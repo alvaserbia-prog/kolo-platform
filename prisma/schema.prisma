@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  FIZICKO_LICE
+  ZADRUGAR
+  ADMIN
+}
+
+enum WalletType {
+  USER
+  ZADRUGA
+  BANKA
+}
+
+model User {
+  id                 String    @id @default(uuid())
+  email              String    @unique
+  passwordHash       String
+  pseudonim          String    @unique
+  role               Role      @default(FIZICKO_LICE)
+  verified           Boolean   @default(false)
+  verifiedAt         DateTime?
+  pseudonimChangedAt DateTime?
+  referralCode       String    @unique
+  referredById       String?
+  referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
+  referrals          User[]    @relation("Referrals")
+  wallet             Wallet?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Wallet {
+  id        String     @id @default(uuid())
+  userId    String?    @unique
+  user      User?      @relation(fields: [userId], references: [id])
+  zadrugaId String?    @unique
+  balance   Int        @default(0)
+  type      WalletType
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
