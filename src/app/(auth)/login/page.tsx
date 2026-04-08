@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 
 function LoginForm() {
@@ -47,8 +48,8 @@ function LoginForm() {
   return (
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-        <div className="mb-8 text-center">
-          <span className="text-3xl font-bold text-gray-900 tracking-tight">KOLO</span>
+        <div className="mb-8 flex flex-col items-center">
+          <Image src="/kolo-logo.png" alt="KOLO" width={100} height={100} className="object-contain" priority />
           <p className="mt-2 text-sm text-gray-500">Prijavite se na platformu</p>
         </div>
 
