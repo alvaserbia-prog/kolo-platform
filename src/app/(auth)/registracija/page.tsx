@@ -70,7 +70,7 @@ export default function RegistracijaPage() {
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
         <div className="mb-8 flex flex-col items-center">
-          <Image src="/kolo-logo.png" alt="KOLO" width={100} height={100} className="object-contain" priority />
+          <Image src="/kolo-logo.png" alt="KOLO" width={100} height={100} className="object-contain" priority unoptimized />
           <p className="mt-2 text-sm text-gray-500">Registracija novog člana</p>
         </div>
 
