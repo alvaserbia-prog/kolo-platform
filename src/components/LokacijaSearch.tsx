@@ -23,7 +23,9 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
   const [query, setQuery] = useState(value);
   const [sugestije, setSugestije] = useState<string[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
+  const [aktivniIndex, setAktivniIndex] = useState(-1);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const listaRef = useRef<HTMLUListElement>(null);
 
   // Sync external value changes
   useEffect(() => {
@@ -42,7 +44,8 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
 
   function handleInput(val: string) {
     setQuery(val);
-    onChange(val); // keep parent in sync with raw input too
+    onChange(val);
+    setAktivniIndex(-1);
     if (val.trim().length < 2) {
       setSugestije([]);
       setShowSugestije(false);
@@ -62,6 +65,31 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
     onChange(naziv);
     setSugestije([]);
     setShowSugestije(false);
+    setAktivniIndex(-1);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!showSugestije || sugestije.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const novi = Math.min(aktivniIndex + 1, sugestije.length - 1);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const novi = Math.max(aktivniIndex - 1, 0);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter") {
+      if (aktivniIndex >= 0 && aktivniIndex < sugestije.length) {
+        e.preventDefault();
+        odaberi(sugestije[aktivniIndex]);
+      }
+    } else if (e.key === "Escape") {
+      setShowSugestije(false);
+      setAktivniIndex(-1);
+    }
   }
 
   return (
@@ -70,21 +98,33 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
         type="text"
         value={query}
         onChange={(e) => handleInput(e.target.value)}
-        onFocus={() => query.trim().length >= 2 && setSugestije(
-          NASELJA_SRBIJE.filter((n) => normalizuj(n).includes(normalizuj(query))).slice(0, 10)
-        ) && setShowSugestije(true)}
+        onFocus={() => {
+          if (query.trim().length >= 2) {
+            const q = normalizuj(query.trim());
+            setSugestije(NASELJA_SRBIJE.filter((n) => normalizuj(n).includes(q)).slice(0, 10));
+            setShowSugestije(true);
+          }
+        }}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
         autoComplete="off"
+        aria-autocomplete="list"
+        aria-expanded={showSugestije && sugestije.length > 0}
         className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
       />
       {showSugestije && sugestije.length > 0 && (
-        <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-          {sugestije.map((naziv) => (
+        <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-y-auto max-h-60">
+          {sugestije.map((naziv, i) => (
             <li key={naziv}>
               <button
                 type="button"
                 onMouseDown={() => odaberi(naziv)}
-                className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-kolo-green-50 hover:text-kolo-green-700 transition-colors"
+                onMouseEnter={() => setAktivniIndex(i)}
+                className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                  i === aktivniIndex
+                    ? "bg-kolo-green-100 text-kolo-green-800"
+                    : "text-gray-700 hover:bg-kolo-green-50 hover:text-kolo-green-700"
+                }`}
               >
                 {naziv}
               </button>

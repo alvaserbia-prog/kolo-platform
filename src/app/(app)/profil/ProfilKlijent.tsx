@@ -20,6 +20,7 @@ interface ProfilProps {
     createdAt: string;
     location: string | null;
     telefon: string | null;
+    punoIme: string | null;
   };
 }
 
@@ -37,6 +38,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [locError, setLocError] = useState("");
   const [locSuccess, setLocSuccess] = useState("");
   const [locLoading, setLocLoading] = useState(false);
+  const [punoIme, setPunoIme] = useState(user.punoIme ?? "");
+  const [podaciError, setPodaciError] = useState("");
+  const [podaciSuccess, setPodaciSuccess] = useState("");
+  const [podaciLoading, setPodaciLoading] = useState(false);
 
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
@@ -68,6 +73,22 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const data = await res.json();
     if (!res.ok) { setLzError(data.error); return; }
     setLzSuccess("Lozinka promenjena."); setStaraLozinka(""); setNovaLozinka("");
+  }
+
+  async function sacuvajPodatke(e: React.FormEvent) {
+    e.preventDefault();
+    setPodaciError(""); setPodaciSuccess("");
+    setPodaciLoading(true);
+    const res = await fetch("/api/profil/podaci", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ punoIme }),
+    });
+    const data = await res.json();
+    setPodaciLoading(false);
+    if (!res.ok) { setPodaciError(data.error ?? "Greška pri čuvanju."); return; }
+    setPodaciSuccess("Sačuvano.");
+    router.refresh();
   }
 
   async function sacuvajLokaciju(e: React.FormEvent) {
@@ -130,6 +151,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             <dt className="text-gray-500">Referral kod</dt>
             <dd className="font-mono text-gray-900 bg-gray-50 px-2 py-0.5 rounded">{user.referralCode}</dd>
           </div>
+          {user.punoIme && (
+            <div className="flex justify-between">
+              <dt className="text-gray-500">Ime i prezime</dt>
+              <dd className="text-gray-700">{user.punoIme}</dd>
+            </div>
+          )}
           {user.location && (
             <div className="flex justify-between">
               <dt className="text-gray-500">Lokacija</dt>
@@ -175,6 +202,33 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
           >
             {locLoading ? "Čuvam..." : "Sačuvaj"}
+          </button>
+        </form>
+      </div>
+
+      {/* Ime i prezime */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h2 className="text-base font-semibold text-gray-700 mb-4">Ime i prezime</h2>
+        <form onSubmit={sacuvajPodatke} className="space-y-3">
+          <div>
+            <label className="block text-sm text-gray-600 mb-1.5">Puno ime <span className="text-gray-400">(opciono)</span></label>
+            <input
+              type="text"
+              value={punoIme}
+              onChange={(e) => setPunoIme(e.target.value)}
+              placeholder="npr. Marko Marković"
+              maxLength={100}
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+            />
+          </div>
+          {podaciError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{podaciError}</p>}
+          {podaciSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{podaciSuccess}</p>}
+          <button
+            type="submit"
+            disabled={podaciLoading}
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+          >
+            {podaciLoading ? "Čuvam..." : "Sačuvaj"}
           </button>
         </form>
       </div>

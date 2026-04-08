@@ -117,6 +117,11 @@ enum DonationStatus {
   CONFIRMED
 }
 
+enum PokroviteljDoprinosTip {
+  SPONZORSTVO_ZADRUGE
+  DONACIJA_FONDACIJI
+}
+
 enum OglasStatus {
   ACTIVE
   CLOSED
@@ -159,7 +164,12 @@ model User {
   wallet             Wallet?
   referralsMade      Referral[] @relation("Referrer")
   referralReceived   Referral?  @relation("Referred")
+  podaci                 UserPodaci?
   donations              DonationRecord[]
+  kreiraniPokrovitelji   Pokrovitelj[]            @relation("AdminKreiraoP")
+  vlasnikPokrovitelja    Pokrovitelj[]            @relation("VlasnikP")
+  evidentiraniDoprinosi  PokroviteljDoprinos[]    @relation("EvidentiraoDoprinos")
+  pokroviteljBonusi      PokroviteljBonusEmisija[] @relation("PrimalacBonusa")
   kreiraniOglasi         RadniOglas[]             @relation("KreiraniOglasi")
   radnePrijave           RadniOglasPrijava[]      @relation("RadnePrijave")
   radneEvidencije        RadnaEvidencija[]        @relation("RadneEvidencije")
@@ -183,6 +193,14 @@ model User {
   notifikacije          Notifikacija[]
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
+}
+
+model UserPodaci {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  punoIme   String?
+  updatedAt DateTime @updatedAt
 }
 
 model Wallet {
@@ -249,9 +267,10 @@ model Zadruga {
   pristupnice ZadrugaPristupnica[]
   projects    ZadrugaProject[]
   bonusLogs   ZadrugaBonusLog[]
-  radniOglasi RadniOglas[]        @relation("ZadrugaOglasi")
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  radniOglasi  RadniOglas[]        @relation("ZadrugaOglasi")
+  pokrovitelji Pokrovitelj[]       @relation("ZadrugaPokrovitelji")
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 }
 
 model ZadrugaMembership {
@@ -590,6 +609,62 @@ model DonationRecord {
   createdAt       DateTime       @default(now())
 
   @@index([status, createdAt])
+}
+
+// ─── Pokrovitelji ─────────────────────────────────────────────────────────────
+
+model Pokrovitelj {
+  id             String      @id @default(uuid())
+  naziv          String
+  pib            String      @unique
+  adresa         String?
+  kontaktEmail   String?
+  kontaktTelefon String?
+  vlasnikId      String
+  vlasnik        User        @relation("VlasnikP", fields: [vlasnikId], references: [id])
+  kreiraoId      String
+  kreirao        User        @relation("AdminKreiraoP", fields: [kreiraoId], references: [id])
+  zadrugaId      String?
+  zadruga        Zadruga?    @relation("ZadrugaPokrovitelji", fields: [zadrugaId], references: [id])
+  rsdKumulativ   Decimal     @default(0) @db.Decimal(12, 2)
+  trenutniNivo   Int         @default(0)
+  status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
+  doprinosi      PokroviteljDoprinos[]
+  bonusiEmisije  PokroviteljBonusEmisija[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([vlasnikId])
+  @@index([status])
+}
+
+model PokroviteljDoprinos {
+  id            String                  @id @default(uuid())
+  pokroviteljId String
+  pokrovitelj   Pokrovitelj             @relation(fields: [pokroviteljId], references: [id])
+  rsdIznos      Decimal                 @db.Decimal(12, 2)
+  tip           PokroviteljDoprinosTip
+  evidentiraoId String
+  evidentirao   User                    @relation("EvidentiraoDoprinos", fields: [evidentiraoId], references: [id])
+  napomena      String?
+  createdAt     DateTime                @default(now())
+
+  @@index([pokroviteljId, createdAt(sort: Desc)])
+}
+
+model PokroviteljBonusEmisija {
+  id            String      @id @default(uuid())
+  pokroviteljId String
+  pokrovitelj   Pokrovitelj @relation(fields: [pokroviteljId], references: [id])
+  vlasnikId     String
+  vlasnik       User        @relation("PrimalacBonusa", fields: [vlasnikId], references: [id])
+  nivo          Int
+  bonusPoen     Int
+  transactionId String?
+  createdAt     DateTime    @default(now())
+
+  @@index([pokroviteljId])
+  @@index([vlasnikId])
 }
 
 model Notifikacija {

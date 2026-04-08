@@ -15,7 +15,7 @@ export default async function AdminPage() {
 
   const [
     pendingRequests, allUsers, banka, pendingZadruge,
-    adminProgrami, dashboardData, auditLogs, zadrugeLista, zaposljavanjeData,
+    adminProgrami, dashboardData, auditLogs, zadrugeLista, pokroviteljiData, zaposljavanjeData,
   ] = await Promise.all([
     prisma.verificationRequest.findMany({
       where: { status: "PENDING" },
@@ -61,6 +61,26 @@ export default async function AdminPage() {
         _count: { select: { memberships: { where: { leftAt: null } }, projects: { where: { status: "ACTIVE" } } } },
       },
     }),
+    Promise.all([
+      prisma.pokrovitelj.findMany({
+        include: {
+          vlasnik: { select: { pseudonim: true } },
+          zadruga: { select: { name: true } },
+          _count: { select: { doprinosi: true } },
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.user.findMany({
+        where: { verified: true },
+        select: { id: true, pseudonim: true },
+        orderBy: { pseudonim: "asc" },
+      }),
+      prisma.zadruga.findMany({
+        where: { status: "ACTIVE" },
+        select: { id: true, name: true },
+        orderBy: { name: "asc" },
+      }),
+    ]),
     Promise.all([
       prisma.radniOglas.findMany({
         include: {
@@ -138,6 +158,20 @@ export default async function AdminPage() {
         balance: z.wallet?.balance ?? 0, clanovi: z._count.memberships,
         projekti: z._count.projects, createdAt: z.createdAt.toISOString(),
       }))}
+      adminPokrovitelji={pokroviteljiData[0].map((p) => ({
+        id: p.id,
+        naziv: p.naziv,
+        pib: p.pib,
+        vlasnikPseudonim: p.vlasnik.pseudonim,
+        zadrugaName: p.zadruga?.name ?? null,
+        rsdKumulativ: Number(p.rsdKumulativ),
+        trenutniNivo: p.trenutniNivo,
+        status: p.status,
+        brDoprinosa: p._count.doprinosi,
+        createdAt: p.createdAt.toISOString(),
+      }))}
+      verifikovaniKorisnici={pokroviteljiData[1]}
+      zadrugeLista2={pokroviteljiData[2]}
       adminZaposljavnje={{
         oglasi: zaposljavanjeData[0].map((o) => ({
           id: o.id, title: o.title, source: o.source as string,

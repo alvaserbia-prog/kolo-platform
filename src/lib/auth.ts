@@ -51,11 +51,15 @@ export const authOptions: NextAuthOptions = {
       session.user.pseudonim = token.pseudonim;
       session.user.role = token.role;
       // Uvek čitaj verified iz baze — JWT može biti zastareo
-      const dbUser = await prisma.user.findUnique({
-        where: { id: token.id as string },
-        select: { verified: true },
-      });
-      session.user.verified = dbUser?.verified ?? token.verified;
+      if (token.id) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { verified: true },
+        });
+        session.user.verified = dbUser?.verified ?? (token.verified as boolean);
+      } else {
+        session.user.verified = token.verified as boolean ?? false;
+      }
       return session;
     },
   },

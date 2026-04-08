@@ -33,6 +33,7 @@ type Transakcija = {
   description: string | null;
   primio: boolean;
   drugiPseudonim: string;
+  drugiId: string | null;
   createdAt: string;
 };
 
@@ -45,9 +46,10 @@ interface Props {
   transakcije: Transakcija[];
   platiPseudonim?: string;
   prefillIznos?: string;
+  prefillOpis?: string;
 }
 
-export default function NovcanikKlijent({ balance, pseudonim, memberHash, transakcije, platiPseudonim, prefillIznos }: Props) {
+export default function NovcanikKlijent({ balance, pseudonim, memberHash, transakcije, platiPseudonim, prefillIznos, prefillOpis }: Props) {
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>("sve");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
@@ -90,6 +92,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
           onSuccess={() => { setShowSend(false); router.refresh(); }}
           initialPseudonim={platiPseudonim}
           initialIznos={prefillIznos}
+          initialOpis={prefillOpis}
         />
       )}
 
@@ -142,7 +145,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                     <span className={`text-xs px-2 py-0.5 rounded font-medium ${TIP_BOJA[t.type] ?? "bg-gray-100 text-gray-600"}`}>
                       {TIP_LABELA[t.type] ?? t.type}
                     </span>
-                    <span className="text-xs text-gray-400 truncate">{t.drugiPseudonim}</span>
+                    {t.drugiId ? (
+                      <a href={`/profil/${t.drugiId}`} className="text-xs text-kolo-green-700 hover:underline truncate">
+                        {t.drugiPseudonim}
+                      </a>
+                    ) : (
+                      <span className="text-xs text-gray-400 truncate">{t.drugiPseudonim}</span>
+                    )}
                   </div>
                   {t.description && (
                     <p className="text-xs text-gray-400 mt-0.5 truncate">{t.description}</p>
@@ -168,10 +177,10 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
 // ── Forma za slanje ────────────────────────────────────────────────────────────
 
-function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string }) {
+function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initialOpis }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string; initialOpis?: string }) {
   const [pseudonim, setPseudonim] = useState(initialPseudonim ?? "");
   const [amount, setAmount] = useState(initialIznos ?? "");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(initialOpis ?? "");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sugestije, setSugestije] = useState<string[]>([]);
@@ -313,7 +322,25 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos }: { onC
 
 function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; memberHash: string; onClose: () => void }) {
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://kolo.rs";
-  const qrValue = memberHash ? `${baseUrl}/m/${memberHash}` : `${baseUrl}/novcanik?plati=${encodeURIComponent(pseudonim)}`;
+  const [iznos, setIznos] = useState("");
+  const [opis, setOpis] = useState("");
+
+  function buildQrValue() {
+    if (memberHash) {
+      const params = new URLSearchParams();
+      if (iznos && parseInt(iznos) > 0) params.set("amount", iznos);
+      if (opis.trim()) params.set("opis", opis.trim());
+      const qs = params.toString();
+      return `${baseUrl}/m/${memberHash}${qs ? `?${qs}` : ""}`;
+    } else {
+      const params = new URLSearchParams({ plati: pseudonim });
+      if (iznos && parseInt(iznos) > 0) params.set("iznos", iznos);
+      if (opis.trim()) params.set("description", opis.trim());
+      return `${baseUrl}/novcanik?${params.toString()}`;
+    }
+  }
+
+  const qrValue = buildQrValue();
 
   function kopiraj() {
     navigator.clipboard.writeText(qrValue).catch(() => {});
@@ -326,6 +353,33 @@ function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; member
         <p className="text-sm text-kolo-muted">
           Pokažite ovaj kod da biste primili POEN. Skenirajte telefonom.
         </p>
+
+        <div className="space-y-2 text-left">
+          <div>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Iznos POEN <span className="text-kolo-border font-normal">(opciono)</span></label>
+            <input
+              type="number"
+              min={1}
+              step={1}
+              value={iznos}
+              onChange={(e) => setIznos(e.target.value)}
+              placeholder="npr. 500"
+              className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors font-mono"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Opis <span className="text-kolo-border font-normal">(opciono)</span></label>
+            <input
+              type="text"
+              maxLength={100}
+              value={opis}
+              onChange={(e) => setOpis(e.target.value)}
+              placeholder="npr. Za kafu"
+              className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+            />
+          </div>
+        </div>
+
         <div className="flex justify-center p-4 bg-white rounded-xl border border-kolo-border">
           <QRCodeSVG
             value={qrValue}

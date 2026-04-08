@@ -27,6 +27,8 @@ export default function MemberLinkPage() {
         const params = new URLSearchParams({ primalac: data.pseudonim });
         const amount = searchParams.get("amount");
         if (amount) params.set("iznos", amount);
+        const opis = searchParams.get("opis");
+        if (opis) params.set("description", opis);
         router.replace(`/novcanik?${params.toString()}`);
       } else {
         // Nije ulogovan → sačuvaj ref u cookie + localStorage, preusmeri na landing

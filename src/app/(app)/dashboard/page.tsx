@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import ClanPretraga from "@/components/ClanPretraga";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -40,8 +41,8 @@ export default async function DashboardPage() {
       orderBy: { createdAt: "desc" },
       take: 5,
       include: {
-        fromWallet: { include: { user: { select: { pseudonim: true } } } },
-        toWallet: { include: { user: { select: { pseudonim: true } } } },
+        fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+        toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
   ]);
@@ -52,13 +53,17 @@ export default async function DashboardPage() {
 
   const txData = poslednje.map((t) => {
     const primio = t.toWallet?.userId === session.user.id;
-    const drugiPseudonim =
-      t.type !== "TRANSFER"
-        ? "Banka"
-        : primio
-        ? (t.fromWallet?.user?.pseudonim ?? "Banka")
-        : (t.toWallet?.user?.pseudonim ?? "?");
-    return { id: t.id, amount: t.amount, type: t.type, primio, drugiPseudonim, createdAt: t.createdAt.toISOString() };
+    const drugiUser = t.type !== "TRANSFER"
+      ? null
+      : primio
+      ? t.fromWallet?.user ?? null
+      : t.toWallet?.user ?? null;
+    return {
+      id: t.id, amount: t.amount, type: t.type, primio,
+      drugiPseudonim: drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Banka" : "?"),
+      drugiId: drugiUser?.id ?? null,
+      createdAt: t.createdAt.toISOString(),
+    };
   });
 
   const tipBoja: Record<string, string> = {
@@ -78,6 +83,11 @@ export default async function DashboardPage() {
       <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>
         Dobrodošli, {session.user.pseudonim}
       </h1>
+
+      {/* Pretraga članova */}
+      {session.user.verified && (
+        <ClanPretraga />
+      )}
 
       {/* Kartice */}
       <div className="grid grid-cols-2 gap-4">
@@ -144,7 +154,13 @@ export default async function DashboardPage() {
                     <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${tipBoja[t.type] ?? "bg-kolo-bg text-kolo-muted"}`}>
                       {tipLabela[t.type] ?? t.type}
                     </span>
-                    <span className="text-xs text-kolo-muted">{t.drugiPseudonim}</span>
+                    {t.drugiId ? (
+                      <Link href={`/profil/${t.drugiId}`} className="text-xs text-kolo-green-700 hover:underline">
+                        {t.drugiPseudonim}
+                      </Link>
+                    ) : (
+                      <span className="text-xs text-kolo-muted">{t.drugiPseudonim}</span>
+                    )}
                   </div>
                   <p className="text-xs text-kolo-border mt-0.5">
                     {new Date(t.createdAt).toLocaleDateString("sr-RS")}

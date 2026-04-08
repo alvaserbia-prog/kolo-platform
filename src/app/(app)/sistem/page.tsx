@@ -54,14 +54,15 @@ export default async function SistemPage() {
       orderBy: { createdAt: "desc" },
       take: 100,
       include: {
-        fromWallet: { include: { user: { select: { pseudonim: true } } } },
-        toWallet: { include: { user: { select: { pseudonim: true } } } },
+        fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+        toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
     prisma.user.findMany({
       where: { role: { not: "ADMIN" } },
       orderBy: [{ wallet: { balance: "desc" } }],
       select: {
+        id: true,
         pseudonim: true,
         verified: true,
         createdAt: true,
@@ -103,10 +104,13 @@ export default async function SistemPage() {
     type: t.type,
     createdAt: t.createdAt.toISOString(),
     fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Banka",
+    fromId: t.fromWallet?.user?.id ?? null,
     toPseudonim: t.toWallet?.user?.pseudonim ?? "Banka",
+    toId: t.toWallet?.user?.id ?? null,
   }));
 
   const clanovi = korisnici.map((u) => ({
+    id: u.id,
     pseudonim: u.pseudonim,
     verified: u.verified,
     balance: u.wallet?.balance ?? 0,

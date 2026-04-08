@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ClanPretraga from "@/components/ClanPretraga";
 
 interface Zadruga {
   id: string;
@@ -22,7 +23,7 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gray-900">Zadruge</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Zajednica</h1>
         {isVerified && !mojaZadruga && !imaOsnivanjeZahtev && (
           <Link
             href="/zajednica/osnivanje"
@@ -32,6 +33,9 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
           </Link>
         )}
       </div>
+
+      {/* Pretraga članova */}
+      <ClanPretraga />
 
       {/* Status mog članstva */}
       {mojaZadruga && (

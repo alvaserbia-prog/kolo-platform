@@ -146,6 +146,19 @@ interface AdminZaposljavanjeData {
   pendingEvidencije: AdminPendingRadnaEvidencija[];
 }
 
+interface PokroviteljItem {
+  id: string;
+  naziv: string;
+  pib: string;
+  vlasnikPseudonim: string;
+  zadrugaName: string | null;
+  rsdKumulativ: number;
+  trenutniNivo: number;
+  status: string;
+  brDoprinosa: number;
+  createdAt: string;
+}
+
 interface AdminKlijentProps {
   pending: PendingRequest[];
   users: KorisnikInfo[];
@@ -153,9 +166,12 @@ interface AdminKlijentProps {
   pendingZadruge: PendingZadruga[];
   adminProgrami: AdminProgramiData;
   adminZaposljavnje: AdminZaposljavanjeData;
+  adminPokrovitelji: PokroviteljItem[];
   dashboard: DashboardData;
   auditLogs: AuditLogEntry[];
   zadrugeLista: ZadrugaListItem[];
+  verifikovaniKorisnici: { id: string; pseudonim: string }[];
+  zadrugeLista2: { id: string; name: string }[];
 }
 
 const roleLabel: Record<string, string> = {
@@ -170,9 +186,9 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-red-50 text-red-600",
 };
 
-type Tab = "dashboard" | "pending" | "zadruge" | "programi" | "zaposljavnje" | "korisnici" | "emisija" | "audit";
+type Tab = "dashboard" | "pending" | "zadruge" | "programi" | "zaposljavnje" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, adminProgrami, adminZaposljavnje, dashboard, auditLogs, zadrugeLista }: AdminKlijentProps) {
+export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, adminProgrami, adminZaposljavnje, adminPokrovitelji, dashboard, auditLogs, zadrugeLista, verifikovaniKorisnici, zadrugeLista2 }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
@@ -186,6 +202,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
     ["zadruge", "Zadruge"],
     ["programi", "Programi"],
     ["zaposljavnje", `Zapošljavanje${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
+    ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
     ["emisija", "Finansije"],
     ["audit", "Audit log"],
@@ -238,6 +255,16 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
 
       {/* Zapošljavanje */}
       {tab === "zaposljavnje" && <AdminZaposljavanjeTab data={adminZaposljavnje} onDone={() => router.refresh()} />}
+
+      {/* Pokrovitelji */}
+      {tab === "pokrovitelji" && (
+        <AdminPokroviteljiTab
+          pokrovitelji={adminPokrovitelji}
+          verifikovaniKorisnici={verifikovaniKorisnici}
+          zadruge={zadrugeLista2}
+          onDone={() => router.refresh()}
+        />
+      )}
 
       {/* Korisnici */}
       {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} />}
@@ -1527,6 +1554,277 @@ function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
           </button>
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── Admin pokrovitelji tab ────────────────────────────────────────────────────
+
+function AdminPokroviteljiTab({
+  pokrovitelji,
+  verifikovaniKorisnici,
+  zadruge,
+  onDone,
+}: {
+  pokrovitelji: PokroviteljItem[];
+  verifikovaniKorisnici: { id: string; pseudonim: string }[];
+  zadruge: { id: string; name: string }[];
+  onDone: () => void;
+}) {
+  const [subTab, setSubTab] = useState<"lista" | "novi" | "doprinos">("lista");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  // Forma — novi pokrovitelj
+  const [noviNaziv, setNoviNaziv] = useState("");
+  const [noviPib, setNoviPib] = useState("");
+  const [noviAdresa, setNoviAdresa] = useState("");
+  const [noviEmail, setNoviEmail] = useState("");
+  const [noviTelefon, setNoviTelefon] = useState("");
+  const [noviVlasnikId, setNoviVlasnikId] = useState("");
+  const [noviZadrugaId, setNoviZadrugaId] = useState("");
+
+  // Forma — doprinos
+  const [doprinosRsd, setDoprinosRsd] = useState("");
+  const [doprinosTip, setDoprinosTip] = useState<"SPONZORSTVO_ZADRUGE" | "DONACIJA_FONDACIJI">("DONACIJA_FONDACIJI");
+  const [doprinosNapomena, setDoprinosNapomena] = useState("");
+
+  async function kreirajPokrovitelja() {
+    if (!noviNaziv.trim() || !noviPib.trim() || !noviVlasnikId) {
+      setPoruka({ text: "Naziv, PIB i vlasnik su obavezni.", ok: false });
+      return;
+    }
+    setLoading(true);
+    setPoruka(null);
+    const res = await fetch("/api/admin/pokrovitelji", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        naziv: noviNaziv.trim(),
+        pib: noviPib.trim(),
+        adresa: noviAdresa.trim() || undefined,
+        kontaktEmail: noviEmail.trim() || undefined,
+        kontaktTelefon: noviTelefon.trim() || undefined,
+        vlasnikId: noviVlasnikId,
+        zadrugaId: noviZadrugaId || undefined,
+      }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      setPoruka({ text: "Pokrovitelj kreiran.", ok: true });
+      setNoviNaziv(""); setNoviPib(""); setNoviAdresa(""); setNoviEmail(""); setNoviTelefon(""); setNoviVlasnikId(""); setNoviZadrugaId("");
+      setTimeout(() => { onDone(); setSubTab("lista"); }, 1200);
+    } else {
+      setPoruka({ text: data.error ?? "Greška.", ok: false });
+    }
+  }
+
+  async function dodajDoprinos() {
+    if (!selectedId || !doprinosRsd) return;
+    const iznos = parseFloat(doprinosRsd);
+    if (isNaN(iznos) || iznos <= 0) {
+      setPoruka({ text: "Neispravan iznos.", ok: false });
+      return;
+    }
+    setLoading(true);
+    setPoruka(null);
+    const res = await fetch(`/api/admin/pokrovitelji/${selectedId}/doprinos`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ rsdIznos: iznos, tip: doprinosTip, napomena: doprinosNapomena.trim() || undefined }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      const noviNivoi: { nivo: number; bonusPoen: number }[] = data.noviNivoi ?? [];
+      if (noviNivoi.length > 0) {
+        const tekst = noviNivoi.map((n: { nivo: number; bonusPoen: number }) => `Nivo ${n.nivo}: +${n.bonusPoen.toLocaleString("sr-RS")} POEN`).join(", ");
+        setPoruka({ text: `Doprinos evidentiran. Novi nivoi: ${tekst}`, ok: true });
+      } else {
+        setPoruka({ text: "Doprinos evidentiran.", ok: true });
+      }
+      setDoprinosRsd(""); setDoprinosNapomena("");
+      setTimeout(() => { onDone(); setSubTab("lista"); }, 2000);
+    } else {
+      setPoruka({ text: data.error ?? "Greška.", ok: false });
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2 border-b border-gray-200 pb-0">
+        {(["lista", "novi", "doprinos"] as const).map((s) => (
+          <button
+            key={s}
+            onClick={() => { setSubTab(s); setPoruka(null); }}
+            className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
+              subTab === s ? "border-green-700 text-green-700" : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            {s === "lista" ? `Lista (${pokrovitelji.length})` : s === "novi" ? "Novi pokrovitelj" : "Evidentiraj doprinos"}
+          </button>
+        ))}
+      </div>
+
+      {poruka && (
+        <div className={`px-4 py-3 rounded-xl text-sm ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+          {poruka.text}
+        </div>
+      )}
+
+      {subTab === "lista" && (
+        <div className="space-y-2">
+          {pokrovitelji.length === 0 ? (
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+              Nema registrovanih pokrovitelja.
+            </div>
+          ) : (
+            pokrovitelji.map((p) => (
+              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-3 flex items-center justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="font-medium text-gray-900 truncate">{p.naziv}</div>
+                  <div className="text-xs text-gray-400 mt-0.5">
+                    PIB: {p.pib} · Vlasnik: {p.vlasnikPseudonim}
+                    {p.zadrugaName && ` · Zadruga: ${p.zadrugaName}`}
+                  </div>
+                </div>
+                <div className="shrink-0 text-right">
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${p.status === "ACTIVE" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                    Nivo {p.trenutniNivo}
+                  </span>
+                  <div className="text-xs text-gray-400 mt-0.5">
+                    {p.rsdKumulativ.toLocaleString("sr-RS")} RSD · {p.brDoprinosa} doprinos{p.brDoprinosa !== 1 ? "a" : ""}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      )}
+
+      {subTab === "novi" && (
+        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-4">
+          <h3 className="font-semibold text-gray-900">Novi pokrovitelj</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Naziv *</label>
+              <input value={noviNaziv} onChange={(e) => setNoviNaziv(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                placeholder="Naziv pravnog lica" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">PIB *</label>
+              <input value={noviPib} onChange={(e) => setNoviPib(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                placeholder="9-13 cifara" />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Adresa</label>
+            <input value={noviAdresa} onChange={(e) => setNoviAdresa(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+              placeholder="Adresa sedišta" />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Email</label>
+              <input value={noviEmail} onChange={(e) => setNoviEmail(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                placeholder="kontakt@firma.rs" />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Telefon</label>
+              <input value={noviTelefon} onChange={(e) => setNoviTelefon(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                placeholder="+381..." />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Vlasnik (verifikovan član) *</label>
+            <select value={noviVlasnikId} onChange={(e) => setNoviVlasnikId(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              <option value="">— odaberite vlasnika —</option>
+              {verifikovaniKorisnici.map((k) => (
+                <option key={k.id} value={k.id}>{k.pseudonim}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Zadruga (opciono)</label>
+            <select value={noviZadrugaId} onChange={(e) => setNoviZadrugaId(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              <option value="">— bez zadruge —</option>
+              {zadruge.map((z) => (
+                <option key={z.id} value={z.id}>{z.name}</option>
+              ))}
+            </select>
+          </div>
+          <button
+            onClick={kreirajPokrovitelja}
+            disabled={loading}
+            className="w-full py-2.5 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60 transition-colors"
+          >
+            {loading ? "Kreiranje..." : "Kreiraj pokrovitelja"}
+          </button>
+        </div>
+      )}
+
+      {subTab === "doprinos" && (
+        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-4">
+          <h3 className="font-semibold text-gray-900">Evidentiraj doprinos</h3>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Pokrovitelj *</label>
+            <select value={selectedId ?? ""} onChange={(e) => setSelectedId(e.target.value || null)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              <option value="">— odaberite pokrovitelja —</option>
+              {pokrovitelji.filter((p) => p.status === "ACTIVE").map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.naziv} (nivo {p.trenutniNivo}, {p.rsdKumulativ.toLocaleString("sr-RS")} RSD)
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Iznos (RSD) *</label>
+              <input
+                type="number"
+                min="1"
+                value={doprinosRsd}
+                onChange={(e) => setDoprinosRsd(e.target.value)}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                placeholder="npr. 50000"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-500 mb-1">Tip *</label>
+              <select
+                value={doprinosTip}
+                onChange={(e) => setDoprinosTip(e.target.value as "SPONZORSTVO_ZADRUGE" | "DONACIJA_FONDACIJI")}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+              >
+                <option value="DONACIJA_FONDACIJI">Donacija Fondaciji</option>
+                <option value="SPONZORSTVO_ZADRUGE">Sponzorstvo zadruge</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 mb-1">Napomena</label>
+            <input value={doprinosNapomena} onChange={(e) => setDoprinosNapomena(e.target.value)}
+              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+              placeholder="Referenca uplate, opis..." />
+          </div>
+          <button
+            onClick={dodajDoprinos}
+            disabled={loading || !selectedId}
+            className="w-full py-2.5 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60 transition-colors"
+          >
+            {loading ? "Evidentiranje..." : "Evidentiraj doprinos"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

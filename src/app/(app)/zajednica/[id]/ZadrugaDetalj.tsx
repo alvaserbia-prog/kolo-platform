@@ -28,6 +28,7 @@ interface PendingEvidencijaItem {
 }
 
 interface ClanInfo {
+  userId: string;
   pseudonim: string;
   isAdmin: boolean;
   joinedAt: string;
@@ -187,8 +188,10 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
       {tab === "clanovi" && (
         <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
           {zadruga.clanovi.map((c, i) => (
-            <div key={c.pseudonim} className={`px-5 py-3 flex justify-between items-center ${i < zadruga.clanovi.length - 1 ? "border-b border-gray-100" : ""}`}>
-              <span className="text-sm font-medium text-gray-900">{c.pseudonim}</span>
+            <div key={c.userId} className={`px-5 py-3 flex justify-between items-center ${i < zadruga.clanovi.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <Link href={`/profil/${c.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline">
+                {c.pseudonim}
+              </Link>
               <div className="flex items-center gap-2">
                 {c.isAdmin && <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded font-medium">Admin</span>}
                 <span className="text-xs text-gray-400">{new Date(c.joinedAt).toLocaleDateString("sr-RS")}</span>

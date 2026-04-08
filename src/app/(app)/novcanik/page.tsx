@@ -7,11 +7,11 @@ import NovcanikKlijent from "./NovcanikKlijent";
 export default async function NovcanikPage({
   searchParams,
 }: {
-  searchParams: Promise<{ plati?: string; primalac?: string; iznos?: string }>;
+  searchParams: Promise<{ plati?: string; primalac?: string; iznos?: string; description?: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  const { plati, primalac, iznos } = await searchParams;
+  const { plati, primalac, iznos, description } = await searchParams;
 
   const [wallet, dbUser] = await Promise.all([
     prisma.wallet.findUnique({
@@ -34,8 +34,8 @@ export default async function NovcanikPage({
     orderBy: { createdAt: "desc" },
     take: 100,
     include: {
-      fromWallet: { include: { user: { select: { pseudonim: true } } } },
-      toWallet: { include: { user: { select: { pseudonim: true } } } },
+      fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+      toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
     },
   });
 
@@ -45,12 +45,11 @@ export default async function NovcanikPage({
     const primio = t.toWallet?.userId
       ? t.toWallet.userId === session.user.id
       : t.toWalletId === walletId;
-    const drugiPseudonim =
-      t.type !== "TRANSFER"
-        ? "Banka"
-        : primio
-        ? (t.fromWallet?.user?.pseudonim ?? "Banka")
-        : (t.toWallet?.user?.pseudonim ?? "?");
+    const drugiUser = t.type !== "TRANSFER"
+      ? null
+      : primio
+      ? t.fromWallet?.user ?? null
+      : t.toWallet?.user ?? null;
 
     return {
       id: t.id,
@@ -58,7 +57,8 @@ export default async function NovcanikPage({
       type: t.type,
       description: t.description,
       primio,
-      drugiPseudonim,
+      drugiPseudonim: drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Banka" : "?"),
+      drugiId: drugiUser?.id ?? null,
       createdAt: t.createdAt.toISOString(),
     };
   });
@@ -71,6 +71,7 @@ export default async function NovcanikPage({
       transakcije={txData}
       platiPseudonim={plati ?? primalac}
       prefillIznos={iznos}
+      prefillOpis={description}
     />
   );
 }

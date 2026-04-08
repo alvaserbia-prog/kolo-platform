@@ -18,6 +18,9 @@ export default async function PublicHeader() {
           <Link href="/pijaca" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Pijaca
           </Link>
+          <Link href="/pokrovitelji" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
+            Pokrovitelji
+          </Link>
           <Link href="/kako-funkcionise" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Kako funkcioniše
           </Link>

@@ -20,6 +20,7 @@ const linkoviVerifikovan = [
   { href: "/glasanje", label: "Glasanje" },
   { href: "/preporuke", label: "Preporuke" },
   { href: "/donacije", label: "Donacije" },
+  { href: "/postani-pokrovitelj", label: "Pokroviteljstvo" },
   { href: "/profil", label: "Profil" },
 ];
 

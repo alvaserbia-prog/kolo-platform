@@ -33,10 +33,13 @@ interface Transakcija {
   type: string;
   createdAt: string;
   fromPseudonim: string;
+  fromId: string | null;
   toPseudonim: string;
+  toId: string | null;
 }
 
 interface Clan {
+  id: string;
   pseudonim: string;
   verified: boolean;
   balance: number;
@@ -331,11 +334,13 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
         ) : (
           filtrirani.map((c, i) => (
             <div
-              key={c.pseudonim}
+              key={c.id}
               className={`grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm ${i < filtrirani.length - 1 ? "border-b border-gray-50" : ""}`}
             >
               <div className="flex items-center gap-2 min-w-0">
-                <span className="font-medium text-kolo-text truncate">{c.pseudonim}</span>
+                <Link href={`/profil/${c.id}`} className="font-medium text-kolo-green-700 hover:underline truncate">
+                  {c.pseudonim}
+                </Link>
                 {c.verified ? (
                   <span className="shrink-0 text-xs bg-green-50 text-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
                 ) : (
@@ -379,8 +384,18 @@ function TransakcijeTab({ transakcije, verified }: { transakcije: Transakcija[];
                     {TIP_LABELA[t.type] ?? t.type}
                   </span>
                   {verified ? (
-                    <span className="text-xs text-gray-500 truncate">
-                      {t.fromPseudonim} → {t.toPseudonim}
+                    <span className="text-xs text-gray-500 truncate flex items-center gap-1">
+                      {t.fromId ? (
+                        <Link href={`/profil/${t.fromId}`} className="text-kolo-green-700 hover:underline">{t.fromPseudonim}</Link>
+                      ) : (
+                        <span>{t.fromPseudonim}</span>
+                      )}
+                      <span className="text-gray-300">→</span>
+                      {t.toId ? (
+                        <Link href={`/profil/${t.toId}`} className="text-kolo-green-700 hover:underline">{t.toPseudonim}</Link>
+                      ) : (
+                        <span>{t.toPseudonim}</span>
+                      )}
                     </span>
                   ) : (
                     <span className="text-xs text-gray-400">Anonimno</span>

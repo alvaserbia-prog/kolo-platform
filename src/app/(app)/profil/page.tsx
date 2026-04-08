@@ -10,7 +10,7 @@ export default async function ProfilPage() {
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
-    include: { wallet: true },
+    include: { wallet: true, podaci: true },
   });
   if (!user) redirect("/login");
 
@@ -29,6 +29,7 @@ export default async function ProfilPage() {
         createdAt: user.createdAt.toISOString(),
         location: user.location ?? null,
         telefon: user.telefon ?? null,
+        punoIme: user.podaci?.punoIme ?? null,
       }}
     />
   );

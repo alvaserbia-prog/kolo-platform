@@ -53,6 +53,7 @@ export default async function ZadrugaPage({ params }: { params: Promise<{ id: st
         location: zadruga.location,
         balance: zadruga.wallet?.balance ?? 0,
         clanovi: zadruga.memberships.map((m) => ({
+          userId: m.userId,
           pseudonim: m.user.pseudonim,
           isAdmin: m.isAdmin,
           joinedAt: m.joinedAt.toISOString(),
