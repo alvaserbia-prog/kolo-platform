@@ -14,7 +14,7 @@ export default async function PijacaLayout({ children }: { children: React.React
         <div className="flex flex-col flex-1 min-w-0">
           <Header />
           <main className="flex-1 overflow-auto">
-            <div className="max-w-5xl mx-auto px-6 py-6 w-full">
+            <div className="max-w-4xl mx-auto px-6 py-6 w-full">
               {children}
             </div>
           </main>
@@ -26,7 +26,7 @@ export default async function PijacaLayout({ children }: { children: React.React
   return (
     <div className="min-h-screen bg-kolo-bg">
       <PublicHeader />
-      <main className="max-w-5xl mx-auto px-6 py-8">{children}</main>
+      <main className="max-w-4xl mx-auto px-6 py-8">{children}</main>
     </div>
   );
 }

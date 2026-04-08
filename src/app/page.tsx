@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
+import PublicHeader from "@/components/PublicHeader";
 
 export const metadata: Metadata = {
   title: "KOLO — Ekonomija koju gradiš sa svojom zajednicom",
@@ -36,45 +37,24 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-kolo-bg">
 
-      {/* ── HEADER ─────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-white border-b border-kolo-border">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
-          <Link href="/" className="shrink-0">
-            <Image src={logoImg} alt="KOLO" width={120} height={82} style={{ height: "auto" }} />
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/kako-funkcionise" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">Kako funkcioniše</Link>
-            <a href="#transparentnost" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">Transparentnost</a>
-            <a href="#sta-kolo-nije" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">Šta KOLO nije</a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Link href="/login" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
-              Prijavi se
-            </Link>
-            <Link href="/registracija"
-              className="px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors">
-              Pridruži se
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicHeader />
 
       {/* ── SADRŽAJ ────────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-6 py-12 space-y-10 pb-20">
+      <div className="max-w-4xl mx-auto px-6 py-12 space-y-10 pb-20">
 
         {/* HERO */}
         <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
-          <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
-            <div>
+          <div className="grid md:grid-cols-[1fr_220px] gap-10 items-center">
+            <div className="max-w-lg">
               <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-5" style={{ letterSpacing: "-0.02em" }}>
                 Ekonomija koju gradiš{" "}
                 <span className="text-kolo-gold-400">sa svojom zajednicom</span>
               </h1>
-              <p className="text-green-200 leading-relaxed mb-7 max-w-lg">
+              <p className="text-green-200 leading-relaxed mb-7">
                 KOLO je sistem u kome tvoj doprinos ima vrednost. POEN beleži šta si dao zajednici.
                 ZRNO ti daje glas u odlukama koje je oblikuju.
               </p>
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="flex flex-wrap gap-3">
                 <Link href="/registracija"
                   className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
                   Pridruži se
@@ -84,29 +64,48 @@ export default async function Home() {
                   Kako funkcioniše
                 </Link>
               </div>
-              {/* Alpha statistike */}
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Alpha faza",
-                  `${clanovi.toLocaleString("sr-RS")} verifikovanih članova`,
-                  `${opticaj.toLocaleString("sr-RS")} POEN u opticaju`,
-                ].map((l) => (
-                  <span key={l} className="bg-white/10 border border-white/20 text-green-100 text-xs font-medium px-3 py-1.5 rounded-full">
-                    {l}
-                  </span>
-                ))}
-              </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
-              <Image
-                src={logoImg}
-                alt="KOLO zajednica"
-                width={200}
-                height={136}
-                style={{ height: "auto", filter: "brightness(0) invert(1)", opacity: 0.9 }}
-                priority
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/kolo-hero-logo.png"
+                alt="KOLO"
+                style={{ width: 190, height: "auto", opacity: 0.97 }}
               />
             </div>
+          </div>
+        </section>
+
+        {/* STATISTIKE */}
+        <section className="grid grid-cols-3 gap-4">
+          <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <p className="text-2xl font-bold text-kolo-text leading-none">{clanovi.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-kolo-muted leading-tight">verifikovanih članova</p>
+          </div>
+
+          <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-kolo-gold-100 flex items-center justify-center text-kolo-gold-600">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+              </svg>
+            </div>
+            <p className="text-2xl font-bold text-kolo-text leading-none">{opticaj.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-kolo-muted leading-tight">POEN u opticaju</p>
+          </div>
+
+          <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <p className="text-sm font-bold text-kolo-green-700 leading-none">Alpha</p>
+            <p className="text-xs text-kolo-muted leading-tight">faza razvoja</p>
           </div>
         </section>
 
@@ -337,7 +336,7 @@ export default async function Home() {
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
       <footer className="border-t border-kolo-border bg-white">
-        <div className="max-w-5xl mx-auto px-6 py-10">
+        <div className="max-w-4xl mx-auto px-6 py-10">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-3">

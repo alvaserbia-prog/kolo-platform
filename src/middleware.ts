@@ -30,6 +30,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/((?!login|registracija|api/auth|api/registracija|api/javno|api/provjeri-pseudonim|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png).*)",
+    "/((?!login|registracija|api/auth|api/registracija|api/javno|api/provjeri-pseudonim|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png).*)",
   ],
 };
