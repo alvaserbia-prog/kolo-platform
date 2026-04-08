@@ -74,7 +74,7 @@ export default function RegistracijaPage() {
           <p className="mt-2 text-sm text-gray-500">Registracija novog člana</p>
         </div>
 
-        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email *

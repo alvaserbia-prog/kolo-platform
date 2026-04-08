@@ -59,7 +59,7 @@ function LoginForm() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} noValidate className="space-y-4">
+        <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email
@@ -71,6 +71,7 @@ function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
               placeholder="vas@email.com"
+              suppressHydrationWarning
             />
           </div>
           <div>
@@ -84,6 +85,7 @@ function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
               placeholder="••••••••"
+              suppressHydrationWarning
             />
           </div>
 
@@ -97,6 +99,7 @@ function LoginForm() {
             type="submit"
             disabled={loading}
             className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60"
+            suppressHydrationWarning
           >
             {loading ? "Prijava u toku..." : "Prijavi se"}
           </button>
