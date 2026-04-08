@@ -66,19 +66,19 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   }
 
   return (
-    <div className="max-w-3xl space-y-5">
+    <div className="max-w-3xl mx-auto space-y-5">
       {/* Zaglavlje */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-gray-900">Pijaca</h1>
+        <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>Pijaca</h1>
         {isVerified ? (
           <Link
             href="/pijaca/novi-oglas"
-            className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors"
+            className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
           >
             + Novi oglas
           </Link>
         ) : (
-          <span className="text-xs text-gray-400">Verifikujte nalog da biste objavili oglas</span>
+          <span className="text-xs text-kolo-muted">Verifikujte nalog da biste objavili oglas</span>
         )}
       </div>
 
@@ -89,7 +89,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           placeholder="Pretraži oglase..."
           value={pretraga}
           onChange={(e) => setPretraga(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+          className="w-full px-4 py-3 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
         />
         <div className="flex gap-2 flex-wrap">
           {["Sve", ...KATEGORIJE].map((kat) => (
@@ -98,8 +98,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               onClick={() => setFilterKat(kat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 filterKat === kat
-                  ? "bg-green-700 text-white"
-                  : "bg-white border border-gray-200 text-gray-600 hover:border-gray-300"
+                  ? "bg-kolo-green-700 text-white"
+                  : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
               }`}
             >
               {kat}
@@ -113,19 +113,19 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
             placeholder="Min POEN"
             value={minCena}
             onChange={(e) => setMinCena(e.target.value)}
-            className="w-28 px-3 py-1.5 rounded-lg border border-gray-200 text-xs outline-none focus:border-green-600 transition-colors"
+            className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
           />
-          <span className="text-gray-300 text-xs">—</span>
+          <span className="text-kolo-border text-xs">—</span>
           <input
             type="number"
             min={0}
             placeholder="Max POEN"
             value={maxCena}
             onChange={(e) => setMaxCena(e.target.value)}
-            className="w-28 px-3 py-1.5 rounded-lg border border-gray-200 text-xs outline-none focus:border-green-600 transition-colors"
+            className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
           />
           {(minCena || maxCena) && (
-            <button onClick={() => { setMinCena(""); setMaxCena(""); }} className="text-xs text-gray-400 hover:text-gray-600">
+            <button onClick={() => { setMinCena(""); setMaxCena(""); }} className="text-xs text-kolo-muted hover:text-kolo-text">
               ×
             </button>
           )}
@@ -149,7 +149,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
 
       {/* Lista oglasa */}
       {filtrirani.length === 0 ? (
-        <div className="bg-kolo-surface rounded-2xl card-shadow p-10 flex flex-col items-center text-center gap-2">
+        <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-10 flex flex-col items-center text-center gap-2">
           <div className="text-kolo-green-500">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
@@ -178,17 +178,17 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
       {/* Modal kupovine */}
       {kupiOglas && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-sm space-y-4">
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 w-full max-w-sm space-y-4">
             <div>
-              <h3 className="text-lg font-bold text-gray-900">Potvrdi kupovinu</h3>
-              <p className="text-sm text-gray-500 mt-1">{kupiOglas.title}</p>
+              <h3 className="text-lg font-bold text-kolo-text">Potvrdi kupovinu</h3>
+              <p className="text-sm text-kolo-muted mt-1">{kupiOglas.title}</p>
             </div>
-            <div className="bg-green-50 rounded-xl px-4 py-3 text-center">
-              <p className="text-2xl font-bold text-green-700">{kupiOglas.price.toLocaleString("sr-RS")} POEN</p>
-              <p className="text-xs text-green-600">biće prebačeno prodavcu</p>
+            <div className="bg-kolo-green-100 rounded-xl px-4 py-3 text-center">
+              <p className="text-2xl font-bold text-kolo-green-700">{kupiOglas.price.toLocaleString("sr-RS")} POEN</p>
+              <p className="text-xs text-kolo-green-700 opacity-70">biće prebačeno prodavcu</p>
             </div>
             {poruka && (
-              <p className={`text-sm px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+              <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-red-50 text-kolo-danger"}`}>
                 {poruka.text}
               </p>
             )}
@@ -196,14 +196,14 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               <button
                 onClick={() => { setKupiOglas(null); setPoruka(null); }}
                 disabled={loading}
-                className="flex-1 py-3 rounded-xl bg-gray-100 text-gray-700 text-sm font-semibold hover:bg-gray-200 transition-colors"
+                className="flex-1 py-3 rounded-xl bg-kolo-bg border border-kolo-border text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors"
               >
                 Otkaži
               </button>
               <button
                 onClick={handleKupi}
                 disabled={loading || !!poruka?.ok}
-                className="flex-1 py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60"
+                className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
               >
                 {loading ? "Obrađujem..." : "Plati"}
               </button>
@@ -227,9 +227,9 @@ function OglasKartica({
   onKupi: () => void;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col">
+    <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
       {/* Slika ili placeholder */}
-      <div className="relative w-full h-36 bg-gray-50 flex items-center justify-center">
+      <div className="relative w-full h-36 bg-kolo-bg flex items-center justify-center">
         {oglas.slike > 0 ? (
           <Image
             src={`/api/pijaca/slika/${oglas.id}/0`}
@@ -241,7 +241,7 @@ function OglasKartica({
         ) : (
           <span className="text-4xl">{kategorijaEmoji(oglas.category)}</span>
         )}
-        <span className="absolute top-2 left-2 bg-white/90 text-gray-700 text-xs font-medium px-2 py-0.5 rounded-md">
+        <span className="absolute top-2 left-2 bg-white/90 text-kolo-muted text-xs font-medium px-2 py-0.5 rounded-lg">
           {oglas.category}
         </span>
       </div>
@@ -250,31 +250,31 @@ function OglasKartica({
       <div className="p-4 flex flex-col gap-2 flex-1">
         <div className="flex justify-between items-start gap-2">
           <div className="flex-1 min-w-0">
-            <Link href={`/pijaca/${oglas.id}`} className="font-semibold text-gray-900 text-sm hover:text-green-700 transition-colors line-clamp-2">
+            <Link href={`/pijaca/${oglas.id}`} className="font-semibold text-kolo-text text-sm hover:text-kolo-green-700 transition-colors line-clamp-2">
               {oglas.title}
             </Link>
-            <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{oglas.description}</p>
+            <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{oglas.description}</p>
           </div>
-          <div className="shrink-0 bg-green-50 rounded-lg px-2.5 py-1.5 text-center">
-            <p className="text-base font-bold text-green-700 leading-none">{oglas.price.toLocaleString("sr-RS")}</p>
-            <p className="text-[10px] text-green-600">POEN</p>
+          <div className="shrink-0 bg-kolo-green-100 rounded-xl px-2.5 py-1.5 text-center">
+            <p className="text-base font-bold text-kolo-green-700 leading-none">{oglas.price.toLocaleString("sr-RS")}</p>
+            <p className="text-[10px] text-kolo-green-700 opacity-70">POEN</p>
           </div>
         </div>
 
-        <div className="flex justify-between items-center mt-auto pt-2 border-t border-gray-100">
-          <span className="text-xs text-gray-400">
+        <div className="flex justify-between items-center mt-auto pt-2 border-t border-kolo-border">
+          <span className="text-xs text-kolo-muted">
             {isVerified ? oglas.sellerPseudonim : "Član KOLO zajednice"}
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
           </span>
           {isVerified ? (
             <button
               onClick={onKupi}
-              className="px-3 py-1.5 bg-green-700 text-white text-xs font-semibold rounded-lg hover:bg-green-800 transition-colors"
+              className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
             >
               Plati
             </button>
           ) : (
-            <Link href="/verifikacija" className="text-xs text-amber-600 hover:underline">
+            <Link href="/verifikacija" className="text-xs text-kolo-gold-600 hover:underline">
               Verifikuj →
             </Link>
           )}
