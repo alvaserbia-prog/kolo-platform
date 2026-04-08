@@ -29,10 +29,19 @@ interface EvidencijaInfo {
   status: EvidencijaStatus;
 }
 
+interface EmisioniKontekst {
+  opticaj: number;
+  dnevniLimit: number;
+  emitovanoAm: number | null;
+  zahtevanoAm: number | null;
+}
+
 interface Props {
   programi: ProgramInfo[];
   isVerified: boolean;
   isZadrugar: boolean;
+  bankaBalance: number;
+  emisioniKontekst: EmisioniKontekst;
   evidencijaToday: EvidencijaInfo | null;
   poslednjeEvidencije: EvidencijaInfo[];
 }
@@ -45,7 +54,7 @@ const statusBadge: Record<EnrollmentStatus, { label: string; cls: string }> = {
 };
 
 
-export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evidencijaToday, poslednjeEvidencije }: Props) {
+export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bankaBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
   const router = useRouter();
   const [activeProgram, setActiveProgram] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -66,6 +75,9 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evid
     if (res.ok) { setActiveProgram(null); setTimeout(() => router.refresh(), 1200); }
   }
 
+  const { opticaj, dnevniLimit, emitovanoAm, zahtevanoAm } = emisioniKontekst;
+  const emitovanoPct = dnevniLimit > 0 && emitovanoAm !== null ? Math.min(100, Math.round((emitovanoAm / dnevniLimit) * 100)) : 0;
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
@@ -74,6 +86,41 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evid
           <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-2 text-center">
             <p className="text-sm font-bold text-green-700">{totalOcekivano.toLocaleString("sr-RS")}</p>
             <p className="text-xs text-green-600">POEN/dan</p>
+          </div>
+        )}
+      </div>
+
+      {/* Emisioni kontekst */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Emisioni kontekst — danas</p>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div>
+            <p className="text-base font-bold text-gray-900">{opticaj.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-gray-400 mt-0.5">Opticaj (POEN)</p>
+          </div>
+          <div>
+            <p className="text-base font-bold text-gray-900">{dnevniLimit.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-gray-400 mt-0.5">Dnevni limit (10%)</p>
+          </div>
+          <div>
+            <p className={`text-base font-bold ${emitovanoAm !== null && emitovanoAm > 0 ? "text-green-700" : "text-gray-400"}`}>
+              {emitovanoAm !== null ? emitovanoAm.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-xs text-gray-400 mt-0.5">Emitovano danas</p>
+          </div>
+        </div>
+        {dnevniLimit > 0 && (
+          <div>
+            <div className="flex justify-between text-xs text-gray-400 mb-1">
+              <span>Iskorišćenost limita</span>
+              <span>{emitovanoPct}%{zahtevanoAm !== null && zahtevanoAm > dnevniLimit ? " — limit dostignut" : ""}</span>
+            </div>
+            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all ${emitovanoPct >= 100 ? "bg-red-500" : emitovanoPct >= 75 ? "bg-amber-400" : "bg-green-500"}`}
+                style={{ width: `${emitovanoPct}%` }}
+              />
+            </div>
           </div>
         )}
       </div>
@@ -91,6 +138,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evid
             p={p}
             isVerified={isVerified}
             isZadrugar={isZadrugar}
+            bankaBalance={bankaBalance}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
@@ -129,11 +177,12 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evid
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 function ProgramKartica({
-  p, isVerified, isZadrugar, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
+  p, isVerified, isZadrugar, bankaBalance, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
   isZadrugar: boolean;
+  bankaBalance: number;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
   expanded: boolean;
@@ -225,6 +274,33 @@ function ProgramKartica({
           Razlog odbijanja: {p.enrollment.rejectionReason}
         </div>
       )}
+
+      {/* Progress indikatori za zaključane faze */}
+      {!p.programAktivan && !enStatus && p.type === "POSEBNA_BRIGA" && (() => {
+        const PRAG = 1_000_000;
+        const opticaj = Math.abs(bankaBalance);
+        const pct = Math.min(100, Math.round((opticaj / PRAG) * 100));
+        return (
+          <div className="border-t border-gray-100 px-5 py-3">
+            <div className="flex justify-between text-xs text-gray-400 mb-1">
+              <span>Banka dostiže prag od 1M POEN opticaja</span>
+              <span>{opticaj.toLocaleString("sr-RS")} / 1.000.000 ({pct}%)</span>
+            </div>
+            <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-full bg-blue-400 rounded-full transition-all" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        );
+      })()}
+
+      {!p.programAktivan && !enStatus && p.type === "SKOLOVANJE" && (() => {
+        return (
+          <div className="border-t border-gray-100 px-5 py-3 text-xs text-gray-400">
+            Program se aktivira odlukom UO — prati glasanje na{" "}
+            <span className="text-gray-500 font-medium">/glasanje</span>
+          </div>
+        );
+      })()}
     </div>
   );
 }

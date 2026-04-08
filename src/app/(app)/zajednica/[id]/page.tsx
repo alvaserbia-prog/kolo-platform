@@ -16,7 +16,15 @@ export default async function ZadrugaPage({ params }: { params: Promise<{ id: st
         wallet: { select: { balance: true } },
         memberships: {
           where: { leftAt: null },
-          include: { user: { select: { pseudonim: true } } },
+          include: {
+            user: {
+              select: {
+                pseudonim: true,
+                programEnrollments: { where: { status: "PENDING" }, select: { id: true, type: true, metadata: true, createdAt: true } },
+                zaposljvanjeEvidencije: { where: { status: "PENDING" }, select: { id: true, date: true, description: true, amount: true, createdAt: true } },
+              },
+            },
+          },
           orderBy: { joinedAt: "asc" },
         },
         projects: { where: { status: "ACTIVE" }, orderBy: { createdAt: "desc" } },
@@ -48,6 +56,19 @@ export default async function ZadrugaPage({ params }: { params: Promise<{ id: st
           pseudonim: m.user.pseudonim,
           isAdmin: m.isAdmin,
           joinedAt: m.joinedAt.toISOString(),
+          pendingEnrollments: m.user.programEnrollments.map((e) => ({
+            id: e.id,
+            type: e.type as string,
+            metadata: e.metadata as Record<string, unknown> | null,
+            createdAt: e.createdAt.toISOString(),
+          })),
+          pendingEvidencije: m.user.zaposljvanjeEvidencije.map((e) => ({
+            id: e.id,
+            date: e.date.toISOString(),
+            description: e.description,
+            amount: e.amount,
+            createdAt: e.createdAt.toISOString(),
+          })),
         })),
         projects: zadruga.projects.map((p) => ({
           id: p.id,

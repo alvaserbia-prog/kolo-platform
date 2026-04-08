@@ -17,7 +17,7 @@ export default async function ProgramiPage() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const [aktivniProgrami, enrollments, evidencijaToday, poslednjeEmisije] = await Promise.all([
+  const [aktivniProgrami, enrollments, evidencijaToday, poslednjeEmisije, banka, emisijaDanas] = await Promise.all([
     prisma.bankaProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({ where: { userId: session.user.id } }),
     prisma.zaposljvanjeEvidencija.findFirst({
@@ -28,6 +28,8 @@ export default async function ProgramiPage() {
       orderBy: { date: "desc" },
       take: 14,
     }),
+    prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
+    prisma.dailyEmissionSummary.findFirst({ where: { date: danas } }),
   ]);
 
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
@@ -56,11 +58,21 @@ export default async function ProgramiPage() {
     };
   });
 
+  const opticaj = banka ? Math.abs(banka.balance) : 0;
+  const dnevniLimit = Math.floor(opticaj * 0.1);
+
   return (
     <ProgramiKlijent
       programi={programi}
       isVerified={session.user.verified}
       isZadrugar={session.user.role === "ZADRUGAR" || session.user.role === "ADMIN"}
+      bankaBalance={banka?.balance ?? 0}
+      emisioniKontekst={{
+        opticaj,
+        dnevniLimit,
+        emitovanoAm: emisijaDanas?.totalEmitted ?? null,
+        zahtevanoAm: emisijaDanas?.totalRequested ?? null,
+      }}
       evidencijaToday={evidencijaToday
         ? {
             id: evidencijaToday.id,

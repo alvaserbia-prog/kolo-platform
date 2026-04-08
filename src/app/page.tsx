@@ -140,76 +140,111 @@ export default async function Home() {
           </p>
         </section>
 
-        {/* KAKO FUNKCIONIŠE */}
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            Kako KOLO funkcioniše?
-          </h2>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-kolo-green-100 flex items-center justify-center">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text">Doprinesi zajednici</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">Verifikuj identitet, preporuči nove članove, doniraj Fondaciji — svaki doprinos nosi POEN nagradu.</p>
-            </div>
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-kolo-green-100 flex items-center justify-center">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
-                  <path d="M16 10a4 4 0 0 1-8 0"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text">Trguj i razmenjuj</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">Na Pijaci prodaješ robu i usluge za POEN i kupuješ od drugih članova. Direktna razmena, bez provizije.</p>
-            </div>
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-kolo-gold-100 flex items-center justify-center">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8860B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text">Upravljaj sistemom</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">ZRNO je glasačka jedinica. Zaključavanjem ZRNA dobijaš glas u odlukama koje oblikuju KOLO.</p>
-            </div>
-          </div>
-        </section>
+        {/* KAKO FUNKCIONIŠE + KAKO DO POEN — bok uz bok */}
+        <div className="grid md:grid-cols-2 gap-6">
 
-        {/* KAKO DO POENA */}
-        <section className="space-y-4">
-          <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            Kako do POEN?
-          </h2>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
-              <div className="w-10 h-10 rounded-xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center font-bold text-base shrink-0">✓</div>
-              <div>
-                <p className="font-semibold text-kolo-text">Verifikacija</p>
-                <p className="text-xs font-mono bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded inline-block mt-1">1.000 POEN</p>
-                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Jednokratna nagrada za svaki novi verifikovani nalog.</p>
-              </div>
+          {/* KAKO FUNKCIONIŠE */}
+          <section className="space-y-3">
+            <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
+              Kako KOLO funkcioniše?
+            </h2>
+            <div className="space-y-3">
+              {[
+                {
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                  ),
+                  iconBg: "bg-kolo-green-100",
+                  title: "Doprinesi zajednici",
+                  opis: "Verifikuj identitet, preporuči nove članove, doniraj Fondaciji — svaki doprinos nosi POEN nagradu.",
+                },
+                {
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+                      <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                  ),
+                  iconBg: "bg-kolo-green-100",
+                  title: "Trguj i razmenjuj",
+                  opis: "Na Pijaci prodaješ robu i usluge za POEN i kupuješ od drugih članova. Direktna razmena, bez provizije.",
+                },
+                {
+                  icon: (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B8860B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  ),
+                  iconBg: "bg-kolo-gold-100",
+                  title: "Upravljaj sistemom",
+                  opis: "ZRNO je glasačka jedinica. Zaključavanjem ZRNA dobijaš glas u odlukama koje oblikuju KOLO.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="bg-white rounded-2xl card-shadow p-4 flex items-start gap-4">
+                  <div className={`w-10 h-10 rounded-xl ${item.iconBg} flex items-center justify-center shrink-0`}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-kolo-text text-sm">{item.title}</p>
+                    <p className="text-xs text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
-              <div className="w-10 h-10 rounded-xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center font-bold text-base shrink-0">→</div>
-              <div>
-                <p className="font-semibold text-kolo-text">Preporuke</p>
-                <p className="text-xs font-mono bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded inline-block mt-1">do 15.000 POEN</p>
-                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Za svaku osobu kojoj si preporučio KOLO i koja se verifikuje — 10 nivoa nagrade.</p>
-              </div>
+          </section>
+
+          {/* KAKO DO POEN */}
+          <section className="space-y-3">
+            <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
+              Kako do POEN?
+            </h2>
+            <div className="space-y-3">
+              {[
+                {
+                  ikona: "✓",
+                  iconBg: "bg-kolo-green-100 text-kolo-green-700",
+                  title: "Verifikacija",
+                  badge: "1.000 POEN",
+                  badgeCls: "bg-kolo-green-100 text-kolo-green-700",
+                  opis: "Jednokratna nagrada za svaki novi verifikovani nalog.",
+                },
+                {
+                  ikona: "→",
+                  iconBg: "bg-kolo-green-100 text-kolo-green-700",
+                  title: "Preporuke",
+                  badge: "do 15.000 POEN",
+                  badgeCls: "bg-kolo-green-100 text-kolo-green-700",
+                  opis: "Za svaku osobu kojoj si preporučio KOLO i koja se verifikuje — 10 nivoa nagrade.",
+                },
+                {
+                  ikona: "♥",
+                  iconBg: "bg-kolo-gold-100 text-kolo-gold-600",
+                  title: "Donacije",
+                  badge: "kurs raste",
+                  badgeCls: "bg-kolo-gold-100 text-kolo-gold-600",
+                  opis: "Svaka donacija Fondaciji povećava kurs POEN/RSD. Donatori dobijaju POEN srazmerno donaciji.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="bg-white rounded-2xl card-shadow p-4 flex items-start gap-4">
+                  <div className={`w-10 h-10 rounded-xl ${item.iconBg} flex items-center justify-center font-bold text-base shrink-0`}>
+                    {item.ikona}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-semibold text-kolo-text text-sm">{item.title}</p>
+                      <span className={`text-xs font-mono px-2 py-0.5 rounded ${item.badgeCls}`}>{item.badge}</span>
+                    </div>
+                    <p className="text-xs text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
-              <div className="w-10 h-10 rounded-xl bg-kolo-gold-100 text-kolo-gold-600 flex items-center justify-center font-bold text-base shrink-0">♥</div>
-              <div>
-                <p className="font-semibold text-kolo-text">Donacije</p>
-                <p className="text-xs font-mono bg-kolo-gold-100 text-kolo-gold-600 px-2 py-0.5 rounded inline-block mt-1">kurs raste</p>
-                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Svaka donacija Fondaciji povećava kurs POEN/RSD. Donatori dobijaju POEN srazmerno donaciji.</p>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+
+        </div>
 
         {/* MIKRO PRIMER */}
         <section className="bg-white rounded-2xl card-shadow p-7">
