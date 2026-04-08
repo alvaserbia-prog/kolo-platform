@@ -137,8 +137,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               onClick={() => setSort(val)}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 sort === val
-                  ? "bg-gray-900 text-white"
-                  : "bg-white border border-gray-200 text-gray-500 hover:border-gray-300"
+                  ? "bg-kolo-green-700 text-white border border-kolo-green-700"
+                  : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
               }`}
             >
               {lab}
@@ -149,8 +149,18 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
 
       {/* Lista oglasa */}
       {filtrirani.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-gray-200 p-10 text-center text-sm text-gray-400">
-          {listings.length === 0 ? "Još nema oglasa. Budite prvi!" : "Nema oglasa koji odgovaraju pretrazi."}
+        <div className="bg-kolo-surface rounded-2xl card-shadow p-10 flex flex-col items-center text-center gap-2">
+          <div className="text-kolo-green-500">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </div>
+          <p className="text-sm font-semibold text-kolo-text">
+            {listings.length === 0 ? "Još nema oglasa" : "Nema oglasa koji odgovaraju pretrazi"}
+          </p>
+          <p className="text-sm text-kolo-muted">
+            {listings.length === 0 ? "Budite prvi koji objavljuje na Pijaci!" : "Pokušajte sa drugačijim filterima."}
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

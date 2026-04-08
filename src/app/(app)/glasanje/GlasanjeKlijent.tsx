@@ -32,13 +32,13 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
         <h1 className="text-2xl font-semibold text-gray-900">Glasanje</h1>
         <div className="flex items-center gap-3">
           {mojaGlasackaMoc > 0 && (
-            <span className="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl font-medium">
+            <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 border border-kolo-gold-400/30 px-3 py-1.5 rounded-xl font-medium">
               {mojaGlasackaMoc} glasova
             </span>
           )}
           {mojaGlasackaMoc > 0 && (
             <button onClick={() => setShowNovi((v) => !v)}
-              className="px-4 py-2 bg-purple-600 text-white text-sm font-semibold rounded-xl hover:bg-purple-700 transition-colors">
+              className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">
               + Novi predlog
             </button>
           )}
@@ -46,9 +46,9 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
       </div>
 
       {mojaGlasackaMoc === 0 && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 text-sm text-amber-700">
+        <div className="box-warning text-sm">
           Za glasanje i kreiranje predloga potrebno je imati aktivnih ZRNA.{" "}
-          <Link href="/zrno" className="underline">Idite na ZRNO →</Link>
+          <Link href="/zrno" className="underline font-medium">Idite na ZRNO →</Link>
         </div>
       )}
 
@@ -123,7 +123,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
 
       {/* Moj glas */}
       {p.mojGlas !== null && (
-        <p className="text-xs text-purple-600 font-medium">
+        <p className="text-xs text-kolo-gold-600 font-medium">
           Glasali ste: {p.mojGlas ? "ZA" : "PROTIV"} ({mojaGlasackaMoc} glasova)
         </p>
       )}
@@ -187,22 +187,22 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
   const minDate = sutra.toISOString().split("T")[0];
 
   return (
-    <div className="bg-white rounded-2xl border border-purple-200 p-5 space-y-3">
+    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
       <p className="text-sm font-semibold text-gray-700">Novi predlog</p>
       <input type="text" placeholder="Naslov *" value={title} onChange={(e) => setTitle(e.target.value)}
-        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700" />
       <textarea rows={3} placeholder="Opis predloga (min 20 karaktera) *" value={description} onChange={(e) => setDescription(e.target.value)}
-        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500 resize-none" />
+        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700 resize-none" />
       <div>
         <label className="block text-xs text-gray-500 mb-1">Rok glasanja *</label>
         <input type="date" min={minDate} value={deadline} onChange={(e) => setDeadline(e.target.value)}
-          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700" />
       </div>
       {error && <p className="text-xs text-red-600">{error}</p>}
       <div className="flex gap-2">
         <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-gray-100 text-gray-600 text-sm font-medium">Otkaži</button>
         <button onClick={handleSubmit} disabled={loading}
-          className="flex-1 py-2.5 rounded-xl bg-purple-600 text-white text-sm font-semibold disabled:opacity-60">
+          className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 disabled:opacity-60 transition-colors">
           {loading ? "..." : "Objavi predlog"}
         </button>
       </div>

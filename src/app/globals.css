@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
+/* ── KOLO Design System ────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAFAF8;
+  --foreground: #1A1A17;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── KOLO Color Palette ─────────────────────────────────────────── */
+
+@theme {
+  /* Primarna zelena (iz logoa) */
+  --color-kolo-green-900: #0F3D20;
+  --color-kolo-green-700: #1B6B3A;
+  --color-kolo-green-500: #2E9D54;
+  --color-kolo-green-100: #E8F5EC;
+
+  /* Zlatna — ZRNO i akcenti */
+  --color-kolo-gold-600: #D99520;
+  --color-kolo-gold-400: #F5B842;
+  --color-kolo-gold-100: #FDF4E0;
+
+  /* Neutralne (topla paleta) */
+  --color-kolo-bg:      #FAFAF8;
+  --color-kolo-surface: #FFFFFF;
+  --color-kolo-border:  #E8E6E1;
+  --color-kolo-muted:   #6B6860;
+  --color-kolo-text:    #1A1A17;
+
+  /* Funkcionalne */
+  --color-kolo-danger: #B33A3A;
+  --color-kolo-info:   #2B6CB0;
 }
+
+/* ── Base ───────────────────────────────────────────────────────── */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ── Card shadows (Raycast style) ───────────────────────────────── */
+
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+}
+
+/* ── Warning / Info boxes ───────────────────────────────────────── */
+
+.box-warning {
+  background: #FDF4E0;
+  border-left: 4px solid #D99520;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  color: #92640A;
+}
+
+.box-info {
+  background: #EBF4FF;
+  border-left: 4px solid #2B6CB0;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  color: #1E4E8C;
 }

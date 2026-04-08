@@ -13,7 +13,7 @@ export default async function AppLayout({
   if (!session) redirect("/login");
 
   return (
-    <div className="flex h-full bg-gray-50 text-gray-900">
+    <div className="flex h-full bg-kolo-bg text-kolo-text">
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0">
         <Header />

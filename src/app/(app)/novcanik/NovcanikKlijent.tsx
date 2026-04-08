@@ -17,12 +17,12 @@ const TIP_LABELA: Record<string, string> = {
 const TIP_BOJA: Record<string, string> = {
   TRANSFER: "bg-gray-100 text-gray-600",
   EMISIJA_VERIFIKACIJA: "bg-green-50 text-green-700",
-  EMISIJA_PREPORUKA: "bg-blue-50 text-blue-700",
+  EMISIJA_PREPORUKA: "bg-kolo-green-100 text-kolo-green-700",
   EMISIJA_DONACIJA: "bg-amber-50 text-amber-700",
-  EMISIJA_POKROVITELJ: "bg-purple-50 text-purple-700",
-  EMISIJA_ZADRUGA_OSNIVANJE: "bg-teal-50 text-teal-700",
-  EMISIJA_ZADRUGA_BONUS: "bg-teal-50 text-teal-700",
-  EMISIJA_PROGRAM: "bg-indigo-50 text-indigo-700",
+  EMISIJA_POKROVITELJ: "bg-kolo-gold-100 text-kolo-gold-600",
+  EMISIJA_ZADRUGA_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
+  EMISIJA_ZADRUGA_BONUS: "bg-kolo-green-100 text-kolo-green-700",
+  EMISIJA_PROGRAM: "bg-kolo-green-100 text-kolo-green-700",
 };
 
 type Transakcija = {
@@ -58,9 +58,9 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije }: Pro
   return (
     <div className="max-w-xl space-y-6">
       {/* Balans kartica */}
-      <div className="bg-green-700 rounded-2xl p-6 text-white">
+      <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
         <p className="text-sm text-green-200 mb-1">Vaše stanje</p>
-        <p className="text-4xl font-bold tracking-tight">{balance.toLocaleString("sr-RS")}</p>
+        <p className="text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
         <p className="text-lg text-green-300 mt-0.5">POEN</p>
         <div className="mt-4 flex gap-3">
           <button

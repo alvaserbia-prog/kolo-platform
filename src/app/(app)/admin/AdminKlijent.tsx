@@ -353,7 +353,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
               day: "2-digit", month: "long", year: "numeric",
             })}
             {vr.imaReferral && (
-              <span className="ml-2 bg-blue-50 text-blue-600 px-2 py-0.5 rounded text-xs font-medium">
+              <span className="ml-2 bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded text-xs font-medium">
                 Preporuka
               </span>
             )}
@@ -544,11 +544,11 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
         </div>
         <div className="flex gap-2 shrink-0 ml-4">
           <button onClick={pokreniZrnoNocnu} disabled={loadingZrno}
-            className="px-3 py-1.5 bg-purple-600 text-white text-xs font-semibold rounded-xl hover:bg-purple-700 disabled:opacity-60 transition-colors">
+            className="px-3 py-1.5 bg-kolo-gold-600 text-white text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 disabled:opacity-60 transition-colors">
             {loadingZrno ? "..." : "▶ ZRNO obrada"}
           </button>
           <button onClick={toggleZrnoTrziste} disabled={loadingZrno}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoTrzisjeAktivno ? "bg-red-50 text-red-600 hover:bg-red-100" : "bg-purple-50 text-purple-700 hover:bg-purple-100"}`}>
+            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoTrzisjeAktivno ? "bg-red-50 text-red-600 hover:bg-red-100" : "bg-kolo-gold-100 text-kolo-gold-600 hover:bg-kolo-gold-100"}`}>
             {data.zrnoTrzisjeAktivno ? "Deaktiviraj" : "Aktiviraj"}
           </button>
         </div>
@@ -889,7 +889,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-gray-200 p-4">
           <p className="text-xs text-gray-400 mb-1">ZRNO kod korisnika</p>
-          <p className="text-2xl font-bold text-purple-700">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
+          <p className="text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-gray-200 p-4">
           <p className="text-xs text-gray-400 mb-1">ZRNO u Banci</p>

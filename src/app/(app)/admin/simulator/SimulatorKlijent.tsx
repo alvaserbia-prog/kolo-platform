@@ -497,8 +497,8 @@ const DOG_CFG: Record<string, { bg: string; text: string; ikona: string }> = {
   don:     { bg: "bg-amber-50",   text: "text-amber-700",   ikona: "♦" },
   zadruga: { bg: "bg-green-50",   text: "text-green-700",   ikona: "⊕" },
   prog:    { bg: "bg-emerald-50", text: "text-emerald-700", ikona: "₽" },
-  zrno:    { bg: "bg-purple-50",  text: "text-purple-700",  ikona: "◆" },
-  ref:     { bg: "bg-indigo-50",  text: "text-indigo-700",  ikona: "→" },
+  zrno:    { bg: "bg-kolo-gold-100",  text: "text-kolo-gold-600",  ikona: "◆" },
+  ref:     { bg: "bg-kolo-green-100", text: "text-kolo-green-700", ikona: "→" },
 };
 
 // Reusable input components
@@ -875,7 +875,7 @@ function ViewClanovi({ members }: { members: Clan[] }) {
                 </td>
                 <td className="px-3 py-1.5 text-right font-mono text-amber-600">{fmt(m.cumDon)}</td>
                 <td className="px-3 py-1.5 text-right">{m.refs}</td>
-                <td className="px-3 py-1.5 text-right font-mono text-purple-600">{m.zrno || "—"}</td>
+                <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{m.zrno || "—"}</td>
                 <td className="px-3 py-1.5 text-right text-gray-400">{m.age}</td>
                 <td className="px-3 py-1.5 text-center">{m.uZadrugu ? <span className="text-green-600">✓</span> : <span className="text-gray-300">—</span>}</td>
               </tr>
@@ -994,9 +994,9 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
       </div>
       <div className="grid grid-cols-4 gap-3 mb-5">
         {[
-          { l: "Kurs (POEN/ZRNO)", v: last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(2) : "—", c: "text-purple-700" },
+          { l: "Kurs (POEN/ZRNO)", v: last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(2) : "—", c: "text-kolo-gold-600" },
           { l: "ZRNO u Banci", v: fmt(last.zrnoUBanci), c: "text-gray-700" },
-          { l: "ZRNO kod korisnika", v: fmt(last.zrnoKodKorisnika), c: "text-purple-600" },
+          { l: "ZRNO kod korisnika", v: fmt(last.zrnoKodKorisnika), c: "text-kolo-gold-600" },
           { l: "% distribuirano", v: last.zrnoKodKorisnika > 0 ? ((last.zrnoKodKorisnika / ukupnoZrna) * 100).toFixed(1) + "%" : "0%", c: "text-gray-700" },
         ].map(x => (
           <div key={x.l} className="bg-white rounded-xl border border-gray-200 p-3">
@@ -1006,10 +1006,10 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
         ))}
       </div>
       {last.zrnoKurs === 0 ? (
-        <div className="bg-purple-50 rounded-2xl border border-purple-100 p-6 text-center">
-          <p className="text-sm font-semibold text-purple-700">ZRNO tržište neaktivno</p>
-          <p className="text-xs text-purple-500 mt-1">Aktivira se automatski pri opticaju ≥ {fmt(1_000_000)} POEN</p>
-          <p className="text-xs text-purple-400 mt-0.5">Trenutni opticaj: {fmt(last.opticaj)} POEN</p>
+        <div className="bg-kolo-gold-100 rounded-2xl border border-kolo-gold-400/30 p-6 text-center">
+          <p className="text-sm font-semibold text-kolo-gold-600">ZRNO tržište neaktivno</p>
+          <p className="text-xs text-kolo-gold-600 mt-1">Aktivira se automatski pri opticaju ≥ {fmt(1_000_000)} POEN</p>
+          <p className="text-xs text-kolo-gold-400 mt-0.5">Trenutni opticaj: {fmt(last.opticaj)} POEN</p>
         </div>
       ) : (
         <>
@@ -1018,7 +1018,7 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
             <MiniChart data={zrnoLog.map(d => d.zrnoKurs)} color="#8b5cf6" h={70} />
             <div className="flex justify-between text-xs text-gray-400 mt-1">
               <span>Dan {zrnoLog[0]?.day ?? "—"}</span>
-              <span className="font-mono text-purple-600">{last.zrnoKurs.toFixed(2)} POEN/ZRNO</span>
+              <span className="font-mono text-kolo-gold-600">{last.zrnoKurs.toFixed(2)} POEN/ZRNO</span>
               <span>Dan {last.day}</span>
             </div>
           </div>
@@ -1027,7 +1027,7 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
             <div className="space-y-2">
               {[
                 { l: "Banka", v: last.zrnoUBanci, total: ukupnoZrna, c: "bg-blue-400" },
-                { l: "Korisnici", v: last.zrnoKodKorisnika, total: ukupnoZrna, c: "bg-purple-500" },
+                { l: "Korisnici", v: last.zrnoKodKorisnika, total: ukupnoZrna, c: "bg-kolo-gold-400" },
               ].map(x => (
                 <div key={x.l}>
                   <div className="flex justify-between text-xs text-gray-500 mb-1">
@@ -1115,7 +1115,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
         </div>
         <div className="bg-white rounded-xl border border-gray-200 p-3">
           <p className="text-xs text-gray-400">ZRNO kurs</p>
-          <p className="text-xl font-bold font-mono text-purple-700">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
+          <p className="text-xl font-bold font-mono text-kolo-gold-600">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
           <p className="text-xs text-gray-400">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
         </div>
       </div>
@@ -1200,7 +1200,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
                     <td className={`px-3 py-1.5 text-right font-mono font-semibold ${d.koeficijent < 1 ? "text-red-600" : "text-gray-300"}`}>
                       {d.koeficijent < 1 ? d.koeficijent.toFixed(3) : "1.000"}
                     </td>
-                    <td className="px-3 py-1.5 text-right font-mono text-purple-600">{d.zrnoKurs > 0 ? d.zrnoKurs.toFixed(1) : "—"}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{d.zrnoKurs > 0 ? d.zrnoKurs.toFixed(1) : "—"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1231,7 +1231,7 @@ function Controls({ playing, speed, onAdvance, onPlay, onReset, onSpeedChange, l
         <button onClick={() => onAdvance(7)} className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors">+7 dana</button>
         <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-xl hover:bg-green-600 transition-colors">+30 dana</button>
         <button onClick={onPlay}
-          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-red-600 text-white hover:bg-red-700" : "bg-purple-600 text-white hover:bg-purple-700"}`}>
+          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-red-600 text-white hover:bg-red-700" : "bg-kolo-green-900 text-white hover:bg-kolo-green-700"}`}>
           {playing ? "⏸ Pauza" : "▶ Auto"}
         </button>
         {playing && (

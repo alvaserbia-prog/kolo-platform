@@ -73,9 +73,9 @@ export default async function DashboardPage() {
 
       {/* Kartice */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-green-700 rounded-2xl p-5 text-white">
+        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-5 text-white shadow-lg">
           <p className="text-xs text-green-300 mb-1">Vaše stanje</p>
-          <p className="text-3xl font-bold">{(wallet?.balance ?? 0).toLocaleString("sr-RS")}</p>
+          <p className="text-3xl font-bold font-mono">{(wallet?.balance ?? 0).toLocaleString("sr-RS")}</p>
           <p className="text-sm text-green-300">POEN</p>
           <Link href="/novcanik" className="mt-3 inline-block text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition-colors">
             Novčanik →
