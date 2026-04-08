@@ -1,0 +1,29 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+
+export async function GET(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session || session.user.role !== "ADMIN")
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+
+  const take = Number(req.nextUrl.searchParams.get("take") ?? "50");
+
+  const logs = await prisma.auditLog.findMany({
+    orderBy: { createdAt: "desc" },
+    take: Math.min(take, 200),
+    include: { admin: { select: { pseudonim: true } } },
+  });
+
+  return NextResponse.json({
+    logs: logs.map((l) => ({
+      id: l.id,
+      adminPseudonim: l.admin.pseudonim,
+      akcija: l.akcija,
+      targetId: l.targetId,
+      detalji: l.detalji,
+      createdAt: l.createdAt.toISOString(),
+    })),
+  });
+}

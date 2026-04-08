@@ -7,6 +7,8 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── Enumi ───────────────────────────────────────────────────────────────────
+
 enum Role {
   FIZICKO_LICE
   ZADRUGAR
@@ -19,12 +21,108 @@ enum WalletType {
   BANKA
 }
 
+enum VerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ZadrugaStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum ZadrugaOsnivanjeStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PristupnicaStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ProjectType {
+  PRIKUPLJANJE
+  REDISTRIBUCIJA
+}
+
+enum ListingStatus {
+  ACTIVE
+  SOLD
+  EXPIRED
+}
+
+enum TransactionType {
+  TRANSFER
+  EMISIJA_VERIFIKACIJA
+  EMISIJA_PREPORUKA
+  EMISIJA_DONACIJA
+  EMISIJA_POKROVITELJ
+  EMISIJA_ZADRUGA_OSNIVANJE
+  EMISIJA_ZADRUGA_BONUS
+  EMISIJA_PROGRAM
+  KUPOVINA_ZRNO
+  PRODAJA_ZRNO
+}
+
+enum ZrnoZahtevStatus {
+  PENDING
+  EXECUTED
+  CANCELLED
+}
+
+enum ZrnoStatusAkcija {
+  ZAKLJUCAJ
+  OTKLJUCAJ
+}
+
+enum PredlogStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum ProgramType {
+  ZAPOSLJAVNJE
+  PODRSKA_MAJKAMA
+  PODRSKA_STARIJIMA
+  POSEBNA_BRIGA
+  SKOLOVANJE
+}
+
+enum EnrollmentStatus {
+  PENDING
+  ACTIVE
+  INACTIVE
+  REJECTED
+}
+
+enum EvidencijaStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EMITTED
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  EXCLUDED
+}
+
+// ─── Modeli ───────────────────────────────────────────────────────────────────
+
 model User {
   id                 String    @id @default(uuid())
   email              String    @unique
   passwordHash       String
   pseudonim          String    @unique
-  role               Role      @default(FIZICKO_LICE)
+  role               Role       @default(FIZICKO_LICE)
+  status             UserStatus @default(ACTIVE)
+  suspendedAt        DateTime?
+  suspendedReason    String?
   verified           Boolean   @default(false)
   verifiedAt         DateTime?
   pseudonimChangedAt DateTime?
@@ -33,17 +131,363 @@ model User {
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
   wallet             Wallet?
+  referralsMade      Referral[] @relation("Referrer")
+  referralReceived   Referral?  @relation("Referred")
+  donations              DonationRecord[]
+  verificationRequest    VerificationRequest?
+  listings               MarketplaceListing[] @relation("SellerListings")
+  purchases              MarketplaceListing[] @relation("BuyerListings")
+  zadrugaMemberships     ZadrugaMembership[]
+  pristupnice            ZadrugaPristupnica[]
+  osnivanjeZahtevi       ZadrugaOsnivanjeZahtev[] @relation("Inicijator")
+  programEnrollments     ProgramEnrollment[]
+  zaposljvanjeEvidencije ZaposljvanjeEvidencija[]
+  zrnoStanje             ZrnoStanje?
+  zrnoKupovinaZahtevi   ZrnoKupovinaZahtev[]
+  zrnoProdajaZahtevi    ZrnoProdajaZahtev[]
+  zrnoStatusZahtevi     ZrnoStatusZahtev[]
+  delegiraoKome         ZrnoDelegacija?          @relation("Delegator")
+  delegatZa             ZrnoDelegacija[]         @relation("Delegat")
+  kreiraniPredlozi      GlasanjePredlog[]
+  glasovi               GlasanjeGlas[]
+  auditLogs             AuditLog[]       @relation("AdminActions")
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
 
 model Wallet {
-  id        String     @id @default(uuid())
-  userId    String?    @unique
-  user      User?      @relation(fields: [userId], references: [id])
-  zadrugaId String?    @unique
-  balance   Int        @default(0)
-  type      WalletType
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id          String        @id @default(uuid())
+  userId      String?       @unique
+  user        User?         @relation(fields: [userId], references: [id])
+  zadrugaId   String?       @unique
+  zadruga     Zadruga?      @relation("ZadrugaWallet", fields: [zadrugaId], references: [id])
+  balance     Int           @default(0)
+  type        WalletType
+  outgoingTx  Transaction[] @relation("FromWallet")
+  incomingTx  Transaction[] @relation("ToWallet")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Transaction {
+  id           String          @id @default(uuid())
+  fromWalletId String?
+  fromWallet   Wallet?         @relation("FromWallet", fields: [fromWalletId], references: [id])
+  toWalletId   String
+  toWallet     Wallet          @relation("ToWallet", fields: [toWalletId], references: [id])
+  amount       Int
+  type         TransactionType
+  description  String?
+  createdAt    DateTime        @default(now())
+}
+
+model Referral {
+  id           String   @id @default(uuid())
+  referrerId   String
+  referrer     User     @relation("Referrer", fields: [referrerId], references: [id])
+  referredId   String   @unique
+  referred     User     @relation("Referred", fields: [referredId], references: [id])
+  rewardPaid   Boolean  @default(false)
+  rewardAmount Int?
+  createdAt    DateTime @default(now())
+}
+
+model VerificationRequest {
+  id               String             @id @default(uuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id])
+  jmbg             String
+  idFrontPath      String
+  idBackPath       String
+  status           VerificationStatus @default(PENDING)
+  rejectionReason  String?
+  reviewedAt       DateTime?
+  reviewedById     String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+model Zadruga {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  description String?
+  location    String?
+  status      ZadrugaStatus @default(ACTIVE)
+  wallet      Wallet?       @relation("ZadrugaWallet")
+  memberships ZadrugaMembership[]
+  pristupnice ZadrugaPristupnica[]
+  projects    ZadrugaProject[]
+  bonusLogs   ZadrugaBonusLog[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model ZadrugaMembership {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  zadrugaId String
+  zadruga   Zadruga   @relation(fields: [zadrugaId], references: [id])
+  isAdmin   Boolean   @default(false)
+  joinedAt  DateTime  @default(now())
+  leftAt    DateTime?
+
+  @@index([userId, leftAt])
+  @@index([zadrugaId, leftAt])
+}
+
+model ZadrugaOsnivanjeZahtev {
+  id              String                 @id @default(uuid())
+  name            String
+  description     String?
+  location        String?
+  inicijatorId    String
+  inicijator      User                   @relation("Inicijator", fields: [inicijatorId], references: [id])
+  osnivaci        String[]
+  status          ZadrugaOsnivanjeStatus @default(PENDING)
+  rejectionReason String?
+  reviewedAt      DateTime?
+  reviewedById    String?
+  createdAt       DateTime               @default(now())
+}
+
+model ZadrugaPristupnica {
+  id        String            @id @default(uuid())
+  userId    String
+  user      User              @relation(fields: [userId], references: [id])
+  zadrugaId String
+  zadruga   Zadruga           @relation(fields: [zadrugaId], references: [id])
+  status    PristupnicaStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+
+  @@unique([userId, zadrugaId])
+}
+
+model ZadrugaProject {
+  id          String      @id @default(uuid())
+  zadrugaId   String
+  zadruga     Zadruga     @relation(fields: [zadrugaId], references: [id])
+  type        ProjectType
+  title       String
+  description String
+  status      String      @default("ACTIVE")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model ZadrugaBonusLog {
+  id        String   @id @default(uuid())
+  zadrugaId String
+  zadruga   Zadruga  @relation(fields: [zadrugaId], references: [id])
+  threshold Int
+  amount    Int
+  createdAt DateTime @default(now())
+}
+
+model MarketplaceListing {
+  id          String        @id @default(uuid())
+  sellerId    String
+  seller      User          @relation("SellerListings", fields: [sellerId], references: [id])
+  buyerId     String?
+  buyer       User?         @relation("BuyerListings", fields: [buyerId], references: [id])
+  title       String
+  description String
+  price       Int
+  category    String
+  images      String[]
+  location    String?
+  phone       String?
+  status      ListingStatus @default(ACTIVE)
+  soldAt      DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status, category, createdAt])
+}
+
+model BankaProgram {
+  type        ProgramType @id
+  isActive    Boolean     @default(false)
+  activatedAt DateTime?
+  updatedAt   DateTime    @updatedAt
+}
+
+model ProgramEnrollment {
+  id              String           @id @default(uuid())
+  userId          String
+  user            User             @relation(fields: [userId], references: [id])
+  type            ProgramType
+  status          EnrollmentStatus @default(PENDING)
+  metadata        Json?
+  dailyAmount     Int?
+  approvedById    String?
+  approvedAt      DateTime?
+  rejectionReason String?
+  nextReverifikacija DateTime?
+  evidencije      ZaposljvanjeEvidencija[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@unique([userId, type])
+  @@index([status, type])
+}
+
+model ZaposljvanjeEvidencija {
+  id           String           @id @default(uuid())
+  userId       String
+  user         User             @relation(fields: [userId], references: [id])
+  enrollmentId String
+  enrollment   ProgramEnrollment @relation(fields: [enrollmentId], references: [id])
+  date         DateTime         @db.Date
+  description  String
+  amount       Int
+  status       EvidencijaStatus @default(PENDING)
+  approvedById String?
+  approvedAt   DateTime?
+  createdAt    DateTime         @default(now())
+
+  @@unique([userId, date])
+  @@index([date, status])
+}
+
+model DailyEmissionSummary {
+  id             String   @id @default(uuid())
+  date           DateTime @db.Date @unique
+  opticaj        Int
+  limit          Int
+  totalRequested Int
+  totalEmitted   Int
+  koeficijent    Decimal  @db.Decimal(10, 6)
+  breakdown      Json
+  createdAt      DateTime @default(now())
+}
+
+// ─── ZRNO sistem ─────────────────────────────────────────────────────────────
+
+model ZrnoTrziste {
+  id          String    @id @default("singleton")
+  isActive    Boolean   @default(false)
+  activatedAt DateTime?
+  updatedAt   DateTime  @updatedAt
+}
+
+model ZrnoStanje {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  slobodno  Int      @default(0)
+  aktivno   Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
+
+model ZrnoKupovinaZahtev {
+  id           String           @id @default(uuid())
+  userId       String
+  user         User             @relation(fields: [userId], references: [id])
+  poenIznos    Int
+  date         DateTime         @db.Date
+  status       ZrnoZahtevStatus @default(PENDING)
+  zrnaKupljeno Int?
+  poenPlaceno  Int?
+  createdAt    DateTime         @default(now())
+
+  @@unique([userId, date])
+  @@index([date, status])
+}
+
+model ZrnoProdajaZahtev {
+  id           String           @id @default(uuid())
+  userId       String
+  user         User             @relation(fields: [userId], references: [id])
+  kolicina     Int
+  date         DateTime         @db.Date
+  status       ZrnoZahtevStatus @default(PENDING)
+  poenDobijeno Int?
+  createdAt    DateTime         @default(now())
+
+  @@unique([userId, date])
+  @@index([date, status])
+}
+
+model ZrnoStatusZahtev {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
+  kolicina  Int
+  akcija    ZrnoStatusAkcija
+  date      DateTime         @db.Date
+  status    ZrnoZahtevStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+
+  @@index([date, status])
+}
+
+model ZrnoDailyRate {
+  date       DateTime @db.Date @unique
+  kurs       Decimal  @db.Decimal(20, 2)
+  bankaMinus Int
+  zrnaUBanci Int
+  createdAt  DateTime @default(now())
+}
+
+model ZrnoDelegacija {
+  id          String   @id @default(uuid())
+  delegatorId String   @unique
+  delegator   User     @relation("Delegator", fields: [delegatorId], references: [id])
+  delegatId   String
+  delegat     User     @relation("Delegat", fields: [delegatId], references: [id])
+  aktivna     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+// ─── Glasanje ─────────────────────────────────────────────────────────────────
+
+model GlasanjePredlog {
+  id          String        @id @default(uuid())
+  title       String
+  description String
+  authorId    String
+  author      User          @relation(fields: [authorId], references: [id])
+  deadline    DateTime
+  status      PredlogStatus @default(ACTIVE)
+  glasovi     GlasanjeGlas[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model GlasanjeGlas {
+  id              String          @id @default(uuid())
+  predlogId       String
+  predlog         GlasanjePredlog @relation(fields: [predlogId], references: [id])
+  userId          String
+  user            User            @relation(fields: [userId], references: [id])
+  za              Boolean
+  glasackaGlasova Int
+  createdAt       DateTime        @default(now())
+
+  @@unique([predlogId, userId])
+  @@index([predlogId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  adminId   String
+  admin     User     @relation("AdminActions", fields: [adminId], references: [id])
+  akcija    String
+  targetId  String?
+  detalji   String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}
+
+model DonationRecord {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  amountRSD     Decimal  @db.Decimal(12, 2)
+  cumulativeRSD Decimal  @db.Decimal(12, 2)
+  level         Int
+  poenEmitted   Int
+  createdAt     DateTime @default(now())
 }

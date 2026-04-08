@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
+import { Providers } from "@/components/Providers";
 
 const geist = Geist({
   variable: "--font-geist",
@@ -16,17 +15,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="sr" className={`${geist.variable} h-full`}>
-      <body className="h-full flex bg-gray-50 text-gray-900 antialiased">
-        <Sidebar />
-        <div className="flex flex-col flex-1 min-w-0">
-          <Header />
-          <main className="flex-1 p-6 overflow-auto">{children}</main>
-        </div>
+      <body className="h-full antialiased">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
