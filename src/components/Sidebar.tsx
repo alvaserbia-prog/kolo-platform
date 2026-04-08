@@ -23,12 +23,12 @@ export default function Sidebar() {
   return (
     <aside className="w-56 shrink-0 bg-kolo-bg border-r border-kolo-border flex flex-col">
       {/* Logo — samo ikona, bez KOLO teksta (tekst je već u logo fajlu) */}
-      <div className="flex items-center justify-center px-5 py-4 border-b border-kolo-border">
+      <div className="flex items-center justify-center px-4 py-4 border-b border-kolo-border">
         <Image
           src="/kolo-logo.png"
           alt="KOLO"
-          width={80}
-          height={80}
+          width={140}
+          height={95}
           className="object-contain"
           priority
           unoptimized
