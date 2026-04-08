@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "@/assets/kolo-logo.png";
+import logoImg from "@/assets/kolo-icon.png";
 
 export default async function PublicHeader() {
   const session = await getServerSession(authOptions);

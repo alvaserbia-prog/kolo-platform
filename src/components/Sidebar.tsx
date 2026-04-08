@@ -43,7 +43,7 @@ export default function Sidebar({ verified, isAdmin }: SidebarProps) {
     <aside className="w-56 shrink-0 bg-kolo-bg border-r border-kolo-border flex flex-col">
       <div className="flex items-center justify-center px-4 py-4 border-b border-kolo-border">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/kolo-logo.png" alt="KOLO" style={{ width: 180, height: "auto" }} />
+        <img src="/kolo-icon.png" alt="KOLO" style={{ width: 90, height: "auto" }} />
       </div>
       <nav className="flex-1 px-2.5 py-4 space-y-0.5">
         {links.map(({ href, label }) => {

@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
-import logoImg from "@/assets/kolo-logo.png";
+import logoImg from "@/assets/kolo-icon.png";
 
 export const metadata: Metadata = {
   title: "KOLO — Ekonomija koju gradiš sa svojom zajednicom",
