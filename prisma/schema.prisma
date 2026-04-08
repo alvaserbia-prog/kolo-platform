@@ -191,6 +191,9 @@ model User {
   glasovi               GlasanjeGlas[]
   auditLogs             AuditLog[]       @relation("AdminActions")
   notifikacije          Notifikacija[]
+  konverzacije1         Konverzacija[]           @relation("KonvUser1")
+  konverzacije2         Konverzacija[]           @relation("KonvUser2")
+  porukePoslate         Poruka[]                 @relation("PorukePostavljene")
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
@@ -680,4 +683,32 @@ model Notifikacija {
 
   @@index([userId, procitana])
   @@index([userId, createdAt(sort: Desc)])
+}
+
+model Konverzacija {
+  id            String   @id @default(uuid())
+  user1Id       String
+  user2Id       String
+  user1         User     @relation("KonvUser1", fields: [user1Id], references: [id])
+  user2         User     @relation("KonvUser2", fields: [user2Id], references: [id])
+  poruke        Poruka[]
+  lastMessageAt DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  @@unique([user1Id, user2Id])
+  @@index([user1Id, lastMessageAt(sort: Desc)])
+  @@index([user2Id, lastMessageAt(sort: Desc)])
+}
+
+model Poruka {
+  id             String       @id @default(uuid())
+  konverzacijaId String
+  konverzacija   Konverzacija @relation(fields: [konverzacijaId], references: [id])
+  posiljacId     String
+  posiljac       User         @relation("PorukePostavljene", fields: [posiljacId], references: [id])
+  tekst          String
+  procitana      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([konverzacijaId, createdAt])
 }

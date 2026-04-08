@@ -16,6 +16,7 @@ interface OglasProps {
   phone: string | null;
   status: string;
   createdAt: string;
+  sellerId: string;
   sellerPseudonim: string;
   sellerVerified: boolean;
   isMine: boolean;
@@ -34,6 +35,20 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
   const [deaktiviranjeLoading, setDeaktiviranjeLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [chatLoading, setChatLoading] = useState(false);
+
+  async function handleKontakt() {
+    setChatLoading(true);
+    const res = await fetch("/api/poruke", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: oglas.sellerId }),
+    });
+    setChatLoading(false);
+    if (!res.ok) return;
+    const data = await res.json();
+    router.push(`/poruke?k=${data.konverzacijaId}`);
+  }
 
   const imaSlika = oglas.images.length > 0;
   const dostupan = oglas.status === "ACTIVE";
@@ -192,6 +207,13 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
                   {loading ? "Obrađujem..." : `Plati ${oglas.price.toLocaleString("sr-RS")} POEN`}
                 </button>
               )}
+              <button
+                onClick={handleKontakt}
+                disabled={chatLoading}
+                className="w-full py-3 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+              >
+                {chatLoading ? "..." : "Kontaktiraj prodavca"}
+              </button>
             </div>
           )}
 

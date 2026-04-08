@@ -11,6 +11,7 @@ interface SidebarProps {
 const linkoviVerifikovan = [
   { href: "/dashboard", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
+  { href: "/poruke", label: "Poruke" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/zajednica", label: "Zajednica" },
   { href: "/zaposljavnje", label: "Zapošljavanje" },
@@ -27,6 +28,7 @@ const linkoviVerifikovan = [
 const linkoviNeverifikovan = [
   { href: "/dashboard", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
+  { href: "/poruke", label: "Poruke" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/sistem", label: "Sistem" },
   { href: "/verifikacija", label: "Verifikacija" },

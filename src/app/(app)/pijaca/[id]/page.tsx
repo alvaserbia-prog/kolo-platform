@@ -32,6 +32,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         phone: listing.phone ?? null,
         status: listing.status,
         createdAt: listing.createdAt.toISOString(),
+        sellerId: listing.seller.id,
         sellerPseudonim: listing.seller.pseudonim,
         sellerVerified: listing.seller.verified,
         isMine: listing.seller.id === session.user.id,
