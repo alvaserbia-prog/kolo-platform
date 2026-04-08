@@ -188,7 +188,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               <p className="text-xs text-kolo-green-700 opacity-70">biće prebačeno prodavcu</p>
             </div>
             {poruka && (
-              <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-red-50 text-kolo-danger"}`}>
+              <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
                 {poruka.text}
               </p>
             )}

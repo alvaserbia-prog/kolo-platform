@@ -41,14 +41,14 @@ interface OglasData {
 const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", ZADRUGA: "Zadruga", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  ZADRUGA: "bg-blue-50 text-blue-700",
+  ZADRUGA: "bg-kolo-info-light text-kolo-info",
   PROJEKAT: "bg-purple-50 text-purple-700",
 };
 const evStatusBadge: Record<string, { label: string; cls: string }> = {
-  PENDING:  { label: "Na čekanju", cls: "text-amber-600" },
-  APPROVED: { label: "Odobreno",   cls: "text-blue-600" },
+  PENDING:  { label: "Na čekanju", cls: "text-kolo-gold-600" },
+  APPROVED: { label: "Odobreno",   cls: "text-kolo-info" },
   REJECTED: { label: "Odbijeno",   cls: "text-red-500" },
-  EMITTED:  { label: "Isplaćeno",  cls: "text-green-600" },
+  EMITTED:  { label: "Isplaćeno",  cls: "text-kolo-green-700" },
 };
 
 export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; isVerified: boolean }) {
@@ -74,57 +74,57 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/zaposljavnje" className="text-gray-400 hover:text-gray-600 text-sm transition-colors">← Zapošljavanje</Link>
+        <Link href="/zaposljavnje" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Zapošljavanje</Link>
       </div>
 
       {/* Header */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+      <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
         <div className="flex justify-between items-start gap-4">
           <div>
             <div className="flex items-center gap-2 flex-wrap mb-2">
-              <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-gray-100 text-gray-500"}`}>
+              <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[oglas.source] ?? oglas.source}
               </span>
-              {oglas.zadrugaName && <span className="text-xs text-gray-400">{oglas.zadrugaName}</span>}
-              {!aktivan && <span className="text-xs bg-gray-100 text-gray-400 px-2 py-0.5 rounded">Zatvoren</span>}
+              {oglas.zadrugaName && <span className="text-xs text-kolo-muted">{oglas.zadrugaName}</span>}
+              {!aktivan && <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">Zatvoren</span>}
             </div>
-            <h1 className="text-xl font-bold text-gray-900">{oglas.title}</h1>
-            <p className="text-sm text-gray-500 mt-2 leading-relaxed">{oglas.description}</p>
+            <h1 className="text-xl font-bold text-kolo-text">{oglas.title}</h1>
+            <p className="text-sm text-kolo-muted mt-2 leading-relaxed">{oglas.description}</p>
           </div>
-          <div className="shrink-0 bg-green-50 rounded-2xl px-4 py-3 text-center">
-            <p className="text-lg font-bold text-green-700">{oglas.hourlyRate.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-green-600">POEN/sat</p>
+          <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
+            <p className="text-lg font-bold text-kolo-green-700">{oglas.hourlyRate.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-kolo-green-700">POEN/sat</p>
           </div>
         </div>
 
         {/* Info grid */}
         <div className="grid grid-cols-3 gap-3 text-sm">
-          <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <p className="font-semibold text-gray-900">{oglas.positions}</p>
-            <p className="text-xs text-gray-400 mt-0.5">{oglas.positions === 1 ? "mesto" : "mesta"}</p>
+          <div className="bg-kolo-bg rounded-xl p-3 text-center">
+            <p className="font-semibold text-kolo-text">{oglas.positions}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{oglas.positions === 1 ? "mesto" : "mesta"}</p>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <p className="font-semibold text-gray-900">max {oglas.maxHoursPerDay}h</p>
-            <p className="text-xs text-gray-400 mt-0.5">po danu</p>
+          <div className="bg-kolo-bg rounded-xl p-3 text-center">
+            <p className="font-semibold text-kolo-text">max {oglas.maxHoursPerDay}h</p>
+            <p className="text-xs text-kolo-muted mt-0.5">po danu</p>
           </div>
-          <div className="bg-gray-50 rounded-xl p-3 text-center">
-            <p className="font-semibold text-green-700">{zaradaMin.toLocaleString("sr-RS")} P</p>
-            <p className="text-xs text-gray-400 mt-0.5">max/dan</p>
+          <div className="bg-kolo-bg rounded-xl p-3 text-center">
+            <p className="font-semibold text-kolo-green-700">{zaradaMin.toLocaleString("sr-RS")} P</p>
+            <p className="text-xs text-kolo-muted mt-0.5">max/dan</p>
           </div>
         </div>
 
         {oglas.deadline && (
-          <p className="text-xs text-gray-400">
-            Rok za prijavu: <strong className="text-gray-700">{new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</strong>
+          <p className="text-xs text-kolo-muted">
+            Rok za prijavu: <strong className="text-kolo-muted">{new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</strong>
           </p>
         )}
 
         {/* Status prijave */}
         {oglas.mojaPrijava && (
           <div className={`rounded-xl px-4 py-3 text-sm border ${
-            oglas.mojaPrijava.status === "APPROVED" ? "bg-green-50 border-green-200 text-green-700" :
-            oglas.mojaPrijava.status === "REJECTED" ? "bg-red-50 border-red-200 text-red-600" :
-            "bg-amber-50 border-amber-200 text-amber-700"
+            oglas.mojaPrijava.status === "APPROVED" ? "bg-kolo-green-100 border-kolo-green-100 text-kolo-green-700" :
+            oglas.mojaPrijava.status === "REJECTED" ? "bg-kolo-danger-light border-kolo-danger/20 text-kolo-danger" :
+            "bg-kolo-gold-100 border-kolo-gold-100 text-kolo-gold-600"
           }`}>
             {oglas.mojaPrijava.status === "APPROVED" && "Vaša prijava je odobrena. Možete unositi sate rada."}
             {oglas.mojaPrijava.status === "PENDING" && "Prijava je podneta i čeka odobrenje admina."}
@@ -137,7 +137,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
         {/* Akcije */}
         <div className="pt-1">
           {!isVerified && aktivan && (
-            <p className="text-sm text-amber-600">Za prijavu je potrebna verifikacija identiteta.</p>
+            <p className="text-sm text-kolo-gold-600">Za prijavu je potrebna verifikacija identiteta.</p>
           )}
           {mozePrijaviti && (
             <button onClick={prijavi} disabled={loadingPrijava}
@@ -146,7 +146,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
             </button>
           )}
           {poruka && (
-            <p className={`mt-3 text-sm px-4 py-2 rounded-xl ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+            <p className={`mt-3 text-sm px-4 py-2 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
               {poruka.text}
             </p>
           )}
@@ -165,20 +165,20 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
 
       {/* Istorija evidencija */}
       {oglas.mojeEvidencije.length > 0 && (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-5 py-3 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-gray-700">Moja evidencija</h3>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-5 py-3 border-b border-kolo-border">
+            <h3 className="text-sm font-semibold text-kolo-muted">Moja evidencija</h3>
           </div>
           {oglas.mojeEvidencije.map((e, i) => {
             const badge = evStatusBadge[e.status];
             return (
-              <div key={e.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < oglas.mojeEvidencije.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <div key={e.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < oglas.mojeEvidencije.length - 1 ? "border-b border-kolo-border" : ""}`}>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-gray-800">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}</p>
-                  <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{e.description}</p>
+                  <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}</p>
+                  <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
                 </div>
                 <div className="shrink-0 text-right">
-                  <p className="text-sm font-semibold text-gray-900">{e.hoursWorked}h · {e.amount.toLocaleString("sr-RS")} P</p>
+                  <p className="text-sm font-semibold text-kolo-text">{e.hoursWorked}h · {e.amount.toLocaleString("sr-RS")} P</p>
                   <p className={`text-xs font-medium ${badge?.cls ?? ""}`}>{badge?.label}</p>
                 </div>
               </div>
@@ -240,44 +240,44 @@ function EvidencijaForma({ oglasId, maxHoursPerDay, hourlyRate, onSuccess }: {
 
   if (success) {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-2xl px-5 py-4 text-sm text-green-700">
+      <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-2xl px-5 py-4 text-sm text-kolo-green-700">
         Evidencija podneta! Admin pregledava zahtev.
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-4">
+    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-semibold text-gray-700">Unesi sate rada</h3>
+        <h3 className="text-sm font-semibold text-kolo-muted">Unesi sate rada</h3>
         {iznos > 0 && (
-          <span className="text-sm font-bold text-green-700">{iznos.toLocaleString("sr-RS")} POEN</span>
+          <span className="text-sm font-bold text-kolo-green-700">{iznos.toLocaleString("sr-RS")} POEN</span>
         )}
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Datum</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum</label>
           <input type="date" value={date} min={minDate} max={maxDate}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Broj sati (1–{maxHoursPerDay})</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Broj sati (1–{maxHoursPerDay})</label>
           <input type="number" min={1} max={maxHoursPerDay} step={1} value={hoursWorked}
             onChange={(e) => setHoursWorked(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-1">Opis aktivnosti *</label>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Opis aktivnosti *</label>
         <textarea rows={3} value={description} onChange={(e) => setDescription(e.target.value)}
           placeholder="Opišite šta ste radili (min. 10 karaktera)..."
-          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 resize-none" />
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none" />
       </div>
 
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
       <button onClick={handleSubmit} disabled={loading}
         className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60">

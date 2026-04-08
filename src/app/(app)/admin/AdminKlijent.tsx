@@ -181,9 +181,9 @@ const roleLabel: Record<string, string> = {
 };
 
 const statusBoja: Record<string, string> = {
-  ACTIVE:    "bg-green-50 text-green-700",
-  SUSPENDED: "bg-amber-50 text-amber-700",
-  EXCLUDED:  "bg-red-50 text-red-600",
+  ACTIVE:    "bg-kolo-green-100 text-kolo-green-700",
+  SUSPENDED: "bg-kolo-gold-100 text-kolo-gold-600",
+  EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
 type Tab = "dashboard" | "pending" | "zadruge" | "programi" | "zaposljavnje" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
@@ -210,18 +210,18 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-900">Admin panel</h1>
+      <h1 className="text-2xl font-semibold text-kolo-text">Admin panel</h1>
 
       {/* Tabs */}
-      <div className="flex gap-0 border-b border-gray-200">
+      <div className="flex gap-0 border-b border-kolo-border">
         {tabs.map(([key, label]) => (
           <button
             key={key}
             onClick={() => setTab(key)}
             className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${
               tab === key
-                ? "border-green-700 text-green-700"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                ? "border-kolo-green-700 text-kolo-green-700"
+                : "border-transparent text-kolo-muted hover:text-kolo-muted"
             }`}
           >
             {label}
@@ -236,7 +236,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
       {tab === "pending" && (
         <div className="space-y-4">
           {pending.length === 0 && (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
               Nema zahteva koji čekaju pregled.
             </div>
           )}
@@ -320,20 +320,20 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
       <div className="flex justify-between items-start">
         <div>
-          <p className="font-semibold text-gray-900">{z.name}</p>
-          {z.location && <p className="text-xs text-gray-400 mt-0.5">{z.location}</p>}
-          {z.description && <p className="text-sm text-gray-500 mt-1">{z.description}</p>}
+          <p className="font-semibold text-kolo-text">{z.name}</p>
+          {z.location && <p className="text-xs text-kolo-muted mt-0.5">{z.location}</p>}
+          {z.description && <p className="text-sm text-kolo-muted mt-1">{z.description}</p>}
         </div>
         <div className="text-right shrink-0 ml-4">
-          <p className="text-xs text-gray-400">Inicijator</p>
-          <p className="text-sm font-medium text-gray-800">{z.inicijatorPseudonim}</p>
+          <p className="text-xs text-kolo-muted">Inicijator</p>
+          <p className="text-sm font-medium text-kolo-text">{z.inicijatorPseudonim}</p>
         </div>
       </div>
 
-      <div className="flex gap-4 text-xs text-gray-400">
+      <div className="flex gap-4 text-xs text-kolo-muted">
         <span>{z.brOsnivaca} osnivača</span>
         <span>{new Date(z.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</span>
       </div>
@@ -342,11 +342,11 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
         <div className="space-y-2 pt-1">
           <div className="flex gap-2">
             <button onClick={odobri} disabled={loading !== null}
-              className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60">
+              className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
               {loading === "odobri" ? "Obrađujem..." : "Odobri osnivanje"}
             </button>
             <button onClick={() => setShowOdbij((v) => !v)} disabled={loading !== null}
-              className="flex-1 py-2.5 rounded-xl bg-white border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors disabled:opacity-60">
+              className="flex-1 py-2.5 rounded-xl bg-white border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors disabled:opacity-60">
               Odbij
             </button>
           </div>
@@ -355,9 +355,9 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
             <div className="space-y-2">
               <textarea value={razlog} onChange={(e) => setRazlog(e.target.value)}
                 placeholder="Razlog odbijanja..." rows={2}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-red-400 resize-none transition-colors" />
+                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400 resize-none transition-colors" />
               <button onClick={odbij} disabled={loading !== null || !razlog.trim()}
-                className="w-full py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60">
+                className="w-full py-2.5 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:bg-kolo-danger transition-colors disabled:opacity-60">
                 {loading === "odbij" ? "Odbijam..." : "Potvrdi odbijanje"}
               </button>
             </div>
@@ -366,7 +366,7 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
       )}
 
       {poruka && (
-        <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+        <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
           {poruka.text}
         </p>
       )}
@@ -417,13 +417,13 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
       {/* Zaglavlje */}
       <div className="px-5 py-4 flex justify-between items-start">
         <div>
-          <p className="font-semibold text-gray-900">{vr.pseudonim}</p>
-          <p className="text-sm text-gray-400 mt-0.5">{vr.email}</p>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="font-semibold text-kolo-text">{vr.pseudonim}</p>
+          <p className="text-sm text-kolo-muted mt-0.5">{vr.email}</p>
+          <p className="text-xs text-kolo-muted mt-1">
             Poslato: {new Date(vr.createdAt).toLocaleDateString("sr-RS", {
               day: "2-digit", month: "long", year: "numeric",
             })}
@@ -436,7 +436,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
         </div>
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="text-xs text-gray-400 hover:text-gray-600 underline mt-1"
+          className="text-xs text-kolo-muted hover:text-kolo-muted underline mt-1"
         >
           {expanded ? "Sakrij" : "Pregledaj"}
         </button>
@@ -444,19 +444,19 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
 
       {/* Detalji */}
       {expanded && (
-        <div className="border-t border-gray-100 px-5 py-4 space-y-4">
+        <div className="border-t border-kolo-border px-5 py-4 space-y-4">
           {/* JMBG */}
           <div>
-            <p className="text-xs text-gray-400 mb-1">JMBG</p>
-            <p className="font-mono text-sm font-semibold text-gray-900 tracking-widest">{vr.jmbg}</p>
+            <p className="text-xs text-kolo-muted mb-1">JMBG</p>
+            <p className="font-mono text-sm font-semibold text-kolo-text tracking-widest">{vr.jmbg}</p>
           </div>
 
           {/* Slike */}
           <div className="grid grid-cols-2 gap-3">
             {(["front", "back"] as const).map((side) => (
               <div key={side} className="space-y-1">
-                <p className="text-xs text-gray-400">{side === "front" ? "Prednja strana" : "Zadnja strana"}</p>
-                <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+                <p className="text-xs text-kolo-muted">{side === "front" ? "Prednja strana" : "Zadnja strana"}</p>
+                <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden border border-kolo-border bg-kolo-bg">
                   <Image
                     src={`/api/admin/dokument/${vr.requestId}/${side}`}
                     alt={side === "front" ? "Prednja strana" : "Zadnja strana"}
@@ -469,7 +469,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
                   href={`/api/admin/dokument/${vr.requestId}/${side}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-green-700 hover:underline"
+                  className="text-xs text-kolo-green-700 hover:underline"
                 >
                   Otvori u novom tabu
                 </a>
@@ -484,14 +484,14 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
                 <button
                   onClick={odobri}
                   disabled={loading !== null}
-                  className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60"
+                  className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
                 >
                   {loading === "odobri" ? "Obrađujem..." : "Odobri"}
                 </button>
                 <button
                   onClick={() => setShowOdbij((v) => !v)}
                   disabled={loading !== null}
-                  className="flex-1 py-2.5 rounded-xl bg-white border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors disabled:opacity-60"
+                  className="flex-1 py-2.5 rounded-xl bg-white border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors disabled:opacity-60"
                 >
                   Odbij
                 </button>
@@ -504,12 +504,12 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
                     onChange={(e) => setRazlog(e.target.value)}
                     placeholder="Razlog odbijanja (korisnik će ga videti)..."
                     rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-red-400 resize-none transition-colors"
+                    className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400 resize-none transition-colors"
                   />
                   <button
                     onClick={odbij}
                     disabled={loading !== null || !razlog.trim()}
-                    className="w-full py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
+                    className="w-full py-2.5 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:bg-kolo-danger transition-colors disabled:opacity-60"
                   >
                     {loading === "odbij" ? "Odbijam..." : "Potvrdi odbijanje"}
                   </button>
@@ -519,7 +519,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
           )}
 
           {poruka && (
-            <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+            <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
               {poruka.text}
             </p>
           )}
@@ -533,8 +533,8 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
 
 const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", ZADRUGA: "Zadruga", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
-  FONDACIJA: "bg-green-50 text-green-700",
-  ZADRUGA:   "bg-blue-50 text-blue-700",
+  FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
+  ZADRUGA:   "bg-kolo-info-light text-kolo-info",
   PROJEKAT:  "bg-purple-50 text-purple-700",
 };
 
@@ -601,10 +601,10 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
   return (
     <div className="space-y-4">
       {/* Sub-tabs */}
-      <div className="flex gap-0 border-b border-gray-200">
+      <div className="flex gap-0 border-b border-kolo-border">
         {subTabs.map(([key, label]) => (
           <button key={key} onClick={() => setView(key)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${view === key ? "border-green-700 text-green-700" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
+            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${view === key ? "border-kolo-green-700 text-kolo-green-700" : "border-transparent text-kolo-muted hover:text-kolo-muted"}`}>
             {label}
           </button>
         ))}
@@ -614,26 +614,26 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
       {view === "oglasi" && (
         <div className="space-y-3">
           {data.oglasi.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Nema oglasa.</div>
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema oglasa.</div>
           ) : data.oglasi.map((o) => (
-            <div key={o.id} className="bg-white rounded-2xl border border-gray-200 p-5">
+            <div key={o.id} className="bg-white rounded-2xl border border-kolo-border p-5">
               <div className="flex justify-between items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[o.source]}`}>{sourceLabel[o.source]}</span>
-                    {o.zadrugaName && <span className="text-xs text-gray-400">{o.zadrugaName}</span>}
-                    <span className={`text-xs px-2 py-0.5 rounded ${o.status === "ACTIVE" ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-400"}`}>
+                    {o.zadrugaName && <span className="text-xs text-kolo-muted">{o.zadrugaName}</span>}
+                    <span className={`text-xs px-2 py-0.5 rounded ${o.status === "ACTIVE" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
                       {o.status === "ACTIVE" ? "Aktivan" : "Zatvoren"}
                     </span>
                   </div>
-                  <p className="font-semibold text-gray-900 text-sm">{o.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">
+                  <p className="font-semibold text-kolo-text text-sm">{o.title}</p>
+                  <p className="text-xs text-kolo-muted mt-1">
                     {o.hourlyRate.toLocaleString("sr-RS")} POEN/sat · max {o.maxHoursPerDay}h · {o.positions} {o.positions === 1 ? "mesto" : "mesta"} · {o.ukupnoPrijava} prijava · {o.pendingEvidencija} pending ev.
                   </p>
                 </div>
                 {o.status === "ACTIVE" && (
                   <button onClick={() => zatvoriOglas(o.id)} disabled={loading === o.id}
-                    className="text-xs px-3 py-1.5 border border-red-200 text-red-600 rounded-xl hover:bg-red-50 disabled:opacity-60">
+                    className="text-xs px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger rounded-xl hover:bg-kolo-danger-light disabled:opacity-60">
                     Zatvori
                   </button>
                 )}
@@ -647,26 +647,26 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
       {view === "prijave" && (
         <div className="space-y-3">
           {data.pendingPrijave.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Nema prijava na čekanju.</div>
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema prijava na čekanju.</div>
           ) : data.pendingPrijave.map((p) => {
             const poruka = poruke[p.id];
             return (
-              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+              <div key={p.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">{p.pseudonim}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{p.oglasTitle} · {p.hourlyRate.toLocaleString("sr-RS")} P/sat</p>
-                    <p className="text-xs text-gray-400">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
+                    <p className="font-semibold text-kolo-text text-sm">{p.pseudonim}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.hourlyRate.toLocaleString("sr-RS")} P/sat</p>
+                    <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
                   </div>
                   <div className="flex gap-2">
                     <OdbijForma onOdbij={(r) => odbijPrijavu(p.id, r)} loading={loading === p.id} />
                     <button onClick={() => odobriPrijavu(p.id)} disabled={loading === p.id}
-                      className="px-4 py-2 bg-green-700 text-white text-xs font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60">
+                      className="px-4 py-2 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60">
                       {loading === p.id ? "..." : "Odobri"}
                     </button>
                   </div>
                 </div>
-                {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>}
+                {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
               </div>
             );
           })}
@@ -677,32 +677,32 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
       {view === "evidencije" && (
         <div className="space-y-3">
           {data.pendingEvidencije.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Nema evidencija na čekanju.</div>
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema evidencija na čekanju.</div>
           ) : data.pendingEvidencije.map((e) => {
             const poruka = poruke[e.id];
             return (
-              <div key={e.id} className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+              <div key={e.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
                 <div className="flex justify-between items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 text-sm">{e.pseudonim}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
-                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">{e.description}</p>
+                    <p className="font-semibold text-kolo-text text-sm">{e.pseudonim}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
+                    <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{e.description}</p>
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="text-sm font-bold text-gray-900">{e.hoursWorked}h · {e.amount.toLocaleString("sr-RS")} P</p>
+                    <p className="text-sm font-bold text-kolo-text">{e.hoursWorked}h · {e.amount.toLocaleString("sr-RS")} P</p>
                     <div className="flex gap-2 mt-2">
                       <button onClick={() => odbijEvidenciju(e.id)} disabled={loading === e.id}
-                        className="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-semibold rounded-lg hover:bg-red-50 disabled:opacity-60">
+                        className="px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60">
                         Odbij
                       </button>
                       <button onClick={() => odobriEvidenciju(e.id)} disabled={loading === e.id}
-                        className="px-3 py-1.5 bg-green-700 text-white text-xs font-semibold rounded-lg hover:bg-green-800 disabled:opacity-60">
+                        className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 disabled:opacity-60">
                         {loading === e.id ? "..." : "Odobri"}
                       </button>
                     </div>
                   </div>
                 </div>
-                {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>}
+                {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
               </div>
             );
           })}
@@ -719,15 +719,15 @@ function OdbijForma({ onOdbij, loading }: { onOdbij: (razlog: string) => void; l
   const [show, setShow] = useState(false);
   const [razlog, setRazlog] = useState("");
   if (!show) return (
-    <button onClick={() => setShow(true)} className="px-3 py-2 border border-red-200 text-red-600 text-xs font-semibold rounded-xl hover:bg-red-50">Odbij</button>
+    <button onClick={() => setShow(true)} className="px-3 py-2 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-xl hover:bg-kolo-danger-light">Odbij</button>
   );
   return (
     <div className="flex gap-1 items-center">
       <input type="text" placeholder="Razlog..." value={razlog} onChange={(e) => setRazlog(e.target.value)}
-        className="px-2 py-1.5 rounded-lg border border-gray-200 text-xs outline-none focus:border-red-400 w-28" />
+        className="px-2 py-1.5 rounded-lg border border-kolo-border text-xs outline-none focus:border-red-400 w-28" />
       <button onClick={() => { onOdbij(razlog); setShow(false); }} disabled={loading}
-        className="px-2 py-1.5 bg-red-600 text-white text-xs font-semibold rounded-lg disabled:opacity-60">✓</button>
-      <button onClick={() => setShow(false)} className="px-2 py-1.5 text-gray-400 text-xs">✕</button>
+        className="px-2 py-1.5 bg-kolo-danger text-white text-xs font-semibold rounded-lg disabled:opacity-60">✓</button>
+      <button onClick={() => setShow(false)} className="px-2 py-1.5 text-kolo-muted text-xs">✕</button>
     </div>
   );
 }
@@ -772,67 +772,67 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
-      <p className="text-sm font-semibold text-gray-700">Novi oglas za posao</p>
+    <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
+      <p className="text-sm font-semibold text-kolo-muted">Novi oglas za posao</p>
 
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-1">Naziv pozicije *</label>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Naziv pozicije *</label>
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="npr. Koordinator dostave"
-          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       </div>
 
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-1">Opis *</label>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Opis *</label>
         <textarea rows={3} value={description} onChange={(e) => setDescription(e.target.value)}
           placeholder="Opis posla, zahtevi, uslovi..."
-          className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none" />
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       </div>
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Izvor pozicije</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Izvor pozicije</label>
           <div className="flex gap-1.5 flex-wrap">
             {(["FONDACIJA", "ZADRUGA", "PROJEKAT"] as const).map((s) => (
               <button key={s} type="button" onClick={() => setSource(s)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${source === s ? "bg-green-700 text-white" : "bg-gray-100 text-gray-600"}`}>
+                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${source === s ? "bg-kolo-green-700 text-white" : "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[s]}
               </button>
             ))}
           </div>
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">POEN/sat (1.000–2.500)</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">POEN/sat (1.000–2.500)</label>
           <input type="number" min={1000} max={2500} step={100} value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
       </div>
 
       <div className="grid grid-cols-3 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Max h/dan</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Max h/dan</label>
           <input type="number" min={1} max={8} value={maxHoursPerDay} onChange={(e) => setMaxHoursPerDay(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Br. mesta</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Br. mesta</label>
           <input type="number" min={1} value={positions} onChange={(e) => setPositions(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1">Rok (opciono)</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rok (opciono)</label>
           <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
       </div>
 
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
-      <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-amber-700">
+      <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2 text-xs text-kolo-gold-600">
         Zaposleni dobijaju {Number(hourlyRate).toLocaleString("sr-RS")} POEN/sat · do {(Number(maxHoursPerDay) * Number(hourlyRate)).toLocaleString("sr-RS")} POEN/dan
       </div>
 
       <button type="submit" disabled={loading || !title.trim() || !description.trim()}
-        className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 disabled:opacity-60">
+        className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
         {loading ? "Kreiranje..." : "Kreiraj oglas"}
       </button>
     </form>
@@ -920,10 +920,10 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
   return (
     <div className="space-y-6">
       {/* ZRNO tržište */}
-      <div className="bg-white rounded-2xl border border-gray-200 px-5 py-4 flex justify-between items-center">
+      <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex justify-between items-center">
         <div>
-          <p className="text-sm font-semibold text-gray-700">ZRNO tržište</p>
-          <p className="text-xs text-gray-400 mt-0.5">
+          <p className="text-sm font-semibold text-kolo-muted">ZRNO tržište</p>
+          <p className="text-xs text-kolo-muted mt-0.5">
             {data.zrnoTrzisjeAktivno ? "Aktivno — kupovina/prodaja ZRNA je moguća" : "Neaktivno — aktivira se pri −1.000.000 POEN (ili ručno)"}
           </p>
         </div>
@@ -933,34 +933,34 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
             {loadingZrno ? "..." : "▶ ZRNO obrada"}
           </button>
           <button onClick={toggleZrnoTrziste} disabled={loadingZrno}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoTrzisjeAktivno ? "bg-red-50 text-red-600 hover:bg-red-100" : "bg-kolo-gold-100 text-kolo-gold-600 hover:bg-kolo-gold-100"}`}>
+            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoTrzisjeAktivno ? "bg-kolo-danger-light text-kolo-danger hover:bg-kolo-danger-light" : "bg-kolo-gold-100 text-kolo-gold-600 hover:bg-kolo-gold-100"}`}>
             {data.zrnoTrzisjeAktivno ? "Deaktiviraj" : "Aktiviraj"}
           </button>
         </div>
       </div>
 
       {/* Status programa */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="px-5 py-3 border-b border-gray-100 flex justify-between items-center">
-          <h3 className="text-sm font-semibold text-gray-700">Status programa</h3>
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center">
+          <h3 className="text-sm font-semibold text-kolo-muted">Status programa</h3>
           <button onClick={pokreniNocnu} disabled={loadingNocna}
-            className="px-3 py-1.5 bg-green-700 text-white text-xs font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60 transition-colors">
+            className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
             {loadingNocna ? "..." : "▶ Pokreni emisiju"}
           </button>
         </div>
         {nocnaRezultat && (
-          <div className="px-5 py-3 border-b border-gray-100 text-xs text-green-700 bg-green-50">{nocnaRezultat}</div>
+          <div className="px-5 py-3 border-b border-kolo-border text-xs text-kolo-green-700 bg-kolo-green-100">{nocnaRezultat}</div>
         )}
         {data.programi.map((p, i) => (
-          <div key={p.type} className={`px-5 py-3 flex justify-between items-center ${i < data.programi.length - 1 ? "border-b border-gray-100" : ""}`}>
+          <div key={p.type} className={`px-5 py-3 flex justify-between items-center ${i < data.programi.length - 1 ? "border-b border-kolo-border" : ""}`}>
             <div>
-              <span className="text-sm font-medium text-gray-900">{p.label}</span>
+              <span className="text-sm font-medium text-kolo-text">{p.label}</span>
               {p.activatedAt && p.isActive && (
-                <span className="ml-2 text-xs text-gray-400">aktiviran {new Date(p.activatedAt).toLocaleDateString("sr-RS")}</span>
+                <span className="ml-2 text-xs text-kolo-muted">aktiviran {new Date(p.activatedAt).toLocaleDateString("sr-RS")}</span>
               )}
             </div>
             <button onClick={() => toggleProgram(p.type)} disabled={loadingToggle === p.type}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${p.isActive ? "bg-red-50 text-red-600 hover:bg-red-100" : "bg-green-50 text-green-700 hover:bg-green-100"}`}>
+              className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${p.isActive ? "bg-kolo-danger-light text-kolo-danger hover:bg-kolo-danger-light" : "bg-kolo-green-100 text-kolo-green-700 hover:bg-kolo-green-100"}`}>
               {loadingToggle === p.type ? "..." : p.isActive ? "Deaktiviraj" : "Aktiviraj"}
             </button>
           </div>
@@ -970,7 +970,7 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
       {/* Pending prijave na programe */}
       {data.pendingEnrollments.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700">Prijave na programe ({data.pendingEnrollments.length})</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Prijave na programe ({data.pendingEnrollments.length})</h3>
           {data.pendingEnrollments.map((e) => (
             <EnrollmentKartica key={e.id} e={e} onOdobri={(amt) => odobriEnrollment(e.id, amt)} onOdbij={() => odbijEnrollment(e.id)} />
           ))}
@@ -980,24 +980,24 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
       {/* Pending evidencije — Zapošljavanje */}
       {data.pendingEvidencije.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700">Evidencije — Zapošljavanje ({data.pendingEvidencije.length})</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Evidencije — Zapošljavanje ({data.pendingEvidencije.length})</h3>
           {data.pendingEvidencije.map((e) => (
-            <div key={e.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-4 space-y-3">
+            <div key={e.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{e.pseudonim}</p>
-                  <p className="text-xs text-gray-400">{new Date(e.date).toLocaleDateString("sr-RS")}</p>
+                  <p className="text-sm font-semibold text-kolo-text">{e.pseudonim}</p>
+                  <p className="text-xs text-kolo-muted">{new Date(e.date).toLocaleDateString("sr-RS")}</p>
                 </div>
-                <span className="text-sm font-bold text-green-700">{e.amount.toLocaleString("sr-RS")} P</span>
+                <span className="text-sm font-bold text-kolo-green-700">{e.amount.toLocaleString("sr-RS")} P</span>
               </div>
-              <p className="text-sm text-gray-700">{e.description}</p>
+              <p className="text-sm text-kolo-muted">{e.description}</p>
               <div className="flex gap-2">
                 <button onClick={() => odobriEvidenciju(e.id)}
-                  className="flex-1 py-2 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors">
+                  className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
                   Odobri
                 </button>
                 <button onClick={() => odbijEvidenciju(e.id)}
-                  className="flex-1 py-2 rounded-xl border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors">
+                  className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors">
                   Odbij
                 </button>
               </div>
@@ -1007,25 +1007,25 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
       )}
 
       {data.pendingEnrollments.length === 0 && data.pendingEvidencije.length === 0 && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           Nema zahteva koji čekaju pregled.
         </div>
       )}
 
       {/* Istorija emisija */}
       {data.poslednjeEmisije.length > 0 && (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-5 py-3 border-b border-gray-100">
-            <h3 className="text-sm font-semibold text-gray-700">Istorija dnevnih emisija</h3>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-5 py-3 border-b border-kolo-border">
+            <h3 className="text-sm font-semibold text-kolo-muted">Istorija dnevnih emisija</h3>
           </div>
           {data.poslednjeEmisije.map((s, i) => (
-            <div key={s.date} className={`px-5 py-3 flex justify-between items-center text-sm ${i < data.poslednjeEmisije.length - 1 ? "border-b border-gray-100" : ""}`}>
-              <span className="text-gray-500">{new Date(s.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
-              <span className="font-semibold text-green-700">{s.totalEmitted.toLocaleString("sr-RS")} P</span>
+            <div key={s.date} className={`px-5 py-3 flex justify-between items-center text-sm ${i < data.poslednjeEmisije.length - 1 ? "border-b border-kolo-border" : ""}`}>
+              <span className="text-kolo-muted">{new Date(s.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
+              <span className="font-semibold text-kolo-green-700">{s.totalEmitted.toLocaleString("sr-RS")} P</span>
               {s.koeficijent < 1 && (
-                <span className="text-xs text-amber-600">koef. {s.koeficijent.toFixed(3)}</span>
+                <span className="text-xs text-kolo-gold-600">koef. {s.koeficijent.toFixed(3)}</span>
               )}
-              <span className="text-xs text-gray-400">lim. {s.limit.toLocaleString("sr-RS")}</span>
+              <span className="text-xs text-kolo-muted">lim. {s.limit.toLocaleString("sr-RS")}</span>
             </div>
           ))}
         </div>
@@ -1044,28 +1044,28 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
   const metaLines = e.metadata ? Object.entries(e.metadata).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(" · ") : "";
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 px-5 py-4 space-y-3">
+    <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">
       <div className="flex justify-between items-start">
         <div>
-          <p className="text-sm font-semibold text-gray-900">{e.pseudonim}</p>
-          <p className="text-xs text-green-700 font-medium">{e.label}</p>
-          {metaLines && <p className="text-xs text-gray-400 mt-0.5">{metaLines}</p>}
+          <p className="text-sm font-semibold text-kolo-text">{e.pseudonim}</p>
+          <p className="text-xs text-kolo-green-700 font-medium">{e.label}</p>
+          {metaLines && <p className="text-xs text-kolo-muted mt-0.5">{metaLines}</p>}
         </div>
-        <span className="text-xs text-gray-400">{new Date(e.createdAt).toLocaleDateString("sr-RS")}</span>
+        <span className="text-xs text-kolo-muted">{new Date(e.createdAt).toLocaleDateString("sr-RS")}</span>
       </div>
       {e.type === "SKOLOVANJE" && (
         <input type="number" min={100} placeholder="Dnevni iznos POEN *" value={dailyAmount}
           onChange={(ev) => setDailyAmount(ev.target.value)}
-          className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+          className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       )}
       <div className="flex gap-2">
         <button onClick={() => onOdobri(dailyAmount ? Number(dailyAmount) : undefined)}
           disabled={e.type === "SKOLOVANJE" && !dailyAmount}
-          className="flex-1 py-2 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 disabled:opacity-60 transition-colors">
+          className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
           Odobri
         </button>
         <button onClick={onOdbij}
-          className="flex-1 py-2 rounded-xl border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors">
+          className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors">
           Odbij
         </button>
       </div>
@@ -1111,29 +1111,29 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
     <div className="space-y-5">
       {/* Opticaj */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Opticaj</p>
-          <p className="text-2xl font-bold text-gray-900">{opticaj.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-gray-400 mt-0.5">POEN u sistemu</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Opticaj</p>
+          <p className="text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">POEN u sistemu</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Dnevni limit programa</p>
-          <p className="text-2xl font-bold text-amber-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-gray-400 mt-0.5">10% opticaja</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Dnevni limit programa</p>
+          <p className="text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">10% opticaja</p>
         </div>
       </div>
 
       {/* Rang tabela */}
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="px-4 py-3 border-b border-gray-100">
-          <h3 className="text-sm font-semibold text-gray-700">Rang tabela donacija (Prilog 1)</h3>
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="px-4 py-3 border-b border-kolo-border">
+          <h3 className="text-sm font-semibold text-kolo-muted">Rang tabela donacija (Prilog 1)</h3>
         </div>
         <table className="w-full text-xs">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="px-4 py-2 text-left text-gray-500 font-medium">Kumulativ RSD</th>
-              <th className="px-4 py-2 text-center text-gray-500 font-medium">Nivo</th>
-              <th className="px-4 py-2 text-right text-gray-500 font-medium">Kurs</th>
+            <tr className="bg-kolo-bg">
+              <th className="px-4 py-2 text-left text-kolo-muted font-medium">Kumulativ RSD</th>
+              <th className="px-4 py-2 text-center text-kolo-muted font-medium">Nivo</th>
+              <th className="px-4 py-2 text-right text-kolo-muted font-medium">Kurs</th>
             </tr>
           </thead>
           <tbody>
@@ -1157,10 +1157,10 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
               ["do 500.000.000",   17, "4,00×"],
               ["1.000.000.000+",   18, "5,00×"],
             ].map(([raspon, nivo, kurs], i) => (
-              <tr key={i} className="border-t border-gray-100">
-                <td className="px-4 py-2 text-gray-600">{raspon}</td>
-                <td className="px-4 py-2 text-center font-medium text-gray-900">{nivo}</td>
-                <td className="px-4 py-2 text-right font-semibold text-green-700">{kurs}</td>
+              <tr key={i} className="border-t border-kolo-border">
+                <td className="px-4 py-2 text-kolo-muted">{raspon}</td>
+                <td className="px-4 py-2 text-center font-medium text-kolo-text">{nivo}</td>
+                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{kurs}</td>
               </tr>
             ))}
           </tbody>
@@ -1168,21 +1168,21 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
       </div>
 
       {/* Forma za donaciju */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-5">
-        <h3 className="text-sm font-semibold text-gray-700 mb-4">Evidentiraj donaciju</h3>
+      <div className="bg-white rounded-2xl border border-kolo-border p-5">
+        <h3 className="text-sm font-semibold text-kolo-muted mb-4">Evidentiraj donaciju</h3>
         <form onSubmit={handleDonacija} noValidate className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Pseudonim donatora</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">Pseudonim donatora</label>
             <input
               type="text"
               value={pseudonim}
               onChange={(e) => setPseudonim(e.target.value)}
               placeholder="npr. MilanPetrovic"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Iznos donacije (RSD)</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">Iznos donacije (RSD)</label>
             <input
               type="number"
               min={1}
@@ -1190,22 +1190,22 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
               value={amountRSD}
               onChange={(e) => setAmountRSD(e.target.value)}
               placeholder="5000"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors font-mono"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors font-mono"
             />
           </div>
-          {error && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>}
+          {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{error}</p>}
           {rezultat && (
-            <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 text-sm text-green-700">
+            <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-3 text-sm text-kolo-green-700">
               <p className="font-semibold">Emisija uspešna!</p>
               <p className="mt-1">Emitovano: <strong>{rezultat.poenEmitted.toLocaleString("sr-RS")} POEN</strong></p>
               <p>Nivo: {rezultat.nivo} · Kurs: ×{rezultat.kurs.toFixed(2)}</p>
-              <p className="text-xs text-green-600 mt-1">Novi kumulativ: {rezultat.noviKumulativ.toLocaleString("sr-RS")} RSD</p>
+              <p className="text-xs text-kolo-green-700 mt-1">Novi kumulativ: {rezultat.noviKumulativ.toLocaleString("sr-RS")} RSD</p>
             </div>
           )}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60"
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
           >
             {loading ? "Evidentiram..." : "Evidentiraj i emituj POEN"}
           </button>
@@ -1232,78 +1232,78 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
     <div className="space-y-5">
       {/* Korisnici */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Korisnici ukupno</p>
-          <p className="text-2xl font-bold text-gray-900">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Korisnici ukupno</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Verifikovani</p>
-          <p className="text-2xl font-bold text-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Verifikovani</p>
+          <p className="text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Suspendovani</p>
-          <p className="text-2xl font-bold text-amber-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Suspendovani</p>
+          <p className="text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
       {/* Zadruge */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Aktivne zadruge</p>
-          <p className="text-2xl font-bold text-gray-900">{data.zadruge.ukupno.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Aktivne zadruge</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.zadruge.ukupno.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Zadrugari</p>
-          <p className="text-2xl font-bold text-gray-900">{data.zadruge.zadrugara.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Zadrugari</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.zadruge.zadrugara.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
       {/* Finansije */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Opticaj (POEN)</p>
-          <p className="text-2xl font-bold text-gray-900">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Opticaj (POEN)</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Ukupno transakcija</p>
-          <p className="text-2xl font-bold text-gray-900">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Ukupno transakcija</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
       {/* ZRNO */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">ZRNO kod korisnika</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">ZRNO kod korisnika</p>
           <p className="text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">ZRNO u Banci</p>
-          <p className="text-2xl font-bold text-gray-900">{data.zrno.uBanci.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">ZRNO u Banci</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.zrno.uBanci.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
-          <p className="text-xs text-gray-400 mb-1">Ukupno ZRNA</p>
-          <p className="text-2xl font-bold text-gray-500">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">Ukupno ZRNA</p>
+          <p className="text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
       {/* Zero-sum provjera */}
-      <div className="bg-white rounded-2xl border border-gray-200 px-5 py-4 flex items-center justify-between gap-4">
+      <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-gray-700">Zero-sum provjera</p>
+          <p className="text-sm font-semibold text-kolo-muted">Zero-sum provjera</p>
           {zeroSum && (
-            <p className={`text-sm mt-0.5 font-mono ${zeroSum.ok ? "text-green-700" : "text-red-600"}`}>
+            <p className={`text-sm mt-0.5 font-mono ${zeroSum.ok ? "text-kolo-green-700" : "text-kolo-danger"}`}>
               Zbir svih računa: {zeroSum.zbir.toLocaleString("sr-RS")} {zeroSum.ok ? "✓ OK" : "✗ GREŠKA"}
             </p>
           )}
         </div>
         <button onClick={provjeriZeroSum} disabled={loadingZS}
-          className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-200 disabled:opacity-60 transition-colors shrink-0">
+          className="px-4 py-2 bg-kolo-bg text-kolo-muted text-sm font-semibold rounded-xl hover:bg-kolo-border disabled:opacity-60 transition-colors shrink-0">
           {loadingZS ? "Provjerava..." : "Provjeri"}
         </button>
       </div>
 
       <button onClick={onRefresh}
-        className="w-full py-2.5 rounded-xl border border-gray-200 text-sm text-gray-500 hover:bg-gray-50 transition-colors">
+        className="w-full py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors">
         Osvježi podatke
       </button>
     </div>
@@ -1318,41 +1318,41 @@ function ZadrugeLista({ pendingZadruge, zadrugeLista, onDone }: {
   onDone: () => void;
 }) {
   const statusZadruge: Record<string, string> = {
-    ACTIVE:   "bg-green-50 text-green-700",
-    PENDING:  "bg-amber-50 text-amber-700",
-    REJECTED: "bg-red-50 text-red-600",
-    CLOSED:   "bg-gray-100 text-gray-500",
+    ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
+    PENDING:  "bg-kolo-gold-100 text-kolo-gold-600",
+    REJECTED: "bg-kolo-danger-light text-kolo-danger",
+    CLOSED:   "bg-kolo-bg text-kolo-muted",
   };
 
   return (
     <div className="space-y-6">
       {pendingZadruge.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700">Zahtevi za osnivanje ({pendingZadruge.length})</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Zahtevi za osnivanje ({pendingZadruge.length})</h3>
           {pendingZadruge.map((z) => (
             <ZadrugaZahtevKartica key={z.id} z={z} onDone={onDone} />
           ))}
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-        <div className="px-5 py-3 border-b border-gray-100">
-          <h3 className="text-sm font-semibold text-gray-700">Sve zadruge ({zadrugeLista.length})</h3>
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="px-5 py-3 border-b border-kolo-border">
+          <h3 className="text-sm font-semibold text-kolo-muted">Sve zadruge ({zadrugeLista.length})</h3>
         </div>
         {zadrugeLista.length === 0 ? (
-          <p className="px-5 py-8 text-center text-sm text-gray-400">Nema zadruga.</p>
+          <p className="px-5 py-8 text-center text-sm text-kolo-muted">Nema zadruga.</p>
         ) : (
           zadrugeLista.map((z, i) => (
-            <div key={z.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < zadrugeLista.length - 1 ? "border-b border-gray-100" : ""}`}>
+            <div key={z.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < zadrugeLista.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <div className="min-w-0">
-                <p className="text-sm font-semibold text-gray-900 truncate">{z.name}</p>
-                {z.location && <p className="text-xs text-gray-400 truncate">{z.location}</p>}
+                <p className="text-sm font-semibold text-kolo-text truncate">{z.name}</p>
+                {z.location && <p className="text-xs text-kolo-muted truncate">{z.location}</p>}
               </div>
-              <div className="flex items-center gap-3 shrink-0 text-xs text-gray-500">
+              <div className="flex items-center gap-3 shrink-0 text-xs text-kolo-muted">
                 <span>{z.clanovi} čl.</span>
                 <span>{z.projekti} proj.</span>
                 <span className="font-mono">{z.balance.toLocaleString("sr-RS")} P</span>
-                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusZadruge[z.status] ?? "bg-gray-100 text-gray-500"}`}>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusZadruge[z.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                   {z.status}
                 </span>
               </div>
@@ -1400,31 +1400,31 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         placeholder="Pretraži po pseudonimu..."
-        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+        className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
       />
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {filtered.length === 0 ? (
-          <p className="px-5 py-8 text-center text-sm text-gray-400">Nema korisnika.</p>
+          <p className="px-5 py-8 text-center text-sm text-kolo-muted">Nema korisnika.</p>
         ) : (
           filtered.map((u, i) => (
-            <div key={u.id} className={`px-4 py-3 ${i < filtered.length - 1 ? "border-b border-gray-100" : ""}`}>
+            <div key={u.id} className={`px-4 py-3 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <div className="flex justify-between items-start gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-semibold text-gray-900">{u.pseudonim}</span>
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-gray-100 text-gray-500"}`}>
+                    <span className="text-sm font-semibold text-kolo-text">{u.pseudonim}</span>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                       {u.status}
                     </span>
                     {!u.verified && (
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-400">
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-kolo-bg text-kolo-muted">
                         neverifikovan
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-400 mt-0.5">
+                  <p className="text-xs text-kolo-muted mt-0.5">
                     {roleLabel[u.role] ?? u.role} · {u.balance.toLocaleString("sr-RS")} P
-                    {u.suspendedReason && <span className="ml-1 text-amber-600">— {u.suspendedReason}</span>}
+                    {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                 </div>
                 {u.role !== "ADMIN" && (
@@ -1437,19 +1437,19 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                     )}
                     {u.status === "ACTIVE" && (
                       <button onClick={() => akcija(u.id, "suspenduj")} disabled={loadingId === u.id}
-                        className="px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-lg hover:bg-amber-100 disabled:opacity-60 transition-colors">
+                        className="px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold rounded-lg hover:bg-amber-100 disabled:opacity-60 transition-colors">
                         Suspenduj
                       </button>
                     )}
                     {u.status === "SUSPENDED" && (
                       <button onClick={() => akcija(u.id, "aktiviraj")} disabled={loadingId === u.id}
-                        className="px-2.5 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-lg hover:bg-green-100 disabled:opacity-60 transition-colors">
+                        className="px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold rounded-lg hover:bg-kolo-green-100 disabled:opacity-60 transition-colors">
                         Aktiviraj
                       </button>
                     )}
                     {u.status !== "EXCLUDED" && (
                       <button onClick={() => akcija(u.id, "iskljuci")} disabled={loadingId === u.id}
-                        className="px-2.5 py-1 bg-red-50 text-red-600 text-xs font-semibold rounded-lg hover:bg-red-100 disabled:opacity-60 transition-colors">
+                        className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60 transition-colors">
                         Isključi
                       </button>
                     )}
@@ -1511,8 +1511,8 @@ function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
         <div>
-          <h3 className="text-base font-semibold text-gray-900">Ručna verifikacija</h3>
-          <p className="text-sm text-gray-500 mt-0.5">Korisnik: <span className="font-medium text-gray-700">{korisnik.pseudonim}</span></p>
+          <h3 className="text-base font-semibold text-kolo-text">Ručna verifikacija</h3>
+          <p className="text-sm text-kolo-muted mt-0.5">Korisnik: <span className="font-medium text-kolo-muted">{korisnik.pseudonim}</span></p>
         </div>
 
         <div className="box-warning px-4 py-3 text-sm text-kolo-gold-600">
@@ -1520,32 +1520,32 @@ function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">JMBG</label>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">JMBG</label>
           <input
             type="text"
             value={jmbg}
             onChange={(e) => setJmbg(e.target.value.replace(/\D/g, "").slice(0, 13))}
             placeholder="0000000000000"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 font-mono text-sm outline-none focus:border-kolo-green-700 transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border font-mono text-sm outline-none focus:border-kolo-green-700 transition-colors"
           />
-          <p className="mt-1 text-xs text-gray-400">{jmbg.length}/13 cifara</p>
+          <p className="mt-1 text-xs text-kolo-muted">{jmbg.length}/13 cifara</p>
         </div>
 
         <label className="flex items-start gap-2.5 cursor-pointer">
           <input type="checkbox" checked={potvrda} onChange={(e) => setPotvrda(e.target.checked)}
             className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
-          <span className="text-xs text-gray-600">
+          <span className="text-xs text-kolo-muted">
             Potvrđujem da sam lično video/la dokument sa ovim JMBG i identifikovao/la korisnika
           </span>
         </label>
 
         {greska && (
-          <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{greska}</p>
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
         )}
 
         <div className="flex gap-2 pt-1">
           <button onClick={onClose} disabled={loading}
-            className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors disabled:opacity-60">
+            className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm font-medium text-kolo-muted hover:bg-kolo-bg transition-colors disabled:opacity-60">
             Otkaži
           </button>
           <button onClick={potvrdi} disabled={loading || jmbg.length !== 13 || !potvrda}
@@ -1654,13 +1654,13 @@ function AdminPokroviteljiTab({
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2 border-b border-gray-200 pb-0">
+      <div className="flex gap-2 border-b border-kolo-border pb-0">
         {(["lista", "novi", "doprinos"] as const).map((s) => (
           <button
             key={s}
             onClick={() => { setSubTab(s); setPoruka(null); }}
             className={`px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors ${
-              subTab === s ? "border-green-700 text-green-700" : "border-transparent text-gray-500 hover:text-gray-700"
+              subTab === s ? "border-kolo-green-700 text-kolo-green-700" : "border-transparent text-kolo-muted hover:text-kolo-muted"
             }`}
           >
             {s === "lista" ? `Lista (${pokrovitelji.length})` : s === "novi" ? "Novi pokrovitelj" : "Evidentiraj doprinos"}
@@ -1669,7 +1669,7 @@ function AdminPokroviteljiTab({
       </div>
 
       {poruka && (
-        <div className={`px-4 py-3 rounded-xl text-sm ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+        <div className={`px-4 py-3 rounded-xl text-sm ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
           {poruka.text}
         </div>
       )}
@@ -1677,24 +1677,24 @@ function AdminPokroviteljiTab({
       {subTab === "lista" && (
         <div className="space-y-2">
           {pokrovitelji.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
               Nema registrovanih pokrovitelja.
             </div>
           ) : (
             pokrovitelji.map((p) => (
-              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-3 flex items-center justify-between gap-4">
+              <div key={p.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-3 flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <div className="font-medium text-gray-900 truncate">{p.naziv}</div>
-                  <div className="text-xs text-gray-400 mt-0.5">
+                  <div className="font-medium text-kolo-text truncate">{p.naziv}</div>
+                  <div className="text-xs text-kolo-muted mt-0.5">
                     PIB: {p.pib} · Vlasnik: {p.vlasnikPseudonim}
                     {p.zadrugaName && ` · Zadruga: ${p.zadrugaName}`}
                   </div>
                 </div>
                 <div className="shrink-0 text-right">
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${p.status === "ACTIVE" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"}`}>
+                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${p.status === "ACTIVE" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-gold-100 text-kolo-gold-600"}`}>
                     Nivo {p.trenutniNivo}
                   </span>
-                  <div className="text-xs text-gray-400 mt-0.5">
+                  <div className="text-xs text-kolo-muted mt-0.5">
                     {p.rsdKumulativ.toLocaleString("sr-RS")} RSD · {p.brDoprinosa} doprinos{p.brDoprinosa !== 1 ? "a" : ""}
                   </div>
                 </div>
@@ -1705,46 +1705,46 @@ function AdminPokroviteljiTab({
       )}
 
       {subTab === "novi" && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-4">
-          <h3 className="font-semibold text-gray-900">Novi pokrovitelj</h3>
+        <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-4">
+          <h3 className="font-semibold text-kolo-text">Novi pokrovitelj</h3>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Naziv *</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">Naziv *</label>
               <input value={noviNaziv} onChange={(e) => setNoviNaziv(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
                 placeholder="Naziv pravnog lica" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">PIB *</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">PIB *</label>
               <input value={noviPib} onChange={(e) => setNoviPib(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
                 placeholder="9-13 cifara" />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Adresa</label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Adresa</label>
             <input value={noviAdresa} onChange={(e) => setNoviAdresa(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+              className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               placeholder="Adresa sedišta" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Email</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">Email</label>
               <input value={noviEmail} onChange={(e) => setNoviEmail(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
                 placeholder="kontakt@firma.rs" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Telefon</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">Telefon</label>
               <input value={noviTelefon} onChange={(e) => setNoviTelefon(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
                 placeholder="+381..." />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Vlasnik (verifikovan član) *</label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Vlasnik (verifikovan član) *</label>
             <select value={noviVlasnikId} onChange={(e) => setNoviVlasnikId(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500">
               <option value="">— odaberite vlasnika —</option>
               {verifikovaniKorisnici.map((k) => (
                 <option key={k.id} value={k.id}>{k.pseudonim}</option>
@@ -1752,9 +1752,9 @@ function AdminPokroviteljiTab({
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Zadruga (opciono)</label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Zadruga (opciono)</label>
             <select value={noviZadrugaId} onChange={(e) => setNoviZadrugaId(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500">
               <option value="">— bez zadruge —</option>
               {zadruge.map((z) => (
                 <option key={z.id} value={z.id}>{z.name}</option>
@@ -1764,7 +1764,7 @@ function AdminPokroviteljiTab({
           <button
             onClick={kreirajPokrovitelja}
             disabled={loading}
-            className="w-full py-2.5 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60 transition-colors"
+            className="w-full py-2.5 bg-kolo-green-700 text-white font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60 transition-colors"
           >
             {loading ? "Kreiranje..." : "Kreiraj pokrovitelja"}
           </button>
@@ -1772,12 +1772,12 @@ function AdminPokroviteljiTab({
       )}
 
       {subTab === "doprinos" && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-4">
-          <h3 className="font-semibold text-gray-900">Evidentiraj doprinos</h3>
+        <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-4">
+          <h3 className="font-semibold text-kolo-text">Evidentiraj doprinos</h3>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Pokrovitelj *</label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Pokrovitelj *</label>
             <select value={selectedId ?? ""} onChange={(e) => setSelectedId(e.target.value || null)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500">
+              className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500">
               <option value="">— odaberite pokrovitelja —</option>
               {pokrovitelji.filter((p) => p.status === "ACTIVE").map((p) => (
                 <option key={p.id} value={p.id}>
@@ -1788,22 +1788,22 @@ function AdminPokroviteljiTab({
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Iznos (RSD) *</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">Iznos (RSD) *</label>
               <input
                 type="number"
                 min="1"
                 value={doprinosRsd}
                 onChange={(e) => setDoprinosRsd(e.target.value)}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
                 placeholder="npr. 50000"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Tip *</label>
+              <label className="block text-xs font-medium text-kolo-muted mb-1">Tip *</label>
               <select
                 value={doprinosTip}
                 onChange={(e) => setDoprinosTip(e.target.value as "SPONZORSTVO_ZADRUGE" | "DONACIJA_FONDACIJI")}
-                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+                className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               >
                 <option value="DONACIJA_FONDACIJI">Donacija Fondaciji</option>
                 <option value="SPONZORSTVO_ZADRUGE">Sponzorstvo zadruge</option>
@@ -1811,15 +1811,15 @@ function AdminPokroviteljiTab({
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Napomena</label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Napomena</label>
             <input value={doprinosNapomena} onChange={(e) => setDoprinosNapomena(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-green-500"
+              className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               placeholder="Referenca uplate, opis..." />
           </div>
           <button
             onClick={dodajDoprinos}
             disabled={loading || !selectedId}
-            className="w-full py-2.5 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 disabled:opacity-60 transition-colors"
+            className="w-full py-2.5 bg-kolo-green-700 text-white font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60 transition-colors"
           >
             {loading ? "Evidentiranje..." : "Evidentiraj doprinos"}
           </button>
@@ -1835,33 +1835,33 @@ function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: ()
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <p className="text-sm text-gray-500">{logs.length} zapisa</p>
+        <p className="text-sm text-kolo-muted">{logs.length} zapisa</p>
         <button onClick={onRefresh}
-          className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors">
+          className="px-4 py-2 bg-kolo-bg text-kolo-muted text-sm font-semibold rounded-xl hover:bg-kolo-border transition-colors">
           Osvježi
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {logs.length === 0 ? (
-          <p className="px-5 py-8 text-center text-sm text-gray-400">Nema audit zapisa.</p>
+          <p className="px-5 py-8 text-center text-sm text-kolo-muted">Nema audit zapisa.</p>
         ) : (
           logs.map((l, i) => (
-            <div key={l.id} className={`px-4 py-3 ${i < logs.length - 1 ? "border-b border-gray-100" : ""}`}>
+            <div key={l.id} className={`px-4 py-3 ${i < logs.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <div className="flex justify-between items-start gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-xs font-mono font-semibold text-green-700">{l.akcija}</span>
+                    <span className="text-xs font-mono font-semibold text-kolo-green-700">{l.akcija}</span>
                     {l.targetId && (
-                      <span className="text-xs text-gray-400 truncate max-w-[120px]">{l.targetId}</span>
+                      <span className="text-xs text-kolo-muted truncate max-w-[120px]">{l.targetId}</span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5">
+                  <p className="text-xs text-kolo-muted mt-0.5">
                     {l.adminPseudonim}
-                    {l.detalji && <span className="text-gray-400"> — {l.detalji}</span>}
+                    {l.detalji && <span className="text-kolo-muted"> — {l.detalji}</span>}
                   </p>
                 </div>
-                <span className="text-xs text-gray-400 shrink-0">
+                <span className="text-xs text-kolo-muted shrink-0">
                   {new Date(l.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
                   })}

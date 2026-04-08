@@ -97,9 +97,9 @@ export default function ClanPretraga() {
           onKeyDown={handleKeyDown}
           placeholder="Pretraži članove..."
           autoComplete="off"
-          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors bg-white"
+          className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors bg-white"
         />
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-kolo-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
         </svg>
         {loading && (
@@ -110,7 +110,7 @@ export default function ClanPretraga() {
       {show && rezultati.length > 0 && (
         <ul
           ref={listaRef}
-          className="absolute z-30 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-y-auto max-h-64"
+          className="absolute z-30 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-y-auto max-h-64"
         >
           {rezultati.map((k, i) => (
             <li key={k.id}>
@@ -125,13 +125,13 @@ export default function ClanPretraga() {
                 }`}
               >
                 <div className="min-w-0">
-                  <span className="text-sm font-medium text-gray-900 truncate block">{k.pseudonim}</span>
+                  <span className="text-sm font-medium text-kolo-text truncate block">{k.pseudonim}</span>
                   {k.location && (
-                    <span className="text-xs text-gray-400">{k.location}</span>
+                    <span className="text-xs text-kolo-muted">{k.location}</span>
                   )}
                 </div>
                 {k.verified && (
-                  <span className="shrink-0 text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">✓</span>
+                  <span className="shrink-0 text-xs font-semibold text-kolo-green-700 bg-kolo-green-100 px-2 py-0.5 rounded-full">✓</span>
                 )}
               </button>
             </li>
@@ -140,7 +140,7 @@ export default function ClanPretraga() {
       )}
 
       {show && query.trim().length >= 2 && rezultati.length === 0 && !loading && (
-        <div className="absolute z-30 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 text-sm text-gray-400">
+        <div className="absolute z-30 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg px-4 py-3 text-sm text-kolo-muted">
           Nema rezultata za &ldquo;{query}&rdquo;
         </div>
       )}

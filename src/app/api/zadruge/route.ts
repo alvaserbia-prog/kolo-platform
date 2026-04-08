@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
   if (!name || name.length < 3)
     return NextResponse.json({ error: "Naziv mora imati najmanje 3 karaktera." }, { status: 400 });
   if (osnivaci.length < 4)
-    return NextResponse.json({ error: "Potrebno je najmanje 5 osnivača (uključujući vas)." }, { status: 400 });
+    return NextResponse.json({ error: "Potrebno je navesti pseudonime najmanje 4 osnivača (pored vas, ukupno 5)." }, { status: 400 });
 
   // Proveri da naziv nije zauzet
   const postojeca = await prisma.zadruga.findUnique({ where: { name } });
@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
   const sviOsnivaci = [session.user.id, ...osnivaciIds];
 
   if (sviOsnivaci.length < 5)
-    return NextResponse.json({ error: "Potrebno je najmanje 5 različitih osnivača." }, { status: 400 });
+    return NextResponse.json({ error: "Potrebno je 5 različitih osnivača. Ne unosite sopstveni pseudonim u listu." }, { status: 400 });
 
   // Proveri verifikaciju inicijatora (već provereno gore, ali proveri i njega)
   const inicijator = await prisma.user.findUnique({

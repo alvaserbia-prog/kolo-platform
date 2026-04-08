@@ -115,87 +115,87 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-900">Profil</h1>
+      <h1 className="text-2xl font-semibold text-kolo-text">Profil</h1>
 
       {/* Osnovni podaci */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
-        <h2 className="text-base font-semibold text-gray-700">Osnovni podaci</h2>
+      <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
+        <h2 className="text-base font-semibold text-kolo-muted">Osnovni podaci</h2>
         <dl className="space-y-3 text-sm">
           <div className="flex justify-between">
-            <dt className="text-gray-500">Pseudonim</dt>
-            <dd className="font-medium text-gray-900">{user.pseudonim}</dd>
+            <dt className="text-kolo-muted">Pseudonim</dt>
+            <dd className="font-medium text-kolo-text">{user.pseudonim}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-gray-500">Email</dt>
-            <dd className="text-gray-700">{user.email}</dd>
+            <dt className="text-kolo-muted">Email</dt>
+            <dd className="text-kolo-muted">{user.email}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-gray-500">Uloga</dt>
-            <dd className="text-gray-700">{roleLabel[user.role] ?? user.role}</dd>
+            <dt className="text-kolo-muted">Uloga</dt>
+            <dd className="text-kolo-muted">{roleLabel[user.role] ?? user.role}</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-gray-500">Status</dt>
+            <dt className="text-kolo-muted">Status</dt>
             <dd>
               {user.verified ? (
-                <span className="text-green-700 font-medium">Verifikovan</span>
+                <span className="text-kolo-green-700 font-medium">Verifikovan</span>
               ) : (
-                <span className="text-amber-600 font-medium">Čeka verifikaciju</span>
+                <span className="text-kolo-gold-600 font-medium">Čeka verifikaciju</span>
               )}
             </dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-gray-500">POEN stanje</dt>
-            <dd className="font-bold text-green-700">{user.balance.toLocaleString()} POEN</dd>
+            <dt className="text-kolo-muted">POEN stanje</dt>
+            <dd className="font-bold text-kolo-green-700">{user.balance.toLocaleString()} POEN</dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-gray-500">Referral kod</dt>
-            <dd className="font-mono text-gray-900 bg-gray-50 px-2 py-0.5 rounded">{user.referralCode}</dd>
+            <dt className="text-kolo-muted">Referral kod</dt>
+            <dd className="font-mono text-kolo-text bg-kolo-bg px-2 py-0.5 rounded">{user.referralCode}</dd>
           </div>
           {user.punoIme && (
             <div className="flex justify-between">
-              <dt className="text-gray-500">Ime i prezime</dt>
-              <dd className="text-gray-700">{user.punoIme}</dd>
+              <dt className="text-kolo-muted">Ime i prezime</dt>
+              <dd className="text-kolo-muted">{user.punoIme}</dd>
             </div>
           )}
           {user.location && (
             <div className="flex justify-between">
-              <dt className="text-gray-500">Lokacija</dt>
-              <dd className="text-gray-700">{user.location}</dd>
+              <dt className="text-kolo-muted">Lokacija</dt>
+              <dd className="text-kolo-muted">{user.location}</dd>
             </div>
           )}
           {user.telefon && (
             <div className="flex justify-between">
-              <dt className="text-gray-500">Telefon</dt>
-              <dd className="text-gray-700">{user.telefon}</dd>
+              <dt className="text-kolo-muted">Telefon</dt>
+              <dd className="text-kolo-muted">{user.telefon}</dd>
             </div>
           )}
           <div className="flex justify-between">
-            <dt className="text-gray-500">Registrovan</dt>
-            <dd className="text-gray-700">{new Date(user.createdAt).toLocaleDateString("sr-RS")}</dd>
+            <dt className="text-kolo-muted">Registrovan</dt>
+            <dd className="text-kolo-muted">{new Date(user.createdAt).toLocaleDateString("sr-RS")}</dd>
           </div>
         </dl>
       </div>
 
       {/* Lokacija i telefon */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-gray-700 mb-4">Lokacija i kontakt</h2>
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-4">Lokacija i kontakt</h2>
         <form onSubmit={sacuvajLokaciju} className="space-y-3">
           <div>
-            <label className="block text-sm text-gray-600 mb-1.5">Mesto <span className="text-gray-400">(opciono)</span></label>
+            <label className="block text-sm text-kolo-muted mb-1.5">Mesto <span className="text-kolo-muted">(opciono)</span></label>
             <LokacijaSearch value={location} onChange={setLocation} />
           </div>
           <div>
-            <label className="block text-sm text-gray-600 mb-1.5">Telefon <span className="text-gray-400">(opciono)</span></label>
+            <label className="block text-sm text-kolo-muted mb-1.5">Telefon <span className="text-kolo-muted">(opciono)</span></label>
             <input
               type="tel"
               value={telefon}
               onChange={(e) => setTelefon(e.target.value)}
               placeholder="npr. +381 60 123 4567"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
             />
           </div>
-          {locError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{locError}</p>}
-          {locSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{locSuccess}</p>}
+          {locError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{locError}</p>}
+          {locSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{locSuccess}</p>}
           <button
             type="submit"
             disabled={locLoading}
@@ -207,22 +207,22 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       </div>
 
       {/* Ime i prezime */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-gray-700 mb-4">Ime i prezime</h2>
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-4">Ime i prezime</h2>
         <form onSubmit={sacuvajPodatke} className="space-y-3">
           <div>
-            <label className="block text-sm text-gray-600 mb-1.5">Puno ime <span className="text-gray-400">(opciono)</span></label>
+            <label className="block text-sm text-kolo-muted mb-1.5">Puno ime <span className="text-kolo-muted">(opciono)</span></label>
             <input
               type="text"
               value={punoIme}
               onChange={(e) => setPunoIme(e.target.value)}
               placeholder="npr. Marko Marković"
               maxLength={100}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
             />
           </div>
-          {podaciError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{podaciError}</p>}
-          {podaciSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{podaciSuccess}</p>}
+          {podaciError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{podaciError}</p>}
+          {podaciSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{podaciSuccess}</p>}
           <button
             type="submit"
             disabled={podaciLoading}
@@ -234,8 +234,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       </div>
 
       {/* Promena pseudonima */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-gray-700 mb-4">Promena pseudonima</h2>
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-4">Promena pseudonima</h2>
         {mozeMenjatiPseudonim ? (
           <form onSubmit={promeniPseudonim} className="space-y-3">
             <input
@@ -245,16 +245,16 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               placeholder="Novi pseudonim"
               value={noviPseudonim}
               onChange={(e) => setNoviPseudonim(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
             />
-            {psError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{psError}</p>}
-            {psSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{psSuccess}</p>}
-            <button type="submit" className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors">
+            {psError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{psError}</p>}
+            {psSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{psSuccess}</p>}
+            <button type="submit" className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
               Promeni pseudonim
             </button>
           </form>
         ) : (
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-kolo-muted">
             Pseudonim možete menjati jednom u 30 dana.{" "}
             {user.pseudonimChangedAt && (
               <>Sledeća promena moguća: {new Date(new Date(user.pseudonimChangedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("sr-RS")}.</>
@@ -264,26 +264,26 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       </div>
 
       {/* Promena lozinke */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6">
-        <h2 className="text-base font-semibold text-gray-700 mb-4">Promena lozinke</h2>
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-4">Promena lozinke</h2>
         <form onSubmit={promeniLozinku} className="space-y-3">
           <input
             type="password"
             placeholder="Trenutna lozinka"
             value={staraLozinka}
             onChange={(e) => setStaraLozinka(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
           />
           <input
             type="password"
             placeholder="Nova lozinka (min. 8 karaktera)"
             value={novaLozinka}
             onChange={(e) => setNovaLozinka(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
           />
-          {lzError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{lzError}</p>}
-          {lzSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{lzSuccess}</p>}
-          <button type="submit" className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors">
+          {lzError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{lzError}</p>}
+          {lzSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{lzSuccess}</p>}
+          <button type="submit" className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
             Promeni lozinku
           </button>
         </form>
@@ -292,14 +292,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       {/* Moji oglasi */}
       <Link
         href="/profil/oglasi"
-        className="block bg-white rounded-2xl border border-gray-200 px-6 py-4 hover:border-green-300 transition-colors"
+        className="block bg-white rounded-2xl border border-kolo-border px-6 py-4 hover:border-green-300 transition-colors"
       >
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-sm font-semibold text-gray-900">Moji oglasi</p>
-            <p className="text-xs text-gray-400 mt-0.5">Pregled aktivnih i prodatih oglasa</p>
+            <p className="text-sm font-semibold text-kolo-text">Moji oglasi</p>
+            <p className="text-xs text-kolo-muted mt-0.5">Pregled aktivnih i prodatih oglasa</p>
           </div>
-          <span className="text-gray-300">→</span>
+          <span className="text-kolo-border">→</span>
         </div>
       </Link>
     </div>

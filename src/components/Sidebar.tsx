@@ -63,7 +63,7 @@ export default function Sidebar({ verified, isAdmin }: SidebarProps) {
               href={href}
               className={`flex items-center px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                 active
-                  ? "bg-kolo-green-100 text-kolo-green-900 border-l-[3px] border-kolo-green-700 pl-[9px]"
+                  ? "bg-kolo-green-100 text-kolo-green-900 ring-1 ring-kolo-green-700"
                   : "text-kolo-muted hover:bg-kolo-green-100/50 hover:text-kolo-green-900"
               }`}
             >

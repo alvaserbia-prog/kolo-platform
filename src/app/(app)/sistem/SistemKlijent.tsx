@@ -17,10 +17,10 @@ const TIP_LABELA: Record<string, string> = {
 };
 
 const TIP_BOJA: Record<string, string> = {
-  TRANSFER: "bg-gray-100 text-gray-600",
-  EMISIJA_VERIFIKACIJA: "bg-green-50 text-green-700",
-  EMISIJA_PREPORUKA: "bg-blue-50 text-blue-700",
-  EMISIJA_DONACIJA: "bg-amber-50 text-amber-700",
+  TRANSFER: "bg-kolo-bg text-kolo-muted",
+  EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
+  EMISIJA_PREPORUKA: "bg-kolo-info-light text-kolo-info",
+  EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
   EMISIJA_POKROVITELJ: "bg-yellow-50 text-yellow-700",
   EMISIJA_ZADRUGA_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
   EMISIJA_ZADRUGA_BONUS: "bg-kolo-green-100 text-kolo-green-700",
@@ -118,7 +118,7 @@ export default function SistemKlijent({
       </h1>
 
       {/* Tabs */}
-      <div className="flex gap-0 border-b border-gray-200 overflow-x-auto">
+      <div className="flex gap-0 border-b border-kolo-border overflow-x-auto">
         {tabovi.map(([key, label]) => (
           <button
             key={key}
@@ -126,7 +126,7 @@ export default function SistemKlijent({
             className={`px-4 py-2.5 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
               tab === key
                 ? "border-kolo-green-700 text-kolo-green-700"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+                : "border-transparent text-kolo-muted hover:text-kolo-muted"
             }`}
           >
             {label}
@@ -192,9 +192,9 @@ function PregledTab({
       {/* Tri kartice */}
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-4 text-white shadow">
-          <p className="text-xs text-green-200 mb-1">Opticaj POENA</p>
+          <p className="text-xs text-white/70 mb-1">Opticaj POENA</p>
           <p className="text-2xl font-bold font-mono">{opticaj.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-green-300 mt-0.5">POEN u sistemu</p>
+          <p className="text-xs text-white/70 mt-0.5">POEN u sistemu</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Članovi</p>
@@ -216,7 +216,7 @@ function PregledTab({
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-white rounded-2xl border border-kolo-border p-4">
               <p className="text-xs text-kolo-muted mb-1">Stanje Banke</p>
-              <p className="text-xl font-bold text-red-600 font-mono">
+              <p className="text-xl font-bold text-kolo-danger font-mono">
                 {bankaBalance.toLocaleString("sr-RS")} POEN
               </p>
               <p className="text-xs text-kolo-muted mt-0.5">
@@ -227,13 +227,13 @@ function PregledTab({
               <p className="text-xs text-kolo-muted mb-2">Zero-sum provera</p>
               {opticaj + bankaBalance === 0 ? (
                 <div className="flex items-center gap-2">
-                  <span className="text-green-600 text-lg">✓</span>
-                  <span className="text-sm font-semibold text-green-700">Zbir svih računa = 0</span>
+                  <span className="text-kolo-green-700 text-lg">✓</span>
+                  <span className="text-sm font-semibold text-kolo-green-700">Zbir svih računa = 0</span>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-red-600 text-lg">✗</span>
-                  <span className="text-sm font-semibold text-red-700">Greška u zbiru!</span>
+                  <span className="text-kolo-danger text-lg">✗</span>
+                  <span className="text-sm font-semibold text-kolo-danger">Greška u zbiru!</span>
                 </div>
               )}
             </div>
@@ -247,9 +247,9 @@ function PregledTab({
                 Limit: {danasLimit.toLocaleString("sr-RS")} POEN (10% opticaja)
               </p>
             </div>
-            <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden mb-2">
+            <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
               <div
-                className={`h-full rounded-full transition-all ${limitPct >= 90 ? "bg-red-500" : limitPct >= 70 ? "bg-amber-400" : "bg-kolo-green-600"}`}
+                className={`h-full rounded-full transition-all ${limitPct >= 90 ? "bg-kolo-danger-light0" : limitPct >= 70 ? "bg-amber-400" : "bg-kolo-green-600"}`}
                 style={{ width: `${limitPct}%` }}
               />
             </div>
@@ -276,7 +276,7 @@ function PregledTab({
                           {e.emitted.toLocaleString("sr-RS")}
                         </div>
                       </div>
-                      <span className="text-[10px] text-gray-400 rotate-45 origin-left translate-y-1">
+                      <span className="text-[10px] text-kolo-muted rotate-45 origin-left translate-y-1">
                         {e.date.slice(5)}
                       </span>
                     </div>
@@ -318,11 +318,11 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
         value={pretraga}
         onChange={(e) => setPretraga(e.target.value)}
         placeholder="Pretraži po pseudonimu..."
-        className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+        className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
       />
       <div className="text-xs text-kolo-muted">{filtrirani.length} {filtrirani.length === 1 ? "član" : "članova"}</div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        <div className="grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-gray-50 border-b border-gray-100 text-xs font-semibold text-gray-500">
+        <div className="grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Pseudonim</span>
           <span className="text-right">Balans</span>
           <span className="text-right">Preporuke</span>
@@ -342,9 +342,9 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
                   {c.pseudonim}
                 </Link>
                 {c.verified ? (
-                  <span className="shrink-0 text-xs bg-green-50 text-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+                  <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
                 ) : (
-                  <span className="shrink-0 text-xs bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded font-medium">?</span>
+                  <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                 )}
               </div>
               <span className="text-right font-mono text-sm font-semibold text-kolo-text">{c.balance.toLocaleString("sr-RS")}</span>
@@ -380,17 +380,17 @@ function TransakcijeTab({ transakcije, verified }: { transakcije: Transakcija[];
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
-                  <span className={`text-xs px-2 py-0.5 rounded font-medium ${TIP_BOJA[t.type] ?? "bg-gray-100 text-gray-600"}`}>
+                  <span className={`text-xs px-2 py-0.5 rounded font-medium ${TIP_BOJA[t.type] ?? "bg-kolo-bg text-kolo-muted"}`}>
                     {TIP_LABELA[t.type] ?? t.type}
                   </span>
                   {verified ? (
-                    <span className="text-xs text-gray-500 truncate flex items-center gap-1">
+                    <span className="text-xs text-kolo-muted truncate flex items-center gap-1">
                       {t.fromId ? (
                         <Link href={`/profil/${t.fromId}`} className="text-kolo-green-700 hover:underline">{t.fromPseudonim}</Link>
                       ) : (
                         <span>{t.fromPseudonim}</span>
                       )}
-                      <span className="text-gray-300">→</span>
+                      <span className="text-kolo-border">→</span>
                       {t.toId ? (
                         <Link href={`/profil/${t.toId}`} className="text-kolo-green-700 hover:underline">{t.toPseudonim}</Link>
                       ) : (
@@ -398,10 +398,10 @@ function TransakcijeTab({ transakcije, verified }: { transakcije: Transakcija[];
                       )}
                     </span>
                   ) : (
-                    <span className="text-xs text-gray-400">Anonimno</span>
+                    <span className="text-xs text-kolo-muted">Anonimno</span>
                   )}
                 </div>
-                <p className="text-xs text-gray-300 mt-0.5">
+                <p className="text-xs text-kolo-border mt-0.5">
                   {new Date(t.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "numeric",
                     hour: "2-digit", minute: "2-digit",
@@ -428,17 +428,17 @@ function ProgramiTab({ programi }: { programi: Program[] }) {
       <div className="space-y-2">
         {programi.map((p) => (
           <div key={p.type} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex gap-4 items-start">
-            <div className={`mt-0.5 shrink-0 w-2.5 h-2.5 rounded-full ${p.isActive ? "bg-green-500" : "bg-gray-300"}`} />
+            <div className={`mt-0.5 shrink-0 w-2.5 h-2.5 rounded-full ${p.isActive ? "bg-kolo-green-1000" : "bg-gray-300"}`} />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-sm font-semibold text-kolo-text">{p.label}</span>
-                <span className={`text-xs px-2 py-0.5 rounded font-medium ${p.isActive ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"}`}>
+                <span className={`text-xs px-2 py-0.5 rounded font-medium ${p.isActive ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
                   {p.isActive ? "Aktivan" : "Neaktivan"}
                 </span>
               </div>
               <p className="text-xs text-kolo-muted">{p.opis}</p>
               {p.isActive && p.activatedAt && (
-                <p className="text-xs text-gray-300 mt-1">
+                <p className="text-xs text-kolo-border mt-1">
                   Aktiviran: {new Date(p.activatedAt).toLocaleDateString("sr-RS")}
                 </p>
               )}
@@ -479,7 +479,7 @@ function ZadrugeLista({ zadruge, verified }: { zadruge: Zadruga[]; verified: boo
         {zadruge.map((z, i) => (
           <div
             key={z.id}
-            className={`px-4 py-3.5 flex justify-between items-center ${i < zadruge.length - 1 ? "border-b border-gray-100" : ""}`}
+            className={`px-4 py-3.5 flex justify-between items-center ${i < zadruge.length - 1 ? "border-b border-kolo-border" : ""}`}
           >
             <div>
               <p className="text-sm font-semibold text-kolo-text">{z.name}</p>

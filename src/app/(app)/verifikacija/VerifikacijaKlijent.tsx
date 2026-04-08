@@ -88,25 +88,25 @@ function VerifikacijaForma({
   return (
     <div className="max-w-md mx-auto space-y-5">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Verifikacija identiteta</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-semibold text-kolo-text">Verifikacija identiteta</h1>
+        <p className="mt-1 text-sm text-kolo-muted">
           Verifikacijom dobijate pristup celom sistemu i bonus od{" "}
-          <span className="font-semibold text-green-700">1.000 POEN</span>.
+          <span className="font-semibold text-kolo-green-700">1.000 POEN</span>.
         </p>
       </div>
 
       {rejected && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-4">
-          <p className="text-sm font-semibold text-red-600 mb-1">Zahtev je odbijen</p>
+        <div className="bg-kolo-danger-light border border-kolo-danger/20 rounded-2xl p-4">
+          <p className="text-sm font-semibold text-kolo-danger mb-1">Zahtev je odbijen</p>
           <p className="text-sm text-red-500">{rejected}</p>
-          <p className="text-xs text-red-400 mt-2">Ispravite navedeni problem i pošaljite ponovo.</p>
+          <p className="text-xs text-kolo-danger mt-2">Ispravite navedeni problem i pošaljite ponovo.</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {/* Upload fotografija */}
         <div>
-          <p className="text-sm font-semibold text-gray-700 mb-3">Fotografija lične karte</p>
+          <p className="text-sm font-semibold text-kolo-muted mb-3">Fotografija lične karte</p>
           <div className="grid grid-cols-2 gap-3">
             {[
               { label: "Prednja strana", file: front, ref: frontRef, side: "front" as const },
@@ -118,19 +118,19 @@ function VerifikacijaForma({
                 onClick={() => ref.current?.click()}
                 className={`p-5 rounded-2xl border-2 border-dashed flex flex-col items-center gap-2 transition-colors ${
                   file
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-300 bg-white hover:border-gray-400"
+                    ? "border-green-500 bg-kolo-green-100"
+                    : "border-kolo-border bg-white hover:border-kolo-muted"
                 }`}
               >
                 {file ? (
                   <>
                     <span className="text-xl">✓</span>
-                    <span className="text-xs font-medium text-green-700 text-center truncate w-full">{file.name}</span>
+                    <span className="text-xs font-medium text-kolo-green-700 text-center truncate w-full">{file.name}</span>
                   </>
                 ) : (
                   <>
                     <span className="text-2xl">📷</span>
-                    <span className="text-xs text-gray-400 text-center">{label}</span>
+                    <span className="text-xs text-kolo-muted text-center">{label}</span>
                   </>
                 )}
               </button>
@@ -138,12 +138,12 @@ function VerifikacijaForma({
           </div>
           <input ref={frontRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "front")} />
           <input ref={backRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "back")} />
-          <p className="mt-2 text-xs text-gray-400">JPG, PNG ili WebP. Maksimalno 5MB po fotografiji.</p>
+          <p className="mt-2 text-xs text-kolo-muted">JPG, PNG ili WebP. Maksimalno 5MB po fotografiji.</p>
         </div>
 
         {/* JMBG */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">JMBG</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">JMBG</label>
           <input
             type="text"
             inputMode="numeric"
@@ -154,31 +154,31 @@ function VerifikacijaForma({
               jmbgError
                 ? "border-red-400 focus:border-red-500"
                 : jmbg.length === 13
-                ? "border-green-500 focus:border-green-600"
-                : "border-gray-200 focus:border-green-600"
+                ? "border-green-500 focus:border-kolo-green-500"
+                : "border-kolo-border focus:border-kolo-green-500"
             }`}
           />
           {jmbgError && <p className="mt-1 text-xs text-red-500">{jmbgError}</p>}
           {jmbg.length === 13 && !jmbgError && (
-            <p className="mt-1 text-xs text-green-600">✓ Format ispravan</p>
+            <p className="mt-1 text-xs text-kolo-green-700">✓ Format ispravan</p>
           )}
         </div>
 
         {error && (
-          <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3">{error}</p>
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={!canSubmit || loading}
-          className="w-full py-3.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50"
+          className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
           {loading ? "Šaljem..." : "Pošalji na verifikaciju"}
         </button>
       </form>
 
-      <p className="text-center text-sm text-gray-400">
-        <Link href="/dashboard" className="hover:text-gray-600 transition-colors">
+      <p className="text-center text-sm text-kolo-muted">
+        <Link href="/dashboard" className="hover:text-kolo-muted transition-colors">
           Preskoči za sada →
         </Link>
       </p>
@@ -191,21 +191,21 @@ function VerifikacijaForma({
 function PendingEkran({ createdAt }: { createdAt: string }) {
   return (
     <div className="max-w-md mx-auto">
-      <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center">
-        <div className="w-20 h-20 rounded-full bg-amber-50 flex items-center justify-center mx-auto mb-5 text-4xl">
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
+        <div className="w-20 h-20 rounded-full bg-kolo-gold-100 flex items-center justify-center mx-auto mb-5 text-4xl">
           ⏰
         </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Zahtev je poslat</h2>
-        <p className="text-sm text-gray-500 mb-1">Dokumentacija je primljena i čeka pregled.</p>
-        <p className="text-xs text-gray-400 mb-6">Obično traje 1–3 radna dana.</p>
-        <div className="bg-gray-50 rounded-xl px-4 py-3 text-xs text-gray-400 mb-6">
+        <h2 className="text-xl font-bold text-kolo-text mb-2">Zahtev je poslat</h2>
+        <p className="text-sm text-kolo-muted mb-1">Dokumentacija je primljena i čeka pregled.</p>
+        <p className="text-xs text-kolo-muted mb-6">Obično traje 1–3 radna dana.</p>
+        <div className="bg-kolo-bg rounded-xl px-4 py-3 text-xs text-kolo-muted mb-6">
           Poslato: {new Date(createdAt).toLocaleDateString("sr-RS", {
             day: "2-digit", month: "long", year: "numeric",
           })}
         </div>
         <Link
           href="/dashboard"
-          className="inline-block px-6 py-3 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors"
+          className="inline-block px-6 py-3 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
         >
           Na početnu
         </Link>

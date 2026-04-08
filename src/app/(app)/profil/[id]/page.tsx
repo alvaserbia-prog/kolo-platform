@@ -44,36 +44,36 @@ export default async function JavniProfilPage({ params }: { params: Promise<{ id
         <span className="text-kolo-text">{korisnik.pseudonim}</span>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+      <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{korisnik.pseudonim}</h1>
+            <h1 className="text-2xl font-bold text-kolo-text">{korisnik.pseudonim}</h1>
             {korisnik.location && (
-              <p className="text-sm text-gray-500 mt-0.5">{korisnik.location}</p>
+              <p className="text-sm text-kolo-muted mt-0.5">{korisnik.location}</p>
             )}
           </div>
           <div className="flex flex-col items-end gap-1.5 shrink-0">
             {korisnik.verified ? (
-              <span className="text-xs font-semibold px-2.5 py-1 bg-green-50 text-green-700 rounded-full">
+              <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 rounded-full">
                 Verifikovan
               </span>
             ) : (
-              <span className="text-xs font-semibold px-2.5 py-1 bg-amber-50 text-amber-600 rounded-full">
+              <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 rounded-full">
                 Neverifikovan
               </span>
             )}
             {korisnik.status === "SUSPENDED" && (
-              <span className="text-xs font-semibold px-2.5 py-1 bg-red-50 text-red-600 rounded-full">
+              <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-danger-light text-kolo-danger rounded-full">
                 Suspendovan
               </span>
             )}
           </div>
         </div>
 
-        <dl className="space-y-2.5 text-sm border-t border-gray-100 pt-4">
+        <dl className="space-y-2.5 text-sm border-t border-kolo-border pt-4">
           {zadruga && (
             <div className="flex justify-between">
-              <dt className="text-gray-500">Zadruga</dt>
+              <dt className="text-kolo-muted">Zadruga</dt>
               <dd>
                 <Link
                   href={`/zajednica/${zadruga.id}`}
@@ -85,8 +85,8 @@ export default async function JavniProfilPage({ params }: { params: Promise<{ id
             </div>
           )}
           <div className="flex justify-between">
-            <dt className="text-gray-500">Član od</dt>
-            <dd className="text-gray-700">
+            <dt className="text-kolo-muted">Član od</dt>
+            <dd className="text-kolo-muted">
               {new Date(korisnik.createdAt).toLocaleDateString("sr-RS", { year: "numeric", month: "long" })}
             </dd>
           </div>

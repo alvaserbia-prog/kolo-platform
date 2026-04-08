@@ -17,17 +17,36 @@ export async function POST(
   if (!prijava) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
   if (prijava.status !== "PENDING") return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
+  const oglasSaKapacitetom = await prisma.radniOglas.findUnique({
+    where: { id: prijava.oglasId },
+    select: {
+      title: true,
+      positions: true,
+      _count: { select: { prijave: { where: { status: "APPROVED" } } } },
+    },
+  });
+  if (!oglasSaKapacitetom) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+
+  if (
+    oglasSaKapacitetom.positions !== null &&
+    oglasSaKapacitetom._count.prijave >= oglasSaKapacitetom.positions
+  ) {
+    return NextResponse.json(
+      { error: `Oglas je popunjen — sva mesta su zauzeta (${oglasSaKapacitetom.positions}).` },
+      { status: 400 }
+    );
+  }
+
   await prisma.radniOglasPrijava.update({
     where: { id },
     data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });
 
-  const oglas = await prisma.radniOglas.findUnique({ where: { id: prijava.oglasId }, select: { title: true } });
   await posaljiNotifikaciju(
     prijava.userId,
     "info",
     "Prijava za posao prihvaćena!",
-    `Vaša prijava za oglas "${oglas?.title ?? ""}" je prihvaćena. Možete početi sa evidencijom radnih sati.`,
+    `Vaša prijava za oglas "${oglasSaKapacitetom.title}" je prihvaćena. Možete početi sa evidencijom radnih sati.`,
     "/programi"
   );
 

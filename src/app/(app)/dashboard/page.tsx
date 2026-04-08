@@ -67,10 +67,10 @@ export default async function DashboardPage() {
   });
 
   const tipBoja: Record<string, string> = {
-    TRANSFER: "bg-gray-100 text-gray-600",
-    EMISIJA_VERIFIKACIJA: "bg-green-50 text-green-700",
-    EMISIJA_PREPORUKA: "bg-blue-50 text-blue-700",
-    EMISIJA_DONACIJA: "bg-amber-50 text-amber-700",
+    TRANSFER: "bg-kolo-bg text-kolo-muted",
+    EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
+    EMISIJA_PREPORUKA: "bg-kolo-info-light text-kolo-info",
+    EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
   };
   const tipLabela: Record<string, string> = {
     TRANSFER: "Transfer", EMISIJA_VERIFIKACIJA: "Verifikacija",
@@ -92,9 +92,9 @@ export default async function DashboardPage() {
       {/* Kartice */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-5 text-white shadow-lg">
-          <p className="text-xs text-green-300 mb-1">Vaše stanje</p>
+          <p className="text-xs text-white/70 mb-1">Vaše stanje</p>
           <p className="text-3xl font-bold font-mono">{(wallet?.balance ?? 0).toLocaleString("sr-RS")}</p>
-          <p className="text-sm text-green-300">POEN</p>
+          <p className="text-sm text-white/70">POEN</p>
           <Link href="/novcanik" className="mt-3 inline-block text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-xl transition-colors">
             Novčanik →
           </Link>

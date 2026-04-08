@@ -482,7 +482,7 @@ function fmt(n: number) {
 }
 
 function MiniChart({ data, color = "#16a34a", h = 60 }: { data: number[]; color?: string; h?: number }) {
-  if (data.length < 2) return <div className="text-xs text-gray-400 py-2 text-center">—</div>;
+  if (data.length < 2) return <div className="text-xs text-kolo-muted py-2 text-center">—</div>;
   const max = Math.max(...data), min = Math.min(...data), range = max - min || 1;
   const pts = data.map((v, i) => `${(i / (data.length - 1)) * 100},${h - ((v - min) / range) * (h - 4) - 2}`).join(" ");
   return (
@@ -493,9 +493,9 @@ function MiniChart({ data, color = "#16a34a", h = 60 }: { data: number[]; color?
 }
 
 const DOG_CFG: Record<string, { bg: string; text: string; ikona: string }> = {
-  verif:   { bg: "bg-blue-50",    text: "text-blue-700",    ikona: "✓" },
-  don:     { bg: "bg-amber-50",   text: "text-amber-700",   ikona: "♦" },
-  zadruga: { bg: "bg-green-50",   text: "text-green-700",   ikona: "⊕" },
+  verif:   { bg: "bg-kolo-info-light",    text: "text-kolo-info",    ikona: "✓" },
+  don:     { bg: "bg-kolo-gold-100",   text: "text-kolo-gold-600",   ikona: "♦" },
+  zadruga: { bg: "bg-kolo-green-100",   text: "text-kolo-green-700",   ikona: "⊕" },
   prog:    { bg: "bg-emerald-50", text: "text-emerald-700", ikona: "₽" },
   zrno:    { bg: "bg-kolo-gold-100",  text: "text-kolo-gold-600",  ikona: "◆" },
   ref:     { bg: "bg-kolo-green-100", text: "text-kolo-green-700", ikona: "→" },
@@ -508,14 +508,14 @@ function N({ val, onChange, min = 0, max = 999_999_999, step = 1, cls = "" }: {
   return (
     <input type="number" value={val} min={min} max={max} step={step}
       onChange={e => onChange(Number(e.target.value))}
-      className={`px-2 py-1 border border-gray-200 rounded-lg text-sm font-mono text-right outline-none focus:border-green-600 ${cls}`} />
+      className={`px-2 py-1 border border-kolo-border rounded-lg text-sm font-mono text-right outline-none focus:border-kolo-green-500 ${cls}`} />
   );
 }
 
 function Tog({ val, onChange }: { val: boolean; onChange: (v: boolean) => void }) {
   return (
     <button onClick={() => onChange(!val)}
-      className={`px-4 py-1 rounded-full text-sm font-semibold transition-colors ${val ? "bg-green-700 text-white" : "bg-gray-100 text-gray-400 hover:bg-gray-200"}`}>
+      className={`px-4 py-1 rounded-full text-sm font-semibold transition-colors ${val ? "bg-kolo-green-700 text-white" : "bg-kolo-bg text-kolo-muted hover:bg-kolo-border"}`}>
       {val ? "Aktivno" : "Neaktivno"}
     </button>
   );
@@ -523,10 +523,10 @@ function Tog({ val, onChange }: { val: boolean; onChange: (v: boolean) => void }
 
 function Row({ label, sub, children }: { label: string; sub?: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0 gap-4">
+    <div className="flex items-center justify-between py-2 border-b border-kolo-border last:border-0 gap-4">
       <div className="min-w-0">
-        <span className="text-sm text-gray-700">{label}</span>
-        {sub && <p className="text-xs text-gray-400">{sub}</p>}
+        <span className="text-sm text-kolo-muted">{label}</span>
+        {sub && <p className="text-xs text-kolo-muted">{sub}</p>}
       </div>
       <div className="shrink-0">{children}</div>
     </div>
@@ -535,8 +535,8 @@ function Row({ label, sub, children }: { label: string; sub?: string; children: 
 
 function Sekcija({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5">
-      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{title}</p>
+    <div className="bg-white rounded-2xl border border-kolo-border p-5">
+      <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wide mb-2">{title}</p>
       {children}
     </div>
   );
@@ -555,18 +555,18 @@ function PreporukaTiersEditor({ tiers, onChange }: { tiers: PreporukaTier[]; onC
   function remove(i: number) { onChange(tiers.filter((_, j) => j !== i)); }
   return (
     <div className="space-y-1">
-      <div className="grid grid-cols-3 gap-1 text-xs text-gray-400 px-1">
+      <div className="grid grid-cols-3 gap-1 text-xs text-kolo-muted px-1">
         <span>Do N-te preporuke</span><span className="text-right">POEN nagrada</span><span />
       </div>
       {tiers.map((t, i) => (
         <div key={i} className="grid grid-cols-3 gap-1 items-center">
           <N val={t.do >= 999999 ? 999999 : t.do} onChange={v => update(i, "do", v)} cls="w-full" />
           <N val={t.poen} onChange={v => update(i, "poen", v)} cls="w-full" />
-          <button onClick={() => remove(i)} className="text-red-400 hover:text-red-600 text-xs px-1">✕</button>
+          <button onClick={() => remove(i)} className="text-kolo-danger hover:text-kolo-danger text-xs px-1">✕</button>
         </div>
       ))}
-      <button onClick={add} className="text-xs text-green-700 hover:underline mt-1">+ dodaj red</button>
-      <p className="text-xs text-gray-400">Poslednji red = maksimalni rang (ostavi 999999 za "i dalje")</p>
+      <button onClick={add} className="text-xs text-kolo-green-700 hover:underline mt-1">+ dodaj red</button>
+      <p className="text-xs text-kolo-muted">Poslednji red = maksimalni rang (ostavi 999999 za "i dalje")</p>
     </div>
   );
 }
@@ -579,17 +579,17 @@ function DonationLevelsEditor({ levels, onChange }: { levels: DonationLevel[]; o
   function remove(i: number) { onChange(levels.filter((_, j) => j !== i)); }
   return (
     <div className="space-y-1">
-      <div className="grid grid-cols-3 gap-1 text-xs text-gray-400 px-1">
+      <div className="grid grid-cols-3 gap-1 text-xs text-kolo-muted px-1">
         <span>Kumulativ RSD ≥</span><span className="text-right">Kurs (×)</span><span />
       </div>
       {levels.map((l, i) => (
         <div key={i} className="grid grid-cols-3 gap-1 items-center">
           <N val={l.t} onChange={v => update(i, "t", v)} cls="w-full" />
           <N val={l.r} onChange={v => update(i, "r", v)} step={0.1} min={0.1} max={10} cls="w-full" />
-          <button onClick={() => remove(i)} className="text-red-400 hover:text-red-600 text-xs px-1">✕</button>
+          <button onClick={() => remove(i)} className="text-kolo-danger hover:text-kolo-danger text-xs px-1">✕</button>
         </div>
       ))}
-      <button onClick={add} className="text-xs text-green-700 hover:underline mt-1">+ dodaj nivo</button>
+      <button onClick={add} className="text-xs text-kolo-green-700 hover:underline mt-1">+ dodaj nivo</button>
     </div>
   );
 }
@@ -602,17 +602,17 @@ function ZadrugaBonusEditor({ pragovi, onChange }: { pragovi: ZadrugaBonusPrag[]
   function remove(i: number) { onChange(pragovi.filter((_, j) => j !== i)); }
   return (
     <div className="space-y-1">
-      <div className="grid grid-cols-3 gap-1 text-xs text-gray-400 px-1">
+      <div className="grid grid-cols-3 gap-1 text-xs text-kolo-muted px-1">
         <span>Broj članova</span><span className="text-right">POEN bonus</span><span />
       </div>
       {pragovi.map((prag, i) => (
         <div key={i} className="grid grid-cols-3 gap-1 items-center">
           <N val={prag.clanovi} onChange={v => update(i, "clanovi", v)} cls="w-full" />
           <N val={prag.poen} onChange={v => update(i, "poen", v)} cls="w-full" />
-          <button onClick={() => remove(i)} className="text-red-400 hover:text-red-600 text-xs px-1">✕</button>
+          <button onClick={() => remove(i)} className="text-kolo-danger hover:text-kolo-danger text-xs px-1">✕</button>
         </div>
       ))}
-      <button onClick={add} className="text-xs text-green-700 hover:underline mt-1">+ dodaj prag</button>
+      <button onClick={add} className="text-xs text-kolo-green-700 hover:underline mt-1">+ dodaj prag</button>
     </div>
   );
 }
@@ -625,16 +625,16 @@ function KoefDeceEditor({ koefs, onChange }: { koefs: number[]; onChange: (k: nu
   function remove(i: number) { onChange(koefs.filter((_, j) => j !== i)); }
   return (
     <div className="space-y-1">
-      <p className="text-xs text-gray-400 mb-1">Koeficijent po rednom broju deteta (1., 2., 3., ...)</p>
+      <p className="text-xs text-kolo-muted mb-1">Koeficijent po rednom broju deteta (1., 2., 3., ...)</p>
       {koefs.map((k, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="text-xs text-gray-400 w-6 text-right">{i + 1}.</span>
+          <span className="text-xs text-kolo-muted w-6 text-right">{i + 1}.</span>
           <N val={k} onChange={v => update(i, v)} step={0.1} min={0.1} max={10} cls="w-24" />
-          <button onClick={() => remove(i)} className="text-red-400 hover:text-red-600 text-xs">✕</button>
+          <button onClick={() => remove(i)} className="text-kolo-danger hover:text-kolo-danger text-xs">✕</button>
         </div>
       ))}
-      <button onClick={add} className="text-xs text-green-700 hover:underline mt-1">+ dodaj</button>
-      <p className="text-xs text-gray-400">Za decu dalje od liste, povećava se za 0.5 po detetu</p>
+      <button onClick={add} className="text-xs text-kolo-green-700 hover:underline mt-1">+ dodaj</button>
+      <p className="text-xs text-kolo-muted">Za decu dalje od liste, povećava se za 0.5 po detetu</p>
     </div>
   );
 }
@@ -654,15 +654,15 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
   return (
     <div className="max-w-2xl mx-auto space-y-5">
       <div>
-        <h2 className="text-xl font-semibold text-gray-900">Konfiguracija simulacije</h2>
-        <p className="text-sm text-gray-400 mt-1">Sve parametre uneseš jednom — za izmenu je potreban reset.</p>
+        <h2 className="text-xl font-semibold text-kolo-text">Konfiguracija simulacije</h2>
+        <p className="text-sm text-kolo-muted mt-1">Sve parametre uneseš jednom — za izmenu je potreban reset.</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 flex-wrap border-b border-gray-200 pb-px">
+      <div className="flex gap-1 flex-wrap border-b border-kolo-border pb-px">
         {TABS_CONF.map(t => (
           <button key={t} onClick={() => setTab(t)}
-            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${tab === t ? "bg-white border border-b-white border-gray-200 text-green-700 -mb-px" : "text-gray-500 hover:text-gray-700"}`}>
+            className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors ${tab === t ? "bg-white border border-b-white border-kolo-border text-kolo-green-700 -mb-px" : "text-kolo-muted hover:text-kolo-muted"}`}>
             {t}
           </button>
         ))}
@@ -674,13 +674,13 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
           <Row label="Seed" sub="Isti seed → isti rezultat"><N val={p.seed} onChange={v => upd("seed", v)} cls="w-28" /></Row>
           <Row label="Početnih članova" sub="Svi dobijaju verifPoen na startu"><N val={p.pocetnihClanova} onChange={v => upd("pocetnihClanova", v)} min={1} max={1000} cls="w-24" /></Row>
           <Row label="Dnevni rast novih članova" sub="% trenutnog broja članova">
-            <div className="flex items-center gap-1"><N val={p.dailyGrowth} onChange={v => upd("dailyGrowth", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div>
+            <div className="flex items-center gap-1"><N val={p.dailyGrowth} onChange={v => upd("dailyGrowth", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div>
           </Row>
           <Row label="Prosečna donacija po članu/dan" sub="20% članova donira, pareto raspodela">
-            <div className="flex items-center gap-1"><N val={p.donRSD} onChange={v => upd("donRSD", v)} cls="w-28" /><span className="text-sm text-gray-400">RSD</span></div>
+            <div className="flex items-center gap-1"><N val={p.donRSD} onChange={v => upd("donRSD", v)} cls="w-28" /><span className="text-sm text-kolo-muted">RSD</span></div>
           </Row>
           <Row label="Ulazak u zadruge" sub="% novih koji su prihvatljivi i ulaze">
-            <div className="flex items-center gap-1"><N val={p.zadrugaRast} onChange={v => upd("zadrugaRast", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div>
+            <div className="flex items-center gap-1"><N val={p.zadrugaRast} onChange={v => upd("zadrugaRast", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div>
           </Row>
         </Sekcija>
       )}
@@ -726,11 +726,11 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
         <div className="space-y-4">
           <Sekcija title="Zapošljavanje">
             <Row label="Aktivan"><Tog val={p.zaposljavnje} onChange={v => upd("zaposljavnje", v)} /></Row>
-            <Row label="% zadrugara koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.zaposljavnjePct} onChange={v => upd("zaposljavnjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% zadrugara koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.zaposljavnjePct} onChange={v => upd("zaposljavnjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Iznos evidencije min/max">
               <div className="flex items-center gap-2">
                 <N val={p.zaposljavnjeMin} onChange={v => upd("zaposljavnjeMin", v)} cls="w-24" />
-                <span className="text-gray-400">–</span>
+                <span className="text-kolo-muted">–</span>
                 <N val={p.zaposljavnjeMax} onChange={v => upd("zaposljavnjeMax", v)} cls="w-24" />
               </div>
             </Row>
@@ -738,7 +738,7 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 
           <Sekcija title="Podrška majkama">
             <Row label="Aktivan"><Tog val={p.majke} onChange={v => upd("majke", v)} /></Row>
-            <Row label="% prijavljenih majki/dan"><div className="flex items-center gap-1"><N val={p.majkePct} onChange={v => upd("majkePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% prijavljenih majki/dan"><div className="flex items-center gap-1"><N val={p.majkePct} onChange={v => upd("majkePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Bazni iznos po detetu/dan" sub="Smanjuje se sa starošću deteta"><N val={p.majkeBaza} onChange={v => upd("majkeBaza", v)} cls="w-28" /></Row>
             <Row label="Smanjenje po godini starosti deteta"><N val={p.majkeSmanjenjePoGodini} onChange={v => upd("majkeSmanjenjePoGodini", v)} cls="w-24" /></Row>
             <Row label="Maksimalna starost deteta (god)"><N val={p.majkeMaxStarost} onChange={v => upd("majkeMaxStarost", v)} min={1} max={30} cls="w-20" /></Row>
@@ -749,7 +749,7 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 
           <Sekcija title="Podrška starijima">
             <Row label="Aktivan"><Tog val={p.stariji} onChange={v => upd("stariji", v)} /></Row>
-            <Row label="% prijavljenih/dan"><div className="flex items-center gap-1"><N val={p.starijiPct} onChange={v => upd("starijiPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% prijavljenih/dan"><div className="flex items-center gap-1"><N val={p.starijiPct} onChange={v => upd("starijiPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Minimalna starost (god)"><N val={p.starijiMinStarost} onChange={v => upd("starijiMinStarost", v)} min={18} max={80} cls="w-20" /></Row>
             <Row label="Bazni iznos (pri min. starosti)"><N val={p.starijiBase} onChange={v => upd("starijiBase", v)} cls="w-28" /></Row>
             <Row label="Dodatak po godini iznad praga"><N val={p.starijiPoGodini} onChange={v => upd("starijiPoGodini", v)} cls="w-24" /></Row>
@@ -757,18 +757,18 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 
           <Sekcija title="Posebna briga">
             <Row label="Aktivan"><Tog val={p.posebnaBriga} onChange={v => upd("posebnaBriga", v)} /></Row>
-            <Row label="% zadrugara/dan"><div className="flex items-center gap-1"><N val={p.posebnaBrigaPct} onChange={v => upd("posebnaBrigaPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% zadrugara/dan"><div className="flex items-center gap-1"><N val={p.posebnaBrigaPct} onChange={v => upd("posebnaBrigaPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Iznos po korisniku/dan"><N val={p.posebnaBrigaIznos} onChange={v => upd("posebnaBrigaIznos", v)} cls="w-28" /></Row>
           </Sekcija>
 
           <Sekcija title="Školovanje">
             <Row label="Aktivan"><Tog val={p.skolovanje} onChange={v => upd("skolovanje", v)} /></Row>
-            <Row label="% mlađih zadrugara/dan"><div className="flex items-center gap-1"><N val={p.skolovanjePct} onChange={v => upd("skolovanjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% mlađih zadrugara/dan"><div className="flex items-center gap-1"><N val={p.skolovanjePct} onChange={v => upd("skolovanjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Maksimalna starost (god)"><N val={p.skolovanjeMaxStarost} onChange={v => upd("skolovanjeMaxStarost", v)} min={18} max={40} cls="w-20" /></Row>
             <Row label="Iznos min/max">
               <div className="flex items-center gap-2">
                 <N val={p.skolovanjeMin} onChange={v => upd("skolovanjeMin", v)} cls="w-24" />
-                <span className="text-gray-400">–</span>
+                <span className="text-kolo-muted">–</span>
                 <N val={p.skolovanjeMax} onChange={v => upd("skolovanjeMax", v)} cls="w-24" />
               </div>
             </Row>
@@ -786,18 +786,18 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
           </Sekcija>
           <Sekcija title="Kupovina">
             <Row label="Min. balans za kupovinu (POEN)"><N val={p.zrnoMinBalance} onChange={v => upd("zrnoMinBalance", v)} cls="w-28" /></Row>
-            <Row label="Maks. % balansa za kupovinu/dan"><div className="flex items-center gap-1"><N val={p.zrnoMaxBuyPct} onChange={v => upd("zrnoMaxBuyPct", v)} min={0} max={100} step={0.1} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
-            <Row label="% članova koji kupuju/dan"><div className="flex items-center gap-1"><N val={p.zrnoBuyProb} onChange={v => upd("zrnoBuyProb", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="Maks. % balansa za kupovinu/dan"><div className="flex items-center gap-1"><N val={p.zrnoMaxBuyPct} onChange={v => upd("zrnoMaxBuyPct", v)} min={0} max={100} step={0.1} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+            <Row label="% članova koji kupuju/dan"><div className="flex items-center gap-1"><N val={p.zrnoBuyProb} onChange={v => upd("zrnoBuyProb", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
           </Sekcija>
           <Sekcija title="Prodaja">
-            <Row label="% šansa da holder proda/dan"><div className="flex items-center gap-1"><N val={p.zrnoSellProb} onChange={v => upd("zrnoSellProb", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
-            <Row label="% ZRNA koje prodaje pri prodaji"><div className="flex items-center gap-1"><N val={p.zrnoSellKolicinaPct} onChange={v => upd("zrnoSellKolicinaPct", v)} min={1} max={100} cls="w-20" /><span className="text-sm text-gray-400">%</span></div></Row>
+            <Row label="% šansa da holder proda/dan"><div className="flex items-center gap-1"><N val={p.zrnoSellProb} onChange={v => upd("zrnoSellProb", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+            <Row label="% ZRNA koje prodaje pri prodaji"><div className="flex items-center gap-1"><N val={p.zrnoSellKolicinaPct} onChange={v => upd("zrnoSellKolicinaPct", v)} min={1} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
           </Sekcija>
         </div>
       )}
 
       <button onClick={() => onStart(p)}
-        className="w-full py-3 bg-green-700 text-white font-semibold rounded-xl hover:bg-green-800 transition-colors">
+        className="w-full py-3 bg-kolo-green-700 text-white font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
         Pokreni simulaciju →
       </button>
     </div>
@@ -819,15 +819,15 @@ const SIM_TABS: { id: SimView; label: string }[] = [
 
 function SimTabs({ view, setView }: { view: SimView; setView: (v: SimView) => void }) {
   return (
-    <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+    <div className="flex gap-1 bg-kolo-bg rounded-xl p-1">
       {SIM_TABS.map(t => (
         <button
           key={t.id}
           onClick={() => setView(t.id)}
           className={`flex-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
             view === t.id
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-500 hover:text-gray-800"
+              ? "bg-white text-kolo-text shadow-sm"
+              : "text-kolo-muted hover:text-kolo-text"
           }`}
         >
           {t.label}
@@ -843,13 +843,13 @@ function ViewClanovi({ members }: { members: Clan[] }) {
   return (
     <div>
       <div className="flex justify-between items-baseline mb-4">
-        <h3 className="text-base font-semibold text-gray-900">Rang lista članova</h3>
-        <span className="text-xs text-gray-400">{members.length} članova · ukupno {fmt(ukupno)} P</span>
+        <h3 className="text-base font-semibold text-kolo-text">Rang lista članova</h3>
+        <span className="text-xs text-kolo-muted">{members.length} članova · ukupno {fmt(ukupno)} P</span>
       </div>
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <table className="w-full text-xs">
           <thead>
-            <tr className="bg-gray-50 text-gray-500">
+            <tr className="bg-kolo-bg text-kolo-muted">
               <th className="px-3 py-2 text-left font-medium w-8">#</th>
               <th className="px-3 py-2 text-left font-medium">ID</th>
               <th className="px-3 py-2 text-right font-medium">Balans</th>
@@ -863,21 +863,21 @@ function ViewClanovi({ members }: { members: Clan[] }) {
           </thead>
           <tbody>
             {sorted.map((m, i) => (
-              <tr key={m.id} className={i % 2 === 0 ? "" : "bg-gray-50/50"}>
-                <td className="px-3 py-1.5 text-left text-gray-400 font-mono">{i + 1}</td>
-                <td className="px-3 py-1.5 text-left font-mono text-gray-600">#{m.id}</td>
-                <td className="px-3 py-1.5 text-right font-mono font-semibold text-green-700">{fmt(m.bal)}</td>
-                <td className="px-3 py-1.5 text-right text-gray-500">
+              <tr key={m.id} className={i % 2 === 0 ? "" : "bg-kolo-bg/50"}>
+                <td className="px-3 py-1.5 text-left text-kolo-muted font-mono">{i + 1}</td>
+                <td className="px-3 py-1.5 text-left font-mono text-kolo-muted">#{m.id}</td>
+                <td className="px-3 py-1.5 text-right font-mono font-semibold text-kolo-green-700">{fmt(m.bal)}</td>
+                <td className="px-3 py-1.5 text-right text-kolo-muted">
                   <div className="flex items-center justify-end gap-1">
                     <div className="h-1.5 bg-green-200 rounded" style={{ width: Math.max(2, (m.bal / (ukupno || 1)) * 80) }} />
                     <span>{ukupno ? ((m.bal / ukupno) * 100).toFixed(1) : "0"}%</span>
                   </div>
                 </td>
-                <td className="px-3 py-1.5 text-right font-mono text-amber-600">{fmt(m.cumDon)}</td>
+                <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{fmt(m.cumDon)}</td>
                 <td className="px-3 py-1.5 text-right">{m.refs}</td>
                 <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{m.zrno || "—"}</td>
-                <td className="px-3 py-1.5 text-right text-gray-400">{m.age}</td>
-                <td className="px-3 py-1.5 text-center">{m.uZadrugu ? <span className="text-green-600">✓</span> : <span className="text-gray-300">—</span>}</td>
+                <td className="px-3 py-1.5 text-right text-kolo-muted">{m.age}</td>
+                <td className="px-3 py-1.5 text-center">{m.uZadrugu ? <span className="text-kolo-green-700">✓</span> : <span className="text-kolo-border">—</span>}</td>
               </tr>
             ))}
           </tbody>
@@ -897,47 +897,47 @@ function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[]
     const ukupnoBal = clanoviZadruge.reduce((s, m) => s + m.bal, 0);
     return (
       <div>
-        <button onClick={() => setSelId(null)} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 mb-4">
+        <button onClick={() => setSelId(null)} className="flex items-center gap-1.5 text-sm text-kolo-muted hover:text-kolo-text mb-4">
           ← Nazad na zadruge
         </button>
         <div className="flex justify-between items-baseline mb-4">
-          <h3 className="text-base font-semibold text-gray-900">Zadruga #{sel.id}</h3>
-          <span className="text-xs text-gray-400">osnovana dan {sel.foundedDay}</span>
+          <h3 className="text-base font-semibold text-kolo-text">Zadruga #{sel.id}</h3>
+          <span className="text-xs text-kolo-muted">osnovana dan {sel.foundedDay}</span>
         </div>
         <div className="grid grid-cols-4 gap-3 mb-4">
           {[
-            { l: "Balans zadruge", v: fmt(sel.bal), c: "text-green-700" },
+            { l: "Balans zadruge", v: fmt(sel.bal), c: "text-kolo-green-700" },
             { l: "Članova", v: String(sel.clanovi) },
             { l: "Projekata", v: String(sel.projekti) },
             { l: "Bonusi plaćeni", v: String(sel.bonusiPlaceni.size) },
           ].map(x => (
-            <div key={x.l} className="bg-white rounded-xl border border-gray-200 p-3">
-              <p className="text-xs text-gray-400">{x.l}</p>
-              <p className={`text-xl font-bold font-mono ${x.c ?? "text-gray-900"}`}>{x.v}</p>
+            <div key={x.l} className="bg-white rounded-xl border border-kolo-border p-3">
+              <p className="text-xs text-kolo-muted">{x.l}</p>
+              <p className={`text-xl font-bold font-mono ${x.c ?? "text-kolo-text"}`}>{x.v}</p>
             </div>
           ))}
         </div>
         {sel.bonusiPlaceni.size > 0 && (
-          <div className="bg-green-50 rounded-xl px-4 py-3 mb-4">
-            <p className="text-xs font-semibold text-green-700 mb-1">Dostignuti pragovi</p>
+          <div className="bg-kolo-green-100 rounded-xl px-4 py-3 mb-4">
+            <p className="text-xs font-semibold text-kolo-green-700 mb-1">Dostignuti pragovi</p>
             <div className="flex flex-wrap gap-2">
               {[...sel.bonusiPlaceni].sort((a, b) => a - b).map(p => (
-                <span key={p} className="bg-white border border-green-200 text-green-700 text-xs font-mono px-2 py-0.5 rounded-lg">{p} čl.</span>
+                <span key={p} className="bg-white border border-kolo-green-100 text-kolo-green-700 text-xs font-mono px-2 py-0.5 rounded-lg">{p} čl.</span>
               ))}
             </div>
           </div>
         )}
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100">
-            <p className="text-sm font-semibold text-gray-700">Projekti ({sel.projekti})</p>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-4 py-3 border-b border-kolo-border">
+            <p className="text-sm font-semibold text-kolo-muted">Projekti ({sel.projekti})</p>
           </div>
           {sel.projekti === 0 ? (
-            <p className="px-4 py-6 text-center text-xs text-gray-400">Nema projekata (minimum 3 člana, 1 nedeljno)</p>
+            <p className="px-4 py-6 text-center text-xs text-kolo-muted">Nema projekata (minimum 3 člana, 1 nedeljno)</p>
           ) : (
             Array.from({ length: sel.projekti }).map((_, i) => (
-              <div key={i} className={`px-4 py-2.5 flex justify-between items-center text-xs ${i < sel.projekti - 1 ? "border-b border-gray-100" : ""}`}>
-                <span className="text-gray-700">Projekat #{i + 1}</span>
-                <span className="text-gray-400 font-mono">dan {sel.foundedDay + (i + 1) * 7}</span>
+              <div key={i} className={`px-4 py-2.5 flex justify-between items-center text-xs ${i < sel.projekti - 1 ? "border-b border-kolo-border" : ""}`}>
+                <span className="text-kolo-muted">Projekat #{i + 1}</span>
+                <span className="text-kolo-muted font-mono">dan {sel.foundedDay + (i + 1) * 7}</span>
               </div>
             ))
           )}
@@ -949,32 +949,32 @@ function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[]
   return (
     <div>
       <div className="flex justify-between items-baseline mb-4">
-        <h3 className="text-base font-semibold text-gray-900">Rang lista zadruga</h3>
-        <span className="text-xs text-gray-400">{zadruge.length} zadruga</span>
+        <h3 className="text-base font-semibold text-kolo-text">Rang lista zadruga</h3>
+        <span className="text-xs text-kolo-muted">{zadruge.length} zadruga</span>
       </div>
       {zadruge.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Nema zadruga</div>
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema zadruga</div>
       ) : (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {sorted.map((z, i) => (
             <button key={z.id} onClick={() => setSelId(z.id)}
-              className={`w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-gray-50 transition-colors text-left ${i < sorted.length - 1 ? "border-b border-gray-100" : ""}`}>
+              className={`w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-kolo-bg transition-colors text-left ${i < sorted.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <div className="flex items-center gap-3 min-w-0">
-                <span className="text-sm text-gray-400 font-mono w-5">{i + 1}</span>
+                <span className="text-sm text-kolo-muted font-mono w-5">{i + 1}</span>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Zadruga #{z.id}</p>
-                  <p className="text-xs text-gray-400">osnovana dan {z.foundedDay} · {z.clanovi} članova · {z.projekti} projekata</p>
+                  <p className="text-sm font-semibold text-kolo-text">Zadruga #{z.id}</p>
+                  <p className="text-xs text-kolo-muted">osnovana dan {z.foundedDay} · {z.clanovi} članova · {z.projekti} projekata</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 shrink-0">
                 <div className="text-right">
-                  <p className="text-sm font-bold font-mono text-green-700">{fmt(z.bal)}</p>
-                  <p className="text-xs text-gray-400">POEN</p>
+                  <p className="text-sm font-bold font-mono text-kolo-green-700">{fmt(z.bal)}</p>
+                  <p className="text-xs text-kolo-muted">POEN</p>
                 </div>
                 {z.bonusiPlaceni.size > 0 && (
-                  <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">{z.bonusiPlaceni.size} bonusa</span>
+                  <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded-full font-medium">{z.bonusiPlaceni.size} bonusa</span>
                 )}
-                <span className="text-gray-300 text-sm">›</span>
+                <span className="text-kolo-border text-sm">›</span>
               </div>
             </button>
           ))}
@@ -989,18 +989,18 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
   return (
     <div>
       <div className="flex justify-between items-baseline mb-4">
-        <h3 className="text-base font-semibold text-gray-900">ZRNO — Dan {last.day}</h3>
-        <span className="text-xs text-gray-400">ukupno u sistemu: {ukupnoZrna.toLocaleString("sr-RS")}</span>
+        <h3 className="text-base font-semibold text-kolo-text">ZRNO — Dan {last.day}</h3>
+        <span className="text-xs text-kolo-muted">ukupno u sistemu: {ukupnoZrna.toLocaleString("sr-RS")}</span>
       </div>
       <div className="grid grid-cols-4 gap-3 mb-5">
         {[
           { l: "Kurs (POEN/ZRNO)", v: last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(2) : "—", c: "text-kolo-gold-600" },
-          { l: "ZRNO u Banci", v: fmt(last.zrnoUBanci), c: "text-gray-700" },
+          { l: "ZRNO u Banci", v: fmt(last.zrnoUBanci), c: "text-kolo-muted" },
           { l: "ZRNO kod korisnika", v: fmt(last.zrnoKodKorisnika), c: "text-kolo-gold-600" },
-          { l: "% distribuirano", v: last.zrnoKodKorisnika > 0 ? ((last.zrnoKodKorisnika / ukupnoZrna) * 100).toFixed(1) + "%" : "0%", c: "text-gray-700" },
+          { l: "% distribuirano", v: last.zrnoKodKorisnika > 0 ? ((last.zrnoKodKorisnika / ukupnoZrna) * 100).toFixed(1) + "%" : "0%", c: "text-kolo-muted" },
         ].map(x => (
-          <div key={x.l} className="bg-white rounded-xl border border-gray-200 p-3">
-            <p className="text-xs text-gray-400">{x.l}</p>
+          <div key={x.l} className="bg-white rounded-xl border border-kolo-border p-3">
+            <p className="text-xs text-kolo-muted">{x.l}</p>
             <p className={`text-xl font-bold font-mono ${x.c}`}>{x.v}</p>
           </div>
         ))}
@@ -1013,28 +1013,28 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4">
-            <p className="text-xs text-gray-400 mb-2">Kurs kroz vreme</p>
+          <div className="bg-white rounded-2xl border border-kolo-border p-4 mb-4">
+            <p className="text-xs text-kolo-muted mb-2">Kurs kroz vreme</p>
             <MiniChart data={zrnoLog.map(d => d.zrnoKurs)} color="#8b5cf6" h={70} />
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
+            <div className="flex justify-between text-xs text-kolo-muted mt-1">
               <span>Dan {zrnoLog[0]?.day ?? "—"}</span>
               <span className="font-mono text-kolo-gold-600">{last.zrnoKurs.toFixed(2)} POEN/ZRNO</span>
               <span>Dan {last.day}</span>
             </div>
           </div>
-          <div className="bg-white rounded-2xl border border-gray-200 p-4">
-            <p className="text-xs text-gray-400 mb-3">Raspodela ZRNA</p>
+          <div className="bg-white rounded-2xl border border-kolo-border p-4">
+            <p className="text-xs text-kolo-muted mb-3">Raspodela ZRNA</p>
             <div className="space-y-2">
               {[
                 { l: "Banka", v: last.zrnoUBanci, total: ukupnoZrna, c: "bg-blue-400" },
                 { l: "Korisnici", v: last.zrnoKodKorisnika, total: ukupnoZrna, c: "bg-kolo-gold-400" },
               ].map(x => (
                 <div key={x.l}>
-                  <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <div className="flex justify-between text-xs text-kolo-muted mb-1">
                     <span>{x.l}</span>
                     <span className="font-mono">{fmt(x.v)} ({((x.v / x.total) * 100).toFixed(1)}%)</span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-kolo-bg rounded-full overflow-hidden">
                     <div className={`h-full ${x.c} rounded-full`} style={{ width: `${(x.v / x.total) * 100}%` }} />
                   </div>
                 </div>
@@ -1087,64 +1087,64 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
       {view === "zadruge" && <ViewZadruge zadruge={state.zadruge} members={state.members} />}
       {view === "zrno" && last && <ViewZrno last={last} log={log} ukupnoZrna={params.ukupnoZrna} />}
       {view === "zrno" && !last && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Pokreni simulaciju da vidiš ZRNO podatke</div>
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Pokreni simulaciju da vidiš ZRNO podatke</div>
       )}
 
       {view === "pregled" && <>
       {/* Stat kartice */}
       <div className="grid grid-cols-5 gap-3">
-        <div className="bg-white rounded-xl border border-gray-200 p-3">
-          <p className="text-xs text-gray-400">Opticaj</p>
-          <p className="text-xl font-bold font-mono text-green-700">{last ? fmt(last.opticaj) : "0"}</p>
-          {deltaOpticaj > 0 && <p className="text-xs text-gray-400">+{fmt(deltaOpticaj)} danas</p>}
+        <div className="bg-white rounded-xl border border-kolo-border p-3">
+          <p className="text-xs text-kolo-muted">Opticaj</p>
+          <p className="text-xl font-bold font-mono text-kolo-green-700">{last ? fmt(last.opticaj) : "0"}</p>
+          {deltaOpticaj > 0 && <p className="text-xs text-kolo-muted">+{fmt(deltaOpticaj)} danas</p>}
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-3">
-          <p className="text-xs text-gray-400">Članovi</p>
-          <p className="text-xl font-bold font-mono text-gray-900">{last ? last.clanovi : params.pocetnihClanova}</p>
-          {last && <p className="text-xs text-gray-400">{last.zadrugari} zadrugara</p>}
+        <div className="bg-white rounded-xl border border-kolo-border p-3">
+          <p className="text-xs text-kolo-muted">Članovi</p>
+          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.clanovi : params.pocetnihClanova}</p>
+          {last && <p className="text-xs text-kolo-muted">{last.zadrugari} zadrugara</p>}
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-3">
-          <p className="text-xs text-gray-400">Zadruge</p>
-          <p className="text-xl font-bold font-mono text-gray-900">{last ? last.zadruge : "0"}</p>
-          {state.zadruge.length > 0 && <p className="text-xs text-gray-400">{state.zadruge.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
+        <div className="bg-white rounded-xl border border-kolo-border p-3">
+          <p className="text-xs text-kolo-muted">Zadruge</p>
+          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.zadruge : "0"}</p>
+          {state.zadruge.length > 0 && <p className="text-xs text-kolo-muted">{state.zadruge.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-3">
-          <p className="text-xs text-gray-400">10% limit</p>
-          <p className="text-xl font-bold font-mono text-amber-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
-          <p className="text-xs text-gray-400">POEN/dan</p>
+        <div className="bg-white rounded-xl border border-kolo-border p-3">
+          <p className="text-xs text-kolo-muted">10% limit</p>
+          <p className="text-xl font-bold font-mono text-kolo-gold-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
+          <p className="text-xs text-kolo-muted">POEN/dan</p>
         </div>
-        <div className="bg-white rounded-xl border border-gray-200 p-3">
-          <p className="text-xs text-gray-400">ZRNO kurs</p>
+        <div className="bg-white rounded-xl border border-kolo-border p-3">
+          <p className="text-xs text-kolo-muted">ZRNO kurs</p>
           <p className="text-xl font-bold font-mono text-kolo-gold-600">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
-          <p className="text-xs text-gray-400">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
+          <p className="text-xs text-kolo-muted">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl border border-gray-200 p-4 space-y-3">
+        <div className="bg-white rounded-2xl border border-kolo-border p-4 space-y-3">
           <div>
-            <p className="text-xs text-gray-400 mb-1">Opticaj POEN</p>
+            <p className="text-xs text-kolo-muted mb-1">Opticaj POEN</p>
             <MiniChart data={log.map(d => d.opticaj)} color="#16a34a" h={55} />
           </div>
           <div>
-            <p className="text-xs text-gray-400 mb-1">Članovi <span className="text-blue-500">●</span>  Zadrugari <span className="text-green-500">●</span></p>
+            <p className="text-xs text-kolo-muted mb-1">Članovi <span className="text-blue-500">●</span>  Zadrugari <span className="text-green-500">●</span></p>
             <MiniChart data={log.map(d => d.clanovi)} color="#3b82f6" h={35} />
             <MiniChart data={log.map(d => d.zadrugari)} color="#16a34a" h={20} />
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-200 p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
           {last ? (
             <>
               <div className="flex justify-between items-center mb-3">
-                <p className="text-sm font-semibold text-gray-700">Dan {last.day} — šta se desilo</p>
+                <p className="text-sm font-semibold text-kolo-muted">Dan {last.day} — šta se desilo</p>
                 {last.koeficijent < 1 && (
-                  <span className="text-xs bg-red-50 text-red-600 font-semibold px-2 py-0.5 rounded-full">koef. {last.koeficijent.toFixed(3)}</span>
+                  <span className="text-xs bg-kolo-danger-light text-kolo-danger font-semibold px-2 py-0.5 rounded-full">koef. {last.koeficijent.toFixed(3)}</span>
                 )}
               </div>
               <div className="space-y-1.5">
                 {last.dogadjaji.map((d, i) => {
-                  const cfg = DOG_CFG[d.tip] ?? { bg: "bg-gray-50", text: "text-gray-600", ikona: "·" };
+                  const cfg = DOG_CFG[d.tip] ?? { bg: "bg-kolo-bg", text: "text-kolo-muted", ikona: "·" };
                   return (
                     <div key={i} className={`flex items-start gap-2 px-3 py-2 rounded-xl text-xs ${cfg.bg} ${cfg.text}`}>
                       <span className="opacity-50 shrink-0">{cfg.ikona}</span>
@@ -1154,35 +1154,35 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
                   );
                 })}
               </div>
-              <div className="mt-3 pt-3 border-t border-gray-100 flex flex-wrap gap-1.5">
+              <div className="mt-3 pt-3 border-t border-kolo-border flex flex-wrap gap-1.5">
                 {[
                   { l: "Verif", v: last.em_verif }, { l: "Prep.", v: last.em_ref },
                   { l: "Donacije", v: last.em_don }, { l: "Zadruge", v: last.em_zadruga },
                   { l: "Programi", v: last.em_programi },
                 ].filter(x => x.v > 0).map(x => (
-                  <div key={x.l} className="bg-gray-50 rounded-lg px-2 py-1 text-center">
-                    <p className="text-gray-400 text-xs">{x.l}</p>
-                    <p className="font-mono font-semibold text-green-700 text-xs">{fmt(x.v)}</p>
+                  <div key={x.l} className="bg-kolo-bg rounded-lg px-2 py-1 text-center">
+                    <p className="text-kolo-muted text-xs">{x.l}</p>
+                    <p className="font-mono font-semibold text-kolo-green-700 text-xs">{fmt(x.v)}</p>
                   </div>
                 ))}
               </div>
             </>
           ) : (
-            <div className="h-full flex items-center justify-center text-sm text-gray-400">Pritisni +1 dan ili ▶ Auto</div>
+            <div className="h-full flex items-center justify-center text-sm text-kolo-muted">Pritisni +1 dan ili ▶ Auto</div>
           )}
         </div>
       </div>
 
       {log.length > 0 && (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-4 py-3 border-b border-gray-100 flex justify-between">
-            <p className="text-sm font-semibold text-gray-700">Istorija</p>
-            <p className="text-xs text-gray-400">{log.length} dana</p>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-4 py-3 border-b border-kolo-border flex justify-between">
+            <p className="text-sm font-semibold text-kolo-muted">Istorija</p>
+            <p className="text-xs text-kolo-muted">{log.length} dana</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-xs">
               <thead>
-                <tr className="bg-gray-50 text-gray-500">
+                <tr className="bg-kolo-bg text-kolo-muted">
                   {["Dan", "Čl.", "Zadr.", "Opticaj", "Kum.Don.", "Prog.zatr.", "Koef.", "ZRNO kurs"].map(h => (
                     <th key={h} className="px-3 py-2 text-right font-medium first:text-left">{h}</th>
                   ))}
@@ -1190,14 +1190,14 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
               </thead>
               <tbody>
                 {[...log].reverse().slice(0, 15).map((d, i) => (
-                  <tr key={d.day} className={i % 2 === 0 ? "" : "bg-gray-50/50"}>
-                    <td className="px-3 py-1.5 text-left font-mono text-gray-500">{d.day}</td>
+                  <tr key={d.day} className={i % 2 === 0 ? "" : "bg-kolo-bg/50"}>
+                    <td className="px-3 py-1.5 text-left font-mono text-kolo-muted">{d.day}</td>
                     <td className="px-3 py-1.5 text-right">{d.clanovi}</td>
-                    <td className="px-3 py-1.5 text-right text-blue-600">{d.zadrugari}</td>
-                    <td className="px-3 py-1.5 text-right font-mono font-semibold text-green-700">{fmt(d.opticaj)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-amber-600">{fmt(d.cumDonRSD)}</td>
-                    <td className="px-3 py-1.5 text-right font-mono text-gray-600">{d.totalRequested > 0 ? fmt(d.totalRequested) : "—"}</td>
-                    <td className={`px-3 py-1.5 text-right font-mono font-semibold ${d.koeficijent < 1 ? "text-red-600" : "text-gray-300"}`}>
+                    <td className="px-3 py-1.5 text-right text-kolo-info">{d.zadrugari}</td>
+                    <td className="px-3 py-1.5 text-right font-mono font-semibold text-kolo-green-700">{fmt(d.opticaj)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{fmt(d.cumDonRSD)}</td>
+                    <td className="px-3 py-1.5 text-right font-mono text-kolo-muted">{d.totalRequested > 0 ? fmt(d.totalRequested) : "—"}</td>
+                    <td className={`px-3 py-1.5 text-right font-mono font-semibold ${d.koeficijent < 1 ? "text-kolo-danger" : "text-kolo-border"}`}>
                       {d.koeficijent < 1 ? d.koeficijent.toFixed(3) : "1.000"}
                     </td>
                     <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{d.zrnoKurs > 0 ? d.zrnoKurs.toFixed(1) : "—"}</td>
@@ -1223,26 +1223,26 @@ function Controls({ playing, speed, onAdvance, onPlay, onReset, onSpeedChange, l
   return (
     <div className="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <span className="text-3xl font-bold font-mono text-green-700">Dan {log.length}</span>
-        {last && <span className="text-sm text-gray-400 ml-3">opticaj {fmt(last.opticaj)} POEN</span>}
+        <span className="text-3xl font-bold font-mono text-kolo-green-700">Dan {log.length}</span>
+        {last && <span className="text-sm text-kolo-muted ml-3">opticaj {fmt(last.opticaj)} POEN</span>}
       </div>
       <div className="flex items-center gap-2 flex-wrap">
-        <button onClick={() => onAdvance(1)} className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors">+1 dan</button>
-        <button onClick={() => onAdvance(7)} className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors">+7 dana</button>
-        <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-xl hover:bg-green-600 transition-colors">+30 dana</button>
+        <button onClick={() => onAdvance(1)} className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">+1 dan</button>
+        <button onClick={() => onAdvance(7)} className="px-4 py-2 bg-kolo-green-500 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-700 transition-colors">+7 dana</button>
+        <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-kolo-green-1000 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">+30 dana</button>
         <button onClick={onPlay}
-          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-red-600 text-white hover:bg-red-700" : "bg-kolo-green-900 text-white hover:bg-kolo-green-700"}`}>
+          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-kolo-danger text-white hover:bg-kolo-danger" : "bg-kolo-green-900 text-white hover:bg-kolo-green-700"}`}>
           {playing ? "⏸ Pauza" : "▶ Auto"}
         </button>
         {playing && (
           <select value={speed} onChange={e => onSpeedChange(Number(e.target.value))}
-            className="px-3 py-2 border border-gray-200 rounded-xl text-sm outline-none">
+            className="px-3 py-2 border border-kolo-border rounded-xl text-sm outline-none">
             <option value={200}>Brzo</option>
             <option value={600}>Normalno</option>
             <option value={1500}>Polako</option>
           </select>
         )}
-        <button onClick={onReset} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors">↺ Reset</button>
+        <button onClick={onReset} className="px-4 py-2 bg-kolo-bg text-kolo-muted text-sm font-semibold rounded-xl hover:bg-kolo-border transition-colors">↺ Reset</button>
       </div>
     </div>
   );

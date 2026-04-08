@@ -89,7 +89,7 @@ function LoginForm() {
           </div>
 
           {error && (
-            <p className="text-sm text-kolo-danger bg-red-50 rounded-xl px-4 py-3">
+            <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">
               {error}
             </p>
           )}

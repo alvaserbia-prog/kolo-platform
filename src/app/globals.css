@@ -36,8 +36,10 @@
   --color-kolo-text:    #1A1A17;
 
   /* Funkcionalne */
-  --color-kolo-danger: #B33A3A;
-  --color-kolo-info:   #2B6CB0;
+  --color-kolo-danger:       #B33A3A;
+  --color-kolo-danger-light: #FDECEA;
+  --color-kolo-info:         #2B6CB0;
+  --color-kolo-info-light:   #EBF4FF;
 }
 
 /* ── Base ───────────────────────────────────────────────────────── */

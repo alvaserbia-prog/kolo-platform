@@ -110,10 +110,10 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
         autoComplete="off"
         aria-autocomplete="list"
         aria-expanded={showSugestije && sugestije.length > 0}
-        className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+        className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
       />
       {showSugestije && sugestije.length > 0 && (
-        <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-y-auto max-h-60">
+        <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-y-auto max-h-60">
           {sugestije.map((naziv, i) => (
             <li key={naziv}>
               <button
@@ -123,7 +123,7 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
                 className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
                   i === aktivniIndex
                     ? "bg-kolo-green-100 text-kolo-green-800"
-                    : "text-gray-700 hover:bg-kolo-green-50 hover:text-kolo-green-700"
+                    : "text-kolo-muted hover:bg-kolo-green-50 hover:text-kolo-green-700"
                 }`}
               >
                 {naziv}

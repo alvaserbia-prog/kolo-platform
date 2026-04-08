@@ -268,7 +268,7 @@ function PorukeContent() {
                     }`}
                   >
                     <p className="whitespace-pre-wrap break-words">{p.tekst}</p>
-                    <p className={`text-[10px] mt-1 ${p.moja ? "text-green-200" : "text-kolo-border"}`}>
+                    <p className={`text-[10px] mt-1 ${p.moja ? "text-white/70" : "text-kolo-border"}`}>
                       {new Date(p.createdAt).toLocaleString("sr-RS", { hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>

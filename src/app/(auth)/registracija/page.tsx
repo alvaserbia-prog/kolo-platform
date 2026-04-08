@@ -13,7 +13,7 @@ function jacina(p: string): { nivo: number; tekst: string; boja: string } {
   if (/[A-Z]/.test(p)) score++;
   if (/[0-9]/.test(p)) score++;
   if (/[^A-Za-z0-9]/.test(p)) score++;
-  if (score <= 1) return { nivo: 1, tekst: "Slaba", boja: "bg-red-500" };
+  if (score <= 1) return { nivo: 1, tekst: "Slaba", boja: "bg-kolo-danger-light0" };
   if (score <= 2) return { nivo: 2, tekst: "Srednja", boja: "bg-kolo-gold-400" };
   if (score <= 3) return { nivo: 3, tekst: "Dobra", boja: "bg-kolo-green-500" };
   return { nivo: 4, tekst: "Jaka", boja: "bg-kolo-green-700" };
@@ -209,7 +209,7 @@ export default function RegistracijaPage() {
             </label>
           </div>
 
-          {error && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>}
+          {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{error}</p>}
 
           <button type="submit" disabled={!canSubmit}
             className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50"

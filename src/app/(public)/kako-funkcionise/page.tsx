@@ -207,7 +207,7 @@ export default function KakoFunkcionisePage() {
       {/* CTA */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 text-center text-white">
         <h2 className="text-2xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>Spreman/a da se pridružiš?</h2>
-        <p className="text-green-200 text-sm mb-6">Registracija je besplatna. Verifikacijom dobijate 1.000 POEN bonus.</p>
+        <p className="text-white/70 text-sm mb-6">Registracija je besplatna. Verifikacijom dobijate 1.000 POEN bonus.</p>
         <div className="flex items-center justify-center gap-3">
           <Link href="/registracija"
             className="px-7 py-3 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm">

@@ -192,8 +192,8 @@ export default function PreporukeKlijent() {
                   <span
                     className={`text-xs font-semibold px-2 py-0.5 rounded-lg ${
                       p.verified
-                        ? "bg-green-50 text-green-700"
-                        : "bg-amber-50 text-amber-700"
+                        ? "bg-kolo-green-100 text-kolo-green-700"
+                        : "bg-kolo-gold-100 text-kolo-gold-600"
                     }`}
                   >
                     {p.verified ? "Verifikovan" : "Registrovan"}

@@ -107,60 +107,60 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/zajednica" className="text-gray-400 hover:text-gray-600 text-sm transition-colors">← Zadruge</Link>
+        <Link href="/zajednica" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Zadruge</Link>
       </div>
 
       {/* Header */}
-      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
         <div className="flex justify-between items-start gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{zadruga.name}</h1>
-            {zadruga.location && <p className="text-sm text-gray-400 mt-0.5">{zadruga.location}</p>}
-            {zadruga.description && <p className="text-sm text-gray-600 mt-2">{zadruga.description}</p>}
+            <h1 className="text-2xl font-bold text-kolo-text">{zadruga.name}</h1>
+            {zadruga.location && <p className="text-sm text-kolo-muted mt-0.5">{zadruga.location}</p>}
+            {zadruga.description && <p className="text-sm text-kolo-muted mt-2">{zadruga.description}</p>}
           </div>
-          <div className="shrink-0 bg-green-50 rounded-2xl px-4 py-3 text-center">
-            <p className="text-xl font-bold text-green-700">{zadruga.balance.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-green-600">POEN</p>
+          <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
+            <p className="text-xl font-bold text-kolo-green-700">{zadruga.balance.toLocaleString("sr-RS")}</p>
+            <p className="text-xs text-kolo-green-700">POEN</p>
           </div>
         </div>
 
         {/* Akcije */}
-        <div className="mt-4 pt-4 border-t border-gray-100 flex gap-2 flex-wrap">
+        <div className="mt-4 pt-4 border-t border-kolo-border flex gap-2 flex-wrap">
           {!mojeClansvo && !imaPristupnicu && isVerified && (
             <button onClick={podnesiPristupnicu} disabled={loading}
-              className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors disabled:opacity-60">
+              className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
               {loading ? "..." : "Podnesi pristupnicu"}
             </button>
           )}
           {imaPristupnicu && (
-            <span className="px-4 py-2 bg-amber-50 text-amber-700 text-sm font-medium rounded-xl border border-amber-200">
+            <span className="px-4 py-2 bg-kolo-gold-100 text-kolo-gold-600 text-sm font-medium rounded-xl border border-kolo-gold-100">
               Pristupnica na čekanju
             </span>
           )}
           {mojeClansvo && (
             <>
-              <span className="px-4 py-2 bg-green-50 text-green-700 text-sm font-medium rounded-xl border border-green-200">
+              <span className="px-4 py-2 bg-kolo-green-100 text-kolo-green-700 text-sm font-medium rounded-xl border border-kolo-green-100">
                 {mojeClansvo.isAdmin ? "Admin zadruge" : "Član zadruge"}
               </span>
               <button onClick={istupi} disabled={loading}
-                className="px-4 py-2 border border-red-200 text-red-600 text-sm font-semibold rounded-xl hover:bg-red-50 transition-colors disabled:opacity-60">
+                className="px-4 py-2 border border-kolo-danger/20 text-kolo-danger text-sm font-semibold rounded-xl hover:bg-kolo-danger-light transition-colors disabled:opacity-60">
                 Istupi
               </button>
             </>
           )}
         </div>
         {poruka && (
-          <p className={`mt-3 text-sm px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+          <p className={`mt-3 text-sm px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
             {poruka.text}
           </p>
         )}
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-0 border-b border-gray-200">
+      <div className="flex gap-0 border-b border-kolo-border">
         {tabs.map(([key, label]) => (
           <button key={key} onClick={() => setTab(key)}
-            className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${tab === key ? "border-green-700 text-green-700" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
+            className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${tab === key ? "border-kolo-green-700 text-kolo-green-700" : "border-transparent text-kolo-muted hover:text-kolo-muted"}`}>
             {label}
           </button>
         ))}
@@ -168,33 +168,33 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
 
       {/* Informacije */}
       {tab === "info" && (
-        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3 text-sm">
+        <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-400">Broj članova</span>
-            <span className="font-medium text-gray-900">{zadruga.clanovi.length}</span>
+            <span className="text-kolo-muted">Broj članova</span>
+            <span className="font-medium text-kolo-text">{zadruga.clanovi.length}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Stanje novčanika</span>
-            <span className="font-bold text-green-700">{zadruga.balance.toLocaleString("sr-RS")} POEN</span>
+            <span className="text-kolo-muted">Stanje novčanika</span>
+            <span className="font-bold text-kolo-green-700">{zadruga.balance.toLocaleString("sr-RS")} POEN</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Aktivnih projekata</span>
-            <span className="font-medium text-gray-900">{zadruga.projects.length}</span>
+            <span className="text-kolo-muted">Aktivnih projekata</span>
+            <span className="font-medium text-kolo-text">{zadruga.projects.length}</span>
           </div>
         </div>
       )}
 
       {/* Članovi */}
       {tab === "clanovi" && (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {zadruga.clanovi.map((c, i) => (
-            <div key={c.userId} className={`px-5 py-3 flex justify-between items-center ${i < zadruga.clanovi.length - 1 ? "border-b border-gray-100" : ""}`}>
+            <div key={c.userId} className={`px-5 py-3 flex justify-between items-center ${i < zadruga.clanovi.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <Link href={`/profil/${c.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline">
                 {c.pseudonim}
               </Link>
               <div className="flex items-center gap-2">
-                {c.isAdmin && <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded font-medium">Admin</span>}
-                <span className="text-xs text-gray-400">{new Date(c.joinedAt).toLocaleDateString("sr-RS")}</span>
+                {c.isAdmin && <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded font-medium">Admin</span>}
+                <span className="text-xs text-kolo-muted">{new Date(c.joinedAt).toLocaleDateString("sr-RS")}</span>
               </div>
             </div>
           ))}
@@ -206,18 +206,18 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
         <div className="space-y-3">
           {canManage && <NoviProjekatForma zadrugaId={zadruga.id} onSuccess={() => router.refresh()} />}
           {zadruga.projects.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
               Nema aktivnih projekata.
             </div>
           ) : (
             zadruga.projects.map((p) => (
-              <div key={p.id} className="bg-white rounded-2xl border border-gray-200 p-4">
+              <div key={p.id} className="bg-white rounded-2xl border border-kolo-border p-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">{p.title}</p>
-                    {p.description && <p className="text-xs text-gray-500 mt-1">{p.description}</p>}
+                    <p className="font-semibold text-kolo-text text-sm">{p.title}</p>
+                    {p.description && <p className="text-xs text-kolo-muted mt-1">{p.description}</p>}
                   </div>
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded ${p.type === "PRIKUPLJANJE" ? "bg-blue-50 text-blue-700" : "bg-purple-50 text-purple-700"}`}>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded ${p.type === "PRIKUPLJANJE" ? "bg-kolo-info-light text-kolo-info" : "bg-purple-50 text-purple-700"}`}>
                     {p.type === "PRIKUPLJANJE" ? "Prikupljanje" : "Redistribucija"}
                   </span>
                 </div>
@@ -231,10 +231,10 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
       {tab === "pristupnice" && canManage && (
         <div className="space-y-3">
           {zadruga.pristupnice.map((p) => (
-            <div key={p.id} className="bg-white rounded-2xl border border-gray-200 px-5 py-4 flex justify-between items-center">
-              <span className="text-sm font-medium text-gray-900">{p.pseudonim}</span>
+            <div key={p.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex justify-between items-center">
+              <span className="text-sm font-medium text-kolo-text">{p.pseudonim}</span>
               <button onClick={() => odibriPristupnicu(p.id)}
-                className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors">
+                className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
                 Odobri
               </button>
             </div>
@@ -293,7 +293,7 @@ function ProgramiAdminTab({ zadrugaId, clanovi, onDone }: { zadrugaId: string; c
 
   if (svePending.length === 0) {
     return (
-      <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
         Nema zahteva koji čekaju odobrenje.
       </div>
     );
@@ -323,41 +323,41 @@ function ProgramiAdminTab({ zadrugaId, clanovi, onDone }: { zadrugaId: string; c
 
       {/* Evidencija zahtevi */}
       {svePending.filter((x) => x.tip === "evidencija").length > 0 && (
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-5 py-3 border-b border-gray-100">
-            <p className="text-sm font-semibold text-gray-700">Zapošljavanje — evidencije na čekanju</p>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-5 py-3 border-b border-kolo-border">
+            <p className="text-sm font-semibold text-kolo-muted">Zapošljavanje — evidencije na čekanju</p>
           </div>
           {svePending.filter((x) => x.tip === "evidencija").map((item, i, arr) => {
             if (item.tip !== "evidencija") return null;
             const poruka = poruke[item.id];
             return (
-              <div key={item.id} className={`px-5 py-4 ${i < arr.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <div key={item.id} className={`px-5 py-4 ${i < arr.length - 1 ? "border-b border-kolo-border" : ""}`}>
                 <div className="flex justify-between items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{item.pseudonim}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{new Date(item.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
-                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">{item.description}</p>
+                    <p className="text-sm font-medium text-kolo-text">{item.pseudonim}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{new Date(item.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
+                    <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{item.description}</p>
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="text-sm font-bold text-gray-900">{item.amount.toLocaleString("sr-RS")} P</p>
+                    <p className="text-sm font-bold text-kolo-text">{item.amount.toLocaleString("sr-RS")} P</p>
                     <div className="flex gap-2 mt-2">
                       <button
                         onClick={() => odobriEvidenciju(zadrugaId, item.id, true)}
                         disabled={loading === item.id}
-                        className="px-3 py-1.5 border border-red-200 text-red-600 text-xs font-semibold rounded-lg hover:bg-red-50 disabled:opacity-60">
+                        className="px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60">
                         Odbij
                       </button>
                       <button
                         onClick={() => odobriEvidenciju(zadrugaId, item.id)}
                         disabled={loading === item.id}
-                        className="px-3 py-1.5 bg-green-700 text-white text-xs font-semibold rounded-lg hover:bg-green-800 disabled:opacity-60">
+                        className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 disabled:opacity-60">
                         Odobri
                       </button>
                     </div>
                   </div>
                 </div>
                 {poruka && (
-                  <p className={`mt-2 text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+                  <p className={`mt-2 text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
                     {poruka.text}
                   </p>
                 )}
@@ -388,19 +388,19 @@ function EnrollmentKartica({ id, pseudonim, type, metadata, createdAt, loading, 
   const trebaIznos = type === "ZAPOSLJAVNJE" || type === "SKOLOVANJE";
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
       <div className="flex justify-between items-start">
         <div>
-          <p className="text-sm font-semibold text-gray-900">{pseudonim}</p>
-          <p className="text-xs text-gray-400 mt-0.5">{labelPrograma[type] ?? type} · {new Date(createdAt).toLocaleDateString("sr-RS")}</p>
+          <p className="text-sm font-semibold text-kolo-text">{pseudonim}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{labelPrograma[type] ?? type} · {new Date(createdAt).toLocaleDateString("sr-RS")}</p>
         </div>
-        <span className="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200">Na čekanju</span>
+        <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 px-2 py-0.5 rounded border border-kolo-gold-100">Na čekanju</span>
       </div>
 
       {metadata && Object.keys(metadata).length > 0 && (
-        <div className="bg-gray-50 rounded-xl px-3 py-2 text-xs text-gray-600 space-y-1">
+        <div className="bg-kolo-bg rounded-xl px-3 py-2 text-xs text-kolo-muted space-y-1">
           {Object.entries(metadata).map(([k, v]) => (
-            <div key={k}><span className="text-gray-400">{k}:</span> {String(v)}</div>
+            <div key={k}><span className="text-kolo-muted">{k}:</span> {String(v)}</div>
           ))}
         </div>
       )}
@@ -411,18 +411,18 @@ function EnrollmentKartica({ id, pseudonim, type, metadata, createdAt, loading, 
           placeholder="Dnevni iznos POEN (opciono)"
           value={dailyAmount}
           onChange={(e) => setDailyAmount(e.target.value)}
-          className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600"
+          className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
         />
       )}
 
       {!showOdbij && (
         <div className="flex gap-2">
           <button onClick={() => setShowOdbij(true)} disabled={loading}
-            className="flex-1 py-2 rounded-xl border border-red-200 text-red-600 text-sm font-medium hover:bg-red-50 disabled:opacity-60">
+            className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-medium hover:bg-kolo-danger-light disabled:opacity-60">
             Odbij
           </button>
           <button onClick={() => onOdobri(dailyAmount ? Number(dailyAmount) : undefined)} disabled={loading}
-            className="flex-1 py-2 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 disabled:opacity-60">
+            className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
             {loading ? "..." : "Odobri"}
           </button>
         </div>
@@ -431,11 +431,11 @@ function EnrollmentKartica({ id, pseudonim, type, metadata, createdAt, loading, 
       {showOdbij && (
         <div className="space-y-2">
           <textarea rows={2} placeholder="Razlog odbijanja *" value={razlog} onChange={(e) => setRazlog(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm outline-none focus:border-red-400 resize-none" />
+            className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400 resize-none" />
           <div className="flex gap-2">
-            <button onClick={() => setShowOdbij(false)} className="flex-1 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm font-medium">Odustani</button>
+            <button onClick={() => setShowOdbij(false)} className="flex-1 py-2 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Odustani</button>
             <button onClick={() => onOdbij(razlog)} disabled={!razlog.trim() || loading}
-              className="flex-1 py-2 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 disabled:opacity-60">
+              className="flex-1 py-2 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:bg-kolo-danger disabled:opacity-60">
               {loading ? "..." : "Potvrdi odbijanje"}
             </button>
           </div>
@@ -443,7 +443,7 @@ function EnrollmentKartica({ id, pseudonim, type, metadata, createdAt, loading, 
       )}
 
       {poruka && (
-        <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+        <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
           {poruka.text}
         </p>
       )}
@@ -480,33 +480,33 @@ function NoviProjekatForma({ zadrugaId, onSuccess }: { zadrugaId: string; onSucc
   if (!show) {
     return (
       <button onClick={() => setShow(true)}
-        className="w-full py-2.5 rounded-xl border-2 border-dashed border-gray-300 text-sm text-gray-400 hover:border-green-400 hover:text-green-600 transition-colors">
+        className="w-full py-2.5 rounded-xl border-2 border-dashed border-kolo-border text-sm text-kolo-muted hover:border-green-400 hover:text-kolo-green-700 transition-colors">
         + Novi projekat
       </button>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-gray-200 p-4 space-y-3">
-      <p className="text-sm font-semibold text-gray-700">Novi projekat</p>
+    <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-kolo-border p-4 space-y-3">
+      <p className="text-sm font-semibold text-kolo-muted">Novi projekat</p>
       <input type="text" placeholder="Naziv *" value={title} onChange={(e) => setTitle(e.target.value)}
-        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600" />
+        className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       <textarea rows={2} placeholder="Opis" value={description} onChange={(e) => setDescription(e.target.value)}
-        className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none" />
+        className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       <div className="flex gap-2">
         {(["PRIKUPLJANJE", "REDISTRIBUCIJA"] as const).map((t) => (
           <button key={t} type="button" onClick={() => setType(t)}
-            className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${type === t ? "bg-green-700 text-white" : "bg-white border border-gray-200 text-gray-600"}`}>
+            className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${type === t ? "bg-kolo-green-700 text-white" : "bg-white border border-kolo-border text-kolo-muted"}`}>
             {t === "PRIKUPLJANJE" ? "Prikupljanje" : "Redistribucija"}
           </button>
         ))}
       </div>
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
         <button type="button" onClick={() => setShow(false)}
-          className="flex-1 py-2.5 rounded-xl bg-gray-100 text-gray-600 text-sm font-medium">Otkaži</button>
+          className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Otkaži</button>
         <button type="submit" disabled={loading}
-          className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold disabled:opacity-60">
+          className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold disabled:opacity-60">
           {loading ? "..." : "Kreiraj"}
         </button>
       </div>

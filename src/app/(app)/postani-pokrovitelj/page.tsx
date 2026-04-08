@@ -104,7 +104,7 @@ export default async function PostaniPokroviteljPage() {
                   <div className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
                     p.status === "ACTIVE"
                       ? "bg-kolo-green-100 text-kolo-green-700"
-                      : "bg-red-100 text-red-600"
+                      : "bg-red-100 text-kolo-danger"
                   }`}>
                     {p.status === "ACTIVE" ? "Aktivan" : "Suspendovan"}
                   </div>

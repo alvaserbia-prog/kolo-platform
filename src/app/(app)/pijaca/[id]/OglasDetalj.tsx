@@ -91,16 +91,16 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/pijaca" className="text-gray-400 hover:text-gray-600 transition-colors text-sm">
+        <Link href="/pijaca" className="text-kolo-muted hover:text-kolo-muted transition-colors text-sm">
           ← Pijaca
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {/* Slike */}
         {imaSlika ? (
           <div className="space-y-2">
-            <div className="relative w-full aspect-[4/3] bg-gray-50">
+            <div className="relative w-full aspect-[4/3] bg-kolo-bg">
               <Image
                 src={`/api/pijaca/slika/${oglas.id}/${activeSlika}`}
                 alt={oglas.title}
@@ -132,7 +132,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
             )}
           </div>
         ) : (
-          <div className="w-full aspect-[4/3] bg-gray-50 flex items-center justify-center text-7xl">
+          <div className="w-full aspect-[4/3] bg-kolo-bg flex items-center justify-center text-7xl">
             {kategorijaEmoji(oglas.category)}
           </div>
         )}
@@ -141,29 +141,29 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
         <div className="p-6 space-y-4">
           <div className="flex justify-between items-start gap-4">
             <div>
-              <span className="text-xs text-gray-400 font-medium uppercase tracking-wide">{oglas.category}</span>
-              <h1 className="text-xl font-bold text-gray-900 mt-0.5">{oglas.title}</h1>
+              <span className="text-xs text-kolo-muted font-medium uppercase tracking-wide">{oglas.category}</span>
+              <h1 className="text-xl font-bold text-kolo-text mt-0.5">{oglas.title}</h1>
             </div>
             <div className="shrink-0 text-right">
-              <p className="text-2xl font-bold text-green-700">{oglas.price.toLocaleString("sr-RS")}</p>
-              <p className="text-sm text-green-600">POEN</p>
+              <p className="text-2xl font-bold text-kolo-green-700">{oglas.price.toLocaleString("sr-RS")}</p>
+              <p className="text-sm text-kolo-green-700">POEN</p>
             </div>
           </div>
 
           {oglas.description && (
-            <p className="text-sm text-gray-600 leading-relaxed">{oglas.description}</p>
+            <p className="text-sm text-kolo-muted leading-relaxed">{oglas.description}</p>
           )}
 
-          <div className="flex flex-wrap gap-4 text-xs text-gray-400 pt-1 border-t border-gray-100">
-            <span>Prodavac: <strong className="text-gray-600">{isVerified ? oglas.sellerPseudonim : "Član KOLO zajednice"}</strong></span>
-            {oglas.location && <span>Lokacija: <strong className="text-gray-600">{oglas.location}</strong></span>}
+          <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
+            <span>Prodavac: <strong className="text-kolo-muted">{isVerified ? oglas.sellerPseudonim : "Član KOLO zajednice"}</strong></span>
+            {oglas.location && <span>Lokacija: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>Objavljeno: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
           </div>
 
           {oglas.phone && isVerified && (
-            <div className="flex items-center gap-2 bg-gray-50 rounded-xl px-4 py-3">
-              <span className="text-xs text-gray-400">Kontakt telefon:</span>
-              <a href={`tel:${oglas.phone}`} className="text-sm font-semibold text-green-700 hover:underline">
+            <div className="flex items-center gap-2 bg-kolo-bg rounded-xl px-4 py-3">
+              <span className="text-xs text-kolo-muted">Kontakt telefon:</span>
+              <a href={`tel:${oglas.phone}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
                 {oglas.phone}
               </a>
             </div>
@@ -171,12 +171,12 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
 
           {/* Status badge */}
           {oglas.status === "SOLD" && (
-            <div className="bg-gray-100 rounded-xl px-4 py-3 text-center text-sm font-semibold text-gray-500">
+            <div className="bg-kolo-bg rounded-xl px-4 py-3 text-center text-sm font-semibold text-kolo-muted">
               Oglas je prodat
             </div>
           )}
           {oglas.status === "EXPIRED" && (
-            <div className="bg-gray-100 rounded-xl px-4 py-3 text-center text-sm font-semibold text-gray-500">
+            <div className="bg-kolo-bg rounded-xl px-4 py-3 text-center text-sm font-semibold text-kolo-muted">
               Oglas je deaktiviran
             </div>
           )}
@@ -185,16 +185,16 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
           {dostupan && !oglas.isMine && (
             <div className="space-y-2">
               {!isVerified ? (
-                <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-700">
+                <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 text-sm text-kolo-gold-600">
                   <Link href="/verifikacija" className="font-semibold hover:underline">Verifikujte nalog</Link> da biste mogli da kupujete.
                 </div>
               ) : walletBalance < oglas.price ? (
-                <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-600">
+                <div className="bg-kolo-danger-light border border-kolo-danger/20 rounded-xl px-4 py-3 text-sm text-kolo-danger">
                   Nedovoljno POEN-a. Imate {walletBalance.toLocaleString("sr-RS")} POEN, potrebno {oglas.price.toLocaleString("sr-RS")}.
                 </div>
               ) : null}
               {poruka && (
-                <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>
+                <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
                   {poruka.text}
                 </p>
               )}
@@ -202,7 +202,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
                 <button
                   onClick={handleKupi}
                   disabled={loading || walletBalance < oglas.price || !!poruka?.ok}
-                  className="w-full py-3.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50"
+                  className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                 >
                   {loading ? "Obrađujem..." : `Plati ${oglas.price.toLocaleString("sr-RS")} POEN`}
                 </button>
@@ -210,7 +210,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
               <button
                 onClick={handleKontakt}
                 disabled={chatLoading}
-                className="w-full py-3 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+                className="w-full py-3 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors disabled:opacity-50"
               >
                 {chatLoading ? "..." : "Kontaktiraj prodavca"}
               </button>
@@ -219,23 +219,23 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
 
           {/* Prodavac — upravljanje */}
           {dostupan && oglas.isMine && (
-            <div className="pt-2 border-t border-gray-100 flex gap-2">
+            <div className="pt-2 border-t border-kolo-border flex gap-2">
               <button
                 onClick={() => setEditMode(true)}
-                className="flex-1 py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors"
+                className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors"
               >
                 Izmeni
               </button>
               <Link
                 href="/profil/oglasi"
-                className="flex-1 py-2.5 rounded-xl bg-gray-100 text-gray-700 text-sm font-semibold text-center hover:bg-gray-200 transition-colors"
+                className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold text-center hover:bg-kolo-border transition-colors"
               >
                 Moji oglasi
               </Link>
               <button
                 onClick={handleDeaktiviraj}
                 disabled={deaktiviranjeLoading}
-                className="flex-1 py-2.5 rounded-xl border border-red-200 text-red-600 text-sm font-semibold hover:bg-red-50 transition-colors disabled:opacity-60"
+                className="flex-1 py-2.5 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors disabled:opacity-60"
               >
                 {deaktiviranjeLoading ? "..." : "Ukloni"}
               </button>
@@ -326,55 +326,55 @@ function IzmeniOglas({
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 transition-colors text-sm">
+        <button onClick={onCancel} className="text-kolo-muted hover:text-kolo-muted transition-colors text-sm">
           ← Nazad
         </button>
-        <h1 className="text-2xl font-semibold text-gray-900">Izmeni oglas</h1>
+        <h1 className="text-2xl font-semibold text-kolo-text">Izmeni oglas</h1>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-5 bg-white rounded-2xl border border-gray-200 p-6">
+      <form onSubmit={handleSubmit} noValidate className="space-y-5 bg-white rounded-2xl border border-kolo-border p-6">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Naslov</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Naslov</label>
           <input type="text" maxLength={80} value={title} onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors" />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Opis</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Opis</label>
           <textarea rows={3} maxLength={500} value={description} onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors" />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Cena (POEN)</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Cena (POEN)</label>
           <input type="number" min={1} step={1} value={price} onChange={(e) => setPrice(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-mono outline-none focus:border-green-600 transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors" />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Lokacija <span className="text-gray-400 font-normal">(opciono)</span></label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Lokacija <span className="text-kolo-muted font-normal">(opciono)</span></label>
           <input type="text" maxLength={60} value={location} onChange={(e) => setLocation(e.target.value)}
             placeholder="npr. Novi Sad"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors" />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Kontakt telefon <span className="text-gray-400 font-normal">(opciono)</span></label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Kontakt telefon <span className="text-kolo-muted font-normal">(opciono)</span></label>
           <input type="tel" maxLength={20} value={phone} onChange={(e) => setPhone(e.target.value)}
             placeholder="npr. 064 123 4567"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors" />
         </div>
 
         {/* Slike */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Slike <span className="text-gray-400 font-normal">({ukupnoSlika}/5)</span>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            Slike <span className="text-kolo-muted font-normal">({ukupnoSlika}/5)</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {/* Postojeće slike */}
             {oglas.images.map((_, idx) => (
               keepIndices.includes(idx) && (
-                <div key={`e-${idx}`} className="relative w-20 h-20 rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
+                <div key={`e-${idx}`} className="relative w-20 h-20 rounded-xl border border-kolo-border overflow-hidden bg-kolo-bg">
                   <Image
                     src={`/api/pijaca/slika/${oglas.id}/${idx}`}
                     alt=""
@@ -394,7 +394,7 @@ function IzmeniOglas({
             ))}
             {/* Nove slike */}
             {noveSlike.map((f, i) => (
-              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-green-300 overflow-hidden bg-gray-50">
+              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-green-300 overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={URL.createObjectURL(f)} alt="" className="w-full h-full object-cover" />
                 <button
@@ -411,25 +411,25 @@ function IzmeniOglas({
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-400 hover:border-gray-400 transition-colors text-xl"
+                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl"
               >
                 +
               </button>
             )}
           </div>
           <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleNoveSlike} />
-          <p className="mt-1.5 text-xs text-gray-400">Klik na × uklanja sliku. Zelena bordura = nova slika (još nije sačuvana).</p>
+          <p className="mt-1.5 text-xs text-kolo-muted">Klik na × uklanja sliku. Zelena bordura = nova slika (još nije sačuvana).</p>
         </div>
 
-        {error && <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3">{error}</p>}
+        {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">{error}</p>}
 
         <div className="flex gap-3">
           <button type="button" onClick={onCancel}
-            className="flex-1 py-3 rounded-xl bg-gray-100 text-gray-700 text-sm font-semibold hover:bg-gray-200 transition-colors">
+            className="flex-1 py-3 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors">
             Otkaži
           </button>
           <button type="submit" disabled={loading}
-            className="flex-1 py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50">
+            className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50">
             {loading ? "Čuvam..." : "Sačuvaj izmene"}
           </button>
         </div>

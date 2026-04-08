@@ -69,42 +69,42 @@ export default function NoviOglasForma() {
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <button onClick={() => router.back()} className="text-gray-400 hover:text-gray-600 transition-colors">
+        <button onClick={() => router.back()} className="text-kolo-muted hover:text-kolo-muted transition-colors">
           ← Nazad
         </button>
-        <h1 className="text-2xl font-semibold text-gray-900">Novi oglas</h1>
+        <h1 className="text-2xl font-semibold text-kolo-text">Novi oglas</h1>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {/* Naslov */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Naslov *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Naslov *</label>
           <input
             type="text"
             maxLength={80}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="npr. Domaći med — lipa"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
 
         {/* Opis */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Opis</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Opis</label>
           <textarea
             rows={3}
             maxLength={500}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Opišite šta nudite..."
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors"
           />
         </div>
 
         {/* Cena */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Cena (POEN) *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Cena (POEN) *</label>
           <input
             type="number"
             min={1}
@@ -112,13 +112,13 @@ export default function NoviOglasForma() {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="500"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm font-mono outline-none focus:border-green-600 transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
 
         {/* Kategorija */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Kategorija *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Kategorija *</label>
           <div className="flex flex-wrap gap-2">
             {KATEGORIJE.map((kat) => (
               <button
@@ -127,8 +127,8 @@ export default function NoviOglasForma() {
                 onClick={() => setCategory(kat)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                   category === kat
-                    ? "bg-green-700 text-white"
-                    : "bg-white border border-gray-200 text-gray-600 hover:border-gray-400"
+                    ? "bg-kolo-green-700 text-white"
+                    : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-muted"
                 }`}
               >
                 {kat}
@@ -139,38 +139,38 @@ export default function NoviOglasForma() {
 
         {/* Lokacija */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Lokacija <span className="text-gray-400 font-normal">(opciono)</span></label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Lokacija <span className="text-kolo-muted font-normal">(opciono)</span></label>
           <input
             type="text"
             maxLength={60}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="npr. Novi Sad"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
 
         {/* Kontakt telefon */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Kontakt telefon <span className="text-gray-400 font-normal">(opciono)</span></label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">Kontakt telefon <span className="text-kolo-muted font-normal">(opciono)</span></label>
           <input
             type="tel"
             maxLength={20}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="npr. 064 123 4567"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
 
         {/* Slike */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Slike <span className="text-gray-400 font-normal">(do {MAX_IMAGES}, opciono)</span>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            Slike <span className="text-kolo-muted font-normal">(do {MAX_IMAGES}, opciono)</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {slike.map((f, i) => (
-              <div key={i} className="relative w-20 h-20 rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
+              <div key={i} className="relative w-20 h-20 rounded-xl border border-kolo-border overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={URL.createObjectURL(f)}
@@ -190,7 +190,7 @@ export default function NoviOglasForma() {
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 hover:border-gray-400 transition-colors text-xl"
+                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex flex-col items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl"
               >
                 +
               </button>
@@ -207,13 +207,13 @@ export default function NoviOglasForma() {
         </div>
 
         {error && (
-          <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3">{error}</p>
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">{error}</p>
         )}
 
         <button
           type="submit"
           disabled={!canSubmit || loading}
-          className="w-full py-3.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50"
+          className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
           {loading ? "Objavljivanje..." : "Objavi oglas"}
         </button>

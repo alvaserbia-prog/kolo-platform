@@ -40,7 +40,7 @@ export function izracunajPoenZaDonaciju(
 ): { noviKumulativ: number; nivo: number; kurs: number; poen: number } {
   const noviKumulativ = dosadaRSD + novaRSD;
   const { nivo, kurs } = nivoZaKumulativ(noviKumulativ);
-  const poen = Math.floor(novaRSD * kurs);
+  const poen = Math.round(novaRSD * kurs);
   return { noviKumulativ, nivo, kurs, poen };
 }
 

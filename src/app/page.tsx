@@ -50,7 +50,7 @@ export default async function Home() {
                 Ekonomija koju gradiš{" "}
                 <span className="text-kolo-gold-400">sa svojom zajednicom</span>
               </h1>
-              <p className="text-green-200 leading-relaxed mb-7">
+              <p className="text-white/70 leading-relaxed mb-7">
                 KOLO je sistem u kome tvoj doprinos ima vrednost. POEN beleži šta si dao zajednici.
                 ZRNO ti daje glas u odlukama koje je oblikuju.
               </p>
@@ -354,14 +354,14 @@ export default async function Home() {
           <h2 className="text-2xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
             Prva grupa članova se trenutno formira
           </h2>
-          <p className="text-green-200 text-sm mb-6">
+          <p className="text-white/70 text-sm mb-6">
             Postani deo zajednice koja gradi alternativni sistem razmene — transparentno, jednostavno i zajedno.
           </p>
           <Link href="/registracija"
             className="inline-block px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm">
             Registruj se besplatno →
           </Link>
-          <p className="mt-4 text-xs text-green-300">
+          <p className="mt-4 text-xs text-white/70">
             Članstvo je besplatno. Verifikacijom dobijaš 1.000 POEN bonusa.
           </p>
         </section>
