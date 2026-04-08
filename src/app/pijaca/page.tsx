@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
 import Link from "next/link";
 
-export default async function PublicPijacaPage() {
+export default async function PijacaPage() {
   const session = await getServerSession(authOptions);
 
   const listings = await prisma.marketplaceListing.findMany({
