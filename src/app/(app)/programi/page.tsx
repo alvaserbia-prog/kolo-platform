@@ -1,0 +1,82 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { izracunajDnevniIznos, labelPrograma } from "@/lib/banka/programi";
+import { ProgramType } from "@/generated/prisma/client";
+import ProgramiKlijent from "./ProgramiKlijent";
+
+const SVI_TIPOVI: ProgramType[] = [
+  "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+];
+
+export default async function ProgramiPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/login");
+
+  const danas = new Date();
+  danas.setHours(0, 0, 0, 0);
+
+  const [aktivniProgrami, enrollments, evidencijaToday, poslednjeEmisije] = await Promise.all([
+    prisma.bankaProgram.findMany({ where: { isActive: true } }),
+    prisma.programEnrollment.findMany({ where: { userId: session.user.id } }),
+    prisma.zaposljvanjeEvidencija.findFirst({
+      where: { userId: session.user.id, date: danas },
+    }),
+    prisma.zaposljvanjeEvidencija.findMany({
+      where: { userId: session.user.id },
+      orderBy: { date: "desc" },
+      take: 14,
+    }),
+  ]);
+
+  const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
+
+  const programi = SVI_TIPOVI.map((type) => {
+    const enrollment = enrollments.find((e) => e.type === type);
+    let ocekivaniDnevni = 0;
+    if (enrollment?.status === "ACTIVE") {
+      ocekivaniDnevni = izracunajDnevniIznos(type, enrollment.metadata, enrollment.dailyAmount, danas);
+    }
+    return {
+      type,
+      label: labelPrograma(type),
+      programAktivan: aktivniTipovi.has(type),
+      enrollment: enrollment
+        ? {
+            id: enrollment.id,
+            status: enrollment.status,
+            metadata: enrollment.metadata as Record<string, unknown> | null,
+            dailyAmount: enrollment.dailyAmount,
+            approvedAt: enrollment.approvedAt?.toISOString() ?? null,
+            rejectionReason: enrollment.rejectionReason,
+            ocekivaniDnevni,
+          }
+        : null,
+    };
+  });
+
+  return (
+    <ProgramiKlijent
+      programi={programi}
+      isVerified={session.user.verified}
+      isZadrugar={session.user.role === "ZADRUGAR" || session.user.role === "ADMIN"}
+      evidencijaToday={evidencijaToday
+        ? {
+            id: evidencijaToday.id,
+            date: evidencijaToday.date.toISOString(),
+            description: evidencijaToday.description,
+            amount: evidencijaToday.amount,
+            status: evidencijaToday.status,
+          }
+        : null}
+      poslednjeEvidencije={poslednjeEmisije.map((e) => ({
+        id: e.id,
+        date: e.date.toISOString(),
+        description: e.description,
+        amount: e.amount,
+        status: e.status,
+      }))}
+    />
+  );
+}

@@ -1,0 +1,40 @@
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/banka/zrno";
+
+// GET /api/zrno — stanje ZRNA korisnika
+export async function GET() {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+
+  const danas = new Date();
+  danas.setHours(0, 0, 0, 0);
+
+  const [stanje, kupovinaZahtev, prodajaZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
+    prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
+    prisma.zrnoKupovinaZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
+    prisma.zrnoProdajaZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
+    prisma.zrnoStatusZahtev.findMany({ where: { userId: session.user.id, status: "PENDING" } }),
+    prisma.zrnoDelegacija.findUnique({ where: { delegatorId: session.user.id } }),
+    poslednjiKurs(),
+    prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
+  ]);
+
+  const slobodno = stanje?.slobodno ?? 0;
+  const aktivno = stanje?.aktivno ?? 0;
+
+  return NextResponse.json({
+    slobodno,
+    aktivno,
+    ukupno: slobodno + aktivno,
+    glasackaMoc: glasackaMoc(aktivno),
+    kurs,
+    trzisjeAktivno: trziste?.isActive ?? false,
+    kupovinaZahtev: kupovinaZahtev ? { id: kupovinaZahtev.id, poenIznos: kupovinaZahtev.poenIznos, status: kupovinaZahtev.status } : null,
+    prodajaZahtev: prodajaZahtev ? { id: prodajaZahtev.id, kolicina: prodajaZahtev.kolicina, status: prodajaZahtev.status } : null,
+    statusZahtevi: statusZahtevi.map((z) => ({ id: z.id, kolicina: z.kolicina, akcija: z.akcija })),
+    delegacija: delegacija ? { delegatId: delegacija.delegatId, aktivna: delegacija.aktivna } : null,
+  });
+}

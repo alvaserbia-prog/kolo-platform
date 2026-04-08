@@ -5,10 +5,15 @@ import { usePathname } from "next/navigation";
 
 const links = [
   { href: "/dashboard", label: "Početna" },
+  { href: "/novcanik", label: "Novčanik" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/zajednica", label: "Zajednica" },
+  { href: "/programi", label: "Programi" },
+  { href: "/zrno", label: "ZRNO" },
+  { href: "/glasanje", label: "Glasanje" },
   { href: "/profil", label: "Profil" },
   { href: "/admin", label: "Admin" },
+  { href: "/admin/simulator", label: "Simulator" },
 ];
 
 export default function Sidebar() {

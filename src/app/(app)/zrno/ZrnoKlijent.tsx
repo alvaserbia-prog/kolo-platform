@@ -1,0 +1,346 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+interface Props {
+  slobodno: number;
+  aktivno: number;
+  glasackaMoc: number;
+  poenBalans: number;
+  kurs: number;
+  trzisjeAktivno: boolean;
+  isVerified: boolean;
+  kupovinaZahtev: { poenIznos: number; status: string } | null;
+  prodajaZahtev: { kolicina: number; status: string } | null;
+  statusZahtevi: { kolicina: number; akcija: string }[];
+  delegacija: { delegatPseudonim: string; aktivna: boolean } | null;
+  poslednjiKursovi: { date: string; kurs: number }[];
+}
+
+type Tab = "pregled" | "trziste" | "glasanje" | "delegacija";
+
+export default function ZrnoKlijent(props: Props) {
+  const [tab, setTab] = useState<Tab>("pregled");
+  const router = useRouter();
+
+  const tabs: [Tab, string][] = [
+    ["pregled", "Pregled"],
+    ["trziste", "Tržište"],
+    ["glasanje", "Delegacija"],
+  ];
+
+  return (
+    <div className="max-w-2xl space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-gray-900">ZRNO</h1>
+        {props.glasackaMoc > 0 && (
+          <div className="bg-purple-50 border border-purple-200 rounded-xl px-4 py-2 text-center">
+            <p className="text-sm font-bold text-purple-700">{props.glasackaMoc}</p>
+            <p className="text-xs text-purple-600">glasova</p>
+          </div>
+        )}
+      </div>
+
+      {/* Stanje */}
+      <div className="grid grid-cols-3 gap-3">
+        <div className="bg-white rounded-2xl border border-gray-200 p-4">
+          <p className="text-xs text-gray-400 mb-1">Slobodno</p>
+          <p className="text-xl font-bold text-gray-900">{props.slobodno.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-gray-400 mt-0.5">može se prodati</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-200 p-4">
+          <p className="text-xs text-gray-400 mb-1">Aktivno</p>
+          <p className="text-xl font-bold text-purple-700">{props.aktivno.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-gray-400 mt-0.5">glasačka moć</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-gray-200 p-4">
+          <p className="text-xs text-gray-400 mb-1">Kurs</p>
+          <p className="text-xl font-bold text-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <p className="text-xs text-gray-400 mt-0.5">POEN/ZRNO</p>
+        </div>
+      </div>
+
+      {/* Glasačka moć formula */}
+      {props.aktivno > 0 && (
+        <div className="bg-purple-50 border border-purple-200 rounded-2xl px-5 py-3 text-sm text-purple-700">
+          Glasačka moć: floor(√{props.aktivno}) = <strong>{props.glasackaMoc} glasova</strong>
+        </div>
+      )}
+
+      {!props.trzisjeAktivno && (
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 text-sm text-amber-700">
+          ZRNO tržište još nije aktivno. Aktivira se kada Banka dostigne −1.000.000 POEN.
+        </div>
+      )}
+
+      {/* Tabs */}
+      <div className="flex gap-0 border-b border-gray-200">
+        {tabs.map(([key, label]) => (
+          <button key={key} onClick={() => setTab(key)}
+            className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${tab === key ? "border-purple-600 text-purple-700" : "border-transparent text-gray-500 hover:text-gray-700"}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {tab === "pregled" && <PregledTab {...props} onRefresh={() => router.refresh()} />}
+      {tab === "trziste" && <TrzisteTab {...props} onRefresh={() => router.refresh()} />}
+      {tab === "glasanje" && <DelegacijaTab {...props} onRefresh={() => router.refresh()} />}
+    </div>
+  );
+}
+
+// ── Pregled ───────────────────────────────────────────────────────────────────
+
+function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, poslednjiKursovi, onRefresh }: Props & { onRefresh: () => void }) {
+  const [prikazKurs, setPrikazKurs] = useState(false);
+  const [kolicina, setKolicina] = useState("");
+  const [akcija, setAkcija] = useState<"ZAKLJUCAJ" | "OTKLJUCAJ">("ZAKLJUCAJ");
+  const [loading, setLoading] = useState(false);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  const maxZakljucaj = slobodno;
+  const maxOtkljucaj = aktivno;
+
+  async function promeniStatus() {
+    const kol = Number(kolicina);
+    if (!kol || kol <= 0) { setPoruka({ text: "Unesite pozitivan ceo broj.", ok: false }); return; }
+    setLoading(true); setPoruka(null);
+    const url = akcija === "ZAKLJUCAJ" ? "/api/zrno/zakljucaj" : "/api/zrno/otkljucaj";
+    const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
+    const data = await res.json();
+    setLoading(false);
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok });
+    if (res.ok) { setKolicina(""); setTimeout(onRefresh, 1200); }
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Pending status zahtevi */}
+      {statusZahtevi.length > 0 && (
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-5 py-3 text-sm text-amber-700 space-y-1">
+          <p className="font-semibold">Na čekanju (biće obrađeno u ponoć):</p>
+          {statusZahtevi.map((z, i) => (
+            <p key={i}>· {z.kolicina.toLocaleString("sr-RS")} ZRNA — {z.akcija === "ZAKLJUCAJ" ? "zaključavanje" : "otključavanje"}</p>
+          ))}
+        </div>
+      )}
+
+      {/* Promena statusa */}
+      {(slobodno > 0 || aktivno > 0) && (
+        <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+          <p className="text-sm font-semibold text-gray-700">Promena statusa ZRNA</p>
+          <p className="text-xs text-gray-400">Zahtev se izvršava u ponoć (period čekanja 1 dan).</p>
+          <div className="flex gap-2">
+            {(["ZAKLJUCAJ", "OTKLJUCAJ"] as const).map((a) => (
+              <button key={a} type="button" onClick={() => setAkcija(a)}
+                className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${akcija === a ? "bg-purple-600 text-white" : "bg-white border border-gray-200 text-gray-600"}`}>
+                {a === "ZAKLJUCAJ" ? `Zaključaj (max ${maxZakljucaj})` : `Otključaj (max ${maxOtkljucaj})`}
+              </button>
+            ))}
+          </div>
+          <input type="number" min={1} max={akcija === "ZAKLJUCAJ" ? maxZakljucaj : maxOtkljucaj}
+            value={kolicina} onChange={(e) => setKolicina(e.target.value)}
+            placeholder="Količina ZRNA"
+            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+          {poruka && (
+            <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>
+          )}
+          <button onClick={promeniStatus} disabled={loading}
+            className="w-full py-2.5 rounded-xl bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 disabled:opacity-60 transition-colors">
+            {loading ? "..." : "Pošalji zahtev"}
+          </button>
+        </div>
+      )}
+
+      {/* Istorija kursa */}
+      {poslednjiKursovi.length > 0 && (
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="px-5 py-3 border-b border-gray-100 flex justify-between items-center cursor-pointer" onClick={() => setPrikazKurs((v) => !v)}>
+            <h3 className="text-sm font-semibold text-gray-700">Istorija kursa</h3>
+            <span className="text-xs text-gray-400">{prikazKurs ? "Sakrij" : "Prikaži"}</span>
+          </div>
+          {prikazKurs && poslednjiKursovi.map((r, i) => (
+            <div key={r.date} className={`px-5 py-2.5 flex justify-between text-sm ${i < poslednjiKursovi.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <span className="text-gray-500">{new Date(r.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
+              <span className="font-semibold text-green-700">{r.kurs.toFixed(2)} POEN/ZRNO</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Tržište ───────────────────────────────────────────────────────────────────
+
+function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, kupovinaZahtev, prodajaZahtev, onRefresh }: Props & { onRefresh: () => void }) {
+  const [poenZaKupovinu, setPoenZaKupovinu] = useState("");
+  const [kolicinaProdaja, setKolicinaProdaja] = useState("");
+  const [loading, setLoading] = useState<"kupi" | "prodaj" | null>(null);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean; for: string } | null>(null);
+
+  const maxPoen = Math.floor(poenBalans * 0.01);
+  const procijenjenoZrna = poenZaKupovinu ? Math.floor(Number(poenZaKupovinu) / kurs) : 0;
+  const procijenjenoPoen = kolicinaProdaja ? Math.floor(Number(kolicinaProdaja) * kurs) : 0;
+
+  async function kupi() {
+    const iznos = Number(poenZaKupovinu);
+    if (!iznos || iznos <= 0) return;
+    setLoading("kupi"); setPoruka(null);
+    const res = await fetch("/api/zrno/kupi", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ poenIznos: iznos }) });
+    const data = await res.json();
+    setLoading(null);
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "kupi" });
+    if (res.ok) { setPoenZaKupovinu(""); setTimeout(onRefresh, 1200); }
+  }
+
+  async function prodaj() {
+    const kol = Number(kolicinaProdaja);
+    if (!kol || kol <= 0) return;
+    setLoading("prodaj"); setPoruka(null);
+    const res = await fetch("/api/zrno/prodaj", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
+    const data = await res.json();
+    setLoading(null);
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "prodaj" });
+    if (res.ok) { setKolicinaProdaja(""); setTimeout(onRefresh, 1200); }
+  }
+
+  if (!trzisjeAktivno) {
+    return (
+      <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">
+        ZRNO tržište nije aktivno.
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      {/* Kupovina */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+        <div className="flex justify-between items-start">
+          <p className="text-sm font-semibold text-gray-700">Kupovina ZRNA</p>
+          <span className="text-xs text-gray-400">max {maxPoen.toLocaleString("sr-RS")} POEN/dan</span>
+        </div>
+        {kupovinaZahtev && (
+          <div className="bg-amber-50 text-amber-700 text-xs px-3 py-2 rounded-lg">
+            Aktivan zahtev: {kupovinaZahtev.poenIznos.toLocaleString("sr-RS")} POEN — {kupovinaZahtev.status}
+          </div>
+        )}
+        {!kupovinaZahtev && (
+          <>
+            <input type="number" min={1} max={maxPoen} value={poenZaKupovinu} onChange={(e) => setPoenZaKupovinu(e.target.value)}
+              placeholder={`POEN za trošak (min 1, max ${maxPoen.toLocaleString("sr-RS")})`}
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+            {procijenjenoZrna > 0 && (
+              <p className="text-xs text-gray-500">≈ {procijenjenoZrna.toLocaleString("sr-RS")} ZRNA po kursu {kurs.toFixed(2)}</p>
+            )}
+            {poruka?.for === "kupi" && (
+              <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>
+            )}
+            <button onClick={kupi} disabled={loading !== null || !poenZaKupovinu}
+              className="w-full py-2.5 rounded-xl bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 disabled:opacity-60 transition-colors">
+              {loading === "kupi" ? "..." : "Rezerviši kupovinu"}
+            </button>
+          </>
+        )}
+        <p className="text-xs text-gray-400">Zahtev se izvršava u ponoć. Min balans: 10.000 POEN.</p>
+      </div>
+
+      {/* Prodaja */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+        <p className="text-sm font-semibold text-gray-700">Prodaja ZRNA Banci</p>
+        {prodajaZahtev && (
+          <div className="bg-amber-50 text-amber-700 text-xs px-3 py-2 rounded-lg">
+            Aktivan zahtev: {prodajaZahtev.kolicina.toLocaleString("sr-RS")} ZRNA — {prodajaZahtev.status}
+          </div>
+        )}
+        {!prodajaZahtev && (
+          <>
+            <input type="number" min={1} max={slobodno} value={kolicinaProdaja} onChange={(e) => setKolicinaProdaja(e.target.value)}
+              placeholder={`Slobodnih ZRNA za prodaju (max ${slobodno.toLocaleString("sr-RS")})`}
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+            {procijenjenoPoen > 0 && (
+              <p className="text-xs text-gray-500">≈ {procijenjenoPoen.toLocaleString("sr-RS")} POEN po kursu {kurs.toFixed(2)}</p>
+            )}
+            {poruka?.for === "prodaj" && (
+              <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>
+            )}
+            <button onClick={prodaj} disabled={loading !== null || !kolicinaProdaja || slobodno <= 0}
+              className="w-full py-2.5 rounded-xl bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 disabled:opacity-60 transition-colors">
+              {loading === "prodaj" ? "..." : "Rezerviši prodaju"}
+            </button>
+          </>
+        )}
+        <p className="text-xs text-gray-400">Samo slobodna ZRNA. Zahtev se izvršava u ponoć.</p>
+      </div>
+    </div>
+  );
+}
+
+// ── Delegacija ────────────────────────────────────────────────────────────────
+
+function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { onRefresh: () => void }) {
+  const [pseudonim, setPseudonim] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  async function delegiraj() {
+    if (!pseudonim.trim()) return;
+    setLoading(true); setPoruka(null);
+    const res = await fetch("/api/zrno/delegiraj", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pseudonim: pseudonim.trim() }) });
+    const data = await res.json();
+    setLoading(false);
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok });
+    if (res.ok) { setPseudonim(""); setTimeout(onRefresh, 1200); }
+  }
+
+  async function opozovi() {
+    if (!confirm("Opozovi delegaciju?")) return;
+    setLoading(true);
+    await fetch("/api/zrno/delegiraj", { method: "DELETE" });
+    setLoading(false);
+    setTimeout(onRefresh, 500);
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-white rounded-2xl border border-gray-200 p-5 space-y-3">
+        <p className="text-sm font-semibold text-gray-700">Delegacija glasova</p>
+        <p className="text-xs text-gray-400">
+          Delegiraju se glasovi (ne ZRNA). Vaša glasačka moć ({moja} glasova) se prenosi delegatu.
+          Promena stupa na snagu u ponoć.
+        </p>
+
+        {delegacija && (
+          <div className="bg-purple-50 border border-purple-200 rounded-xl px-4 py-3 text-sm flex justify-between items-center">
+            <div>
+              <p className="font-medium text-purple-800">Delegat: {delegacija.delegatPseudonim}</p>
+              <p className="text-xs text-purple-600 mt-0.5">{delegacija.aktivna ? "Aktivna" : "Na čekanju (ponoć)"}</p>
+            </div>
+            <button onClick={opozovi} disabled={loading}
+              className="px-3 py-1.5 text-xs text-red-600 border border-red-200 rounded-xl hover:bg-red-50 transition-colors">
+              Opozovi
+            </button>
+          </div>
+        )}
+
+        {!delegacija && (
+          <>
+            <input type="text" value={pseudonim} onChange={(e) => setPseudonim(e.target.value)}
+              placeholder="Pseudonim delegata"
+              className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm outline-none focus:border-purple-500" />
+            {poruka && (
+              <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`}>{poruka.text}</p>
+            )}
+            <button onClick={delegiraj} disabled={loading || !pseudonim.trim()}
+              className="w-full py-2.5 rounded-xl bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 disabled:opacity-60 transition-colors">
+              {loading ? "..." : "Delegiraj glasove"}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

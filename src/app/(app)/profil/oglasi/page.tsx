@@ -1,0 +1,34 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import MojiOglasiKlijent from "./MojiOglasiKlijent";
+
+export default async function MojiOglasiPage() {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/login");
+
+  const listings = await prisma.marketplaceListing.findMany({
+    where: { sellerId: session.user.id },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true, title: true, price: true, category: true,
+      status: true, images: true, createdAt: true, soldAt: true,
+    },
+  });
+
+  return (
+    <MojiOglasiKlijent
+      listings={listings.map((l) => ({
+        id: l.id,
+        title: l.title,
+        price: l.price,
+        category: l.category,
+        status: l.status,
+        slike: l.images.length,
+        createdAt: l.createdAt.toISOString(),
+        soldAt: l.soldAt?.toISOString() ?? null,
+      }))}
+    />
+  );
+}
