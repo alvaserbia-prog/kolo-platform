@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen, preporukaNagrada } from "@/lib/banka/emisija";
 import { TransactionType } from "@/generated/prisma/client";
 import { logAdminAkcija } from "@/lib/audit";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 // POST /api/admin/verifikacija/[id] — odobri (id je VerificationRequest.id)
 export async function POST(
@@ -74,5 +75,12 @@ export async function POST(
   }
 
   await logAdminAkcija(session.user.id, "VERIFIKACIJA_ODOBRENA", vr.userId, vr.user.pseudonim);
+  await posaljiNotifikaciju(
+    vr.userId,
+    "verifikacija_odobrena",
+    "Verifikacija odobrena!",
+    "Vaš identitet je verifikovan. Dobili ste 1.000 POEN bonus.",
+    "/novcanik"
+  );
   return NextResponse.json({ ok: true });
 }

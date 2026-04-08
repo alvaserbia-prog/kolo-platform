@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { QRCodeSVG } from "qrcode.react";
 
 const TIP_LABELA: Record<string, string> = {
   TRANSFER: "Transfer",
@@ -41,12 +42,14 @@ interface Props {
   balance: number;
   pseudonim: string;
   transakcije: Transakcija[];
+  platiPseudonim?: string;
 }
 
-export default function NovcanikKlijent({ balance, pseudonim, transakcije }: Props) {
+export default function NovcanikKlijent({ balance, pseudonim, transakcije, platiPseudonim }: Props) {
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>("sve");
-  const [showSend, setShowSend] = useState(false);
+  const [showSend, setShowSend] = useState(!!platiPseudonim);
+  const [showQR, setShowQR] = useState(false);
 
   const filtered = transakcije.filter((t) => {
     if (filter === "primljeno") return t.primio && t.type === "TRANSFER";
@@ -69,6 +72,12 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije }: Pro
           >
             Pošalji POEN
           </button>
+          <button
+            onClick={() => setShowQR(true)}
+            className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+          >
+            Moj QR
+          </button>
         </div>
       </div>
 
@@ -77,7 +86,13 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije }: Pro
         <SendForma
           onClose={() => setShowSend(false)}
           onSuccess={() => { setShowSend(false); router.refresh(); }}
+          initialPseudonim={platiPseudonim}
         />
+      )}
+
+      {/* QR modal */}
+      {showQR && (
+        <QRModal pseudonim={pseudonim} onClose={() => setShowQR(false)} />
       )}
 
       {/* Istorija transakcija */}
@@ -150,8 +165,8 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije }: Pro
 
 // ── Forma za slanje ────────────────────────────────────────────────────────────
 
-function SendForma({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
-  const [pseudonim, setPseudonim] = useState("");
+function SendForma({ onClose, onSuccess, initialPseudonim }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string }) {
+  const [pseudonim, setPseudonim] = useState(initialPseudonim ?? "");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -287,6 +302,55 @@ function SendForma({ onClose, onSuccess }: { onClose: () => void; onSuccess: () 
           </button>
         </div>
       </form>
+    </div>
+  );
+}
+
+// ── QR modal ──────────────────────────────────────────────────────────────────
+
+function QRModal({ pseudonim, onClose }: { pseudonim: string; onClose: () => void }) {
+  const qrValue = typeof window !== "undefined"
+    ? `${window.location.origin}/novcanik?plati=${encodeURIComponent(pseudonim)}`
+    : `/novcanik?plati=${encodeURIComponent(pseudonim)}`;
+
+  function kopiraj() {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(qrValue).catch(() => {});
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-xs p-6 space-y-4 text-center">
+        <h3 className="text-base font-semibold text-kolo-text">Moj QR za prijem</h3>
+        <p className="text-sm text-kolo-muted">
+          Pokažite ovaj kod da biste primili POEN. Skenirajte telefonom.
+        </p>
+        <div className="flex justify-center p-4 bg-white rounded-xl border border-kolo-border">
+          <QRCodeSVG
+            value={qrValue}
+            size={180}
+            fgColor="#1B6B3A"
+            bgColor="#FFFFFF"
+            level="M"
+          />
+        </div>
+        <p className="text-sm font-semibold text-kolo-green-700 font-mono">{pseudonim}</p>
+        <div className="flex gap-2">
+          <button
+            onClick={kopiraj}
+            className="flex-1 py-2.5 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors"
+          >
+            Kopiraj link
+          </button>
+          <button
+            onClick={onClose}
+            className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors"
+          >
+            Zatvori
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

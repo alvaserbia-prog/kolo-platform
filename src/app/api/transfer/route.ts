@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -66,6 +67,14 @@ export async function POST(req: NextRequest) {
       },
     });
   });
+
+  await posaljiNotifikaciju(
+    primalac.id,
+    "transfer_primljen",
+    `Primili ste ${iznos.toLocaleString("sr-RS")} POEN`,
+    `${posiljac.pseudonim} vam je poslao/la ${iznos.toLocaleString("sr-RS")} POEN.${description ? ` Poruka: "${description}"` : ""}`,
+    "/novcanik"
+  );
 
   return NextResponse.json({ ok: true });
 }

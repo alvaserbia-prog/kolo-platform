@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const links = [
+interface SidebarProps {
+  verified: boolean;
+  isAdmin: boolean;
+}
+
+const linkoviVerifikovan = [
   { href: "/dashboard", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
   { href: "/pijaca", label: "Pijaca" },
@@ -12,23 +17,37 @@ const links = [
   { href: "/zrno", label: "ZRNO" },
   { href: "/glasanje", label: "Glasanje" },
   { href: "/profil", label: "Profil" },
+];
+
+const linkoviNeverifikovan = [
+  { href: "/dashboard", label: "Početna" },
+  { href: "/novcanik", label: "Novčanik" },
+  { href: "/pijaca", label: "Pijaca" },
+  { href: "/verifikacija", label: "Verifikacija" },
+  { href: "/profil", label: "Profil" },
+];
+
+const linkoviAdmin = [
   { href: "/admin", label: "Admin" },
   { href: "/admin/simulator", label: "Simulator" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ verified, isAdmin }: SidebarProps) {
   const pathname = usePathname();
+  const links = [
+    ...(verified ? linkoviVerifikovan : linkoviNeverifikovan),
+    ...(isAdmin ? linkoviAdmin : []),
+  ];
 
   return (
     <aside className="w-56 shrink-0 bg-kolo-bg border-r border-kolo-border flex flex-col">
-      {/* Logo — samo ikona, bez KOLO teksta (tekst je već u logo fajlu) */}
       <div className="flex items-center justify-center px-4 py-4 border-b border-kolo-border">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/kolo-logo.png" alt="KOLO" style={{ width: 140, height: "auto" }} />
       </div>
       <nav className="flex-1 px-2.5 py-4 space-y-0.5">
         {links.map(({ href, label }) => {
-          const active = pathname === href || pathname.startsWith(href + "/");
+          const active = pathname === href || (href !== "/dashboard" && pathname.startsWith(href + "/"));
           return (
             <Link
               key={href}
@@ -44,6 +63,14 @@ export default function Sidebar() {
           );
         })}
       </nav>
+      {!verified && (
+        <div className="px-3 pb-4">
+          <Link href="/verifikacija"
+            className="block w-full text-center px-3 py-2 bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 hover:text-white transition-colors">
+            Verifikuj nalog →
+          </Link>
+        </div>
+      )}
     </aside>
   );
 }

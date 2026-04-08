@@ -984,6 +984,7 @@ function ZadrugeLista({ pendingZadruge, zadrugeLista, onDone }: {
 function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => void }) {
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [rucnaKorisnik, setRucnaKorisnik] = useState<KorisnikInfo | null>(null);
 
   const filtered = users.filter((u) =>
     u.pseudonim.toLowerCase().includes(filter.toLowerCase())
@@ -1042,7 +1043,13 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                   </p>
                 </div>
                 {u.role !== "ADMIN" && (
-                  <div className="flex gap-1.5 shrink-0">
+                  <div className="flex gap-1.5 shrink-0 flex-wrap justify-end">
+                    {!u.verified && u.status === "ACTIVE" && (
+                      <button onClick={() => setRucnaKorisnik(u)} disabled={loadingId === u.id}
+                        className="px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold rounded-lg hover:bg-kolo-green-500 hover:text-white disabled:opacity-60 transition-colors">
+                        Verifikuj ručno
+                      </button>
+                    )}
                     {u.status === "ACTIVE" && (
                       <button onClick={() => akcija(u.id, "suspenduj")} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-lg hover:bg-amber-100 disabled:opacity-60 transition-colors">
@@ -1067,6 +1074,100 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
             </div>
           ))
         )}
+      </div>
+
+      {rucnaKorisnik && (
+        <RucnaVerifikacijaForma
+          korisnik={rucnaKorisnik}
+          onClose={() => setRucnaKorisnik(null)}
+          onDone={() => { setRucnaKorisnik(null); onDone(); }}
+        />
+      )}
+    </div>
+  );
+}
+
+function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
+  korisnik: KorisnikInfo;
+  onClose: () => void;
+  onDone: () => void;
+}) {
+  const [jmbg, setJmbg] = useState("");
+  const [potvrda, setPotvrda] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [greska, setGreska] = useState("");
+
+  async function potvrdi() {
+    setGreska("");
+    if (jmbg.length !== 13 || !/^\d{13}$/.test(jmbg)) {
+      setGreska("JMBG mora imati tačno 13 cifara.");
+      return;
+    }
+    if (!potvrda) {
+      setGreska("Morate potvrditi da ste videli dokument lično.");
+      return;
+    }
+    setLoading(true);
+    const res = await fetch(`/api/admin/korisnici/${korisnik.id}/rucna-verifikacija`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jmbg }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      onDone();
+    } else {
+      setGreska(data.error ?? "Greška pri verifikaciji.");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-gray-900">Ručna verifikacija</h3>
+          <p className="text-sm text-gray-500 mt-0.5">Korisnik: <span className="font-medium text-gray-700">{korisnik.pseudonim}</span></p>
+        </div>
+
+        <div className="box-warning px-4 py-3 text-sm text-kolo-gold-600">
+          Ovu akciju koristite samo ako ste <strong>lično videli</strong> dokument korisnika i potvrdili identitet.
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">JMBG</label>
+          <input
+            type="text"
+            value={jmbg}
+            onChange={(e) => setJmbg(e.target.value.replace(/\D/g, "").slice(0, 13))}
+            placeholder="0000000000000"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 font-mono text-sm outline-none focus:border-kolo-green-700 transition-colors"
+          />
+          <p className="mt-1 text-xs text-gray-400">{jmbg.length}/13 cifara</p>
+        </div>
+
+        <label className="flex items-start gap-2.5 cursor-pointer">
+          <input type="checkbox" checked={potvrda} onChange={(e) => setPotvrda(e.target.checked)}
+            className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
+          <span className="text-xs text-gray-600">
+            Potvrđujem da sam lično video/la dokument sa ovim JMBG i identifikovao/la korisnika
+          </span>
+        </label>
+
+        {greska && (
+          <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{greska}</p>
+        )}
+
+        <div className="flex gap-2 pt-1">
+          <button onClick={onClose} disabled={loading}
+            className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors disabled:opacity-60">
+            Otkaži
+          </button>
+          <button onClick={potvrdi} disabled={loading || jmbg.length !== 13 || !potvrda}
+            className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50">
+            {loading ? "Verifikujem..." : "Verifikuj"}
+          </button>
+        </div>
       </div>
     </div>
   );

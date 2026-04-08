@@ -4,9 +4,14 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import NovcanikKlijent from "./NovcanikKlijent";
 
-export default async function NovcanikPage() {
+export default async function NovcanikPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ plati?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
+  const { plati } = await searchParams;
 
   const wallet = await prisma.wallet.findUnique({
     where: { userId: session.user.id },
@@ -57,6 +62,7 @@ export default async function NovcanikPage() {
       balance={wallet?.balance ?? 0}
       pseudonim={session.user.pseudonim}
       transakcije={txData}
+      platiPseudonim={plati}
     />
   );
 }

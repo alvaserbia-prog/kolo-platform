@@ -24,11 +24,12 @@ export async function GET(
   if (!vr) return new NextResponse("Nije pronađeno", { status: 404 });
 
   const filePath = side === "front" ? vr.idFrontPath : vr.idBackPath;
+  if (!filePath) return new NextResponse("Dokument nije uploadovan (ručna verifikacija)", { status: 404 });
 
   try {
     const absPath = path.join(process.cwd(), filePath);
     const fileBuffer = await readFile(absPath);
-    const ext = path.extname(filePath).toLowerCase();
+    const ext = path.extname(filePath as string).toLowerCase();
     const contentType =
       ext === ".png" ? "image/png" :
       ext === ".webp" ? "image/webp" :

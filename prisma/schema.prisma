@@ -151,6 +151,7 @@ model User {
   kreiraniPredlozi      GlasanjePredlog[]
   glasovi               GlasanjeGlas[]
   auditLogs             AuditLog[]       @relation("AdminActions")
+  notifikacije          Notifikacija[]
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
@@ -197,8 +198,9 @@ model VerificationRequest {
   userId           String             @unique
   user             User               @relation(fields: [userId], references: [id])
   jmbg             String
-  idFrontPath      String
-  idBackPath       String
+  idFrontPath      String?
+  idBackPath       String?
+  kanal            String?            // "UPLOAD" | "LICNO"
   status           VerificationStatus @default(PENDING)
   rejectionReason  String?
   reviewedAt       DateTime?
@@ -490,4 +492,19 @@ model DonationRecord {
   level         Int
   poenEmitted   Int
   createdAt     DateTime @default(now())
+}
+
+model Notifikacija {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  tip       String   // "transfer_primljen" | "verifikacija_odobrena" | "verifikacija_odbijena" | "preporuka_nagradjeni" | "oglas_kupljen" | "info"
+  naslov    String
+  tekst     String
+  procitana Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, procitana])
+  @@index([userId, createdAt(sort: Desc)])
 }
