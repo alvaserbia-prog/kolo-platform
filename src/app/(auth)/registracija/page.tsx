@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function RegistracijaPage() {
@@ -70,7 +69,8 @@ export default function RegistracijaPage() {
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
         <div className="mb-8 flex flex-col items-center">
-          <Image src="/kolo-logo.png" alt="KOLO" width={160} height={109} className="object-contain" priority unoptimized />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/kolo-logo.png" alt="KOLO" style={{ width: 160, height: "auto" }} />
           <p className="mt-2 text-sm text-gray-500">Registracija novog člana</p>
         </div>
 
