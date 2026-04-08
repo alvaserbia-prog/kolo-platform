@@ -15,13 +15,21 @@ export default withAuth(
   },
   {
     callbacks: {
-      authorized: ({ token }) => !!token,
+      authorized: ({ token, req }) => {
+        const { pathname } = req.nextUrl;
+        // Javne rute — ne zahtevaju prijavu
+        const javneRute = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost"];
+        if (javneRute.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
+          return true;
+        }
+        return !!token;
+      },
     },
   }
 );
 
 export const config = {
   matcher: [
-    "/((?!login|registracija|api/auth|api/registracija|_next/static|_next/image|favicon.ico).*)",
+    "/((?!login|registracija|api/auth|api/registracija|api/javno|api/provjeri-pseudonim|_next/static|_next/image|favicon.ico|kolo-logo.png).*)",
   ],
 };
