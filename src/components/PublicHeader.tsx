@@ -10,9 +10,8 @@ export default async function PublicHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-kolo-border">
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <Image src={logoImg} alt="KOLO" width={36} height={25} style={{ height: "auto" }} />
-          <span className="font-bold text-kolo-green-900 text-lg tracking-tight">KOLO</span>
+        <Link href="/" className="shrink-0">
+          <Image src={logoImg} alt="KOLO" width={120} height={82} style={{ height: "auto" }} />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           <Link href="/pijaca" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
