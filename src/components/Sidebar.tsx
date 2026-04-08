@@ -13,6 +13,7 @@ const linkoviVerifikovan = [
   { href: "/novcanik", label: "Novčanik" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/zajednica", label: "Zajednica" },
+  { href: "/zaposljavnje", label: "Zapošljavanje" },
   { href: "/programi", label: "Programi" },
   { href: "/zrno", label: "ZRNO" },
   { href: "/sistem", label: "Sistem" },

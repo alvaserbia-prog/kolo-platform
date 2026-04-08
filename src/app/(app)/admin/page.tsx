@@ -15,7 +15,7 @@ export default async function AdminPage() {
 
   const [
     pendingRequests, allUsers, banka, pendingZadruge,
-    adminProgrami, dashboardData, auditLogs, zadrugeLista,
+    adminProgrami, dashboardData, auditLogs, zadrugeLista, zaposljavanjeData,
   ] = await Promise.all([
     prisma.verificationRequest.findMany({
       where: { status: "PENDING" },
@@ -61,6 +61,26 @@ export default async function AdminPage() {
         _count: { select: { memberships: { where: { leftAt: null } }, projects: { where: { status: "ACTIVE" } } } },
       },
     }),
+    Promise.all([
+      prisma.radniOglas.findMany({
+        include: {
+          createdBy: { select: { pseudonim: true } },
+          zadruga: { select: { name: true } },
+          _count: { select: { prijave: true, evidencije: { where: { status: "PENDING" } } } },
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.radniOglasPrijava.findMany({
+        where: { status: "PENDING" },
+        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true, hourlyRate: true, positions: true } } },
+        orderBy: { createdAt: "asc" },
+      }),
+      prisma.radnaEvidencija.findMany({
+        where: { status: "PENDING" },
+        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true } } },
+        orderBy: { createdAt: "asc" },
+      }),
+    ]),
   ]);
 
   const opticaj = banka ? Math.abs(banka.balance) : 0;
@@ -118,6 +138,26 @@ export default async function AdminPage() {
         balance: z.wallet?.balance ?? 0, clanovi: z._count.memberships,
         projekti: z._count.projects, createdAt: z.createdAt.toISOString(),
       }))}
+      adminZaposljavnje={{
+        oglasi: zaposljavanjeData[0].map((o) => ({
+          id: o.id, title: o.title, source: o.source as string,
+          hourlyRate: o.hourlyRate, maxHoursPerDay: o.maxHoursPerDay, positions: o.positions,
+          deadline: o.deadline?.toISOString() ?? null, status: o.status as string,
+          createdByPseudonim: o.createdBy.pseudonim, zadrugaName: o.zadruga?.name ?? null,
+          ukupnoPrijava: o._count.prijave, pendingEvidencija: o._count.evidencije,
+          createdAt: o.createdAt.toISOString(),
+        })),
+        pendingPrijave: zaposljavanjeData[1].map((p) => ({
+          id: p.id, pseudonim: p.user.pseudonim, oglasTitle: p.oglas.title,
+          hourlyRate: p.oglas.hourlyRate, positions: p.oglas.positions,
+          createdAt: p.createdAt.toISOString(),
+        })),
+        pendingEvidencije: zaposljavanjeData[2].map((e) => ({
+          id: e.id, pseudonim: e.user.pseudonim, oglasTitle: e.oglas.title,
+          date: e.date.toISOString(), hoursWorked: e.hoursWorked, amount: e.amount,
+          description: e.description, createdAt: e.createdAt.toISOString(),
+        })),
+      }}
     />
   );
 }

@@ -117,6 +117,24 @@ enum DonationStatus {
   CONFIRMED
 }
 
+enum OglasStatus {
+  ACTIVE
+  CLOSED
+  CANCELLED
+}
+
+enum OglasSource {
+  FONDACIJA
+  ZADRUGA
+  PROJEKAT
+}
+
+enum RadnaPrijavaStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 // ─── Modeli ───────────────────────────────────────────────────────────────────
 
 model User {
@@ -142,6 +160,9 @@ model User {
   referralsMade      Referral[] @relation("Referrer")
   referralReceived   Referral?  @relation("Referred")
   donations              DonationRecord[]
+  kreiraniOglasi         RadniOglas[]             @relation("KreiraniOglasi")
+  radnePrijave           RadniOglasPrijava[]      @relation("RadnePrijave")
+  radneEvidencije        RadnaEvidencija[]        @relation("RadneEvidencije")
   verificationRequest    VerificationRequest?
   listings               MarketplaceListing[] @relation("SellerListings")
   purchases              MarketplaceListing[] @relation("BuyerListings")
@@ -228,6 +249,7 @@ model Zadruga {
   pristupnice ZadrugaPristupnica[]
   projects    ZadrugaProject[]
   bonusLogs   ZadrugaBonusLog[]
+  radniOglasi RadniOglas[]        @relation("ZadrugaOglasi")
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 }
@@ -370,6 +392,68 @@ model DailyEmissionSummary {
   koeficijent    Decimal  @db.Decimal(10, 6)
   breakdown      Json
   createdAt      DateTime @default(now())
+}
+
+// ─── Zapošljavanje — Radni oglasi ────────────────────────────────────────────
+
+model RadniOglas {
+  id              String      @id @default(uuid())
+  title           String
+  description     String
+  source          OglasSource
+  hourlyRate      Int         // POEN/sat, raspon 1000-2500
+  maxHoursPerDay  Int         @default(8)
+  positions       Int         @default(1)
+  deadline        DateTime?
+  status          OglasStatus @default(ACTIVE)
+  createdById     String
+  createdBy       User        @relation("KreiraniOglasi", fields: [createdById], references: [id])
+  zadrugaId       String?
+  zadruga         Zadruga?    @relation("ZadrugaOglasi", fields: [zadrugaId], references: [id])
+  prijave         RadniOglasPrijava[]
+  evidencije      RadnaEvidencija[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+}
+
+model RadniOglasPrijava {
+  id              String             @id @default(uuid())
+  oglasId         String
+  oglas           RadniOglas         @relation(fields: [oglasId], references: [id])
+  userId          String
+  user            User               @relation("RadnePrijave", fields: [userId], references: [id])
+  status          RadnaPrijavaStatus @default(PENDING)
+  approvedById    String?
+  approvedAt      DateTime?
+  rejectionReason String?
+  evidencije      RadnaEvidencija[]
+  createdAt       DateTime           @default(now())
+
+  @@unique([oglasId, userId])
+  @@index([status, oglasId])
+}
+
+model RadnaEvidencija {
+  id           String             @id @default(uuid())
+  userId       String
+  user         User               @relation("RadneEvidencije", fields: [userId], references: [id])
+  oglasId      String
+  oglas        RadniOglas         @relation(fields: [oglasId], references: [id])
+  prijavaId    String
+  prijava      RadniOglasPrijava  @relation(fields: [prijavaId], references: [id])
+  date         DateTime           @db.Date
+  hoursWorked  Int
+  amount       Int                // hoursWorked × oglas.hourlyRate
+  description  String
+  status       EvidencijaStatus   @default(PENDING)
+  approvedById String?
+  approvedAt   DateTime?
+  createdAt    DateTime           @default(now())
+
+  @@unique([userId, oglasId, date])
+  @@index([date, status])
 }
 
 // ─── ZRNO sistem ─────────────────────────────────────────────────────────────
