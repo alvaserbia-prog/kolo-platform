@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import Image from "next/image";
-import logoImg from "@/assets/kolo-logo.png";
 import Link from "next/link";
 
 function jacina(p: string): { nivo: number; tekst: string; boja: string } {
@@ -86,51 +84,51 @@ export default function RegistracijaPage() {
 
   return (
     <div className="w-full max-w-sm">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-        <div className="mb-6 flex flex-col items-center">
-          <Image src={logoImg} alt="KOLO" width={160} height={109} style={{ height: "auto" }} priority />
-          <p className="mt-2 text-sm text-gray-500">Registracija novog člana</p>
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8">
+        <div className="mb-7">
+          <h1 className="text-xl font-bold text-kolo-text">Registracija</h1>
+          <p className="mt-1 text-sm text-kolo-muted">Pridružite se KOLO zajednici</p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">Email *</label>
             <input type="email" autoComplete="email" value={form.email} onChange={(e) => set("email", e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder="vas@email.com" suppressHydrationWarning />
           </div>
 
           {/* Pseudonim */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Pseudonim *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">Pseudonim *</label>
             <div className="relative">
               <input type="text" autoComplete="username" maxLength={30} value={form.pseudonim} onChange={(e) => set("pseudonim", e.target.value)}
                 className={`w-full px-4 py-3 pr-9 rounded-xl border text-sm outline-none transition-colors ${
                   pseudonimStatus === "zauzet" ? "border-red-400 focus:border-red-500"
                   : pseudonimStatus === "slobodan" ? "border-kolo-green-500 focus:border-kolo-green-700"
-                  : "border-gray-200 focus:border-kolo-green-700"
+                  : "border-kolo-border focus:border-kolo-green-700"
                 }`}
                 placeholder="VasePseudonim" suppressHydrationWarning />
-              {pseudonimStatus === "checking" && <span className="absolute right-3 top-3.5 text-xs text-gray-400">...</span>}
+              {pseudonimStatus === "checking" && <span className="absolute right-3 top-3.5 text-xs text-kolo-muted">...</span>}
               {pseudonimStatus === "slobodan" && <span className="absolute right-3 top-3 text-kolo-green-700">✓</span>}
               {pseudonimStatus === "zauzet" && <span className="absolute right-3 top-3 text-red-500">✕</span>}
             </div>
             {pseudonimStatus === "zauzet" && <p className="mt-1 text-xs text-red-500">Ovaj pseudonim je zauzet</p>}
-            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-gray-400">Javno vidljiv, ne prikazuje pravo ime</p>}
+            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">Javno vidljiv, ne prikazuje pravo ime</p>}
           </div>
 
           {/* Lozinka */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Lozinka *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">Lozinka *</label>
             <input type="password" autoComplete="new-password" value={form.password} onChange={(e) => set("password", e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder="••••••••" suppressHydrationWarning />
             {form.password.length > 0 && (
               <div className="mt-2">
                 <div className="flex gap-1 mb-1">
                   {[1,2,3,4].map(n => (
-                    <div key={n} className={`h-1 flex-1 rounded-full transition-colors ${n <= lozinkaJacina.nivo ? lozinkaJacina.boja : "bg-gray-100"}`} />
+                    <div key={n} className={`h-1 flex-1 rounded-full transition-colors ${n <= lozinkaJacina.nivo ? lozinkaJacina.boja : "bg-kolo-border"}`} />
                   ))}
                 </div>
                 <p className={`text-xs ${lozinkaJacina.nivo <= 1 ? "text-red-500" : lozinkaJacina.nivo <= 2 ? "text-kolo-gold-600" : "text-kolo-green-700"}`}>
@@ -142,10 +140,10 @@ export default function RegistracijaPage() {
 
           {/* Potvrda */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Potvrda lozinke *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">Potvrda lozinke *</label>
             <input type="password" autoComplete="new-password" value={form.passwordConfirm} onChange={(e) => set("passwordConfirm", e.target.value)}
               className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${
-                form.passwordConfirm && form.password !== form.passwordConfirm ? "border-red-400" : "border-gray-200 focus:border-kolo-green-700"
+                form.passwordConfirm && form.password !== form.passwordConfirm ? "border-red-400" : "border-kolo-border focus:border-kolo-green-700"
               }`}
               placeholder="••••••••" suppressHydrationWarning />
             {form.passwordConfirm && form.password !== form.passwordConfirm && (
@@ -155,9 +153,9 @@ export default function RegistracijaPage() {
 
           {/* Referral */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Referral kod <span className="text-gray-400 font-normal">(opciono)</span></label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">Referral kod <span className="text-kolo-muted font-normal">(opciono)</span></label>
             <input type="text" value={form.referralCode} onChange={(e) => set("referralCode", e.target.value.toUpperCase())}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-700 transition-colors font-mono"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg font-mono"
               placeholder="ABCD1234" suppressHydrationWarning />
           </div>
 
@@ -166,14 +164,14 @@ export default function RegistracijaPage() {
             <label className="flex items-start gap-2.5 cursor-pointer group">
               <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-kolo-muted">
                 Prihvatam <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">Uslove korišćenja</Link>
               </span>
             </label>
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={privatnost} onChange={(e) => setPrivatnost(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-kolo-muted">
                 Prihvatam <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">Politiku privatnosti</Link>
               </span>
             </label>
@@ -188,7 +186,7 @@ export default function RegistracijaPage() {
           </button>
         </form>
 
-        <p className="mt-5 text-center text-sm text-gray-500">
+        <p className="mt-5 text-center text-sm text-kolo-muted">
           Već imate nalog?{" "}
           <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">Prijavite se</Link>
         </p>

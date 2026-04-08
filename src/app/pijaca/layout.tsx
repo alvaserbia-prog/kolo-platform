@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import Link from "next/link";
+import PublicHeader from "@/components/PublicHeader";
 
 export default async function PijacaLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -13,7 +13,11 @@ export default async function PijacaLayout({ children }: { children: React.React
         <Sidebar verified={session.user.verified} isAdmin={session.user.role === "ADMIN"} />
         <div className="flex flex-col flex-1 min-w-0">
           <Header />
-          <main className="flex-1 p-6 overflow-auto">{children}</main>
+          <main className="flex-1 overflow-auto">
+            <div className="max-w-5xl mx-auto px-6 py-6 w-full">
+              {children}
+            </div>
+          </main>
         </div>
       </div>
     );
@@ -21,25 +25,7 @@ export default async function PijacaLayout({ children }: { children: React.React
 
   return (
     <div className="min-h-screen bg-kolo-bg">
-      <header className="border-b border-kolo-border bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-          <Link href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/kolo-logo.png" alt="KOLO" style={{ height: 44, width: "auto" }} />
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link href="/kako-funkcionise" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
-              Kako funkcioniše
-            </Link>
-            <Link href="/login" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-500 transition-colors">
-              Prijavi se
-            </Link>
-            <Link href="/registracija" className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">
-              Pridruži se
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicHeader />
       <main className="max-w-5xl mx-auto px-6 py-8">{children}</main>
     </div>
   );

@@ -3,8 +3,6 @@
 import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
-import logoImg from "@/assets/kolo-logo.png";
 import Link from "next/link";
 
 function LoginForm() {
@@ -48,21 +46,21 @@ function LoginForm() {
 
   return (
     <div className="w-full max-w-sm">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-        <div className="mb-8 flex flex-col items-center">
-          <Image src={logoImg} alt="KOLO" width={160} height={109} style={{ height: "auto" }} priority />
-          <p className="mt-2 text-sm text-gray-500">Prijavite se na platformu</p>
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8">
+        <div className="mb-7">
+          <h1 className="text-xl font-bold text-kolo-text">Prijava</h1>
+          <p className="mt-1 text-sm text-kolo-muted">Dobrodošli nazad u KOLO</p>
         </div>
 
         {registered && (
-          <div className="mb-4 text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">
+          <div className="mb-5 text-sm text-kolo-green-700 bg-kolo-green-100 rounded-xl px-4 py-3">
             Nalog je kreiran. Prijavite se i sačekajte admin verifikaciju.
           </div>
         )}
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">
               Email
             </label>
             <input
@@ -70,13 +68,13 @@ function LoginForm() {
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder="vas@email.com"
               suppressHydrationWarning
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">
               Lozinka
             </label>
             <input
@@ -84,14 +82,14 @@ function LoginForm() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder="••••••••"
               suppressHydrationWarning
             />
           </div>
 
           {error && (
-            <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
+            <p className="text-sm text-kolo-danger bg-red-50 rounded-xl px-4 py-3">
               {error}
             </p>
           )}
@@ -99,16 +97,16 @@ function LoginForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-60"
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
             suppressHydrationWarning
           >
             {loading ? "Prijava u toku..." : "Prijavi se"}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-sm text-kolo-muted">
           Nemate nalog?{" "}
-          <Link href="/registracija" className="text-green-700 font-medium hover:underline">
+          <Link href="/registracija" className="text-kolo-green-700 font-medium hover:underline">
             Registrujte se
           </Link>
         </p>

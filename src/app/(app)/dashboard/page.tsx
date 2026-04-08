@@ -67,7 +67,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-xl space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-900">
+      <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>
         Dobrodošli, {session.user.pseudonim}
       </h1>
 
@@ -77,32 +77,32 @@ export default async function DashboardPage() {
           <p className="text-xs text-green-300 mb-1">Vaše stanje</p>
           <p className="text-3xl font-bold font-mono">{(wallet?.balance ?? 0).toLocaleString("sr-RS")}</p>
           <p className="text-sm text-green-300">POEN</p>
-          <Link href="/novcanik" className="mt-3 inline-block text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-lg transition-colors">
+          <Link href="/novcanik" className="mt-3 inline-block text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-xl transition-colors">
             Novčanik →
           </Link>
         </div>
-        <div className="bg-white rounded-2xl border border-gray-200 p-5">
-          <p className="text-xs text-gray-400 mb-1">Opticaj</p>
-          <p className="text-3xl font-bold text-gray-900">{opticaj.toLocaleString("sr-RS")}</p>
-          <p className="text-sm text-gray-400">POEN u sistemu</p>
+        <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-5">
+          <p className="text-xs text-kolo-muted mb-1">Opticaj</p>
+          <p className="text-3xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
+          <p className="text-sm text-kolo-muted">POEN u sistemu</p>
         </div>
       </div>
 
       {!session.user.verified && verRequest?.status === "PENDING" && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-4">
-          <p className="text-sm font-semibold text-amber-700">Zahtev je na čekanju</p>
-          <p className="text-sm text-amber-600 mt-0.5">Dokumentacija je primljena i čeka pregled admina (1–3 radna dana).</p>
+        <div className="box-warning">
+          <p className="text-sm font-semibold">Zahtev je na čekanju</p>
+          <p className="text-sm mt-0.5 opacity-90">Dokumentacija je primljena i čeka pregled admina (1–3 radna dana).</p>
         </div>
       )}
       {!session.user.verified && !verRequest && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-4 flex items-center justify-between gap-4">
+        <div className="box-warning flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-amber-700">Nalog nije verifikovan</p>
-            <p className="text-sm text-amber-600 mt-0.5">Verifikujte identitet i dobijte <strong>1.000 POEN</strong> bonusa.</p>
+            <p className="text-sm font-semibold">Nalog nije verifikovan</p>
+            <p className="text-sm mt-0.5 opacity-90">Verifikujte identitet i dobijte <strong>1.000 POEN</strong> bonusa.</p>
           </div>
           <Link
             href="/verifikacija"
-            className="shrink-0 px-4 py-2 bg-amber-600 text-white text-sm font-semibold rounded-xl hover:bg-amber-700 transition-colors"
+            className="shrink-0 px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
           >
             Verifikuj →
           </Link>
@@ -112,29 +112,29 @@ export default async function DashboardPage() {
       {/* Poslednje transakcije */}
       <div>
         <div className="flex justify-between items-center mb-3">
-          <h2 className="text-base font-semibold text-gray-700">Poslednje transakcije</h2>
-          <Link href="/novcanik" className="text-sm text-green-700 hover:underline">Sve →</Link>
+          <h2 className="text-base font-semibold text-kolo-text">Poslednje transakcije</h2>
+          <Link href="/novcanik" className="text-sm text-kolo-green-700 hover:underline">Sve →</Link>
         </div>
         {txData.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-gray-200 p-6 text-center text-sm text-gray-400">
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
             Još nema transakcija.
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden">
             {txData.map((t, i) => (
-              <div key={t.id} className={`px-4 py-3 flex justify-between items-center ${i < txData.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <div key={t.id} className={`px-4 py-3 flex justify-between items-center ${i < txData.length - 1 ? "border-b border-kolo-border" : ""}`}>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className={`text-xs px-2 py-0.5 rounded font-medium ${tipBoja[t.type] ?? "bg-gray-100 text-gray-600"}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-lg font-medium ${tipBoja[t.type] ?? "bg-kolo-bg text-kolo-muted"}`}>
                       {tipLabela[t.type] ?? t.type}
                     </span>
-                    <span className="text-xs text-gray-400">{t.drugiPseudonim}</span>
+                    <span className="text-xs text-kolo-muted">{t.drugiPseudonim}</span>
                   </div>
-                  <p className="text-xs text-gray-300 mt-0.5">
+                  <p className="text-xs text-kolo-border mt-0.5">
                     {new Date(t.createdAt).toLocaleDateString("sr-RS")}
                   </p>
                 </div>
-                <span className={`text-sm font-bold ${t.primio ? "text-green-700" : "text-red-500"}`}>
+                <span className={`text-sm font-bold ${t.primio ? "text-kolo-green-700" : "text-kolo-danger"}`}>
                   {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
                 </span>
               </div>

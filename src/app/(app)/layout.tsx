@@ -17,7 +17,11 @@ export default async function AppLayout({
       <Sidebar verified={session.user.verified} isAdmin={session.user.role === "ADMIN"} />
       <div className="flex flex-col flex-1 min-w-0">
         <Header />
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        <main className="flex-1 overflow-auto">
+          <div className="max-w-5xl mx-auto px-6 py-6 w-full">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );
