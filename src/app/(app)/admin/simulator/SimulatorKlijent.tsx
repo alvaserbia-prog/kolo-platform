@@ -157,7 +157,7 @@ interface Clan {
 }
 interface Zadruga {
   id: number; foundedDay: number; clanovi: number;
-  bonusiPlaceni: Set<number>; bal: number;
+  bonusiPlaceni: Set<number>; bal: number; projekti: number;
 }
 interface DnevniDogadjaj {
   tip: "verif" | "ref" | "don" | "zadruga" | "prog" | "zrno";
@@ -316,12 +316,16 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   const bezZadruge = members.filter(m => !m.uZadrugu);
   const mozNova = p.novaZadrugaNaDan > 0 ? (day % p.novaZadrugaNaDan === 0 || zadruge.length === 0) : zadruge.length === 0;
   if (bezZadruge.length >= 10 && mozNova) {
-    zadruge.push({ id: zadruge.length, foundedDay: day, clanovi: 0, bonusiPlaceni: new Set(), bal: p.zadrugaStartPoen });
+    zadruge.push({ id: zadruge.length, foundedDay: day, clanovi: 0, bonusiPlaceni: new Set(), bal: p.zadrugaStartPoen, projekti: 0 });
     em_zadruga += p.zadrugaStartPoen;
     bankaMinus += p.zadrugaStartPoen;
     dogadjaji.push({ tip: "zadruga", tekst: `Nova zadruga #${zadruge.length - 1} osnovana`, iznos: p.zadrugaStartPoen });
   }
   if (zadruge.length > 0) {
+    // Projekti rastu ~1 po 7 dana po zadruzi
+    for (const z of zadruge) {
+      if (day % 7 === z.id % 7 && z.clanovi >= 3) z.projekti++;
+    }
     const noviClanovi = members.filter(m => !m.uZadrugu && day - m.joinDay >= 1);
     const ulaze = Math.floor(noviClanovi.length * p.zadrugaRast / 100);
     for (let i = 0; i < ulaze && i < noviClanovi.length; i++) {
@@ -804,10 +808,234 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 // SIMULACIONI EKRAN
 // ─────────────────────────────────────────────────────────────────
 
+type SimView = "pregled" | "clanovi" | "zadruge" | "zrno";
+
+function ViewNazad({ onBack }: { onBack: () => void }) {
+  return (
+    <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-4">
+      ← Nazad na pregled
+    </button>
+  );
+}
+
+function ViewClanovi({ members, onBack }: { members: Clan[]; onBack: () => void }) {
+  const sorted = [...members].sort((a, b) => b.bal - a.bal);
+  const ukupno = members.reduce((s, m) => s + m.bal, 0);
+  return (
+    <div>
+      <ViewNazad onBack={onBack} />
+      <div className="flex justify-between items-baseline mb-4">
+        <h3 className="text-base font-semibold text-gray-900">Rang lista članova</h3>
+        <span className="text-xs text-gray-400">{members.length} članova · ukupno {fmt(ukupno)} P</span>
+      </div>
+      <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="bg-gray-50 text-gray-500">
+              <th className="px-3 py-2 text-left font-medium w-8">#</th>
+              <th className="px-3 py-2 text-left font-medium">ID</th>
+              <th className="px-3 py-2 text-right font-medium">Balans</th>
+              <th className="px-3 py-2 text-right font-medium">% od ukupnog</th>
+              <th className="px-3 py-2 text-right font-medium">Donacije</th>
+              <th className="px-3 py-2 text-right font-medium">Preporuke</th>
+              <th className="px-3 py-2 text-right font-medium">ZRNO</th>
+              <th className="px-3 py-2 text-right font-medium">God.</th>
+              <th className="px-3 py-2 text-center font-medium">Zadr.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((m, i) => (
+              <tr key={m.id} className={i % 2 === 0 ? "" : "bg-gray-50/50"}>
+                <td className="px-3 py-1.5 text-left text-gray-400 font-mono">{i + 1}</td>
+                <td className="px-3 py-1.5 text-left font-mono text-gray-600">#{m.id}</td>
+                <td className="px-3 py-1.5 text-right font-mono font-semibold text-green-700">{fmt(m.bal)}</td>
+                <td className="px-3 py-1.5 text-right text-gray-500">
+                  <div className="flex items-center justify-end gap-1">
+                    <div className="h-1.5 bg-green-200 rounded" style={{ width: Math.max(2, (m.bal / (ukupno || 1)) * 80) }} />
+                    <span>{ukupno ? ((m.bal / ukupno) * 100).toFixed(1) : "0"}%</span>
+                  </div>
+                </td>
+                <td className="px-3 py-1.5 text-right font-mono text-amber-600">{fmt(m.cumDon)}</td>
+                <td className="px-3 py-1.5 text-right">{m.refs}</td>
+                <td className="px-3 py-1.5 text-right font-mono text-purple-600">{m.zrno || "—"}</td>
+                <td className="px-3 py-1.5 text-right text-gray-400">{m.age}</td>
+                <td className="px-3 py-1.5 text-center">{m.uZadrugu ? <span className="text-green-600">✓</span> : <span className="text-gray-300">—</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function ViewZadruge({ zadruge, members, onBack }: { zadruge: Zadruga[]; members: Clan[]; onBack: () => void }) {
+  const sorted = [...zadruge].sort((a, b) => b.bal - a.bal);
+  const [selId, setSelId] = useState<number | null>(null);
+  const sel = selId !== null ? zadruge.find(z => z.id === selId) : null;
+
+  if (sel) {
+    const clanoviZadruge = members.filter(m => m.uZadrugu).slice(0, sel.clanovi);
+    const ukupnoBal = clanoviZadruge.reduce((s, m) => s + m.bal, 0);
+    return (
+      <div>
+        <button onClick={() => setSelId(null)} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 mb-4">
+          ← Nazad na zadruge
+        </button>
+        <div className="flex justify-between items-baseline mb-4">
+          <h3 className="text-base font-semibold text-gray-900">Zadruga #{sel.id}</h3>
+          <span className="text-xs text-gray-400">osnovana dan {sel.foundedDay}</span>
+        </div>
+        <div className="grid grid-cols-4 gap-3 mb-4">
+          {[
+            { l: "Balans zadruge", v: fmt(sel.bal), c: "text-green-700" },
+            { l: "Članova", v: String(sel.clanovi) },
+            { l: "Projekata", v: String(sel.projekti) },
+            { l: "Bonusi plaćeni", v: String(sel.bonusiPlaceni.size) },
+          ].map(x => (
+            <div key={x.l} className="bg-white rounded-xl border border-gray-200 p-3">
+              <p className="text-xs text-gray-400">{x.l}</p>
+              <p className={`text-xl font-bold font-mono ${x.c ?? "text-gray-900"}`}>{x.v}</p>
+            </div>
+          ))}
+        </div>
+        {sel.bonusiPlaceni.size > 0 && (
+          <div className="bg-green-50 rounded-xl px-4 py-3 mb-4">
+            <p className="text-xs font-semibold text-green-700 mb-1">Dostignuti pragovi</p>
+            <div className="flex flex-wrap gap-2">
+              {[...sel.bonusiPlaceni].sort((a, b) => a - b).map(p => (
+                <span key={p} className="bg-white border border-green-200 text-green-700 text-xs font-mono px-2 py-0.5 rounded-lg">{p} čl.</span>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="px-4 py-3 border-b border-gray-100">
+            <p className="text-sm font-semibold text-gray-700">Projekti ({sel.projekti})</p>
+          </div>
+          {sel.projekti === 0 ? (
+            <p className="px-4 py-6 text-center text-xs text-gray-400">Nema projekata (minimum 3 člana, 1 nedeljno)</p>
+          ) : (
+            Array.from({ length: sel.projekti }).map((_, i) => (
+              <div key={i} className={`px-4 py-2.5 flex justify-between items-center text-xs ${i < sel.projekti - 1 ? "border-b border-gray-100" : ""}`}>
+                <span className="text-gray-700">Projekat #{i + 1}</span>
+                <span className="text-gray-400 font-mono">dan {sel.foundedDay + (i + 1) * 7}</span>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <ViewNazad onBack={onBack} />
+      <div className="flex justify-between items-baseline mb-4">
+        <h3 className="text-base font-semibold text-gray-900">Rang lista zadruga</h3>
+        <span className="text-xs text-gray-400">{zadruge.length} zadruga</span>
+      </div>
+      {zadruge.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Nema zadruga</div>
+      ) : (
+        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          {sorted.map((z, i) => (
+            <button key={z.id} onClick={() => setSelId(z.id)}
+              className={`w-full px-4 py-3 flex items-center justify-between gap-3 hover:bg-gray-50 transition-colors text-left ${i < sorted.length - 1 ? "border-b border-gray-100" : ""}`}>
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="text-sm text-gray-400 font-mono w-5">{i + 1}</span>
+                <div>
+                  <p className="text-sm font-semibold text-gray-900">Zadruga #{z.id}</p>
+                  <p className="text-xs text-gray-400">osnovana dan {z.foundedDay} · {z.clanovi} članova · {z.projekti} projekata</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 shrink-0">
+                <div className="text-right">
+                  <p className="text-sm font-bold font-mono text-green-700">{fmt(z.bal)}</p>
+                  <p className="text-xs text-gray-400">POEN</p>
+                </div>
+                {z.bonusiPlaceni.size > 0 && (
+                  <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">{z.bonusiPlaceni.size} bonusa</span>
+                )}
+                <span className="text-gray-300 text-sm">›</span>
+              </div>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ViewZrno({ last, log, ukupnoZrna, onBack }: { last: DnevniLog; log: DnevniLog[]; ukupnoZrna: number; onBack: () => void }) {
+  const zrnoLog = log.filter(d => d.zrnoKodKorisnika > 0 || d.zrnoKurs > 0);
+  return (
+    <div>
+      <ViewNazad onBack={onBack} />
+      <div className="flex justify-between items-baseline mb-4">
+        <h3 className="text-base font-semibold text-gray-900">ZRNO — Dan {last.day}</h3>
+        <span className="text-xs text-gray-400">ukupno u sistemu: {ukupnoZrna.toLocaleString("sr-RS")}</span>
+      </div>
+      <div className="grid grid-cols-4 gap-3 mb-5">
+        {[
+          { l: "Kurs (POEN/ZRNO)", v: last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(2) : "—", c: "text-purple-700" },
+          { l: "ZRNO u Banci", v: fmt(last.zrnoUBanci), c: "text-gray-700" },
+          { l: "ZRNO kod korisnika", v: fmt(last.zrnoKodKorisnika), c: "text-purple-600" },
+          { l: "% distribuirano", v: last.zrnoKodKorisnika > 0 ? ((last.zrnoKodKorisnika / ukupnoZrna) * 100).toFixed(1) + "%" : "0%", c: "text-gray-700" },
+        ].map(x => (
+          <div key={x.l} className="bg-white rounded-xl border border-gray-200 p-3">
+            <p className="text-xs text-gray-400">{x.l}</p>
+            <p className={`text-xl font-bold font-mono ${x.c}`}>{x.v}</p>
+          </div>
+        ))}
+      </div>
+      {last.zrnoKurs === 0 ? (
+        <div className="bg-purple-50 rounded-2xl border border-purple-100 p-6 text-center">
+          <p className="text-sm font-semibold text-purple-700">ZRNO tržište neaktivno</p>
+          <p className="text-xs text-purple-500 mt-1">Aktivira se automatski pri opticaju ≥ {fmt(1_000_000)} POEN</p>
+          <p className="text-xs text-purple-400 mt-0.5">Trenutni opticaj: {fmt(last.opticaj)} POEN</p>
+        </div>
+      ) : (
+        <>
+          <div className="bg-white rounded-2xl border border-gray-200 p-4 mb-4">
+            <p className="text-xs text-gray-400 mb-2">Kurs kroz vreme</p>
+            <MiniChart data={zrnoLog.map(d => d.zrnoKurs)} color="#8b5cf6" h={70} />
+            <div className="flex justify-between text-xs text-gray-400 mt-1">
+              <span>Dan {zrnoLog[0]?.day ?? "—"}</span>
+              <span className="font-mono text-purple-600">{last.zrnoKurs.toFixed(2)} POEN/ZRNO</span>
+              <span>Dan {last.day}</span>
+            </div>
+          </div>
+          <div className="bg-white rounded-2xl border border-gray-200 p-4">
+            <p className="text-xs text-gray-400 mb-3">Raspodela ZRNA</p>
+            <div className="space-y-2">
+              {[
+                { l: "Banka", v: last.zrnoUBanci, total: ukupnoZrna, c: "bg-blue-400" },
+                { l: "Korisnici", v: last.zrnoKodKorisnika, total: ukupnoZrna, c: "bg-purple-500" },
+              ].map(x => (
+                <div key={x.l}>
+                  <div className="flex justify-between text-xs text-gray-500 mb-1">
+                    <span>{x.l}</span>
+                    <span className="font-mono">{fmt(x.v)} ({((x.v / x.total) * 100).toFixed(1)}%)</span>
+                  </div>
+                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className={`h-full ${x.c} rounded-full`} style={{ width: `${(x.v / x.total) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () => void }) {
   const [state, setState] = useState<SimState>(() => initState(params));
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(600);
+  const [view, setView] = useState<SimView>("pregled");
   const playRef = useRef(false);
 
   useEffect(() => { playRef.current = playing; }, [playing]);
@@ -834,50 +1062,60 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
   const prev2 = log[log.length - 2];
   const deltaOpticaj = last && prev2 ? last.opticaj - prev2.opticaj : 0;
 
+  // Detail views
+  if (view === "clanovi") return (
+    <div className="space-y-4">
+      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
+      <ViewClanovi members={state.members} onBack={() => setView("pregled")} />
+    </div>
+  );
+  if (view === "zadruge") return (
+    <div className="space-y-4">
+      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
+      <ViewZadruge zadruge={state.zadruge} members={state.members} onBack={() => setView("pregled")} />
+    </div>
+  );
+  if (view === "zrno" && last) return (
+    <div className="space-y-4">
+      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
+      <ViewZrno last={last} log={log} ukupnoZrna={params.ukupnoZrna} onBack={() => setView("pregled")} />
+    </div>
+  );
+
   return (
     <div className="space-y-5">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <div className="flex items-baseline gap-3">
-            <span className="text-4xl font-bold font-mono text-green-700">Dan {log.length}</span>
-            {last && <span className="text-sm text-gray-400">opticaj {fmt(last.opticaj)} POEN</span>}
-          </div>
-          <p className="text-xs text-gray-400 mt-0.5">Seed: {params.seed} · rast {params.dailyGrowth}% · donacije {params.donRSD} RSD/čl.</p>
-        </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          <button onClick={() => advance(1)} className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors">+1 dan</button>
-          <button onClick={() => advance(7)} className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors">+7 dana</button>
-          <button onClick={() => advance(30)} className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-xl hover:bg-green-600 transition-colors">+30 dana</button>
-          <button onClick={() => setPlaying(v => !v)}
-            className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-red-600 text-white hover:bg-red-700" : "bg-purple-600 text-white hover:bg-purple-700"}`}>
-            {playing ? "⏸ Pauza" : "▶ Auto"}
-          </button>
-          {playing && (
-            <select value={speed} onChange={e => setSpeed(Number(e.target.value))}
-              className="px-3 py-2 border border-gray-200 rounded-xl text-sm outline-none">
-              <option value={200}>Brzo</option>
-              <option value={600}>Normalno</option>
-              <option value={1500}>Polako</option>
-            </select>
-          )}
-          <button onClick={onReset} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors">↺ Reset</button>
-        </div>
-      </div>
+      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
 
+      {/* Klikabilne kartice */}
       <div className="grid grid-cols-5 gap-3">
-        {[
-          { l: "Opticaj", v: last ? fmt(last.opticaj) : "0", s: deltaOpticaj > 0 ? `+${fmt(deltaOpticaj)} danas` : undefined, c: "text-green-700" },
-          { l: "Članovi", v: last ? String(last.clanovi) : String(params.pocetnihClanova), s: last ? `${last.zadrugari} zadrugara` : undefined, c: "" },
-          { l: "Zadruge", v: last ? String(last.zadruge) : "0", c: "" },
-          { l: "10% limit", v: last ? fmt(Math.floor(last.opticaj * 0.1)) : "0", s: "POEN/dan", c: "text-amber-600" },
-          { l: "ZRNO kurs", v: last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—", s: last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno", c: "text-purple-700" },
-        ].map(({ l, v, s, c }) => (
-          <div key={l} className="bg-white rounded-xl border border-gray-200 p-3">
-            <p className="text-xs text-gray-400">{l}</p>
-            <p className={`text-xl font-bold font-mono ${c}`}>{v}</p>
-            {s && <p className="text-xs text-gray-400 mt-0.5">{s}</p>}
-          </div>
-        ))}
+        <div className="bg-white rounded-xl border border-gray-200 p-3">
+          <p className="text-xs text-gray-400">Opticaj</p>
+          <p className="text-xl font-bold font-mono text-green-700">{last ? fmt(last.opticaj) : "0"}</p>
+          {deltaOpticaj > 0 && <p className="text-xs text-gray-400">+{fmt(deltaOpticaj)} danas</p>}
+        </div>
+        <button onClick={() => setView("clanovi")}
+          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-blue-300 hover:bg-blue-50/30 transition-colors group">
+          <p className="text-xs text-gray-400 group-hover:text-blue-600">Članovi ›</p>
+          <p className="text-xl font-bold font-mono text-gray-900">{last ? last.clanovi : params.pocetnihClanova}</p>
+          {last && <p className="text-xs text-gray-400">{last.zadrugari} zadrugara</p>}
+        </button>
+        <button onClick={() => setView("zadruge")}
+          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-green-300 hover:bg-green-50/30 transition-colors group">
+          <p className="text-xs text-gray-400 group-hover:text-green-700">Zadruge ›</p>
+          <p className="text-xl font-bold font-mono text-gray-900">{last ? last.zadruge : "0"}</p>
+          {state.zadruge.length > 0 && <p className="text-xs text-gray-400">{state.zadruge.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
+        </button>
+        <div className="bg-white rounded-xl border border-gray-200 p-3">
+          <p className="text-xs text-gray-400">10% limit</p>
+          <p className="text-xl font-bold font-mono text-amber-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
+          <p className="text-xs text-gray-400">POEN/dan</p>
+        </div>
+        <button onClick={() => last && setView("zrno")}
+          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-purple-300 hover:bg-purple-50/30 transition-colors group">
+          <p className="text-xs text-gray-400 group-hover:text-purple-600">ZRNO ›</p>
+          <p className="text-xl font-bold font-mono text-purple-700">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
+          <p className="text-xs text-gray-400">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
+        </button>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -968,6 +1206,41 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function Controls({ playing, speed, onAdvance, onPlay, onReset, onSpeedChange, log }: {
+  playing: boolean; speed: number;
+  onAdvance: (n: number) => void; onPlay: () => void;
+  onReset: () => void; onSpeedChange: (v: number) => void;
+  log: DnevniLog[];
+}) {
+  const last = log[log.length - 1];
+  return (
+    <div className="flex items-center justify-between flex-wrap gap-3">
+      <div>
+        <span className="text-3xl font-bold font-mono text-green-700">Dan {log.length}</span>
+        {last && <span className="text-sm text-gray-400 ml-3">opticaj {fmt(last.opticaj)} POEN</span>}
+      </div>
+      <div className="flex items-center gap-2 flex-wrap">
+        <button onClick={() => onAdvance(1)} className="px-4 py-2 bg-green-700 text-white text-sm font-semibold rounded-xl hover:bg-green-800 transition-colors">+1 dan</button>
+        <button onClick={() => onAdvance(7)} className="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors">+7 dana</button>
+        <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-xl hover:bg-green-600 transition-colors">+30 dana</button>
+        <button onClick={onPlay}
+          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-red-600 text-white hover:bg-red-700" : "bg-purple-600 text-white hover:bg-purple-700"}`}>
+          {playing ? "⏸ Pauza" : "▶ Auto"}
+        </button>
+        {playing && (
+          <select value={speed} onChange={e => onSpeedChange(Number(e.target.value))}
+            className="px-3 py-2 border border-gray-200 rounded-xl text-sm outline-none">
+            <option value={200}>Brzo</option>
+            <option value={600}>Normalno</option>
+            <option value={1500}>Polako</option>
+          </select>
+        )}
+        <button onClick={onReset} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-semibold rounded-xl hover:bg-gray-200 transition-colors">↺ Reset</button>
+      </div>
     </div>
   );
 }
