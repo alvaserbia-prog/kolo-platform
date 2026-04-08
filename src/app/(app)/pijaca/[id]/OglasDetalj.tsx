@@ -74,7 +74,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
   }
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/pijaca" className="text-gray-400 hover:text-gray-600 transition-colors text-sm">
           ← Pijaca
@@ -302,7 +302,7 @@ function IzmeniOglas({
   }
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 transition-colors text-sm">
           ← Nazad

@@ -67,7 +67,7 @@ export default function NoviOglasForma() {
   }
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <button onClick={() => router.back()} className="text-gray-400 hover:text-gray-600 transition-colors">
           ← Nazad

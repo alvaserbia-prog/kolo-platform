@@ -44,7 +44,7 @@ export default function Sidebar({ verified, isAdmin }: SidebarProps) {
       <div className="flex flex-col items-center justify-center px-4 py-4 border-b border-kolo-border gap-1">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/kolo-icon.png" alt="KOLO" style={{ width: 120, height: "auto", mixBlendMode: "multiply" }} />
-        <span className="font-bold text-kolo-green-900 text-base tracking-tight">KOLO</span>
+        <span className="font-bold text-kolo-green-900 text-2xl tracking-widest">KOLO</span>
       </div>
       <nav className="flex-1 px-2.5 py-4 space-y-0.5">
         {links.map(({ href, label }) => {

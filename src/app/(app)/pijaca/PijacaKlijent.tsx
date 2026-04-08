@@ -178,7 +178,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
       {/* Modal kupovine */}
       {kupiOglas && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-4">
-          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 w-full max-w-sm space-y-4">
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 w-full max-w-sm mx-auto space-y-4">
             <div>
               <h3 className="text-lg font-bold text-kolo-text">Potvrdi kupovinu</h3>
               <p className="text-sm text-kolo-muted mt-1">{kupiOglas.title}</p>

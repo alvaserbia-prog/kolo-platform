@@ -47,7 +47,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
   }
 
   return (
-    <div className="max-w-2xl space-y-5">
+    <div className="max-w-2xl mx-auto space-y-5">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <Link href="/profil" className="text-gray-400 hover:text-gray-600 text-sm transition-colors">← Profil</Link>

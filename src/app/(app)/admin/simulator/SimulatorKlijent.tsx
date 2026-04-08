@@ -652,7 +652,7 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
   const upd = <K extends keyof SimParams>(k: K, v: SimParams[K]) => setP(prev => ({ ...prev, [k]: v }));
 
   return (
-    <div className="max-w-2xl space-y-5">
+    <div className="max-w-2xl mx-auto space-y-5">
       <div>
         <h2 className="text-xl font-semibold text-gray-900">Konfiguracija simulacije</h2>
         <p className="text-sm text-gray-400 mt-1">Sve parametre uneseš jednom — za izmenu je potreban reset.</p>

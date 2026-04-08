@@ -67,7 +67,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, evid
   }
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-900">Programi Banke</h1>
         {totalOcekivano > 0 && (

@@ -83,7 +83,7 @@ export default function OsnivanjeForma() {
   }
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/zajednica" className="text-gray-400 hover:text-gray-600 text-sm transition-colors">← Zadruge</Link>
         <h1 className="text-2xl font-semibold text-gray-900">Osnivanje zadruge</h1>

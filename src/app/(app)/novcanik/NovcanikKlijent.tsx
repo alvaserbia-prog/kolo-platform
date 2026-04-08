@@ -59,7 +59,7 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije, plati
   });
 
   return (
-    <div className="max-w-xl space-y-6">
+    <div className="max-w-xl mx-auto space-y-6">
       {/* Balans kartica */}
       <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
         <p className="text-sm text-green-200 mb-1">Vaše stanje</p>

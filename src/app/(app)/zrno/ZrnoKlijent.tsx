@@ -31,7 +31,7 @@ export default function ZrnoKlijent(props: Props) {
   ];
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-gray-900">ZRNO</h1>
         {props.glasackaMoc > 0 && (
