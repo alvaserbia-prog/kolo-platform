@@ -42,9 +42,17 @@ export default function RegistracijaPage() {
     setPseudonimStatus("checking");
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
-      const res = await fetch(`/api/provjeri-pseudonim?p=${encodeURIComponent(p)}`);
-      const data = await res.json();
-      setPseudonimStatus(data.slobodan ? "slobodan" : "zauzet");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+      try {
+        const res = await fetch(`/api/provjeri-pseudonim?p=${encodeURIComponent(p)}`, { signal: controller.signal });
+        const data = await res.json();
+        setPseudonimStatus(data.slobodan ? "slobodan" : "zauzet");
+      } catch {
+        setPseudonimStatus("idle");
+      } finally {
+        clearTimeout(timer);
+      }
     }, 400);
   }, [form.pseudonim]);
 
