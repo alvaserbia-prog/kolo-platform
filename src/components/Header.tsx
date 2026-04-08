@@ -77,11 +77,13 @@ function BellNotifikacije() {
   const [neprocitano, setNeprocitano] = useState(0);
   const [notifikacije, setNotifikacije] = useState<Notifikacija[]>([]);
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState<Notifikacija | null>(null);
+  const prevNeprocitanoRef = useRef<number | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     ucitaj();
-    const interval = setInterval(ucitaj, 30_000);
+    const interval = setInterval(ucitaj, 15_000);
     return () => clearInterval(interval);
   }, []);
 
@@ -95,12 +97,27 @@ function BellNotifikacije() {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [open]);
 
+  useEffect(() => {
+    if (toast) {
+      const t = setTimeout(() => setToast(null), 5000);
+      return () => clearTimeout(t);
+    }
+  }, [toast]);
+
   async function ucitaj() {
     const res = await fetch("/api/notifikacije");
     if (!res.ok) return;
     const data = await res.json();
-    setNeprocitano(data.neprocitano ?? 0);
-    setNotifikacije(data.notifikacije ?? []);
+    const noviCount: number = data.neprocitano ?? 0;
+    const lista: Notifikacija[] = data.notifikacije ?? [];
+    // Prikaži toast ako je porastao broj nepročitanih (ne pri prvom učitavanju)
+    if (prevNeprocitanoRef.current !== null && noviCount > prevNeprocitanoRef.current) {
+      const najnovija = lista.find((n) => !n.procitana);
+      if (najnovija) setToast(najnovija);
+    }
+    prevNeprocitanoRef.current = noviCount;
+    setNeprocitano(noviCount);
+    setNotifikacije(lista);
   }
 
   async function oznaciProcitane() {
@@ -118,6 +135,24 @@ function BellNotifikacije() {
 
   return (
     <div className="relative" ref={panelRef}>
+      {/* Toast */}
+      {toast && (
+        <div
+          className="fixed bottom-6 right-6 z-[100] w-80 bg-white rounded-2xl shadow-xl border border-kolo-border p-4 flex items-start gap-3 animate-slide-up"
+          onClick={() => { setToast(null); if (toast.link) router.push(toast.link); }}
+          style={{ cursor: toast.link ? "pointer" : "default" }}
+        >
+          <div className="mt-0.5 w-2 h-2 rounded-full bg-kolo-green-700 shrink-0" />
+          <div className="flex-1 min-w-0">
+            <p className={`text-sm font-semibold ${TIP_BOJA[toast.tip] ?? "text-kolo-text"}`}>{toast.naslov}</p>
+            <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed line-clamp-2">{toast.tekst}</p>
+          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); setToast(null); }}
+            className="text-kolo-border hover:text-kolo-muted text-lg leading-none shrink-0"
+          >×</button>
+        </div>
+      )}
       <button
         onClick={() => setOpen((v) => !v)}
         className="relative p-1.5 rounded-lg text-kolo-muted hover:text-kolo-text hover:bg-kolo-bg transition-colors"

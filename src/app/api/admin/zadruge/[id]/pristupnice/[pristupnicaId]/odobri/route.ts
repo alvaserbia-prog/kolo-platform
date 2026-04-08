@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { proveriIEmitujBonusPrag } from "@/lib/banka/zadruga";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 // POST — odobri pristupnicu (admin zadruge ili ADMIN)
 export async function POST(
@@ -53,6 +54,15 @@ export async function POST(
 
   // Proveri bonus prag (van $transaction)
   await proveriIEmitujBonusPrag(zadrugaId);
+
+  const zadruga = await prisma.zadruga.findUnique({ where: { id: zadrugaId }, select: { name: true } });
+  await posaljiNotifikaciju(
+    pristupnica.userId,
+    "info",
+    "Pristupnica prihvaćena!",
+    `Postali ste član zadruge "${zadruga?.name ?? zadrugaId}".`,
+    `/zajednica/${zadrugaId}`
+  );
 
   return NextResponse.json({ ok: true });
 }

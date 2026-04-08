@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 export async function POST(
   _req: NextRequest,
@@ -17,5 +18,14 @@ export async function POST(
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
 
   await prisma.radnaEvidencija.update({ where: { id }, data: { status: "REJECTED" } });
+
+  await posaljiNotifikaciju(
+    ev.userId,
+    "info",
+    "Evidencija rada odbijena",
+    `Evidencija sati je odbijena. Kontaktirajte administratora za više informacija.`,
+    "/programi"
+  );
+
   return NextResponse.json({ ok: true });
 }

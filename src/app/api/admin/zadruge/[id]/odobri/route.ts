@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/banka/emisija";
 import { TransactionType } from "@/generated/prisma/client";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 // POST /api/admin/zadruge/[id]/odobri — odobri osnivanje zadruge
 export async function POST(
@@ -75,6 +76,17 @@ export async function POST(
     TransactionType.EMISIJA_ZADRUGA_OSNIVANJE,
     `Osnivanje zadruge "${zahtev.name}"`
   );
+
+  // 6. Notifikacija svim osnivačima
+  for (const userId of zahtev.osnivaci as string[]) {
+    await posaljiNotifikaciju(
+      userId,
+      "info",
+      `Zadruga "${zahtev.name}" odobrena!`,
+      `Osnivanje zadruge je odobreno. Zadruga je dobila 50.000 POEN startnog kapitala.`,
+      `/zajednica/${zadrugaId}`
+    );
+  }
 
   return NextResponse.json({ ok: true, zadrugaId });
 }

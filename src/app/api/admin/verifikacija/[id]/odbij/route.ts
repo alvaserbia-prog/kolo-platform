@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 // POST /api/admin/verifikacija/[id]/odbij
 export async function POST(
@@ -35,6 +36,14 @@ export async function POST(
       reviewedById: session.user.id,
     },
   });
+
+  await posaljiNotifikaciju(
+    vr.userId,
+    "verifikacija_odbijena",
+    "Verifikacija odbijena",
+    `Vaš zahtev za verifikaciju je odbijen. Razlog: ${razlog}`,
+    "/verifikacija"
+  );
 
   return NextResponse.json({ ok: true });
 }

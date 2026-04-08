@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 export async function POST(
   _req: NextRequest,
@@ -20,6 +21,15 @@ export async function POST(
     where: { id },
     data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });
+
+  const oglas = await prisma.radniOglas.findUnique({ where: { id: prijava.oglasId }, select: { title: true } });
+  await posaljiNotifikaciju(
+    prijava.userId,
+    "info",
+    "Prijava za posao prihvaćena!",
+    `Vaša prijava za oglas "${oglas?.title ?? ""}" je prihvaćena. Možete početi sa evidencijom radnih sati.`,
+    "/programi"
+  );
 
   return NextResponse.json({ ok: true });
 }

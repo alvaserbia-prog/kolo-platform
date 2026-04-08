@@ -81,3 +81,14 @@ body {
   padding: 0.875rem 1.25rem;
   color: #1E4E8C;
 }
+
+/* ── Toast animacija ─────────────────────────────────────────────── */
+
+@keyframes slide-up {
+  from { transform: translateY(1rem); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s ease-out;
+}

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { labelPrograma } from "@/lib/banka/programi";
 
 // POST /api/admin/programi/enrollments/[id]/odbij
 export async function POST(
@@ -25,6 +27,14 @@ export async function POST(
     where: { id },
     data: { status: "REJECTED", rejectionReason: razlog || null },
   });
+
+  await posaljiNotifikaciju(
+    enrollment.userId,
+    "info",
+    `Prijava na program odbijena`,
+    `Vaša prijava na program "${labelPrograma(enrollment.type)}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    "/programi"
+  );
 
   return NextResponse.json({ ok: true });
 }

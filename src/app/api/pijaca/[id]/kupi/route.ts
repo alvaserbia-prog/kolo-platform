@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 // POST /api/pijaca/[id]/kupi
 export async function POST(
@@ -63,6 +64,14 @@ export async function POST(
       },
     });
   });
+
+  await posaljiNotifikaciju(
+    listing.sellerId,
+    "oglas_kupljen",
+    `Oglas "${listing.title}" je kupljen!`,
+    `Primili ste ${listing.price.toLocaleString("sr-RS")} POEN za oglas "${listing.title}".`,
+    "/novcanik"
+  );
 
   return NextResponse.json({ ok: true });
 }

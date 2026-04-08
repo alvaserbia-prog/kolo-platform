@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/banka/emisija";
 import { TransactionType } from "@/generated/prisma/client";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 export async function POST(
   _req: NextRequest,
@@ -38,6 +39,14 @@ export async function POST(
     where: { id },
     data: { status: "EMITTED", approvedById: session.user.id, approvedAt: new Date() },
   });
+
+  await posaljiNotifikaciju(
+    ev.userId,
+    "transfer_primljen",
+    `Primili ste ${ev.amount.toLocaleString("sr-RS")} POEN`,
+    `Evidencija rada za "${ev.oglas.title}" (${ev.hoursWorked}h) je potvrđena.`,
+    "/novcanik"
+  );
 
   return NextResponse.json({ ok: true, amount: ev.amount });
 }
