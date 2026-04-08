@@ -810,20 +810,38 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 
 type SimView = "pregled" | "clanovi" | "zadruge" | "zrno";
 
-function ViewNazad({ onBack }: { onBack: () => void }) {
+const SIM_TABS: { id: SimView; label: string }[] = [
+  { id: "pregled", label: "Pregled" },
+  { id: "clanovi", label: "Članovi" },
+  { id: "zadruge", label: "Zadruge" },
+  { id: "zrno", label: "ZRNO" },
+];
+
+function SimTabs({ view, setView }: { view: SimView; setView: (v: SimView) => void }) {
   return (
-    <button onClick={onBack} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors mb-4">
-      ← Nazad na pregled
-    </button>
+    <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+      {SIM_TABS.map(t => (
+        <button
+          key={t.id}
+          onClick={() => setView(t.id)}
+          className={`flex-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+            view === t.id
+              ? "bg-white text-gray-900 shadow-sm"
+              : "text-gray-500 hover:text-gray-800"
+          }`}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
   );
 }
 
-function ViewClanovi({ members, onBack }: { members: Clan[]; onBack: () => void }) {
+function ViewClanovi({ members }: { members: Clan[] }) {
   const sorted = [...members].sort((a, b) => b.bal - a.bal);
   const ukupno = members.reduce((s, m) => s + m.bal, 0);
   return (
     <div>
-      <ViewNazad onBack={onBack} />
       <div className="flex justify-between items-baseline mb-4">
         <h3 className="text-base font-semibold text-gray-900">Rang lista članova</h3>
         <span className="text-xs text-gray-400">{members.length} članova · ukupno {fmt(ukupno)} P</span>
@@ -869,7 +887,7 @@ function ViewClanovi({ members, onBack }: { members: Clan[]; onBack: () => void 
   );
 }
 
-function ViewZadruge({ zadruge, members, onBack }: { zadruge: Zadruga[]; members: Clan[]; onBack: () => void }) {
+function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[] }) {
   const sorted = [...zadruge].sort((a, b) => b.bal - a.bal);
   const [selId, setSelId] = useState<number | null>(null);
   const sel = selId !== null ? zadruge.find(z => z.id === selId) : null;
@@ -930,7 +948,6 @@ function ViewZadruge({ zadruge, members, onBack }: { zadruge: Zadruga[]; members
 
   return (
     <div>
-      <ViewNazad onBack={onBack} />
       <div className="flex justify-between items-baseline mb-4">
         <h3 className="text-base font-semibold text-gray-900">Rang lista zadruga</h3>
         <span className="text-xs text-gray-400">{zadruge.length} zadruga</span>
@@ -967,11 +984,10 @@ function ViewZadruge({ zadruge, members, onBack }: { zadruge: Zadruga[]; members
   );
 }
 
-function ViewZrno({ last, log, ukupnoZrna, onBack }: { last: DnevniLog; log: DnevniLog[]; ukupnoZrna: number; onBack: () => void }) {
+function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]; ukupnoZrna: number }) {
   const zrnoLog = log.filter(d => d.zrnoKodKorisnika > 0 || d.zrnoKurs > 0);
   return (
     <div>
-      <ViewNazad onBack={onBack} />
       <div className="flex justify-between items-baseline mb-4">
         <h3 className="text-base font-semibold text-gray-900">ZRNO — Dan {last.day}</h3>
         <span className="text-xs text-gray-400">ukupno u sistemu: {ukupnoZrna.toLocaleString("sr-RS")}</span>
@@ -1062,60 +1078,46 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
   const prev2 = log[log.length - 2];
   const deltaOpticaj = last && prev2 ? last.opticaj - prev2.opticaj : 0;
 
-  // Detail views
-  if (view === "clanovi") return (
-    <div className="space-y-4">
-      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
-      <ViewClanovi members={state.members} onBack={() => setView("pregled")} />
-    </div>
-  );
-  if (view === "zadruge") return (
-    <div className="space-y-4">
-      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
-      <ViewZadruge zadruge={state.zadruge} members={state.members} onBack={() => setView("pregled")} />
-    </div>
-  );
-  if (view === "zrno" && last) return (
-    <div className="space-y-4">
-      <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
-      <ViewZrno last={last} log={log} ukupnoZrna={params.ukupnoZrna} onBack={() => setView("pregled")} />
-    </div>
-  );
-
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <Controls playing={playing} speed={speed} onAdvance={advance} onPlay={() => setPlaying(v => !v)} onReset={onReset} onSpeedChange={setSpeed} log={log} />
+      <SimTabs view={view} setView={setView} />
 
-      {/* Klikabilne kartice */}
+      {view === "clanovi" && <ViewClanovi members={state.members} />}
+      {view === "zadruge" && <ViewZadruge zadruge={state.zadruge} members={state.members} />}
+      {view === "zrno" && last && <ViewZrno last={last} log={log} ukupnoZrna={params.ukupnoZrna} />}
+      {view === "zrno" && !last && (
+        <div className="bg-white rounded-2xl border border-gray-200 p-8 text-center text-sm text-gray-400">Pokreni simulaciju da vidiš ZRNO podatke</div>
+      )}
+
+      {view === "pregled" && <>
+      {/* Stat kartice */}
       <div className="grid grid-cols-5 gap-3">
         <div className="bg-white rounded-xl border border-gray-200 p-3">
           <p className="text-xs text-gray-400">Opticaj</p>
           <p className="text-xl font-bold font-mono text-green-700">{last ? fmt(last.opticaj) : "0"}</p>
           {deltaOpticaj > 0 && <p className="text-xs text-gray-400">+{fmt(deltaOpticaj)} danas</p>}
         </div>
-        <button onClick={() => setView("clanovi")}
-          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-blue-300 hover:bg-blue-50/30 transition-colors group">
-          <p className="text-xs text-gray-400 group-hover:text-blue-600">Članovi ›</p>
+        <div className="bg-white rounded-xl border border-gray-200 p-3">
+          <p className="text-xs text-gray-400">Članovi</p>
           <p className="text-xl font-bold font-mono text-gray-900">{last ? last.clanovi : params.pocetnihClanova}</p>
           {last && <p className="text-xs text-gray-400">{last.zadrugari} zadrugara</p>}
-        </button>
-        <button onClick={() => setView("zadruge")}
-          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-green-300 hover:bg-green-50/30 transition-colors group">
-          <p className="text-xs text-gray-400 group-hover:text-green-700">Zadruge ›</p>
+        </div>
+        <div className="bg-white rounded-xl border border-gray-200 p-3">
+          <p className="text-xs text-gray-400">Zadruge</p>
           <p className="text-xl font-bold font-mono text-gray-900">{last ? last.zadruge : "0"}</p>
           {state.zadruge.length > 0 && <p className="text-xs text-gray-400">{state.zadruge.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
-        </button>
+        </div>
         <div className="bg-white rounded-xl border border-gray-200 p-3">
           <p className="text-xs text-gray-400">10% limit</p>
           <p className="text-xl font-bold font-mono text-amber-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
           <p className="text-xs text-gray-400">POEN/dan</p>
         </div>
-        <button onClick={() => last && setView("zrno")}
-          className="bg-white rounded-xl border border-gray-200 p-3 text-left hover:border-purple-300 hover:bg-purple-50/30 transition-colors group">
-          <p className="text-xs text-gray-400 group-hover:text-purple-600">ZRNO ›</p>
+        <div className="bg-white rounded-xl border border-gray-200 p-3">
+          <p className="text-xs text-gray-400">ZRNO kurs</p>
           <p className="text-xl font-bold font-mono text-purple-700">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
           <p className="text-xs text-gray-400">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
-        </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -1206,6 +1208,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
           </div>
         </div>
       )}
+      </>}
     </div>
   );
 }
