@@ -8,17 +8,18 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti. Koristi dve interne jedin
 Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softverski protokol) i članove.
 
 ## Tech stack
-- Next.js 14+ (App Router), TypeScript
-- PostgreSQL, Prisma ORM
+- Next.js 16 (App Router), TypeScript
+- PostgreSQL, Prisma ORM 7
 - NextAuth.js (credentials provider)
-- Tailwind CSS
+- Tailwind CSS v4
 - Srpski jezik (latinica) u celom interfejsu
+- **Nema instaliranog zod, decimal.js, ni sličnih library-a** — validacija ručno, Decimal tipovi se konvertuju sa `Number()`
 
 ## Fundamentalna pravila sistema
 
 1. **Zero-sum princip**: zbir svih računa (uključujući Banku) = 0. Banka ide u minus pri svakoj emisiji.
 2. **Nema negativnog balansa**: korisnici i zadruge nikad ispod 0. Samo Banka može u minus.
-3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je kurs ZRNA (DECIMAL(20,2)).
+3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je kurs ZRNA (DECIMAL(20,2)) i RSD iznosi pokrovitelja (DECIMAL(12,2)).
 4. **Transfer 1:1**: slanje POEN-a između članova je bez provizije, Banka nije posrednik.
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) se izvršavaju u ponoć.
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet.
@@ -28,164 +29,264 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 
 - POEN iznosi: `INTEGER` u bazi, nikad float/decimal.
 - ZRNO količine: `INTEGER` u bazi.
-- Kurs ZRNA: `DECIMAL(20,2)` — jedini decimalni tip u sistemu.
+- Kurs ZRNA: `DECIMAL(20,2)` — jedini decimalni tip u ZRNO sistemu.
+- RSD iznosi (pokrovitelji, donacije): `DECIMAL(12,2)` — konvertovati sa `Number()` pre slanja klijentu.
 - Svaka operacija koja menja balans: obavezno `prisma.$transaction()`.
-- Zero-sum provera: pozivati `checkZeroSum()` nakon svake transakcije u dev modu.
-- API rute: srpski termini (`/api/clanovi`, `/api/transakcije`, `/api/zadruge`).
+- `emitujPoen()` kreira sopstvenu internu transakciju — NE sme da se poziva unutar druge `prisma.$transaction()`.
+- Pattern za multi-korak operacije: DB promene u jednoj transakciji → `emitujPoen()` pozivi sekvencijalno van nje.
+- Zero-sum provera: automatski se zove unutar `emitujPoen()` u dev modu.
+- API rute: srpski termini.
+- Route handleri sa dinamičkim segmentima: params je `Promise<{id: string}>`, mora se `await params`.
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
+- `/api/korisnici/pretraga` vraća array objekata `{ id, pseudonim, verified, location }` direktno (ne `{ rezultati: [...] }`).
 
 ## Struktura foldera
 ```
 src/app/          — Next.js stranice (App Router)
-src/components/   — React komponente
+src/app/(app)/    — autentifikovane stranice (dashboard, admin, novcanik...)
+src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise)
+src/app/pijaca/   — pijaca sa sopstvenim layout-om (ima i javni i auth prikaz)
+src/components/   — React komponente (Sidebar, Header, PublicHeader...)
 src/lib/          — pomoćne funkcije, validacije
-src/lib/banka/    — logika KOLO Banke (emisija, kurs, limiti)
+src/lib/banka/    — logika KOLO Banke (emisija.ts, pokrovitelj.ts, programi.ts...)
 prisma/           — šema i migracije
 docs/             — dokumentacija po fazama
 ```
 
-## Uloge u sistemu
-- **Fizičko lice** — registrovan korisnik
-- **Zadrugar** — fizičko lice učlanjeno u zadrugu
-- **Admin** — Fondacija/Upravni odbor
-- **Pokrovitelj** — pravno lice, nije član sistema (buduća faza)
+## Implementirane funkcionalnosti
 
-## Implementirane stranice
+### Autentikacija i korisnici
+- Registracija sa pseudonimom, email, lozinka, referral kod
+- Login (NextAuth credentials)
+- Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično)
+- Profil: pseudonim, lokacija (autocomplete), telefon, punoIme (u tabeli `UserPodaci`)
+- Javni profil `/profil/[id]` — prikazuje pseudonim, lokaciju, zadrugun, datum; skriva email/balans/pravo ime
+- Suspenzija / isključenje korisnika (admin)
 
-### Javne (bez prijave)
-- `/` — Landing page: hero, statistike, "Kako funkcioniše", "Kako do POEN", primer iz prakse, transparentnost, FAQ, CTA
-- `/login` — Prijava (email + lozinka, NextAuth credentials)
-- `/registracija` — Registracija (pseudonim, email, lozinka, opciono referral kod)
-- `/kako-funkcionise` — Edukativna stranica
-- `/pijaca` — Javni pregled Pijace (bez kontakt podataka, bez pseudonima)
-- `/m/[hash]` — Javna referral stranica (prikazuje pseudonim vlasnika hash-a)
+### Novčanik (POEN)
+- Prikaz stanja
+- Transfer POEN-a između korisnika (1:1, bez provizije)
+- Istorija transakcija sa filterima; klikabilni pseudonimi u transakcijama
+- QR modal: polja za iznos i opis — dinamički menjaju QR kod; `/m/[hash]` prosleđuje `amount` i `opis` na novčanik
 
-### App (zahteva prijavu) — `/src/app/(app)/`
-- `/dashboard` — Pregled stanja: POEN balans, ZRNO, poslednje transakcije, brzi linkovi
-- `/novcanik` — Novčanik: slanje POEN-a (transfer), istorija transakcija
-- `/profil` — Profil: promena pseudonima, lozinke, lokacije (search), telefona; prikaz referral linka
-- `/profil/oglasi` — Korisnikovi aktivni oglasi na Pijaci
-- `/pijaca` — Marketplace: lista oglasa, filteri (kategorija, lokacija), pretraga
-- `/pijaca/[id]` — Detalj oglasa: opis, cena, kupovina za POEN (samo verifikovani)
-- `/pijaca/novi-oglas` — Kreiranje novog oglasa (naziv, opis, cena, kategorija, slike, lokacija, telefon)
-- `/preporuke` — Preporuke: referral link, QR kod, istorija nagrada, stablo preporuka
-- `/donacije` — Donacije: podnošenje zahteva za donaciju, istorija donacija, kurs POEN/RSD
-- `/verifikacija` — Zahtev za verifikaciju identiteta: upload dokumenata (prednja/zadnja strana) ili lično
-- `/programi` — Programi Banke: katalog 5 programa, prijava, evidencija (Zapošljavanje), emisioni kontekst
-- `/zajednica` — Lista zadruga: pregled, filter, pretraga, CTA za osnivanje
-- `/zajednica/osnivanje` — Forma za osnivanje zadruge (sedište, naziv, opis, osnivači — min 5)
-- `/zajednica/[id]` — Detalj zadruge: info, članovi, projekti, pristupnice (admin), programi (admin)
-- `/glasanje` — Lista glasanja: aktivni predlozi, ZRNO težine, rok
-- `/glasanje/[id]` — Detalj predloga: opis, glasanje Za/Protiv, prikaz rezultata
-- `/zrno` — ZRNO upravljanje: stanje (slobodno/aktivno), kupovina, prodaja, zaključavanje, delegacija
-- `/sistem` — Javna transparentnost (tabovi): Pregled, Članovi, Transakcije, Programi, Zadruge
-- `/admin` — Admin panel (tabovi): Dashboard, Na čekanju, Zadruge, Programi, Korisnici, Finansije, Audit log
+### Poruke (Chat)
+- `/poruke` — split-panel: levo lista konverzacija, desno chat
+- Polling 5s za nove poruke, badge nepročitanih, automatski scroll
+- Enter za slanje, Shift+Enter za novi red; poruke se označavaju pročitanima pri otvaranju
+- "Kontaktiraj prodavca" dugme na svakom oglasu na Pijaci
+- Notifikacija primaocu pri svakoj poruci
 
-## Implementirani API endpointi
+### Pijaca (Marketplace)
+- Listinzi za prodaju/razmenu
+- Pretraga po kategoriji, lokaciji
+- Javni prikaz (bez pseudonima) i prijavljeni prikaz
+- Sopstveni layout (`src/app/pijaca/layout.tsx`)
 
-### Autentifikacija i korisnici
-- `POST /api/registracija` — Registracija novog korisnika
-- `GET /api/provjeri-pseudonim` — Live provera dostupnosti pseudonima
-- `PATCH /api/profil/pseudonim` — Promena pseudonima
-- `PATCH /api/profil/lozinka` — Promena lozinke
-- `PATCH /api/profil/lokacija` — Promena lokacije i telefona
-- `GET /api/profil/balans` — Trenutni balans korisnika
-- `GET /api/korisnici/pretraga` — Pretraga korisnika po pseudonimu (za osnivanje zadruge)
-- `GET /api/m/[hash]/pseudonim` — Dohvati pseudonim za referral hash
-
-### Novčanik i transakcije
-- `POST /api/transfer` — Slanje POEN-a drugom korisniku
-- `GET /api/novcanik/transakcije` — Istorija transakcija korisnika
-
-### Pijaca
-- `GET /api/pijaca` — Lista oglasa (javno, sa filterima)
-- `POST /api/pijaca` — Kreiranje oglasa
-- `GET /api/pijaca/[id]` — Detalj oglasa
-- `DELETE /api/pijaca/[id]` — Brisanje oglasa
-- `POST /api/pijaca/[id]/kupi` — Kupovina oglasa za POEN
-- `GET /api/pijaca/slika/[listingId]/[idx]` — Prikaz slike oglasa
-
-### Verifikacija
-- `POST /api/verifikacija` — Podnošenje zahteva za verifikaciju
-- `GET /api/admin/dokument/[requestId]/[side]` — Pregled dokumenta (admin)
-- `POST /api/admin/verifikacija/[id]` — Odobravanje verifikacije (admin)
-- `POST /api/admin/verifikacija/[id]/odbij` — Odbijanje verifikacije (admin)
-
-### Preporuke i donacije
-- `GET /api/preporuke` — Stablo preporuka i istorija nagrada
-- `POST /api/donacije` — Podnošenje zahteva za donaciju
-- `GET /api/donacije` — Istorija donacija korisnika
-- `GET/POST /api/admin/donacija` — Pregled i potvrda donacija (admin)
-
-### Programi Banke
-- `GET /api/programi` — Lista programa sa statusom enrollmenta
-- `POST /api/programi/[type]/prijava` — Prijava na program
-- `POST /api/programi/zaposljavnje/evidencija` — Dnevna evidencija (Zapošljavanje)
-- `POST /api/admin/programi/[type]/toggle` — Aktivacija/deaktivacija programa (admin)
-- `POST /api/admin/programi/enrollments/[id]/odobri` — Odobravanje enrollmenta (admin)
-- `POST /api/admin/programi/enrollments/[id]/odbij` — Odbijanje enrollmenta (admin)
-- `POST /api/admin/programi/zaposljavnje/[id]/odobri` — Odobravanje evidencije (admin)
-- `POST /api/admin/programi/zaposljavnje/[id]/odbij` — Odbijanje evidencije (admin)
-- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odobri` — Odobravanje enrollmenta (zadruga admin)
-- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odbij` — Odbijanje enrollmenta (zadruga admin)
-- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odobri` — Odobravanje evidencije (zadruga admin)
-- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odbij` — Odbijanje evidencije (zadruga admin)
+### Pretraga članova
+- `ClanPretraga` komponenta (debounce 250ms, keyboard navigacija ↑↓ Enter Escape)
+- Prisutna na: Dashboard (verifikovani), Sistem → Članovi, Zajednica
+- Klikabilni pseudonimi u tabelama (zadruga, transakcije, sistem, dashboard)
 
 ### Zadruge
-- `GET /api/zadruge` — Lista zadruga
-- `POST /api/zadruge` — Podnošenje zahteva za osnivanje zadruge
-- `GET /api/zadruge/[id]` — Detalj zadruge
-- `DELETE /api/zadruge/[id]` — Istupanje iz zadruge
-- `POST /api/zadruge/[id]/pristupnica` — Podnošenje pristupnice
-- `POST /api/zadruge/[id]/projekti` — Kreiranje projekta zadruge
-- `POST /api/admin/zadruge/[id]/odobri` — Odobravanje osnivanja (admin, emituje 50.000 POEN)
-- `POST /api/admin/zadruge/[id]/odbij` — Odbijanje osnivanja (admin)
-- `POST /api/admin/zadruge/[id]/pristupnice/[pristupnicaId]/odobri` — Odobravanje pristupnice (admin/zadruga admin)
-- `GET /api/admin/zadruge-lista` — Lista svih zadruga (admin)
+- Osnivanje zadruge (zahtev → admin odobrava, 50.000 POEN emisija)
+- Pristupnica (zahtev za učlanjenje)
+- Projekti zadruge (PRIKUPLJANJE, REDISTRIBUCIJA)
+- Admin panel zadruge (upravljanje članovima, projektima)
 
-### ZRNO sistem
-- `GET /api/zrno` — ZRNO stanje (slobodno, aktivno, kurs, tržište)
-- `POST /api/zrno/kupi` — Zahtev za kupovinu ZRNA
-- `POST /api/zrno/prodaj` — Zahtev za prodaju ZRNA
-- `POST /api/zrno/zakljucaj` — Zahtev za zaključavanje ZRNA
-- `POST /api/zrno/otkljucaj` — Zahtev za otključavanje ZRNA
-- `POST /api/zrno/delegiraj` — Delegacija glasačkih prava
-- `POST /api/admin/zrno/nocna` — Noćna ZRNO obrada (admin/cron)
+### Programi Banke
+- ZAPOSLJAVNJE, PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE
+- Enrollment (zahtev → admin odobrava, postavlja dailyAmount)
+- Evidencija rada (dnevna, admin potvrđuje → emisija)
+- Dnevni emisioni limit (10% opticaja), DailyEmissionSummary
+
+### Zapošljavanje (Radni oglasi)
+- Admin kreira oglas (FONDACIJA | ZADRUGA | PROJEKAT), hourlyRate 1000–2500 POEN/sat
+- Korisnik se prijavljuje → admin odobrava
+- Evidencija sati → admin potvrđuje → emisija (hoursWorked × hourlyRate)
+
+### ZRNO
+- Kupovina/prodaja ZRNA (zahtev → noćni cron)
+- Zaključaj/otključaj ZRNO
+- Delegacija glasačke moći
+- Dnevni kurs
 
 ### Glasanje
-- `GET /api/glasanje` — Lista predloga
-- `POST /api/glasanje` — Kreiranje predloga (admin)
-- `GET /api/glasanje/[id]` — Detalj predloga
-- `POST /api/glasanje/[id]/glasaj` — Glasanje Za/Protiv
+- Predlozi, glasanje sa ponderisanom glasačkom moći
+
+### Pokrovitelji
+- Pokrovitelj = pravno lice, nema login, ima vlasnika (verifikovani član)
+- Admin kreira pokrovitelja (naziv, PIB, vlasnikId, zadrugaId?)
+- Admin evidentira doprinos u RSD → automatski bonus POEN vlasniku po nivoima
+- Nivo 1 (prvi doprinos): 20.000 POEN; Nivo 2+: prag u RSD = bonus u POEN (1-2-5 skala, bez gornje granice)
+- Pragovi: 50k, 100k, 200k, 500k, 1M, 2M, 5M, ... RSD
+- Javna stranica: `/pokrovitelji`, app stranica: `/postani-pokrovitelj`
+- Logika: `src/lib/banka/pokrovitelj.ts`
+
+### Donacije
+- Donacije fizičkih lica Fondaciji (RSD), admin potvrđuje, emisija POEN-a
+
+### Preporuke
+- Referral sistem, nagrade po tabeli
+
+### Notifikacije
+- Bell ikona u Header-u sa badge-om nepročitanih
+- Dropdown panel sa listom, "Označi sve kao pročitano"
+- Toast koji se pojavljuje u realnom vremenu (polling 15s) kad stigne nova notifikacija
+- `posaljiNotifikaciju()` helper u `src/lib/notifikacije.ts`
+- Trigeri: transfer primljen, verifikacija odobrena/odbijena, zadruga odobrena/odbijena,
+  pristupnica prihvaćena, program enrollment odobren/odbijen, zapošljavanje prijava/evidencija,
+  oglas kupljen, nova poruka
+
+### Sistem i ZRNO tržište
+- Tržišne informacije, admin kontrole
+- Tabovi: Pregled, Članovi (klikabilni), Transakcije (klikabilni), Programi, Zadruge
+
+### Admin panel
+- Tabs: Dashboard, Na čekanju, Zadruge, Programi, Zapošljavanje, Pokrovitelji, Korisnici, Finansije, Audit log
+- Audit log za sve admin akcije
+
+## Uloge u sistemu
+- **Fizičko lice** — registrovan korisnik (neverifikovan ili verifikovan)
+- **Zadrugar** — fizičko lice učlanjeno u zadrugu
+- **Admin** — Fondacija/Upravni odbor
+- **Pokrovitelj** — pravno lice, nema nalog, vlasnik je verifikovani član
+
+## Sidebar linkovi
+- Neverifikovan: Početna, Novčanik, Poruke, Pijaca, Sistem, Verifikacija, Profil
+- Verifikovan: Početna, Novčanik, Poruke, Pijaca, Zajednica, Zapošljavanje, Programi, ZRNO, Sistem, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
+- Admin (dodatno): Admin, Simulator
+
+## API endpointi
+
+### Autentifikacija i korisnici
+- `POST /api/registracija`
+- `GET /api/provjeri-pseudonim`
+- `PATCH /api/profil/pseudonim`
+- `PATCH /api/profil/lozinka`
+- `PATCH /api/profil/lokacija`
+- `PATCH /api/profil/podaci` — punoIme (UserPodaci tabela)
+- `GET /api/profil/balans`
+- `GET /api/korisnici/pretraga` — vraća `[{ id, pseudonim, verified, location }]`
+- `GET /api/m/[hash]/pseudonim`
+
+### Novčanik i transakcije
+- `POST /api/transfer`
+- `GET /api/novcanik/transakcije`
+
+### Poruke
+- `GET /api/poruke` — lista konverzacija
+- `POST /api/poruke` — otvori/kreiraj konverzaciju (`{ userId }`)
+- `GET /api/poruke/[konvId]` — poruke u konverzaciji (označava pročitanima)
+- `POST /api/poruke/[konvId]` — pošalji poruku
+
+### Pijaca
+- `GET /api/pijaca`
+- `POST /api/pijaca`
+- `GET /api/pijaca/[id]`
+- `DELETE /api/pijaca/[id]`
+- `POST /api/pijaca/[id]/kupi`
+- `GET /api/pijaca/slika/[listingId]/[idx]`
+
+### Verifikacija
+- `POST /api/verifikacija`
+- `GET /api/admin/dokument/[requestId]/[side]`
+- `POST /api/admin/verifikacija/[id]`
+- `POST /api/admin/verifikacija/[id]/odbij`
+
+### Preporuke i donacije
+- `GET /api/preporuke`
+- `POST /api/donacije`
+- `GET /api/donacije`
+- `GET/POST /api/admin/donacija`
+
+### Programi Banke
+- `GET /api/programi`
+- `POST /api/programi/[type]/prijava`
+- `POST /api/programi/zaposljavnje/evidencija`
+- `POST /api/admin/programi/[type]/toggle`
+- `POST /api/admin/programi/enrollments/[id]/odobri`
+- `POST /api/admin/programi/enrollments/[id]/odbij`
+- `POST /api/admin/programi/zaposljavnje/[id]/odobri`
+- `POST /api/admin/programi/zaposljavnje/[id]/odbij`
+- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odobri`
+- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odbij`
+- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odobri`
+- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odbij`
+
+### Zadruge
+- `GET /api/zadruge`
+- `POST /api/zadruge`
+- `GET /api/zadruge/[id]`
+- `DELETE /api/zadruge/[id]`
+- `POST /api/zadruge/[id]/pristupnica`
+- `POST /api/zadruge/[id]/projekti`
+- `POST /api/admin/zadruge/[id]/odobri`
+- `POST /api/admin/zadruge/[id]/odbij`
+- `POST /api/admin/zadruge/[id]/pristupnice/[pristupnicaId]/odobri`
+- `GET /api/admin/zadruge-lista`
+
+### Pokrovitelji
+- `GET /api/pokrovitelji` — javna lista
+- `GET /api/admin/pokrovitelji` — admin lista
+- `POST /api/admin/pokrovitelji` — kreiranje
+- `GET /api/admin/pokrovitelji/[id]`
+- `PATCH /api/admin/pokrovitelji/[id]`
+- `POST /api/admin/pokrovitelji/[id]/doprinos`
+
+### ZRNO sistem
+- `GET /api/zrno`
+- `POST /api/zrno/kupi`
+- `POST /api/zrno/prodaj`
+- `POST /api/zrno/zakljucaj`
+- `POST /api/zrno/otkljucaj`
+- `POST /api/zrno/delegiraj`
+- `POST /api/admin/zrno/nocna`
+
+### Glasanje
+- `GET /api/glasanje`
+- `POST /api/glasanje`
+- `GET /api/glasanje/[id]`
+- `POST /api/glasanje/[id]/glasaj`
+
+### Zapošljavanje
+- `POST /api/admin/zaposljavnje/oglasi`
+- `POST /api/admin/zaposljavnje/prijave/[id]/odobri`
+- `POST /api/admin/zaposljavnje/prijave/[id]/odbij`
+- `POST /api/admin/zaposljavnje/evidencija/[id]/odobri`
+- `POST /api/admin/zaposljavnje/evidencija/[id]/odbij`
 
 ### Admin i sistem
-- `GET /api/admin/dashboard` — Agregirani podaci za admin dashboard
-- `GET /api/admin/transakcije` — Sve transakcije (admin)
-- `POST /api/admin/emisija/nocna` — Ručno pokretanje noćne emisije (admin)
-- `POST /api/cron/nocna-emisija` — Cron trigger za noćnu emisiju
-- `GET /api/admin/audit-log` — Audit log (admin)
-- `POST /api/admin/korisnici/[id]/suspenduj` — Suspenzija korisnika (admin)
-- `POST /api/admin/korisnici/[id]/aktiviraj` — Aktivacija korisnika (admin)
-- `POST /api/admin/korisnici/[id]/iskljuci` — Isključenje korisnika (admin)
-- `POST /api/admin/korisnici/[id]/rucna-verifikacija` — Ručna verifikacija (admin)
-- `GET /api/admin/zero-sum` — Provera zero-sum integriteta (admin)
-- `GET /api/javno/statistike` — Javne statistike (broj članova, opticaj)
-- `GET /api/notifikacije` — Notifikacije korisnika
+- `GET /api/admin/dashboard`
+- `GET /api/admin/transakcije`
+- `POST /api/admin/emisija/nocna`
+- `POST /api/cron/nocna-emisija`
+- `GET /api/admin/audit-log`
+- `POST /api/admin/korisnici/[id]/suspenduj`
+- `POST /api/admin/korisnici/[id]/aktiviraj`
+- `POST /api/admin/korisnici/[id]/iskljuci`
+- `POST /api/admin/korisnici/[id]/rucna-verifikacija`
+- `GET /api/admin/zero-sum`
+- `GET /api/javno/statistike`
+- `GET /api/notifikacije`
+- `PATCH /api/notifikacije`
 
-## Biblioteka funkcija (`src/lib/banka/`)
+## Biblioteka funkcija (`src/lib/`)
 
-- `emisija.ts` — `emitujPoen()`: emisija POEN-a iz Banke, zero-sum validacija
-- `programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`: logika programa Banke
-- `donacija.ts` — Logika donacija, kurs POEN/RSD
-- `zadruga.ts` — Bonus zadruge pri osnivanju (50.000 POEN)
-- `zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA
+- `banka/emisija.ts` — `emitujPoen()`: emisija POEN-a iz Banke, zero-sum validacija
+- `banka/programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
+- `banka/pokrovitelj.ts` — `evidentirajDoprinos()`, generator pragova 1-2-5, `bonusZaNivo()`
+- `banka/donacija.ts` — logika donacija, kurs POEN/RSD
+- `banka/zadruga.ts` — bonus zadruge pri osnivanju (50.000 POEN)
+- `banka/zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA
+- `notifikacije.ts` — `posaljiNotifikaciju(userId, tip, naslov, tekst, link?)`
 
 ## Shared komponente (`src/components/`)
 
 - `Sidebar.tsx` — Navigacija (različiti linkovi za verifikovanog/neverifikovanog/admina)
-- `Header.tsx` — Gornji header sa odjava dugmetom
-- `PublicHeader.tsx` — Header za javne stranice (logo, login/registracija linkovi)
-- `LokacijaSearch.tsx` — Autocomplete polje za srpska naselja (client-side, ~840 naselja, dijakritike-tolerantno)
+- `Header.tsx` — Header sa balans prikazom, bell notifikacijama (polling 15s), toast
+- `PublicHeader.tsx` — Header za javne stranice (logo, linkovi, Pokrovitelji)
+- `LokacijaSearch.tsx` — Autocomplete za srpska naselja (keyboard navigacija ↑↓ Enter Escape)
+- `ClanPretraga.tsx` — Autocomplete za pretragu članova, navigira na `/profil/[id]`
 - `Providers.tsx` — NextAuth SessionProvider wrapper
 - `EmptyState.tsx` — Reusable empty state komponenta
 
