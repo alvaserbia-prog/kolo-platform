@@ -8,7 +8,7 @@ export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
-  const [wallet, banka, verRequest, poslednje] = await Promise.all([
+  const [wallet, banka, verRequest, preporucilac, poslednje] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
@@ -23,6 +23,13 @@ export default async function DashboardPage() {
           where: { userId: session.user.id },
           select: { status: true },
         }),
+    // Preporučilac — vidljiv neverifikovanom korisniku
+    !session.user.verified
+      ? prisma.user.findUnique({
+          where: { id: session.user.id },
+          select: { referredBy: { select: { pseudonim: true } } },
+        })
+      : Promise.resolve(null),
     prisma.transaction.findMany({
       where: {
         OR: [
@@ -41,6 +48,7 @@ export default async function DashboardPage() {
 
   const opticaj = banka ? Math.abs(banka.balance) : 0;
   const walletId = wallet?.id ?? "";
+  const preporucilacPseudonim = preporucilac?.referredBy?.pseudonim ?? null;
 
   const txData = poslednje.map((t) => {
     const primio = t.toWallet?.userId === session.user.id;
@@ -87,6 +95,14 @@ export default async function DashboardPage() {
           <p className="text-sm text-kolo-muted">POEN u sistemu</p>
         </div>
       </div>
+
+      {/* Preporučio vas */}
+      {!session.user.verified && preporucilacPseudonim && (
+        <div className="bg-white rounded-2xl card-shadow border border-kolo-border px-5 py-4">
+          <p className="text-xs text-kolo-muted mb-0.5">Preporučio vas u KOLO</p>
+          <p className="text-base font-semibold text-kolo-green-700">{preporucilacPseudonim}</p>
+        </div>
+      )}
 
       {!session.user.verified && verRequest?.status === "PENDING" && (
         <div className="box-warning">

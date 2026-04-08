@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionType } from "@/generated/prisma/client";
+import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
 
 // ─── Rang tabela — Prilog 1, tačka 1 ─────────────────────────────────────────
@@ -46,16 +46,21 @@ export function izracunajPoenZaDonaciju(
 
 /**
  * Admin evidentira donaciju i emituje POEN iz Banke.
+ * Ako je existingRecordId zadato — ažurira taj PENDING zapis umesto kreiranja novog.
  */
 export async function evidentirajDonaciju(
   userId: string,
-  novaRSD: number
+  novaRSD: number,
+  options?: { existingRecordId?: string; adminId?: string }
 ): Promise<{ poenEmitted: number; nivo: number; kurs: number; noviKumulativ: number }> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {
       wallet: true,
-      donations: { select: { amountRSD: true } },
+      donations: {
+        where: { status: DonationStatus.CONFIRMED },
+        select: { amountRSD: true },
+      },
     },
   });
 
@@ -68,15 +73,35 @@ export async function evidentirajDonaciju(
 
   if (poen <= 0) throw new Error("Iznos donacije mora biti pozitivan.");
 
-  await prisma.donationRecord.create({
-    data: {
-      userId,
-      amountRSD: novaRSD,
-      cumulativeRSD: noviKumulativ,
-      level: nivo,
-      poenEmitted: poen,
-    },
-  });
+  if (options?.existingRecordId) {
+    // Ažuriraj existing PENDING zapis
+    await prisma.donationRecord.update({
+      where: { id: options.existingRecordId },
+      data: {
+        amountRSD: novaRSD,
+        cumulativeRSD: noviKumulativ,
+        level: nivo,
+        poenEmitted: poen,
+        status: DonationStatus.CONFIRMED,
+        confirmedAt: new Date(),
+        confirmedById: options.adminId ?? null,
+      },
+    });
+  } else {
+    // Kreiraj novi CONFIRMED zapis
+    await prisma.donationRecord.create({
+      data: {
+        userId,
+        amountRSD: novaRSD,
+        cumulativeRSD: noviKumulativ,
+        level: nivo,
+        poenEmitted: poen,
+        status: DonationStatus.CONFIRMED,
+        confirmedAt: new Date(),
+        confirmedById: options?.adminId ?? null,
+      },
+    });
+  }
 
   await emitujPoen(
     user.wallet.id,

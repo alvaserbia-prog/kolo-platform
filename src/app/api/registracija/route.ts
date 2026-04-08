@@ -3,13 +3,23 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 
+const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
 function generateReferralCode(): string {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let code = "";
   for (let i = 0; i < 8; i++) {
-    code += chars[Math.floor(Math.random() * chars.length)];
+    code += CHARS[Math.floor(Math.random() * CHARS.length)];
   }
   return code;
+}
+
+function generateMemberHash(): string {
+  const chars = "abcdefghijkmnpqrstuvwxyz23456789";
+  let hash = "";
+  for (let i = 0; i < 8; i++) {
+    hash += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return hash;
 }
 
 export async function POST(req: NextRequest) {
@@ -49,10 +59,14 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Generiši jedinstven referral kod
+    // Generiši jedinstven referral kod i member hash
     let myCode = generateReferralCode();
     while (await prisma.user.findUnique({ where: { referralCode: myCode } })) {
       myCode = generateReferralCode();
+    }
+    let myHash = generateMemberHash();
+    while (await prisma.user.findUnique({ where: { memberHash: myHash } })) {
+      myHash = generateMemberHash();
     }
 
     const passwordHash = await bcrypt.hash(password, 12);
@@ -65,6 +79,7 @@ export async function POST(req: NextRequest) {
           passwordHash,
           pseudonim,
           referralCode: myCode,
+          memberHash: myHash,
           referredById: referrer?.id ?? null,
           wallet: {
             create: { type: WalletType.USER, balance: 0 },

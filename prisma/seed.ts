@@ -32,6 +32,7 @@ async function main() {
       verified: true,
       verifiedAt: new Date(),
       referralCode: "ADMIN0000",
+      memberHash: "adm00001",
       wallet: {
         create: {
           type: WalletType.USER,

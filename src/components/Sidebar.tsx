@@ -16,6 +16,8 @@ const linkoviVerifikovan = [
   { href: "/programi", label: "Programi" },
   { href: "/zrno", label: "ZRNO" },
   { href: "/glasanje", label: "Glasanje" },
+  { href: "/preporuke", label: "Preporuke" },
+  { href: "/donacije", label: "Donacije" },
   { href: "/profil", label: "Profil" },
 ];
 

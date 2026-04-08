@@ -18,7 +18,7 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl;
         // Javne rute — ne zahtevaju prijavu
-        const javneRute = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost"];
+        const javneRute = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost", "/m"];
         if (javneRute.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
           return true;
         }
@@ -30,6 +30,6 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/((?!login|registracija|api/auth|api/registracija|api/javno|api/provjeri-pseudonim|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png).*)",
+    "/((?!login|registracija|api/auth|api/registracija|api/javno|api/provjeri-pseudonim|api/m|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png).*)",
   ],
 };

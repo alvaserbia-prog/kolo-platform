@@ -41,11 +41,13 @@ type Filter = "sve" | "primljeno" | "poslato" | "emisije";
 interface Props {
   balance: number;
   pseudonim: string;
+  memberHash: string;
   transakcije: Transakcija[];
   platiPseudonim?: string;
+  prefillIznos?: string;
 }
 
-export default function NovcanikKlijent({ balance, pseudonim, transakcije, platiPseudonim }: Props) {
+export default function NovcanikKlijent({ balance, pseudonim, memberHash, transakcije, platiPseudonim, prefillIznos }: Props) {
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>("sve");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
@@ -87,12 +89,13 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije, plati
           onClose={() => setShowSend(false)}
           onSuccess={() => { setShowSend(false); router.refresh(); }}
           initialPseudonim={platiPseudonim}
+          initialIznos={prefillIznos}
         />
       )}
 
       {/* QR modal */}
       {showQR && (
-        <QRModal pseudonim={pseudonim} onClose={() => setShowQR(false)} />
+        <QRModal pseudonim={pseudonim} memberHash={memberHash} onClose={() => setShowQR(false)} />
       )}
 
       {/* Istorija transakcija */}
@@ -165,9 +168,9 @@ export default function NovcanikKlijent({ balance, pseudonim, transakcije, plati
 
 // ── Forma za slanje ────────────────────────────────────────────────────────────
 
-function SendForma({ onClose, onSuccess, initialPseudonim }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string }) {
+function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string }) {
   const [pseudonim, setPseudonim] = useState(initialPseudonim ?? "");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(initialIznos ?? "");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -308,15 +311,12 @@ function SendForma({ onClose, onSuccess, initialPseudonim }: { onClose: () => vo
 
 // ── QR modal ──────────────────────────────────────────────────────────────────
 
-function QRModal({ pseudonim, onClose }: { pseudonim: string; onClose: () => void }) {
-  const qrValue = typeof window !== "undefined"
-    ? `${window.location.origin}/novcanik?plati=${encodeURIComponent(pseudonim)}`
-    : `/novcanik?plati=${encodeURIComponent(pseudonim)}`;
+function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; memberHash: string; onClose: () => void }) {
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://kolo.rs";
+  const qrValue = memberHash ? `${baseUrl}/m/${memberHash}` : `${baseUrl}/novcanik?plati=${encodeURIComponent(pseudonim)}`;
 
   function kopiraj() {
-    if (typeof window !== "undefined") {
-      navigator.clipboard.writeText(qrValue).catch(() => {});
-    }
+    navigator.clipboard.writeText(qrValue).catch(() => {});
   }
 
   return (

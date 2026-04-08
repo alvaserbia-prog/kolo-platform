@@ -7,16 +7,22 @@ import NovcanikKlijent from "./NovcanikKlijent";
 export default async function NovcanikPage({
   searchParams,
 }: {
-  searchParams: Promise<{ plati?: string }>;
+  searchParams: Promise<{ plati?: string; primalac?: string; iznos?: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  const { plati } = await searchParams;
+  const { plati, primalac, iznos } = await searchParams;
 
-  const wallet = await prisma.wallet.findUnique({
-    where: { userId: session.user.id },
-    select: { id: true, balance: true },
-  });
+  const [wallet, dbUser] = await Promise.all([
+    prisma.wallet.findUnique({
+      where: { userId: session.user.id },
+      select: { id: true, balance: true },
+    }),
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { memberHash: true },
+    }),
+  ]);
 
   const transakcije = await prisma.transaction.findMany({
     where: {
@@ -61,8 +67,10 @@ export default async function NovcanikPage({
     <NovcanikKlijent
       balance={wallet?.balance ?? 0}
       pseudonim={session.user.pseudonim}
+      memberHash={dbUser?.memberHash ?? ""}
       transakcije={txData}
-      platiPseudonim={plati}
+      platiPseudonim={plati ?? primalac}
+      prefillIznos={iznos}
     />
   );
 }

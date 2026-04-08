@@ -22,6 +22,38 @@ function jacina(p: string): { nivo: number; tekst: string; boja: string } {
 export default function RegistracijaPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", pseudonim: "", password: "", passwordConfirm: "", referralCode: "" });
+
+  // Auto-popuni referral iz cookie ili localStorage (postavljeno pri kliknu na /m/{hash})
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    // Pokušaj localStorage
+    const lsRef = localStorage.getItem("kolo_ref");
+    if (lsRef) {
+      // Treba da pronađemo pseudonim za ovaj hash
+      fetch(`/api/m/${lsRef}/pseudonim`)
+        .then((r) => r.ok ? r.json() : null)
+        .then((data) => {
+          if (data?.referralCode) {
+            setForm((f) => ({ ...f, referralCode: data.referralCode }));
+          }
+        })
+        .catch(() => {});
+      return;
+    }
+    // Pokušaj cookie
+    const match = document.cookie.match(/(?:^|;\s*)kolo_ref=([^;]+)/);
+    if (match) {
+      fetch(`/api/m/${match[1]}/pseudonim`)
+        .then((r) => r.ok ? r.json() : null)
+        .then((data) => {
+          if (data?.referralCode) {
+            setForm((f) => ({ ...f, referralCode: data.referralCode }));
+          }
+        })
+        .catch(() => {});
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [pseudonimStatus, setPseudonimStatus] = useState<"idle" | "checking" | "slobodan" | "zauzet">("idle");
