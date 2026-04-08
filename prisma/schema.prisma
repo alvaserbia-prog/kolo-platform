@@ -133,6 +133,8 @@ model User {
   pseudonimChangedAt DateTime?
   referralCode       String    @unique
   memberHash         String    @unique
+  location           String?
+  telefon            String?
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")

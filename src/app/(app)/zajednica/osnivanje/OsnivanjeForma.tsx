@@ -3,12 +3,22 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import LokacijaSearch from "@/components/LokacijaSearch";
 
-export default function OsnivanjeForma() {
+function generisiIme(location: string) {
+  return location.trim() ? `KOLO Zadruga ${location.trim()}` : "";
+}
+
+interface Props {
+  userLocation: string | null;
+}
+
+export default function OsnivanjeForma({ userLocation }: Props) {
   const router = useRouter();
-  const [name, setName] = useState("");
+  const [location, setLocation] = useState(userLocation ?? "");
+  const [name, setName] = useState(generisiIme(userLocation ?? ""));
+  const [nameEdited, setNameEdited] = useState(false);
   const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
   const [osnivaci, setOsnivaci] = useState<{ id: string; pseudonim: string }[]>([]);
   const [searchQ, setSearchQ] = useState("");
   const [sugestije, setSugestije] = useState<{ id: string; pseudonim: string }[]>([]);
@@ -16,6 +26,13 @@ export default function OsnivanjeForma() {
   const [error, setError] = useState("");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+
+  // Auto-generisi ime kad se lokacija promeni (osim ako je korisnik već ručno izmenio)
+  useEffect(() => {
+    if (!nameEdited) {
+      setName(generisiIme(location));
+    }
+  }, [location, nameEdited]);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -32,7 +49,6 @@ export default function OsnivanjeForma() {
     debounceRef.current = setTimeout(async () => {
       const res = await fetch(`/api/korisnici/pretraga?q=${encodeURIComponent(val.trim())}`);
       const data = await res.json();
-      // Filtriraj već dodane
       const dodatiIds = new Set(osnivaci.map((o) => o.id));
       const filtered = (data.rezultati as string[])
         .filter((ps: string) => !dodatiIds.has(ps))
@@ -43,7 +59,7 @@ export default function OsnivanjeForma() {
 
   function dodajOsnivaoca(ps: string) {
     if (osnivaci.find((o) => o.pseudonim === ps)) return;
-    if (osnivaci.length >= 9) return; // max 9 + inicijator = 10
+    if (osnivaci.length >= 9) return;
     setOsnivaci((prev) => [...prev, { id: ps, pseudonim: ps }]);
     setSearchQ("");
     setSugestije([]);
@@ -95,33 +111,62 @@ export default function OsnivanjeForma() {
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5 bg-white rounded-2xl border border-gray-200 p-6">
+
+        {/* Sedište */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Sedište <span className="text-gray-400 font-normal">(mesto osnivanja)</span>
+          </label>
+          <LokacijaSearch
+            value={location}
+            onChange={(val) => setLocation(val)}
+            placeholder="npr. Sombor"
+          />
+          {!userLocation && (
+            <p className="text-xs text-gray-400 mt-1.5">
+              Možeš podesiti default lokaciju u{" "}
+              <Link href="/profil" className="text-kolo-green-700 hover:underline">profilu</Link>.
+            </p>
+          )}
+        </div>
+
+        {/* Naziv */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">Naziv zadruge *</label>
-          <input type="text" maxLength={80} value={name} onChange={(e) => setName(e.target.value)}
-            placeholder="npr. Zadruga Sunce"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
+          <input
+            type="text"
+            maxLength={80}
+            value={name}
+            onChange={(e) => { setName(e.target.value); setNameEdited(true); }}
+            placeholder="npr. KOLO Zadruga Sombor"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+          />
+          {!nameEdited && location && (
+            <p className="text-xs text-gray-400 mt-1.5">Naziv je automatski generisan iz sedišta.</p>
+          )}
         </div>
 
+        {/* Opis */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Opis <span className="text-gray-400 font-normal">(opciono)</span></label>
-          <textarea rows={3} maxLength={300} value={description} onChange={(e) => setDescription(e.target.value)}
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Opis <span className="text-gray-400 font-normal">(opciono)</span>
+          </label>
+          <textarea
+            rows={3}
+            maxLength={300}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="Kratki opis ciljeva i delatnosti zadruge..."
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none transition-colors" />
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 resize-none transition-colors"
+          />
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Sedište <span className="text-gray-400 font-normal">(opciono)</span></label>
-          <input type="text" maxLength={60} value={location} onChange={(e) => setLocation(e.target.value)}
-            placeholder="npr. Novi Sad"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
-        </div>
-
+        {/* Osnivači */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Osnivači * <span className="text-gray-400 font-normal">({osnivaci.length + 1}/min 5 — vi ste prvi)</span>
           </label>
 
-          {/* Dodati osnivači */}
           {osnivaci.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-3">
               {osnivaci.map((o) => (
@@ -134,12 +179,15 @@ export default function OsnivanjeForma() {
             </div>
           )}
 
-          {/* Pretraga */}
           <div className="relative" ref={searchRef}>
-            <input type="text" value={searchQ} onChange={(e) => handleSearch(e.target.value)}
+            <input
+              type="text"
+              value={searchQ}
+              onChange={(e) => handleSearch(e.target.value)}
               placeholder="Pretraži po pseudonimu..."
               autoComplete="off"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors" />
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-green-600 transition-colors"
+            />
             {sugestije.length > 0 && (
               <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
                 {sugestije.map((s) => (
@@ -157,8 +205,11 @@ export default function OsnivanjeForma() {
 
         {error && <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3">{error}</p>}
 
-        <button type="submit" disabled={!canSubmit || loading}
-          className="w-full py-3.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50">
+        <button
+          type="submit"
+          disabled={!canSubmit || loading}
+          className="w-full py-3.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors disabled:opacity-50"
+        >
           {loading ? "Šaljem zahtev..." : "Pošalji zahtev za osnivanje"}
         </button>
       </form>

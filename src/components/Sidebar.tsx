@@ -15,6 +15,7 @@ const linkoviVerifikovan = [
   { href: "/zajednica", label: "Zajednica" },
   { href: "/programi", label: "Programi" },
   { href: "/zrno", label: "ZRNO" },
+  { href: "/sistem", label: "Sistem" },
   { href: "/glasanje", label: "Glasanje" },
   { href: "/preporuke", label: "Preporuke" },
   { href: "/donacije", label: "Donacije" },
@@ -25,6 +26,7 @@ const linkoviNeverifikovan = [
   { href: "/dashboard", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
   { href: "/pijaca", label: "Pijaca" },
+  { href: "/sistem", label: "Sistem" },
   { href: "/verifikacija", label: "Verifikacija" },
   { href: "/profil", label: "Profil" },
 ];

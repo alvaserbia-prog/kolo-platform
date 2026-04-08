@@ -27,6 +27,8 @@ export default async function ProfilPage() {
         referralCode: user.referralCode,
         balance: user.wallet?.balance ?? 0,
         createdAt: user.createdAt.toISOString(),
+        location: user.location ?? null,
+        telefon: user.telefon ?? null,
       }}
     />
   );

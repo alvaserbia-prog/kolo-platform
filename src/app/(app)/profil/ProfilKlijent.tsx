@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import LokacijaSearch from "@/components/LokacijaSearch";
 
 interface ProfilProps {
   user: {
@@ -17,6 +18,8 @@ interface ProfilProps {
     referralCode: string;
     balance: number;
     createdAt: string;
+    location: string | null;
+    telefon: string | null;
   };
 }
 
@@ -29,8 +32,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [staraLozinka, setStaraLozinka] = useState("");
   const [lzError, setLzError] = useState("");
   const [lzSuccess, setLzSuccess] = useState("");
+  const [location, setLocation] = useState(user.location ?? "");
+  const [telefon, setTelefon] = useState(user.telefon ?? "");
+  const [locError, setLocError] = useState("");
+  const [locSuccess, setLocSuccess] = useState("");
+  const [locLoading, setLocLoading] = useState(false);
 
-  // Provera da li je moguća promena pseudonima (jednom u 30 dana)
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
 
@@ -61,6 +68,22 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const data = await res.json();
     if (!res.ok) { setLzError(data.error); return; }
     setLzSuccess("Lozinka promenjena."); setStaraLozinka(""); setNovaLozinka("");
+  }
+
+  async function sacuvajLokaciju(e: React.FormEvent) {
+    e.preventDefault();
+    setLocError(""); setLocSuccess("");
+    setLocLoading(true);
+    const res = await fetch("/api/profil/lokacija", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ location, telefon }),
+    });
+    const data = await res.json();
+    setLocLoading(false);
+    if (!res.ok) { setLocError(data.error ?? "Greška pri čuvanju."); return; }
+    setLocSuccess("Sačuvano.");
+    router.refresh();
   }
 
   const roleLabel: Record<string, string> = {
@@ -107,11 +130,53 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             <dt className="text-gray-500">Referral kod</dt>
             <dd className="font-mono text-gray-900 bg-gray-50 px-2 py-0.5 rounded">{user.referralCode}</dd>
           </div>
+          {user.location && (
+            <div className="flex justify-between">
+              <dt className="text-gray-500">Lokacija</dt>
+              <dd className="text-gray-700">{user.location}</dd>
+            </div>
+          )}
+          {user.telefon && (
+            <div className="flex justify-between">
+              <dt className="text-gray-500">Telefon</dt>
+              <dd className="text-gray-700">{user.telefon}</dd>
+            </div>
+          )}
           <div className="flex justify-between">
             <dt className="text-gray-500">Registrovan</dt>
             <dd className="text-gray-700">{new Date(user.createdAt).toLocaleDateString("sr-RS")}</dd>
           </div>
         </dl>
+      </div>
+
+      {/* Lokacija i telefon */}
+      <div className="bg-white rounded-2xl border border-gray-200 p-6">
+        <h2 className="text-base font-semibold text-gray-700 mb-4">Lokacija i kontakt</h2>
+        <form onSubmit={sacuvajLokaciju} className="space-y-3">
+          <div>
+            <label className="block text-sm text-gray-600 mb-1.5">Mesto <span className="text-gray-400">(opciono)</span></label>
+            <LokacijaSearch value={location} onChange={setLocation} />
+          </div>
+          <div>
+            <label className="block text-sm text-gray-600 mb-1.5">Telefon <span className="text-gray-400">(opciono)</span></label>
+            <input
+              type="tel"
+              value={telefon}
+              onChange={(e) => setTelefon(e.target.value)}
+              placeholder="npr. +381 60 123 4567"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:border-kolo-green-600 transition-colors"
+            />
+          </div>
+          {locError && <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">{locError}</p>}
+          {locSuccess && <p className="text-sm text-green-700 bg-green-50 rounded-lg px-3 py-2">{locSuccess}</p>}
+          <button
+            type="submit"
+            disabled={locLoading}
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+          >
+            {locLoading ? "Čuvam..." : "Sačuvaj"}
+          </button>
+        </form>
       </div>
 
       {/* Promena pseudonima */}

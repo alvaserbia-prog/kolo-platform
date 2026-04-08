@@ -145,69 +145,69 @@ export default async function Home() {
           <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             Kako KOLO funkcioniše?
           </h2>
-          <div className="space-y-3">
-            {[
-              {
-                korak: "1",
-                naslov: "Doprinesi zajednici",
-                opis: "Verifikacijom identiteta zarađuješ 1.000 POEN. Preporukama novih članova dobijaš nagrade. Donacijama povećavaš vrednost sistema.",
-                boja: "bg-kolo-green-100 text-kolo-green-700",
-              },
-              {
-                korak: "2",
-                naslov: "Trguj i razmenjuj",
-                opis: "Na Pijaci prodaješ robu i usluge za POEN i kupuješ od drugih članova. Direktna razmena, bez provizije, bez posrednika.",
-                boja: "bg-kolo-green-100 text-kolo-green-700",
-              },
-              {
-                korak: "3",
-                naslov: "Upravljaj sistemom",
-                opis: "ZRNO je glasačka jedinica. Zaključavanjem ZRNA dobijaš glas u odlukama koje oblikuju KOLO — od projekata zadruga do pravaca razvoja.",
-                boja: "bg-kolo-gold-100 text-kolo-gold-600",
-              },
-            ].map((s) => (
-              <div key={s.korak} className="flex gap-4 bg-white rounded-2xl card-shadow p-5">
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${s.boja}`}>
-                  {s.korak}
-                </div>
-                <div>
-                  <p className="font-semibold text-kolo-text">{s.naslov}</p>
-                  <p className="text-sm text-kolo-muted mt-1 leading-relaxed">{s.opis}</p>
-                </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
+              <div className="w-14 h-14 rounded-2xl bg-kolo-green-100 flex items-center justify-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
               </div>
-            ))}
+              <p className="font-semibold text-kolo-text">Doprinesi zajednici</p>
+              <p className="text-xs text-kolo-muted leading-relaxed">Verifikuj identitet, preporuči nove članove, doniraj Fondaciji — svaki doprinos nosi POEN nagradu.</p>
+            </div>
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
+              <div className="w-14 h-14 rounded-2xl bg-kolo-green-100 flex items-center justify-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B6B3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+                  <path d="M16 10a4 4 0 0 1-8 0"/>
+                </svg>
+              </div>
+              <p className="font-semibold text-kolo-text">Trguj i razmenjuj</p>
+              <p className="text-xs text-kolo-muted leading-relaxed">Na Pijaci prodaješ robu i usluge za POEN i kupuješ od drugih članova. Direktna razmena, bez provizije.</p>
+            </div>
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col items-center text-center gap-3">
+              <div className="w-14 h-14 rounded-2xl bg-kolo-gold-100 flex items-center justify-center">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B8860B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <p className="font-semibold text-kolo-text">Upravljaj sistemom</p>
+              <p className="text-xs text-kolo-muted leading-relaxed">ZRNO je glasačka jedinica. Zaključavanjem ZRNA dobijaš glas u odlukama koje oblikuju KOLO.</p>
+            </div>
           </div>
         </section>
 
-        {/* PROGRAMI */}
+        {/* KAKO DO POENA */}
         <section className="space-y-4">
           <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            Programi Banke
+            Kako do POEN?
           </h2>
-          <p className="text-sm text-kolo-muted">
-            KOLO Banka emituje POEN isključivo kroz odobrene programe.
-            Svaki dan može da emituje maksimalno <strong className="text-kolo-text">10% od ukupnog opticaja</strong>.
-          </p>
-          <div className="grid grid-cols-1 gap-3">
-            {[
-              { ikona: "✓", naziv: "Verifikacija", iznos: "1.000 POEN", opis: "Jednokratna nagrada za svaki novi verifikovani nalog.", aktivan: true },
-              { ikona: "→", naziv: "Preporuke", iznos: "do 15.000 POEN", opis: "Za svaku osobu kojoj si preporučio KOLO i koja se verifikuje — 10 nivoa nagrade.", aktivan: true },
-              { ikona: "♥", naziv: "Donacije", iznos: "kurs raste", opis: "Svaka donacija Fondaciji povećava kurs POEN/RSD. Donatori dobijaju POEN srazmerno donaciji.", aktivan: true },
-              { ikona: "🏡", naziv: "Podrška porodicama", iznos: "u pripremi", opis: "Programi za majke, starije, osobe sa posebnim potrebama i školovanje.", aktivan: false },
-            ].map((p) => (
-              <div key={p.naziv} className={`bg-white rounded-2xl card-shadow p-5 flex gap-4 items-start ${!p.aktivan ? "opacity-60" : ""}`}>
-                <div className="w-10 h-10 rounded-xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center text-lg shrink-0 font-bold">
-                  {!p.aktivan ? "🔒" : p.ikona}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <p className="font-semibold text-kolo-text">{p.naziv}</p>
-                    <span className="text-xs font-mono bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded">{p.iznos}</span>
-                  </div>
-                  <p className="text-sm text-kolo-muted mt-1 leading-relaxed">{p.opis}</p>
-                </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
+              <div className="w-10 h-10 rounded-xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center font-bold text-base shrink-0">✓</div>
+              <div>
+                <p className="font-semibold text-kolo-text">Verifikacija</p>
+                <p className="text-xs font-mono bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded inline-block mt-1">1.000 POEN</p>
+                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Jednokratna nagrada za svaki novi verifikovani nalog.</p>
               </div>
-            ))}
+            </div>
+            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
+              <div className="w-10 h-10 rounded-xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center font-bold text-base shrink-0">→</div>
+              <div>
+                <p className="font-semibold text-kolo-text">Preporuke</p>
+                <p className="text-xs font-mono bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded inline-block mt-1">do 15.000 POEN</p>
+                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Za svaku osobu kojoj si preporučio KOLO i koja se verifikuje — 10 nivoa nagrade.</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
+              <div className="w-10 h-10 rounded-xl bg-kolo-gold-100 text-kolo-gold-600 flex items-center justify-center font-bold text-base shrink-0">♥</div>
+              <div>
+                <p className="font-semibold text-kolo-text">Donacije</p>
+                <p className="text-xs font-mono bg-kolo-gold-100 text-kolo-gold-600 px-2 py-0.5 rounded inline-block mt-1">kurs raste</p>
+                <p className="text-xs text-kolo-muted mt-2 leading-relaxed">Svaka donacija Fondaciji povećava kurs POEN/RSD. Donatori dobijaju POEN srazmerno donaciji.</p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -228,65 +228,64 @@ export default async function Home() {
           </p>
         </section>
 
-        {/* TRANSPARENTNOST */}
-        <section id="transparentnost" className="bg-white rounded-2xl card-shadow p-7">
-          <h2 className="text-lg font-bold text-kolo-green-900 mb-4">Potpuna transparentnost</h2>
-          <p className="text-sm text-kolo-muted mb-5">
-            Svako može u svakom trenutku da proveri stanje sistema.
-          </p>
-          <div className="space-y-3">
-            {[
-              "Tačan balans svakog računa u svakom trenutku",
-              "Kompletna istorija svih transakcija",
-              "Sva pravila sistema su javna i dostupna u Pravilniku",
-            ].map((t) => (
-              <div key={t} className="flex items-center gap-3">
-                <div className="w-5 h-5 rounded-full bg-kolo-green-700 flex items-center justify-center shrink-0">
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                    <path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+        {/* TRANSPARENTNOST + ŠTA KOLO NIJE — bok uz bok */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <section id="transparentnost" className="bg-white rounded-2xl card-shadow p-7">
+            <h2 className="text-lg font-bold text-kolo-green-900 mb-2">Potpuna transparentnost</h2>
+            <p className="text-sm text-kolo-muted mb-5">
+              Svako može u svakom trenutku da proveri stanje sistema.
+            </p>
+            <div className="space-y-3">
+              {[
+                "Tačan balans svakog računa u svakom trenutku",
+                "Kompletna istorija svih transakcija",
+                "Sva pravila sistema su javna i dostupna u Pravilniku",
+              ].map((t) => (
+                <div key={t} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-kolo-green-700 flex items-center justify-center shrink-0">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                      <path d="M1 4l2.5 2.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-kolo-text">{t}</span>
                 </div>
-                <span className="text-sm text-kolo-text">{t}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
 
-        {/* ŠTA KOLO NIJE */}
-        <section id="sta-kolo-nije" className="space-y-4">
-          <div>
-            <h2 className="text-xl font-bold text-kolo-green-900 mb-1" style={{ letterSpacing: "-0.02em" }}>Šta KOLO nije</h2>
-            <p className="text-sm text-kolo-muted">Pre nego što nastaviš — jasno da znaš šta KOLO nije.</p>
-          </div>
-          <div className="space-y-3">
-            {[
-              {
-                naslov: "Nije piramidalna šema",
-                opis: "Nema nivoa ispod tebe. Nema provizije od tuđih doprinosa. Nema investicije koja se množi.",
-              },
-              {
-                naslov: "Nije kriptovaluta",
-                opis: "POEN nije token, ne trguje se na berzama, nema špekulativnu vrednost. POEN je interna evidencija doprinosa.",
-              },
-              {
-                naslov: "Ne obećava brzu zaradu",
-                opis: "KOLO nudi održiv sistem razmene između ljudi koji se međusobno poznaju — ne get-rich-quick shemu.",
-              },
-            ].map((s) => (
-              <div key={s.naslov} className="flex gap-4 bg-white rounded-2xl card-shadow p-5">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 bg-red-50">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 2l8 8M10 2l-8 8" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
+          <section id="sta-kolo-nije" className="bg-white rounded-2xl card-shadow p-7">
+            <h2 className="text-lg font-bold text-kolo-green-900 mb-2">Šta KOLO nije</h2>
+            <p className="text-sm text-kolo-muted mb-5">Pre nego što nastaviš — jasno da znaš šta KOLO nije.</p>
+            <div className="space-y-4">
+              {[
+                {
+                  naslov: "Nije piramidalna šema",
+                  opis: "Nema nivoa ispod tebe. Nema provizije od tuđih doprinosa.",
+                },
+                {
+                  naslov: "Nije kriptovaluta",
+                  opis: "POEN nije token, ne trguje se na berzama. POEN je interna evidencija doprinosa.",
+                },
+                {
+                  naslov: "Ne obećava brzu zaradu",
+                  opis: "KOLO nudi održiv sistem razmene između ljudi koji se međusobno poznaju.",
+                },
+              ].map((s) => (
+                <div key={s.naslov} className="flex gap-3">
+                  <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
+                      <path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-kolo-text">{s.naslov}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed">{s.opis}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-semibold text-kolo-text">{s.naslov}</p>
-                  <p className="text-sm text-kolo-muted mt-1 leading-relaxed">{s.opis}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        </div>
 
         {/* FAQ */}
         <section className="space-y-3">
