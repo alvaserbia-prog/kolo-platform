@@ -52,7 +52,7 @@ export default function ZaposljavanjeKlijent({ oglasi, isVerified }: { oglasi: O
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-3 gap-3 text-center text-sm">
+      <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
         <div>
           <p className="text-lg font-bold text-kolo-text">{oglasi.length}</p>
           <p className="text-xs text-kolo-muted mt-0.5">aktivnih oglasa</p>

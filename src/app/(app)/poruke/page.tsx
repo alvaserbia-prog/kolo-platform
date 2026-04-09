@@ -30,16 +30,19 @@ function PorukeContent() {
   const [poruke, setPoruke] = useState<Poruka[]>([]);
   const [drugiPseudonim, setDrugiPseudonim] = useState("");
   const [drugiId, setDrugiId] = useState("");
+  const [mobilniPrikaz, setMobilniPrikaz] = useState<"lista" | "chat">("lista");
   const [tekst, setTekst] = useState("");
   const [slanje, setSlanje] = useState(false);
   const [noviKorisnik, setNoviKorisnik] = useState("");
   const [novaKonvGreska, setNovaKonvGreska] = useState("");
   const [sugestije, setSugestije] = useState<{ id: string; pseudonim: string }[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
+  const [aktivniIndex, setAktivniIndex] = useState(-1);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchWrapperRef = useRef<HTMLDivElement>(null);
+  const sugestijeRef = useRef<HTMLUListElement>(null);
 
   const ucitajKonverzacije = useCallback(async () => {
     const res = await fetch("/api/poruke");
@@ -104,6 +107,7 @@ function PorukeContent() {
     setNoviKorisnik(val);
     setNovaKonvGreska("");
     setShowSugestije(true);
+    setAktivniIndex(-1);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     if (val.trim().length < 2) { setSugestije([]); return; }
     debounceRef.current = setTimeout(async () => {
@@ -111,6 +115,33 @@ function PorukeContent() {
       const data = await res.json();
       setSugestije(Array.isArray(data) ? data : []);
     }, 250);
+  }
+
+  function handleSearchKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!showSugestije || sugestije.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setAktivniIndex((prev) => {
+        const next = prev < sugestije.length - 1 ? prev + 1 : 0;
+        sugestijeRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setAktivniIndex((prev) => {
+        const next = prev > 0 ? prev - 1 : sugestije.length - 1;
+        sugestijeRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (aktivniIndex >= 0 && sugestije[aktivniIndex]) {
+        otvoriKonverzaciju(sugestije[aktivniIndex].id);
+      }
+    } else if (e.key === "Escape") {
+      setShowSugestije(false);
+      setAktivniIndex(-1);
+    }
   }
 
   async function otvoriKonverzaciju(userId: string) {
@@ -131,6 +162,7 @@ function PorukeContent() {
     setShowSugestije(false);
     await ucitajKonverzacije();
     router.push(`/poruke?k=${data.konverzacijaId}`);
+    setMobilniPrikaz("chat");
   }
 
   async function posalji(e: React.FormEvent) {
@@ -161,7 +193,7 @@ function PorukeContent() {
   return (
     <div className="flex h-full overflow-hidden rounded-2xl border border-kolo-border bg-white shadow-sm" style={{ minHeight: "calc(100vh - 3.5rem - 2rem)" }}>
       {/* Leva tabla — lista konverzacija */}
-      <div className="w-72 shrink-0 border-r border-kolo-border flex flex-col">
+      <div className={`w-full md:w-72 shrink-0 border-r border-kolo-border flex flex-col ${mobilniPrikaz === "chat" ? "hidden md:flex" : "flex"}`}>
         <div className="px-4 py-3 border-b border-kolo-border">
           <h1 className="text-base font-semibold text-kolo-text">Poruke</h1>
         </div>
@@ -174,18 +206,24 @@ function PorukeContent() {
               value={noviKorisnik}
               onChange={(e) => handleNoviKorisnikChange(e.target.value)}
               onFocus={() => noviKorisnik.length >= 2 && setShowSugestije(true)}
+              onKeyDown={handleSearchKeyDown}
               placeholder="Novi chat..."
               autoComplete="off"
               className="w-full px-3 py-2 text-xs rounded-xl border border-kolo-border outline-none focus:border-kolo-green-700 transition-colors"
             />
             {showSugestije && sugestije.length > 0 && (
-              <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
-                {sugestije.map((u) => (
+              <ul ref={sugestijeRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
+                {sugestije.map((u, i) => (
                   <li key={u.id}>
                     <button
                       type="button"
                       onMouseDown={() => otvoriKonverzaciju(u.id)}
-                      className="w-full text-left px-3 py-2 text-sm text-kolo-text hover:bg-kolo-green-100/50 hover:text-kolo-green-700 transition-colors"
+                      onMouseEnter={() => setAktivniIndex(i)}
+                      className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                        i === aktivniIndex
+                          ? "bg-kolo-green-100/50 text-kolo-green-700"
+                          : "text-kolo-text hover:bg-kolo-green-100/50 hover:text-kolo-green-700"
+                      }`}
                     >
                       {u.pseudonim}
                     </button>
@@ -205,7 +243,7 @@ function PorukeContent() {
             konverzacije.map((k) => (
               <button
                 key={k.id}
-                onClick={() => router.push(`/poruke?k=${k.id}`)}
+                onClick={() => { router.push(`/poruke?k=${k.id}`); setMobilniPrikaz("chat"); }}
                 className={`w-full text-left px-4 py-3 border-b border-kolo-border/50 last:border-0 hover:bg-kolo-bg transition-colors ${
                   aktivnaKonvId === k.id ? "bg-kolo-green-100/40" : ""
                 }`}
@@ -235,7 +273,7 @@ function PorukeContent() {
       </div>
 
       {/* Desna tabla — aktivni chat */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className={`flex-1 flex-col min-w-0 ${mobilniPrikaz === "lista" ? "hidden md:flex" : "flex"}`}>
         {!aktivnaKonvId ? (
           <div className="flex-1 flex items-center justify-center">
             <p className="text-kolo-muted text-sm">Izaberite konverzaciju ili pretražite korisnika.</p>
@@ -243,7 +281,16 @@ function PorukeContent() {
         ) : (
           <>
             {/* Header chata */}
-            <div className="px-5 py-3 border-b border-kolo-border flex items-center gap-3">
+            <div className="px-4 py-3 border-b border-kolo-border flex items-center gap-3">
+              <button
+                onClick={() => setMobilniPrikaz("lista")}
+                className="md:hidden p-1 text-kolo-muted hover:text-kolo-text transition-colors shrink-0"
+                aria-label="Nazad"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
               {drugiId ? (
                 <Link href={`/profil/${drugiId}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
                   {drugiPseudonim}

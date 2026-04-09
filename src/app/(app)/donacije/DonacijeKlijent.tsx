@@ -141,7 +141,7 @@ export default function DonacijeKlijent() {
           <p className="text-sm font-semibold text-kolo-text">Tabela rangova donacija</p>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[280px] text-sm">
             <thead>
               <tr className="bg-kolo-bg border-b border-kolo-border">
                 <th className="px-4 py-2 text-left text-xs font-medium text-kolo-muted">Nivo</th>

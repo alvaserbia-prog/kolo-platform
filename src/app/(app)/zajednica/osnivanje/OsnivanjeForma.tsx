@@ -22,10 +22,12 @@ export default function OsnivanjeForma({ userLocation }: Props) {
   const [osnivaci, setOsnivaci] = useState<{ id: string; pseudonim: string }[]>([]);
   const [searchQ, setSearchQ] = useState("");
   const [sugestije, setSugestije] = useState<{ id: string; pseudonim: string }[]>([]);
+  const [aktivniIndex, setAktivniIndex] = useState(-1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const sugestijeRef = useRef<HTMLUListElement>(null);
 
   // Auto-generisi ime kad se lokacija promeni (osim ako je korisnik već ručno izmenio)
   useEffect(() => {
@@ -44,6 +46,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
 
   function handleSearch(val: string) {
     setSearchQ(val);
+    setAktivniIndex(-1);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     if (val.trim().length < 2) { setSugestije([]); return; }
     debounceRef.current = setTimeout(async () => {
@@ -53,6 +56,33 @@ export default function OsnivanjeForma({ userLocation }: Props) {
       const filtered = data.filter((u) => !dodatiPseudonimi.has(u.pseudonim));
       setSugestije(filtered);
     }, 250);
+  }
+
+  function handleSearchKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (sugestije.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setAktivniIndex((prev) => {
+        const next = prev < sugestije.length - 1 ? prev + 1 : 0;
+        sugestijeRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setAktivniIndex((prev) => {
+        const next = prev > 0 ? prev - 1 : sugestije.length - 1;
+        sugestijeRef.current?.children[next]?.scrollIntoView({ block: "nearest" });
+        return next;
+      });
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (aktivniIndex >= 0 && sugestije[aktivniIndex]) {
+        dodajOsnivaoca(sugestije[aktivniIndex]);
+      }
+    } else if (e.key === "Escape") {
+      setSugestije([]);
+      setAktivniIndex(-1);
+    }
   }
 
   function dodajOsnivaoca(u: { id: string; pseudonim: string }) {
@@ -182,16 +212,22 @@ export default function OsnivanjeForma({ userLocation }: Props) {
               type="text"
               value={searchQ}
               onChange={(e) => handleSearch(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               placeholder="Pretraži po pseudonimu..."
               autoComplete="off"
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
             />
             {sugestije.length > 0 && (
-              <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
-                {sugestije.map((s) => (
+              <ul ref={sugestijeRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
+                {sugestije.map((s, i) => (
                   <li key={s.pseudonim}>
                     <button type="button" onMouseDown={() => dodajOsnivaoca(s)}
-                      className="w-full text-left px-4 py-2.5 text-sm text-kolo-muted hover:bg-kolo-green-100 hover:text-kolo-green-700 transition-colors">
+                      onMouseEnter={() => setAktivniIndex(i)}
+                      className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                        i === aktivniIndex
+                          ? "bg-kolo-green-100 text-kolo-green-700"
+                          : "text-kolo-muted hover:bg-kolo-green-100 hover:text-kolo-green-700"
+                      }`}>
                       {s.pseudonim}
                     </button>
                   </li>

@@ -190,7 +190,7 @@ function PregledTab({
   return (
     <div className="space-y-5">
       {/* Tri kartice */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-4 text-white shadow">
           <p className="text-xs text-white/70 mb-1">Opticaj POENA</p>
           <p className="text-2xl font-bold font-mono">{opticaj.toLocaleString("sr-RS")}</p>
@@ -213,7 +213,7 @@ function PregledTab({
       {verified && (
         <>
           {/* Banka + Zero-sum */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white rounded-2xl border border-kolo-border p-4">
               <p className="text-xs text-kolo-muted mb-1">Stanje Banke</p>
               <p className="text-xl font-bold text-kolo-danger font-mono">
@@ -322,7 +322,8 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
       />
       <div className="text-xs text-kolo-muted">{filtrirani.length} {filtrirani.length === 1 ? "član" : "članova"}</div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        <div className="grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        {/* Desktop header */}
+        <div className="hidden sm:grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Pseudonim</span>
           <span className="text-right">Balans</span>
           <span className="text-right">Preporuke</span>
@@ -335,24 +336,48 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
           filtrirani.map((c, i) => (
             <div
               key={c.id}
-              className={`grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm ${i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+              className={`${i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
-              <div className="flex items-center gap-2 min-w-0">
-                <Link href={`/profil/${c.id}`} className="font-medium text-kolo-green-700 hover:underline truncate">
-                  {c.pseudonim}
-                </Link>
-                {c.verified ? (
-                  <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
-                ) : (
-                  <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
-                )}
+              {/* Desktop red */}
+              <div className="hidden sm:grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm">
+                <div className="flex items-center gap-2 min-w-0">
+                  <Link href={`/profil/${c.id}`} className="font-medium text-kolo-green-700 hover:underline truncate">
+                    {c.pseudonim}
+                  </Link>
+                  {c.verified ? (
+                    <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+                  ) : (
+                    <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
+                  )}
+                </div>
+                <span className="text-right font-mono text-sm font-semibold text-kolo-text">{c.balance.toLocaleString("sr-RS")}</span>
+                <span className="text-right text-xs text-kolo-muted">{c.preporuke}</span>
+                <span className="text-center text-xs text-kolo-muted truncate px-1">{c.zadruga ?? "—"}</span>
+                <span className="text-right text-xs text-kolo-muted">
+                  {new Date(c.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                </span>
               </div>
-              <span className="text-right font-mono text-sm font-semibold text-kolo-text">{c.balance.toLocaleString("sr-RS")}</span>
-              <span className="text-right text-xs text-kolo-muted">{c.preporuke}</span>
-              <span className="text-center text-xs text-kolo-muted truncate px-1">{c.zadruga ?? "—"}</span>
-              <span className="text-right text-xs text-kolo-muted">
-                {new Date(c.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" })}
-              </span>
+              {/* Mobilna kartica */}
+              <div className="sm:hidden px-4 py-3 space-y-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
+                      {c.pseudonim}
+                    </Link>
+                    {c.verified ? (
+                      <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+                    ) : (
+                      <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
+                    )}
+                  </div>
+                  <span className="font-mono text-sm font-bold text-kolo-text">{c.balance.toLocaleString("sr-RS")} POEN</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-kolo-muted">
+                  {c.zadruga && <span>Zadruga: {c.zadruga}</span>}
+                  <span>{c.preporuke} preporuka</span>
+                  <span className="ml-auto">{new Date(c.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" })}</span>
+                </div>
+              </div>
             </div>
           ))
         )}
