@@ -869,7 +869,7 @@ function ViewClanovi({ members }: { members: Clan[] }) {
                 <td className="px-3 py-1.5 text-right font-mono font-semibold text-kolo-green-700">{fmt(m.bal)}</td>
                 <td className="px-3 py-1.5 text-right text-kolo-muted">
                   <div className="flex items-center justify-end gap-1">
-                    <div className="h-1.5 bg-green-200 rounded" style={{ width: Math.max(2, (m.bal / (ukupno || 1)) * 80) }} />
+                    <div className="h-1.5 bg-kolo-green-100 rounded" style={{ width: Math.max(2, (m.bal / (ukupno || 1)) * 80) }} />
                     <span>{ukupno ? ((m.bal / ukupno) * 100).toFixed(1) : "0"}%</span>
                   </div>
                 </td>
@@ -1229,7 +1229,7 @@ function Controls({ playing, speed, onAdvance, onPlay, onReset, onSpeedChange, l
       <div className="flex items-center gap-2 flex-wrap">
         <button onClick={() => onAdvance(1)} className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">+1 dan</button>
         <button onClick={() => onAdvance(7)} className="px-4 py-2 bg-kolo-green-500 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-700 transition-colors">+7 dana</button>
-        <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-kolo-green-1000 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">+30 dana</button>
+        <button onClick={() => onAdvance(30)} className="px-4 py-2 bg-kolo-green-900 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">+30 dana</button>
         <button onClick={onPlay}
           className={`px-4 py-2 text-sm font-semibold rounded-xl transition-colors ${playing ? "bg-kolo-danger text-white hover:bg-kolo-danger" : "bg-kolo-green-900 text-white hover:bg-kolo-green-700"}`}>
           {playing ? "⏸ Pauza" : "▶ Auto"}

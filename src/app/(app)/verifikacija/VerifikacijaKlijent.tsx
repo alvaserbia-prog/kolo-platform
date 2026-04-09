@@ -118,7 +118,7 @@ function VerifikacijaForma({
                 onClick={() => ref.current?.click()}
                 className={`p-5 rounded-2xl border-2 border-dashed flex flex-col items-center gap-2 transition-colors ${
                   file
-                    ? "border-green-500 bg-kolo-green-100"
+                    ? "border-kolo-green-500 bg-kolo-green-100"
                     : "border-kolo-border bg-white hover:border-kolo-muted"
                 }`}
               >
@@ -154,7 +154,7 @@ function VerifikacijaForma({
               jmbgError
                 ? "border-red-400 focus:border-red-500"
                 : jmbg.length === 13
-                ? "border-green-500 focus:border-kolo-green-500"
+                ? "border-kolo-green-500 focus:border-kolo-green-500"
                 : "border-kolo-border focus:border-kolo-green-500"
             }`}
           />

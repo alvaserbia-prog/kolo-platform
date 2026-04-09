@@ -16,6 +16,7 @@ interface PendingRequest {
 interface KorisnikInfo {
   id: string;
   pseudonim: string;
+  email: string;
   role: string;
   verified: boolean;
   status: string;
@@ -1370,6 +1371,7 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [rucnaKorisnik, setRucnaKorisnik] = useState<KorisnikInfo | null>(null);
+  const [izmeniKorisnik, setIzmeniKorisnik] = useState<KorisnikInfo | null>(null);
 
   const filtered = users.filter((u) =>
     u.pseudonim.toLowerCase().includes(filter.toLowerCase())
@@ -1429,6 +1431,10 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                 </div>
                 {u.role !== "ADMIN" && (
                   <div className="flex gap-1.5 shrink-0 flex-wrap justify-end">
+                    <button onClick={() => setIzmeniKorisnik(u)} disabled={loadingId === u.id}
+                      className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                      Izmeni
+                    </button>
                     {!u.verified && u.status === "ACTIVE" && (
                       <button onClick={() => setRucnaKorisnik(u)} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold rounded-lg hover:bg-kolo-green-500 hover:text-white disabled:opacity-60 transition-colors">
@@ -1437,7 +1443,7 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                     )}
                     {u.status === "ACTIVE" && (
                       <button onClick={() => akcija(u.id, "suspenduj")} disabled={loadingId === u.id}
-                        className="px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold rounded-lg hover:bg-amber-100 disabled:opacity-60 transition-colors">
+                        className="px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold rounded-lg hover:bg-kolo-gold-100 disabled:opacity-60 transition-colors">
                         Suspenduj
                       </button>
                     )}
@@ -1468,6 +1474,94 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
           onDone={() => { setRucnaKorisnik(null); onDone(); }}
         />
       )}
+
+      {izmeniKorisnik && (
+        <IzmeniKorisnikaForma
+          korisnik={izmeniKorisnik}
+          onClose={() => setIzmeniKorisnik(null)}
+          onDone={() => { setIzmeniKorisnik(null); onDone(); }}
+        />
+      )}
+    </div>
+  );
+}
+
+function IzmeniKorisnikaForma({ korisnik, onClose, onDone }: {
+  korisnik: KorisnikInfo;
+  onClose: () => void;
+  onDone: () => void;
+}) {
+  const [email, setEmail] = useState(korisnik.email);
+  const [pseudonim, setPseudonim] = useState(korisnik.pseudonim);
+  const [loading, setLoading] = useState(false);
+  const [greska, setGreska] = useState("");
+
+  async function sacuvaj() {
+    setGreska("");
+    const data: Record<string, string> = {};
+    if (email.trim() !== korisnik.email) data.email = email.trim();
+    if (pseudonim.trim() !== korisnik.pseudonim) data.pseudonim = pseudonim.trim();
+    if (Object.keys(data).length === 0) { onClose(); return; }
+
+    setLoading(true);
+    const res = await fetch(`/api/admin/korisnici/${korisnik.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const resData = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      onDone();
+    } else {
+      setGreska(resData.error ?? "Greška pri izmeni.");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
+        <div>
+          <h3 className="text-base font-semibold text-kolo-text">Izmeni podatke korisnika</h3>
+          <p className="text-sm text-kolo-muted mt-0.5">{korisnik.pseudonim}</p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">Pseudonim</label>
+          <input
+            type="text"
+            value={pseudonim}
+            onChange={(e) => setPseudonim(e.target.value)}
+            maxLength={30}
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+          />
+        </div>
+
+        {greska && (
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
+        )}
+
+        <div className="flex gap-3 pt-1">
+          <button onClick={onClose}
+            className="flex-1 py-2.5 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors">
+            Otkaži
+          </button>
+          <button onClick={sacuvaj} disabled={loading}
+            className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
+            {loading ? "Čuvam..." : "Sačuvaj"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

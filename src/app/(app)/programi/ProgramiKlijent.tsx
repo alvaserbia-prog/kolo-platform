@@ -117,7 +117,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
             </div>
             <div className="h-2 bg-kolo-bg rounded-full overflow-hidden">
               <div
-                className={`h-full rounded-full transition-all ${emitovanoPct >= 100 ? "bg-kolo-danger-light0" : emitovanoPct >= 75 ? "bg-amber-400" : "bg-kolo-green-1000"}`}
+                className={`h-full rounded-full transition-all ${emitovanoPct >= 100 ? "bg-kolo-danger-light0" : emitovanoPct >= 75 ? "bg-kolo-gold-400" : "bg-kolo-green-1000"}`}
                 style={{ width: `${emitovanoPct}%` }}
               />
             </div>
@@ -237,7 +237,7 @@ function ProgramKartica({
           )}
           {enStatus === "REJECTED" && mozePrijaviti && (
             <button onClick={onExpand}
-              className="px-3 py-1.5 border border-green-600 text-kolo-green-700 text-xs font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors">
+              className="px-3 py-1.5 border border-kolo-green-500 text-kolo-green-700 text-xs font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors">
               Pokušaj ponovo
             </button>
           )}

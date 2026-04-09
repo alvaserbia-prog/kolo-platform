@@ -48,19 +48,17 @@ export default function OsnivanjeForma({ userLocation }: Props) {
     if (val.trim().length < 2) { setSugestije([]); return; }
     debounceRef.current = setTimeout(async () => {
       const res = await fetch(`/api/korisnici/pretraga?q=${encodeURIComponent(val.trim())}`);
-      const data = await res.json();
-      const dodatiIds = new Set(osnivaci.map((o) => o.id));
-      const filtered = (data.rezultati as string[])
-        .filter((ps: string) => !dodatiIds.has(ps))
-        .map((ps: string) => ({ id: ps, pseudonim: ps }));
+      const data: { id: string; pseudonim: string }[] = await res.json();
+      const dodatiPseudonimi = new Set(osnivaci.map((o) => o.pseudonim));
+      const filtered = data.filter((u) => !dodatiPseudonimi.has(u.pseudonim));
       setSugestije(filtered);
     }, 250);
   }
 
-  function dodajOsnivaoca(ps: string) {
-    if (osnivaci.find((o) => o.pseudonim === ps)) return;
+  function dodajOsnivaoca(u: { id: string; pseudonim: string }) {
+    if (osnivaci.find((o) => o.pseudonim === u.pseudonim)) return;
     if (osnivaci.length >= 9) return;
-    setOsnivaci((prev) => [...prev, { id: ps, pseudonim: ps }]);
+    setOsnivaci((prev) => [...prev, { id: u.id, pseudonim: u.pseudonim }]);
     setSearchQ("");
     setSugestije([]);
   }
@@ -171,9 +169,9 @@ export default function OsnivanjeForma({ userLocation }: Props) {
             <div className="flex flex-wrap gap-2 mb-3">
               {osnivaci.map((o) => (
                 <div key={o.pseudonim} className="flex items-center gap-1.5 bg-kolo-green-100 border border-kolo-green-100 rounded-lg px-3 py-1.5">
-                  <span className="text-sm text-green-800 font-medium">{o.pseudonim}</span>
+                  <span className="text-sm text-kolo-green-900 font-medium">{o.pseudonim}</span>
                   <button type="button" onClick={() => ukloniOsnivaoca(o.pseudonim)}
-                    className="text-green-400 hover:text-kolo-green-700 text-sm leading-none">×</button>
+                    className="text-kolo-green-500 hover:text-kolo-green-700 text-sm leading-none">×</button>
                 </div>
               ))}
             </div>
@@ -192,7 +190,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
               <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
                 {sugestije.map((s) => (
                   <li key={s.pseudonim}>
-                    <button type="button" onMouseDown={() => dodajOsnivaoca(s.pseudonim)}
+                    <button type="button" onMouseDown={() => dodajOsnivaoca(s)}
                       className="w-full text-left px-4 py-2.5 text-sm text-kolo-muted hover:bg-kolo-green-100 hover:text-kolo-green-700 transition-colors">
                       {s.pseudonim}
                     </button>

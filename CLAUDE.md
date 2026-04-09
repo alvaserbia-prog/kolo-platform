@@ -116,9 +116,12 @@ docs/             — dokumentacija po fazama
 ### Pokrovitelji
 - Pokrovitelj = pravno lice, nema login, ima vlasnika (verifikovani član)
 - Admin kreira pokrovitelja (naziv, PIB, vlasnikId, zadrugaId?)
-- Admin evidentira doprinos u RSD → automatski bonus POEN vlasniku po nivoima
+- Admin evidentira doprinos u RSD → vlasnik dobija:
+  1. **Donaciju 1:1** — `Math.round(rsdIznos)` POEN
+  2. **Nivo bonuse** — za svaki novi nivo koji je prešao
 - Nivo 1 (prvi doprinos): 20.000 POEN; Nivo 2+: prag u RSD = bonus u POEN (1-2-5 skala, bez gornje granice)
 - Pragovi: 50k, 100k, 200k, 500k, 1M, 2M, 5M, ... RSD
+- Primer: prva donacija 100.000 RSD → 20.000 (n1) + 50.000 (n2) + 100.000 (n3) + 100.000 (1:1) = 270.000 POEN
 - Javna stranica: `/pokrovitelji`, app stranica: `/postani-pokrovitelj`
 - Logika: `src/lib/banka/pokrovitelj.ts`
 
@@ -289,6 +292,13 @@ docs/             — dokumentacija po fazama
 - `ClanPretraga.tsx` — Autocomplete za pretragu članova, navigira na `/profil/[id]`
 - `Providers.tsx` — NextAuth SessionProvider wrapper
 - `EmptyState.tsx` — Reusable empty state komponenta
+
+## Testovi
+
+- Framework: **Vitest** (`npm test` za jednokratno, `npm run test:watch` za watch mode)
+- Lokacija: `__tests__/banka/` — unit testovi za čiste funkcije bez baze
+- Pokriva: `emisija.ts` (preporukaNagrada), `pokrovitelj.ts` (bonusZaNivo, izracunajNivo), `donacija.ts` (nivoZaKumulativ, izracunajPoenZaDonaciju), `programi.ts` (izracunajMajke, izracunajStariji, izracunajDnevniIznos)
+- Config: `vitest.config.ts` sa path aliasom `@/` → `src/`
 
 ## Reference
 - `PLAN.md` — pregled svih faza sa zavisnostima

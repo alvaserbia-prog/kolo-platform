@@ -41,9 +41,9 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
       {mojaZadruga && (
         <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-2xl px-5 py-4 flex justify-between items-center">
           <div>
-            <p className="text-sm font-semibold text-green-800">Član ste zadruge</p>
+            <p className="text-sm font-semibold text-kolo-green-900">Član ste zadruge</p>
             <p className="text-sm text-kolo-green-700 mt-0.5">{mojaZadruga.name}
-              {mojaZadruga.isAdmin && <span className="ml-2 text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded font-medium">Admin</span>}
+              {mojaZadruga.isAdmin && <span className="ml-2 text-xs bg-kolo-green-100 text-kolo-green-900 px-2 py-0.5 rounded font-medium">Admin</span>}
             </p>
           </div>
           <Link
@@ -75,7 +75,7 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
             <Link
               key={z.id}
               href={`/zajednica/${z.id}`}
-              className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-green-300 transition-colors"
+              className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-100 transition-colors"
             >
               <div className="flex justify-between items-start gap-4">
                 <div className="flex-1 min-w-0">

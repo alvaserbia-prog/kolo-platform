@@ -292,7 +292,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       {/* Moji oglasi */}
       <Link
         href="/profil/oglasi"
-        className="block bg-white rounded-2xl border border-kolo-border px-6 py-4 hover:border-green-300 transition-colors"
+        className="block bg-white rounded-2xl border border-kolo-border px-6 py-4 hover:border-kolo-green-100 transition-colors"
       >
         <div className="flex justify-between items-center">
           <div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 interface Notifikacija {
@@ -14,25 +14,31 @@ interface Notifikacija {
   createdAt: string;
 }
 
-export default function Header() {
+export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   const { data: session } = useSession();
 
   return (
-    <header className="h-14 shrink-0 bg-white border-b border-kolo-border px-6 flex items-center justify-between">
-      <div />
+    <header className="h-11 shrink-0 bg-white border-b border-kolo-border px-4 flex items-center justify-between">
+      {/* Hamburger — samo mobilno */}
+      <button
+        onClick={onMenuOpen}
+        className="md:hidden p-1.5 rounded-lg text-kolo-muted hover:text-kolo-text hover:bg-kolo-bg transition-colors"
+        aria-label="Meni"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+      <div className="hidden md:block" />
+
       <div className="flex items-center gap-4 text-sm">
         {session ? (
           <>
             <BalansHeader userId={session.user.id} />
             <span className="text-kolo-border">•</span>
             <BellNotifikacije />
-            <span className="font-medium text-kolo-text">{session.user.pseudonim}</span>
-            <button
-              onClick={() => signOut({ callbackUrl: "/login" })}
-              className="text-kolo-muted hover:text-kolo-text transition-colors"
-            >
-              Odjava
-            </button>
           </>
         ) : (
           <span className="text-kolo-muted text-xs">Učitavam...</span>

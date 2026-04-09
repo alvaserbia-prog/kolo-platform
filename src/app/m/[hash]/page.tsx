@@ -31,10 +31,12 @@ export default function MemberLinkPage() {
         if (opis) params.set("description", opis);
         router.replace(`/novcanik?${params.toString()}`);
       } else {
-        // Nije ulogovan → sačuvaj ref u cookie + localStorage, preusmeri na landing
+        // Nije ulogovan → sačuvaj ref u cookie + localStorage, preusmeri na login
         localStorage.setItem("kolo_ref", hash);
         document.cookie = `kolo_ref=${hash}; max-age=${60 * 60 * 24 * 30}; path=/; samesite=lax`;
-        router.replace("/");
+        const qs = searchParams.toString();
+        const callbackUrl = encodeURIComponent(`/m/${hash}${qs ? `?${qs}` : ""}`);
+        router.replace(`/login?callbackUrl=${callbackUrl}`);
       }
     }
     resolve();

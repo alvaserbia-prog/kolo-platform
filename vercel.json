@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/zero-sum",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/cron/nocna-emisija",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

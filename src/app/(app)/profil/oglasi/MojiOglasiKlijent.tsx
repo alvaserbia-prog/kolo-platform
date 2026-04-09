@@ -68,7 +68,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
             key={val}
             onClick={() => setFilter(val)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              filter === val ? "bg-gray-900 text-white" : "bg-white border border-kolo-border text-kolo-muted"
+              filter === val ? "bg-kolo-text text-white" : "bg-white border border-kolo-border text-kolo-muted"
             }`}
           >
             {lab}

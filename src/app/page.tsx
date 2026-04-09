@@ -307,7 +307,7 @@ export default async function Home() {
                 },
               ].map((s) => (
                 <div key={s.naslov} className="flex gap-3">
-                  <div className="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-full bg-kolo-danger-light flex items-center justify-center shrink-0 mt-0.5">
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
                       <path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round"/>
                     </svg>

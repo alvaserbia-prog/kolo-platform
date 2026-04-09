@@ -116,7 +116,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
                     key={i}
                     onClick={() => setActiveSlika(i)}
                     className={`relative w-16 h-12 rounded-lg overflow-hidden border-2 transition-colors ${
-                      activeSlika === i ? "border-green-600" : "border-transparent"
+                      activeSlika === i ? "border-kolo-green-500" : "border-transparent"
                     }`}
                   >
                     <Image
@@ -394,7 +394,7 @@ function IzmeniOglas({
             ))}
             {/* Nove slike */}
             {noveSlike.map((f, i) => (
-              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-green-300 overflow-hidden bg-kolo-bg">
+              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-kolo-green-100 overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={URL.createObjectURL(f)} alt="" className="w-full h-full object-cover" />
                 <button

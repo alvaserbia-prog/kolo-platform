@@ -11,7 +11,7 @@ import { emitujPoen } from "./emisija";
 function* generatorPragova(): Generator<number> {
   const faktori = [1, 2, 5];
   let eksponent = 4; // 10^4 = 10_000 → × faktori daje 50k, 100k, ...
-  let i = 1; // kreće od faktori[1] = 2 → 50_000
+  let i = 2; // kreće od faktori[2] = 5 → 50_000
   while (true) {
     const baza = Math.pow(10, eksponent);
     yield faktori[i] * baza;
@@ -146,5 +146,16 @@ export async function evidentirajDoprinos(params: {
     });
   }
 
-  return { noviNivoi };
+  // Korak 3: Emituj 1:1 vrednost donacije u POEN (van transakcije)
+  const poenZaDonaciju = Math.round(rsdIznos);
+  if (poenZaDonaciju > 0) {
+    await emitujPoen(
+      vlasnikWalletId,
+      poenZaDonaciju,
+      "EMISIJA_POKROVITELJ",
+      `Pokroviteljska donacija ${rsdIznos.toLocaleString("sr-RS")} RSD — 1:1`
+    );
+  }
+
+  return { noviNivoi, poenZaDonaciju };
 }

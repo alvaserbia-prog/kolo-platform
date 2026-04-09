@@ -206,7 +206,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
     debounceRef.current = setTimeout(async () => {
       const res = await fetch(`/api/korisnici/pretraga?q=${encodeURIComponent(val.trim())}`);
       const data = await res.json();
-      setSugestije(data.rezultati ?? []);
+      setSugestije((data as { pseudonim: string }[]).map((u) => u.pseudonim));
     }, 250);
   }
 
@@ -225,16 +225,20 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
     if (!amount || isNaN(iznos) || iznos <= 0) { setError("Iznos mora biti pozitivan ceo broj."); return; }
 
     setLoading(true);
-    const res = await fetch("/api/transfer", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pseudonim: pseudonim.trim(), amount: iznos, description: description.trim() }),
-    });
-    const data = await res.json();
-    setLoading(false);
-
-    if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
-    onSuccess();
+    try {
+      const res = await fetch("/api/transfer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pseudonim: pseudonim.trim(), amount: iznos, description: description.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
+      onSuccess();
+    } catch {
+      setError("Greška pri slanju. Pokušajte ponovo.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

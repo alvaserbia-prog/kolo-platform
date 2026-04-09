@@ -132,7 +132,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
       {isActive && mojaGlasackaMoc > 0 && (
         <div className="flex gap-2">
           <button onClick={() => glasaj(true)} disabled={loading !== null}
-            className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${p.mojGlas === true ? "bg-kolo-green-500 text-white" : "border border-green-600 text-kolo-green-700 hover:bg-kolo-green-100"}`}>
+            className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${p.mojGlas === true ? "bg-kolo-green-500 text-white" : "border border-kolo-green-500 text-kolo-green-700 hover:bg-kolo-green-100"}`}>
             {loading === true ? "..." : "ZA"}
           </button>
           <button onClick={() => glasaj(false)} disabled={loading !== null}

@@ -249,7 +249,7 @@ function PregledTab({
             </div>
             <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
               <div
-                className={`h-full rounded-full transition-all ${limitPct >= 90 ? "bg-kolo-danger-light0" : limitPct >= 70 ? "bg-amber-400" : "bg-kolo-green-600"}`}
+                className={`h-full rounded-full transition-all ${limitPct >= 90 ? "bg-kolo-danger" : limitPct >= 70 ? "bg-kolo-gold-400" : "bg-kolo-green-500"}`}
                 style={{ width: `${limitPct}%` }}
               />
             </div>
@@ -272,7 +272,7 @@ function PregledTab({
                         className="w-full bg-kolo-green-500 rounded-t-sm relative"
                         style={{ height: `${Math.max(pct, 4)}%` }}
                       >
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-800 text-white text-xs rounded px-1.5 py-0.5 whitespace-nowrap z-10">
+                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-kolo-text text-white text-xs rounded px-1.5 py-0.5 whitespace-nowrap z-10">
                           {e.emitted.toLocaleString("sr-RS")}
                         </div>
                       </div>
@@ -318,7 +318,7 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
         value={pretraga}
         onChange={(e) => setPretraga(e.target.value)}
         placeholder="Pretraži po pseudonimu..."
-        className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+        className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
       />
       <div className="text-xs text-kolo-muted">{filtrirani.length} {filtrirani.length === 1 ? "član" : "članova"}</div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -335,7 +335,7 @@ function ClanoviTab({ clanovi, verified }: { clanovi: Clan[]; verified: boolean 
           filtrirani.map((c, i) => (
             <div
               key={c.id}
-              className={`grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm ${i < filtrirani.length - 1 ? "border-b border-gray-50" : ""}`}
+              className={`grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm ${i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
               <div className="flex items-center gap-2 min-w-0">
                 <Link href={`/profil/${c.id}`} className="font-medium text-kolo-green-700 hover:underline truncate">
@@ -376,7 +376,7 @@ function TransakcijeTab({ transakcije, verified }: { transakcije: Transakcija[];
           {transakcije.map((t, i) => (
             <div
               key={t.id}
-              className={`px-4 py-3 flex justify-between items-start ${i < transakcije.length - 1 ? "border-b border-gray-50" : ""}`}
+              className={`px-4 py-3 flex justify-between items-start ${i < transakcije.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
@@ -428,7 +428,7 @@ function ProgramiTab({ programi }: { programi: Program[] }) {
       <div className="space-y-2">
         {programi.map((p) => (
           <div key={p.type} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex gap-4 items-start">
-            <div className={`mt-0.5 shrink-0 w-2.5 h-2.5 rounded-full ${p.isActive ? "bg-kolo-green-1000" : "bg-gray-300"}`} />
+            <div className={`mt-0.5 shrink-0 w-2.5 h-2.5 rounded-full ${p.isActive ? "bg-kolo-green-900" : "bg-kolo-border"}`} />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-sm font-semibold text-kolo-text">{p.label}</span>

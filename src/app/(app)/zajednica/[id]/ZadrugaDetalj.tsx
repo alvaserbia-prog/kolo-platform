@@ -480,7 +480,7 @@ function NoviProjekatForma({ zadrugaId, onSuccess }: { zadrugaId: string; onSucc
   if (!show) {
     return (
       <button onClick={() => setShow(true)}
-        className="w-full py-2.5 rounded-xl border-2 border-dashed border-kolo-border text-sm text-kolo-muted hover:border-green-400 hover:text-kolo-green-700 transition-colors">
+        className="w-full py-2.5 rounded-xl border-2 border-dashed border-kolo-border text-sm text-kolo-muted hover:border-kolo-green-500 hover:text-kolo-green-700 transition-colors">
         + Novi projekat
       </button>
     );

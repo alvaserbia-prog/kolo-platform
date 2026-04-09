@@ -23,7 +23,7 @@ export default async function AdminPage() {
       orderBy: { createdAt: "asc" },
     }),
     prisma.user.findMany({
-      select: { id: true, pseudonim: true, role: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
+      select: { id: true, pseudonim: true, email: true, role: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
       take: 100,
     }),
@@ -114,7 +114,7 @@ export default async function AdminPage() {
         jmbg: vr.jmbg, createdAt: vr.createdAt.toISOString(), imaReferral: !!vr.user.referredById,
       }))}
       users={allUsers.map((u) => ({
-        id: u.id, pseudonim: u.pseudonim, role: u.role, verified: u.verified,
+        id: u.id, pseudonim: u.pseudonim, email: u.email, role: u.role, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(),
       }))}
