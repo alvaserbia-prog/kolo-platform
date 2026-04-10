@@ -27,7 +27,7 @@ export default async function PostaniPokroviteljPage() {
     : [];
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div>
       <div className="mb-8">
         <h1 className="kolo-naslov mb-2">Pokroviteljstvo</h1>
         <p className="text-kolo-muted leading-relaxed">
