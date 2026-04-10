@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/cron/zero-sum",
-      "schedule": "* * * * *"
+      "schedule": "0 6 * * *"
     },
     {
       "path": "/api/cron/nocna-emisija",
