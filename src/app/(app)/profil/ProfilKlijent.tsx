@@ -21,11 +21,15 @@ interface ProfilProps {
     location: string | null;
     telefon: string | null;
     punoIme: string | null;
+    avatar: string | null;
   };
 }
 
 export default function ProfilKlijent({ user }: ProfilProps) {
   const router = useRouter();
+  const [avatar, setAvatar] = useState<string | null>(user.avatar);
+  const [avatarLoading, setAvatarLoading] = useState(false);
+  const [avatarError, setAvatarError] = useState("");
   const [noviPseudonim, setNoviPseudonim] = useState("");
   const [psError, setPsError] = useState("");
   const [psSuccess, setPsSuccess] = useState("");
@@ -45,6 +49,50 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
+
+  async function uploadAvatar(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAvatarError("");
+    setAvatarLoading(true);
+
+    const base64 = await new Promise<string>((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const size = 256;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d")!;
+        const min = Math.min(img.width, img.height);
+        const sx = (img.width - min) / 2;
+        const sy = (img.height - min) / 2;
+        ctx.drawImage(img, sx, sy, min, min, 0, 0, size, size);
+        resolve(canvas.toDataURL("image/jpeg", 0.82));
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+
+    if (base64.length > 150_000) {
+      setAvatarError("Slika je prevelika. Pokušaj sa manjom slikom.");
+      setAvatarLoading(false);
+      return;
+    }
+
+    const res = await fetch("/api/profil/avatar", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ avatar: base64 }),
+    });
+    const data = await res.json();
+    setAvatarLoading(false);
+    if (!res.ok) { setAvatarError(data.error ?? "Greška pri čuvanju."); return; }
+    setAvatar(base64);
+    e.target.value = "";
+  }
 
   async function promeniPseudonim(e: React.FormEvent) {
     e.preventDefault();
@@ -116,6 +164,42 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-kolo-text">Profil</h1>
+
+      {/* Profilna slika */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-4">Profilna slika</h2>
+        <div className="flex items-center gap-5">
+          <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
+            {avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={avatar} alt={user.pseudonim} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-2xl">
+                {user.pseudonim.charAt(0).toUpperCase()}
+              </div>
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-kolo-border text-sm text-kolo-text hover:bg-kolo-bg transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              {avatarLoading ? "Čuvam..." : "Postavi sliku"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={avatarLoading}
+                onChange={uploadAvatar}
+              />
+            </label>
+            <p className="text-xs text-kolo-muted mt-2">JPG, PNG, WebP — automatski se iseca na kvadrat 256×256px</p>
+            {avatarError && <p className="text-sm text-kolo-danger mt-2">{avatarError}</p>}
+          </div>
+        </div>
+      </div>
 
       {/* Osnovni podaci */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
