@@ -69,7 +69,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
     <div className="space-y-5">
       {/* Zaglavlje */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>Pijaca</h1>
+        <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>Pijaca</h1>
         {isVerified ? (
           <Link
             href="/pijaca/novi-oglas"

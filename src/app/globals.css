@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* ── Page heading gradient ──────────────────────────────────────── */
+.kolo-naslov {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #0F3D20 0%, #2E9D54 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ── KOLO Design System ────────────────────────────────────────── */
 
 :root {

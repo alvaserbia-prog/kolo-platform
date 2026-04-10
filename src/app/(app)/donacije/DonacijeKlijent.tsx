@@ -57,7 +57,7 @@ export default function DonacijeKlijent() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>
+      <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
         Donacije Fondaciji
       </h1>
 

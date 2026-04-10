@@ -23,7 +23,7 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-kolo-text">Zajednica</h1>
+        <h1 className="kolo-naslov">Zajednica</h1>
         {isVerified && !mojaZadruga && !imaOsnivanjeZahtev && (
           <Link
             href="/zajednica/osnivanje"

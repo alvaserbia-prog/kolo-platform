@@ -72,7 +72,7 @@ export default function NoviOglasForma() {
         <button onClick={() => router.back()} className="text-kolo-muted hover:text-kolo-muted transition-colors">
           ← Nazad
         </button>
-        <h1 className="text-2xl font-semibold text-kolo-text">Novi oglas</h1>
+        <h1 className="kolo-naslov">Novi oglas</h1>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">

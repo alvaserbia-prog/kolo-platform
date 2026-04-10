@@ -122,7 +122,7 @@ function VerifikacijaForma({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-semibold text-kolo-text">Verifikacija identiteta</h1>
+        <h1 className="kolo-naslov">Verifikacija identiteta</h1>
         <p className="mt-1 text-sm text-kolo-muted">
           Verifikacijom dobijate pristup celom sistemu i bonus od{" "}
           <span className="font-semibold text-kolo-green-700">1.000 POEN</span>.

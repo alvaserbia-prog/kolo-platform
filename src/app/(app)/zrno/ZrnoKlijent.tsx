@@ -33,7 +33,7 @@ export default function ZrnoKlijent(props: Props) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-kolo-text">ZRNO</h1>
+        <h1 className="kolo-naslov">ZRNO</h1>
         {props.glasackaMoc > 0 && (
           <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-xl px-4 py-2 text-center">
             <p className="text-sm font-bold text-kolo-gold-600">{props.glasackaMoc}</p>

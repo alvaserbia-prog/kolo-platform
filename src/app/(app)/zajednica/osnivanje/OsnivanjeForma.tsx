@@ -130,7 +130,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
     <div className="space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/zajednica" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Zadruge</Link>
-        <h1 className="text-2xl font-semibold text-kolo-text">Osnivanje zadruge</h1>
+        <h1 className="kolo-naslov">Osnivanje zadruge</h1>
       </div>
 
       <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-4 py-3 text-sm text-kolo-gold-600">

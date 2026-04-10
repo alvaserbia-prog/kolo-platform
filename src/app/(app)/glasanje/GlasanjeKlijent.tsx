@@ -29,7 +29,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-kolo-text">Glasanje</h1>
+        <h1 className="kolo-naslov">Glasanje</h1>
         <div className="flex items-center gap-3">
           {mojaGlasackaMoc > 0 && (
             <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 border border-kolo-gold-400/30 px-3 py-1.5 rounded-xl font-medium">

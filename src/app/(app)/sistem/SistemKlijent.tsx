@@ -124,7 +124,7 @@ export default function SistemKlijent({
     <div className="space-y-6">
       {/* Pozdrav */}
       <h1
-        className="text-2xl font-bold text-kolo-text"
+        className="kolo-naslov"
         style={{ letterSpacing: "-0.02em" }}
       >
         Dobrodošli, {pseudonim}

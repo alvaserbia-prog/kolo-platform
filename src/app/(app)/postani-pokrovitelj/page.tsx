@@ -29,7 +29,7 @@ export default async function PostaniPokroviteljPage() {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-kolo-green-900 mb-2">Pokroviteljstvo</h1>
+        <h1 className="kolo-naslov mb-2">Pokroviteljstvo</h1>
         <p className="text-kolo-muted leading-relaxed">
           Pokrovitelj je pravno lice koje sponzoriše zadrugu ili donira Fondaciji.
           Kao vlasnik pokrovitelja, dobijate POEN bonuse pri svakom dostizanju novog nivoa.

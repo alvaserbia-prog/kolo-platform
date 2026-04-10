@@ -81,7 +81,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-kolo-text">Programi Banke</h1>
+        <h1 className="kolo-naslov">Programi Banke</h1>
         {totalOcekivano > 0 && (
           <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-2 text-center">
             <p className="text-sm font-bold text-kolo-green-700">{totalOcekivano.toLocaleString("sr-RS")}</p>

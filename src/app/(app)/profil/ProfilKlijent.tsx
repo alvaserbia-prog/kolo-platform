@@ -207,7 +207,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-kolo-text">Profil</h1>
+      <h1 className="kolo-naslov">Profil</h1>
 
       {/* Profilna slika + Osnovni podaci — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

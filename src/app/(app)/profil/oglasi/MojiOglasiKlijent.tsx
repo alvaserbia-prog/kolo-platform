@@ -51,7 +51,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
           <Link href="/profil" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Profil</Link>
-          <h1 className="text-2xl font-semibold text-kolo-text">Moji oglasi</h1>
+          <h1 className="kolo-naslov">Moji oglasi</h1>
         </div>
         <Link
           href="/pijaca/novi-oglas"
