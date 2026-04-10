@@ -607,52 +607,60 @@ function TransakcijeSekcija({
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          {/* Zaglavlje */}
+          <div className="grid grid-cols-[7rem_1fr_1.5rem_1fr_auto] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Vreme</span>
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Pošiljalac</span>
+            <span />
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Primalac</span>
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">Iznos</span>
+          </div>
           {filtrirane.map((t, i) => (
             <div
               key={t.id}
-              className={`px-4 py-3 flex justify-between items-start ${
+              className={`grid grid-cols-[7rem_1fr_1.5rem_1fr_auto] gap-x-3 items-center px-4 py-2.5 ${
                 i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""
               }`}
             >
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded font-medium ${
-                      TIP_BOJA[t.type] ?? "bg-kolo-bg text-kolo-muted"
-                    }`}
-                  >
-                    {TIP_LABELA[t.type] ?? t.type}
-                  </span>
-                  {verified ? (
-                    <span className="text-xs text-kolo-muted truncate flex items-center gap-1">
-                      {t.fromId ? (
-                        <Link href={`/profil/${t.fromId}`} className="text-kolo-green-700 hover:underline">
-                          {t.fromPseudonim}
-                        </Link>
-                      ) : (
-                        <span>{t.fromPseudonim}</span>
-                      )}
-                      <span className="text-kolo-border">→</span>
-                      {t.toId ? (
-                        <Link href={`/profil/${t.toId}`} className="text-kolo-green-700 hover:underline">
-                          {t.toPseudonim}
-                        </Link>
-                      ) : (
-                        <span>{t.toPseudonim}</span>
-                      )}
-                    </span>
+              {/* Vreme */}
+              <p className="text-[10px] text-kolo-border leading-tight">
+                {new Date(t.createdAt).toLocaleString("sr-RS", {
+                  day: "2-digit", month: "2-digit", year: "numeric",
+                  hour: "2-digit", minute: "2-digit",
+                })}
+              </p>
+              {/* Pošiljalac */}
+              <div className="min-w-0">
+                {verified ? (
+                  t.fromId ? (
+                    <Link href={`/profil/${t.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      {t.fromPseudonim}
+                    </Link>
                   ) : (
-                    <span className="text-xs text-kolo-muted">Anonimno</span>
-                  )}
-                </div>
-                <p className="text-xs text-kolo-border mt-0.5">
-                  {new Date(t.createdAt).toLocaleString("sr-RS", {
-                    day: "2-digit", month: "2-digit", year: "numeric",
-                    hour: "2-digit", minute: "2-digit",
-                  })}
-                </p>
+                    <span className="text-base text-kolo-muted truncate block">{t.fromPseudonim}</span>
+                  )
+                ) : (
+                  <span className="text-base text-kolo-muted">—</span>
+                )}
               </div>
-              <span className="ml-4 text-sm font-bold text-kolo-text shrink-0 font-mono">
+              {/* Strelica */}
+              <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
+              {/* Primalac */}
+              <div className="min-w-0">
+                {verified ? (
+                  t.toId ? (
+                    <Link href={`/profil/${t.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      {t.toPseudonim}
+                    </Link>
+                  ) : (
+                    <span className="text-base text-kolo-muted truncate block">{t.toPseudonim}</span>
+                  )
+                ) : (
+                  <span className="text-base text-kolo-muted">—</span>
+                )}
+              </div>
+              {/* Iznos */}
+              <span className="text-base font-bold text-kolo-text text-right">
                 {t.amount.toLocaleString("sr-RS")}
               </span>
             </div>
