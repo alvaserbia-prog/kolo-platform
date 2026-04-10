@@ -72,17 +72,22 @@ function VerifikacijaForma({
     if (!canSubmit) return;
     setError(""); setLoading(true);
 
-    const fd = new FormData();
-    fd.append("jmbg", jmbg);
-    fd.append("front", front!);
-    fd.append("back", back!);
+    try {
+      const fd = new FormData();
+      fd.append("jmbg", jmbg);
+      fd.append("front", front!);
+      fd.append("back", back!);
 
-    const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
-    const data = await res.json();
-    setLoading(false);
+      const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
+      const data = await res.json();
 
-    if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
-    onSuccess();
+      if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
+      onSuccess();
+    } catch {
+      setError("Greška pri slanju. Pokušajte ponovo.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
