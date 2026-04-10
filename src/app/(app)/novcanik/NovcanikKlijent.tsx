@@ -72,13 +72,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         <div className="mt-4 flex gap-3">
           <button
             onClick={() => setShowSend(true)}
-            className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+            className="px-6 py-3 bg-white text-kolo-green-700 text-base font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
           >
             Pošalji POEN
           </button>
           <button
             onClick={() => setShowQR(true)}
-            className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+            className="px-6 py-3 bg-white/20 text-white text-base font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
           >
             Moj QR
           </button>
