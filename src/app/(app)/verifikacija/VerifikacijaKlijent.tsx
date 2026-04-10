@@ -4,6 +4,30 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+// Kompresuje sliku na max 1200px, JPEG 80% — tipično <200KB
+async function kompresujSliku(file: File): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const MAX = 1200;
+      let { width, height } = img;
+      if (width > MAX || height > MAX) {
+        if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
+        else { width = Math.round((width * MAX) / height); height = MAX; }
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext("2d")!;
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("Kompresija nije uspela")), "image/jpeg", 0.82);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Učitavanje slike nije uspelo")); };
+    img.src = url;
+  });
+}
+
 type VerStatus = "PENDING" | "APPROVED" | "REJECTED";
 
 interface Props {
@@ -67,16 +91,21 @@ function VerifikacijaForma({
 
   const canSubmit = front && back && jmbg.length === 13 && !jmbgError;
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!canSubmit) return;
     setError(""); setLoading(true);
 
     try {
+      const [frontBlob, backBlob] = await Promise.all([
+        kompresujSliku(front!),
+        kompresujSliku(back!),
+      ]);
+
       const fd = new FormData();
       fd.append("jmbg", jmbg);
-      fd.append("front", front!);
-      fd.append("back", back!);
+      fd.append("front", new File([frontBlob], "front.jpg", { type: "image/jpeg" }));
+      fd.append("back", new File([backBlob], "back.jpg", { type: "image/jpeg" }));
 
       const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
       const data = await res.json();
