@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+
+const CROP_SIZE = 320;
+const CROP_RADIUS = 140;
 
 interface ProfilProps {
   user: {
@@ -31,6 +34,13 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [avatarError, setAvatarError] = useState("");
+  // crop modal
+  const [cropSrc, setCropSrc] = useState<string | null>(null);
+  const [cropNatural, setCropNatural] = useState({ w: 1, h: 1 });
+  const [cropScale, setCropScale] = useState(1);
+  const [cropOffset, setCropOffset] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ startX: number; startY: number; ox: number; oy: number } | null>(null);
+  const cropImgRef = useRef<HTMLImageElement>(null);
   const [noviPseudonim, setNoviPseudonim] = useState("");
   const [psError, setPsError] = useState("");
   const [psSuccess, setPsSuccess] = useState("");
@@ -52,31 +62,83 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
 
-  async function uploadAvatar(e: React.ChangeEvent<HTMLInputElement>) {
+  function clampOffset(ox: number, oy: number, scale: number, natW: number, natH: number) {
+    const dispW = natW * scale;
+    const dispH = natH * scale;
+    const maxX = CROP_SIZE / 2 - CROP_RADIUS;
+    const minX = CROP_SIZE / 2 + CROP_RADIUS - dispW;
+    const maxY = CROP_SIZE / 2 - CROP_RADIUS;
+    const minY = CROP_SIZE / 2 + CROP_RADIUS - dispH;
+    return {
+      x: Math.min(maxX, Math.max(minX, ox)),
+      y: Math.min(maxY, Math.max(minY, oy)),
+    };
+  }
+
+  function selectAvatar(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setAvatarError("");
-    setAvatarLoading(true);
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.max(
+        (CROP_SIZE / img.width) * 1.05,
+        (CROP_SIZE / img.height) * 1.05,
+      );
+      const initOffset = clampOffset(
+        (CROP_SIZE - img.width * scale) / 2,
+        (CROP_SIZE - img.height * scale) / 2,
+        scale, img.width, img.height,
+      );
+      setCropNatural({ w: img.width, h: img.height });
+      setCropScale(scale);
+      setCropOffset(initOffset);
+      setCropSrc(url);
+    };
+    img.src = url;
+    e.target.value = "";
+  }
 
-    const base64 = await new Promise<string>((resolve, reject) => {
-      const img = new Image();
-      const url = URL.createObjectURL(file);
-      img.onload = () => {
-        URL.revokeObjectURL(url);
-        const size = 256;
-        const canvas = document.createElement("canvas");
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext("2d")!;
-        const min = Math.min(img.width, img.height);
-        const sx = (img.width - min) / 2;
-        const sy = (img.height - min) / 2;
-        ctx.drawImage(img, sx, sy, min, min, 0, 0, size, size);
-        resolve(canvas.toDataURL("image/jpeg", 0.82));
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
+  const onDragStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    const pt = "touches" in e ? e.touches[0] : e;
+    dragRef.current = { startX: pt.clientX, startY: pt.clientY, ox: cropOffset.x, oy: cropOffset.y };
+  }, [cropOffset]);
+
+  const onDragMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
+    if (!dragRef.current) return;
+    const pt = "touches" in e ? e.touches[0] : e;
+    const dx = pt.clientX - dragRef.current.startX;
+    const dy = pt.clientY - dragRef.current.startY;
+    setCropOffset(clampOffset(
+      dragRef.current.ox + dx,
+      dragRef.current.oy + dy,
+      cropScale, cropNatural.w, cropNatural.h,
+    ));
+  }, [cropScale, cropNatural]);
+
+  const onDragEnd = useCallback(() => { dragRef.current = null; }, []);
+
+  async function confirmCrop() {
+    if (!cropSrc || !cropImgRef.current) return;
+    setAvatarLoading(true);
+    setAvatarError("");
+
+    const size = 256;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+
+    const imgEl = cropImgRef.current;
+    const cx = (CROP_SIZE / 2 - cropOffset.x) / cropScale;
+    const cy = (CROP_SIZE / 2 - cropOffset.y) / cropScale;
+    const r = CROP_RADIUS / cropScale;
+    ctx.drawImage(imgEl, cx - r, cy - r, r * 2, r * 2, 0, 0, size, size);
+
+    const base64 = canvas.toDataURL("image/jpeg", 0.82);
+    URL.revokeObjectURL(cropSrc);
+    setCropSrc(null);
 
     if (base64.length > 150_000) {
       setAvatarError("Slika je prevelika. Pokušaj sa manjom slikom.");
@@ -93,7 +155,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     setAvatarLoading(false);
     if (!res.ok) { setAvatarError(data.error ?? "Greška pri čuvanju."); return; }
     setAvatar(base64);
-    e.target.value = "";
   }
 
   async function promeniPseudonim(e: React.FormEvent) {
@@ -194,7 +255,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 accept="image/*"
                 className="hidden"
                 disabled={avatarLoading}
-                onChange={uploadAvatar}
+                onChange={selectAvatar}
               />
             </label>
             <p className="text-xs text-kolo-muted text-center">JPG, PNG, WebP — iseca se na kvadrat</p>
@@ -386,6 +447,58 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           </form>
         </div>
       </div>
+
+      {/* Crop modal */}
+      {cropSrc && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl">
+            <p className="text-sm text-kolo-muted">Pomeri sliku da namjestiš kadar</p>
+            <div
+              className="relative overflow-hidden rounded-full cursor-grab active:cursor-grabbing"
+              style={{ width: CROP_SIZE, height: CROP_SIZE }}
+              onMouseDown={onDragStart}
+              onMouseMove={onDragMove}
+              onMouseUp={onDragEnd}
+              onMouseLeave={onDragEnd}
+              onTouchStart={onDragStart}
+              onTouchMove={onDragMove}
+              onTouchEnd={onDragEnd}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                ref={cropImgRef}
+                src={cropSrc}
+                alt=""
+                draggable={false}
+                style={{
+                  position: "absolute",
+                  width: cropNatural.w * cropScale,
+                  height: cropNatural.h * cropScale,
+                  left: cropOffset.x,
+                  top: cropOffset.y,
+                  userSelect: "none",
+                  pointerEvents: "none",
+                }}
+              />
+            </div>
+            <div className="flex gap-3 w-full">
+              <button
+                onClick={() => { URL.revokeObjectURL(cropSrc); setCropSrc(null); }}
+                className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
+              >
+                Otkaži
+              </button>
+              <button
+                onClick={confirmCrop}
+                disabled={avatarLoading}
+                className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+              >
+                {avatarLoading ? "Čuvam..." : "Potvrdi"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Moji oglasi */}
       <Link
