@@ -9,13 +9,13 @@ export default async function PijacaLayout({ children }: { children: React.React
 
   if (session) {
     return (
-      <div className="h-full bg-kolo-bg text-kolo-text flex justify-center">
-        <div className="flex w-full max-w-[1140px] min-w-0">
-          <Sidebar verified={session.user.verified} isAdmin={session.user.role === "ADMIN"} />
-          <div className="flex flex-col flex-1 min-w-0">
-            <Header />
+      <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">
+        <Header />
+        <div className="flex flex-1 min-h-0 justify-center">
+          <div className="flex w-full max-w-[1140px] min-w-0">
+            <Sidebar verified={session.user.verified} isAdmin={session.user.role === "ADMIN"} />
             <main className="flex-1 overflow-auto">
-              <div className="px-6 py-6">
+              <div className="px-4 py-5 md:px-8 md:py-6">
                 {children}
               </div>
             </main>

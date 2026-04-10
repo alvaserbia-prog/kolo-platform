@@ -82,7 +82,7 @@ export default function KakoFunkcionisePage() {
           ].map((f) => (
             <div key={f.naslov} className="bg-kolo-bg rounded-xl p-3">
               <p className="text-xs font-semibold text-kolo-text">{f.naslov}</p>
-              <p className="text-xs text-kolo-muted mt-0.5">{f.opis}</p>
+              <p className="text-sm text-kolo-muted mt-0.5">{f.opis}</p>
             </div>
           ))}
         </div>
@@ -101,7 +101,7 @@ export default function KakoFunkcionisePage() {
         </p>
         <div className="bg-kolo-gold-100 rounded-xl p-4">
           <p className="text-xs font-semibold text-kolo-gold-600 mb-1">Kurs ZRNA</p>
-          <p className="text-xs text-kolo-muted leading-relaxed">
+          <p className="text-sm text-kolo-muted leading-relaxed">
             Kurs ZRNA raste sa svakom donacijom Fondaciji. Što više donacija, veća vrednost ZRNA.
             To znači da rani članovi plaćaju manje POEN po ZRNU.
           </p>
@@ -118,13 +118,13 @@ export default function KakoFunkcionisePage() {
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-kolo-bg rounded-xl p-4">
             <p className="text-sm font-semibold text-kolo-text mb-1">Kanal 1 — Upload</p>
-            <p className="text-xs text-kolo-muted leading-relaxed">
+            <p className="text-sm text-kolo-muted leading-relaxed">
               Fotografišite obe strane lične karte i uploadujete kroz aplikaciju. Admin pregleda i odobrava.
             </p>
           </div>
           <div className="bg-kolo-bg rounded-xl p-4">
             <p className="text-sm font-semibold text-kolo-text mb-1">Kanal 2 — Lično</p>
-            <p className="text-xs text-kolo-muted leading-relaxed">
+            <p className="text-sm text-kolo-muted leading-relaxed">
               Javite se u lokalnu zadrugu i pokažite dokument lično. Admin unosi JMBG direktno u sistem.
             </p>
           </div>
@@ -197,7 +197,7 @@ export default function KakoFunkcionisePage() {
         </p>
         <div className="bg-kolo-bg rounded-xl p-4">
           <p className="text-xs font-semibold text-kolo-text mb-1">Kako osnovati zadrugu?</p>
-          <p className="text-xs text-kolo-muted">
+          <p className="text-sm text-kolo-muted">
             Potrebno je minimum 3 verifikovana člana. Inicijator šalje zahtev za osnivanje,
             Fondacija pregleda i odobrava. Osnivanje donosi 50.000 POEN startnog kapitala.
           </p>

@@ -58,6 +58,11 @@ function SidebarContent({
 
   return (
     <>
+      <div className="flex flex-col items-center px-4 pt-5 pb-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/kolo-hero-logo.png" alt="KOLO" style={{ width: 130, height: 130, objectFit: "contain", borderRadius: "1.25rem" }} />
+        <span className="font-bold text-white text-5xl tracking-widest mt-2">KOLO</span>
+      </div>
       <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
         {links.map(({ href, label }) => {
           const active = pathname === href || (href !== "/sistem" && pathname.startsWith(href + "/"));
@@ -66,7 +71,7 @@ function SidebarContent({
               key={href}
               href={href}
               onClick={onLinkClick}
-              className={`flex items-center px-3 py-2 rounded-xl text-sm font-medium transition-all duration-150 ${
+              className={`flex items-center px-3 py-2 rounded-xl text-base font-medium transition-all duration-150 ${
                 active
                   ? "bg-white/15 text-white"
                   : "text-white/55 hover:bg-white/10 hover:text-white/90"
@@ -82,7 +87,7 @@ function SidebarContent({
           <Link
             href="/verifikacija"
             onClick={onLinkClick}
-            className="block w-full text-center px-3 py-2 bg-kolo-gold-400/20 text-kolo-gold-400 text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 hover:text-white transition-colors"
+            className="block w-full text-center px-3 py-2 bg-kolo-gold-400/20 text-kolo-gold-400 text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 hover:text-white transition-colors"
           >
             Verifikuj nalog →
           </Link>
@@ -120,6 +125,11 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose }
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/kolo-icon.png" alt="KOLO" style={{ width: 38, height: 38, objectFit: "contain" }} />
+          <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
+        </div>
         <SidebarContent verified={verified} isAdmin={isAdmin} onLinkClick={onMobileClose} />
       </aside>
     </>

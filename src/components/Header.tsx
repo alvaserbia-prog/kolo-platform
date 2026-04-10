@@ -18,39 +18,47 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   const { data: session } = useSession();
 
   return (
-    <header className="h-11 shrink-0 bg-white border-b border-kolo-border px-4 flex items-center justify-between">
-      {/* Hamburger — samo mobilno */}
-      <button
-        onClick={onMenuOpen}
-        className="md:hidden p-1.5 rounded-lg text-kolo-muted hover:text-kolo-text hover:bg-kolo-bg transition-colors"
-        aria-label="Meni"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
-      <div className="hidden md:block" />
+    <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
+      <div className="flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900">
 
-      <div className="flex items-center gap-3 text-sm">
-        {session ? (
-          <>
-            <BalansHeader userId={session.user.id} />
-            <span className="text-kolo-border">•</span>
-            <BellNotifikacije />
-            <span className="text-kolo-border">•</span>
-            <span className="text-xs text-kolo-muted hidden sm:inline truncate max-w-[100px]">{session.user.pseudonim}</span>
-            <button
-              onClick={() => signOut({ callbackUrl: "/login" })}
-              className="text-xs text-kolo-muted hover:text-kolo-text transition-colors shrink-0"
-            >
-              Odjava
-            </button>
-          </>
-        ) : (
-          <span className="text-kolo-muted text-xs">Učitavam...</span>
-        )}
+        {/* Logo — desktop: ista širina kao sidebar (w-52 = 208px) */}
+        <div className="hidden md:block w-52 shrink-0" />
+
+        {/* Hamburger + logo — mobilno */}
+        <div className="flex md:hidden items-center gap-2 px-4">
+          <button
+            onClick={onMenuOpen}
+            className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Meni"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <span className="font-bold text-white text-base tracking-widest">KOLO</span>
+        </div>
+
+        <div className="flex items-center gap-3 px-4">
+          {session ? (
+            <>
+              <BalansHeader userId={session.user.id} />
+              <span className="text-white/25">•</span>
+              <BellNotifikacije />
+              <span className="text-white/25">•</span>
+              <span className="text-sm text-white/60 hidden sm:inline truncate max-w-[120px]">{session.user.pseudonim}</span>
+              <button
+                onClick={() => signOut({ callbackUrl: "/login" })}
+                className="text-sm text-white/50 hover:text-white transition-colors shrink-0"
+              >
+                Odjava
+              </button>
+            </>
+          ) : (
+            <span className="text-white/50 text-sm">Učitavam...</span>
+          )}
+        </div>
       </div>
     </header>
   );
@@ -67,8 +75,8 @@ function BalansHeader({ userId }: { userId: string }) {
   }, [userId]);
 
   return (
-    <span className="text-kolo-muted">
-      <span className="font-medium text-kolo-text">
+    <span className="text-white/60 text-sm">
+      <span className="font-semibold text-white">
         {balans === null ? "..." : balans.toLocaleString("sr-RS")}
       </span>{" "}
       POEN
@@ -169,10 +177,10 @@ function BellNotifikacije() {
       )}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="relative p-1.5 rounded-lg text-kolo-muted hover:text-kolo-text hover:bg-kolo-bg transition-colors"
+        className="relative p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
         aria-label="Notifikacije"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
         </svg>

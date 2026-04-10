@@ -85,7 +85,7 @@ export default async function Home() {
               </svg>
             </div>
             <p className="text-2xl font-bold text-kolo-text leading-none">{clanovi.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted leading-tight">verifikovanih članova</p>
+            <p className="text-sm text-kolo-muted leading-tight">verifikovanih članova</p>
           </div>
 
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
@@ -95,7 +95,7 @@ export default async function Home() {
               </svg>
             </div>
             <p className="text-2xl font-bold text-kolo-text leading-none">{opticaj.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted leading-tight">POEN u opticaju</p>
+            <p className="text-sm text-kolo-muted leading-tight">POEN u opticaju</p>
           </div>
 
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
@@ -105,7 +105,7 @@ export default async function Home() {
               </svg>
             </div>
             <p className="text-sm font-bold text-kolo-green-700 leading-none">Alpha</p>
-            <p className="text-xs text-kolo-muted leading-tight">faza razvoja</p>
+            <p className="text-sm text-kolo-muted leading-tight">faza razvoja</p>
           </div>
         </section>
 
@@ -189,7 +189,7 @@ export default async function Home() {
                   </div>
                   <div>
                     <p className="font-semibold text-kolo-text text-sm">{item.title}</p>
-                    <p className="text-xs text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
+                    <p className="text-sm text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
                   </div>
                 </div>
               ))}
@@ -237,7 +237,7 @@ export default async function Home() {
                       <p className="font-semibold text-kolo-text text-sm">{item.title}</p>
                       <span className={`text-xs font-mono px-2 py-0.5 rounded ${item.badgeCls}`}>{item.badge}</span>
                     </div>
-                    <p className="text-xs text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
+                    <p className="text-sm text-kolo-muted mt-1 leading-relaxed">{item.opis}</p>
                   </div>
                 </div>
               ))}
@@ -314,7 +314,7 @@ export default async function Home() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-kolo-text">{s.naslov}</p>
-                    <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed">{s.opis}</p>
+                    <p className="text-sm text-kolo-muted mt-0.5 leading-relaxed">{s.opis}</p>
                   </div>
                 </div>
               ))}
