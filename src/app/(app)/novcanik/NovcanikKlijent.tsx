@@ -4,27 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 
-const TIP_LABELA: Record<string, string> = {
-  TRANSFER: "Transfer",
-  EMISIJA_VERIFIKACIJA: "Verifikacija",
-  EMISIJA_PREPORUKA: "Preporuka",
-  EMISIJA_DONACIJA: "Donacija",
-  EMISIJA_POKROVITELJ: "Pokrovitelj",
-  EMISIJA_ZADRUGA_OSNIVANJE: "Osnivanje zadruge",
-  EMISIJA_ZADRUGA_BONUS: "Bonus zadruge",
-  EMISIJA_PROGRAM: "Program",
-};
-
-const TIP_BOJA: Record<string, string> = {
-  TRANSFER: "bg-kolo-bg text-kolo-muted",
-  EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_PREPORUKA: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
-  EMISIJA_POKROVITELJ: "bg-kolo-gold-100 text-kolo-gold-600",
-  EMISIJA_ZADRUGA_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_ZADRUGA_BONUS: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_PROGRAM: "bg-kolo-green-100 text-kolo-green-700",
-};
 
 type Transakcija = {
   id: string;
@@ -138,34 +117,39 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             {filtered.map((t, i) => (
               <div
                 key={t.id}
-                className={`px-4 py-3 flex justify-between items-start ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
+                className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className={`text-xs px-2 py-0.5 rounded font-medium ${TIP_BOJA[t.type] ?? "bg-kolo-bg text-kolo-muted"}`}>
-                      {TIP_LABELA[t.type] ?? t.type}
-                    </span>
-                    {t.drugiId ? (
-                      <a href={`/profil/${t.drugiId}`} className="text-xs text-kolo-green-700 hover:underline truncate">
-                        {t.drugiPseudonim}
-                      </a>
-                    ) : (
-                      <span className="text-xs text-kolo-muted truncate">{t.drugiPseudonim}</span>
-                    )}
-                  </div>
-                  {t.description && (
-                    <p className="text-xs text-kolo-muted mt-0.5 truncate">{t.description}</p>
+                {/* Glavni red */}
+                <div className="flex items-center gap-2 min-w-0">
+                  {/* Strelica */}
+                  <span className={`shrink-0 text-lg font-bold ${t.primio ? "text-kolo-green-700" : "text-red-400"}`}>
+                    {t.primio ? "→" : "←"}
+                  </span>
+                  {/* Pošiljalac / primalac */}
+                  {t.drugiId ? (
+                    <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline shrink-0">
+                      {t.drugiPseudonim}
+                    </a>
+                  ) : (
+                    <span className="text-base text-kolo-muted shrink-0">{t.drugiPseudonim}</span>
                   )}
-                  <p className="text-xs text-kolo-border mt-0.5">
-                    {new Date(t.createdAt).toLocaleString("sr-RS", {
-                      day: "2-digit", month: "2-digit", year: "numeric",
-                      hour: "2-digit", minute: "2-digit",
-                    })}
-                  </p>
+                  {/* Opis */}
+                  {t.description && (
+                    <span className="text-base text-kolo-muted truncate flex-1">{t.description}</span>
+                  )}
+                  {!t.description && <span className="flex-1" />}
+                  {/* Iznos */}
+                  <span className={`text-base font-bold shrink-0 ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                    {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+                  </span>
                 </div>
-                <div className={`ml-4 text-sm font-bold shrink-0 ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-                  {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
-                </div>
+                {/* Datum */}
+                <p className="text-[10px] text-kolo-border mt-0.5 pl-6">
+                  {new Date(t.createdAt).toLocaleString("sr-RS", {
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
+                  })}
+                </p>
               </div>
             ))}
           </div>
