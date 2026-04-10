@@ -120,7 +120,7 @@ export default function SistemKlijent({
   const zeroSum = opticaj + bankaBalance === 0;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="space-y-6">
       {/* Pozdrav */}
       <h1
         className="text-2xl font-bold text-kolo-text"

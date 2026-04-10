@@ -79,7 +79,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
   const emitovanoPct = dnevniLimit > 0 && emitovanoAm !== null ? Math.min(100, Math.round((emitovanoAm / dnevniLimit) * 100)) : 0;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-semibold text-kolo-text">Programi Banke</h1>
         {totalOcekivano > 0 && (

@@ -39,6 +39,9 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 - Route handleri sa dinamičkim segmentima: params je `Promise<{id: string}>`, mora se `await params`.
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
 - `/api/korisnici/pretraga` vraća array objekata `{ id, pseudonim, verified, location }` direktno (ne `{ rezultati: [...] }`).
+- Zaokruživanje POEN-a: koristiti `Math.round()` (ne `Math.floor()`).
+- Slike za verifikaciju: čuvaju se kao base64 string u bazi (ne filesystem) — Vercel kompatibilnost.
+- Kompresija slika: obavlja se na klijentu pre slanja (Vercel limit 4.5MB po requestu).
 
 ## Struktura foldera
 ```
@@ -58,9 +61,9 @@ docs/             — dokumentacija po fazama
 ### Autentikacija i korisnici
 - Registracija sa pseudonimom, email, lozinka, referral kod
 - Login (NextAuth credentials)
-- Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično)
+- Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično); slike se čuvaju kao base64 u bazi
 - Profil: pseudonim, lokacija (autocomplete), telefon, punoIme (u tabeli `UserPodaci`)
-- Javni profil `/profil/[id]` — prikazuje pseudonim, lokaciju, zadrugun, datum; skriva email/balans/pravo ime
+- Javni profil `/profil/[id]` — prikazuje pseudonim, lokaciju, zadrugu, datum; skriva email/balans/pravo ime
 - Suspenzija / isključenje korisnika (admin)
 
 ### Novčanik (POEN)
@@ -73,6 +76,7 @@ docs/             — dokumentacija po fazama
 - `/poruke` — split-panel: levo lista konverzacija, desno chat
 - Polling 5s za nove poruke, badge nepročitanih, automatski scroll
 - Enter za slanje, Shift+Enter za novi red; poruke se označavaju pročitanima pri otvaranju
+- Mobilni view: lista i chat naizmenično (← nazad dugme)
 - "Kontaktiraj prodavca" dugme na svakom oglasu na Pijaci
 - Notifikacija primaocu pri svakoj poruci
 
@@ -140,13 +144,19 @@ docs/             — dokumentacija po fazama
   pristupnica prihvaćena, program enrollment odobren/odbijen, zapošljavanje prijava/evidencija,
   oglas kupljen, nova poruka
 
-### Sistem i ZRNO tržište
-- Tržišne informacije, admin kontrole
-- Tabovi: Pregled, Članovi (klikabilni), Transakcije (klikabilni), Programi, Zadruge
+### Početna / Sistem (spojene stranice)
+- `/dashboard` redirectuje na `/sistem`
+- Sidebar: "Početna" vodi na `/sistem`, nema duplog linka
+- Vrh stranice: lični pregled (balans, poslednje transakcije)
+- 4 kartice u 2×2 gridu sa statistikama i "danas" vrednostima: Članovi, Transakcije (gornji red), Zadruge, Opticaj (donji red)
+- Kartica Opticaj: zero-sum provera sa kvačicom
+- Klikabilne kartice vode na filtrirane prikaze (Članovi, Transakcije, Programi, Zadruge)
 
 ### Admin panel
 - Tabs: Dashboard, Na čekanju, Zadruge, Programi, Zapošljavanje, Pokrovitelji, Korisnici, Finansije, Audit log
 - Audit log za sve admin akcije
+- `GET /api/cron/zero-sum` — cron endpoint za Vercel (Hobby plan, smanjena frekvencija)
+- `vercel.json` sa cron konfiguracijom
 
 ## Uloge u sistemu
 - **Fizičko lice** — registrovan korisnik (neverifikovan ili verifikovan)
@@ -155,9 +165,10 @@ docs/             — dokumentacija po fazama
 - **Pokrovitelj** — pravno lice, nema nalog, vlasnik je verifikovani član
 
 ## Sidebar linkovi
-- Neverifikovan: Početna, Novčanik, Poruke, Pijaca, Sistem, Verifikacija, Profil
-- Verifikovan: Početna, Novčanik, Poruke, Pijaca, Zajednica, Zapošljavanje, Programi, ZRNO, Sistem, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
+- Neverifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Verifikacija, Profil
+- Verifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Zajednica, Zapošljavanje, Programi, ZRNO, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
 - Admin (dodatno): Admin, Simulator
+- Napomena: "Početna" i "Sistem" su spojeni u jedan link `/sistem`
 
 ## API endpointi
 
@@ -269,9 +280,11 @@ docs/             — dokumentacija po fazama
 - `POST /api/admin/korisnici/[id]/iskljuci`
 - `POST /api/admin/korisnici/[id]/rucna-verifikacija`
 - `GET /api/admin/zero-sum`
+- `GET /api/admin/korisnici/[id]` — detalji korisnika (admin)
 - `GET /api/javno/statistike`
 - `GET /api/notifikacije`
 - `PATCH /api/notifikacije`
+- `GET /api/cron/zero-sum` — Vercel cron endpoint
 
 ## Biblioteka funkcija (`src/lib/`)
 
@@ -285,8 +298,9 @@ docs/             — dokumentacija po fazama
 
 ## Shared komponente (`src/components/`)
 
-- `Sidebar.tsx` — Navigacija (različiti linkovi za verifikovanog/neverifikovanog/admina)
-- `Header.tsx` — Header sa balans prikazom, bell notifikacijama (polling 15s), toast
+- `Sidebar.tsx` — Navigacija, tamna pozadina, logo na vrhu, w-44; različiti linkovi za verifikovanog/neverifikovanog/admina
+- `Header.tsx` — Puno širinom, balans prikaz, bell notifikacije (polling 15s), toast, dugme za odjavu
+- `AppShell.tsx` — Layout wrapper; sadržaj kontejner max-w-[940px]
 - `PublicHeader.tsx` — Header za javne stranice (logo, linkovi, Pokrovitelji)
 - `LokacijaSearch.tsx` — Autocomplete za srpska naselja (keyboard navigacija ↑↓ Enter Escape)
 - `ClanPretraga.tsx` — Autocomplete za pretragu članova, navigira na `/profil/[id]`

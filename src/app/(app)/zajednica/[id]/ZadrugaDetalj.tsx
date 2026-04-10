@@ -105,7 +105,7 @@ export default function ZadrugaDetalj({ zadruga, mojeClansvo, imaPristupnicu, is
   ];
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/zajednica" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Zadruge</Link>
       </div>

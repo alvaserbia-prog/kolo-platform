@@ -66,7 +66,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-5">
+    <div className="space-y-5">
       {/* Zaglavlje */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-kolo-text" style={{ letterSpacing: "-0.02em" }}>Pijaca</h1>

@@ -40,7 +40,7 @@ const prijavaStatusBadge: Record<string, { label: string; cls: string }> = {
 
 export default function ZaposljavanjeKlijent({ oglasi, isVerified }: { oglasi: OglasItem[]; isVerified: boolean }) {
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold text-kolo-text">Zapošljavanje</h1>
         <p className="text-sm text-kolo-muted mt-1">Aktivni oglasi za angažovanje u sistemu</p>

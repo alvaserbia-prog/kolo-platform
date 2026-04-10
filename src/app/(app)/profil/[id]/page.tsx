@@ -37,7 +37,7 @@ export default async function JavniProfilPage({ params }: { params: Promise<{ id
   const zadruga = korisnik.zadrugaMemberships[0]?.zadruga ?? null;
 
   return (
-    <div className="max-w-lg mx-auto space-y-4">
+    <div className="space-y-4">
       <div className="flex items-center gap-2 text-sm text-kolo-muted">
         <Link href="/zajednica" className="hover:text-kolo-green-700 transition-colors">Zajednica</Link>
         <span>/</span>

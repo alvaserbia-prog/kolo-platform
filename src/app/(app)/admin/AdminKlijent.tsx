@@ -210,7 +210,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
   ];
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-kolo-text">Admin panel</h1>
 
       {/* Tabs */}

@@ -120,7 +120,7 @@ function VerifikacijaForma({
   }
 
   return (
-    <div className="max-w-md mx-auto space-y-5">
+    <div className="space-y-5">
       <div>
         <h1 className="text-2xl font-semibold text-kolo-text">Verifikacija identiteta</h1>
         <p className="mt-1 text-sm text-kolo-muted">
@@ -224,7 +224,7 @@ function VerifikacijaForma({
 
 function PendingEkran({ createdAt }: { createdAt: string }) {
   return (
-    <div className="max-w-md mx-auto">
+    <div className="w-full">
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
         <div className="w-20 h-20 rounded-full bg-kolo-gold-100 flex items-center justify-center mx-auto mb-5 text-4xl">
           ⏰
