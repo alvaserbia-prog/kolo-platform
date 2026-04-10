@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -45,24 +42,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
   }
 
-  // Sačuvaj fajlove
-  const dir = path.join(process.cwd(), "storage", "verifikacija", session.user.id);
-  await mkdir(dir, { recursive: true });
-
-  const ext = (file: File) => {
-    if (file.type === "image/png") return ".png";
-    if (file.type === "image/webp") return ".webp";
-    return ".jpg";
+  // Sačuvaj kao base64 data URL (radi na serverless/Vercel okruženju)
+  const toDataUrl = async (file: File) => {
+    const buffer = Buffer.from(await file.arrayBuffer());
+    return `data:${file.type};base64,${buffer.toString("base64")}`;
   };
 
-  const frontName = `${randomUUID()}${ext(frontFile)}`;
-  const backName = `${randomUUID()}${ext(backFile)}`;
-
-  await writeFile(path.join(dir, frontName), Buffer.from(await frontFile.arrayBuffer()));
-  await writeFile(path.join(dir, backName), Buffer.from(await backFile.arrayBuffer()));
-
-  const frontPath = `storage/verifikacija/${session.user.id}/${frontName}`;
-  const backPath = `storage/verifikacija/${session.user.id}/${backName}`;
+  const frontPath = await toDataUrl(frontFile);
+  const backPath = await toDataUrl(backFile);
 
   // Upiši ili ažuriraj VerificationRequest
   if (postojeci) {

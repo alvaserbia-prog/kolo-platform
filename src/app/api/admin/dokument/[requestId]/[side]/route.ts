@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { readFile } from "fs/promises";
-import path from "path";
 
 export async function GET(
   req: NextRequest,
@@ -23,25 +21,20 @@ export async function GET(
   const vr = await prisma.verificationRequest.findUnique({ where: { id: requestId } });
   if (!vr) return new NextResponse("Nije pronađeno", { status: 404 });
 
-  const filePath = side === "front" ? vr.idFrontPath : vr.idBackPath;
-  if (!filePath) return new NextResponse("Dokument nije uploadovan (ručna verifikacija)", { status: 404 });
+  const dataUrl = side === "front" ? vr.idFrontPath : vr.idBackPath;
+  if (!dataUrl) return new NextResponse("Dokument nije uploadovan (ručna verifikacija)", { status: 404 });
 
-  try {
-    const absPath = path.join(process.cwd(), filePath);
-    const fileBuffer = await readFile(absPath);
-    const ext = path.extname(filePath as string).toLowerCase();
-    const contentType =
-      ext === ".png" ? "image/png" :
-      ext === ".webp" ? "image/webp" :
-      "image/jpeg";
+  // Podrška za base64 data URL format: "data:<mime>;base64,<data>"
+  const match = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+  if (!match) return new NextResponse("Neispravan format dokumenta", { status: 500 });
 
-    return new NextResponse(fileBuffer, {
-      headers: {
-        "Content-Type": contentType,
-        "Cache-Control": "no-store",
-      },
-    });
-  } catch {
-    return new NextResponse("Fajl nije pronađen", { status: 404 });
-  }
+  const contentType = match[1];
+  const buffer = Buffer.from(match[2], "base64");
+
+  return new NextResponse(buffer, {
+    headers: {
+      "Content-Type": contentType,
+      "Cache-Control": "no-store",
+    },
+  });
 }
