@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Notifikacija {
   id: string;
@@ -21,10 +22,10 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
     <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
       <div className="flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900">
 
-        {/* Logo — desktop: ista širina kao sidebar (w-52 = 208px) */}
+        {/* Placeholder — ista širina kao sidebar (w-52) */}
         <div className="hidden md:block w-52 shrink-0" />
 
-        {/* Hamburger + logo — mobilno */}
+        {/* Hamburger — mobilno */}
         <div className="flex md:hidden items-center gap-2 px-4">
           <button
             onClick={onMenuOpen}
@@ -40,20 +41,29 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           <span className="font-bold text-white text-base tracking-widest">KOLO</span>
         </div>
 
-        <div className="flex items-center gap-3 px-4">
+        {/* Desna strana: balans + poruke + notifikacije + profil */}
+        <div className="flex items-center gap-1.5 px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
-              <span className="text-white/25">•</span>
-              <BellNotifikacije />
-              <span className="text-white/25">•</span>
-              <span className="text-sm text-white/60 hidden sm:inline truncate max-w-[120px]">{session.user.pseudonim}</span>
-              <button
-                onClick={() => signOut({ callbackUrl: "/login" })}
-                className="text-sm text-white/50 hover:text-white transition-colors shrink-0"
+              <div className="w-px h-4 bg-white/20 mx-1.5" />
+              {/* Poruke ikonica */}
+              <Link
+                href="/poruke"
+                className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Poruke"
               >
-                Odjava
-              </button>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </Link>
+              {/* Notifikacije */}
+              <BellNotifikacije />
+              {/* Profilni krug */}
+              <ProfilMeni
+                userId={session.user.id}
+                pseudonim={session.user.pseudonim}
+              />
             </>
           ) : (
             <span className="text-white/50 text-sm">Učitavam...</span>
@@ -75,12 +85,83 @@ function BalansHeader({ userId }: { userId: string }) {
   }, [userId]);
 
   return (
-    <span className="text-white/60 text-sm">
-      <span className="font-semibold text-white">
+    <span className="text-white/60 text-base hidden sm:inline">
+      <span className="font-semibold text-white text-base">
         {balans === null ? "..." : balans.toLocaleString("sr-RS")}
       </span>{" "}
       POEN
     </span>
+  );
+}
+
+function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [avatar, setAvatar] = useState<string | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetch("/api/profil/balans")
+      .then((r) => r.json())
+      .then((d) => setAvatar(d.avatar ?? null))
+      .catch(() => {});
+  }, [userId]);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    if (open) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [open]);
+
+  const inicijal = pseudonim.charAt(0).toUpperCase();
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
+        aria-label="Profil"
+      >
+        {avatar ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={avatar} alt={pseudonim} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-sm">
+            {inicijal}
+          </div>
+        )}
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-11 w-52 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
+          <div className="px-4 py-3 border-b border-kolo-border">
+            <p className="text-sm font-semibold text-kolo-text truncate">{pseudonim}</p>
+          </div>
+          <div className="py-1">
+            <button
+              onClick={() => { setOpen(false); router.push("/profil"); }}
+              className="w-full text-left px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center gap-3"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+              Moj profil
+            </button>
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="w-full text-left px-4 py-2.5 text-sm text-kolo-danger hover:bg-kolo-danger-light transition-colors flex items-center gap-3"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+              Odjavi se
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -111,9 +192,7 @@ function BellNotifikacije() {
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) setOpen(false);
     }
     if (open) document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
@@ -132,7 +211,6 @@ function BellNotifikacije() {
     const data = await res.json();
     const noviCount: number = data.neprocitano ?? 0;
     const lista: Notifikacija[] = data.notifikacije ?? [];
-    // Prikaži toast ako je porastao broj nepročitanih (ne pri prvom učitavanju)
     if (prevNeprocitanoRef.current !== null && noviCount > prevNeprocitanoRef.current) {
       const najnovija = lista.find((n) => !n.procitana);
       if (najnovija) setToast(najnovija);
@@ -157,7 +235,6 @@ function BellNotifikacije() {
 
   return (
     <div className="relative" ref={panelRef}>
-      {/* Toast */}
       {toast && (
         <div
           className="fixed bottom-6 right-6 z-[100] w-80 bg-white rounded-2xl shadow-xl border border-kolo-border p-4 flex items-start gap-3 animate-slide-up"
@@ -169,67 +246,50 @@ function BellNotifikacije() {
             <p className={`text-sm font-semibold ${TIP_BOJA[toast.tip] ?? "text-kolo-text"}`}>{toast.naslov}</p>
             <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed line-clamp-2">{toast.tekst}</p>
           </div>
-          <button
-            onClick={(e) => { e.stopPropagation(); setToast(null); }}
-            className="text-kolo-border hover:text-kolo-muted text-lg leading-none shrink-0"
-          >×</button>
+          <button onClick={(e) => { e.stopPropagation(); setToast(null); }} className="text-kolo-border hover:text-kolo-muted text-lg leading-none shrink-0">×</button>
         </div>
       )}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="relative p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+        className="relative w-9 h-9 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
         aria-label="Notifikacije"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
         </svg>
         {neprocitano > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-kolo-danger-light0 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
+          <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
             {neprocitano > 9 ? "9+" : neprocitano}
           </span>
         )}
       </button>
 
       {open && (
-        <div className="absolute right-0 top-10 w-80 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
+        <div className="absolute right-0 top-11 w-80 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-kolo-border">
             <span className="text-sm font-semibold text-kolo-text">Obaveštenja</span>
             {neprocitano > 0 && (
-              <button onClick={oznaciProcitane} disabled={loading}
-                className="text-xs text-kolo-green-700 hover:underline disabled:opacity-50">
+              <button onClick={oznaciProcitane} disabled={loading} className="text-xs text-kolo-green-700 hover:underline disabled:opacity-50">
                 Označi sve kao pročitano
               </button>
             )}
           </div>
           <div className="max-h-80 overflow-y-auto">
             {notifikacije.length === 0 ? (
-              <div className="px-4 py-8 text-center text-sm text-kolo-muted">
-                Nema obaveštenja.
-              </div>
+              <div className="px-4 py-8 text-center text-sm text-kolo-muted">Nema obaveštenja.</div>
             ) : (
               notifikacije.map((n) => (
-                <button
-                  key={n.id}
-                  onClick={() => handleKlik(n)}
-                  className={`w-full text-left px-4 py-3 hover:bg-kolo-bg transition-colors border-b border-kolo-border/50 last:border-0 ${
-                    !n.procitana ? "bg-kolo-green-100/30" : ""
-                  }`}
+                <button key={n.id} onClick={() => handleKlik(n)}
+                  className={`w-full text-left px-4 py-3 hover:bg-kolo-bg transition-colors border-b border-kolo-border/50 last:border-0 ${!n.procitana ? "bg-kolo-green-100/30" : ""}`}
                 >
                   <div className="flex items-start gap-2">
-                    {!n.procitana && (
-                      <div className="mt-1.5 w-2 h-2 rounded-full bg-kolo-green-700 shrink-0" />
-                    )}
+                    {!n.procitana && <div className="mt-1.5 w-2 h-2 rounded-full bg-kolo-green-700 shrink-0" />}
                     <div className={!n.procitana ? "" : "pl-4"}>
-                      <p className={`text-sm font-semibold ${TIP_BOJA[n.tip] ?? "text-kolo-text"}`}>
-                        {n.naslov}
-                      </p>
+                      <p className={`text-sm font-semibold ${TIP_BOJA[n.tip] ?? "text-kolo-text"}`}>{n.naslov}</p>
                       <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed">{n.tekst}</p>
                       <p className="text-[10px] text-kolo-border mt-1">
-                        {new Date(n.createdAt).toLocaleString("sr-RS", {
-                          day: "2-digit", month: "2-digit",
-                          hour: "2-digit", minute: "2-digit",
-                        })}
+                        {new Date(n.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                       </p>
                     </div>
                   </div>

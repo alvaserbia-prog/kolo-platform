@@ -6,8 +6,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
 
-const CROP_SIZE = 320;
-const CROP_RADIUS = 140;
+const MAX_DISPLAY = 440;
 
 interface ProfilProps {
   user: {
@@ -36,10 +35,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [avatarError, setAvatarError] = useState("");
   // crop modal
   const [cropSrc, setCropSrc] = useState<string | null>(null);
-  const [cropNatural, setCropNatural] = useState({ w: 1, h: 1 });
-  const [cropScale, setCropScale] = useState(1);
-  const [cropOffset, setCropOffset] = useState({ x: 0, y: 0 });
-  const dragRef = useRef<{ startX: number; startY: number; ox: number; oy: number } | null>(null);
+  const [cropDisplay, setCropDisplay] = useState({ w: 1, h: 1, scale: 1 });
+  const [cropRadius, setCropRadius] = useState(120);
+  const [circleCenter, setCircleCenter] = useState({ x: 0, y: 0 });
+  const dragRef = useRef<{ startX: number; startY: number; cx: number; cy: number } | null>(null);
   const cropImgRef = useRef<HTMLImageElement>(null);
   const [noviPseudonim, setNoviPseudonim] = useState("");
   const [psError, setPsError] = useState("");
@@ -62,19 +61,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
 
-  function clampOffset(ox: number, oy: number, scale: number, natW: number, natH: number) {
-    const dispW = natW * scale;
-    const dispH = natH * scale;
-    const maxX = CROP_SIZE / 2 - CROP_RADIUS;
-    const minX = CROP_SIZE / 2 + CROP_RADIUS - dispW;
-    const maxY = CROP_SIZE / 2 - CROP_RADIUS;
-    const minY = CROP_SIZE / 2 + CROP_RADIUS - dispH;
-    return {
-      x: Math.min(maxX, Math.max(minX, ox)),
-      y: Math.min(maxY, Math.max(minY, oy)),
-    };
-  }
-
   function selectAvatar(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -82,18 +68,13 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      const scale = Math.max(
-        (CROP_SIZE / img.width) * 1.05,
-        (CROP_SIZE / img.height) * 1.05,
-      );
-      const initOffset = clampOffset(
-        (CROP_SIZE - img.width * scale) / 2,
-        (CROP_SIZE - img.height * scale) / 2,
-        scale, img.width, img.height,
-      );
-      setCropNatural({ w: img.width, h: img.height });
-      setCropScale(scale);
-      setCropOffset(initOffset);
+      const scale = Math.min(MAX_DISPLAY / img.width, MAX_DISPLAY / img.height, 1);
+      const dw = img.width * scale;
+      const dh = img.height * scale;
+      const r = Math.min(dw, dh) / 2 - 12;
+      setCropDisplay({ w: dw, h: dh, scale });
+      setCropRadius(r);
+      setCircleCenter({ x: dw / 2, y: dh / 2 });
       setCropSrc(url);
     };
     img.src = url;
@@ -102,20 +83,20 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   const onDragStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     const pt = "touches" in e ? e.touches[0] : e;
-    dragRef.current = { startX: pt.clientX, startY: pt.clientY, ox: cropOffset.x, oy: cropOffset.y };
-  }, [cropOffset]);
+    dragRef.current = { startX: pt.clientX, startY: pt.clientY, cx: circleCenter.x, cy: circleCenter.y };
+  }, [circleCenter]);
 
   const onDragMove = useCallback((e: React.MouseEvent | React.TouchEvent) => {
     if (!dragRef.current) return;
     const pt = "touches" in e ? e.touches[0] : e;
     const dx = pt.clientX - dragRef.current.startX;
     const dy = pt.clientY - dragRef.current.startY;
-    setCropOffset(clampOffset(
-      dragRef.current.ox + dx,
-      dragRef.current.oy + dy,
-      cropScale, cropNatural.w, cropNatural.h,
-    ));
-  }, [cropScale, cropNatural]);
+    const r = cropRadius;
+    setCircleCenter({
+      x: Math.min(cropDisplay.w - r, Math.max(r, dragRef.current.cx + dx)),
+      y: Math.min(cropDisplay.h - r, Math.max(r, dragRef.current.cy + dy)),
+    });
+  }, [cropRadius, cropDisplay]);
 
   const onDragEnd = useCallback(() => { dragRef.current = null; }, []);
 
@@ -130,11 +111,11 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     canvas.height = size;
     const ctx = canvas.getContext("2d")!;
 
-    const imgEl = cropImgRef.current;
-    const cx = (CROP_SIZE / 2 - cropOffset.x) / cropScale;
-    const cy = (CROP_SIZE / 2 - cropOffset.y) / cropScale;
-    const r = CROP_RADIUS / cropScale;
-    ctx.drawImage(imgEl, cx - r, cy - r, r * 2, r * 2, 0, 0, size, size);
+    const { scale } = cropDisplay;
+    const r = cropRadius / scale;
+    const cx = circleCenter.x / scale;
+    const cy = circleCenter.y / scale;
+    ctx.drawImage(cropImgRef.current, cx - r, cy - r, r * 2, r * 2, 0, 0, size, size);
 
     const base64 = canvas.toDataURL("image/jpeg", 0.82);
     URL.revokeObjectURL(cropSrc);
@@ -450,12 +431,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Crop modal */}
       {cropSrc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
-          <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl">
-            <p className="text-sm text-kolo-muted">Pomeri sliku da namjestiš kadar</p>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl max-w-full">
+            <p className="text-sm text-kolo-muted">Pomeri krug da označiš kadar</p>
             <div
-              className="relative overflow-hidden rounded-full cursor-grab active:cursor-grabbing"
-              style={{ width: CROP_SIZE, height: CROP_SIZE }}
+              className="relative cursor-grab active:cursor-grabbing rounded-xl overflow-hidden select-none"
+              style={{ width: cropDisplay.w, height: cropDisplay.h }}
               onMouseDown={onDragStart}
               onMouseMove={onDragMove}
               onMouseUp={onDragEnd}
@@ -470,16 +451,22 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 src={cropSrc}
                 alt=""
                 draggable={false}
-                style={{
-                  position: "absolute",
-                  width: cropNatural.w * cropScale,
-                  height: cropNatural.h * cropScale,
-                  left: cropOffset.x,
-                  top: cropOffset.y,
-                  userSelect: "none",
-                  pointerEvents: "none",
-                }}
+                style={{ width: cropDisplay.w, height: cropDisplay.h, display: "block", pointerEvents: "none" }}
               />
+              <svg
+                style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+                width={cropDisplay.w}
+                height={cropDisplay.h}
+              >
+                <defs>
+                  <mask id="cm">
+                    <rect width={cropDisplay.w} height={cropDisplay.h} fill="white" />
+                    <circle cx={circleCenter.x} cy={circleCenter.y} r={cropRadius} fill="black" />
+                  </mask>
+                </defs>
+                <rect width={cropDisplay.w} height={cropDisplay.h} fill="black" fillOpacity={0.55} mask="url(#cm)" />
+                <circle cx={circleCenter.x} cy={circleCenter.y} r={cropRadius} fill="none" stroke="white" strokeWidth={2} strokeDasharray="6 3" />
+              </svg>
             </div>
             <div className="flex gap-3 w-full">
               <button
