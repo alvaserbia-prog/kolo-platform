@@ -42,28 +42,30 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         </div>
 
         {/* Desna strana: balans + poruke + notifikacije + profil */}
-        <div className="flex items-center gap-1.5 px-4">
+        <div className="flex items-center gap-0.5 px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
-              <div className="w-px h-4 bg-white/20 mx-1.5" />
+              <div className="w-px h-4 bg-white/20 mx-1" />
               {/* Poruke ikonica */}
               <Link
                 href="/poruke"
-                className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                className="w-[3.75rem] h-[3.75rem] flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
                 aria-label="Poruke"
               >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
               </Link>
               {/* Notifikacije */}
               <BellNotifikacije />
               {/* Profilni krug */}
-              <ProfilMeni
-                userId={session.user.id}
-                pseudonim={session.user.pseudonim}
-              />
+              <div className="ml-3">
+                <ProfilMeni
+                  userId={session.user.id}
+                  pseudonim={session.user.pseudonim}
+                />
+              </div>
             </>
           ) : (
             <span className="text-white/50 text-sm">Učitavam...</span>
@@ -121,7 +123,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
+        className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
         aria-label="Profil"
       >
         {avatar ? (
@@ -251,10 +253,10 @@ function BellNotifikacije() {
       )}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="relative w-9 h-9 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+        className="relative w-[3.75rem] h-[3.75rem] flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
         aria-label="Notifikacije"
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
           <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
         </svg>
