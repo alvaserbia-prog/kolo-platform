@@ -29,6 +29,7 @@ export default async function SistemPage() {
   const verified = session.user.verified;
 
   const [
+    wallet,
     banka,
     ukupnoKorisnika,
     verifikovanih,
@@ -38,7 +39,13 @@ export default async function SistemPage() {
     korisnici,
     zadrugeLista,
     aktivniProgrami,
+    verRequest,
+    poslednjeKorisnika,
   ] = await Promise.all([
+    prisma.wallet.findUnique({
+      where: { userId: session.user.id },
+      select: { balance: true },
+    }),
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
       select: { balance: true },
@@ -88,6 +95,26 @@ export default async function SistemPage() {
     }),
     prisma.bankaProgram.findMany({
       select: { type: true, isActive: true, activatedAt: true },
+    }),
+    session.user.verified
+      ? Promise.resolve(null)
+      : prisma.verificationRequest.findUnique({
+          where: { userId: session.user.id },
+          select: { status: true },
+        }),
+    prisma.transaction.findMany({
+      where: {
+        OR: [
+          { toWallet: { userId: session.user.id } },
+          { fromWallet: { userId: session.user.id } },
+        ],
+      },
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      include: {
+        fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+        toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+      },
     }),
   ]);
 
@@ -147,8 +174,32 @@ export default async function SistemPage() {
     };
   });
 
+  const poslednjeKorisnikaTx = poslednjeKorisnika.map((t) => {
+    const primio = t.toWallet?.userId === session.user.id;
+    const drugiUser =
+      t.type !== "TRANSFER"
+        ? null
+        : primio
+        ? t.fromWallet?.user ?? null
+        : t.toWallet?.user ?? null;
+    return {
+      id: t.id,
+      amount: t.amount,
+      type: t.type,
+      primio,
+      drugiPseudonim:
+        drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Banka" : "?"),
+      drugiId: drugiUser?.id ?? null,
+      createdAt: t.createdAt.toISOString(),
+    };
+  });
+
   return (
     <SistemKlijent
+      pseudonim={session.user.pseudonim}
+      userBalance={wallet?.balance ?? 0}
+      verRequest={verRequest ? { status: verRequest.status } : null}
+      poslednjeKorisnikaTx={poslednjeKorisnikaTx}
       verified={verified}
       opticaj={opticaj}
       bankaBalance={bankaBalance}
