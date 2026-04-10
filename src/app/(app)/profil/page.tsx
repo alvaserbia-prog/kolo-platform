@@ -30,6 +30,7 @@ export default async function ProfilPage() {
         location: user.location ?? null,
         telefon: user.telefon ?? null,
         punoIme: user.podaci?.punoIme ?? null,
+        opis: user.podaci?.opis ?? null,
         avatar: user.avatar ?? null,
       }}
     />

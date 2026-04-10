@@ -21,6 +21,7 @@ interface ProfilProps {
     location: string | null;
     telefon: string | null;
     punoIme: string | null;
+    opis: string | null;
     avatar: string | null;
   };
 }
@@ -43,6 +44,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [locSuccess, setLocSuccess] = useState("");
   const [locLoading, setLocLoading] = useState(false);
   const [punoIme, setPunoIme] = useState(user.punoIme ?? "");
+  const [opis, setOpis] = useState(user.opis ?? "");
   const [podaciError, setPodaciError] = useState("");
   const [podaciSuccess, setPodaciSuccess] = useState("");
   const [podaciLoading, setPodaciLoading] = useState(false);
@@ -130,7 +132,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const res = await fetch("/api/profil/podaci", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ punoIme }),
+      body: JSON.stringify({ punoIme, opis }),
     });
     const data = await res.json();
     setPodaciLoading(false);
@@ -167,38 +169,36 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Profilna slika + Osnovni podaci — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Profilna slika</h2>
-          <div className="flex items-center gap-5">
-            <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
-              {avatar ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={avatar} alt={user.pseudonim} className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-2xl">
-                  {user.pseudonim.charAt(0).toUpperCase()}
-                </div>
-              )}
-            </div>
-            <div className="flex-1 min-w-0">
-              <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-kolo-border text-sm text-kolo-text hover:bg-kolo-bg transition-colors">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="17 8 12 3 7 8"/>
-                  <line x1="12" y1="3" x2="12" y2="15"/>
-                </svg>
-                {avatarLoading ? "Čuvam..." : "Postavi sliku"}
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  disabled={avatarLoading}
-                  onChange={uploadAvatar}
-                />
-              </label>
-              <p className="text-xs text-kolo-muted mt-2">JPG, PNG, WebP — iseca se na kvadrat 256×256px</p>
-              {avatarError && <p className="text-sm text-kolo-danger mt-2">{avatarError}</p>}
-            </div>
+        <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col items-center gap-5">
+          <h2 className="text-base font-semibold text-kolo-muted self-start">Profilna slika</h2>
+          <div className="w-44 h-44 rounded-full overflow-hidden ring-2 ring-kolo-border">
+            {avatar ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={avatar} alt={user.pseudonim} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-6xl">
+                {user.pseudonim.charAt(0).toUpperCase()}
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col items-center gap-1 mt-auto">
+            <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-kolo-border text-sm text-kolo-text hover:bg-kolo-bg transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              {avatarLoading ? "Čuvam..." : "Postavi sliku"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                disabled={avatarLoading}
+                onChange={uploadAvatar}
+              />
+            </label>
+            <p className="text-xs text-kolo-muted text-center">JPG, PNG, WebP — iseca se na kvadrat</p>
+            {avatarError && <p className="text-sm text-kolo-danger text-center">{avatarError}</p>}
           </div>
         </div>
 
@@ -261,8 +261,45 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </div>
 
-      {/* Lokacija i kontakt + Ime i prezime — jedno pored drugog */}
+      {/* Ime i prezime + Lokacija i kontakt — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl border border-kolo-border p-6">
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">Ime i prezime</h2>
+          <form onSubmit={sacuvajPodatke} className="space-y-3">
+            <div>
+              <label className="block text-sm text-kolo-muted mb-1.5">Puno ime <span className="text-kolo-muted">(opciono)</span></label>
+              <input
+                type="text"
+                value={punoIme}
+                onChange={(e) => setPunoIme(e.target.value)}
+                placeholder="npr. Marko Marković"
+                maxLength={100}
+                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-kolo-muted mb-1.5">Opis / zanimanje <span className="text-kolo-muted">(opciono)</span></label>
+              <input
+                type="text"
+                value={opis}
+                onChange={(e) => setOpis(e.target.value)}
+                placeholder="npr. Stolar, programer, učenik..."
+                maxLength={200}
+                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+              />
+            </div>
+            {podaciError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{podaciError}</p>}
+            {podaciSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{podaciSuccess}</p>}
+            <button
+              type="submit"
+              disabled={podaciLoading}
+              className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+            >
+              {podaciLoading ? "Čuvam..." : "Sačuvaj"}
+            </button>
+          </form>
+        </div>
+
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
           <h2 className="text-base font-semibold text-kolo-muted mb-4">Lokacija i kontakt</h2>
           <form onSubmit={sacuvajLokaciju} className="space-y-3">
@@ -288,32 +325,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
             >
               {locLoading ? "Čuvam..." : "Sačuvaj"}
-            </button>
-          </form>
-        </div>
-
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Ime i prezime</h2>
-          <form onSubmit={sacuvajPodatke} className="space-y-3">
-            <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">Puno ime <span className="text-kolo-muted">(opciono)</span></label>
-              <input
-                type="text"
-                value={punoIme}
-                onChange={(e) => setPunoIme(e.target.value)}
-                placeholder="npr. Marko Marković"
-                maxLength={100}
-                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
-              />
-            </div>
-            {podaciError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{podaciError}</p>}
-            {podaciSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{podaciSuccess}</p>}
-            <button
-              type="submit"
-              disabled={podaciLoading}
-              className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
-            >
-              {podaciLoading ? "Čuvam..." : "Sačuvaj"}
             </button>
           </form>
         </div>

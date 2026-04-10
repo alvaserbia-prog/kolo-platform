@@ -204,6 +204,7 @@ model UserPodaci {
   userId    String   @unique
   user      User     @relation(fields: [userId], references: [id])
   punoIme   String?
+  opis      String?
   updatedAt DateTime @updatedAt
 }
 
