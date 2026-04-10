@@ -87,8 +87,8 @@ function BalansHeader({ userId }: { userId: string }) {
   }, [userId]);
 
   return (
-    <span className="text-white/60 text-base hidden sm:inline">
-      <span className="font-semibold text-white text-base">
+    <span className="text-white/60 text-xl hidden sm:inline">
+      <span className="font-semibold text-white text-xl">
         {balans === null ? "..." : balans.toLocaleString("sr-RS")}
       </span>{" "}
       POEN
