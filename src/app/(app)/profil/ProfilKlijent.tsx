@@ -171,12 +171,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col items-center gap-5">
           <h2 className="text-base font-semibold text-kolo-muted self-start">Profilna slika</h2>
-          <div className="w-44 h-44 rounded-full overflow-hidden ring-2 ring-kolo-border">
+          <div className="w-56 h-56 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
             {avatar ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={avatar} alt={user.pseudonim} className="w-full h-full object-cover" />
+              <img src={avatar} alt={user.pseudonim} className="block w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-6xl">
+              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-7xl">
                 {user.pseudonim.charAt(0).toUpperCase()}
               </div>
             )}
