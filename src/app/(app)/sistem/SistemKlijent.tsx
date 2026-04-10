@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "zadruge";
+type TxFilter = "sve" | "banka" | "clanovi";
 
 const TIP_LABELA: Record<string, string> = {
   TRANSFER: "Transfer",
@@ -91,6 +92,8 @@ interface Props {
   programi: Program[];
 }
 
+const CILJ_OPTICAJ = 1_000_000;
+
 export default function SistemKlijent({
   pseudonim,
   verRequest,
@@ -115,14 +118,6 @@ export default function SistemKlijent({
 
   const aktivniProgrami = programi.filter((p) => p.isActive).length;
   const zeroSum = opticaj + bankaBalance === 0;
-
-  const navigacija: { key: Sekcija; label: string; broj: number | string }[] = [
-    { key: "pregled", label: "Pregled", broj: opticaj.toLocaleString("sr-RS") },
-    { key: "clanovi", label: "Članovi", broj: ukupnoKorisnika },
-    { key: "transakcije", label: "Transakcije", broj: transakcije.length },
-    { key: "programi", label: "Programi", broj: aktivniProgrami },
-    { key: "zadruge", label: "Zadruge", broj: ukupnoZadrugaCount },
-  ];
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -160,82 +155,37 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* 4 kartice */}
+      {/* 4 kartice 2×2 */}
       <div className="grid grid-cols-2 gap-4">
         {/* Članovi */}
-        <button
+        <Kartica
+          aktivan={sekcija === "clanovi"}
           onClick={() => setSekcija("clanovi")}
-          className={`rounded-2xl p-5 text-left transition-all border ${
-            sekcija === "clanovi"
-              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
-              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
-          }`}
-        >
-          <p className={`text-xs font-medium mb-1 ${sekcija === "clanovi" ? "text-white/70" : "text-kolo-muted"}`}>
-            Članovi
-          </p>
-          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "clanovi" ? "text-white" : "text-kolo-text"}`}>
-            {ukupnoKorisnika.toLocaleString("sr-RS")}
-            {danasKorisnika > 0 && (
-              <span className={`text-base font-semibold ml-1.5 ${sekcija === "clanovi" ? "text-white/60" : "text-kolo-green-500"}`}>
-                (+{danasKorisnika})
-              </span>
-            )}
-          </p>
-          <p className={`text-xs mt-1 ${sekcija === "clanovi" ? "text-white/60" : "text-kolo-muted"}`}>
-            {verifikovanih} verif. · {ukupnoKorisnika - verifikovanih} neverif.
-          </p>
-        </button>
+          label="Članovi"
+          broj={ukupnoKorisnika}
+          danas={danasKorisnika}
+          podnaslov={`${verifikovanih} verif. · ${ukupnoKorisnika - verifikovanih} neverif.`}
+        />
 
         {/* Transakcije */}
-        <button
+        <Kartica
+          aktivan={sekcija === "transakcije"}
           onClick={() => setSekcija("transakcije")}
-          className={`rounded-2xl p-5 text-left transition-all border ${
-            sekcija === "transakcije"
-              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
-              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
-          }`}
-        >
-          <p className={`text-xs font-medium mb-1 ${sekcija === "transakcije" ? "text-white/70" : "text-kolo-muted"}`}>
-            Transakcije
-          </p>
-          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "transakcije" ? "text-white" : "text-kolo-text"}`}>
-            {transakcije.length.toLocaleString("sr-RS")}
-            {danasTransakcija > 0 && (
-              <span className={`text-base font-semibold ml-1.5 ${sekcija === "transakcije" ? "text-white/60" : "text-kolo-green-500"}`}>
-                (+{danasTransakcija})
-              </span>
-            )}
-          </p>
-          <p className={`text-xs mt-1 ${sekcija === "transakcije" ? "text-white/60" : "text-kolo-muted"}`}>
-            poslednjih {transakcije.length} u pregledu
-          </p>
-        </button>
+          label="Transakcije"
+          broj={transakcije.length}
+          danas={danasTransakcija}
+          podnaslov={`poslednjih ${transakcije.length} u pregledu`}
+        />
 
         {/* Zadruge */}
-        <button
+        <Kartica
+          aktivan={sekcija === "zadruge"}
           onClick={() => setSekcija("zadruge")}
-          className={`rounded-2xl p-5 text-left transition-all border ${
-            sekcija === "zadruge"
-              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
-              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
-          }`}
-        >
-          <p className={`text-xs font-medium mb-1 ${sekcija === "zadruge" ? "text-white/70" : "text-kolo-muted"}`}>
-            Zadruge
-          </p>
-          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "zadruge" ? "text-white" : "text-kolo-text"}`}>
-            {ukupnoZadrugaCount.toLocaleString("sr-RS")}
-            {danasZadruga > 0 && (
-              <span className={`text-base font-semibold ml-1.5 ${sekcija === "zadruge" ? "text-white/60" : "text-kolo-green-500"}`}>
-                (+{danasZadruga})
-              </span>
-            )}
-          </p>
-          <p className={`text-xs mt-1 ${sekcija === "zadruge" ? "text-white/60" : "text-kolo-muted"}`}>
-            aktivnih u mreži
-          </p>
-        </button>
+          label="Zadruge"
+          broj={ukupnoZadrugaCount}
+          danas={danasZadruga}
+          podnaslov="aktivnih u mreži"
+        />
 
         {/* Opticaj */}
         <button
@@ -284,6 +234,9 @@ export default function SistemKlijent({
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
+          programi={programi}
+          ukupnoZadruga={ukupnoZadrugaCount}
+          aktivniProgrami={aktivniProgrami}
         />
       )}
       {sekcija === "clanovi" && (
@@ -300,6 +253,50 @@ export default function SistemKlijent({
   );
 }
 
+// ── Kartica (reusable) ────────────────────────────────────────────────────────
+
+function Kartica({
+  aktivan,
+  onClick,
+  label,
+  broj,
+  danas,
+  podnaslov,
+}: {
+  aktivan: boolean;
+  onClick: () => void;
+  label: string;
+  broj: number;
+  danas: number;
+  podnaslov: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-2xl p-5 text-left transition-all border ${
+        aktivan
+          ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+          : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+      }`}
+    >
+      <p className={`text-xs font-medium mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
+        {label}
+      </p>
+      <p className={`text-3xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
+        {broj.toLocaleString("sr-RS")}
+        {danas > 0 && (
+          <span className={`text-base font-semibold ml-1.5 ${aktivan ? "text-white/60" : "text-kolo-green-500"}`}>
+            (+{danas})
+          </span>
+        )}
+      </p>
+      <p className={`text-xs mt-1 ${aktivan ? "text-white/60" : "text-kolo-muted"}`}>
+        {podnaslov}
+      </p>
+    </button>
+  );
+}
+
 // ── Pregled ───────────────────────────────────────────────────────────────────
 
 function PregledSekcija({
@@ -308,67 +305,99 @@ function PregledSekcija({
   danasEmitovano,
   danasLimit,
   emisijeChart,
+  programi,
+  ukupnoZadruga,
+  aktivniProgrami,
 }: {
   verified: boolean;
   opticaj: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
+  programi: Program[];
+  ukupnoZadruga: number;
+  aktivniProgrami: number;
 }) {
-  const limitPct =
-    danasLimit > 0 ? Math.min((danasEmitovano / danasLimit) * 100, 100) : 0;
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
+  const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
 
-  if (!verified) {
-    return (
-      <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center text-sm text-kolo-muted">
-        Detaljni pregled sistema dostupan je verifikovanim članovima.
-      </div>
-    );
-  }
+  const faze = [
+    { label: "Registracija i novčanik", on: true },
+    { label: "Pijaca", on: true },
+    { label: "Poruke", on: true },
+    { label: "Zadruge", on: ukupnoZadruga > 0 },
+    { label: "Zapošljavanje", on: programi.some((p) => p.type === "ZAPOSLJAVNJE" && p.isActive) },
+    { label: "Podrška majkama", on: programi.some((p) => p.type === "PODRSKA_MAJKAMA" && p.isActive) },
+    { label: "Podrška starijima", on: programi.some((p) => p.type === "PODRSKA_STARIJIMA" && p.isActive) },
+    { label: "Posebna briga", on: programi.some((p) => p.type === "POSEBNA_BRIGA" && p.isActive) },
+    { label: "Školovanje", on: programi.some((p) => p.type === "SKOLOVANJE" && p.isActive) },
+    { label: "ZRNO tržište", on: true },
+    { label: "Glasanje", on: true },
+  ];
 
   return (
     <div className="space-y-5">
+      {/* Progress bar do 1M */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5">
         <div className="flex justify-between items-center mb-3">
-          <p className="text-sm font-semibold text-kolo-text">Dnevna emisija</p>
+          <p className="text-sm font-semibold text-kolo-text">Rast opticaja</p>
           <p className="text-xs text-kolo-muted">
-            Limit: {danasLimit.toLocaleString("sr-RS")} POEN (10% opticaja)
+            Cilj: {CILJ_OPTICAJ.toLocaleString("sr-RS")} POEN
           </p>
         </div>
         <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
           <div
-            className={`h-full rounded-full transition-all ${
-              limitPct >= 90
-                ? "bg-kolo-danger"
-                : limitPct >= 70
-                ? "bg-kolo-gold-400"
-                : "bg-kolo-green-500"
-            }`}
-            style={{ width: `${limitPct}%` }}
+            className="h-full bg-kolo-green-500 rounded-full transition-all"
+            style={{ width: `${opticajPct}%` }}
           />
         </div>
         <div className="flex justify-between text-xs text-kolo-muted">
           <span>
-            Danas emitovano:{" "}
+            Trenutno:{" "}
             <strong className="text-kolo-text">
-              {danasEmitovano.toLocaleString("sr-RS")}
+              {opticaj.toLocaleString("sr-RS")} POEN
             </strong>
           </span>
-          <span>
-            Preostalo:{" "}
-            <strong className="text-kolo-text">
-              {Math.max(danasLimit - danasEmitovano, 0).toLocaleString("sr-RS")}
-            </strong>
+          <span className="font-medium text-kolo-green-700">
+            {opticajPct.toFixed(1)}%
           </span>
         </div>
       </div>
 
-      {emisijeChart.length > 0 && (
+      {/* Čeklista faza */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-5">
+        <p className="text-sm font-semibold text-kolo-text mb-4">Aktivirane funkcije</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {faze.map((f) => (
+            <div key={f.label} className="flex items-center gap-2.5">
+              <span
+                className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
+                  f.on
+                    ? "bg-kolo-green-100 text-kolo-green-700"
+                    : "bg-kolo-bg text-kolo-border"
+                }`}
+              >
+                {f.on ? "✓" : "○"}
+              </span>
+              <span className={`text-sm ${f.on ? "text-kolo-text" : "text-kolo-muted"}`}>
+                {f.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Grafikon emisija — samo za verifikovane */}
+      {verified && emisijeChart.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
-          <p className="text-sm font-semibold text-kolo-text mb-4">
-            Emisija poslednjih 14 dana
-          </p>
+          <div className="flex justify-between items-center mb-4">
+            <p className="text-sm font-semibold text-kolo-text">
+              Emisija poslednjih 14 dana
+            </p>
+            <p className="text-xs text-kolo-muted">
+              Limit danas: {danasLimit.toLocaleString("sr-RS")} POEN
+            </p>
+          </div>
           <div className="flex items-end gap-1.5 h-24">
             {emisijeChart.map((e) => {
               const pct = (e.emitted / maxEmitted) * 100;
@@ -392,6 +421,12 @@ function PregledSekcija({
               );
             })}
           </div>
+          <p className="text-xs text-kolo-muted mt-4">
+            Danas emitovano:{" "}
+            <strong className="text-kolo-text">
+              {danasEmitovano.toLocaleString("sr-RS")} POEN
+            </strong>
+          </p>
         </div>
       )}
     </div>
@@ -442,7 +477,8 @@ function ClanoviSekcija({
         {filtrirani.length} {filtrirani.length === 1 ? "član" : "članova"}
       </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        <div className="hidden sm:grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        {/* Desktop header */}
+        <div className="hidden sm:grid grid-cols-[1fr_100px_80px_100px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Pseudonim</span>
           <span className="text-right">Balans</span>
           <span className="text-right">Preporuke</span>
@@ -457,11 +493,10 @@ function ClanoviSekcija({
           filtrirani.map((c, i) => (
             <div
               key={c.id}
-              className={`${
-                i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""
-              }`}
+              className={i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}
             >
-              <div className="hidden sm:grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2.5 items-center text-sm">
+              {/* Desktop red */}
+              <div className="hidden sm:grid grid-cols-[1fr_100px_80px_100px_110px] gap-4 px-5 py-3 items-center text-sm">
                 <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/profil/${c.id}`}
@@ -470,49 +505,33 @@ function ClanoviSekcija({
                     {c.pseudonim}
                   </Link>
                   {c.verified ? (
-                    <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">
-                      ✓
-                    </span>
+                    <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
                   ) : (
-                    <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">
-                      ?
-                    </span>
+                    <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                   )}
                 </div>
                 <span className="text-right font-mono text-sm font-semibold text-kolo-text">
                   {c.balance.toLocaleString("sr-RS")}
                 </span>
-                <span className="text-right text-xs text-kolo-muted">
-                  {c.preporuke}
-                </span>
-                <span className="text-center text-xs text-kolo-muted truncate px-1">
-                  {c.zadruga ?? "—"}
-                </span>
+                <span className="text-right text-xs text-kolo-muted">{c.preporuke}</span>
+                <span className="text-center text-xs text-kolo-muted truncate">{c.zadruga ?? "—"}</span>
                 <span className="text-right text-xs text-kolo-muted">
                   {new Date(c.createdAt).toLocaleDateString("sr-RS", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
+                    day: "2-digit", month: "2-digit", year: "2-digit",
                   })}
                 </span>
               </div>
+              {/* Mobilna kartica */}
               <div className="sm:hidden px-4 py-3 space-y-1">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Link
-                      href={`/profil/${c.id}`}
-                      className="font-semibold text-kolo-green-700 hover:underline"
-                    >
+                    <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
                       {c.pseudonim}
                     </Link>
                     {c.verified ? (
-                      <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">
-                        ✓
-                      </span>
+                      <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
                     ) : (
-                      <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">
-                        ?
-                      </span>
+                      <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                     )}
                   </div>
                   <span className="font-mono text-sm font-bold text-kolo-text">
@@ -524,9 +543,7 @@ function ClanoviSekcija({
                   <span>{c.preporuke} preporuka</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "2-digit",
+                      day: "2-digit", month: "2-digit", year: "2-digit",
                     })}
                   </span>
                 </div>
@@ -548,22 +565,53 @@ function TransakcijeSekcija({
   transakcije: Transakcija[];
   verified: boolean;
 }) {
+  const [filter, setFilter] = useState<TxFilter>("sve");
+
+  const filtrirane = transakcije.filter((t) => {
+    if (filter === "banka") return t.fromId === null || t.toId === null;
+    if (filter === "clanovi") return t.type === "TRANSFER";
+    return true;
+  });
+
+  const filteri: [TxFilter, string][] = [
+    ["sve", "Sve"],
+    ["banka", "Banka"],
+    ["clanovi", "Između članova"],
+  ];
+
   return (
-    <div className="space-y-3">
-      <p className="text-xs text-kolo-muted">
-        Poslednjih {transakcije.length} transakcija u sistemu
-      </p>
-      {transakcije.length === 0 ? (
+    <div className="space-y-4">
+      {/* Filter dugmad */}
+      <div className="flex gap-2">
+        {filteri.map(([key, label]) => (
+          <button
+            key={key}
+            onClick={() => setFilter(key)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors border ${
+              filter === key
+                ? "bg-kolo-green-700 text-white border-kolo-green-700"
+                : "bg-white text-kolo-muted border-kolo-border hover:border-kolo-green-500 hover:text-kolo-text"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+        <span className="ml-auto text-xs text-kolo-muted self-center">
+          {filtrirane.length} transakcija
+        </span>
+      </div>
+
+      {filtrirane.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           Nema transakcija.
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-          {transakcije.map((t, i) => (
+          {filtrirane.map((t, i) => (
             <div
               key={t.id}
               className={`px-4 py-3 flex justify-between items-start ${
-                i < transakcije.length - 1 ? "border-b border-kolo-border/30" : ""
+                i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""
               }`}
             >
               <div className="flex-1 min-w-0">
@@ -578,10 +626,7 @@ function TransakcijeSekcija({
                   {verified ? (
                     <span className="text-xs text-kolo-muted truncate flex items-center gap-1">
                       {t.fromId ? (
-                        <Link
-                          href={`/profil/${t.fromId}`}
-                          className="text-kolo-green-700 hover:underline"
-                        >
+                        <Link href={`/profil/${t.fromId}`} className="text-kolo-green-700 hover:underline">
                           {t.fromPseudonim}
                         </Link>
                       ) : (
@@ -589,10 +634,7 @@ function TransakcijeSekcija({
                       )}
                       <span className="text-kolo-border">→</span>
                       {t.toId ? (
-                        <Link
-                          href={`/profil/${t.toId}`}
-                          className="text-kolo-green-700 hover:underline"
-                        >
+                        <Link href={`/profil/${t.toId}`} className="text-kolo-green-700 hover:underline">
                           {t.toPseudonim}
                         </Link>
                       ) : (
@@ -605,11 +647,8 @@ function TransakcijeSekcija({
                 </div>
                 <p className="text-xs text-kolo-border mt-0.5">
                   {new Date(t.createdAt).toLocaleString("sr-RS", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
                   })}
                 </p>
               </div>
@@ -645,14 +684,10 @@ function ProgramiSekcija({ programi }: { programi: Program[] }) {
             />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-semibold text-kolo-text">
-                  {p.label}
-                </span>
+                <span className="text-sm font-semibold text-kolo-text">{p.label}</span>
                 <span
                   className={`text-xs px-2 py-0.5 rounded font-medium ${
-                    p.isActive
-                      ? "bg-kolo-green-100 text-kolo-green-700"
-                      : "bg-kolo-bg text-kolo-muted"
+                    p.isActive ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"
                   }`}
                 >
                   {p.isActive ? "Aktivan" : "Neaktivan"}
@@ -661,8 +696,7 @@ function ProgramiSekcija({ programi }: { programi: Program[] }) {
               <p className="text-xs text-kolo-muted">{p.opis}</p>
               {p.isActive && p.activatedAt && (
                 <p className="text-xs text-kolo-border mt-1">
-                  Aktiviran:{" "}
-                  {new Date(p.activatedAt).toLocaleDateString("sr-RS")}
+                  Aktiviran: {new Date(p.activatedAt).toLocaleDateString("sr-RS")}
                 </p>
               )}
             </div>
@@ -715,7 +749,7 @@ function ZadrugeSekcija({
         {zadruge.map((z, i) => (
           <div
             key={z.id}
-            className={`px-4 py-3.5 flex justify-between items-center ${
+            className={`px-5 py-3.5 flex justify-between items-center ${
               i < zadruge.length - 1 ? "border-b border-kolo-border" : ""
             }`}
           >
@@ -724,9 +758,7 @@ function ZadrugeSekcija({
               <p className="text-xs text-kolo-muted mt-0.5">
                 {z.location ?? "—"} · Osnov.{" "}
                 {new Date(z.createdAt).toLocaleDateString("sr-RS", {
-                  day: "2-digit",
-                  month: "2-digit",
-                  year: "numeric",
+                  day: "2-digit", month: "2-digit", year: "numeric",
                 })}
               </p>
             </div>

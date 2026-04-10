@@ -58,7 +58,7 @@ export function izracunajDnevniIznos(
     case "PODRSKA_STARIJIMA": return izracunajStariji(metadata, danas);
     case "POSEBNA_BRIGA":     return 2000;
     case "SKOLOVANJE":        return dailyAmount ?? 0;
-    case "ZAPOSLJAVNJE":      return 0; // via evidencija
+    case "ZAPOSLJAVNJE":      return 600;
   }
 }
 
@@ -96,7 +96,6 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
   const items: EmisijaItem[] = [];
 
   for (const en of enrollments) {
-    if (en.type === "ZAPOSLJAVNJE") continue;
     if (!aktivniTipovi.has(en.type)) continue;
     if (!en.user.wallet) continue;
 
