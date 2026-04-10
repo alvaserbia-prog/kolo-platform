@@ -44,3 +44,5 @@ next-env.d.ts
 
 # Korisničke slike i upload-ovi
 /storage/
+
+.vercel
