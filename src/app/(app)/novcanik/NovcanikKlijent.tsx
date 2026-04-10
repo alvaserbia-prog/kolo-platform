@@ -114,42 +114,44 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+            {/* Zaglavlje tabele */}
+            <div className="grid grid-cols-[1.5rem_10rem_1fr_auto] gap-x-4 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+              <span />
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Korisnik</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Opis</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">Iznos</span>
+            </div>
             {filtered.map((t, i) => (
               <div
                 key={t.id}
-                className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
+                className={`grid grid-cols-[1.5rem_10rem_1fr_auto] gap-x-4 items-center px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
-                {/* Glavni red */}
-                <div className="flex items-center gap-2 min-w-0">
-                  {/* Strelica */}
-                  <span className={`shrink-0 text-lg font-bold ${t.primio ? "text-kolo-green-700" : "text-red-400"}`}>
-                    {t.primio ? "→" : "←"}
-                  </span>
-                  {/* Pošiljalac / primalac */}
+                {/* Strelica */}
+                <span className={`text-lg font-bold leading-none ${t.primio ? "text-kolo-green-700" : "text-red-400"}`}>
+                  {t.primio ? "→" : "←"}
+                </span>
+                {/* Korisnik + datum */}
+                <div className="min-w-0">
                   {t.drugiId ? (
-                    <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline shrink-0">
+                    <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
                       {t.drugiPseudonim}
                     </a>
                   ) : (
-                    <span className="text-base text-kolo-muted shrink-0">{t.drugiPseudonim}</span>
+                    <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
                   )}
-                  {/* Opis */}
-                  {t.description && (
-                    <span className="text-base text-kolo-muted truncate flex-1">{t.description}</span>
-                  )}
-                  {!t.description && <span className="flex-1" />}
-                  {/* Iznos */}
-                  <span className={`text-base font-bold shrink-0 ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-                    {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
-                  </span>
+                  <p className="text-[10px] text-kolo-border">
+                    {new Date(t.createdAt).toLocaleString("sr-RS", {
+                      day: "2-digit", month: "2-digit", year: "numeric",
+                      hour: "2-digit", minute: "2-digit",
+                    })}
+                  </p>
                 </div>
-                {/* Datum */}
-                <p className="text-[10px] text-kolo-border mt-0.5 pl-6">
-                  {new Date(t.createdAt).toLocaleString("sr-RS", {
-                    day: "2-digit", month: "2-digit", year: "numeric",
-                    hour: "2-digit", minute: "2-digit",
-                  })}
-                </p>
+                {/* Opis */}
+                <span className="text-base text-kolo-muted truncate">{t.description ?? ""}</span>
+                {/* Iznos */}
+                <span className={`text-base font-bold text-right ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                  {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+                </span>
               </div>
             ))}
           </div>
