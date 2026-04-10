@@ -42,7 +42,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         </div>
 
         {/* Desna strana: balans + poruke + notifikacije + profil */}
-        <div className="flex items-center gap-0.5 px-4">
+        <div className="flex items-center gap-0 px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
@@ -50,7 +50,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               {/* Poruke ikonica */}
               <Link
                 href="/poruke"
-                className="w-[3.75rem] h-[3.75rem] flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
                 aria-label="Poruke"
               >
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -60,7 +60,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               {/* Notifikacije */}
               <BellNotifikacije />
               {/* Profilni krug */}
-              <div className="ml-3">
+              <div className="ml-1.5">
                 <ProfilMeni
                   userId={session.user.id}
                   pseudonim={session.user.pseudonim}
@@ -253,7 +253,7 @@ function BellNotifikacije() {
       )}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="relative w-[3.75rem] h-[3.75rem] flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+        className="relative w-10 h-10 flex items-center justify-center rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
         aria-label="Notifikacije"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
