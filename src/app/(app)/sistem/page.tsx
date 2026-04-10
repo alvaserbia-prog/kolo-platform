@@ -72,6 +72,7 @@ export default async function SistemPage() {
         id: true,
         pseudonim: true,
         verified: true,
+        location: true,
         createdAt: true,
         wallet: { select: { balance: true } },
         zadrugaMemberships: {
@@ -138,6 +139,7 @@ export default async function SistemPage() {
     balance: u.wallet?.balance ?? 0,
     zadruga: u.zadrugaMemberships[0]?.zadruga?.name ?? null,
     preporuke: u.referralsMade.length,
+    location: u.location ?? null,
     createdAt: u.createdAt.toISOString(),
   }));
 

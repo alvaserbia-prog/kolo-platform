@@ -115,7 +115,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
             {/* Zaglavlje tabele */}
-            <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_auto] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Vreme</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Pošiljalac</span>
               <span />
@@ -125,7 +125,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             {filtered.map((t, i) => (
               <div
                 key={t.id}
-                className={`grid grid-cols-[9rem_1fr_1.5rem_1fr_auto] gap-x-3 items-center px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
+                className={`grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
                 {/* Vreme */}
                 <p className="text-sm text-kolo-muted leading-tight">

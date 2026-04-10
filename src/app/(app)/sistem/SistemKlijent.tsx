@@ -46,6 +46,7 @@ interface Clan {
   balance: number;
   zadruga: string | null;
   preporuke: number;
+  location: string | null;
   createdAt: string;
 }
 
@@ -478,11 +479,12 @@ function ClanoviSekcija({
       </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {/* Desktop header */}
-        <div className="hidden sm:grid grid-cols-[1fr_100px_80px_100px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_80px_1fr_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Pseudonim</span>
+          <span>Lokacija</span>
           <span className="text-right">Balans</span>
           <span className="text-right">Preporuke</span>
-          <span className="text-center">Zadruga</span>
+          <span>Zadruga</span>
           <span className="text-right">Registracija</span>
         </div>
         {filtrirani.length === 0 ? (
@@ -496,7 +498,7 @@ function ClanoviSekcija({
               className={i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}
             >
               {/* Desktop red */}
-              <div className="hidden sm:grid grid-cols-[1fr_100px_80px_100px_110px] gap-4 px-5 py-3 items-center text-sm">
+              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_80px_1fr_100px] gap-4 px-5 py-3 items-center text-sm">
                 <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/profil/${c.id}`}
@@ -510,12 +512,13 @@ function ClanoviSekcija({
                     <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                   )}
                 </div>
+                <span className="text-sm text-kolo-muted truncate">{c.location ?? "—"}</span>
                 <span className="text-right font-mono text-sm font-semibold text-kolo-text">
                   {c.balance.toLocaleString("sr-RS")}
                 </span>
-                <span className="text-right text-xs text-kolo-muted">{c.preporuke}</span>
-                <span className="text-center text-xs text-kolo-muted truncate">{c.zadruga ?? "—"}</span>
-                <span className="text-right text-xs text-kolo-muted">
+                <span className="text-right text-sm text-kolo-muted">{c.preporuke}</span>
+                <span className="text-sm text-kolo-muted truncate">{c.zadruga ?? "—"}</span>
+                <span className="text-right text-sm text-kolo-muted">
                   {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "2-digit",
                   })}
@@ -608,7 +611,7 @@ function TransakcijeSekcija({
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {/* Zaglavlje */}
-          <div className="grid grid-cols-[7rem_1fr_1.5rem_1fr_auto] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+          <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Vreme</span>
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Pošiljalac</span>
             <span />
@@ -618,7 +621,7 @@ function TransakcijeSekcija({
           {filtrirane.map((t, i) => (
             <div
               key={t.id}
-              className={`grid grid-cols-[7rem_1fr_1.5rem_1fr_auto] gap-x-3 items-center px-4 py-2.5 ${
+              className={`grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center px-4 py-2.5 ${
                 i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""
               }`}
             >
