@@ -14,7 +14,6 @@ interface SidebarProps {
 const linkoviVerifikovan = [
   { href: "/sistem", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
-  { href: "/poruke", label: "Poruke" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/zajednica", label: "Zajednica" },
   { href: "/zaposljavnje", label: "Zapošljavanje" },
@@ -24,16 +23,13 @@ const linkoviVerifikovan = [
   { href: "/preporuke", label: "Preporuke" },
   { href: "/donacije", label: "Donacije" },
   { href: "/postani-pokrovitelj", label: "Pokroviteljstvo" },
-  { href: "/profil", label: "Profil" },
 ];
 
 const linkoviNeverifikovan = [
   { href: "/sistem", label: "Početna" },
   { href: "/novcanik", label: "Novčanik" },
-  { href: "/poruke", label: "Poruke" },
   { href: "/pijaca", label: "Pijaca" },
   { href: "/verifikacija", label: "Verifikacija" },
-  { href: "/profil", label: "Profil" },
 ];
 
 const linkoviAdmin = [

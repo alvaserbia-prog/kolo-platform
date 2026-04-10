@@ -158,6 +158,7 @@ model User {
   memberHash         String    @unique
   location           String?
   telefon            String?
+  avatar             String?
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
