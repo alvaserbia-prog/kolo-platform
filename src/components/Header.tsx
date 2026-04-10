@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 interface Notifikacija {
@@ -33,12 +33,20 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
       </button>
       <div className="hidden md:block" />
 
-      <div className="flex items-center gap-4 text-sm">
+      <div className="flex items-center gap-3 text-sm">
         {session ? (
           <>
             <BalansHeader userId={session.user.id} />
             <span className="text-kolo-border">•</span>
             <BellNotifikacije />
+            <span className="text-kolo-border">•</span>
+            <span className="text-xs text-kolo-muted hidden sm:inline truncate max-w-[100px]">{session.user.pseudonim}</span>
+            <button
+              onClick={() => signOut({ callbackUrl: "/login" })}
+              className="text-xs text-kolo-muted hover:text-kolo-text transition-colors shrink-0"
+            >
+              Odjava
+            </button>
           </>
         ) : (
           <span className="text-kolo-muted text-xs">Učitavam...</span>

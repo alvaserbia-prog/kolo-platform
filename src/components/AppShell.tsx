@@ -15,7 +15,7 @@ export default function AppShell({ verified, isAdmin, children }: AppShellProps)
 
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex justify-center">
-      <div className="flex w-full max-w-[1140px] min-w-0">
+      <div className="flex w-full max-w-[940px] min-w-0">
         <Sidebar
           verified={verified}
           isAdmin={isAdmin}

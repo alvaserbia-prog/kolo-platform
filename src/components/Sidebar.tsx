@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession, signOut } from "next-auth/react";
 import { useEffect } from "react";
 
 interface SidebarProps {
@@ -54,7 +53,6 @@ function SidebarContent({
   onLinkClick?: () => void;
 }) {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const links = [
     ...(verified ? linkoviVerifikovan : linkoviNeverifikovan),
     ...(isAdmin ? linkoviAdmin : []),
@@ -86,17 +84,8 @@ function SidebarContent({
           );
         })}
       </nav>
-      <div className="px-3 pb-3 pt-2 space-y-2 border-t border-kolo-border">
-        <div className="flex items-center justify-between gap-2 px-1">
-          <span className="text-xs text-kolo-muted truncate">{session?.user?.pseudonim}</span>
-          <button
-            onClick={() => signOut({ callbackUrl: "/login" })}
-            className="text-xs text-kolo-muted hover:text-kolo-text transition-colors shrink-0"
-          >
-            Odjava
-          </button>
-        </div>
-        {!verified && (
+      {!verified && (
+        <div className="px-3 pb-3 pt-2 border-t border-kolo-border">
           <Link
             href="/verifikacija"
             onClick={onLinkClick}
@@ -104,8 +93,8 @@ function SidebarContent({
           >
             Verifikuj nalog →
           </Link>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
@@ -120,7 +109,7 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose }
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-48 shrink-0 bg-kolo-bg border-r border-kolo-border flex-col">
+      <aside className="hidden md:flex w-44 shrink-0 bg-kolo-bg border-r border-kolo-border flex-col">
         <SidebarContent verified={verified} isAdmin={isAdmin} />
       </aside>
 
