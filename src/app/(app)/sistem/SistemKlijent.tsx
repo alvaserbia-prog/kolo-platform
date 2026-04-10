@@ -27,16 +27,6 @@ const TIP_BOJA: Record<string, string> = {
   EMISIJA_PROGRAM: "bg-kolo-green-100 text-kolo-green-700",
 };
 
-interface KorisnikTx {
-  id: string;
-  amount: number;
-  type: string;
-  primio: boolean;
-  drugiPseudonim: string;
-  drugiId: string | null;
-  createdAt: string;
-}
-
 interface Transakcija {
   id: string;
   amount: number;
@@ -82,9 +72,7 @@ interface EmisijaChart {
 
 interface Props {
   pseudonim: string;
-  userBalance: number;
   verRequest: { status: string } | null;
-  poslednjeKorisnikaTx: KorisnikTx[];
   verified: boolean;
   opticaj: number;
   bankaBalance: number;
@@ -93,6 +81,9 @@ interface Props {
   ukupnoZadrugaCount: number;
   danasEmitovano: number;
   danasLimit: number;
+  danasKorisnika: number;
+  danasTransakcija: number;
+  danasZadruga: number;
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
@@ -100,18 +91,9 @@ interface Props {
   programi: Program[];
 }
 
-const TIP_BOJA_KORISNIK: Record<string, string> = {
-  TRANSFER: "bg-kolo-bg text-kolo-muted",
-  EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_PREPORUKA: "bg-kolo-info-light text-kolo-info",
-  EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
-};
-
 export default function SistemKlijent({
   pseudonim,
-  userBalance,
   verRequest,
-  poslednjeKorisnikaTx,
   verified,
   opticaj,
   bankaBalance,
@@ -120,6 +102,9 @@ export default function SistemKlijent({
   ukupnoZadrugaCount,
   danasEmitovano,
   danasLimit,
+  danasKorisnika,
+  danasTransakcija,
+  danasZadruga,
   emisijeChart,
   transakcije,
   clanovi,
@@ -129,6 +114,7 @@ export default function SistemKlijent({
   const [sekcija, setSekcija] = useState<Sekcija>("pregled");
 
   const aktivniProgrami = programi.filter((p) => p.isActive).length;
+  const zeroSum = opticaj + bankaBalance === 0;
 
   const navigacija: { key: Sekcija; label: string; broj: number | string }[] = [
     { key: "pregled", label: "Pregled", broj: opticaj.toLocaleString("sr-RS") },
@@ -140,38 +126,13 @@ export default function SistemKlijent({
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      {/* Lični pregled */}
-      <div>
-        <h1
-          className="text-2xl font-bold text-kolo-text mb-4"
-          style={{ letterSpacing: "-0.02em" }}
-        >
-          Dobrodošli, {pseudonim}
-        </h1>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-5 text-white shadow-lg">
-            <p className="text-xs text-white/70 mb-1">Vaše stanje</p>
-            <p className="text-3xl font-bold font-mono">
-              {userBalance.toLocaleString("sr-RS")}
-            </p>
-            <p className="text-sm text-white/70">POEN</p>
-            <Link
-              href="/novcanik"
-              className="mt-3 inline-block text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-xl transition-colors"
-            >
-              Novčanik →
-            </Link>
-          </div>
-          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-5">
-            <p className="text-xs text-kolo-muted mb-1">Opticaj</p>
-            <p className="text-3xl font-bold text-kolo-text">
-              {opticaj.toLocaleString("sr-RS")}
-            </p>
-            <p className="text-sm text-kolo-muted">POEN u sistemu</p>
-          </div>
-        </div>
-      </div>
+      {/* Pozdrav */}
+      <h1
+        className="text-2xl font-bold text-kolo-text"
+        style={{ letterSpacing: "-0.02em" }}
+      >
+        Dobrodošli, {pseudonim}
+      </h1>
 
       {/* Upozorenja za neverifikovane */}
       {!verified && verRequest?.status === "PENDING" && (
@@ -199,112 +160,127 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* Poslednje transakcije korisnika */}
-      {poslednjeKorisnikaTx.length > 0 && (
-        <div>
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-base font-semibold text-kolo-text">
-              Poslednje transakcije
-            </h2>
-            <Link
-              href="/novcanik"
-              className="text-sm text-kolo-green-700 hover:underline"
-            >
-              Sve →
-            </Link>
+      {/* 4 kartice */}
+      <div className="grid grid-cols-2 gap-4">
+        {/* Članovi */}
+        <button
+          onClick={() => setSekcija("clanovi")}
+          className={`rounded-2xl p-5 text-left transition-all border ${
+            sekcija === "clanovi"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-xs font-medium mb-1 ${sekcija === "clanovi" ? "text-white/70" : "text-kolo-muted"}`}>
+            Članovi
+          </p>
+          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "clanovi" ? "text-white" : "text-kolo-text"}`}>
+            {ukupnoKorisnika.toLocaleString("sr-RS")}
+            {danasKorisnika > 0 && (
+              <span className={`text-base font-semibold ml-1.5 ${sekcija === "clanovi" ? "text-white/60" : "text-kolo-green-500"}`}>
+                (+{danasKorisnika})
+              </span>
+            )}
+          </p>
+          <p className={`text-xs mt-1 ${sekcija === "clanovi" ? "text-white/60" : "text-kolo-muted"}`}>
+            {verifikovanih} verif. · {ukupnoKorisnika - verifikovanih} neverif.
+          </p>
+        </button>
+
+        {/* Transakcije */}
+        <button
+          onClick={() => setSekcija("transakcije")}
+          className={`rounded-2xl p-5 text-left transition-all border ${
+            sekcija === "transakcije"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-xs font-medium mb-1 ${sekcija === "transakcije" ? "text-white/70" : "text-kolo-muted"}`}>
+            Transakcije
+          </p>
+          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "transakcije" ? "text-white" : "text-kolo-text"}`}>
+            {transakcije.length.toLocaleString("sr-RS")}
+            {danasTransakcija > 0 && (
+              <span className={`text-base font-semibold ml-1.5 ${sekcija === "transakcije" ? "text-white/60" : "text-kolo-green-500"}`}>
+                (+{danasTransakcija})
+              </span>
+            )}
+          </p>
+          <p className={`text-xs mt-1 ${sekcija === "transakcije" ? "text-white/60" : "text-kolo-muted"}`}>
+            poslednjih {transakcije.length} u pregledu
+          </p>
+        </button>
+
+        {/* Zadruge */}
+        <button
+          onClick={() => setSekcija("zadruge")}
+          className={`rounded-2xl p-5 text-left transition-all border ${
+            sekcija === "zadruge"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-xs font-medium mb-1 ${sekcija === "zadruge" ? "text-white/70" : "text-kolo-muted"}`}>
+            Zadruge
+          </p>
+          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "zadruge" ? "text-white" : "text-kolo-text"}`}>
+            {ukupnoZadrugaCount.toLocaleString("sr-RS")}
+            {danasZadruga > 0 && (
+              <span className={`text-base font-semibold ml-1.5 ${sekcija === "zadruge" ? "text-white/60" : "text-kolo-green-500"}`}>
+                (+{danasZadruga})
+              </span>
+            )}
+          </p>
+          <p className={`text-xs mt-1 ${sekcija === "zadruge" ? "text-white/60" : "text-kolo-muted"}`}>
+            aktivnih u mreži
+          </p>
+        </button>
+
+        {/* Opticaj */}
+        <button
+          onClick={() => setSekcija("pregled")}
+          className={`rounded-2xl p-5 text-left transition-all border ${
+            sekcija === "pregled"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-xs font-medium mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+            Opticaj
+          </p>
+          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+            {opticaj.toLocaleString("sr-RS")}
+            {danasEmitovano > 0 && (
+              <span className={`text-base font-semibold ml-1.5 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-green-500"}`}>
+                (+{danasEmitovano.toLocaleString("sr-RS")})
+              </span>
+            )}
+          </p>
+          <div className={`flex items-center gap-1.5 mt-1 text-xs ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+            {zeroSum ? (
+              <>
+                <span className={sekcija === "pregled" ? "text-white/80" : "text-kolo-green-600"}>✓</span>
+                <span>zero-sum</span>
+              </>
+            ) : (
+              <>
+                <span className={sekcija === "pregled" ? "text-red-300" : "text-kolo-danger"}>✗</span>
+                <span>greška u zbiru</span>
+              </>
+            )}
           </div>
-          <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden">
-            {poslednjeKorisnikaTx.map((t, i) => (
-              <div
-                key={t.id}
-                className={`px-4 py-3 flex justify-between items-center ${
-                  i < poslednjeKorisnikaTx.length - 1
-                    ? "border-b border-kolo-border"
-                    : ""
-                }`}
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`text-xs px-2 py-0.5 rounded-lg font-medium ${
-                        TIP_BOJA_KORISNIK[t.type] ?? "bg-kolo-bg text-kolo-muted"
-                      }`}
-                    >
-                      {TIP_LABELA[t.type] ?? t.type}
-                    </span>
-                    {t.drugiId ? (
-                      <Link
-                        href={`/profil/${t.drugiId}`}
-                        className="text-xs text-kolo-green-700 hover:underline"
-                      >
-                        {t.drugiPseudonim}
-                      </Link>
-                    ) : (
-                      <span className="text-xs text-kolo-muted">
-                        {t.drugiPseudonim}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-kolo-border mt-0.5">
-                    {new Date(t.createdAt).toLocaleDateString("sr-RS")}
-                  </p>
-                </div>
-                <span
-                  className={`text-sm font-bold ${
-                    t.primio ? "text-kolo-green-700" : "text-kolo-danger"
-                  }`}
-                >
-                  {t.primio ? "+" : "−"}
-                  {t.amount.toLocaleString("sr-RS")}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        </button>
+      </div>
 
       {/* Separator */}
       <div className="border-t border-kolo-border" />
-
-      {/* Navigacione kartice (zamena za tabove) */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-        {navigacija.map(({ key, label, broj }) => (
-          <button
-            key={key}
-            onClick={() => setSekcija(key)}
-            className={`rounded-2xl p-4 text-left transition-all border ${
-              sekcija === key
-                ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
-                : "bg-white border-kolo-border text-kolo-text hover:border-kolo-green-500 hover:shadow-sm"
-            }`}
-          >
-            <p
-              className={`text-xs font-medium mb-1 ${
-                sekcija === key ? "text-white/70" : "text-kolo-muted"
-              }`}
-            >
-              {label}
-            </p>
-            <p
-              className={`text-xl font-bold font-mono leading-tight ${
-                sekcija === key ? "text-white" : "text-kolo-text"
-              }`}
-            >
-              {typeof broj === "number" ? broj.toLocaleString("sr-RS") : broj}
-            </p>
-          </button>
-        ))}
-      </div>
 
       {/* Sekcija sadržaj */}
       {sekcija === "pregled" && (
         <PregledSekcija
           verified={verified}
           opticaj={opticaj}
-          bankaBalance={bankaBalance}
-          ukupnoKorisnika={ukupnoKorisnika}
-          verifikovanih={verifikovanih}
-          ukupnoZadruga={ukupnoZadrugaCount}
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
@@ -329,20 +305,12 @@ export default function SistemKlijent({
 function PregledSekcija({
   verified,
   opticaj,
-  bankaBalance,
-  ukupnoKorisnika,
-  verifikovanih,
-  ukupnoZadruga,
   danasEmitovano,
   danasLimit,
   emisijeChart,
 }: {
   verified: boolean;
   opticaj: number;
-  bankaBalance: number;
-  ukupnoKorisnika: number;
-  verifikovanih: number;
-  ukupnoZadruga: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
@@ -351,138 +319,80 @@ function PregledSekcija({
     danasLimit > 0 ? Math.min((danasEmitovano / danasLimit) * 100, 100) : 0;
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
 
+  if (!verified) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+        Detaljni pregled sistema dostupan je verifikovanim članovima.
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Članovi</p>
-          <p className="text-2xl font-bold text-kolo-text font-mono">
-            {ukupnoKorisnika.toLocaleString("sr-RS")}
-          </p>
-          <p className="text-xs text-kolo-muted mt-0.5">
-            {verifikovanih} verif. · {ukupnoKorisnika - verifikovanih} neverif.
+      <div className="bg-white rounded-2xl border border-kolo-border p-5">
+        <div className="flex justify-between items-center mb-3">
+          <p className="text-sm font-semibold text-kolo-text">Dnevna emisija</p>
+          <p className="text-xs text-kolo-muted">
+            Limit: {danasLimit.toLocaleString("sr-RS")} POEN (10% opticaja)
           </p>
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Zadruge</p>
-          <p className="text-2xl font-bold text-kolo-text font-mono">
-            {ukupnoZadruga}
-          </p>
-          <p className="text-xs text-kolo-muted mt-0.5">aktivnih u mreži</p>
+        <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
+          <div
+            className={`h-full rounded-full transition-all ${
+              limitPct >= 90
+                ? "bg-kolo-danger"
+                : limitPct >= 70
+                ? "bg-kolo-gold-400"
+                : "bg-kolo-green-500"
+            }`}
+            style={{ width: `${limitPct}%` }}
+          />
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Danas emitovano</p>
-          <p className="text-2xl font-bold text-kolo-text font-mono">
-            {danasEmitovano.toLocaleString("sr-RS")}
-          </p>
-          <p className="text-xs text-kolo-muted mt-0.5">
-            od {danasLimit.toLocaleString("sr-RS")} POEN
-          </p>
+        <div className="flex justify-between text-xs text-kolo-muted">
+          <span>
+            Danas emitovano:{" "}
+            <strong className="text-kolo-text">
+              {danasEmitovano.toLocaleString("sr-RS")}
+            </strong>
+          </span>
+          <span>
+            Preostalo:{" "}
+            <strong className="text-kolo-text">
+              {Math.max(danasLimit - danasEmitovano, 0).toLocaleString("sr-RS")}
+            </strong>
+          </span>
         </div>
       </div>
 
-      {verified && (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl border border-kolo-border p-4">
-              <p className="text-xs text-kolo-muted mb-1">Stanje Banke</p>
-              <p className="text-xl font-bold text-kolo-danger font-mono">
-                {bankaBalance.toLocaleString("sr-RS")} POEN
-              </p>
-              <p className="text-xs text-kolo-muted mt-0.5">
-                Svaki POEN u opticaju je minus na računu Banke.
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl border border-kolo-border p-4 flex flex-col justify-between">
-              <p className="text-xs text-kolo-muted mb-2">Zero-sum provera</p>
-              {opticaj + bankaBalance === 0 ? (
-                <div className="flex items-center gap-2">
-                  <span className="text-kolo-green-700 text-lg">✓</span>
-                  <span className="text-sm font-semibold text-kolo-green-700">
-                    Zbir svih računa = 0
-                  </span>
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <span className="text-kolo-danger text-lg">✗</span>
-                  <span className="text-sm font-semibold text-kolo-danger">
-                    Greška u zbiru!
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="bg-white rounded-2xl border border-kolo-border p-5">
-            <div className="flex justify-between items-center mb-3">
-              <p className="text-sm font-semibold text-kolo-text">
-                Dnevna emisija
-              </p>
-              <p className="text-xs text-kolo-muted">
-                Limit: {danasLimit.toLocaleString("sr-RS")} POEN (10% opticaja)
-              </p>
-            </div>
-            <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
-              <div
-                className={`h-full rounded-full transition-all ${
-                  limitPct >= 90
-                    ? "bg-kolo-danger"
-                    : limitPct >= 70
-                    ? "bg-kolo-gold-400"
-                    : "bg-kolo-green-500"
-                }`}
-                style={{ width: `${limitPct}%` }}
-              />
-            </div>
-            <div className="flex justify-between text-xs text-kolo-muted">
-              <span>
-                Danas emitovano:{" "}
-                <strong className="text-kolo-text">
-                  {danasEmitovano.toLocaleString("sr-RS")}
-                </strong>
-              </span>
-              <span>
-                Preostalo:{" "}
-                <strong className="text-kolo-text">
-                  {Math.max(danasLimit - danasEmitovano, 0).toLocaleString(
-                    "sr-RS"
-                  )}
-                </strong>
-              </span>
-            </div>
-          </div>
-
-          {emisijeChart.length > 0 && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-5">
-              <p className="text-sm font-semibold text-kolo-text mb-4">
-                Emisija poslednjih 14 dana
-              </p>
-              <div className="flex items-end gap-1.5 h-24">
-                {emisijeChart.map((e) => {
-                  const pct = (e.emitted / maxEmitted) * 100;
-                  return (
-                    <div
-                      key={e.date}
-                      className="flex-1 flex flex-col items-center gap-1 group"
-                    >
-                      <div
-                        className="w-full bg-kolo-green-500 rounded-t-sm relative"
-                        style={{ height: `${Math.max(pct, 4)}%` }}
-                      >
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-kolo-text text-white text-xs rounded px-1.5 py-0.5 whitespace-nowrap z-10">
-                          {e.emitted.toLocaleString("sr-RS")}
-                        </div>
-                      </div>
-                      <span className="text-[10px] text-kolo-muted rotate-45 origin-left translate-y-1">
-                        {e.date.slice(5)}
-                      </span>
+      {emisijeChart.length > 0 && (
+        <div className="bg-white rounded-2xl border border-kolo-border p-5">
+          <p className="text-sm font-semibold text-kolo-text mb-4">
+            Emisija poslednjih 14 dana
+          </p>
+          <div className="flex items-end gap-1.5 h-24">
+            {emisijeChart.map((e) => {
+              const pct = (e.emitted / maxEmitted) * 100;
+              return (
+                <div
+                  key={e.date}
+                  className="flex-1 flex flex-col items-center gap-1 group"
+                >
+                  <div
+                    className="w-full bg-kolo-green-500 rounded-t-sm relative"
+                    style={{ height: `${Math.max(pct, 4)}%` }}
+                  >
+                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-kolo-text text-white text-xs rounded px-1.5 py-0.5 whitespace-nowrap z-10">
+                      {e.emitted.toLocaleString("sr-RS")}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </>
+                  </div>
+                  <span className="text-[10px] text-kolo-muted rotate-45 origin-left translate-y-1">
+                    {e.date.slice(5)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       )}
     </div>
   );
@@ -529,8 +439,7 @@ function ClanoviSekcija({
         className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
       />
       <div className="text-xs text-kolo-muted">
-        {filtrirani.length}{" "}
-        {filtrirani.length === 1 ? "član" : "članova"}
+        {filtrirani.length} {filtrirani.length === 1 ? "član" : "članova"}
       </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_80px_60px_80px_100px] gap-0 px-4 py-2 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">

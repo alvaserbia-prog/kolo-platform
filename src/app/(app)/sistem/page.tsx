@@ -28,8 +28,10 @@ export default async function SistemPage() {
 
   const verified = session.user.verified;
 
+  const danas = new Date();
+  danas.setHours(0, 0, 0, 0);
+
   const [
-    wallet,
     banka,
     ukupnoKorisnika,
     verifikovanih,
@@ -40,12 +42,10 @@ export default async function SistemPage() {
     zadrugeLista,
     aktivniProgrami,
     verRequest,
-    poslednjeKorisnika,
+    danasKorisnika,
+    danasTransakcija,
+    danasZadruga,
   ] = await Promise.all([
-    prisma.wallet.findUnique({
-      where: { userId: session.user.id },
-      select: { balance: true },
-    }),
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
       select: { balance: true },
@@ -102,28 +102,23 @@ export default async function SistemPage() {
           where: { userId: session.user.id },
           select: { status: true },
         }),
-    prisma.transaction.findMany({
-      where: {
-        OR: [
-          { toWallet: { userId: session.user.id } },
-          { fromWallet: { userId: session.user.id } },
-        ],
-      },
-      orderBy: { createdAt: "desc" },
-      take: 5,
-      include: {
-        fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
-        toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
-      },
+    prisma.user.count({
+      where: { role: { not: "ADMIN" }, createdAt: { gte: danas } },
+    }),
+    prisma.transaction.count({
+      where: { createdAt: { gte: danas } },
+    }),
+    prisma.zadruga.count({
+      where: { status: "ACTIVE", createdAt: { gte: danas } },
     }),
   ]);
 
   const opticaj = Math.abs(banka?.balance ?? 0);
   const bankaBalance = banka?.balance ?? 0;
 
-  const danas = emisije[0];
-  const danasEmitovano = danas?.totalEmitted ?? 0;
-  const danasLimit = danas?.limit ?? Math.floor(opticaj * 0.1);
+  const danasEmisija = emisije[0];
+  const danasEmitovano = danasEmisija?.totalEmitted ?? 0;
+  const danasLimit = danasEmisija?.limit ?? Math.floor(opticaj * 0.1);
 
   const txData = transakcijeSve.map((t) => ({
     id: t.id,
@@ -174,32 +169,10 @@ export default async function SistemPage() {
     };
   });
 
-  const poslednjeKorisnikaTx = poslednjeKorisnika.map((t) => {
-    const primio = t.toWallet?.userId === session.user.id;
-    const drugiUser =
-      t.type !== "TRANSFER"
-        ? null
-        : primio
-        ? t.fromWallet?.user ?? null
-        : t.toWallet?.user ?? null;
-    return {
-      id: t.id,
-      amount: t.amount,
-      type: t.type,
-      primio,
-      drugiPseudonim:
-        drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Banka" : "?"),
-      drugiId: drugiUser?.id ?? null,
-      createdAt: t.createdAt.toISOString(),
-    };
-  });
-
   return (
     <SistemKlijent
       pseudonim={session.user.pseudonim}
-      userBalance={wallet?.balance ?? 0}
       verRequest={verRequest ? { status: verRequest.status } : null}
-      poslednjeKorisnikaTx={poslednjeKorisnikaTx}
       verified={verified}
       opticaj={opticaj}
       bankaBalance={bankaBalance}
@@ -208,6 +181,9 @@ export default async function SistemPage() {
       ukupnoZadrugaCount={ukupnoZadruga}
       danasEmitovano={danasEmitovano}
       danasLimit={danasLimit}
+      danasKorisnika={danasKorisnika}
+      danasTransakcija={danasTransakcija}
+      danasZadruga={danasZadruga}
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
