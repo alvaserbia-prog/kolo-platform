@@ -128,7 +128,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                 className={`grid grid-cols-[7rem_1.5rem_10rem_1fr_auto] gap-x-4 items-center px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
                 {/* Vreme */}
-                <p className="text-[10px] text-kolo-border leading-tight">
+                <p className="text-sm text-kolo-muted leading-tight">
                   {new Date(t.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "numeric",
                     hour: "2-digit", minute: "2-digit",

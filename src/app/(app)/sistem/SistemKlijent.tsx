@@ -623,7 +623,7 @@ function TransakcijeSekcija({
               }`}
             >
               {/* Vreme */}
-              <p className="text-[10px] text-kolo-border leading-tight">
+              <p className="text-sm text-kolo-muted leading-tight">
                 {new Date(t.createdAt).toLocaleString("sr-RS", {
                   day: "2-digit", month: "2-digit", year: "numeric",
                   hour: "2-digit", minute: "2-digit",
