@@ -1,33 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-
-// Kompresuje sliku na max 1200px, JPEG 80% — tipično <200KB
-async function kompresujSliku(file: File): Promise<Blob> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    const url = URL.createObjectURL(file);
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      const MAX = 1200;
-      let { width, height } = img;
-      if (width > MAX || height > MAX) {
-        if (width > height) { height = Math.round((height * MAX) / width); width = MAX; }
-        else { width = Math.round((width * MAX) / height); height = MAX; }
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = width; canvas.height = height;
-      const ctx = canvas.getContext("2d")!;
-      ctx.drawImage(img, 0, 0, width, height);
-      canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("Kompresija nije uspela")), "image/jpeg", 0.82);
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Učitavanje slike nije uspelo")); };
-    img.src = url;
-  });
-}
 
 type VerStatus = "PENDING" | "APPROVED" | "REJECTED";
 
@@ -42,12 +18,10 @@ interface Props {
 export default function VerifikacijaKlijent({ request }: Props) {
   const router = useRouter();
 
-  // Ako je na čekanju — prikaži pending ekran
   if (request?.status === "PENDING") {
     return <PendingEkran createdAt={request.createdAt} />;
   }
 
-  // Forma (nova ili ponovni pokušaj posle odbijanja)
   return (
     <VerifikacijaForma
       rejected={request?.status === "REJECTED" ? request.rejectionReason : null}
@@ -56,7 +30,46 @@ export default function VerifikacijaKlijent({ request }: Props) {
   );
 }
 
-// ── Forma za upload ────────────────────────────────────────────────────────────
+// ── Kompresija slike na klijentu ──────────────────────────────────────────────
+
+async function kompresujSliku(file: File, maxSizeKB = 800): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const canvas = document.createElement("canvas");
+      let { width, height } = img;
+      const MAX_DIM = 1600;
+      if (width > MAX_DIM || height > MAX_DIM) {
+        if (width > height) { height = Math.round((height * MAX_DIM) / width); width = MAX_DIM; }
+        else { width = Math.round((width * MAX_DIM) / height); height = MAX_DIM; }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d")!;
+      ctx.drawImage(img, 0, 0, width, height);
+
+      let quality = 0.85;
+      const tryCompress = () => {
+        canvas.toBlob((blob) => {
+          if (!blob) { resolve(file); return; }
+          if (blob.size <= maxSizeKB * 1024 || quality <= 0.3) {
+            resolve(new File([blob], file.name, { type: "image/jpeg" }));
+          } else {
+            quality -= 0.1;
+            tryCompress();
+          }
+        }, "image/jpeg", quality);
+      };
+      tryCompress();
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+// ── Forma za unos JMBG i upload LK fotografija ────────────────────────────────
 
 function VerifikacijaForma({
   rejected,
@@ -68,13 +81,11 @@ function VerifikacijaForma({
   const t = useTranslations("verifikacija");
   const [jmbg, setJmbg] = useState("");
   const [jmbgError, setJmbgError] = useState("");
-  const [front, setFront] = useState<File | null>(null);
-  const [back, setBack] = useState<File | null>(null);
+  const [idFront, setIdFront] = useState<File | null>(null);
+  const [idBack, setIdBack] = useState<File | null>(null);
   const [pristanak, setPristanak] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const frontRef = useRef<HTMLInputElement>(null);
-  const backRef = useRef<HTMLInputElement>(null);
 
   function handleJmbg(val: string) {
     const clean = val.replace(/\D/g, "").slice(0, 13);
@@ -83,37 +94,33 @@ function VerifikacijaForma({
     else setJmbgError("");
   }
 
-  function handleFile(e: React.ChangeEvent<HTMLInputElement>, side: "front" | "back") {
+  async function handleFileChange(
+    e: React.ChangeEvent<HTMLInputElement>,
+    setter: (f: File | null) => void
+  ) {
     const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { setError(t("foto_prevelika")); return; }
-    if (side === "front") setFront(file);
-    else setBack(file);
-    setError("");
+    if (!file) { setter(null); return; }
+    const compressed = await kompresujSliku(file);
+    setter(compressed);
   }
 
-  const canSubmit = front && back && jmbg.length === 13 && !jmbgError && pristanak;
+  const canSubmit = jmbg.length === 13 && !jmbgError && idFront && idBack && pristanak;
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!canSubmit) return;
-    setError(""); setLoading(true);
+    setError("");
+    setLoading(true);
 
     try {
-      const [frontBlob, backBlob] = await Promise.all([
-        kompresujSliku(front!),
-        kompresujSliku(back!),
-      ]);
-
       const fd = new FormData();
       fd.append("jmbg", jmbg);
-      fd.append("front", new File([frontBlob], "front.jpg", { type: "image/jpeg" }));
-      fd.append("back", new File([backBlob], "back.jpg", { type: "image/jpeg" }));
       fd.append("pristanak", "true");
+      fd.append("idFront", idFront!);
+      fd.append("idBack", idBack!);
 
       const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
       const data = await res.json();
-
       if (!res.ok) { setError(data.error ?? t("greska_slanje")); return; }
       onSuccess();
     } catch {
@@ -141,43 +148,6 @@ function VerifikacijaForma({
       )}
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
-        {/* Upload fotografija */}
-        <div>
-          <p className="text-sm font-semibold text-kolo-muted mb-3">{t("fotografija_lk")}</p>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { label: t("prednja_strana"), file: front, ref: frontRef, side: "front" as const },
-              { label: t("zadnja_strana"), file: back, ref: backRef, side: "back" as const },
-            ].map(({ label, file, ref, side }) => (
-              <button
-                key={side}
-                type="button"
-                onClick={() => ref.current?.click()}
-                className={`p-5 rounded-2xl border-2 border-dashed flex flex-col items-center gap-2 transition-colors ${
-                  file
-                    ? "border-kolo-green-500 bg-kolo-green-100"
-                    : "border-kolo-border bg-white hover:border-kolo-muted"
-                }`}
-              >
-                {file ? (
-                  <>
-                    <span className="text-xl">✓</span>
-                    <span className="text-xs font-medium text-kolo-green-700 text-center truncate w-full">{file.name}</span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-2xl">📷</span>
-                    <span className="text-xs text-kolo-muted text-center">{label}</span>
-                  </>
-                )}
-              </button>
-            ))}
-          </div>
-          <input ref={frontRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "front")} />
-          <input ref={backRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "back")} />
-          <p className="mt-2 text-xs text-kolo-muted">{t("foto_napomena")}</p>
-        </div>
-
         {/* JMBG */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("jmbg")}</label>
@@ -199,9 +169,58 @@ function VerifikacijaForma({
           {jmbg.length === 13 && !jmbgError && (
             <p className="mt-1 text-xs text-kolo-green-700">{t("jmbg_ispravan")}</p>
           )}
+          <p className="mt-1 text-xs text-kolo-muted">
+            Verifikacija se obavlja uvođenjem JMBG-a i fotografijama lične karte. Vaši podaci neće biti deljeni sa trećim stranama.
+          </p>
         </div>
 
-        {/* Pristanak za obradu ličnih podataka */}
+        {/* Fotografija prednje strane LK */}
+        <div>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            {t("prednja_strana")}
+          </label>
+          <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
+            idFront ? "border-kolo-green-500 bg-kolo-green-100/30" : "border-kolo-border hover:border-kolo-green-500"
+          }`}>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              className="hidden"
+              onChange={(e) => handleFileChange(e, setIdFront)}
+            />
+            {idFront ? (
+              <span className="text-sm text-kolo-green-700 font-medium">{idFront.name}</span>
+            ) : (
+              <span className="text-sm text-kolo-muted">{t("foto_napomena")}</span>
+            )}
+          </label>
+        </div>
+
+        {/* Fotografija zadnje strane LK */}
+        <div>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            {t("zadnja_strana")}
+          </label>
+          <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
+            idBack ? "border-kolo-green-500 bg-kolo-green-100/30" : "border-kolo-border hover:border-kolo-green-500"
+          }`}>
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              className="hidden"
+              onChange={(e) => handleFileChange(e, setIdBack)}
+            />
+            {idBack ? (
+              <span className="text-sm text-kolo-green-700 font-medium">{idBack.name}</span>
+            ) : (
+              <span className="text-sm text-kolo-muted">{t("foto_napomena")}</span>
+            )}
+          </label>
+        </div>
+
+        {/* Pristanak za obradu podataka */}
         <label className="flex items-start gap-2.5 cursor-pointer">
           <input
             type="checkbox"
@@ -210,11 +229,11 @@ function VerifikacijaForma({
             className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0"
           />
           <span className="text-xs text-kolo-muted">
-            Dajem izričit pristanak za obradu podataka lične karte i JMBG-a u svrhu verifikacije identiteta, u skladu sa{" "}
+            Dajem izričit pristanak za obradu JMBG podataka i fotografija lične karte u svrhu verifikacije identiteta, u skladu sa{" "}
             <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">
               Politikom privatnosti
             </Link>
-            . Razumem da ovi podaci mogu biti čuvani do 5 godina od deaktivacije naloga, a u svrhu ispunjavanja zakonskih obaveza i duže.
+            .
           </span>
         </label>
 

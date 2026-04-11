@@ -117,8 +117,12 @@ export const authOptions: NextAuthOptions = {
       const referralCode = await uniqueReferralCode();
       const memberHash = await uniqueMemberHash();
 
+      // Ime i avatar iz Google profila
+      const punoIme = user.name ?? undefined;
+      const avatar = user.image ?? undefined;
+
       const newUser = await prisma.$transaction(async (tx) => {
-        return tx.user.create({
+        const created = await tx.user.create({
           data: {
             email,
             passwordHash: undefined,
@@ -128,9 +132,17 @@ export const authOptions: NextAuthOptions = {
             oauthPending: true,
             referralCode,
             memberHash,
+            avatar,
             wallet: { create: { type: WalletType.USER, balance: 0 } },
           },
         });
+        // Upiši punoIme u UserPodaci
+        if (punoIme) {
+          await tx.userPodaci.create({
+            data: { userId: created.id, punoIme },
+          });
+        }
+        return created;
       });
 
       user.id = newUser.id;

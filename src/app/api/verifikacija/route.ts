@@ -21,43 +21,37 @@ export async function POST(req: NextRequest) {
 
   const formData = await req.formData();
   const jmbg = (formData.get("jmbg") as string)?.trim();
-  const frontFile = formData.get("front") as File | null;
-  const backFile = formData.get("back") as File | null;
-  const pristanakStr = formData.get("pristanak") as string | null;
+  const pristanak = formData.get("pristanak") === "true";
+  const idFrontFile = formData.get("idFront") as File | null;
+  const idBackFile = formData.get("idBack") as File | null;
 
-  // Obavezan eksplicitni pristanak za obradu lk/JMBG podataka
-  if (pristanakStr !== "true") {
+  // Obavezan eksplicitni pristanak za obradu podataka
+  if (!pristanak) {
     return NextResponse.json({
-      error: "Morate dati pristanak za obradu ličnih podataka (lična karta, JMBG) pre slanja zahteva za verifikaciju.",
+      error: "Morate dati pristanak za obradu podataka pre slanja zahteva za verifikaciju.",
     }, { status: 400 });
   }
 
-  // Validacija
+  // Validacija JMBG
   if (!jmbg || jmbg.length !== 13 || !/^\d{13}$/.test(jmbg)) {
     return NextResponse.json({ error: "JMBG mora sadržati tačno 13 cifara." }, { status: 400 });
   }
-  if (!frontFile || !backFile) {
-    return NextResponse.json({ error: "Obavezne su fotografije prednje i zadnje strane." }, { status: 400 });
+
+  // Validacija slika
+  if (!idFrontFile || !idBackFile) {
+    return NextResponse.json({ error: "Morate priložiti fotografije prednje i zadnje strane lične karte." }, { status: 400 });
   }
 
-  const MAX_SIZE = 5 * 1024 * 1024; // 5MB
-  if (frontFile.size > MAX_SIZE || backFile.size > MAX_SIZE) {
-    return NextResponse.json({ error: "Svaka fotografija može biti najviše 5MB." }, { status: 400 });
+  const MAX_SIZE = 4 * 1024 * 1024; // 4MB
+  if (idFrontFile.size > MAX_SIZE || idBackFile.size > MAX_SIZE) {
+    return NextResponse.json({ error: "Svaka fotografija mora biti manja od 4MB." }, { status: 400 });
   }
 
-  const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-  if (!allowed.includes(frontFile.type) || !allowed.includes(backFile.type)) {
-    return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
-  }
-
-  // Sačuvaj kao base64 data URL (radi na serverless/Vercel okruženju)
-  const toDataUrl = async (file: File) => {
-    const buffer = Buffer.from(await file.arrayBuffer());
-    return `data:${file.type};base64,${buffer.toString("base64")}`;
-  };
-
-  const frontPath = await toDataUrl(frontFile);
-  const backPath = await toDataUrl(backFile);
+  // Konvertuj slike u base64
+  const frontBuffer = await idFrontFile.arrayBuffer();
+  const backBuffer = await idBackFile.arrayBuffer();
+  const frontBase64 = `data:${idFrontFile.type};base64,${Buffer.from(frontBuffer).toString("base64")}`;
+  const backBase64 = `data:${idBackFile.type};base64,${Buffer.from(backBuffer).toString("base64")}`;
 
   // Upiši ili ažuriraj VerificationRequest
   if (postojeci) {
@@ -66,8 +60,9 @@ export async function POST(req: NextRequest) {
       where: { userId: session.user.id },
       data: {
         jmbg,
-        idFrontPath: frontPath,
-        idBackPath: backPath,
+        idFrontPath: frontBase64,
+        idBackPath: backBase64,
+        kanal: "UPLOAD",
         status: "PENDING",
         rejectionReason: null,
         reviewedAt: null,
@@ -79,13 +74,14 @@ export async function POST(req: NextRequest) {
       data: {
         userId: session.user.id,
         jmbg,
-        idFrontPath: frontPath,
-        idBackPath: backPath,
+        idFrontPath: frontBase64,
+        idBackPath: backBase64,
+        kanal: "UPLOAD",
       },
     });
   }
 
-  // Snimi pristanak za obradu lk/JMBG (odvojen od pristanka na Politiku)
+  // Snimi pristanak za obradu podataka
   await prisma.verifikacijaPristanak.upsert({
     where: { userId: session.user.id },
     update: { prihvacenAt: new Date() },

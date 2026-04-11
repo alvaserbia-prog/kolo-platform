@@ -20,7 +20,11 @@ export default async function AdminPage() {
   ] = await Promise.all([
     prisma.verificationRequest.findMany({
       where: { status: "PENDING" },
-      include: { user: { select: { pseudonim: true, email: true, referredById: true } } },
+      select: {
+        id: true, jmbg: true, kanal: true, createdAt: true,
+        idFrontPath: true, idBackPath: true,
+        user: { select: { pseudonim: true, email: true, referredById: true } },
+      },
       orderBy: { createdAt: "asc" },
     }),
     prisma.user.findMany({
@@ -122,7 +126,8 @@ export default async function AdminPage() {
       opticaj={opticaj}
       pending={pendingRequests.map((vr) => ({
         requestId: vr.id, pseudonim: vr.user.pseudonim, email: vr.user.email,
-        jmbg: vr.jmbg, createdAt: vr.createdAt.toISOString(), imaReferral: !!vr.user.referredById,
+        jmbg: vr.jmbg, imaFotografije: !!(vr.idFrontPath && vr.idBackPath),
+        createdAt: vr.createdAt.toISOString(), imaReferral: !!vr.user.referredById,
       }))}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, role: u.role, verified: u.verified,

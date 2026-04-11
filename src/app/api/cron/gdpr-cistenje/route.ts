@@ -6,8 +6,7 @@ import { prisma } from "@/lib/prisma";
  * GDPR data retention cleanup job.
  * Pokreće se mesečno (preporučeno 1. u mesecu u 02:00).
  *
- * 1. Briše verifikacione podatke (jmbg, slike lk) za korisnike koji su
- *    deaktivirani pre više od 5 godina.
+ * 1. Briše JMBG hash za korisnike koji su deaktivirani pre više od 5 godina.
  *
  * 2. Briše poruke u konverzacijama u kojima je poslednja poruka starija od
  *    24 meseca (i obe strane su deaktivirane ili konverzacija je neaktivna).
@@ -39,16 +38,10 @@ export async function POST(req: NextRequest) {
     const updated = await prisma.verificationRequest.updateMany({
       where: {
         userId: k.id,
-        OR: [
-          { jmbg: { not: "" } },
-          { idFrontPath: { not: null } },
-          { idBackPath: { not: null } },
-        ],
+        jmbg: { not: "OBRISANO" },
       },
       data: {
         jmbg: "OBRISANO",
-        idFrontPath: null,
-        idBackPath: null,
       },
     });
     obrVer += updated.count;

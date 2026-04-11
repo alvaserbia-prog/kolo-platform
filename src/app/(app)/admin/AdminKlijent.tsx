@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 interface PendingRequest {
   requestId: string;
   pseudonim: string;
   email: string | null;
   jmbg: string;
+  imaFotografije: boolean;
   createdAt: string;
   imaReferral: boolean;
 }
@@ -379,6 +379,7 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
 
 function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () => void }) {
   const [expanded, setExpanded] = useState(false);
+  const [vidiSliku, setVidiSliku] = useState<"front" | "back" | null>(null);
   const [razlog, setRazlog] = useState("");
   const [showOdbij, setShowOdbij] = useState(false);
   const [loading, setLoading] = useState<"odobri" | "odbij" | null>(null);
@@ -452,31 +453,36 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
             <p className="font-mono text-sm font-semibold text-kolo-text tracking-widest">{vr.jmbg}</p>
           </div>
 
-          {/* Slike */}
-          <div className="grid grid-cols-2 gap-3">
-            {(["front", "back"] as const).map((side) => (
-              <div key={side} className="space-y-1">
-                <p className="text-xs text-kolo-muted">{side === "front" ? "Prednja strana" : "Zadnja strana"}</p>
-                <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden border border-kolo-border bg-kolo-bg">
-                  <Image
-                    src={`/api/admin/dokument/${vr.requestId}/${side}`}
-                    alt={side === "front" ? "Prednja strana" : "Zadnja strana"}
-                    fill
-                    className="object-contain"
-                    unoptimized
+          {/* Fotografije LK */}
+          {vr.imaFotografije && (
+            <div>
+              <p className="text-xs text-kolo-muted mb-2">Fotografije lične karte</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setVidiSliku(vidiSliku === "front" ? null : "front")}
+                  className="flex-1 py-2 rounded-xl border border-kolo-border text-xs font-medium text-kolo-muted hover:bg-kolo-bg transition-colors"
+                >
+                  {vidiSliku === "front" ? "Sakrij prednju stranu" : "Prednja strana"}
+                </button>
+                <button
+                  onClick={() => setVidiSliku(vidiSliku === "back" ? null : "back")}
+                  className="flex-1 py-2 rounded-xl border border-kolo-border text-xs font-medium text-kolo-muted hover:bg-kolo-bg transition-colors"
+                >
+                  {vidiSliku === "back" ? "Sakrij zadnju stranu" : "Zadnja strana"}
+                </button>
+              </div>
+              {vidiSliku && (
+                <div className="mt-2 rounded-xl overflow-hidden border border-kolo-border">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`/api/admin/dokument/${vr.requestId}/${vidiSliku}`}
+                    alt={vidiSliku === "front" ? "Prednja strana LK" : "Zadnja strana LK"}
+                    className="w-full object-contain max-h-64"
                   />
                 </div>
-                <a
-                  href={`/api/admin/dokument/${vr.requestId}/${side}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-kolo-green-700 hover:underline"
-                >
-                  Otvori u novom tabu
-                </a>
-              </div>
-            ))}
-          </div>
+              )}
+            </div>
+          )}
 
           {/* Akcije */}
           {!poruka && (

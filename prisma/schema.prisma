@@ -256,8 +256,8 @@ model VerificationRequest {
   userId           String             @unique
   user             User               @relation(fields: [userId], references: [id])
   jmbg             String
-  idFrontPath      String?
-  idBackPath       String?
+  idFrontPath      String?            // base64 slika prednje strane LK
+  idBackPath       String?            // base64 slika zadnje strane LK
   kanal            String?            // "UPLOAD" | "LICNO"
   status           VerificationStatus @default(PENDING)
   rejectionReason  String?
