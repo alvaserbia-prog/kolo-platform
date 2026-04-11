@@ -30,7 +30,6 @@ export default function JezikSvitcer() {
           title={j.naziv}
         >
           <span>{j.zastava}</span>
-          <span>{j.naziv}</span>
         </button>
       ))}
     </div>
