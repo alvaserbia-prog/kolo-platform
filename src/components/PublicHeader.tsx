@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
+import JezikSvitcer from "@/components/JezikSvitcer";
 
 export default async function PublicHeader() {
   const session = await getServerSession(authOptions);
@@ -26,6 +27,7 @@ export default async function PublicHeader() {
           </Link>
         </nav>
         <div className="flex items-center gap-3">
+          <JezikSvitcer />
           {session ? (
             <Link
               href="/dashboard"
