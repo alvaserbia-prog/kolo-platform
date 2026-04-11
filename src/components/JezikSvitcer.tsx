@@ -24,8 +24,8 @@ export default function JezikSvitcer() {
           onClick={() => promeniJezik(j.kod)}
           className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-colors ${
             trenutniJezik === j.kod
-              ? "bg-white/20 text-white"
-              : "text-white/60 hover:text-white hover:bg-white/10"
+              ? "bg-kolo-green-100 text-kolo-green-700"
+              : "text-kolo-muted hover:text-kolo-green-700 hover:bg-kolo-green-100"
           }`}
           title={j.naziv}
         >
