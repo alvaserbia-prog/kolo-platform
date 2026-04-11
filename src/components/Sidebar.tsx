@@ -54,7 +54,7 @@ function SidebarContent({
 
   return (
     <>
-      <div className="flex flex-col items-center px-4 pt-5 pb-3">
+      <div className="flex flex-col items-center px-4 pt-2 pb-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/kolo-hero-logo.png" alt="KOLO" style={{ width: 130, height: 130, objectFit: "contain", borderRadius: "1.25rem" }} />
         <span className="font-bold text-white text-5xl tracking-widest mt-2">KOLO</span>
