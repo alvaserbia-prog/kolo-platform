@@ -171,14 +171,19 @@ export const authOptions: NextAuthOptions = {
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
       // Uvek čitaj verified iz baze — JWT može biti zastareo
       if (token.id) {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: token.id as string },
-          select: { verified: true, oauthPending: true },
-        });
-        session.user.verified = dbUser?.verified ?? (token.verified as boolean);
-        session.user.oauthPending = dbUser?.oauthPending ?? (token.oauthPending as boolean) ?? false;
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id as string },
+            select: { verified: true, oauthPending: true },
+          });
+          session.user.verified = dbUser?.verified ?? (token.verified as boolean);
+          session.user.oauthPending = dbUser?.oauthPending ?? (token.oauthPending as boolean) ?? false;
+        } catch {
+          session.user.verified = (token.verified as boolean) ?? false;
+          session.user.oauthPending = (token.oauthPending as boolean) ?? false;
+        }
       } else {
-        session.user.verified = token.verified as boolean ?? false;
+        session.user.verified = (token.verified as boolean) ?? false;
       }
       return session;
     },
