@@ -39,7 +39,8 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 - Route handleri sa dinamičkim segmentima: params je `Promise<{id: string}>`, mora se `await params`.
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
 - `/api/korisnici/pretraga` vraća array objekata `{ id, pseudonim, verified, location }` direktno (ne `{ rezultati: [...] }`).
-- Zaokruživanje POEN-a: koristiti `Math.round()` (ne `Math.floor()`).
+- Zaokruživanje POEN-a u emisijama (donacije, programi, bonusi): `Math.round()`.
+- Zaokruživanje u ZRNO konverzijama: uvek u korist Banke — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
 - Slike za verifikaciju: čuvaju se kao base64 string u bazi (ne filesystem) — Vercel kompatibilnost.
 - Kompresija slika: obavlja se na klijentu pre slanja (Vercel limit 4.5MB po requestu).
 
@@ -61,7 +62,7 @@ docs/             — dokumentacija po fazama
 ### Autentikacija i korisnici
 - Registracija sa pseudonimom, email, lozinka, referral kod
 - Login (NextAuth credentials)
-- Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično); slike se čuvaju kao base64 u bazi
+- Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično); slike se čuvaju kao base64 u bazi; odobrena verifikacija emituje **1.000 POEN** korisniku
 - Profil: pseudonim, lokacija (autocomplete), telefon, punoIme, opis/zanimanje (opciono, max 200 znakova) — sve u tabeli `UserPodaci`; upload profilne slike sa crop modalom
 - Javni profil `/profil/[id]` — prikazuje pseudonim, lokaciju, zadrugu, datum; skriva email/balans/pravo ime
 - Suspenzija / isključenje korisnika (admin)
@@ -123,6 +124,7 @@ docs/             — dokumentacija po fazama
 - Zaključaj/otključaj ZRNO
 - Delegacija glasačke moći
 - Dnevni kurs
+- **Ograničenja pri kupovini** (čl. 18): minimalni balans korisnika 10.000 POEN (inače se zahtev otkazuje); maksimalni dnevni iznos = 1% trenutnog POEN balansa
 
 ### Glasanje
 - Predlozi, glasanje sa ponderisanom glasačkom moći
