@@ -70,6 +70,7 @@ function VerifikacijaForma({
   const [jmbgError, setJmbgError] = useState("");
   const [front, setFront] = useState<File | null>(null);
   const [back, setBack] = useState<File | null>(null);
+  const [pristanak, setPristanak] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const frontRef = useRef<HTMLInputElement>(null);
@@ -91,7 +92,7 @@ function VerifikacijaForma({
     setError("");
   }
 
-  const canSubmit = front && back && jmbg.length === 13 && !jmbgError;
+  const canSubmit = front && back && jmbg.length === 13 && !jmbgError && pristanak;
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -108,6 +109,7 @@ function VerifikacijaForma({
       fd.append("jmbg", jmbg);
       fd.append("front", new File([frontBlob], "front.jpg", { type: "image/jpeg" }));
       fd.append("back", new File([backBlob], "back.jpg", { type: "image/jpeg" }));
+      fd.append("pristanak", "true");
 
       const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
       const data = await res.json();
@@ -198,6 +200,23 @@ function VerifikacijaForma({
             <p className="mt-1 text-xs text-kolo-green-700">{t("jmbg_ispravan")}</p>
           )}
         </div>
+
+        {/* Pristanak za obradu ličnih podataka */}
+        <label className="flex items-start gap-2.5 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={pristanak}
+            onChange={(e) => setPristanak(e.target.checked)}
+            className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0"
+          />
+          <span className="text-xs text-kolo-muted">
+            Dajem izričit pristanak za obradu podataka lične karte i JMBG-a u svrhu verifikacije identiteta, u skladu sa{" "}
+            <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">
+              Politikom privatnosti
+            </Link>
+            . Razumem da ovi podaci mogu biti čuvani do 5 godina od deaktivacije naloga, a u svrhu ispunjavanja zakonskih obaveza i duže.
+          </span>
+        </label>
 
         {error && (
           <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">{error}</p>

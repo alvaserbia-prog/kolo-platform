@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { logAdminAkcija } from "@/lib/audit";
 
 export async function GET(
   req: NextRequest,
@@ -20,6 +21,14 @@ export async function GET(
 
   const vr = await prisma.verificationRequest.findUnique({ where: { id: requestId } });
   if (!vr) return new NextResponse("Nije pronađeno", { status: 404 });
+
+  // Audit log: admin je pristupio dokumentu za verifikaciju (lk/JMBG)
+  await logAdminAkcija(
+    session.user.id,
+    "PRISTUP_DOKUMENT_VERIFIKACIJA",
+    vr.userId,
+    `Strana: ${side}, zahtevId: ${requestId}`
+  );
 
   const dataUrl = side === "front" ? vr.idFrontPath : vr.idBackPath;
   if (!dataUrl) return new NextResponse("Dokument nije uploadovan (ručna verifikacija)", { status: 404 });

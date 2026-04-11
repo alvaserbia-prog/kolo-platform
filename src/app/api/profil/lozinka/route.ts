@@ -18,6 +18,7 @@ export async function PATCH(req: NextRequest) {
 
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!user.passwordHash) return NextResponse.json({ error: "Nalog nema lozinku (OAuth nalog)." }, { status: 400 });
 
   const valid = await bcrypt.compare(staraLozinka, user.passwordHash);
   if (!valid) return NextResponse.json({ error: "Trenutna lozinka nije tačna." }, { status: 400 });

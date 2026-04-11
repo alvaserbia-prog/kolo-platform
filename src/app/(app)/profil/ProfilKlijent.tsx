@@ -9,6 +9,13 @@ import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
 
+const TIPOVI_ODLUKA = [
+  { value: "VERIFIKACIJA", label: "Verifikacija identiteta" },
+  { value: "SUSPENZIJA", label: "Suspenzija/isključenje naloga" },
+  { value: "PROGRAM", label: "Upis u program" },
+  { value: "OSTALO", label: "Ostalo" },
+];
+
 interface ProfilProps {
   user: {
     id: string;
@@ -60,6 +67,19 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [podaciError, setPodaciError] = useState("");
   const [podaciSuccess, setPodaciSuccess] = useState("");
   const [podaciLoading, setPodaciLoading] = useState(false);
+
+  // Prigovor
+  const [prigovorTip, setPrigovorTip] = useState("OSTALO");
+  const [prigovorOpis, setPrigovorOpis] = useState("");
+  const [prigovorError, setPrigovorError] = useState("");
+  const [prigovorSuccess, setPrigovorSuccess] = useState("");
+  const [prigovorLoading, setPrigovorLoading] = useState(false);
+
+  // Brisanje naloga
+  const [brisiModalOpen, setBrisiModalOpen] = useState(false);
+  const [brisiPrimalac, setBrisiPrimalac] = useState("");
+  const [brisiError, setBrisiError] = useState("");
+  const [brisiLoading, setBrisiLoading] = useState(false);
 
   const mozeMenjatiPseudonim = !user.pseudonimChangedAt ||
     (Date.now() - new Date(user.pseudonimChangedAt).getTime()) > 30 * 24 * 60 * 60 * 1000;
@@ -208,6 +228,37 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     ZADRUGAR: t("uloga_zadrugar"),
     ADMIN: t("uloga_admin"),
   };
+
+  async function posaljiPrigovor(e: React.FormEvent) {
+    e.preventDefault();
+    setPrigovorError(""); setPrigovorSuccess("");
+    if (prigovorOpis.trim().length < 10) { setPrigovorError("Opis mora imati najmanje 10 karaktera."); return; }
+    setPrigovorLoading(true);
+    const res = await fetch("/api/prigovor", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ opis: prigovorOpis, tipOdluke: prigovorTip }),
+    });
+    const data = await res.json();
+    setPrigovorLoading(false);
+    if (!res.ok) { setPrigovorError(data.error ?? "Greška pri slanju."); return; }
+    setPrigovorSuccess("Prigovor je primljen. Odgovorićemo u roku od 30 dana.");
+    setPrigovorOpis("");
+  }
+
+  async function obrisiNalog() {
+    setBrisiError("");
+    setBrisiLoading(true);
+    const res = await fetch("/api/profil", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prenesPoen: brisiPrimalac || undefined }),
+    });
+    const data = await res.json();
+    setBrisiLoading(false);
+    if (!res.ok) { setBrisiError(data.error ?? "Greška pri brisanju."); return; }
+    await signOut({ callbackUrl: "/" });
+  }
 
   return (
     <div className="space-y-6">
@@ -504,6 +555,112 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <span className="text-kolo-border">→</span>
         </div>
       </Link>
+
+      {/* Podaci i privatnost */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Eksport podataka */}
+        <div className="bg-white rounded-2xl border border-kolo-border p-6">
+          <h2 className="text-base font-semibold text-kolo-muted mb-2">Pravo na prenosivost podataka</h2>
+          <p className="text-xs text-kolo-muted mb-4">
+            Preuzmite kopiju svih vaših ličnih podataka u JSON formatu (čl. 36 Zakona o zaštiti podataka o ličnosti).
+            JMBG nije uključen — dostupan na pisani zahtev.
+          </p>
+          <a
+            href="/api/profil/eksport"
+            download
+            className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
+          >
+            Preuzmi moje podatke
+          </a>
+        </div>
+
+        {/* Prigovor na odluku */}
+        <div className="bg-white rounded-2xl border border-kolo-border p-6">
+          <h2 className="text-base font-semibold text-kolo-muted mb-2">Prigovor na odluku</h2>
+          <p className="text-xs text-kolo-muted mb-4">
+            Ukoliko smatrate da je neka odluka sistema (verifikacija, suspenzija, upis u program) donesena pogrešno,
+            možete podneti prigovor. Odgovorićemo u roku od 30 dana.
+          </p>
+          <form onSubmit={posaljiPrigovor} className="space-y-3">
+            <select
+              value={prigovorTip}
+              onChange={(e) => setPrigovorTip(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600"
+            >
+              {TIPOVI_ODLUKA.map((t) => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
+            </select>
+            <textarea
+              value={prigovorOpis}
+              onChange={(e) => setPrigovorOpis(e.target.value)}
+              placeholder="Opišite prigovor (min. 10 karaktera)..."
+              rows={3}
+              maxLength={2000}
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none"
+            />
+            {prigovorError && <p className="text-xs text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{prigovorError}</p>}
+            {prigovorSuccess && <p className="text-xs text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{prigovorSuccess}</p>}
+            <button
+              type="submit"
+              disabled={prigovorLoading}
+              className="w-full py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+            >
+              {prigovorLoading ? "Šaljem..." : "Pošalji prigovor"}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {/* Brisanje naloga */}
+      <div className="bg-white rounded-2xl border border-red-200 p-6">
+        <h2 className="text-base font-semibold text-kolo-danger mb-2">Brisanje naloga</h2>
+        <p className="text-xs text-kolo-muted mb-4">
+          Brisanjem naloga anonimizuju se svi vaši lični podaci (email, ime, telefon, lokacija, avatar).
+          Transakcione istorije ostaju sa anonimizovanim pseudonimom. POEN možete preneti drugom korisniku
+          ili će biti vraćeni Banci. ZRNA se automatski prodaju. Ova radnja je <strong>nepovratna</strong>.
+        </p>
+        {!brisiModalOpen ? (
+          <button
+            onClick={() => setBrisiModalOpen(true)}
+            className="px-4 py-2.5 rounded-xl border border-red-300 text-kolo-danger text-sm font-semibold hover:bg-red-50 transition-colors"
+          >
+            Obriši nalog
+          </button>
+        ) : (
+          <div className="space-y-3 border border-red-200 rounded-xl p-4 bg-red-50">
+            <p className="text-sm font-semibold text-kolo-danger">Potvrda brisanja naloga</p>
+            <div>
+              <label className="block text-xs text-kolo-muted mb-1.5">
+                Pseudonim korisnika kome da se prenesu vaši POEN-i <span className="font-normal">(opciono — prazno = vraća Banci)</span>
+              </label>
+              <input
+                type="text"
+                value={brisiPrimalac}
+                onChange={(e) => setBrisiPrimalac(e.target.value)}
+                placeholder="pseudonim primaoca"
+                className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400"
+              />
+            </div>
+            {brisiError && <p className="text-xs text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{brisiError}</p>}
+            <div className="flex gap-3">
+              <button
+                onClick={() => { setBrisiModalOpen(false); setBrisiError(""); }}
+                className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
+              >
+                Odustani
+              </button>
+              <button
+                onClick={obrisiNalog}
+                disabled={brisiLoading}
+                className="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
+              >
+                {brisiLoading ? "Brišem..." : "Potvrdi brisanje"}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

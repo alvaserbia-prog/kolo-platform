@@ -7,6 +7,10 @@
     {
       "path": "/api/cron/nocna-emisija",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/gdpr-cistenje",
+      "schedule": "0 2 1 * *"
     }
   ]
 }

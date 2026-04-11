@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
@@ -12,6 +13,23 @@ interface AppShellProps {
 
 export default function AppShell({ verified, isAdmin, children }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Provera da li korisnik treba da prihvati novu verziju Politike privatnosti
+  useEffect(() => {
+    if (pathname === "/politika-prihvati") return;
+    fetch("/api/politika/prihvati")
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (data?.potrebno) {
+          router.replace("/politika-prihvati");
+        }
+      })
+      .catch(() => {});
+  // Proveravamo samo pri mountovanju
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">

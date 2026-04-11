@@ -7,7 +7,7 @@ import Image from "next/image";
 interface PendingRequest {
   requestId: string;
   pseudonim: string;
-  email: string;
+  email: string | null;
   jmbg: string;
   createdAt: string;
   imaReferral: boolean;
@@ -16,7 +16,7 @@ interface PendingRequest {
 interface KorisnikInfo {
   id: string;
   pseudonim: string;
-  email: string;
+  email: string | null;
   role: string;
   verified: boolean;
   status: string;

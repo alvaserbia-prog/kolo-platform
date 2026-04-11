@@ -11,6 +11,8 @@ export default withAuth(
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
+    // Prihvatanje politike — provera se radi na klijentskoj strani u AppShell
+
     return NextResponse.next();
   },
   {
@@ -18,7 +20,7 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl;
         // Javne rute — ne zahtevaju prijavu
-        const javneRute = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost", "/m"];
+        const javneRute = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji"];
         if (javneRute.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
           return true;
         }

@@ -6,6 +6,7 @@ import AdminKlijent from "./AdminKlijent";
 import { labelPrograma } from "@/lib/banka/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/banka/zrno";
+import { logAdminAkcija } from "@/lib/audit";
 
 const SVI_PROGRAMI: ProgramType[] = ["ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
@@ -105,6 +106,16 @@ export default async function AdminPage() {
 
   const opticaj = banka ? Math.abs(banka.balance) : 0;
   const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
+
+  // Audit log: admin je učitao stranicu sa JMBG podacima iz pending zahteva
+  if (pendingRequests.length > 0) {
+    await logAdminAkcija(
+      session.user.id,
+      "PRISTUP_JMBG_PODACI",
+      undefined,
+      `Pregled ${pendingRequests.length} zahteva za verifikaciju (JMBG vidljiv)`
+    );
+  }
 
   return (
     <AdminKlijent

@@ -23,6 +23,14 @@ export async function POST(req: NextRequest) {
   const jmbg = (formData.get("jmbg") as string)?.trim();
   const frontFile = formData.get("front") as File | null;
   const backFile = formData.get("back") as File | null;
+  const pristanakStr = formData.get("pristanak") as string | null;
+
+  // Obavezan eksplicitni pristanak za obradu lk/JMBG podataka
+  if (pristanakStr !== "true") {
+    return NextResponse.json({
+      error: "Morate dati pristanak za obradu ličnih podataka (lična karta, JMBG) pre slanja zahteva za verifikaciju.",
+    }, { status: 400 });
+  }
 
   // Validacija
   if (!jmbg || jmbg.length !== 13 || !/^\d{13}$/.test(jmbg)) {
@@ -76,6 +84,13 @@ export async function POST(req: NextRequest) {
       },
     });
   }
+
+  // Snimi pristanak za obradu lk/JMBG (odvojen od pristanka na Politiku)
+  await prisma.verifikacijaPristanak.upsert({
+    where: { userId: session.user.id },
+    update: { prihvacenAt: new Date() },
+    create: { userId: session.user.id },
+  });
 
   return NextResponse.json({ ok: true });
 }
