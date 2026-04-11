@@ -7,6 +7,7 @@ declare module "next-auth" {
       pseudonim: string;
       role: string;
       verified: boolean;
+      oauthPending: boolean;
     } & DefaultSession["user"];
   }
 
@@ -15,6 +16,7 @@ declare module "next-auth" {
     pseudonim: string;
     role: string;
     verified: boolean;
+    oauthPending?: boolean;
   }
 }
 
@@ -24,5 +26,6 @@ declare module "next-auth/jwt" {
     pseudonim: string;
     role: string;
     verified: boolean;
+    oauthPending?: boolean;
   }
 }

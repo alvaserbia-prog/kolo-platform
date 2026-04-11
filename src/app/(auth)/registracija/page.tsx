@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
-function jacina(p: string): { nivo: number; tekst: string; boja: string } {
+function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
   let score = 0;
   if (p.length >= 8) score++;
@@ -13,14 +14,15 @@ function jacina(p: string): { nivo: number; tekst: string; boja: string } {
   if (/[A-Z]/.test(p)) score++;
   if (/[0-9]/.test(p)) score++;
   if (/[^A-Za-z0-9]/.test(p)) score++;
-  if (score <= 1) return { nivo: 1, tekst: "Slaba", boja: "bg-kolo-danger-light0" };
-  if (score <= 2) return { nivo: 2, tekst: "Srednja", boja: "bg-kolo-gold-400" };
-  if (score <= 3) return { nivo: 3, tekst: "Dobra", boja: "bg-kolo-green-500" };
-  return { nivo: 4, tekst: "Jaka", boja: "bg-kolo-green-700" };
+  if (score <= 1) return { nivo: 1, tekst: t("lozinka_slaba"), boja: "bg-kolo-danger-light0" };
+  if (score <= 2) return { nivo: 2, tekst: t("lozinka_srednja"), boja: "bg-kolo-gold-400" };
+  if (score <= 3) return { nivo: 3, tekst: t("lozinka_dobra"), boja: "bg-kolo-green-500" };
+  return { nivo: 4, tekst: t("lozinka_jaka"), boja: "bg-kolo-green-700" };
 }
 
 export default function RegistracijaPage() {
   const router = useRouter();
+  const t = useTranslations("registracija");
   const [form, setForm] = useState({ email: "", pseudonim: "", password: "", passwordConfirm: "", referralCode: "" });
 
   // Auto-popuni referral iz cookie ili localStorage (postavljeno pri kliknu na /m/{hash})
@@ -86,18 +88,18 @@ export default function RegistracijaPage() {
     }, 400);
   }, [form.pseudonim]);
 
-  const lozinkaJacina = jacina(form.password);
+  const lozinkaJacina = jacina(form.password, t);
   const canSubmit = !loading && uslovi && privatnost && pseudonimStatus !== "zauzet" && pseudonimStatus !== "checking";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!form.email.trim() || !form.email.includes("@")) { setError("Unesite ispravnu email adresu."); return; }
-    if (form.pseudonim.trim().length < 3) { setError("Pseudonim mora imati najmanje 3 karaktera."); return; }
-    if (pseudonimStatus === "zauzet") { setError("Ovaj pseudonim je zauzet."); return; }
-    if (form.password.length < 8) { setError("Lozinka mora imati najmanje 8 karaktera."); return; }
-    if (form.password !== form.passwordConfirm) { setError("Lozinke se ne poklapaju."); return; }
-    if (!uslovi || !privatnost) { setError("Morate prihvatiti uslove i politiku privatnosti."); return; }
+    if (!form.email.trim() || !form.email.includes("@")) { setError(t("greska_email")); return; }
+    if (form.pseudonim.trim().length < 3) { setError(t("greska_pseudonim_duljina")); return; }
+    if (pseudonimStatus === "zauzet") { setError(t("greska_pseudonim_zauzet")); return; }
+    if (form.password.length < 8) { setError(t("greska_lozinka_duljina")); return; }
+    if (form.password !== form.passwordConfirm) { setError(t("greska_lozinke_poklapaju")); return; }
+    if (!uslovi || !privatnost) { setError(t("greska_uslovi")); return; }
 
     setLoading(true);
     const res = await fetch("/api/registracija", {
@@ -107,7 +109,7 @@ export default function RegistracijaPage() {
     });
     const data = await res.json();
     setLoading(false);
-    if (!res.ok) { setError(data.error ?? "Greška pri registraciji."); return; }
+    if (!res.ok) { setError(data.error ?? t("greska_registracija")); return; }
 
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     if (result?.error) { router.push("/login?registered=1"); return; }
@@ -118,14 +120,14 @@ export default function RegistracijaPage() {
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8">
         <div className="mb-7">
-          <h1 className="text-xl font-bold text-kolo-text">Registracija</h1>
-          <p className="mt-1 text-sm text-kolo-muted">Pridružite se KOLO zajednici</p>
+          <h1 className="text-xl font-bold text-kolo-text">{t("naslov")}</h1>
+          <p className="mt-1 text-sm text-kolo-muted">{t("podnaslov")}</p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">Email *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("email")} *</label>
             <input type="email" autoComplete="email" value={form.email} onChange={(e) => set("email", e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder="vas@email.com" suppressHydrationWarning />
@@ -133,7 +135,7 @@ export default function RegistracijaPage() {
 
           {/* Pseudonim */}
           <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">Pseudonim *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("pseudonim")} *</label>
             <div className="relative">
               <input type="text" autoComplete="username" maxLength={30} value={form.pseudonim} onChange={(e) => set("pseudonim", e.target.value)}
                 className={`w-full px-4 py-3 pr-9 rounded-xl border text-sm outline-none transition-colors ${
@@ -141,21 +143,21 @@ export default function RegistracijaPage() {
                   : pseudonimStatus === "slobodan" ? "border-kolo-green-500 focus:border-kolo-green-700"
                   : "border-kolo-border focus:border-kolo-green-700"
                 }`}
-                placeholder="VasePseudonim" suppressHydrationWarning />
-              {pseudonimStatus === "checking" && <span className="absolute right-3 top-3.5 text-xs text-kolo-muted">...</span>}
+                placeholder={t("placeholder_pseudonim")} suppressHydrationWarning />
+              {pseudonimStatus === "checking" && <span className="absolute right-3 top-3.5 text-xs text-kolo-muted">{t("pseudonim_provera")}</span>}
               {pseudonimStatus === "slobodan" && <span className="absolute right-3 top-3 text-kolo-green-700">✓</span>}
               {pseudonimStatus === "zauzet" && <span className="absolute right-3 top-3 text-red-500">✕</span>}
             </div>
-            {pseudonimStatus === "zauzet" && <p className="mt-1 text-xs text-red-500">Ovaj pseudonim je zauzet</p>}
-            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">Javno vidljiv, ne prikazuje pravo ime</p>}
+            {pseudonimStatus === "zauzet" && <p className="mt-1 text-xs text-red-500">{t("pseudonim_zauzet")}</p>}
+            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">{t("pseudonim_slobodan_opis")}</p>}
           </div>
 
           {/* Lozinka */}
           <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">Lozinka *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("lozinka")} *</label>
             <input type="password" autoComplete="new-password" value={form.password} onChange={(e) => set("password", e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-              placeholder="••••••••" suppressHydrationWarning />
+              placeholder={t("placeholder_lozinka")} suppressHydrationWarning />
             {form.password.length > 0 && (
               <div className="mt-2">
                 <div className="flex gap-1 mb-1">
@@ -172,23 +174,25 @@ export default function RegistracijaPage() {
 
           {/* Potvrda */}
           <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">Potvrda lozinke *</label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("potvrda_lozinke")} *</label>
             <input type="password" autoComplete="new-password" value={form.passwordConfirm} onChange={(e) => set("passwordConfirm", e.target.value)}
               className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${
                 form.passwordConfirm && form.password !== form.passwordConfirm ? "border-red-400" : "border-kolo-border focus:border-kolo-green-700"
               }`}
-              placeholder="••••••••" suppressHydrationWarning />
+              placeholder={t("placeholder_lozinka")} suppressHydrationWarning />
             {form.passwordConfirm && form.password !== form.passwordConfirm && (
-              <p className="mt-1 text-xs text-red-500">Lozinke se ne poklapaju</p>
+              <p className="mt-1 text-xs text-red-500">{t("lozinke_ne_poklapaju")}</p>
             )}
           </div>
 
           {/* Referral */}
           <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">Referral kod <span className="text-kolo-muted font-normal">(opciono)</span></label>
+            <label className="block text-sm font-medium text-kolo-text mb-1.5">
+              {t("referral_kod")} <span className="text-kolo-muted font-normal">{t("opciono")}</span>
+            </label>
             <input type="text" value={form.referralCode} onChange={(e) => set("referralCode", e.target.value.toUpperCase())}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg font-mono"
-              placeholder="ABCD1234" suppressHydrationWarning />
+              placeholder={t("placeholder_referral")} suppressHydrationWarning />
           </div>
 
           {/* Checkbox-ovi */}
@@ -197,14 +201,14 @@ export default function RegistracijaPage() {
               <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                Prihvatam <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">Uslove korišćenja</Link>
+                {t("uslovi")} <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{t("uslovi_link")}</Link>
               </span>
             </label>
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={privatnost} onChange={(e) => setPrivatnost(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                Prihvatam <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">Politiku privatnosti</Link>
+                {t("uslovi")} <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{t("privatnost_link")}</Link>
               </span>
             </label>
           </div>
@@ -214,13 +218,13 @@ export default function RegistracijaPage() {
           <button type="submit" disabled={!canSubmit}
             className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50"
             suppressHydrationWarning>
-            {loading ? "Registracija..." : "Registruj se"}
+            {loading ? t("dugme_loading") : t("dugme")}
           </button>
         </form>
 
         <p className="mt-5 text-center text-sm text-kolo-muted">
-          Već imate nalog?{" "}
-          <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">Prijavite se</Link>
+          {t("vec_imate_nalog")}{" "}
+          <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">{t("prijavite_se")}</Link>
         </p>
       </div>
     </div>

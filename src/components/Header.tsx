@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import JezikSvitcer from "@/components/JezikSvitcer";
 
 interface Notifikacija {
   id: string;
@@ -41,8 +43,11 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           <span className="font-bold text-white text-base tracking-widest">KOLO</span>
         </div>
 
-        {/* Desna strana: balans + poruke + notifikacije + profil */}
+        {/* Desna strana: jezik + balans + poruke + notifikacije + profil */}
         <div className="flex items-center gap-0 px-4">
+          <div className="hidden sm:flex mr-2">
+            <JezikSvitcer />
+          </div>
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
@@ -98,6 +103,7 @@ function BalansHeader({ userId }: { userId: string }) {
 
 function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }) {
   const router = useRouter();
+  const t = useTranslations("header");
   const [open, setOpen] = useState(false);
   const [avatar, setAvatar] = useState<string | null>(null);
   const ref = useRef<HTMLDivElement>(null);
@@ -157,7 +163,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
-              Moj profil
+              {t("moj_profil")}
             </button>
             <button
               onClick={() => signOut({ callbackUrl: "/login" })}
@@ -166,7 +172,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
               </svg>
-              Odjavi se
+              {t("odjavi_se")}
             </button>
           </div>
         </div>
@@ -186,6 +192,7 @@ const TIP_BOJA: Record<string, string> = {
 
 function BellNotifikacije() {
   const router = useRouter();
+  const t = useTranslations("header");
   const [open, setOpen] = useState(false);
   const [neprocitano, setNeprocitano] = useState(0);
   const [notifikacije, setNotifikacije] = useState<Notifikacija[]>([]);
@@ -278,16 +285,16 @@ function BellNotifikacije() {
       {open && (
         <div className="absolute right-0 top-11 w-80 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-kolo-border">
-            <span className="text-sm font-semibold text-kolo-text">Obaveštenja</span>
+            <span className="text-sm font-semibold text-kolo-text">{t("obavestenja")}</span>
             {neprocitano > 0 && (
               <button onClick={oznaciProcitane} disabled={loading} className="text-xs text-kolo-green-700 hover:underline disabled:opacity-50">
-                Označi sve kao pročitano
+                {t("oznaci_procitane")}
               </button>
             )}
           </div>
           <div className="max-h-80 overflow-y-auto">
             {notifikacije.length === 0 ? (
-              <div className="px-4 py-8 text-center text-sm text-kolo-muted">Nema obaveštenja.</div>
+              <div className="px-4 py-8 text-center text-sm text-kolo-muted">{t("nema_obavestenja")}</div>
             ) : (
               notifikacije.map((n) => (
                 <button key={n.id} onClick={() => handleKlik(n)}

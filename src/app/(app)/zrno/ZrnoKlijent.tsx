@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Props {
   slobodno: number;
@@ -18,26 +19,28 @@ interface Props {
   poslednjiKursovi: { date: string; kurs: number }[];
 }
 
-type Tab = "pregled" | "trziste" | "glasanje" | "delegacija";
+type Tab = "pregled" | "trziste" | "glasanje";
 
 export default function ZrnoKlijent(props: Props) {
   const [tab, setTab] = useState<Tab>("pregled");
   const router = useRouter();
+  const t = useTranslations("zrno");
+  const tc = useTranslations("common");
 
   const tabs: [Tab, string][] = [
-    ["pregled", "Pregled"],
-    ["trziste", "Tržište"],
-    ["glasanje", "Delegacija"],
+    ["pregled", t("tab_pregled")],
+    ["trziste", t("tab_trziste")],
+    ["glasanje", t("tab_delegacija")],
   ];
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov">ZRNO</h1>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
         {props.glasackaMoc > 0 && (
           <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-xl px-4 py-2 text-center">
             <p className="text-sm font-bold text-kolo-gold-600">{props.glasackaMoc}</p>
-            <p className="text-xs text-kolo-gold-600">glasova</p>
+            <p className="text-xs text-kolo-gold-600">{t("glasova")}</p>
           </div>
         )}
       </div>
@@ -45,32 +48,32 @@ export default function ZrnoKlijent(props: Props) {
       {/* Stanje */}
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Slobodno</p>
+          <p className="text-xs text-kolo-muted mb-1">{t("slobodno")}</p>
           <p className="text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">može se prodati</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("slobodno_opis")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Aktivno</p>
+          <p className="text-xs text-kolo-muted mb-1">{t("aktivno")}</p>
           <p className="text-xl font-bold text-kolo-gold-600">{props.aktivno.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">glasačka moć</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("aktivno_opis")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Kurs</p>
+          <p className="text-xs text-kolo-muted mb-1">{t("kurs")}</p>
           <p className="text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">POEN/ZRNO</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("kurs_opis")}</p>
         </div>
       </div>
 
       {/* Glasačka moć formula */}
       {props.aktivno > 0 && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-2xl px-5 py-3 text-sm text-kolo-gold-600">
-          Glasačka moć: floor(√{props.aktivno}) = <strong>{props.glasackaMoc} glasova</strong>
+          {t("glasacka_moc_formula", { aktivno: props.aktivno, moc: props.glasackaMoc })}
         </div>
       )}
 
       {!props.trzisjeAktivno && (
         <div className="box-warning text-sm">
-          ZRNO tržište još nije aktivno. Aktivira se kada Banka dostigne −1.000.000 POEN.
+          {t("trziste_neaktivno")}
         </div>
       )}
 
@@ -94,6 +97,8 @@ export default function ZrnoKlijent(props: Props) {
 // ── Pregled ───────────────────────────────────────────────────────────────────
 
 function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, poslednjiKursovi, onRefresh }: Props & { onRefresh: () => void }) {
+  const t = useTranslations("zrno");
+  const tc = useTranslations("common");
   const [prikazKurs, setPrikazKurs] = useState(false);
   const [kolicina, setKolicina] = useState("");
   const [akcija, setAkcija] = useState<"ZAKLJUCAJ" | "OTKLJUCAJ">("ZAKLJUCAJ");
@@ -105,7 +110,7 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
 
   async function promeniStatus() {
     const kol = Number(kolicina);
-    if (!kol || kol <= 0) { setPoruka({ text: "Unesite pozitivan ceo broj.", ok: false }); return; }
+    if (!kol || kol <= 0) { setPoruka({ text: t("unesite_pozitivan"), ok: false }); return; }
     setLoading(true); setPoruka(null);
     const url = akcija === "ZAKLJUCAJ" ? "/api/zrno/zakljucaj" : "/api/zrno/otkljucaj";
     const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
@@ -120,9 +125,9 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
       {/* Pending status zahtevi */}
       {statusZahtevi.length > 0 && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-3 text-sm text-kolo-gold-600 space-y-1">
-          <p className="font-semibold">Na čekanju (biće obrađeno u ponoć):</p>
+          <p className="font-semibold">{t("cekanje_naslov")}</p>
           {statusZahtevi.map((z, i) => (
-            <p key={i}>· {z.kolicina.toLocaleString("sr-RS")} ZRNA — {z.akcija === "ZAKLJUCAJ" ? "zaključavanje" : "otključavanje"}</p>
+            <p key={i}>· {t("cekanje_red", { kolicina: z.kolicina.toLocaleString("sr-RS"), akcija: z.akcija === "ZAKLJUCAJ" ? t("zaključavanje") : t("otkljucavanje") })}</p>
           ))}
         </div>
       )}
@@ -130,26 +135,26 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
       {/* Promena statusa */}
       {(slobodno > 0 || aktivno > 0) && (
         <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-          <p className="text-sm font-semibold text-kolo-muted">Promena statusa ZRNA</p>
-          <p className="text-xs text-kolo-muted">Zahtev se izvršava u ponoć (period čekanja 1 dan).</p>
+          <p className="text-sm font-semibold text-kolo-muted">{t("promena_statusa")}</p>
+          <p className="text-xs text-kolo-muted">{t("promena_napomena")}</p>
           <div className="flex gap-2">
             {(["ZAKLJUCAJ", "OTKLJUCAJ"] as const).map((a) => (
               <button key={a} type="button" onClick={() => setAkcija(a)}
                 className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${akcija === a ? "bg-kolo-gold-600 text-white" : "bg-white border border-kolo-border text-kolo-muted"}`}>
-                {a === "ZAKLJUCAJ" ? `Zaključaj (max ${maxZakljucaj})` : `Otključaj (max ${maxOtkljucaj})`}
+                {a === "ZAKLJUCAJ" ? t("zakljucaj", { max: maxZakljucaj }) : t("otkljucaj", { max: maxOtkljucaj })}
               </button>
             ))}
           </div>
           <input type="number" min={1} max={akcija === "ZAKLJUCAJ" ? maxZakljucaj : maxOtkljucaj}
             value={kolicina} onChange={(e) => setKolicina(e.target.value)}
-            placeholder="Količina ZRNA"
+            placeholder={t("kolicina_placeholder")}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
           {poruka && (
             <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
           )}
           <button onClick={promeniStatus} disabled={loading}
             className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-            {loading ? "..." : "Pošalji zahtev"}
+            {loading ? "..." : t("posalji_zahtev")}
           </button>
         </div>
       )}
@@ -158,8 +163,8 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
       {poslednjiKursovi.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center cursor-pointer" onClick={() => setPrikazKurs((v) => !v)}>
-            <h3 className="text-sm font-semibold text-kolo-muted">Istorija kursa</h3>
-            <span className="text-xs text-kolo-muted">{prikazKurs ? "Sakrij" : "Prikaži"}</span>
+            <h3 className="text-sm font-semibold text-kolo-muted">{t("istorija_kursa")}</h3>
+            <span className="text-xs text-kolo-muted">{prikazKurs ? tc("sakrij") : tc("prikaži")}</span>
           </div>
           {prikazKurs && poslednjiKursovi.map((r, i) => (
             <div key={r.date} className={`px-5 py-2.5 flex justify-between text-sm ${i < poslednjiKursovi.length - 1 ? "border-b border-kolo-border" : ""}`}>
@@ -176,6 +181,7 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
 // ── Tržište ───────────────────────────────────────────────────────────────────
 
 function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, kupovinaZahtev, prodajaZahtev, onRefresh }: Props & { onRefresh: () => void }) {
+  const t = useTranslations("zrno");
   const [poenZaKupovinu, setPoenZaKupovinu] = useState("");
   const [kolicinaProdaja, setKolicinaProdaja] = useState("");
   const [loading, setLoading] = useState<"kupi" | "prodaj" | null>(null);
@@ -210,7 +216,7 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
   if (!trzisjeAktivno) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        ZRNO tržište nije aktivno.
+        {t("trziste_neaktivno_tab")}
       </div>
     );
   }
@@ -220,60 +226,60 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
       {/* Kupovina */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
         <div className="flex justify-between items-start">
-          <p className="text-sm font-semibold text-kolo-muted">Kupovina ZRNA</p>
-          <span className="text-xs text-kolo-muted">max {maxPoen.toLocaleString("sr-RS")} POEN/dan</span>
+          <p className="text-sm font-semibold text-kolo-muted">{t("kupovina_naslov")}</p>
+          <span className="text-xs text-kolo-muted">{t("kupovina_max", { max: maxPoen.toLocaleString("sr-RS") })}</span>
         </div>
         {kupovinaZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            Aktivan zahtev: {kupovinaZahtev.poenIznos.toLocaleString("sr-RS")} POEN — {kupovinaZahtev.status}
+            {t("kupovina_aktivan_zahtev", { iznos: kupovinaZahtev.poenIznos.toLocaleString("sr-RS"), status: kupovinaZahtev.status })}
           </div>
         )}
         {!kupovinaZahtev && (
           <>
             <input type="number" min={1} max={maxPoen} value={poenZaKupovinu} onChange={(e) => setPoenZaKupovinu(e.target.value)}
-              placeholder={`POEN za trošak (min 1, max ${maxPoen.toLocaleString("sr-RS")})`}
+              placeholder={`POEN (max ${maxPoen.toLocaleString("sr-RS")})`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoZrna > 0 && (
-              <p className="text-xs text-kolo-muted">≈ {procijenjenoZrna.toLocaleString("sr-RS")} ZRNA po kursu {kurs.toFixed(2)}</p>
+              <p className="text-xs text-kolo-muted">{t("kupovina_procena", { zrna: procijenjenoZrna.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
             {poruka?.for === "kupi" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
             <button onClick={kupi} disabled={loading !== null || !poenZaKupovinu}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "kupi" ? "..." : "Rezerviši kupovinu"}
+              {loading === "kupi" ? "..." : t("kupovina_dugme")}
             </button>
           </>
         )}
-        <p className="text-xs text-kolo-muted">Zahtev se izvršava u ponoć. Min balans: 10.000 POEN.</p>
+        <p className="text-xs text-kolo-muted">{t("kupovina_napomena")}</p>
       </div>
 
       {/* Prodaja */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-        <p className="text-sm font-semibold text-kolo-muted">Prodaja ZRNA Banci</p>
+        <p className="text-sm font-semibold text-kolo-muted">{t("prodaja_naslov")}</p>
         {prodajaZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            Aktivan zahtev: {prodajaZahtev.kolicina.toLocaleString("sr-RS")} ZRNA — {prodajaZahtev.status}
+            {t("prodaja_aktivan_zahtev", { kolicina: prodajaZahtev.kolicina.toLocaleString("sr-RS"), status: prodajaZahtev.status })}
           </div>
         )}
         {!prodajaZahtev && (
           <>
             <input type="number" min={1} max={slobodno} value={kolicinaProdaja} onChange={(e) => setKolicinaProdaja(e.target.value)}
-              placeholder={`Slobodnih ZRNA za prodaju (max ${slobodno.toLocaleString("sr-RS")})`}
+              placeholder={`max ${slobodno.toLocaleString("sr-RS")} ZRNA`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoPoen > 0 && (
-              <p className="text-xs text-kolo-muted">≈ {procijenjenoPoen.toLocaleString("sr-RS")} POEN po kursu {kurs.toFixed(2)}</p>
+              <p className="text-xs text-kolo-muted">{t("prodaja_procena", { poen: procijenjenoPoen.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
             {poruka?.for === "prodaj" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
             <button onClick={prodaj} disabled={loading !== null || !kolicinaProdaja || slobodno <= 0}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "prodaj" ? "..." : "Rezerviši prodaju"}
+              {loading === "prodaj" ? "..." : t("prodaja_dugme")}
             </button>
           </>
         )}
-        <p className="text-xs text-kolo-muted">Samo slobodna ZRNA. Zahtev se izvršava u ponoć.</p>
+        <p className="text-xs text-kolo-muted">{t("prodaja_napomena")}</p>
       </div>
     </div>
   );
@@ -282,6 +288,7 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
 // ── Delegacija ────────────────────────────────────────────────────────────────
 
 function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { onRefresh: () => void }) {
+  const t = useTranslations("zrno");
   const [pseudonim, setPseudonim] = useState("");
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
@@ -297,7 +304,7 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
   }
 
   async function opozovi() {
-    if (!confirm("Opozovi delegaciju?")) return;
+    if (!confirm(t("opozovi_pitanje"))) return;
     setLoading(true);
     await fetch("/api/zrno/delegiraj", { method: "DELETE" });
     setLoading(false);
@@ -307,21 +314,20 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-        <p className="text-sm font-semibold text-kolo-muted">Delegacija glasova</p>
+        <p className="text-sm font-semibold text-kolo-muted">{t("delegacija_naslov")}</p>
         <p className="text-xs text-kolo-muted">
-          Delegiraju se glasovi (ne ZRNA). Vaša glasačka moć ({moja} glasova) se prenosi delegatu.
-          Promena stupa na snagu u ponoć.
+          {t("delegacija_opis", { moc: moja })}
         </p>
 
         {delegacija && (
           <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-xl px-4 py-3 text-sm flex justify-between items-center">
             <div>
-              <p className="font-medium text-kolo-gold-600">Delegat: {delegacija.delegatPseudonim}</p>
-              <p className="text-xs text-kolo-gold-600 mt-0.5">{delegacija.aktivna ? "Aktivna" : "Na čekanju (ponoć)"}</p>
+              <p className="font-medium text-kolo-gold-600">{t("delegat_label")} {delegacija.delegatPseudonim}</p>
+              <p className="text-xs text-kolo-gold-600 mt-0.5">{delegacija.aktivna ? t("aktivna") : t("cekanje_ponoc")}</p>
             </div>
             <button onClick={opozovi} disabled={loading}
               className="px-3 py-1.5 text-xs text-kolo-danger border border-kolo-danger/20 rounded-xl hover:bg-kolo-danger-light transition-colors">
-              Opozovi
+              {t("opozovi")}
             </button>
           </div>
         )}
@@ -329,14 +335,14 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
         {!delegacija && (
           <>
             <input type="text" value={pseudonim} onChange={(e) => setPseudonim(e.target.value)}
-              placeholder="Pseudonim delegata"
+              placeholder={t("delegat_placeholder")}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {poruka && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
             <button onClick={delegiraj} disabled={loading || !pseudonim.trim()}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading ? "..." : "Delegiraj glasove"}
+              {loading ? "..." : t("delegiraj")}
             </button>
           </>
         )}

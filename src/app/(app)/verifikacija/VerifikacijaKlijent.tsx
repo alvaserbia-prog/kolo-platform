@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 // Kompresuje sliku na max 1200px, JPEG 80% — tipično <200KB
 async function kompresujSliku(file: File): Promise<Blob> {
@@ -64,6 +65,7 @@ function VerifikacijaForma({
   rejected: string | null | undefined;
   onSuccess: () => void;
 }) {
+  const t = useTranslations("verifikacija");
   const [jmbg, setJmbg] = useState("");
   const [jmbgError, setJmbgError] = useState("");
   const [front, setFront] = useState<File | null>(null);
@@ -76,14 +78,14 @@ function VerifikacijaForma({
   function handleJmbg(val: string) {
     const clean = val.replace(/\D/g, "").slice(0, 13);
     setJmbg(clean);
-    if (clean.length > 0 && clean.length < 13) setJmbgError("JMBG mora imati 13 cifara");
+    if (clean.length > 0 && clean.length < 13) setJmbgError(t("jmbg_greska"));
     else setJmbgError("");
   }
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>, side: "front" | "back") {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) { setError("Fotografija je prevelika (max 5MB)."); return; }
+    if (file.size > 5 * 1024 * 1024) { setError(t("foto_prevelika")); return; }
     if (side === "front") setFront(file);
     else setBack(file);
     setError("");
@@ -110,10 +112,10 @@ function VerifikacijaForma({
       const res = await fetch("/api/verifikacija", { method: "POST", body: fd });
       const data = await res.json();
 
-      if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
+      if (!res.ok) { setError(data.error ?? t("greska_slanje")); return; }
       onSuccess();
     } catch {
-      setError("Greška pri slanju. Pokušajte ponovo.");
+      setError(t("greska_slanje"));
     } finally {
       setLoading(false);
     }
@@ -122,29 +124,28 @@ function VerifikacijaForma({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="kolo-naslov">Verifikacija identiteta</h1>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
         <p className="mt-1 text-sm text-kolo-muted">
-          Verifikacijom dobijate pristup celom sistemu i bonus od{" "}
-          <span className="font-semibold text-kolo-green-700">1.000 POEN</span>.
+          {t("podnaslov", { iznos: "1.000 POEN" })}
         </p>
       </div>
 
       {rejected && (
         <div className="bg-kolo-danger-light border border-kolo-danger/20 rounded-2xl p-4">
-          <p className="text-sm font-semibold text-kolo-danger mb-1">Zahtev je odbijen</p>
+          <p className="text-sm font-semibold text-kolo-danger mb-1">{t("odbijen_naslov")}</p>
           <p className="text-sm text-red-500">{rejected}</p>
-          <p className="text-xs text-kolo-danger mt-2">Ispravite navedeni problem i pošaljite ponovo.</p>
+          <p className="text-xs text-kolo-danger mt-2">{t("odbijen_ispravite")}</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {/* Upload fotografija */}
         <div>
-          <p className="text-sm font-semibold text-kolo-muted mb-3">Fotografija lične karte</p>
+          <p className="text-sm font-semibold text-kolo-muted mb-3">{t("fotografija_lk")}</p>
           <div className="grid grid-cols-2 gap-3">
             {[
-              { label: "Prednja strana", file: front, ref: frontRef, side: "front" as const },
-              { label: "Zadnja strana", file: back, ref: backRef, side: "back" as const },
+              { label: t("prednja_strana"), file: front, ref: frontRef, side: "front" as const },
+              { label: t("zadnja_strana"), file: back, ref: backRef, side: "back" as const },
             ].map(({ label, file, ref, side }) => (
               <button
                 key={side}
@@ -172,16 +173,16 @@ function VerifikacijaForma({
           </div>
           <input ref={frontRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "front")} />
           <input ref={backRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleFile(e, "back")} />
-          <p className="mt-2 text-xs text-kolo-muted">JPG, PNG ili WebP. Maksimalno 5MB po fotografiji.</p>
+          <p className="mt-2 text-xs text-kolo-muted">{t("foto_napomena")}</p>
         </div>
 
         {/* JMBG */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">JMBG</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("jmbg")}</label>
           <input
             type="text"
             inputMode="numeric"
-            placeholder="13 cifara"
+            placeholder={t("jmbg_placeholder")}
             value={jmbg}
             onChange={(e) => handleJmbg(e.target.value)}
             className={`w-full px-4 py-3 rounded-xl border text-center text-lg font-mono tracking-widest outline-none transition-colors ${
@@ -194,7 +195,7 @@ function VerifikacijaForma({
           />
           {jmbgError && <p className="mt-1 text-xs text-red-500">{jmbgError}</p>}
           {jmbg.length === 13 && !jmbgError && (
-            <p className="mt-1 text-xs text-kolo-green-700">✓ Format ispravan</p>
+            <p className="mt-1 text-xs text-kolo-green-700">{t("jmbg_ispravan")}</p>
           )}
         </div>
 
@@ -207,13 +208,13 @@ function VerifikacijaForma({
           disabled={!canSubmit || loading}
           className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
-          {loading ? "Šaljem..." : "Pošalji na verifikaciju"}
+          {loading ? t("dugme_loading") : t("dugme")}
         </button>
       </form>
 
       <p className="text-center text-sm text-kolo-muted">
         <Link href="/dashboard" className="hover:text-kolo-muted transition-colors">
-          Preskoči za sada →
+          {t("preskoci")}
         </Link>
       </p>
     </div>
@@ -223,17 +224,18 @@ function VerifikacijaForma({
 // ── Ekran čekanja ──────────────────────────────────────────────────────────────
 
 function PendingEkran({ createdAt }: { createdAt: string }) {
+  const t = useTranslations("verifikacija");
   return (
     <div className="w-full">
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
         <div className="w-20 h-20 rounded-full bg-kolo-gold-100 flex items-center justify-center mx-auto mb-5 text-4xl">
           ⏰
         </div>
-        <h2 className="text-xl font-bold text-kolo-text mb-2">Zahtev je poslat</h2>
-        <p className="text-sm text-kolo-muted mb-1">Dokumentacija je primljena i čeka pregled.</p>
-        <p className="text-xs text-kolo-muted mb-6">Obično traje 1–3 radna dana.</p>
+        <h2 className="text-xl font-bold text-kolo-text mb-2">{t("pending_naslov")}</h2>
+        <p className="text-sm text-kolo-muted mb-1">{t("pending_opis")}</p>
+        <p className="text-xs text-kolo-muted mb-6">{t("pending_vreme")}</p>
         <div className="bg-kolo-bg rounded-xl px-4 py-3 text-xs text-kolo-muted mb-6">
-          Poslato: {new Date(createdAt).toLocaleDateString("sr-RS", {
+          {t("pending_poslato")} {new Date(createdAt).toLocaleDateString("sr-RS", {
             day: "2-digit", month: "long", year: "numeric",
           })}
         </div>
@@ -241,7 +243,7 @@ function PendingEkran({ createdAt }: { createdAt: string }) {
           href="/dashboard"
           className="inline-block px-6 py-3 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
         >
-          Na početnu
+          {t("na_pocetnu")}
         </Link>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import ClanPretraga from "@/components/ClanPretraga";
+import { useTranslations } from "next-intl";
 
 interface Zadruga {
   id: string;
@@ -20,16 +21,17 @@ interface Props {
 }
 
 export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZahtev, isVerified }: Props) {
+  const t = useTranslations("zajednica");
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov">Zajednica</h1>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
         {isVerified && !mojaZadruga && !imaOsnivanjeZahtev && (
           <Link
             href="/zajednica/osnivanje"
             className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
           >
-            + Osnuj zadrugu
+            {t("osnuj_zadrugu")}
           </Link>
         )}
       </div>
@@ -41,32 +43,32 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
       {mojaZadruga && (
         <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-2xl px-5 py-4 flex justify-between items-center">
           <div>
-            <p className="text-sm font-semibold text-kolo-green-900">Član ste zadruge</p>
+            <p className="text-sm font-semibold text-kolo-green-900">{t("clan_zadruge_naslov")}</p>
             <p className="text-sm text-kolo-green-700 mt-0.5">{mojaZadruga.name}
-              {mojaZadruga.isAdmin && <span className="ml-2 text-xs bg-kolo-green-100 text-kolo-green-900 px-2 py-0.5 rounded font-medium">Admin</span>}
+              {mojaZadruga.isAdmin && <span className="ml-2 text-xs bg-kolo-green-100 text-kolo-green-900 px-2 py-0.5 rounded font-medium">{t("clan_admin_badge")}</span>}
             </p>
           </div>
           <Link
             href={`/zajednica/${mojaZadruga.id}`}
             className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
           >
-            Moja zadruga →
+            {t("moja_zadruga_dugme")}
           </Link>
         </div>
       )}
 
       {imaOsnivanjeZahtev && !mojaZadruga && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
-          Zahtev za osnivanje zadruge je na čekanju. Admin UO pregleda zahtev.
+          {t("osnivanje_na_cekanju")}
         </div>
       )}
 
       {/* Lista zadruga */}
       {zadruge.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-10 text-center text-sm text-kolo-muted">
-          Još nema registrovanih zadruga.
+          {t("nema_zadruga")}
           {isVerified && (
-            <> <Link href="/zajednica/osnivanje" className="text-kolo-green-700 hover:underline ml-1">Osnujte prvu!</Link></>
+            <> <Link href="/zajednica/osnivanje" className="text-kolo-green-700 hover:underline ml-1">{t("osnujte_prvu")}</Link></>
           )}
         </div>
       ) : (
@@ -92,7 +94,7 @@ export default function ZajednicaKlijent({ zadruge, mojaZadruga, imaOsnivanjeZah
                     <p className="text-sm font-bold text-kolo-green-700">{z.balance.toLocaleString("sr-RS")}</p>
                     <p className="text-xs text-kolo-green-700">POEN</p>
                   </div>
-                  <p className="text-xs text-kolo-muted text-center">{z.clanovi} {z.clanovi === 1 ? "član" : "članova"}</p>
+                  <p className="text-xs text-kolo-muted text-center">{z.clanovi} {z.clanovi === 1 ? t("clan_count_1") : t("clan_count_vise")}</p>
                 </div>
               </div>
             </Link>

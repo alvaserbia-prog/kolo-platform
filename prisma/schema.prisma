@@ -145,7 +145,10 @@ enum RadnaPrijavaStatus {
 model User {
   id                 String    @id @default(uuid())
   email              String    @unique
-  passwordHash       String
+  passwordHash       String?
+  oauthProvider      String?
+  oauthId            String?
+  oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
   role               Role       @default(FIZICKO_LICE)
   status             UserStatus @default(ACTIVE)

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
+import { useTranslations } from "next-intl";
 
 
 type Transakcija = {
@@ -30,14 +31,15 @@ interface Props {
 
 export default function NovcanikKlijent({ balance, pseudonim, memberHash, transakcije, platiPseudonim, prefillIznos, prefillOpis }: Props) {
   const router = useRouter();
+  const t = useTranslations("novcanik");
   const [filter, setFilter] = useState<Filter>("sve");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
   const [showQR, setShowQR] = useState(false);
 
-  const filtered = transakcije.filter((t) => {
-    if (filter === "primljeno") return t.primio && t.type === "TRANSFER";
-    if (filter === "poslato") return !t.primio && t.type === "TRANSFER";
-    if (filter === "emisije") return t.type !== "TRANSFER";
+  const filtered = transakcije.filter((tx) => {
+    if (filter === "primljeno") return tx.primio && tx.type === "TRANSFER";
+    if (filter === "poslato") return !tx.primio && tx.type === "TRANSFER";
+    if (filter === "emisije") return tx.type !== "TRANSFER";
     return true;
   });
 
@@ -45,7 +47,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
     <div className="space-y-6">
       {/* Balans kartica */}
       <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
-        <p className="text-sm text-white/70 mb-1">Vaše stanje</p>
+        <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
         <p className="text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
         <p className="text-lg text-white/70 mt-0.5">POEN</p>
         <div className="mt-4 flex gap-3">
@@ -53,13 +55,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             onClick={() => setShowSend(true)}
             className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
           >
-            Pošalji POEN
+            {t("posalji_poen")}
           </button>
           <button
             onClick={() => setShowQR(true)}
             className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
           >
-            Moj QR
+            {t("moj_qr")}
           </button>
         </div>
       </div>
@@ -83,16 +85,16 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
       {/* Istorija transakcija */}
       <div>
         <div className="flex justify-between items-center mb-3">
-          <h2 className="text-base font-semibold text-kolo-muted">Istorija transakcija</h2>
+          <h2 className="text-base font-semibold text-kolo-muted">{t("istorija_transakcija")}</h2>
         </div>
 
         {/* Filteri */}
         <div className="flex gap-2 mb-4 flex-wrap">
           {([
-            ["sve", "Sve"],
-            ["primljeno", "Primljeno"],
-            ["poslato", "Poslato"],
-            ["emisije", "Emisije"],
+            ["sve", t("filter_sve")],
+            ["primljeno", t("filter_primljeno")],
+            ["poslato", t("filter_poslato")],
+            ["emisije", t("filter_emisije")],
           ] as [Filter, string][]).map(([key, label]) => (
             <button
               key={key}
@@ -110,17 +112,17 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
         {filtered.length === 0 ? (
           <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-            Nema transakcija u ovoj kategoriji.
+            {t("nema_tx_kategorija")}
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
             {/* Zaglavlje tabele */}
             <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
-              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Vreme</span>
-              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Pošiljalac</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_vreme")}</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_posiljac")}</span>
               <span />
-              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">Primalac</span>
-              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">Iznos</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_primalac")}</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("col_iznos")}</span>
             </div>
             {filtered.map((t, i) => (
               <div
@@ -180,6 +182,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 // ── Forma za slanje ────────────────────────────────────────────────────────────
 
 function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initialOpis }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string; initialOpis?: string }) {
+  const t = useTranslations("novcanik");
+  const tc = useTranslations("common");
   const [pseudonim, setPseudonim] = useState(initialPseudonim ?? "");
   const [amount, setAmount] = useState(initialIznos ?? "");
   const [description, setDescription] = useState(initialOpis ?? "");
@@ -222,9 +226,9 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
     e.preventDefault();
     setError("");
 
-    if (!pseudonim.trim()) { setError("Unesite pseudonim primaoca."); return; }
+    if (!pseudonim.trim()) { setError(t("send_greska_pseudonim")); return; }
     const iznos = parseInt(amount, 10);
-    if (!amount || isNaN(iznos) || iznos <= 0) { setError("Iznos mora biti pozitivan ceo broj."); return; }
+    if (!amount || isNaN(iznos) || iznos <= 0) { setError(t("send_greska_iznos")); return; }
 
     setLoading(true);
     try {
@@ -234,10 +238,10 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
         body: JSON.stringify({ pseudonim: pseudonim.trim(), amount: iznos, description: description.trim() }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error ?? "Greška pri slanju."); return; }
+      if (!res.ok) { setError(data.error ?? t("send_greska")); return; }
       onSuccess();
     } catch {
-      setError("Greška pri slanju. Pokušajte ponovo.");
+      setError(t("send_greska"));
     } finally {
       setLoading(false);
     }
@@ -246,18 +250,18 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   return (
     <div className="bg-white rounded-2xl border border-kolo-border p-5">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-base font-semibold text-kolo-muted">Pošalji POEN</h2>
+        <h2 className="text-base font-semibold text-kolo-muted">{t("send_naslov")}</h2>
         <button onClick={onClose} className="text-kolo-muted hover:text-kolo-muted text-xl leading-none">×</button>
       </div>
       <form onSubmit={handleSubmit} noValidate className="space-y-3">
         <div className="relative" ref={wrapperRef}>
-          <label className="block text-sm font-medium text-kolo-muted mb-1">Pseudonim primaoca</label>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("send_pseudonim")}</label>
           <input
             type="text"
             value={pseudonim}
             onChange={(e) => handlePseudonimChange(e.target.value)}
             onFocus={() => pseudonim.length >= 2 && setShowSugestije(true)}
-            placeholder="npr. MilanPetrovic"
+            placeholder={t("send_pseudonim_placeholder")}
             autoComplete="off"
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
@@ -278,27 +282,27 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium text-kolo-muted mb-1">Iznos (POEN)</label>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("send_iznos")}</label>
           <input
             type="number"
             min={1}
             step={1}
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="100"
+            placeholder={t("send_iznos_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors font-mono"
           />
         </div>
         <div>
           <label className="block text-sm font-medium text-kolo-muted mb-1">
-            Opis <span className="text-kolo-muted font-normal">(opciono)</span>
+            {t("send_opis")} <span className="text-kolo-muted font-normal">({tc("opciono")})</span>
           </label>
           <input
             type="text"
             maxLength={100}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Za šta šaljete..."
+            placeholder={t("send_opis_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
@@ -309,14 +313,14 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
             onClick={onClose}
             className="flex-1 py-3 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium hover:bg-kolo-border transition-colors"
           >
-            Otkaži
+            {tc("otkazi")}
           </button>
           <button
             type="submit"
             disabled={loading}
             className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
           >
-            {loading ? "Šaljem..." : "Pošalji"}
+            {loading ? t("send_dugme_loading") : t("send_dugme")}
           </button>
         </div>
       </form>
@@ -327,6 +331,8 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
 // ── QR modal ──────────────────────────────────────────────────────────────────
 
 function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; memberHash: string; onClose: () => void }) {
+  const t = useTranslations("novcanik");
+  const tc = useTranslations("common");
   const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://kolo.rs";
   const [iznos, setIznos] = useState("");
   const [opis, setOpis] = useState("");
@@ -355,32 +361,30 @@ function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; member
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-xs p-6 space-y-4 text-center">
-        <h3 className="text-base font-semibold text-kolo-text">Moj QR za prijem</h3>
-        <p className="text-sm text-kolo-muted">
-          Pokažite ovaj kod da biste primili POEN. Skenirajte telefonom.
-        </p>
+        <h3 className="text-base font-semibold text-kolo-text">{t("qr_naslov")}</h3>
+        <p className="text-sm text-kolo-muted">{t("qr_opis")}</p>
 
         <div className="space-y-2 text-left">
           <div>
-            <label className="block text-xs font-medium text-kolo-muted mb-1">Iznos POEN <span className="text-kolo-border font-normal">(opciono)</span></label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">{t("qr_iznos")} <span className="text-kolo-border font-normal">({tc("opciono")})</span></label>
             <input
               type="number"
               min={1}
               step={1}
               value={iznos}
               onChange={(e) => setIznos(e.target.value)}
-              placeholder="npr. 500"
+              placeholder={t("qr_placeholder_iznos")}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors font-mono"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-kolo-muted mb-1">Opis <span className="text-kolo-border font-normal">(opciono)</span></label>
+            <label className="block text-xs font-medium text-kolo-muted mb-1">{tc("opis")} <span className="text-kolo-border font-normal">({tc("opciono")})</span></label>
             <input
               type="text"
               maxLength={100}
               value={opis}
               onChange={(e) => setOpis(e.target.value)}
-              placeholder="npr. Za kafu"
+              placeholder={t("qr_placeholder_opis")}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
             />
           </div>
@@ -401,13 +405,13 @@ function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; member
             onClick={kopiraj}
             className="flex-1 py-2.5 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors"
           >
-            Kopiraj link
+            {t("qr_kopiraj")}
           </button>
           <button
             onClick={onClose}
             className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors"
           >
-            Zatvori
+            {tc("zatvori")}
           </button>
         </div>
       </div>

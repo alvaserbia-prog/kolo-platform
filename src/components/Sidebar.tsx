@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 interface SidebarProps {
   verified: boolean;
@@ -10,32 +11,6 @@ interface SidebarProps {
   mobileOpen?: boolean;
   onMobileClose?: () => void;
 }
-
-const linkoviVerifikovan = [
-  { href: "/sistem", label: "Početna" },
-  { href: "/novcanik", label: "Novčanik" },
-  { href: "/pijaca", label: "Pijaca" },
-  { href: "/zajednica", label: "Zajednica" },
-  { href: "/zaposljavnje", label: "Zapošljavanje" },
-  { href: "/programi", label: "Programi" },
-  { href: "/zrno", label: "ZRNO" },
-  { href: "/glasanje", label: "Glasanje" },
-  { href: "/preporuke", label: "Preporuke" },
-  { href: "/donacije", label: "Donacije" },
-  { href: "/postani-pokrovitelj", label: "Pokroviteljstvo" },
-];
-
-const linkoviNeverifikovan = [
-  { href: "/sistem", label: "Početna" },
-  { href: "/novcanik", label: "Novčanik" },
-  { href: "/pijaca", label: "Pijaca" },
-  { href: "/verifikacija", label: "Verifikacija" },
-];
-
-const linkoviAdmin = [
-  { href: "/admin", label: "Admin" },
-  { href: "/admin/simulator", label: "Simulator" },
-];
 
 function SidebarContent({
   verified,
@@ -47,6 +22,34 @@ function SidebarContent({
   onLinkClick?: () => void;
 }) {
   const pathname = usePathname();
+  const t = useTranslations("nav");
+
+  const linkoviVerifikovan = [
+    { href: "/sistem", label: t("pocetna") },
+    { href: "/novcanik", label: t("novcanik") },
+    { href: "/pijaca", label: t("pijaca") },
+    { href: "/zajednica", label: t("zajednica") },
+    { href: "/zaposljavnje", label: t("zaposljavnje") },
+    { href: "/programi", label: t("programi") },
+    { href: "/zrno", label: t("zrno") },
+    { href: "/glasanje", label: t("glasanje") },
+    { href: "/preporuke", label: t("preporuke") },
+    { href: "/donacije", label: t("donacije") },
+    { href: "/postani-pokrovitelj", label: t("pokroviteljstvo") },
+  ];
+
+  const linkoviNeverifikovan = [
+    { href: "/sistem", label: t("pocetna") },
+    { href: "/novcanik", label: t("novcanik") },
+    { href: "/pijaca", label: t("pijaca") },
+    { href: "/verifikacija", label: t("verifikacija") },
+  ];
+
+  const linkoviAdmin = [
+    { href: "/admin", label: t("admin") },
+    { href: "/admin/simulator", label: t("simulator") },
+  ];
+
   const links = [
     ...(verified ? linkoviVerifikovan : linkoviNeverifikovan),
     ...(isAdmin ? linkoviAdmin : []),
@@ -85,7 +88,7 @@ function SidebarContent({
             onClick={onLinkClick}
             className="block w-full text-center px-3 py-2 bg-kolo-gold-400/20 text-kolo-gold-400 text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 hover:text-white transition-colors"
           >
-            Verifikuj nalog →
+            {t("verifikuj_nalog")}
           </Link>
         </div>
       )}
