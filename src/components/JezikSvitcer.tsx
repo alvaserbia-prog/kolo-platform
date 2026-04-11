@@ -3,9 +3,9 @@
 import { useLocale } from "next-intl";
 
 const jezici = [
-  { kod: "sr", zastava: "🇷🇸", naziv: "SR" },
-  { kod: "en", zastava: "🇬🇧", naziv: "EN" },
-  { kod: "hu", zastava: "🇭🇺", naziv: "HU" },
+  { kod: "sr", fi: "rs", naziv: "Srpski" },
+  { kod: "en", fi: "gb", naziv: "English" },
+  { kod: "hu", fi: "hu", naziv: "Magyar" },
 ];
 
 function promeniJezik(kod: string) {
@@ -22,14 +22,14 @@ export default function JezikSvitcer() {
         <button
           key={j.kod}
           onClick={() => promeniJezik(j.kod)}
-          className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-colors ${
-            trenutniJezik === j.kod
-              ? "bg-kolo-green-100 text-kolo-green-700"
-              : "text-kolo-muted hover:text-kolo-green-700 hover:bg-kolo-green-100"
-          }`}
           title={j.naziv}
+          className={`p-1 rounded transition-all ${
+            trenutniJezik === j.kod
+              ? "ring-2 ring-kolo-green-700 opacity-100"
+              : "opacity-50 hover:opacity-100"
+          }`}
         >
-          <span>{j.zastava}</span>
+          <span className={`fi fi-${j.fi}`} style={{ width: 20, height: 15, display: "inline-block", borderRadius: 2 }} />
         </button>
       ))}
     </div>
