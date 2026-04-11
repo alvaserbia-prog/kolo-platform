@@ -92,10 +92,20 @@ docs/             — dokumentacija po fazama
 - Klikabilni pseudonimi u tabelama (zadruga, transakcije, sistem, dashboard)
 
 ### Zadruge
-- Osnivanje zadruge (zahtev → admin odobrava, 50.000 POEN emisija)
+- Osnivanje zadruge (zahtev → admin odobrava)
 - Pristupnica (zahtev za učlanjenje)
 - Projekti zadruge (PRIKUPLJANJE, REDISTRIBUCIJA)
 - Admin panel zadruge (upravljanje članovima, projektima)
+- **Bonus pragovi rasta** (isti princip kao pokrovitelji — svaki prag se loguje u `ZadrugaBonusLog`, ne ponavlja se):
+  - 5 članova (osnivanje): **50.000 POEN** (`EMISIJA_ZADRUGA_OSNIVANJE`)
+  - 10 članova: 100.000 POEN
+  - 20 članova: 200.000 POEN
+  - 50 članova: 500.000 POEN
+  - 100 članova: 1.000.000 POEN
+  - 200 članova: 2.000.000 POEN
+  - 500 članova: 5.000.000 POEN
+  - Formula: `broj_članova × 10.000 POEN`
+- Logika: `src/lib/banka/zadruga.ts` → `proveriIEmitujBonusPrag()`
 
 ### Programi Banke
 - ZAPOSLJAVNJE, PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE

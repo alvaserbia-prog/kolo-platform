@@ -77,6 +77,11 @@ export async function POST(
     `Osnivanje zadruge "${zahtev.name}"`
   );
 
+  // Logovati osnivački prag (threshold=5) u BonusLog radi konzistentnosti
+  await prisma.zadrugaBonusLog.create({
+    data: { zadrugaId, threshold: 5, amount: 50_000 },
+  });
+
   // 6. Notifikacija svim osnivačima
   for (const userId of zahtev.osnivaci as string[]) {
     await posaljiNotifikaciju(
