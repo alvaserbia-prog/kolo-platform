@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface OglasItem {
   id: string;
@@ -20,56 +21,45 @@ interface OglasItem {
   mojaPrijava: string | null;
 }
 
-const sourceLabel: Record<string, string> = {
-  FONDACIJA: "Fondacija",
-  ZADRUGA: "Zadruga",
-  PROJEKAT: "Projekat",
-};
-
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
   ZADRUGA: "bg-kolo-info-light text-kolo-info",
   PROJEKAT: "bg-purple-50 text-purple-700",
 };
 
-const prijavaStatusBadge: Record<string, { label: string; cls: string }> = {
-  PENDING:  { label: "Prijava na čekanju", cls: "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100" },
-  APPROVED: { label: "Prijava odobrena",   cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
-  REJECTED: { label: "Prijava odbijena",   cls: "bg-kolo-danger-light text-kolo-danger border-kolo-danger/20" },
-};
-
 export default function ZaposljavanjeKlijent({ oglasi, isVerified }: { oglasi: OglasItem[]; isVerified: boolean }) {
+  const t = useTranslations("zaposljavnje");
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="kolo-naslov">Zapošljavanje</h1>
-        <p className="text-sm text-kolo-muted mt-1">Aktivni oglasi za angažovanje u sistemu</p>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
+        <p className="text-sm text-kolo-muted mt-1">{t("podnaslov")}</p>
       </div>
 
       {!isVerified && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
-          Za prijavu na oglase potrebna je verifikacija identiteta.
+          {t("nije_verifikovan")}
         </div>
       )}
 
       <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
         <div>
           <p className="text-lg font-bold text-kolo-text">{oglasi.length}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">aktivnih oglasa</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("aktivnih_oglasa")}</p>
         </div>
         <div>
           <p className="text-lg font-bold text-kolo-text">1.000 – 2.500</p>
-          <p className="text-xs text-kolo-muted mt-0.5">POEN/sat</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("poen_sat")}</p>
         </div>
         <div>
           <p className="text-lg font-bold text-kolo-text">max 8h</p>
-          <p className="text-xs text-kolo-muted mt-0.5">po danu</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("po_danu")}</p>
         </div>
       </div>
 
       {oglasi.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-12 text-center text-sm text-kolo-muted">
-          Trenutno nema aktivnih oglasa.
+          {t("nema_oglasa")}
         </div>
       ) : (
         <div className="space-y-3">
@@ -83,9 +73,22 @@ export default function ZaposljavanjeKlijent({ oglasi, isVerified }: { oglasi: O
 }
 
 function OglasKartica({ oglas, isVerified }: { oglas: OglasItem; isVerified: boolean }) {
+  const t = useTranslations("zaposljavnje");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  const prijavaStatusBadge: Record<string, { label: string; cls: string }> = {
+    PENDING:  { label: t("prijava_na_cekanju"), cls: "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100" },
+    APPROVED: { label: t("prijava_odobrena"),   cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
+    REJECTED: { label: t("prijava_odbijena"),   cls: "bg-kolo-danger-light text-kolo-danger border-kolo-danger/20" },
+  };
+  const sourceLabel: Record<string, string> = {
+    FONDACIJA: t("fondacija"),
+    ZADRUGA: t("zadruga"),
+    PROJEKAT: t("projekat"),
+  };
 
   const badge = oglas.mojaPrijava ? prijavaStatusBadge[oglas.mojaPrijava] : null;
   const mozePrijaviti = isVerified && !oglas.mojaPrijava;
@@ -95,7 +98,7 @@ function OglasKartica({ oglas, isVerified }: { oglas: OglasItem; isVerified: boo
     const res = await fetch(`/api/zaposljavnje/${oglas.id}/prijavi`, { method: "POST" });
     const data = await res.json();
     setLoading(false);
-    setPoruka({ text: res.ok ? "Prijava podneta! Čekajte odobrenje." : (data.error ?? "Greška."), ok: res.ok });
+    setPoruka({ text: res.ok ? t("prijava_podneta") : (data.error ?? tc("greska_ucitavanja")), ok: res.ok });
     if (res.ok) setTimeout(() => router.refresh(), 1200);
   }
 
@@ -124,32 +127,32 @@ function OglasKartica({ oglas, isVerified }: { oglas: OglasItem; isVerified: boo
           </div>
           <div className="shrink-0 text-right">
             <p className="text-sm font-bold text-kolo-green-700">{oglas.hourlyRate.toLocaleString("sr-RS")} P/h</p>
-            <p className="text-xs text-kolo-muted mt-0.5">max {oglas.maxHoursPerDay}h/dan</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("max_h", { h: oglas.maxHoursPerDay })}</p>
           </div>
         </div>
 
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-4 text-xs text-kolo-muted">
-            <span>{oglas.positions} {oglas.positions === 1 ? "mesto" : "mesta"} · {oglas.odobreniClanovi} odobreno</span>
+            <span>{t("mesta", { count: oglas.positions, label: oglas.positions === 1 ? t("mesto_1") : t("mesta_vise"), odobreno: oglas.odobreniClanovi })}</span>
             {oglas.deadline && (
-              <span>Rok: {new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
+              <span>{t("rok")} {new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
             )}
           </div>
           <div className="flex items-center gap-2">
             <Link href={`/zaposljavnje/${oglas.id}`}
               className="text-xs text-kolo-muted hover:text-kolo-green-700 transition-colors">
-              Detalji →
+              {tc("detalji")}
             </Link>
             {mozePrijaviti && (
               <button onClick={prijavi} disabled={loading}
                 className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors disabled:opacity-60">
-                {loading ? "..." : "Prijavi se"}
+                {loading ? "..." : t("prijavi_se")}
               </button>
             )}
             {oglas.mojaPrijava === "APPROVED" && (
               <Link href={`/zaposljavnje/${oglas.id}`}
                 className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
-                Unesi sate
+                {t("unesi_sate")}
               </Link>
             )}
           </div>

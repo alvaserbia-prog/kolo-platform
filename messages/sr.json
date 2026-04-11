@@ -383,7 +383,12 @@
     "ev_status_na_cekanju": "Na čekanju",
     "ev_status_odobreno": "Odobreno",
     "ev_status_odbijeno": "Odbijeno",
-    "ev_status_isplaceno": "Isplaćeno"
+    "ev_status_isplaceno": "Isplaćeno",
+    "opis_zaposljavnje": "Dnevna evidencija radnih aktivnosti · admin odobrava",
+    "opis_majkama": "2.000 POEN/dan po detetu · koeficijenti rastu s brojem dece · trajanje 20 god.",
+    "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno zadrugarsima 50+",
+    "opis_posebna_briga": "2.000 POEN/dan · invaliditet ili hronična bolest · verifikacija dokumentacijom",
+    "opis_skolovanje": "Iznos postavlja admin · reverifikacija svakih 6 meseci"
   },
   "glasanje": {
     "naslov": "Glasanje",

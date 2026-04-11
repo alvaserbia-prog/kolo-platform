@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type EnrollmentStatus = "PENDING" | "ACTIVE" | "INACTIVE" | "REJECTED";
 type EvidencijaStatus = "PENDING" | "APPROVED" | "REJECTED" | "EMITTED";
@@ -46,15 +47,20 @@ interface Props {
   poslednjeEvidencije: EvidencijaInfo[];
 }
 
-const statusBadge: Record<EnrollmentStatus, { label: string; cls: string }> = {
-  PENDING:  { label: "Na čekanju",  cls: "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100" },
-  ACTIVE:   { label: "Aktivan",     cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
-  INACTIVE: { label: "Neaktivan",   cls: "bg-kolo-bg text-kolo-muted border-kolo-border" },
-  REJECTED: { label: "Odbijen",     cls: "bg-kolo-danger-light text-kolo-danger border-kolo-danger/20" },
-};
+function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string }> {
+  const t = useTranslations("programi");
+  return {
+    PENDING:  { label: t("status_na_cekanju"), cls: "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100" },
+    ACTIVE:   { label: t("status_aktivan"),    cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
+    INACTIVE: { label: t("status_neaktivan"),  cls: "bg-kolo-bg text-kolo-muted border-kolo-border" },
+    REJECTED: { label: t("status_odbijen"),    cls: "bg-kolo-danger-light text-kolo-danger border-kolo-danger/20" },
+  };
+}
 
 
 export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bankaBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
+  const t = useTranslations("programi");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [activeProgram, setActiveProgram] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -71,7 +77,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
     });
     const data = await res.json();
     setLoading(false);
-    setPoruka({ text: res.ok ? "Prijava podneta. Čekajte odobrenje." : (data.error ?? "Greška."), ok: res.ok, for: type });
+    setPoruka({ text: res.ok ? t("prijava_podneta") : (data.error ?? tc("greska_ucitavanja")), ok: res.ok, for: type });
     if (res.ok) { setActiveProgram(null); setTimeout(() => router.refresh(), 1200); }
   }
 
@@ -81,39 +87,39 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov">Programi Banke</h1>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
         {totalOcekivano > 0 && (
           <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-2 text-center">
             <p className="text-sm font-bold text-kolo-green-700">{totalOcekivano.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-green-700">POEN/dan</p>
+            <p className="text-xs text-kolo-green-700">{tc("poen_dan")}</p>
           </div>
         )}
       </div>
 
       {/* Emisioni kontekst */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-        <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wider">Emisioni kontekst — danas</p>
+        <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wider">{t("emisioni_kontekst")}</p>
         <div className="grid grid-cols-3 gap-3 text-center">
           <div>
             <p className="text-base font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">Opticaj (POEN)</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("opticaj")}</p>
           </div>
           <div>
             <p className="text-base font-bold text-kolo-text">{dnevniLimit.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">Dnevni limit (10%)</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("dnevni_limit")}</p>
           </div>
           <div>
             <p className={`text-base font-bold ${emitovanoAm !== null && emitovanoAm > 0 ? "text-kolo-green-700" : "text-kolo-muted"}`}>
               {emitovanoAm !== null ? emitovanoAm.toLocaleString("sr-RS") : "—"}
             </p>
-            <p className="text-xs text-kolo-muted mt-0.5">Emitovano danas</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("emitovano_danas")}</p>
           </div>
         </div>
         {dnevniLimit > 0 && (
           <div>
             <div className="flex justify-between text-xs text-kolo-muted mb-1">
-              <span>Iskorišćenost limita</span>
-              <span>{emitovanoPct}%{zahtevanoAm !== null && zahtevanoAm > dnevniLimit ? " — limit dostignut" : ""}</span>
+              <span>{t("iskorišcenost")}</span>
+              <span>{emitovanoPct}%{zahtevanoAm !== null && zahtevanoAm > dnevniLimit ? t("limit_dostignut") : ""}</span>
             </div>
             <div className="h-2 bg-kolo-bg rounded-full overflow-hidden">
               <div
@@ -127,7 +133,7 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
 
       {!isVerified && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
-          Za prijavu na programe potrebna je verifikacija identiteta.
+          {t("nije_verifikovan")}
         </div>
       )}
 
@@ -154,20 +160,23 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
       {poslednjeEvidencije.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           <div className="px-5 py-3 border-b border-kolo-border">
-            <h3 className="text-sm font-semibold text-kolo-muted">Istorija — Zapošljavanje</h3>
+            <h3 className="text-sm font-semibold text-kolo-muted">{t("istorija_naslov")}</h3>
           </div>
-          {poslednjeEvidencije.map((e, i) => (
-            <div key={e.id} className={`px-5 py-3 flex justify-between items-center ${i < poslednjeEvidencije.length - 1 ? "border-b border-kolo-border" : ""}`}>
-              <div>
-                <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
-                <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
+          {poslednjeEvidencije.map((e, i) => {
+            const evBadge = getEvStatusBadge(e.status, t);
+            return (
+              <div key={e.id} className={`px-5 py-3 flex justify-between items-center ${i < poslednjeEvidencije.length - 1 ? "border-b border-kolo-border" : ""}`}>
+                <div>
+                  <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
+                  <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
+                </div>
+                <div className="text-right shrink-0 ml-4">
+                  <p className="text-sm font-semibold text-kolo-text">{e.amount.toLocaleString("sr-RS")} P</p>
+                  <p className={`text-xs font-medium ${evBadge.cls}`}>{evBadge.label}</p>
+                </div>
               </div>
-              <div className="text-right shrink-0 ml-4">
-                <p className="text-sm font-semibold text-kolo-text">{e.amount.toLocaleString("sr-RS")} P</p>
-                <p className={`text-xs font-medium ${evStatusBadge[e.status].cls}`}>{evStatusBadge[e.status].label}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
@@ -191,8 +200,10 @@ function ProgramKartica({
   evidencijaToday: { id: string; status: string; description: string; amount: number } | null;
   onEvidencijaSuccess: () => void;
 }) {
+  const t = useTranslations("programi");
+  const tc = useTranslations("common");
+  const statusBadge = useStatusBadge();
   const enStatus = p.enrollment?.status;
-  const [router] = [useRouter()];
 
   const zadrugarskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
   const zahtevaDrugarstvo = zadrugarskaProvera.includes(p.type);
@@ -205,7 +216,7 @@ function ProgramKartica({
           <div className="flex items-center gap-2 flex-wrap">
             <p className="font-semibold text-kolo-text">{p.label}</p>
             {!p.programAktivan && (
-              <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">Neaktivan</span>
+              <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">{tc("neaktivan")}</span>
             )}
             {enStatus && (
               <span className={`text-xs px-2 py-0.5 rounded border font-medium ${statusBadge[enStatus].cls}`}>
@@ -215,10 +226,10 @@ function ProgramKartica({
           </div>
           {enStatus === "ACTIVE" && p.enrollment!.ocekivaniDnevni > 0 && (
             <p className="text-sm text-kolo-green-700 font-medium mt-1">
-              {p.enrollment!.ocekivaniDnevni.toLocaleString("sr-RS")} POEN/dan
+              {p.enrollment!.ocekivaniDnevni.toLocaleString("sr-RS")} {tc("poen_dan")}
             </p>
           )}
-          <p className="text-xs text-kolo-muted mt-0.5">{opisPrograma(p.type)}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{opisPrograma(p.type, t)}</p>
         </div>
 
         {/* Akcija dugme */}
@@ -226,19 +237,19 @@ function ProgramKartica({
           {!enStatus && mozePrijaviti && (
             <button onClick={onExpand}
               className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
-              Prijavi se
+              {t("prijavi_se")}
             </button>
           )}
           {enStatus === "ACTIVE" && p.type === "ZAPOSLJAVNJE" && (
             <button onClick={onExpand}
               className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
-              Evidencija
+              {t("evidencija")}
             </button>
           )}
           {enStatus === "REJECTED" && mozePrijaviti && (
             <button onClick={onExpand}
               className="px-3 py-1.5 border border-kolo-green-500 text-kolo-green-700 text-xs font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors">
-              Pokušaj ponovo
+              {t("pokusaj_ponovo")}
             </button>
           )}
         </div>
@@ -271,7 +282,7 @@ function ProgramKartica({
 
       {enStatus === "REJECTED" && p.enrollment?.rejectionReason && !expanded && (
         <div className="border-t border-kolo-border px-5 py-3 text-xs text-red-500">
-          Razlog odbijanja: {p.enrollment.rejectionReason}
+          {t("razlog_odbijanja")} {p.enrollment.rejectionReason}
         </div>
       )}
 
@@ -283,7 +294,7 @@ function ProgramKartica({
         return (
           <div className="border-t border-kolo-border px-5 py-3">
             <div className="flex justify-between text-xs text-kolo-muted mb-1">
-              <span>Banka dostiže prag od 1M POEN opticaja</span>
+              <span>{t("prag_banka")}</span>
               <span>{opticaj.toLocaleString("sr-RS")} / 1.000.000 ({pct}%)</span>
             </div>
             <div className="h-1.5 bg-kolo-bg rounded-full overflow-hidden">
@@ -296,8 +307,7 @@ function ProgramKartica({
       {!p.programAktivan && !enStatus && p.type === "SKOLOVANJE" && (() => {
         return (
           <div className="border-t border-kolo-border px-5 py-3 text-xs text-kolo-muted">
-            Program se aktivira odlukom UO — prati glasanje na{" "}
-            <span className="text-kolo-muted font-medium">/glasanje</span>
+            {t("skolovanje_info")}
           </div>
         );
       })()}
@@ -313,6 +323,8 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
   onSubmit: (meta?: Record<string, unknown>) => void;
   onCancel: () => void;
 }) {
+  const t = useTranslations("programi");
+  const tc = useTranslations("common");
   const [datumRodjenja, setDatumRodjenja] = useState("");
   const [dijagnoza, setDijagnoza] = useState("");
   const [ustanova, setUstanova] = useState("");
@@ -331,45 +343,45 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
     <div className="space-y-3">
       {type === "ZAPOSLJAVNJE" && (
         <p className="text-sm text-kolo-muted">
-          Bićete prijavani na program Zapošljavanje. Svaki dan unosite evidenciju aktivnosti koji admin odobrava.
+          {t("zaposljavnje_opis")}
         </p>
       )}
 
       {type === "PODRSKA_STARIJIMA" && (
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum rođenja</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("datum_rodjenja")}</label>
           <input type="date" value={datumRodjenja} onChange={(e) => setDatumRodjenja(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-          <p className="text-xs text-kolo-muted mt-1">Potrebno 50+ godina.</p>
+          <p className="text-xs text-kolo-muted mt-1">{t("starijima_napomena")}</p>
         </div>
       )}
 
       {type === "POSEBNA_BRIGA" && (
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Dijagnoza / opis stanja</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("dijagnoza")}</label>
           <textarea rows={2} value={dijagnoza} onChange={(e) => setDijagnoza(e.target.value)}
-            placeholder="Ukratko opišite stanje..."
+            placeholder={t("posebna_briga_opis")}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
-          <p className="text-xs text-kolo-muted mt-1">Admin proverava medicinsku dokumentaciju. Bazni iznos: 2.000 POEN/dan.</p>
+          <p className="text-xs text-kolo-muted mt-1">{t("posebna_briga_napomena")}</p>
         </div>
       )}
 
       {type === "SKOLOVANJE" && (
         <div className="space-y-2">
-          <input type="text" placeholder="Ustanova *" value={ustanova} onChange={(e) => setUstanova(e.target.value)}
+          <input type="text" placeholder={t("ustanova")} value={ustanova} onChange={(e) => setUstanova(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-          <input type="text" placeholder="Program / smer *" value={program} onChange={(e) => setProgram(e.target.value)}
+          <input type="text" placeholder={t("smer")} value={program} onChange={(e) => setProgram(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-          <p className="text-xs text-kolo-muted">Admin postavlja dnevni iznos. Reverifikacija svakih 6 meseci.</p>
+          <p className="text-xs text-kolo-muted">{t("skolovanje_napomena")}</p>
         </div>
       )}
 
       {type === "PODRSKA_MAJKAMA" && (
         <div className="space-y-2">
-          <p className="text-xs font-semibold text-kolo-muted">Deca (datum rođenja)</p>
+          <p className="text-xs font-semibold text-kolo-muted">{t("deca_naslov")}</p>
           {deca.map((d, i) => (
             <div key={i} className="flex gap-2">
-              <input type="text" placeholder={`Ime deteta ${i + 1}`} value={d.ime}
+              <input type="text" placeholder={t("dete_ime", { n: i + 1 })} value={d.ime}
                 onChange={(e) => setDeca((prev) => prev.map((x, j) => j === i ? { ...x, ime: e.target.value } : x))}
                 className="flex-1 px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
               <input type="date" value={d.datumRodjenja}
@@ -383,18 +395,18 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
           ))}
           {deca.length < 10 && (
             <button type="button" onClick={() => setDeca((prev) => [...prev, { ime: "", datumRodjenja: "" }])}
-              className="text-xs text-kolo-green-700 hover:underline">+ Dodaj dete</button>
+              className="text-xs text-kolo-green-700 hover:underline">{t("dodaj_dete")}</button>
           )}
-          <p className="text-xs text-kolo-muted">Bazni iznos: 2.000 POEN/dan po detetu. Koeficijenti rastu sa brojem dece.</p>
+          <p className="text-xs text-kolo-muted">{t("majkama_napomena")}</p>
         </div>
       )}
 
       <div className="flex gap-2 pt-1">
         <button onClick={onCancel}
-          className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Otkaži</button>
+          className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("otkazi")}</button>
         <button onClick={handleSubmit} disabled={loading}
           className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold disabled:opacity-60">
-          {loading ? "..." : "Pošalji prijavu"}
+          {loading ? "..." : t("posalji_prijavu")}
         </button>
       </div>
     </div>
@@ -406,6 +418,8 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
   onSuccess: () => void;
   onCancel: () => void;
 }) {
+  const t = useTranslations("programi");
+  const tc = useTranslations("common");
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -413,18 +427,18 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
   const [success, setSuccess] = useState(false);
 
   if (evidencijaToday) {
-    const evBadge = evStatusBadge[evidencijaToday.status as keyof typeof evStatusBadge];
+    const evBadge = getEvStatusBadge(evidencijaToday.status, t);
     return (
       <div className="space-y-3">
-        <p className="text-sm font-semibold text-kolo-muted">Evidencija za danas</p>
+        <p className="text-sm font-semibold text-kolo-muted">{t("ev_za_danas")}</p>
         <div className="bg-kolo-bg rounded-xl px-4 py-3 text-sm">
           <p className="text-kolo-text">{evidencijaToday.description}</p>
           <div className="flex justify-between mt-2">
             <span className={`text-xs font-medium ${evBadge?.cls ?? ""}`}>{evBadge?.label}</span>
-            <span className="text-sm font-semibold text-kolo-text">{evidencijaToday.amount.toLocaleString("sr-RS")} POEN</span>
+            <span className="text-sm font-semibold text-kolo-text">{evidencijaToday.amount.toLocaleString("sr-RS")} {tc("poen")}</span>
           </div>
         </div>
-        <button onClick={onCancel} className="w-full py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Zatvori</button>
+        <button onClick={onCancel} className="w-full py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("zatvori")}</button>
       </div>
     );
   }
@@ -432,7 +446,7 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
   if (success) {
     return (
       <div className="bg-kolo-green-100 rounded-xl px-4 py-3 text-sm text-kolo-green-700">
-        Evidencija podneta. Admin pregleda zahtev.
+        {t("ev_podneta")}
       </div>
     );
   }
@@ -440,8 +454,8 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
   async function handleSubmit() {
     setError("");
     const amt = Number(amount);
-    if (!description.trim() || description.trim().length < 10) { setError("Opis mora imati najmanje 10 karaktera."); return; }
-    if (!amt || amt < 100 || amt > 10000) { setError("Iznos mora biti između 100 i 10.000."); return; }
+    if (!description.trim() || description.trim().length < 10) { setError(t("ev_greska_opis")); return; }
+    if (!amt || amt < 100 || amt > 10000) { setError(t("ev_greska_iznos")); return; }
 
     setLoading(true);
     try {
@@ -451,7 +465,7 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
         body: JSON.stringify({ description: description.trim(), amount: amt }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error ?? "Greška."); return; }
+      if (!res.ok) { setError(data.error ?? tc("greska_ucitavanja")); return; }
       setSuccess(true);
       onSuccess();
     } finally {
@@ -461,19 +475,19 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-kolo-muted">Dnevna evidencija</p>
-      <textarea rows={3} placeholder="Opišite aktivnosti od danas (min. 10 karaktera)..." value={description}
+      <p className="text-sm font-semibold text-kolo-muted">{t("ev_dnevna")}</p>
+      <textarea rows={3} placeholder={t("ev_opis_placeholder")} value={description}
         onChange={(e) => setDescription(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
-      <input type="number" min={100} max={10000} step={100} placeholder="Traženi iznos POEN (100–10.000)"
+      <input type="number" min={100} max={10000} step={100} placeholder={t("ev_iznos_placeholder")}
         value={amount} onChange={(e) => setAmount(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
-        <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Otkaži</button>
+        <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("otkazi")}</button>
         <button onClick={handleSubmit} disabled={loading}
           className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold disabled:opacity-60">
-          {loading ? "..." : "Pošalji"}
+          {loading ? "..." : t("ev_posalji")}
         </button>
       </div>
     </div>
@@ -482,20 +496,23 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-const evStatusBadge: Record<string, { label: string; cls: string }> = {
-  PENDING:  { label: "Na čekanju",  cls: "text-kolo-gold-600" },
-  APPROVED: { label: "Odobreno",    cls: "text-kolo-info" },
-  REJECTED: { label: "Odbijeno",    cls: "text-red-500" },
-  EMITTED:  { label: "Isplaćeno",   cls: "text-kolo-green-700" },
-};
+function getEvStatusBadge(status: string, t: (key: string) => string): { label: string; cls: string } {
+  const map: Record<string, { label: string; cls: string }> = {
+    PENDING:  { label: t("ev_status_na_cekanju"), cls: "text-kolo-gold-600" },
+    APPROVED: { label: t("ev_status_odobreno"),   cls: "text-kolo-info" },
+    REJECTED: { label: t("ev_status_odbijeno"),   cls: "text-red-500" },
+    EMITTED:  { label: t("ev_status_isplaceno"),  cls: "text-kolo-green-700" },
+  };
+  return map[status] ?? { label: status, cls: "" };
+}
 
-function opisPrograma(type: string): string {
+function opisPrograma(type: string, t: (key: string) => string): string {
   const mapa: Record<string, string> = {
-    ZAPOSLJAVNJE:       "Dnevna evidencija radnih aktivnosti · admin odobrava",
-    PODRSKA_MAJKAMA:    "2.000 POEN/dan po detetu · koeficijenti rastu s brojem dece · trajanje 20 god.",
-    PODRSKA_STARIJIMA:  "1.000 + 100 × (godine − 50) POEN/dan · dostupno zadrugarsima 50+",
-    POSEBNA_BRIGA:      "2.000 POEN/dan · invaliditet ili hronična bolest · verifikacija dokumentacijom",
-    SKOLOVANJE:         "Iznos postavlja admin · reverifikacija svakih 6 meseci",
+    ZAPOSLJAVNJE:      t("opis_zaposljavnje"),
+    PODRSKA_MAJKAMA:   t("opis_majkama"),
+    PODRSKA_STARIJIMA: t("opis_starijima"),
+    POSEBNA_BRIGA:     t("opis_posebna_briga"),
+    SKOLOVANJE:        t("opis_skolovanje"),
   };
   return mapa[type] ?? "";
 }

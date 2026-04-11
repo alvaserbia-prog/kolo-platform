@@ -383,7 +383,12 @@
     "ev_status_na_cekanju": "Függőben",
     "ev_status_odobreno": "Jóváhagyva",
     "ev_status_odbijeno": "Elutasítva",
-    "ev_status_isplaceno": "Kifizetve"
+    "ev_status_isplaceno": "Kifizetve",
+    "opis_zaposljavnje": "Napi tevékenységi napló · admin jóváhagyja",
+    "opis_majkama": "2 000 POEN/nap gyermekenként · koefficiensek nőnek a gyermekszámmal · 20 évig",
+    "opis_starijima": "1 000 + 100 × (kor − 50) POEN/nap · szövetkezeti tagoknak 50 felett",
+    "opis_posebna_briga": "2 000 POEN/nap · rokkantság vagy krónikus betegség · dokumentáció szükséges",
+    "opis_skolovanje": "Az összeget az admin állítja be · 6 havonta újraellenőrzés"
   },
   "glasanje": {
     "naslov": "Szavazás",

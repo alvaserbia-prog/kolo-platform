@@ -144,7 +144,7 @@ enum RadnaPrijavaStatus {
 
 model User {
   id                 String    @id @default(uuid())
-  email              String    @unique
+  email              String?   @unique
   passwordHash       String?
   oauthProvider      String?
   oauthId            String?
@@ -162,6 +162,8 @@ model User {
   location           String?
   telefon            String?
   avatar             String?
+  deaktiviranAt      DateTime?
+  pristankiPolitike  PolitikaPrihvatanje[]
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
@@ -198,6 +200,7 @@ model User {
   konverzacije1         Konverzacija[]           @relation("KonvUser1")
   konverzacije2         Konverzacija[]           @relation("KonvUser2")
   porukePoslate         Poruka[]                 @relation("PorukePostavljene")
+  prigovori             PrigovorNaOdluku[]
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
 }
@@ -716,4 +719,65 @@ model Poruka {
   createdAt      DateTime     @default(now())
 
   @@index([konverzacijaId, createdAt])
+}
+
+// ─── Politika privatnosti — verzionisanje i pristanci ────────────────────────
+
+model PolitikaVerzija {
+  id          String                @id @default(uuid())
+  verzija     String                @unique  // npr. "1.0", "1.1"
+  naslov      String
+  efektivnaOd DateTime
+  kreirao     String                // adminId
+  createdAt   DateTime              @default(now())
+  pristanci   PolitikaPrihvatanje[]
+}
+
+model PolitikaPrihvatanje {
+  id        String          @id @default(uuid())
+  userId    String
+  user      User            @relation(fields: [userId], references: [id])
+  verzijaId String
+  verzija   PolitikaVerzija @relation(fields: [verzijaId], references: [id])
+  prihvacen Boolean         @default(true)
+  createdAt DateTime        @default(now())
+
+  @@unique([userId, verzijaId])
+  @@index([userId])
+}
+
+// ─── Verifikacija — odvojeni pristanak za obradu lk/JMBG ─────────────────────
+
+model VerifikacijaPristanak {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  prihvacenAt DateTime @default(now())
+  ipAdresa    String?
+  userAgent   String?
+}
+
+// ─── Prigovor na automatizovanu odluku ───────────────────────────────────────
+
+enum PrigovorStatus {
+  PENDING
+  U_OBRADI
+  RESENO
+  ODBIJENO
+}
+
+model PrigovorNaOdluku {
+  id           String         @id @default(uuid())
+  userId       String
+  user         User           @relation(fields: [userId], references: [id])
+  opis         String
+  tipOdluke    String         // "VERIFIKACIJA" | "SUSPENZIJA" | "PROGRAM" | "OSTALO"
+  status       PrigovorStatus @default(PENDING)
+  odgovor      String?
+  odgovorioId  String?
+  odgovorioAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([userId])
 }

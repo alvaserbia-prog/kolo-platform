@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Predlog {
   id: string;
@@ -23,23 +24,24 @@ interface Props {
 }
 
 export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
+  const t = useTranslations("glasanje");
   const router = useRouter();
   const [showNovi, setShowNovi] = useState(false);
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov">Glasanje</h1>
+        <h1 className="kolo-naslov">{t("naslov")}</h1>
         <div className="flex items-center gap-3">
           {mojaGlasackaMoc > 0 && (
             <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 border border-kolo-gold-400/30 px-3 py-1.5 rounded-xl font-medium">
-              {mojaGlasackaMoc} glasova
+              {t("glasova_badge", { count: mojaGlasackaMoc })}
             </span>
           )}
           {mojaGlasackaMoc > 0 && (
             <button onClick={() => setShowNovi((v) => !v)}
               className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">
-              + Novi predlog
+              {t("novi_predlog")}
             </button>
           )}
         </div>
@@ -47,8 +49,8 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
 
       {mojaGlasackaMoc === 0 && (
         <div className="box-warning text-sm">
-          Za glasanje i kreiranje predloga potrebno je imati aktivnih ZRNA.{" "}
-          <Link href="/zrno" className="underline font-medium">Idite na ZRNO →</Link>
+          {t("nema_zrna")}{" "}
+          <Link href="/zrno" className="underline font-medium">{t("idi_na_zrno")}</Link>
         </div>
       )}
 
@@ -58,7 +60,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
 
       {predlozi.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-          Nema predloga za glasanje.
+          {t("nema_predloga")}
         </div>
       ) : (
         <div className="space-y-3">
@@ -74,6 +76,8 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
 // ── Kartica predloga ──────────────────────────────────────────────────────────
 
 function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGlasackaMoc: number; onRefresh: () => void }) {
+  const t = useTranslations("glasanje");
+  const tc = useTranslations("common");
   const [loading, setLoading] = useState<boolean | null>(null);
   const [poruka, setPoruka] = useState<string | null>(null);
 
@@ -89,7 +93,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
     const data = await res.json();
     setLoading(null);
     if (res.ok) { onRefresh(); }
-    else { setPoruka(data.error ?? "Greška."); }
+    else { setPoruka(data.error ?? tc("greska_ucitavanja")); }
   }
 
   return (
@@ -102,7 +106,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
           </p>
         </div>
         <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${isActive ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
-          {isActive ? "Aktivno" : "Zatvoreno"}
+          {isActive ? t("aktivno") : t("zatvoreno")}
         </span>
       </div>
 
@@ -112,8 +116,8 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
       {ukupno > 0 && (
         <div className="space-y-1">
           <div className="flex justify-between text-xs text-kolo-muted">
-            <span>ZA: {p.zaGlasova} glasova ({zaProc}%)</span>
-            <span>PROTIV: {p.protiGlasova} glasova</span>
+            <span>{t("za_glasova", { count: p.zaGlasova, pct: zaProc })}</span>
+            <span>{t("protiv_glasova", { count: p.protiGlasova })}</span>
           </div>
           <div className="h-2 bg-kolo-bg rounded-full overflow-hidden">
             <div className="h-full bg-kolo-green-1000 rounded-full transition-all" style={{ width: `${zaProc}%` }} />
@@ -124,7 +128,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
       {/* Moj glas */}
       {p.mojGlas !== null && (
         <p className="text-xs text-kolo-gold-600 font-medium">
-          Glasali ste: {p.mojGlas ? "ZA" : "PROTIV"} ({mojaGlasackaMoc} glasova)
+          {t("moj_glas", { glas: p.mojGlas ? t("za") : t("protiv"), moc: mojaGlasackaMoc })}
         </p>
       )}
 
@@ -133,17 +137,17 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
         <div className="flex gap-2">
           <button onClick={() => glasaj(true)} disabled={loading !== null}
             className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${p.mojGlas === true ? "bg-kolo-green-500 text-white" : "border border-kolo-green-500 text-kolo-green-700 hover:bg-kolo-green-100"}`}>
-            {loading === true ? "..." : "ZA"}
+            {loading === true ? "..." : t("za")}
           </button>
           <button onClick={() => glasaj(false)} disabled={loading !== null}
             className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${p.mojGlas === false ? "bg-kolo-danger text-white" : "border border-kolo-danger/30 text-kolo-danger hover:bg-kolo-danger-light"}`}>
-            {loading === false ? "..." : "PROTIV"}
+            {loading === false ? "..." : t("protiv")}
           </button>
         </div>
       )}
 
       {isActive && (
-        <p className="text-xs text-kolo-muted">Rok: {new Date(p.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
+        <p className="text-xs text-kolo-muted">{t("rok")} {new Date(p.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
       )}
 
       {poruka && <p className="text-xs text-kolo-danger">{poruka}</p>}
@@ -154,6 +158,8 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
 // ── Nova predlog forma ────────────────────────────────────────────────────────
 
 function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCancel: () => void }) {
+  const t = useTranslations("glasanje");
+  const tc = useTranslations("common");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -162,9 +168,9 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
 
   async function handleSubmit() {
     setError("");
-    if (title.trim().length < 5) { setError("Naslov mora imati najmanje 5 karaktera."); return; }
-    if (description.trim().length < 20) { setError("Opis mora imati najmanje 20 karaktera."); return; }
-    if (!deadline) { setError("Unesite rok glasanja."); return; }
+    if (title.trim().length < 5) { setError(t("np_greska_naslov")); return; }
+    if (description.trim().length < 20) { setError(t("np_greska_opis")); return; }
+    if (!deadline) { setError(t("np_greska_rok")); return; }
 
     setLoading(true);
     try {
@@ -174,7 +180,7 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
         body: JSON.stringify({ title: title.trim(), description: description.trim(), deadline }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error ?? "Greška."); return; }
+      if (!res.ok) { setError(data.error ?? tc("greska_ucitavanja")); return; }
       onSuccess();
     } finally {
       setLoading(false);
@@ -188,22 +194,22 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-      <p className="text-sm font-semibold text-kolo-muted">Novi predlog</p>
-      <input type="text" placeholder="Naslov *" value={title} onChange={(e) => setTitle(e.target.value)}
+      <p className="text-sm font-semibold text-kolo-muted">{t("novi_predlog_naslov")}</p>
+      <input type="text" placeholder={t("naslov_placeholder")} value={title} onChange={(e) => setTitle(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
-      <textarea rows={3} placeholder="Opis predloga (min 20 karaktera) *" value={description} onChange={(e) => setDescription(e.target.value)}
+      <textarea rows={3} placeholder={t("opis_placeholder")} value={description} onChange={(e) => setDescription(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 resize-none" />
       <div>
-        <label className="block text-xs text-kolo-muted mb-1">Rok glasanja *</label>
+        <label className="block text-xs text-kolo-muted mb-1">{t("rok_glasanja")}</label>
         <input type="date" min={minDate} value={deadline} onChange={(e) => setDeadline(e.target.value)}
           className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
       </div>
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
-        <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Otkaži</button>
+        <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("otkazi")}</button>
         <button onClick={handleSubmit} disabled={loading}
           className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 disabled:opacity-60 transition-colors">
-          {loading ? "..." : "Objavi predlog"}
+          {loading ? "..." : t("objavi")}
         </button>
       </div>
     </div>

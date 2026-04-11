@@ -383,7 +383,12 @@
     "ev_status_na_cekanju": "Pending",
     "ev_status_odobreno": "Approved",
     "ev_status_odbijeno": "Rejected",
-    "ev_status_isplaceno": "Paid"
+    "ev_status_isplaceno": "Paid",
+    "opis_zaposljavnje": "Daily activity record · admin approves",
+    "opis_majkama": "2,000 POEN/day per child · coefficients grow with number of children · 20 years",
+    "opis_starijima": "1,000 + 100 × (age − 50) POEN/day · available to cooperative members 50+",
+    "opis_posebna_briga": "2,000 POEN/day · disability or chronic illness · documentation required",
+    "opis_skolovanje": "Amount set by admin · re-verification every 6 months"
   },
   "glasanje": {
     "naslov": "Voting",

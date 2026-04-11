@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type Konverzacija = {
   id: string;
@@ -22,6 +23,7 @@ type Poruka = {
 };
 
 function PorukeContent() {
+  const t = useTranslations("poruke");
   const router = useRouter();
   const searchParams = useSearchParams();
   const aktivnaKonvId = searchParams.get("k");
@@ -153,7 +155,7 @@ function PorukeContent() {
     });
     if (!res.ok) {
       const d = await res.json();
-      setNovaKonvGreska(d.error ?? "Greška.");
+      setNovaKonvGreska(d.error ?? "—");
       return;
     }
     const data = await res.json();
@@ -195,7 +197,7 @@ function PorukeContent() {
       {/* Leva tabla — lista konverzacija */}
       <div className={`w-full md:w-72 shrink-0 border-r border-kolo-border flex flex-col ${mobilniPrikaz === "chat" ? "hidden md:flex" : "flex"}`}>
         <div className="px-4 py-3 border-b border-kolo-border">
-          <h1 className="text-base font-semibold text-kolo-text">Poruke</h1>
+          <h1 className="text-base font-semibold text-kolo-text">{t("naslov")}</h1>
         </div>
 
         {/* Nova konverzacija — pretraga */}
@@ -207,7 +209,7 @@ function PorukeContent() {
               onChange={(e) => handleNoviKorisnikChange(e.target.value)}
               onFocus={() => noviKorisnik.length >= 2 && setShowSugestije(true)}
               onKeyDown={handleSearchKeyDown}
-              placeholder="Novi chat..."
+              placeholder={t("novi_chat")}
               autoComplete="off"
               className="w-full px-3 py-2 text-xs rounded-xl border border-kolo-border outline-none focus:border-kolo-green-700 transition-colors"
             />
@@ -238,7 +240,7 @@ function PorukeContent() {
         {/* Lista konverzacija */}
         <div className="flex-1 overflow-y-auto">
           {konverzacije.length === 0 ? (
-            <p className="px-4 py-8 text-center text-xs text-kolo-muted">Nema konverzacija.<br />Pretražite korisnika da počnete.</p>
+            <p className="px-4 py-8 text-center text-xs text-kolo-muted whitespace-pre-line">{t("nema_konverzacija")}</p>
           ) : (
             konverzacije.map((k) => (
               <button
@@ -263,7 +265,7 @@ function PorukeContent() {
                 </div>
                 {k.poslednjaPorukaIznos && (
                   <p className="text-xs text-kolo-muted truncate">
-                    {k.poslednjaPosiljacJa ? "Vi: " : ""}{k.poslednjaPorukaIznos}
+                    {k.poslednjaPosiljacJa ? t("vi") : ""}{k.poslednjaPorukaIznos}
                   </p>
                 )}
               </button>
@@ -276,7 +278,7 @@ function PorukeContent() {
       <div className={`flex-1 flex-col min-w-0 ${mobilniPrikaz === "lista" ? "hidden md:flex" : "flex"}`}>
         {!aktivnaKonvId ? (
           <div className="flex-1 flex items-center justify-center">
-            <p className="text-kolo-muted text-sm">Izaberite konverzaciju ili pretražite korisnika.</p>
+            <p className="text-kolo-muted text-sm">{t("izaberite_konverzaciju")}</p>
           </div>
         ) : (
           <>
@@ -303,7 +305,7 @@ function PorukeContent() {
             {/* Poruke */}
             <div className="flex-1 overflow-y-auto px-5 py-4 space-y-2">
               {poruke.length === 0 && (
-                <p className="text-center text-xs text-kolo-muted py-8">Počnite konverzaciju.</p>
+                <p className="text-center text-xs text-kolo-muted py-8">{t("pocnite_konverzaciju")}</p>
               )}
               {poruke.map((p) => (
                 <div key={p.id} className={`flex ${p.moja ? "justify-end" : "justify-start"}`}>
@@ -332,7 +334,7 @@ function PorukeContent() {
                   value={tekst}
                   onChange={(e) => setTekst(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Napišite poruku... (Enter za slanje)"
+                  placeholder={t("napišite_poruku")}
                   maxLength={1000}
                   rows={1}
                   className="flex-1 px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors resize-none leading-relaxed"
@@ -343,7 +345,7 @@ function PorukeContent() {
                   disabled={slanje || !tekst.trim()}
                   className="px-4 py-2.5 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors disabled:opacity-50 shrink-0"
                 >
-                  {slanje ? "..." : "Pošalji"}
+                  {slanje ? t("saljem") : t("posalji")}
                 </button>
               </form>
             </div>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
 
@@ -29,6 +30,8 @@ interface ProfilProps {
 }
 
 export default function ProfilKlijent({ user }: ProfilProps) {
+  const t = useTranslations("profil");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
   const [avatarLoading, setAvatarLoading] = useState(false);
@@ -122,7 +125,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     setCropSrc(null);
 
     if (base64.length > 150_000) {
-      setAvatarError("Slika je prevelika. Pokušaj sa manjom slikom.");
+      setAvatarError(t("foto_napomena"));
       setAvatarLoading(false);
       return;
     }
@@ -134,7 +137,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     setAvatarLoading(false);
-    if (!res.ok) { setAvatarError(data.error ?? "Greška pri čuvanju."); return; }
+    if (!res.ok) { setAvatarError(data.error ?? tc("greska_ucitavanja")); return; }
     setAvatar(base64);
     window.dispatchEvent(new CustomEvent("avatar-updated", { detail: base64 }));
   }
@@ -142,7 +145,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   async function promeniPseudonim(e: React.FormEvent) {
     e.preventDefault();
     setPsError(""); setPsSuccess("");
-    if (noviPseudonim.length < 3) { setPsError("Minimalno 3 karaktera."); return; }
+    if (noviPseudonim.length < 3) { setPsError(t("ps_min_3")); return; }
     const res = await fetch("/api/profil/pseudonim", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -150,14 +153,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     if (!res.ok) { setPsError(data.error); return; }
-    setPsSuccess("Pseudonim promenjen. Odjavljujemo vas...");
+    setPsSuccess(t("ps_uspeh"));
     setTimeout(() => signOut({ callbackUrl: "/login" }), 1500);
   }
 
   async function promeniLozinku(e: React.FormEvent) {
     e.preventDefault();
     setLzError(""); setLzSuccess("");
-    if (novaLozinka.length < 8) { setLzError("Lozinka mora imati najmanje 8 karaktera."); return; }
+    if (novaLozinka.length < 8) { setLzError(t("lz_greska_duljina")); return; }
     const res = await fetch("/api/profil/lozinka", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -165,7 +168,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     if (!res.ok) { setLzError(data.error); return; }
-    setLzSuccess("Lozinka promenjena."); setStaraLozinka(""); setNovaLozinka("");
+    setLzSuccess(t("lz_uspeh")); setStaraLozinka(""); setNovaLozinka("");
   }
 
   async function sacuvajPodatke(e: React.FormEvent) {
@@ -179,8 +182,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     setPodaciLoading(false);
-    if (!res.ok) { setPodaciError(data.error ?? "Greška pri čuvanju."); return; }
-    setPodaciSuccess("Sačuvano.");
+    if (!res.ok) { setPodaciError(data.error ?? tc("greska_ucitavanja")); return; }
+    setPodaciSuccess(t("sacuvano"));
     router.refresh();
   }
 
@@ -195,25 +198,25 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     setLocLoading(false);
-    if (!res.ok) { setLocError(data.error ?? "Greška pri čuvanju."); return; }
-    setLocSuccess("Sačuvano.");
+    if (!res.ok) { setLocError(data.error ?? tc("greska_ucitavanja")); return; }
+    setLocSuccess(t("sacuvano"));
     router.refresh();
   }
 
   const roleLabel: Record<string, string> = {
-    FIZICKO_LICE: "Fizičko lice",
-    ZADRUGAR: "Zadrugar",
-    ADMIN: "Administrator",
+    FIZICKO_LICE: t("uloga_fizicko"),
+    ZADRUGAR: t("uloga_zadrugar"),
+    ADMIN: t("uloga_admin"),
   };
 
   return (
     <div className="space-y-6">
-      <h1 className="kolo-naslov">Profil</h1>
+      <h1 className="kolo-naslov">{t("naslov")}</h1>
 
       {/* Profilna slika + Osnovni podaci — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col items-center gap-5">
-          <h2 className="text-base font-semibold text-kolo-muted self-start">Profilna slika</h2>
+          <h2 className="text-base font-semibold text-kolo-muted self-start">{t("profilna_slika")}</h2>
           <div className="w-56 h-56 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
             {avatar ? (
               // eslint-disable-next-line @next/next/no-img-element
@@ -231,7 +234,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 <polyline points="17 8 12 3 7 8"/>
                 <line x1="12" y1="3" x2="12" y2="15"/>
               </svg>
-              {avatarLoading ? "Čuvam..." : "Postavi sliku"}
+              {avatarLoading ? t("cuvam_sliku") : t("postavi_sliku")}
               <input
                 type="file"
                 accept="image/*"
@@ -240,64 +243,64 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 onChange={selectAvatar}
               />
             </label>
-            <p className="text-xs text-kolo-muted text-center">JPG, PNG, WebP — iseca se na kvadrat</p>
+            <p className="text-xs text-kolo-muted text-center">{t("foto_napomena")}</p>
             {avatarError && <p className="text-sm text-kolo-danger text-center">{avatarError}</p>}
           </div>
         </div>
 
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Osnovni podaci</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("osnovi_podaci")}</h2>
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Pseudonim</dt>
+              <dt className="text-kolo-muted">{t("pseudonim_label")}</dt>
               <dd className="font-medium text-kolo-text">{user.pseudonim}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Email</dt>
+              <dt className="text-kolo-muted">{t("email_label")}</dt>
               <dd className="text-kolo-muted">{user.email}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Uloga</dt>
+              <dt className="text-kolo-muted">{t("uloga_label")}</dt>
               <dd className="text-kolo-muted">{roleLabel[user.role] ?? user.role}</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Status</dt>
+              <dt className="text-kolo-muted">{t("status_label")}</dt>
               <dd>
                 {user.verified ? (
-                  <span className="text-kolo-green-700 font-medium">Verifikovan</span>
+                  <span className="text-kolo-green-700 font-medium">{t("status_verifikovan")}</span>
                 ) : (
-                  <span className="text-kolo-gold-600 font-medium">Čeka verifikaciju</span>
+                  <span className="text-kolo-gold-600 font-medium">{t("status_ceka")}</span>
                 )}
               </dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">POEN stanje</dt>
+              <dt className="text-kolo-muted">{t("poen_stanje_label")}</dt>
               <dd className="font-bold text-kolo-green-700">{user.balance.toLocaleString()} POEN</dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Referral kod</dt>
+              <dt className="text-kolo-muted">{t("referral_kod_label")}</dt>
               <dd className="font-mono text-kolo-text bg-kolo-bg px-2 py-0.5 rounded">{user.referralCode}</dd>
             </div>
             {user.punoIme && (
               <div className="flex justify-between">
-                <dt className="text-kolo-muted">Ime i prezime</dt>
+                <dt className="text-kolo-muted">{t("ime_prezime_label")}</dt>
                 <dd className="text-kolo-muted">{user.punoIme}</dd>
               </div>
             )}
             {user.location && (
               <div className="flex justify-between">
-                <dt className="text-kolo-muted">Lokacija</dt>
+                <dt className="text-kolo-muted">{t("lokacija_label")}</dt>
                 <dd className="text-kolo-muted">{user.location}</dd>
               </div>
             )}
             {user.telefon && (
               <div className="flex justify-between">
-                <dt className="text-kolo-muted">Telefon</dt>
+                <dt className="text-kolo-muted">{t("telefon_label")}</dt>
                 <dd className="text-kolo-muted">{user.telefon}</dd>
               </div>
             )}
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Registrovan</dt>
+              <dt className="text-kolo-muted">{t("registrovan_label")}</dt>
               <dd className="text-kolo-muted">{new Date(user.createdAt).toLocaleDateString("sr-RS")}</dd>
             </div>
           </dl>
@@ -307,26 +310,26 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       {/* Ime i prezime + Lokacija i kontakt — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Ime i prezime</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("ime_prezime_sekcija")}</h2>
           <form onSubmit={sacuvajPodatke} className="space-y-3">
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">Puno ime <span className="text-kolo-muted">(opciono)</span></label>
+              <label className="block text-sm text-kolo-muted mb-1.5">{t("puno_ime")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
               <input
                 type="text"
                 value={punoIme}
                 onChange={(e) => setPunoIme(e.target.value)}
-                placeholder="npr. Marko Marković"
+                placeholder={t("puno_ime_placeholder")}
                 maxLength={100}
                 className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
             </div>
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">Opis / zanimanje <span className="text-kolo-muted">(opciono)</span></label>
+              <label className="block text-sm text-kolo-muted mb-1.5">{t("opis_zanimanje")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
               <input
                 type="text"
                 value={opis}
                 onChange={(e) => setOpis(e.target.value)}
-                placeholder="npr. Stolar, programer, učenik..."
+                placeholder={t("opis_placeholder")}
                 maxLength={200}
                 className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
@@ -338,25 +341,25 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               disabled={podaciLoading}
               className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
             >
-              {podaciLoading ? "Čuvam..." : "Sačuvaj"}
+              {podaciLoading ? tc("cuvam") : tc("sacuvaj")}
             </button>
           </form>
         </div>
 
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Lokacija i kontakt</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("lokacija_kontakt")}</h2>
           <form onSubmit={sacuvajLokaciju} className="space-y-3">
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">Mesto <span className="text-kolo-muted">(opciono)</span></label>
+              <label className="block text-sm text-kolo-muted mb-1.5">{t("mesto")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
               <LokacijaSearch value={location} onChange={setLocation} />
             </div>
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">Telefon <span className="text-kolo-muted">(opciono)</span></label>
+              <label className="block text-sm text-kolo-muted mb-1.5">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
               <input
                 type="tel"
                 value={telefon}
                 onChange={(e) => setTelefon(e.target.value)}
-                placeholder="npr. +381 60 123 4567"
+                placeholder={t("telefon_placeholder")}
                 className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
             </div>
@@ -367,7 +370,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               disabled={locLoading}
               className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
             >
-              {locLoading ? "Čuvam..." : "Sačuvaj"}
+              {locLoading ? tc("cuvam") : tc("sacuvaj")}
             </button>
           </form>
         </div>
@@ -376,14 +379,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       {/* Promena pseudonima + Promena lozinke — jedno pored drugog */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Promena pseudonima</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("promena_pseudonima")}</h2>
           {mozeMenjatiPseudonim ? (
             <form onSubmit={promeniPseudonim} className="space-y-3">
               <input
                 type="text"
                 minLength={3}
                 maxLength={30}
-                placeholder="Novi pseudonim"
+                placeholder={t("novi_pseudonim")}
                 value={noviPseudonim}
                 onChange={(e) => setNoviPseudonim(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
@@ -391,32 +394,32 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               {psError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{psError}</p>}
               {psSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{psSuccess}</p>}
               <button type="submit" className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
-                Promeni pseudonim
+                {t("promeni_pseudonim")}
               </button>
             </form>
           ) : (
             <p className="text-sm text-kolo-muted">
-              Pseudonim možete menjati jednom u 30 dana.{" "}
+              {t("pseudonim_30_dana")}{" "}
               {user.pseudonimChangedAt && (
-                <>Sledeća promena moguća: {new Date(new Date(user.pseudonimChangedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("sr-RS")}.</>
+                <>{t("sledeca_promena")} {new Date(new Date(user.pseudonimChangedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("sr-RS")}.</>
               )}
             </p>
           )}
         </div>
 
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">Promena lozinke</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("promena_lozinke")}</h2>
           <form onSubmit={promeniLozinku} className="space-y-3">
             <input
               type="password"
-              placeholder="Trenutna lozinka"
+              placeholder={t("trenutna_lozinka")}
               value={staraLozinka}
               onChange={(e) => setStaraLozinka(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
             />
             <input
               type="password"
-              placeholder="Nova lozinka (min. 8 karaktera)"
+              placeholder={t("nova_lozinka")}
               value={novaLozinka}
               onChange={(e) => setNovaLozinka(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
@@ -424,7 +427,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             {lzError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{lzError}</p>}
             {lzSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{lzSuccess}</p>}
             <button type="submit" className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
-              Promeni lozinku
+              {t("promeni_lozinku")}
             </button>
           </form>
         </div>
@@ -434,7 +437,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       {cropSrc && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl max-w-full">
-            <p className="text-sm text-kolo-muted">Pomeri krug da označiš kadar</p>
+            <p className="text-sm text-kolo-muted">{t("crop_opis")}</p>
             <div
               className="relative cursor-grab active:cursor-grabbing rounded-xl overflow-hidden select-none"
               style={{ width: cropDisplay.w, height: cropDisplay.h }}
@@ -474,14 +477,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 onClick={() => { URL.revokeObjectURL(cropSrc); setCropSrc(null); }}
                 className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
               >
-                Otkaži
+                {tc("otkazi")}
               </button>
               <button
                 onClick={confirmCrop}
                 disabled={avatarLoading}
                 className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
               >
-                {avatarLoading ? "Čuvam..." : "Potvrdi"}
+                {avatarLoading ? tc("cuvam") : tc("potvrdi")}
               </button>
             </div>
           </div>
@@ -495,8 +498,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       >
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-sm font-semibold text-kolo-text">Moji oglasi</p>
-            <p className="text-xs text-kolo-muted mt-0.5">Pregled aktivnih i prodatih oglasa</p>
+            <p className="text-sm font-semibold text-kolo-text">{t("moji_oglasi")}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("moji_oglasi_opis")}</p>
           </div>
           <span className="text-kolo-border">→</span>
         </div>
