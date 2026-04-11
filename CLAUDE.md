@@ -62,7 +62,7 @@ docs/             — dokumentacija po fazama
 - Registracija sa pseudonimom, email, lozinka, referral kod
 - Login (NextAuth credentials)
 - Verifikacija korisnika — admin ručno verifikuje (upload dokumenata ili lično); slike se čuvaju kao base64 u bazi
-- Profil: pseudonim, lokacija (autocomplete), telefon, punoIme (u tabeli `UserPodaci`)
+- Profil: pseudonim, lokacija (autocomplete), telefon, punoIme, opis/zanimanje (opciono, max 200 znakova) — sve u tabeli `UserPodaci`; upload profilne slike sa crop modalom
 - Javni profil `/profil/[id]` — prikazuje pseudonim, lokaciju, zadrugu, datum; skriva email/balans/pravo ime
 - Suspenzija / isključenje korisnika (admin)
 
@@ -178,7 +178,7 @@ docs/             — dokumentacija po fazama
 - `PATCH /api/profil/pseudonim`
 - `PATCH /api/profil/lozinka`
 - `PATCH /api/profil/lokacija`
-- `PATCH /api/profil/podaci` — punoIme (UserPodaci tabela)
+- `PATCH /api/profil/podaci` — punoIme, opis (UserPodaci tabela)
 - `GET /api/profil/balans`
 - `GET /api/korisnici/pretraga` — vraća `[{ id, pseudonim, verified, location }]`
 - `GET /api/m/[hash]/pseudonim`
