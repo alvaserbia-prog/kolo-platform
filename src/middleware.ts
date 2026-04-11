@@ -1,8 +1,13 @@
+import createMiddleware from "next-intl/middleware";
 import { withAuth } from "next-auth/middleware";
+import { routing } from "@/i18n/routing";
 import { NextResponse } from "next/server";
+import type { NextRequestWithAuth } from "next-auth/middleware";
 
-export default withAuth(
-  function middleware(req) {
+const intl = createMiddleware(routing);
+
+const authMiddleware = withAuth(
+  function middleware(req: NextRequestWithAuth) {
     const { pathname } = req.nextUrl;
     const token = req.nextauth.token;
 
@@ -10,7 +15,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    return NextResponse.next();
+    return intl(req);
   },
   {
     callbacks: {
@@ -28,6 +33,10 @@ export default withAuth(
     },
   }
 );
+
+export default function middleware(req: NextRequestWithAuth) {
+  return authMiddleware(req);
+}
 
 export const config = {
   matcher: [
