@@ -1,52 +1,44 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { routing } from "./i18n/routing";
+import { withAuth } from "next-auth/middleware";
+import { routing } from "@/i18n/routing";
+import { NextResponse } from "next/server";
 
-const JAVNE_RUTE = ["/", "/pijaca", "/kako-funkcionise", "/uslovi", "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji"];
+export default withAuth(
+  function middleware(req) {
+    const { pathname } = req.nextUrl;
+    const token = req.nextauth.token;
 
-const PRESKOCI = [
-  "/login", "/registracija", "/oauth",
-  "/api/auth", "/api/registracija", "/api/oauth",
-  "/api/javno", "/api/provjeri-pseudonim", "/api/m",
-  "/_next", "/favicon.ico", "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png",
-];
-
-export default async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-
-  // Preskoci staticke fajlove i API rute
-  if (pathname.startsWith("/api/") || PRESKOCI.some((r) => pathname.startsWith(r))) {
-    return NextResponse.next();
-  }
-
-  const isJavna = JAVNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"));
-
-  if (!isJavna) {
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-
-    if (!token) {
-      const loginUrl = new URL("/login", req.url);
-      loginUrl.searchParams.set("callbackUrl", pathname);
-      return NextResponse.redirect(loginUrl);
-    }
-
-    if (pathname.startsWith("/admin") && token.role !== "ADMIN") {
+    if (pathname.startsWith("/admin") && token?.role !== "ADMIN") {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
+
+    const localeCookie = req.cookies.get("NEXT_LOCALE")?.value;
+    const locale = routing.locales.includes(localeCookie as (typeof routing.locales)[number])
+      ? localeCookie!
+      : routing.defaultLocale;
+
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("X-NEXT-INTL-LOCALE", locale);
+    return NextResponse.next({ request: { headers: requestHeaders } });
+  },
+  {
+    callbacks: {
+      authorized: ({ token, req }) => {
+        const { pathname } = req.nextUrl;
+        const javneRute = [
+          "/", "/pijaca", "/kako-funkcionise", "/uslovi",
+          "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji",
+        ];
+        if (javneRute.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
+          return true;
+        }
+        return !!token;
+      },
+    },
   }
-
-  // Postavi locale iz NEXT_LOCALE kolacica kao request header koji next-intl cita
-  const localeCookie = req.cookies.get("NEXT_LOCALE")?.value;
-  const locale = routing.locales.includes(localeCookie as (typeof routing.locales)[number])
-    ? localeCookie!
-    : routing.defaultLocale;
-
-  const requestHeaders = new Headers(req.headers);
-  requestHeaders.set("X-NEXT-INTL-LOCALE", locale);
-
-  return NextResponse.next({ request: { headers: requestHeaders } });
-}
+);
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png).*)"],
+  matcher: [
+    "/((?!login|registracija|oauth|api/auth|api/registracija|api/oauth|api/javno|api/provjeri-pseudonim|api/m|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png).*)",
+  ],
 };
