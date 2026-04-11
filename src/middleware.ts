@@ -1,5 +1,4 @@
 import { withAuth } from "next-auth/middleware";
-import { routing } from "@/i18n/routing";
 import { NextResponse } from "next/server";
 
 export default withAuth(
@@ -11,14 +10,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
 
-    const localeCookie = req.cookies.get("NEXT_LOCALE")?.value;
-    const locale = routing.locales.includes(localeCookie as (typeof routing.locales)[number])
-      ? localeCookie!
-      : routing.defaultLocale;
-
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("X-NEXT-INTL-LOCALE", locale);
-    return NextResponse.next({ request: { headers: requestHeaders } });
+    return NextResponse.next();
   },
   {
     callbacks: {
