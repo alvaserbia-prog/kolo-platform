@@ -136,6 +136,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     setAvatarLoading(false);
     if (!res.ok) { setAvatarError(data.error ?? "Greška pri čuvanju."); return; }
     setAvatar(base64);
+    window.dispatchEvent(new CustomEvent("avatar-updated", { detail: base64 }));
   }
 
   async function promeniPseudonim(e: React.FormEvent) {

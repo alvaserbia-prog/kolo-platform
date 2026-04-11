@@ -110,6 +110,14 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
   }, [userId]);
 
   useEffect(() => {
+    function onAvatarUpdated(e: Event) {
+      setAvatar((e as CustomEvent<string>).detail);
+    }
+    window.addEventListener("avatar-updated", onAvatarUpdated);
+    return () => window.removeEventListener("avatar-updated", onAvatarUpdated);
+  }, []);
+
+  useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
     }
