@@ -49,11 +49,11 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         </div>
 
         {/* Desna strana: balans + poruke + notifikacije + profil */}
-        <div className="flex items-center gap-0 px-4">
+        <div className="flex items-center gap-3 px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
-              <div className="w-px h-4 bg-white/20 mx-1" />
+              <div className="w-px h-4 bg-white/20" />
               {/* Poruke ikonica */}
               <Link
                 href="/poruke"
@@ -67,12 +67,10 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               {/* Notifikacije */}
               <BellNotifikacije />
               {/* Profilni krug */}
-              <div className="ml-1.5">
-                <ProfilMeni
-                  userId={session.user.id}
-                  pseudonim={session.user.pseudonim}
-                />
-              </div>
+              <ProfilMeni
+                userId={session.user.id}
+                pseudonim={session.user.pseudonim}
+              />
             </>
           ) : (
             <span className="text-white/50 text-sm">Učitavam...</span>
@@ -94,8 +92,8 @@ function BalansHeader({ userId }: { userId: string }) {
   }, [userId]);
 
   return (
-    <span className="text-white/60 text-xl hidden sm:inline">
-      <span className="font-semibold text-white text-xl">
+    <span className="text-white/60 text-sm hidden sm:inline">
+      <span className="font-semibold text-white text-sm">
         {balans === null ? "..." : balans.toLocaleString("sr-RS")}
       </span>{" "}
       POEN
