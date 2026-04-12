@@ -3,6 +3,20 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import GlasanjeKlijent from "@/app/(app)/glasanje/GlasanjeKlijent";
+
+interface Predlog {
+  id: string;
+  title: string;
+  description: string;
+  authorPseudonim: string;
+  deadline: string;
+  status: "ACTIVE" | "CLOSED";
+  zaGlasova: number;
+  protiGlasova: number;
+  mojGlas: boolean | null;
+  createdAt: string;
+}
 
 interface Props {
   slobodno: number;
@@ -17,6 +31,7 @@ interface Props {
   statusZahtevi: { kolicina: number; akcija: string }[];
   delegacija: { delegatPseudonim: string; aktivna: boolean } | null;
   poslednjiKursovi: { date: string; kurs: number }[];
+  predlozi: Predlog[];
 }
 
 type Tab = "pregled" | "trziste" | "glasanje";
@@ -90,6 +105,12 @@ export default function ZrnoKlijent(props: Props) {
       {tab === "pregled" && <PregledTab {...props} onRefresh={() => router.refresh()} />}
       {tab === "trziste" && <TrzisteTab {...props} onRefresh={() => router.refresh()} />}
       {tab === "glasanje" && <DelegacijaTab {...props} onRefresh={() => router.refresh()} />}
+
+      {/* Razdvajač */}
+      <div className="border-t border-kolo-border pt-2" />
+
+      {/* Glasanje sekcija */}
+      <GlasanjeKlijent predlozi={props.predlozi} mojaGlasackaMoc={props.glasackaMoc} />
     </div>
   );
 }
