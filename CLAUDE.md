@@ -24,6 +24,13 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) se izvršavaju u ponoć.
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet.
 7. **Dnevni limit programa Banke**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Banke).
+8. **Gradirana vidljivost podataka po ulozi**:
+   - Neverifikovan prijavljen korisnik vidi: (a) agregatni feed transakcija bez identifikatora strana — vreme, iznos, tip, oznaka programa Banke; opis samo za emisije Banke, ne za P2P transfere; (b) sopstvenu potpunu istoriju sa pseudonimima protivstrana; (c) zadruge (naziv, lokacija, broj članova, projekti, bonusi); (d) sistemske agregate (opticaj, kurs ZRNA, broj članova, broj transakcija, zero-sum); (e) javnu rang-listu pokrovitelja; (f) sopstvene notifikacije sa pseudonimima protivstrana.
+   - Neverifikovan prijavljen korisnik ne vidi: pseudonime u tuđim transakcijama; rang-liste članova (donacije, preporuke); profile drugih članova; sadržaj poruka; identitet prodavca na Pijaci.
+   - Neverifikovan prijavljen korisnik ne može: slati niti primati poruke; kupovati niti prodavati na Pijaci; otvarati profile drugih korisnika (redirect na poruku o verifikaciji).
+   - Pijaca za neverifikovanog = isti nivo kao za neprijavljenog posetioca: oglasi, opisi, lokacije — bez pseudonima prodavca i bez dugmeta "Kontaktiraj prodavca".
+   - Pretraga članova za neverifikovanog: dostupna isključivo u kontekstu forme za slanje POENA, vraća `{ id, pseudonim }`. Za verifikovanog vraća `{ id, pseudonim, verified, location }`.
+   - Verifikacija je sticanje prava na uvid u tuđe pseudonimne podatke, ne pravo na sakrivanje sopstvenih.
 
 ## Konvencije koda
 
@@ -38,7 +45,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 - API rute: srpski termini.
 - Route handleri sa dinamičkim segmentima: params je `Promise<{id: string}>`, mora se `await params`.
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
-- `/api/korisnici/pretraga` vraća array objekata `{ id, pseudonim, verified, location }` direktno (ne `{ rezultati: [...] }`).
+- `/api/korisnici/pretraga` vraća `{ id, pseudonim, verified, location }` za verifikovane korisnike; `{ id, pseudonim }` za neverifikovane (dostupna isključivo u kontekstu forme za slanje POENA).
 - Zaokruživanje POEN-a u emisijama (donacije, programi, bonusi): `Math.round()`.
 - Zaokruživanje u ZRNO konverzijama: uvek u korist Banke — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
 - Slike za verifikaciju: čuvaju se kao base64 string u bazi (ne filesystem) — Vercel kompatibilnost.
@@ -132,17 +139,17 @@ docs/             — dokumentacija po fazama
 ### Pokrovitelji
 - Pokrovitelj = pravno lice, nema login, ima vlasnika (verifikovani član)
 - Admin kreira pokrovitelja (naziv, PIB, vlasnikId, zadrugaId?)
-- Admin evidentira doprinos u RSD → vlasnik dobija:
-  1. **Donaciju 1:1** — `Math.round(rsdIznos)` POEN
-  2. **Nivo bonuse** — za svaki novi nivo koji je prešao
+- Admin evidentira doprinos u RSD → vlasnik dobija bonus POEN: nivoi (1-2-5 skala) + 1:1 donacija
 - Nivo 1 (prvi doprinos): 20.000 POEN; Nivo 2+: prag u RSD = bonus u POEN (1-2-5 skala, bez gornje granice)
-- Pragovi: 50k, 100k, 200k, 500k, 1M, 2M, 5M, ... RSD
-- Primer: prva donacija 100.000 RSD → 20.000 (n1) + 50.000 (n2) + 100.000 (n3) + 100.000 (1:1) = 270.000 POEN
+- Sve se emituje kao **jedna transakcija** sa opisom `"Bonus za pokroviteljstvo iznos X"`
 - Javna stranica: `/pokrovitelji`, app stranica: `/postani-pokrovitelj`
 - Logika: `src/lib/banka/pokrovitelj.ts`
 
 ### Donacije
 - Donacije fizičkih lica Fondaciji (RSD), admin potvrđuje, emisija POEN-a
+- Rang tabela 18 nivoa (kurs 1,00× do 5,00×) — kumulativna donacija određuje nivo, kurs tog nivoa primenjuje se na celu novu donaciju; zaokruživanje sa `Math.round()`
+- Jedna transakcija sa opisom `"Bonus za donaciju iznos X"`
+- Logika: `src/lib/banka/donacija.ts` → `izracunajBonusZaDonaciju()`
 
 ### Preporuke
 - Referral sistem, nagrade po tabeli
@@ -303,7 +310,7 @@ docs/             — dokumentacija po fazama
 - `banka/emisija.ts` — `emitujPoen()`: emisija POEN-a iz Banke, zero-sum validacija
 - `banka/programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
 - `banka/pokrovitelj.ts` — `evidentirajDoprinos()`, generator pragova 1-2-5, `bonusZaNivo()`
-- `banka/donacija.ts` — logika donacija, kurs POEN/RSD
+- `banka/donacija.ts` — `izracunajBonusZaDonaciju()`, `evidentirajDonaciju()`: fiksni pragovi, nema kurs
 - `banka/zadruga.ts` — bonus zadruge pri osnivanju (50.000 POEN)
 - `banka/zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA
 - `notifikacije.ts` — `posaljiNotifikaciju(userId, tip, naslov, tekst, link?)`
