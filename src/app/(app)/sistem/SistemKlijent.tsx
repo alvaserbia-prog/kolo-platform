@@ -214,30 +214,30 @@ export default function SistemKlijent({
           podnaslov={t("kartica_tx_opis", { count: transakcije.length })}
         />
 
-        {/* Emisija za programe */}
+        {/* Opticaj programa */}
         <button
-          onClick={() => setSekcija("pregled")}
+          onClick={() => setSekcija("programi")}
           className={`rounded-2xl p-5 text-left transition-all border ${
-            sekcija === "pregled"
+            sekcija === "programi"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
           }`}
         >
-          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
-            Emisija za programe
+          <p className={`text-base font-semibold mb-1 ${sekcija === "programi" ? "text-white/70" : "text-kolo-muted"}`}>
+            Opticaj programa
           </p>
-          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
             {danasEmitovano.toLocaleString("sr-RS")}
           </p>
           {danasLimit > 0 && (
             <>
-              <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+              <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "programi" ? "bg-white/20" : "bg-kolo-bg"}`}>
                 <div
-                  className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+                  className={`h-1.5 rounded-full transition-all ${sekcija === "programi" ? "bg-white/70" : "bg-kolo-green-500"}`}
                   style={{ width: `${Math.min(100, Math.round((danasEmitovano / danasLimit) * 100))}%` }}
                 />
               </div>
-              <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+              <p className={`text-xs mt-1 ${sekcija === "programi" ? "text-white/60" : "text-kolo-muted"}`}>
                 {Math.round((danasEmitovano / danasLimit) * 100)}% dnevnog limita
               </p>
             </>
