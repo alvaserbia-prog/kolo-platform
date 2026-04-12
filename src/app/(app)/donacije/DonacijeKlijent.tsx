@@ -28,6 +28,15 @@ interface DonacijeData {
   rangTabela: RangRed[];
 }
 
+interface Pokrovitelj {
+  id: string;
+  naziv: string;
+  adresa: string | null;
+  zadruga: { name: string } | null;
+  rsdKumulativ: number;
+  trenutniNivo: number;
+}
+
 // Poziv na broj = jedinstven za svakog člana (generisan od strane platforme)
 // Za sada koristimo referralCode kao poziv na broj dok se ne definiše finalni format
 const FONDACIJA_RACUN = "840-123456789-00"; // Placeholder — zameniti pre Beta faze
@@ -38,12 +47,16 @@ export default function DonacijeKlijent() {
   const [data, setData] = useState<DonacijeData | null>(null);
   const [loading, setLoading] = useState(true);
   const [kopirano, setKopirano] = useState(false);
+  const [pokrovitelji, setPokrovitelji] = useState<Pokrovitelj[]>([]);
 
   useEffect(() => {
     fetch("/api/donacije")
       .then((r) => r.json())
       .then(setData)
       .finally(() => setLoading(false));
+    fetch("/api/pokrovitelji")
+      .then((r) => r.json())
+      .then(setPokrovitelji);
   }, []);
 
   if (loading) return <div className="max-w-xl mx-auto py-12 text-center text-kolo-muted text-sm">{tc("ucitavanje")}</div>;
@@ -189,6 +202,42 @@ export default function DonacijeKlijent() {
         >
           Saznaj više o pokroviteljstvu →
         </Link>
+      </div>
+
+      {/* Ranglista pokrovitelja */}
+      <div>
+        <h2 className="text-base font-semibold text-kolo-text mb-3">Ranglista pokrovitelja</h2>
+        {pokrovitelji.length === 0 ? (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+            Još uvek nema registrovanih pokrovitelja.
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden">
+            {pokrovitelji.map((p, i) => (
+              <div
+                key={p.id}
+                className={`px-4 py-3 flex items-center gap-3 ${i < pokrovitelji.length - 1 ? "border-b border-kolo-border" : ""}`}
+              >
+                <div className="text-sm font-semibold text-kolo-muted w-5 text-right shrink-0">{i + 1}.</div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-kolo-text">{p.naziv}</p>
+                  {(p.adresa || p.zadruga) && (
+                    <p className="text-xs text-kolo-muted mt-0.5">
+                      {p.adresa && <span>{p.adresa}</span>}
+                      {p.zadruga && <span className={p.adresa ? " · " : ""}>{p.zadruga.name}</span>}
+                    </p>
+                  )}
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="text-sm font-semibold text-kolo-green-700">Nivo {p.trenutniNivo}</p>
+                  <p className="text-xs text-kolo-muted mt-0.5">
+                    {p.rsdKumulativ.toLocaleString("sr-RS")} RSD
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Istorija donacija */}
