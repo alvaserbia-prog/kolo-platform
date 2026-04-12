@@ -182,8 +182,8 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* 6 kartica 3×2 */}
-      <div className="grid grid-cols-3 gap-4">
+      {/* 8 kartica 4×2 */}
+      <div className="grid grid-cols-4 gap-4">
         {/* Članovi */}
         <Kartica
           aktivan={sekcija === "clanovi"}
@@ -213,6 +213,36 @@ export default function SistemKlijent({
           danas={danasTransakcija}
           podnaslov={t("kartica_tx_opis", { count: transakcije.length })}
         />
+
+        {/* Emisija za programe */}
+        <button
+          onClick={() => setSekcija("pregled")}
+          className={`rounded-2xl p-5 text-left transition-all border ${
+            sekcija === "pregled"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+            Emisija za programe
+          </p>
+          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+            {danasEmitovano.toLocaleString("sr-RS")}
+          </p>
+          {danasLimit > 0 && (
+            <>
+              <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+                <div
+                  className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+                  style={{ width: `${Math.min(100, Math.round((danasEmitovano / danasLimit) * 100))}%` }}
+                />
+              </div>
+              <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+                {Math.round((danasEmitovano / danasLimit) * 100)}% dnevnog limita
+              </p>
+            </>
+          )}
+        </button>
 
         {/* Opticaj */}
         <button
@@ -268,6 +298,37 @@ export default function SistemKlijent({
           danas={danasIznosTx}
           podnaslov="POEN između članova"
         />
+
+        {/* Zdravlje sistema */}
+        <div className="rounded-2xl p-5 text-left border bg-white border-kolo-border">
+          <p className="text-base font-semibold mb-2 text-kolo-muted">Zdravlje sistema</p>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${zeroSum ? "bg-kolo-green-100 text-kolo-green-700" : "bg-red-100 text-red-600"}`}>
+                {zeroSum ? "✓" : "✗"}
+              </span>
+              <span className={`text-sm ${zeroSum ? "text-kolo-text" : "text-kolo-danger"}`}>
+                {zeroSum ? "Zero-sum OK" : "Zero-sum greška"}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center text-xs font-bold shrink-0">
+                {aktivniProgrami}
+              </span>
+              <span className="text-sm text-kolo-text">
+                {aktivniProgrami === 1 ? "aktivan program" : aktivniProgrami >= 2 && aktivniProgrami <= 4 ? "aktivna programa" : "aktivnih programa"}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-kolo-info-light text-kolo-info flex items-center justify-center text-xs font-bold shrink-0">
+                {verifikovanih}
+              </span>
+              <span className="text-sm text-kolo-text">
+                verifikovanih članova
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Separator */}
