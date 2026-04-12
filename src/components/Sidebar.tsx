@@ -49,8 +49,6 @@ function SidebarContent({
     { href: "/sistem", label: t("pocetna") },
     { href: "/novcanik", label: t("novcanik") },
     { href: "/pijaca", label: t("pijaca") },
-    { href: "/zajednica", label: t("zajednica") },
-    { href: "/zaposljavnje", label: t("zaposljavnje") },
     { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
   ];
@@ -95,9 +93,6 @@ function SidebarContent({
               }`}
             >
               <span>{label}</span>
-              {count > 0 && (
-                <span className="text-xs font-semibold text-kolo-green-400">({count})</span>
-              )}
             </Link>
           );
         })}
