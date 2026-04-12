@@ -40,10 +40,10 @@ export default async function Home() {
       <PublicHeader />
 
       {/* ── SADRŽAJ ────────────────────────────────────────────────── */}
-      <div className="max-w-4xl mx-auto px-6 py-12 space-y-10 pb-20">
+      <div className="max-w-4xl mx-auto px-6 py-8 space-y-6 pb-20">
 
         {/* HERO */}
-        <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
+        <section className="bg-kolo-green-900 rounded-2xl p-6 md:p-8 text-white">
           <div className="grid md:grid-cols-[1fr_220px] gap-10 items-center">
             <div className="max-w-lg">
               <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-5" style={{ letterSpacing: "-0.02em" }}>
@@ -84,7 +84,7 @@ export default async function Home() {
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
               </svg>
             </div>
-            <p className="text-2xl font-bold text-kolo-text leading-none">{clanovi.toLocaleString("sr-RS")}</p>
+            <p className="text-3xl font-bold font-mono text-kolo-text leading-none">{clanovi.toLocaleString("sr-RS")}</p>
             <p className="text-sm text-kolo-muted leading-tight">verifikovanih članova</p>
           </div>
 
@@ -94,7 +94,7 @@ export default async function Home() {
                 <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
               </svg>
             </div>
-            <p className="text-2xl font-bold text-kolo-text leading-none">{opticaj.toLocaleString("sr-RS")}</p>
+            <p className="text-3xl font-bold font-mono text-kolo-text leading-none">{opticaj.toLocaleString("sr-RS")}</p>
             <p className="text-sm text-kolo-muted leading-tight">POEN u opticaju</p>
           </div>
 
@@ -110,7 +110,7 @@ export default async function Home() {
         </section>
 
         {/* PROBLEM */}
-        <section className="bg-white rounded-2xl card-shadow p-7">
+        <section className="bg-white rounded-2xl card-shadow p-5">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             Problem
           </div>
@@ -128,7 +128,7 @@ export default async function Home() {
         </section>
 
         {/* ALTERNATIVA */}
-        <section className="bg-white rounded-2xl card-shadow p-7 border-l-4 border-kolo-green-700">
+        <section className="bg-white rounded-2xl card-shadow p-5 border-l-4 border-kolo-green-700">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             KOLO ti daje alternativu
           </div>
@@ -247,7 +247,7 @@ export default async function Home() {
         </div>
 
         {/* MIKRO PRIMER */}
-        <section className="bg-white rounded-2xl card-shadow p-7">
+        <section className="bg-white rounded-2xl card-shadow p-5">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             Primer iz prakse
           </div>
@@ -265,7 +265,7 @@ export default async function Home() {
 
         {/* TRANSPARENTNOST + ŠTA KOLO NIJE — bok uz bok */}
         <div className="grid md:grid-cols-2 gap-4">
-          <section id="transparentnost" className="bg-white rounded-2xl card-shadow p-7">
+          <section id="transparentnost" className="bg-white rounded-2xl card-shadow p-5">
             <h2 className="text-lg font-bold text-kolo-green-900 mb-2">Potpuna transparentnost</h2>
             <p className="text-sm text-kolo-muted mb-5">
               Svako može u svakom trenutku da proveri stanje sistema.
@@ -288,7 +288,7 @@ export default async function Home() {
             </div>
           </section>
 
-          <section id="sta-kolo-nije" className="bg-white rounded-2xl card-shadow p-7">
+          <section id="sta-kolo-nije" className="bg-white rounded-2xl card-shadow p-5">
             <h2 className="text-lg font-bold text-kolo-green-900 mb-2">Šta KOLO nije</h2>
             <p className="text-sm text-kolo-muted mb-5">Pre nego što nastaviš — jasno da znaš šta KOLO nije.</p>
             <div className="space-y-4">
@@ -350,7 +350,7 @@ export default async function Home() {
         </section>
 
         {/* CTA */}
-        <section className="bg-kolo-green-700 rounded-2xl p-8 text-center text-white">
+        <section className="bg-kolo-green-700 rounded-2xl p-6 text-center text-white">
           <h2 className="text-2xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
             Prva grupa članova se trenutno formira
           </h2>
@@ -370,7 +370,7 @@ export default async function Home() {
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
       <footer className="border-t border-kolo-border bg-white">
-        <div className="max-w-4xl mx-auto px-6 py-10">
+        <div className="max-w-4xl mx-auto px-6 py-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-3">

@@ -49,7 +49,7 @@ function LoginForm() {
 
   return (
     <div className="w-full max-w-sm">
-      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8">
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
         <div className="mb-7">
           <h1 className="text-2xl font-bold text-kolo-text">{t("naslov")}</h1>
           <p className="mt-1 text-base text-kolo-muted">{t("podnaslov")}</p>

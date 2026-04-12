@@ -26,7 +26,7 @@ export default async function KakoFunkcionisePage() {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto space-y-12 pb-16">
+    <div className="max-w-4xl mx-auto space-y-6 pb-8">
 
       {/* Uvod */}
       <section className="text-center pt-4">
