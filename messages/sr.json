@@ -64,6 +64,7 @@
     "placeholder_lozinka": "••••••••",
     "dugme": "Prijavi se",
     "dugme_loading": "Prijava u toku...",
+    "dugme_google": "Prijavi se sa Google",
     "nalog_kreiran": "Nalog je kreiran. Prijavite se i sačekajte admin verifikaciju.",
     "greska_email_obavezan": "Email je obavezan.",
     "greska_email_neispravan": "Unesite ispravnu email adresu.",

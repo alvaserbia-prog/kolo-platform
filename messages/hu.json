@@ -6,7 +6,7 @@
     "zajednica": "Közösség",
     "zaposljavnje": "Foglalkoztatás",
     "programi": "Programok",
-    "zrno": "ZRNO",
+    "zrno": "Szem",
     "glasanje": "Szavazás",
     "preporuke": "Ajánlások",
     "donacije": "Adományok",
@@ -57,7 +57,8 @@
   },
   "login": {
     "naslov": "Bejelentkezés",
-    "podnaslov": "Üdvözöljük vissza a KOLO-ban",
+    "podnaslov": "Üdvözöljük vissza a Kör-ben",
+    "dugme_google": "Bejelentkezés Google-lel",
     "email": "Email",
     "lozinka": "Jelszó",
     "placeholder_email": "az@email.com",

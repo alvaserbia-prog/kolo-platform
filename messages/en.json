@@ -6,7 +6,7 @@
     "zajednica": "Community",
     "zaposljavnje": "Employment",
     "programi": "Programs",
-    "zrno": "ZRNO",
+    "zrno": "Grain",
     "glasanje": "Voting",
     "preporuke": "Referrals",
     "donacije": "Donations",
@@ -57,7 +57,8 @@
   },
   "login": {
     "naslov": "Sign In",
-    "podnaslov": "Welcome back to KOLO",
+    "podnaslov": "Welcome back to Circle",
+    "dugme_google": "Continue with Google",
     "email": "Email",
     "lozinka": "Password",
     "placeholder_email": "your@email.com",
