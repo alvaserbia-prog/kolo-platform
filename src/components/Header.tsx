@@ -134,7 +134,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
   const inicijal = pseudonim.charAt(0).toUpperCase();
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative flex items-center" ref={ref}>
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
@@ -153,26 +153,26 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
       {open && (
         <div className="absolute right-0 top-11 w-52 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-kolo-border">
-            <p className="text-sm font-semibold text-kolo-text truncate">{pseudonim}</p>
+            <p className="text-sm font-semibold text-kolo-text truncate text-right">{pseudonim}</p>
           </div>
           <div className="py-1">
             <button
               onClick={() => { setOpen(false); router.push("/profil"); }}
-              className="w-full text-left px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center gap-3"
+              className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
             >
+              {t("moj_profil")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
-              {t("moj_profil")}
             </button>
             <button
               onClick={() => signOut({ callbackUrl: "/login" })}
-              className="w-full text-left px-4 py-2.5 text-sm text-kolo-danger hover:bg-kolo-danger-light transition-colors flex items-center gap-3"
+              className="w-full text-right px-4 py-2.5 text-sm text-kolo-danger hover:bg-kolo-danger-light transition-colors flex items-center justify-end gap-3"
             >
+              {t("odjavi_se")}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
               </svg>
-              {t("odjavi_se")}
             </button>
           </div>
         </div>
@@ -251,7 +251,7 @@ function BellNotifikacije() {
   }
 
   return (
-    <div className="relative" ref={panelRef}>
+    <div className="relative flex items-center" ref={panelRef}>
       {toast && (
         <div
           className="fixed bottom-6 right-6 z-[100] w-80 bg-white rounded-2xl shadow-xl border border-kolo-border p-4 flex items-start gap-3 animate-slide-up"
