@@ -93,7 +93,7 @@ export default function PreporukeKlijent() {
           <div>
             <p className="text-sm font-semibold text-kolo-text">{t("vas_rang")}</p>
             <p className="text-3xl font-bold text-kolo-green-700 mt-1">{t("rang", { n: data.trenutniRang })}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">{t("verifikovanih", { n: data.verifikovani })}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("verifikovanih", { count: data.verifikovani })}</p>
           </div>
           <div className="text-right">
             <p className="text-xs text-kolo-muted">{t("bonus_sledeca")}</p>
