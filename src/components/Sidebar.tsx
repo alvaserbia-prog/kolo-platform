@@ -33,8 +33,6 @@ function SidebarContent({
     { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
     { href: "/glasanje", label: t("glasanje") },
-    { href: "/preporuke", label: t("preporuke") },
-    { href: "/donacije", label: t("donacije") },
     { href: "/postani-pokrovitelj", label: t("pokroviteljstvo") },
   ];
 

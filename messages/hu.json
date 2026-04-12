@@ -19,7 +19,9 @@
     "verifikuj_nalog": "Fiók ellenőrzése →"
   },
   "header": {
-    "moj_profil": "Profilom",
+    "moje_donacije": "Adományaim",
+    "moje_preporuke": "Ajánlásaim",
+    "podesi_profil": "Profil szerkesztése",
     "odjavi_se": "Kijelentkezés",
     "ucitavanje": "Betöltés...",
     "obavestenja": "Értesítések",

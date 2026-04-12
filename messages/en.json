@@ -19,7 +19,9 @@
     "verifikuj_nalog": "Verify account →"
   },
   "header": {
-    "moj_profil": "My profile",
+    "moje_donacije": "My donations",
+    "moje_preporuke": "My referrals",
+    "podesi_profil": "Edit profile",
     "odjavi_se": "Sign out",
     "ucitavanje": "Loading...",
     "obavestenja": "Notifications",
