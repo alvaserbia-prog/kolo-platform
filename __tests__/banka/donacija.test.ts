@@ -1,76 +1,52 @@
 import { describe, it, expect } from "vitest";
-import { nivoZaKumulativ, izracunajPoenZaDonaciju } from "@/lib/banka/donacija";
+import { izracunajBonusZaDonaciju } from "@/lib/banka/donacija";
 
-describe("nivoZaKumulativ", () => {
-  it("0 RSD → nivo 1, kurs 1.00", () => {
-    const r = nivoZaKumulativ(0);
-    expect(r.nivo).toBe(1);
-    expect(r.kurs).toBe(1.00);
+describe("izracunajBonusZaDonaciju", () => {
+  it("donacija ispod prvog praga (5.000 RSD) — nema bonusa", () => {
+    const r = izracunajBonusZaDonaciju(0, 5_000);
+    expect(r.ukupanBonus).toBe(0);
+    expect(r.predjeniNivoi).toEqual([]);
+    expect(r.noviNivo).toBe(0);
+    expect(r.noviKumulativ).toBe(5_000);
   });
 
-  it("2.000 RSD → nivo 1 (granica)", () => {
-    expect(nivoZaKumulativ(2_000).nivo).toBe(1);
+  it("nivo 1 — dostiže 10.000 RSD → 20.000 POEN", () => {
+    const r = izracunajBonusZaDonaciju(0, 10_000);
+    expect(r.ukupanBonus).toBe(20_000);
+    expect(r.predjeniNivoi).toEqual([1]);
+    expect(r.noviNivo).toBe(1);
   });
 
-  it("2.001 RSD → nivo 2, kurs 1.10", () => {
-    const r = nivoZaKumulativ(2_001);
-    expect(r.nivo).toBe(2);
-    expect(r.kurs).toBe(1.10);
+  it("nivo 2 — dostiže 20.000 RSD (od 12.000) → 30.000 POEN", () => {
+    const r = izracunajBonusZaDonaciju(12_000, 8_000);
+    expect(r.ukupanBonus).toBe(30_000);
+    expect(r.predjeniNivoi).toEqual([2]);
   });
 
-  it("100.000 RSD → nivo 6, kurs 1.50", () => {
-    const r = nivoZaKumulativ(100_000);
-    expect(r.nivo).toBe(6);
-    expect(r.kurs).toBe(1.50);
+  it("prelazi više nivoa odjednom — od 0 do 50.000 → nivoi 1+2+3", () => {
+    const r = izracunajBonusZaDonaciju(0, 50_000);
+    expect(r.predjeniNivoi).toEqual([1, 2, 3]);
+    expect(r.ukupanBonus).toBe(20_000 + 30_000 + 80_000); // 130.000
   });
 
-  it("500.001.000 RSD (iznad max praga) → nivo 18, kurs 5.00", () => {
-    const r = nivoZaKumulativ(500_001_000);
-    expect(r.nivo).toBe(18);
-    expect(r.kurs).toBe(5.00);
-  });
-});
-
-describe("izracunajPoenZaDonaciju", () => {
-  it("prva donacija 1.000 RSD (dosad 0) → kurs 1.00 → 1.000 POEN", () => {
-    const r = izracunajPoenZaDonaciju(0, 1_000);
-    expect(r.poen).toBe(1_000);
-    expect(r.kurs).toBe(1.00);
-    expect(r.nivo).toBe(1);
-    expect(r.noviKumulativ).toBe(1_000);
+  it("donacija 1.000.000 RSD od nule → svih 7 nivoa → 2.880.000 POEN", () => {
+    const r = izracunajBonusZaDonaciju(0, 1_000_000);
+    expect(r.predjeniNivoi).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    expect(r.ukupanBonus).toBe(2_880_000);
+    expect(r.noviNivo).toBe(7);
   });
 
-  it("donacija prelazi prag → važi NOVI kurs na celu donaciju", () => {
-    // dosad 1.900 RSD, nova donacija 200 RSD → kumulativ 2.100 → nivo 2 (kurs 1.10)
-    const r = izracunajPoenZaDonaciju(1_900, 200);
-    expect(r.noviKumulativ).toBe(2_100);
-    expect(r.kurs).toBe(1.10);
-    expect(r.poen).toBe(Math.round(200 * 1.10)); // 220
+  it("prag koji je već pređen se ne ponavlja", () => {
+    // dosad 500.000 (svih 6 nivoa pređeno), nova donacija 600.000 → samo nivo 7
+    const r = izracunajBonusZaDonaciju(500_000, 600_000);
+    expect(r.predjeniNivoi).toEqual([7]);
+    expect(r.ukupanBonus).toBe(1_500_000);
   });
 
-  it("POEN je uvek ceo broj (Math.round)", () => {
-    // 3.000 RSD pri kursu 1.10 = 3300.0 — tačno
-    const r = izracunajPoenZaDonaciju(0, 3_000);
-    expect(Number.isInteger(r.poen)).toBe(true);
-  });
-
-  it("zaokruživanje — Math.round ne Math.floor", () => {
-    // 1 RSD × kurs 1.10 = 1.1 → Math.round → 1, Math.floor → 1 (isti)
-    // 5 RSD × kurs 1.10 = 5.5 → Math.round → 6, Math.floor → 5
-    const r = izracunajPoenZaDonaciju(1_900, 5);
-    // noviKumulativ = 1905, nivo 1 (≤2000), kurs 1.00
-    // Ovde je kurs 1.00 pa je 5 * 1.00 = 5
-    expect(r.poen).toBe(5);
-  });
-
-  it("velika donacija — nivo 18 (kurs 5.00)", () => {
-    const r = izracunajPoenZaDonaciju(500_000_000, 10_000);
-    expect(r.kurs).toBe(5.00);
-    expect(r.poen).toBe(50_000);
-  });
-
-  it("noviKumulativ = dosad + nova", () => {
-    const r = izracunajPoenZaDonaciju(50_000, 30_000);
-    expect(r.noviKumulativ).toBe(80_000);
+  it("donacija iznad max praga (1.5M) — nema novih pragova", () => {
+    const r = izracunajBonusZaDonaciju(1_000_000, 500_000);
+    expect(r.ukupanBonus).toBe(0);
+    expect(r.predjeniNivoi).toEqual([]);
+    expect(r.noviNivo).toBe(7);
   });
 });

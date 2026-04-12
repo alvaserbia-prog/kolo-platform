@@ -2,57 +2,51 @@ import { prisma } from "@/lib/prisma";
 import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
 
-// ─── Rang tabela — Prilog 1, tačka 1 ─────────────────────────────────────────
-// Kumulativ dostigne ovaj prag → ovaj nivo/kurs važi za celu novu donaciju
-
-const RANG_TABELA = [
-  { do: 2_000,           nivo: 1,  kurs: 1.00 },
-  { do: 5_000,           nivo: 2,  kurs: 1.10 },
-  { do: 10_000,          nivo: 3,  kurs: 1.20 },
-  { do: 20_000,          nivo: 4,  kurs: 1.30 },
-  { do: 50_000,          nivo: 5,  kurs: 1.40 },
-  { do: 100_000,         nivo: 6,  kurs: 1.50 },
-  { do: 200_000,         nivo: 7,  kurs: 1.60 },
-  { do: 500_000,         nivo: 8,  kurs: 1.70 },
-  { do: 1_000_000,       nivo: 9,  kurs: 1.80 },
-  { do: 2_000_000,       nivo: 10, kurs: 1.90 },
-  { do: 5_000_000,       nivo: 11, kurs: 2.00 },
-  { do: 10_000_000,      nivo: 12, kurs: 2.20 },
-  { do: 20_000_000,      nivo: 13, kurs: 2.40 },
-  { do: 50_000_000,      nivo: 14, kurs: 2.70 },
-  { do: 100_000_000,     nivo: 15, kurs: 3.00 },
-  { do: 200_000_000,     nivo: 16, kurs: 3.50 },
-  { do: 500_000_000,     nivo: 17, kurs: 4.00 },
-  { do: Infinity,        nivo: 18, kurs: 5.00 },
-] as const;
-
-export function nivoZaKumulativ(kumulativRSD: number): { nivo: number; kurs: number } {
-  return RANG_TABELA.find((r) => kumulativRSD <= r.do) ?? RANG_TABELA[RANG_TABELA.length - 1];
-}
+// Pragovi donacija — fiksni POEN bonus kada kumulativ pređe prag (jednom po pragu)
+const PRAGOVI_DONACIJA = [
+  { prag:    10_000, bonus:    20_000 },
+  { prag:    20_000, bonus:    30_000 },
+  { prag:    50_000, bonus:    80_000 },
+  { prag:   100_000, bonus:   150_000 },
+  { prag:   200_000, bonus:   300_000 },
+  { prag:   500_000, bonus:   800_000 },
+  { prag: 1_000_000, bonus: 1_500_000 },
+];
 
 /**
- * Mehanizam (Prilog 1):
- * stare donacije + nova donacija = novi kumulativ → odredi nivo → primeni kurs na celu novu donaciju.
+ * Izračunaj koji pragovi su tek ovom donacijom pređeni i ukupan bonus.
+ * Svaki prag se računa samo jednom (dosad < prag <= noviKumulativ).
  */
-export function izracunajPoenZaDonaciju(
+export function izracunajBonusZaDonaciju(
   dosadaRSD: number,
   novaRSD: number
-): { noviKumulativ: number; nivo: number; kurs: number; poen: number } {
+): { noviKumulativ: number; noviNivo: number; ukupanBonus: number; predjeniNivoi: number[] } {
   const noviKumulativ = dosadaRSD + novaRSD;
-  const { nivo, kurs } = nivoZaKumulativ(noviKumulativ);
-  const poen = Math.round(novaRSD * kurs);
-  return { noviKumulativ, nivo, kurs, poen };
+  const predjeniNivoi: number[] = [];
+  let ukupanBonus = 0;
+
+  for (let i = 0; i < PRAGOVI_DONACIJA.length; i++) {
+    const { prag, bonus } = PRAGOVI_DONACIJA[i];
+    if (dosadaRSD < prag && noviKumulativ >= prag) {
+      predjeniNivoi.push(i + 1);
+      ukupanBonus += bonus;
+    }
+  }
+
+  const noviNivo = PRAGOVI_DONACIJA.filter((p) => noviKumulativ >= p.prag).length;
+
+  return { noviKumulativ, noviNivo, ukupanBonus, predjeniNivoi };
 }
 
 /**
- * Admin evidentira donaciju i emituje POEN iz Banke.
- * Ako je existingRecordId zadato — ažurira taj PENDING zapis umesto kreiranja novog.
+ * Admin evidentira donaciju i emituje POEN iz Banke ako su pređeni pragovi.
+ * Jedna transakcija sa ukupnim bonusom.
  */
 export async function evidentirajDonaciju(
   userId: string,
   novaRSD: number,
   options?: { existingRecordId?: string; adminId?: string }
-): Promise<{ poenEmitted: number; nivo: number; kurs: number; noviKumulativ: number }> {
+): Promise<{ poenEmitted: number; noviNivo: number; noviKumulativ: number }> {
   const user = await prisma.user.findUnique({
     where: { id: userId },
     include: {
@@ -69,33 +63,29 @@ export async function evidentirajDonaciju(
   if (!user.verified) throw new Error("Korisnik nije verifikovan.");
 
   const dosadaRSD = user.donations.reduce((sum, d) => sum + Number(d.amountRSD), 0);
-  const { noviKumulativ, nivo, kurs, poen } = izracunajPoenZaDonaciju(dosadaRSD, novaRSD);
-
-  if (poen <= 0) throw new Error("Iznos donacije mora biti pozitivan.");
+  const { noviKumulativ, noviNivo, ukupanBonus } = izracunajBonusZaDonaciju(dosadaRSD, novaRSD);
 
   if (options?.existingRecordId) {
-    // Ažuriraj existing PENDING zapis
     await prisma.donationRecord.update({
       where: { id: options.existingRecordId },
       data: {
         amountRSD: novaRSD,
         cumulativeRSD: noviKumulativ,
-        level: nivo,
-        poenEmitted: poen,
+        level: noviNivo,
+        poenEmitted: ukupanBonus,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options.adminId ?? null,
       },
     });
   } else {
-    // Kreiraj novi CONFIRMED zapis
     await prisma.donationRecord.create({
       data: {
         userId,
         amountRSD: novaRSD,
         cumulativeRSD: noviKumulativ,
-        level: nivo,
-        poenEmitted: poen,
+        level: noviNivo,
+        poenEmitted: ukupanBonus,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options?.adminId ?? null,
@@ -103,12 +93,14 @@ export async function evidentirajDonaciju(
     });
   }
 
-  await emitujPoen(
-    user.wallet.id,
-    poen,
-    TransactionType.EMISIJA_DONACIJA,
-    `Donacija ${novaRSD.toLocaleString("sr-RS")} RSD — nivo ${nivo} (×${kurs.toFixed(2)})`
-  );
+  if (ukupanBonus > 0) {
+    await emitujPoen(
+      user.wallet.id,
+      ukupanBonus,
+      TransactionType.EMISIJA_DONACIJA,
+      `Bonus za donaciju iznos ${ukupanBonus.toLocaleString("sr-RS")}`
+    );
+  }
 
-  return { poenEmitted: poen, nivo, kurs, noviKumulativ };
+  return { poenEmitted: ukupanBonus, noviNivo, noviKumulativ };
 }

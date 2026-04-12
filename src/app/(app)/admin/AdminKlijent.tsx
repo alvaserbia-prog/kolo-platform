@@ -1086,7 +1086,7 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
   const [pseudonim, setPseudonim] = useState("");
   const [amountRSD, setAmountRSD] = useState("");
   const [loading, setLoading] = useState(false);
-  const [rezultat, setRezultat] = useState<{ poenEmitted: number; nivo: number; kurs: number; noviKumulativ: number } | null>(null);
+  const [rezultat, setRezultat] = useState<{ poenEmitted: number; noviNivo: number; noviKumulativ: number } | null>(null);
   const [error, setError] = useState("");
 
   async function handleDonacija(e: { preventDefault: () => void }) {
@@ -1130,44 +1130,34 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
         </div>
       </div>
 
-      {/* Rang tabela */}
+      {/* Pragovi donacija */}
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-4 py-3 border-b border-kolo-border">
-          <h3 className="text-sm font-semibold text-kolo-muted">Rang tabela donacija (Prilog 1)</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Pragovi donacija — fiksni bonus</h3>
+          <p className="text-xs text-kolo-muted mt-0.5">Bonus se emituje jednom, kad kumulativ pređe prag</p>
         </div>
         <table className="w-full text-xs">
           <thead>
             <tr className="bg-kolo-bg">
-              <th className="px-4 py-2 text-left text-kolo-muted font-medium">Kumulativ RSD</th>
               <th className="px-4 py-2 text-center text-kolo-muted font-medium">Nivo</th>
-              <th className="px-4 py-2 text-right text-kolo-muted font-medium">Kurs</th>
+              <th className="px-4 py-2 text-left text-kolo-muted font-medium">Kumulativ RSD</th>
+              <th className="px-4 py-2 text-right text-kolo-muted font-medium">Bonus POEN</th>
             </tr>
           </thead>
           <tbody>
             {[
-              ["do 2.000",         1,  "1,00×"],
-              ["do 5.000",         2,  "1,10×"],
-              ["do 10.000",        3,  "1,20×"],
-              ["do 20.000",        4,  "1,30×"],
-              ["do 50.000",        5,  "1,40×"],
-              ["do 100.000",       6,  "1,50×"],
-              ["do 200.000",       7,  "1,60×"],
-              ["do 500.000",       8,  "1,70×"],
-              ["do 1.000.000",     9,  "1,80×"],
-              ["do 2.000.000",     10, "1,90×"],
-              ["do 5.000.000",     11, "2,00×"],
-              ["do 10.000.000",    12, "2,20×"],
-              ["do 20.000.000",    13, "2,40×"],
-              ["do 50.000.000",    14, "2,70×"],
-              ["do 100.000.000",   15, "3,00×"],
-              ["do 200.000.000",   16, "3,50×"],
-              ["do 500.000.000",   17, "4,00×"],
-              ["1.000.000.000+",   18, "5,00×"],
-            ].map(([raspon, nivo, kurs], i) => (
-              <tr key={i} className="border-t border-kolo-border">
-                <td className="px-4 py-2 text-kolo-muted">{raspon}</td>
+              [1, "10.000",     "20.000"],
+              [2, "20.000",     "30.000"],
+              [3, "50.000",     "80.000"],
+              [4, "100.000",   "150.000"],
+              [5, "200.000",   "300.000"],
+              [6, "500.000",   "800.000"],
+              [7, "1.000.000", "1.500.000"],
+            ].map(([nivo, prag, bonus]) => (
+              <tr key={nivo} className="border-t border-kolo-border">
                 <td className="px-4 py-2 text-center font-medium text-kolo-text">{nivo}</td>
-                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{kurs}</td>
+                <td className="px-4 py-2 text-kolo-muted">{prag} RSD</td>
+                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{bonus}</td>
               </tr>
             ))}
           </tbody>
@@ -1203,10 +1193,13 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
           {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{error}</p>}
           {rezultat && (
             <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-3 text-sm text-kolo-green-700">
-              <p className="font-semibold">Emisija uspešna!</p>
-              <p className="mt-1">Emitovano: <strong>{rezultat.poenEmitted.toLocaleString("sr-RS")} POEN</strong></p>
-              <p>Nivo: {rezultat.nivo} · Kurs: ×{rezultat.kurs.toFixed(2)}</p>
-              <p className="text-xs text-kolo-green-700 mt-1">Novi kumulativ: {rezultat.noviKumulativ.toLocaleString("sr-RS")} RSD</p>
+              <p className="font-semibold">Donacija evidentirana!</p>
+              {rezultat.poenEmitted > 0 ? (
+                <p className="mt-1">Emitovano: <strong>{rezultat.poenEmitted.toLocaleString("sr-RS")} POEN</strong> · Nivo {rezultat.noviNivo}</p>
+              ) : (
+                <p className="mt-1 text-kolo-muted">Prag nije dostignut — nema emisije POEN-a</p>
+              )}
+              <p className="text-xs mt-1">Kumulativ: {rezultat.noviKumulativ.toLocaleString("sr-RS")} RSD</p>
             </div>
           )}
           <button
