@@ -1,45 +1,44 @@
-import createMiddleware from "next-intl/middleware";
-import { withAuth } from "next-auth/middleware";
-import { routing } from "@/i18n/routing";
-import { NextResponse } from "next/server";
-import type { NextRequestWithAuth } from "next-auth/middleware";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-const intl = createMiddleware(routing);
+const JAVNE_RUTE = [
+  "/", "/pijaca", "/kako-funkcionise", "/uslovi",
+  "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji",
+];
 
-const authMiddleware = withAuth(
-  function middleware(req: NextRequestWithAuth) {
-    const { pathname } = req.nextUrl;
-    const token = req.nextauth.token;
+const PRESKOCI = [
+  "/login", "/registracija", "/oauth",
+  "/api/", "/_next", "/favicon.ico",
+  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/flags/",
+];
 
-    if (pathname.startsWith("/admin") && token?.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
-    }
+export default async function proxy(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-    return intl(req);
-  },
-  {
-    callbacks: {
-      authorized: ({ token, req }) => {
-        const { pathname } = req.nextUrl;
-        const javneRute = [
-          "/", "/pijaca", "/kako-funkcionise", "/uslovi",
-          "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji",
-        ];
-        if (javneRute.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
-          return true;
-        }
-        return !!token;
-      },
-    },
+  if (PRESKOCI.some((r) => pathname.startsWith(r))) {
+    return NextResponse.next();
   }
-);
 
-export default function proxy(req: NextRequestWithAuth) {
-  return authMiddleware(req);
+  const isJavna = JAVNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"));
+  if (isJavna) return NextResponse.next();
+
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
+  if (!token) {
+    const loginUrl = new URL("/login", req.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  if (pathname.startsWith("/admin") && token.role !== "ADMIN") {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    "/((?!login|registracija|oauth|api/auth|api/registracija|api/oauth|api/javno|api/provjeri-pseudonim|api/m|_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|flags).*)",
+    "/((?!_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|flags).*)",
   ],
 };
