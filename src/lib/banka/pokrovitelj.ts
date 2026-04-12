@@ -131,30 +131,26 @@ export async function evidentirajDoprinos(params: {
     };
   });
 
-  // Korak 2: Emituj POEN za svaki novi nivo (van transakcije)
-  for (const { nivo, bonusPoen, bonusId } of noviNivoi) {
+  // Korak 2: Saberi sve bonuse (nivoi + 1:1) i emituj jednu transakciju
+  const bonusiZbir = noviNivoi.reduce((s, n) => s + n.bonusPoen, 0);
+  const poenZaDonaciju = Math.round(rsdIznos);
+  const ukupanBonus = bonusiZbir + poenZaDonaciju;
+
+  if (ukupanBonus > 0) {
     const { transaction } = await emitujPoen(
       vlasnikWalletId,
-      bonusPoen,
+      ukupanBonus,
       "EMISIJA_POKROVITELJ",
-      `Pokroviteljski bonus — nivo ${nivo}`
+      `Bonus za pokroviteljstvo iznos ${ukupanBonus.toLocaleString("sr-RS")}`
     );
 
-    await prisma.pokroviteljBonusEmisija.update({
-      where: { id: bonusId },
-      data: { transactionId: transaction.id },
-    });
-  }
-
-  // Korak 3: Emituj 1:1 vrednost donacije u POEN (van transakcije)
-  const poenZaDonaciju = Math.round(rsdIznos);
-  if (poenZaDonaciju > 0) {
-    await emitujPoen(
-      vlasnikWalletId,
-      poenZaDonaciju,
-      "EMISIJA_POKROVITELJ",
-      `Pokroviteljska donacija ${rsdIznos.toLocaleString("sr-RS")} RSD — 1:1`
-    );
+    // Poveži sve bonus zapise sa istom transakcijom
+    for (const { bonusId } of noviNivoi) {
+      await prisma.pokroviteljBonusEmisija.update({
+        where: { id: bonusId },
+        data: { transactionId: transaction.id },
+      });
+    }
   }
 
   return { noviNivoi, poenZaDonaciju };
