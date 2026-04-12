@@ -53,7 +53,6 @@ function SidebarContent({
     { href: "/zaposljavnje", label: t("zaposljavnje") },
     { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
-    { href: "/postani-pokrovitelj", label: t("pokroviteljstvo") },
   ];
 
   const linkoviNeverifikovan = [

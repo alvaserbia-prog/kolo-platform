@@ -75,6 +75,15 @@ interface DonacijaItem {
   confirmedAt: string;
 }
 
+interface PokroviteljItem {
+  id: string;
+  naziv: string;
+  adresa: string | null;
+  zadruga: { name: string } | null;
+  rsdKumulativ: number;
+  trenutniNivo: number;
+}
+
 interface Props {
   pseudonim: string;
   verRequest: { status: string } | null;
@@ -94,6 +103,7 @@ interface Props {
   ukupanIznosTx: number;
   danasIznosTx: number;
   donacije: DonacijaItem[];
+  pokrovitelji: PokroviteljItem[];
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
@@ -122,6 +132,7 @@ export default function SistemKlijent({
   ukupanIznosTx,
   danasIznosTx,
   donacije,
+  pokrovitelji,
   emisijeChart,
   transakcije,
   clanovi,
@@ -285,7 +296,7 @@ export default function SistemKlijent({
         <ZadrugeSekcija zadruge={zadruge} verified={verified} />
       )}
       {sekcija === "donacije" && (
-        <DonacijeSekcija donacije={donacije} verified={verified} />
+        <DonacijeSekcija donacije={donacije} pokrovitelji={pokrovitelji} verified={verified} />
       )}
       {sekcija === "iznos" && (
         <IznosSekcija
@@ -794,9 +805,11 @@ function ProgramiSekcija({ programi }: { programi: Program[] }) {
 
 function DonacijeSekcija({
   donacije,
+  pokrovitelji,
   verified,
 }: {
   donacije: DonacijaItem[];
+  pokrovitelji: PokroviteljItem[];
   verified: boolean;
 }) {
   if (!verified) {
@@ -825,15 +838,7 @@ function DonacijeSekcija({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
-        <Link
-          href="/donacije"
-          className="text-sm font-semibold px-4 py-1.5 bg-kolo-green-700 text-white rounded-xl hover:bg-kolo-green-500 transition-colors"
-        >
-          Donacije →
-        </Link>
-      </div>
+      <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Donator</span>
@@ -891,6 +896,54 @@ function DonacijeSekcija({
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Ranglista pokrovitelja */}
+      <div>
+        <h2 className="text-sm font-semibold text-kolo-text mb-3">Ranglista pokrovitelja</h2>
+        {pokrovitelji.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+            Još uvek nema registrovanih pokrovitelja.
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+            {pokrovitelji.map((p, i) => (
+              <div
+                key={p.id}
+                className={`px-4 py-3 flex items-center gap-3 ${i < pokrovitelji.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+              >
+                <div className="text-sm font-semibold text-kolo-muted w-6 text-right shrink-0">
+                  {i + 1}.
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-kolo-text">{p.naziv}</p>
+                  {(p.adresa || p.zadruga) && (
+                    <p className="text-xs text-kolo-muted mt-0.5">
+                      {p.adresa && <span>{p.adresa}</span>}
+                      {p.zadruga && (
+                        <span className={p.adresa ? " · " : ""}>Zadruga: {p.zadruga.name}</span>
+                      )}
+                    </p>
+                  )}
+                </div>
+                <div className="shrink-0 text-right">
+                  <p className="text-sm font-semibold text-kolo-green-700">Nivo {p.trenutniNivo}</p>
+                  <p className="text-xs text-kolo-muted mt-0.5">
+                    {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="mt-3 text-center">
+          <Link
+            href="/postani-pokrovitelj"
+            className="text-sm font-medium text-kolo-green-700 hover:underline"
+          >
+            Kako postati pokrovitelj →
+          </Link>
+        </div>
       </div>
     </div>
   );

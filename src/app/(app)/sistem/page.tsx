@@ -68,6 +68,7 @@ export default async function SistemPage() {
     ukupanIznosTxRaw,
     danasIznosTxRaw,
     donacijeLista,
+    pokroviteljiLista,
   ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
@@ -160,6 +161,18 @@ export default async function SistemPage() {
       take: 50,
       include: { user: { select: { id: true, pseudonim: true } } },
     }),
+    prisma.pokrovitelj.findMany({
+      where: { status: "ACTIVE" },
+      select: {
+        id: true,
+        naziv: true,
+        adresa: true,
+        zadruga: { select: { name: true } },
+        rsdKumulativ: true,
+        trenutniNivo: true,
+      },
+      orderBy: { rsdKumulativ: "desc" },
+    }),
   ]);
 
   const opticaj = Math.abs(banka?.balance ?? 0);
@@ -177,6 +190,15 @@ export default async function SistemPage() {
     poenEmitted: d.poenEmitted,
     level: d.level,
     confirmedAt: (d.confirmedAt ?? d.createdAt).toISOString(),
+  }));
+
+  const pokrovitelji = pokroviteljiLista.map((p) => ({
+    id: p.id,
+    naziv: p.naziv,
+    adresa: p.adresa,
+    zadruga: p.zadruga,
+    rsdKumulativ: Number(p.rsdKumulativ),
+    trenutniNivo: p.trenutniNivo,
   }));
 
   const danasEmisija = emisije[0];
@@ -260,6 +282,7 @@ export default async function SistemPage() {
       ukupanIznosTx={ukupanIznosTx}
       danasIznosTx={danasIznosTx}
       donacije={donacije}
+      pokrovitelji={pokrovitelji}
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
