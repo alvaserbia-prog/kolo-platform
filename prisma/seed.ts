@@ -20,7 +20,7 @@ const testKorisnici = [
 ];
 
 // POEN koji dobija svaki korisnik pri verifikaciji
-const POEN_VERIFIKACIJA = 5_000;
+const POEN_VERIFIKACIJA = 1_000;
 // POEN za osnivanje zadruge
 const POEN_ZADRUGA_OSNIVANJE = 50_000;
 
