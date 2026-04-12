@@ -828,16 +828,13 @@ function DonacijeSekcija({
     );
   }
 
-  if (donacije.length === 0) {
-    return (
-      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        Nema potvrđenih donacija.
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-4">
+      {donacije.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+          Nema potvrđenih donacija.
+        </div>
+      ) : (<>
       <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
@@ -897,6 +894,8 @@ function DonacijeSekcija({
           </div>
         ))}
       </div>
+
+      </>)}
 
       {/* Ranglista pokrovitelja */}
       <div>
