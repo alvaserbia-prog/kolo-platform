@@ -14,6 +14,14 @@ const PRAGOVI_DONACIJA = [
 ];
 
 /**
+ * Vraća trenutni nivo za dati kumulativni RSD iznos.
+ */
+export function nivoZaKumulativ(kumulativRSD: number): { nivo: number } {
+  const nivo = PRAGOVI_DONACIJA.filter((p) => kumulativRSD >= p.prag).length;
+  return { nivo };
+}
+
+/**
  * Izračunaj koji pragovi su tek ovom donacijom pređeni i ukupan bonus.
  * Svaki prag se računa samo jednom (dosad < prag <= noviKumulativ).
  */
