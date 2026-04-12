@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "zadruge";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "zadruge" | "donacije" | "iznos";
 type TxFilter = "sve" | "banka" | "clanovi";
 
 const TIP_BOJA: Record<string, string> = {
@@ -65,6 +65,16 @@ interface EmisijaChart {
   limit: number;
 }
 
+interface DonacijaItem {
+  id: string;
+  userId: string;
+  pseudonim: string;
+  amountRSD: number;
+  poenEmitted: number;
+  level: number;
+  confirmedAt: string;
+}
+
 interface Props {
   pseudonim: string;
   verRequest: { status: string } | null;
@@ -79,6 +89,11 @@ interface Props {
   danasKorisnika: number;
   danasTransakcija: number;
   danasZadruga: number;
+  ukupnoDonacija: number;
+  danasDonacija: number;
+  ukupanIznosTx: number;
+  danasIznosTx: number;
+  donacije: DonacijaItem[];
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
@@ -102,6 +117,11 @@ export default function SistemKlijent({
   danasKorisnika,
   danasTransakcija,
   danasZadruga,
+  ukupnoDonacija,
+  danasDonacija,
+  ukupanIznosTx,
+  danasIznosTx,
+  donacije,
   emisijeChart,
   transakcije,
   clanovi,
@@ -150,8 +170,8 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* 4 kartice 2×2 */}
-      <div className="grid grid-cols-2 gap-4">
+      {/* 6 kartica 3×2 */}
+      <div className="grid grid-cols-3 gap-4">
         {/* Članovi */}
         <Kartica
           aktivan={sekcija === "clanovi"}
@@ -216,6 +236,26 @@ export default function SistemKlijent({
             )}
           </div>
         </button>
+
+        {/* Donacije */}
+        <Kartica
+          aktivan={sekcija === "donacije"}
+          onClick={() => setSekcija("donacije")}
+          label="Donacije"
+          broj={ukupnoDonacija}
+          danas={danasDonacija}
+          podnaslov="potvrđenih donacija"
+        />
+
+        {/* Iznos transakcija */}
+        <Kartica
+          aktivan={sekcija === "iznos"}
+          onClick={() => setSekcija("iznos")}
+          label="Iznos transakcija"
+          broj={ukupanIznosTx}
+          danas={danasIznosTx}
+          podnaslov="ukupno POEN prometa"
+        />
       </div>
 
       {/* Separator */}
@@ -243,6 +283,16 @@ export default function SistemKlijent({
       {sekcija === "programi" && <ProgramiSekcija programi={programi} />}
       {sekcija === "zadruge" && (
         <ZadrugeSekcija zadruge={zadruge} verified={verified} />
+      )}
+      {sekcija === "donacije" && (
+        <DonacijeSekcija donacije={donacije} verified={verified} />
+      )}
+      {sekcija === "iznos" && (
+        <IznosSekcija
+          ukupanIznosTx={ukupanIznosTx}
+          danasIznosTx={danasIznosTx}
+          transakcije={transakcije}
+        />
       )}
     </div>
   );
@@ -736,6 +786,173 @@ function ProgramiSekcija({ programi }: { programi: Program[] }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ── Donacije ──────────────────────────────────────────────────────────────────
+
+function DonacijeSekcija({
+  donacije,
+  verified,
+}: {
+  donacije: DonacijaItem[];
+  verified: boolean;
+}) {
+  if (!verified) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
+        <p className="text-sm text-kolo-muted mb-3">
+          Pregled donacija dostupan je verifikovanim članovima.
+        </p>
+        <Link
+          href="/verifikacija"
+          className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
+        >
+          Verifikuj nalog →
+        </Link>
+      </div>
+    );
+  }
+
+  if (donacije.length === 0) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+        Nema potvrđenih donacija.
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+          <span>Donator</span>
+          <span className="text-right">RSD</span>
+          <span className="text-right">POEN</span>
+          <span className="text-right">Nivo</span>
+          <span className="text-right">Datum</span>
+        </div>
+        {donacije.map((d, i) => (
+          <div key={d.id} className={i < donacije.length - 1 ? "border-b border-kolo-border/30" : ""}>
+            {/* Desktop */}
+            <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-3 items-center text-sm">
+              <Link
+                href={`/profil/${d.userId}`}
+                className="font-medium text-kolo-green-700 hover:underline truncate"
+              >
+                {d.pseudonim}
+              </Link>
+              <span className="text-right font-mono">
+                {d.amountRSD.toLocaleString("sr-RS")}
+              </span>
+              <span className="text-right font-mono font-semibold text-kolo-text">
+                {d.poenEmitted.toLocaleString("sr-RS")}
+              </span>
+              <span className="text-right text-kolo-muted">Nivo {d.level}</span>
+              <span className="text-right text-kolo-muted">
+                {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "2-digit",
+                })}
+              </span>
+            </div>
+            {/* Mobilna kartica */}
+            <div className="sm:hidden px-4 py-3 space-y-1">
+              <div className="flex items-center justify-between">
+                <Link href={`/profil/${d.userId}`} className="font-semibold text-kolo-green-700 hover:underline">
+                  {d.pseudonim}
+                </Link>
+                <span className="font-mono text-sm font-bold text-kolo-text">
+                  {d.poenEmitted.toLocaleString("sr-RS")} POEN
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-xs text-kolo-muted">
+                <span>{d.amountRSD.toLocaleString("sr-RS")} RSD</span>
+                <span>Nivo {d.level}</span>
+                <span className="ml-auto">
+                  {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                  })}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Iznos transakcija ─────────────────────────────────────────────────────────
+
+function IznosSekcija({
+  ukupanIznosTx,
+  danasIznosTx,
+  transakcije,
+}: {
+  ukupanIznosTx: number;
+  danasIznosTx: number;
+  transakcije: Transakcija[];
+}) {
+  const byType = transakcije.reduce(
+    (acc, tx) => {
+      acc[tx.type] = (acc[tx.type] || 0) + tx.amount;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
+
+  const sortedTypes = Object.entries(byType).sort(([, a], [, b]) => b - a);
+
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-5">
+          <p className="text-xs text-kolo-muted mb-1">Ukupno prometa (sve)</p>
+          <p className="text-2xl font-bold font-mono text-kolo-text">
+            {ukupanIznosTx.toLocaleString("sr-RS")}
+          </p>
+          <p className="text-xs text-kolo-muted mt-1">POEN</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-kolo-border p-5">
+          <p className="text-xs text-kolo-muted mb-1">Danas</p>
+          <p className="text-2xl font-bold font-mono text-kolo-text">
+            {danasIznosTx.toLocaleString("sr-RS")}
+          </p>
+          <p className="text-xs text-kolo-muted mt-1">POEN</p>
+        </div>
+      </div>
+      {sortedTypes.length > 0 && (
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-5 py-2.5 bg-kolo-bg border-b border-kolo-border">
+            <p className="text-xs font-semibold text-kolo-muted">Promet po tipu (poslednjih 100 tx)</p>
+          </div>
+          {sortedTypes.map(([type, amount], i) => (
+            <div
+              key={type}
+              className={`px-5 py-3 flex justify-between items-center ${
+                i < sortedTypes.length - 1 ? "border-b border-kolo-border/30" : ""
+              }`}
+            >
+              <span
+                className={`text-xs px-2 py-0.5 rounded font-medium ${
+                  TIP_BOJA[type] || "bg-kolo-bg text-kolo-muted"
+                }`}
+              >
+                {type.replace(/_/g, " ")}
+              </span>
+              <span className="font-mono text-sm font-semibold text-kolo-text">
+                {amount.toLocaleString("sr-RS")} POEN
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -63,6 +63,11 @@ export default async function SistemPage() {
     danasKorisnika,
     danasTransakcija,
     danasZadruga,
+    ukupnoDonacijaRaw,
+    danasDonacijaRaw,
+    ukupanIznosTxRaw,
+    danasIznosTxRaw,
+    donacijeLista,
   ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
@@ -137,10 +142,39 @@ export default async function SistemPage() {
     prisma.zadruga.count({
       where: { status: "ACTIVE", createdAt: { gte: danas } },
     }),
+    prisma.donationRecord.count({ where: { status: "CONFIRMED" } }),
+    prisma.donationRecord.count({
+      where: { status: "CONFIRMED", confirmedAt: { gte: danas } },
+    }),
+    prisma.transaction.aggregate({ _sum: { amount: true } }),
+    prisma.transaction.aggregate({
+      _sum: { amount: true },
+      where: { createdAt: { gte: danas } },
+    }),
+    prisma.donationRecord.findMany({
+      where: { status: "CONFIRMED" },
+      orderBy: { confirmedAt: "desc" },
+      take: 50,
+      include: { user: { select: { id: true, pseudonim: true } } },
+    }),
   ]);
 
   const opticaj = Math.abs(banka?.balance ?? 0);
   const bankaBalance = banka?.balance ?? 0;
+
+  const ukupnoDonacija = ukupnoDonacijaRaw;
+  const danasDonacija = danasDonacijaRaw;
+  const ukupanIznosTx = ukupanIznosTxRaw._sum.amount ?? 0;
+  const danasIznosTx = danasIznosTxRaw._sum.amount ?? 0;
+  const donacije = donacijeLista.map((d) => ({
+    id: d.id,
+    userId: d.userId,
+    pseudonim: d.user.pseudonim,
+    amountRSD: Number(d.amountRSD),
+    poenEmitted: d.poenEmitted,
+    level: d.level,
+    confirmedAt: (d.confirmedAt ?? d.createdAt).toISOString(),
+  }));
 
   const danasEmisija = emisije[0];
   const danasEmitovano = danasEmisija?.totalEmitted ?? 0;
@@ -218,6 +252,11 @@ export default async function SistemPage() {
       danasKorisnika={danasKorisnika}
       danasTransakcija={danasTransakcija}
       danasZadruga={danasZadruga}
+      ukupnoDonacija={ukupnoDonacija}
+      danasDonacija={danasDonacija}
+      ukupanIznosTx={ukupanIznosTx}
+      danasIznosTx={danasIznosTx}
+      donacije={donacije}
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
