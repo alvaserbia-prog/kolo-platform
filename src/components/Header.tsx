@@ -48,6 +48,16 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           </div>
         </div>
 
+        {/* Sredina: Pošalji POEN */}
+        <div className="flex-1 flex justify-center">
+          <Link
+            href="/novcanik"
+            className="px-4 py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl transition-colors"
+          >
+            Pošalji POEN
+          </Link>
+        </div>
+
         {/* Desna strana: balans + poruke + notifikacije + profil */}
         <div className="flex items-center gap-3 px-4">
           {session ? (
