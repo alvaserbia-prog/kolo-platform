@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface Donacija {
   id: string;
@@ -173,6 +174,21 @@ export default function DonacijeKlijent() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Pokroviteljstvo baner */}
+      <div className="bg-kolo-green-50 border border-kolo-green-200 rounded-2xl p-5">
+        <p className="text-sm font-semibold text-kolo-green-900 mb-1">Predstavljate pravno lice?</p>
+        <p className="text-sm text-kolo-muted mb-3">
+          Kompanije, preduzetnici i organizacije mogu postati pokrovitelji KOLO platforme i dobijati POEN
+          bonuse za svaki nivo doprinosa.
+        </p>
+        <Link
+          href="/postani-pokrovitelj"
+          className="inline-block text-sm font-semibold text-kolo-green-700 hover:underline"
+        >
+          Saznaj više o pokroviteljstvu →
+        </Link>
       </div>
 
       {/* Istorija donacija */}
