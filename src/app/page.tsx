@@ -40,7 +40,7 @@ export default async function Home() {
       <PublicHeader />
 
       {/* ── SADRŽAJ ────────────────────────────────────────────────── */}
-      <div className="max-w-4xl mx-auto px-6 py-8 space-y-6 pb-20">
+      <div className="max-w-[1140px] mx-auto px-6 py-8 space-y-6 pb-20">
 
         {/* HERO */}
         <section className="bg-kolo-green-900 rounded-2xl p-6 md:p-8 text-white">
@@ -370,7 +370,7 @@ export default async function Home() {
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
       <footer className="border-t border-kolo-border bg-white">
-        <div className="max-w-4xl mx-auto px-6 py-6">
+        <div className="max-w-[1140px] mx-auto px-6 py-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-3">
