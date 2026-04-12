@@ -68,7 +68,7 @@ export default async function KakoFunkcionisePage() {
           <h2 className="text-lg font-bold text-kolo-green-900">{t("poen_naslov")}</h2>
         </div>
         <p className="text-sm text-kolo-muted leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: t("poen_opis") }}
+          dangerouslySetInnerHTML={{ __html: t.markup("poen_opis", { strong: (chunks) => `<strong>${chunks}</strong>` }) }}
         />
         <div className="grid grid-cols-2 gap-3">
           {poenFakti.map((f) => (
@@ -87,7 +87,7 @@ export default async function KakoFunkcionisePage() {
           <h2 className="text-lg font-bold text-kolo-green-900">{t("zrno_naslov")}</h2>
         </div>
         <p className="text-sm text-kolo-muted leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: t("zrno_opis") }}
+          dangerouslySetInnerHTML={{ __html: t.markup("zrno_opis", { strong: (chunks) => `<strong>${chunks}</strong>` }) }}
         />
         <div className="bg-kolo-gold-100 rounded-xl p-4">
           <p className="text-xs font-semibold text-kolo-gold-600 mb-1">{t("zrno_kurs_naslov")}</p>
@@ -99,7 +99,7 @@ export default async function KakoFunkcionisePage() {
       <section className="bg-white rounded-2xl card-shadow p-6 space-y-4">
         <h2 className="text-lg font-bold text-kolo-green-900">{t("ver_naslov")}</h2>
         <p className="text-sm text-kolo-muted leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: t("ver_opis") }}
+          dangerouslySetInnerHTML={{ __html: t.markup("ver_opis", { strong: (chunks) => `<strong>${chunks}</strong>` }) }}
         />
         <div className="grid grid-cols-2 gap-3">
           <div className="bg-kolo-bg rounded-xl p-4">
@@ -119,7 +119,7 @@ export default async function KakoFunkcionisePage() {
           {t("prog_naslov")}
         </h2>
         <p className="text-sm text-kolo-muted"
-          dangerouslySetInnerHTML={{ __html: t("prog_opis") }}
+          dangerouslySetInnerHTML={{ __html: t.markup("prog_opis", { strong: (chunks) => `<strong>${chunks}</strong>` }) }}
         />
         <div className="grid grid-cols-1 gap-3">
           {programi.map((p) => (
