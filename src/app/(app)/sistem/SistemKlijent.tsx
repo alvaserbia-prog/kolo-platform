@@ -22,6 +22,7 @@ interface Transakcija {
   id: string;
   amount: number;
   type: string;
+  description: string | null;
   createdAt: string;
   fromPseudonim: string;
   fromId: string | null;
@@ -336,15 +337,10 @@ function Kartica({
       }`}
     >
       <p className={`text-xs font-medium mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
-        {label}
+        {label}{danas > 0 && <span className={`ml-1 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>({danas})</span>}
       </p>
       <p className={`text-3xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
-        {danas > 0 && (
-          <span className={`text-base font-semibold ml-1.5 ${aktivan ? "text-white/60" : "text-kolo-green-500"}`}>
-            (+{danas})
-          </span>
-        )}
       </p>
       <p className={`text-xs mt-1 ${aktivan ? "text-white/60" : "text-kolo-muted"}`}>
         {podnaslov}
@@ -702,51 +698,55 @@ function TransakcijeSekcija({
           {filtrirane.map((tx, i) => (
             <div
               key={tx.id}
-              className={`grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center px-4 py-2.5 ${
-                i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""
-              }`}
+              className={`px-4 py-2.5 ${i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
-              {/* Vreme */}
-              <p className="text-sm text-kolo-muted leading-tight">
-                {new Date(tx.createdAt).toLocaleString("sr-RS", {
-                  day: "2-digit", month: "2-digit", year: "numeric",
-                  hour: "2-digit", minute: "2-digit",
-                })}
-              </p>
-              {/* Pošiljalac */}
-              <div className="min-w-0">
-                {verified ? (
-                  tx.fromId ? (
-                    <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                      {tx.fromPseudonim}
-                    </Link>
+              <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                {/* Vreme */}
+                <p className="text-sm text-kolo-muted leading-tight">
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", {
+                    day: "2-digit", month: "2-digit", year: "numeric",
+                    hour: "2-digit", minute: "2-digit",
+                  })}
+                </p>
+                {/* Pošiljalac */}
+                <div className="min-w-0">
+                  {verified ? (
+                    tx.fromId ? (
+                      <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                        {tx.fromPseudonim}
+                      </Link>
+                    ) : (
+                      <span className="text-base text-kolo-muted truncate block">{tx.fromPseudonim}</span>
+                    )
                   ) : (
-                    <span className="text-base text-kolo-muted truncate block">{tx.fromPseudonim}</span>
-                  )
-                ) : (
-                  <span className="text-base text-kolo-muted">—</span>
-                )}
-              </div>
-              {/* Strelica */}
-              <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
-              {/* Primalac */}
-              <div className="min-w-0">
-                {verified ? (
-                  tx.toId ? (
-                    <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                      {tx.toPseudonim}
-                    </Link>
+                    <span className="text-base text-kolo-muted">—</span>
+                  )}
+                </div>
+                {/* Strelica */}
+                <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
+                {/* Primalac */}
+                <div className="min-w-0">
+                  {verified ? (
+                    tx.toId ? (
+                      <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                        {tx.toPseudonim}
+                      </Link>
+                    ) : (
+                      <span className="text-base text-kolo-muted truncate block">{tx.toPseudonim}</span>
+                    )
                   ) : (
-                    <span className="text-base text-kolo-muted truncate block">{tx.toPseudonim}</span>
-                  )
-                ) : (
-                  <span className="text-base text-kolo-muted">—</span>
-                )}
+                    <span className="text-base text-kolo-muted">—</span>
+                  )}
+                </div>
+                {/* Iznos */}
+                <span className="text-base font-bold text-kolo-text text-right">
+                  {tx.amount.toLocaleString("sr-RS")}
+                </span>
               </div>
-              {/* Iznos */}
-              <span className="text-base font-bold text-kolo-text text-right">
-                {tx.amount.toLocaleString("sr-RS")}
-              </span>
+              {/* Opis transakcije */}
+              {tx.description && (
+                <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{tx.description}</p>
+              )}
             </div>
           ))}
         </div>

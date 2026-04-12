@@ -209,6 +209,7 @@ export default async function SistemPage() {
     id: t.id,
     amount: t.amount,
     type: t.type,
+    description: t.description,
     createdAt: t.createdAt.toISOString(),
     fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Banka",
     fromId: t.fromWallet?.user?.id ?? null,

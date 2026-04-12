@@ -127,49 +127,55 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             {filtered.map((t, i) => (
               <div
                 key={t.id}
-                className={`grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
+                className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
-                {/* Vreme */}
-                <p className="text-sm text-kolo-muted leading-tight">
-                  {new Date(t.createdAt).toLocaleString("sr-RS", {
-                    day: "2-digit", month: "2-digit", year: "numeric",
-                    hour: "2-digit", minute: "2-digit",
-                  })}
-                </p>
-                {/* Pošiljalac */}
-                <div className="min-w-0">
-                  {t.primio ? (
-                    t.drugiId ? (
-                      <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {t.drugiPseudonim}
-                      </a>
+                <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                  {/* Vreme */}
+                  <p className="text-sm text-kolo-muted leading-tight">
+                    {new Date(t.createdAt).toLocaleString("sr-RS", {
+                      day: "2-digit", month: "2-digit", year: "numeric",
+                      hour: "2-digit", minute: "2-digit",
+                    })}
+                  </p>
+                  {/* Pošiljalac */}
+                  <div className="min-w-0">
+                    {t.primio ? (
+                      t.drugiId ? (
+                        <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                          {t.drugiPseudonim}
+                        </a>
+                      ) : (
+                        <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
+                      )
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
-                    )
-                  ) : (
-                    <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
-                  )}
-                </div>
-                {/* Strelica */}
-                <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
-                {/* Primalac */}
-                <div className="min-w-0">
-                  {t.primio ? (
-                    <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
-                  ) : (
-                    t.drugiId ? (
-                      <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {t.drugiPseudonim}
-                      </a>
+                      <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
+                    )}
+                  </div>
+                  {/* Strelica */}
+                  <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
+                  {/* Primalac */}
+                  <div className="min-w-0">
+                    {t.primio ? (
+                      <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
-                    )
-                  )}
+                      t.drugiId ? (
+                        <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                          {t.drugiPseudonim}
+                        </a>
+                      ) : (
+                        <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
+                      )
+                    )}
+                  </div>
+                  {/* Iznos */}
+                  <span className={`text-base font-bold text-right ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                    {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+                  </span>
                 </div>
-                {/* Iznos */}
-                <span className={`text-base font-bold text-right ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-                  {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
-                </span>
+                {/* Opis transakcije */}
+                {t.description && (
+                  <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{t.description}</p>
+                )}
               </div>
             ))}
           </div>
