@@ -5,6 +5,15 @@ import { useRouter, usePathname } from "next/navigation";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
+interface DnevniBrojevi {
+  novcanik: number;
+  pijaca: number;
+  zajednica: number;
+  zaposljavnje: number;
+  programi: number;
+  zrno: number;
+}
+
 interface AppShellProps {
   verified: boolean;
   isAdmin: boolean;
@@ -13,6 +22,7 @@ interface AppShellProps {
 
 export default function AppShell({ verified, isAdmin, children }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dnevniBrojevi, setDnevniBrojevi] = useState<DnevniBrojevi | null>(null);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -31,6 +41,14 @@ export default function AppShell({ verified, isAdmin, children }: AppShellProps)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (!verified) return;
+    fetch("/api/dnevni-brojevi")
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => { if (data) setDnevniBrojevi(data); })
+      .catch(() => {});
+  }, [verified]);
+
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">
       <Header onMenuOpen={() => setMobileOpen(true)} />
@@ -41,6 +59,7 @@ export default function AppShell({ verified, isAdmin, children }: AppShellProps)
           isAdmin={isAdmin}
           mobileOpen={mobileOpen}
           onMobileClose={() => setMobileOpen(false)}
+          dnevniBrojevi={dnevniBrojevi}
         />
         <main className="flex-1 overflow-auto">
           <div className="px-4 py-5 md:px-8 md:py-6">

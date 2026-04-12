@@ -10,21 +10,35 @@ export default async function PostaniPokroviteljPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/prijava");
 
-  const mojiPokrovitelji = session.user.verified
-    ? await prisma.pokrovitelj.findMany({
-        where: { vlasnikId: session.user.id },
-        select: {
-          id: true,
-          naziv: true,
-          pib: true,
-          rsdKumulativ: true,
-          trenutniNivo: true,
-          status: true,
-          zadruga: { select: { name: true } },
-        },
-        orderBy: { createdAt: "desc" },
-      })
-    : [];
+  const [mojiPokrovitelji, sviPokrovitelji] = await Promise.all([
+    session.user.verified
+      ? prisma.pokrovitelj.findMany({
+          where: { vlasnikId: session.user.id },
+          select: {
+            id: true,
+            naziv: true,
+            pib: true,
+            rsdKumulativ: true,
+            trenutniNivo: true,
+            status: true,
+            zadruga: { select: { name: true } },
+          },
+          orderBy: { createdAt: "desc" },
+        })
+      : Promise.resolve([]),
+    prisma.pokrovitelj.findMany({
+      where: { status: "ACTIVE" },
+      select: {
+        id: true,
+        naziv: true,
+        adresa: true,
+        zadruga: { select: { name: true } },
+        rsdKumulativ: true,
+        trenutniNivo: true,
+      },
+      orderBy: { rsdKumulativ: "desc" },
+    }),
+  ]);
 
   return (
     <div>
@@ -82,6 +96,49 @@ export default async function PostaniPokroviteljPage() {
             <span className="font-semibold text-kolo-green-700">prag u POEN</span>
           </div>
         </div>
+      </div>
+
+      <div className="mb-6">
+        <h2 className="font-semibold text-kolo-text mb-3">Ranglista pokrovitelja</h2>
+        {sviPokrovitelji.length === 0 ? (
+          <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-6 text-center text-sm text-kolo-muted">
+            Još uvek nema registrovanih pokrovitelja.
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {sviPokrovitelji.map((p, i) => (
+              <div
+                key={p.id}
+                className="bg-kolo-surface border border-kolo-border rounded-2xl px-5 py-3 flex items-center gap-4"
+              >
+                <div className="text-sm font-semibold text-kolo-muted w-6 text-right shrink-0">
+                  {i + 1}.
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="font-medium text-kolo-text">{p.naziv}</div>
+                  {(p.adresa || p.zadruga) && (
+                    <div className="text-xs text-kolo-muted mt-0.5">
+                      {p.adresa && <span>{p.adresa}</span>}
+                      {p.zadruga && (
+                        <span className={p.adresa ? " · " : ""}>
+                          Zadruga: {p.zadruga.name}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="shrink-0 text-right">
+                  <div className="text-sm font-semibold text-kolo-green-700">
+                    Nivo {p.trenutniNivo}
+                  </div>
+                  <div className="text-xs text-kolo-muted mt-0.5">
+                    {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {mojiPokrovitelji.length > 0 && (

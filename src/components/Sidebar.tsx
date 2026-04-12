@@ -5,24 +5,45 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
+interface DnevniBrojevi {
+  novcanik: number;
+  pijaca: number;
+  zajednica: number;
+  zaposljavnje: number;
+  programi: number;
+  zrno: number;
+}
+
 interface SidebarProps {
   verified: boolean;
   isAdmin: boolean;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
+  dnevniBrojevi?: DnevniBrojevi | null;
 }
 
 function SidebarContent({
   verified,
   isAdmin,
   onLinkClick,
+  dnevniBrojevi,
 }: {
   verified: boolean;
   isAdmin: boolean;
   onLinkClick?: () => void;
+  dnevniBrojevi?: DnevniBrojevi | null;
 }) {
   const pathname = usePathname();
   const t = useTranslations("nav");
+
+  const badge: Record<string, number> = dnevniBrojevi ? {
+    "/novcanik": dnevniBrojevi.novcanik,
+    "/pijaca": dnevniBrojevi.pijaca,
+    "/zajednica": dnevniBrojevi.zajednica,
+    "/zaposljavnje": dnevniBrojevi.zaposljavnje,
+    "/programi": dnevniBrojevi.programi,
+    "/zrno": dnevniBrojevi.zrno,
+  } : {};
 
   const linkoviVerifikovan = [
     { href: "/sistem", label: t("pocetna") },
@@ -62,18 +83,22 @@ function SidebarContent({
       <nav className="flex-1 px-2.5 py-3 space-y-0.5 overflow-y-auto">
         {links.map(({ href, label }) => {
           const active = pathname === href || (href !== "/sistem" && pathname.startsWith(href + "/"));
+          const count = badge[href] ?? 0;
           return (
             <Link
               key={href}
               href={href}
               onClick={onLinkClick}
-              className={`flex items-center px-3 py-2 rounded-xl text-base font-medium transition-all duration-150 ${
+              className={`flex items-center justify-between px-3 py-2 rounded-xl text-base font-medium transition-all duration-150 ${
                 active
                   ? "bg-white/15 text-white"
                   : "text-white/55 hover:bg-white/10 hover:text-white/90"
               }`}
             >
-              {label}
+              <span>{label}</span>
+              {count > 0 && (
+                <span className="text-xs font-semibold text-kolo-green-400">({count})</span>
+              )}
             </Link>
           );
         })}
@@ -93,7 +118,7 @@ function SidebarContent({
   );
 }
 
-export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose }: SidebarProps) {
+export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
   // Zatvori drawer pri promeni rute
   const pathname = usePathname();
   useEffect(() => {
@@ -104,7 +129,7 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose }
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col">
-        <SidebarContent verified={verified} isAdmin={isAdmin} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 
       {/* Mobile drawer overlay */}
@@ -126,7 +151,7 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose }
           <img src="/kolo-icon.png" alt="KOLO" style={{ width: 38, height: 38, objectFit: "contain" }} />
           <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
         </div>
-        <SidebarContent verified={verified} isAdmin={isAdmin} onLinkClick={onMobileClose} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>
     </>
   );
