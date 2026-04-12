@@ -49,7 +49,6 @@ function SidebarContent({
     { href: "/sistem", label: t("pocetna") },
     { href: "/novcanik", label: t("novcanik") },
     { href: "/pijaca", label: t("pijaca") },
-    { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
   ];
 

@@ -197,8 +197,10 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   const [loading, setLoading] = useState(false);
   const [sugestije, setSugestije] = useState<string[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
+  const [aktivniIndex, setAktivniIndex] = useState(-1);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const listaRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -213,6 +215,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   function handlePseudonimChange(val: string) {
     setPseudonim(val);
     setShowSugestije(true);
+    setAktivniIndex(-1);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     if (val.trim().length < 2) { setSugestije([]); return; }
     debounceRef.current = setTimeout(async () => {
@@ -226,6 +229,30 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
     setPseudonim(ps);
     setSugestije([]);
     setShowSugestije(false);
+    setAktivniIndex(-1);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!showSugestije || sugestije.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const novi = Math.min(aktivniIndex + 1, sugestije.length - 1);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const novi = Math.max(aktivniIndex - 1, 0);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter") {
+      if (aktivniIndex >= 0 && aktivniIndex < sugestije.length) {
+        e.preventDefault();
+        odaberi(sugestije[aktivniIndex]);
+      }
+    } else if (e.key === "Escape") {
+      setShowSugestije(false);
+      setAktivniIndex(-1);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -267,18 +294,24 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
             value={pseudonim}
             onChange={(e) => handlePseudonimChange(e.target.value)}
             onFocus={() => pseudonim.length >= 2 && setShowSugestije(true)}
+            onKeyDown={handleKeyDown}
             placeholder={t("send_pseudonim_placeholder")}
             autoComplete="off"
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
           {showSugestije && sugestije.length > 0 && (
-            <ul className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
-              {sugestije.map((ps) => (
+            <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-hidden">
+              {sugestije.map((ps, i) => (
                 <li key={ps}>
                   <button
                     type="button"
                     onMouseDown={() => odaberi(ps)}
-                    className="w-full text-left px-4 py-2.5 text-sm text-kolo-muted hover:bg-kolo-green-100 hover:text-kolo-green-700 transition-colors"
+                    onMouseEnter={() => setAktivniIndex(i)}
+                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                      i === aktivniIndex
+                        ? "bg-kolo-green-100 text-kolo-green-800"
+                        : "text-kolo-muted hover:bg-kolo-green-50 hover:text-kolo-green-700"
+                    }`}
                   >
                     {ps}
                   </button>
