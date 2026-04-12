@@ -3,8 +3,26 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { labelPrograma } from "@/lib/banka/programi";
+import { nivoZaKumulativ } from "@/lib/banka/donacija";
 import { ProgramType } from "@/generated/prisma/client";
 import SistemKlijent from "./SistemKlijent";
+
+const RANG_SIRENJEM = [
+  { do: 0, rang: 0 },
+  { do: 5, rang: 1 },
+  { do: 10, rang: 2 },
+  { do: 15, rang: 3 },
+  { do: 20, rang: 4 },
+  { do: 30, rang: 5 },
+  { do: 40, rang: 6 },
+  { do: 50, rang: 7 },
+  { do: 70, rang: 8 },
+  { do: 100, rang: 9 },
+  { do: Infinity, rang: 10 },
+];
+function rangZaBroj(n: number): number {
+  return RANG_SIRENJEM.find((r) => n <= r.do)?.rang ?? 10;
+}
 
 const SVE_PROGRAME: ProgramType[] = [
   "ZAPOSLJAVNJE",
@@ -80,7 +98,14 @@ export default async function SistemPage() {
           select: { zadruga: { select: { name: true } } },
           take: 1,
         },
-        referralsMade: { select: { id: true } },
+        referralsMade: {
+          where: { rewardPaid: true },
+          select: { id: true },
+        },
+        donations: {
+          where: { status: "CONFIRMED" },
+          select: { amountRSD: true },
+        },
       },
     }),
     prisma.zadruga.findMany({
@@ -132,16 +157,23 @@ export default async function SistemPage() {
     toId: t.toWallet?.user?.id ?? null,
   }));
 
-  const clanovi = korisnici.map((u) => ({
-    id: u.id,
-    pseudonim: u.pseudonim,
-    verified: u.verified,
-    balance: u.wallet?.balance ?? 0,
-    zadruga: u.zadrugaMemberships[0]?.zadruga?.name ?? null,
-    preporuke: u.referralsMade.length,
-    location: u.location ?? null,
-    createdAt: u.createdAt.toISOString(),
-  }));
+  const clanovi = korisnici.map((u) => {
+    const preporukeVerif = u.referralsMade.length;
+    const donacijeRSD = u.donations.reduce((s, d) => s + Number(d.amountRSD), 0);
+    return {
+      id: u.id,
+      pseudonim: u.pseudonim,
+      verified: u.verified,
+      balance: u.wallet?.balance ?? 0,
+      zadruga: u.zadrugaMemberships[0]?.zadruga?.name ?? null,
+      preporukeVerif,
+      rangPreporuke: rangZaBroj(preporukeVerif),
+      donacijeRSD,
+      rangDonacije: donacijeRSD > 0 ? nivoZaKumulativ(donacijeRSD).nivo : 0,
+      location: u.location ?? null,
+      createdAt: u.createdAt.toISOString(),
+    };
+  });
 
   const zadruge = zadrugeLista.map((z) => ({
     id: z.id,

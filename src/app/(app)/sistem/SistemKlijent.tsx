@@ -35,7 +35,10 @@ interface Clan {
   verified: boolean;
   balance: number;
   zadruga: string | null;
-  preporuke: number;
+  preporukeVerif: number;
+  rangPreporuke: number;
+  donacijeRSD: number;
+  rangDonacije: number;
   location: string | null;
   createdAt: string;
 }
@@ -426,6 +429,19 @@ function PregledSekcija({
   );
 }
 
+// ── RangTooltip ───────────────────────────────────────────────────────────────
+
+function RangTooltip({ rang, label }: { rang: number; label: string }) {
+  return (
+    <span className="relative group/tt inline-block cursor-default">
+      <span className="tabular-nums">{rang}</span>
+      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 bg-kolo-text text-white text-xs rounded whitespace-nowrap opacity-0 group-hover/tt:opacity-100 transition-opacity pointer-events-none z-20">
+        {label}
+      </span>
+    </span>
+  );
+}
+
 // ── Članovi ───────────────────────────────────────────────────────────────────
 
 function ClanoviSekcija({
@@ -472,11 +488,11 @@ function ClanoviSekcija({
       </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {/* Desktop header */}
-        <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_80px_1fr_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_1fr_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Pseudonim</span>
           <span>Lokacija</span>
           <span className="text-right">Balans</span>
-          <span className="text-right">Preporuke</span>
+          <span className="text-right">Rang</span>
           <span>Zadruga</span>
           <span className="text-right">Registracija</span>
         </div>
@@ -491,7 +507,7 @@ function ClanoviSekcija({
               className={i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}
             >
               {/* Desktop red */}
-              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_80px_1fr_100px] gap-4 px-5 py-3 items-center text-sm">
+              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_1fr_100px] gap-4 px-5 py-3 items-center text-sm">
                 <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/profil/${c.id}`}
@@ -509,7 +525,17 @@ function ClanoviSekcija({
                 <span className="text-right font-mono text-sm font-semibold text-kolo-text">
                   {c.balance.toLocaleString("sr-RS")}
                 </span>
-                <span className="text-right text-sm text-kolo-muted">{c.preporuke}</span>
+                <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
+                  <RangTooltip
+                    rang={c.rangDonacije}
+                    label={`Nivo ${c.rangDonacije} · ${c.donacijeRSD.toLocaleString("sr-RS")} RSD`}
+                  />
+                  <span className="text-kolo-border">/</span>
+                  <RangTooltip
+                    rang={c.rangPreporuke}
+                    label={`Rang ${c.rangPreporuke} · ${c.preporukeVerif} preporuka`}
+                  />
+                </div>
                 <span className="text-sm text-kolo-muted truncate">{c.zadruga ?? "—"}</span>
                 <span className="text-right text-sm text-kolo-muted">
                   {new Date(c.createdAt).toLocaleDateString("sr-RS", {
@@ -536,7 +562,7 @@ function ClanoviSekcija({
                 </div>
                 <div className="flex items-center gap-3 text-xs text-kolo-muted">
                   {c.zadruga && <span>Zadruga: {c.zadruga}</span>}
-                  <span>{c.preporuke} preporuka</span>
+                  <span>Rang {c.rangDonacije}/{c.rangPreporuke}</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "2-digit",
