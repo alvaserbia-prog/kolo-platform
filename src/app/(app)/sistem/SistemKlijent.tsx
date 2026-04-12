@@ -258,12 +258,12 @@ export default function SistemKlijent({
           </p>
           <p className={`text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
             {opticaj.toLocaleString("sr-RS")}
-            {danasEmitovano > 0 && (
-              <span className={`text-lg font-semibold ml-1.5 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-green-500"}`}>
-                (+{danasEmitovano.toLocaleString("sr-RS")})
-              </span>
-            )}
           </p>
+          {danasEmitovano > 0 && (
+            <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 ${sekcija === "pregled" ? "bg-white/20 text-white/80" : "bg-kolo-green-100 text-kolo-green-700"}`}>
+              +{danasEmitovano.toLocaleString("sr-RS")} danas
+            </span>
+          )}
           <div className={`flex items-center gap-1.5 mt-1 text-xs ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
             {zeroSum ? (
               <>
@@ -402,12 +402,12 @@ function Kartica({
       </p>
       <p className={`text-4xl font-bold tabular-nums leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
-        {danas > 0 && (
-          <span className={`text-lg font-semibold ml-1.5 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>
-            (+{danas})
-          </span>
-        )}
       </p>
+      {danas > 0 && (
+        <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 ${aktivan ? "bg-white/20 text-white/80" : "bg-kolo-green-100 text-kolo-green-700"}`}>
+          +{danas.toLocaleString("sr-RS")} danas
+        </span>
+      )}
       <p className={`text-xs mt-1 ${aktivan ? "text-white/60" : "text-kolo-muted"}`}>
         {podnaslov}
       </p>
