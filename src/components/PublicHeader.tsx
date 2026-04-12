@@ -19,10 +19,10 @@ export default async function PublicHeader() {
           <JezikSvitcer />
         </div>
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/pijaca" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
+          <Link href="/pijaca" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Pijaca
           </Link>
-          <Link href="/kako-funkcionise" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
+          <Link href="/kako-funkcionise" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Kako funkcioniše
           </Link>
         </nav>
