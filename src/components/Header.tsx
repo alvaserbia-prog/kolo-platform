@@ -151,7 +151,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
       </button>
 
       {open && (
-        <div className="absolute right-0 top-11 w-52 bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
+        <div className="absolute right-0 top-11 w-auto min-w-max bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-kolo-border">
             <p className="text-sm font-semibold text-kolo-text truncate text-right">{pseudonim}</p>
           </div>
