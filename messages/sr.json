@@ -168,7 +168,9 @@
     "tip_zadruga_osnivanje": "Osnivanje zadruge",
     "tip_zadruga_bonus": "Bonus zadruge",
     "tip_program": "Program",
-    "verifikuj_dugme_link": "Verifikuj nalog →"
+    "verifikuj_dugme_link": "Verifikuj nalog →",
+    "vreme": "Vreme",
+    "iznos": "Iznos"
   },
   "novcanik": {
     "vase_stanje": "Vaše stanje",

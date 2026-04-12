@@ -168,7 +168,9 @@
     "tip_zadruga_osnivanje": "Cooperative founding",
     "tip_zadruga_bonus": "Cooperative bonus",
     "tip_program": "Program",
-    "verifikuj_dugme_link": "Verify account →"
+    "verifikuj_dugme_link": "Verify account →",
+    "vreme": "Time",
+    "iznos": "Amount"
   },
   "novcanik": {
     "vase_stanje": "Your balance",

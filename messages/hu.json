@@ -168,7 +168,9 @@
     "tip_zadruga_osnivanje": "Szövetkezet alapítása",
     "tip_zadruga_bonus": "Szövetkezet bónusz",
     "tip_program": "Program",
-    "verifikuj_dugme_link": "Fiók ellenőrzése →"
+    "verifikuj_dugme_link": "Fiók ellenőrzése →",
+    "vreme": "Idő",
+    "iznos": "Összeg"
   },
   "novcanik": {
     "vase_stanje": "Az Ön egyenlege",
