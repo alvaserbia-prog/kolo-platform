@@ -226,7 +226,7 @@ export default function SistemKlijent({
           <p className={`text-base font-semibold mb-1 ${sekcija === "programi" ? "text-white/70" : "text-kolo-muted"}`}>
             Opticaj programa
           </p>
-          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-4xl font-bold tabular-nums leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
             {danasEmitovano.toLocaleString("sr-RS")}
           </p>
           {danasLimit > 0 && (
@@ -256,7 +256,7 @@ export default function SistemKlijent({
           <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
             {t("kartica_opticaj")}
           </p>
-          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
             {opticaj.toLocaleString("sr-RS")}
             {danasEmitovano > 0 && (
               <span className={`text-lg font-semibold ml-1.5 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-green-500"}`}>
@@ -400,7 +400,7 @@ function Kartica({
       <p className={`text-base font-semibold mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
         {label}
       </p>
-      <p className={`text-4xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
+      <p className={`text-4xl font-bold tabular-nums leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
         {danas > 0 && (
           <span className={`text-lg font-semibold ml-1.5 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>
