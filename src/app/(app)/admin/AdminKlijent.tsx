@@ -1497,7 +1497,7 @@ function IzmeniKorisnikaForma({ korisnik, onClose, onDone }: {
   onClose: () => void;
   onDone: () => void;
 }) {
-  const [email, setEmail] = useState(korisnik.email);
+  const [email, setEmail] = useState(korisnik.email ?? "");
   const [pseudonim, setPseudonim] = useState(korisnik.pseudonim);
   const [loading, setLoading] = useState(false);
   const [greska, setGreska] = useState("");
@@ -1505,7 +1505,7 @@ function IzmeniKorisnikaForma({ korisnik, onClose, onDone }: {
   async function sacuvaj() {
     setGreska("");
     const data: Record<string, string> = {};
-    if (email.trim() !== korisnik.email) data.email = email.trim();
+    if (email.trim() !== (korisnik.email ?? "")) data.email = email.trim();
     if (pseudonim.trim() !== korisnik.pseudonim) data.pseudonim = pseudonim.trim();
     if (Object.keys(data).length === 0) { onClose(); return; }
 
