@@ -11,23 +11,22 @@ export default async function PublicHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-kolo-border">
       <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <Image src={logoImg} alt="KOLO" width={40} height={24} style={{ height: "auto" }} />
-          <span className="font-bold text-kolo-green-900 text-lg tracking-tight">KOLO</span>
-        </Link>
+        <div className="flex items-center gap-6 shrink-0">
+          <Link href="/" className="flex items-center gap-2.5">
+            <Image src={logoImg} alt="KOLO" width={40} height={24} style={{ height: "auto" }} />
+            <span className="font-bold text-kolo-green-900 text-lg tracking-tight">KOLO</span>
+          </Link>
+          <JezikSvitcer />
+        </div>
         <nav className="hidden md:flex items-center gap-6">
           <Link href="/pijaca" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Pijaca
-          </Link>
-          <Link href="/pokrovitelji" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
-            Pokrovitelji
           </Link>
           <Link href="/kako-funkcionise" className="text-sm text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Kako funkcioniše
           </Link>
         </nav>
         <div className="flex items-center gap-3">
-          <JezikSvitcer />
           {session ? (
             <Link
               href="/dashboard"

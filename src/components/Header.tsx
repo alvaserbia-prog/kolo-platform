@@ -24,30 +24,32 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
     <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
       <div className="flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900">
 
-        {/* Placeholder — ista širina kao sidebar (w-52) */}
-        <div className="hidden md:block w-52 shrink-0" />
-
-        {/* Hamburger — mobilno */}
-        <div className="flex md:hidden items-center gap-2 px-4">
-          <button
-            onClick={onMenuOpen}
-            className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-            aria-label="Meni"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-          </button>
-          <span className="font-bold text-white text-base tracking-widest">KOLO</span>
-        </div>
-
-        {/* Desna strana: jezik + balans + poruke + notifikacije + profil */}
-        <div className="flex items-center gap-0 px-4">
-          <div className="hidden sm:flex mr-2">
+        {/* Leva strana: jezik + hamburger (mobilno) */}
+        <div className="flex items-center shrink-0">
+          {/* Desktop: placeholder + zastavice */}
+          <div className="hidden md:flex items-center w-52 px-4 gap-3">
             <JezikSvitcer />
           </div>
+          {/* Mobilno: hamburger + naziv + zastavice */}
+          <div className="flex md:hidden items-center gap-2 px-4">
+            <button
+              onClick={onMenuOpen}
+              className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Meni"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            </button>
+            <span className="font-bold text-white text-base tracking-widest">KOLO</span>
+            <JezikSvitcer />
+          </div>
+        </div>
+
+        {/* Desna strana: balans + poruke + notifikacije + profil */}
+        <div className="flex items-center gap-0 px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
