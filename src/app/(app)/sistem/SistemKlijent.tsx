@@ -825,7 +825,15 @@ function DonacijeSekcija({
 
   return (
     <div className="space-y-4">
-      <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
+      <div className="flex items-center justify-between">
+        <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
+        <Link
+          href="/donacije"
+          className="text-sm font-semibold px-4 py-1.5 bg-kolo-green-700 text-white rounded-xl hover:bg-kolo-green-500 transition-colors"
+        >
+          Donacije →
+        </Link>
+      </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>Donator</span>
