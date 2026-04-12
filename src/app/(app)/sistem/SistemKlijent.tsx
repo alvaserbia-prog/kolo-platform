@@ -182,16 +182,6 @@ export default function SistemKlijent({
           podnaslov={t("kartica_verif_opis", { verif: verifikovanih, neverif: ukupnoKorisnika - verifikovanih })}
         />
 
-        {/* Transakcije */}
-        <Kartica
-          aktivan={sekcija === "transakcije"}
-          onClick={() => setSekcija("transakcije")}
-          label={t("kartica_transakcije")}
-          broj={transakcije.length}
-          danas={danasTransakcija}
-          podnaslov={t("kartica_tx_opis", { count: transakcije.length })}
-        />
-
         {/* Zadruge */}
         <Kartica
           aktivan={sekcija === "zadruge"}
@@ -200,6 +190,16 @@ export default function SistemKlijent({
           broj={ukupnoZadrugaCount}
           danas={danasZadruga}
           podnaslov={t("kartica_zadruge_opis")}
+        />
+
+        {/* Transakcije */}
+        <Kartica
+          aktivan={sekcija === "transakcije"}
+          onClick={() => setSekcija("transakcije")}
+          label={t("kartica_transakcije")}
+          broj={transakcije.length}
+          danas={danasTransakcija}
+          podnaslov={t("kartica_tx_opis", { count: transakcije.length })}
         />
 
         {/* Opticaj */}
@@ -251,10 +251,10 @@ export default function SistemKlijent({
         <Kartica
           aktivan={sekcija === "iznos"}
           onClick={() => setSekcija("iznos")}
-          label="Iznos transakcija"
+          label="Ukupan promet"
           broj={ukupanIznosTx}
           danas={danasIznosTx}
-          podnaslov="ukupno POEN prometa"
+          podnaslov="POEN između članova"
         />
       </div>
 
@@ -899,55 +899,73 @@ function IznosSekcija({
   danasIznosTx: number;
   transakcije: Transakcija[];
 }) {
-  const byType = transakcije.reduce(
-    (acc, tx) => {
-      acc[tx.type] = (acc[tx.type] || 0) + tx.amount;
-      return acc;
-    },
-    {} as Record<string, number>
-  );
-
-  const sortedTypes = Object.entries(byType).sort(([, a], [, b]) => b - a);
+  const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
+  const ukupnoTransferi = transferi.reduce((s, tx) => s + tx.amount, 0);
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
-          <p className="text-xs text-kolo-muted mb-1">Ukupno prometa (sve)</p>
+          <p className="text-xs text-kolo-muted mb-1">Ukupno prometa</p>
           <p className="text-2xl font-bold font-mono text-kolo-text">
             {ukupanIznosTx.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs text-kolo-muted mt-1">POEN</p>
+          <p className="text-xs text-kolo-muted mt-1">POEN između članova</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
           <p className="text-xs text-kolo-muted mb-1">Danas</p>
           <p className="text-2xl font-bold font-mono text-kolo-text">
             {danasIznosTx.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs text-kolo-muted mt-1">POEN</p>
+          <p className="text-xs text-kolo-muted mt-1">POEN između članova</p>
         </div>
       </div>
-      {sortedTypes.length > 0 && (
+      {transferi.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-          <div className="px-5 py-2.5 bg-kolo-bg border-b border-kolo-border">
-            <p className="text-xs font-semibold text-kolo-muted">Promet po tipu (poslednjih 100 tx)</p>
+          <div className="px-5 py-2.5 bg-kolo-bg border-b border-kolo-border flex justify-between items-center">
+            <p className="text-xs font-semibold text-kolo-muted">
+              Poslednjih {transferi.length} transfera
+            </p>
+            <p className="text-xs text-kolo-muted">
+              ukupno {ukupnoTransferi.toLocaleString("sr-RS")} POEN
+            </p>
           </div>
-          {sortedTypes.map(([type, amount], i) => (
+          <div className="grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 px-5 py-2 border-b border-kolo-border bg-kolo-bg/50 text-xs font-semibold text-kolo-muted">
+            <span>Vreme</span>
+            <span>Pošiljalac</span>
+            <span />
+            <span>Primalac</span>
+            <span className="text-right">Iznos</span>
+          </div>
+          {transferi.slice(0, 20).map((tx, i) => (
             <div
-              key={type}
-              className={`px-5 py-3 flex justify-between items-center ${
-                i < sortedTypes.length - 1 ? "border-b border-kolo-border/30" : ""
+              key={tx.id}
+              className={`grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 items-center px-5 py-2.5 text-sm ${
+                i < Math.min(transferi.length, 20) - 1 ? "border-b border-kolo-border/30" : ""
               }`}
             >
-              <span
-                className={`text-xs px-2 py-0.5 rounded font-medium ${
-                  TIP_BOJA[type] || "bg-kolo-bg text-kolo-muted"
-                }`}
-              >
-                {type.replace(/_/g, " ")}
+              <span className="text-xs text-kolo-muted">
+                {new Date(tx.createdAt).toLocaleString("sr-RS", {
+                  day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
+                })}
               </span>
-              <span className="font-mono text-sm font-semibold text-kolo-text">
-                {amount.toLocaleString("sr-RS")} POEN
+              {tx.fromId ? (
+                <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
+                  {tx.fromPseudonim}
+                </Link>
+              ) : (
+                <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+              )}
+              <span className="text-kolo-muted text-center">→</span>
+              {tx.toId ? (
+                <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
+                  {tx.toPseudonim}
+                </Link>
+              ) : (
+                <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+              )}
+              <span className="font-mono font-semibold text-kolo-text text-right">
+                {tx.amount.toLocaleString("sr-RS")}
               </span>
             </div>
           ))}

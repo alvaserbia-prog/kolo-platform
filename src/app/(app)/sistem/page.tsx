@@ -146,10 +146,13 @@ export default async function SistemPage() {
     prisma.donationRecord.count({
       where: { status: "CONFIRMED", confirmedAt: { gte: danas } },
     }),
-    prisma.transaction.aggregate({ _sum: { amount: true } }),
     prisma.transaction.aggregate({
       _sum: { amount: true },
-      where: { createdAt: { gte: danas } },
+      where: { type: "TRANSFER" },
+    }),
+    prisma.transaction.aggregate({
+      _sum: { amount: true },
+      where: { type: "TRANSFER", createdAt: { gte: danas } },
     }),
     prisma.donationRecord.findMany({
       where: { status: "CONFIRMED" },
