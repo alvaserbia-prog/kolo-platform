@@ -223,13 +223,13 @@ export default function SistemKlijent({
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
           }`}
         >
-          <p className={`text-xs font-medium mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
             {t("kartica_opticaj")}
           </p>
-          <p className={`text-3xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-4xl font-bold font-mono leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
             {opticaj.toLocaleString("sr-RS")}
             {danasEmitovano > 0 && (
-              <span className={`text-base font-semibold ml-1.5 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-green-500"}`}>
+              <span className={`text-lg font-semibold ml-1.5 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-green-500"}`}>
                 (+{danasEmitovano.toLocaleString("sr-RS")})
               </span>
             )}
@@ -336,13 +336,13 @@ function Kartica({
           : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
       }`}
     >
-      <p className={`text-xs font-medium mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
+      <p className={`text-base font-semibold mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
         {label}
       </p>
-      <p className={`text-3xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
+      <p className={`text-4xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
         {danas > 0 && (
-          <span className={`text-base font-semibold ml-1.5 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>
+          <span className={`text-lg font-semibold ml-1.5 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>
             (+{danas})
           </span>
         )}
