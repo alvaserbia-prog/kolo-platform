@@ -528,7 +528,7 @@ function ClanoviSekcija({
                 <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
                   <RangTooltip
                     rang={c.rangDonacije}
-                    label={`Nivo ${c.rangDonacije} · ${c.donacijeRSD.toLocaleString("sr-RS")} RSD`}
+                    label={`Rang ${c.rangDonacije} · ${c.donacijeRSD.toLocaleString("sr-RS")} RSD`}
                   />
                   <span className="text-kolo-border">/</span>
                   <RangTooltip
