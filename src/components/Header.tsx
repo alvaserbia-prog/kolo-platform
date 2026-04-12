@@ -247,7 +247,12 @@ function BellNotifikacije() {
   }, [toast]);
 
   async function ucitaj() {
-    const res = await fetch("/api/notifikacije");
+    let res: Response;
+    try {
+      res = await fetch("/api/notifikacije");
+    } catch {
+      return;
+    }
     if (!res.ok) return;
     const data = await res.json();
     const noviCount: number = data.neprocitano ?? 0;
