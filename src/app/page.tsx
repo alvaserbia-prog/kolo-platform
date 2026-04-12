@@ -404,6 +404,8 @@ export default async function Home() {
                 <li><a href="#" className="hover:text-kolo-green-700 transition-colors">O Fondaciji</a></li>
                 <li><a href="#" className="hover:text-kolo-green-700 transition-colors">Kontakt</a></li>
                 <li><a href="#faq" className="hover:text-kolo-green-700 transition-colors">FAQ</a></li>
+                <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">Uslovi korišćenja</Link></li>
+                <li><Link href="/privatnost" className="hover:text-kolo-green-700 transition-colors">Politika privatnosti</Link></li>
               </ul>
             </div>
           </div>
