@@ -94,12 +94,21 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 function BalansHeader({ userId }: { userId: string }) {
   const [balans, setBalans] = useState<number | null>(null);
 
-  useEffect(() => {
+  function ucitajBalans() {
     fetch("/api/profil/balans")
       .then((r) => r.json())
       .then((d) => setBalans(d.balance ?? 0))
       .catch(() => setBalans(0));
+  }
+
+  useEffect(() => {
+    ucitajBalans();
   }, [userId]);
+
+  useEffect(() => {
+    window.addEventListener("balans-updated", ucitajBalans);
+    return () => window.removeEventListener("balans-updated", ucitajBalans);
+  }, []);
 
   return (
     <span className="text-white/60 text-sm hidden sm:inline">

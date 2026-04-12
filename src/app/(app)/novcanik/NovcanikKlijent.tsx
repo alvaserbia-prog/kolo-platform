@@ -70,7 +70,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
       {showSend && (
         <SendForma
           onClose={() => setShowSend(false)}
-          onSuccess={() => { setShowSend(false); router.refresh(); }}
+          onSuccess={() => { setShowSend(false); window.dispatchEvent(new Event("balans-updated")); router.refresh(); }}
           initialPseudonim={platiPseudonim}
           initialIznos={prefillIznos}
           initialOpis={prefillOpis}
