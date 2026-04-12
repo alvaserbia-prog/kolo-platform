@@ -337,10 +337,15 @@ function Kartica({
       }`}
     >
       <p className={`text-xs font-medium mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
-        {label}{danas > 0 && <span className={`ml-1 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>({danas})</span>}
+        {label}
       </p>
       <p className={`text-3xl font-bold font-mono leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
+        {danas > 0 && (
+          <span className={`text-base font-semibold ml-1.5 ${aktivan ? "text-white/50" : "text-kolo-green-500"}`}>
+            (+{danas})
+          </span>
+        )}
       </p>
       <p className={`text-xs mt-1 ${aktivan ? "text-white/60" : "text-kolo-muted"}`}>
         {podnaslov}
