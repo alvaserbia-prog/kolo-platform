@@ -9,7 +9,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/login");
+  if (!session) redirect("/");
 
   return (
     <AppShell verified={session.user.verified} isAdmin={session.user.role === "ADMIN"}>
