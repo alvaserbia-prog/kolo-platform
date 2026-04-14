@@ -71,8 +71,7 @@ export default async function Home() {
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
               </svg>
             </div>
-            <p className="text-sm font-bold text-kolo-gold-600 leading-none">Rani pristup</p>
-            <p className="text-xs text-kolo-muted leading-tight">alpha faza otvorena</p>
+            <p className="text-sm font-semibold text-kolo-gold-600 leading-snug">Rani pristup<br /><span className="font-normal text-kolo-muted">Alpha faza</span></p>
           </div>
 
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
@@ -81,8 +80,7 @@ export default async function Home() {
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
-            <p className="text-sm font-bold text-kolo-green-700 leading-none">Fondacija</p>
-            <p className="text-xs text-kolo-muted leading-tight">u registraciji u Somboru</p>
+            <p className="text-sm font-semibold text-kolo-green-700 leading-snug">Fondacija<br /><span className="font-normal text-kolo-muted">u Somboru</span></p>
           </div>
 
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
@@ -91,8 +89,7 @@ export default async function Home() {
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
             </div>
-            <p className="text-sm font-bold text-kolo-green-700 leading-none">Članstvo</p>
-            <p className="text-xs text-kolo-muted leading-tight">besplatno</p>
+            <p className="text-sm font-semibold text-kolo-green-700 leading-snug">Registracija<br /><span className="font-normal text-kolo-muted">besplatna</span></p>
           </div>
         </section>
 
