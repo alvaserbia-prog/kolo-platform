@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
@@ -20,19 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
-async function ucitajStatistike() {
-  const [clanovi, banka] = await Promise.all([
-    prisma.user.count({ where: { verified: true } }),
-    prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
-  ]);
-  return { clanovi, opticaj: banka ? Math.abs(banka.balance) : 0 };
-}
-
 export default async function Home() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/dashboard");
-
-  const { clanovi, opticaj } = await ucitajStatistike();
 
   return (
     <div className="min-h-screen bg-kolo-bg">
@@ -46,13 +35,13 @@ export default async function Home() {
         <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
           <div className="grid md:grid-cols-[1fr_360px] gap-10 items-center">
             <div className="max-w-lg">
-              <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-5" style={{ letterSpacing: "-0.02em" }}>
-                Samoodrživa zajednica.
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
+                Probudimo zajednicu
               </h1>
-              <p className="text-white/70 text-xl md:text-2xl leading-relaxed mb-10">
-                Razmena rada, dobara i znanja<br />u duhu solidarnosti.
+              <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-7">
+                kroz razmenu rada, dobara i znanja<br />po našim pravilima.
               </p>
-              <div className="flex flex-wrap gap-3 mb-4">
+              <div className="flex flex-wrap gap-3">
                 <Link href="/kako-funkcionise"
                   className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
                   Kako funkcioniše →
@@ -62,9 +51,6 @@ export default async function Home() {
                   Priključi se
                 </Link>
               </div>
-              <p className="text-white/40 text-xs">
-                Rani pristup · Fondacija u registraciji u Somboru · Članstvo besplatno
-              </p>
             </div>
             <div className="hidden md:flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -77,36 +63,36 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* STATISTIKE */}
+        {/* INFO KARTICE */}
         <section className="grid grid-cols-3 gap-4">
-          <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <p className="text-3xl font-bold font-mono text-kolo-text leading-none">{clanovi.toLocaleString("sr-RS")}</p>
-            <p className="text-sm text-kolo-muted leading-tight">verifikovanih članova</p>
-          </div>
-
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-kolo-gold-100 flex items-center justify-center text-kolo-gold-600">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
               </svg>
             </div>
-            <p className="text-3xl font-bold font-mono text-kolo-text leading-none">{opticaj.toLocaleString("sr-RS")}</p>
-            <p className="text-sm text-kolo-muted leading-tight">POEN u opticaju</p>
+            <p className="text-sm font-bold text-kolo-gold-600 leading-none">Rani pristup</p>
+            <p className="text-xs text-kolo-muted leading-tight">alpha faza otvorena</p>
           </div>
 
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
             </div>
-            <p className="text-3xl font-bold font-mono text-kolo-green-700 leading-none">Alfa</p>
-            <p className="text-sm text-kolo-muted leading-tight">faza razvoja</p>
+            <p className="text-sm font-bold text-kolo-green-700 leading-none">Fondacija</p>
+            <p className="text-xs text-kolo-muted leading-tight">u registraciji u Somboru</p>
+          </div>
+
+          <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
+            <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <p className="text-sm font-bold text-kolo-green-700 leading-none">Članstvo</p>
+            <p className="text-xs text-kolo-muted leading-tight">besplatno</p>
           </div>
         </section>
 
