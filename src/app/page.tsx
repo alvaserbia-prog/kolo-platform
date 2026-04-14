@@ -52,7 +52,7 @@ export default async function Home() {
               <p className="text-white/70 text-xl md:text-2xl leading-relaxed mb-10">
                 Razmena rada, dobara i znanja<br />u duhu solidarnosti.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 mb-4">
                 <Link href="/kako-funkcionise"
                   className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
                   Kako funkcioniše →
@@ -62,6 +62,9 @@ export default async function Home() {
                   Priključi se
                 </Link>
               </div>
+              <p className="text-white/40 text-xs">
+                Rani pristup · Fondacija u registraciji u Somboru · Članstvo besplatno
+              </p>
             </div>
             <div className="hidden md:flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
