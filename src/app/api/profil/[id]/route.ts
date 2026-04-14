@@ -85,9 +85,10 @@ export async function GET(
 
   // Transakcije — uvek prikazujemo, poslednjih 10
   const { cursor } = Object.fromEntries(req.nextUrl.searchParams);
-  const transakcije = await prisma.transaction.findMany({
+  const walletId = korisnik.wallet?.id ?? null;
+  const transakcije = walletId ? await prisma.transaction.findMany({
     where: {
-      OR: [{ fromWalletId: korisnik.wallet?.id }, { toWalletId: korisnik.wallet?.id }],
+      OR: [{ fromWalletId: walletId }, { toWalletId: walletId }],
     },
     orderBy: { createdAt: "desc" },
     take: 11,
@@ -101,7 +102,7 @@ export async function GET(
       fromWallet: { select: { user: { select: { id: true, pseudonim: true } } } },
       toWallet: { select: { user: { select: { id: true, pseudonim: true } } } },
     },
-  });
+  }) : [];
 
   const imaJos = transakcije.length === 11;
   const transakcijeSlice = imaJos ? transakcije.slice(0, 10) : transakcije;
