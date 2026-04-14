@@ -25,6 +25,9 @@ export default async function PublicHeader() {
           <Link href="/kako-funkcionise" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
             Kako funkcioniše
           </Link>
+          <Link href="/o-nama" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
+            O nama
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           {session ? (

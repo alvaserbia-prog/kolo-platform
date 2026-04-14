@@ -40,30 +40,31 @@ export default async function Home() {
       <PublicHeader />
 
       {/* ── SADRŽAJ ────────────────────────────────────────────────── */}
-      <div className="max-w-[1140px] mx-auto px-6 py-8 space-y-6 pb-20">
+      <div className="max-w-[932px] mx-auto px-6 py-8 space-y-6 pb-20">
 
         {/* HERO */}
-        <section className="bg-kolo-green-900 rounded-2xl p-6 md:p-8 text-white">
+        <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
           <div className="grid md:grid-cols-[1fr_220px] gap-10 items-center">
             <div className="max-w-lg">
-              <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-5" style={{ letterSpacing: "-0.02em" }}>
-                Ekonomija koju gradiš{" "}
-                <span className="text-kolo-gold-400">sa svojom zajednicom</span>
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
+                Samoodrživa zajednica.
               </h1>
-              <p className="text-white/70 leading-relaxed mb-7">
-                KOLO je sistem u kome tvoj doprinos ima vrednost. POEN beleži šta si dao zajednici.
-                ZRNO ti daje glas u odlukama koje je oblikuju.
+              <p className="text-white/70 text-base md:text-lg leading-relaxed mb-6">
+                Razmena rada, dobara i znanja u duhu solidarnosti.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/registracija"
-                  className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
-                  Pridruži se
-                </Link>
+              <div className="flex flex-wrap gap-3 mb-4">
                 <Link href="/kako-funkcionise"
+                  className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
+                  Kako funkcioniše →
+                </Link>
+                <Link href="/registracija"
                   className="px-6 py-3 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm">
-                  Kako funkcioniše
+                  Priključi se
                 </Link>
               </div>
+              <p className="text-white/40 text-xs">
+                Rani pristup · Fondacija u registraciji u Somboru · Članstvo besplatno
+              </p>
             </div>
             <div className="hidden md:flex items-center justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -370,7 +371,7 @@ export default async function Home() {
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
       <footer className="border-t border-kolo-border bg-white">
-        <div className="max-w-[1140px] mx-auto px-6 py-6">
+        <div className="max-w-[932px] mx-auto px-6 py-6">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-3">
@@ -401,7 +402,7 @@ export default async function Home() {
             <div>
               <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Informacije</p>
               <ul className="space-y-2 text-sm text-kolo-muted">
-                <li><a href="#" className="hover:text-kolo-green-700 transition-colors">O Fondaciji</a></li>
+                <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">O nama</Link></li>
                 <li><a href="#" className="hover:text-kolo-green-700 transition-colors">Kontakt</a></li>
                 <li><a href="#faq" className="hover:text-kolo-green-700 transition-colors">FAQ</a></li>
                 <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">Uslovi korišćenja</Link></li>
