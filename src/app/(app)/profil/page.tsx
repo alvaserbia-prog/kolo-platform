@@ -32,6 +32,15 @@ export default async function ProfilPage() {
         punoIme: user.podaci?.punoIme ?? null,
         opis: user.podaci?.opis ?? null,
         avatar: user.avatar ?? null,
+        prikaziLokaciju: user.podaci?.prikaziLokaciju ?? true,
+        prikaziOpis: user.podaci?.prikaziOpis ?? false,
+        prikaziPunoIme: user.podaci?.prikaziPunoIme ?? false,
+        prikaziTelefon: user.podaci?.prikaziTelefon ?? false,
+        prikaziBilans: user.podaci?.prikaziBilans ?? true,
+        prikaziZrno: user.podaci?.prikaziZrno ?? true,
+        prikaziRangPreporuka: user.podaci?.prikaziRangPreporuka ?? true,
+        prikaziRangDonacija: user.podaci?.prikaziRangDonacija ?? true,
+        prikaziOglase: user.podaci?.prikaziOglase ?? true,
       }}
     />
   );

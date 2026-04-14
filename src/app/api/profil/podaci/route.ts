@@ -3,6 +3,18 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+const TOGGLE_FIELDS = [
+  "prikaziLokaciju",
+  "prikaziOpis",
+  "prikaziPunoIme",
+  "prikaziTelefon",
+  "prikaziBilans",
+  "prikaziZrno",
+  "prikaziRangPreporuka",
+  "prikaziRangDonacija",
+  "prikaziOglase",
+] as const;
+
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
@@ -18,11 +30,19 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "Opis je predugačak (max 200 karaktera)." }, { status: 400 });
   }
 
+  const toggleUpdate: Record<string, boolean> = {};
+  for (const field of TOGGLE_FIELDS) {
+    if (typeof body[field] === "boolean") {
+      toggleUpdate[field] = body[field];
+    }
+  }
+
   await prisma.userPodaci.upsert({
     where: { userId: session.user.id },
     update: {
       punoIme: punoIme === "" ? null : punoIme,
       opis: opis === "" ? null : opis,
+      ...toggleUpdate,
     },
     create: {
       userId: session.user.id,

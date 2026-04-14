@@ -212,6 +212,17 @@ model UserPodaci {
   punoIme   String?
   opis      String?
   updatedAt DateTime @updatedAt
+
+  // Vidljivost profila
+  prikaziLokaciju      Boolean @default(true)
+  prikaziOpis          Boolean @default(false)
+  prikaziPunoIme       Boolean @default(false)
+  prikaziTelefon       Boolean @default(false)
+  prikaziBilans        Boolean @default(true)
+  prikaziZrno          Boolean @default(true)
+  prikaziRangPreporuka Boolean @default(true)
+  prikaziRangDonacija  Boolean @default(true)
+  prikaziOglase        Boolean @default(true)
 }
 
 model Wallet {

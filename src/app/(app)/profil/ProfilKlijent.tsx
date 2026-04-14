@@ -33,6 +33,15 @@ interface ProfilProps {
     punoIme: string | null;
     opis: string | null;
     avatar: string | null;
+    prikaziLokaciju: boolean;
+    prikaziOpis: boolean;
+    prikaziPunoIme: boolean;
+    prikaziTelefon: boolean;
+    prikaziBilans: boolean;
+    prikaziZrno: boolean;
+    prikaziRangPreporuka: boolean;
+    prikaziRangDonacija: boolean;
+    prikaziOglase: boolean;
   };
 }
 
@@ -67,6 +76,32 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [podaciError, setPodaciError] = useState("");
   const [podaciSuccess, setPodaciSuccess] = useState("");
   const [podaciLoading, setPodaciLoading] = useState(false);
+
+  // Vidljivost profila
+  const [togglei, setTogglei] = useState({
+    prikaziLokaciju: user.prikaziLokaciju,
+    prikaziOpis: user.prikaziOpis,
+    prikaziPunoIme: user.prikaziPunoIme,
+    prikaziTelefon: user.prikaziTelefon,
+    prikaziBilans: user.prikaziBilans,
+    prikaziZrno: user.prikaziZrno,
+    prikaziRangPreporuka: user.prikaziRangPreporuka,
+    prikaziRangDonacija: user.prikaziRangDonacija,
+    prikaziOglase: user.prikaziOglase,
+  });
+  const [toggleLoading, setToggleLoading] = useState<string | null>(null);
+
+  async function promeniToggle(field: keyof typeof togglei, vrednost: boolean) {
+    setToggleLoading(field);
+    const noviTogglei = { ...togglei, [field]: vrednost };
+    setTogglei(noviTogglei);
+    await fetch("/api/profil/podaci", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ [field]: vrednost }),
+    });
+    setToggleLoading(null);
+  }
 
   // Prigovor
   const [prigovorTip, setPrigovorTip] = useState("OSTALO");
@@ -555,6 +590,43 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <span className="text-kolo-border">→</span>
         </div>
       </Link>
+
+      {/* Vidljivost profila */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-1">Vidljivost profila</h2>
+        <p className="text-xs text-kolo-muted mb-5">Izaberite koje informacije su vidljive drugim verifikovanim korisnicima na vašem javnom profilu.</p>
+        <div className="space-y-0 divide-y divide-kolo-border">
+          {([
+            { field: "prikaziLokaciju", label: "Lokacija" },
+            { field: "prikaziBilans", label: "POEN balans" },
+            { field: "prikaziZrno", label: "ZRNO (ukupan broj)" },
+            { field: "prikaziRangPreporuka", label: "Rang preporuka" },
+            { field: "prikaziRangDonacija", label: "Rang donacija" },
+            { field: "prikaziOglase", label: "Oglasi na Pijaci" },
+            { field: "prikaziOpis", label: "Opis / zanimanje" },
+            { field: "prikaziPunoIme", label: "Pravo ime" },
+            { field: "prikaziTelefon", label: "Telefon" },
+          ] as { field: keyof typeof togglei; label: string }[]).map(({ field, label }) => (
+            <div key={field} className="flex items-center justify-between py-3">
+              <span className="text-sm text-kolo-text">{label}</span>
+              <button
+                onClick={() => promeniToggle(field, !togglei[field])}
+                disabled={toggleLoading === field}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
+                  togglei[field] ? "bg-kolo-green-700" : "bg-kolo-border"
+                }`}
+                aria-label={`${label} — ${togglei[field] ? "vidljivo" : "skriveno"}`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+                    togglei[field] ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Podaci i privatnost */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
