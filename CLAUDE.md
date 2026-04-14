@@ -22,15 +22,17 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je kurs ZRNA (DECIMAL(20,2)) i RSD iznosi pokrovitelja (DECIMAL(12,2)).
 4. **Transfer 1:1**: slanje POEN-a između članova je bez provizije, Banka nije posrednik.
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) se izvršavaju u ponoć.
-6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet.
+6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet. **Pseudonim je vidljiv svim posetiocima (i neregistrovanim) u javnoj evidenciji transakcija i na Pijaci.**
 7. **Dnevni limit programa Banke**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Banke).
 8. **Gradirana vidljivost podataka po ulozi**:
-   - Neverifikovan prijavljen korisnik vidi: (a) agregatni feed transakcija bez identifikatora strana — vreme, iznos, tip, oznaka programa Banke; opis samo za emisije Banke, ne za P2P transfere; (b) sopstvenu potpunu istoriju sa pseudonimima protivstrana; (c) zadruge (naziv, lokacija, broj članova, projekti, bonusi); (d) sistemske agregate (opticaj, kurs ZRNA, broj članova, broj transakcija, zero-sum); (e) javnu rang-listu pokrovitelja; (f) sopstvene notifikacije sa pseudonimima protivstrana.
-   - Neverifikovan prijavljen korisnik ne vidi: pseudonime u tuđim transakcijama; rang-liste članova (donacije, preporuke); profile drugih članova; sadržaj poruka; identitet prodavca na Pijaci.
-   - Neverifikovan prijavljen korisnik ne može: slati niti primati poruke; kupovati niti prodavati na Pijaci; otvarati profile drugih korisnika (redirect na poruku o verifikaciji).
-   - Pijaca za neverifikovanog = isti nivo kao za neprijavljenog posetioca: oglasi, opisi, lokacije — bez pseudonima prodavca i bez dugmeta "Kontaktiraj prodavca".
+   - **Neregistrovan posetilac** vidi: javnu evidenciju transakcija sa pseudonimima strana (iznos, vreme, tip, opis emisija); Pijaca oglase sa pseudonimom prodavca, opisom, lokacijom, cenom; sistemske agregate; javnu rang-listu pokrovitelja.
+   - **Neregistrovan posetilac** ne može: slati POEN, kupovati/prodavati na Pijaci, kontaktirati prodavca, pristupiti profilima članova, videti telefon prodavca.
+   - **Neverifikovan prijavljen korisnik** vidi sve što vidi neregistrovan, plus: sopstvenu potpunu istoriju transakcija sa pseudonimima protivstrana; sopstvene notifikacije sa pseudonimima; zadruge (naziv, lokacija, broj članova, projekti, bonusi).
+   - **Neverifikovan prijavljen korisnik** ne vidi: rang-liste članova (donacije, preporuke); profile drugih članova; sadržaj poruka; telefon prodavca na Pijaci.
+   - **Neverifikovan prijavljen korisnik** ne može: slati niti primati poruke; kupovati niti prodavati na Pijaci; otvarati profile drugih korisnika (redirect na poruku o verifikaciji).
+   - **Verifikovan korisnik** ima pun pristup svim funkcionalnostima: profili članova, poruke, kupovina/prodaja na Pijaci, rang-liste, telefon prodavca.
    - Pretraga članova za neverifikovanog: dostupna isključivo u kontekstu forme za slanje POENA, vraća `{ id, pseudonim }`. Za verifikovanog vraća `{ id, pseudonim, verified, location }`.
-   - Verifikacija je sticanje prava na uvid u tuđe pseudonimne podatke, ne pravo na sakrivanje sopstvenih.
+   - Verifikacija je preduslov za pristup profilima članova, komunikacionom modulu i punoj funkcionalnosti Pijace. Javna evidencija transakcija — pseudonimi strana, iznosi, vremena — dostupna je svim posetiocima Platforme.
 
 ## Konvencije koda
 
@@ -91,8 +93,8 @@ docs/             — dokumentacija po fazama
 ### Pijaca (Marketplace)
 - Listinzi za prodaju/razmenu
 - Pretraga po kategoriji, lokaciji
-- Javni prikaz (bez pseudonima) i prijavljeni prikaz
-- Sopstveni layout (`src/app/pijaca/layout.tsx`)
+- Javni prikaz (sa pseudonimom prodavca) i prijavljeni prikaz; kupovina i kontakt samo za verifikovane
+- Sopstveni layout (`src/app/pijaca/layout.tsx`), stranica detalja oglasa na `/pijaca/[id]/page.tsx` (javno dostupna)
 
 ### Pretraga članova
 - `ClanPretraga` komponenta (debounce 250ms, keyboard navigacija ↑↓ Enter Escape)
@@ -139,8 +141,8 @@ docs/             — dokumentacija po fazama
 ### Pokrovitelji
 - Pokrovitelj = pravno lice, nema login, ima vlasnika (verifikovani član)
 - Admin kreira pokrovitelja (naziv, PIB, vlasnikId, zadrugaId?)
-- Admin evidentira doprinos u RSD → vlasnik dobija bonus POEN: nivoi (1-2-5 skala) + 1:1 donacija
-- Nivo 1 (prvi doprinos): 20.000 POEN; Nivo 2+: prag u RSD = bonus u POEN (1-2-5 skala, bez gornje granice)
+- Admin evidentira doprinos u RSD → vlasnik dobija bonus POEN po fiksnoj tabeli 7 nivoa (nema 1:1 konverzije)
+- 10.000 → 20.000 | 20.000 → 30.000 | 50.000 → 80.000 | 100.000 → 150.000 | 200.000 → 300.000 | 500.000 → 800.000 | 1.000.000 → 1.500.000 POEN
 - Sve se emituje kao **jedna transakcija** sa opisom `"Bonus za pokroviteljstvo iznos X"`
 - Javna stranica: `/pokrovitelji`, app stranica: `/postani-pokrovitelj`
 - Logika: `src/lib/banka/pokrovitelj.ts`
@@ -301,6 +303,7 @@ docs/             — dokumentacija po fazama
 - `GET /api/admin/zero-sum`
 - `GET /api/admin/korisnici/[id]` — detalji korisnika (admin)
 - `GET /api/javno/statistike`
+- `GET /api/javno/feed` — javna evidencija transakcija sa pseudonimima (bez autentikacije)
 - `GET /api/notifikacije`
 - `PATCH /api/notifikacije`
 - `GET /api/cron/zero-sum` — Vercel cron endpoint
@@ -309,7 +312,7 @@ docs/             — dokumentacija po fazama
 
 - `banka/emisija.ts` — `emitujPoen()`: emisija POEN-a iz Banke, zero-sum validacija
 - `banka/programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
-- `banka/pokrovitelj.ts` — `evidentirajDoprinos()`, generator pragova 1-2-5, `bonusZaNivo()`
+- `banka/pokrovitelj.ts` — `evidentirajDoprinos()`, fiksna tabela 7 nivoa, `bonusZaNivo()`, `izracunajNivo()`
 - `banka/donacija.ts` — `izracunajBonusZaDonaciju()`, `evidentirajDonaciju()`: fiksni pragovi, nema kurs
 - `banka/zadruga.ts` — bonus zadruge pri osnivanju (50.000 POEN)
 - `banka/zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA

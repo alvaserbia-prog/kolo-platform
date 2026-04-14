@@ -263,7 +263,7 @@ function OglasKartica({
 
         <div className="flex justify-between items-center mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted">
-            {isVerified ? oglas.sellerPseudonim : "Član KOLO zajednice"}
+            {oglas.sellerPseudonim}
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
           </span>
           {isVerified ? (

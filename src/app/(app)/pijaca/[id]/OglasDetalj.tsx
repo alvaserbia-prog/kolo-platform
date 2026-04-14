@@ -155,7 +155,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
           )}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
-            <span>Prodavac: <strong className="text-kolo-muted">{isVerified ? oglas.sellerPseudonim : "Član KOLO zajednice"}</strong></span>
+            <span>Prodavac: <strong className="text-kolo-muted">{oglas.sellerPseudonim}</strong></span>
             {oglas.location && <span>Lokacija: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>Objavljeno: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
           </div>
