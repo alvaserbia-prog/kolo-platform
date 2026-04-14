@@ -49,7 +49,7 @@ export default async function Home() {
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
                 Samoodrživa zajednica.
               </h1>
-              <p className="text-white/70 text-base md:text-lg leading-relaxed mb-6">
+              <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-6">
                 Razmena rada, dobara i znanja u duhu solidarnosti.
               </p>
               <div className="flex flex-wrap gap-3 mb-4">
@@ -105,7 +105,7 @@ export default async function Home() {
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
-            <p className="text-sm font-bold text-kolo-green-700 leading-none">Alpha</p>
+            <p className="text-3xl font-bold font-mono text-kolo-green-700 leading-none">Alfa</p>
             <p className="text-sm text-kolo-muted leading-tight">faza razvoja</p>
           </div>
         </section>
