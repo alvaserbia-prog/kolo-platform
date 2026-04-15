@@ -52,7 +52,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         <div className="flex-1 flex justify-center">
           <Link
             href="/novcanik"
-            className="px-4 py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl border border-white/70 transition-colors"
+            className="ml-[1cm] px-4 py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl border border-white/70 transition-colors"
           >
             Pošalji POEN
           </Link>

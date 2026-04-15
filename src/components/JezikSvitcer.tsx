@@ -23,6 +23,7 @@ export default function JezikSvitcer() {
           key={j.kod}
           onClick={() => promeniJezik(j.kod)}
           title={j.naziv}
+          suppressHydrationWarning
           className={`p-0.5 rounded transition-all ${
             trenutniJezik === j.kod
               ? "ring-2 ring-kolo-green-700 opacity-100"

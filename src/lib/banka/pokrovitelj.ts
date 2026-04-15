@@ -2,41 +2,23 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 
 /**
- * Generator nivoa po 1-2-5 skali (bez gornje granice).
- * Nivo 1: prvi doprinos (bilo koji pozitivan iznos) → 20.000 POEN
- * Nivo 2+: pragovi u RSD → iznos praga u POEN
- *
- * Pragovi: 50k, 100k, 200k, 500k, 1M, 2M, 5M, 10M, 20M, 50M, 100M, ...
+ * Fiksna tabela 7 nivoa pokrovitelja.
+ * Nivo se dostiže kad kumulativni RSD doprinos pređe prag.
+ * Nivo 1: prvi doprinos (kumulativ >= 10.000 RSD) → 20.000 POEN
  */
-function* generatorPragova(): Generator<number> {
-  const faktori = [1, 2, 5];
-  let eksponent = 4; // 10^4 = 10_000 → × faktori daje 50k, 100k, ...
-  let i = 2; // kreće od faktori[2] = 5 → 50_000
-  while (true) {
-    const baza = Math.pow(10, eksponent);
-    yield faktori[i] * baza;
-    i++;
-    if (i >= faktori.length) {
-      i = 0;
-      eksponent++;
-    }
-  }
-}
-
-function pragZaNivo(nivo: number): number {
-  if (nivo <= 1) return 0;
-  const gen = generatorPragova();
-  let prag = 0;
-  for (let i = 2; i <= nivo; i++) {
-    prag = gen.next().value as number;
-  }
-  return prag;
-}
+const NIVOI_POKROVITELJA: { pragRsd: number; bonusPoen: number }[] = [
+  { pragRsd: 10_000, bonusPoen: 20_000 },
+  { pragRsd: 20_000, bonusPoen: 30_000 },
+  { pragRsd: 50_000, bonusPoen: 80_000 },
+  { pragRsd: 100_000, bonusPoen: 150_000 },
+  { pragRsd: 200_000, bonusPoen: 300_000 },
+  { pragRsd: 500_000, bonusPoen: 800_000 },
+  { pragRsd: 1_000_000, bonusPoen: 1_500_000 },
+];
 
 export function bonusZaNivo(nivo: number): number {
-  if (nivo <= 0) return 0;
-  if (nivo === 1) return 20_000;
-  return pragZaNivo(nivo);
+  if (nivo <= 0 || nivo > NIVOI_POKROVITELJA.length) return 0;
+  return NIVOI_POKROVITELJA[nivo - 1].bonusPoen;
 }
 
 /**
@@ -44,13 +26,9 @@ export function bonusZaNivo(nivo: number): number {
  * kumulativRsd je broj (float).
  */
 export function izracunajNivo(kumulativRsd: number, trenutniNivo: number): number {
-  const gen = generatorPragova();
-  // Nivo 1 = dostignut prvim doprinosom (uvek >= 1 ako ima ikakvog kumulativa)
-  // Nivo 2 = kumulativ >= 50.000 RSD, itd.
-  let dostignuti = 1;
-  for (;;) {
-    const prag = gen.next().value as number;
-    if (kumulativRsd >= prag) {
+  let dostignuti = 0;
+  for (const nivo of NIVOI_POKROVITELJA) {
+    if (kumulativRsd >= nivo.pragRsd) {
       dostignuti++;
     } else {
       break;
@@ -131,17 +109,15 @@ export async function evidentirajDoprinos(params: {
     };
   });
 
-  // Korak 2: Saberi sve bonuse (nivoi + 1:1) i emituj jednu transakciju
+  // Korak 2: Emituj bonus POEN za dostignute nivoe
   const bonusiZbir = noviNivoi.reduce((s, n) => s + n.bonusPoen, 0);
-  const poenZaDonaciju = Math.round(rsdIznos);
-  const ukupanBonus = bonusiZbir + poenZaDonaciju;
 
-  if (ukupanBonus > 0) {
+  if (bonusiZbir > 0) {
     const { transaction } = await emitujPoen(
       vlasnikWalletId,
-      ukupanBonus,
+      bonusiZbir,
       "EMISIJA_POKROVITELJ",
-      `Bonus za pokroviteljstvo iznos ${ukupanBonus.toLocaleString("sr-RS")}`
+      `Bonus za pokroviteljstvo iznos ${bonusiZbir.toLocaleString("sr-RS")}`
     );
 
     // Poveži sve bonus zapise sa istom transakcijom
@@ -153,5 +129,5 @@ export async function evidentirajDoprinos(params: {
     }
   }
 
-  return { noviNivoi, poenZaDonaciju };
+  return { noviNivoi };
 }

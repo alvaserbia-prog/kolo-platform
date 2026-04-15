@@ -229,7 +229,7 @@ function OglasKartica({
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
       {/* Slika ili placeholder */}
-      <div className="relative w-full h-36 bg-kolo-bg flex items-center justify-center">
+      <div className="relative w-full h-[180px] bg-kolo-bg flex items-center justify-center">
         {oglas.slike > 0 ? (
           <Image
             src={`/api/pijaca/slika/${oglas.id}/0`}
