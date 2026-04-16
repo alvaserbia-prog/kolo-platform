@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 /**
  * POST /api/prigovor — korisnik podnosi prigovor na odluku (čl. 38 ZZPL)
@@ -55,6 +56,11 @@ export async function POST(req: NextRequest) {
       tipOdluke,
     },
   });
+
+  void posaljiAdminAlert(
+    "Novi prigovor na odluku",
+    `Tip: ${tipOdluke}\nKorisnik: ${session.user.pseudonim}`
+  );
 
   return NextResponse.json({ ok: true, id: prigovor.id }, { status: 201 });
 }

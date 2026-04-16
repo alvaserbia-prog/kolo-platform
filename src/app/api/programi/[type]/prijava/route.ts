@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
   "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
@@ -55,6 +56,11 @@ export async function POST(
       data: { userId: session.user.id, type: programType, metadata },
     });
   }
+
+  void posaljiAdminAlert(
+    "Nova prijava na program",
+    `Program: ${programType}\nKorisnik: ${session.user.pseudonim}`
+  );
 
   return NextResponse.json({ ok: true });
 }

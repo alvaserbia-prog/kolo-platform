@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // GET /api/zadruge — lista svih aktivnih zadruga
 export async function GET() {
@@ -83,6 +84,11 @@ export async function POST(req: NextRequest) {
       osnivaci: sviOsnivaci,
     },
   });
+
+  void posaljiAdminAlert(
+    "Zahtev za osnivanje zadruge",
+    `Naziv: ${name}\nInicijator: ${session.user.pseudonim}\nOsnivači: ${sviOsnivaci.length}`
+  );
 
   return NextResponse.json({ ok: true });
 }

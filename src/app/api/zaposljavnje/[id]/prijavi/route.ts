@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // POST /api/zaposljavnje/[id]/prijavi
 export async function POST(
@@ -27,6 +28,11 @@ export async function POST(
   await prisma.radniOglasPrijava.create({
     data: { oglasId: id, userId: session.user.id },
   });
+
+  void posaljiAdminAlert(
+    "Nova prijava za posao",
+    `Oglas: ${oglas.title}\nKorisnik: ${session.user.pseudonim}`
+  );
 
   return NextResponse.json({ ok: true });
 }

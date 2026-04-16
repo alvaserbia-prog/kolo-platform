@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // POST /api/zrno/kupi — rezervacija kupovine (izvršava se u ponoć)
 export async function POST(req: NextRequest) {
@@ -40,6 +41,11 @@ export async function POST(req: NextRequest) {
     create: { userId: session.user.id, poenIznos, date: danas },
     update: { poenIznos, status: "PENDING" },
   });
+
+  void posaljiAdminAlert(
+    "Zahtev za kupovinu ZRNA",
+    `Korisnik: ${session.user.pseudonim}\nIznos: ${poenIznos.toLocaleString("sr-RS")} POEN`
+  );
 
   return NextResponse.json({ ok: true, poruka: "Zahtev primljen. Biće obrađen u ponoć." });
 }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // POST /api/zrno/otkljucaj — AKTIVNO → SLOBODNO (period čekanja 1 dan)
 export async function POST(req: NextRequest) {
@@ -25,6 +26,11 @@ export async function POST(req: NextRequest) {
   await prisma.zrnoStatusZahtev.create({
     data: { userId: session.user.id, kolicina, akcija: "OTKLJUCAJ", date: danas },
   });
+
+  void posaljiAdminAlert(
+    "Zahtev za otključavanje ZRNA",
+    `Korisnik: ${session.user.pseudonim}\nKoličina: ${kolicina.toLocaleString("sr-RS")} ZRNA`
+  );
 
   return NextResponse.json({ ok: true, poruka: "Zahtev primljen. Otključavanje se izvršava u ponoć." });
 }

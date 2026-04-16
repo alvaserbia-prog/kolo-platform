@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // POST /api/zaposljavnje/[id]/evidencija — unos radnih sati
 export async function POST(
@@ -58,6 +59,11 @@ export async function POST(
       description: description.trim(),
     },
   });
+
+  void posaljiAdminAlert(
+    "Nova radna evidencija",
+    `Oglas: ${oglas.title}\nKorisnik: ${session.user.pseudonim}\nSati: ${sati} | Iznos: ${amount.toLocaleString("sr-RS")} POEN`
+  );
 
   return NextResponse.json({ ok: true, amount });
 }
