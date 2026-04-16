@@ -33,6 +33,7 @@ async function getPijacaPreview() {
         category: true,
         location: true,
         createdAt: true,
+        images: true,
         seller: { select: { pseudonim: true } },
       },
     });
@@ -414,11 +415,14 @@ export default async function Home() {
             Primer iz prakse
           </div>
           <p className="text-kolo-green-900 leading-relaxed mb-4">
-            Ana nudi med na Pijaci. Milan ga vidi, šalje joj <strong>8.000 POEN</strong> i preuzima tegle. Direktna razmena, bez posrednika, između dvoje ljudi koji žive u istom gradu i nikad se nisu upoznali.
+            Ana ponudi med na platformi. Milan ga vidi, kontaktira je, preuzima tegle i šalje joj <strong>8.000 POEN</strong>. Direktna razmena, bez posrednika, između dvoje ljudi koji žive u istom gradu i nikad se nisu upoznali.
+          </p>
+          <p className="text-kolo-muted leading-relaxed mb-4">
+            Sledeće nedelje Ani pukne bojler. Na platformi pronalazi Lazara, vodoinstalatera iz susedne ulice. On dolazi, popravlja, Ana mu šalje <strong>4.000 POEN</strong>.
           </p>
           <p className="text-kolo-muted leading-relaxed">
-            Sledeće nedelje Ani pukne bojler. Seća se Milana sa Pijace. On dolazi, popravlja, Ana mu šalje <strong>4.000 POEN</strong>. Fondacija nije učestvovala. Banka je samo zabeležila. Niko nije platio proviziju.{" "}
-            <strong className="text-kolo-text">Komšiluk se upoznao.</strong>
+            Banka je upisala dve stavke u evidenciji. Fondacija nije uključena ni u jedan događaj. Bez provizije, bez posrednika.{" "}
+            <strong className="text-kolo-text">Troje komšija koji bi se mimoišli bez reči — konačno su se upoznali.</strong>
           </p>
         </section>
 
@@ -443,9 +447,27 @@ export default async function Home() {
                 <Link
                   key={oglas.id}
                   href={`/pijaca/${oglas.id}`}
-                  className="bg-white rounded-2xl card-shadow p-4 hover:shadow-md transition-shadow flex flex-col gap-2 group"
+                  className="bg-white rounded-2xl card-shadow overflow-hidden hover:shadow-md transition-shadow flex flex-col group"
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  {/* Slika */}
+                  <div className="w-full h-44 bg-kolo-bg overflow-hidden">
+                    {oglas.images.length > 0 ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={`/api/pijaca/slika/${oglas.id}/0`}
+                        alt={oglas.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-kolo-muted/30">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  {/* Info */}
+                  <div className="p-4 flex items-start justify-between gap-2">
                     <p className="font-semibold text-kolo-text text-sm leading-snug group-hover:text-kolo-green-700 transition-colors line-clamp-2">
                       {oglas.title}
                     </p>
@@ -453,13 +475,6 @@ export default async function Home() {
                       {oglas.price.toLocaleString("sr-RS")} P
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-kolo-muted flex-wrap">
-                    <span className="bg-kolo-bg rounded px-2 py-0.5">{oglas.category}</span>
-                    {oglas.location && <span>{oglas.location}</span>}
-                  </div>
-                  <p className="text-xs text-kolo-muted mt-auto pt-1 border-t border-kolo-border">
-                    {oglas.seller.pseudonim}
-                  </p>
                 </Link>
               ))}
             </div>
