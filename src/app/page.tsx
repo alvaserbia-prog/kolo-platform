@@ -246,34 +246,49 @@ export default async function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
               {
-                ikona: "🌾",
+                ikona: "🌱",
                 naslov: "Farmeri i mali proizvođači",
-                opis: "Direktna prodaja bez posrednika. Tvoj rad ide tamo gde ima stvarnu vrednost.",
+                opis: "Direktan pristup potrošačima i olakšana distribucija domaćih proizvoda bez posrednika i provizije — vrednovanje tvojih proizvoda srazmerno uloženom radu.",
               },
               {
                 ikona: "🔧",
                 naslov: "Zanatlije i majstori",
-                opis: "Vidljivost u zajednici. Tražnja postoji — nedostajao je kanal.",
+                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke — da cela zajednica vidi koliko vrediš.",
               },
               {
-                ikona: "🧓",
+                ikona: "👴",
                 naslov: "Penzioneri sa znanjem",
-                opis: "Iskustvo koje se više ne odliva. KOLO prepoznaje znanje kao vrednost.",
+                opis: "Razmena znanja i usluga za stvari koje ti realno trebaju — domaći proizvodi, lokalne usluge. Iskustvo konačno ima konkretnu vrednost, ne samo sentimentalnu.",
+              },
+              {
+                ikona: "🏠",
+                naslov: "Domaćice",
+                opis: "Prodaja domaćih proizvoda (zimnica, pečeno, ručni rad) i razmena usluga sa komšinicama — kućni rad postaje izvor stvarnih sredstava.",
               },
               {
                 ikona: "👩‍👧",
-                naslov: "Majke i samohrani roditelji",
-                opis: "Program podrške majkama je aktivan. Doprinos se beleži i nagrađuje.",
+                naslov: "Majke i roditelji",
+                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane — zajednica koja roditeljstvo tretira kao posao, ne kao prirodnu obavezu.",
               },
               {
-                ikona: "💻",
-                naslov: "Freelenseri i mladi profesionalci",
-                opis: "Platforma koja vidi tvoj doprinos i daje ti glas u tome kako se razvija.",
+                ikona: "🎓",
+                naslov: "Mladi",
+                opis: "Neformalni rad, prvi klijenti i prostor za razvoj u tvom kraju — razlog da ostaneš nije samo plata, nego i okruženje na koje možeš da utičeš.",
               },
               {
-                ikona: "🏢",
-                naslov: "Preduzetnici kao pokrovitelji",
-                opis: "Ulazak od 10.000 RSD = 20.000 POEN. Firma postaje deo lokalne ekonomije.",
+                ikona: "💼",
+                naslov: "Nezaposleni",
+                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ na poslovima unutar zajednice — dostojanstvo i sigurnost za tebe i porodicu.",
+              },
+              {
+                ikona: "🤝",
+                naslov: "Postojeće zadruge i udruženja",
+                opis: "Već ste organizovani, već imate ljude i strukturu. Ekonomski sloj otvara nove mogućnosti za vašu organizaciju kao i za svakog pojedinog člana.",
+              },
+              {
+                ikona: "🏘️",
+                naslov: "Lokalpatriotе",
+                opis: "Sva vrednost koju razmeniš sa drugima ostaje u zajednici. Svaka obavljena transakcija je doprinos poboljšanju ekonomske slike tvog mesta.",
               },
             ].map((seg) => (
               <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
@@ -295,25 +310,25 @@ export default async function Home() {
               {
                 br: "1",
                 naslov: "Registruješ se",
-                opis: "Besplatno. Biraš pseudonim — niko u javnom sistemu ne vidi tvoje pravo ime.",
+                opis: "Besplatno, za manje od minut. Biraš pseudonim — u javnom delu sistema niko ne vidi tvoje pravo ime.",
               },
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Uživo u zadruzi ili uploadom dokumenta. Verifikacijom dobijaš 1.000 POEN kao početni kapital.",
+                opis: "Slanjem dokumenta ili uživo u nekoj od zadruga. Time potvrđuješ da si stvarna osoba i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
               },
               {
                 br: "3",
                 naslov: "Doprinosiš i koristiš",
-                opis: "Nudiš na Pijaci, razmenjuješ direktno, prijavlješ se na programe. Svaki doprinos je zabeležen.",
+                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, učestvuješ u programima zadruge. Svaki doprinos se beleži u POEN-ima.",
               },
               {
                 br: "4",
-                naslov: "Dobijaš glas",
-                opis: "Kroz ZRNO učestvuješ u odlučivanju. Niko nije apsolutni većinski glasač — sistem nagrađuje doprinos, ali ograničava koncentraciju moći.",
+                naslov: "Odlučuješ",
+                opis: "Poenima stičeš ZRNO, upravljačku jedinicu i time ulaziš u krug onih koji direktno upravljaju algoritmima i sistemom.",
               },
             ].map((k, i, arr) => (
-              <div key={k.br} className={`flex gap-5 items-start py-4 ${i < arr.length - 1 ? "border-b border-kolo-border" : ""}`}>
+              <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
                 <div className="w-8 h-8 rounded-full bg-kolo-green-900 text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
                   {k.br}
                 </div>
@@ -328,46 +343,6 @@ export default async function Home() {
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
               Detaljno objašnjenje →
             </Link>
-          </div>
-        </section>
-
-        {/* ── SEKCIJA 7 — PRVIH PET MINUTA ────────────────────────── */}
-        <section className="space-y-4">
-          <div>
-            <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-              Šta se dešava u prvih pet minuta?
-            </h2>
-            <p className="text-kolo-muted text-sm mt-1">Od prvog klika do prvog pogleda na sistem.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4">
-            {[
-              {
-                br: "01",
-                naslov: "Registracija",
-                opis: "Email, pseudonim, lozinka. Oko dva minuta. Nema socijalnih mreža, nema kreditnih kartica, nema ugovora.",
-              },
-              {
-                br: "02",
-                naslov: "Osnovni pregled",
-                opis: "Odmah vidiš Pijacu, aktivne članove u kraju i kako izgleda novčanik. Slobodan si da istražiš pre nego što se obavežeš.",
-              },
-              {
-                br: "03",
-                naslov: "Verifikacija → 1.000 POEN",
-                opis: "Kada si spreman — verifikuješ se lično u zadruzi ili uploadom dokumenta. Odobrena verifikacija donosi 1.000 POEN i pun pristup sistemu.",
-              },
-            ].map((k) => (
-              <div key={k.br} className="bg-white rounded-2xl card-shadow p-5 relative overflow-hidden">
-                <span
-                  className="absolute top-2 right-4 text-5xl font-bold text-kolo-green-900 select-none pointer-events-none"
-                  style={{ opacity: 0.05, letterSpacing: "-0.04em" }}
-                >
-                  {k.br}
-                </span>
-                <p className="font-semibold text-kolo-green-900 text-sm mb-2">{k.naslov}</p>
-                <p className="text-sm text-kolo-muted leading-relaxed">{k.opis}</p>
-              </div>
-            ))}
           </div>
         </section>
 
