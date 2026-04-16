@@ -27,8 +27,7 @@ Otvori [http://localhost:3000](http://localhost:3000) u pregledaču.
 
 Copyright (C) 2026 Nikola Šarić
 
-Ovaj softver je objavljen pod uslovima **GNU Affero General Public License v3.0** (AGPL-3.0-only).
+Ovaj projekat koristi dve licence:
 
-Slobodan je za korišćenje, izmenu i distribuciju uz uslov da se svaka modifikovana verzija — uključujući verzije dostupne preko mreže — distribuira pod istim uslovima i sa izvornim kodom.
-
-Pun tekst licence: [LICENSE](./LICENSE)
+- **Softverski kod** — [AGPL-3.0-only](./LICENSE): slobodan za korišćenje, izmenu i distribuciju; svaka modifikovana verzija (uključujući mrežno dostupne) mora biti distribuirana pod istim uslovima sa izvornim kodom.
+- **Sadržaj i dokumentacija** — [CC BY-SA 4.0](./LICENSE-CONTENT): dokumentacija, koncepti i tekstovi mogu se koristiti i adaptirati uz navođenje autorstva i distribuciju pod istom licencom.
