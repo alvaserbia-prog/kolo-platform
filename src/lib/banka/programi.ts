@@ -173,7 +173,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
 
 export function labelPrograma(type: ProgramType): string {
   const mapa: Record<ProgramType, string> = {
-    ZAPOSLJAVNJE:       "Zapošljavanje",
+    ZAPOSLJAVNJE:       "Evidencija Doprinosa",
     PODRSKA_MAJKAMA:    "Podrška majkama",
     PODRSKA_STARIJIMA:  "Podrška starijima",
     POSEBNA_BRIGA:      "Posebna briga",

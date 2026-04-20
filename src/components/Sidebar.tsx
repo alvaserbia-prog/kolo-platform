@@ -40,23 +40,32 @@ function SidebarContent({
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
     "/zajednica": dnevniBrojevi.zajednica,
-    "/zaposljavnje": dnevniBrojevi.zaposljavnje,
-    "/programi": dnevniBrojevi.programi,
+    "/programi": dnevniBrojevi.programi + dnevniBrojevi.zaposljavnje,
     "/zrno": dnevniBrojevi.zrno,
   } : {};
 
   const linkoviVerifikovan = [
     { href: "/sistem", label: t("pocetna") },
     { href: "/novcanik", label: t("novcanik") },
+    { href: "/poruke", label: t("poruke") },
     { href: "/pijaca", label: t("pijaca") },
+    { href: "/zajednica", label: t("zajednica") },
+    { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
+    { href: "/glasanje", label: t("glasanje") },
+    { href: "/preporuke", label: t("preporuke") },
+    { href: "/donacije", label: t("donacije") },
+    { href: "/postani-pokrovitelj", label: t("pokroviteljstvo") },
+    { href: "/profil", label: t("profil") },
   ];
 
   const linkoviNeverifikovan = [
     { href: "/sistem", label: t("pocetna") },
     { href: "/novcanik", label: t("novcanik") },
+    { href: "/poruke", label: t("poruke") },
     { href: "/pijaca", label: t("pijaca") },
     { href: "/verifikacija", label: t("verifikacija") },
+    { href: "/profil", label: t("profil") },
   ];
 
   const linkoviAdmin = [
