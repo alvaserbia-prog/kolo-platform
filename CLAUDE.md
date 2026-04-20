@@ -5,7 +5,7 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti. Koristi dve interne jedin
 - **POEN** — jedinica evidencije doprinosa (NIJE novac)
 - **ZRNO** — upravljačka jedinica za glasanje
 
-Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softverski protokol) i članove.
+Sistem funkcioniše kroz Fondaciju, mrežu Zajednica, KOLO Protokol (softverski protokol) i korisnike.
 
 ## Tech stack
 - Next.js 16 (App Router), TypeScript
@@ -17,17 +17,22 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 
 ## Fundamentalna pravila sistema
 
-1. **Zero-sum princip**: zbir svih računa (uključujući Banku) = 0. Banka ide u minus pri svakoj emisiji.
-2. **Nema negativnog balansa**: korisnici i zadruge nikad ispod 0. Samo Banka može u minus.
+1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
+2. **Nema negativnog balansa**: korisnici i Zajednice nikad ispod 0. Samo Protokol može u minus.
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je kurs ZRNA (DECIMAL(20,2)) i RSD iznosi pokrovitelja (DECIMAL(12,2)).
-4. **Transfer 1:1**: slanje POEN-a između članova je bez provizije, Banka nije posrednik.
+4. **Transfer 1:1**: slanje POEN-a između korisnika je bez provizije, Protokol nije posrednik.
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) se izvršavaju u ponoć.
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet. **Pseudonim je vidljiv svim posetiocima (i neregistrovanim) u javnoj evidenciji transakcija i na Pijaci.**
-7. **Dnevni limit programa Banke**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Banke).
-8. **Gradirana vidljivost podataka po ulozi**:
-   - **Neregistrovan posetilac** vidi: javnu evidenciju transakcija sa pseudonimima strana (iznos, vreme, tip, opis emisija); Pijaca oglase sa pseudonimom prodavca, opisom, lokacijom, cenom; sistemske agregate; javnu rang-listu pokrovitelja.
+7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola). Odnosi se samo na Socijalne i Operativne programe — Mehanizmi platforme i Projekti ne ulaze u ovaj limit.
+8. **Kategorije emisije POENA**:
+   - **Socijalni programi** — emisija po statusu primaoca (Podrška Majkama, Starijima, Posebna Briga, Školovanje); ulaze u dnevni limit.
+   - **Operativni programi** — peer attestation (Program Evidencije Doprinosa); ulaze u dnevni limit.
+   - **Mehanizmi platforme** — prate pravni akt ili činjenicu (verifikacija, preporuke, donacije, pokroviteljstvo, bonus rasta Zajednice); **NE ulaze u dnevni limit**.
+   - **Projekti** — na osnovu odobrenog projektnog predloga (Upravni odbor / Gornje Kolo); **NE ulaze u dnevni limit**.
+9. **Gradirana vidljivost podataka po ulozi**:
+   - **Neregistrovan posetilac** vidi: javnu evidenciju transakcija sa pseudonimima strana (iznos, vreme, tip, opis emisija Protokola); Pijaca oglase sa pseudonimom prodavca, opisom, lokacijom, cenom; sistemske agregate; javnu rang-listu pokrovitelja.
    - **Neregistrovan posetilac** ne može: slati POEN, kupovati/prodavati na Pijaci, kontaktirati prodavca, pristupiti profilima članova, videti telefon prodavca.
-   - **Neverifikovan prijavljen korisnik** vidi sve što vidi neregistrovan, plus: sopstvenu potpunu istoriju transakcija sa pseudonimima protivstrana; sopstvene notifikacije sa pseudonimima; zadruge (naziv, lokacija, broj članova, projekti, bonusi).
+   - **Neverifikovan prijavljen korisnik** vidi sve što vidi neregistrovan, plus: sopstvenu potpunu istoriju transakcija sa pseudonimima protivstrana; sopstvene notifikacije sa pseudonimima; Zajednice (naziv, oblast delovanja, broj članova, aktivnosti, bonusi).
    - **Neverifikovan prijavljen korisnik** ne vidi: rang-liste članova (donacije, preporuke); profile drugih članova; sadržaj poruka; telefon prodavca na Pijaci.
    - **Neverifikovan prijavljen korisnik** ne može: slati niti primati poruke; kupovati niti prodavati na Pijaci; otvarati profile drugih korisnika (redirect na poruku o verifikaciji).
    - **Verifikovan korisnik** ima pun pristup svim funkcionalnostima: profili članova, poruke, kupovina/prodaja na Pijaci, rang-liste, telefon prodavca.
@@ -49,7 +54,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu lokalnih zadruga, KOLO Banku (softver
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
 - `/api/korisnici/pretraga` vraća `{ id, pseudonim, verified, location }` za verifikovane korisnike; `{ id, pseudonim }` za neverifikovane (dostupna isključivo u kontekstu forme za slanje POENA).
 - Zaokruživanje POEN-a u emisijama (donacije, programi, bonusi): `Math.round()`.
-- Zaokruživanje u ZRNO konverzijama: uvek u korist Banke — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
+- Zaokruživanje u ZRNO konverzijama: uvek u korist Protokola — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
 - Slike za verifikaciju: čuvaju se kao base64 string u bazi (ne filesystem) — Vercel kompatibilnost.
 - Kompresija slika: obavlja se na klijentu pre slanja (Vercel limit 4.5MB po requestu).
 
@@ -61,7 +66,7 @@ src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise)
 src/app/pijaca/   — pijaca sa sopstvenim layout-om (ima i javni i auth prikaz)
 src/components/   — React komponente (Sidebar, Header, PublicHeader...)
 src/lib/          — pomoćne funkcije, validacije
-src/lib/banka/    — logika KOLO Banke (emisija.ts, pokrovitelj.ts, programi.ts...)
+src/lib/banka/    — logika KOLO Protokola (emisija.ts, pokrovitelj.ts, programi.ts...)
 prisma/           — šema i migracije
 docs/             — dokumentacija po fazama
 ```
@@ -101,39 +106,32 @@ docs/             — dokumentacija po fazama
 - Prisutna na: Dashboard (verifikovani), Sistem → Članovi, Zajednica
 - Klikabilni pseudonimi u tabelama (zadruga, transakcije, sistem, dashboard)
 
-### Zadruge
-- Osnivanje zadruge (zahtev → admin odobrava)
-- Pristupnica (zahtev za učlanjenje)
-- Projekti zadruge (PRIKUPLJANJE, REDISTRIBUCIJA)
-- Admin panel zadruge (upravljanje članovima, projektima)
-- **Bonus pragovi rasta** (isti princip kao pokrovitelji — svaki prag se loguje u `ZadrugaBonusLog`, ne ponavlja se):
-  - 5 članova (osnivanje): **50.000 POEN** (`EMISIJA_ZADRUGA_OSNIVANJE`)
-  - 10 članova: 100.000 POEN
-  - 20 članova: 200.000 POEN
-  - 50 članova: 500.000 POEN
-  - 100 članova: 1.000.000 POEN
-  - 200 članova: 2.000.000 POEN
-  - 500 članova: 5.000.000 POEN
+### Zajednice
+- Osnivanje Zajednice: potrebno najmanje 5 verifikovanih korisnika ukupno
+- Fondacija proverava formalnu ispravnost prijave (naziv, opis interesa, interna pravila, ovlašćena lica) i evidentira Zajednicu
+- **Ovlašćena lica**: 1–3 lica iz redova članova, isključivo tehnička funkcija (iniciranje transakcija sa zajedničkog računa); ne daju osnov za emisiju POEN-a
+- Pristupnica (zahtev za učlanjenje) prema internim pravilima Zajednice
+- Napuštanje Zajednice: `DELETE /api/zadruge/[id]` — postavlja `leftAt`, vraća ulogu na `FIZICKO_LICE` (ili ekvivalent)
+- Aktivnosti Zajednice (PRIKUPLJANJE i REDISTRIBUCIJA) — koriste postojeći POEN balans Zajednice, ne zahtevaju novu emisiju
+- **Bonus pragovi rasta** — Mehanizam platforme, ne ulazi u dnevni limit (svaki prag se loguje jednom u `ZadrugaBonusLog`, ne ponavlja se):
+  - 5 članova (osnivanje): **50.000 POEN**
+  - 10 članova: 100.000 | 20: 200.000 | 50: 500.000 | 100: 1.000.000 | 200: 2.000.000 | 500: 5.000.000
   - Formula: `broj_članova × 10.000 POEN`
 - Logika: `src/lib/banka/zadruga.ts` → `proveriIEmitujBonusPrag()`
 
-### Programi Banke
-- ZAPOSLJAVNJE, PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE
-- Enrollment (zahtev → admin odobrava, postavlja dailyAmount)
-- Evidencija rada (dnevna, admin potvrđuje → emisija)
-- Dnevni emisioni limit (10% opticaja), DailyEmissionSummary
-
-### Zapošljavanje (Radni oglasi)
-- Admin kreira oglas (FONDACIJA | ZADRUGA | PROJEKAT), hourlyRate 1000–2500 POEN/sat
-- Korisnik se prijavljuje → admin odobrava
-- Evidencija sati → admin potvrđuje → emisija (hoursWorked × hourlyRate)
+### Programi Protokola
+- **Operativni program**: Program Evidencije Doprinosa — peer attestation sistem (drugi verifikovani korisnici potvrđuju doprinos)
+- **Socijalni programi**: PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE
+- Svi programi otvoreni svim verifikovanim korisnicima — nezavisno od članstva u Zajednici
+- Dnevni emisioni limit (10% opticaja), proporcijalno smanjenje ako se prekorači
+- Redosled aktivacije: Evidencija Doprinosa (od starta) → Podrška Majkama → Podrška Starijima → Posebna Briga → Školovanje
 
 ### ZRNO
-- Kupovina/prodaja ZRNA (zahtev → noćni cron)
+- Sticanje/povrat ZRNA (zahtev → noćni cron)
 - Zaključaj/otključaj ZRNO
 - Delegacija glasačke moći
-- Dnevni kurs
-- **Ograničenja pri kupovini** (čl. 18): minimalni balans korisnika 10.000 POEN (inače se zahtev otkazuje); maksimalni dnevni iznos = 1% trenutnog POEN balansa
+- Dnevni kurs: `|Minus Protokola| / Ukupan broj ZRNA koje drži Protokol`
+- **Ograničenja pri sticanju** (čl. 20): minimalni balans korisnika 10.000 POEN; maksimalno dnevno sticanje = 1% balansa POENA na kraju obračunskog perioda
 
 ### Glasanje
 - Predlozi, glasanje sa ponderisanom glasačkom moći
@@ -174,20 +172,21 @@ docs/             — dokumentacija po fazama
 - Klikabilne kartice vode na filtrirane prikaze (Članovi, Transakcije, Programi, Zadruge)
 
 ### Admin panel
-- Tabs: Dashboard, Na čekanju, Zadruge, Programi, Zapošljavanje, Pokrovitelji, Korisnici, Finansije, Audit log
+- Tabs: Dashboard, Na čekanju, Zajednice, Programi, Pokrovitelji, Korisnici, Finansije, Audit log
 - Audit log za sve admin akcije
 - `GET /api/cron/zero-sum` — cron endpoint za Vercel (Hobby plan, smanjena frekvencija)
 - `vercel.json` sa cron konfiguracijom
 
 ## Uloge u sistemu
-- **Fizičko lice** — registrovan korisnik (neverifikovan ili verifikovan)
-- **Zadrugar** — fizičko lice učlanjeno u zadrugu
+- **Korisnik platforme** — registrovan korisnik (neverifikovan ili verifikovan)
+- **Verifikovani korisnik** — korisnik koji je prošao verifikaciju identiteta
+- **Član Zajednice** — verifikovani korisnik učlanjen u jednu Zajednicu
 - **Admin** — Fondacija/Upravni odbor
 - **Pokrovitelj** — pravno lice, nema nalog, vlasnik je verifikovani član
 
 ## Sidebar linkovi
 - Neverifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Verifikacija, Profil
-- Verifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Zajednica, Zapošljavanje, Programi, ZRNO, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
+- Verifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Zajednica, Programi, ZRNO, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
 - Admin (dodatno): Admin, Simulator
 - Napomena: "Početna" i "Sistem" su spojeni u jedan link `/sistem`
 
@@ -234,21 +233,14 @@ docs/             — dokumentacija po fazama
 - `GET /api/donacije`
 - `GET/POST /api/admin/donacija`
 
-### Programi Banke
+### Programi Protokola
 - `GET /api/programi`
 - `POST /api/programi/[type]/prijava`
-- `POST /api/programi/zaposljavnje/evidencija`
 - `POST /api/admin/programi/[type]/toggle`
 - `POST /api/admin/programi/enrollments/[id]/odobri`
 - `POST /api/admin/programi/enrollments/[id]/odbij`
-- `POST /api/admin/programi/zaposljavnje/[id]/odobri`
-- `POST /api/admin/programi/zaposljavnje/[id]/odbij`
-- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odobri`
-- `POST /api/zadruge/[id]/programi/enrollments/[enrollmentId]/odbij`
-- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odobri`
-- `POST /api/zadruge/[id]/programi/evidencije/[evidencijaId]/odbij`
 
-### Zadruge
+### Zajednice
 - `GET /api/zadruge`
 - `POST /api/zadruge`
 - `GET /api/zadruge/[id]`
@@ -283,13 +275,6 @@ docs/             — dokumentacija po fazama
 - `GET /api/glasanje/[id]`
 - `POST /api/glasanje/[id]/glasaj`
 
-### Zapošljavanje
-- `POST /api/admin/zaposljavnje/oglasi`
-- `POST /api/admin/zaposljavnje/prijave/[id]/odobri`
-- `POST /api/admin/zaposljavnje/prijave/[id]/odbij`
-- `POST /api/admin/zaposljavnje/evidencija/[id]/odobri`
-- `POST /api/admin/zaposljavnje/evidencija/[id]/odbij`
-
 ### Admin i sistem
 - `GET /api/admin/dashboard`
 - `GET /api/admin/transakcije`
@@ -310,11 +295,11 @@ docs/             — dokumentacija po fazama
 
 ## Biblioteka funkcija (`src/lib/`)
 
-- `banka/emisija.ts` — `emitujPoen()`: emisija POEN-a iz Banke, zero-sum validacija
+- `banka/emisija.ts` — `emitujPoen()`: emisija POEN-a iz Protokola, zero-sum validacija
 - `banka/programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
 - `banka/pokrovitelj.ts` — `evidentirajDoprinos()`, fiksna tabela 7 nivoa, `bonusZaNivo()`, `izracunajNivo()`
 - `banka/donacija.ts` — `izracunajBonusZaDonaciju()`, `evidentirajDonaciju()`: fiksni pragovi, nema kurs
-- `banka/zadruga.ts` — bonus zadruge pri osnivanju (50.000 POEN)
+- `banka/zadruga.ts` — bonus Zajednice pri osnivanju i pragovima rasta; Mehanizam platforme (ne ulazi u dnevni limit)
 - `banka/zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA
 - `notifikacije.ts` — `posaljiNotifikaciju(userId, tip, naslov, tekst, link?)`
 
