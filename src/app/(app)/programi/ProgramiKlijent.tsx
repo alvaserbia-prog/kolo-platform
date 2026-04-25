@@ -40,7 +40,7 @@ interface EmisioniKontekst {
 interface Props {
   programi: ProgramInfo[];
   isVerified: boolean;
-  isZadrugar: boolean;
+  isKrugr: boolean;
   bankaBalance: number;
   emisioniKontekst: EmisioniKontekst;
   evidencijaToday: EvidencijaInfo | null;
@@ -58,7 +58,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bankaBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
+export default function ProgramiKlijent({ programi, isVerified, isKrugr, bankaBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -143,14 +143,14 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
             key={p.type}
             p={p}
             isVerified={isVerified}
-            isZadrugar={isZadrugar}
+            isKrugr={isKrugr}
             bankaBalance={bankaBalance}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
             onExpand={() => setActiveProgram(activeProgram === p.type ? null : p.type)}
             onPrijavi={(meta) => prijavi(p.type, meta)}
-            evidencijaToday={p.type === "ZAPOSLJAVNJE" ? evidencijaToday : null}
+            evidencijaToday={p.type === "PED" ? evidencijaToday : null}
             onEvidencijaSuccess={() => { setTimeout(() => router.refresh(), 1200); }}
           />
         ))}
@@ -186,11 +186,11 @@ export default function ProgramiKlijent({ programi, isVerified, isZadrugar, bank
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 function ProgramKartica({
-  p, isVerified, isZadrugar, bankaBalance, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
+  p, isVerified, isKrugr, bankaBalance, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
-  isZadrugar: boolean;
+  isKrugr: boolean;
   bankaBalance: number;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
@@ -205,9 +205,9 @@ function ProgramKartica({
   const statusBadge = useStatusBadge();
   const enStatus = p.enrollment?.status;
 
-  const zadrugarskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
-  const zahtevaDrugarstvo = zadrugarskaProvera.includes(p.type);
-  const mozePrijaviti = isVerified && (!zahtevaDrugarstvo || isZadrugar) && p.programAktivan;
+  const krugrskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
+  const zahtevaDrugarstvo = krugrskaProvera.includes(p.type);
+  const mozePrijaviti = isVerified && (!zahtevaDrugarstvo || isKrugr) && p.programAktivan;
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -240,7 +240,7 @@ function ProgramKartica({
               {t("prijavi_se")}
             </button>
           )}
-          {enStatus === "ACTIVE" && p.type === "ZAPOSLJAVNJE" && (
+          {enStatus === "ACTIVE" && p.type === "PED" && (
             <button onClick={onExpand}
               className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
               {t("evidencija")}
@@ -258,7 +258,7 @@ function ProgramKartica({
       {/* Expanded — forma za prijavu ili evidencija */}
       {expanded && (
         <div className="border-t border-kolo-border px-5 py-4">
-          {enStatus === "ACTIVE" && p.type === "ZAPOSLJAVNJE" ? (
+          {enStatus === "ACTIVE" && p.type === "PED" ? (
             <EvidencijaForma
               evidencijaToday={evidencijaToday}
               onSuccess={onEvidencijaSuccess}
@@ -332,7 +332,7 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
   const [deca, setDeca] = useState<{ ime: string; datumRodjenja: string }[]>([{ ime: "", datumRodjenja: "" }]);
 
   function handleSubmit() {
-    if (type === "ZAPOSLJAVNJE") { onSubmit(); return; }
+    if (type === "PED") { onSubmit(); return; }
     if (type === "PODRSKA_STARIJIMA") { onSubmit({ datumRodjenja }); return; }
     if (type === "POSEBNA_BRIGA") { onSubmit({ dijagnoza }); return; }
     if (type === "SKOLOVANJE") { onSubmit({ ustanova, program }); return; }
@@ -341,7 +341,7 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
 
   return (
     <div className="space-y-3">
-      {type === "ZAPOSLJAVNJE" && (
+      {type === "PED" && (
         <p className="text-sm text-kolo-muted">
           {t("zaposljavnje_opis")}
         </p>
@@ -508,7 +508,7 @@ function getEvStatusBadge(status: string, t: (key: string) => string): { label: 
 
 function opisPrograma(type: string, t: (key: string) => string): string {
   const mapa: Record<string, string> = {
-    ZAPOSLJAVNJE:      t("opis_zaposljavnje"),
+    PED:      t("opis_zaposljavnje"),
     PODRSKA_MAJKAMA:   t("opis_majkama"),
     PODRSKA_STARIJIMA: t("opis_starijima"),
     POSEBNA_BRIGA:     t("opis_posebna_briga"),

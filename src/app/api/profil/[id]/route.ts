@@ -41,9 +41,9 @@ export async function GET(
           prikaziOglase: true,
         },
       },
-      zadrugaMemberships: {
+      krugClanstva: {
         where: { leftAt: null },
-        include: { zadruga: { select: { id: true, name: true } } },
+        include: { krug: { select: { id: true, name: true } } },
         take: 1,
       },
       wallet: { select: { id: true, balance: true } },
@@ -56,7 +56,7 @@ export async function GET(
   }
 
   const podaci = korisnik.podaci;
-  const zadruga = korisnik.zadrugaMemberships[0]?.zadruga ?? null;
+  const krug = korisnik.krugClanstva[0]?.krug ?? null;
 
   // Rangovi preporuka i donacija
   let rangPreporuka: number | null = null;
@@ -127,7 +127,7 @@ export async function GET(
     status: korisnik.status,
     avatar: korisnik.avatar,
     createdAt: korisnik.createdAt,
-    zadruga,
+    krug,
     // Opcioni podaci
     lokacija: podaci?.prikaziLokaciju ? korisnik.location : null,
     opis: podaci?.prikaziOpis ? podaci.opis : null,

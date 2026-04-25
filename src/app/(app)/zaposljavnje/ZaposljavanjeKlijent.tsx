@@ -15,7 +15,7 @@ interface OglasItem {
   positions: number;
   deadline: string | null;
   createdByPseudonim: string;
-  zadrugaName: string | null;
+  krugName: string | null;
   odobreniClanovi: number;
   createdAt: string;
   mojaPrijava: string | null;
@@ -23,7 +23,7 @@ interface OglasItem {
 
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  ZADRUGA: "bg-kolo-info-light text-kolo-info",
+  KRUG: "bg-kolo-info-light text-kolo-info",
   PROJEKAT: "bg-purple-50 text-purple-700",
 };
 
@@ -86,7 +86,7 @@ function OglasKartica({ oglas, isVerified }: { oglas: OglasItem; isVerified: boo
   };
   const sourceLabel: Record<string, string> = {
     FONDACIJA: t("fondacija"),
-    ZADRUGA: t("zadruga"),
+    KRUG: t("krug"),
     PROJEKAT: t("projekat"),
   };
 
@@ -111,8 +111,8 @@ function OglasKartica({ oglas, isVerified }: { oglas: OglasItem; isVerified: boo
               <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[oglas.source] ?? oglas.source}
               </span>
-              {oglas.zadrugaName && (
-                <span className="text-xs text-kolo-muted">{oglas.zadrugaName}</span>
+              {oglas.krugName && (
+                <span className="text-xs text-kolo-muted">{oglas.krugName}</span>
               )}
               {badge && (
                 <span className={`text-xs px-2 py-0.5 rounded border font-medium ${badge.cls}`}>

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { izvrsiZrnoOperacije } from "@/lib/banka/zrno";
+import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 import { prisma } from "@/lib/prisma";
 
 // POST /api/admin/zrno/nocna — manualni okidač ZRNO operacija

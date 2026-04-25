@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
-  zajednica: number;
+  krug: number;
   zaposljavnje: number;
   programi: number;
   zrno: number;
@@ -39,7 +39,7 @@ function SidebarContent({
   const badge: Record<string, number> = dnevniBrojevi ? {
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
-    "/zajednica": dnevniBrojevi.zajednica,
+    "/krug": dnevniBrojevi.krug,
     "/programi": dnevniBrojevi.programi + dnevniBrojevi.zaposljavnje,
     "/zrno": dnevniBrojevi.zrno,
   } : {};
@@ -49,7 +49,7 @@ function SidebarContent({
     { href: "/novcanik", label: t("novcanik") },
     { href: "/poruke", label: t("poruke") },
     { href: "/pijaca", label: t("pijaca") },
-    { href: "/zajednica", label: t("zajednica") },
+    { href: "/krug", label: t("krug") },
     { href: "/programi", label: t("programi") },
     { href: "/zrno", label: t("zrno") },
     { href: "/glasanje", label: t("glasanje") },

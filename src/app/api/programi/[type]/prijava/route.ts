@@ -6,7 +6,7 @@ import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
-  "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 // POST /api/programi/[type]/prijava — prijava na program
@@ -26,14 +26,14 @@ export async function POST(
   const programType = type as ProgramType;
 
   // Proveri da program postoji i da je aktivan
-  const program = await prisma.bankaProgram.findUnique({ where: { type: programType } });
+  const program = await prisma.protokolProgram.findUnique({ where: { type: programType } });
   if (!program?.isActive)
     return NextResponse.json({ error: "Program nije aktivan." }, { status: 400 });
 
-  // Zadrugar check za programe koji zahtevaju zadrugarski status
-  const zadrugarskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
-  if (zadrugarskaProvera.includes(programType) && session.user.role !== "ZADRUGAR" && session.user.role !== "ADMIN")
-    return NextResponse.json({ error: "Ovaj program je dostupan samo zadrugarsima." }, { status: 403 });
+  // Krugr check za programe koji zahtevaju krugrski status
+  const krugrskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
+  if (krugrskaProvera.includes(programType) && session.user.role !== "CLAN_KRUGA" && session.user.role !== "ADMIN")
+    return NextResponse.json({ error: "Ovaj program je dostupan samo krugrsima." }, { status: 403 });
 
   // Proveri duplikat
   const vec = await prisma.programEnrollment.findUnique({

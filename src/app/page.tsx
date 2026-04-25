@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "KOLO je sistem u kome tvoj doprinos ima vrednost. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje je oblikuju.",
   openGraph: {
     title: "KOLO — Ekonomija koju gradiš sa svojom zajednicom",
-    description: "KOLO je sistem uzajamnosti kroz mrežu lokalnih zadruga. Članstvo je besplatno.",
+    description: "KOLO je sistem uzajamnosti kroz mrežu lokalnih krug. Članstvo je besplatno.",
     locale: "sr_RS",
     type: "website",
   },
@@ -138,14 +138,14 @@ export default async function Home() {
           {[
             {
               broj: "01",
-              naslov: "Zajednica",
-              tekst: "Pre tržišta, pre banaka, pre država, postojala je zajednica. Ljudi su razmenjivali rad, hranu i znanje zato što su jedni drugima bili potrebni.",
+              naslov: "Krug",
+              tekst: "Pre tržišta, pre banaka, pre država, postojala je krug. Ljudi su razmenjivali rad, hranu i znanje zato što su jedni drugima bili potrebni.",
               naglasak: "KOLO vraća ono što je oduvek radilo na način koji odgovara 21. veku.",
             },
             {
               broj: "02",
               naslov: "Doprinos",
-              tekst: "Zajednica radi samo ako postoji evidencija ko šta daje. Bez toga, dobronamerni ljudi sagore, a mešetari ostaju neprimećeni.",
+              tekst: "Krug radi samo ako postoji evidencija ko šta daje. Bez toga, dobronamerni ljudi sagore, a mešetari ostaju neprimećeni.",
               naglasak: "KOLO beleži tvoj doprinos i to postaje osnova za sve što dobijaš nazad.",
             },
             {
@@ -181,7 +181,7 @@ export default async function Home() {
               <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Ne znamo šta jedemo.</p>
               <div className="space-y-2">
                 <p className="text-sm text-kolo-muted leading-relaxed">
-                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz naše zajednice proizvodi baš to — med, jaja, sir, voće, povrće.
+                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz naše krugovi proizvodi baš to — med, jaja, sir, voće, povrće.
                 </p>
                 <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Ono što nam treba raste pored nas, ali do nas ne stiže.</p>
               </div>
@@ -213,7 +213,7 @@ export default async function Home() {
             KOLO ti daje alternativu
           </div>
           <p className="text-kolo-green-900 leading-relaxed mb-7">
-            KOLO je mreža korisnika i lokalnih zadruga u kojoj se rad, dobra i znanje razmenjuju kroz POEN. POEN je interna evidencija doprinosa sistemu, ne novac i ne digitalna imovina. Ne postoji van KOLO sistema i ne menja se za dinare unutar njega.
+            KOLO je mreža korisnika i lokalnih krug u kojoj se rad, dobra i znanje razmenjuju kroz POEN. POEN je interna evidencija doprinosa sistemu, ne novac i ne digitalna imovina. Ne postoji van KOLO sistema i ne menja se za dinare unutar njega.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 mb-6">
@@ -230,9 +230,9 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-kolo-bg rounded-xl p-4 text-center">
-              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">KOLO Zadruge</p>
+              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">KOLO Krugovi</p>
               <p className="text-sm text-kolo-text leading-relaxed">
-                Lokalne zadruge su srce KOLO mreže. Registrovane su kao pravna lica i svaka radi autonomno u svom gradu ili kraju. Zadruga okuplja članove iz iste sredine, organizuje razmenu i pokreće zajedničke projekte.
+                Lokalne krugovi su srce KOLO mreže. Registrovane su kao pravna lica i svaka radi autonomno u svom gradu ili kraju. Krug okuplja članove iz iste sredine, organizuje razmenu i pokreće zajedničke projekte.
               </p>
             </div>
           </div>
@@ -254,7 +254,7 @@ export default async function Home() {
               {
                 ikona: "🔧",
                 naslov: "Zanatlije i majstori",
-                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke — da cela zajednica vidi koliko vrediš.",
+                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke — da cela krug vidi koliko vrediš.",
               },
               {
                 ikona: "👴",
@@ -269,7 +269,7 @@ export default async function Home() {
               {
                 ikona: "👩‍👧",
                 naslov: "Majke i roditelji",
-                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane — zajednica koja roditeljstvo tretira kao posao, ne kao prirodnu obavezu.",
+                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane — krug koja roditeljstvo tretira kao posao, ne kao prirodnu obavezu.",
               },
               {
                 ikona: "🎓",
@@ -279,11 +279,11 @@ export default async function Home() {
               {
                 ikona: "💼",
                 naslov: "Nezaposleni",
-                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ na poslovima unutar zajednice — dostojanstvo i sigurnost za tebe i porodicu.",
+                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ na poslovima unutar krugovi — dostojanstvo i sigurnost za tebe i porodicu.",
               },
               {
                 ikona: "🤝",
-                naslov: "Postojeće zadruge i udruženja",
+                naslov: "Postojeće krugovi i udruženja",
                 opis: "Već ste organizovani, već imate ljude i strukturu. Ekonomski sloj otvara nove mogućnosti za vašu organizaciju kao i za svakog pojedinog člana.",
               },
               {
@@ -316,12 +316,12 @@ export default async function Home() {
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Slanjem dokumenta ili uživo u nekoj od zadruga. Time potvrđuješ da si stvarna osoba i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
+                opis: "Slanjem dokumenta ili uživo u nekoj od krug. Time potvrđuješ da si stvarna osoba i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
               },
               {
                 br: "3",
                 naslov: "Doprinosiš i koristiš",
-                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, učestvuješ u programima zadruge. Svaki doprinos se beleži u POEN-ima.",
+                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, učestvuješ u programima krugovi. Svaki doprinos se beleži u POEN-ima.",
               },
               {
                 br: "4",
@@ -584,7 +584,7 @@ export default async function Home() {
           {[
             {
               p: "Da li KOLO zamenjuje dinar?",
-              o: "Ne. KOLO je komplement postojećoj ekonomiji — unutrašnji sistem evidencije razmene unutar zajednice. Dinari i POEN ne prelaze iste institucionalne granice. Nema planova ni namere da KOLO zameni zvanično platno sredstvo.",
+              o: "Ne. KOLO je komplement postojećoj ekonomiji — unutrašnji sistem evidencije razmene unutar krugovi. Dinari i POEN ne prelaze iste institucionalne granice. Nema planova ni namere da KOLO zameni zvanično platno sredstvo.",
             },
             {
               p: "Šta ako hoću da izađem?",
@@ -600,7 +600,7 @@ export default async function Home() {
             },
             {
               p: "Ko kontroliše KOLO?",
-              o: "Pravni subjekt je Fondacija, čiji rad je podložan reviziji i nadzoru nadležnih organa. Softverski protokol (Banka) radi po matematičkim pravilima koja su javno dostupna i nepromenjiva bez glasanja zajednice. Odluke donosi zajednica kroz ZRNO glasanje.",
+              o: "Pravni subjekt je Fondacija, čiji rad je podložan reviziji i nadzoru nadležnih organa. Softverski protokol (Banka) radi po matematičkim pravilima koja su javno dostupna i nepromenjiva bez glasanja krugovi. Odluke donosi krug kroz ZRNO glasanje.",
             },
             {
               p: "Može li dete da bude član?",
@@ -608,7 +608,7 @@ export default async function Home() {
             },
             {
               p: "Da li POEN ističe?",
-              o: "Trenutno ne. U budućim verzijama moguće je uvođenje demurrage mehanizma (negativne kamate) koji bi podsticao cirkulaciju POEN-a umesto akumulacije, ali to bi bila odluka zajednice kroz glasanje, ne unilateralna odluka Fondacije.",
+              o: "Trenutno ne. U budućim verzijama moguće je uvođenje demurrage mehanizma (negativne kamate) koji bi podsticao cirkulaciju POEN-a umesto akumulacije, ali to bi bila odluka krugovi kroz glasanje, ne unilateralna odluka Fondacije.",
             },
             {
               p: "Kako se štiti moja privatnost?",
@@ -644,7 +644,7 @@ export default async function Home() {
             <div className="flex items-center gap-0">
               {[
                 { naziv: "Prvih sto članova", aktivan: true },
-                { naziv: "Lokalne zadruge", aktivan: false },
+                { naziv: "Lokalne krugovi", aktivan: false },
                 { naziv: "Međugradska mreža", aktivan: false },
                 { naziv: "Samoupravljanje", aktivan: false },
                 { naziv: "Puna zrelost", aktivan: false },
@@ -707,7 +707,7 @@ export default async function Home() {
               },
               {
                 naslov: "Nije kriptovaluta",
-                opis: "POEN nije token, ne trguje se ni na kakvoj berzi, nema tržišnu cenu. POEN je interna evidencija doprinosa unutar zajednice.",
+                opis: "POEN nije token, ne trguje se ni na kakvoj berzi, nema tržišnu cenu. POEN je interna evidencija doprinosa unutar krugovi.",
               },
               {
                 naslov: "Ne obećava brzu zaradu",
@@ -755,10 +755,10 @@ export default async function Home() {
               </ul>
             </div>
             <div>
-              <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Zajednica</p>
+              <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Krug</p>
               <ul className="space-y-2 text-sm text-kolo-muted">
                 <li><Link href="/pijaca" className="hover:text-kolo-green-700 transition-colors">Pijaca</Link></li>
-                <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Zadruge</Link></li>
+                <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Krugovi</Link></li>
                 <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Programi</Link></li>
                 <li><Link href="/pokrovitelji" className="hover:text-kolo-green-700 transition-colors">Pokrovitelji</Link></li>
               </ul>

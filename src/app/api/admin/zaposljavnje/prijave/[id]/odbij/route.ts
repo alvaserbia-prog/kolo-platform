@@ -16,16 +16,16 @@ export async function POST(
   const body = await req.json().catch(() => ({}));
   const razlog = typeof body.razlog === "string" ? body.razlog.trim() : "";
 
-  const prijava = await prisma.radniOglasPrijava.findUnique({ where: { id } });
+  const prijava = await prisma.oglasPrijava.findUnique({ where: { id } });
   if (!prijava) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
   if (prijava.status !== "PENDING") return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
-  await prisma.radniOglasPrijava.update({
+  await prisma.oglasPrijava.update({
     where: { id },
     data: { status: "REJECTED", rejectionReason: razlog || null },
   });
 
-  const oglas = await prisma.radniOglas.findUnique({ where: { id: prijava.oglasId }, select: { title: true } });
+  const oglas = await prisma.doprinosOglas.findUnique({ where: { id: prijava.oglasId }, select: { title: true } });
   await posaljiNotifikaciju(
     prijava.userId,
     "info",

@@ -5,12 +5,12 @@ const pitanja = [
   {
     pitanje: "Kako se rešavaju sporovi između članova?",
     odgovor:
-      "Postoje tri nivoa. Prvo: direktan razgovor između strana — sistem beleži sve transakcije, pa se greška lako identifikuje. Drugo: posredovanje zadruge — starešina ili savet zadruge može da interveniše i predloži rešenje. Treće: prigovor Fondaciji — svaki verifikovani član može podneti formalni prigovor koji Fondacija mora da reši u roku od 30 dana. Ako ništa od toga ne zadovolji, pravo na sudsku zaštitu ostaje neotuđivo — nadležan je Osnovni sud u Somboru.",
+      "Postoje tri nivoa. Prvo: direktan razgovor između strana — sistem beleži sve transakcije, pa se greška lako identifikuje. Drugo: posredovanje krugovi — starešina ili savet krugovi može da interveniše i predloži rešenje. Treće: prigovor Fondaciji — svaki verifikovani član može podneti formalni prigovor koji Fondacija mora da reši u roku od 30 dana. Ako ništa od toga ne zadovolji, pravo na sudsku zaštitu ostaje neotuđivo — nadležan je Osnovni sud u Somboru.",
   },
   {
     pitanje: "Kako izlazim iz sistema?",
     odgovor:
-      "Brisanje naloga je uvek dostupno iz podešavanja profila. Pre brisanja, POEN koji imaš možeš preneti drugom članu ili ga vratiti Banci. ZRNO se automatski prodaje Banci po tekućem kursu. Lični podaci se anonimizuju — tvoje ime se briše, ali transakcioni zapisi ostaju jer su deo kolektivne evidencije zajednice (sa anonimizovanim pseudonimom). Precizna pravila su opisana u Politici privatnosti i Uslovima korišćenja.",
+      "Brisanje naloga je uvek dostupno iz podešavanja profila. Pre brisanja, POEN koji imaš možeš preneti drugom članu ili ga vratiti Banci. ZRNO se automatski prodaje Banci po tekućem kursu. Lični podaci se anonimizuju — tvoje ime se briše, ali transakcioni zapisi ostaju jer su deo kolektivne evidencije krugovi (sa anonimizovanim pseudonimom). Precizna pravila su opisana u Politici privatnosti i Uslovima korišćenja.",
   },
   {
     pitanje: "Kakav je odnos prema porezu i fiskalizaciji?",
@@ -25,12 +25,12 @@ const pitanja = [
   {
     pitanje: "Šta se dešava kada se neko ne pridržava dogovora?",
     odgovor:
-      "Sistem ima kolektivno pamćenje — svaka transakcija je trajno zabeležena sa pseudonimom. Loše ponašanje ostaje vidljivo. Zadruga može uskratiti pristup nekim uslugama u okviru svoje autonomije. Fondacija može suspendovati nalog ili isključiti korisnika iz sistema ako su prekršena Pravila. Isključen korisnik gubi pravo korišćenja platforme, ali POEN koji je zaradio ostaje zabeležen kao istorijski podatak.",
+      "Sistem ima kolektivno pamćenje — svaka transakcija je trajno zabeležena sa pseudonimom. Loše ponašanje ostaje vidljivo. Krug može uskratiti pristup nekim uslugama u okviru svoje autonomije. Fondacija može suspendovati nalog ili isključiti korisnika iz sistema ako su prekršena Pravila. Isključen korisnik gubi pravo korišćenja platforme, ali POEN koji je zaradio ostaje zabeležen kao istorijski podatak.",
   },
   {
-    pitanje: "Kako zadruga postaje deo KOLO sistema?",
+    pitanje: "Kako krug postaje deo KOLO sistema?",
     odgovor:
-      "Potrebno je minimum 5 verifikovanih članova KOLO platforme (4 pored tebe). Inicijator podnosi zahtev za osnivanje kroz platformu, uz kratki opis zadruge. Fondacija pregleda zahtev i odobrava ga. Činom osnivanja, KOLO Banka emituje 50.000 POEN na račun zadruge kao startni kapital. Zadruga je od tog trenutka autonomna — određuje sopstvene programe, prihvata ili odbija pristupnice, upravlja projektima.",
+      "Potrebno je minimum 5 verifikovanih članova KOLO platforme (4 pored tebe). Inicijator podnosi zahtev za osnivanje kroz platformu, uz kratki opis krugovi. Fondacija pregleda zahtev i odobrava ga. Činom osnivanja, KOLO Banka emituje 50.000 POEN na račun krugovi kao startni kapital. Krug je od tog trenutka autonomna — određuje sopstvene programe, prihvata ili odbija pristupnice, upravlja projektima.",
   },
 ];
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "zadruge" | "donacije" | "iznos";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "krugovi" | "donacije" | "iznos";
 type TxFilter = "sve" | "banka" | "clanovi";
 
 const TIP_BOJA: Record<string, string> = {
@@ -13,8 +13,8 @@ const TIP_BOJA: Record<string, string> = {
   EMISIJA_PREPORUKA: "bg-kolo-info-light text-kolo-info",
   EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
   EMISIJA_POKROVITELJ: "bg-yellow-50 text-yellow-700",
-  EMISIJA_ZADRUGA_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_ZADRUGA_BONUS: "bg-kolo-green-100 text-kolo-green-700",
+  EMISIJA_KRUG_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
+  EMISIJA_KRUG_BONUS: "bg-kolo-green-100 text-kolo-green-700",
   EMISIJA_PROGRAM: "bg-kolo-green-100 text-kolo-green-700",
 };
 
@@ -35,7 +35,7 @@ interface Clan {
   pseudonim: string;
   verified: boolean;
   balance: number;
-  zadruga: string | null;
+  krug: string | null;
   preporukeVerif: number;
   rangPreporuke: number;
   donacijeRSD: number;
@@ -44,7 +44,7 @@ interface Clan {
   createdAt: string;
 }
 
-interface Zadruga {
+interface Krug {
   id: string;
   name: string;
   location: string | null;
@@ -80,7 +80,7 @@ interface PokroviteljItem {
   id: string;
   naziv: string;
   adresa: string | null;
-  zadruga: { name: string } | null;
+  krug: { name: string } | null;
   rsdKumulativ: number;
   trenutniNivo: number;
 }
@@ -93,12 +93,12 @@ interface Props {
   bankaBalance: number;
   ukupnoKorisnika: number;
   verifikovanih: number;
-  ukupnoZadrugaCount: number;
+  ukupnoKrugCount: number;
   danasEmitovano: number;
   danasLimit: number;
   danasKorisnika: number;
   danasTransakcija: number;
-  danasZadruga: number;
+  danasKrug: number;
   ukupnoDonacija: number;
   danasDonacija: number;
   ukupanIznosTx: number;
@@ -108,7 +108,7 @@ interface Props {
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
-  zadruge: Zadruga[];
+  krugovi: Krug[];
   programi: Program[];
 }
 
@@ -122,12 +122,12 @@ export default function SistemKlijent({
   bankaBalance,
   ukupnoKorisnika,
   verifikovanih,
-  ukupnoZadrugaCount,
+  ukupnoKrugCount,
   danasEmitovano,
   danasLimit,
   danasKorisnika,
   danasTransakcija,
-  danasZadruga,
+  danasKrug,
   ukupnoDonacija,
   danasDonacija,
   ukupanIznosTx,
@@ -137,7 +137,7 @@ export default function SistemKlijent({
   emisijeChart,
   transakcije,
   clanovi,
-  zadruge,
+  krugovi,
   programi,
 }: Props) {
   const [sekcija, setSekcija] = useState<Sekcija>("pregled");
@@ -194,14 +194,14 @@ export default function SistemKlijent({
           podnaslov={t("kartica_verif_opis", { verif: verifikovanih, neverif: ukupnoKorisnika - verifikovanih })}
         />
 
-        {/* Zadruge */}
+        {/* Krugovi */}
         <Kartica
-          aktivan={sekcija === "zadruge"}
-          onClick={() => setSekcija("zadruge")}
-          label={t("kartica_zadruge")}
-          broj={ukupnoZadrugaCount}
-          danas={danasZadruga}
-          podnaslov={t("kartica_zadruge_opis")}
+          aktivan={sekcija === "krugovi"}
+          onClick={() => setSekcija("krugovi")}
+          label={t("kartica_krugovi")}
+          broj={ukupnoKrugCount}
+          danas={danasKrug}
+          podnaslov={t("kartica_krugovi_opis")}
         />
 
         {/* Transakcije */}
@@ -343,7 +343,7 @@ export default function SistemKlijent({
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
           programi={programi}
-          ukupnoZadruga={ukupnoZadrugaCount}
+          ukupnoKrug={ukupnoKrugCount}
           aktivniProgrami={aktivniProgrami}
         />
       )}
@@ -354,8 +354,8 @@ export default function SistemKlijent({
         <TransakcijeSekcija transakcije={transakcije} verified={verified} />
       )}
       {sekcija === "programi" && <ProgramiSekcija programi={programi} />}
-      {sekcija === "zadruge" && (
-        <ZadrugeSekcija zadruge={zadruge} verified={verified} />
+      {sekcija === "krugovi" && (
+        <KrugoviSekcija krugovi={krugovi} verified={verified} />
       )}
       {sekcija === "donacije" && (
         <DonacijeSekcija donacije={donacije} pokrovitelji={pokrovitelji} verified={verified} />
@@ -424,7 +424,7 @@ function PregledSekcija({
   danasLimit,
   emisijeChart,
   programi,
-  ukupnoZadruga,
+  ukupnoKrug,
   aktivniProgrami,
 }: {
   verified: boolean;
@@ -433,7 +433,7 @@ function PregledSekcija({
   danasLimit: number;
   emisijeChart: EmisijaChart[];
   programi: Program[];
-  ukupnoZadruga: number;
+  ukupnoKrug: number;
   aktivniProgrami: number;
 }) {
   const t = useTranslations("sistem");
@@ -444,8 +444,8 @@ function PregledSekcija({
     { label: t("registracija_link"), on: true },
     { label: t("pijaca_link"), on: true },
     { label: t("poruke_link"), on: true },
-    { label: t("zadruge_link"), on: ukupnoZadruga > 0 },
-    { label: t("zaposljavnje_link"), on: programi.some((p) => p.type === "ZAPOSLJAVNJE" && p.isActive) },
+    { label: t("krugovi_link"), on: ukupnoKrug > 0 },
+    { label: t("zaposljavnje_link"), on: programi.some((p) => p.type === "PED" && p.isActive) },
     { label: t("podrska_majkama_link"), on: programi.some((p) => p.type === "PODRSKA_MAJKAMA" && p.isActive) },
     { label: t("podrska_starijima_link"), on: programi.some((p) => p.type === "PODRSKA_STARIJIMA" && p.isActive) },
     { label: t("posebna_briga_link"), on: programi.some((p) => p.type === "POSEBNA_BRIGA" && p.isActive) },
@@ -616,7 +616,7 @@ function ClanoviSekcija({
           <span>Lokacija</span>
           <span className="text-right">Balans</span>
           <span className="text-right">Rang</span>
-          <span>Zadruga</span>
+          <span>Krug</span>
           <span className="text-right">Registracija</span>
         </div>
         {filtrirani.length === 0 ? (
@@ -659,7 +659,7 @@ function ClanoviSekcija({
                     label={`Rang ${c.rangPreporuke} · ${c.preporukeVerif} preporuka`}
                   />
                 </div>
-                <span className="text-sm text-kolo-muted truncate">{c.zadruga ?? "—"}</span>
+                <span className="text-sm text-kolo-muted truncate">{c.krug ?? "—"}</span>
                 <span className="text-right text-sm text-kolo-muted">
                   {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "2-digit",
@@ -684,7 +684,7 @@ function ClanoviSekcija({
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-kolo-muted">
-                  {c.zadruga && <span>Zadruga: {c.zadruga}</span>}
+                  {c.krug && <span>Krug: {c.krug}</span>}
                   <span>Rang {c.rangDonacije}/{c.rangPreporuke}</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
@@ -982,11 +982,11 @@ function DonacijeSekcija({
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-kolo-text">{p.naziv}</p>
-                  {(p.adresa || p.zadruga) && (
+                  {(p.adresa || p.krug) && (
                     <p className="text-xs text-kolo-muted mt-0.5">
                       {p.adresa && <span>{p.adresa}</span>}
-                      {p.zadruga && (
-                        <span className={p.adresa ? " · " : ""}>Zadruga: {p.zadruga.name}</span>
+                      {p.krug && (
+                        <span className={p.adresa ? " · " : ""}>Krug: {p.krug.name}</span>
                       )}
                     </p>
                   )}
@@ -1101,13 +1101,13 @@ function IznosSekcija({
   );
 }
 
-// ── Zadruge ───────────────────────────────────────────────────────────────────
+// ── Krugovi ───────────────────────────────────────────────────────────────────
 
-function ZadrugeSekcija({
-  zadruge,
+function KrugoviSekcija({
+  krugovi,
   verified,
 }: {
-  zadruge: Zadruga[];
+  krugovi: Krug[];
   verified: boolean;
 }) {
   const t = useTranslations("sistem");
@@ -1116,7 +1116,7 @@ function ZadrugeSekcija({
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
         <p className="text-sm text-kolo-muted mb-3">
-          {t("zadruge_pregled_blokiran")}
+          {t("krugovi_pregled_blokiran")}
         </p>
         <Link
           href="/verifikacija"
@@ -1128,10 +1128,10 @@ function ZadrugeSekcija({
     );
   }
 
-  if (zadruge.length === 0) {
+  if (krugovi.length === 0) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        {t("nema_zadruga")}
+        {t("nema_krug")}
       </div>
     );
   }
@@ -1139,14 +1139,14 @@ function ZadrugeSekcija({
   return (
     <div className="space-y-3">
       <p className="text-xs text-kolo-muted">
-        {t("zadruge_count", { count: zadruge.length })}
+        {t("krugovi_count", { count: krugovi.length })}
       </p>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        {zadruge.map((z, i) => (
+        {krugovi.map((z, i) => (
           <div
             key={z.id}
             className={`px-5 py-3.5 flex justify-between items-center ${
-              i < zadruge.length - 1 ? "border-b border-kolo-border" : ""
+              i < krugovi.length - 1 ? "border-b border-kolo-border" : ""
             }`}
           >
             <div>
@@ -1160,7 +1160,7 @@ function ZadrugeSekcija({
             </div>
             <div className="text-right shrink-0 ml-4">
               <p className="text-sm font-bold text-kolo-text">{z.clanovi}</p>
-              <p className="text-xs text-kolo-muted">{t("zadrugara")}</p>
+              <p className="text-xs text-kolo-muted">{t("krugra")}</p>
             </div>
           </div>
         ))}

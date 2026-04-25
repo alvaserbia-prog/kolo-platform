@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/banka/zrno";
+import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 
 // GET /api/zrno — stanje ZRNA korisnika
 export async function GET() {

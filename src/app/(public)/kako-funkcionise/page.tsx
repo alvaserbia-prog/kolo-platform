@@ -12,7 +12,7 @@ const koraci = [
   {
     br: "1",
     naslov: "Registracija",
-    opis: "Email, pseudonim, lozinka. Pravo ime nigde ne piše — ostatak zajednice vidi samo pseudonim.",
+    opis: "Email, pseudonim, lozinka. Pravo ime nigde ne piše — ostatak krugovi vidi samo pseudonim.",
     detalj: "~2 minuta",
   },
   {
@@ -37,7 +37,7 @@ const koraci = [
   {
     br: "5",
     naslov: "Glas u sistemu",
-    opis: "ZRNO ti daje pravo glasa o odlukama zajednice. Kvadratni koren štiti od koncentracije moći.",
+    opis: "ZRNO ti daje pravo glasa o odlukama krugovi. Kvadratni koren štiti od koncentracije moći.",
     detalj: "demokratski glas",
   },
 ];
@@ -81,14 +81,14 @@ const nacinSticanja = [
   {
     br: "6",
     naslov: "Zapošljavanje",
-    opis: "Fondacija i zadruge objavljuju radne oglase. Ako si verifikovan/a i odobren/a za posao, beleže se sati rada — emisija sledi.",
+    opis: "Fondacija i krugovi objavljuju radne oglase. Ako si verifikovan/a i odobren/a za posao, beleže se sati rada — emisija sledi.",
     iznos: "1.000–2.500 POEN/sat",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },
   {
     br: "7",
     naslov: "Programi podrške",
-    opis: "Za zadrugare koji su odobreni za neki od programa Banke — zapošljavanje, majke, stariji, školovanje, posebna briga — emisija je dnevna.",
+    opis: "Za krugre koji su odobreni za neki od programa Banke — zapošljavanje, majke, stariji, školovanje, posebna briga — emisija je dnevna.",
     iznos: "dnevna emisija",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },
@@ -114,12 +114,12 @@ const institucije = [
     uloga: "Emituje POEN · Softverski protokol",
   },
   {
-    naziv: "Lokalne zadruge",
+    naziv: "Lokalne krugovi",
     inicijal: "Z",
     boja: "bg-kolo-green-100 text-kolo-green-700",
     border: "border-kolo-green-200",
     tekst:
-      "Pravna lica po Zakonu o zadrugama, potpuno autonomna. Svaka zadruga odlučuje o sopstvenim programima i projektima. Zadruge su spona između Fondacije i članova — ali ni Fondacija ni Banka ne mogu im nalagati odluke.",
+      "Pravna lica po Zakonu o krugma, potpuno autonomna. Svaka krug odlučuje o sopstvenim programima i projektima. Krugovi su spona između Fondacije i članova — ali ni Fondacija ni Banka ne mogu im nalagati odluke.",
     uloga: "Okuplja članove · Autonomna pravna lica",
   },
 ];
@@ -281,14 +281,14 @@ export default function KakoFunkcionisePage() {
               <text x="360" y="121" textAnchor="middle" fill="#A07020" fontSize="9.5">Softverski protokol</text>
               <text x="360" y="136" textAnchor="middle" fill="#A07020" fontSize="9.5">Zero-sum</text>
 
-              {/* Strelica Banka → Zadruge */}
+              {/* Strelica Banka → Krugovi */}
               <path d="M454 100 L520 100" stroke="#B3DFC5" strokeWidth="1.5" strokeDasharray="4 3"/>
               <polygon points="520,96 528,100 520,104" fill="#B3DFC5"/>
               <text x="487" y="94" textAnchor="middle" fill="#4B7A5E" fontSize="8.5">distribuira POEN</text>
 
-              {/* Zadruge */}
+              {/* Krugovi */}
               <rect x="530" y="60" width="180" height="80" rx="14" fill="#F0F9F4" stroke="#B3DFC5" strokeWidth="1.5"/>
-              <text x="620" y="94" textAnchor="middle" fill="#1B6B3A" fontSize="11" fontWeight="700">Lokalne zadruge</text>
+              <text x="620" y="94" textAnchor="middle" fill="#1B6B3A" fontSize="11" fontWeight="700">Lokalne krugovi</text>
               <text x="620" y="112" textAnchor="middle" fill="#4B7A5E" fontSize="9.5">Okuplja članove</text>
               <text x="620" y="127" textAnchor="middle" fill="#4B7A5E" fontSize="9.5">Autonomna</text>
 
@@ -344,7 +344,7 @@ export default function KakoFunkcionisePage() {
               },
               {
                 naslov: "Princip dva odvojena akta",
-                tekst: "Akt 1: doniraš robu ili uslugu Fondaciji (ili zajednici). Akt 2: KOLO Banka emituje POEN na tvoj račun kao potvrdu da je zajednica zabeležila tvoj doprinos. Ova dva akta su pravno nezavisna — što znači da POEN nije naknada za uslugu i ne podleže poreskim propisima koji regulišu naknadu.",
+                tekst: "Akt 1: doniraš robu ili uslugu Fondaciji (ili zajednici). Akt 2: KOLO Banka emituje POEN na tvoj račun kao potvrdu da je krug zabeležila tvoj doprinos. Ova dva akta su pravno nezavisna — što znači da POEN nije naknada za uslugu i ne podleže poreskim propisima koji regulišu naknadu.",
               },
               {
                 naslov: "Praktična implikacija",
@@ -421,7 +421,7 @@ export default function KakoFunkcionisePage() {
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-xs font-semibold text-kolo-green-700 mb-1">Zero-sum princip</p>
               <p className="text-xs text-kolo-muted leading-relaxed">
-                Zbir svih POEN-a u sistemu — tvoj, zadruge, Banke — uvek je tačno nula. Banka ide u minus svaki put kad emituje. Niko ne može stvoriti POEN iz vazduha.
+                Zbir svih POEN-a u sistemu — tvoj, krugovi, Banke — uvek je tačno nula. Banka ide u minus svaki put kad emituje. Niko ne može stvoriti POEN iz vazduha.
               </p>
             </div>
           </div>

@@ -13,12 +13,12 @@ export async function POST(
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
-  const ev = await prisma.zaposljvanjeEvidencija.findUnique({ where: { id } });
+  const ev = await prisma.doprinosEvidencija.findUnique({ where: { id } });
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING")
     return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
 
-  await prisma.zaposljvanjeEvidencija.update({
+  await prisma.doprinosEvidencija.update({
     where: { id },
     data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });

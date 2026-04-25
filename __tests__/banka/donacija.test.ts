@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { izracunajBonusZaDonaciju } from "@/lib/banka/donacija";
+import { izracunajBonusZaDonaciju } from "@/lib/protokol/donacija";
 
 describe("izracunajBonusZaDonaciju", () => {
   it("donacija ispod prvog praga (5.000 RSD) — nema bonusa", () => {

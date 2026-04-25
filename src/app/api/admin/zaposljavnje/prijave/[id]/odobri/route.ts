@@ -13,11 +13,11 @@ export async function POST(
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
-  const prijava = await prisma.radniOglasPrijava.findUnique({ where: { id } });
+  const prijava = await prisma.oglasPrijava.findUnique({ where: { id } });
   if (!prijava) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
   if (prijava.status !== "PENDING") return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
-  const oglasSaKapacitetom = await prisma.radniOglas.findUnique({
+  const oglasSaKapacitetom = await prisma.doprinosOglas.findUnique({
     where: { id: prijava.oglasId },
     select: {
       title: true,
@@ -37,7 +37,7 @@ export async function POST(
     );
   }
 
-  await prisma.radniOglasPrijava.update({
+  await prisma.oglasPrijava.update({
     where: { id },
     data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { emitujPoen, preporukaNagrada } from "@/lib/banka/emisija";
+import { emitujPoen, preporukaNagrada } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";

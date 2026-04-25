@@ -13,11 +13,11 @@ export async function GET(
 
   const { id } = await params;
 
-  const oglas = await prisma.radniOglas.findUnique({
+  const oglas = await prisma.doprinosOglas.findUnique({
     where: { id },
     include: {
       createdBy: { select: { pseudonim: true } },
-      zadruga: { select: { name: true } },
+      krug: { select: { name: true } },
       prijave: {
         where: { userId: session.user.id },
         select: { id: true, status: true, rejectionReason: true, createdAt: true },
@@ -46,7 +46,7 @@ export async function GET(
       deadline: oglas.deadline?.toISOString() ?? null,
       status: oglas.status,
       createdByPseudonim: oglas.createdBy.pseudonim,
-      zadrugaName: oglas.zadruga?.name ?? null,
+      krugName: oglas.krug?.name ?? null,
       odobreniClanovi: oglas._count.prijave,
       createdAt: oglas.createdAt.toISOString(),
       mojaPrijava: oglas.prijave[0]

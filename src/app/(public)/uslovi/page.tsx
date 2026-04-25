@@ -94,7 +94,7 @@ export default function UsloviPage() {
           </h2>
           <p className="mb-3">
             <strong>Beta faza.</strong> Platforma se nalazi u fazi razvoja. Pojedine funkcionalnosti
-            predviđene Pravilnikom, uključujući lokalne zadruge sa pravnim subjektivitetom, Programe
+            predviđene Pravilnikom, uključujući lokalne krugovi sa pravnim subjektivitetom, Programe
             Podrške i aktivno Gornje Kolo, u ovoj fazi su neaktivne ili ograničeno dostupne.
           </p>
           <p>
@@ -202,7 +202,7 @@ export default function UsloviPage() {
               <p className="font-semibold mb-1">Neverifikovan prijavljen korisnik</p>
               <p className="text-kolo-muted">
                 Vidi agregatni feed transakcija bez identifikatora strana, sopstvenu istoriju, podatke o
-                zadrugama i sistemske agregate. Ne vidi pseudonime u tuđim transakcijama, profile korisnika
+                krugma i sistemske agregate. Ne vidi pseudonime u tuđim transakcijama, profile korisnika
                 niti identitete prodavaca. Ne može slati poruke niti kupovati na pijaci.
               </p>
             </div>

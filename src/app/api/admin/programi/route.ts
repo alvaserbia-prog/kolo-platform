@@ -3,10 +3,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
-import { labelPrograma } from "@/lib/banka/programi";
+import { labelPrograma } from "@/lib/protokol/programi";
 
 const SVI_TIPOVI: ProgramType[] = [
-  "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 // GET /api/admin/programi — pregled svih programa + pending zahtevi
@@ -16,13 +16,13 @@ export async function GET() {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const [programi, pendingEnrollments, pendingEvidencije, poslednjeEmisije] = await Promise.all([
-    prisma.bankaProgram.findMany(),
+    prisma.protokolProgram.findMany(),
     prisma.programEnrollment.findMany({
       where: { status: "PENDING" },
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
     }),
-    prisma.zaposljvanjeEvidencija.findMany({
+    prisma.doprinosEvidencija.findMany({
       where: { status: "PENDING" },
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },

@@ -3,7 +3,7 @@ import {
   izracunajMajke,
   izracunajStariji,
   izracunajDnevniIznos,
-} from "@/lib/banka/programi";
+} from "@/lib/protokol/programi";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -118,7 +118,7 @@ describe("izracunajDnevniIznos", () => {
   });
 
   it("ZAPOSLJAVNJE → uvek 0 (ide kroz evidenciju)", () => {
-    expect(izracunajDnevniIznos("ZAPOSLJAVNJE", null, 5_000, DANAS)).toBe(0);
+    expect(izracunajDnevniIznos("PED", null, 5_000, DANAS)).toBe(0);
   });
 
   it("PODRSKA_MAJKAMA delegira na izracunajMajke", () => {

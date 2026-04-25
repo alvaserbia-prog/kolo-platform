@@ -76,7 +76,7 @@ export default function ONamaPage() {
               javno objavljen. Veštačka inteligencija je, poslednjih godinu dana, postala alat koji je
               konačno omogućio da se ogroman dokumentacioni okvir iznese do kraja — Pravilnik, Statut,
               Politika privatnosti, Uslovi korišćenja, operativni materijali. Nikola više nije sam. Tim se
-              proširuje, prve zadruge se pripremaju. Ovo je trenutak pre prvih članova — i to je, posle
+              proširuje, prve krugovi se pripremaju. Ovo je trenutak pre prvih članova — i to je, posle
               14 godina, velika stvar.
             </p>
           </div>
@@ -108,7 +108,7 @@ export default function ONamaPage() {
             Ne izmišljamo toplu vodu
           </h2>
           <p className="text-kolo-muted leading-relaxed max-w-[660px]" style={{ lineHeight: "1.7" }}>
-            Ideja da zajednica može da organizuje sopstvenu razmenu — da evidentira doprinos svojih članova
+            Ideja da krug može da organizuje sopstvenu razmenu — da evidentira doprinos svojih članova
             i uspostavi jedinicu koja nije novac ali radi posao novca u zatvorenom krugu — nije nova. Nije
             ni egzotična. Decenijama postoje dokumentovane mreže, u različitim zemljama i pod različitim
             okolnostima, u kojima ljudi razmenjuju rad, dobra i znanje kroz sopstvene sisteme evidencije.
@@ -352,7 +352,7 @@ export default function ONamaPage() {
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
           Nema reklama, nema pretplate, nema skrivenih nagodbi.<br />
-          Ima sistem i ima zajednica koja se upravo formira.
+          Ima sistem i ima krug koja se upravo formira.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           <Link

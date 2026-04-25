@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { UKUPNO_ZRNA } from "@/lib/banka/zrno";
+import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -11,7 +11,7 @@ export async function GET() {
 
   const [
     ukupnoKorisnika, verifikovanih, suspendovanih,
-    ukupnoZadruga, ukupnoZadrugara,
+    ukupnoKrug, ukupnoKrugra,
     banka, zrnoStanje,
     poslednjeEmisije, ukupnoTransakcija,
     noviKorisnici,
@@ -19,8 +19,8 @@ export async function GET() {
     prisma.user.count({ where: { role: { not: "ADMIN" } } }),
     prisma.user.count({ where: { verified: true, role: { not: "ADMIN" } } }),
     prisma.user.count({ where: { status: "SUSPENDED" } }),
-    prisma.zadruga.count({ where: { status: "ACTIVE" } }),
-    prisma.zadrugaMembership.count({ where: { leftAt: null } }),
+    prisma.krug.count({ where: { status: "ACTIVE" } }),
+    prisma.krugClanstvo.count({ where: { leftAt: null } }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
     prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
     prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
@@ -49,7 +49,7 @@ export async function GET() {
 
   return NextResponse.json({
     korisnici: { ukupno: ukupnoKorisnika, verifikovanih, suspendovanih },
-    zadruge: { ukupno: ukupnoZadruga, zadrugara: ukupnoZadrugara },
+    krugovi: { ukupno: ukupnoKrug, krugra: ukupnoKrugra },
     finansije: { opticaj, bankaBalance: banka?.balance ?? 0 },
     zrno: { kodKorisnika: zrnaKodKorisnika, uBanci: zrnaUBanci, ukupno: UKUPNO_ZRNA },
     programi: poslednjeEmisije.map((e) => ({

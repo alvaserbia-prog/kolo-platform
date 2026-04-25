@@ -27,7 +27,7 @@ interface KorisnikInfo {
 
 interface DashboardData {
   korisnici: { ukupno: number; verifikovanih: number; suspendovanih: number };
-  zadruge: { ukupno: number; zadrugara: number };
+  krugovi: { ukupno: number; krugra: number };
   finansije: { opticaj: number; bankaBalance: number };
   zrno: { kodKorisnika: number; uBanci: number; ukupno: number };
   ukupnoTransakcija: number;
@@ -42,7 +42,7 @@ interface AuditLogEntry {
   createdAt: string;
 }
 
-interface ZadrugaListItem {
+interface KrugListItem {
   id: string;
   name: string;
   location: string | null;
@@ -53,7 +53,7 @@ interface ZadrugaListItem {
   createdAt: string;
 }
 
-interface PendingZadruga {
+interface PendingKrug {
   id: string;
   name: string;
   description: string | null;
@@ -115,7 +115,7 @@ interface AdminOglasItem {
   deadline: string | null;
   status: string;
   createdByPseudonim: string;
-  zadrugaName: string | null;
+  krugName: string | null;
   ukupnoPrijava: number;
   pendingEvidencija: number;
   createdAt: string;
@@ -130,7 +130,7 @@ interface AdminPendingPrijava {
   createdAt: string;
 }
 
-interface AdminPendingRadnaEvidencija {
+interface AdminPendingOglasEvidencija {
   id: string;
   pseudonim: string;
   oglasTitle: string;
@@ -144,7 +144,7 @@ interface AdminPendingRadnaEvidencija {
 interface AdminZaposljavanjeData {
   oglasi: AdminOglasItem[];
   pendingPrijave: AdminPendingPrijava[];
-  pendingEvidencije: AdminPendingRadnaEvidencija[];
+  pendingEvidencije: AdminPendingOglasEvidencija[];
 }
 
 interface PokroviteljItem {
@@ -152,7 +152,7 @@ interface PokroviteljItem {
   naziv: string;
   pib: string;
   vlasnikPseudonim: string;
-  zadrugaName: string | null;
+  krugName: string | null;
   rsdKumulativ: number;
   trenutniNivo: number;
   status: string;
@@ -164,20 +164,20 @@ interface AdminKlijentProps {
   pending: PendingRequest[];
   users: KorisnikInfo[];
   opticaj: number;
-  pendingZadruge: PendingZadruga[];
+  pendingKrugovi: PendingKrug[];
   adminProgrami: AdminProgramiData;
   adminZaposljavnje: AdminZaposljavanjeData;
   adminPokrovitelji: PokroviteljItem[];
   dashboard: DashboardData;
   auditLogs: AuditLogEntry[];
-  zadrugeLista: ZadrugaListItem[];
+  krugoviLista: KrugListItem[];
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
-  zadrugeLista2: { id: string; name: string }[];
+  krugoviLista2: { id: string; name: string }[];
 }
 
 const roleLabel: Record<string, string> = {
   FIZICKO_LICE: "Fizičko lice",
-  ZADRUGAR: "Zadrugar",
+  CLAN_KRUGA: "Krugr",
   ADMIN: "Admin",
 };
 
@@ -187,20 +187,20 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "pending" | "zadruge" | "programi" | "zaposljavnje" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
+type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "zaposljavnje" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, adminProgrami, adminZaposljavnje, adminPokrovitelji, dashboard, auditLogs, zadrugeLista, verifikovaniKorisnici, zadrugeLista2 }: AdminKlijentProps) {
+export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminZaposljavnje, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2 }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
   const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length + adminProgrami.pendingEvidencije.length;
   const ukupnoPendingZaposl = adminZaposljavnje.pendingPrijave.length + adminZaposljavnje.pendingEvidencije.length;
-  const ukupnoPending = pending.length + pendingZadruge.length + ukupnoPendingProgrami;
+  const ukupnoPending = pending.length + pendingKrugovi.length + ukupnoPendingProgrami;
 
   const tabs: [Tab, string][] = [
     ["dashboard", "Dashboard"],
     ["pending", `Na čekanju${ukupnoPending > 0 ? ` (${ukupnoPending})` : ""}`],
-    ["zadruge", "Zadruge"],
+    ["krugovi", "Krugovi"],
     ["programi", "Programi"],
     ["zaposljavnje", `Evidencija Doprinosa${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
@@ -233,7 +233,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
       {/* Dashboard */}
       {tab === "dashboard" && <DashboardTab data={dashboard} onRefresh={() => router.refresh()} />}
 
-      {/* Na čekanju — verifikacije + zadruge osnivanje + programi */}
+      {/* Na čekanju — verifikacije + krugovi osnivanje + programi */}
       {tab === "pending" && (
         <div className="space-y-4">
           {pending.length === 0 && (
@@ -247,9 +247,9 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
         </div>
       )}
 
-      {/* Zadruge */}
-      {/* Zadruge — pending osnivanje + lista aktivnih */}
-      {tab === "zadruge" && <ZadrugeLista pendingZadruge={pendingZadruge} zadrugeLista={zadrugeLista} onDone={() => router.refresh()} />}
+      {/* Krugovi */}
+      {/* Krugovi — pending osnivanje + lista aktivnih */}
+      {tab === "krugovi" && <KrugoviLista pendingKrugovi={pendingKrugovi} krugoviLista={krugoviLista} onDone={() => router.refresh()} />}
 
       {/* Programi */}
       {tab === "programi" && <AdminProgramiTab data={adminProgrami} onDone={() => router.refresh()} />}
@@ -262,7 +262,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
         <AdminPokroviteljiTab
           pokrovitelji={adminPokrovitelji}
           verifikovaniKorisnici={verifikovaniKorisnici}
-          zadruge={zadrugeLista2}
+          krugovi={krugoviLista2}
           onDone={() => router.refresh()}
         />
       )}
@@ -279,9 +279,9 @@ export default function AdminKlijent({ pending, users, opticaj, pendingZadruge, 
   );
 }
 
-// ── Kartica za zahtev za osnivanje zadruge ────────────────────────────────────
+// ── Kartica za zahtev za osnivanje krugovi ────────────────────────────────────
 
-function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => void }) {
+function KrugZahtevKartica({ z, onDone }: { z: PendingKrug; onDone: () => void }) {
   const [razlog, setRazlog] = useState("");
   const [showOdbij, setShowOdbij] = useState(false);
   const [loading, setLoading] = useState<"odobri" | "odbij" | null>(null);
@@ -290,11 +290,11 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
   async function odobri() {
     setLoading("odobri");
     setPoruka(null);
-    const res = await fetch(`/api/admin/zadruge/${z.id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/krugovi/${z.id}/odobri`, { method: "POST" });
     const data = await res.json();
     setLoading(null);
     if (res.ok) {
-      setPoruka({ text: `Zadruga "${z.name}" odobrena. Emitovano 50.000 POEN.`, ok: true });
+      setPoruka({ text: `Krug "${z.name}" odobrena. Emitovano 50.000 POEN.`, ok: true });
       setTimeout(onDone, 1500);
     } else {
       setPoruka({ text: data.error ?? "Greška.", ok: false });
@@ -305,7 +305,7 @@ function ZadrugaZahtevKartica({ z, onDone }: { z: PendingZadruga; onDone: () => 
     if (!razlog.trim()) return;
     setLoading("odbij");
     setPoruka(null);
-    const res = await fetch(`/api/admin/zadruge/${z.id}/odbij`, {
+    const res = await fetch(`/api/admin/krugovi/${z.id}/odbij`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ razlog: razlog.trim() }),
@@ -538,10 +538,10 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
 
 // ── Zapošljavanje tab ─────────────────────────────────────────────────────────
 
-const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", ZADRUGA: "Zadruga", PROJEKAT: "Projekat" };
+const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", KRUG: "Krug", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  ZADRUGA:   "bg-kolo-info-light text-kolo-info",
+  KRUG:   "bg-kolo-info-light text-kolo-info",
   PROJEKAT:  "bg-purple-50 text-purple-700",
 };
 
@@ -628,7 +628,7 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[o.source]}`}>{sourceLabel[o.source]}</span>
-                    {o.zadrugaName && <span className="text-xs text-kolo-muted">{o.zadrugaName}</span>}
+                    {o.krugName && <span className="text-xs text-kolo-muted">{o.krugName}</span>}
                     <span className={`text-xs px-2 py-0.5 rounded ${o.status === "ACTIVE" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
                       {o.status === "ACTIVE" ? "Aktivan" : "Zatvoren"}
                     </span>
@@ -742,7 +742,7 @@ function OdbijForma({ onOdbij, loading }: { onOdbij: (razlog: string) => void; l
 function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [source, setSource] = useState<"FONDACIJA" | "ZADRUGA" | "PROJEKAT">("FONDACIJA");
+  const [source, setSource] = useState<"FONDACIJA" | "KRUG" | "PROJEKAT">("FONDACIJA");
   const [hourlyRate, setHourlyRate] = useState("1500");
   const [maxHoursPerDay, setMaxHoursPerDay] = useState("8");
   const [positions, setPositions] = useState("1");
@@ -799,7 +799,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">Izvor pozicije</label>
           <div className="flex gap-1.5 flex-wrap">
-            {(["FONDACIJA", "ZADRUGA", "PROJEKAT"] as const).map((s) => (
+            {(["FONDACIJA", "KRUG", "PROJEKAT"] as const).map((s) => (
               <button key={s} type="button" onClick={() => setSource(s)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${source === s ? "bg-kolo-green-700 text-white" : "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[s]}
@@ -1246,15 +1246,15 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         </div>
       </div>
 
-      {/* Zadruge */}
+      {/* Krugovi */}
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Aktivne zadruge</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.zadruge.ukupno.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mb-1">Aktivne krugovi</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.krugovi.ukupno.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">Zadrugari</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.zadruge.zadrugara.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mb-1">Krugri</p>
+          <p className="text-2xl font-bold text-kolo-text">{data.krugovi.krugra.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1310,14 +1310,14 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
   );
 }
 
-// ── Zadruge lista tab ─────────────────────────────────────────────────────────
+// ── Krugovi lista tab ─────────────────────────────────────────────────────────
 
-function ZadrugeLista({ pendingZadruge, zadrugeLista, onDone }: {
-  pendingZadruge: PendingZadruga[];
-  zadrugeLista: ZadrugaListItem[];
+function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
+  pendingKrugovi: PendingKrug[];
+  krugoviLista: KrugListItem[];
   onDone: () => void;
 }) {
-  const statusZadruge: Record<string, string> = {
+  const statusKrugovi: Record<string, string> = {
     ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
     PENDING:  "bg-kolo-gold-100 text-kolo-gold-600",
     REJECTED: "bg-kolo-danger-light text-kolo-danger",
@@ -1326,24 +1326,24 @@ function ZadrugeLista({ pendingZadruge, zadrugeLista, onDone }: {
 
   return (
     <div className="space-y-6">
-      {pendingZadruge.length > 0 && (
+      {pendingKrugovi.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-kolo-muted">Zahtevi za osnivanje ({pendingZadruge.length})</h3>
-          {pendingZadruge.map((z) => (
-            <ZadrugaZahtevKartica key={z.id} z={z} onDone={onDone} />
+          <h3 className="text-sm font-semibold text-kolo-muted">Zahtevi za osnivanje ({pendingKrugovi.length})</h3>
+          {pendingKrugovi.map((z) => (
+            <KrugZahtevKartica key={z.id} z={z} onDone={onDone} />
           ))}
         </div>
       )}
 
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-5 py-3 border-b border-kolo-border">
-          <h3 className="text-sm font-semibold text-kolo-muted">Sve zadruge ({zadrugeLista.length})</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Sve krugovi ({krugoviLista.length})</h3>
         </div>
-        {zadrugeLista.length === 0 ? (
-          <p className="px-5 py-8 text-center text-sm text-kolo-muted">Nema zadruga.</p>
+        {krugoviLista.length === 0 ? (
+          <p className="px-5 py-8 text-center text-sm text-kolo-muted">Nema krug.</p>
         ) : (
-          zadrugeLista.map((z, i) => (
-            <div key={z.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < zadrugeLista.length - 1 ? "border-b border-kolo-border" : ""}`}>
+          krugoviLista.map((z, i) => (
+            <div key={z.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < krugoviLista.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <div className="min-w-0">
                 <p className="text-sm font-semibold text-kolo-text truncate">{z.name}</p>
                 {z.location && <p className="text-xs text-kolo-muted truncate">{z.location}</p>}
@@ -1352,7 +1352,7 @@ function ZadrugeLista({ pendingZadruge, zadrugeLista, onDone }: {
                 <span>{z.clanovi} čl.</span>
                 <span>{z.projekti} proj.</span>
                 <span className="font-mono">{z.balance.toLocaleString("sr-RS")} P</span>
-                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusZadruge[z.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusKrugovi[z.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                   {z.status}
                 </span>
               </div>
@@ -1656,12 +1656,12 @@ function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
 function AdminPokroviteljiTab({
   pokrovitelji,
   verifikovaniKorisnici,
-  zadruge,
+  krugovi,
   onDone,
 }: {
   pokrovitelji: PokroviteljItem[];
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
-  zadruge: { id: string; name: string }[];
+  krugovi: { id: string; name: string }[];
   onDone: () => void;
 }) {
   const [subTab, setSubTab] = useState<"lista" | "novi" | "doprinos">("lista");
@@ -1676,11 +1676,11 @@ function AdminPokroviteljiTab({
   const [noviEmail, setNoviEmail] = useState("");
   const [noviTelefon, setNoviTelefon] = useState("");
   const [noviVlasnikId, setNoviVlasnikId] = useState("");
-  const [noviZadrugaId, setNoviZadrugaId] = useState("");
+  const [noviKrugId, setNoviKrugId] = useState("");
 
   // Forma — doprinos
   const [doprinosRsd, setDoprinosRsd] = useState("");
-  const [doprinosTip, setDoprinosTip] = useState<"SPONZORSTVO_ZADRUGE" | "DONACIJA_FONDACIJI">("DONACIJA_FONDACIJI");
+  const [doprinosTip, setDoprinosTip] = useState<"SPONZORSTVO_KRUGA" | "DONACIJA_FONDACIJI">("DONACIJA_FONDACIJI");
   const [doprinosNapomena, setDoprinosNapomena] = useState("");
 
   async function kreirajPokrovitelja() {
@@ -1700,14 +1700,14 @@ function AdminPokroviteljiTab({
         kontaktEmail: noviEmail.trim() || undefined,
         kontaktTelefon: noviTelefon.trim() || undefined,
         vlasnikId: noviVlasnikId,
-        zadrugaId: noviZadrugaId || undefined,
+        krugId: noviKrugId || undefined,
       }),
     });
     const data = await res.json();
     setLoading(false);
     if (res.ok) {
       setPoruka({ text: "Pokrovitelj kreiran.", ok: true });
-      setNoviNaziv(""); setNoviPib(""); setNoviAdresa(""); setNoviEmail(""); setNoviTelefon(""); setNoviVlasnikId(""); setNoviZadrugaId("");
+      setNoviNaziv(""); setNoviPib(""); setNoviAdresa(""); setNoviEmail(""); setNoviTelefon(""); setNoviVlasnikId(""); setNoviKrugId("");
       setTimeout(() => { onDone(); setSubTab("lista"); }, 1200);
     } else {
       setPoruka({ text: data.error ?? "Greška.", ok: false });
@@ -1780,7 +1780,7 @@ function AdminPokroviteljiTab({
                   <div className="font-medium text-kolo-text truncate">{p.naziv}</div>
                   <div className="text-xs text-kolo-muted mt-0.5">
                     PIB: {p.pib} · Vlasnik: {p.vlasnikPseudonim}
-                    {p.zadrugaName && ` · Zadruga: ${p.zadrugaName}`}
+                    {p.krugName && ` · Krug: ${p.krugName}`}
                   </div>
                 </div>
                 <div className="shrink-0 text-right">
@@ -1845,11 +1845,11 @@ function AdminPokroviteljiTab({
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-kolo-muted mb-1">Zadruga (opciono)</label>
-            <select value={noviZadrugaId} onChange={(e) => setNoviZadrugaId(e.target.value)}
+            <label className="block text-xs font-medium text-kolo-muted mb-1">Krug (opciono)</label>
+            <select value={noviKrugId} onChange={(e) => setNoviKrugId(e.target.value)}
               className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500">
-              <option value="">— bez zadruge —</option>
-              {zadruge.map((z) => (
+              <option value="">— bez krugovi —</option>
+              {krugovi.map((z) => (
                 <option key={z.id} value={z.id}>{z.name}</option>
               ))}
             </select>
@@ -1895,11 +1895,11 @@ function AdminPokroviteljiTab({
               <label className="block text-xs font-medium text-kolo-muted mb-1">Tip *</label>
               <select
                 value={doprinosTip}
-                onChange={(e) => setDoprinosTip(e.target.value as "SPONZORSTVO_ZADRUGE" | "DONACIJA_FONDACIJI")}
+                onChange={(e) => setDoprinosTip(e.target.value as "SPONZORSTVO_KRUGA" | "DONACIJA_FONDACIJI")}
                 className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               >
                 <option value="DONACIJA_FONDACIJI">Donacija Fondaciji</option>
-                <option value="SPONZORSTVO_ZADRUGE">Sponzorstvo zadruge</option>
+                <option value="SPONZORSTVO_KRUGA">Sponzorstvo krugovi</option>
               </select>
             </div>
           </div>

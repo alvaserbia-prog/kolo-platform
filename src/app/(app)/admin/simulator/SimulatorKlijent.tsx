@@ -8,7 +8,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 interface PreporukaTier { do: number; poen: number; }
 interface DonationLevel { t: number; r: number; }
-interface ZadrugaBonusPrag { clanovi: number; poen: number; }
+interface KrugBonusPrag { clanovi: number; poen: number; }
 
 interface SimParams {
   // Osnovno
@@ -16,9 +16,9 @@ interface SimParams {
   pocetnihClanova: number;
   dailyGrowth: number;        // %
   donRSD: number;             // prosečna donacija po članu/dan
-  zadrugaRast: number;        // % novih koji ulaze u zadrugu/dan
-  novaZadrugaNaDan: number;   // svakih N dana može nova zadruga
-  zadrugaStartPoen: number;   // emisija pri osnivanju
+  krugRast: number;        // % novih koji ulaze u krug/dan
+  novaKrugNaDan: number;   // svakih N dana može nova krug
+  krugStartPoen: number;   // emisija pri osnivanju
 
   // Verifikacija
   verifPoen: number;
@@ -29,12 +29,12 @@ interface SimParams {
   // Donacioni nivoi
   donationLevels: DonationLevel[];
 
-  // Zadruga bonus pragovi
-  zadrugaBonusPragovi: ZadrugaBonusPrag[];
+  // Krug bonus pragovi
+  krugBonusPragovi: KrugBonusPrag[];
 
   // Zapošljavanje
   zaposljavnje: boolean;
-  zaposljavnjePct: number;    // % zadrugara koji podnose evidenciju/dan
+  zaposljavnjePct: number;    // % krugra koji podnose evidenciju/dan
   zaposljavnjeMin: number;
   zaposljavnjeMax: number;
 
@@ -81,9 +81,9 @@ const DEFAULT_PARAMS: SimParams = {
   pocetnihClanova: 5,
   dailyGrowth: 5,
   donRSD: 200,
-  zadrugaRast: 30,
-  novaZadrugaNaDan: 30,
-  zadrugaStartPoen: 50_000,
+  krugRast: 30,
+  novaKrugNaDan: 30,
+  krugStartPoen: 50_000,
 
   verifPoen: 1_000,
 
@@ -103,7 +103,7 @@ const DEFAULT_PARAMS: SimParams = {
     { t: 200_000_000, r: 4.2 }, { t: 500_000_000, r: 4.5 }, { t: 1_000_000_000, r: 5.0 },
   ],
 
-  zadrugaBonusPragovi: [
+  krugBonusPragovi: [
     { clanovi: 10, poen: 100_000 }, { clanovi: 20, poen: 200_000 },
     { clanovi: 50, poen: 500_000 }, { clanovi: 100, poen: 1_000_000 },
     { clanovi: 200, poen: 2_000_000 }, { clanovi: 500, poen: 5_000_000 },
@@ -153,26 +153,26 @@ const DEFAULT_PARAMS: SimParams = {
 
 interface Clan {
   id: number; bal: number; refs: number; zrno: number; cumDon: number;
-  age: number; decaStarosti: number[]; uZadrugu: boolean; joinDay: number;
+  age: number; decaStarosti: number[]; uKrug: boolean; joinDay: number;
 }
-interface Zadruga {
+interface Krug {
   id: number; foundedDay: number; clanovi: number;
   bonusiPlaceni: Set<number>; bal: number; projekti: number;
 }
 interface DnevniDogadjaj {
-  tip: "verif" | "ref" | "don" | "zadruga" | "prog" | "zrno";
+  tip: "verif" | "ref" | "don" | "krug" | "prog" | "zrno";
   tekst: string; iznos: number;
 }
 interface DnevniLog {
-  day: number; clanovi: number; zadrugari: number; zadruge: number;
+  day: number; clanovi: number; krugri: number; krugovi: number;
   opticaj: number; cumDonRSD: number;
-  em_verif: number; em_ref: number; em_don: number; em_zadruga: number; em_programi: number;
+  em_verif: number; em_ref: number; em_don: number; em_krug: number; em_programi: number;
   totalRequested: number; koeficijent: number;
   zrnoUBanci: number; zrnoKodKorisnika: number; zrnoKurs: number;
   dogadjaji: DnevniDogadjaj[];
 }
 interface SimState {
-  members: Clan[]; zadruge: Zadruga[];
+  members: Clan[]; krugovi: Krug[];
   bankaMinus: number; zrnoUBanci: number; cumDonRSD: number;
   log: DnevniLog[]; rngState: number;
 }
@@ -248,10 +248,10 @@ function initState(p: SimParams): SimState {
     const age = 18 + Math.floor(rng.next() * 57);
     const brDece = rng.next() < 0.3 ? Math.floor(1 + rng.next() * 3) : 0;
     const decaStarosti = Array.from({ length: brDece }, () => Math.floor(rng.next() * 20));
-    members.push({ id: i, bal: p.verifPoen, refs: 0, zrno: 0, cumDon: 0, age, decaStarosti, uZadrugu: false, joinDay: 0 });
+    members.push({ id: i, bal: p.verifPoen, refs: 0, zrno: 0, cumDon: 0, age, decaStarosti, uKrug: false, joinDay: 0 });
   }
   return {
-    members, zadruge: [],
+    members, krugovi: [],
     bankaMinus: p.pocetnihClanova * p.verifPoen,
     zrnoUBanci: p.ukupnoZrna,
     cumDonRSD: 0, log: [], rngState: rng.state(),
@@ -260,7 +260,7 @@ function initState(p: SimParams): SimState {
 
 function nextDayStep(prev: SimState, p: SimParams): SimState {
   const members: Clan[] = prev.members.map(m => ({ ...m, decaStarosti: [...m.decaStarosti] }));
-  const zadruge: Zadruga[] = prev.zadruge.map(z => ({ ...z, bonusiPlaceni: new Set(z.bonusiPlaceni) }));
+  const krugovi: Krug[] = prev.krugovi.map(z => ({ ...z, bonusiPlaceni: new Set(z.bonusiPlaceni) }));
   let bankaMinus = prev.bankaMinus;
   let zrnoUBanci = prev.zrnoUBanci;
   let cumDonRSD = prev.cumDonRSD;
@@ -270,7 +270,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   const rng = makeRng(prev.rngState + day * 997);
   const rand = rng.next.bind(rng);
 
-  let em_verif = 0, em_ref = 0, em_don = 0, em_zadruga = 0;
+  let em_verif = 0, em_ref = 0, em_don = 0, em_krug = 0;
   let em_zaposljavnje = 0, em_majke = 0, em_stariji = 0, em_posebna = 0, em_skolovanje = 0;
 
   // 1. NOVI ČLANOVI
@@ -286,7 +286,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     const age = 18 + Math.floor(rand() * 65);
     const brDece = (rand() < 0.25 && age < 50) ? Math.floor(1 + rand() * 3) : 0;
     const decaStarosti = Array.from({ length: brDece }, () => Math.floor(rand() * 20));
-    members.push({ id: members.length, bal: p.verifPoen, refs: 0, zrno: 0, cumDon: 0, age, decaStarosti, uZadrugu: false, joinDay: day });
+    members.push({ id: members.length, bal: p.verifPoen, refs: 0, zrno: 0, cumDon: 0, age, decaStarosti, uKrug: false, joinDay: day });
     em_verif += p.verifPoen;
   }
   bankaMinus += em_verif + em_ref;
@@ -312,34 +312,34 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     if (em_don > 0) dogadjaji.push({ tip: "don", tekst: `${donorN} donatora · kum. ${Math.round(cumDonRSD).toLocaleString("sr-RS")} RSD`, iznos: em_don });
   }
 
-  // 3. ZADRUGE
-  const bezZadruge = members.filter(m => !m.uZadrugu);
-  const mozNova = p.novaZadrugaNaDan > 0 ? (day % p.novaZadrugaNaDan === 0 || zadruge.length === 0) : zadruge.length === 0;
-  if (bezZadruge.length >= 10 && mozNova) {
-    zadruge.push({ id: zadruge.length, foundedDay: day, clanovi: 0, bonusiPlaceni: new Set(), bal: p.zadrugaStartPoen, projekti: 0 });
-    em_zadruga += p.zadrugaStartPoen;
-    bankaMinus += p.zadrugaStartPoen;
-    dogadjaji.push({ tip: "zadruga", tekst: `Nova zadruga #${zadruge.length - 1} osnovana`, iznos: p.zadrugaStartPoen });
+  // 3. KRUGOVI
+  const bezKrugovi = members.filter(m => !m.uKrug);
+  const mozNova = p.novaKrugNaDan > 0 ? (day % p.novaKrugNaDan === 0 || krugovi.length === 0) : krugovi.length === 0;
+  if (bezKrugovi.length >= 10 && mozNova) {
+    krugovi.push({ id: krugovi.length, foundedDay: day, clanovi: 0, bonusiPlaceni: new Set(), bal: p.krugStartPoen, projekti: 0 });
+    em_krug += p.krugStartPoen;
+    bankaMinus += p.krugStartPoen;
+    dogadjaji.push({ tip: "krug", tekst: `Nova krug #${krugovi.length - 1} osnovana`, iznos: p.krugStartPoen });
   }
-  if (zadruge.length > 0) {
+  if (krugovi.length > 0) {
     // Projekti rastu ~1 po 7 dana po zadruzi
-    for (const z of zadruge) {
+    for (const z of krugovi) {
       if (day % 7 === z.id % 7 && z.clanovi >= 3) z.projekti++;
     }
-    const noviClanovi = members.filter(m => !m.uZadrugu && day - m.joinDay >= 1);
-    const ulaze = Math.floor(noviClanovi.length * p.zadrugaRast / 100);
+    const noviClanovi = members.filter(m => !m.uKrug && day - m.joinDay >= 1);
+    const ulaze = Math.floor(noviClanovi.length * p.krugRast / 100);
     for (let i = 0; i < ulaze && i < noviClanovi.length; i++) {
       const m = noviClanovi[i];
-      const z = zadruge[Math.floor(rand() * zadruge.length)];
-      m.uZadrugu = true;
+      const z = krugovi[Math.floor(rand() * krugovi.length)];
+      m.uKrug = true;
       z.clanovi++;
-      for (const prag of p.zadrugaBonusPragovi) {
+      for (const prag of p.krugBonusPragovi) {
         if (z.clanovi === prag.clanovi && !z.bonusiPlaceni.has(prag.clanovi)) {
           z.bal += prag.poen;
           z.bonusiPlaceni.add(prag.clanovi);
-          em_zadruga += prag.poen;
+          em_krug += prag.poen;
           bankaMinus += prag.poen;
-          dogadjaji.push({ tip: "zadruga", tekst: `Zadruga #${z.id}: bonus prag ${prag.clanovi} članova`, iznos: prag.poen });
+          dogadjaji.push({ tip: "krug", tekst: `Krug #${z.id}: bonus prag ${prag.clanovi} članova`, iznos: prag.poen });
         }
       }
     }
@@ -347,11 +347,11 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
 
   // 4. PROGRAMI
   const limit = Math.floor(bankaMinus * 0.1);
-  const zadrugari = members.filter(m => m.uZadrugu);
+  const krugri = members.filter(m => m.uKrug);
   const programItems: { m: Clan; iznos: number; tip: string }[] = [];
 
   if (p.zaposljavnje) {
-    for (const m of zadrugari) {
+    for (const m of krugri) {
       if (rand() * 100 < p.zaposljavnjePct) {
         const iznos = p.zaposljavnjeMin + Math.floor(rand() * (p.zaposljavnjeMax - p.zaposljavnjeMin));
         programItems.push({ m, iznos, tip: "zaposljavnje" });
@@ -359,7 +359,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     }
   }
   if (p.majke) {
-    for (const m of zadrugari.filter(m => m.decaStarosti.length > 0)) {
+    for (const m of krugri.filter(m => m.decaStarosti.length > 0)) {
       if (rand() * 100 < p.majkePct) {
         const iznos = izracunajMajkeFromParams(m.decaStarosti, p);
         if (iznos > 0) programItems.push({ m, iznos, tip: "majke" });
@@ -367,7 +367,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     }
   }
   if (p.stariji) {
-    for (const m of zadrugari.filter(m => m.age >= p.starijiMinStarost)) {
+    for (const m of krugri.filter(m => m.age >= p.starijiMinStarost)) {
       if (rand() * 100 < p.starijiPct) {
         const iznos = izracunajStarijiFromParams(m.age, p);
         if (iznos > 0) programItems.push({ m, iznos, tip: "stariji" });
@@ -375,12 +375,12 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     }
   }
   if (p.posebnaBriga) {
-    for (const m of zadrugari) {
+    for (const m of krugri) {
       if (rand() * 100 < p.posebnaBrigaPct) programItems.push({ m, iznos: p.posebnaBrigaIznos, tip: "posebna" });
     }
   }
   if (p.skolovanje) {
-    for (const m of zadrugari.filter(m => m.age < p.skolovanjeMaxStarost)) {
+    for (const m of krugri.filter(m => m.age < p.skolovanjeMaxStarost)) {
       if (rand() * 100 < p.skolovanjePct) {
         const iznos = p.skolovanjeMin + Math.floor(rand() * (p.skolovanjeMax - p.skolovanjeMin));
         programItems.push({ m, iznos, tip: "skolovanje" });
@@ -457,13 +457,13 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   const zrnoKurs = bankaMinus > 0 && finalZKK > 0 ? bankaMinus / finalZKK : 0;
 
   return {
-    members, zadruge, bankaMinus, zrnoUBanci, cumDonRSD,
+    members, krugovi, bankaMinus, zrnoUBanci, cumDonRSD,
     log: [...prev.log, {
       day, clanovi: members.length,
-      zadrugari: zadruge.reduce((s, z) => s + z.clanovi, 0),
-      zadruge: zadruge.length, opticaj: Math.round(bankaMinus),
+      krugri: krugovi.reduce((s, z) => s + z.clanovi, 0),
+      krugovi: krugovi.length, opticaj: Math.round(bankaMinus),
       cumDonRSD: Math.round(cumDonRSD),
-      em_verif, em_ref, em_don, em_zadruga, em_programi: em_prog,
+      em_verif, em_ref, em_don, em_krug, em_programi: em_prog,
       totalRequested: Math.round(totalRequested), koeficijent,
       zrnoUBanci, zrnoKodKorisnika: finalZKK, zrnoKurs, dogadjaji,
     }],
@@ -495,7 +495,7 @@ function MiniChart({ data, color = "#16a34a", h = 60 }: { data: number[]; color?
 const DOG_CFG: Record<string, { bg: string; text: string; ikona: string }> = {
   verif:   { bg: "bg-kolo-info-light",    text: "text-kolo-info",    ikona: "✓" },
   don:     { bg: "bg-kolo-gold-100",   text: "text-kolo-gold-600",   ikona: "♦" },
-  zadruga: { bg: "bg-kolo-green-100",   text: "text-kolo-green-700",   ikona: "⊕" },
+  krug: { bg: "bg-kolo-green-100",   text: "text-kolo-green-700",   ikona: "⊕" },
   prog:    { bg: "bg-emerald-50", text: "text-emerald-700", ikona: "₽" },
   zrno:    { bg: "bg-kolo-gold-100",  text: "text-kolo-gold-600",  ikona: "◆" },
   ref:     { bg: "bg-kolo-green-100", text: "text-kolo-green-700", ikona: "→" },
@@ -594,8 +594,8 @@ function DonationLevelsEditor({ levels, onChange }: { levels: DonationLevel[]; o
   );
 }
 
-function ZadrugaBonusEditor({ pragovi, onChange }: { pragovi: ZadrugaBonusPrag[]; onChange: (p: ZadrugaBonusPrag[]) => void }) {
-  function update(i: number, key: keyof ZadrugaBonusPrag, val: number) {
+function KrugBonusEditor({ pragovi, onChange }: { pragovi: KrugBonusPrag[]; onChange: (p: KrugBonusPrag[]) => void }) {
+  function update(i: number, key: keyof KrugBonusPrag, val: number) {
     onChange(pragovi.map((p, j) => j === i ? { ...p, [key]: val } : p));
   }
   function add() { onChange([...pragovi, { clanovi: 0, poen: 0 }]); }
@@ -643,7 +643,7 @@ function KoefDeceEditor({ koefs, onChange }: { koefs: number[]; onChange: (k: nu
 // KONFIGURACIONI EKRAN
 // ─────────────────────────────────────────────────────────────────
 
-const TABS_CONF = ["Osnovno", "Verifikacija i preporuke", "Donacioni nivoi", "Zadruge", "Programi", "ZRNO"] as const;
+const TABS_CONF = ["Osnovno", "Verifikacija i preporuke", "Donacioni nivoi", "Krugovi", "Programi", "ZRNO"] as const;
 type TabConf = typeof TABS_CONF[number];
 
 function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
@@ -679,8 +679,8 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
           <Row label="Prosečna donacija po članu/dan" sub="20% članova donira, pareto raspodela">
             <div className="flex items-center gap-1"><N val={p.donRSD} onChange={v => upd("donRSD", v)} cls="w-28" /><span className="text-sm text-kolo-muted">RSD</span></div>
           </Row>
-          <Row label="Ulazak u zadruge" sub="% novih koji su prihvatljivi i ulaze">
-            <div className="flex items-center gap-1"><N val={p.zadrugaRast} onChange={v => upd("zadrugaRast", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div>
+          <Row label="Ulazak u krugovi" sub="% novih koji su prihvatljivi i ulaze">
+            <div className="flex items-center gap-1"><N val={p.krugRast} onChange={v => upd("krugRast", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div>
           </Row>
         </Sekcija>
       )}
@@ -704,19 +704,19 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
         </Sekcija>
       )}
 
-      {/* Zadruge */}
-      {tab === "Zadruge" && (
+      {/* Krugovi */}
+      {tab === "Krugovi" && (
         <div className="space-y-4">
-          <Sekcija title="Osnivanje zadruge">
-            <Row label="Nova zadruga svakih N dana" sub="0 = samo na početku">
-              <N val={p.novaZadrugaNaDan} onChange={v => upd("novaZadrugaNaDan", v)} min={0} max={365} cls="w-24" />
+          <Sekcija title="Osnivanje krugovi">
+            <Row label="Nova krug svakih N dana" sub="0 = samo na početku">
+              <N val={p.novaKrugNaDan} onChange={v => upd("novaKrugNaDan", v)} min={0} max={365} cls="w-24" />
             </Row>
             <Row label="POEN emisija pri osnivanju">
-              <N val={p.zadrugaStartPoen} onChange={v => upd("zadrugaStartPoen", v)} cls="w-28" />
+              <N val={p.krugStartPoen} onChange={v => upd("krugStartPoen", v)} cls="w-28" />
             </Row>
           </Sekcija>
           <Sekcija title="Bonus pragovi rasta">
-            <ZadrugaBonusEditor pragovi={p.zadrugaBonusPragovi} onChange={v => upd("zadrugaBonusPragovi", v)} />
+            <KrugBonusEditor pragovi={p.krugBonusPragovi} onChange={v => upd("krugBonusPragovi", v)} />
           </Sekcija>
         </div>
       )}
@@ -726,7 +726,7 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
         <div className="space-y-4">
           <Sekcija title="Zapošljavanje">
             <Row label="Aktivan"><Tog val={p.zaposljavnje} onChange={v => upd("zaposljavnje", v)} /></Row>
-            <Row label="% zadrugara koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.zaposljavnjePct} onChange={v => upd("zaposljavnjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+            <Row label="% krugra koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.zaposljavnjePct} onChange={v => upd("zaposljavnjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Iznos evidencije min/max">
               <div className="flex items-center gap-2">
                 <N val={p.zaposljavnjeMin} onChange={v => upd("zaposljavnjeMin", v)} cls="w-24" />
@@ -757,13 +757,13 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 
           <Sekcija title="Posebna briga">
             <Row label="Aktivan"><Tog val={p.posebnaBriga} onChange={v => upd("posebnaBriga", v)} /></Row>
-            <Row label="% zadrugara/dan"><div className="flex items-center gap-1"><N val={p.posebnaBrigaPct} onChange={v => upd("posebnaBrigaPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+            <Row label="% krugra/dan"><div className="flex items-center gap-1"><N val={p.posebnaBrigaPct} onChange={v => upd("posebnaBrigaPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Iznos po korisniku/dan"><N val={p.posebnaBrigaIznos} onChange={v => upd("posebnaBrigaIznos", v)} cls="w-28" /></Row>
           </Sekcija>
 
           <Sekcija title="Školovanje">
             <Row label="Aktivan"><Tog val={p.skolovanje} onChange={v => upd("skolovanje", v)} /></Row>
-            <Row label="% mlađih zadrugara/dan"><div className="flex items-center gap-1"><N val={p.skolovanjePct} onChange={v => upd("skolovanjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+            <Row label="% mlađih krugra/dan"><div className="flex items-center gap-1"><N val={p.skolovanjePct} onChange={v => upd("skolovanjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Maksimalna starost (god)"><N val={p.skolovanjeMaxStarost} onChange={v => upd("skolovanjeMaxStarost", v)} min={18} max={40} cls="w-20" /></Row>
             <Row label="Iznos min/max">
               <div className="flex items-center gap-2">
@@ -808,12 +808,12 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
 // SIMULACIONI EKRAN
 // ─────────────────────────────────────────────────────────────────
 
-type SimView = "pregled" | "clanovi" | "zadruge" | "zrno";
+type SimView = "pregled" | "clanovi" | "krugovi" | "zrno";
 
 const SIM_TABS: { id: SimView; label: string }[] = [
   { id: "pregled", label: "Pregled" },
   { id: "clanovi", label: "Članovi" },
-  { id: "zadruge", label: "Zadruge" },
+  { id: "krugovi", label: "Krugovi" },
   { id: "zrno", label: "ZRNO" },
 ];
 
@@ -877,7 +877,7 @@ function ViewClanovi({ members }: { members: Clan[] }) {
                 <td className="px-3 py-1.5 text-right">{m.refs}</td>
                 <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{m.zrno || "—"}</td>
                 <td className="px-3 py-1.5 text-right text-kolo-muted">{m.age}</td>
-                <td className="px-3 py-1.5 text-center">{m.uZadrugu ? <span className="text-kolo-green-700">✓</span> : <span className="text-kolo-border">—</span>}</td>
+                <td className="px-3 py-1.5 text-center">{m.uKrug ? <span className="text-kolo-green-700">✓</span> : <span className="text-kolo-border">—</span>}</td>
               </tr>
             ))}
           </tbody>
@@ -887,26 +887,26 @@ function ViewClanovi({ members }: { members: Clan[] }) {
   );
 }
 
-function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[] }) {
-  const sorted = [...zadruge].sort((a, b) => b.bal - a.bal);
+function ViewKrugovi({ krugovi, members }: { krugovi: Krug[]; members: Clan[] }) {
+  const sorted = [...krugovi].sort((a, b) => b.bal - a.bal);
   const [selId, setSelId] = useState<number | null>(null);
-  const sel = selId !== null ? zadruge.find(z => z.id === selId) : null;
+  const sel = selId !== null ? krugovi.find(z => z.id === selId) : null;
 
   if (sel) {
-    const clanoviZadruge = members.filter(m => m.uZadrugu).slice(0, sel.clanovi);
-    const ukupnoBal = clanoviZadruge.reduce((s, m) => s + m.bal, 0);
+    const clanoviKrugovi = members.filter(m => m.uKrug).slice(0, sel.clanovi);
+    const ukupnoBal = clanoviKrugovi.reduce((s, m) => s + m.bal, 0);
     return (
       <div>
         <button onClick={() => setSelId(null)} className="flex items-center gap-1.5 text-sm text-kolo-muted hover:text-kolo-text mb-4">
-          ← Nazad na zadruge
+          ← Nazad na krugovi
         </button>
         <div className="flex justify-between items-baseline mb-4">
-          <h3 className="text-base font-semibold text-kolo-text">Zadruga #{sel.id}</h3>
+          <h3 className="text-base font-semibold text-kolo-text">Krug #{sel.id}</h3>
           <span className="text-xs text-kolo-muted">osnovana dan {sel.foundedDay}</span>
         </div>
         <div className="grid grid-cols-4 gap-3 mb-4">
           {[
-            { l: "Balans zadruge", v: fmt(sel.bal), c: "text-kolo-green-700" },
+            { l: "Balans krugovi", v: fmt(sel.bal), c: "text-kolo-green-700" },
             { l: "Članova", v: String(sel.clanovi) },
             { l: "Projekata", v: String(sel.projekti) },
             { l: "Bonusi plaćeni", v: String(sel.bonusiPlaceni.size) },
@@ -949,11 +949,11 @@ function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[]
   return (
     <div>
       <div className="flex justify-between items-baseline mb-4">
-        <h3 className="text-base font-semibold text-kolo-text">Rang lista zadruga</h3>
-        <span className="text-xs text-kolo-muted">{zadruge.length} zadruga</span>
+        <h3 className="text-base font-semibold text-kolo-text">Rang lista krug</h3>
+        <span className="text-xs text-kolo-muted">{krugovi.length} krug</span>
       </div>
-      {zadruge.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema zadruga</div>
+      {krugovi.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema krug</div>
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {sorted.map((z, i) => (
@@ -962,7 +962,7 @@ function ViewZadruge({ zadruge, members }: { zadruge: Zadruga[]; members: Clan[]
               <div className="flex items-center gap-3 min-w-0">
                 <span className="text-sm text-kolo-muted font-mono w-5">{i + 1}</span>
                 <div>
-                  <p className="text-sm font-semibold text-kolo-text">Zadruga #{z.id}</p>
+                  <p className="text-sm font-semibold text-kolo-text">Krug #{z.id}</p>
                   <p className="text-xs text-kolo-muted">osnovana dan {z.foundedDay} · {z.clanovi} članova · {z.projekti} projekata</p>
                 </div>
               </div>
@@ -1084,7 +1084,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
       <SimTabs view={view} setView={setView} />
 
       {view === "clanovi" && <ViewClanovi members={state.members} />}
-      {view === "zadruge" && <ViewZadruge zadruge={state.zadruge} members={state.members} />}
+      {view === "krugovi" && <ViewKrugovi krugovi={state.krugovi} members={state.members} />}
       {view === "zrno" && last && <ViewZrno last={last} log={log} ukupnoZrna={params.ukupnoZrna} />}
       {view === "zrno" && !last && (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Pokreni simulaciju da vidiš ZRNO podatke</div>
@@ -1101,12 +1101,12 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">Članovi</p>
           <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.clanovi : params.pocetnihClanova}</p>
-          {last && <p className="text-xs text-kolo-muted">{last.zadrugari} zadrugara</p>}
+          {last && <p className="text-xs text-kolo-muted">{last.krugri} krugra</p>}
         </div>
         <div className="bg-white rounded-xl border border-kolo-border p-3">
-          <p className="text-xs text-kolo-muted">Zadruge</p>
-          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.zadruge : "0"}</p>
-          {state.zadruge.length > 0 && <p className="text-xs text-kolo-muted">{state.zadruge.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
+          <p className="text-xs text-kolo-muted">Krugovi</p>
+          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.krugovi : "0"}</p>
+          {state.krugovi.length > 0 && <p className="text-xs text-kolo-muted">{state.krugovi.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
         </div>
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">10% limit</p>
@@ -1127,9 +1127,9 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
             <MiniChart data={log.map(d => d.opticaj)} color="#16a34a" h={55} />
           </div>
           <div>
-            <p className="text-xs text-kolo-muted mb-1">Članovi <span className="text-blue-500">●</span>  Zadrugari <span className="text-green-500">●</span></p>
+            <p className="text-xs text-kolo-muted mb-1">Članovi <span className="text-blue-500">●</span>  Krugri <span className="text-green-500">●</span></p>
             <MiniChart data={log.map(d => d.clanovi)} color="#3b82f6" h={35} />
-            <MiniChart data={log.map(d => d.zadrugari)} color="#16a34a" h={20} />
+            <MiniChart data={log.map(d => d.krugri)} color="#16a34a" h={20} />
           </div>
         </div>
 
@@ -1157,7 +1157,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
               <div className="mt-3 pt-3 border-t border-kolo-border flex flex-wrap gap-1.5">
                 {[
                   { l: "Verif", v: last.em_verif }, { l: "Prep.", v: last.em_ref },
-                  { l: "Donacije", v: last.em_don }, { l: "Zadruge", v: last.em_zadruga },
+                  { l: "Donacije", v: last.em_don }, { l: "Krugovi", v: last.em_krug },
                   { l: "Programi", v: last.em_programi },
                 ].filter(x => x.v > 0).map(x => (
                   <div key={x.l} className="bg-kolo-bg rounded-lg px-2 py-1 text-center">
@@ -1193,7 +1193,7 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
                   <tr key={d.day} className={i % 2 === 0 ? "" : "bg-kolo-bg/50"}>
                     <td className="px-3 py-1.5 text-left font-mono text-kolo-muted">{d.day}</td>
                     <td className="px-3 py-1.5 text-right">{d.clanovi}</td>
-                    <td className="px-3 py-1.5 text-right text-kolo-info">{d.zadrugari}</td>
+                    <td className="px-3 py-1.5 text-right text-kolo-info">{d.krugri}</td>
                     <td className="px-3 py-1.5 text-right font-mono font-semibold text-kolo-green-700">{fmt(d.opticaj)}</td>
                     <td className="px-3 py-1.5 text-right font-mono text-kolo-gold-600">{fmt(d.cumDonRSD)}</td>
                     <td className="px-3 py-1.5 text-right font-mono text-kolo-muted">{d.totalRequested > 0 ? fmt(d.totalRequested) : "—"}</td>

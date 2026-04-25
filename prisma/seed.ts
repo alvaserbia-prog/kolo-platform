@@ -21,8 +21,8 @@ const testKorisnici = [
 
 // POEN koji dobija svaki korisnik pri verifikaciji
 const POEN_VERIFIKACIJA = 1_000;
-// POEN za osnivanje zadruge
-const POEN_ZADRUGA_OSNIVANJE = 50_000;
+// POEN za osnivanje krugovi
+const POEN_KRUG_OSNIVANJE = 50_000;
 
 async function main() {
   console.log("=== KOLO Seed ===\n");
@@ -33,7 +33,7 @@ async function main() {
     update: {},
     create: {
       id: "banka-singleton",
-      type: WalletType.BANKA,
+      type: WalletType.PROTOKOL,
       balance: 0,
     },
   });
@@ -114,75 +114,75 @@ async function main() {
     console.log(`✓ Korisnik: ${korisnik.pseudonim} (${k.email}) — ${POEN_VERIFIKACIJA} POEN`);
   }
 
-  // ─── 4. Test zadruga ───────────────────────────────────────────────────────
-  const zadruga = await prisma.zadruga.upsert({
+  // ─── 4. Test krug ───────────────────────────────────────────────────────
+  const krug = await prisma.krug.upsert({
     where: { name: "Zelena Mreža" },
     update: {},
     create: {
       name: "Zelena Mreža",
-      description: "Test zadruga za Alpha fazu — uzajamna podrška i razmena u Beogradu",
+      description: "Test krug za Alpha fazu — uzajamna podrška i razmena u Beogradu",
       location: "Beograd",
-      wallet: { create: { type: WalletType.ZADRUGA, balance: 0 } },
+      wallet: { create: { type: WalletType.KRUG, balance: 0 } },
     },
     include: { wallet: true },
   });
-  console.log("\n✓ Zadruga:", zadruga.name);
+  console.log("\n✓ Krug:", krug.name);
 
-  const zadrugaWalletId = zadruga.wallet!.id;
+  const krugWalletId = krug.wallet!.id;
 
   // Emisija 50.000 POEN zadruznom novčaniku (osnivanje)
-  const vecImaZadrugaEmisiju = await prisma.transaction.findFirst({
-    where: { toWalletId: zadrugaWalletId, type: TransactionType.EMISIJA_ZADRUGA_OSNIVANJE },
+  const vecImaKrugEmisiju = await prisma.transaction.findFirst({
+    where: { toWalletId: krugWalletId, type: TransactionType.EMISIJA_KRUG_OSNIVANJE },
   });
 
-  if (!vecImaZadrugaEmisiju) {
+  if (!vecImaKrugEmisiju) {
     await prisma.$transaction([
       prisma.wallet.update({
         where: { id: "banka-singleton" },
-        data: { balance: { decrement: POEN_ZADRUGA_OSNIVANJE } },
+        data: { balance: { decrement: POEN_KRUG_OSNIVANJE } },
       }),
       prisma.wallet.update({
-        where: { id: zadrugaWalletId },
-        data: { balance: { increment: POEN_ZADRUGA_OSNIVANJE } },
+        where: { id: krugWalletId },
+        data: { balance: { increment: POEN_KRUG_OSNIVANJE } },
       }),
       prisma.transaction.create({
         data: {
           fromWalletId: "banka-singleton",
-          toWalletId: zadrugaWalletId,
-          amount: POEN_ZADRUGA_OSNIVANJE,
-          type: TransactionType.EMISIJA_ZADRUGA_OSNIVANJE,
-          description: "Emisija pri osnivanju zadruge",
+          toWalletId: krugWalletId,
+          amount: POEN_KRUG_OSNIVANJE,
+          type: TransactionType.EMISIJA_KRUG_OSNIVANJE,
+          description: "Emisija pri osnivanju krugovi",
         },
       }),
     ]);
-    console.log(`  ✓ Emisija osnivanja: ${POEN_ZADRUGA_OSNIVANJE} POEN`);
+    console.log(`  ✓ Emisija osnivanja: ${POEN_KRUG_OSNIVANJE} POEN`);
   }
 
   // Dodaj prvih 5 korisnika kao članove (uključujući isAdmin za prvog)
   for (let i = 0; i < Math.min(5, kreiraniKorisnici.length); i++) {
     const k = kreiraniKorisnici[i];
 
-    const vecClan = await prisma.zadrugaMembership.findFirst({
-      where: { userId: k.id, zadrugaId: zadruga.id, leftAt: null },
+    const vecClan = await prisma.krugClanstvo.findFirst({
+      where: { userId: k.id, krugId: krug.id, leftAt: null },
     });
 
     if (!vecClan) {
-      await prisma.zadrugaMembership.create({
+      await prisma.krugClanstvo.create({
         data: {
           userId: k.id,
-          zadrugaId: zadruga.id,
-          isAdmin: i === 0, // prvi osnivač je admin zadruge
+          krugId: krug.id,
+          isAdmin: i === 0, // prvi osnivač je admin krugovi
         },
       });
 
-      // Ažuriraj ulogu na ZADRUGAR
+      // Ažuriraj ulogu na CLAN_KRUGA
       await prisma.user.update({
         where: { id: k.id },
-        data: { role: Role.ZADRUGAR },
+        data: { role: Role.CLAN_KRUGA },
       });
     }
 
-    console.log(`  ✓ Član: ${k.pseudonim}${i === 0 ? " (admin zadruge)" : ""}`);
+    console.log(`  ✓ Član: ${k.pseudonim}${i === 0 ? " (admin krugovi)" : ""}`);
   }
 
   // Stefan_M (index 5) ostaje fizičko lice — nije u zadruzi, za testiranje pristupnica

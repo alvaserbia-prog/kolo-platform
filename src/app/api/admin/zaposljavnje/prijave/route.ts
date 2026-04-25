@@ -9,7 +9,7 @@ export async function GET(_req: NextRequest) {
   if (!session || session.user.role !== "ADMIN")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
-  const prijave = await prisma.radniOglasPrijava.findMany({
+  const prijave = await prisma.oglasPrijava.findMany({
     where: { status: "PENDING" },
     include: {
       user: { select: { pseudonim: true } },

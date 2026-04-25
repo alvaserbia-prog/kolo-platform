@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { preporukaNagrada } from "@/lib/banka/emisija";
+import { preporukaNagrada } from "@/lib/protokol/emisija";
 
 // Rang tabela za širenje (Prilog 1, tačka 2)
 const RANG_SIRENJEM = [

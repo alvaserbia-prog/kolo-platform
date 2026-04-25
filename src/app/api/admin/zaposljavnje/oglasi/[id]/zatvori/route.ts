@@ -13,6 +13,6 @@ export async function POST(
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
-  await prisma.radniOglas.update({ where: { id }, data: { status: "CLOSED" } });
+  await prisma.doprinosOglas.update({ where: { id }, data: { status: "CLOSED" } });
   return NextResponse.json({ ok: true });
 }

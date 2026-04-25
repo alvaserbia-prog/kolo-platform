@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { evidentirajDonaciju } from "@/lib/banka/donacija";
+import { evidentirajDonaciju } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";

@@ -260,7 +260,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   const roleLabel: Record<string, string> = {
     FIZICKO_LICE: t("uloga_fizicko"),
-    ZADRUGAR: t("uloga_zadrugar"),
+    CLAN_KRUGA: t("uloga_krugar"),
     ADMIN: t("uloga_admin"),
   };
 

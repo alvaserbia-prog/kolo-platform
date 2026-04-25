@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { bonusZaNivo, izracunajNivo } from "@/lib/banka/pokrovitelj";
+import { bonusZaNivo, izracunajNivo } from "@/lib/protokol/pokrovitelj";
 
 // Fiksna tabela 7 nivoa:
 // Nivo 1: prag 10.000 RSD → 20.000 POEN

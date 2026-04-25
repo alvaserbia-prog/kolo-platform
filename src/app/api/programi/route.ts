@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { izracunajDnevniIznos, labelPrograma } from "@/lib/banka/programi";
+import { izracunajDnevniIznos, labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 
 // GET /api/programi — status enrollmenta i aktivnih programa za korisnika
@@ -14,11 +14,11 @@ export async function GET() {
   danas.setHours(0, 0, 0, 0);
 
   const [aktivniProgrami, enrollments, evidencijaToday] = await Promise.all([
-    prisma.bankaProgram.findMany({ where: { isActive: true } }),
+    prisma.protokolProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({
       where: { userId: session.user.id },
     }),
-    prisma.zaposljvanjeEvidencija.findFirst({
+    prisma.doprinosEvidencija.findFirst({
       where: { userId: session.user.id, date: danas },
     }),
   ]);
@@ -26,7 +26,7 @@ export async function GET() {
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
 
   const sviTipovi: ProgramType[] = [
-    "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+    "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
   ];
 
   const rezultati = sviTipovi.map((type) => {

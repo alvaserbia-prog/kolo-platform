@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 
-// POST — isključi korisnika (Čl. 33): EXCLUDED status, izlaz iz zadruge
+// POST — isključi korisnika (Čl. 33): EXCLUDED status, izlaz iz krugovi
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || session.user.role !== "ADMIN")
@@ -23,13 +23,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (korisnik.status === "EXCLUDED") return NextResponse.json({ error: "Korisnik je već isključen." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {
-    // Isključi iz zadruge
-    await tx.zadrugaMembership.updateMany({
+    // Isključi iz krugovi
+    await tx.krugClanstvo.updateMany({
       where: { userId: id, leftAt: null },
       data: { leftAt: new Date() },
     });
     // Odbij pending pristupnice
-    await tx.zadrugaPristupnica.updateMany({
+    await tx.krugPristupnica.updateMany({
       where: { userId: id, status: "PENDING" },
       data: { status: "REJECTED" },
     });

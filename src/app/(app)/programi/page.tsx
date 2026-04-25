@@ -2,12 +2,12 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { izracunajDnevniIznos, labelPrograma } from "@/lib/banka/programi";
+import { izracunajDnevniIznos, labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import ProgramiKlijent from "./ProgramiKlijent";
 
 const SVI_TIPOVI: ProgramType[] = [
-  "ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 export default async function ProgramiPage() {
@@ -18,12 +18,12 @@ export default async function ProgramiPage() {
   danas.setHours(0, 0, 0, 0);
 
   const [aktivniProgrami, enrollments, evidencijaToday, poslednjeEmisije, banka, emisijaDanas] = await Promise.all([
-    prisma.bankaProgram.findMany({ where: { isActive: true } }),
+    prisma.protokolProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({ where: { userId: session.user.id } }),
-    prisma.zaposljvanjeEvidencija.findFirst({
+    prisma.doprinosEvidencija.findFirst({
       where: { userId: session.user.id, date: danas },
     }),
-    prisma.zaposljvanjeEvidencija.findMany({
+    prisma.doprinosEvidencija.findMany({
       where: { userId: session.user.id },
       orderBy: { date: "desc" },
       take: 14,
@@ -65,7 +65,7 @@ export default async function ProgramiPage() {
     <ProgramiKlijent
       programi={programi}
       isVerified={session.user.verified}
-      isZadrugar={session.user.role === "ZADRUGAR" || session.user.role === "ADMIN"}
+      isKrugr={session.user.role === "CLAN_KRUGA" || session.user.role === "ADMIN"}
       bankaBalance={banka?.balance ?? 0}
       emisioniKontekst={{
         opticaj,

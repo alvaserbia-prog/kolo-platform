@@ -13,11 +13,11 @@ export async function POST(
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
-  const ev = await prisma.radnaEvidencija.findUnique({ where: { id } });
+  const ev = await prisma.oglasEvidencija.findUnique({ where: { id } });
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
 
-  await prisma.radnaEvidencija.update({ where: { id }, data: { status: "REJECTED" } });
+  await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED" } });
 
   await posaljiNotifikaciju(
     ev.userId,

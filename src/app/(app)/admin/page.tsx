@@ -3,20 +3,20 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import AdminKlijent from "./AdminKlijent";
-import { labelPrograma } from "@/lib/banka/programi";
+import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
-import { UKUPNO_ZRNA } from "@/lib/banka/zrno";
+import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { logAdminAkcija } from "@/lib/audit";
 
-const SVI_PROGRAMI: ProgramType[] = ["ZAPOSLJAVNJE", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
+const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
   if (!session || session.user.role !== "ADMIN") redirect("/dashboard");
 
   const [
-    pendingRequests, allUsers, banka, pendingZadruge,
-    adminProgrami, dashboardData, auditLogs, zadrugeLista, pokroviteljiData, zaposljavanjeData,
+    pendingRequests, allUsers, banka, pendingKrugovi,
+    adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
   ] = await Promise.all([
     prisma.verificationRequest.findMany({
       where: { status: "PENDING" },
@@ -33,24 +33,24 @@ export default async function AdminPage() {
       take: 100,
     }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
-    prisma.zadrugaOsnivanjeZahtev.findMany({
+    prisma.krugOsnivanjeZahtev.findMany({
       where: { status: "PENDING" },
       include: { inicijator: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
     }),
     Promise.all([
       prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
-      prisma.bankaProgram.findMany(),
+      prisma.protokolProgram.findMany(),
       prisma.programEnrollment.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
-      prisma.zaposljvanjeEvidencija.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
+      prisma.doprinosEvidencija.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
       prisma.user.count({ where: { role: { not: "ADMIN" } } }),
       prisma.user.count({ where: { verified: true } }),
       prisma.user.count({ where: { status: "SUSPENDED" } }),
-      prisma.zadruga.count({ where: { status: "ACTIVE" } }),
-      prisma.zadrugaMembership.count({ where: { leftAt: null } }),
+      prisma.krug.count({ where: { status: "ACTIVE" } }),
+      prisma.krugClanstvo.count({ where: { leftAt: null } }),
       prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
       prisma.transaction.count(),
     ]),
@@ -59,7 +59,7 @@ export default async function AdminPage() {
       take: 50,
       include: { admin: { select: { pseudonim: true } } },
     }),
-    prisma.zadruga.findMany({
+    prisma.krug.findMany({
       orderBy: { createdAt: "desc" },
       include: {
         wallet: { select: { balance: true } },
@@ -70,7 +70,7 @@ export default async function AdminPage() {
       prisma.pokrovitelj.findMany({
         include: {
           vlasnik: { select: { pseudonim: true } },
-          zadruga: { select: { name: true } },
+          krug: { select: { name: true } },
           _count: { select: { doprinosi: true } },
         },
         orderBy: { createdAt: "desc" },
@@ -80,27 +80,27 @@ export default async function AdminPage() {
         select: { id: true, pseudonim: true },
         orderBy: { pseudonim: "asc" },
       }),
-      prisma.zadruga.findMany({
+      prisma.krug.findMany({
         where: { status: "ACTIVE" },
         select: { id: true, name: true },
         orderBy: { name: "asc" },
       }),
     ]),
     Promise.all([
-      prisma.radniOglas.findMany({
+      prisma.doprinosOglas.findMany({
         include: {
           createdBy: { select: { pseudonim: true } },
-          zadruga: { select: { name: true } },
+          krug: { select: { name: true } },
           _count: { select: { prijave: true, evidencije: { where: { status: "PENDING" } } } },
         },
         orderBy: { createdAt: "desc" },
       }),
-      prisma.radniOglasPrijava.findMany({
+      prisma.oglasPrijava.findMany({
         where: { status: "PENDING" },
         include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true, hourlyRate: true, positions: true } } },
         orderBy: { createdAt: "asc" },
       }),
-      prisma.radnaEvidencija.findMany({
+      prisma.oglasEvidencija.findMany({
         where: { status: "PENDING" },
         include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true } } },
         orderBy: { createdAt: "asc" },
@@ -134,7 +134,7 @@ export default async function AdminPage() {
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(),
       }))}
-      pendingZadruge={pendingZadruge.map((z) => ({
+      pendingKrugovi={pendingKrugovi.map((z) => ({
         id: z.id, name: z.name, description: z.description, location: z.location,
         inicijatorPseudonim: z.inicijator.pseudonim, brOsnivaca: z.osnivaci.length,
         createdAt: z.createdAt.toISOString(),
@@ -160,7 +160,7 @@ export default async function AdminPage() {
       }}
       dashboard={{
         korisnici: { ukupno: dashboardData[0], verifikovanih: dashboardData[1], suspendovanih: dashboardData[2] },
-        zadruge: { ukupno: dashboardData[3], zadrugara: dashboardData[4] },
+        krugovi: { ukupno: dashboardData[3], krugra: dashboardData[4] },
         finansije: { opticaj, bankaBalance: banka?.balance ?? 0 },
         zrno: { kodKorisnika: zrnaKodKorisnika, uBanci: UKUPNO_ZRNA - zrnaKodKorisnika, ukupno: UKUPNO_ZRNA },
         ukupnoTransakcija: dashboardData[6],
@@ -169,7 +169,7 @@ export default async function AdminPage() {
         id: l.id, adminPseudonim: l.admin.pseudonim, akcija: l.akcija,
         targetId: l.targetId, detalji: l.detalji, createdAt: l.createdAt.toISOString(),
       }))}
-      zadrugeLista={zadrugeLista.map((z) => ({
+      krugoviLista={krugoviLista.map((z) => ({
         id: z.id, name: z.name, location: z.location, status: z.status,
         balance: z.wallet?.balance ?? 0, clanovi: z._count.memberships,
         projekti: z._count.projects, createdAt: z.createdAt.toISOString(),
@@ -179,7 +179,7 @@ export default async function AdminPage() {
         naziv: p.naziv,
         pib: p.pib,
         vlasnikPseudonim: p.vlasnik.pseudonim,
-        zadrugaName: p.zadruga?.name ?? null,
+        krugName: p.krug?.name ?? null,
         rsdKumulativ: Number(p.rsdKumulativ),
         trenutniNivo: p.trenutniNivo,
         status: p.status,
@@ -187,13 +187,13 @@ export default async function AdminPage() {
         createdAt: p.createdAt.toISOString(),
       }))}
       verifikovaniKorisnici={pokroviteljiData[1]}
-      zadrugeLista2={pokroviteljiData[2]}
+      krugoviLista2={pokroviteljiData[2]}
       adminZaposljavnje={{
         oglasi: zaposljavanjeData[0].map((o) => ({
           id: o.id, title: o.title, source: o.source as string,
           hourlyRate: o.hourlyRate, maxHoursPerDay: o.maxHoursPerDay, positions: o.positions,
           deadline: o.deadline?.toISOString() ?? null, status: o.status as string,
-          createdByPseudonim: o.createdBy.pseudonim, zadrugaName: o.zadruga?.name ?? null,
+          createdByPseudonim: o.createdBy.pseudonim, krugName: o.krug?.name ?? null,
           ukupnoPrijava: o._count.prijave, pendingEvidencija: o._count.evidencije,
           createdAt: o.createdAt.toISOString(),
         })),

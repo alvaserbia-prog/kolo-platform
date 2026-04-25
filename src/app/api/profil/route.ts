@@ -18,7 +18,7 @@ const BANKA_WALLET_ID = "banka-singleton";
  * 3. Anonimizuj lične podatke (email, punoIme, telefon, lokacija, avatar = null;
  *    pseudonim = "obrisani-korisnik-{id}"; passwordHash = null)
  * 4. Deaktiviraj nalog (deaktiviranAt = now, status = EXCLUDED)
- * 5. Zadržaj: transakcije, audit log, ZadrugaBonusLog, Referral zapise
+ * 5. Zadržaj: transakcije, audit log, KrugBonusLog, Referral zapise
  */
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -40,7 +40,7 @@ export async function DELETE(req: NextRequest) {
     include: {
       wallet: true,
       zrnoStanje: true,
-      zadrugaMemberships: { where: { leftAt: null } },
+      krugClanstva: { where: { leftAt: null } },
     },
   });
 
@@ -128,9 +128,9 @@ export async function DELETE(req: NextRequest) {
     }
   }
 
-  // --- 3. Napusti zadrugu ako je zadrugar ---
-  for (const m of user.zadrugaMemberships) {
-    await prisma.zadrugaMembership.update({
+  // --- 3. Napusti krug ako je krugar ---
+  for (const m of user.krugClanstva) {
+    await prisma.krugClanstvo.update({
       where: { id: m.id },
       data: { leftAt: new Date() },
     });

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { izvrsiNocnuEmisiju } from "@/lib/banka/programi";
+import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
 
 // POST /api/admin/emisija/nocna — manualni okidač (samo admin)
 export async function POST() {

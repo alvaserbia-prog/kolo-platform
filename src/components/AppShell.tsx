@@ -8,7 +8,7 @@ import Header from "./Header";
 interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
-  zajednica: number;
+  krug: number;
   zaposljavnje: number;
   programi: number;
   zrno: number;

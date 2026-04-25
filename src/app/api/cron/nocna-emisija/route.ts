@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { izvrsiNocnuEmisiju } from "@/lib/banka/programi";
-import { izvrsiZrnoOperacije } from "@/lib/banka/zrno";
+import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
+import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 
 // POST /api/cron/nocna-emisija — pokreće se u ponoć (zaštićeno CRON_SECRET)
 export async function POST(req: NextRequest) {

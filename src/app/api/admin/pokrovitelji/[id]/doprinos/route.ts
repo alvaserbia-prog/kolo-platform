@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { evidentirajDoprinos } from "@/lib/banka/pokrovitelj";
+import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (!rsdIznos || typeof rsdIznos !== "number" || rsdIznos <= 0) {
     return NextResponse.json({ error: "Neispravan iznos." }, { status: 400 });
   }
-  if (tip !== "SPONZORSTVO_ZADRUGE" && tip !== "DONACIJA_FONDACIJI") {
+  if (tip !== "SPONZORSTVO_KRUGA" && tip !== "DONACIJA_FONDACIJI") {
     return NextResponse.json({ error: "Neispravan tip doprinosa." }, { status: 400 });
   }
 

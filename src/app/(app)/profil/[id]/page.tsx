@@ -30,7 +30,7 @@ interface ProfilData {
   status: string;
   avatar: string | null;
   createdAt: string;
-  zadruga: { id: string; name: string } | null;
+  krug: { id: string; name: string } | null;
   lokacija: string | null;
   opis: string | null;
   punoIme: string | null;
@@ -52,9 +52,9 @@ const TIP_LABELA: Record<string, string> = {
   EMISIJA_DONACIJA: "Donacija",
   EMISIJA_POKROVITELJ: "Pokroviteljstvo",
   EMISIJA_PROGRAM: "Program",
-  EMISIJA_ZAPOSLJAVNJE: "Zapošljavanje",
-  EMISIJA_ZADRUGA: "Zadruga bonus",
-  EMISIJA_ZADRUGA_OSNIVANJE: "Osnivanje zadruge",
+  EMISIJA_PED: "Zapošljavanje",
+  EMISIJA_KRUG: "Krug bonus",
+  EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",
   ZRNO_KUPOVINA: "ZRNO kupovina",
   ZRNO_PRODAJA: "ZRNO prodaja",
 };
@@ -133,7 +133,7 @@ export default function JavniProfilPage() {
     <div className="space-y-4">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-kolo-muted">
-        <Link href="/zajednica" className="hover:text-kolo-green-700 transition-colors">Zajednica</Link>
+        <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">Krug</Link>
         <span>/</span>
         <span className="text-kolo-text">{profil.pseudonim}</span>
       </div>
@@ -194,12 +194,12 @@ export default function JavniProfilPage() {
 
         {/* Info red */}
         <dl className="mt-5 space-y-2.5 text-sm border-t border-kolo-border pt-4">
-          {profil.zadruga && (
+          {profil.krug && (
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Zadruga</dt>
+              <dt className="text-kolo-muted">Krug</dt>
               <dd>
-                <Link href={`/zajednica/${profil.zadruga.id}`} className="font-medium text-kolo-green-700 hover:underline">
-                  {profil.zadruga.name}
+                <Link href={`/krug/${profil.krug.id}`} className="font-medium text-kolo-green-700 hover:underline">
+                  {profil.krug.name}
                 </Link>
               </dd>
             </div>

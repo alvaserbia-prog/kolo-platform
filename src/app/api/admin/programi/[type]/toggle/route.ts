@@ -16,10 +16,10 @@ export async function POST(
   const { type } = await params;
   const programType = type as ProgramType;
 
-  const current = await prisma.bankaProgram.findUnique({ where: { type: programType } });
+  const current = await prisma.protokolProgram.findUnique({ where: { type: programType } });
   const novoStanje = !(current?.isActive ?? false);
 
-  await prisma.bankaProgram.upsert({
+  await prisma.protokolProgram.upsert({
     where: { type: programType },
     create: { type: programType, isActive: novoStanje, activatedAt: novoStanje ? new Date() : null },
     update: { isActive: novoStanje, activatedAt: novoStanje ? new Date() : undefined },

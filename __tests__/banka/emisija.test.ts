@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { preporukaNagrada } from "@/lib/banka/emisija";
+import { preporukaNagrada } from "@/lib/protokol/emisija";
 
 describe("preporukaNagrada", () => {
   it("prvi preporučeni → 1.000 POEN", () => {

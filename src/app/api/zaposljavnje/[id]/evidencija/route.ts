@@ -31,24 +31,24 @@ export async function POST(
   if (razlikaDana < 0 || razlikaDana > 3) return NextResponse.json({ error: "Evidencija moguća max 3 dana unazad." }, { status: 400 });
 
   // Oglas i odobrena prijava
-  const oglas = await prisma.radniOglas.findUnique({ where: { id: oglasId } });
+  const oglas = await prisma.doprinosOglas.findUnique({ where: { id: oglasId } });
   if (!oglas || oglas.status !== "ACTIVE") return NextResponse.json({ error: "Oglas nije aktivan." }, { status: 400 });
   if (sati > oglas.maxHoursPerDay) return NextResponse.json({ error: `Max ${oglas.maxHoursPerDay} sati dnevno za ovaj oglas.` }, { status: 400 });
 
-  const prijava = await prisma.radniOglasPrijava.findUnique({
+  const prijava = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId, userId: session.user.id } },
   });
   if (!prijava || prijava.status !== "APPROVED") return NextResponse.json({ error: "Nemate odobrenu prijavu za ovaj oglas." }, { status: 403 });
 
   // Provera duplikata za isti dan
-  const postoji = await prisma.radnaEvidencija.findUnique({
+  const postoji = await prisma.oglasEvidencija.findUnique({
     where: { userId_oglasId_date: { userId: session.user.id, oglasId, date: datumEv } },
   });
   if (postoji) return NextResponse.json({ error: "Evidencija za taj dan je već unesena." }, { status: 400 });
 
   const amount = sati * oglas.hourlyRate;
 
-  await prisma.radnaEvidencija.create({
+  await prisma.oglasEvidencija.create({
     data: {
       userId: session.user.id,
       oglasId,

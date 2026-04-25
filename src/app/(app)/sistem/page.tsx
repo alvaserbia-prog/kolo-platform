@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { labelPrograma } from "@/lib/banka/programi";
-import { nivoZaKumulativ } from "@/lib/banka/donacija";
+import { labelPrograma } from "@/lib/protokol/programi";
+import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { ProgramType } from "@/generated/prisma/client";
 import SistemKlijent from "./SistemKlijent";
 
@@ -25,7 +25,7 @@ function rangZaBroj(n: number): number {
 }
 
 const SVE_PROGRAME: ProgramType[] = [
-  "ZAPOSLJAVNJE",
+  "PED",
   "PODRSKA_MAJKAMA",
   "PODRSKA_STARIJIMA",
   "POSEBNA_BRIGA",
@@ -33,7 +33,7 @@ const SVE_PROGRAME: ProgramType[] = [
 ];
 
 const OPIS_PROGRAMA: Record<ProgramType, string> = {
-  ZAPOSLJAVNJE: "Mesečna POEN podrška nezaposlenim članovima koji aktivno traže posao.",
+  PED: "Mesečna POEN podrška nezaposlenim članovima koji aktivno traže posao.",
   PODRSKA_MAJKAMA: "Podrška majkama sa malom decom do 3 godine starosti.",
   PODRSKA_STARIJIMA: "Podrška starijim članovima koji su napunili 65 godina.",
   POSEBNA_BRIGA: "Posebna briga — za članove sa posebnim potrebama ili u teškim okolnostima.",
@@ -53,16 +53,16 @@ export default async function SistemPage() {
     banka,
     ukupnoKorisnika,
     verifikovanih,
-    ukupnoZadruga,
+    ukupnoKrug,
     emisije,
     transakcijeSve,
     korisnici,
-    zadrugeLista,
+    krugoviLista,
     aktivniProgrami,
     verRequest,
     danasKorisnika,
     danasTransakcija,
-    danasZadruga,
+    danasKrug,
     ukupnoDonacijaRaw,
     danasDonacijaRaw,
     ukupanIznosTxRaw,
@@ -76,7 +76,7 @@ export default async function SistemPage() {
     }),
     prisma.user.count({ where: { role: { not: "ADMIN" } } }),
     prisma.user.count({ where: { verified: true, role: { not: "ADMIN" } } }),
-    prisma.zadruga.count({ where: { status: "ACTIVE" } }),
+    prisma.krug.count({ where: { status: "ACTIVE" } }),
     prisma.dailyEmissionSummary.findMany({
       orderBy: { date: "desc" },
       take: 30,
@@ -99,9 +99,9 @@ export default async function SistemPage() {
         location: true,
         createdAt: true,
         wallet: { select: { balance: true } },
-        zadrugaMemberships: {
+        krugClanstva: {
           where: { leftAt: null },
-          select: { zadruga: { select: { name: true } } },
+          select: { krug: { select: { name: true } } },
           take: 1,
         },
         referralsMade: {
@@ -114,7 +114,7 @@ export default async function SistemPage() {
         },
       },
     }),
-    prisma.zadruga.findMany({
+    prisma.krug.findMany({
       where: { status: "ACTIVE" },
       orderBy: { createdAt: "asc" },
       select: {
@@ -125,7 +125,7 @@ export default async function SistemPage() {
         memberships: { where: { leftAt: null }, select: { id: true } },
       },
     }),
-    prisma.bankaProgram.findMany({
+    prisma.protokolProgram.findMany({
       select: { type: true, isActive: true, activatedAt: true },
     }),
     session.user.verified
@@ -140,7 +140,7 @@ export default async function SistemPage() {
     prisma.transaction.count({
       where: { createdAt: { gte: danas } },
     }),
-    prisma.zadruga.count({
+    prisma.krug.count({
       where: { status: "ACTIVE", createdAt: { gte: danas } },
     }),
     prisma.donationRecord.count({ where: { status: "CONFIRMED" } }),
@@ -167,7 +167,7 @@ export default async function SistemPage() {
         id: true,
         naziv: true,
         adresa: true,
-        zadruga: { select: { name: true } },
+        krug: { select: { name: true } },
         rsdKumulativ: true,
         trenutniNivo: true,
       },
@@ -196,7 +196,7 @@ export default async function SistemPage() {
     id: p.id,
     naziv: p.naziv,
     adresa: p.adresa,
-    zadruga: p.zadruga,
+    krug: p.krug,
     rsdKumulativ: Number(p.rsdKumulativ),
     trenutniNivo: p.trenutniNivo,
   }));
@@ -225,7 +225,7 @@ export default async function SistemPage() {
       pseudonim: u.pseudonim,
       verified: u.verified,
       balance: u.wallet?.balance ?? 0,
-      zadruga: u.zadrugaMemberships[0]?.zadruga?.name ?? null,
+      krug: u.krugClanstva[0]?.krug?.name ?? null,
       preporukeVerif,
       rangPreporuke: rangZaBroj(preporukeVerif),
       donacijeRSD,
@@ -235,7 +235,7 @@ export default async function SistemPage() {
     };
   });
 
-  const zadruge = zadrugeLista.map((z) => ({
+  const krugovi = krugoviLista.map((z) => ({
     id: z.id,
     name: z.name,
     location: z.location,
@@ -272,12 +272,12 @@ export default async function SistemPage() {
       bankaBalance={bankaBalance}
       ukupnoKorisnika={ukupnoKorisnika}
       verifikovanih={verifikovanih}
-      ukupnoZadrugaCount={ukupnoZadruga}
+      ukupnoKrugCount={ukupnoKrug}
       danasEmitovano={danasEmitovano}
       danasLimit={danasLimit}
       danasKorisnika={danasKorisnika}
       danasTransakcija={danasTransakcija}
-      danasZadruga={danasZadruga}
+      danasKrug={danasKrug}
       ukupnoDonacija={ukupnoDonacija}
       danasDonacija={danasDonacija}
       ukupanIznosTx={ukupanIznosTx}
@@ -287,7 +287,7 @@ export default async function SistemPage() {
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
-      zadruge={zadruge}
+      krugovi={krugovi}
       programi={programiData}
     />
   );

@@ -8,17 +8,17 @@ export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
 
-  const oglasi = await prisma.radniOglas.findMany({
+  const oglasi = await prisma.doprinosOglas.findMany({
     where: { status: "ACTIVE" },
     include: {
       createdBy: { select: { pseudonim: true } },
-      zadruga: { select: { name: true } },
+      krug: { select: { name: true } },
       _count: { select: { prijave: { where: { status: "APPROVED" } } } },
     },
     orderBy: { createdAt: "desc" },
   });
 
-  const mojePrijave = await prisma.radniOglasPrijava.findMany({
+  const mojePrijave = await prisma.oglasPrijava.findMany({
     where: { userId: session.user.id },
     select: { oglasId: true, status: true },
   });
@@ -37,7 +37,7 @@ export async function GET(_req: NextRequest) {
       deadline: o.deadline?.toISOString() ?? null,
       status: o.status,
       createdByPseudonim: o.createdBy.pseudonim,
-      zadrugaName: o.zadruga?.name ?? null,
+      krugName: o.krug?.name ?? null,
       odobreniClanovi: o._count.prijave,
       createdAt: o.createdAt.toISOString(),
       mojaPrijava: prijaveMap[o.id] ?? null,

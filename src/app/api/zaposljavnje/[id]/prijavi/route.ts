@@ -15,17 +15,17 @@ export async function POST(
 
   const { id } = await params;
 
-  const oglas = await prisma.radniOglas.findUnique({ where: { id } });
+  const oglas = await prisma.doprinosOglas.findUnique({ where: { id } });
   if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
   if (oglas.status !== "ACTIVE") return NextResponse.json({ error: "Oglas više nije aktivan." }, { status: 400 });
   if (oglas.deadline && new Date() > oglas.deadline) return NextResponse.json({ error: "Rok za prijavu je istekao." }, { status: 400 });
 
-  const postoji = await prisma.radniOglasPrijava.findUnique({
+  const postoji = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId: id, userId: session.user.id } },
   });
   if (postoji) return NextResponse.json({ error: "Već ste podneli prijavu." }, { status: 400 });
 
-  await prisma.radniOglasPrijava.create({
+  await prisma.oglasPrijava.create({
     data: { oglasId: id, userId: session.user.id },
   });
 

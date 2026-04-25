@@ -11,17 +11,17 @@ export async function GET(req: NextRequest) {
       skip: offset,
       take,
       include: {
-        fromWallet: { include: { user: { select: { pseudonim: true } }, zadruga: { select: { name: true } } } },
-        toWallet: { include: { user: { select: { pseudonim: true } }, zadruga: { select: { name: true } } } },
+        fromWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
+        toWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
       },
     }),
     prisma.transaction.count(),
   ]);
 
-  function walletLabel(w: { user?: { pseudonim: string } | null; zadruga?: { name: string } | null } | null) {
+  function walletLabel(w: { user?: { pseudonim: string } | null; krug?: { name: string } | null } | null) {
     if (!w) return "Banka";
     if (w.user) return w.user.pseudonim;
-    if (w.zadruga) return `[${w.zadruga.name}]`;
+    if (w.krug) return `[${w.krug.name}]`;
     return "Banka";
   }
 

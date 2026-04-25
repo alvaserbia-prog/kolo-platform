@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { emitujPoen } from "@/lib/banka/emisija";
+import { emitujPoen } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
@@ -16,7 +16,7 @@ export async function POST(
 
   const { id } = await params;
 
-  const ev = await prisma.radnaEvidencija.findUnique({
+  const ev = await prisma.oglasEvidencija.findUnique({
     where: { id },
     include: {
       user: { include: { wallet: true } },
@@ -35,7 +35,7 @@ export async function POST(
     `Zapošljavanje: ${ev.oglas.title} (${ev.hoursWorked}h)`
   );
 
-  await prisma.radnaEvidencija.update({
+  await prisma.oglasEvidencija.update({
     where: { id },
     data: { status: "EMITTED", approvedById: session.user.id, approvedAt: new Date() },
   });

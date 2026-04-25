@@ -25,7 +25,7 @@ export default async function PijacaPage() {
       {!session && (
         <div className="mb-5 bg-kolo-green-100 border border-kolo-green-500/20 rounded-2xl px-5 py-4 flex items-center justify-between gap-4">
           <p className="text-sm text-kolo-green-900">
-            Pogledajte šta nudi KOLO zajednica. Za kupovinu je potrebna verifikacija.
+            Pogledajte šta nudi KOLO krug. Za kupovinu je potrebna verifikacija.
           </p>
           <div className="flex gap-2 shrink-0">
             <Link href="/login" className="px-4 py-2 border border-kolo-green-700 text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-700 hover:text-white transition-colors">

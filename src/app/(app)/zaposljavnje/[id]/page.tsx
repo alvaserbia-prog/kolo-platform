@@ -9,11 +9,11 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
   if (!session) redirect("/login");
   const { id } = await params;
 
-  const oglas = await prisma.radniOglas.findUnique({
+  const oglas = await prisma.doprinosOglas.findUnique({
     where: { id },
     include: {
       createdBy: { select: { pseudonim: true } },
-      zadruga: { select: { name: true } },
+      krug: { select: { name: true } },
       prijave: {
         where: { userId: session.user.id },
         select: { id: true, status: true, rejectionReason: true, createdAt: true },
@@ -43,7 +43,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         deadline: oglas.deadline?.toISOString() ?? null,
         status: oglas.status as string,
         createdByPseudonim: oglas.createdBy.pseudonim,
-        zadrugaName: oglas.zadruga?.name ?? null,
+        krugName: oglas.krug?.name ?? null,
         odobreniClanovi: oglas._count.prijave,
         createdAt: oglas.createdAt.toISOString(),
         mojaPrijava: oglas.prijave[0]

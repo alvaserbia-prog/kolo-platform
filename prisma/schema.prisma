@@ -11,14 +11,14 @@ datasource db {
 
 enum Role {
   FIZICKO_LICE
-  ZADRUGAR
+  CLAN_KRUGA
   ADMIN
 }
 
 enum WalletType {
   USER
-  ZADRUGA
-  BANKA
+  KRUG
+  PROTOKOL
 }
 
 enum VerificationStatus {
@@ -27,12 +27,12 @@ enum VerificationStatus {
   REJECTED
 }
 
-enum ZadrugaStatus {
+enum KrugStatus {
   ACTIVE
   SUSPENDED
 }
 
-enum ZadrugaOsnivanjeStatus {
+enum KrugOsnivanjeStatus {
   PENDING
   APPROVED
   REJECTED
@@ -61,8 +61,8 @@ enum TransactionType {
   EMISIJA_PREPORUKA
   EMISIJA_DONACIJA
   EMISIJA_POKROVITELJ
-  EMISIJA_ZADRUGA_OSNIVANJE
-  EMISIJA_ZADRUGA_BONUS
+  EMISIJA_KRUG_OSNIVANJE
+  EMISIJA_KRUG_BONUS
   EMISIJA_PROGRAM
   KUPOVINA_ZRNO
   PRODAJA_ZRNO
@@ -85,7 +85,7 @@ enum PredlogStatus {
 }
 
 enum ProgramType {
-  ZAPOSLJAVNJE
+  PED
   PODRSKA_MAJKAMA
   PODRSKA_STARIJIMA
   POSEBNA_BRIGA
@@ -118,7 +118,7 @@ enum DonationStatus {
 }
 
 enum PokroviteljDoprinosTip {
-  SPONZORSTVO_ZADRUGE
+  SPONZORSTVO_KRUGA
   DONACIJA_FONDACIJI
 }
 
@@ -130,11 +130,11 @@ enum OglasStatus {
 
 enum OglasSource {
   FONDACIJA
-  ZADRUGA
+  KRUG
   PROJEKAT
 }
 
-enum RadnaPrijavaStatus {
+enum OglasPrijavaStatus {
   PENDING
   APPROVED
   REJECTED
@@ -172,37 +172,37 @@ model User {
   referralReceived   Referral?  @relation("Referred")
   podaci                 UserPodaci?
   donations              DonationRecord[]
-  kreiraniPokrovitelji   Pokrovitelj[]            @relation("AdminKreiraoP")
-  vlasnikPokrovitelja    Pokrovitelj[]            @relation("VlasnikP")
-  evidentiraniDoprinosi  PokroviteljDoprinos[]    @relation("EvidentiraoDoprinos")
-  pokroviteljBonusi      PokroviteljBonusEmisija[] @relation("PrimalacBonusa")
-  kreiraniOglasi         RadniOglas[]             @relation("KreiraniOglasi")
-  radnePrijave           RadniOglasPrijava[]      @relation("RadnePrijave")
-  radneEvidencije        RadnaEvidencija[]        @relation("RadneEvidencije")
+  kreiraniPokrovitelji   Pokrovitelj[]              @relation("AdminKreiraoP")
+  vlasnikPokrovitelja    Pokrovitelj[]              @relation("VlasnikP")
+  evidentiraniDoprinosi  PokroviteljDoprinos[]      @relation("EvidentiraoDoprinos")
+  pokroviteljBonusi      PokroviteljBonusEmisija[]  @relation("PrimalacBonusa")
+  kreiraniOglasi         DoprinosOglas[]            @relation("KreiraniOglasi")
+  oglasPrijave           OglasPrijava[]             @relation("OglasPrijave")
+  oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
   verificationRequest    VerificationRequest?
-  listings               MarketplaceListing[] @relation("SellerListings")
-  purchases              MarketplaceListing[] @relation("BuyerListings")
-  zadrugaMemberships     ZadrugaMembership[]
-  pristupnice            ZadrugaPristupnica[]
-  osnivanjeZahtevi       ZadrugaOsnivanjeZahtev[] @relation("Inicijator")
+  listings               MarketplaceListing[]       @relation("SellerListings")
+  purchases              MarketplaceListing[]       @relation("BuyerListings")
+  krugClanstva   KrugClanstvo[]
+  pristupnice            KrugPristupnica[]
+  osnivanjeZahtevi       KrugOsnivanjeZahtev[] @relation("Inicijator")
   programEnrollments     ProgramEnrollment[]
-  zaposljvanjeEvidencije ZaposljvanjeEvidencija[]
+  doprinosEvidencije     DoprinosEvidencija[]
   zrnoStanje             ZrnoStanje?
-  zrnoKupovinaZahtevi   ZrnoKupovinaZahtev[]
-  zrnoProdajaZahtevi    ZrnoProdajaZahtev[]
-  zrnoStatusZahtevi     ZrnoStatusZahtev[]
-  delegiraoKome         ZrnoDelegacija?          @relation("Delegator")
-  delegatZa             ZrnoDelegacija[]         @relation("Delegat")
-  kreiraniPredlozi      GlasanjePredlog[]
-  glasovi               GlasanjeGlas[]
-  auditLogs             AuditLog[]       @relation("AdminActions")
-  notifikacije          Notifikacija[]
-  konverzacije1         Konverzacija[]           @relation("KonvUser1")
-  konverzacije2         Konverzacija[]           @relation("KonvUser2")
-  porukePoslate         Poruka[]                 @relation("PorukePostavljene")
-  prigovori             PrigovorNaOdluku[]
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
+  zrnoKupovinaZahtevi    ZrnoKupovinaZahtev[]
+  zrnoProdajaZahtevi     ZrnoProdajaZahtev[]
+  zrnoStatusZahtevi      ZrnoStatusZahtev[]
+  delegiraoKome          ZrnoDelegacija?            @relation("Delegator")
+  delegatZa              ZrnoDelegacija[]           @relation("Delegat")
+  kreiraniPredlozi       GlasanjePredlog[]
+  glasovi                GlasanjeGlas[]
+  auditLogs              AuditLog[]                 @relation("AdminActions")
+  notifikacije           Notifikacija[]
+  konverzacije1          Konverzacija[]             @relation("KonvUser1")
+  konverzacije2          Konverzacija[]             @relation("KonvUser2")
+  porukePoslate          Poruka[]                   @relation("PorukePostavljene")
+  prigovori              PrigovorNaOdluku[]
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 }
 
 model UserPodaci {
@@ -229,8 +229,8 @@ model Wallet {
   id          String        @id @default(uuid())
   userId      String?       @unique
   user        User?         @relation(fields: [userId], references: [id])
-  zadrugaId   String?       @unique
-  zadruga     Zadruga?      @relation("ZadrugaWallet", fields: [zadrugaId], references: [id])
+  krugId String?       @unique
+  krug   Krug?    @relation("KrugWallet", fields: [krugId], references: [id])
   balance     Int           @default(0)
   type        WalletType
   outgoingTx  Transaction[] @relation("FromWallet")
@@ -278,68 +278,68 @@ model VerificationRequest {
   updatedAt        DateTime           @updatedAt
 }
 
-model Zadruga {
-  id          String        @id @default(uuid())
-  name        String        @unique
-  description String?
-  location    String?
-  status      ZadrugaStatus @default(ACTIVE)
-  wallet      Wallet?       @relation("ZadrugaWallet")
-  memberships ZadrugaMembership[]
-  pristupnice ZadrugaPristupnica[]
-  projects    ZadrugaProject[]
-  bonusLogs   ZadrugaBonusLog[]
-  radniOglasi  RadniOglas[]        @relation("ZadrugaOglasi")
-  pokrovitelji Pokrovitelj[]       @relation("ZadrugaPokrovitelji")
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+model Krug {
+  id             String          @id @default(uuid())
+  name           String          @unique
+  description    String?
+  location       String?
+  status         KrugStatus @default(ACTIVE)
+  wallet         Wallet?         @relation("KrugWallet")
+  memberships    KrugClanstvo[]
+  pristupnice    KrugPristupnica[]
+  projects       KrugProjekat[]
+  bonusLogs      KrugBonusLog[]
+  doprinosOglasi DoprinosOglas[] @relation("KrugOglasi")
+  pokrovitelji   Pokrovitelj[]   @relation("PokroviteljKrug")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
 }
 
-model ZadrugaMembership {
-  id        String    @id @default(uuid())
-  userId    String
-  user      User      @relation(fields: [userId], references: [id])
-  zadrugaId String
-  zadruga   Zadruga   @relation(fields: [zadrugaId], references: [id])
-  isAdmin   Boolean   @default(false)
-  joinedAt  DateTime  @default(now())
-  leftAt    DateTime?
+model KrugClanstvo {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  krugId String
+  krug   Krug @relation(fields: [krugId], references: [id])
+  isAdmin     Boolean   @default(false)
+  joinedAt    DateTime  @default(now())
+  leftAt      DateTime?
 
   @@index([userId, leftAt])
-  @@index([zadrugaId, leftAt])
+  @@index([krugId, leftAt])
 }
 
-model ZadrugaOsnivanjeZahtev {
-  id              String                 @id @default(uuid())
+model KrugOsnivanjeZahtev {
+  id              String                   @id @default(uuid())
   name            String
   description     String?
   location        String?
   inicijatorId    String
-  inicijator      User                   @relation("Inicijator", fields: [inicijatorId], references: [id])
+  inicijator      User                     @relation("Inicijator", fields: [inicijatorId], references: [id])
   osnivaci        String[]
-  status          ZadrugaOsnivanjeStatus @default(PENDING)
+  status          KrugOsnivanjeStatus @default(PENDING)
   rejectionReason String?
   reviewedAt      DateTime?
   reviewedById    String?
-  createdAt       DateTime               @default(now())
+  createdAt       DateTime                 @default(now())
 }
 
-model ZadrugaPristupnica {
-  id        String            @id @default(uuid())
-  userId    String
-  user      User              @relation(fields: [userId], references: [id])
-  zadrugaId String
-  zadruga   Zadruga           @relation(fields: [zadrugaId], references: [id])
-  status    PristupnicaStatus @default(PENDING)
-  createdAt DateTime          @default(now())
+model KrugPristupnica {
+  id          String            @id @default(uuid())
+  userId      String
+  user        User              @relation(fields: [userId], references: [id])
+  krugId String
+  krug   Krug         @relation(fields: [krugId], references: [id])
+  status      PristupnicaStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
 
-  @@unique([userId, zadrugaId])
+  @@unique([userId, krugId])
 }
 
-model ZadrugaProject {
+model KrugProjekat {
   id          String      @id @default(uuid())
-  zadrugaId   String
-  zadruga     Zadruga     @relation(fields: [zadrugaId], references: [id])
+  krugId String
+  krug   Krug   @relation(fields: [krugId], references: [id])
   type        ProjectType
   title       String
   description String
@@ -348,13 +348,13 @@ model ZadrugaProject {
   updatedAt   DateTime    @updatedAt
 }
 
-model ZadrugaBonusLog {
-  id        String   @id @default(uuid())
-  zadrugaId String
-  zadruga   Zadruga  @relation(fields: [zadrugaId], references: [id])
-  threshold Int
-  amount    Int
-  createdAt DateTime @default(now())
+model KrugBonusLog {
+  id          String    @id @default(uuid())
+  krugId String
+  krug   Krug @relation(fields: [krugId], references: [id])
+  threshold   Int
+  amount      Int
+  createdAt   DateTime  @default(now())
 }
 
 model MarketplaceListing {
@@ -378,7 +378,7 @@ model MarketplaceListing {
   @@index([status, category, createdAt])
 }
 
-model BankaProgram {
+model ProtokolProgram {
   type        ProgramType @id
   isActive    Boolean     @default(false)
   activatedAt DateTime?
@@ -386,38 +386,38 @@ model BankaProgram {
 }
 
 model ProgramEnrollment {
-  id              String           @id @default(uuid())
-  userId          String
-  user            User             @relation(fields: [userId], references: [id])
-  type            ProgramType
-  status          EnrollmentStatus @default(PENDING)
-  metadata        Json?
-  dailyAmount     Int?
-  approvedById    String?
-  approvedAt      DateTime?
-  rejectionReason String?
+  id                 String               @id @default(uuid())
+  userId             String
+  user               User                 @relation(fields: [userId], references: [id])
+  type               ProgramType
+  status             EnrollmentStatus     @default(PENDING)
+  metadata           Json?
+  dailyAmount        Int?
+  approvedById       String?
+  approvedAt         DateTime?
+  rejectionReason    String?
   nextReverifikacija DateTime?
-  evidencije      ZaposljvanjeEvidencija[]
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
+  evidencije         DoprinosEvidencija[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
 
   @@unique([userId, type])
   @@index([status, type])
 }
 
-model ZaposljvanjeEvidencija {
-  id           String           @id @default(uuid())
+model DoprinosEvidencija {
+  id           String            @id @default(uuid())
   userId       String
-  user         User             @relation(fields: [userId], references: [id])
+  user         User              @relation(fields: [userId], references: [id])
   enrollmentId String
   enrollment   ProgramEnrollment @relation(fields: [enrollmentId], references: [id])
-  date         DateTime         @db.Date
+  date         DateTime          @db.Date
   description  String
   amount       Int
-  status       EvidencijaStatus @default(PENDING)
+  status       EvidencijaStatus  @default(PENDING)
   approvedById String?
   approvedAt   DateTime?
-  createdAt    DateTime         @default(now())
+  createdAt    DateTime          @default(now())
 
   @@unique([userId, date])
   @@index([date, status])
@@ -435,55 +435,55 @@ model DailyEmissionSummary {
   createdAt      DateTime @default(now())
 }
 
-// ─── Zapošljavanje — Radni oglasi ────────────────────────────────────────────
+// ─── Program Doprinosa Zajedničkom Dobru — Oglasi ─────────────────────────────
 
-model RadniOglas {
-  id              String      @id @default(uuid())
-  title           String
-  description     String
-  source          OglasSource
-  hourlyRate      Int         // POEN/sat, raspon 1000-2500
-  maxHoursPerDay  Int         @default(8)
-  positions       Int         @default(1)
-  deadline        DateTime?
-  status          OglasStatus @default(ACTIVE)
-  createdById     String
-  createdBy       User        @relation("KreiraniOglasi", fields: [createdById], references: [id])
-  zadrugaId       String?
-  zadruga         Zadruga?    @relation("ZadrugaOglasi", fields: [zadrugaId], references: [id])
-  prijave         RadniOglasPrijava[]
-  evidencije      RadnaEvidencija[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+model DoprinosOglas {
+  id             String        @id @default(uuid())
+  title          String
+  description    String
+  source         OglasSource
+  hourlyRate     Int           // POEN/sat, raspon 1000-2500
+  maxHoursPerDay Int           @default(8)
+  positions      Int           @default(1)
+  deadline       DateTime?
+  status         OglasStatus   @default(ACTIVE)
+  createdById    String
+  createdBy      User          @relation("KreiraniOglasi", fields: [createdById], references: [id])
+  krugId    String?
+  krug      Krug?    @relation("KrugOglasi", fields: [krugId], references: [id])
+  prijave        OglasPrijava[]
+  evidencije     OglasEvidencija[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
   @@index([status, createdAt(sort: Desc)])
 }
 
-model RadniOglasPrijava {
+model OglasPrijava {
   id              String             @id @default(uuid())
   oglasId         String
-  oglas           RadniOglas         @relation(fields: [oglasId], references: [id])
+  oglas           DoprinosOglas      @relation(fields: [oglasId], references: [id])
   userId          String
-  user            User               @relation("RadnePrijave", fields: [userId], references: [id])
-  status          RadnaPrijavaStatus @default(PENDING)
+  user            User               @relation("OglasPrijave", fields: [userId], references: [id])
+  status          OglasPrijavaStatus @default(PENDING)
   approvedById    String?
   approvedAt      DateTime?
   rejectionReason String?
-  evidencije      RadnaEvidencija[]
+  evidencije      OglasEvidencija[]
   createdAt       DateTime           @default(now())
 
   @@unique([oglasId, userId])
   @@index([status, oglasId])
 }
 
-model RadnaEvidencija {
+model OglasEvidencija {
   id           String             @id @default(uuid())
   userId       String
-  user         User               @relation("RadneEvidencije", fields: [userId], references: [id])
+  user         User               @relation("OglasEvidencije", fields: [userId], references: [id])
   oglasId      String
-  oglas        RadniOglas         @relation(fields: [oglasId], references: [id])
+  oglas        DoprinosOglas      @relation(fields: [oglasId], references: [id])
   prijavaId    String
-  prijava      RadniOglasPrijava  @relation(fields: [prijavaId], references: [id])
+  prijava      OglasPrijava       @relation(fields: [prijavaId], references: [id])
   date         DateTime           @db.Date
   hoursWorked  Int
   amount       Int                // hoursWorked × oglas.hourlyRate
@@ -558,11 +558,11 @@ model ZrnoStatusZahtev {
 }
 
 model ZrnoDailyRate {
-  date       DateTime @db.Date @unique
-  kurs       Decimal  @db.Decimal(20, 2)
-  bankaMinus Int
-  zrnaUBanci Int
-  createdAt  DateTime @default(now())
+  date           DateTime @db.Date @unique
+  kurs           Decimal  @db.Decimal(20, 2)
+  protokolMinus  Int
+  zrnaUProtokolu Int
+  createdAt      DateTime @default(now())
 }
 
 model ZrnoDelegacija {
@@ -646,11 +646,11 @@ model Pokrovitelj {
   vlasnik        User        @relation("VlasnikP", fields: [vlasnikId], references: [id])
   kreiraoId      String
   kreirao        User        @relation("AdminKreiraoP", fields: [kreiraoId], references: [id])
-  zadrugaId      String?
-  zadruga        Zadruga?    @relation("ZadrugaPokrovitelji", fields: [zadrugaId], references: [id])
   rsdKumulativ   Decimal     @default(0) @db.Decimal(12, 2)
   trenutniNivo   Int         @default(0)
   status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
+  krugId         String?
+  krug           Krug?       @relation("PokroviteljKrug", fields: [krugId], references: [id])
   doprinosi      PokroviteljDoprinos[]
   bonusiEmisije  PokroviteljBonusEmisija[]
   createdAt      DateTime    @default(now())
@@ -693,7 +693,7 @@ model Notifikacija {
   id        String   @id @default(uuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  tip       String   // "transfer_primljen" | "verifikacija_odobrena" | "verifikacija_odbijena" | "preporuka_nagradjeni" | "oglas_kupljen" | "info"
+  tip       String
   naslov    String
   tekst     String
   procitana Boolean  @default(false)

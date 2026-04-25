@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { labelPrograma } from "@/lib/banka/programi";
+import { labelPrograma } from "@/lib/protokol/programi";
 
 // POST /api/admin/programi/enrollments/[id]/odbij
 export async function POST(

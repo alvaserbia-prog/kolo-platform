@@ -31,17 +31,17 @@ interface OglasData {
   deadline: string | null;
   status: string;
   createdByPseudonim: string;
-  zadrugaName: string | null;
+  krugName: string | null;
   odobreniClanovi: number;
   createdAt: string;
   mojaPrijava: MojaPrijava | null;
   mojeEvidencije: EvidencijaItem[];
 }
 
-const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", ZADRUGA: "Zadruga", PROJEKAT: "Projekat" };
+const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", KRUG: "Krug", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  ZADRUGA: "bg-kolo-info-light text-kolo-info",
+  KRUG: "bg-kolo-info-light text-kolo-info",
   PROJEKAT: "bg-purple-50 text-purple-700",
 };
 const evStatusBadge: Record<string, { label: string; cls: string }> = {
@@ -85,7 +85,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
               <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[oglas.source] ?? oglas.source}
               </span>
-              {oglas.zadrugaName && <span className="text-xs text-kolo-muted">{oglas.zadrugaName}</span>}
+              {oglas.krugName && <span className="text-xs text-kolo-muted">{oglas.krugName}</span>}
               {!aktivan && <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">Zatvoren</span>}
             </div>
             <h1 className="text-xl font-bold text-kolo-text">{oglas.title}</h1>

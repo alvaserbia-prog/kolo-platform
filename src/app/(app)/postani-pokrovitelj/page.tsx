@@ -21,7 +21,7 @@ export default async function PostaniPokroviteljPage() {
             rsdKumulativ: true,
             trenutniNivo: true,
             status: true,
-            zadruga: { select: { name: true } },
+            krug: { select: { name: true } },
           },
           orderBy: { createdAt: "desc" },
         })
@@ -32,7 +32,7 @@ export default async function PostaniPokroviteljPage() {
         id: true,
         naziv: true,
         adresa: true,
-        zadruga: { select: { name: true } },
+        krug: { select: { name: true } },
         rsdKumulativ: true,
         trenutniNivo: true,
       },
@@ -45,7 +45,7 @@ export default async function PostaniPokroviteljPage() {
       <div className="mb-8">
         <h1 className="kolo-naslov mb-2">Pokroviteljstvo</h1>
         <p className="text-kolo-muted leading-relaxed">
-          Pokrovitelj je pravno lice koje sponzoriše zadrugu ili donira Fondaciji.
+          Pokrovitelj je pravno lice koje sponzoriše krug ili donira Fondaciji.
           Kao vlasnik pokrovitelja, dobijate POEN bonuse pri svakom dostizanju novog nivoa.
         </p>
       </div>
@@ -116,12 +116,12 @@ export default async function PostaniPokroviteljPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="font-medium text-kolo-text">{p.naziv}</div>
-                  {(p.adresa || p.zadruga) && (
+                  {(p.adresa || p.krug) && (
                     <div className="text-xs text-kolo-muted mt-0.5">
                       {p.adresa && <span>{p.adresa}</span>}
-                      {p.zadruga && (
+                      {p.krug && (
                         <span className={p.adresa ? " · " : ""}>
-                          Zadruga: {p.zadruga.name}
+                          Krug: {p.krug.name}
                         </span>
                       )}
                     </div>
@@ -154,7 +154,7 @@ export default async function PostaniPokroviteljPage() {
                   <div className="font-medium text-kolo-text">{p.naziv}</div>
                   <div className="text-xs text-kolo-muted mt-0.5">
                     PIB: {p.pib}
-                    {p.zadruga && <span> · Zadruga: {p.zadruga.name}</span>}
+                    {p.krug && <span> · Krug: {p.krug.name}</span>}
                   </div>
                 </div>
                 <div className="text-right shrink-0">

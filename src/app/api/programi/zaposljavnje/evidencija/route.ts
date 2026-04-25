@@ -8,7 +8,7 @@ export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const evidencije = await prisma.zaposljvanjeEvidencija.findMany({
+  const evidencije = await prisma.doprinosEvidencija.findMany({
     where: { userId: session.user.id },
     orderBy: { date: "desc" },
     take: 30,
@@ -32,13 +32,13 @@ export async function POST(req: NextRequest) {
 
   // Mora imati aktivan enrollment
   const enrollment = await prisma.programEnrollment.findUnique({
-    where: { userId_type: { userId: session.user.id, type: "ZAPOSLJAVNJE" } },
+    where: { userId_type: { userId: session.user.id, type: "PED" } },
   });
   if (!enrollment || enrollment.status !== "ACTIVE")
     return NextResponse.json({ error: "Niste aktivni na programu Zapošljavanje." }, { status: 403 });
 
   // Program mora biti aktivan
-  const program = await prisma.bankaProgram.findUnique({ where: { type: "ZAPOSLJAVNJE" } });
+  const program = await prisma.protokolProgram.findUnique({ where: { type: "PED" } });
   if (!program?.isActive)
     return NextResponse.json({ error: "Program Zapošljavanje nije aktivan." }, { status: 400 });
 
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   danas.setHours(0, 0, 0, 0);
 
   // Jedna evidencija po danu
-  const vec = await prisma.zaposljvanjeEvidencija.findUnique({
+  const vec = await prisma.doprinosEvidencija.findUnique({
     where: { userId_date: { userId: session.user.id, date: danas } },
   });
   if (vec)
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
   if (!amount || amount < 100 || amount > 10000)
     return NextResponse.json({ error: "Iznos mora biti između 100 i 10.000 POEN." }, { status: 400 });
 
-  await prisma.zaposljvanjeEvidencija.create({
+  await prisma.doprinosEvidencija.create({
     data: {
       userId: session.user.id,
       enrollmentId: enrollment.id,
