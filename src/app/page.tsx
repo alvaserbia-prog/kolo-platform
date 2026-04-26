@@ -236,7 +236,7 @@ export default async function Home() {
             KOLO ti daje alternativu
           </div>
           <p className="text-kolo-green-900 leading-relaxed mb-7">
-            KOLO povezuje ljude koji razmenjuju rad, dobra i znanje. POEN je način na koji se ti doprinosi beleže — interna evidencija, a ne novac niti digitalna imovina. Živi samo u KOLO mreži i ne menja se za dinare.
+            KOLO povezuje ljude koji razmenjuju rad, dobra i znanje. POEN je način na koji se ti doprinosi beleže — interna evidencija, a ne novac niti digitalna imovina. Postoji samo u KOLO mreži i ne može da se promeni za dinare.
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mb-6">
