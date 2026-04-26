@@ -113,7 +113,7 @@ export default async function Home() {
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
               </svg>
             </div>
-            <p className="text-sm font-semibold text-kolo-gold-600 leading-snug">Rani pristup<br /><span className="font-normal text-kolo-muted">Pre-alfa faza</span></p>
+            <p className="text-sm font-semibold text-kolo-gold-600 leading-snug">Rani pristup<br /><span className="font-normal text-kolo-muted">Beta faza</span></p>
           </div>
           <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col items-center text-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
@@ -169,6 +169,29 @@ export default async function Home() {
               </div>
             </div>
           ))}
+        </section>
+
+        {/* ── SEKCIJA — ZAJEDNIČKO DOBRO ──────────────────────────── */}
+        <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 text-center mb-6" style={{ letterSpacing: "-0.02em" }}>
+            KOLO Zajedničko dobro
+          </h2>
+          <blockquote className="text-center italic text-kolo-muted leading-relaxed text-base md:text-lg mb-8 max-w-xl mx-auto">
+            Kad su ljudi bili žedni, iskopali su bunar.<br />
+            Iz njega je pio svako, i niko više nije bio žedan.<br />
+            Bunar je bio njihov — i nije bio ničiji.
+          </blockquote>
+          <div className="space-y-4 max-w-2xl mx-auto leading-relaxed text-kolo-text">
+            <p>
+              Sve što prolazi kroz KOLO sistem — rad članova, znanje i veštine, dobra koja idu iz ruke u ruku, vreme posvećeno drugima, mreža poznanstava i poverenja, infrastruktura koju Fondacija održava — ostaje u zajednici, gradi je, čini je sposobnijom da brine o sebi.
+            </p>
+            <p>
+              To zovemo zajedničkim dobrom KOLA. Niko nije njegov vlasnik. Svi su učesnici. Što više daješ, veći je tvoj udeo u njemu.
+            </p>
+            <p>
+              <strong className="text-kolo-green-900">POEN</strong> je mera tvog doprinosa zajedničkom dobru i pristup onome što kroz njega prolazi. POEN je priznanje da si doneo nešto — i osnova da koristiš ono što su doneli drugi.
+            </p>
+          </div>
         </section>
 
         {/* ── SEKCIJA 3 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
@@ -637,7 +660,7 @@ export default async function Home() {
             Gde smo sada
           </div>
           <p className="text-sm text-kolo-muted mb-6 leading-relaxed">
-            Pre-alfa faza. Platforma je funkcionalna, KOLO Fondacija je u procesu registracije u Somboru.
+            Beta faza. Platforma je funkcionalna, KOLO Fondacija je u procesu registracije u Somboru.
           </p>
           {/* Roadmap */}
           <div className="relative">
