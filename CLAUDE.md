@@ -1,4 +1,4 @@
-# KOLO Platforma
+# KOLO Platforma — v2.12
 
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Koristi dve interne jedinice:
@@ -38,7 +38,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
    - **Verifikovan korisnik** ima pun pristup svim funkcionalnostima: profili članova, poruke, postavljanje i kupovina/prodaja na Pijaci, rang-liste, telefon prodavca.
    - Verifikacija je preduslov za pristup profilima članova, komunikacionom modulu i punoj funkcionalnosti Pijace, kao i za sticanje ZRNA i učešće u Programima/Projektima.
 
-## Ključni koncepti v2.1
+## Ključni koncepti v2.12
 
 ### Pravna priroda POEN-a (čl. 10 Pravilnika)
 POEN je **jedinica evidencije doprinosa zajedničkom dobru** koja korisniku omogućava prospektivan pristup budućim dobrima u okviru zajedničkog dobra — **bez kvantifikovane vrednosti, roka dospeća, izvršnog dejstva i bez karaktera potraživanja prema Fondaciji**. Korisnik nema potraživanje prema Fondaciji za emisijom POEN-a, sticanjem ZRNA niti pristupom funkcionalnostima.
@@ -80,7 +80,7 @@ Implikacija za kod: praćenje mesečnih troškova Fondacije, praćenje stanja sr
 - Dnevni emisioni limit (10% opticaja), proporcijalno smanjenje ako se prekorači.
 - Suspenzija pre Gornjeg Kola: **samo u hitnim slučajevima, najviše 30 dana**, uz javno obrazloženje.
 
-### Projekti (Glava VIII — proširen pristup u v2.1)
+### Projekti (Glava VIII — proširen pristup u v2.12)
 - Projekti dostupni **svim verifikovanim korisnicima**, nezavisno od članstva u Krugu.
 - Izuzetak: Projekat podrške Krugovima (čl. 57) — strukturno namenjen Krugovima.
 
@@ -385,7 +385,7 @@ docs/             — dokumentacija po fazama
 - `PLAN.md` — pregled svih faza sa zavisnostima
 - `docs/schema-plan.md` — kompletna šema baze
 - `docs/faza-X-*.md` — detalji implementacije po fazama
-- `dokumentacija/Pravilnik 2.12.md` — najnoviji Pravilnik (v2.1)
+- `dokumentacija/Pravilnik 2.12.md` — najnoviji Pravilnik (v2.12)
 - `dokumentacija/STATUT v2.1.md` — Statut Fondacije
 - `dokumentacija/Politika v2.1.md` — Politika privatnosti
 - `dokumentacija/Uslovi v2.1.md` — Uslovi korišćenja
