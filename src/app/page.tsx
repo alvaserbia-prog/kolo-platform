@@ -133,7 +133,43 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── SEKCIJA 2 — TRI STUBA ────────────────────────────────── */}
+        {/* ── SEKCIJA 2 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
+        <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+            Problem koji svi osećamo
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="flex flex-col gap-3 items-center text-center">
+              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Ne znamo šta jedemo.</p>
+              <div className="space-y-2">
+                <p className="text-sm text-kolo-muted leading-relaxed">
+                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz našeg kruga proizvodi baš to — med, jaja, sir, voće, povrće.
+                </p>
+                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Ono što nam treba raste pored nas, ali do nas ne stiže.</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 items-center text-center">
+              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Proizvođači ne mogu do nas.</p>
+              <div className="space-y-2">
+                <p className="text-sm text-kolo-muted leading-relaxed">
+                  Potrošnja je utabana kroz veletrgovine i lance u koje mali proizvođač ne može da uđe. Oni su zatvoreni za njega, a mi smo zatvoreni u njima.
+                </p>
+                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Tražnja postoji, ponuda postoji — kanal ne postoji.</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-3 items-center text-center">
+              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Znanja i veštine su nevidljivi.</p>
+              <div className="space-y-2">
+                <p className="text-sm text-kolo-muted leading-relaxed">
+                  Komšija je majstor, njegova žena kuva i može da pričuva decu. Neko treći zna da okreči, da popravi krov, da drži časove.
+                </p>
+                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Svima nam to svakodnevno treba — ali ne postoji mesto gde se ljudi sreću.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SEKCIJA 3 — TRI STUBA ────────────────────────────────── */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
@@ -194,42 +230,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── SEKCIJA 3 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
-        <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Problem koji svi osećamo
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Ne znamo šta jedemo.</p>
-              <div className="space-y-2">
-                <p className="text-sm text-kolo-muted leading-relaxed">
-                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz našeg kruga proizvodi baš to — med, jaja, sir, voće, povrće.
-                </p>
-                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Ono što nam treba raste pored nas, ali do nas ne stiže.</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Proizvođači ne mogu do nas.</p>
-              <div className="space-y-2">
-                <p className="text-sm text-kolo-muted leading-relaxed">
-                  Potrošnja je utabana kroz veletrgovine i lance u koje mali proizvođač ne može da uđe. Oni su zatvoreni za njega, a mi smo zatvoreni u njima.
-                </p>
-                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Tražnja postoji, ponuda postoji — kanal ne postoji.</p>
-              </div>
-            </div>
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Znanja i veštine su nevidljivi.</p>
-              <div className="space-y-2">
-                <p className="text-sm text-kolo-muted leading-relaxed">
-                  Komšija je majstor, njegova žena kuva i može da pričuva decu. Neko treći zna da okreči, da popravi krov, da drži časove.
-                </p>
-                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Svima nam to svakodnevno treba — ali ne postoji mesto gde se ljudi sreću.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── SEKCIJA 4 — KOLO TI DAJE ALTERNATIVU ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 border-l-4 border-kolo-green-700">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
@@ -239,7 +239,7 @@ export default async function Home() {
             KOLO povezuje ljude koji razmenjuju rad, dobra i znanje. POEN je način na koji se ti doprinosi beleže — interna evidencija, a ne novac niti digitalna imovina. Živi samo u KOLO mreži i ne menja se za dinare.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 mb-6">
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="bg-kolo-bg rounded-xl p-4 text-center">
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">KOLO Fondacija</p>
               <p className="text-sm text-kolo-text leading-relaxed">
@@ -250,12 +250,6 @@ export default async function Home() {
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">KOLO Protokol</p>
               <p className="text-sm text-kolo-text leading-relaxed">
                 Softverski protokol u vlasništvu Fondacije. Nema pravni subjektivitet, ne prima dinare. Emituje POEN i vodi evidenciju računa članova po pravilima koja su unapred određena, javno dostupna i ista za sve.
-              </p>
-            </div>
-            <div className="bg-kolo-bg rounded-xl p-4 text-center">
-              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">KOLO Krugovi</p>
-              <p className="text-sm text-kolo-text leading-relaxed">
-                Lokalni krugovi su srce KOLO mreže. Svaki radi autonomno u svom gradu ili kraju, okuplja članove iz iste sredine i organizuje razmenu i zajedničke projekte.
               </p>
             </div>
           </div>
