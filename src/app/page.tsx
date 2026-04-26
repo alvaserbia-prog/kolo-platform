@@ -284,7 +284,7 @@ export default async function Home() {
               {
                 ikona: "🏠",
                 naslov: "Domaćice",
-                opis: "Prodaja domaćih proizvoda (zimnica, pečeno, ručni rad) i razmena usluga sa komšinicama.",
+                opis: "Prodaja domaćih proizvoda (zimnica, pecivo, ručni rad) i razmena usluga sa komšinicama.",
                 poenta: "Kućni rad postaje izvor stvarnih sredstava.",
               },
               {
@@ -339,22 +339,22 @@ export default async function Home() {
               {
                 br: "1",
                 naslov: "Registruješ se",
-                opis: "Besplatno, za manje od minut. Biraš pseudonim — u javnom delu sistema niko ne vidi tvoje pravo ime.",
+                opis: "Besplatno, za manje od minut. Biraš pseudonim, prihvataš Uslove i Pravilnik. Dobijaš pristup javnom delu platforme dok ne verifikuješ identitet.",
               },
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Slanjem dokumenta ili uživo u nekoj od krug. Time potvrđuješ da si stvarna osoba i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
+                opis: "Slanjem dokumenta i ličnih podataka. Time potvrđuješ da si stvarna osoba, otključavaš Pijacu, poruke, preporuke i Programe, i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
               },
               {
                 br: "3",
                 naslov: "Doprinosiš i koristiš",
-                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, učestvuješ u programima krugova. Svaki doprinos se beleži u POEN-ima.",
+                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima na Pijaci, pozivaš ljude koje poznaješ, učestvuješ u Programima Protokola, doniraš Fondaciji. Svaki doprinos se beleži u POEN-ima.",
               },
               {
                 br: "4",
-                naslov: "Odlučuješ",
-                opis: "Poenima stičeš ZRNO, upravljačku jedinicu i time ulaziš u krug onih koji direktno upravljaju algoritmima i sistemom.",
+                naslov: "Predlažeš i odlučuješ",
+                opis: "Predlažeš ideje za unapređenje sistema i daješ svoje mišljenje o idejama drugih. POEN-ima stičeš ZRNO i tako zajedno odlučujete — glasačka moć je ponderisana doprinosom sistemu.",
               },
             ].map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
