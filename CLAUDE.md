@@ -202,8 +202,7 @@ docs/             — dokumentacija po fazama
 
 ### Pokrovitelji
 - Pokrovitelj = pravno lice, nema login, ima vlasnika (verifikovani član)
-- Pokrovitelj može biti vezan za jedan Krug (opciono — `Pokrovitelj.krug` relacija)
-- Admin kreira pokrovitelja (naziv, PIB, vlasnikId, krugId?)
+- Admin kreira pokrovitelja (naziv, PIB, vlasnikId)
 - Admin evidentira doprinos u RSD → vlasnik dobija bonus POEN po fiksnoj tabeli 7 nivoa (nema 1:1 konverzije)
 - 10.000 → 20.000 | 20.000 → 30.000 | 50.000 → 80.000 | 100.000 → 150.000 | 200.000 → 300.000 | 500.000 → 800.000 | 1.000.000 → 1.500.000 POEN
 - Sve se emituje kao **jedna transakcija** sa opisom `"Bonus za pokroviteljstvo iznos X"`
@@ -391,12 +390,62 @@ docs/             — dokumentacija po fazama
 - `dokumentacija/Politika v2.1.md` — Politika privatnosti
 - `dokumentacija/Uslovi v2.1.md` — Uslovi korišćenja
 
-## Nezavršeni TODO
+## Nezavršeni TODO (mapirano na Pravilnik 2.12)
 
-- **Zaštitni veto Fondacije** (čl. 71 Pravilnika) — još nije implementiran. Potrebno:
-  - Tabela/polje za praćenje mesečnih operativnih troškova Fondacije.
-  - Tabela/polje za praćenje stanja sredstava Fondacije (RSD).
-  - Jednosmerni flag "veto aktivan" / "veto trajno ugašen" (gasi se kada sredstva ≥ 3× mesečni troškovi).
-  - Logika: dok je veto aktivan, Projekti koji zahtevaju dinarska sredstva su zamrznuti.
-- **Trajna atribucija doprinosa pri anonimizaciji** (Glava XV) — kada platforma bude imala modul za doprinose koda/sadržaja pod licencama Glave XV, `DELETE /api/profil` mora da NE briše atribuciju (ime/pseudonim) za te doprinose. Trenutno nije relevantno jer modul ne postoji.
-- **Migracija `20260424000000_rename_zadruga_to_krug` mora da se primeni na production bazu** sa `npx prisma migrate deploy`.
+### Kritično — kompletni moduli koji ne postoje
+
+1. **Glava VIII (Projekti) — čl. 54-58** — kompletno nedostaje:
+   - Predlaganje Projekata (od strane korisnika, Krugova ili UO)
+   - Odobravanje (Upravni odbor pre Gornjeg Kola; Gornje Kolo posle aktivacije)
+   - Emisija POEN povodom odobrenog Projekta (van dnevnog limita)
+   - Projekti kolektivnih nabavki (čl. 56)
+   - Projekat podrške Krugovima (čl. 57)
+   - Redistribucija donirane robe (čl. 58)
+   - **Napomena:** trenutni `KrugProjekat` model je samo "aktivnost Kruga" (PRIKUPLJANJE/REDISTRIBUCIJA), NE Projekat iz Pravilnika.
+
+2. **Zaštitni veto Fondacije (čl. 71)** — nije implementiran:
+   - Tabela/polje za praćenje mesečnih operativnih troškova Fondacije
+   - Tabela/polje za praćenje stanja sredstava Fondacije (RSD)
+   - Jednosmerni flag "veto aktivan" → "veto trajno ugašen" (gasi se kada sredstva ≥ 3× mesečni troškovi)
+   - Dok je veto aktivan, Projekti koji zahtevaju dinarska sredstva su zamrznuti
+
+3. **Redosled alokacije dinarskih sredstava (čl. 54)** — nema evidencije osnovnih troškova ni rezerve održivosti; bez ovoga se ne može pratiti čl. 71 ni čl. 8.
+
+4. **Doniranje robe Fondaciji (čl. 58)** — modul ne postoji (samo dinarske donacije rade); aktivno od stupanja Pravilnika na snagu.
+
+5. **Unutrašnje odlučivanje Kruga (čl. 45)** — princip "jedan član = jedan glas" za interna pitanja Kruga; trenutno postoji samo Gornje Kolo glasanje (kvadratno, ZRNO).
+
+### Važno — postojeća polja, ali bez automatizacije
+
+6. **Trostepeni mehanizam sporova (čl. 80)** — postoji samo Nivo 2 (`PrigovorNaOdluku`); fali Nivo 1 (Krug) i Nivo 3 (žalba Gornjem Kolu).
+
+7. **Ovlašćena lica Kruga ograničena na 1–3 (čl. 46)** — `KrugClanstvo.isAdmin` postoji, ali bez formalnog ograničenja broja niti formalizovane "ovlašćene" uloge.
+
+8. **Suspenzija korisnika — auto ukidanje posle 30 dana (čl. 37)** — `suspendedAt` polje postoji, nema cron-a za auto-aktivaciju.
+
+9. **Aktivacija Gornjeg Kola na −1.000.000 POEN (čl. 69)** — `ZrnoTrziste.isActive` flag postoji, ali nije jasno automatsko prepoznavanje praga.
+
+10. **Verzionisanje Pravilnika (čl. 83–84)** — `PolitikaVerzija` postoji za Politiku privatnosti; treba paralelan sistem za Pravilnik.
+
+11. **Pseudonim — najviše jedna izmena u 30 dana (čl. 30)** — polje `pseudonimChangedAt` postoji, ali API kontrola treba potvrdu.
+
+12. **Reverifikacija školaraca svakih 6 meseci (čl. 67)** — polje `nextReverifikacija` postoji, automatski tok suspenzije pri propuštanju roka nije implementiran.
+
+### Manje stavke
+
+13. **Formula za Podršku Majkama — koeficijenti po rednom broju deteta (čl. 64)** — proveriti u `programi.ts` da li koeficijenti `2.000 × (1 − 0,05N) × Koeficijent` rade ispravno.
+
+14. **Suspenzija Programa — 30 dana max + javno obrazloženje (čl. 68)** — nije modelovano kao zaseban entitet.
+
+15. **Faze razvoja (Alpha / Beta / Gornje Kolo / Puno samoupravljanje) — čl. 89** — nema kao globalni flag stanja sistema.
+
+16. **DCO Signed-off-by + trajna atribucija doprinosa (čl. 88)** — kad platforma bude imala modul za doprinose koda/sadržaja pod licencama Glave XV, `DELETE /api/profil` mora da NE briše atribuciju za te doprinose.
+
+17. **CC BY-SA 4.0 oznaka sadržaja (čl. 87)** — bez formalnog mehanizma označavanja sadržaja na nivou pojedinačnog dela.
+
+### Operativno
+
+18. **Migracija `20260424000000_rename_zadruga_to_krug`** mora da se primeni na production bazu sa `npx prisma migrate deploy`.
+
+### Procena pokrivenosti
+**Pravilnik 2.12 je implementiran ~70%.** Osnovni mehanizmi (POEN, ZRNO, transferi, Programi, Krugovi, Pokrovitelji, Donacije, Verifikacija, Glasanje, Pijaca, Privatnost, Audit log) su solidno pokriveni. Glavne rupe su Glava VIII (Projekti) — kompletno nedostaje, Zaštitni veto (čl. 71), redosled alokacije sredstava (čl. 54) i unutrašnje odlučivanje Kruga (čl. 45). Pre prelaska u "Puno samoupravljanje" (drugi prag iz čl. 89), kritično je dovršiti najmanje stavke 1–5 sa ove liste.

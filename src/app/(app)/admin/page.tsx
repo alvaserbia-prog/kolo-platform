@@ -70,7 +70,6 @@ export default async function AdminPage() {
       prisma.pokrovitelj.findMany({
         include: {
           vlasnik: { select: { pseudonim: true } },
-          krug: { select: { name: true } },
           _count: { select: { doprinosi: true } },
         },
         orderBy: { createdAt: "desc" },
@@ -179,7 +178,6 @@ export default async function AdminPage() {
         naziv: p.naziv,
         pib: p.pib,
         vlasnikPseudonim: p.vlasnik.pseudonim,
-        krugName: p.krug?.name ?? null,
         rsdKumulativ: Number(p.rsdKumulativ),
         trenutniNivo: p.trenutniNivo,
         status: p.status,

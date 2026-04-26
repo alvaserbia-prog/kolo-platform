@@ -9,8 +9,6 @@ export async function GET() {
       naziv: true,
       pib: true,
       adresa: true,
-      krugId: true,
-      krug: { select: { name: true } },
       rsdKumulativ: true,
       trenutniNivo: true,
       createdAt: true,

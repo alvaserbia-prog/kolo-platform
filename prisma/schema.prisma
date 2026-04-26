@@ -290,7 +290,6 @@ model Krug {
   projects       KrugProjekat[]
   bonusLogs      KrugBonusLog[]
   doprinosOglasi DoprinosOglas[] @relation("KrugOglasi")
-  pokrovitelji   Pokrovitelj[]   @relation("PokroviteljKrug")
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 }
@@ -649,8 +648,6 @@ model Pokrovitelj {
   rsdKumulativ   Decimal     @default(0) @db.Decimal(12, 2)
   trenutniNivo   Int         @default(0)
   status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
-  krugId         String?
-  krug           Krug?       @relation("PokroviteljKrug", fields: [krugId], references: [id])
   doprinosi      PokroviteljDoprinos[]
   bonusiEmisije  PokroviteljBonusEmisija[]
   createdAt      DateTime    @default(now())

@@ -10,7 +10,6 @@ export default async function PokroviteljiPage() {
       id: true,
       naziv: true,
       adresa: true,
-      krug: { select: { name: true } },
       rsdKumulativ: true,
       trenutniNivo: true,
     },
@@ -43,11 +42,6 @@ export default async function PokroviteljiPage() {
                 <div className="font-semibold text-kolo-text">{p.naziv}</div>
                 <div className="text-sm text-kolo-muted mt-0.5">
                   {p.adresa && <span>{p.adresa}</span>}
-                  {p.krug && (
-                    <span className={p.adresa ? " · " : ""}>
-                      Krug: {p.krug.name}
-                    </span>
-                  )}
                 </div>
               </div>
               <div className="shrink-0 text-right">

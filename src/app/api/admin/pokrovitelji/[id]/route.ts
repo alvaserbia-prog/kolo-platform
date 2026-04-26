@@ -15,7 +15,6 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     where: { id },
     include: {
       vlasnik: { select: { pseudonim: true, email: true } },
-      krug: { select: { name: true } },
       doprinosi: {
         include: { evidentirao: { select: { pseudonim: true } } },
         orderBy: { createdAt: "desc" },
@@ -39,8 +38,6 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     kontaktTelefon: pokrovitelj.kontaktTelefon,
     vlasnikId: pokrovitelj.vlasnikId,
     vlasnikPseudonim: pokrovitelj.vlasnik.pseudonim,
-    krugId: pokrovitelj.krugId,
-    krugName: pokrovitelj.krug?.name ?? null,
     rsdKumulativ: Number(pokrovitelj.rsdKumulativ),
     trenutniNivo: pokrovitelj.trenutniNivo,
     status: pokrovitelj.status,
@@ -71,7 +68,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await req.json();
-  const { naziv, adresa, kontaktEmail, kontaktTelefon, krugId, status } = body;
+  const { naziv, adresa, kontaktEmail, kontaktTelefon, status } = body;
 
   await prisma.pokrovitelj.update({
     where: { id },
@@ -80,7 +77,6 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       ...(adresa !== undefined && { adresa }),
       ...(kontaktEmail !== undefined && { kontaktEmail: kontaktEmail || null }),
       ...(kontaktTelefon !== undefined && { kontaktTelefon }),
-      ...(krugId !== undefined && { krugId: krugId || null }),
       ...(status !== undefined && { status }),
     },
   });

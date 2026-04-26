@@ -80,7 +80,6 @@ interface PokroviteljItem {
   id: string;
   naziv: string;
   adresa: string | null;
-  krug: { name: string } | null;
   rsdKumulativ: number;
   trenutniNivo: number;
 }
@@ -982,12 +981,9 @@ function DonacijeSekcija({
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-kolo-text">{p.naziv}</p>
-                  {(p.adresa || p.krug) && (
+                  {p.adresa && (
                     <p className="text-xs text-kolo-muted mt-0.5">
-                      {p.adresa && <span>{p.adresa}</span>}
-                      {p.krug && (
-                        <span className={p.adresa ? " · " : ""}>Krug: {p.krug.name}</span>
-                      )}
+                      {p.adresa}
                     </p>
                   )}
                 </div>

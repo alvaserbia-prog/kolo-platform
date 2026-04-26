@@ -152,7 +152,6 @@ interface PokroviteljItem {
   naziv: string;
   pib: string;
   vlasnikPseudonim: string;
-  krugName: string | null;
   rsdKumulativ: number;
   trenutniNivo: number;
   status: string;
@@ -1780,7 +1779,6 @@ function AdminPokroviteljiTab({
                   <div className="font-medium text-kolo-text truncate">{p.naziv}</div>
                   <div className="text-xs text-kolo-muted mt-0.5">
                     PIB: {p.pib} · Vlasnik: {p.vlasnikPseudonim}
-                    {p.krugName && ` · Krug: ${p.krugName}`}
                   </div>
                 </div>
                 <div className="shrink-0 text-right">

@@ -12,7 +12,6 @@ export async function GET() {
   const pokrovitelji = await prisma.pokrovitelj.findMany({
     include: {
       vlasnik: { select: { pseudonim: true } },
-      krug: { select: { name: true } },
       _count: { select: { doprinosi: true } },
     },
     orderBy: { createdAt: "desc" },
@@ -28,8 +27,6 @@ export async function GET() {
       kontaktTelefon: p.kontaktTelefon,
       vlasnikId: p.vlasnikId,
       vlasnikPseudonim: p.vlasnik.pseudonim,
-      krugId: p.krugId,
-      krugName: p.krug?.name ?? null,
       rsdKumulativ: Number(p.rsdKumulativ),
       trenutniNivo: p.trenutniNivo,
       status: p.status,
@@ -46,7 +43,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { naziv, pib, adresa, kontaktEmail, kontaktTelefon, vlasnikId, krugId } = body;
+  const { naziv, pib, adresa, kontaktEmail, kontaktTelefon, vlasnikId } = body;
 
   if (!naziv?.trim() || !pib?.trim() || !vlasnikId) {
     return NextResponse.json({ error: "Naziv, PIB i vlasnik su obavezni." }, { status: 400 });
@@ -74,7 +71,6 @@ export async function POST(req: NextRequest) {
       kontaktTelefon: kontaktTelefon?.trim() || null,
       vlasnikId,
       kreiraoId: session.user.id,
-      krugId: krugId || null,
     },
   });
 

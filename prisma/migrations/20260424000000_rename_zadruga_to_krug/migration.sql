@@ -99,6 +99,10 @@ ALTER TABLE "OglasEvidencija"      RENAME CONSTRAINT "RadnaEvidencija_oglasId_fk
 ALTER TABLE "OglasEvidencija"      RENAME CONSTRAINT "RadnaEvidencija_prijavaId_fkey"            TO "OglasEvidencija_prijavaId_fkey";
 ALTER TABLE "Pokrovitelj"          RENAME CONSTRAINT "Pokrovitelj_zadrugaId_fkey"                TO "Pokrovitelj_krugId_fkey";
 
+-- Pokrovitelj.krugId više ne postoji u modelu — uklanjamo kolonu i FK
+ALTER TABLE "Pokrovitelj" DROP CONSTRAINT IF EXISTS "Pokrovitelj_krugId_fkey";
+ALTER TABLE "Pokrovitelj" DROP COLUMN IF EXISTS "krugId";
+
 -- Indexes
 ALTER INDEX "ZaposljvanjeEvidencija_date_status_idx"  RENAME TO "DoprinosEvidencija_date_status_idx";
 ALTER INDEX "ZaposljvanjeEvidencija_userId_date_key"  RENAME TO "DoprinosEvidencija_userId_date_key";

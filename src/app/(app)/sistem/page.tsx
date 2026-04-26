@@ -167,7 +167,6 @@ export default async function SistemPage() {
         id: true,
         naziv: true,
         adresa: true,
-        krug: { select: { name: true } },
         rsdKumulativ: true,
         trenutniNivo: true,
       },
@@ -196,7 +195,6 @@ export default async function SistemPage() {
     id: p.id,
     naziv: p.naziv,
     adresa: p.adresa,
-    krug: p.krug,
     rsdKumulativ: Number(p.rsdKumulativ),
     trenutniNivo: p.trenutniNivo,
   }));
