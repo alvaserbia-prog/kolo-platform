@@ -80,7 +80,7 @@ const nacinSticanja = [
   },
   {
     br: "6",
-    naslov: "Zapošljavanje",
+    naslov: "Evidencija doprinosa",
     opis: "Fondacija i krugovi objavljuju radne oglase. Ako si verifikovan/a i odobren/a za posao, beleže se sati rada — emisija sledi.",
     iznos: "1.000–2.500 POEN/sat",
     boja: "bg-kolo-green-100 text-kolo-green-700",

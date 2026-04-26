@@ -141,7 +141,7 @@ interface AdminPendingOglasEvidencija {
   createdAt: string;
 }
 
-interface AdminZaposljavanjeData {
+interface AdminPedData {
   oglasi: AdminOglasItem[];
   pendingPrijave: AdminPendingPrijava[];
   pendingEvidencije: AdminPendingOglasEvidencija[];
@@ -166,7 +166,7 @@ interface AdminKlijentProps {
   opticaj: number;
   pendingKrugovi: PendingKrug[];
   adminProgrami: AdminProgramiData;
-  adminZaposljavnje: AdminZaposljavanjeData;
+  adminPed: AdminPedData;
   adminPokrovitelji: PokroviteljItem[];
   dashboard: DashboardData;
   auditLogs: AuditLogEntry[];
@@ -187,14 +187,14 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "zaposljavnje" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
+type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminZaposljavnje, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2 }: AdminKlijentProps) {
+export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2 }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
   const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length + adminProgrami.pendingEvidencije.length;
-  const ukupnoPendingZaposl = adminZaposljavnje.pendingPrijave.length + adminZaposljavnje.pendingEvidencije.length;
+  const ukupnoPendingZaposl = adminPed.pendingPrijave.length + adminPed.pendingEvidencije.length;
   const ukupnoPending = pending.length + pendingKrugovi.length + ukupnoPendingProgrami;
 
   const tabs: [Tab, string][] = [
@@ -202,7 +202,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
     ["pending", `Na čekanju${ukupnoPending > 0 ? ` (${ukupnoPending})` : ""}`],
     ["krugovi", "Krugovi"],
     ["programi", "Programi"],
-    ["zaposljavnje", `Evidencija Doprinosa${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
+    ["ped", `Evidencija Doprinosa${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
     ["emisija", "Finansije"],
@@ -254,8 +254,8 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
       {/* Programi */}
       {tab === "programi" && <AdminProgramiTab data={adminProgrami} onDone={() => router.refresh()} />}
 
-      {/* Zapošljavanje */}
-      {tab === "zaposljavnje" && <AdminZaposljavanjeTab data={adminZaposljavnje} onDone={() => router.refresh()} />}
+      {/* Evidencija doprinosa */}
+      {tab === "ped" && <AdminPedTab data={adminPed} onDone={() => router.refresh()} />}
 
       {/* Pokrovitelji */}
       {tab === "pokrovitelji" && (
@@ -536,7 +536,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
   );
 }
 
-// ── Zapošljavanje tab ─────────────────────────────────────────────────────────
+// ── Evidencija doprinosa tab ─────────────────────────────────────────────────────────
 
 const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", KRUG: "Krug", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
@@ -545,14 +545,14 @@ const sourceCls: Record<string, string> = {
   PROJEKAT:  "bg-purple-50 text-purple-700",
 };
 
-function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData; onDone: () => void }) {
+function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void }) {
   const [view, setView] = useState<"oglasi" | "prijave" | "evidencije" | "novi">("oglasi");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
 
   async function odobriPrijavu(id: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/zaposljavnje/prijave/${id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/doprinos-oglasi/prijave/${id}/odobri`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
     setPoruke((p) => ({ ...p, [id]: { text: res.ok ? "Odobreno." : (d.error ?? "Greška."), ok: res.ok } }));
@@ -561,7 +561,7 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
 
   async function odbijPrijavu(id: string, razlog: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/zaposljavnje/prijave/${id}/odbij`, {
+    const res = await fetch(`/api/admin/doprinos-oglasi/prijave/${id}/odbij`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ razlog }),
@@ -574,7 +574,7 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
 
   async function odobriEvidenciju(id: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/zaposljavnje/evidencija/${id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/doprinos-oglasi/evidencija/${id}/odobri`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
     setPoruke((p) => ({ ...p, [id]: { text: res.ok ? `Odobreno. Emitovano ${d.amount?.toLocaleString("sr-RS")} POEN.` : (d.error ?? "Greška."), ok: res.ok } }));
@@ -583,7 +583,7 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
 
   async function odbijEvidenciju(id: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/zaposljavnje/evidencija/${id}/odbij`, { method: "POST" });
+    const res = await fetch(`/api/admin/doprinos-oglasi/evidencija/${id}/odbij`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
     setPoruke((p) => ({ ...p, [id]: { text: res.ok ? "Odbijeno." : (d.error ?? "Greška."), ok: res.ok } }));
@@ -593,7 +593,7 @@ function AdminZaposljavanjeTab({ data, onDone }: { data: AdminZaposljavanjeData;
   async function zatvoriOglas(id: string) {
     if (!confirm("Zatvoriti oglas?")) return;
     setLoading(id);
-    const res = await fetch(`/api/admin/zaposljavnje/oglasi/${id}/zatvori`, { method: "POST" });
+    const res = await fetch(`/api/admin/doprinos-oglasi/oglasi/${id}/zatvori`, { method: "POST" });
     setLoading(null);
     if (res.ok) onDone();
   }
@@ -757,7 +757,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
     if (stopa < 1000 || stopa > 2500) { setError("Stopa mora biti 1.000–2.500 POEN/sat."); return; }
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/zaposljavnje/oglasi", {
+      const res = await fetch("/api/admin/doprinos-oglasi/oglasi", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -914,13 +914,13 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
   }
 
   async function odobriEvidenciju(id: string) {
-    const res = await fetch(`/api/admin/programi/zaposljavnje/${id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/programi/ped/${id}/odobri`, { method: "POST" });
     if (res.ok) onDone();
     else { const d = await res.json(); alert(d.error); }
   }
 
   async function odbijEvidenciju(id: string) {
-    const res = await fetch(`/api/admin/programi/zaposljavnje/${id}/odbij`, { method: "POST" });
+    const res = await fetch(`/api/admin/programi/ped/${id}/odbij`, { method: "POST" });
     if (res.ok) onDone();
   }
 
@@ -984,10 +984,10 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
         </div>
       )}
 
-      {/* Pending evidencije — Zapošljavanje */}
+      {/* Pending evidencije — Evidencija doprinosa */}
       {data.pendingEvidencije.length > 0 && (
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-kolo-muted">Evidencije — Zapošljavanje ({data.pendingEvidencije.length})</h3>
+          <h3 className="text-sm font-semibold text-kolo-muted">Evidencije — Evidencija doprinosa ({data.pendingEvidencije.length})</h3>
           {data.pendingEvidencije.map((e) => (
             <div key={e.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">
               <div className="flex justify-between items-start">

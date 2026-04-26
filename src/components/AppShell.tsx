@@ -9,7 +9,7 @@ interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
   krug: number;
-  zaposljavnje: number;
+  ped: number;
   programi: number;
   zrno: number;
 }

@@ -393,9 +393,10 @@ docs/             — dokumentacija po fazama
 
 ## Nezavršeni TODO
 
-- **Folder `src/app/(app)/zaposljvanje/`** — sadržaj radi sa modelom `DoprinosOglas`, ali tipfeler u nazivu foldera. Razmotriti rename u `oglasi/` ili `evidencija-doprinosa/`.
-- **Folder `src/app/api/admin/programi/zaposljvanje/`** i `src/app/api/admin/zaposljvanje/` — slično.
-- **Zaštitni veto Fondacije** (čl. 71 Pravilnika) — još nije implementiran (potrebno: praćenje mesečnih troškova Fondacije, jednosmerni flag "veto trajno ugašen").
-- **`__tests__/banka/`** folder ne odražava novi naziv `protokol/` (sadržaj je ažuriran, samo folder ostaje).
-- **Trajna atribucija doprinosa pri anonimizaciji** (Glava XV) — provera da `DELETE /api/profil` ne briše atribuciju za doprinose pod AGPL/CC BY-SA licencama.
-- **`docs/pregled-funkcija.md`** — ažurirati da reflektuje v2.1 terminologiju.
+- **Zaštitni veto Fondacije** (čl. 71 Pravilnika) — još nije implementiran. Potrebno:
+  - Tabela/polje za praćenje mesečnih operativnih troškova Fondacije.
+  - Tabela/polje za praćenje stanja sredstava Fondacije (RSD).
+  - Jednosmerni flag "veto aktivan" / "veto trajno ugašen" (gasi se kada sredstva ≥ 3× mesečni troškovi).
+  - Logika: dok je veto aktivan, Projekti koji zahtevaju dinarska sredstva su zamrznuti.
+- **Trajna atribucija doprinosa pri anonimizaciji** (Glava XV) — kada platforma bude imala modul za doprinose koda/sadržaja pod licencama Glave XV, `DELETE /api/profil` mora da NE briše atribuciju (ime/pseudonim) za te doprinose. Trenutno nije relevantno jer modul ne postoji.
+- **Migracija `20260424000000_rename_zadruga_to_krug` mora da se primeni na production bazu** sa `npx prisma migrate deploy`.

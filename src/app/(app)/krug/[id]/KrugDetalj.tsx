@@ -253,7 +253,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
 // ── Programi admin tab ────────────────────────────────────────────────────────
 
 const labelPrograma: Record<string, string> = {
-  PED:      "Zapošljavanje",
+  PED:      "Evidencija doprinosa",
   PODRSKA_MAJKAMA:   "Podrška majkama",
   PODRSKA_STARIJIMA: "Podrška starijima",
   POSEBNA_BRIGA:     "Posebna briga",
@@ -325,7 +325,7 @@ function ProgramiAdminTab({ krugId, clanovi, onDone }: { krugId: string; clanovi
       {svePending.filter((x) => x.tip === "evidencija").length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           <div className="px-5 py-3 border-b border-kolo-border">
-            <p className="text-sm font-semibold text-kolo-muted">Zapošljavanje — evidencije na čekanju</p>
+            <p className="text-sm font-semibold text-kolo-muted">Evidencija doprinosa — evidencije na čekanju</p>
           </div>
           {svePending.filter((x) => x.tip === "evidencija").map((item, i, arr) => {
             if (item.tip !== "evidencija") return null;

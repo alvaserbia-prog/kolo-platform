@@ -185,7 +185,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
               </svg>
             </button>
             <button
-              onClick={() => { setOpen(false); router.push("/zaposljavnje"); }}
+              onClick={() => { setOpen(false); router.push("/doprinos-oglasi"); }}
               className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
             >
               {t("moji_poslovi")}

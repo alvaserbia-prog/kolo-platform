@@ -32,11 +32,11 @@ interface SimParams {
   // Krug bonus pragovi
   krugBonusPragovi: KrugBonusPrag[];
 
-  // Zapošljavanje
-  zaposljavnje: boolean;
-  zaposljavnjePct: number;    // % krugra koji podnose evidenciju/dan
-  zaposljavnjeMin: number;
-  zaposljavnjeMax: number;
+  // Evidencija doprinosa
+  ped: boolean;
+  pedPct: number;    // % krugra koji podnose evidenciju/dan
+  pedMin: number;
+  pedMax: number;
 
   // Podrška majkama
   majke: boolean;
@@ -109,10 +109,10 @@ const DEFAULT_PARAMS: SimParams = {
     { clanovi: 200, poen: 2_000_000 }, { clanovi: 500, poen: 5_000_000 },
   ],
 
-  zaposljavnje: true,
-  zaposljavnjePct: 20,
-  zaposljavnjeMin: 5_000,
-  zaposljavnjeMax: 15_000,
+  ped: true,
+  pedPct: 20,
+  pedMin: 5_000,
+  pedMax: 15_000,
 
   majke: true,
   majkePct: 80,
@@ -271,7 +271,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   const rand = rng.next.bind(rng);
 
   let em_verif = 0, em_ref = 0, em_don = 0, em_krug = 0;
-  let em_zaposljavnje = 0, em_majke = 0, em_stariji = 0, em_posebna = 0, em_skolovanje = 0;
+  let em_ped = 0, em_majke = 0, em_stariji = 0, em_posebna = 0, em_skolovanje = 0;
 
   // 1. NOVI ČLANOVI
   const growN = Math.max(1, Math.floor(members.length * p.dailyGrowth / 100));
@@ -350,11 +350,11 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   const krugri = members.filter(m => m.uKrug);
   const programItems: { m: Clan; iznos: number; tip: string }[] = [];
 
-  if (p.zaposljavnje) {
+  if (p.ped) {
     for (const m of krugri) {
-      if (rand() * 100 < p.zaposljavnjePct) {
-        const iznos = p.zaposljavnjeMin + Math.floor(rand() * (p.zaposljavnjeMax - p.zaposljavnjeMin));
-        programItems.push({ m, iznos, tip: "zaposljavnje" });
+      if (rand() * 100 < p.pedPct) {
+        const iznos = p.pedMin + Math.floor(rand() * (p.pedMax - p.pedMin));
+        programItems.push({ m, iznos, tip: "ped" });
       }
     }
   }
@@ -396,7 +396,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
     if (emitAmount <= 0) continue;
     item.m.bal += emitAmount;
     switch (item.tip) {
-      case "zaposljavnje": em_zaposljavnje += emitAmount; break;
+      case "ped": em_ped += emitAmount; break;
       case "majke":        em_majke += emitAmount; break;
       case "stariji":      em_stariji += emitAmount; break;
       case "posebna":      em_posebna += emitAmount; break;
@@ -407,7 +407,7 @@ function nextDayStep(prev: SimState, p: SimParams): SimState {
   if (em_prog > 0) {
     bankaMinus += em_prog;
     const det = [
-      em_zaposljavnje > 0 ? `Zapoš. ${fmt(em_zaposljavnje)}` : null,
+      em_ped > 0 ? `PED ${fmt(em_ped)}` : null,
       em_majke > 0 ? `Majke ${fmt(em_majke)}` : null,
       em_stariji > 0 ? `Stariji ${fmt(em_stariji)}` : null,
       em_posebna > 0 ? `Pos.briga ${fmt(em_posebna)}` : null,
@@ -724,14 +724,14 @@ function KonfiguracioniEkran({ onStart }: { onStart: (p: SimParams) => void }) {
       {/* Programi */}
       {tab === "Programi" && (
         <div className="space-y-4">
-          <Sekcija title="Zapošljavanje">
-            <Row label="Aktivan"><Tog val={p.zaposljavnje} onChange={v => upd("zaposljavnje", v)} /></Row>
-            <Row label="% krugra koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.zaposljavnjePct} onChange={v => upd("zaposljavnjePct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
+          <Sekcija title="Evidencija doprinosa">
+            <Row label="Aktivan"><Tog val={p.ped} onChange={v => upd("ped", v)} /></Row>
+            <Row label="% krugra koji podnose evidenciju/dan"><div className="flex items-center gap-1"><N val={p.pedPct} onChange={v => upd("pedPct", v)} min={0} max={100} cls="w-20" /><span className="text-sm text-kolo-muted">%</span></div></Row>
             <Row label="Iznos evidencije min/max">
               <div className="flex items-center gap-2">
-                <N val={p.zaposljavnjeMin} onChange={v => upd("zaposljavnjeMin", v)} cls="w-24" />
+                <N val={p.pedMin} onChange={v => upd("pedMin", v)} cls="w-24" />
                 <span className="text-kolo-muted">–</span>
-                <N val={p.zaposljavnjeMax} onChange={v => upd("zaposljavnjeMax", v)} cls="w-24" />
+                <N val={p.pedMax} onChange={v => upd("pedMax", v)} cls="w-24" />
               </div>
             </Row>
           </Sekcija>

@@ -445,7 +445,7 @@ function PregledSekcija({
     { label: t("pijaca_link"), on: true },
     { label: t("poruke_link"), on: true },
     { label: t("krugovi_link"), on: ukupnoKrug > 0 },
-    { label: t("zaposljavnje_link"), on: programi.some((p) => p.type === "PED" && p.isActive) },
+    { label: t("ped_link"), on: programi.some((p) => p.type === "PED" && p.isActive) },
     { label: t("podrska_majkama_link"), on: programi.some((p) => p.type === "PODRSKA_MAJKAMA" && p.isActive) },
     { label: t("podrska_starijima_link"), on: programi.some((p) => p.type === "PODRSKA_STARIJIMA" && p.isActive) },
     { label: t("posebna_briga_link"), on: programi.some((p) => p.type === "POSEBNA_BRIGA" && p.isActive) },

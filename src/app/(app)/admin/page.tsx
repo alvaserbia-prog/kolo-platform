@@ -188,7 +188,7 @@ export default async function AdminPage() {
       }))}
       verifikovaniKorisnici={pokroviteljiData[1]}
       krugoviLista2={pokroviteljiData[2]}
-      adminZaposljavnje={{
+      adminPed={{
         oglasi: zaposljavanjeData[0].map((o) => ({
           id: o.id, title: o.title, source: o.source as string,
           hourlyRate: o.hourlyRate, maxHoursPerDay: o.maxHoursPerDay, positions: o.positions,

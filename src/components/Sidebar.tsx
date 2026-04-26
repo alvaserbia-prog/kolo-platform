@@ -9,7 +9,7 @@ interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
   krug: number;
-  zaposljavnje: number;
+  ped: number;
   programi: number;
   zrno: number;
 }
@@ -40,7 +40,7 @@ function SidebarContent({
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
     "/krug": dnevniBrojevi.krug,
-    "/programi": dnevniBrojevi.programi + dnevniBrojevi.zaposljavnje,
+    "/programi": dnevniBrojevi.programi + dnevniBrojevi.ped,
     "/zrno": dnevniBrojevi.zrno,
   } : {};
 

@@ -178,7 +178,7 @@ export default function UsloviPage() {
           </p>
           <p>
             Verifikacijom Korisnik stiče: bonus od 1.000 POENA, pristup sistemu preporuka, pravo na
-            donacije, pravo na sticanje ZRNA, učešće u Programu Zapošljavanje, pun uvid u pseudonime
+            donacije, pravo na sticanje ZRNA, učešće u Programu Evidencija doprinosa, pun uvid u pseudonime
             i transakcije, te pristup komunikaciji i pijaci.
           </p>
         </section>

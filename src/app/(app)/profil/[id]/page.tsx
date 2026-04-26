@@ -52,7 +52,7 @@ const TIP_LABELA: Record<string, string> = {
   EMISIJA_DONACIJA: "Donacija",
   EMISIJA_POKROVITELJ: "Pokroviteljstvo",
   EMISIJA_PROGRAM: "Program",
-  EMISIJA_PED: "Zapošljavanje",
+  EMISIJA_PED: "Evidencija doprinosa",
   EMISIJA_KRUG: "Krug bonus",
   EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",
   ZRNO_KUPOVINA: "ZRNO kupovina",

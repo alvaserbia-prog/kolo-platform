@@ -343,7 +343,7 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
     <div className="space-y-3">
       {type === "PED" && (
         <p className="text-sm text-kolo-muted">
-          {t("zaposljavnje_opis")}
+          {t("ped_opis")}
         </p>
       )}
 
@@ -459,7 +459,7 @@ function EvidencijaForma({ evidencijaToday, onSuccess, onCancel }: {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/programi/zaposljavnje/evidencija", {
+      const res = await fetch("/api/programi/ped/evidencija", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ description: description.trim(), amount: amt }),
@@ -508,7 +508,7 @@ function getEvStatusBadge(status: string, t: (key: string) => string): { label: 
 
 function opisPrograma(type: string, t: (key: string) => string): string {
   const mapa: Record<string, string> = {
-    PED:      t("opis_zaposljavnje"),
+    PED:      t("opis_ped"),
     PODRSKA_MAJKAMA:   t("opis_majkama"),
     PODRSKA_STARIJIMA: t("opis_starijima"),
     POSEBNA_BRIGA:     t("opis_posebna_briga"),

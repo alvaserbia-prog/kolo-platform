@@ -402,7 +402,7 @@ export default async function Home() {
             ))}
           </div>
           <p className="text-sm text-kolo-muted px-1">
-            Postoje još tri načina (Zapošljavanje, Programi podrške, verifikacioni bonus).{" "}
+            Postoje još tri načina (Evidencija doprinosa, Programi podrške, verifikacioni bonus).{" "}
             <Link href="/kako-funkcionise" className="text-kolo-green-700 hover:text-kolo-green-900 font-medium transition-colors">
               Detaljno objašnjenje →
             </Link>

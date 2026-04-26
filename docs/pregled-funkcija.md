@@ -1,14 +1,14 @@
-# KOLO Platforma — Pregled funkcija
+# KOLO Platforma — Pregled funkcija (v2.1)
 
 ## Šta je KOLO
 
-KOLO je platforma alternativnog ekonomskog sistema zasnovana na uzajamnosti. Nije banka ni kripto projekat — to je mreža lokalnih zadruga u kojoj doprinos zajednici ima vrednost.
+KOLO je platforma alternativnog ekonomskog sistema zasnovana na uzajamnosti i doprinosu zajedničkom dobru. Nije banka ni kripto projekat — to je mreža lokalnih **Krugova** u kojoj doprinos zajednici ima vrednost.
 
 Sistem koristi dve interne jedinice:
-- **POEN** — evidencija doprinosa (ceo broj, ne može ići u minus, ne ističe)
-- **ZRNO** — upravljačka jedinica za glasanje (kupuje se za POEN, kurs raste sa donacijama)
+- **POEN** — jedinica evidencije doprinosa zajedničkom dobru (ceo broj, ne može ići u minus, ne ističe; nije pravo, već prospektivan pristup budućim dobrima)
+- **ZRNO** — upravljačka jedinica za glasanje u Gornjem Kolu (stiče se za POEN po dnevnom kursu)
 
-**Zero-sum pravilo**: zbir svih POEN-a u sistemu uvek je 0. Samo Banka može imati negativan saldo.
+**Zero-sum pravilo**: zbir svih POEN-a u sistemu uvek je 0. Samo Protokol može imati negativno stanje.
 
 ---
 
@@ -16,10 +16,10 @@ Sistem koristi dve interne jedinice:
 
 | Uloga | Opis |
 |---|---|
-| Gost (neregistrovan) | Može da gleda pijacku i landing page |
-| Fizičko lice (neverifikovan) | Registrovan, ali nije potvrdio identitet |
-| Fizičko lice (verifikovan) | Pun pristup: novčanik, pijaca, zajednica, programi, glasanje |
-| Zadrugar | Verifikovan korisnik koji je član zadruge |
+| Gost (neregistrovan) | Može da gleda pijacu i landing page |
+| Fizičko lice (neverifikovan) | Registrovan, ali nije potvrdio identitet; ne može postavljati oglase ni primati POEN za ponuđena dobra |
+| Fizičko lice (verifikovan) | Pun pristup: novčanik, pijaca, Krug, programi, glasanje |
+| Član Kruga | Verifikovan korisnik učlanjen u jedan Krug |
 | Admin | Fondacija — odobrava verifikacije, upravlja sistemom |
 
 ---
@@ -29,19 +29,19 @@ Sistem koristi dve interne jedinice:
 ### `/` — Landing stranica
 - Hero sekcija sa opisom sistema
 - Živi widget: broj verifikovanih članova + POEN u opticaju (iz baze)
-- Prikaz programa Banke (Verifikacija, Preporuke, Donacije, Podrška porodicama)
+- Prikaz programa Protokola (Verifikacija, Preporuke, Donacije, Podrška porodicama)
 - CTA: Registruj se / Kako funkcioniše
 
 ### `/pijaca` — Pijaca (javna)
-- Isti oglasi kao za prijavljene korisnike
-- Posetioci ne vide pseudonime prodavaca
-- Nema dugmeta za kupovinu — prikazuje se poziv na registraciju
+- Isti oglasi kao za prijavljene korisnike (kategorija, opis, lokacija, pseudonim)
+- Posetioci ne mogu pokrenuti komunikaciju ili kupiti
+- Nema dugmeta za kupovinu — prikazuje se poziv na registraciju/verifikaciju
 
 ### `/kako-funkcionise` — Edukativna stranica
 - 4 koraka do aktivnog članstva
 - Objašnjenje POEN-a i ZRNO-a
 - Opis oba kanala verifikacije (upload vs lično)
-- Pregled programa Banke
+- Pregled programa Protokola
 
 ---
 
@@ -63,17 +63,17 @@ Sistem koristi dve interne jedinice:
 
 ## App stranice (zahtevaju prijavu)
 
-### `/dashboard` — Početna
+### `/sistem` — Početna
 - Kartica sa stanjem POEN-a (gradient zelena)
 - Kartica sa ukupnim opticajem u sistemu
 - Upozorenje + CTA za verifikaciju (ako nije verifikovan)
 - 5 poslednjih transakcija sa linkovima
+- 4 kartice u 2×2 gridu: Članovi, Transakcije, Krugovi, Opticaj
 
 ### `/novcanik` — Novčanik
 - Stanje POEN-a (gradient kartica)
 - **Pošalji POEN** — autocomplete po pseudonimu, iznos, opis
 - **Moj QR** — QR kod koji kodira link za prijem; skener otvara popunjenu formu
-  - Format: `/novcanik?plati=Pseudonim`
 - Filter transakcija: Sve / Primljeno / Poslato / Emisije
 - Puna istorija (100 transakcija)
 
@@ -84,9 +84,9 @@ Sistem koristi dve interne jedinice:
 - Ako odbijeno: prikazuje razlog i opciju ponovnog slanja
 
 ### `/pijaca` — Pijaca (za prijavljene)
-- Iste filteri: kategorija, pretraga, min/max POEN, sortiranje
-- Verifikovani korisnici vide pseudonime i mogu kupovati
-- Neverifikovani vide "Verifikuj →" umesto dugmeta za kupovinu
+- Filteri: kategorija, pretraga, min/max POEN, sortiranje
+- Verifikovani korisnici vide pseudonime, mogu kupovati i postavljati oglase
+- Neverifikovani vide "Verifikuj →" umesto dugmeta za kupovinu i ne mogu postavljati oglase
 - Modal za potvrdu kupovine
 
 ### `/pijaca/novi-oglas` — Novi oglas
@@ -96,33 +96,43 @@ Sistem koristi dve interne jedinice:
 
 ### `/pijaca/[id]` — Detalj oglasa
 - Prikaz svih slika, opisa, informacija o prodavcu
-- Dugme za kupovinu (za verifikovane)
+- Dugme za kupovinu i kontakt (za verifikovane)
 
-### `/zajednica` — Zadruge
-- Lista svih aktivnih zadruga sa brojem članova i projektima
+### `/krug` — Krugovi
+- Lista svih aktivnih Krugova sa brojem članova i projektima
 - Filtri, pretraga
-- Dugme za osnivanje nove zadruge
+- Dugme za osnivanje novog Kruga
 
-### `/zajednica/osnivanje` — Osnivanje zadruge
+### `/krug/osnivanje` — Osnivanje Kruga
 - Forma: naziv, opis, lokacija
-- Minimalno 3 verifikovana osnivača
+- Minimalno 5 verifikovanih osnivača
 - Zahtev ide na odobrenje admina
-- Odobrenje nosi 50.000 POEN emisiju za zadrugu
+- Odobrenje nosi 50.000 POEN emisiju za novi Krug
 
-### `/zajednica/[id]` — Profil zadruge
+### `/krug/[id]` — Profil Kruga
 - Informacije, lista članova, aktivni projekti
 - Dugme za učlanjenje (pristupnica)
 
-### `/programi` — Programi Banke
+### `/programi` — Programi Protokola
 - Lista dostupnih programa sa statusom (aktivan/neaktivan)
 - Prijava za program (enrollment)
-- Programi: Verifikacija, Preporuke, Donacije, Zapošljavanje, Podrška porodicama
+- **Operativni program**: Program Evidencije Doprinosa (PED) — međusobno potvrđivanje doprinosa
+- **Socijalni programi**: Podrška Majkama (i primarnim starateljima), Podrška Starijima, Posebna Briga, Školovanje
+
+### `/doprinos-oglasi` — Oglasi za doprinos (PED)
+- Lista oglasa za doprinos zajedničkom dobru (DoprinosOglas)
+- Mogu se postavljati od strane Fondacije, Krugova ili kao deo Projekta
+- Korisnik se prijavljuje, evidentira odrađene sate, drugi verifikovani korisnici potvrđuju doprinos
+
+### `/doprinos-oglasi/[id]` — Detalj oglasa za doprinos
+- Opis posla, satnica POEN/h, broj pozicija, deadline
+- Dugme za prijavu (verifikovani korisnici)
 
 ### `/zrno` — ZRNO upravljanje
 - Stanje ZRNA (slobodna / zaključana)
-- Kupovina ZRNA od Banke (POEN → ZRNO po kursu)
-- Prodaja ZRNA nazad u Banku
-- Zaključavanje ZRNA za glasanje
+- Sticanje ZRNA od Protokola (POEN → ZRNO po dnevnom kursu)
+- **Povrat** ZRNA Protokolu (umesto starog "prodaja ZRNA")
+- Zaključavanje ZRNA za glasanje (izvršava se u ponoć istog obračunskog perioda, bez perioda čekanja od 1 dan)
 - Otključavanje ZRNA
 - Delegiranje glasačkih prava drugom članu
 
@@ -149,9 +159,9 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 
 ### Tab: Dashboard
 - Brojevi: ukupno korisnika, verifikovanih, suspendovanih
-- Zadruge: ukupno, ukupno zadrugara
-- Finansije: opticaj, saldo Banke
-- ZRNO: kod korisnika, u Banci, ukupno
+- Krugovi: ukupno, ukupno članova Krugova
+- Finansije: opticaj, stanje Protokola
+- ZRNO: kod korisnika, u Protokolu, ukupno
 - Ukupan broj transakcija
 
 ### Tab: Na čekanju
@@ -159,18 +169,18 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
   - Prikaz slika prednje/zadnje strane
   - Dugme "Odobri" → emisija 1.000 POEN + referral nagrada
   - Dugme "Odbij" → unos razloga
-- Zahtevi za osnivanje zadruge
+- Zahtevi za osnivanje Kruga
   - Odobri (emisija 50.000 POEN) / Odbij
 
-### Tab: Zadruge
-- Lista svih zadruga sa statusom, saldom, brojem članova
+### Tab: Krugovi
+- Lista svih Krugova sa statusom, stanjem, brojem članova
 - Pregled pristupnica (zahtevi za učlanjenje)
 - Odobravanje/odbijanje pristupnica
 
 ### Tab: Programi
-- Uključivanje/isključivanje programa Banke
+- Uključivanje/isključivanje programa Protokola
 - Odobravanje enrollment zahteva
-- Odobravanje evidencija rada (Zapošljavanje program)
+- Odobravanje evidencija doprinosa (PED program)
 - Pokretanje noćne emisije ručno
 
 ### Tab: Korisnici
@@ -189,7 +199,7 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 - Hronološki zapis svih admin akcija
 
 ### `/admin/simulator` — Simulator
-- 4 taba: Pregled | Članovi | Zadruge | ZRNO
+- 4 taba: Pregled | Članovi | Krugovi | ZRNO
 - Testiranje sistema bez uticaja na produkcione podatke
 
 ---
@@ -206,6 +216,11 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 **Trigeri koji šalju notifikaciju:**
 - Primljeni POEN transfer
 - Verifikacija odobrena (upload i ručni kanal)
+- Krug odobren / odbijen
+- Pristupnica prihvaćena
+- Program enrollment odobren / odbijen
+- Oglas kupljen
+- Nova poruka
 
 ---
 
@@ -219,26 +234,28 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 
 ---
 
-## KOLO Banka — pravila emisije
+## KOLO Protokol — pravila emisije
 
-- Banka je softverski protokol, nema fizičku adresu
-- Saldo Banke uvek negativan (ona emituje, korisnici primaju)
+- Protokol je softverski protokol, nema fizičku adresu
+- Stanje Protokola uvek negativno (on emituje, korisnici primaju)
 - **Dnevni limit**: max 10% od opticaja može se emitovati u jednom danu
 - Ako je zatraženo više od limita, svaki korisnik dobija proporcionalni deo (koeficijent < 1)
 - Noćna emisija se pokreće automatski u ponoć (ili ručno iz admin panela)
+- Mehanizmi platforme i Projekti **NE ulaze u dnevni limit**
 
 ---
 
 ## Tehničke napomene za AI asistente
 
-- Stranice: Next.js 14+ App Router, TypeScript
-- Baza: PostgreSQL + Prisma ORM
+- Stranice: Next.js 16+ App Router, TypeScript
+- Baza: PostgreSQL + Prisma ORM 7
 - Auth: NextAuth.js (JWT, credentials provider)
 - Stilovi: Tailwind CSS v4 sa custom KOLO design tokenima
 - Jezik interfejsa: srpski (latinica)
 - POEN iznosi: uvek celi brojevi (INTEGER), nikad decimalni
 - ZRNO količine: uvek celi brojevi (INTEGER)
 - Kurs ZRNA: jedini decimalni tip (DECIMAL 20,2)
-- Sve operacije koje menjaju balans: `prisma.$transaction()`
-- API rute su na srpskom: `/api/clanovi`, `/api/transakcije`, itd.
+- Sve operacije koje menjaju stanje: `prisma.$transaction()`
+- API rute su na srpskom: `/api/krugovi`, `/api/doprinos-oglasi`, `/api/transakcije`, itd.
+- Biznis logika u `src/lib/protokol/` (donacija, emisija, krug, pokrovitelj, programi, zrno)
 - Middleware (`src/middleware.ts`): blokira neautorizovane korisnike, osim javnih ruta (/, /pijaca, /kako-funkcionise)

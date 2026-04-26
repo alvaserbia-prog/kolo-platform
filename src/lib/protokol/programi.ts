@@ -105,7 +105,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     }
   }
 
-  // 4. Zapošljavanje — odobrene evidencije za danas
+  // 4. Evidencija doprinosa — odobrene evidencije za danas
   if (aktivniTipovi.has("PED")) {
     const evidencije = await prisma.doprinosEvidencija.findMany({
       where: { date: danas, status: "APPROVED" },
