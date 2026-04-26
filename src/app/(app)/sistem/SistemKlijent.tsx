@@ -1127,7 +1127,7 @@ function KrugoviSekcija({
   if (krugovi.length === 0) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        {t("nema_krug")}
+        {t("nema_krugova")}
       </div>
     );
   }
@@ -1156,7 +1156,7 @@ function KrugoviSekcija({
             </div>
             <div className="text-right shrink-0 ml-4">
               <p className="text-sm font-bold text-kolo-text">{z.clanovi}</p>
-              <p className="text-xs text-kolo-muted">{t("krugra")}</p>
+              <p className="text-xs text-kolo-muted">{t("clanova")}</p>
             </div>
           </div>
         ))}
