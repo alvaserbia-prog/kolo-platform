@@ -266,53 +266,64 @@ export default async function Home() {
               {
                 ikona: "🌱",
                 naslov: "Farmeri i mali proizvođači",
-                opis: "Direktan pristup potrošačima i olakšana distribucija domaćih proizvoda bez posrednika i provizije — vrednovanje tvojih proizvoda srazmerno uloženom radu.",
+                opis: "Direktan pristup potrošačima i olakšana distribucija domaćih proizvoda bez posrednika i provizije.",
+                poenta: "Vrednovanje tvojih proizvoda srazmerno uloženom radu.",
               },
               {
                 ikona: "🔧",
                 naslov: "Zanatlije i majstori",
-                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke — da ceo krug vidi koliko vrediš.",
+                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke.",
+                poenta: "Da ceo krug\nvidi koliko vrediš.",
               },
               {
                 ikona: "👴",
                 naslov: "Penzioneri sa znanjem",
-                opis: "Razmena znanja i usluga za stvari koje ti realno trebaju — domaći proizvodi, lokalne usluge. Iskustvo konačno ima konkretnu vrednost, ne samo sentimentalnu.",
+                opis: "Razmena znanja i usluga za stvari koje ti realno trebaju — domaći proizvodi, lokalne usluge.",
+                poenta: "Tvoje iskustvo dobija konkretnu vrednost.",
               },
               {
                 ikona: "🏠",
                 naslov: "Domaćice",
-                opis: "Prodaja domaćih proizvoda (zimnica, pečeno, ručni rad) i razmena usluga sa komšinicama — kućni rad postaje izvor stvarnih sredstava.",
+                opis: "Prodaja domaćih proizvoda (zimnica, pečeno, ručni rad) i razmena usluga sa komšinicama.",
+                poenta: "Kućni rad postaje izvor stvarnih sredstava.",
               },
               {
                 ikona: "👩‍👧",
                 naslov: "Majke i roditelji",
-                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane — krug koji roditeljstvo tretira kao posao, ne kao prirodnu obavezu.",
+                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane.",
+                poenta: "Imaš pomoć da budeš roditelj jer je to svima u interesu.",
               },
               {
                 ikona: "🎓",
                 naslov: "Mladi",
-                opis: "Neformalni rad, prvi klijenti i prostor za razvoj u tvom kraju — razlog da ostaneš nije samo plata, nego i okruženje na koje možeš da utičeš.",
+                opis: "Neformalni rad, prvi klijenti i prostor za razvoj u tvom kraju.",
+                poenta: "Razlog da ostaneš i okruženje na koje možeš da utičeš.",
               },
               {
                 ikona: "💼",
                 naslov: "Nezaposleni",
-                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ na poslovima unutar krugova — dostojanstvo i sigurnost za tebe i porodicu.",
+                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ u aktivnostima zajedničkog dobra.",
+                poenta: "Dostojanstvo i sigurnost za tebe i porodicu.",
               },
               {
                 ikona: "🤝",
-                naslov: "Postojeći krugovi i udruženja",
-                opis: "Već ste organizovani, već imate ljude i strukturu. Ekonomski sloj otvara nove mogućnosti za vašu organizaciju kao i za svakog pojedinog člana.",
+                naslov: "Postojeće zadruge i udruženja",
+                opis: "Već ste organizovani, već imate ljude i strukturu. Ekonomski sloj otvara…",
+                poenta: "…nove mogućnosti za organizaciju\ni za svakog pojedinog člana.",
+                puna_sirina: true,
               },
               {
                 ikona: "🏘️",
                 naslov: "Lokalpatrioti",
-                opis: "Sva vrednost koju razmeniš sa drugima ostaje u zajednici. Svaka obavljena transakcija je doprinos poboljšanju ekonomske slike tvog mesta.",
+                opis: "Sva vrednost koju razmeniš sa drugima ostaje u zajednici. Svaka obavljena transakcija je…",
+                poenta: "…doprinos poboljšanju ekonomske slike tvog mesta.",
               },
             ].map((seg) => (
               <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
                 <span className="text-2xl">{seg.ikona}</span>
                 <p className="font-semibold text-kolo-text text-sm leading-snug">{seg.naslov}</p>
                 <p className="text-xs text-kolo-muted leading-relaxed">{seg.opis}</p>
+                <p className={`text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line ${"puna_sirina" in seg && seg.puna_sirina ? "" : "max-w-[70%]"}`}>{seg.poenta}</p>
               </div>
             ))}
           </div>
