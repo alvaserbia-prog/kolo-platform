@@ -247,10 +247,10 @@ docs/             — dokumentacija po fazama
 - **Pokrovitelj** — pravno lice, nema nalog, vlasnik je verifikovani član
 
 ## Sidebar linkovi
-- Neverifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Verifikacija, Profil
-- Verifikovan: Početna (/sistem), Novčanik, Poruke, Pijaca, Krug, Programi, ZRNO, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil
+- Neverifikovan: Početna (/sistem), Novčanik, Pijaca, Verifikacija
+- Verifikovan: Početna (/sistem), Novčanik, Pijaca, ZRNO
 - Admin (dodatno): Admin, Simulator
-- Napomena: "Početna" i "Sistem" su spojeni u jedan link `/sistem`
+- Napomena: "Početna" i "Sistem" su spojeni u jedan link `/sistem`. Ostale funkcionalnosti (Poruke, Krug, Programi, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil) postoje kao stranice ali nisu u sidebaru — pristupaju se preko drugih ulaznih tačaka (header, profilni meni, kartice na /sistem).
 
 ## API endpointi
 
