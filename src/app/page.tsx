@@ -60,11 +60,61 @@ async function getPijacaPreview() {
   }
 }
 
+async function getPoslednjeTransakcije() {
+  try {
+    const transakcije = await prisma.transaction.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 5,
+      include: {
+        fromWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
+        toWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
+      },
+    });
+
+    function walletLabel(w: { user?: { pseudonim: string } | null; krug?: { name: string } | null } | null) {
+      if (!w) return "Protokol";
+      if (w.user) return w.user.pseudonim;
+      if (w.krug) return `[${w.krug.name}]`;
+      return "Protokol";
+    }
+
+    return transakcije.map((t) => ({
+      id: t.id,
+      from: walletLabel(t.fromWallet),
+      to: walletLabel(t.toWallet),
+      amount: t.amount,
+      type: t.type,
+      createdAt: t.createdAt,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+function relativnoVreme(date: Date): string {
+  const sek = Math.floor((Date.now() - date.getTime()) / 1000);
+  if (sek < 60) return "upravo sada";
+  const min = Math.floor(sek / 60);
+  if (min < 60) return `pre ${min} min`;
+  const sat = Math.floor(min / 60);
+  if (sat < 24) {
+    if (sat === 1) return "pre 1 sat";
+    if (sat < 5) return `pre ${sat} sata`;
+    return `pre ${sat} sati`;
+  }
+  const dan = Math.floor(sat / 24);
+  if (dan === 1) return "pre 1 dan";
+  return `pre ${dan} dana`;
+}
+
 export default async function Home() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/dashboard");
 
-  const pijacaOglasi = await getPijacaPreview();
+  const [pijacaOglasi, poslednjeTransakcije] = await Promise.all([
+    getPijacaPreview(),
+    getPoslednjeTransakcije(),
+  ]);
 
   return (
     <div className="min-h-screen bg-kolo-bg">
@@ -375,86 +425,78 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── SEKCIJA 8 — KAKO DO POEN ─────────────────────────────── */}
+        {/* ── SEKCIJA 8 — PRIMER IZ PRAKSE ─────────────────────────── */}
         <section className="space-y-4">
-          <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            Kako do POEN?
-          </h2>
-          <div className="space-y-3">
-            {[
-              {
-                br: "1",
-                naslov: "Razmena sa drugim članom",
-                badge: "P2P, 1:1",
-                badgeCls: "bg-kolo-green-100 text-kolo-green-700",
-                opis: "Direktno slanje POEN-a između članova, bez provizije. Protokol nije posrednik — samo evidentira. Ovo je osnovna forma razmene u KOLO sistemu.",
-                highlight: true,
-              },
-              {
-                br: "2",
-                naslov: "Preporuke",
-                badge: "po tabeli",
-                badgeCls: "bg-kolo-green-100 text-kolo-green-700",
-                opis: "Za svaku osobu kojoj si preporučio KOLO i koja se verifikuje — dobijaš POEN nagradu po tabeli iz Pravilnika.",
-                highlight: false,
-              },
-              {
-                br: "3",
-                naslov: "Donacija Fondaciji",
-                badge: "18 nivoa",
-                badgeCls: "bg-kolo-gold-100 text-kolo-gold-600",
-                opis: "Donacija u dinarima Fondaciji i emisija POEN-a su dva odvojena akta. Svaki nivo donacije nosi viši faktor POEN bonusa (od 1,00× do 5,00×). Prag ulaska: 2.000 RSD.",
-                highlight: false,
-              },
-              {
-                br: "4",
-                naslov: "Pokroviteljstvo",
-                badge: "firme, od 10.000 RSD",
-                badgeCls: "bg-kolo-gold-100 text-kolo-gold-600",
-                opis: "Firma postaje pokrovitelj. 10.000 RSD donacije = 20.000 POEN za vlasnika naloga. Sedam nivoa prema visini podrške, po Prilogu 2 Pravilnika.",
-                highlight: false,
-              },
-            ].map((item) => (
-              <div key={item.br} className={`bg-white rounded-2xl card-shadow p-4 flex items-start gap-4 ${item.highlight ? "border-l-4 border-kolo-green-700" : ""}`}>
-                <div className="w-8 h-8 rounded-full bg-kolo-green-900 text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
-                  {item.br}
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <p className="font-semibold text-kolo-text text-sm">{item.naslov}</p>
-                    <span className={`text-xs font-mono px-2 py-0.5 rounded ${item.badgeCls}`}>{item.badge}</span>
-                  </div>
-                  <p className="text-sm text-kolo-muted leading-relaxed">{item.opis}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-sm text-kolo-muted px-1">
-            Postoje još tri načina (Evidencija doprinosa, Programi podrške, verifikacioni bonus).{" "}
-            <Link href="/kako-funkcionise" className="text-kolo-green-700 hover:text-kolo-green-900 font-medium transition-colors">
-              Detaljno objašnjenje →
-            </Link>
-          </p>
-        </section>
-
-        {/* ── SEKCIJA 9 — PRIMER IZ PRAKSE ─────────────────────────── */}
-        <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
             Primer iz prakse
           </div>
-          <p className="text-kolo-green-900 leading-relaxed mb-4">
-            Ana ponudi med na platformi. Milan ga vidi, kontaktira je, preuzima tegle i šalje joj <strong>8.000 POEN</strong>. Direktna razmena, bez posrednika, između dvoje ljudi koji žive u istom gradu i nikad se nisu upoznali.
-          </p>
-          <p className="text-kolo-muted leading-relaxed mb-4">
-            Sledeće nedelje Ani pukne bojler. Na platformi pronalazi Lazara, vodoinstalatera iz susedne ulice. On dolazi, popravlja, Ana mu šalje <strong>4.000 POEN</strong>.
-          </p>
-          <p className="text-kolo-muted leading-relaxed">
-            Protokol je upisao dve stavke u evidenciji. Fondacija nije uključena ni u jedan događaj. Bez provizije, bez posrednika.{" "}
-            <strong className="text-kolo-text">Troje komšija koji bi se mimoišli bez reči — konačno su se upoznali.</strong>
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Kartica 1 — Med */}
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 3h6v3l1 1v3l-1 1v9a2 2 0 01-2 2h-2a2 2 0 01-2-2v-9l-1-1V7l1-1V3z"/>
+                    <line x1="8" y1="11" x2="16" y2="11"/>
+                  </svg>
+                </div>
+                <span className="text-xs font-mono text-kolo-muted">1</span>
+              </div>
+              <p className="text-kolo-green-900 leading-relaxed text-sm">
+                Ana drži košnice u dvorištu i ponudi med na Pijaci. Milan ga uzme za <strong>8.000 POEN</strong>.
+              </p>
+            </div>
+            {/* Kartica 2 — Bojler */}
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                  </svg>
+                </div>
+                <span className="text-xs font-mono text-kolo-muted">2</span>
+              </div>
+              <p className="text-kolo-text leading-relaxed text-sm">
+                Ani pukne bojler. Pronalazi Lazara, vodoinstalatera. Lazar dolazi, popravlja, Ana mu šalje <strong>4.000 POEN</strong>.
+              </p>
+            </div>
+            {/* Kartica 3 — Hleb i pribori */}
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 11l1-1c1-1 3-1 4 0l1 1c1 1 3 1 4 0l1-1c1-1 3-1 4 0l1 1v8H3v-8z"/>
+                    <line x1="3" y1="14" x2="21" y2="14"/>
+                  </svg>
+                </div>
+                <span className="text-xs font-mono text-kolo-muted">3</span>
+              </div>
+              <p className="text-kolo-text leading-relaxed text-sm">
+                Lazar pronalazi Mariju, koja peče hleb u svojoj kuhinji. Naruči, Marija mu donese, on joj prosledi POEN. Marija ga sutradan uputi na Stefana, koji rezbari drvene kuhinjske pribore — i krug se nastavlja.
+              </p>
+            </div>
+            {/* Kartica 4 — Zaključak */}
+            <div className="bg-kolo-green-900 text-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+                <span className="text-xs font-mono text-white/60 uppercase tracking-wide">zaključak</span>
+              </div>
+              <p className="leading-relaxed text-sm">
+                Sve transakcije ostaju u javnoj evidenciji platforme — vide se pseudonim, iznos i vreme svake razmene.
+              </p>
+              <p className="leading-relaxed text-sm font-semibold">
+                Lanac poverenja je vidljiv, i ne briše se.
+              </p>
+            </div>
+          </div>
         </section>
 
-        {/* ── SEKCIJA 10 — PIJACA PREVIEW ──────────────────────────── */}
+        {/* ── SEKCIJA 9 — PIJACA PREVIEW ──────────────────────────── */}
         {pijacaOglasi.length >= 3 && (
           <section className="space-y-4">
             <div className="flex items-center justify-between">
@@ -506,6 +548,43 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* ── SEKCIJA 10 — POSLEDNJE TRANSAKCIJE ─────────────────────── */}
+        {poslednjeTransakcije.length > 0 && (
+          <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
+                Šta se trenutno dešava
+              </h2>
+              <span className="text-xs text-kolo-muted">poslednjih {poslednjeTransakcije.length}</span>
+            </div>
+            <div className="divide-y divide-kolo-bg">
+              {poslednjeTransakcije.map((t) => (
+                <div
+                  key={t.id}
+                  className="grid items-center py-3 text-sm gap-3"
+                  style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 5.5rem 5.5rem" }}
+                >
+                  <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
+                  <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
+                  <span className="font-semibold text-kolo-text whitespace-nowrap text-right">
+                    {t.amount.toLocaleString("sr-RS")} P
+                  </span>
+                  <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
+                    {relativnoVreme(t.createdAt)}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-kolo-muted mt-5 text-center">
+              Punu evidenciju vide registrovani članovi platforme.
+            </p>
           </section>
         )}
 
