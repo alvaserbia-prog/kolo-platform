@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
-  "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama",
+  "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
 ];
 
 const PRESKOCI = [

@@ -28,6 +28,9 @@ export default async function PublicHeader() {
           <Link href="/o-nama" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
             O nama
           </Link>
+          <Link href="/o-sistemu" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
+            O sistemu
+          </Link>
         </nav>
         <div className="flex items-center gap-3">
           {session ? (
