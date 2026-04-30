@@ -430,70 +430,64 @@ export default async function Home() {
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
             Primer iz prakse
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Kartica 1 — Med */}
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9 3h6v3l1 1v3l-1 1v9a2 2 0 01-2 2h-2a2 2 0 01-2-2v-9l-1-1V7l1-1V3z"/>
-                    <line x1="8" y1="11" x2="16" y2="11"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-mono text-kolo-muted">1</span>
-              </div>
-              <p className="text-kolo-green-900 leading-relaxed text-sm">
-                Ana drži košnice u dvorištu i ponudi med na Pijaci. Milan ga uzme za <strong>8.000 POEN</strong>.
-              </p>
-            </div>
-            {/* Kartica 2 — Bojler */}
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-mono text-kolo-muted">2</span>
-              </div>
+
+          {/* 4 stubca povezana strelicama po hronologiji */}
+          <div className="flex flex-col md:flex-row items-stretch gap-3">
+            {/* Stubac 1 — Ana i med */}
+            <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+              <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">1</span>
               <p className="text-kolo-text leading-relaxed text-sm">
-                Ani pukne bojler. Pronalazi Lazara, vodoinstalatera. Lazar dolazi, popravlja, Ana mu šalje <strong>4.000 POEN</strong>.
+                Ana proda 5 tegli meda Milanu za <strong>4.000 POEN</strong>.
               </p>
             </div>
-            {/* Kartica 3 — Hleb i pribori */}
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 11l1-1c1-1 3-1 4 0l1 1c1 1 3 1 4 0l1-1c1-1 3-1 4 0l1 1v8H3v-8z"/>
-                    <line x1="3" y1="14" x2="21" y2="14"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-mono text-kolo-muted">3</span>
-              </div>
+            {/* Strelica 1 → 2 */}
+            <div className="flex items-center justify-center text-kolo-muted shrink-0">
+              <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </div>
+            {/* Stubac 2 — Veš mašina */}
+            <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+              <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">2</span>
               <p className="text-kolo-text leading-relaxed text-sm">
-                Lazar pronalazi Mariju, koja peče hleb u svojoj kuhinji. Naruči, Marija mu donese, on joj prosledi POEN. Marija ga sutradan uputi na Stefana, koji rezbari drvene kuhinjske pribore — i krug se nastavlja.
+                Ani se pokvari veš mašina. Lazar joj popravi za <strong>4.000 POEN</strong>.
               </p>
             </div>
-            {/* Kartica 4 — Zaključak */}
-            <div className="bg-kolo-green-900 text-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center shrink-0">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                  </svg>
-                </div>
-                <span className="text-xs font-mono text-white/60 uppercase tracking-wide">zaključak</span>
-              </div>
-              <p className="leading-relaxed text-sm">
-                Sve transakcije ostaju u javnoj evidenciji platforme — vide se pseudonim, iznos i vreme svake razmene.
+            {/* Strelica 2 → 3 */}
+            <div className="flex items-center justify-center text-kolo-muted shrink-0">
+              <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </div>
+            {/* Stubac 3 — Marija i hleb */}
+            <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+              <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">3</span>
+              <p className="text-kolo-text leading-relaxed text-sm">
+                Lazar kupuje domaći hleb koji Marija peče u svojoj kuhinji za <strong>500 POEN</strong>.
               </p>
-              <p className="leading-relaxed text-sm font-semibold">
-                Lanac poverenja je vidljiv, i ne briše se.
+            </div>
+            {/* Strelica 3 → 4 */}
+            <div className="flex items-center justify-center text-kolo-muted shrink-0">
+              <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </div>
+            {/* Stubac 4 — Stefan i pribori */}
+            <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+              <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">4</span>
+              <p className="text-kolo-text leading-relaxed text-sm">
+                Marija ga uputi na Stefana, koji rezbari drvene kuhinjske pribore.
               </p>
             </div>
           </div>
+
+          {/* Suptilan most ka zaključku — izvan stubaca */}
+          <p className="text-center text-sm text-kolo-muted italic">
+            … i krug se nastavlja.
+          </p>
         </section>
 
         {/* ── SEKCIJA 9 — PIJACA PREVIEW ──────────────────────────── */}
@@ -551,42 +545,69 @@ export default async function Home() {
           </section>
         )}
 
-        {/* ── SEKCIJA 10 — POSLEDNJE TRANSAKCIJE ─────────────────────── */}
-        {poslednjeTransakcije.length > 0 && (
-          <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-                Šta se trenutno dešava
+        {/* ── SEKCIJA 10 — POSLEDNJE TRANSAKCIJE + LANAC POVERENJA ─────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+          {/* Leva polovina — poslednje transakcije */}
+          {poslednjeTransakcije.length > 0 && (
+            <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 flex flex-col">
+              <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
+                Poslednjih {poslednjeTransakcije.length} transakcija
               </h2>
-              <span className="text-xs text-kolo-muted">poslednjih {poslednjeTransakcije.length}</span>
-            </div>
-            <div className="divide-y divide-kolo-bg">
-              {poslednjeTransakcije.map((t) => (
-                <div
-                  key={t.id}
-                  className="grid items-center py-3 text-sm gap-3"
-                  style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 5.5rem 5.5rem" }}
-                >
-                  <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
-                  <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
-                  </svg>
-                  <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
-                  <span className="font-semibold text-kolo-text whitespace-nowrap text-right">
-                    {t.amount.toLocaleString("sr-RS")} P
-                  </span>
-                  <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
-                    {relativnoVreme(t.createdAt)}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs text-kolo-muted mt-5 text-center">
-              Punu evidenciju vide registrovani članovi platforme.
-            </p>
+              <div className="divide-y divide-kolo-bg flex-1">
+                {poslednjeTransakcije.map((t) => (
+                  <div
+                    key={t.id}
+                    className="grid items-center py-3 text-sm gap-2"
+                    style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 6rem 5rem" }}
+                  >
+                    <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
+                    <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"/>
+                      <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                    <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
+                    <span className="font-semibold text-kolo-text whitespace-nowrap text-right tabular-nums">
+                      {t.amount.toLocaleString("sr-RS")} POEN
+                    </span>
+                    <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
+                      {relativnoVreme(t.createdAt)}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-kolo-muted mt-5 text-center">
+                Punu evidenciju vide registrovani članovi platforme.
+              </p>
+            </section>
+          )}
+
+          {/* Desna polovina — strukturalni dokaz */}
+          <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 flex flex-col">
+            <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
+              Strukturalni dokaz
+            </h2>
+            <ul className="divide-y divide-kolo-bg">
+              <li className="flex items-center gap-3 py-3 text-sm">
+                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                <p className="text-kolo-text leading-snug">
+                  Sistem ne zavisi od priliva novog novca.
+                </p>
+              </li>
+              <li className="flex items-center gap-3 py-3 text-sm">
+                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                <p className="text-kolo-text leading-snug">
+                  Svaki POEN koji postoji izdat je od strane Protokola kao nagrada za evidentiran doprinos Zajedničkom dobru.
+                </p>
+              </li>
+              <li className="flex items-center gap-3 py-3 text-sm">
+                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                <p className="text-kolo-text leading-snug">
+                  Zbir svih POEN računa u sistemu uvek je nula.
+                </p>
+              </li>
+            </ul>
           </section>
-        )}
+        </div>
 
         {/* ── SEKCIJA 11 — KO STOJI IZA KOLA ──────────────────────── */}
         <section className="bg-white rounded-2xl card-shadow overflow-hidden">
@@ -617,69 +638,6 @@ export default async function Home() {
                 Pročitaj celu priču →
               </Link>
             </div>
-          </div>
-        </section>
-
-        {/* ── SEKCIJA 12 — POTPUNA TRANSPARENTNOST ─────────────────── */}
-        <section id="transparentnost" className="space-y-3">
-          <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            Potpuna transparentnost
-          </h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {/* Strukturalni dokaz */}
-            <div className="bg-white rounded-2xl card-shadow p-5">
-              <div className="w-8 h-8 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text text-sm mb-2">Strukturalni dokaz</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">
-                Zbir svih POEN računa u sistemu uvek je nula. Ovo je matematičko svojstvo, ne obećanje. Sistem ne zavisi od priliva novog novca — svaki POEN koji postoji evidentiran je kao obaveza Protokola prema zajednici.
-              </p>
-            </div>
-            {/* Pravni dokaz */}
-            <div className="bg-white rounded-2xl card-shadow p-5">
-              <div className="w-8 h-8 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text text-sm mb-2">Pravni okvir</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">
-                POEN nije zakonsko sredstvo plaćanja, nije kriptovaluta, nije trampa u pravnom smislu. Donacije Fondaciji i emisija POEN-a su dva potpuno odvojena akta. Nije digitalna imovina u smislu važećeg zakona.
-              </p>
-            </div>
-            {/* Proaktivna transparentnost */}
-            <div className="bg-white rounded-2xl card-shadow p-5">
-              <div className="w-8 h-8 rounded-xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700 mb-3">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-                </svg>
-              </div>
-              <p className="font-semibold text-kolo-text text-sm mb-2">Proaktivnost pred regulatorom</p>
-              <p className="text-xs text-kolo-muted leading-relaxed">
-                NBS, Poreska uprava i nadležna ministarstva kontaktirana su pre lansiranja. Svaki zvanični odgovor biće javno objavljen na ovoj stranici, bez izmena.
-              </p>
-            </div>
-          </div>
-          {/* Javni dokumenti */}
-          <div className="bg-kolo-bg rounded-2xl p-4 flex flex-wrap gap-3">
-            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide self-center mr-1">Javni dokumenti:</span>
-            {[
-              { naziv: "Pravilnik", href: "#" },
-              { naziv: "Statut Fondacije", href: "#" },
-              { naziv: "Politika privatnosti", href: "/privatnost" },
-              { naziv: "Uslovi korišćenja", href: "/uslovi" },
-            ].map((d) => (
-              <Link
-                key={d.naziv}
-                href={d.href}
-                className="text-xs font-medium text-kolo-green-700 hover:text-kolo-green-900 bg-white rounded-lg px-3 py-1.5 card-shadow transition-colors"
-              >
-                {d.naziv}
-              </Link>
-            ))}
           </div>
         </section>
 
@@ -856,7 +814,6 @@ export default async function Home() {
               <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Sistem</p>
               <ul className="space-y-2 text-sm text-kolo-muted">
                 <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Kako funkcioniše</Link></li>
-                <li><a href="#transparentnost" className="hover:text-kolo-green-700 transition-colors">Transparentnost</a></li>
                 <li><a href="#" className="hover:text-kolo-green-700 transition-colors">Pravilnik</a></li>
                 <li><a href="#sta-kolo-nije" className="hover:text-kolo-green-700 transition-colors">Šta KOLO nije</a></li>
               </ul>
