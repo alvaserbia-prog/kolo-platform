@@ -9,7 +9,7 @@ const JAVNE_RUTE = [
 const PRESKOCI = [
   "/login", "/registracija", "/oauth",
   "/api/", "/_next", "/favicon.ico",
-  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/flags/",
+  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/flags/",
 ];
 
 export default async function proxy(req: NextRequest) {
@@ -39,6 +39,6 @@ export default async function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|flags).*)",
+    "/((?!_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|flags).*)",
   ],
 };

@@ -4,212 +4,295 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "O nama — KOLO Fondacija",
   description:
-    "Nikola Šarić, lekar iz Sombora, 14 godina gradi sistem uzajamnosti. Priča o KOLO-u, Fondaciji i tome zašto ovo postoji.",
+    "Nikola Šarić, lekar iz Sombora, 14 godina gradi sistem uzajamnosti. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
 };
 
 export default function ONamaPage() {
   return (
     <div className="space-y-6 pb-12">
 
-      {/* ── SEKCIJA 1 — HERO (bez fotografije) ───────────────────── */}
+      {/* ── HERO ──────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
-        <div className="max-w-[580px]">
-          <div className="inline-block bg-white/10 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            KOLO Fondacija · Sombor
+        <div className="flex flex-col-reverse md:flex-row md:items-center gap-8 md:gap-12">
+          <div className="max-w-[580px]">
+            <div className="inline-block bg-white/10 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+              KOLO Fondacija · Sombor
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-3" style={{ letterSpacing: "-0.02em" }}>
+              Nikola Šarić
+            </h1>
+            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 max-w-[520px]">
+              Lekar iz Sombora koji četrnaest godina gradi sistem razmene bez novca.
+              Ovo je priča o tome i poziv da ovaj sistem gradimo zajedno.
+            </p>
+            {/* Mini-sadržaj */}
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
+              <a href="#prica" className="hover:text-white/80 transition-colors">Priča</a>
+              <span className="text-white/20">·</span>
+              <a href="#sta-radimo-sada" className="hover:text-white/80 transition-colors">Šta radimo sada</a>
+              <span className="text-white/20">·</span>
+              <a href="#kako-se-ukljucujes" className="hover:text-white/80 transition-colors">Kako se uključuješ</a>
+              <span className="text-white/20">·</span>
+              <a href="#fondacija" className="hover:text-white/80 transition-colors">Fondacija</a>
+              <span className="text-white/20">·</span>
+              <a href="#dokumenti" className="hover:text-white/80 transition-colors">Dokumenti</a>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-3" style={{ letterSpacing: "-0.02em" }}>
-            Nikola Šarić
-          </h1>
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8">
-            Lekar iz Sombora koji 14 godina gradi sistem uzajamnosti.<br />
-            Ovo je priča o tome i o Fondaciji koja ga danas nosi.
-          </p>
-          {/* Mini-sadržaj */}
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
-            <a href="#prica" className="hover:text-white/80 transition-colors">Priča</a>
-            <span className="text-white/20">·</span>
-            <a href="#sira-slika" className="hover:text-white/80 transition-colors">Šira slika</a>
-            <span className="text-white/20">·</span>
-            <a href="#fondacija" className="hover:text-white/80 transition-colors">Fondacija</a>
-            <span className="text-white/20">·</span>
-            <a href="#dokumenti" className="hover:text-white/80 transition-colors">Javno i dostupno</a>
+          <div className="shrink-0 mx-auto md:ml-auto">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/nikola-saric.png"
+              alt="Nikola Šarić"
+              width={176}
+              height={176}
+              className="rounded-full object-cover ring-4 ring-white/10 shadow-xl"
+              style={{ width: "144px", height: "144px", display: "block" }}
+            />
           </div>
         </div>
       </section>
 
-      {/* ── SEKCIJA 2 — PRIČA ─────────────────────────────────────── */}
+      {/* ── CITAT ─────────────────────────────────────────────────── */}
+      <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-8 border-l-4 border-kolo-green-700">
+        <div className="max-w-[680px] mx-auto">
+          <blockquote
+            className="text-base md:text-lg text-kolo-text mb-4"
+            style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
+          >
+            <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>Kao lekaru poziv mi je da pomažem ljudima. Smatram da je iz istog razloga osmišljen i
+            sistem u kome živimo. Ali, svaki dan gledam ljude kojima bi taj sistem trebalo da pomogne,
+            ali ne može — poljoprivrednike, penzionere, nezaposlene, mlade. Duboko verujem da svi oni
+            imaju svoje mesto u zajednici i mogu da joj doprinesu na svoj način. Samo im treba
+            infrastruktura.<span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
+          </blockquote>
+          <p className="text-sm text-kolo-muted font-medium">— Nikola Šarić</p>
+        </div>
+      </section>
+
+      {/* ── ŠTA NAS JE DOVELO OVDE ────────────────────────────────── */}
       <section id="prica" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[660px] mx-auto">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
             Priča
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-8" style={{ letterSpacing: "-0.02em" }}>
-            Zašto ovo postoji
+            Šta nas je dovelo ovde
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
             <p>
-              Nikola je lekar. To je profesija koja ga svakodnevno vodi u kuće ljudi koje formalna ekonomija
-              ne vidi — starijih osoba sa penzijom koja ne pokriva lekove, samohranih majki koje rade više
-              poslova a nijedan nije prijavljen, zanatlija koji znaju sve osim kako da dođu do kupca. Ideja
-              za KOLO nije došla iz ekonomskog fakulteta. Došla je iz svakodnevnog kontakta sa ljudima
-              kojima je sistem rekao da ne postoje.
+              Prva sumnja u sistem u koji sam tek trebalo da uđem došla je još na medicinskom fakultetu.
+              Postavio sam pitanje koje je delovalo obično, a odgovor sam pronašao tek kad sam pogledao ko
+              finansira istraživanja. Tada sam prvi put video da nauka koju učim nije neutralna i da postoje
+              skriveni interesi koji struku usmeravaju prema profitu čiji krajnji cilj nije zdravlje nego
+              lečenje. Ista logika oblikuje sve ostale sisteme — proizvodnju hrane, organizaciju zdravstva,
+              tržište rada. Završio sam medicinu jer sam zaključio da se sistem lakše menja iznutra.
             </p>
             <p>
-              Prvi pokušaj bio je ALVA — skica alternativne valute, 2012. godine. Intuicija bez strukture,
-              koncept koji nije mogao da izdrži prvu ozbiljnu proveru pravnog okvira ni tehničku realizaciju.
-              Druga iteracija, 2013–14, bio je pokušaj razrade kroz udruženje Tranziciona alternativa —
-              sistem je počeo da se gradi, ali platformu nismo uspeli da dovedemo do upotrebljivog stanja.
-              Treća, 2016–17, bila je Alva Fondacija u Stanišiću, sa pravom platformom i pravim korisnicima —
-              ali koncept je za većinu bio presložen, a interfejs previše komplikovan da bi se sistem održao
-              bez stalnog objašnjavanja.
+              Paralelno sa medicinom, godinama sam se obrazovao u oblasti komplementarnih ekonomskih sistema.
+              U martu 2014. bio sam gost emisije <em>Na rubu znanosti</em> kod Krešimira Mišaka na HRT, u
+              epizodi o lokalnim i alternativnim valutama, gde sam predstavio ALVU — tadašnju formu projekta.
+              Krajem juna 2016. proveo sam nedelju dana na Pelionu, u letnjoj školi Kalikalos, na radionici{" "}
+              <em>Innovation in Exchange and Finance</em> koju je vodio Thomas Greco — autor knjige{" "}
+              <em>The End of Money and the Future of Civilization</em> i jedan od najznačajnijih svetskih
+              teoretičara komplementarnih valuta. U grupi je između ostalih bio i tim iz Volosa koji je već
+              četiri godine vodio Volos TEM, jednu od najpoznatijih grčkih lokalnih mreža razmene.
+              Organizovao sam više tribina na ovu temu — u Stanišiću, Somboru, Novom Sadu i Beogradu. To su
+              godine u kojima sam shvatio da postoji svetska familija sistema koji rade po istim principima —
+              i da koncept treba adaptirati za naše uslove.
             </p>
-            <p className="text-kolo-muted">
-              Četrnaest godina nije slika upornosti. To je vreme koje je bilo potrebno da tri stvari budu
-              rešene istovremeno: pravni okvir koji može da stoji pred inspektorom, platforma koja može da
-              nosi prve članove bez rušenja, i struktura koja nastavlja da radi ako jednog dana Nikola ne
-              bude tu.
-            </p>
-            <p className="text-kolo-muted">
-              KOLO danas postoji kao platforma u ranoj fazi i kao Fondacija u postupku registracije u
-              Somboru. Dokumentacija je proaktivno podneta poreskom inspektoru. Od Narodne banke Srbije,
-              Poreske uprave i nadležnih ministarstava zatražena su zvanična mišljenja — svaki odgovor biće
-              javno objavljen. Veštačka inteligencija je, poslednjih godinu dana, postala alat koji je
-              konačno omogućio da se ogroman dokumentacioni okvir iznese do kraja — Pravilnik, Statut,
-              Politika privatnosti, Uslovi korišćenja, operativni materijali. Nikola više nije sam. Tim se
-              proširuje, prve krugovi se pripremaju. Ovo je trenutak pre prvih članova — i to je, posle
-              14 godina, velika stvar.
+            <p>
+              Ideja je tokom vremena prošla kroz nekoliko formi: ALVA (2012), Tranziciona alternativa
+              (2013–14), Alva Fondacija (2016–17), i sada KOLO. Sada nakon četrnaest godina imamo spreman
+              pravni okvir, platformu kao i strukturu koja može da radi nezavisno od bilo koga.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── SEKCIJA 3 — CITAT ─────────────────────────────────────── */}
-      <section className="bg-kolo-green-900 rounded-2xl p-8 md:p-12 text-white">
-        <div className="max-w-[680px] mx-auto">
-          <div className="text-kolo-gold-400 font-serif text-6xl leading-none mb-4" style={{ fontFamily: "Georgia, serif" }}>&ldquo;</div>
-          <blockquote className="text-lg md:text-xl leading-relaxed text-white/90 mb-6" style={{ lineHeight: "1.7" }}>
-            Lekar sam petnaest godina. Svaki dan gledam ljude kojima sistem kaže da ne postoje —
-            penzionerku koja zna sve o travama, komšiju koji može da okreči ceo stan za dva dana,
-            farmera čiji je med bolji od svega u prodavnici. Svi oni postoje. Samo im treba mesto
-            gde to ne treba da dokazuju.
-          </blockquote>
-          <p className="text-sm text-white/50 font-medium">— Nikola Šarić</p>
-        </div>
-      </section>
-
-      {/* ── SEKCIJA 4 — ŠIRA SLIKA ───────────────────────────────── */}
-      <section id="sira-slika" className="space-y-4">
-
-        <div className="bg-white rounded-2xl card-shadow p-8 md:p-10">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Šira slika
+      {/* ── ŠTA RADIMO SADA ───────────────────────────────────────── */}
+      <section id="sta-radimo-sada" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[760px] mx-auto">
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
+            <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              Šta radimo sada
+            </div>
+            <span className="text-xs text-kolo-muted font-medium tracking-wide">Maj 2026.</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
-            Ne izmišljamo toplu vodu
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
+            KOLO se priprema za beta fazu
           </h2>
-          <p className="text-kolo-muted leading-relaxed max-w-[660px]" style={{ lineHeight: "1.7" }}>
-            Ideja da krug može da organizuje sopstvenu razmenu — da evidentira doprinos svojih članova
-            i uspostavi jedinicu koja nije novac ali radi posao novca u zatvorenom krugu — nije nova. Nije
-            ni egzotična. Decenijama postoje dokumentovane mreže, u različitim zemljama i pod različitim
-            okolnostima, u kojima ljudi razmenjuju rad, dobra i znanje kroz sopstvene sisteme evidencije.
-            Evropska unija od 2021. godine socijalnu ekonomiju formalno prepoznaje kao strateški sektor.
-            KOLO ulazi u taj tok.
+          <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
+            Završavaju se poslednji koraci pred otvaranje sistema prvim korisnicima.
+          </p>
+
+          <div className="space-y-5">
+            {[
+              {
+                naslov: "Registracija Fondacije",
+                tekst: "U toku je postupak promene naziva (iz Alva Fondacije u KOLO Fondaciju), preseljenja sedišta u Sombor i usvajanja novih akata u Agenciji za privredne registre.",
+              },
+              {
+                naslov: "Platforma",
+                tekst: "Završne pripreme za beta fazu. Razvoj je u poslednjem segmentu pre nego što platforma bude otvorena za prve verifikovane korisnike.",
+              },
+              {
+                naslov: "Pravna i ekonomska verifikacija sistema",
+                tekst: "Dokumentacioni okvir KOLO sistema — Pravilnik, Statut, Politika privatnosti, Uslovi korišćenja — predat je sudskim veštacima i advokatima na nezavisnu proveru. Provera nije ukazala na bitne pravne ni strukturne nedostatke. Sa eksternim konsultantima u toku je finalna provera računovodstvene logike sistema. Rezime se očekuje.",
+              },
+              {
+                naslov: "Komunikacija sa regulatorima",
+                tekst: "Dokumentacija je proaktivno dostupna nadležnim organima. Po pokretanju sistema, od Narodne banke Srbije, Poreske uprave i nadležnih ministarstava biće formalno zatraženo zvanično mišljenje. Kad odgovori stignu, biće javno objavljeni — bez izmena.",
+              },
+              {
+                naslov: "Tim",
+                tekst: "Upravni odbor Fondacije i spoljni konsultanti. U beta fazi formira se uži krug saradnika — programera, prevodilaca, prvih verifikovanih korisnika — koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle beta faze, doprinos svakog verifikovanog korisnika — kroz razvoj softvera, prevođenje, kreiranje sadržaja, organizaciju aktivnosti, mentorstvo, moderaciju — biva prepoznat kroz Program evidencije doprinosa.",
+              },
+            ].map((stavka) => (
+              <div key={stavka.naslov} className="flex gap-4">
+                <div className="w-2 h-2 rounded-full bg-kolo-green-700 mt-2.5 shrink-0" />
+                <div>
+                  <p className="font-semibold text-kolo-text mb-1">{stavka.naslov}</p>
+                  <p className="text-sm text-kolo-muted leading-relaxed" style={{ lineHeight: "1.7" }}>
+                    {stavka.tekst}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-kolo-border">
+            <p className="text-sm font-medium text-kolo-green-900 italic" style={{ lineHeight: "1.7" }}>
+              Cilj svih ovih koraka je da Fondacija što pre prestane da bude centar sistema.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── KAKO SE UKLJUČUJEŠ ─────────────────────────────────────── */}
+      <section id="kako-se-ukljucujes" className="space-y-5">
+        {/* Uvod */}
+        <div className="bg-white rounded-2xl card-shadow p-8 md:p-10">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
+            Kako se uključuješ
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
+            Sistem se gradi kroz različite oblike doprinosa
+          </h2>
+          <p className="text-kolo-muted leading-relaxed max-w-[680px]" style={{ lineHeight: "1.7" }}>
+            Bilo da imaš pet minuta, ekspertizu, sredstva ili kontakt — postoji kanal kroz koji možeš da uđeš.
           </p>
         </div>
 
-        {/* Tri kartice */}
-        <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
-          Tri primera koja vredi znati
-        </div>
+        {/* Primarne kartice (3) */}
         <div className="grid md:grid-cols-3 gap-4">
           {[
             {
-              naziv: "LETS",
-              meta: "od 1983. · 1.500+ mreža u 39 zemalja",
-              tekst: "Michael Linton je 1983. u malom gradu u Kanadi pokrenuo prvu Local Exchange Trading System — lokalnu mrežu u kojoj članovi razmenjuju usluge koristeći sopstvenu jedinicu evidencije. Za četrdeset godina model se proširio po svetu. Tipična LETS mreža okuplja pedesetak do dvestotinak ljudi, zbir svih računa uvek je nula, a jedinica se ne menja u nacionalnu valutu.",
-              zakljucak: "Mreža lokalnog okupljanja oko sopstvene jedinice evidencije je proveren model — ne 5 godina, ne 10, nego četrdeset godina u 39 zemalja. KOLO ne izmišlja strukturu — adaptira je za srpski kontekst.",
+              naslov: "Rani pristup i verifikacija",
+              tekst: "Ako još nije trenutak za aktivno uključivanje, ali želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice i njihov rad u beta fazi posebno se prepoznaje kroz Program evidencije doprinosa.",
+              cta: "Registruj se besplatno →",
+              ctaHref: "/registracija",
+              ctaIsLink: true,
             },
             {
-              naziv: "Sardex",
-              meta: "Sardinija · od 2010. · 3.200 članova, 43M€ prometa",
-              tekst: "Osnovan 2010. kao odgovor na dužničku krizu. Četvoro mladih Sardinjana, bez ekonomskog obrazovanja, pokrenulo je mrežu uzajamnog kredita za lokalne učesnike. Do 2018. dostigli su 3.200 članova i 43 miliona evra prometa. Sistem radi na istom principu kao KOLO — svaki član startuje na nuli, zbir svih računa je uvek nula, nema kamate. Evropska komisija ih je uključila u DigiPay4Growth. Model je repliciran u osam regija.",
-              zakljucak: "Lokalni tim, bez velike investicije i bez državne podrške, uspeo je za nepunih deset godina da izgradi mrežu koja radi. Potrebni su struktura, istrajnost i uvid u problem sopstvene sredine.",
+              naslov: "Postani pokrovitelj",
+              tekst: "Ako vodiš firmu ili imaš sredstva da podržiš razvoj, donacija Fondaciji direktno omogućava operativnu održivost sistema u prvim mesecima. Pokrovitelji su javno navedeni, a nivoi doprinosa su transparentno definisani u Pravilniku.",
+              cta: "Piši nam → kontakt@ekolo.rs",
+              ctaHref: "mailto:kontakt@ekolo.rs",
+              ctaIsLink: false,
             },
             {
-              naziv: "Fureai Kippu",
-              meta: "Japan · od kasnih 1980-ih · 5.000+ učesničkih tačaka",
-              tekst: "Japanski sistem razmene zasnovan na vremenu i brizi za starije. Članovi koji pomažu starijim ljudima — kroz kućnu negu, pratnju, kuvanje — beleže odrađene sate i mogu ih iskoristiti za sebe ili preneti članu porodice u drugom delu zemlje. Vlada Japana ga je formalno prepoznala kao deo nacionalne politike brige o starijim ljudima.",
-              zakljucak: "Sistem evidencije doprinosa može postati infrastruktura brige o osetljivim grupama. Programi podrške u KOLO sistemu — majkama, starijima, školovanju — idu po toj logici.",
+              naslov: "Pomozi razvoju",
+              tekst: "Ako si programer, prevodilac, dizajner ili nešto drugo što može da pomogne — javi se. Posebno tražimo ljude koji mogu da rade na razvoju platforme.",
+              cta: "Piši nam → kontakt@ekolo.rs",
+              ctaHref: "mailto:kontakt@ekolo.rs",
+              ctaIsLink: false,
             },
-          ].map((primer) => (
-            <div key={primer.naziv} className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-4">
-              <div>
-                <p className="font-bold text-kolo-green-900 text-lg mb-1" style={{ letterSpacing: "-0.01em" }}>
-                  {primer.naziv}
-                </p>
-                <p className="text-xs text-kolo-muted font-medium">{primer.meta}</p>
-              </div>
-              <p className="text-sm text-kolo-muted leading-relaxed flex-1">{primer.tekst}</p>
-              <div className="bg-kolo-green-100 rounded-xl p-3">
-                <p className="text-xs font-semibold text-kolo-green-700 leading-relaxed">
-                  {primer.zakljucak}
-                </p>
-              </div>
+          ].map((k) => (
+            <div
+              key={k.naslov}
+              className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700"
+            >
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+                {k.naslov}
+              </h3>
+              <p className="text-sm text-kolo-muted leading-relaxed flex-1" style={{ lineHeight: "1.65" }}>
+                {k.tekst}
+              </p>
+              {k.ctaIsLink ? (
+                <Link href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
+                  {k.cta}
+                </Link>
+              ) : (
+                <a href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
+                  {k.cta}
+                </a>
+              )}
             </div>
           ))}
         </div>
 
-        {/* EU kontekst */}
-        <div className="bg-white rounded-2xl card-shadow p-8 md:p-10">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Šta Evropska unija kaže
-          </div>
-          <p className="text-kolo-muted leading-relaxed mb-8 max-w-[580px]">
-            Socijalna ekonomija u Evropi nije marginalna niša — deo je formalnog privrednog okvira.
+        {/* Sekundarne kartice — specifične ekspertize i drugi oblici */}
+        <div className="pt-2">
+          <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3 px-1">
+            Specifične ekspertize i drugi oblici
           </p>
-          <div className="grid grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {[
-              { broj: "2,8M", opis: "organizacija socijalne ekonomije u EU" },
-              { broj: "13,6M", opis: "zaposlenih u sektoru" },
-              { broj: "10%", opis: "svih preduzeća u Uniji" },
-            ].map((stat) => (
-              <div key={stat.broj} className="text-center">
-                <p className="text-4xl font-bold text-kolo-green-700 mb-2" style={{ letterSpacing: "-0.02em" }}>
-                  {stat.broj}
+              {
+                naslov: "Komunikacija i sadržaj",
+                tekst: "Pisci, novinari, urednici, video-producenti, dizajneri. Posebna potreba: ljudi koji mogu da prevedu složene koncepte u jasan jezik za različite publike (farmeri, penzioneri, mladi).",
+              },
+              {
+                naslov: "Medijski i akademski kontakti",
+                tekst: "Novinari koji bi pisali o sistemu, urednici otvoreni za teme komplementarnih ekonomija, akademici (ekonomisti, pravnici, sociolozi, antropolozi). Kritika iznutra jača sistem koliko i podrška.",
+              },
+              {
+                naslov: "Upravljanje i operativa",
+                tekst: "Iskustvo u vođenju preduzeća, NVO ili većih organizacija. Fondaciji je potrebno operativno upravljanje, koordinacija između Upravnog odbora i izvršnih funkcija, izgradnja unutrašnjih procesa.",
+              },
+              {
+                naslov: "Pravna i računovodstvena ekspertiza",
+                tekst: "Pravnici sa interesom za zadružno pravo, fondacijsko pravo i pitanja digitalnih platformi, kao i računovođe sa iskustvom u neprofitnom sektoru — dragocen su resurs.",
+              },
+              {
+                naslov: "Strukovne i institucionalne veze",
+                tekst: "Kontakti u zadrugarstvu, asocijacijama proizvođača, sindikatima, civilnom sektoru, lokalnim samoupravama — sve to ubrzava širenje sistema u zajednicama gde ima najviše smisla.",
+              },
+              {
+                naslov: "Prostor i događaji",
+                tekst: "Ako možeš da obezbediš prostor za tribinu, prezentaciju ili manji skup u svom gradu — Sombor i okolina su prvi krug, ali svaki grad u Srbiji i regionu je dobrodošao.",
+              },
+              {
+                naslov: "Lična donacija",
+                tekst: "Ako nemaš firmu ali imaš mogućnost i želju da podržiš sistem direktno, fizička lica takođe mogu biti pokrovitelji pod istim uslovima kao firme.",
+              },
+              {
+                naslov: "Ostali oblici doprinosa",
+                tekst: "Sistem se gradi i kroz oblike doprinosa koji još nisu predviđeni. Ako vidiš način da pomogneš koji nije gore — javi se, razgovaraćemo.",
+              },
+            ].map((k) => (
+              <div key={k.naslov} className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-2">
+                <p className="font-semibold text-kolo-text text-sm leading-snug">{k.naslov}</p>
+                <p className="text-xs text-kolo-muted leading-relaxed" style={{ lineHeight: "1.6" }}>
+                  {k.tekst}
                 </p>
-                <p className="text-xs text-kolo-muted leading-relaxed">{stat.opis}</p>
               </div>
             ))}
           </div>
-          <p className="text-sm text-kolo-muted leading-relaxed max-w-[660px]" style={{ lineHeight: "1.7" }}>
-            U decembru 2021. Evropska komisija je usvojila Akcioni plan za socijalnu ekonomiju — dokument
-            sa 38 konkretnih mera za period do 2030. U junu 2023. Savet EU doneo je Preporuku o uslovima
-            za razvoj socijalne ekonomije, pozivajući države članice da usvoje nacionalne strategije.
-            Srbija nije članica Unije, ali je u procesu pristupanja — i okvir koji KOLO gradi direktno se
-            usklađuje sa tim pravcem.
-          </p>
         </div>
 
-        {/* Gde je tu KOLO */}
-        <div className="bg-white rounded-2xl card-shadow p-8 md:p-10 border-l-4 border-kolo-green-700">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
-            Gde je tu KOLO
-          </div>
-          <p className="text-kolo-text leading-relaxed max-w-[660px]" style={{ lineHeight: "1.75" }}>
-            KOLO nije kopija ni jedne od navedenih mreža, i razlike su stvarne — KOLO koristi zadružnu
-            strukturu kao okosnicu lokalnog okupljanja, uvodi ZRNO kao odvojenu jedinicu glasa sa
-            kvadratnim korenom kao zaštitom od koncentracije moći, i pravnu prirodu svake transakcije
-            definiše kao donaciju dobra ili usluge mreži, ne kao prodaju ili trampu. Ali fundamentalno
-            pripadamo istoj familiji — sistemi evidencije razmene među ljudima, koji rade komplementarno
-            sa zvaničnom valutom, i koji rade za članove umesto da ih koriste. Ono što smo 14 godina
-            radili nije eksperimentisanje. To je adaptacija proverene kategorije sistema u srpski pravni
-            i društveni kontekst — sa svim posebnostima koje taj kontekst zahteva.
+        {/* Zatvarajući kontakt blok */}
+        <div className="bg-kolo-green-100 rounded-2xl p-5 text-center">
+          <p className="text-sm text-kolo-green-900 leading-relaxed">
+            Za sva pitanja, pišite na{" "}
+            <a href="mailto:kontakt@ekolo.rs" className="font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
+              kontakt@ekolo.rs
+            </a>
           </p>
         </div>
-
       </section>
 
-      {/* ── SEKCIJA 5 — FONDACIJA ────────────────────────────────── */}
+      {/* ── KOLO FONDACIJA ────────────────────────────────────────── */}
       <section id="fondacija" className="bg-white rounded-2xl card-shadow overflow-hidden">
         <div className="p-8 md:p-10 border-b border-kolo-border">
           <div className="flex items-start justify-between gap-6">
@@ -221,15 +304,13 @@ export default function ONamaPage() {
                 KOLO Fondacija
               </h2>
             </div>
-            {/* Placeholder za SVG znak */}
+            {/* Znak — tri figure u krugu sa klasom */}
             <div className="shrink-0 w-20 h-20 rounded-2xl bg-kolo-green-100 flex items-center justify-center text-kolo-green-700">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Tri figure u krug */}
                 <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.3"/>
                 <circle cx="20" cy="13" r="4" fill="currentColor" opacity="0.7"/>
                 <circle cx="27" cy="26" r="4" fill="currentColor" opacity="0.7"/>
                 <circle cx="13" cy="26" r="4" fill="currentColor" opacity="0.7"/>
-                {/* Klas - centralna linija */}
                 <line x1="20" y1="17" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
                 <line x1="23.5" y1="22" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
                 <line x1="16.5" y1="22" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
@@ -246,7 +327,7 @@ export default function ONamaPage() {
           {[
             {
               naslov: "Sedište i registracija",
-              tekst: "Sombor, Šetalište 14. Fondacija je u postupku registracije u Agenciji za privredne registre. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić) — postupak promene naziva u KOLO Fondaciju i preseljenja u Sombor aktivno je u toku.",
+              tekst: "Sombor, Šetalište 14. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić).",
             },
             {
               naslov: "Organi",
@@ -265,7 +346,7 @@ export default function ONamaPage() {
         </div>
       </section>
 
-      {/* ── SEKCIJA 6 — JAVNO I DOSTUPNO ─────────────────────────── */}
+      {/* ── JAVNO I DOSTUPNO ──────────────────────────────────────── */}
       <section id="dokumenti" className="bg-white rounded-2xl card-shadow p-8 md:p-10">
         <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
           Javno i dostupno
@@ -348,11 +429,11 @@ export default function ONamaPage() {
         </div>
       </section>
 
-      {/* ── SEKCIJA 7 — CTA ──────────────────────────────────────── */}
+      {/* ── CTA ───────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
           Nema reklama, nema pretplate, nema skrivenih nagodbi.<br />
-          Ima sistem i ima krug koja se upravo formira.
+          Ima sistem i ima krug koji se upravo formira.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           <Link
@@ -368,7 +449,7 @@ export default function ONamaPage() {
             Kako funkcioniše
           </Link>
         </div>
-        <p className="text-xs text-white/40">Rani pristup · Alpha faza · Fondacija u registraciji</p>
+        <p className="text-xs text-white/40">Rani pristup · Beta · Fondacija u registraciji</p>
       </section>
 
     </div>
