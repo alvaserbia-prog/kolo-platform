@@ -4,35 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import JezikSvitcer from "@/components/JezikSvitcer";
+import PublicNav from "@/components/PublicNav";
 
 export default async function PublicHeader() {
   const session = await getServerSession(authOptions);
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-kolo-border">
-      <div className="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between gap-6">
-        <div className="flex items-center gap-6 shrink-0">
+      <div className="max-w-[1140px] mx-auto px-6 h-16 flex items-center justify-between gap-4 md:gap-6">
+        <div className="flex items-center gap-4 md:gap-6 shrink-0">
           <Link href="/" className="flex items-center gap-2.5">
             <Image src={logoImg} alt="KOLO" width={48} height={28} style={{ height: "auto" }} />
             <span className="font-bold text-kolo-green-900 text-xl tracking-tight">KOLO</span>
           </Link>
           <JezikSvitcer />
         </div>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link href="/pijaca" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
-            Pijaca
-          </Link>
-          <Link href="/kako-funkcionise" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
-            Kako funkcioniše
-          </Link>
-          <Link href="/o-nama" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
-            O nama
-          </Link>
-          <Link href="/o-sistemu" className="text-base text-kolo-muted hover:text-kolo-green-700 transition-colors">
-            O sistemu
-          </Link>
-        </nav>
-        <div className="flex items-center gap-3">
+
+        <PublicNav isLoggedIn={!!session} />
+
+        <div className="hidden md:flex items-center gap-3 shrink-0">
           {session ? (
             <Link
               href="/dashboard"
