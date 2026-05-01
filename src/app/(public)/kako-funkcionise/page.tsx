@@ -111,7 +111,7 @@ const institucije = [
     boja: "bg-kolo-gold-100 text-kolo-gold-600",
     border: "border-kolo-gold-200",
     tekst:
-      "Upravljačko telo sistema. Skupština verifikovanih članova koja odlučuje o svim parametrima sistema kroz glasanje ZRNOM. Aktivira se kada opticaj POENA dostigne 1.000.000. Glasačka snaga se računa po kvadratnom korenu — zaštita od koncentracije moći.",
+      "Dinamično telo sastavljeno od svih korisnika sa pravom glasa — onih koji poseduju ZRNO. Glasačka moć korisnika jednaka je kvadratnom korenu broja ZRNA koja poseduje, čime se sprečava koncentracija moći. Aktivira se kada opticaj POENA dostigne 1.000.000.",
     uloga: "Upravljačko telo · Glasanje ZRNOM",
   },
   {

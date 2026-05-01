@@ -108,11 +108,11 @@ export default function OSistemuPage() {
             },
             {
               naslov: "Fondacija i Protokol",
-              tekst: "KOLO Fondacija i Protokol su instrumenti u službi zajedničkog dobra. Fondacija je pravni instrument — pravno lice koje prima donacije, zastupa sistem pred državom i drži infrastrukturu. Protokol je tehnički instrument — softver koji algoritamski emituje POEN i upravlja ZRNOM.",
+              tekst: "KOLO Fondacija i Protokol čine pravnu i tehničku osnovu sistema. Fondacija je pravni instrument — pravno lice koje prima donacije, zastupa sistem pred državom i drži infrastrukturu. Protokol je tehnički instrument — softverski protokol koji algoritamski emituje POEN i vodi evidenciju ZRNA.",
             },
             {
               naslov: "Gornje Kolo",
-              tekst: "Kada veličina Zajedničkog dobra dostigne određeni nivo — aktivira se Gornje Kolo, upravljačko telo koje odlučuje o svim parametrima sistema.",
+              tekst: "Dinamično upravljačko telo sastavljeno od korisnika sa pravom glasa — onih koji poseduju ZRNO. Glasačka moć je jednaka kvadratnom korenu broja ZRNA, čime se sprečava koncentracija moći. Aktivira se kada opticaj POENA dostigne 1.000.000.",
             },
           ].map((k) => (
             <div

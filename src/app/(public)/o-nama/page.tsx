@@ -320,8 +320,9 @@ export default function ONamaPage() {
             </div>
           </div>
           <p className="text-kolo-muted mt-4 leading-relaxed max-w-[580px]" style={{ lineHeight: "1.7" }}>
-            Fondacija je pravni subjekt sistema. Prima dinare, pokriva operativne troškove, zastupa
-            KOLO pred zajednicom i državom. Ne emituje POEN i ne raspolaže njime.
+            Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u
+            robi, uslugama i novcu, pokriva operativne troškove platforme, drži infrastrukturu i
+            zastupa KOLO pred zajednicom i državom. Ne emituje POEN i ne raspolaže njime.
           </p>
         </div>
 
@@ -333,7 +334,7 @@ export default function ONamaPage() {
             },
             {
               naslov: "Organi",
-              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. U kasnijoj fazi razvoja, kada donacije premaše operativne troškove, aktivira se Gornje Kolo — skupština verifikovanih članova koja glasa kroz ZRNO. Tada Fondacija postaje izvršni organ skupštine. Taj prelazak je strukturni mehanizam, ne obećanje.",
+              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola — kada opticaj POENA dostigne 1.000.000 — Fondacija postaje izvršni organ skupštine, koja odlučuje kroz glasanje ZRNOM (po kvadratnom korenu, kao zaštita od koncentracije moći). Taj prelazak je strukturni mehanizam, ne obećanje.",
             },
             {
               naslov: "Znak",
