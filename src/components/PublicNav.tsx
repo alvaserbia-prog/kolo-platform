@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 
@@ -9,10 +10,13 @@ type Props = {
   isLoggedIn: boolean;
 };
 
+const O_KOLU_PUTANJE = ["/o-nama", "/o-sistemu", "/cesto-postavljena-pitanja"];
+
 export default function PublicNav({ isLoggedIn }: Props) {
   const [oKoluOpen, setOKoluOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname() || "/";
 
   useEffect(() => {
     if (!oKoluOpen) return;
@@ -38,40 +42,107 @@ export default function PublicNav({ isLoggedIn }: Props) {
     };
   }, [mobileOpen]);
 
-  const linkBase =
-    "text-base text-kolo-muted hover:text-kolo-green-700 transition-colors";
-  const dropdownItem =
-    "block px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg hover:text-kolo-green-700 transition-colors";
-  const mobilePrimary =
-    "block py-2.5 text-lg font-medium text-kolo-text hover:text-kolo-green-700 transition-colors";
-  const mobileSecondary =
-    "block py-2 text-base text-kolo-text hover:text-kolo-green-700 transition-colors";
-  const mobileFooter =
-    "block py-1.5 text-kolo-muted hover:text-kolo-green-700 transition-colors";
+  const isActive = (path: string) =>
+    path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/");
+  const isOKoluActive = O_KOLU_PUTANJE.some((p) => isActive(p));
+
+  const topLink = (path: string, label: string) => (
+    <Link
+      href={path}
+      className={`text-base transition-colors ${
+        isActive(path)
+          ? "text-kolo-green-700 font-semibold"
+          : "text-kolo-muted hover:text-kolo-green-700"
+      }`}
+    >
+      {label}
+    </Link>
+  );
+
+  const dropdownItem = (path: string, label: string) => {
+    const active = isActive(path);
+    return (
+      <Link
+        href={path}
+        onClick={() => setOKoluOpen(false)}
+        className={`block px-4 py-2.5 text-sm transition-colors ${
+          active
+            ? "bg-kolo-green-100 text-kolo-green-700 font-semibold"
+            : "text-kolo-text hover:bg-kolo-bg hover:text-kolo-green-700"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  };
+
+  const mobilePrimaryLink = (path: string, label: string) => {
+    const active = isActive(path);
+    return (
+      <Link
+        href={path}
+        onClick={() => setMobileOpen(false)}
+        className={`block py-2.5 text-lg transition-colors ${
+          active
+            ? "text-kolo-green-700 font-bold"
+            : "text-kolo-text font-medium hover:text-kolo-green-700"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  };
+
+  const mobileSecondaryLink = (path: string, label: string) => {
+    const active = isActive(path);
+    return (
+      <Link
+        href={path}
+        onClick={() => setMobileOpen(false)}
+        className={`block py-2 text-base transition-colors ${
+          active
+            ? "text-kolo-green-700 font-semibold"
+            : "text-kolo-text hover:text-kolo-green-700"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  };
+
+  const mobileFooterLink = (path: string, label: string) => {
+    const active = isActive(path);
+    return (
+      <Link
+        href={path}
+        onClick={() => setMobileOpen(false)}
+        className={`block py-1.5 transition-colors ${
+          active
+            ? "text-kolo-green-700 font-semibold"
+            : "text-kolo-muted hover:text-kolo-green-700"
+        }`}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <>
       {/* Desktop nav */}
       <nav className="hidden md:flex items-center gap-6">
-        <Link href="/" className={linkBase}>
-          Početna
-        </Link>
-        <Link href="/pijaca" className={linkBase}>
-          Pijaca
-        </Link>
-        <Link href="/kako-funkcionise" className={linkBase}>
-          Kako funkcioniše
-        </Link>
+        {topLink("/", "Početna")}
+        {topLink("/pijaca", "Pijaca")}
+        {topLink("/kako-funkcionise", "Kako funkcioniše")}
 
-        <div
-          ref={dropdownRef}
-          className="relative"
-          onMouseEnter={() => setOKoluOpen(true)}
-          onMouseLeave={() => setOKoluOpen(false)}
-        >
+        <div ref={dropdownRef} className="relative">
           <button
             onClick={() => setOKoluOpen((v) => !v)}
-            className={`flex items-center gap-1 ${linkBase}`}
+            className={`flex items-center gap-1 text-base transition-colors ${
+              isOKoluActive
+                ? "text-kolo-green-700 font-semibold"
+                : "text-kolo-muted hover:text-kolo-green-700"
+            }`}
             aria-haspopup="true"
             aria-expanded={oKoluOpen}
           >
@@ -94,20 +165,10 @@ export default function PublicNav({ isLoggedIn }: Props) {
           </button>
 
           {oKoluOpen && (
-            <div className="absolute top-full left-0 mt-1 w-60 bg-white rounded-2xl card-shadow py-2 z-50">
-              <Link href="/o-nama" onClick={() => setOKoluOpen(false)} className={dropdownItem}>
-                O nama
-              </Link>
-              <Link href="/o-sistemu" onClick={() => setOKoluOpen(false)} className={dropdownItem}>
-                O sistemu
-              </Link>
-              <Link
-                href="/cesto-postavljena-pitanja"
-                onClick={() => setOKoluOpen(false)}
-                className={dropdownItem}
-              >
-                Često postavljana pitanja
-              </Link>
+            <div className="absolute top-full left-0 mt-1 w-60 bg-white rounded-2xl card-shadow overflow-hidden py-1 z-50">
+              {dropdownItem("/o-nama", "O nama")}
+              {dropdownItem("/o-sistemu", "O sistemu")}
+              {dropdownItem("/cesto-postavljena-pitanja", "Često postavljana pitanja")}
             </div>
           )}
         </div>
@@ -167,42 +228,18 @@ export default function PublicNav({ isLoggedIn }: Props) {
 
           <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
             <div className="space-y-1">
-              <Link href="/" onClick={() => setMobileOpen(false)} className={mobilePrimary}>
-                Početna
-              </Link>
-              <Link href="/pijaca" onClick={() => setMobileOpen(false)} className={mobilePrimary}>
-                Pijaca
-              </Link>
-              <Link
-                href="/kako-funkcionise"
-                onClick={() => setMobileOpen(false)}
-                className={mobilePrimary}
-              >
-                Kako funkcioniše
-              </Link>
+              {mobilePrimaryLink("/", "Početna")}
+              {mobilePrimaryLink("/pijaca", "Pijaca")}
+              {mobilePrimaryLink("/kako-funkcionise", "Kako funkcioniše")}
             </div>
 
             <div className="space-y-1 pt-2 border-t border-kolo-border">
               <div className="text-xs uppercase font-semibold text-kolo-muted tracking-wider pt-3 pb-1">
                 O KOLU
               </div>
-              <Link href="/o-nama" onClick={() => setMobileOpen(false)} className={mobileSecondary}>
-                O nama
-              </Link>
-              <Link
-                href="/o-sistemu"
-                onClick={() => setMobileOpen(false)}
-                className={mobileSecondary}
-              >
-                O sistemu
-              </Link>
-              <Link
-                href="/cesto-postavljena-pitanja"
-                onClick={() => setMobileOpen(false)}
-                className={mobileSecondary}
-              >
-                Često postavljana pitanja
-              </Link>
+              {mobileSecondaryLink("/o-nama", "O nama")}
+              {mobileSecondaryLink("/o-sistemu", "O sistemu")}
+              {mobileSecondaryLink("/cesto-postavljena-pitanja", "Često postavljana pitanja")}
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-3">
@@ -235,27 +272,13 @@ export default function PublicNav({ isLoggedIn }: Props) {
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-2 text-sm">
-              <Link
-                href="/pokrovitelji"
-                onClick={() => setMobileOpen(false)}
-                className={mobileFooter}
-              >
-                Pokrovitelji
-              </Link>
-              <Link href="/uslovi" onClick={() => setMobileOpen(false)} className={mobileFooter}>
-                Uslovi korišćenja
-              </Link>
-              <Link
-                href="/privatnost"
-                onClick={() => setMobileOpen(false)}
-                className={mobileFooter}
-              >
-                Politika privatnosti
-              </Link>
+              {mobileFooterLink("/pokrovitelji", "Pokrovitelji")}
+              {mobileFooterLink("/uslovi", "Uslovi korišćenja")}
+              {mobileFooterLink("/privatnost", "Politika privatnosti")}
               <a
                 href="mailto:kontakt@ekolo.rs"
                 onClick={() => setMobileOpen(false)}
-                className={mobileFooter}
+                className="block py-1.5 text-kolo-muted hover:text-kolo-green-700 transition-colors"
               >
                 Kontakt
               </a>

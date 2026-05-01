@@ -6,6 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import PublicHeader from "@/components/PublicHeader";
+import FaqAkordeon from "@/components/FaqAkordeon";
+import { poBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
@@ -643,59 +645,23 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── SEKCIJA 13 — FAQ ──────────────────────────────────────── */}
+        {/* ── SEKCIJA 13 — FAQ TIZER ───────────────────────────────── */}
         <section id="faq" className="space-y-3">
           <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             Često postavljana pitanja
           </h2>
-          {[
-            {
-              p: "Da li KOLO zamenjuje dinar?",
-              o: "Ne. KOLO je komplement postojećoj ekonomiji — unutrašnji sistem evidencije razmene unutar krugova. Dinari i POEN ne prelaze iste institucionalne granice. Nema planova ni namere da KOLO zameni zvanično platno sredstvo.",
-            },
-            {
-              p: "Šta ako hoću da izađem?",
-              o: "Slobodan si da napustiš sistem u svakom trenutku. Možeš anonimizovati nalog — tvoji podaci se brišu, transakcioni zapisi ostaju sa pseudonimom koji više ni na koga ne pokazuje. POEN koji poseduješ ostaje evidentiran ili se vraća Protokolu.",
-            },
-            {
-              p: "Šta ako se posvađam sa drugim članom oko razmene?",
-              o: "U sistemu postoji mehanizam prigovora. Svaki član može podneti prigovor, koji admin razmatra i odgovara u roku od 30 dana. Odluka je javna i evidentirana. Sistem ne može prinuditi nikoga da pruži uslugu — ali može evidentirati ko se ne ponaša u skladu sa pravilima.",
-            },
-            {
-              p: "Može li firma da bude član?",
-              o: "Firma ne može biti direktni član, ali može biti pokrovitelj. To znači da firma u dinarima daje podršku Fondaciji, a njen vlasnik — kao verifikovani član — dobija POEN bonus. Svi pokrovitelji su javno navedeni na stranici pokrovitelja.",
-            },
-            {
-              p: "Ko kontroliše KOLO?",
-              o: "Pravni subjekt je Fondacija, čiji rad je podložan reviziji i nadzoru nadležnih organa. Softverski protokol radi po matematičkim pravilima koja su javno dostupna i nepromenjiva bez glasanja Gornjeg Kola. Odluke donosi Gornje Kolo kroz ZRNO glasanje.",
-            },
-            {
-              p: "Može li dete da bude član?",
-              o: "Ne. Verifikacija zahteva lični dokument — što znači punoletnost ili roditeljski pristanak uz pratnju. Sistem trenutno ne podržava maloletne korisnike.",
-            },
-            {
-              p: "Da li POEN ističe?",
-              o: "Trenutno ne. U budućim verzijama moguće je uvođenje demurrage mehanizma (negativne kamate) koji bi podsticao cirkulaciju POEN-a umesto akumulacije, ali to bi bila odluka Gornjeg Kola kroz glasanje, ne unilateralna odluka Fondacije.",
-            },
-            {
-              p: "Kako se štiti moja privatnost?",
-              o: "U javnom delu sistema vidljivi su samo pseudonimi — niko ne može povezati pseudonim sa tvojim pravim imenom osim admina. Sve transakcije su evidentirane pod pseudonimom. Politika privatnosti je javna i dostupna u celosti.",
-            },
-          ].map((faq) => (
-            <details key={faq.p} className="bg-white rounded-2xl card-shadow group">
-              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer list-none font-medium text-kolo-text hover:text-kolo-green-700 transition-colors select-none text-sm">
-                {faq.p}
-                <span className="ml-4 shrink-0 text-kolo-muted group-open:rotate-180 transition-transform duration-200">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
-              </summary>
-              <div className="px-6 pb-5 text-sm text-kolo-muted leading-relaxed border-t border-kolo-border pt-3">
-                {faq.o}
-              </div>
-            </details>
-          ))}
+          <FaqAkordeon pitanja={poBrojevima([1, 2, 5])} />
+          <div className="text-center pt-2">
+            <Link
+              href="/cesto-postavljena-pitanja"
+              className="inline-flex items-center gap-2 text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors"
+            >
+              Vidi sva pitanja
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
         </section>
 
         {/* ── SEKCIJA 14 — GDE SMO SADA ────────────────────────────── */}
@@ -708,26 +674,64 @@ export default async function Home() {
           </p>
           {/* Roadmap */}
           <div className="relative">
-            <div className="flex items-center gap-0">
-              {[
-                { naziv: "Prvih sto članova", aktivan: true },
-                { naziv: "Lokalni krugovi", aktivan: false },
-                { naziv: "Međugradska mreža", aktivan: false },
-                { naziv: "Samoupravljanje", aktivan: false },
-                { naziv: "Puna zrelost", aktivan: false },
-              ].map((faza, i, arr) => (
-                <div key={faza.naziv} className="flex items-center flex-1 min-w-0">
-                  <div className="flex flex-col items-center gap-1.5 shrink-0">
-                    <div className={`w-3.5 h-3.5 rounded-full border-2 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
-                    <p className={`text-xs leading-tight text-center max-w-[80px] ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
-                      {faza.naziv}
+            {/* Mobilni — vertikalni redosled */}
+            <div className="md:hidden relative">
+              <div
+                className="absolute w-0.5 bg-kolo-border"
+                style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
+              />
+              <div className="flex flex-col gap-3">
+                {[
+                  { r1: "Pripremna", r2: "faza", aktivan: true },
+                  { r1: "Testiranje", r2: "platforme", aktivan: false },
+                  { r1: "Prvih sto", r2: "korisnika", aktivan: false },
+                  { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
+                  { r1: "Međugradska", r2: "mreža", aktivan: false },
+                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Puna", r2: "zrelost", aktivan: false },
+                ].map((faza) => (
+                  <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                    <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1} {faza.r2}
+                      {faza.aktivan && (
+                        <span className="ml-2 text-[11px] font-bold text-kolo-green-700">← tu smo</span>
+                      )}
                     </p>
                   </div>
-                  {i < arr.length - 1 && (
-                    <div className="h-0.5 bg-kolo-border flex-1 mb-5" />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop — horizontalni redosled */}
+            <div className="hidden md:block relative pt-5">
+              <div
+                className="absolute h-0.5 bg-kolo-border"
+                style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
+              />
+              <div className="relative grid grid-cols-7">
+                {[
+                  { r1: "Pripremna", r2: "faza", aktivan: true },
+                  { r1: "Testiranje", r2: "platforme", aktivan: false },
+                  { r1: "Prvih sto", r2: "korisnika", aktivan: false },
+                  { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
+                  { r1: "Međugradska", r2: "mreža", aktivan: false },
+                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Puna", r2: "zrelost", aktivan: false },
+                ].map((faza) => (
+                  <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
+                    {faza.aktivan && (
+                      <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
+                        tu smo
+                      </span>
+                    )}
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                    <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1}<br />{faza.r2}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -834,7 +838,7 @@ export default async function Home() {
               <ul className="space-y-2 text-sm text-kolo-muted">
                 <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">O Fondaciji</Link></li>
                 <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">Ko stoji iza KOLA</Link></li>
-                <li><a href="#faq" className="hover:text-kolo-green-700 transition-colors">FAQ</a></li>
+                <li><Link href="/cesto-postavljena-pitanja" className="hover:text-kolo-green-700 transition-colors">FAQ</Link></li>
                 <li><a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">Kontakt</a></li>
                 <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">Uslovi korišćenja</Link></li>
                 <li><Link href="/privatnost" className="hover:text-kolo-green-700 transition-colors">Politika privatnosti</Link></li>

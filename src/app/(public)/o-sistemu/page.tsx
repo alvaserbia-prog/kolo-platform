@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import FaqAkordeon from "@/components/FaqAkordeon";
+import { poBrojevima } from "@/lib/faq-data";
 
 export const metadata: Metadata = {
   title: "O sistemu — KOLO",
@@ -365,6 +367,30 @@ export default function OSistemuPage() {
             model that makes the existing model obsolete."
           </p>
           <p className="text-sm text-kolo-muted font-medium">— Buckminster Fuller</p>
+        </div>
+      </section>
+
+      {/* ── FAQ TIZER ─────────────────────────────────────────────── */}
+      <section className="space-y-4">
+        <div>
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
+            Strukturni koncepti
+          </div>
+          <h2 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
+            Često postavljana pitanja
+          </h2>
+        </div>
+        <FaqAkordeon pitanja={poBrojevima([4, 11, 28])} />
+        <div className="text-center pt-2">
+          <Link
+            href="/cesto-postavljena-pitanja"
+            className="inline-flex items-center gap-2 text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors"
+          >
+            Vidi sva pitanja
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </section>
 

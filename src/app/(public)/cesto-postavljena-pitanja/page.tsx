@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import FaqAkordeon from "@/components/FaqAkordeon";
+import FaqStranica from "@/components/FaqStranica";
 
 export const metadata: Metadata = {
   title: "Često postavljana pitanja — KOLO",
   description:
-    "Odgovori na najčešća pitanja o KOLO sistemu, POEN-u, ZRNU, Krugovima, sporovima, izlasku iz sistema i pravnim aspektima platforme.",
+    "Odgovori na najčešća pitanja o KOLO sistemu — POEN-u, ZRNU, Krugovima, Programima, Pijaci, sporovima, privatnosti i izlasku iz sistema.",
 };
 
 export default function CestoPostavljenaPitanjaPage() {
@@ -17,12 +17,12 @@ export default function CestoPostavljenaPitanjaPage() {
         >
           Često postavljana pitanja
         </h1>
-        <p className="text-base text-kolo-muted mt-2 leading-relaxed">
-          Odgovori na najčešća pitanja o KOLO sistemu — POEN-u, ZRNU, Krugovima
-          i pravnim aspektima platforme.
+        <p className="text-base text-kolo-muted mt-2 leading-relaxed max-w-2xl">
+          Odgovori na najčešća pitanja o KOLO sistemu. Klikni na pitanje da
+          razviješ odgovor, ili pretraži po ključnoj reči.
         </p>
       </div>
-      <FaqAkordeon />
+      <FaqStranica />
     </div>
   );
 }
