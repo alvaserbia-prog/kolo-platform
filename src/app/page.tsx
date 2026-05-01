@@ -612,13 +612,15 @@ export default async function Home() {
         {/* ── SEKCIJA 11 — KO STOJI IZA KOLA ──────────────────────── */}
         <section className="bg-white rounded-2xl card-shadow overflow-hidden">
           <div className="grid md:grid-cols-[2fr_3fr]">
-            {/* Levo — foto placeholder */}
+            {/* Levo — slika */}
             <div className="bg-kolo-green-900 flex items-center justify-center min-h-[220px] p-8">
-              <div className="w-24 h-24 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}>
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
-                </svg>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/nikola-saric.png"
+                alt="Nikola Šarić"
+                className="rounded-full object-cover ring-4 ring-white/10 shadow-xl"
+                style={{ width: "160px", height: "160px", display: "block" }}
+              />
             </div>
             {/* Desno — tekst */}
             <div className="p-6 md:p-8">
@@ -626,13 +628,13 @@ export default async function Home() {
                 Ko stoji iza KOLA
               </div>
               <p className="text-kolo-text leading-relaxed mb-4 text-sm">
-                <strong>Nikola Šarić</strong>, lekar iz Sombora. Ideja za KOLO razvijala se 14 godina kroz tri prethodne iteracije — svaka pala na nešto: pravni okvir, tehnička nedovršenost, ili zavisnost od jedne osobe.
+                <strong>Nikola Šarić</strong> je lekar iz Sombora. Četrnaest godina razvija sisteme komplementarne ekonomije. Slične mreže razmene rade u Švajcarskoj, Kanadi, Italiji i Japanu već decenijama; UN i EU su kategoriju solidarne ekonomije formalno priznali kao sektor.
               </p>
               <p className="text-kolo-muted text-sm leading-relaxed mb-5">
-                Fondacija se osniva u Somboru. Dokumentacija je proaktivno podneta poreskom inspektoru. Od NBS, Poreske uprave i nadležnih ministarstava zatražena su zvanična mišljenja — svaki odgovor biće javno objavljen.
+                KOLO je adaptacija socijalne i solidarne ekonomije za srpski pravni i društveni kontekst. Postojeći pravni okvir, proces priključenja EU i živa tradicija zadrugarstva, mobe i samoupravljanja stvaraju povoljne uslove za ovakav sistem razmene — ono što je nedostajalo jeste digitalna infrastruktura.
               </p>
               <blockquote className="border-l-4 border-kolo-green-700 pl-4 text-sm text-kolo-muted italic leading-relaxed mb-5">
-                „Nisam želeo da pokrenem pre nego što pravni okvir bude čvrst, pre nego što platforma bude sposobna da nosi prve članove, i pre nego što budem siguran da sistem ne zavisi od mene. Svaki prethodni pokušaj je pao na jednu od te tri stvari. Ovaj ne sme."
+                „Kao lekaru poziv mi je da pomažem ljudima. Smatram da je iz istog razloga osmišljen i sistem u kome živimo. Ali, svaki dan gledam ljude kojima bi taj sistem trebalo da pomogne, ali ne može — poljoprivrednike, penzionere, nezaposlene, mlade. Duboko verujem da svi oni imaju svoje mesto u zajednici i mogu da joj doprinesu na svoj način. Samo im treba infrastruktura."
               </blockquote>
               <Link href="/o-nama" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
                 Pročitaj celu priču →
