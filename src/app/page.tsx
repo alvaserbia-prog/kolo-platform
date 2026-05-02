@@ -145,9 +145,9 @@ export default async function Home() {
                   Priključi se
                 </Link>
               </div>
-              <div className="mt-5 inline-flex items-center gap-2 text-xs text-white/70">
+              <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 border border-white/30 rounded-full text-xs font-medium text-white/80">
                 <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-400" />
-                Besplatna registracija · traje manje od minuta
+                Besplatna registracija
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -198,49 +198,63 @@ export default async function Home() {
         </section>
 
         {/* ── SEKCIJA 3 — KOLO TI DAJE ALTERNATIVU (konsolidovano) ── */}
-        <section className="bg-white rounded-2xl card-shadow p-6 md:p-10 border-l-4 border-kolo-green-700">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+        <section className="space-y-6 text-center">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
             KOLO ti daje alternativu
           </div>
 
-          <blockquote className="italic text-kolo-muted leading-relaxed text-base md:text-lg mb-8 max-w-xl">
+          <blockquote
+            className="italic text-kolo-green-900 leading-relaxed text-2xl md:text-3xl max-w-3xl mx-auto"
+            style={{ fontFamily: "Georgia, serif", lineHeight: "1.5" }}
+          >
             „Kad su ljudi bili žedni, iskopali su bunar.<br />
             Iz njega je pio svako, i niko više nije bio žedan.<br />
             Bunar je bio njihov — i nije bio ničiji."
           </blockquote>
 
-          <p className="text-kolo-green-900 font-medium leading-snug text-xl md:text-2xl mb-8 max-w-2xl" style={{ letterSpacing: "-0.01em" }}>
-            Mreža ljudi koji direktno razmenjuju rad, dobra i znanje — bez posrednika, bez provizije, po pravilima koja sami postavljaju.
-          </p>
-
-          <div className="space-y-6 max-w-2xl">
-            <div>
-              <h3 className="font-bold text-kolo-green-900 text-lg mb-2" style={{ letterSpacing: "-0.01em" }}>
-                Mreža umesto tržišta
-              </h3>
-              <p className="text-kolo-text leading-relaxed">
-                Komšija, prijatelj, prijatelj prijatelja — ljudi koji ti mogu nešto ponuditi i kojima ti možeš nešto vratiti. KOLO ih okuplja na jednom mestu i čini ih međusobno vidljivim. Ono što jedni imaju, drugima treba.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-kolo-green-900 text-lg mb-2" style={{ letterSpacing: "-0.01em" }}>
-                Doprinos koji se pamti
-              </h3>
-              <p className="text-kolo-text leading-relaxed">
-                Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove <strong className="text-kolo-green-900">POEN</strong>. Nije novac, ne menja se za dinare, ne ide na berzu. Ali stoji uz tebe i otvara ti pristup onome što su drugi doneli.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-bold text-kolo-green-900 text-lg mb-2" style={{ letterSpacing: "-0.01em" }}>
-                Pravila koja se ne menjaju u hodu
-              </h3>
-              <p className="text-kolo-text leading-relaxed">
-                Sve što sistem radi — ko šta dobija, kako se odluke donose, šta se sa čim radi — zapisano je unapred i javno dostupno. Niko ne može da promeni pravila u svoju korist usred igre.
-              </p>
-            </div>
+          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
+            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl" style={{ letterSpacing: "-0.01em" }}>
+              Mreža ljudi koji direktno razmenjuju rad, dobra i znanje.
+            </p>
           </div>
 
-          <div className="mt-8 pt-5 border-t border-kolo-border">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 text-left">
+            {[
+              {
+                naslov: "Mreža umesto tržišta",
+                tekst: "Komšija, prijatelj, prijatelj prijatelja — ljudi koji ti mogu nešto ponuditi i kojima ti možeš nešto vratiti. KOLO ih okuplja na jednom mestu i čini ih međusobno vidljivim. Ono što jedni imaju, drugima treba.",
+              },
+              {
+                naslov: "Doprinos koji se pamti",
+                tekst: "Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove POEN. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara pristup onome što su drugi doneli.",
+                istakniPoen: true,
+              },
+              {
+                naslov: "Pravila koja su transparentna",
+                tekst: "Sve što sistem radi — ko šta dobija, kako se odluke donose, šta se sa čim radi — ostaje zapisano i javno dostupno. Niko ne može da promeni pravila u svoju korist.",
+              },
+            ].map((kartica) => (
+              <div
+                key={kartica.naslov}
+                className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700"
+              >
+                <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+                  {kartica.naslov}
+                </h3>
+                <p className="text-sm text-kolo-text leading-relaxed">
+                  {kartica.istakniPoen ? (
+                    <>
+                      Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove <strong className="text-kolo-green-900">POEN</strong>. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara pristup onome što su drugi doneli.
+                    </>
+                  ) : (
+                    kartica.tekst
+                  )}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-2">
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
               Detaljno kako to radi →
             </Link>
