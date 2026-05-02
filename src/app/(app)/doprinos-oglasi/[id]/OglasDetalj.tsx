@@ -98,7 +98,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
         </div>
 
         {/* Info grid */}
-        <div className="grid grid-cols-3 gap-3 text-sm">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 text-sm">
           <div className="bg-kolo-bg rounded-xl p-3 text-center">
             <p className="font-semibold text-kolo-text">{oglas.positions}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{oglas.positions === 1 ? "mesto" : "mesta"}</p>
@@ -255,7 +255,7 @@ function EvidencijaForma({ oglasId, maxHoursPerDay, hourlyRate, onSuccess }: {
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum</label>
           <input type="date" value={date} min={minDate} max={maxDate}

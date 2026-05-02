@@ -99,7 +99,7 @@ export default function ProgramiKlijent({ programi, isVerified, isKrugr, bankaBa
       {/* Emisioni kontekst */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
         <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wider">{t("emisioni_kontekst")}</p>
-        <div className="grid grid-cols-3 gap-3 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
           <div>
             <p className="text-base font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{t("opticaj")}</p>

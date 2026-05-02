@@ -48,7 +48,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
       {/* Balans kartica */}
       <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
         <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
-        <p className="text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
+        <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
         <p className="text-lg text-white/70 mt-0.5">POEN</p>
         <div className="mt-4 flex gap-3">
           <button
@@ -116,8 +116,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-            {/* Zaglavlje tabele */}
-            <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            {/* Zaglavlje tabele — desktop */}
+            <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_vreme")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_posiljac")}</span>
               <span />
@@ -129,7 +129,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                 key={t.id}
                 className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
-                <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                {/* Desktop prikaz */}
+                <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
                   {/* Vreme */}
                   <p className="text-sm text-kolo-muted leading-tight">
                     {new Date(t.createdAt).toLocaleString("sr-RS", {
@@ -172,10 +173,55 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                     {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
                   </span>
                 </div>
-                {/* Opis transakcije */}
+                {/* Desktop opis */}
                 {t.description && (
-                  <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{t.description}</p>
+                  <p className="hidden sm:block mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{t.description}</p>
                 )}
+
+                {/* Mobilna kompaktna kartica */}
+                <div className="sm:hidden">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 text-sm min-w-0">
+                        {t.primio ? (
+                          t.drugiId ? (
+                            <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                              {t.drugiPseudonim}
+                            </a>
+                          ) : (
+                            <span className="text-kolo-muted truncate">{t.drugiPseudonim}</span>
+                          )
+                        ) : (
+                          <span className="text-kolo-text font-medium truncate">{pseudonim}</span>
+                        )}
+                        <span className="text-kolo-muted shrink-0">→</span>
+                        {t.primio ? (
+                          <span className="text-kolo-text font-medium truncate">{pseudonim}</span>
+                        ) : (
+                          t.drugiId ? (
+                            <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                              {t.drugiPseudonim}
+                            </a>
+                          ) : (
+                            <span className="text-kolo-muted truncate">{t.drugiPseudonim}</span>
+                          )
+                        )}
+                      </div>
+                      <p className="text-xs text-kolo-muted mt-0.5">
+                        {new Date(t.createdAt).toLocaleString("sr-RS", {
+                          day: "2-digit", month: "2-digit", year: "numeric",
+                          hour: "2-digit", minute: "2-digit",
+                        })}
+                      </p>
+                    </div>
+                    <span className={`text-sm font-bold text-right shrink-0 ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                      {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+                    </span>
+                  </div>
+                  {t.description && (
+                    <p className="mt-1 text-xs text-kolo-muted/70 truncate">{t.description}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>

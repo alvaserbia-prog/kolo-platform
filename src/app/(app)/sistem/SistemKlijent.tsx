@@ -182,7 +182,7 @@ export default function SistemKlijent({
       )}
 
       {/* 8 kartica 4×2 */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {/* Članovi */}
         <Kartica
           aktivan={sekcija === "clanovi"}
@@ -216,7 +216,7 @@ export default function SistemKlijent({
         {/* Opticaj programa */}
         <button
           onClick={() => setSekcija("programi")}
-          className={`rounded-2xl p-5 text-left transition-all border ${
+          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
             sekcija === "programi"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
@@ -225,7 +225,7 @@ export default function SistemKlijent({
           <p className={`text-base font-semibold mb-1 ${sekcija === "programi" ? "text-white/70" : "text-kolo-muted"}`}>
             Opticaj programa
           </p>
-          <p className={`text-4xl font-bold tabular-nums leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
             {danasEmitovano.toLocaleString("sr-RS")}
           </p>
           {danasLimit > 0 && (
@@ -246,7 +246,7 @@ export default function SistemKlijent({
         {/* Opticaj */}
         <button
           onClick={() => setSekcija("pregled")}
-          className={`rounded-2xl p-5 text-left transition-all border ${
+          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
             sekcija === "pregled"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
@@ -255,7 +255,7 @@ export default function SistemKlijent({
           <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
             {t("kartica_opticaj")}
           </p>
-          <p className={`text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
             {opticaj.toLocaleString("sr-RS")}
           </p>
           {danasEmitovano > 0 && (
@@ -299,7 +299,7 @@ export default function SistemKlijent({
         />
 
         {/* Zdravlje sistema */}
-        <div className="rounded-2xl p-5 text-left border bg-white border-kolo-border">
+        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
           <p className="text-base font-semibold mb-2 text-kolo-muted">Zdravlje sistema</p>
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -388,7 +388,7 @@ function Kartica({
   return (
     <button
       onClick={onClick}
-      className={`rounded-2xl p-5 text-left transition-all border ${
+      className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
         aktivan
           ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
           : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
@@ -397,7 +397,7 @@ function Kartica({
       <p className={`text-base font-semibold mb-1 ${aktivan ? "text-white/70" : "text-kolo-muted"}`}>
         {label}
       </p>
-      <p className={`text-4xl font-bold tabular-nums leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
+      <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
         {broj.toLocaleString("sr-RS")}
       </p>
       {danas > 0 && (
@@ -476,7 +476,7 @@ function PregledSekcija({
           <div className="p-6 text-center text-sm text-kolo-muted">{t("nema_tx")}</div>
         ) : (
           <>
-            <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("vreme")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("posalje")}</span>
               <span />
@@ -488,7 +488,8 @@ function PregledSekcija({
                 key={tx.id}
                 className={`px-4 py-2.5 ${i < protokolTx.length - 1 ? "border-b border-kolo-border/30" : ""}`}
               >
-                <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                {/* Desktop grid */}
+                <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
                   <p className="text-sm text-kolo-muted leading-tight">
                     {new Date(tx.createdAt).toLocaleString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "numeric",
@@ -518,8 +519,30 @@ function PregledSekcija({
                     {tx.amount.toLocaleString("sr-RS")}
                   </span>
                 </div>
+                {/* Mobilna kartica */}
+                <div className="sm:hidden space-y-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
+                      {verified && tx.fromId ? (
+                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                      ) : (
+                        <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                      )}
+                      <span className="text-kolo-muted shrink-0">→</span>
+                      {verified && tx.toId ? (
+                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                      ) : (
+                        <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                      )}
+                    </div>
+                    <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
+                  </div>
+                  <p className="text-xs text-kolo-muted">
+                    {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                  </p>
+                </div>
                 {tx.description && (
-                  <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{tx.description}</p>
+                  <p className="mt-0.5 text-xs text-kolo-muted/70 truncate sm:pl-[9.75rem]">{tx.description}</p>
                 )}
               </div>
             ))}
@@ -749,7 +772,7 @@ function TransakcijeSekcija({
   return (
     <div className="space-y-4">
       {/* Filter dugmad */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2 items-center">
         {filteri.map(([key, label]) => (
           <button
             key={key}
@@ -775,7 +798,7 @@ function TransakcijeSekcija({
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {/* Zaglavlje */}
-          <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+          <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("vreme")}</span>
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("posalje")}</span>
             <span />
@@ -787,7 +810,8 @@ function TransakcijeSekcija({
               key={tx.id}
               className={`px-4 py-2.5 ${i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
-              <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+              {/* Desktop grid */}
+              <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
                 {/* Vreme */}
                 <p className="text-sm text-kolo-muted leading-tight">
                   {new Date(tx.createdAt).toLocaleString("sr-RS", {
@@ -830,9 +854,39 @@ function TransakcijeSekcija({
                   {tx.amount.toLocaleString("sr-RS")}
                 </span>
               </div>
+              {/* Mobilna kartica */}
+              <div className="sm:hidden space-y-1">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
+                    {verified ? (
+                      tx.fromId ? (
+                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                      ) : (
+                        <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                      )
+                    ) : (
+                      <span className="text-kolo-muted">—</span>
+                    )}
+                    <span className="text-kolo-muted shrink-0">→</span>
+                    {verified ? (
+                      tx.toId ? (
+                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                      ) : (
+                        <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                      )
+                    ) : (
+                      <span className="text-kolo-muted">—</span>
+                    )}
+                  </div>
+                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
+                </div>
+                <p className="text-xs text-kolo-muted">
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                </p>
+              </div>
               {/* Opis transakcije */}
               {tx.description && (
-                <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{tx.description}</p>
+                <p className="mt-0.5 text-xs text-kolo-muted/70 truncate sm:pl-[9.75rem]">{tx.description}</p>
               )}
             </div>
           ))}
@@ -1074,7 +1128,7 @@ function IznosSekcija({
               ukupno {ukupnoTransferi.toLocaleString("sr-RS")} POEN
             </p>
           </div>
-          <div className="grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 px-5 py-2 border-b border-kolo-border bg-kolo-bg/50 text-xs font-semibold text-kolo-muted">
+          <div className="hidden sm:grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 px-5 py-2 border-b border-kolo-border bg-kolo-bg/50 text-xs font-semibold text-kolo-muted">
             <span>Vreme</span>
             <span>Pošiljalac</span>
             <span />
@@ -1084,33 +1138,58 @@ function IznosSekcija({
           {transferi.slice(0, 20).map((tx, i) => (
             <div
               key={tx.id}
-              className={`grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 items-center px-5 py-2.5 text-sm ${
+              className={`px-4 sm:px-5 py-2.5 ${
                 i < Math.min(transferi.length, 20) - 1 ? "border-b border-kolo-border/30" : ""
               }`}
             >
-              <span className="text-xs text-kolo-muted">
-                {new Date(tx.createdAt).toLocaleString("sr-RS", {
-                  day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
-                })}
-              </span>
-              {tx.fromId ? (
-                <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
-                  {tx.fromPseudonim}
-                </Link>
-              ) : (
-                <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
-              )}
-              <span className="text-kolo-muted text-center">→</span>
-              {tx.toId ? (
-                <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
-                  {tx.toPseudonim}
-                </Link>
-              ) : (
-                <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
-              )}
-              <span className="font-mono font-semibold text-kolo-text text-right">
-                {tx.amount.toLocaleString("sr-RS")}
-              </span>
+              {/* Desktop grid */}
+              <div className="hidden sm:grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 items-center text-sm">
+                <span className="text-xs text-kolo-muted">
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", {
+                    day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
+                  })}
+                </span>
+                {tx.fromId ? (
+                  <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
+                    {tx.fromPseudonim}
+                  </Link>
+                ) : (
+                  <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                )}
+                <span className="text-kolo-muted text-center">→</span>
+                {tx.toId ? (
+                  <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
+                    {tx.toPseudonim}
+                  </Link>
+                ) : (
+                  <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                )}
+                <span className="font-mono font-semibold text-kolo-text text-right">
+                  {tx.amount.toLocaleString("sr-RS")}
+                </span>
+              </div>
+              {/* Mobilna kartica */}
+              <div className="sm:hidden space-y-1">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
+                    {tx.fromId ? (
+                      <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                    ) : (
+                      <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                    )}
+                    <span className="text-kolo-muted shrink-0">→</span>
+                    {tx.toId ? (
+                      <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                    ) : (
+                      <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                    )}
+                  </div>
+                  <span className="font-mono font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
+                </div>
+                <p className="text-xs text-kolo-muted">
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                </p>
+              </div>
             </div>
           ))}
         </div>

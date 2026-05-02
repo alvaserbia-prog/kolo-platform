@@ -808,7 +808,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
           className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">Izvor pozicije</label>
           <div className="flex gap-1.5 flex-wrap">
@@ -827,7 +827,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">Max h/dan</label>
           <input type="number" min={1} max={8} value={maxHoursPerDay} onChange={(e) => setMaxHoursPerDay(e.target.value)}
@@ -1130,15 +1130,15 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
   return (
     <div className="space-y-5">
       {/* Opticaj */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Opticaj</p>
-          <p className="text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">POEN u sistemu</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Dnevni limit programa</p>
-          <p className="text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">10% opticaja</p>
         </div>
       </div>
@@ -1244,18 +1244,18 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
   return (
     <div className="space-y-5">
       {/* Korisnici */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Korisnici ukupno</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Verifikovani</p>
-          <p className="text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">Suspendovani</p>
-          <p className="text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1263,11 +1263,11 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Aktivne krugovi</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.krugovi.ukupno.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.krugovi.ukupno.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Krugri</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.krugovi.krugra.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.krugovi.krugra.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1275,27 +1275,27 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Opticaj (POEN)</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">Ukupno transakcija</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
       {/* ZRNO */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">ZRNO kod korisnika</p>
-          <p className="text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">ZRNO u Banci</p>
-          <p className="text-2xl font-bold text-kolo-text">{data.zrno.uBanci.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uBanci.toLocaleString("sr-RS")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">Ukupno ZRNA</p>
-          <p className="text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1812,7 +1812,7 @@ function AdminPokroviteljiTab({
       {subTab === "novi" && (
         <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-4">
           <h3 className="font-semibold text-kolo-text">Novi pokrovitelj</h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-kolo-muted mb-1">Naziv *</label>
               <input value={noviNaziv} onChange={(e) => setNoviNaziv(e.target.value)}
@@ -1832,7 +1832,7 @@ function AdminPokroviteljiTab({
               className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               placeholder="Adresa sedišta" />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-kolo-muted mb-1">Email</label>
               <input value={noviEmail} onChange={(e) => setNoviEmail(e.target.value)}
@@ -1891,7 +1891,7 @@ function AdminPokroviteljiTab({
               ))}
             </select>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-kolo-muted mb-1">Iznos (RSD) *</label>
               <input

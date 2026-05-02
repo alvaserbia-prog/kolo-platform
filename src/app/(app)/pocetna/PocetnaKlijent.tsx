@@ -135,7 +135,7 @@ export default function PocetnaKlijent({
                       year: "numeric",
                     })}
                   </p>
-                  <p className="text-sm text-kolo-text leading-relaxed whitespace-pre-wrap">
+                  <p className="text-sm text-kolo-text leading-relaxed whitespace-pre-wrap text-body">
                     {sazet ? o.content.slice(0, 280) + "…" : o.content}
                   </p>
                   {o.content.length > 280 && (

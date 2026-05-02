@@ -61,7 +61,7 @@ export default function ZrnoKlijent(props: Props) {
       </div>
 
       {/* Stanje */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("slobodno")}</p>
           <p className="text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString("sr-RS")}</p>

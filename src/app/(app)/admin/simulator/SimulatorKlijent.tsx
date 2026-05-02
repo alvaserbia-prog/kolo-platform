@@ -904,7 +904,7 @@ function ViewKrugovi({ krugovi, members }: { krugovi: Krug[]; members: Clan[] })
           <h3 className="text-base font-semibold text-kolo-text">Krug #{sel.id}</h3>
           <span className="text-xs text-kolo-muted">osnovana dan {sel.foundedDay}</span>
         </div>
-        <div className="grid grid-cols-4 gap-3 mb-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
           {[
             { l: "Balans krugovi", v: fmt(sel.bal), c: "text-kolo-green-700" },
             { l: "Članova", v: String(sel.clanovi) },
@@ -913,7 +913,7 @@ function ViewKrugovi({ krugovi, members }: { krugovi: Krug[]; members: Clan[] })
           ].map(x => (
             <div key={x.l} className="bg-white rounded-xl border border-kolo-border p-3">
               <p className="text-xs text-kolo-muted">{x.l}</p>
-              <p className={`text-xl font-bold font-mono ${x.c ?? "text-kolo-text"}`}>{x.v}</p>
+              <p className={`text-base md:text-xl font-bold font-mono ${x.c ?? "text-kolo-text"}`}>{x.v}</p>
             </div>
           ))}
         </div>
@@ -992,7 +992,7 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
         <h3 className="text-base font-semibold text-kolo-text">ZRNO — Dan {last.day}</h3>
         <span className="text-xs text-kolo-muted">ukupno u sistemu: {ukupnoZrna.toLocaleString("sr-RS")}</span>
       </div>
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
         {[
           { l: "Kurs (POEN/ZRNO)", v: last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(2) : "—", c: "text-kolo-gold-600" },
           { l: "ZRNO u Banci", v: fmt(last.zrnoUBanci), c: "text-kolo-muted" },
@@ -1001,7 +1001,7 @@ function ViewZrno({ last, log, ukupnoZrna }: { last: DnevniLog; log: DnevniLog[]
         ].map(x => (
           <div key={x.l} className="bg-white rounded-xl border border-kolo-border p-3">
             <p className="text-xs text-kolo-muted">{x.l}</p>
-            <p className={`text-xl font-bold font-mono ${x.c}`}>{x.v}</p>
+            <p className={`text-base md:text-xl font-bold font-mono ${x.c}`}>{x.v}</p>
           </div>
         ))}
       </div>
@@ -1092,35 +1092,35 @@ function SimulacioniEkran({ params, onReset }: { params: SimParams; onReset: () 
 
       {view === "pregled" && <>
       {/* Stat kartice */}
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">Opticaj</p>
-          <p className="text-xl font-bold font-mono text-kolo-green-700">{last ? fmt(last.opticaj) : "0"}</p>
+          <p className="text-base md:text-xl font-bold font-mono text-kolo-green-700">{last ? fmt(last.opticaj) : "0"}</p>
           {deltaOpticaj > 0 && <p className="text-xs text-kolo-muted">+{fmt(deltaOpticaj)} danas</p>}
         </div>
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">Članovi</p>
-          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.clanovi : params.pocetnihClanova}</p>
+          <p className="text-base md:text-xl font-bold font-mono text-kolo-text">{last ? last.clanovi : params.pocetnihClanova}</p>
           {last && <p className="text-xs text-kolo-muted">{last.krugri} krugra</p>}
         </div>
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">Krugovi</p>
-          <p className="text-xl font-bold font-mono text-kolo-text">{last ? last.krugovi : "0"}</p>
+          <p className="text-base md:text-xl font-bold font-mono text-kolo-text">{last ? last.krugovi : "0"}</p>
           {state.krugovi.length > 0 && <p className="text-xs text-kolo-muted">{state.krugovi.reduce((s, z) => s + z.projekti, 0)} projekata</p>}
         </div>
         <div className="bg-white rounded-xl border border-kolo-border p-3">
           <p className="text-xs text-kolo-muted">10% limit</p>
-          <p className="text-xl font-bold font-mono text-kolo-gold-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
+          <p className="text-base md:text-xl font-bold font-mono text-kolo-gold-600">{last ? fmt(Math.floor(last.opticaj * 0.1)) : "0"}</p>
           <p className="text-xs text-kolo-muted">POEN/dan</p>
         </div>
-        <div className="bg-white rounded-xl border border-kolo-border p-3">
+        <div className="bg-white rounded-xl border border-kolo-border p-3 col-span-2 sm:col-span-3 md:col-span-1">
           <p className="text-xs text-kolo-muted">ZRNO kurs</p>
-          <p className="text-xl font-bold font-mono text-kolo-gold-600">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
+          <p className="text-base md:text-xl font-bold font-mono text-kolo-gold-600">{last && last.zrnoKurs > 0 ? last.zrnoKurs.toFixed(1) : "—"}</p>
           <p className="text-xs text-kolo-muted">{last && last.zrnoKodKorisnika > 0 ? `${fmt(last.zrnoKodKorisnika)} izvan` : "neaktivno"}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-4 space-y-3">
           <div>
             <p className="text-xs text-kolo-muted mb-1">Opticaj POEN</p>
@@ -1223,7 +1223,7 @@ function Controls({ playing, speed, onAdvance, onPlay, onReset, onSpeedChange, l
   return (
     <div className="flex items-center justify-between flex-wrap gap-3">
       <div>
-        <span className="text-3xl font-bold font-mono text-kolo-green-700">Dan {log.length}</span>
+        <span className="text-2xl md:text-3xl font-bold font-mono text-kolo-green-700">Dan {log.length}</span>
         {last && <span className="text-sm text-kolo-muted ml-3">opticaj {fmt(last.opticaj)} POEN</span>}
       </div>
       <div className="flex items-center gap-2 flex-wrap">
