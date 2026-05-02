@@ -1,6 +1,7 @@
 {
   "nav": {
     "pocetna": "Home",
+    "sistem": "System",
     "novcanik": "Wallet",
     "pijaca": "Marketplace",
     "krug": "Circle",

@@ -159,6 +159,15 @@ interface PokroviteljItem {
   createdAt: string;
 }
 
+interface BlogObjavaAdmin {
+  id: string;
+  title: string;
+  content: string;
+  authorPseudonim: string;
+  publishedAt: string;
+  createdAt: string;
+}
+
 interface AdminKlijentProps {
   pending: PendingRequest[];
   users: KorisnikInfo[];
@@ -172,6 +181,7 @@ interface AdminKlijentProps {
   krugoviLista: KrugListItem[];
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
   krugoviLista2: { id: string; name: string }[];
+  blogObjave: BlogObjavaAdmin[];
 }
 
 const roleLabel: Record<string, string> = {
@@ -186,9 +196,9 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "audit";
+type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2 }: AdminKlijentProps) {
+export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
@@ -205,6 +215,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
     ["emisija", "Finansije"],
+    ["vesti", "Vesti"],
     ["audit", "Audit log"],
   ];
 
@@ -271,6 +282,9 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab opticaj={opticaj} onSuccess={() => router.refresh()} />}
+
+      {/* Vesti */}
+      {tab === "vesti" && <VestiTab objave={blogObjave} onDone={() => router.refresh()} />}
 
       {/* Audit log */}
       {tab === "audit" && <AuditLogTab logs={auditLogs} onRefresh={() => router.refresh()} />}
@@ -1960,6 +1974,199 @@ function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: ()
               </div>
             </div>
           ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Vesti (blog Fondacije) ────────────────────────────────────────────────────
+
+function VestiTab({ objave, onDone }: { objave: BlogObjavaAdmin[]; onDone: () => void }) {
+  const [editId, setEditId] = useState<string | null>(null);
+  const [naslov, setNaslov] = useState("");
+  const [sadrzaj, setSadrzaj] = useState("");
+  const [datum, setDatum] = useState("");
+  const [salje, setSalje] = useState(false);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  function resetForma() {
+    setEditId(null);
+    setNaslov("");
+    setSadrzaj("");
+    setDatum("");
+    setPoruka(null);
+  }
+
+  function pocniIzmenu(o: BlogObjavaAdmin) {
+    setEditId(o.id);
+    setNaslov(o.title);
+    setSadrzaj(o.content);
+    setDatum(o.publishedAt.slice(0, 16));
+    setPoruka(null);
+  }
+
+  async function sacuvaj(e: React.FormEvent) {
+    e.preventDefault();
+    if (!naslov.trim() || !sadrzaj.trim() || salje) return;
+    setSalje(true);
+    setPoruka(null);
+
+    const url = editId ? `/api/admin/blog/${editId}` : "/api/admin/blog";
+    const method = editId ? "PATCH" : "POST";
+    const body: { title: string; content: string; publishedAt?: string } = {
+      title: naslov.trim(),
+      content: sadrzaj.trim(),
+    };
+    if (datum) body.publishedAt = new Date(datum).toISOString();
+
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPoruka({ text: data.error ?? "Greška.", ok: false });
+        return;
+      }
+      setPoruka({ text: editId ? "Objava izmenjena." : "Objava sačuvana.", ok: true });
+      resetForma();
+      setTimeout(onDone, 800);
+    } catch {
+      setPoruka({ text: "Greška u mreži.", ok: false });
+    } finally {
+      setSalje(false);
+    }
+  }
+
+  async function obrisi(id: string) {
+    if (!confirm("Obriši ovu objavu?")) return;
+    const res = await fetch(`/api/admin/blog/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      onDone();
+    } else {
+      const data = await res.json();
+      alert(data.error ?? "Greška.");
+    }
+  }
+
+  return (
+    <div className="space-y-5">
+      {/* Forma */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-5">
+        <h3 className="text-sm font-semibold text-kolo-text mb-3">
+          {editId ? "Izmeni objavu" : "Nova objava"}
+        </h3>
+        <form onSubmit={sacuvaj} className="space-y-3">
+          <input
+            type="text"
+            value={naslov}
+            onChange={(e) => setNaslov(e.target.value)}
+            placeholder="Naslov"
+            maxLength={200}
+            className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
+          />
+          <textarea
+            value={sadrzaj}
+            onChange={(e) => setSadrzaj(e.target.value)}
+            placeholder="Sadržaj objave (običan tekst, novi red = novi paragraf)"
+            rows={8}
+            maxLength={20000}
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-y"
+          />
+          <div className="flex items-center gap-3 flex-wrap">
+            <label className="text-xs text-kolo-muted">
+              Datum objave (opciono):{" "}
+              <input
+                type="datetime-local"
+                value={datum}
+                onChange={(e) => setDatum(e.target.value)}
+                className="ml-1 px-2 py-1 rounded border border-kolo-border text-xs"
+              />
+            </label>
+            <span className="text-xs text-kolo-muted ml-auto">
+              {sadrzaj.length} / 20.000 znakova
+            </span>
+          </div>
+          <div className="flex gap-2">
+            <button
+              type="submit"
+              disabled={!naslov.trim() || !sadrzaj.trim() || salje}
+              className="px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors disabled:opacity-60"
+            >
+              {salje ? "..." : editId ? "Sačuvaj izmene" : "Objavi"}
+            </button>
+            {editId && (
+              <button
+                type="button"
+                onClick={resetForma}
+                className="px-5 py-2 bg-white border border-kolo-border text-kolo-muted text-sm font-medium rounded-xl hover:bg-kolo-bg transition-colors"
+              >
+                Otkaži
+              </button>
+            )}
+          </div>
+          {poruka && (
+            <p
+              className={`text-sm px-3 py-2 rounded-xl ${
+                poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"
+              }`}
+            >
+              {poruka.text}
+            </p>
+          )}
+        </form>
+      </div>
+
+      {/* Lista postojećih */}
+      <div>
+        <h3 className="text-sm font-semibold text-kolo-text mb-3">
+          Postojeće objave ({objave.length})
+        </h3>
+        {objave.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+            Još uvek nema objava.
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {objave.map((o) => (
+              <div
+                key={o.id}
+                className="bg-white rounded-2xl border border-kolo-border p-4 flex items-start gap-4"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-kolo-text">{o.title}</p>
+                  <p className="text-xs text-kolo-muted mt-0.5">
+                    {new Date(o.publishedAt).toLocaleString("sr-RS", {
+                      day: "2-digit", month: "2-digit", year: "numeric",
+                      hour: "2-digit", minute: "2-digit",
+                    })}{" "}
+                    · {o.authorPseudonim}
+                  </p>
+                  <p className="text-xs text-kolo-muted mt-1 line-clamp-2">
+                    {o.content.slice(0, 200)}
+                    {o.content.length > 200 ? "…" : ""}
+                  </p>
+                </div>
+                <div className="flex gap-2 shrink-0">
+                  <button
+                    onClick={() => pocniIzmenu(o)}
+                    className="px-3 py-1.5 bg-white border border-kolo-border text-kolo-text text-xs font-medium rounded-lg hover:bg-kolo-bg transition-colors"
+                  >
+                    Izmeni
+                  </button>
+                  <button
+                    onClick={() => obrisi(o.id)}
+                    className="px-3 py-1.5 bg-white border border-kolo-danger/20 text-kolo-danger text-xs font-medium rounded-lg hover:bg-kolo-danger-light transition-colors"
+                  >
+                    Obriši
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>

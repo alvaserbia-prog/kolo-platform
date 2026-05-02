@@ -201,6 +201,8 @@ model User {
   konverzacije2          Konverzacija[]             @relation("KonvUser2")
   porukePoslate          Poruka[]                   @relation("PorukePostavljene")
   prigovori              PrigovorNaOdluku[]
+  blogObjave             BlogPost[]                 @relation("BlogAutor")
+  chatPoruke             ChatMessage[]              @relation("ChatPoruke")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -787,5 +789,33 @@ model PrigovorNaOdluku {
   updatedAt    DateTime       @updatedAt
 
   @@index([status, createdAt(sort: Desc)])
+  @@index([userId])
+}
+
+// ─── Blog (Vesti Fondacije) ──────────────────────────────────────────────────
+
+model BlogPost {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  authorId    String
+  author      User     @relation("BlogAutor", fields: [authorId], references: [id])
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([publishedAt(sort: Desc)])
+}
+
+// ─── Chat soba (globalna) ────────────────────────────────────────────────────
+
+model ChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation("ChatPoruke", fields: [userId], references: [id])
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
   @@index([userId])
 }

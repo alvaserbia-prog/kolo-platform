@@ -17,6 +17,7 @@ export default async function AdminPage() {
   const [
     pendingRequests, allUsers, banka, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
+    blogObjave,
   ] = await Promise.all([
     prisma.verificationRequest.findMany({
       where: { status: "PENDING" },
@@ -105,6 +106,10 @@ export default async function AdminPage() {
         orderBy: { createdAt: "asc" },
       }),
     ]),
+    prisma.blogPost.findMany({
+      orderBy: { publishedAt: "desc" },
+      include: { author: { select: { pseudonim: true } } },
+    }),
   ]);
 
   const opticaj = banka ? Math.abs(banka.balance) : 0;
@@ -186,6 +191,14 @@ export default async function AdminPage() {
       }))}
       verifikovaniKorisnici={pokroviteljiData[1]}
       krugoviLista2={pokroviteljiData[2]}
+      blogObjave={blogObjave.map((o) => ({
+        id: o.id,
+        title: o.title,
+        content: o.content,
+        authorPseudonim: o.author.pseudonim,
+        publishedAt: o.publishedAt.toISOString(),
+        createdAt: o.createdAt.toISOString(),
+      }))}
       adminPed={{
         oglasi: zaposljavanjeData[0].map((o) => ({
           id: o.id, title: o.title, source: o.source as string,

@@ -43,14 +43,16 @@ function SidebarContent({
   } : {};
 
   const linkoviVerifikovan = [
-    { href: "/sistem", label: t("pocetna") },
+    { href: "/pocetna", label: t("pocetna") },
+    { href: "/sistem", label: t("sistem") },
     { href: "/novcanik", label: t("novcanik") },
     { href: "/pijaca", label: t("pijaca") },
     { href: "/zrno", label: t("zrno") },
   ];
 
   const linkoviNeverifikovan = [
-    { href: "/sistem", label: t("pocetna") },
+    { href: "/pocetna", label: t("pocetna") },
+    { href: "/sistem", label: t("sistem") },
     { href: "/novcanik", label: t("novcanik") },
     { href: "/pijaca", label: t("pijaca") },
     { href: "/verifikacija", label: t("verifikacija") },
