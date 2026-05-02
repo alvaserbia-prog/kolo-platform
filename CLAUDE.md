@@ -12,6 +12,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 - PostgreSQL, Prisma ORM 7
 - NextAuth.js (credentials provider)
 - Tailwind CSS v4
+- next-intl — i18n biblioteka (prevodi u `messages/`); osnovni jezik srpski (latinica)
 - Srpski jezik (latinica) u celom interfejsu
 - **Nema instaliranog zod, decimal.js, ni sličnih library-a** — validacija ručno, Decimal tipovi se konvertuju sa `Number()`
 
@@ -105,13 +106,14 @@ Implikacija za kod: praćenje mesečnih troškova Fondacije, praćenje stanja sr
 ## Struktura foldera
 ```
 src/app/          — Next.js stranice (App Router)
-src/app/(app)/    — autentifikovane stranice (dashboard, admin, novcanik...)
-src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise)
+src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, preporuke, postani-pokrovitelj, verifikacija, politika-prihvati, admin)
+src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise, o-nama, o-sistemu, cesto-postavljena-pitanja, pravilnik, statut, politika-privatnosti, uslovi-koriscenja)
 src/app/pijaca/   — pijaca sa sopstvenim layout-om (ima i javni i auth prikaz)
-src/components/   — React komponente (Sidebar, Header, PublicHeader...)
-src/lib/          — pomoćne funkcije, validacije
+src/components/   — React komponente (Sidebar, Header, PublicHeader, PublicNav, FaqAkordeon, FaqStranica, ClanPretraga, LokacijaSearch, EmptyState, AppShell, Providers)
+src/lib/          — pomoćne funkcije, validacije, faq-data
 src/lib/protokol/ — logika KOLO Protokola (emisija.ts, pokrovitelj.ts, programi.ts, donacija.ts, krug.ts, zrno.ts)
 prisma/           — šema i migracije
+messages/         — i18n prevodi (next-intl)
 docs/             — dokumentacija po fazama
 ```
 
@@ -225,13 +227,54 @@ docs/             — dokumentacija po fazama
 - `posaljiNotifikaciju()` helper u `src/lib/notifikacije.ts`
 - Trigeri: transfer primljen, verifikacija odobrena/odbijena, Krug odobren/odbijen, pristupnica prihvaćena, program enrollment odobren/odbijen, oglas kupljen, nova poruka
 
-### Početna / Sistem (spojene stranice)
+### Početna (`/pocetna`) — nova landing stranica za prijavljene korisnike
+- Sidebar: prvi link "Početna" vodi na `/pocetna`
+- Dva panela:
+  - **Vesti Fondacije (Blog)** — poslednjih 5 objava, prikazuje pseudonim autora i datum
+  - **Chat soba** — globalna javna sobu sa porukama; svi prijavljeni vide, **samo verifikovani** mogu da pišu (max 1.000 znakova po poruci)
+- Polling za nove poruke i nove vesti
+
+### Sistem (`/sistem`) — pregled celokupnog stanja
 - `/dashboard` redirectuje na `/sistem`
-- Sidebar: "Početna" vodi na `/sistem`, nema duplog linka
 - Vrh stranice: lični pregled (stanje, poslednje transakcije)
 - 4 kartice u 2×2 gridu sa statistikama i "danas" vrednostima: Članovi, Transakcije (gornji red), Krugovi, Opticaj (donji red)
 - Kartica Opticaj: zero-sum provera sa kvačicom
 - Klikabilne kartice vode na filtrirane prikaze (Članovi, Transakcije, Programi, Krugovi)
+
+### Blog (Vesti Fondacije)
+- Admin objavljuje vesti zajednici (`POST /api/admin/blog`)
+- Javna stranica `/api/blog` — vraća poslednje vesti sa pseudonimom autora
+- Prikaz na `/pocetna` u Vesti panelu
+- Model: `BlogPost` (id, title, content, authorId, publishedAt)
+
+### Chat soba (globalna)
+- Jedna globalna sobu — svi prijavljeni vide, **samo verifikovani** pišu
+- Polling 5–10s za nove poruke
+- Auto-čišćenje: cron `POST /api/cron/chat-cistenje` briše poruke starije od 30 dana
+- Model: `ChatMessage` (id, userId, content, createdAt)
+
+### Doprinos zajedničkom dobru — Oglasi (PED, evolucija)
+**Operativni program za sticanje POEN-a kroz konkretan rad za zajednicu.**
+- Admin (kasnije i Krug, drugi UO) **postavlja oglas**: opis posla, satnica (1.000–2.500 POEN/sat), max sati po danu (default 8), broj pozicija, rok, izvor (FONDACIJA/KRUG/PROJEKAT)
+- Verifikovan korisnik se **prijavljuje** za oglas (`POST /api/doprinos-oglasi/[id]/prijavi`)
+- Admin odobrava ili odbija prijavu
+- Prijavljen korisnik **evidentira sate** dan po dan (`POST /api/doprinos-oglasi/[id]/evidencija`) — opis šta je urađeno
+- **Trenutno: admin odobrava evidenciju → emisija POEN** (`hoursWorked × hourlyRate`)
+- **Finalna vizija:** evidenciju **potvrđuju drugi verifikovani korisnici** (međusobno potvrđivanje), kao u izvornom PED konceptu (čl. 11 Pravilnika)
+- Stranica: `/doprinos-oglasi`, detalji `/doprinos-oglasi/[id]`
+- Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + ENUM `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`
+- **Napomena:** stari PED tok i dalje postoji u modulu `/programi` (`DoprinosEvidencija` model, `/api/programi/ped/evidencija`) — bez tarife, principom međusobnog potvrđivanja. **Treba ih konsolidovati u jedan tok** (vidi TODO).
+
+### Javne stranice (bez prijave)
+- `/pocetna` (javni varijant) ne postoji — `/pocetna` je **iza login-a**; landing za neprijavljene je root `/`
+- `/pravilnik` — prikaz aktuelnog Pravilnika (markdown render iz `dokumentacija/Pravilnik 2.12.md`); **otključano za sve posetioce**
+- `/statut` — prikaz Statuta Fondacije; **otključano za sve posetioce**
+- `/o-nama` — biografija osnivača, status sistema, kako se uključiti
+- `/o-sistemu` — pregled funkcionisanja sistema
+- `/kako-funkcionise` — vodič: koraci registracije i načini sticanja POEN-a (sa CTA dugmetom i "Nazad na početnu")
+- `/cesto-postavljena-pitanja` — FAQ sa pretragom (komponenta `FaqStranica`, podaci u `src/lib/faq-data.ts`)
+- `/pokrovitelji` — javna rang-lista pokrovitelja
+- `/privatnost`, `/uslovi` — Politika privatnosti, Uslovi korišćenja
 
 ### Admin panel
 - Tabs: Dashboard, Na čekanju, Krugovi, Programi, Pokrovitelji, Korisnici, Finansije, Audit log
@@ -247,10 +290,11 @@ docs/             — dokumentacija po fazama
 - **Pokrovitelj** — pravno lice, nema nalog, vlasnik je verifikovani član
 
 ## Sidebar linkovi
-- Neverifikovan: Početna (/sistem), Novčanik, Pijaca, Verifikacija
-- Verifikovan: Početna (/sistem), Novčanik, Pijaca, ZRNO
+- Neverifikovan: Početna (/pocetna), Sistem (/sistem), Novčanik, Pijaca, Verifikacija
+- Verifikovan: Početna (/pocetna), Sistem (/sistem), Novčanik, Pijaca, ZRNO
 - Admin (dodatno): Admin, Simulator
-- Napomena: "Početna" i "Sistem" su spojeni u jedan link `/sistem`. Ostale funkcionalnosti (Poruke, Krug, Programi, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil) postoje kao stranice ali nisu u sidebaru — pristupaju se preko drugih ulaznih tačaka (header, profilni meni, kartice na /sistem).
+- Badge brojevi (dnevne aktivnosti) učitavaju se sa `GET /api/dnevni-brojevi` i prikazuju kao indikatori na linkovima (novcanik, pijaca, zrno).
+- Napomena: "Početna" je posvećena landing stranica (`/pocetna`) sa Vestima i Chat sobom; "Sistem" je pregled celokupnog stanja (`/sistem`). Ostale funkcionalnosti (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil) postoje kao stranice ali nisu u sidebaru — pristupaju se preko drugih ulaznih tačaka (header, profilni meni, kartice na `/sistem`, ulazi sa `/pocetna`).
 
 ## API endpointi
 
@@ -354,6 +398,35 @@ docs/             — dokumentacija po fazama
 - `GET /api/notifikacije`
 - `PATCH /api/notifikacije`
 - `GET /api/cron/zero-sum` — Vercel cron endpoint
+- `GET /api/dnevni-brojevi` — dnevni brojevi za sidebar badge-ove (novcanik, pijaca, krug, ped, programi, zrno)
+
+### Blog (Vesti Fondacije)
+- `GET /api/blog` — javna lista vesti sa pseudonimom autora
+- `GET /api/admin/blog` — admin lista vesti
+- `POST /api/admin/blog` — kreiraj vest
+- `GET /api/admin/blog/[id]` — detalji vesti (admin)
+- `PATCH /api/admin/blog/[id]` — izmeni vest
+- `DELETE /api/admin/blog/[id]` — obriši vest
+
+### Chat soba
+- `GET /api/chat` — preuzmi poruke (samo prijavljeni); query `?since=ISO&limit=100`
+- `POST /api/chat` — pošalji poruku (samo verifikovani; max 1.000 znakova)
+- `POST /api/cron/chat-cistenje` — dnevni cron, briše poruke starije od 30 dana
+
+### Doprinos zajedničkom dobru — Oglasi (Operativni program)
+- `GET /api/doprinos-oglasi` — lista aktivnih oglasa sa statusom moje prijave
+- `POST /api/doprinos-oglasi` — kreiraj oglas (admin/krug)
+- `GET /api/doprinos-oglasi/[id]` — detalji oglasa
+- `DELETE /api/doprinos-oglasi/[id]` — obriši oglas
+- `POST /api/doprinos-oglasi/[id]/prijavi` — prijava verifikovanog korisnika
+- `POST /api/doprinos-oglasi/[id]/evidencija` — unos sati za dan
+- `GET /api/admin/doprinos-oglasi/oglasi` — admin lista oglasa
+- `GET /api/admin/doprinos-oglasi/prijave` — admin lista prijava
+- `POST /api/admin/doprinos-oglasi/prijave/[id]/odobri` — odobri prijavu
+- `POST /api/admin/doprinos-oglasi/prijave/[id]/odbij` — odbij prijavu
+- `POST /api/admin/doprinos-oglasi/oglasi/[id]/zatvori` — zatvori oglas
+- `POST /api/admin/doprinos-oglasi/evidencija/[id]/odobri` — odobri evidentirane sate (emisija POEN)
+- `POST /api/admin/doprinos-oglasi/evidencija/[id]/odbij` — odbij evidentirane sate
 
 ## Biblioteka funkcija (`src/lib/`)
 
@@ -364,12 +437,16 @@ docs/             — dokumentacija po fazama
 - `protokol/krug.ts` — bonus Kruga pri osnivanju i pragovima rasta; Mehanizam platforme (ne ulazi u dnevni limit)
 - `protokol/zrno.ts` — `UKUPNO_ZRNA`, noćna ZRNO obrada, kurs ZRNA
 - `notifikacije.ts` — `posaljiNotifikaciju(userId, tip, naslov, tekst, link?)`
+- `faq-data.ts` — `FAQ_SEKCIJE` struktura sa svim pitanjima i odgovorima po kategorijama (koristi je `FaqStranica`)
 
 ## Shared komponente (`src/components/`)
-- `Sidebar.tsx` — Navigacija, tamna pozadina, logo na vrhu, w-44; različiti linkovi za verifikovanog/neverifikovanog/admina
+- `Sidebar.tsx` — Navigacija, tamna pozadina, logo na vrhu, w-52; različiti linkovi za verifikovanog/neverifikovanog/admina; mobilni drawer; badge brojevi sa `/api/dnevni-brojevi`
 - `Header.tsx` — Puno širinom, prikaz stanja, bell notifikacije (polling 15s), toast, dugme za odjavu
-- `AppShell.tsx` — Layout wrapper; sadržaj kontejner max-w-[940px]
+- `AppShell.tsx` — Layout wrapper; sadržaj kontejner max-w-[940px]; učitava dnevne brojeve i prosleđuje ih Sidebar-u
 - `PublicHeader.tsx` — Header za javne stranice (logo, linkovi, Pokrovitelji)
+- `PublicNav.tsx` — Navigacija za javne stranice (desktop + mobile hamburger meni)
+- `FaqAkordeon.tsx` — Akordeon komponenta za pitanja/odgovore
+- `FaqStranica.tsx` — Kompletan FAQ interfejs sa search filterom (koristi `FAQ_SEKCIJE` iz `src/lib/faq-data.ts`)
 - `LokacijaSearch.tsx` — Autocomplete za srpska naselja (keyboard navigacija ↑↓ Enter Escape)
 - `ClanPretraga.tsx` — Autocomplete za pretragu članova, navigira na `/profil/[id]`
 - `Providers.tsx` — NextAuth SessionProvider wrapper
@@ -445,7 +522,25 @@ docs/             — dokumentacija po fazama
 
 ### Operativno
 
-18. **Migracija `20260424000000_rename_zadruga_to_krug`** mora da se primeni na production bazu sa `npx prisma migrate deploy`.
+18. **Migracije** moraju se primeniti na production bazu sa `npx prisma migrate deploy` posle deploy-a (Vercel ne pokreće migracije automatski). Najnovije migracije:
+    - `20260424000000_rename_zadruga_to_krug`
+    - `20260426000000_rename_banka_to_protokol_in_zrno_rate`
+    - `20260502170839_add_blog_chat` — uvodi modele `BlogPost` i `ChatMessage` (Vesti Fondacije i globalna chat soba)
+
+### Konsolidacija PED + Doprinos-oglasi (prioritet)
+
+19. **Spojiti dva paralelna toka u jedinstveni "Program Evidencije Doprinosa":**
+    - **Trenutno stanje:** dva odvojena modula — `/programi` (PED, model `DoprinosEvidencija`, princip međusobnog potvrđivanja, bez tarife) i `/doprinos-oglasi` (modeli `DoprinosOglas`/`OglasPrijava`/`OglasEvidencija`, sa satnicom 1.000–2.500 POEN/sat, **admin** odobrava sate).
+    - **Finalna vizija (prema čl. 11 Pravilnika i razgovoru sa korisnikom):**
+      1. Admin (kasnije i Krugovi, Upravni odbor) **postavlja oglas** sa opisom posla i cenom
+      2. Verifikovan korisnik se **prijavljuje**, izvršava posao
+      3. **Drugi verifikovani korisnici potvrđuju** evidenciju (međusobno potvrđivanje), ne admin
+      4. Sistem **emituje POEN** po potvrđenoj evidenciji
+    - **Šta treba uraditi u kodu:**
+      - Pomeriti odobravanje evidencije sa admina na druge verifikovane korisnike (npr. ≥ N potvrda od drugih korisnika koji nisu povezani sa oglasom)
+      - Ujediniti `/programi/ped` ulaze sa `/doprinos-oglasi` (jedan modul, jedan tok)
+      - Razrešiti i18n ključ `useTranslations("ped")` u `DoprinosOglasiKlijent.tsx` (sad upućuje na "ped" namespace iako je modul Doprinos-oglasi)
+      - Proširiti pravo postavljanja oglasa sa samo admina na ovlašćena lica Krugova i UO (uz validaciju izvora `OglasSource`)
 
 ### Procena pokrivenosti
-**Pravilnik 2.12 je implementiran ~70%.** Osnovni mehanizmi (POEN, ZRNO, transferi, Programi, Krugovi, Pokrovitelji, Donacije, Verifikacija, Glasanje, Pijaca, Privatnost, Audit log) su solidno pokriveni. Glavne rupe su Glava VIII (Projekti) — kompletno nedostaje, Zaštitni veto (čl. 71), redosled alokacije sredstava (čl. 54) i unutrašnje odlučivanje Kruga (čl. 45). Pre prelaska u "Puno samoupravljanje" (drugi prag iz čl. 89), kritično je dovršiti najmanje stavke 1–5 sa ove liste.
+**Pravilnik 2.12 je implementiran ~72%.** Osnovni mehanizmi (POEN, ZRNO, transferi, Programi, Krugovi, Pokrovitelji, Donacije, Verifikacija, Glasanje, Pijaca, Privatnost, Audit log, Vesti, Chat soba, Doprinos-oglasi/PED) su solidno pokriveni. Glavne rupe su Glava VIII (Projekti) — kompletno nedostaje, Zaštitni veto (čl. 71), redosled alokacije sredstava (čl. 54), unutrašnje odlučivanje Kruga (čl. 45) i konsolidacija PED + Doprinos-oglasi (stavka 19). Pre prelaska u "Puno samoupravljanje" (drugi prag iz čl. 89), kritično je dovršiti najmanje stavke 1–5 i 19 sa ove liste.
