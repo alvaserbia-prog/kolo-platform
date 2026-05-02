@@ -141,13 +141,16 @@ export default function FaqStranica() {
                     </button>
                     {otvoren && (
                       <div className="px-5 pb-5">
-                        <div className="border-t border-kolo-border pt-4">
-                          <p
-                            className="text-base text-kolo-muted leading-relaxed text-body"
-                            style={{ lineHeight: "1.75" }}
-                          >
-                            {p.odgovor}
-                          </p>
+                        <div className="border-t border-kolo-border pt-4 space-y-3">
+                          {p.odgovor.split("\n\n").map((pasus, idx) => (
+                            <p
+                              key={idx}
+                              className="text-base text-kolo-muted leading-relaxed text-body"
+                              style={{ lineHeight: "1.75" }}
+                            >
+                              {pasus}
+                            </p>
+                          ))}
                         </div>
                       </div>
                     )}
