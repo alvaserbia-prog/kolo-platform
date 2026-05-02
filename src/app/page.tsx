@@ -230,7 +230,7 @@ export default async function Home() {
                 istakniPoen: true,
               },
               {
-                naslov: "Pravila koja su transparentna",
+                naslov: "Transparentna pravila",
                 tekst: "Sve što sistem radi — ko šta dobija, kako se odluke donose, šta se sa čim radi — ostaje zapisano i javno dostupno. Niko ne može da promeni pravila u svoju korist.",
               },
             ].map((kartica) => (
@@ -414,17 +414,12 @@ export default async function Home() {
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Slanjem dokumenta i ličnih podataka. Time potvrđuješ da si stvarna osoba, otključavaš Pijacu, poruke, preporuke i Programe, i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
+                opis: "Slanjem dokumenta i ličnih podataka. Time potvrđuješ da si stvarna osoba, otključavaš sve funkcije platforme, i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
               },
               {
                 br: "3",
                 naslov: "Doprinosiš i koristiš",
-                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima na Pijaci, pozivaš ljude koje poznaješ, učestvuješ u Programima Protokola, doniraš Fondaciji. Svaki doprinos se beleži u POEN-ima.",
-              },
-              {
-                br: "4",
-                naslov: "Predlažeš i odlučuješ",
-                opis: "Predlažeš ideje za unapređenje sistema i učestvuješ u odlučivanju o predlozima drugih. Glas u zajednici stiče se doprinosom — ko više daje sistemu, ima i više glasa, ali sa zaštitom protiv koncentracije moći.",
+                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, aktiviraš se u zajednici, doniraš Fondaciji. Svaki doprinos se beleži u POEN-ima.",
               },
             ].map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
