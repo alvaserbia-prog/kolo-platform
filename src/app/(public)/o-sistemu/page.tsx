@@ -67,7 +67,9 @@ export default function OSistemuPage() {
           </p>
           {/* Mini-sadržaj */}
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
-            <a href="#sta-je-kolo" className="hover:text-white/80 transition-colors">Šta je KOLO</a>
+            <a href="#zajednicko-dobro" className="hover:text-white/80 transition-colors">Zajedničko dobro</a>
+            <span className="text-white/20">·</span>
+            <a href="#ko-sta-radi" className="hover:text-white/80 transition-colors">Ko šta radi</a>
             <span className="text-white/20">·</span>
             <a href="#topla-voda" className="hover:text-white/80 transition-colors">Ne izmišljamo toplu vodu</a>
             <span className="text-white/20">·</span>
@@ -80,48 +82,92 @@ export default function OSistemuPage() {
         </div>
       </section>
 
-      {/* ── ŠTA JE KOLO ───────────────────────────────────────────── */}
-      <section id="sta-je-kolo" className="space-y-5">
-        {/* Uvod */}
+      {/* ── ZAJEDNIČKO DOBRO KOLA ──────────────────────────────────── */}
+      <section id="zajednicko-dobro" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[680px] mx-auto">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+            Zajedničko dobro
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6" style={{ letterSpacing: "-0.02em" }}>
+            Zajedničko dobro KOLA
+          </h2>
+
+          <blockquote
+            className="border-l-4 border-kolo-green-700 pl-4 italic text-kolo-muted leading-relaxed text-base md:text-lg mb-8"
+            style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
+          >
+            Kad su ljudi bili žedni, iskopali su bunar.<br />
+            Iz njega je pio svako, i niko više nije bio žedan.<br />
+            Bunar je bio njihov — i nije bio ničiji.
+          </blockquote>
+
+          <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+            <p>
+              Sve što prolazi kroz KOLO sistem — rad članova, znanje i veštine, dobra koja idu iz ruke u ruku, vreme posvećeno drugima, mreža poznanstava i poverenja, infrastruktura koju Fondacija održava — ostaje u zajednici. Gradi je. Čini je sposobnijom da brine o sebi.
+            </p>
+            <p>
+              To zovemo <strong className="text-kolo-green-900">zajedničkim dobrom KOLA</strong>. Niko nije njegov vlasnik. Svi su učesnici. Što više daješ, veći je tvoj udeo u njemu.
+            </p>
+            <p>
+              <strong className="text-kolo-green-900">POEN</strong> je mera tvog doprinosa zajedničkom dobru i pristup onome što kroz njega prolazi. Priznanje da si doneo nešto — i osnova da koristiš ono što su drugi doneli.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── KO ŠTA RADI U SISTEMU ──────────────────────────────────── */}
+      <section id="ko-sta-radi" className="space-y-5">
         <div className="bg-white rounded-2xl card-shadow p-8 md:p-10">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
-            Šta je KOLO
+            Ko šta radi u sistemu
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
-            Sistem koji pripada svima koji ga koriste
+            Dva instrumenta i dve forme okupljanja članova
           </h2>
           <p className="text-kolo-muted leading-relaxed max-w-[680px]" style={{ lineHeight: "1.7" }}>
-            Konceptualni okvir KOLA u četiri tačke — od pravne prirode do upravljanja.
+            KOLO počiva na dva instrumenta i dve forme okupljanja članova. Svaki ima jasnu ulogu i jasnu granicu — niko ne može u tuđu nadležnost.
           </p>
         </div>
 
-        {/* 4 kartice u 2×2 */}
         <div className="grid md:grid-cols-2 gap-4">
           {[
             {
-              naslov: "Sistem otvorenog tipa",
-              tekst: "KOLO je sistem otvorenog tipa po istoj logici kao zajednička dobra — vode i šume, znanje i koncepti, infrastruktura koja pripada svima koji je koriste.",
+              naslov: "KOLO Fondacija",
+              podnaslov: "Pravna osnova",
+              tekst: "Pravno lice sa sedištem u Somboru. Prima donacije u dinarima, robi i uslugama. Pokriva operativne troškove sistema, drži infrastrukturu i zastupa KOLO pred zajednicom i državom. Ne emituje POEN i ne raspolaže njime.",
+              boja: "border-kolo-green-700",
             },
             {
-              naslov: "Zajedničko dobro",
-              tekst: "KOLO je zajedničko dobro. Pripada korisnicima platforme i zajednici koja se kroz njega formira. Sistem počiva na dobrovoljnoj saradnji, demokratskom upravljanju i primatu ljudi i društvene svrhe nad kapitalom.",
+              naslov: "KOLO Protokol",
+              podnaslov: "Tehnička osnova",
+              tekst: "Softverski protokol u vlasništvu Fondacije. Bez pravnog subjektiviteta, ne prima dinare. Emituje POEN i vodi evidenciju računa po pravilima koja su unapred određena, javno dostupna i ista za sve. Pri svakoj emisiji POEN-a, Protokol sam ide u minus — to je razlog zašto zbir svih računa u sistemu ostaje uvek nula.",
+              boja: "border-kolo-gold-400",
             },
             {
-              naslov: "Fondacija i Protokol",
-              tekst: "KOLO Fondacija i Protokol čine pravnu i tehničku osnovu sistema. Fondacija je pravni instrument — pravno lice koje prima donacije, zastupa sistem pred državom i drži infrastrukturu. Protokol je tehnički instrument — softverski protokol koji algoritamski emituje POEN i vodi evidenciju ZRNA.",
+              naslov: "KOLO Krugovi",
+              podnaslov: "Operativna forma članstva",
+              tekst: "Lokalne ili tematske grupe od najmanje pet verifikovanih korisnika, okupljene oko zajedničkog interesa — to može biti posao, mesto, zanimanje, ideja. Krug donosi sopstvena interna pravila i sam organizuje aktivnosti svojih članova. Nema pravnog subjektiviteta i ne registruje se u APR-u.",
+              boja: "border-kolo-green-700",
             },
             {
               naslov: "Gornje Kolo",
-              tekst: "Dinamično upravljačko telo sastavljeno od korisnika sa pravom glasa — onih koji poseduju ZRNO. Glasačka moć je jednaka kvadratnom korenu broja ZRNA, čime se sprečava koncentracija moći. Aktivira se kada opticaj POENA dostigne 1.000.000.",
+              podnaslov: "Upravljačka forma članstva",
+              tekst: "Skup svih korisnika koji poseduju ZRNO — jedinicu glasačke moći. Glasa kvadratnim korenom (ko ima sto ZRNA, ima deset glasova), čime se sprečava koncentracija moći. Aktivira se tek kada opticaj POEN-a u sistemu dostigne milion. Do tada Fondacija sama upravlja sistemom.",
+              boja: "border-kolo-gold-400",
             },
           ].map((k) => (
             <div
               key={k.naslov}
-              className="bg-white rounded-2xl card-shadow p-6 md:p-7 flex flex-col gap-3 border-t-4 border-kolo-green-700"
+              className={`bg-white rounded-2xl card-shadow p-6 md:p-7 flex flex-col gap-3 border-t-4 ${k.boja}`}
             >
-              <h3 className="text-xl font-bold text-kolo-green-900 leading-snug" style={{ letterSpacing: "-0.01em" }}>
-                {k.naslov}
-              </h3>
+              <div>
+                <h3 className="text-xl font-bold text-kolo-green-900 leading-snug" style={{ letterSpacing: "-0.01em" }}>
+                  {k.naslov}
+                </h3>
+                <p className="text-xs font-semibold tracking-widest text-kolo-muted uppercase mt-1">
+                  {k.podnaslov}
+                </p>
+              </div>
               <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.7" }}>
                 {k.tekst}
               </p>
@@ -129,10 +175,13 @@ export default function OSistemuPage() {
           ))}
         </div>
 
-        {/* Footnote */}
         <div className="bg-kolo-bg rounded-xl p-4 text-center">
           <p className="text-sm text-kolo-muted leading-relaxed">
-            Precizni parametri pragova i mehanizmi glasanja definisani su u Pravilniku.
+            Detalji u Pravilniku. Mehanički prikaz arhitekture i pragova{" "}
+            <Link href="/kako-funkcionise" className="text-kolo-green-700 hover:underline font-medium">
+              → /kako-funkcionise
+            </Link>
+            .
           </p>
         </div>
       </section>

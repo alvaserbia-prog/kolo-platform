@@ -38,7 +38,17 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
       {
         id: 5,
         pitanje: `Kakav je odnos prema porezu i fiskalizaciji?`,
-        odgovor: `POEN nije novac u pravnom smislu — nije zakonsko sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, niti potraživanje prema Fondaciji. Pravno se konstruiše kao doprinos zajedničkom dobru, a emisija POEN-a kao evidencija tog doprinosa — to su dva odvojena akta. Ne postoji prodaja, ne postoji trampa, ne postoji PDV i ne postoji obaveza fiskalnog računa. Fondacija će proaktivno predati dokumentaciju Poreskoj upravi i Narodnoj banci sa zahtevom za zvanično mišljenje, koje će biti javno objavljeno.`,
+        odgovor: `POEN nije novac u pravnom smislu — nije zakonsko sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, niti potraživanje prema Fondaciji. Pravno se konstruiše kao doprinos zajedničkom dobru, a emisija POEN-a kao evidencija tog doprinosa — to su dva odvojena akta. Postojanje POEN-a ne ukida i ne menja obaveze koje korisnik već ima po opštim propisima Republike Srbije (poreske, registracione, profesionalne i druge) kada obavlja delatnost koja te obaveze pokreće. Pravna kvalifikacija razmena u sistemu KOLO predmet je dijaloga sa nadležnim organima — Fondacija će odmah po pokretanju sistema proaktivno predati dokumentaciju Poreskoj upravi i Narodnoj banci Srbije i javno objaviti svaki zvanični odgovor.`,
+      },
+      {
+        id: 38,
+        pitanje: `Šta tačno znači princip dva odvojena akta?`,
+        odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svake emisije POEN-a iz Protokola. Akt 1: korisnik nešto uradi u korist zajedničkog dobra ili ima status koji to potvrđuje (donira, doprinosi kroz Program evidencije doprinosa, verifikuje se, preporuči novog člana, ima status koji pokreće socijalni program ili dobije odobrenje za projekat). Akt 2: Protokol algoritamski emituje POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe. Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fondacije po kome bi za uradeno X dobio Y POEN-a, niti korisnik ima potraživanje prema Fondaciji za emisijom. Princip je definisan u čl. 5 Pravilnika i primenjuje se na sve kategorije emisije iz čl. 11.`,
+      },
+      {
+        id: 40,
+        pitanje: `Da li je ovo neka piramida ili kripto?`,
+        odgovor: `Nije ni jedno ni drugo. Piramidalna šema funkcioniše tako što novi članovi plaćaju da bi raniji članovi zaradili — u KOLU ne postoji nivo ispod tebe, ne postoji provizija od tuđih doprinosa, niti se POEN kupuje za novac. Sistem je zero-sum: svaki POEN koji postoji evidentiran je kao minus na računu Protokola, niko ne može stvoriti POEN ni iz čega. Kriptovaluta postoji na blockchain mreži, ima tržišnu cenu i može se trgovati na berzi — POEN nije token, ne postoji izvan KOLO platforme, ne menja se za dinare i nema tržišnu cenu. POEN je interna evidencija doprinosa zajedničkom dobru, slična knjigovodstvenom zapisu. Vrednost je u mreži ljudi koji međusobno razmenjuju rad, dobra i znanje, ne u spekulaciji.`,
       },
     ],
   },
@@ -163,6 +173,11 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
         id: 25,
         pitanje: `Može li firma da bude direktni član?`,
         odgovor: `Ne. Direktni članovi su isključivo fizička lica. Firme učestvuju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili suvlasnik kao verifikovan član dobija POEN bonus.`,
+      },
+      {
+        id: 39,
+        pitanje: `Da li je razmena na Pijaci prodaja?`,
+        odgovor: `Po Pravilniku KOLO sistema, razmena dobara i usluga između korisnika na Pijaci nije konstruisana kao klasična prodaja. Reč je o međusobnom dogovoru dva korisnika — jedan daje robu ili uslugu, drugi prenosi POEN, koji nije novac već evidencija doprinosa zajedničkom dobru. Sam prenos POEN-a u toj razmeni nije plaćanje novcem niti sredstvom plaćanja u smislu Zakona o platnim uslugama. Odnosi između korisnika povodom razmene — uključujući pitanja ispunjenja, odgovornosti i rizika — uređuju se prema opštim pravilima obligacionog prava (čl. 4 Pravilnika); Protokol u toj razmeni ne posreduje. Pravna kvalifikacija ovih razmena u poreskom i fiskalnom smislu predmet je dijaloga sa nadležnim organima i ne ukida postojeće obaveze korisnika koji obavlja delatnost po opštim propisima.`,
       },
     ],
   },

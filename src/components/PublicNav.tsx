@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -10,24 +10,9 @@ type Props = {
   isLoggedIn: boolean;
 };
 
-const O_KOLU_PUTANJE = ["/o-nama", "/o-sistemu", "/cesto-postavljena-pitanja"];
-
 export default function PublicNav({ isLoggedIn }: Props) {
-  const [oKoluOpen, setOKoluOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname() || "/";
-
-  useEffect(() => {
-    if (!oKoluOpen) return;
-    const onClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOKoluOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", onClickOutside);
-    return () => document.removeEventListener("mousedown", onClickOutside);
-  }, [oKoluOpen]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -44,7 +29,6 @@ export default function PublicNav({ isLoggedIn }: Props) {
 
   const isActive = (path: string) =>
     path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/");
-  const isOKoluActive = O_KOLU_PUTANJE.some((p) => isActive(p));
 
   const topLink = (path: string, label: string) => (
     <Link
@@ -59,23 +43,6 @@ export default function PublicNav({ isLoggedIn }: Props) {
     </Link>
   );
 
-  const dropdownItem = (path: string, label: string) => {
-    const active = isActive(path);
-    return (
-      <Link
-        href={path}
-        onClick={() => setOKoluOpen(false)}
-        className={`block px-4 py-2.5 text-sm transition-colors ${
-          active
-            ? "bg-kolo-green-100 text-kolo-green-700 font-semibold"
-            : "text-kolo-text hover:bg-kolo-bg hover:text-kolo-green-700"
-        }`}
-      >
-        {label}
-      </Link>
-    );
-  };
-
   const mobilePrimaryLink = (path: string, label: string) => {
     const active = isActive(path);
     return (
@@ -86,23 +53,6 @@ export default function PublicNav({ isLoggedIn }: Props) {
           active
             ? "text-kolo-green-700 font-bold"
             : "text-kolo-text font-medium hover:text-kolo-green-700"
-        }`}
-      >
-        {label}
-      </Link>
-    );
-  };
-
-  const mobileSecondaryLink = (path: string, label: string) => {
-    const active = isActive(path);
-    return (
-      <Link
-        href={path}
-        onClick={() => setMobileOpen(false)}
-        className={`block py-2 text-base transition-colors ${
-          active
-            ? "text-kolo-green-700 font-semibold"
-            : "text-kolo-text hover:text-kolo-green-700"
         }`}
       >
         {label}
@@ -134,44 +84,8 @@ export default function PublicNav({ isLoggedIn }: Props) {
         {topLink("/", "Početna")}
         {topLink("/pijaca", "Pijaca")}
         {topLink("/kako-funkcionise", "Kako funkcioniše")}
-
-        <div ref={dropdownRef} className="relative">
-          <button
-            onClick={() => setOKoluOpen((v) => !v)}
-            className={`flex items-center gap-1 text-base transition-colors ${
-              isOKoluActive
-                ? "text-kolo-green-700 font-semibold"
-                : "text-kolo-muted hover:text-kolo-green-700"
-            }`}
-            aria-haspopup="true"
-            aria-expanded={oKoluOpen}
-          >
-            O KOLU
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              className={`transition-transform duration-200 ${oKoluOpen ? "rotate-180" : ""}`}
-            >
-              <path
-                d="M2 4L6 8L10 4"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-
-          {oKoluOpen && (
-            <div className="absolute top-full left-0 mt-1 w-60 bg-white rounded-2xl card-shadow overflow-hidden py-1 z-50">
-              {dropdownItem("/o-nama", "O nama")}
-              {dropdownItem("/o-sistemu", "O sistemu")}
-              {dropdownItem("/cesto-postavljena-pitanja", "Često postavljana pitanja")}
-            </div>
-          )}
-        </div>
+        {topLink("/o-sistemu", "O sistemu")}
+        {topLink("/o-nama", "O nama")}
       </nav>
 
       {/* Mobilni hamburger */}
@@ -231,15 +145,8 @@ export default function PublicNav({ isLoggedIn }: Props) {
               {mobilePrimaryLink("/", "Početna")}
               {mobilePrimaryLink("/pijaca", "Pijaca")}
               {mobilePrimaryLink("/kako-funkcionise", "Kako funkcioniše")}
-            </div>
-
-            <div className="space-y-1 pt-2 border-t border-kolo-border">
-              <div className="text-xs uppercase font-semibold text-kolo-muted tracking-wider pt-3 pb-1">
-                O KOLU
-              </div>
-              {mobileSecondaryLink("/o-nama", "O nama")}
-              {mobileSecondaryLink("/o-sistemu", "O sistemu")}
-              {mobileSecondaryLink("/cesto-postavljena-pitanja", "Često postavljana pitanja")}
+              {mobilePrimaryLink("/o-sistemu", "O sistemu")}
+              {mobilePrimaryLink("/o-nama", "O nama")}
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-3">
@@ -272,6 +179,7 @@ export default function PublicNav({ isLoggedIn }: Props) {
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-2 text-sm">
+              {mobileFooterLink("/cesto-postavljena-pitanja", "Često postavljana pitanja")}
               {mobileFooterLink("/pokrovitelji", "Pokrovitelji")}
               {mobileFooterLink("/uslovi", "Uslovi korišćenja")}
               {mobileFooterLink("/privatnost", "Politika privatnosti")}

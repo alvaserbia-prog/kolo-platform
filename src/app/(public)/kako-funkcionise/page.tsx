@@ -213,6 +213,29 @@ export default function KakoFunkcionisePage() {
           </p>
         </div>
 
+        <div className="bg-white rounded-2xl card-shadow p-6 md:p-8 border-l-4 border-kolo-green-700">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
+            Pravna priroda svake emisije
+          </div>
+          <h3 className="text-lg font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.01em" }}>
+            Princip dva odvojena akta
+          </h3>
+          <p className="text-sm text-kolo-muted leading-relaxed mb-3">
+            Bilo da donirate, doprinosite kroz Program evidencije doprinosa, ili imate status koji pokreće socijalni program — struktura je uvek ista.
+          </p>
+          <div className="space-y-2 mb-3">
+            <p className="text-sm text-kolo-muted leading-relaxed">
+              <strong className="text-kolo-text">Akt 1.</strong> Vi uradite nešto u korist zajedničkog dobra ili imate status koji to potvrđuje.
+            </p>
+            <p className="text-sm text-kolo-muted leading-relaxed">
+              <strong className="text-kolo-text">Akt 2.</strong> Protokol algoritamski emituje POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
+            </p>
+          </div>
+          <p className="text-sm text-kolo-muted leading-relaxed">
+            POEN nije naknada za vaš rad ni cena za donaciju — već evidencija doprinosa. Korisnik nema potraživanje prema Fondaciji za emisijom.
+          </p>
+        </div>
+
         <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-3">
           {nacinSticanja.map((n) => (
             <div key={n.br} className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
@@ -508,46 +531,32 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S5: PRAVNA PRIRODA TRANSAKCIJA ─────────────────────────── */}
+      {/* ── S5: RAZMENA NA PIJACI ──────────────────────────────────── */}
       <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[660px] mx-auto">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             Član 4 prostim jezikom
           </div>
-          <h2 className="text-2xl font-bold text-kolo-green-900 mb-8" style={{ letterSpacing: "-0.02em" }}>
-            Pravna priroda transakcija
+          <h2 className="text-2xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
+            Razmena na Pijaci — odnos između korisnika
           </h2>
 
-          <div className="space-y-6">
-            {[
-              {
-                naslov: "Zašto razmena nije prodaja",
-                tekst: "Kada daješ uslugu ili robu u KOLO mreži, ne prodaješ je — doprinosiš zajedničkom dobru. POEN koji primaš nije cena. POEN je jedinica evidencije doprinosa zajedničkom dobru, beleška da si dao/la zajednici. Bez cene nema prodaje, bez prodaje nema PDV-a.",
-              },
-              {
-                naslov: "Zašto razmena nije trampa",
-                tekst: "Trampa je istovremena razmena dobara između dve strane. U KOLO sistemu ne postoji istovremena razmena — postoje dva odvojena akta: tvoj doprinos zajedničkom dobru i emisija POEN-a kao evidencija. Ovi akti nisu ni vremenski ni pravno vezani jedan za drugi.",
-              },
-              {
-                naslov: "Princip dva odvojena akta",
-                tekst: "Akt 1: doprinosiš zajedničkom dobru — uslugom, robom, vremenom ili novcem. Akt 2: KOLO Protokol emituje POEN na tvoj račun kao evidenciju tog doprinosa. Ova dva akta su pravno nezavisna — POEN nije naknada za uslugu, već prospektivan pristup budućim dobrima u zajedničkom dobru, bez kvantifikovane vrednosti i izvršnog dejstva.",
-              },
-              {
-                naslov: "Praktična implikacija",
-                tekst: "Nema PDV-a. Nema fiskalnog računa. Nema obaveze prijavljivanja prihoda po osnovu POEN-a. Korisnik nema potraživanje prema Fondaciji za emisijom POEN-a. Fondacija je dokumentaciju proaktivno podnela Poreskoj upravi i NBS, i javno će objaviti svaki zvanični odgovor.",
-              },
-            ].map((tacka) => (
-              <div key={tacka.naslov} className="flex gap-4">
-                <div className="w-1.5 rounded-full bg-kolo-green-200 shrink-0 self-stretch" />
-                <div>
-                  <p className="font-semibold text-kolo-text mb-1 text-base">{tacka.naslov}</p>
-                  <p className="text-base text-kolo-muted leading-relaxed" style={{ lineHeight: "1.75" }}>
-                    {tacka.tekst}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-base text-kolo-muted leading-relaxed mb-4" style={{ lineHeight: "1.75" }}>
+            Kada se na Pijaci dogovorite sa drugim članom da razmenite robu ili uslugu uz prenos POEN-a, to je odnos <strong className="text-kolo-text">između vas i tog člana</strong>, po pravilima obligacionog prava — kao i svaki drugi međuljudski dogovor. Protokol ne posreduje, ne izvršava razmenu, ne garantuje za nju i ne odgovara za rizike.
+          </p>
+          <p className="text-base text-kolo-muted leading-relaxed mb-4" style={{ lineHeight: "1.75" }}>
+            Sam prenos POEN-a u toj razmeni je izmena u evidenciji doprinosa zajedničkom dobru — <strong className="text-kolo-text">nije plaćanje novcem</strong> ni sredstvom plaćanja u smislu propisa o platnim uslugama. Postojanje POEN-a ne ukida obaveze koje korisnik već ima po opštim propisima Republike Srbije kada obavlja delatnost koja te obaveze pokreće.
+          </p>
+          <p className="text-sm text-kolo-muted leading-relaxed">
+            Detaljnije:{" "}
+            <Link href="/cesto-postavljena-pitanja" className="text-kolo-green-700 hover:underline">
+              česta pitanja
+            </Link>
+            {" · "}
+            <Link href="/uslovi" className="text-kolo-green-700 hover:underline">
+              Uslovi korišćenja (Član 5)
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -662,7 +671,52 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S7: FAQ AKORDEON ───────────────────────────────────────── */}
+      {/* ── S7: PRAGOVI SISTEMA ────────────────────────────────────── */}
+      <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[680px] mx-auto">
+          <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+            Pragovi sistema
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
+            Dva praga koja menjaju sistem
+          </h2>
+          <p className="text-base text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.75" }}>
+            KOLO se ne razvija po datumu, nego po stanju. Dva merljiva događaja prevode sistem iz jedne faze u drugu. Oba su trajna i nepovratna — kad se jednom prešlo, ne vraća se.
+          </p>
+
+          <div className="space-y-6">
+            <div className="bg-kolo-bg rounded-2xl p-6 border-l-4 border-kolo-gold-400">
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                <span className="text-xs font-bold tracking-widest text-kolo-gold-600 uppercase">Prvi prag</span>
+                <h3 className="text-lg font-bold text-kolo-green-900" style={{ letterSpacing: "-0.01em" }}>
+                  Opticaj POEN-a dostigne milion
+                </h3>
+              </div>
+              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+                Sve dok je opticaj manji, Fondacija sama upravlja. Kad se pređe milion POEN-a u sistemu — što znači da je Protokol toliko ušao u minus emitujući POEN članovima — počinje sticanje ZRNA i aktivira se Gornje Kolo. Od tog trenutka sve bitne odluke o sistemu donose se kvadratnim glasanjem.
+              </p>
+            </div>
+
+            <div className="bg-kolo-bg rounded-2xl p-6 border-l-4 border-kolo-green-700">
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                <span className="text-xs font-bold tracking-widest text-kolo-green-700 uppercase">Drugi prag</span>
+                <h3 className="text-lg font-bold text-kolo-green-900" style={{ letterSpacing: "-0.01em" }}>
+                  Sredstva Fondacije = trostruki mesečni troškovi
+                </h3>
+              </div>
+              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+                Dok je Fondacija finansijski osetljiva, ona zadržava zaštitni veto na alokaciju dinara i parametre direktne finansijske održivosti. Kad sredstva dostignu trostruki iznos prošlomesečnih operativa — što znači da Fondacija može da preživi tri meseca čak i da svi prihodi stanu — veto se trajno gasi. Fondacija postaje izvršni organ Gornjeg Kola.
+              </p>
+            </div>
+          </div>
+
+          <p className="text-xs text-kolo-muted mt-6 leading-relaxed italic">
+            Pragovi su strukturni mehanizam, ne obećanje na rok. Fondacija ne preuzima obavezu kad će ovi događaji nastupiti.
+          </p>
+        </div>
+      </section>
+
+      {/* ── S8: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">
         <div>
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
@@ -686,7 +740,7 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S8: CTA ────────────────────────────────────────────────── */}
+      {/* ── S9: CTA ────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <div className="inline-block bg-white/10 text-white/70 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
           Sve si pročitao/la

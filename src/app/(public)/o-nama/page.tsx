@@ -31,7 +31,7 @@ export default function ONamaPage() {
             <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
               <a href="#prica" className="hover:text-white/80 transition-colors">Priča</a>
               <span className="text-white/20">·</span>
-              <a href="#sta-radimo-sada" className="hover:text-white/80 transition-colors">Šta radimo sada</a>
+              <a href="#sta-radimo-sada" className="hover:text-white/80 transition-colors">Status sistema</a>
               <span className="text-white/20">·</span>
               <a href="#kako-se-ukljucujes" className="hover:text-white/80 transition-colors">Kako se uključuješ</a>
               <span className="text-white/20">·</span>
@@ -111,18 +111,88 @@ export default function ONamaPage() {
         </div>
       </section>
 
-      {/* ── ŠTA RADIMO SADA ───────────────────────────────────────── */}
+      {/* ── STATUS SISTEMA · MAJ 2026 ─────────────────────────────── */}
       <section id="sta-radimo-sada" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[760px] mx-auto">
           <div className="flex items-center gap-3 mb-6 flex-wrap">
             <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
-              Šta radimo sada
+              Status sistema
             </div>
             <span className="text-xs text-kolo-muted font-medium tracking-wide">Maj 2026.</span>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
-            KOLO se priprema za beta fazu
+            Gde smo sada
           </h2>
+          <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
+            Sistem se gradi po fazama. Trenutno smo u pripremnoj fazi pred otvaranje platforme prvim verifikovanim korisnicima.
+          </p>
+
+          {/* Timeline */}
+          <div className="relative mb-10 pb-8 border-b border-kolo-border">
+            {/* Mobilni — vertikalni redosled */}
+            <div className="md:hidden relative">
+              <div
+                className="absolute w-0.5 bg-kolo-border"
+                style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
+              />
+              <div className="flex flex-col gap-3">
+                {[
+                  { r1: "Pripremna", r2: "faza", aktivan: true },
+                  { r1: "Testiranje", r2: "platforme", aktivan: false },
+                  { r1: "Prvih sto", r2: "korisnika", aktivan: false },
+                  { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
+                  { r1: "Međugradska", r2: "mreža", aktivan: false },
+                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Puna", r2: "zrelost", aktivan: false },
+                ].map((faza) => (
+                  <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                    <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1} {faza.r2}
+                      {faza.aktivan && (
+                        <span className="ml-2 text-[11px] font-bold text-kolo-green-700">← tu smo</span>
+                      )}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop — horizontalni redosled */}
+            <div className="hidden md:block relative pt-5">
+              <div
+                className="absolute h-0.5 bg-kolo-border"
+                style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
+              />
+              <div className="relative grid grid-cols-7">
+                {[
+                  { r1: "Pripremna", r2: "faza", aktivan: true },
+                  { r1: "Testiranje", r2: "platforme", aktivan: false },
+                  { r1: "Prvih sto", r2: "korisnika", aktivan: false },
+                  { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
+                  { r1: "Međugradska", r2: "mreža", aktivan: false },
+                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Puna", r2: "zrelost", aktivan: false },
+                ].map((faza) => (
+                  <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
+                    {faza.aktivan && (
+                      <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
+                        tu smo
+                      </span>
+                    )}
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                    <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1}<br />{faza.r2}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
+            KOLO se priprema za beta fazu
+          </h3>
           <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
             Završavaju se poslednji koraci pred otvaranje sistema prvim korisnicima.
           </p>
