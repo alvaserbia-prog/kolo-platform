@@ -17,7 +17,9 @@ export default async function PublicHeader() {
             <Image src={logoImg} alt="KOLO" width={48} height={28} style={{ height: "auto" }} />
             <span className="font-bold text-kolo-green-900 text-xl tracking-tight">KOLO</span>
           </Link>
-          <JezikSvitcer />
+          <div className="hidden md:flex">
+            <JezikSvitcer />
+          </div>
         </div>
 
         <PublicNav isLoggedIn={!!session} />

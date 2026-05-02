@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
+import JezikSvitcer from "@/components/JezikSvitcer";
 
 interface DnevniBrojevi {
   novcanik: number;
@@ -138,10 +139,13 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose, 
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/kolo-icon.png" alt="KOLO" style={{ width: 38, height: 38, objectFit: "contain" }} />
-          <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
+        <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/kolo-icon.png" alt="KOLO" style={{ width: 38, height: 38, objectFit: "contain" }} />
+            <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
+          </div>
+          <JezikSvitcer />
         </div>
         <SidebarContent verified={verified} isAdmin={isAdmin} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>

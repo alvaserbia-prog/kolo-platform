@@ -30,7 +30,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           <div className="hidden md:flex items-center w-52 px-4 gap-3">
             <JezikSvitcer />
           </div>
-          {/* Mobilno: hamburger + naziv + zastavice */}
+          {/* Mobilno: hamburger + naziv */}
           <div className="flex md:hidden items-center gap-2 px-4">
             <button
               onClick={onMenuOpen}
@@ -44,7 +44,6 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               </svg>
             </button>
             <span className="font-bold text-white text-base tracking-widest">KOLO</span>
-            <JezikSvitcer />
           </div>
         </div>
 

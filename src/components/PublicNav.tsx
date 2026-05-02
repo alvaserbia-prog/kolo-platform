@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
+import JezikSvitcer from "@/components/JezikSvitcer";
 
 type Props = {
   isLoggedIn: boolean;
@@ -124,20 +125,23 @@ export default function PublicNav({ isLoggedIn }: Props) {
                 KOLO
               </span>
             </Link>
-            <button
-              onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center w-10 h-10 rounded-lg text-kolo-text hover:bg-kolo-bg transition-colors"
-              aria-label="Zatvori meni"
-            >
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <path
-                  d="M5 5l12 12M17 5L5 17"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+            <div className="flex items-center gap-3">
+              <JezikSvitcer />
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center w-10 h-10 rounded-lg text-kolo-text hover:bg-kolo-bg transition-colors"
+                aria-label="Zatvori meni"
+              >
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <path
+                    d="M5 5l12 12M17 5L5 17"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
