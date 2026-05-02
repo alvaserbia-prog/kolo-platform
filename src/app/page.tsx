@@ -495,91 +495,37 @@ export default async function Home() {
           </section>
         )}
 
-        {/* ── SEKCIJA 8 — STRUKTURALNI DOKAZ (+ TRANSAKCIJE AKO IH IMA DOVOLJNO) ─────────────────────── */}
-        {poslednjeTransakcije.length >= 10 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-            <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 flex flex-col">
-              <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
-                Poslednjih {poslednjeTransakcije.length} transakcija
-              </h2>
-              <div className="divide-y divide-kolo-bg flex-1">
-                {poslednjeTransakcije.map((t) => (
-                  <div
-                    key={t.id}
-                    className="grid items-center py-3 text-sm gap-2"
-                    style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 6rem 5rem" }}
-                  >
-                    <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
-                    <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"/>
-                      <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                    <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
-                    <span className="font-semibold text-kolo-text whitespace-nowrap text-right tabular-nums">
-                      {t.amount.toLocaleString("sr-RS")} POEN
-                    </span>
-                    <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
-                      {relativnoVreme(t.createdAt)}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs text-kolo-muted mt-5 text-center">
-                Punu evidenciju vide registrovani članovi platforme.
-              </p>
-            </section>
-
-            <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 flex flex-col">
-              <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
-                Strukturalni dokaz
-              </h2>
-              <ul className="divide-y divide-kolo-bg">
-                <li className="flex items-center gap-3 py-3 text-sm">
-                  <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                  <p className="text-kolo-text leading-snug">
-                    Sistem ne zavisi od priliva novog novca.
-                  </p>
-                </li>
-                <li className="flex items-center gap-3 py-3 text-sm">
-                  <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                  <p className="text-kolo-text leading-snug">
-                    Svaki POEN koji postoji izdat je od strane Protokola kao nagrada za evidentiran doprinos Zajedničkom dobru.
-                  </p>
-                </li>
-                <li className="flex items-center gap-3 py-3 text-sm">
-                  <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                  <p className="text-kolo-text leading-snug">
-                    Zbir svih POEN računa u sistemu uvek je nula.
-                  </p>
-                </li>
-              </ul>
-            </section>
-          </div>
-        ) : (
+        {/* ── SEKCIJA 8 — POSLEDNJE TRANSAKCIJE (samo ako ih ima ≥10) ─────────────────────── */}
+        {poslednjeTransakcije.length >= 10 && (
           <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
             <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
-              Strukturalni dokaz
+              Poslednjih {poslednjeTransakcije.length} transakcija
             </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <li className="flex items-start gap-3 text-sm">
-                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
-                <p className="text-kolo-text leading-snug">
-                  Sistem ne zavisi od priliva novog novca.
-                </p>
-              </li>
-              <li className="flex items-start gap-3 text-sm">
-                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
-                <p className="text-kolo-text leading-snug">
-                  Svaki POEN koji postoji izdat je od strane Protokola kao nagrada za evidentiran doprinos Zajedničkom dobru.
-                </p>
-              </li>
-              <li className="flex items-start gap-3 text-sm">
-                <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
-                <p className="text-kolo-text leading-snug">
-                  Zbir svih POEN računa u sistemu uvek je nula.
-                </p>
-              </li>
-            </ul>
+            <div className="divide-y divide-kolo-bg">
+              {poslednjeTransakcije.map((t) => (
+                <div
+                  key={t.id}
+                  className="grid items-center py-3 text-sm gap-2"
+                  style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 6rem 5rem" }}
+                >
+                  <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
+                  <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                  <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
+                  <span className="font-semibold text-kolo-text whitespace-nowrap text-right tabular-nums">
+                    {t.amount.toLocaleString("sr-RS")} POEN
+                  </span>
+                  <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
+                    {relativnoVreme(t.createdAt)}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-kolo-muted mt-5 text-center">
+              Punu evidenciju vide registrovani članovi platforme.
+            </p>
           </section>
         )}
 
@@ -666,40 +612,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ŠTA KOLO NIJE */}
-        <section id="sta-kolo-nije" className="bg-white rounded-2xl card-shadow p-5">
-          <h2 className="text-lg font-bold text-kolo-green-900 mb-2">Šta KOLO nije</h2>
-          <p className="text-sm text-kolo-muted mb-5">Pre nego što nastaviš — jasno da znaš šta KOLO nije.</p>
-          <div className="space-y-4">
-            {[
-              {
-                naslov: "Nije piramidalna šema",
-                opis: "Nema nivoa ispod tebe. Nema provizije od tuđih doprinosa. Sistem je zero-sum — svaki POEN koji postoji evidentiran je kao obaveza.",
-              },
-              {
-                naslov: "Nije kriptovaluta",
-                opis: "POEN nije token, ne trguje se ni na kakvoj berzi, nema tržišnu cenu. POEN je interna evidencija doprinosa unutar krugova.",
-              },
-              {
-                naslov: "Ne obećava brzu zaradu",
-                opis: "KOLO nudi održiv sistem razmene između ljudi koji se međusobno poznaju. Vrednost je u mreži — ne u spekulaciji.",
-              },
-            ].map((s) => (
-              <div key={s.naslov} className="flex gap-3">
-                <div className="w-5 h-5 rounded-full bg-kolo-danger-light flex items-center justify-center shrink-0 mt-0.5">
-                  <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-                    <path d="M1.5 1.5l5 5M6.5 1.5l-5 5" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-kolo-text">{s.naslov}</p>
-                  <p className="text-sm text-kolo-muted mt-0.5 leading-relaxed">{s.opis}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
       </div>
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
@@ -721,7 +633,6 @@ export default async function Home() {
               <ul className="space-y-2 text-sm text-kolo-muted">
                 <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Kako funkcioniše</Link></li>
                 <li><a href="#" className="hover:text-kolo-green-700 transition-colors">Pravilnik</a></li>
-                <li><a href="#sta-kolo-nije" className="hover:text-kolo-green-700 transition-colors">Šta KOLO nije</a></li>
               </ul>
             </div>
             <div>

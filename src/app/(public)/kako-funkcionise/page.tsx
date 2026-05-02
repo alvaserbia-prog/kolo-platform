@@ -716,7 +716,43 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S8: FAQ AKORDEON ───────────────────────────────────────── */}
+      {/* ── S8: STRUKTURALNI DOKAZ ─────────────────────────────────── */}
+      <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[680px] mx-auto">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+            Strukturalni dokaz
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
+            Tri matematičke garancije sistema
+          </h2>
+          <p className="text-base text-kolo-muted leading-relaxed mb-6" style={{ lineHeight: "1.75" }}>
+            Sve što je opisano iznad — emisija POEN-a, Programi, ZRNO, Pragovi — počiva na tri tačke koje se ne mogu zaobići. Nisu obećanje, nego svojstvo sistema.
+          </p>
+
+          <ul className="space-y-3">
+            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
+              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">1</span>
+              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
+                Sistem ne zavisi od priliva novog novca.
+              </p>
+            </li>
+            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
+              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">2</span>
+              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
+                Svaki POEN koji postoji izdat je od strane Protokola kao priznanje evidentiranog doprinosa zajedničkom dobru.
+              </p>
+            </li>
+            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
+              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">3</span>
+              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
+                Zbir svih POEN računa u sistemu — članova, Krugova, Protokola — uvek je tačno nula.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* ── S9: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">
         <div>
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
@@ -740,7 +776,7 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S9: CTA ────────────────────────────────────────────────── */}
+      {/* ── S10: CTA ────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <div className="inline-block bg-white/10 text-white/70 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
           Sve si pročitao/la
