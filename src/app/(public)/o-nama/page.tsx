@@ -248,7 +248,7 @@ export default function ONamaPage() {
             Sistem se gradi kroz različite oblike doprinosa
           </h2>
           <p className="text-kolo-muted leading-relaxed max-w-[680px]" style={{ lineHeight: "1.7" }}>
-            Bilo da imaš pet minuta, ekspertizu, sredstva ili kontakt — postoji kanal kroz koji možeš da uđeš.
+            Bilo da imaš pet minuta, ekspertizu, sredstva ili kontakt — postoji kanal kroz koji možeš da doprineseš sistemu.
           </p>
         </div>
 
@@ -257,21 +257,21 @@ export default function ONamaPage() {
           {[
             {
               naslov: "Rani pristup i verifikacija",
-              tekst: "Ako još nije trenutak za aktivno uključivanje, ali želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice i njihov rad u beta fazi posebno se prepoznaje kroz Program evidencije doprinosa.",
+              tekst: "Ako želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice i njihov rad u beta fazi posebno se prepoznaje kroz Program evidencije doprinosa.",
               cta: "Registruj se besplatno →",
               ctaHref: "/registracija",
               ctaIsLink: true,
             },
             {
               naslov: "Postani pokrovitelj",
-              tekst: "Ako vodiš firmu ili imaš sredstva da podržiš razvoj, donacija Fondaciji direktno omogućava operativnu održivost sistema u prvim mesecima. Pokrovitelji su javno navedeni, a nivoi doprinosa su transparentno definisani u Pravilniku.",
+              tekst: "Ako vodiš firmu ili imaš sredstva da podržiš razvoj, donacija Fondaciji direktno omogućava operativnu održivost sistema. Pokrovitelji su javno navedeni, a nivoi doprinosa su transparentno definisani u Pravilniku.",
               cta: "Piši nam → kontakt@ekolo.rs",
               ctaHref: "mailto:kontakt@ekolo.rs",
               ctaIsLink: false,
             },
             {
               naslov: "Pomozi razvoju",
-              tekst: "Ako si programer, prevodilac, dizajner ili nešto drugo što može da pomogne — javi se. Posebno tražimo ljude koji mogu da rade na razvoju platforme.",
+              tekst: "Ako si programer, dizajner ili druge IT struke što može da pomogne razvoju naše platforme i sistema uopšte — javi se.",
               cta: "Piši nam → kontakt@ekolo.rs",
               ctaHref: "mailto:kontakt@ekolo.rs",
               ctaIsLink: false,
@@ -321,7 +321,7 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Pravna i računovodstvena ekspertiza",
-                tekst: "Pravnici sa interesom za zadružno pravo, fondacijsko pravo i pitanja digitalnih platformi, kao i računovođe sa iskustvom u neprofitnom sektoru — dragocen su resurs.",
+                tekst: "Pravnici sa interesom za zadružno pravo, fondacijsko pravo i pitanja digitalnih platformi, kao i računovođe sa iskustvom u neprofitnom sektoru.",
               },
               {
                 naslov: "Strukovne i institucionalne veze",
@@ -333,7 +333,7 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Lična donacija",
-                tekst: "Ako nemaš firmu ali imaš mogućnost i želju da podržiš sistem direktno, fizička lica takođe mogu biti pokrovitelji pod istim uslovima kao firme.",
+                tekst: "Ako nemaš firmu ali imaš mogućnost i želju da podržiš sistem direktno, fizička lica takođe mogu biti donatori čiji se doprinos evidentira na poseban način.",
               },
               {
                 naslov: "Ostali oblici doprinosa",
