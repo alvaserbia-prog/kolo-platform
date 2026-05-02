@@ -367,14 +367,11 @@ export default function KakoFunkcionisePage() {
 
       {/* ── S7: CTA ────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
-        <div className="inline-block bg-white/10 text-white/70 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
-          Sve si pročitao/la
-        </div>
         <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
-          Pravila su jasna. Sad je na tebi.
+          Sve si pročitao
         </h2>
         <p className="text-white/70 text-base mb-7 max-w-md mx-auto leading-relaxed">
-          Registracija je besplatna. Verifikacijom dobijaš 1.000 POEN startnog kapitala.
+          Pravila su jasna. Registracija je besplatna. Verifikacijom dobijaš 1.000 POEN-a.
           Javna evidencija i oglasi na Pijaci dostupni su i bez registracije.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -389,6 +386,12 @@ export default function KakoFunkcionisePage() {
             className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
           >
             Pogledaj Pijacu
+          </Link>
+          <Link
+            href="/"
+            className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
+          >
+            Nazad na početnu
           </Link>
         </div>
       </section>
