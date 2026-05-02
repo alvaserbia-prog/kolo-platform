@@ -42,7 +42,7 @@ export default function FaqAkordeon({ pitanja }: Props) {
             <div className="px-5 pb-5">
               <div className="border-t border-kolo-border pt-4">
                 <p
-                  className="text-base text-kolo-muted leading-relaxed"
+                  className="text-base text-kolo-muted leading-relaxed text-body"
                   style={{ lineHeight: "1.75" }}
                 >
                   {item.odgovor}

@@ -58,7 +58,7 @@ export default function ONamaPage() {
       <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-8 border-l-4 border-kolo-green-700">
         <div className="max-w-[680px] mx-auto">
           <blockquote
-            className="text-base md:text-lg text-kolo-text mb-4"
+            className="text-base md:text-lg text-kolo-text mb-4 text-body"
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>Kao lekaru poziv mi je da pomažem ljudima. Smatram da je iz istog razloga osmišljen i
@@ -67,7 +67,7 @@ export default function ONamaPage() {
             imaju svoje mesto u zajednici i mogu da joj doprinesu na svoj način. Samo im treba
             infrastruktura.<span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
-          <p className="text-sm text-kolo-muted font-medium">— Nikola Šarić</p>
+          <p className="text-sm text-kolo-muted font-medium text-center">— Nikola Šarić</p>
         </div>
       </section>
 
@@ -80,7 +80,7 @@ export default function ONamaPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-8" style={{ letterSpacing: "-0.02em" }}>
             Šta nas je dovelo ovde
           </h2>
-          <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+          <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
               Prva sumnja u sistem došla je još na medicinskom fakultetu. Tada sam video da nauka koju
               učim nije neutralna i da postoje skriveni interesi koji struku usmeravaju prema profitu.
@@ -120,7 +120,7 @@ export default function ONamaPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
             Gde smo sada
           </h2>
-          <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
+          <p className="text-kolo-muted leading-relaxed mb-8 text-body" style={{ lineHeight: "1.7" }}>
             Sistem se gradi po fazama. Trenutno smo u pripremnoj fazi pred otvaranje platforme prvim verifikovanim korisnicima.
           </p>
 
@@ -190,7 +190,7 @@ export default function ONamaPage() {
           <h3 className="text-xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
             KOLO se priprema za beta fazu
           </h3>
-          <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
+          <p className="text-kolo-muted leading-relaxed mb-8 text-body" style={{ lineHeight: "1.7" }}>
             Završavaju se poslednji koraci pred otvaranje sistema prvim korisnicima.
           </p>
 
@@ -221,7 +221,7 @@ export default function ONamaPage() {
                 <div className="w-2 h-2 rounded-full bg-kolo-green-700 mt-2.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-kolo-text mb-1">{stavka.naslov}</p>
-                  <p className="text-sm text-kolo-muted leading-relaxed" style={{ lineHeight: "1.7" }}>
+                  <p className="text-sm text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
                     {stavka.tekst}
                   </p>
                 </div>
@@ -230,7 +230,7 @@ export default function ONamaPage() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-kolo-border">
-            <p className="text-sm font-medium text-kolo-green-900 italic" style={{ lineHeight: "1.7" }}>
+            <p className="text-sm font-medium text-kolo-green-900 italic text-center" style={{ lineHeight: "1.7" }}>
               Cilj svih ovih koraka je da Fondacija što pre prestane da bude centar sistema.
             </p>
           </div>
@@ -247,7 +247,7 @@ export default function ONamaPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
             Sistem se gradi kroz različite oblike doprinosa
           </h2>
-          <p className="text-kolo-muted leading-relaxed max-w-[680px]" style={{ lineHeight: "1.7" }}>
+          <p className="text-kolo-muted leading-relaxed max-w-[680px] text-body" style={{ lineHeight: "1.7" }}>
             Bilo da imaš pet minuta, ekspertizu, sredstva ili kontakt — postoji kanal kroz koji možeš da doprineseš sistemu.
           </p>
         </div>
@@ -284,7 +284,7 @@ export default function ONamaPage() {
               <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {k.naslov}
               </h3>
-              <p className="text-sm text-kolo-muted leading-relaxed flex-1" style={{ lineHeight: "1.65" }}>
+              <p className="text-sm text-kolo-muted leading-relaxed flex-1 text-body" style={{ lineHeight: "1.65" }}>
                 {k.tekst}
               </p>
               {k.ctaIsLink ? (
@@ -342,7 +342,7 @@ export default function ONamaPage() {
             ].map((k) => (
               <div key={k.naslov} className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-2">
                 <p className="font-semibold text-kolo-text text-sm leading-snug">{k.naslov}</p>
-                <p className="text-xs text-kolo-muted leading-relaxed" style={{ lineHeight: "1.6" }}>
+                <p className="text-xs text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.6" }}>
                   {k.tekst}
                 </p>
               </div>
@@ -386,31 +386,28 @@ export default function ONamaPage() {
               </svg>
             </div>
           </div>
-          <p className="text-kolo-muted mt-4 leading-relaxed max-w-[580px]" style={{ lineHeight: "1.7" }}>
-            Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u
-            robi, uslugama i novcu, pokriva operativne troškove platforme, drži infrastrukturu i
-            zastupa KOLO pred zajednicom i državom. Ne emituje POEN i ne raspolaže njime.
-          </p>
         </div>
 
         <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-kolo-border">
           {[
+            {
+              naslov: "",
+              tekst: "Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u robi, uslugama i novcu, pokriva operativne troškove platforme, drži infrastrukturu i zastupa KOLO pred zajednicom i državom.",
+            },
             {
               naslov: "Sedište i registracija",
               tekst: "Sombor, Šetalište 14. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić).",
             },
             {
               naslov: "Organi",
-              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola — kada opticaj POENA dostigne 1.000.000 — Fondacija postaje izvršni organ skupštine, koja odlučuje kroz glasanje ZRNOM (po kvadratnom korenu, kao zaštita od koncentracije moći). Taj prelazak je strukturni mehanizam, ne obećanje.",
+              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija postaje njegov izvršni organ.",
             },
-            {
-              naslov: "Znak",
-              tekst: "Tri ljudske figure raspoređene u krug, sa rukama koje formiraju prsten. U središtu klas pšenice. Znak je definisan Statutom KOLO Fondacije, članom 5, i ne može se menjati bez odluke Upravnog odbora.",
-            },
-          ].map((stub) => (
-            <div key={stub.naslov} className="p-6 md:p-8">
-              <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">{stub.naslov}</p>
-              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.7" }}>{stub.tekst}</p>
+          ].map((stub, idx) => (
+            <div key={stub.naslov || `card-${idx}`} className="p-6 md:p-8">
+              {stub.naslov && (
+                <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">{stub.naslov}</p>
+              )}
+              <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>{stub.tekst}</p>
             </div>
           ))}
         </div>
@@ -421,10 +418,6 @@ export default function ONamaPage() {
         <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
           Javno i dostupno
         </div>
-        <h2 className="text-2xl font-bold text-kolo-green-900 mb-2" style={{ letterSpacing: "-0.02em" }}>
-          Sva pravila, sva dokumenta, svaki kontakt.
-        </h2>
-        <p className="text-kolo-muted mb-8">Ništa se ne krije za kasnije.</p>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Levo — dokumenti */}
@@ -432,10 +425,10 @@ export default function ONamaPage() {
             <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti</p>
             <div className="space-y-2">
               {[
-                { naziv: "Pravilnik o KOLO sistemu (v11) + Prilozi", href: "#" },
-                { naziv: "Statut KOLO Fondacije (v2)", href: "#" },
-                { naziv: "Politika privatnosti (v4)", href: "/privatnost" },
-                { naziv: "Uslovi korišćenja (v4)", href: "/uslovi" },
+                { naziv: "Pravilnik o KOLO sistemu (v2.12) + Prilozi", href: "#" },
+                { naziv: "Statut KOLO Fondacije (v2.1)", href: "#" },
+                { naziv: "Politika privatnosti (v2.1)", href: "/privatnost" },
+                { naziv: "Uslovi korišćenja (v2.1)", href: "/uslovi" },
               ].map((dok) => (
                 <a
                   key={dok.naziv}
@@ -455,9 +448,6 @@ export default function ONamaPage() {
                 </a>
               ))}
             </div>
-            <p className="text-xs text-kolo-muted mt-4 px-1 leading-relaxed">
-              Dokumenti su u PDF formatu. Svaka nova verzija zamenjuje prethodnu, a istorija izmena je zabeležena u samom dokumentu.
-            </p>
           </div>
 
           {/* Desno — kontakt */}
@@ -490,9 +480,8 @@ export default function ONamaPage() {
               </div>
             </div>
             <div className="mt-6 p-4 bg-kolo-bg rounded-xl">
-              <p className="text-sm text-kolo-muted leading-relaxed">
-                <strong className="text-kolo-text">Pitanja, prigovori, predlozi</strong> — pišite direktno.
-                Odgovaramo lično, ne automatski.
+              <p className="text-sm text-kolo-muted leading-relaxed text-body">
+                Za sva pitanja koja nisu pokrivena u FAQ sekciji, možete nam se obratiti direktno na navedenu adresu.
               </p>
             </div>
           </div>
@@ -501,7 +490,7 @@ export default function ONamaPage() {
 
       {/* ── FAQ TIZER ─────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <div>
+        <div className="text-center">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
             Pitanja o Fondaciji
           </div>

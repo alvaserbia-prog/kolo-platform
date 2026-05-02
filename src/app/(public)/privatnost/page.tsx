@@ -26,7 +26,7 @@ export default function PolitikaPrivatnostiPage() {
         </div>
       </div>
 
-      <div className="space-y-8 text-sm text-kolo-text leading-relaxed">
+      <div className="space-y-8 text-sm text-kolo-text leading-relaxed text-body">
 
         {/* Član 1 */}
         <section>

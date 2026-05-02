@@ -218,7 +218,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             {[
               {
                 naslov: "Mreža umesto tržišta",
@@ -428,7 +428,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <p className="font-semibold text-kolo-text text-sm mb-1">{k.naslov}</p>
-                  <p className="text-sm text-kolo-muted leading-relaxed">{k.opis}</p>
+                  <p className="text-sm text-kolo-muted leading-relaxed text-body">{k.opis}</p>
                 </div>
               </div>
             ))}
@@ -547,13 +547,13 @@ export default async function Home() {
               <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
                 Ko stoji iza KOLA
               </div>
-              <p className="text-kolo-text leading-relaxed mb-3 text-sm">
+              <p className="text-kolo-text leading-relaxed mb-3 text-sm text-body">
                 <strong>Nikola Šarić</strong>, lekar iz Sombora. Četrnaest godina razvija sisteme komplementarne ekonomije i prati kako rade slične mreže u Švajcarskoj, Kanadi, Italiji i Japanu.
               </p>
-              <p className="text-kolo-muted text-sm leading-relaxed mb-5">
+              <p className="text-kolo-muted text-sm leading-relaxed mb-5 text-body">
                 KOLO je adaptacija socijalne i solidarne ekonomije — sektora koji su Ujedinjene nacije i Evropska unija formalno priznali — za srpski pravni i društveni kontekst.
               </p>
-              <blockquote className="border-l-4 border-kolo-green-700 pl-4 text-sm text-kolo-muted italic leading-relaxed mb-5">
+              <blockquote className="border-l-4 border-kolo-green-700 pl-4 text-sm text-kolo-muted italic leading-relaxed mb-5 text-body">
                 „Svaki dan gledam ljude kojima sistem treba da pomogne, ali ne može. Smatram da svi imaju mesto u zajednici i mogu da joj doprinesu. Samo im treba infrastruktura."
               </blockquote>
               <Link href="/o-nama" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">

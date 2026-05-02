@@ -98,6 +98,18 @@ body {
   color: #1E4E8C;
 }
 
+/* ── Telo teksta (obostrano poravnanje sa hyphenation za srpski) ── */
+
+.text-body {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  text-wrap: pretty;
+}
+
 /* ── Toast animacija ─────────────────────────────────────────────── */
 
 @keyframes slide-up {

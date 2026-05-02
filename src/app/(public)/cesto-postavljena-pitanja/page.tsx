@@ -17,7 +17,7 @@ export default function CestoPostavljenaPitanjaPage() {
         >
           Često postavljana pitanja
         </h1>
-        <p className="text-base text-kolo-muted mt-2 leading-relaxed max-w-2xl">
+        <p className="text-base text-kolo-muted mt-2 leading-relaxed max-w-2xl text-body">
           Odgovori na najčešća pitanja o KOLO sistemu. Klikni na pitanje da
           razviješ odgovor, ili pretraži po ključnoj reči.
         </p>

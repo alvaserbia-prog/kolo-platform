@@ -20,7 +20,7 @@ export default async function PokroviteljiPage() {
     <div className="max-w-[932px] mx-auto">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-kolo-green-900 mb-3">Pokrovitelji</h1>
-        <p className="text-kolo-muted leading-relaxed">
+        <p className="text-kolo-muted leading-relaxed text-body">
           Pokrovitelji su pravna lica i organizacije koje podržavaju KOLO zajednicu
           sponzorstvima i donacijama. Njihovi vlasnici — verifikovani članovi platforme —
           dobijaju POEN bonuse srazmerno kumulativnom doprinosu.
@@ -59,7 +59,7 @@ export default async function PokroviteljiPage() {
 
       <div className="mt-8 p-5 bg-kolo-gold-50 border border-kolo-gold-200 rounded-2xl">
         <h2 className="font-semibold text-kolo-gold-700 mb-2">Postanite pokrovitelj</h2>
-        <p className="text-sm text-kolo-muted mb-3">
+        <p className="text-sm text-kolo-muted mb-3 text-body">
           Ako zastupate pravno lice i želite da podržite KOLO zajednicu, obratite se
           administratorima platforme ili se prijavite kao verifikovani član.
         </p>

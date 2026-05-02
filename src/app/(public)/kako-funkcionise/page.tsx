@@ -213,7 +213,7 @@ export default function KakoFunkcionisePage() {
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-kolo-muted leading-relaxed">{n.opis}</p>
+                <p className="text-sm text-kolo-muted leading-relaxed text-body">{n.opis}</p>
               </div>
             );
           })}
@@ -277,7 +277,7 @@ export default function KakoFunkcionisePage() {
 
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-green-700 mb-1">Zero-sum princip</p>
-              <p className="text-sm text-kolo-muted leading-relaxed">
+              <p className="text-sm text-kolo-muted leading-relaxed text-body">
                 Zbir svih POEN-a u sistemu — svih korisnika i Protokola — uvek je tačno nula. Protokol ide u minus svaki put kad emituje. Niko ne može stvoriti POEN iz vazduha.
               </p>
             </div>
@@ -331,7 +331,7 @@ export default function KakoFunkcionisePage() {
 
             <div className="bg-kolo-gold-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-gold-600 mb-1">Zaštita od plutokratije</p>
-              <p className="text-sm text-kolo-muted leading-relaxed">
+              <p className="text-sm text-kolo-muted leading-relaxed text-body">
                 Kvadratni koren znači da niko sa puno ZRNA ne može jednostavno nadglasati ostale. Ko ima 10.000 ZRNA — ima 100 glasova, ne 10.000. Sistem nagrađuje širu participaciju, ne akumulaciju.
               </p>
             </div>
@@ -343,7 +343,7 @@ export default function KakoFunkcionisePage() {
 
       {/* ── S6: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">
-        <div>
+        <div className="text-center">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
             Operativna pitanja
           </div>

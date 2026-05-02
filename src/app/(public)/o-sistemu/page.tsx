@@ -88,7 +88,7 @@ export default function OSistemuPage() {
             i niko ne govoraše za imanje svoje da je njegovo, nego im sve bijaše zajedničko."
           </blockquote>
 
-          <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+          <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
               Sve što prolazi kroz KOLO sistem — rad članova, znanje i veštine, dobra koja idu iz ruke u ruku, vreme posvećeno drugima, mreža poznanstava i poverenja, infrastruktura koju Fondacija održava — ostaje u zajednici. Gradi je. Čini je sposobnijom da brine o sebi.
             </p>
@@ -368,7 +368,7 @@ export default function OSistemuPage() {
                   {k.podnaslov}
                 </p>
               </div>
-              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.7" }}>
+              <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
                 {k.tekst}
               </p>
             </div>
@@ -388,7 +388,7 @@ export default function OSistemuPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
             Pilot eksperiment solidarne ekonomije u Srbiji
           </h2>
-          <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+          <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
               Ideja da zajednica može da organizuje sopstvenu razmenu — da evidentira doprinos svojih
               članova i uspostavi jedinicu koja nije novac ali radi posao novca u zatvorenom krugu —
@@ -446,14 +446,14 @@ export default function OSistemuPage() {
                   {s.podnaslov}
                 </p>
               </div>
-              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.7" }}>
+              <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
                 {s.opis}
               </p>
               <div className="pt-3 border-t border-kolo-border mt-auto">
                 <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-1.5">
                   Šta je pokazao
                 </p>
-                <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.65" }}>
+                <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.65" }}>
                   {s.pokazao}
                 </p>
               </div>
@@ -465,13 +465,15 @@ export default function OSistemuPage() {
       {/* ── MEĐUNARODNI OKVIR ─────────────────────────────────────── */}
       <section id="okvir" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[680px] mx-auto">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Međunarodni okvir
+          <div className="text-center mb-6">
+            <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              Međunarodni okvir
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3 text-center" style={{ letterSpacing: "-0.02em" }}>
             Globalni i evropski tok u koji KOLO ulazi
           </h2>
-          <p className="text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.7" }}>
+          <p className="text-kolo-muted leading-relaxed mb-8 text-body" style={{ lineHeight: "1.7" }}>
             U poslednje četiri godine, solidarna ekonomija postala je formalno priznat sektor — i u UN
             sistemu, i u pravnom okviru Evropske unije.
           </p>
@@ -508,7 +510,7 @@ export default function OSistemuPage() {
                       {stavka.godina}
                     </span>
                   </div>
-                  <p className="text-sm text-kolo-muted leading-relaxed" style={{ lineHeight: "1.7" }}>
+                  <p className="text-sm text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
                     {stavka.tekst}
                   </p>
                 </div>
@@ -520,7 +522,7 @@ export default function OSistemuPage() {
             <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">
               Pristupni proces Srbije
             </p>
-            <p className="text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+            <p className="text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
               Srbija je u procesu pristupanja Evropskoj uniji, što znači da pravac kojim Unija ide
               postaje pravac kojem se i Srbija usklađuje — formalno, kroz pregovaračka{" "}
               <strong className="text-kolo-green-900">poglavlje 19</strong> (socijalna politika i
@@ -535,13 +537,15 @@ export default function OSistemuPage() {
       {/* ── ZAŠTO SAD I OVDE ──────────────────────────────────────── */}
       <section id="zasto-sad" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[680px] mx-auto">
-          <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Zašto sad i ovde
+          <div className="text-center mb-6">
+            <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              Zašto sad i ovde
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
             Trenutak je posebno povoljan
           </h2>
-          <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+          <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
               KOLO nije kopija nijedne od navedenih mreža. Razlike su stvarne —{" "}
               <strong className="text-kolo-green-900">KOLO Krug</strong> kao opciona forma lokalnog ili
@@ -582,7 +586,7 @@ export default function OSistemuPage() {
       <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-10 border-l-4 border-kolo-green-700">
         <div className="max-w-[680px] mx-auto">
           <blockquote
-            className="text-base md:text-lg text-kolo-text mb-4"
+            className="text-base md:text-lg text-kolo-text mb-4 text-body"
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>
@@ -591,19 +595,19 @@ export default function OSistemuPage() {
             <span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
           <p
-            className="text-sm text-kolo-muted italic mb-4"
+            className="text-sm text-kolo-muted italic mb-4 text-body"
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             „You never change things by fighting the existing reality. To change something, build a new
             model that makes the existing model obsolete."
           </p>
-          <p className="text-sm text-kolo-muted font-medium">— Buckminster Fuller</p>
+          <p className="text-sm text-kolo-muted font-medium text-center">— Buckminster Fuller</p>
         </div>
       </section>
 
       {/* ── FAQ TIZER ─────────────────────────────────────────────── */}
       <section className="space-y-4">
-        <div>
+        <div className="text-center">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
             Strukturni koncepti
           </div>
