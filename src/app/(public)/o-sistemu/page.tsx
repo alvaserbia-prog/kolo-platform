@@ -71,6 +71,8 @@ export default function OSistemuPage() {
             <span className="text-white/20">·</span>
             <a href="#ko-sta-radi" className="hover:text-white/80 transition-colors">Ko šta radi</a>
             <span className="text-white/20">·</span>
+            <a href="#arhitektura" className="hover:text-white/80 transition-colors">Arhitektura</a>
+            <span className="text-white/20">·</span>
             <a href="#topla-voda" className="hover:text-white/80 transition-colors">Ne izmišljamo toplu vodu</a>
             <span className="text-white/20">·</span>
             <a href="#sistemi" className="hover:text-white/80 transition-colors">Provereni sistemi</a>
@@ -177,11 +179,333 @@ export default function OSistemuPage() {
 
         <div className="bg-kolo-bg rounded-xl p-4 text-center">
           <p className="text-sm text-kolo-muted leading-relaxed">
-            Detalji u Pravilniku. Mehanički prikaz arhitekture i pragova{" "}
-            <Link href="/kako-funkcionise" className="text-kolo-green-700 hover:underline font-medium">
-              → /kako-funkcionise
+            Detalji u Pravilniku.
+          </p>
+        </div>
+      </section>
+
+      {/* ── ARHITEKTURA SISTEMA ────────────────────────────────────── */}
+      <section id="arhitektura" className="space-y-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-kolo-green-900 text-center" style={{ letterSpacing: "-0.02em" }}>
+          Arhitektura sistema
+        </h2>
+
+        <div className="bg-white rounded-2xl card-shadow p-6 md:p-8">
+          <div className="relative overflow-x-auto">
+            <svg
+              viewBox="0 0 720 740"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full max-w-3xl mx-auto"
+              style={{ minWidth: "320px" }}
+            >
+              <defs>
+                <marker
+                  id="arrow-green"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#1B6B3A" />
+                </marker>
+                <marker
+                  id="arrow-gold"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M0,0 L10,5 L0,10 Z" fill="#A07020" />
+                </marker>
+              </defs>
+
+              {/* VRH: ZAJEDNIČKO DOBRO */}
+              <rect x="40" y="10" width="640" height="110" rx="14" fill="#1B6B3A" />
+              <text x="360" y="50" textAnchor="middle" fill="white" fontSize="20" fontWeight="700" letterSpacing="3">
+                ZAJEDNIČKO DOBRO
+              </text>
+              <text x="360" y="80" textAnchor="middle" fill="rgba(255,255,255,0.92)" fontSize="14">
+                Mreža, znanje i infrastruktura
+              </text>
+              <text x="360" y="100" textAnchor="middle" fill="rgba(255,255,255,0.92)" fontSize="14">
+                kojom upravlja zajednica koja ih koristi
+              </text>
+
+              <path d="M360 158 L360 130" stroke="#1B6B3A" strokeWidth="2" />
+              <polygon points="354,130 360,120 366,130" fill="#1B6B3A" />
+              <text x="378" y="150" fill="#4B7A5E" fontSize="13" fontStyle="italic">
+                grade i čuvaju
+              </text>
+
+              {/* SREDINA: KOLO ZAJEDNICA */}
+              <text x="360" y="190" textAnchor="middle" fill="#1B6B3A" fontSize="16" fontWeight="700" letterSpacing="3">
+                KOLO ZAJEDNICA
+              </text>
+              <text x="360" y="212" textAnchor="middle" fill="#4B7A5E" fontSize="12">
+                svi korisnici sistema
+              </text>
+
+              <rect
+                x="20"
+                y="225"
+                width="680"
+                height="315"
+                rx="16"
+                fill="#F0F9F4"
+                stroke="#B3DFC5"
+                strokeWidth="1.8"
+                strokeDasharray="6 4"
+              />
+
+              <circle cx="360" cy="285" r="48" fill="#FFFBEB" stroke="#F0C060" strokeWidth="2.5" />
+              <text x="360" y="281" textAnchor="middle" fill="#92600A" fontSize="13" fontWeight="700">
+                GORNJE
+              </text>
+              <text x="360" y="299" textAnchor="middle" fill="#92600A" fontSize="13" fontWeight="700">
+                KOLO
+              </text>
+              <text x="360" y="354" textAnchor="middle" fill="#A07020" fontSize="12" fontStyle="italic">
+                upravljačko telo
+              </text>
+
+              <path d="M360 415 L360 335" stroke="#F0C060" strokeWidth="1.2" strokeDasharray="3 4" opacity="0.65" />
+
+              <text x="120" y="355" textAnchor="middle" fill="#1B6B3A" fontSize="14" fontWeight="700">
+                Krug
+              </text>
+              <circle
+                cx="120"
+                cy="430"
+                r="55"
+                fill="white"
+                stroke="#1B6B3A"
+                strokeWidth="2"
+                strokeDasharray="4 3"
+              />
+              <g transform="translate(95, 430)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(120, 455)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(145, 430)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+
+              <text x="600" y="355" textAnchor="middle" fill="#1B6B3A" fontSize="14" fontWeight="700">
+                Krug
+              </text>
+              <circle
+                cx="600"
+                cy="430"
+                r="55"
+                fill="white"
+                stroke="#1B6B3A"
+                strokeWidth="2"
+                strokeDasharray="4 3"
+              />
+              <g transform="translate(575, 430)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(600, 455)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(625, 430)">
+                <circle cx="0" cy="-4" r="7" fill="#1B6B3A" />
+                <path d="M -11 14 Q -11 2 0 2 Q 11 2 11 14 Z" fill="#1B6B3A" />
+              </g>
+
+              <text x="360" y="392" textAnchor="middle" fill="#4B7A5E" fontSize="13" fontWeight="700" letterSpacing="2">
+                ČLANOVI
+              </text>
+              <g transform="translate(282, 442)">
+                <circle cx="0" cy="-5" r="9" fill="#1B6B3A" />
+                <path d="M -14 18 Q -14 4 0 4 Q 14 4 14 18 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(322, 442)">
+                <circle cx="0" cy="-5" r="9" fill="#1B6B3A" />
+                <path d="M -14 18 Q -14 4 0 4 Q 14 4 14 18 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(362, 442)">
+                <circle cx="0" cy="-5" r="9" fill="#1B6B3A" />
+                <path d="M -14 18 Q -14 4 0 4 Q 14 4 14 18 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(402, 442)">
+                <circle cx="0" cy="-5" r="9" fill="#1B6B3A" />
+                <path d="M -14 18 Q -14 4 0 4 Q 14 4 14 18 Z" fill="#1B6B3A" />
+              </g>
+              <g transform="translate(442, 442)">
+                <circle cx="0" cy="-5" r="9" fill="#1B6B3A" />
+                <path d="M -14 18 Q -14 4 0 4 Q 14 4 14 18 Z" fill="#1B6B3A" />
+              </g>
+
+              <text x="360" y="505" textAnchor="middle" fill="#4B7A5E" fontSize="12" fontStyle="italic">
+                članovi se okupljaju u Krugove
+              </text>
+              <text x="360" y="525" textAnchor="middle" fill="#4B7A5E" fontSize="12" fontStyle="italic">
+                zajedno biraju i upravljaju kroz Gornje Kolo
+              </text>
+
+              <path
+                d="M187 595 L265 540"
+                stroke="#1B6B3A"
+                strokeWidth="2"
+                strokeDasharray="6 3"
+                markerEnd="url(#arrow-green)"
+              />
+              <path
+                d="M532 595 L455 540"
+                stroke="#A07020"
+                strokeWidth="2"
+                strokeDasharray="6 3"
+                markerEnd="url(#arrow-gold)"
+              />
+
+              {/* DNO: FONDACIJA + PROTOKOL */}
+              <rect x="20" y="595" width="335" height="135" rx="14" fill="#F0F9F4" stroke="#B3DFC5" strokeWidth="1.8" />
+              <text x="187" y="628" textAnchor="middle" fill="#1B6B3A" fontSize="16" fontWeight="700">
+                KOLO FONDACIJA
+              </text>
+              <text x="187" y="650" textAnchor="middle" fill="#4B7A5E" fontSize="13" fontWeight="600">
+                pravna osnova
+              </text>
+              <line x1="60" y1="662" x2="314" y2="662" stroke="#B3DFC5" strokeWidth="1" />
+              <text x="187" y="682" textAnchor="middle" fill="#4B7A5E" fontSize="12">
+                · pravno lice (fondacija)
+              </text>
+              <text x="187" y="700" textAnchor="middle" fill="#4B7A5E" fontSize="12">
+                · prima RSD donacije
+              </text>
+              <text x="187" y="718" textAnchor="middle" fill="#4B7A5E" fontSize="12">
+                · drži infrastrukturu
+              </text>
+
+              <rect x="365" y="595" width="335" height="135" rx="14" fill="#FFFBEB" stroke="#F0C060" strokeWidth="1.8" />
+              <text x="532" y="628" textAnchor="middle" fill="#92600A" fontSize="16" fontWeight="700">
+                KOLO PROTOKOL
+              </text>
+              <text x="532" y="650" textAnchor="middle" fill="#A07020" fontSize="13" fontWeight="600">
+                tehnička osnova
+              </text>
+              <line x1="405" y1="662" x2="660" y2="662" stroke="#F0C060" strokeWidth="1" />
+              <text x="532" y="682" textAnchor="middle" fill="#A07020" fontSize="12">
+                · softverski protokol
+              </text>
+              <text x="532" y="700" textAnchor="middle" fill="#A07020" fontSize="12">
+                · emituje POEN, vodi ZRNO
+              </text>
+              <text x="532" y="718" textAnchor="middle" fill="#A07020" fontSize="12">
+                · zero-sum invarijanta
+              </text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PRINCIP DVA ODVOJENA AKTA ──────────────────────────────── */}
+      <section className="bg-white rounded-2xl card-shadow p-6 md:p-8 border-l-4 border-kolo-green-700">
+        <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
+          Pravna priroda svake emisije
+        </div>
+        <h3 className="text-lg font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.01em" }}>
+          Princip dva odvojena akta
+        </h3>
+        <p className="text-sm text-kolo-muted leading-relaxed mb-3">
+          Bilo da donirate, doprinosite kroz Program evidencije doprinosa, ili imate status koji pokreće socijalni program — struktura je uvek ista.
+        </p>
+        <div className="space-y-2 mb-3">
+          <p className="text-sm text-kolo-muted leading-relaxed">
+            <strong className="text-kolo-text">Akt 1.</strong> Vi uradite nešto u korist zajedničkog dobra ili imate status koji to potvrđuje.
+          </p>
+          <p className="text-sm text-kolo-muted leading-relaxed">
+            <strong className="text-kolo-text">Akt 2.</strong> Protokol algoritamski emituje POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
+          </p>
+        </div>
+        <p className="text-sm text-kolo-muted leading-relaxed">
+          POEN nije naknada za vaš rad ni cena za donaciju — već evidencija doprinosa. Korisnik nema potraživanje prema Fondaciji za emisijom.
+        </p>
+      </section>
+
+      {/* ── RAZMENA NA PIJACI — ČLAN 4 ─────────────────────────────── */}
+      <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[660px] mx-auto">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+            Član 4 prostim jezikom
+          </div>
+          <h2 className="text-2xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
+            Razmena na Pijaci — odnos između korisnika
+          </h2>
+
+          <p className="text-base text-kolo-muted leading-relaxed mb-4" style={{ lineHeight: "1.75" }}>
+            Kada se na Pijaci dogovorite sa drugim članom da razmenite robu ili uslugu uz prenos POEN-a, to je odnos <strong className="text-kolo-text">između vas i tog člana</strong>, po pravilima obligacionog prava — kao i svaki drugi međuljudski dogovor. Protokol ne posreduje, ne izvršava razmenu, ne garantuje za nju i ne odgovara za rizike.
+          </p>
+          <p className="text-base text-kolo-muted leading-relaxed mb-4" style={{ lineHeight: "1.75" }}>
+            Sam prenos POEN-a u toj razmeni je izmena u evidenciji doprinosa zajedničkom dobru — <strong className="text-kolo-text">nije plaćanje novcem</strong> ni sredstvom plaćanja u smislu propisa o platnim uslugama. Postojanje POEN-a ne ukida obaveze koje korisnik već ima po opštim propisima Republike Srbije kada obavlja delatnost koja te obaveze pokreće.
+          </p>
+          <p className="text-sm text-kolo-muted leading-relaxed">
+            Detaljnije:{" "}
+            <Link href="/cesto-postavljena-pitanja" className="text-kolo-green-700 hover:underline">
+              česta pitanja
             </Link>
-            .
+            {" · "}
+            <Link href="/uslovi" className="text-kolo-green-700 hover:underline">
+              Uslovi korišćenja (Član 5)
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ── PRAGOVI SISTEMA ────────────────────────────────────────── */}
+      <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[680px] mx-auto">
+          <div className="inline-block bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+            Pragovi sistema
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
+            Dva praga koja menjaju sistem
+          </h2>
+          <p className="text-base text-kolo-muted leading-relaxed mb-8" style={{ lineHeight: "1.75" }}>
+            KOLO se ne razvija po datumu, nego po stanju. Dva merljiva događaja prevode sistem iz jedne faze u drugu. Oba su trajna i nepovratna — kad se jednom prešlo, ne vraća se.
+          </p>
+
+          <div className="space-y-6">
+            <div className="bg-kolo-bg rounded-2xl p-6 border-l-4 border-kolo-gold-400">
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                <span className="text-xs font-bold tracking-widest text-kolo-gold-600 uppercase">Prvi prag</span>
+                <h3 className="text-lg font-bold text-kolo-green-900" style={{ letterSpacing: "-0.01em" }}>
+                  Opticaj POEN-a dostigne milion
+                </h3>
+              </div>
+              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+                Sve dok je opticaj manji, Fondacija sama upravlja. Kad se pređe milion POEN-a u sistemu — što znači da je Protokol toliko ušao u minus emitujući POEN članovima — počinje sticanje ZRNA i aktivira se Gornje Kolo. Od tog trenutka sve bitne odluke o sistemu donose se kvadratnim glasanjem.
+              </p>
+            </div>
+
+            <div className="bg-kolo-bg rounded-2xl p-6 border-l-4 border-kolo-green-700">
+              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+                <span className="text-xs font-bold tracking-widest text-kolo-green-700 uppercase">Drugi prag</span>
+                <h3 className="text-lg font-bold text-kolo-green-900" style={{ letterSpacing: "-0.01em" }}>
+                  Sredstva Fondacije = trostruki mesečni troškovi
+                </h3>
+              </div>
+              <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
+                Dok je Fondacija finansijski osetljiva, ona zadržava zaštitni veto na alokaciju dinara i parametre direktne finansijske održivosti. Kad sredstva dostignu trostruki iznos prošlomesečnih operativa — što znači da Fondacija može da preživi tri meseca čak i da svi prihodi stanu — veto se trajno gasi. Fondacija postaje izvršni organ Gornjeg Kola.
+              </p>
+            </div>
+          </div>
+
+          <p className="text-xs text-kolo-muted mt-6 leading-relaxed italic">
+            Pragovi su strukturni mehanizam, ne obećanje na rok. Fondacija ne preuzima obavezu kad će ovi događaji nastupiti.
           </p>
         </div>
       </section>
