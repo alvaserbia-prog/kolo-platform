@@ -15,9 +15,7 @@ const sistemi = [
     podnaslov: "Švajcarska · od 1934.",
     opis: "Najstariji aktivni sistem ove kategorije. Osnovan u jeku velike depresije, kao mreža uzajamnog kredita između preduzeća — svaki član startuje na nuli, zaduženje se vraća prodajom drugim članovima, WIR frank se ne menja u švajcarski frank. Sistem je preživeo tri velike svetske krize i danas radi između desetina hiljada švajcarskih malih i srednjih preduzeća.",
     pokazao:
-      "Sistem uzajamnog kredita bez kamate i bez veze sa nacionalnom valutom može da preživi devedeset godina i da bude kontracikličan — kada formalna ekonomija slabi, trgovina u WIR-u raste.",
-    uzima: "Princip uzajamnog kredita, zbira-nula i nekonvertibilnosti u nacionalnu valutu.",
-    drugacije: "WIR je B2B mreža; KOLO je primarno P2P, sa firmama kao pokroviteljima.",
+      "Sistem uzajamnog kredita bez kamate može da preživi devedeset godina i da bude kontracikličan — kada formalna ekonomija slabi, trgovina u WIR-u raste.",
   },
   {
     naziv: "LETS",
@@ -25,9 +23,6 @@ const sistemi = [
     opis: "Michael Linton je 1983. u malom gradu na ostrvu Vankuver pokrenuo prvu Local Exchange Trading System — lokalnu mrežu u kojoj članovi razmenjuju rad, robu i usluge sopstvenom jedinicom evidencije, bez veze sa nacionalnom valutom. Tipična LETS mreža okuplja desetine do nekoliko stotina ljudi, zbir svih računa je uvek nula. Za četrdeset godina, model se proširio po svetu.",
     pokazao:
       "Lokalna mreža sa sopstvenom jedinicom evidencije ne mora da bude tehnološki napredna da bi radila — i može da traje kroz generacije.",
-    uzima: "P2P logika i lokalna autonomija.",
-    drugacije:
-      "LETS se oslanja samo na lokalni krug; KOLO uvodi mogućnost povezivanja Krugova kroz Protokol i dodaje upravljački sloj (ZRNO) koji LETS nikada nije razvio.",
   },
   {
     naziv: "Sardex",
@@ -35,8 +30,6 @@ const sistemi = [
     opis: "Osnovan 2010. kao odgovor na dužničku krizu koja je teško pogodila Sardiniju. Četvoro mladih Sardinjana, bez ekonomskog obrazovanja ali sa jasnim uvidom u problem sopstvene sredine, pokrenulo je mrežu uzajamnog kredita između lokalnih preduzeća. Svaki član startuje na nuli, zbir svih računa je uvek nula, nema kamate. Evropska komisija ih je uključila u DigiPay4Growth program.",
     pokazao:
       "Lokalni tim, bez velike investicije i bez direktne državne podrške, može za desetak godina da izgradi održivu mrežu — ako ima istrajnost, strukturu i uvid u stvarne probleme sredine.",
-    uzima: "Princip uzajamnog kredita između članova bez kamate.",
-    drugacije: "Sardex je B2B; KOLO je P2P, sa programima podrške ranjivim grupama ugrađenim u arhitekturu.",
   },
   {
     naziv: "Fureai Kippu",
@@ -44,8 +37,6 @@ const sistemi = [
     opis: "Japanski sistem razmene zasnovan na vremenu i brizi za starije. Članovi koji pomažu starijim ljudima — kroz kućnu negu, pratnju, kuvanje — beleže odrađene sate, mogu ih iskoristiti za sebe ili preneti članu porodice u drugom delu zemlje koji se brine o njihovom roditelju. Vlada Japana ga je formalno prepoznala kao deo nacionalne politike brige o starijim ljudima.",
     pokazao:
       "Sistem evidencije doprinosa može postati infrastruktura brige o osetljivim grupama društva. Prepoznavanje rada brige kao ekonomski merljivog ne degradira njegov ljudski karakter — naprotiv, čini ga vidljivim i prenosivim.",
-    uzima: "Programi Podrška Starijima, Podrška Majkama, Posebna Briga, Školovanje.",
-    drugacije: "Fureai Kippu meri vreme; KOLO meri doprinos u njegovoj raznovrsnosti — vreme, znanje, robu, novac — kroz jedinstvenu jedinicu (POEN).",
   },
 ];
 
@@ -73,7 +64,7 @@ export default function OSistemuPage() {
             <span className="text-white/20">·</span>
             <a href="#topla-voda" className="hover:text-white/80 transition-colors">Ne izmišljamo toplu vodu</a>
             <span className="text-white/20">·</span>
-            <a href="#sistemi" className="hover:text-white/80 transition-colors">Provereni sistemi</a>
+            <a href="#sistemi" className="hover:text-white/80 transition-colors">Postojeći sistemi</a>
             <span className="text-white/20">·</span>
             <a href="#okvir" className="hover:text-white/80 transition-colors">Međunarodni okvir</a>
             <span className="text-white/20">·</span>
@@ -86,7 +77,7 @@ export default function OSistemuPage() {
       <section id="zajednicko-dobro" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[680px] mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
-            Zajedničko dobro KOLA
+            KOLO Zajedničko dobro
           </h2>
 
           <blockquote
@@ -280,7 +271,7 @@ export default function OSistemuPage() {
                 članovi se okupljaju u Krugove
               </text>
               <text x="360" y="525" textAnchor="middle" fill="#4B7A5E" fontSize="12" fontStyle="italic">
-                zajedno biraju i upravljaju kroz Gornje Kolo
+                zajedno odlučuju i upravljaju kroz Gornje Kolo
               </text>
 
               <path
@@ -342,26 +333,26 @@ export default function OSistemuPage() {
           {[
             {
               naslov: "KOLO Fondacija",
-              podnaslov: "Pravna osnova",
-              tekst: "Pravno lice sa sedištem u Somboru. Prima donacije u dinarima, robi i uslugama. Pokriva operativne troškove sistema, drži infrastrukturu i zastupa KOLO pred zajednicom i državom. Ne emituje POEN i ne raspolaže njime.",
+              podnaslov: "Pravni instrument",
+              tekst: "Pravno lice sa sedištem u Somboru. Prima donacije i sponzorstva u dinarima, robi i uslugama. Pokriva operativne troškove sistema, drži infrastrukturu i zastupa KOLO pred zajednicom i državom.",
               boja: "border-kolo-green-700",
             },
             {
               naslov: "KOLO Protokol",
-              podnaslov: "Tehnička osnova",
-              tekst: "Softverski protokol u vlasništvu Fondacije. Bez pravnog subjektiviteta, ne prima dinare. Emituje POEN i vodi evidenciju računa po pravilima koja su unapred određena, javno dostupna i ista za sve. Pri svakoj emisiji POEN-a, Protokol sam ide u minus — to je razlog zašto zbir svih računa u sistemu ostaje uvek nula.",
+              podnaslov: "Tehnički instrument",
+              tekst: "Softverski protokol u vlasništvu Fondacije. Emituje POEN i vodi evidenciju računa po pravilima koja su unapred određena, javno dostupna i ista za sve. Pri svakoj emisiji POEN-a, Protokol ide u minus.",
               boja: "border-kolo-gold-400",
             },
             {
               naslov: "KOLO Krugovi",
               podnaslov: "Operativna forma članstva",
-              tekst: "Lokalne ili tematske grupe od najmanje pet verifikovanih korisnika, okupljene oko zajedničkog interesa — to može biti posao, mesto, zanimanje, ideja. Krug donosi sopstvena interna pravila i sam organizuje aktivnosti svojih članova. Nema pravnog subjektiviteta i ne registruje se u APR-u.",
+              tekst: "Operativne grupe od najmanje pet verifikovanih korisnika, okupljene oko zajedničkog interesa — to može biti posao, mesto, zanimanje, ideja. Krug donosi sopstvena interna pravila i sam organizuje aktivnosti svojih članova.",
               boja: "border-kolo-green-700",
             },
             {
               naslov: "Gornje Kolo",
               podnaslov: "Upravljačka forma članstva",
-              tekst: "Skup svih korisnika koji poseduju ZRNO — jedinicu glasačke moći. Glasa kvadratnim korenom (ko ima sto ZRNA, ima deset glasova), čime se sprečava koncentracija moći. Aktivira se tek kada opticaj POEN-a u sistemu dostigne milion. Do tada Fondacija sama upravlja sistemom.",
+              tekst: "Dinamično upravljačko telo korisnika koji poseduju aktivno ZRNO čije se struktura menja svakog dana. Glasačka moć je razmerna kvadratnom korenu broja aktivnih ZRNA (ko ima 100 ZRNA, ima 10 glasova), čime se sprečava koncentracija moći.",
               boja: "border-kolo-gold-400",
             },
           ].map((k) => (
@@ -384,29 +375,25 @@ export default function OSistemuPage() {
           ))}
         </div>
 
-        <div className="bg-kolo-bg rounded-xl p-4 text-center">
-          <p className="text-sm text-kolo-muted leading-relaxed">
-            Detalji u Pravilniku.
-          </p>
-        </div>
       </section>
 
       {/* ── NE IZMIŠLJAMO TOPLU VODU ──────────────────────────────── */}
       <section id="topla-voda" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[680px] mx-auto">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Ne izmišljamo toplu vodu
+          <div className="text-center mb-6">
+            <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
+              Ne izmišljamo toplu vodu
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6" style={{ letterSpacing: "-0.02em" }}>
-            Pilot eksperiment u dokazanoj kategoriji
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
+            Pilot eksperiment solidarne ekonomije u Srbiji
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
             <p>
-              Ideja da krug može da organizuje sopstvenu razmenu — da evidentira doprinos svojih članova
-              i uspostavi jedinicu koja nije novac ali radi posao novca u zatvorenom krugu — nije nova.
-              Nije ni egzotična. Decenijama postoje dokumentovane mreže, u različitim zemljama i pod
-              različitim okolnostima, u kojima ljudi razmenjuju rad, dobra i znanje kroz sopstvene
-              sisteme evidencije.
+              Ideja da zajednica može da organizuje sopstvenu razmenu — da evidentira doprinos svojih
+              članova i uspostavi jedinicu koja nije novac ali radi posao novca u zatvorenom krugu —
+              nije nova. Nije ni egzotična. Decenijama u različitim zemljama postoje dokumentovane mreže,
+              u kojima ljudi razmenjuju rad, dobra i znanje kroz sopstvene sisteme evidencije.
             </p>
             <p>
               <strong className="text-kolo-green-900">Solidarna ekonomija</strong> je međunarodno priznata
@@ -431,13 +418,15 @@ export default function OSistemuPage() {
       {/* ── PROVERENI SISTEMI ─────────────────────────────────────── */}
       <section id="sistemi" className="space-y-5">
         <div className="bg-white rounded-2xl card-shadow p-8 md:p-10">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
-            Provereni sistemi
+          <div className="text-center mb-4">
+            <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
+              Postojeći sistemi
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-3 text-center" style={{ letterSpacing: "-0.02em" }}>
             Sistemi koji rade — već decenijama
           </h2>
-          <p className="text-kolo-muted leading-relaxed max-w-[680px]" style={{ lineHeight: "1.7" }}>
+          <p className="text-kolo-muted leading-relaxed max-w-[680px] mx-auto text-center" style={{ lineHeight: "1.7" }}>
             Četiri mreže iz različitih delova sveta. Različite zemlje, različiti konteksti — ali ista
             familija sistema. KOLO pripada toj familiji, sa svojim posebnostima.
           </p>
@@ -460,31 +449,13 @@ export default function OSistemuPage() {
               <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.7" }}>
                 {s.opis}
               </p>
-              <div className="space-y-3 pt-3 border-t border-kolo-border">
-                <div>
-                  <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-1.5">
-                    Šta je pokazao
-                  </p>
-                  <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.65" }}>
-                    {s.pokazao}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold tracking-widest text-kolo-green-700 uppercase mb-1.5">
-                    Šta KOLO uzima
-                  </p>
-                  <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.65" }}>
-                    {s.uzima}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-bold tracking-widest text-kolo-gold-600 uppercase mb-1.5">
-                    Šta KOLO radi drugačije
-                  </p>
-                  <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.65" }}>
-                    {s.drugacije}
-                  </p>
-                </div>
+              <div className="pt-3 border-t border-kolo-border mt-auto">
+                <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-1.5">
+                  Šta je pokazao
+                </p>
+                <p className="text-sm text-kolo-text leading-relaxed" style={{ lineHeight: "1.65" }}>
+                  {s.pokazao}
+                </p>
               </div>
             </div>
           ))}
@@ -590,12 +561,18 @@ export default function OSistemuPage() {
               pristupanja Evropskoj uniji.
             </p>
             <p>
-              Ono što je u Somboru rađeno četrnaest godina nije eksperimentisanje u praznom prostoru.
-              To je adaptacija proverene kategorije sistema u srpski pravni i društveni kontekst — sa
-              svim posebnostima koje taj kontekst zahteva. KOLO nije izum. KOLO je odgovor — lokalan,
-              srpski, sa korenima u proverenim svetskim modelima — na istu globalnu situaciju zbog
-              koje je solidarna ekonomija već u međunarodnom okviru ušla u praksu kao formalan sektor,
-              a ne više kao margina.
+              Unutar srpskog konteksta, <strong className="text-kolo-green-900">Sombor</strong> je
+              idealan za pilot projekat. Vojvođanska Bačka nosi jednu od najjačih zadrugarskih tradicija
+              u Evropi. Poljoprivredne zadruge, salašarska ekonomija — to je živo sećanje koje stariji
+              ljudi u somborskim selima pamte iz prve ruke. KOLO aktivira oblik organizovanja koji je
+              u ovim krajevima istorijski normalan.
+            </p>
+            <p>
+              Sombor je dovoljno velik da efekti mreže budu merljivi, a dovoljno mali da se vide bez
+              statističkog šuma. Urbano jezgro opasano salašima i selima omogućava da pilot u jednom
+              potezu obuhvati zanatliju, penzionera, mladu majku i poljoprivrednika — sve tipove korisnika
+              koje sistem mora da izdrži. Ako solidarni ekonomski sistem ima šta da ponudi, mora to prvo
+              da ponudi mestu kakvo je Sombor.
             </p>
           </div>
         </div>

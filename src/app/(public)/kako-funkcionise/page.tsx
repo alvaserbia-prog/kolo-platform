@@ -81,7 +81,7 @@ const nacinSticanja = [
   },
   {
     br: "6",
-    naslov: "Program Evidencije Doprinosa",
+    naslov: "Evidencija Doprinosa",
     opis: "Doprinos zajedničkom dobru evidentira se kroz međusobno potvrđivanje — drugi verifikovani korisnici potvrđuju tvoju aktivnost.",
     iznos: "operativni program",
     boja: "bg-kolo-green-100 text-kolo-green-700",
@@ -104,22 +104,20 @@ export default function KakoFunkcionisePage() {
         <div className="inline-block bg-white/10 text-white/70 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
           Detaljna verzija
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-3" style={{ letterSpacing: "-0.02em" }}>
+        <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-2" style={{ letterSpacing: "-0.02em" }}>
           Kako funkcioniše KOLO?
         </h1>
-        <p className="text-white/70 max-w-xl leading-relaxed">
-          Svako pravilo razloženo. Ako ti je dovoljan pregled,{" "}
-          <Link href="/" className="text-kolo-gold-400 hover:text-kolo-gold-300 underline underline-offset-2 transition-colors">
-            vrati se na početnu
-          </Link>{" "}
-          — ovde je sve.
+        <p className="text-white/70 text-base md:text-lg">
+          Uputstvo za korišćenje
         </p>
       </section>
 
       {/* ── S2: POSTANI KORISNIK ───────────────────────────────────── */}
       <section className="bg-white rounded-2xl card-shadow p-8">
-        <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-          Postani korisnik
+        <div className="text-center mb-6">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
+            Postani korisnik
+          </div>
         </div>
 
         {/* Desktop: olimpijski raspored 3 + 2 */}
@@ -163,7 +161,7 @@ export default function KakoFunkcionisePage() {
       {/* ── S3: SEDAM NAČINA STICANJA POEN-a ───────────────────────── */}
       <section className="space-y-6">
         <div className="text-center space-y-3">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
             Evidencija doprinosa
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
@@ -196,23 +194,29 @@ export default function KakoFunkcionisePage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-3">
-          {nacinSticanja.map((n) => (
-            <div key={n.br} className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3">
-              <div className="flex items-start gap-3">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
-                  {n.br}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
+          {nacinSticanja.map((n, i) => {
+            const startClass = i === 3 ? "md:col-start-2" : i === 5 ? "md:col-start-2" : "";
+            return (
+              <div
+                key={n.br}
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 md:col-span-2 ${startClass}`}
+              >
+                <div className="flex items-start gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
+                    {n.br}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-kolo-text text-base mb-1">{n.naslov}</p>
+                    <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${n.boja}`}>
+                      {n.iznos}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-kolo-text text-base mb-1">{n.naslov}</p>
-                  <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${n.boja}`}>
-                    {n.iznos}
-                  </span>
-                </div>
+                <p className="text-sm text-kolo-muted leading-relaxed">{n.opis}</p>
               </div>
-              <p className="text-sm text-kolo-muted leading-relaxed">{n.opis}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
       </section>
@@ -336,41 +340,6 @@ export default function KakoFunkcionisePage() {
         </div>
       </section>
 
-      {/* ── S5: STRUKTURALNI DOKAZ ─────────────────────────────────── */}
-      <section className="bg-white rounded-2xl card-shadow p-8 md:p-12">
-        <div className="max-w-[680px] mx-auto">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
-            Strukturalni dokaz
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-4" style={{ letterSpacing: "-0.02em" }}>
-            Tri matematičke garancije sistema
-          </h2>
-          <p className="text-base text-kolo-muted leading-relaxed mb-6" style={{ lineHeight: "1.75" }}>
-            Sve što je opisano iznad — emisija POEN-a, Programi, ZRNO, Pragovi — počiva na tri tačke koje se ne mogu zaobići. Nisu obećanje, nego svojstvo sistema.
-          </p>
-
-          <ul className="space-y-3">
-            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
-              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">1</span>
-              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
-                Sistem ne zavisi od priliva novog novca.
-              </p>
-            </li>
-            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
-              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">2</span>
-              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
-                Svaki POEN koji postoji izdat je od strane Protokola kao priznanje evidentiranog doprinosa zajedničkom dobru.
-              </p>
-            </li>
-            <li className="flex items-start gap-3 p-4 bg-kolo-bg rounded-xl">
-              <span className="w-7 h-7 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-sm font-bold shrink-0">3</span>
-              <p className="text-sm text-kolo-text leading-relaxed pt-0.5" style={{ lineHeight: "1.7" }}>
-                Zbir svih POEN računa u sistemu — članova, Krugova, Protokola — uvek je tačno nula.
-              </p>
-            </li>
-          </ul>
-        </div>
-      </section>
 
       {/* ── S6: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">

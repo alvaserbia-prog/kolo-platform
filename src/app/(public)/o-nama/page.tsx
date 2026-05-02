@@ -82,25 +82,22 @@ export default function ONamaPage() {
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed" style={{ lineHeight: "1.75" }}>
             <p>
-              Prva sumnja u sistem u koji sam tek trebalo da uđem došla je još na medicinskom fakultetu.
-              Postavio sam pitanje koje je delovalo obično, a odgovor sam pronašao tek kad sam pogledao ko
-              finansira istraživanja. Tada sam prvi put video da nauka koju učim nije neutralna i da postoje
-              skriveni interesi koji struku usmeravaju prema profitu čiji krajnji cilj nije zdravlje nego
-              lečenje. Ista logika oblikuje sve ostale sisteme — proizvodnju hrane, organizaciju zdravstva,
-              tržište rada. Završio sam medicinu jer sam zaključio da se sistem lakše menja iznutra.
+              Prva sumnja u sistem došla je još na medicinskom fakultetu. Tada sam video da nauka koju
+              učim nije neutralna i da postoje skriveni interesi koji struku usmeravaju prema profitu.
+              I da u krajnjoj biti cilj sistema nije zdravlje nego kontinuirano lečenje. Ista logika
+              oblikuje sve ostale sisteme — proizvodnju hrane, ekonomiju, tržište rada. Završio sam
+              medicinu jer sam zaključio da se sistem lakše menja iznutra.
             </p>
             <p>
               Paralelno sa medicinom, godinama sam se obrazovao u oblasti komplementarnih ekonomskih sistema.
               U martu 2014. bio sam gost emisije <em>Na rubu znanosti</em> kod Krešimira Mišaka na HRT, u
-              epizodi o lokalnim i alternativnim valutama, gde sam predstavio ALVU — tadašnju formu projekta.
-              Krajem juna 2016. proveo sam nedelju dana na Pelionu, u letnjoj školi Kalikalos, na radionici{" "}
+              epizodi o lokalnim i alternativnim valutama i predstavio ALVU — tadašnju formu projekta.
+              Krajem juna 2016. proveo sam nedelju dana na Pelionu u Grčkoj, na radionici{" "}
               <em>Innovation in Exchange and Finance</em> koju je vodio Thomas Greco — autor knjige{" "}
               <em>The End of Money and the Future of Civilization</em> i jedan od najznačajnijih svetskih
               teoretičara komplementarnih valuta. U grupi je između ostalih bio i tim iz Volosa koji je već
-              četiri godine vodio Volos TEM, jednu od najpoznatijih grčkih lokalnih mreža razmene.
-              Organizovao sam više tribina na ovu temu — u Stanišiću, Somboru, Novom Sadu i Beogradu. To su
-              godine u kojima sam shvatio da postoji svetska familija sistema koji rade po istim principima —
-              i da koncept treba adaptirati za naše uslove.
+              četiri godine vodio Volos TEM, jednu od grčkih lokalnih mreža razmene. Organizovao sam više
+              tribina na ovu temu — u Stanišiću, Somboru, Novom Sadu i Beogradu.
             </p>
             <p>
               Ideja je tokom vremena prošla kroz nekoliko formi: ALVA (2012), Tranziciona alternativa
@@ -213,11 +210,11 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Komunikacija sa regulatorima",
-                tekst: "Dokumentacija je proaktivno dostupna nadležnim organima. Po pokretanju sistema, od Narodne banke Srbije, Poreske uprave i nadležnih ministarstava biće formalno zatraženo zvanično mišljenje. Kad odgovori stignu, biće javno objavljeni — bez izmena.",
+                tekst: "Dokumentacija je proaktivno dostupna nadležnim organima. Po pokretanju sistema, od Narodne banke Srbije, Poreske uprave i nadležnih ministarstava biće formalno zatraženo zvanično mišljenje. Kad odgovori stignu, biće javno objavljeni.",
               },
               {
                 naslov: "Tim",
-                tekst: "Upravni odbor Fondacije i spoljni konsultanti. U beta fazi formira se uži krug saradnika — programera, prevodilaca, prvih verifikovanih korisnika — koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle beta faze, doprinos svakog verifikovanog korisnika — kroz razvoj softvera, prevođenje, kreiranje sadržaja, organizaciju aktivnosti, mentorstvo, moderaciju — biva prepoznat kroz Program evidencije doprinosa.",
+                tekst: "Upravni odbor Fondacije i spoljni konsultanti. U beta fazi formira se uži krug saradnika koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle beta faze, doprinos svakog verifikovanog korisnika — kroz razvoj softvera, prevođenje, kreiranje sadržaja, organizaciju aktivnosti, mentorstvo, moderaciju — biva prepoznat kroz Program evidencije doprinosa.",
               },
             ].map((stavka) => (
               <div key={stavka.naslov} className="flex gap-4">
