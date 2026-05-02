@@ -341,9 +341,7 @@ export default function SistemKlijent({
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
-          programi={programi}
-          ukupnoKrug={ukupnoKrugCount}
-          aktivniProgrami={aktivniProgrami}
+          transakcije={transakcije}
         />
       )}
       {sekcija === "clanovi" && (
@@ -422,36 +420,22 @@ function PregledSekcija({
   danasEmitovano,
   danasLimit,
   emisijeChart,
-  programi,
-  ukupnoKrug,
-  aktivniProgrami,
+  transakcije,
 }: {
   verified: boolean;
   opticaj: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
-  programi: Program[];
-  ukupnoKrug: number;
-  aktivniProgrami: number;
+  transakcije: Transakcija[];
 }) {
   const t = useTranslations("sistem");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
   const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
 
-  const faze = [
-    { label: t("registracija_link"), on: true },
-    { label: t("pijaca_link"), on: true },
-    { label: t("poruke_link"), on: true },
-    { label: t("krugovi_link"), on: ukupnoKrug > 0 },
-    { label: t("ped_link"), on: programi.some((p) => p.type === "PED" && p.isActive) },
-    { label: t("podrska_majkama_link"), on: programi.some((p) => p.type === "PODRSKA_MAJKAMA" && p.isActive) },
-    { label: t("podrska_starijima_link"), on: programi.some((p) => p.type === "PODRSKA_STARIJIMA" && p.isActive) },
-    { label: t("posebna_briga_link"), on: programi.some((p) => p.type === "POSEBNA_BRIGA" && p.isActive) },
-    { label: t("skolovanje_link"), on: programi.some((p) => p.type === "SKOLOVANJE" && p.isActive) },
-    { label: t("zrno_trziste_link"), on: true },
-    { label: t("glasanje_link"), on: true },
-  ];
+  const protokolTx = transakcije.filter(
+    (tx) => tx.fromId === null || tx.toId === null
+  );
 
   return (
     <div className="space-y-5">
@@ -482,27 +466,65 @@ function PregledSekcija({
         </div>
       </div>
 
-      {/* Čeklista faza */}
-      <div className="bg-white rounded-2xl border border-kolo-border p-5">
-        <p className="text-sm font-semibold text-kolo-text mb-4">{t("aktivirane_funkcije")}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {faze.map((f) => (
-            <div key={f.label} className="flex items-center gap-2.5">
-              <span
-                className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold ${
-                  f.on
-                    ? "bg-kolo-green-100 text-kolo-green-700"
-                    : "bg-kolo-bg text-kolo-border"
-                }`}
-              >
-                {f.on ? "✓" : "○"}
-              </span>
-              <span className={`text-sm ${f.on ? "text-kolo-text" : "text-kolo-muted"}`}>
-                {f.label}
-              </span>
-            </div>
-          ))}
+      {/* Transakcije Protokola */}
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center">
+          <p className="text-sm font-semibold text-kolo-text">Transakcije Protokola</p>
+          <p className="text-xs text-kolo-muted">{protokolTx.length} ukupno</p>
         </div>
+        {protokolTx.length === 0 ? (
+          <div className="p-6 text-center text-sm text-kolo-muted">{t("nema_tx")}</div>
+        ) : (
+          <>
+            <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("vreme")}</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("posalje")}</span>
+              <span />
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("primalac")}</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("iznos")}</span>
+            </div>
+            {protokolTx.map((tx, i) => (
+              <div
+                key={tx.id}
+                className={`px-4 py-2.5 ${i < protokolTx.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+              >
+                <div className="grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                  <p className="text-sm text-kolo-muted leading-tight">
+                    {new Date(tx.createdAt).toLocaleString("sr-RS", {
+                      day: "2-digit", month: "2-digit", year: "numeric",
+                      hour: "2-digit", minute: "2-digit",
+                    })}
+                  </p>
+                  <div className="min-w-0">
+                    {verified && tx.fromId ? (
+                      <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                        {tx.fromPseudonim}
+                      </Link>
+                    ) : (
+                      <span className="text-base text-kolo-muted truncate block">{tx.fromPseudonim}</span>
+                    )}
+                  </div>
+                  <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
+                  <div className="min-w-0">
+                    {verified && tx.toId ? (
+                      <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                        {tx.toPseudonim}
+                      </Link>
+                    ) : (
+                      <span className="text-base text-kolo-muted truncate block">{tx.toPseudonim}</span>
+                    )}
+                  </div>
+                  <span className="text-base font-bold text-kolo-text text-right">
+                    {tx.amount.toLocaleString("sr-RS")}
+                  </span>
+                </div>
+                {tx.description && (
+                  <p className="mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{tx.description}</p>
+                )}
+              </div>
+            ))}
+          </>
+        )}
       </div>
 
       {/* Grafikon emisija — samo za verifikovane */}
