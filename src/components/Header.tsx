@@ -31,10 +31,10 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
             <JezikSvitcer />
           </div>
           {/* Mobilno: hamburger + naziv */}
-          <div className="flex md:hidden items-center gap-2 px-4">
+          <div className="flex md:hidden items-center gap-1.5 pl-2 pr-1">
             <button
               onClick={onMenuOpen}
-              className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-1 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Meni"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -48,21 +48,21 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         </div>
 
         {/* Sredina: Pošalji POEN */}
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-start md:justify-center pl-2 md:pl-0">
           <Link
             href="/novcanik"
-            className="ml-[1cm] px-4 py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl border border-white/70 transition-colors"
+            className="md:ml-[1cm] px-2.5 py-1 md:px-4 md:py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-xs md:text-sm font-semibold rounded-xl border border-white/70 transition-colors whitespace-nowrap"
           >
             Pošalji POEN
           </Link>
         </div>
 
         {/* Desna strana: balans + poruke + notifikacije + profil */}
-        <div className="flex items-center gap-3 px-4">
+        <div className="flex items-center gap-1.5 md:gap-3 pr-2 md:px-4">
           {session ? (
             <>
               <BalansHeader userId={session.user.id} />
-              <div className="w-px h-4 bg-white/20" />
+              <div className="hidden sm:block w-px h-4 bg-white/20" />
               {/* Poruke ikonica */}
               <Link
                 href="/poruke"
