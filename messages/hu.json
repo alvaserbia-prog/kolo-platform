@@ -77,7 +77,39 @@
     "greska_pogresni_podaci": "Helytelen email vagy jelszó.",
     "greska_prijava": "Bejelentkezési hiba. Kérjük próbálja újra.",
     "nema_naloga": "Nincs még fiókja?",
-    "registrujte_se": "Regisztráljon"
+    "registrujte_se": "Regisztráljon",
+    "zaboravljena_lozinka": "Elfelejtett jelszó?"
+  },
+  "zaboravljenaLozinka": {
+    "naslov": "Elfelejtett jelszó",
+    "podnaslov": "Adja meg az email címét és küldünk egy visszaállítási linket.",
+    "email": "Email",
+    "placeholder_email": "az@email.com",
+    "dugme": "Link küldése",
+    "dugme_loading": "Küldés...",
+    "nazad_na_login": "Vissza a bejelentkezéshez",
+    "poslato_poruka": "Ha létezik fiók ezzel az email címmel, elküldtük a visszaállítási linket.",
+    "poslato_napomena": "Ellenőrizze a Spam/Levélszemét mappát. A link 1 óráig érvényes.",
+    "greska_email_obavezan": "Az email kötelező.",
+    "greska_email_neispravan": "Adjon meg érvényes email címet.",
+    "greska_zahtev": "Hiba a kérés küldésekor. Kérjük próbálja újra."
+  },
+  "resetLozinka": {
+    "naslov": "Új jelszó",
+    "podnaslov": "Adjon meg egy új jelszót a fiókjához.",
+    "nova_lozinka": "Új jelszó",
+    "potvrda": "Jelszó megerősítése",
+    "placeholder_lozinka": "••••••••",
+    "dugme": "Új jelszó mentése",
+    "dugme_loading": "Mentés...",
+    "provera_linka": "Link ellenőrzése...",
+    "link_nevazeci": "A link érvénytelen vagy lejárt. Kérjen új linket.",
+    "trazi_novi_link": "Új link kérése",
+    "uspesno_promenjena": "A jelszó sikeresen megváltozott.",
+    "preusmeravanje": "Átirányítás a bejelentkezéshez...",
+    "greska_lozinka_kratka": "A jelszónak legalább 8 karakteresnek kell lennie.",
+    "greska_lozinke_ne_poklapaju": "A jelszavak nem egyeznek.",
+    "greska_zahtev": "Hiba a jelszó megváltoztatásakor. Kérjük próbálja újra."
   },
   "registracija": {
     "naslov": "Regisztráció",

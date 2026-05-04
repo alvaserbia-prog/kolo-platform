@@ -9,6 +9,7 @@ const JAVNE_RUTE = [
 
 const PRESKOCI = [
   "/login", "/registracija", "/oauth",
+  "/zaboravljena-lozinka", "/reset-lozinka",
   "/api/", "/_next", "/favicon.ico",
   "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/flags/",
 ];

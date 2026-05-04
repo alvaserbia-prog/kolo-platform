@@ -77,7 +77,39 @@
     "greska_pogresni_podaci": "Pogrešan email ili lozinka.",
     "greska_prijava": "Greška pri prijavi. Pokušajte ponovo.",
     "nema_naloga": "Nemate nalog?",
-    "registrujte_se": "Registrujte se"
+    "registrujte_se": "Registrujte se",
+    "zaboravljena_lozinka": "Zaboravljena lozinka?"
+  },
+  "zaboravljenaLozinka": {
+    "naslov": "Zaboravljena lozinka",
+    "podnaslov": "Unesite email i poslaćemo vam link za resetovanje.",
+    "email": "Email",
+    "placeholder_email": "vas@email.com",
+    "dugme": "Pošalji link",
+    "dugme_loading": "Slanje...",
+    "nazad_na_login": "Nazad na prijavu",
+    "poslato_poruka": "Ako postoji nalog sa tim email-om, link za resetovanje je poslat na vašu adresu.",
+    "poslato_napomena": "Proverite i Spam/Junk fasciklu. Link važi 1 sat.",
+    "greska_email_obavezan": "Email je obavezan.",
+    "greska_email_neispravan": "Unesite ispravnu email adresu.",
+    "greska_zahtev": "Greška pri slanju zahteva. Pokušajte ponovo."
+  },
+  "resetLozinka": {
+    "naslov": "Nova lozinka",
+    "podnaslov": "Postavite novu lozinku za vaš nalog.",
+    "nova_lozinka": "Nova lozinka",
+    "potvrda": "Potvrda lozinke",
+    "placeholder_lozinka": "••••••••",
+    "dugme": "Sačuvaj novu lozinku",
+    "dugme_loading": "Čuvanje...",
+    "provera_linka": "Provera linka...",
+    "link_nevazeci": "Link je nevažeći ili je istekao. Zatražite novi link.",
+    "trazi_novi_link": "Zatraži novi link",
+    "uspesno_promenjena": "Lozinka je uspešno promenjena.",
+    "preusmeravanje": "Preusmeravanje na prijavu...",
+    "greska_lozinka_kratka": "Lozinka mora imati najmanje 8 karaktera.",
+    "greska_lozinke_ne_poklapaju": "Lozinke se ne poklapaju.",
+    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo."
   },
   "registracija": {
     "naslov": "Registracija",

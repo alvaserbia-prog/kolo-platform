@@ -77,7 +77,39 @@
     "greska_pogresni_podaci": "Wrong email or password.",
     "greska_prijava": "Sign in error. Please try again.",
     "nema_naloga": "Don't have an account?",
-    "registrujte_se": "Register"
+    "registrujte_se": "Register",
+    "zaboravljena_lozinka": "Forgot password?"
+  },
+  "zaboravljenaLozinka": {
+    "naslov": "Forgot Password",
+    "podnaslov": "Enter your email and we'll send you a reset link.",
+    "email": "Email",
+    "placeholder_email": "your@email.com",
+    "dugme": "Send link",
+    "dugme_loading": "Sending...",
+    "nazad_na_login": "Back to sign in",
+    "poslato_poruka": "If an account with that email exists, a reset link has been sent to your address.",
+    "poslato_napomena": "Check your Spam/Junk folder. The link is valid for 1 hour.",
+    "greska_email_obavezan": "Email is required.",
+    "greska_email_neispravan": "Enter a valid email address.",
+    "greska_zahtev": "Error sending request. Please try again."
+  },
+  "resetLozinka": {
+    "naslov": "New Password",
+    "podnaslov": "Set a new password for your account.",
+    "nova_lozinka": "New password",
+    "potvrda": "Confirm password",
+    "placeholder_lozinka": "••••••••",
+    "dugme": "Save new password",
+    "dugme_loading": "Saving...",
+    "provera_linka": "Checking link...",
+    "link_nevazeci": "The link is invalid or has expired. Request a new link.",
+    "trazi_novi_link": "Request a new link",
+    "uspesno_promenjena": "Password changed successfully.",
+    "preusmeravanje": "Redirecting to sign in...",
+    "greska_lozinka_kratka": "Password must be at least 8 characters.",
+    "greska_lozinke_ne_poklapaju": "Passwords do not match.",
+    "greska_zahtev": "Error changing password. Please try again."
   },
   "registracija": {
     "naslov": "Registration",

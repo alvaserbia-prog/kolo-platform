@@ -105,6 +105,12 @@ function LoginForm() {
           >
             {loading ? t("dugme_loading") : t("dugme")}
           </button>
+
+          <p className="text-center text-sm">
+            <Link href="/zaboravljena-lozinka" className="text-kolo-muted hover:text-kolo-green-700 hover:underline">
+              {t("zaboravljena_lozinka")}
+            </Link>
+          </p>
         </form>
 
         <div className="mt-6">
