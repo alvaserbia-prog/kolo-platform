@@ -1,5 +1,6 @@
 import { randomBytes, createHash } from "crypto";
 import { prisma } from "@/lib/prisma";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const TOKEN_BYTES = 32;
 const EXPIRY_HOURS = 1;
@@ -104,8 +105,18 @@ export async function posaljiResetEmail(
   if (!res.ok) {
     const errText = await res.text().catch(() => "");
     console.error(`[passwordReset] Resend HTTP ${res.status}: ${errText}`);
+    void posaljiAdminAlert(
+      "Reset lozinke — Resend greška",
+      `Email: ${email}\nFrom: ${RESEND_FROM}\nHTTP: ${res.status}\nOdgovor: ${errText.slice(0, 500)}`
+    );
     throw new Error("Email nije poslat");
   }
+
+  // Uspešno poslat — admin alert za debugging
+  void posaljiAdminAlert(
+    "Reset lozinke — email poslat",
+    `Za: ${email}\nFrom: ${RESEND_FROM}\nTip: ${imaLozinku ? "reset" : "postavljanje"}\nLink važi 1h.`
+  );
 }
 
 export async function verifikujResetToken(token: string): Promise<{ userId: string; tokenId: string } | null> {

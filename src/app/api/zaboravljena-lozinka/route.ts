@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { kreirajResetToken, posaljiResetEmail } from "@/lib/passwordReset";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,9 +11,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unesite ispravnu email adresu." }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { email: email.trim().toLowerCase() },
-    });
+    const trazeniEmail = email.trim().toLowerCase();
+    const user = await prisma.user.findUnique({ where: { email: trazeniEmail } });
 
     // Iz bezbednosnih razloga uvek vraćamo isti odgovor — ne otkrivamo da li email postoji.
     // Email se šalje za svaki aktivan nalog, bez obzira da li ima lozinku.
@@ -24,8 +24,13 @@ export async function POST(req: NextRequest) {
         await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku);
       } catch (err) {
         console.error("[zaboravljena-lozinka] greška pri slanju:", err);
-        // Ne otkrivamo grešku korisniku — ali interno logujemo
       }
+    } else {
+      // Debug alert — javlja zašto email NIJE poslat (nalog ne postoji ili nije aktivan)
+      void posaljiAdminAlert(
+        "Reset lozinke — nalog NIJE pronađen",
+        `Trazeni email: ${trazeniEmail}\nNalog postoji: ${!!user}\nStatus: ${user?.status ?? "n/a"}`
+      );
     }
 
     return NextResponse.json({ ok: true });
