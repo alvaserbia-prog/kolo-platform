@@ -89,8 +89,8 @@ export default function OAuthDovrsiPage() {
     router.push("/verifikacija");
   }
 
-  // Čekanje na sesiju
-  if (!session) {
+  // Čekanje na sesiju ILI redirect (ako je nalog već dovršen, prikaži loading dok se redirektuje)
+  if (!session || !session.user.oauthPending) {
     return (
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8 text-center text-kolo-muted text-sm">
