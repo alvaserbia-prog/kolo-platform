@@ -37,7 +37,8 @@ export async function kreirajResetToken(userId: string): Promise<string> {
 export async function posaljiResetEmail(
   email: string,
   token: string,
-  pseudonim: string
+  pseudonim: string,
+  imaLozinku: boolean
 ): Promise<void> {
   if (!RESEND_KEY) {
     console.error("[passwordReset] RESEND_API_KEY nije postavljen — email nije poslat");
@@ -46,20 +47,32 @@ export async function posaljiResetEmail(
 
   const link = `${getBaseUrl()}/reset-lozinka/${token}`;
 
+  const naslov = imaLozinku ? "Resetovanje lozinke" : "Postavljanje lozinke";
+  const subject = imaLozinku
+    ? "Resetovanje lozinke — KOLO"
+    : "Postavljanje lozinke — KOLO";
+  const dugme = imaLozinku ? "Postavi novu lozinku" : "Postavi lozinku";
+  const uvod = imaLozinku
+    ? "Primili smo zahtev za resetovanje lozinke za vaš KOLO nalog."
+    : "Primili smo zahtev za postavljanje lozinke za vaš KOLO nalog. Trenutno se prijavljujete preko Google-a — postavljanjem lozinke moći ćete da se prijavljujete i preko forme sa email-om i lozinkom.";
+  const pozivNaAkciju = imaLozinku
+    ? "Da postavite novu lozinku, kliknite na dugme ispod."
+    : "Da postavite lozinku, kliknite na dugme ispod.";
+
   const html = `
     <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;color:#374151;">
-      <h2 style="margin:0 0 16px;font-size:18px;color:#111827;">Resetovanje lozinke</h2>
+      <h2 style="margin:0 0 16px;font-size:18px;color:#111827;">${naslov}</h2>
       <p style="margin:0 0 12px;">Pozdrav <strong>${pseudonim}</strong>,</p>
       <p style="margin:0 0 12px;">
-        Primili smo zahtev za resetovanje lozinke za vaš KOLO nalog.
+        ${uvod}
         Ako niste vi pokrenuli ovaj zahtev, slobodno ignorišite ovu poruku.
       </p>
       <p style="margin:0 0 20px;">
-        Da postavite novu lozinku, kliknite na dugme ispod. Link važi <strong>1 sat</strong>.
+        ${pozivNaAkciju} Link važi <strong>1 sat</strong>.
       </p>
       <p style="margin:0 0 20px;text-align:center;">
         <a href="${link}" style="display:inline-block;padding:12px 24px;background:#16a34a;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
-          Postavi novu lozinku
+          ${dugme}
         </a>
       </p>
       <p style="margin:0 0 8px;font-size:12px;color:#6b7280;">
@@ -83,7 +96,7 @@ export async function posaljiResetEmail(
     body: JSON.stringify({
       from: RESEND_FROM,
       to: email,
-      subject: "Resetovanje lozinke — KOLO",
+      subject,
       html,
     }),
   });

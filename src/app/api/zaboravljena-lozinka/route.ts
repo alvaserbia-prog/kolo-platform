@@ -15,11 +15,13 @@ export async function POST(req: NextRequest) {
     });
 
     // Iz bezbednosnih razloga uvek vraćamo isti odgovor — ne otkrivamo da li email postoji.
-    // Email se šalje samo ako korisnik postoji, ima lozinku (nije čisto OAuth nalog) i aktivan je.
-    if (user && user.passwordHash && user.status === "ACTIVE") {
+    // Email se šalje za svaki aktivan nalog, bez obzira da li ima lozinku.
+    // OAuth-only nalozi dobijaju email sa drugačijim tekstom — "Postavi lozinku" umesto "Resetovanje lozinke".
+    if (user && user.status === "ACTIVE") {
       try {
         const token = await kreirajResetToken(user.id);
-        await posaljiResetEmail(user.email!, token, user.pseudonim);
+        const imaLozinku = !!user.passwordHash;
+        await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku);
       } catch (err) {
         console.error("[zaboravljena-lozinka] greška pri slanju:", err);
         // Ne otkrivamo grešku korisniku — ali interno logujemo
