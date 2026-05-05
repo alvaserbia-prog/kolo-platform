@@ -4,8 +4,6 @@ import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const TOKEN_BYTES = 32;
 const EXPIRY_HOURS = 1;
-const RESEND_KEY = process.env.RESEND_API_KEY;
-const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@ekolo.rs>";
 
 function getBaseUrl(): string {
   const url = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
@@ -41,6 +39,11 @@ export async function posaljiResetEmail(
   pseudonim: string,
   imaLozinku: boolean
 ): Promise<void> {
+  // Citamo env varijable u runtime-u (ne module-level) da bi se
+  // posle Vercel env promene odmah pokupile bez ostatka starog kesa.
+  const RESEND_KEY = process.env.RESEND_API_KEY;
+  const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@ekolo.rs>";
+
   if (!RESEND_KEY) {
     console.error("[passwordReset] RESEND_API_KEY nije postavljen — email nije poslat");
     return;
