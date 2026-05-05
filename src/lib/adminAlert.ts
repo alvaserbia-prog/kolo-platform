@@ -8,14 +8,14 @@
  *   TELEGRAM_CHAT_ID    — ID četa/kanala gde bot šalje poruke
  *   RESEND_API_KEY      — API ključ sa resend.com
  *   ADMIN_EMAIL         — email adresa admina (primalac)
- *   RESEND_FROM         — pošiljalac (npr. "KOLO <noreplay@kolo.rs>"), opcionalno
+ *   RESEND_FROM         — pošiljalac (npr. "KOLO <noreply@ekolo.rs>"), opcionalno
  */
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const RESEND_KEY = process.env.RESEND_API_KEY;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@kolo.rs>";
+const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@ekolo.rs>";
 
 async function posaljiTelegram(naslov: string, tekst: string): Promise<void> {
   if (!BOT_TOKEN || !CHAT_ID) return;

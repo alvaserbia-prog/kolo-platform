@@ -6,7 +6,7 @@
 
 Rukovalac podacima o ličnosti u smislu Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS", br. 87/2018, u daljem tekstu: ZZPL) je:
 
-KOLO Fondacija Sedište: Šetalište 14, 25101 Sombor, Republika Srbija Matični broj: 28830360 PIB: 110186805 Email: privatnost@kolo.rs
+KOLO Fondacija Sedište: Šetalište 14, 25101 Sombor, Republika Srbija Matični broj: 28830360 PIB: 110186805 Email: privatnost@ekolo.rs
 
 Za sva pitanja u vezi sa obradom podataka o ličnosti korisnici se mogu obratiti na gore navedenu email adresu. Kontakt osoba za pitanja privatnosti je direktor Fondacije, koji je ovlašćen za postupanje po zahtevima lica na koje se podaci odnose i za komunikaciju sa Poverenikom za informacije od javnog značaja i zaštitu podataka o ličnosti.
 

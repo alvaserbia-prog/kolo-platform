@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 const TOKEN_BYTES = 32;
 const EXPIRY_HOURS = 1;
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@kolo.rs>";
+const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@ekolo.rs>";
 
 function getBaseUrl(): string {
   const url = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_BASE_URL;

@@ -418,7 +418,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
 function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; memberHash: string; onClose: () => void }) {
   const t = useTranslations("novcanik");
   const tc = useTranslations("common");
-  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://kolo.rs";
+  const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://ekolo.rs";
   const [iznos, setIznos] = useState("");
   const [opis, setOpis] = useState("");
 

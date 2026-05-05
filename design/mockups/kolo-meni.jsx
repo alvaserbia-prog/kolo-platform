@@ -178,7 +178,7 @@ function PreporukeScreen({ onBack }) {
         <div style={{ background: C.white, borderRadius: 16, padding: 20, marginBottom: 16, textAlign: "center" }}>
           <p style={{ fontFamily: "sans-serif", fontSize: 13, color: C.gray500, margin: "0 0 14px" }}>Podelite link i zaradite POENE za svaku preporuku</p>
           <div style={{ display: "flex", alignItems: "center", gap: 8, background: C.gray50, borderRadius: 10, padding: "10px 14px" }}>
-            <span style={{ fontFamily: "sans-serif", fontSize: 13, color: C.gray700, flex: 1 }}>kolo.rs/m/a7x3k9</span>
+            <span style={{ fontFamily: "sans-serif", fontSize: 13, color: C.gray700, flex: 1 }}>ekolo.rs/m/a7x3k9</span>
             <button onClick={() => { setCopied(true); setTimeout(() => setCopied(false), 2000); }} style={{ padding: "6px 14px", borderRadius: 8, border: "none", cursor: "pointer", background: copied ? C.green600 : C.green700, color: C.white, fontFamily: "sans-serif", fontSize: 12, fontWeight: 600 }}>
               {copied ? "✓ Kopirano" : "Kopiraj"}
             </button>

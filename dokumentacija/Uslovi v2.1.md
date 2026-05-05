@@ -15,9 +15,9 @@ Identifikacioni podaci Fondacije su:
 * Registarski organ: Agencija za privredne registre Republike Srbije (APR);  
 * Zastupnik: \[IME I PREZIME DIREKTORA\];  
 * Kontakt telefon: \[BROJ TELEFONA\];  
-* Email za opšta pitanja: info@kolo.rs;  
-* Email za pitanja zaštite podataka: privatnost@kolo.rs;  
-* Email za prijave nezakonitog sadržaja: prijave@kolo.rs.
+* Email za opšta pitanja: info@ekolo.rs;  
+* Email za pitanja zaštite podataka: privatnost@ekolo.rs;  
+* Email za prijave nezakonitog sadržaja: prijave@ekolo.rs.
 
 Ovi Uslovi korišćenja (u daljem tekstu: Uslovi) uređuju prava i obaveze između Fondacije i svakog lica koje pristupa ili koristi Platformu (u daljem tekstu: Korisnik).
 
@@ -373,7 +373,7 @@ Korisnik je dužan da Fondaciji bez odlaganja prijavi svaku sumnju na aktivnost 
 * prevaru;  
 * drugu nezakonitu radnju povezanu sa korišćenjem Platforme.
 
-Prijava se upućuje na email adresu prijave@kolo.rs.
+Prijava se upućuje na email adresu prijave@ekolo.rs.
 
 Korisnik izričito prihvata da Fondacija, u skladu sa Zakonom o sprečavanju pranja novca i finansiranja terorizma i drugim prinudnim propisima, može i po potrebi mora nadležnim organima Republike Srbije dostaviti podatke o Korisniku, njegovim transakcijama i aktivnostima na Platformi.
 
@@ -381,7 +381,7 @@ Fondacija u takvim slučajevima postupa u skladu sa zakonskim obavezama, bez pot
 
 ### **8.4 Prijava nezakonitog sadržaja**
 
-Svako lice može prijaviti sadržaj na Platformi za koji smatra da je nezakonit ili da krši prava trećih lica (uključujući korisnički sadržaj na Pijaci, u profilima i porukama) na email adresu prijave@kolo.rs.
+Svako lice može prijaviti sadržaj na Platformi za koji smatra da je nezakonit ili da krši prava trećih lica (uključujući korisnički sadržaj na Pijaci, u profilima i porukama) na email adresu prijave@ekolo.rs.
 
 Prijava treba da sadrži:
 

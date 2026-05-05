@@ -27,7 +27,7 @@ interface PreporukeData {
   rangTabela: RangRed[];
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://kolo.rs";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://ekolo.rs";
 
 export default function PreporukeKlijent() {
   const t = useTranslations("preporuke");

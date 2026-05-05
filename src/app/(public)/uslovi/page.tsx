@@ -42,9 +42,9 @@ export default function UsloviPage() {
             <p><span className="text-kolo-muted">Matični broj:</span> 28830360</p>
             <p><span className="text-kolo-muted">PIB:</span> 110186805</p>
             <p><span className="text-kolo-muted">Sedište:</span> Stanišić, Oslobođenja 82A</p>
-            <p><span className="text-kolo-muted">Email:</span> info@kolo.rs</p>
-            <p><span className="text-kolo-muted">Zaštita podataka:</span> privatnost@kolo.rs</p>
-            <p><span className="text-kolo-muted">Prijave nezakonitog sadržaja:</span> prijave@kolo.rs</p>
+            <p><span className="text-kolo-muted">Email:</span> info@ekolo.rs</p>
+            <p><span className="text-kolo-muted">Zaštita podataka:</span> privatnost@ekolo.rs</p>
+            <p><span className="text-kolo-muted">Prijave nezakonitog sadržaja:</span> prijave@ekolo.rs</p>
           </div>
           <p className="text-kolo-muted text-xs italic mb-3">
             Fondacija je u postupku promene naziva u KOLO Fondaciju i ažuriranja podataka u APR.

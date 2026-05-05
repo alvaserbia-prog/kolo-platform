@@ -41,7 +41,7 @@ export default function PolitikaPrivatnostiPage() {
             <p><span className="text-kolo-muted">Sedište:</span> Oslobođenja 82A, 25284, Stanišić, Srbija</p>
             <p><span className="text-kolo-muted">Matični broj:</span> 28830360</p>
             <p><span className="text-kolo-muted">PIB:</span> 110186805</p>
-            <p><span className="text-kolo-muted">Email:</span> privatnost@kolo.rs</p>
+            <p><span className="text-kolo-muted">Email:</span> privatnost@ekolo.rs</p>
           </div>
           <p className="text-kolo-muted text-xs italic">
             Fondacija je u postupku promene naziva u KOLO Fondaciju i ažuriranja podataka u APR.
@@ -239,7 +239,7 @@ export default function PolitikaPrivatnostiPage() {
             <li><strong className="text-kolo-text">Pravo na ljudski pregled</strong> — automatizovane odluke sistema</li>
           </ol>
           <p className="mt-4 text-kolo-muted text-xs">
-            <strong>Kako ostvariti prava:</strong> Zahtev se podnosi na privatnost@kolo.rs.
+            <strong>Kako ostvariti prava:</strong> Zahtev se podnosi na privatnost@ekolo.rs.
             Odgovaramo u roku od 30 dana. Pravo na pritužbu možete podneti Povereniku za informacije
             od javnog značaja i zaštitu podataka o ličnosti (www.poverenik.rs).
           </p>
