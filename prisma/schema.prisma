@@ -58,6 +58,7 @@ enum ListingStatus {
 enum TransactionType {
   TRANSFER
   EMISIJA_VERIFIKACIJA
+  EMISIJA_NADZOR
   EMISIJA_PREPORUKA
   EMISIJA_DONACIJA
   EMISIJA_POKROVITELJ
@@ -66,6 +67,13 @@ enum TransactionType {
   EMISIJA_PROGRAM
   KUPOVINA_ZRNO
   PRODAJA_ZRNO
+}
+
+enum TipKorisnika {
+  POCETNI
+  REGULARNI
+  NOSILAC_ZRNA
+  NEVERIFIKOVAN
 }
 
 enum ZrnoZahtevStatus {
@@ -156,6 +164,10 @@ model User {
   suspendedReason    String?
   verified           Boolean   @default(false)
   verifiedAt         DateTime?
+  tipKorisnika           TipKorisnika @default(NEVERIFIKOVAN)
+  indeksStvarnosti       Int          @default(0)
+  slotoviPotroseni       Int          @default(0)
+  pocetnaEmisijaIzvrsena Boolean      @default(false)
   pseudonimChangedAt DateTime?
   referralCode       String    @unique
   memberHash         String    @unique
@@ -204,6 +216,10 @@ model User {
   blogObjave             BlogPost[]                 @relation("BlogAutor")
   chatPoruke             ChatMessage[]              @relation("ChatPoruke")
   passwordResetTokens    PasswordResetToken[]
+  verifikacijeKojeSamObavio       VerifikacionaVeza[] @relation("Verifikator")
+  verifikacijaKojomSamVerifikovan VerifikacionaVeza?  @relation("Verifikovani")
+  nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
+  verifikacijaTokeni              VerifikacijaToken[]
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -832,4 +848,40 @@ model ChatMessage {
 
   @@index([createdAt(sort: Desc)])
   @@index([userId])
+}
+
+// ─── Dokaz stvarnosti — graf verifikacija (Pravilnik v3.5.0) ─────────────────
+
+model VerifikacionaVeza {
+  id              String    @id @default(uuid())
+  verifikatorId   String
+  verifikator     User      @relation("Verifikator", fields: [verifikatorId], references: [id])
+  redniBroj       Int
+  verifikovaniId  String    @unique
+  verifikovani    User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
+  vremenskiZig    DateTime  @default(now())
+  nadzornikId     String?
+  nadzornik       User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
+  podlezeNadzoru  Boolean
+  nadzoranAt      DateTime?
+
+  @@unique([verifikatorId, redniBroj])
+  @@index([verifikatorId])
+  @@index([verifikovaniId])
+  @@index([nadzornikId])
+}
+
+model VerifikacijaToken {
+  id         String    @id @default(uuid())
+  token      String    @unique
+  brojCifara String    @unique
+  korisnikId String
+  korisnik   User      @relation(fields: [korisnikId], references: [id])
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime
+  used       Boolean   @default(false)
+  usedAt     DateTime?
+
+  @@index([korisnikId])
+  @@index([expiresAt])
 }
