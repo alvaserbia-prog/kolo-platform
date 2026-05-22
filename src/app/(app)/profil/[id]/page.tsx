@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import IndeksSekcija from "@/components/profil/IndeksSekcija";
 
 interface Transakcija {
   id: string;
@@ -229,6 +230,9 @@ export default function JavniProfilPage() {
           <PorukaButton userId={profil.id} />
         </div>
       </div>
+
+      {/* Indeks stvarnosti */}
+      <IndeksSekcija korisnikId={profil.id} />
 
       {/* Statistike */}
       {(profil.bilans !== null || profil.zrno !== null || profil.rangPreporuka !== null || profil.rangDonacija !== null) && (

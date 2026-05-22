@@ -10,7 +10,8 @@
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
-    "seed:dokaz": "tsx prisma/seed-dokaz-stvarnosti.ts"
+    "seed:dokaz": "tsx prisma/seed-dokaz-stvarnosti.ts",
+    "smoke:dokaz": "tsx scripts/smoke-test-dokaz-stvarnosti.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
