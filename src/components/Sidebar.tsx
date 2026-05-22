@@ -18,6 +18,8 @@ interface DnevniBrojevi {
 interface SidebarProps {
   verified: boolean;
   isAdmin: boolean;
+  jeNadzornik?: boolean; // POCETNI ili NOSILAC_ZRNA — vidi link "Nadzor"
+  brojZaNadzor?: number; // badge na sidebar-u
   mobileOpen?: boolean;
   onMobileClose?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
@@ -26,11 +28,15 @@ interface SidebarProps {
 function SidebarContent({
   verified,
   isAdmin,
+  jeNadzornik,
+  brojZaNadzor,
   onLinkClick,
   dnevniBrojevi,
 }: {
   verified: boolean;
   isAdmin: boolean;
+  jeNadzornik?: boolean;
+  brojZaNadzor?: number;
   onLinkClick?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
 }) {
@@ -42,6 +48,9 @@ function SidebarContent({
     "/pijaca": dnevniBrojevi.pijaca,
     "/zrno": dnevniBrojevi.zrno,
   } : {};
+  if (jeNadzornik && brojZaNadzor && brojZaNadzor > 0) {
+    badge["/nadzor"] = brojZaNadzor;
+  }
 
   const linkoviVerifikovan = [
     { href: "/pocetna", label: t("pocetna") },
@@ -49,6 +58,7 @@ function SidebarContent({
     { href: "/novcanik", label: t("novcanik") },
     { href: "/pijaca", label: t("pijaca") },
     { href: "/zrno", label: t("zrno") },
+    { href: "/verifikacija", label: t("verifikacija") },
   ];
 
   const linkoviNeverifikovan = [
@@ -59,6 +69,8 @@ function SidebarContent({
     { href: "/verifikacija", label: t("verifikacija") },
   ];
 
+  const linkoviNadzor = jeNadzornik ? [{ href: "/nadzor", label: "Nadzor" }] : [];
+
   const linkoviAdmin = [
     { href: "/admin", label: t("admin") },
     { href: "/admin/simulator", label: t("simulator") },
@@ -66,6 +78,7 @@ function SidebarContent({
 
   const links = [
     ...(verified ? linkoviVerifikovan : linkoviNeverifikovan),
+    ...linkoviNadzor,
     ...(isAdmin ? linkoviAdmin : []),
   ];
 
@@ -92,6 +105,11 @@ function SidebarContent({
               }`}
             >
               <span>{label}</span>
+              {count > 0 && (
+                <span className="ml-2 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-kolo-gold-400 text-black text-xs font-semibold">
+                  {count}
+                </span>
+              )}
             </Link>
           );
         })}
@@ -111,7 +129,7 @@ function SidebarContent({
   );
 }
 
-export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
+export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
   // Zatvori drawer pri promeni rute
   const pathname = usePathname();
   useEffect(() => {
@@ -122,7 +140,7 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose, 
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col">
-        <SidebarContent verified={verified} isAdmin={isAdmin} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 
       {/* Mobile drawer overlay */}
@@ -147,7 +165,7 @@ export default function Sidebar({ verified, isAdmin, mobileOpen, onMobileClose, 
           </div>
           <JezikSvitcer />
         </div>
-        <SidebarContent verified={verified} isAdmin={isAdmin} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>
     </>
   );

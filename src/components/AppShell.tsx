@@ -17,12 +17,14 @@ interface DnevniBrojevi {
 interface AppShellProps {
   verified: boolean;
   isAdmin: boolean;
+  jeNadzornik?: boolean;
   children: React.ReactNode;
 }
 
-export default function AppShell({ verified, isAdmin, children }: AppShellProps) {
+export default function AppShell({ verified, isAdmin, jeNadzornik, children }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dnevniBrojevi, setDnevniBrojevi] = useState<DnevniBrojevi | null>(null);
+  const [brojZaNadzor, setBrojZaNadzor] = useState<number>(0);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -49,6 +51,17 @@ export default function AppShell({ verified, isAdmin, children }: AppShellProps)
       .catch(() => {});
   }, [verified]);
 
+  // Učitaj broj verifikacija za nadzor (samo POCETNI / NOSILAC_ZRNA)
+  useEffect(() => {
+    if (!jeNadzornik) return;
+    fetch("/api/nadzor")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (data?.verifikacije) setBrojZaNadzor(data.verifikacije.length);
+      })
+      .catch(() => {});
+  }, [jeNadzornik, pathname]);
+
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">
       <Header onMenuOpen={() => setMobileOpen(true)} />
@@ -57,6 +70,8 @@ export default function AppShell({ verified, isAdmin, children }: AppShellProps)
         <Sidebar
           verified={verified}
           isAdmin={isAdmin}
+          jeNadzornik={jeNadzornik}
+          brojZaNadzor={brojZaNadzor}
           mobileOpen={mobileOpen}
           onMobileClose={() => setMobileOpen(false)}
           dnevniBrojevi={dnevniBrojevi}
