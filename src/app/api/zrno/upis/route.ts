@@ -30,13 +30,13 @@ export async function POST(req: NextRequest) {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const vec = await prisma.zrnoKupovinaZahtev.findUnique({
+  const vec = await prisma.zrnoUpisZahtev.findUnique({
     where: { userId_date: { userId: session.user.id, date: danas } },
   });
   if (vec && vec.status === "PENDING")
     return NextResponse.json({ error: "Već postoji aktivan zahtev za kupovinu danas." }, { status: 400 });
 
-  await prisma.zrnoKupovinaZahtev.upsert({
+  await prisma.zrnoUpisZahtev.upsert({
     where: { userId_date: { userId: session.user.id, date: danas } },
     create: { userId: session.user.id, poenIznos, date: danas },
     update: { poenIznos, status: "PENDING" },

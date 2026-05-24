@@ -74,8 +74,8 @@ export async function DELETE(req: NextRequest) {
           fromWalletId: BANKA_WALLET_ID,
           toWalletId: user.wallet.id,
           amount: poenDobijeno,
-          type: TransactionType.PRODAJA_ZRNO,
-          description: `Prodaja ${slobodnaZrna} ZRNA pri deaktivaciji naloga`,
+          type: TransactionType.OTPIS_ZRNO,
+          description: `Otpis ${slobodnaZrna} ZRNA pri deaktivaciji naloga`,
         },
       });
     });

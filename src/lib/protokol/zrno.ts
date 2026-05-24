@@ -64,7 +64,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   });
 
   // 2. Obradi kupovine
-  const kupovine = await prisma.zrnoKupovinaZahtev.findMany({
+  const kupovine = await prisma.zrnoUpisZahtev.findMany({
     where: { date: danas, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
@@ -98,7 +98,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           fromWalletId: z.user.wallet!.id,
           toWalletId: BANKA_WALLET_ID,
           amount: poenPlaceno,
-          type: TransactionType.KUPOVINA_ZRNO,
+          type: TransactionType.UPIS_ZRNO,
           description: `Upis ${zrnaDobija} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
@@ -109,7 +109,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           update: { slobodno: { increment: zrnaDobija } },
         });
 
-        await tx.zrnoKupovinaZahtev.update({
+        await tx.zrnoUpisZahtev.update({
           where: { id: z.id },
           data: { status: "EXECUTED", zrnaKupljeno: zrnaDobija, poenPlaceno },
         });
@@ -121,7 +121,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   }
 
   // 3. Obradi prodaje
-  const prodaje = await prisma.zrnoProdajaZahtev.findMany({
+  const prodaje = await prisma.zrnoOtpisZahtev.findMany({
     where: { date: danas, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
@@ -142,7 +142,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           fromWalletId: BANKA_WALLET_ID,
           toWalletId: z.user.wallet!.id,
           amount: poenDobijeno,
-          type: TransactionType.PRODAJA_ZRNO,
+          type: TransactionType.OTPIS_ZRNO,
           description: `Otpis ${z.kolicina} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
@@ -152,7 +152,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           data: { slobodno: { decrement: z.kolicina } },
         });
 
-        await tx.zrnoProdajaZahtev.update({
+        await tx.zrnoOtpisZahtev.update({
           where: { id: z.id },
           data: { status: "EXECUTED", poenDobijeno },
         });
@@ -206,9 +206,9 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
 async function cancel(id: string, tip: "kupovina" | "prodaja") {
   if (tip === "kupovina") {
-    await prisma.zrnoKupovinaZahtev.update({ where: { id }, data: { status: "CANCELLED" } });
+    await prisma.zrnoUpisZahtev.update({ where: { id }, data: { status: "CANCELLED" } });
   } else {
-    await prisma.zrnoProdajaZahtev.update({ where: { id }, data: { status: "CANCELLED" } });
+    await prisma.zrnoOtpisZahtev.update({ where: { id }, data: { status: "CANCELLED" } });
   }
 }
 

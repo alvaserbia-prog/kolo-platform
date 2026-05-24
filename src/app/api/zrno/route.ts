@@ -14,8 +14,8 @@ export async function GET() {
 
   const [stanje, kupovinaZahtev, prodajaZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
-    prisma.zrnoKupovinaZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
-    prisma.zrnoProdajaZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
+    prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
+    prisma.zrnoOtpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
     prisma.zrnoStatusZahtev.findMany({ where: { userId: session.user.id, status: "PENDING" } }),
     prisma.zrnoDelegacija.findUnique({ where: { delegatorId: session.user.id } }),
     poslednjiKurs(),

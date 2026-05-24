@@ -65,8 +65,8 @@ enum TransactionType {
   EMISIJA_KRUG_OSNIVANJE
   EMISIJA_KRUG_BONUS
   EMISIJA_PROGRAM
-  KUPOVINA_ZRNO
-  PRODAJA_ZRNO
+  UPIS_ZRNO
+  OTPIS_ZRNO
 }
 
 enum TipKorisnika {
@@ -200,8 +200,8 @@ model User {
   programEnrollments     ProgramEnrollment[]
   doprinosEvidencije     DoprinosEvidencija[]
   zrnoStanje             ZrnoStanje?
-  zrnoKupovinaZahtevi    ZrnoKupovinaZahtev[]
-  zrnoProdajaZahtevi     ZrnoProdajaZahtev[]
+  zrnoUpisZahtevi        ZrnoUpisZahtev[]
+  zrnoOtpisZahtevi       ZrnoOtpisZahtev[]
   zrnoStatusZahtevi      ZrnoStatusZahtev[]
   delegiraoKome          ZrnoDelegacija?            @relation("Delegator")
   delegatZa              ZrnoDelegacija[]           @relation("Delegat")
@@ -546,7 +546,7 @@ model ZrnoStanje {
   updatedAt DateTime @updatedAt
 }
 
-model ZrnoKupovinaZahtev {
+model ZrnoUpisZahtev {
   id           String           @id @default(uuid())
   userId       String
   user         User             @relation(fields: [userId], references: [id])
@@ -561,7 +561,7 @@ model ZrnoKupovinaZahtev {
   @@index([date, status])
 }
 
-model ZrnoProdajaZahtev {
+model ZrnoOtpisZahtev {
   id           String           @id @default(uuid())
   userId       String
   user         User             @relation(fields: [userId], references: [id])
