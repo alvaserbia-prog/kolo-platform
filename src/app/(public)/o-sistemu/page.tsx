@@ -151,7 +151,7 @@ export default function OSistemuPage() {
                 Mreža, znanje i infrastruktura
               </text>
               <text x="360" y="100" textAnchor="middle" fill="rgba(255,255,255,0.92)" fontSize="14">
-                kojom upravlja zajednica koja ih koristi
+                koju Fondacija čuva u ime svih učesnika
               </text>
 
               <path d="M360 158 L360 130" stroke="#1B6B3A" strokeWidth="2" />
@@ -346,13 +346,13 @@ export default function OSistemuPage() {
             {
               naslov: "KOLO Krugovi",
               podnaslov: "Operativna forma članstva",
-              tekst: "Operativne grupe od najmanje pet verifikovanih korisnika, okupljene oko zajedničkog interesa — to može biti posao, mesto, zanimanje, ideja. Krug donosi sopstvena interna pravila i sam organizuje aktivnosti svojih članova.",
+              tekst: "Organizaciona jedinica zasnovana na zajedničkom interesu — posao, mesto, zanimanje, ideja. Krug donosi sopstvena interna pravila i sam organizuje aktivnosti svojih članova. Krug nema pravni subjektivitet.",
               boja: "border-kolo-green-700",
             },
             {
               naslov: "Gornje Kolo",
               podnaslov: "Upravljačka forma članstva",
-              tekst: "Dinamično upravljačko telo korisnika koji poseduju aktivno ZRNO čije se struktura menja svakog dana. Glasačka moć je razmerna kvadratnom korenu broja aktivnih ZRNA (ko ima 100 ZRNA, ima 10 glasova), čime se sprečava koncentracija moći.",
+              tekst: "Upravno telo svih nosilaca ZRNA; sastav se menja sa svakim obračunskim periodom. Odlučuje kvadratnim glasanjem — glasačka moć jednaka je celobrojnoj vrednosti kvadratnog korena iz broja aktivnih ZRNA (ko ima 100 aktivnih ZRNA, ima 10 glasova), čime se sprečava koncentracija moći.",
               boja: "border-kolo-gold-400",
             },
           ].map((k) => (

@@ -42,12 +42,14 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
       },
       {
         id: 4,
-        pitanje: `Šta je ZRNO i kako ga sticem?`,
-        odgovor: `ZRNO je upravljačka jedinica — daje ti pravo glasa u Gornjem Kolu, dinamičnom telu članova koja odlučuje o budućnosti sistema.
+        pitanje: `Šta je ZRNO i kako ga upisujem?`,
+        odgovor: `ZRNO je obračunska jedinica položaja korisnika u zajedničkom dobru — daje ti pravo glasa u Gornjem Kolu, telu nosilaca ZRNA koje odlučuje o budućnosti sistema. Ukupna količina ZRNA u sistemu je fiksna — 1.000.000, bez mogućnosti povećanja ili smanjenja.
 
-Upisuje se isključivo od strane KOLO Protokola, u zamenu za POEN, po dnevno utvrđenom kursu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 10.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno pretvoriti.
+ZRNO se upisuje isključivo od KOLO Protokola, u zamenu za POEN, po dnevnom obračunskom koeficijentu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 10.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno upisati.
 
-Glasačka snaga ZRNA računa se po formuli kvadratnog korena — 100 ZRNA daje 10 glasova, da bi se sprečilo da bogati pojedinci dominiraju.`,
+Obračunski koeficijent je administrativna veličina — odnos broja evidentiranih POEN-a i raspoloživih ZRNA. Nije cena, nije tržišni kurs.
+
+Glasačka snaga aktivnog ZRNA računa se po formuli kvadratnog korena — 100 aktivnih ZRNA daje 10 glasova, da bi se sprečilo da pojedinci sa najviše ZRNA dominiraju.`,
       },
       {
         id: 5,
@@ -63,7 +65,7 @@ Pravna kvalifikacija razmena u sistemu KOLO predmet je dijaloga sa nadležnim or
         pitanje: `Šta tačno znači princip dva odvojena akta?`,
         odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svake emisije POEN-a iz Protokola.
 
-Akt 1: korisnik nešto uradi u korist zajedničkog dobra ili ima status koji to potvrđuje (donira, doprinosi kroz Program evidencije doprinosa, verifikuje se, preporuči novog člana, ima status koji pokreće socijalni program ili dobije odobrenje za projekat).
+Akt 1: korisnik nešto uradi u korist zajedničkog dobra ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verifikuje novog korisnika u lancu jemstva, ima status koji pokreće socijalni program ili dobije odobrenje za projekat).
 
 Akt 2: Protokol algoritamski emituje POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
 
@@ -89,16 +91,20 @@ POEN je interna evidencija doprinosa zajedničkom dobru, slična knjigovodstveno
       {
         id: 6,
         pitanje: `Mogu li se maloletnici registrovati?`,
-        odgovor: `Ne. Platforma je namenjena isključivo punoletnim licima.
-
-Pri registraciji se potvrđuje punoletstvo, a verifikacija zahteva ličnu kartu ili pasoš.`,
+        odgovor: `Ne. Platforma je trenutno namenjena isključivo punoletnim licima. Maloletni korisnici biće obuhvaćeni posebnim modulom sa pojačanim zahtevima i saglasnošću roditelja ili zakonskog zastupnika, koji se aktivira kasnije.`,
       },
       {
         id: 7,
         pitanje: `Kako se verifikujem i šta time dobijam?`,
-        odgovor: `Verifikacija je opciona. Učitaš ličnu kartu (ili pasoš) i admin Fondacije ručno proverava i odobrava — pri odobrenju jednokratno dobijaš 1.000 POEN.
+        odgovor: `Verifikacija je opciona, ali je preduslov za pun pristup funkcijama platforme.
 
-Verifikacija je preduslov za sve glavne funkcionalnosti: sticanje POEN-a kroz preporuke, donacije i pokroviteljstvo, upis ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
+Verifikacija se obavlja kroz lanac jemstva: druga dva verifikovana korisnika koji te lično poznaju potvrđuju tvoju stvarnost u fizičkom prisustvu. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog. Verifikator ne traži niti prikuplja dokumente.
+
+Svaka verifikacija uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
+
+Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN svakom verifikatoru i 500 POEN nadzorniku (kada verifikacija podleže nadzoru). Upis nije naknada za podatke — to je automatski akt Protokola po pravilu.
+
+Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
       },
       {
         id: 8,
@@ -381,9 +387,11 @@ Profili verifikovanih članova (sa lokacijom, opisom, telefonom za kontakt na Pi
       {
         id: 35,
         pitanje: `Kako se štiti moja privatnost?`,
-        odgovor: `Tvoji lični podaci (ime, prezime, JMBG, lična karta) su strogo zaštićeni — vidi ih samo admin Fondacije, i to samo radi verifikacije ili u slučaju zakonske obaveze.
+        odgovor: `Minimizacija podataka je jedan od četiri principa sistema — platforma prikuplja samo podatke neophodne za funkcionisanje sistema.
 
-Sve admin akcije pristupa ličnim podacima se beleže u trajnom logu. Fondacija ne deli podatke sa trećim licima izuzev po nalogu suda.
+Verifikacija se obavlja u lancu jemstva: drugi verifikovani korisnici potvrđuju tvoju stvarnost u fizičkom prisustvu, bez prikupljanja ili dostavljanja ličnih dokumenata. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog.
+
+Sve admin akcije pristupa eventualnim ličnim podacima beleže se u trajnom logu. Fondacija ne deli podatke sa trećim licima izuzev po nalogu nadležnog organa.
 
 U svakom trenutku možeš zatražiti eksport svih svojih podataka u JSON formatu, ili ih anonimizovati kroz brisanje naloga.`,
       },
@@ -392,7 +400,7 @@ U svakom trenutku možeš zatražiti eksport svih svojih podataka u JSON formatu
         pitanje: `Kako izlazim iz sistema?`,
         odgovor: `Brisanje naloga je dostupno u svakom trenutku iz podešavanja profila.
 
-Pre deaktivacije možeš preneti POEN drugom korisniku; sva ZRNA se automatski vraćaju Protokolu po dnevnom kursu. POEN koji ostane se takođe vraća Protokolu.
+Pre deaktivacije možeš preneti POEN drugom korisniku; sva ZRNA se automatski otpisuju Protokolu po tekućem obračunskom koeficijentu. POEN koji ostane se takođe vraća Protokolu.
 
 Tvoji lični podaci se anonimizuju (pseudonim postaje neutralni KorisnikID), ali numerička istorija transakcija ostaje radi održanja matematičke ispravnosti sistema.
 

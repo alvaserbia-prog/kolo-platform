@@ -396,11 +396,11 @@ export default function ONamaPage() {
             },
             {
               naslov: "Sedište i registracija",
-              tekst: "Sombor, Šetalište 14. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić).",
+              tekst: "Sombor, Šetalište 16. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić); u toku je promena naziva u KOLO Fondacija i preseljenje sedišta.",
             },
             {
               naslov: "Organi",
-              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija postaje njegov izvršni organ.",
+              tekst: "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija prelazi u servisnu i izvršnu ulogu — primenjuje odluke i upućuje obrazložene odgovore na preporuke Gornjeg Kola.",
             },
           ].map((stub, idx) => (
             <div key={stub.naslov || `card-${idx}`} className="p-6 md:p-8">
@@ -422,13 +422,20 @@ export default function ONamaPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Levo — dokumenti */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti</p>
+            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti (v3.7.0)</p>
             <div className="space-y-2">
               {[
-                { naziv: "Pravilnik o KOLO sistemu (v3.7.0) + Prilozi", href: "/pravilnik" },
-                { naziv: "Statut KOLO Fondacije (v3.7.0)", href: "/statut" },
-                { naziv: "Politika privatnosti (v3.7.0)", href: "/privatnost" },
-                { naziv: "Uslovi korišćenja (v3.7.0)", href: "/uslovi" },
+                { naziv: "Statut KOLO Fondacije", href: "/statut" },
+                { naziv: "Pravilnik o hijerarhiji akata", href: "/pravilnik/hijerarhija" },
+                { naziv: "Pravilnik o KOLO sistemu", href: "/pravilnik/kolo-sistem" },
+                { naziv: "Pravilnik o dokazu stvarnosti", href: "/pravilnik/dokaz-stvarnosti" },
+                { naziv: "Pravilnik o pokroviteljstvu i donacijama", href: "/pravilnik/pokroviteljstvo-donacije" },
+                { naziv: "Pravilnik o operativnom doprinosu", href: "/pravilnik/operativni" },
+                { naziv: "Pravilnik o osnivačkom doprinosu", href: "/pravilnik/osnivacki" },
+                { naziv: "Politika privatnosti", href: "/privatnost" },
+                { naziv: "Procena uticaja na zaštitu podataka (DPIA)", href: "/dpia" },
+                { naziv: "Uslovi korišćenja", href: "/uslovi" },
+                { naziv: "Whitepaper", href: "/whitepaper" },
               ].map((dok) => (
                 <a
                   key={dok.naziv}
@@ -475,7 +482,7 @@ export default function ONamaPage() {
                 </div>
                 <div>
                   <p className="text-xs text-kolo-muted mb-1">Adresa</p>
-                  <p className="text-sm font-medium text-kolo-text">KOLO Fondacija, Šetalište 14, Sombor</p>
+                  <p className="text-sm font-medium text-kolo-text">KOLO Fondacija, Šetalište 16, Sombor</p>
                 </div>
               </div>
             </div>

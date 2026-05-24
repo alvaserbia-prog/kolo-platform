@@ -11,11 +11,11 @@ import { poBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
-  title: "KOLO — Ekonomija koju gradiš sa svojom zajednicom",
+  title: "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
   description:
-    "KOLO je sistem u kome tvoj doprinos ima vrednost. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje je oblikuju.",
+    "KOLO je sistem evidencije doprinosa zajedničkom dobru. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje sistem oblikuju.",
   openGraph: {
-    title: "KOLO — Ekonomija koju gradiš sa svojom zajednicom",
+    title: "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
     description: "KOLO je sistem uzajamnosti kroz mrežu lokalnih krugova. Članstvo je besplatno.",
     locale: "sr_RS",
     type: "website",
@@ -226,7 +226,7 @@ export default async function Home() {
               },
               {
                 naslov: "Doprinos koji se pamti",
-                tekst: "Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove POEN. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara pristup onome što su drugi doneli.",
+                tekst: "Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove POEN. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara prospektivan pristup onome što su drugi doneli.",
                 istakniPoen: true,
               },
               {
@@ -244,7 +244,7 @@ export default async function Home() {
                 <p className="text-sm text-kolo-text leading-relaxed">
                   {kartica.istakniPoen ? (
                     <>
-                      Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove <strong className="text-kolo-green-900">POEN</strong>. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara pristup onome što su drugi doneli.
+                      Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove <strong className="text-kolo-green-900">POEN</strong>. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara prospektivan pristup onome što su drugi doneli.
                     </>
                   ) : (
                     kartica.tekst
@@ -272,25 +272,25 @@ export default async function Home() {
                 ikona: "🌱",
                 naslov: "Farmeri i mali proizvođači",
                 opis: "Direktan pristup potrošačima i olakšana distribucija domaćih proizvoda bez posrednika i provizije.",
-                poenta: "Vrednovanje tvojih proizvoda srazmerno uloženom radu.",
+                poenta: "Prepoznavanje tvog rada srazmerno uloženom trudu.",
               },
               {
                 ikona: "🔧",
                 naslov: "Zanatlije i majstori",
                 opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke.",
-                poenta: "Da ceo krug\nvidi koliko vrediš.",
+                poenta: "Da ceo krug\nvidi tvoj rad.",
               },
               {
                 ikona: "👴",
                 naslov: "Penzioneri sa znanjem",
                 opis: "Razmena znanja i usluga za stvari koje ti realno trebaju — domaći proizvodi, lokalne usluge.",
-                poenta: "Tvoje iskustvo dobija konkretnu vrednost.",
+                poenta: "Tvoje iskustvo postaje vidljivo i traženo.",
               },
               {
                 ikona: "🏠",
                 naslov: "Domaćice",
                 opis: "Prodaja domaćih proizvoda (zimnica, pecivo, ručni rad) i razmena usluga sa komšinicama.",
-                poenta: "Kućni rad postaje izvor stvarnih sredstava.",
+                poenta: "Kućni rad postaje vidljiv kao doprinos zajednici.",
               },
               {
                 ikona: "👩‍👧",
@@ -308,7 +308,7 @@ export default async function Home() {
                 ikona: "💼",
                 naslov: "Nezaposleni",
                 opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ u aktivnostima zajedničkog dobra.",
-                poenta: "Dostojanstvo i sigurnost za tebe i porodicu.",
+                poenta: "Dostojanstvo i prostor da pokreneš svoj rad.",
               },
               {
                 ikona: "🤝",
@@ -414,7 +414,7 @@ export default async function Home() {
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Slanjem dokumenta i ličnih podataka. Time potvrđuješ da si stvarna osoba, otključavaš sve funkcije platforme, i dobijaš 1.000 POEN kao priznanje za pridruživanje.",
+                opis: "Druga dva verifikovana korisnika koji te lično poznaju potvrđuju tvoju stvarnost u fizičkom prisustvu. Tvoj indeks stvarnosti raste, otključavaš pun pristup funkcijama. Protokol ti automatski upiše 1.000 POEN po pravilu — nije naknada za podatke, već priznanje da si ušao u lanac jemstva.",
               },
               {
                 br: "3",
@@ -598,12 +598,10 @@ export default async function Home() {
               Registruj se →
             </Link>
             <a
-              href="https://viber.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:kontakt@ekolo.rs?subject=Prati%20razvoj%20KOLO%20sistema"
               className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
             >
-              Prati razvoj ↗
+              Prati razvoj →
             </a>
           </div>
           <div className="mt-8 pt-6 border-t border-white/15 space-y-1.5">
@@ -632,7 +630,7 @@ export default async function Home() {
               <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Sistem</p>
               <ul className="space-y-2 text-sm text-kolo-muted">
                 <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Kako funkcioniše</Link></li>
-                <li><a href="#" className="hover:text-kolo-green-700 transition-colors">Pravilnik</a></li>
+                <li><Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">Pravilnici</Link></li>
               </ul>
             </div>
             <div>

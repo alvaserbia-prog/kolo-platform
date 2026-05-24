@@ -6,28 +6,27 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
-  title: "Statut KOLO Fondacije — KOLO",
-  description: "Statut KOLO Fondacije, verzija 3.7.0",
+  title: "Whitepaper — KOLO",
+  description: "KOLO Whitepaper, verzija 3.7.0",
 };
 
-export default async function StatutPage() {
-  const filePath = path.join(process.cwd(), "dokumentacija", "statut_3_7_0.md");
+export default async function WhitepaperPage() {
+  const filePath = path.join(process.cwd(), "dokumentacija", "whitepaper_3_7_0.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
+        <p className="text-xs text-kolo-muted mb-1">Dokumentacija</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Statut KOLO Fondacije
+          KOLO Whitepaper
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0 · 16.05.2026.</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnik</Link>
-          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
-          <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
+          <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">O sistemu (sažetak)</Link>
+          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
         </div>
       </div>
 
@@ -55,6 +54,15 @@ export default async function StatutPage() {
       >
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{sadrzaj}</ReactMarkdown>
       </article>
+
+      <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
+        <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">
+          ← O sistemu (sažetak)
+        </Link>
+        <Link href="/" className="hover:text-kolo-green-700 transition-colors">
+          Nazad na početnu
+        </Link>
+      </div>
     </div>
   );
 }

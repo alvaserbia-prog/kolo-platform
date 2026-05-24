@@ -1,34 +1,83 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export const metadata: Metadata = {
-  title: "Politika privatnosti — KOLO",
-  description: "Politika privatnosti KOLO platforme, verzija 3.7.0",
+const PRAVILNICI: Record<string, { naziv: string; fajl: string; opis: string }> = {
+  "kolo-sistem": {
+    naziv: "Pravilnik o KOLO sistemu",
+    fajl: "Pravilnik_3_7_0.md",
+    opis: "Osnovni akt sistema — 12 glava, 82 člana.",
+  },
+  "hijerarhija": {
+    naziv: "Pravilnik o hijerarhiji akata",
+    fajl: "hijerarhija_3_7_0.md",
+    opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
+  },
+  "dokaz-stvarnosti": {
+    naziv: "Pravilnik o dokazu stvarnosti",
+    fajl: "dokaz_stvarnosti_3_7_0.md",
+    opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
+  },
+  "pokroviteljstvo-donacije": {
+    naziv: "Pravilnik o pokroviteljstvu i donacijama",
+    fajl: "donacije_3_7_0.md",
+    opis: "Nivoi donacija i pokroviteljstva.",
+  },
+  "operativni": {
+    naziv: "Pravilnik o operativnom doprinosu",
+    fajl: "operativni_3_7_0.md",
+    opis: "Operativni program i međusobno potvrđivanje doprinosa.",
+  },
+  "osnivacki": {
+    naziv: "Pravilnik o osnivačkom doprinosu",
+    fajl: "osnivacki_3_7_0.md",
+    opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
+  },
 };
 
-export default async function PolitikaPrivatnostiPage() {
-  const filePath = path.join(process.cwd(), "dokumentacija", "politika_3_7_0.md");
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const p = PRAVILNICI[slug];
+  if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
+  return {
+    title: `${p.naziv} — KOLO`,
+    description: `${p.naziv}, verzija 3.7.0. ${p.opis}`,
+  };
+}
+
+export async function generateStaticParams() {
+  return Object.keys(PRAVILNICI).map((slug) => ({ slug }));
+}
+
+export default async function PravilnikSlugPage({ params }: Props) {
+  const { slug } = await params;
+  const p = PRAVILNICI[slug];
+  if (!p) notFound();
+
+  const filePath = path.join(process.cwd(), "dokumentacija", p.fajl);
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
+        <p className="text-xs text-kolo-muted mb-1">
+          <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">Pravilnici</Link>
+          {" / "}
+          <span>{p.naziv}</span>
+        </p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Politika privatnosti KOLO platforme
+          {p.naziv}
         </h1>
         <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
-        <div className="mt-4 flex gap-3 text-sm flex-wrap">
-          <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/dpia" className="text-kolo-green-700 hover:underline">DPIA (procena uticaja)</Link>
-          <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
-        </div>
       </div>
 
       <article
@@ -57,11 +106,8 @@ export default async function PolitikaPrivatnostiPage() {
       </article>
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
-        <Link href="/dpia" className="text-kolo-green-700 hover:underline">
-          DPIA →
-        </Link>
-        <Link href="/uslovi" className="text-kolo-green-700 hover:underline">
-          Uslovi korišćenja →
+        <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">
+          ← Svi pravilnici
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
           Nazad na početnu

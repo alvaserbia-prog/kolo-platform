@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Uslovi korišćenja KOLO platforme, verzija 3.7.0",
 };
 
-export default async function UsloviKoriscenjaPage() {
+export default async function UsloviPage() {
   const filePath = path.join(process.cwd(), "dokumentacija", "uslovi_koriscenja_3_7_0.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
@@ -25,7 +25,7 @@ export default async function UsloviKoriscenjaPage() {
         <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnik</Link>
+          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
           <Link href="/statut" className="text-kolo-green-700 hover:underline">Statut Fondacije</Link>
           <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
         </div>
@@ -55,6 +55,15 @@ export default async function UsloviKoriscenjaPage() {
       >
         <ReactMarkdown remarkPlugins={[remarkGfm]}>{sadrzaj}</ReactMarkdown>
       </article>
+
+      <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
+        <Link href="/privatnost" className="text-kolo-green-700 hover:underline">
+          Politika privatnosti →
+        </Link>
+        <Link href="/" className="hover:text-kolo-green-700 transition-colors">
+          Nazad na početnu
+        </Link>
+      </div>
     </div>
   );
 }
