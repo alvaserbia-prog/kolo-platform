@@ -2,15 +2,37 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
+/**
+ * POST /api/admin/doprinos-oglasi/prijave/[id]/odobri
+ *
+ * Odobrenje prijave za operativni doprinos (čl. 36 Pravilnika v3.7.0).
+ * Faza 1: UO Fondacije (admin). Faza 2: nosioci ZRNA.
+ */
 export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+
+  const jeAdmin = session.user.role === "ADMIN";
+  let jeNosilacZrna = false;
+  if (!jeAdmin) {
+    const me = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { tipKorisnika: true },
+    });
+    jeNosilacZrna = me?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
+  }
+  if (!jeAdmin && !jeNosilacZrna) {
+    return NextResponse.json(
+      { error: "Odobrenje prijave dostupno je samo nosiocima ZRNA i Upravnom odboru (čl. 36)." },
+      { status: 403 }
+    );
+  }
 
   const { id } = await params;
   const prijava = await prisma.oglasPrijava.findUnique({ where: { id } });
@@ -22,10 +44,25 @@ export async function POST(
     select: {
       title: true,
       positions: true,
+      createdById: true,
       _count: { select: { prijave: { where: { status: "APPROVED" } } } },
     },
   });
   if (!oglasSaKapacitetom) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+
+  // Konflikt interesa: verifikator ne sme biti predlagač oglasa ni podnosilac prijave.
+  if (session.user.id === prijava.userId) {
+    return NextResponse.json(
+      { error: "Ne možeš odlučivati o sopstvenoj prijavi." },
+      { status: 403 }
+    );
+  }
+  if (session.user.id === oglasSaKapacitetom.createdById) {
+    return NextResponse.json(
+      { error: "Predlagač oglasa ne može odlučivati o prijavama na svoj oglas." },
+      { status: 403 }
+    );
+  }
 
   if (
     oglasSaKapacitetom.positions !== null &&

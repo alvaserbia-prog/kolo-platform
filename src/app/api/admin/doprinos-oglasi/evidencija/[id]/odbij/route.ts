@@ -2,20 +2,59 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
+/**
+ * POST /api/admin/doprinos-oglasi/evidencija/[id]/odbij
+ *
+ * Odbijanje evidencije operativnog doprinosa (čl. 36 Pravilnika v3.7.0).
+ * Faza 1: UO Fondacije (admin). Faza 2: nosioci ZRNA.
+ * Konflikt interesa: verifikator ≠ izvršilac ≠ predlagač oglasa.
+ */
 export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+
+  const jeAdmin = session.user.role === "ADMIN";
+  let jeNosilacZrna = false;
+  if (!jeAdmin) {
+    const me = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { tipKorisnika: true },
+    });
+    jeNosilacZrna = me?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
+  }
+  if (!jeAdmin && !jeNosilacZrna) {
+    return NextResponse.json(
+      { error: "Verifikacija evidencije dostupna je samo nosiocima ZRNA i Upravnom odboru (čl. 36)." },
+      { status: 403 }
+    );
+  }
 
   const { id } = await params;
-  const ev = await prisma.oglasEvidencija.findUnique({ where: { id } });
+  const ev = await prisma.oglasEvidencija.findUnique({
+    where: { id },
+    include: { oglas: { select: { createdById: true } } },
+  });
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
+
+  if (session.user.id === ev.userId) {
+    return NextResponse.json(
+      { error: "Ne možeš odlučivati o sopstvenoj evidenciji rada." },
+      { status: 403 }
+    );
+  }
+  if (session.user.id === ev.oglas.createdById) {
+    return NextResponse.json(
+      { error: "Predlagač oglasa ne može odlučivati o evidenciji na svom oglasu." },
+      { status: 403 }
+    );
+  }
 
   await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED" } });
 
