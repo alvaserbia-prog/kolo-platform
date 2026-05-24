@@ -179,6 +179,7 @@ model User {
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]
   osnivacZapis        Osnivac?                   @relation("Osnivac")
+  kreiraniTroskovi    FondacijaTrosak[]          @relation("KreiraoTrosak")
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
@@ -860,6 +861,42 @@ model OsnivackiKorakEmisija {
   createdAt    DateTime          @default(now())
 
   @@unique([korakLogId, osnivacId])
+}
+
+// ─── Fondacija — transparentnost sredstava i Zastitni veto (cl. 71) ──────────
+
+enum FondacijaTrosakKategorija {
+  PLATA
+  INFRASTRUKTURA   // hosting, domeni, serveri
+  PRAVNI_TROSAK    // advokati, sudski vestaci, registracije
+  SOFTWARE         // pretplate na alate, licence
+  ADMINISTRATIVNO  // bankarski troskovi, pisarnica, materijal
+  OPERATIVNO       // ostali operativni troskovi
+  DRUGO
+}
+
+model FondacijaTrosak {
+  id           String                    @id @default(uuid())
+  datum        DateTime                  @db.Date
+  iznosRSD     Decimal                   @db.Decimal(12, 2)
+  kategorija   FondacijaTrosakKategorija
+  opis         String
+  dokumentUrl  String?                   // link na racun/ugovor (opciono)
+  kreiraoId    String
+  kreirao      User                      @relation("KreiraoTrosak", fields: [kreiraoId], references: [id])
+  createdAt    DateTime                  @default(now())
+
+  @@index([datum])
+  @@index([kategorija, datum])
+}
+
+model SistemskiVeto {
+  id              String    @id @default("singleton")
+  aktivan         Boolean   @default(false)     // true kad Protokol < -1M I trajnoUgasen = false
+  trajnoUgasen    Boolean   @default(false)     // jednosmerni flag (cl. 71)
+  datumAktivacije DateTime?
+  datumGasenja    DateTime?                     // kada je trajnoUgasen postao true
+  updatedAt       DateTime  @updatedAt
 }
 
 // ─── Verifikacija — odvojeni pristanak za obradu lk/JMBG ─────────────────────
