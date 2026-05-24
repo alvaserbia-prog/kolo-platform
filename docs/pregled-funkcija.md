@@ -198,10 +198,6 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 ### Tab: Audit log
 - Hronološki zapis svih admin akcija
 
-### `/admin/simulator` — Simulator
-- 4 taba: Pregled | Članovi | Krugovi | ZRNO
-- Testiranje sistema bez uticaja na produkcione podatke
-
 ---
 
 ## Notifikacije

@@ -312,7 +312,7 @@ docs/             — dokumentacija po fazama
 ## Sidebar linkovi
 - Neverifikovan: Početna (/pocetna), Sistem (/sistem), Novčanik, Pijaca, Verifikacija
 - Verifikovan: Početna (/pocetna), Sistem (/sistem), Novčanik, Pijaca, ZRNO
-- Admin (dodatno): Admin, Simulator
+- Admin (dodatno): Admin
 - Badge brojevi (dnevne aktivnosti) učitavaju se sa `GET /api/dnevni-brojevi` i prikazuju kao indikatori na linkovima (novcanik, pijaca, zrno).
 - Napomena: "Početna" je posvećena landing stranica (`/pocetna`) sa Vestima i Chat sobom; "Sistem" je pregled celokupnog stanja (`/sistem`). Ostale funkcionalnosti (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil) postoje kao stranice ali nisu u sidebaru — pristupaju se preko drugih ulaznih tačaka (header, profilni meni, kartice na `/sistem`, ulazi sa `/pocetna`).
 

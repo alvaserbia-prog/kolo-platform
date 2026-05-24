@@ -73,7 +73,6 @@ function SidebarContent({
 
   const linkoviAdmin = [
     { href: "/admin", label: t("admin") },
-    { href: "/admin/simulator", label: t("simulator") },
   ];
 
   const links = [
