@@ -37,12 +37,14 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
       setError("Moraš potvrditi fizičko prisustvo.");
       return;
     }
+    // Skini sve razmake — korisnik može da prilepi "384 729" iz QR ekrana
+    const ocisceno = tokenIliBroj.replace(/\s+/g, "");
     setLoading(true);
     try {
       const res = await fetch("/api/verifikacija", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ token: tokenIliBroj.trim(), potvrdaPrisustva: true }),
+        body: JSON.stringify({ token: ocisceno, potvrdaPrisustva: true }),
       });
       const data = await res.json();
       if (!res.ok) {

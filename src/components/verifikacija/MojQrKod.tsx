@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 
 type Token = {
@@ -9,19 +10,31 @@ type Token = {
   expiresAt: string;
 };
 
+type MojIndeks = {
+  tip: string;
+  indeks: number;
+  brojVerifikacijaObavljenih: number;
+};
+
 /**
  * Generiše token za verifikaciju i prikazuje QR + 6-cifren broj + countdown 60s.
+ * Polluje moj-indeks endpoint i pokazuje obaveštenje kad se verifikacija desi.
  */
 export default function MojQrKod() {
+  const router = useRouter();
   const [token, setToken] = useState<Token | null>(null);
   const [preostalo, setPreostalo] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [obavestenje, setObavestenje] = useState<string | null>(null);
   const tikerRef = useRef<NodeJS.Timeout | null>(null);
+  const pollerRef = useRef<NodeJS.Timeout | null>(null);
+  const pocetniRef = useRef<MojIndeks | null>(null);
 
   async function generisi() {
     setLoading(true);
     setError(null);
+    setObavestenje(null);
     try {
       const res = await fetch("/api/verifikacija/token", { method: "POST" });
       const data = await res.json();
@@ -31,6 +44,11 @@ export default function MojQrKod() {
         return;
       }
       setToken(data);
+      // Snimi početni indeks da bismo detektovali promenu
+      const indeksRes = await fetch("/api/verifikacija/moj-indeks");
+      if (indeksRes.ok) {
+        pocetniRef.current = await indeksRes.json();
+      }
     } catch {
       setError("Mreža nije dostupna");
     } finally {
@@ -49,7 +67,35 @@ export default function MojQrKod() {
     };
   }, [token]);
 
-  const istekao = preostalo === 0 && token !== null;
+  // Polling: kad se indeks ili tip promeni → verifikacija se desila
+  useEffect(() => {
+    if (!token || obavestenje) return;
+    pollerRef.current = setInterval(async () => {
+      try {
+        const res = await fetch("/api/verifikacija/moj-indeks");
+        if (!res.ok) return;
+        const sada: MojIndeks = await res.json();
+        const pocetak = pocetniRef.current;
+        if (
+          pocetak &&
+          (sada.tip !== pocetak.tip || sada.indeks > pocetak.indeks)
+        ) {
+          setObavestenje(
+            `Uspešno verifikovan! Tvoj indeks: ${sada.indeks}%. Stranica se osvežava...`
+          );
+          if (pollerRef.current) clearInterval(pollerRef.current);
+          setTimeout(() => router.refresh(), 1200);
+        }
+      } catch {
+        // ignoriši mrežne greške u pollingu
+      }
+    }, 2000);
+    return () => {
+      if (pollerRef.current) clearInterval(pollerRef.current);
+    };
+  }, [token, obavestenje, router]);
+
+  const istekao = preostalo === 0 && token !== null && !obavestenje;
   const formatBroj = token
     ? `${token.brojCifara.slice(0, 3)} ${token.brojCifara.slice(3)}`
     : null;

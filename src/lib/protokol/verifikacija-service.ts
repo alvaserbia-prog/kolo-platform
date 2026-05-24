@@ -101,9 +101,16 @@ export async function izvrsiVerifikaciju(
   }
 
   // Faza 1: DB promene u jednoj transakciji
-  const trimmed = tokenIliBroj.trim();
-  const { verifikacijaId, verifikatorPseudonim, verifikovaniId, verifikovaniPseudonim, verifikovaniNoviIndeks } =
-    await prisma.$transaction(async (tx) => {
+  // Skini sve whitespace karaktere (razmaci, tab, novi red) — QR ekran prikazuje "384 729"
+  const trimmed = tokenIliBroj.replace(/\s+/g, "");
+  const {
+    verifikacijaId,
+    verifikatorPseudonim,
+    verifikatorWalletId,
+    verifikovaniPseudonim,
+    verifikovaniWalletId,
+    verifikovaniNoviIndeks,
+  } = await prisma.$transaction(async (tx) => {
       // Pronađi token: bilo po 64-char hex ili 6-cifrenom broju
       const token = await tx.verifikacijaToken.findFirst({
         where: {
@@ -111,7 +118,29 @@ export async function izvrsiVerifikaciju(
         },
       });
       if (!token) {
-        throw new VerifikacijaGreska("Nevažeći kod.", 404);
+        if (process.env.NODE_ENV !== "production") {
+          // Dev-only dijagnostika
+          const aktivniTokeni = await tx.verifikacijaToken.findMany({
+            where: { used: false, expiresAt: { gt: new Date() } },
+            select: { brojCifara: true, expiresAt: true, korisnikId: true },
+            take: 5,
+          });
+          console.warn(
+            "[verifikacija] Token NIJE pronađen. Unos:",
+            JSON.stringify(trimmed),
+            "dužina:",
+            trimmed.length,
+            "Aktivni tokeni u bazi:",
+            aktivniTokeni.map((t) => ({
+              brojCifara: t.brojCifara,
+              istice: t.expiresAt.toISOString(),
+            }))
+          );
+        }
+        throw new VerifikacijaGreska(
+          `Nevažeći kod (uneseno: "${trimmed}"). Proveri da li si tačno preneo cifre.`,
+          404
+        );
       }
       if (token.used) {
         throw new VerifikacijaGreska("Kod je već iskorišćen.", 409);
@@ -222,12 +251,21 @@ export async function izvrsiVerifikaciju(
       }
 
       // Osiguraj wallet za verifikovanog ako ga nema
-      const verifikovaniWallet = await tx.wallet.findUnique({
+      let verifikovaniWallet = await tx.wallet.findUnique({
         where: { userId: verifikovani.id },
       });
       if (!verifikovaniWallet) {
-        await tx.wallet.create({
+        verifikovaniWallet = await tx.wallet.create({
           data: { userId: verifikovani.id, type: "USER", balance: 0 },
+        });
+      }
+      // Osiguraj wallet za verifikatora (sanity — trebao bi da postoji)
+      let verifikatorWallet = await tx.wallet.findUnique({
+        where: { userId: verifikator.id },
+      });
+      if (!verifikatorWallet) {
+        verifikatorWallet = await tx.wallet.create({
+          data: { userId: verifikator.id, type: "USER", balance: 0 },
         });
       }
 
@@ -240,41 +278,25 @@ export async function izvrsiVerifikaciju(
       return {
         verifikacijaId: veza.id,
         verifikatorPseudonim: verifikator.pseudonim,
-        verifikovaniId: verifikovani.id,
+        verifikatorWalletId: verifikatorWallet.id,
         verifikovaniPseudonim: verifikovani.pseudonim,
+        verifikovaniWalletId: verifikovaniWallet.id,
         verifikovaniNoviIndeks: noviIndeks,
       };
     });
 
-  // Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu)
-  const verifikatorWallet = await prisma.wallet.findUnique({
-    where: { userId: verifikatorId },
-  });
-  const verifikovaniWallet = await prisma.wallet.findUnique({
-    where: { userId: verifikovaniId },
-  });
-  if (!verifikatorWallet || !verifikovaniWallet) {
-    // Ovo ne bi smelo da se desi — wallet je osiguran u Fazi 1
-    console.error("[verifikacija-service] Wallet nedostaje posle Faze 1", {
-      verifikatorId,
-      verifikovaniId,
-    });
-    return {
-      verifikacijaId,
-      verifikovaniPseudonim,
-      verifikovaniNoviIndeks,
-    };
-  }
-
+  // Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu).
+  // Koristi se walletId direktno iz Faze 1 (bez ponovnog findUnique-a) da bi se
+  // izbegao connection-pool race u kojem novokreirani wallet nije još vidljiv.
   try {
     await emitujPoen(
-      verifikatorWallet.id,
+      verifikatorWalletId,
       POEN_VERIFIKATOR,
       TransactionType.EMISIJA_VERIFIKACIJA,
       `Verifikacija ${verifikovaniPseudonim} (čl. 7 Pravilnika o dokazu stvarnosti)`
     );
     await emitujPoen(
-      verifikovaniWallet.id,
+      verifikovaniWalletId,
       POEN_VERIFIKOVANI,
       TransactionType.EMISIJA_VERIFIKACIJA,
       `Primljena verifikacija od ${verifikatorPseudonim}`
@@ -282,10 +304,16 @@ export async function izvrsiVerifikaciju(
   } catch (e) {
     console.error("[verifikacija-service] POEN emisija pukla posle Faze 1 — incident", {
       verifikacijaId,
+      verifikatorWalletId,
+      verifikovaniWalletId,
       error: e,
     });
-    // Ne bacamo dalje — verifikacija je već u bazi, samo nije emitovan POEN.
-    // Ovo treba ručno rešavanje (cron za retry je posle u planu).
+    // Verifikacija je u bazi, slot iskorišćen, ali POEN nije emitovan.
+    // Bacamo dalje da UI moze da prikaze upozorenje korisniku.
+    throw new VerifikacijaGreska(
+      "Verifikacija je evidentirana, ali emisija POEN-a je pukla. Kontaktiraj administratora.",
+      500
+    );
   }
 
   return {
