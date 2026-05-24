@@ -67,6 +67,7 @@ enum TransactionType {
   EMISIJA_PROGRAM
   UPIS_ZRNO
   OTPIS_ZRNO
+  EMISIJA_OSNIVACKI
 }
 
 enum TipKorisnika {
@@ -177,6 +178,7 @@ model User {
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]
+  osnivacZapis        Osnivac?                   @relation("Osnivac")
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
@@ -810,6 +812,54 @@ model PravilnikPrihvatanje {
 
   @@unique([userId, verzijaId])
   @@index([userId])
+}
+
+// ─── Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.7.0) ────────────
+
+model OsnivackiKanal {
+  id                 String   @id @default("singleton")
+  ukupnoEvidentirano Int      @default(0)        // ukupno POEN-a evidentirano kroz kanal (max 2.400.000)
+  brojKoraka         Int      @default(0)        // broj izvrsenih koraka (max 120)
+  zatvoren           Boolean  @default(false)    // postaje true kad brojKoraka = 120
+  zatvorenAt         DateTime?
+  poslednjiPrag      Int      @default(0)        // posljednji aktiviran prag (100.000, 200.000, ...)
+  updatedAt          DateTime @updatedAt
+}
+
+model Osnivac {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation("Osnivac", fields: [userId], references: [id])
+  udeoBrojilac  Int                              // npr. 50 (znaci 50/zbir)
+  udeoImenilac  Int                              // npr. 100 (znaci 50/100 = 50%)
+  redniBroj     Int      @unique                 // redosled u javnom registru
+  napomena      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  emisije       OsnivackiKorakEmisija[]
+}
+
+model OsnivackiKorakLog {
+  id                  String   @id @default(uuid())
+  brojKoraka          Int      @unique           // 1, 2, ..., 120
+  prag                Int                        // POEN prag koji je aktivirao korak (100k, 200k, ...)
+  ukupanPoenUSistemu  Int                        // total POEN-a u sistemu u trenutku okidanja
+  iznosKoraka         Int      @default(20000)   // 20.000 POEN po koraku
+  createdAt           DateTime @default(now())
+  emisije             OsnivackiKorakEmisija[]
+}
+
+model OsnivackiKorakEmisija {
+  id           String            @id @default(uuid())
+  korakLogId   String
+  korakLog     OsnivackiKorakLog @relation(fields: [korakLogId], references: [id])
+  osnivacId    String
+  osnivac      Osnivac           @relation(fields: [osnivacId], references: [id])
+  iznosPoen    Int                                // emitovano ovom osnivacu u ovom koraku
+  transactionId String?                           // veza na Transaction
+  createdAt    DateTime          @default(now())
+
+  @@unique([korakLogId, osnivacId])
 }
 
 // ─── Verifikacija — odvojeni pristanak za obradu lk/JMBG ─────────────────────
