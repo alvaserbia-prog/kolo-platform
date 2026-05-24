@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 
-// POST /api/zrno/kupi — rezervacija kupovine (izvršava se u ponoć)
+// POST /api/zrno/upis — rezervacija upisa ZRNA (izvršava se u ponoć)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });

@@ -216,7 +216,7 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
     const iznos = Number(poenZaKupovinu);
     if (!iznos || iznos <= 0) return;
     setLoading("kupi"); setPoruka(null);
-    const res = await fetch("/api/zrno/kupi", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ poenIznos: iznos }) });
+    const res = await fetch("/api/zrno/upis", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ poenIznos: iznos }) });
     const data = await res.json();
     setLoading(null);
     setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "kupi" });
@@ -227,7 +227,7 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
     const kol = Number(kolicinaProdaja);
     if (!kol || kol <= 0) return;
     setLoading("prodaj"); setPoruka(null);
-    const res = await fetch("/api/zrno/prodaj", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
+    const res = await fetch("/api/zrno/otpis", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
     const data = await res.json();
     setLoading(null);
     setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "prodaj" });
@@ -247,12 +247,12 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
       {/* Kupovina */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
         <div className="flex justify-between items-start">
-          <p className="text-sm font-semibold text-kolo-muted">{t("kupovina_naslov")}</p>
-          <span className="text-xs text-kolo-muted">{t("kupovina_max", { max: maxPoen.toLocaleString("sr-RS") })}</span>
+          <p className="text-sm font-semibold text-kolo-muted">{t("upis_naslov")}</p>
+          <span className="text-xs text-kolo-muted">{t("upis_max", { max: maxPoen.toLocaleString("sr-RS") })}</span>
         </div>
         {kupovinaZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            {t("kupovina_aktivan_zahtev", { iznos: kupovinaZahtev.poenIznos.toLocaleString("sr-RS"), status: kupovinaZahtev.status })}
+            {t("upis_aktivan_zahtev", { iznos: kupovinaZahtev.poenIznos.toLocaleString("sr-RS"), status: kupovinaZahtev.status })}
           </div>
         )}
         {!kupovinaZahtev && (
@@ -261,26 +261,26 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
               placeholder={`POEN (max ${maxPoen.toLocaleString("sr-RS")})`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoZrna > 0 && (
-              <p className="text-xs text-kolo-muted">{t("kupovina_procena", { zrna: procijenjenoZrna.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
+              <p className="text-xs text-kolo-muted">{t("upis_procena", { zrna: procijenjenoZrna.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
             {poruka?.for === "kupi" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
             <button onClick={kupi} disabled={loading !== null || !poenZaKupovinu}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "kupi" ? "..." : t("kupovina_dugme")}
+              {loading === "kupi" ? "..." : t("upis_dugme")}
             </button>
           </>
         )}
-        <p className="text-xs text-kolo-muted">{t("kupovina_napomena")}</p>
+        <p className="text-xs text-kolo-muted">{t("upis_napomena")}</p>
       </div>
 
       {/* Prodaja */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-        <p className="text-sm font-semibold text-kolo-muted">{t("prodaja_naslov")}</p>
+        <p className="text-sm font-semibold text-kolo-muted">{t("otpis_naslov")}</p>
         {prodajaZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            {t("prodaja_aktivan_zahtev", { kolicina: prodajaZahtev.kolicina.toLocaleString("sr-RS"), status: prodajaZahtev.status })}
+            {t("otpis_aktivan_zahtev", { kolicina: prodajaZahtev.kolicina.toLocaleString("sr-RS"), status: prodajaZahtev.status })}
           </div>
         )}
         {!prodajaZahtev && (
@@ -289,18 +289,18 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
               placeholder={`max ${slobodno.toLocaleString("sr-RS")} ZRNA`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoPoen > 0 && (
-              <p className="text-xs text-kolo-muted">{t("prodaja_procena", { poen: procijenjenoPoen.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
+              <p className="text-xs text-kolo-muted">{t("otpis_procena", { poen: procijenjenoPoen.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
             {poruka?.for === "prodaj" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
             <button onClick={prodaj} disabled={loading !== null || !kolicinaProdaja || slobodno <= 0}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "prodaj" ? "..." : t("prodaja_dugme")}
+              {loading === "prodaj" ? "..." : t("otpis_dugme")}
             </button>
           </>
         )}
-        <p className="text-xs text-kolo-muted">{t("prodaja_napomena")}</p>
+        <p className="text-xs text-kolo-muted">{t("otpis_napomena")}</p>
       </div>
     </div>
   );
