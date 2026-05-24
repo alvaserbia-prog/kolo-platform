@@ -690,7 +690,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         <p className="text-xs text-kolo-muted mb-4">
           Brisanjem naloga anonimizuju se svi vaši lični podaci (email, ime, telefon, lokacija, avatar).
           Transakcione istorije ostaju sa anonimizovanim pseudonimom. POEN možete preneti drugom korisniku
-          ili će biti vraćeni Banci. ZRNA se automatski prodaju. Ova radnja je <strong>nepovratna</strong>.
+          ili će biti vraćeni Protokolu. ZRNA se automatski otpisuju. Ova radnja je <strong>nepovratna</strong>.
         </p>
         {!brisiModalOpen ? (
           <button
@@ -704,7 +704,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             <p className="text-sm font-semibold text-kolo-danger">Potvrda brisanja naloga</p>
             <div>
               <label className="block text-xs text-kolo-muted mb-1.5">
-                Pseudonim korisnika kome da se prenesu vaši POEN-i <span className="font-normal">(opciono — prazno = vraća Banci)</span>
+                Pseudonim korisnika kome da se prenesu vaši POEN-i <span className="font-normal">(opciono — prazno = vraća Protokolu)</span>
               </label>
               <input
                 type="text"

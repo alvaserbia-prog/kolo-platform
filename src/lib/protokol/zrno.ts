@@ -4,6 +4,9 @@ import { TransactionType } from "@/generated/prisma/client";
 export const UKUPNO_ZRNA = 1_000_000;
 export const BANKA_WALLET_ID = "banka-singleton";
 
+// Pravilnik v3.7.0, čl. 19: upis ZRNA pretpostavlja minimum od 20.000 evidentiranih POEN-a
+export const MINIMUM_POEN_ZA_UPIS_ZRNA = 20_000;
+
 // ── Računanje ─────────────────────────────────────────────────────────────────
 
 export function glasackaMoc(aktivno: number): number {
@@ -75,7 +78,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
       const walletBalance = z.user.wallet.balance;
 
       // Proveri minimalni balans
-      if (walletBalance < 10_000) { await cancel(z.id, "kupovina"); continue; }
+      if (walletBalance < MINIMUM_POEN_ZA_UPIS_ZRNA) { await cancel(z.id, "kupovina"); continue; }
 
       // Proveri limit (1% balansa)
       const maxPoen = Math.floor(walletBalance * 0.01);

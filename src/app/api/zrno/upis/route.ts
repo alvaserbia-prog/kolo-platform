@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { MINIMUM_POEN_ZA_UPIS_ZRNA } from "@/lib/protokol/zrno";
 
 // POST /api/zrno/upis — rezervacija upisa ZRNA (izvršava se u ponoć)
 export async function POST(req: NextRequest) {
@@ -14,8 +15,8 @@ export async function POST(req: NextRequest) {
   if (!trziste?.isActive) return NextResponse.json({ error: "ZRNO tržište nije aktivno." }, { status: 400 });
 
   const wallet = await prisma.wallet.findUnique({ where: { userId: session.user.id }, select: { balance: true } });
-  if (!wallet || wallet.balance < 10_000)
-    return NextResponse.json({ error: "Potreban minimalni balans od 10.000 POEN." }, { status: 400 });
+  if (!wallet || wallet.balance < MINIMUM_POEN_ZA_UPIS_ZRNA)
+    return NextResponse.json({ error: `Potreban minimalni balans od ${MINIMUM_POEN_ZA_UPIS_ZRNA.toLocaleString("sr-RS")} POEN.` }, { status: 400 });
 
   const body = await req.json();
   const poenIznos = Number(body.poenIznos);
@@ -34,7 +35,7 @@ export async function POST(req: NextRequest) {
     where: { userId_date: { userId: session.user.id, date: danas } },
   });
   if (vec && vec.status === "PENDING")
-    return NextResponse.json({ error: "Već postoji aktivan zahtev za kupovinu danas." }, { status: 400 });
+    return NextResponse.json({ error: "Već postoji aktivan zahtev za upis danas." }, { status: 400 });
 
   await prisma.zrnoUpisZahtev.upsert({
     where: { userId_date: { userId: session.user.id, date: danas } },
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
   });
 
   void posaljiAdminAlert(
-    "Zahtev za kupovinu ZRNA",
+    "Zahtev za upis ZRNA",
     `Korisnik: ${session.user.pseudonim}\nIznos: ${poenIznos.toLocaleString("sr-RS")} POEN`
   );
 

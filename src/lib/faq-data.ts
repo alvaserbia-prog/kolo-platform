@@ -45,7 +45,7 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
         pitanje: `Šta je ZRNO i kako ga upisujem?`,
         odgovor: `ZRNO je obračunska jedinica položaja korisnika u zajedničkom dobru — daje ti pravo glasa u Gornjem Kolu, telu nosilaca ZRNA koje odlučuje o budućnosti sistema. Ukupna količina ZRNA u sistemu je fiksna — 1.000.000, bez mogućnosti povećanja ili smanjenja.
 
-ZRNO se upisuje isključivo od KOLO Protokola, u zamenu za POEN, po dnevnom obračunskom koeficijentu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 10.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno upisati.
+ZRNO se upisuje isključivo od KOLO Protokola, u zamenu za POEN, po dnevnom obračunskom koeficijentu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 20.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno upisati.
 
 Obračunski koeficijent je administrativna veličina — odnos broja evidentiranih POEN-a i raspoloživih ZRNA. Nije cena, nije tržišni kurs.
 

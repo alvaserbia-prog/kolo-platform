@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "krugovi" | "donacije" | "iznos";
-type TxFilter = "sve" | "banka" | "clanovi";
+type TxFilter = "sve" | "protokol" | "clanovi";
 
 const TIP_BOJA: Record<string, string> = {
   TRANSFER: "bg-kolo-bg text-kolo-muted",
@@ -758,14 +758,14 @@ function TransakcijeSekcija({
   const [filter, setFilter] = useState<TxFilter>("sve");
 
   const filtrirane = transakcije.filter((tx) => {
-    if (filter === "banka") return tx.fromId === null || tx.toId === null;
+    if (filter === "protokol") return tx.fromId === null || tx.toId === null;
     if (filter === "clanovi") return tx.type === "TRANSFER";
     return true;
   });
 
   const filteri: [TxFilter, string][] = [
     ["sve", t("filter_sve")],
-    ["banka", t("filter_banka")],
+    ["protokol", t("filter_protokol")],
     ["clanovi", t("filter_clanovi")],
   ];
 

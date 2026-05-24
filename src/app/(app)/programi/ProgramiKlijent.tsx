@@ -294,7 +294,7 @@ function ProgramKartica({
         return (
           <div className="border-t border-kolo-border px-5 py-3">
             <div className="flex justify-between text-xs text-kolo-muted mb-1">
-              <span>{t("prag_banka")}</span>
+              <span>{t("prag_protokol")}</span>
               <span>{opticaj.toLocaleString("sr-RS")} / 1.000.000 ({pct}%)</span>
             </div>
             <div className="h-1.5 bg-kolo-bg rounded-full overflow-hidden">

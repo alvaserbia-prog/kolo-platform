@@ -6,7 +6,7 @@ import { poBrojevima } from "@/lib/faq-data";
 export const metadata: Metadata = {
   title: "Kako funkcioniše KOLO — detaljna pravila sistema",
   description:
-    "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, sedam načina sticanja POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
+    "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, sedam načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
 };
 
 const koraci = [
@@ -43,7 +43,7 @@ const koraci = [
   },
 ];
 
-const nacinSticanja = [
+const nacinUpisa = [
   {
     br: "1",
     naslov: "Dokaz stvarnosti",
@@ -199,7 +199,7 @@ export default function KakoFunkcionisePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          {nacinSticanja.map((n) => {
+          {nacinUpisa.map((n) => {
             return (
               <div
                 key={n.br}
@@ -306,7 +306,7 @@ export default function KakoFunkcionisePage() {
                 {[
                   "ZRNO se upisuje u tvoj zapis u zamenu za POEN; ne može se prenositi između korisnika.",
                   "Ukupna količina ZRNA je fiksna — 1.000.000.",
-                  "Kurs ZRNA raste sa povećanjem Opticaja POEN-a.",
+                  "Obračunski koeficijent raste sa povećanjem Opticaja POEN-a.",
                   "ZRNO čuva vrednost tvog doprinosa sistemu.",
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
