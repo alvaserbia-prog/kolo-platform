@@ -176,6 +176,7 @@ model User {
   avatar             String?
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
+  pristankiPravilnika PravilnikPrihvatanje[]
   referredById       String?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
   referrals          User[]    @relation("Referrals")
@@ -781,6 +782,31 @@ model PolitikaPrihvatanje {
   verzija   PolitikaVerzija @relation(fields: [verzijaId], references: [id])
   prihvacen Boolean         @default(true)
   createdAt DateTime        @default(now())
+
+  @@unique([userId, verzijaId])
+  @@index([userId])
+}
+
+// ─── Verzionisanje Pravilnika (paralelno sa Politikom, v3.7.0) ───────────────
+
+model PravilnikVerzija {
+  id          String                 @id @default(uuid())
+  verzija     String                 @unique  // npr. "3.7.0"
+  naslov      String
+  efektivnaOd DateTime
+  kreirao     String                 // adminId
+  createdAt   DateTime               @default(now())
+  pristanci   PravilnikPrihvatanje[]
+}
+
+model PravilnikPrihvatanje {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
+  verzijaId String
+  verzija   PravilnikVerzija @relation(fields: [verzijaId], references: [id])
+  prihvacen Boolean          @default(true)
+  createdAt DateTime         @default(now())
 
   @@unique([userId, verzijaId])
   @@index([userId])
