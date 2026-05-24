@@ -99,7 +99,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           toWalletId: BANKA_WALLET_ID,
           amount: poenPlaceno,
           type: TransactionType.KUPOVINA_ZRNO,
-          description: `Kupovina ${zrnaDobija} ZRNA po kursu ${kurs.toFixed(2)}`,
+          description: `Upis ${zrnaDobija} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
         // ZRNO: Banka → user
@@ -143,7 +143,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           toWalletId: z.user.wallet!.id,
           amount: poenDobijeno,
           type: TransactionType.PRODAJA_ZRNO,
-          description: `Prodaja ${z.kolicina} ZRNA po kursu ${kurs.toFixed(2)}`,
+          description: `Otpis ${z.kolicina} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
         // ZRNO: user → Banka

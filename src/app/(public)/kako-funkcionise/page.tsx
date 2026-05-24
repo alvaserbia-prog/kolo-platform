@@ -296,10 +296,10 @@ export default function KakoFunkcionisePage() {
             </div>
 
             <div>
-              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">Kako se stiče</p>
+              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">Kako se upisuje</p>
               <ul className="space-y-1.5">
                 {[
-                  "ZRNO stičeš od KOLO Protokola za POEN.",
+                  "ZRNO se upisuje u tvoj zapis u zamenu za POEN.",
                   "Kurs ZRNA raste sa povećanjem Opticaja POEN-a.",
                   "ZRNO čuva vrednost tvog doprinosa sistemu.",
                 ].map((s) => (

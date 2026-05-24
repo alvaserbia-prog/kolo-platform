@@ -45,7 +45,7 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
         pitanje: `Šta je ZRNO i kako ga sticem?`,
         odgovor: `ZRNO je upravljačka jedinica — daje ti pravo glasa u Gornjem Kolu, dinamičnom telu članova koja odlučuje o budućnosti sistema.
 
-Stiče se isključivo od KOLO Protokola, u zamenu za POEN, po dnevno utvrđenom kursu. Da bi sticao ZRNO, moraš biti verifikovan, imati najmanje 10.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno pretvoriti.
+Upisuje se isključivo od strane KOLO Protokola, u zamenu za POEN, po dnevno utvrđenom kursu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 10.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno pretvoriti.
 
 Glasačka snaga ZRNA računa se po formuli kvadratnog korena — 100 ZRNA daje 10 glasova, da bi se sprečilo da bogati pojedinci dominiraju.`,
       },
@@ -98,7 +98,7 @@ Pri registraciji se potvrđuje punoletstvo, a verifikacija zahteva ličnu kartu 
         pitanje: `Kako se verifikujem i šta time dobijam?`,
         odgovor: `Verifikacija je opciona. Učitaš ličnu kartu (ili pasoš) i admin Fondacije ručno proverava i odobrava — pri odobrenju jednokratno dobijaš 1.000 POEN.
 
-Verifikacija je preduslov za sve glavne funkcionalnosti: sticanje POEN-a kroz preporuke, donacije i pokroviteljstvo, sticanje ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
+Verifikacija je preduslov za sve glavne funkcionalnosti: sticanje POEN-a kroz preporuke, donacije i pokroviteljstvo, upis ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
       },
       {
         id: 8,

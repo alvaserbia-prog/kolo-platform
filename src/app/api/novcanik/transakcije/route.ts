@@ -12,8 +12,8 @@ const TIP_LABELA: Record<string, string> = {
   EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",
   EMISIJA_KRUG_BONUS: "Bonus krugovi",
   EMISIJA_PROGRAM: "Program",
-  KUPOVINA_ZRNO: "Kupovina ZRNO",
-  PRODAJA_ZRNO: "Prodaja ZRNO",
+  KUPOVINA_ZRNO: "Upis ZRNA",
+  PRODAJA_ZRNO: "Otpis ZRNA",
 };
 
 export async function GET(req: NextRequest) {
