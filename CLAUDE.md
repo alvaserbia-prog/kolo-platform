@@ -1,4 +1,4 @@
-# KOLO Platforma — v2.12
+# KOLO Platforma — v3.7.0
 
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Koristi dve interne jedinice:
@@ -6,6 +6,16 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 - **ZRNO** — upravljačka jedinica za glasanje u Gornjem Kolu
 
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
+
+## Status usklađenosti sa v3.7.0 (24.05.2026)
+Dokumentacija je ažurirana na verziju **3.7.0** (Pravilnik, Statut, Whitepaper, Politika, DPIA). Kod se postepeno usklađuje:
+- ✅ Dokaz stvarnosti — implementiran kroz 10 koraka (Koraci 1–10, commit c0b8376 → 90e9641); tri statusa korisnika (`POCETNI`/`REGULARNI`/`NOSILAC_ZRNA`), indeks stvarnosti, lanac jemstva, anti-cirkularno pravilo, QR token, mini stablo
+- ✅ Stranice `/pravilnik` i `/statut` rendrju v3.7.0 dokumente
+- 🟡 Terminologija nije usaglašena: kod i UI još uvek koriste `kupi`/`prodaj` za ZRNO (treba `upis`/`otpis`), `KOLO Banka` (treba `KOLO Protokol`), `sticanje`/`povrat` (treba `upis`/`otpis`)
+- 🟡 Pravni mehanizmi nedostaju: Zaštitni veto Fondacije (čl. 71), Osnivački doprinos sa granicom 2.4M POEN
+- 🔴 Moduli (Krugovi/Zadruge/Soc.prog/Deca/Internacionalizacija) — nisu fokus razvoja po odluci vlasnika
+
+**Tri statusa korisnika (po v3.7.0):** Neverifikovani / Verifikovani / Nosilac ZRNA. NE POSTOJE organizatorske titule (zagovornik/aktivista/glasnik/šampion); NE POSTOJI "apostol" ni "Pokret" kao modul.
 
 ## Tech stack
 - Next.js 16 (App Router), TypeScript
@@ -39,7 +49,17 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
    - **Verifikovan korisnik** ima pun pristup svim funkcionalnostima: profili članova, poruke, postavljanje i kupovina/prodaja na Pijaci, rang-liste, telefon prodavca.
    - Verifikacija je preduslov za pristup profilima članova, komunikacionom modulu i punoj funkcionalnosti Pijace, kao i za sticanje ZRNA i učešće u Programima/Projektima.
 
-## Ključni koncepti v2.12
+## Ključni koncepti v3.7.0
+
+### Dokaz stvarnosti (implementiran, Koraci 1–10)
+- Tri statusa korisnika: `NEVERIFIKOVAN` (po šemi `tipKorisnika` enum) / `REGULARNI` (verifikovan običan) / `POCETNI` (UO Fondacije, izuzet od anti-cirkularnog) / `NOSILAC_ZRNA` (drži ZRNO, nadzire verifikacije)
+- **Verifikacija = +10 procentnih poena** indeksa stvarnosti (raspon 0–100%)
+- **Funkcionalni prag:** indeks ≥ 10% = pun pristup funkcijama; < 10% = verifikovan ali bez pristupa
+- **Verifikacioni kapacitet** regularnog korisnika = `⌊indeks/10⌋` (broj korisnika koje može da verifikuje)
+- POEN emisija pri verifikaciji: **verifikator 1.000, verifikovani 1.000, nadzornik 500** (kada podleže nadzoru)
+- Anti-cirkularno pravilo: zabranjeno recipročno, ancestralno, descendentno; početni (UO) izuzeti
+- Modeli: `VerifikacionaVeza` (graf), `VerifikacijaToken` (QR, 60s)
+- UI: `/verifikacija` (QR + skener kamere), `/nadzor` (samo POCETNI/NOSILAC_ZRNA), profil sa javnim indeksom i mini stablom
 
 ### Pravna priroda POEN-a (čl. 10 Pravilnika)
 POEN je **jedinica evidencije doprinosa zajedničkom dobru** koja korisniku omogućava prospektivan pristup budućim dobrima u okviru zajedničkog dobra — **bez kvantifikovane vrednosti, roka dospeća, izvršnog dejstva i bez karaktera potraživanja prema Fondaciji**. Korisnik nema potraživanje prema Fondaciji za emisijom POEN-a, sticanjem ZRNA niti pristupom funkcionalnostima.
@@ -462,12 +482,28 @@ docs/             — dokumentacija po fazama
 - `PLAN.md` — pregled svih faza sa zavisnostima
 - `docs/schema-plan.md` — kompletna šema baze
 - `docs/faza-X-*.md` — detalji implementacije po fazama
-- `dokumentacija/Pravilnik 2.12.md` — najnoviji Pravilnik (v2.12)
-- `dokumentacija/STATUT v2.1.md` — Statut Fondacije
-- `dokumentacija/Politika v2.1.md` — Politika privatnosti
-- `dokumentacija/Uslovi v2.1.md` — Uslovi korišćenja
+- `dokumentacija/Pravilnik_3_7_0.md` — Pravilnik o KOLO sistemu (v3.7.0, 82 člana, 12 glava)
+- `dokumentacija/statut_3_7_0.md` — Statut KOLO Fondacije (v3.7.0)
+- Kanonski set v3.7.0 (u root `dokumentacija/`): Whitepaper, DPIA, Politika privatnosti, Pravilnik o hijerarhiji akata, Pravilnik o dokazu stvarnosti, Pravilnik o pokroviteljstvu i donacijama, Pravilnik o operativnom doprinosu, Pravilnik o osnivačkom doprinosu, Radnje obrade, Rizici
+- Stari dokumenti (v2.x) — premešteni u `.claude/OLD DOCS/`, ignorisati osim kad korisnik eksplicitno traži
 
-## Nezavršeni TODO (mapirano na Pravilnik 2.12)
+## Nezavršeni TODO (mapirano na Pravilnik v3.7.0)
+
+### Završeno od poslednje verzije ovog TODO-a
+- ✅ **Dokaz stvarnosti / Verifikacija po čl. 10 Pravilnika v3.5.0+** — Koraci 1–10 (commitovi c0b8376 → 90e9641). Tri statusa, indeks 0–100, lanac jemstva, anti-cirkularno, QR token, kamera skener, nadzor, mini stablo, smoke test.
+
+### NOVO iz v3.7.0 — terminologija (Faza 3 plana usklađivanja)
+- **Zameniti u kodu i UI:** `kupi/prodaja ZRNA` → `upis/otpis ZRNA`; `sticanje/povrat` → `upis/otpis`; `KOLO Banka` → `KOLO Protokol` (npr. `messages/sr.json` linija 566)
+- **API rute:** `/api/zrno/kupi` → `/api/zrno/upis`, `/api/zrno/prodaj` → `/api/zrno/otpis`
+- **Prisma enum `TransactionType`:** `KUPOVINA_ZRNO`/`PRODAJA_ZRNO` → `UPIS_ZRNO`/`OTPIS_ZRNO`
+
+### NOVO iz v3.7.0 — osnivački doprinos
+- **Osnivački doprinos** (Pravilnik o osnivačkom doprinosu v3.7.0): naknadna evidencija pre-launch rada; **gornja granica 2.400.000 POEN-a**; kanal se trajno zatvara kada se dostigne granica.
+
+### Odložene odluke vlasnika (24.05.2026)
+- **Moduli (Krugovi, Zadruge, Socijalni programi, Deca, Internacionalizacija)** — NISU trenutni fokus razvoja. Ostaju u kodu/dokumentaciji kao referenca arhitekture.
+- **Glava VIII Projekti** — odlaže se zajedno sa modulima
+- **Redizajn navigacije** (Pijaca/Zajednica/Profil/FAB "Pošalji" iz Claude_context.md) — ostaje **sidebar paradigma**
 
 ### Kritično — kompletni moduli koji ne postoje
 
@@ -543,4 +579,9 @@ docs/             — dokumentacija po fazama
       - Proširiti pravo postavljanja oglasa sa samo admina na ovlašćena lica Krugova i UO (uz validaciju izvora `OglasSource`)
 
 ### Procena pokrivenosti
-**Pravilnik 2.12 je implementiran ~72%.** Osnovni mehanizmi (POEN, ZRNO, transferi, Programi, Krugovi, Pokrovitelji, Donacije, Verifikacija, Glasanje, Pijaca, Privatnost, Audit log, Vesti, Chat soba, Doprinos-oglasi/PED) su solidno pokriveni. Glavne rupe su Glava VIII (Projekti) — kompletno nedostaje, Zaštitni veto (čl. 71), redosled alokacije sredstava (čl. 54), unutrašnje odlučivanje Kruga (čl. 45) i konsolidacija PED + Doprinos-oglasi (stavka 19). Pre prelaska u "Puno samoupravljanje" (drugi prag iz čl. 89), kritično je dovršiti najmanje stavke 1–5 i 19 sa ove liste.
+**Pravilnik v3.7.0 je implementiran ~78%** (rast sa ~72% nakon implementacije Dokaza stvarnosti). Osnovni mehanizmi (POEN, ZRNO, transferi, Programi, Krugovi, Pokrovitelji, Donacije, Glasanje, Pijaca, Privatnost, Audit log, Vesti, Chat soba, Doprinos-oglasi/PED, **Dokaz stvarnosti / Verifikacija**) su solidno pokriveni. Glavne rupe (po prioritetu, isključujući module koji se odlažu):
+1. **Terminologija** — kupi/prodaj → upis/otpis kroz ceo kod, UI i prevode (Faza 3)
+2. **Osnivački doprinos** sa granicom 2.4M POEN (NOVO u v3.7.0)
+3. **Zaštitni veto Fondacije** (čl. 71) — praćenje 3× operativnih troškova
+4. **Verzionisanje Pravilnika** (paralelno sa postojećim verzionisanjem Politike)
+5. **Konsolidacija PED + Doprinos-oglasi** (stavka 19 iz starije TODO liste)

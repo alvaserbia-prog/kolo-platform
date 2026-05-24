@@ -425,10 +425,10 @@ export default function ONamaPage() {
             <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti</p>
             <div className="space-y-2">
               {[
-                { naziv: "Pravilnik o KOLO sistemu (v2.12) + Prilozi", href: "/pravilnik" },
-                { naziv: "Statut KOLO Fondacije (v2.1)", href: "/statut" },
-                { naziv: "Politika privatnosti (v2.1)", href: "/privatnost" },
-                { naziv: "Uslovi korišćenja (v2.1)", href: "/uslovi" },
+                { naziv: "Pravilnik o KOLO sistemu (v3.7.0) + Prilozi", href: "/pravilnik" },
+                { naziv: "Statut KOLO Fondacije (v3.7.0)", href: "/statut" },
+                { naziv: "Politika privatnosti (v3.7.0)", href: "/privatnost" },
+                { naziv: "Uslovi korišćenja (v3.7.0)", href: "/uslovi" },
               ].map((dok) => (
                 <a
                   key={dok.naziv}
