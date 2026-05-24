@@ -12,7 +12,7 @@ export async function GET() {
   const [
     ukupnoKorisnika, verifikovanih, suspendovanih,
     ukupnoKrug, ukupnoKrugra,
-    banka, zrnoStanje,
+    protokol, zrnoStanje,
     poslednjeEmisije, ukupnoTransakcija,
     noviKorisnici,
   ] = await Promise.all([
@@ -33,9 +33,9 @@ export async function GET() {
     }),
   ]);
 
-  const opticaj = Math.abs(banka?.balance ?? 0);
+  const opticaj = Math.abs(protokol?.balance ?? 0);
   const zrnaKodKorisnika = (zrnoStanje._sum.slobodno ?? 0) + (zrnoStanje._sum.aktivno ?? 0);
-  const zrnaUBanci = UKUPNO_ZRNA - zrnaKodKorisnika;
+  const zrnaUProtokolu = UKUPNO_ZRNA - zrnaKodKorisnika;
 
   // Grupiši nove korisnike po danu (poslednih 30 dana)
   const rastMap: Record<string, number> = {};
@@ -50,8 +50,8 @@ export async function GET() {
   return NextResponse.json({
     korisnici: { ukupno: ukupnoKorisnika, verifikovanih, suspendovanih },
     krugovi: { ukupno: ukupnoKrug, krugra: ukupnoKrugra },
-    finansije: { opticaj, bankaBalance: banka?.balance ?? 0 },
-    zrno: { kodKorisnika: zrnaKodKorisnika, uBanci: zrnaUBanci, ukupno: UKUPNO_ZRNA },
+    finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
+    zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: zrnaUProtokolu, ukupno: UKUPNO_ZRNA },
     programi: poslednjeEmisije.map((e) => ({
       date: e.date.toISOString(),
       emitted: e.totalEmitted,

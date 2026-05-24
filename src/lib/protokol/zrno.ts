@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
 
 export const UKUPNO_ZRNA = 1_000_000;
-export const BANKA_WALLET_ID = "banka-singleton";
+export const PROTOKOL_WALLET_ID = "banka-singleton";
 
 // Pravilnik v3.7.0, čl. 19: upis ZRNA pretpostavlja minimum od 20.000 evidentiranih POEN-a
 export const MINIMUM_POEN_ZA_UPIS_ZRNA = 20_000;
@@ -15,22 +15,22 @@ export function glasackaMoc(aktivno: number): number {
 }
 
 export async function trendsKurs(): Promise<number> {
-  // Kurs = |banka_balance| / zrnaUBanci
-  const banka = await prisma.wallet.findUnique({
-    where: { id: BANKA_WALLET_ID },
+  // Kurs = |protokol_balance| / zrnaUProtokolu
+  const protokol = await prisma.wallet.findUnique({
+    where: { id: PROTOKOL_WALLET_ID },
     select: { balance: true },
   });
-  const bankaBalance = Math.abs(banka?.balance ?? 0);
-  if (bankaBalance === 0) return 1;
+  const protokolBalance = Math.abs(protokol?.balance ?? 0);
+  if (protokolBalance === 0) return 1;
 
   const ukupnoKodKorisnika = await prisma.zrnoStanje.aggregate({
     _sum: { slobodno: true, aktivno: true },
   });
   const kodKorisnika = (ukupnoKodKorisnika._sum.slobodno ?? 0) + (ukupnoKodKorisnika._sum.aktivno ?? 0);
-  const zrnaUBanci = UKUPNO_ZRNA - kodKorisnika;
-  if (zrnaUBanci <= 0) return bankaBalance; // edge case
+  const zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika;
+  if (zrnaUProtokolu <= 0) return protokolBalance; // edge case
 
-  return bankaBalance / zrnaUBanci;
+  return protokolBalance / zrnaUProtokolu;
 }
 
 export async function poslednjiKurs(): Promise<number> {
@@ -46,39 +46,39 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   danas.setHours(0, 0, 0, 0);
 
   // 1. Izračunaj kurs za danas
-  const banka = await prisma.wallet.findUnique({
-    where: { id: BANKA_WALLET_ID },
+  const protokol = await prisma.wallet.findUnique({
+    where: { id: PROTOKOL_WALLET_ID },
     select: { balance: true },
   });
-  const bankaBalance = Math.abs(banka?.balance ?? 0);
+  const protokolBalance = Math.abs(protokol?.balance ?? 0);
 
   const ukupnoKodKorisnika = await prisma.zrnoStanje.aggregate({
     _sum: { slobodno: true, aktivno: true },
   });
   const kodKorisnika = (ukupnoKodKorisnika._sum.slobodno ?? 0) + (ukupnoKodKorisnika._sum.aktivno ?? 0);
-  const zrnaUBanci = UKUPNO_ZRNA - kodKorisnika;
-  const kurs = bankaBalance > 0 && zrnaUBanci > 0 ? bankaBalance / zrnaUBanci : 1;
+  const zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika;
+  const kurs = protokolBalance > 0 && zrnaUProtokolu > 0 ? protokolBalance / zrnaUProtokolu : 1;
 
   // Sačuvaj kurs
   await prisma.zrnoDailyRate.upsert({
     where: { date: danas },
-    create: { date: danas, kurs: kurs.toFixed(2), protokolMinus: bankaBalance, zrnaUProtokolu: zrnaUBanci },
-    update: { kurs: kurs.toFixed(2), protokolMinus: bankaBalance, zrnaUProtokolu: zrnaUBanci },
+    create: { date: danas, kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
+    update: { kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
   });
 
-  // 2. Obradi kupovine
-  const kupovine = await prisma.zrnoUpisZahtev.findMany({
+  // 2. Obradi upise
+  const upisi = await prisma.zrnoUpisZahtev.findMany({
     where: { date: danas, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
 
-  for (const z of kupovine) {
+  for (const z of upisi) {
     try {
-      if (!z.user.wallet) { await cancel(z.id, "kupovina"); continue; }
+      if (!z.user.wallet) { await cancel(z.id, "upis"); continue; }
       const walletBalance = z.user.wallet.balance;
 
       // Proveri minimalni balans
-      if (walletBalance < MINIMUM_POEN_ZA_UPIS_ZRNA) { await cancel(z.id, "kupovina"); continue; }
+      if (walletBalance < MINIMUM_POEN_ZA_UPIS_ZRNA) { await cancel(z.id, "upis"); continue; }
 
       // Proveri limit (1% balansa)
       const maxPoen = Math.floor(walletBalance * 0.01);
@@ -86,26 +86,26 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
       // Zaokruži
       const zrnaDobija = Math.floor(poenZaTrosak / kurs);
-      if (zrnaDobija <= 0) { await cancel(z.id, "kupovina"); continue; }
+      if (zrnaDobija <= 0) { await cancel(z.id, "upis"); continue; }
       const poenPlaceno = Math.ceil(zrnaDobija * kurs);
 
-      // Proveri da ima dovoljno slobodnih ZRNA u Banci
-      const slobodnoUBanci = UKUPNO_ZRNA - kodKorisnika;
-      if (zrnaDobija > slobodnoUBanci) { await cancel(z.id, "kupovina"); continue; }
+      // Proveri da ima dovoljno slobodnih ZRNA u Protokolu
+      const slobodnoUProtokolu = UKUPNO_ZRNA - kodKorisnika;
+      if (zrnaDobija > slobodnoUProtokolu) { await cancel(z.id, "upis"); continue; }
 
       await prisma.$transaction(async (tx) => {
-        // POEN: user → Banka (reverse emission)
+        // POEN: user → Protokol (reverse emission)
         await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { decrement: poenPlaceno } } });
-        await tx.wallet.update({ where: { id: BANKA_WALLET_ID }, data: { balance: { increment: poenPlaceno } } });
+        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: poenPlaceno } } });
         await tx.transaction.create({ data: {
           fromWalletId: z.user.wallet!.id,
-          toWalletId: BANKA_WALLET_ID,
+          toWalletId: PROTOKOL_WALLET_ID,
           amount: poenPlaceno,
           type: TransactionType.UPIS_ZRNO,
           description: `Upis ${zrnaDobija} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
-        // ZRNO: Banka → user
+        // ZRNO: Protokol → user
         await tx.zrnoStanje.upsert({
           where: { userId: z.userId },
           create: { userId: z.userId, slobodno: zrnaDobija, aktivno: 0 },
@@ -118,38 +118,38 @@ export async function izvrsiZrnoOperacije(datum: Date) {
         });
       });
     } catch (err) {
-      console.error(`Greška pri kupovini ZRNA za ${z.userId}:`, err);
-      await cancel(z.id, "kupovina");
+      console.error(`Greška pri upisu ZRNA za ${z.userId}:`, err);
+      await cancel(z.id, "upis");
     }
   }
 
-  // 3. Obradi prodaje
-  const prodaje = await prisma.zrnoOtpisZahtev.findMany({
+  // 3. Obradi otpise
+  const otpisi = await prisma.zrnoOtpisZahtev.findMany({
     where: { date: danas, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
 
-  for (const z of prodaje) {
+  for (const z of otpisi) {
     try {
-      if (!z.user.wallet || !z.user.zrnoStanje) { await cancel(z.id, "prodaja"); continue; }
-      if (z.user.zrnoStanje.slobodno < z.kolicina) { await cancel(z.id, "prodaja"); continue; }
+      if (!z.user.wallet || !z.user.zrnoStanje) { await cancel(z.id, "otpis"); continue; }
+      if (z.user.zrnoStanje.slobodno < z.kolicina) { await cancel(z.id, "otpis"); continue; }
 
       const poenDobijeno = Math.floor(z.kolicina * kurs);
-      if (poenDobijeno <= 0) { await cancel(z.id, "prodaja"); continue; }
+      if (poenDobijeno <= 0) { await cancel(z.id, "otpis"); continue; }
 
       await prisma.$transaction(async (tx) => {
-        // POEN: Banka → user
-        await tx.wallet.update({ where: { id: BANKA_WALLET_ID }, data: { balance: { decrement: poenDobijeno } } });
+        // POEN: Protokol → user
+        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { decrement: poenDobijeno } } });
         await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { increment: poenDobijeno } } });
         await tx.transaction.create({ data: {
-          fromWalletId: BANKA_WALLET_ID,
+          fromWalletId: PROTOKOL_WALLET_ID,
           toWalletId: z.user.wallet!.id,
           amount: poenDobijeno,
           type: TransactionType.OTPIS_ZRNO,
           description: `Otpis ${z.kolicina} ZRNA po kursu ${kurs.toFixed(2)}`,
         }});
 
-        // ZRNO: user → Banka
+        // ZRNO: user → Protokol
         await tx.zrnoStanje.update({
           where: { userId: z.userId },
           data: { slobodno: { decrement: z.kolicina } },
@@ -161,8 +161,8 @@ export async function izvrsiZrnoOperacije(datum: Date) {
         });
       });
     } catch (err) {
-      console.error(`Greška pri prodaji ZRNA za ${z.userId}:`, err);
-      await cancel(z.id, "prodaja");
+      console.error(`Greška pri otpisu ZRNA za ${z.userId}:`, err);
+      await cancel(z.id, "otpis");
     }
   }
 
@@ -204,11 +204,11 @@ export async function izvrsiZrnoOperacije(datum: Date) {
     data: { aktivna: true },
   });
 
-  return { kurs, zrnaUBanci, obradjenihKupovina: kupovine.length, obradjenihProdaja: prodaje.length };
+  return { kurs, zrnaUProtokolu, obradjenihUpisa: upisi.length, obradjenihOtpisa: otpisi.length };
 }
 
-async function cancel(id: string, tip: "kupovina" | "prodaja") {
-  if (tip === "kupovina") {
+async function cancel(id: string, tip: "upis" | "otpis") {
+  if (tip === "upis") {
     await prisma.zrnoUpisZahtev.update({ where: { id }, data: { status: "CANCELLED" } });
   } else {
     await prisma.zrnoOtpisZahtev.update({ where: { id }, data: { status: "CANCELLED" } });

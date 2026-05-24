@@ -19,10 +19,10 @@ export async function GET(req: NextRequest) {
   ]);
 
   function walletLabel(w: { user?: { pseudonim: string } | null; krug?: { name: string } | null } | null) {
-    if (!w) return "Banka";
+    if (!w) return "Protokol";
     if (w.user) return w.user.pseudonim;
     if (w.krug) return `[${w.krug.name}]`;
-    return "Banka";
+    return "Protokol";
   }
 
   return NextResponse.json({

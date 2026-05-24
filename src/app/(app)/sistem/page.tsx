@@ -50,7 +50,7 @@ export default async function SistemPage() {
   danas.setHours(0, 0, 0, 0);
 
   const [
-    banka,
+    protokol,
     ukupnoKorisnika,
     verifikovanih,
     ukupnoKrug,
@@ -174,8 +174,8 @@ export default async function SistemPage() {
     }),
   ]);
 
-  const opticaj = Math.abs(banka?.balance ?? 0);
-  const bankaBalance = banka?.balance ?? 0;
+  const opticaj = Math.abs(protokol?.balance ?? 0);
+  const protokolBalance = protokol?.balance ?? 0;
 
   const ukupnoDonacija = ukupnoDonacijaRaw;
   const danasDonacija = danasDonacijaRaw;
@@ -209,9 +209,9 @@ export default async function SistemPage() {
     type: t.type,
     description: t.description,
     createdAt: t.createdAt.toISOString(),
-    fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Banka",
+    fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Protokol",
     fromId: t.fromWallet?.user?.id ?? null,
-    toPseudonim: t.toWallet?.user?.pseudonim ?? "Banka",
+    toPseudonim: t.toWallet?.user?.pseudonim ?? "Protokol",
     toId: t.toWallet?.user?.id ?? null,
   }));
 
@@ -267,7 +267,7 @@ export default async function SistemPage() {
       verRequest={verRequest ? { status: verRequest.status } : null}
       verified={verified}
       opticaj={opticaj}
-      bankaBalance={bankaBalance}
+      protokolBalance={protokolBalance}
       ukupnoKorisnika={ukupnoKorisnika}
       verifikovanih={verifikovanih}
       ukupnoKrugCount={ukupnoKrug}

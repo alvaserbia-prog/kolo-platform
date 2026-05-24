@@ -16,7 +16,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { TransactionType } from "@/generated/prisma/client";
 
-const BANKA_WALLET_ID = "banka-singleton";
+const PROTOKOL_WALLET_ID = "banka-singleton";
 
 export const ITERATION_LIMIT = 120;
 export const KORAK_IZNOS = 20_000;
@@ -29,7 +29,7 @@ export const PRAG_SKOK = 100_000;
  */
 export async function izracunajUkupanPoen(): Promise<number> {
   const protokol = await prisma.wallet.findUnique({
-    where: { id: BANKA_WALLET_ID },
+    where: { id: PROTOKOL_WALLET_ID },
     select: { balance: true },
   });
   if (!protokol) return 0;

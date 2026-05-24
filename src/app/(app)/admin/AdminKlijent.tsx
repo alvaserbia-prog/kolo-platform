@@ -28,8 +28,8 @@ interface KorisnikInfo {
 interface DashboardData {
   korisnici: { ukupno: number; verifikovanih: number; suspendovanih: number };
   krugovi: { ukupno: number; krugra: number };
-  finansije: { opticaj: number; bankaBalance: number };
-  zrno: { kodKorisnika: number; uBanci: number; ukupno: number };
+  finansije: { opticaj: number; protokolBalance: number };
+  zrno: { kodKorisnika: number; uProtokolu: number; ukupno: number };
   ukupnoTransakcija: number;
 }
 
@@ -880,7 +880,7 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
     const res = await fetch("/api/admin/zrno/nocna", { method: "POST" });
     const d = await res.json();
     setLoadingZrno(false);
-    alert(res.ok ? `ZRNO: kurs ${Number(d.kurs).toFixed(2)}, u Banci: ${d.zrnaUBanci?.toLocaleString("sr-RS")}` : d.error);
+    alert(res.ok ? `ZRNO: kurs ${Number(d.kurs).toFixed(2)}, u Protokolu: ${d.zrnaUProtokolu?.toLocaleString("sr-RS")}` : d.error);
     onDone();
   }
 
@@ -944,7 +944,7 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
         <div>
           <p className="text-sm font-semibold text-kolo-muted">ZRNO tržište</p>
           <p className="text-xs text-kolo-muted mt-0.5">
-            {data.zrnoTrzisjeAktivno ? "Aktivno — kupovina/prodaja ZRNA je moguća" : "Neaktivno — aktivira se pri −1.000.000 POEN (ili ručno)"}
+            {data.zrnoTrzisjeAktivno ? "Aktivno — upis/otpis ZRNA je moguć" : "Neaktivno — aktivira se pri −1.000.000 POEN (ili ručno)"}
           </p>
         </div>
         <div className="flex gap-2 shrink-0 ml-4">
@@ -1290,8 +1290,8 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
           <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">ZRNO u Banci</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uBanci.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mb-1">ZRNO u Protokolu</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uProtokolu.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">Ukupno ZRNA</p>

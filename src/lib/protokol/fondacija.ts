@@ -10,7 +10,7 @@
 
 import { prisma } from "@/lib/prisma";
 
-const BANKA_WALLET_ID = "banka-singleton";
+const PROTOKOL_WALLET_ID = "banka-singleton";
 const VETO_PRAG_POEN = -1_000_000;
 const PROSEK_PERIOD_MESECI = 6; // koliko meseci se gleda za prosek troskova
 
@@ -89,7 +89,7 @@ export async function dohvatiProsekMesecnihTroskova(brojMeseci = PROSEK_PERIOD_M
 export async function azurirajVetoStatus(): Promise<VetoStatus> {
   const [veto, protokol, saldo, prosek] = await Promise.all([
     prisma.sistemskiVeto.findUnique({ where: { id: "singleton" } }),
-    prisma.wallet.findUnique({ where: { id: BANKA_WALLET_ID }, select: { balance: true } }),
+    prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID }, select: { balance: true } }),
     dohvatiSaldoFondacije(),
     dohvatiProsekMesecnihTroskova(),
   ]);
@@ -138,7 +138,7 @@ export async function dohvatiVetoStatus(): Promise<VetoStatus> {
   // Ne update-uje, samo izvestava trenutno stanje + izracunate kontekstne vrednosti
   const [veto, protokol, saldo, prosek] = await Promise.all([
     prisma.sistemskiVeto.findUnique({ where: { id: "singleton" } }),
-    prisma.wallet.findUnique({ where: { id: BANKA_WALLET_ID }, select: { balance: true } }),
+    prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID }, select: { balance: true } }),
     dohvatiSaldoFondacije(),
     dohvatiProsekMesecnihTroskova(),
   ]);

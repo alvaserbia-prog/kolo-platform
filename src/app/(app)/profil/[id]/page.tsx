@@ -56,8 +56,8 @@ const TIP_LABELA: Record<string, string> = {
   EMISIJA_PED: "Evidencija doprinosa",
   EMISIJA_KRUG: "Krug bonus",
   EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",
-  ZRNO_KUPOVINA: "ZRNO kupovina",
-  ZRNO_PRODAJA: "ZRNO prodaja",
+  UPIS_ZRNO: "Upis ZRNA",
+  OTPIS_ZRNO: "Otpis ZRNA",
 };
 
 export default function JavniProfilPage() {
@@ -285,7 +285,7 @@ export default function JavniProfilPage() {
                         <Link href={`/profil/${drugaStrana.id}`} className="text-kolo-green-700 hover:underline">
                           {drugaStrana.pseudonim}
                         </Link>
-                      ) : "Banka")}
+                      ) : "Protokol")}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
                       {new Date(trx.createdAt).toLocaleDateString("sr-RS", { day: "numeric", month: "short", year: "numeric" })}

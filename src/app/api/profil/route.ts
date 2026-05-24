@@ -10,7 +10,7 @@ import {
   izracunajIndeks,
 } from "@/lib/protokol/dokaz-stvarnosti";
 
-const BANKA_WALLET_ID = "banka-singleton";
+const PROTOKOL_WALLET_ID = "banka-singleton";
 
 /**
  * DELETE /api/profil
@@ -82,7 +82,7 @@ export async function DELETE(req: NextRequest) {
       where: { userId },
       data: { aktivno: 0, slobodno: 0 },
     });
-    // ZRNA se implicitno vraćaju u raspoloživa Protokola (zrnaUBanci = UKUPNO_ZRNA - kodKorisnika);
+    // ZRNA se implicitno vraćaju u raspoloživa Protokola (zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika);
     // koeficijent se menja jer imenilac raste — što je u skladu sa čl. 34 st. 3.
   }
 
@@ -121,13 +121,13 @@ export async function DELETE(req: NextRequest) {
       data: { balance: { decrement: stvarno } },
     });
     await tx.wallet.update({
-      where: { id: BANKA_WALLET_ID },
+      where: { id: PROTOKOL_WALLET_ID },
       data: { balance: { increment: stvarno } },
     });
     await tx.transaction.create({
       data: {
         fromWalletId: w.id,
-        toWalletId: BANKA_WALLET_ID,
+        toWalletId: PROTOKOL_WALLET_ID,
         amount: stvarno,
         type: TransactionType.TRANSFER,
         description: opis,
@@ -266,11 +266,11 @@ export async function DELETE(req: NextRequest) {
       // zero-sum invarijanta očuvana.
       await prisma.$transaction(async (tx) => {
         await tx.wallet.update({ where: { userId }, data: { balance: 0 } });
-        await tx.wallet.update({ where: { id: BANKA_WALLET_ID }, data: { balance: { increment: balans } } });
+        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: balans } } });
         await tx.transaction.create({
           data: {
             fromWalletId: svezWallet!.id,
-            toWalletId: BANKA_WALLET_ID,
+            toWalletId: PROTOKOL_WALLET_ID,
             amount: balans,
             type: TransactionType.TRANSFER,
             description: `Poništavanje POEN-a pri prestanku statusa (čl. 34 Pravilnika v3.7.0)`,

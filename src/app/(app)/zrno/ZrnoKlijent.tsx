@@ -26,8 +26,8 @@ interface Props {
   kurs: number;
   trzisjeAktivno: boolean;
   isVerified: boolean;
-  kupovinaZahtev: { poenIznos: number; status: string } | null;
-  prodajaZahtev: { kolicina: number; status: string } | null;
+  upisZahtev: { poenIznos: number; status: string } | null;
+  otpisZahtev: { kolicina: number; status: string } | null;
   statusZahtevi: { kolicina: number; akcija: string }[];
   delegacija: { delegatPseudonim: string; aktivna: boolean } | null;
   poslednjiKursovi: { date: string; kurs: number }[];
@@ -201,37 +201,37 @@ function PregledTab({ slobodno, aktivno, poenBalans, kurs, statusZahtevi, posled
 
 // ── Tržište ───────────────────────────────────────────────────────────────────
 
-function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, kupovinaZahtev, prodajaZahtev, onRefresh }: Props & { onRefresh: () => void }) {
+function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, upisZahtev, otpisZahtev, onRefresh }: Props & { onRefresh: () => void }) {
   const t = useTranslations("zrno");
-  const [poenZaKupovinu, setPoenZaKupovinu] = useState("");
-  const [kolicinaProdaja, setKolicinaProdaja] = useState("");
-  const [loading, setLoading] = useState<"kupi" | "prodaj" | null>(null);
+  const [poenZaUpis, setPoenZaUpis] = useState("");
+  const [kolicinaOtpis, setKolicinaOtpis] = useState("");
+  const [loading, setLoading] = useState<"upis" | "otpis" | null>(null);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean; for: string } | null>(null);
 
   const maxPoen = Math.floor(poenBalans * 0.01);
-  const procijenjenoZrna = poenZaKupovinu ? Math.floor(Number(poenZaKupovinu) / kurs) : 0;
-  const procijenjenoPoen = kolicinaProdaja ? Math.floor(Number(kolicinaProdaja) * kurs) : 0;
+  const procijenjenoZrna = poenZaUpis ? Math.floor(Number(poenZaUpis) / kurs) : 0;
+  const procijenjenoPoen = kolicinaOtpis ? Math.floor(Number(kolicinaOtpis) * kurs) : 0;
 
-  async function kupi() {
-    const iznos = Number(poenZaKupovinu);
+  async function upis() {
+    const iznos = Number(poenZaUpis);
     if (!iznos || iznos <= 0) return;
-    setLoading("kupi"); setPoruka(null);
+    setLoading("upis"); setPoruka(null);
     const res = await fetch("/api/zrno/upis", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ poenIznos: iznos }) });
     const data = await res.json();
     setLoading(null);
-    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "kupi" });
-    if (res.ok) { setPoenZaKupovinu(""); setTimeout(onRefresh, 1200); }
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "upis" });
+    if (res.ok) { setPoenZaUpis(""); setTimeout(onRefresh, 1200); }
   }
 
-  async function prodaj() {
-    const kol = Number(kolicinaProdaja);
+  async function otpis() {
+    const kol = Number(kolicinaOtpis);
     if (!kol || kol <= 0) return;
-    setLoading("prodaj"); setPoruka(null);
+    setLoading("otpis"); setPoruka(null);
     const res = await fetch("/api/zrno/otpis", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kolicina: kol }) });
     const data = await res.json();
     setLoading(null);
-    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "prodaj" });
-    if (res.ok) { setKolicinaProdaja(""); setTimeout(onRefresh, 1200); }
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok, for: "otpis" });
+    if (res.ok) { setKolicinaOtpis(""); setTimeout(onRefresh, 1200); }
   }
 
   if (!trzisjeAktivno) {
@@ -244,59 +244,59 @@ function TrzisteTab({ slobodno, poenBalans, kurs, trzisjeAktivno, isVerified, ku
 
   return (
     <div className="space-y-4">
-      {/* Kupovina */}
+      {/* Upis */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
         <div className="flex justify-between items-start">
           <p className="text-sm font-semibold text-kolo-muted">{t("upis_naslov")}</p>
           <span className="text-xs text-kolo-muted">{t("upis_max", { max: maxPoen.toLocaleString("sr-RS") })}</span>
         </div>
-        {kupovinaZahtev && (
+        {upisZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            {t("upis_aktivan_zahtev", { iznos: kupovinaZahtev.poenIznos.toLocaleString("sr-RS"), status: kupovinaZahtev.status })}
+            {t("upis_aktivan_zahtev", { iznos: upisZahtev.poenIznos.toLocaleString("sr-RS"), status: upisZahtev.status })}
           </div>
         )}
-        {!kupovinaZahtev && (
+        {!upisZahtev && (
           <>
-            <input type="number" min={1} max={maxPoen} value={poenZaKupovinu} onChange={(e) => setPoenZaKupovinu(e.target.value)}
+            <input type="number" min={1} max={maxPoen} value={poenZaUpis} onChange={(e) => setPoenZaUpis(e.target.value)}
               placeholder={`POEN (max ${maxPoen.toLocaleString("sr-RS")})`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoZrna > 0 && (
               <p className="text-xs text-kolo-muted">{t("upis_procena", { zrna: procijenjenoZrna.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
-            {poruka?.for === "kupi" && (
+            {poruka?.for === "upis" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
-            <button onClick={kupi} disabled={loading !== null || !poenZaKupovinu}
+            <button onClick={upis} disabled={loading !== null || !poenZaUpis}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "kupi" ? "..." : t("upis_dugme")}
+              {loading === "upis" ? "..." : t("upis_dugme")}
             </button>
           </>
         )}
         <p className="text-xs text-kolo-muted">{t("upis_napomena")}</p>
       </div>
 
-      {/* Prodaja */}
+      {/* Otpis */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
         <p className="text-sm font-semibold text-kolo-muted">{t("otpis_naslov")}</p>
-        {prodajaZahtev && (
+        {otpisZahtev && (
           <div className="bg-kolo-gold-100 text-kolo-gold-600 text-xs px-3 py-2 rounded-lg">
-            {t("otpis_aktivan_zahtev", { kolicina: prodajaZahtev.kolicina.toLocaleString("sr-RS"), status: prodajaZahtev.status })}
+            {t("otpis_aktivan_zahtev", { kolicina: otpisZahtev.kolicina.toLocaleString("sr-RS"), status: otpisZahtev.status })}
           </div>
         )}
-        {!prodajaZahtev && (
+        {!otpisZahtev && (
           <>
-            <input type="number" min={1} max={slobodno} value={kolicinaProdaja} onChange={(e) => setKolicinaProdaja(e.target.value)}
+            <input type="number" min={1} max={slobodno} value={kolicinaOtpis} onChange={(e) => setKolicinaOtpis(e.target.value)}
               placeholder={`max ${slobodno.toLocaleString("sr-RS")} ZRNA`}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600" />
             {procijenjenoPoen > 0 && (
               <p className="text-xs text-kolo-muted">{t("otpis_procena", { poen: procijenjenoPoen.toLocaleString("sr-RS"), kurs: kurs.toFixed(2) })}</p>
             )}
-            {poruka?.for === "prodaj" && (
+            {poruka?.for === "otpis" && (
               <p className={`text-xs px-3 py-2 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>
             )}
-            <button onClick={prodaj} disabled={loading !== null || !kolicinaProdaja || slobodno <= 0}
+            <button onClick={otpis} disabled={loading !== null || !kolicinaOtpis || slobodno <= 0}
               className="w-full py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
-              {loading === "prodaj" ? "..." : t("otpis_dugme")}
+              {loading === "otpis" ? "..." : t("otpis_dugme")}
             </button>
           </>
         )}

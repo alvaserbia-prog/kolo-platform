@@ -13,7 +13,7 @@ export default async function ZrnoPage() {
   danas.setHours(0, 0, 0, 0);
   const now = new Date();
 
-  const [stanje, wallet, kupovinaZahtev, prodajaZahtev, statusZahtevi, delegacija, trziste, kurs, poslednjiKursovi, predlozi] = await Promise.all([
+  const [stanje, wallet, upisZahtev, otpisZahtev, statusZahtevi, delegacija, trziste, kurs, poslednjiKursovi, predlozi] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
     prisma.wallet.findUnique({ where: { userId: session.user.id }, select: { balance: true } }),
     prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
@@ -55,8 +55,8 @@ export default async function ZrnoPage() {
       kurs={kurs}
       trzisjeAktivno={trziste?.isActive ?? false}
       isVerified={session.user.verified}
-      kupovinaZahtev={kupovinaZahtev ? { poenIznos: kupovinaZahtev.poenIznos, status: kupovinaZahtev.status } : null}
-      prodajaZahtev={prodajaZahtev ? { kolicina: prodajaZahtev.kolicina, status: prodajaZahtev.status } : null}
+      upisZahtev={upisZahtev ? { poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null}
+      otpisZahtev={otpisZahtev ? { kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null}
       statusZahtevi={statusZahtevi.map((z) => ({ kolicina: z.kolicina, akcija: z.akcija }))}
       delegacija={delegacija ? { delegatPseudonim: delegacija.delegat.pseudonim, aktivna: delegacija.aktivna } : null}
       poslednjiKursovi={poslednjiKursovi.map((r) => ({ date: r.date.toISOString(), kurs: Number(r.kurs) }))}

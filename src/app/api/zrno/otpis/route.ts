@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
 
   const stanje = await prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } });
   if (!stanje || stanje.slobodno <= 0)
-    return NextResponse.json({ error: "Nemate slobodnih ZRNA za prodaju." }, { status: 400 });
+    return NextResponse.json({ error: "Nemate slobodnih ZRNA za otpis." }, { status: 400 });
 
   const body = await req.json();
   const kolicina = Number(body.kolicina);
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     where: { userId_date: { userId: session.user.id, date: danas } },
   });
   if (vec && vec.status === "PENDING")
-    return NextResponse.json({ error: "Već postoji aktivan zahtev za prodaju danas." }, { status: 400 });
+    return NextResponse.json({ error: "Već postoji aktivan zahtev za otpis danas." }, { status: 400 });
 
   await prisma.zrnoOtpisZahtev.upsert({
     where: { userId_date: { userId: session.user.id, date: danas } },
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
   });
 
   void posaljiAdminAlert(
-    "Zahtev za prodaju ZRNA",
+    "Zahtev za otpis ZRNA",
     `Korisnik: ${session.user.pseudonim}\nKoličina: ${kolicina.toLocaleString("sr-RS")} ZRNA`
   );
 

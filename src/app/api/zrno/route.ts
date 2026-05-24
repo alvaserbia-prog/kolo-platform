@@ -12,7 +12,7 @@ export async function GET() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const [stanje, kupovinaZahtev, prodajaZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
+  const [stanje, upisZahtev, otpisZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
     prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
     prisma.zrnoOtpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
@@ -32,8 +32,8 @@ export async function GET() {
     glasackaMoc: glasackaMoc(aktivno),
     kurs,
     trzisjeAktivno: trziste?.isActive ?? false,
-    kupovinaZahtev: kupovinaZahtev ? { id: kupovinaZahtev.id, poenIznos: kupovinaZahtev.poenIznos, status: kupovinaZahtev.status } : null,
-    prodajaZahtev: prodajaZahtev ? { id: prodajaZahtev.id, kolicina: prodajaZahtev.kolicina, status: prodajaZahtev.status } : null,
+    upisZahtev: upisZahtev ? { id: upisZahtev.id, poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null,
+    otpisZahtev: otpisZahtev ? { id: otpisZahtev.id, kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null,
     statusZahtevi: statusZahtevi.map((z) => ({ id: z.id, kolicina: z.kolicina, akcija: z.akcija })),
     delegacija: delegacija ? { delegatId: delegacija.delegatId, aktivna: delegacija.aktivna } : null,
   });

@@ -21,7 +21,7 @@ export async function GET(
   const { id: userId } = await params;
 
   const [
-    user, podaci, transakcije, zrnoStanje, zrnoKupovine, zrnoProdaje,
+    user, podaci, transakcije, zrnoStanje, zrnoUpisi, zrnoOtpisi,
     verifikacija, politikaPristanci, prigovori, programEnrollments, donacije,
   ] = await Promise.all([
     prisma.user.findUnique({
@@ -86,7 +86,7 @@ export async function GET(
     profil: { ...user, ...podaci },
     verifikacija,
     transakcije,
-    zrno: { stanje: zrnoStanje, kupovine: zrnoKupovine, prodaje: zrnoProdaje },
+    zrno: { stanje: zrnoStanje, upisi: zrnoUpisi, otpisi: zrnoOtpisi },
     politikaPristanci,
     prigovori,
     programEnrollments,

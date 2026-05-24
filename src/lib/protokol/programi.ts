@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { ProgramType, TransactionType } from "@/generated/prisma/client";
 
-const BANKA_WALLET_ID = "banka-singleton";
+const PROTOKOL_WALLET_ID = "banka-singleton";
 
 // ── Koeficijenti po rednom broju deteta (Čl. 53) ─────────────────────────────
 
@@ -79,8 +79,8 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
   sutra.setDate(sutra.getDate() + 1);
 
   // 1. Opticaj i limit
-  const banka = await prisma.wallet.findUnique({ where: { id: BANKA_WALLET_ID } });
-  const opticaj = Math.abs(banka?.balance ?? 0);
+  const protokol = await prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID } });
+  const opticaj = Math.abs(protokol?.balance ?? 0);
   const limit = Math.floor(opticaj * 0.1);
 
   // 2. Aktivni programi

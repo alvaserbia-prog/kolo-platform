@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
 
-const BANKA_WALLET_ID = "banka-singleton";
+const PROTOKOL_WALLET_ID = "banka-singleton";
 
 // Nagrada za preporuku po broju verifikovanih preporučenih (Prilog 1, tačka 3)
 const PREPORUKA_TABELA: { do: number; poen: number }[] = [
@@ -23,8 +23,8 @@ export function preporukaNagrada(brojVerifikovanih: number): number {
 }
 
 /**
- * Emituje POEN iz Banke na wallet korisnika.
- * Banka ide u minus, korisnik prima POEN.
+ * Emituje POEN iz Protokola na wallet korisnika.
+ * Protokol ide u minus, korisnik prima POEN.
  * Mora se zvati unutar prisma.$transaction ako je deo šire operacije.
  */
 export async function emitujPoen(
@@ -36,9 +36,9 @@ export async function emitujPoen(
   if (amount <= 0) throw new Error("Iznos emisije mora biti pozitivan.");
 
   return prisma.$transaction(async (tx) => {
-    // Banka ide u minus
-    const banka = await tx.wallet.update({
-      where: { id: BANKA_WALLET_ID },
+    // Protokol ide u minus
+    const protokol = await tx.wallet.update({
+      where: { id: PROTOKOL_WALLET_ID },
       data: { balance: { decrement: amount } },
     });
 
@@ -51,7 +51,7 @@ export async function emitujPoen(
     // Evidentira transakciju
     const tx_ = await tx.transaction.create({
       data: {
-        fromWalletId: BANKA_WALLET_ID,
+        fromWalletId: PROTOKOL_WALLET_ID,
         toWalletId,
         amount,
         type,
@@ -63,7 +63,7 @@ export async function emitujPoen(
       await checkZeroSum(tx);
     }
 
-    return { banka, wallet, transaction: tx_ };
+    return { protokol, wallet, transaction: tx_ };
   });
 }
 

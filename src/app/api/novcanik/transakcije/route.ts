@@ -52,7 +52,7 @@ export async function GET(req: NextRequest) {
     const primio = t.toWalletId === wallet.id;
     const drugiPseudonim =
       primio
-        ? (t.fromWallet?.user?.pseudonim ?? "Banka")
+        ? (t.fromWallet?.user?.pseudonim ?? "Protokol")
         : (t.toWallet?.user?.pseudonim ?? "?");
 
     return {

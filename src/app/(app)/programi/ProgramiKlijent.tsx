@@ -41,7 +41,7 @@ interface Props {
   programi: ProgramInfo[];
   isVerified: boolean;
   isKrugr: boolean;
-  bankaBalance: number;
+  protokolBalance: number;
   emisioniKontekst: EmisioniKontekst;
   evidencijaToday: EvidencijaInfo | null;
   poslednjeEvidencije: EvidencijaInfo[];
@@ -58,7 +58,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, isVerified, isKrugr, bankaBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
+export default function ProgramiKlijent({ programi, isVerified, isKrugr, protokolBalance, emisioniKontekst, evidencijaToday, poslednjeEvidencije }: Props) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -144,7 +144,7 @@ export default function ProgramiKlijent({ programi, isVerified, isKrugr, bankaBa
             p={p}
             isVerified={isVerified}
             isKrugr={isKrugr}
-            bankaBalance={bankaBalance}
+            protokolBalance={protokolBalance}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
@@ -186,12 +186,12 @@ export default function ProgramiKlijent({ programi, isVerified, isKrugr, bankaBa
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 function ProgramKartica({
-  p, isVerified, isKrugr, bankaBalance, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
+  p, isVerified, isKrugr, protokolBalance, loading, poruka, expanded, onExpand, onPrijavi, evidencijaToday, onEvidencijaSuccess,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
   isKrugr: boolean;
-  bankaBalance: number;
+  protokolBalance: number;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
   expanded: boolean;
@@ -289,7 +289,7 @@ function ProgramKartica({
       {/* Progress indikatori za zaključane faze */}
       {!p.programAktivan && !enStatus && p.type === "POSEBNA_BRIGA" && (() => {
         const PRAG = 1_000_000;
-        const opticaj = Math.abs(bankaBalance);
+        const opticaj = Math.abs(protokolBalance);
         const pct = Math.min(100, Math.round((opticaj / PRAG) * 100));
         return (
           <div className="border-t border-kolo-border px-5 py-3">

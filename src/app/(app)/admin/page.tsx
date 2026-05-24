@@ -15,7 +15,7 @@ export default async function AdminPage() {
   if (!session || session.user.role !== "ADMIN") redirect("/dashboard");
 
   const [
-    pendingRequests, allUsers, banka, pendingKrugovi,
+    pendingRequests, allUsers, protokol, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
     blogObjave,
   ] = await Promise.all([
@@ -112,7 +112,7 @@ export default async function AdminPage() {
     }),
   ]);
 
-  const opticaj = banka ? Math.abs(banka.balance) : 0;
+  const opticaj = protokol ? Math.abs(protokol.balance) : 0;
   const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
 
   // Audit log: admin je učitao stranicu sa JMBG podacima iz pending zahteva
@@ -165,8 +165,8 @@ export default async function AdminPage() {
       dashboard={{
         korisnici: { ukupno: dashboardData[0], verifikovanih: dashboardData[1], suspendovanih: dashboardData[2] },
         krugovi: { ukupno: dashboardData[3], krugra: dashboardData[4] },
-        finansije: { opticaj, bankaBalance: banka?.balance ?? 0 },
-        zrno: { kodKorisnika: zrnaKodKorisnika, uBanci: UKUPNO_ZRNA - zrnaKodKorisnika, ukupno: UKUPNO_ZRNA },
+        finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
+        zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: UKUPNO_ZRNA - zrnaKodKorisnika, ukupno: UKUPNO_ZRNA },
         ukupnoTransakcija: dashboardData[6],
       }}
       auditLogs={auditLogs.map((l) => ({

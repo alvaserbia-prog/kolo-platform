@@ -89,7 +89,7 @@ interface Props {
   verRequest: { status: string } | null;
   verified: boolean;
   opticaj: number;
-  bankaBalance: number;
+  protokolBalance: number;
   ukupnoKorisnika: number;
   verifikovanih: number;
   ukupnoKrugCount: number;
@@ -118,7 +118,7 @@ export default function SistemKlijent({
   verRequest,
   verified,
   opticaj,
-  bankaBalance,
+  protokolBalance,
   ukupnoKorisnika,
   verifikovanih,
   ukupnoKrugCount,
@@ -143,7 +143,7 @@ export default function SistemKlijent({
   const t = useTranslations("sistem");
 
   const aktivniProgrami = programi.filter((p) => p.isActive).length;
-  const zeroSum = opticaj + bankaBalance === 0;
+  const zeroSum = opticaj + protokolBalance === 0;
 
   return (
     <div className="space-y-6">

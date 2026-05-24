@@ -57,7 +57,7 @@ export default async function NovcanikPage({
       type: t.type,
       description: t.description,
       primio,
-      drugiPseudonim: drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Banka" : "?"),
+      drugiPseudonim: drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Protokol" : "?"),
       drugiId: drugiUser?.id ?? null,
       createdAt: t.createdAt.toISOString(),
     };
