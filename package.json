@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
+    "build": "prisma generate && node scripts/build-migrate.mjs && next build",
+    "migrate:prod": "node scripts/migrate-prod.mjs",
+    "migrate:prod:status": "node scripts/migrate-prod.mjs --status",
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",
