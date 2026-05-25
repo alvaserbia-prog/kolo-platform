@@ -4,7 +4,14 @@ import { getToken } from "next-auth/jwt";
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
-  "/cesto-postavljena-pitanja", "/pravilnik", "/statut",
+  "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro",
+];
+
+// Putanje za ulazak u nalog. Kada je MAINTENANCE_MODE uključen (postavlja se
+// ISKLJUČIVO na produkciji, ne na testu), preusmeravaju se na /uskoro.
+const ZAKLJUCANE_ULAZNE_RUTE = [
+  "/login", "/registracija", "/oauth",
+  "/zaboravljena-lozinka", "/reset-lozinka",
 ];
 
 const PRESKOCI = [
@@ -16,6 +23,13 @@ const PRESKOCI = [
 
 export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  if (
+    process.env.MAINTENANCE_MODE === "true" &&
+    ZAKLJUCANE_ULAZNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"))
+  ) {
+    return NextResponse.redirect(new URL("/uskoro", req.url));
+  }
 
   if (PRESKOCI.some((r) => pathname.startsWith(r))) {
     return NextResponse.next();
