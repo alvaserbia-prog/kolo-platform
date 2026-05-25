@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Lozinka", type: "password" },
       },
       async authorize(credentials) {
+        if (process.env.MAINTENANCE_MODE === "true") return null;
         if (!credentials?.email || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
@@ -82,6 +83,8 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
+      if (process.env.MAINTENANCE_MODE === "true") return false;
+
       // Credentials — provera je u authorize()
       if (account?.provider === "credentials") return true;
 

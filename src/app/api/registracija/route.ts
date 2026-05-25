@@ -24,6 +24,13 @@ function generateMemberHash(): string {
 
 export async function POST(req: NextRequest) {
   try {
+    if (process.env.MAINTENANCE_MODE === "true") {
+      return NextResponse.json(
+        { error: "Registracija je trenutno onemogućena. Platforma se priprema za pokretanje." },
+        { status: 503 },
+      );
+    }
+
     const body = await req.json();
     const { email, pseudonim, password, referralCode } = body;
 
