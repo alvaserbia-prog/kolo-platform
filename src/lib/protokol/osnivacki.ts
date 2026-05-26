@@ -24,6 +24,28 @@ export const GORNJA_GRANICA = ITERATION_LIMIT * KORAK_IZNOS; // 2.400.000
 export const PRAG_SKOK = 100_000;
 
 /**
+ * Raspodela jednog koraka (KORAK_IZNOS) među osnivačima srazmerno udelima (čl. 12).
+ * Largest-remainder metoda — zbir vraćenih iznosa je tačno KORAK_IZNOS (bez gubitka
+ * na zaokruživanju), pa evidentirani iznos po koraku ostaje konzistentan sa 20.000.
+ * Pretpostavka (validirano u pozivaocu): svi udeli imaju isti imenilac, zbir
+ * brojilaca = imenilac.
+ */
+export function raspodeliKorak(udeli: { udeoBrojilac: number; udeoImenilac: number }[]): number[] {
+  if (udeli.length === 0) return [];
+  const imenilac = udeli[0].udeoImenilac;
+  const baze = udeli.map((u) => Math.floor((KORAK_IZNOS * u.udeoBrojilac) / imenilac));
+  let ostatak = KORAK_IZNOS - baze.reduce((s, x) => s + x, 0);
+  const ostaci = udeli
+    .map((u, i) => ({ i, frac: (KORAK_IZNOS * u.udeoBrojilac) % imenilac }))
+    .sort((a, b) => b.frac - a.frac);
+  for (let k = 0; k < ostaci.length && ostatak > 0; k++) {
+    baze[ostaci[k].i] += 1;
+    ostatak--;
+  }
+  return baze;
+}
+
+/**
  * Ukupan POEN u sistemu = apsolutna vrednost Protokol balansa (jer je zero-sum).
  * Ekvivalentno: suma svih korisnickih + Krug balansa.
  */
@@ -127,9 +149,11 @@ export async function proveriIEvidentirajKorak(): Promise<{
       },
     });
 
-    // Emituj POEN svakom osnivacu prema udelu
-    for (const osnivac of osnivaci) {
-      const iznos = Math.floor((KORAK_IZNOS * osnivac.udeoBrojilac) / osnivac.udeoImenilac);
+    // Emituj POEN svakom osnivacu prema udelu (zbir = tačno KORAK_IZNOS)
+    const iznosi = raspodeliKorak(osnivaci);
+    for (let oi = 0; oi < osnivaci.length; oi++) {
+      const osnivac = osnivaci[oi];
+      const iznos = iznosi[oi];
       if (iznos <= 0) continue;
 
       const wallet = await prisma.wallet.findUnique({ where: { userId: osnivac.userId } });

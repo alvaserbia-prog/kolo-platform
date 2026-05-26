@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import OsnivaciTab from "./OsnivaciTab";
 
 interface KorisnikInfo {
   id: string;
@@ -185,7 +186,7 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
+type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit";
 
 export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
   const router = useRouter();
@@ -202,6 +203,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
     ["emisija", "Finansije"],
+    ["osnivaci", "Osnivači"],
     ["vesti", "Vesti"],
     ["audit", "Audit log"],
   ];
@@ -254,6 +256,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab opticaj={opticaj} onSuccess={() => router.refresh()} />}
+
+      {/* Osnivači */}
+      {tab === "osnivaci" && <OsnivaciTab verifikovaniKorisnici={verifikovaniKorisnici} onDone={() => router.refresh()} />}
 
       {/* Vesti */}
       {tab === "vesti" && <VestiTab objave={blogObjave} onDone={() => router.refresh()} />}

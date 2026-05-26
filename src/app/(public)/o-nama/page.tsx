@@ -432,6 +432,7 @@ export default function ONamaPage() {
                 { naziv: "Pravilnik o pokroviteljstvu i donacijama", href: "/pravilnik/pokroviteljstvo-donacije" },
                 { naziv: "Pravilnik o operativnom doprinosu", href: "/pravilnik/operativni" },
                 { naziv: "Pravilnik o osnivačkom doprinosu", href: "/pravilnik/osnivacki" },
+                { naziv: "Osnivački doprinos — stanje kanala (uživo)", href: "/osnivacki-doprinos" },
                 { naziv: "Politika privatnosti", href: "/privatnost" },
                 { naziv: "Procena uticaja na zaštitu podataka (DPIA)", href: "/dpia" },
                 { naziv: "Uslovi korišćenja", href: "/uslovi" },
