@@ -15,14 +15,9 @@ export async function GET() {
   if (!session || session.user.role !== "ADMIN")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
-  const [programi, pendingEnrollments, pendingEvidencije, poslednjeEmisije] = await Promise.all([
+  const [programi, pendingEnrollments, poslednjeEmisije] = await Promise.all([
     prisma.protokolProgram.findMany(),
     prisma.programEnrollment.findMany({
-      where: { status: "PENDING" },
-      include: { user: { select: { pseudonim: true } } },
-      orderBy: { createdAt: "asc" },
-    }),
-    prisma.doprinosEvidencija.findMany({
       where: { status: "PENDING" },
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
@@ -48,14 +43,6 @@ export async function GET() {
       type: e.type,
       label: labelPrograma(e.type),
       metadata: e.metadata,
-      createdAt: e.createdAt.toISOString(),
-    })),
-    pendingEvidencije: pendingEvidencije.map((e) => ({
-      id: e.id,
-      pseudonim: e.user.pseudonim,
-      date: e.date.toISOString(),
-      description: e.description,
-      amount: e.amount,
       createdAt: e.createdAt.toISOString(),
     })),
     poslednjeEmisije: poslednjeEmisije.map((s) => ({

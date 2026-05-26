@@ -43,7 +43,6 @@ export default async function AdminPage() {
       prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
       prisma.protokolProgram.findMany(),
       prisma.programEnrollment.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
-      prisma.doprinosEvidencija.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
@@ -87,22 +86,22 @@ export default async function AdminPage() {
       }),
     ]),
     Promise.all([
-      prisma.doprinosOglas.findMany({
+      prisma.zadatak.findMany({
         include: {
           createdBy: { select: { pseudonim: true } },
           krug: { select: { name: true } },
-          _count: { select: { prijave: true, evidencije: { where: { status: "PENDING" } } } },
+          _count: { select: { prijave: true, izvrsenja: { where: { status: "PODNETO" } } } },
         },
         orderBy: { createdAt: "desc" },
       }),
-      prisma.oglasPrijava.findMany({
-        where: { status: "PENDING" },
-        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true, hourlyRate: true, positions: true } } },
+      prisma.zadatakPrijava.findMany({
+        where: { status: "PODNETA" },
+        include: { user: { select: { pseudonim: true } }, zadatak: { select: { naslov: true, brojIzvrsilaca: true } } },
         orderBy: { createdAt: "asc" },
       }),
-      prisma.oglasEvidencija.findMany({
-        where: { status: "PENDING" },
-        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true } } },
+      prisma.zadatakIzvrsenje.findMany({
+        where: { status: "PODNETO" },
+        include: { user: { select: { pseudonim: true } }, zadatak: { select: { naslov: true, mod: true } } },
         orderBy: { createdAt: "asc" },
       }),
     ]),
@@ -153,11 +152,7 @@ export default async function AdminPage() {
           id: e.id, pseudonim: e.user.pseudonim, type: e.type, label: labelPrograma(e.type),
           metadata: e.metadata as Record<string, unknown> | null, createdAt: e.createdAt.toISOString(),
         })),
-        pendingEvidencije: adminProgrami[3].map((e) => ({
-          id: e.id, pseudonim: e.user.pseudonim, date: e.date.toISOString(),
-          description: e.description, amount: e.amount, createdAt: e.createdAt.toISOString(),
-        })),
-        poslednjeEmisije: adminProgrami[4].map((s) => ({
+        poslednjeEmisije: adminProgrami[3].map((s) => ({
           date: s.date.toISOString(), opticaj: s.opticaj, limit: s.limit,
           totalRequested: s.totalRequested, totalEmitted: s.totalEmitted, koeficijent: Number(s.koeficijent),
         })),
@@ -199,24 +194,24 @@ export default async function AdminPage() {
         publishedAt: o.publishedAt.toISOString(),
         createdAt: o.createdAt.toISOString(),
       }))}
-      adminPed={{
-        oglasi: zaposljavanjeData[0].map((o) => ({
-          id: o.id, title: o.title, source: o.source as string,
-          hourlyRate: o.hourlyRate, maxHoursPerDay: o.maxHoursPerDay, positions: o.positions,
-          deadline: o.deadline?.toISOString() ?? null, status: o.status as string,
-          createdByPseudonim: o.createdBy.pseudonim, krugName: o.krug?.name ?? null,
-          ukupnoPrijava: o._count.prijave, pendingEvidencija: o._count.evidencije,
-          createdAt: o.createdAt.toISOString(),
+      adminZadaci={{
+        zadaci: zaposljavanjeData[0].map((z) => ({
+          id: z.id, naslov: z.naslov, izvor: z.izvor as string, mod: z.mod as string,
+          stopaPoSatu: z.stopaPoSatu, iznosUCelosti: z.iznosUCelosti, predlozeniPoen: z.predlozeniPoen,
+          brojIzvrsilaca: z.brojIzvrsilaca, saOdobravanjem: z.saOdobravanjem, status: z.status as string,
+          createdByPseudonim: z.createdBy.pseudonim, krugName: z.krug?.name ?? null,
+          ukupnoPrijava: z._count.prijave, pendingIzvrsenja: z._count.izvrsenja,
+          createdAt: z.createdAt.toISOString(),
         })),
         pendingPrijave: zaposljavanjeData[1].map((p) => ({
-          id: p.id, pseudonim: p.user.pseudonim, oglasTitle: p.oglas.title,
-          hourlyRate: p.oglas.hourlyRate, positions: p.oglas.positions,
+          id: p.id, pseudonim: p.user.pseudonim, zadatakNaslov: p.zadatak.naslov,
+          brojIzvrsilaca: p.zadatak.brojIzvrsilaca, planIzvrsenja: p.planIzvrsenja,
           createdAt: p.createdAt.toISOString(),
         })),
-        pendingEvidencije: zaposljavanjeData[2].map((e) => ({
-          id: e.id, pseudonim: e.user.pseudonim, oglasTitle: e.oglas.title,
-          date: e.date.toISOString(), hoursWorked: e.hoursWorked, amount: e.amount,
-          description: e.description, createdAt: e.createdAt.toISOString(),
+        pendingIzvrsenja: zaposljavanjeData[2].map((iz) => ({
+          id: iz.id, pseudonim: iz.user.pseudonim, zadatakNaslov: iz.zadatak.naslov,
+          mod: iz.zadatak.mod as string, datum: iz.datum.toISOString(), sati: iz.sati,
+          dokaz: iz.dokaz, tezina: iz.tezina, createdAt: iz.createdAt.toISOString(),
         })),
       }}
     />

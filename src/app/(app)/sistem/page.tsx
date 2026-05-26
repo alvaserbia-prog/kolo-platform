@@ -25,15 +25,13 @@ function rangZaBroj(n: number): number {
 }
 
 const SVE_PROGRAME: ProgramType[] = [
-  "PED",
   "PODRSKA_MAJKAMA",
   "PODRSKA_STARIJIMA",
   "POSEBNA_BRIGA",
   "SKOLOVANJE",
 ];
 
-const OPIS_PROGRAMA: Record<ProgramType, string> = {
-  PED: "Mesečna POEN podrška nezaposlenim članovima koji aktivno traže posao.",
+const OPIS_PROGRAMA: Partial<Record<ProgramType, string>> = {
   PODRSKA_MAJKAMA: "Podrška majkama sa malom decom do 3 godine starosti.",
   PODRSKA_STARIJIMA: "Podrška starijim članovima koji su napunili 65 godina.",
   POSEBNA_BRIGA: "Posebna briga — za članove sa posebnim potrebama ili u teškim okolnostima.",
@@ -255,7 +253,7 @@ export default async function SistemPage() {
     return {
       type,
       label: labelPrograma(type),
-      opis: OPIS_PROGRAMA[type],
+      opis: OPIS_PROGRAMA[type] ?? "",
       isActive: program?.isActive ?? false,
       activatedAt: program?.activatedAt?.toISOString() ?? null,
     };

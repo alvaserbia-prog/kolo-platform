@@ -13,20 +13,18 @@ export async function GET() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const [aktivniProgrami, enrollments, evidencijaToday] = await Promise.all([
+  const [aktivniProgrami, enrollments] = await Promise.all([
     prisma.protokolProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({
       where: { userId: session.user.id },
-    }),
-    prisma.doprinosEvidencija.findFirst({
-      where: { userId: session.user.id, date: danas },
     }),
   ]);
 
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
 
+  // PED (operativni doprinos) više nije enrollment-program — vodi se kroz /zadaci.
   const sviTipovi: ProgramType[] = [
-    "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+    "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
   ];
 
   const rezultati = sviTipovi.map((type) => {
@@ -54,14 +52,5 @@ export async function GET() {
     };
   });
 
-  return NextResponse.json({ programi: rezultati, evidencijaToday: evidencijaToday
-    ? {
-        id: evidencijaToday.id,
-        date: evidencijaToday.date.toISOString(),
-        description: evidencijaToday.description,
-        amount: evidencijaToday.amount,
-        status: evidencijaToday.status,
-      }
-    : null,
-  });
+  return NextResponse.json({ programi: rezultati });
 }
