@@ -1,8 +1,11 @@
 import "dotenv/config";
+import fs from "node:fs";
+import path from "node:path";
 import {
   PrismaClient,
   WalletType,
   Role,
+  TipKorisnika,
   TransactionType,
   UserStatus,
   ProgramType,
@@ -17,6 +20,19 @@ import {
 } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
+
+type UoClan = {
+  email: string;
+  pseudonim: string;
+  referralCode: string;
+  memberHash: string;
+};
+
+function ucitajUoClanove(): UoClan[] {
+  const configPath = path.resolve(__dirname, "uo-clanovi.json");
+  const raw = fs.readFileSync(configPath, "utf-8");
+  return JSON.parse(raw) as UoClan[];
+}
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
@@ -202,23 +218,39 @@ async function seedBanka() {
 
 async function seedAdmin() {
   const hash = await bcrypt.hash(ADMIN_LOZINKA, 12);
-  await prisma.user.upsert({
-    where: { email: "alva.serbia@gmail.com" },
-    update: {},
-    create: {
-      email: "alva.serbia@gmail.com",
-      passwordHash: hash,
-      pseudonim: "Admin",
-      role: Role.ADMIN,
-      verified: true,
-      verifiedAt: new Date(),
-      referralCode: "ADMIN0000",
-      memberHash: "adm00001",
-      location: "Beograd",
-      wallet: { create: { type: WalletType.USER, balance: 0 } },
-    },
-  });
-  console.log(`✓ Admin: alva.serbia@gmail.com (lozinka: ${ADMIN_LOZINKA})`);
+  const clanovi = ucitajUoClanove();
+
+  for (const c of clanovi) {
+    const korisnik = await prisma.user.upsert({
+      where: { email: c.email },
+      update: {
+        role: Role.ADMIN,
+        tipKorisnika: TipKorisnika.POCETNI,
+        verified: true,
+      },
+      create: {
+        email: c.email,
+        passwordHash: hash,
+        pseudonim: c.pseudonim,
+        role: Role.ADMIN,
+        tipKorisnika: TipKorisnika.POCETNI,
+        indeksStvarnosti: 10,
+        verified: true,
+        verifiedAt: new Date(),
+        referralCode: c.referralCode,
+        memberHash: c.memberHash,
+        location: "Beograd",
+        wallet: { create: { type: WalletType.USER, balance: 0 } },
+      },
+      include: { wallet: true },
+    });
+
+    if (korisnik.wallet && !(await vecPostojiTransakcija(korisnik.wallet.id, TransactionType.EMISIJA_VERIFIKACIJA, "Početni doprinos UO"))) {
+      await emitujIzBanke(korisnik.wallet.id, POEN_VERIFIKACIJA, TransactionType.EMISIJA_VERIFIKACIJA, "Početni doprinos UO Fondacije");
+    }
+
+    console.log(`✓ Admin: ${c.email} → ${c.pseudonim} (lozinka: ${ADMIN_LOZINKA})`);
+  }
 }
 
 async function seedVerifikovaniKorisnici() {
@@ -952,25 +984,21 @@ async function ispisiPregled() {
 }
 
 async function main() {
-  console.log("=== KOLO Seed (prošireno) ===\n");
+  console.log("=== KOLO Seed (minimalan — Banka + UO admini) ===\n");
 
   await seedBanka();
   await seedAdmin();
-  await seedVerifikovaniKorisnici();
-  await seedNeverifikovaniKorisnici();
-  await seedSuspendovaniKorisnici();
-  await seedKrugovi();
-  await seedPijaca();
-  await seedTransferi();
-  await seedProgrami();
-  await seedDoprinosOglasi();
-  await seedPokrovitelji();
-  await seedDonacije();
-  await seedBlog();
-  await seedChatPoruke();
-  await seedNotifikacije();
 
-  await ispisiPregled();
+  // Pregled
+  const banka = await prisma.wallet.findUnique({ where: { id: "banka-singleton" } });
+  const admini = await prisma.user.findMany({
+    where: { role: Role.ADMIN },
+    select: { email: true, pseudonim: true },
+  });
+  console.log("\n=== Seed završen ===");
+  console.log(`Banka balans: ${banka?.balance.toLocaleString("sr-RS")} POEN`);
+  console.log(`Admini (lozinka: ${ADMIN_LOZINKA}):`);
+  for (const a of admini) console.log(`  ${a.pseudonim.padEnd(12)} — ${a.email}`);
 }
 
 main()
