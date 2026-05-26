@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
 
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
   "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
@@ -18,6 +19,8 @@ export async function POST(
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!session.user.verified)
     return NextResponse.json({ error: "Mora biti verifikovan." }, { status: 403 });
+  if (!(await imaFunkcionalniPristup(session.user.id)))
+    return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
 
   const { type } = await params;
   if (!DOZVOLJENI_TIPOVI.includes(type as ProgramType))

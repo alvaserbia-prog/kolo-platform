@@ -1199,8 +1199,11 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
     u.pseudonim.toLowerCase().includes(filter.toLowerCase())
   );
 
-  async function akcija(userId: string, tip: "suspenduj" | "aktiviraj" | "iskljuci") {
+  async function akcija(userId: string, tip: "suspenduj" | "aktiviraj" | "iskljuci" | "lazni-verifikator") {
     if (tip === "iskljuci" && !confirm("Trajno isključiti korisnika iz sistema?")) return;
+    if (tip === "lazni-verifikator" && !confirm(
+      "Označiti kao lažnog verifikatora?\n\nSve verifikacije iz njegovog podstabla biće rekurzivno poništene, emitovani POEN (1.000/1.000/500) vraćen Protokolu (moguć minus), a korisnik isključen. Pogođeni korisnici padaju na 0% indeksa."
+    )) return;
     let razlog: string | null = null;
     if (tip === "suspenduj") {
       razlog = prompt("Razlog suspenzije:");
@@ -1212,9 +1215,14 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
       headers: { "Content-Type": "application/json" },
       body: razlog !== null ? JSON.stringify({ razlog }) : "{}",
     });
+    const d = await res.json().catch(() => ({}));
     setLoadingId(null);
-    if (res.ok) onDone();
-    else { const d = await res.json(); alert(d.error ?? "Greška."); }
+    if (res.ok) {
+      if (tip === "lazni-verifikator") alert(`Poništeno ${d.poistenoVerifikacija ?? 0} verifikacija u podstablu.`);
+      onDone();
+    } else {
+      alert(d.error ?? "Greška.");
+    }
   }
 
   return (
@@ -1273,6 +1281,12 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                       <button onClick={() => akcija(u.id, "iskljuci")} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60 transition-colors">
                         Isključi
+                      </button>
+                    )}
+                    {u.verified && u.status !== "EXCLUDED" && (
+                      <button onClick={() => akcija(u.id, "lazni-verifikator")} disabled={loadingId === u.id}
+                        className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60 transition-colors">
+                        Lažni verifikator
                       </button>
                     )}
                   </div>
