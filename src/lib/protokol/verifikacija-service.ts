@@ -242,6 +242,12 @@ export async function izvrsiVerifikaciju(
         },
       });
 
+      // Sprovedena verifikacija zatvara aktivan zahtev na tabli jemstva (ZAVRSEN).
+      await tx.zahtevZaJemstvo.updateMany({
+        where: { userId: verifikovani.id, status: "AKTIVAN" },
+        data: { status: "ZAVRSEN" },
+      });
+
       // REGULARNI verifikator: slotoviPotroseni += 1
       if (verifikator.tipKorisnika === TipKorisnika.REGULARNI) {
         await tx.user.update({

@@ -217,6 +217,7 @@ model User {
   verifikacijaKojomSamVerifikovan VerifikacionaVeza?  @relation("Verifikovani")
   nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
   verifikacijaTokeni              VerifikacijaToken[]
+  zahteviZaJemstvo                ZahtevZaJemstvo[]
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -963,5 +964,34 @@ model VerifikacijaToken {
   usedAt     DateTime?
 
   @@index([korisnikId])
+  @@index([expiresAt])
+}
+
+// ─── Tabla zahteva za jemstvo ─────────────────────────────────────────────────
+// Neverifikovan korisnik se predstavlja mreži verifikovanih radi uspostavljanja
+// kontakta neophodnog za verifikaciju (čl. 32 Pravilnika, čl. 16 Uslova korišćenja).
+// Tekst je vidljiv svim prijavljenima; kontakt samo verifikovanima, uz logovanje.
+
+enum JemstvoStatus {
+  AKTIVAN
+  POVUCEN
+  ISTEKAO
+  UKLONJEN
+  ZAVRSEN
+}
+
+model ZahtevZaJemstvo {
+  id                  String        @id @default(uuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id])
+  tekstPredstavljanja String
+  kontaktPodaci       String
+  status              JemstvoStatus @default(AKTIVAN)
+  uklonjenRazlog      String?
+  createdAt           DateTime      @default(now())
+  expiresAt           DateTime
+
+  @@index([userId])
+  @@index([status])
   @@index([expiresAt])
 }

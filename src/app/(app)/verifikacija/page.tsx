@@ -110,6 +110,18 @@ export default async function VerifikacijaPage() {
       <MojQrKod />
 
       <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
+
+      <a
+        href="/tabla-jemstva"
+        className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+      >
+        <p className="font-semibold text-kolo-text">Tabla zahteva za jemstvo</p>
+        <p className="text-sm text-kolo-muted mt-0.5">
+          {user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN
+            ? "Nemate koga da vas verifikuje? Predstavite se mreži verifikovanih korisnika."
+            : "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."}
+        </p>
+      </a>
     </div>
   );
 }
