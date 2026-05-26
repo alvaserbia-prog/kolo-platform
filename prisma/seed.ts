@@ -203,10 +203,10 @@ async function seedBanka() {
 async function seedAdmin() {
   const hash = await bcrypt.hash(ADMIN_LOZINKA, 12);
   await prisma.user.upsert({
-    where: { email: "admin@ekolo.rs" },
+    where: { email: "alva.serbia@gmail.com" },
     update: {},
     create: {
-      email: "admin@ekolo.rs",
+      email: "alva.serbia@gmail.com",
       passwordHash: hash,
       pseudonim: "Admin",
       role: Role.ADMIN,
@@ -218,7 +218,7 @@ async function seedAdmin() {
       wallet: { create: { type: WalletType.USER, balance: 0 } },
     },
   });
-  console.log(`✓ Admin: admin@ekolo.rs (lozinka: ${ADMIN_LOZINKA})`);
+  console.log(`✓ Admin: alva.serbia@gmail.com (lozinka: ${ADMIN_LOZINKA})`);
 }
 
 async function seedVerifikovaniKorisnici() {
@@ -562,7 +562,7 @@ async function seedProgrami() {
 }
 
 async function seedDoprinosOglasi() {
-  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "admin@ekolo.rs" } });
+  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "alva.serbia@gmail.com" } });
 
   const oglasi = [
     {
@@ -686,7 +686,7 @@ async function seedDoprinosOglasi() {
 }
 
 async function seedPokrovitelji() {
-  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "admin@ekolo.rs" } });
+  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "alva.serbia@gmail.com" } });
 
   const pokrovitelji = [
     {
@@ -763,7 +763,7 @@ async function seedPokrovitelji() {
 }
 
 async function seedDonacije() {
-  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "admin@ekolo.rs" } });
+  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "alva.serbia@gmail.com" } });
 
   const donacije = [
     { donor: "Vlada_Z",    rsd: 5000,  level: 1 },
@@ -810,7 +810,7 @@ async function seedDonacije() {
 }
 
 async function seedBlog() {
-  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "admin@ekolo.rs" } });
+  const admin = await prisma.user.findUniqueOrThrow({ where: { email: "alva.serbia@gmail.com" } });
 
   const objave = [
     {
@@ -936,7 +936,7 @@ async function ispisiPregled() {
   console.log(`Chat poruke:          ${chatPoruke}`);
   console.log(`Banka balans:         ${banka?.balance.toLocaleString("sr-RS")} POEN`);
   console.log(`\n--- Test nalozi (lozinka: ${TEST_LOZINKA}) ---`);
-  console.log(`Admin: admin@ekolo.rs (lozinka: ${ADMIN_LOZINKA})`);
+  console.log(`Admin: alva.serbia@gmail.com (lozinka: ${ADMIN_LOZINKA})`);
   console.log(`\nVerifikovani:`);
   for (const k of VERIFIKOVANI) {
     console.log(`  ${k.pseudonim.padEnd(14)} — ${k.email.padEnd(22)} (${k.location})`);
