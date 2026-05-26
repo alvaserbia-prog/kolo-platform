@@ -5,7 +5,6 @@ import {
   Role,
   TransactionType,
   UserStatus,
-  VerificationStatus,
   ProgramType,
   EnrollmentStatus,
   EvidencijaStatus,
@@ -254,7 +253,7 @@ async function seedVerifikovaniKorisnici() {
 async function seedNeverifikovaniKorisnici() {
   const hash = await bcrypt.hash(TEST_LOZINKA, 12);
   for (const k of NEVERIFIKOVANI) {
-    const korisnik = await prisma.user.upsert({
+    await prisma.user.upsert({
       where: { email: k.email },
       update: {},
       create: {
@@ -270,21 +269,8 @@ async function seedNeverifikovaniKorisnici() {
         wallet: { create: { type: WalletType.USER, balance: 0 } },
       },
     });
-
-    // Kreiraj pending VerificationRequest
-    const postojeci = await prisma.verificationRequest.findUnique({ where: { userId: korisnik.id } });
-    if (!postojeci) {
-      await prisma.verificationRequest.create({
-        data: {
-          userId: korisnik.id,
-          jmbg: "0000000000000",
-          kanal: "UPLOAD",
-          status: VerificationStatus.PENDING,
-        },
-      });
-    }
   }
-  console.log(`✓ Neverifikovanih korisnika: ${NEVERIFIKOVANI.length} (sa pending zahtevima)`);
+  console.log(`✓ Neverifikovanih korisnika: ${NEVERIFIKOVANI.length}`);
 }
 
 async function seedSuspendovaniKorisnici() {

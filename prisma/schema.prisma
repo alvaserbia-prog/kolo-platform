@@ -21,12 +21,6 @@ enum WalletType {
   PROTOKOL
 }
 
-enum VerificationStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
 enum KrugStatus {
   ACTIVE
   SUSPENDED
@@ -195,7 +189,6 @@ model User {
   kreiraniOglasi         DoprinosOglas[]            @relation("KreiraniOglasi")
   oglasPrijave           OglasPrijava[]             @relation("OglasPrijave")
   oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
-  verificationRequest    VerificationRequest?
   listings               MarketplaceListing[]       @relation("SellerListings")
   purchases              MarketplaceListing[]       @relation("BuyerListings")
   krugClanstva   KrugClanstvo[]
@@ -296,22 +289,6 @@ model Referral {
   rewardPaid   Boolean  @default(false)
   rewardAmount Int?
   createdAt    DateTime @default(now())
-}
-
-model VerificationRequest {
-  id               String             @id @default(uuid())
-  userId           String             @unique
-  user             User               @relation(fields: [userId], references: [id])
-  jmbg             String
-  idFrontPath      String?            // base64 slika prednje strane LK
-  idBackPath       String?            // base64 slika zadnje strane LK
-  kanal            String?            // "UPLOAD" | "LICNO"
-  status           VerificationStatus @default(PENDING)
-  rejectionReason  String?
-  reviewedAt       DateTime?
-  reviewedById     String?
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
 }
 
 model Krug {
@@ -897,16 +874,6 @@ model SistemskiVeto {
   datumAktivacije DateTime?
   datumGasenja    DateTime?                     // kada je trajnoUgasen postao true
   updatedAt       DateTime  @updatedAt
-}
-
-// ─── Verifikacija — odvojeni pristanak za obradu lk/JMBG ─────────────────────
-
-model VerifikacijaPristanak {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  prihvacenAt DateTime @default(now())
-  ipAdresa    String?
-  userAgent   String?
 }
 
 // ─── Prigovor na automatizovanu odluku ───────────────────────────────────────

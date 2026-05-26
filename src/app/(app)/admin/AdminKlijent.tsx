@@ -3,16 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-interface PendingRequest {
-  requestId: string;
-  pseudonim: string;
-  email: string | null;
-  jmbg: string;
-  imaFotografije: boolean;
-  createdAt: string;
-  imaReferral: boolean;
-}
-
 interface KorisnikInfo {
   id: string;
   pseudonim: string;
@@ -169,7 +159,6 @@ interface BlogObjavaAdmin {
 }
 
 interface AdminKlijentProps {
-  pending: PendingRequest[];
   users: KorisnikInfo[];
   opticaj: number;
   pendingKrugovi: PendingKrug[];
@@ -196,21 +185,19 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
+type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
   const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length + adminProgrami.pendingEvidencije.length;
   const ukupnoPendingZaposl = adminPed.pendingPrijave.length + adminPed.pendingEvidencije.length;
-  const ukupnoPending = pending.length + pendingKrugovi.length + ukupnoPendingProgrami;
 
   const tabs: [Tab, string][] = [
     ["dashboard", "Dashboard"],
-    ["pending", `Na čekanju${ukupnoPending > 0 ? ` (${ukupnoPending})` : ""}`],
-    ["krugovi", "Krugovi"],
-    ["programi", "Programi"],
+    ["krugovi", `Krugovi${pendingKrugovi.length > 0 ? ` (${pendingKrugovi.length})` : ""}`],
+    ["programi", `Programi${ukupnoPendingProgrami > 0 ? ` (${ukupnoPendingProgrami})` : ""}`],
     ["ped", `Evidencija Doprinosa${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
@@ -243,21 +230,6 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
       {/* Dashboard */}
       {tab === "dashboard" && <DashboardTab data={dashboard} onRefresh={() => router.refresh()} />}
 
-      {/* Na čekanju — verifikacije + krugovi osnivanje + programi */}
-      {tab === "pending" && (
-        <div className="space-y-4">
-          {pending.length === 0 && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-              Nema zahteva koji čekaju pregled.
-            </div>
-          )}
-          {pending.map((vr) => (
-            <VerifikacijaKartica key={vr.requestId} vr={vr} onDone={() => router.refresh()} />
-          ))}
-        </div>
-      )}
-
-      {/* Krugovi */}
       {/* Krugovi — pending osnivanje + lista aktivnih */}
       {tab === "krugovi" && <KrugoviLista pendingKrugovi={pendingKrugovi} krugoviLista={krugoviLista} onDone={() => router.refresh()} />}
 
@@ -383,167 +355,6 @@ function KrugZahtevKartica({ z, onDone }: { z: PendingKrug; onDone: () => void }
         <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
           {poruka.text}
         </p>
-      )}
-    </div>
-  );
-}
-
-// ── Kartica za jedan zahtev ────────────────────────────────────────────────────
-
-function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () => void }) {
-  const [expanded, setExpanded] = useState(false);
-  const [vidiSliku, setVidiSliku] = useState<"front" | "back" | null>(null);
-  const [razlog, setRazlog] = useState("");
-  const [showOdbij, setShowOdbij] = useState(false);
-  const [loading, setLoading] = useState<"odobri" | "odbij" | null>(null);
-  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
-
-  async function odobri() {
-    setLoading("odobri");
-    setPoruka(null);
-    const res = await fetch(`/api/admin/verifikacija/${vr.requestId}`, { method: "POST" });
-    const data = await res.json();
-    setLoading(null);
-    if (res.ok) {
-      setPoruka({ text: "Odobreno. Emitovano 1.000 POEN.", ok: true });
-      setTimeout(onDone, 1200);
-    } else {
-      setPoruka({ text: data.error ?? "Greška.", ok: false });
-    }
-  }
-
-  async function odbij() {
-    if (!razlog.trim()) return;
-    setLoading("odbij");
-    setPoruka(null);
-    const res = await fetch(`/api/admin/verifikacija/${vr.requestId}/odbij`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ razlog: razlog.trim() }),
-    });
-    const data = await res.json();
-    setLoading(null);
-    if (res.ok) {
-      setPoruka({ text: "Zahtev odbijen.", ok: false });
-      setTimeout(onDone, 1200);
-    } else {
-      setPoruka({ text: data.error ?? "Greška.", ok: false });
-    }
-  }
-
-  return (
-    <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-      {/* Zaglavlje */}
-      <div className="px-5 py-4 flex justify-between items-start">
-        <div>
-          <p className="font-semibold text-kolo-text">{vr.pseudonim}</p>
-          <p className="text-sm text-kolo-muted mt-0.5">{vr.email}</p>
-          <p className="text-xs text-kolo-muted mt-1">
-            Poslato: {new Date(vr.createdAt).toLocaleDateString("sr-RS", {
-              day: "2-digit", month: "long", year: "numeric",
-            })}
-            {vr.imaReferral && (
-              <span className="ml-2 bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded text-xs font-medium">
-                Preporuka
-              </span>
-            )}
-          </p>
-        </div>
-        <button
-          onClick={() => setExpanded((v) => !v)}
-          className="text-xs text-kolo-muted hover:text-kolo-muted underline mt-1"
-        >
-          {expanded ? "Sakrij" : "Pregledaj"}
-        </button>
-      </div>
-
-      {/* Detalji */}
-      {expanded && (
-        <div className="border-t border-kolo-border px-5 py-4 space-y-4">
-          {/* JMBG */}
-          <div>
-            <p className="text-xs text-kolo-muted mb-1">JMBG</p>
-            <p className="font-mono text-sm font-semibold text-kolo-text tracking-widest">{vr.jmbg}</p>
-          </div>
-
-          {/* Fotografije LK */}
-          {vr.imaFotografije && (
-            <div>
-              <p className="text-xs text-kolo-muted mb-2">Fotografije lične karte</p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setVidiSliku(vidiSliku === "front" ? null : "front")}
-                  className="flex-1 py-2 rounded-xl border border-kolo-border text-xs font-medium text-kolo-muted hover:bg-kolo-bg transition-colors"
-                >
-                  {vidiSliku === "front" ? "Sakrij prednju stranu" : "Prednja strana"}
-                </button>
-                <button
-                  onClick={() => setVidiSliku(vidiSliku === "back" ? null : "back")}
-                  className="flex-1 py-2 rounded-xl border border-kolo-border text-xs font-medium text-kolo-muted hover:bg-kolo-bg transition-colors"
-                >
-                  {vidiSliku === "back" ? "Sakrij zadnju stranu" : "Zadnja strana"}
-                </button>
-              </div>
-              {vidiSliku && (
-                <div className="mt-2 rounded-xl overflow-hidden border border-kolo-border">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`/api/admin/dokument/${vr.requestId}/${vidiSliku}`}
-                    alt={vidiSliku === "front" ? "Prednja strana LK" : "Zadnja strana LK"}
-                    className="w-full object-contain max-h-64"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Akcije */}
-          {!poruka && (
-            <div className="space-y-3 pt-1">
-              <div className="flex gap-2">
-                <button
-                  onClick={odobri}
-                  disabled={loading !== null}
-                  className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
-                >
-                  {loading === "odobri" ? "Obrađujem..." : "Odobri"}
-                </button>
-                <button
-                  onClick={() => setShowOdbij((v) => !v)}
-                  disabled={loading !== null}
-                  className="flex-1 py-2.5 rounded-xl bg-white border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors disabled:opacity-60"
-                >
-                  Odbij
-                </button>
-              </div>
-
-              {showOdbij && (
-                <div className="space-y-2">
-                  <textarea
-                    value={razlog}
-                    onChange={(e) => setRazlog(e.target.value)}
-                    placeholder="Razlog odbijanja (korisnik će ga videti)..."
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400 resize-none transition-colors"
-                  />
-                  <button
-                    onClick={odbij}
-                    disabled={loading !== null || !razlog.trim()}
-                    className="w-full py-2.5 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:bg-kolo-danger transition-colors disabled:opacity-60"
-                  >
-                    {loading === "odbij" ? "Odbijam..." : "Potvrdi odbijanje"}
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-
-          {poruka && (
-            <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
-              {poruka.text}
-            </p>
-          )}
-        </div>
       )}
     </div>
   );
@@ -1382,7 +1193,6 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
 function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => void }) {
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
-  const [rucnaKorisnik, setRucnaKorisnik] = useState<KorisnikInfo | null>(null);
   const [izmeniKorisnik, setIzmeniKorisnik] = useState<KorisnikInfo | null>(null);
 
   const filtered = users.filter((u) =>
@@ -1447,12 +1257,6 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
                       Izmeni
                     </button>
-                    {!u.verified && u.status === "ACTIVE" && (
-                      <button onClick={() => setRucnaKorisnik(u)} disabled={loadingId === u.id}
-                        className="px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold rounded-lg hover:bg-kolo-green-500 hover:text-white disabled:opacity-60 transition-colors">
-                        Verifikuj ručno
-                      </button>
-                    )}
                     {u.status === "ACTIVE" && (
                       <button onClick={() => akcija(u.id, "suspenduj")} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 text-xs font-semibold rounded-lg hover:bg-kolo-gold-100 disabled:opacity-60 transition-colors">
@@ -1478,14 +1282,6 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
           ))
         )}
       </div>
-
-      {rucnaKorisnik && (
-        <RucnaVerifikacijaForma
-          korisnik={rucnaKorisnik}
-          onClose={() => setRucnaKorisnik(null)}
-          onDone={() => { setRucnaKorisnik(null); onDone(); }}
-        />
-      )}
 
       {izmeniKorisnik && (
         <IzmeniKorisnikaForma
@@ -1571,92 +1367,6 @@ function IzmeniKorisnikaForma({ korisnik, onClose, onDone }: {
           <button onClick={sacuvaj} disabled={loading}
             className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
             {loading ? "Čuvam..." : "Sačuvaj"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function RucnaVerifikacijaForma({ korisnik, onClose, onDone }: {
-  korisnik: KorisnikInfo;
-  onClose: () => void;
-  onDone: () => void;
-}) {
-  const [jmbg, setJmbg] = useState("");
-  const [potvrda, setPotvrda] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [greska, setGreska] = useState("");
-
-  async function potvrdi() {
-    setGreska("");
-    if (jmbg.length !== 13 || !/^\d{13}$/.test(jmbg)) {
-      setGreska("JMBG mora imati tačno 13 cifara.");
-      return;
-    }
-    if (!potvrda) {
-      setGreska("Morate potvrditi da ste videli dokument lično.");
-      return;
-    }
-    setLoading(true);
-    const res = await fetch(`/api/admin/korisnici/${korisnik.id}/rucna-verifikacija`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ jmbg }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      onDone();
-    } else {
-      setGreska(data.error ?? "Greška pri verifikaciji.");
-    }
-  }
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
-        <div>
-          <h3 className="text-base font-semibold text-kolo-text">Ručna verifikacija</h3>
-          <p className="text-sm text-kolo-muted mt-0.5">Korisnik: <span className="font-medium text-kolo-muted">{korisnik.pseudonim}</span></p>
-        </div>
-
-        <div className="box-warning px-4 py-3 text-sm text-kolo-gold-600">
-          Ovu akciju koristite samo ako ste <strong>lično videli</strong> dokument korisnika i potvrdili identitet.
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-kolo-muted mb-1">JMBG</label>
-          <input
-            type="text"
-            value={jmbg}
-            onChange={(e) => setJmbg(e.target.value.replace(/\D/g, "").slice(0, 13))}
-            placeholder="0000000000000"
-            className="w-full px-4 py-3 rounded-xl border border-kolo-border font-mono text-sm outline-none focus:border-kolo-green-700 transition-colors"
-          />
-          <p className="mt-1 text-xs text-kolo-muted">{jmbg.length}/13 cifara</p>
-        </div>
-
-        <label className="flex items-start gap-2.5 cursor-pointer">
-          <input type="checkbox" checked={potvrda} onChange={(e) => setPotvrda(e.target.checked)}
-            className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
-          <span className="text-xs text-kolo-muted">
-            Potvrđujem da sam lično video/la dokument sa ovim JMBG i identifikovao/la korisnika
-          </span>
-        </label>
-
-        {greska && (
-          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
-        )}
-
-        <div className="flex gap-2 pt-1">
-          <button onClick={onClose} disabled={loading}
-            className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm font-medium text-kolo-muted hover:bg-kolo-bg transition-colors disabled:opacity-60">
-            Otkaži
-          </button>
-          <button onClick={potvrdi} disabled={loading || jmbg.length !== 13 || !potvrda}
-            className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50">
-            {loading ? "Verifikujem..." : "Verifikuj"}
           </button>
         </div>
       </div>

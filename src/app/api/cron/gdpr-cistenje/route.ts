@@ -6,11 +6,9 @@ import { prisma } from "@/lib/prisma";
  * GDPR data retention cleanup job.
  * Pokreće se mesečno (preporučeno 1. u mesecu u 02:00).
  *
- * 1. Briše JMBG hash za korisnike koji su deaktivirani pre više od 5 godina.
- *
- * 2. Briše poruke u konverzacijama u kojima je poslednja poruka starija od
- *    24 meseca (i obe strane su deaktivirane ili konverzacija je neaktivna).
- *    Ako je JEDNA strana i dalje aktivna, poruke se čuvaju dok ona ne deaktivira nalog.
+ * Briše poruke u konverzacijama u kojima je poslednja poruka starija od
+ * 24 meseca (i obe strane su deaktivirane ili konverzacija je neaktivna).
+ * Ako je JEDNA strana i dalje aktivna, poruke se čuvaju dok ona ne deaktivira nalog.
  */
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-cron-secret");
@@ -19,35 +17,10 @@ export async function POST(req: NextRequest) {
   }
 
   const sada = new Date();
-  const petGodinaUnazad = new Date(sada);
-  petGodinaUnazad.setFullYear(petGodinaUnazad.getFullYear() - 5);
-
   const dvadesetCetiriMesecaUnazad = new Date(sada);
   dvadesetCetiriMesecaUnazad.setMonth(dvadesetCetiriMesecaUnazad.getMonth() - 24);
 
-  // --- 1. Verifikacioni podaci — 5 godina od deaktivacije ---
-  const deaktivrianiKorisnici = await prisma.user.findMany({
-    where: {
-      deaktiviranAt: { not: null, lte: petGodinaUnazad },
-    },
-    select: { id: true },
-  });
-
-  let obrVer = 0;
-  for (const k of deaktivrianiKorisnici) {
-    const updated = await prisma.verificationRequest.updateMany({
-      where: {
-        userId: k.id,
-        jmbg: { not: "OBRISANO" },
-      },
-      data: {
-        jmbg: "OBRISANO",
-      },
-    });
-    obrVer += updated.count;
-  }
-
-  // --- 2. Retencija poruka — 24 meseca ---
+  // --- Retencija poruka — 24 meseca ---
   // Briše poruke u konverzacijama u kojima je lastMessageAt > 24 meseca
   // I obe strane su deaktivirane
   const stareKonverzacije = await prisma.konverzacija.findMany({
@@ -68,11 +41,10 @@ export async function POST(req: NextRequest) {
     obrPoruke = deleted.count;
   }
 
-  console.log(`[GDPR Cron] Verifikacioni podaci obrisani: ${obrVer}, Poruke obrisane: ${obrPoruke}`);
+  console.log(`[GDPR Cron] Poruke obrisane: ${obrPoruke}`);
 
   return NextResponse.json({
     ok: true,
-    verifikacijaObrisana: obrVer,
     porukeObrisane: obrPoruke,
   });
 }

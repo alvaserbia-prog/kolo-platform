@@ -6,7 +6,6 @@ import AdminKlijent from "./AdminKlijent";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
-import { logAdminAkcija } from "@/lib/audit";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
@@ -15,19 +14,10 @@ export default async function AdminPage() {
   if (!session || session.user.role !== "ADMIN") redirect("/dashboard");
 
   const [
-    pendingRequests, allUsers, protokol, pendingKrugovi,
+    allUsers, protokol, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
     blogObjave,
   ] = await Promise.all([
-    prisma.verificationRequest.findMany({
-      where: { status: "PENDING" },
-      select: {
-        id: true, jmbg: true, kanal: true, createdAt: true,
-        idFrontPath: true, idBackPath: true,
-        user: { select: { pseudonim: true, email: true, referredById: true } },
-      },
-      orderBy: { createdAt: "asc" },
-    }),
     prisma.user.findMany({
       select: { id: true, pseudonim: true, email: true, role: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
@@ -115,24 +105,9 @@ export default async function AdminPage() {
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
   const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
 
-  // Audit log: admin je učitao stranicu sa JMBG podacima iz pending zahteva
-  if (pendingRequests.length > 0) {
-    await logAdminAkcija(
-      session.user.id,
-      "PRISTUP_JMBG_PODACI",
-      undefined,
-      `Pregled ${pendingRequests.length} zahteva za verifikaciju (JMBG vidljiv)`
-    );
-  }
-
   return (
     <AdminKlijent
       opticaj={opticaj}
-      pending={pendingRequests.map((vr) => ({
-        requestId: vr.id, pseudonim: vr.user.pseudonim, email: vr.user.email,
-        jmbg: vr.jmbg, imaFotografije: !!(vr.idFrontPath && vr.idBackPath),
-        createdAt: vr.createdAt.toISOString(), imaReferral: !!vr.user.referredById,
-      }))}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, role: u.role, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,

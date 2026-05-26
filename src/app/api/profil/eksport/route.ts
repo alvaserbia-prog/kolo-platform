@@ -27,9 +27,7 @@ export async function GET() {
     glasovi,
     poruke,
     referrals,
-    verifikacija,
     politikaPristanci,
-    verifikacijaPristanak,
     prigovori,
     programEnrollments,
     donacije,
@@ -119,11 +117,6 @@ export async function GET() {
       select: { referrerId: true, referredId: true, rewardPaid: true, rewardAmount: true, createdAt: true },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.verificationRequest.findUnique({
-      where: { userId },
-      select: { status: true, kanal: true, createdAt: true, reviewedAt: true },
-      // NE vraćamo jmbg ni slike dokumenata u eksportu — osetljivi podaci dostupni na zahtev
-    }),
     prisma.politikaPrihvatanje.findMany({
       where: { userId },
       select: {
@@ -132,10 +125,6 @@ export async function GET() {
         verzija: { select: { verzija: true, naslov: true } },
       },
       orderBy: { createdAt: "desc" },
-    }),
-    prisma.verifikacijaPristanak.findUnique({
-      where: { userId },
-      select: { prihvacenAt: true },
     }),
     prisma.prigovorNaOdluku.findMany({
       where: { userId },
@@ -174,13 +163,8 @@ export async function GET() {
     glasanje: glasovi,
     poruke,
     referrals,
-    verifikacija: {
-      ...verifikacija,
-      napomena: "JMBG i slike dokumenta nisu uključeni. Dostupni na pisani zahtev.",
-    },
     saglasnosti: {
       politikaPristanci,
-      verifikacijaPristanak,
     },
     prigovori,
     programEnrollments,
