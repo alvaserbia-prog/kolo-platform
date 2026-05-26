@@ -316,9 +316,6 @@ export async function DELETE(req: NextRequest) {
       where: { userId },
       data: { punoIme: null, opis: null },
     });
-
-    // NE brišemo VerificationRequest odmah — retencija 5 godina (AML obaveza,
-    // čisti se kroz cron `/api/cron/gdpr-cistenje`)
   });
 
   return NextResponse.json({ ok: true });

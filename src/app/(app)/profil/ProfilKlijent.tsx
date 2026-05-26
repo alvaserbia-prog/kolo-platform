@@ -635,7 +635,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <h2 className="text-base font-semibold text-kolo-muted mb-2">Pravo na prenosivost podataka</h2>
           <p className="text-xs text-kolo-muted mb-4">
             Preuzmite kopiju svih vaših ličnih podataka u JSON formatu (čl. 36 Zakona o zaštiti podataka o ličnosti).
-            JMBG nije uključen — dostupan na pisani zahtev.
           </p>
           <a
             href="/api/profil/eksport"

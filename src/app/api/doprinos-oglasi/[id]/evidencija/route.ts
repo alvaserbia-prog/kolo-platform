@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
 
 // POST /api/doprinos-oglasi/[id]/evidencija — unos radnih sati
 export async function POST(
@@ -11,6 +12,8 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
+  if (!(await imaFunkcionalniPristup(session.user.id)))
+    return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
 
   const { id: oglasId } = await params;
   const body = await req.json().catch(() => ({}));

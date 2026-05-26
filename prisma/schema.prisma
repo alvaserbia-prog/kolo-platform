@@ -21,12 +21,6 @@ enum WalletType {
   PROTOKOL
 }
 
-enum VerificationStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
 enum KrugStatus {
   ACTIVE
   SUSPENDED
@@ -126,9 +120,17 @@ enum DonationStatus {
   CONFIRMED
 }
 
-enum PokroviteljDoprinosTip {
-  SPONZORSTVO_KRUGA
-  DONACIJA_FONDACIJI
+enum VrstaDonacije {
+  NOVAC
+  ROBA
+  USLUGE
+}
+
+enum PokroviteljPrijavaStatus {
+  CEKA_POTPIS
+  POTPISANA
+  POTVRDJENA
+  ODBIJENA
 }
 
 enum OglasStatus {
@@ -195,7 +197,6 @@ model User {
   kreiraniOglasi         DoprinosOglas[]            @relation("KreiraniOglasi")
   oglasPrijave           OglasPrijava[]             @relation("OglasPrijave")
   oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
-  verificationRequest    VerificationRequest?
   listings               MarketplaceListing[]       @relation("SellerListings")
   purchases              MarketplaceListing[]       @relation("BuyerListings")
   krugClanstva   KrugClanstvo[]
@@ -224,6 +225,8 @@ model User {
   verifikacijaKojomSamVerifikovan VerifikacionaVeza?  @relation("Verifikovani")
   nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
   verifikacijaTokeni              VerifikacijaToken[]
+  zahteviZaJemstvo                ZahtevZaJemstvo[]
+  pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -296,22 +299,6 @@ model Referral {
   rewardPaid   Boolean  @default(false)
   rewardAmount Int?
   createdAt    DateTime @default(now())
-}
-
-model VerificationRequest {
-  id               String             @id @default(uuid())
-  userId           String             @unique
-  user             User               @relation(fields: [userId], references: [id])
-  jmbg             String
-  idFrontPath      String?            // base64 slika prednje strane LK
-  idBackPath       String?            // base64 slika zadnje strane LK
-  kanal            String?            // "UPLOAD" | "LICNO"
-  status           VerificationStatus @default(PENDING)
-  rejectionReason  String?
-  reviewedAt       DateTime?
-  reviewedById     String?
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
 }
 
 model Krug {
@@ -686,10 +673,38 @@ model Pokrovitelj {
   status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
   doprinosi      PokroviteljDoprinos[]
   bonusiEmisije  PokroviteljBonusEmisija[]
+  prijave        PokroviteljPrijava[]
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 
   @@index([vlasnikId])
+  @@index([status])
+}
+
+// Prijava pokroviteljstva (čl. 7–9) — verifikovani korisnik pokreće evidenciju
+// doprinosa pravnog lica; platforma generiše ugovor; po potvrdi Fondacije emituje
+// se bonus POEN prema nivoima (čl. 10).
+model PokroviteljPrijava {
+  id             String                   @id @default(uuid())
+  podnosilacId   String
+  podnosilac     User                     @relation("PodnosilacPrijave", fields: [podnosilacId], references: [id])
+  naziv          String
+  pib            String
+  vrstaDonacije  VrstaDonacije
+  vrednostRsd    Decimal                  @db.Decimal(12, 2)
+  cenovnikSlika  String?
+  ugovorTekst    String
+  status         PokroviteljPrijavaStatus @default(CEKA_POTPIS)
+  potpisanoAt    DateTime?
+  pokroviteljId  String?
+  pokrovitelj    Pokrovitelj?             @relation(fields: [pokroviteljId], references: [id])
+  potvrdioId     String?
+  potvrdjenoAt   DateTime?
+  odbijenoRazlog String?
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+
+  @@index([podnosilacId])
   @@index([status])
 }
 
@@ -698,7 +713,7 @@ model PokroviteljDoprinos {
   pokroviteljId String
   pokrovitelj   Pokrovitelj             @relation(fields: [pokroviteljId], references: [id])
   rsdIznos      Decimal                 @db.Decimal(12, 2)
-  tip           PokroviteljDoprinosTip
+  tip           VrstaDonacije
   evidentiraoId String
   evidentirao   User                    @relation("EvidentiraoDoprinos", fields: [evidentiraoId], references: [id])
   napomena      String?
@@ -899,16 +914,6 @@ model SistemskiVeto {
   updatedAt       DateTime  @updatedAt
 }
 
-// ─── Verifikacija — odvojeni pristanak za obradu lk/JMBG ─────────────────────
-
-model VerifikacijaPristanak {
-  id          String   @id @default(uuid())
-  userId      String   @unique
-  prihvacenAt DateTime @default(now())
-  ipAdresa    String?
-  userAgent   String?
-}
-
 // ─── Prigovor na automatizovanu odluku ───────────────────────────────────────
 
 enum PrigovorStatus {
@@ -996,5 +1001,34 @@ model VerifikacijaToken {
   usedAt     DateTime?
 
   @@index([korisnikId])
+  @@index([expiresAt])
+}
+
+// ─── Tabla zahteva za jemstvo ─────────────────────────────────────────────────
+// Neverifikovan korisnik se predstavlja mreži verifikovanih radi uspostavljanja
+// kontakta neophodnog za verifikaciju (čl. 32 Pravilnika, čl. 16 Uslova korišćenja).
+// Tekst je vidljiv svim prijavljenima; kontakt samo verifikovanima, uz logovanje.
+
+enum JemstvoStatus {
+  AKTIVAN
+  POVUCEN
+  ISTEKAO
+  UKLONJEN
+  ZAVRSEN
+}
+
+model ZahtevZaJemstvo {
+  id                  String        @id @default(uuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id])
+  tekstPredstavljanja String
+  kontaktPodaci       String
+  status              JemstvoStatus @default(AKTIVAN)
+  uklonjenRazlog      String?
+  createdAt           DateTime      @default(now())
+  expiresAt           DateTime
+
+  @@index([userId])
+  @@index([status])
   @@index([expiresAt])
 }

@@ -7,7 +7,6 @@ import { logAdminAkcija } from "@/lib/audit";
 /**
  * GET /api/admin/korisnici/[id]/eksport
  * Admin generiše eksport ličnih podataka za korisnika koji je to zatražio pisanim putem.
- * Uključuje JMBG (za razliku od korisničkog self-export-a).
  */
 export async function GET(
   req: NextRequest,
@@ -22,7 +21,7 @@ export async function GET(
 
   const [
     user, podaci, transakcije, zrnoStanje, zrnoUpisi, zrnoOtpisi,
-    verifikacija, politikaPristanci, prigovori, programEnrollments, donacije,
+    politikaPristanci, prigovori, programEnrollments, donacije,
   ] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
@@ -46,11 +45,6 @@ export async function GET(
     prisma.zrnoOtpisZahtev.findMany({
       where: { userId },
       select: { id: true, kolicina: true, date: true, status: true, poenDobijeno: true, createdAt: true },
-    }),
-    // Admin eksport uključuje JMBG
-    prisma.verificationRequest.findUnique({
-      where: { userId },
-      select: { jmbg: true, status: true, kanal: true, createdAt: true, reviewedAt: true },
     }),
     prisma.politikaPrihvatanje.findMany({
       where: { userId },
@@ -76,15 +70,14 @@ export async function GET(
     session.user.id,
     "ADMIN_EKSPORT_PODATAKA",
     userId,
-    `Eksport ličnih podataka za korisnika ${user.pseudonim} (uključuje JMBG)`
+    `Eksport ličnih podataka za korisnika ${user.pseudonim}`
   );
 
   const eksport = {
     generisanoAt: new Date().toISOString(),
     generisaoAdmin: session.user.id,
-    napomena: "Admin eksport ličnih podataka — uključuje JMBG po pisanom zahtevu korisnika. Čuvati u skladu sa procedurama.",
+    napomena: "Admin eksport ličnih podataka po pisanom zahtevu korisnika. Čuvati u skladu sa procedurama.",
     profil: { ...user, ...podaci },
-    verifikacija,
     transakcije,
     zrno: { stanje: zrnoStanje, upisi: zrnoUpisi, otpisi: zrnoOtpisi },
     politikaPristanci,

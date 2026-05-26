@@ -15,6 +15,10 @@
     {
       "path": "/api/cron/chat-cistenje",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/tabla-jemstva-istek",
+      "schedule": "0 4 * * *"
     }
   ]
 }

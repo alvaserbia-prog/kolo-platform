@@ -59,7 +59,6 @@ export default async function SistemPage() {
     korisnici,
     krugoviLista,
     aktivniProgrami,
-    verRequest,
     danasKorisnika,
     danasTransakcija,
     danasKrug,
@@ -128,12 +127,6 @@ export default async function SistemPage() {
     prisma.protokolProgram.findMany({
       select: { type: true, isActive: true, activatedAt: true },
     }),
-    session.user.verified
-      ? Promise.resolve(null)
-      : prisma.verificationRequest.findUnique({
-          where: { userId: session.user.id },
-          select: { status: true },
-        }),
     prisma.user.count({
       where: { role: { not: "ADMIN" }, createdAt: { gte: danas } },
     }),
@@ -264,7 +257,6 @@ export default async function SistemPage() {
   return (
     <SistemKlijent
       pseudonim={session.user.pseudonim}
-      verRequest={verRequest ? { status: verRequest.status } : null}
       verified={verified}
       opticaj={opticaj}
       protokolBalance={protokolBalance}

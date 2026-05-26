@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import PokroviteljstvoPrijava from "./PokroviteljstvoPrijava";
 
 export const metadata = { title: "Postani pokrovitelj — KOLO" };
 
@@ -60,40 +61,29 @@ export default async function PostaniPokroviteljPage() {
         </div>
       )}
 
-      <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-5 mb-6">
-        <h2 className="font-semibold text-kolo-text mb-3">Kako funkcioniše?</h2>
-        <div className="space-y-2 text-sm text-kolo-muted">
-          <p>1. Kontaktirajte administratore platforme sa podacima o pravnom licu (naziv, PIB).</p>
-          <p>2. Admin kreira pokrovitelja i dodeljuje ga vama kao vlasniku.</p>
-          <p>3. Kada pravno lice uplati sponzorstvo ili donaciju, admin evidentira doprinos u RSD.</p>
-          <p>4. Pri dostizanju svakog nivoa, vi automatski dobijate POEN bonus na račun.</p>
-        </div>
-      </div>
+      {session.user.verified && <PokroviteljstvoPrijava />}
 
       <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-5 mb-6">
-        <h2 className="font-semibold text-kolo-text mb-3">Struktura bonusa</h2>
+        <h2 className="font-semibold text-kolo-text mb-3">Nivoi pokroviteljstva i bonus (čl. 10)</h2>
         <div className="space-y-1.5 text-sm">
-          <div className="flex justify-between py-1.5 border-b border-kolo-border">
-            <span className="text-kolo-muted">Nivo 1 — prvi doprinos</span>
-            <span className="font-semibold text-kolo-green-700">20.000 POEN</span>
-          </div>
-          <div className="flex justify-between py-1.5 border-b border-kolo-border">
-            <span className="text-kolo-muted">Nivo 2 — 50.000 RSD kumulativno</span>
-            <span className="font-semibold text-kolo-green-700">50.000 POEN</span>
-          </div>
-          <div className="flex justify-between py-1.5 border-b border-kolo-border">
-            <span className="text-kolo-muted">Nivo 3 — 100.000 RSD kumulativno</span>
-            <span className="font-semibold text-kolo-green-700">100.000 POEN</span>
-          </div>
-          <div className="flex justify-between py-1.5 border-b border-kolo-border">
-            <span className="text-kolo-muted">Nivo 4 — 200.000 RSD kumulativno</span>
-            <span className="font-semibold text-kolo-green-700">200.000 POEN</span>
-          </div>
-          <div className="flex justify-between py-1.5">
-            <span className="text-kolo-muted">Nivo 5+ — 1-2-5 skala bez gornje granice</span>
-            <span className="font-semibold text-kolo-green-700">prag u POEN</span>
-          </div>
+          {[
+            { nivo: 1, rsd: "10.000", poen: "20.000" },
+            { nivo: 2, rsd: "20.000", poen: "30.000" },
+            { nivo: 3, rsd: "50.000", poen: "80.000" },
+            { nivo: 4, rsd: "100.000", poen: "150.000" },
+            { nivo: 5, rsd: "200.000", poen: "300.000" },
+            { nivo: 6, rsd: "500.000", poen: "800.000" },
+            { nivo: 7, rsd: "1.000.000", poen: "1.500.000" },
+          ].map((r) => (
+            <div key={r.nivo} className="flex justify-between py-1.5 border-b border-kolo-border last:border-0">
+              <span className="text-kolo-muted">Nivo {r.nivo} — {r.rsd} RSD kumulativno</span>
+              <span className="font-semibold text-kolo-green-700">{r.poen} POEN</span>
+            </div>
+          ))}
         </div>
+        <p className="mt-3 text-xs text-kolo-muted">
+          Kumulativni doprinos sabira novac, robu i usluge. Bonus se evidentira za svaki novodostignuti nivo.
+        </p>
       </div>
 
       <div className="mb-6">

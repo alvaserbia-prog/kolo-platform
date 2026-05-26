@@ -86,7 +86,6 @@ interface PokroviteljItem {
 
 interface Props {
   pseudonim: string;
-  verRequest: { status: string } | null;
   verified: boolean;
   opticaj: number;
   protokolBalance: number;
@@ -115,7 +114,6 @@ const CILJ_OPTICAJ = 1_000_000;
 
 export default function SistemKlijent({
   pseudonim,
-  verRequest,
   verified,
   opticaj,
   protokolBalance,
@@ -155,16 +153,8 @@ export default function SistemKlijent({
         {t("dobrodoslice", { pseudonim })}
       </h1>
 
-      {/* Upozorenja za neverifikovane */}
-      {!verified && verRequest?.status === "PENDING" && (
-        <div className="box-warning">
-          <p className="text-sm font-semibold">{t("zahtev_na_cekanju_naslov")}</p>
-          <p className="text-sm mt-0.5 opacity-90">
-            {t("zahtev_na_cekanju_opis")}
-          </p>
-        </div>
-      )}
-      {!verified && !verRequest && (
+      {/* Upozorenje za neverifikovane */}
+      {!verified && (
         <div className="box-warning flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-semibold">{t("nalog_nije_verifikovan_naslov")}</p>
