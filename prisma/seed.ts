@@ -11,7 +11,7 @@ import {
   OglasSource,
   OglasStatus,
   OglasPrijavaStatus,
-  PokroviteljDoprinosTip,
+  VrstaDonacije,
   DonationStatus,
   PristupnicaStatus,
 } from "../src/generated/prisma/client";
@@ -733,7 +733,7 @@ async function seedPokrovitelji() {
         data: {
           pokroviteljId: pokrovitelj.id,
           rsdIznos: p.doprinosRSD,
-          tip: PokroviteljDoprinosTip.DONACIJA_FONDACIJI,
+          tip: VrstaDonacije.NOVAC,
           evidentiraoId: admin.id,
           napomena: "Prvi doprinos pri prijavi pokroviteljstva",
         },

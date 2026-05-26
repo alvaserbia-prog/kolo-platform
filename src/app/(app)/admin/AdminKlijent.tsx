@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import OsnivaciTab from "./OsnivaciTab";
+import PokroviteljPrijaveTab from "./PokroviteljPrijaveTab";
 
 interface KorisnikInfo {
   id: string;
@@ -1406,7 +1407,7 @@ function AdminPokroviteljiTab({
   krugovi: { id: string; name: string }[];
   onDone: () => void;
 }) {
-  const [subTab, setSubTab] = useState<"lista" | "novi" | "doprinos">("lista");
+  const [subTab, setSubTab] = useState<"lista" | "prijave" | "novi" | "doprinos">("lista");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
@@ -1422,7 +1423,7 @@ function AdminPokroviteljiTab({
 
   // Forma — doprinos
   const [doprinosRsd, setDoprinosRsd] = useState("");
-  const [doprinosTip, setDoprinosTip] = useState<"SPONZORSTVO_KRUGA" | "DONACIJA_FONDACIJI">("DONACIJA_FONDACIJI");
+  const [doprinosTip, setDoprinosTip] = useState<"NOVAC" | "ROBA" | "USLUGE">("NOVAC");
   const [doprinosNapomena, setDoprinosNapomena] = useState("");
 
   async function kreirajPokrovitelja() {
@@ -1490,7 +1491,7 @@ function AdminPokroviteljiTab({
   return (
     <div className="space-y-4">
       <div className="flex gap-2 border-b border-kolo-border pb-0">
-        {(["lista", "novi", "doprinos"] as const).map((s) => (
+        {(["lista", "prijave", "novi", "doprinos"] as const).map((s) => (
           <button
             key={s}
             onClick={() => { setSubTab(s); setPoruka(null); }}
@@ -1498,7 +1499,7 @@ function AdminPokroviteljiTab({
               subTab === s ? "border-kolo-green-700 text-kolo-green-700" : "border-transparent text-kolo-muted hover:text-kolo-muted"
             }`}
           >
-            {s === "lista" ? `Lista (${pokrovitelji.length})` : s === "novi" ? "Novi pokrovitelj" : "Evidentiraj doprinos"}
+            {s === "lista" ? `Lista (${pokrovitelji.length})` : s === "prijave" ? "Prijave" : s === "novi" ? "Novi pokrovitelj" : "Evidentiraj doprinos"}
           </button>
         ))}
       </div>
@@ -1508,6 +1509,8 @@ function AdminPokroviteljiTab({
           {poruka.text}
         </div>
       )}
+
+      {subTab === "prijave" && <PokroviteljPrijaveTab onDone={onDone} />}
 
       {subTab === "lista" && (
         <div className="space-y-2">
@@ -1636,11 +1639,12 @@ function AdminPokroviteljiTab({
               <label className="block text-xs font-medium text-kolo-muted mb-1">Tip *</label>
               <select
                 value={doprinosTip}
-                onChange={(e) => setDoprinosTip(e.target.value as "SPONZORSTVO_KRUGA" | "DONACIJA_FONDACIJI")}
+                onChange={(e) => setDoprinosTip(e.target.value as "NOVAC" | "ROBA" | "USLUGE")}
                 className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
               >
-                <option value="DONACIJA_FONDACIJI">Donacija Fondaciji</option>
-                <option value="SPONZORSTVO_KRUGA">Sponzorstvo krugovi</option>
+                <option value="NOVAC">Novac</option>
+                <option value="ROBA">Roba</option>
+                <option value="USLUGE">Usluge</option>
               </select>
             </div>
           </div>

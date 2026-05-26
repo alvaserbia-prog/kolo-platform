@@ -16,7 +16,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (!rsdIznos || typeof rsdIznos !== "number" || rsdIznos <= 0) {
     return NextResponse.json({ error: "Neispravan iznos." }, { status: 400 });
   }
-  if (tip !== "SPONZORSTVO_KRUGA" && tip !== "DONACIJA_FONDACIJI") {
+  if (tip !== "NOVAC" && tip !== "ROBA" && tip !== "USLUGE") {
     return NextResponse.json({ error: "Neispravan tip doprinosa." }, { status: 400 });
   }
 

@@ -120,9 +120,17 @@ enum DonationStatus {
   CONFIRMED
 }
 
-enum PokroviteljDoprinosTip {
-  SPONZORSTVO_KRUGA
-  DONACIJA_FONDACIJI
+enum VrstaDonacije {
+  NOVAC
+  ROBA
+  USLUGE
+}
+
+enum PokroviteljPrijavaStatus {
+  CEKA_POTPIS
+  POTPISANA
+  POTVRDJENA
+  ODBIJENA
 }
 
 enum OglasStatus {
@@ -218,6 +226,7 @@ model User {
   nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
   verifikacijaTokeni              VerifikacijaToken[]
   zahteviZaJemstvo                ZahtevZaJemstvo[]
+  pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -664,10 +673,38 @@ model Pokrovitelj {
   status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
   doprinosi      PokroviteljDoprinos[]
   bonusiEmisije  PokroviteljBonusEmisija[]
+  prijave        PokroviteljPrijava[]
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 
   @@index([vlasnikId])
+  @@index([status])
+}
+
+// Prijava pokroviteljstva (čl. 7–9) — verifikovani korisnik pokreće evidenciju
+// doprinosa pravnog lica; platforma generiše ugovor; po potvrdi Fondacije emituje
+// se bonus POEN prema nivoima (čl. 10).
+model PokroviteljPrijava {
+  id             String                   @id @default(uuid())
+  podnosilacId   String
+  podnosilac     User                     @relation("PodnosilacPrijave", fields: [podnosilacId], references: [id])
+  naziv          String
+  pib            String
+  vrstaDonacije  VrstaDonacije
+  vrednostRsd    Decimal                  @db.Decimal(12, 2)
+  cenovnikSlika  String?
+  ugovorTekst    String
+  status         PokroviteljPrijavaStatus @default(CEKA_POTPIS)
+  potpisanoAt    DateTime?
+  pokroviteljId  String?
+  pokrovitelj    Pokrovitelj?             @relation(fields: [pokroviteljId], references: [id])
+  potvrdioId     String?
+  potvrdjenoAt   DateTime?
+  odbijenoRazlog String?
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+
+  @@index([podnosilacId])
   @@index([status])
 }
 
@@ -676,7 +713,7 @@ model PokroviteljDoprinos {
   pokroviteljId String
   pokrovitelj   Pokrovitelj             @relation(fields: [pokroviteljId], references: [id])
   rsdIznos      Decimal                 @db.Decimal(12, 2)
-  tip           PokroviteljDoprinosTip
+  tip           VrstaDonacije
   evidentiraoId String
   evidentirao   User                    @relation("EvidentiraoDoprinos", fields: [evidentiraoId], references: [id])
   napomena      String?
