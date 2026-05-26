@@ -14,7 +14,7 @@ export async function GET() {
     prisma.wallet.findUnique({ where: { userId: session.user.id }, select: { id: true } }),
     prisma.marketplaceListing.count({ where: { createdAt: { gte: danas } } }),
     prisma.krugPristupnica.count({ where: { createdAt: { gte: danas } } }),
-    prisma.doprinosOglas.count({ where: { createdAt: { gte: danas }, status: "ACTIVE" } }),
+    prisma.zadatak.count({ where: { createdAt: { gte: danas }, status: { in: ["OTVOREN", "U_IZVRSENJU"] } } }),
     prisma.programEnrollment.count({ where: { createdAt: { gte: danas } } }),
     prisma.glasanjePredlog.count({ where: { createdAt: { gte: danas } } }),
   ]);

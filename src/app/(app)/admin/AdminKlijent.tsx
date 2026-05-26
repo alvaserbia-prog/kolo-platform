@@ -79,15 +79,6 @@ interface PendingEnrollment {
   createdAt: string;
 }
 
-interface PendingEvidencija {
-  id: string;
-  pseudonim: string;
-  date: string;
-  description: string;
-  amount: number;
-  createdAt: string;
-}
-
 interface EmisionaSumarija {
   date: string;
   opticaj: number;
@@ -101,50 +92,52 @@ interface AdminProgramiData {
   zrnoTrzisjeAktivno: boolean;
   programi: ProgramInfo[];
   pendingEnrollments: PendingEnrollment[];
-  pendingEvidencije: PendingEvidencija[];
   poslednjeEmisije: EmisionaSumarija[];
 }
 
-interface AdminOglasItem {
+interface AdminZadatakItem {
   id: string;
-  title: string;
-  source: string;
-  hourlyRate: number;
-  maxHoursPerDay: number;
-  positions: number;
-  deadline: string | null;
+  naslov: string;
+  izvor: string;
+  mod: string;
+  stopaPoSatu: number | null;
+  iznosUCelosti: number | null;
+  predlozeniPoen: number;
+  brojIzvrsilaca: number;
+  saOdobravanjem: boolean;
   status: string;
   createdByPseudonim: string;
   krugName: string | null;
   ukupnoPrijava: number;
-  pendingEvidencija: number;
+  pendingIzvrsenja: number;
   createdAt: string;
 }
 
-interface AdminPendingPrijava {
+interface AdminZadatakPrijava {
   id: string;
   pseudonim: string;
-  oglasTitle: string;
-  hourlyRate: number;
-  positions: number;
+  zadatakNaslov: string;
+  brojIzvrsilaca: number;
+  planIzvrsenja: string;
   createdAt: string;
 }
 
-interface AdminPendingOglasEvidencija {
+interface AdminZadatakIzvrsenje {
   id: string;
   pseudonim: string;
-  oglasTitle: string;
-  date: string;
-  hoursWorked: number;
-  amount: number;
-  description: string;
+  zadatakNaslov: string;
+  mod: string;
+  datum: string;
+  sati: number | null;
+  dokaz: string;
+  tezina: number;
   createdAt: string;
 }
 
-interface AdminPedData {
-  oglasi: AdminOglasItem[];
-  pendingPrijave: AdminPendingPrijava[];
-  pendingEvidencije: AdminPendingOglasEvidencija[];
+interface AdminZadaciData {
+  zadaci: AdminZadatakItem[];
+  pendingPrijave: AdminZadatakPrijava[];
+  pendingIzvrsenja: AdminZadatakIzvrsenje[];
 }
 
 interface PokroviteljItem {
@@ -174,7 +167,7 @@ interface AdminKlijentProps {
   opticaj: number;
   pendingKrugovi: PendingKrug[];
   adminProgrami: AdminProgramiData;
-  adminPed: AdminPedData;
+  adminZadaci: AdminZadaciData;
   adminPokrovitelji: PokroviteljItem[];
   dashboard: DashboardData;
   auditLogs: AuditLogEntry[];
@@ -196,14 +189,14 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
+type Tab = "dashboard" | "pending" | "krugovi" | "programi" | "zadaci" | "pokrovitelji" | "korisnici" | "emisija" | "vesti" | "audit";
 
-export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
+export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, adminProgrami, adminZadaci, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
-  const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length + adminProgrami.pendingEvidencije.length;
-  const ukupnoPendingZaposl = adminPed.pendingPrijave.length + adminPed.pendingEvidencije.length;
+  const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length;
+  const ukupnoPendingZadaci = adminZadaci.pendingPrijave.length + adminZadaci.pendingIzvrsenja.length;
   const ukupnoPending = pending.length + pendingKrugovi.length + ukupnoPendingProgrami;
 
   const tabs: [Tab, string][] = [
@@ -211,7 +204,7 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
     ["pending", `Na čekanju${ukupnoPending > 0 ? ` (${ukupnoPending})` : ""}`],
     ["krugovi", "Krugovi"],
     ["programi", "Programi"],
-    ["ped", `Evidencija Doprinosa${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
+    ["zadaci", `Operativni doprinos${ukupnoPendingZadaci > 0 ? ` (${ukupnoPendingZadaci})` : ""}`],
     ["pokrovitelji", `Pokrovitelji${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["korisnici", "Korisnici"],
     ["emisija", "Finansije"],
@@ -264,8 +257,8 @@ export default function AdminKlijent({ pending, users, opticaj, pendingKrugovi, 
       {/* Programi */}
       {tab === "programi" && <AdminProgramiTab data={adminProgrami} onDone={() => router.refresh()} />}
 
-      {/* Evidencija doprinosa */}
-      {tab === "ped" && <AdminPedTab data={adminPed} onDone={() => router.refresh()} />}
+      {/* Operativni doprinos — zadaci */}
+      {tab === "zadaci" && <AdminZadaciTab data={adminZadaci} onDone={() => router.refresh()} />}
 
       {/* Pokrovitelji */}
       {tab === "pokrovitelji" && (
@@ -549,7 +542,7 @@ function VerifikacijaKartica({ vr, onDone }: { vr: PendingRequest; onDone: () =>
   );
 }
 
-// ── Evidencija doprinosa tab ─────────────────────────────────────────────────────────
+// ── Operativni doprinos (zadaci) tab ───────────────────────────────────────────
 
 const sourceLabel: Record<string, string> = { FONDACIJA: "Fondacija", KRUG: "Krug", PROJEKAT: "Projekat" };
 const sourceCls: Record<string, string> = {
@@ -558,14 +551,19 @@ const sourceCls: Record<string, string> = {
   PROJEKAT:  "bg-purple-50 text-purple-700",
 };
 
-function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void }) {
-  const [view, setView] = useState<"oglasi" | "prijave" | "evidencije" | "novi">("oglasi");
+function modLabelZadatak(z: { mod: string; stopaPoSatu: number | null; iznosUCelosti: number | null }): string {
+  if (z.mod === "PO_SATU") return `Po satu (${(z.stopaPoSatu ?? 0).toLocaleString("sr-RS")} POEN/sat)`;
+  return `U celosti (${(z.iznosUCelosti ?? 0).toLocaleString("sr-RS")} POEN)`;
+}
+
+function AdminZadaciTab({ data, onDone }: { data: AdminZadaciData; onDone: () => void }) {
+  const [view, setView] = useState<"zadaci" | "prijave" | "izvrsenja" | "novi">("zadaci");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
 
   async function odobriPrijavu(id: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/doprinos-oglasi/prijave/${id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/zadaci/prijave/${id}/odobri`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
     setPoruke((p) => ({ ...p, [id]: { text: res.ok ? "Odobreno." : (d.error ?? "Greška."), ok: res.ok } }));
@@ -574,7 +572,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
 
   async function odbijPrijavu(id: string, razlog: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/doprinos-oglasi/prijave/${id}/odbij`, {
+    const res = await fetch(`/api/admin/zadaci/prijave/${id}/odbij`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ razlog }),
@@ -585,43 +583,47 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
     if (res.ok) setTimeout(onDone, 1000);
   }
 
-  async function odobriEvidenciju(id: string) {
+  async function potvrdiIzvrsenje(id: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/doprinos-oglasi/evidencija/${id}/odobri`, { method: "POST" });
+    const res = await fetch(`/api/admin/zadaci/izvrsenja/${id}/potvrdi`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
-    setPoruke((p) => ({ ...p, [id]: { text: res.ok ? `Odobreno. Emitovano ${d.amount?.toLocaleString("sr-RS")} POEN.` : (d.error ?? "Greška."), ok: res.ok } }));
+    setPoruke((p) => ({ ...p, [id]: { text: res.ok ? "Potvrđeno." : (d.error ?? "Greška."), ok: res.ok } }));
     if (res.ok) setTimeout(onDone, 1000);
   }
 
-  async function odbijEvidenciju(id: string) {
+  async function odbijIzvrsenje(id: string, razlog: string) {
     setLoading(id);
-    const res = await fetch(`/api/admin/doprinos-oglasi/evidencija/${id}/odbij`, { method: "POST" });
+    const res = await fetch(`/api/admin/zadaci/izvrsenja/${id}/odbij`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ razlog }),
+    });
     const d = await res.json();
     setLoading(null);
     setPoruke((p) => ({ ...p, [id]: { text: res.ok ? "Odbijeno." : (d.error ?? "Greška."), ok: res.ok } }));
     if (res.ok) setTimeout(onDone, 1000);
   }
 
-  async function zatvoriOglas(id: string) {
-    if (!confirm("Zatvoriti oglas?")) return;
+  async function povuciZadatak(id: string) {
+    if (!confirm("Povući zadatak?")) return;
     setLoading(id);
-    const res = await fetch(`/api/admin/doprinos-oglasi/oglasi/${id}/zatvori`, { method: "POST" });
+    const res = await fetch(`/api/admin/zadaci/${id}/povuci`, { method: "POST" });
     setLoading(null);
     if (res.ok) onDone();
   }
 
   const subTabs: [typeof view, string][] = [
-    ["oglasi", `Oglasi (${data.oglasi.length})`],
-    ["prijave", `Prijave${data.pendingPrijave.length > 0 ? ` (${data.pendingPrijave.length})` : ""}`],
-    ["evidencije", `Evidencije${data.pendingEvidencije.length > 0 ? ` (${data.pendingEvidencije.length})` : ""}`],
-    ["novi", "Novi oglas"],
+    ["zadaci", `Zadaci (${data.zadaci.length})`],
+    ["prijave", `Prijave na čekanju${data.pendingPrijave.length > 0 ? ` (${data.pendingPrijave.length})` : ""}`],
+    ["izvrsenja", `Izvršenja na verifikaciji${data.pendingIzvrsenja.length > 0 ? ` (${data.pendingIzvrsenja.length})` : ""}`],
+    ["novi", "Novi zadatak"],
   ];
 
   return (
     <div className="space-y-4">
       {/* Sub-tabs */}
-      <div className="flex gap-0 border-b border-kolo-border">
+      <div className="flex gap-0 border-b border-kolo-border flex-wrap">
         {subTabs.map(([key, label]) => (
           <button key={key} onClick={() => setView(key)}
             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${view === key ? "border-kolo-green-700 text-kolo-green-700" : "border-transparent text-kolo-muted hover:text-kolo-muted"}`}>
@@ -630,31 +632,32 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
         ))}
       </div>
 
-      {/* Oglasi */}
-      {view === "oglasi" && (
+      {/* Zadaci */}
+      {view === "zadaci" && (
         <div className="space-y-3">
-          {data.oglasi.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema oglasa.</div>
-          ) : data.oglasi.map((o) => (
-            <div key={o.id} className="bg-white rounded-2xl border border-kolo-border p-5">
+          {data.zadaci.length === 0 ? (
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema zadataka.</div>
+          ) : data.zadaci.map((z) => (
+            <div key={z.id} className="bg-white rounded-2xl border border-kolo-border p-5">
               <div className="flex justify-between items-start gap-3">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[o.source]}`}>{sourceLabel[o.source]}</span>
-                    {o.krugName && <span className="text-xs text-kolo-muted">{o.krugName}</span>}
-                    <span className={`text-xs px-2 py-0.5 rounded ${o.status === "ACTIVE" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
-                      {o.status === "ACTIVE" ? "Aktivan" : "Zatvoren"}
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[z.izvor]}`}>{sourceLabel[z.izvor]}</span>
+                    {z.krugName && <span className="text-xs text-kolo-muted">{z.krugName}</span>}
+                    <span className={`text-xs px-2 py-0.5 rounded ${z.status === "OBJAVLJEN" || z.status === "U_IZVRSENJU" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
+                      {z.status}
                     </span>
+                    {z.saOdobravanjem && <span className="text-xs px-2 py-0.5 rounded bg-kolo-gold-100 text-kolo-gold-600">odobravanje plana</span>}
                   </div>
-                  <p className="font-semibold text-kolo-text text-sm">{o.title}</p>
+                  <p className="font-semibold text-kolo-text text-sm">{z.naslov}</p>
                   <p className="text-xs text-kolo-muted mt-1">
-                    {o.hourlyRate.toLocaleString("sr-RS")} POEN/sat · max {o.maxHoursPerDay}h · {o.positions} {o.positions === 1 ? "mesto" : "mesta"} · {o.ukupnoPrijava} prijava · {o.pendingEvidencija} pending ev.
+                    {modLabelZadatak(z)} · procena {z.predlozeniPoen.toLocaleString("sr-RS")} POEN · {z.brojIzvrsilaca} {z.brojIzvrsilaca === 1 ? "izvršilac" : "izvršilaca"} · {z.ukupnoPrijava} prijava · {z.pendingIzvrsenja} izvr. na čekanju
                   </p>
                 </div>
-                {o.status === "ACTIVE" && (
-                  <button onClick={() => zatvoriOglas(o.id)} disabled={loading === o.id}
+                {z.status !== "POVUCEN" && z.status !== "ZAVRSEN" && (
+                  <button onClick={() => povuciZadatak(z.id)} disabled={loading === z.id}
                     className="text-xs px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger rounded-xl hover:bg-kolo-danger-light disabled:opacity-60">
-                    Zatvori
+                    Povuci
                   </button>
                 )}
               </div>
@@ -672,13 +675,13 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
             const poruka = poruke[p.id];
             return (
               <div key={p.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-                <div className="flex justify-between items-start">
-                  <div>
+                <div className="flex justify-between items-start gap-3">
+                  <div className="min-w-0">
                     <p className="font-semibold text-kolo-text text-sm">{p.pseudonim}</p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.hourlyRate.toLocaleString("sr-RS")} P/sat</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{p.zadatakNaslov} · {p.brojIzvrsilaca} {p.brojIzvrsilaca === 1 ? "mesto" : "mesta"}</p>
                     <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 shrink-0">
                     <OdbijForma onOdbij={(r) => odbijPrijavu(p.id, r)} loading={loading === p.id} />
                     <button onClick={() => odobriPrijavu(p.id)} disabled={loading === p.id}
                       className="px-4 py-2 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60">
@@ -686,6 +689,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                     </button>
                   </div>
                 </div>
+                <p className="text-xs text-kolo-muted bg-kolo-bg rounded-lg px-3 py-2 whitespace-pre-wrap">{p.planIzvrsenja}</p>
                 {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
               </div>
             );
@@ -693,33 +697,31 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
         </div>
       )}
 
-      {/* Evidencije */}
-      {view === "evidencije" && (
+      {/* Izvršenja na verifikaciji */}
+      {view === "izvrsenja" && (
         <div className="space-y-3">
-          {data.pendingEvidencije.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema evidencija na čekanju.</div>
-          ) : data.pendingEvidencije.map((e) => {
-            const poruka = poruke[e.id];
+          {data.pendingIzvrsenja.length === 0 ? (
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">Nema izvršenja na verifikaciji.</div>
+          ) : data.pendingIzvrsenja.map((iz) => {
+            const poruka = poruke[iz.id];
             return (
-              <div key={e.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
+              <div key={iz.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
                 <div className="flex justify-between items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-kolo-text text-sm">{e.pseudonim}</p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
-                    <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{e.description}</p>
+                    <p className="font-semibold text-kolo-text text-sm">{iz.pseudonim}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">
+                      {iz.zadatakNaslov} · {new Date(iz.datum).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}
+                      {iz.mod === "PO_SATU" && iz.sati != null && ` · ${iz.sati}h`}
+                      {` · težina ${iz.tezina}`}
+                    </p>
+                    <p className="text-xs text-kolo-muted mt-1 whitespace-pre-wrap">{iz.dokaz}</p>
                   </div>
-                  <div className="shrink-0 text-right">
-                    <p className="text-sm font-bold text-kolo-text">{e.hoursWorked}h · {e.amount.toLocaleString("sr-RS")} P</p>
-                    <div className="flex gap-2 mt-2">
-                      <button onClick={() => odbijEvidenciju(e.id)} disabled={loading === e.id}
-                        className="px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60">
-                        Odbij
-                      </button>
-                      <button onClick={() => odobriEvidenciju(e.id)} disabled={loading === e.id}
-                        className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 disabled:opacity-60">
-                        {loading === e.id ? "..." : "Odobri"}
-                      </button>
-                    </div>
+                  <div className="shrink-0 flex flex-col gap-2 items-end">
+                    <button onClick={() => potvrdiIzvrsenje(iz.id)} disabled={loading === iz.id}
+                      className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 disabled:opacity-60">
+                      {loading === iz.id ? "..." : "Potvrdi"}
+                    </button>
+                    <OdbijForma onOdbij={(r) => odbijIzvrsenje(iz.id, r)} loading={loading === iz.id} />
                   </div>
                 </div>
                 {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
@@ -729,8 +731,8 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
         </div>
       )}
 
-      {/* Novi oglas */}
-      {view === "novi" && <NoviOglasForma onSuccess={() => { onDone(); setView("oglasi"); }} />}
+      {/* Novi zadatak */}
+      {view === "novi" && <NoviZadatakForma onSuccess={() => { onDone(); setView("zadaci"); }} />}
     </div>
   );
 }
@@ -743,45 +745,77 @@ function OdbijForma({ onOdbij, loading }: { onOdbij: (razlog: string) => void; l
   );
   return (
     <div className="flex gap-1 items-center">
-      <input type="text" placeholder="Razlog..." value={razlog} onChange={(e) => setRazlog(e.target.value)}
+      <input type="text" placeholder="Razlog (min 5)..." value={razlog} onChange={(e) => setRazlog(e.target.value)}
         className="px-2 py-1.5 rounded-lg border border-kolo-border text-xs outline-none focus:border-red-400 w-28" />
-      <button onClick={() => { onOdbij(razlog); setShow(false); }} disabled={loading}
+      <button onClick={() => { if (razlog.trim().length >= 5) { onOdbij(razlog.trim()); setShow(false); } }} disabled={loading || razlog.trim().length < 5}
         className="px-2 py-1.5 bg-kolo-danger text-white text-xs font-semibold rounded-lg disabled:opacity-60">✓</button>
       <button onClick={() => setShow(false)} className="px-2 py-1.5 text-kolo-muted text-xs">✕</button>
     </div>
   );
 }
 
-function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [source, setSource] = useState<"FONDACIJA" | "KRUG" | "PROJEKAT">("FONDACIJA");
-  const [hourlyRate, setHourlyRate] = useState("1500");
-  const [maxHoursPerDay, setMaxHoursPerDay] = useState("8");
-  const [positions, setPositions] = useState("1");
-  const [deadline, setDeadline] = useState("");
+function NoviZadatakForma({ onSuccess }: { onSuccess: () => void }) {
+  const [naslov, setNaslov] = useState("");
+  const [opis, setOpis] = useState("");
+  const [cilj, setCilj] = useState("");
+  const [kriterijumi, setKriterijumi] = useState("");
+  const [izvor, setIzvor] = useState<"FONDACIJA" | "KRUG" | "PROJEKAT">("FONDACIJA");
+  const [mod, setMod] = useState<"PO_SATU" | "U_CELOSTI">("PO_SATU");
+  const [stopaPoSatu, setStopaPoSatu] = useState("1500");
+  const [maxSati, setMaxSati] = useState("8");
+  const [iznosUCelosti, setIznosUCelosti] = useState("");
+  const [gornjaGranica, setGornjaGranica] = useState("");
+  const [brojIzvrsilaca, setBrojIzvrsilaca] = useState("1");
+  const [minIndeks, setMinIndeks] = useState("10");
+  const [saOdobravanjem, setSaOdobravanjem] = useState(false);
+  const [kvalFilter, setKvalFilter] = useState("");
+  const [rokPrijave, setRokPrijave] = useState("");
+  const [rokIzvrsenja, setRokIzvrsenja] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    const stopa = Number(hourlyRate);
-    if (stopa < 1000 || stopa > 2500) { setError("Stopa mora biti 1.000–2.500 POEN/sat."); return; }
+    if (mod === "PO_SATU") {
+      const stopa = Number(stopaPoSatu);
+      if (stopa < 1000 || stopa > 2500) { setError("Stopa mora biti 1.000–2.500 POEN/sat."); return; }
+      const max = Number(maxSati);
+      if (max < 1 || max > 8) { setError("Max sati mora biti 1–8."); return; }
+    } else {
+      if (!iznosUCelosti || Number(iznosUCelosti) <= 0) { setError("Iznos u celosti mora biti pozitivan."); return; }
+    }
+    const indeks = Number(minIndeks);
+    if (indeks < 10 || indeks > 100) { setError("Minimalni indeks mora biti 10–100."); return; }
+
+    const body: Record<string, unknown> = {
+      naslov: naslov.trim(),
+      opis: opis.trim(),
+      cilj: cilj.trim(),
+      kriterijumi: kriterijumi.trim(),
+      izvor,
+      mod,
+      brojIzvrsilaca: Number(brojIzvrsilaca),
+      minIndeks: indeks,
+      saOdobravanjem,
+    };
+    if (mod === "PO_SATU") {
+      body.stopaPoSatu = Number(stopaPoSatu);
+      body.maxSati = Number(maxSati);
+    } else {
+      body.iznosUCelosti = Number(iznosUCelosti);
+    }
+    if (gornjaGranica) body.gornjaGranica = Number(gornjaGranica);
+    if (kvalFilter.trim()) body.kvalFilter = kvalFilter.trim();
+    if (rokPrijave) body.rokPrijave = new Date(rokPrijave).toISOString();
+    if (rokIzvrsenja) body.rokIzvrsenja = new Date(rokIzvrsenja).toISOString();
+
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/doprinos-oglasi/oglasi", {
+      const res = await fetch("/api/admin/zadaci", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: title.trim(),
-          description: description.trim(),
-          source,
-          hourlyRate: stopa,
-          maxHoursPerDay: Number(maxHoursPerDay),
-          positions: Number(positions),
-          deadline: deadline || null,
-        }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? "Greška."); return; }
@@ -793,67 +827,125 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
-      <p className="text-sm font-semibold text-kolo-muted">Novi oglas za posao</p>
+      <p className="text-sm font-semibold text-kolo-muted">Novi zadatak za zajedničko dobro</p>
 
       <div>
-        <label className="block text-xs font-semibold text-kolo-muted mb-1">Naziv pozicije *</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="npr. Koordinator dostave"
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Naslov *</label>
+        <input type="text" value={naslov} onChange={(e) => setNaslov(e.target.value)} placeholder="npr. Koordinacija dostave"
           className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       </div>
 
       <div>
         <label className="block text-xs font-semibold text-kolo-muted mb-1">Opis *</label>
-        <textarea rows={3} value={description} onChange={(e) => setDescription(e.target.value)}
-          placeholder="Opis posla, zahtevi, uslovi..."
+        <textarea rows={3} value={opis} onChange={(e) => setOpis(e.target.value)}
+          placeholder="Opis zadatka..."
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
+      </div>
+
+      <div>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Cilj *</label>
+        <textarea rows={2} value={cilj} onChange={(e) => setCilj(e.target.value)}
+          placeholder="Šta se postiže ovim zadatkom..."
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
+      </div>
+
+      <div>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Kriterijumi *</label>
+        <textarea rows={2} value={kriterijumi} onChange={(e) => setKriterijumi(e.target.value)}
+          placeholder="Kriterijumi za potvrdu izvršenja..."
           className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Izvor pozicije</label>
-          <div className="flex gap-1.5 flex-wrap">
-            {(["FONDACIJA", "KRUG", "PROJEKAT"] as const).map((s) => (
-              <button key={s} type="button" onClick={() => setSource(s)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${source === s ? "bg-kolo-green-700 text-white" : "bg-kolo-bg text-kolo-muted"}`}>
-                {sourceLabel[s]}
-              </button>
-            ))}
-          </div>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Izvor</label>
+          <select value={izvor} onChange={(e) => setIzvor(e.target.value as typeof izvor)}
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500">
+            <option value="FONDACIJA">Fondacija</option>
+            <option value="KRUG">Krug</option>
+            <option value="PROJEKAT">Projekat</option>
+          </select>
         </div>
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">POEN/sat (1.000–2.500)</label>
-          <input type="number" min={1000} max={2500} step={100} value={hourlyRate} onChange={(e) => setHourlyRate(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Način obračuna</label>
+          <select value={mod} onChange={(e) => setMod(e.target.value as typeof mod)}
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500">
+            <option value="PO_SATU">Po satu</option>
+            <option value="U_CELOSTI">U celosti</option>
+          </select>
         </div>
       </div>
+
+      {mod === "PO_SATU" ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">POEN/sat (1.000–2.500)</label>
+            <input type="number" min={1000} max={2500} step={100} value={stopaPoSatu} onChange={(e) => setStopaPoSatu(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">Max sati (1–8)</label>
+            <input type="number" min={1} max={8} value={maxSati} onChange={(e) => setMaxSati(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Iznos u celosti (POEN) *</label>
+          <input type="number" min={1} value={iznosUCelosti} onChange={(e) => setIznosUCelosti(e.target.value)}
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+        </div>
+      )}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Max h/dan</label>
-          <input type="number" min={1} max={8} value={maxHoursPerDay} onChange={(e) => setMaxHoursPerDay(e.target.value)}
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Br. izvršilaca</label>
+          <input type="number" min={1} value={brojIzvrsilaca} onChange={(e) => setBrojIzvrsilaca(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Br. mesta</label>
-          <input type="number" min={1} value={positions} onChange={(e) => setPositions(e.target.value)}
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Min. indeks (10–100)</label>
+          <input type="number" min={10} max={100} value={minIndeks} onChange={(e) => setMinIndeks(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rok (opciono)</label>
-          <input type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)}
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Gornja granica (opc.)</label>
+          <input type="number" min={1} value={gornjaGranica} onChange={(e) => setGornjaGranica(e.target.value)}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
       </div>
+
+      <div>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">Kvalifikacioni filter (opciono)</label>
+        <input type="text" value={kvalFilter} onChange={(e) => setKvalFilter(e.target.value)}
+          placeholder="npr. potrebne veštine..."
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rok prijave (opc.)</label>
+          <input type="datetime-local" value={rokPrijave} onChange={(e) => setRokPrijave(e.target.value)}
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rok izvršenja (opc.)</label>
+          <input type="datetime-local" value={rokIzvrsenja} onChange={(e) => setRokIzvrsenja(e.target.value)}
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+        </div>
+      </div>
+
+      <label className="flex items-center gap-2.5 cursor-pointer">
+        <input type="checkbox" checked={saOdobravanjem} onChange={(e) => setSaOdobravanjem(e.target.checked)}
+          className="accent-kolo-green-700 w-4 h-4 shrink-0" />
+        <span className="text-xs text-kolo-muted">Zahtevaj odobravanje plana izvršenja pre rada</span>
+      </label>
 
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
-      <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2 text-xs text-kolo-gold-600">
-        Zaposleni dobijaju {Number(hourlyRate).toLocaleString("sr-RS")} POEN/sat · do {(Number(maxHoursPerDay) * Number(hourlyRate)).toLocaleString("sr-RS")} POEN/dan
-      </div>
-
-      <button type="submit" disabled={loading || !title.trim() || !description.trim()}
+      <button type="submit" disabled={loading || !naslov.trim() || !opis.trim() || !cilj.trim() || !kriterijumi.trim()}
         className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
-        {loading ? "Kreiranje..." : "Kreiraj oglas"}
+        {loading ? "Kreiranje..." : "Kreiraj zadatak"}
       </button>
     </form>
   );
@@ -926,17 +1018,6 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
     if (res.ok) onDone();
   }
 
-  async function odobriEvidenciju(id: string) {
-    const res = await fetch(`/api/admin/programi/ped/${id}/odobri`, { method: "POST" });
-    if (res.ok) onDone();
-    else { const d = await res.json(); alert(d.error); }
-  }
-
-  async function odbijEvidenciju(id: string) {
-    const res = await fetch(`/api/admin/programi/ped/${id}/odbij`, { method: "POST" });
-    if (res.ok) onDone();
-  }
-
   return (
     <div className="space-y-6">
       {/* ZRNO tržište */}
@@ -997,36 +1078,7 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
         </div>
       )}
 
-      {/* Pending evidencije — Evidencija doprinosa */}
-      {data.pendingEvidencije.length > 0 && (
-        <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-kolo-muted">Evidencije — Evidencija doprinosa ({data.pendingEvidencije.length})</h3>
-          {data.pendingEvidencije.map((e) => (
-            <div key={e.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-sm font-semibold text-kolo-text">{e.pseudonim}</p>
-                  <p className="text-xs text-kolo-muted">{new Date(e.date).toLocaleDateString("sr-RS")}</p>
-                </div>
-                <span className="text-sm font-bold text-kolo-green-700">{e.amount.toLocaleString("sr-RS")} P</span>
-              </div>
-              <p className="text-sm text-kolo-muted">{e.description}</p>
-              <div className="flex gap-2">
-                <button onClick={() => odobriEvidenciju(e.id)}
-                  className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">
-                  Odobri
-                </button>
-                <button onClick={() => odbijEvidenciju(e.id)}
-                  className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors">
-                  Odbij
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {data.pendingEnrollments.length === 0 && data.pendingEvidencije.length === 0 && (
+      {data.pendingEnrollments.length === 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           Nema zahteva koji čekaju pregled.
         </div>

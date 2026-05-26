@@ -5,8 +5,9 @@ import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 
+// PED (operativni doprinos) ide kroz /zadaci, ne kroz enrollment.
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
-  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 // POST /api/programi/[type]/prijava — prijava na program

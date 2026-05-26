@@ -184,10 +184,10 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
               </svg>
             </button>
             <button
-              onClick={() => { setOpen(false); router.push("/doprinos-oglasi"); }}
+              onClick={() => { setOpen(false); router.push("/zadaci"); }}
               className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
             >
-              {t("moji_poslovi")}
+              Operativni doprinos
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
               </svg>

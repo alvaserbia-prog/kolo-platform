@@ -8,10 +8,10 @@ import {
   VerificationStatus,
   ProgramType,
   EnrollmentStatus,
-  EvidencijaStatus,
-  OglasSource,
-  OglasStatus,
-  OglasPrijavaStatus,
+  ZadatakIzvor,
+  ZadatakMod,
+  PrijavaStatus,
+  IzvrsenjeStatus,
   PokroviteljDoprinosTip,
   DonationStatus,
   PristupnicaStatus,
@@ -578,125 +578,151 @@ async function seedProgrami() {
 async function seedDoprinosOglasi() {
   const admin = await prisma.user.findUniqueOrThrow({ where: { email: "admin@ekolo.rs" } });
 
-  const oglasi = [
+  // Operativni doprinos — zadaci za zajedničko dobro (Pravilnik o operativnom doprinosu v3.7.0)
+  const zadaci = [
     {
-      title: "Pomoć pri sređivanju javne bašte",
-      description: "Tražimo volontere za uređenje gradskog parka — kopanje, sadnja, krečenje klupa. Termin: vikend, po dogovoru.",
-      hourlyRate: 1500,
-      maxHoursPerDay: 6,
-      positions: 5,
-      source: OglasSource.FONDACIJA,
+      naslov: "Pomoć pri sređivanju javne bašte",
+      opis: "Tražimo volontere za uređenje gradskog parka — kopanje, sadnja, krečenje klupa. Termin: vikend, po dogovoru.",
+      cilj: "Uređeniji javni prostor za sve sugrađane.",
+      kriterijumi: "Park očišćen, klupe okrečene, posađeno najmanje 10 sadnica.",
+      mod: ZadatakMod.PO_SATU,
+      stopaPoSatu: 1500,
+      maxSati: 6,
+      brojIzvrsilaca: 5,
+      saOdobravanjem: false,
     },
     {
-      title: "Prevodi materijala (srpski–engleski)",
-      description: "Prevod tekstova o sistemu KOLO za internacionalnu publiku. Iskustvo poželjno, ali nije obavezno.",
-      hourlyRate: 2200,
-      maxHoursPerDay: 4,
-      positions: 2,
-      source: OglasSource.FONDACIJA,
+      naslov: "Prevodi materijala (srpski–engleski)",
+      opis: "Prevod tekstova o sistemu KOLO za internacionalnu publiku. Iskustvo poželjno, ali nije obavezno.",
+      cilj: "Materijali dostupni i na engleskom jeziku.",
+      kriterijumi: "Preveden i lektorisan kompletan dokument.",
+      mod: ZadatakMod.U_CELOSTI,
+      iznosUCelosti: 12000,
+      brojIzvrsilaca: 2,
+      saOdobravanjem: true,
     },
     {
-      title: "Foto reportaža sa lokalnih dešavanja",
-      description: "Fotografisanje radionica i susreta članova zajednice. Potrebna sopstvena oprema.",
-      hourlyRate: 2000,
-      maxHoursPerDay: 5,
-      positions: 1,
-      source: OglasSource.FONDACIJA,
+      naslov: "Foto reportaža sa lokalnih dešavanja",
+      opis: "Fotografisanje radionica i susreta članova zajednice. Potrebna sopstvena oprema.",
+      cilj: "Vizuelna dokumentacija aktivnosti zajednice.",
+      kriterijumi: "Najmanje 30 obrađenih fotografija isporučeno.",
+      mod: ZadatakMod.U_CELOSTI,
+      iznosUCelosti: 10000,
+      brojIzvrsilaca: 1,
+      saOdobravanjem: false,
     },
     {
-      title: "Pomoć starijim sugrađanima — kupovina i obilasci",
-      description: "Pomažemo starijim sugrađanima oko nabavki, plaćanja računa, lekova. Potrebna empatija i strpljenje.",
-      hourlyRate: 1300,
-      maxHoursPerDay: 4,
-      positions: 8,
-      source: OglasSource.FONDACIJA,
+      naslov: "Pomoć starijim sugrađanima — kupovina i obilasci",
+      opis: "Pomažemo starijim sugrađanima oko nabavki, plaćanja računa, lekova. Potrebna empatija i strpljenje.",
+      cilj: "Podrška starijima u svakodnevnim potrebama.",
+      kriterijumi: "Obavljen dogovoreni obilazak uz potvrdu korisnika.",
+      mod: ZadatakMod.PO_SATU,
+      stopaPoSatu: 1300,
+      maxSati: 4,
+      brojIzvrsilaca: 8,
+      saOdobravanjem: false,
     },
   ];
 
-  for (const o of oglasi) {
-    const postoji = await prisma.doprinosOglas.findFirst({ where: { title: o.title } });
+  for (const z of zadaci) {
+    const postoji = await prisma.zadatak.findFirst({ where: { naslov: z.naslov } });
     if (!postoji) {
-      await prisma.doprinosOglas.create({
+      const predlozeniPoen =
+        z.mod === ZadatakMod.PO_SATU
+          ? (z.maxSati ?? 8) * (z.stopaPoSatu ?? 0)
+          : (z.iznosUCelosti ?? 0);
+      await prisma.zadatak.create({
         data: {
-          title: o.title,
-          description: o.description,
-          source: o.source,
-          hourlyRate: o.hourlyRate,
-          maxHoursPerDay: o.maxHoursPerDay,
-          positions: o.positions,
-          status: OglasStatus.ACTIVE,
+          naslov: z.naslov,
+          opis: z.opis,
+          cilj: z.cilj,
+          kriterijumi: z.kriterijumi,
+          izvor: ZadatakIzvor.FONDACIJA,
+          mod: z.mod,
+          stopaPoSatu: z.stopaPoSatu ?? null,
+          maxSati: z.maxSati ?? null,
+          iznosUCelosti: z.iznosUCelosti ?? null,
+          predlozeniPoen,
+          brojIzvrsilaca: z.brojIzvrsilaca,
+          saOdobravanjem: z.saOdobravanjem,
           createdById: admin.id,
         },
       });
     }
   }
 
-  // Par prijava — odobrene i na čekanju
-  const oglas1 = await prisma.doprinosOglas.findFirst({ where: { title: oglasi[0].title } });
-  const oglas2 = await prisma.doprinosOglas.findFirst({ where: { title: oglasi[1].title } });
+  // Par prijava i izvršenja — primljena (auto) i podneta (sa odobravanjem)
+  const zadatak1 = await prisma.zadatak.findFirst({ where: { naslov: zadaci[0].naslov } });
+  const zadatak2 = await prisma.zadatak.findFirst({ where: { naslov: zadaci[1].naslov } });
 
-  if (oglas1) {
+  if (zadatak1) {
     const lukaP = await getKorisnikPoPseudonimu("Luka_S");
     const danicaP = await getKorisnikPoPseudonimu("Danica_P");
 
-    const lukaPrijava = await prisma.oglasPrijava.upsert({
-      where: { oglasId_userId: { oglasId: oglas1.id, userId: lukaP.id } },
+    const lukaPrijava = await prisma.zadatakPrijava.upsert({
+      where: { zadatakId_userId: { zadatakId: zadatak1.id, userId: lukaP.id } },
       update: {},
       create: {
-        oglasId: oglas1.id,
+        zadatakId: zadatak1.id,
         userId: lukaP.id,
-        status: OglasPrijavaStatus.APPROVED,
-        approvedById: admin.id,
-        approvedAt: daniPre(8),
+        planIzvrsenja: "Radim subotom ujutru, dokaz: fotografije pre/posle radova.",
+        status: PrijavaStatus.PRIMLJENA,
+        primljenaAt: daniPre(8),
       },
     });
 
-    await prisma.oglasPrijava.upsert({
-      where: { oglasId_userId: { oglasId: oglas1.id, userId: danicaP.id } },
+    await prisma.zadatakPrijava.upsert({
+      where: { zadatakId_userId: { zadatakId: zadatak1.id, userId: danicaP.id } },
       update: {},
       create: {
-        oglasId: oglas1.id,
+        zadatakId: zadatak1.id,
         userId: danicaP.id,
-        status: OglasPrijavaStatus.PENDING,
+        planIzvrsenja: "Pomažem oko sadnje sredinom nedelje, dostavljam izveštaj.",
+        status: PrijavaStatus.PRIMLJENA,
+        primljenaAt: daniPre(7),
       },
     });
 
-    // Evidencije za Luku — jedna odobrena (emitovana), jedna pending
+    await prisma.zadatak.update({ where: { id: zadatak1.id }, data: { status: "U_IZVRSENJU" } });
+
+    // Izvršenje za Luku — jedno podneto na verifikaciju (PO_SATU, 4 sata)
     const datum1 = daniPre(5);
     datum1.setHours(0, 0, 0, 0);
-    const ev1Postoji = await prisma.oglasEvidencija.findUnique({
-      where: { userId_oglasId_date: { userId: lukaP.id, oglasId: oglas1.id, date: datum1 } },
+    const izPostoji = await prisma.zadatakIzvrsenje.findUnique({
+      where: { prijavaId_datum: { prijavaId: lukaPrijava.id, datum: datum1 } },
     });
-    if (!ev1Postoji) {
-      await prisma.oglasEvidencija.create({
+    if (!izPostoji) {
+      await prisma.zadatakIzvrsenje.create({
         data: {
-          userId: lukaP.id,
-          oglasId: oglas1.id,
           prijavaId: lukaPrijava.id,
-          date: datum1,
-          hoursWorked: 4,
-          amount: 4 * oglas1.hourlyRate,
-          description: "Sadnja drveća na istoku parka i krečenje klupa.",
-          status: EvidencijaStatus.PENDING,
+          zadatakId: zadatak1.id,
+          userId: lukaP.id,
+          datum: datum1,
+          sati: 4,
+          dokaz: "Sadnja drveća na istoku parka i krečenje klupa — fotografije priložene.",
+          tezina: 4 * (zadatak1.stopaPoSatu ?? 0),
+          zavrsno: true,
+          status: IzvrsenjeStatus.PODNETO,
         },
       });
     }
   }
 
-  if (oglas2) {
+  if (zadatak2) {
     const ivanaG = await getKorisnikPoPseudonimu("Ivana_G");
-    await prisma.oglasPrijava.upsert({
-      where: { oglasId_userId: { oglasId: oglas2.id, userId: ivanaG.id } },
+    await prisma.zadatakPrijava.upsert({
+      where: { zadatakId_userId: { zadatakId: zadatak2.id, userId: ivanaG.id } },
       update: {},
       create: {
-        oglasId: oglas2.id,
+        zadatakId: zadatak2.id,
         userId: ivanaG.id,
-        status: OglasPrijavaStatus.PENDING,
+        planIzvrsenja: "Prevod u dve faze, prvo nacrt pa lektura; dokaz: dokument sa izmenama.",
+        status: PrijavaStatus.PODNETA,
       },
     });
   }
 
-  console.log(`✓ Doprinos-oglasi: ${oglasi.length} aktivnih oglasa, par prijava i evidencija`);
+  console.log(`✓ Operativni doprinos: ${zadaci.length} zadataka, par prijava i izvršenja`);
 }
 
 async function seedPokrovitelji() {

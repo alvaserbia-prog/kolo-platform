@@ -58,8 +58,23 @@ export function izracunajDnevniIznos(
     case "PODRSKA_STARIJIMA": return izracunajStariji(metadata, danas);
     case "POSEBNA_BRIGA":     return 2000;
     case "SKOLOVANJE":        return dailyAmount ?? 0;
-    case "PED":      return 600;
+    case "PED":               return 0; // operativni doprinos ide kroz ZadatakIzvrsenje (čl. 24)
   }
+}
+
+// ── Raspodela (čiste funkcije) ──────────────────────────────────────────────
+
+/**
+ * Koeficijent raspodele dnevnog limita (čl. 24).
+ * Ako tražnja prelazi limit, sve evidencije se srežu proporcionalno.
+ */
+export function koeficijentRaspodele(totalRequested: number, limit: number): number {
+  return totalRequested > limit && limit > 0 ? limit / totalRequested : 1.0;
+}
+
+/** Evidentirani iznos pojedinačne stavke nakon primene koeficijenta. */
+export function evidentiraniIznos(amount: number, koeficijent: number): number {
+  return Math.floor(amount * koeficijent);
 }
 
 // ── Nocna emisija ─────────────────────────────────────────────────────────────
@@ -68,7 +83,7 @@ type EmisijaItem = {
   walletId: string;
   amount: number;
   type: ProgramType;
-  evidencijaId?: string;
+  izvrsenjeId?: string;
 };
 
 export async function izvrsiNocnuEmisiju(datum: Date) {
@@ -105,15 +120,16 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     }
   }
 
-  // 4. Evidencija doprinosa — odobrene evidencije za danas
+  // 4. Operativni doprinos — potvrđena izvršenja zadataka za danas (čl. 18/24)
   if (aktivniTipovi.has("PED")) {
-    const evidencije = await prisma.doprinosEvidencija.findMany({
-      where: { date: danas, status: "APPROVED" },
+    const izvrsenja = await prisma.zadatakIzvrsenje.findMany({
+      where: { datum: danas, status: "POTVRDJENO" },
       include: { user: { include: { wallet: true } } },
     });
-    for (const ev of evidencije) {
-      if (!ev.user.wallet) continue;
-      items.push({ walletId: ev.user.wallet.id, amount: ev.amount, type: "PED", evidencijaId: ev.id });
+    for (const iz of izvrsenja) {
+      if (!iz.user.wallet) continue;
+      if (iz.tezina <= 0) continue;
+      items.push({ walletId: iz.user.wallet.id, amount: iz.tezina, type: "PED", izvrsenjeId: iz.id });
     }
   }
 
@@ -127,16 +143,16 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     return { opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {} };
   }
 
-  // 5. Proporcionalno smanjenje (Čl. 50)
+  // 5. Proporcionalno smanjenje (čl. 24 — zajednički dnevni limit)
   const totalRequested = items.reduce((s, i) => s + i.amount, 0);
-  const koeficijent = totalRequested > limit && limit > 0 ? limit / totalRequested : 1.0;
+  const koeficijent = koeficijentRaspodele(totalRequested, limit);
 
   // 6. Emisije
   const breakdown: Record<string, { count: number; requested: number; emitted: number }> = {};
   let totalEmitted = 0;
 
   for (const item of items) {
-    const emitAmount = Math.floor(item.amount * koeficijent);
+    const emitAmount = evidentiraniIznos(item.amount, koeficijent);
     if (emitAmount <= 0) continue;
 
     await emitujPoen(
@@ -146,10 +162,10 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
       `Program ${labelPrograma(item.type)}`
     );
 
-    if (item.evidencijaId) {
-      await prisma.doprinosEvidencija.update({
-        where: { id: item.evidencijaId },
-        data: { status: "EMITTED" },
+    if (item.izvrsenjeId) {
+      await prisma.zadatakIzvrsenje.update({
+        where: { id: item.izvrsenjeId },
+        data: { status: "EVIDENTIRANO", evidentiraniPoen: emitAmount },
       });
     }
 

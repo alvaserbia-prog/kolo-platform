@@ -108,13 +108,6 @@ enum EnrollmentStatus {
   REJECTED
 }
 
-enum EvidencijaStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  EMITTED
-}
-
 enum UserStatus {
   ACTIVE
   SUSPENDED
@@ -131,22 +124,38 @@ enum PokroviteljDoprinosTip {
   DONACIJA_FONDACIJI
 }
 
-enum OglasStatus {
-  ACTIVE
-  CLOSED
-  CANCELLED
+enum ZadatakStatus {
+  OTVOREN
+  U_IZVRSENJU
+  IZVRSEN
+  NEIZVRSEN
+  POVUCEN
 }
 
-enum OglasSource {
+enum ZadatakMod {
+  PO_SATU
+  U_CELOSTI
+}
+
+enum ZadatakIzvor {
   FONDACIJA
   KRUG
   PROJEKAT
 }
 
-enum OglasPrijavaStatus {
-  PENDING
-  APPROVED
-  REJECTED
+enum PrijavaStatus {
+  PODNETA
+  PRIMLJENA
+  ODBIJENA
+  ODUSTAO
+}
+
+enum IzvrsenjeStatus {
+  PODNETO
+  POTVRDJENO
+  USLOVNO
+  ODBIJENO
+  EVIDENTIRANO
 }
 
 // ─── Modeli ───────────────────────────────────────────────────────────────────
@@ -192,9 +201,9 @@ model User {
   vlasnikPokrovitelja    Pokrovitelj[]              @relation("VlasnikP")
   evidentiraniDoprinosi  PokroviteljDoprinos[]      @relation("EvidentiraoDoprinos")
   pokroviteljBonusi      PokroviteljBonusEmisija[]  @relation("PrimalacBonusa")
-  kreiraniOglasi         DoprinosOglas[]            @relation("KreiraniOglasi")
-  oglasPrijave           OglasPrijava[]             @relation("OglasPrijave")
-  oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
+  kreiraniZadaci         Zadatak[]                  @relation("ZadaciKreirani")
+  zadatakPrijave         ZadatakPrijava[]           @relation("ZadatakPrijave")
+  zadatakIzvrsenja       ZadatakIzvrsenje[]         @relation("ZadatakIzvrsenja")
   verificationRequest    VerificationRequest?
   listings               MarketplaceListing[]       @relation("SellerListings")
   purchases              MarketplaceListing[]       @relation("BuyerListings")
@@ -202,7 +211,6 @@ model User {
   pristupnice            KrugPristupnica[]
   osnivanjeZahtevi       KrugOsnivanjeZahtev[] @relation("Inicijator")
   programEnrollments     ProgramEnrollment[]
-  doprinosEvidencije     DoprinosEvidencija[]
   zrnoStanje             ZrnoStanje?
   zrnoUpisZahtevi        ZrnoUpisZahtev[]
   zrnoOtpisZahtevi       ZrnoOtpisZahtev[]
@@ -325,7 +333,7 @@ model Krug {
   pristupnice    KrugPristupnica[]
   projects       KrugProjekat[]
   bonusLogs      KrugBonusLog[]
-  doprinosOglasi DoprinosOglas[] @relation("KrugOglasi")
+  zadaci         Zadatak[]       @relation("KrugZadaci")
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 }
@@ -432,30 +440,11 @@ model ProgramEnrollment {
   approvedAt         DateTime?
   rejectionReason    String?
   nextReverifikacija DateTime?
-  evidencije         DoprinosEvidencija[]
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
 
   @@unique([userId, type])
   @@index([status, type])
-}
-
-model DoprinosEvidencija {
-  id           String            @id @default(uuid())
-  userId       String
-  user         User              @relation(fields: [userId], references: [id])
-  enrollmentId String
-  enrollment   ProgramEnrollment @relation(fields: [enrollmentId], references: [id])
-  date         DateTime          @db.Date
-  description  String
-  amount       Int
-  status       EvidencijaStatus  @default(PENDING)
-  approvedById String?
-  approvedAt   DateTime?
-  createdAt    DateTime          @default(now())
-
-  @@unique([userId, date])
-  @@index([date, status])
 }
 
 model DailyEmissionSummary {
@@ -470,66 +459,88 @@ model DailyEmissionSummary {
   createdAt      DateTime @default(now())
 }
 
-// ─── Program Doprinosa Zajedničkom Dobru — Oglasi ─────────────────────────────
+// ─── Operativni doprinos — Zadaci za zajedničko dobro (Pravilnik o operativnom doprinosu v3.7.0) ───
 
-model DoprinosOglas {
+model Zadatak {
   id             String        @id @default(uuid())
-  title          String
-  description    String
-  source         OglasSource
-  hourlyRate     Int           // POEN/sat, raspon 1000-2500
-  maxHoursPerDay Int           @default(8)
-  positions      Int           @default(1)
-  deadline       DateTime?
-  status         OglasStatus   @default(ACTIVE)
+  naslov         String
+  opis           String
+  cilj           String        // doprinos zajedničkom dobru (čl. 5)
+  kriterijumi    String        // kriterijumi izvršenja (čl. 5)
+  izvor          ZadatakIzvor  @default(FONDACIJA)
+
+  mod            ZadatakMod                    // PO_SATU | U_CELOSTI
+  stopaPoSatu    Int?          // PO_SATU: 1000–2500 POEN/sat
+  maxSati        Int?          // PO_SATU: gornji limit sati za izvršenje
+  iznosUCelosti  Int?          // U_CELOSTI: fiksni predloženi POEN
+  gornjaGranica  Int?          // čl. 26 — gornja granica predloženog POEN po zadatku
+  predlozeniPoen Int           // procena ukupnog predloženog POEN (čl. 5/6), za prikaz
+
+  brojIzvrsilaca Int           @default(1)
+  minIndeks      Int           @default(10)    // čl. 9 — minimalni indeks stvarnosti
+  saOdobravanjem Boolean       @default(false) // čl. 14
+  kvalFilter     String?       // opcioni kvalifikacioni filter (čl. 9 st. 3)
+
+  rokPrijave     DateTime?
+  rokIzvrsenja   DateTime?
+  status         ZadatakStatus @default(OTVOREN)
+
   createdById    String
-  createdBy      User          @relation("KreiraniOglasi", fields: [createdById], references: [id])
-  krugId    String?
-  krug      Krug?    @relation("KrugOglasi", fields: [krugId], references: [id])
-  prijave        OglasPrijava[]
-  evidencije     OglasEvidencija[]
+  createdBy      User          @relation("ZadaciKreirani", fields: [createdById], references: [id])
+  krugId         String?
+  krug           Krug?         @relation("KrugZadaci", fields: [krugId], references: [id])
+
+  prijave        ZadatakPrijava[]
+  izvrsenja      ZadatakIzvrsenje[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
   @@index([status, createdAt(sort: Desc)])
 }
 
-model OglasPrijava {
-  id              String             @id @default(uuid())
-  oglasId         String
-  oglas           DoprinosOglas      @relation(fields: [oglasId], references: [id])
-  userId          String
-  user            User               @relation("OglasPrijave", fields: [userId], references: [id])
-  status          OglasPrijavaStatus @default(PENDING)
-  approvedById    String?
-  approvedAt      DateTime?
-  rejectionReason String?
-  evidencije      OglasEvidencija[]
-  createdAt       DateTime           @default(now())
+model ZadatakPrijava {
+  id             String         @id @default(uuid())
+  zadatakId      String
+  zadatak        Zadatak        @relation(fields: [zadatakId], references: [id])
+  userId         String
+  user           User           @relation("ZadatakPrijave", fields: [userId], references: [id])
 
-  @@unique([oglasId, userId])
-  @@index([status, oglasId])
+  planIzvrsenja  String         // opis načina + način dokazivanja (čl. 11)
+  status         PrijavaStatus  @default(PRIMLJENA) // PODNETA ako zadatak ima saOdobravanjem
+  verifikatorId  String?        // ko je odobrio plan (čl. 14)
+  primljenaAt    DateTime?
+  odbijenaRazlog String?
+
+  izvrsenja      ZadatakIzvrsenje[]
+  createdAt      DateTime       @default(now())
+
+  @@unique([zadatakId, userId])
+  @@index([status, zadatakId])
 }
 
-model OglasEvidencija {
-  id           String             @id @default(uuid())
-  userId       String
-  user         User               @relation("OglasEvidencije", fields: [userId], references: [id])
-  oglasId      String
-  oglas        DoprinosOglas      @relation(fields: [oglasId], references: [id])
-  prijavaId    String
-  prijava      OglasPrijava       @relation(fields: [prijavaId], references: [id])
-  date         DateTime           @db.Date
-  hoursWorked  Int
-  amount       Int                // hoursWorked × oglas.hourlyRate
-  description  String
-  status       EvidencijaStatus   @default(PENDING)
-  approvedById String?
-  approvedAt   DateTime?
-  createdAt    DateTime           @default(now())
+model ZadatakIzvrsenje {
+  id               String          @id @default(uuid())
+  prijavaId        String
+  prijava          ZadatakPrijava  @relation(fields: [prijavaId], references: [id])
+  zadatakId        String
+  zadatak          Zadatak         @relation(fields: [zadatakId], references: [id])
+  userId           String
+  user             User            @relation("ZadatakIzvrsenja", fields: [userId], references: [id])
 
-  @@unique([userId, oglasId, date])
-  @@index([date, status])
+  datum            DateTime        @db.Date
+  sati             Int?            // PO_SATU
+  dokaz            String          // foto/izveštaj/link (čl. 11/18)
+  tezina           Int             // sati×stopaPoSatu ILI iznosUCelosti — težina u raspodeli
+  zavrsno          Boolean         @default(true)  // za sad svako izvršenje je završno (jednodnevni)
+  status           IzvrsenjeStatus @default(PODNETO)
+  verifikatorId    String?
+  potvrdjenaAt     DateTime?
+  obrazlozenje     String?         // za USLOVNO/ODBIJENO
+  evidentiraniPoen Int?            // popunjava noćna raspodela
+  createdAt        DateTime        @default(now())
+
+  @@unique([prijavaId, datum])
+  @@index([datum, status])
 }
 
 // ─── ZRNO sistem ─────────────────────────────────────────────────────────────
