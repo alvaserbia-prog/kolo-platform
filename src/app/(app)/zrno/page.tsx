@@ -21,7 +21,7 @@ export default async function ZrnoPage() {
     prisma.zrnoStatusZahtev.findMany({ where: { userId: session.user.id, status: "PENDING" } }),
     prisma.zrnoDelegacija.findUnique({
       where: { delegatorId: session.user.id },
-      include: { delegat: { select: { pseudonim: true } } },
+      include: { delegat: { select: { pseudonim: true } }, zakazaniDelegat: { select: { pseudonim: true } } },
     }),
     prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
     poslednjiKurs(),
@@ -58,7 +58,12 @@ export default async function ZrnoPage() {
       upisZahtev={upisZahtev ? { poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null}
       otpisZahtev={otpisZahtev ? { kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null}
       statusZahtevi={statusZahtevi.map((z) => ({ kolicina: z.kolicina, akcija: z.akcija }))}
-      delegacija={delegacija ? { delegatPseudonim: delegacija.delegat.pseudonim, aktivna: delegacija.aktivna } : null}
+      delegacija={delegacija ? {
+        aktivna: delegacija.delegatId != null,
+        delegatPseudonim: delegacija.delegat?.pseudonim ?? null,
+        imaZakazano: delegacija.imaZakazano,
+        zakazaniPseudonim: delegacija.zakazaniDelegat?.pseudonim ?? null,
+      } : null}
       poslednjiKursovi={poslednjiKursovi.map((r) => ({ date: r.date.toISOString(), kurs: Number(r.kurs) }))}
       predlozi={predlozi.map((p) => ({
         id: p.id,

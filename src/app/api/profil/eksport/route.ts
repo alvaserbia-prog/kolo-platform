@@ -94,7 +94,7 @@ export async function GET() {
     }),
     prisma.zrnoDelegacija.findFirst({
       where: { delegatorId: userId },
-      select: { delegatId: true, aktivna: true, createdAt: true },
+      select: { delegatId: true, zakazaniDelegatId: true, imaZakazano: true, createdAt: true },
     }),
     prisma.glasanjeGlas.findMany({
       where: { userId },
