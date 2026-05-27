@@ -130,24 +130,24 @@ export default async function Home() {
           <div className="grid md:grid-cols-[1fr_360px] gap-10 items-center">
             <div className="max-w-lg">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
-                Probudimo zajednicu
+                Udružimo snage u svom kraju
               </h1>
               <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-7">
-                kroz razmenu rada, dobara i znanja<br />po našim pravilima.
+                kroz razmenu rada, dobara i znanja — bez posrednika.<br />Svaki doprinos se beleži. I tvoj.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/kako-funkcionise"
                   className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
-                  Kako funkcioniše →
+                  Kako to radi →
                 </Link>
                 <Link href="/registracija"
                   className="px-6 py-3 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm">
-                  Priključi se
+                  Otvori nalog besplatno
                 </Link>
               </div>
               <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 border border-white/30 rounded-full text-xs font-medium text-white/80">
                 <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-400" />
-                Besplatna registracija
+                Bez obaveza
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
