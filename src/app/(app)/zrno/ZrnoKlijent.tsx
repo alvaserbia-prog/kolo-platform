@@ -29,7 +29,12 @@ interface Props {
   upisZahtev: { poenIznos: number; status: string } | null;
   otpisZahtev: { kolicina: number; status: string } | null;
   statusZahtevi: { kolicina: number; akcija: string }[];
-  delegacija: { delegatPseudonim: string; aktivna: boolean } | null;
+  delegacija: {
+    aktivna: boolean;
+    delegatPseudonim: string | null;
+    imaZakazano: boolean;
+    zakazaniPseudonim: string | null;
+  } | null;
   poslednjiKursovi: { date: string; kurs: number }[];
   predlozi: Predlog[];
 }
@@ -343,8 +348,18 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
         {delegacija && (
           <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-xl px-4 py-3 text-sm flex justify-between items-center">
             <div>
-              <p className="font-medium text-kolo-gold-600">{t("delegat_label")} {delegacija.delegatPseudonim}</p>
-              <p className="text-xs text-kolo-gold-600 mt-0.5">{delegacija.aktivna ? t("aktivna") : t("cekanje_ponoc")}</p>
+              {delegacija.aktivna && (
+                <p className="font-medium text-kolo-gold-600">{t("delegat_label")} {delegacija.delegatPseudonim}</p>
+              )}
+              {delegacija.imaZakazano ? (
+                <p className="text-xs text-kolo-gold-600 mt-0.5">
+                  {delegacija.zakazaniPseudonim
+                    ? `Zakazano: → ${delegacija.zakazaniPseudonim} — stupa na snagu u ponoć`
+                    : "Zakazan opoziv — stupa na snagu u ponoć"}
+                </p>
+              ) : (
+                delegacija.aktivna && <p className="text-xs text-kolo-gold-600 mt-0.5">{t("aktivna")}</p>
+              )}
             </div>
             <button onClick={opozovi} disabled={loading}
               className="px-3 py-1.5 text-xs text-kolo-danger border border-kolo-danger/20 rounded-xl hover:bg-kolo-danger-light transition-colors">

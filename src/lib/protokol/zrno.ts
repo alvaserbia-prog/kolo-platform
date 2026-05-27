@@ -198,11 +198,19 @@ export async function izvrsiZrnoOperacije(datum: Date) {
     }
   }
 
-  // 5. Aktiviraj pending delegacije
-  await prisma.zrnoDelegacija.updateMany({
-    where: { aktivna: false },
-    data: { aktivna: true },
-  });
+  // 5. Primeni zakazane promene delegiranja (delegacija i opoziv stupaju na snagu u ponoć)
+  const zakazane = await prisma.zrnoDelegacija.findMany({ where: { imaZakazano: true } });
+  for (const d of zakazane) {
+    if (!d.zakazaniDelegatId) {
+      // Zakazan opoziv → ukloni delegaciju
+      await prisma.zrnoDelegacija.delete({ where: { id: d.id } });
+    } else {
+      await prisma.zrnoDelegacija.update({
+        where: { id: d.id },
+        data: { delegatId: d.zakazaniDelegatId, zakazaniDelegatId: null, imaZakazano: false },
+      });
+    }
+  }
 
   return { kurs, zrnaUProtokolu, obradjenihUpisa: upisi.length, obradjenihOtpisa: otpisi.length };
 }
@@ -221,19 +229,72 @@ async function cancelStatus(id: string) {
 
 // ── Glasačka moć sa delegacijom ───────────────────────────────────────────────
 
+/**
+ * Glasačka moć korisnika sa tranzitivnim (beskonačnim) lancem delegiranja.
+ *
+ * Pravila (Pravilnik o KOLO sistemu, Glava VII):
+ * - Ko je delegirao svoje glasove, nema sopstvenu glasačku moć (preneo ju je).
+ * - Lanac delegiranja je beskonačan: moć delegatora teče do terminalnog delegata
+ *   (onaj koji sam nije delegirao).
+ * - Ako se lanac zatvori u krug, niko u tom krugu (ni oni koji su u njega
+ *   delegirali) nema pravo glasa.
+ *
+ * Računa se nad VAŽEĆIM delegacijama (delegatId != null). Zakazane promene
+ * (imaZakazano) stupaju na snagu tek u ponoć i ne utiču na trenutni obračun.
+ */
+/**
+ * Čista funkcija razrešavanja glasačke moći nad grafom delegiranja.
+ * `next`: delegator → delegat (samo važeće delegacije). `baza`: userId → sopstvena
+ * kvadratna moć. Vraća ukupnu moć kojom `userId` glasa.
+ *  - ako je `userId` delegirao (ima izlaznu vezu) → 0;
+ *  - inače: sopstvena moć + moć svih čiji se lanac (tranzitivno) završava na njemu;
+ *  - lanci koji upadnu u krug ne doprinose nikome (krug = nevažeći).
+ */
+export function razresiGlasackuMoc(
+  next: Map<string, string>,
+  baza: Map<string, number>,
+  userId: string
+): number {
+  if (next.has(userId)) return 0;
+
+  const resolve = (h: string): string | null => {
+    const seen = new Set<string>();
+    let cur = h;
+    while (next.has(cur)) {
+      if (seen.has(cur)) return null; // krug → nevažeće
+      seen.add(cur);
+      cur = next.get(cur)!;
+    }
+    return cur;
+  };
+
+  let total = baza.get(userId) ?? 0;
+  for (const delegator of next.keys()) {
+    if (delegator !== userId && resolve(delegator) === userId) {
+      total += baza.get(delegator) ?? 0;
+    }
+  }
+  return total;
+}
+
 export async function izracunajGlasove(userId: string): Promise<number> {
-  const stanje = await prisma.zrnoStanje.findUnique({ where: { userId } });
-  const sopstveni = glasackaMoc(stanje?.aktivno ?? 0);
-
-  // Dodaj delegirane glasove
-  const delegacije = await prisma.zrnoDelegacija.findMany({
-    where: { delegatId: userId, aktivna: true },
-    include: { delegator: { include: { zrnoStanje: true } } },
+  const sve = await prisma.zrnoDelegacija.findMany({
+    where: { delegatId: { not: null } },
+    select: { delegatorId: true, delegatId: true },
   });
+  const next = new Map<string, string>();
+  for (const d of sve) next.set(d.delegatorId, d.delegatId!);
 
-  const delegirani = delegacije.reduce((sum, d) => {
-    return sum + glasackaMoc(d.delegator.zrnoStanje?.aktivno ?? 0);
-  }, 0);
+  if (next.has(userId)) return 0;
 
-  return sopstveni + delegirani;
+  // Kandidati za doprinos: userId + svi delegatori (lanac može da se završi na userId).
+  const ids = [...new Set<string>([userId, ...next.keys()])];
+  const stanja = await prisma.zrnoStanje.findMany({
+    where: { userId: { in: ids } },
+    select: { userId: true, aktivno: true },
+  });
+  const baza = new Map<string, number>();
+  for (const s of stanja) baza.set(s.userId, glasackaMoc(s.aktivno));
+
+  return razresiGlasackuMoc(next, baza, userId);
 }

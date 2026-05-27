@@ -17,7 +17,10 @@ export async function GET() {
     prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
     prisma.zrnoOtpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
     prisma.zrnoStatusZahtev.findMany({ where: { userId: session.user.id, status: "PENDING" } }),
-    prisma.zrnoDelegacija.findUnique({ where: { delegatorId: session.user.id } }),
+    prisma.zrnoDelegacija.findUnique({
+      where: { delegatorId: session.user.id },
+      include: { delegat: { select: { pseudonim: true } }, zakazaniDelegat: { select: { pseudonim: true } } },
+    }),
     poslednjiKurs(),
     prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
   ]);
@@ -35,6 +38,11 @@ export async function GET() {
     upisZahtev: upisZahtev ? { id: upisZahtev.id, poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null,
     otpisZahtev: otpisZahtev ? { id: otpisZahtev.id, kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null,
     statusZahtevi: statusZahtevi.map((z) => ({ id: z.id, kolicina: z.kolicina, akcija: z.akcija })),
-    delegacija: delegacija ? { delegatId: delegacija.delegatId, aktivna: delegacija.aktivna } : null,
+    delegacija: delegacija ? {
+      aktivna: delegacija.delegatId != null,
+      delegatPseudonim: delegacija.delegat?.pseudonim ?? null,
+      imaZakazano: delegacija.imaZakazano,
+      zakazaniPseudonim: delegacija.zakazaniDelegat?.pseudonim ?? null,
+    } : null,
   });
 }

@@ -210,6 +210,7 @@ model User {
   zrnoStatusZahtevi      ZrnoStatusZahtev[]
   delegiraoKome          ZrnoDelegacija?            @relation("Delegator")
   delegatZa              ZrnoDelegacija[]           @relation("Delegat")
+  zakazanZaDelegata      ZrnoDelegacija[]           @relation("ZakazaniDelegat")
   kreiraniPredlozi       GlasanjePredlog[]
   glasovi                GlasanjeGlas[]
   auditLogs              AuditLog[]                 @relation("AdminActions")
@@ -588,13 +589,16 @@ model ZrnoDailyRate {
 }
 
 model ZrnoDelegacija {
-  id          String   @id @default(uuid())
-  delegatorId String   @unique
-  delegator   User     @relation("Delegator", fields: [delegatorId], references: [id])
-  delegatId   String
-  delegat     User     @relation("Delegat", fields: [delegatId], references: [id])
-  aktivna     Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id                String   @id @default(uuid())
+  delegatorId       String   @unique
+  delegator         User     @relation("Delegator", fields: [delegatorId], references: [id])
+  delegatId         String?
+  delegat           User?    @relation("Delegat", fields: [delegatId], references: [id])
+  zakazaniDelegatId String?
+  zakazaniDelegat   User?    @relation("ZakazaniDelegat", fields: [zakazaniDelegatId], references: [id])
+  imaZakazano       Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
 // ─── Glasanje ─────────────────────────────────────────────────────────────────
