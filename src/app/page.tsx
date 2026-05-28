@@ -164,14 +164,14 @@ export default async function Home() {
         {/* ── SEKCIJA 2 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
-            Problem koji svi osećamo
+            Problem koji osećamo
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex flex-col gap-3 items-center text-center">
               <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Ne znamo šta jedemo.</p>
               <div className="space-y-2">
                 <p className="text-sm text-kolo-muted leading-relaxed">
-                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz našeg kruga proizvodi baš to — med, jaja, sir, voće, povrće.
+                  Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz našeg komšiluka proizvodi baš to — med, jaja, sir, voće, povrće.
                 </p>
                 <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Ono što nam treba raste pored nas, ali do nas ne stiže.</p>
               </div>
@@ -189,9 +189,9 @@ export default async function Home() {
               <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>Znanja i veštine su nevidljivi.</p>
               <div className="space-y-2">
                 <p className="text-sm text-kolo-muted leading-relaxed">
-                  Komšija je majstor, njegova žena kuva i može da pričuva decu. Neko treći zna da okreči, da popravi krov, da drži časove.
+                  Komšija je majstor, komšinica pravi najbolji sir u kraju, njihov sin drži časove. Ali to zna samo njihova bliža okolina.
                 </p>
-                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Svima nam to svakodnevno treba — ali ne postoji mesto gde se ljudi sreću.</p>
+                <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">Sve to nam treba svaki dan — ali niko to ne povezuje i ne beleži.</p>
               </div>
             </div>
           </div>
@@ -200,7 +200,7 @@ export default async function Home() {
         {/* ── SEKCIJA 3 — KOLO TI DAJE ALTERNATIVU (konsolidovano) ── */}
         <section className="space-y-6 text-center">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
-            KOLO ti daje alternativu
+            KOLO je odgovor koji gradimo zajedno
           </div>
 
           <blockquote
@@ -209,7 +209,8 @@ export default async function Home() {
           >
             „Kad su ljudi bili žedni, iskopali su bunar.<br />
             Iz njega je pio svako, i niko više nije bio žedan.<br />
-            Bunar je bio njihov — i nije bio ničiji."
+            Bunar je bio njihov — i nije bio ničiji.<br />
+            KOLO je takav bunar."
           </blockquote>
 
           <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
@@ -270,65 +271,64 @@ export default async function Home() {
             {[
               {
                 ikona: "🌱",
-                naslov: "Farmeri i mali proizvođači",
-                opis: "Direktan pristup potrošačima i olakšana distribucija domaćih proizvoda bez posrednika i provizije.",
-                poenta: "Prepoznavanje tvog rada srazmerno uloženom trudu.",
+                naslov: "Poljoprivrednici i lokalni proizvođači",
+                opis: "Tvoji domaći proizvodi direktno do ljudi koji ih traže — bez otkupljivača, bez provizije.",
+                poenta: "Svaki tvoj trud se beleži i vidi — ništa ne nestaje u tuđem džepu.",
               },
               {
                 ikona: "🔧",
                 naslov: "Zanatlije i majstori",
-                opis: "Novi kanal za pristup klijentima i besplatno oglašavanje svojih usluga u lokalnoj mreži uz mogućnost javne preporuke.",
-                poenta: "Da ceo krug\nvidi tvoj rad.",
+                opis: "Ljudi u tvom kraju vide šta radiš i mogu te preporučiti — na osnovu stvarnog iskustva, bez provizije.",
+                poenta: "Manje praznog hoda, više posla od ljudi kojima treba i koji znaju šta je dobar rad.",
               },
               {
-                ikona: "👴",
+                ikona: "👴👵",
                 naslov: "Penzioneri sa znanjem",
-                opis: "Razmena znanja i usluga za stvari koje ti realno trebaju — domaći proizvodi, lokalne usluge.",
+                opis: "Znaš da popravljaš, savetuješ, predaješ — razmeni to za domaće proizvode ili usluge koje ti trebaju, sa ljudima koje poznaje neko od tvojih.",
                 poenta: "Tvoje iskustvo postaje vidljivo i traženo.",
               },
               {
                 ikona: "🏠",
-                naslov: "Domaćice",
-                opis: "Prodaja domaćih proizvoda (zimnica, pecivo, ručni rad) i razmena usluga sa komšinicama.",
+                naslov: "Domaća proizvodnja i ručni rad",
+                opis: "Ponudi zimnice, peciva i ručni rad u svom kraju — i razmeni sa komšinicama za ono što tebi treba.",
                 poenta: "Kućni rad postaje vidljiv kao doprinos zajednici.",
               },
               {
                 ikona: "👩‍👧",
                 naslov: "Majke i roditelji",
-                opis: "Pomoć u svakodnevnim aktivnostima, čuvanje dece, nabavka zdrave hrane.",
-                poenta: "Imaš pomoć da budeš roditelj jer je to svima u interesu.",
+                opis: "Čuvanje dece, nabavka zdrave hrane, svakodnevna pomoć — od ljudi koje poznaješ ili koje poznaje neko kome veruješ.",
+                poenta: "Imaš pomoć da budeš roditelj — jer smo svi tu jedni za druge.",
               },
               {
-                ikona: "🎓",
-                naslov: "Mladi",
-                opis: "Neformalni rad, prvi klijenti i prostor za razvoj u tvom kraju.",
-                poenta: "Razlog da ostaneš i okruženje na koje možeš da utičeš.",
+                ikona: "🌅",
+                naslov: "Novi početak",
+                opis: "Prvi klijenti, neformalni rad i prostor da razviješ svoje — u mreži ljudi iz tvog kraja.",
+                poenta: "Dostojanstvo, razlog da ostaneš ovde i okruženje na koje možeš da utičeš.",
               },
               {
-                ikona: "💼",
-                naslov: "Nezaposleni",
-                opis: "Prostor da pokreneš svoju aktivnost u lokalnoj mreži ili da se angažuješ u aktivnostima zajedničkog dobra.",
-                poenta: "Dostojanstvo i prostor da pokreneš svoj rad.",
+                ikona: "💻",
+                naslov: "Programeri i freelanceri",
+                opis: "Otvoren kod (AGPL-3.0), sadržaj pod CC BY-SA 4.0. Možeš da proveriš kako sistem radi, predložiš izmene ili doprineseš razvoju.",
+                poenta: "Smislen projekat kome veruješ jer možeš da ga pročitaš.",
               },
               {
                 ikona: "🤝",
                 naslov: "Postojeće zadruge i udruženja",
-                opis: "Već ste organizovani, već imate ljude i strukturu. Ekonomski sloj otvara…",
-                poenta: "…nove mogućnosti za organizaciju\ni za svakog pojedinog člana.",
-                puna_sirina: true,
+                opis: "Već ste organizovani, već imate ljude i strukturu. KOLO dodaje evidenciju razmene i vezu sa drugim zadrugama i pojedincima.",
+                poenta: "Vaši članovi dobijaju pristup celoj mreži, a zadruga — još jedan alat za rad.",
               },
               {
                 ikona: "🏘️",
                 naslov: "Lokalpatrioti",
-                opis: "Sva vrednost koju razmeniš sa drugima ostaje u zajednici. Svaka obavljena transakcija je…",
-                poenta: "…doprinos poboljšanju ekonomske slike tvog mesta.",
+                opis: "Sva vrednost koju razmeniš sa drugima ostaje u zajednici.",
+                poenta: "Svakom razmenom u tvom naselju stvaraš uslove koji su bolji za sve.",
               },
             ].map((seg) => (
               <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
                 <span className="text-2xl">{seg.ikona}</span>
                 <p className="font-semibold text-kolo-text text-sm leading-snug">{seg.naslov}</p>
                 <p className="text-xs text-kolo-muted leading-relaxed">{seg.opis}</p>
-                <p className={`text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line ${"puna_sirina" in seg && seg.puna_sirina ? "" : "max-w-[70%]"}`}>{seg.poenta}</p>
+                <p className="text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line max-w-[70%]">{seg.poenta}</p>
               </div>
             ))}
           </div>
