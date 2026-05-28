@@ -556,13 +556,13 @@ export default async function Home() {
                 Ko stoji iza KOLA
               </div>
               <p className="text-kolo-text leading-relaxed mb-3 text-sm text-body">
-                <strong>Nikola Šarić</strong>, lekar iz Sombora. Četrnaest godina razvija sisteme komplementarne ekonomije i prati kako rade slične mreže u Švajcarskoj, Kanadi, Italiji i Japanu.
+                <strong>Nikola Šarić</strong>, lekar iz Sombora. Petnaest godina proučava kako zajednice širom sveta — od Švajcarske i Italije do Kanade i Japana — razmenjuju rad i dobra bez novca.
               </p>
               <p className="text-kolo-muted text-sm leading-relaxed mb-5 text-body">
-                KOLO je adaptacija socijalne i solidarne ekonomije — sektora koji su Ujedinjene nacije i Evropska unija formalno priznali — za srpski pravni i društveni kontekst.
+                KOLO je naša verzija socijalne i solidarne ekonomije — kad se ljudi sami organizuju da brinu jedni o drugima — koju su i Ujedinjene nacije i Evropska unija priznale, prilagođena srpskim zakonima.
               </p>
               <blockquote className="border-l-4 border-kolo-green-700 pl-4 text-sm text-kolo-muted italic leading-relaxed mb-5 text-body">
-                „Svaki dan gledam ljude kojima sistem treba da pomogne, ali ne može. Smatram da svi imaju mesto u zajednici i mogu da joj doprinesu. Samo im treba infrastruktura."
+                „Svaki dan u ordinaciji vidim ljude kojima sistem treba da pomogne, ali ne može. Svako ima svoje mesto u društvu i nešto čime može da doprinese. Samo im treba infrastruktura — alat i zajednica iza njega."
               </blockquote>
               <Link href="/o-nama" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
                 Cela priča →
