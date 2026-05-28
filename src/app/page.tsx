@@ -214,24 +214,24 @@ export default async function Home() {
 
           <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
             <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl" style={{ letterSpacing: "-0.01em" }}>
-              Mreža ljudi koji direktno razmenjuju rad, dobra i znanje.
+              Mreža ljudi koji jedni drugima nude rad, dobra i znanje — bez posrednika.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             {[
               {
-                naslov: "Mreža umesto tržišta",
-                tekst: "Komšija, prijatelj, prijatelj prijatelja — ljudi koji ti mogu nešto ponuditi i kojima ti možeš nešto vratiti. KOLO ih okuplja na jednom mestu i čini ih međusobno vidljivim. Ono što jedni imaju, drugima treba.",
+                naslov: "Ljudi, a ne anonimno tržište",
+                tekst: "Komšija, prijatelj, prijatelj prijatelja — ljudi koji ti mogu nešto ponuditi i kojima ti možeš nešto dati za uzvrat. KOLO ih međusobno povezuje i čini doprinose vidljivim. Ono što jedni imaju, drugima treba.",
               },
               {
                 naslov: "Doprinos koji se pamti",
-                tekst: "Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove POEN. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara prospektivan pristup onome što su drugi doneli.",
+                tekst: "Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Ta beleška se zove POEN — interna jedinica računa unutar mreže. Nije novac, ne menja se za dinare, ne ide na berzu. Tako se vidi šta si dao mreži — i drugi te lakše prepoznaju kad i tebi nešto zatreba.",
                 istakniPoen: true,
               },
               {
-                naslov: "Transparentna pravila",
-                tekst: "Sve što sistem radi — ko šta dobija, kako se odluke donose, šta se sa čim radi — ostaje zapisano i javno dostupno. Niko ne može da promeni pravila u svoju korist.",
+                naslov: "Pravila su ista za sve",
+                tekst: "Pravila sistema i način donošenja odluka su javno zapisani i dostupni svima. Pravila se ne menjaju u korist pojedinca — menjaju se samo zajednički i po istom postupku za sve. Zajedničkim resursima upravlja sama zajednica, ne neko sa strane.",
               },
             ].map((kartica) => (
               <div
@@ -244,7 +244,7 @@ export default async function Home() {
                 <p className="text-sm text-kolo-text leading-relaxed">
                   {kartica.istakniPoen ? (
                     <>
-                      Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Beleška se zove <strong className="text-kolo-green-900">POEN</strong>. Nije novac, ne menja se za dinare, ne ide na berzu. Ali ti otvara prospektivan pristup onome što su drugi doneli.
+                      Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Ta beleška se zove <strong className="text-kolo-green-900">POEN</strong> — interna jedinica računa unutar mreže. Nije novac, ne menja se za dinare, ne ide na berzu. Tako se vidi šta si dao mreži — i drugi te lakše prepoznaju kad i tebi nešto zatreba.
                     </>
                   ) : (
                     kartica.tekst
