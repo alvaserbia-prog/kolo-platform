@@ -593,10 +593,10 @@ export default async function Home() {
         {/* ── SEKCIJA 11 — CTA ─────────────────────────────────────── */}
         <section className="bg-kolo-green-700 rounded-2xl p-6 md:p-10 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
-            Pridruži se ili prati razvoj
+            Pridruži se — ili prati kako sistem raste
           </h2>
           <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
-            Prva grupa članova se trenutno formira. Registracija je besplatna i traje manje od dva minuta.
+            Upravo se okuplja prva grupa članova. Registracija je besplatna i traje manje od dva minuta.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link
@@ -612,9 +612,8 @@ export default async function Home() {
               Prati razvoj →
             </a>
           </div>
-          <div className="mt-8 pt-6 border-t border-white/15 space-y-1.5">
-            <p className="text-xs text-white/60">Transparentno i zajedno. Pravila su javna, a odluke zajedničke.</p>
-            <p className="text-xs text-white/60">Sebičnost stvara solidarnost. Sistem radi za članove, ne od članova.</p>
+          <div className="mt-8 pt-6 border-t border-white/15">
+            <p className="text-xs text-white/60">Ono što koristi tebi, koristi i tvojoj zajednici.</p>
           </div>
         </section>
 
