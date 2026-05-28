@@ -417,17 +417,17 @@ export default async function Home() {
               {
                 br: "1",
                 naslov: "Registruješ se",
-                opis: "Besplatno, za manje od minut. Biraš pseudonim, prihvataš Uslove i Pravilnik. Dobijaš pristup javnom delu platforme dok ne verifikuješ identitet.",
+                opis: "Besplatno, za manje od minut. Biraš pseudonim umesto pravog imena i prihvataš Uslove korišćenja — za registraciju ti nisu neophodni dokumenti. Odmah dobijaš pristup javnom delu KOLA, a pun pristup otključavaš kada se potvrdi da si stvaran čovek.",
               },
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Druga dva verifikovana korisnika koji te lično poznaju potvrđuju tvoju stvarnost u fizičkom prisustvu. Tvoj indeks stvarnosti raste, otključavaš pun pristup funkcijama. Protokol ti automatski upiše 1.000 POEN po pravilu — nije naknada za podatke, već priznanje da si ušao u lanac jemstva.",
+                opis: "Verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost u fizičkom prisustvu. Tako i sam postaješ verifikovani korisnik, sa svim funkcijama sistema na raspolaganju. Protokol ti tada automatski upiše 1.000 POEN — kao priznanje da si ušao u lanac jemstva.",
               },
               {
                 br: "3",
                 naslov: "Doprinosiš i koristiš",
-                opis: "Razmenjuješ robu i usluge sa ostalim korisnicima, pozivaš ljude koje poznaješ, aktiviraš se u zajednici, doniraš Fondaciji. Svaki doprinos se beleži u POEN-ima.",
+                opis: "Razmenjuješ robu i usluge, pozivaš ljude koje poznaješ, uključuješ se u zajednicu i, ako želiš, doniraš Fondaciji. Svaki tvoj doprinos ostaje zabeležen i vidljiv u POEN-ima.",
               },
             ].map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
