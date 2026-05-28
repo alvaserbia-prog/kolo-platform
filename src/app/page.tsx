@@ -340,10 +340,6 @@ export default async function Home() {
             Primer iz prakse
           </div>
 
-          <p className="text-sm text-kolo-muted leading-relaxed italic max-w-3xl">
-            <strong className="text-kolo-green-900 not-italic">POEN nije novac</strong> — to je zapis o tome koliko je ko doprineo zajednici. Med, popravka i hleb u primeru ispod su stvarni; POEN samo beleži razmenu.
-          </p>
-
           {/* 4 stubca povezana strelicama po hronologiji */}
           <div className="flex flex-col md:flex-row items-stretch gap-3">
             {/* Stubac 1 — Ana i med */}
@@ -401,6 +397,14 @@ export default async function Home() {
           <p className="text-center text-sm text-kolo-muted italic">
             … i krug se nastavlja.
           </p>
+
+          <div className="flex items-center gap-3 bg-kolo-green-100 border-l-4 border-kolo-green-700 rounded-xl p-4 w-fit mx-auto">
+            <span className="shrink-0 w-7 h-7 rounded-full bg-kolo-green-700 text-white inline-flex items-center justify-center font-bold text-base">!</span>
+            <div className="text-sm text-kolo-text leading-relaxed space-y-1">
+              <p><strong className="text-kolo-green-900">POEN nije novac</strong> — to je zapis o tome koliko je ko doprineo zajednici.</p>
+              <p>Med, popravka i hleb iz primera su stvarni; POEN samo beleži razmenu.</p>
+            </div>
+          </div>
         </section>
 
         {/* ── SEKCIJA 6 — KAKO FUNKCIONIŠE UKRATKO ────────────────── */}
