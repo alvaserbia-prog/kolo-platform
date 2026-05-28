@@ -18,20 +18,20 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
       {
         id: 1,
         pitanje: `Šta je POEN i ima li vrednost u dinarima?`,
-        odgovor: `POEN je jedinica evidencije doprinosa zajedničkom dobru — algoritamski zapis da si dao zajednici nešto vredno, bilo kroz verifikaciju, doprinose, donaciju, pokroviteljstvo ili Programe.
+        odgovor: `POEN je zapis u evidenciji da si zajednici dao nešto vredno — kroz verifikaciju drugih korisnika, rad za zajednicu, donaciju ili pokroviteljstvo.
 
-POEN nije novac u pravnom smislu — nije zakonsko sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, niti potraživanje prema Fondaciji.
+POEN nije novac u pravnom smislu — nije sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, i ne predstavlja dug Fondacije prema tebi.
 
-Iznos „1 POEN ≈ 1 RSD" koristi se isključivo informativno i nema pravno dejstvo — Fondacija ne garantuje niti održava nijednu vrednost POEN-a.`,
+Odnos „1 POEN ≈ 1 RSD" služi samo kao orijentir da znaš o kolikoj vrednosti je reč — Fondacija ne garantuje tu vrednost i ne menja POEN za novac.`,
       },
       {
         id: 2,
         pitanje: `Mogu li unovčiti POEN ili ga prodati za novac?`,
-        odgovor: `Ne. POEN se ne može konvertovati u dinare, stranu valutu ni drugo sredstvo plaćanja. Fondacija ne otkupljuje POEN.
+        odgovor: `Ne. POEN ne možeš zameniti za dinare, stranu valutu ni bilo koje drugo sredstvo plaćanja. Fondacija ne otkupljuje POEN.
 
-Možeš ga preneti drugom korisniku, koristiti za primanje robe i usluga (uključujući Pijacu) ili steći ZRNO.
+Možeš ga preneti drugom korisniku, koristiti za robu i usluge u razmeni — uključujući Pijacu — ili kroz njega upisati ZRNO.
 
-Bilo kakva prodaja POEN-a za novac van platforme je privatni aranžman bez priznavanja sistema.`,
+Sam prenos POEN-a uvek se beleži u evidenciji — a ako se uz to neko privatno dogovori za novac, radi to na svoju odgovornost: Fondacija takav dogovor niti podržava, niti je njegov deo, niti ga može sprečiti.`,
       },
       {
         id: 3,
@@ -76,11 +76,11 @@ Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fonda
         pitanje: `Da li je ovo neka piramida ili kripto?`,
         odgovor: `Nije ni jedno ni drugo.
 
-Piramidalna šema funkcioniše tako što novi članovi plaćaju da bi raniji članovi zaradili — u KOLU ne postoji nivo ispod tebe, ne postoji provizija od tuđih doprinosa, niti se POEN kupuje za novac. Sistem je zero-sum: svaki POEN koji postoji evidentiran je kao minus na računu Protokola, niko ne može stvoriti POEN ni iz čega.
+Piramidalna šema funkcioniše tako što novi članovi plaćaju da bi raniji članovi zaradili — u KOLU ne postoji nivo ispod tebe, ne postoji provizija od tuđih doprinosa, niti se POEN kupuje za novac. Zbir je uvek nula: svaki POEN koji postoji upisan je kao isti takav minus u evidenciji Protokola, pa niko ne može stvoriti POEN ni iz čega.
 
-Kriptovaluta postoji na blockchain mreži, ima tržišnu cenu i može se trgovati na berzi — POEN nije token, ne postoji izvan KOLO platforme, ne menja se za dinare i nema tržišnu cenu.
+Kriptovaluta postoji na blokčejn mreži, ima tržišnu cenu i može se kupovati i prodavati na berzi — POEN nije token, ne postoji izvan KOLA, ne menja se za dinare i nema tržišnu cenu.
 
-POEN je interna evidencija doprinosa zajedničkom dobru, slična knjigovodstvenom zapisu. Vrednost je u mreži ljudi koji međusobno razmenjuju rad, dobra i znanje, ne u spekulaciji.`,
+POEN je, jednostavno, zapis o tome šta si dao zajednici — sličan knjigovodstvenoj stavci, ne novcu. Vrednost je u mreži ljudi koji međusobno razmenjuju rad, dobra i znanje, ne u spekulaciji.`,
       },
     ],
   },
