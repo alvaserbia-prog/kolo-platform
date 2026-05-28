@@ -340,13 +340,17 @@ export default async function Home() {
             Primer iz prakse
           </div>
 
+          <p className="text-sm text-kolo-muted leading-relaxed italic max-w-3xl">
+            <strong className="text-kolo-green-900 not-italic">POEN nije novac</strong> — to je zapis o tome koliko je ko doprineo zajednici. Med, popravka i hleb u primeru ispod su stvarni; POEN samo beleži razmenu.
+          </p>
+
           {/* 4 stubca povezana strelicama po hronologiji */}
           <div className="flex flex-col md:flex-row items-stretch gap-3">
             {/* Stubac 1 — Ana i med */}
             <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
               <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">1</span>
               <p className="text-kolo-text leading-relaxed text-sm">
-                Ana proda 5 tegli meda Milanu za <strong>4.000 POEN</strong>.
+                Ana razmeni 5 tegli meda sa Milanom za <strong>4.000 POEN</strong>.
               </p>
             </div>
             {/* Strelica 1 → 2 */}
@@ -360,7 +364,7 @@ export default async function Home() {
             <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
               <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">2</span>
               <p className="text-kolo-text leading-relaxed text-sm">
-                Ani se pokvari veš mašina. Lazar joj popravi za <strong>4.000 POEN</strong>.
+                Ani se pokvari veš mašina. Lazar je popravi za <strong>4.000 POEN</strong>.
               </p>
             </div>
             {/* Strelica 2 → 3 */}
@@ -374,7 +378,7 @@ export default async function Home() {
             <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
               <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">3</span>
               <p className="text-kolo-text leading-relaxed text-sm">
-                Lazar kupuje domaći hleb koji Marija peče u svojoj kuhinji za <strong>500 POEN</strong>.
+                Lazar razmeni <strong>500 POEN</strong> za domaći hleb koji Marija peče u svojoj kuhinji.
               </p>
             </div>
             {/* Strelica 3 → 4 */}
