@@ -98,11 +98,11 @@ POEN je, jednostavno, zapis o tome šta si dao zajednici — sličan knjigovodst
         pitanje: `Kako se verifikujem i šta time dobijam?`,
         odgovor: `Verifikacija je opciona, ali je preduslov za pun pristup funkcijama platforme.
 
-Verifikacija se obavlja kroz lanac jemstva: druga dva verifikovana korisnika koji te lično poznaju potvrđuju tvoju stvarnost u fizičkom prisustvu. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog. Verifikator ne traži niti prikuplja dokumente.
+Verifikacija se obavlja kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost u fizičkom prisustvu. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog. Verifikator ne traži niti prikuplja dokumente.
 
 Svaka verifikacija uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
 
-Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN svakom verifikatoru i 500 POEN nadzorniku (kada verifikacija podleže nadzoru). Upis nije naknada za podatke — to je automatski akt Protokola po pravilu.
+Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN verifikatoru i 500 POEN nadzorniku (kada verifikacija podleže nadzoru). Upis nije naknada za podatke — to je automatski akt Protokola po pravilu.
 
 Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
       },
