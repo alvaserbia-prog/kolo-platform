@@ -6,39 +6,39 @@ import { poBrojevima } from "@/lib/faq-data";
 export const metadata: Metadata = {
   title: "Kako funkcioniše KOLO — detaljna pravila sistema",
   description:
-    "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, sedam načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
+    "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, šest načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
 };
 
 const koraci = [
   {
     br: "1",
     naslov: "Registracija",
-    opis: "Otvaranje naloga traje oko minut — dovoljni su email, pseudonim i lozinka. Pravo ime nigde nije javno: u celom interfejsu te predstavlja isključivo pseudonim, a vezu sa identitetom vidi samo Fondacija. Registracija je besplatna i ne obavezuje te ni na šta.",
-    detalj: "~ minut · besplatno",
+    opis: "Email, pseudonim, lozinka. Pravo ime nigde nije javno: u celom interfejsu te predstavlja isključivo pseudonim, a vezu sa identitetom vidi samo Fondacija. Registracija je besplatna i ne obavezuje te ni na šta.",
+    detalj: "~ minut",
   },
   {
     br: "2",
     naslov: "Osnovni pregled",
-    opis: "Vidiš javnu evidenciju transakcija i oglase na Pijaci. Možeš primati i slati POEN, ali ne možeš postavljati oglase niti kontaktirati prodavce.",
+    opis: "Vidiš javnu evidenciju razmena i oglase na Pijaci, ali još ne možeš postavljati oglase niti kontaktirati prodavce.",
     detalj: "bez verifikacije",
   },
   {
     br: "3",
     naslov: "Verifikacija kroz lanac jemstva",
-    opis: "Druga dva verifikovana korisnika koji te lično poznaju potvrđuju tvoju stvarnost u fizičkom prisustvu. Platforma obezbeđuje tehnički mehanizam potvrde prisustva, bez prikupljanja dokumenata. Svaka verifikacija povećava tvoj indeks stvarnosti za 10 procentnih poena.",
+    opis: "Verifikovani korisnik koji te lično poznaje potvrđuje, uživo, da si stvarna osoba. KOLO to obezbeđuje tehnički, bez prikupljanja ijednog dokumenta. Svaka potvrda te dodatno učvršćuje kao stvarnog korisnika mreže — i za svaku ti Protokol upisuje 1.000 POEN.",
     detalj: "+10% indeks · 1.000 POEN",
     istaknut: true,
   },
   {
     br: "4",
     naslov: "Razmena i doprinos",
-    opis: "Pun pristup mreži: postavljaš oglase na Pijaci, prijavljuješ se na Programe Protokola i razmenjuješ POEN sa članovima. Sa indeksom stvarnosti od najmanje 10% otključava se i tvoj kapacitet da verifikuješ druge.",
+    opis: "Pun pristup mreži: postavljaš oglase na Pijaci, razmenjuješ sa drugim korisnicima, doprinosiš sistemu i prijavljuješ se za Socijalne programe. Kad si i sam jednom potvrđen, i ti možeš da uvedeš i potvrdiš ljude koje lično poznaješ.",
     detalj: "pun pristup",
   },
   {
     br: "5",
     naslov: "Glas u sistemu",
-    opis: "Upisom POEN-a u ZRNO stičeš pravo glasa u Gornjem Kolu, telu koje odlučuje o svim sistemskim pitanjima. Glasačka moć računa se kao kvadratni koren tvog aktivnog ZRNA, pa niko ne može sam nadglasati zajednicu — sistem nagrađuje širu participaciju, ne akumulaciju.",
+    opis: "ZRNO ti daje pravo glasa u Gornjem Kolu — telu koje odlučuje o pravilima koja važe za sve. Glasovi se računaju po kvadratnom korenu, pa niko sa mnogo ZRNA ne može sam da nadglasa zajednicu.",
     detalj: "demokratski glas",
   },
 ];
@@ -47,15 +47,15 @@ const nacinUpisa = [
   {
     br: "1",
     naslov: "Dokaz stvarnosti",
-    opis: "Kad te druga dva verifikovana korisnika potvrde u lancu jemstva, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN svakom verifikatoru i 500 POEN nadzorniku. Ulazak u sistem je istovremeno doprinos sistemu.",
+    opis: "Kad te verifikovani korisnik koji te lično poznaje potvrdi u lancu jemstva, Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN verifikatoru — a kad verifikacija podleže nadzoru, i 500 POEN nadzorniku. Ulazak u sistem je istovremeno doprinos sistemu.",
     iznos: "1.000 / 1.000 / 500",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },
   {
     br: "2",
     naslov: "Donacija Fondaciji",
-    opis: "Doniraš novac Fondaciji. Protokol upisuje POEN po koeficijentu evidencije koji raste sa tvojim ukupnim doprinosom — kroz 18 nivoa, od 1,00× za početne donacije do 5,00× za najveće donatore.",
-    iznos: "18 nivoa",
+    opis: "Doniraš novac Fondaciji. Protokol upisuje POEN po koeficijentu koji blago raste sa tvojim ukupnim doprinosom — na primer 1,5× na 100.000 dinara. POEN iz donacije ne daje vlasništvo, ne pretvara se u novac i ne kupuje glasove: glas zavisi od ZRNA, a glasanje je kvadratno, pa veći donator ne može da nadglasa zajednicu.",
+    iznos: "11 nivoa · do 2,00×",
     boja: "bg-kolo-gold-100 text-kolo-gold-600",
   },
   {
@@ -75,14 +75,14 @@ const nacinUpisa = [
   {
     br: "5",
     naslov: "Osnivački doprinos",
-    opis: "Naknadno evidentiranje rada obavljenog pre otvaranja platforme. Evidentira se u koracima od 20.000 POEN-a, jedan po svakih 100.000 POEN-a u sistemu. Kanal se trajno zatvara kad ukupan osnivački doprinos dostigne gornju granicu od 2.400.000 POEN-a.",
+    opis: "Priznanje za rad uložen pre nego što je sistem uopšte postojao — ograničeno i iznosom i tempom. Evidentira se u koracima od 20.000 POEN-a, najviše jedan po svakih 100.000 POEN-a u sistemu, pa se ne može ubrzati. Kanal se trajno zatvara kad osnivački doprinos dostigne gornju granicu od 2.400.000 POEN-a.",
     iznos: "do 2.400.000 POEN-a",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },
   {
     br: "6",
     naslov: "Socijalni programi",
-    opis: "Verifikovani korisnici sa odobrenim statusom — Podrška Majkama (i primarnim starateljima), Podrška Starijima, Posebna Briga, Školovanje — primaju POEN na dnevnom nivou.",
+    opis: "Za majke i staratelje, starije, posebnu brigu i školovanje predviđeni su programi u kojima odobreni korisnici dobijaju POEN svakog dana.",
     iznos: "dnevna evidencija",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },
@@ -182,7 +182,7 @@ export default function KakoFunkcionisePage() {
               </svg>
             </span>
             <p className="text-sm text-kolo-text leading-relaxed">
-              Upisuje se isključivo kroz šest kanala doprinosa, koje evidentira <strong className="text-kolo-text">Protokol</strong> automatski, bez diskrecije.
+              Upisuje se isključivo kroz šest kanala doprinosa — <strong className="text-kolo-text">Protokol</strong> ih beleži automatski, isto za sve, bez izuzetaka.
             </p>
           </div>
           <div className="bg-white rounded-xl card-shadow p-4 flex items-start gap-3">
@@ -193,7 +193,7 @@ export default function KakoFunkcionisePage() {
               </svg>
             </span>
             <p className="text-sm text-kolo-text leading-relaxed">
-              Razmena dobara i usluga između korisnika je <strong className="text-kolo-text">redistribucija</strong> postojećih zapisa POEN-a, ne upisivanje novih.
+              Kad razmenjuješ s nekim, POEN samo prelazi od jednog do drugog: postojeći zapisi se <strong className="text-kolo-text">preraspodeljuju</strong>, ništa novo se ne stvara.
             </p>
           </div>
         </div>
@@ -249,7 +249,6 @@ export default function KakoFunkcionisePage() {
               <ul className="space-y-1.5">
                 {[
                   "Evidencija doprinosa zajedničkom dobru",
-                  "Prospektivan pristup budućim dobrima u zajedničkom dobru",
                   "Ne ističe — tvoj doprinos se pamti trajno",
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
@@ -262,6 +261,9 @@ export default function KakoFunkcionisePage() {
 
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">Šta nije</p>
+              <p className="text-sm text-kolo-muted leading-relaxed mb-2 text-body">
+                Ukratko: POEN nije novac i njime se ne može trgovati. Ispod su zakonski razlozi zašto.
+              </p>
               <ul className="space-y-1.5">
                 {[
                   "Zakonsko sredstvo plaćanja",
@@ -306,8 +308,8 @@ export default function KakoFunkcionisePage() {
                 {[
                   "ZRNO se upisuje u tvoj zapis u zamenu za POEN; ne može se prenositi između korisnika.",
                   "Ukupna količina ZRNA je fiksna — 1.000.000.",
-                  "Obračunski koeficijent raste sa povećanjem Opticaja POEN-a.",
-                  "ZRNO čuva vrednost tvog doprinosa sistemu.",
+                  "Obračunski koeficijent raste sa povećanjem opticaja POEN-a.",
+                  "ZRNO beleži tvoj položaj u sistemu.",
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
                     <span className="text-kolo-gold-600 mt-0.5 shrink-0">◆</span>
@@ -377,7 +379,7 @@ export default function KakoFunkcionisePage() {
           Sve si pročitao
         </h2>
         <p className="text-white/70 text-base mb-7 max-w-md mx-auto leading-relaxed">
-          Pravila su jasna. Registracija je besplatna. Verifikacija te uvodi u lanac jemstva — Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN svakom verifikatoru, po pravilu.
+          Pravila su jasna. Registracija je besplatna. Verifikacija te uvodi u lanac jemstva — Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN verifikatoru.
           Javna evidencija i oglasi na Pijaci dostupni su i bez registracije.
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -400,6 +402,9 @@ export default function KakoFunkcionisePage() {
             Nazad na početnu
           </Link>
         </div>
+        <p className="text-white/40 text-xs mt-7">
+          Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence
+        </p>
       </section>
 
     </div>
