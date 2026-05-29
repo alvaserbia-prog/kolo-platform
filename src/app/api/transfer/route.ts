@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Korisnik sa tim pseudonimom ne postoji." }, { status: 404 });
   }
   if (primalac.id === session.user.id) {
-    return NextResponse.json({ error: "Ne možete evidentirati POEN samom sebi." }, { status: 400 });
+    return NextResponse.json({ error: "Ne možete upisati POEN samom sebi." }, { status: 400 });
   }
   if (!primalac.wallet) {
     return NextResponse.json({ error: "Primalac nema novčanik." }, { status: 500 });

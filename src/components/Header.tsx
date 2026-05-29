@@ -47,13 +47,13 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           </div>
         </div>
 
-        {/* Sredina: Evidentiraj POEN */}
+        {/* Sredina: Upiši POEN */}
         <div className="flex-1 flex justify-start md:justify-center pl-2 md:pl-0">
           <Link
             href="/novcanik"
             className="md:ml-[1cm] px-2.5 py-1 md:px-4 md:py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-xs md:text-sm font-semibold rounded-xl border border-white/70 transition-colors whitespace-nowrap"
           >
-            Evidentiraj POEN
+            Upiši POEN
           </Link>
         </div>
 

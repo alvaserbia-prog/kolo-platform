@@ -66,7 +66,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         </div>
       </div>
 
-      {/* Forma za evidentiranje */}
+      {/* Forma za upis POEN-a */}
       {showSend && (
         <SendForma
           onClose={() => setShowSend(false)}
@@ -231,7 +231,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
   );
 }
 
-// ── Forma za evidentiranje ──────────────────────────────────────────────────────
+// ── Forma za upis POEN-a ──────────────────────────────────────────────────────
 
 function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initialOpis }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string; initialOpis?: string }) {
   const t = useTranslations("novcanik");
