@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Korisnik sa tim pseudonimom ne postoji." }, { status: 404 });
   }
   if (primalac.id === session.user.id) {
-    return NextResponse.json({ error: "Ne možete slati POEN sami sebi." }, { status: 400 });
+    return NextResponse.json({ error: "Ne možete evidentirati POEN samom sebi." }, { status: 400 });
   }
   if (!primalac.wallet) {
     return NextResponse.json({ error: "Primalac nema novčanik." }, { status: 500 });
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: `Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.` }, { status: 400 });
   }
 
-  // Transfer 1:1 — bez posrednika, bez provizije (Čl. 11)
+  // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
   await prisma.$transaction(async (tx) => {
     await tx.wallet.update({
       where: { id: posiljac.wallet!.id },

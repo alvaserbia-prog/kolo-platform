@@ -33,7 +33,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         uid,
         "VERIFIKACIJA_PONISTENA",
         "Verifikacija poništena",
-        "Verifikator u vašem lancu jemstva je označen kao lažan, pa je vaša verifikacija poništena. Indeks stvarnosti vam je 0% — zadržavate nalog i osnovne funkcije (slanje i primanje POEN-a, Pijaca, donacije), ali nemate pristup operativnom doprinosu i programima podrške.",
+        "Verifikator u vašem lancu jemstva je označen kao lažan, pa je vaša verifikacija poništena. Indeks stvarnosti vam je 0% — zadržavate nalog i osnovne funkcije (ažuriranje evidencije POEN-a, Pijaca, donacije), ali nemate pristup operativnom doprinosu i programima podrške.",
         "/profil"
       );
     }

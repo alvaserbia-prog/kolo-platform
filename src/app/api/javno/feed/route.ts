@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
       to: walletLabel(t.toWallet),
       amount: t.amount,
       type: t.type,
-      // Opis samo za emisije Banke, ne za P2P transfere
+      // Opis samo za emisije Protokola, ne za ažuriranja evidencije između korisnika
       description: t.fromWallet === null ? t.description : null,
       createdAt: t.createdAt.toISOString(),
     })),

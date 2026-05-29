@@ -102,7 +102,7 @@ Neverifikovani korisnik je lice registrovano na Platformi čija stvarnost nije p
 
 Neverifikovani korisnik može da pregleda opšte pokazatelje sistema, da se upozna sa pravilima, da pristupi tabli zahteva za jemstvo u skladu sa Članom 16 ovih Uslova i da vidi iznose i vremenske oznake POEN transakcija bez pseudonima strana i bez uvida u stanja računa.
 
-Neverifikovani korisnik nema pristup prostoru za razmenu, ne može da inicira niti da prima POEN transakcije i ne može da verifikuje druge korisnike.
+Neverifikovani korisnik nema pristup prostoru za razmenu (oglašavanju) i ne može da verifikuje druge korisnike, niti mu se može evidentirati doprinos u POEN-ima. Može da razmenjuje dobra i usluge van prostora za razmenu i da učestvuje u ažuriranju evidencije POEN-a — kao davalac ili primalac (u skladu sa Članom 28 Pravilnika o KOLO sistemu).
 
 ### Član 15 — Verifikovani korisnik i nosilac ZRNA
 
