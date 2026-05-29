@@ -246,7 +246,7 @@ Razmena nije platna transakcija. Ažuriranje evidencije POEN-a nije prenos monet
 
 Za ispunjenje, kvalitet, odgovornost i rizik u razmeni odgovaraju korisnici koji u njoj učestvuju, prema opštim pravilima obligacionog prava. Fondacija i Protokol ne posreduju u razmeni i ne odgovaraju za ispunjenje obaveza korisnika.
 
-Svi korisnici mogu da razmenjuju dobra i usluge i da primaju i šalju POEN-e. Platformski prostor za oglašavanje dostupan je verifikovanim korisnicima. Pravila platformskog prostora za oglašavanje uređuju se Uslovima korišćenja.
+Svi korisnici mogu da razmenjuju dobra i usluge i da iniciraju ažuriranje evidencije POEN-a u korist drugog korisnika (uz razmenu ili bez protivusluge). Platformski prostor za oglašavanje dostupan je verifikovanim korisnicima. Pravila platformskog prostora za oglašavanje uređuju se Uslovima korišćenja.
 
 ## IV — ZRNO i obračunski okvir
 
@@ -354,7 +354,7 @@ Status određuje obim prava i mogućnosti korisnika u sistemu.
 
 Neverifikovani korisnik je lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac jemstva.
 
-Neverifikovani korisnik ima pravo pregleda javnog sadržaja sistema. Može da prima i šalje POEN-e i da razmenjuje dobra i usluge van platformskog prostora za oglašavanje. Neverifikovanom korisniku se ne može evidentirati doprinos u POEN-ima niti može upisati ZRNO.
+Neverifikovani korisnik ima pravo pregleda javnog sadržaja sistema. Može da razmenjuje dobra i usluge van platformskog prostora za oglašavanje i da učestvuje u ažuriranju evidencije POEN-a — kao davalac ili primalac (uz razmenu ili bez protivusluge). Neverifikovanom korisniku se ne može evidentirati doprinos u POEN-ima niti može upisati ZRNO.
 
 ### Član 29
 

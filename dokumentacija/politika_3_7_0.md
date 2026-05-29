@@ -78,7 +78,7 @@ Pristanak je dobrovoljan i može se povući u svakom trenutku. Povlačenje prist
 
 **4.4 Podaci o aktivnosti**
 
-U toku korišćenja Platforme automatski se evidentiraju podaci o razmenama i doprinosima u pseudonimnom obliku: iznos POEN transfera, vreme transfera i pseudonimi strana.
+U toku korišćenja Platforme automatski se evidentiraju podaci o razmenama i doprinosima u pseudonimnom obliku: iznos ažuriranja evidencije POEN-a, vreme ažuriranja i pseudonimi strana.
 
 Svrha obrade: vođenje evidencije zajedničkog dobra i funkcionisanje obračunskog okvira sistema.
 
