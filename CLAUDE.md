@@ -33,7 +33,7 @@ Dokumentacija je ažurirana na verziju **3.7.0** (Pravilnik, Statut, Whitepaper,
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je kurs ZRNA (DECIMAL(20,2)) i RSD iznosi pokrovitelja (DECIMAL(12,2)).
 4. **Transfer 1:1**: slanje POEN-a između korisnika je bez provizije, Protokol nije posrednik.
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda** (bez dodatnog perioda čekanja od 1 dan kao u v2.0).
-6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. Samo admin vidi vezu pseudonim–identitet. **Pseudonim je vidljiv svim posetiocima (i neregistrovanim) u javnoj evidenciji transakcija i na Pijaci.**
+6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. **Po v3.7.0 (Pravilnik l. 379, DPIA, Whitepaper) ne postoji centralizovana evidencija koja povezuje pseudonim sa identitetom korisnika** — Fondacija tu vezu NE poseduje; dokaz stvarnosti ne prikuplja dokumente, a ime/telefon su dobrovoljni i nisu uslov. **Pseudonim je vidljiv svim posetiocima (i neregistrovanim) u javnoj evidenciji transakcija i na Pijaci.**
 7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola). Odnosi se samo na Socijalne i Operativne programe — Mehanizmi platforme i Projekti ne ulaze u ovaj limit.
 8. **Kategorije emisije POENA**:
    - **Socijalni programi** — emisija po statusu primaoca (Podrška Majkama/primarnim starateljima, Podrška Starijima, Posebna Briga, Školovanje); ulaze u dnevni limit.
