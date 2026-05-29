@@ -13,7 +13,7 @@ const koraci = [
   {
     br: "1",
     naslov: "Registracija",
-    opis: "Email, pseudonim, lozinka. Pravo ime nigde nije javno: u celom interfejsu te predstavlja isključivo pseudonim, a vezu sa identitetom vidi samo Fondacija. Registracija je besplatna i ne obavezuje te ni na šta.",
+    opis: "Email, pseudonim, lozinka. U celom interfejsu te predstavlja isključivo pseudonim — pravo ime nije obavezno, niti sistem vodi evidenciju koja pseudonim povezuje sa tvojim identitetom. Registracija je besplatna i ne obavezuje te ni na šta.",
     detalj: "~ minut",
   },
   {
