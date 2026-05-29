@@ -56,7 +56,7 @@ Datum poslednje izmene: 23.05.2026.
 | **Svrha obrade** | Vođenje evidencije zajedničkog dobra i funkcionisanje obračunskog okvira sistema. |
 | --- | --- |
 | **Kategorije lica** | Korisnici platforme koji učestvuju u razmenama i doprinosima. |
-| **Kategorije podataka** | Iznos POEN transfera, vreme transfera, pseudonimi strana u transakciji. |
+| **Kategorije podataka** | Iznos ažuriranja evidencije POEN-a, vreme ažuriranja, pseudonimi strana u evidentiranoj razmeni. |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) dok korisnik učestvuje u sistemu. Nakon prestanka statusa i anonimizacije, zapisi prestaju da budu lični podaci. |
 | **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača]. Evidencija je javna u pseudonimnom obliku — verifikovani korisnici mogu videti iznose, vremenske oznake i pseudonime strana. |
 | **Prenos u treću zemlju** | [Da/Ne] |

@@ -11,7 +11,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 Kanonska dokumentacija je verzija **3.7.0** (Pravilnik o KOLO sistemu, Statut, Whitepaper, Politika, DPIA), uz **Pravilnik o pokroviteljstvu i donacijama v3.7.1** (tabela donacija skraćena na 11 nivoa / maks 2,00×). **Ovaj CLAUDE.md opisuje model prema dokumentaciji; gde se kod razlikuje, to je eksplicitno označeno kao odstupanje koje kod treba da uskladi.** Kod se postepeno usklađuje:
 - ✅ Dokaz stvarnosti — implementiran kroz 10 koraka (Koraci 1–10, commit c0b8376 → 90e9641); tri statusa korisnika (`POCETNI`/`REGULARNI`/`NOSILAC_ZRNA`), indeks stvarnosti, lanac jemstva, anti-cirkularno pravilo, QR token, mini stablo
 - ✅ Stranice `/pravilnik` i `/statut` rendrju v3.7.0 dokumente
-- 🟡 Terminologija nije usaglašena: kod i UI još uvek koriste `kupi`/`prodaj` za ZRNO (treba `upis`/`otpis`), `KOLO Banka` (treba `KOLO Protokol`), `sticanje`/`povrat` (treba `upis`/`otpis`), `kurs ZRNA` (treba **obračunski koeficijent** — Pravilnik čl. 23 izričito kaže „nije kurs")
+- 🟡 Terminologija nije usaglašena: kod i UI još uvek koriste `kupi`/`prodaj` za ZRNO (treba `upis`/`otpis`), `KOLO Banka` (treba `KOLO Protokol`), `sticanje`/`povrat` (treba `upis`/`otpis`), `kurs ZRNA` (treba **obračunski koeficijent** — Pravilnik čl. 23 izričito kaže „nije kurs"), te `slanje/primanje POEN-a` / „Pošalji POEN" / `/api/transfer` / `TransactionType.TRANSFER` (pojmovno **ažuriranje evidencije** — Pravilnik čl. 14, 16: „nije prenos monetarne vrednosti"; „upis" se NE koristi jer označava stvaranje novih POEN-a kroz kanale)
 - 🟡 **Verifikacija = dokaz stvarnosti bez dokumenata** (Pravilnik čl. 31, lanac jemstva). Kod još uvek ima legacy tok zasnovan na dokumentima/JMBG-u (upload lk, base64 slike, admin pregled dokumenata, JMBG u eksportu/auditu, GDPR brisanje verifikacionih dokumenata) — **to NE postoji u v3.7.0 modelu i treba ga ukloniti/uskladiti** (vidi odgovarajuće sekcije ispod)
 - 🟡 **Vidljivost podataka po ulozi** (Pravilnik čl. 28–30, 67; Politika čl. 6): pseudonimi su vidljivi **samo verifikovanim korisnicima**; neregistrovani vide samo agregate. Kod trenutno izlaže pseudonime javno (`/api/javno/feed`, javni prikaz Pijace, „globalna javnost transakcija") — **odstupanje koje kod treba da uskladi**
 - 🟡 Pravni mehanizmi nedostaju: Zaštitni veto Fondacije (čl. 48–50), Osnivački doprinos sa granicom 2.4M POEN
@@ -33,7 +33,7 @@ Kanonska dokumentacija je verzija **3.7.0** (Pravilnik o KOLO sistemu, Statut, W
 1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
 2. **Nema negativnog stanja**: korisnici i Krugovi nikad ispod 0. Samo Protokol može u minus.
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznos u sistemu je **obračunski koeficijent ZRNA** (DECIMAL(20,2); u kodu još uvek nazvan „kurs") i RSD iznosi pokrovitelja (DECIMAL(12,2)).
-4. **Transfer 1:1**: slanje POEN-a između korisnika je bez provizije, Protokol nije posrednik.
+4. **Prenos 1:1 (ažuriranje evidencije)**: prenos POEN-a između korisnika je **ažuriranje evidencije** (zapis davaoca se umanjuje, zapis primaoca uvećava), bez provizije; Protokol nije posrednik i **to nije platna transakcija ni prenos monetarne vrednosti** (Pravilnik čl. 14, 16). Izbegavati „slanje/primanje POEN-a" — POEN nema nosioca, korisnik samo inicira ažuriranje evidencije.
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda** (bez dodatnog perioda čekanja od 1 dan kao u v2.0).
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. **Po v3.7.0 (Pravilnik čl. 31, DPIA, Whitepaper) ne postoji centralizovana evidencija koja povezuje pseudonim sa identitetom korisnika** — Fondacija tu vezu NE poseduje; dokaz stvarnosti ne prikuplja dokumente, a ime/telefon su dobrovoljni i nisu uslov. **Pseudonim je u evidenciji doprinosa vidljiv samo verifikovanim korisnicima** (Pravilnik čl. 67, Politika čl. 6); neregistrovani vide samo agregate. 🟡 Kod trenutno izlaže pseudonime javno — odstupanje koje treba uskladiti.
 7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola; po Pravilniku o operativnom doprinosu čl. 23 baza je „ukupan broj evidentiranih POEN-a na početku perioda" — pod zero-sum invarijantom jednako po magnitudi). Odnosi se samo na **operativni doprinos i socijalne programe**; ostali kanali evidentiranja (automatski akti Protokola) ne ulaze u ovaj limit.
@@ -44,7 +44,7 @@ Kanonska dokumentacija je verzija **3.7.0** (Pravilnik o KOLO sistemu, Statut, W
    - **Ne ulaze u dnevni limit (automatski akt Protokola, prati pravni akt/činjenicu):** verifikacija u lancu jemstva (dokaz stvarnosti), finansijski doprinos (donacije), pokroviteljstvo, rast kolektivnih oblika (bonus rasta Kruga), osnivački doprinos.
 9. **Gradirana vidljivost podataka po ulozi (Pravilnik čl. 28–30, 67; Politika čl. 6; Uslovi čl. 14, 17):**
    - **Neregistrovan posetilac** vidi: **isključivo opšte pokazatelje sistema (agregate)**. NE vidi pojedinačne transakcije ni pseudonime; na Pijaci ne pristupa oglasima niti kontakt podacima.
-   - **Neverifikovan prijavljen korisnik** vidi: iznose i vremenske oznake POEN transakcija **bez pseudonima strana** i bez stanja računa; svoje notifikacije. **Može da prima i šalje POEN i da razmenjuje dobra/usluge van platformskog prostora za oglašavanje** (čl. 28). Može da se predstavi mreži kroz **tablu zahteva za jemstvo** radi verifikacije.
+   - **Neverifikovan prijavljen korisnik** vidi: iznose i vremenske oznake ažuriranja evidencije POEN-a **bez pseudonima strana** i bez stanja računa; svoje notifikacije. **Može da razmenjuje dobra/usluge van platformskog prostora za oglašavanje i da učestvuje u ažuriranju evidencije POEN-a — kao davalac ili primalac** (čl. 28). Može da se predstavi mreži kroz **tablu zahteva za jemstvo** radi verifikacije.
    - **Neverifikovan prijavljen korisnik NE MOŽE**: videti pseudonime drugih, rang-liste, profile drugih članova; postavljati oglase u platformskom prostoru za oglašavanje; slati/primati poruke (osim mehanizma table jemstva).
    - **Verifikovan korisnik (indeks ≥ 10%)** ima pun pristup: pseudonimi svih korisnika, sve transakcije sa pseudonimima strana, stanja računa, profili, poruke, platformski prostor za oglašavanje (Pijaca), upis ZRNA, učešće u Programima.
    - 🟡 Kod trenutno daje širu javnu vidljivost (javni feed/Pijaca sa pseudonimima) nego što dokumentacija propisuje — odstupanje koje kod treba da uskladi.
@@ -81,8 +81,8 @@ Implikacija za kod: praćenje stanja sredstava Fondacije i praga iz posebnog pra
 
 ### Pijaca / razmena (Pravilnik čl. 16, odgovornost čl. 77)
 - Za razmenu dobara i usluga odgovaraju korisnici prema **obligacionom pravu**, **ne kroz Protokol** — Fondacija/Protokol ne posreduju i ne odgovaraju.
-- **Svi korisnici mogu da razmenjuju dobra/usluge i da primaju i šalju POEN.** Neverifikovani mogu razmenjivati **van platformskog prostora za oglašavanje** (čl. 28).
-- **Platformski prostor za oglašavanje (postavljanje oglasa)** dostupan je samo **verifikovanim korisnicima** (čl. 16). Neverifikovanom korisniku se **ne evidentira doprinos u POEN-ima** (emisija), ali POEN može primati transferom.
+- **Svi korisnici mogu da razmenjuju dobra/usluge i da iniciraju ažuriranje evidencije POEN-a u korist drugih.** Neverifikovani mogu razmenjivati **van platformskog prostora za oglašavanje** (čl. 28).
+- **Platformski prostor za oglašavanje (postavljanje oglasa)** dostupan je samo **verifikovanim korisnicima** (čl. 16). Neverifikovanom korisniku se **ne evidentira doprinos u POEN-ima** (emisija), ali mu se POEN može evidentirati ažuriranjem evidencije (kao primaocu).
 
 ### Krug (kolektivni oblik — Pravilnik Glava VIII, čl. 55)
 - Kolektivni oblik zasnovan na zajedničkom interesu ili delatnosti; nastaje udruživanjem korisnika.
@@ -119,7 +119,7 @@ Implikacija za kod: praćenje stanja sredstava Fondacije i praga iz posebnog pra
 - API rute: srpski termini.
 - Route handleri sa dinamičkim segmentima: params je `Promise<{id: string}>`, mora se `await params`.
 - Fontovi: koristiti fontove koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
-- `/api/korisnici/pretraga` vraća `{ id, pseudonim, verified, location }` za verifikovane korisnike; `{ id, pseudonim }` za neverifikovane (dostupna isključivo u kontekstu forme za slanje POENA).
+- `/api/korisnici/pretraga` vraća `{ id, pseudonim, verified, location }` za verifikovane korisnike; `{ id, pseudonim }` za neverifikovane (dostupna isključivo u kontekstu forme za prenos POEN-a).
 - Zaokruživanje POEN-a u emisijama (donacije, programi, bonusi): `Math.round()`.
 - Zaokruživanje u ZRNO konverzijama: uvek u korist Protokola — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
 - Slike za verifikaciju: čuvaju se kao base64 string u bazi (ne filesystem) — Vercel kompatibilnost.
@@ -173,7 +173,7 @@ docs/             — dokumentacija po fazama
 
 ### Novčanik (POEN)
 - Prikaz stanja
-- Transfer POEN-a između korisnika (1:1, bez provizije)
+- Prenos POEN-a između korisnika — ažuriranje evidencije 1:1, bez provizije (u kodu `/api/transfer`; pojmovno „ažuriranje evidencije", ne „slanje")
 - Istorija transakcija sa filterima; klikabilni pseudonimi u transakcijama
 - QR modal: polja za iznos i opis — dinamički menjaju QR kod; `/m/[hash]` prosleđuje `amount` i `opis` na novčanik
 - 🟡 **Globalna javnost transakcija (trenutni kod)**: sve transakcije vidljive svim posetiocima sa pseudonimima. **Odstupanje od v3.7.0**: po Pravilniku čl. 67 / Politici čl. 6, pseudonime u evidenciji vide samo verifikovani korisnici; neregistrovani vide samo agregate, neverifikovani prijavljeni vide iznose/vremena bez pseudonima. Treba uskladiti.
