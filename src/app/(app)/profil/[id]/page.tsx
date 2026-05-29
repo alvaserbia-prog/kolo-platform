@@ -225,7 +225,7 @@ export default function JavniProfilPage() {
             href={`/novcanik?prima=${profil.pseudonim}`}
             className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
           >
-            Pošalji POEN
+            Evidentiraj POEN
           </Link>
           <PorukaButton userId={profil.id} />
         </div>
