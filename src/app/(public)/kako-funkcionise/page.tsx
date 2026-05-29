@@ -13,8 +13,8 @@ const koraci = [
   {
     br: "1",
     naslov: "Registracija",
-    opis: "Email, pseudonim, lozinka.",
-    detalj: "~ minut",
+    opis: "Otvaranje naloga traje oko minut — dovoljni su email, pseudonim i lozinka. Pravo ime nigde nije javno: u celom interfejsu te predstavlja isključivo pseudonim, a vezu sa identitetom vidi samo Fondacija. Registracija je besplatna i ne obavezuje te ni na šta.",
+    detalj: "~ minut · besplatno",
   },
   {
     br: "2",
@@ -38,7 +38,7 @@ const koraci = [
   {
     br: "5",
     naslov: "Glas u sistemu",
-    opis: "ZRNO ti daje pravo glasa u Gornjem Kolu koje odlučuje o svim sistemskim pitanjima. Kvadratno glasanje štiti zajednicu od koncentracije moći.",
+    opis: "Upisom POEN-a u ZRNO stičeš pravo glasa u Gornjem Kolu, telu koje odlučuje o svim sistemskim pitanjima. Glasačka moć računa se kao kvadratni koren tvog aktivnog ZRNA, pa niko ne može sam nadglasati zajednicu — sistem nagrađuje širu participaciju, ne akumulaciju.",
     detalj: "demokratski glas",
   },
 ];
