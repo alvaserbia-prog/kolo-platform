@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 const TIP_LABELA: Record<string, string> = {
-  TRANSFER: "Ažuriranje evidencije",
+  TRANSFER: "Upis POEN-a",
   EMISIJA_VERIFIKACIJA: "Verifikacija",
   EMISIJA_PREPORUKA: "Preporuka",
   EMISIJA_DONACIJA: "Donacija",
