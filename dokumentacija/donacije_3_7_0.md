@@ -1,6 +1,6 @@
 # Pravilnik o pokroviteljstvu i donacijama
 
-*Verzija 3.7.0*
+*Verzija 3.7.1*
 
 ## I — Opšte odredbe
 
@@ -49,13 +49,6 @@ Nivo se utvrđuje na osnovu zbira svih prethodnih donacija korisnika i nove dona
 | 9 | 1.000.000 | 1,80 |
 | 10 | 2.000.000 | 1,90 |
 | 11 | 5.000.000 | 2,00 |
-| 12 | 10.000.000 | 2,20 |
-| 13 | 20.000.000 | 2,40 |
-| 14 | 50.000.000 | 2,70 |
-| 15 | 100.000.000 | 3,00 |
-| 16 | 200.000.000 | 3,50 |
-| 17 | 500.000.000 | 4,00 |
-| 18 | 1.000.000.000 | 5,00 |
 
 Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koeficijentom evidencije.
 
