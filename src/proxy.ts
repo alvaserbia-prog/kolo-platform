@@ -17,7 +17,7 @@ const ZAKLJUCANE_ULAZNE_RUTE = [
 const PRESKOCI = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
-  "/api/", "/_next", "/favicon.ico",
+  "/api/", "/_next", "/favicon.ico", "/icon.png",
   "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/flags/",
 ];
 
@@ -55,6 +55,6 @@ export default async function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|flags).*)",
+    "/((?!_next/static|_next/image|favicon.ico|icon.png|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|flags).*)",
   ],
 };
