@@ -405,6 +405,36 @@ export default function OSistemuPage() {
         </div>
       </section>
 
+      {/* ── KOLO U TOJ FAMILIJI ───────────────────────────────────── */}
+      <section id="kolo-familija" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
+        <div className="max-w-[680px] mx-auto">
+          <div className="text-center mb-6">
+            <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              Gde je tu KOLO
+            </div>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
+            Ista familija, sa svojim posebnostima
+          </h2>
+          <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
+            <p>
+              KOLO nije kopija nijedne od navedenih mreža. Za razliku od tih mreža — koje su pre svega
+              valute za razmenu — KOLO razdvaja doprinos od glasa:{" "}
+              <strong className="text-kolo-green-900">POEN</strong> beleži šta si dao, a{" "}
+              <strong className="text-kolo-green-900">ZRNO</strong> nosi glas u odlučivanju, uz kvadratno
+              glasanje kao zaštitu da niko ne preuzme moć. Uz to, razmena i njena evidencija su pravno
+              odvojene — pa POEN nikad nije plaćanje — a podrška ranjivim grupama (majke, stariji, đaci)
+              ugrađena je u sam sistem.
+            </p>
+            <p>
+              Ali fundamentalno, KOLO pripada istoj familiji — sistemi evidencije razmene među
+              pojedincima, koji rade komplementarno sa zvaničnom valutom, i koji rade za korisnike
+              umesto da ih koriste.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ── MEĐUNARODNI OKVIR ─────────────────────────────────────── */}
       <section id="okvir" className="bg-white rounded-2xl card-shadow p-8 md:p-12">
         <div className="max-w-[680px] mx-auto">
@@ -487,21 +517,7 @@ export default function OSistemuPage() {
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
-              KOLO nije kopija nijedne od navedenih mreža. Za razliku od tih mreža — koje su pre svega
-              valute za razmenu — KOLO razdvaja doprinos od glasa:{" "}
-              <strong className="text-kolo-green-900">POEN</strong> beleži šta si dao, a{" "}
-              <strong className="text-kolo-green-900">ZRNO</strong> nosi glas u odlučivanju, uz kvadratno
-              glasanje kao zaštitu da niko ne preuzme moć. Uz to, razmena i njena evidencija su pravno
-              odvojene — pa POEN nikad nije plaćanje — a podrška ranjivim grupama (majke, stariji, đaci)
-              ugrađena je u sam sistem.
-            </p>
-            <p>
-              Ali fundamentalno, KOLO pripada istoj familiji — sistemi evidencije razmene među
-              pojedincima, koji rade komplementarno sa zvaničnom valutom, i koji rade za korisnike
-              umesto da ih koriste.
-            </p>
-            <p>
-              Trenutak je posebno povoljan. Solidarna ekonomija je sada formalno priznat sektor, a Srbija
+              Solidarna ekonomija je sada formalno priznat sektor, a Srbija
               je u procesu pristupanja Evropskoj uniji.
             </p>
             <p>
