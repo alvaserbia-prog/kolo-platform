@@ -6,12 +6,12 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
-  title: "Uslovi korišćenja — KOLO",
-  description: "Uslovi korišćenja KOLO platforme, verzija 3.7.0",
+  title: "Izjava o prihvatanju rizika — KOLO",
+  description: "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.0",
 };
 
-export default async function UsloviPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "uslovi_koriscenja_3_7_2.md");
+export default async function RiziciPage() {
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "rizici_3_7_2.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -20,14 +20,13 @@ export default async function UsloviPage() {
       <div className="mb-8">
         <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Uslovi korišćenja KOLO platforme
+          Izjava o prihvatanju rizika
         </h1>
         <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
-          <Link href="/statut" className="text-kolo-green-700 hover:underline">Statut Fondacije</Link>
-          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
+          <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
+          <Link href="/pravilnik/kolo-sistem" className="text-kolo-green-700 hover:underline">Pravilnik o KOLO sistemu</Link>
         </div>
       </div>
 
@@ -57,8 +56,8 @@ export default async function UsloviPage() {
       </article>
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
-        <Link href="/privatnost" className="text-kolo-green-700 hover:underline">
-          Politika privatnosti →
+        <Link href="/uslovi" className="text-kolo-green-700 hover:underline">
+          ← Uslovi korišćenja
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
           Nazad na početnu

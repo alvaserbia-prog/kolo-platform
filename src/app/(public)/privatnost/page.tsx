@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function PolitikaPrivatnostiPage() {
-  const filePath = path.join(process.cwd(), "dokumentacija", "politika_3_7_0.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_2.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (

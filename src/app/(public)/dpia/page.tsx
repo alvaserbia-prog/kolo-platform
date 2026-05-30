@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DPIAPage() {
-  const filePath = path.join(process.cwd(), "dokumentacija", "DPIA_3_7_0.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "DPIA_3_7_2.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -26,6 +26,7 @@ export default async function DPIAPage() {
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
+          <Link href="/radnje-obrade" className="text-kolo-green-700 hover:underline">Registar radnji obrade</Link>
           <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
         </div>
       </div>

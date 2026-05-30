@@ -25,7 +25,7 @@ const PRAVILNICI = [
   {
     slug: "pokroviteljstvo-donacije",
     naziv: "Pravilnik o pokroviteljstvu i donacijama",
-    opis: "Nivoi donacija fizičkih lica (18 nivoa, koeficijent 1,00–5,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD).",
+    opis: "Nivoi donacija fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD).",
   },
   {
     slug: "operativni",

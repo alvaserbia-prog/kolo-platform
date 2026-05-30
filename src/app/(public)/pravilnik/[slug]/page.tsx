@@ -9,32 +9,32 @@ import remarkGfm from "remark-gfm";
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; opis: string }> = {
   "kolo-sistem": {
     naziv: "Pravilnik o KOLO sistemu",
-    fajl: "Pravilnik_3_7_0.md",
+    fajl: "Pravilnik_3_7_2.md",
     opis: "Osnovni akt sistema — 12 glava, 82 člana.",
   },
   "hijerarhija": {
     naziv: "Pravilnik o hijerarhiji akata",
-    fajl: "hijerarhija_3_7_0.md",
+    fajl: "hijerarhija_3_7_2.md",
     opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
   },
   "dokaz-stvarnosti": {
     naziv: "Pravilnik o dokazu stvarnosti",
-    fajl: "dokaz_stvarnosti_3_7_0.md",
+    fajl: "dokaz_stvarnosti_3_7_2.md",
     opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
   },
   "pokroviteljstvo-donacije": {
     naziv: "Pravilnik o pokroviteljstvu i donacijama",
-    fajl: "donacije_3_7_0.md",
+    fajl: "donacije_3_7_2.md",
     opis: "Nivoi donacija i pokroviteljstva.",
   },
   "operativni": {
     naziv: "Pravilnik o operativnom doprinosu",
-    fajl: "operativni_3_7_0.md",
+    fajl: "operativni_3_7_2.md",
     opis: "Operativni program i međusobno potvrđivanje doprinosa.",
   },
   "osnivacki": {
     naziv: "Pravilnik o osnivačkom doprinosu",
-    fajl: "osnivacki_3_7_0.md",
+    fajl: "osnivacki_3_7_2.md",
     opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
   },
 };
@@ -62,7 +62,7 @@ export default async function PravilnikSlugPage({ params }: Props) {
   const p = PRAVILNICI[slug];
   if (!p) notFound();
 
-  const filePath = path.join(process.cwd(), "dokumentacija", p.fajl);
+  const filePath = path.join(process.cwd(), "nova dokumentacija", p.fajl);
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (

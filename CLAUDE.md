@@ -1,5 +1,17 @@
 # KOLO Platforma — v3.7.0
 
+## ⚠️ Deploy i grane (OBAVEZNO poštovati)
+Vercel **Production Branch = `production`**. Podela okruženja:
+- **`main`** → TEST deploy (`*.vercel.app`, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
+- **`production`** → UŽIVO na **ekolo.rs** (prod Neon baza, `seed-prod.ts`). Samo namerna „objava".
+
+**Pravila za Claude:**
+- Podrazumevano radi i guraj na **`main`** (= test). NIKAD ne guraj direktno na `production` osim kad vlasnik eksplicitno kaže „objavi na ekolo.rs" / „pošalji na produkciju".
+- Vlasnik ne barata gitom. Mapiranje komandi:
+  - „pošalji na test" → commit + push na `main`.
+  - „objavi na ekolo.rs" → merge `main` → `production` + push na `production`.
+- Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
+
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Koristi dve interne jedinice:
 - **POEN** — interna obračunska jedinica kojom se evidentira doprinos i učešće u zajedničkom dobru (NIJE novac, NIJE imovinsko pravo; beleži činjenicu doprinosa, bez vrednosti van sistema — analogija: zapis u matičnoj knjizi)

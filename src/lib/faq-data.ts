@@ -55,11 +55,11 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
         pitanje: `Šta tačno znači princip dva odvojena akta?`,
         odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svake emisije POEN-a iz Protokola.
 
-Akt 1: korisnik nešto uradi u korist zajedničkog dobra ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verifikuje novog korisnika u lancu jemstva, ima status koji pokreće socijalni program ili dobije odobrenje za projekat).
+Akt 1: korisnik doprinese zajedničkom dobru ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verifikuje novog korisnika u lancu jemstva, ima status koji pokreće socijalni program ili podnese prijavu pokroviteljstva).
 
-Akt 2: Protokol algoritamski emituje POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
+Akt 2: Protokol algoritamski i deterministički evidentira POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
 
-Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fondacije po kome bi za uradeno X dobio Y POEN-a, niti korisnik ima potraživanje prema Fondaciji za emisijom. Princip je definisan u čl. 5 Pravilnika i primenjuje se na sve kategorije emisije iz čl. 11.`,
+Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fondacije po kome bi za urađeno X dobio Y POEN-a, niti korisnik ima potraživanje prema Fondaciji za emisijom. Princip je razrađen u Pravilniku (čl. 73), a kanali evidentiranja POEN-a nabrojani su u čl. 15.`,
       },
       {
         id: 40,
@@ -99,9 +99,9 @@ Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donaci
       {
         id: 8,
         pitanje: `Šta ako sam stranac — mogu li biti član?`,
-        odgovor: `Da, sa pasošem ili ekvivalentnim identifikacionim dokumentom. Strani državljani mogu se registrovati i verifikovati ako mogu da dokažu identitet.
+        odgovor: `Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost uživo. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
-Sistem trenutno radi na srpskom jeziku, ali su dostupne i engleska i mađarska verzija interfejsa.`,
+Sistem trenutno radi na srpskom jeziku; interfejs ima i englesku i mađarsku verziju, dok pravno obavezujući tekstovi (Pravilnik, Uslovi) ostaju na srpskom.`,
       },
       {
         id: 9,
@@ -192,11 +192,11 @@ Iznos je fiksan i isplaćuje se mesečno dok status traje.`,
       {
         id: 19,
         pitanje: `Kako radi Program Evidencije Doprinosa (PED)?`,
-        odgovor: `PED evidentira različite oblike rada koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
+        odgovor: `Operativni doprinos (Program Evidencije Doprinosa) evidentira oblike rada za zajedničko dobro koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
 
-Drugi verifikovani korisnici potvrđuju da si zaista doprineo, a Protokol na osnovu te potvrde emituje POEN.
+Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo (po aktivaciji). Verifikovan korisnik se prijavljuje i izvršava ga, a izvršenje potvrđuje ovlašćeni verifikator pre nego što Protokol evidentira POEN.
 
-Nema fiksne „tarife po satu" — sistem se oslanja na međusobno potvrđivanje između članova.`,
+Nema fiksne „tarife po satu" — predloženi POEN je samo težinski orijentir, a stvarno evidentirani iznos raspoređuje se u okviru dnevnog limita emisije.`,
       },
       {
         id: 20,
@@ -230,11 +230,11 @@ Sav RSD deo je tvoja privatna odgovornost prema poreskim propisima.`,
       {
         id: 23,
         pitanje: `Kako radi donacija Fondaciji i koliko POEN-a dobijam?`,
-        odgovor: `Donacija je dobrovoljni novčani prilog Fondaciji u dinarima.
+        odgovor: `Donaciju može dati svaki verifikovani korisnik, uplatom u dinarima na račun Fondacije.
 
-Admin potvrđuje uplatu i Protokol ti automatski emituje POEN bonus po skali sa 18 nivoa — što više kumulativno daješ, to veći koeficijent (od 1× do 5× iznosa donacije u POEN-ima).
+Po prijemu uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa kumulativnim iznosom kroz 11 nivoa — od 1,00 (pri kumulativno 2.000 RSD) do 2,00 (pri 5.000.000 RSD). Nivo je trajan i ne smanjuje se korišćenjem POEN-a. (Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.)
 
-Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, pravnik, računovodstvo); kad sredstva dostignu trostruki iznos mesečnih troškova, sistem prelazi u potpuno samoupravljanje.`,
+Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, pravnik, računovodstvo). Kad prihodi premaše operativne troškove, višak se usmerava u programe sistema.`,
       },
       {
         id: 24,
@@ -310,11 +310,11 @@ Cilj je da bogati pojedinci ne mogu „kupiti" odluku samo time što imaju mnogo
       {
         id: 30,
         pitanje: `Šta je Zaštitni veto Fondacije?`,
-        odgovor: `Posle aktivacije Gornjeg Kola, Fondacija zadržava pravo veta — ali samo na odluke koje bi ugrozile njenu finansijsku održivost (na primer, da se sva sredstva potroše na jedan projekat).
+        odgovor: `Posle aktivacije Gornjeg Kola, Fondacija može odbiti izvršenje odluke koja bi: (1) narušila temeljne principe sistema, (2) prekršila zakon ili (3) ugrozila pravni status Fondacije.
 
-To nije politička kontrola, već zaštita kontinuiteta.
+Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretan princip ili normu; veto bez obrazloženja sam je zloupotreba. To nije politička kontrola, već zaštita kontinuiteta.
 
-Veto se trajno gasi kad sredstva Fondacije dostignu trostruki iznos mesečnih operativnih troškova — Fondacija je tada dovoljno stabilna da ne treba dodatnu zaštitu.`,
+Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti utvrđen posebnim pravilnikom.`,
       },
     ],
   },
@@ -325,15 +325,13 @@ Veto se trajno gasi kad sredstva Fondacije dostignu trostruki iznos mesečnih op
       {
         id: 31,
         pitanje: `Kako se rešavaju sporovi između članova?`,
-        odgovor: `Sistem ima trostepeni mehanizam.
+        odgovor: `Spor između članova oko razmene rešava se po opštim pravilima obligacionog prava, pred nadležnim sudom — Fondacija nije strana u tom odnosu.
 
-Prvi nivo je Krug — ako je spor između članova istog Kruga, Krug pokušava posredovanje kroz svoja interna pravila.
+U početnoj fazi možeš zatražiti dobrovoljno (neobavezujuće) posredovanje Fondacije. Ako je spor između člana i same Fondacije, prvo se traži sporazumno rešenje, a inače je nadležan sud u Somboru.
 
-Drugi nivo je Fondacija — formalni prigovor koji Fondacija mora rešiti u roku od 30 dana.
+Za zaštitu ličnih podataka imaš pravo pritužbe Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti.
 
-Treći nivo je Gornje Kolo (kada se aktivira) — kao konačna instanca.
-
-Pravo na sudsku zaštitu ostaje neotuđivo — možeš tužiti Fondaciji pred sudom u Somboru.`,
+Posebni interni mehanizmi rešavanja sporova mogu se uspostaviti kasnije (poseban pravilnik ili odluka Gornjeg Kola); zasad ne postoje.`,
       },
       {
         id: 32,
@@ -386,7 +384,7 @@ U svakom trenutku možeš zatražiti eksport svih svojih podataka u JSON formatu
         pitanje: `Kako izlazim iz sistema?`,
         odgovor: `Brisanje naloga je dostupno u svakom trenutku iz podešavanja profila.
 
-Pre deaktivacije možeš preneti POEN drugom korisniku; sva ZRNA se automatski otpisuju Protokolu po tekućem obračunskom koeficijentu. POEN koji ostane se takođe vraća Protokolu.
+Pre deaktivacije možeš inicirati ažuriranje evidencije POEN-a u korist drugog korisnika. Sva ZRNA se pri prestanku statusa otpisuju Protokolu — taj otpis ne pokreće evidentiranje POEN-a. POEN koji ostane se takođe poništava i vraća Protokolu.
 
 Tvoji lični podaci se anonimizuju (pseudonim postaje neutralni KorisnikID), ali numerička istorija transakcija ostaje radi održanja matematičke ispravnosti sistema.
 

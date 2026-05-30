@@ -285,6 +285,12 @@ export default function OSistemuPage() {
               tekst: "Upravno telo svih nosilaca ZRNA; sastav se menja sa svakim obračunskim periodom. Odlučuje kvadratnim glasanjem — glasačka moć jednaka je celobrojnoj vrednosti kvadratnog korena iz broja aktivnih ZRNA (ko ima 100 aktivnih ZRNA, ima 10 glasova), čime se sprečava koncentracija moći.",
               boja: "border-kolo-gold-400",
             },
+            {
+              naslov: "Korisnici",
+              podnaslov: "Učesnici sistema",
+              tekst: "Ljudi koji čine KOLO Zajednicu — svi oni koji prihvataju uslove po kojima ona funkcioniše. Svojim radom, dobrima i znanjem doprinose zajedničkom dobru i za to dobijaju POEN, a kroz njega i pristup onome što su drugi doneli. Oni koji nose ZRNO učestvuju i u odlučivanju kroz Gornje Kolo.",
+              boja: "border-kolo-green-700",
+            },
           ].map((k) => (
             <div
               key={k.naslov}

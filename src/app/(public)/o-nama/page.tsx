@@ -516,7 +516,7 @@ export default function ONamaPage() {
                 <summary className="flex items-center justify-between gap-2 p-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-kolo-bg transition-colors">
                   <span className="text-sm font-semibold text-kolo-text">Pravni i korisnički dokumenti</span>
                   <span className="flex items-center gap-2 text-kolo-muted">
-                    <span className="text-[11px]">3 dokumenta</span>
+                    <span className="text-[11px]">5 dokumenata</span>
                     <svg className="transition-transform group-open/sek:rotate-90" width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -525,8 +525,10 @@ export default function ONamaPage() {
                 <div className="px-1 pb-1.5 space-y-1">
                   {[
                     { naziv: "Uslovi korišćenja", href: "/uslovi" },
+                    { naziv: "Izjava o prihvatanju rizika", href: "/rizici" },
                     { naziv: "Politika privatnosti", href: "/privatnost" },
                     { naziv: "Procena uticaja na zaštitu podataka (DPIA)", href: "/dpia" },
+                    { naziv: "Registar radnji obrade", href: "/radnje-obrade" },
                   ].map((dok) => (
                     <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
                   ))}
