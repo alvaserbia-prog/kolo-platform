@@ -42,23 +42,13 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
       },
       {
         id: 4,
-        pitanje: `Šta je ZRNO i kako ga upisujem?`,
-        odgovor: `ZRNO je obračunska jedinica položaja korisnika u zajedničkom dobru — daje ti pravo glasa u Gornjem Kolu, telu nosilaca ZRNA koje odlučuje o budućnosti sistema. Ukupna količina ZRNA u sistemu je fiksna — 1.000.000, bez mogućnosti povećanja ili smanjenja.
-
-ZRNO se upisuje isključivo od KOLO Protokola, u zamenu za POEN, po dnevnom obračunskom koeficijentu. Da bi upisao ZRNO, moraš biti verifikovan, imati najmanje 20.000 POEN-a na računu, a najviše 1% svog stanja možeš dnevno upisati.
-
-Obračunski koeficijent je administrativna veličina — odnos broja evidentiranih POEN-a i raspoloživih ZRNA. Nije cena, nije tržišni kurs.
-
-Glasačka snaga aktivnog ZRNA računa se po formuli kvadratnog korena — 100 aktivnih ZRNA daje 10 glasova, da bi se sprečilo da pojedinci sa najviše ZRNA dominiraju.`,
+        pitanje: `Šta je ZRNO i čemu služi?`,
+        odgovor: `ZRNO je drugi zapis koji sistem vodi o tebi, odvojen od POEN-a. Dok POEN beleži tvoj doprinos — šta si dao zajednici — ZRNO beleži tvoj položaj, meru trajnijeg učešća u zajednici. Iz tog položaja proizlaze dve stvari: glas u odlukama o pravilima sistema i evidentiran položaj koji se menja sa aktivnošću u sistemu. ZRNO nije udeo, akcija ni digitalna imovina i ne nosi kamatu ni prinos — ono pokazuje koliko si svog doprinosa uložio nazad u zajednicu, ne koliko ti ona duguje.`,
       },
       {
         id: 5,
         pitanje: `Kakav je odnos prema porezu i fiskalizaciji?`,
-        odgovor: `POEN nije novac u pravnom smislu — nije zakonsko sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, niti potraživanje prema Fondaciji. Pravno se konstruiše kao doprinos zajedničkom dobru, a emisija POEN-a kao evidencija tog doprinosa — to su dva odvojena akta.
-
-Postojanje POEN-a ne ukida i ne menja obaveze koje korisnik već ima po opštim propisima Republike Srbije (poreske, registracione, profesionalne i druge) kada obavlja delatnost koja te obaveze pokreće.
-
-Pravna kvalifikacija razmena u sistemu KOLO predmet je dijaloga sa nadležnim organima — Fondacija će odmah po pokretanju sistema proaktivno predati dokumentaciju Poreskoj upravi i Narodnoj banci Srbije i javno objaviti svaki zvanični odgovor.`,
+        odgovor: `POEN nije novac niti zakonsko sredstvo plaćanja, a razmena u POEN-ima nije platna transakcija u smislu propisa o platnim uslugama. KOLO ne obračunava poreze niti izdaje fiskalne račune u tvoje ime. Ipak, razmena dobara i usluga može imati poreske implikacije za tebe, zavisno od toga šta i u kom obimu radiš — za to važe opšti propisi. Fondacija ne pruža poreski savet; korisnik je odgovoran za sopstvene poreske obaveze. Ako redovno pružaš robu ili uslugu, posavetuj se sa knjigovođom.`,
       },
       {
         id: 38,
@@ -179,11 +169,7 @@ Ovlašćena lica nisu „menadžment" — Krug i dalje odlučuje kolektivno, oni
       {
         id: 16,
         pitanje: `Šta su Programi i koji postoje?`,
-        odgovor: `Programi su način na koji Protokol periodično emituje POEN određenim grupama.
-
-Postoji Operativni program (Program Evidencije Doprinosa — PED, koji evidentira različite oblike rada i doprinosa kroz međusobno potvrđivanje) i četiri socijalna programa: Podrška Majkama (i primarnim starateljima), Podrška Starijima, Posebna Briga (za korisnike sa rešenjem o invalidnosti) i Školovanje.
-
-Svi programi su otvoreni svim verifikovanim korisnicima, nezavisno od članstva u Krugu.`,
+        odgovor: `Neki oblici učešća u zajednici su stalni i razuđeni — briga o deci, o starijima — pa se ne mogu evidentirati kao pojedinačne razmene. Za to postoje socijalni programi: majke kao primarni staratelji, stariji korisnici, posebna briga i školovanje. Kad verifikuješ da pripadaš takvoj grupi, Protokol ti automatski upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo učešće dobije ravnopravno mesto u sistemu.`,
       },
       {
         id: 17,

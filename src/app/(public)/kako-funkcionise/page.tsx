@@ -359,7 +359,7 @@ export default function KakoFunkcionisePage() {
             Najčešća pitanja
           </h2>
         </div>
-        <FaqAkordeon pitanja={poBrojevima([21, 31, 36])} />
+        <FaqAkordeon pitanja={poBrojevima([4, 16, 5])} />
         <div className="text-center pt-2">
           <Link
             href="/cesto-postavljena-pitanja"
