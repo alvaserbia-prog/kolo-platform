@@ -53,23 +53,9 @@ export default function OSistemuPage() {
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
             O sistemu
           </h1>
-          <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 max-w-[600px]">
+          <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-[600px]">
             KOLO beleži ono čime doprinosimo zajednici — rad, dobra i znanje — i čuva to kao zajedničko dobro.
           </p>
-          {/* Mini-sadržaj */}
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
-            <a href="#zajednicko-dobro" className="hover:text-white/80 transition-colors">Zajedničko dobro</a>
-            <span className="text-white/20">·</span>
-            <a href="#arhitektura" className="hover:text-white/80 transition-colors">Arhitektura</a>
-            <span className="text-white/20">·</span>
-            <a href="#topla-voda" className="hover:text-white/80 transition-colors">Ne izmišljamo toplu vodu</a>
-            <span className="text-white/20">·</span>
-            <a href="#sistemi" className="hover:text-white/80 transition-colors">Postojeći sistemi</a>
-            <span className="text-white/20">·</span>
-            <a href="#okvir" className="hover:text-white/80 transition-colors">Međunarodni okvir</a>
-            <span className="text-white/20">·</span>
-            <a href="#zasto-sad" className="hover:text-white/80 transition-colors">Zašto sad i ovde</a>
-          </div>
         </div>
       </section>
 

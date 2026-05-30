@@ -50,22 +50,10 @@ export default function ONamaPage() {
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-3" style={{ letterSpacing: "-0.02em" }}>
               Nikola Šarić
             </h1>
-            <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 max-w-[520px]">
+            <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-[520px]">
               Lekar iz Sombora koji već petnaest godina gradi sistem razmene rada i dobara bez posrednika.
               Ovo je priča o tome i poziv da ovaj sistem gradimo zajedno.
             </p>
-            {/* Mini-sadržaj */}
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/50">
-              <a href="#prica" className="hover:text-white/80 transition-colors">Priča</a>
-              <span className="text-white/20">·</span>
-              <a href="#sta-radimo-sada" className="hover:text-white/80 transition-colors">Status sistema</a>
-              <span className="text-white/20">·</span>
-              <a href="#kako-se-ukljucujes" className="hover:text-white/80 transition-colors">Kako se uključuješ</a>
-              <span className="text-white/20">·</span>
-              <a href="#fondacija" className="hover:text-white/80 transition-colors">Fondacija</a>
-              <span className="text-white/20">·</span>
-              <a href="#dokumenti" className="hover:text-white/80 transition-colors">Dokumenti</a>
-            </div>
           </div>
           <div className="shrink-0 mx-auto md:ml-auto">
             {/* eslint-disable-next-line @next/next/no-img-element */}
