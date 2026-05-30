@@ -288,7 +288,7 @@ export default function OSistemuPage() {
             {
               naslov: "Korisnici",
               podnaslov: "Učesnici sistema",
-              tekst: "Ljudi koji čine KOLO Zajednicu — svi oni koji prihvataju uslove po kojima ona funkcioniše. Svojim radom, dobrima i znanjem doprinose zajedničkom dobru i za to dobijaju POEN, a kroz njega i pristup onome što su drugi doneli. Oni koji nose ZRNO učestvuju i u odlučivanju kroz Gornje Kolo.",
+              tekst: "Ljudi koji čine KOLO Zajednicu — svi koji pristanu na pravila po kojima ona funkcioniše. Svojim radom, dobrima i znanjem doprinose zajedničkom dobru i za to dobijaju POEN, a kroz njega i pristup onome što su drugi doneli. Oni koji nose ZRNO učestvuju i u odlučivanju kroz Gornje Kolo.",
               boja: "border-kolo-green-700",
             },
           ].map((k) => (
