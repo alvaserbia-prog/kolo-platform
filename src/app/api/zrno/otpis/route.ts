@@ -8,6 +8,7 @@ import { posaljiAdminAlert } from "@/lib/adminAlert";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
 
   const trziste = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
   if (!trziste?.isActive) return NextResponse.json({ error: "ZRNO tržište nije aktivno." }, { status: 400 });

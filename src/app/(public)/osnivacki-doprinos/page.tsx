@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
 
@@ -6,6 +8,12 @@ export const metadata = { title: "Osnivački doprinos — KOLO" };
 const fmt = (n: number) => n.toLocaleString("sr-RS");
 
 export default async function OsnivackiDoprinosPage() {
+  // Pseudonimi osnivača vidljivi su isključivo verifikovanim članovima (Pravilnik o
+  // osnivačkom doprinosu čl. 12 — „javnost udela" znači prema zajednici verifikovanih,
+  // ne prema eksternoj javnosti). Neverifikovani/gosti vide samo agregat kanala.
+  const session = await getServerSession(authOptions);
+  const verifikovan = !!session?.user?.verified;
+
   let status: Awaited<ReturnType<typeof dohvatiStatusKanala>> | null = null;
   try {
     status = await dohvatiStatusKanala();
@@ -14,16 +22,18 @@ export default async function OsnivackiDoprinosPage() {
   }
 
   const [osnivaci, koraci] = await Promise.all([
-    prisma.osnivac.findMany({
-      select: {
-        redniBroj: true,
-        udeoBrojilac: true,
-        udeoImenilac: true,
-        napomena: true,
-        user: { select: { pseudonim: true } },
-      },
-      orderBy: { redniBroj: "asc" },
-    }),
+    verifikovan
+      ? prisma.osnivac.findMany({
+          select: {
+            redniBroj: true,
+            udeoBrojilac: true,
+            udeoImenilac: true,
+            napomena: true,
+            user: { select: { pseudonim: true } },
+          },
+          orderBy: { redniBroj: "asc" },
+        })
+      : Promise.resolve([] as const),
     prisma.osnivackiKorakLog.findMany({
       select: { brojKoraka: true, prag: true, iznosKoraka: true, createdAt: true },
       orderBy: { brojKoraka: "desc" },
@@ -79,7 +89,12 @@ export default async function OsnivackiDoprinosPage() {
       )}
 
       <h2 className="font-semibold text-kolo-text mb-3">Osnivači i udeli</h2>
-      {osnivaci.length === 0 ? (
+      {!verifikovan ? (
+        <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-8 text-center text-kolo-muted">
+          Registar osnivača sa pseudonimima i udelima dostupan je verifikovanim članovima.
+          Ukupan osnivački doprinos vidljiv je gore, u stanju kanala.
+        </div>
+      ) : osnivaci.length === 0 ? (
         <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-8 text-center text-kolo-muted">
           Registar osnivača još nije objavljen.
         </div>

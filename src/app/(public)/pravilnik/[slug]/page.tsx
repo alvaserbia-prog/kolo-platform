@@ -9,7 +9,7 @@ import remarkGfm from "remark-gfm";
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; opis: string }> = {
   "kolo-sistem": {
     naziv: "Pravilnik o KOLO sistemu",
-    fajl: "Pravilnik_3_7_2.md",
+    fajl: "Pravilnik_3_7_3.md",
     opis: "Osnovni akt sistema — 12 glava, 82 člana.",
   },
   "hijerarhija": {

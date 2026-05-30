@@ -1,12 +1,14 @@
 /**
  * GET /api/verifikacija/lanac/[korisnikId]
  *
- * Javan endpoint — bez auth provere. Verifikacioni zapisi su deo evidencije
- * kolektivnog dobra (čl. 32 KOLO Pravilnika).
- *
- * Vraća verifikatora i listu verifikovanih za datog korisnika sa pseudonimima.
+ * Vraća verifikatora i listu verifikovanih (mini-stablo) za datog korisnika sa
+ * pseudonimima. Graf verifikacija je deo podataka koji se NIKADA ne izlažu javno
+ * (Politika privatnosti čl. 6) — dostupan je isključivo verifikovanim korisnicima
+ * (indeks stvarnosti ≥ 10%).
  */
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
   formatIndeksZaPrikaz,
@@ -17,6 +19,10 @@ export async function GET(
   _req: NextRequest,
   ctx: { params: Promise<{ korisnikId: string }> }
 ) {
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+
   const { korisnikId } = await ctx.params;
 
   const user = await prisma.user.findUnique({

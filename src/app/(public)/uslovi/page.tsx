@@ -7,11 +7,11 @@ import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
   title: "Uslovi korišćenja — KOLO",
-  description: "Uslovi korišćenja KOLO platforme, verzija 3.7.0",
+  description: "Uslovi korišćenja KOLO platforme, verzija 3.7.3",
 };
 
 export default async function UsloviPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "uslovi_koriscenja_3_7_2.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "uslovi_koriscenja_3_7_3.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -22,7 +22,7 @@ export default async function UsloviPage() {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           Uslovi korišćenja KOLO platforme
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.3</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>

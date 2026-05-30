@@ -45,6 +45,9 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  // Poruke su dostupne samo verifikovanima; neverifikovani komuniciraju isključivo
+  // preko table zahteva za jemstvo (Uslovi čl. 16, Politika čl. 6).
+  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
   const meId = session.user.id;
 
   const { userId } = await req.json();

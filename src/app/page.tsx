@@ -62,60 +62,35 @@ async function getPijacaPreview() {
   }
 }
 
-async function getPoslednjeTransakcije() {
+// Naslovnu vidi samo gost (prijavljeni se preusmeravaju na /dashboard). Po
+// gradiranoj vidljivosti (Politika čl. 6), gost vidi SAMO agregate — ne
+// pojedinačne transakcije ni pseudonime. Opticaj se računa kao zbir pozitivnih
+// stanja (pod zero-sum jednako apsolutnoj vrednosti minusa Protokola) — bez
+// zavisnosti od ID-ja Protokol novčanika.
+async function getAgregati() {
   try {
-    const transakcije = await prisma.transaction.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 5,
-      include: {
-        fromWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
-        toWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
-      },
-    });
-
-    function walletLabel(w: { user?: { pseudonim: string } | null; krug?: { name: string } | null } | null) {
-      if (!w) return "Protokol";
-      if (w.user) return w.user.pseudonim;
-      if (w.krug) return `[${w.krug.name}]`;
-      return "Protokol";
-    }
-
-    return transakcije.map((t) => ({
-      id: t.id,
-      from: walletLabel(t.fromWallet),
-      to: walletLabel(t.toWallet),
-      amount: t.amount,
-      type: t.type,
-      createdAt: t.createdAt,
-    }));
+    const [brojTransakcija, brojClanova, opticajAgg] = await Promise.all([
+      prisma.transaction.count(),
+      prisma.user.count({ where: { verified: true } }),
+      prisma.wallet.aggregate({ _sum: { balance: true }, where: { balance: { gt: 0 } } }),
+    ]);
+    return {
+      brojTransakcija,
+      brojClanova,
+      opticaj: Number(opticajAgg._sum.balance ?? 0),
+    };
   } catch {
-    return [];
+    return { brojTransakcija: 0, brojClanova: 0, opticaj: 0 };
   }
-}
-
-function relativnoVreme(date: Date): string {
-  const sek = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (sek < 60) return "upravo sada";
-  const min = Math.floor(sek / 60);
-  if (min < 60) return `pre ${min} min`;
-  const sat = Math.floor(min / 60);
-  if (sat < 24) {
-    if (sat === 1) return "pre 1 sat";
-    if (sat < 5) return `pre ${sat} sata`;
-    return `pre ${sat} sati`;
-  }
-  const dan = Math.floor(sat / 24);
-  if (dan === 1) return "pre 1 dan";
-  return `pre ${dan} dana`;
 }
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/dashboard");
 
-  const [pijacaOglasi, poslednjeTransakcije] = await Promise.all([
+  const [pijacaOglasi, agregati] = await Promise.all([
     getPijacaPreview(),
-    getPoslednjeTransakcije(),
+    getAgregati(),
   ]);
 
   return (
@@ -503,36 +478,34 @@ export default async function Home() {
           </section>
         )}
 
-        {/* ── SEKCIJA 8 — POSLEDNJE TRANSAKCIJE (samo ako ih ima ≥10) ─────────────────────── */}
-        {poslednjeTransakcije.length >= 10 && (
+        {/* ── SEKCIJA 8 — ŽIVI AGREGATI SISTEMA (samo ako ima ≥10 transakcija) ────────────── */}
+        {agregati.brojTransakcija >= 10 && (
           <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
             <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
-              Poslednjih {poslednjeTransakcije.length} transakcija
+              Sistem je živ
             </h2>
-            <div className="divide-y divide-kolo-bg">
-              {poslednjeTransakcije.map((t) => (
-                <div
-                  key={t.id}
-                  className="grid items-center py-3 text-sm gap-2"
-                  style={{ gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr) 6rem 5rem" }}
-                >
-                  <span className="font-medium text-kolo-green-700 truncate text-right">{t.from}</span>
-                  <svg className="w-4 h-4 text-kolo-muted shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
-                  </svg>
-                  <span className="font-medium text-kolo-green-700 truncate">{t.to}</span>
-                  <span className="font-semibold text-kolo-text whitespace-nowrap text-right tabular-nums">
-                    {t.amount.toLocaleString("sr-RS")} POEN
-                  </span>
-                  <span className="text-xs text-kolo-muted whitespace-nowrap text-right">
-                    {relativnoVreme(t.createdAt)}
-                  </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.brojClanova.toLocaleString("sr-RS")}
                 </div>
-              ))}
+                <div className="text-xs text-kolo-muted mt-1">verifikovanih članova</div>
+              </div>
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.brojTransakcija.toLocaleString("sr-RS")}
+                </div>
+                <div className="text-xs text-kolo-muted mt-1">ažuriranja evidencije</div>
+              </div>
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.opticaj.toLocaleString("sr-RS")}
+                </div>
+                <div className="text-xs text-kolo-muted mt-1">POEN u opticaju</div>
+              </div>
             </div>
             <p className="text-xs text-kolo-muted mt-5 text-center">
-              Punu evidenciju vide registrovani članovi platforme.
+              Pojedinačne zapise evidencije vide verifikovani članovi platforme.
             </p>
           </section>
         )}

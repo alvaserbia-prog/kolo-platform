@@ -1,26 +1,35 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala } from "@/lib/protokol/osnivacki";
 
 /**
  * GET /api/javno/osnivacki-doprinos
- * Javni endpoint transparentnosti (cl. 16 Pravilnika o osnivackom doprinosu).
- * Vraca status kanala + listu osnivaca sa udelima + log koraka.
+ * Status kanala + log koraka (agregat) dostupni su svima radi transparentnosti.
+ * Lista osnivaca sa PSEUDONIMIMA i udelima vraca se iskljucivo verifikovanim
+ * korisnicima (Pravilnik o osnivackom doprinosu cl. 12 — „javnost udela" znaci
+ * prema zajednici verifikovanih, ne prema eksternoj javnosti).
  */
 export async function GET() {
   try {
+    const session = await getServerSession(authOptions);
+    const verifikovan = !!session?.user?.verified;
+
     const [status, osnivaci, koraci] = await Promise.all([
       dohvatiStatusKanala(),
-      prisma.osnivac.findMany({
-        select: {
-          redniBroj: true,
-          udeoBrojilac: true,
-          udeoImenilac: true,
-          napomena: true,
-          user: { select: { pseudonim: true } },
-        },
-        orderBy: { redniBroj: "asc" },
-      }),
+      verifikovan
+        ? prisma.osnivac.findMany({
+            select: {
+              redniBroj: true,
+              udeoBrojilac: true,
+              udeoImenilac: true,
+              napomena: true,
+              user: { select: { pseudonim: true } },
+            },
+            orderBy: { redniBroj: "asc" },
+          })
+        : Promise.resolve(null),
       prisma.osnivackiKorakLog.findMany({
         select: {
           brojKoraka: true,
