@@ -6,8 +6,35 @@ import { poBrojevima } from "@/lib/faq-data";
 export const metadata: Metadata = {
   title: "O nama — KOLO Fondacija",
   description:
-    "Nikola Šarić, lekar iz Sombora, 14 godina gradi sistem uzajamnosti. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
+    "Nikola Šarić, lekar iz Sombora, petnaest godina gradi sistem razmene rada i dobara bez posrednika. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
 };
+
+function DokumentRed({ naziv, href, zivo = false }: { naziv: string; href: string; zivo?: boolean }) {
+  const eksterni = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={eksterni ? "_blank" : undefined}
+      rel={eksterni ? "noopener noreferrer" : undefined}
+      className="flex items-center gap-3 p-3 rounded-xl hover:bg-kolo-green-100 transition-colors group"
+    >
+      <div className="w-8 h-8 rounded-lg bg-kolo-gold-100 flex items-center justify-center shrink-0">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D99520" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <span className="text-sm text-kolo-text group-hover:text-kolo-green-700 transition-colors font-medium flex-1">
+        {naziv}
+      </span>
+      {zivo && (
+        <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-kolo-green-700 bg-kolo-green-100 px-2 py-0.5 rounded-full shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-kolo-green-700 animate-pulse" />
+          uživo
+        </span>
+      )}
+    </a>
+  );
+}
 
 export default function ONamaPage() {
   return (
@@ -24,7 +51,7 @@ export default function ONamaPage() {
               Nikola Šarić
             </h1>
             <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-8 max-w-[520px]">
-              Lekar iz Sombora koji četrnaest godina gradi sistem razmene bez novca.
+              Lekar iz Sombora koji već petnaest godina gradi sistem razmene rada i dobara bez posrednika.
               Ovo je priča o tome i poziv da ovaj sistem gradimo zajedno.
             </p>
             {/* Mini-sadržaj */}
@@ -62,10 +89,10 @@ export default function ONamaPage() {
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>Kao lekaru poziv mi je da pomažem ljudima. Smatram da je iz istog razloga osmišljen i
-            sistem u kome živimo. Ali, svaki dan gledam ljude kojima bi taj sistem trebalo da pomogne,
-            ali ne može — poljoprivrednike, penzionere, nezaposlene, mlade. Duboko verujem da svi oni
-            imaju svoje mesto u zajednici i mogu da joj doprinesu na svoj način. Samo im treba
-            infrastruktura.<span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
+            sistem u kome živimo. Ali, svaki dan na poslu gledam ljude kojima bi taj sistem trebalo da
+            pomogne, a ne može — poljoprivrednike, penzionere, majke, bolesne ljude koji bi još mnogo
+            toga mogli da pruže. Duboko verujem da svako ima svoje mesto u zajednici i nešto čime može
+            da joj doprinese. Samo im treba infrastruktura — alat i ljudi iza njega.<span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
           <p className="text-sm text-kolo-muted font-medium text-center">— Nikola Šarić</p>
         </div>
@@ -84,25 +111,29 @@ export default function ONamaPage() {
             <p>
               Prva sumnja u sistem došla je još na medicinskom fakultetu. Tada sam video da nauka koju
               učim nije neutralna i da postoje skriveni interesi koji struku usmeravaju prema profitu.
-              I da u krajnjoj biti cilj sistema nije zdravlje nego kontinuirano lečenje. Ista logika
+              I da u suštini cilj sistema nije zdravlje nego kontinuirano lečenje. Ista logika
               oblikuje sve ostale sisteme — proizvodnju hrane, ekonomiju, tržište rada. Završio sam
               medicinu jer sam zaključio da se sistem lakše menja iznutra.
             </p>
             <p>
-              Paralelno sa medicinom, godinama sam se obrazovao u oblasti komplementarnih ekonomskih sistema.
-              U martu 2014. bio sam gost emisije <em>Na rubu znanosti</em> kod Krešimira Mišaka na HRT, u
-              epizodi o lokalnim i alternativnim valutama i predstavio ALVU — tadašnju formu projekta.
-              Krajem juna 2016. proveo sam nedelju dana na Pelionu u Grčkoj, na radionici{" "}
+              Paralelno sa medicinom, godinama sam izučavao kako zajednice širom sveta razmenjuju rad i
+              dobra bez novca kao posrednika — takozvane komplementarne ekonomske sisteme. U martu 2014.
+              bio sam gost emisije <em>Na rubu znanosti</em> kod Krešimira Mišaka na HRT, u epizodi o
+              lokalnim i alternativnim valutama, i predstavio ALVU — tadašnju formu projekta. Krajem juna
+              2016. proveo sam nedelju dana na Pelionu u Grčkoj, na radionici{" "}
               <em>Innovation in Exchange and Finance</em> koju je vodio Thomas Greco — autor knjige{" "}
               <em>The End of Money and the Future of Civilization</em> i jedan od najznačajnijih svetskih
-              teoretičara komplementarnih valuta. U grupi je između ostalih bio i tim iz Volosa koji je već
-              četiri godine vodio Volos TEM, jednu od grčkih lokalnih mreža razmene. Organizovao sam više
-              tribina na ovu temu — u Stanišiću, Somboru, Novom Sadu i Beogradu.
+              teoretičara komplementarnih valuta. U grupi je između ostalih bio i tim iz Volosa, koji je
+              već četiri godine vodio Volos TEM — grčku lokalnu mrežu razmene gde preko 800 ljudi razmenjuje
+              hranu, usluge i zanatske proizvode na posebnim pijacama, beležeći vrednost umesto da je
+              plaćaju gotovinom. Organizovao sam više tribina na ovu temu — u Stanišiću, Somboru, Novom
+              Sadu i Beogradu.
             </p>
             <p>
-              Ideja je tokom vremena prošla kroz nekoliko formi: ALVA (2012), Tranziciona alternativa
-              (2013–14), Alva Fondacija (2016–17), i sada KOLO. Sada nakon četrnaest godina imamo spreman
-              pravni okvir, platformu kao i strukturu koja može da radi nezavisno od bilo koga.
+              Ideja je kroz godine menjala ime i formu — ALVA (2012), Tranziciona alternativa (2013–14),
+              Alva Fondacija (2016–17) — i sazrela u ono što je danas KOLO. Sada, nakon petnaest godina,
+              imamo spreman pravni okvir, platformu i strukturu koja je postavljena tako da vremenom radi
+              sve nezavisnije od bilo kog pojedinca — uključujući i osnivača.
             </p>
           </div>
         </div>
@@ -139,7 +170,7 @@ export default function ONamaPage() {
                   { r1: "Prvih sto", r2: "korisnika", aktivan: false },
                   { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
                   { r1: "Međugradska", r2: "mreža", aktivan: false },
-                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Pravno", r2: "priznanje", aktivan: false },
                   { r1: "Puna", r2: "zrelost", aktivan: false },
                 ].map((faza) => (
                   <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
@@ -168,7 +199,7 @@ export default function ONamaPage() {
                   { r1: "Prvih sto", r2: "korisnika", aktivan: false },
                   { r1: "Potpuno aktivan", r2: "sistem", aktivan: false },
                   { r1: "Međugradska", r2: "mreža", aktivan: false },
-                  { r1: "Državna", r2: "regulacija", aktivan: false },
+                  { r1: "Pravno", r2: "priznanje", aktivan: false },
                   { r1: "Puna", r2: "zrelost", aktivan: false },
                 ].map((faza) => (
                   <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
@@ -188,7 +219,7 @@ export default function ONamaPage() {
           </div>
 
           <h3 className="text-xl font-bold text-kolo-green-900 mb-3" style={{ letterSpacing: "-0.02em" }}>
-            KOLO se priprema za beta fazu
+            KOLO se priprema za prvo otvaranje
           </h3>
           <p className="text-kolo-muted leading-relaxed mb-8 text-body" style={{ lineHeight: "1.7" }}>
             Završavaju se poslednji koraci pred otvaranje sistema prvim korisnicima.
@@ -198,23 +229,23 @@ export default function ONamaPage() {
             {[
               {
                 naslov: "Registracija Fondacije",
-                tekst: "U toku je postupak promene naziva (iz Alva Fondacije u KOLO Fondaciju), preseljenja sedišta u Sombor i usvajanja novih akata u Agenciji za privredne registre.",
+                tekst: "KOLO Fondacija je osnovana kao pravno lice sa sedištem u Somboru; u toku je upis u Agenciju za privredne registre.",
               },
               {
                 naslov: "Platforma",
-                tekst: "Završne pripreme za beta fazu. Razvoj je u poslednjem segmentu pre nego što platforma bude otvorena za prve verifikovane korisnike.",
+                tekst: "Platforma je u završnoj fazi razvoja, pred prvo otvaranje za verifikovane korisnike.",
               },
               {
                 naslov: "Pravna i ekonomska verifikacija sistema",
-                tekst: "Dokumentacioni okvir KOLO sistema — Pravilnik, Statut, Politika privatnosti, Uslovi korišćenja — predat je sudskim veštacima i advokatima na nezavisnu proveru. Provera nije ukazala na bitne pravne ni strukturne nedostatke. Sa eksternim konsultantima u toku je finalna provera računovodstvene logike sistema. Rezime se očekuje.",
+                tekst: "Dokumentaciju su nezavisno pregledali ekonomisti i pravnici, koji ne vide problem sa ovakvim modelom razmene ni sa ovakvom fondacijom. Provera nije ukazala na bitne pravne ni strukturne nedostatke.",
               },
               {
                 naslov: "Komunikacija sa regulatorima",
-                tekst: "Dokumentacija je proaktivno dostupna nadležnim organima. Po pokretanju sistema, od Narodne banke Srbije, Poreske uprave i nadležnih ministarstava biće formalno zatraženo zvanično mišljenje. Kad odgovori stignu, biće javno objavljeni.",
+                tekst: "Sva dokumentacija sistema otvoreno je dostupna svakome ko želi da je pregleda — od pravnika i ekonomista do nadležnih organa. KOLO ne mora da traži dozvolu da postoji jer počiva na postojećim zakonima i pravu građana na slobodno udruživanje i razmenu. Sistem se pokreće otvoreno, a svako može sam da proveri kako i na čemu stoji.",
               },
               {
                 naslov: "Tim",
-                tekst: "Upravni odbor Fondacije i spoljni konsultanti. U beta fazi formira se uži krug saradnika koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle beta faze, doprinos svakog verifikovanog korisnika — kroz razvoj softvera, prevođenje, kreiranje sadržaja, organizaciju aktivnosti, mentorstvo, moderaciju — biva prepoznat kroz Program evidencije doprinosa.",
+                tekst: "Tim danas čine Upravni odbor Fondacije i spoljni konsultanti. Nakon otvaranja sistema formira se uži krug saradnika koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle otvaranja, doprinos svakog verifikovanog korisnika — bilo da je to razvoj softvera, prevođenje i pisanje, organizacija okupljanja, mentorstvo, ili pomoć drugima u zajednici — biva prepoznat kroz Program evidencije doprinosa.",
               },
             ].map((stavka) => (
               <div key={stavka.naslov} className="flex gap-4">
@@ -248,8 +279,43 @@ export default function ONamaPage() {
             Sistem se gradi kroz različite oblike doprinosa
           </h2>
           <p className="text-kolo-muted leading-relaxed max-w-[680px] text-body" style={{ lineHeight: "1.7" }}>
-            Bilo da imaš pet minuta, ekspertizu, sredstva ili kontakt — postoji kanal kroz koji možeš da doprineseš sistemu.
+            Bilo da imaš pet minuta, znanje, sredstva ili poznanstvo — postoji način da pomogneš.
           </p>
+        </div>
+
+        {/* Istaknut kanal — najširi poziv (puna širina, prvi po redu) */}
+        <div className="bg-kolo-green-100 rounded-2xl p-6 md:p-8 border-2 border-kolo-green-700 flex flex-col md:flex-row md:items-center gap-5 md:gap-7">
+          {/* Ikona — krug ljudi (KOLO = krug) */}
+          <div className="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center text-kolo-green-700 mx-auto md:mx-0">
+            <svg width="44" height="44" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.35" />
+              <circle cx="20" cy="13" r="4" fill="currentColor" opacity="0.85" />
+              <circle cx="27" cy="26" r="4" fill="currentColor" opacity="0.85" />
+              <circle cx="13" cy="26" r="4" fill="currentColor" opacity="0.85" />
+              <line x1="20" y1="17" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+              <line x1="23.5" y1="22" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+              <line x1="16.5" y1="22" x2="20" y2="24" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+            </svg>
+          </div>
+          <div className="flex-1 text-center md:text-left">
+            <h3 className="font-bold text-kolo-green-900 text-xl leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>
+              Budi među prvima u svom kraju
+            </h3>
+            <p className="text-sm md:text-base text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
+              Najvažniji doprinos ne traži ni firmu ni posebno znanje. Dovoljno je da se uključiš i pozoveš
+              ljude koje poznaješ — komšije, prijatelje, rođake. Svaki novi krug u jednom mestu počinje od
+              nekoliko ljudi koji veruju jedni drugima. Ako želiš da KOLO zaživi tamo gde ti živiš, počni od
+              sebe i svog kruga.
+            </p>
+          </div>
+          <div className="shrink-0 w-full md:w-auto">
+            <Link
+              href="/registracija"
+              className="block text-center px-7 py-4 bg-kolo-green-700 text-white font-bold rounded-xl hover:bg-kolo-green-900 transition-colors text-base whitespace-nowrap"
+            >
+              Registruj se besplatno →
+            </Link>
+          </div>
         </div>
 
         {/* Primarne kartice (3) */}
@@ -257,21 +323,21 @@ export default function ONamaPage() {
           {[
             {
               naslov: "Rani pristup i verifikacija",
-              tekst: "Ako želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice i njihov rad u beta fazi posebno se prepoznaje kroz Program evidencije doprinosa.",
+              tekst: "Ako želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice, i njihov se rad u toj ranoj fazi posebno prepoznaje kroz Program evidencije doprinosa.",
               cta: "Registruj se besplatno →",
               ctaHref: "/registracija",
               ctaIsLink: true,
             },
             {
               naslov: "Postani pokrovitelj",
-              tekst: "Ako vodiš firmu ili imaš sredstva da podržiš razvoj, donacija Fondaciji direktno omogućava operativnu održivost sistema. Pokrovitelji su javno navedeni, a nivoi doprinosa su transparentno definisani u Pravilniku.",
+              tekst: "Ako vodiš firmu ili imaš mogućnost da podržiš razvoj, tvoja donacija Fondaciji pokriva troškove održavanja platforme i rada sistema. Pokrovitelji su javno navedeni, a nivoi doprinosa su transparentno definisani u Pravilniku.",
               cta: "Piši nam → kontakt@ekolo.rs",
               ctaHref: "mailto:kontakt@ekolo.rs",
               ctaIsLink: false,
             },
             {
               naslov: "Pomozi razvoju",
-              tekst: "Ako si programer, dizajner ili druge IT struke što može da pomogne razvoju naše platforme i sistema uopšte — javi se.",
+              tekst: "Ako si programer, dizajner ili radiš u nekoj drugoj IT oblasti i možeš da pomogneš razvoju platforme — javi se.",
               cta: "Piši nam → kontakt@ekolo.rs",
               ctaHref: "mailto:kontakt@ekolo.rs",
               ctaIsLink: false,
@@ -309,7 +375,7 @@ export default function ONamaPage() {
             {[
               {
                 naslov: "Komunikacija i sadržaj",
-                tekst: "Pisci, novinari, urednici, video-producenti, dizajneri. Posebna potreba: ljudi koji mogu da prevedu složene koncepte u jasan jezik za različite publike (farmeri, penzioneri, mladi).",
+                tekst: "Pisci, novinari, urednici, video-producenti, dizajneri. Posebna potreba: ljudi koji mogu da prevedu složene koncepte u jasan jezik za različite publike (poljoprivrednici, penzioneri, mladi).",
               },
               {
                 naslov: "Medijski i akademski kontakti",
@@ -333,7 +399,7 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Lična donacija",
-                tekst: "Ako nemaš firmu ali imaš mogućnost i želju da podržiš sistem direktno, fizička lica takođe mogu biti donatori čiji se doprinos evidentira na poseban način.",
+                tekst: "Ako nemaš firmu ali želiš da podržiš sistem, i fizička lica mogu biti donatori — taj se doprinos beleži na poseban način, definisan Pravilnikom.",
               },
               {
                 naslov: "Ostali oblici doprinosa",
@@ -392,11 +458,11 @@ export default function ONamaPage() {
           {[
             {
               naslov: "",
-              tekst: "Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u robi, uslugama i novcu, pokriva operativne troškove platforme, drži infrastrukturu i zastupa KOLO pred zajednicom i državom.",
+              tekst: "Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u robi, uslugama i novcu. Ona pokriva operativne troškove platforme, drži infrastrukturu i zastupa KOLO pred zajednicom i državom.",
             },
             {
               naslov: "Sedište i registracija",
-              tekst: "Sombor, Šetalište 16. Trenutno je pravno registrovana pod ranijim imenom Alva Fondacija (matični broj 28830360, sedište Stanišić); u toku je promena naziva u KOLO Fondacija i preseljenje sedišta.",
+              tekst: "KOLO Fondacija je osnovana sa sedištem u Somboru (Šetalište 16). U toku je upis u Agenciju za privredne registre.",
             },
             {
               naslov: "Organi",
@@ -424,37 +490,63 @@ export default function ONamaPage() {
           <div>
             <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti (v3.7.0)</p>
             <div className="space-y-2">
+              {/* Ključni dokumenti — uvek vidljivi */}
               {[
-                { naziv: "Statut KOLO Fondacije", href: "/statut" },
-                { naziv: "Pravilnik o hijerarhiji akata", href: "/pravilnik/hijerarhija" },
-                { naziv: "Pravilnik o KOLO sistemu", href: "/pravilnik/kolo-sistem" },
-                { naziv: "Pravilnik o dokazu stvarnosti", href: "/pravilnik/dokaz-stvarnosti" },
-                { naziv: "Pravilnik o pokroviteljstvu i donacijama", href: "/pravilnik/pokroviteljstvo-donacije" },
-                { naziv: "Pravilnik o operativnom doprinosu", href: "/pravilnik/operativni" },
-                { naziv: "Pravilnik o osnivačkom doprinosu", href: "/pravilnik/osnivacki" },
-                { naziv: "Osnivački doprinos — stanje kanala (uživo)", href: "/osnivacki-doprinos" },
-                { naziv: "Politika privatnosti", href: "/privatnost" },
-                { naziv: "Procena uticaja na zaštitu podataka (DPIA)", href: "/dpia" },
-                { naziv: "Uslovi korišćenja", href: "/uslovi" },
                 { naziv: "Whitepaper", href: "/whitepaper" },
+                { naziv: "Statut KOLO Fondacije", href: "/statut" },
+                { naziv: "Pravilnik o KOLO sistemu", href: "/pravilnik/kolo-sistem" },
               ].map((dok) => (
-                <a
-                  key={dok.naziv}
-                  href={dok.href}
-                  target={dok.href.startsWith("http") ? "_blank" : undefined}
-                  rel={dok.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center gap-3 p-3 rounded-xl hover:bg-kolo-green-100 transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-kolo-gold-100 flex items-center justify-center shrink-0">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D99520" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-                    </svg>
-                  </div>
-                  <span className="text-sm text-kolo-text group-hover:text-kolo-green-700 transition-colors font-medium">
-                    {dok.naziv}
-                  </span>
-                </a>
+                <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
               ))}
+
+              {/* Posebni pravilnici — sklopivo */}
+              <details className="group/sek border border-kolo-border rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between gap-2 p-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-kolo-bg transition-colors">
+                  <span className="text-sm font-semibold text-kolo-text">Posebni pravilnici</span>
+                  <span className="flex items-center gap-2 text-kolo-muted">
+                    <span className="text-[11px]">5 dokumenata</span>
+                    <svg className="transition-transform group-open/sek:rotate-90" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-1 pb-1.5 space-y-1">
+                  {[
+                    { naziv: "Pravilnik o hijerarhiji akata", href: "/pravilnik/hijerarhija" },
+                    { naziv: "Pravilnik o dokazu stvarnosti", href: "/pravilnik/dokaz-stvarnosti" },
+                    { naziv: "Pravilnik o pokroviteljstvu i donacijama", href: "/pravilnik/pokroviteljstvo-donacije" },
+                    { naziv: "Pravilnik o operativnom doprinosu", href: "/pravilnik/operativni" },
+                    { naziv: "Pravilnik o osnivačkom doprinosu", href: "/pravilnik/osnivacki" },
+                  ].map((dok) => (
+                    <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
+                  ))}
+                </div>
+              </details>
+
+              {/* Pravni i korisnički dokumenti — sklopivo */}
+              <details className="group/sek border border-kolo-border rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between gap-2 p-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-kolo-bg transition-colors">
+                  <span className="text-sm font-semibold text-kolo-text">Pravni i korisnički dokumenti</span>
+                  <span className="flex items-center gap-2 text-kolo-muted">
+                    <span className="text-[11px]">3 dokumenta</span>
+                    <svg className="transition-transform group-open/sek:rotate-90" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-1 pb-1.5 space-y-1">
+                  {[
+                    { naziv: "Uslovi korišćenja", href: "/uslovi" },
+                    { naziv: "Politika privatnosti", href: "/privatnost" },
+                    { naziv: "Procena uticaja na zaštitu podataka (DPIA)", href: "/dpia" },
+                  ].map((dok) => (
+                    <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
+                  ))}
+                </div>
+              </details>
+
+              {/* Uživo — stanje kanala osnivačkog doprinosa */}
+              <DokumentRed naziv="Osnivački doprinos — stanje kanala" href="/osnivacki-doprinos" zivo />
             </div>
           </div>
 
@@ -489,7 +581,7 @@ export default function ONamaPage() {
             </div>
             <div className="mt-6 p-4 bg-kolo-bg rounded-xl">
               <p className="text-sm text-kolo-muted leading-relaxed text-body">
-                Za sva pitanja koja nisu pokrivena u FAQ sekciji, možete nam se obratiti direktno na navedenu adresu.
+                Za sva pitanja koja nisu pokrivena u sekciji čestih pitanja, možete nam se obratiti direktno na navedenu adresu.
               </p>
             </div>
           </div>
@@ -524,7 +616,7 @@ export default function ONamaPage() {
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
           Nema reklama, nema pretplate, nema skrivenih nagodbi.<br />
-          Ima sistem i ima krug koji se upravo formira.
+          Postoji sistem i postoji krug ljudi koji se upravo formira.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           <Link
@@ -540,7 +632,10 @@ export default function ONamaPage() {
             Kako funkcioniše
           </Link>
         </div>
-        <p className="text-xs text-white/40">Rani pristup · Beta · Fondacija u registraciji</p>
+        <p className="text-xs text-white/40 mb-6">Rani pristup · Pred otvaranje · Fondacija u registraciji</p>
+        <p className="text-white/40 text-xs">
+          Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence
+        </p>
       </section>
 
     </div>
