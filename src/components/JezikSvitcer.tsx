@@ -4,8 +4,6 @@ import { useLocale } from "next-intl";
 
 const jezici = [
   { kod: "sr", zastava: "/flags/rs.svg", naziv: "Srpski" },
-  { kod: "en", zastava: "/flags/gb.svg", naziv: "English" },
-  { kod: "hu", zastava: "/flags/hu.svg", naziv: "Magyar" },
 ];
 
 function promeniJezik(kod: string) {
