@@ -33,11 +33,9 @@ I treće, lanac mora negde da počne — i počinje od početnih korisnika. To s
         pitanje: `Da li je stvarno besplatno ili moram nešto da uplatim/doniram da bih koristio sistem?`,
         odgovor: `Da, korišćenje je besplatno. Registracija ne košta ništa — biraš pseudonim, uneseš email i lozinku, i to je sve. Ne tražimo nikakvu uplatu da bi se pridružio ni da bi koristio osnovne funkcije.
 
-POEN se ne kupuje za dinare. On nije novac i ne može se kupiti, prodati ni zameniti za novac — to je samo zapis u evidenciji o tome ko je koliko doprineo zajednici. Niko ne može da „plati" sebi POEN.
+Donacija i pokroviteljstvo su dobrovoljni i nisu uslov za korišćenje. Donacijom podržavaš osnovne troškove Fondacije (server, pravne i računovodstvene usluge); po prijemu donacije Protokol evidentira POEN u tvom zapisu, prema pravilima sistema. Takvo evidentiranje nije kupovina POEN-a — POEN nema vrednost van sistema, ne preprodaje se i ne vraća u novac, a donacija je nepovratna nezavisno od evidentiranog POEN-a.
 
-Donacija i pokroviteljstvo su potpuno dobrovoljni i nisu uslov za korišćenje. Možeš donirati Fondaciji ako želiš da pomogneš pokrivanje osnovnih troškova (server, pravnik, računovodstvo), i tada ti se po pravilima upiše POEN — ali to je tvoj izbor, ne obaveza.
-
-POEN dobijaš kroz doprinos zajednici. Na primer, kada se verifikuješ kroz lanac jemstva, u tvoj zapis se upiše 1.000 POEN. Dalje ga sakupljaš radom za zajednicu i razmenom sa drugim članovima — ne kupovinom.`,
+POEN se evidentira i kroz druge kanale — verifikaciju u lancu jemstva, operativni doprinos i razmenu sa drugim korisnicima — pa uplata nije jedini niti obavezan put. Na primer, pri verifikaciji se u tvom zapisu evidentira 1.000 POEN.`,
       },
       {
         id: 44,
@@ -93,7 +91,7 @@ Jedna iskrena napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U 
 
 Fondacija nikada neće tražiti tvoju lozinku, PIN, broj platne kartice, JMBG ni sliku lične karte ili pasoša. Verifikacija se obavlja kroz lično poznavanje — bez ikakvih dokumenata.
 
-U sistemu ne postoji ponuda tipa „uplati pa ćeš dobiti POEN ili novac". POEN se ne kupuje za novac, ne unovčava se i niko ti ga ne može „prodati". Svako ko ti to nudi pokušava prevaru — nije deo KOLA.
+POEN nema vrednost van sistema — ne unovčava se, ne preprodaje i Fondacija ga ne otkupljuje. Nijedna ponuda koja obećava zaradu, povraćaj novca ili pretvaranje POEN-a u dinare nije deo KOLA; reč je o pokušaju prevare.
 
 Ako naiđeš na bilo šta od ovoga, ne deli podatke i prijavi to Fondaciji.`,
       },
