@@ -137,13 +137,13 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi podsticao cirkulacij
       {
         id: 38,
         pitanje: `Šta tačno znači princip dva odvojena akta?`,
-        odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svake emisije POEN-a iz Protokola.
+        odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svakog evidentiranja POEN-a iz Protokola.
 
 Akt 1: korisnik doprinese zajedničkom dobru ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verifikuje novog korisnika u lancu jemstva, ima status koji pokreće socijalni program ili podnese prijavu pokroviteljstva).
 
 Akt 2: Protokol algoritamski i deterministički evidentira POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protivčinidbe.
 
-Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fondacije po kome bi za urađeno X dobio Y POEN-a, niti korisnik ima potraživanje prema Fondaciji za emisijom. Princip je razrađen u Pravilniku (čl. 73), a kanali evidentiranja POEN-a nabrojani su u čl. 15.`,
+Ova dva akta su pravno nezavisna — ne postoji ugovor između korisnika i Fondacije po kome bi za urađeno X dobio Y POEN-a, niti korisnik ima potraživanje prema Fondaciji za evidentiranjem POEN-a.`,
       },
       {
         id: 40,
@@ -159,26 +159,22 @@ POEN je, jednostavno, zapis o tome šta si dao zajednici — sličan knjigovodst
       {
         id: 51,
         pitanje: `Šta ako sistem propadne ili Fondacija prestane sa radom — gubim li sve?`,
-        odgovor: `Da budemo iskreni odmah na početku: POEN i ZRNO nisu novac koji negde leži na tvoje ime, niti je to dug koji ti Fondacija duguje. Oni su zapisi — beleže koliko si doprineo i razmenio u zajednici. Zbog toga ni dok sistem radi, ni ako jednog dana prestane, nemaš novčano potraživanje koje bi mogao da naplatiš.
+        odgovor: `POEN i ZRNO nisu novac koji leži na tvoje ime ni dug koji ti Fondacija duguje — to su zapisi o tome koliko si doprineo i razmenio u zajednici. Zato ni dok sistem radi, ni ako jednog dana prestane, nemaš novčano potraživanje koje bi mogao da naplatiš.
 
-To može da zvuči obeshrabrujuće, ali zapravo je obrnuto: prava vrednost koju si dobio kroz KOLO nije broj na ekranu, nego stvarne razmene dobara i usluga koje su se već dogodile. To što si kroz sistem dobio ili dao — to ostaje tvoje iskustvo i tvoja mreža odnosa, bez obzira na sudbinu platforme.
+Vrednost koju si ostvario kroz KOLO nisu brojevi na ekranu, nego stvarne razmene dobara i usluga koje su se već dogodile. One ostaju tvoje iskustvo i tvoja mreža odnosa, nezavisno od sudbine platforme.
 
-Ako bi Fondacija ikada prestala sa radom, njena pravila su jasna: ono što od imovine preostane NE ide osnivačima ni bilo kome privatno. Po pravilima, preostala imovina se predaje drugoj fondaciji, zadužbini ili udruženju sa istim ili sličnim ciljevima — sa prednošću za one koji rade u duhu solidarne ekonomije. Dakle, niko ne može da se obogati gašenjem sistema.
+Ako bi Fondacija prestala sa radom, njena pravila su jasna: preostala imovina ne pripada osnivačima ni bilo kome privatno, nego se predaje drugoj fondaciji, zadužbini ili udruženju sa istim ili sličnim ciljevima, sa prednošću za one koji rade u duhu solidarne ekonomije. Niko se ne može obogatiti gašenjem sistema.
 
-Postoji još jedna zaštita koja ti je u korist: softver na kome KOLO radi objavljen je pod otvorenom licencom (AGPL-3.0), a sadržaj pod otvorenom licencom. To znači da i ako konkretna organizacija nestane, sam alat i znanje ostaju dostupni — zajednica može da nastavi, podigne sistem ponovo ili napravi nešto novo na istim temeljima. Zajedničko dobro ne prestaje da postoji gašenjem jedne organizacije.`,
+Softver na kome KOLO radi objavljen je pod otvorenom licencom (AGPL-3.0), a sadržaj pod otvorenom licencom. I ako konkretna organizacija nestane, alat i znanje ostaju dostupni — zajednica može da nastavi ili ponovo podigne sistem na istim temeljima. Zajedničko dobro ne prestaje gašenjem jedne organizacije.`,
       },
       {
         id: 52,
         pitanje: `Čemu gornja granica od 1.000.000 ZRNA ako se ZRNO ne može trgovati? Postoji li staking ili prinos?`,
-        odgovor: `Granica od 1.000.000 ZRNA nije postavljena zbog cene. ZRNO uopšte nema tržišnu vrednost: ne može se preneti drugom korisniku, ne može se trgovati i ne predstavlja udeo, akciju ni digitalnu imovinu.
+        odgovor: `Granica je fiksan, unapred određen broj — ukupno 1.000.000 ZRNA, koji se ne može ni povećati ni smanjiti. ZRNO se ne može trgovati ni preneti drugom korisniku; ono evidentira tvoj položaj u zajedničkom dobru, iz kojeg proizlazi glas u Gornjem Kolu.
 
-Zato granica nije „ponuda i tražnja" kao kod kriptovaluta. To je fiksan, unapred određen broj jedinica kojima sistem evidentira položaj korisnika u zajedničkom dobru. U svakom trenutku jedan deo tih ZRNA je upisan kod korisnika, a drugi deo je raspoloživ za upis u Protokolu, i ta dva dela uvek daju isti ukupan broj.
+Iako se ne trguje, ZRNO ima obračunsku vrednost izraženu u POEN-ima: obračunski koeficijent pokazuje koliko je POEN-a potrebno da se upiše jedno ZRNO. Taj koeficijent vremenom raste — kako ukupan broj POEN-a u sistemu raste, a broj ZRNA raspoloživih u Protokolu opada sa svakim upisom.
 
-Smisao ZRNA je upravljački, ne finansijski. Iz upisanog i aktiviranog ZRNA proizlazi tvoj glas u Gornjem Kolu, telu koje odlučuje o pravilima sistema. Glasa se kvadratno: snaga glasa raste kao kvadratni koren broja ZRNA, pa veliki nosioci nemaju srazmerno veliku moć.
-
-Stakinga, kamate ni prinosa nema. ZRNO izričito ne nosi dividendu, kamatu, prinos ni pravo na likvidacioni ostatak. Tvoja pozicija se vremenom menja samo kroz obračunski koeficijent, kako sistem živi i raste, ali ta promena nije zagarantovan prinos i ne isplaćuje se u novcu.
-
-Ukratko: ZRNO ne držiš da bi zaradio, nego da bi imao glas u tome kako zajednica funkcioniše.`,
+Stakinga, kamate ni prinosa nema. ZRNO ne nosi dividendu, kamatu ni pravo na likvidacioni ostatak. Obračunska vrednost se menja jedino kroz koeficijent, kako sistem raste — ali ta promena nije zagarantovan prinos, ne isplaćuje je nijedno lice i ostvaruje se isključivo u POEN-ima, koji nemaju vrednost van sistema.`,
       },
       {
         id: 53,
@@ -196,19 +192,19 @@ Ako neko ipak lažno verifikuje — potvrdi nekoga ko ne postoji ili ima drugi n
       {
         id: 54,
         pitanje: `Osnivački kanal evidentira do 2.400.000 POEN „osnivačima" — nije li to vrh koji sebi upiše novac?`,
-        odgovor: `Razumemo zašto taj broj deluje sumnjivo, ali kad se rasčlani — to nije novac koji neko sebi „upiše".
+        odgovor: `Ne. Osnivački kanal ne upisuje novac — POEN nije novac, a iznos ne donosi ni vlasništvo ni moć nad sistemom.
 
-Osnivački kanal naknadno evidentira rad koji je obavljen pre nego što je platforma uopšte postojala: projektovanje sistema, pisanje pravila, pravna i organizaciona priprema, izrada dokumentacije. Taj rad se odvijao dok nije bilo gde da se zabeleži, pa se beleži kasnije — kao i svaki drugi doprinos.
+Kanal naknadno evidentira rad obavljen pre nego što je platforma postojala: projektovanje sistema, pisanje pravila, pravna i organizaciona priprema, izrada dokumentacije. Taj rad se odvijao dok nije bilo gde da se zabeleži, pa se beleži kasnije — kao i svaki drugi doprinos.
 
-A POEN, podsetimo, nije novac. Nekonvertibilan je, nema vrednost van sistema i ne daje nikakvo potraživanje prema Fondaciji. Osnivački POEN ima potpuno isti status kao i svaki drugi — to je zapis o doprinosu, a ne sredstvo koje se može potrošiti napolju.
+Osnivački POEN ima isti status kao svaki drugi: nekonvertibilan je, nema vrednost van sistema i ne daje potraživanje prema Fondaciji.
 
-Krug osnivača je zatvoren. Lica koja imaju taj status utvrđena su unapred i objavljena; nijedna kasnija odluka ne može proširiti taj krug niti dodati nekoga.
+Krug osnivača je zatvoren. Lica sa tim statusom utvrđena su unapred internim aktom Fondacije i objavljena; nijedna kasnija odluka ne može proširiti taj krug.
 
-Ni tempo nije proizvoljan. Evidentira se jedan korak od 20.000 POEN tek kada ukupan broj POEN-a u celom sistemu poraste za narednih 100.000. Drugim rečima, osnivački doprinos može da raste samo onoliko koliko raste i ceo sistem oko njega — i tek kad se dostigne 120 koraka, kanal se trajno i neopozivo zatvara.
+Ni tempo nije proizvoljan. Jedan korak od 20.000 POEN evidentira se tek kada ukupan broj POEN-a u sistemu poraste za narednih 100.000. Osnivački doprinos tako raste samo onoliko koliko raste i ceo sistem; kada se dostigne 120 koraka (ukupno 2.400.000 POEN), kanal se trajno i neopozivo zatvara.
 
-I najvažnije: veći saldo ovde ne znači veću moć. Glasanje u Gornjem Kolu je kvadratno, glasačka snaga raste kao kvadratni koren broja ZRNA — pa ogroman saldo POEN-a ne donosi kontrolu nad sistemom.
+Veći saldo ne donosi veću moć. Glasanje u Gornjem Kolu je kvadratno — glasačka snaga raste kao kvadratni koren broja ZRNA, pa veliki saldo POEN-a ne daje kontrolu nad sistemom.
 
-Na kraju, sve je javno: ukupan evidentiran iznos, broj koraka, preostalo do granice i udeli svakog pojedinog osnivača. Nema ničega što se ne može proveriti.`,
+Svi podaci su javni: ukupan evidentiran iznos, broj koraka, preostalo do granice i udeo svakog osnivača.`,
       },
     ],
   },
