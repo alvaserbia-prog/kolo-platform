@@ -17,12 +17,12 @@ export async function POST(
 
   const { id: oglasId } = await params;
   const body = await req.json().catch(() => ({}));
-  const { date, hoursWorked, description } = body;
+  const { date, predlozeniPoen, description, dokaz } = body;
 
   // Validacije
-  if (!date || !hoursWorked || !description) return NextResponse.json({ error: "Nedostaju podaci." }, { status: 400 });
-  const sati = Number(hoursWorked);
-  if (!Number.isInteger(sati) || sati < 1 || sati > 8) return NextResponse.json({ error: "Broj sati mora biti 1–8." }, { status: 400 });
+  if (!date || !predlozeniPoen || !description) return NextResponse.json({ error: "Nedostaju podaci." }, { status: 400 });
+  const predlozeni = Number(predlozeniPoen);
+  if (!Number.isInteger(predlozeni) || predlozeni < 1) return NextResponse.json({ error: "Predloženi POEN mora biti pozitivan ceo broj." }, { status: 400 });
   if (typeof description !== "string" || description.trim().length < 10) return NextResponse.json({ error: "Opis mora imati najmanje 10 karaktera." }, { status: 400 });
 
   // Datum — max 3 dana unazad
@@ -33,23 +33,35 @@ export async function POST(
   const razlikaDana = Math.floor(razlikaMs / (1000 * 60 * 60 * 24));
   if (razlikaDana < 0 || razlikaDana > 3) return NextResponse.json({ error: "Evidencija moguća max 3 dana unazad." }, { status: 400 });
 
-  // Oglas i odobrena prijava
+  // Oglas i primljena prijava
   const oglas = await prisma.doprinosOglas.findUnique({ where: { id: oglasId } });
-  if (!oglas || oglas.status !== "ACTIVE") return NextResponse.json({ error: "Oglas nije aktivan." }, { status: 400 });
-  if (sati > oglas.maxHoursPerDay) return NextResponse.json({ error: `Max ${oglas.maxHoursPerDay} sati dnevno za ovaj oglas.` }, { status: 400 });
+  if (!oglas || oglas.status !== "ACTIVE") return NextResponse.json({ error: "Zadatak nije aktivan." }, { status: 400 });
+
+  // Predloženi POEN pojedinačnog dnevnog izvršenja ne sme premašiti predloženi POEN
+  // celog zadatka (čl. 26 — gornja granica po dnevnom izvršenju).
+  if (predlozeni > oglas.predlozeniPoen)
+    return NextResponse.json({ error: `Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (predloženi POEN zadatka).` }, { status: 400 });
 
   const prijava = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId, userId: session.user.id } },
   });
-  if (!prijava || prijava.status !== "APPROVED") return NextResponse.json({ error: "Nemate odobrenu prijavu za ovaj oglas." }, { status: 403 });
+  if (!prijava || prijava.status !== "APPROVED") return NextResponse.json({ error: "Vaša prijava za ovaj zadatak nije primljena." }, { status: 403 });
 
   // Provera duplikata za isti dan
   const postoji = await prisma.oglasEvidencija.findUnique({
     where: { userId_oglasId_date: { userId: session.user.id, oglasId, date: datumEv } },
   });
-  if (postoji) return NextResponse.json({ error: "Evidencija za taj dan je već unesena." }, { status: 400 });
+  if (postoji) return NextResponse.json({ error: "Evidencija za taj dan je već uneta." }, { status: 400 });
 
-  const amount = sati * oglas.hourlyRate;
+  // Kumulativni predloženi POEN svih dnevnih izvršenja (osim odbijenih) ne sme preći
+  // predloženi POEN zadatka (čl. 11 — raspodela predloženog POEN-a po dnevnim izvršenjima).
+  const agg = await prisma.oglasEvidencija.aggregate({
+    where: { userId: session.user.id, oglasId, status: { not: "REJECTED" } },
+    _sum: { predlozeniPoen: true },
+  });
+  const dosadasnji = agg._sum.predlozeniPoen ?? 0;
+  if (dosadasnji + predlozeni > oglas.predlozeniPoen)
+    return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi predloženi POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
 
   await prisma.oglasEvidencija.create({
     data: {
@@ -57,16 +69,16 @@ export async function POST(
       oglasId,
       prijavaId: prijava.id,
       date: datumEv,
-      hoursWorked: sati,
-      amount,
+      predlozeniPoen: predlozeni,
+      dokaz: typeof dokaz === "string" && dokaz.trim() ? dokaz.trim() : null,
       description: description.trim(),
     },
   });
 
   void posaljiAdminAlert(
-    "Nova radna evidencija",
-    `Oglas: ${oglas.title}\nKorisnik: ${session.user.pseudonim}\nSati: ${sati} | Iznos: ${amount.toLocaleString("sr-RS")} POEN`
+    "Novo dnevno izvršenje (operativni doprinos)",
+    `Zadatak: ${oglas.title}\nKorisnik: ${session.user.pseudonim}\nPredloženi POEN: ${predlozeni.toLocaleString("sr-RS")}`
   );
 
-  return NextResponse.json({ ok: true, amount });
+  return NextResponse.json({ ok: true, predlozeniPoen: predlozeni });
 }

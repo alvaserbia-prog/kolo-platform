@@ -21,7 +21,6 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
               select: {
                 pseudonim: true,
                 programEnrollments: { where: { status: "PENDING" }, select: { id: true, type: true, metadata: true, createdAt: true } },
-                doprinosEvidencije: { where: { status: "PENDING" }, select: { id: true, date: true, description: true, amount: true, createdAt: true } },
               },
             },
           },
@@ -61,13 +60,6 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
             id: e.id,
             type: e.type as string,
             metadata: e.metadata as Record<string, unknown> | null,
-            createdAt: e.createdAt.toISOString(),
-          })),
-          pendingEvidencije: m.user.doprinosEvidencije.map((e) => ({
-            id: e.id,
-            date: e.date.toISOString(),
-            description: e.description,
-            amount: e.amount,
             createdAt: e.createdAt.toISOString(),
           })),
         })),

@@ -33,7 +33,6 @@ export default async function AdminPage() {
       prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
       prisma.protokolProgram.findMany(),
       prisma.programEnrollment.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
-      prisma.doprinosEvidencija.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
@@ -87,7 +86,7 @@ export default async function AdminPage() {
       }),
       prisma.oglasPrijava.findMany({
         where: { status: "PENDING" },
-        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true, hourlyRate: true, positions: true } } },
+        include: { user: { select: { pseudonim: true } }, oglas: { select: { title: true, predlozeniPoen: true, positions: true } } },
         orderBy: { createdAt: "asc" },
       }),
       prisma.oglasEvidencija.findMany({
@@ -128,11 +127,7 @@ export default async function AdminPage() {
           id: e.id, pseudonim: e.user.pseudonim, type: e.type, label: labelPrograma(e.type),
           metadata: e.metadata as Record<string, unknown> | null, createdAt: e.createdAt.toISOString(),
         })),
-        pendingEvidencije: adminProgrami[3].map((e) => ({
-          id: e.id, pseudonim: e.user.pseudonim, date: e.date.toISOString(),
-          description: e.description, amount: e.amount, createdAt: e.createdAt.toISOString(),
-        })),
-        poslednjeEmisije: adminProgrami[4].map((s) => ({
+        poslednjeEmisije: adminProgrami[3].map((s) => ({
           date: s.date.toISOString(), opticaj: s.opticaj, limit: s.limit,
           totalRequested: s.totalRequested, totalEmitted: s.totalEmitted, koeficijent: Number(s.koeficijent),
         })),
@@ -177,7 +172,7 @@ export default async function AdminPage() {
       adminPed={{
         oglasi: zaposljavanjeData[0].map((o) => ({
           id: o.id, title: o.title, source: o.source as string,
-          hourlyRate: o.hourlyRate, maxHoursPerDay: o.maxHoursPerDay, positions: o.positions,
+          predlozeniPoen: o.predlozeniPoen, saOdobravanjem: o.saOdobravanjem, positions: o.positions,
           deadline: o.deadline?.toISOString() ?? null, status: o.status as string,
           createdByPseudonim: o.createdBy.pseudonim, krugName: o.krug?.name ?? null,
           ukupnoPrijava: o._count.prijave, pendingEvidencija: o._count.evidencije,
@@ -185,13 +180,14 @@ export default async function AdminPage() {
         })),
         pendingPrijave: zaposljavanjeData[1].map((p) => ({
           id: p.id, pseudonim: p.user.pseudonim, oglasTitle: p.oglas.title,
-          hourlyRate: p.oglas.hourlyRate, positions: p.oglas.positions,
+          predlozeniPoen: p.oglas.predlozeniPoen, positions: p.oglas.positions,
+          planIzvrsenja: p.planIzvrsenja,
           createdAt: p.createdAt.toISOString(),
         })),
         pendingEvidencije: zaposljavanjeData[2].map((e) => ({
           id: e.id, pseudonim: e.user.pseudonim, oglasTitle: e.oglas.title,
-          date: e.date.toISOString(), hoursWorked: e.hoursWorked, amount: e.amount,
-          description: e.description, createdAt: e.createdAt.toISOString(),
+          date: e.date.toISOString(), predlozeniPoen: e.predlozeniPoen,
+          description: e.description, dokaz: e.dokaz, createdAt: e.createdAt.toISOString(),
         })),
       }}
     />

@@ -2,20 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { emitujPoen } from "@/lib/protokol/emisija";
-import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 /**
  * POST /api/admin/doprinos-oglasi/evidencija/[id]/odobri
  *
- * Verifikacija izvršenja operativnog doprinosa po Pravilniku v3.7.0 čl. 36:
+ * Potvrda dnevnog izvršenja operativnog doprinosa (Pravilnik čl. 36; Pravilnik o
+ * operativnom doprinosu čl. 16, 18, 22):
  *   — u Fazi 2 verifikuju nosioci ZRNA;
  *   — u Fazi 1 (dok nema ZRNA) funkciju vrše članovi UO Fondacije (admin).
  *
- * Konflikt interesa (čl. 16 Pravilnika o operativnom doprinosu):
- *   verifikator ne sme biti predlagač oglasa niti izvršilac (korisnik koji
- *   je evidentirao sate).
+ * VAŽNO: potvrda NE emituje POEN odmah. Potvrđena verifikacija (status APPROVED)
+ * ulazi u raspodelu dnevnog limita na kraju obračunskog perioda, gde se evidentirani
+ * POEN računa kao predloženi × min(1, L/P) (čl. 24, 25). Emisija se izvršava u
+ * noćnom obračunu (`izvrsiNocnuEmisiju`).
+ *
+ * Konflikt interesa (čl. 16): verifikator ne sme biti predlagač zadatka niti izvršilac.
  */
 export async function POST(
   _req: NextRequest,
@@ -45,48 +48,41 @@ export async function POST(
   const ev = await prisma.oglasEvidencija.findUnique({
     where: { id },
     include: {
-      user: { include: { wallet: true } },
       oglas: { select: { title: true, createdById: true } },
     },
   });
 
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
-  if (!ev.user.wallet) return NextResponse.json({ error: "Korisnik nema novčanik." }, { status: 400 });
 
   // Konflikt interesa: verifikator ne sme biti izvršilac ni predlagač.
   if (session.user.id === ev.userId) {
     return NextResponse.json(
-      { error: "Ne možeš verifikovati sopstvenu evidenciju rada." },
+      { error: "Ne možeš verifikovati sopstveno izvršenje." },
       { status: 403 }
     );
   }
   if (session.user.id === ev.oglas.createdById) {
     return NextResponse.json(
-      { error: "Predlagač oglasa ne može verifikovati evidenciju na svom oglasu." },
+      { error: "Predlagač zadatka ne može verifikovati izvršenje na svom zadatku." },
       { status: 403 }
     );
   }
 
-  await emitujPoen(
-    ev.user.wallet!.id,
-    ev.amount,
-    TransactionType.EMISIJA_PROGRAM,
-    `Evidencija doprinosa: ${ev.oglas.title} (${ev.hoursWorked}h)`
-  );
-
+  // Potvrda — evidencija ulazi u raspodelu narednog noćnog obračuna (čl. 22, 24, 25).
+  // POEN se NE emituje sada.
   await prisma.oglasEvidencija.update({
     where: { id },
-    data: { status: "EMITTED", approvedById: session.user.id, approvedAt: new Date() },
+    data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });
 
   await posaljiNotifikaciju(
     ev.userId,
-    "transfer_primljen",
-    `Primili ste ${ev.amount.toLocaleString("sr-RS")} POEN`,
-    `Evidencija rada za "${ev.oglas.title}" (${ev.hoursWorked}h) je potvrđena.`,
-    "/novcanik"
+    "info",
+    "Izvršenje potvrđeno",
+    `Vaše dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
+    "/doprinos-oglasi"
   );
 
-  return NextResponse.json({ ok: true, amount: ev.amount });
+  return NextResponse.json({ ok: true, predlozeniPoen: ev.predlozeniPoen });
 }

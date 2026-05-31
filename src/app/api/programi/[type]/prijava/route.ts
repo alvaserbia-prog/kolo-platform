@@ -6,8 +6,10 @@ import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
 
+// PED (operativni doprinos) ne ide kroz enrollment — prijava se vrši na konkretan
+// zadatak kroz /api/doprinos-oglasi/[id]/prijavi (Pravilnik o operativnom doprinosu).
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
-  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 // POST /api/programi/[type]/prijava — prijava na program
