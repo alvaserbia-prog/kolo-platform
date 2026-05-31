@@ -18,15 +18,15 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
       {
         id: 42,
         pitanje: `Ne poznajem nikoga ko je već u KOLU — kako da se verifikujem ako verifikacija traži da te neko iznutra potvrdi?`,
-        odgovor: `Razumemo brigu — deluje kao začarani krug: da bi te neko potvrdio, treba da ga već poznaješ. Ali postoji put i kad ne poznaješ nikoga iznutra.
+        odgovor: `Možeš se verifikovati i kada ne poznaješ nikoga ko je već u sistemu. Verifikacija se zasniva na ličnom poznavanju, ali tri stvari ti otvaraju put i bez ranijih poznanstava.
 
 Prvo, registracija je besplatna i ne moraš biti verifikovan da bi ušao. Možeš da se upoznaš sa pravilima, da pratiš opšte pokazatelje sistema i da pogledaš ponudu na Pijaci — sve to radi i bez verifikacije.
 
-Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i kontakt telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoj kontakt telefon vide samo verifikovani korisnici — oni koji mogu da te verifikuju. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost uživo.
+Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i kontakt telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoj kontakt telefon vide samo verifikovani korisnici — oni koji mogu da te verifikuju. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost.
 
 Zahtev možeš povući u svakom trenutku.
 
-I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred — poznanstvo se stvara kasnije, kroz tablu jemstva i susret uživo.`,
+I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred — poznanstvo se stvara kasnije, kroz kontakt koji tabla jemstva omogući.`,
       },
       {
         id: 43,
@@ -40,9 +40,9 @@ POEN se evidentira i kroz druge kanale — verifikaciju u lancu jemstva, operati
       {
         id: 44,
         pitanje: `Kako da zaradim svoje prve POEN-e ako nemam šta da prodam? Koji je moj prvi korak?`,
-        odgovor: `Ne brini — ne moraš imati nijedan proizvod da bi učestvovao u sistemu i počeo da prikupljaš POEN.
+        odgovor: `Ne moraš imati nijedan proizvod da bi prikupljao POEN — prvi korak je verifikacija.
 
-Tvoj prvi korak je verifikacija. Verifikacija znači da te neko ko je već verifikovan, a lično te poznaje, potvrdi kao stvarnu osobu — na osnovu tog poznavanja, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
+Verifikacija znači da te neko ko je već verifikovan, a lično te poznaje, potvrdi kao stvarnu osobu — na osnovu tog poznavanja, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
 
 Kad si verifikovan, otvara ti se nekoliko načina da prikupiš još:
 
@@ -50,11 +50,9 @@ Možeš sam da verifikuješ druge ljude koje stvarno poznaješ — za svaku obav
 
 Možeš da se prijaviš za zadatak iz operativnog doprinosa — to je rad za zajedničko dobro koji objavi Fondacija (kasnije i nosioci ZRNA). Kad izvršiš zadatak i ovlašćeni verifikator potvrdi izvršenje, upiše ti se POEN.
 
-Ako pripadaš nekoj od grupa koje pokrivaju socijalni programi (majke i primarni staratelji, stariji, posebna briga, školovanje), prijaviš svoj status i Protokol ti upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti.
+Ako pripadaš nekoj od grupa koje pokrivaju socijalni programi (majke, stariji, posebna briga, školovanje), prijaviš svoj status i Protokol ti upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti.
 
-I najjednostavnije od svega: ne moraš da prodaješ proizvod. Razmena u sistemu obuhvata i usluge i znanje — možeš nekome pomoći oko nečega, podučiti ga, pričuvati decu, uraditi neki posao. Druga strana ti tada upiše POEN za to što si učinio.
-
-Ukratko: verifikuj se da dobiješ prvih 1.000 POEN, a zatim biraj — verifikuj druge, prijavi se za zadatak, prijavi svoj status ako pripadaš nekoj grupi, ili jednostavno ponudi svoju pomoć i znanje drugima.`,
+I najjednostavnije od svega: ne moraš da prodaješ proizvod. Razmena u sistemu obuhvata i usluge i znanje — možeš nekome pomoći oko nečega, podučiti ga, pričuvati decu, uraditi neki posao. Druga strana ti tada upiše POEN za to što si učinio.`,
       },
       {
         id: 45,
@@ -65,7 +63,7 @@ Uključuješ se onoliko koliko želiš i kada želiš. Operativni doprinos, razm
 
 Tvoj evidentirani položaj te čeka i kad pauziraš: ako neko vreme nisi aktivan, zadržavaš svoj zapis. Tvoj POEN ti trenutno ne ističe — ostaje zabeležen dok ga ne iskoristiš ili dok ne obrišeš nalog.
 
-Registracija je besplatna i jednostavna: biraš pseudonim, uneseš email i postaviš lozinku, pa potvrdiš nalog porukom na email. Bez obaveznog roka, bez ugovorne vezanosti.
+Registracija je besplatna i jednostavna: biraš pseudonim, uneseš email i postaviš lozinku. Bez obaveznog roka, bez ugovorne vezanosti.
 
 Iz sistema možeš izaći u svakom trenutku, brisanjem naloga iz podešavanja profila, bez otkaznog roka.`,
       },
@@ -82,12 +80,12 @@ Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom.
 
 Ime i broj telefona možeš kasnije uneti samo ako sam to želiš — potpuno dobrovoljno i samo verifikovanim korisnicima. To otkrivanje možeš povući u svakom trenutku.
 
-Jedna iskrena napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U maloj sredini kombinacija pseudonima, lokacije i aktivnosti može posredno ukazati na to ko si — toga budi svestan.`,
+Napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U maloj sredini kombinacija pseudonima, lokacije i aktivnosti može posredno ukazati na to ko si — toga budi svestan.`,
       },
       {
         id: 76,
         pitanje: `Šta KOLO nikad neće tražiti od mene (zaštita od prevare)?`,
-        odgovor: `Registracija je besplatna. Fondacija NIKAD ne traži da uplatiš novac da bi se uključio u sistem.
+        odgovor: `Registracija je besplatna. Fondacija nikada ne traži da uplatiš novac da bi se uključio u sistem.
 
 Fondacija nikada neće tražiti tvoju lozinku, PIN, broj platne kartice, JMBG ni sliku lične karte ili pasoša. Verifikacija se obavlja kroz lično poznavanje — bez ikakvih dokumenata.
 
