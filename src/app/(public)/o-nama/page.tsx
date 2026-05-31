@@ -62,8 +62,8 @@ export default function ONamaPage() {
               alt="Nikola Šarić"
               width={176}
               height={176}
-              className="rounded-full object-cover ring-4 ring-white/10 shadow-xl"
-              style={{ width: "144px", height: "144px", display: "block" }}
+              className="rounded-full object-cover object-top ring-4 ring-white/10 shadow-xl"
+              style={{ width: "160px", height: "160px", display: "block" }}
             />
           </div>
         </div>

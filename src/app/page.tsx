@@ -512,14 +512,13 @@ export default async function Home() {
         {/* ── SEKCIJA 9 — KO STOJI IZA KOLA ──────────────────────── */}
         <section className="bg-white rounded-2xl card-shadow overflow-hidden">
           <div className="grid md:grid-cols-[2fr_3fr]">
-            {/* Levo — slika */}
-            <div className="bg-kolo-green-900 flex items-center justify-center min-h-[220px] p-8">
+            {/* Levo — slika (popunjava panel) */}
+            <div className="relative bg-kolo-green-900 min-h-[340px] md:min-h-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nikola-saric.png"
                 alt="Nikola Šarić"
-                className="rounded-full object-cover ring-4 ring-white/10 shadow-xl"
-                style={{ width: "160px", height: "160px", display: "block" }}
+                className="absolute inset-0 w-full h-full object-cover object-top"
               />
             </div>
             {/* Desno — tekst */}
