@@ -41,7 +41,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
     setError(null);
     setUspeh(null);
     if (!potvrdjeno) {
-      setError("Moraš potvrditi fizičko prisustvo.");
+      setError("Moraš potvrditi lično poznavanje i odgovornost.");
       return;
     }
     const ocisceno = tokenIliBroj.replace(/\s+/g, "");
@@ -50,7 +50,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
       const res = await fetch("/api/verifikacija", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ token: ocisceno, potvrdaPrisustva: true }),
+        body: JSON.stringify({ token: ocisceno, potvrdaPoznavanja: true }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -132,8 +132,9 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
               className="mt-0.5"
             />
             <span>
-              Potvrđujem da poznajem ovu osobu lično i da sam u njenom fizičkom prisustvu
-              (čl. 5 Pravilnika o dokazu stvarnosti).
+              Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću jemčim za
+              njenu stvarnost, jedinstvenost i kontinuitet (čl. 5 Pravilnika o dokazu
+              stvarnosti).
             </span>
           </label>
           <div className="flex gap-2">

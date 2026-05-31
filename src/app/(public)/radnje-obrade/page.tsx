@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RadnjeObradePage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "radnje_obrade_3_7_2.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "radnje_obrade_3_7_3.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (

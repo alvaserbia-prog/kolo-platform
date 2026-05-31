@@ -276,7 +276,7 @@ Format: **P:** pitanje — **O:** odgovor / NEPOZNATO — **[trazi]**. Sortirano
 ### Dijaspora (lokalizacija/valuta)
 
 **P37: Mogu li se verifikovati na daljinu iz inostranstva?**
-**O:** Po pravilu ne — verifikacija je u fizickom prisustvu (dokaz_stvarnosti čl. 5). Daljinske verifikacije nema. Iz inostranstva mozes se registrovati i pratiti sistem; pun pristup po verifikaciji uzivo (npr. pri poseti Srbiji). **NEPOZNATO:** poseban rezim za dijasporu nije razraden. **[dijaspora — 1]**
+**O:** Da — verifikacija se zasniva na licnom poznavanju i ne zahteva fizicko prisustvo (dokaz_stvarnosti čl. 5, v3.7.3). Verifikacija na daljinu je moguca dok god te verifikator licno poznaje dovoljno da za tebe jemci; zastita pociva na licnom poznavanju, odgovornosti verifikatora i strukturi mreze, ne na zajednickom prisustvu. Iz inostranstva mozes se registrovati i pratiti sistem; pun pristup po verifikaciji (uzivo ili na daljinu). **[dijaspora — 1]**
 
 **P38: U kojoj valuti doniram — mogu li poslati evre iz inostranstva?**
 **O:** Donacije_3_7_0.md predvida donaciju „u dinarima ili drugoj valuti". Uplatom na racun Fondacije, Protokol evidentira POEN po koeficijentu (11 nivoa, 1,00–2,00). Donira samo verifikovani korisnik. **[dijaspora — 1]**

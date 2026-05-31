@@ -2,9 +2,9 @@
  * POST /api/verifikacija
  *
  * Verifikator izvršava verifikaciju koristeći token verifikovanog.
- * Body: { token: string, potvrdaPrisustva: boolean }
+ * Body: { token: string, potvrdaPoznavanja: boolean }
  *   - token: 64-char hex (iz QR-a) ili 6-cifren broj
- *   - potvrdaPrisustva: mora biti true
+ *   - potvrdaPoznavanja: mora biti true (lično poznavanje + odgovornost, čl. 5)
  *
  * Po uspehu: kreira VerifikacionaVeza, troši slot, emituje POEN za oba.
  */
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
   }
 
-  let body: { token?: string; potvrdaPrisustva?: boolean };
+  let body: { token?: string; potvrdaPoznavanja?: boolean };
   try {
     body = await req.json();
   } catch {
@@ -30,13 +30,13 @@ export async function POST(req: NextRequest) {
   }
 
   const tokenIliBroj = typeof body.token === "string" ? body.token : "";
-  const potvrdaPrisustva = body.potvrdaPrisustva === true;
+  const potvrdaPoznavanja = body.potvrdaPoznavanja === true;
 
   try {
     const rez = await izvrsiVerifikaciju({
       verifikatorId: session.user.id,
       tokenIliBroj,
-      potvrdaPrisustva,
+      potvrdaPoznavanja,
     });
     return NextResponse.json({
       verifikacijaId: rez.verifikacijaId,

@@ -7,11 +7,11 @@ import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
   title: "Politika privatnosti — KOLO",
-  description: "Politika privatnosti KOLO platforme, verzija 3.7.3",
+  description: "Politika privatnosti KOLO platforme, verzija 3.7.4",
 };
 
 export default async function PolitikaPrivatnostiPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_3.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_4.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (

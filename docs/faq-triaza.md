@@ -68,7 +68,7 @@ Po unosu vlasnika dodata su još 3 pitanja u `faq-data.ts`, pa je SPREMNA/dodato
 | P34 | SPREMNA | Tehnika i open-source | — | Javni developerski API ne postoji; postoji samo izvoz ličnih podataka (JSON). |
 | P35 | SPREMNA | Tehnika i open-source | 27 | Nije blockchain; zaštita kroz zero-sum, determinizam i nepromenljiv log; integritet je dizajnersko, ne trustless pravilo. |
 | P36 | SPREMNA | Zaštite i upravljanje | 28 | Dva praga: aktivacija Gornjeg Kola (1.000.000 POEN) i gašenje veta (prag finansijske samostalnosti). |
-| P37 | SPREMNA | Privatnost i izlazak | 8 | Daljinske verifikacije nema (fizičko prisustvo); registracija/praćenje moguće; dijaspora-režim nije razrađen. |
+| P37 | SPREMNA | Privatnost i izlazak | 8 | Verifikacija na daljinu moguća (lično poznavanje, ne fizičko prisustvo; v3.7.3); registracija/praćenje moguće. |
 | P38 | SPREMNA | Pijaca, donacije, pokrovitelji | 23 | Donacija u dinarima ili drugoj valuti (i evri); koeficijent 1,00–2,00 kroz 11 nivoa, trajan. |
 | P39 | SPREMNA | Uključivanje | 8 | Zvanični jezik srpski; interfejs ima en/hu prebacivač; merodavan je srpski izvorni tekst. |
 | P40 | SPREMNA | Za početnike | 40 | KOLO nikad ne traži uplatu, lozinku, PIN, karticu, JMBG ni sliku dokumenta; sve suprotno je prevara. |

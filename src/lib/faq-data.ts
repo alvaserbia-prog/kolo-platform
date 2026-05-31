@@ -20,15 +20,13 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
         pitanje: `Ne poznajem nikoga ko je već u KOLU — kako da se verifikujem ako verifikacija traži da te neko iznutra potvrdi?`,
         odgovor: `Razumemo brigu — deluje kao začarani krug: da bi te neko potvrdio, treba da ga već poznaješ. Ali postoji put i kad ne poznaješ nikoga iznutra.
 
-Prvo, registracija je besplatna i ne moraš biti verifikovan da bi ušao. Možeš da se upoznaš sa pravilima, da pratiš opšte pokazatelje sistema i da razmenjuješ dobra i usluge i van platforme — sve to radi i bez verifikacije.
+Prvo, registracija je besplatna i ne moraš biti verifikovan da bi ušao. Možeš da se upoznaš sa pravilima, da pratiš opšte pokazatelje sistema i da pogledaš ponudu na Pijaci — sve to radi i bez verifikacije.
 
-Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i, ako hoćeš, kontakt po sopstvenom izboru. Tvoje predstavljanje vide svi prijavljeni članovi, a kontakt vide samo verifikovani korisnici i tek kad ga sam otkriješ. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost uživo, u fizičkom prisustvu.
+Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i kontakt telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a kontakt vide samo verifikovani korisnici i tek kad ga sam otkriješ. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost uživo.
 
-Jedan zahtev na tabli je aktivan do 30 dana ili dok te neko ne verifikuje; možeš ga povući u svakom trenutku.
+Zahtev možeš povući u svakom trenutku.
 
-I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred.
-
-Sama verifikacija ostaje ista: nije provera dokumenata, nego potvrda stvarne osobe koju neko sretne uživo. Tabla je samo most da do tog susreta dođe.`,
+I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred.`,
       },
       {
         id: 43,
@@ -46,7 +44,7 @@ POEN dobijaš kroz doprinos zajednici. Na primer, kada se verifikuješ kroz lana
         pitanje: `Kako da zaradim svoje prve POEN-e ako nemam šta da prodam? Koji je moj prvi korak?`,
         odgovor: `Ne brini — ne moraš imati nijedan proizvod da bi učestvovao u sistemu i počeo da prikupljaš POEN.
 
-Tvoj prvi korak je verifikacija. Verifikacija znači da te neko ko je već verifikovan, a lično te poznaje, potvrdi kao stvarnu osobu — uživo, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
+Tvoj prvi korak je verifikacija. Verifikacija znači da te neko ko je već verifikovan, a lično te poznaje, potvrdi kao stvarnu osobu — na osnovu tog poznavanja, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
 
 Kad si verifikovan, otvara ti se nekoliko načina da prikupiš još:
 
@@ -80,7 +78,7 @@ Iz sistema možeš izaći u svakom trenutku, brisanjem naloga iz podešavanja pr
 
 Pravo ime nije obavezno. Pri registraciji od tebe se traži samo pseudonim, email adresa i lozinka. Ne tražimo ni JMBG, ni ličnu kartu, ni pasoš, niti bilo kakav dokument — i nikada ne tražimo da nešto slikaš.
 
-Ni verifikacija ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te lično poznaje, uživo, kroz lanac jemstva — nema upload-a lične karte ni provere papira.
+Ni verifikacija ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te lično poznaje, kroz lanac jemstva — nema upload-a lične karte ni provere papira.
 
 Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom. Ta veza u sistemu jednostavno ne postoji.
 
@@ -93,7 +91,7 @@ Jedna iskrena napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U 
         pitanje: `Šta KOLO nikad neće tražiti od mene (zaštita od prevare)?`,
         odgovor: `Registracija je besplatna. Fondacija NIKAD ne traži da uplatiš novac da bi se uključio u sistem.
 
-Fondacija nikada neće tražiti tvoju lozinku, PIN, broj platne kartice, JMBG ni sliku lične karte ili pasoša. Verifikacija se obavlja uživo, kroz lično poznavanje — bez ikakvih dokumenata.
+Fondacija nikada neće tražiti tvoju lozinku, PIN, broj platne kartice, JMBG ni sliku lične karte ili pasoša. Verifikacija se obavlja kroz lično poznavanje — bez ikakvih dokumenata.
 
 U sistemu ne postoji ponuda tipa „uplati pa ćeš dobiti POEN ili novac". POEN se ne kupuje za novac, ne unovčava se i niko ti ga ne može „prodati". Svako ko ti to nudi pokušava prevaru — nije deo KOLA.
 
@@ -195,7 +193,7 @@ Kada te neko verifikuje, Protokol upiše po 1.000 POEN i tebi i osobi koja te je
 
 Upis nije ni naknada za tvoje podatke — to je automatski akt Protokola po pravilu: kad se evidentira verifikacioni zapis, sistem deterministički upiše POEN bez ikakvog ugovora ili pogađanja.
 
-Farmanje nema smisla iz nekoliko razloga. POEN se ne unovčava — ne menjaš ga za dinare niti za bilo šta van sistema, pa nemaš šta da „izvučeš". Princip je jedan čovek — jedan nalog, a verifikacija se obavlja lice u lice, u fizičkom prisustvu osobe koju verifikuješ; ne možeš izmišljati nepostojeće ljude. Pored toga, zbir svih zapisa je uvek nula: svaki upisani POEN ima isti takav minus u evidenciji Protokola, pa niko ne stvara vrednost ni iz čega.
+Farmanje nema smisla iz nekoliko razloga. POEN se ne unovčava — ne menjaš ga za dinare niti za bilo šta van sistema, pa nemaš šta da „izvučeš". Princip je jedan čovek — jedan nalog, a verifikacija počiva na ličnom poznavanju i odgovornosti verifikatora koji svojom potvrdom jemči za stvarnost osobe; ne možeš izmišljati nepostojeće ljude. Pored toga, zbir svih zapisa je uvek nula: svaki upisani POEN ima isti takav minus u evidenciji Protokola, pa niko ne stvara vrednost ni iz čega.
 
 Ako neko ipak lažno verifikuje — potvrdi nekoga ko ne postoji ili ima drugi nalog — to se utvrđuje kao lažna verifikacija i poništava, sa kaskadnim posledicama po sve takve veze.`,
       },
@@ -232,7 +230,7 @@ Na kraju, sve je javno: ukupan evidentiran iznos, broj koraka, preostalo do gran
         pitanje: `Kako se verifikujem i šta time dobijam?`,
         odgovor: `Verifikacija je opciona, ali je preduslov za pun pristup funkcijama platforme.
 
-Verifikacija se obavlja kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost u fizičkom prisustvu. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog. Verifikator ne traži niti prikuplja dokumente.
+Verifikacija se obavlja kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost na osnovu tog poznavanja. Platforma obezbeđuje tehnički mehanizam saglasnosti i potvrde identiteta naloga koji ne prikuplja lične podatke verifikovanog. Verifikator ne traži niti prikuplja dokumente.
 
 Svaka verifikacija uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
 
@@ -243,7 +241,7 @@ Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donaci
       {
         id: 8,
         pitanje: `Šta ako sam stranac — mogu li biti član?`,
-        odgovor: `Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost uživo. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+        odgovor: `Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
 Sistem trenutno radi na srpskom jeziku; interfejs ima i englesku i mađarsku verziju, dok pravno obavezujući tekstovi (Pravilnik, Uslovi) ostaju na srpskom.`,
       },
@@ -830,7 +828,7 @@ Izuzetak je Pijaca: tvoji oglasi (opis, cena, lokacija i pseudonim) javno su vid
         pitanje: `Kako se štiti moja privatnost?`,
         odgovor: `Minimizacija podataka je jedan od četiri principa sistema — platforma prikuplja samo podatke neophodne za funkcionisanje sistema.
 
-Verifikacija se obavlja u lancu jemstva: drugi verifikovani korisnici potvrđuju tvoju stvarnost u fizičkom prisustvu, bez prikupljanja ili dostavljanja ličnih dokumenata. Platforma obezbeđuje tehnički mehanizam potvrde prisustva koji ne prikuplja lične podatke verifikovanog.
+Verifikacija se obavlja u lancu jemstva: drugi verifikovani korisnici potvrđuju tvoju stvarnost na osnovu ličnog poznavanja, bez prikupljanja ili dostavljanja ličnih dokumenata. Platforma obezbeđuje tehnički mehanizam saglasnosti i potvrde identiteta naloga koji ne prikuplja lične podatke verifikovanog.
 
 Sve admin akcije pristupa eventualnim ličnim podacima beleže se u trajnom logu. Fondacija ne deli podatke sa trećim licima izuzev po nalogu nadležnog organa.
 
@@ -889,7 +887,7 @@ Iskreno: ovo je poznato ograničenje pseudonimnih sistema. Razdvajamo identifika
       {
         id: 57,
         pitanje: `Osoba koja me verifikuje zna i moje lice i pseudonim — ne razbija li lanac jemstva anonimnost?`,
-        odgovor: `Tačno je: osoba koja te verifikuje povezuje tvoje lice sa tvojim pseudonimom. Verifikacija se i zasniva na ličnom poznavanju — neko ko te poznaje uživo potvrđuje da si stvarna osoba. Bez te jedne ljudske veze ceo sistem ne bi mogao da razlikuje stvarne ljude od izmišljenih naloga.
+        odgovor: `Tačno je: osoba koja te verifikuje povezuje tvoje lice sa tvojim pseudonimom. Verifikacija se i zasniva na ličnom poznavanju — neko ko te poznaje lično potvrđuje da si stvarna osoba. Bez te jedne ljudske veze ceo sistem ne bi mogao da razlikuje stvarne ljude od izmišljenih naloga.
 
 Ali važno je šta se dešava dalje. Ta veza ostaje između tebe i ljudi koji te poznaju u stvarnom svetu — Fondacija je ne vidi. Fondacija ne vodi nikakvu evidenciju koja povezuje tvoj pseudonim sa tvojim imenom i licem.
 
@@ -902,13 +900,13 @@ Iskreno o granici: u maloj sredini, gde se ljudi i ovako poznaju, anonimnost pre
       {
         id: 73,
         pitanje: `Mogu li se verifikovati na daljinu, iz inostranstva?`,
-        odgovor: `Po pravilu ne. Verifikacija (dokaz stvarnosti) obavlja se u fizičkom prisustvu — verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost uživo. Daljinske verifikacije nema, jer cela zaštita sistema počiva upravo na ličnom poznavanju, ne na proveri dokumenata.
+        odgovor: `Da. Verifikacija (dokaz stvarnosti) zasniva se na neposrednom ličnom poznavanju — verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost i svojom odgovornošću jemči za nju. Pravilnik ne zahteva fizičko prisustvo u trenutku verifikacije, pa se ona može obaviti i na daljinu, sve dok te verifikator zaista poznaje dovoljno da za tebe jemči.
 
-To ne znači da si isključen ako si u inostranstvu. Možeš se registrovati, birati pseudonim, pratiti sistem i pripremiti se. Pun pristup funkcijama otključava se kada te neko verifikuje uživo — na primer pri poseti Srbiji, ili kada upoznaš verifikovanog korisnika gde god da se nađete.
+Zaštita sistema ne počiva na tome da ste u istoj prostoriji, nego na ličnom poznavanju, na odgovornosti verifikatora (lažna verifikacija povlači poništavanje verifikacija i sankcije) i na strukturi mreže — da bi dostigao pun indeks stvarnosti, moraš biti poznat ljudima iz više nezavisnih delova mreže.
 
-Državljanstvo nije uslov — bitno je da si stvarna osoba.
+Zato nisi isključen ako si u inostranstvu: možeš se registrovati, birati pseudonim i pratiti sistem, a pun pristup funkcijama otključava se čim te neko ko te poznaje verifikuje — bilo uživo, bilo na daljinu.
 
-Iskreno: poseban režim za dijasporu (neki olakšani put verifikacije iz inostranstva) zasad nije razrađen.`,
+Državljanstvo nije uslov — bitno je da si stvarna osoba.`,
       },
       {
         id: 78,

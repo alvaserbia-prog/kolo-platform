@@ -396,7 +396,7 @@ export default async function Home() {
               {
                 br: "2",
                 naslov: "Verifikuješ se",
-                opis: "Verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost u fizičkom prisustvu. Tako i sam postaješ verifikovani korisnik, sa svim funkcijama sistema na raspolaganju. Protokol tada automatski upiše 1.000 POEN tebi i 1.000 POEN korisniku koji te je potvrdio — kao priznanje da ste oboje u lancu jemstva.",
+                opis: "Verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost na osnovu tog poznavanja. Tako i sam postaješ verifikovani korisnik, sa svim funkcijama sistema na raspolaganju. Protokol tada automatski upiše 1.000 POEN tebi i 1.000 POEN korisniku koji te je potvrdio — kao priznanje da ste oboje u lancu jemstva.",
               },
               {
                 br: "3",

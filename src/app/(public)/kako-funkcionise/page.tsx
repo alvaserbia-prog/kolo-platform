@@ -25,7 +25,7 @@ const koraci = [
   {
     br: "3",
     naslov: "Verifikacija kroz lanac jemstva",
-    opis: "Verifikovani korisnik koji te lično poznaje potvrđuje, uživo, da si stvarna osoba. KOLO to obezbeđuje tehnički, bez prikupljanja ijednog dokumenta. Svaka potvrda te dodatno učvršćuje kao stvarnog korisnika mreže — i za svaku ti Protokol upisuje 1.000 POEN.",
+    opis: "Verifikovani korisnik koji te lično poznaje potvrđuje da si stvarna osoba. KOLO to obezbeđuje tehnički, bez prikupljanja ijednog dokumenta. Svaka potvrda te dodatno učvršćuje kao stvarnog korisnika mreže — i za svaku ti Protokol upisuje 1.000 POEN.",
     detalj: "+10% indeks · 1.000 POEN",
     istaknut: true,
   },

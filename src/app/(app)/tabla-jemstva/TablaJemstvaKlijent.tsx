@@ -102,7 +102,8 @@ export default function TablaJemstvaKlijent({
         <h1 className="text-2xl font-semibold text-kolo-text">Tabla zahteva za jemstvo</h1>
         <p className="text-sm text-kolo-muted mt-1">
           Neverifikovani korisnici se ovde predstavljaju mreži verifikovanih kako bi uspostavili
-          kontakt potreban za verifikaciju (lanac jemstva). Verifikacija se i dalje sprovodi uživo.
+          kontakt potreban za verifikaciju (lanac jemstva). Verifikacija se zasniva na ličnom
+          poznavanju verifikatora i verifikovanog.
         </p>
       </div>
 

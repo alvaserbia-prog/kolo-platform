@@ -110,7 +110,7 @@ async function verifikujKroz(verifikatorId: string, verifikovaniId: string) {
   return izvrsiVerifikaciju({
     verifikatorId,
     tokenIliBroj: t.token,
-    potvrdaPrisustva: true,
+    potvrdaPoznavanja: true,
   });
 }
 

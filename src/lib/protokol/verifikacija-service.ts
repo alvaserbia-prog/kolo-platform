@@ -73,7 +73,7 @@ export async function generisiTokenZaVerifikaciju(korisnikId: string) {
 export type IzvrsiVerifikacijuInput = {
   verifikatorId: string;
   tokenIliBroj: string; // 64-char hex ili 6-cifren broj
-  potvrdaPrisustva: boolean;
+  potvrdaPoznavanja: boolean;
 };
 
 export type IzvrsiVerifikacijuRezultat = {
@@ -88,11 +88,11 @@ export type IzvrsiVerifikacijuRezultat = {
 export async function izvrsiVerifikaciju(
   input: IzvrsiVerifikacijuInput
 ): Promise<IzvrsiVerifikacijuRezultat> {
-  const { verifikatorId, tokenIliBroj, potvrdaPrisustva } = input;
+  const { verifikatorId, tokenIliBroj, potvrdaPoznavanja } = input;
 
-  if (!potvrdaPrisustva) {
+  if (!potvrdaPoznavanja) {
     throw new VerifikacijaGreska(
-      "Moraš potvrditi fizičko prisustvo i lično poznavanje.",
+      "Moraš potvrditi lično poznavanje i odgovornost za verifikaciju.",
       400
     );
   }

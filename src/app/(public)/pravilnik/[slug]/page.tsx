@@ -19,7 +19,7 @@ const PRAVILNICI: Record<string, { naziv: string; fajl: string; opis: string }> 
   },
   "dokaz-stvarnosti": {
     naziv: "Pravilnik o dokazu stvarnosti",
-    fajl: "dokaz_stvarnosti_3_7_2.md",
+    fajl: "dokaz_stvarnosti_3_7_3.md",
     opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
   },
   "pokroviteljstvo-donacije": {
