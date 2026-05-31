@@ -14,7 +14,8 @@ export default function PublicFooter() {
               <span className="font-bold text-kolo-green-900 text-lg">KOLO</span>
             </div>
             <p className="text-sm text-kolo-muted leading-relaxed mb-2">
-              KOLO je participatorni sistem zajedničkog dobra. Beleži rad, dobra i znanja koja doprinosimo jedni drugima i zajednici.
+              KOLO je participatorni sistem zajedničkog dobra.<br />
+              Beleži rad, dobra i znanja koja doprinosimo jedni drugima i zajednici.
             </p>
             <p className="text-xs text-kolo-muted">Sombor, Srbija · Pripremna faza</p>
           </div>
