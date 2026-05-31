@@ -22,11 +22,11 @@ export const FAQ_SEKCIJE: FaqSekcija[] = [
 
 Prvo, registracija je besplatna i ne moraš biti verifikovan da bi ušao. Možeš da se upoznaš sa pravilima, da pratiš opšte pokazatelje sistema i da pogledaš ponudu na Pijaci — sve to radi i bez verifikacije.
 
-Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i kontakt telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a kontakt vide samo verifikovani korisnici i tek kad ga sam otkriješ. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost uživo.
+Drugo, za samu verifikaciju postoji posebno mesto: tabla zahteva za jemstvo. Tu objaviš kratko predstavljanje — odakle si i zašto želiš da se uključiš — i kontakt telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoj kontakt telefon vide samo verifikovani korisnici — oni koji mogu da te verifikuju. Tako te mreža upozna iako nikoga ne poznaješ unapred, pa neko od verifikovanih može da uspostavi kontakt s tobom i potvrdi tvoju stvarnost uživo.
 
 Zahtev možeš povući u svakom trenutku.
 
-I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred.`,
+I treće, lanac mora negde da počne — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu da verifikuju nove ljude bez ograničenja, pa prvi krug verifikacija ne zavisi od toga da li nekoga poznaješ unapred — poznanstvo se stvara kasnije, kroz tablu jemstva i susret uživo.`,
       },
       {
         id: 43,
