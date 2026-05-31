@@ -9,19 +9,19 @@ export default function PublicFooter() {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brend */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 h-7 mb-5">
               <Image src={logoImg} alt="KOLO" width={28} height={19} style={{ height: "auto" }} />
-              <span className="font-bold text-kolo-green-900">KOLO</span>
+              <span className="font-bold text-kolo-green-900 text-lg">KOLO</span>
             </div>
             <p className="text-sm text-kolo-muted leading-relaxed mb-2">
-              Sistem evidencije doprinosa zajedničkom dobru.
+              KOLO je participatorni sistem zajedničkog dobra. Beleži rad, dobra i znanja koja doprinosimo jedni drugima i zajednici.
             </p>
-            <p className="text-xs text-kolo-muted">Sombor, Srbija · Rana faza</p>
+            <p className="text-xs text-kolo-muted">Sombor, Srbija · Pripremna faza</p>
           </div>
 
           {/* Sistem */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Sistem</p>
+            <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">Sistem</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">Kako funkcioniše</Link></li>
               <li><Link href="/o-sistemu" className="hover:text-kolo-green-700 transition-colors">O sistemu</Link></li>
@@ -31,7 +31,7 @@ export default function PublicFooter() {
 
           {/* Zajednica */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Zajednica</p>
+            <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">Zajednica</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">O nama</Link></li>
               <li><Link href="/cesto-postavljena-pitanja" className="hover:text-kolo-green-700 transition-colors">FAQ</Link></li>
@@ -42,7 +42,7 @@ export default function PublicFooter() {
 
           {/* Pravni okvir */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Pravni okvir</p>
+            <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">Pravni okvir</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">Pravilnici</Link></li>
               <li><Link href="/statut" className="hover:text-kolo-green-700 transition-colors">Statut</Link></li>
@@ -55,7 +55,7 @@ export default function PublicFooter() {
 
         {/* Donja traka — copyright + licence (na svakoj strani) */}
         <div className="border-t border-kolo-border pt-5 text-xs text-kolo-muted leading-relaxed text-center space-y-1.5">
-          <p>© 2026 KOLO Fondacija · Sombor, Srbija · Rana faza · ekolo.rs</p>
+          <p>© 2026 KOLO Fondacija · Sombor, Srbija · Pripremna faza · ekolo.rs</p>
           <p>
             Softver: <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer" className="hover:underline">AGPL-3.0</a>
             {" · "}
