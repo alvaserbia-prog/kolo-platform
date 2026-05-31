@@ -58,8 +58,29 @@ export function izracunajDnevniIznos(
     case "PODRSKA_STARIJIMA": return izracunajStariji(metadata, danas);
     case "POSEBNA_BRIGA":     return 2000;
     case "SKOLOVANJE":        return dailyAmount ?? 0;
-    case "PED":      return 600;
+    case "PED":               return 0; // operativni doprinos ne ide kroz enrollment — raspodela iz OglasEvidencija (čl. 24)
   }
+}
+
+// ── Raspodela operativnog doprinosa (Pravilnik o operativnom doprinosu čl. 24) ──
+//
+// evidentirani POEN = predloženi POEN × min(1, L/P)
+//   P = zbir predloženih POEN-a svih potvrđenih verifikacija u periodu
+//   L = dnevni limit (10% opticaja, deljen sa socijalnim programima — Pravilnik čl. 15)
+//
+// Napomena o zajedničkom poolu: master Pravilnik (čl. 15) stavlja operativni doprinos
+// i socijalne programe u JEDAN dnevni limit od 10%. Zato se predloženi POEN potvrđenih
+// verifikacija ubacuje u isti pool kao socijalni programi, a `raspodelaKoeficijent`
+// nad ukupnom potražnjom prirodno daje min(1, L/P) iz čl. 24.
+
+/** Koeficijent srazmerne raspodele: min(1, limit/totalRequested). */
+export function raspodelaKoeficijent(totalRequested: number, limit: number): number {
+  return totalRequested > limit && limit > 0 ? limit / totalRequested : 1.0;
+}
+
+/** Evidentirani (stvarni) POEN za jednu potvrđenu verifikaciju. Math.floor — u korist Protokola. */
+export function evidentiraniPoen(predlozeniPoen: number, koeficijent: number): number {
+  return Math.floor(predlozeniPoen * koeficijent);
 }
 
 // ── Nocna emisija ─────────────────────────────────────────────────────────────
@@ -105,15 +126,17 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     }
   }
 
-  // 4. Evidencija doprinosa — odobrene evidencije za danas
+  // 4. Operativni doprinos — sve potvrđene verifikacije (status APPROVED) ulaze u
+  //    raspodelu ovog perioda (čl. 22, 24). Težina je `predlozeniPoen`; stvarni
+  //    evidentirani iznos računa se srazmerno dnevnom limitu (čl. 24).
   if (aktivniTipovi.has("PED")) {
-    const evidencije = await prisma.doprinosEvidencija.findMany({
-      where: { date: danas, status: "APPROVED" },
+    const evidencije = await prisma.oglasEvidencija.findMany({
+      where: { status: "APPROVED" },
       include: { user: { include: { wallet: true } } },
     });
     for (const ev of evidencije) {
       if (!ev.user.wallet) continue;
-      items.push({ walletId: ev.user.wallet.id, amount: ev.amount, type: "PED", evidencijaId: ev.id });
+      items.push({ walletId: ev.user.wallet.id, amount: ev.predlozeniPoen, type: "PED", evidencijaId: ev.id });
     }
   }
 
@@ -127,31 +150,36 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     return { opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {} };
   }
 
-  // 5. Proporcionalno smanjenje (Čl. 50)
+  // 5. Proporcionalno smanjenje (Pravilnik čl. 50; operativni čl. 24: min(1, L/P))
   const totalRequested = items.reduce((s, i) => s + i.amount, 0);
-  const koeficijent = totalRequested > limit && limit > 0 ? limit / totalRequested : 1.0;
+  const koeficijent = raspodelaKoeficijent(totalRequested, limit);
 
   // 6. Emisije
   const breakdown: Record<string, { count: number; requested: number; emitted: number }> = {};
   let totalEmitted = 0;
 
   for (const item of items) {
-    const emitAmount = Math.floor(item.amount * koeficijent);
-    if (emitAmount <= 0) continue;
+    const emitAmount = evidentiraniPoen(item.amount, koeficijent);
 
-    await emitujPoen(
-      item.walletId,
-      emitAmount,
-      TransactionType.EMISIJA_PROGRAM,
-      `Program ${labelPrograma(item.type)}`
-    );
+    if (emitAmount > 0) {
+      await emitujPoen(
+        item.walletId,
+        emitAmount,
+        TransactionType.EMISIJA_PROGRAM,
+        `Program ${labelPrograma(item.type)}`
+      );
+    }
 
+    // Operativni doprinos: potvrđena verifikacija se uvek označava obrađenom (EMITTED),
+    // i kada je emitovani iznos 0 — neevidentirani višak se NE prenosi u naredni period (čl. 24).
     if (item.evidencijaId) {
-      await prisma.doprinosEvidencija.update({
+      await prisma.oglasEvidencija.update({
         where: { id: item.evidencijaId },
-        data: { status: "EMITTED" },
+        data: { status: "EMITTED", amount: emitAmount },
       });
     }
+
+    if (emitAmount <= 0) continue;
 
     const key = item.type;
     if (!breakdown[key]) breakdown[key] = { count: 0, requested: 0, emitted: 0 };
@@ -173,7 +201,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
 
 export function labelPrograma(type: ProgramType): string {
   const mapa: Record<ProgramType, string> = {
-    PED:       "Evidencija Doprinosa",
+    PED:       "Operativni doprinos",
     PODRSKA_MAJKAMA:    "Podrška majkama",
     PODRSKA_STARIJIMA:  "Podrška starijima",
     POSEBNA_BRIGA:      "Posebna briga",

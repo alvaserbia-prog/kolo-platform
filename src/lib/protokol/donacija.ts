@@ -4,7 +4,7 @@ import { emitujPoen } from "./emisija";
 
 /**
  * Nivoi donacija i koeficijent evidencije (Pravilnik o pokroviteljstvu i
- * donacijama v3.7.0, čl. 4) — 18 nivoa.
+ * donacijama v3.7.2, čl. 4) — 11 nivoa, koeficijent 1,00× → maks 2,00×.
  *
  * Broj evidentiranih POEN-a = iznos donacije (RSD) × koeficijent evidencije
  * novodostignutog nivoa, primenjen na CELU novu donaciju. Nivo je kumulativan i
@@ -22,13 +22,6 @@ export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
   { nivo: 9,  do:       1_000_000, kurs: 1.80 },
   { nivo: 10, do:       2_000_000, kurs: 1.90 },
   { nivo: 11, do:       5_000_000, kurs: 2.00 },
-  { nivo: 12, do:      10_000_000, kurs: 2.20 },
-  { nivo: 13, do:      20_000_000, kurs: 2.40 },
-  { nivo: 14, do:      50_000_000, kurs: 2.70 },
-  { nivo: 15, do:     100_000_000, kurs: 3.00 },
-  { nivo: 16, do:     200_000_000, kurs: 3.50 },
-  { nivo: 17, do:     500_000_000, kurs: 4.00 },
-  { nivo: 18, do:   1_000_000_000, kurs: 5.00 },
 ];
 
 /**

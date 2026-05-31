@@ -6,8 +6,9 @@ import { izracunajDnevniIznos, labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import ProgramiKlijent from "./ProgramiKlijent";
 
+// PED (operativni doprinos) ide kroz zadatke (/doprinos-oglasi), ne kroz enrollment.
 const SVI_TIPOVI: ProgramType[] = [
-  "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
+  "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
 export default async function ProgramiPage() {
@@ -17,17 +18,9 @@ export default async function ProgramiPage() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const [aktivniProgrami, enrollments, evidencijaToday, poslednjeEmisije, protokol, emisijaDanas] = await Promise.all([
+  const [aktivniProgrami, enrollments, protokol, emisijaDanas] = await Promise.all([
     prisma.protokolProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({ where: { userId: session.user.id } }),
-    prisma.doprinosEvidencija.findFirst({
-      where: { userId: session.user.id, date: danas },
-    }),
-    prisma.doprinosEvidencija.findMany({
-      where: { userId: session.user.id },
-      orderBy: { date: "desc" },
-      take: 14,
-    }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
     prisma.dailyEmissionSummary.findFirst({ where: { date: danas } }),
   ]);
@@ -73,22 +66,6 @@ export default async function ProgramiPage() {
         emitovanoAm: emisijaDanas?.totalEmitted ?? null,
         zahtevanoAm: emisijaDanas?.totalRequested ?? null,
       }}
-      evidencijaToday={evidencijaToday
-        ? {
-            id: evidencijaToday.id,
-            date: evidencijaToday.date.toISOString(),
-            description: evidencijaToday.description,
-            amount: evidencijaToday.amount,
-            status: evidencijaToday.status,
-          }
-        : null}
-      poslednjeEvidencije={poslednjeEmisije.map((e) => ({
-        id: e.id,
-        date: e.date.toISOString(),
-        description: e.description,
-        amount: e.amount,
-        status: e.status,
-      }))}
     />
   );
 }

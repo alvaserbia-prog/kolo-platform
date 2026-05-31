@@ -11,8 +11,8 @@ describe("nivoZaKumulativ", () => {
   it("110.000 RSD → nivo 6, kurs 1,50", () => {
     expect(nivoZaKumulativ(110_000)).toEqual({ nivo: 6, kurs: 1.5 });
   });
-  it("preko najvišeg praga → nivo 18, kurs 5,00", () => {
-    expect(nivoZaKumulativ(5_000_000_000)).toEqual({ nivo: 18, kurs: 5.0 });
+  it("preko najvišeg praga → nivo 11, kurs 2,00 (maks po v3.7.2)", () => {
+    expect(nivoZaKumulativ(5_000_000_000)).toEqual({ nivo: 11, kurs: 2.0 });
   });
 });
 

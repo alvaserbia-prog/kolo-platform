@@ -45,25 +45,25 @@ export async function POST(
 
   if (session.user.id === ev.userId) {
     return NextResponse.json(
-      { error: "Ne možeš odlučivati o sopstvenoj evidenciji rada." },
+      { error: "Ne možeš odlučivati o sopstvenom izvršenju." },
       { status: 403 }
     );
   }
   if (session.user.id === ev.oglas.createdById) {
     return NextResponse.json(
-      { error: "Predlagač oglasa ne može odlučivati o evidenciji na svom oglasu." },
+      { error: "Predlagač zadatka ne može odlučivati o izvršenju na svom zadatku." },
       { status: 403 }
     );
   }
 
-  await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED" } });
+  await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED", approvedById: session.user.id, approvedAt: new Date() } });
 
   await posaljiNotifikaciju(
     ev.userId,
     "info",
-    "Evidencija rada odbijena",
-    `Evidencija sati je odbijena. Kontaktirajte administratora za više informacija.`,
-    "/programi"
+    "Dnevno izvršenje odbijeno",
+    `Vaše dnevno izvršenje je odbijeno. Za to izvršenje se ne evidentira POEN (čl. 18).`,
+    "/doprinos-oglasi"
   );
 
   return NextResponse.json({ ok: true });

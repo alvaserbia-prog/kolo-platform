@@ -19,21 +19,12 @@ interface PendingEnrollmentItem {
   createdAt: string;
 }
 
-interface PendingEvidencijaItem {
-  id: string;
-  date: string;
-  description: string;
-  amount: number;
-  createdAt: string;
-}
-
 interface ClanInfo {
   userId: string;
   pseudonim: string;
   isAdmin: boolean;
   joinedAt: string;
   pendingEnrollments: PendingEnrollmentItem[];
-  pendingEvidencije: PendingEvidencijaItem[];
 }
 
 interface KrugData {
@@ -89,7 +80,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
   }
 
   const ukupnoPendingProgrami = krug.clanovi.reduce(
-    (s, c) => s + c.pendingEnrollments.length + c.pendingEvidencije.length, 0
+    (s, c) => s + c.pendingEnrollments.length, 0
   );
 
   const tabs: [Tab, string][] = [
@@ -277,19 +268,9 @@ function ProgramiAdminTab({ krugId, clanovi, onDone }: { krugId: string; clanovi
     if (res.ok) setTimeout(onDone, 1200);
   }
 
-  async function odobriEvidenciju(krugId: string, evidencijaId: string, odbij = false) {
-    setLoading(evidencijaId);
-    const res = await fetch(`/api/krugovi/${krugId}/programi/evidencije/${evidencijaId}/${odbij ? "odbij" : "odobri"}`, { method: "POST" });
-    const data = await res.json();
-    setLoading(null);
-    setPoruke((prev) => ({ ...prev, [evidencijaId]: { text: res.ok ? (odbij ? "Odbijeno." : "Odobreno.") : (data.error ?? "Greška."), ok: res.ok } }));
-    if (res.ok) setTimeout(onDone, 1200);
-  }
-
-  const svePending = clanovi.flatMap((c) => [
-    ...c.pendingEnrollments.map((e) => ({ tip: "enrollment" as const, pseudonim: c.pseudonim, ...e })),
-    ...c.pendingEvidencije.map((e) => ({ tip: "evidencija" as const, pseudonim: c.pseudonim, ...e })),
-  ]);
+  const svePending = clanovi.flatMap((c) =>
+    c.pendingEnrollments.map((e) => ({ tip: "enrollment" as const, pseudonim: c.pseudonim, ...e }))
+  );
 
   if (svePending.length === 0) {
     return (
@@ -302,8 +283,7 @@ function ProgramiAdminTab({ krugId, clanovi, onDone }: { krugId: string; clanovi
   return (
     <div className="space-y-3">
       {/* Enrollment zahtevi */}
-      {svePending.filter((x) => x.tip === "enrollment").map((item) => {
-        if (item.tip !== "enrollment") return null;
+      {svePending.map((item) => {
         const poruka = poruke[item.id];
         return (
           <EnrollmentKartica
@@ -320,52 +300,6 @@ function ProgramiAdminTab({ krugId, clanovi, onDone }: { krugId: string; clanovi
           />
         );
       })}
-
-      {/* Evidencija zahtevi */}
-      {svePending.filter((x) => x.tip === "evidencija").length > 0 && (
-        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-          <div className="px-5 py-3 border-b border-kolo-border">
-            <p className="text-sm font-semibold text-kolo-muted">Evidencija doprinosa — evidencije na čekanju</p>
-          </div>
-          {svePending.filter((x) => x.tip === "evidencija").map((item, i, arr) => {
-            if (item.tip !== "evidencija") return null;
-            const poruka = poruke[item.id];
-            return (
-              <div key={item.id} className={`px-5 py-4 ${i < arr.length - 1 ? "border-b border-kolo-border" : ""}`}>
-                <div className="flex justify-between items-start gap-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-kolo-text">{item.pseudonim}</p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{new Date(item.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
-                    <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{item.description}</p>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="text-sm font-bold text-kolo-text">{item.amount.toLocaleString("sr-RS")} P</p>
-                    <div className="flex gap-2 mt-2">
-                      <button
-                        onClick={() => odobriEvidenciju(krugId, item.id, true)}
-                        disabled={loading === item.id}
-                        className="px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60">
-                        Odbij
-                      </button>
-                      <button
-                        onClick={() => odobriEvidenciju(krugId, item.id)}
-                        disabled={loading === item.id}
-                        className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 disabled:opacity-60">
-                        Odobri
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                {poruka && (
-                  <p className={`mt-2 text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
-                    {poruka.text}
-                  </p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 }

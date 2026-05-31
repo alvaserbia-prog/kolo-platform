@@ -41,7 +41,6 @@ DELETE FROM "OglasPrijava";
 DELETE FROM "DoprinosOglas";
 
 -- ─── 7. Programi Protokola (PED, socijalni) ────────────────────────────────
-DELETE FROM "DoprinosEvidencija";
 DELETE FROM "ProgramEnrollment";
 
 -- ─── 8. Pokrovitelji ───────────────────────────────────────────────────────

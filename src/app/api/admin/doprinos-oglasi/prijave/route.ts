@@ -13,7 +13,7 @@ export async function GET(_req: NextRequest) {
     where: { status: "PENDING" },
     include: {
       user: { select: { pseudonim: true } },
-      oglas: { select: { title: true, hourlyRate: true, positions: true } },
+      oglas: { select: { title: true, predlozeniPoen: true, positions: true } },
     },
     orderBy: { createdAt: "asc" },
   });
@@ -23,8 +23,9 @@ export async function GET(_req: NextRequest) {
       id: p.id,
       pseudonim: p.user.pseudonim,
       oglasTitle: p.oglas.title,
-      hourlyRate: p.oglas.hourlyRate,
+      predlozeniPoen: p.oglas.predlozeniPoen,
       positions: p.oglas.positions,
+      planIzvrsenja: p.planIzvrsenja,
       createdAt: p.createdAt.toISOString(),
     })),
   });

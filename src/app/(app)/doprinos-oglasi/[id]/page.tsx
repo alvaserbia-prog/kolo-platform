@@ -16,13 +16,13 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
       krug: { select: { name: true } },
       prijave: {
         where: { userId: session.user.id },
-        select: { id: true, status: true, rejectionReason: true, createdAt: true },
+        select: { id: true, status: true, planIzvrsenja: true, rejectionReason: true, createdAt: true },
       },
       evidencije: {
         where: { userId: session.user.id },
         orderBy: { date: "desc" },
         take: 30,
-        select: { id: true, date: true, hoursWorked: true, amount: true, description: true, status: true },
+        select: { id: true, date: true, predlozeniPoen: true, amount: true, dokaz: true, description: true, status: true },
       },
       _count: { select: { prijave: { where: { status: "APPROVED" } } } },
     },
@@ -37,8 +37,9 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         title: oglas.title,
         description: oglas.description,
         source: oglas.source as string,
-        hourlyRate: oglas.hourlyRate,
-        maxHoursPerDay: oglas.maxHoursPerDay,
+        predlozeniPoen: oglas.predlozeniPoen,
+        obrazlozenje: oglas.obrazlozenje,
+        saOdobravanjem: oglas.saOdobravanjem,
         positions: oglas.positions,
         deadline: oglas.deadline?.toISOString() ?? null,
         status: oglas.status as string,
@@ -47,13 +48,14 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         odobreniClanovi: oglas._count.prijave,
         createdAt: oglas.createdAt.toISOString(),
         mojaPrijava: oglas.prijave[0]
-          ? { id: oglas.prijave[0].id, status: oglas.prijave[0].status as string, rejectionReason: oglas.prijave[0].rejectionReason, createdAt: oglas.prijave[0].createdAt.toISOString() }
+          ? { id: oglas.prijave[0].id, status: oglas.prijave[0].status as string, planIzvrsenja: oglas.prijave[0].planIzvrsenja, rejectionReason: oglas.prijave[0].rejectionReason, createdAt: oglas.prijave[0].createdAt.toISOString() }
           : null,
         mojeEvidencije: oglas.evidencije.map((e) => ({
           id: e.id,
           date: e.date.toISOString(),
-          hoursWorked: e.hoursWorked,
+          predlozeniPoen: e.predlozeniPoen,
           amount: e.amount,
+          dokaz: e.dokaz,
           description: e.description,
           status: e.status as string,
         })),
