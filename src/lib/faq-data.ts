@@ -226,16 +226,16 @@ Verifikacija se obavlja kroz lanac jemstva: verifikovani korisnik koji te lično
 
 Svaka verifikacija uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
 
-Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN verifikatoru i 500 POEN nadzorniku (kada verifikacija podleže nadzoru). Upis nije naknada za podatke — to je automatski akt Protokola po pravilu.
+Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN verifikatoru i 500 POEN nadzorniku.
 
-Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima i Projektima, formiranje i članstvo u Krugu, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
+Verifikacija je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
       },
       {
         id: 8,
         pitanje: `Šta ako sam stranac — mogu li biti član?`,
         odgovor: `Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jemstva: verifikovani korisnik koji te lično poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
-Sistem trenutno radi na srpskom jeziku; interfejs ima i englesku i mađarsku verziju, dok pravno obavezujući tekstovi (Pravilnik, Uslovi) ostaju na srpskom.`,
+Sistem radi na srpskom jeziku.`,
       },
       {
         id: 9,
@@ -249,109 +249,14 @@ Imaš jedan pseudonim u javnom prikazu sistema.`,
         pitanje: `Mogu li da promenim pseudonim?`,
         odgovor: `Da, ali najviše jednom u 30 dana.
 
-Kad promeniš pseudonim, ranije transakcije ostaju zabeležene pod starim pseudonimom u istoriji — što je deo trajne i nepromenljive evidencije sistema. Tu pseudonimnu istoriju vide samo verifikovani članovi (indeks ≥ 10%); neregistrovani i neverifikovani je ne vide.`,
+Kad promeniš pseudonim, sve tvoje transakcije u istoriji prikazuju se pod novim pseudonimom — stari se više nigde ne vidi. Jedino trajno i nepromenljivo je tvoj interni korisnički identifikator, koji drugi korisnici ne vide.`,
       },
       {
         id: 75,
         pitanje: `Na kom jeziku radi sistem? Postoji li engleska verzija?`,
-        odgovor: `Zvanični jezik sistema je srpski. Pravilnik, Uslovi i ostali pravno obavezujući tekstovi su na srpskom i oni su merodavni.
+        odgovor: `Sistem trenutno radi samo na srpskom jeziku (latinica). Pravilnik, Uslovi i ostali pravno obavezujući tekstovi su na srpskom i oni su merodavni.
 
-Interfejs platforme možeš prebaciti i na engleski ili mađarski — u zaglavlju postoji prebacivač jezika (zastavice srpski / English / Magyar) koji menja jezik korišćenja.
-
-Ali pamti: prevodi interfejsa su radi lakšeg snalaženja; ako bi negde došlo do razlike u značenju, merodavan je srpski izvorni tekst pravila.`,
-      },
-    ],
-  },
-  {
-    id: "krugovi",
-    naslov: "Krugovi",
-    pitanja: [
-      {
-        id: 11,
-        pitanje: `Kako Krug postaje deo KOLO sistema?`,
-        odgovor: `Potrebno je najmanje 5 verifikovanih članova okupljenih oko zajedničkog interesa (npr. domaćice u jednom kraju, voćari iz iste oblasti, IT zajednica).
-
-Inicijator podnosi zahtev kroz platformu sa nazivom, opisom interesa, internim pravilima i podacima o ovlašćenim licima (1 do 3). Fondacija proverava formalnu ispravnost i evidentira Krug.
-
-Pri formiranju, Protokol automatski emituje 50.000 POEN na zajednički račun Kruga, a kako Krug raste, dobija dodatne bonus emisije pri pragovima od 10, 20, 50, 100, 200 i 500 članova.`,
-      },
-      {
-        id: 12,
-        pitanje: `Mogu li biti u više Krugova istovremeno?`,
-        odgovor: `Ne. Verifikovan korisnik može biti član samo jednog Kruga u datom trenutku, ali može slobodno napustiti jedan i pristupiti drugom.
-
-Ovo sprečava razvodnjavanje pripadnosti i čuva fokus svakog Kruga.`,
-      },
-      {
-        id: 13,
-        pitanje: `Kako se učlanjujem u Krug i ko odlučuje?`,
-        odgovor: `Podnosiš pristupnicu kroz platformu. Krug autonomno odlučuje o prijemu prema sopstvenim internim pravilima — neki Krugovi mogu tražiti pratnju postojećeg člana, neki preporuku, neki samo formalni zahtev.
-
-Princip je „jedan član — jedan glas" pri internom odlučivanju Kruga, bez obzira na količinu POEN-a ili ZRNA.`,
-      },
-      {
-        id: 14,
-        pitanje: `Kako napuštam Krug?`,
-        odgovor: `U meniju svog profila, u sekciji Krug, postoji opcija za napuštanje. Trenutno te uklanja iz Kruga; stanje POEN-a Kruga, kao i tvoja istorija učešća, ostaju zabeleženi u sistemu.
-
-Posle napuštanja možeš pristupiti drugom Krugu.`,
-      },
-      {
-        id: 15,
-        pitanje: `Šta su ovlašćena lica Kruga i šta mogu?`,
-        odgovor: `Ovlašćena lica (1 do 3 po Krugu) imaju isključivo tehničku funkciju — pokreću transakcije sa zajedničkog računa Kruga (npr. preraspodelu sredstava među članovima ili kupovine za potrebe Kruga). Po toj ulozi NE dobijaju dodatni POEN.
-
-Ovlašćena lica nisu „menadžment" — Krug i dalje odlučuje kolektivno, oni samo izvršavaju ono što je Krug dogovorio.`,
-      },
-      {
-        id: 65,
-        pitanje: `Imam udruženje ili zadrugu koje već postoji — mogu li ga uvesti kao Krug a da zadrži pravno postojanje?`,
-        odgovor: `Da. Postojeća udruženja i zadruge registrovane po važećim zakonima mogu da prenesu svoju strukturu u Krug koji preslikava njihov sastav i organizaciju.
-
-Krug sam po sebi nema pravni subjektivitet — on je organizaciona jedinica unutar sistema. Zato udruženje ili zadruga koja formira Krug zadržava svoj pravni subjektivitet nezavisno od Kruga.
-
-Drugim rečima, ne gubiš ništa od onoga što već imaš. Tvoja organizacija ostaje pravno lice kakvo jeste, a kroz Krug dobija mesto u sistemu i učešće u zajedničkom rastu.
-
-Detaljna pravila osnivanja, funkcionisanja i gašenja Krugova uređuju se posebnim pravilnikom.`,
-      },
-      {
-        id: 66,
-        pitanje: `Koja je razlika između „Kruga" i „Zadruge" i šta da osnujem?`,
-        odgovor: `Krug i Zadruga su dva načina da se povežeš sa drugim ljudima u trajniju strukturu, ali se razlikuju po dve ključne stvari: po čemu vas okuplja i da li imate pravni status.
-
-Krug okuplja ljude oko zajedničkog interesa ili delatnosti — recimo ljubitelje istog zanata, suseda po nekom poslu ili udruženje koje hoće da prenese svoju strukturu na platformu. Krug nastaje jednostavno, udruživanjem korisnika kroz platformu, i nema sopstveni pravni subjektivitet. To znači da Krug nije zasebno pravno lice; ako neko udruženje ili već postojeća zadruga formira Krug, ono zadržava svoj pravni status nezavisno od Kruga.
-
-Zadruga okuplja ljude po teritorijalnom principu — to je struktura za određeno područje. Zadruga je registrovana po Zakonu o zadrugama i ima pun pravni subjektivitet, sa svojim obavezama (vođenje poslovnih knjiga, godišnje izveštavanje, poštovanje zadružnih principa). Odnos između Fondacije i zadruge uređuje se ugovorom o saradnji, pri čemu zadruga ostaje potpuno samostalno pravno lice i ne postaje vlasnik nijednog dela zajedničkog dobra.
-
-Obe strukture imaju podsticajnu funkciju kroz mehanizam rasta: kako raste broj članova i dostižu se određeni pragovi, Protokol upisuje nove POEN-e u zapis Kruga, odnosno Zadruge, kao organizacione jedinice.
-
-Šta da osnuješ? Ako te sa drugima spaja zajednički interes ili delatnost i želiš jednostavno povezivanje bez pravne registracije — to je Krug. Ako gradiš lokalnu, teritorijalnu strukturu koja treba pun pravni status i samostalnost kao pravno lice — to je Zadruga.
-
-Iskreno: trenutno je razvijen i u upotrebi modul Krugova. Zadruga je predviđena u sistemu, ali još nije fokus razvoja, pa praktično danas osnivaš Krug.`,
-      },
-      {
-        id: 67,
-        pitanje: `Mogu li članovi mog Kruga ostati i u drugim grupama, ili je članstvo ekskluzivno?`,
-        odgovor: `Pravilo o ekskluzivnosti odnosi se samo na Krugove unutar KOLA: u datom trenutku možeš biti član samo jednog Kruga. To znači da neko ne može istovremeno biti u dva tvoja Kruga, ali može slobodno istupiti iz jednog i pristupiti drugom.
-
-Izvan platforme to pravilo ne važi. Tvoji članovi mogu i dalje pripadati svojim udruženjima, zadrugama, klubovima ili bilo kojim drugim grupama van KOLA — KOLO se u to ne meša.
-
-Štaviše, postojeće udruženje ili zadruga može svoju strukturu da preslika u Krug, a pritom zadržava svoj pravni subjektivitet potpuno nezavisno od KOLA. Krug je samo organizaciona jedinica unutar sistema i nema pravni subjektivitet; spoljna organizacija ostaje to što jeste.
-
-Razlog za pravilo „jedan Krug u datom trenutku" jednostavan je: čuva fokus i pripadnost svakog Kruga, da se ne razvodni.`,
-      },
-      {
-        id: 68,
-        pitanje: `Dobijam li kao osnivač ili organizator posebno priznanje (POEN, status, titulu)?`,
-        odgovor: `Sistem ne deli počasne titule. Ne postoje uloge tipa „zagovornik", „aktivista" ili „šampion" — tako nešto je namerno izbačeno.
-
-Postoje samo tri statusa kroz koje svako prolazi: neverifikovan, verifikovan i nosilac ZRNA. To su jedini statusi koji se zvanično prikazuju, i do njih se dolazi učešćem, a ne imenovanjem.
-
-Ako pokrećeš ili vodiš Krug, za samu tu ulogu ne dobijaš dodatni POEN. Ovlašćena lica Kruga (njih jedan do troje) imaju samo tehničku funkciju — izvršavaju ono što je Krug dogovorio — i po toj ulozi im se ne upisuje poseban POEN. Tvoj rad se prepoznaje kroz ono što stvarno uradiš: kroz verifikaciju novih članova, kroz operativni doprinos i kroz preporuke.
-
-Osnivači sistema su poseban slučaj. Za rad obavljen pre nego što je platforma uopšte postojala predviđen je osnivački doprinos — naknadni upis POEN-a za taj raniji trud. Taj krug osnivača je zatvoren i ko su oni utvrđuje se internim aktom Fondacije; raspodela tog doprinosa među njima takođe se uređuje internim aktom. I tu je reč o priznanju kroz POEN, a ne o tituli ili posebnom statusu.
-
-Važno je razumeti šta POEN jeste: on beleži činjenicu doprinosa, ali nije imovinsko pravo i ne nasleđuje se. Dakle nijedna uloga — ni osnivač, ni organizator — ne donosi vlasništvo ni poseban rang nad drugima.`,
+Strana verzija interfejsa za sada ne postoji.`,
       },
     ],
   },
@@ -778,8 +683,6 @@ Posebni interni mehanizmi rešavanja sporova mogu se uspostaviti kasnije (poseba
         id: 32,
         pitanje: `Šta se dešava kada se neko ne pridržava pravila?`,
         odgovor: `Sistem ima trajno pamćenje — svaka transakcija je trajno zabeležena pod pseudonimom i vidljiva verifikovanim članovima, pa loše ponašanje ostaje vidljivo onima koji učestvuju u sistemu.
-
-Krug može uskratiti pristup unutrašnjim aktivnostima ili isključiti člana po sopstvenim pravilima.
 
 Fondacija može privremeno suspendovati nalog (najviše 30 dana, uz pravo korisnika da bude obavešten o razlozima i da se izjasni) ili isključiti korisnika pri težoj povredi pravila.
 
