@@ -34,7 +34,7 @@ Programi podrške obuhvataju sledeće kvalifikovane grupe:
 
 3) korisnici u režimu posebne brige (osobe sa invaliditetom) — program Posebna Briga;
 
-4) korisnici u školovanju — program Školovanje.
+4) studenti — program Školovanje.
 
 Primarni staratelji izjednačeni su sa majkama u pogledu prava iz programa Podrška Majkama.
 
@@ -142,7 +142,7 @@ Status podleže godišnjoj reviziji. Ako se status pri reviziji ne potvrdi, auto
 
 *Pravo i iznos*
 
-Pravo imaju korisnici u redovnom školovanju. Dokaz statusa je upisana godina (potvrda o upisu).
+Pravo imaju studenti — korisnici upisani na visokoškolsku ustanovu. Dokaz statusa je upisana godina studija (potvrda o upisu).
 
 Dnevni iznos je fiksan i iznosi 2.000 POEN.
 
