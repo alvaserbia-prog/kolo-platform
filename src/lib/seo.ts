@@ -10,8 +10,8 @@
  */
 
 /** Kanonski domen produkcije — apsolutni URL-ovi i canonical uvek vode ovde.
- *  Sajt se servira na www (ne-www radi redirect na www), pa je www kanonski. */
-export const SITE_URL = "https://www.ekolo.rs";
+ *  Primarni domen je ekolo.rs (bez www); www radi redirect na njega. */
+export const SITE_URL = "https://ekolo.rs";
 
 /** Ime sistema za naslove i strukturirane podatke. */
 export const SITE_NAME = "KOLO";
