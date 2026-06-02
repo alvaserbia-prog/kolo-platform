@@ -3,16 +3,6 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 
-const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-function generateReferralCode(): string {
-  let code = "";
-  for (let i = 0; i < 8; i++) {
-    code += CHARS[Math.floor(Math.random() * CHARS.length)];
-  }
-  return code;
-}
-
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
   let hash = "";
@@ -32,7 +22,8 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { email, pseudonim, password, referralCode } = body;
+    const { email, pseudonim, password } = body;
+    const location = typeof body.location === "string" ? body.location.trim() : null;
 
     // Validacija
     if (!email || !pseudonim || !password) {
@@ -43,6 +34,9 @@ export async function POST(req: NextRequest) {
     }
     if (pseudonim.length < 3 || pseudonim.length > 30) {
       return NextResponse.json({ error: "Pseudonim mora imati između 3 i 30 karaktera." }, { status: 400 });
+    }
+    if (location !== null && location.length > 80) {
+      return NextResponse.json({ error: "Mesto je predugačko." }, { status: 400 });
     }
 
     // Provera jedinstvenosti
@@ -57,20 +51,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Pseudonim je zauzet." }, { status: 409 });
     }
 
-    // Referral — pronađi pozivaoca
-    let referrer = null;
-    if (referralCode) {
-      referrer = await prisma.user.findUnique({ where: { referralCode } });
-      if (!referrer) {
-        return NextResponse.json({ error: "Referral kod nije validan." }, { status: 400 });
-      }
-    }
-
-    // Generiši jedinstven referral kod i member hash
-    let myCode = generateReferralCode();
-    while (await prisma.user.findUnique({ where: { referralCode: myCode } })) {
-      myCode = generateReferralCode();
-    }
+    // Generiši jedinstven member hash
     let myHash = generateMemberHash();
     while (await prisma.user.findUnique({ where: { memberHash: myHash } })) {
       myHash = generateMemberHash();
@@ -78,33 +59,18 @@ export async function POST(req: NextRequest) {
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    // Kreira korisnika + wallet u transakciji
-    const user = await prisma.$transaction(async (tx) => {
-      const newUser = await tx.user.create({
-        data: {
-          email,
-          passwordHash,
-          pseudonim,
-          referralCode: myCode,
-          memberHash: myHash,
-          referredById: referrer?.id ?? null,
-          wallet: {
-            create: { type: WalletType.USER, balance: 0 },
-          },
+    // Kreira korisnika + wallet
+    const user = await prisma.user.create({
+      data: {
+        email,
+        passwordHash,
+        pseudonim,
+        memberHash: myHash,
+        location: location || null,
+        wallet: {
+          create: { type: WalletType.USER, balance: 0 },
         },
-      });
-
-      // Upiši Referral zapis
-      if (referrer) {
-        await tx.referral.create({
-          data: {
-            referrerId: referrer.id,
-            referredId: newUser.id,
-          },
-        });
-      }
-
-      return newUser;
+      },
     });
 
     return NextResponse.json({ ok: true, id: user.id }, { status: 201 });

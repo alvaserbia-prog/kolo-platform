@@ -27,8 +27,7 @@ interface DonacijeData {
   rangTabela: RangRed[];
 }
 
-// Poziv na broj = jedinstven za svakog člana (generisan od strane platforme)
-// Za sada koristimo referralCode kao poziv na broj dok se ne definiše finalni format
+// Poziv na broj = jedinstven za svakog člana (generisan od strane platforme; finalni format TBD)
 const FONDACIJA_RACUN = "840-123456789-00"; // Placeholder — zameniti pre Beta faze
 
 export default function DonacijeKlijent() {

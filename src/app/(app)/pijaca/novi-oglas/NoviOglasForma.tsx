@@ -2,17 +2,18 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import LokacijaSearch from "@/components/LokacijaSearch";
 
 const KATEGORIJE = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"];
 const MAX_IMAGES = 5;
 
-export default function NoviOglasForma() {
+export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocation?: string }) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(defaultLocation);
   const [phone, setPhone] = useState("");
   const [slike, setSlike] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
@@ -140,14 +141,7 @@ export default function NoviOglasForma() {
         {/* Lokacija */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">Lokacija <span className="text-kolo-muted font-normal">(opciono)</span></label>
-          <input
-            type="text"
-            maxLength={60}
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="npr. Novi Sad"
-            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
-          />
+          <LokacijaSearch value={location} onChange={setLocation} placeholder="npr. Novi Sad" />
         </div>
 
         {/* Kontakt telefon */}

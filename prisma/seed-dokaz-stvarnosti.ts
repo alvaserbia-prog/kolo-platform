@@ -31,7 +31,6 @@ const POCETNA_EMISIJA = 1_000;
 type UoClan = {
   email: string;
   pseudonim: string;
-  referralCode: string;
   memberHash: string;
 };
 
@@ -49,7 +48,7 @@ function ucitajUoClanove(): UoClan[] {
       console.warn(`⚠ Preskačem nevažeći email: ${JSON.stringify(c)}`);
       return false;
     }
-    if (!c.pseudonim || !c.referralCode || !c.memberHash) {
+    if (!c.pseudonim || !c.memberHash) {
       console.warn(`⚠ Preskačem nepotpun unos: ${JSON.stringify(c)}`);
       return false;
     }
@@ -87,7 +86,7 @@ async function seedUoClana(clan: UoClan) {
         tipKorisnika: TipKorisnika.POCETNI,
         indeksStvarnosti: Math.max(postojeci.indeksStvarnosti, 10),
         slotoviPotroseni: postojeci.slotoviPotroseni,
-        // pseudonim, referralCode, memberHash — NE diramo na postojećem nalogu
+        // pseudonim, memberHash — NE diramo na postojećem nalogu
       },
       include: { wallet: true },
     });
@@ -110,7 +109,6 @@ async function seedUoClana(clan: UoClan) {
         tipKorisnika: TipKorisnika.POCETNI,
         indeksStvarnosti: 10,
         slotoviPotroseni: 0,
-        referralCode: clan.referralCode,
         memberHash: clan.memberHash,
         wallet: { create: { type: WalletType.USER, balance: 0 } },
       },

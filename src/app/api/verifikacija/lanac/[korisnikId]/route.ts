@@ -33,7 +33,8 @@ export async function GET(
       tipKorisnika: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
-      verifikacijaKojomSamVerifikovan: {
+      verifikacijeKojeSuMeVerifikovale: {
+        orderBy: { vremenskiZig: "asc" },
         select: {
           vremenskiZig: true,
           nadzornikId: true,
@@ -64,18 +65,16 @@ export async function GET(
     user.slotoviPotroseni
   );
 
-  const verifikator = user.verifikacijaKojomSamVerifikovan
-    ? {
-        id: user.verifikacijaKojomSamVerifikovan.verifikator.id,
-        pseudonim: user.verifikacijaKojomSamVerifikovan.verifikator.pseudonim,
-        datum: user.verifikacijaKojomSamVerifikovan.vremenskiZig.toISOString(),
-        statusNadzora: !user.verifikacijaKojomSamVerifikovan.podlezeNadzoru
-          ? "ne-podleze"
-          : user.verifikacijaKojomSamVerifikovan.nadzornikId
-            ? "nadzirano"
-            : "ceka-nadzor",
-      }
-    : null;
+  const verifikatori = user.verifikacijeKojeSuMeVerifikovale.map((v) => ({
+    id: v.verifikator.id,
+    pseudonim: v.verifikator.pseudonim,
+    datum: v.vremenskiZig.toISOString(),
+    statusNadzora: !v.podlezeNadzoru
+      ? "ne-podleze"
+      : v.nadzornikId
+        ? "nadzirano"
+        : "ceka-nadzor",
+  }));
 
   const verifikovani = user.verifikacijeKojeSamObavio.map((v) => ({
     id: v.verifikovani.id,
@@ -98,7 +97,7 @@ export async function GET(
       neograniceno: kapacitet === "neograniceno",
       prikaz,
     },
-    verifikator,
+    verifikatori,
     verifikovani,
   });
 }

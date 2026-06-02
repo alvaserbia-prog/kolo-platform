@@ -10,6 +10,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import {
   GrafZapis,
+  MAX_INDEKS,
   POEN_VERIFIKATOR,
   POEN_VERIFIKOVANI,
   TOKEN_VAZI_SEKUNDI,
@@ -177,10 +178,26 @@ export async function izvrsiVerifikaciju(
         );
       }
 
-      // Provera da verifikovani već nije verifikovan
-      if (verifikovani.tipKorisnika !== TipKorisnika.NEVERIFIKOVAN) {
+      // Provera da verifikovani može da primi (još jednu) verifikaciju.
+      // POCETNI (UO Fondacije) i NOSILAC_ZRNA su posebni statusi — ne primaju lične
+      // verifikacije ovim tokom. REGULARNI može da primi DODATNE verifikacije od
+      // različitih verifikatora dok ne dostigne maksimalan indeks od 100%
+      // (Pravilnik o dokazu stvarnosti čl. 3: 1 početni + do 10 ličnih).
+      if (
+        verifikovani.tipKorisnika === TipKorisnika.POCETNI ||
+        verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA
+      ) {
         throw new VerifikacijaGreska(
-          "Ovaj korisnik je već verifikovan u sistemu.",
+          "Ovaj korisnik ima poseban status i ne prima dodatne verifikacije.",
+          409
+        );
+      }
+      if (
+        verifikovani.tipKorisnika === TipKorisnika.REGULARNI &&
+        verifikovani.indeksStvarnosti >= MAX_INDEKS
+      ) {
+        throw new VerifikacijaGreska(
+          "Ovaj korisnik već ima maksimalan indeks stvarnosti (100%).",
           409
         );
       }
@@ -227,7 +244,8 @@ export async function izvrsiVerifikaciju(
         },
       });
 
-      // Ažuriraj verifikovanog: postaje REGULARNI sa indeksom 10
+      // Ažuriraj verifikovanog: postaje (ostaje) REGULARNI; indeks = broj veza × 10.
+      // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
       const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
         where: { verifikovaniId: verifikovani.id },
       });
@@ -238,7 +256,8 @@ export async function izvrsiVerifikaciju(
           tipKorisnika: TipKorisnika.REGULARNI,
           indeksStvarnosti: noviIndeks,
           verified: true,
-          verifiedAt: new Date(),
+          // Zadrži datum prve verifikacije pri dodatnim verifikacijama.
+          verifiedAt: verifikovani.verifiedAt ?? new Date(),
         },
       });
 

@@ -36,7 +36,6 @@ export async function GET(
           prikaziTelefon: true,
           prikaziBilans: true,
           prikaziZrno: true,
-          prikaziRangPreporuka: true,
           prikaziRangDonacija: true,
           prikaziOglase: true,
         },
@@ -58,19 +57,8 @@ export async function GET(
   const podaci = korisnik.podaci;
   const krug = korisnik.krugClanstva[0]?.krug ?? null;
 
-  // Rangovi preporuka i donacija
-  let rangPreporuka: number | null = null;
+  // Rang donacija
   let rangDonacija: number | null = null;
-
-  if (podaci?.prikaziRangPreporuka) {
-    const sviPreporucioci = await prisma.referral.groupBy({
-      by: ["referrerId"],
-      _count: { id: true },
-      orderBy: { _count: { id: "desc" } },
-    });
-    const idx = sviPreporucioci.findIndex((r) => r.referrerId === id);
-    if (idx !== -1) rangPreporuka = idx + 1;
-  }
 
   if (podaci?.prikaziRangDonacija) {
     const sviDonatori = await prisma.donationRecord.groupBy({
@@ -137,7 +125,6 @@ export async function GET(
     zrno: podaci?.prikaziZrno
       ? (korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0)
       : null,
-    rangPreporuka,
     rangDonacija,
     transakcije: transakcijeSlice,
     nextCursor,

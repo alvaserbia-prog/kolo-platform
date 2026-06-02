@@ -26,13 +26,11 @@ Izveštaj je generisan automatski iz koda (`prisma/schema.prisma` i `src/app/api
 | verified | Boolean | ne | false | — | — |
 | verifiedAt | DateTime | da | — | — | — |
 | pseudonimChangedAt | DateTime | da | — | — | — |
-| referralCode | String | ne | — | @unique | — |
 | memberHash | String | ne | — | @unique | — |
 | location | String | da | — | — | — |
 | telefon | String | da | — | — | — |
 | avatar | String | da | — | — | — |
 | deaktiviranAt | DateTime | da | — | — | — |
-| referredById | String | da | — | — | — |
 | createdAt | DateTime | ne | now() | — | — |
 | updatedAt | DateTime | ne | @updatedAt | — | — |
 

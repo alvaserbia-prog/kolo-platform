@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { pseudonim, referralCode } = body;
+  const { pseudonim } = body;
 
   if (!pseudonim || pseudonim.trim().length < 3 || pseudonim.trim().length > 30) {
     return NextResponse.json({ error: "Pseudonim mora imati između 3 i 30 karaktera." }, { status: 400 });
@@ -29,34 +29,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Pseudonim je zauzet." }, { status: 409 });
   }
 
-  let referrer = null;
-  if (referralCode?.trim()) {
-    referrer = await prisma.user.findUnique({ where: { referralCode: referralCode.trim() } });
-    if (!referrer) {
-      return NextResponse.json({ error: "Referral kod nije validan." }, { status: 400 });
-    }
-  }
-
-  await prisma.$transaction(async (tx) => {
-    await tx.user.update({
-      where: { id: session.user.id },
-      data: {
-        pseudonim: trimmed,
-        oauthPending: false,
-        referredById: referrer?.id ?? undefined,
-      },
-    });
-
-    if (referrer) {
-      const refPostoji = await tx.referral.findUnique({
-        where: { referredId: session.user.id },
-      });
-      if (!refPostoji) {
-        await tx.referral.create({
-          data: { referrerId: referrer.id, referredId: session.user.id },
-        });
-      }
-    }
+  await prisma.user.update({
+    where: { id: session.user.id },
+    data: {
+      pseudonim: trimmed,
+      oauthPending: false,
+    },
   });
 
   return NextResponse.json({ ok: true });

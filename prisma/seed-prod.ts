@@ -29,7 +29,6 @@ async function main() {
       role: Role.ADMIN,
       verified: true,
       verifiedAt: new Date(),
-      referralCode: "ADMIN0000",
       memberHash: "adm00001",
       location: "Beograd",
       wallet: { create: { type: WalletType.USER, balance: 0 } },

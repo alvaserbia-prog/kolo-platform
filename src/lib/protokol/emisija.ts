@@ -3,25 +3,6 @@ import { TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
-// Nagrada za preporuku po broju verifikovanih preporučenih (Prilog 1, tačka 3)
-const PREPORUKA_TABELA: { do: number; poen: number }[] = [
-  { do: 5,        poen: 1_000 },
-  { do: 10,       poen: 2_000 },
-  { do: 15,       poen: 3_000 },
-  { do: 20,       poen: 4_000 },
-  { do: 30,       poen: 5_000 },
-  { do: 40,       poen: 6_000 },
-  { do: 50,       poen: 7_000 },
-  { do: 70,       poen: 8_000 },
-  { do: 100,      poen: 9_000 },
-  { do: Infinity, poen: 10_000 },
-];
-
-export function preporukaNagrada(brojVerifikovanih: number): number {
-  const red = PREPORUKA_TABELA.find((r) => brojVerifikovanih <= r.do);
-  return red?.poen ?? 15_000;
-}
-
 /**
  * Emituje POEN iz Protokola na wallet korisnika.
  * Protokol ide u minus, korisnik prima POEN.

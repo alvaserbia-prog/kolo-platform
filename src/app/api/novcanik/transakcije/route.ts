@@ -6,7 +6,6 @@ import { prisma } from "@/lib/prisma";
 const TIP_LABELA: Record<string, string> = {
   TRANSFER: "Upis POEN-a",
   EMISIJA_VERIFIKACIJA: "Verifikacija",
-  EMISIJA_PREPORUKA: "Preporuka",
   EMISIJA_DONACIJA: "Donacija",
   EMISIJA_POKROVITELJ: "Pokrovitelj",
   EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",

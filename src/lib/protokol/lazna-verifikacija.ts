@@ -4,6 +4,7 @@ import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
   POEN_VERIFIKOVANI,
+  izracunajIndeks,
 } from "./dokaz-stvarnosti";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
@@ -28,8 +29,9 @@ export type PonistavanjeRezultat = {
  *
  * Admin označava korisnika kao lažnog verifikatora. Posledice:
  *  - sve verifikacije koje je obavio se poništavaju (brišu se veze);
- *  - svaki korisnik kog je verifikovao gubi 10 p.p. indeksa — u ovom stablo-modelu
- *    (jedan verifikator po korisniku) to znači pad na 0%;
+ *  - svaki korisnik kog je verifikovao gubi 10 p.p. indeksa; indeks se preračunava
+ *    iz preostalih veza ka njemu (korisnik može imati više verifikatora), pa pada na
+ *    0% samo ako mu je ovo bila jedina verifikacija;
  *  - vraćaju se emitovani POEN-i: verifikator 1.000, verifikovani 1.000, nadzornik 500.
  *    Reverzija NIJE ograničena na stanje — u ovom jedinstvenom slučaju računi mogu
  *    da odu u minus (izuzetak od zabrane negativnog stanja). Zero-sum je očuvan jer je
@@ -109,10 +111,18 @@ export async function ponistiLaznogVerifikatora(
               "Poništavanje lažne verifikacije — povrat POEN nadzornika (čl. 18)"
             );
           }
-          // Verifikovani gubi jedinu verifikaciju → indeks 0; ostaje verifikovan.
+          // Verifikovani gubi OVU verifikaciju → indeks se preračunava iz preostalih
+          // veza ka njemu (moguće je više verifikatora). Trenutna veza v još nije
+          // obrisana (deleteMany ide posle petlje), pa je isključujemo iz brojanja.
+          // Korisnik ostaje verifikovan (REGULARNI) i kada padne na 0% (čl. 18).
+          // slotoviPotroseni se NE resetuje — kapacitet se izvodi iz indeksa, a
+          // resetovanje bi mu pogrešno oslobodilo već potrošene slotove.
+          const ostalo = await tx.verifikacionaVeza.count({
+            where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
+          });
           await tx.user.update({
             where: { id: v.verifikovaniId },
-            data: { indeksStvarnosti: 0, slotoviPotroseni: 0 },
+            data: { indeksStvarnosti: izracunajIndeks(ostalo) },
           });
           pogodjeni.push(v.verifikovaniId);
           red.push(v.verifikovaniId);

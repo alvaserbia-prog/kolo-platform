@@ -38,7 +38,6 @@ interface ProfilData {
   telefon: string | null;
   bilans: number | null;
   zrno: number | null;
-  rangPreporuka: number | null;
   rangDonacija: number | null;
   transakcije: Transakcija[];
   nextCursor: string | null;
@@ -49,7 +48,6 @@ const TIP_LABELA: Record<string, string> = {
   TRANSFER: "Transfer",
   EMISIJA: "Emisija",
   EMISIJA_VERIFIKACIJA: "Verifikacija",
-  EMISIJA_PREPORUKA: "Preporuka",
   EMISIJA_DONACIJA: "Donacija",
   EMISIJA_POKROVITELJ: "Pokroviteljstvo",
   EMISIJA_PROGRAM: "Program",
@@ -235,7 +233,7 @@ export default function JavniProfilPage() {
       <IndeksSekcija korisnikId={profil.id} />
 
       {/* Statistike */}
-      {(profil.bilans !== null || profil.zrno !== null || profil.rangPreporuka !== null || profil.rangDonacija !== null) && (
+      {(profil.bilans !== null || profil.zrno !== null || profil.rangDonacija !== null) && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {profil.bilans !== null && (
             <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
@@ -247,12 +245,6 @@ export default function JavniProfilPage() {
             <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
               <p className="text-xs text-kolo-muted mb-1">ZRNO</p>
               <p className="text-lg font-bold text-kolo-text">{profil.zrno.toLocaleString("sr-RS")}</p>
-            </div>
-          )}
-          {profil.rangPreporuka !== null && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">Rang preporuka</p>
-              <p className="text-lg font-bold text-kolo-text">#{profil.rangPreporuka}</p>
             </div>
           )}
           {profil.rangDonacija !== null && (

@@ -9,7 +9,7 @@ import Link from "next/link";
 export type CvorVerifikator = {
   id: string;
   pseudonim: string;
-} | null;
+};
 
 export type CvorVerifikovani = {
   id: string;
@@ -19,7 +19,8 @@ export type CvorVerifikovani = {
 
 type Props = {
   ja: { pseudonim: string; prikaz: string };
-  verifikator: CvorVerifikator;
+  // Korisnik može imati više verifikatora (1 početni + do 10 ličnih = do 100%).
+  verifikatori: CvorVerifikator[];
   verifikovani: CvorVerifikovani[];
   jeJaPocetni?: boolean;
 };
@@ -36,22 +37,27 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
   );
 }
 
-export default function MiniStablo({ ja, verifikator, verifikovani, jeJaPocetni }: Props) {
+export default function MiniStablo({ ja, verifikatori, verifikovani, jeJaPocetni }: Props) {
   return (
     <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
       <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-4">
         Lanac verifikacija
       </div>
 
-      {/* Gore: verifikator */}
+      {/* Gore: verifikatori (može ih biti više) */}
       <div className="flex flex-col items-center gap-2">
-        {verifikator ? (
-          <Link
-            href={`/profil/${verifikator.id}`}
-            className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
-          >
-            @{verifikator.pseudonim}
-          </Link>
+        {verifikatori.length > 0 ? (
+          <div className="flex flex-wrap justify-center gap-2 max-w-md">
+            {verifikatori.map((v) => (
+              <Link
+                key={v.id}
+                href={`/profil/${v.id}`}
+                className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+              >
+                @{v.pseudonim}
+              </Link>
+            ))}
+          </div>
         ) : jeJaPocetni ? (
           <div className="px-3 py-1.5 rounded-xl bg-black/5 text-sm text-black/55 italic">
             Početni korisnik (UO Fondacije)

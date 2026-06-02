@@ -53,7 +53,6 @@ enum TransactionType {
   TRANSFER
   EMISIJA_VERIFIKACIJA
   EMISIJA_NADZOR
-  EMISIJA_PREPORUKA
   EMISIJA_DONACIJA
   EMISIJA_POKROVITELJ
   EMISIJA_KRUG_OSNIVANJE
@@ -172,7 +171,6 @@ model User {
   slotoviPotroseni       Int          @default(0)
   pocetnaEmisijaIzvrsena Boolean      @default(false)
   pseudonimChangedAt DateTime?
-  referralCode       String    @unique
   memberHash         String    @unique
   location           String?
   telefon            String?
@@ -182,12 +180,7 @@ model User {
   pristankiPravilnika PravilnikPrihvatanje[]
   osnivacZapis        Osnivac?                   @relation("Osnivac")
   kreiraniTroskovi    FondacijaTrosak[]          @relation("KreiraoTrosak")
-  referredById       String?
-  referredBy         User?     @relation("Referrals", fields: [referredById], references: [id])
-  referrals          User[]    @relation("Referrals")
   wallet             Wallet?
-  referralsMade      Referral[] @relation("Referrer")
-  referralReceived   Referral?  @relation("Referred")
   podaci                 UserPodaci?
   donations              DonationRecord[]
   kreiraniPokrovitelji   Pokrovitelj[]              @relation("AdminKreiraoP")
@@ -222,7 +215,7 @@ model User {
   chatPoruke             ChatMessage[]              @relation("ChatPoruke")
   passwordResetTokens    PasswordResetToken[]
   verifikacijeKojeSamObavio       VerifikacionaVeza[] @relation("Verifikator")
-  verifikacijaKojomSamVerifikovan VerifikacionaVeza?  @relation("Verifikovani")
+  verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[] @relation("Verifikovani")
   nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
   verifikacijaTokeni              VerifikacijaToken[]
   zahteviZaJemstvo                ZahtevZaJemstvo[]
@@ -259,7 +252,6 @@ model UserPodaci {
   prikaziTelefon       Boolean @default(false)
   prikaziBilans        Boolean @default(true)
   prikaziZrno          Boolean @default(true)
-  prikaziRangPreporuka Boolean @default(true)
   prikaziRangDonacija  Boolean @default(true)
   prikaziOglase        Boolean @default(true)
 }
@@ -288,17 +280,6 @@ model Transaction {
   type         TransactionType
   description  String?
   createdAt    DateTime        @default(now())
-}
-
-model Referral {
-  id           String   @id @default(uuid())
-  referrerId   String
-  referrer     User     @relation("Referrer", fields: [referrerId], references: [id])
-  referredId   String   @unique
-  referred     User     @relation("Referred", fields: [referredId], references: [id])
-  rewardPaid   Boolean  @default(false)
-  rewardAmount Int?
-  createdAt    DateTime @default(now())
 }
 
 model Krug {
@@ -963,7 +944,7 @@ model VerifikacionaVeza {
   verifikatorId   String
   verifikator     User      @relation("Verifikator", fields: [verifikatorId], references: [id])
   redniBroj       Int
-  verifikovaniId  String    @unique
+  verifikovaniId  String
   verifikovani    User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
   vremenskiZig    DateTime  @default(now())
   nadzornikId     String?

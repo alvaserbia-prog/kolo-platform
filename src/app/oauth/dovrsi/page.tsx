@@ -8,33 +8,12 @@ export default function OAuthDovrsiPage() {
   const { data: session, update } = useSession();
   const router = useRouter();
   const [pseudonim, setPseudonim] = useState("");
-  const [referralCode, setReferralCode] = useState("");
   const [pseudonimStatus, setPseudonimStatus] = useState<"idle" | "checking" | "slobodan" | "zauzet">("idle");
   const [uslovi, setUslovi] = useState(false);
   const [privatnost, setPrivatnost] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Auto-popuni referral iz localStorage/cookie
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const lsRef = localStorage.getItem("kolo_ref");
-    if (lsRef) {
-      fetch(`/api/m/${lsRef}/pseudonim`)
-        .then((r) => r.ok ? r.json() : null)
-        .then((data) => { if (data?.referralCode) setReferralCode(data.referralCode); })
-        .catch(() => {});
-      return;
-    }
-    const match = document.cookie.match(/(?:^|;\s*)kolo_ref=([^;]+)/);
-    if (match) {
-      fetch(`/api/m/${match[1]}/pseudonim`)
-        .then((r) => r.ok ? r.json() : null)
-        .then((data) => { if (data?.referralCode) setReferralCode(data.referralCode); })
-        .catch(() => {});
-    }
-  }, []);
 
   // Redirect ako nalog nije oauthPending
   useEffect(() => {
@@ -77,7 +56,7 @@ export default function OAuthDovrsiPage() {
     const res = await fetch("/api/oauth/dovrsi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pseudonim: pseudonim.trim(), referralCode: referralCode || undefined }),
+      body: JSON.stringify({ pseudonim: pseudonim.trim() }),
     });
     const data = await res.json();
     setLoading(false);
@@ -133,21 +112,6 @@ export default function OAuthDovrsiPage() {
             </div>
             {pseudonimStatus === "zauzet" && <p className="mt-1 text-xs text-red-500">Ovaj pseudonim je zauzet</p>}
             {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">Javno vidljiv, ne prikazuje pravo ime</p>}
-          </div>
-
-          {/* Referral */}
-          <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">
-              Referral kod <span className="text-kolo-muted font-normal">(opciono)</span>
-            </label>
-            <input
-              type="text"
-              value={referralCode}
-              onChange={(e) => setReferralCode(e.target.value.toUpperCase())}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg font-mono"
-              placeholder="ABCD1234"
-              suppressHydrationWarning
-            />
           </div>
 
           {/* Checkbox-ovi */}

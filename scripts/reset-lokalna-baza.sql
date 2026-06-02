@@ -98,8 +98,6 @@ WHERE "userId" NOT IN (
   '84f637eb-f3d5-4a24-843e-66d5154ef888'
 );
 
-DELETE FROM "Referral";
-
 DELETE FROM "UserPodaci"
 WHERE "userId" NOT IN (
   'f7b602a6-ec30-4e32-a45a-25ac041a0476',

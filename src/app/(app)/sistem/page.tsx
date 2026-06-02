@@ -7,23 +7,6 @@ import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { ProgramType } from "@/generated/prisma/client";
 import SistemKlijent from "./SistemKlijent";
 
-const RANG_SIRENJEM = [
-  { do: 0, rang: 0 },
-  { do: 5, rang: 1 },
-  { do: 10, rang: 2 },
-  { do: 15, rang: 3 },
-  { do: 20, rang: 4 },
-  { do: 30, rang: 5 },
-  { do: 40, rang: 6 },
-  { do: 50, rang: 7 },
-  { do: 70, rang: 8 },
-  { do: 100, rang: 9 },
-  { do: Infinity, rang: 10 },
-];
-function rangZaBroj(n: number): number {
-  return RANG_SIRENJEM.find((r) => n <= r.do)?.rang ?? 10;
-}
-
 const SVE_PROGRAME: ProgramType[] = [
   "PED",
   "PODRSKA_MAJKAMA",
@@ -102,10 +85,6 @@ export default async function SistemPage() {
           where: { leftAt: null },
           select: { krug: { select: { name: true } } },
           take: 1,
-        },
-        referralsMade: {
-          where: { rewardPaid: true },
-          select: { id: true },
         },
         donations: {
           where: { status: "CONFIRMED" },
@@ -209,7 +188,6 @@ export default async function SistemPage() {
   }));
 
   const clanovi = korisnici.map((u) => {
-    const preporukeVerif = u.referralsMade.length;
     const donacijeRSD = u.donations.reduce((s, d) => s + Number(d.amountRSD), 0);
     return {
       id: u.id,
@@ -217,8 +195,6 @@ export default async function SistemPage() {
       verified: u.verified,
       balance: u.wallet?.balance ?? 0,
       krug: u.krugClanstva[0]?.krug?.name ?? null,
-      preporukeVerif,
-      rangPreporuke: rangZaBroj(preporukeVerif),
       donacijeRSD,
       rangDonacije: donacijeRSD > 0 ? nivoZaKumulativ(donacijeRSD).nivo : 0,
       location: u.location ?? null,

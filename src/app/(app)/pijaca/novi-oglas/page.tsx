@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import NoviOglasForma from "./NoviOglasForma";
 
 export default async function NoviOglasPage() {
@@ -8,5 +9,10 @@ export default async function NoviOglasPage() {
   if (!session) redirect("/login");
   if (!session.user.verified) redirect("/verifikacija");
 
-  return <NoviOglasForma />;
+  const korisnik = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { location: true },
+  });
+
+  return <NoviOglasForma defaultLocation={korisnik?.location ?? ""} />;
 }

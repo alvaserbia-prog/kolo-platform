@@ -10,7 +10,6 @@ const TOGGLE_FIELDS = [
   "prikaziTelefon",
   "prikaziBilans",
   "prikaziZrno",
-  "prikaziRangPreporuka",
   "prikaziRangDonacija",
   "prikaziOglase",
 ] as const;

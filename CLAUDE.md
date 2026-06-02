@@ -1,4 +1,4 @@
-# KOLO Platforma — v3.7.3
+# KOLO Platforma — v3.7.5
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -21,40 +21,46 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `nova dokumentacija/`)
-Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokumentacija je sada u **`nova dokumentacija/`** (pažnja: ime sa razmakom). Verzije su **mešane 3.7.3 / 3.7.2**:
+Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokumentacija je sada u **`nova dokumentacija/`** (pažnja: ime sa razmakom). Verzije su **mešane 3.7.5 / 3.7.4 / 3.7.3 / 3.7.2** — uvek koristiti najviši broj verzije za dati dokument:
 
 | Dokument | Fajl | Verzija |
 |---|---|---|
 | Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Politika privatnosti | `politika_3_7_3.md` | **3.7.3 (aktuelan)** |
+| Politika privatnosti | `politika_3_7_4.md` | **3.7.4 (aktuelan)** |
 | Uslovi korišćenja | `uslovi_koriscenja_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
 | Whitepaper | `whitepaper_3_7_2.md` (+ `KOLO_Whitepaper_3.7.2.pdf`) | 3.7.2 |
-| DPIA | `DPIA_3_7_2.md` | 3.7.2 |
-| Radnje obrade | `radnje_obrade_3_7_2.md` | 3.7.2 |
+| DPIA | `DPIA_3_7_3.md` | **3.7.3 (aktuelan)** |
+| Radnje obrade | `radnje_obrade_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Rizici | `rizici_3_7_2.md` | 3.7.2 |
 | Pravilnik o hijerarhiji akata | `hijerarhija_3_7_2.md` | 3.7.2 |
-| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_7_2.md` | 3.7.2 |
+| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Pravilnik o pokroviteljstvu i donacijama | `donacije_3_7_3.md` | **3.7.3** |
 | Pravilnik o operativnom doprinosu | `operativni_3_7_2.md` | 3.7.2 |
 | Pravilnik o osnivačkom doprinosu | `osnivacki_3_7_2.md` | 3.7.2 |
-| Pravilnik o programima podrške | `programi_podrske_3_7_3.md` | **3.7.3 (nov)** |
+| Pravilnik o programima podrške | `programi_podrske_3_7_3.md` | **3.7.3** |
 
-Prethodne verzije (`Pravilnik_3_7_2.md`, `politika_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) su zadržane u folderu kao istorija, ali ih je zamenila 3.7.3 verzija.
+Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`, `DPIA_3_7_2.md`, `radnje_obrade_3_7_2.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
+
+**Promene po verzijama (changelog iz zaglavlja dokumenata):**
+- **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
+- **Pravilnik 3.7.4 / donacije 3.7.3** — pokroviteljstvo izričito obuhvata i **preduzetnike**, ravnopravno sa pravnim licima (čl. 2, 38, 40).
+- **Politika 3.7.4 / dokaz stvarnosti 3.7.3** — verifikacija se zasniva na **neposrednom ličnom poznavanju i ne zahteva fizičko prisustvo**; svrha obrade kontakt podataka sa table jemstva preformulisana u skladu s tim.
+- **Pravilnik 3.7.3** — vidljivost prostora za oglašavanje (vidi „Ključna izmena" ispod).
 
 Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog modela vidljivosti, pregled funkcija, dpia-podloga) — NIJE kanonska normativa.
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
-## Status usklađenosti (24.05.2026 → 31.05.2026)
-**Kod je u velikoj meri usklađen sa v3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
+## Status usklađenosti (24.05.2026 → 02.06.2026)
+**Kod je u velikoj meri usklađen sa v3.7.5/3.7.4/3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
 - ✅ **Dokaz stvarnosti / Verifikacija** — implementiran (tri statusa, indeks 0–100, lanac jemstva, anti-cirkularno, QR token, kamera skener, nadzor, mini stablo)
 - ✅ **Legacy LK/JMBG verifikacija UKLONJENA** (commit `f2f6575`, migracija `20260526120000_ukloni_lk_jmbg`) — nema više upload-a dokumenata, JMBG-a, `VerifikacijaPristanak` tabele, admin pregleda dokumenata
 - ✅ **Tabla zahteva za jemstvo** — implementirana (`ZahtevZaJemstvo`, `/tabla-jemstva`, istek cron)
 - ✅ **Poništavanje lažne verifikacije** sa rekurzivnom kaskadom (`lazna-verifikacija.ts`)
 - ✅ **Osnivački doprinos** — implementiran (granica 2.4M POEN, 120 koraka × 20.000, noćni cron, admin UI, javna transparentnost)
 - ✅ **Pun tok pokroviteljstva** — prijava → ugovor → potpis → potvrda (`PokroviteljPrijava`, novac/roba/usluge)
-- ✅ **Zaštitni veto Fondacije** — implementiran (`SistemskiVeto`, `FondacijaTrosak`, transparentnost sredstava). 🟡 **Ali prag gašenja je hardkodovan na `3× prosek mesečnih troškova`** — i dokumentacija (Pravilnik čl. 49) i raniji TODO kažu da to NIJE tačan standard; prag se utvrđuje posebnim pravilnikom (vidi GAP ispod)
+- ✅ **Zaštitni veto Fondacije** — implementiran (`SistemskiVeto`, `FondacijaTrosak`, transparentnost sredstava). 🟡 **Dva GAP-a po Pravilniku 3.7.5:** (a) prag gašenja je hardkodovan na `3× prosek mesečnih troškova` — Pravilnik čl. 49 delegira prag posebnom pravilniku; (b) **obrazloženje/opseg veta** treba da prati novu formulaciju 3.7.5 (zaštita operativne i finansijske održivosti Fondacije do finansijske samostalnosti), ne staru (narušavanje principa/zakona/pravnog statusa). Vidi GAP ispod
 - ✅ **Verzionisanje Pravilnika** (`PravilnikVerzija`/`PravilnikPrihvatanje`, `/pravilnik-prihvati`) — paralelno sa Politikom
 - ✅ **Vidljivost po ulozi (feed)** — `/api/javno/feed` sada gradiran: gost→agregat, neverifikovan→maskirano „Korisnik", verifikovan→pseudonimi
 - ✅ **ZRNO minimum upisa 20.000 POEN** (`MINIMUM_POEN_ZA_UPIS_ZRNA = 20_000`)
@@ -63,7 +69,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **Banka → Protokol** u UI/kodu (interni identifikator wallet-a ostao `"banka-singleton"`)
 - ✅ **Faze sistema** — `faza-sistema.ts`, auto prelaz Faza 1 → Faza 2 na 1.000.000 POEN, NOSILAC_ZRNA verifikuje operativni doprinos
 - ✅ **DCO + CC BY-SA** označavanje (`DCO`, `CONTRIBUTING.md`, `.github/workflows/dco.yml`)
-- 🟡 **Tabela donacija u kodu ima 18 nivoa (do 5,00×)** — dokumentacija (`donacije_3_7_2.md` čl. 4) propisuje **11 nivoa / maks 2,00×**. Treba uskladiti (vidi GAP)
+- 🟡 **Tabela donacija u kodu ima 18 nivoa (do 5,00×)** — dokumentacija (`donacije_3_7_3.md` čl. 4) propisuje **11 nivoa / maks 2,00×**. Treba uskladiti (vidi GAP)
 - 🟡 **Operativni doprinos još na modelu satnice** (1.000–2.500 POEN/sat, admin odobrava) — treba model **predloženog POEN-a × min(1, L/P)** sa verifikacijom nosilaca ZRNA (vidi GAP)
 - 🟡 **„kurs" u UI/prevodima** — kanonski termin je **obračunski koeficijent** (ZRNO) / **koeficijent evidencije donacija**; interni identifikatori mogu ostati
 - 🔴 Moduli (Zadruga, Modul Deca, internacionalizacija, Glava VIII) — nisu fokus razvoja po odluci vlasnika
@@ -100,6 +106,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 ## Ključni koncepti
 
 ### Dokaz stvarnosti (implementiran)
+- **Model verifikacije (Pravilnik o dokazu stvarnosti 3.7.3, čl. 1):** zasniva se na **neposrednom ličnom poznavanju i NE zahteva fizičko prisustvo** (usklađeno sa Politikom 3.7.4). Kontakt podaci sa table jemstva obrađuju se u toj svrsi.
 - Tri statusa: `NEVERIFIKOVAN` / `REGULARNI` (verifikovan običan) / `POCETNI` (UO Fondacije, počinju na 10%, izuzeti od anti-cirkularnog, bez kapaciteta/nadzora) / `NOSILAC_ZRNA` (drži ZRNO, nadzire verifikacije). Enum `TipKorisnika`.
 - **Verifikacija = +10 procentnih poena** indeksa (raspon 0–100%).
 - **Funkcionalni prag:** indeks ≥ 10% = pun pristup; < 10% = verifikovan ali bez pristupa.
@@ -120,10 +127,12 @@ POEN je **interna obračunska jedinica kojom se evidentira doprinos i drugi obli
 ### Nasleđivanje (Pravilnik čl. 34, čl. 72)
 POEN i ZRNO **nisu imovinsko pravo i ne nasleđuju se**. Pri prestanku statusa zapisi POEN-a se poništavaju uz protivzapis Protokola, ZRNO se otpisuje u raspoloživa (zero-sum očuvan), a podaci se anonimizuju. Postupanje u slučaju smrti bliže se uređuje Uslovima.
 
-### Zaštitni veto Fondacije (Pravilnik čl. 48–50 — implementiran, jedan parametar nije usaglašen)
-U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola** koja bi narušila četiri principa, prekršila zakon ili ugrozila pravni status Fondacije (čl. 48). Veto nije diskrecion — mora biti obrazložen. Gasi se **trajno i jednosmerno** kada sredstva Fondacije dostignu **prag finansijske samostalnosti utvrđen posebnim pravilnikom** (čl. 49).
+### Zaštitni veto Fondacije (Pravilnik čl. 48–50 — preformulisan u 3.7.5)
+U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugrozila operativnu i finansijsku održivost Fondacije pre nego što ona dostigne finansijsku samostalnost** — naročito odluke o trošenju dinarskih sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava infrastrukturu (čl. 48, v3.7.5). **Ovo je promena u odnosu na raniji opis** (veto NIJE više vezan za narušavanje četiri principa / zakona / pravnog statusa — to su sada zasebna ograničenja Gornjeg Kola po čl. 50, uz licence). Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti (čl. 48 st. 2). Gasi se **trajno i jednosmerno** kada sredstva Fondacije dostignu **prag finansijske samostalnosti utvrđen posebnim pravilnikom** (čl. 49); gašenje ne ukida zakonske obaveze UO.
+- **Ograničenja Gornjeg Kola (čl. 50):** (1) četiri principa — ne može ukinuti nekonvertibilnost, uvesti imovinsko pravo nad zapisima, učiniti donacije povratnim, ni napustiti minimizaciju podataka; (2) zaštitni veto dok traje + zakonske obaveze UO posle gašenja; (3) licence (AGPL-3.0, CC BY-SA 4.0) se ne mogu zameniti restriktivnijim.
 - Kod: `fondacija.ts` (`dohvatiSaldoFondacije`, `azurirajVetoStatus`), model `SistemskiVeto` (singleton), `FondacijaTrosak`, API `/api/admin/fondacija`, javni status.
-- 🟡 **GAP:** `pragZaGasenje = prosek × 3` (3× prosek mesečnih troškova) je hardkodovan u `fondacija.ts:100`. Pravilnik čl. 49 delegira prag posebnom pravilniku; „3× mesečno" eksplicitno NIJE tačan standard. Treba parametrizovati kad poseban pravilnik utvrdi iznos.
+- 🟡 **GAP (a):** `pragZaGasenje = prosek × 3` (3× prosek mesečnih troškova) je hardkodovan u `fondacija.ts:100`. Pravilnik čl. 49 delegira prag posebnom pravilniku; „3× mesečno" eksplicitno NIJE tačan standard. Treba parametrizovati kad poseban pravilnik utvrdi iznos.
+- 🟡 **GAP (b):** obrazloženje/opis veta u UI/kodu treba uskladiti sa formulacijom 3.7.5 (održivost Fondacije), ako još referencira staru (principi/zakon/pravni status).
 
 ### Zajedničko dobro (Pravilnik Glava II, čl. 5–8)
 - Softver: **AGPL-3.0** (čl. 7). Sadržaj: **CC BY-SA 4.0** (čl. 7). Licence se ne mogu zameniti restriktivnijim (važi i za Gornje Kolo).
@@ -170,7 +179,7 @@ U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola** koja bi n
 ## Struktura foldera
 ```
 src/app/          — Next.js stranice (App Router)
-src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, preporuke, postani-pokrovitelj, verifikacija, nadzor, tabla-jemstva, politika-prihvati, pravilnik-prihvati, admin)
+src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, postani-pokrovitelj, verifikacija, nadzor, tabla-jemstva, politika-prihvati, pravilnik-prihvati, admin)
 src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise, o-nama, o-sistemu, cesto-postavljena-pitanja, pravilnik, statut, whitepaper, dpia, radnje-obrade, rizici, zajednicko-dobro, osnivacki-doprinos, privatnost, uslovi)
 src/app/pijaca/   — pijaca sa sopstvenim layout-om (javni + auth prikaz)
 src/app/uskoro/   — maintenance/„uskoro" gate stranica
@@ -180,14 +189,14 @@ src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
 src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
-nova dokumentacija/ — kanonska dokumentacija (v3.7.3/3.7.2)
+nova dokumentacija/ — kanonska dokumentacija (v3.7.5/3.7.4/3.7.3/3.7.2)
 docs/             — interne radne beleške (nije normativa)
 ```
 
 ## Implementirane funkcionalnosti
 
 ### Autentikacija i korisnici
-- Registracija (pseudonim, email, lozinka, referral), login (NextAuth credentials), OAuth tok (`/api/oauth`, `/oauth/dovrsi`), reset lozinke (`/api/zaboravljena-lozinka`, `/api/reset-lozinka`).
+- Registracija (pseudonim, email, lozinka), login (NextAuth credentials), OAuth tok (`/api/oauth`, `/oauth/dovrsi`), reset lozinke (`/api/zaboravljena-lozinka`, `/api/reset-lozinka`).
 - **Verifikacija = dokaz stvarnosti kroz lanac jemstva, bez dokumenata/JMBG-a** (vidi „Dokaz stvarnosti"). Legacy LK/JMBG tok je UKLONJEN.
 - Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. Javni profil `/profil/[id]`.
 - Suspenzija/isključenje (admin).
@@ -236,8 +245,8 @@ docs/             — interne radne beleške (nije normativa)
 ### Glasanje
 - Predlozi, glasanje sa ponderisanom (kvadratnom) glasačkom moći.
 
-### Pokrovitelji (pun tok, v3.7.2)
-- Pokrovitelj = pravno lice, nema login, vlasnik je verifikovani član.
+### Pokrovitelji (pun tok, v3.7.2; +preduzetnici v3.7.4)
+- Pokrovitelj = **pravno lice ili preduzetnik** (ravnopravno, Pravilnik čl. 40, v3.7.4 / donacije 3.7.3), nema login; doprinos se evidentira u zapisu verifikovanog vlasnika pravnog lica, odnosno samog preduzetnika. 🟡 Proveriti da li kod/UI dopuštaju preduzetnika (ne samo „pravno lice").
 - **Tok (Pravilnik o pokroviteljstvu čl. 7–10):** verifikovani korisnik pokreće **prijavu** (`/api/pokroviteljstvo/prijava`) → platforma generiše ugovor → korisnik **potpisuje** (`/[id]/potpisi`) → Fondacija **potvrđuje** (`/api/admin/pokroviteljstvo/prijave/[id]/potvrdi`), što pokreće evidenciju. Doprinos: **novac, roba ili usluge** (`VrstaDonacije` NOVAC/ROBA/USLUGE; roba/usluge po cenovniku).
 - Model `PokroviteljPrijava`; admin UI `PokroviteljPrijaveTab.tsx`; korisnički UI `PokroviteljstvoPrijava.tsx`.
 - Bonus POEN po fiksnoj **tabeli 7 nivoa** (zbir bonusa za sve novodostignute nivoe; jedna transakcija „Bonus za pokroviteljstvo iznos X"):
@@ -246,7 +255,7 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Donacije
 - Donacije fizičkih lica Fondaciji (RSD), admin potvrđuje, evidencija POEN-a.
-- **Koeficijentni model (Pravilnik o pokroviteljstvu i donacijama 3.7.2, čl. 4):** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju; `Math.round()`.
+- **Koeficijentni model (Pravilnik o pokroviteljstvu i donacijama 3.7.3, čl. 4):** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju; `Math.round()`.
 - **Dokumentacija: 11 nivoa, 1,00× (2.000 RSD) → 2,00× (5.000.000 RSD).** 🟡 **Kod (`donacija.ts` `RANG_TABELA`) još ima 18 nivoa do 5,00× — GAP, treba skratiti na 11 / maks 2,00×.**
 - Jedna transakcija „Bonus za donaciju iznos X". Logika: `donacija.ts` (`nivoZaKumulativ`, `izracunajPoenZaDonaciju`, `evidentirajDonaciju`).
 
@@ -254,9 +263,6 @@ docs/             — interne radne beleške (nije normativa)
 - Naknadna evidencija pre-launch rada (Pravilnik čl. 37; Pravilnik o osnivačkom doprinosu).
 - **Parametri:** korak 20.000 POEN, ukupno **120 koraka**, jedan korak po svakom dostignutom pragu od **100.000** ukupnih POEN-a u sistemu; gornja granica **2.400.000 POEN**; kanal se trajno zatvara na 120. koraku. Zaseban kanal — ne ulazi u dnevni limit.
 - Kod: `osnivacki.ts` (`ITERATION_LIMIT=120`, `KORAK_IZNOS=20_000`, `GORNJA_GRANICA=2_400_000`, `PRAG_SKOK=100_000`, raspodela među osnivačima largest-remainder metodom). Modeli: `OsnivackiKanal`, `Osnivac`, `OsnivackiKorakLog`, `OsnivackiKorakEmisija`. Admin `OsnivaciTab.tsx`, `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`; javno `/api/javno/osnivacki-doprinos`, stranica `/osnivacki-doprinos`. Noćni triger u cron-u.
-
-### Preporuke
-- Referral sistem, nagrade po tabeli.
 
 ### Notifikacije
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
@@ -293,7 +299,7 @@ docs/             — interne radne beleške (nije normativa)
 - Neverifikovan: Početna, Sistem, Novčanik, Pijaca, Verifikacija
 - Verifikovan: Početna, Sistem, Novčanik, Pijaca, ZRNO
 - Admin (dodatno): Admin
-- Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Preporuke, Donacije, Pokroviteljstvo, Profil, Nadzor, Tabla jemstva) dostupne preko drugih ulaznih tačaka.
+- Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Donacije, Pokroviteljstvo, Profil, Nadzor, Tabla jemstva) dostupne preko drugih ulaznih tačaka.
 
 ## API endpointi (izbor)
 
@@ -343,19 +349,19 @@ docs/             — interne radne beleške (nije normativa)
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
 ## Reference
-- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.3, Politika 3.7.3, Uslovi 3.7.3; ostalo 3.7.2)
+- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika 3.7.4, Uslovi 3.7.3, DPIA/Radnje obrade/Dokaz stvarnosti/Donacije/Programi podrške 3.7.3; ostalo 3.7.2)
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
-## Nezavršeni TODO / preostali GAP-ovi (mapirano na v3.7.3/3.7.2)
+## Nezavršeni TODO / preostali GAP-ovi (mapirano na v3.7.5/3.7.4/3.7.3/3.7.2)
 
 ### Stvarni GAP-ovi (dokumentacija propisuje, kod radi drugačije)
-1. **Tabela donacija 18 → 11 nivoa, maks 5,00× → 2,00×** (`donacija.ts` `RANG_TABELA`; dokument `donacije_3_7_2.md` čl. 4). **PRIORITET** — ide uživo pri objavi.
+1. **Tabela donacija 18 → 11 nivoa, maks 5,00× → 2,00×** (`donacija.ts` `RANG_TABELA`; dokument `donacije_3_7_3.md` čl. 4). **PRIORITET** — ide uživo pri objavi.
 2. **Veto prag `3× prosek` → vrednost iz posebnog pravilnika** (`fondacija.ts:100`). Pravilnik čl. 49 delegira prag; „3×" nije tačan standard.
 3. **Operativni doprinos: model satnice → predloženi POEN × min(1, L/P)** + verifikacija nosilaca ZRNA/UO umesto admin odobravanja (Pravilnik čl. 36; `operativni_3_7_2.md`).
 4. **Konsolidacija PED + doprinos-oglasi** u jedan tok (`/programi/ped` + `DoprinosEvidencija` vs `/doprinos-oglasi` + `DoprinosOglas/OglasPrijava/OglasEvidencija`). Razrešiti i18n ključ `useTranslations("ped")`.
 5. **„kurs" → „obračunski koeficijent" / „koeficijent evidencije donacija"** u UI/prevodima (`messages/*.json`, ZRNO/donacije ekrani). Interni identifikatori mogu ostati.
-6. **Verzijske labele „3.7.0"** na javnim stranicama (`pravilnik/[slug]/page.tsx` i sl.) → 3.7.3/3.7.2.
+6. **Verzijske labele „3.7.0"/zastarele** na javnim stranicama (`pravilnik/[slug]/page.tsx` i sl.) → uskladiti sa tabelom (Pravilnik 3.7.5, Politika 3.7.4, ostalo 3.7.3/3.7.2).
 7. **Dual `Role` / `TipKorisnika`** — počistiti legacy `Role` enum gde je moguće.
 
 ### Mehanizmi delegirani posebnim pravilnicima / nisu fokus
@@ -374,4 +380,4 @@ docs/             — interne radne beleške (nije normativa)
 18. **Git okruženje:** uvek `git fetch origin main` pre poređenja (lokalni `main` u kontejneru ume da bude zastareo).
 
 ### Procena pokrivenosti
-**Pravilnik v3.7.3 je implementiran ~90%.** Osnovni mehanizmi + dokaz stvarnosti, osnivački doprinos, zaštitni veto, verzionisanje Pravilnika, tabla jemstva, pun tok pokroviteljstva, gradirana vidljivost, faze sistema — pokriveni. Preostali GAP-ovi su parametarski/terminološki (donacije 18→11, veto prag, operativni model, „kurs", verzijske labele) i moduli koji se svesno odlažu (Zadruga, Modul Deca).
+**Pravilnik v3.7.5 je implementiran ~90%.** Osnovni mehanizmi + dokaz stvarnosti, osnivački doprinos, zaštitni veto, verzionisanje Pravilnika, tabla jemstva, pun tok pokroviteljstva, gradirana vidljivost, faze sistema — pokriveni. Preostali GAP-ovi su parametarski/terminološki (donacije 18→11, veto prag + nova formulacija 3.7.5, pokrovitelj+preduzetnik, operativni model, „kurs", verzijske labele) i moduli koji se svesno odlažu (Zadruga, Modul Deca).

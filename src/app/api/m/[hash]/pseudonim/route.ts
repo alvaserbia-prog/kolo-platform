@@ -8,8 +8,8 @@ export async function GET(
   const { hash } = await params;
   const user = await prisma.user.findUnique({
     where: { memberHash: hash },
-    select: { referralCode: true, pseudonim: true },
+    select: { pseudonim: true },
   });
   if (!user) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json({ referralCode: user.referralCode, pseudonim: user.pseudonim });
+  return NextResponse.json({ pseudonim: user.pseudonim });
 }

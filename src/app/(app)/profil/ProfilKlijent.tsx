@@ -25,7 +25,6 @@ interface ProfilProps {
     verified: boolean;
     verifiedAt: string | null;
     pseudonimChangedAt: string | null;
-    referralCode: string;
     balance: number;
     createdAt: string;
     location: string | null;
@@ -39,7 +38,6 @@ interface ProfilProps {
     prikaziTelefon: boolean;
     prikaziBilans: boolean;
     prikaziZrno: boolean;
-    prikaziRangPreporuka: boolean;
     prikaziRangDonacija: boolean;
     prikaziOglase: boolean;
   };
@@ -85,7 +83,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     prikaziTelefon: user.prikaziTelefon,
     prikaziBilans: user.prikaziBilans,
     prikaziZrno: user.prikaziZrno,
-    prikaziRangPreporuka: user.prikaziRangPreporuka,
     prikaziRangDonacija: user.prikaziRangDonacija,
     prikaziOglase: user.prikaziOglase,
   });
@@ -363,10 +360,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               <dt className="text-kolo-muted">{t("poen_stanje_label")}</dt>
               <dd className="font-bold text-kolo-green-700">{user.balance.toLocaleString()} POEN</dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("referral_kod_label")}</dt>
-              <dd className="font-mono text-kolo-text bg-kolo-bg px-2 py-0.5 rounded">{user.referralCode}</dd>
-            </div>
             {user.punoIme && (
               <div className="flex justify-between">
                 <dt className="text-kolo-muted">{t("ime_prezime_label")}</dt>
@@ -600,7 +593,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             { field: "prikaziLokaciju", label: "Lokacija" },
             { field: "prikaziBilans", label: "POEN balans" },
             { field: "prikaziZrno", label: "ZRNO (ukupan broj)" },
-            { field: "prikaziRangPreporuka", label: "Rang preporuka" },
             { field: "prikaziRangDonacija", label: "Rang donacija" },
             { field: "prikaziOglase", label: "Oglasi na Pijaci" },
             { field: "prikaziOpis", label: "Opis / zanimanje" },

@@ -39,7 +39,8 @@ export default async function VerifikacijaPage() {
       tipKorisnika: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
-      verifikacijaKojomSamVerifikovan: {
+      verifikacijeKojeSuMeVerifikovale: {
+        orderBy: { vremenskiZig: "asc" },
         select: {
           verifikator: { select: { id: true, pseudonim: true } },
         },
@@ -68,12 +69,12 @@ export default async function VerifikacijaPage() {
     imaPristupVerifikaciji(user.tipKorisnika, user.indeksStvarnosti) &&
     raspolozivSlot(kapacitet, user.slotoviPotroseni);
 
-  const verifikatorCvor: CvorVerifikator = user.verifikacijaKojomSamVerifikovan
-    ? {
-        id: user.verifikacijaKojomSamVerifikovan.verifikator.id,
-        pseudonim: user.verifikacijaKojomSamVerifikovan.verifikator.pseudonim,
-      }
-    : null;
+  const verifikatorCvorovi: CvorVerifikator[] = user.verifikacijeKojeSuMeVerifikovale.map(
+    (v) => ({
+      id: v.verifikator.id,
+      pseudonim: v.verifikator.pseudonim,
+    })
+  );
 
   const verifikovaniCvorovi: CvorVerifikovani[] = user.verifikacijeKojeSamObavio.map(
     (v) => ({
@@ -102,7 +103,7 @@ export default async function VerifikacijaPage() {
 
       <MiniStablo
         ja={{ pseudonim: user.pseudonim, prikaz }}
-        verifikator={verifikatorCvor}
+        verifikatori={verifikatorCvorovi}
         verifikovani={verifikovaniCvorovi}
         jeJaPocetni={user.tipKorisnika === TipKorisnika.POCETNI}
       />

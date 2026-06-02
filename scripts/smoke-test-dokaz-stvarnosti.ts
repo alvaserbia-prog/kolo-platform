@@ -70,7 +70,6 @@ async function kreirajKorisnika(broj: number, tip: TipKorisnika) {
       role: Role.FIZICKO_LICE,
       tipKorisnika: tip,
       indeksStvarnosti: tip === TipKorisnika.POCETNI ? 10 : 0,
-      referralCode: `${PREFIX.toUpperCase()}${broj.toString().padStart(3, "0")}`,
       memberHash: `${PREFIX}${broj}h`,
       wallet: { create: { type: WalletType.USER, balance: 0 } },
     },

@@ -5,16 +5,6 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 
-const CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-function generateReferralCode(): string {
-  let code = "";
-  for (let i = 0; i < 8; i++) {
-    code += CHARS[Math.floor(Math.random() * CHARS.length)];
-  }
-  return code;
-}
-
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
   let hash = "";
@@ -22,14 +12,6 @@ function generateMemberHash(): string {
     hash += chars[Math.floor(Math.random() * chars.length)];
   }
   return hash;
-}
-
-async function uniqueReferralCode(): Promise<string> {
-  let code = generateReferralCode();
-  while (await prisma.user.findUnique({ where: { referralCode: code } })) {
-    code = generateReferralCode();
-  }
-  return code;
 }
 
 async function uniqueMemberHash(): Promise<string> {
@@ -117,7 +99,6 @@ export const authOptions: NextAuthOptions = {
       // Novi korisnik — kreiraj nalog sa oauthPending=true
       // Privremeni pseudonim (biće promenjen na /oauth/dovrsi)
       const tempPseudonim = `korisnik_${Date.now()}`;
-      const referralCode = await uniqueReferralCode();
       const memberHash = await uniqueMemberHash();
 
       // Ime i avatar iz Google profila
@@ -133,7 +114,6 @@ export const authOptions: NextAuthOptions = {
             oauthProvider: provider,
             oauthId,
             oauthPending: true,
-            referralCode,
             memberHash,
             avatar,
             wallet: { create: { type: WalletType.USER, balance: 0 } },

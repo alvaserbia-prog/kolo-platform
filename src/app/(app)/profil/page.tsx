@@ -24,7 +24,6 @@ export default async function ProfilPage() {
         verified: user.verified,
         verifiedAt: user.verifiedAt?.toISOString() ?? null,
         pseudonimChangedAt: user.pseudonimChangedAt?.toISOString() ?? null,
-        referralCode: user.referralCode,
         balance: user.wallet?.balance ?? 0,
         createdAt: user.createdAt.toISOString(),
         location: user.location ?? null,
@@ -38,7 +37,6 @@ export default async function ProfilPage() {
         prikaziTelefon: user.podaci?.prikaziTelefon ?? false,
         prikaziBilans: user.podaci?.prikaziBilans ?? true,
         prikaziZrno: user.podaci?.prikaziZrno ?? true,
-        prikaziRangPreporuka: user.podaci?.prikaziRangPreporuka ?? true,
         prikaziRangDonacija: user.podaci?.prikaziRangDonacija ?? true,
         prikaziOglase: user.podaci?.prikaziOglase ?? true,
       }}

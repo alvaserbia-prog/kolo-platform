@@ -1,5 +1,5 @@
 [
-  { "email": "alva.serbia@gmail.com",   "pseudonim": "Alva",       "referralCode": "UO000001", "memberHash": "uo000001" },
-  { "email": "jelenacs53@gmail.com",    "pseudonim": "Jelena",     "referralCode": "UO000002", "memberHash": "uo000002" },
-  { "email": "dragonkiss025@gmail.com", "pseudonim": "Dragonkiss", "referralCode": "UO000003", "memberHash": "uo000003" }
+  { "email": "alva.serbia@gmail.com",   "pseudonim": "Alva",       "memberHash": "uo000001" },
+  { "email": "jelenacs53@gmail.com",    "pseudonim": "Jelena",     "memberHash": "uo000002" },
+  { "email": "dragonkiss025@gmail.com", "pseudonim": "Dragonkiss", "memberHash": "uo000003" }
 ]

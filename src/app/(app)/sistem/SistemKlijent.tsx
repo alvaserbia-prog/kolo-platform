@@ -10,7 +10,6 @@ type TxFilter = "sve" | "protokol" | "clanovi";
 const TIP_BOJA: Record<string, string> = {
   TRANSFER: "bg-kolo-bg text-kolo-muted",
   EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_PREPORUKA: "bg-kolo-info-light text-kolo-info",
   EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
   EMISIJA_POKROVITELJ: "bg-yellow-50 text-yellow-700",
   EMISIJA_KRUG_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
@@ -36,8 +35,6 @@ interface Clan {
   verified: boolean;
   balance: number;
   krug: string | null;
-  preporukeVerif: number;
-  rangPreporuke: number;
   donacijeRSD: number;
   rangDonacije: number;
   location: string | null;
@@ -687,11 +684,6 @@ function ClanoviSekcija({
                     rang={c.rangDonacije}
                     label={`Rang ${c.rangDonacije} · ${c.donacijeRSD.toLocaleString("sr-RS")} RSD`}
                   />
-                  <span className="text-kolo-border">/</span>
-                  <RangTooltip
-                    rang={c.rangPreporuke}
-                    label={`Rang ${c.rangPreporuke} · ${c.preporukeVerif} preporuka`}
-                  />
                 </div>
                 <span className="text-sm text-kolo-muted truncate">{c.krug ?? "—"}</span>
                 <span className="text-right text-sm text-kolo-muted">
@@ -719,7 +711,7 @@ function ClanoviSekcija({
                 </div>
                 <div className="flex items-center gap-3 text-xs text-kolo-muted">
                   {c.krug && <span>Krug: {c.krug}</span>}
-                  <span>Rang {c.rangDonacije}/{c.rangPreporuke}</span>
+                  <span>Rang {c.rangDonacije}</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "2-digit",

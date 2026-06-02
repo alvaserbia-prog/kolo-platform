@@ -24,7 +24,6 @@ import bcrypt from "bcryptjs";
 type UoClan = {
   email: string;
   pseudonim: string;
-  referralCode: string;
   memberHash: string;
 };
 
@@ -62,37 +61,37 @@ const POKROVITELJ_BONUS_TABLE: Array<[number, number, number]> = [
 // ─── Korisnici ───────────────────────────────────────────────────────────────
 
 const VERIFIKOVANI = [
-  { email: "mila@test.rs",     pseudonim: "Mila_V",     referralCode: "TEST0001", memberHash: "tst00001", location: "Beograd",     telefon: "+381641111111" },
-  { email: "petar@test.rs",    pseudonim: "Petar_K",    referralCode: "TEST0002", memberHash: "tst00002", location: "Novi Sad",    telefon: "+381641111112" },
-  { email: "ana@test.rs",      pseudonim: "Ana_D",      referralCode: "TEST0003", memberHash: "tst00003", location: "Niš",         telefon: "+381641111113" },
-  { email: "marko@test.rs",    pseudonim: "Marko_J",    referralCode: "TEST0004", memberHash: "tst00004", location: "Kragujevac",  telefon: "+381641111114" },
-  { email: "jovana@test.rs",   pseudonim: "Jovana_R",   referralCode: "TEST0005", memberHash: "tst00005", location: "Subotica",    telefon: "+381641111115" },
-  { email: "stefan@test.rs",   pseudonim: "Stefan_M",   referralCode: "TEST0006", memberHash: "tst00006", location: "Beograd",     telefon: "+381641111116" },
-  { email: "danica@test.rs",   pseudonim: "Danica_P",   referralCode: "TEST0007", memberHash: "tst00007", location: "Čačak",       telefon: "+381641111117" },
-  { email: "luka@test.rs",     pseudonim: "Luka_S",     referralCode: "TEST0008", memberHash: "tst00008", location: "Užice",       telefon: "+381641111118" },
-  { email: "tijana@test.rs",   pseudonim: "Tijana_B",   referralCode: "TEST0009", memberHash: "tst00009", location: "Pančevo",     telefon: "+381641111119" },
-  { email: "nemanja@test.rs",  pseudonim: "Nemanja_O",  referralCode: "TEST0010", memberHash: "tst00010", location: "Zrenjanin",   telefon: "+381641111120" },
-  { email: "milica@test.rs",   pseudonim: "Milica_T",   referralCode: "TEST0011", memberHash: "tst00011", location: "Sombor",      telefon: "+381641111121" },
-  { email: "vlada@test.rs",    pseudonim: "Vlada_Z",    referralCode: "TEST0012", memberHash: "tst00012", location: "Beograd",     telefon: "+381641111122" },
-  { email: "sanja@test.rs",    pseudonim: "Sanja_F",    referralCode: "TEST0013", memberHash: "tst00013", location: "Kragujevac",  telefon: "+381641111123" },
-  { email: "dejan@test.rs",    pseudonim: "Dejan_C",    referralCode: "TEST0014", memberHash: "tst00014", location: "Niš",         telefon: "+381641111124" },
-  { email: "ivana@test.rs",    pseudonim: "Ivana_G",    referralCode: "TEST0015", memberHash: "tst00015", location: "Novi Sad",    telefon: "+381641111125" },
-  { email: "bojan@test.rs",    pseudonim: "Bojan_L",    referralCode: "TEST0016", memberHash: "tst00016", location: "Vranje",      telefon: "+381641111126" },
-  { email: "nikolina@test.rs", pseudonim: "Nikolina_H", referralCode: "TEST0017", memberHash: "tst00017", location: "Leskovac",    telefon: "+381641111127" },
-  { email: "filip@test.rs",    pseudonim: "Filip_E",    referralCode: "TEST0018", memberHash: "tst00018", location: "Beograd",     telefon: "+381641111128" },
-  { email: "marina@test.rs",   pseudonim: "Marina_W",   referralCode: "TEST0019", memberHash: "tst00019", location: "Kraljevo",    telefon: "+381641111129" },
-  { email: "stevan@test.rs",   pseudonim: "Stevan_Q",   referralCode: "TEST0020", memberHash: "tst00020", location: "Šabac",       telefon: "+381641111130" },
+  { email: "mila@test.rs",     pseudonim: "Mila_V",     memberHash: "tst00001", location: "Beograd",     telefon: "+381641111111" },
+  { email: "petar@test.rs",    pseudonim: "Petar_K",    memberHash: "tst00002", location: "Novi Sad",    telefon: "+381641111112" },
+  { email: "ana@test.rs",      pseudonim: "Ana_D",      memberHash: "tst00003", location: "Niš",         telefon: "+381641111113" },
+  { email: "marko@test.rs",    pseudonim: "Marko_J",    memberHash: "tst00004", location: "Kragujevac",  telefon: "+381641111114" },
+  { email: "jovana@test.rs",   pseudonim: "Jovana_R",   memberHash: "tst00005", location: "Subotica",    telefon: "+381641111115" },
+  { email: "stefan@test.rs",   pseudonim: "Stefan_M",   memberHash: "tst00006", location: "Beograd",     telefon: "+381641111116" },
+  { email: "danica@test.rs",   pseudonim: "Danica_P",   memberHash: "tst00007", location: "Čačak",       telefon: "+381641111117" },
+  { email: "luka@test.rs",     pseudonim: "Luka_S",     memberHash: "tst00008", location: "Užice",       telefon: "+381641111118" },
+  { email: "tijana@test.rs",   pseudonim: "Tijana_B",   memberHash: "tst00009", location: "Pančevo",     telefon: "+381641111119" },
+  { email: "nemanja@test.rs",  pseudonim: "Nemanja_O",  memberHash: "tst00010", location: "Zrenjanin",   telefon: "+381641111120" },
+  { email: "milica@test.rs",   pseudonim: "Milica_T",   memberHash: "tst00011", location: "Sombor",      telefon: "+381641111121" },
+  { email: "vlada@test.rs",    pseudonim: "Vlada_Z",    memberHash: "tst00012", location: "Beograd",     telefon: "+381641111122" },
+  { email: "sanja@test.rs",    pseudonim: "Sanja_F",    memberHash: "tst00013", location: "Kragujevac",  telefon: "+381641111123" },
+  { email: "dejan@test.rs",    pseudonim: "Dejan_C",    memberHash: "tst00014", location: "Niš",         telefon: "+381641111124" },
+  { email: "ivana@test.rs",    pseudonim: "Ivana_G",    memberHash: "tst00015", location: "Novi Sad",    telefon: "+381641111125" },
+  { email: "bojan@test.rs",    pseudonim: "Bojan_L",    memberHash: "tst00016", location: "Vranje",      telefon: "+381641111126" },
+  { email: "nikolina@test.rs", pseudonim: "Nikolina_H", memberHash: "tst00017", location: "Leskovac",    telefon: "+381641111127" },
+  { email: "filip@test.rs",    pseudonim: "Filip_E",    memberHash: "tst00018", location: "Beograd",     telefon: "+381641111128" },
+  { email: "marina@test.rs",   pseudonim: "Marina_W",   memberHash: "tst00019", location: "Kraljevo",    telefon: "+381641111129" },
+  { email: "stevan@test.rs",   pseudonim: "Stevan_Q",   memberHash: "tst00020", location: "Šabac",       telefon: "+381641111130" },
 ];
 
 const NEVERIFIKOVANI = [
-  { email: "miloš@test.rs",  pseudonim: "Milos_N",  referralCode: "NVRF0001", memberHash: "nvrf0001", location: "Beograd",   telefon: "+381642222201" },
-  { email: "katarina@test.rs", pseudonim: "Katarina_I", referralCode: "NVRF0002", memberHash: "nvrf0002", location: "Novi Sad", telefon: "+381642222202" },
-  { email: "aleksandar@test.rs", pseudonim: "Aleksandar_X", referralCode: "NVRF0003", memberHash: "nvrf0003", location: "Niš", telefon: "+381642222203" },
+  { email: "miloš@test.rs",  pseudonim: "Milos_N",  memberHash: "nvrf0001", location: "Beograd",   telefon: "+381642222201" },
+  { email: "katarina@test.rs", pseudonim: "Katarina_I", memberHash: "nvrf0002", location: "Novi Sad", telefon: "+381642222202" },
+  { email: "aleksandar@test.rs", pseudonim: "Aleksandar_X", memberHash: "nvrf0003", location: "Niš", telefon: "+381642222203" },
 ];
 
 const SUSPENDOVANI = [
-  { email: "spam1@test.rs", pseudonim: "Spam_User1", referralCode: "SUSP0001", memberHash: "susp0001", location: "Beograd", telefon: "+381643333301", razlog: "Slanje neželjenih poruka" },
-  { email: "spam2@test.rs", pseudonim: "Spam_User2", referralCode: "SUSP0002", memberHash: "susp0002", location: "Niš",     telefon: "+381643333302", razlog: "Pokušaj manipulacije sistema" },
+  { email: "spam1@test.rs", pseudonim: "Spam_User1", memberHash: "susp0001", location: "Beograd", telefon: "+381643333301", razlog: "Slanje neželjenih poruka" },
+  { email: "spam2@test.rs", pseudonim: "Spam_User2", memberHash: "susp0002", location: "Niš",     telefon: "+381643333302", razlog: "Pokušaj manipulacije sistema" },
 ];
 
 // ─── Krugovi ────────────────────────────────────────────────────────────────
@@ -237,7 +236,6 @@ async function seedAdmin() {
         indeksStvarnosti: 10,
         verified: true,
         verifiedAt: new Date(),
-        referralCode: c.referralCode,
         memberHash: c.memberHash,
         location: "Beograd",
         wallet: { create: { type: WalletType.USER, balance: 0 } },
@@ -266,7 +264,6 @@ async function seedVerifikovaniKorisnici() {
         role: Role.FIZICKO_LICE,
         verified: true,
         verifiedAt: daniPre(30 + Math.floor(Math.random() * 90)),
-        referralCode: k.referralCode,
         memberHash: k.memberHash,
         location: k.location,
         telefon: k.telefon,
@@ -294,7 +291,6 @@ async function seedNeverifikovaniKorisnici() {
         pseudonim: k.pseudonim,
         role: Role.FIZICKO_LICE,
         verified: false,
-        referralCode: k.referralCode,
         memberHash: k.memberHash,
         location: k.location,
         telefon: k.telefon,
@@ -321,7 +317,6 @@ async function seedSuspendovaniKorisnici() {
         status: UserStatus.SUSPENDED,
         suspendedAt: daniPre(5),
         suspendedReason: k.razlog,
-        referralCode: k.referralCode,
         memberHash: k.memberHash,
         location: k.location,
         telefon: k.telefon,

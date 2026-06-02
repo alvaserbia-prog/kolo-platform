@@ -26,7 +26,6 @@ export async function GET() {
     zrnoDelegacija,
     glasovi,
     poruke,
-    referrals,
     politikaPristanci,
     prigovori,
     programEnrollments,
@@ -45,7 +44,6 @@ export async function GET() {
         verifiedAt: true,
         location: true,
         telefon: true,
-        referralCode: true,
         memberHash: true,
         createdAt: true,
         deaktiviranAt: true,
@@ -112,11 +110,6 @@ export async function GET() {
       },
       orderBy: { createdAt: "desc" },
     }),
-    prisma.referral.findMany({
-      where: { OR: [{ referrerId: userId }, { referredId: userId }] },
-      select: { referrerId: true, referredId: true, rewardPaid: true, rewardAmount: true, createdAt: true },
-      orderBy: { createdAt: "desc" },
-    }),
     prisma.politikaPrihvatanje.findMany({
       where: { userId },
       select: {
@@ -162,7 +155,6 @@ export async function GET() {
     },
     glasanje: glasovi,
     poruke,
-    referrals,
     saglasnosti: {
       politikaPristanci,
     },

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import LokacijaSearch from "@/components/LokacijaSearch";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -23,39 +24,8 @@ function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: str
 export default function RegistracijaPage() {
   const router = useRouter();
   const t = useTranslations("registracija");
-  const [form, setForm] = useState({ email: "", pseudonim: "", password: "", passwordConfirm: "", referralCode: "" });
-
-  // Auto-popuni referral iz cookie ili localStorage (postavljeno pri kliknu na /m/{hash})
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    // Pokušaj localStorage
-    const lsRef = localStorage.getItem("kolo_ref");
-    if (lsRef) {
-      // Treba da pronađemo pseudonim za ovaj hash
-      fetch(`/api/m/${lsRef}/pseudonim`)
-        .then((r) => r.ok ? r.json() : null)
-        .then((data) => {
-          if (data?.referralCode) {
-            setForm((f) => ({ ...f, referralCode: data.referralCode }));
-          }
-        })
-        .catch(() => {});
-      return;
-    }
-    // Pokušaj cookie
-    const match = document.cookie.match(/(?:^|;\s*)kolo_ref=([^;]+)/);
-    if (match) {
-      fetch(`/api/m/${match[1]}/pseudonim`)
-        .then((r) => r.ok ? r.json() : null)
-        .then((data) => {
-          if (data?.referralCode) {
-            setForm((f) => ({ ...f, referralCode: data.referralCode }));
-          }
-        })
-        .catch(() => {});
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [form, setForm] = useState({ email: "", pseudonim: "", password: "", passwordConfirm: "" });
+  const [mesto, setMesto] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [pseudonimStatus, setPseudonimStatus] = useState<"idle" | "checking" | "slobodan" | "zauzet">("idle");
@@ -105,7 +75,7 @@ export default function RegistracijaPage() {
     const res = await fetch("/api/registracija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: form.email, pseudonim: form.pseudonim, password: form.password, referralCode: form.referralCode || undefined }),
+      body: JSON.stringify({ email: form.email, pseudonim: form.pseudonim, password: form.password, location: mesto.trim() || undefined }),
     });
     const data = await res.json();
     setLoading(false);
@@ -185,14 +155,13 @@ export default function RegistracijaPage() {
             )}
           </div>
 
-          {/* Referral */}
+          {/* Mesto (opciono) */}
           <div>
             <label className="block text-sm font-medium text-kolo-text mb-1.5">
-              {t("referral_kod")} <span className="text-kolo-muted font-normal">{t("opciono")}</span>
+              {t("mesto")} <span className="text-kolo-muted font-normal">{t("opciono")}</span>
             </label>
-            <input type="text" value={form.referralCode} onChange={(e) => set("referralCode", e.target.value.toUpperCase())}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg font-mono"
-              placeholder={t("placeholder_referral")} suppressHydrationWarning />
+            <LokacijaSearch value={mesto} onChange={setMesto} />
+            <p className="mt-1 text-xs text-kolo-muted">{t("mesto_opis")}</p>
           </div>
 
           {/* Checkbox-ovi */}

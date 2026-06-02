@@ -28,7 +28,7 @@ export async function GET(
       select: {
         id: true, email: true, pseudonim: true, role: true, status: true,
         verified: true, verifiedAt: true, location: true, telefon: true,
-        referralCode: true, memberHash: true, createdAt: true, deaktiviranAt: true,
+        memberHash: true, createdAt: true, deaktiviranAt: true,
       },
     }),
     prisma.userPodaci.findUnique({ where: { userId }, select: { punoIme: true, opis: true } }),

@@ -17,14 +17,12 @@ type LanacResponse = {
     neograniceno: boolean;
     prikaz: string;
   };
-  verifikator:
-    | {
-        id: string;
-        pseudonim: string;
-        datum: string;
-        statusNadzora: string;
-      }
-    | null;
+  verifikatori: {
+    id: string;
+    pseudonim: string;
+    datum: string;
+    statusNadzora: string;
+  }[];
   verifikovani: {
     id: string;
     pseudonim: string;
@@ -64,9 +62,10 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
     );
   }
 
-  const verifikatorCvor: CvorVerifikator = data.verifikator
-    ? { id: data.verifikator.id, pseudonim: data.verifikator.pseudonim }
-    : null;
+  const verifikatorCvorovi: CvorVerifikator[] = data.verifikatori.map((v) => ({
+    id: v.id,
+    pseudonim: v.pseudonim,
+  }));
 
   const verifikovaniCvorovi: CvorVerifikovani[] = data.verifikovani.map((v) => ({
     id: v.id,
@@ -79,7 +78,7 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
       <IndeksPrikaz prikaz={data.korisnik.prikaz} tip={data.korisnik.tip} />
       <MiniStablo
         ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
-        verifikator={verifikatorCvor}
+        verifikatori={verifikatorCvorovi}
         verifikovani={verifikovaniCvorovi}
         jeJaPocetni={data.korisnik.tip === "POCETNI"}
       />
