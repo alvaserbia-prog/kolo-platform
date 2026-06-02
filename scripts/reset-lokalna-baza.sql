@@ -112,9 +112,6 @@ WHERE "userId" NOT IN (
   '84f637eb-f3d5-4a24-843e-66d5154ef888'
 );
 
--- ─── 15. Self-reference referredBy → NULL (da bi DELETE User prošao) ──────
-UPDATE "User" SET "referredById" = NULL;
-
 -- ─── 16. Konačno: korisnici van 3 ──────────────────────────────────────────
 DELETE FROM "User"
 WHERE id NOT IN (

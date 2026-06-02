@@ -29,7 +29,7 @@ Sistem koristi dve interne jedinice:
 ### `/` — Landing stranica
 - Hero sekcija sa opisom sistema
 - Živi widget: broj verifikovanih članova + POEN u opticaju (iz baze)
-- Prikaz programa Protokola (Verifikacija, Preporuke, Donacije, Podrška porodicama)
+- Prikaz programa Protokola (Verifikacija, Donacije, Podrška porodicama)
 - CTA: Registruj se / Kako funkcioniše
 
 ### `/pijaca` — Pijaca (javna)
@@ -55,7 +55,6 @@ Sistem koristi dve interne jedinice:
 - Email, pseudonim (javno vidljiv, bez pravog imena), lozinka
 - **Live provera pseudonima** — debounce 400ms, API `/api/provjeri-pseudonim`
 - **Indikator jačine lozinke** — 4 nivoa (Slaba/Srednja/Dobra/Jaka)
-- **Referral kod** — opciono, unosi se tokom registracije
 - Checkbox-ovi za Uslove korišćenja i Politiku privatnosti
 - Dugme je zaključano dok pseudonim nije slobodan i oba checkbox-a nisu čekirana
 
@@ -144,8 +143,6 @@ Sistem koristi dve interne jedinice:
 ### `/profil` — Profil
 - Promena pseudonima
 - Promena lozinke
-- Prikaz referral koda (jedinstven za svakog korisnika)
-- Link za deljenje referral koda
 
 ### `/profil/oglasi` — Moji oglasi
 - Lista sopstvenih oglasa
@@ -167,7 +164,7 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 ### Tab: Na čekanju
 - Zahtevi za verifikaciju identiteta (JMBG + slike lične karte)
   - Prikaz slika prednje/zadnje strane
-  - Dugme "Odobri" → emisija 1.000 POEN + referral nagrada
+  - Dugme "Odobri" → emisija 1.000 POEN
   - Dugme "Odbij" → unos razloga
 - Zahtevi za osnivanje Kruga
   - Odobri (emisija 50.000 POEN) / Odbij
@@ -217,16 +214,6 @@ Dostupno samo korisnicima sa ulogom `ADMIN`.
 - Program enrollment odobren / odbijen
 - Oglas kupljen
 - Nova poruka
-
----
-
-## Referral sistem
-
-- Svaki korisnik dobija jedinstveni referral kod
-- Kod se unosi pri registraciji novog korisnika
-- Nagrada se isplaćuje **kada se preporučeni verifikuje**
-- 10 nivoa nagrade (1. preporuka = manji iznos, 10. = 10.000 POEN)
-- Nagrada se emituje pozivaocima automatski pri odobrenju verifikacije
 
 ---
 

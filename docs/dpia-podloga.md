@@ -34,7 +34,7 @@ Izveštaj je generisan automatski iz koda (`prisma/schema.prisma` i `src/app/api
 | createdAt | DateTime | ne | now() | — | — |
 | updatedAt | DateTime | ne | @updatedAt | — | — |
 
-(Relacije: `pristankiPolitike`, `referredBy/referrals`, `wallet`, `referralsMade/referralReceived`, `podaci`, `donations`, `kreiraniPokrovitelji`, `vlasnikPokrovitelja`, `evidentiraniDoprinosi`, `pokroviteljBonusi`, `kreiraniOglasi`, `oglasPrijave`, `oglasEvidencije`, `verificationRequest`, `listings`, `purchases`, `krugClanstva`, `pristupnice`, `osnivanjeZahtevi`, `programEnrollments`, `doprinosEvidencije`, `zrnoStanje`, `zrnoKupovinaZahtevi`, `zrnoProdajaZahtevi`, `zrnoStatusZahtevi`, `delegiraoKome`, `delegatZa`, `kreiraniPredlozi`, `glasovi`, `auditLogs`, `notifikacije`, `konverzacije1`, `konverzacije2`, `porukePoslate`, `prigovori`, `blogObjave`, `chatPoruke` — relacije nisu skalarna polja.)
+(Relacije: `pristankiPolitike`, `wallet`, `podaci`, `donations`, `kreiraniPokrovitelji`, `vlasnikPokrovitelja`, `evidentiraniDoprinosi`, `pokroviteljBonusi`, `kreiraniOglasi`, `oglasPrijave`, `oglasEvidencije`, `verificationRequest`, `listings`, `purchases`, `krugClanstva`, `pristupnice`, `osnivanjeZahtevi`, `programEnrollments`, `doprinosEvidencije`, `zrnoStanje`, `zrnoKupovinaZahtevi`, `zrnoProdajaZahtevi`, `zrnoStatusZahtevi`, `delegiraoKome`, `delegatZa`, `kreiraniPredlozi`, `glasovi`, `auditLogs`, `notifikacije`, `konverzacije1`, `konverzacije2`, `porukePoslate`, `prigovori`, `blogObjave`, `chatPoruke` — relacije nisu skalarna polja.)
 
 ### 1.2 `UserPodaci`
 
@@ -51,7 +51,6 @@ Izveštaj je generisan automatski iz koda (`prisma/schema.prisma` i `src/app/api
 | prikaziTelefon | Boolean | ne | false | — | — |
 | prikaziBilans | Boolean | ne | true | — | — |
 | prikaziZrno | Boolean | ne | true | — | — |
-| prikaziRangPreporuka | Boolean | ne | true | — | — |
 | prikaziRangDonacija | Boolean | ne | true | — | — |
 | prikaziOglase | Boolean | ne | true | — | — |
 
@@ -158,9 +157,9 @@ Tabela obuhvata sve rute pod `src/app/api/` koje čitaju ili pišu u modele iz Z
 
 | Method + path | Modeli koje ČITA | Modeli koje PIŠE/MENJA | Ko može da pozove | Šta validira ulazno |
 |---|---|---|---|---|
-| `POST /api/registracija` | User | User (create), Wallet (create), Referral (create) | PUBLIC | email/pseudonim/lozinka prisutni; lozinka ≥8; pseudonim 3–30; email i pseudonim jedinstveni; opcioni referralCode mora postojati u bazi |
+| `POST /api/registracija` | User | User (create), Wallet (create) | PUBLIC | email/pseudonim/lozinka prisutni; lozinka ≥8; pseudonim 3–30; email i pseudonim jedinstveni |
 | `GET /api/provjeri-pseudonim` | User | — | PUBLIC | `p` query, min 3 karaktera |
-| `POST /api/oauth/dovrsi` | User | User (update — pseudonim, oauthPending, referredById), Referral (create) | AUTH (oauthPending=true) | pseudonim 3–30; pseudonim jedinstven; opcioni referralCode validan |
+| `POST /api/oauth/dovrsi` | User | User (update — pseudonim, oauthPending) | AUTH (oauthPending=true) | pseudonim 3–30; pseudonim jedinstven |
 | `GET /api/profil/balans` | User, Wallet | — | AUTH | — |
 | `GET /api/profil/avatar` | User | — | AUTH | — |
 | `PATCH /api/profil/avatar` | — | User (update — avatar) | AUTH | data:image/* prefiks; veličina ≤150 000 znakova |
@@ -212,7 +211,6 @@ Tabela obuhvata sve rute pod `src/app/api/` koje čitaju ili pišu u modele iz Z
 | `POST /api/admin/donacija` | User, DonationRecord | DonationRecord/Transaction/Wallet (kroz `evidentirajDonaciju`), AuditLog ("DONACIJA_POTVRDJENA"/"DONACIJA_RUCNO_EVIDENTIRANA"), Notifikacija | ADMIN | iznos > 0; ako se šalje `donationId` mora postojati i ne sme biti CONFIRMED; inače `pseudonim` mora postojati |
 | `GET /api/admin/donacija` | DonationRecord, User | — | ADMIN | — |
 | `GET /api/donacije` | User, DonationRecord (sopstvene) | — | VERIFIED | — |
-| `GET /api/preporuke` | User, Referral (sa podacima referredog) | — | VERIFIED | — |
 | `POST /api/zrno/delegiraj` | User | ZrnoDelegacija (upsert — `aktivna: false`, primenjuje se u ponoć) | AUTH | pseudonim delegata postoji; nije sebi |
 
 > Napomena: `Notifikacija (create)` se često upisuje preko helper funkcije `posaljiNotifikaciju()` (`src/lib/notifikacije.ts`). `AuditLog (create)` ide preko `logAdminAkcija()` (`src/lib/audit.ts`); izuzetak su `POST /api/admin/pokrovitelji` i `PATCH /api/admin/pokrovitelji/[id]`, gde se `prisma.auditLog.create` poziva direktno.
@@ -256,7 +254,6 @@ Ako korisnik posle odbijanja podnese novi zahtev (`POST /api/verifikacija`), kod
   - `User.update`: `verified=true`, `verifiedAt=now`.
   - `VerificationRequest.update`: `status="APPROVED"`, `reviewedAt=now`, `reviewedById=adminId`.
 - Van transakcije: `emitujPoen()` upisuje 1 000 POEN korisniku (`EMISIJA_VERIFIKACIJA`).
-- Ako postoji aktivna `Referral` veza (`referralReceived`) i nagrada još nije isplaćena (`!rewardPaid`): emituje se preporuka pozivaocu i `Referral` se ažurira (`rewardPaid=true`, `rewardAmount`).
 - `logAdminAkcija(... "VERIFIKACIJA_ODOBRENA" ...)` — upis u `AuditLog`.
 - Notifikacija korisniku.
 
