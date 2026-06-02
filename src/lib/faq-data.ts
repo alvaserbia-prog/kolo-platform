@@ -706,7 +706,7 @@ Verifikovan korisnik (indeks stvarnosti ≥ 10%) vidi pseudonime svih korisnika,
 
 Tvoje pravo ime i telefon su dobrovoljni i nisu uslov za korišćenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom — sam biraš da li ćeš i kome (samo verifikovanima) otkriti ime i telefon, a otkrivanje možeš povući.
 
-Izuzetak je Pijaca: tvoji oglasi (opis, cena, lokacija i pseudonim) javno su vidljivi svima radi razmene, ali tvoj kontakt i povezivanje sa istorijom vide samo verifikovani korisnici.`,
+Izuzetak je Pijaca: tvoji oglasi (opis, cena, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje sa istorijom vide samo verifikovani korisnici.`,
       },
       {
         id: 35,
@@ -755,11 +755,11 @@ Email adresa ti nikada nije javno vidljiva, bez obzira na sve.`,
       {
         id: 56,
         pitanje: `Može li me neko deanonimizovati kombinujući iznose, vreme i učestalost transakcija?`,
-        odgovor: `Da — i to ti otvoreno priznajemo. Pseudonimnost nije isto što i anonimnost.
+        odgovor: `Da. Pseudonimnost nije isto što i anonimnost.
 
 Tvoje transakcije se u evidenciji vode pod pseudonimom, ne pod tvojim imenom. Ali sama kombinacija iznosa, vremena i učestalosti ažuriranja evidencije može u nekim slučajevima posredno ukazati na to ko si — naročito u maloj sredini gde se ljudi poznaju. Registracijom prihvataš da je javnost pseudonimne evidencije ugrađena u sistem i da se ne može isključiti.
 
-Evo šta te ipak štiti:
+Ipak te štiti nekoliko stvari:
 
 Fondacija ne vodi tabelu koja povezuje pseudonim sa tvojim identitetom — tu vezu jednostavno ne posedujemo. Tvoje pravo ime i broj telefona su dobrovoljni; sam biraš da li ćeš ih i kome (samo verifikovanima) otkriti, a otkrivanje možeš povući u svakom trenutku.
 
@@ -767,20 +767,7 @@ Vidljivost je gradirana: neregistrovani vide samo agregate, a pojedinačne trans
 
 Odgovoran si i da tvoj pseudonim ne sadrži lične podatke koji bi te odali.
 
-Iskreno: ovo je poznato ograničenje pseudonimnih sistema. Razdvajamo identifikacione od obračunskih podataka i ne držimo centralnu vezu, ali dodatne tehničke mere baš protiv napada povezivanjem još nisu posebno razrađene — ako koristiš sistem u maloj sredini, imaj ovo na umu.`,
-      },
-      {
-        id: 57,
-        pitanje: `Osoba koja me verifikuje zna i moje lice i pseudonim — ne razbija li lanac jemstva anonimnost?`,
-        odgovor: `Tačno je: osoba koja te verifikuje povezuje tvoje lice sa tvojim pseudonimom. Verifikacija se i zasniva na ličnom poznavanju — neko ko te poznaje lično potvrđuje da si stvarna osoba. Bez te jedne ljudske veze ceo sistem ne bi mogao da razlikuje stvarne ljude od izmišljenih naloga.
-
-Ali važno je šta se dešava dalje. Ta veza ostaje između tebe i ljudi koji te poznaju u stvarnom svetu — Fondacija je ne vidi. Fondacija ne vodi nikakvu evidenciju koja povezuje tvoj pseudonim sa tvojim imenom i licem.
-
-Zapis o tome ko je koga verifikovao postoji, ali samo u pseudonimnom obliku, i nikada nije javan. Taj zapis se tretira kao lični podatak i nije dostupan drugim korisnicima — vide ga samo oni kojima je neophodan za sam postupak.
-
-Sistem je dodatno tako postavljen da niko ne može da prikupi celu sliku o tebi. Da bi dostigao puno učešće, moraš biti poznat ljudima iz više različitih delova mreže — pravila sprečavaju da te verifikuju ljudi iz istog uskog kruga. Zato ne postoji nijedna jedina osoba ni tačka koja drži tvoj kompletan identitet.
-
-Iskreno o granici: u maloj sredini, gde se ljudi i ovako poznaju, anonimnost prema komšiluku je realno ograničena. Pseudonimnost te štiti od sistema i od stranaca, ne nužno od onih koji te i inače znaju.`,
+Ovo je poznato ograničenje pseudonimnih sistema. Razdvajamo identifikacione od obračunskih podataka i ne držimo centralnu vezu, ali dodatne tehničke mere baš protiv napada povezivanjem još nisu posebno razrađene — ako koristiš sistem u maloj sredini, imaj ovo na umu.`,
       },
       {
         id: 73,
