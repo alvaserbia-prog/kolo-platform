@@ -7,11 +7,11 @@ import remarkGfm from "remark-gfm";
 
 export const metadata: Metadata = {
   title: "DPIA — KOLO",
-  description: "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.0",
+  description: "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.5",
 };
 
 export default async function DPIAPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "DPIA_3_7_3.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "DPIA_3_7_5.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -22,7 +22,7 @@ export default async function DPIAPage() {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           DPIA — Procena uticaja na zaštitu podataka o ličnosti
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.5</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>

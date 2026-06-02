@@ -4,7 +4,11 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
+import { MAX_INDEKS } from "@/lib/protokol/dokaz-stvarnosti";
+import { dohvatiVerifikatore, kreirajPotvrde } from "@/lib/protokol/program-potvrda";
+import { labelPrograma } from "@/lib/protokol/programi";
 
 // PED (operativni doprinos) ne ide kroz enrollment — prijava se vrši na konkretan
 // zadatak kroz /api/doprinos-oglasi/[id]/prijavi (Pravilnik o operativnom doprinosu).
@@ -12,7 +16,10 @@ const DOZVOLJENI_TIPOVI: ProgramType[] = [
   "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
 
-// POST /api/programi/[type]/prijava — prijava na program
+// POST /api/programi/[type]/prijava — prijava na socijalni program.
+// Anti-malverzacija (Pravilnik o programima podrške čl. 4): potreban je pun indeks
+// stvarnosti (100%), izričit pristanak i potvrda SVIH verifikatora pod punom
+// odgovornošću pre nego što Fondacija može da odobri prijavu.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
@@ -35,10 +42,26 @@ export async function POST(
   if (!program?.isActive)
     return NextResponse.json({ error: "Program nije aktivan." }, { status: 400 });
 
-  // Krugr check za programe koji zahtevaju krugrski status
-  const krugrskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
-  if (krugrskaProvera.includes(programType) && session.user.role !== "CLAN_KRUGA" && session.user.role !== "ADMIN")
-    return NextResponse.json({ error: "Ovaj program je dostupan samo krugrsima." }, { status: 403 });
+  // Pun indeks stvarnosti (100% = svih 10 verifikacija) — uslov za socijalni program.
+  const korisnik = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { indeksStvarnosti: true, pseudonim: true },
+  });
+  if (!korisnik) return NextResponse.json({ error: "Korisnik ne postoji." }, { status: 404 });
+  if (korisnik.indeksStvarnosti < MAX_INDEKS)
+    return NextResponse.json(
+      { error: "Za socijalni program potreban je pun indeks stvarnosti (100%) — sve verifikacije." },
+      { status: 403 }
+    );
+
+  const body = await req.json().catch(() => ({}));
+
+  // Izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova.
+  if (body.pristanakVerifikatori !== true)
+    return NextResponse.json(
+      { error: "Potreban je pristanak da vaši verifikatori potvrde ispunjenost uslova." },
+      { status: 400 }
+    );
 
   // Proveri duplikat
   const vec = await prisma.programEnrollment.findUnique({
@@ -47,27 +70,60 @@ export async function POST(
   if (vec && vec.status !== "REJECTED")
     return NextResponse.json({ error: "Već ste prijavljeni na ovaj program." }, { status: 400 });
 
-  const body = await req.json().catch(() => ({}));
   const metadata = buildMetadata(programType, body);
 
-  if (vec?.status === "REJECTED") {
-    // Reapply
-    await prisma.programEnrollment.update({
-      where: { id: vec.id },
-      data: { status: "PENDING", metadata, rejectionReason: null, approvedAt: null, approvedById: null },
-    });
-  } else {
-    await prisma.programEnrollment.create({
-      data: { userId: session.user.id, type: programType, metadata },
-    });
+  // Verifikatori koji će potvrđivati (pri indeksu 100% biće ih 10).
+  const verifikatori = await dohvatiVerifikatore(prisma, session.user.id);
+  if (verifikatori.length === 0)
+    return NextResponse.json(
+      { error: "Nemate verifikatore koji mogu da potvrde prijavu." },
+      { status: 403 }
+    );
+
+  // Kreiranje/obnova prijave + potvrda za verifikatore — atomarno.
+  await prisma.$transaction(async (tx) => {
+    let enrollmentId: string;
+    if (vec?.status === "REJECTED") {
+      const enr = await tx.programEnrollment.update({
+        where: { id: vec.id },
+        data: {
+          status: "PENDING",
+          metadata,
+          pristanakVerifikatori: true,
+          rejectionReason: null,
+          approvedAt: null,
+          approvedById: null,
+        },
+      });
+      enrollmentId = enr.id;
+      // Reapply: ukloni stare potvrde pre kreiranja novih.
+      await tx.programPotvrda.deleteMany({ where: { enrollmentId } });
+    } else {
+      const enr = await tx.programEnrollment.create({
+        data: { userId: session.user.id, type: programType, metadata, pristanakVerifikatori: true },
+      });
+      enrollmentId = enr.id;
+    }
+    await kreirajPotvrde(tx, enrollmentId, verifikatori);
+  });
+
+  // In-app notifikacija svakom verifikatoru (jedini kanal — nema email/push).
+  for (const verifikatorId of verifikatori) {
+    await posaljiNotifikaciju(
+      verifikatorId,
+      "info",
+      "Zahtev za potvrdu socijalnog programa",
+      `Korisnik ${korisnik.pseudonim} se prijavio za program "${labelPrograma(programType)}" i navodi vas kao verifikatora. Potvrdite ispunjenost uslova pod punom odgovornošću, ili obrazložite odbijanje.`,
+      "/programi/potvrde"
+    );
   }
 
   void posaljiAdminAlert(
     "Nova prijava na program",
-    `Program: ${programType}\nKorisnik: ${session.user.pseudonim}`
+    `Program: ${programType}\nKorisnik: ${korisnik.pseudonim}\nČeka potvrdu ${verifikatori.length} verifikatora.`
   );
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, brojVerifikatora: verifikatori.length });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,7 +136,9 @@ function buildMetadata(type: ProgramType, body: Record<string, unknown>): any {
     case "PODRSKA_STARIJIMA":
       return { datumRodjenja: body.datumRodjenja as string };
     case "POSEBNA_BRIGA":
-      return { dijagnoza: (body.dijagnoza as string)?.trim() ?? "" };
+      // Dokaz statusa je rešenje o invaliditetu nadležnog organa (čl. 12) — NE dijagnoza
+      // ni medicinska dokumentacija. Čuva se referenca (broj/organ), ne posebne kategorije.
+      return { resenjeInvaliditet: (body.resenjeInvaliditet as string)?.trim() ?? "" };
     case "SKOLOVANJE":
       return { ustanova: (body.ustanova as string)?.trim() ?? "", program: (body.program as string)?.trim() ?? "" };
     default:

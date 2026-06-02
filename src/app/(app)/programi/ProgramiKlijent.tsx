@@ -31,7 +31,7 @@ interface EmisioniKontekst {
 interface Props {
   programi: ProgramInfo[];
   isVerified: boolean;
-  isKrugr: boolean;
+  imaPunIndeks: boolean;
   protokolBalance: number;
   emisioniKontekst: EmisioniKontekst;
 }
@@ -47,7 +47,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, isVerified, isKrugr, protokolBalance, emisioniKontekst }: Props) {
+export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, protokolBalance, emisioniKontekst }: Props) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -126,13 +126,20 @@ export default function ProgramiKlijent({ programi, isVerified, isKrugr, protoko
         </div>
       )}
 
+      {isVerified && !imaPunIndeks && (
+        <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
+          Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset
+          verifikacija. Svi vaši verifikatori potvrđuju ispunjenost uslova pre odobravanja.
+        </div>
+      )}
+
       <div className="space-y-3">
         {programi.map((p) => (
           <ProgramKartica
             key={p.type}
             p={p}
             isVerified={isVerified}
-            isKrugr={isKrugr}
+            imaPunIndeks={imaPunIndeks}
             protokolBalance={protokolBalance}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
@@ -149,11 +156,11 @@ export default function ProgramiKlijent({ programi, isVerified, isKrugr, protoko
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 function ProgramKartica({
-  p, isVerified, isKrugr, protokolBalance, loading, poruka, expanded, onExpand, onPrijavi,
+  p, isVerified, imaPunIndeks, protokolBalance, loading, poruka, expanded, onExpand, onPrijavi,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
-  isKrugr: boolean;
+  imaPunIndeks: boolean;
   protokolBalance: number;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
@@ -166,9 +173,8 @@ function ProgramKartica({
   const statusBadge = useStatusBadge();
   const enStatus = p.enrollment?.status;
 
-  const krugrskaProvera = ["PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
-  const zahtevaDrugarstvo = krugrskaProvera.includes(p.type);
-  const mozePrijaviti = isVerified && (!zahtevaDrugarstvo || isKrugr) && p.programAktivan;
+  // Socijalni programi zahtevaju pun indeks stvarnosti (100%) — anti-malverzacija (čl. 4).
+  const mozePrijaviti = isVerified && imaPunIndeks && p.programAktivan;
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -273,16 +279,18 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const [datumRodjenja, setDatumRodjenja] = useState("");
-  const [dijagnoza, setDijagnoza] = useState("");
+  const [resenjeInvaliditet, setResenjeInvaliditet] = useState("");
   const [ustanova, setUstanova] = useState("");
   const [program, setProgram] = useState("");
   const [deca, setDeca] = useState<{ ime: string; datumRodjenja: string }[]>([{ ime: "", datumRodjenja: "" }]);
+  const [pristanak, setPristanak] = useState(false);
 
   function handleSubmit() {
-    if (type === "PODRSKA_STARIJIMA") { onSubmit({ datumRodjenja }); return; }
-    if (type === "POSEBNA_BRIGA") { onSubmit({ dijagnoza }); return; }
-    if (type === "SKOLOVANJE") { onSubmit({ ustanova, program }); return; }
-    if (type === "PODRSKA_MAJKAMA") { onSubmit({ deca: deca.filter(d => d.ime && d.datumRodjenja) }); return; }
+    const baza = { pristanakVerifikatori: pristanak };
+    if (type === "PODRSKA_STARIJIMA") { onSubmit({ ...baza, datumRodjenja }); return; }
+    if (type === "POSEBNA_BRIGA") { onSubmit({ ...baza, resenjeInvaliditet }); return; }
+    if (type === "SKOLOVANJE") { onSubmit({ ...baza, ustanova, program }); return; }
+    if (type === "PODRSKA_MAJKAMA") { onSubmit({ ...baza, deca: deca.filter(d => d.ime && d.datumRodjenja) }); return; }
   }
 
   return (
@@ -298,11 +306,14 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
 
       {type === "POSEBNA_BRIGA" && (
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("dijagnoza")}</label>
-          <textarea rows={2} value={dijagnoza} onChange={(e) => setDijagnoza(e.target.value)}
-            placeholder={t("posebna_briga_opis")}
-            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
-          <p className="text-xs text-kolo-muted mt-1">{t("posebna_briga_napomena")}</p>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rešenje o invaliditetu (broj i organ)</label>
+          <input type="text" value={resenjeInvaliditet} onChange={(e) => setResenjeInvaliditet(e.target.value)}
+            placeholder="npr. broj rešenja i naziv organa koji ga je izdao"
+            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          <p className="text-xs text-kolo-muted mt-1">
+            Dokaz statusa je rešenje o invaliditetu nadležnog organa. Ne traži se
+            medicinska dokumentacija ni dijagnoza.
+          </p>
         </div>
       )}
 
@@ -341,10 +352,21 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
         </div>
       )}
 
+      {/* Pristanak — pravni osnov obrade je izričit pristanak (čl. 4). */}
+      <label className="flex items-start gap-2 pt-2 cursor-pointer">
+        <input type="checkbox" checked={pristanak} onChange={(e) => setPristanak(e.target.checked)}
+          className="mt-0.5 shrink-0" />
+        <span className="text-xs text-kolo-muted">
+          Pristajem da mojih deset verifikatora bude zamoljeno da pod punom odgovornošću
+          potvrde da ispunjavam uslov za ovaj program. Verifikatori ne vide unete podatke.
+          Prijavu odobrava Fondacija tek kada svi potvrde.
+        </span>
+      </label>
+
       <div className="flex gap-2 pt-1">
         <button onClick={onCancel}
           className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("otkazi")}</button>
-        <button onClick={handleSubmit} disabled={loading}
+        <button onClick={handleSubmit} disabled={loading || !pristanak}
           className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold disabled:opacity-60">
           {loading ? "..." : t("posalji_prijavu")}
         </button>

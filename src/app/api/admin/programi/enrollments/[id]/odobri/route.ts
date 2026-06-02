@@ -21,6 +21,20 @@ export async function POST(
   if (enrollment.status !== "PENDING")
     return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
+  // Tvrda blokada (anti-malverzacija, Pravilnik o programima podrške čl. 4):
+  // svi verifikatori moraju da potvrde pre nego što Fondacija može da odobri.
+  const ukupnoPotvrda = await prisma.programPotvrda.count({ where: { enrollmentId: id } });
+  const nepotvrdjeno = await prisma.programPotvrda.count({
+    where: { enrollmentId: id, status: { not: "POTVRDJENO" } },
+  });
+  if (ukupnoPotvrda === 0 || nepotvrdjeno > 0)
+    return NextResponse.json(
+      {
+        error: `Nije moguće odobriti — ${nepotvrdjeno} od ${ukupnoPotvrda} verifikatora još nije potvrdilo.`,
+      },
+      { status: 409 }
+    );
+
   const body = await req.json().catch(() => ({}));
   const dailyAmount = body.dailyAmount ? Number(body.dailyAmount) : undefined;
 

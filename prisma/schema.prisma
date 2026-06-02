@@ -101,6 +101,12 @@ enum EnrollmentStatus {
   REJECTED
 }
 
+enum PotvrdaStatus {
+  CEKA
+  POTVRDJENO
+  ODBIJENO
+}
+
 enum EvidencijaStatus {
   PENDING
   APPROVED
@@ -196,6 +202,7 @@ model User {
   pristupnice            KrugPristupnica[]
   osnivanjeZahtevi       KrugOsnivanjeZahtev[] @relation("Inicijator")
   programEnrollments     ProgramEnrollment[]
+  programPotvrde         ProgramPotvrda[]           @relation("VerifikatorPotvrda")
   zrnoStanje             ZrnoStanje?
   zrnoUpisZahtevi        ZrnoUpisZahtev[]
   zrnoOtpisZahtevi       ZrnoOtpisZahtev[]
@@ -389,22 +396,46 @@ model ProtokolProgram {
 }
 
 model ProgramEnrollment {
-  id                 String               @id @default(uuid())
-  userId             String
-  user               User                 @relation(fields: [userId], references: [id])
-  type               ProgramType
-  status             EnrollmentStatus     @default(PENDING)
-  metadata           Json?
-  dailyAmount        Int?
-  approvedById       String?
-  approvedAt         DateTime?
-  rejectionReason    String?
-  nextReverifikacija DateTime?
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
+  id                    String               @id @default(uuid())
+  userId                String
+  user                  User                 @relation(fields: [userId], references: [id])
+  type                  ProgramType
+  status                EnrollmentStatus     @default(PENDING)
+  metadata              Json?
+  dailyAmount           Int?
+  // Izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova
+  // (Pravilnik o programima podrške čl. 4 — pravni osnov obrade je pristanak).
+  pristanakVerifikatori Boolean              @default(false)
+  approvedById          String?
+  approvedAt            DateTime?
+  rejectionReason       String?
+  nextReverifikacija    DateTime?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  potvrde               ProgramPotvrda[]
 
   @@unique([userId, type])
   @@index([status, type])
+}
+
+// Potvrda verifikatora da prijavljeni korisnik ispunjava uslov socijalnog programa.
+// Verifikator potvrđuje pod punom odgovornošću, na osnovu ličnog poznavanja osobe —
+// NEMA uvid u osetljive prijavljene podatke (datumi rođenja dece, rešenje o
+// invaliditetu i sl.), koji ostaju dostupni samo licu koje obrađuje prijavu (čl. 4).
+// Odbijanje zahteva obrazloženje.
+model ProgramPotvrda {
+  id            String            @id @default(uuid())
+  enrollmentId  String
+  enrollment    ProgramEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  verifikatorId String
+  verifikator   User              @relation("VerifikatorPotvrda", fields: [verifikatorId], references: [id])
+  status        PotvrdaStatus     @default(CEKA)
+  obrazlozenje  String?
+  odgovorAt     DateTime?
+  createdAt     DateTime          @default(now())
+
+  @@unique([enrollmentId, verifikatorId])
+  @@index([verifikatorId, status])
 }
 
 model DailyEmissionSummary {

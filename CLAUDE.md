@@ -26,19 +26,19 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 | Dokument | Fajl | Verzija |
 |---|---|---|
 | Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Politika privatnosti | `politika_3_7_4.md` | **3.7.4 (aktuelan)** |
+| Politika privatnosti | `politika_3_7_5.md` | **3.7.5 (aktuelan)** |
 | Uslovi korišćenja | `uslovi_koriscenja_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
 | Whitepaper | `whitepaper_3_7_2.md` (+ `KOLO_Whitepaper_3.7.2.pdf`) | 3.7.2 |
-| DPIA | `DPIA_3_7_3.md` | **3.7.3 (aktuelan)** |
-| Radnje obrade | `radnje_obrade_3_7_3.md` | **3.7.3 (aktuelan)** |
+| DPIA | `DPIA_3_7_5.md` | **3.7.5 (aktuelan)** |
+| Radnje obrade | `radnje_obrade_3_7_5.md` | **3.7.5 (aktuelan)** |
 | Rizici | `rizici_3_7_2.md` | 3.7.2 |
 | Pravilnik o hijerarhiji akata | `hijerarhija_3_7_2.md` | 3.7.2 |
 | Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Pravilnik o pokroviteljstvu i donacijama | `donacije_3_7_3.md` | **3.7.3** |
 | Pravilnik o operativnom doprinosu | `operativni_3_7_2.md` | 3.7.2 |
 | Pravilnik o osnivačkom doprinosu | `osnivacki_3_7_2.md` | 3.7.2 |
-| Pravilnik o programima podrške | `programi_podrske_3_7_3.md` | **3.7.3** |
+| Pravilnik o programima podrške | `programi_podrske_3_7_5.md` | **3.7.5 (aktuelan)** — verifikatorska potvrda socijalnih programa |
 
 Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`, `DPIA_3_7_2.md`, `radnje_obrade_3_7_2.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
 
@@ -285,7 +285,7 @@ docs/             — interne radne beleške (nije normativa)
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
-- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_3.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/whitepaper`, `/dpia`, `/rizici`, `/radnje-obrade` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
+- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_5.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_5.md`; `/radnje-obrade` → `radnje_obrade_3_7_5.md`; `/whitepaper`, `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
 - 🟡 **GAP:** neke stranice u page chrome-u/metadata još pišu „Verzija 3.7.0" iako rendruju 3.7.3 fajl (npr. `pravilnik/[slug]/page.tsx`). Treba ažurirati labelu.
 
 ### Admin panel

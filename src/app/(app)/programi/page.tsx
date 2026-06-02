@@ -18,11 +18,12 @@ export default async function ProgramiPage() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
 
-  const [aktivniProgrami, enrollments, protokol, emisijaDanas] = await Promise.all([
+  const [aktivniProgrami, enrollments, protokol, emisijaDanas, korisnik] = await Promise.all([
     prisma.protokolProgram.findMany({ where: { isActive: true } }),
     prisma.programEnrollment.findMany({ where: { userId: session.user.id } }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
     prisma.dailyEmissionSummary.findFirst({ where: { date: danas } }),
+    prisma.user.findUnique({ where: { id: session.user.id }, select: { indeksStvarnosti: true } }),
   ]);
 
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
@@ -58,7 +59,7 @@ export default async function ProgramiPage() {
     <ProgramiKlijent
       programi={programi}
       isVerified={session.user.verified}
-      isKrugr={session.user.role === "CLAN_KRUGA" || session.user.role === "ADMIN"}
+      imaPunIndeks={(korisnik?.indeksStvarnosti ?? 0) >= 100}
       protokolBalance={protokol?.balance ?? 0}
       emisioniKontekst={{
         opticaj,
