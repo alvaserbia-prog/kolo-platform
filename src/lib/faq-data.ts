@@ -610,18 +610,14 @@ Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog o
     pitanja: [
       {
         id: 69,
-        pitanje: `Ako pošaljem PR (doprinos kodom) — dobijam li POEN? Je li to PED? Moram li biti verifikovan?`,
+        pitanje: `Ako pošaljem PR (doprinos kodom) — dobijam li POEN? Je li to operativni doprinos? Moram li biti verifikovan?`,
         odgovor: `Doprinos kodom spada u operativni doprinos — isti kanal kroz koji se evidentira rad za zajedničko dobro.
 
 Kod i sadržaj su zajedničko dobro: softver je pod AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvata se po principu DCO (potpis „Signed-off-by") — to je potvrda porekla doprinosa, ne prenos autorskih prava na Fondaciju (nije CLA). Tvoja atribucija na tom doprinosu je trajna i ostaje čak i ako kasnije obrišeš nalog.
 
 Da bi ti se POEN upisao, treba da budeš verifikovan korisnik sa indeksom stvarnosti najmanje 10%.
 
-Mehanizam ide ovako: zadatak objavljuje Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo po aktivaciji; ti se prijaviš i izvršiš ga, a izvršenje potvrđuje ovlašćeni verifikator pre nego što se POEN upiše.
-
-Nema „tarife po satu": predloženi POEN je samo težinski orijentir, a stvarno upisani iznos raspoređuje se u okviru dnevnog limita.
-
-Iskreno: iz ugla programera ovaj tok još nije posebno objašnjen na sajtu kao „pošalji PR i evo šta sledi" — radi se kroz opšti tok operativnog doprinosa.`,
+Mehanizam ide ovako: zadatak objavljuje Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo po aktivaciji; ti se prijaviš i izvršiš ga, a izvršenje potvrđuje ovlašćeni verifikator pre nego što se POEN upiše.`,
       },
       {
         id: 70,
@@ -641,7 +637,7 @@ Zaštita od „kovanja" POEN-a počiva na zero-sum pravilu: svaki POEN koji post
 
 Što se istorije tiče, svaki zapis u evidenciji vremenski je označen i vezan za prethodno stanje, tako da se ranija stanja ne mogu naknadno tiho prepisati bez narušavanja celog lanca. Pored toga, svaki pristup podacima se beleži u zaštićenom formatu koji se ne može menjati unazad, a redovne provere konzistentnosti potvrđuju da evidencija u svakom trenutku odgovara pravilima.
 
-Budimo pošteni o granicama: ova nepromenljivost je dizajnersko pravilo obezbeđeno softverskom arhitekturom, a ne kriptografska „trustless" garancija kakvu pruža javni blockchain. Drugim rečima, integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, a ne na tome da matematika čini prevaru nemogućom bez ičijeg poverenja. Zato su tu i dodatne mere — šifrovanje podataka u prenosu i u mirovanju, višefaktorska prijava za administrativni pristup, redovni bekapi na odvojene lokacije i otvoren kod koji svako može nezavisno da pregleda.`,
+O granicama: ova nepromenljivost je dizajnersko pravilo obezbeđeno softverskom arhitekturom, a ne kriptografska „trustless" garancija kakvu pruža javni blockchain. Drugim rečima, integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, a ne na tome da matematika čini prevaru nemogućom bez ičijeg poverenja. Zato su tu i dodatne mere — šifrovanje podataka u prenosu i u mirovanju, redovni bekapi na odvojene lokacije i otvoren kod koji svako može nezavisno da pregleda.`,
       },
       {
         id: 80,
