@@ -8,12 +8,12 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Whitepaper — KOLO",
-  description: "KOLO Whitepaper, verzija 3.7.0",
+  description: "KOLO Whitepaper, verzija 3.7.6",
   path: "/whitepaper",
 });
 
 export default async function WhitepaperPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "whitepaper_3_7_2.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "whitepaper_3_7_6.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -24,7 +24,7 @@ export default async function WhitepaperPage() {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           KOLO Whitepaper
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.6</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">O sistemu (sažetak)</Link>

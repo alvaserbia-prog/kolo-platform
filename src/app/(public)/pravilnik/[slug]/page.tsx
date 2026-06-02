@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
   return {
     title: `${p.naziv} — KOLO`,
-    description: `${p.naziv}, verzija 3.7.0. ${p.opis}`,
+    description: `${p.naziv}, verzija 3.7.5. ${p.opis}`,
   };
 }
 
@@ -77,7 +77,7 @@ export default async function PravilnikSlugPage({ params }: Props) {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           {p.naziv}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.5</p>
       </div>
 
       <article

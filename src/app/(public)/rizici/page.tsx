@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Izjava o prihvatanju rizika — KOLO",
-  description: "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.0",
+  description: "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.2",
   path: "/rizici",
 });
 
@@ -24,7 +24,7 @@ export default async function RiziciPage() {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           Izjava o prihvatanju rizika
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.2</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
