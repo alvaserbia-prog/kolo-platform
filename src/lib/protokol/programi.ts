@@ -4,13 +4,15 @@ import { ProgramType, TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
-// ── Koeficijenti po rednom broju deteta (Čl. 53) ─────────────────────────────
+// ── Koeficijenti po rednom broju deteta (Pravilnik o programima podrške) ──────
+// Progresivna skala: 1.→1,0 2.→1,2 3.→1,5 4.→2,0 5.→3,0 6.→4,5 7.→6,0 8.→8,0 9.→10,0
+// Za 10. dete i dalje progresija se nastavlja korakom +2,0 (10.→12,0 11.→14,0 …).
 
-const KOEF_DECE = [1.0, 1.2, 1.5, 2.0];
+const KOEF_DECE = [1.0, 1.2, 1.5, 2.0, 3.0, 4.5, 6.0, 8.0, 10.0];
 
 function koeficijentDeteta(index: number): number {
   if (index < KOEF_DECE.length) return KOEF_DECE[index];
-  return KOEF_DECE[KOEF_DECE.length - 1] + 0.5 * (index - KOEF_DECE.length + 1);
+  return KOEF_DECE[KOEF_DECE.length - 1] + 2.0 * (index - KOEF_DECE.length + 1);
 }
 
 function godinaRazlike(rodjendan: Date, danas: Date): number {

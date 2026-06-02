@@ -61,6 +61,24 @@ describe("izracunajMajke", () => {
     expect(izracunajMajke(meta, DANAS)).toBe(11_400);
   });
 
+  it("peto i šesto dete — progresivni koef 3.0 i 4.5", () => {
+    const deca = Array.from({ length: 6 }, (_, i) => ({
+      ime: `Dete${i}`,
+      datumRodjenja: datumPre(0),
+    }));
+    // 2000×(1.0+1.2+1.5+2.0+3.0+4.5) = 2000×13.2 = 26400
+    expect(izracunajMajke({ deca }, DANAS)).toBe(26_400);
+  });
+
+  it("deseto dete — progresija se nastavlja korakom +2.0 (koef 12.0)", () => {
+    const deca = Array.from({ length: 10 }, (_, i) => ({
+      ime: `Dete${i}`,
+      datumRodjenja: datumPre(0),
+    }));
+    // po detetu (×2000): 2000+2400+3000+4000+6000+9000+12000+16000+20000+24000 = 98400
+    expect(izracunajMajke({ deca }, DANAS)).toBe(98_400);
+  });
+
   it("iznos je uvek ceo broj (Math.floor u kodu)", () => {
     const meta = { deca: [{ ime: "Ana", datumRodjenja: datumPre(3) }] };
     const r = izracunajMajke(meta, DANAS);

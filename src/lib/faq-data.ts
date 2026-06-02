@@ -272,9 +272,9 @@ Strana verzija interfejsa za sada ne postoji.`,
       {
         id: 17,
         pitanje: `Ko se može prijaviti za Podršku Majkama?`,
-        odgovor: `Majke i primarni staratelji dece.
+        odgovor: `Majke.
 
-Iznos koji dobijaš zavisi od broja dece — što više dece, to veći ukupan iznos, ali sa blagim opadanjem po detetu (kroz koeficijent koji se primenjuje formulom).
+Iznos koji ti se evidentira zavisi od broja dece — što više dece, to veći ukupan iznos, ali sa blagim opadanjem po detetu (kroz koeficijent koji se primenjuje formulom).
 
 Prijava ide kroz platformu uz dokaz statusa.`,
       },
@@ -285,12 +285,12 @@ Prijava ide kroz platformu uz dokaz statusa.`,
 
 Jedini potreban dokument je rešenje o invalidnosti — ne tražimo medicinsku dokumentaciju, dijagnozu ni „dokaz hronične bolesti", jer to bi bila obrada osetljivih podataka koja je izuzetno restriktivna po zakonu.
 
-Iznos je fiksan i isplaćuje se mesečno dok status traje.`,
+Iznos je fiksan i evidentira se na dnevnom nivou dok status traje.`,
       },
       {
         id: 19,
-        pitanje: `Kako radi Program Evidencije Doprinosa (PED)?`,
-        odgovor: `Operativni doprinos (Program Evidencije Doprinosa) evidentira oblike rada za zajedničko dobro koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
+        pitanje: `Kako radi operativni doprinos?`,
+        odgovor: `Operativni doprinos evidentira oblike rada za zajedničko dobro koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
 
 Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo (po aktivaciji). Verifikovan korisnik se prijavljuje i izvršava ga, a izvršenje potvrđuje ovlašćeni verifikator pre nego što Protokol evidentira POEN.
 
@@ -312,7 +312,7 @@ Kada potvrdiš (verifikuješ) podatke koji dokazuju da pripadaš toj grupi, Prot
 
 Prijava ide kroz platformu i otvorena je verifikovanim korisnicima.
 
-Da budem iskren prema tebi: tačnu starosnu granicu, iznos POEN-a i način dokazivanja statusa utvrđuje poseban programski pravilnik — te brojke još nisu deo glavne dokumentacije, pa ti ih ovde ne mogu navesti. Kada program zaživi, uslovi će biti objavljeni na platformi.`,
+Pravo imaju korisnici od 50 godina naviše. Dnevni iznos raste sa godinama: 1.000 POEN sa navršenih 50 godina, uvećano za 100 POEN za svaku narednu godinu. Tako korisnik od 65 godina ima 2.500 POEN dnevno, a korisnik od 80 godina 4.000 POEN dnevno. Bliži uslovi i način dokazivanja godina uređuju se programskim pravilnikom.`,
       },
       {
         id: 62,
@@ -330,7 +330,7 @@ Tačni uslovi kojima se potvrđuje status za svaku grupu još se razrađuju pose
         pitanje: `Postoji li program za nezaposlene ili opštu finansijsku nuždu?`,
         odgovor: `Trenutno ne postoji poseban program za nezaposlenost ni za opštu finansijsku nuždu.
 
-Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke i primarne staratelje, starije korisnike, posebnu brigu (osobe sa invaliditetom) i školovanje. Nezaposlenost ni siromaštvo nisu među tim grupama.
+Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke, starije korisnike, posebnu brigu (osobe sa invaliditetom) i školovanje. Nezaposlenost ni siromaštvo nisu među tim grupama.
 
 Važno je i da socijalni programi nisu socijalna pomoć ni naknada — oni postoje da bi i takvo razuđeno učešće dobilo ravnopravno mesto u sistemu, a ne kao oblik podrške zbog finansijskog stanja.
 
@@ -349,14 +349,14 @@ Ne postoji ni ugovor po kome bi za urađeno X dobio tačno Y POEN-a. Tvoj doprin
 
 POEN nije plata ni naknada. Kada se objavi zadatak, uz njega ide predloženi POEN, ali to nije zagarantovan iznos — to je samo težina zadatka. Koliko će ti se zaista upisati zavisi od toga koliko je doprinosa toga dana ušlo u zajednički dnevni okvir, pa se taj okvir srazmerno deli. Nijedna potvrđena evidencija se ne prenosi za naredni dan i ne stvara obavezu sistema prema tebi.
 
-Ukratko: ovo je dobrovoljan doprinos zajednici koji se beleži, a ne posao sa zagarantovanom mesečnom zaradom.`,
+Ovo je dobrovoljan doprinos zajednici koji se beleži, a ne posao sa zagarantovanom mesečnom zaradom.`,
       },
       {
         id: 79,
         pitanje: `Koliko POEN dnevno po detetu donosi Podrška Majkama i kako broj i uzrast dece utiču?`,
         odgovor: `Za svako dete polazna dnevna osnova je 2.000 POEN. Od te osnove se oduzima 100 POEN za svaku godinu uzrasta deteta — tako da podrška postepeno opada kako dete raste i prestaje kada dete napuni 20 godina.
 
-Broj dece povećava ukupan iznos, ali ne prostim sabiranjem — svako naredno dete nosi veći množilac: prvo dete ×1,00, drugo ×1,20, treće ×1,50, četvrto ×2,00, a svako sledeće dodatnih ×0,50. Tako veće porodice dobijaju srazmerno veću podršku.
+Broj dece povećava ukupan iznos, ali ne prostim sabiranjem — svako naredno dete nosi veći množilac, i to progresivno: 1. dete ×1,00, 2. ×1,20, 3. ×1,50, 4. ×2,00, 5. ×3,00, 6. ×4,50, 7. ×6,00, 8. ×8,00, 9. ×10,00, a za 10. dete i dalje raste za ×2,00 po svakom narednom detetu. Tako veće porodice dobijaju srazmerno veću podršku.
 
 Primer: za jedno dete od 3 godine to je (2.000 − 300) × 1,00 = 1.700 POEN dnevno. Za isto dete kao treće po redu bilo bi (2.000 − 300) × 1,50 = 2.550 POEN dnevno.
 
@@ -617,7 +617,7 @@ Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog o
       {
         id: 69,
         pitanje: `Ako pošaljem PR (doprinos kodom) — dobijam li POEN? Je li to PED? Moram li biti verifikovan?`,
-        odgovor: `Doprinos kodom spada u operativni doprinos (Program Evidencije Doprinosa) — isti kanal kroz koji se evidentira rad za zajedničko dobro.
+        odgovor: `Doprinos kodom spada u operativni doprinos — isti kanal kroz koji se evidentira rad za zajedničko dobro.
 
 Kod i sadržaj su zajedničko dobro: softver je pod AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvata se po principu DCO (potpis „Signed-off-by") — to je potvrda porekla doprinosa, ne prenos autorskih prava na Fondaciju (nije CLA). Tvoja atribucija na tom doprinosu je trajna i ostaje čak i ako kasnije obrišeš nalog.
 
