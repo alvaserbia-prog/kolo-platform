@@ -33,7 +33,7 @@ I treće, lanac mora negde da počne — i počinje od početnih korisnika. To s
         pitanje: `Da li je stvarno besplatno ili moram nešto da uplatim/doniram da bih koristio sistem?`,
         odgovor: `Da, korišćenje je besplatno. Registracija ne košta ništa — biraš pseudonim, uneseš email i lozinku, i to je sve. Ne tražimo nikakvu uplatu da bi se pridružio ni da bi koristio osnovne funkcije.
 
-Donacija i pokroviteljstvo su dobrovoljni i nisu uslov za korišćenje. Donacijom podržavaš osnovne troškove Fondacije (server, pravne i računovodstvene usluge); po prijemu donacije Protokol evidentira POEN u tvom zapisu, prema pravilima sistema. Takvo evidentiranje nije kupovina POEN-a — POEN nema vrednost van sistema, ne preprodaje se i ne vraća u novac, a donacija je nepovratna nezavisno od evidentiranog POEN-a.
+Donacija i pokroviteljstvo su dobrovoljni i nisu uslov za korišćenje. Donacijom podržavaš osnovne troškove Fondacije (server, alati, razvoj, pravne i računovodstvene usluge); po prijemu donacije Protokol evidentira POEN u tvom zapisu, prema pravilima sistema. Takvo evidentiranje nije kupovina POEN-a — POEN nema vrednost van sistema, ne preprodaje se i ne vraća u novac, a donacija je nepovratna nezavisno od evidentiranog POEN-a.
 
 POEN se evidentira i kroz druge kanale — verifikaciju u lancu jemstva, operativni doprinos i razmenu sa drugim korisnicima — pa uplata nije jedini niti obavezan put. Na primer, pri verifikaciji se u tvom zapisu evidentira 1.000 POEN.`,
       },
@@ -373,7 +373,7 @@ Podrška se evidentira automatski na dnevnom nivou dok status traje, bez prijavl
         pitanje: `Pijaca — ko odgovara ako razmena ne uspe?`,
         odgovor: `Razmena na Pijaci je direktan odnos između dva korisnika i privatnopravne je prirode. Fondacija i Protokol ne odgovaraju za kvalitet, isporuku ni za ispunjenje obaveza — sve se uređuje po opštim pravilima obligacionog prava.
 
-Ako ti razmena ne uspe, prvo pokušaj direktno sa drugom stranom; ako ne uspe — dostupan je interni mehanizam sporova i pravo na sudsku zaštitu.`,
+Ako ti razmena ne uspe, prvo pokušaj direktno sa drugom stranom; u početnoj fazi možeš zatražiti dobrovoljno, neobavezujuće posredovanje Fondacije, a na raspolaganju je i sudska zaštita.`,
       },
       {
         id: 22,
@@ -391,16 +391,16 @@ Sav RSD deo je tvoja privatna odgovornost prema poreskim propisima.`,
 
 Po prijemu uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa kumulativnim iznosom kroz 11 nivoa — od 1,00 (pri kumulativno 2.000 RSD) do 2,00 (pri 5.000.000 RSD). Nivo je trajan i ne smanjuje se korišćenjem POEN-a. (Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.)
 
-Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, pravnik, računovodstvo). Kad prihodi premaše operativne troškove, višak se usmerava u programe sistema.`,
+Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, alati, razvoj, pravnik, računovodstvo). Kad prihodi premaše operativne troškove, višak se usmerava u programe sistema.`,
       },
       {
         id: 24,
         pitanje: `Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su pravna lica (firme, preduzetnici) koji daju veću podršku Fondaciji.
+        odgovor: `Pokrovitelji su firme koje podržavaju rad Fondacije. Glavna razlika u odnosu na donaciju fizičkog lica je u tome što pokrovitelj može doprineti ne samo novcem, nego i u robi ili uslugama.
 
-Pravno lice nema sopstveni nalog — POEN bonus se evidentira na nalogu vlasnika ili suvlasnika pravnog lica koji je verifikovan korisnik, po fiksnoj tabeli sa 7 nivoa (od 10.000 RSD do 1.000.000 RSD).
+Firma nema sopstveni nalog — POEN bonus se evidentira na nalogu vlasnika ili suvlasnika koji je verifikovan korisnik, po fiksnoj tabeli sa 7 nivoa (od 10.000 RSD do 1.000.000 RSD).
 
-Sva pravna lica koja podrže Fondaciju javno se vide na stranici Pokrovitelji — to je vrsta javnog sponzorstva sa transparentnošću.`,
+Svi pokrovitelji javno se vide na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
       },
       {
         id: 25,
@@ -414,18 +414,16 @@ Firme učestvuju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili
         pitanje: `Da li je razmena na Pijaci prodaja?`,
         odgovor: `Po Pravilniku KOLO sistema, razmena dobara i usluga između korisnika na Pijaci nije konstruisana kao klasična prodaja. Reč je o međusobnom dogovoru dva korisnika — jedan daje robu ili uslugu, drugi prenosi POEN, koji nije novac već evidencija doprinosa zajedničkom dobru.
 
-Sam prenos POEN-a u toj razmeni nije plaćanje novcem niti sredstvom plaćanja u smislu Zakona o platnim uslugama. Odnosi između korisnika povodom razmene — uključujući pitanja ispunjenja, odgovornosti i rizika — uređuju se prema opštim pravilima obligacionog prava (čl. 4 Pravilnika); Protokol u toj razmeni ne posreduje.
+Sam prenos POEN-a u toj razmeni nije plaćanje novcem niti sredstvom plaćanja u smislu Zakona o platnim uslugama. Odnosi između korisnika povodom razmene — uključujući pitanja ispunjenja, odgovornosti i rizika — uređuju se prema opštim pravilima obligacionog prava; Protokol u toj razmeni ne posreduje.
 
-Pravna kvalifikacija ovih razmena u poreskom i fiskalnom smislu predmet je dijaloga sa nadležnim organima i ne ukida postojeće obaveze korisnika koji obavlja delatnost po opštim propisima.`,
+Razmena dobara i usluga može imati poreske implikacije za korisnika koji obavlja delatnost; za sopstvene poreske obaveze odgovoran je korisnik po opštim propisima. Fondacija ne pruža poreski savet.`,
       },
       {
         id: 41,
         pitanje: `Da li je moj oglas na Pijaci javno vidljiv?`,
         odgovor: `Da. Sadržaj oglasa — opis, cena u POEN-ima, lokacija i tvoj pseudonim — javno je vidljiv svim posetiocima, uključujući neregistrovane, da bi razmena bila dostupna i lakša za pronalaženje.
 
-Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti neko piše ili kupi — to je dostupno samo verifikovanim korisnicima. Za neregistrovane i neverifikovane, tvoj pseudonim na oglasu ne vodi ka tvom profilu ni istoriji transakcija.
-
-Imaj na umu da pseudonim uz lokaciju i vrstu robe može posredno ukazati na to ko si u maloj sredini — oglas objavljuješ na sopstvenu inicijativu, svestan da je javan.`,
+Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti neko piše ili kupi — to je dostupno samo verifikovanim korisnicima. Za neregistrovane i neverifikovane, tvoj pseudonim na oglasu ne vodi ka tvom profilu ni istoriji transakcija.`,
       },
       {
         id: 58,
