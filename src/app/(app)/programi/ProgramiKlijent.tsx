@@ -279,18 +279,19 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const [datumRodjenja, setDatumRodjenja] = useState("");
-  const [resenjeInvaliditet, setResenjeInvaliditet] = useState("");
+  const [datumResenja, setDatumResenja] = useState("");
+  const [datumIsteka, setDatumIsteka] = useState("");
   const [ustanova, setUstanova] = useState("");
   const [program, setProgram] = useState("");
-  const [deca, setDeca] = useState<{ ime: string; datumRodjenja: string }[]>([{ ime: "", datumRodjenja: "" }]);
+  const [deca, setDeca] = useState<{ datumRodjenja: string }[]>([{ datumRodjenja: "" }]);
   const [pristanak, setPristanak] = useState(false);
 
   function handleSubmit() {
     const baza = { pristanakVerifikatori: pristanak };
     if (type === "PODRSKA_STARIJIMA") { onSubmit({ ...baza, datumRodjenja }); return; }
-    if (type === "POSEBNA_BRIGA") { onSubmit({ ...baza, resenjeInvaliditet }); return; }
+    if (type === "POSEBNA_BRIGA") { onSubmit({ ...baza, datumResenja, datumIsteka }); return; }
     if (type === "SKOLOVANJE") { onSubmit({ ...baza, ustanova, program }); return; }
-    if (type === "PODRSKA_MAJKAMA") { onSubmit({ ...baza, deca: deca.filter(d => d.ime && d.datumRodjenja) }); return; }
+    if (type === "PODRSKA_MAJKAMA") { onSubmit({ ...baza, deca: deca.filter(d => d.datumRodjenja) }); return; }
   }
 
   return (
@@ -305,14 +306,20 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
       )}
 
       {type === "POSEBNA_BRIGA" && (
-        <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">Rešenje o invaliditetu (broj i organ)</label>
-          <input type="text" value={resenjeInvaliditet} onChange={(e) => setResenjeInvaliditet(e.target.value)}
-            placeholder="npr. broj rešenja i naziv organa koji ga je izdao"
-            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-          <p className="text-xs text-kolo-muted mt-1">
-            Dokaz statusa je rešenje o invaliditetu nadležnog organa. Ne traži se
-            medicinska dokumentacija ni dijagnoza.
+        <div className="space-y-2">
+          <div>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum donošenja rešenja o invaliditetu</label>
+            <input type="date" value={datumResenja} onChange={(e) => setDatumResenja(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum isteka rešenja (opciono — ostavite prazno ako je trajno)</label>
+            <input type="date" value={datumIsteka} onChange={(e) => setDatumIsteka(e.target.value)}
+              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          </div>
+          <p className="text-xs text-kolo-muted">
+            Evidentira se samo datum rešenja nadležnog organa — ne traži se broj rešenja,
+            naziv organa, medicinska dokumentacija ni dijagnoza.
           </p>
         </div>
       )}
@@ -331,12 +338,10 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
         <div className="space-y-2">
           <p className="text-xs font-semibold text-kolo-muted">{t("deca_naslov")}</p>
           {deca.map((d, i) => (
-            <div key={i} className="flex gap-2">
-              <input type="text" placeholder={t("dete_ime", { n: i + 1 })} value={d.ime}
-                onChange={(e) => setDeca((prev) => prev.map((x, j) => j === i ? { ...x, ime: e.target.value } : x))}
-                className="flex-1 px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+            <div key={i} className="flex items-center gap-2">
+              <span className="text-xs text-kolo-muted w-16 shrink-0">{t("dete_ime", { n: i + 1 })}</span>
               <input type="date" value={d.datumRodjenja}
-                onChange={(e) => setDeca((prev) => prev.map((x, j) => j === i ? { ...x, datumRodjenja: e.target.value } : x))}
+                onChange={(e) => setDeca((prev) => prev.map((x, j) => j === i ? { datumRodjenja: e.target.value } : x))}
                 className="flex-1 px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
               {deca.length > 1 && (
                 <button type="button" onClick={() => setDeca((prev) => prev.filter((_, j) => j !== i))}
@@ -345,7 +350,7 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
             </div>
           ))}
           {deca.length < 10 && (
-            <button type="button" onClick={() => setDeca((prev) => [...prev, { ime: "", datumRodjenja: "" }])}
+            <button type="button" onClick={() => setDeca((prev) => [...prev, { datumRodjenja: "" }])}
               className="text-xs text-kolo-green-700 hover:underline">{t("dodaj_dete")}</button>
           )}
           <p className="text-xs text-kolo-muted">{t("majkama_napomena")}</p>

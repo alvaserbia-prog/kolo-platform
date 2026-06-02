@@ -399,7 +399,7 @@
     "smer": "Program / smer *",
     "skolovanje_napomena": "Admin postavlja dnevni iznos. Reverifikacija svakih 6 meseci.",
     "deca_naslov": "Deca (datum rođenja)",
-    "dete_ime": "Ime deteta {n}",
+    "dete_ime": "{n}. dete",
     "dodaj_dete": "+ Dodaj dete",
     "majkama_napomena": "Bazni iznos: 2.000 POEN/dan po detetu. Koeficijenti rastu sa brojem dece.",
     "zaposljavnje_opis": "Bićete prijavani na program Zapošljavanje. Svaki dan unosite evidenciju aktivnosti koji admin odobrava.",

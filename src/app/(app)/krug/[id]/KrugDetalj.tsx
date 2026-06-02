@@ -12,19 +12,11 @@ interface Projekat {
   createdAt: string;
 }
 
-interface PendingEnrollmentItem {
-  id: string;
-  type: string;
-  metadata: Record<string, unknown> | null;
-  createdAt: string;
-}
-
 interface ClanInfo {
   userId: string;
   pseudonim: string;
   isAdmin: boolean;
   joinedAt: string;
-  pendingEnrollments: PendingEnrollmentItem[];
 }
 
 interface KrugData {
@@ -46,7 +38,7 @@ interface Props {
   isAdmin: boolean;
 }
 
-type Tab = "info" | "clanovi" | "projekti" | "pristupnice" | "programi";
+type Tab = "info" | "clanovi" | "projekti" | "pristupnice";
 
 export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin }: Props) {
   const router = useRouter();
@@ -79,19 +71,12 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
     else { const d = await res.json(); alert(d.error); }
   }
 
-  const ukupnoPendingProgrami = krug.clanovi.reduce(
-    (s, c) => s + c.pendingEnrollments.length, 0
-  );
-
   const tabs: [Tab, string][] = [
     ["info", "Informacije"],
     ["clanovi", `Članovi (${krug.clanovi.length})`],
     ["projekti", `Projekti (${krug.projects.length})`],
     ...(canManage && krug.pristupnice.length > 0
       ? [["pristupnice", `Pristupnice (${krug.pristupnice.length})`] as [Tab, string]]
-      : []),
-    ...(canManage && ukupnoPendingProgrami > 0
-      ? [["programi", `Programi (${ukupnoPendingProgrami})`] as [Tab, string]]
       : []),
   ];
 
@@ -233,154 +218,6 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
         </div>
       )}
 
-      {/* Programi — pending enrollments i evidencije članova (admin) */}
-      {tab === "programi" && canManage && (
-        <ProgramiAdminTab krugId={krug.id} clanovi={krug.clanovi} onDone={() => router.refresh()} />
-      )}
-    </div>
-  );
-}
-
-// ── Programi admin tab ────────────────────────────────────────────────────────
-
-const labelPrograma: Record<string, string> = {
-  PED:      "Evidencija doprinosa",
-  PODRSKA_MAJKAMA:   "Podrška majkama",
-  PODRSKA_STARIJIMA: "Podrška starijima",
-  POSEBNA_BRIGA:     "Posebna briga",
-  SKOLOVANJE:        "Školovanje",
-};
-
-function ProgramiAdminTab({ krugId, clanovi, onDone }: { krugId: string; clanovi: ClanInfo[]; onDone: () => void }) {
-  const [loading, setLoading] = useState<string | null>(null);
-  const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
-
-  async function odobriEnrollment(krugId: string, enrollmentId: string, dailyAmount?: number, razlog?: string, odbij = false) {
-    setLoading(enrollmentId);
-    const res = await fetch(`/api/krugovi/${krugId}/programi/enrollments/${enrollmentId}/${odbij ? "odbij" : "odobri"}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(odbij ? { razlog } : { dailyAmount }),
-    });
-    const data = await res.json();
-    setLoading(null);
-    setPoruke((prev) => ({ ...prev, [enrollmentId]: { text: res.ok ? (odbij ? "Odbijeno." : "Odobreno.") : (data.error ?? "Greška."), ok: res.ok } }));
-    if (res.ok) setTimeout(onDone, 1200);
-  }
-
-  const svePending = clanovi.flatMap((c) =>
-    c.pendingEnrollments.map((e) => ({ tip: "enrollment" as const, pseudonim: c.pseudonim, ...e }))
-  );
-
-  if (svePending.length === 0) {
-    return (
-      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        Nema zahteva koji čekaju odobrenje.
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-3">
-      {/* Enrollment zahtevi */}
-      {svePending.map((item) => {
-        const poruka = poruke[item.id];
-        return (
-          <EnrollmentKartica
-            key={item.id}
-            id={item.id}
-            pseudonim={item.pseudonim}
-            type={item.type}
-            metadata={item.metadata}
-            createdAt={item.createdAt}
-            loading={loading === item.id}
-            poruka={poruka ?? null}
-            onOdobri={(dailyAmount) => odobriEnrollment(krugId, item.id, dailyAmount)}
-            onOdbij={(razlog) => odobriEnrollment(krugId, item.id, undefined, razlog, true)}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-function EnrollmentKartica({ id, pseudonim, type, metadata, createdAt, loading, poruka, onOdobri, onOdbij }: {
-  id: string;
-  pseudonim: string;
-  type: string;
-  metadata: Record<string, unknown> | null;
-  createdAt: string;
-  loading: boolean;
-  poruka: { text: string; ok: boolean } | null;
-  onOdobri: (dailyAmount?: number) => void;
-  onOdbij: (razlog: string) => void;
-}) {
-  const [dailyAmount, setDailyAmount] = useState("");
-  const [razlog, setRazlog] = useState("");
-  const [showOdbij, setShowOdbij] = useState(false);
-
-  const trebaIznos = type === "PED" || type === "SKOLOVANJE";
-
-  return (
-    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="text-sm font-semibold text-kolo-text">{pseudonim}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{labelPrograma[type] ?? type} · {new Date(createdAt).toLocaleDateString("sr-RS")}</p>
-        </div>
-        <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 px-2 py-0.5 rounded border border-kolo-gold-100">Na čekanju</span>
-      </div>
-
-      {metadata && Object.keys(metadata).length > 0 && (
-        <div className="bg-kolo-bg rounded-xl px-3 py-2 text-xs text-kolo-muted space-y-1">
-          {Object.entries(metadata).map(([k, v]) => (
-            <div key={k}><span className="text-kolo-muted">{k}:</span> {String(v)}</div>
-          ))}
-        </div>
-      )}
-
-      {trebaIznos && !showOdbij && (
-        <input
-          type="number"
-          placeholder="Dnevni iznos POEN (opciono)"
-          value={dailyAmount}
-          onChange={(e) => setDailyAmount(e.target.value)}
-          className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
-        />
-      )}
-
-      {!showOdbij && (
-        <div className="flex gap-2">
-          <button onClick={() => setShowOdbij(true)} disabled={loading}
-            className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-medium hover:bg-kolo-danger-light disabled:opacity-60">
-            Odbij
-          </button>
-          <button onClick={() => onOdobri(dailyAmount ? Number(dailyAmount) : undefined)} disabled={loading}
-            className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
-            {loading ? "..." : "Odobri"}
-          </button>
-        </div>
-      )}
-
-      {showOdbij && (
-        <div className="space-y-2">
-          <textarea rows={2} placeholder="Razlog odbijanja *" value={razlog} onChange={(e) => setRazlog(e.target.value)}
-            className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400 resize-none" />
-          <div className="flex gap-2">
-            <button onClick={() => setShowOdbij(false)} className="flex-1 py-2 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Odustani</button>
-            <button onClick={() => onOdbij(razlog)} disabled={!razlog.trim() || loading}
-              className="flex-1 py-2 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:bg-kolo-danger disabled:opacity-60">
-              {loading ? "..." : "Potvrdi odbijanje"}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {poruka && (
-        <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
-          {poruka.text}
-        </p>
-      )}
     </div>
   );
 }

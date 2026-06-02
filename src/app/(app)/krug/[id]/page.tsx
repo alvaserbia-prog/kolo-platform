@@ -17,12 +17,11 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
         memberships: {
           where: { leftAt: null },
           include: {
-            user: {
-              select: {
-                pseudonim: true,
-                programEnrollments: { where: { status: "PENDING" }, select: { id: true, type: true, metadata: true, createdAt: true } },
-              },
-            },
+            // Socijalni programi se prijavljuju i odobravaju isključivo kroz
+            // Fondaciju (/programi + verifikatorske potvrde) — krug nema uvid u
+            // prijave ni osetljive podatke članova (Pravilnik o programima
+            // podrške čl. 4, čl. 14).
+            user: { select: { pseudonim: true } },
           },
           orderBy: { joinedAt: "asc" },
         },
@@ -56,12 +55,6 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
           pseudonim: m.user.pseudonim,
           isAdmin: m.isAdmin,
           joinedAt: m.joinedAt.toISOString(),
-          pendingEnrollments: m.user.programEnrollments.map((e) => ({
-            id: e.id,
-            type: e.type as string,
-            metadata: e.metadata as Record<string, unknown> | null,
-            createdAt: e.createdAt.toISOString(),
-          })),
         })),
         projects: krug.projects.map((p) => ({
           id: p.id,

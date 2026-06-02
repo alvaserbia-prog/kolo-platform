@@ -108,7 +108,7 @@ Pravni osnov: legitimni interes Fondacije (čl. 12 st. 1 t. 6 ZZPL-a) i zakonska
 
 Aktiviranjem Modula 3 (Socijalni programi) u skladu sa čl. 57 Pravilnika o KOLO sistemu, sistem može obrađivati posebne kategorije podataka: status roditelja, starosnu dob, invaliditet, studentski status ili pripadnost drugoj kvalifikovanoj grupi.
 
-Fondacija ne čuva kopije podnesene dokumentacije — u sistemu ostaje samo minimalni zapis o pripadnosti kvalifikovanoj grupi i datum verifikacije statusa. Pristup unetim podacima ograničen je na lice koje obrađuje prijavu u Fondaciji. Podaci se čuvaju odvojeno od opšte evidencije aktivnosti i zaštićeni su dodatnim nivoom enkripcije. Za invaliditet, dokaz statusa je rešenje nadležnog organa — ne prikupljaju se medicinska dokumentacija ni dijagnoza.
+Fondacija ne čuva kopije podnesene dokumentacije. U sistemu se evidentira samo minimum potreban za obračun prava: za podršku majkama datumi rođenja dece (bez imena dece), za podršku starijima datum rođenja korisnika, za invaliditet datum rešenja nadležnog organa (bez broja rešenja, dijagnoze i medicinske dokumentacije), za školovanje obrazovna ustanova i smer. Pristup tim podacima ograničen je na lice koje u Fondaciji obrađuje prijavu — verifikatori i drugi korisnici nemaju uvid u njih, a podaci se vode pseudonimizovano, vezani za pseudonim korisnika, a ne za ime i prezime.
 
 Prijava na socijalni program i traženje potvrde od verifikatora vrše se isključivo uz Vaš izričit pristanak i uz pun indeks stvarnosti. Pre odobravanja, ispunjenost uslova potvrđuju Vaši verifikatori — lica koja Vas lično poznaju — pod punom odgovornošću i bez uvida u unete podatke; prijava se ne odobrava dok svi ne potvrde, a odbijanje zahteva obrazloženje. Pristankom prihvatate da Vaši verifikatori budu obavešteni da ste se prijavili za određeni program, što im može otkriti pripadnost posebnoj kategoriji; obaveštavanje se vrši isključivo unutar platforme. Pristanak možete povući u svakom trenutku.
 
@@ -144,9 +144,9 @@ Pravni osnov: pristanak korisnika (čl. 12 st. 1 t. 1 ZZPL-a), dat zasebno za sv
 
 ### Član 5 — Tehnički podaci
 
-Radi bezbednosti Platforme i sprečavanja zloupotreba prikupljamo: IP adresu, podatke o uređaju i pretraživaču i vreme i datum pristupa.
+Radi bezbednosti Platforme i sprečavanja zloupotreba, na nivou hosting infrastrukture beleže se IP adresa, podaci o uređaju i pretraživaču i vreme pristupa.
 
-Svaki pristup podacima se beleži — ko je pristupio, kad je pristupio, kojim podacima je pristupio i sa kog uređaja. Evidencija pristupa čuva se u zaštićenom formatu koji se ne može retroaktivno menjati i dostupna je licu za zaštitu podataka (DPO).
+Unutar Platforme, administrativne radnje nad podacima korisnika i otkrivanje kontakt podataka na tabli zahteva za jemstvo beleže se u revizijskom dnevniku (ko je izvršio radnju, kada i koju). Revizijski dnevnik dostupan je licu za zaštitu podataka (DPO).
 
 Svrha obrade: bezbednost Platforme, sprečavanje zloupotreba, detekcija neovlašćenog pristupa, tehnička podrška.
 
@@ -280,11 +280,11 @@ Pravo na pritužbu: ako smatrate da je obrada vaših podataka nezakonita, možet
 
 Fondacija primenjuje tehničke i organizacione mere zaštite podataka primerene riziku, u skladu sa čl. 51 ZZPL-a.
 
-Tehničke mere obuhvataju: šifrovanje podataka u prenosu TLS enkripcijom (minimalno verzija 1.2), šifrovanje podataka u mirovanju na nivou skladištenja sa razdvojenim čuvanjem ključeva za enkripciju, pseudonimizaciju evidencije i razdvajanje identifikacionih od obračunskih podataka.
+Tehničke mere obuhvataju: šifrovanje podataka u prenosu TLS enkripcijom (minimalno verzija 1.2), šifrovanje podataka u mirovanju na nivou hosting infrastrukture, pseudonimizaciju evidencije (zapisi su vezani za pseudonim, ne za ime i prezime) i razdvajanje identifikacionih od obračunskih podataka u zasebne evidencije.
 
 Organizacione mere obuhvataju: kontrolu pristupa po principu minimalne neophodnosti — svaki korisnik sistema, administrator i proces ima pristup samo onim podacima koji su neophodni za obavljanje njegove funkcije; višefaktorsku autentifikaciju za administrativni pristup infrastrukturi; obavezu čuvanja poverljivosti za sva lica koja imaju pristup podacima korisnika; redovnu obuku zaposlenih i saradnika o zaštiti podataka; redovne bezbednosne provere i penetraciono testiranje sistema.
 
-Evidencija doprinosa u Protokolu zaštićena je od neovlašćene promene — svaki zapis je vremenski označen i vezan za prethodno stanje evidencije, tako da retroaktivna promena zapisa nije moguća bez narušavanja integriteta celokupnog lanca evidencije.
+Integritet evidencije doprinosa u Protokolu štiti se zero-sum invarijantom — zbir svih stanja u sistemu uvek je jednak nuli i automatski se proverava — uz atomaran (sve-ili-ništa) upis svake promene i vremensko označavanje zapisa; administrativne radnje beleže se u revizijskom dnevniku. Svako odstupanje od zero-sum invarijante je vidljivo i predmet je provere.
 
 U slučaju povrede zaštite podataka koja može ugroziti prava i slobode korisnika, obavestitićemo Poverenika u roku od 72 sata od saznanja za incident (čl. 52 ZZPL-a), a vas bez nepotrebnog odlaganja ako incident može prouzrokovati visok rizik za vaša prava i slobode (čl. 53 ZZPL-a).
 

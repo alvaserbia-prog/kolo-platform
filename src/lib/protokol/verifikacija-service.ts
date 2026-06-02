@@ -178,20 +178,16 @@ export async function izvrsiVerifikaciju(
         );
       }
 
-      // Provera da verifikovani može da primi (još jednu) verifikaciju.
-      // POCETNI (UO Fondacije) i NOSILAC_ZRNA su posebni statusi — ne primaju lične
-      // verifikacije ovim tokom. REGULARNI može da primi DODATNE verifikacije od
-      // različitih verifikatora dok ne dostigne maksimalan indeks od 100%
-      // (Pravilnik o dokazu stvarnosti čl. 3: 1 početni + do 10 ličnih).
-      if (
+      // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju početne
+      // korisnike i nosioce ZRNA po redovnim pravilima lanca jemstva. Njihov indeks
+      // raste kao evidencija, ali bez funkcionalnog efekta — pristup i kapacitet
+      // proizlaze iz statusa, ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
+      const verifikovaniJePoseban =
         verifikovani.tipKorisnika === TipKorisnika.POCETNI ||
-        verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA
-      ) {
-        throw new VerifikacijaGreska(
-          "Ovaj korisnik ima poseban status i ne prima dodatne verifikacije.",
-          409
-        );
-      }
+        verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
+
+      // REGULARNI korisnik sa punim indeksom (100%) nema šta da dobije dodatnom
+      // verifikacijom. Posebni statusi nemaju gornju granicu evidencije (cap je 100).
       if (
         verifikovani.tipKorisnika === TipKorisnika.REGULARNI &&
         verifikovani.indeksStvarnosti >= MAX_INDEKS
@@ -244,16 +240,25 @@ export async function izvrsiVerifikaciju(
         },
       });
 
-      // Ažuriraj verifikovanog: postaje (ostaje) REGULARNI; indeks = broj veza × 10.
+      // Ažuriraj verifikovanog: indeks = broj veza × 10 (cap 100).
       // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
       const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
         where: { verifikovaniId: verifikovani.id },
       });
-      const noviIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
+      const izracunatiIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
+      // Za posebne statuse (POCETNI/NOSILAC_ZRNA) indeks je evidencija bez
+      // funkcionalnog efekta: zadržavamo status i nikad ne umanjujemo postojeći
+      // indeks (npr. bootstrap 10% početnog korisnika iz čl. 14, koji ne potiče iz
+      // lanca jemstva). NEVERIFIKOVAN/REGULARNI postaje (ostaje) REGULARNI.
+      const noviIndeks = verifikovaniJePoseban
+        ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
+        : izracunatiIndeks;
       await tx.user.update({
         where: { id: verifikovani.id },
         data: {
-          tipKorisnika: TipKorisnika.REGULARNI,
+          tipKorisnika: verifikovaniJePoseban
+            ? verifikovani.tipKorisnika
+            : TipKorisnika.REGULARNI,
           indeksStvarnosti: noviIndeks,
           verified: true,
           // Zadrži datum prve verifikacije pri dodatnim verifikacijama.

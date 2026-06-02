@@ -399,7 +399,7 @@
     "smer": "Program / szak *",
     "skolovanje_napomena": "Az admin állítja be a napi összeget. Újraellenőrzés 6 havonta.",
     "deca_naslov": "Gyermekek (születési dátum)",
-    "dete_ime": "{n}. gyermek neve",
+    "dete_ime": "{n}. gyermek",
     "dodaj_dete": "+ Gyermek hozzáadása",
     "majkama_napomena": "Alapösszeg: 2 000 POEN/nap gyermekenként. Az együtthatók a gyermekek számával nőnek.",
     "zaposljavnje_opis": "Feliratkozik a Foglalkoztatás programra. Minden nap tevékenységi nyilvántartást küld be admin jóváhagyásra.",

@@ -399,7 +399,7 @@
     "smer": "Program / course *",
     "skolovanje_napomena": "Admin sets daily amount. Re-verification every 6 months.",
     "deca_naslov": "Children (date of birth)",
-    "dete_ime": "Child {n} name",
+    "dete_ime": "Child {n}",
     "dodaj_dete": "+ Add child",
     "majkama_napomena": "Base amount: 2,000 POEN/day per child. Coefficients grow with number of children.",
     "zaposljavnje_opis": "You will be enrolled in the Employment program. Each day you submit an activity record for admin approval.",

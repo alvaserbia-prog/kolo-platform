@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionType } from "@/generated/prisma/client";
+import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 export const UKUPNO_ZRNA = 1_000_000;
 export const PROTOKOL_WALLET_ID = "banka-singleton";
@@ -112,6 +112,16 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           update: { slobodno: { increment: zrnaDobija } },
         });
 
+        // Pravilnik čl. 29-30: verifikovani korisnik koji upiše ZRNO postaje
+        // nosilac ZRNA. (POCETNI već ima sva prava nosioca ZRNA — kapacitet i
+        // glasačku moć iz aktivnog ZRNA — pa zadržava svoj bootstrap status.)
+        if (z.user.tipKorisnika === TipKorisnika.REGULARNI) {
+          await tx.user.update({
+            where: { id: z.userId },
+            data: { tipKorisnika: TipKorisnika.NOSILAC_ZRNA },
+          });
+        }
+
         await tx.zrnoUpisZahtev.update({
           where: { id: z.id },
           data: { status: "EXECUTED", zrnaKupljeno: zrnaDobija, poenPlaceno },
@@ -154,6 +164,18 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           where: { userId: z.userId },
           data: { slobodno: { decrement: z.kolicina } },
         });
+
+        // Pravilnik čl. 30: nosilac ZRNA čije je ZRNO u celosti otpisano (ni
+        // slobodnog ni aktivnog) ponovo ima status verifikovanog korisnika.
+        // Otpis dira samo slobodno; aktivno mora prethodno biti otključano.
+        const preostalo =
+          z.user.zrnoStanje!.slobodno - z.kolicina + z.user.zrnoStanje!.aktivno;
+        if (preostalo <= 0 && z.user.tipKorisnika === TipKorisnika.NOSILAC_ZRNA) {
+          await tx.user.update({
+            where: { id: z.userId },
+            data: { tipKorisnika: TipKorisnika.REGULARNI },
+          });
+        }
 
         await tx.zrnoOtpisZahtev.update({
           where: { id: z.id },

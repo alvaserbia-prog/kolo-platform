@@ -24,7 +24,7 @@ Datum poslednje izmene: 02.06.2026.
 | **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača], na osnovu ugovora o obradi u skladu sa zakonom. |
 | **Prenos u treću zemlju** | [Da/Ne — uskladiti sa čl. 9 Politike privatnosti] |
 | **Rok čuvanja** | Dok korisnički nalog ostaje aktivan. Po prestanku statusa, email adresa se briše, a preostali podaci se anonimizuju u skladu sa čl. 34 Pravilnika i čl. 11 Politike privatnosti. |
-| **Mere zaštite** | Hashiranje lozinke, TLS enkripcija u prenosu (min. verzija 1.2), enkripcija u mirovanju sa razdvojenim čuvanjem ključeva, kontrola pristupa po principu minimalne neophodnosti, višefaktorska autentifikacija za administrativni pristup. |
+| **Mere zaštite** | Hashiranje lozinke, TLS enkripcija u prenosu (min. verzija 1.2), enkripcija u mirovanju na nivou hosting infrastrukture, kontrola pristupa po principu minimalne neophodnosti, višefaktorska autentifikacija za administrativni pristup. |
 
 **Radnja obrade br. 2 — Dokaz stvarnosti (verifikacija korisnika)**
 
@@ -61,7 +61,7 @@ Datum poslednje izmene: 02.06.2026.
 | **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača]. Evidencija je javna u pseudonimnom obliku — verifikovani korisnici mogu videti iznose, vremenske oznake i pseudonime strana. |
 | **Prenos u treću zemlju** | [Da/Ne] |
 | **Rok čuvanja** | 10 godina od nastanka, u skladu sa poreskim i računovodstvenim propisima, u pseudonimnom obliku. Po prestanku statusa korisnika, identifikacioni podaci se brišu, a numerička istorija se zadržava pod identifikatorom koji ne omogućava identifikaciju. |
-| **Mere zaštite** | Pseudonimizacija, integritet lanca evidencije (svaki zapis vremenski označen i vezan za prethodno stanje), TLS enkripcija, enkripcija u mirovanju. |
+| **Mere zaštite** | Pseudonimizacija, integritet evidencije (zero-sum invarijanta sa automatskom proverom, atomaran upis i vremensko označavanje zapisa), TLS enkripcija, enkripcija u mirovanju na nivou hosting infrastrukture. |
 
 **Radnja obrade br. 5 — Donacije fizičkih lica**
 
@@ -98,7 +98,7 @@ Datum poslednje izmene: 02.06.2026.
 | **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača]. |
 | **Prenos u treću zemlju** | [Da/Ne] |
 | **Rok čuvanja** | 12 meseci. |
-| **Mere zaštite** | Evidencija pristupa čuva se u zaštićenom formatu koji se ne može retroaktivno menjati, kontrola pristupa ograničena na DPO i administratore bezbednosti, TLS enkripcija. |
+| **Mere zaštite** | Administrativne radnje i otkrivanje kontakt podataka beleže se u revizijskom dnevniku, kontrola pristupa ograničena na lice za zaštitu podataka i administratore bezbednosti, TLS enkripcija. |
 
 **Radnja obrade br. 8 — Automatizovano odlučivanje**
 
@@ -137,7 +137,7 @@ Datum poslednje izmene: 02.06.2026.
 | **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača]. Lice koje obrađuje prijavu u Fondaciji ima uvid u unete podatke. Verifikatori podnosioca primaju isključivo zahtev za potvrdu (naziv programa i pseudonim podnosioca koga lično poznaju) — bez uvida u unete podatke. |
 | **Prenos u treću zemlju** | [Da/Ne] |
 | **Rok čuvanja** | Do povlačenja pristanka od strane korisnika. Zapisi o potvrdama verifikatora (potvrđeno/odbijeno, obrazloženje odbijanja) čuvaju se uz prijavu dok status traje. |
-| **Mere zaštite** | Podaci se čuvaju odvojeno od opšte evidencije aktivnosti i dostupni su samo licu koje obrađuje prijavu; verifikatori nemaju uvid u unete podatke. Prijava zahteva pun indeks stvarnosti (100%) i izričit pristanak. Tvrda blokada: prijava se ne odobrava dok svi verifikatori ne potvrde; odbijanje zahteva obrazloženje. Obaveštavanje verifikatora isključivo unutar platforme (in-app), bez spoljnih kanala. Minimizacija: verifikatoru se ne prikazuje sadržaj prijave. |
+| **Mere zaštite** | Podaci se vode pseudonimizovano i dostupni su samo licu koje u Fondaciji obrađuje prijavu; verifikatori i drugi korisnici nemaju uvid u unete podatke. Minimizacija: evidentiraju se samo datumi (datumi rođenja dece bez imena, datum rešenja o invaliditetu bez broja/dijagnoze). Prijava zahteva pun indeks stvarnosti (100%) i izričit pristanak. Tvrda blokada: prijava se ne odobrava dok svi verifikatori ne potvrde; odbijanje zahteva obrazloženje. Obaveštavanje verifikatora isključivo unutar platforme (in-app), bez spoljnih kanala. Minimizacija: verifikatoru se ne prikazuje sadržaj prijave. |
 
 **Radnja obrade br. 11 — Podaci maloletnih lica (Modul 4 — Deca)**
 
