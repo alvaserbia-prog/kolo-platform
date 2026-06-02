@@ -1,8 +1,40 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
-import { ProgramType, TransactionType } from "@/generated/prisma/client";
+import { MAX_INDEKS } from "./dokaz-stvarnosti";
+import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
+
+// ── Reverifikacija / obustava socijalnih programa (Pravilnik o programima podrške) ──
+
+/** Broj dana do reverifikacije po tipu programa (null = nema periodične revizije). */
+export function danaDoReverifikacije(type: ProgramType): number | null {
+  if (type === "POSEBNA_BRIGA") return 365; // godišnja revizija (čl. 12)
+  if (type === "SKOLOVANJE") return 183; // po studijskoj godini (čl. 13)
+  return null; // MAJKAMA/STARIJIMA — stabilne činjenice, bez periodične revizije
+}
+
+export type RevizijaRazlog = "revizija" | "indeks";
+
+/**
+ * Da li ACTIVE socijalni program treba obustaviti (čista, testabilna odluka):
+ *  - "revizija": prošao rok `nextReverifikacija`, status nije ponovo potvrđen (čl. 12);
+ *  - "indeks": REGULARNI korisnik ima indeks stvarnosti ispod 100% — osnov na kojem je
+ *    program odobren (pun indeks + potvrda svih verifikatora) više ne važi.
+ * Vraća null ako program ostaje aktivan.
+ */
+export function razlogObustaveProgram(
+  args: { nextReverifikacija: Date | null; tipKorisnika: TipKorisnika; indeksStvarnosti: number },
+  sada: Date
+): RevizijaRazlog | null {
+  if (args.nextReverifikacija != null && args.nextReverifikacija.getTime() <= sada.getTime()) {
+    return "revizija";
+  }
+  if (args.tipKorisnika === TipKorisnika.REGULARNI && args.indeksStvarnosti < MAX_INDEKS) {
+    return "indeks";
+  }
+  return null;
+}
 
 // ── Koeficijenti po rednom broju deteta (Pravilnik o programima podrške) ──────
 // Progresivna skala: 1.→1,0 2.→1,2 3.→1,5 4.→2,0 5.→3,0 6.→4,5 7.→6,0 8.→8,0 9.→10,0
@@ -24,7 +56,7 @@ function godinaRazlike(rodjendan: Date, danas: Date): number {
 
 // ── Iznosi po programu ────────────────────────────────────────────────────────
 
-type MajkeMetadata = { deca: { ime: string; datumRodjenja: string }[] };
+type MajkeMetadata = { deca: { datumRodjenja: string }[] };
 type StarijiMetadata = { datumRodjenja: string };
 
 export function izracunajMajke(metadata: unknown, danas: Date): number {

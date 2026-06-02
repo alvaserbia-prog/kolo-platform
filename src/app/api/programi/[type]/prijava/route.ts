@@ -63,11 +63,13 @@ export async function POST(
       { status: 400 }
     );
 
-  // Proveri duplikat
+  // Proveri duplikat — ponovna prijava dozvoljena samo iz REJECTED ili INACTIVE
+  // (odbijena, odnosno obustavljena reverizijom/padom indeksa).
   const vec = await prisma.programEnrollment.findUnique({
     where: { userId_type: { userId: session.user.id, type: programType } },
   });
-  if (vec && vec.status !== "REJECTED")
+  const mozeReapply = vec != null && (vec.status === "REJECTED" || vec.status === "INACTIVE");
+  if (vec && !mozeReapply)
     return NextResponse.json({ error: "Već ste prijavljeni na ovaj program." }, { status: 400 });
 
   const metadata = buildMetadata(programType, body);
@@ -83,7 +85,7 @@ export async function POST(
   // Kreiranje/obnova prijave + potvrda za verifikatore — atomarno.
   await prisma.$transaction(async (tx) => {
     let enrollmentId: string;
-    if (vec?.status === "REJECTED") {
+    if (mozeReapply && vec) {
       const enr = await tx.programEnrollment.update({
         where: { id: vec.id },
         data: {
@@ -130,15 +132,21 @@ export async function POST(
 function buildMetadata(type: ProgramType, body: Record<string, unknown>): any {
   switch (type) {
     case "PODRSKA_MAJKAMA": {
-      const deca = (body.deca as { ime: string; datumRodjenja: string }[]) ?? [];
-      return { deca: deca.map((d) => ({ ime: d.ime?.trim(), datumRodjenja: d.datumRodjenja })) };
+      // Minimizacija (čl. 14): čuva se SAMO datum rođenja deteta (za uzrast i redni
+      // broj u obračunu). Ime deteta se ne prikuplja — nije potrebno ni za šta.
+      const deca = (body.deca as { datumRodjenja: string }[]) ?? [];
+      return { deca: deca.map((d) => ({ datumRodjenja: d.datumRodjenja })) };
     }
     case "PODRSKA_STARIJIMA":
       return { datumRodjenja: body.datumRodjenja as string };
     case "POSEBNA_BRIGA":
-      // Dokaz statusa je rešenje o invaliditetu nadležnog organa (čl. 12) — NE dijagnoza
-      // ni medicinska dokumentacija. Čuva se referenca (broj/organ), ne posebne kategorije.
-      return { resenjeInvaliditet: (body.resenjeInvaliditet as string)?.trim() ?? "" };
+      // Dokaz statusa je rešenje o invaliditetu nadležnog organa (čl. 12). Minimizacija
+      // (čl. 14): evidentira se SAMO datum rešenja (donošenje + opcioni istek) — ne
+      // broj/organ, ne slobodan tekst, ne dijagnoza ni medicinska dokumentacija.
+      return {
+        datumResenja: (body.datumResenja as string) ?? "",
+        datumIsteka: (body.datumIsteka as string) ?? "",
+      };
     case "SKOLOVANJE":
       return { ustanova: (body.ustanova as string)?.trim() ?? "", program: (body.program as string)?.trim() ?? "" };
     default:

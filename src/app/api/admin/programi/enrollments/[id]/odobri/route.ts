@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { labelPrograma } from "@/lib/protokol/programi";
+import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
 
 // POST /api/admin/programi/enrollments/[id]/odobri
 export async function POST(
@@ -38,6 +38,13 @@ export async function POST(
   const body = await req.json().catch(() => ({}));
   const dailyAmount = body.dailyAmount ? Number(body.dailyAmount) : undefined;
 
+  // Reverifikacija statusa (Pravilnik o programima podrške čl. 12/13).
+  const danaDoRevizije = danaDoReverifikacije(enrollment.type);
+  const nextReverifikacija =
+    danaDoRevizije != null
+      ? new Date(Date.now() + danaDoRevizije * 24 * 60 * 60 * 1000)
+      : undefined;
+
   await prisma.programEnrollment.update({
     where: { id },
     data: {
@@ -45,10 +52,7 @@ export async function POST(
       approvedById: session.user.id,
       approvedAt: new Date(),
       ...(dailyAmount != null ? { dailyAmount } : {}),
-      // Za SKOLOVANJE: reverifikacija za 6 meseci
-      ...(enrollment.type === "SKOLOVANJE"
-        ? { nextReverifikacija: new Date(Date.now() + 183 * 24 * 60 * 60 * 1000) }
-        : {}),
+      ...(nextReverifikacija ? { nextReverifikacija } : {}),
     },
   });
 

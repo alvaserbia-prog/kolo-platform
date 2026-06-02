@@ -69,7 +69,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **Banka → Protokol** u UI/kodu (interni identifikator wallet-a ostao `"banka-singleton"`)
 - ✅ **Faze sistema** — `faza-sistema.ts`, auto prelaz Faza 1 → Faza 2 na 1.000.000 POEN, NOSILAC_ZRNA verifikuje operativni doprinos
 - ✅ **DCO + CC BY-SA** označavanje (`DCO`, `CONTRIBUTING.md`, `.github/workflows/dco.yml`)
-- 🟡 **Tabela donacija u kodu ima 18 nivoa (do 5,00×)** — dokumentacija (`donacije_3_7_3.md` čl. 4) propisuje **11 nivoa / maks 2,00×**. Treba uskladiti (vidi GAP)
+- ✅ **Tabela donacija usklađena** — `donacija.ts` `RANG_TABELA` ima **11 nivoa, 1,00×→2,00×**, identično `donacije_3_7_3.md` čl. 4 (testovi pokrivaju)
 - 🟡 **Operativni doprinos još na modelu satnice** (1.000–2.500 POEN/sat, admin odobrava) — treba model **predloženog POEN-a × min(1, L/P)** sa verifikacijom nosilaca ZRNA (vidi GAP)
 - 🟡 **„kurs" u UI/prevodima** — kanonski termin je **obračunski koeficijent** (ZRNO) / **koeficijent evidencije donacija**; interni identifikatori mogu ostati
 - 🔴 Moduli (Zadruga, Modul Deca, internacionalizacija, Glava VIII) — nisu fokus razvoja po odluci vlasnika
@@ -256,7 +256,7 @@ docs/             — interne radne beleške (nije normativa)
 ### Donacije
 - Donacije fizičkih lica Fondaciji (RSD), admin potvrđuje, evidencija POEN-a.
 - **Koeficijentni model (Pravilnik o pokroviteljstvu i donacijama 3.7.3, čl. 4):** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju; `Math.round()`.
-- **Dokumentacija: 11 nivoa, 1,00× (2.000 RSD) → 2,00× (5.000.000 RSD).** 🟡 **Kod (`donacija.ts` `RANG_TABELA`) još ima 18 nivoa do 5,00× — GAP, treba skratiti na 11 / maks 2,00×.**
+- **11 nivoa, 1,00× (2.000 RSD) → 2,00× (5.000.000 RSD)** — kod (`donacija.ts` `RANG_TABELA`) usklađen sa `donacije_3_7_3.md` čl. 4. ✅
 - Jedna transakcija „Bonus za donaciju iznos X". Logika: `donacija.ts` (`nivoZaKumulativ`, `izracunajPoenZaDonaciju`, `evidentirajDonaciju`).
 
 ### Osnivački doprinos (implementiran)
@@ -334,7 +334,7 @@ docs/             — interne radne beleške (nije normativa)
 - `emisija.ts` — `emitujPoen()`: emisija + zero-sum validacija
 - `programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
 - `pokrovitelj.ts` — pun tok prijave, fiksna tabela 7 nivoa, `bonusZaNivo()`, `izracunajNivo()`
-- `donacija.ts` — `nivoZaKumulativ()`, `izracunajPoenZaDonaciju()`, `evidentirajDonaciju()` (🟡 18 nivoa, treba 11)
+- `donacija.ts` — `nivoZaKumulativ()`, `izracunajPoenZaDonaciju()`, `evidentirajDonaciju()` (11 nivoa, maks 2,00× ✅)
 - `krug.ts` — bonus rasta Kruga (ne ulazi u dnevni limit)
 - `zrno.ts` — `UKUPNO_ZRNA`, `MINIMUM_POEN_ZA_UPIS_ZRNA`, obračunski koeficijent (`trendsKurs`/`poslednjiKurs`), noćna obrada, `glasackaMoc()`
 - `osnivacki.ts` — osnivački kanal (120 × 20.000, granica 2.4M, raspodela)
@@ -356,7 +356,7 @@ docs/             — interne radne beleške (nije normativa)
 ## Nezavršeni TODO / preostali GAP-ovi (mapirano na v3.7.5/3.7.4/3.7.3/3.7.2)
 
 ### Stvarni GAP-ovi (dokumentacija propisuje, kod radi drugačije)
-1. **Tabela donacija 18 → 11 nivoa, maks 5,00× → 2,00×** (`donacija.ts` `RANG_TABELA`; dokument `donacije_3_7_3.md` čl. 4). **PRIORITET** — ide uživo pri objavi.
+1. ✅ **REŠENO — Tabela donacija** (`donacija.ts` `RANG_TABELA`): 11 nivoa, 1,00×→2,00×, usklađeno sa `donacije_3_7_3.md` čl. 4 i testovima.
 2. **Veto prag `3× prosek` → vrednost iz posebnog pravilnika** (`fondacija.ts:100`). Pravilnik čl. 49 delegira prag; „3×" nije tačan standard.
 3. **Operativni doprinos: model satnice → predloženi POEN × min(1, L/P)** + verifikacija nosilaca ZRNA/UO umesto admin odobravanja (Pravilnik čl. 36; `operativni_3_7_2.md`).
 4. **Konsolidacija PED + doprinos-oglasi** u jedan tok (`/programi/ped` + `DoprinosEvidencija` vs `/doprinos-oglasi` + `DoprinosOglas/OglasPrijava/OglasEvidencija`). Razrešiti i18n ključ `useTranslations("ped")`.
@@ -370,7 +370,7 @@ docs/             — interne radne beleške (nije normativa)
 10. **Unutrašnje odlučivanje Kruga / ovlašćena lica (čl. 55)** — poseban pravilnik o krugovima; `KrugClanstvo.isAdmin` postoji bez formalnog ograničenja broja.
 11. **Rešavanje sporova (čl. 79)** — sud (obligaciono pravo); interni mehanizmi opcioni. Postoji samo `PrigovorNaOdluku`.
 12. **Suspenzija — mehanika u Uslovima (čl. 33)** — `suspendedAt` postoji; rok/auto-ukidanje delegirani Uslovima.
-13. **Reverifikacija u socijalnim programima** — programski pravilnici; polje `nextReverifikacija` postoji, auto-tok nije.
+13. ✅ **REŠENO — Reverifikacija socijalnih programa.** `nextReverifikacija` se postavlja pri odobravanju (POSEBNA_BRIGA 365d / SKOLOVANJE 183d); cron `/api/cron/programi-revizija` (vercel.json, 23:00) deaktivira ACTIVE prijavu kad prođe rok ili REGULARNI indeks padne ispod 100% → INACTIVE + notifikacija; reapply dozvoljen iz INACTIVE. Čiste funkcije `danaDoReverifikacije`/`razlogObustaveProgram` u `programi.ts` (testirano).
 14. **Pseudonim — limit izmene** — `pseudonimChangedAt` postoji; limit nije propisan Pravilnikom (Uslovi).
 15. **CC BY-SA označavanje sadržaja na nivou pojedinačnog dela** — bez formalnog mehanizma.
 16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
@@ -380,4 +380,4 @@ docs/             — interne radne beleške (nije normativa)
 18. **Git okruženje:** uvek `git fetch origin main` pre poređenja (lokalni `main` u kontejneru ume da bude zastareo).
 
 ### Procena pokrivenosti
-**Pravilnik v3.7.5 je implementiran ~90%.** Osnovni mehanizmi + dokaz stvarnosti, osnivački doprinos, zaštitni veto, verzionisanje Pravilnika, tabla jemstva, pun tok pokroviteljstva, gradirana vidljivost, faze sistema — pokriveni. Preostali GAP-ovi su parametarski/terminološki (donacije 18→11, veto prag + nova formulacija 3.7.5, pokrovitelj+preduzetnik, operativni model, „kurs", verzijske labele) i moduli koji se svesno odlažu (Zadruga, Modul Deca).
+**Pravilnik v3.7.5 je implementiran ~90%.** Osnovni mehanizmi + dokaz stvarnosti, osnivački doprinos, zaštitni veto, verzionisanje Pravilnika, tabla jemstva, pun tok pokroviteljstva, gradirana vidljivost, faze sistema — pokriveni. Preostali GAP-ovi su parametarski/terminološki (veto prag + nova formulacija 3.7.5, pokrovitelj+preduzetnik, operativni model, „kurs", verzijske labele) i moduli koji se svesno odlažu (Zadruga, Modul Deca).
