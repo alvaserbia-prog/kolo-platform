@@ -481,34 +481,30 @@ Donirati može svaki verifikovani korisnik. Fondacija na zahtev izdaje potvrdu o
     pitanja: [
       {
         id: 47,
-        pitanje: `Da li je iko od regulatora (NBS, Poreska, Poverenik, APR) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
-        odgovor: `Budimo iskreni: trenutno ne postoji pisano mišljenje nekog regulatora koje kaže "ovo je legalno". Niti Narodna banka, niti Poreska uprava, niti Poverenik, niti APR nisu izdali takvu potvrdu, i mi ti to ne predstavljamo drugačije.
+        pitanje: `Da li je iko od regulatora (NBS, Poreska, Poverenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
+        odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost — ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
 
 Ono na čemu sistem počiva nije nečija dozvola, nego sopstvena pravna konstrukcija. POEN po pravilima nije novac, valuta, elektronski novac, platno sredstvo ni digitalna imovina, i ne može se pretvoriti u nešto sa vrednošću van sistema. Ažuriranje evidencije POEN-a između korisnika nije platna transakcija u smislu propisa o platnim uslugama. Za samu razmenu dobara i usluga između ljudi važe opšta pravila obligacionog prava, a sporovi se vode pred nadležnim sudom. Pravna pozicija sistema, dakle, proizlazi iz toga kako je sistem strukturno postavljen, a ne iz spoljne saglasnosti.
 
-Što se poreza tiče, kako će se ove razmene tretirati u poreskom i fiskalnom smislu jeste pitanje koje je predmet dijaloga sa nadležnim organima i ne ukida tvoje postojeće obaveze ako obavljaš delatnost. Fondacija ne pruža poreski savet i ti si odgovoran za sopstvene poreske obaveze.
+Što se poreza tiče, način na koji će se ove razmene tretirati u poreskom i fiskalnom smislu ne ukida tvoje postojeće obaveze ako obavljaš delatnost. Fondacija ne pruža poreski savet i ti si odgovoran za sopstvene poreske obaveze.
 
 Za zaštitu ličnih podataka uvek imaš pravo da se obratiš Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti.
 
-I poslednje, pošteno: izmene propisa ili tumačenja regulatora su rizik koji treba da imaš u vidu pre nego što se uključiš.`,
+Izmene propisa ili tumačenja regulatora su rizik koji treba da imaš u vidu pre nego što se uključiš.`,
       },
       {
         id: 48,
         pitanje: `Redovno prodajem viškove (med, rakija, zimnica) ili pružam zanatske usluge — treba li mi račun, PDV ili registrovana delatnost? Ko snosi porez?`,
-        odgovor: `Kratko: KOLO ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime, ali ti ne ukida obaveze koje već imaš po opštim propisima.
+        odgovor: `KOLO ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime, ali ti ne ukida obaveze koje već imaš po opštim propisima.
 
-Zašto je tako? Razmena dobara i usluga među korisnicima nije konstruisana kao klasična prodaja, a sam prenos POEN-a nije plaćanje novcem u smislu propisa o platnim uslugama — POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POEN-a, ali ne vodi tvoje poreske knjige niti izdaje račune.
+Razmena dobara i usluga među korisnicima nije konstruisana kao klasična prodaja, a sam prenos POEN-a nije plaćanje novcem u smislu propisa o platnim uslugama — POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POEN-a, ali ne vodi tvoje poreske knjige niti izdaje račune.
 
-To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovno i u obimu koji liči na delatnost, na tebe se primenjuju opšti propisi kao i van platforme. Fondacija ne pruža poreski savet i nije strana u tvojoj razmeni — za ispunjenje, kvalitet i rizik odgovaraš ti i druga strana po opštim pravilima obligacionog prava, a za sopstvene poreske obaveze odgovoran si ti.
-
-Posebno pazi na hranu i piće. Promet domaće hrane, rakije i sličnih proizvoda u nekim slučajevima ulazi u posebne propise (bezbednost hrane, akcize, uslovi proizvodnje). Ako planiraš da to radiš redovno, najbezbednije je da se posavetuješ sa knjigovođom ili nadležnim organom kako bi znao šta tačno tebi treba (registracija, evidencija, eventualni porez).
-
-Iskreno o granici: precizan poreski tretman primarnih poljoprivrednih proizvoda i alkohola (akcize) još nije do kraja razrađen u našoj dokumentaciji — to je deo dijaloga sa nadležnim organima. Zato ti ne možemo dati konačan odgovor "da/ne" za baš tvoj slučaj; možemo ti reći da KOLO te obaveze ne preuzima umesto tebe.`,
+To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovno i u obimu koji liči na delatnost, na tebe se primenjuju opšti propisi kao i van platforme. Fondacija ne pruža poreski savet i nije strana u tvojoj razmeni — za ispunjenje, kvalitet i rizik odgovaraš ti i druga strana po opštim pravilima obligacionog prava, a za sopstvene poreske obaveze odgovoran si ti.`,
       },
       {
         id: 49,
         pitanje: `Utiče li učešće u KOLU / POEN na moju penziju ili socijalna davanja?`,
-        odgovor: `Sam POEN ne bi trebalo da utiče na tvoju penziju ni na socijalna davanja.
+        odgovor: `POEN ne utiče na tvoju penziju ni na socijalna davanja.
 
 POEN nije novac, nije zarada ni prihod — to je interni zapis u evidenciji o tome šta si dao zajednici, i ne može se pretvoriti u sredstvo sa vrednošću van sistema. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigde kao tvoj prihod.
 
@@ -536,7 +532,7 @@ Da znaš o kolikoj je vrednosti reč, koristi se orijentir da je 1 POEN otprilik
         pitanje: `Da li je Fondacija obveznik propisa o sprečavanju pranja novca (AML/KYC) i identifikuje li donatore?`,
         odgovor: `Fondacija nije finansijska institucija i ne posluje novcem korisnika — POEN nije novac, a razmena među korisnicima nije platna transakcija. Po svojoj delatnosti Fondacija nije obveznik propisa o sprečavanju pranja novca i finansiranja terorizma.
 
-Donatori se ipak ne primaju anonimno. Donacije fizičkih lica primaju se uplatom na račun Fondacije, sa verifikovanih bankovnih računa — pa identifikaciju uplatioca i proveru porekla sredstava sprovodi sam bankarski sistem, po svojim propisima. Pokrovitelji su pravna lica koja se identifikuju ugovorom o donaciji.
+Donatori se ipak ne primaju anonimno. Donacije fizičkih lica primaju se uplatom na račun Fondacije, sa verifikovanih bankovnih računa — pa identifikaciju uplatioca i proveru porekla sredstava sprovodi sam bankarski sistem, po svojim propisima. Pokrovitelji su pravna lica i preduzetnici koji se identifikuju ugovorom o donaciji.
 
 Podatke o donacijama Fondacija čuva u skladu sa propisima o finansijskom izveštavanju i čini ih dostupnim nadležnim organima — uključujući Poresku upravu i Upravu za sprečavanje pranja novca — kada to zakon nalaže.`,
       },
