@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Registar radnji obrade — KOLO",
   description: "Registar radnji obrade podataka o ličnosti, verzija 3.7.5",
-};
+  path: "/radnje-obrade",
+});
 
 export default async function RadnjeObradePage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "radnje_obrade_3_7_5.md");

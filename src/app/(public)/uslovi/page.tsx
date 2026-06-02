@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Uslovi korišćenja — KOLO",
   description: "Uslovi korišćenja KOLO platforme, verzija 3.7.3",
-};
+  path: "/uslovi",
+});
 
 export default async function UsloviPage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "uslovi_koriscenja_3_7_3.md");

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Pravilnici KOLO sistema — KOLO",
   description: "Indeks pravilnika KOLO sistema, verzija 3.7.0",
-};
+  path: "/pravilnik",
+});
 
 const PRAVILNICI = [
   {

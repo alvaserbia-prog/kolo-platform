@@ -1,4 +1,11 @@
-export const metadata = { title: "Zajedničko dobro i licence — KOLO" };
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+  title: "Zajedničko dobro i licence — KOLO",
+  description:
+    "Zajedničko dobro KOLO sistema — softver pod AGPL-3.0 i sadržaj pod CC BY-SA 4.0. Kolektivno dobro svih korisnika nad kojim niko nema svojinsko pravo.",
+  path: "/zajednicko-dobro",
+});
 
 export default function ZajednickoDobroPage() {
   return (

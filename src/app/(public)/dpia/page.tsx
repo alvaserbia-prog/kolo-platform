@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "DPIA — KOLO",
   description: "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.5",
-};
+  path: "/dpia",
+});
 
 export default async function DPIAPage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "DPIA_3_7_5.md");

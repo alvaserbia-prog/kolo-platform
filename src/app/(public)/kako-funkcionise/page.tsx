@@ -2,12 +2,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { poBrojevima } from "@/lib/faq-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Kako funkcioniše KOLO — detaljna pravila sistema",
   description:
     "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, šest načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
-};
+  path: "/kako-funkcionise",
+});
 
 const koraci = [
   {

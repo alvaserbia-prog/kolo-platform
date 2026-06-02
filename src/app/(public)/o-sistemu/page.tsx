@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { poBrojevima } from "@/lib/faq-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "O sistemu — KOLO",
   description:
     "KOLO beleži ono čime doprinosimo zajednici — rad, dobra i znanje — i čuva to kao zajedničko dobro, u okviru socijalne i solidarne ekonomije.",
-};
+  path: "/o-sistemu",
+});
 
 const sistemi = [
   {

@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Whitepaper — KOLO",
   description: "KOLO Whitepaper, verzija 3.7.0",
-};
+  path: "/whitepaper",
+});
 
 export default async function WhitepaperPage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "whitepaper_3_7_2.md");

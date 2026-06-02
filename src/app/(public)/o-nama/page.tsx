@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { poBrojevima } from "@/lib/faq-data";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "O nama — KOLO Fondacija",
   description:
     "Nikola Šarić, lekar iz Sombora, petnaest godina gradi sistem razmene rada i dobara bez posrednika. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
-};
+  path: "/o-nama",
+});
 
 function DokumentRed({ naziv, href, zivo = false }: { naziv: string; href: string; zivo?: boolean }) {
   const eksterni = href.startsWith("http");
@@ -56,12 +59,12 @@ export default function ONamaPage() {
             </p>
           </div>
           <div className="shrink-0 mx-auto md:ml-auto">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/nikola-saric.png"
               alt="Nikola Šarić"
-              width={176}
-              height={176}
+              width={160}
+              height={160}
+              priority
               className="rounded-full object-cover object-top ring-4 ring-white/10 shadow-xl"
               style={{ width: "160px", height: "160px", display: "block" }}
             />

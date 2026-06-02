@@ -1,7 +1,13 @@
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Pokrovitelji — KOLO" };
+export const metadata = pageMetadata({
+  title: "Pokrovitelji — KOLO",
+  description:
+    "Pokrovitelji KOLO zajednice — pravna lica i preduzetnici koji doprinosom Fondaciji (novac, roba ili usluge) podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
+  path: "/pokrovitelji",
+});
 
 export default async function PokroviteljiPage() {
   const pokrovitelji = await prisma.pokrovitelj.findMany({

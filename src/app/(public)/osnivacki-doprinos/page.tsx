@@ -2,8 +2,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Osnivački doprinos — KOLO" };
+export const metadata = pageMetadata({
+  title: "Osnivački doprinos — KOLO",
+  description:
+    "Osnivački doprinos KOLO sistema — naknadno evidentiranje rada na pripremi platforme. Pratite stanje kanala, izvršene korake i raspodelu POEN-a među osnivačima.",
+  path: "/osnivacki-doprinos",
+});
 
 const fmt = (n: number) => n.toLocaleString("sr-RS");
 

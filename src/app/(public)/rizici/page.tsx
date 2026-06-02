@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Izjava o prihvatanju rizika — KOLO",
   description: "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.0",
-};
+  path: "/rizici",
+});
 
 export default async function RiziciPage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "rizici_3_7_2.md");

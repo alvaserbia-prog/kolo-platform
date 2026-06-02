@@ -4,11 +4,13 @@ import { promises as fs } from "fs";
 import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Politika privatnosti — KOLO",
   description: "Politika privatnosti KOLO platforme, verzija 3.7.5",
-};
+  path: "/privatnost",
+});
 
 export default async function PolitikaPrivatnostiPage() {
   const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_5.md");
