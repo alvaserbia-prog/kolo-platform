@@ -25,7 +25,7 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 
 | Dokument | Fajl | Verzija |
 |---|---|---|
-| Pravilnik o KOLO sistemu | `Pravilnik_3_7_4.md` | **3.7.4 (aktuelan)** |
+| Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
 | Politika privatnosti | `politika_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Uslovi korišćenja | `uslovi_koriscenja_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
@@ -279,7 +279,7 @@ docs/             — interne radne beleške (nije normativa)
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
-- `/pravilnik` → `Pravilnik_3_7_4.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_3.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/whitepaper`, `/dpia`, `/rizici`, `/radnje-obrade` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
+- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_3.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/whitepaper`, `/dpia`, `/rizici`, `/radnje-obrade` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
 - 🟡 **GAP:** neke stranice u page chrome-u/metadata još pišu „Verzija 3.7.0" iako rendruju 3.7.3 fajl (npr. `pravilnik/[slug]/page.tsx`). Treba ažurirati labelu.
 
 ### Admin panel

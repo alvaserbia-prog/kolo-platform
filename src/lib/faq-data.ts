@@ -573,7 +573,7 @@ I konačno, aktivacija Gornjeg Kola koja prebacuje nadležnost na članove.`,
 
 Aktivira se automatski kad minus Protokola dostigne −1.000.000 POEN (znak da je sistem dovoljno aktivan i da članovi imaju značajnu kolektivnu odgovornost).
 
-Pre toga, Fondacija donosi sve odluke; posle toga, ključne sistemske odluke (izmene Pravilnika, novi Programi, suspenzija Programa, veći Projekti) donosi Gornje Kolo kroz kvadratno glasanje sa ZRNOM.`,
+Pre toga, Fondacija donosi sve odluke; posle toga, ključne sistemske odluke (izmene Pravilnika, novi Programi, suspenzija Programa) donosi Gornje Kolo kroz kvadratno glasanje sa ZRNOM.`,
       },
       {
         id: 29,
@@ -585,11 +585,11 @@ Cilj je da bogati pojedinci ne mogu „kupiti" odluku samo time što imaju mnogo
       {
         id: 30,
         pitanje: `Šta je Zaštitni veto Fondacije?`,
-        odgovor: `Posle aktivacije Gornjeg Kola, Fondacija može odbiti izvršenje odluke koja bi: (1) narušila temeljne principe sistema, (2) prekršila zakon ili (3) ugrozila pravni status Fondacije.
+        odgovor: `Dok Fondacija nije finansijski samostalna, može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu i finansijsku održivost — pre svega odluke o trošenju sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava sistem.
 
-Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretan princip ili normu; veto bez obrazloženja sam je zloupotreba. To nije politička kontrola, već zaštita kontinuiteta.
+Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti; veto bez obrazloženja sam je zloupotreba. To nije politička kontrola, već zaštita kontinuiteta i održivosti Fondacije.
 
-Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti utvrđen posebnim pravilnikom.`,
+Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti utvrđen posebnim pravilnikom — tada održivost više nije ugrožena.`,
       },
       {
         id: 72,
@@ -598,7 +598,7 @@ Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijs
 
 Prvi prag — aktivacija Gornjeg Kola. Kada ukupan broj upisanih POEN-a u sistemu dostigne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravno telo svih nosilaca ZRNA. Od tog trenutka članovi kroz kvadratno glasanje aktivnim ZRNOM odlučuju o pravilima sistema: izmenama Pravilnika, Programima i drugim pitanjima koja utiču na zajedničko dobro. Fondacija od suverenog prelazi u izvršni i servisni organ — sprovodi odluke, ne donosi ih sama.
 
-Drugi prag — gašenje zaštitnog veta. Dok traje prelazni period, Fondacija ima zaštitni veto: može odbiti izvršenje odluke koja bi narušila temeljne principe, prekršila zakon ili ugrozila pravni status Fondacije (veto mora biti obrazložen, nije samovoljan). Taj veto se gasi trajno i jednosmerno tek kada finansijska sredstva Fondacije dostignu prag finansijske samostalnosti — a taj prag utvrđuje poseban pravilnik.
+Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije finansijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu održivost — pre svega odluke o trošenju sredstava (npr. kolektivne nabavke) pre nego što je obezbeđena održivost (veto mora biti obrazložen, nije samovoljan). Taj veto se gasi trajno i jednosmerno tek kada finansijska sredstva Fondacije dostignu prag finansijske samostalnosti — a taj prag utvrđuje poseban pravilnik.
 
 Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog odbora.`,
       },
