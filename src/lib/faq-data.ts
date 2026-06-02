@@ -416,7 +416,7 @@ Firme učestvuju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili
 
 Sam prenos POEN-a u toj razmeni nije plaćanje novcem niti sredstvom plaćanja u smislu Zakona o platnim uslugama. Odnosi između korisnika povodom razmene — uključujući pitanja ispunjenja, odgovornosti i rizika — uređuju se prema opštim pravilima obligacionog prava; Protokol u toj razmeni ne posreduje.
 
-Razmena dobara i usluga može imati poreske implikacije za korisnika koji obavlja delatnost; za sopstvene poreske obaveze odgovoran je korisnik po opštim propisima. Fondacija ne pruža poreski savet.`,
+Pravna kvalifikacija ovih razmena u poreskom i fiskalnom smislu ne ukida postojeće obaveze korisnika koji obavlja delatnost po opštim propisima.`,
       },
       {
         id: 41,
