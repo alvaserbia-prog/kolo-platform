@@ -127,12 +127,8 @@ describe("izracunajDnevniIznos", () => {
     expect(izracunajDnevniIznos("POSEBNA_BRIGA", null, null, DANAS)).toBe(2_000);
   });
 
-  it("SKOLOVANJE → dailyAmount (admin podešava)", () => {
-    expect(izracunajDnevniIznos("SKOLOVANJE", null, 1_500, DANAS)).toBe(1_500);
-  });
-
-  it("SKOLOVANJE bez dailyAmount → 0", () => {
-    expect(izracunajDnevniIznos("SKOLOVANJE", null, null, DANAS)).toBe(0);
+  it("SKOLOVANJE → fiksno 2000 POEN", () => {
+    expect(izracunajDnevniIznos("SKOLOVANJE", null, null, DANAS)).toBe(2_000);
   });
 
   it("ZAPOSLJAVNJE → uvek 0 (ide kroz evidenciju)", () => {

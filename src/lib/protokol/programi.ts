@@ -52,14 +52,14 @@ export function izracunajStariji(metadata: unknown, danas: Date): number {
 export function izracunajDnevniIznos(
   type: ProgramType,
   metadata: unknown,
-  dailyAmount: number | null,
+  _dailyAmount: number | null,
   danas: Date
 ): number {
   switch (type) {
     case "PODRSKA_MAJKAMA":   return izracunajMajke(metadata, danas);
     case "PODRSKA_STARIJIMA": return izracunajStariji(metadata, danas);
     case "POSEBNA_BRIGA":     return 2000;
-    case "SKOLOVANJE":        return dailyAmount ?? 0;
+    case "SKOLOVANJE":        return 2000;
     case "PED":               return 0; // operativni doprinos ne ide kroz enrollment — raspodela iz OglasEvidencija (čl. 24)
   }
 }
