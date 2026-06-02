@@ -88,7 +88,7 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
         {topLink("/kako-funkcionise", "Kako funkcioniše")}
         {topLink("/o-sistemu", "O sistemu")}
         {topLink("/o-nama", "O nama")}
-        {topLink("/cesto-postavljena-pitanja", "FAQ")}
+        {topLink("/cesto-postavljena-pitanja", "Pitanja")}
       </nav>
 
       {/* Mobilni hamburger */}
@@ -153,7 +153,7 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
               {mobilePrimaryLink("/kako-funkcionise", "Kako funkcioniše")}
               {mobilePrimaryLink("/o-sistemu", "O sistemu")}
               {mobilePrimaryLink("/o-nama", "O nama")}
-              {mobilePrimaryLink("/cesto-postavljena-pitanja", "FAQ")}
+              {mobilePrimaryLink("/cesto-postavljena-pitanja", "Pitanja")}
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-3">
