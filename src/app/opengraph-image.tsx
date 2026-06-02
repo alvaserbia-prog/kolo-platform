@@ -1,18 +1,24 @@
 import { ImageResponse } from "next/og";
 
 /**
- * Dinamička Open Graph slika (1200×630) — prikazuje se kad se ekolo.rs deli na
+ * Dinamička Open Graph slika (1200×630) — prikazuje se kad se sajt deli na
  * društvenim mrežama. Next.js je automatski servira na /opengraph-image.
  *
- * Napomena: tekst namerno bez srpskih dijakritika (č/ć/š/ž/đ) jer podrazumevani
- * font u ImageResponse pokriva osnovnu latinicu — time izbegavamo učitavanje
- * spoljnog fonta i moguće prazne glifove.
+ * Font Inter (latin-ext) se učitava lokalno radi pune srpske latinice
+ * (č/ć/š/ž/đ). `new URL(..., import.meta.url)` natera Next da bundluje .woff
+ * kao asset, pa radi i u serverless i u edge okruženju.
  */
+export const runtime = "edge";
 export const alt = "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const [interRegular, interBold] = await Promise.all([
+    fetch(new URL("./_fonts/Inter-400.woff", import.meta.url)).then((r) => r.arrayBuffer()),
+    fetch(new URL("./_fonts/Inter-700.woff", import.meta.url)).then((r) => r.arrayBuffer()),
+  ]);
+
   return new ImageResponse(
     (
       <div
@@ -24,7 +30,7 @@ export default function OpengraphImage() {
           position: "relative",
           background: "linear-gradient(135deg, #0F3D20 0%, #1B6B3A 100%)",
           color: "#FAFAF8",
-          fontFamily: "sans-serif",
+          fontFamily: "Inter",
           padding: "80px",
           justifyContent: "space-between",
           overflow: "hidden",
@@ -67,8 +73,8 @@ export default function OpengraphImage() {
               display: "flex",
             }}
           />
-          <span style={{ fontSize: "30px", letterSpacing: "8px", color: "#E8F5EC" }}>
-            ZAJEDNICKO DOBRO
+          <span style={{ fontSize: "30px", letterSpacing: "8px", color: "#E8F5EC", fontWeight: 700 }}>
+            ZAJEDNIČKO DOBRO
           </span>
         </div>
 
@@ -77,7 +83,7 @@ export default function OpengraphImage() {
           <div
             style={{
               fontSize: "180px",
-              fontWeight: 800,
+              fontWeight: 700,
               letterSpacing: "-4px",
               lineHeight: 1,
               display: "flex",
@@ -109,10 +115,16 @@ export default function OpengraphImage() {
           }}
         >
           <span style={{ color: "#F5B842", fontWeight: 700 }}>ekolo.rs</span>
-          <span style={{ color: "#E8F5EC" }}>Clanstvo je besplatno</span>
+          <span style={{ color: "#E8F5EC" }}>Članstvo je besplatno</span>
         </div>
       </div>
     ),
-    { ...size },
+    {
+      ...size,
+      fonts: [
+        { name: "Inter", data: interRegular, weight: 400, style: "normal" },
+        { name: "Inter", data: interBold, weight: 700, style: "normal" },
+      ],
+    },
   );
 }

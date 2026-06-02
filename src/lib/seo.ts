@@ -9,8 +9,9 @@
  * development, lokalno) tretiramo kao ne-indeksabilno.
  */
 
-/** Kanonski domen produkcije — apsolutni URL-ovi i canonical uvek vode ovde. */
-export const SITE_URL = "https://ekolo.rs";
+/** Kanonski domen produkcije — apsolutni URL-ovi i canonical uvek vode ovde.
+ *  Sajt se servira na www (ne-www radi redirect na www), pa je www kanonski. */
+export const SITE_URL = "https://www.ekolo.rs";
 
 /** Ime sistema za naslove i strukturirane podatke. */
 export const SITE_NAME = "KOLO";
