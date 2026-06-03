@@ -512,22 +512,30 @@ export default async function Home() {
         {/* ── SEKCIJA 9 — KO STOJI IZA KOLA ──────────────────────── */}
         <section className="bg-white rounded-2xl card-shadow overflow-hidden">
           <div className="grid md:grid-cols-[2fr_3fr]">
-            {/* Levo — slika (popunjava panel) */}
-            <div className="relative bg-kolo-green-900 min-h-[340px] md:min-h-0 overflow-hidden">
+            {/* Levo — slika u krugu, tekst iznad i ispod */}
+            <div className="bg-kolo-green-900 p-8 flex flex-col items-center justify-center text-center gap-5">
+              {/* Tekst iznad fotografije */}
+              <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+                Ko stoji iza KOLA
+              </span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/nikola-saric.png"
+                src="/nikola-saric-mantil.png"
                 alt="Nikola Šarić"
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="w-36 h-36 rounded-full object-cover object-top ring-4 ring-white/10 shadow-xl"
               />
+              {/* Tekst ispod fotografije */}
+              <div>
+                <p className="text-white font-bold text-lg leading-tight">Nikola Šarić</p>
+                <p className="text-white/70 text-sm mt-1 leading-snug">
+                  Lekar iz Sombora · petnaest godina gradi sistem razmene bez novca
+                </p>
+              </div>
             </div>
             {/* Desno — tekst */}
-            <div className="p-6 md:p-8">
-              <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 tracking-wide uppercase">
-                Ko stoji iza KOLA
-              </div>
+            <div className="p-6 md:p-8 flex flex-col justify-center">
               <p className="text-kolo-text leading-relaxed mb-3 text-sm text-body">
-                <strong>Nikola Šarić</strong>, lekar iz Sombora. Petnaest godina proučava kako zajednice širom sveta — od Švajcarske i Italije do Kanade i Japana — razmenjuju rad i dobra bez novca.
+Petnaest godina proučava kako zajednice širom sveta — od Švajcarske i Italije do Kanade i Japana — razmenjuju rad i dobra bez novca.
               </p>
               <p className="text-kolo-muted text-sm leading-relaxed mb-5 text-body">
                 KOLO je naša verzija socijalne i solidarne ekonomije — kad se ljudi sami organizuju da brinu jedni o drugima — koju su i Ujedinjene nacije i Evropska unija priznale, prilagođena srpskim zakonima.
