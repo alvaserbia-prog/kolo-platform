@@ -1,5 +1,5 @@
 /**
- * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 71, v3.7.0)
+ * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 48–50, v3.7.5)
  *
  * Sredstva Fondacije = priliv (donacije + pokroviteljstvo, oba u RSD) - odliv (troskovi)
  * Veto aktivan ako Protokol balansa < -1.000.000 POEN I trajnoUgasen = false

@@ -72,7 +72,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **Faze sistema** — `faza-sistema.ts`, auto prelaz Faza 1 → Faza 2 na 1.000.000 POEN, NOSILAC_ZRNA verifikuje operativni doprinos
 - ✅ **DCO + CC BY-SA** označavanje (`DCO`, `CONTRIBUTING.md`, `.github/workflows/dco.yml`)
 - ✅ **Tabela donacija usklađena** — `donacija.ts` `RANG_TABELA` ima **11 nivoa, 1,00×→2,00×**, identično `donacije_3_7_3.md` čl. 4 (testovi pokrivaju)
-- 🟡 **Operativni doprinos još na modelu satnice** (1.000–2.500 POEN/sat, admin odobrava) — treba model **predloženog POEN-a × min(1, L/P)** sa verifikacijom nosilaca ZRNA (vidi GAP)
+- ✅ **Operativni doprinos usklađen** — model **predloženog POEN-a × min(1, L/P)** u okviru dnevnog limita (`programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (ne admin proizvoljno). Model satnice (`hourlyRate`/`hoursWorked`) uklonjen; PED i doprinos-oglasi konsolidovani u jedan tok
 - ✅ **„kurs" u srpskim prevodima** sređen → „Koeficijent" / „koeficijent evidencije" (`messages/sr.json`, ZRNO/donacije ekrani); interni identifikatori (`trendsKurs`, `.kurs`, `{kurs}`, ključevi) i en/hu „Rate"/„Árfolyam" ostaju
 - 🔴 Moduli (Zadruga, Modul Deca, internacionalizacija, Glava VIII) — nisu fokus razvoja po odluci vlasnika
 
@@ -133,7 +133,7 @@ POEN i ZRNO **nisu imovinsko pravo i ne nasleđuju se**. Pri prestanku statusa z
 U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugrozila operativnu i finansijsku održivost Fondacije pre nego što ona dostigne finansijsku samostalnost** — naročito odluke o trošenju dinarskih sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava infrastrukturu (čl. 48, v3.7.5). **Ovo je promena u odnosu na raniji opis** (veto NIJE više vezan za narušavanje četiri principa / zakona / pravnog statusa — to su sada zasebna ograničenja Gornjeg Kola po čl. 50, uz licence). Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti (čl. 48 st. 2). Gasi se **trajno i jednosmerno** kada sredstva Fondacije dostignu **prag finansijske samostalnosti utvrđen posebnim pravilnikom** (čl. 49); gašenje ne ukida zakonske obaveze UO.
 - **Ograničenja Gornjeg Kola (čl. 50):** (1) četiri principa — ne može ukinuti nekonvertibilnost, uvesti imovinsko pravo nad zapisima, učiniti donacije povratnim, ni napustiti minimizaciju podataka; (2) zaštitni veto dok traje + zakonske obaveze UO posle gašenja; (3) licence (AGPL-3.0, CC BY-SA 4.0) se ne mogu zameniti restriktivnijim.
 - Kod: `fondacija.ts` (`dohvatiSaldoFondacije`, `azurirajVetoStatus`), model `SistemskiVeto` (singleton), `FondacijaTrosak`, API `/api/admin/fondacija`, javni status.
-- 🟡 **GAP (a) — norma izmenjena u 3.7.6, kod skoro usklađen:** `gornje_kolo_3_7_6.md` čl. 19 sada propisuje **jedan uslov**: veto se gasi kad likvidna dinarska sredstva dostignu **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts:100`) već koristi `pragZaGasenje = prosek × 3` — **množilac (3×) se poklapa**; preostala razlika je samo baza: kod uzima `prosek` poslednjih `PROSEK_PERIOD_MESECI` (default 6) meseci umesto **prethodnog meseca**. Manja parametarska korekcija (promeniti bazu na trošak prethodnog meseca) ako se traži potpuna doslednost. (Ranija 3.7.5 norma je tražila dvostruki uslov 24× + samoodrživost — povučeno.)
+- ✅ **GAP (a) — REŠEN (norma 3.7.6 + kod usklađen):** `gornje_kolo_3_7_6.md` čl. 19 propisuje **jedan uslov** — veto se gasi kad likvidna dinarska sredstva dostignu **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts`) usklađen: `dohvatiTrosakPrethodnogMeseca()` (prethodni kalendarski mesec) × 3 daje `pragZaGasenje`; raniji placeholder `prosek × 3` (6 meseci) i `PROSEK_PERIOD_MESECI` uklonjeni; `VetoStatus.prosekMesecnihTroskova → trosakPrethodnogMeseca`. (Ranija 3.7.5 norma 24× rezerva + 12-mes. samoodrživost povučena.)
 - 🟡 **GAP (b):** obrazloženje/opis veta u UI/kodu treba uskladiti sa formulacijom 3.7.5 (održivost Fondacije), ako još referencira staru (principi/zakon/pravni status).
 
 ### Zajedničko dobro (Pravilnik Glava II, čl. 5–8)
@@ -156,7 +156,7 @@ U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugr
 - Logika: `src/lib/protokol/krug.ts` → `proveriIEmitujBonusPrag()`.
 
 ### Programi Protokola
-- **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** Fondacija/Gornje Kolo/nosioci ZRNA objavljuju **zadatak**; korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. 🟡 Kod još koristi satnicu (vidi GAP).
+- **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** Fondacija/Gornje Kolo/nosioci ZRNA objavljuju **zadatak**; korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
 - **Socijalni programi:** PODRSKA_MAJKAMA (i primarni staratelji), PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE — uslovi/koeficijenti u programskim pravilnicima.
 - Svi programi otvoreni verifikovanim korisnicima (indeks ≥ 10%), nezavisno od Kruga.
 - Dnevni limit (10% opticaja), proporcionalno smanjenje pri prekoračenju.
@@ -283,7 +283,7 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Doprinos zajedničkom dobru — Oglasi (Operativni program)
 - Predlagač objavljuje zadatak; verifikovan korisnik (indeks ≥ 10%) se prijavljuje (`/api/doprinos-oglasi/[id]/prijavi`), evidentira izvršenje (`/api/doprinos-oglasi/[id]/evidencija`).
-- 🟡 **GAP:** trenutni kod koristi **model satnice** (`DoprinosOglas.hourlyRate` 1.000–2.500 POEN/sat, `OglasEvidencija.hoursWorked × hourlyRate`) i **admin odobrava** evidenciju. Pravilnik o operativnom doprinosu traži **predloženi POEN × min(1, L/P)** i verifikaciju od strane **nosilaca ZRNA / UO** (čl. 36). Treba uskladiti + konsolidovati sa starim PED tokom (`/programi/ped`, `DoprinosEvidencija`).
+- ✅ **Usklađeno:** model je **predloženi POEN × min(1, L/P)** (`DoprinosOglas.predlozeniPoen`, `OglasEvidencija.predlozeniPoen`; `programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (verifikator ≠ izvršilac ≠ predlagač). Satnica (`hourlyRate`/`hoursWorked`) uklonjena. Konsolidovano sa starim PED tokom — `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; „PED" je samo enum/labela koja se rutira kroz doprinos-oglase.
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
@@ -359,11 +359,11 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Stvarni GAP-ovi (dokumentacija propisuje, kod radi drugačije)
 1. ✅ **REŠENO — Tabela donacija** (`donacija.ts` `RANG_TABELA`): 11 nivoa, 1,00×→2,00×, usklađeno sa `donacije_3_7_3.md` čl. 4 i testovima.
-2. 🟡 **Veto prag — NORMA 3.7.6 (2026-06-03), kod skoro usklađen.** `gornje_kolo_3_7_6.md` čl. 19: jedan uslov — **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts:100`) već radi `prosek × 3`; množilac se poklapa, preostaje samo da se baza promeni sa proseka (6 meseci) na trošak prethodnog meseca radi potpune doslednosti. (Stara 3.7.5 norma 24× + samoodrživost povučena.)
-3. **Operativni doprinos: model satnice → predloženi POEN × min(1, L/P)** + verifikacija nosilaca ZRNA/UO umesto admin odobravanja (Pravilnik čl. 36; `operativni_3_7_2.md`).
-4. **Konsolidacija PED + doprinos-oglasi** u jedan tok (`/programi/ped` + `DoprinosEvidencija` vs `/doprinos-oglasi` + `DoprinosOglas/OglasPrijava/OglasEvidencija`). Razrešiti i18n ključ `useTranslations("ped")`.
+2. ✅ **REŠENO — Veto prag (NORMA 3.7.6, 2026-06-03).** `gornje_kolo_3_7_6.md` čl. 19: jedan uslov — **3× operativni trošak prethodnog meseca**. Kod `fondacija.ts` usklađen: `dohvatiTrosakPrethodnogMeseca()` × 3 daje `pragZaGasenje`; raniji placeholder `prosek × 3` (6 meseci) uklonjen. (Stara 3.7.5 norma 24× rezerva + 12-mes. samoodrživost povučena.)
+3. ✅ **REŠENO — Operativni doprinos:** model **predloženi POEN × min(1, L/P)** (`programi.ts`) + verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa; satnica uklonjena.
+4. ✅ **REŠENO — Konsolidacija PED + doprinos-oglasi** u jedan tok. `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; orphan i18n ključ `ped_link` uklonjen iz `messages/*.json`.
 5. ✅ **REŠENO — „kurs" u srpskom UI** → „Koeficijent"/„koeficijent evidencije" (`messages/sr.json`). Interni identifikatori i en/hu prevodi zadržani.
-6. **Verzijske labele „3.7.0"/zastarele** na javnim stranicama (`pravilnik/[slug]/page.tsx` i sl.) → uskladiti sa tabelom (Pravilnik 3.7.5, Politika 3.7.4, ostalo 3.7.3/3.7.2).
+6. ✅ **REŠENO — Verzijske labele** na javnim stranicama. Glavne pravne stranice tačne; `pravilnik/[slug]/page.tsx` sada izvodi verziju iz `verzija` polja po pravilniku (ne hardkod „3.7.5"). Preostali „v3.7.0" su bili samo interni komentari — ažurirani.
 7. **Dual `Role` / `TipKorisnika`** — počistiti legacy `Role` enum gde je moguće.
 
 ### Mehanizmi delegirani posebnim pravilnicima / nisu fokus

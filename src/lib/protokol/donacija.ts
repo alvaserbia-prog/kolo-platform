@@ -4,7 +4,7 @@ import { emitujPoen } from "./emisija";
 
 /**
  * Nivoi donacija i koeficijent evidencije (Pravilnik o pokroviteljstvu i
- * donacijama v3.7.2, čl. 4) — 11 nivoa, koeficijent 1,00× → maks 2,00×.
+ * donacijama v3.7.3, čl. 4) — 11 nivoa, koeficijent 1,00× → maks 2,00×.
  *
  * Broj evidentiranih POEN-a = iznos donacije (RSD) × koeficijent evidencije
  * novodostignutog nivoa, primenjen na CELU novu donaciju. Nivo je kumulativan i
