@@ -78,7 +78,7 @@ export default function PokroviteljstvoPrijava() {
   }
 
   async function potpisi(id: string) {
-    if (!confirm("Potpisati ugovor o donaciji u ime pravnog lica?")) return;
+    if (!confirm("Potpisati ugovor o donaciji u ime pravnog lica ili preduzetnika?")) return;
     setRadnja(id);
     const res = await fetch(`/api/pokroviteljstvo/prijava/${id}/potpisi`, { method: "POST" });
     setRadnja(null);
@@ -94,12 +94,12 @@ export default function PokroviteljstvoPrijava() {
       <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-5 space-y-4">
         <h2 className="font-semibold text-kolo-text">Pokreni pokroviteljstvo</h2>
         <p className="text-sm text-kolo-muted">
-          Podnesite prijavu u ime pravnog lica. Platforma generiše ugovor o donaciji koji potpisujete;
+          Podnesite prijavu u ime pravnog lica ili preduzetnika. Platforma generiše ugovor o donaciji koji potpisujete;
           po potvrdi prijema od strane Fondacije, evidentira se bonus POEN.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Naziv pravnog lica</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">Naziv pravnog lica ili preduzetnika</label>
             <input value={naziv} onChange={(e) => setNaziv(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>

@@ -66,7 +66,7 @@ export default async function PokroviteljiPage() {
       <div className="mt-8 p-5 bg-kolo-gold-50 border border-kolo-gold-200 rounded-2xl">
         <h2 className="font-semibold text-kolo-gold-700 mb-2">Postanite pokrovitelj</h2>
         <p className="text-sm text-kolo-muted mb-3 text-body">
-          Ako zastupate pravno lice i želite da podržite KOLO zajednicu, obratite se
+          Ako zastupate pravno lice ili ste preduzetnik i želite da podržite KOLO zajednicu, obratite se
           administratorima platforme ili se prijavite kao verifikovani član.
         </p>
         <Link

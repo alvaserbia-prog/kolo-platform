@@ -44,7 +44,7 @@ export default async function PostaniPokroviteljPage() {
       <div className="mb-8">
         <h1 className="kolo-naslov mb-2">Pokroviteljstvo</h1>
         <p className="text-kolo-muted leading-relaxed">
-          Pokrovitelj je pravno lice koje donira Fondaciji.
+          Pokrovitelj je pravno lice ili preduzetnik koji donira Fondaciji.
           Kao vlasnik pokrovitelja, dobijate POEN bonuse pri svakom dostizanju novog nivoa.
         </p>
       </div>

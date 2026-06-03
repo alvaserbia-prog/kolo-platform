@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
   const cenovnikSlika: string | null = body.cenovnikSlika ?? null;
 
   if (!naziv || !pib)
-    return NextResponse.json({ error: "Naziv pravnog lica i PIB su obavezni." }, { status: 400 });
+    return NextResponse.json({ error: "Naziv pravnog lica ili preduzetnika i PIB su obavezni." }, { status: 400 });
   if (!DOZVOLJENE_VRSTE.includes(vrstaDonacije))
     return NextResponse.json({ error: "Neispravna vrsta donacije." }, { status: 400 });
   if (!vrednostRsd || isNaN(vrednostRsd) || vrednostRsd <= 0)
