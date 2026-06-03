@@ -80,6 +80,13 @@ enum PredlogStatus {
   CLOSED
 }
 
+// Stanje izvršenja usvojene odluke Gornjeg Kola (čl. 17, 18)
+enum IzvrsenjeStatus {
+  ZA_IZVRSENJE      // usvojeno, čeka izvršenje od strane Fondacije
+  IZVRSENO          // Fondacija izvršila odluku
+  VETO_OBUSTAVLJENO // izvršenje obustavljeno zaštitnim vetom (čl. 18, 48)
+}
+
 enum ProgramType {
   PED
   PODRSKA_MAJKAMA
@@ -604,6 +611,10 @@ model GlasanjePredlog {
   ishodUsvojen    Boolean?      // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
   zaZbir          Int?          // zbir glasačke moći „za" u trenutku zatvaranja
   protivZbir      Int?          // zbir glasačke moći „protiv" u trenutku zatvaranja
+  izvrsenjeStatus IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
+  vetoObrazlozenje String?      // obavezno obrazloženje zaštitnog veta (čl. 18)
+  izvrsenoAt      DateTime?
+  vetoAt          DateTime?
   glasovi         GlasanjeGlas[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt

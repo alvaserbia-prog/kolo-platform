@@ -3,14 +3,22 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "@/lib/auth";
 import { dohvatiRegistarOdluka } from "@/lib/protokol/glasanje";
+import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
 
 export const metadata = { title: "Registar odluka — KOLO" };
+
+const IZVRSENJE_LABEL: Record<string, string> = {
+  ZA_IZVRSENJE: "Čeka izvršenje",
+  IZVRSENO: "Izvršeno",
+  VETO_OBUSTAVLJENO: "Veto — izvršenje obustavljeno",
+};
 
 // Registar odluka Gornjeg Kola (Pravilnik o Gornjem Kolu 3.7.6, čl. 21).
 // Nepromenljiv, javno vidljiv pregled svih zatvorenih predloga sa ishodom.
 export default async function RegistarOdlukaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
+  const jeAdmin = session.user.tipKorisnika === "POCETNI";
 
   const odluke = await dohvatiRegistarOdluka();
 
@@ -52,6 +60,24 @@ export default async function RegistarOdlukaPage() {
                   <span>PROTIV: <span className="font-semibold text-kolo-danger">{o.protivZbir}</span></span>
                   <span>· {o.brGlasova} glasača</span>
                 </div>
+
+                {/* Izvršenje usvojene odluke (čl. 17, 18) */}
+                {o.izvrsenjeStatus && (
+                  <div className="text-xs">
+                    <span className={`inline-block px-2 py-0.5 rounded font-medium ${
+                      o.izvrsenjeStatus === "IZVRSENO" ? "bg-kolo-green-100 text-kolo-green-700"
+                      : o.izvrsenjeStatus === "VETO_OBUSTAVLJENO" ? "bg-kolo-danger-light text-kolo-danger"
+                      : "bg-kolo-gold-100 text-kolo-gold-600"
+                    }`}>
+                      {IZVRSENJE_LABEL[o.izvrsenjeStatus]}
+                    </span>
+                    {o.vetoObrazlozenje && (
+                      <p className="mt-1 text-kolo-muted italic">Obrazloženje veta: {o.vetoObrazlozenje}</p>
+                    )}
+                  </div>
+                )}
+
+                {jeAdmin && o.izvrsenjeStatus === "ZA_IZVRSENJE" && <IzvrsenjeKontrole id={o.id} />}
               </div>
             );
           })}

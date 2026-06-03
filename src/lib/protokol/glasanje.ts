@@ -11,6 +11,14 @@ import { prisma } from "@/lib/prisma";
 
 export type FazaPredloga = "NAJAVLJEN" | "U_TOKU" | "ZATVOREN";
 
+export class GlasanjeGreska extends Error {
+  status: number;
+  constructor(message: string, status = 400) {
+    super(message);
+    this.status = status;
+  }
+}
+
 /** Period zabrane ponovnog predlaganja iste sadržine (čl. 22). */
 export const DANA_PONOVNO_PREDLAGANJE = 30;
 
@@ -86,6 +94,8 @@ export async function dohvatiRegistarOdluka() {
     ishodUsvojen: o.ishodUsvojen,
     zaZbir: o.zaZbir ?? 0,
     protivZbir: o.protivZbir ?? 0,
+    izvrsenjeStatus: o.izvrsenjeStatus,
+    vetoObrazlozenje: o.vetoObrazlozenje,
     brGlasova: o._count.glasovi,
   }));
 }
@@ -103,14 +113,47 @@ export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promis
   for (const p of istekli) {
     const zaZbir = p.glasovi.filter((g) => g.za).reduce((s, g) => s + g.glasackaGlasova, 0);
     const protivZbir = p.glasovi.filter((g) => !g.za).reduce((s, g) => s + g.glasackaGlasova, 0);
+    const usvojen = utvrdiIshod(zaZbir, protivZbir); // izjednačeno = neusvojeno (čl. 9)
     await prisma.glasanjePredlog.update({
       where: { id: p.id },
       data: {
         status: "CLOSED",
         zaZbir,
         protivZbir,
-        ishodUsvojen: utvrdiIshod(zaZbir, protivZbir), // izjednačeno = neusvojeno (čl. 9)
+        ishodUsvojen: usvojen,
+        // Usvojena odluka prelazi u izvršenje od strane Fondacije (čl. 17)
+        izvrsenjeStatus: usvojen ? "ZA_IZVRSENJE" : null,
       },
     });
   }
+}
+
+/** Fondacija (UO) beleži da je usvojena odluka izvršena (čl. 17). */
+export async function izvrsiOdluku(id: string): Promise<void> {
+  const p = await prisma.glasanjePredlog.findUnique({ where: { id }, select: { izvrsenjeStatus: true } });
+  if (!p) throw new GlasanjeGreska("Predlog nije pronađen.", 404);
+  if (p.izvrsenjeStatus !== "ZA_IZVRSENJE")
+    throw new GlasanjeGreska("Izvršenje je moguće samo za usvojenu odluku koja čeka izvršenje.");
+  await prisma.glasanjePredlog.update({
+    where: { id },
+    data: { izvrsenjeStatus: "IZVRSENO", izvrsenoAt: new Date() },
+  });
+}
+
+/**
+ * Fondacija (UO) obustavlja izvršenje odluke zaštitnim vetom (čl. 18).
+ * Veto mora biti obrazložen — bez obrazloženja predstavlja zloupotrebu.
+ */
+export async function vetoNaIzvrsenje(id: string, obrazlozenje: string): Promise<void> {
+  const o = (obrazlozenje ?? "").trim();
+  if (o.length < 10)
+    throw new GlasanjeGreska("Zaštitni veto mora imati obrazloženje koje upućuje na konkretnu pretnju održivosti (čl. 18).");
+  const p = await prisma.glasanjePredlog.findUnique({ where: { id }, select: { izvrsenjeStatus: true } });
+  if (!p) throw new GlasanjeGreska("Predlog nije pronađen.", 404);
+  if (p.izvrsenjeStatus !== "ZA_IZVRSENJE")
+    throw new GlasanjeGreska("Veto je moguć samo na odluku koja čeka izvršenje.");
+  await prisma.glasanjePredlog.update({
+    where: { id },
+    data: { izvrsenjeStatus: "VETO_OBUSTAVLJENO", vetoObrazlozenje: o, vetoAt: new Date() },
+  });
 }
