@@ -18,7 +18,7 @@ const PRESKOCI = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
   "/api/", "/_next", "/favicon.ico", "/icon.png",
-  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/flags/",
+  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/nikola-saric-mantil.png", "/flags/",
   // SEO/metadata rute — moraju biti javno dostupne pretraživačima (inače bi
   // bot pri pristupu /sitemap.xml ili /robots.txt bio preusmeren na /login).
   "/sitemap.xml", "/robots.txt", "/opengraph-image", "/twitter-image", "/manifest.webmanifest",
@@ -58,6 +58,6 @@ export default async function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|icon.png|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|flags).*)",
+    "/((?!_next/static|_next/image|favicon.ico|icon.png|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|nikola-saric-mantil.png|flags).*)",
   ],
 };
