@@ -430,6 +430,7 @@
   },
   "glasanje": {
     "naslov": "Glasanje",
+    "registar_link": "Registar odluka →",
     "novi_predlog": "+ Novi predlog",
     "glasova_badge": "{count} glasova",
     "nema_zrna": "Za glasanje i kreiranje predloga potrebno je imati aktivnih ZRNA.",

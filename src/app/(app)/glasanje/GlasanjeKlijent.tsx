@@ -36,6 +36,9 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
       <div className="flex justify-between items-center">
         <h1 className="kolo-naslov">{t("naslov")}</h1>
         <div className="flex items-center gap-3">
+          <Link href="/glasanje/registar" className="text-xs text-kolo-green-700 hover:underline">
+            {t("registar_link")}
+          </Link>
           {mojaGlasackaMoc > 0 && (
             <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 border border-kolo-gold-400/30 px-3 py-1.5 rounded-xl font-medium">
               {t("glasova_badge", { count: mojaGlasackaMoc })}

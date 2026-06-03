@@ -41,6 +41,34 @@ export function fazaPredloga(
 }
 
 /**
+ * Registar odluka (čl. 21) — nepromenljiv pregled svih zatvorenih predloga sa
+ * ishodom i zbirovima glasačke moći. Zatvoreni zapisi se ne menjaju retroaktivno
+ * (status CLOSED se postavlja jednom u `zatvoriIstekleIObjaviIshod` i ne dira se).
+ */
+export async function dohvatiRegistarOdluka() {
+  await zatvoriIstekleIObjaviIshod();
+  const odluke = await prisma.glasanjePredlog.findMany({
+    where: { status: "CLOSED" },
+    orderBy: { deadline: "desc" },
+    include: {
+      author: { select: { pseudonim: true } },
+      _count: { select: { glasovi: true } },
+    },
+  });
+  return odluke.map((o) => ({
+    id: o.id,
+    title: o.title,
+    description: o.description,
+    authorPseudonim: o.author.pseudonim,
+    rok: o.deadline.toISOString(),
+    ishodUsvojen: o.ishodUsvojen,
+    zaZbir: o.zaZbir ?? 0,
+    protivZbir: o.protivZbir ?? 0,
+    brGlasova: o._count.glasovi,
+  }));
+}
+
+/**
  * Zatvara sve predloge kojima je istekao rok i beleži ishod (prosta većina).
  * Idempotentno — bezbedno za pozivanje pri svakom čitanju.
  */

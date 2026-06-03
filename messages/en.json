@@ -430,6 +430,7 @@
   },
   "glasanje": {
     "naslov": "Voting",
+    "registar_link": "Decision register →",
     "novi_predlog": "+ New proposal",
     "glasova_badge": "{count} votes",
     "nema_zrna": "Active ZRNO required for voting and creating proposals.",

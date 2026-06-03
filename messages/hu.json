@@ -430,6 +430,7 @@
   },
   "glasanje": {
     "naslov": "Szavazás",
+    "registar_link": "Döntések nyilvántartása →",
     "novi_predlog": "+ Új javaslat",
     "glasova_badge": "{count} szavazat",
     "nema_zrna": "A szavazáshoz és javaslatok létrehozásához aktív ZRNO szükséges.",
