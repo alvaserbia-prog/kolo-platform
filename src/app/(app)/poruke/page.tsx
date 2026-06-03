@@ -29,6 +29,7 @@ function PorukeContent() {
   const aktivnaKonvId = searchParams.get("k");
 
   const [konverzacije, setKonverzacije] = useState<Konverzacija[]>([]);
+  const [verified, setVerified] = useState(true);
   const [poruke, setPoruke] = useState<Poruka[]>([]);
   const [drugiPseudonim, setDrugiPseudonim] = useState("");
   const [drugiId, setDrugiId] = useState("");
@@ -51,6 +52,7 @@ function PorukeContent() {
     if (res.ok) {
       const data = await res.json();
       setKonverzacije(data.konverzacije ?? []);
+      if (typeof data.verified === "boolean") setVerified(data.verified);
     }
   }, []);
 
@@ -200,7 +202,15 @@ function PorukeContent() {
           <h1 className="text-base font-semibold text-kolo-text">{t("naslov")}</h1>
         </div>
 
-        {/* Nova konverzacija — pretraga */}
+        {/* Nova konverzacija — pretraga (samo verifikovani mogu da iniciraju) */}
+        {!verified ? (
+          <div className="px-3 py-2 border-b border-kolo-border">
+            <p className="text-[11px] text-kolo-muted leading-relaxed">
+              Kao neverifikovan korisnik možete da odgovorite samo na poruke verifikovanih
+              članova koji su vam se javili povodom vašeg zahteva za jemstvo.
+            </p>
+          </div>
+        ) : (
         <div className="px-3 py-2 border-b border-kolo-border" ref={searchWrapperRef}>
           <div className="relative">
             <input
@@ -236,6 +246,7 @@ function PorukeContent() {
           </div>
           {novaKonvGreska && <p className="text-xs text-red-500 mt-1">{novaKonvGreska}</p>}
         </div>
+        )}
 
         {/* Lista konverzacija */}
         <div className="flex-1 overflow-y-auto">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Zahtev = {
   id: string;
@@ -17,6 +18,7 @@ export default function TablaJemstvaKlijent({
   verified: boolean;
   isAdmin: boolean;
 }) {
+  const router = useRouter();
   const [zahtevi, setZahtevi] = useState<Zahtev[]>([]);
   const [ucitavanje, setUcitavanje] = useState(true);
   const [kontakti, setKontakti] = useState<Record<string, string>>({});
@@ -79,6 +81,15 @@ export default function TablaJemstvaKlijent({
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok) setKontakti((k) => ({ ...k, [id]: d.kontaktPodaci }));
+    else alert(d.error ?? "Greška.");
+  }
+
+  async function posaljiPoruku(id: string) {
+    setRadnja(id);
+    const res = await fetch(`/api/tabla-jemstva/${id}/poruka`, { method: "POST" });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok && d.konverzacijaId) router.push(`/poruke?k=${d.konverzacijaId}`);
     else alert(d.error ?? "Greška.");
   }
 
@@ -203,20 +214,27 @@ export default function TablaJemstvaKlijent({
 
               <p className="text-sm text-kolo-text mt-3 whitespace-pre-wrap">{z.tekstPredstavljanja}</p>
 
-              {/* Kontakt — samo verifikovani, uz izričito otkrivanje */}
+              {/* Akcije — samo verifikovani: otkrivanje kontakta i/ili direktna poruka */}
               {verified && !z.mojZahtev && (
-                <div className="mt-3 pt-3 border-t border-kolo-border">
-                  {kontakti[z.id] ? (
+                <div className="mt-3 pt-3 border-t border-kolo-border space-y-2">
+                  {kontakti[z.id] && (
                     <p className="text-sm text-kolo-text">
                       <span className="text-kolo-muted">Kontakt: </span>
                       <span className="font-medium whitespace-pre-wrap">{kontakti[z.id]}</span>
                     </p>
-                  ) : (
-                    <button onClick={() => prikaziKontakt(z.id)} disabled={radnja === z.id}
-                      className="px-3 py-1.5 rounded-lg bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold hover:bg-kolo-green-500 hover:text-white disabled:opacity-60 transition-colors">
-                      {radnja === z.id ? "..." : "Prikaži kontakt"}
-                    </button>
                   )}
+                  <div className="flex flex-wrap gap-2">
+                    {!kontakti[z.id] && (
+                      <button onClick={() => prikaziKontakt(z.id)} disabled={radnja === z.id}
+                        className="px-3 py-1.5 rounded-lg bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold hover:bg-kolo-green-500 hover:text-white disabled:opacity-60 transition-colors">
+                        {radnja === z.id ? "..." : "Prikaži kontakt"}
+                      </button>
+                    )}
+                    <button onClick={() => posaljiPoruku(z.id)} disabled={radnja === z.id}
+                      className="px-3 py-1.5 rounded-lg bg-kolo-green-700 text-white text-xs font-semibold hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
+                      {radnja === z.id ? "..." : "Pošalji poruku"}
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

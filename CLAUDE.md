@@ -44,8 +44,8 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 | Dokument | Fajl | Verzija |
 |---|---|---|
 | Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Politika privatnosti | `politika_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Uslovi korišćenja | `uslovi_koriscenja_3_7_3.md` | **3.7.3 (aktuelan)** |
+| Politika privatnosti | `politika_3_7_6.md` | **3.7.6 (aktuelan)** |
+| Uslovi korišćenja | `uslovi_koriscenja_3_7_4.md` | **3.7.4 (aktuelan)** |
 | Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
 | Whitepaper | `whitepaper_3_7_6.md` | **3.7.6 (aktuelan)** — veto usklađen sa Pravilnikom 3.7.5 (PDF `KOLO_Whitepaper_3.7.2.pdf` zastareo) |
 | DPIA | `DPIA_3_7_5.md` | **3.7.5 (aktuelan)** |
@@ -65,6 +65,7 @@ Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.m
 - **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
 - **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
 - **Pravilnik 3.7.4 / donacije 3.7.3** — pokroviteljstvo izričito obuhvata i **preduzetnike**, ravnopravno sa pravnim licima (čl. 2, 38, 40).
+- **Uslovi 3.7.4 / Politika 3.7.6** — opcija B za tablu jemstva: verifikovani korisnik može, polazeći od objavljenog zahteva, da započne 1-na-1 razgovor (poruke) sa neverifikovanim podnosiocem, koji u tom razgovoru sme da odgovara i pre verifikacije; neverifikovani i dalje ne može sam da inicira komunikaciju. Uslovi čl. 14/16, Politika 4.8/čl. 5/čl. 6. **Napomena:** re-saglasnost na Politiku NE okida bump fajla — traži nov `PolitikaVerzija` DB red (admin).
 - **Politika 3.7.4 / dokaz stvarnosti 3.7.3** — verifikacija se zasniva na **neposrednom ličnom poznavanju i ne zahteva fizičko prisustvo**; svrha obrade kontakt podataka sa table jemstva preformulisana u skladu s tim.
 - **Pravilnik 3.7.3** — vidljivost prostora za oglašavanje (vidi „Ključna izmena" ispod).
 
@@ -312,7 +313,7 @@ docs/             — interne radne beleške (nije normativa)
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
-- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_5.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_5.md`; `/radnje-obrade` → `radnje_obrade_3_7_5.md`; `/whitepaper` → `whitepaper_3_7_6.md`; `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
+- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_6.md`; `/uslovi` → `uslovi_koriscenja_3_7_4.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_5.md`; `/radnje-obrade` → `radnje_obrade_3_7_5.md`; `/whitepaper` → `whitepaper_3_7_6.md`; `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
 - ✅ **Verzijske labele sređene** — sve javne stranice prikazuju stvarnu verziju (Pravilnik 3.7.5, statut/rizici 3.7.2, DPIA/radnje/politika 3.7.5, whitepaper 3.7.6, o-nama „v3.7.5"); više nema stale „3.7.0".
 
 ### Admin panel
@@ -376,7 +377,7 @@ docs/             — interne radne beleške (nije normativa)
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
 ## Reference
-- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika 3.7.4, Uslovi 3.7.3, DPIA/Radnje obrade/Dokaz stvarnosti/Donacije/Programi podrške 3.7.3; ostalo 3.7.2)
+- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika 3.7.6, Uslovi 3.7.4, DPIA/Radnje obrade 3.7.5, Dokaz stvarnosti/Donacije/Programi podrške 3.7.3; ostalo 3.7.2)
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
