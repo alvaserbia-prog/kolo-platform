@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "db:deploy": "prisma migrate deploy",
+    "db:deploy": "node scripts/migrate-deploy.mjs",
+    "db:deploy:raw": "prisma migrate deploy",
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest",

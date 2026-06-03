@@ -25,10 +25,16 @@ Isti GitHub repo (`alvaserbia-prog/kolo-platform`) prate **dva odvojena Vercel p
 - `main` je „production" samo za **test** projekat (`kolo-platform`). Na tom projektu je `production` grana tek **preview** (nema `DATABASE_URL` u tom okruženju).
 - **Env varijable se postavljaju po projektu.** Tajne za ekolo.rs (npr. `PLACANJE_AKTIVNO`, `NESTPAY_*`) idu u env **`kolo`** projekta (Production), ne u `kolo-platform`.
 
-### Migracije se primenjuju AUTOMATSKI pri deploy-u
-`vercel.json` → `buildCommand`: `if [ -n "$DATABASE_URL" ]; then prisma migrate deploy; fi && npm run build`.
-- Migracije se primenjuju **same** na bazu okruženja preko Vercel `DATABASE_URL` (prod→prod, test→test). **Nema više ručnog `npx prisma migrate deploy`** posle deploy-a.
-- Guard `if DATABASE_URL` znači da okruženja **bez baze** (npr. preview na `kolo-platform`) preskaču migraciju i ne pucaju; gde baza postoji, neuspela migracija i dalje **glasno** obara build (prethodni deploy ostaje živ).
+### Migracije se primenjuju RUČNO (van build-a) — vidi `MIGRACIJE.md`
+Build (`vercel.json` → `buildCommand: npm run build`) **NE dira bazu** — radi samo `prisma generate && next build`. Migracije pokrećeš **ručno posle deploy-a**:
+```bash
+# TEST (main):   DATABASE_URL="<neon test direktan>"  npm run db:deploy
+# PROD (ekolo):  MIGRATE_DATABASE_URL="<neon prod direktan>" npm run db:deploy
+```
+- **Zašto van build-a:** Neon ima auto-suspend; uspavana baza vraća **P1002** pri prvoj konekciji, a to je ranije (dok je `migrate deploy` bio u `buildCommand`) **obaralo ceo deploy**. Sada build prolazi nezavisno od stanja baze.
+- `npm run db:deploy` (`scripts/migrate-deploy.mjs`) prvo **budi bazu** (`SELECT 1` uz retry, eksponencijalni backoff 2→4→8→16→30s), pa pokreće `prisma migrate deploy`, opet uz retry — tako tolerantno na P1002/Neon „spavanje".
+- **Connection pooling:** za migracije koristi **NEPOOLED (direktan)** Neon string (pooler/pgbouncer ne podržava advisory lock + DDL); pooled string ostavi za runtime `DATABASE_URL`. Prioritet URL-a u skripti: `MIGRATE_DATABASE_URL` → `DIRECT_DATABASE_URL` → `DATABASE_URL`.
+- ⚠️ **Ne zaboravi `npm run db:deploy` kad menjaš `prisma/schema.prisma`** — inače novi kod radi nad starom šemom. Fallback bez retry-ja: `npm run db:deploy:raw`.
 - `prisma.config.ts` čita `datasource.url` iz `process.env.DATABASE_URL` (datasource u šemi nema `url`, jer runtime koristi `@prisma/adapter-pg`).
 
 ## Opis projekta
@@ -403,7 +409,7 @@ docs/             — interne radne beleške (nije normativa)
 16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
 
 ### Operativno
-17. ✅ **Migracije se primenjuju AUTOMATSKI pri svakom deploy-u** (vidi „Migracije se primenjuju AUTOMATSKI" u Deploy sekciji) — `vercel.json buildCommand` pokreće `prisma migrate deploy` kad postoji `DATABASE_URL`. Ručni `npx prisma migrate deploy` više nije potreban (ostaje kao fallback za lokalno/vanredne situacije).
+17. ✅ **Migracije idu RUČNO, van build-a** (vidi „Migracije se primenjuju RUČNO" u Deploy sekciji + `MIGRACIJE.md`). Build (`vercel.json buildCommand`) više ne pokreće `prisma migrate deploy` (P1002 na uspavanom Neon-u je obarao deploy). Posle deploy-a pokreni `npm run db:deploy` (skripta budi bazu i radi `migrate deploy` uz retry; nepooled URL za migracije, pooled za runtime).
 18. **Git okruženje:** uvek `git fetch origin main` pre poređenja (lokalni `main` u kontejneru ume da bude zastareo).
 
 ### Procena pokrivenosti
