@@ -4,6 +4,8 @@
  * Veliki prikaz indeksa stvarnosti u formatu "X/Y%" ili "∞/Y%".
  * Pravilnik o dokazu stvarnosti v3.5.0.
  */
+import Pojam from "@/components/Pojam";
+
 type Props = {
   prikaz: string; // "30/30%", "10/30%", "∞/10%", "0/0%"
   tip: string;
@@ -20,7 +22,10 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov }: Props) {
   return (
     <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
       <div className="text-sm uppercase tracking-wide text-black/55 font-semibold">
-        Indeks stvarnosti
+        <Pojam
+          termin="Indeks stvarnosti"
+          objasnjenje="Koliko te je mreža potvrdila kao stvarnu osobu. Raste sa svakom verifikacijom; na 10% dobijaš pun pristup."
+        />
       </div>
       <div className="mt-1 text-5xl font-bold tabular-nums">{prikaz}</div>
       <div className="mt-2 text-sm text-black/70">{tipLabela[tip] ?? tip}</div>

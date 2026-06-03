@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import PageOpis from "@/components/PageOpis";
 
 const KATEGORIJE = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"];
 
@@ -81,6 +82,10 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           <span className="text-xs text-kolo-muted">Verifikujte nalog da biste objavili oglas</span>
         )}
       </div>
+      <PageOpis>
+        Mesto gde članovi nude i traže dobra i usluge. Ponudu može da razgleda
+        svako; za objavu oglasa i kontakt sa prodavcem potrebna je verifikacija.
+      </PageOpis>
 
       {/* Pretraga + filteri */}
       <div className="space-y-3">

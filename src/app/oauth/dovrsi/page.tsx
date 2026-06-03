@@ -65,7 +65,8 @@ export default function OAuthDovrsiPage() {
 
     // Osveži sesiju da se oauthPending postavi na false
     await update();
-    router.push("/verifikacija");
+    try { sessionStorage.setItem("kolo-welcome", "1"); } catch { /* nedostupan */ }
+    router.push("/dobrodosli");
   }
 
   // Čekanje na sesiju ILI redirect (ako je nalog već dovršen, prikaži loading dok se redirektuje)

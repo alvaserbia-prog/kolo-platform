@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import GlasanjeKlijent from "@/app/(app)/glasanje/GlasanjeKlijent";
+import PageOpis from "@/components/PageOpis";
+import Pojam from "@/components/Pojam";
 
 interface Predlog {
   id: string;
@@ -67,6 +69,10 @@ export default function ZrnoKlijent(props: Props) {
           </div>
         )}
       </div>
+      <PageOpis>
+        ZRNO beleži tvoj položaj u zajednici i iz njega proizlazi tvoj glas u
+        odlučivanju. Ovde upisuješ i otpisuješ ZRNO i upravljaš svojim glasom.
+      </PageOpis>
 
       {/* Stanje */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -81,7 +87,12 @@ export default function ZrnoKlijent(props: Props) {
           <p className="text-xs text-kolo-muted mt-0.5">{t("aktivno_opis")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("kurs")}</p>
+          <p className="text-xs text-kolo-muted mb-1">
+            <Pojam
+              termin={t("kurs")}
+              objasnjenje="Odnos ukupnih POEN-a i raspoloživih ZRNA — pokazuje koliko ti je POEN-a potrebno da upišeš jedno ZRNO. Nije cena i nije kurs."
+            />
+          </p>
           <p className="text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("kurs_opis")}</p>
         </div>

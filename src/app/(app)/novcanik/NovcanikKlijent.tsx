@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
+import PageOpis from "@/components/PageOpis";
 
 
 type Transakcija = {
@@ -45,6 +46,12 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
   return (
     <div className="space-y-6">
+      <PageOpis>
+        Tvoj zapis POEN-a — koliko ti je evidentirano i šta se sve dešavalo. POEN
+        beleži tvoj doprinos; nije novac i ne menja se za dinare. Odavde možeš upisati
+        POEN drugom korisniku.
+      </PageOpis>
+
       {/* Balans kartica */}
       <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
         <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>

@@ -83,7 +83,8 @@ export default function RegistracijaPage() {
 
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     if (result?.error) { router.push("/login?registered=1"); return; }
-    router.push("/verifikacija");
+    try { sessionStorage.setItem("kolo-welcome", "1"); } catch { /* nedostupan */ }
+    router.push("/dobrodosli");
   }
 
   return (

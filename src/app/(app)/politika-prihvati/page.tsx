@@ -11,6 +11,17 @@ interface Verzija {
   efektivnaOd: string;
 }
 
+/**
+ * Nakon prihvatanja politike: novog korisnika (sveža registracija postavlja flag)
+ * vodimo na welcome onboarding, postojećeg korisnika na /sistem.
+ */
+function odredisteNakonPristanka(): string {
+  try {
+    if (sessionStorage.getItem("kolo-welcome") === "1") return "/dobrodosli";
+  } catch { /* sessionStorage nedostupan */ }
+  return "/sistem";
+}
+
 export default function PolitikaPrihvatiPage() {
   const router = useRouter();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
@@ -23,7 +34,7 @@ export default function PolitikaPrihvatiPage() {
       .then((r) => r.ok ? r.json() : null)
       .then((data) => {
         if (!data?.potrebno) {
-          router.replace("/sistem");
+          router.replace(odredisteNakonPristanka());
           return;
         }
         setVerzija(data.verzija);
@@ -46,7 +57,7 @@ export default function PolitikaPrihvatiPage() {
       setPrihvatanje(false);
       return;
     }
-    router.replace("/sistem");
+    router.replace(odredisteNakonPristanka());
   }
 
   if (loading) {
