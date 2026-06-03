@@ -531,7 +531,7 @@ export default async function Home() {
               <div>
                 <p className="text-white font-bold text-lg leading-tight">Nikola Šarić</p>
                 <p className="text-white/70 text-sm mt-1 leading-snug">
-                  Lekar iz Sombora · petnaest godina gradi sistem razmene bez novca
+                  Lekar iz Sombora
                 </p>
               </div>
             </div>
