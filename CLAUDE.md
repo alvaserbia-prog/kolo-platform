@@ -196,9 +196,42 @@ U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugr
 - Fontovi koji podržavaju srpsku latinicu (č, ć, š, ž, đ).
 - Zaokruživanje POEN-a u emisijama: `Math.round()`. ZRNO konverzije: uvek u korist Protokola — `Math.floor()` za iznos koji korisnik DOBIJA, `Math.ceil()` za iznos koji korisnik PLAĆA.
 
+## Infrastruktura i integracije (van domena Protokola)
+
+Ovi mehanizmi nisu deo KOLO Protokola, ali postoje u kodu i utiču na rad/usklađenost sajta:
+
+### Analitika i praćenje posetilaca (⚠️ usklađenost — vidi GAP)
+- U `src/app/layout.tsx` učitavaju se **tri** trekera, **bezuslovno** (`afterInteractive`, bez cookie-consent gate-a):
+  - **Google Analytics** — `gtag`, ID `G-JY214NWCDK` (hardkodovan u layout-u).
+  - **Microsoft Clarity** — `NEXT_PUBLIC_CLARITY_ID` (env-gated); ovo je **session-recording / heatmap** alat (snima ponašanje korisnika).
+  - **Vercel Analytics** — `<Analytics />` (`@vercel/analytics`).
+- 🟡 **GAP usklađenosti (otvoren):** Politika privatnosti čl. 7 pominje samo „neophodne kolačiće" i ima placeholder „[DOPUNITI: analitički kolačići…]". **Nema cookie-consent bannera**, a GA/Clarity (treća lica, prenos van EU) se učitavaju bez pristanka. Pre uključivanja uživo treba: (a) consent-gate za ne-neophodne trekere, (b) dopuniti Politiku (čl. 7/8) i DPIA/radnje obrade, (c) navesti Google/Microsoft kao obrađivače.
+
+### SEO sloj
+- `src/lib/seo.ts` (`pageMetadata`, `absoluteUrl`, `SITE_URL=https://ekolo.rs`, `IS_PRODUCTION` preko `VERCEL_ENV`). Test (`*.vercel.app`) → **noindex** (da Google ne tretira kao duplikat prod-a); produkcija → indeksira, canonical na ekolo.rs.
+- File-convention rute: `src/app/robots.ts`, `sitemap.ts`, `opengraph-image.tsx`, `icon.png`; JSON-LD `organizationJsonLd` u `layout.tsx`.
+
+### Proxy / middleware (`src/proxy.ts`)
+- Next middleware: routing autentikacije (neprijavljeni → `/login?callbackUrl=…`), lista `JAVNE_RUTE`, **admin gating** (`/admin` zahteva `token.tipKorisnika === "POCETNI"`, inače → `/dashboard`).
+- **`MAINTENANCE_MODE=true`** (postavlja se **isključivo na produkciji**) preusmerava ulazne rute (`/login`, `/registracija`, `/oauth`, reset lozinke) na `/uskoro`. SEO/metadata rute (`/sitemap.xml`, `/robots.txt`, `/opengraph-image`, `/manifest.webmanifest`) su uvek propusne za botove.
+
+### Admin upozorenja (`src/lib/adminAlert.ts`)
+- `posaljiAdminAlert(naslov, tekst)` šalje **paralelno na Telegram bot i email (Resend)**; nikad ne baca grešku (API poziv prolazi i ako notifikacija ne uspe). Pozivati kao `void posaljiAdminAlert(...)`.
+- Env: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `RESEND_API_KEY`, `ADMIN_EMAIL`, `RESEND_FROM` (opc.). Bez env-a tihо preskače taj kanal.
+
+### Email (Resend)
+- Reset lozinke šalje email preko **Resend** (`src/lib/passwordReset.ts` — `kreirajResetToken`, `posaljiResetEmail`, `verifikujResetToken`, `hashToken`). Isti `RESEND_API_KEY` koristi i admin-alert.
+
+### Lokacije
+- `src/lib/naselja-srbije.ts` (`NASELJA_SRBIJE`) — baza naselja Srbije za `LokacijaSearch.tsx` (profil/oglasi/pretraga po lokaciji).
+
+### Pomoćne/operativne skripte (`scripts/`, ne deo runtime-a)
+- `dijagnostika-emisija.ts` (provera emisija vs. graf verifikacija), `repair-emisija-dokaz.ts` (retroaktivna emisija + vraćanje zero-sum), `smoke-test-dokaz-stvarnosti.ts` (E2E graf verifikacija), `ocisti-program-metadata.ts` (jednokratna minimizacija osetljivih polja), `migrate-prod.mjs`.
+
 ## Struktura foldera
 ```
 src/app/          — Next.js stranice (App Router)
+src/proxy.ts      — Next middleware (auth routing, admin gate, MAINTENANCE_MODE)
 src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, postani-pokrovitelj, verifikacija, nadzor, tabla-jemstva, politika-prihvati, pravilnik-prihvati, admin)
 src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise, o-nama, o-sistemu, cesto-postavljena-pitanja, pravilnik, statut, whitepaper, dpia, radnje-obrade, rizici, zajednicko-dobro, osnivacki-doprinos, privatnost, uslovi)
 src/app/pijaca/   — pijaca sa sopstvenim layout-om (javni + auth prikaz)
@@ -255,6 +288,7 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Programi Protokola
 - Operativni (PED) + socijalni (PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE). Svi otvoreni verifikovanima. Dnevni limit 10% opticaja.
+- **Verifikatorska potvrda socijalnih programa (anti-malverzacija — `programi_podrske_3_7_5.md` čl. 4):** prijava na socijalni program zahteva indeks 100% (10 verifikacija) + izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova. **Tvrda blokada: admin ne može da odobri prijavu dok SVI verifikatori ne potvrde** (na osnovu ličnog poznavanja, bez uvida u osetljive prijavljene podatke; odbijanje traži obrazloženje). Lib `src/lib/protokol/program-potvrda.ts` (`dohvatiVerifikatore`, `kreirajPotvrde`); model `ProgramPotvrda` + enum `PotvrdaStatus`; rute `GET /api/programi/potvrde` (moje potvrde) + `POST /api/programi/potvrde/[id]/odgovori`; stranica `/programi/potvrde`. Migracija `20260602130000_program_potvrde`.
 
 ### ZRNO
 - Upis/otpis ZRNA (zahtev → noćni cron, ponoć); zaključaj/otključaj (u ponoć istog perioda); delegacija glasova (tranzitivni lanac, krugovi, zakazivanje u ponoć — Pravilnik čl. 47).
@@ -285,6 +319,14 @@ docs/             — interne radne beleške (nije normativa)
 - **Koeficijentni model (Pravilnik o pokroviteljstvu i donacijama 3.7.3, čl. 4):** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju; `Math.round()`.
 - **11 nivoa, 1,00× (2.000 RSD) → 2,00× (5.000.000 RSD)** — kod (`donacija.ts` `RANG_TABELA`) usklađen sa `donacije_3_7_3.md` čl. 4. ✅
 - Jedna transakcija „Bonus za donaciju iznos X". Logika: `donacija.ts` (`nivoZaKumulativ`, `izracunajPoenZaDonaciju`, `evidentirajDonaciju`).
+- **Dva načina uplate** (`DonationRecord.nacinUplate`): **UPLATA NA RAČUN** (admin ručno potvrđuje → evidencija) i **KARTICA** (online, NestPay).
+
+#### Kartično plaćanje — NestPay (Banca Intesa / OTP banka)
+- Lib: `src/lib/placanje/nestpay.ts`. Oba provajdera (`INTESA`/`OTP`) koriste **isti NestPay e-commerce gateway** (Asseco SEE / Payten), 3D Secure, **hosted** model — razlika je samo u env konfiguraciji.
+- **Bezbednost (PCI-DSS SAQ-A):** broj kartice se unosi isključivo na hostovanoj stranici banke, **nikad ne dolazi do KOLO servera**. Zahtev se potpisuje **HASH-om (ver3, SHA-512)** iz tajnog store key-a; odgovor banke se **obavezno verifikuje** istim hash-om (`verifikujOdgovor`) + `uspesnoPlacanje` (3D `mdStatus` 1–4 + `Response=Approved`/`ProcReturnCode=00`) pre nego što se POEN emituje.
+- **Tok:** `POST /api/donacije/placanje/zapocni` (samo verifikovani; kreira `DonationRecord` PENDING sa `oid`, vraća polja forme) → klijent auto-POST na gateway banke → korisnik plaća na stranici banke → banka vraća na `/api/donacije/placanje/povratak` (verifikacija hash-a → evidencija POEN-a). POEN se **NE** emituje pri iniciranju, tek po verifikovanom povratku.
+- Funkcije: `placanjeAktivno()`, `dohvatiNestpayConfig()`, `pripremiZahtev()`, `nestpayHashVer3()`, `verifikujOdgovor()`, `uspesnoPlacanje()`. Polja: `DonationRecord.nacinUplate/provajder/oid`; migracija `20260603160000_donacija_karticno_placanje`.
+- **Env (postavljaju se u `kolo` Vercel projektu, Production):** `PLACANJE_AKTIVNO` (master prekidač), `PLACANJE_PROVAJDER` (default `INTESA`), `NESTPAY_INTESA_*` / `NESTPAY_OTP_*` (`_GATEWAY_URL`, `_CLIENT_ID`, `_STORE_KEY`, `_STORE_TYPE`). Ako prekidač isključen ili config nedostaje → ruta vraća 503 sa porukom „koristite uplatu na račun" (nema pucanja).
 
 ### Osnivački doprinos (implementiran)
 - Naknadna evidencija pre-launch rada (Pravilnik čl. 37; Pravilnik o osnivačkom doprinosu).
@@ -331,7 +373,7 @@ docs/             — interne radne beleške (nije normativa)
 ## API endpointi (izbor)
 
 ### Korisnici / profil
-`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci}` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
+`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci}` · `POST /api/profil/avatar` (upload profilne) · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
 
 ### Novčanik / transfer
 `POST /api/transfer` · `GET /api/novcanik/transakcije`
@@ -348,14 +390,17 @@ docs/             — interne radne beleške (nije normativa)
 ### Programi / doprinos-oglasi
 `GET /api/programi` · `POST /api/programi/[type]/prijava` · `POST /api/programi/ped/evidencija` · `/api/admin/programi/*` · `/api/doprinos-oglasi/*` (+ admin odobravanje/odbijanje prijava i evidencije)
 
+### Programi — potvrde verifikatora
+`GET /api/programi/potvrde` (moje potvrde) · `POST /api/programi/potvrde/[id]/odgovori` (potvrdi/odbij) · `/api/admin/programi/enrollments/[id]/{odobri,odbij}`
+
 ### Krugovi / glasanje
-`/api/krugovi/*` (+ admin) · `/api/glasanje/*`
+`/api/krugovi/*` (+ `/[id]/projekti`, `/[id]/pristupnica`, admin) · `/api/glasanje/*`
 
 ### Pokrovitelji / donacije / osnivački
-`GET /api/pokrovitelji` · `/api/pokroviteljstvo/prijava` (+ `/[id]/potpisi`) · `/api/admin/pokroviteljstvo/prijave/*` (potvrdi/odbij) · `/api/admin/pokrovitelji/*` · `POST/GET /api/donacije` · `/api/admin/donacija` · `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`, `/api/javno/osnivacki-doprinos`
+`GET /api/pokrovitelji` · `/api/pokroviteljstvo/prijava` (+ `/[id]/potpisi`) · `/api/admin/pokroviteljstvo/prijave/*` (potvrdi/odbij) · `/api/admin/pokrovitelji/*` · `POST/GET /api/donacije` · **kartično:** `POST /api/donacije/placanje/zapocni`, `GET/POST /api/donacije/placanje/povratak` (NestPay callback) · `/api/admin/donacija` · `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`, `/api/javno/osnivacki-doprinos`
 
 ### Fondacija / veto / sistem
-`/api/admin/fondacija` (saldo, troškovi, veto) · `GET /api/javno/statistike` · `GET /api/javno/feed` (gradiran: gost→agregat, neverifikovan→maskirano, verifikovan→pseudonimi) · `/api/notifikacije` · `/api/dnevni-brojevi` · `/api/admin/{dashboard,transakcije,audit-log,zero-sum,emisija/nocna}` · `/api/cron/{nocna-emisija,zero-sum,gdpr-cistenje}` · `/api/prigovor` + `/api/admin/prigovori/[id]`
+`/api/admin/fondacija` (saldo, troškovi, veto) · **javna transparentnost:** `GET /api/javno/fondacija`, `/api/javno/fondacija/troskovi`, `/api/javno/veto` · `GET /api/javno/statistike` · `GET /api/javno/feed` (gradiran: gost→agregat, neverifikovan→maskirano, verifikovan→pseudonimi) · `/api/notifikacije` · `/api/dnevni-brojevi` · `/api/admin/{dashboard,transakcije,audit-log,zero-sum,emisija/nocna}` · `/api/admin/korisnici/[id]/{suspenduj,aktiviraj,iskljuci,eksport}` · `/api/cron/{nocna-emisija,zero-sum,gdpr-cistenje,programi-revizija}` · `/api/prigovor` + `/api/admin/prigovori/[id]`
 
 ## Biblioteka funkcija (`src/lib/protokol/`)
 - `emisija.ts` — `emitujPoen()`: emisija + zero-sum validacija
@@ -368,8 +413,10 @@ docs/             — interne radne beleške (nije normativa)
 - `fondacija.ts` — saldo Fondacije + zaštitni veto (🟡 prag 3× hardkodovan)
 - `faza-sistema.ts` — Faza 1/2, auto prelaz na 1.000.000 POEN
 - `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` — dokaz stvarnosti i nadzor
+- `program-potvrda.ts` — verifikatorska potvrda socijalnih programa (`dohvatiVerifikatore`, `kreirajPotvrde`)
 - `pristup.ts` — provere pristupa po statusu/indeksu
-- `src/lib/notifikacije.ts` — `posaljiNotifikaciju()`; `src/lib/faq-data.ts` — `FAQ_SEKCIJE`
+
+**Van `protokol/` (`src/lib/`):** `notifikacije.ts` (`posaljiNotifikaciju()`) · `faq-data.ts` (`FAQ_SEKCIJE`) · `adminAlert.ts` (`posaljiAdminAlert()` → Telegram + Resend) · `passwordReset.ts` (reset lozinke + Resend email) · `placanje/nestpay.ts` (kartično plaćanje, vidi sekciju Donacije) · `seo.ts` (SEO metadata) · `naselja-srbije.ts` (`NASELJA_SRBIJE`) · `audit.ts` (`logAdminAkcija`) · `colors.ts` · `auth.ts` (`authOptions`).
 
 ## Testovi
 - **Vitest** (`npm test`, `npm run test:watch`). Lokacija: `__tests__/protokol/`.
@@ -401,6 +448,9 @@ docs/             — interne radne beleške (nije normativa)
 14. **Pseudonim — limit izmene** — `pseudonimChangedAt` postoji; limit nije propisan Pravilnikom (Uslovi).
 15. **CC BY-SA označavanje sadržaja na nivou pojedinačnog dela** — bez formalnog mehanizma.
 16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
+
+### Usklađenost — analitika/kolačići
+19. 🟡 **Analitika bez pristanka (otvoren GAP).** GA (`G-JY214NWCDK`), Microsoft Clarity (`NEXT_PUBLIC_CLARITY_ID`, session-recording) i Vercel Analytics se u `layout.tsx` učitavaju **bezuslovno**, bez cookie-consent gate-a. Politika privatnosti čl. 7 pokriva samo „neophodne kolačiće" i ima placeholder za analitičke; nema bannera za pristanak ni navođenja Google/Microsoft kao obrađivača (prenos van EU). Treba: consent-gate za ne-neophodne trekere + dopuna Politike (čl. 7/8), DPIA i radnji obrade. (Vidi „Infrastruktura i integracije → Analitika".)
 
 ### Operativno
 17. ✅ **Migracije se primenjuju AUTOMATSKI pri svakom deploy-u** (vidi „Migracije se primenjuju AUTOMATSKI" u Deploy sekciji) — `vercel.json buildCommand` pokreće `prisma migrate deploy` kad postoji `DATABASE_URL`. Ručni `npx prisma migrate deploy` više nije potreban (ostaje kao fallback za lokalno/vanredne situacije).
