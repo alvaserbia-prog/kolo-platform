@@ -17,7 +17,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
-    select: { tipKorisnika: true, status: true, pseudonim: true },
+    select: { tipKorisnika: true, admin: true, status: true, pseudonim: true },
   });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
   if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });

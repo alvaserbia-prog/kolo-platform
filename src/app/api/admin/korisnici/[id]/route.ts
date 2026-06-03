@@ -16,7 +16,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
-    select: { pseudonim: true, tipKorisnika: true },
+    select: { pseudonim: true, tipKorisnika: true, admin: true },
   });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
   if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se editovati admin." }, { status: 400 });

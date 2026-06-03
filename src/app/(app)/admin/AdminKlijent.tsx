@@ -11,6 +11,7 @@ interface KorisnikInfo {
   pseudonim: string;
   email: string | null;
   tipKorisnika: string;
+  admin: string;
   verified: boolean;
   status: string;
   suspendedReason: string | null;

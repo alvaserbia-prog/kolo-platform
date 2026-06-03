@@ -5,6 +5,7 @@ import {
   PrismaClient,
   WalletType,
   TipKorisnika,
+  AdminNivo,
   TransactionType,
   UserStatus,
   ProgramType,
@@ -223,6 +224,7 @@ async function seedAdmin() {
       where: { email: c.email },
       update: {
         tipKorisnika: TipKorisnika.POCETNI,
+        admin: AdminNivo.SUPERADMIN,
         verified: true,
       },
       create: {
@@ -230,6 +232,7 @@ async function seedAdmin() {
         passwordHash: hash,
         pseudonim: c.pseudonim,
         tipKorisnika: TipKorisnika.POCETNI,
+        admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: 10,
         verified: true,
         verifiedAt: new Date(),

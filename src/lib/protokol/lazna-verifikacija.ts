@@ -49,7 +49,7 @@ export async function ponistiLaznogVerifikatora(
 ): Promise<PonistavanjeRezultat> {
   const lazni = await prisma.user.findUnique({
     where: { id: laznoVerifikatorId },
-    select: { id: true, pseudonim: true, tipKorisnika: true, status: true },
+    select: { id: true, pseudonim: true, tipKorisnika: true, admin: true, status: true },
   });
   if (!lazni) throw new LaznaVerifikacijaGreska("Korisnik nije pronađen.", 404);
   if (jeSuperadmin(lazni))

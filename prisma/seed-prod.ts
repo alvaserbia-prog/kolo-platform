@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient, WalletType, TipKorisnika } from "../src/generated/prisma/client";
+import { PrismaClient, WalletType, TipKorisnika, AdminNivo } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import bcrypt from "bcryptjs";
 
@@ -21,12 +21,13 @@ async function main() {
   const hash = await bcrypt.hash(ADMIN_LOZINKA, 12);
   await prisma.user.upsert({
     where: { email: "admin@ekolo.rs" },
-    update: { tipKorisnika: TipKorisnika.POCETNI, indeksStvarnosti: 10, verified: true },
+    update: { tipKorisnika: TipKorisnika.POCETNI, admin: AdminNivo.SUPERADMIN, indeksStvarnosti: 10, verified: true },
     create: {
       email: "admin@ekolo.rs",
       passwordHash: hash,
       pseudonim: "Admin",
       tipKorisnika: TipKorisnika.POCETNI,
+      admin: AdminNivo.SUPERADMIN,
       indeksStvarnosti: 10,
       verified: true,
       verifiedAt: new Date(),

@@ -64,6 +64,15 @@ enum TipKorisnika {
   NEVERIFIKOVAN
 }
 
+// Operativna ovlašćenja (admin osa), nezavisna od članskog tipa (TipKorisnika).
+// NONE = običan član; ADMIN = svakodnevna operativa; SUPERADMIN = sve + opasne
+// radnje + verifikuje prve ljude (koren lanca jemstva).
+enum AdminNivo {
+  NONE
+  ADMIN
+  SUPERADMIN
+}
+
 enum ZrnoZahtevStatus {
   PENDING
   EXECUTED
@@ -185,6 +194,7 @@ model User {
   verified           Boolean   @default(false)
   verifiedAt         DateTime?
   tipKorisnika           TipKorisnika @default(NEVERIFIKOVAN)
+  admin                  AdminNivo    @default(NONE)
   indeksStvarnosti       Int          @default(0)
   slotoviPotroseni       Int          @default(0)
   pocetnaEmisijaIzvrsena Boolean      @default(false)

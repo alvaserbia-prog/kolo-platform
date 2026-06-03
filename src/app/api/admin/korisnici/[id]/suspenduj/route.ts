@@ -14,7 +14,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const body = await req.json().catch(() => ({}));
   const razlog = (body.razlog ?? "").trim();
 
-  const korisnik = await prisma.user.findUnique({ where: { id }, select: { tipKorisnika: true, status: true, pseudonim: true } });
+  const korisnik = await prisma.user.findUnique({ where: { id }, select: { tipKorisnika: true, admin: true, status: true, pseudonim: true } });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
   if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se suspendovati admin." }, { status: 400 });
   if (korisnik.status === "SUSPENDED") return NextResponse.json({ error: "Korisnik je već suspendovan." }, { status: 400 });
