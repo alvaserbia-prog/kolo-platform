@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const title = (body.title ?? "").trim();
   const description = (body.description ?? "").trim();
+  const vrsta = body.vrsta === "DINARSKA_PREPORUKA" ? "DINARSKA_PREPORUKA" : "ODLUKA";
 
   if (!title || title.length < 5)
     return NextResponse.json({ error: "Naslov mora imati najmanje 5 karaktera." }, { status: 400 });
@@ -72,7 +73,7 @@ export async function POST(req: NextRequest) {
   const { glasanjePocetak, deadline } = granicePeriodaGlasanja(new Date());
 
   const predlog = await prisma.glasanjePredlog.create({
-    data: { title, description, authorId: session.user.id, glasanjePocetak, deadline },
+    data: { title, description, vrsta, authorId: session.user.id, glasanjePocetak, deadline },
   });
 
   return NextResponse.json({ ok: true, id: predlog.id });

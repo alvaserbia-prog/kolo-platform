@@ -4,6 +4,7 @@ import Link from "next/link";
 import { authOptions } from "@/lib/auth";
 import { dohvatiRegistarOdluka } from "@/lib/protokol/glasanje";
 import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
+import PreporukaOdgovor from "./PreporukaOdgovor";
 
 export const metadata = { title: "Registar odluka — KOLO" };
 
@@ -48,7 +49,12 @@ export default async function RegistarOdlukaPage() {
             return (
               <div key={o.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-2">
                 <div className="flex items-start justify-between gap-3">
-                  <p className="font-semibold text-kolo-text">{o.title}</p>
+                  <div className="min-w-0">
+                    <p className="font-semibold text-kolo-text">{o.title}</p>
+                    {o.vrsta === "DINARSKA_PREPORUKA" && (
+                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded bg-kolo-gold-50 text-kolo-gold-600 font-medium">Dinarska preporuka (savetodavna)</span>
+                    )}
+                  </div>
                   <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${usvojen ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
                     {usvojen ? "Usvojeno" : "Neusvojeno"}
                   </span>
@@ -78,6 +84,23 @@ export default async function RegistarOdlukaPage() {
                 )}
 
                 {jeAdmin && o.izvrsenjeStatus === "ZA_IZVRSENJE" && <IzvrsenjeKontrole id={o.id} />}
+
+                {/* Usvojena dinarska preporuka — odgovor UO (čl. 20) */}
+                {usvojen && o.vrsta === "DINARSKA_PREPORUKA" && (
+                  o.uoOdgovor ? (
+                    <div className="text-xs">
+                      <span className={`inline-block px-2 py-0.5 rounded font-medium ${o.uoOdgovor === "PRIHVACENO" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
+                        Odgovor UO: {o.uoOdgovor === "PRIHVACENO" ? "Prihvaćeno" : "Odbijeno"}
+                      </span>
+                      {o.uoObrazlozenje && <p className="mt-1 text-kolo-muted italic">{o.uoObrazlozenje}</p>}
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-xs text-kolo-gold-600 font-medium">Čeka obrazložen odgovor UO</p>
+                      {jeAdmin && <PreporukaOdgovor id={o.id} />}
+                    </>
+                  )
+                )}
               </div>
             );
           })}

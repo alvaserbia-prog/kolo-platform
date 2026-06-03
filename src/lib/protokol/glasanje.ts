@@ -94,8 +94,11 @@ export async function dohvatiRegistarOdluka() {
     ishodUsvojen: o.ishodUsvojen,
     zaZbir: o.zaZbir ?? 0,
     protivZbir: o.protivZbir ?? 0,
+    vrsta: o.vrsta,
     izvrsenjeStatus: o.izvrsenjeStatus,
     vetoObrazlozenje: o.vetoObrazlozenje,
+    uoOdgovor: o.uoOdgovor,
+    uoObrazlozenje: o.uoObrazlozenje,
     brGlasova: o._count.glasovi,
   }));
 }
@@ -121,8 +124,9 @@ export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promis
         zaZbir,
         protivZbir,
         ishodUsvojen: usvojen,
-        // Usvojena odluka prelazi u izvršenje od strane Fondacije (čl. 17)
-        izvrsenjeStatus: usvojen ? "ZA_IZVRSENJE" : null,
+        // Usvojena ODLUKA je obavezujuća → izvršenje Fondacije (čl. 17).
+        // Usvojena DINARSKA_PREPORUKA nije obavezujuća → čeka obrazložen odgovor UO (čl. 20).
+        izvrsenjeStatus: usvojen && p.vrsta === "ODLUKA" ? "ZA_IZVRSENJE" : null,
       },
     });
   }
@@ -137,6 +141,34 @@ export async function izvrsiOdluku(id: string): Promise<void> {
   await prisma.glasanjePredlog.update({
     where: { id },
     data: { izvrsenjeStatus: "IZVRSENO", izvrsenoAt: new Date() },
+  });
+}
+
+/**
+ * UO daje obrazložen odgovor na usvojenu dinarsku preporuku (čl. 20).
+ * Preporuka nije obavezujuća — UO je prihvata ili odbija, uvek uz obrazloženje.
+ */
+export async function odgovoriNaPreporuku(
+  id: string,
+  odgovor: "PRIHVACENO" | "ODBIJENO",
+  obrazlozenje: string
+): Promise<void> {
+  const o = (obrazlozenje ?? "").trim();
+  if (odgovor !== "PRIHVACENO" && odgovor !== "ODBIJENO")
+    throw new GlasanjeGreska("Neispravan odgovor.");
+  if (o.length < 10)
+    throw new GlasanjeGreska("Odgovor UO mora biti obrazložen (čl. 20).");
+  const p = await prisma.glasanjePredlog.findUnique({
+    where: { id },
+    select: { vrsta: true, status: true, ishodUsvojen: true, uoOdgovor: true },
+  });
+  if (!p) throw new GlasanjeGreska("Predlog nije pronađen.", 404);
+  if (p.vrsta !== "DINARSKA_PREPORUKA" || p.status !== "CLOSED" || p.ishodUsvojen !== true)
+    throw new GlasanjeGreska("Odgovor je moguć samo na usvojenu dinarsku preporuku.");
+  if (p.uoOdgovor) throw new GlasanjeGreska("UO je već odgovorio na ovu preporuku.");
+  await prisma.glasanjePredlog.update({
+    where: { id },
+    data: { uoOdgovor: odgovor, uoObrazlozenje: o, uoOdgovorAt: new Date() },
   });
 }
 

@@ -87,6 +87,18 @@ enum IzvrsenjeStatus {
   VETO_OBUSTAVLJENO // izvršenje obustavljeno zaštitnim vetom (čl. 18, 48)
 }
 
+// Vrsta predloga: obavezujuća odluka ili neobavezujuća dinarska preporuka (čl. 20)
+enum PredlogVrsta {
+  ODLUKA
+  DINARSKA_PREPORUKA
+}
+
+// Obrazložen odgovor UO na usvojenu dinarsku preporuku (čl. 20)
+enum UoOdgovor {
+  PRIHVACENO
+  ODBIJENO
+}
+
 enum ProgramType {
   PED
   PODRSKA_MAJKAMA
@@ -605,6 +617,7 @@ model GlasanjePredlog {
   description     String
   authorId        String
   author          User          @relation(fields: [authorId], references: [id])
+  vrsta           PredlogVrsta  @default(ODLUKA) // odluka (obavezujuća) ili dinarska preporuka (čl. 20)
   glasanjePocetak DateTime      // ponoć narednog obračunskog perioda (čl. 11)
   deadline        DateTime      // kraj glasanja = kraj tog perioda
   status          PredlogStatus @default(ACTIVE)
@@ -615,6 +628,9 @@ model GlasanjePredlog {
   vetoObrazlozenje String?      // obavezno obrazloženje zaštitnog veta (čl. 18)
   izvrsenoAt      DateTime?
   vetoAt          DateTime?
+  uoOdgovor       UoOdgovor?    // obrazložen odgovor UO na usvojenu preporuku (čl. 20)
+  uoObrazlozenje  String?
+  uoOdgovorAt     DateTime?
   glasovi         GlasanjeGlas[]
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt

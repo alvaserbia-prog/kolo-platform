@@ -184,6 +184,7 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
   const tc = useTranslations("common");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [vrsta, setVrsta] = useState<"ODLUKA" | "DINARSKA_PREPORUKA">("ODLUKA");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -197,7 +198,7 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
       const res = await fetch("/api/glasanje", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: title.trim(), description: description.trim() }),
+        body: JSON.stringify({ title: title.trim(), description: description.trim(), vrsta }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? tc("greska_ucitavanja")); return; }
@@ -214,6 +215,14 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
       <textarea rows={3} placeholder={t("opis_placeholder")} value={description} onChange={(e) => setDescription(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 resize-none" />
+      <div>
+        <label className="block text-xs text-kolo-muted mb-1">{t("vrsta_label")}</label>
+        <select value={vrsta} onChange={(e) => setVrsta(e.target.value as "ODLUKA" | "DINARSKA_PREPORUKA")}
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700">
+          <option value="ODLUKA">{t("vrsta_odluka")}</option>
+          <option value="DINARSKA_PREPORUKA">{t("vrsta_preporuka")}</option>
+        </select>
+      </div>
       <p className="text-xs text-kolo-muted bg-kolo-bg rounded-lg px-3 py-2">{t("period_info")}</p>
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
