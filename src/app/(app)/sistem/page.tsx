@@ -2,26 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { labelPrograma } from "@/lib/protokol/programi";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
-import { ProgramType } from "@/generated/prisma/client";
 import SistemKlijent from "./SistemKlijent";
-
-const SVE_PROGRAME: ProgramType[] = [
-  "PED",
-  "PODRSKA_MAJKAMA",
-  "PODRSKA_STARIJIMA",
-  "POSEBNA_BRIGA",
-  "SKOLOVANJE",
-];
-
-const OPIS_PROGRAMA: Record<ProgramType, string> = {
-  PED: "Mesečna POEN podrška nezaposlenim članovima koji aktivno traže posao.",
-  PODRSKA_MAJKAMA: "Podrška majkama sa malom decom do 3 godine starosti.",
-  PODRSKA_STARIJIMA: "Podrška starijim članovima koji su napunili 65 godina.",
-  POSEBNA_BRIGA: "Posebna briga — za članove sa posebnim potrebama ili u teškim okolnostima.",
-  SKOLOVANJE: "Podrška za školovanje — đacima i studentima koji su članovi KOLO-a.",
-};
 
 export default async function SistemPage() {
   const session = await getServerSession(authOptions);
@@ -36,21 +18,20 @@ export default async function SistemPage() {
     protokol,
     ukupnoKorisnika,
     verifikovanih,
-    ukupnoKrug,
     emisije,
     transakcijeSve,
+    ukupnoTransakcija,
     korisnici,
-    krugoviLista,
-    aktivniProgrami,
     danasKorisnika,
     danasTransakcija,
-    danasKrug,
     ukupnoDonacijaRaw,
     danasDonacijaRaw,
     ukupanIznosTxRaw,
     danasIznosTxRaw,
     donacijeLista,
     pokroviteljiLista,
+    ukupnoVerifikacija,
+    danasVerifikacija,
   ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
@@ -58,7 +39,6 @@ export default async function SistemPage() {
     }),
     prisma.user.count(),
     prisma.user.count({ where: { verified: true } }),
-    prisma.krug.count({ where: { status: "ACTIVE" } }),
     prisma.dailyEmissionSummary.findMany({
       orderBy: { date: "desc" },
       take: 30,
@@ -71,6 +51,7 @@ export default async function SistemPage() {
         toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
+    prisma.transaction.count(),
     prisma.user.findMany({
       orderBy: [{ wallet: { balance: "desc" } }],
       select: {
@@ -91,28 +72,11 @@ export default async function SistemPage() {
         },
       },
     }),
-    prisma.krug.findMany({
-      where: { status: "ACTIVE" },
-      orderBy: { createdAt: "asc" },
-      select: {
-        id: true,
-        name: true,
-        location: true,
-        createdAt: true,
-        memberships: { where: { leftAt: null }, select: { id: true } },
-      },
-    }),
-    prisma.protokolProgram.findMany({
-      select: { type: true, isActive: true, activatedAt: true },
-    }),
     prisma.user.count({
       where: { createdAt: { gte: danas } },
     }),
     prisma.transaction.count({
       where: { createdAt: { gte: danas } },
-    }),
-    prisma.krug.count({
-      where: { status: "ACTIVE", createdAt: { gte: danas } },
     }),
     prisma.donationRecord.count({ where: { status: "CONFIRMED" } }),
     prisma.donationRecord.count({
@@ -142,6 +106,10 @@ export default async function SistemPage() {
         trenutniNivo: true,
       },
       orderBy: { rsdKumulativ: "desc" },
+    }),
+    prisma.verifikacionaVeza.count(),
+    prisma.verifikacionaVeza.count({
+      where: { vremenskiZig: { gte: danas } },
     }),
   ]);
 
@@ -201,14 +169,6 @@ export default async function SistemPage() {
     };
   });
 
-  const krugovi = krugoviLista.map((z) => ({
-    id: z.id,
-    name: z.name,
-    location: z.location,
-    clanovi: z.memberships.length,
-    createdAt: z.createdAt.toISOString(),
-  }));
-
   const emisijeChart = emisije
     .slice(0, 14)
     .reverse()
@@ -218,17 +178,6 @@ export default async function SistemPage() {
       limit: e.limit,
     }));
 
-  const programiData = SVE_PROGRAME.map((type) => {
-    const program = aktivniProgrami.find((p) => p.type === type);
-    return {
-      type,
-      label: labelPrograma(type),
-      opis: OPIS_PROGRAMA[type],
-      isActive: program?.isActive ?? false,
-      activatedAt: program?.activatedAt?.toISOString() ?? null,
-    };
-  });
-
   return (
     <SistemKlijent
       pseudonim={session.user.pseudonim}
@@ -237,12 +186,13 @@ export default async function SistemPage() {
       protokolBalance={protokolBalance}
       ukupnoKorisnika={ukupnoKorisnika}
       verifikovanih={verifikovanih}
-      ukupnoKrugCount={ukupnoKrug}
+      ukupnoTransakcija={ukupnoTransakcija}
       danasEmitovano={danasEmitovano}
       danasLimit={danasLimit}
       danasKorisnika={danasKorisnika}
       danasTransakcija={danasTransakcija}
-      danasKrug={danasKrug}
+      ukupnoVerifikacija={ukupnoVerifikacija}
+      danasVerifikacija={danasVerifikacija}
       ukupnoDonacija={ukupnoDonacija}
       danasDonacija={danasDonacija}
       ukupanIznosTx={ukupanIznosTx}
@@ -252,8 +202,6 @@ export default async function SistemPage() {
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
-      krugovi={krugovi}
-      programi={programiData}
     />
   );
 }
