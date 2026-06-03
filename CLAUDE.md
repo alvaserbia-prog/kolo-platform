@@ -13,6 +13,24 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 
+### Vercel topologija — DVA projekta na istom repou
+Isti GitHub repo (`alvaserbia-prog/kolo-platform`) prate **dva odvojena Vercel projekta**; svaki push okida build na **oba**:
+
+| Vercel projekat | Production Branch | „Uživo" domen | Baza (Neon) |
+|---|---|---|---|
+| **`kolo`** | **`production`** | **ekolo.rs** / www.ekolo.rs | prod (`ep-empty-forest-alajuasx`) |
+| **`kolo-platform`** | **`main`** | `kolo-peach.vercel.app` | test (`ep-old-sky-aleg2alm`) |
+
+- **ekolo.rs servira `kolo` projekat sa `production` grane** (potvrđeno: alias `ekolo.rs`/`www.ekolo.rs`). „Objava na ekolo.rs" = merge `main` → `production` + push (kao i ranije).
+- `main` je „production" samo za **test** projekat (`kolo-platform`). Na tom projektu je `production` grana tek **preview** (nema `DATABASE_URL` u tom okruženju).
+- **Env varijable se postavljaju po projektu.** Tajne za ekolo.rs (npr. `PLACANJE_AKTIVNO`, `NESTPAY_*`) idu u env **`kolo`** projekta (Production), ne u `kolo-platform`.
+
+### Migracije se primenjuju AUTOMATSKI pri deploy-u
+`vercel.json` → `buildCommand`: `if [ -n "$DATABASE_URL" ]; then prisma migrate deploy; fi && npm run build`.
+- Migracije se primenjuju **same** na bazu okruženja preko Vercel `DATABASE_URL` (prod→prod, test→test). **Nema više ručnog `npx prisma migrate deploy`** posle deploy-a.
+- Guard `if DATABASE_URL` znači da okruženja **bez baze** (npr. preview na `kolo-platform`) preskaču migraciju i ne pucaju; gde baza postoji, neuspela migracija i dalje **glasno** obara build (prethodni deploy ostaje živ).
+- `prisma.config.ts` čita `datasource.url` iz `process.env.DATABASE_URL` (datasource u šemi nema `url`, jer runtime koristi `@prisma/adapter-pg`).
+
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Koristi dve interne jedinice:
 - **POEN** — interna obračunska jedinica kojom se evidentira doprinos i učešće u zajedničkom dobru (NIJE novac, NIJE imovinsko pravo; beleži činjenicu doprinosa, bez vrednosti van sistema — analogija: zapis u matičnoj knjizi)
@@ -385,7 +403,7 @@ docs/             — interne radne beleške (nije normativa)
 16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
 
 ### Operativno
-17. **Migracije** se primenjuju na production sa `npx prisma migrate deploy` posle deploy-a. Novije migracije: `20260526120000_ukloni_lk_jmbg`, `20260526130000_tabla_jemstva`, `20260527090000_delegiranje_lanac` (+ pokroviteljstvo/osnivački/veto migracije).
+17. ✅ **Migracije se primenjuju AUTOMATSKI pri svakom deploy-u** (vidi „Migracije se primenjuju AUTOMATSKI" u Deploy sekciji) — `vercel.json buildCommand` pokreće `prisma migrate deploy` kad postoji `DATABASE_URL`. Ručni `npx prisma migrate deploy` više nije potreban (ostaje kao fallback za lokalno/vanredne situacije).
 18. **Git okruženje:** uvek `git fetch origin main` pre poređenja (lokalni `main` u kontejneru ume da bude zastareo).
 
 ### Procena pokrivenosti
