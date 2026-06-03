@@ -56,8 +56,8 @@ export default async function SistemPage() {
       where: { id: "banka-singleton" },
       select: { balance: true },
     }),
-    prisma.user.count({ where: { tipKorisnika: { not: "POCETNI" } } }),
-    prisma.user.count({ where: { verified: true, tipKorisnika: { not: "POCETNI" } } }),
+    prisma.user.count(),
+    prisma.user.count({ where: { verified: true } }),
     prisma.krug.count({ where: { status: "ACTIVE" } }),
     prisma.dailyEmissionSummary.findMany({
       orderBy: { date: "desc" },
@@ -72,7 +72,6 @@ export default async function SistemPage() {
       },
     }),
     prisma.user.findMany({
-      where: { tipKorisnika: { not: "POCETNI" } },
       orderBy: [{ wallet: { balance: "desc" } }],
       select: {
         id: true,
@@ -107,7 +106,7 @@ export default async function SistemPage() {
       select: { type: true, isActive: true, activatedAt: true },
     }),
     prisma.user.count({
-      where: { tipKorisnika: { not: "POCETNI" }, createdAt: { gte: danas } },
+      where: { createdAt: { gte: danas } },
     }),
     prisma.transaction.count({
       where: { createdAt: { gte: danas } },
