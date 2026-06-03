@@ -5,7 +5,7 @@ declare module "next-auth" {
     user: {
       id: string;
       pseudonim: string;
-      role: string;
+      tipKorisnika: string;
       verified: boolean;
       oauthPending: boolean;
     } & DefaultSession["user"];
@@ -14,7 +14,7 @@ declare module "next-auth" {
   interface User {
     id: string;
     pseudonim: string;
-    role: string;
+    tipKorisnika: string;
     verified: boolean;
     oauthPending?: boolean;
   }
@@ -24,7 +24,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     pseudonim: string;
-    role: string;
+    tipKorisnika: string;
     verified: boolean;
     oauthPending?: boolean;
   }

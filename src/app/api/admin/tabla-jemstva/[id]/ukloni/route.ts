@@ -9,7 +9,7 @@ import { posaljiNotifikaciju } from "@/lib/notifikacije";
 // (uvredljiv/diskriminatorski/nezakonit sadržaj, lažni podaci ili van svrhe table).
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;

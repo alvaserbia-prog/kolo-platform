@@ -16,7 +16,7 @@ export async function POST(
   const { id: krugId, pristupnicaId } = await params;
 
   // Mora biti admin krugovi ili ADMIN sistema
-  const isAdmin = session.user.role === "ADMIN";
+  const isAdmin = session.user.tipKorisnika === "POCETNI";
   const isKrugAdmin = await prisma.krugClanstvo.findFirst({
     where: { krugId, userId: session.user.id, leftAt: null, isAdmin: true },
   });

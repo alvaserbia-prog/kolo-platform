@@ -7,7 +7,7 @@ import { logAdminAkcija } from "@/lib/audit";
 // POST /api/admin/blog — kreira novu vest
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 // GET /api/admin/blog — admin lista (sve objave)
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 

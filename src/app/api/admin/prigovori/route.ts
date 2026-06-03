@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
  */
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
   }
 

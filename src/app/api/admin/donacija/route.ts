@@ -9,7 +9,7 @@ import { posaljiNotifikaciju } from "@/lib/notifikacije";
 // POST — potvrdi ili ručno evidentiraj donaciju
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
 // GET — lista svih donacija sa statusom
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 

@@ -48,10 +48,10 @@ export async function ponistiLaznogVerifikatora(
 ): Promise<PonistavanjeRezultat> {
   const lazni = await prisma.user.findUnique({
     where: { id: laznoVerifikatorId },
-    select: { id: true, pseudonim: true, role: true, status: true },
+    select: { id: true, pseudonim: true, tipKorisnika: true, status: true },
   });
   if (!lazni) throw new LaznaVerifikacijaGreska("Korisnik nije pronađen.", 404);
-  if (lazni.role === "ADMIN")
+  if (lazni.tipKorisnika === "POCETNI")
     throw new LaznaVerifikacijaGreska("Ne može se označiti administrator.", 400);
 
   const pogodjeni: string[] = [];

@@ -6,7 +6,7 @@ import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
 // POST /api/admin/emisija/nocna — manualni okidač (samo admin)
 export async function POST() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   try {

@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 async function proveriAdmin() {
   const session = await getServerSession(authOptions);
   if (!session) return { ok: false, status: 401, error: "Nije prijavljen." } as const;
-  if (session.user.role !== "ADMIN") return { ok: false, status: 403, error: "Samo admin." } as const;
+  if (session.user.tipKorisnika !== "POCETNI") return { ok: false, status: 403, error: "Samo admin." } as const;
   return { ok: true, session } as const;
 }
 

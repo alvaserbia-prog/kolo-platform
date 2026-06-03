@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 // POST /api/admin/doprinos-oglasi/oglasi — kreiranje oglasa
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const body = await req.json().catch(() => ({}));
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
 // GET /api/admin/doprinos-oglasi/oglasi — lista svih oglasa
 export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const oglasi = await prisma.doprinosOglas.findMany({

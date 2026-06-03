@@ -10,6 +10,7 @@ interface KorisnikInfo {
   pseudonim: string;
   email: string | null;
   role: string;
+  tipKorisnika: string;
   verified: boolean;
   status: string;
   suspendedReason: string | null;
@@ -1231,7 +1232,7 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                 </div>
-                {u.role !== "ADMIN" && (
+                {u.tipKorisnika !== "POCETNI" && (
                   <div className="flex gap-1.5 shrink-0 flex-wrap justify-end">
                     <button onClick={() => setIzmeniKorisnik(u)} disabled={loadingId === u.id}
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">

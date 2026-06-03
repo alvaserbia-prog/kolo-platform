@@ -16,7 +16,7 @@ type Kategorija = typeof KATEGORIJE[number];
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.role !== "ADMIN") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const troskovi = await prisma.fondacijaTrosak.findMany({
     include: { kreirao: { select: { pseudonim: true } } },
@@ -30,7 +30,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.role !== "ADMIN") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const body = await req.json();
   const { datum, iznosRSD, kategorija, opis, dokumentUrl } = body;
