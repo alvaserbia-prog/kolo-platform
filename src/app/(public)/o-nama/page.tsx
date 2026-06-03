@@ -60,7 +60,7 @@ export default function ONamaPage() {
           </div>
           <div className="shrink-0 mx-auto md:ml-auto">
             <Image
-              src="/nikola-saric.png"
+              src="/nikola-saric-mantil.png"
               alt="Nikola Šarić"
               width={160}
               height={160}
