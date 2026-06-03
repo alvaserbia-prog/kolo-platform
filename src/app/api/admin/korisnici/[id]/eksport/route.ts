@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 /**
  * GET /api/admin/korisnici/[id]/eksport
@@ -13,7 +14,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeSuperadmin(session.user)) {
     return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
   }
 

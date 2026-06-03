@@ -67,7 +67,7 @@ async function kreirajKorisnika(broj: number, tip: TipKorisnika) {
       pseudonim,
       passwordHash: null,
       tipKorisnika: tip,
-      indeksStvarnosti: tip === TipKorisnika.POCETNI ? 10 : 0,
+      indeksStvarnosti: tip === TipKorisnika.NOSILAC_ZRNA ? 10 : 0,
       memberHash: `${PREFIX}${broj}h`,
       wallet: { create: { type: WalletType.USER, balance: 0 } },
     },
@@ -125,10 +125,10 @@ async function main() {
   await cleanup();
 
   // 1. Kreiraj 5 test korisnika
-  const u1 = await kreirajKorisnika(1, TipKorisnika.POCETNI); // POCETNI
+  const u1 = await kreirajKorisnika(1, TipKorisnika.NOSILAC_ZRNA); // koren (verifikuje prve)
   const u2 = await kreirajKorisnika(2, TipKorisnika.NEVERIFIKOVAN);
   const u3 = await kreirajKorisnika(3, TipKorisnika.NEVERIFIKOVAN);
-  const u4 = await kreirajKorisnika(4, TipKorisnika.POCETNI); // drugi POCETNI za nadzor
+  const u4 = await kreirajKorisnika(4, TipKorisnika.NOSILAC_ZRNA); // drugi nosilac ZRNA za nadzor
   const u5 = await kreirajKorisnika(5, TipKorisnika.NEVERIFIKOVAN);
   console.log(`✓ Kreirano 5 test korisnika`);
 

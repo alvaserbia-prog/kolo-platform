@@ -6,6 +6,7 @@ import MiniStablo, {
   type CvorVerifikator,
   type CvorVerifikovani,
 } from "@/components/verifikacija/MiniStablo";
+import { jeKorenJemstva } from "@/lib/dozvole";
 
 type LanacResponse = {
   korisnik: {
@@ -80,7 +81,7 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
         ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
         verifikatori={verifikatorCvorovi}
         verifikovani={verifikovaniCvorovi}
-        jeJaPocetni={data.korisnik.tip === "POCETNI"}
+        jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
       />
     </div>
   );

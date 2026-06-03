@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/doprinos-oglasi/oglasi — kreiranje oglasa
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const body = await req.json().catch(() => ({}));
@@ -47,7 +48,7 @@ export async function POST(req: NextRequest) {
 // GET /api/admin/doprinos-oglasi/oglasi — lista svih oglasa
 export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const oglasi = await prisma.doprinosOglas.findMany({

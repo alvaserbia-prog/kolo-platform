@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 /**
  * POST /api/admin/doprinos-oglasi/evidencija/[id]/odbij
@@ -19,16 +20,16 @@ export async function POST(
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const jeAdmin = session.user.tipKorisnika === "POCETNI";
+  const korisnikJeAdmin = jeAdmin(session.user);
   let jeNosilacZrna = false;
-  if (!jeAdmin) {
+  if (!korisnikJeAdmin) {
     const me = await prisma.user.findUnique({
       where: { id: session.user.id },
       select: { tipKorisnika: true },
     });
     jeNosilacZrna = me?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
   }
-  if (!jeAdmin && !jeNosilacZrna) {
+  if (!korisnikJeAdmin && !jeNosilacZrna) {
     return NextResponse.json(
       { error: "Verifikacija evidencije dostupna je samo nosiocima ZRNA i Upravnom odboru (čl. 36)." },
       { status: 403 }

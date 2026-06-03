@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/programi/enrollments/[id]/odobri
 export async function POST(
@@ -11,7 +12,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;

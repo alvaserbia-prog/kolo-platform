@@ -3,10 +3,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
@@ -15,10 +16,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
-    select: { pseudonim: true, tipKorisnika: true },
+    select: { pseudonim: true, tipKorisnika: true, admin: true },
   });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
-  if (korisnik.tipKorisnika === "POCETNI") return NextResponse.json({ error: "Ne može se editovati admin." }, { status: 400 });
+  if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se editovati admin." }, { status: 400 });
 
   const data: { email?: string; pseudonim?: string } = {};
 

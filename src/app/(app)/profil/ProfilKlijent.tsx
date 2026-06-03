@@ -259,7 +259,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     NEVERIFIKOVAN: t("tip_neverifikovan"),
     REGULARNI: t("tip_regularni"),
     NOSILAC_ZRNA: t("tip_nosilac"),
-    POCETNI: t("uloga_admin"),
   };
 
   async function posaljiPrigovor(e: React.FormEvent) {

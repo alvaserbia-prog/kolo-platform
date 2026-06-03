@@ -8,8 +8,8 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika } from "@/generated/prisma/client";
 import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
+import { mozeNadzor } from "@/lib/dozvole";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -21,11 +21,7 @@ export async function GET() {
     where: { id: session.user.id },
     select: { tipKorisnika: true },
   });
-  if (
-    !user ||
-    (user.tipKorisnika !== TipKorisnika.POCETNI &&
-      user.tipKorisnika !== TipKorisnika.NOSILAC_ZRNA)
-  ) {
+  if (!user || !mozeNadzor(user)) {
     return NextResponse.json(
       { error: "Nemaš ovlašćenje za nadzor (čl. 10 Pravilnika)." },
       { status: 403 }

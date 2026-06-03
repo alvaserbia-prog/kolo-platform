@@ -9,7 +9,8 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import { POEN_NADZORNIK } from "@/lib/protokol/dokaz-stvarnosti";
-import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { TransactionType } from "@/generated/prisma/client";
+import { mozeNadzor } from "@/lib/dozvole";
 
 export class NadzorGreska extends Error {
   constructor(
@@ -73,12 +74,9 @@ export async function obaviNadzor(input: {
       if (!nadzornik) {
         throw new NadzorGreska("Nadzornik ne postoji.", 404);
       }
-      if (
-        nadzornik.tipKorisnika !== TipKorisnika.POCETNI &&
-        nadzornik.tipKorisnika !== TipKorisnika.NOSILAC_ZRNA
-      ) {
+      if (!mozeNadzor(nadzornik)) {
         throw new NadzorGreska(
-          "Nemaš ovlašćenje za nadzor (samo POCETNI / NOSILAC_ZRNA, čl. 10).",
+          "Nemaš ovlašćenje za nadzor (samo nosioci ZRNA i UO, čl. 10).",
           403
         );
       }

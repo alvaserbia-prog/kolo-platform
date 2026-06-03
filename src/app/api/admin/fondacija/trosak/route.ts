@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { azurirajVetoStatus } from "@/lib/protokol/fondacija";
+import { jeAdmin } from "@/lib/dozvole";
 
 const KATEGORIJE = ["PLATA", "INFRASTRUKTURA", "PRAVNI_TROSAK", "SOFTWARE", "ADMINISTRATIVNO", "OPERATIVNO", "DRUGO"] as const;
 type Kategorija = typeof KATEGORIJE[number];
@@ -16,7 +17,7 @@ type Kategorija = typeof KATEGORIJE[number];
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!jeAdmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const troskovi = await prisma.fondacijaTrosak.findMany({
     include: { kreirao: { select: { pseudonim: true } } },
@@ -30,7 +31,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!jeAdmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const body = await req.json();
   const { datum, iznosRSD, kategorija, opis, dokumentUrl } = body;

@@ -3,10 +3,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { jeAdmin } from "@/lib/dozvole";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const [
@@ -16,8 +17,8 @@ export async function GET() {
     poslednjeEmisije, ukupnoTransakcija,
     noviKorisnici,
   ] = await Promise.all([
-    prisma.user.count({ where: { tipKorisnika: { not: "POCETNI" } } }),
-    prisma.user.count({ where: { verified: true, tipKorisnika: { not: "POCETNI" } } }),
+    prisma.user.count(),
+    prisma.user.count({ where: { verified: true } }),
     prisma.user.count({ where: { status: "SUSPENDED" } }),
     prisma.krug.count({ where: { status: "ACTIVE" } }),
     prisma.krugClanstvo.count({ where: { leftAt: null } }),
@@ -26,7 +27,6 @@ export async function GET() {
     prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     prisma.transaction.count(),
     prisma.user.findMany({
-      where: { tipKorisnika: { not: "POCETNI" } },
       orderBy: { createdAt: "desc" },
       take: 30,
       select: { createdAt: true },

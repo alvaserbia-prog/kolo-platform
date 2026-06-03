@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika } from "@/generated/prisma/client";
+import { jeAdmin, mozeNadzor } from "@/lib/dozvole";
 
 export default async function AppLayout({
   children,
@@ -17,14 +17,12 @@ export default async function AppLayout({
     where: { id: session.user.id },
     select: { tipKorisnika: true },
   });
-  const jeNadzornik =
-    user?.tipKorisnika === TipKorisnika.POCETNI ||
-    user?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
+  const jeNadzornik = mozeNadzor(user);
 
   return (
     <AppShell
       verified={session.user.verified}
-      isAdmin={session.user.tipKorisnika === "POCETNI"}
+      isAdmin={jeAdmin(session.user)}
       jeNadzornik={jeNadzornik}
     >
       {children}

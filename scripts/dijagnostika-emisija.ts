@@ -50,10 +50,10 @@ async function main() {
     );
   }
 
-  console.log("\n=== Korisnici tipa POCETNI ili REGULARNI ===");
+  console.log("\n=== Korisnici tipa NOSILAC_ZRNA ili REGULARNI ===");
   const users = await prisma.user.findMany({
     where: {
-      tipKorisnika: { in: ["POCETNI", "REGULARNI"] },
+      tipKorisnika: { in: ["NOSILAC_ZRNA", "REGULARNI"] },
     },
     select: {
       pseudonim: true,

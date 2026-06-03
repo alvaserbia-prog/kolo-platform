@@ -4,12 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import OsnivaciTab from "./OsnivaciTab";
 import PokroviteljPrijaveTab from "./PokroviteljPrijaveTab";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 interface KorisnikInfo {
   id: string;
   pseudonim: string;
   email: string | null;
   tipKorisnika: string;
+  admin: string;
   verified: boolean;
   status: string;
   suspendedReason: string | null;
@@ -164,14 +166,22 @@ interface AdminKlijentProps {
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
   krugoviLista2: { id: string; name: string }[];
   blogObjave: BlogObjavaAdmin[];
+  viewerJeSuperadmin: boolean;
+  viewerId: string;
 }
 
 const tipLabel: Record<string, string> = {
   NEVERIFIKOVAN: "Neverifikovan",
   REGULARNI: "Verifikovan",
   NOSILAC_ZRNA: "Nosilac ZRNA",
-  POCETNI: "Administrator (UO)",
 };
+
+const adminNivoLabel: Record<string, string> = {
+  NONE: "Član",
+  ADMIN: "Admin",
+  SUPERADMIN: "Superadmin",
+};
+const ADMIN_NIVOI = ["NONE", "ADMIN", "SUPERADMIN"] as const;
 
 const statusBoja: Record<string, string> = {
   ACTIVE:    "bg-kolo-green-100 text-kolo-green-700",
@@ -181,7 +191,7 @@ const statusBoja: Record<string, string> = {
 
 type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit";
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
@@ -245,7 +255,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       )}
 
       {/* Korisnici */}
-      {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} />}
+      {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} viewerJeSuperadmin={viewerJeSuperadmin} viewerId={viewerId} />}
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab opticaj={opticaj} onSuccess={() => router.refresh()} />}
@@ -1163,7 +1173,7 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
 
 // ── Korisnici tab ─────────────────────────────────────────────────────────────
 
-function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => void }) {
+function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: KorisnikInfo[]; onDone: () => void; viewerJeSuperadmin: boolean; viewerId: string }) {
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [izmeniKorisnik, setIzmeniKorisnik] = useState<KorisnikInfo | null>(null);
@@ -1196,6 +1206,20 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
     } else {
       alert(d.error ?? "Greška.");
     }
+  }
+
+  async function postaviAdminRolu(userId: string, nivo: string) {
+    if (nivo === "SUPERADMIN" && !confirm("Dodeliti SUPERADMIN? Dobija sve poluge, uključujući opasne i sistemske radnje.")) return;
+    setLoadingId(userId);
+    const res = await fetch(`/api/admin/korisnici/${userId}/admin-rola`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nivo }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setLoadingId(null);
+    if (res.ok) onDone();
+    else alert(d.error ?? "Greška.");
   }
 
   return (
@@ -1232,7 +1256,7 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                 </div>
-                {u.tipKorisnika !== "POCETNI" && (
+                {!jeSuperadmin(u) && (
                   <div className="flex gap-1.5 shrink-0 flex-wrap justify-end">
                     <button onClick={() => setIzmeniKorisnik(u)} disabled={loadingId === u.id}
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
@@ -1265,6 +1289,25 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                   </div>
                 )}
               </div>
+              {viewerJeSuperadmin && u.id !== viewerId && (
+                <div className="mt-2 flex items-center gap-1.5 flex-wrap">
+                  <span className="text-xs text-kolo-muted">Admin rola:</span>
+                  {ADMIN_NIVOI.map((nivo) => (
+                    <button
+                      key={nivo}
+                      onClick={() => postaviAdminRolu(u.id, nivo)}
+                      disabled={loadingId === u.id || u.admin === nivo}
+                      className={`px-2 py-0.5 rounded-lg text-xs font-semibold transition-colors ${
+                        u.admin === nivo
+                          ? "bg-kolo-green-700 text-white"
+                          : "bg-kolo-bg border border-kolo-border text-kolo-muted hover:bg-kolo-border disabled:opacity-60"
+                      }`}
+                    >
+                      {adminNivoLabel[nivo]}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ))
         )}

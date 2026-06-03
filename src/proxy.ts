@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { jeAdmin } from "@/lib/dozvole";
 
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
@@ -49,7 +50,12 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (pathname.startsWith("/admin") && token.tipKorisnika !== "POCETNI") {
+  // Fallback na POCETNI tip za stare JWT-ove (pre uvođenja `admin` polja);
+  // ukloniti u koraku 7 kad svi tokeni nose `admin`.
+  const adminPristup =
+    jeAdmin({ admin: token.admin as string | undefined }) ||
+    token.tipKorisnika === "POCETNI";
+  if (pathname.startsWith("/admin") && !adminPristup) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 

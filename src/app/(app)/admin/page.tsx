@@ -6,12 +6,13 @@ import AdminKlijent from "./AdminKlijent";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") redirect("/dashboard");
+  if (!session || !jeAdmin(session.user)) redirect("/dashboard");
 
   const [
     allUsers, protokol, pendingKrugovi,
@@ -19,7 +20,7 @@ export default async function AdminPage() {
     blogObjave,
   ] = await Promise.all([
     prisma.user.findMany({
-      select: { id: true, pseudonim: true, email: true, tipKorisnika: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
+      select: { id: true, pseudonim: true, email: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
       take: 100,
     }),
@@ -36,7 +37,7 @@ export default async function AdminPage() {
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
-      prisma.user.count({ where: { tipKorisnika: { not: "POCETNI" } } }),
+      prisma.user.count(),
       prisma.user.count({ where: { verified: true } }),
       prisma.user.count({ where: { status: "SUSPENDED" } }),
       prisma.krug.count({ where: { status: "ACTIVE" } }),
@@ -107,8 +108,10 @@ export default async function AdminPage() {
   return (
     <AdminKlijent
       opticaj={opticaj}
+      viewerJeSuperadmin={jeSuperadmin(session.user)}
+      viewerId={session.user.id}
       users={allUsers.map((u) => ({
-        id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, verified: u.verified,
+        id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(),
       }))}
