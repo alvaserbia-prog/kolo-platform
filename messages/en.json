@@ -67,7 +67,7 @@
     "placeholder_lozinka": "••••••••",
     "dugme": "Sign In",
     "dugme_loading": "Signing in...",
-    "nalog_kreiran": "Account created. Sign in and wait for admin verification.",
+    "nalog_kreiran": "Account created. Sign in to continue — someone who knows you verifies you, or you can introduce yourself to the network.",
     "greska_email_obavezan": "Email is required.",
     "greska_email_neispravan": "Enter a valid email address.",
     "greska_lozinka_obavezna": "Password is required.",

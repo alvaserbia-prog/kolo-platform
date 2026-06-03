@@ -67,7 +67,7 @@
     "placeholder_lozinka": "••••••••",
     "dugme": "Bejelentkezés",
     "dugme_loading": "Bejelentkezés...",
-    "nalog_kreiran": "A fiók létrehozva. Jelentkezzen be és várjon az admin ellenőrzésre.",
+    "nalog_kreiran": "A fiók létrehozva. Jelentkezz be a folytatáshoz — egy ismerősöd igazol, vagy bemutatkozhatsz a hálózatnak.",
     "greska_email_obavezan": "Az email kötelező.",
     "greska_email_neispravan": "Adjon meg érvényes email címet.",
     "greska_lozinka_obavezna": "A jelszó kötelező.",
