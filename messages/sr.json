@@ -15,12 +15,21 @@
     "profil": "Profil",
     "admin": "Admin",
     "poruke": "Poruke",
-    "verifikuj_nalog": "Verifikuj nalog →"
+    "verifikuj_nalog": "Verifikuj nalog →",
+    "doprinos": "Doprinos",
+    "tabla_jemstva": "Tabla jemstva",
+    "postani_pokrovitelj": "Postani pokrovitelj",
+    "nadzor": "Nadzor",
+    "grupa_ekonomija": "Ekonomija",
+    "grupa_upravljanje": "Upravljanje",
+    "grupa_poverenje": "Poverenje",
+    "grupa_podrzi": "Podrži KOLO"
   },
   "header": {
     "moje_donacije": "Moje donacije",
     "moja_krug": "Moj Krug",
     "moji_poslovi": "Moji poslovi",
+    "moj_profil": "Moj profil",
     "podesi_profil": "Podesi profil",
     "odjavi_se": "Odjavi se",
     "ucitavanje": "Učitavam...",
