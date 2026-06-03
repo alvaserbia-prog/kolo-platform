@@ -109,58 +109,39 @@ export default async function VerifikacijaPage() {
         </PageOpis>
       </div>
 
-      <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} podnaslov={podnaslov} />
+      {/* Indeks stvarnosti i lanac verifikacija — jedno pored drugog */}
+      <div className="grid lg:grid-cols-2 gap-6 items-start">
+        <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} podnaslov={podnaslov} />
+        <MiniStablo
+          ja={{ pseudonim: user.pseudonim, prikaz }}
+          verifikatori={verifikatorCvorovi}
+          verifikovani={verifikovaniCvorovi}
+          jeJaPocetni={jeKorenJemstva(user)}
+        />
+      </div>
 
-      {/* Reframe za neverifikovane: dva jasna puta umesto QR + "ne smeš" */}
-      {jeNeverifikovan && (
-        <div className="grid sm:grid-cols-2 gap-3">
-          <a
-            href="#moj-kod"
-            className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-          >
-            <p className="font-semibold text-kolo-text">Poznaješ nekog u KOLO?</p>
-            <p className="text-sm text-kolo-muted mt-0.5">
-              Pokaži mu svoj kod ispod i potvrdiće te za par sekundi.
-            </p>
-          </a>
-          <a
-            href="/tabla-jemstva"
-            className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-          >
-            <p className="font-semibold text-kolo-text">Ne poznaješ nikog?</p>
-            <p className="text-sm text-kolo-muted mt-0.5">
-              Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi.
-            </p>
-          </a>
-        </div>
-      )}
+      {/* Tabla jemstva — za neverifikovane put da ih neko upozna; za verifikovane poziv da pomognu novima */}
+      <a
+        href="/tabla-jemstva"
+        className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+      >
+        <p className="font-semibold text-kolo-text">
+          {jeNeverifikovan ? "Ne poznaješ nikog u KOLO?" : "Tabla zahteva za jemstvo"}
+        </p>
+        <p className="text-sm text-kolo-muted mt-0.5">
+          {jeNeverifikovan
+            ? "Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi."
+            : "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."}
+        </p>
+      </a>
 
-      <MiniStablo
-        ja={{ pseudonim: user.pseudonim, prikaz }}
-        verifikatori={verifikatorCvorovi}
-        verifikovani={verifikovaniCvorovi}
-        jeJaPocetni={jeKorenJemstva(user)}
-      />
-
+      {/* Kod za verifikaciju */}
       <div id="moj-kod">
         <MojQrKod />
       </div>
 
       {/* "Verifikuj nekoga" se prikazuje samo onima koji to mogu — bez negativne poruke novajliji */}
       {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
-
-      {/* Link na tablu jemstva (za verifikovane — pomoć novima; za neverifikovane je već gore) */}
-      {!jeNeverifikovan && (
-        <a
-          href="/tabla-jemstva"
-          className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-        >
-          <p className="font-semibold text-kolo-text">Tabla zahteva za jemstvo</p>
-          <p className="text-sm text-kolo-muted mt-0.5">
-            Pomozite novim korisnicima — pogledajte ko traži verifikaciju.
-          </p>
-        </a>
-      )}
     </div>
   );
 }

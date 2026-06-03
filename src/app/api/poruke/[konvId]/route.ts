@@ -56,10 +56,12 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // Poruke su dostupne samo verifikovanima (Uslovi čl. 16, Politika čl. 6).
-  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
   const { konvId } = await params;
 
+  // Slanje je dozvoljeno svakom UČESNIKU konverzacije (getKonv to proverava).
+  // Neverifikovani NE MOŽE da inicira konverzaciju (vidi POST /api/poruke), pa
+  // može biti učesnik samo u konverzaciji koju je verifikovani pokrenuo povodom
+  // njegovog zahteva za jemstvo (Uslovi čl. 16, Politika čl. 6) — tu sme da uzvrati.
   const k = await getKonv(konvId, session.user.id);
   if (!k) return NextResponse.json({ error: "Konverzacija nije pronađena." }, { status: 404 });
 

@@ -118,9 +118,23 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         </div>
 
         {filtered.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-            {t("nema_tx_kategorija")}
-          </div>
+          transakcije.length === 0 ? (
+            // Sasvim nov korisnik — bez ijedne transakcije: navedi ga šta dalje
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center space-y-2">
+              <p className="text-sm font-medium text-kolo-text">Još nemaš evidentiran nijedan POEN.</p>
+              <p className="text-sm text-kolo-muted max-w-md mx-auto">
+                POEN se beleži kroz učešće u zajednici — pri verifikaciji, razmeni
+                dobara i usluga ili doprinosu. Počni tako što ćeš se verifikovati.
+              </p>
+              <a href="/verifikacija" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
+                Verifikuj se →
+              </a>
+            </div>
+          ) : (
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+              {t("nema_tx_kategorija")}
+            </div>
+          )
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
             {/* Zaglavlje tabele — desktop */}

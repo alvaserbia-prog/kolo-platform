@@ -38,15 +38,17 @@ export async function GET() {
     };
   });
 
-  return NextResponse.json({ konverzacije: data });
+  return NextResponse.json({ konverzacije: data, verified: session.user.verified });
 }
 
 // POST — otvori ili kreiraj konverzaciju sa korisnikom (po userId)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  // Poruke su dostupne samo verifikovanima; neverifikovani komuniciraju isključivo
-  // preko table zahteva za jemstvo (Uslovi čl. 16, Politika čl. 6).
+  // INICIRANJE konverzacije je dostupno samo verifikovanima. Neverifikovani ne
+  // može da pokrene konverzaciju; ka neverifikovanom se kreće isključivo preko
+  // table zahteva za jemstvo (POST /api/tabla-jemstva/[id]/poruka), gde on potom
+  // SME da uzvrati (Uslovi čl. 16, Politika čl. 6).
   if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
   const meId = session.user.id;
 

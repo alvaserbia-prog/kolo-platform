@@ -442,7 +442,12 @@ function PregledSekcija({
       {/* Progress bar do 1M */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5">
         <div className="flex justify-between items-center mb-3">
-          <p className="text-sm font-semibold text-kolo-text">{t("rast_opticaja")}</p>
+          <p className="text-sm font-semibold text-kolo-text">
+            <Pojam
+              termin={t("rast_opticaja")}
+              objasnjenje="Kada zajednica evidentira 1.000.000 POEN doprinosa, sistem prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje). Ovo nije cilj cene — POEN nema cenu ni vrednost van sistema."
+            />
+          </p>
           <p className="text-xs text-kolo-muted">
             {t("rast_opticaja_cilj", { cilj: CILJ_OPTICAJ.toLocaleString("sr-RS") })}
           </p>
