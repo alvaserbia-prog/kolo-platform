@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/programi/[type]/toggle — aktiviraj/deaktiviraj program
 export async function POST(
@@ -10,7 +11,7 @@ export async function POST(
   { params }: { params: Promise<{ type: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { type } = await params;

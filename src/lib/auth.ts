@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           pseudonim: user.pseudonim,
           tipKorisnika: user.tipKorisnika,
+          admin: user.admin,
           verified: user.verified,
           oauthPending: user.oauthPending,
         };
@@ -91,6 +92,7 @@ export const authOptions: NextAuthOptions = {
         user.id = existing.id;
         user.pseudonim = existing.pseudonim;
         user.tipKorisnika = existing.tipKorisnika;
+        user.admin = existing.admin;
         user.verified = existing.verified;
         user.oauthPending = existing.oauthPending;
         return true;
@@ -131,6 +133,7 @@ export const authOptions: NextAuthOptions = {
       user.id = newUser.id;
       user.pseudonim = newUser.pseudonim;
       user.tipKorisnika = newUser.tipKorisnika;
+      user.admin = newUser.admin;
       user.verified = newUser.verified;
       user.oauthPending = true;
       return true;
@@ -141,6 +144,7 @@ export const authOptions: NextAuthOptions = {
         token.id = user.id;
         token.pseudonim = user.pseudonim;
         token.tipKorisnika = user.tipKorisnika;
+        token.admin = user.admin;
         token.verified = user.verified;
         token.oauthPending = user.oauthPending ?? false;
       }
@@ -152,16 +156,18 @@ export const authOptions: NextAuthOptions = {
       session.user.pseudonim = token.pseudonim;
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
       session.user.tipKorisnika = token.tipKorisnika as string;
-      // Uvek čitaj verified i tipKorisnika iz baze — JWT može biti zastareo
+      session.user.admin = (token.admin as string) ?? "NONE";
+      // Uvek čitaj verified, tipKorisnika i admin iz baze — JWT može biti zastareo
       if (token.id) {
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id as string },
-            select: { verified: true, oauthPending: true, tipKorisnika: true },
+            select: { verified: true, oauthPending: true, tipKorisnika: true, admin: true },
           });
           session.user.verified = dbUser?.verified ?? (token.verified as boolean);
           session.user.oauthPending = dbUser?.oauthPending ?? (token.oauthPending as boolean) ?? false;
           if (dbUser?.tipKorisnika) session.user.tipKorisnika = dbUser.tipKorisnika;
+          if (dbUser?.admin) session.user.admin = dbUser.admin;
         } catch {
           session.user.verified = (token.verified as boolean) ?? false;
           session.user.oauthPending = (token.oauthPending as boolean) ?? false;

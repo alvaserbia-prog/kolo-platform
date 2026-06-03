@@ -6,6 +6,7 @@ declare module "next-auth" {
       id: string;
       pseudonim: string;
       tipKorisnika: string;
+      admin: string;
       verified: boolean;
       oauthPending: boolean;
     } & DefaultSession["user"];
@@ -15,6 +16,7 @@ declare module "next-auth" {
     id: string;
     pseudonim: string;
     tipKorisnika: string;
+    admin?: string;
     verified: boolean;
     oauthPending?: boolean;
   }
@@ -25,6 +27,7 @@ declare module "next-auth/jwt" {
     id: string;
     pseudonim: string;
     tipKorisnika: string;
+    admin?: string;
     verified: boolean;
     oauthPending?: boolean;
   }

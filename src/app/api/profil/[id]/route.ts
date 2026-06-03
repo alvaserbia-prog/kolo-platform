@@ -50,7 +50,7 @@ export async function GET(
     },
   });
 
-  if (!korisnik || korisnik.status === "EXCLUDED" || korisnik.tipKorisnika === "POCETNI") {
+  if (!korisnik || korisnik.status === "EXCLUDED") {
     return NextResponse.json({ error: "Profil nije pronađen." }, { status: 404 });
   }
 

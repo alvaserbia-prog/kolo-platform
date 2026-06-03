@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { labelPrograma } from "@/lib/protokol/programi";
+import { jeAdmin } from "@/lib/dozvole";
 
 const SVI_TIPOVI: ProgramType[] = [
   "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
@@ -12,7 +13,7 @@ const SVI_TIPOVI: ProgramType[] = [
 // GET /api/admin/programi — pregled svih programa + pending zahtevi
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const [programi, pendingEnrollments, poslednjeEmisije] = await Promise.all([

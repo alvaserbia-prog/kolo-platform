@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST — odobri pristupnicu (admin krugovi ili ADMIN)
 export async function POST(
@@ -16,7 +17,7 @@ export async function POST(
   const { id: krugId, pristupnicaId } = await params;
 
   // Mora biti admin krugovi ili ADMIN sistema
-  const isAdmin = session.user.tipKorisnika === "POCETNI";
+  const isAdmin = jeAdmin(session.user);
   const isKrugAdmin = await prisma.krugClanstvo.findFirst({
     where: { krugId, userId: session.user.id, leftAt: null, isAdmin: true },
   });

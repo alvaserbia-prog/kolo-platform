@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { odgovoriNaPreporuku, GlasanjeGreska } from "@/lib/protokol/glasanje";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/glasanje/[id]/odgovor — obrazložen odgovor UO na usvojenu
 // dinarsku preporuku (čl. 20). Telo: { odgovor: "PRIHVACENO"|"ODBIJENO", obrazlozenje }.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const { id } = await params;

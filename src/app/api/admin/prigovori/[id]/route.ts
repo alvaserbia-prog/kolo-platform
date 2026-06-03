@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 /**
  * PATCH /api/admin/prigovori/[id] — odgovori na prigovor
@@ -14,7 +15,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
   }
 

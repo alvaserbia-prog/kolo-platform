@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/krugovi/[id]/odobri — odobri osnivanje krugovi
 export async function POST(
@@ -12,7 +13,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;

@@ -4,12 +4,13 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/tabla-jemstva/[id]/ukloni — Fondacija uklanja neprikladan zahtev
 // (uvredljiv/diskriminatorski/nezakonit sadržaj, lažni podaci ili van svrhe table).
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeAdmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;

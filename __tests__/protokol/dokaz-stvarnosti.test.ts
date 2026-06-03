@@ -61,11 +61,6 @@ describe("izracunajKapacitet", () => {
     expect(izracunajKapacitet(TipKorisnika.REGULARNI, 100)).toBe(10);
   });
 
-  it("POCETNI ima neograničen kapacitet (čl. 9)", () => {
-    expect(izracunajKapacitet(TipKorisnika.POCETNI, 10)).toBe(BESKONACNI_KAPACITET);
-    expect(izracunajKapacitet(TipKorisnika.POCETNI, 0)).toBe(BESKONACNI_KAPACITET);
-  });
-
   it("NOSILAC_ZRNA ima neograničen kapacitet", () => {
     expect(izracunajKapacitet(TipKorisnika.NOSILAC_ZRNA, 40)).toBe(BESKONACNI_KAPACITET);
     expect(izracunajKapacitet(TipKorisnika.NOSILAC_ZRNA, 0)).toBe(BESKONACNI_KAPACITET);
@@ -100,21 +95,12 @@ describe("podlezeNadzoru", () => {
     expect(podlezeNadzoru(TipKorisnika.REGULARNI)).toBe(true);
   });
 
-  it("POCETNI verifikator → ne podleže nadzoru", () => {
-    expect(podlezeNadzoru(TipKorisnika.POCETNI)).toBe(false);
-  });
-
   it("NOSILAC_ZRNA verifikator → ne podleže nadzoru", () => {
     expect(podlezeNadzoru(TipKorisnika.NOSILAC_ZRNA)).toBe(false);
   });
 });
 
 describe("imaPristupVerifikaciji", () => {
-  it("POCETNI uvek ima pristup", () => {
-    expect(imaPristupVerifikaciji(TipKorisnika.POCETNI, 0)).toBe(true);
-    expect(imaPristupVerifikaciji(TipKorisnika.POCETNI, 100)).toBe(true);
-  });
-
   it("NOSILAC_ZRNA uvek ima pristup", () => {
     expect(imaPristupVerifikaciji(TipKorisnika.NOSILAC_ZRNA, 0)).toBe(true);
   });
@@ -236,10 +222,6 @@ describe("proveriAntiCirkularno", () => {
 describe("formatIndeksZaPrikaz", () => {
   it("NEVERIFIKOVAN: 0/0%", () => {
     expect(formatIndeksZaPrikaz(TipKorisnika.NEVERIFIKOVAN, 0, 0)).toBe("0/0%");
-  });
-
-  it("POCETNI sa indeksom 10: ∞/10%", () => {
-    expect(formatIndeksZaPrikaz(TipKorisnika.POCETNI, 10, 0)).toBe("∞/10%");
   });
 
   it("NOSILAC_ZRNA sa indeksom 40: ∞/40%", () => {

@@ -6,8 +6,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika } from "@/generated/prisma/client";
 import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
+import { mozeNadzor } from "@/lib/dozvole";
 import VerifikacijaCard from "@/components/nadzor/VerifikacijaCard";
 
 export default async function NadzorPage() {
@@ -18,11 +18,7 @@ export default async function NadzorPage() {
     where: { id: session.user.id },
     select: { tipKorisnika: true },
   });
-  if (
-    !user ||
-    (user.tipKorisnika !== TipKorisnika.POCETNI &&
-      user.tipKorisnika !== TipKorisnika.NOSILAC_ZRNA)
-  ) {
+  if (!user || !mozeNadzor(user)) {
     return (
       <div className="max-w-2xl mx-auto py-12 text-center">
         <h1 className="text-2xl font-bold mb-2">Nemaš ovlašćenje</h1>

@@ -178,12 +178,11 @@ export async function izvrsiVerifikaciju(
         );
       }
 
-      // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju početne
-      // korisnike i nosioce ZRNA po redovnim pravilima lanca jemstva. Njihov indeks
-      // raste kao evidencija, ali bez funkcionalnog efekta — pristup i kapacitet
-      // proizlaze iz statusa, ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
+      // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju nosioce ZRNA
+      // po redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija,
+      // ali bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa,
+      // ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
       const verifikovaniJePoseban =
-        verifikovani.tipKorisnika === TipKorisnika.POCETNI ||
         verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
 
       // REGULARNI korisnik sa punim indeksom (100%) nema šta da dobije dodatnom

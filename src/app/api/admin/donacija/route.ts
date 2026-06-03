@@ -5,11 +5,12 @@ import { evidentirajDonaciju } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { jeAdmin } from "@/lib/dozvole";
 
 // POST — potvrdi ili ručno evidentiraj donaciju
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
@@ -84,7 +85,7 @@ export async function POST(req: NextRequest) {
 // GET — lista svih donacija sa statusom
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 

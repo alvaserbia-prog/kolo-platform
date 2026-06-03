@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
     where: {
       pseudonim: { contains: q, mode: "insensitive" },
       status: { not: "EXCLUDED" },
-      tipKorisnika: { not: "POCETNI" },
       id: { not: session.user.id },
     },
     select: {
