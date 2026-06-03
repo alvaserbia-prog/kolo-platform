@@ -26,7 +26,7 @@ export async function GET(
     prisma.user.findUnique({
       where: { id: userId },
       select: {
-        id: true, email: true, pseudonim: true, role: true, status: true,
+        id: true, email: true, pseudonim: true, tipKorisnika: true, status: true,
         verified: true, verifiedAt: true, location: true, telefon: true,
         memberHash: true, createdAt: true, deaktiviranAt: true,
       },

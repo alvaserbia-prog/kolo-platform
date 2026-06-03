@@ -9,12 +9,6 @@ datasource db {
 
 // ─── Enumi ───────────────────────────────────────────────────────────────────
 
-enum Role {
-  FIZICKO_LICE
-  CLAN_KRUGA
-  ADMIN
-}
-
 enum WalletType {
   USER
   KRUG
@@ -166,7 +160,6 @@ model User {
   oauthId            String?
   oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
-  role               Role       @default(FIZICKO_LICE)
   status             UserStatus @default(ACTIVE)
   suspendedAt        DateTime?
   suspendedReason    String?

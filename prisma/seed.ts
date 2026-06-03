@@ -4,7 +4,6 @@ import path from "node:path";
 import {
   PrismaClient,
   WalletType,
-  Role,
   TipKorisnika,
   TransactionType,
   UserStatus,
@@ -223,7 +222,6 @@ async function seedAdmin() {
     const korisnik = await prisma.user.upsert({
       where: { email: c.email },
       update: {
-        role: Role.ADMIN,
         tipKorisnika: TipKorisnika.POCETNI,
         verified: true,
       },
@@ -231,7 +229,6 @@ async function seedAdmin() {
         email: c.email,
         passwordHash: hash,
         pseudonim: c.pseudonim,
-        role: Role.ADMIN,
         tipKorisnika: TipKorisnika.POCETNI,
         indeksStvarnosti: 10,
         verified: true,
@@ -261,7 +258,6 @@ async function seedVerifikovaniKorisnici() {
         email: k.email,
         passwordHash: hash,
         pseudonim: k.pseudonim,
-        role: Role.FIZICKO_LICE,
         verified: true,
         verifiedAt: daniPre(30 + Math.floor(Math.random() * 90)),
         memberHash: k.memberHash,
@@ -289,7 +285,6 @@ async function seedNeverifikovaniKorisnici() {
         email: k.email,
         passwordHash: hash,
         pseudonim: k.pseudonim,
-        role: Role.FIZICKO_LICE,
         verified: false,
         memberHash: k.memberHash,
         location: k.location,
@@ -311,7 +306,6 @@ async function seedSuspendovaniKorisnici() {
         email: k.email,
         passwordHash: hash,
         pseudonim: k.pseudonim,
-        role: Role.FIZICKO_LICE,
         verified: true,
         verifiedAt: daniPre(60),
         status: UserStatus.SUSPENDED,
@@ -381,10 +375,6 @@ async function seedKrugovi() {
             krugId: krug.id,
             isAdmin: k.clanovi[i] === k.admin,
           },
-        });
-        await prisma.user.update({
-          where: { id: clan.id },
-          data: { role: Role.CLAN_KRUGA },
         });
       }
     }
@@ -981,7 +971,7 @@ async function main() {
   // Pregled
   const banka = await prisma.wallet.findUnique({ where: { id: "banka-singleton" } });
   const admini = await prisma.user.findMany({
-    where: { role: Role.ADMIN },
+    where: { tipKorisnika: TipKorisnika.POCETNI },
     select: { email: true, pseudonim: true },
   });
   console.log("\n=== Seed završen ===");
