@@ -112,9 +112,9 @@ export default function TablaJemstvaKlijent({
       <div>
         <h1 className="text-2xl font-semibold text-kolo-text">Tabla zahteva za jemstvo</h1>
         <p className="text-sm text-kolo-muted mt-1">
-          Neverifikovani korisnici se ovde predstavljaju mreži verifikovanih kako bi uspostavili
-          kontakt potreban za verifikaciju (lanac jemstva). Verifikacija se zasniva na ličnom
-          poznavanju verifikatora i verifikovanog.
+          Neverifikovani korisnici se ovde predstavljaju mreži kako bi uspostavili kontakt
+          potreban za verifikaciju — koja se uvek zasniva na ličnom poznavanju onoga ko
+          verifikuje i onoga ko se verifikuje (lanac jemstva).
         </p>
       </div>
 
@@ -129,7 +129,7 @@ export default function TablaJemstvaKlijent({
               onChange={(e) => setTekst(e.target.value)}
               rows={4}
               maxLength={1000}
-              placeholder="Odakle ste i zašto želite da se priključite. (Vidljivo svim prijavljenim korisnicima.)"
+              placeholder="Odakle ste i zašto želite da se priključite."
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 resize-none transition-colors"
             />
             <p className="mt-1 text-xs text-kolo-muted">{tekst.length}/1000</p>
@@ -156,8 +156,8 @@ export default function TablaJemstvaKlijent({
             <input type="checkbox" checked={pristanak} onChange={(e) => setPristanak(e.target.checked)}
               className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
             <span className="text-xs text-kolo-muted">
-              Saglasan/na sam sa objavom predstavljanja (svi prijavljeni) i kontakt podataka
-              (verifikovani, uz beleženje pristupa). Zahtev ističe automatski nakon 30 dana.
+              Saglasan/na sam sa gore navedenim uslovima objave. Zahtev se automatski uklanja
+              nakon 30 dana.
             </span>
           </label>
 
