@@ -28,24 +28,16 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   const router = useRouter();
   const pathname = usePathname();
 
-  // Provera pristanaka: prvo Politika privatnosti, pa Pravilnik
+  // Provera pristanaka: Politika privatnosti
+  // (Popup za prihvatanje Pravilnika je uklonjen — nudio je zastarelu verziju.)
   useEffect(() => {
-    if (pathname === "/politika-prihvati" || pathname === "/pravilnik-prihvati") return;
+    if (pathname === "/politika-prihvati") return;
     fetch("/api/politika/prihvati")
       .then((r) => r.ok ? r.json() : null)
       .then((data) => {
         if (data?.potrebno) {
           router.replace("/politika-prihvati");
-          return;
         }
-        // Politika je u redu — proveri Pravilnik
-        return fetch("/api/pravilnik/prihvati")
-          .then((r) => r.ok ? r.json() : null)
-          .then((data2) => {
-            if (data2?.potrebno) {
-              router.replace("/pravilnik-prihvati");
-            }
-          });
       })
       .catch(() => {});
   // Proveravamo samo pri mountovanju
