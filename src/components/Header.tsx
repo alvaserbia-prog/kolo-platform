@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
+import Pojam from "@/components/Pojam";
 
 interface Notifikacija {
   id: string;
@@ -123,11 +124,14 @@ function BalansHeader({ userId }: { userId: string }) {
   }, []);
 
   return (
-    <span className="text-white/60 text-sm hidden sm:inline">
+    <span className="text-white/60 text-sm hidden sm:inline-flex items-center gap-1">
       <span className="font-semibold text-white text-sm">
         {balans === null ? "..." : balans.toLocaleString("sr-RS")}
-      </span>{" "}
-      POEN
+      </span>
+      <Pojam
+        termin="POEN"
+        objasnjenje="Zapis tvog doprinosa zajednici — kao upis u knjigu, a ne novac. Ne kupuje se, ne menja se za dinare i nema vrednost van sistema."
+      />
     </span>
   );
 }
