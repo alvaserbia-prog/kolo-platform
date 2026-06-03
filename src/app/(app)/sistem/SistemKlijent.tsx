@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PageOpis from "@/components/PageOpis";
+import Pojam from "@/components/Pojam";
 
 type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "krugovi" | "donacije" | "iznos";
 type TxFilter = "sve" | "protokol" | "clanovi";
@@ -149,6 +151,11 @@ export default function SistemKlijent({
       >
         {t("dobrodoslice", { pseudonim })}
       </h1>
+      <PageOpis>
+        Pregled celog KOLO sistema u brojkama — koliko vas ima, koliko se razmenjuje
+        i da li je sve u ravnoteži. Ovde pratiš zdravlje zajednice; ništa se odavde ne
+        menja, samo se gleda.
+      </PageOpis>
 
       {/* Upozorenje za neverifikovane */}
       {!verified && (
@@ -240,7 +247,10 @@ export default function SistemKlijent({
           }`}
         >
           <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
-            {t("kartica_opticaj")}
+            <Pojam
+              termin={t("kartica_opticaj")}
+              objasnjenje="Ukupan broj POEN-a koji trenutno postoji u sistemu. Pokazuje koliko je zajednica aktivna."
+            />
           </p>
           <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
             {opticaj.toLocaleString("sr-RS")}
@@ -254,7 +264,10 @@ export default function SistemKlijent({
             {zeroSum ? (
               <>
                 <span className={sekcija === "pregled" ? "text-white/80" : "text-kolo-green-600"}>✓</span>
-                <span>{t("zero_sum_ok")}</span>
+                <Pojam
+                  termin={<span>{t("zero_sum_ok")}</span>}
+                  objasnjenje="Provera ravnoteže: zbir svih zapisa je tačno nula. Znači da nijedan POEN nije nastao ni iz čega — sve je evidentirano kako treba."
+                />
               </>
             ) : (
               <>

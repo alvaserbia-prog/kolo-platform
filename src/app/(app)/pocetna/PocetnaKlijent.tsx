@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import PageOpis from "@/components/PageOpis";
 
 interface BlogObjava {
   id: string;
@@ -104,6 +105,10 @@ export default function PocetnaKlijent({
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
         Dobrodošao, {pseudonim}
       </h1>
+      <PageOpis>
+        Tvoja polazna tačka: vesti Fondacije i razgovor sa zajednicom. Ovde vidiš
+        šta je novo i šta drugi pišu (pisanje se otključava verifikacijom).
+      </PageOpis>
 
       {/* ── BLOG / VESTI FONDACIJE ──────────────────────────────────── */}
       <section className="space-y-3">

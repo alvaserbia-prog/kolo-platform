@@ -26,6 +26,7 @@ import MiniStablo, {
 } from "@/components/verifikacija/MiniStablo";
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
+import PageOpis from "@/components/PageOpis";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { jeKorenJemstva } from "@/lib/dozvole";
 
@@ -96,11 +97,43 @@ export default async function VerifikacijaPage() {
         ? "Kapacitet: neograničeno"
         : `Slotovi: ${slotoviRaspolozivi ?? 0} raspoloživo / ${user.slotoviPotroseni} potrošeno`;
 
+  const jeNeverifikovan = user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN;
+
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
-      <h1 className="text-2xl font-bold">Verifikacija</h1>
+      <div className="space-y-1">
+        <h1 className="text-2xl font-bold">Verifikacija</h1>
+        <PageOpis>
+          Ovde te mreža potvrđuje kao stvarnu osobu — preko nekog ko te lično
+          poznaje, bez dokumenata. To ti otključava pun pristup KOLO.
+        </PageOpis>
+      </div>
 
       <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} podnaslov={podnaslov} />
+
+      {/* Reframe za neverifikovane: dva jasna puta umesto QR + "ne smeš" */}
+      {jeNeverifikovan && (
+        <div className="grid sm:grid-cols-2 gap-3">
+          <a
+            href="#moj-kod"
+            className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+          >
+            <p className="font-semibold text-kolo-text">Poznaješ nekog u KOLO?</p>
+            <p className="text-sm text-kolo-muted mt-0.5">
+              Pokaži mu svoj kod ispod i potvrdiće te za par sekundi.
+            </p>
+          </a>
+          <a
+            href="/tabla-jemstva"
+            className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+          >
+            <p className="font-semibold text-kolo-text">Ne poznaješ nikog?</p>
+            <p className="text-sm text-kolo-muted mt-0.5">
+              Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi.
+            </p>
+          </a>
+        </div>
+      )}
 
       <MiniStablo
         ja={{ pseudonim: user.pseudonim, prikaz }}
@@ -109,21 +142,25 @@ export default async function VerifikacijaPage() {
         jeJaPocetni={jeKorenJemstva(user)}
       />
 
-      <MojQrKod />
+      <div id="moj-kod">
+        <MojQrKod />
+      </div>
 
-      <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
+      {/* "Verifikuj nekoga" se prikazuje samo onima koji to mogu — bez negativne poruke novajliji */}
+      {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
 
-      <a
-        href="/tabla-jemstva"
-        className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-      >
-        <p className="font-semibold text-kolo-text">Tabla zahteva za jemstvo</p>
-        <p className="text-sm text-kolo-muted mt-0.5">
-          {user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN
-            ? "Nemate koga da vas verifikuje? Predstavite se mreži verifikovanih korisnika."
-            : "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."}
-        </p>
-      </a>
+      {/* Link na tablu jemstva (za verifikovane — pomoć novima; za neverifikovane je već gore) */}
+      {!jeNeverifikovan && (
+        <a
+          href="/tabla-jemstva"
+          className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+        >
+          <p className="font-semibold text-kolo-text">Tabla zahteva za jemstvo</p>
+          <p className="text-sm text-kolo-muted mt-0.5">
+            Pomozite novim korisnicima — pogledajte ko traži verifikaciju.
+          </p>
+        </a>
+      )}
     </div>
   );
 }
