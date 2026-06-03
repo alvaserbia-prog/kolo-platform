@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 
@@ -62,7 +62,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 

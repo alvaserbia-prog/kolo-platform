@@ -10,8 +10,11 @@ interface Predlog {
   title: string;
   description: string;
   authorPseudonim: string;
+  glasanjePocetak: string;
   deadline: string;
   status: "ACTIVE" | "CLOSED";
+  faza: "NAJAVLJEN" | "U_TOKU" | "ZATVOREN";
+  ishodUsvojen: boolean | null;
   zaGlasova: number;
   protiGlasova: number;
   mojGlas: boolean | null;
@@ -33,6 +36,9 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
       <div className="flex justify-between items-center">
         <h1 className="kolo-naslov">{t("naslov")}</h1>
         <div className="flex items-center gap-3">
+          <Link href="/glasanje/registar" className="text-xs text-kolo-green-700 hover:underline">
+            {t("registar_link")}
+          </Link>
           {mojaGlasackaMoc > 0 && (
             <span className="text-xs bg-kolo-gold-100 text-kolo-gold-600 border border-kolo-gold-400/30 px-3 py-1.5 rounded-xl font-medium">
               {t("glasova_badge", { count: mojaGlasackaMoc })}
@@ -83,7 +89,20 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
 
   const ukupno = p.zaGlasova + p.protiGlasova;
   const zaProc = ukupno > 0 ? Math.round((p.zaGlasova / ukupno) * 100) : 0;
-  const isActive = p.status === "ACTIVE" && new Date(p.deadline) > new Date();
+  const uToku = p.faza === "U_TOKU";
+  const najavljen = p.faza === "NAJAVLJEN";
+
+  // Oznaka statusa: najavljen / u toku / ishod po zatvaranju
+  const statusLabel = najavljen
+    ? t("najavljeno")
+    : uToku
+      ? t("u_toku")
+      : p.ishodUsvojen === true
+        ? t("usvojeno")
+        : p.ishodUsvojen === false
+          ? t("neusvojeno")
+          : t("zatvoreno");
+  const statusZelen = uToku || p.ishodUsvojen === true;
 
   async function glasaj(za: boolean) {
     setLoading(za); setPoruka(null);
@@ -105,8 +124,8 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
             {p.authorPseudonim} · {new Date(p.createdAt).toLocaleDateString("sr-RS")}
           </p>
         </div>
-        <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${isActive ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
-          {isActive ? t("aktivno") : t("zatvoreno")}
+        <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${statusZelen ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
+          {statusLabel}
         </span>
       </div>
 
@@ -132,8 +151,8 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
         </p>
       )}
 
-      {/* Akcije */}
-      {isActive && mojaGlasackaMoc > 0 && (
+      {/* Akcije — glasanje samo dok je U_TOKU */}
+      {uToku && mojaGlasackaMoc > 0 && (
         <div className="flex gap-2">
           <button onClick={() => glasaj(true)} disabled={loading !== null}
             className={`flex-1 py-2 rounded-xl text-sm font-semibold transition-colors disabled:opacity-60 ${p.mojGlas === true ? "bg-kolo-green-500 text-white" : "border border-kolo-green-500 text-kolo-green-700 hover:bg-kolo-green-100"}`}>
@@ -146,7 +165,10 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
         </div>
       )}
 
-      {isActive && (
+      {najavljen && (
+        <p className="text-xs text-kolo-muted">{t("glasanje_pocinje", { datum: new Date(p.glasanjePocetak).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" }) })}</p>
+      )}
+      {uToku && (
         <p className="text-xs text-kolo-muted">{t("rok")} {new Date(p.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
       )}
 
@@ -162,7 +184,6 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
   const tc = useTranslations("common");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -170,14 +191,13 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
     setError("");
     if (title.trim().length < 5) { setError(t("np_greska_naslov")); return; }
     if (description.trim().length < 20) { setError(t("np_greska_opis")); return; }
-    if (!deadline) { setError(t("np_greska_rok")); return; }
 
     setLoading(true);
     try {
       const res = await fetch("/api/glasanje", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: title.trim(), description: description.trim(), deadline }),
+        body: JSON.stringify({ title: title.trim(), description: description.trim() }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? tc("greska_ucitavanja")); return; }
@@ -187,11 +207,6 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
     }
   }
 
-  // Min deadline = tomorrow
-  const sutra = new Date();
-  sutra.setDate(sutra.getDate() + 1);
-  const minDate = sutra.toISOString().split("T")[0];
-
   return (
     <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
       <p className="text-sm font-semibold text-kolo-muted">{t("novi_predlog_naslov")}</p>
@@ -199,11 +214,7 @@ function NoviPredlogForma({ onSuccess, onCancel }: { onSuccess: () => void; onCa
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
       <textarea rows={3} placeholder={t("opis_placeholder")} value={description} onChange={(e) => setDescription(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 resize-none" />
-      <div>
-        <label className="block text-xs text-kolo-muted mb-1">{t("rok_glasanja")}</label>
-        <input type="date" min={minDate} value={deadline} onChange={(e) => setDeadline(e.target.value)}
-          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
-      </div>
+      <p className="text-xs text-kolo-muted bg-kolo-bg rounded-lg px-3 py-2">{t("period_info")}</p>
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
         <button onClick={onCancel} className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{tc("otkazi")}</button>

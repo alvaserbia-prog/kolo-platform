@@ -7,7 +7,7 @@ import { logAdminAkcija } from "@/lib/audit";
 // POST — isključi korisnika (Čl. 33): EXCLUDED status, izlaz iz krugovi
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
@@ -16,10 +16,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
-    select: { role: true, status: true, pseudonim: true },
+    select: { tipKorisnika: true, status: true, pseudonim: true },
   });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
-  if (korisnik.role === "ADMIN") return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });
+  if (korisnik.tipKorisnika === "POCETNI") return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });
   if (korisnik.status === "EXCLUDED") return NextResponse.json({ error: "Korisnik je već isključen." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {
@@ -40,7 +40,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         status: "EXCLUDED",
         suspendedAt: new Date(),
         suspendedReason: razlog || "Isključenje (Čl. 33)",
-        role: "FIZICKO_LICE",
       },
     });
   });

@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const take = Number(req.nextUrl.searchParams.get("take") ?? "50");

@@ -16,7 +16,7 @@ export default async function TablaJemstvaPage() {
   return (
     <TablaJemstvaKlijent
       verified={session.user.verified}
-      isAdmin={session.user.role === "ADMIN"}
+      isAdmin={session.user.tipKorisnika === "POCETNI"}
     />
   );
 }

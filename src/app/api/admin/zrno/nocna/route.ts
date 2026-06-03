@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 // POST /api/admin/zrno/nocna — manualni okidač ZRNO operacija
 export async function POST() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   try {
@@ -22,7 +22,7 @@ export async function POST() {
 // PATCH /api/admin/zrno/nocna — toggle ZRNO tržište
 export async function PATCH() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const current = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });

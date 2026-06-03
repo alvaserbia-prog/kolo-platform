@@ -38,7 +38,7 @@ export async function GET() {
         id: true,
         email: true,
         pseudonim: true,
-        role: true,
+        tipKorisnika: true,
         status: true,
         verified: true,
         verifiedAt: true,

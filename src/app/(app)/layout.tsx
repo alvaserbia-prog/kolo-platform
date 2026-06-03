@@ -24,7 +24,7 @@ export default async function AppLayout({
   return (
     <AppShell
       verified={session.user.verified}
-      isAdmin={session.user.role === "ADMIN"}
+      isAdmin={session.user.tipKorisnika === "POCETNI"}
       jeNadzornik={jeNadzornik}
     >
       {children}

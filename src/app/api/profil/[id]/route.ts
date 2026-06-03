@@ -24,7 +24,7 @@ export async function GET(
       telefon: true,
       avatar: true,
       createdAt: true,
-      role: true,
+      tipKorisnika: true,
       status: true,
       podaci: {
         select: {
@@ -50,7 +50,7 @@ export async function GET(
     },
   });
 
-  if (!korisnik || korisnik.status === "EXCLUDED" || korisnik.role === "ADMIN") {
+  if (!korisnik || korisnik.status === "EXCLUDED" || korisnik.tipKorisnika === "POCETNI") {
     return NextResponse.json({ error: "Profil nije pronađen." }, { status: 404 });
   }
 

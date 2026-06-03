@@ -17,7 +17,7 @@ export async function POST(
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const jeAdmin = session.user.role === "ADMIN";
+  const jeAdmin = session.user.tipKorisnika === "POCETNI";
   let jeNosilacZrna = false;
   if (!jeAdmin) {
     const me = await prisma.user.findUnique({

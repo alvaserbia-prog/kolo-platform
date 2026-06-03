@@ -10,8 +10,11 @@ interface Predlog {
   title: string;
   description: string;
   authorPseudonim: string;
+  glasanjePocetak: string;
   deadline: string;
   status: "ACTIVE" | "CLOSED";
+  faza: "NAJAVLJEN" | "U_TOKU" | "ZATVOREN";
+  ishodUsvojen: boolean | null;
   zaGlasova: number;
   protiGlasova: number;
   mojGlas: boolean | null;

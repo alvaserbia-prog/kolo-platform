@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 // GET /api/admin/doprinos-oglasi/prijave — sve pending prijave
 export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const prijave = await prisma.oglasPrijava.findMany({

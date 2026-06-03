@@ -16,7 +16,6 @@ import path from "node:path";
 import {
   PrismaClient,
   WalletType,
-  Role,
   TipKorisnika,
   TransactionType,
 } from "../src/generated/prisma/client";
@@ -105,7 +104,6 @@ async function seedUoClana(clan: UoClan) {
         email: clan.email,
         passwordHash: null, // bez lozinke — UO član postavlja kroz reset password tok
         pseudonim: clan.pseudonim,
-        role: Role.FIZICKO_LICE,
         tipKorisnika: TipKorisnika.POCETNI,
         indeksStvarnosti: 10,
         slotoviPotroseni: 0,

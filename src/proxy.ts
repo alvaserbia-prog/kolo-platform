@@ -49,7 +49,7 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (pathname.startsWith("/admin") && token.role !== "ADMIN") {
+  if (pathname.startsWith("/admin") && token.tipKorisnika !== "POCETNI") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 

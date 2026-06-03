@@ -294,8 +294,8 @@ docs/             — interne radne beleške (nije normativa)
 - Tabs: Dashboard, Na čekanju, Krugovi, Programi, Pokrovitelji (+ prijave), Korisnici, Osnivači, Finansije (+ veto/troškovi), Audit log. (Admin simulator UKLONJEN.)
 
 ## Uloge u sistemu
-- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga**, **Admin** (Fondacija/UO), **Pokrovitelj** (pravno lice, bez naloga).
-- 🟡 **Napomena o šemi:** postoje **dva paralelna statusna modela** — legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) i kanonski `TipKorisnika` (`POCETNI`/`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`). Latentna nekonzistentnost — kandidat za čišćenje.
+- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`tipKorisnika POCETNI`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
+- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Sada postoji samo kanonski `TipKorisnika` (`POCETNI`/`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`). **Admin = UO Fondacije = `POCETNI`** (autorizacija `/admin` panela ide preko `tipKorisnika === "POCETNI"`); **članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603140000_admin_pocetni_backfill` (postojeći admini → POCETNI) i `20260603150000_drop_role_enum`.
 
 ## Sidebar linkovi
 - Neverifikovan: Početna, Sistem, Novčanik, Pijaca, Verifikacija
@@ -364,7 +364,7 @@ docs/             — interne radne beleške (nije normativa)
 4. ✅ **REŠENO — Konsolidacija PED + doprinos-oglasi** u jedan tok. `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; orphan i18n ključ `ped_link` uklonjen iz `messages/*.json`.
 5. ✅ **REŠENO — „kurs" u srpskom UI** → „Koeficijent"/„koeficijent evidencije" (`messages/sr.json`). Interni identifikatori i en/hu prevodi zadržani.
 6. ✅ **REŠENO — Verzijske labele** na javnim stranicama. Glavne pravne stranice tačne; `pravilnik/[slug]/page.tsx` sada izvodi verziju iz `verzija` polja po pravilniku (ne hardkod „3.7.5"). Preostali „v3.7.0" su bili samo interni komentari — ažurirani.
-7. **Dual `Role` / `TipKorisnika`** — počistiti legacy `Role` enum gde je moguće.
+7. ✅ **REŠENO — Dual `Role` / `TipKorisnika`.** Legacy `Role` enum uklonjen (Faza C: C1 admin→`POCETNI`, C2 članstvo→`KrugClanstvo`, C3 drop kolone/enuma). Jedinstveni model je `TipKorisnika`. **Operativno:** na produkciji obavezno `npx prisma migrate deploy` (backfill prebacuje postojeće admine na POCETNI).
 
 ### Mehanizmi delegirani posebnim pravilnicima / nisu fokus
 8. **Moduli — Zadruga (čl. 56) i Modul Deca (čl. 58)** — nisu implementirani (odluka vlasnika). Krug postoji.

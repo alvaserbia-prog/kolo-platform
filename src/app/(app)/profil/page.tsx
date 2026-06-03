@@ -20,7 +20,7 @@ export default async function ProfilPage() {
         id: user.id,
         email: user.email ?? "",
         pseudonim: user.pseudonim,
-        role: user.role,
+        tipKorisnika: user.tipKorisnika,
         verified: user.verified,
         verifiedAt: user.verifiedAt?.toISOString() ?? null,
         pseudonimChangedAt: user.pseudonimChangedAt?.toISOString() ?? null,

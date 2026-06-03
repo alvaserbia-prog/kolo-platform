@@ -11,7 +11,7 @@ import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.role !== "ADMIN") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   try {
     const rezultat = await proveriIEvidentirajKorak();

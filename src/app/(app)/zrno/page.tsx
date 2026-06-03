@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { fazaPredloga, zatvoriIstekleIObjaviIshod } from "@/lib/protokol/glasanje";
 import ZrnoKlijent from "./ZrnoKlijent";
 
 export default async function ZrnoPage() {
@@ -12,6 +13,9 @@ export default async function ZrnoPage() {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
   const now = new Date();
+
+  // Zatvori istekle predloge i utvrdi ishod pre čitanja (čl. 13)
+  await zatvoriIstekleIObjaviIshod(now);
 
   const [stanje, wallet, upisZahtev, otpisZahtev, statusZahtevi, delegacija, trziste, kurs, poslednjiKursovi, predlozi] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
@@ -31,16 +35,6 @@ export default async function ZrnoPage() {
       include: { author: { select: { pseudonim: true } }, glasovi: true },
     }),
   ]);
-
-  // Auto-close expired proposals
-  const toClose = predlozi.filter((p) => p.status === "ACTIVE" && p.deadline < now);
-  if (toClose.length > 0) {
-    await prisma.glasanjePredlog.updateMany({
-      where: { id: { in: toClose.map((p) => p.id) } },
-      data: { status: "CLOSED" },
-    });
-    toClose.forEach((p) => { p.status = "CLOSED"; });
-  }
 
   const slobodno = stanje?.slobodno ?? 0;
   const aktivno = stanje?.aktivno ?? 0;
@@ -70,8 +64,11 @@ export default async function ZrnoPage() {
         title: p.title,
         description: p.description,
         authorPseudonim: p.author.pseudonim,
+        glasanjePocetak: p.glasanjePocetak.toISOString(),
         deadline: p.deadline.toISOString(),
         status: p.status as "ACTIVE" | "CLOSED",
+        faza: fazaPredloga(p, now),
+        ishodUsvojen: p.ishodUsvojen,
         zaGlasova: p.glasovi.filter((g) => g.za).reduce((s, g) => s + g.glasackaGlasova, 0),
         protiGlasova: p.glasovi.filter((g) => !g.za).reduce((s, g) => s + g.glasackaGlasova, 0),
         mojGlas: p.glasovi.find((g) => g.userId === session.user.id)?.za ?? null,

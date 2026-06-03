@@ -74,7 +74,7 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
         : null}
       imaPristupnicu={!!mojaPristupnica}
       isVerified={session.user.verified}
-      isAdmin={session.user.role === "ADMIN"}
+      isAdmin={session.user.tipKorisnika === "POCETNI"}
     />
   );
 }

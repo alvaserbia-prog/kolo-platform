@@ -11,7 +11,7 @@ const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIM
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") redirect("/dashboard");
+  if (!session || session.user.tipKorisnika !== "POCETNI") redirect("/dashboard");
 
   const [
     allUsers, protokol, pendingKrugovi,
@@ -19,7 +19,7 @@ export default async function AdminPage() {
     blogObjave,
   ] = await Promise.all([
     prisma.user.findMany({
-      select: { id: true, pseudonim: true, email: true, role: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
+      select: { id: true, pseudonim: true, email: true, tipKorisnika: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
       take: 100,
     }),
@@ -36,7 +36,7 @@ export default async function AdminPage() {
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
-      prisma.user.count({ where: { role: { not: "ADMIN" } } }),
+      prisma.user.count({ where: { tipKorisnika: { not: "POCETNI" } } }),
       prisma.user.count({ where: { verified: true } }),
       prisma.user.count({ where: { status: "SUSPENDED" } }),
       prisma.krug.count({ where: { status: "ACTIVE" } }),
@@ -108,7 +108,7 @@ export default async function AdminPage() {
     <AdminKlijent
       opticaj={opticaj}
       users={allUsers.map((u) => ({
-        id: u.id, pseudonim: u.pseudonim, email: u.email, role: u.role, verified: u.verified,
+        id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(),
       }))}

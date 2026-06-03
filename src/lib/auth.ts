@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           pseudonim: user.pseudonim,
-          role: user.role,
+          tipKorisnika: user.tipKorisnika,
           verified: user.verified,
           oauthPending: user.oauthPending,
         };
@@ -90,7 +90,7 @@ export const authOptions: NextAuthOptions = {
         if (existing.status !== "ACTIVE") return false;
         user.id = existing.id;
         user.pseudonim = existing.pseudonim;
-        user.role = existing.role;
+        user.tipKorisnika = existing.tipKorisnika;
         user.verified = existing.verified;
         user.oauthPending = existing.oauthPending;
         return true;
@@ -130,7 +130,7 @@ export const authOptions: NextAuthOptions = {
 
       user.id = newUser.id;
       user.pseudonim = newUser.pseudonim;
-      user.role = newUser.role;
+      user.tipKorisnika = newUser.tipKorisnika;
       user.verified = newUser.verified;
       user.oauthPending = true;
       return true;
@@ -140,7 +140,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.pseudonim = user.pseudonim;
-        token.role = user.role;
+        token.tipKorisnika = user.tipKorisnika;
         token.verified = user.verified;
         token.oauthPending = user.oauthPending ?? false;
       }
@@ -150,17 +150,18 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.pseudonim = token.pseudonim;
-      session.user.role = token.role;
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
-      // Uvek čitaj verified iz baze — JWT može biti zastareo
+      session.user.tipKorisnika = token.tipKorisnika as string;
+      // Uvek čitaj verified i tipKorisnika iz baze — JWT može biti zastareo
       if (token.id) {
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id as string },
-            select: { verified: true, oauthPending: true },
+            select: { verified: true, oauthPending: true, tipKorisnika: true },
           });
           session.user.verified = dbUser?.verified ?? (token.verified as boolean);
           session.user.oauthPending = dbUser?.oauthPending ?? (token.oauthPending as boolean) ?? false;
+          if (dbUser?.tipKorisnika) session.user.tipKorisnika = dbUser.tipKorisnika;
         } catch {
           session.user.verified = (token.verified as boolean) ?? false;
           session.user.oauthPending = (token.oauthPending as boolean) ?? false;

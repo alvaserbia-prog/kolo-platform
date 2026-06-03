@@ -16,7 +16,6 @@ import "dotenv/config";
 import {
   PrismaClient,
   WalletType,
-  Role,
   TipKorisnika,
 } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -67,7 +66,6 @@ async function kreirajKorisnika(broj: number, tip: TipKorisnika) {
       email: `${PREFIX}${broj}@test.local`,
       pseudonim,
       passwordHash: null,
-      role: Role.FIZICKO_LICE,
       tipKorisnika: tip,
       indeksStvarnosti: tip === TipKorisnika.POCETNI ? 10 : 0,
       memberHash: `${PREFIX}${broj}h`,

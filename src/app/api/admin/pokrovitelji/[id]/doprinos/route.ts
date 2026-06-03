@@ -5,7 +5,7 @@ import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session.user.tipKorisnika !== "POCETNI") {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 

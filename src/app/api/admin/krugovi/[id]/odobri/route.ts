@@ -12,7 +12,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
@@ -55,10 +55,6 @@ export async function POST(
       const userId = zahtev.osnivaci[i];
       await tx.krugClanstvo.create({
         data: { userId, krugId, isAdmin: i === 0 },
-      });
-      await tx.user.update({
-        where: { id: userId },
-        data: { role: "CLAN_KRUGA" },
       });
     }
 

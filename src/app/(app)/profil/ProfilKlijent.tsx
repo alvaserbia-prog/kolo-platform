@@ -21,7 +21,7 @@ interface ProfilProps {
     id: string;
     email: string;
     pseudonim: string;
-    role: string;
+    tipKorisnika: string;
     verified: boolean;
     verifiedAt: string | null;
     pseudonimChangedAt: string | null;
@@ -255,10 +255,11 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     router.refresh();
   }
 
-  const roleLabel: Record<string, string> = {
-    FIZICKO_LICE: t("uloga_fizicko"),
-    CLAN_KRUGA: t("uloga_clan_kruga"),
-    ADMIN: t("uloga_admin"),
+  const tipLabel: Record<string, string> = {
+    NEVERIFIKOVAN: t("tip_neverifikovan"),
+    REGULARNI: t("tip_regularni"),
+    NOSILAC_ZRNA: t("tip_nosilac"),
+    POCETNI: t("uloga_admin"),
   };
 
   async function posaljiPrigovor(e: React.FormEvent) {
@@ -344,7 +345,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             </div>
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("uloga_label")}</dt>
-              <dd className="text-kolo-muted">{roleLabel[user.role] ?? user.role}</dd>
+              <dd className="text-kolo-muted">{tipLabel[user.tipKorisnika] ?? user.tipKorisnika}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("status_label")}</dt>

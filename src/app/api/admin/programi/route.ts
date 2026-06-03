@@ -12,7 +12,7 @@ const SVI_TIPOVI: ProgramType[] = [
 // GET /api/admin/programi — pregled svih programa + pending zahtevi
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.role !== "ADMIN")
+  if (!session || session.user.tipKorisnika !== "POCETNI")
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const [programi, pendingEnrollments, poslednjeEmisije] = await Promise.all([

@@ -45,15 +45,9 @@ export async function DELETE(
   if (!membership)
     return NextResponse.json({ error: "Niste član ove krugovi." }, { status: 400 });
 
-  await prisma.$transaction(async (tx) => {
-    await tx.krugClanstvo.update({
-      where: { id: membership.id },
-      data: { leftAt: new Date() },
-    });
-    await tx.user.update({
-      where: { id: session.user.id },
-      data: { role: "FIZICKO_LICE" },
-    });
+  await prisma.krugClanstvo.update({
+    where: { id: membership.id },
+    data: { leftAt: new Date() },
   });
 
   return NextResponse.json({ ok: true });

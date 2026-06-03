@@ -9,12 +9,6 @@ datasource db {
 
 // ─── Enumi ───────────────────────────────────────────────────────────────────
 
-enum Role {
-  FIZICKO_LICE
-  CLAN_KRUGA
-  ADMIN
-}
-
 enum WalletType {
   USER
   KRUG
@@ -84,6 +78,13 @@ enum ZrnoStatusAkcija {
 enum PredlogStatus {
   ACTIVE
   CLOSED
+}
+
+// Stanje izvršenja usvojene odluke Gornjeg Kola (čl. 17, 18)
+enum IzvrsenjeStatus {
+  ZA_IZVRSENJE      // usvojeno, čeka izvršenje od strane Fondacije
+  IZVRSENO          // Fondacija izvršila odluku
+  VETO_OBUSTAVLJENO // izvršenje obustavljeno zaštitnim vetom (čl. 18, 48)
 }
 
 enum ProgramType {
@@ -166,7 +167,6 @@ model User {
   oauthId            String?
   oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
-  role               Role       @default(FIZICKO_LICE)
   status             UserStatus @default(ACTIVE)
   suspendedAt        DateTime?
   suspendedReason    String?
@@ -600,16 +600,24 @@ model ZrnoDelegacija {
 // ─── Glasanje ─────────────────────────────────────────────────────────────────
 
 model GlasanjePredlog {
-  id          String        @id @default(uuid())
-  title       String
-  description String
-  authorId    String
-  author      User          @relation(fields: [authorId], references: [id])
-  deadline    DateTime
-  status      PredlogStatus @default(ACTIVE)
-  glasovi     GlasanjeGlas[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id              String        @id @default(uuid())
+  title           String
+  description     String
+  authorId        String
+  author          User          @relation(fields: [authorId], references: [id])
+  glasanjePocetak DateTime      // ponoć narednog obračunskog perioda (čl. 11)
+  deadline        DateTime      // kraj glasanja = kraj tog perioda
+  status          PredlogStatus @default(ACTIVE)
+  ishodUsvojen    Boolean?      // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
+  zaZbir          Int?          // zbir glasačke moći „za" u trenutku zatvaranja
+  protivZbir      Int?          // zbir glasačke moći „protiv" u trenutku zatvaranja
+  izvrsenjeStatus IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
+  vetoObrazlozenje String?      // obavezno obrazloženje zaštitnog veta (čl. 18)
+  izvrsenoAt      DateTime?
+  vetoAt          DateTime?
+  glasovi         GlasanjeGlas[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model GlasanjeGlas {
@@ -651,6 +659,13 @@ model DonationRecord {
   confirmedAt     DateTime?
   confirmedById   String?
   createdAt       DateTime       @default(now())
+
+  // Kartično plaćanje (NestPay: Banca Intesa / OTP). RUCNO = klasična uplata
+  // na račun koju admin ručno potvrđuje. KARTICA = naplata preko gateway-a.
+  nacinUplate     String         @default("RUCNO")
+  provajder       String?
+  oid             String?        @unique
+  bankRef         String?
 
   @@index([status, createdAt])
 }
