@@ -1,9 +1,10 @@
 /**
- * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 71, v3.7.0)
+ * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 48–50, v3.7.5)
  *
  * Sredstva Fondacije = priliv (donacije + pokroviteljstvo, oba u RSD) - odliv (troskovi)
  * Veto aktivan ako Protokol balansa < -1.000.000 POEN I trajnoUgasen = false
- * Veto se trajno gasi kad sredstva Fondacije >= 3 × prosecnih mesecnih operativnih troskova
+ * Veto se trajno gasi kad sredstva Fondacije >= 3 × operativni trosak prethodnog meseca
+ *   (reper po Pravilniku o Gornjem Kolu 3.7.6, cl. 19).
  *
  * Inicijalne vrednosti = 0 (po dogovoru sa vlasnikom 2026-05-24).
  */
@@ -12,7 +13,6 @@ import { prisma } from "@/lib/prisma";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 const VETO_PRAG_POEN = -1_000_000;
-const PROSEK_PERIOD_MESECI = 6; // koliko meseci se gleda za prosek troskova
 
 export interface FondacijaSaldo {
   ukupanPriliv: number;        // RSD
@@ -30,8 +30,8 @@ export interface VetoStatus {
   protokolBalans: number;
   prag: number;
   saldoFondacije: number;
-  prosekMesecnihTroskova: number;
-  pragZaGasenje: number;       // 3 × prosek
+  trosakPrethodnogMeseca: number;
+  pragZaGasenje: number;       // 3 × trosak prethodnog meseca
 }
 
 export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
@@ -63,47 +63,46 @@ export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
 }
 
 /**
- * Prosek mesecnih troskova racuna se iz poslednjih N meseci (default 6).
- * Ako nema dovoljno meseci sa zapisima, vraca 0 (dok se ne akumulira istorija).
+ * Operativni trosak Fondacije za prethodni KALENDARSKI mesec — reper za prag
+ * gasenja zastitnog veta (Pravilnik o Gornjem Kolu 3.7.6, cl. 19).
+ * Vraca 0 dok ne postoji nijedan zapis za prethodni mesec.
  */
-export async function dohvatiProsekMesecnihTroskova(brojMeseci = PROSEK_PERIOD_MESECI): Promise<number> {
+export async function dohvatiTrosakPrethodnogMeseca(): Promise<number> {
   const danas = new Date();
-  const pocetak = new Date(danas);
-  pocetak.setMonth(pocetak.getMonth() - brojMeseci);
+  const pocetakOvogMeseca = new Date(danas.getFullYear(), danas.getMonth(), 1);
+  const pocetakPrethodnog = new Date(danas.getFullYear(), danas.getMonth() - 1, 1);
 
   const troskovi = await prisma.fondacijaTrosak.aggregate({
-    where: { datum: { gte: pocetak } },
+    where: { datum: { gte: pocetakPrethodnog, lt: pocetakOvogMeseca } },
     _sum: { iznosRSD: true },
   });
 
-  const ukupno = Number(troskovi._sum.iznosRSD ?? 0);
-  if (ukupno === 0) return 0;
-  return ukupno / brojMeseci;
+  return Number(troskovi._sum.iznosRSD ?? 0);
 }
 
 /**
  * Azurira singleton SistemskiVeto na osnovu trenutnog stanja:
  * - aktivan = (Protokol < -1M) I (!trajnoUgasen)
- * - trajnoUgasen postaje true ako saldoFondacije >= 3 × prosek (jednosmerni flag)
+ * - trajnoUgasen postaje true ako saldoFondacije >= 3 × trosak prethodnog meseca (jednosmerni flag)
  */
 export async function azurirajVetoStatus(): Promise<VetoStatus> {
-  const [veto, protokol, saldo, prosek] = await Promise.all([
+  const [veto, protokol, saldo, trosakPrethodnog] = await Promise.all([
     prisma.sistemskiVeto.findUnique({ where: { id: "singleton" } }),
     prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID }, select: { balance: true } }),
     dohvatiSaldoFondacije(),
-    dohvatiProsekMesecnihTroskova(),
+    dohvatiTrosakPrethodnogMeseca(),
   ]);
 
   if (!veto) throw new Error("SistemskiVeto singleton nije inicijalizovan.");
 
   const protokolBalans = protokol?.balance ?? 0;
-  const pragZaGasenje = prosek * 3;
+  const pragZaGasenje = trosakPrethodnog * 3;
 
   let trajnoUgasen = veto.trajnoUgasen;
   let datumGasenja = veto.datumGasenja;
 
   // Provera trajnog gasenja (jednosmerni flag)
-  if (!trajnoUgasen && prosek > 0 && saldo.saldo >= pragZaGasenje) {
+  if (!trajnoUgasen && trosakPrethodnog > 0 && saldo.saldo >= pragZaGasenje) {
     trajnoUgasen = true;
     datumGasenja = new Date();
   }
@@ -129,18 +128,18 @@ export async function azurirajVetoStatus(): Promise<VetoStatus> {
     protokolBalans,
     prag: VETO_PRAG_POEN,
     saldoFondacije: saldo.saldo,
-    prosekMesecnihTroskova: prosek,
+    trosakPrethodnogMeseca: trosakPrethodnog,
     pragZaGasenje,
   };
 }
 
 export async function dohvatiVetoStatus(): Promise<VetoStatus> {
   // Ne update-uje, samo izvestava trenutno stanje + izracunate kontekstne vrednosti
-  const [veto, protokol, saldo, prosek] = await Promise.all([
+  const [veto, protokol, saldo, trosakPrethodnog] = await Promise.all([
     prisma.sistemskiVeto.findUnique({ where: { id: "singleton" } }),
     prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID }, select: { balance: true } }),
     dohvatiSaldoFondacije(),
-    dohvatiProsekMesecnihTroskova(),
+    dohvatiTrosakPrethodnogMeseca(),
   ]);
 
   if (!veto) throw new Error("SistemskiVeto singleton nije inicijalizovan.");
@@ -153,7 +152,7 @@ export async function dohvatiVetoStatus(): Promise<VetoStatus> {
     protokolBalans: protokol?.balance ?? 0,
     prag: VETO_PRAG_POEN,
     saldoFondacije: saldo.saldo,
-    prosekMesecnihTroskova: prosek,
-    pragZaGasenje: prosek * 3,
+    trosakPrethodnogMeseca: trosakPrethodnog,
+    pragZaGasenje: trosakPrethodnog * 3,
   };
 }

@@ -10,11 +10,14 @@ const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
 
 // GET /api/pijaca/[id] — jedan oglas
+// Pregled oglasa je javan (Pravilnik čl. 16), ali kontakt oglašivača (telefon)
+// vidi samo verifikovani korisnik.
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
+  const session = await getServerSession(authOptions);
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
     include: {
@@ -22,7 +25,9 @@ export async function GET(
     },
   });
   if (!listing) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
-  return NextResponse.json({ listing });
+  return NextResponse.json({
+    listing: { ...listing, phone: session?.user?.verified ? listing.phone : null },
+  });
 }
 
 // PATCH /api/pijaca/[id] — uredi ili deaktiviraj oglas (samo prodavac)

@@ -479,7 +479,7 @@ export default function ONamaPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Levo — dokumenti */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti (v3.7.0)</p>
+            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">Dokumenti (v3.7.5)</p>
             <div className="space-y-2">
               {/* Ključni dokumenti — uvek vidljivi */}
               {[

@@ -1,5 +1,5 @@
 /**
- * Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.7.0)
+ * Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.7.2)
  *
  * Pravila:
  * - Gornja granica: 2.400.000 POEN (120 koraka x 20.000)

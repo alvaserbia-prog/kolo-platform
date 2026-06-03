@@ -6,35 +6,41 @@ import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const PRAVILNICI: Record<string, { naziv: string; fajl: string; opis: string }> = {
+const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
   "kolo-sistem": {
     naziv: "Pravilnik o KOLO sistemu",
     fajl: "Pravilnik_3_7_5.md",
+    verzija: "3.7.5",
     opis: "Osnovni akt sistema — 12 glava, 82 člana.",
   },
   "hijerarhija": {
     naziv: "Pravilnik o hijerarhiji akata",
     fajl: "hijerarhija_3_7_2.md",
+    verzija: "3.7.2",
     opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
   },
   "dokaz-stvarnosti": {
     naziv: "Pravilnik o dokazu stvarnosti",
     fajl: "dokaz_stvarnosti_3_7_3.md",
+    verzija: "3.7.3",
     opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
   },
   "pokroviteljstvo-donacije": {
     naziv: "Pravilnik o pokroviteljstvu i donacijama",
     fajl: "donacije_3_7_3.md",
+    verzija: "3.7.3",
     opis: "Nivoi donacija i pokroviteljstva.",
   },
   "operativni": {
     naziv: "Pravilnik o operativnom doprinosu",
     fajl: "operativni_3_7_2.md",
+    verzija: "3.7.2",
     opis: "Operativni program i međusobno potvrđivanje doprinosa.",
   },
   "osnivacki": {
     naziv: "Pravilnik o osnivačkom doprinosu",
     fajl: "osnivacki_3_7_2.md",
+    verzija: "3.7.2",
     opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
   },
 };
@@ -49,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
   return {
     title: `${p.naziv} — KOLO`,
-    description: `${p.naziv}, verzija 3.7.0. ${p.opis}`,
+    description: `${p.naziv}, verzija ${p.verzija}. ${p.opis}`,
   };
 }
 
@@ -77,7 +83,7 @@ export default async function PravilnikSlugPage({ params }: Props) {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           {p.naziv}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.0</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija {p.verzija}</p>
       </div>
 
       <article

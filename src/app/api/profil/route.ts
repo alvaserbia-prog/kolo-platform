@@ -16,7 +16,7 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
  * DELETE /api/profil
  * Korisnik zahteva brisanje naloga (čl. 17 ZZPL — pravo na zaborav).
  *
- * Implementacija Pravilnika v3.7.0 čl. 34 — Mehanika prestanka statusa:
+ * Implementacija Pravilnika v3.7.5 čl. 34 — Mehanika prestanka statusa:
  * — Aktivno ZRNO prelazi u slobodno, a potom se svo slobodno ZRNO otpisuje
  *   i vraća u raspoloživa ZRNA u Protokolu. Otpis NE pokreće evidentiranje POEN-a
  *   prema obračunskom koeficijentu.
@@ -273,7 +273,7 @@ export async function DELETE(req: NextRequest) {
             toWalletId: PROTOKOL_WALLET_ID,
             amount: balans,
             type: TransactionType.TRANSFER,
-            description: `Poništavanje POEN-a pri prestanku statusa (čl. 34 Pravilnika v3.7.0)`,
+            description: `Poništavanje POEN-a pri prestanku statusa (čl. 34 Pravilnika v3.7.5)`,
           },
         });
       });
