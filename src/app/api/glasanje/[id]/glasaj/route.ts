@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { izracunajGlasove } from "@/lib/protokol/zrno";
 import { fazaPredloga } from "@/lib/protokol/glasanje";
+import { dohvatiFazuStatus } from "@/lib/protokol/faza-sistema";
 
 // POST /api/glasanje/[id]/glasaj — glasa ZA ili PROTIV
 export async function POST(
@@ -12,6 +13,11 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+
+  // Glasanje Gornjeg Kola je operativno tek u Fazi 2 (čl. 3, 24)
+  const fazaSistema = await dohvatiFazuStatus();
+  if (fazaSistema.faza !== "FAZA_2")
+    return NextResponse.json({ error: "Glasanje Gornjeg Kola je operativno tek u Fazi 2." }, { status: 403 });
 
   const { id } = await params;
   const predlog = await prisma.glasanjePredlog.findUnique({ where: { id } });

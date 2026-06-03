@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { granicePeriodaGlasanja, fazaPredloga, utvrdiIshod } from "@/lib/protokol/glasanje";
+import { granicePeriodaGlasanja, fazaPredloga, utvrdiIshod, normalizujNaslov } from "@/lib/protokol/glasanje";
 
 describe("glasanje — obračunski period (čl. 11)", () => {
   it("glasanje počinje u ponoć narednog perioda i traje tačno jedan period", () => {
@@ -43,5 +43,15 @@ describe("glasanje — ishod (prosta većina, čl. 8/9)", () => {
   });
   it("neusvojeno pri izjednačenju (čl. 9)", () => {
     expect(utvrdiIshod(5, 5)).toBe(false);
+  });
+});
+
+describe("glasanje — normalizacija naslova (čl. 22)", () => {
+  it("ujednačava velika slova, razmake i ivične praznine", () => {
+    expect(normalizujNaslov("  Izmena   Pravila  ")).toBe("izmena pravila");
+    expect(normalizujNaslov("IZMENA PRAVILA")).toBe(normalizujNaslov("izmena pravila"));
+  });
+  it("razlikuje stvarno različite naslove", () => {
+    expect(normalizujNaslov("Predlog A")).not.toBe(normalizujNaslov("Predlog B"));
   });
 });

@@ -11,6 +11,28 @@ import { prisma } from "@/lib/prisma";
 
 export type FazaPredloga = "NAJAVLJEN" | "U_TOKU" | "ZATVOREN";
 
+/** Period zabrane ponovnog predlaganja iste sadržine (čl. 22). */
+export const DANA_PONOVNO_PREDLAGANJE = 30;
+
+/** Normalizacija naslova za poređenje „suštinski istovetne sadržine" (čl. 22). */
+export function normalizujNaslov(s: string): string {
+  return s.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+/**
+ * Da li postoji neusvojen predlog iste (normalizovane) sadržine zatvoren u
+ * poslednjih 30 dana — tada je ponovno predlaganje nedopušteno (čl. 22).
+ */
+export async function postojiSkoroOdbijen(title: string, now: Date = new Date()): Promise<boolean> {
+  const granica = new Date(now.getTime() - DANA_PONOVNO_PREDLAGANJE * 24 * 60 * 60 * 1000);
+  const norm = normalizujNaslov(title);
+  const odbijeni = await prisma.glasanjePredlog.findMany({
+    where: { status: "CLOSED", ishodUsvojen: false, deadline: { gte: granica } },
+    select: { title: true },
+  });
+  return odbijeni.some((o) => normalizujNaslov(o.title) === norm);
+}
+
 /**
  * Granice glasanja za predlog otvoren u trenutku `od`:
  * glasanje počinje u ponoć narednog obračunskog perioda i traje tačno jedan period.
