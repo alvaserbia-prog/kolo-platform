@@ -1,9 +1,14 @@
 /**
- * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 71, v3.7.0)
+ * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 48–50, v3.7.5)
  *
  * Sredstva Fondacije = priliv (donacije + pokroviteljstvo, oba u RSD) - odliv (troskovi)
  * Veto aktivan ako Protokol balansa < -1.000.000 POEN I trajnoUgasen = false
  * Veto se trajno gasi kad sredstva Fondacije >= 3 × prosecnih mesecnih operativnih troskova
+ *
+ * TODO (GAP #6, gornje_kolo_3_7_5.md cl. 19): prag gasenja je placeholder (3×).
+ * Kanonski standard su DVA kumulativna uslova: (1) likvidna RSD sredstva >= 24×
+ * prosecni mesecni operativni trosak (rezerva za 2 god.) I (2) prilivi u poslednjih
+ * 12 meseci pokrivaju troskove istog perioda. Primena praga je odluka Fondacije.
  *
  * Inicijalne vrednosti = 0 (po dogovoru sa vlasnikom 2026-05-24).
  */

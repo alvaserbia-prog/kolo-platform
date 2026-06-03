@@ -4,7 +4,7 @@ import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
 export const UKUPNO_ZRNA = 1_000_000;
 export const PROTOKOL_WALLET_ID = "banka-singleton";
 
-// Pravilnik v3.7.0, čl. 19: upis ZRNA pretpostavlja minimum od 20.000 evidentiranih POEN-a
+// Pravilnik v3.7.5, čl. 19: upis ZRNA pretpostavlja minimum od 20.000 evidentiranih POEN-a
 export const MINIMUM_POEN_ZA_UPIS_ZRNA = 20_000;
 
 // ── Računanje ─────────────────────────────────────────────────────────────────
