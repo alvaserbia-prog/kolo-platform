@@ -44,12 +44,12 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 | Dokument | Fajl | Verzija |
 |---|---|---|
 | Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Politika privatnosti | `politika_3_7_5.md` | **3.7.5 (aktuelan)** |
+| Politika privatnosti | `politika_3_7_6.md` | **3.7.6 (aktuelan)** — čl. 7/8/9 dopunjeni: analitički kolačići (GA, Clarity), obrađivači, prenos van Srbije |
 | Uslovi korišćenja | `uslovi_koriscenja_3_7_3.md` | **3.7.3 (aktuelan)** |
 | Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
 | Whitepaper | `whitepaper_3_7_6.md` | **3.7.6 (aktuelan)** — veto usklađen sa Pravilnikom 3.7.5 (PDF `KOLO_Whitepaper_3.7.2.pdf` zastareo) |
-| DPIA | `DPIA_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Radnje obrade | `radnje_obrade_3_7_5.md` | **3.7.5 (aktuelan)** |
+| DPIA | `DPIA_3_7_6.md` | **3.7.6 (aktuelan)** — dodata radnja obrade br. 12 (analitika, pristanak) |
+| Radnje obrade | `radnje_obrade_3_7_6.md` | **3.7.6 (aktuelan)** — dodata radnja br. 12 (analitika korišćenja) |
 | Rizici | `rizici_3_7_2.md` | 3.7.2 |
 | Pravilnik o hijerarhiji akata | `hijerarhija_3_7_2.md` | 3.7.2 |
 | Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_7_3.md` | **3.7.3 (aktuelan)** |
@@ -59,9 +59,10 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 | Pravilnik o programima podrške | `programi_podrske_3_7_5.md` | **3.7.5 (aktuelan)** — verifikatorska potvrda socijalnih programa |
 | Pravilnik o Gornjem Kolu | `gornje_kolo_3_7_6.md` | **3.7.6 (aktuelan)** — glasanje, kvorum, pragovi, delegiranje (delegiran čl. 41/46/47); operativan u Fazi 2. **Čl. 19:** prag gašenja veta = **3× operativni trošak prethodnog meseca** (jedini uslov; prethodna 3.7.5 verzija je imala dvostruki uslov 24× rezerva + 12-mes. samoodrživost) |
 
-Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`, `DPIA_3_7_2.md`, `radnje_obrade_3_7_2.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
+Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`/`3_7_4.md`/`3_7_5.md`, `DPIA_3_7_2.md`/`3_7_5.md`, `radnje_obrade_3_7_2.md`/`3_7_5.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
 
 **Promene po verzijama (changelog iz zaglavlja dokumenata):**
+- **Politika 3.7.6 / DPIA 3.7.6 / Radnje obrade 3.7.6** — usklađivanje sa analitikom: Politika čl. 7 (analitički kolačići GA/Clarity + mehanizam pristanka), čl. 8 (obrađivači: Vercel/Neon/Resend/Google/Microsoft), čl. 9 (prenos van Srbije, SCC); DPIA i Registar dobijaju **radnju obrade br. 12 (Analitika korišćenja, pravni osnov pristanak)** sa procenom rizika i merama. Prati implementaciju cookie-consent bannera (GAP 19 rešen).
 - **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
 - **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
 - **Pravilnik 3.7.4 / donacije 3.7.3** — pokroviteljstvo izričito obuhvata i **preduzetnike**, ravnopravno sa pravnim licima (čl. 2, 38, 40).
@@ -200,12 +201,16 @@ U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugr
 
 Ovi mehanizmi nisu deo KOLO Protokola, ali postoje u kodu i utiču na rad/usklađenost sajta:
 
-### Analitika i praćenje posetilaca (⚠️ usklađenost — vidi GAP)
-- U `src/app/layout.tsx` učitavaju se **tri** trekera, **bezuslovno** (`afterInteractive`, bez cookie-consent gate-a):
-  - **Google Analytics** — `gtag`, ID `G-JY214NWCDK` (hardkodovan u layout-u).
-  - **Microsoft Clarity** — `NEXT_PUBLIC_CLARITY_ID` (env-gated); ovo je **session-recording / heatmap** alat (snima ponašanje korisnika).
-  - **Vercel Analytics** — `<Analytics />` (`@vercel/analytics`).
-- 🟡 **GAP usklađenosti (otvoren):** Politika privatnosti čl. 7 pominje samo „neophodne kolačiće" i ima placeholder „[DOPUNITI: analitički kolačići…]". **Nema cookie-consent bannera**, a GA/Clarity (treća lica, prenos van EU) se učitavaju bez pristanka. Pre uključivanja uživo treba: (a) consent-gate za ne-neophodne trekere, (b) dopuniti Politiku (čl. 7/8) i DPIA/radnje obrade, (c) navesti Google/Microsoft kao obrađivače.
+### Analitika i praćenje posetilaca (✅ usklađeno — consent-gated)
+- **Cookie-consent (privacy-by-default):** ne-neophodni trekeri se učitavaju **tek po izričitom pristanku** korisnika.
+  - `src/lib/cookieConsent.ts` — stanje pristanka u `localStorage` (`kolo-kolacici-pristanak`) + `CustomEvent` za reakciju bez reload-a.
+  - `src/components/CookieConsent.tsx` — baner (Prihvati / Odbij + link na `/privatnost`); prikazuje se dok korisnik nije odlučio.
+  - `src/components/Analitika.tsx` — renderuje GA + Clarity **samo ako je pristanak `prihvaceno`**.
+- Trekeri (u `layout.tsx` preko `Analitika`):
+  - **Google Analytics** — `gtag`, ID `G-JY214NWCDK` (hardkodovan), uz `anonymize_ip`. Učitava se samo uz pristanak.
+  - **Microsoft Clarity** — `NEXT_PUBLIC_CLARITY_ID` (env-gated), session-recording/heatmap. Učitava se samo uz pristanak.
+  - **Vercel Analytics** — `<Analytics />` (`@vercel/analytics`), **bez kolačića** (cookieless, agregatno) → učitava se bezuslovno, ne zahteva pristanak.
+- ✅ **Usklađenost (GAP 19 rešen):** Politika 3.7.6 čl. 7/8/9, DPIA 3.7.6 i Registar radnji obrade 3.7.6 (radnja br. 12) dopunjeni — analitika navedena, pravni osnov **pristanak**, Google/Microsoft kao obrađivači, prenos van Srbije pokriven SCC. **Operativno:** posle deploya admin kreira novu verziju Politike (`/api/admin/politika`) → korisnici dobijaju ponovni pristanak preko `/politika-prihvati`.
 
 ### SEO sloj
 - `src/lib/seo.ts` (`pageMetadata`, `absoluteUrl`, `SITE_URL=https://ekolo.rs`, `IS_PRODUCTION` preko `VERCEL_ENV`). Test (`*.vercel.app`) → **noindex** (da Google ne tretira kao duplikat prod-a); produkcija → indeksira, canonical na ekolo.rs.
@@ -354,7 +359,7 @@ docs/             — interne radne beleške (nije normativa)
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
-- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_5.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_5.md`; `/radnje-obrade` → `radnje_obrade_3_7_5.md`; `/whitepaper` → `whitepaper_3_7_6.md`; `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
+- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_6.md`; `/uslovi` → `uslovi_koriscenja_3_7_3.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_6.md`; `/radnje-obrade` → `radnje_obrade_3_7_6.md`; `/whitepaper` → `whitepaper_3_7_6.md`; `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
 - ✅ **Verzijske labele sređene** — sve javne stranice prikazuju stvarnu verziju (Pravilnik 3.7.5, statut/rizici 3.7.2, DPIA/radnje/politika 3.7.5, whitepaper 3.7.6, o-nama „v3.7.5"); više nema stale „3.7.0".
 
 ### Admin panel
@@ -423,7 +428,7 @@ docs/             — interne radne beleške (nije normativa)
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
 ## Reference
-- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika 3.7.4, Uslovi 3.7.3, DPIA/Radnje obrade/Dokaz stvarnosti/Donacije/Programi podrške 3.7.3; ostalo 3.7.2)
+- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika/DPIA/Radnje obrade 3.7.6, Uslovi 3.7.3, Dokaz stvarnosti/Donacije 3.7.3, Programi podrške 3.7.5; ostalo 3.7.2)
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
@@ -450,7 +455,7 @@ docs/             — interne radne beleške (nije normativa)
 16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
 
 ### Usklađenost — analitika/kolačići
-19. 🟡 **Analitika bez pristanka (otvoren GAP).** GA (`G-JY214NWCDK`), Microsoft Clarity (`NEXT_PUBLIC_CLARITY_ID`, session-recording) i Vercel Analytics se u `layout.tsx` učitavaju **bezuslovno**, bez cookie-consent gate-a. Politika privatnosti čl. 7 pokriva samo „neophodne kolačiće" i ima placeholder za analitičke; nema bannera za pristanak ni navođenja Google/Microsoft kao obrađivača (prenos van EU). Treba: consent-gate za ne-neophodne trekere + dopuna Politike (čl. 7/8), DPIA i radnji obrade. (Vidi „Infrastruktura i integracije → Analitika".)
+19. ✅ **REŠENO — Analitika uz pristanak.** Implementiran cookie-consent baner (`CookieConsent.tsx` + `Analitika.tsx` + `lib/cookieConsent.ts`): GA (uz `anonymize_ip`) i Microsoft Clarity se učitavaju **samo po izričitom pristanku**; Vercel Analytics ostaje (cookieless). Politika 3.7.6 (čl. 7/8/9), DPIA 3.7.6 i Registar radnji obrade 3.7.6 (radnja br. 12) dopunjeni — pravni osnov pristanak, Google/Microsoft kao obrađivači, prenos van Srbije (SCC). **Operativno posle deploya:** admin kreira novu verziju Politike → korisnici dobijaju ponovni pristanak preko `/politika-prihvati`. (Vidi „Infrastruktura i integracije → Analitika".)
 
 ### Operativno
 17. ✅ **Migracije se primenjuju AUTOMATSKI pri svakom deploy-u** (vidi „Migracije se primenjuju AUTOMATSKI" u Deploy sekciji) — `vercel.json buildCommand` pokreće `prisma migrate deploy` kad postoji `DATABASE_URL`. Ručni `npx prisma migrate deploy` više nije potreban (ostaje kao fallback za lokalno/vanredne situacije).

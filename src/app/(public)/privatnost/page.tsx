@@ -8,12 +8,12 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Politika privatnosti — KOLO",
-  description: "Politika privatnosti KOLO platforme, verzija 3.7.5",
+  description: "Politika privatnosti KOLO platforme, verzija 3.7.6",
   path: "/privatnost",
 });
 
 export default async function PolitikaPrivatnostiPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_5.md");
+  const filePath = path.join(process.cwd(), "nova dokumentacija", "politika_3_7_6.md");
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
@@ -24,7 +24,7 @@ export default async function PolitikaPrivatnostiPage() {
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           Politika privatnosti KOLO platforme
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.5</p>
+        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.6</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
           <span className="text-kolo-muted">Vidite i:</span>
           <Link href="/dpia" className="text-kolo-green-700 hover:underline">DPIA (procena uticaja)</Link>
