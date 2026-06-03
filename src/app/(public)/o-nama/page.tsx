@@ -59,15 +59,20 @@ export default function ONamaPage() {
             </p>
           </div>
           <div className="shrink-0 mx-auto md:ml-auto">
-            <Image
-              src="/nikola-saric-mantil.png"
-              alt="Nikola Šarić"
-              width={160}
-              height={160}
-              priority
-              className="rounded-full object-cover object-top ring-4 ring-white/10 shadow-xl"
-              style={{ width: "160px", height: "160px", display: "block" }}
-            />
+            <div
+              className="rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl"
+              style={{ width: "160px", height: "160px" }}
+            >
+              <Image
+                src="/nikola-saric-mantil.png"
+                alt="Nikola Šarić"
+                width={160}
+                height={160}
+                priority
+                className="object-cover object-top"
+                style={{ width: "160px", height: "160px", display: "block", transform: "scale(1.28)", transformOrigin: "center 22%" }}
+              />
+            </div>
           </div>
         </div>
       </section>
