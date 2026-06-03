@@ -1,5 +1,5 @@
 /**
- * Faza sistema — automatski prelaz iz Faze 1 u Fazu 2 (Pravilnik v3.7.5; gornje_kolo_3_7_5, čl. 3).
+ * Faza sistema — automatski prelaz iz Faze 1 u Fazu 2 (Pravilnik v3.7.5; gornje_kolo_3_7_6, čl. 3).
  *
  * Faza 1: pravila Protokola postavlja osnivač u saradnji sa Fondacijom.
  * Faza 2: Gornje Kolo postaje upravno telo sistema.

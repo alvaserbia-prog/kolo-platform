@@ -248,7 +248,7 @@ docs/             — interne radne beleške (nije normativa)
 - Predlozi, glasanje sa ponderisanom (kvadratnom) glasačkom moći.
 
 ### Pokrovitelji (pun tok, v3.7.2; +preduzetnici v3.7.4)
-- Pokrovitelj = **pravno lice ili preduzetnik** (ravnopravno, Pravilnik čl. 40, v3.7.4 / donacije 3.7.3), nema login; doprinos se evidentira u zapisu verifikovanog vlasnika pravnog lica, odnosno samog preduzetnika. 🟡 Proveriti da li kod/UI dopuštaju preduzetnika (ne samo „pravno lice").
+- Pokrovitelj = **pravno lice ili preduzetnik** (ravnopravno, Pravilnik čl. 40, v3.7.4 / donacije 3.7.3), nema login; doprinos se evidentira u zapisu verifikovanog vlasnika pravnog lica, odnosno samog preduzetnika. ✅ UI/ugovor preformulisani da izričito obuhvataju i preduzetnika (PIB ostaje ključ; ugovorni tekst koristi „Donator" + naziv/PIB, neutralan).
 - **Tok (Pravilnik o pokroviteljstvu čl. 7–10):** verifikovani korisnik pokreće **prijavu** (`/api/pokroviteljstvo/prijava`) → platforma generiše ugovor → korisnik **potpisuje** (`/[id]/potpisi`) → Fondacija **potvrđuje** (`/api/admin/pokroviteljstvo/prijave/[id]/potvrdi`), što pokreće evidenciju. Doprinos: **novac, roba ili usluge** (`VrstaDonacije` NOVAC/ROBA/USLUGE; roba/usluge po cenovniku).
 - Model `PokroviteljPrijava`; admin UI `PokroviteljPrijaveTab.tsx`; korisnički UI `PokroviteljstvoPrijava.tsx`.
 - Bonus POEN po fiksnoj **tabeli 7 nivoa** (zbir bonusa za sve novodostignute nivoe; jedna transakcija „Bonus za pokroviteljstvo iznos X"):

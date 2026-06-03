@@ -162,7 +162,8 @@ export function generisiUgovorTekst(p: {
 }
 
 /**
- * Potvrda prijema doprinosa (čl. 8). Pronalazi ili registruje pravno lice po PIB-u,
+ * Potvrda prijema doprinosa (čl. 8). Pronalazi ili registruje pokrovitelja
+ * (pravno lice ili preduzetnik) po PIB-u,
  * evidentira doprinos i emituje bonus POEN prema dostignutim nivoima (čl. 10).
  * Mora biti pozvana van prisma.$transaction (zbog emitujPoen).
  */
@@ -172,7 +173,7 @@ export async function potvrdiPrijavu(prijavaId: string, adminId: string) {
   if (prijava.status !== "POTPISANA")
     throw new Error("Samo potpisana prijava može biti potvrđena.");
 
-  // Pronađi ili registruj pravno lice po PIB-u
+  // Pronađi ili registruj pokrovitelja (pravno lice ili preduzetnik) po PIB-u
   let pokrovitelj = await prisma.pokrovitelj.findUnique({ where: { pib: prijava.pib } });
   if (!pokrovitelj) {
     pokrovitelj = await prisma.pokrovitelj.create({

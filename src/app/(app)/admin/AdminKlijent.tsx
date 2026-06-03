@@ -1515,7 +1515,7 @@ function AdminPokroviteljiTab({
               <label className="block text-xs font-medium text-kolo-muted mb-1">Naziv *</label>
               <input value={noviNaziv} onChange={(e) => setNoviNaziv(e.target.value)}
                 className="w-full border border-kolo-border rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-kolo-green-500"
-                placeholder="Naziv pravnog lica" />
+                placeholder="Naziv pravnog lica ili preduzetnika" />
             </div>
             <div>
               <label className="block text-xs font-medium text-kolo-muted mb-1">PIB *</label>
