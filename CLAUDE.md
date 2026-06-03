@@ -39,11 +39,12 @@ Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokum
 | Pravilnik o operativnom doprinosu | `operativni_3_7_2.md` | 3.7.2 |
 | Pravilnik o osnivačkom doprinosu | `osnivacki_3_7_2.md` | 3.7.2 |
 | Pravilnik o programima podrške | `programi_podrske_3_7_5.md` | **3.7.5 (aktuelan)** — verifikatorska potvrda socijalnih programa |
-| Pravilnik o Gornjem Kolu | `gornje_kolo_3_7_5.md` | **3.7.5 (nov)** — glasanje, kvorum, pragovi, delegiranje (delegiran čl. 41/46/47); operativan u Fazi 2 |
+| Pravilnik o Gornjem Kolu | `gornje_kolo_3_7_6.md` | **3.7.6 (aktuelan)** — glasanje, kvorum, pragovi, delegiranje (delegiran čl. 41/46/47); operativan u Fazi 2. **Čl. 19:** prag gašenja veta = **3× operativni trošak prethodnog meseca** (jedini uslov; prethodna 3.7.5 verzija je imala dvostruki uslov 24× rezerva + 12-mes. samoodrživost) |
 
 Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`, `DPIA_3_7_2.md`, `radnje_obrade_3_7_2.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
 
 **Promene po verzijama (changelog iz zaglavlja dokumenata):**
+- **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
 - **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
 - **Pravilnik 3.7.4 / donacije 3.7.3** — pokroviteljstvo izričito obuhvata i **preduzetnike**, ravnopravno sa pravnim licima (čl. 2, 38, 40).
 - **Politika 3.7.4 / dokaz stvarnosti 3.7.3** — verifikacija se zasniva na **neposrednom ličnom poznavanju i ne zahteva fizičko prisustvo**; svrha obrade kontakt podataka sa table jemstva preformulisana u skladu s tim.
@@ -132,7 +133,7 @@ POEN i ZRNO **nisu imovinsko pravo i ne nasleđuju se**. Pri prestanku statusa z
 U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugrozila operativnu i finansijsku održivost Fondacije pre nego što ona dostigne finansijsku samostalnost** — naročito odluke o trošenju dinarskih sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava infrastrukturu (čl. 48, v3.7.5). **Ovo je promena u odnosu na raniji opis** (veto NIJE više vezan za narušavanje četiri principa / zakona / pravnog statusa — to su sada zasebna ograničenja Gornjeg Kola po čl. 50, uz licence). Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti (čl. 48 st. 2). Gasi se **trajno i jednosmerno** kada sredstva Fondacije dostignu **prag finansijske samostalnosti utvrđen posebnim pravilnikom** (čl. 49); gašenje ne ukida zakonske obaveze UO.
 - **Ograničenja Gornjeg Kola (čl. 50):** (1) četiri principa — ne može ukinuti nekonvertibilnost, uvesti imovinsko pravo nad zapisima, učiniti donacije povratnim, ni napustiti minimizaciju podataka; (2) zaštitni veto dok traje + zakonske obaveze UO posle gašenja; (3) licence (AGPL-3.0, CC BY-SA 4.0) se ne mogu zameniti restriktivnijim.
 - Kod: `fondacija.ts` (`dohvatiSaldoFondacije`, `azurirajVetoStatus`), model `SistemskiVeto` (singleton), `FondacijaTrosak`, API `/api/admin/fondacija`, javni status.
-- 🟡 **GAP (a) — standard utvrđen, kod zaostaje:** `pragZaGasenje = prosek × 3` u `fondacija.ts:100` je placeholder. **Pravi standard je sad u `gornje_kolo_3_7_5.md` čl. 19:** veto se gasi kad su ispunjena DVA kumulativna uslova — (1) likvidna dinarska sredstva ≥ **24× prosečni mesečni operativni trošak** (rezerva za 2 god.) I (2) prilivi u poslednjih 12 meseci pokrivaju troškove istog perioda (samoodrživost). Treba zameniti `prosek × 3` ovim u `fondacija.ts`.
+- 🟡 **GAP (a) — norma izmenjena u 3.7.6, kod skoro usklađen:** `gornje_kolo_3_7_6.md` čl. 19 sada propisuje **jedan uslov**: veto se gasi kad likvidna dinarska sredstva dostignu **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts:100`) već koristi `pragZaGasenje = prosek × 3` — **množilac (3×) se poklapa**; preostala razlika je samo baza: kod uzima `prosek` poslednjih `PROSEK_PERIOD_MESECI` (default 6) meseci umesto **prethodnog meseca**. Manja parametarska korekcija (promeniti bazu na trošak prethodnog meseca) ako se traži potpuna doslednost. (Ranija 3.7.5 norma je tražila dvostruki uslov 24× + samoodrživost — povučeno.)
 - 🟡 **GAP (b):** obrazloženje/opis veta u UI/kodu treba uskladiti sa formulacijom 3.7.5 (održivost Fondacije), ako još referencira staru (principi/zakon/pravni status).
 
 ### Zajedničko dobro (Pravilnik Glava II, čl. 5–8)
@@ -358,7 +359,7 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Stvarni GAP-ovi (dokumentacija propisuje, kod radi drugačije)
 1. ✅ **REŠENO — Tabela donacija** (`donacija.ts` `RANG_TABELA`): 11 nivoa, 1,00×→2,00×, usklađeno sa `donacije_3_7_3.md` čl. 4 i testovima.
-2. 🟡 **Veto prag — NORMA REŠENA (2026-06-02), kod zaostaje.** Standard definisan u `gornje_kolo_3_7_5.md` čl. 19 (24× mesečni trošak rezerve + prilivi pokrivaju troškove u 12 meseci). Treba zameniti `pragZaGasenje = prosek × 3` u `fondacija.ts:100` ovim dvostrukim uslovom.
+2. 🟡 **Veto prag — NORMA 3.7.6 (2026-06-03), kod skoro usklađen.** `gornje_kolo_3_7_6.md` čl. 19: jedan uslov — **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts:100`) već radi `prosek × 3`; množilac se poklapa, preostaje samo da se baza promeni sa proseka (6 meseci) na trošak prethodnog meseca radi potpune doslednosti. (Stara 3.7.5 norma 24× + samoodrživost povučena.)
 3. **Operativni doprinos: model satnice → predloženi POEN × min(1, L/P)** + verifikacija nosilaca ZRNA/UO umesto admin odobravanja (Pravilnik čl. 36; `operativni_3_7_2.md`).
 4. **Konsolidacija PED + doprinos-oglasi** u jedan tok (`/programi/ped` + `DoprinosEvidencija` vs `/doprinos-oglasi` + `DoprinosOglas/OglasPrijava/OglasEvidencija`). Razrešiti i18n ključ `useTranslations("ped")`.
 5. ✅ **REŠENO — „kurs" u srpskom UI** → „Koeficijent"/„koeficijent evidencije" (`messages/sr.json`). Interni identifikatori i en/hu prevodi zadržani.
