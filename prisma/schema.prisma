@@ -660,6 +660,13 @@ model DonationRecord {
   confirmedById   String?
   createdAt       DateTime       @default(now())
 
+  // Kartično plaćanje (NestPay: Banca Intesa / OTP). RUCNO = klasična uplata
+  // na račun koju admin ručno potvrđuje. KARTICA = naplata preko gateway-a.
+  nacinUplate     String         @default("RUCNO")
+  provajder       String?
+  oid             String?        @unique
+  bankRef         String?
+
   @@index([status, createdAt])
 }
 
