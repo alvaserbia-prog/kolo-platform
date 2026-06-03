@@ -19,7 +19,7 @@ export default async function AdminPage() {
     blogObjave,
   ] = await Promise.all([
     prisma.user.findMany({
-      select: { id: true, pseudonim: true, email: true, role: true, tipKorisnika: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
+      select: { id: true, pseudonim: true, email: true, tipKorisnika: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
       take: 100,
     }),
@@ -108,7 +108,7 @@ export default async function AdminPage() {
     <AdminKlijent
       opticaj={opticaj}
       users={allUsers.map((u) => ({
-        id: u.id, pseudonim: u.pseudonim, email: u.email, role: u.role, tipKorisnika: u.tipKorisnika, verified: u.verified,
+        id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(),
       }))}

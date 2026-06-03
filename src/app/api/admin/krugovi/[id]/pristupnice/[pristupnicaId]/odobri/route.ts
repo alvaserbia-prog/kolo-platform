@@ -42,10 +42,6 @@ export async function POST(
     await tx.krugClanstvo.create({
       data: { userId: pristupnica.userId, krugId, isAdmin: false },
     });
-    await tx.user.update({
-      where: { id: pristupnica.userId },
-      data: { role: "CLAN_KRUGA" },
-    });
     await tx.krugPristupnica.update({
       where: { id: pristupnicaId },
       data: { status: "APPROVED" },

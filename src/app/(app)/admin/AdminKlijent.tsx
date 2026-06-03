@@ -9,7 +9,6 @@ interface KorisnikInfo {
   id: string;
   pseudonim: string;
   email: string | null;
-  role: string;
   tipKorisnika: string;
   verified: boolean;
   status: string;
@@ -167,10 +166,11 @@ interface AdminKlijentProps {
   blogObjave: BlogObjavaAdmin[];
 }
 
-const roleLabel: Record<string, string> = {
-  FIZICKO_LICE: "Fizičko lice",
-  CLAN_KRUGA: "Krugr",
-  ADMIN: "Admin",
+const tipLabel: Record<string, string> = {
+  NEVERIFIKOVAN: "Neverifikovan",
+  REGULARNI: "Verifikovan",
+  NOSILAC_ZRNA: "Nosilac ZRNA",
+  POCETNI: "Administrator (UO)",
 };
 
 const statusBoja: Record<string, string> = {
@@ -1228,7 +1228,7 @@ function KorisniciTab({ users, onDone }: { users: KorisnikInfo[]; onDone: () => 
                     )}
                   </div>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {roleLabel[u.role] ?? u.role} · {u.balance.toLocaleString("sr-RS")} P
+                    {tipLabel[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString("sr-RS")} P
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                 </div>

@@ -56,10 +56,6 @@ export async function POST(
       await tx.krugClanstvo.create({
         data: { userId, krugId, isAdmin: i === 0 },
       });
-      await tx.user.update({
-        where: { id: userId },
-        data: { role: "CLAN_KRUGA" },
-      });
     }
 
     // 4. Ažuriraj status zahteva

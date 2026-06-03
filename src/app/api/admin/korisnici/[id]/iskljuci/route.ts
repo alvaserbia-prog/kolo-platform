@@ -40,7 +40,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         status: "EXCLUDED",
         suspendedAt: new Date(),
         suspendedReason: razlog || "Isključenje (Čl. 33)",
-        role: "FIZICKO_LICE",
       },
     });
   });
