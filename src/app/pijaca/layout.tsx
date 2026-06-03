@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import PublicHeader from "@/components/PublicHeader";
+import { jeAdmin } from "@/lib/dozvole";
 
 export default async function PijacaLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
@@ -13,7 +14,7 @@ export default async function PijacaLayout({ children }: { children: React.React
         <Header />
         <div className="flex flex-1 min-h-0 justify-center">
           <div className="flex w-full max-w-[1140px] min-w-0">
-            <Sidebar verified={session.user.verified} isAdmin={session.user.tipKorisnika === "POCETNI"} />
+            <Sidebar verified={session.user.verified} isAdmin={jeAdmin(session.user)} />
             <main className="flex-1 overflow-auto">
               <div className="px-4 py-5 md:px-8 md:py-6">
                 {children}

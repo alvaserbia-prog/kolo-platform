@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
+import { jeAdmin } from "@/lib/dozvole";
 
 // PATCH /api/admin/blog/[id] — izmena
 export async function PATCH(
@@ -10,7 +11,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
@@ -62,7 +63,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 

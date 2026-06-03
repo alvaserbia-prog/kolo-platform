@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 import { prisma } from "@/lib/prisma";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 // POST /api/admin/zrno/nocna — manualni okidač ZRNO operacija
 export async function POST() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   try {
@@ -22,7 +23,7 @@ export async function POST() {
 // PATCH /api/admin/zrno/nocna — toggle ZRNO tržište
 export async function PATCH() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const current = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });

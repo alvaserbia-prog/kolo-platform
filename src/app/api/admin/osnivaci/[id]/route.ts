@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 /**
  * DELETE /api/admin/osnivaci/[id]
@@ -10,7 +11,7 @@ import { prisma } from "@/lib/prisma";
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!jeSuperadmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const { id } = await params;
 

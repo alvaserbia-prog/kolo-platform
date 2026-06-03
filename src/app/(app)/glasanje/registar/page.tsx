@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { dohvatiRegistarOdluka } from "@/lib/protokol/glasanje";
 import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
 import PreporukaOdgovor from "./PreporukaOdgovor";
+import { jeAdmin } from "@/lib/dozvole";
 
 export const metadata = { title: "Registar odluka — KOLO" };
 
@@ -19,7 +20,7 @@ const IZVRSENJE_LABEL: Record<string, string> = {
 export default async function RegistarOdlukaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  const jeAdmin = session.user.tipKorisnika === "POCETNI";
+  const korisnikJeAdmin = jeAdmin(session.user);
 
   const odluke = await dohvatiRegistarOdluka();
 
@@ -83,7 +84,7 @@ export default async function RegistarOdlukaPage() {
                   </div>
                 )}
 
-                {jeAdmin && o.izvrsenjeStatus === "ZA_IZVRSENJE" && <IzvrsenjeKontrole id={o.id} />}
+                {korisnikJeAdmin && o.izvrsenjeStatus === "ZA_IZVRSENJE" && <IzvrsenjeKontrole id={o.id} />}
 
                 {/* Usvojena dinarska preporuka — odgovor UO (čl. 20) */}
                 {usvojen && o.vrsta === "DINARSKA_PREPORUKA" && (
@@ -97,7 +98,7 @@ export default async function RegistarOdlukaPage() {
                   ) : (
                     <>
                       <p className="text-xs text-kolo-gold-600 font-medium">Čeka obrazložen odgovor UO</p>
-                      {jeAdmin && <PreporukaOdgovor id={o.id} />}
+                      {korisnikJeAdmin && <PreporukaOdgovor id={o.id} />}
                     </>
                   )
                 )}

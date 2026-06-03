@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 async function proveriAdmin() {
   const session = await getServerSession(authOptions);
   if (!session) return { ok: false, status: 401, error: "Nije prijavljen." } as const;
-  if (session.user.tipKorisnika !== "POCETNI") return { ok: false, status: 403, error: "Samo admin." } as const;
+  if (!jeSuperadmin(session.user)) return { ok: false, status: 403, error: "Samo admin." } as const;
   return { ok: true, session } as const;
 }
 

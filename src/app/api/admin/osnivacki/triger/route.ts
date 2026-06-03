@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 /**
  * POST /api/admin/osnivacki/triger
@@ -11,7 +12,7 @@ import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (session.user.tipKorisnika !== "POCETNI") return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!jeSuperadmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   try {
     const rezultat = await proveriIEvidentirajKorak();

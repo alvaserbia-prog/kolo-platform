@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import KrugDetalj from "./KrugDetalj";
+import { jeAdmin } from "@/lib/dozvole";
 
 export default async function KrugPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -74,7 +75,7 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
         : null}
       imaPristupnicu={!!mojaPristupnica}
       isVerified={session.user.verified}
-      isAdmin={session.user.tipKorisnika === "POCETNI"}
+      isAdmin={jeAdmin(session.user)}
     />
   );
 }

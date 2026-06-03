@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 // POST — isključi korisnika (Čl. 33): EXCLUDED status, izlaz iz krugovi
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     select: { tipKorisnika: true, status: true, pseudonim: true },
   });
   if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
-  if (korisnik.tipKorisnika === "POCETNI") return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });
+  if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });
   if (korisnik.status === "EXCLUDED") return NextResponse.json({ error: "Korisnik je već isključen." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {

@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { vetoNaIzvrsenje, GlasanjeGreska } from "@/lib/protokol/glasanje";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 // POST /api/admin/glasanje/[id]/veto — Fondacija (UO) obrazloženim vetom
 // obustavlja izvršenje usvojene odluke (čl. 18). Telo: { obrazlozenje }.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const { id } = await params;

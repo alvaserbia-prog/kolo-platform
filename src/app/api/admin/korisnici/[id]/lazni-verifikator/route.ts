@@ -7,13 +7,14 @@ import {
   ponistiLaznogVerifikatora,
   LaznaVerifikacijaGreska,
 } from "@/lib/protokol/lazna-verifikacija";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 // POST — označi korisnika kao lažnog verifikatora (Pravilnik o dokazu stvarnosti, čl. 18).
 // Rekurzivno poništava sve verifikacije iz njegovog podstabla, vraća POEN Protokolu
 // (uz dozvoljen minus) i isključuje ga.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI")
+  if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;

@@ -6,12 +6,13 @@ import AdminKlijent from "./AdminKlijent";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { jeAdmin } from "@/lib/dozvole";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") redirect("/dashboard");
+  if (!session || !jeAdmin(session.user)) redirect("/dashboard");
 
   const [
     allUsers, protokol, pendingKrugovi,

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { jeAdmin } from "@/lib/dozvole";
 
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
@@ -49,7 +50,7 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (pathname.startsWith("/admin") && token.tipKorisnika !== "POCETNI") {
+  if (pathname.startsWith("/admin") && !jeAdmin({ tipKorisnika: token.tipKorisnika as string })) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 

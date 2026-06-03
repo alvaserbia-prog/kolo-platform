@@ -27,6 +27,7 @@ import MiniStablo, {
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
 import { TipKorisnika } from "@/generated/prisma/client";
+import { jeKorenJemstva } from "@/lib/dozvole";
 
 export default async function VerifikacijaPage() {
   const session = await getServerSession(authOptions);
@@ -105,7 +106,7 @@ export default async function VerifikacijaPage() {
         ja={{ pseudonim: user.pseudonim, prikaz }}
         verifikatori={verifikatorCvorovi}
         verifikovani={verifikovaniCvorovi}
-        jeJaPocetni={user.tipKorisnika === TipKorisnika.POCETNI}
+        jeJaPocetni={jeKorenJemstva(user)}
       />
 
       <MojQrKod />

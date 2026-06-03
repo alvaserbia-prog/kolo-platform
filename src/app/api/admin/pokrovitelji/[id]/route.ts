@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { jeAdmin } from "@/lib/dozvole";
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 
@@ -62,7 +63,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 

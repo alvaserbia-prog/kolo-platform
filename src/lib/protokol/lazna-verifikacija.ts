@@ -6,6 +6,7 @@ import {
   POEN_VERIFIKOVANI,
   izracunajIndeks,
 } from "./dokaz-stvarnosti";
+import { jeSuperadmin } from "@/lib/dozvole";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -51,7 +52,7 @@ export async function ponistiLaznogVerifikatora(
     select: { id: true, pseudonim: true, tipKorisnika: true, status: true },
   });
   if (!lazni) throw new LaznaVerifikacijaGreska("Korisnik nije pronađen.", 404);
-  if (lazni.tipKorisnika === "POCETNI")
+  if (jeSuperadmin(lazni))
     throw new LaznaVerifikacijaGreska("Ne može se označiti administrator.", 400);
 
   const pogodjeni: string[] = [];

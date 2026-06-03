@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
+import { jeAdmin } from "@/lib/dozvole";
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session || session.user.tipKorisnika !== "POCETNI") {
+  if (!session || !jeAdmin(session.user)) {
     return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 
