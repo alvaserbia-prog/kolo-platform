@@ -518,12 +518,15 @@ export default async function Home() {
               <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
                 Ko stoji iza KOLA
               </span>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/nikola-saric-mantil.png"
-                alt="Nikola Šarić"
-                className="w-36 h-36 rounded-full object-cover object-top ring-4 ring-white/10 shadow-xl"
-              />
+              <div className="w-36 h-36 rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/nikola-saric-mantil.png"
+                  alt="Nikola Šarić"
+                  className="w-full h-full object-cover object-top"
+                  style={{ transform: "scale(1.28)", transformOrigin: "center 22%" }}
+                />
+              </div>
               {/* Tekst ispod fotografije */}
               <div>
                 <p className="text-white font-bold text-lg leading-tight">Nikola Šarić</p>
