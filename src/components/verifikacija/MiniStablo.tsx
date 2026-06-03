@@ -23,6 +23,7 @@ type Props = {
   verifikatori: CvorVerifikator[];
   verifikovani: CvorVerifikovani[];
   jeJaPocetni?: boolean;
+  className?: string;
 };
 
 function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) {
@@ -37,9 +38,15 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
   );
 }
 
-export default function MiniStablo({ ja, verifikatori, verifikovani, jeJaPocetni }: Props) {
+export default function MiniStablo({
+  ja,
+  verifikatori,
+  verifikovani,
+  jeJaPocetni,
+  className = "",
+}: Props) {
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+    <div className={`rounded-2xl border border-black/10 bg-white p-6 shadow-sm ${className}`}>
       <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-4">
         Lanac verifikacija
       </div>
