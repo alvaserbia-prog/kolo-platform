@@ -15,12 +15,21 @@
     "profil": "Profile",
     "admin": "Admin",
     "poruke": "Messages",
-    "verifikuj_nalog": "Verify account →"
+    "verifikuj_nalog": "Verify account →",
+    "doprinos": "Contribution",
+    "tabla_jemstva": "Vouch board",
+    "postani_pokrovitelj": "Become a sponsor",
+    "nadzor": "Supervision",
+    "grupa_ekonomija": "Economy",
+    "grupa_upravljanje": "Governance",
+    "grupa_poverenje": "Trust",
+    "grupa_podrzi": "Support KOLO"
   },
   "header": {
     "moje_donacije": "My donations",
     "moja_krug": "My Circle",
     "moji_poslovi": "My jobs",
+    "moj_profil": "My profile",
     "podesi_profil": "Edit profile",
     "odjavi_se": "Sign out",
     "ucitavanje": "Loading...",

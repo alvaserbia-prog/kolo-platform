@@ -6,18 +6,8 @@ import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "programi" | "krugovi" | "donacije" | "iznos";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos";
 type TxFilter = "sve" | "protokol" | "clanovi";
-
-const TIP_BOJA: Record<string, string> = {
-  TRANSFER: "bg-kolo-bg text-kolo-muted",
-  EMISIJA_VERIFIKACIJA: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_DONACIJA: "bg-kolo-gold-100 text-kolo-gold-600",
-  EMISIJA_POKROVITELJ: "bg-yellow-50 text-yellow-700",
-  EMISIJA_KRUG_OSNIVANJE: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_KRUG_BONUS: "bg-kolo-green-100 text-kolo-green-700",
-  EMISIJA_PROGRAM: "bg-kolo-green-100 text-kolo-green-700",
-};
 
 interface Transakcija {
   id: string;
@@ -41,22 +31,6 @@ interface Clan {
   rangDonacije: number;
   location: string | null;
   createdAt: string;
-}
-
-interface Krug {
-  id: string;
-  name: string;
-  location: string | null;
-  clanovi: number;
-  createdAt: string;
-}
-
-interface Program {
-  type: string;
-  label: string;
-  opis: string;
-  isActive: boolean;
-  activatedAt: string | null;
 }
 
 interface EmisijaChart {
@@ -90,12 +64,13 @@ interface Props {
   protokolBalance: number;
   ukupnoKorisnika: number;
   verifikovanih: number;
-  ukupnoKrugCount: number;
+  ukupnoTransakcija: number;
   danasEmitovano: number;
   danasLimit: number;
   danasKorisnika: number;
   danasTransakcija: number;
-  danasKrug: number;
+  ukupnoVerifikacija: number;
+  danasVerifikacija: number;
   ukupnoDonacija: number;
   danasDonacija: number;
   ukupanIznosTx: number;
@@ -105,8 +80,6 @@ interface Props {
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
-  krugovi: Krug[];
-  programi: Program[];
 }
 
 const CILJ_OPTICAJ = 1_000_000;
@@ -118,12 +91,13 @@ export default function SistemKlijent({
   protokolBalance,
   ukupnoKorisnika,
   verifikovanih,
-  ukupnoKrugCount,
+  ukupnoTransakcija,
   danasEmitovano,
   danasLimit,
   danasKorisnika,
   danasTransakcija,
-  danasKrug,
+  ukupnoVerifikacija,
+  danasVerifikacija,
   ukupnoDonacija,
   danasDonacija,
   ukupanIznosTx,
@@ -133,14 +107,13 @@ export default function SistemKlijent({
   emisijeChart,
   transakcije,
   clanovi,
-  krugovi,
-  programi,
 }: Props) {
   const [sekcija, setSekcija] = useState<Sekcija>("pregled");
   const t = useTranslations("sistem");
 
-  const aktivniProgrami = programi.filter((p) => p.isActive).length;
   const zeroSum = opticaj + protokolBalance === 0;
+  const faza2 = opticaj >= CILJ_OPTICAJ;
+  const fazaPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
 
   return (
     <div className="space-y-6">
@@ -175,7 +148,7 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* 8 kartica 4×2 */}
+      {/* Kartice pokazatelja */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         {/* Članovi */}
         <Kartica
@@ -187,54 +160,43 @@ export default function SistemKlijent({
           podnaslov={t("kartica_verif_opis", { verif: verifikovanih, neverif: ukupnoKorisnika - verifikovanih })}
         />
 
-        {/* Krugovi */}
-        <Kartica
-          aktivan={sekcija === "krugovi"}
-          onClick={() => setSekcija("krugovi")}
-          label={t("kartica_krugovi")}
-          broj={ukupnoKrugCount}
-          danas={danasKrug}
-          podnaslov={t("kartica_krugovi_opis")}
-        />
-
         {/* Transakcije */}
         <Kartica
           aktivan={sekcija === "transakcije"}
           onClick={() => setSekcija("transakcije")}
           label={t("kartica_transakcije")}
-          broj={transakcije.length}
+          broj={ukupnoTransakcija}
           danas={danasTransakcija}
-          podnaslov={t("kartica_tx_opis", { count: transakcije.length })}
+          podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
         />
 
-        {/* Opticaj programa */}
+        {/* Faza sistema */}
         <button
-          onClick={() => setSekcija("programi")}
+          onClick={() => setSekcija("pregled")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
-            sekcija === "programi"
+            sekcija === "pregled"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
           }`}
         >
-          <p className={`text-base font-semibold mb-1 ${sekcija === "programi" ? "text-white/70" : "text-kolo-muted"}`}>
-            Opticaj programa
+          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+            <Pojam
+              termin="Faza sistema"
+              objasnjenje="Kada zajednica evidentira 1.000.000 POEN doprinosa, sistem automatski prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje) i upis ZRNA."
+            />
           </p>
-          <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "programi" ? "text-white" : "text-kolo-text"}`}>
-            {danasEmitovano.toLocaleString("sr-RS")}
+          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+            {faza2 ? "Faza 2" : "Faza 1"}
           </p>
-          {danasLimit > 0 && (
-            <>
-              <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "programi" ? "bg-white/20" : "bg-kolo-bg"}`}>
-                <div
-                  className={`h-1.5 rounded-full transition-all ${sekcija === "programi" ? "bg-white/70" : "bg-kolo-green-500"}`}
-                  style={{ width: `${Math.min(100, Math.round((danasEmitovano / danasLimit) * 100))}%` }}
-                />
-              </div>
-              <p className={`text-xs mt-1 ${sekcija === "programi" ? "text-white/60" : "text-kolo-muted"}`}>
-                {Math.round((danasEmitovano / danasLimit) * 100)}% dnevnog limita
-              </p>
-            </>
-          )}
+          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+            <div
+              className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+              style={{ width: `${fazaPct}%` }}
+            />
+          </div>
+          <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+            {faza2 ? "Gornje Kolo aktivno" : `${fazaPct.toFixed(1)}% do Gornjeg Kola`}
+          </p>
         </button>
 
         {/* Opticaj */}
@@ -278,6 +240,25 @@ export default function SistemKlijent({
           </div>
         </button>
 
+        {/* Mreža poverenja */}
+        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
+          <p className="text-base font-semibold mb-1 text-kolo-muted">
+            <Pojam
+              termin="Mreža poverenja"
+              objasnjenje="Ukupan broj veza u lancu jemstva (dokaz stvarnosti) — koliko je puta jedan član jemčio za drugog. Pokazuje koliko je mreža poverenja izrasla."
+            />
+          </p>
+          <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
+            {ukupnoVerifikacija.toLocaleString("sr-RS")}
+          </p>
+          {danasVerifikacija > 0 && (
+            <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 bg-kolo-green-100 text-kolo-green-700">
+              +{danasVerifikacija.toLocaleString("sr-RS")} danas
+            </span>
+          )}
+          <p className="text-xs mt-1 text-kolo-muted">veza u lancu jemstva</p>
+        </div>
+
         {/* Donacije */}
         <Kartica
           aktivan={sekcija === "donacije"}
@@ -297,37 +278,6 @@ export default function SistemKlijent({
           danas={danasIznosTx}
           podnaslov="POEN između članova"
         />
-
-        {/* Zdravlje sistema */}
-        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
-          <p className="text-base font-semibold mb-2 text-kolo-muted">Zdravlje sistema</p>
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <span className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${zeroSum ? "bg-kolo-green-100 text-kolo-green-700" : "bg-red-100 text-red-600"}`}>
-                {zeroSum ? "✓" : "✗"}
-              </span>
-              <span className={`text-sm ${zeroSum ? "text-kolo-text" : "text-kolo-danger"}`}>
-                {zeroSum ? "Zero-sum OK" : "Zero-sum greška"}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center text-xs font-bold shrink-0">
-                {aktivniProgrami}
-              </span>
-              <span className="text-sm text-kolo-text">
-                {aktivniProgrami === 1 ? "aktivan program" : aktivniProgrami >= 2 && aktivniProgrami <= 4 ? "aktivna programa" : "aktivnih programa"}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-kolo-info-light text-kolo-info flex items-center justify-center text-xs font-bold shrink-0">
-                {verifikovanih}
-              </span>
-              <span className="text-sm text-kolo-text">
-                verifikovanih članova
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Separator */}
@@ -349,10 +299,6 @@ export default function SistemKlijent({
       )}
       {sekcija === "transakcije" && (
         <TransakcijeSekcija transakcije={transakcije} verified={verified} />
-      )}
-      {sekcija === "programi" && <ProgramiSekcija programi={programi} />}
-      {sekcija === "krugovi" && (
-        <KrugoviSekcija krugovi={krugovi} verified={verified} />
       )}
       {sekcija === "donacije" && (
         <DonacijeSekcija donacije={donacije} pokrovitelji={pokrovitelji} verified={verified} />
@@ -896,52 +842,6 @@ function TransakcijeSekcija({
   );
 }
 
-// ── Programi ──────────────────────────────────────────────────────────────────
-
-function ProgramiSekcija({ programi }: { programi: Program[] }) {
-  const t = useTranslations("sistem");
-  const tc = useTranslations("common");
-  return (
-    <div className="space-y-3">
-      <p className="text-xs text-kolo-muted">
-        {t("programi_opis")}
-      </p>
-      <div className="space-y-2">
-        {programi.map((p) => (
-          <div
-            key={p.type}
-            className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex gap-4 items-start"
-          >
-            <div
-              className={`mt-0.5 shrink-0 w-2.5 h-2.5 rounded-full ${
-                p.isActive ? "bg-kolo-green-900" : "bg-kolo-border"
-              }`}
-            />
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-sm font-semibold text-kolo-text">{p.label}</span>
-                <span
-                  className={`text-xs px-2 py-0.5 rounded font-medium ${
-                    p.isActive ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"
-                  }`}
-                >
-                  {p.isActive ? tc("aktivan") : tc("neaktivan")}
-                </span>
-              </div>
-              <p className="text-xs text-kolo-muted">{p.opis}</p>
-              {p.isActive && p.activatedAt && (
-                <p className="text-xs text-kolo-border mt-1">
-                  Aktiviran: {new Date(p.activatedAt).toLocaleDateString("sr-RS")}
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 // ── Donacije ──────────────────────────────────────────────────────────────────
 
 function DonacijeSekcija({
@@ -1198,70 +1098,3 @@ function IznosSekcija({
   );
 }
 
-// ── Krugovi ───────────────────────────────────────────────────────────────────
-
-function KrugoviSekcija({
-  krugovi,
-  verified,
-}: {
-  krugovi: Krug[];
-  verified: boolean;
-}) {
-  const t = useTranslations("sistem");
-
-  if (!verified) {
-    return (
-      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
-        <p className="text-sm text-kolo-muted mb-3">
-          {t("krugovi_pregled_blokiran")}
-        </p>
-        <Link
-          href="/verifikacija"
-          className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
-        >
-          {t("verifikuj_dugme_link")}
-        </Link>
-      </div>
-    );
-  }
-
-  if (krugovi.length === 0) {
-    return (
-      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-        {t("nema_krugova")}
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-3">
-      <p className="text-xs text-kolo-muted">
-        {t("krugovi_count", { count: krugovi.length })}
-      </p>
-      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        {krugovi.map((z, i) => (
-          <div
-            key={z.id}
-            className={`px-5 py-3.5 flex justify-between items-center ${
-              i < krugovi.length - 1 ? "border-b border-kolo-border" : ""
-            }`}
-          >
-            <div>
-              <p className="text-sm font-semibold text-kolo-text">{z.name}</p>
-              <p className="text-xs text-kolo-muted mt-0.5">
-                {z.location ?? "—"} · {t("osnov")}{" "}
-                {new Date(z.createdAt).toLocaleDateString("sr-RS", {
-                  day: "2-digit", month: "2-digit", year: "numeric",
-                })}
-              </p>
-            </div>
-            <div className="text-right shrink-0 ml-4">
-              <p className="text-sm font-bold text-kolo-text">{z.clanovi}</p>
-              <p className="text-xs text-kolo-muted">{t("clanova")}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}

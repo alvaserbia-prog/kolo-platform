@@ -15,12 +15,21 @@
     "profil": "Profil",
     "admin": "Admin",
     "poruke": "Üzenetek",
-    "verifikuj_nalog": "Fiók ellenőrzése →"
+    "verifikuj_nalog": "Fiók ellenőrzése →",
+    "doprinos": "Hozzájárulás",
+    "tabla_jemstva": "Kezességi tábla",
+    "postani_pokrovitelj": "Legyen szponzor",
+    "nadzor": "Felügyelet",
+    "grupa_ekonomija": "Gazdaság",
+    "grupa_upravljanje": "Irányítás",
+    "grupa_poverenje": "Bizalom",
+    "grupa_podrzi": "Támogasd a KOLO-t"
   },
   "header": {
     "moje_donacije": "Adományaim",
     "moja_krug": "Körem",
     "moji_poslovi": "Munkáim",
+    "moj_profil": "Profilom",
     "podesi_profil": "Profil szerkesztése",
     "odjavi_se": "Kijelentkezés",
     "ucitavanje": "Betöltés...",
