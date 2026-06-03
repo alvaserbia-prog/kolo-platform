@@ -12,7 +12,6 @@ type Props = {
 
 export default function IndeksPrikaz({ prikaz, tip, podnaslov }: Props) {
   const tipLabela: Record<string, string> = {
-    POCETNI: "Početni korisnik",
     REGULARNI: "Verifikovan kroz lanac jemstva",
     NOSILAC_ZRNA: "Nosilac ZRNA",
     NEVERIFIKOVAN: "Neverifikovan",

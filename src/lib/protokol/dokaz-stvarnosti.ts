@@ -36,12 +36,12 @@ export function izracunajIndeks(brojVerifikacija: number): number {
 /**
  * Izračunava verifikacioni kapacitet (čl. 8 i čl. 9).
  *
- * - POCETNI i NOSILAC_ZRNA: neograničen kapacitet (status nadjačava indeks)
+ * - NOSILAC_ZRNA: neograničen kapacitet (status nadjačava indeks)
  * - REGULARNI: floor(indeks / 10), tj. 0 do 10
  * - NEVERIFIKOVAN: 0
  */
 export function izracunajKapacitet(tip: TipKorisnika, indeks: number): Kapacitet {
-  if (tip === TipKorisnika.POCETNI || tip === TipKorisnika.NOSILAC_ZRNA) {
+  if (tip === TipKorisnika.NOSILAC_ZRNA) {
     return BESKONACNI_KAPACITET;
   }
   if (tip === TipKorisnika.NEVERIFIKOVAN) {
@@ -73,7 +73,7 @@ export function brojRaspolozivihSlotova(
 
 /**
  * Određuje da li verifikacija koju je obavio dati tip korisnika podleže nadzoru (čl. 10).
- * REGULARNI: da. POCETNI i NOSILAC_ZRNA: ne.
+ * REGULARNI: da. NOSILAC_ZRNA: ne.
  */
 export function podlezeNadzoru(tipVerifikatora: TipKorisnika): boolean {
   return tipVerifikatora === TipKorisnika.REGULARNI;
@@ -81,10 +81,10 @@ export function podlezeNadzoru(tipVerifikatora: TipKorisnika): boolean {
 
 /**
  * Da li verifikator ima pristup funkciji verifikovanja drugih (čl. 4).
- * REGULARNI mora imati indeks >= 10%; POCETNI i NOSILAC_ZRNA uvek imaju pristup.
+ * REGULARNI mora imati indeks >= 10%; NOSILAC_ZRNA uvek ima pristup.
  */
 export function imaPristupVerifikaciji(tip: TipKorisnika, indeks: number): boolean {
-  if (tip === TipKorisnika.POCETNI || tip === TipKorisnika.NOSILAC_ZRNA) return true;
+  if (tip === TipKorisnika.NOSILAC_ZRNA) return true;
   if (tip === TipKorisnika.NEVERIFIKOVAN) return false;
   return indeks >= FUNKCIONALNI_PRAG_INDEKSA;
 }

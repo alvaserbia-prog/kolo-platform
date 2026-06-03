@@ -223,7 +223,7 @@ async function seedAdmin() {
     const korisnik = await prisma.user.upsert({
       where: { email: c.email },
       update: {
-        tipKorisnika: TipKorisnika.POCETNI,
+        tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         admin: AdminNivo.SUPERADMIN,
         verified: true,
       },
@@ -231,7 +231,7 @@ async function seedAdmin() {
         email: c.email,
         passwordHash: hash,
         pseudonim: c.pseudonim,
-        tipKorisnika: TipKorisnika.POCETNI,
+        tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: 10,
         verified: true,
@@ -974,7 +974,7 @@ async function main() {
   // Pregled
   const banka = await prisma.wallet.findUnique({ where: { id: "banka-singleton" } });
   const admini = await prisma.user.findMany({
-    where: { tipKorisnika: TipKorisnika.POCETNI },
+    where: { admin: AdminNivo.SUPERADMIN },
     select: { email: true, pseudonim: true },
   });
   console.log("\n=== Seed završen ===");

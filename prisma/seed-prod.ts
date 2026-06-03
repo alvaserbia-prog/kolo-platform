@@ -21,12 +21,12 @@ async function main() {
   const hash = await bcrypt.hash(ADMIN_LOZINKA, 12);
   await prisma.user.upsert({
     where: { email: "admin@ekolo.rs" },
-    update: { tipKorisnika: TipKorisnika.POCETNI, admin: AdminNivo.SUPERADMIN, indeksStvarnosti: 10, verified: true },
+    update: { tipKorisnika: TipKorisnika.NOSILAC_ZRNA, admin: AdminNivo.SUPERADMIN, indeksStvarnosti: 10, verified: true },
     create: {
       email: "admin@ekolo.rs",
       passwordHash: hash,
       pseudonim: "Admin",
-      tipKorisnika: TipKorisnika.POCETNI,
+      tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
       admin: AdminNivo.SUPERADMIN,
       indeksStvarnosti: 10,
       verified: true,

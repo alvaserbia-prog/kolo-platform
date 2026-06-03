@@ -17,6 +17,7 @@ import {
   PrismaClient,
   WalletType,
   TipKorisnika,
+  AdminNivo,
   TransactionType,
 } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -82,7 +83,8 @@ async function seedUoClana(clan: UoClan) {
     user = await prisma.user.update({
       where: { id: postojeci.id },
       data: {
-        tipKorisnika: TipKorisnika.POCETNI,
+        tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: Math.max(postojeci.indeksStvarnosti, 10),
         slotoviPotroseni: postojeci.slotoviPotroseni,
         // pseudonim, memberHash — NE diramo na postojećem nalogu
@@ -104,7 +106,8 @@ async function seedUoClana(clan: UoClan) {
         email: clan.email,
         passwordHash: null, // bez lozinke — UO član postavlja kroz reset password tok
         pseudonim: clan.pseudonim,
-        tipKorisnika: TipKorisnika.POCETNI,
+        tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: 10,
         slotoviPotroseni: 0,
         memberHash: clan.memberHash,
@@ -160,7 +163,7 @@ async function seedUoClana(clan: UoClan) {
 
 async function ispisiPregled(clanovi: UoClan[]) {
   const ukupnoUoClanova = await prisma.user.count({
-    where: { tipKorisnika: TipKorisnika.POCETNI },
+    where: { admin: AdminNivo.SUPERADMIN },
   });
   const banka = await prisma.wallet.findUnique({ where: { id: BANKA_WALLET_ID } });
   const sumaSvihBalansa = await prisma.wallet.aggregate({ _sum: { balance: true } });

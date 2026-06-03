@@ -58,7 +58,6 @@ enum TransactionType {
 }
 
 enum TipKorisnika {
-  POCETNI
   REGULARNI
   NOSILAC_ZRNA
   NEVERIFIKOVAN

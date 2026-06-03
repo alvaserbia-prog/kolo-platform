@@ -35,19 +35,16 @@ describe("dozvole — nadzor (distribuirano)", () => {
     expect(mozeNadzor({ tipKorisnika: "NEVERIFIKOVAN", admin: "NONE" })).toBe(false);
   });
 
-  it("admin takođe može nadzor", () => {
+  it("admin/superadmin takođe može nadzor", () => {
+    expect(mozeNadzor({ tipKorisnika: "REGULARNI", admin: "ADMIN" })).toBe(true);
     expect(mozeNadzor({ tipKorisnika: "REGULARNI", admin: "SUPERADMIN" })).toBe(true);
-  });
-
-  it("osnivač (POCETNI tip, prelazno) može nadzor", () => {
-    expect(mozeNadzor({ tipKorisnika: "POCETNI", admin: "SUPERADMIN" })).toBe(true);
   });
 });
 
 describe("dozvole — koren jemstva", () => {
-  it("superadmin i (prelazno) POCETNI su koren", () => {
+  it("koren je isključivo superadmin", () => {
     expect(jeKorenJemstva({ admin: "SUPERADMIN" })).toBe(true);
-    expect(jeKorenJemstva({ tipKorisnika: "POCETNI" })).toBe(true);
+    expect(jeKorenJemstva({ admin: "ADMIN" })).toBe(false);
     expect(jeKorenJemstva({ tipKorisnika: "NOSILAC_ZRNA", admin: "NONE" })).toBe(false);
   });
 });

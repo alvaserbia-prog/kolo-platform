@@ -37,7 +37,7 @@ export default async function AdminPage() {
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
-      prisma.user.count({ where: { tipKorisnika: { not: "POCETNI" } } }),
+      prisma.user.count(),
       prisma.user.count({ where: { verified: true } }),
       prisma.user.count({ where: { status: "SUSPENDED" } }),
       prisma.krug.count({ where: { status: "ACTIVE" } }),

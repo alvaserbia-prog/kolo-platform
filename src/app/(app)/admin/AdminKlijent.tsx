@@ -174,7 +174,6 @@ const tipLabel: Record<string, string> = {
   NEVERIFIKOVAN: "Neverifikovan",
   REGULARNI: "Verifikovan",
   NOSILAC_ZRNA: "Nosilac ZRNA",
-  POCETNI: "Administrator (UO)",
 };
 
 const adminNivoLabel: Record<string, string> = {

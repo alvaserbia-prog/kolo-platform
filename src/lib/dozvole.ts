@@ -5,12 +5,11 @@
  *   1. Članski tip (TipKorisnika) — šta si u zajednici (zarađuje se).
  *   2. Admin rola (AdminRola)      — šta smeš operativno (dodeljuje se).
  *
- * Faza refaktora:
- *   - Korak 4 (TRENUTNO): `jeAdmin`/`jeSuperadmin` čitaju kolonu `admin`
- *     (AdminNivo). `mozeNadzor` i `jeKorenJemstva` i dalje čitaju `tipKorisnika`
- *     jer osnivači zadržavaju POCETNI tip do čišćenja enuma (korak 7).
- *   - Korak 7: kad POCETNI nestane iz TipKorisnika, `jeKorenJemstva` postaje
- *     `jeSuperadmin`, a `mozeNadzor` = jeAdmin || NOSILAC_ZRNA.
+ * Dve nezavisne ose:
+ *   - Članski tip (TipKorisnika): NEVERIFIKOVAN → REGULARNI → NOSILAC_ZRNA.
+ *   - Admin nivo (AdminNivo, kolona `admin`): NONE / ADMIN / SUPERADMIN.
+ * `jeAdmin`/`jeSuperadmin` čitaju `admin`; `mozeNadzor`/`jeKorenJemstva`
+ * kombinuju članski tip i admin nivo.
  *
  * Modul NE sme da uvozi Prisma client (koristi ga i proxy.ts u edge middleware-u),
  * zato se porede string literali, ne enum vrednosti.
@@ -22,7 +21,6 @@ export type KorisnikDozvole = {
   admin?: string | null;
 };
 
-const POCETNI = "POCETNI";
 const NOSILAC_ZRNA = "NOSILAC_ZRNA";
 const ADMIN = "ADMIN";
 const SUPERADMIN = "SUPERADMIN";
@@ -39,16 +37,10 @@ export function jeAdmin(u?: KorisnikDozvole | null): boolean {
 
 /** Nadzor verifikacija i druge distribuirane (kvorum) funkcije — nosioci ZRNA + admini. */
 export function mozeNadzor(u?: KorisnikDozvole | null): boolean {
-  // Osnivači su još POCETNI tip (do koraka 7); pokriva ih i jeAdmin preko `admin`.
-  return (
-    u?.tipKorisnika === POCETNI ||
-    u?.tipKorisnika === NOSILAC_ZRNA ||
-    jeAdmin(u)
-  );
+  return u?.tipKorisnika === NOSILAC_ZRNA || jeAdmin(u);
 }
 
-/** Koren lanca jemstva — bootstrap poverenja (može da verifikuje bez da je sam verifikovan). */
+/** Koren lanca jemstva — bootstrap poverenja (superadmin verifikuje prve ljude). */
 export function jeKorenJemstva(u?: KorisnikDozvole | null): boolean {
-  // Do koraka 7 osnivači imaju POCETNI tip; superadmin je takođe koren.
-  return u?.tipKorisnika === POCETNI || jeSuperadmin(u);
+  return jeSuperadmin(u);
 }
