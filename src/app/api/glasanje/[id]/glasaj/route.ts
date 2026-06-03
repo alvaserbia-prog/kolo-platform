@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { izracunajGlasove } from "@/lib/protokol/zrno";
+import { fazaPredloga } from "@/lib/protokol/glasanje";
 
 // POST /api/glasanje/[id]/glasaj — glasa ZA ili PROTIV
 export async function POST(
@@ -15,7 +16,13 @@ export async function POST(
   const { id } = await params;
   const predlog = await prisma.glasanjePredlog.findUnique({ where: { id } });
   if (!predlog) return NextResponse.json({ error: "Predlog nije pronađen." }, { status: 404 });
-  if (predlog.status !== "ACTIVE" || predlog.deadline < new Date())
+
+  const faza = fazaPredloga(predlog);
+  if (faza === "NAJAVLJEN") {
+    const datum = predlog.glasanjePocetak.toLocaleDateString("sr-RS");
+    return NextResponse.json({ error: `Glasanje još nije počelo (počinje ${datum}).` }, { status: 400 });
+  }
+  if (faza !== "U_TOKU")
     return NextResponse.json({ error: "Glasanje je završeno." }, { status: 400 });
 
   const glasovi = await izracunajGlasove(session.user.id);
@@ -25,7 +32,7 @@ export async function POST(
   const body = await req.json();
   const za = body.za === true;
 
-  // Upsert — dozvoljavamo promenu glasa dok je glasanje otvoreno
+  // Upsert — dozvoljavamo izmenu glasa dok glasanje traje (čl. 11)
   await prisma.glasanjeGlas.upsert({
     where: { predlogId_userId: { predlogId: id, userId: session.user.id } },
     create: { predlogId: id, userId: session.user.id, za, glasackaGlasova: glasovi },

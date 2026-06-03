@@ -442,15 +442,19 @@
     "protiv": "ELLENE",
     "aktivno": "Aktív",
     "zatvoreno": "Lezárt",
+    "najavljeno": "Bejelentve",
+    "u_toku": "Folyamatban",
+    "usvojeno": "Elfogadva",
+    "neusvojeno": "Elutasítva",
+    "glasanje_pocinje": "Szavazás kezdete: {datum}",
     "rok": "Határidő:",
     "novi_predlog_naslov": "Új javaslat",
     "naslov_placeholder": "Cím *",
     "opis_placeholder": "Javaslat leírása (min. 20 karakter) *",
-    "rok_glasanja": "Szavazási határidő *",
+    "period_info": "A szavazás a következő elszámolási időszakban zajlik (éjféltől éjfélig); a határidőt nem Ön határozza meg (11. cikk).",
     "objavi": "Javaslat közzététele",
     "np_greska_naslov": "A cím legalább 5 karakterből kell álljon.",
-    "np_greska_opis": "A leírásnak legalább 20 karakterből kell állnia.",
-    "np_greska_rok": "Adjon meg szavazási határidőt."
+    "np_greska_opis": "A leírásnak legalább 20 karakterből kell állnia."
   },
   "donacije": {
     "naslov": "Adományok az Alapítványnak",

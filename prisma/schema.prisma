@@ -593,16 +593,20 @@ model ZrnoDelegacija {
 // ─── Glasanje ─────────────────────────────────────────────────────────────────
 
 model GlasanjePredlog {
-  id          String        @id @default(uuid())
-  title       String
-  description String
-  authorId    String
-  author      User          @relation(fields: [authorId], references: [id])
-  deadline    DateTime
-  status      PredlogStatus @default(ACTIVE)
-  glasovi     GlasanjeGlas[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id              String        @id @default(uuid())
+  title           String
+  description     String
+  authorId        String
+  author          User          @relation(fields: [authorId], references: [id])
+  glasanjePocetak DateTime      // ponoć narednog obračunskog perioda (čl. 11)
+  deadline        DateTime      // kraj glasanja = kraj tog perioda
+  status          PredlogStatus @default(ACTIVE)
+  ishodUsvojen    Boolean?      // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
+  zaZbir          Int?          // zbir glasačke moći „za" u trenutku zatvaranja
+  protivZbir      Int?          // zbir glasačke moći „protiv" u trenutku zatvaranja
+  glasovi         GlasanjeGlas[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model GlasanjeGlas {

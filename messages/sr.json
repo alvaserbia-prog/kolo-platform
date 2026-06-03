@@ -442,15 +442,19 @@
     "protiv": "PROTIV",
     "aktivno": "Aktivno",
     "zatvoreno": "Zatvoreno",
+    "najavljeno": "Najavljeno",
+    "u_toku": "U toku",
+    "usvojeno": "Usvojeno",
+    "neusvojeno": "Neusvojeno",
+    "glasanje_pocinje": "Glasanje počinje: {datum}",
     "rok": "Rok:",
     "novi_predlog_naslov": "Novi predlog",
     "naslov_placeholder": "Naslov *",
     "opis_placeholder": "Opis predloga (min 20 karaktera) *",
-    "rok_glasanja": "Rok glasanja *",
+    "period_info": "Glasanje se održava u narednom obračunskom periodu (ponoć–ponoć); rok ne određujete vi (čl. 11).",
     "objavi": "Objavi predlog",
     "np_greska_naslov": "Naslov mora imati najmanje 5 karaktera.",
-    "np_greska_opis": "Opis mora imati najmanje 20 karaktera.",
-    "np_greska_rok": "Unesite rok glasanja."
+    "np_greska_opis": "Opis mora imati najmanje 20 karaktera."
   },
   "donacije": {
     "naslov": "Donacije Fondaciji",
