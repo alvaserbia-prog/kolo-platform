@@ -6,7 +6,7 @@ import AdminKlijent from "./AdminKlijent";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
@@ -108,6 +108,8 @@ export default async function AdminPage() {
   return (
     <AdminKlijent
       opticaj={opticaj}
+      viewerJeSuperadmin={jeSuperadmin(session.user)}
+      viewerId={session.user.id}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
