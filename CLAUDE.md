@@ -2,7 +2,7 @@
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
-- **`main`** → TEST deploy (`*.vercel.app`, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
+- **`main`** → TEST deploy (preview na **`kolo-git-main-alvaserbia-progs-projects.vercel.app`**, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
 - **`production`** → UŽIVO na **ekolo.rs** (prod Neon baza, `seed-prod.ts`). Samo namerna „objava".
 
 **Pravila za Claude:**
@@ -13,23 +13,24 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 
-### Vercel topologija — DVA projekta na istom repou
-Isti GitHub repo (`alvaserbia-prog/kolo-platform`) prate **dva odvojena Vercel projekta**; svaki push okida build na **oba**:
+### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04)
+**PROMENA 2026-06-04:** `kolo-platform` projekat je **isključen** (`kolo-peach.vercel.app` je ZAMRZNUT na starom buildu `d8bc6fc` i više ne prima deploye — ne koristiti taj URL). Sada **jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`):
 
-| Vercel projekat | Production Branch | „Uživo" domen | Baza (Neon) |
+| Grana | Vercel target | URL | Baza (Neon) |
 |---|---|---|---|
-| **`kolo`** | **`production`** | **ekolo.rs** / www.ekolo.rs | prod (`ep-empty-forest-alajuasx`) |
-| **`kolo-platform`** | **`main`** | `kolo-peach.vercel.app` | test (`ep-old-sky-aleg2alm`) |
+| **`production`** | production | **ekolo.rs** / www.ekolo.rs | prod (`ep-empty-forest-alajuasx`) |
+| **`main`** | preview | **`kolo-git-main-alvaserbia-progs-projects.vercel.app`** | test (`ep-old-sky-aleg2alm`) |
 
-- **ekolo.rs servira `kolo` projekat sa `production` grane** (potvrđeno: alias `ekolo.rs`/`www.ekolo.rs`). „Objava na ekolo.rs" = merge `main` → `production` + push (kao i ranije).
-- `main` je „production" samo za **test** projekat (`kolo-platform`). Na tom projektu je `production` grana tek **preview** (nema `DATABASE_URL` u tom okruženju).
-- **Env varijable se postavljaju po projektu.** Tajne za ekolo.rs (npr. `PLACANJE_AKTIVNO`, `NESTPAY_*`) idu u env **`kolo`** projekta (Production), ne u `kolo-platform`.
+- „pošalji na test" = push na `main` → gleda se na **`kolo-git-main-...vercel.app`** (NE više `kolo-peach`).
+- „objava na ekolo.rs" = merge `main` → `production` + push (nepromenjeno).
+- **Env varijable po grani/scope-u:** Production scope (prod baza, tajne za ekolo.rs: `PLACANJE_AKTIVNO`, `NESTPAY_*`) vs Preview scope (test baza). Oba imaju `DATABASE_URL`, pa migracije rade i na test i na prod buildu.
 
 ### Migracije se primenjuju AUTOMATSKI pri deploy-u
 `vercel.json` → `buildCommand`: `if [ -n "$DATABASE_URL" ]; then prisma migrate deploy; fi && npm run build`.
 - Migracije se primenjuju **same** na bazu okruženja preko Vercel `DATABASE_URL` (prod→prod, test→test). **Nema više ručnog `npx prisma migrate deploy`** posle deploy-a.
-- Guard `if DATABASE_URL` znači da okruženja **bez baze** (npr. preview na `kolo-platform`) preskaču migraciju i ne pucaju; gde baza postoji, neuspela migracija i dalje **glasno** obara build (prethodni deploy ostaje živ).
+- Guard `if DATABASE_URL` znači da okruženja **bez baze** preskaču migraciju i ne pucaju; gde baza postoji, neuspela migracija i dalje **glasno** obara build (prethodni deploy ostaje živ).
 - `prisma.config.ts` čita `datasource.url` iz `process.env.DATABASE_URL` (datasource u šemi nema `url`, jer runtime koristi `@prisma/adapter-pg`).
+- **VAŽNO — migrate ide DIREKTNO, ne preko poolera (fix `4e75948`, 2026-06-04):** `prisma.config.ts` skida `-pooler` iz `DATABASE_URL` za Prisma CLI. Razlog: `prisma migrate deploy` uzima Postgres advisory lock koji ne radi kroz Neon pooler (PgBouncer) → puca sa **P1002** (timeout na `pg_advisory_lock`, 10s) i obara build. Runtime klijent (`@prisma/adapter-pg`) i dalje koristi **pooled** `process.env.DATABASE_URL` — direktna konekcija važi samo za CLI. (Neon direktni host = pooled host bez `-pooler`.)
 
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Koristi dve interne jedinice:
