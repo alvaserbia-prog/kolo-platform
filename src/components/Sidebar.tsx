@@ -69,19 +69,17 @@ function SidebarContent({
           { href: "/pocetna", label: t("pocetna") },
           { href: "/sistem", label: t("sistem") },
         ] },
-        { label: t("grupa_ekonomija"), links: [
+        { links: [
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
           { href: "/programi", label: t("programi") },
           { href: "/doprinos-oglasi", label: t("doprinos") },
         ] },
-        { label: t("grupa_upravljanje"), links: [
+        { links: [
           { href: "/zrno", label: t("zrno") },
-          { href: "/glasanje", label: t("glasanje") },
-          { href: "/krug", label: t("krug") },
         ] },
-        { label: t("grupa_poverenje"), links: poverenje },
-        { label: t("grupa_podrzi"), links: [
+        { links: poverenje },
+        { links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
         ] },
@@ -94,7 +92,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { label: t("grupa_poverenje"), links: poverenje },
+        { links: poverenje },
         ...adminGrupa,
       ];
 
