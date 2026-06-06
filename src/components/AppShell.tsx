@@ -8,10 +8,8 @@ import Header from "./Header";
 interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
-  krug: number;
-  ped: number;
-  programi: number;
-  zrno: number;
+  tablaJemstva: number;
+  adminCekanje: number;
 }
 
 interface AppShellProps {
