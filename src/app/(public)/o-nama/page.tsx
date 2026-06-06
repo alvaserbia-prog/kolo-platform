@@ -241,7 +241,7 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Tim",
-                tekst: "Tim danas čine Upravni odbor Fondacije i spoljni konsultanti. Nakon otvaranja sistema formira se uži krug saradnika koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle otvaranja, doprinos svakog verifikovanog korisnika — bilo da je to razvoj softvera, prevođenje i pisanje, organizacija okupljanja, mentorstvo, ili pomoć drugima u zajednici — biva prepoznat kroz Program evidencije doprinosa.",
+                tekst: "Tim danas čine Upravni odbor Fondacije i spoljni konsultanti. Nakon otvaranja sistema formira se uži tim saradnika koji će zajedno proveriti sistem u praksi i postaviti temelje zajednice. Posle otvaranja, doprinos svakog verifikovanog korisnika — bilo da je to razvoj softvera, prevođenje i pisanje, organizacija okupljanja, mentorstvo, ili pomoć drugima u zajednici — biva prepoznat kroz Program evidencije doprinosa.",
               },
             ].map((stavka) => (
               <div key={stavka.naslov} className="flex gap-4">
@@ -299,9 +299,9 @@ export default function ONamaPage() {
             </h3>
             <p className="text-sm md:text-base text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
               Najvažniji doprinos ne traži ni firmu ni posebno znanje. Dovoljno je da se uključiš i pozoveš
-              ljude koje poznaješ — komšije, prijatelje, rođake. Svaki novi krug u jednom mestu počinje od
-              nekoliko ljudi koji veruju jedni drugima. Ako želiš da KOLO zaživi tamo gde ti živiš, počni od
-              sebe i svog kruga.
+              ljude koje poznaješ — komšije, prijatelje, rođake. Sve u jednom mestu počinje od nekoliko
+              ljudi koji veruju jedni drugima. Ako želiš da KOLO zaživi tamo gde ti živiš, počni od sebe i
+              ljudi oko tebe.
             </p>
           </div>
           <div className="shrink-0 w-full md:w-auto">
@@ -391,7 +391,7 @@ export default function ONamaPage() {
               },
               {
                 naslov: "Prostor i događaji",
-                tekst: "Ako možeš da obezbediš prostor za tribinu, prezentaciju ili manji skup u svom gradu — Sombor i okolina su prvi krug, ali svaki grad u Srbiji i regionu je dobrodošao.",
+                tekst: "Ako možeš da obezbediš prostor za tribinu, prezentaciju ili manji skup u svom gradu — Sombor i okolina su prvi na redu, ali svaki grad u Srbiji i regionu je dobrodošao.",
               },
               {
                 naslov: "Lična donacija",
@@ -614,7 +614,7 @@ export default function ONamaPage() {
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
         <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
           Nema reklama, nema pretplate, nema skrivenih nagodbi.<br />
-          Postoji sistem i postoji krug ljudi koji se upravo formira.
+          Postoji sistem i postoji zajednica ljudi koja se upravo formira.
         </p>
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           <Link
