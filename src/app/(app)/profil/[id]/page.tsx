@@ -73,7 +73,7 @@ export default function JavniProfilPage() {
   useEffect(() => {
     fetch(`/api/profil/${id}`)
       .then((r) => {
-        if (r.status === 403) { router.push("/verifikacija"); return null; }
+        if (r.status === 403) { router.push("/tabla-jemstva"); return null; }
         if (r.status === 404) { router.push("/404"); return null; }
         return r.json();
       })

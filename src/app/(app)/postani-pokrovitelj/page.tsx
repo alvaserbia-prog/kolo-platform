@@ -55,8 +55,8 @@ export default async function PostaniPokroviteljPage() {
           <p className="text-sm text-kolo-muted mb-3">
             Da biste mogli biti vlasnik pokrovitelja, potrebno je da verifikujete nalog.
           </p>
-          <Link href="/verifikacija" className="text-sm font-medium text-kolo-gold-600 hover:underline">
-            Verifikuj nalog →
+          <Link href="/tabla-jemstva" className="text-sm font-medium text-kolo-gold-600 hover:underline">
+            Zatraži verifikaciju →
           </Link>
         </div>
       )}

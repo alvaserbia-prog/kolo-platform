@@ -35,7 +35,7 @@ const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string;
     naziv: "Pravilnik o operativnom doprinosu",
     fajl: "operativni_3_7_2.md",
     verzija: "3.7.2",
-    opis: "Operativni program i međusobno potvrđivanje doprinosa.",
+    opis: "Operativni program — zadaci i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije.",
   },
   "osnivacki": {
     naziv: "Pravilnik o osnivačkom doprinosu",
