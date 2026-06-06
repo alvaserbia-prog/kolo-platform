@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import OsnivaciTab from "./OsnivaciTab";
 import PokroviteljPrijaveTab from "./PokroviteljPrijaveTab";
+import NadzorTab, { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
 
 interface KorisnikInfo {
@@ -166,6 +167,7 @@ interface AdminKlijentProps {
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
   krugoviLista2: { id: string; name: string }[];
   blogObjave: BlogObjavaAdmin[];
+  nadzorNalazi: NadzorNalaz[];
   viewerJeSuperadmin: boolean;
   viewerId: string;
 }
@@ -189,9 +191,9 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit";
+type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit" | "nadzor";
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("dashboard");
 
@@ -209,6 +211,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["osnivaci", "Osnivači"],
     ["vesti", "Vesti"],
     ["audit", "Audit log"],
+    ...(viewerJeSuperadmin
+      ? ([["nadzor", `Nadzor${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`]] as [Tab, string][])
+      : []),
   ];
 
   return (
@@ -259,6 +264,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab opticaj={opticaj} onSuccess={() => router.refresh()} />}
+
+      {/* Nadzor integriteta (samo superadmin) */}
+      {tab === "nadzor" && viewerJeSuperadmin && <NadzorTab nalazi={nadzorNalazi} />}
 
       {/* Osnivači */}
       {tab === "osnivaci" && <OsnivaciTab verifikovaniKorisnici={verifikovaniKorisnici} onDone={() => router.refresh()} />}

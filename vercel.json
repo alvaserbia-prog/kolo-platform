@@ -24,6 +24,10 @@
     {
       "path": "/api/cron/programi-revizija",
       "schedule": "0 23 * * *"
+    },
+    {
+      "path": "/api/cron/nadzor-integriteta",
+      "schedule": "0 1 * * *"
     }
   ]
 }

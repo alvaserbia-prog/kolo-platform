@@ -1072,3 +1072,27 @@ model ZahtevZaJemstvo {
   @@index([status])
   @@index([expiresAt])
 }
+
+// ─── Nadzor integriteta verifikacija (anti-malverzacija, 1. krug) ─────────────
+// Noćni cron (/api/cron/nadzor-integriteta) računa pravila P1–P15 nad grafom
+// verifikacija i tokom POEN-a i upisuje OBELEŽENE naloge/grupe ovde. Sistem
+// NIKAD sam ne preduzima radnju — samo evidentira i (za HITNO) javi superadminu;
+// gašenje uvek povlači čovek. `subjektId` je plain string (bez FK na User) da
+// model ostane labavo spregnut. Status CISTO = superadmin odbacio kao lažnu uzbunu.
+model RizikNalaz {
+  id         String    @id @default(uuid())
+  tip        String    // "NALOG" | "GRUPA"
+  subjektId  String?   // userId za NALOG; null za GRUPA
+  pseudonim  String?   // za prikaz (NALOG)
+  clanovi    String?   // JSON [{id,pseudonim}] za GRUPA
+  pravila    String    // JSON [{kod,nivo,opis}]
+  rizik      Int       // ukupan skor (zbir težina pravila)
+  nivo       String    // najviši nivo: "INFO" | "UPOZORENJE" | "HITNO"
+  status     String    @default("OTVOREN") // "OTVOREN" | "CISTO"
+  resenById  String?
+  resenAt    DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([status, rizik(sort: Desc)])
+  @@index([subjektId])
+}
