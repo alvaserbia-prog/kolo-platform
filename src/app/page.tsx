@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "KOLO je sistem evidencije doprinosa zajedničkom dobru. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje sistem oblikuju.",
   openGraph: {
     title: "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
-    description: "KOLO je sistem uzajamnosti kroz mrežu lokalnih krugova. Članstvo je besplatno.",
+    description: "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. POEN beleži šta si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno.",
     locale: "sr_RS",
     type: "website",
   },

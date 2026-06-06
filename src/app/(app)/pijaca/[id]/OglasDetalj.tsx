@@ -186,7 +186,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
             <div className="space-y-2">
               {!isVerified ? (
                 <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 text-sm text-kolo-gold-600">
-                  <Link href="/verifikacija" className="font-semibold hover:underline">Verifikujte nalog</Link> da biste mogli da kupujete.
+                  <Link href="/tabla-jemstva" className="font-semibold hover:underline">Zatražite verifikaciju</Link> da biste mogli da kupujete.
                 </div>
               ) : walletBalance < oglas.price ? (
                 <div className="bg-kolo-danger-light border border-kolo-danger/20 rounded-xl px-4 py-3 text-sm text-kolo-danger">

@@ -7,7 +7,7 @@ import OsnivanjeForma from "./OsnivanjeForma";
 export default async function OsnivanjePage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  if (!session.user.verified) redirect("/verifikacija");
+  if (!session.user.verified) redirect("/tabla-jemstva");
 
   const dbUser = await prisma.user.findUnique({
     where: { id: session.user.id },

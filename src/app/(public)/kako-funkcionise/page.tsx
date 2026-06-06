@@ -70,7 +70,7 @@ const nacinUpisa = [
   {
     br: "4",
     naslov: "Operativni doprinos",
-    opis: "Konkretan rad za zajednicu evidentira se kroz međusobno potvrđivanje — drugi verifikovani korisnici potvrđuju tvoju aktivnost.",
+    opis: "Konkretan rad za zajednicu: nosioci ZRNA (a u prvoj fazi Uprava Fondacije) objave zadatak, ti se prijaviš i izvršiš ga, pa oni potvrde izvršenje pre nego što Protokol upiše POEN.",
     iznos: "po obavljenom poslu",
     boja: "bg-kolo-green-100 text-kolo-green-700",
   },

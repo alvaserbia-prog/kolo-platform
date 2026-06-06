@@ -126,8 +126,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                 POEN se beleži kroz učešće u zajednici — pri verifikaciji, razmeni
                 dobara i usluga ili doprinosu. Počni tako što ćeš se verifikovati.
               </p>
-              <a href="/verifikacija" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
-                Verifikuj se →
+              <a href="/tabla-jemstva" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
+                Zatraži verifikaciju →
               </a>
             </div>
           ) : (

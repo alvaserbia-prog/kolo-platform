@@ -79,7 +79,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
             + Novi oglas
           </Link>
         ) : (
-          <span className="text-xs text-kolo-muted">Verifikujte nalog da biste objavili oglas</span>
+          <span className="text-xs text-kolo-muted">Zatražite verifikaciju da biste objavili oglas</span>
         )}
       </div>
       <PageOpis>
@@ -279,8 +279,8 @@ function OglasKartica({
               Plati
             </button>
           ) : (
-            <Link href="/verifikacija" className="text-xs text-kolo-gold-600 hover:underline">
-              Verifikuj →
+            <Link href="/tabla-jemstva" className="text-xs text-kolo-gold-600 hover:underline">
+              Zatraži verifikaciju →
             </Link>
           )}
         </div>

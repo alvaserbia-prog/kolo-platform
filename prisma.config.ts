@@ -3,6 +3,14 @@
 import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
+// Prisma CLI (migrate deploy / generate) MORA da koristi DIREKTNU Neon konekciju.
+// Migracije uzimaju Postgres advisory lock (pg_advisory_lock), koji ne radi preko
+// Neon poolera (PgBouncer) i puca sa P1002 (timeout na 10s). Runtime klijent
+// (@prisma/adapter-pg) i dalje koristi pooled process.env.DATABASE_URL — ovo menja
+// ISKLJUČIVO konekciju Prisma CLI-ja. Ako URL nema "-pooler", ostaje nepromenjen.
+const databaseUrl = process.env["DATABASE_URL"];
+const directUrl = databaseUrl?.replace("-pooler.", ".");
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
@@ -10,6 +18,6 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    url: directUrl,
   },
 });

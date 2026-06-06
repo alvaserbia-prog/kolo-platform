@@ -32,7 +32,7 @@ const PRAVILNICI = [
   {
     slug: "operativni",
     naziv: "Pravilnik o operativnom doprinosu",
-    opis: "Mehanika operativnog programa — međusobno potvrđivanje doprinosa verifikovanih korisnika.",
+    opis: "Mehanika operativnog programa — objavljivanje zadataka i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije u prvoj fazi.",
   },
   {
     slug: "osnivacki",

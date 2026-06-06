@@ -249,10 +249,10 @@ export default function PocetnaKlijent({
                   Pisanje u chat sobu dostupno je samo verifikovanim članovima.
                 </span>
                 <Link
-                  href="/verifikacija"
+                  href="/tabla-jemstva"
                   className="shrink-0 px-3 py-1.5 bg-kolo-gold-600 text-white text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
                 >
-                  Verifikuj nalog →
+                  Zatraži verifikaciju →
                 </Link>
               </div>
             )}

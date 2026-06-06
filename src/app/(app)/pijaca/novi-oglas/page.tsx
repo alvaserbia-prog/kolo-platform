@@ -7,7 +7,7 @@ import NoviOglasForma from "./NoviOglasForma";
 export default async function NoviOglasPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  if (!session.user.verified) redirect("/verifikacija");
+  if (!session.user.verified) redirect("/tabla-jemstva");
 
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },

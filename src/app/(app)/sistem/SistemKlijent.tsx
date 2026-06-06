@@ -140,7 +140,7 @@ export default function SistemKlijent({
             </p>
           </div>
           <Link
-            href="/verifikacija"
+            href="/tabla-jemstva"
             className="shrink-0 px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
           >
             {t("verifikuj_dugme")}
@@ -579,7 +579,7 @@ function ClanoviSekcija({
           {t("clanovi_pregled_blokiran")}
         </p>
         <Link
-          href="/verifikacija"
+          href="/tabla-jemstva"
           className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
         >
           {t("verifikuj_dugme_link")}
@@ -860,10 +860,10 @@ function DonacijeSekcija({
           Pregled donacija dostupan je verifikovanim članovima.
         </p>
         <Link
-          href="/verifikacija"
+          href="/tabla-jemstva"
           className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
         >
-          Verifikuj nalog →
+          Zatraži verifikaciju →
         </Link>
       </div>
     );
