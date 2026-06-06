@@ -105,10 +105,28 @@ export default async function AdminPage() {
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
   const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
 
+  // Nadzor integriteta — samo superadmin vidi obeležene naloge/grupe.
+  const jeSuper = jeSuperadmin(session.user);
+  const nadzorRedovi = jeSuper
+    ? await prisma.rizikNalaz.findMany({ where: { status: "OTVOREN" }, orderBy: { rizik: "desc" }, take: 200 })
+    : [];
+  const nadzorNalazi = nadzorRedovi.map((r) => ({
+    id: r.id,
+    tip: r.tip,
+    subjektId: r.subjektId,
+    pseudonim: r.pseudonim,
+    clanovi: r.clanovi ? (JSON.parse(r.clanovi) as { id: string; pseudonim: string }[]) : null,
+    pravila: JSON.parse(r.pravila) as { kod: string; nivo: string; opis: string }[],
+    rizik: r.rizik,
+    nivo: r.nivo,
+    createdAt: r.createdAt.toISOString(),
+  }));
+
   return (
     <AdminKlijent
       opticaj={opticaj}
-      viewerJeSuperadmin={jeSuperadmin(session.user)}
+      nadzorNalazi={nadzorNalazi}
+      viewerJeSuperadmin={jeSuper}
       viewerId={session.user.id}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
