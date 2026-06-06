@@ -23,7 +23,8 @@
     "grupa_ekonomija": "Economy",
     "grupa_upravljanje": "Governance",
     "grupa_poverenje": "Trust",
-    "grupa_podrzi": "Support KOLO"
+    "grupa_podrzi": "Support KOLO",
+    "grupa_zajednicko_dobro": "Common good"
   },
   "header": {
     "moje_donacije": "My donations",
