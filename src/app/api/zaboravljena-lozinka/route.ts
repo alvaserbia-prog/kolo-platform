@@ -21,7 +21,8 @@ export async function POST(req: NextRequest) {
       try {
         const token = await kreirajResetToken(user.id);
         const imaLozinku = !!user.passwordHash;
-        await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku);
+        const origin = new URL(req.url).origin;
+        await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku, origin);
       } catch (err) {
         console.error("[zaboravljena-lozinka] greška pri slanju:", err);
       }

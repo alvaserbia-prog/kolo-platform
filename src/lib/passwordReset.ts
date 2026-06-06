@@ -5,7 +5,29 @@ import { posaljiAdminAlert } from "@/lib/adminAlert";
 const TOKEN_BYTES = 32;
 const EXPIRY_HOURS = 1;
 
-function getBaseUrl(): string {
+// Dozvoljeni host-ovi za reset link — sprečava host-header poisoning
+// (napadač ne može da natera link da vodi na svoj domen).
+function jeDozvoljenHost(host: string): boolean {
+  const h = host.toLowerCase();
+  if (h === "ekolo.rs" || h === "www.ekolo.rs") return true;
+  if (h === "localhost" || h.startsWith("localhost:")) return true;
+  if (h.endsWith(".vercel.app")) return true;
+  return false;
+}
+
+// Bazni URL za reset link. Prioritet: origin sa kog je zahtev poslat
+// (test → test, prod → prod), uz allowlist; fallback na env varijablu.
+function getBaseUrl(requestOrigin?: string): string {
+  if (requestOrigin) {
+    try {
+      const u = new URL(requestOrigin);
+      if (jeDozvoljenHost(u.host)) {
+        return `${u.protocol}//${u.host}`;
+      }
+    } catch {
+      // neispravan origin — pada na fallback ispod
+    }
+  }
   const url = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
   if (url) return url.replace(/\/$/, "");
   return "http://localhost:3000";
@@ -37,7 +59,8 @@ export async function posaljiResetEmail(
   email: string,
   token: string,
   pseudonim: string,
-  imaLozinku: boolean
+  imaLozinku: boolean,
+  requestOrigin?: string
 ): Promise<void> {
   // Citamo env varijable u runtime-u (ne module-level) da bi se
   // posle Vercel env promene odmah pokupile bez ostatka starog kesa.
@@ -49,7 +72,7 @@ export async function posaljiResetEmail(
     return;
   }
 
-  const link = `${getBaseUrl()}/reset-lozinka/${token}`;
+  const link = `${getBaseUrl(requestOrigin)}/reset-lozinka/${token}`;
 
   const naslov = imaLozinku ? "Resetovanje lozinke" : "Postavljanje lozinke";
   const subject = imaLozinku
