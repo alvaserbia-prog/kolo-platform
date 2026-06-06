@@ -1,4 +1,4 @@
-# KOLO Platforma — v3.7.5
+# KOLO Platforma — v3.8.0
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -39,30 +39,36 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
-## Kanonska dokumentacija (folder `nova dokumentacija/`)
-Stari folder `dokumentacija/` (v3.7.0 i v2.x) je **obrisan**. Sva kanonska dokumentacija je sada u **`nova dokumentacija/`** (pažnja: ime sa razmakom). Verzije su **mešane 3.7.5 / 3.7.4 / 3.7.3 / 3.7.2** — uvek koristiti najviši broj verzije za dati dokument:
+## Kanonska dokumentacija (folder `dokumentacija 3.8/`)
+**Kanonski set je konsolidovan na jedinstvenu verziju 3.8.0** u folderu **`dokumentacija 3.8/`** (pažnja: ime sa razmakom). v3.8.0 je sadržinski jednaka prethodnom mešanom 3.7.x setu (folder `nova dokumentacija/`, sada istorija) uz otklonjene neusaglašenosti između akata — pa svi implementacioni nalazi niže koji referenciraju 3.7.x i dalje važe.
 
-| Dokument | Fajl | Verzija |
+| Dokument | Fajl (`dokumentacija 3.8/`) | Verzija |
 |---|---|---|
-| Pravilnik o KOLO sistemu | `Pravilnik_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Politika privatnosti | `politika_3_7_6.md` | **3.7.6 (aktuelan)** |
-| Uslovi korišćenja | `uslovi_koriscenja_3_7_4.md` | **3.7.4 (aktuelan)** |
-| Statut Fondacije | `statut_3_7_2.md` | 3.7.2 |
-| Whitepaper | `whitepaper_3_7_6.md` | **3.7.6 (aktuelan)** — veto usklađen sa Pravilnikom 3.7.5 (PDF `KOLO_Whitepaper_3.7.2.pdf` zastareo) |
-| DPIA | `DPIA_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Radnje obrade | `radnje_obrade_3_7_5.md` | **3.7.5 (aktuelan)** |
-| Rizici | `rizici_3_7_2.md` | 3.7.2 |
-| Pravilnik o hijerarhiji akata | `hijerarhija_3_7_2.md` | 3.7.2 |
-| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_7_3.md` | **3.7.3 (aktuelan)** |
-| Pravilnik o pokroviteljstvu i donacijama | `donacije_3_7_3.md` | **3.7.3** |
-| Pravilnik o operativnom doprinosu | `operativni_3_7_2.md` | 3.7.2 |
-| Pravilnik o osnivačkom doprinosu | `osnivacki_3_7_2.md` | 3.7.2 |
-| Pravilnik o programima podrške | `programi_podrske_3_7_5.md` | **3.7.5 (aktuelan)** — verifikatorska potvrda socijalnih programa |
-| Pravilnik o Gornjem Kolu | `gornje_kolo_3_7_6.md` | **3.7.6 (aktuelan)** — glasanje, kvorum, pragovi, delegiranje (delegiran čl. 41/46/47); operativan u Fazi 2. **Čl. 19:** prag gašenja veta = **3× operativni trošak prethodnog meseca** (jedini uslov; prethodna 3.7.5 verzija je imala dvostruki uslov 24× rezerva + 12-mes. samoodrživost) |
+| Pravilnik o KOLO sistemu | `Pravilnik_3_8_0.md` | **3.8.0** (82 člana, 12 glava) |
+| Politika privatnosti | `politika_3_8_0.md` | **3.8.0** |
+| Uslovi korišćenja | `uslovi_koriscenja_3_8_0.md` | **3.8.0** |
+| Statut Fondacije | `statut_3_8_0.md` | **3.8.0** |
+| Whitepaper | `whitepaper_3_8_0.md` | **3.8.0** (PDF `nova dokumentacija/KOLO_Whitepaper_3.7.2.pdf` zastareo) |
+| DPIA | `DPIA_3_8_0.md` | **3.8.0** |
+| Radnje obrade | `radnje_obrade_3_8_0.md` | **3.8.0** |
+| Rizici (Izjava o prihvatanju rizika) | `rizici_3_8_0.md` | **3.8.0** |
+| Pravilnik o hijerarhiji akata | `hijerarhija_3_8_0.md` | **3.8.0** (dopunjen: dodat Pravilnik o Gornjem Kolu; „kolektivni oblici") |
+| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_8_0.md` | **3.8.0** |
+| Pravilnik o pokroviteljstvu i donacijama | `donacije_3_8_0.md` | **3.8.0** (donacije 11 nivoa 1,00–2,00; pokroviteljstvo 7 nivoa; +preduzetnici) |
+| Pravilnik o operativnom doprinosu | `operativni_3_8_0.md` | **3.8.0** |
+| Pravilnik o osnivačkom doprinosu | `osnivacki_3_8_0.md` | **3.8.0** |
+| Pravilnik o programima podrške | `programi_podrske_3_8_0.md` | **3.8.0** (verifikatorska potvrda socijalnih programa) |
+| Pravilnik o Gornjem Kolu | `gornje_kolo_3_8_0.md` | **3.8.0** (glasanje, delegiranje; veto-prag = **3× operativni trošak prethodnog meseca**) |
+| Kontekst za razvoj | `Claude_context.md` | usaglašen sa 3.8.0 |
 
-Prethodne verzije (`Pravilnik_3_7_2.md`/`3_7_3.md`/`3_7_4.md`, `politika_3_7_2.md`/`3_7_3.md`, `DPIA_3_7_2.md`, `radnje_obrade_3_7_2.md`, `dokaz_stvarnosti_3_7_2.md`, `uslovi_koriscenja_3_7_2.md`) zadržane su u folderu kao istorija, ali ih je zamenila viša verzija iz tabele.
+**Otklonjene neusaglašenosti pri konsolidaciji na 3.8.0:** whitepaper — prava neverifikovanog korisnika (razmena van prostora za oglašavanje + ažuriranje evidencije POEN-a) usklađena sa Pravilnikom čl. 28; e-mail za zaštitu podataka ujednačen na `privatnost@ekolo.rs` (DPIA/Radnje obrade); hijerarhija — dodat Pravilnik o Gornjem Kolu, naziv „kolektivni oblici"; programi podrške — verzija u footeru ujednačena; zastarele međudokumentne verzijske reference → 3.8.0.
+
+**⚠️ Rendering app-a:** javne pravne stranice i dalje čitaju iz `nova dokumentacija/` (vidi „Javne pravne stranice" niže). Re-pointovanje na `dokumentacija 3.8/` je zaseban kod-zadatak ako/kada se odluči.
+
+Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 
 **Promene po verzijama (changelog iz zaglavlja dokumenata):**
+- **3.8.0 (06.06.2026)** — konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0 u folderu `dokumentacija 3.8/`, uz otklanjanje neusaglašenosti između akata (vidi „Otklonjene neusaglašenosti" iznad). Sadržinski jednako prethodnom 3.7.x setu osim navedenih ispravki.
 - **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
 - **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
 - **Pravilnik 3.7.4 / donacije 3.7.3** — pokroviteljstvo izričito obuhvata i **preduzetnike**, ravnopravno sa pravnim licima (čl. 2, 38, 40).
@@ -211,7 +217,8 @@ src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
 src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
-nova dokumentacija/ — kanonska dokumentacija (v3.7.5/3.7.4/3.7.3/3.7.2)
+dokumentacija 3.8/ — kanonska dokumentacija (v3.8.0)
+nova dokumentacija/ — prethodni mešani set (3.7.2–3.7.6), istorija; app rendering još čita odavde
 docs/             — interne radne beleške (nije normativa)
 ```
 
@@ -378,7 +385,7 @@ docs/             — interne radne beleške (nije normativa)
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
 ## Reference
-- `nova dokumentacija/` — vidi tabelu na vrhu (Pravilnik 3.7.5, Politika 3.7.6, Uslovi 3.7.4, DPIA/Radnje obrade 3.7.5, Dokaz stvarnosti/Donacije/Programi podrške 3.7.3; ostalo 3.7.2)
+- `dokumentacija 3.8/` — kanonski set v3.8.0 (vidi tabelu na vrhu). `nova dokumentacija/` = prethodni mešani set (istorija; app rendering još odatle)
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
