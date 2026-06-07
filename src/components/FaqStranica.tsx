@@ -1,9 +1,14 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { FAQ_SEKCIJE } from "@/lib/faq-data";
+import { getFaqSekcije } from "@/lib/faq-data";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FaqStranica() {
+  const locale = useLocale();
+  const t = useTranslations("cestoPage");
+  const FAQ_SEKCIJE = getFaqSekcije(locale);
+
   const [pretraga, setPretraga] = useState("");
   const [otvoreni, setOtvoreni] = useState<Set<number>>(new Set());
 
@@ -27,7 +32,7 @@ export default function FaqStranica() {
           p.odgovor.toLowerCase().includes(q)
       ),
     })).filter((s) => s.pitanja.length > 0);
-  }, [pretraga]);
+  }, [pretraga, FAQ_SEKCIJE]);
 
   const ukupnoPrikazano = filtrirano.reduce(
     (sum, s) => sum + s.pitanja.length,
@@ -53,15 +58,15 @@ export default function FaqStranica() {
             type="text"
             value={pretraga}
             onChange={(e) => setPretraga(e.target.value)}
-            placeholder="Pretraži pitanja…"
+            placeholder={t("pretraga_placeholder")}
             className="w-full pl-10 pr-4 py-2.5 border border-kolo-border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-kolo-green-700 focus:border-transparent"
           />
         </div>
         {pretraga.trim() && (
           <div className="mt-2 text-xs text-kolo-muted">
             {ukupnoPrikazano === 0
-              ? `Nema rezultata za „${pretraga}"`
-              : `Pronađeno: ${ukupnoPrikazano} pitanj${ukupnoPrikazano === 1 ? "e" : "a"}`}
+              ? t("nema_rezultata")
+              : `${ukupnoPrikazano}`}
           </div>
         )}
       </div>
@@ -90,7 +95,7 @@ export default function FaqStranica() {
       {filtrirano.length === 0 ? (
         <div className="bg-white rounded-2xl card-shadow p-8 text-center">
           <p className="text-kolo-muted">
-            Nema pitanja koja odgovaraju pretrazi.
+            {t("nema_rezultata")}
           </p>
         </div>
       ) : (

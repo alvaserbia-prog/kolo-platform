@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import JezikSvitcer from "@/components/JezikSvitcer";
+import { useTranslations } from "next-intl";
 
 type Props = {
   isLoggedIn: boolean;
@@ -13,6 +13,7 @@ type Props = {
 };
 
 export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
+  const t = useTranslations("javneKomponente");
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname() || "/";
 
@@ -83,19 +84,19 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
     <>
       {/* Desktop nav */}
       <nav className="hidden md:flex items-center gap-6">
-        {topLink("/", "Početna")}
-        {topLink("/pijaca", "Pijaca")}
-        {topLink("/kako-funkcionise", "Kako funkcioniše")}
-        {topLink("/o-sistemu", "O sistemu")}
-        {topLink("/o-nama", "O nama")}
-        {topLink("/cesto-postavljena-pitanja", "Pitanja")}
+        {topLink("/", t("nav_fooldal"))}
+        {topLink("/pijaca", t("nav_pijaca"))}
+        {topLink("/kako-funkcionise", t("nav_kako_funkcionise"))}
+        {topLink("/o-sistemu", t("nav_o_sistemu"))}
+        {topLink("/o-nama", t("nav_o_nama"))}
+        {topLink("/cesto-postavljena-pitanja", t("nav_pitanja"))}
       </nav>
 
       {/* Mobilni hamburger */}
       <button
         onClick={() => setMobileOpen(true)}
         className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-kolo-text hover:bg-kolo-bg transition-colors"
-        aria-label="Otvori meni"
+        aria-label={t("header_aria_otvori")}
       >
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
           <path
@@ -132,7 +133,7 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
               <button
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center w-10 h-10 rounded-lg text-kolo-text hover:bg-kolo-bg transition-colors"
-                aria-label="Zatvori meni"
+                aria-label={t("header_aria_zatvori")}
               >
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                   <path
@@ -148,19 +149,19 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
 
           <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
             <div className="space-y-1">
-              {mobilePrimaryLink("/", "Početna")}
-              {mobilePrimaryLink("/pijaca", "Pijaca")}
-              {mobilePrimaryLink("/kako-funkcionise", "Kako funkcioniše")}
-              {mobilePrimaryLink("/o-sistemu", "O sistemu")}
-              {mobilePrimaryLink("/o-nama", "O nama")}
-              {mobilePrimaryLink("/cesto-postavljena-pitanja", "Pitanja")}
+              {mobilePrimaryLink("/", t("nav_fooldal"))}
+              {mobilePrimaryLink("/pijaca", t("nav_pijaca"))}
+              {mobilePrimaryLink("/kako-funkcionise", t("nav_kako_funkcionise"))}
+              {mobilePrimaryLink("/o-sistemu", t("nav_o_sistemu"))}
+              {mobilePrimaryLink("/o-nama", t("nav_o_nama"))}
+              {mobilePrimaryLink("/cesto-postavljena-pitanja", t("nav_pitanja"))}
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-3">
               {maintenance ? (
                 <span className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-kolo-border rounded-xl text-base font-medium text-kolo-muted">
                   <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-600" />
-                  Uskoro počinjemo
+                  {t("header_uskoro_pocinemo")}
                 </span>
               ) : isLoggedIn ? (
                 <Link
@@ -168,7 +169,7 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
                   onClick={() => setMobileOpen(false)}
                   className="block w-full text-center px-4 py-3 bg-kolo-green-700 text-white text-base font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
                 >
-                  Moj nalog →
+                  {t("header_moj_nalog")}
                 </Link>
               ) : (
                 <>
@@ -177,29 +178,29 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
                     onClick={() => setMobileOpen(false)}
                     className="block w-full text-center px-4 py-3 border border-kolo-green-700 text-kolo-green-700 text-base font-semibold rounded-xl hover:bg-kolo-bg transition-colors"
                   >
-                    Prijavi se
+                    {t("header_prijavi_se")}
                   </Link>
                   <Link
                     href="/registracija"
                     onClick={() => setMobileOpen(false)}
                     className="block w-full text-center px-4 py-3 bg-kolo-gold-600 text-white text-base font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
                   >
-                    Pridruži se
+                    {t("header_priduzi_se")}
                   </Link>
                 </>
               )}
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-2 text-sm">
-              {mobileFooterLink("/pokrovitelji", "Pokrovitelji")}
-              {mobileFooterLink("/uslovi", "Uslovi korišćenja")}
-              {mobileFooterLink("/privatnost", "Politika privatnosti")}
+              {mobileFooterLink("/pokrovitelji", t("nav_pokrovitelji"))}
+              {mobileFooterLink("/uslovi", t("nav_uslovi"))}
+              {mobileFooterLink("/privatnost", t("nav_politika"))}
               <a
                 href="mailto:kontakt@ekolo.rs"
                 onClick={() => setMobileOpen(false)}
                 className="block py-1.5 text-kolo-muted hover:text-kolo-green-700 transition-colors"
               >
-                Kontakt
+                {t("nav_kontakt")}
               </a>
             </div>
           </nav>

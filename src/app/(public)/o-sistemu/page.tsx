@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import FaqAkordeon from "@/components/FaqAkordeon";
-import { poBrojevima } from "@/lib/faq-data";
+import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = pageMetadata({
   title: "O sistemu — KOLO",
@@ -42,7 +43,10 @@ const sistemi = [
   },
 ];
 
-export default function OSistemuPage() {
+export default async function OSistemuPage() {
+  const locale = await getLocale();
+  const faqPitanja = getFaqPoBrojevima([1, 4, 28], locale);
+
   return (
     <div className="space-y-6 pb-12">
 
@@ -567,7 +571,7 @@ export default function OSistemuPage() {
             Često postavljana pitanja
           </h2>
         </div>
-        <FaqAkordeon pitanja={poBrojevima([1, 4, 28])} />
+        <FaqAkordeon pitanja={faqPitanja} />
         <div className="text-center pt-2">
           <Link
             href="/cesto-postavljena-pitanja"

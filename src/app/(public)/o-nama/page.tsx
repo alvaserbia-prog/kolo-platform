@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import FaqAkordeon from "@/components/FaqAkordeon";
-import { poBrojevima } from "@/lib/faq-data";
+import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = pageMetadata({
   title: "O nama — KOLO Fondacija",
@@ -39,7 +40,10 @@ function DokumentRed({ naziv, href, zivo = false }: { naziv: string; href: strin
   );
 }
 
-export default function ONamaPage() {
+export default async function ONamaPage() {
+  const locale = await getLocale();
+  const faqPitanja = getFaqPoBrojevima([26, 27, 30], locale);
+
   return (
     <div className="space-y-6 pb-12">
 
@@ -596,7 +600,7 @@ export default function ONamaPage() {
             Često postavljana pitanja
           </h2>
         </div>
-        <FaqAkordeon pitanja={poBrojevima([26, 27, 30])} />
+        <FaqAkordeon pitanja={faqPitanja} />
         <div className="text-center pt-2">
           <Link
             href="/cesto-postavljena-pitanja"

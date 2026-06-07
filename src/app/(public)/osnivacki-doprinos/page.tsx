@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
 import { pageMetadata } from "@/lib/seo";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export const metadata = pageMetadata({
   title: "Osnivački doprinos — KOLO",
@@ -11,9 +12,12 @@ export const metadata = pageMetadata({
   path: "/osnivacki-doprinos",
 });
 
-const fmt = (n: number) => n.toLocaleString("sr-RS");
-
 export default async function OsnivackiDoprinosPage() {
+  const t = await getTranslations("osnivackiDoprinosPage");
+  const locale = await getLocale();
+
+  const fmt = (n: number) => n.toLocaleString(locale === "sr-Cyrl" ? "sr-RS" : locale === "hu" ? "hu-HU" : locale === "en" ? "en-US" : "sr-RS");
+
   // Pseudonimi osnivača vidljivi su isključivo verifikovanim članovima (Pravilnik o
   // osnivačkom doprinosu čl. 12 — „javnost udela" znači prema zajednici verifikovanih,
   // ne prema eksternoj javnosti). Neverifikovani/gosti vide samo agregat kanala.
@@ -50,41 +54,37 @@ export default async function OsnivackiDoprinosPage() {
   return (
     <div className="max-w-[932px] mx-auto">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-kolo-green-900 mb-3">Osnivački doprinos</h1>
+        <h1 className="text-3xl font-bold text-kolo-green-900 mb-3">{t("naslov")}</h1>
         <p className="text-kolo-muted leading-relaxed text-body">
-          Osnivački doprinos je naknadno evidentiranje rada obavljenog na projektovanju i pripremi
-          KOLO sistema pre otvaranja platforme. Evidentira se automatski, u koracima od{" "}
-          {fmt(GORNJA_GRANICA / ITERATION_LIMIT)} POEN-a, svaki put kada ukupan broj evidentiranih
-          POEN-a u sistemu dostigne novi prag od 100.000. Ukupna gornja granica je{" "}
-          {fmt(GORNJA_GRANICA)} POEN-a ({ITERATION_LIMIT} koraka), nakon čega se kanal trajno zatvara.
+          {t("opis")}
         </p>
       </div>
 
       {status && (
         <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="font-semibold text-kolo-text">Stanje kanala</h2>
+            <h2 className="font-semibold text-kolo-text">{t("stanje_naslov")}</h2>
             {status.zatvoren && (
               <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-kolo-bg text-kolo-muted">
-                Trajno zatvoren
+                {t("stanje_zatvoreno")}
               </span>
             )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
-              <div className="text-xs text-kolo-muted">Izvršeno koraka</div>
+              <div className="text-xs text-kolo-muted">{t("izvrseno_koraka")}</div>
               <div className="font-semibold text-kolo-text">{status.brojKoraka} / {ITERATION_LIMIT}</div>
             </div>
             <div>
-              <div className="text-xs text-kolo-muted">Evidentirano</div>
+              <div className="text-xs text-kolo-muted">{t("evidentirano")}</div>
               <div className="font-semibold text-kolo-text">{fmt(status.ukupnoEvidentirano)} POEN</div>
             </div>
             <div>
-              <div className="text-xs text-kolo-muted">Preostalo</div>
+              <div className="text-xs text-kolo-muted">{t("preostalo")}</div>
               <div className="font-semibold text-kolo-text">{fmt(status.preostalo)} POEN</div>
             </div>
             <div>
-              <div className="text-xs text-kolo-muted">Iskorišćenost</div>
+              <div className="text-xs text-kolo-muted">{t("iskorisceno")}</div>
               <div className="font-semibold text-kolo-text">{status.procenatIskoriscenja}%</div>
             </div>
           </div>
@@ -94,15 +94,14 @@ export default async function OsnivackiDoprinosPage() {
         </div>
       )}
 
-      <h2 className="font-semibold text-kolo-text mb-3">Osnivači i udeli</h2>
+      <h2 className="font-semibold text-kolo-text mb-3">{t("osnivaci_naslov")}</h2>
       {!verifikovan ? (
         <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-8 text-center text-kolo-muted">
-          Registar osnivača sa pseudonimima i udelima dostupan je verifikovanim članovima.
-          Ukupan osnivački doprinos vidljiv je gore, u stanju kanala.
+          {t("registar_blokiran")}
         </div>
       ) : osnivaci.length === 0 ? (
         <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-8 text-center text-kolo-muted">
-          Registar osnivača još nije objavljen.
+          {t("registar_prazan")}
         </div>
       ) : (
         <div className="space-y-3 mb-8">
@@ -125,15 +124,15 @@ export default async function OsnivackiDoprinosPage() {
 
       {koraci.length > 0 && (
         <>
-          <h2 className="font-semibold text-kolo-text mb-3">Poslednji evidentirani koraci</h2>
+          <h2 className="font-semibold text-kolo-text mb-3">{t("koraci_naslov")}</h2>
           <div className="bg-kolo-surface border border-kolo-border rounded-2xl overflow-hidden">
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-left text-kolo-muted border-b border-kolo-border">
-                  <th className="px-6 py-3 font-medium">Korak</th>
-                  <th className="px-6 py-3 font-medium">Prag</th>
-                  <th className="px-6 py-3 font-medium">Iznos</th>
-                  <th className="px-6 py-3 font-medium">Datum</th>
+                  <th className="px-6 py-3 font-medium">{t("col_korak")}</th>
+                  <th className="px-6 py-3 font-medium">{t("col_prag")}</th>
+                  <th className="px-6 py-3 font-medium">{t("col_iznos")}</th>
+                  <th className="px-6 py-3 font-medium">{t("col_datum")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,7 +142,10 @@ export default async function OsnivackiDoprinosPage() {
                     <td className="px-6 py-3 text-kolo-muted">{fmt(k.prag)}</td>
                     <td className="px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} POEN</td>
                     <td className="px-6 py-3 text-kolo-muted">
-                      {new Date(k.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}
+                      {new Date(k.createdAt).toLocaleDateString(
+                        locale === "sr-Cyrl" ? "sr-RS" : locale === "hu" ? "hu-HU" : locale === "en" ? "en-US" : "sr-RS",
+                        { day: "2-digit", month: "long", year: "numeric" }
+                      )}
                     </td>
                   </tr>
                 ))}

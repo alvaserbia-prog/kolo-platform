@@ -1,8 +1,9 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Metadata } from "next";
 import FaqAkordeon from "@/components/FaqAkordeon";
-import { poBrojevima } from "@/lib/faq-data";
+import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { getLocale } from "next-intl/server";
 
 export const metadata: Metadata = pageMetadata({
   title: "Kako funkcioniše KOLO — detaljna pravila sistema",
@@ -90,7 +91,9 @@ const nacinUpisa = [
   },
 ];
 
-export default function KakoFunkcionisePage() {
+export default async function KakoFunkcionisePage() {
+  const locale = await getLocale();
+  const faqPitanja = getFaqPoBrojevima([4, 16, 5], locale);
   return (
     <div className="space-y-6 pb-12">
 
@@ -361,7 +364,7 @@ export default function KakoFunkcionisePage() {
             Najčešća pitanja
           </h2>
         </div>
-        <FaqAkordeon pitanja={poBrojevima([4, 16, 5])} />
+        <FaqAkordeon pitanja={faqPitanja} />
         <div className="text-center pt-2">
           <Link
             href="/cesto-postavljena-pitanja"
