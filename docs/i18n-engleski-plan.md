@@ -7,7 +7,7 @@
 > - **Faza 4 — pravni dokumenti EN (13/13)** (`ea729a4`,`c89eb90`,`d56e660`,`27e9c3a`): svih 13 renderovanih markdown akata prevedeno u `nova dokumentacija/en/` sa disklejmerom „Serbian prevails" (uklj. Whitepaper 32.865 reči, cepan na 5 delova).
 > - **Faza B — pravne stranice** (`e8988ee`): 8 stranica locale-svesno čita EN markdown (fallback sr), chrome i18n (`pravne` namespace), interni linkovi kroz `@/i18n/navigation`.
 > - **Faza B — marketing + landing + FAQ** (`24d1fd6`,`9ae6168`,`f5f14db`): landing + 7 javnih stranica + `PublicNav/Header/Footer` i18n; `faq-data-en.ts` (46 pitanja); body o-nama/o-sistemu/kako-funkcionise izvučen (uklj. SVG labele). Paritet **1066 ključeva** sr/en/hu, build zelen (139 stranica).
-> - **Faza 7 — metapodaci (title/description) javnih stranica** — u toku (poslednji agent).
+> - **Faza 7 — metapodaci (title/description) javnih stranica** (`0fcf313`): 17 stranica → `generateMetadata` sa lokalizovanim title/description (EN/HU). Paritet **1098**, build zelen. ✅
 >
 > **Preostalo / svesno odloženo:** autentifikovana app `(app)/*` ostaje srpska (ćirilica transliteracijom) — van Opsega B; notifikacije/email i18n (polje `User.jezik` spremno, prevod stringova je app-scope); HU prevodi delom popunjeni EN fallback-om gde sadržaj još nije lokalizovan; per-locale canonical je delom aproksimiran (hreflang cross-link je tačan). **Pravni rizik:** EN prevod bez pravnika — disklejmer „Serbian prevails" je na svakom dokumentu (ublažava, ne uklanja).
 
