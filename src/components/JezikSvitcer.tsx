@@ -26,6 +26,12 @@ export default function JezikSvitcer() {
     if (kod === trenutni) return;
     // Zadrži izabrani jezik i za buduće posete (cookie koji next-intl чita).
     document.cookie = `NEXT_LOCALE=${kod}; path=/; max-age=31536000; SameSite=Lax`;
+    // Prijavljenom korisniku trajno upiši izbor (notifikacije/email); gostu no-op.
+    fetch("/api/profil/jezik", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jezik: kod }),
+    }).catch(() => {});
     startTransition(() => {
       // pathname je bez prefiksa; router dodaje odgovarajući prefiks za `locale`.
       router.replace(pathname, { locale: kod });

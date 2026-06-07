@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, hreflangAlternates } from "@/lib/seo";
 
 /**
  * Javne stranice za sitemap. Autentifikovane (app) i API rute se NE navode —
@@ -30,5 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: absoluteUrl(path),
     changeFrequency,
     priority,
+    // hreflang varijante (sr default + /en, /hu, /sr-Cyrl) — Google čita iz sitemap-a.
+    alternates: {
+      languages: Object.fromEntries(
+        Object.entries(hreflangAlternates(path)).map(([k, v]) => [k, absoluteUrl(v)]),
+      ),
+    },
   }));
 }

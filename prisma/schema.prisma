@@ -202,6 +202,9 @@ model User {
   location           String?
   telefon            String?
   avatar             String?
+  // Izabrani jezik korisnika (next-intl locale): "sr" | "sr-Cyrl" | "en" | "hu".
+  // Koristi se za jezik notifikacija/email-ova i podrazumevani prikaz po prijavi.
+  jezik              String    @default("sr")
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]
