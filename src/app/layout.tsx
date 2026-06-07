@@ -6,6 +6,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
+import CirilicaProvider from "@/components/CirilicaProvider";
 import {
   SITE_URL,
   SITE_NAME,
@@ -18,7 +19,9 @@ const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
+  // "cyrillic" je obavezan da ćirilični tekst koristi isti font (Inter), a ne
+  // sistemski fallback — inače bi ćirilica izgledala vizuelno neujednačeno.
+  subsets: ["latin", "latin-ext", "cyrillic"],
   display: "swap",
 });
 
@@ -90,6 +93,7 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <NextIntlClientProvider messages={messages}>
+          <CirilicaProvider />
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
         <Analytics />

@@ -2,8 +2,11 @@
 
 import { useLocale } from "next-intl";
 
-const jezici = [
-  { kod: "sr", zastava: "/flags/rs.svg", naziv: "Srpski" },
+// Dva pisma istog jezika. Pošto su oba "srpski", razlikujemo ih tekstualnom
+// oznakom ("Lat" / "Ћир") umesto iste zastave — jasnije korisniku.
+const pisma = [
+  { kod: "sr", oznaka: "Lat", naziv: "Srpski — latinica" },
+  { kod: "sr-Cyrl", oznaka: "Ћир", naziv: "Српски — ћирилица" },
 ];
 
 function promeniJezik(kod: string) {
@@ -12,29 +15,26 @@ function promeniJezik(kod: string) {
 }
 
 export default function JezikSvitcer() {
-  const trenutniJezik = useLocale();
+  const trenutni = useLocale();
 
   return (
-    <div className="flex items-center gap-1">
-      {jezici.map((j) => (
+    // data-no-cyr: oznake pisama se NE transliterišu (treba da ostanu "Lat"/"Ћир").
+    <div data-no-cyr className="flex items-center gap-1">
+      {pisma.map((p) => (
         <button
-          key={j.kod}
-          onClick={() => promeniJezik(j.kod)}
-          title={j.naziv}
+          key={p.kod}
+          onClick={() => promeniJezik(p.kod)}
+          title={p.naziv}
+          aria-label={p.naziv}
+          aria-pressed={trenutni === p.kod}
           suppressHydrationWarning
-          className={`p-0.5 rounded transition-all ${
-            trenutniJezik === j.kod
-              ? "ring-2 ring-kolo-green-700 opacity-100"
-              : "opacity-40 hover:opacity-100"
+          className={`px-1.5 py-0.5 rounded text-xs font-semibold leading-none transition-all ${
+            trenutni === p.kod
+              ? "bg-kolo-green-700 text-white opacity-100"
+              : "text-kolo-muted opacity-50 hover:opacity-100"
           }`}
         >
-          <img
-            src={j.zastava}
-            alt={j.naziv}
-            width={20}
-            height={15}
-            style={{ borderRadius: 2, display: "block" }}
-          />
+          {p.oznaka}
         </button>
       ))}
     </div>
