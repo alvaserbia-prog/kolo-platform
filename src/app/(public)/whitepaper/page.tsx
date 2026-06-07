@@ -17,7 +17,9 @@ export default async function WhitepaperPage() {
   const sadrzaj = await fs.readFile(filePath, "utf-8");
 
   return (
-    <div className="max-w-[800px] mx-auto pb-16">
+    // data-no-cyr: whitepaper se NE transliteriše u ćirilicu — ostaje u izvornom
+    // (latiničnom) obliku bez obzira na izabrano pismo.
+    <div data-no-cyr className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
         <p className="text-xs text-kolo-muted mb-1">Dokumentacija</p>

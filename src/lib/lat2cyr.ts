@@ -20,7 +20,7 @@ const BELA_LISTA = [
   "QR", "AGPL-3.0", "AGPL", "GPL", "CC BY-SA", "BY-SA", "CC",
   "PDF", "JSON", "API", "URL", "HTML", "CSS", "OAuth", "GDPR",
   "RSD", "EUR", "USD", "ISO", "NestPay", "Vercel", "Neon", "Prisma",
-  "Next.js", "TypeScript", "PostgreSQL",
+  "Next.js", "TypeScript", "PostgreSQL", "Whitepaper",
 ];
 
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
