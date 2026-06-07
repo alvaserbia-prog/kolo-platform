@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { jeAdmin } from "@/lib/dozvole";
+import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
 
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
-  "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro",
+  "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/rani-pristup",
 ];
 
 // Putanje za ulazak u nalog. Kada je MAINTENANCE_MODE uključen (postavlja se
@@ -32,7 +33,11 @@ export default async function proxy(req: NextRequest) {
     process.env.MAINTENANCE_MODE === "true" &&
     ZAKLJUCANE_ULAZNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"))
   ) {
-    return NextResponse.redirect(new URL("/uskoro", req.url));
+    // Rani prihvatioci sa validnim pristupnim kodom (kolačić) prolaze gate.
+    const raniPristup = validanRaniPristup(req.cookies.get(RANI_PRISTUP_COOKIE)?.value);
+    if (!raniPristup) {
+      return NextResponse.redirect(new URL("/uskoro", req.url));
+    }
   }
 
   if (PRESKOCI.some((r) => pathname.startsWith(r))) {
