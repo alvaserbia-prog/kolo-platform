@@ -803,12 +803,14 @@ export function poBrojevima(brojevi: number[]): FaqPitanje[] {
     .filter((p): p is FaqPitanje => p !== undefined);
 }
 
+import { FAQ_SEKCIJE_EN } from "./faq-data-en";
+
 /**
  * Returns FAQ sections for a given locale.
- * English/Hungarian FAQ content is not yet translated — falls back to Serbian.
+ * English returns English data; all other locales (sr, sr-Cyrl, hu, …) fall back to Serbian.
  */
 export function getFaqSekcije(locale: string): FaqSekcija[] {
-  // Future: import and return locale-specific data for "en" and "hu"
+  if (locale === "en") return FAQ_SEKCIJE_EN;
   return FAQ_SEKCIJE;
 }
 
