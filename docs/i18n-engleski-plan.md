@@ -59,7 +59,11 @@ Verifikovano stanje:
 — veliki mehanički refaktor preko skoro cele aplikacije, sa rizikom build-loma. Ovo je pravi
 trošak engleske verzije koji je transliteracioni trik sakrio.
 
-**Izbor opsega (čeka odluku vlasnika):**
+**✅ ODLUKA VLASNIKA (2026-06-07): Opseg B — javna/SEO površina.** I18n-izuje se i prevodi:
+landing, sve `(public)/*` stranice, 17 pravnih dokumenata, auth (registracija/login/reset).
+Autentifikovana app `(app)/*` ostaje srpska zasad (ćirilica i dalje radi preko transliteracije).
+
+**Izbor opsega (istorija):**
 - **Opseg A — Cela aplikacija:** izvući svih ~925 linija iz 85 fajlova + 17 pravnih dokumenata.
   Najpotpunije, ali najveći obim/rizik; ide fajl-po-fajl preko pod-agenata uz build-provere.
 - **Opseg B — Samo javna/SEO površina (preporuka):** pošto je `/en/` motivisan SEO-om, izvući i
