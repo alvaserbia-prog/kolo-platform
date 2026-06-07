@@ -31,6 +31,34 @@ export function absoluteUrl(path = "/"): string {
 
 import type { Metadata } from "next";
 
+/** BCP-47 oznake i OG locale po internom kodu jezika (next-intl locale). */
+export const OG_LOCALE: Record<string, string> = {
+  sr: "sr_RS",
+  "sr-Cyrl": "sr_RS",
+  en: "en_US",
+  hu: "hu_HU",
+};
+
+/** Jezici sa URL prefiksom (default "sr" ide bez prefiksa). */
+const PREFIKSIRANI = ["en", "hu", "sr-Cyrl"] as const;
+
+/**
+ * hreflang `languages` mapa za zadatu putanju: unakrsno povezuje srpsku (default,
+ * bez prefiksa) sa /en, /hu i /sr-Cyrl verzijama + x-default → srpski.
+ * Relativne putanje; `metadataBase` ih pretvara u apsolutne.
+ */
+export function hreflangAlternates(path = "/"): Record<string, string> {
+  const clean = path === "/" ? "" : path;
+  const langs: Record<string, string> = {
+    "sr-Latn": path,
+    "x-default": path,
+  };
+  for (const kod of PREFIKSIRANI) {
+    langs[kod] = `/${kod}${clean}` || "/";
+  }
+  return langs;
+}
+
 /**
  * Konzistentna metadata za javnu stranicu: naslov (kroz template `%s — KOLO`),
  * opis, self-canonical i OG/Twitter. Dinamičku OG sliku obezbeđuje
@@ -50,7 +78,7 @@ export function pageMetadata({
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: hreflangAlternates(path) },
     openGraph: {
       type: "website",
       locale: "sr_RS",

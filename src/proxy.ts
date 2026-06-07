@@ -1,7 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import createMiddleware from "next-intl/middleware";
 import { jeAdmin } from "@/lib/dozvole";
 import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
+import { routing } from "@/i18n/routing";
+
+// next-intl middleware: rešava jezički prefiks (/en, /hu, /sr-Cyrl); default
+// "sr" ide bez prefiksa. Pozivamo ga ručno NAKON auth/maintenance odluka.
+const intlMiddleware = createMiddleware(routing);
+
+// Jezici sa prefiksom (default "sr" je bez prefiksa).
+const PREFIKSI = routing.locales.filter((l) => l !== routing.defaultLocale);
+
+/** Skida jezički prefiks (/en, /hu, /sr-Cyrl) da bi se rute proveravale jednoobrazno. */
+function bezPrefiksa(pathname: string): string {
+  for (const loc of PREFIKSI) {
+    if (pathname === `/${loc}`) return "/";
+    if (pathname.startsWith(`/${loc}/`)) return pathname.slice(loc.length + 1);
+  }
+  return pathname;
+}
+
+// Specijalne rute bez ekstenzije na kojima i18n NE sme da radi (image-gen rute,
+// QR kratki linkovi). API/_next/fajlovi su već isključeni `config.matcher`-om.
+const BEZ_I18N = ["/m", "/opengraph-image", "/twitter-image"];
 
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
@@ -16,18 +38,23 @@ const ZAKLJUCANE_ULAZNE_RUTE = [
   "/zaboravljena-lozinka", "/reset-lozinka",
 ];
 
-const PRESKOCI = [
+// Ulazne (auth) rute koje preskaču proveru prijave, ali i dalje prolaze kroz i18n
+// (treba da se renderuju na izabranom jeziku — Opseg B).
+const PRESKOCI_AUTH = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
-  "/api/", "/_next", "/favicon.ico", "/icon.png",
-  "/kolo-logo.png", "/kolo-icon.png", "/kolo-hero-logo.png", "/nikola-saric.png", "/nikola-saric-mantil.png", "/flags/",
-  // SEO/metadata rute — moraju biti javno dostupne pretraživačima (inače bi
-  // bot pri pristupu /sitemap.xml ili /robots.txt bio preusmeren na /login).
-  "/sitemap.xml", "/robots.txt", "/opengraph-image", "/twitter-image", "/manifest.webmanifest",
 ];
 
 export default async function proxy(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const raw = req.nextUrl.pathname;
+
+  // i18n se ne primenjuje na image-gen/QR rute — propusti kako jeste.
+  if (BEZ_I18N.some((r) => raw === r || raw.startsWith(r + "/"))) {
+    return NextResponse.next();
+  }
+
+  // Rute upoređujemo bez jezičkog prefiksa.
+  const pathname = bezPrefiksa(raw);
 
   if (
     process.env.MAINTENANCE_MODE === "true" &&
@@ -40,18 +67,19 @@ export default async function proxy(req: NextRequest) {
     }
   }
 
-  if (PRESKOCI.some((r) => pathname.startsWith(r))) {
-    return NextResponse.next();
+  // Auth-ulazne i javne rute: bez provere prijave, ali kroz i18n (jezički prefiks).
+  if (PRESKOCI_AUTH.some((r) => pathname === r || pathname.startsWith(r + "/"))) {
+    return intlMiddleware(req);
   }
 
   const isJavna = JAVNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"));
-  if (isJavna) return NextResponse.next();
+  if (isJavna) return intlMiddleware(req);
 
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
   if (!token) {
     const loginUrl = new URL("/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", pathname);
+    loginUrl.searchParams.set("callbackUrl", raw);
     return NextResponse.redirect(loginUrl);
   }
 
@@ -64,11 +92,12 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
-  return NextResponse.next();
+  // Prijavljen i dozvoljen pristup — i dalje kroz i18n (da se postavi locale).
+  return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|icon.png|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|nikola-saric-mantil.png|flags).*)",
-  ],
+  // Isključi API, Next interne putanje i sve fajlove sa ekstenzijom (slike,
+  // sitemap.xml, robots.txt, manifest.webmanifest, favicon.ico…).
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };
