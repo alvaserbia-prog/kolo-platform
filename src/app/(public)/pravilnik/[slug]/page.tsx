@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
-import { promises as fs } from "fs";
-import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
   "kolo-sistem": {
@@ -68,22 +68,23 @@ export default async function PravilnikSlugPage({ params }: Props) {
   const p = PRAVILNICI[slug];
   if (!p) notFound();
 
-  const filePath = path.join(process.cwd(), "nova dokumentacija", p.fajl);
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument(p.fajl, locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
         <p className="text-xs text-kolo-muted mb-1">
-          <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">Pravilnici</Link>
+          <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">{t("pravilnik.pravilnici")}</Link>
           {" / "}
           <span>{p.naziv}</span>
         </p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
           {p.naziv}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija {p.verzija}</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {p.verzija}</p>
       </div>
 
       <article
@@ -113,10 +114,10 @@ export default async function PravilnikSlugPage({ params }: Props) {
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
         <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">
-          ← Svi pravilnici
+          {t("pravilnik.sviPravilnici")}
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
-          Nazad na početnu
+          {t("nazadNaPocetnu")}
         </Link>
       </div>
     </div>

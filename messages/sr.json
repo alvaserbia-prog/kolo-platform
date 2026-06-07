@@ -585,5 +585,62 @@
     "cta_opis": "Registracija je besplatna. Verifikacijom dobijate 1.000 POEN bonus.",
     "cta_registruj": "Registruj se besplatno →",
     "cta_pijaca": "Pogledaj Pijacku"
+  },
+  "pravne": {
+    "eyebrow": "Pravni dokumenti",
+    "dokumentacija": "Dokumentacija",
+    "viditeI": "Vidite i:",
+    "nazadNaPocetnu": "Nazad na početnu",
+    "verzija": "Verzija",
+    "otvoriDokument": "Otvori dokument →",
+    "uslovi": {
+      "naslov": "Uslovi korišćenja KOLO platforme",
+      "ver": "3.7.4"
+    },
+    "privatnost": {
+      "naslov": "Politika privatnosti KOLO platforme",
+      "ver": "3.7.6"
+    },
+    "statut": {
+      "naslov": "Statut KOLO Fondacije",
+      "ver": "3.7.2"
+    },
+    "dpia": {
+      "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
+      "ver": "3.7.5"
+    },
+    "radnjeObrade": {
+      "naslov": "Registar radnji obrade podataka o ličnosti",
+      "ver": "3.7.5"
+    },
+    "rizici": {
+      "naslov": "Izjava o prihvatanju rizika",
+      "ver": "3.7.2"
+    },
+    "whitepaper": {
+      "naslov": "KOLO Whitepaper",
+      "ver": "3.7.6"
+    },
+    "pravilnik": {
+      "naslov": "Pravilnici KOLO sistema",
+      "ver": "3.7.5",
+      "sviPravilnici": "← Svi pravilnici",
+      "pravilnici": "Pravilnici"
+    },
+    "link": {
+      "pravilnik": "Pravilnike",
+      "pravilnikJed": "Pravilnik",
+      "statut": "Statut Fondacije",
+      "privatnost": "Politiku privatnosti",
+      "uslovi": "Uslove korišćenja",
+      "dpia": "DPIA (procena uticaja)",
+      "dpiaKratko": "DPIA",
+      "whitepaper": "Whitepaper",
+      "radnjeObrade": "Registar radnji obrade",
+      "rizici": "Rizici",
+      "zajednickoDobro": "Zajedničko dobro",
+      "oSistemu": "O sistemu (sažetak)",
+      "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
+    }
   }
 }

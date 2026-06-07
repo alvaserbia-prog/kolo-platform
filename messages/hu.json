@@ -585,5 +585,62 @@
     "cta_opis": "A regisztráció ingyenes. Az ellenőrzéssel 1 000 POEN bónuszt kap.",
     "cta_registruj": "Ingyenes regisztráció →",
     "cta_pijaca": "Böngészze a Piacot"
+  },
+  "pravne": {
+    "eyebrow": "Jogi dokumentumok",
+    "dokumentacija": "Dokumentáció",
+    "viditeI": "Lásd még:",
+    "nazadNaPocetnu": "Vissza a főoldalra",
+    "verzija": "Verzió",
+    "otvoriDokument": "Dokumentum megnyitása →",
+    "uslovi": {
+      "naslov": "A KOLO platform felhasználási feltételei",
+      "ver": "3.7.4"
+    },
+    "privatnost": {
+      "naslov": "A KOLO platform adatvédelmi szabályzata",
+      "ver": "3.7.6"
+    },
+    "statut": {
+      "naslov": "A KOLO Alapítvány alapszabálya",
+      "ver": "3.7.2"
+    },
+    "dpia": {
+      "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
+      "ver": "3.7.5"
+    },
+    "radnjeObrade": {
+      "naslov": "Adatkezelési tevékenységek nyilvántartása",
+      "ver": "3.7.5"
+    },
+    "rizici": {
+      "naslov": "Kockázatvállalási nyilatkozat",
+      "ver": "3.7.2"
+    },
+    "whitepaper": {
+      "naslov": "KOLO Whitepaper",
+      "ver": "3.7.6"
+    },
+    "pravilnik": {
+      "naslov": "KOLO rendszer szabályzatai",
+      "ver": "3.7.5",
+      "sviPravilnici": "← Összes szabályzat",
+      "pravilnici": "Szabályzatok"
+    },
+    "link": {
+      "pravilnik": "Szabályzatok",
+      "pravilnikJed": "Szabályzat",
+      "statut": "Alapítvány alapszabálya",
+      "privatnost": "Adatvédelmi szabályzat",
+      "uslovi": "Felhasználási feltételek",
+      "dpia": "DPIA (hatásvizsgálat)",
+      "dpiaKratko": "DPIA",
+      "whitepaper": "Whitepaper",
+      "radnjeObrade": "Adatkezelési nyilvántartás",
+      "rizici": "Kockázati nyilatkozat",
+      "zajednickoDobro": "Közös jó",
+      "oSistemu": "A rendszerről (összefoglaló)",
+      "pravilnikKoloSistem": "KOLO rendszer szabályzata"
+    }
   }
 }

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
 export const metadata: Metadata = pageMetadata({
   title: "Registar radnji obrade — KOLO",
@@ -13,22 +13,23 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function RadnjeObradePage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "radnje_obrade_3_7_5.md");
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument("radnje_obrade_3_7_5.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
+        <p className="text-xs text-kolo-muted mb-1">{t("eyebrow")}</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Registar radnji obrade podataka o ličnosti
+          {t("radnjeObrade.naslov")}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.5</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {t("radnjeObrade.ver")}</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
-          <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
-          <Link href="/dpia" className="text-kolo-green-700 hover:underline">DPIA</Link>
+          <span className="text-kolo-muted">{t("viditeI")}</span>
+          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">{t("link.privatnost")}</Link>
+          <Link href="/dpia" className="text-kolo-green-700 hover:underline">{t("link.dpiaKratko")}</Link>
         </div>
       </div>
 
@@ -59,10 +60,10 @@ export default async function RadnjeObradePage() {
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
         <Link href="/privatnost" className="text-kolo-green-700 hover:underline">
-          ← Politika privatnosti
+          ← {t("link.privatnost")}
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
-          Nazad na početnu
+          {t("nazadNaPocetnu")}
         </Link>
       </div>
     </div>

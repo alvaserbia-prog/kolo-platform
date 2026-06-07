@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
 export const metadata: Metadata = pageMetadata({
   title: "Whitepaper — KOLO",
@@ -13,22 +13,23 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function WhitepaperPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "whitepaper_3_7_6.md");
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument("whitepaper_3_7_6.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Dokumentacija</p>
+        <p className="text-xs text-kolo-muted mb-1">{t("dokumentacija")}</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          KOLO Whitepaper
+          {t("whitepaper.naslov")}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.6</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {t("whitepaper.ver")}</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
-          <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">O sistemu (sažetak)</Link>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
+          <span className="text-kolo-muted">{t("viditeI")}</span>
+          <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">{t("link.oSistemu")}</Link>
+          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">{t("link.pravilnik")}</Link>
         </div>
       </div>
 
@@ -59,10 +60,10 @@ export default async function WhitepaperPage() {
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
         <Link href="/o-sistemu" className="text-kolo-green-700 hover:underline">
-          ← O sistemu (sažetak)
+          ← {t("link.oSistemu")}
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
-          Nazad na početnu
+          {t("nazadNaPocetnu")}
         </Link>
       </div>
     </div>

@@ -585,5 +585,62 @@
     "cta_opis": "Registration is free. Verification gives you 1,000 POEN bonus.",
     "cta_registruj": "Register for free →",
     "cta_pijaca": "Browse the Marketplace"
+  },
+  "pravne": {
+    "eyebrow": "Legal documents",
+    "dokumentacija": "Documentation",
+    "viditeI": "See also:",
+    "nazadNaPocetnu": "Back to home",
+    "verzija": "Version",
+    "otvoriDokument": "Open document →",
+    "uslovi": {
+      "naslov": "KOLO Platform Terms of Use",
+      "ver": "3.7.4"
+    },
+    "privatnost": {
+      "naslov": "KOLO Platform Privacy Policy",
+      "ver": "3.7.6"
+    },
+    "statut": {
+      "naslov": "KOLO Foundation Statute",
+      "ver": "3.7.2"
+    },
+    "dpia": {
+      "naslov": "DPIA — Data Protection Impact Assessment",
+      "ver": "3.7.5"
+    },
+    "radnjeObrade": {
+      "naslov": "Register of Processing Activities",
+      "ver": "3.7.5"
+    },
+    "rizici": {
+      "naslov": "Risk Acceptance Statement",
+      "ver": "3.7.2"
+    },
+    "whitepaper": {
+      "naslov": "KOLO Whitepaper",
+      "ver": "3.7.6"
+    },
+    "pravilnik": {
+      "naslov": "KOLO System Rulebooks",
+      "ver": "3.7.5",
+      "sviPravilnici": "← All rulebooks",
+      "pravilnici": "Rulebooks"
+    },
+    "link": {
+      "pravilnik": "Rulebooks",
+      "pravilnikJed": "Rulebook",
+      "statut": "Foundation Statute",
+      "privatnost": "Privacy Policy",
+      "uslovi": "Terms of Use",
+      "dpia": "DPIA (impact assessment)",
+      "dpiaKratko": "DPIA",
+      "whitepaper": "Whitepaper",
+      "radnjeObrade": "Register of Processing Activities",
+      "rizici": "Risk Statement",
+      "zajednickoDobro": "Common good",
+      "oSistemu": "About the system (summary)",
+      "pravilnikKoloSistem": "KOLO System Rulebook"
+    }
   }
 }
