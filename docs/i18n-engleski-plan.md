@@ -43,6 +43,32 @@ van i18n (API/notifikacije/faq-data), (4) migracija `User.jezik`.
 
 ---
 
+## ⚠️ KRITIČAN NALAZ (2026-06-07) — pretpostavka „UI je preveden" NE VAŽI
+
+Ćirilica radi preko **runtime DOM transliteracije** (`CirilicaProvider`, `lat2cyr`):
+deterministička mapa slovo-u-slovo, BEZ vađenja stringova. **Engleski to ne može** —
+prevod traži stvarni izvučen tekst u i18n.
+
+Verifikovano stanje:
+- Samo **15 od 112** `.tsx` fajlova koristi `useTranslations`/`getTranslations`.
+- **85 fajlova** ima **~925 linija vidljivog srpskog teksta hardkodovanog u JSX** (van i18n).
+- **0 od 17** javnih pravnih stranica koristi i18n (sav sadržaj hardkodovan srpski).
+- `messages/en.json` (549 ključeva) pokriva SAMO onih ~15 i18n-iziranih fajlova.
+
+**Posledica:** uska grla NIJE prevod (jeftin), nego **vađenje ~925 linija iz 85 fajlova u i18n**
+— veliki mehanički refaktor preko skoro cele aplikacije, sa rizikom build-loma. Ovo je pravi
+trošak engleske verzije koji je transliteracioni trik sakrio.
+
+**Izbor opsega (čeka odluku vlasnika):**
+- **Opseg A — Cela aplikacija:** izvući svih ~925 linija iz 85 fajlova + 17 pravnih dokumenata.
+  Najpotpunije, ali najveći obim/rizik; ide fajl-po-fajl preko pod-agenata uz build-provere.
+- **Opseg B — Samo javna/SEO površina (preporuka):** pošto je `/en/` motivisan SEO-om, izvući i
+  prevesti samo javne stranice (landing, `(public)/*`, pravni dokumenti, auth/registracija/login).
+  Autentifikovana aplikacija (`(app)/*`) ostaje srpska zasad, i18n-izuje se inkrementalno kasnije.
+  Postiže SEO cilj uz daleko manji obim i rizik.
+
+---
+
 ## Faze izvršenja
 
 Svaka faza = zasebna sesija/PR. Označi `[x]` kad je gotova i navedi commit hash.
