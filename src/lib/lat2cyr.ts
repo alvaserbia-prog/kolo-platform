@@ -29,6 +29,12 @@ const BELA_LISTA = [
 const BELA_LISTA_OBRASCI: RegExp[] = [
   // freelancer, freelanceri, freelancera, freelancerima… → ostaje latinica.
   /\bfreelancer[a-z]*\b/gi,
+  // blockchain, blockchaina, blockchainu… → ostaje latinica.
+  /\bblockchain[a-z]*\b/gi,
+  // open source / opensource / open-source (+ nastavci) → ostaje latinica.
+  /\bopen[\s-]?source[a-z]*\b/gi,
+  // email / e-mail (+ nastavci) — sama reč ostaje latinica (adrese su već zaštićene).
+  /\be-?mail[a-z]*\b/gi,
 ];
 
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
