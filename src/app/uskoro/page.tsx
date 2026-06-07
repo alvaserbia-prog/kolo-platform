@@ -42,6 +42,12 @@ export default function UskoroPage() {
               Nazad na početnu
             </Link>
           </div>
+
+          <p className="mt-8 text-xs text-white/50">
+            <Link href="/rani-pristup" className="hover:text-white/80 hover:underline">
+              Imaš pristupni kod?
+            </Link>
+          </p>
         </section>
       </div>
     </div>
