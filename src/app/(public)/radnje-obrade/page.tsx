@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Registar radnji obrade — KOLO",
-  description: "Registar radnji obrade podataka o ličnosti, verzija 3.7.5",
-  path: "/radnje-obrade",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_radnje_title"),
+    description: t("meta_radnje_desc"),
+    path: "/radnje-obrade",
+  });
+}
 
 export default async function RadnjeObradePage() {
   const locale = await getLocale();

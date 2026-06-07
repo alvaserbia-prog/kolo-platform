@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "DPIA — KOLO",
-  description: "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.5",
-  path: "/dpia",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_dpia_title"),
+    description: t("meta_dpia_desc"),
+    path: "/dpia",
+  });
+}
 
 export default async function DPIAPage() {
   const locale = await getLocale();

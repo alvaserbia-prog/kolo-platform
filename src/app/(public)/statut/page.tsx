@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Statut KOLO Fondacije — KOLO",
-  description: "Statut KOLO Fondacije, verzija 3.7.2",
-  path: "/statut",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_statut_title"),
+    description: t("meta_statut_desc"),
+    path: "/statut",
+  });
+}
 
 export default async function StatutPage() {
   const locale = await getLocale();

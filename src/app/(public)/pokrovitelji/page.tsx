@@ -2,13 +2,16 @@ import { prisma } from "@/lib/prisma";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 
-export const metadata = pageMetadata({
-  title: "Pokrovitelji — KOLO",
-  description:
-    "Pokrovitelji KOLO zajednice — pravna lica i preduzetnici koji doprinosom Fondaciji (novac, roba ili usluge) podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
-  path: "/pokrovitelji",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pokroviteljPage");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/pokrovitelji",
+  });
+}
 
 export default async function PokroviteljiPage() {
   const t = await getTranslations("pokroviteljPage");

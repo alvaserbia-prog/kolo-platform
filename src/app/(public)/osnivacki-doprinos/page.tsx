@@ -4,13 +4,16 @@ import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
 import { pageMetadata } from "@/lib/seo";
 import { getTranslations, getLocale } from "next-intl/server";
+import type { Metadata } from "next";
 
-export const metadata = pageMetadata({
-  title: "Osnivački doprinos — KOLO",
-  description:
-    "Osnivački doprinos KOLO sistema — naknadno evidentiranje rada na pripremi platforme. Pratite stanje kanala, izvršene korake i raspodelu POEN-a među osnivačima.",
-  path: "/osnivacki-doprinos",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("osnivackiDoprinosPage");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/osnivacki-doprinos",
+  });
+}
 
 export default async function OsnivackiDoprinosPage() {
   const t = await getTranslations("osnivackiDoprinosPage");

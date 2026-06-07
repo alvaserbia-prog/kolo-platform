@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Politika privatnosti — KOLO",
-  description: "Politika privatnosti KOLO platforme, verzija 3.7.6",
-  path: "/privatnost",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_privatnost_title"),
+    description: t("meta_privatnost_desc"),
+    path: "/privatnost",
+  });
+}
 
 export default async function PolitikaPrivatnostiPage() {
   const locale = await getLocale();

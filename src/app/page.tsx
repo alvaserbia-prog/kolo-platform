@@ -9,18 +9,16 @@ import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 import { getTranslations, getLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
-  description:
-    "KOLO je sistem evidencije doprinosa zajedničkom dobru. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje sistem oblikuju.",
-  openGraph: {
-    title: "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
-    description: "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. POEN beleži šta si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno.",
-    locale: "sr_RS",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("landing");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/",
+  });
+}
 
 async function getPijacaPreview() {
   try {

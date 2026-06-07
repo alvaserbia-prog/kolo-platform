@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Whitepaper — KOLO",
-  description: "KOLO Whitepaper, verzija 3.7.6",
-  path: "/whitepaper",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_whitepaper_title"),
+    description: t("meta_whitepaper_desc"),
+    path: "/whitepaper",
+  });
+}
 
 export default async function WhitepaperPage() {
   const locale = await getLocale();

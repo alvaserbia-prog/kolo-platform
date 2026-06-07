@@ -641,7 +641,23 @@
       "zajednickoDobro": "Common good",
       "oSistemu": "About the system (summary)",
       "pravilnikKoloSistem": "KOLO System Rulebook"
-    }
+    },
+    "meta_uslovi_title": "Terms of Use — KOLO",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 3.7.4",
+    "meta_privatnost_title": "Privacy Policy — KOLO",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 3.7.6",
+    "meta_statut_title": "KOLO Foundation Statute — KOLO",
+    "meta_statut_desc": "KOLO Foundation Statute, version 3.7.2",
+    "meta_dpia_title": "DPIA — KOLO",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 3.7.5",
+    "meta_radnje_title": "Register of Processing Activities — KOLO",
+    "meta_radnje_desc": "Register of personal data processing activities, version 3.7.5",
+    "meta_rizici_title": "Risk Acceptance Statement — KOLO",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 3.7.2",
+    "meta_whitepaper_title": "Whitepaper — KOLO",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 3.7.6",
+    "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.7.5"
   },
   "javneKomponente": {
     "nav_fooldal": "Home",
@@ -684,6 +700,8 @@
     "footer_zajednicko_dobro_link": "Common good and licences"
   },
   "landing": {
+    "meta_title": "KOLO — A mutuality system you build with your community",
+    "meta_desc": "KOLO is a common-good contribution ledger. POEN records what you give to your community. ZRNO gives you a voice in the decisions that shape the system.",
     "hero_naslov": "People count in the economy too",
     "hero_podnaslov": "Records work, goods and knowledge we contribute to each other and the community — without intermediaries. Every contribution is recorded. Including yours.",
     "hero_cta_priduzi": "Join free",
@@ -757,6 +775,8 @@
     "cta_saznaj": "Learn more"
   },
   "oNama": {
+    "meta_title": "About us — KOLO Foundation",
+    "meta_desc": "Nikola Šarić, a doctor from Sombor, has spent fifteen years building a system of exchange of labour and goods without intermediaries. The story of KOLO, the Foundation and an invitation to participate.",
     "hero_tag": "KOLO Foundation · Sombor",
     "hero_naslov": "Nikola Šarić",
     "hero_opis": "A doctor from Sombor who has spent fifteen years building a system of exchange of labour and goods without intermediaries. This is that story and an invitation to build this system together.",
@@ -876,6 +896,8 @@
     "uzivo": "live"
   },
   "oSistemu": {
+    "meta_title": "About the system — KOLO",
+    "meta_desc": "KOLO records what we contribute to our community — labour, goods and knowledge — and preserves it as a common good, within the framework of the social and solidarity economy.",
     "hero_tag": "Conceptual framework",
     "hero_naslov": "About the system",
     "hero_opis": "KOLO records what we contribute to the community — labour, goods and knowledge — and keeps it as a common good.",
@@ -999,6 +1021,8 @@
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "kakoFunkcionisePage": {
+    "meta_title": "How KOLO works — detailed system rules",
+    "meta_desc": "KOLO is a social network for economic exchange. Become a member, six ways to record POEN, system architecture, legal nature of transactions and everything you need to know.",
     "hero_tag": "Detailed version",
     "hero_naslov": "How does KOLO work?",
     "hero_opis": "User guide",
@@ -1082,6 +1106,8 @@
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "pokroviteljPage": {
+    "meta_title": "Sponsors — KOLO",
+    "meta_desc": "KOLO community sponsors — legal entities and entrepreneurs who support the system by contributing to the Foundation (money, goods or services). View active sponsors and their tiers.",
     "naslov": "Sponsors",
     "opis": "Sponsors are legal entities and organisations that support the KOLO community through sponsorships and donations. Their owners — verified platform members — receive POEN bonuses proportional to the cumulative contribution.",
     "nivo": "Tier",
@@ -1095,6 +1121,8 @@
     "vrsta_usluge": "Services"
   },
   "zajednickoDobroPage": {
+    "meta_title": "Common good and licences — KOLO",
+    "meta_desc": "KOLO system common good — software under AGPL-3.0 and content under CC BY-SA 4.0. A collective good belonging to all users over which no one holds a property right.",
     "naslov": "Common good and licences",
     "opis": "The common good of the KOLO system comprises the system software, system rules, the contribution and participation ledger, and content created within the system. It is the collective property of all users — no user, founder or the Foundation holds a property right over it (art. 4–5 of the Regulations).",
     "softver_naslov": "Software — AGPL-3.0",
@@ -1118,6 +1146,8 @@
     "cta_saznaj": "About the system"
   },
   "osnivackiDoprinosPage": {
+    "meta_title": "Founding contribution — KOLO",
+    "meta_desc": "KOLO founding contribution — retrospective recording of preparatory work on the platform. Track channel status, completed steps and POEN distribution among founders.",
     "naslov": "Founding contribution",
     "opis": "The founding contribution is the retrospective recording of work carried out on the design and preparation of the KOLO system before the platform opened.",
     "stanje_naslov": "Channel status",
@@ -1136,6 +1166,8 @@
     "registar_prazan": "The founders register has not yet been published."
   },
   "cestoPage": {
+    "meta_title": "Frequently asked questions — KOLO",
+    "meta_desc": "Answers to the most common questions about the KOLO system — POEN, ZRNO, verification, Protocol, Foundation and the marketplace.",
     "naslov": "Frequently asked questions",
     "opis": "Answers to the most common questions about the KOLO system. Click on a question to expand the answer, or search by keyword.",
     "pretraga_placeholder": "Search questions…",

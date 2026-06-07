@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Uslovi korišćenja — KOLO",
-  description: "Uslovi korišćenja KOLO platforme, verzija 3.7.4",
-  path: "/uslovi",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_uslovi_title"),
+    description: t("meta_uslovi_desc"),
+    path: "/uslovi",
+  });
+}
 
 export default async function UsloviPage() {
   const locale = await getLocale();

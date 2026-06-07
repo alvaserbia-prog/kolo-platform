@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
+import { pageMetadata } from "@/lib/seo";
 
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
   "kolo-sistem": {
@@ -53,10 +54,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = PRAVILNICI[slug];
   if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
-  return {
+  return pageMetadata({
     title: `${p.naziv} — KOLO`,
     description: `${p.naziv}, verzija ${p.verzija}. ${p.opis}`,
-  };
+    path: `/pravilnik/${slug}`,
+  });
 }
 
 export async function generateStaticParams() {

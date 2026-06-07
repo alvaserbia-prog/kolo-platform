@@ -3,14 +3,15 @@ import Script from "next/script";
 import FaqStranica from "@/components/FaqStranica";
 import { getFaqSekcije } from "@/lib/faq-data";
 import { getTranslations, getLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("cestoPage");
-  return {
-    title: t("naslov"),
-    description: t("opis"),
-    alternates: { canonical: "/cesto-postavljena-pitanja" },
-  };
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/cesto-postavljena-pitanja",
+  });
 }
 
 /** Pretvara markdown odgovor u čist tekst za FAQPage schema (Google traži plain). */

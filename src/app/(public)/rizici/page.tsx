@@ -6,11 +6,14 @@ import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Izjava o prihvatanju rizika — KOLO",
-  description: "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.2",
-  path: "/rizici",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_rizici_title"),
+    description: t("meta_rizici_desc"),
+    path: "/rizici",
+  });
+}
 
 export default async function RiziciPage() {
   const locale = await getLocale();

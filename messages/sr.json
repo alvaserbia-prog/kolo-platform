@@ -641,7 +641,23 @@
       "zajednickoDobro": "Zajedničko dobro",
       "oSistemu": "O sistemu (sažetak)",
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
-    }
+    },
+    "meta_uslovi_title": "Uslovi korišćenja — KOLO",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 3.7.4",
+    "meta_privatnost_title": "Politika privatnosti — KOLO",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 3.7.6",
+    "meta_statut_title": "Statut KOLO Fondacije — KOLO",
+    "meta_statut_desc": "Statut KOLO Fondacije, verzija 3.7.2",
+    "meta_dpia_title": "DPIA — KOLO",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.5",
+    "meta_radnje_title": "Registar radnji obrade — KOLO",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 3.7.5",
+    "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.2",
+    "meta_whitepaper_title": "Whitepaper — KOLO",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 3.7.6",
+    "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.7.5"
   },
   "javneKomponente": {
     "nav_fooldal": "Pocetna",
@@ -684,6 +700,8 @@
     "footer_zajednicko_dobro_link": "Zajedničko dobro i licence"
   },
   "landing": {
+    "meta_title": "KOLO — Sistem uzajamnosti koji gradiš sa svojom zajednicom",
+    "meta_desc": "KOLO je sistem evidencije doprinosa zajedničkom dobru. POEN beleži šta si dao zajednici. ZRNO ti daje glas u odlukama koje sistem oblikuju.",
     "hero_naslov": "Udružimo snage u svom kraju",
     "hero_podnaslov": "kroz razmenu rada, dobara i znanja — bez posrednika.\nSvaki doprinos se beleži. I tvoj.",
     "hero_cta_priduzi": "Otvori nalog besplatno",
@@ -757,6 +775,8 @@
     "cta_saznaj": "Prati razvoj →"
   },
   "oNama": {
+    "meta_title": "O nama — KOLO Fondacija",
+    "meta_desc": "Nikola Šarić, lekar iz Sombora, petnaest godina gradi sistem razmene rada i dobara bez posrednika. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
     "hero_tag": "KOLO Fondacija · Sombor",
     "hero_naslov": "Nikola Šarić",
     "hero_opis": "Lekar iz Sombora koji već petnaest godina gradi sistem razmene rada i dobara bez posrednika. Ovo je priča o tome i poziv da ovaj sistem gradimo zajedno.",
@@ -876,6 +896,8 @@
     "uzivo": "uživo"
   },
   "oSistemu": {
+    "meta_title": "O sistemu — KOLO",
+    "meta_desc": "KOLO beleži ono čime doprinosimo zajednici — rad, dobra i znanje — i čuva to kao zajedničko dobro, u okviru socijalne i solidarne ekonomije.",
     "hero_tag": "Konceptualni okvir",
     "hero_naslov": "O sistemu",
     "hero_opis": "KOLO beleži ono čime doprinosimo zajednici — rad, dobra i znanje — i čuva to kao zajedničko dobro.",
@@ -999,6 +1021,8 @@
     "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence"
   },
   "kakoFunkcionisePage": {
+    "meta_title": "Kako funkcioniše KOLO — detaljna pravila sistema",
+    "meta_desc": "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, šest načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
     "hero_tag": "Detaljna verzija",
     "hero_naslov": "Kako funkcionise KOLO?",
     "hero_opis": "Uputstvo za korišćenje",
@@ -1082,6 +1106,8 @@
     "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence"
   },
   "pokroviteljPage": {
+    "meta_title": "Pokrovitelji — KOLO",
+    "meta_desc": "Pokrovitelji KOLO zajednice — pravna lica i preduzetnici koji doprinosom Fondaciji (novac, roba ili usluge) podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
     "naslov": "Pokrovitelji",
     "opis": "Pokrovitelji su pravna lica i organizacije koje podržavaju KOLO zajednicu sponzorstvima i donacijama.",
     "nivo": "Nivo",
@@ -1095,6 +1121,8 @@
     "vrsta_usluge": "Usluge"
   },
   "zajednickoDobroPage": {
+    "meta_title": "Zajedničko dobro i licence — KOLO",
+    "meta_desc": "Zajedničko dobro KOLO sistema — softver pod AGPL-3.0 i sadržaj pod CC BY-SA 4.0. Kolektivno dobro svih korisnika nad kojim niko nema svojinsko pravo.",
     "naslov": "Zajedničko dobro i licence",
     "opis": "Zajedničko dobro KOLO sistema čine softver sistema, pravila sistema, evidencija doprinosa i učešća, i sadržaj nastao u sistemu.",
     "softver_naslov": "Softver — AGPL-3.0",
@@ -1118,6 +1146,8 @@
     "cta_saznaj": "O sistemu"
   },
   "osnivackiDoprinosPage": {
+    "meta_title": "Osnivački doprinos — KOLO",
+    "meta_desc": "Osnivački doprinos KOLO sistema — naknadno evidentiranje rada na pripremi platforme. Pratite stanje kanala, izvršene korake i raspodelu POEN-a među osnivačima.",
     "naslov": "Osnivački doprinos",
     "opis": "Osnivački doprinos je naknadno evidentiranje rada obavljenog na projektovanju i pripremi KOLO sistema pre otvaranja platforme.",
     "stanje_naslov": "Stanje kanala",
@@ -1136,6 +1166,8 @@
     "col_datum": "Datum"
   },
   "cestoPage": {
+    "meta_title": "Često postavljana pitanja — KOLO",
+    "meta_desc": "Odgovori na najčešća pitanja o KOLO sistemu — POEN, ZRNO, verifikacija, Protokol, Fondacija i pijaca.",
     "naslov": "Često postavljana pitanja",
     "opis": "Odgovori na najčešća pitanja o KOLO sistemu.",
     "pretraga_placeholder": "Pretraži pitanja…",

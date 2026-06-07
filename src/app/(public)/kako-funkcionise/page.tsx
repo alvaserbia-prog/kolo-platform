@@ -6,12 +6,14 @@ import { pageMetadata } from "@/lib/seo";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Kako funkcioniše KOLO — detaljna pravila sistema",
-  description:
-    "KOLO je društvena mreža za ekonomsku razmenu. Postani korisnik, šest načina upisa POEN-a, arhitektura sistema, pravna priroda transakcija i sve što trebaš znati o sistemu.",
-  path: "/kako-funkcionise",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("kakoFunkcionisePage");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/kako-funkcionise",
+  });
+}
 
 export default async function KakoFunkcionisePage() {
   const locale = await getLocale();

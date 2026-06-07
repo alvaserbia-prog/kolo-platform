@@ -641,7 +641,23 @@
       "zajednickoDobro": "Közös jó",
       "oSistemu": "A rendszerről (összefoglaló)",
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
-    }
+    },
+    "meta_uslovi_title": "Felhasználási feltételek — KOLO",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 3.7.4-es verzió",
+    "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 3.7.6-os verzió",
+    "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
+    "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 3.7.2-es verzió",
+    "meta_dpia_title": "DPIA — KOLO",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 3.7.5-ös verzió",
+    "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 3.7.5-ös verzió",
+    "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 3.7.2-es verzió",
+    "meta_whitepaper_title": "Whitepaper — KOLO",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 3.7.6-os verzió",
+    "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 3.7.5-ös verzió"
   },
   "javneKomponente": {
     "nav_fooldal": "Kezdőlap",
@@ -684,6 +700,8 @@
     "footer_zajednicko_dobro_link": "Közjó és licencek"
   },
   "landing": {
+    "meta_title": "KOLO — Kölcsönösségi rendszer, amelyet közösségeddel együtt építesz",
+    "meta_desc": "A KOLO a közjóhoz való hozzájárulás nyilvántartója. A POEN rögzíti, amit a közösségnek adsz. A ZRNO szavazati jogot ad a rendszert alakító döntésekben.",
     "hero_naslov": "A gazdaságban az emberek is",
     "hero_podnaslov": "Nyilvántartja a munkát, javakat és tudást, amellyel egymásnak és a közösségnek hozzájárulunk.",
     "hero_cta_priduzi": "Csatlakozás",
@@ -757,6 +775,8 @@
     "cta_saznaj": "Tudj meg többet"
   },
   "oNama": {
+    "meta_title": "Rólunk — KOLO Alapítvány",
+    "meta_desc": "Nikola Šarić, sombori orvos, tizenöt éve épít közvetítők nélküli munka- és árucsere-rendszert. A KOLO-ról, az Alapítványról és a részvételre szóló meghívóról.",
     "hero_tag": "KOLO Alapítvány · Szabadka körzete / Sombor",
     "hero_naslov": "Nikola Šarić",
     "hero_opis": "Sombori orvos, aki tizenöt éve épít egy közvetítők nélküli munka- és árucsere-rendszert. Ez az ő története és egyben meghívó, hogy együtt építsük tovább.",
@@ -876,6 +896,8 @@
     "uzivo": "élő"
   },
   "oSistemu": {
+    "meta_title": "A rendszerről — KOLO",
+    "meta_desc": "A KOLO rögzíti, amivel a közösséghez hozzájárulunk — munkával, javakkal és tudással — és azt közjóként őrzi meg a szociális és szolidáris gazdaság keretein belül.",
     "hero_tag": "Fogalmi keret",
     "hero_naslov": "A rendszerről",
     "hero_opis": "A KOLO rögzíti, amivel hozzájárulunk a közösséghez — munka, áruk és tudás — és ezt közjóként őrzi meg.",
@@ -999,6 +1021,8 @@
     "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek"
   },
   "kakoFunkcionisePage": {
+    "meta_title": "Hogyan működik a KOLO — részletes rendszerszabályok",
+    "meta_desc": "A KOLO gazdasági cserére szolgáló közösségi hálózat. Légy tag, hat módszer a POEN rögzítésére, rendszerarchitektúra és minden, amit tudni érdemes.",
     "hero_tag": "Detailed version",
     "hero_naslov": "How does KOLO work?",
     "hero_opis": "User guide",
@@ -1082,6 +1106,8 @@
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "pokroviteljPage": {
+    "meta_title": "Pártfogók — KOLO",
+    "meta_desc": "A KOLO közösség pártfogói — jogi személyek és vállalkozók, akik az Alapítványhoz való hozzájárulással (pénz, áru vagy szolgáltatás) támogatják a rendszert.",
     "naslov": "Pártfogók",
     "opis": "Szervezetek és vállalkozók, akik a KOLO rendszert támogatják",
     "prazno_naslov": "Még nincsenek pártfogók",
@@ -1095,6 +1121,8 @@
     "vrsta_usluge": "Szolgáltatás"
   },
   "zajednickoDobroPage": {
+    "meta_title": "Közjó és licenszek — KOLO",
+    "meta_desc": "A KOLO rendszer közjava — szoftver AGPL-3.0 alatt, tartalom CC BY-SA 4.0 alatt. Minden felhasználó kollektív java, amelyre senkinek nincs tulajdonjoga.",
     "naslov": "Közjó és licenszek",
     "opis": "A KOLO nyílt forráskód és szabad tartalom elvein alapul",
     "softver_naslov": "Szoftver – AGPL-3.0",
@@ -1118,6 +1146,8 @@
     "cta_saznaj": "A rendszerről"
   },
   "osnivackiDoprinosPage": {
+    "meta_title": "Alapítói hozzájárulás — KOLO",
+    "meta_desc": "KOLO alapítói hozzájárulás — a platform előkészítésén végzett munka utólagos rögzítése. Kövesse a csatorna állapotát, az elvégzett lépéseket és a POEN-elosztást.",
     "naslov": "Alapítói hozzájárulás",
     "opis": "Az indulás előtti munka utólagos rögzítése",
     "stanje_naslov": "Az alapítói csatorna állapota",
@@ -1136,6 +1166,8 @@
     "col_datum": "Dátum"
   },
   "cestoPage": {
+    "meta_title": "Gyakran ismételt kérdések — KOLO",
+    "meta_desc": "Válaszok a KOLO rendszerrel kapcsolatos leggyakoribb kérdésekre — POEN, ZRNO, ellenőrzés, Protokoll, Alapítvány és a piac.",
     "naslov": "Gyakran ismételt kérdések",
     "opis": "A KOLO rendszerrel kapcsolatos leggyakoribb kérdések és válaszok",
     "pretraga_placeholder": "Keresés a kérdések között...",

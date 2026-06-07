@@ -6,12 +6,14 @@ import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
 import { getLocale, getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = pageMetadata({
-  title: "O nama — KOLO Fondacija",
-  description:
-    "Nikola Šarić, lekar iz Sombora, petnaest godina gradi sistem razmene rada i dobara bez posrednika. Priča o KOLO-u, Fondaciji i pozivu na učešće.",
-  path: "/o-nama",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("oNama");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/o-nama",
+  });
+}
 
 function DokumentRed({ naziv, href, zivoLabel }: { naziv: string; href: string; zivoLabel?: string }) {
   const eksterni = href.startsWith("http");

@@ -1,12 +1,15 @@
 import { pageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 
-export const metadata = pageMetadata({
-  title: "Zajedničko dobro i licence — KOLO",
-  description:
-    "Zajedničko dobro KOLO sistema — softver pod AGPL-3.0 i sadržaj pod CC BY-SA 4.0. Kolektivno dobro svih korisnika nad kojim niko nema svojinsko pravo.",
-  path: "/zajednicko-dobro",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("zajednickoDobroPage");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/zajednicko-dobro",
+  });
+}
 
 export default async function ZajednickoDobroPage() {
   const t = await getTranslations("zajednickoDobroPage");

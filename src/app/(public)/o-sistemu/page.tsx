@@ -5,12 +5,14 @@ import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
 import { getLocale, getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = pageMetadata({
-  title: "O sistemu — KOLO",
-  description:
-    "KOLO beleži ono čime doprinosimo zajednici — rad, dobra i znanje — i čuva to kao zajedničko dobro, u okviru socijalne i solidarne ekonomije.",
-  path: "/o-sistemu",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("oSistemu");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/o-sistemu",
+  });
+}
 
 export default async function OSistemuPage() {
   const locale = await getLocale();

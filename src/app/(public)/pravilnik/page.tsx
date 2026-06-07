@@ -3,11 +3,14 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Pravilnici KOLO sistema — KOLO",
-  description: "Indeks pravilnika KOLO sistema, verzija 3.7.5",
-  path: "/pravilnik",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_pravilnik_title"),
+    description: t("meta_pravilnik_desc"),
+    path: "/pravilnik",
+  });
+}
 
 const PRAVILNICI = [
   {
