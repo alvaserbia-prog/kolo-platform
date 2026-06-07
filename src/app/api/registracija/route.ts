@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
+import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
 
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
@@ -14,7 +15,10 @@ function generateMemberHash(): string {
 
 export async function POST(req: NextRequest) {
   try {
-    if (process.env.MAINTENANCE_MODE === "true") {
+    if (
+      process.env.MAINTENANCE_MODE === "true" &&
+      !validanRaniPristup(req.cookies.get(RANI_PRISTUP_COOKIE)?.value)
+    ) {
       return NextResponse.json(
         { error: "Registracija je trenutno onemogućena. Platforma se priprema za pokretanje." },
         { status: 503 },
