@@ -23,6 +23,14 @@ const BELA_LISTA = [
   "Next.js", "TypeScript", "PostgreSQL", "Whitepaper",
 ];
 
+// Strane reči (pozajmljenice) koje ostaju u latinici u SVIM padežnim oblicima.
+// Obrasci su case-insensitive; originalni oblik se očuva (maskiranje vraća tekst
+// doslovno). Dodaj koren reči ovde da pokriješ sve nastavke odjednom.
+const BELA_LISTA_OBRASCI: RegExp[] = [
+  // freelancer, freelanceri, freelancera, freelancerima… → ostaje latinica.
+  /\bfreelancer[a-z]*\b/gi,
+];
+
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
 // „nad-" + „živeti", ili strane reči. Preslikavaju se kao cela reč.
 // Lista je proširiva; za rečnik ove platforme praktično se ne aktivira.
@@ -122,6 +130,11 @@ export function lat2cyr(input: string): string {
   // 2) Maskiraj reči iz bele liste (kao cele reči, case-sensitive po unosu).
   for (const token of BELA_LISTA) {
     const re = new RegExp(`(?<![\\wčćšžđ])${escapeRe(token)}(?![\\wčćšžđ])`, "g");
+    s = s.replace(re, masc);
+  }
+
+  // 2b) Maskiraj obrasce pozajmljenica (sve padežne varijante, case-insensitive).
+  for (const re of BELA_LISTA_OBRASCI) {
     s = s.replace(re, masc);
   }
 

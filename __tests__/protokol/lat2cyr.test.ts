@@ -61,6 +61,11 @@ describe("lat2cyr — zaštićeni tokeni", () => {
     expect(lat2cyr("Skeniraj QR kod")).toBe("Скенирај QR код");
     expect(lat2cyr("Iznos u RSD")).toBe("Износ у RSD");
   });
+  it("pozajmljenica freelancer ostaje latinica u svim padežima", () => {
+    expect(lat2cyr("Programeri i freelanceri")).toBe("Програмери и freelanceri");
+    expect(lat2cyr("za freelancera")).toBe("за freelancera");
+    expect(lat2cyr("Freelancerima")).toBe("Freelancerima");
+  });
 });
 
 describe("lat2cyr — brojevi i interpunkcija", () => {
