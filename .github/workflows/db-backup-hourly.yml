@@ -27,9 +27,9 @@ jobs:
         run: |
           sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
           curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql-client-17
-          pg_dump --version
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+          /usr/lib/postgresql/17/bin/pg_dump --version
 
       - name: Napravi dump
         env:
@@ -43,7 +43,7 @@ jobs:
           echo "STAMP=$STAMP" >> "$GITHUB_ENV"
           # -Fc = custom format (kompresovan, vraća se sa pg_restore)
           # --no-owner/--no-privileges = restore u svež branch ne pada na role/grant
-          pg_dump --no-owner --no-privileges -Fc "$DATABASE_URL" -f "kolo-$STAMP.dump"
+          /usr/lib/postgresql/17/bin/pg_dump --no-owner --no-privileges -Fc "$DATABASE_URL" -f "kolo-$STAMP.dump"
           ls -lh "kolo-$STAMP.dump"
 
       - name: Otpremi bekap (artifact)

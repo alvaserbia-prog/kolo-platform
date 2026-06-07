@@ -61,6 +61,18 @@ describe("lat2cyr — zaštićeni tokeni", () => {
     expect(lat2cyr("Skeniraj QR kod")).toBe("Скенирај QR код");
     expect(lat2cyr("Iznos u RSD")).toBe("Износ у RSD");
   });
+  it("pozajmljenica freelancer ostaje latinica u svim padežima", () => {
+    expect(lat2cyr("Programeri i freelanceri")).toBe("Програмери и freelanceri");
+    expect(lat2cyr("za freelancera")).toBe("за freelancera");
+    expect(lat2cyr("Freelancerima")).toBe("Freelancerima");
+  });
+  it("blockchain, open source i email ostaju latinica", () => {
+    expect(lat2cyr("Koristi blockchain tehnologiju")).toBe("Користи blockchain технологију");
+    expect(lat2cyr("Softver je open source")).toBe("Софтвер је open source");
+    expect(lat2cyr("Projekat je opensource danas")).toBe("Пројекат је opensource данас");
+    expect(lat2cyr("Pošalji email odmah")).toBe("Пошаљи email одмах");
+    expect(lat2cyr("Tvoj e-mail je bitan")).toBe("Твој e-mail је битан");
+  });
 });
 
 describe("lat2cyr — brojevi i interpunkcija", () => {
