@@ -264,7 +264,7 @@ export default async function Home() {
               {
                 ikona: "🏠",
                 naslov: "Domaća proizvodnja i ručni rad",
-                opis: "Ponudi zimnice, peciva i ručni rad u svom kraju — i razmeni sa komšinicama za ono što tebi treba.",
+                opis: "Ponudi zimnicu, peciva i ručni rad u svom kraju — i razmeni sa komšinicama za ono što tebi treba.",
                 poenta: "Kućni rad postaje vidljiv kao doprinos zajednici.",
               },
               {

@@ -1,0 +1,55 @@
+name: db-backup-hourly
+
+# Eksterni (off-Neon) bekap baze svakog punog sata.
+# Dump se čuva kao GitHub artifact 14 dana. Dopuna Neon PITR-u (instant restore),
+# ne zamena — ovo je kopija koja preživi i gubitak Neon naloga.
+
+on:
+  schedule:
+    - cron: "0 * * * *" # svaki pun sat, UTC (GH cron je uvek UTC)
+  workflow_dispatch: {} # dugme za ručno pokretanje / test
+
+permissions:
+  contents: read
+
+concurrency:
+  group: db-backup
+  cancel-in-progress: false
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Instaliraj pg_dump 17 (PGDG)
+        # Noviji pg_dump radi protiv starijeg servera; instaliramo 17 da nema
+        # "server version mismatch" greške bez obzira na Neon verziju.
+        run: |
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17
+          pg_dump --version
+
+      - name: Napravi dump
+        env:
+          DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::Nedostaje secret BACKUP_DATABASE_URL"; exit 1
+          fi
+          STAMP=$(date -u +'%Y-%m-%dT%H-%M-%SZ')
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+          # -Fc = custom format (kompresovan, vraća se sa pg_restore)
+          # --no-owner/--no-privileges = restore u svež branch ne pada na role/grant
+          pg_dump --no-owner --no-privileges -Fc "$DATABASE_URL" -f "kolo-$STAMP.dump"
+          ls -lh "kolo-$STAMP.dump"
+
+      - name: Otpremi bekap (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ env.STAMP }}
+          path: kolo-*.dump
+          retention-days: 14
+          if-no-files-found: error
