@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-const BAZA = path.join(process.cwd(), "nova dokumentacija");
+const BAZA = path.join(process.cwd(), "dokumentacija 3.8");
 
 /**
  * Učitava pravni markdown dokument za dati jezik.

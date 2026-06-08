@@ -602,35 +602,35 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "3.7.4"
+      "ver": "3.8.0"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "3.7.6"
+      "ver": "3.8.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
-      "ver": "3.7.2"
+      "ver": "3.8.0"
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "3.7.5"
+      "ver": "3.8.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "3.7.5"
+      "ver": "3.8.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "3.7.2"
+      "ver": "3.8.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.7.6"
+      "ver": "3.8.0"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "3.7.5",
+      "ver": "3.8.0",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -650,21 +650,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 3.7.4",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 3.8.0",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 3.7.6",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 3.8.1",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
-    "meta_statut_desc": "Statut KOLO Fondacije, verzija 3.7.2",
+    "meta_statut_desc": "Statut KOLO Fondacije, verzija 3.8.0",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.7.5",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.8.1",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 3.7.5",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 3.8.1",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.7.2",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.8.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 3.7.6",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 3.8.0",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.7.5"
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.8.0"
   },
   "javneKomponente": {
     "nav_fooldal": "Pocetna",
@@ -867,7 +867,7 @@
     "stub3_naslov": "Organi",
     "stub3_tekst": "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija prelazi u servisnu i izvršnu ulogu — primenjuje odluke i upućuje obrazložene odgovore na preporuke Gornjeg Kola.",
     "javno_tag": "Javno i dostupno",
-    "dok_tag": "Dokumenti (v3.7.5)",
+    "dok_tag": "Dokumenti (v3.8.0)",
     "dok_whitepaper": "Whitepaper",
     "dok_statut": "Statut KOLO Fondacije",
     "dok_pravilnik_kolo": "Pravilnik o KOLO sistemu",

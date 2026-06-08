@@ -43,6 +43,16 @@ const PRAVILNICI = [
     naziv: "Pravilnik o osnivačkom doprinosu",
     opis: "Naknadno evidentiranje rada obavljenog pre otvaranja platforme. Gornja granica 2.400.000 POEN-a; kanal se trajno zatvara.",
   },
+  {
+    slug: "gornje-kolo",
+    naziv: "Pravilnik o Gornjem Kolu",
+    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; obračunski period glasanja, kvadratna glasačka moć i zaštitni veto Fondacije.",
+  },
+  {
+    slug: "programi-podrske",
+    naziv: "Pravilnik o programima podrške",
+    opis: "Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) — uslovi, koeficijenti i verifikatorska potvrda.",
+  },
 ] as const;
 
 export default async function PravilniciIndex() {

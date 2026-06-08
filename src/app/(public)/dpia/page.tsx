@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DPIAPage() {
   const locale = await getLocale();
   const t = await getTranslations("pravne");
-  const sadrzaj = await ucitajPravniDokument("DPIA_3_7_5.md", locale);
+  const sadrzaj = await ucitajPravniDokument("DPIA_3_8_1.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
