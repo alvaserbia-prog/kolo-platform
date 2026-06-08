@@ -9,7 +9,6 @@ const jezici = [
   { kod: "sr", oznaka: "Lat", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", oznaka: "Ћир", naziv: "Српски — ћирилица" },
   { kod: "en", oznaka: "EN", naziv: "English" },
-  { kod: "hu", oznaka: "HU", naziv: "Magyar" },
 ];
 
 function promeniJezik(kod: string) {
