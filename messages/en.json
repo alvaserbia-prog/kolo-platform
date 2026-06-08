@@ -36,7 +36,14 @@
     "ucitavanje": "Loading...",
     "obavestenja": "Notifications",
     "nema_obavestenja": "No notifications.",
-    "oznaci_procitane": "Mark all as read"
+    "oznaci_procitane": "Mark all as read",
+    "aria_meni": "Menu",
+    "upisi_poen": "Record POEN",
+    "aria_kako_funkcionise": "How KOLO works",
+    "aria_poruke": "Messages",
+    "aria_profil": "Profile",
+    "aria_notifikacije": "Notifications",
+    "poen_objasnjenje": "A record of your contribution to the community — like an entry in a ledger, not money. Cannot be bought, cannot be exchanged for cash, and has no value outside the system."
   },
   "common": {
     "ucitavanje": "Loading...",
@@ -1165,13 +1172,17 @@
     "registar_blokiran": "The founders register with pseudonyms and shares is available to verified members.",
     "registar_prazan": "The founders register has not yet been published."
   },
+  "pojam": {
+    "aria_sta_je": "What is {termin}"
+  },
   "cestoPage": {
     "meta_title": "Frequently asked questions — KOLO",
     "meta_desc": "Answers to the most common questions about the KOLO system — POEN, ZRNO, verification, Protocol, Foundation and the marketplace.",
     "naslov": "Frequently asked questions",
     "opis": "Answers to the most common questions about the KOLO system. Click on a question to expand the answer, or search by keyword.",
     "pretraga_placeholder": "Search questions…",
-    "nema_rezultata": "No results."
+    "nema_rezultata": "No results.",
+    "brzo_navigovanje": "Quick navigation"
   },
   "pijaca": {
     "naslov": "Marketplace",

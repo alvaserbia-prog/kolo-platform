@@ -75,7 +75,7 @@ export default function FaqStranica() {
       {!pretraga.trim() && (
         <div className="bg-white rounded-2xl card-shadow p-5">
           <div className="text-xs uppercase font-semibold text-kolo-muted tracking-wider mb-3">
-            Brzo navigovanje
+            {t("brzo_navigovanje")}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2">
             {FAQ_SEKCIJE.map((s) => (

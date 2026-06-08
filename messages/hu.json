@@ -36,7 +36,14 @@
     "ucitavanje": "Betöltés...",
     "obavestenja": "Értesítések",
     "nema_obavestenja": "Nincs értesítés.",
-    "oznaci_procitane": "Mind olvasottnak jelöl"
+    "oznaci_procitane": "Mind olvasottnak jelöl",
+    "aria_meni": "Menu",
+    "upisi_poen": "Record POEN",
+    "aria_kako_funkcionise": "How KOLO works",
+    "aria_poruke": "Messages",
+    "aria_profil": "Profile",
+    "aria_notifikacije": "Notifications",
+    "poen_objasnjenje": "A record of your contribution to the community — like an entry in a ledger, not money. Cannot be bought, cannot be exchanged for cash, and has no value outside the system."
   },
   "common": {
     "ucitavanje": "Betöltés...",
@@ -1165,13 +1172,17 @@
     "col_iznos": "Összeg",
     "col_datum": "Dátum"
   },
+  "pojam": {
+    "aria_sta_je": "What is {termin}"
+  },
   "cestoPage": {
     "meta_title": "Gyakran ismételt kérdések — KOLO",
     "meta_desc": "Válaszok a KOLO rendszerrel kapcsolatos leggyakoribb kérdésekre — POEN, ZRNO, ellenőrzés, Protokoll, Alapítvány és a piac.",
     "naslov": "Gyakran ismételt kérdések",
     "opis": "A KOLO rendszerrel kapcsolatos leggyakoribb kérdések és válaszok",
     "pretraga_placeholder": "Keresés a kérdések között...",
-    "nema_rezultata": "Nincs találat."
+    "nema_rezultata": "Nincs találat.",
+    "brzo_navigovanje": "Quick navigation"
   },
   "pijaca": {
     "naslov": "Marketplace",
