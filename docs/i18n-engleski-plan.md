@@ -1,6 +1,21 @@
 # Plan: Engleska verzija platforme (i18n EN)
 
 > ## ✅ STATUS (2026-06-07): Opseg B u velikoj meri ZAVRŠEN
+>
+> ### 🛑 INCIDENT + ISPRAVKA (2026-06-08, `3550df6`): URL prefiks ruši sajt
+> Faza 0 je uvela `createMiddleware(routing)` sa `localePrefix` PREFIKSOM. next-intl
+> prefiks-middleware očekuje **`app/[locale]/` strukturu foldera**; ovaj projekat je
+> NEMA (ravno stablo + cookie + transliteracija). Posledica: middleware je rewrite-ovao
+> `/` → nepostojeću `[locale]` rutu → **CEO SAJT 404 u runtime-u** (build je prolazio!).
+> **Ispravka:** vraćeno na `localePrefix: "never"` (jezik preko `NEXT_LOCALE` cookie-a),
+> `proxy.ts` bez next-intl middleware-a, `JezikSvitcer` izlaže EN/HU preko cookie-a,
+> hreflang prefiks-alternative ugašene (`hreflangAlternates` → `{}`). **Engleski radi
+> preko cookie-a (dugme EN), na ISTOM URL-u — nema `/en/` putanje.**
+>
+> **POUKA / preduslov za `/en/` URL (SEO):** zahteva premeštanje SVIH ruta pod
+> `src/app/[locale]/…` (veliki refaktor) ILI custom rewrite middleware koji mapira
+> `/en/*` → ravnu rutu i postavlja next-intl locale preko headera. **Obavezno testirati
+> na PREVIEW URL-u grane pre merge-a na `main`** — build koji prolazi NE garantuje runtime.
 > Engleska javna/SEO površina je implementirana i gurnuta na granu. Urađeno:
 > - **Faza 0 — routing `/en/`** (`d012bf0`): `localePrefix: as-needed`, `proxy.ts` integrisan next-intl middleware + auth/maintenance gate, `navigation.ts`, `JezikSvitcer` (EN/HU izloženi), hreflang + `OG_LOCALE`, `scripts/check-i18n-parity.mjs` + `npm run i18n:check`, sitemap hreflang.
 > - **Faza 5 — `User.jezik`** (`ef47e9b`): polje + migracija `20260607120000_user_jezik`, `/api/profil/jezik`, svič upisuje izbor; `src/lib/pravni-dokument.ts` loader.
