@@ -2,12 +2,29 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 
-const KATEGORIJE = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"];
+// DB enum values — never change these (they are stored in the database)
+const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
+
+// Map a DB category value to its i18n key suffix
+function kategorijaKljuc(kat: string): string {
+  const map: Record<string, string> = {
+    "Hrana": "Hrana",
+    "Usluge": "Usluge",
+    "Zanati": "Zanati",
+    "Elektronika": "Elektronika",
+    "Odeća": "Odeca",
+    "Ostalo": "Ostalo",
+  };
+  return map[kat] ?? "Ostalo";
+}
+
 const MAX_IMAGES = 5;
 
 export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocation?: string }) {
+  const t = useTranslations("pijaca");
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -24,7 +41,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
     const files = Array.from(e.target.files ?? []);
     const combined = [...slike, ...files].slice(0, MAX_IMAGES);
     for (const f of combined) {
-      if (f.size > 5 * 1024 * 1024) { setError("Slika je prevelika (max 5MB)."); return; }
+      if (f.size > 5 * 1024 * 1024) { setError(t("slika_prevelika")); return; }
     }
     setSlike(combined);
     setError("");
@@ -40,7 +57,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
     e.preventDefault();
     if (!canSubmit) return;
     const priceNum = Math.floor(Number(price));
-    if (isNaN(priceNum) || priceNum <= 0) { setError("Unesite ispravnu cenu."); return; }
+    if (isNaN(priceNum) || priceNum <= 0) { setError(t("cena_greska_unos")); return; }
 
     setLoading(true);
     setError("");
@@ -58,10 +75,10 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
       const res = await fetch("/api/pijaca", { method: "POST", body: fd });
       const data = await res.json();
 
-      if (!res.ok) { setError(data.error ?? "Greška pri objavljivanju."); return; }
+      if (!res.ok) { setError(data.error ?? t("greska_objavljivanje")); return; }
       router.push(`/pijaca/${data.id}`);
     } catch {
-      setError("Greška pri slanju. Pokušajte ponovo.");
+      setError(t("greska_slanje"));
     } finally {
       setLoading(false);
     }
@@ -71,41 +88,41 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
     <div className="max-w-lg mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <button onClick={() => router.back()} className="text-kolo-muted hover:text-kolo-muted transition-colors">
-          ← Nazad
+          {t("nazad")}
         </button>
-        <h1 className="kolo-naslov">Novi oglas</h1>
+        <h1 className="kolo-naslov">{t("novi_oglas_naslov")}</h1>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
         {/* Naslov */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Naslov *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("naslov_required")}</label>
           <input
             type="text"
             maxLength={80}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="npr. Domaći med — lipa"
+            placeholder={t("naslov_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
 
         {/* Opis */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Opis</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("opis_label")}</label>
           <textarea
             rows={3}
             maxLength={500}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Opišite šta nudite..."
+            placeholder={t("opis_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors"
           />
         </div>
 
         {/* Cena */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Cena (POEN) *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("cena_required")}</label>
           <input
             type="number"
             min={1}
@@ -119,9 +136,9 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
 
         {/* Kategorija */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Kategorija *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("kategorija_label")}</label>
           <div className="flex flex-wrap gap-2">
-            {KATEGORIJE.map((kat) => (
+            {KATEGORIJE_VREDNOSTI.map((kat) => (
               <button
                 key={kat}
                 type="button"
@@ -132,7 +149,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
                     : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-muted"
                 }`}
               >
-                {kat}
+                {t(`kategorija_${kategorijaKljuc(kat)}`)}
               </button>
             ))}
           </div>
@@ -140,19 +157,23 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
 
         {/* Lokacija */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Lokacija <span className="text-kolo-muted font-normal">(opciono)</span></label>
-          <LokacijaSearch value={location} onChange={setLocation} placeholder="npr. Novi Sad" />
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            {t("lokacija_label")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
+          </label>
+          <LokacijaSearch value={location} onChange={setLocation} placeholder={t("lokacija_placeholder")} />
         </div>
 
         {/* Kontakt telefon */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Kontakt telefon <span className="text-kolo-muted font-normal">(opciono)</span></label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">
+            {t("kontakt_telefon")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
+          </label>
           <input
             type="tel"
             maxLength={20}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="npr. 064 123 4567"
+            placeholder={t("kontakt_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
@@ -160,7 +181,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
         {/* Slike */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">
-            Slike <span className="text-kolo-muted font-normal">(do {MAX_IMAGES}, opciono)</span>
+            {t("slike_label")} <span className="text-kolo-muted font-normal">{t("slike_do", { max: MAX_IMAGES })}</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {slike.map((f, i) => (
@@ -209,7 +230,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
           disabled={!canSubmit || loading}
           className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
-          {loading ? "Objavljivanje..." : "Objavi oglas"}
+          {loading ? t("objavljivanje") : t("objavi_oglas")}
         </button>
       </form>
     </div>
