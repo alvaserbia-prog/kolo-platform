@@ -12,47 +12,16 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const PRAVILNICI = [
-  {
-    slug: "kolo-sistem",
-    naziv: "Pravilnik o KOLO sistemu",
-    opis: "Osnovni akt sistema (12 glava, 82 člana). Uređuje POEN, ZRNO, obračunski koeficijent, dokaz stvarnosti, kanale evidentiranja doprinosa, module i upravljanje.",
-  },
-  {
-    slug: "hijerarhija",
-    naziv: "Pravilnik o hijerarhiji akata",
-    opis: "Uređuje odnose između opštih akata Fondacije i platformskih akata, postupak donošenja i izmena.",
-  },
-  {
-    slug: "dokaz-stvarnosti",
-    naziv: "Pravilnik o dokazu stvarnosti",
-    opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva: indeks stvarnosti, verifikacioni kapacitet, anti-cirkularno pravilo.",
-  },
-  {
-    slug: "pokroviteljstvo-donacije",
-    naziv: "Pravilnik o pokroviteljstvu i donacijama",
-    opis: "Nivoi donacija fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD).",
-  },
-  {
-    slug: "operativni",
-    naziv: "Pravilnik o operativnom doprinosu",
-    opis: "Mehanika operativnog programa — objavljivanje zadataka i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije u prvoj fazi.",
-  },
-  {
-    slug: "osnivacki",
-    naziv: "Pravilnik o osnivačkom doprinosu",
-    opis: "Naknadno evidentiranje rada obavljenog pre otvaranja platforme. Gornja granica 2.400.000 POEN-a; kanal se trajno zatvara.",
-  },
-  {
-    slug: "gornje-kolo",
-    naziv: "Pravilnik o Gornjem Kolu",
-    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; obračunski period glasanja, kvadratna glasačka moć i zaštitni veto Fondacije.",
-  },
-  {
-    slug: "programi-podrske",
-    naziv: "Pravilnik o programima podrške",
-    opis: "Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) — uslovi, koeficijenti i verifikatorska potvrda.",
-  },
+// Redosled prikaza pravilnika; nazivi i opisi se čitaju iz i18n (pravne.rb.<slug>).
+const SLUGOVI = [
+  "kolo-sistem",
+  "hijerarhija",
+  "dokaz-stvarnosti",
+  "pokroviteljstvo-donacije",
+  "operativni",
+  "osnivacki",
+  "gornje-kolo",
+  "programi-podrske",
 ] as const;
 
 export default async function PravilniciIndex() {
@@ -81,17 +50,17 @@ export default async function PravilniciIndex() {
       </div>
 
       <div className="space-y-3">
-        {PRAVILNICI.map((p) => (
+        {SLUGOVI.map((slug) => (
           <Link
-            key={p.slug}
-            href={`/pravilnik/${p.slug}`}
+            key={slug}
+            href={`/pravilnik/${slug}`}
             className="block bg-white rounded-2xl card-shadow p-5 hover:shadow-md transition-shadow border-t-4 border-kolo-green-700"
           >
             <h2 className="font-bold text-kolo-green-900 text-lg leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>
-              {p.naziv}
+              {t(`rb.${slug}.naziv`)}
             </h2>
             <p className="text-sm text-kolo-muted leading-relaxed">
-              {p.opis}
+              {t(`rb.${slug}.opis`)}
             </p>
             <p className="text-sm font-medium text-kolo-green-700 mt-3">{t("otvoriDokument")}</p>
           </Link>

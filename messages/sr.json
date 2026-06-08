@@ -664,7 +664,41 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 3.8.0",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.8.0"
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.8.0",
+    "rb": {
+      "kolo-sistem": {
+        "naziv": "Pravilnik o KOLO sistemu",
+        "opis": "Osnovni akt sistema (12 glava, 82 člana). Uređuje POEN, ZRNO, obračunski koeficijent, dokaz stvarnosti, kanale evidentiranja doprinosa, module i upravljanje."
+      },
+      "hijerarhija": {
+        "naziv": "Pravilnik o hijerarhiji akata",
+        "opis": "Uređuje odnose između opštih akata Fondacije i platformskih akata, postupak donošenja i izmena."
+      },
+      "dokaz-stvarnosti": {
+        "naziv": "Pravilnik o dokazu stvarnosti",
+        "opis": "Operativna mehanika verifikacije korisnika kroz lanac jemstva: indeks stvarnosti, verifikacioni kapacitet, anti-cirkularno pravilo."
+      },
+      "pokroviteljstvo-donacije": {
+        "naziv": "Pravilnik o pokroviteljstvu i donacijama",
+        "opis": "Nivoi donacija fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD)."
+      },
+      "operativni": {
+        "naziv": "Pravilnik o operativnom doprinosu",
+        "opis": "Mehanika operativnog programa — objavljivanje zadataka i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije u prvoj fazi."
+      },
+      "osnivacki": {
+        "naziv": "Pravilnik o osnivačkom doprinosu",
+        "opis": "Naknadno evidentiranje rada obavljenog pre otvaranja platforme. Gornja granica 2.400.000 POEN-a; kanal se trajno zatvara."
+      },
+      "gornje-kolo": {
+        "naziv": "Pravilnik o Gornjem Kolu",
+        "opis": "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; obračunski period glasanja, kvadratna glasačka moć i zaštitni veto Fondacije."
+      },
+      "programi-podrske": {
+        "naziv": "Pravilnik o programima podrške",
+        "opis": "Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) — uslovi, koeficijenti i verifikatorska potvrda."
+      }
+    }
   },
   "javneKomponente": {
     "nav_fooldal": "Pocetna",

@@ -664,7 +664,41 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 3.8.0",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.8.0"
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.8.0",
+    "rb": {
+      "kolo-sistem": {
+        "naziv": "Rulebook on the KOLO System",
+        "opis": "The system's foundational act (12 chapters, 82 articles). Governs POEN, ZRNO, the accounting coefficient, proof of reality, the contribution-recording channels, modules, and governance."
+      },
+      "hijerarhija": {
+        "naziv": "Rulebook on the Hierarchy of Acts",
+        "opis": "Governs the relationships between the Foundation's general acts and the platform acts, and the procedure for their adoption and amendment."
+      },
+      "dokaz-stvarnosti": {
+        "naziv": "Rulebook on Proof of Reality",
+        "opis": "The operational mechanics of user verification through the vouching chain: the reality index, verification capacity, and the anti-circularity rule."
+      },
+      "pokroviteljstvo-donacije": {
+        "naziv": "Rulebook on Sponsorship and Donations",
+        "opis": "Donation tiers for individuals (11 levels, coefficient 1.00–2.00) and sponsorship tiers for legal entities (7 levels, threshold RSD 10,000)."
+      },
+      "operativni": {
+        "naziv": "Rulebook on Operational Contribution",
+        "opis": "The mechanics of the operational programme — publishing tasks and confirming their completion by ZRNO Holders, or by the Foundation's Management Board in the first phase."
+      },
+      "osnivacki": {
+        "naziv": "Rulebook on Founding Contribution",
+        "opis": "Retroactive recording of work performed before the platform launched. Upper limit of 2,400,000 POEN; the channel closes permanently."
+      },
+      "gornje-kolo": {
+        "naziv": "Rulebook on the Upper Kolo",
+        "opis": "Voting, delegation, and decision-making in the Upper Kolo; the voting accounting period, quadratic voting power, and the Foundation's protective veto."
+      },
+      "programi-podrske": {
+        "naziv": "Rulebook on Support Programmes",
+        "opis": "Social programmes (Support for Mothers, for the Elderly, Special Care, Schooling) — conditions, coefficients, and verifier confirmation."
+      }
+    }
   },
   "javneKomponente": {
     "nav_fooldal": "Home",

@@ -65,10 +65,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = PRAVILNICI[slug];
-  if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
+  if (!p) return { title: "KOLO" };
+  const t = await getTranslations("pravne");
+  const naziv = t(`rb.${slug}.naziv`);
   return pageMetadata({
-    title: `${p.naziv} — KOLO`,
-    description: `${p.naziv}, verzija ${p.verzija}. ${p.opis}`,
+    title: `${naziv} — KOLO`,
+    description: `${naziv} ${p.verzija}. ${t(`rb.${slug}.opis`)}`,
     path: `/pravilnik/${slug}`,
   });
 }
@@ -93,10 +95,10 @@ export default async function PravilnikSlugPage({ params }: Props) {
         <p className="text-xs text-kolo-muted mb-1">
           <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">{t("pravilnik.pravilnici")}</Link>
           {" / "}
-          <span>{p.naziv}</span>
+          <span>{t(`rb.${slug}.naziv`)}</span>
         </p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          {p.naziv}
+          {t(`rb.${slug}.naziv`)}
         </h1>
         <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {p.verzija}</p>
       </div>
