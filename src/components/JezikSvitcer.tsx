@@ -1,14 +1,10 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { useTransition } from "react";
-import { usePathname, useRouter } from "@/i18n/navigation";
 
-// Jezik/pismo se sada bira preko URL prefiksa (next-intl navigacija):
-//  - "sr"      → bez prefiksa (default)
-//  - "sr-Cyrl" → /sr-Cyrl/…  (ćirilica, transliteracija iz sr)
-//  - "en"      → /en/…
-//  - "hu"      → /hu/…
+// Jezik/pismo se bira preko cookie-a (NEXT_LOCALE) + osvežavanja — bez URL prefiksa
+// (projekat koristi ravno stablo ruta; request.ts чita cookie i učitava prevode,
+// a ćirilica se izvodi transliteracijom iz "sr").
 const jezici = [
   { kod: "sr", oznaka: "Lat", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", oznaka: "Ћир", naziv: "Српски — ћирилица" },
@@ -16,27 +12,19 @@ const jezici = [
   { kod: "hu", oznaka: "HU", naziv: "Magyar" },
 ];
 
+function promeniJezik(kod: string) {
+  document.cookie = `NEXT_LOCALE=${kod}; path=/; max-age=31536000; SameSite=Lax`;
+  // Prijavljenom korisniku trajno upiši izbor (notifikacije/email); gostu no-op.
+  fetch("/api/profil/jezik", {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ jezik: kod }),
+  }).catch(() => {});
+  window.location.reload();
+}
+
 export default function JezikSvitcer() {
   const trenutni = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [isPending, startTransition] = useTransition();
-
-  function promeniJezik(kod: string) {
-    if (kod === trenutni) return;
-    // Zadrži izabrani jezik i za buduće posete (cookie koji next-intl чita).
-    document.cookie = `NEXT_LOCALE=${kod}; path=/; max-age=31536000; SameSite=Lax`;
-    // Prijavljenom korisniku trajno upiši izbor (notifikacije/email); gostu no-op.
-    fetch("/api/profil/jezik", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ jezik: kod }),
-    }).catch(() => {});
-    startTransition(() => {
-      // pathname je bez prefiksa; router dodaje odgovarajući prefiks za `locale`.
-      router.replace(pathname, { locale: kod });
-    });
-  }
 
   return (
     // data-no-cyr: oznake jezika se NE transliterišu (treba da ostanu "Lat"/"Ћир"/"EN"/"HU").
@@ -45,7 +33,6 @@ export default function JezikSvitcer() {
         <button
           key={j.kod}
           onClick={() => promeniJezik(j.kod)}
-          disabled={isPending}
           title={j.naziv}
           aria-label={j.naziv}
           aria-pressed={trenutni === j.kod}

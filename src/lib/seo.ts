@@ -39,24 +39,16 @@ export const OG_LOCALE: Record<string, string> = {
   hu: "hu_HU",
 };
 
-/** Jezici sa URL prefiksom (default "sr" ide bez prefiksa). */
-const PREFIKSIRANI = ["en", "hu", "sr-Cyrl"] as const;
-
 /**
- * hreflang `languages` mapa za zadatu putanju: unakrsno povezuje srpsku (default,
- * bez prefiksa) sa /en, /hu i /sr-Cyrl verzijama + x-default → srpski.
- * Relativne putanje; `metadataBase` ih pretvara u apsolutne.
+ * hreflang `languages` mapa za zadatu putanju.
+ *
+ * ⚠️ TRENUTNO ONEMOGUĆENO: jezici se biraju preko cookie-a na ISTOM URL-u (nema
+ * /en, /hu, /sr-Cyrl ruta — projekat koristi ravno stablo). Emitovanje hreflang
+ * linkova na nepostojeće prefiks-URL-ove slalo bi Google na 404. Vraća praznu
+ * mapu dok se ne uvede app/[locale]/ struktura (vidi docs/i18n-engleski-plan.md).
  */
-export function hreflangAlternates(path = "/"): Record<string, string> {
-  const clean = path === "/" ? "" : path;
-  const langs: Record<string, string> = {
-    "sr-Latn": path,
-    "x-default": path,
-  };
-  for (const kod of PREFIKSIRANI) {
-    langs[kod] = `/${kod}${clean}` || "/";
-  }
-  return langs;
+export function hreflangAlternates(_path = "/"): Record<string, string> {
+  return {};
 }
 
 /**
