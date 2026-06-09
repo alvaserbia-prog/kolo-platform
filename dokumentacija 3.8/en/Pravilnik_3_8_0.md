@@ -336,7 +336,7 @@ The accounting period lasts twenty-four hours, from midnight to midnight.
 
 ### Article 25
 
-A ZRNO Holder has a position in the accounting system that changes with the accounting coefficient, as well as the right to participate in system governance through the Upper Kolo.
+A ZRNO Holder holds a position in the accounting system that shifts with the accounting coefficient, as well as the right to participate in system governance through the Upper Kolo.
 
 A change in a ZRNO Holder's position arises exclusively as a consequence of activity in the system and a change in the accounting coefficient. That change is not a return, is not guaranteed, and no actor pays it.
 
@@ -686,9 +686,7 @@ Data protection in the system is based on data protection by design and by defau
 
 The first design decision is pseudonymity of the ledger. Records in the ledger are tied to pseudonyms, not to personal names. No centralized table exists that links pseudonyms to personal identities of users. Pseudonymity is not anonymity — pseudonymized data remain personal data because they can, with additional information, be linked to an identified person.
 
-The second design decision is data separation. The Foundation does not store personal data of platform users in its own databases — all user data are stored on the infrastructure on which the Protocol operates. The Foundation stores directly only the banking documentation of donations and the record of the link between the legal entity sponsor and the user in whose record the contribution is entered.
-
-The third design decision is data minimization. The Platform collects only the data necessary for the functioning of the system. Data minimization is a structural principle of the KOLO system that cannot be abolished by any governance decision.
+The second design decision is data minimization. The Platform collects only the data necessary for the functioning of the system. A user may voluntarily enter additional data for easier use of the platform, but such entry is not a condition for proof of reality or for access to system functions.
 
 ### Article 62
 
