@@ -188,7 +188,7 @@ Upon the users' agreement, the Protocol records the exchange by updating the POE
 
 Exchange redistributes existing POENs and does not increase their total number in the system. Exchange is not a payment transaction and the POEN ledger update does not constitute a payment within the meaning of payment services regulations.
 
-For performance, quality, and risk in the exchange, the users who participate in it are responsible, pursuant to the general rules of the law of obligations.
+The users who participate in the exchange are responsible for its performance, quality, and risk, pursuant to the general rules of the law of obligations.
 
 ## Chapter V — Rules of Conduct on the Platform
 
@@ -272,7 +272,7 @@ The name "KOLO", the logotype, the mark, and the system domains are not part of 
 
 ### Article 33 — Platform Availability
 
-The Platform is provided as-is and with such availability as it has. The Foundation is obliged to take reasonable technical and organizational measures to provide and maintain the infrastructure, but does not guarantee uninterrupted availability of the Platform.
+The Platform is provided on an "as-is" and "as-available" basis. The Foundation is obliged to take reasonable technical and organizational measures to provide and maintain the infrastructure, but does not guarantee uninterrupted availability of the Platform.
 
 The Foundation reserves the right to temporarily suspend the operation of the Platform at any time for maintenance, upgrades, or the resolution of technical problems. Users will be notified in advance of a planned outage lasting more than 24 hours whenever possible.
 

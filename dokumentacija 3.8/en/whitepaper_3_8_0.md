@@ -420,7 +420,7 @@ Both effects are consequences of user activity in the system. No individual user
 
 For a system user, the accounting coefficient determines how many POEN are needed to inscribe one ZRNO at a given moment. A higher coefficient means that more recorded contribution is required to inscribe ZRNO. A user who fulfilled the conditions for inscribing ZRNO earlier did so at a lower accounting coefficient — meaning that fewer POEN were needed for the same number of ZRNO.
 
-For a ZRNO Holder, a change in the accounting coefficient changes the position of their recorded position in the context of the system. That change is not a payment, is not a return, and is not guaranteed — it is an arithmetic consequence of a change in the state of the ledger of the entire system. Any benefit from a change of position is realised exclusively in POEN — records in the ledger without external financial value. The user cannot realise the change in position in money, currency, or any external means. The benefit of the position is intra-systemic — it exists only within the system and has value only for users of the system who exchange goods and services within it.
+For a ZRNO Holder, a change in the accounting coefficient shifts how their recorded position stands within the system. That change is not a payment, is not a return, and is not guaranteed — it is an arithmetic consequence of a change in the state of the ledger of the entire system. Any benefit from a change of position is realised exclusively in POEN — records in the ledger without external financial value. The user cannot realise the change in position in money, currency, or any external means. The benefit of the position is intra-systemic — it exists only within the system and has value only for users of the system who exchange goods and services within it.
 
 ### What the Accounting Coefficient Is Not
 
@@ -706,7 +706,7 @@ The verifier also has a structural constraint — they put their own position in
 
 A ZRNO Holder has all the incentives of a system user, plus two additional ones: participation in governance through the Upper Kolo and a position in the accounting system whose value changes with the activity of the community (chapters 6 and 10). Both additional incentives are aligned with the collective interest — a ZRNO Holder wants the system to grow because their position depends on collective activity. The benefits and limitations of that position are qualified in section 6.2.
 
-A ZRNO Holder also has the option of withdrawal (otpis) — returning free ZRNO to the pool of available units with POEN records at the current accounting coefficient (section 6.2). This option is a structural incentive for early and active participation, but the benefit is limited to the internal exchange capacity because POENs cannot leave the system. At the same time, the structural choice between the governance function (active ZRNO) and accounting flexibility (free ZRNO) prevents simultaneous realization of both benefits.
+A ZRNO Holder also has the option of redemption — returning free ZRNO to the pool of available units, with the Protocol recording POEN at the current accounting coefficient (section 6.2). This option is a structural incentive for early and active participation, but the benefit is limited to the internal exchange capacity because POENs cannot leave the system. At the same time, the structural choice between the governance function (active ZRNO) and accounting flexibility (free ZRNO) prevents simultaneous realization of both benefits.
 
 At the individual level, a ZRNO Holder has an incentive for others to exchange and contribute, while themselves favoring activities through which new POENs arise over exchange that reduces their own number of recorded POENs. This asymmetry is a structural feature that arises from the tension between accumulation and circulation described later in this chapter. A ZRNO Holder cannot derive benefit from their position at the expense of other participants in the sense of extracting value from the system — ZRNO cannot be transferred, cannot be sold, and cannot be monetized.
 
@@ -830,7 +830,7 @@ The LPDP (Art. 30) gives the user the right to request the deletion of their per
 
 The Foundation is obliged to carry out a Data Protection Impact Assessment (DPIA) before commencing processing (Art. 54 LPDP), to appoint a Data Protection Officer (DPO, Art. 56 LPDP), and to apply technical and organizational protection measures proportionate to the risk (Art. 51 LPDP). The activation of Module 3 (Social Programs) and Module 4 (Children) requires updating the DPIA before activation because it introduces the processing of special categories of data (Art. 17 LPDP) and data of minors (Art. 16 LPDP). If the system's infrastructure includes servers outside the Republic of Serbia, the transfer of personal data outside the country is subject to the LPDP rules on cross-border transfer (Arts. 65–69).
 
-System users have all the rights guaranteed to them by the LPDP — the right of access (Art. 26), rectification (Art. 29), erasure (Art. 30), restriction of processing (Art. 31), portability (Art. 36), and objection (Art. 37). The Foundation provides a mechanism for submitting requests that is accessible to all users and responds to requests within thirty days of receipt of the request (Art. 21 para. 3 LPDP), with the possibility of extension by a further sixty days with notification to the user of the reasons for the extension. A detailed description of data categories, legal bases of processing for each category, user rights, technical and organizational protection measures, and rules on cross-border transfer is given in the KOLO System Privacy Policy. Technical protection measures are described in Annex D of this document.
+System users have all the rights guaranteed to them by the LPDP — the right of access (Art. 26), rectification (Art. 29), erasure (Art. 30), restriction of processing (Art. 31), portability (Art. 36), and objection (Art. 37). The Foundation provides a mechanism for submitting requests that is accessible to all users and responds to requests within thirty days of receipt of the request (Art. 21 para. 3 LPDP), with the possibility of extension by a further sixty days with notification to the user of the reasons for the extension. A detailed description of data categories, legal bases of processing for each category, user rights, technical and organizational protection measures, and rules on cross-border transfer is given in the KOLO System Privacy Policy. Technical protection measures are described in Appendix D of this document.
 
 # 13. Development Trajectory
 
@@ -924,7 +924,7 @@ The four principles — non-convertibility of POEN, the absence of proprietary r
 
 The system recognizes its limitations. The tension between accumulation and circulation is a deliberate design choice with documented consequences (chapter 11). The scaling of proof of reality beyond a region with a dense acquaintance network remains an open question (chapter 13). The relationship with the tax system — specifically the question of whether exchange within the system is subject to qualification as barter — requires formal analysis and consultation with the competent authorities (chapter 13). The question of the inheritance of records has no final answer. These open questions are stated in the document because honesty toward participants and regulators is part of the system's design, not a deficiency in its documentation.
 
-The KOLO system commences operation with the publication of this document. The documentation that follows — Annex A (international institutional framework), Annex B (parameter tables), Annex C (glossary), Annex D (technical and organizational security measures), and Annex E (mapping of Ostrom design principles) — provides additional context for positioning the system within the regulatory and academic framework.
+The KOLO system commences operation with the publication of this document. The documentation that follows — Appendix A (international institutional framework), Appendix B (parameter tables), Appendix C (glossary), Appendix D (technical and organizational security measures), and Appendix E (mapping of Ostrom design principles) — provides additional context for positioning the system within the regulatory and academic framework.
 
 # Appendix A: International Institutional Framework
 
@@ -989,10 +989,10 @@ The tables in this appendix summarize the key parameters of the system. Each par
 | Legal character | Position ledger entry | Not a security, share, stock, investment contract, or digital asset |
 | Total available | 1,000,000 | Fixed in the Protocol |
 | Transferability | Non-transferable | Never, at any stage, in any way |
-| States | Free or active | Free: enables withdrawal; active: enables voting |
+| States | Free or active | Free: enables redemption; active: enables voting |
 | Minimum POEN for inscription | 20,000 | Recorded in the system |
 | Maximum inscription per period | 1% of balance | Per accounting period |
-| Withdrawal | At the accounting coefficient | In the new accounting period, only for free ZRNO |
+| Redemption | At the accounting coefficient | In the new accounting period, only for free ZRNO |
 | Trading | Not possible | No market or transfer mechanism exists |
 | Dividend/interest/return | Does not exist | Nor is any benefit guaranteed |
 

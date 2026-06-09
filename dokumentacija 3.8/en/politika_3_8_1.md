@@ -150,7 +150,7 @@ The user may have one active request on the board. An active request loses that 
 
 Purpose of processing: enabling the establishment of contact between an unverified user and potential verifiers for the purpose of conducting verification within the meaning of the Rulebook on Proof of Reality.
 
-Legal basis: user's consent (Art. 12 para. 1 item 1 LPDP), given separately for each publication, with an explicit warning about the circle of persons who will see the text and the contact details respectively. Consent is voluntary and may be withdrawn at any time by withdrawing the request, without any consequences for the user's status in the system. Withdrawal of consent does not affect the lawfulness of processing before withdrawal.
+Legal basis: user's consent (Art. 12 para. 1 item 1 LPDP), given separately for each publication, with an explicit warning as to which persons will see the presentation text and which will see the contact details. Consent is voluntary and may be withdrawn at any time by withdrawing the request, without any consequences for the user's status in the system. Withdrawal of consent does not affect the lawfulness of processing before withdrawal.
 
 **4.9 Protection of System Integrity**
 
@@ -160,7 +160,7 @@ Purpose of processing: protection of the integrity of proof of reality, the comm
 
 Legal basis: legitimate interest of the Foundation and honest users (Art. 12 para. 1 item 6 LPDP).
 
-The system does not make automated decisions within the meaning of Art. 38 LPDP — it only flags an account or group of accounts for review, and every measure is examined and taken by an authorised person. Flagging prioritises the absence of genuine activity, rather than connection density, so that a tight real-world community is not incorrectly treated. You have the right to object to this processing in accordance with Article 13 of this Policy.
+The system does not make automated decisions within the meaning of Art. 38 LPDP — it only flags an account or group of accounts for review, and every measure is examined and taken by an authorised person. Flagging prioritises the absence of genuine activity rather than the density of connections, so that a close-knit real-world community is not wrongly flagged. You have the right to object to this processing in accordance with Article 13 of this Policy.
 
 ### Article 5 — Technical Data
 
@@ -182,9 +182,9 @@ Verified users — persons whose reality has been confirmed and whose reality in
 
 ZRNO Holders have the same access as verified users.
 
-Exchange space (advertising). An exception to the graduated visibility in this Article constitutes the platform exchange space: the content of listings — a description of the offer or request, price expressed in POENs, location, and the advertiser's pseudonym — is publicly visible to all visitors, including non-registered persons, for the accessibility of exchange. The advertiser's contact details and the ability to communicate regarding listings are accessible exclusively to verified users, upon explicit disclosure. For non-registered and unverified persons, the advertiser's pseudonym in the exchange space is not linked to the contribution ledger, account balance, or user profile. The advertiser publishes their listing on their own initiative and is aware that the listing is publicly visible.
+Exchange space (advertising). The platform exchange space is an exception to the graduated visibility set out in this Article: the content of listings — a description of the offer or request, the price expressed in POENs, the location, and the advertiser's pseudonym — is publicly visible to all visitors, including non-registered persons, in order to make exchange accessible. The advertiser's contact details and the ability to communicate regarding listings are accessible exclusively to verified users, upon explicit disclosure. For non-registered and unverified persons, the advertiser's pseudonym in the exchange space is not linked to the contribution ledger, account balance, or user profile. The advertiser publishes their listing on their own initiative and is aware that the listing is publicly visible.
 
-Guarantee board. The presentation text from sub-section 4.8 is accessible to all registered Platform users, including unverified ones. Contact details from the same sub-section are accessible exclusively to verified users and are displayed only upon explicit disclosure, which is logged in the access log referred to in Article 5 of this Policy. The text and contact details are not accessible to non-registered persons and are not indexed by search engines. A verified user may continue an established contact as a direct conversation (messages) in which the user who published the request may participate even before verification, in accordance with sub-section 4.8 of this Policy and Article 16 of the Terms of Use.
+Guarantee board. The presentation text referred to in sub-section 4.8 is accessible to all registered Platform users, including unverified ones. Contact details from the same sub-section are accessible exclusively to verified users and are displayed only upon explicit disclosure, which is logged in the access log referred to in Article 5 of this Policy. The text and contact details are not accessible to non-registered persons and are not indexed by search engines. A verified user may continue an established contact as a direct conversation (messages) in which the user who published the request may participate even before verification, in accordance with sub-section 4.8 of this Policy and Article 16 of the Terms of Use.
 
 The user may, on their own initiative and at any time, choose to make their name and surname and telephone number visible to all verified Platform users. This disclosure is entirely voluntary and may be withdrawn at any time, after which the data will no longer be displayed to other users. Withdrawal does not affect data that may already have been recorded outside the Platform by third parties.
 
@@ -246,7 +246,7 @@ Upon expiry of the retention period, data are deleted or permanently anonymized 
 
 Upon termination of the user's status — whether by withdrawal, exclusion, or death — the anonymization procedure is initiated in accordance with Art. 34 of the Rulebook on the KOLO System.
 
-The email address, all voluntarily entered data, and data published on the guarantee board are deleted, including the presentation text and contact details; the pseudonymous record of the outcome of the request remains to the extent it is an integral part of the vouching chain ledger, already in anonymized form. The user's connections in the verification graph are anonymized.
+The email address, all voluntarily entered data, and data published on the guarantee board are deleted, including the presentation text and contact details; the pseudonymous record of the outcome of the request is retained to the extent that it forms an integral part of the vouching chain ledger, already in anonymized form. The user's connections in the verification graph are anonymized.
 
 The user's POEN records are annulled, and the numerical history is retained under an identifier that no longer enables identification. Records thus anonymized cease to be personal data within the meaning of the LPDP and are retained permanently as part of the common good.
 

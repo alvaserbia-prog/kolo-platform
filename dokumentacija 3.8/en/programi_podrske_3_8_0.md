@@ -52,7 +52,7 @@ The right to a programme is exercised by a verified user with a full reality ind
 
 Before the Foundation decides, the fulfilment of conditions is confirmed by all of the applicant's verifiers. Each verifier, under full responsibility and on the basis of direct personal acquaintance with the applicant, confirms that the applicant satisfies the programme's conditions, or refuses confirmation with a mandatory statement of reasons. Verifiers do not have access to the data entered by the applicant — they confirm on the basis of their own knowledge. The Foundation may approve the application only once all verifiers have confirmed; the absence or refusal of even one verifier prevents approval. This mechanism protects the integrity of the programmes against false applications (anti-fraud).
 
-The application and the request for confirmation from verifiers are made exclusively with the explicit consent of the applicant. By consenting, the applicant accepts that their verifiers will be informed that the applicant has applied for a specific programme and asked to confirm the fulfilment of conditions; the data about the programme applied for may reveal to verifiers the applicant's membership of a special category of data. Consent may be withdrawn at any time, with the consequence of terminating the procedure or the automatic recording of POENs.
+The application and the request for confirmation from verifiers are made exclusively with the explicit consent of the applicant. By consenting, the applicant accepts that their verifiers will be informed that the applicant has applied for a specific programme and asked to confirm the fulfilment of conditions; the data about the programme applied for may reveal to verifiers the applicant's membership of a special category of data. Consent may be withdrawn at any time, with the consequence of terminating the procedure or the automatic recording of POEN.
 
 Verification of status constitutes the processing of special categories of personal data; the legal basis for processing is the explicit consent of the user. The entered data are not public and are accessible exclusively to the person at the Foundation processing the application — not to the verifiers.
 
@@ -68,7 +68,7 @@ When the sum of the amounts requested exceeds the daily limit, all amounts are p
 
 *Recording*
 
-The recording of POENs in support programmes is an automatic act of the Protocol and is performed once daily, at midnight of the accounting period, for the duration of the status.
+The recording of POEN in support programmes is an automatic act of the Protocol and is performed once daily, at midnight of the accounting period, for the duration of the status.
 
 Amounts are recorded as whole numbers; rounding is performed downwards (in favour of the Protocol).
 
@@ -154,7 +154,7 @@ The daily amount is fixed at 2,000 POEN.
 
 ### Article 14
 
-The processing of data in support programmes is based on minimization — only the data necessary to establish status are collected. Data on health status, child status, and other special-category data are processed exclusively with the explicit consent of the user and are not publicly accessible.
+The processing of data in support programmes is based on minimisation — only the data necessary to establish status are collected. Data on health status, child status, and other special-category data are processed exclusively with the explicit consent of the user and are not publicly accessible.
 
 The activation or amendment of a programme that introduces new categories of special data requires a prior update to the data protection impact assessment (DPIA).
 

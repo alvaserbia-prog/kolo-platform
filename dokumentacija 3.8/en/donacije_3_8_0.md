@@ -6,7 +6,7 @@
 
 *Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; substantive provisions unchanged.*
 
-*Changes in version 3.7.3: sponsorship explicitly includes sole traders (entrepreneurs), on equal footing with legal entities.*
+*Changes in version 3.7.3: sponsorship explicitly includes entrepreneurs, on equal footing with legal entities.*
 
 ## I — General Provisions
 
@@ -70,7 +70,7 @@ Recorded POEN have the same status as all other POEN in the system.
 
 ### Article 6 — Sponsorship
 
-Sponsorship is a donation of money, goods, or services by a legal entity or a sole trader (entrepreneur) to the Foundation. The sponsor is not a system user and receives neither POEN nor ZRNO.
+Sponsorship is a donation of money, goods, or services by a legal entity or an entrepreneur to the Foundation. The sponsor is not a system user and receives neither POEN nor ZRNO.
 
 The relationship between the Foundation and the sponsor is governed by a donation agreement.
 
@@ -78,13 +78,13 @@ The relationship between the Foundation and the sponsor is governed by a donatio
 
 Sponsorship is initiated by a verified system user by submitting a sponsorship application on the platform.
 
-The application contains: the name of the legal entity or sole trader, the type of donation (money, goods, services), and the value of the donation in dinars. If the subject of the donation is goods or services, the user attaches to the application the sponsor's current retail price list on the basis of which the dinar value of the donation was determined.
+The application contains: the name of the legal entity or entrepreneur, the type of donation (money, goods, services), and the value of the donation in dinars. If the subject of the donation is goods or services, the user attaches to the application the sponsor's current retail price list on the basis of which the dinar value of the donation was determined.
 
 Upon submission of the application, the platform automatically generates a donation agreement between the named sponsor and the Foundation. The donation agreement does not contain provisions on POEN or on the recording of POEN.
 
 ### Article 8 — Signing and performance
 
-The user signs the generated donation agreement on behalf of the legal entity or sole trader. The method of signing and the procedure for the transfer of the donation are established by a separate decision of the Foundation in accordance with the applicable accounting and tax regulations.
+The user signs the generated donation agreement on behalf of the legal entity or entrepreneur. The method of signing and the procedure for the transfer of the donation are established by a separate decision of the Foundation in accordance with the applicable accounting and tax regulations.
 
 Upon receipt of the donation, the Foundation confirms receipt on the platform. Following confirmation, the Protocol records POEN in the user's record according to the tiers set out in Article 10 of this Rulebook.
 
@@ -92,7 +92,7 @@ If the donation has not been received or the value does not correspond, the Foun
 
 ### Article 9 — Sponsor register
 
-The Foundation maintains a sponsor register in which it records all confirmed applications, including data on the sponsor (legal entity or sole trader), the type and value of the donation, the date of confirmation, and the pseudonym of the user in whose record the entry was made.
+The Foundation maintains a sponsor register in which it records all confirmed applications, including data on the sponsor (legal entity or entrepreneur), the type and value of the donation, the date of confirmation, and the pseudonym of the user in whose record the entry was made.
 
 On the basis of the register, the Foundation determines each sponsor's cumulative contribution by summing the values of all confirmed applications.
 

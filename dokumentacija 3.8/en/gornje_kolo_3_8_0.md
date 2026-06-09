@@ -102,7 +102,7 @@ Delegation may be indirect: if the delegate also delegates their power, the dele
 
 ### Article 16 — Revocation
 
-A delegation may be revoked at any time. A revocation and a new delegation take effect from midnight of the next accounting period, in order to ensure stability of power determination during open votings.
+A delegation may be revoked at any time. A revocation and a new delegation take effect from midnight of the next accounting period, in order to ensure stable determination of voting power while a vote is open.
 
 ## VI — Execution of Decisions and the Foundation
 
@@ -112,7 +112,7 @@ The Foundation, in its service role (Art. 51 of the Rulebook), executes an adopt
 
 ### Article 18 — Protective veto and financial self-sufficiency
 
-The Foundation may place a reasoned protective veto on the execution of a decision that would jeopardise the operational and financial sustainability of the Foundation before it achieves financial self-sufficiency (Art. 48 of the Rulebook). The veto is raised without delay upon the determination of the outcome, with a statement of reasons pointing to a specific threat to sustainability.
+The Foundation may place a reasoned protective veto on the execution of a decision that would jeopardise the operational and financial sustainability of the Foundation before it achieves financial self-sufficiency (Art. 48 of the Rulebook). The veto is asserted without delay once the outcome has been determined, with a statement of reasons pointing to a specific threat to sustainability.
 
 The veto suspends the execution of the decision. The Upper Kolo may amend the proposal so as to eliminate the identified threat and decide on it again.
 
