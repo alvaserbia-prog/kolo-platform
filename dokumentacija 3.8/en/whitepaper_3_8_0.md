@@ -8,7 +8,7 @@
 
 *Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; the description of unverified users' rights has been aligned with the KOLO System Rulebook (Art. 28) — exchange outside the advertising space and participation in POEN ledger updates; sponsorship in the glossary explicitly includes entrepreneurs.*
 
-*Changes in version 3.7.6: (1) the protective veto has been aligned with the KOLO System Rules v3.7.5 — the veto protects the operational and financial sustainability of the Foundation until it achieves financial independence (replacing the earlier formulation that tied the veto to violations of principles, breaches of law, or threats to legal status, which remain protected by the four principles, the licences, and the statutory obligations of the Board of Directors); (2) sponsorship explicitly covers entrepreneurs on equal footing with legal entities (aligned with the Rules v3.7.4 and the Sponsorship Rules v3.7.3).*
+*Changes in version 3.7.6: (1) the protective veto has been aligned with the KOLO System Rules v3.7.5 — the veto protects the operational and financial sustainability of the Foundation until it achieves financial self-sufficiency (replacing the earlier formulation that tied the veto to violations of principles, breaches of law, or threats to legal status, which remain protected by the four principles, the licences, and the statutory obligations of the Board of Directors); (2) sponsorship explicitly covers entrepreneurs on equal footing with legal entities (aligned with the Rules v3.7.4 and the Sponsorship Rules v3.7.3).*
 
 **Contents**
 
@@ -868,7 +868,7 @@ Threshold for transition to Phase 2: the total number of POENs recorded in the s
 
 When the total number of POENs recorded in the system reaches one million, the accounting coefficient reaches its minimum value of 1 — one million POENs divided by one million available ZRNOs. This threshold is determined by the accounting mechanics: at a coefficient of 1, inscribing one ZRNO requires at least 1 POEN, at which point the accounting relationship between the two units begins to function meaningfully. This is the trigger for activating ZRNO inscription — the Protocol begins accepting ZRNO inscription requests according to the rules described in chapter 6.
 
-With the activation of ZRNO, the Upper Kolo automatically comes into being — the system's governing body comprises all ZRNO Holders. Governance powers transfer from the Foundation's Board of Directors to the community of active ZRNO Holders (chapter 10). There is no separate step for activating the Upper Kolo: one million POENs is the threshold that simultaneously activates ZRNO, establishes the Upper Kolo, and marks the transition from founding governance to community governance. The Foundation retains its legal and service role, as well as a protective veto over decisions of the Upper Kolo. The veto expires permanently and irreversibly when the Foundation's financial resources reach the financial independence threshold established by a special rulebook.
+With the activation of ZRNO, the Upper Kolo automatically comes into being — the system's governing body comprises all ZRNO Holders. Governance powers transfer from the Foundation's Board of Directors to the community of active ZRNO Holders (chapter 10). There is no separate step for activating the Upper Kolo: one million POENs is the threshold that simultaneously activates ZRNO, establishes the Upper Kolo, and marks the transition from founding governance to community governance. The Foundation retains its legal and service role, as well as a protective veto over decisions of the Upper Kolo. The veto expires permanently and irreversibly when the Foundation's financial resources reach the financial self-sufficiency threshold established by a special rulebook.
 
 The first users reach the threshold of twenty thousand POENs and begin to inscribe ZRNO. The accounting coefficient changes for the first time on the basis of real activity. The system acquires its first ZRNO Holders. Users who had a supervisory function in Phase 1 inscribe ZRNO through the regular mechanism of chapter 6, whereby the supervisory function becomes tied to the status of ZRNO Holder in accordance with the Proof of Reality Rulebook.
 
@@ -1025,8 +1025,8 @@ The tables in this appendix summarize the key parameters of the system. Each par
 
 | **Protective mechanism** | **Condition** | **Note** |
 | --- | --- | --- |
-| Foundation's protective veto | Active until dissolution | Rejects a decision that jeopardizes the operational and financial sustainability of the Foundation until financial independence |
-| Veto dissolution | Financial independence threshold established by a specific bylaw | Permanent and one-way |
+| Foundation's protective veto | Active until dissolution | Rejects a decision that jeopardizes the operational and financial sustainability of the Foundation until financial self-sufficiency |
+| Veto dissolution | Financial self-sufficiency threshold established by a specific bylaw | Permanent and one-way |
 
 ### Table 6: Modules (chapter 9)
 
@@ -1062,11 +1062,11 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **POEN —** The internal accounting unit of the system. A ledger entry for contributions and other forms of participation in the common good. Has no holder — it exists exclusively as a record in the Protocol ledger. Records are entered solely by the Protocol. Recording mechanisms: user contributions (donations, sponsorship, verification, operational contribution) — POENs in the user's record; growth of Circles and Cooperatives (Modules 1 and 2) — POENs in the record of the organizational unit; automatic recording in social programs (Module 3) — POENs in the user's record by status. Exchange does not increase the total number of POENs — it redistributes existing ones (zero-sum). Not money, currency, token, payment instrument, electronic money, or digital asset. Non-convertible. Chapter 6.1.
 
-**ZRNO —** A record of position in the common good. Total available: one million. Inscribed and withdrawn exclusively through the Protocol. Non-transferable between users. Can be in a free state (enables withdrawal) or an active state (enables voting in the Upper Kolo). Not a security, share, stock, investment contract, or digital asset. Carries no dividend, interest, or guaranteed return. Chapter 6.2.
+**ZRNO —** A record of position in the common good. Total available: one million. Inscribed and redeemed exclusively through the Protocol. Non-transferable between users. Can be in a free state (enables redemption) or an active state (enables voting in the Upper Kolo). Not a security, share, stock, investment contract, or digital asset. Carries no dividend, interest, or guaranteed return. Chapter 6.2.
 
 **Accounting coefficient —** The total number of POENs recorded in the system divided by the number of ZRNOs available in the Protocol. Calculated by the Protocol once daily. An administrative figure — not a price, exchange rate, or performance index. Chapter 6.3.
 
-**Accounting period —** The time interval at the end of which the Protocol calculates the accounting coefficient and applies the rules for ZRNO inscription and withdrawal. The accounting period lasts 24 hours, closing at midnight — a fixed element of the system. Chapter 6.
+**Accounting period —** The time interval at the end of which the Protocol calculates the accounting coefficient and applies the rules for ZRNO inscription and redemption. The accounting period lasts 24 hours, closing at midnight — a fixed element of the system. Chapter 6.
 
 **Two separate acts —** The principle that the legal act of donation (monetary flow) and the administrative act of POEN recording (accounting flow) are two legally independent acts. A donation does not purchase POENs. Recording is not a counter-performance for the donation. Chapter 4.
 
@@ -1076,7 +1076,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Verified user —** A person whose reality has been confirmed through the vouching chain and whose reality index is at least 10%. Exchanges, contributes, acquires POEN records, donates, participates in Circles and Cooperatives. Full and legitimate status. Chapter 7.
 
-**ZRNO Holder —** A Verified user in whose name ZRNO is recorded in the Protocol. Reality index always 100%. All functions of a Verified user plus participation in governance through the Upper Kolo, position in the accounting system, permanent verifier with full capacity, and the function of a spread monitor. Chapter 7.
+**ZRNO Holder —** A Verified user in whose name ZRNO is recorded in the Protocol. Reality index always 100%. All functions of a Verified user plus participation in governance through the Upper Kolo, position in the accounting system, permanent verifier with full capacity, and the function of an expansion overseer. Chapter 7.
 
 ### Proof of Reality
 
@@ -1090,7 +1090,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Bootstrap mechanism —** The mechanism for starting the vouching chain, whereby members of the Foundation's Board of Directors receive an initial index without verification by other users. Chapter 7.
 
-**Spread monitor —** The function of checking the legitimacy of a completed verification before the verifier's capacity is replenished. In Phase 1, performed by members of the Foundation's Board of Directors; in Phase 2, by ZRNO Holders. Chapter 7.
+**Expansion overseer —** The function of checking the legitimacy of a completed verification before the verifier's capacity is replenished. In Phase 1, performed by members of the Foundation's Board of Directors; in Phase 2, by ZRNO Holders. Chapter 7.
 
 ### Contribution
 
@@ -1112,7 +1112,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Delegation —** The transfer of voting power from one ZRNO Holder to another. Votes are delegated, not ZRNO. General — the delegate votes on all issues. Revocable. Delegated votes are added to the delegate's own votes. The rules of delegation, including the effects of revocation and delegation limits, are established by the Bylaw on the Upper Kolo. Chapter 10.
 
-**Protective veto —** The Foundation's right to reject a decision that jeopardizes the operational and financial sustainability of the Foundation before it achieves financial independence. Must be reasoned. Dissolves permanently and one-way when the Foundation's financial resources reach the financial independence threshold established by a specific bylaw. Chapter 10.
+**Protective veto —** The Foundation's right to reject a decision that jeopardizes the operational and financial sustainability of the Foundation before it achieves financial self-sufficiency. Must be reasoned. Dissolves permanently and one-way when the Foundation's financial resources reach the financial self-sufficiency threshold established by a specific bylaw. Chapter 10.
 
 ### Modules
 
@@ -1130,7 +1130,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Absence of property rights over records —** A structural principle of the system. A user has no property right over the record of their contribution. Records are data in the ledger, not assets. Cannot be abolished by any governance decision. Chapter 4.
 
-**Irrevocability of donations —** A structural principle of the system. A monetary donation to the Foundation is irrevocable. The donor does not acquire the right to a refund, a governance right, or a share in the system. Cannot be abolished by any governance decision. Chapter 4.
+**Non-refundability of donations —** A structural principle of the system. A monetary donation to the Foundation is non-refundable. The donor does not acquire the right to a refund, a governance right, or a share in the system. Cannot be abolished by any governance decision. Chapter 4.
 
 **Data minimization —** A structural principle of the system. The platform collects only the data necessary for the operation of the system. The Foundation does not store personal data of platform users in its own databases. Cannot be abolished by any governance decision. Chapter 4.
 
@@ -1246,7 +1246,7 @@ This appendix maps each of the eight principles onto specific elements of the KO
 
 *Ostrom:* Monitors who actively track the condition of the common good and the behavior of users are accountable to users, or are themselves users.
 
-*KOLO:* The Protocol records every activity in the system — every exchange, every contribution, every act of verification (chapters 6 and 7). The ledger is available to system participants in pseudonymous form (chapter 12). Spread monitors — members of the Foundation's Board of Directors in Phase 1, ZRNO Holders in Phase 2 — check the legitimacy of verifications (chapter 7). ZRNO Holders verify the performance of operational tasks (chapter 8.3). The transparency of rules and the ledger enables every participant to detect irregular patterns.
+*KOLO:* The Protocol records every activity in the system — every exchange, every contribution, every act of verification (chapters 6 and 7). The ledger is available to system participants in pseudonymous form (chapter 12). Expansion overseers — members of the Foundation's Board of Directors in Phase 1, ZRNO Holders in Phase 2 — check the legitimacy of verifications (chapter 7). ZRNO Holders verify the performance of operational tasks (chapter 8.3). The transparency of rules and the ledger enables every participant to detect irregular patterns.
 
 *Alignment:* Structural. Monitoring is automated (the Protocol records everything) and decentralized (ZRNO Holders perform the monitoring function). Monitors are themselves system users with recorded contributions.
 
@@ -1262,7 +1262,7 @@ This appendix maps each of the eight principles onto specific elements of the KO
 
 *Ostrom:* Users have rapid access to mechanisms for resolving disputes.
 
-*KOLO:* Users can submit objections and appeals regarding the functioning of the system to the Foundation (in both phases) and to the Upper Kolo (in Phase 2). The decision-making process in the Upper Kolo includes a period of public discussion in which the entire community can comment on and contest proposals before voting (chapter 10). The four principles of the system, the common-good licenses, and the legal obligations of the Board of Directors absolutely constrain decisions, while the Foundation's protective veto protects its operational and financial sustainability until financial independence. A user who disagrees with decisions retains the right to exit the system while exercising the rights set out in chapter 12 (cf. Hirschman, 1970). Concrete procedures for submitting objections and resolving disputes are defined in the system's bylaw.
+*KOLO:* Users can submit objections and appeals regarding the functioning of the system to the Foundation (in both phases) and to the Upper Kolo (in Phase 2). The decision-making process in the Upper Kolo includes a period of public discussion in which the entire community can comment on and contest proposals before voting (chapter 10). The four principles of the system, the common-good licenses, and the legal obligations of the Board of Directors absolutely constrain decisions, while the Foundation's protective veto protects its operational and financial sustainability until financial self-sufficiency. A user who disagrees with decisions retains the right to exit the system while exercising the rights set out in chapter 12 (cf. Hirschman, 1970). Concrete procedures for submitting objections and resolving disputes are defined in the system's bylaw.
 
 *Alignment:* Structural. Mechanisms exist at both levels (Foundation and Upper Kolo), with defined procedures in the system's bylaw.
 
