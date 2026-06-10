@@ -128,8 +128,7 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
 
       {isVerified && !imaPunIndeks && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
-          Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset
-          verifikacija. Svi vaši verifikatori potvrđuju ispunjenost uslova pre odobravanja.
+          {t("nepun_indeks")}
         </div>
       )}
 
@@ -308,18 +307,17 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
       {type === "POSEBNA_BRIGA" && (
         <div className="space-y-2">
           <div>
-            <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum donošenja rešenja o invaliditetu</label>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_resenja")}</label>
             <input type="date" value={datumResenja} onChange={(e) => setDatumResenja(e.target.value)}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-kolo-muted mb-1">Datum isteka rešenja (opciono — ostavite prazno ako je trajno)</label>
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_isteka")}</label>
             <input type="date" value={datumIsteka} onChange={(e) => setDatumIsteka(e.target.value)}
               className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
           </div>
           <p className="text-xs text-kolo-muted">
-            Evidentira se samo datum rešenja nadležnog organa — ne traži se broj rešenja,
-            naziv organa, medicinska dokumentacija ni dijagnoza.
+            {t("posebna_briga_napomena2")}
           </p>
         </div>
       )}
@@ -362,9 +360,7 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
         <input type="checkbox" checked={pristanak} onChange={(e) => setPristanak(e.target.checked)}
           className="mt-0.5 shrink-0" />
         <span className="text-xs text-kolo-muted">
-          Pristajem da mojih deset verifikatora bude zamoljeno da pod punom odgovornošću
-          potvrde da ispunjavam uslov za ovaj program. Verifikatori ne vide unete podatke.
-          Prijavu odobrava Fondacija tek kada svi potvrde.
+          {t("pristanak_tekst")}
         </span>
       </label>
 

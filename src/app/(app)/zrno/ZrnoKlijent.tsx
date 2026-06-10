@@ -69,10 +69,7 @@ export default function ZrnoKlijent(props: Props) {
           </div>
         )}
       </div>
-      <PageOpis>
-        ZRNO beleži tvoj položaj u zajednici i iz njega proizlazi tvoj glas u
-        odlučivanju. Ovde upisuješ i otpisuješ ZRNO i upravljaš svojim glasom.
-      </PageOpis>
+      <PageOpis>{t("opis")}</PageOpis>
 
       {/* Stanje */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -368,8 +365,8 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
               {delegacija.imaZakazano ? (
                 <p className="text-xs text-kolo-gold-600 mt-0.5">
                   {delegacija.zakazaniPseudonim
-                    ? `Zakazano: → ${delegacija.zakazaniPseudonim} — stupa na snagu u ponoć`
-                    : "Zakazan opoziv — stupa na snagu u ponoć"}
+                    ? t("zakazana_promena", { pseudonim: delegacija.zakazaniPseudonim })
+                    : t("zakazan_opoziv")}
                 </p>
               ) : (
                 delegacija.aktivna && <p className="text-xs text-kolo-gold-600 mt-0.5">{t("aktivna")}</p>

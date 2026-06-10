@@ -125,9 +125,7 @@ export default function SistemKlijent({
         {t("dobrodoslice", { pseudonim })}
       </h1>
       <PageOpis>
-        Pregled celog KOLO sistema u brojkama — koliko vas ima, koliko se razmenjuje
-        i da li je sve u ravnoteži. Ovde pratiš zdravlje zajednice; ništa se odavde ne
-        menja, samo se gleda.
+        {t("opis_stranice")}
       </PageOpis>
 
       {/* Upozorenje za neverifikovane */}
@@ -181,12 +179,12 @@ export default function SistemKlijent({
         >
           <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
-              termin="Faza sistema"
-              objasnjenje="Kada zajednica evidentira 1.000.000 POEN doprinosa, sistem automatski prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje) i upis ZRNA."
+              termin={t("faza_sistema")}
+              objasnjenje={t("faza_sistema_opis")}
             />
           </p>
           <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
-            {faza2 ? "Faza 2" : "Faza 1"}
+            {faza2 ? t("faza_2") : t("faza_1")}
           </p>
           <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
             <div
@@ -195,7 +193,7 @@ export default function SistemKlijent({
             />
           </div>
           <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
-            {faza2 ? "Gornje Kolo aktivno" : `${fazaPct.toFixed(1)}% do Gornjeg Kola`}
+            {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
           </p>
         </button>
 
@@ -211,7 +209,7 @@ export default function SistemKlijent({
           <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
               termin={t("kartica_opticaj")}
-              objasnjenje="Ukupan broj POEN-a koji trenutno postoji u sistemu. Pokazuje koliko je zajednica aktivna."
+              objasnjenje={t("kartica_opticaj_opis")}
             />
           </p>
           <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
@@ -219,7 +217,7 @@ export default function SistemKlijent({
           </p>
           {danasEmitovano > 0 && (
             <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 ${sekcija === "pregled" ? "bg-white/20 text-white/80" : "bg-kolo-green-100 text-kolo-green-700"}`}>
-              +{danasEmitovano.toLocaleString("sr-RS")} danas
+              +{danasEmitovano.toLocaleString("sr-RS")} {t("danas")}
             </span>
           )}
           <div className={`flex items-center gap-1.5 mt-1 text-xs ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
@@ -228,7 +226,7 @@ export default function SistemKlijent({
                 <span className={sekcija === "pregled" ? "text-white/80" : "text-kolo-green-600"}>✓</span>
                 <Pojam
                   termin={<span>{t("zero_sum_ok")}</span>}
-                  objasnjenje="Provera ravnoteže: zbir svih zapisa je tačno nula. Znači da nijedan POEN nije nastao ni iz čega — sve je evidentirano kako treba."
+                  objasnjenje={t("zero_sum_ok_opis")}
                 />
               </>
             ) : (
@@ -244,8 +242,8 @@ export default function SistemKlijent({
         <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
           <p className="text-base font-semibold mb-1 text-kolo-muted">
             <Pojam
-              termin="Mreža poverenja"
-              objasnjenje="Ukupan broj veza u lancu jemstva (dokaz stvarnosti) — koliko je puta jedan član jemčio za drugog. Pokazuje koliko je mreža poverenja izrasla."
+              termin={t("mreza_poverenja")}
+              objasnjenje={t("mreza_poverenja_opis")}
             />
           </p>
           <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
@@ -253,30 +251,30 @@ export default function SistemKlijent({
           </p>
           {danasVerifikacija > 0 && (
             <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 bg-kolo-green-100 text-kolo-green-700">
-              +{danasVerifikacija.toLocaleString("sr-RS")} danas
+              +{danasVerifikacija.toLocaleString("sr-RS")} {t("danas")}
             </span>
           )}
-          <p className="text-xs mt-1 text-kolo-muted">veza u lancu jemstva</p>
+          <p className="text-xs mt-1 text-kolo-muted">{t("veza_u_lancu")}</p>
         </div>
 
         {/* Donacije */}
         <Kartica
           aktivan={sekcija === "donacije"}
           onClick={() => setSekcija("donacije")}
-          label="Donacije"
+          label={t("kartica_donacije")}
           broj={ukupnoDonacija}
           danas={danasDonacija}
-          podnaslov="potvrđenih donacija"
+          podnaslov={t("kartica_donacije_opis")}
         />
 
         {/* Iznos transakcija */}
         <Kartica
           aktivan={sekcija === "iznos"}
           onClick={() => setSekcija("iznos")}
-          label="Ukupan promet"
+          label={t("kartica_promet")}
           broj={ukupanIznosTx}
           danas={danasIznosTx}
-          podnaslov="POEN između članova"
+          podnaslov={t("kartica_promet_opis")}
         />
       </div>
 
@@ -391,7 +389,7 @@ function PregledSekcija({
           <p className="text-sm font-semibold text-kolo-text">
             <Pojam
               termin={t("rast_opticaja")}
-              objasnjenje="Kada zajednica evidentira 1.000.000 POEN doprinosa, sistem prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje). Ovo nije cilj cene — POEN nema cenu ni vrednost van sistema."
+              objasnjenje={t("rast_opticaja_objasnjenje")}
             />
           </p>
           <p className="text-xs text-kolo-muted">
@@ -420,8 +418,8 @@ function PregledSekcija({
       {/* Transakcije Protokola */}
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center">
-          <p className="text-sm font-semibold text-kolo-text">Transakcije Protokola</p>
-          <p className="text-xs text-kolo-muted">{protokolTx.length} ukupno</p>
+          <p className="text-sm font-semibold text-kolo-text">{t("protokol_tx_naslov")}</p>
+          <p className="text-xs text-kolo-muted">{protokolTx.length} {t("ukupno")}</p>
         </div>
         {protokolTx.length === 0 ? (
           <div className="p-6 text-center text-sm text-kolo-muted">{t("nema_tx")}</div>
@@ -607,12 +605,12 @@ function ClanoviSekcija({
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {/* Desktop header */}
         <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_1fr_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
-          <span>Pseudonim</span>
-          <span>Lokacija</span>
-          <span className="text-right">Balans</span>
-          <span className="text-right">Rang</span>
-          <span>Krug</span>
-          <span className="text-right">Registracija</span>
+          <span>{t("col_pseudonim")}</span>
+          <span>{t("col_lokacija")}</span>
+          <span className="text-right">{t("col_balans")}</span>
+          <span className="text-right">{t("col_rang")}</span>
+          <span>{t("col_krug")}</span>
+          <span className="text-right">{t("col_registracija")}</span>
         </div>
         {filtrirani.length === 0 ? (
           <div className="p-6 text-center text-sm text-kolo-muted">
@@ -646,7 +644,7 @@ function ClanoviSekcija({
                 <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
                   <RangTooltip
                     rang={c.rangDonacije}
-                    label={`Rang ${c.rangDonacije} · ${c.donacijeRSD.toLocaleString("sr-RS")} RSD`}
+                    label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString("sr-RS") })}`}
                   />
                 </div>
                 <span className="text-sm text-kolo-muted truncate">{c.krug ?? "—"}</span>
@@ -674,8 +672,8 @@ function ClanoviSekcija({
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-kolo-muted">
-                  {c.krug && <span>Krug: {c.krug}</span>}
-                  <span>Rang {c.rangDonacije}</span>
+                  {c.krug && <span>{t("krug_label")}: {c.krug}</span>}
+                  <span>{t("rang_label")} {c.rangDonacije}</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "2-digit",
@@ -853,17 +851,19 @@ function DonacijeSekcija({
   pokrovitelji: PokroviteljItem[];
   verified: boolean;
 }) {
+  const t = useTranslations("sistem");
+
   if (!verified) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
         <p className="text-sm text-kolo-muted mb-3">
-          Pregled donacija dostupan je verifikovanim članovima.
+          {t("donacije_pregled_blokiran")}
         </p>
         <Link
           href="/tabla-jemstva"
           className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
         >
-          Zatraži verifikaciju →
+          {t("verifikuj_dugme_link")}
         </Link>
       </div>
     );
@@ -873,17 +873,17 @@ function DonacijeSekcija({
     <div className="space-y-4">
       {donacije.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-          Nema potvrđenih donacija.
+          {t("nema_donacija")}
         </div>
       ) : (<>
-      <p className="text-xs text-kolo-muted">{donacije.length} prikazanih donacija</p>
+      <p className="text-xs text-kolo-muted">{t("prikazanih_donacija", { count: donacije.length })}</p>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
-          <span>Donator</span>
+          <span>{t("col_donator")}</span>
           <span className="text-right">RSD</span>
           <span className="text-right">POEN</span>
-          <span className="text-right">Nivo</span>
-          <span className="text-right">Datum</span>
+          <span className="text-right">{t("col_nivo")}</span>
+          <span className="text-right">{t("col_datum")}</span>
         </div>
         {donacije.map((d, i) => (
           <div key={d.id} className={i < donacije.length - 1 ? "border-b border-kolo-border/30" : ""}>
@@ -901,7 +901,7 @@ function DonacijeSekcija({
               <span className="text-right font-mono font-semibold text-kolo-text">
                 {d.poenEmitted.toLocaleString("sr-RS")}
               </span>
-              <span className="text-right text-kolo-muted">Nivo {d.level}</span>
+              <span className="text-right text-kolo-muted">{t("nivo_label")} {d.level}</span>
               <span className="text-right text-kolo-muted">
                 {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
                   day: "2-digit",
@@ -922,7 +922,7 @@ function DonacijeSekcija({
               </div>
               <div className="flex items-center gap-3 text-xs text-kolo-muted">
                 <span>{d.amountRSD.toLocaleString("sr-RS")} RSD</span>
-                <span>Nivo {d.level}</span>
+                <span>{t("nivo_label")} {d.level}</span>
                 <span className="ml-auto">
                   {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
                     day: "2-digit",
@@ -940,10 +940,10 @@ function DonacijeSekcija({
 
       {/* Ranglista pokrovitelja */}
       <div>
-        <h2 className="text-sm font-semibold text-kolo-text mb-3">Ranglista pokrovitelja</h2>
+        <h2 className="text-sm font-semibold text-kolo-text mb-3">{t("ranglista_pokrovitelja")}</h2>
         {pokrovitelji.length === 0 ? (
           <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center text-sm text-kolo-muted">
-            Još uvek nema registrovanih pokrovitelja.
+            {t("nema_pokrovitelja")}
           </div>
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -964,7 +964,7 @@ function DonacijeSekcija({
                   )}
                 </div>
                 <div className="shrink-0 text-right">
-                  <p className="text-sm font-semibold text-kolo-green-700">Nivo {p.trenutniNivo}</p>
+                  <p className="text-sm font-semibold text-kolo-green-700">{t("nivo_label")} {p.trenutniNivo}</p>
                   <p className="text-xs text-kolo-muted mt-0.5">
                     {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
                   </p>
@@ -978,7 +978,7 @@ function DonacijeSekcija({
             href="/postani-pokrovitelj"
             className="text-sm font-medium text-kolo-green-700 hover:underline"
           >
-            Kako postati pokrovitelj →
+            {t("postani_pokrovitelj_link")}
           </Link>
         </div>
       </div>
@@ -997,6 +997,7 @@ function IznosSekcija({
   danasIznosTx: number;
   transakcije: Transakcija[];
 }) {
+  const t = useTranslations("sistem");
   const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
   const ukupnoTransferi = transferi.reduce((s, tx) => s + tx.amount, 0);
 
@@ -1004,36 +1005,36 @@ function IznosSekcija({
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
-          <p className="text-xs text-kolo-muted mb-1">Ukupno prometa</p>
+          <p className="text-xs text-kolo-muted mb-1">{t("ukupno_prometa")}</p>
           <p className="text-2xl font-bold font-mono text-kolo-text">
             {ukupanIznosTx.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs text-kolo-muted mt-1">POEN između članova</p>
+          <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
-          <p className="text-xs text-kolo-muted mb-1">Danas</p>
+          <p className="text-xs text-kolo-muted mb-1">{t("danas")}</p>
           <p className="text-2xl font-bold font-mono text-kolo-text">
             {danasIznosTx.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs text-kolo-muted mt-1">POEN između članova</p>
+          <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
         </div>
       </div>
       {transferi.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           <div className="px-5 py-2.5 bg-kolo-bg border-b border-kolo-border flex justify-between items-center">
             <p className="text-xs font-semibold text-kolo-muted">
-              Poslednjih {transferi.length} transfera
+              {t("poslednjih_transfera", { count: transferi.length })}
             </p>
             <p className="text-xs text-kolo-muted">
-              ukupno {ukupnoTransferi.toLocaleString("sr-RS")} POEN
+              {t("ukupno_poen", { iznos: ukupnoTransferi.toLocaleString("sr-RS") })}
             </p>
           </div>
           <div className="hidden sm:grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 px-5 py-2 border-b border-kolo-border bg-kolo-bg/50 text-xs font-semibold text-kolo-muted">
-            <span>Vreme</span>
-            <span>Pošiljalac</span>
+            <span>{t("vreme")}</span>
+            <span>{t("posalje")}</span>
             <span />
-            <span>Primalac</span>
-            <span className="text-right">Iznos</span>
+            <span>{t("primalac")}</span>
+            <span className="text-right">{t("iznos")}</span>
           </div>
           {transferi.slice(0, 20).map((tx, i) => (
             <div

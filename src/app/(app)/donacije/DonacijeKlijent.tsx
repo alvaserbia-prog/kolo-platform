@@ -53,7 +53,7 @@ export default function DonacijeKlijent() {
     setKarticaGreska(null);
     const iznos = Math.round(Number(iznosKartica));
     if (!Number.isFinite(iznos) || iznos < 100) {
-      setKarticaGreska("Unesite iznos (najmanje 100 RSD).");
+      setKarticaGreska(t("karticno_min_iznos"));
       return;
     }
     setKarticaLoading(true);
@@ -65,7 +65,7 @@ export default function DonacijeKlijent() {
       });
       const j = await r.json();
       if (!r.ok) {
-        setKarticaGreska(j.error ?? "Plaćanje trenutno nije moguće.");
+        setKarticaGreska(j.error ?? t("karticno_nije_moguce"));
         return;
       }
       // Auto-submit forme ka NestPay gateway-u banke (preusmeravanje na 3D stranicu).
@@ -82,7 +82,7 @@ export default function DonacijeKlijent() {
       document.body.appendChild(forma);
       forma.submit();
     } catch {
-      setKarticaGreska("Greška u komunikaciji. Pokušajte ponovo.");
+      setKarticaGreska(t("karticno_greska_komunikacije"));
       setKarticaLoading(false);
     }
   }
@@ -109,17 +109,17 @@ export default function DonacijeKlijent() {
       {/* Ishod kartičnog plaćanja (povratak sa gateway-a) */}
       {ishod === "uspeh" && (
         <div className="rounded-2xl border border-kolo-green-700/30 bg-kolo-green-100 p-4 text-sm text-kolo-green-900">
-          Uplata je uspešno primljena. POEN je evidentiran — vidite ga u istoriji ispod.
+          {t("placanje_uspeh")}
         </div>
       )}
       {ishod === "neuspeh" && (
         <div className="rounded-2xl border border-kolo-gold-600/30 bg-kolo-gold-100 p-4 text-sm text-kolo-gold-600">
-          Plaćanje nije odobreno (banka je odbila transakciju). Nije evidentirana nijedna uplata.
+          {t("placanje_neuspeh")}
         </div>
       )}
       {ishod === "greska" && (
         <div className="rounded-2xl border border-red-300 bg-red-50 p-4 text-sm text-red-600">
-          Došlo je do greške pri obradi plaćanja. Ako je iznos naplaćen, obratite se podršci.
+          {t("placanje_greska")}
         </div>
       )}
 
@@ -165,9 +165,9 @@ export default function DonacijeKlijent() {
       {/* Kartično plaćanje (Banca Intesa / OTP — NestPay) */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
         <div>
-          <p className="text-sm font-semibold text-kolo-text">Doniraj platnom karticom</p>
+          <p className="text-sm font-semibold text-kolo-text">{t("karticno_naslov")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">
-            Bezbedno plaćanje na stranici banke (3D Secure). Podaci o kartici se ne čuvaju na platformi.
+            {t("karticno_opis")}
           </p>
         </div>
         <div className="flex gap-2">
@@ -179,7 +179,7 @@ export default function DonacijeKlijent() {
               step={100}
               value={iznosKartica}
               onChange={(e) => setIznosKartica(e.target.value)}
-              placeholder="Iznos"
+              placeholder={t("karticno_iznos_placeholder")}
               className="w-full pl-3 pr-12 py-2.5 rounded-xl border border-kolo-border text-sm focus:outline-none focus:ring-2 focus:ring-kolo-green-500/40"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-kolo-muted">RSD</span>
@@ -189,7 +189,7 @@ export default function DonacijeKlijent() {
             disabled={karticaLoading}
             className="px-5 py-2.5 rounded-xl bg-kolo-gold-600 text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
           >
-            {karticaLoading ? "Otvaram…" : "Plati karticom"}
+            {karticaLoading ? t("karticno_otvaram") : t("karticno_plati")}
           </button>
         </div>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}

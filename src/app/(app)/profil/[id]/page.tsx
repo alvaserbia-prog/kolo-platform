@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
+import { useTranslations } from "next-intl";
 
 interface Transakcija {
   id: string;
@@ -44,24 +45,25 @@ interface ProfilData {
   oglasi: Oglas[];
 }
 
-const TIP_LABELA: Record<string, string> = {
-  TRANSFER: "Transfer",
-  EMISIJA: "Emisija",
-  EMISIJA_VERIFIKACIJA: "Verifikacija",
-  EMISIJA_DONACIJA: "Donacija",
-  EMISIJA_POKROVITELJ: "Pokroviteljstvo",
-  EMISIJA_PROGRAM: "Program",
-  EMISIJA_PED: "Evidencija doprinosa",
-  EMISIJA_KRUG: "Krug bonus",
-  EMISIJA_KRUG_OSNIVANJE: "Osnivanje krugovi",
-  UPIS_ZRNO: "Upis ZRNA",
-  OTPIS_ZRNO: "Otpis ZRNA",
-};
-
 export default function JavniProfilPage() {
+  const t = useTranslations("profil");
   const params = useParams();
   const router = useRouter();
   const id = params.id as string;
+
+  const TIP_LABELA: Record<string, string> = {
+    TRANSFER: t("trx_transfer"),
+    EMISIJA: t("trx_emisija"),
+    EMISIJA_VERIFIKACIJA: t("trx_verifikacija"),
+    EMISIJA_DONACIJA: t("trx_donacija"),
+    EMISIJA_POKROVITELJ: t("trx_pokroviteljstvo"),
+    EMISIJA_PROGRAM: t("trx_program"),
+    EMISIJA_PED: t("trx_evidencija_doprinosa"),
+    EMISIJA_KRUG: t("trx_krug_bonus"),
+    EMISIJA_KRUG_OSNIVANJE: t("trx_osnivanje_krugovi"),
+    UPIS_ZRNO: t("trx_upis_zrno"),
+    OTPIS_ZRNO: t("trx_otpis_zrno"),
+  };
 
   const [profil, setProfil] = useState<ProfilData | null>(null);
   const [greska, setGreska] = useState("");
@@ -88,7 +90,7 @@ export default function JavniProfilPage() {
         }
         setUcitavam(false);
       })
-      .catch(() => { setGreska("Greška pri učitavanju."); setUcitavam(false); });
+      .catch(() => { setGreska(t("greska_ucitavanja")); setUcitavam(false); });
   }, [id, router]);
 
   const ucitajJos = useCallback(async () => {
@@ -121,7 +123,7 @@ export default function JavniProfilPage() {
   if (greska || !profil) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
-        <p className="text-kolo-muted text-sm">{greska || "Profil nije pronađen."}</p>
+        <p className="text-kolo-muted text-sm">{greska || t("profil_nije_pronadjen")}</p>
       </div>
     );
   }
@@ -132,7 +134,7 @@ export default function JavniProfilPage() {
     <div className="space-y-4">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-kolo-muted">
-        <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">Krug</Link>
+        <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">{t("krug_link")}</Link>
         <span>/</span>
         <span className="text-kolo-text">{profil.pseudonim}</span>
       </div>
@@ -171,16 +173,16 @@ export default function JavniProfilPage() {
               <div className="flex flex-wrap gap-1.5 shrink-0">
                 {profil.verified ? (
                   <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 rounded-full">
-                    Verifikovan
+                    {t("status_verifikovan")}
                   </span>
                 ) : (
                   <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 rounded-full">
-                    Neverifikovan
+                    {t("status_ceka")}
                   </span>
                 )}
                 {profil.status === "SUSPENDED" && (
                   <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-danger-light text-kolo-danger rounded-full">
-                    Suspendovan
+                    {t("status_suspendovan")}
                   </span>
                 )}
               </div>
@@ -195,7 +197,7 @@ export default function JavniProfilPage() {
         <dl className="mt-5 space-y-2.5 text-sm border-t border-kolo-border pt-4">
           {profil.krug && (
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Krug</dt>
+              <dt className="text-kolo-muted">{t("krug_link")}</dt>
               <dd>
                 <Link href={`/krug/${profil.krug.id}`} className="font-medium text-kolo-green-700 hover:underline">
                   {profil.krug.name}
@@ -204,14 +206,14 @@ export default function JavniProfilPage() {
             </div>
           )}
           <div className="flex justify-between">
-            <dt className="text-kolo-muted">Član od</dt>
+            <dt className="text-kolo-muted">{t("clan_od")}</dt>
             <dd className="text-kolo-muted">
               {new Date(profil.createdAt).toLocaleDateString("sr-RS", { year: "numeric", month: "long" })}
             </dd>
           </div>
           {profil.telefon && (
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">Telefon</dt>
+              <dt className="text-kolo-muted">{t("telefon_label")}</dt>
               <dd className="text-kolo-text">{profil.telefon}</dd>
             </div>
           )}
@@ -223,7 +225,7 @@ export default function JavniProfilPage() {
             href={`/novcanik?prima=${profil.pseudonim}`}
             className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
           >
-            Upiši POEN
+            {t("upisi_poen")}
           </Link>
           <PorukaButton userId={profil.id} />
         </div>
@@ -237,7 +239,7 @@ export default function JavniProfilPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {profil.bilans !== null && (
             <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">POEN balans</p>
+              <p className="text-xs text-kolo-muted mb-1">{t("poen_stanje_label")}</p>
               <p className="text-lg font-bold text-kolo-text">{profil.bilans.toLocaleString("sr-RS")}</p>
             </div>
           )}
@@ -249,7 +251,7 @@ export default function JavniProfilPage() {
           )}
           {profil.rangDonacija !== null && (
             <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">Rang donacija</p>
+              <p className="text-xs text-kolo-muted mb-1">{t("toggle_rang_donacija")}</p>
               <p className="text-lg font-bold text-kolo-text">#{profil.rangDonacija}</p>
             </div>
           )}
@@ -259,10 +261,10 @@ export default function JavniProfilPage() {
       {/* Transakcije */}
       <div className="bg-white rounded-2xl border border-kolo-border">
         <div className="px-6 py-4 border-b border-kolo-border">
-          <h2 className="text-sm font-semibold text-kolo-text">Transakcije</h2>
+          <h2 className="text-sm font-semibold text-kolo-text">{t("transakcije_naslov")}</h2>
         </div>
         {sveTrx.length === 0 ? (
-          <p className="px-6 py-8 text-center text-sm text-kolo-muted">Nema transakcija.</p>
+          <p className="px-6 py-8 text-center text-sm text-kolo-muted">{t("nema_transakcija")}</p>
         ) : (
           <ul className="divide-y divide-kolo-border">
             {sveTrx.map((trx) => {
@@ -277,7 +279,7 @@ export default function JavniProfilPage() {
                         <Link href={`/profil/${drugaStrana.id}`} className="text-kolo-green-700 hover:underline">
                           {drugaStrana.pseudonim}
                         </Link>
-                      ) : "Protokol")}
+                      ) : t("protokol"))}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
                       {new Date(trx.createdAt).toLocaleDateString("sr-RS", { day: "numeric", month: "short", year: "numeric" })}
@@ -298,7 +300,7 @@ export default function JavniProfilPage() {
               disabled={ucitavamJos}
               className="w-full py-2.5 text-sm text-kolo-green-700 font-semibold hover:bg-kolo-green-100 rounded-xl transition-colors disabled:opacity-60"
             >
-              {ucitavamJos ? "Učitavam..." : "Prikaži više"}
+              {ucitavamJos ? t("ucitavam") : t("prikazi_vise")}
             </button>
           </div>
         )}
@@ -308,7 +310,7 @@ export default function JavniProfilPage() {
       {profil.oglasi.length > 0 && (
         <div className="bg-white rounded-2xl border border-kolo-border">
           <div className="px-6 py-4 border-b border-kolo-border">
-            <h2 className="text-sm font-semibold text-kolo-text">Aktivni oglasi</h2>
+            <h2 className="text-sm font-semibold text-kolo-text">{t("aktivni_oglasi")}</h2>
           </div>
           <ul className="divide-y divide-kolo-border">
             {profil.oglasi.map((oglas) => (
@@ -335,6 +337,7 @@ export default function JavniProfilPage() {
 }
 
 function PorukaButton({ userId }: { userId: string }) {
+  const t = useTranslations("profil");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -358,7 +361,7 @@ function PorukaButton({ userId }: { userId: string }) {
       disabled={loading}
       className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm font-semibold text-kolo-text hover:bg-kolo-bg transition-colors disabled:opacity-60"
     >
-      {loading ? "..." : "Pošalji poruku"}
+      {loading ? "..." : t("posalji_poruku")}
     </button>
   );
 }

@@ -12,6 +12,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getTranslations } from "next-intl/server";
 import {
   brojRaspolozivihSlotova,
   formatIndeksZaPrikaz,
@@ -31,6 +32,7 @@ import { TipKorisnika } from "@/generated/prisma/client";
 import { jeKorenJemstva } from "@/lib/dozvole";
 
 export default async function VerifikacijaPage() {
+  const t = await getTranslations("verifikacija");
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
@@ -92,20 +94,19 @@ export default async function VerifikacijaPage() {
 
   const podnaslov =
     user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN
-      ? "Pokaži svoj kod nekome ko može da te verifikuje."
+      ? t("podnaslov_neverifikovan")
       : kapacitet === "neograniceno"
-        ? "Kapacitet: neograničeno"
-        : `Slotovi: ${slotoviRaspolozivi ?? 0} raspoloživo / ${user.slotoviPotroseni} potrošeno`;
+        ? t("kapacitet_neograniceno")
+        : t("slotovi_prikaz", { raspolozivo: slotoviRaspolozivi ?? 0, potroseno: user.slotoviPotroseni });
 
   const jeNeverifikovan = user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN;
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold">Verifikacija</h1>
+        <h1 className="text-2xl font-bold">{t("page_naslov")}</h1>
         <PageOpis>
-          Ovde te mreža potvrđuje kao stvarnu osobu — preko nekog ko te lično
-          poznaje, bez dokumenata. To ti otključava pun pristup KOLO.
+          {t("page_opis")}
         </PageOpis>
       </div>
 
@@ -120,12 +121,12 @@ export default async function VerifikacijaPage() {
             className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
           >
             <p className="font-semibold text-kolo-text">
-              {jeNeverifikovan ? "Ne poznaješ nikog u KOLO?" : "Tabla zahteva za jemstvo"}
+              {jeNeverifikovan ? t("tabla_neverifikovan_naslov") : t("tabla_verifikovan_naslov")}
             </p>
             <p className="text-sm text-kolo-muted mt-0.5">
               {jeNeverifikovan
-                ? "Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi."
-                : "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."}
+                ? t("tabla_neverifikovan_opis")
+                : t("tabla_verifikovan_opis")}
             </p>
           </a>
         </div>

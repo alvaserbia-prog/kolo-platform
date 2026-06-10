@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Projekat {
   id: string;
@@ -41,6 +42,7 @@ interface Props {
 type Tab = "info" | "clanovi" | "projekti" | "pristupnice";
 
 export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin }: Props) {
+  const t = useTranslations("krug");
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("info");
   const [loading, setLoading] = useState(false);
@@ -53,12 +55,12 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
     const res = await fetch(`/api/krugovi/${krug.id}/pristupnica`, { method: "POST" });
     const data = await res.json();
     setLoading(false);
-    setPoruka({ text: res.ok ? "Pristupnica poslata! Čekajte odobrenje." : (data.error ?? "Greška."), ok: res.ok });
+    setPoruka({ text: res.ok ? t("pristupnica_poslata") : (data.error ?? t("greska_generic")), ok: res.ok });
     if (res.ok) setTimeout(() => router.refresh(), 1500);
   }
 
   async function istupi() {
-    if (!confirm("Da li ste sigurni da želite da istupite iz krugovi?")) return;
+    if (!confirm(t("istupi_potvrda"))) return;
     setLoading(true);
     const res = await fetch(`/api/krugovi/${krug.id}`, { method: "DELETE" });
     setLoading(false);
@@ -72,18 +74,18 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
   }
 
   const tabs: [Tab, string][] = [
-    ["info", "Informacije"],
-    ["clanovi", `Članovi (${krug.clanovi.length})`],
-    ["projekti", `Projekti (${krug.projects.length})`],
+    ["info", t("tab_info")],
+    ["clanovi", t("tab_clanovi", { count: krug.clanovi.length })],
+    ["projekti", t("tab_projekti", { count: krug.projects.length })],
     ...(canManage && krug.pristupnice.length > 0
-      ? [["pristupnice", `Pristupnice (${krug.pristupnice.length})`] as [Tab, string]]
+      ? [["pristupnice", t("tab_pristupnice", { count: krug.pristupnice.length })] as [Tab, string]]
       : []),
   ];
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/krug" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Krugovi</Link>
+        <Link href="/krug" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">{t("nazad_krugovi")}</Link>
       </div>
 
       {/* Header */}
@@ -105,22 +107,22 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           {!mojeClansvo && !imaPristupnicu && isVerified && (
             <button onClick={podnesiPristupnicu} disabled={loading}
               className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
-              {loading ? "..." : "Podnesi pristupnicu"}
+              {loading ? "..." : t("podnesi_pristupnicu")}
             </button>
           )}
           {imaPristupnicu && (
             <span className="px-4 py-2 bg-kolo-gold-100 text-kolo-gold-600 text-sm font-medium rounded-xl border border-kolo-gold-100">
-              Pristupnica na čekanju
+              {t("pristupnica_cekanje")}
             </span>
           )}
           {mojeClansvo && (
             <>
               <span className="px-4 py-2 bg-kolo-green-100 text-kolo-green-700 text-sm font-medium rounded-xl border border-kolo-green-100">
-                {mojeClansvo.isAdmin ? "Admin krugovi" : "Član krugovi"}
+                {mojeClansvo.isAdmin ? t("status_admin") : t("status_clan")}
               </span>
               <button onClick={istupi} disabled={loading}
                 className="px-4 py-2 border border-kolo-danger/20 text-kolo-danger text-sm font-semibold rounded-xl hover:bg-kolo-danger-light transition-colors disabled:opacity-60">
-                Istupi
+                {t("istupi")}
               </button>
             </>
           )}
@@ -146,15 +148,15 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
       {tab === "info" && (
         <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3 text-sm">
           <div className="flex justify-between">
-            <span className="text-kolo-muted">Broj članova</span>
+            <span className="text-kolo-muted">{t("info_broj_clanova")}</span>
             <span className="font-medium text-kolo-text">{krug.clanovi.length}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-kolo-muted">Stanje novčanika</span>
+            <span className="text-kolo-muted">{t("info_stanje")}</span>
             <span className="font-bold text-kolo-green-700">{krug.balance.toLocaleString("sr-RS")} POEN</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-kolo-muted">Aktivnih projekata</span>
+            <span className="text-kolo-muted">{t("info_aktivnih_projekata")}</span>
             <span className="font-medium text-kolo-text">{krug.projects.length}</span>
           </div>
         </div>
@@ -169,7 +171,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
                 {c.pseudonim}
               </Link>
               <div className="flex items-center gap-2">
-                {c.isAdmin && <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded font-medium">Admin</span>}
+                {c.isAdmin && <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded font-medium">{t("clan_admin_badge")}</span>}
                 <span className="text-xs text-kolo-muted">{new Date(c.joinedAt).toLocaleDateString("sr-RS")}</span>
               </div>
             </div>
@@ -183,7 +185,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           {canManage && <NoviProjekatForma krugId={krug.id} onSuccess={() => router.refresh()} />}
           {krug.projects.length === 0 ? (
             <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-              Nema aktivnih projekata.
+              {t("nema_projekata")}
             </div>
           ) : (
             krug.projects.map((p) => (
@@ -194,7 +196,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
                     {p.description && <p className="text-xs text-kolo-muted mt-1">{p.description}</p>}
                   </div>
                   <span className={`text-xs font-medium px-2 py-0.5 rounded ${p.type === "PRIKUPLJANJE" ? "bg-kolo-info-light text-kolo-info" : "bg-purple-50 text-purple-700"}`}>
-                    {p.type === "PRIKUPLJANJE" ? "Prikupljanje" : "Redistribucija"}
+                    {p.type === "PRIKUPLJANJE" ? t("tip_prikupljanje") : t("tip_redistribucija")}
                   </span>
                 </div>
               </div>
@@ -211,7 +213,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
               <span className="text-sm font-medium text-kolo-text">{p.pseudonim}</span>
               <button onClick={() => odibriPristupnicu(p.id)}
                 className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
-                Odobri
+                {t("odobri_pristupnicu")}
               </button>
             </div>
           ))}
@@ -225,6 +227,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
 // ── Mini forma za novi projekat ────────────────────────────────────────────────
 
 function NoviProjekatForma({ krugId, onSuccess }: { krugId: string; onSuccess: () => void }) {
+  const t = useTranslations("krug");
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -234,7 +237,7 @@ function NoviProjekatForma({ krugId, onSuccess }: { krugId: string; onSuccess: (
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (title.trim().length < 3) { setError("Naziv mora imati najmanje 3 karaktera."); return; }
+    if (title.trim().length < 3) { setError(t("projekat_naziv_greska")); return; }
     setLoading(true);
     const res = await fetch(`/api/krugovi/${krugId}/projekti`, {
       method: "POST",
@@ -243,7 +246,7 @@ function NoviProjekatForma({ krugId, onSuccess }: { krugId: string; onSuccess: (
     });
     const data = await res.json();
     setLoading(false);
-    if (!res.ok) { setError(data.error ?? "Greška."); return; }
+    if (!res.ok) { setError(data.error ?? t("greska_generic")); return; }
     setTitle(""); setDescription(""); setShow(false); setError("");
     onSuccess();
   }
@@ -252,33 +255,33 @@ function NoviProjekatForma({ krugId, onSuccess }: { krugId: string; onSuccess: (
     return (
       <button onClick={() => setShow(true)}
         className="w-full py-2.5 rounded-xl border-2 border-dashed border-kolo-border text-sm text-kolo-muted hover:border-kolo-green-500 hover:text-kolo-green-700 transition-colors">
-        + Novi projekat
+        {t("novi_projekat_dugme")}
       </button>
     );
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-kolo-border p-4 space-y-3">
-      <p className="text-sm font-semibold text-kolo-muted">Novi projekat</p>
-      <input type="text" placeholder="Naziv *" value={title} onChange={(e) => setTitle(e.target.value)}
+      <p className="text-sm font-semibold text-kolo-muted">{t("novi_projekat_naslov")}</p>
+      <input type="text" placeholder={t("projekat_naziv_placeholder")} value={title} onChange={(e) => setTitle(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-      <textarea rows={2} placeholder="Opis" value={description} onChange={(e) => setDescription(e.target.value)}
+      <textarea rows={2} placeholder={t("projekat_opis_placeholder")} value={description} onChange={(e) => setDescription(e.target.value)}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       <div className="flex gap-2">
-        {(["PRIKUPLJANJE", "REDISTRIBUCIJA"] as const).map((t) => (
-          <button key={t} type="button" onClick={() => setType(t)}
-            className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${type === t ? "bg-kolo-green-700 text-white" : "bg-white border border-kolo-border text-kolo-muted"}`}>
-            {t === "PRIKUPLJANJE" ? "Prikupljanje" : "Redistribucija"}
+        {(["PRIKUPLJANJE", "REDISTRIBUCIJA"] as const).map((tp) => (
+          <button key={tp} type="button" onClick={() => setType(tp)}
+            className={`flex-1 py-2 rounded-xl text-xs font-medium transition-colors ${type === tp ? "bg-kolo-green-700 text-white" : "bg-white border border-kolo-border text-kolo-muted"}`}>
+            {tp === "PRIKUPLJANJE" ? t("tip_prikupljanje") : t("tip_redistribucija")}
           </button>
         ))}
       </div>
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
       <div className="flex gap-2">
         <button type="button" onClick={() => setShow(false)}
-          className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">Otkaži</button>
+          className="flex-1 py-2.5 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-medium">{t("otkazi")}</button>
         <button type="submit" disabled={loading}
           className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold disabled:opacity-60">
-          {loading ? "..." : "Kreiraj"}
+          {loading ? "..." : t("kreiraj")}
         </button>
       </div>
     </form>

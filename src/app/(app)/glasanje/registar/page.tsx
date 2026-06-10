@@ -6,14 +6,9 @@ import { dohvatiRegistarOdluka } from "@/lib/protokol/glasanje";
 import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
 import PreporukaOdgovor from "./PreporukaOdgovor";
 import { jeAdmin } from "@/lib/dozvole";
+import { getTranslations } from "next-intl/server";
 
 export const metadata = { title: "Registar odluka — KOLO" };
-
-const IZVRSENJE_LABEL: Record<string, string> = {
-  ZA_IZVRSENJE: "Čeka izvršenje",
-  IZVRSENO: "Izvršeno",
-  VETO_OBUSTAVLJENO: "Veto — izvršenje obustavljeno",
-};
 
 // Registar odluka Gornjeg Kola (Pravilnik o Gornjem Kolu 3.7.6, čl. 21).
 // Nepromenljiv, javno vidljiv pregled svih zatvorenih predloga sa ishodom.
@@ -21,6 +16,7 @@ export default async function RegistarOdlukaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
   const korisnikJeAdmin = jeAdmin(session.user);
+  const t = await getTranslations("glasanje");
 
   const odluke = await dohvatiRegistarOdluka();
 
@@ -28,19 +24,19 @@ export default async function RegistarOdlukaPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="kolo-naslov">Registar odluka</h1>
+          <h1 className="kolo-naslov">{t("registar_naslov")}</h1>
           <p className="text-sm text-kolo-muted mt-1">
-            Nepromenljiv pregled svih zatvorenih predloga Gornjeg Kola sa ishodom (čl. 21).
+            {t("registar_opis")}
           </p>
         </div>
         <Link href="/zrno" className="shrink-0 text-sm text-kolo-green-700 hover:underline">
-          ← Glasanje
+          {t("registar_nazad")}
         </Link>
       </div>
 
       {odluke.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-          Još uvek nema zatvorenih odluka.
+          {t("registar_prazno")}
         </div>
       ) : (
         <div className="space-y-3">
@@ -53,19 +49,19 @@ export default async function RegistarOdlukaPage() {
                   <div className="min-w-0">
                     <p className="font-semibold text-kolo-text">{o.title}</p>
                     {o.vrsta === "DINARSKA_PREPORUKA" && (
-                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded bg-kolo-gold-50 text-kolo-gold-600 font-medium">Dinarska preporuka (savetodavna)</span>
+                      <span className="inline-block mt-1 text-xs px-2 py-0.5 rounded bg-kolo-gold-50 text-kolo-gold-600 font-medium">{t("vrsta_preporuka")}</span>
                     )}
                   </div>
                   <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${usvojen ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
-                    {usvojen ? "Usvojeno" : "Neusvojeno"}
+                    {usvojen ? t("usvojeno") : t("neusvojeno")}
                   </span>
                 </div>
-                <p className="text-xs text-kolo-muted">Predlagač: {o.authorPseudonim} · Zatvoreno: {datum}</p>
+                <p className="text-xs text-kolo-muted">{t("registar_predlagac", { pseudonim: o.authorPseudonim })} · {t("registar_zatvoreno", { datum })}</p>
                 <p className="text-sm text-kolo-muted whitespace-pre-line">{o.description}</p>
                 <div className="flex gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
-                  <span>ZA: <span className="font-semibold text-kolo-green-700">{o.zaZbir}</span> glasačke moći</span>
-                  <span>PROTIV: <span className="font-semibold text-kolo-danger">{o.protivZbir}</span></span>
-                  <span>· {o.brGlasova} glasača</span>
+                  <span>{t("registar_za_zbir", { zbir: o.zaZbir })}</span>
+                  <span>{t("registar_protiv_zbir", { zbir: o.protivZbir })}</span>
+                  <span>· {t("registar_br_glasaca", { count: o.brGlasova })}</span>
                 </div>
 
                 {/* Izvršenje usvojene odluke (čl. 17, 18) */}
@@ -76,10 +72,10 @@ export default async function RegistarOdlukaPage() {
                       : o.izvrsenjeStatus === "VETO_OBUSTAVLJENO" ? "bg-kolo-danger-light text-kolo-danger"
                       : "bg-kolo-gold-100 text-kolo-gold-600"
                     }`}>
-                      {IZVRSENJE_LABEL[o.izvrsenjeStatus]}
+                      {o.izvrsenjeStatus === "ZA_IZVRSENJE" ? t("izvrsenje_ceka") : o.izvrsenjeStatus === "IZVRSENO" ? t("izvrsenje_izvrseno") : t("izvrsenje_veto")}
                     </span>
                     {o.vetoObrazlozenje && (
-                      <p className="mt-1 text-kolo-muted italic">Obrazloženje veta: {o.vetoObrazlozenje}</p>
+                      <p className="mt-1 text-kolo-muted italic">{t("veto_obrazlozenje_label")} {o.vetoObrazlozenje}</p>
                     )}
                   </div>
                 )}
@@ -91,13 +87,13 @@ export default async function RegistarOdlukaPage() {
                   o.uoOdgovor ? (
                     <div className="text-xs">
                       <span className={`inline-block px-2 py-0.5 rounded font-medium ${o.uoOdgovor === "PRIHVACENO" ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
-                        Odgovor UO: {o.uoOdgovor === "PRIHVACENO" ? "Prihvaćeno" : "Odbijeno"}
+                        {t("uo_odgovor_label")} {o.uoOdgovor === "PRIHVACENO" ? t("uo_prihvaceno") : t("uo_odbijeno")}
                       </span>
                       {o.uoObrazlozenje && <p className="mt-1 text-kolo-muted italic">{o.uoObrazlozenje}</p>}
                     </div>
                   ) : (
                     <>
-                      <p className="text-xs text-kolo-gold-600 font-medium">Čeka obrazložen odgovor UO</p>
+                      <p className="text-xs text-kolo-gold-600 font-medium">{t("uo_ceka_odgovor")}</p>
                       {korisnikJeAdmin && <PreporukaOdgovor id={o.id} />}
                     </>
                   )

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import { useTranslations } from "next-intl";
 
 function generisiIme(location: string) {
   return location.trim() ? `KOLO Krug ${location.trim()}` : "";
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function OsnivanjeForma({ userLocation }: Props) {
+  const t = useTranslations("krug");
   const router = useRouter();
   const [location, setLocation] = useState(userLocation ?? "");
   const [name, setName] = useState(generisiIme(userLocation ?? ""));
@@ -117,10 +119,10 @@ export default function OsnivanjeForma({ userLocation }: Props) {
         }),
       });
       const data = await res.json();
-      if (!res.ok) { setError(data.error ?? "Greška."); return; }
+      if (!res.ok) { setError(data.error ?? t("greska_generic")); return; }
       router.push("/krug");
     } catch {
-      setError("Greška pri slanju. Pokušajte ponovo.");
+      setError(t("greska_slanje"));
     } finally {
       setLoading(false);
     }
@@ -129,13 +131,12 @@ export default function OsnivanjeForma({ userLocation }: Props) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/krug" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Krugovi</Link>
-        <h1 className="kolo-naslov">Osnivanje krugovi</h1>
+        <Link href="/krug" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">{t("nazad_krugovi")}</Link>
+        <h1 className="kolo-naslov">{t("osnivanje_naslov")}</h1>
       </div>
 
       <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-4 py-3 text-sm text-kolo-gold-600">
-        Potrebno je najmanje <strong>5 verifikovanih članova</strong> (vi + 4 osnivača). Admin UO odobrava osnivanje.
-        Po odobrenju krug dobija <strong>50.000 POEN</strong> (Čl. 37).
+        {t("osnivanje_info_pre")} <strong>{t("osnivanje_info_uslov")}</strong> {t("osnivanje_info_mid")} <strong>{t("osnivanje_info_bonus")}</strong> {t("osnivanje_info_post")}
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5 bg-white rounded-2xl border border-kolo-border p-6">
@@ -143,48 +144,49 @@ export default function OsnivanjeForma({ userLocation }: Props) {
         {/* Sedište */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">
-            Sedište <span className="text-kolo-muted font-normal">(mesto osnivanja)</span>
+            {t("sediste_label")} <span className="text-kolo-muted font-normal">({t("sediste_hint")})</span>
           </label>
           <LokacijaSearch
             value={location}
             onChange={(val) => setLocation(val)}
-            placeholder="npr. Sombor"
+            placeholder={t("sediste_placeholder")}
           />
           {!userLocation && (
             <p className="text-xs text-kolo-muted mt-1.5">
-              Možeš podesiti default lokaciju u{" "}
-              <Link href="/profil" className="text-kolo-green-700 hover:underline">profilu</Link>.
+              {t("lokacija_hint_pre")}{" "}
+              <Link href="/profil" className="text-kolo-green-700 hover:underline">{t("lokacija_hint_link")}</Link>
+              {t("lokacija_hint_post")}
             </p>
           )}
         </div>
 
         {/* Naziv */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">Naziv krugovi *</label>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("naziv_label")}</label>
           <input
             type="text"
             maxLength={80}
             value={name}
             onChange={(e) => { setName(e.target.value); setNameEdited(true); }}
-            placeholder="npr. KOLO Krug Sombor"
+            placeholder={t("naziv_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
           {!nameEdited && location && (
-            <p className="text-xs text-kolo-muted mt-1.5">Naziv je automatski generisan iz sedišta.</p>
+            <p className="text-xs text-kolo-muted mt-1.5">{t("naziv_auto_generisan")}</p>
           )}
         </div>
 
         {/* Opis */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">
-            Opis <span className="text-kolo-muted font-normal">(opciono)</span>
+            {t("opis_label")} <span className="text-kolo-muted font-normal">({t("opciono")})</span>
           </label>
           <textarea
             rows={3}
             maxLength={300}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Kratki opis ciljeva i delatnosti krugovi..."
+            placeholder={t("opis_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors"
           />
         </div>
@@ -192,7 +194,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
         {/* Osnivači */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">
-            Osnivači * <span className="text-kolo-muted font-normal">({osnivaci.length + 1}/min 5 — vi ste prvi)</span>
+            {t("osnivaci_label")} <span className="text-kolo-muted font-normal">({t("osnivaci_count", { count: osnivaci.length + 1 })})</span>
           </label>
 
           {osnivaci.length > 0 && (
@@ -213,7 +215,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
               value={searchQ}
               onChange={(e) => handleSearch(e.target.value)}
               onKeyDown={handleSearchKeyDown}
-              placeholder="Pretraži po pseudonimu..."
+              placeholder={t("osnivaci_search_placeholder")}
               autoComplete="off"
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
             />
@@ -244,7 +246,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
           disabled={!canSubmit || loading}
           className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
-          {loading ? "Šaljem zahtev..." : "Pošalji zahtev za osnivanje"}
+          {loading ? t("saljem_zahtev") : t("posalji_zahtev")}
         </button>
       </form>
     </div>
