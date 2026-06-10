@@ -95,6 +95,32 @@ export default async function Home() {
     Promise.resolve(getFaqPoBrojevima([1, 2, 40], locale)),
   ]);
 
+  // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.
+  const komeKartice = [
+    { ikona: "🌱", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
+    { ikona: "🔧", naslov: t("kome_2_naslov"), opis: t("kome_2_opis"), poenta: t("kome_2_poenta") },
+    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
+    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
+    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
+    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
+    { ikona: "💻", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
+    { ikona: "🤝", naslov: t("kome_8_naslov"), opis: t("kome_8_opis"), poenta: t("kome_8_poenta") },
+    { ikona: "🏘️", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
+  ];
+
+  const primerKoraci = [
+    { naslov: t("primer_korak_1_naslov"), opis: t("primer_korak_1_opis") },
+    { naslov: t("primer_korak_2_naslov"), opis: t("primer_korak_2_opis") },
+    { naslov: t("primer_korak_3_naslov"), opis: t("primer_korak_3_opis") },
+    { naslov: t("primer_korak_4_naslov"), opis: t("primer_korak_4_opis") },
+  ];
+
+  const kakoKoraci = [
+    { br: "1", naslov: t("kako_funkcionise_korak_1_naslov"), opis: t("kako_funkcionise_korak_1_opis") },
+    { br: "2", naslov: t("kako_funkcionise_korak_2_naslov"), opis: t("kako_funkcionise_korak_2_opis") },
+    { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis") },
+  ];
+
   return (
     <div className="min-h-screen bg-kolo-bg">
 
@@ -109,18 +135,22 @@ export default async function Home() {
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
                 {t("hero_naslov")}
               </h1>
-              <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-7">
+              <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-7 whitespace-pre-line">
                 {t("hero_podnaslov")}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/kako-funkcionise"
                   className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
-                  {t("cta_saznaj")} →
+                  {t("hero_cta_saznaj")} →
                 </Link>
                 <Link href="/registracija"
                   className="px-6 py-3 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm">
-                  {t("cta_priduzi")}
+                  {t("hero_cta_priduzi")}
                 </Link>
+              </div>
+              <div className="mt-5 inline-flex items-center gap-2 px-3 py-1.5 border border-white/30 rounded-full text-xs font-medium text-white/80">
+                <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-400" />
+                {t("hero_badge")}
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
@@ -140,18 +170,15 @@ export default async function Home() {
             {t("problem_naslov")}
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>{t("problem_1_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed">{t("problem_1_opis")}</p>
-            </div>
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>{t("problem_2_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed">{t("problem_2_opis")}</p>
-            </div>
-            <div className="flex flex-col gap-3 items-center text-center">
-              <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>{t("problem_3_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed">{t("problem_3_opis")}</p>
-            </div>
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="flex flex-col gap-3 items-center text-center">
+                <p className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.02em" }}>{t(`problem_${n}_naslov`)}</p>
+                <div className="space-y-2">
+                  <p className="text-sm text-kolo-muted leading-relaxed">{t(`problem_${n}_opis`)}</p>
+                  <p className="text-sm text-kolo-green-900 font-medium leading-relaxed">{t(`problem_${n}_poenta`)}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -161,24 +188,35 @@ export default async function Home() {
             {t("alternativa_naslov")}
           </div>
 
-          <p className="text-kolo-green-900 text-lg font-medium">{t("alternativa_podnaslov")}</p>
+          <blockquote
+            className="italic text-kolo-green-900 leading-relaxed text-2xl md:text-3xl max-w-3xl mx-auto whitespace-pre-line"
+            style={{ fontFamily: "Georgia, serif", lineHeight: "1.5" }}
+          >
+            {t("alternativa_citat")}
+          </blockquote>
+
+          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
+            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl" style={{ letterSpacing: "-0.01em" }}>
+              {t("alternativa_podnaslov")}
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
               <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
               </h3>
-              <p className="text-sm text-kolo-text leading-relaxed">
-                {t("alternativa_1_opis_start")}
-                <strong className="text-kolo-green-900">{t("alternativa_1_istakni_poen")}</strong>
-                {t("alternativa_1_opis_end")}
-              </p>
+              <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_1_opis")}</p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
               <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_2_naslov")}
               </h3>
-              <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_2_opis")}</p>
+              <p className="text-sm text-kolo-text leading-relaxed">
+                {t("alternativa_2_opis_start")}
+                <strong className="text-kolo-green-900">{t("alternativa_2_istakni_poen")}</strong>
+                {t("alternativa_2_opis_end")}
+              </p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
               <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
@@ -190,7 +228,7 @@ export default async function Home() {
 
           <div className="pt-2">
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
-              {t("kako_funkcionise_naslov")} →
+              {t("kako_funkcionise_link")} →
             </Link>
           </div>
         </section>
@@ -201,19 +239,12 @@ export default async function Home() {
             {t("kome_naslov")}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {[
-              t("kome_1"),
-              t("kome_2"),
-              t("kome_3"),
-              t("kome_4"),
-              t("kome_5"),
-              t("kome_6"),
-              t("kome_7"),
-              t("kome_8"),
-              t("kome_9"),
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
-                <p className="text-sm text-kolo-text leading-relaxed">{item}</p>
+            {komeKartice.map((seg) => (
+              <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
+                <span className="text-2xl">{seg.ikona}</span>
+                <p className="font-semibold text-kolo-text text-sm leading-snug">{seg.naslov}</p>
+                <p className="text-xs text-kolo-muted leading-relaxed">{seg.opis}</p>
+                <p className="text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line max-w-[70%]">{seg.poenta}</p>
               </div>
             ))}
           </div>
@@ -224,32 +255,39 @@ export default async function Home() {
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
             {t("primer_naslov")}
           </div>
-          <p className="text-sm text-kolo-muted">{t("primer_podnaslov")}</p>
 
           {/* 4 stubca povezana strelicama po hronologiji */}
           <div className="flex flex-col md:flex-row items-stretch gap-3">
-            {[
-              { naslov: t("primer_korak_1_naslov"), opis: t("primer_korak_1_opis") },
-              { naslov: t("primer_korak_2_naslov"), opis: t("primer_korak_2_opis") },
-              { naslov: t("primer_korak_3_naslov"), opis: t("primer_korak_3_opis") },
-              { naslov: t("primer_korak_4_naslov"), opis: t("primer_korak_4_opis") },
-            ].map((k, i) => (
-              <>
-                <div key={k.naslov} className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+            {primerKoraci.map((k, i) => (
+              <div key={k.naslov} className="contents">
+                <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
                   <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">{i + 1}</span>
                   <p className="font-semibold text-kolo-text text-sm">{k.naslov}</p>
                   <p className="text-kolo-muted leading-relaxed text-xs">{k.opis}</p>
                 </div>
-                {i < 3 && (
-                  <div key={`arrow-${i}`} className="flex items-center justify-center text-kolo-muted shrink-0">
+                {i < primerKoraci.length - 1 && (
+                  <div className="flex items-center justify-center text-kolo-muted shrink-0">
                     <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12"/>
                       <polyline points="12 5 19 12 12 19"/>
                     </svg>
                   </div>
                 )}
-              </>
+              </div>
             ))}
+          </div>
+
+          {/* Suptilan most ka zaključku — izvan stubaca */}
+          <p className="text-center text-sm text-kolo-muted italic">
+            {t("primer_most")}
+          </p>
+
+          <div className="flex items-center gap-3 bg-kolo-green-100 border-l-4 border-kolo-green-700 rounded-xl p-4 w-fit mx-auto">
+            <span className="shrink-0 w-7 h-7 rounded-full bg-kolo-green-700 text-white inline-flex items-center justify-center font-bold text-base">!</span>
+            <div className="text-sm text-kolo-text leading-relaxed space-y-1">
+              <p><strong className="text-kolo-green-900">{t("primer_napomena_bold")}</strong> {t("primer_napomena_1")}</p>
+              <p>{t("primer_napomena_2")}</p>
+            </div>
           </div>
         </section>
 
@@ -259,11 +297,7 @@ export default async function Home() {
             {t("kako_funkcionise_naslov")}
           </div>
           <div className="space-y-0">
-            {[
-              { br: "1", naslov: t("kako_funkcionise_korak_1_naslov"), opis: t("kako_funkcionise_korak_1_opis") },
-              { br: "2", naslov: t("kako_funkcionise_korak_2_naslov"), opis: t("kako_funkcionise_korak_2_opis") },
-              { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis") },
-            ].map((k, i, arr) => (
+            {kakoKoraci.map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
                 <div className="w-8 h-8 rounded-full bg-kolo-green-900 text-white flex items-center justify-center text-sm font-bold shrink-0 mt-0.5">
                   {k.br}
@@ -277,7 +311,7 @@ export default async function Home() {
           </div>
           <div className="mt-5 pt-4 border-t border-kolo-border">
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
-              {t("kako_funkcionise_naslov")} →
+              {t("kako_funkcionise_link")} →
             </Link>
           </div>
         </section>
@@ -348,7 +382,7 @@ export default async function Home() {
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
                   {agregati.brojClanova.toLocaleString("sr-RS")}
                 </div>
-                <div className="text-xs text-kolo-muted mt-1">{t("statistike_aktivnih")} {t("statistike_clan")}</div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_clan")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
@@ -374,6 +408,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-[2fr_3fr]">
             {/* Levo — slika u krugu, tekst iznad i ispod */}
             <div className="bg-kolo-green-900 p-8 flex flex-col items-center justify-center text-center gap-5">
+              {/* Tekst iznad fotografije */}
               <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
                 {t("ko_stoji_naslov")}
               </span>
@@ -386,6 +421,7 @@ export default async function Home() {
                   style={{ transform: "scale(1.28)", transformOrigin: "center 22%" }}
                 />
               </div>
+              {/* Tekst ispod fotografije */}
               <div>
                 <p className="text-white font-bold text-lg leading-tight">Nikola Šarić</p>
                 <p className="text-white/70 text-sm mt-1 leading-snug">
@@ -398,6 +434,12 @@ export default async function Home() {
               <p className="text-kolo-text leading-relaxed mb-3 text-sm text-body">
                 {t("ko_stoji_opis")}
               </p>
+              <p className="text-kolo-muted text-sm leading-relaxed mb-5 text-body">
+                {t("ko_stoji_opis_2")}
+              </p>
+              <blockquote className="border-l-4 border-kolo-green-700 pl-4 text-sm text-kolo-muted italic leading-relaxed mb-5 text-body">
+                {t("ko_stoji_citat")}
+              </blockquote>
               <Link href="/o-nama" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
                 {t("ko_stoji_fondacija")} →
               </Link>
@@ -445,6 +487,9 @@ export default async function Home() {
             >
               {t("cta_saznaj")} →
             </a>
+          </div>
+          <div className="mt-8 pt-6 border-t border-white/15">
+            <p className="text-xs text-white/60">{t("cta_footer")}</p>
           </div>
         </section>
 
