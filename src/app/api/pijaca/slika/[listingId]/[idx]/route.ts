@@ -22,6 +22,12 @@ export async function GET(
 
   const filePath = listing.images[index];
 
+  // Vercel Blob (ili bilo koji apsolutni URL) — preusmeri na CDN.
+  if (/^https?:\/\//i.test(filePath)) {
+    return NextResponse.redirect(filePath, 308);
+  }
+
+  // Legacy: slika na lokalnom disku (dev).
   try {
     const absPath = path.join(process.cwd(), filePath);
     const buffer = await readFile(absPath);

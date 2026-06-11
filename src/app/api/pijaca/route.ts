@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { put } from "@vercel/blob";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -88,13 +89,27 @@ export async function POST(req: NextRequest) {
   const imagePaths: string[] = [];
 
   if (imageFiles.length > 0) {
-    const dir = path.join(process.cwd(), "storage", "oglasi", listingId);
-    await mkdir(dir, { recursive: true });
+    // Vercel Blob u produkciji (read-only/efemeran FS na serverless),
+    // fallback na lokalni disk za dev kad token nije postavljen.
+    const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
+    let dir: string | null = null;
+    if (!useBlob) {
+      dir = path.join(process.cwd(), "storage", "oglasi", listingId);
+      await mkdir(dir, { recursive: true });
+    }
     for (const file of imageFiles) {
       const ext = file.type === "image/png" ? ".png" : file.type === "image/webp" ? ".webp" : ".jpg";
       const fname = `${randomUUID()}${ext}`;
-      await writeFile(path.join(dir, fname), Buffer.from(await file.arrayBuffer()));
-      imagePaths.push(`storage/oglasi/${listingId}/${fname}`);
+      if (useBlob) {
+        const blob = await put(`oglasi/${listingId}/${fname}`, file, {
+          access: "public",
+          contentType: file.type,
+        });
+        imagePaths.push(blob.url);
+      } else {
+        await writeFile(path.join(dir!, fname), Buffer.from(await file.arrayBuffer()));
+        imagePaths.push(`storage/oglasi/${listingId}/${fname}`);
+      }
     }
   }
 
