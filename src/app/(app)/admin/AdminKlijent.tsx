@@ -204,7 +204,6 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
   const tabs: [Tab, string][] = [
     ["dashboard", t("tab_dashboard")],
-    ["krugovi", `${t("tab_krugovi")}${pendingKrugovi.length > 0 ? ` (${pendingKrugovi.length})` : ""}`],
     ["programi", `${t("tab_programi")}${ukupnoPendingProgrami > 0 ? ` (${ukupnoPendingProgrami})` : ""}`],
     ["ped", `${t("tab_ped")}${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
@@ -241,9 +240,6 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Dashboard */}
       {tab === "dashboard" && <DashboardTab data={dashboard} onRefresh={() => router.refresh()} />}
-
-      {/* Krugovi — pending osnivanje + lista aktivnih */}
-      {tab === "krugovi" && <KrugoviLista pendingKrugovi={pendingKrugovi} krugoviLista={krugoviLista} onDone={() => router.refresh()} />}
 
       {/* Programi */}
       {tab === "programi" && <AdminProgramiTab data={adminProgrami} onDone={() => router.refresh()} />}
@@ -1067,18 +1063,6 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_suspendovani")}</p>
           <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
-        </div>
-      </div>
-
-      {/* Krugovi */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_aktivne_krugovi")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.krugovi.ukupno.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_krugri")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.krugovi.krugra.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
