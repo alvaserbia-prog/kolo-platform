@@ -24,7 +24,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 
   return (
     <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
-      <div className="flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900">
+      <div className="relative flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900 before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
 
         {/* Leva strana: jezik + hamburger (mobilno) */}
         <div className="flex items-center shrink-0">
