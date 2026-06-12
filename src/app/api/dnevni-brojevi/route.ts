@@ -13,14 +13,23 @@ export async function GET() {
   danas.setHours(0, 0, 0, 0);
   const sada = new Date();
 
-  // "Novo danas" — informativni brojači uz linkove
+  // "Viđeno" vremena: badge broji samo ono što je stiglo POSLE poslednjeg
+  // otvaranja taba. Ako tab još nije otvaran (null), pada na ponoć ("novo danas").
+  const meUser = await prisma.user.findUnique({
+    where: { id: meId },
+    select: { vidjenoNovcanikAt: true, vidjenoPijacaAt: true },
+  });
+  const odNovcanik = meUser?.vidjenoNovcanikAt ?? danas;
+  const odPijaca = meUser?.vidjenoPijacaAt ?? danas;
+
+  // "Novo od poslednje posete" — informativni brojači uz linkove
   const [wallet, pijaca] = await Promise.all([
     prisma.wallet.findUnique({ where: { userId: meId }, select: { id: true } }),
-    prisma.marketplaceListing.count({ where: { createdAt: { gte: danas } } }),
+    prisma.marketplaceListing.count({ where: { createdAt: { gt: odPijaca } } }),
   ]);
 
   const novcanik = wallet
-    ? await prisma.transaction.count({ where: { toWalletId: wallet.id, createdAt: { gte: danas } } })
+    ? await prisma.transaction.count({ where: { toWalletId: wallet.id, createdAt: { gt: odNovcanik } } })
     : 0;
 
   // Akcioni badge: otvoreni zahtevi za jemstvo na koje korisnik može da odgovori

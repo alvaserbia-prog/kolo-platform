@@ -198,6 +198,10 @@ model User {
   slotoviPotroseni       Int          @default(0)
   pocetnaEmisijaIzvrsena Boolean      @default(false)
   pseudonimChangedAt DateTime?
+  // "Viđeno" vremena za sidebar badge-eve: badge broji samo stavke novije od ovog
+  // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
+  vidjenoNovcanikAt  DateTime?
+  vidjenoPijacaAt    DateTime?
   memberHash         String    @unique
   location           String?
   telefon            String?
