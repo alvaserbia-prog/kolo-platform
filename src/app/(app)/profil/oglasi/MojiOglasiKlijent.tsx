@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Oglas {
   id: string;
@@ -20,14 +21,18 @@ const statusBoja: Record<string, string> = {
   SOLD:    "bg-kolo-info-light text-kolo-info",
   EXPIRED: "bg-kolo-bg text-kolo-muted",
 };
-const statusLabela: Record<string, string> = {
-  ACTIVE: "Aktivan", SOLD: "Prodat", EXPIRED: "Istekao",
-};
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
+  const t = useTranslations("profil");
   const router = useRouter();
   const [filter, setFilter] = useState("sve");
   const [deaktivacija, setDeaktivacija] = useState<string | null>(null);
+
+  const statusLabela: Record<string, string> = {
+    ACTIVE: t("oglas_aktivan"),
+    SOLD: t("oglas_prodat"),
+    EXPIRED: t("oglas_istekao"),
+  };
 
   const filtrirani = listings.filter((l) => {
     if (filter === "aktivni") return l.status === "ACTIVE";
@@ -50,20 +55,24 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
     <div className="space-y-5">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <Link href="/profil" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← Profil</Link>
-          <h1 className="kolo-naslov">Moji oglasi</h1>
+          <Link href="/profil" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← {t("naslov")}</Link>
+          <h1 className="kolo-naslov">{t("moji_oglasi")}</h1>
         </div>
         <Link
           href="/pijaca/novi-oglas"
           className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
         >
-          + Novi oglas
+          + {t("novi_oglas")}
         </Link>
       </div>
 
       {/* Filter */}
       <div className="flex gap-2">
-        {[["sve", "Svi"], ["aktivni", "Aktivni"], ["prodati", "Prodati"]].map(([val, lab]) => (
+        {([
+          ["sve", t("filter_svi")],
+          ["aktivni", t("filter_aktivni")],
+          ["prodati", t("filter_prodati")],
+        ] as [string, string][]).map(([val, lab]) => (
           <button
             key={val}
             onClick={() => setFilter(val)}
@@ -81,10 +90,10 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           {listings.length === 0 ? (
             <>
-              Još nemate oglasa.{" "}
-              <Link href="/pijaca/novi-oglas" className="text-kolo-green-700 hover:underline">Objavite prvi!</Link>
+              {t("nema_oglasa_jos")}{" "}
+              <Link href="/pijaca/novi-oglas" className="text-kolo-green-700 hover:underline">{t("objavite_prvi")}</Link>
             </>
-          ) : "Nema oglasa u ovom filteru."}
+          ) : t("nema_oglasa_filter")}
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden divide-y divide-gray-100">
@@ -101,7 +110,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                   {l.soldAt && (
                     <>
                       <span className="text-xs text-kolo-border">·</span>
-                      <span className="text-xs text-kolo-muted">Prodato: {new Date(l.soldAt).toLocaleDateString("sr-RS")}</span>
+                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.soldAt).toLocaleDateString("sr-RS")}</span>
                     </>
                   )}
                 </div>
@@ -116,7 +125,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                     disabled={deaktivacija === l.id}
                     className="text-xs text-red-500 hover:text-kolo-danger transition-colors disabled:opacity-50"
                   >
-                    {deaktivacija === l.id ? "..." : "Ukloni"}
+                    {deaktivacija === l.id ? "..." : t("ukloni")}
                   </button>
                 )}
               </div>

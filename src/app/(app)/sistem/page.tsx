@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
+import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
 import SistemKlijent from "./SistemKlijent";
 
 export default async function SistemPage() {
@@ -32,6 +33,7 @@ export default async function SistemPage() {
     pokroviteljiLista,
     ukupnoVerifikacija,
     danasVerifikacija,
+    saldoFondacije,
   ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
@@ -111,6 +113,7 @@ export default async function SistemPage() {
     prisma.verifikacionaVeza.count({
       where: { vremenskiZig: { gte: danas } },
     }),
+    dohvatiSaldoFondacije(),
   ]);
 
   const opticaj = Math.abs(protokol?.balance ?? 0);
@@ -193,6 +196,7 @@ export default async function SistemPage() {
       danasTransakcija={danasTransakcija}
       ukupnoVerifikacija={ukupnoVerifikacija}
       danasVerifikacija={danasVerifikacija}
+      racunFondacije={saldoFondacije.saldo}
       ukupnoDonacija={ukupnoDonacija}
       danasDonacija={danasDonacija}
       ukupanIznosTx={ukupanIznosTx}

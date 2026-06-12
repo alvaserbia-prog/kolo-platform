@@ -20,10 +20,11 @@ interface Notifikacija {
 
 export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   const { data: session } = useSession();
+  const t = useTranslations("header");
 
   return (
     <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
-      <div className="flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900">
+      <div className="relative flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900 before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
 
         {/* Leva strana: jezik + hamburger (mobilno) */}
         <div className="flex items-center shrink-0">
@@ -36,7 +37,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
             <button
               onClick={onMenuOpen}
               className="p-1 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-              aria-label="Meni"
+              aria-label={t("aria_meni")}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="3" y1="6" x2="21" y2="6" />
@@ -54,7 +55,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
             href="/novcanik"
             className="md:ml-[1cm] px-2.5 py-1 md:px-4 md:py-1.5 bg-kolo-green-600 hover:bg-kolo-green-500 text-white text-xs md:text-sm font-semibold rounded-xl border border-white/70 transition-colors whitespace-nowrap"
           >
-            Upiši POEN
+            {t("upisi_poen")}
           </Link>
         </div>
 
@@ -68,8 +69,8 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               <Link
                 href="/dobrodosli"
                 className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 ring-2 ring-white/20 hover:text-white hover:ring-white/50 transition-all shrink-0"
-                aria-label="Kako KOLO funkcioniše"
-                title="Kako KOLO funkcioniše"
+                aria-label={t("aria_kako_funkcionise")}
+                title={t("aria_kako_funkcionise")}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="10"/>
@@ -81,7 +82,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               <Link
                 href="/poruke"
                 className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 ring-2 ring-white/20 hover:text-white hover:ring-white/50 transition-all shrink-0"
-                aria-label="Poruke"
+                aria-label={t("aria_poruke")}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -96,7 +97,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               />
             </>
           ) : (
-            <span className="text-white/50 text-sm">Učitavam...</span>
+            <span className="text-white/50 text-sm">{t("ucitavanje")}</span>
           )}
         </div>
       </div>
@@ -105,6 +106,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 }
 
 function BalansHeader({ userId }: { userId: string }) {
+  const t = useTranslations("header");
   const [balans, setBalans] = useState<number | null>(null);
 
   function ucitajBalans() {
@@ -130,7 +132,7 @@ function BalansHeader({ userId }: { userId: string }) {
       </span>
       <Pojam
         termin="POEN"
-        objasnjenje="Zapis tvog doprinosa zajednici — kao upis u knjigu, a ne novac. Ne kupuje se, ne menja se za dinare i nema vrednost van sistema."
+        objasnjenje={t("poen_objasnjenje")}
       />
     </span>
   );
@@ -173,7 +175,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
       <button
         onClick={() => setOpen((v) => !v)}
         className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
-        aria-label="Profil"
+        aria-label={t("aria_profil")}
       >
         {avatar ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -321,7 +323,7 @@ function BellNotifikacije() {
       <button
         onClick={() => setOpen((v) => !v)}
         className="relative w-9 h-9 flex items-center justify-center rounded-full text-white/60 ring-2 ring-white/20 hover:text-white hover:ring-white/50 transition-all shrink-0"
-        aria-label="Notifikacije"
+        aria-label={t("aria_notifikacije")}
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>

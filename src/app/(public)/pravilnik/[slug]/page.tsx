@@ -1,47 +1,60 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { notFound } from "next/navigation";
-import { promises as fs } from "fs";
-import path from "path";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
+import { pageMetadata } from "@/lib/seo";
 
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
   "kolo-sistem": {
     naziv: "Pravilnik o KOLO sistemu",
-    fajl: "Pravilnik_3_7_5.md",
-    verzija: "3.7.5",
+    fajl: "Pravilnik_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Osnovni akt sistema — 12 glava, 82 člana.",
   },
   "hijerarhija": {
     naziv: "Pravilnik o hijerarhiji akata",
-    fajl: "hijerarhija_3_7_2.md",
-    verzija: "3.7.2",
+    fajl: "hijerarhija_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
   },
   "dokaz-stvarnosti": {
     naziv: "Pravilnik o dokazu stvarnosti",
-    fajl: "dokaz_stvarnosti_3_7_3.md",
-    verzija: "3.7.3",
+    fajl: "dokaz_stvarnosti_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
   },
   "pokroviteljstvo-donacije": {
     naziv: "Pravilnik o pokroviteljstvu i donacijama",
-    fajl: "donacije_3_7_3.md",
-    verzija: "3.7.3",
+    fajl: "donacije_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Nivoi donacija i pokroviteljstva.",
   },
   "operativni": {
     naziv: "Pravilnik o operativnom doprinosu",
-    fajl: "operativni_3_7_2.md",
-    verzija: "3.7.2",
+    fajl: "operativni_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Operativni program — zadaci i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije.",
   },
   "osnivacki": {
     naziv: "Pravilnik o osnivačkom doprinosu",
-    fajl: "osnivacki_3_7_2.md",
-    verzija: "3.7.2",
+    fajl: "osnivacki_3_8_0.md",
+    verzija: "3.8.0",
     opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
+  },
+  "gornje-kolo": {
+    naziv: "Pravilnik o Gornjem Kolu",
+    fajl: "gornje_kolo_3_8_0.md",
+    verzija: "3.8.0",
+    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; zaštitni veto.",
+  },
+  "programi-podrske": {
+    naziv: "Pravilnik o programima podrške",
+    fajl: "programi_podrske_3_8_0.md",
+    verzija: "3.8.0",
+    opis: "Socijalni programi — uslovi i verifikatorska potvrda.",
   },
 };
 
@@ -52,11 +65,14 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = PRAVILNICI[slug];
-  if (!p) return { title: "Pravilnik nije pronađen — KOLO" };
-  return {
-    title: `${p.naziv} — KOLO`,
-    description: `${p.naziv}, verzija ${p.verzija}. ${p.opis}`,
-  };
+  if (!p) return { title: "KOLO" };
+  const t = await getTranslations("pravne");
+  const naziv = t(`rb.${slug}.naziv`);
+  return pageMetadata({
+    title: `${naziv} — KOLO`,
+    description: `${naziv} ${p.verzija}. ${t(`rb.${slug}.opis`)}`,
+    path: `/pravilnik/${slug}`,
+  });
 }
 
 export async function generateStaticParams() {
@@ -68,22 +84,23 @@ export default async function PravilnikSlugPage({ params }: Props) {
   const p = PRAVILNICI[slug];
   if (!p) notFound();
 
-  const filePath = path.join(process.cwd(), "nova dokumentacija", p.fajl);
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument(p.fajl, locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
         <p className="text-xs text-kolo-muted mb-1">
-          <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">Pravilnici</Link>
+          <Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">{t("pravilnik.pravilnici")}</Link>
           {" / "}
-          <span>{p.naziv}</span>
+          <span>{t(`rb.${slug}.naziv`)}</span>
         </p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          {p.naziv}
+          {t(`rb.${slug}.naziv`)}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija {p.verzija}</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {p.verzija}</p>
       </div>
 
       <article
@@ -113,10 +130,10 @@ export default async function PravilnikSlugPage({ params }: Props) {
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
         <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">
-          ← Svi pravilnici
+          {t("pravilnik.sviPravilnici")}
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
-          Nazad na početnu
+          {t("nazadNaPocetnu")}
         </Link>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Verzija {
   id: string;
@@ -12,6 +13,7 @@ interface Verzija {
 }
 
 export default function PravilnikPrihvatiPage() {
+  const t = useTranslations("pravilnikPrihvati");
   const router = useRouter();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
   const [loading, setLoading] = useState(true);
@@ -42,7 +44,7 @@ export default function PravilnikPrihvatiPage() {
       body: JSON.stringify({ verzijaId: verzija.id }),
     });
     if (!res.ok) {
-      setError("Greška pri prihvatanju. Pokušajte ponovo.");
+      setError(t("greska_prihvatanje"));
       setPrihvatanje(false);
       return;
     }
@@ -52,7 +54,7 @@ export default function PravilnikPrihvatiPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-kolo-bg">
-        <p className="text-kolo-muted text-sm">Učitavanje...</p>
+        <p className="text-kolo-muted text-sm">{t("ucitavanje")}</p>
       </div>
     );
   }
@@ -61,25 +63,25 @@ export default function PravilnikPrihvatiPage() {
     <div className="flex items-center justify-center min-h-screen bg-kolo-bg p-4">
       <div className="bg-white rounded-2xl border border-kolo-border p-8 max-w-md w-full shadow-sm">
         <div className="mb-6">
-          <h1 className="text-lg font-bold text-kolo-text mb-2">Ažuriran Pravilnik o KOLO sistemu</h1>
+          <h1 className="text-lg font-bold text-kolo-text mb-2">{t("naslov")}</h1>
           {verzija && (
             <p className="text-sm text-kolo-muted">
-              Verzija <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
-              Na snazi od: <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
+              {t("verzija_label")} <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
+              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
             </p>
           )}
         </div>
 
         <p className="text-sm text-kolo-text mb-4">
-          Molimo vas da pročitate i prihvatite novu verziju Pravilnika kako biste nastavili sa korišćenjem platforme.
+          {t("opis")}
         </p>
 
         <p className="text-sm text-kolo-muted mb-6">
-          Pravilnik možete pročitati na{" "}
+          {t("procitajte_na")}{" "}
           <Link href="/pravilnik" target="_blank" className="text-kolo-green-700 underline">
-            ovoj stranici
+            {t("ovoj_stranici")}
           </Link>
-          . Ukoliko se ne slažete, možete obrisati nalog u podešavanjima profila.
+          {t("ne_slazete_se")}
         </p>
 
         {error && (
@@ -91,7 +93,7 @@ export default function PravilnikPrihvatiPage() {
           disabled={prihvatanje}
           className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
         >
-          {prihvatanje ? "Prihvatam..." : "Prihvatam Pravilnik"}
+          {prihvatanje ? t("dugme_prihvatam_loading") : t("dugme_prihvatam")}
         </button>
       </div>
     </div>

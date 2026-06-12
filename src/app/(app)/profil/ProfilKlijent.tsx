@@ -9,12 +9,7 @@ import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
 
-const TIPOVI_ODLUKA = [
-  { value: "VERIFIKACIJA", label: "Verifikacija identiteta" },
-  { value: "SUSPENZIJA", label: "Suspenzija/isključenje naloga" },
-  { value: "PROGRAM", label: "Upis u program" },
-  { value: "OSTALO", label: "Ostalo" },
-];
+// TIPOVI_ODLUKA labels are defined inside the component using t()
 
 interface ProfilProps {
   user: {
@@ -47,6 +42,13 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const t = useTranslations("profil");
   const tc = useTranslations("common");
   const router = useRouter();
+
+  const TIPOVI_ODLUKA = [
+    { value: "VERIFIKACIJA", label: t("prigovor_tip_verifikacija") },
+    { value: "SUSPENZIJA", label: t("prigovor_tip_suspenzija") },
+    { value: "PROGRAM", label: t("prigovor_tip_program") },
+    { value: "OSTALO", label: t("prigovor_tip_ostalo") },
+  ];
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [avatarError, setAvatarError] = useState("");
@@ -264,7 +266,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   async function posaljiPrigovor(e: React.FormEvent) {
     e.preventDefault();
     setPrigovorError(""); setPrigovorSuccess("");
-    if (prigovorOpis.trim().length < 10) { setPrigovorError("Opis mora imati najmanje 10 karaktera."); return; }
+    if (prigovorOpis.trim().length < 10) { setPrigovorError(t("prigovor_opis_min10")); return; }
     setPrigovorLoading(true);
     const res = await fetch("/api/prigovor", {
       method: "POST",
@@ -273,8 +275,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     setPrigovorLoading(false);
-    if (!res.ok) { setPrigovorError(data.error ?? "Greška pri slanju."); return; }
-    setPrigovorSuccess("Prigovor je primljen. Odgovorićemo u roku od 30 dana.");
+    if (!res.ok) { setPrigovorError(data.error ?? t("prigovor_greska_slanja")); return; }
+    setPrigovorSuccess(t("prigovor_uspeh"));
     setPrigovorOpis("");
   }
 
@@ -288,7 +290,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     });
     const data = await res.json();
     setBrisiLoading(false);
-    if (!res.ok) { setBrisiError(data.error ?? "Greška pri brisanju."); return; }
+    if (!res.ok) { setBrisiError(data.error ?? t("brisi_greska")); return; }
     await signOut({ callbackUrl: "/" });
   }
 
@@ -586,18 +588,18 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Vidljivost profila */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
-        <h2 className="text-base font-semibold text-kolo-muted mb-1">Vidljivost profila</h2>
-        <p className="text-xs text-kolo-muted mb-5">Izaberite koje informacije su vidljive drugim verifikovanim korisnicima na vašem javnom profilu.</p>
+        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("vidljivost_naslov")}</h2>
+        <p className="text-xs text-kolo-muted mb-5">{t("vidljivost_opis")}</p>
         <div className="space-y-0 divide-y divide-kolo-border">
           {([
-            { field: "prikaziLokaciju", label: "Lokacija" },
-            { field: "prikaziBilans", label: "POEN balans" },
-            { field: "prikaziZrno", label: "ZRNO (ukupan broj)" },
-            { field: "prikaziRangDonacija", label: "Rang donacija" },
-            { field: "prikaziOglase", label: "Oglasi na Pijaci" },
-            { field: "prikaziOpis", label: "Opis / zanimanje" },
-            { field: "prikaziPunoIme", label: "Pravo ime" },
-            { field: "prikaziTelefon", label: "Telefon" },
+            { field: "prikaziLokaciju", label: t("toggle_lokacija") },
+            { field: "prikaziBilans", label: t("toggle_bilans") },
+            { field: "prikaziZrno", label: t("toggle_zrno") },
+            { field: "prikaziRangDonacija", label: t("toggle_rang_donacija") },
+            { field: "prikaziOglase", label: t("toggle_oglasi") },
+            { field: "prikaziOpis", label: t("toggle_opis") },
+            { field: "prikaziPunoIme", label: t("toggle_pravo_ime") },
+            { field: "prikaziTelefon", label: t("toggle_telefon") },
           ] as { field: keyof typeof togglei; label: string }[]).map(({ field, label }) => (
             <div key={field} className="flex items-center justify-between py-3">
               <span className="text-sm text-kolo-text">{label}</span>
@@ -607,7 +609,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
                   togglei[field] ? "bg-kolo-green-700" : "bg-kolo-border"
                 }`}
-                aria-label={`${label} — ${togglei[field] ? "vidljivo" : "skriveno"}`}
+                aria-label={`${label} — ${togglei[field] ? t("vidljivo") : t("skriveno")}`}
               >
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
@@ -624,25 +626,24 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Eksport podataka */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-2">Pravo na prenosivost podataka</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("eksport_naslov")}</h2>
           <p className="text-xs text-kolo-muted mb-4">
-            Preuzmite kopiju svih vaših ličnih podataka u JSON formatu (čl. 36 Zakona o zaštiti podataka o ličnosti).
+            {t("eksport_opis")}
           </p>
           <a
             href="/api/profil/eksport"
             download
             className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
           >
-            Preuzmi moje podatke
+            {t("eksport_dugme")}
           </a>
         </div>
 
         {/* Prigovor na odluku */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-2">Prigovor na odluku</h2>
+          <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("prigovor_naslov")}</h2>
           <p className="text-xs text-kolo-muted mb-4">
-            Ukoliko smatrate da je neka odluka sistema (verifikacija, suspenzija, upis u program) donesena pogrešno,
-            možete podneti prigovor. Odgovorićemo u roku od 30 dana.
+            {t("prigovor_opis")}
           </p>
           <form onSubmit={posaljiPrigovor} className="space-y-3">
             <select
@@ -650,14 +651,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               onChange={(e) => setPrigovorTip(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600"
             >
-              {TIPOVI_ODLUKA.map((t) => (
-                <option key={t.value} value={t.value}>{t.label}</option>
+              {TIPOVI_ODLUKA.map((tip) => (
+                <option key={tip.value} value={tip.value}>{tip.label}</option>
               ))}
             </select>
             <textarea
               value={prigovorOpis}
               onChange={(e) => setPrigovorOpis(e.target.value)}
-              placeholder="Opišite prigovor (min. 10 karaktera)..."
+              placeholder={t("prigovor_placeholder")}
               rows={3}
               maxLength={2000}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none"
@@ -669,7 +670,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               disabled={prigovorLoading}
               className="w-full py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
             >
-              {prigovorLoading ? "Šaljem..." : "Pošalji prigovor"}
+              {prigovorLoading ? t("saljem") : t("prigovor_dugme")}
             </button>
           </form>
         </div>
@@ -677,31 +678,29 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Brisanje naloga */}
       <div className="bg-white rounded-2xl border border-red-200 p-6">
-        <h2 className="text-base font-semibold text-kolo-danger mb-2">Brisanje naloga</h2>
+        <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("brisi_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-4">
-          Brisanjem naloga anonimizuju se svi vaši lični podaci (email, ime, telefon, lokacija, avatar).
-          Transakcione istorije ostaju sa anonimizovanim pseudonimom. POEN možete preneti drugom korisniku
-          ili će biti vraćeni Protokolu. ZRNA se automatski otpisuju. Ova radnja je <strong>nepovratna</strong>.
+          {t("brisi_opis")}
         </p>
         {!brisiModalOpen ? (
           <button
             onClick={() => setBrisiModalOpen(true)}
             className="px-4 py-2.5 rounded-xl border border-red-300 text-kolo-danger text-sm font-semibold hover:bg-red-50 transition-colors"
           >
-            Obriši nalog
+            {t("brisi_dugme")}
           </button>
         ) : (
           <div className="space-y-3 border border-red-200 rounded-xl p-4 bg-red-50">
-            <p className="text-sm font-semibold text-kolo-danger">Potvrda brisanja naloga</p>
+            <p className="text-sm font-semibold text-kolo-danger">{t("brisi_potvrda_naslov")}</p>
             <div>
               <label className="block text-xs text-kolo-muted mb-1.5">
-                Pseudonim korisnika kome da se prenesu vaši POEN-i <span className="font-normal">(opciono — prazno = vraća Protokolu)</span>
+                {t("brisi_primalac_label")} <span className="font-normal">({t("brisi_primalac_napomena")})</span>
               </label>
               <input
                 type="text"
                 value={brisiPrimalac}
                 onChange={(e) => setBrisiPrimalac(e.target.value)}
-                placeholder="pseudonim primaoca"
+                placeholder={t("brisi_primalac_placeholder")}
                 className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-red-400"
               />
             </div>
@@ -711,14 +710,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 onClick={() => { setBrisiModalOpen(false); setBrisiError(""); }}
                 className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
               >
-                Odustani
+                {t("odustani")}
               </button>
               <button
                 onClick={obrisiNalog}
                 disabled={brisiLoading}
                 className="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
               >
-                {brisiLoading ? "Brišem..." : "Potvrdi brisanje"}
+                {brisiLoading ? t("brisem") : t("brisi_potvrdi")}
               </button>
             </div>
           </div>

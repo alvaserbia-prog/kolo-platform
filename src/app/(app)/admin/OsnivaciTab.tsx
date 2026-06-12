@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Osnivac = {
   id: string;
@@ -32,6 +33,7 @@ export default function OsnivaciTab({
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
   onDone: () => void;
 }) {
+  const t = useTranslations("admin");
   const [osnivaci, setOsnivaci] = useState<Osnivac[]>([]);
   const [status, setStatus] = useState<Status | null>(null);
   const [ucitavanje, setUcitavanje] = useState(true);
@@ -84,30 +86,30 @@ export default function OsnivaciTab({
       setUserId(""); setBrojilac(""); setImenilac(""); setRedniBroj(""); setNapomena("");
       await ucitaj();
     } else {
-      setGreska(d.error ?? "Greška pri dodavanju.");
+      setGreska(d.error ?? t("osnivaci_greska_dodavanja"));
     }
   }
 
   async function obrisi(id: string) {
-    if (!confirm("Obrisati osnivača?")) return;
+    if (!confirm(t("osnivaci_obrisi_confirm"))) return;
     setRadnja(id);
     const res = await fetch(`/api/admin/osnivaci/${id}`, { method: "DELETE" });
     setRadnja(null);
     if (res.ok) await ucitaj();
-    else { const d = await res.json().catch(() => ({})); alert(d.error ?? "Greška."); }
+    else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska_generalna")); }
   }
 
   async function evidentiraj() {
-    if (!confirm("Pokrenuti proveru i evidentiranje koraka osnivačkog doprinosa sada?")) return;
+    if (!confirm(t("osnivaci_evidentiraj_confirm"))) return;
     setRadnja("triger");
     const res = await fetch("/api/admin/osnivacki/triger", { method: "POST" });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
-    alert(res.ok ? (d.poruka ?? "Gotovo.") : (d.error ?? "Greška."));
+    alert(res.ok ? (d.poruka ?? "Gotovo.") : (d.error ?? t("greska_generalna")));
     if (res.ok) { await ucitaj(); onDone(); }
   }
 
-  if (ucitavanje) return <p className="text-sm text-kolo-muted">Učitavanje…</p>;
+  if (ucitavanje) return <p className="text-sm text-kolo-muted">{t("osnivaci_ucitavanje")}</p>;
 
   return (
     <div className="space-y-6">
@@ -115,18 +117,18 @@ export default function OsnivaciTab({
       {status && (
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold text-kolo-text">Kanal osnivačkog doprinosa</h2>
+            <h2 className="text-base font-semibold text-kolo-text">{t("osnivaci_kanal_naslov")}</h2>
             {status.zatvoren && (
-              <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-kolo-bg text-kolo-muted">Trajno zatvoren</span>
+              <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-kolo-bg text-kolo-muted">{t("osnivaci_trajno_zatvoren")}</span>
             )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-            <Stat label="Koraka" value={`${status.brojKoraka} / 120`} />
-            <Stat label="Evidentirano" value={`${fmt(status.ukupnoEvidentirano)} POEN`} />
-            <Stat label="Preostalo" value={`${fmt(status.preostalo)} POEN`} />
-            <Stat label="Iskorišćenost" value={`${status.procenatIskoriscenja}%`} />
-            <Stat label="POEN u sistemu" value={fmt(status.ukupanPoenUSistemu)} />
-            <Stat label="Sledeći prag" value={fmt(status.sledeciPrag)} />
+            <Stat label={t("osnivaci_stat_koraka")} value={`${status.brojKoraka} / 120`} />
+            <Stat label={t("osnivaci_stat_evidentirano")} value={`${fmt(status.ukupnoEvidentirano)} POEN`} />
+            <Stat label={t("osnivaci_stat_preostalo")} value={`${fmt(status.preostalo)} POEN`} />
+            <Stat label={t("osnivaci_stat_iskoriscenos")} value={`${status.procenatIskoriscenja}%`} />
+            <Stat label={t("osnivaci_stat_poen_u_sistemu")} value={fmt(status.ukupanPoenUSistemu)} />
+            <Stat label={t("osnivaci_stat_sledeci_prag")} value={fmt(status.sledeciPrag)} />
           </div>
           <div className="mt-4 h-2 rounded-full bg-kolo-bg overflow-hidden">
             <div className="h-full bg-kolo-green-700" style={{ width: `${Math.min(100, status.procenatIskoriscenja)}%` }} />
@@ -136,10 +138,10 @@ export default function OsnivaciTab({
             disabled={radnja === "triger" || status.zatvoren}
             className="mt-4 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
           >
-            {radnja === "triger" ? "Obrađujem…" : "Evidentiraj korake sada"}
+            {radnja === "triger" ? t("osnivaci_evidentiraj_loading") : t("osnivaci_evidentiraj_btn")}
           </button>
           <p className="mt-2 text-xs text-kolo-muted">
-            Evidentiranje je inače automatsko (noćna emisija). Ovo dugme služi za ručno pokretanje.
+            {t("osnivaci_evidentiraj_napomena")}
           </p>
         </div>
       )}
@@ -147,22 +149,22 @@ export default function OsnivaciTab({
       {/* Lista osnivaca */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-base font-semibold text-kolo-text">Osnivači i udeli</h2>
+          <h2 className="text-base font-semibold text-kolo-text">{t("osnivaci_lista_naslov")}</h2>
           <span className={`text-xs font-semibold ${udeliValidni ? "text-kolo-green-700" : "text-kolo-danger"}`}>
-            Zbir udela: {zbirBrojilaca}/{zajednickiImenilac || "—"} {udeliValidni ? "✓" : "(mora biti 1/1)"}
+            {t("osnivaci_zbir_udela", { zbir: zbirBrojilaca, imenilac: zajednickiImenilac || "—", valid: udeliValidni ? "✓" : "(mora biti 1/1)" })}
           </span>
         </div>
 
         {osnivaci.length === 0 ? (
-          <p className="text-sm text-kolo-muted">Nema definisanih osnivača.</p>
+          <p className="text-sm text-kolo-muted">{t("osnivaci_nema")}</p>
         ) : (
           <table className="w-full text-sm">
             <thead>
               <tr className="text-left text-kolo-muted border-b border-kolo-border">
-                <th className="py-2 font-medium">#</th>
-                <th className="py-2 font-medium">Pseudonim</th>
-                <th className="py-2 font-medium">Udeo</th>
-                <th className="py-2 font-medium">Napomena</th>
+                <th className="py-2 font-medium">{t("osnivaci_tbl_rb")}</th>
+                <th className="py-2 font-medium">{t("osnivaci_tbl_pseudonim")}</th>
+                <th className="py-2 font-medium">{t("osnivaci_tbl_udeo")}</th>
+                <th className="py-2 font-medium">{t("osnivaci_tbl_napomena")}</th>
                 <th className="py-2"></th>
               </tr>
             </thead>
@@ -180,7 +182,7 @@ export default function OsnivaciTab({
                     {!aktiviran && (
                       <button onClick={() => obrisi(o.id)} disabled={radnja === o.id}
                         className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg disabled:opacity-60">
-                        Obriši
+                        {t("osnivaci_obrisi_btn")}
                       </button>
                     )}
                   </td>
@@ -192,7 +194,7 @@ export default function OsnivaciTab({
 
         {aktiviran && (
           <p className="mt-3 text-xs text-kolo-muted">
-            Kanal je aktiviran (broj koraka &gt; 0) — krug osnivača je zaključan i ne može se menjati (čl. 3).
+            {t("osnivaci_kanal_zakljucan")}
           </p>
         )}
       </div>
@@ -200,36 +202,36 @@ export default function OsnivaciTab({
       {/* Forma za dodavanje */}
       {!aktiviran && (
         <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
-          <h2 className="text-base font-semibold text-kolo-text">Dodaj osnivača</h2>
+          <h2 className="text-base font-semibold text-kolo-text">{t("osnivaci_dodaj_naslov")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-kolo-muted mb-1">Korisnik</label>
+              <label className="block text-sm font-medium text-kolo-muted mb-1">{t("osnivaci_korisnik_label")}</label>
               <select value={userId} onChange={(e) => setUserId(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700">
-                <option value="">— izaberi —</option>
+                <option value="">{t("osnivaci_korisnik_placeholder")}</option>
                 {verifikovaniKorisnici.map((k) => (
                   <option key={k.id} value={k.id}>{k.pseudonim}</option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-kolo-muted mb-1">Redni broj (registar)</label>
+              <label className="block text-sm font-medium text-kolo-muted mb-1">{t("osnivaci_redni_broj_label")}</label>
               <input type="number" value={redniBroj} onChange={(e) => setRedniBroj(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-kolo-muted mb-1">Udeo — brojilac</label>
+              <label className="block text-sm font-medium text-kolo-muted mb-1">{t("osnivaci_brojilac_label")}</label>
               <input type="number" value={brojilac} onChange={(e) => setBrojilac(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-kolo-muted mb-1">Udeo — imenilac (isti za sve)</label>
+              <label className="block text-sm font-medium text-kolo-muted mb-1">{t("osnivaci_imenilac_label")}</label>
               <input type="number" value={imenilac} onChange={(e) => setImenilac(e.target.value)}
                 className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Napomena (opciono)</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("osnivaci_napomena_label")}</label>
             <input type="text" value={napomena} onChange={(e) => setNapomena(e.target.value)} maxLength={200}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>
@@ -239,7 +241,7 @@ export default function OsnivaciTab({
             disabled={radnja === "dodaj" || !userId || !brojilac || !imenilac || !redniBroj}
             className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
           >
-            {radnja === "dodaj" ? "Dodajem…" : "Dodaj osnivača"}
+            {radnja === "dodaj" ? t("osnivaci_dodajem") : t("osnivaci_dodaj_btn")}
           </button>
         </div>
       )}

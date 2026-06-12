@@ -47,9 +47,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
   return (
     <div className="space-y-6">
       <PageOpis>
-        Tvoj zapis POEN-a — koliko ti je evidentirano i šta se sve dešavalo. POEN
-        beleži tvoj doprinos; nije novac i ne menja se za dinare. Odavde možeš upisati
-        POEN drugom korisniku.
+        {t("opis_stranice")}
       </PageOpis>
 
       {/* Balans kartica */}
@@ -121,13 +119,12 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
           transakcije.length === 0 ? (
             // Sasvim nov korisnik — bez ijedne transakcije: navedi ga šta dalje
             <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center space-y-2">
-              <p className="text-sm font-medium text-kolo-text">Još nemaš evidentiran nijedan POEN.</p>
+              <p className="text-sm font-medium text-kolo-text">{t("prazno_naslov")}</p>
               <p className="text-sm text-kolo-muted max-w-md mx-auto">
-                POEN se beleži kroz učešće u zajednici — pri verifikaciji, razmeni
-                dobara i usluga ili doprinosu. Počni tako što ćeš se verifikovati.
+                {t("prazno_opis")}
               </p>
               <a href="/tabla-jemstva" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
-                Zatraži verifikaciju →
+                {t("prazno_verif_link")}
               </a>
             </div>
           ) : (

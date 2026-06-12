@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Korisnik {
   id: string;
@@ -12,6 +13,7 @@ interface Korisnik {
 
 export default function ClanPretraga() {
   const router = useRouter();
+  const t = useTranslations("common");
   const [query, setQuery] = useState("");
   const [rezultati, setRezultati] = useState<Korisnik[]>([]);
   const [show, setShow] = useState(false);
@@ -95,7 +97,7 @@ export default function ClanPretraga() {
           value={query}
           onChange={(e) => handleInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Pretraži članove..."
+          placeholder={t("pretrazi_clanove")}
           autoComplete="off"
           className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors bg-white"
         />

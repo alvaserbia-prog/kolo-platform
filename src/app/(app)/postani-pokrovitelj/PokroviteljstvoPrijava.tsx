@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 type Prijava = {
   id: string;
@@ -14,16 +15,10 @@ type Prijava = {
   createdAt: string;
 };
 
-const STATUS_LABEL: Record<Prijava["status"], string> = {
-  CEKA_POTPIS: "Čeka vaš potpis",
-  POTPISANA: "Potpisana — čeka potvrdu Fondacije",
-  POTVRDJENA: "Potvrđena",
-  ODBIJENA: "Odbijena",
-};
-const VRSTA_LABEL: Record<Prijava["vrstaDonacije"], string> = { NOVAC: "Novac", ROBA: "Roba", USLUGE: "Usluge" };
 const MAX_BYTES = 3_000_000;
 
 export default function PokroviteljstvoPrijava() {
+  const t = useTranslations("postaniPokrovitelj");
   const [prijave, setPrijave] = useState<Prijava[]>([]);
   const [ucitavanje, setUcitavanje] = useState(true);
   const [radnja, setRadnja] = useState<string | null>(null);
@@ -50,7 +45,7 @@ export default function PokroviteljstvoPrijava() {
     const f = e.target.files?.[0];
     setGreska("");
     if (!f) { setCenovnik(null); return; }
-    if (f.size > MAX_BYTES) { setGreska("Cenovnik je prevelik (maks. ~3MB)."); if (fileRef.current) fileRef.current.value = ""; return; }
+    if (f.size > MAX_BYTES) { setGreska(t("forma_cenovnik_prevelik")); if (fileRef.current) fileRef.current.value = ""; return; }
     const reader = new FileReader();
     reader.onload = () => setCenovnik(typeof reader.result === "string" ? reader.result : null);
     reader.readAsDataURL(f);
@@ -59,7 +54,7 @@ export default function PokroviteljstvoPrijava() {
   async function posalji() {
     setGreska("");
     if ((vrsta === "ROBA" || vrsta === "USLUGE") && !cenovnik) {
-      setGreska("Za robu i usluge priložite maloprodajni cenovnik.");
+      setGreska(t("forma_cenovnik_obavezan"));
       return;
     }
     setRadnja("posalji");
@@ -74,78 +69,89 @@ export default function PokroviteljstvoPrijava() {
       setNaziv(""); setPib(""); setVrsta("NOVAC"); setVrednost(""); setCenovnik(null);
       if (fileRef.current) fileRef.current.value = "";
       await ucitaj();
-    } else setGreska(d.error ?? "Greška pri slanju.");
+    } else setGreska(d.error ?? t("forma_greska_slanja"));
   }
 
   async function potpisi(id: string) {
-    if (!confirm("Potpisati ugovor o donaciji u ime pravnog lica ili preduzetnika?")) return;
+    if (!confirm(t("potpis_potvrda"))) return;
     setRadnja(id);
     const res = await fetch(`/api/pokroviteljstvo/prijava/${id}/potpisi`, { method: "POST" });
     setRadnja(null);
     if (res.ok) await ucitaj();
-    else { const d = await res.json().catch(() => ({})); alert(d.error ?? "Greška."); }
+    else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska")); }
   }
 
   const trebaCenovnik = vrsta === "ROBA" || vrsta === "USLUGE";
+
+  const STATUS_LABEL: Record<Prijava["status"], string> = {
+    CEKA_POTPIS: t("status_ceka_potpis"),
+    POTPISANA: t("status_potpisana"),
+    POTVRDJENA: t("status_potvrdjena"),
+    ODBIJENA: t("status_odbijena"),
+  };
+  const VRSTA_LABEL: Record<Prijava["vrstaDonacije"], string> = {
+    NOVAC: t("vrsta_novac"),
+    ROBA: t("vrsta_roba"),
+    USLUGE: t("vrsta_usluge"),
+  };
 
   return (
     <div className="space-y-6 mb-8">
       {/* Forma */}
       <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-5 space-y-4">
-        <h2 className="font-semibold text-kolo-text">Pokreni pokroviteljstvo</h2>
+        <h2 className="font-semibold text-kolo-text">{t("forma_naslov")}</h2>
         <p className="text-sm text-kolo-muted">
-          Podnesite prijavu u ime pravnog lica ili preduzetnika. Platforma generiše ugovor o donaciji koji potpisujete;
-          po potvrdi prijema od strane Fondacije, evidentira se bonus POEN.
+          {t("forma_opis")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Naziv pravnog lica ili preduzetnika</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_naziv_label")}</label>
             <input value={naziv} onChange={(e) => setNaziv(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">PIB</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_pib_label")}</label>
             <input value={pib} onChange={(e) => setPib(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Vrsta donacije</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_vrsta_label")}</label>
             <select value={vrsta} onChange={(e) => setVrsta(e.target.value as Prijava["vrstaDonacije"])}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700">
-              <option value="NOVAC">Novac</option>
-              <option value="ROBA">Roba</option>
-              <option value="USLUGE">Usluge</option>
+              <option value="NOVAC">{t("vrsta_novac")}</option>
+              <option value="ROBA">{t("vrsta_roba")}</option>
+              <option value="USLUGE">{t("vrsta_usluge")}</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Vrednost (RSD)</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_vrednost_label")}</label>
             <input type="number" value={vrednost} onChange={(e) => setVrednost(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>
         </div>
         {trebaCenovnik && (
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">Maloprodajni cenovnik (slika/PDF)</label>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_cenovnik_label")}</label>
             <input ref={fileRef} type="file" accept="image/*" onChange={onFile} className="text-sm" />
-            <p className="mt-1 text-xs text-kolo-muted">Obavezno za robu i usluge — služi za utvrđivanje dinarske vrednosti.</p>
+            <p className="mt-1 text-xs text-kolo-muted">{t("forma_cenovnik_napomena")}</p>
           </div>
         )}
         {greska && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>}
         <button onClick={posalji}
           disabled={radnja === "posalji" || !naziv.trim() || !pib.trim() || !vrednost || Number(vrednost) <= 0}
           className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50">
-          {radnja === "posalji" ? "Šaljem…" : "Podnesi prijavu"}
+          {radnja === "posalji" ? t("forma_saljem") : t("forma_podnesi")}
         </button>
       </div>
 
       {/* Moje prijave */}
       <div>
-        <h2 className="font-semibold text-kolo-text mb-3">Moje prijave</h2>
+        <h2 className="font-semibold text-kolo-text mb-3">{t("moje_prijave_naslov")}</h2>
         {ucitavanje ? (
-          <p className="text-sm text-kolo-muted">Učitavanje…</p>
+          <p className="text-sm text-kolo-muted">{t("ucitavanje")}</p>
         ) : prijave.length === 0 ? (
           <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-6 text-center text-sm text-kolo-muted">
-            Nemate podnetih prijava.
+            {t("moje_prijave_prazno")}
           </div>
         ) : (
           <div className="space-y-3">
@@ -153,22 +159,22 @@ export default function PokroviteljstvoPrijava() {
               <div key={p.id} className="bg-kolo-surface border border-kolo-border rounded-2xl p-4">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="font-medium text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· PIB {p.pib}</span></p>
+                    <p className="font-medium text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· {t("forma_pib_label")} {p.pib}</span></p>
                     <p className="text-sm text-kolo-muted mt-0.5">{VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString("sr-RS")} RSD</p>
                     <p className="text-xs mt-1 font-semibold text-kolo-gold-600">{STATUS_LABEL[p.status]}</p>
                     {p.status === "ODBIJENA" && p.odbijenoRazlog && (
-                      <p className="text-xs text-kolo-danger mt-0.5">Razlog: {p.odbijenoRazlog}</p>
+                      <p className="text-xs text-kolo-danger mt-0.5">{t("odbijena_razlog")} {p.odbijenoRazlog}</p>
                     )}
                   </div>
                   <div className="flex flex-col gap-1.5 shrink-0">
                     <button onClick={() => setOtvoreniUgovor(otvoreniUgovor === p.id ? null : p.id)}
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg">
-                      {otvoreniUgovor === p.id ? "Sakrij ugovor" : "Prikaži ugovor"}
+                      {otvoreniUgovor === p.id ? t("sakrij_ugovor") : t("prikazi_ugovor")}
                     </button>
                     {p.status === "CEKA_POTPIS" && (
                       <button onClick={() => potpisi(p.id)} disabled={radnja === p.id}
                         className="px-2.5 py-1 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg disabled:opacity-60">
-                        {radnja === p.id ? "…" : "Potpiši"}
+                        {radnja === p.id ? "…" : t("potpisi")}
                       </button>
                     )}
                   </div>

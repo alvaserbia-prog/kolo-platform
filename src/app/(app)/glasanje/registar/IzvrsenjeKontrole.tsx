@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // Admin (UO) kontrole nad usvojenom odlukom koja čeka izvršenje (čl. 17, 18).
 export default function IzvrsenjeKontrole({ id }: { id: string }) {
+  const t = useTranslations("glasanje");
   const router = useRouter();
   const [radnja, setRadnja] = useState<"izvrsi" | "veto" | null>(null);
   const [vetoForma, setVetoForma] = useState(false);
@@ -16,7 +18,7 @@ export default function IzvrsenjeKontrole({ id }: { id: string }) {
     const res = await fetch(`/api/admin/glasanje/${id}/izvrsi`, { method: "POST" });
     setRadnja(null);
     if (res.ok) router.refresh();
-    else setGreska((await res.json().catch(() => ({}))).error ?? "Greška.");
+    else setGreska((await res.json().catch(() => ({}))).error ?? t("greska_generic"));
   }
 
   async function veto() {
@@ -28,7 +30,7 @@ export default function IzvrsenjeKontrole({ id }: { id: string }) {
     });
     setRadnja(null);
     if (res.ok) { setVetoForma(false); setObrazlozenje(""); router.refresh(); }
-    else setGreska((await res.json().catch(() => ({}))).error ?? "Greška.");
+    else setGreska((await res.json().catch(() => ({}))).error ?? t("greska_generic"));
   }
 
   return (
@@ -37,26 +39,26 @@ export default function IzvrsenjeKontrole({ id }: { id: string }) {
         <div className="flex gap-2">
           <button onClick={izvrsi} disabled={radnja !== null}
             className="px-3 py-1.5 rounded-lg bg-kolo-green-700 text-white text-xs font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
-            {radnja === "izvrsi" ? "..." : "Označi izvršeno"}
+            {radnja === "izvrsi" ? "..." : t("oznaci_izvrseno")}
           </button>
           <button onClick={() => setVetoForma(true)} disabled={radnja !== null}
             className="px-3 py-1.5 rounded-lg border border-kolo-danger/40 text-kolo-danger text-xs font-semibold hover:bg-kolo-danger-light disabled:opacity-60">
-            Zaštitni veto
+            {t("zastitni_veto")}
           </button>
         </div>
       ) : (
         <div className="space-y-2">
           <textarea rows={2} value={obrazlozenje} onChange={(e) => setObrazlozenje(e.target.value)}
-            placeholder="Obrazloženje veta — konkretna pretnja održivosti (čl. 18)"
+            placeholder={t("veto_obrazlozenje_placeholder")}
             className="w-full px-3 py-2 rounded-lg border border-kolo-border text-xs outline-none focus:border-kolo-green-700 resize-none" />
           <div className="flex gap-2">
             <button onClick={veto} disabled={radnja !== null || obrazlozenje.trim().length < 10}
               className="px-3 py-1.5 rounded-lg bg-kolo-danger text-white text-xs font-semibold disabled:opacity-60">
-              {radnja === "veto" ? "..." : "Potvrdi veto"}
+              {radnja === "veto" ? "..." : t("potvrdi_veto")}
             </button>
             <button onClick={() => { setVetoForma(false); setObrazlozenje(""); }}
               className="px-3 py-1.5 rounded-lg bg-kolo-bg text-kolo-muted text-xs font-medium">
-              Otkaži
+              {t("otkazi_veto")}
             </button>
           </div>
         </div>

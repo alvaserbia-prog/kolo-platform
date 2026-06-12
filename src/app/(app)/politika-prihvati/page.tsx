@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface Verzija {
   id: string;
@@ -23,6 +24,7 @@ function odredisteNakonPristanka(): string {
 }
 
 export default function PolitikaPrihvatiPage() {
+  const t = useTranslations("politikaPrihvati");
   const router = useRouter();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
   const [loading, setLoading] = useState(true);
@@ -53,7 +55,7 @@ export default function PolitikaPrihvatiPage() {
       body: JSON.stringify({ verzijaId: verzija.id }),
     });
     if (!res.ok) {
-      setError("Greška pri prihvatanju. Pokušajte ponovo.");
+      setError(t("greska_prihvatanje"));
       setPrihvatanje(false);
       return;
     }
@@ -63,7 +65,7 @@ export default function PolitikaPrihvatiPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-kolo-bg">
-        <p className="text-kolo-muted text-sm">Učitavanje...</p>
+        <p className="text-kolo-muted text-sm">{t("ucitavanje")}</p>
       </div>
     );
   }
@@ -72,25 +74,25 @@ export default function PolitikaPrihvatiPage() {
     <div className="flex items-center justify-center min-h-screen bg-kolo-bg p-4">
       <div className="bg-white rounded-2xl border border-kolo-border p-8 max-w-md w-full shadow-sm">
         <div className="mb-6">
-          <h1 className="text-lg font-bold text-kolo-text mb-2">Ažurirana Politika privatnosti</h1>
+          <h1 className="text-lg font-bold text-kolo-text mb-2">{t("naslov")}</h1>
           {verzija && (
             <p className="text-sm text-kolo-muted">
-              Verzija <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
-              Na snazi od: <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
+              {t("verzija_label")} <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
+              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
             </p>
           )}
         </div>
 
         <p className="text-sm text-kolo-text mb-4">
-          Molimo vas da pročitate i prihvatite novu verziju Politike privatnosti kako biste nastavili sa korišćenjem platforme.
+          {t("opis")}
         </p>
 
         <p className="text-sm text-kolo-muted mb-6">
-          Politiku privatnosti možete pročitati na{" "}
+          {t("procitajte_na")}{" "}
           <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">
-            ovoj stranici
+            {t("ovoj_stranici")}
           </Link>
-          . Ukoliko se ne slažete, možete obrisati nalog u podešavanjima profila.
+          {t("ne_slazete_se")}
         </p>
 
         {error && (
@@ -102,7 +104,7 @@ export default function PolitikaPrihvatiPage() {
           disabled={prihvatanje}
           className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
         >
-          {prihvatanje ? "Prihvatam..." : "Prihvatam Politiku privatnosti"}
+          {prihvatanje ? t("dugme_prihvatam_loading") : t("dugme_prihvatam")}
         </button>
       </div>
     </div>

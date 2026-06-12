@@ -1,35 +1,39 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Statut KOLO Fondacije — KOLO",
-  description: "Statut KOLO Fondacije, verzija 3.7.2",
-  path: "/statut",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_statut_title"),
+    description: t("meta_statut_desc"),
+    path: "/statut",
+  });
+}
 
 export default async function StatutPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "statut_3_7_2.md");
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument("statut_3_8_0.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
+        <p className="text-xs text-kolo-muted mb-1">{t("eyebrow")}</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Statut KOLO Fondacije
+          {t("statut.naslov")}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.2</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {t("statut.ver")}</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
-          <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnik</Link>
-          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
-          <Link href="/uslovi" className="text-kolo-green-700 hover:underline">Uslove korišćenja</Link>
+          <span className="text-kolo-muted">{t("viditeI")}</span>
+          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">{t("link.pravilnikJed")}</Link>
+          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">{t("link.privatnost")}</Link>
+          <Link href="/uslovi" className="text-kolo-green-700 hover:underline">{t("link.uslovi")}</Link>
         </div>
       </div>
 

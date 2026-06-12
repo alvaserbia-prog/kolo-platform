@@ -9,8 +9,10 @@ import { prisma } from "@/lib/prisma";
 import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
 import { mozeNadzor } from "@/lib/dozvole";
 import VerifikacijaCard from "@/components/nadzor/VerifikacijaCard";
+import { getTranslations } from "next-intl/server";
 
 export default async function NadzorPage() {
+  const t = await getTranslations("nadzor");
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
@@ -21,10 +23,9 @@ export default async function NadzorPage() {
   if (!user || !mozeNadzor(user)) {
     return (
       <div className="max-w-2xl mx-auto py-12 text-center">
-        <h1 className="text-2xl font-bold mb-2">Nemaš ovlašćenje</h1>
+        <h1 className="text-2xl font-bold mb-2">{t("nema_ovlascenja_naslov")}</h1>
         <p className="text-black/70">
-          Nadzor obavljaju samo članovi UO Fondacije i nosioci ZRNA
-          (čl. 10 Pravilnika o dokazu stvarnosti).
+          {t("nema_ovlascenja_opis")}
         </p>
       </div>
     );
@@ -35,16 +36,15 @@ export default async function NadzorPage() {
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Nadzor</h1>
+        <h1 className="text-2xl font-bold">{t("page_naslov")}</h1>
         <p className="text-sm text-black/70 mt-1">
-          Verifikacije koje čekaju potvrdu. Po potvrđenom nadzoru, verifikator
-          dobija slot nazad i ti dobijaš 500 POEN (čl. 7, 10–11).
+          {t("page_opis")}
         </p>
       </div>
 
       {lista.length === 0 ? (
         <div className="rounded-2xl border border-black/10 bg-white p-8 text-center text-black/55">
-          Nema verifikacija koje čekaju nadzor.
+          {t("prazna_lista")}
         </div>
       ) : (
         <div className="space-y-3">

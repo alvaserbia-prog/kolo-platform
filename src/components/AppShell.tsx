@@ -50,6 +50,29 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
       .catch(() => {});
   }, [verified]);
 
+  // Kad korisnik otvori Novčanik/Pijaca → označi "viđeno" (badge ide na 0).
+  // Optimistički nuliramo lokalno, pa serveru javimo da pomeri "viđeno" vreme.
+  useEffect(() => {
+    const sekcija =
+      pathname.startsWith("/novcanik") ? "novcanik" :
+      pathname.startsWith("/pijaca") ? "pijaca" :
+      null;
+    if (!sekcija) return;
+
+    setDnevniBrojevi((prev) => (prev ? { ...prev, [sekcija]: 0 } : prev));
+    fetch("/api/dnevni-brojevi/vidjeno", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sekcija }),
+    })
+      // Posle pomeranja "viđeno" vremena osveži brojeve da ne dođe do trke
+      // sa inicijalnim GET-om (koji bi mogao da vrati staru, ne-nulu vrednost).
+      .then(() => fetch("/api/dnevni-brojevi"))
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => { if (data) setDnevniBrojevi(data); })
+      .catch(() => {});
+  }, [pathname]);
+
   // Učitaj broj verifikacija za nadzor (samo POCETNI / NOSILAC_ZRNA)
   useEffect(() => {
     if (!jeNadzornik) return;
@@ -62,7 +85,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   }, [jeNadzornik, pathname]);
 
   return (
-    <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">
+    <div className="h-full bg-kolo-bg text-kolo-text flex flex-col overflow-x-hidden">
       <Header onMenuOpen={() => setMobileOpen(true)} />
       <div className="flex flex-1 min-h-0 justify-center">
       <div className="flex w-full max-w-[1140px] min-w-0">

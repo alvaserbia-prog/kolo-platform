@@ -1,35 +1,39 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { promises as fs } from "fs";
-import path from "path";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
+import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Uslovi korišćenja — KOLO",
-  description: "Uslovi korišćenja KOLO platforme, verzija 3.7.4",
-  path: "/uslovi",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pravne");
+  return pageMetadata({
+    title: t("meta_uslovi_title"),
+    description: t("meta_uslovi_desc"),
+    path: "/uslovi",
+  });
+}
 
 export default async function UsloviPage() {
-  const filePath = path.join(process.cwd(), "nova dokumentacija", "uslovi_koriscenja_3_7_4.md");
-  const sadrzaj = await fs.readFile(filePath, "utf-8");
+  const locale = await getLocale();
+  const t = await getTranslations("pravne");
+  const sadrzaj = await ucitajPravniDokument("uslovi_koriscenja_3_8_0.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
 
       <div className="mb-8">
-        <p className="text-xs text-kolo-muted mb-1">Pravni dokumenti</p>
+        <p className="text-xs text-kolo-muted mb-1">{t("eyebrow")}</p>
         <h1 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-          Uslovi korišćenja KOLO platforme
+          {t("uslovi.naslov")}
         </h1>
-        <p className="text-sm text-kolo-muted mt-2">Verzija 3.7.4</p>
+        <p className="text-sm text-kolo-muted mt-2">{t("verzija")} {t("uslovi.ver")}</p>
         <div className="mt-4 flex gap-3 text-sm flex-wrap">
-          <span className="text-kolo-muted">Vidite i:</span>
-          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">Pravilnike</Link>
-          <Link href="/statut" className="text-kolo-green-700 hover:underline">Statut Fondacije</Link>
-          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">Politiku privatnosti</Link>
+          <span className="text-kolo-muted">{t("viditeI")}</span>
+          <Link href="/pravilnik" className="text-kolo-green-700 hover:underline">{t("link.pravilnik")}</Link>
+          <Link href="/statut" className="text-kolo-green-700 hover:underline">{t("link.statut")}</Link>
+          <Link href="/privatnost" className="text-kolo-green-700 hover:underline">{t("link.privatnost")}</Link>
         </div>
       </div>
 
@@ -60,10 +64,10 @@ export default async function UsloviPage() {
 
       <div className="mt-10 pt-6 border-t border-kolo-border flex flex-wrap gap-4 text-sm text-kolo-muted">
         <Link href="/privatnost" className="text-kolo-green-700 hover:underline">
-          Politika privatnosti →
+          {t("link.privatnost")} →
         </Link>
         <Link href="/" className="hover:text-kolo-green-700 transition-colors">
-          Nazad na početnu
+          {t("nazadNaPocetnu")}
         </Link>
       </div>
     </div>

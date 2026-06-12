@@ -198,10 +198,17 @@ model User {
   slotoviPotroseni       Int          @default(0)
   pocetnaEmisijaIzvrsena Boolean      @default(false)
   pseudonimChangedAt DateTime?
+  // "Viđeno" vremena za sidebar badge-eve: badge broji samo stavke novije od ovog
+  // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
+  vidjenoNovcanikAt  DateTime?
+  vidjenoPijacaAt    DateTime?
   memberHash         String    @unique
   location           String?
   telefon            String?
   avatar             String?
+  // Izabrani jezik korisnika (next-intl locale): "sr" | "sr-Cyrl" | "en" | "hu".
+  // Koristi se za jezik notifikacija/email-ova i podrazumevani prikaz po prijavi.
+  jezik              String    @default("sr")
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]

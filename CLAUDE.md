@@ -63,7 +63,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 
 **Otklonjene neusaglašenosti pri konsolidaciji na 3.8.0:** whitepaper — prava neverifikovanog korisnika (razmena van prostora za oglašavanje + ažuriranje evidencije POEN-a) usklađena sa Pravilnikom čl. 28; e-mail za zaštitu podataka ujednačen na `privatnost@ekolo.rs` (DPIA/Radnje obrade); hijerarhija — dodat Pravilnik o Gornjem Kolu, naziv „kolektivni oblici"; programi podrške — verzija u footeru ujednačena; zastarele međudokumentne verzijske reference → 3.8.0.
 
-**⚠️ Rendering app-a:** javne pravne stranice i dalje čitaju iz `nova dokumentacija/` (vidi „Javne pravne stranice" niže). Re-pointovanje na `dokumentacija 3.8/` je zaseban kod-zadatak ako/kada se odluči.
+**✅ Rendering app-a (od 2026-06-08):** javne pravne stranice sada čitaju iz **`dokumentacija 3.8/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 3.8`). Prikazuju se NAJNOVIJE verzije: 3.8.0, a **DPIA/Politika privatnosti/Radnje obrade → 3.8.1**. Engleski prevod celog seta je u **`dokumentacija 3.8/en/`** (15 dokumenata, uz disklejmer „Serbian prevails"; loader bira EN za locale `en`, fallback na srpski). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
 
 Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 
@@ -320,9 +320,10 @@ docs/             — interne radne beleške (nije normativa)
 - ✅ **Usklađeno:** model je **predloženi POEN × min(1, L/P)** (`DoprinosOglas.predlozeniPoen`, `OglasEvidencija.predlozeniPoen`; `programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (verifikator ≠ izvršilac ≠ predlagač). Satnica (`hourlyRate`/`hoursWorked`) uklonjena. Konsolidovano sa starim PED tokom — `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; „PED" je samo enum/labela koja se rutira kroz doprinos-oglase.
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
-### Javne pravne stranice (rendruju iz `nova dokumentacija/`)
-- `/pravilnik` → `Pravilnik_3_7_5.md` (+ `/pravilnik/[slug]`); `/privatnost` → `politika_3_7_6.md`; `/uslovi` → `uslovi_koriscenja_3_7_4.md`; `/statut` → `statut_3_7_2.md`; `/dpia` → `DPIA_3_7_5.md`; `/radnje-obrade` → `radnje_obrade_3_7_5.md`; `/whitepaper` → `whitepaper_3_7_6.md`; `/rizici` → 3.7.2; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce.
-- ✅ **Verzijske labele sređene** — sve javne stranice prikazuju stvarnu verziju (Pravilnik 3.7.5, statut/rizici 3.7.2, DPIA/radnje/politika 3.7.5, whitepaper 3.7.6, o-nama „v3.7.5"); više nema stale „3.7.0".
+### Javne pravne stranice (rendruju iz `dokumentacija 3.8/`, EN iz `dokumentacija 3.8/en/`)
+- `/pravilnik` → `Pravilnik_3_8_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.8.0); `/privatnost` → `politika_3_8_1.md`; `/uslovi` → `uslovi_koriscenja_3_8_0.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_8_1.md`; `/radnje-obrade` → `radnje_obrade_3_8_1.md`; `/whitepaper` → `whitepaper_3_8_0.md`; `/rizici` → `rizici_3_8_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.8/en/<isti fajl>` (fallback srpski).
+- ✅ **Verzijske labele** — prikazuju 3.8.0 (DPIA/politika/radnje 3.8.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
+- **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
 - Tabs: Dashboard, Na čekanju, Krugovi, Programi, Pokrovitelji (+ prijave), Korisnici, Osnivači, Finansije (+ veto/troškovi), Audit log. (Admin simulator UKLONJEN.)

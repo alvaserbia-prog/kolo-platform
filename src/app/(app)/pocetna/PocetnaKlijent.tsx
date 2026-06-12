@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 
 interface BlogObjava {
@@ -36,6 +37,7 @@ export default function PocetnaKlijent({
   blog,
   chatInicijalno,
 }: Props) {
+  const t = useTranslations("pocetna");
   const [poruke, setPoruke] = useState<ChatPoruka[]>(chatInicijalno);
   const [input, setInput] = useState("");
   const [salje, setSalje] = useState(false);
@@ -88,13 +90,13 @@ export default function PocetnaKlijent({
       });
       const data = await res.json();
       if (!res.ok) {
-        setGreska(data.error ?? "Greška pri slanju.");
+        setGreska(data.error ?? t("greska_slanje"));
         return;
       }
       setPoruke((prev) => [...prev, data.poruka]);
       setInput("");
     } catch {
-      setGreska("Greška u mreži.");
+      setGreska(t("greska_mreza"));
     } finally {
       setSalje(false);
     }
@@ -103,22 +105,21 @@ export default function PocetnaKlijent({
   return (
     <div className="space-y-6">
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
-        Dobrodošao, {pseudonim}
+        {t("dobrodoslice", { pseudonim })}
       </h1>
       <PageOpis>
-        Tvoja polazna tačka: vesti Fondacije i razgovor sa zajednicom. Ovde vidiš
-        šta je novo i šta drugi pišu (pisanje se otključava verifikacijom).
+        {t("opis_stranice")}
       </PageOpis>
 
       {/* ── BLOG / VESTI FONDACIJE ──────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">Vesti Fondacije</h2>
+          <h2 className="text-lg font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
         </div>
 
         {blog.length === 0 ? (
           <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-            Još uvek nema objava.
+            {t("nema_objava")}
           </div>
         ) : (
           <div className="space-y-3">
@@ -148,7 +149,7 @@ export default function PocetnaKlijent({
                       onClick={() => setOtvorenaObjava(otvorena ? null : o.id)}
                       className="mt-2 text-sm font-medium text-kolo-green-700 hover:underline"
                     >
-                      {otvorena ? "Skupi" : "Pročitaj celu objavu →"}
+                      {otvorena ? t("skupi") : t("procitaj_celo")}
                     </button>
                   )}
                 </article>
@@ -161,9 +162,9 @@ export default function PocetnaKlijent({
       {/* ── CHAT SOBA ───────────────────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">Chat soba</h2>
+          <h2 className="text-lg font-semibold text-kolo-text">{t("chat_naslov")}</h2>
           <span className="text-xs text-kolo-muted">
-            Poruke se brišu nakon 30 dana
+            {t("chat_brisanje")}
           </span>
         </div>
 
@@ -175,7 +176,7 @@ export default function PocetnaKlijent({
           >
             {poruke.length === 0 ? (
               <div className="h-full flex items-center justify-center text-sm text-kolo-muted">
-                Nema poruka. Budi prvi koji će napisati.
+                {t("chat_nema_poruka")}
               </div>
             ) : (
               poruke.map((p) => {
@@ -231,7 +232,7 @@ export default function PocetnaKlijent({
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Napiši poruku…"
+                  placeholder={t("chat_placeholder")}
                   maxLength={1000}
                   className="flex-1 px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
                 />
@@ -240,19 +241,19 @@ export default function PocetnaKlijent({
                   disabled={!input.trim() || salje}
                   className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {salje ? "..." : "Pošalji"}
+                  {salje ? "..." : t("chat_posalji")}
                 </button>
               </form>
             ) : (
               <div className="flex items-center justify-between gap-3 text-sm">
                 <span className="text-kolo-muted">
-                  Pisanje u chat sobu dostupno je samo verifikovanim članovima.
+                  {t("chat_samo_verif")}
                 </span>
                 <Link
                   href="/tabla-jemstva"
                   className="shrink-0 px-3 py-1.5 bg-kolo-gold-600 text-white text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
                 >
-                  Zatraži verifikaciju →
+                  {t("chat_zatrazi_verif")}
                 </Link>
               </div>
             )}

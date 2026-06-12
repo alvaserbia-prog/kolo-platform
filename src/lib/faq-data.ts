@@ -802,3 +802,25 @@ export function poBrojevima(brojevi: number[]): FaqPitanje[] {
     .map((n) => SVA_PITANJA.find((p) => p.id === n))
     .filter((p): p is FaqPitanje => p !== undefined);
 }
+
+import { FAQ_SEKCIJE_EN } from "./faq-data-en";
+
+/**
+ * Returns FAQ sections for a given locale.
+ * English returns English data; all other locales (sr, sr-Cyrl, hu, …) fall back to Serbian.
+ */
+export function getFaqSekcije(locale: string): FaqSekcija[] {
+  if (locale === "en") return FAQ_SEKCIJE_EN;
+  return FAQ_SEKCIJE;
+}
+
+/**
+ * Returns selected FAQ questions by ID for a given locale.
+ */
+export function getFaqPoBrojevima(ids: number[], locale: string): FaqPitanje[] {
+  const sekcije = getFaqSekcije(locale);
+  const sva = sekcije.flatMap((s) => s.pitanja);
+  return ids
+    .map((n) => sva.find((p) => p.id === n))
+    .filter((p): p is FaqPitanje => p !== undefined);
+}

@@ -31,6 +31,26 @@ export function absoluteUrl(path = "/"): string {
 
 import type { Metadata } from "next";
 
+/** BCP-47 oznake i OG locale po internom kodu jezika (next-intl locale). */
+export const OG_LOCALE: Record<string, string> = {
+  sr: "sr_RS",
+  "sr-Cyrl": "sr_RS",
+  en: "en_US",
+  hu: "hu_HU",
+};
+
+/**
+ * hreflang `languages` mapa za zadatu putanju.
+ *
+ * ⚠️ TRENUTNO ONEMOGUĆENO: jezici se biraju preko cookie-a na ISTOM URL-u (nema
+ * /en, /hu, /sr-Cyrl ruta — projekat koristi ravno stablo). Emitovanje hreflang
+ * linkova na nepostojeće prefiks-URL-ove slalo bi Google na 404. Vraća praznu
+ * mapu dok se ne uvede app/[locale]/ struktura (vidi docs/i18n-engleski-plan.md).
+ */
+export function hreflangAlternates(_path = "/"): Record<string, string> {
+  return {};
+}
+
 /**
  * Konzistentna metadata za javnu stranicu: naslov (kroz template `%s — KOLO`),
  * opis, self-canonical i OG/Twitter. Dinamičku OG sliku obezbeđuje
@@ -50,7 +70,7 @@ export function pageMetadata({
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: path, languages: hreflangAlternates(path) },
     openGraph: {
       type: "website",
       locale: "sr_RS",

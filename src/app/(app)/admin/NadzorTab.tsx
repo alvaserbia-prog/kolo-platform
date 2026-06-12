@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export interface NadzorPravilo {
   kod: string;
@@ -29,18 +30,19 @@ const NIVO_STIL: Record<string, string> = {
 const NIVO_ZNAK: Record<string, string> = { HITNO: "🔴", UPOZORENJE: "🟠", INFO: "🟡" };
 
 export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
+  const t = useTranslations("admin");
   const router = useRouter();
   const [otvoren, setOtvoren] = useState<string | null>(null);
   const [radim, setRadim] = useState<string | null>(null);
 
   async function oznaciCisto(id: string) {
-    if (!confirm("Označiti ovaj nalaz kao čistu (lažnu uzbunu)? Sklanja se sa spiska.")) return;
+    if (!confirm(t("nadzor_oznaci_cisto_confirm"))) return;
     setRadim(id);
     try {
       const res = await fetch(`/api/admin/nadzor/${id}/cisto`, { method: "POST" });
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
-        alert(j.error ?? "Greška.");
+        alert(j.error ?? t("nadzor_greska"));
       } else {
         router.refresh();
       }
@@ -56,9 +58,9 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-kolo-text">Nadzor integriteta verifikacija</h2>
+          <h2 className="text-lg font-semibold text-kolo-text">{t("nadzor_naslov")}</h2>
           <p className="text-sm text-kolo-muted">
-            Sistem samo posmatra i obeležava — nijedna radnja nije automatska. Gašenje povlači čovek.
+            {t("nadzor_opis")}
           </p>
         </div>
         <div className="flex gap-2 text-sm">
@@ -69,13 +71,13 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
 
       {nalazi.length === 0 ? (
         <div className="rounded-lg border border-kolo-border bg-white p-8 text-center text-kolo-muted">
-          Nema otvorenih nalaza. (Cron se pokreće noću — spisak je prazan dok prvi put ne odradi.)
+          {t("nadzor_nema")}
         </div>
       ) : (
         <div className="divide-y divide-kolo-border rounded-lg border border-kolo-border bg-white">
           {nalazi.map((n) => {
             const naslov =
-              n.tip === "GRUPA" ? `Grupa (${n.clanovi?.length ?? 0} naloga)` : n.pseudonim ?? n.subjektId ?? "—";
+              n.tip === "GRUPA" ? t("nadzor_grupa_label", { count: n.clanovi?.length ?? 0 }) : n.pseudonim ?? n.subjektId ?? "—";
             const jeOtvoren = otvoren === n.id;
             return (
               <div key={n.id} className="p-3">
@@ -109,7 +111,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
 
                     {n.tip === "GRUPA" && n.clanovi && (
                       <div>
-                        <div className="text-kolo-muted mb-1">Nalozi u grupi:</div>
+                        <div className="text-kolo-muted mb-1">{t("nadzor_nalozi_u_grupi")}</div>
                         <div className="flex flex-wrap gap-2">
                           {n.clanovi.map((c) => (
                             <Link key={c.id} href={`/profil/${c.id}`} className="text-kolo-green-700 hover:underline">
@@ -126,7 +128,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
                           href={`/profil/${n.subjektId}`}
                           className="px-3 py-1.5 rounded border border-kolo-border text-kolo-text hover:bg-kolo-bg"
                         >
-                          Otvori profil
+                          {t("nadzor_otvori_profil")}
                         </Link>
                       )}
                       <button
@@ -134,7 +136,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
                         disabled={radim === n.id}
                         className="px-3 py-1.5 rounded border border-kolo-border text-kolo-text hover:bg-kolo-bg disabled:opacity-50"
                       >
-                        {radim === n.id ? "..." : "Označi kao čisto"}
+                        {radim === n.id ? "..." : t("nadzor_oznaci_cisto")}
                       </button>
                     </div>
                   </div>

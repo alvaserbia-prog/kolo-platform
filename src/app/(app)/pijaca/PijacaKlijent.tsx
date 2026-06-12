@@ -2,11 +2,26 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import PageOpis from "@/components/PageOpis";
 
-const KATEGORIJE = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"];
+// DB enum values — never change these (they are stored in the database)
+const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
+
+// Map a DB category value to its i18n key suffix
+function kategorijaKljuc(kat: string): string {
+  const map: Record<string, string> = {
+    "Hrana": "Hrana",
+    "Usluge": "Usluge",
+    "Zanati": "Zanati",
+    "Elektronika": "Elektronika",
+    "Odeća": "Odeca",
+    "Ostalo": "Ostalo",
+  };
+  return map[kat] ?? "Ostalo";
+}
 
 interface Listing {
   id: string;
@@ -27,6 +42,7 @@ interface Props {
 }
 
 export default function PijacaKlijent({ listings, isVerified }: Props) {
+  const t = useTranslations("pijaca");
   const router = useRouter();
   const [filterKat, setFilterKat] = useState("Sve");
   const [pretraga, setPretraga] = useState("");
@@ -59,10 +75,10 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
     const data = await res.json();
     setLoading(false);
     if (res.ok) {
-      setPoruka({ text: `Kupovina uspešna! Prebačeno ${kupiOglas.price.toLocaleString("sr-RS")} POEN.`, ok: true });
+      setPoruka({ text: t("kupovina_uspesna", { iznos: kupiOglas.price.toLocaleString("sr-RS") }), ok: true });
       setTimeout(() => { setKupiOglas(null); setPoruka(null); router.refresh(); }, 2000);
     } else {
-      setPoruka({ text: data.error ?? "Greška.", ok: false });
+      setPoruka({ text: data.error ?? t("greska"), ok: false });
     }
   }
 
@@ -70,34 +86,45 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
     <div className="space-y-5">
       {/* Zaglavlje */}
       <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>Pijaca</h1>
+        <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
         {isVerified ? (
           <Link
             href="/pijaca/novi-oglas"
             className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
           >
-            + Novi oglas
+            {t("novi_oglas")}
           </Link>
         ) : (
-          <span className="text-xs text-kolo-muted">Zatražite verifikaciju da biste objavili oglas</span>
+          <span className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</span>
         )}
       </div>
       <PageOpis>
-        Mesto gde članovi nude i traže dobra i usluge. Ponudu može da razgleda
-        svako; za objavu oglasa i kontakt sa prodavcem potrebna je verifikacija.
+        {t("opis")}
       </PageOpis>
 
       {/* Pretraga + filteri */}
       <div className="space-y-3">
         <input
           type="text"
-          placeholder="Pretraži oglase..."
+          placeholder={t("pretrazi_placeholder")}
           value={pretraga}
           onChange={(e) => setPretraga(e.target.value)}
           className="w-full px-4 py-3 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
         />
         <div className="flex gap-2 flex-wrap">
-          {["Sve", ...KATEGORIJE].map((kat) => (
+          {/* "All/Sve" button */}
+          <button
+            onClick={() => setFilterKat("Sve")}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              filterKat === "Sve"
+                ? "bg-kolo-green-700 text-white"
+                : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
+            }`}
+          >
+            {t("sve_kategorije")}
+          </button>
+          {/* Category buttons — filter value stays as DB enum, label is translated */}
+          {KATEGORIJE_VREDNOSTI.map((kat) => (
             <button
               key={kat}
               onClick={() => setFilterKat(kat)}
@@ -107,7 +134,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                   : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
               }`}
             >
-              {kat}
+              {t(`kategorija_${kategorijaKljuc(kat)}`)}
             </button>
           ))}
         </div>
@@ -115,7 +142,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           <input
             type="number"
             min={0}
-            placeholder="Min POEN"
+            placeholder={t("min_poen")}
             value={minCena}
             onChange={(e) => setMinCena(e.target.value)}
             className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
@@ -124,7 +151,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           <input
             type="number"
             min={0}
-            placeholder="Max POEN"
+            placeholder={t("max_poen")}
             value={maxCena}
             onChange={(e) => setMaxCena(e.target.value)}
             className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
@@ -136,7 +163,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           )}
         </div>
         <div className="flex gap-2">
-          {[["novo", "Najnovije"], ["jeftino", "Najjeftinije"], ["skupo", "Najskuplje"]].map(([val, lab]) => (
+          {(["novo", "jeftino", "skupo"] as const).map((val) => (
             <button
               key={val}
               onClick={() => setSort(val)}
@@ -146,7 +173,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                   : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
               }`}
             >
-              {lab}
+              {t(`sort_${val}`)}
             </button>
           ))}
         </div>
@@ -161,10 +188,10 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
             </svg>
           </div>
           <p className="text-sm font-semibold text-kolo-text">
-            {listings.length === 0 ? "Još nema oglasa" : "Nema oglasa koji odgovaraju pretrazi"}
+            {listings.length === 0 ? t("nema_oglasa_naslov") : t("nema_rezultata_naslov")}
           </p>
           <p className="text-sm text-kolo-muted">
-            {listings.length === 0 ? "Budite prvi koji objavljuje na Pijaci!" : "Pokušajte sa drugačijim filterima."}
+            {listings.length === 0 ? t("nema_oglasa_opis") : t("nema_rezultata_opis")}
           </p>
         </div>
       ) : (
@@ -175,6 +202,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               oglas={l}
               isVerified={isVerified}
               onKupi={() => { setKupiOglas(l); setPoruka(null); }}
+              t={t}
             />
           ))}
         </div>
@@ -185,12 +213,12 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-4">
           <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 w-full max-w-sm mx-auto space-y-4">
             <div>
-              <h3 className="text-lg font-bold text-kolo-text">Potvrdi kupovinu</h3>
+              <h3 className="text-lg font-bold text-kolo-text">{t("potvrdi_kupovinu")}</h3>
               <p className="text-sm text-kolo-muted mt-1">{kupiOglas.title}</p>
             </div>
             <div className="bg-kolo-green-100 rounded-xl px-4 py-3 text-center">
               <p className="text-2xl font-bold text-kolo-green-700">{kupiOglas.price.toLocaleString("sr-RS")} POEN</p>
-              <p className="text-xs text-kolo-green-700 opacity-70">biće prebačeno prodavcu</p>
+              <p className="text-xs text-kolo-green-700 opacity-70">{t("bice_prebaceno")}</p>
             </div>
             {poruka && (
               <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
@@ -203,14 +231,14 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                 disabled={loading}
                 className="flex-1 py-3 rounded-xl bg-kolo-bg border border-kolo-border text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors"
               >
-                Otkaži
+                {t("otkazi")}
               </button>
               <button
                 onClick={handleKupi}
                 disabled={loading || !!poruka?.ok}
                 className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
               >
-                {loading ? "Obrađujem..." : "Plati"}
+                {loading ? t("obradjem") : t("plati")}
               </button>
             </div>
           </div>
@@ -222,14 +250,18 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
 
 // ── Kartica oglasa ─────────────────────────────────────────────────────────────
 
+type TFunction = ReturnType<typeof useTranslations<"pijaca">>;
+
 function OglasKartica({
   oglas,
   isVerified,
   onKupi,
+  t,
 }: {
   oglas: Listing;
   isVerified: boolean;
   onKupi: () => void;
+  t: TFunction;
 }) {
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
@@ -247,7 +279,7 @@ function OglasKartica({
           <span className="text-4xl">{kategorijaEmoji(oglas.category)}</span>
         )}
         <span className="absolute top-2 left-2 bg-white/90 text-kolo-muted text-xs font-medium px-2 py-0.5 rounded-lg">
-          {oglas.category}
+          {t(`kategorija_${kategorijaKljuc(oglas.category)}`)}
         </span>
       </div>
 
@@ -276,11 +308,11 @@ function OglasKartica({
               onClick={onKupi}
               className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
             >
-              Plati
+              {t("plati")}
             </button>
           ) : (
             <Link href="/tabla-jemstva" className="text-xs text-kolo-gold-600 hover:underline">
-              Zatraži verifikaciju →
+              {t("zatrazi_verifikaciju_link")}
             </Link>
           )}
         </div>

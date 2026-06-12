@@ -7,6 +7,7 @@
  * poput "Opticaj", "zero-sum", "Indeks stvarnosti", "ZRNO"...
  */
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 export default function Pojam({
   termin,
@@ -15,6 +16,7 @@ export default function Pojam({
   termin: React.ReactNode;
   objasnjenje: string;
 }) {
+  const t = useTranslations("pojam");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -37,7 +39,7 @@ export default function Pojam({
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); setOpen((v) => !v); } }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
-        aria-label={`Šta je ${typeof termin === "string" ? termin : "ovo"}`}
+        aria-label={t("aria_sta_je", { termin: typeof termin === "string" ? termin : "?" })}
         className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-current text-[10px] font-bold leading-none text-kolo-muted hover:text-kolo-green-700 transition-colors align-middle cursor-help select-none"
       >
         i

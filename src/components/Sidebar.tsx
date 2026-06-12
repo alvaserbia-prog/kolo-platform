@@ -35,6 +35,43 @@ function BadgePill({ broj }: { broj: number }) {
   );
 }
 
+// Ikonice navigacije — inline SVG (isti stil kao u Header-u: 24x24, stroke currentColor).
+// Mapiranje ruta → ikonica drži izgled doslednim i bez dodatne zavisnosti.
+function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
+  const s = mali ? 16 : 18;
+  const p = { width: s, height: s, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.9, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  switch (href) {
+    case "/pocetna":
+      return <svg {...p}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10" /></svg>;
+    case "/sistem":
+      return <svg {...p}><path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5" /><path d="m3 17 9 5 9-5" /></svg>;
+    case "/novcanik":
+      return <svg {...p}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" /><path d="M3 5v14a2 2 0 0 0 2 2h16v-5" /><path d="M18 12a2 2 0 0 0 0 4h4v-4Z" /></svg>;
+    case "/pijaca":
+      return <svg {...p}><path d="m2 7 2-4h16l2 4" /><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7" /><path d="M2 7h20" /><path d="M9 21v-6h6v6" /></svg>;
+    case "/verifikacija":
+      return <svg {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
+    case "/tabla-jemstva":
+      return <svg {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
+    case "/zrno":
+      return <svg {...p}><path d="M7 20h10" /><path d="M12 20V11" /><path d="M12 11C9 11 7 9 7 6c3 0 5 2 5 5Z" /><path d="M12 11c0-3 2-5 5-5 0 3-2 5-5 5Z" /></svg>;
+    case "/doprinos-oglasi":
+      return <svg {...p}><rect x="3" y="8" width="18" height="4" rx="1" /><path d="M12 8v13" /><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" /><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8" /><path d="M16.5 8a2.5 2.5 0 0 0 0-5C13 3 12 8 12 8" /></svg>;
+    case "/programi":
+      return <svg {...p}><rect x="8" y="2" width="8" height="4" rx="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M9 12h6" /><path d="M9 16h6" /></svg>;
+    case "/nadzor":
+      return <svg {...p}><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>;
+    case "/donacije":
+      return <svg {...p}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.5 4.04 3 5.5l7 7Z" /></svg>;
+    case "/postani-pokrovitelj":
+      return <svg {...p}><circle cx="12" cy="8" r="6" /><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5" /></svg>;
+    case "/admin":
+      return <svg {...p}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>;
+    default:
+      return <svg {...p}><circle cx="12" cy="12" r="9" /></svg>;
+  }
+}
+
 function NavLink({ href, label, broj, aktivan, uvuceno, onClick }: {
   href: string; label: string; broj: number; aktivan: boolean; uvuceno?: boolean; onClick?: () => void;
 }) {
@@ -42,11 +79,17 @@ function NavLink({ href, label, broj, aktivan, uvuceno, onClick }: {
     <Link
       href={href}
       onClick={onClick}
-      className={`flex items-center justify-between ${uvuceno ? "pl-7 pr-3" : "px-3"} py-2 rounded-xl text-base font-medium transition-all duration-150 ${
-        aktivan ? "bg-white/15 text-white" : "text-white/55 hover:bg-white/10 hover:text-white/90"
+      className={`group relative flex items-center gap-2.5 ${uvuceno ? "pl-4 pr-3" : "px-3"} py-2 rounded-xl text-base font-medium transition-all duration-150 ${
+        aktivan ? "bg-white/12 text-white" : "text-white/55 hover:bg-white/10 hover:text-white/90"
       }`}
     >
-      <span>{label}</span>
+      {aktivan && (
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-[3px] rounded-r-full bg-kolo-gold-400" aria-hidden="true" />
+      )}
+      <span className={`shrink-0 transition-opacity ${aktivan ? "opacity-100" : "opacity-70 group-hover:opacity-100"}`}>
+        <NavIkona href={href} mali={uvuceno} />
+      </span>
+      <span className="flex-1 truncate">{label}</span>
       {broj > 0 && <BadgePill broj={broj} />}
     </Link>
   );
@@ -71,9 +114,21 @@ function PadajucaGrupa({ label, links, badge, pathname, onLinkClick }: {
         type="button"
         onClick={() => setOtvoreno((o) => !o)}
         aria-expanded={otvoreno}
-        className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-base font-medium text-white/55 hover:bg-white/10 hover:text-white/90 transition-all duration-150"
+        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-base font-medium transition-all duration-150 ${
+          nekiAktivan ? "text-white/90" : "text-white/55 hover:bg-white/10 hover:text-white/90"
+        }`}
       >
-        <span>{label}</span>
+        <span className="flex items-center gap-2.5">
+          <span className={`shrink-0 transition-opacity ${nekiAktivan ? "opacity-100" : "opacity-70"}`}>
+            {/* Zajedničko dobro — ikonica paketa/resursa */}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+              <path d="m3.3 7 8.7 5 8.7-5" />
+              <path d="M12 22V12" />
+            </svg>
+          </span>
+          <span>{label}</span>
+        </span>
         <span className="flex items-center">
           {!otvoreno && zbirBadge > 0 && <BadgePill broj={zbirBadge} />}
           <svg
@@ -84,21 +139,24 @@ function PadajucaGrupa({ label, links, badge, pathname, onLinkClick }: {
           </svg>
         </span>
       </button>
-      {otvoreno && (
-        <div className="mt-0.5 space-y-0.5">
-          {links.map((l) => (
-            <NavLink
-              key={l.href}
-              href={l.href}
-              label={l.label}
-              broj={badge[l.href] ?? 0}
-              aktivan={jeAktivan(pathname, l.href)}
-              uvuceno
-              onClick={onLinkClick}
-            />
-          ))}
+      {/* Glatka animacija visine preko grid-rows 0fr→1fr (bez JS merenja) */}
+      <div className={`grid transition-all duration-200 ease-out ${otvoreno ? "grid-rows-[1fr] opacity-100 mt-0.5" : "grid-rows-[0fr] opacity-0"}`}>
+        <div className="overflow-hidden">
+          <div className="space-y-0.5">
+            {links.map((l) => (
+              <NavLink
+                key={l.href}
+                href={l.href}
+                label={l.label}
+                broj={badge[l.href] ?? 0}
+                aktivan={jeAktivan(pathname, l.href)}
+                uvuceno
+                onClick={onLinkClick}
+              />
+            ))}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -180,10 +238,10 @@ function SidebarContent({
 
   return (
     <>
-      <div className="flex flex-col items-center px-4 pt-2 pb-3">
+      <div className="flex flex-col items-center px-4 pt-3 pb-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/kolo-hero-logo.png" alt="KOLO" style={{ width: 130, height: 130, objectFit: "contain", borderRadius: "1.25rem" }} />
-        <span className="font-bold text-white text-5xl tracking-widest mt-2">KOLO</span>
+        <img src="/kolo-hero-logo.png" alt="KOLO" style={{ width: 92, height: 92, objectFit: "contain", borderRadius: "1.1rem" }} />
+        <span className="font-bold text-white text-3xl tracking-[0.2em] mt-1.5">KOLO</span>
       </div>
       <nav className="flex-1 px-2.5 py-3 space-y-1 overflow-y-auto">
         {grupe.map((grupa, gi) => (
@@ -245,7 +303,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col">
+      <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col relative before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
         <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 

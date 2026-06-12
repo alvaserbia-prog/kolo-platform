@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { getTranslations } from "next-intl/server";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
@@ -6,6 +7,7 @@ import Link from "next/link";
 
 export default async function PijacaPage() {
   const session = await getServerSession(authOptions);
+  const t = await getTranslations("pijaca");
 
   const listings = await prisma.marketplaceListing.findMany({
     where: { status: "ACTIVE" },
@@ -25,14 +27,14 @@ export default async function PijacaPage() {
       {!session && (
         <div className="mb-5 bg-kolo-green-100 border border-kolo-green-500/20 rounded-2xl px-5 py-4 flex items-center justify-between gap-4">
           <p className="text-sm text-kolo-green-900">
-            Pogledajte šta nudi KOLO krug. Za kupovinu je potrebna verifikacija.
+            {t("gost_tekst")}
           </p>
           <div className="flex gap-2 shrink-0">
             <Link href="/login" className="px-4 py-2 border border-kolo-green-700 text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-700 hover:text-white transition-colors">
-              Prijavi se
+              {t("prijavi_se")}
             </Link>
             <Link href="/registracija" className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors">
-              Registruj se
+              {t("registruj_se")}
             </Link>
           </div>
         </div>
