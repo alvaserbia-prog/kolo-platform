@@ -85,7 +85,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   }, [jeNadzornik, pathname]);
 
   return (
-    <div className="h-full bg-kolo-bg text-kolo-text flex flex-col">
+    <div className="h-full bg-kolo-bg text-kolo-text flex flex-col overflow-x-hidden">
       <Header onMenuOpen={() => setMobileOpen(true)} />
       <div className="flex flex-1 min-h-0 justify-center">
       <div className="flex w-full max-w-[1140px] min-w-0">
