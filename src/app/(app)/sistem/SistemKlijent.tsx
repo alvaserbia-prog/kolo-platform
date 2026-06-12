@@ -71,6 +71,7 @@ interface Props {
   danasTransakcija: number;
   ukupnoVerifikacija: number;
   danasVerifikacija: number;
+  racunFondacije: number;
   ukupnoDonacija: number;
   danasDonacija: number;
   ukupanIznosTx: number;
@@ -98,6 +99,7 @@ export default function SistemKlijent({
   danasTransakcija,
   ukupnoVerifikacija,
   danasVerifikacija,
+  racunFondacije,
   ukupnoDonacija,
   danasDonacija,
   ukupanIznosTx,
@@ -148,6 +150,7 @@ export default function SistemKlijent({
 
       {/* Kartice pokazatelja */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        {/* — Kolona 1 — */}
         {/* Članovi */}
         <Kartica
           aktivan={sekcija === "clanovi"}
@@ -158,6 +161,7 @@ export default function SistemKlijent({
           podnaslov={t("kartica_verif_opis", { verif: verifikovanih, neverif: ukupnoKorisnika - verifikovanih })}
         />
 
+        {/* — Kolona 2 — */}
         {/* Transakcije */}
         <Kartica
           aktivan={sekcija === "transakcije"}
@@ -168,35 +172,7 @@ export default function SistemKlijent({
           podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
         />
 
-        {/* Faza sistema */}
-        <button
-          onClick={() => setSekcija("pregled")}
-          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
-            sekcija === "pregled"
-              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
-              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
-          }`}
-        >
-          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
-            <Pojam
-              termin={t("faza_sistema")}
-              objasnjenje={t("faza_sistema_opis")}
-            />
-          </p>
-          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
-            {faza2 ? t("faza_2") : t("faza_1")}
-          </p>
-          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
-            <div
-              className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
-              style={{ width: `${fazaPct}%` }}
-            />
-          </div>
-          <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
-            {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
-          </p>
-        </button>
-
+        {/* — Kolona 3 — */}
         {/* Opticaj */}
         <button
           onClick={() => setSekcija("pregled")}
@@ -238,7 +214,19 @@ export default function SistemKlijent({
           </div>
         </button>
 
-        {/* Mreža poverenja */}
+        {/* — Kolona 4 — */}
+        {/* Donacije */}
+        <Kartica
+          aktivan={sekcija === "donacije"}
+          onClick={() => setSekcija("donacije")}
+          label={t("kartica_donacije")}
+          broj={ukupnoDonacija}
+          danas={danasDonacija}
+          podnaslov={t("kartica_donacije_opis")}
+        />
+
+        {/* — Drugi red — */}
+        {/* Verifikacija (mreža poverenja) — ispod Članova */}
         <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
           <p className="text-base font-semibold mb-1 text-kolo-muted">
             <Pojam
@@ -257,17 +245,7 @@ export default function SistemKlijent({
           <p className="text-xs mt-1 text-kolo-muted">{t("veza_u_lancu")}</p>
         </div>
 
-        {/* Donacije */}
-        <Kartica
-          aktivan={sekcija === "donacije"}
-          onClick={() => setSekcija("donacije")}
-          label={t("kartica_donacije")}
-          broj={ukupnoDonacija}
-          danas={danasDonacija}
-          podnaslov={t("kartica_donacije_opis")}
-        />
-
-        {/* Iznos transakcija */}
+        {/* Ukupan promet — ispod Transakcija */}
         <Kartica
           aktivan={sekcija === "iznos"}
           onClick={() => setSekcija("iznos")}
@@ -276,6 +254,49 @@ export default function SistemKlijent({
           danas={danasIznosTx}
           podnaslov={t("kartica_promet_opis")}
         />
+
+        {/* Faza sistema — ispod Opticaja */}
+        <button
+          onClick={() => setSekcija("pregled")}
+          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
+            sekcija === "pregled"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+            <Pojam
+              termin={t("faza_sistema")}
+              objasnjenje={t("faza_sistema_opis")}
+            />
+          </p>
+          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+            {faza2 ? t("faza_2") : t("faza_1")}
+          </p>
+          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+            <div
+              className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+              style={{ width: `${fazaPct}%` }}
+            />
+          </div>
+          <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+            {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
+          </p>
+        </button>
+
+        {/* Račun Fondacije — desno dole */}
+        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
+          <p className="text-base font-semibold mb-1 text-kolo-muted">
+            <Pojam
+              termin={t("kartica_racun_fondacije")}
+              objasnjenje={t("kartica_racun_fondacije_opis")}
+            />
+          </p>
+          <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
+            {racunFondacije.toLocaleString("sr-RS")}
+          </p>
+          <p className="text-xs mt-1 text-kolo-muted">{t("kartica_racun_fondacije_podnaslov")}</p>
+        </div>
       </div>
 
       {/* Separator */}
@@ -604,12 +625,11 @@ function ClanoviSekcija({
       </div>
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         {/* Desktop header */}
-        <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_1fr_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_100px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>{t("col_pseudonim")}</span>
           <span>{t("col_lokacija")}</span>
           <span className="text-right">{t("col_balans")}</span>
           <span className="text-right">{t("col_rang")}</span>
-          <span>{t("col_krug")}</span>
           <span className="text-right">{t("col_registracija")}</span>
         </div>
         {filtrirani.length === 0 ? (
@@ -623,7 +643,7 @@ function ClanoviSekcija({
               className={i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}
             >
               {/* Desktop red */}
-              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_1fr_100px] gap-4 px-5 py-3 items-center text-sm">
+              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_100px] gap-4 px-5 py-3 items-center text-sm">
                 <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/profil/${c.id}`}
@@ -647,7 +667,6 @@ function ClanoviSekcija({
                     label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString("sr-RS") })}`}
                   />
                 </div>
-                <span className="text-sm text-kolo-muted truncate">{c.krug ?? "—"}</span>
                 <span className="text-right text-sm text-kolo-muted">
                   {new Date(c.createdAt).toLocaleDateString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "2-digit",
@@ -672,7 +691,6 @@ function ClanoviSekcija({
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-xs text-kolo-muted">
-                  {c.krug && <span>{t("krug_label")}: {c.krug}</span>}
                   <span>{t("rang_label")} {c.rangDonacije}</span>
                   <span className="ml-auto">
                     {new Date(c.createdAt).toLocaleDateString("sr-RS", {
