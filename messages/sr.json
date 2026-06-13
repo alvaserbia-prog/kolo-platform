@@ -504,6 +504,7 @@
     "trx_otpis_zrno": "Otpis ZRNA",
     "greska_ucitavanja": "Greška pri učitavanju.",
     "profil_nije_pronadjen": "Profil nije pronađen.",
+    "pristup_samo_verifikovani": "Pregled profila dostupan je samo verifikovanim korisnicima.",
     "krug_link": "Krug",
     "clan_od": "Član od",
     "upisi_poen": "Upiši POEN",
