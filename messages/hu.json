@@ -504,6 +504,7 @@
     "trx_otpis_zrno": "ZRNO deregistration",
     "greska_ucitavanja": "Error loading.",
     "profil_nije_pronadjen": "Profile not found.",
+    "pristup_samo_verifikovani": "A profilokat csak hitelesített felhasználók tekinthetik meg.",
     "krug_link": "Krug",
     "clan_od": "Member since",
     "upisi_poen": "Record POEN",
