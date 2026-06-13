@@ -4,6 +4,8 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import CirilicaProvider from "@/components/CirilicaProvider";
@@ -88,6 +90,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang={locale} className={`${inter.variable} ${jetbrainsMono.variable} h-full`}>
@@ -99,7 +102,7 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <CirilicaProvider />
-          <Providers>{children}</Providers>
+          <Providers session={session}>{children}</Providers>
         </NextIntlClientProvider>
         <Analytics />
         <Script

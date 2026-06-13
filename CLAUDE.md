@@ -2,7 +2,7 @@
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
-- **`main`** → TEST deploy (preview na **`kolo-git-main-alvaserbia-progs-projects.vercel.app`**, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
+- **`main`** → TEST deploy (preview na **`kolo-peach.vercel.app`**, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
 - **`production`** → UŽIVO na **ekolo.rs** (prod Neon baza, `seed-prod.ts`). Samo namerna „objava".
 
 **Pravila za Claude:**
@@ -14,14 +14,14 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 
 ### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04)
-**PROMENA 2026-06-04:** `kolo-platform` projekat je **isključen** (`kolo-peach.vercel.app` je ZAMRZNUT na starom buildu `d8bc6fc` i više ne prima deploye — ne koristiti taj URL). Sada **jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`):
+**PROMENA 2026-06-13:** `kolo-peach.vercel.app` je **ponovo aktivan TEST URL** za granu `main` (raniji status „ZAMRZNUT na buildu `d8bc6fc`" iz 2026-06-04 više ne važi — projekat ponovo prima deploye sa `main` i to je URL na koji vlasnik gleda test). **Jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`):
 
 | Grana | Vercel target | URL | Baza (Neon) |
 |---|---|---|---|
 | **`production`** | production | **ekolo.rs** / www.ekolo.rs | prod (`ep-empty-forest-alajuasx`) |
-| **`main`** | preview | **`kolo-git-main-alvaserbia-progs-projects.vercel.app`** | test (`ep-old-sky-aleg2alm`) |
+| **`main`** | preview | **`kolo-peach.vercel.app`** | test (`ep-old-sky-aleg2alm`) |
 
-- „pošalji na test" = push na `main` → gleda se na **`kolo-git-main-...vercel.app`** (NE više `kolo-peach`).
+- „pošalji na test" = push na `main` → gleda se na **`kolo-peach.vercel.app`**.
 - „objava na ekolo.rs" = merge `main` → `production` + push (nepromenjeno).
 - **Env varijable po grani/scope-u:** Production scope (prod baza, tajne za ekolo.rs: `PLACANJE_AKTIVNO`, `NESTPAY_*`) vs Preview scope (test baza). Oba imaju `DATABASE_URL`, pa migracije rade i na test i na prod buildu.
 
