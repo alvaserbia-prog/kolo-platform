@@ -20,16 +20,16 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov }: Props) {
   };
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-      <div className="text-sm uppercase tracking-wide text-black/55 font-semibold">
+    <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold">
         <Pojam
           termin="Indeks stvarnosti"
           objasnjenje="Koliko te je mreža potvrdila kao stvarnu osobu. Raste sa svakom verifikacijom; na 10% dobijaš pun pristup."
         />
       </div>
-      <div className="mt-1 text-5xl font-bold tabular-nums">{prikaz}</div>
-      <div className="mt-2 text-sm text-black/70">{tipLabela[tip] ?? tip}</div>
-      {podnaslov && <div className="mt-1 text-xs text-black/55">{podnaslov}</div>}
+      <div className="mt-1 text-5xl font-bold tabular-nums text-kolo-green-700">{prikaz}</div>
+      <div className="mt-2 text-sm text-kolo-muted">{tipLabela[tip] ?? tip}</div>
+      {podnaslov && <div className="mt-1 text-xs text-kolo-muted">{podnaslov}</div>}
     </div>
   );
 }

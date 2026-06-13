@@ -49,7 +49,7 @@ export default function VerifikacijaCard({
   });
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-4 shadow-sm flex items-center justify-between gap-3">
+    <div className="rounded-2xl border border-kolo-border bg-white p-4 shadow-sm flex items-center justify-between gap-3">
       <div className="min-w-0 flex-1">
         <div className="text-sm">
           <Link
@@ -58,7 +58,7 @@ export default function VerifikacijaCard({
           >
             @<Pseudonim>{verifikator.pseudonim}</Pseudonim>
           </Link>
-          <span className="text-black/55"> → </span>
+          <span className="text-kolo-muted"> → </span>
           <Link
             href={`/profil/${verifikovani.id}`}
             className="font-semibold hover:underline"
@@ -66,16 +66,16 @@ export default function VerifikacijaCard({
             @<Pseudonim>{verifikovani.pseudonim}</Pseudonim>
           </Link>
         </div>
-        <div className="mt-1 text-xs text-black/55">
+        <div className="mt-1 text-xs text-kolo-muted">
           {datumLepo} · verifikator potrošio {verifikator.slotoviPotroseni}{" "}
           {verifikator.slotoviPotroseni === 1 ? "slot" : "slota"}
         </div>
-        {error && <div className="mt-1 text-xs text-red-700">{error}</div>}
+        {error && <div className="mt-1 text-xs text-kolo-danger">{error}</div>}
       </div>
       <button
         onClick={potvrdi}
         disabled={loading}
-        className="px-3 py-1.5 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85 disabled:opacity-50"
+        className="px-3 py-1.5 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
       >
         {loading ? "Šaljem..." : "Potvrdi nadzor"}
       </button>

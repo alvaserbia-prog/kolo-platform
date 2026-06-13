@@ -31,8 +31,8 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
   if (status === "ne-podleze") return null;
   const klasa =
     status === "nadzirano"
-      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-      : "bg-amber-50 text-amber-700 border-amber-200";
+      ? "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100"
+      : "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100";
   const tekst = status === "nadzirano" ? "Nadzirano" : "Čeka nadzor";
   return (
     <span className={`text-[10px] px-1.5 py-0.5 rounded-md border ${klasa}`}>{tekst}</span>
@@ -47,8 +47,8 @@ export default function MiniStablo({
   className = "",
 }: Props) {
   return (
-    <div className={`rounded-2xl border border-black/10 bg-white p-6 shadow-sm ${className}`}>
-      <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-4">
+    <div className={`rounded-2xl border border-kolo-border bg-white p-6 shadow-sm ${className}`}>
+      <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
         Lanac verifikacija
       </div>
 
@@ -60,25 +60,25 @@ export default function MiniStablo({
               <Link
                 key={v.id}
                 href={`/profil/${v.id}`}
-                className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+                className="px-3 py-1.5 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
               >
                 @<Pseudonim>{v.pseudonim}</Pseudonim>
               </Link>
             ))}
           </div>
         ) : jeJaPocetni ? (
-          <div className="px-3 py-1.5 rounded-xl bg-black/5 text-sm text-black/55 italic">
+          <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
             Početni korisnik (UO Fondacije)
           </div>
         ) : (
-          <div className="px-3 py-1.5 rounded-xl bg-black/5 text-sm text-black/55 italic">
+          <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
             Još nisi verifikovan
           </div>
         )}
-        <div className="text-black/30 text-lg">↓</div>
+        <div className="text-kolo-muted text-lg">↓</div>
 
         {/* Sredina: ja */}
-        <div className="px-4 py-2 rounded-xl bg-black text-white text-sm font-semibold">
+        <div className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold">
           <Pseudonim>{ja.pseudonim}</Pseudonim>
           <span className="ml-2 text-white/70 text-xs font-mono">{ja.prikaz}</span>
         </div>
@@ -86,13 +86,13 @@ export default function MiniStablo({
         {/* Dole: ja sam verifikovao */}
         {verifikovani.length > 0 && (
           <>
-            <div className="text-black/30 text-lg">↓</div>
+            <div className="text-kolo-muted text-lg">↓</div>
             <div className="grid grid-cols-2 gap-2 w-full max-w-md">
               {verifikovani.map((v) => (
                 <Link
                   key={v.id}
                   href={`/profil/${v.id}`}
-                  className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-black/5 hover:bg-black/10"
+                  className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
                 >
                   <span className="text-sm font-medium">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
                   <StatusBadge status={v.statusNadzora} />
@@ -103,8 +103,8 @@ export default function MiniStablo({
         )}
         {verifikovani.length === 0 && (
           <>
-            <div className="text-black/30 text-lg">↓</div>
-            <div className="px-3 py-1.5 rounded-xl bg-black/5 text-xs text-black/55 italic">
+            <div className="text-kolo-muted text-lg">↓</div>
+            <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-xs text-kolo-muted italic">
               Još nikog nisi verifikovao
             </div>
           </>
