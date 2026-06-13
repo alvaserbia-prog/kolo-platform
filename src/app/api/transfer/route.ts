@@ -9,7 +9,13 @@ export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const { pseudonim, amount, description } = await req.json();
+  let body: { pseudonim?: string; amount?: unknown; description?: string };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
+  }
+  const { pseudonim, amount, description } = body;
 
   // Validacija ulaza
   if (!pseudonim || !amount) {
