@@ -37,8 +37,11 @@ Sve urađeno na testu (`main` → `kolo-peach.vercel.app`) i objavljeno na produ
   - Ikonica „Poruke" u zaglavlju sada prikazuje **crveni badge** sa brojem nepročitanih (polling 15s + trenutno osvežavanje preko `poruke-procitane` događaja kad se konverzacija otvori i poruke označe pročitanim).
 - **Fajlovi:** novi `src/app/api/poruke/brojac/route.ts`, `src/components/Header.tsx`, `src/app/api/poruke/[konvId]/route.ts`, `src/app/(app)/poruke/page.tsx`
 
-### 🔧 Transfer (Novčanik)
-- Prazan ili neispravan JSON na `/api/transfer` sada vraća **HTTP 400** umesto 500.
+### 🔧 Transfer (Novčanik) — prazan/neispravan JSON vraća 400 umesto 500
+- **Problem:** kada zahtev na `POST /api/transfer` nema body ili sadrži neispravan JSON, `await req.json()` je pucao i vraćao `500 SyntaxError: Unexpected end of JSON input`.
+- **Popravka:** parsiranje body-ja obavijeno `try/catch`; sada se vraća čisto `400 "Neispravan zahtev."`. Provera prijave (`401 "Nije prijavljen."`) ostaje **pre** parsiranja, pa neprijavljeni i dalje dobijaju `401`.
+- **Fajl:** `src/app/api/transfer/route.ts`
+- **Bezbednosna napomena (bez izmene koda):** povodom sumnje da se API gađa bez prijave, pregledane su sve rute koje menjaju stanje + javna površina — **nema propusta** (zahtevi bez sesije dobijaju `401`, potvrđeno logovima). Poruka „Ne možete upisati POEN samom sebi" javljala se samo kada je klijent (Insomnia) iz svog cookie-jara slao važeći `next-auth.session-token`.
 
 ### 👤 Profil
 - Uklonjen tvrdi redirect na 403/404 — umesto toga prikazuje se **jasna inline poruka**.
