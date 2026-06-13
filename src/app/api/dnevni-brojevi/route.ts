@@ -45,12 +45,11 @@ export async function GET() {
   // Akcioni badge za admina: zbir stavki "na čekanju" koje traže admin radnju
   let adminCekanje = 0;
   if (jeAdmin(session.user)) {
+    // Krugovi izbačeni iz admin panela → ne broje se ovde (nemaju tab gde bi se rešili).
     const [
-      krugOsnivanje, krugPristupnice, programi, oglasPrijave, oglasEvidencije,
+      programi, oglasPrijave, oglasEvidencije,
       pokrovitelji, donacije, prigovori,
     ] = await Promise.all([
-      prisma.krugOsnivanjeZahtev.count({ where: { status: "PENDING" } }),
-      prisma.krugPristupnica.count({ where: { status: "PENDING" } }),
       prisma.programEnrollment.count({ where: { status: "PENDING" } }),
       prisma.oglasPrijava.count({ where: { status: "PENDING" } }),
       prisma.oglasEvidencija.count({ where: { status: "PENDING" } }),
@@ -59,7 +58,7 @@ export async function GET() {
       prisma.prigovorNaOdluku.count({ where: { status: { in: ["PENDING", "U_OBRADI"] } } }),
     ]);
     adminCekanje =
-      krugOsnivanje + krugPristupnice + programi + oglasPrijave + oglasEvidencije +
+      programi + oglasPrijave + oglasEvidencije +
       pokrovitelji + donacije + prigovori;
   }
 

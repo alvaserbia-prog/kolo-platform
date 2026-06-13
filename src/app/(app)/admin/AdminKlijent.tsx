@@ -155,6 +155,27 @@ interface BlogObjavaAdmin {
   createdAt: string;
 }
 
+interface DonacijaItem {
+  id: string;
+  pseudonim: string;
+  amountRSD: number;
+  cumulativeRSD: number;
+  level: number;
+  poenEmitted: number;
+  nacinUplate: string;
+  referenceNumber: string | null;
+  createdAt: string;
+}
+
+interface PrigovorItem {
+  id: string;
+  pseudonim: string;
+  opis: string;
+  tipOdluke: string;
+  status: string;
+  createdAt: string;
+}
+
 interface AdminKlijentProps {
   users: KorisnikInfo[];
   opticaj: number;
@@ -169,6 +190,8 @@ interface AdminKlijentProps {
   krugoviLista2: { id: string; name: string }[];
   blogObjave: BlogObjavaAdmin[];
   nadzorNalazi: NadzorNalaz[];
+  pendingDonacije: DonacijaItem[];
+  otvoreniPrigovori: PrigovorItem[];
   viewerJeSuperadmin: boolean;
   viewerId: string;
 }
@@ -192,21 +215,25 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "krugovi" | "programi" | "ped" | "pokrovitelji" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit" | "nadzor";
+type Tab = "dashboard" | "programi" | "ped" | "pokrovitelji" | "donacije" | "prigovori" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit" | "nadzor";
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, setTab] = useState<Tab>("dashboard");
 
   const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length;
   const ukupnoPendingZaposl = adminPed.pendingPrijave.length + adminPed.pendingEvidencije.length;
+  const ukupnoPendingDonacije = pendingDonacije.length;
+  const ukupnoOtvoreniPrigovori = otvoreniPrigovori.length;
 
   const tabs: [Tab, string][] = [
     ["dashboard", t("tab_dashboard")],
     ["programi", `${t("tab_programi")}${ukupnoPendingProgrami > 0 ? ` (${ukupnoPendingProgrami})` : ""}`],
     ["ped", `${t("tab_ped")}${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
+    ["donacije", `${t("tab_donacije")}${ukupnoPendingDonacije > 0 ? ` (${ukupnoPendingDonacije})` : ""}`],
+    ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["korisnici", t("tab_korisnici")],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
@@ -256,6 +283,12 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
           onDone={() => router.refresh()}
         />
       )}
+
+      {/* Donacije */}
+      {tab === "donacije" && <DonacijeTab donacije={pendingDonacije} onDone={() => router.refresh()} />}
+
+      {/* Prigovori */}
+      {tab === "prigovori" && <PrigovoriTab prigovori={otvoreniPrigovori} onDone={() => router.refresh()} />}
 
       {/* Korisnici */}
       {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} viewerJeSuperadmin={viewerJeSuperadmin} viewerId={viewerId} />}
@@ -1030,6 +1063,145 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
           </button>
         </form>
       </div>
+    </div>
+  );
+}
+
+// ── Dashboard tab ─────────────────────────────────────────────────────────────
+
+// ── Donacije tab ─────────────────────────────────────────────────────────────
+
+function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: () => void }) {
+  const t = useTranslations("admin");
+  const [loading, setLoading] = useState<string | null>(null);
+  const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
+
+  async function potvrdi(d: DonacijaItem) {
+    setLoading(d.id);
+    const res = await fetch("/api/admin/donacija", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ donationId: d.id, amountRSD: d.amountRSD }),
+    });
+    const data = await res.json();
+    setLoading(null);
+    setPoruke((p) => ({ ...p, [d.id]: { text: res.ok ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString("sr-RS") }) : (data.error ?? t("greska_generalna")), ok: res.ok } }));
+    if (res.ok) setTimeout(onDone, 1200);
+  }
+
+  if (donacije.length === 0) {
+    return <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">{t("donacije_nema")}</div>;
+  }
+
+  return (
+    <div className="space-y-3">
+      {donacije.map((d) => {
+        const poruka = poruke[d.id];
+        return (
+          <div key={d.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
+            <div className="flex justify-between items-start gap-3">
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-kolo-text text-sm">{d.pseudonim}</p>
+                <p className="text-xs text-kolo-muted mt-0.5">
+                  {d.nacinUplate === "KARTICA" ? t("donacije_nacin_kartica") : t("donacije_nacin_rucno")}
+                  {d.referenceNumber ? ` · ${d.referenceNumber}` : ""}
+                  {" · "}{new Date(d.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}
+                </p>
+                <p className="text-xs text-kolo-muted mt-1">{t("donacije_kumulativ", { val: d.cumulativeRSD.toLocaleString("sr-RS") })}</p>
+              </div>
+              <div className="shrink-0 text-right">
+                <p className="text-sm font-bold text-kolo-text">{d.amountRSD.toLocaleString("sr-RS")} RSD</p>
+                <button onClick={() => potvrdi(d)} disabled={loading === d.id}
+                  className="mt-2 px-4 py-2 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60">
+                  {loading === d.id ? t("donacije_potvrdjujem") : t("donacije_potvrdi")}
+                </button>
+              </div>
+            </div>
+            {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Prigovori tab ────────────────────────────────────────────────────────────
+
+const prigovorTipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
+  VERIFIKACIJA: t("prigovori_tip_verifikacija"),
+  SUSPENZIJA: t("prigovori_tip_suspenzija"),
+  PROGRAM: t("prigovori_tip_program"),
+  OSTALO: t("prigovori_tip_ostalo"),
+});
+
+function PrigovoriTab({ prigovori, onDone }: { prigovori: PrigovorItem[]; onDone: () => void }) {
+  const t = useTranslations("admin");
+  if (prigovori.length === 0) {
+    return <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">{t("prigovori_nema")}</div>;
+  }
+  return (
+    <div className="space-y-3">
+      {prigovori.map((p) => <PrigovorKartica key={p.id} p={p} onDone={onDone} />)}
+    </div>
+  );
+}
+
+function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void }) {
+  const t = useTranslations("admin");
+  const [odgovor, setOdgovor] = useState("");
+  const [loading, setLoading] = useState<string | null>(null);
+  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+
+  async function posalji(status: "RESENO" | "ODBIJENO" | "U_OBRADI") {
+    setLoading(status);
+    const res = await fetch(`/api/admin/prigovori/${p.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status, odgovor: odgovor.trim() }),
+    });
+    const data = await res.json();
+    setLoading(null);
+    if (res.ok) {
+      setPoruka({ text: t("prigovori_poslato_msg"), ok: true });
+      setTimeout(onDone, 1200);
+    } else {
+      setPoruka({ text: data.error ?? t("greska_generalna"), ok: false });
+    }
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap mb-1">
+          <span className="text-xs font-semibold px-2 py-0.5 rounded bg-kolo-info-light text-kolo-info">{prigovorTipLabel(t)[p.tipOdluke] ?? p.tipOdluke}</span>
+          {p.status === "U_OBRADI" && <span className="text-xs px-2 py-0.5 rounded bg-kolo-gold-100 text-kolo-gold-600">{t("prigovori_status_u_obradi")}</span>}
+        </div>
+        <p className="font-semibold text-kolo-text text-sm">{p.pseudonim}</p>
+        <p className="text-sm text-kolo-muted mt-1 whitespace-pre-wrap">{p.opis}</p>
+        <p className="text-xs text-kolo-muted mt-1">{new Date(p.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
+      </div>
+      <textarea value={odgovor} onChange={(e) => setOdgovor(e.target.value)} rows={2}
+        placeholder={t("prigovori_odgovor_placeholder")}
+        className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
+      {!poruka && (
+        <div className="flex gap-2">
+          <button onClick={() => posalji("RESENO")} disabled={loading !== null}
+            className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
+            {loading === "RESENO" ? "..." : t("prigovori_resi")}
+          </button>
+          <button onClick={() => posalji("ODBIJENO")} disabled={loading !== null}
+            className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light disabled:opacity-60">
+            {loading === "ODBIJENO" ? "..." : t("krug_odbij")}
+          </button>
+          {p.status !== "U_OBRADI" && (
+            <button onClick={() => posalji("U_OBRADI")} disabled={loading !== null}
+              className="px-3 py-2 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold hover:bg-kolo-border disabled:opacity-60">
+              {loading === "U_OBRADI" ? "..." : t("prigovori_u_obradu")}
+            </button>
+          )}
+        </div>
+      )}
+      {poruka && <p className={`text-sm px-3 py-2 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
     </div>
   );
 }
