@@ -9,9 +9,15 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
 
   const { id } = await params;
+
+  // Kapija "samo verifikovani vide profile" odnosi se na TUĐE profile (Pravilnik čl. 28–30,
+  // 67): neverifikovan ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek
+  // sme da vidi — inače bi klik na "Moj profil" blokirao i njega samog.
+  if (!session.user.verified && id !== session.user.id) {
+    return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+  }
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
