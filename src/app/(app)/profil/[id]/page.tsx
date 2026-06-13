@@ -48,7 +48,6 @@ interface ProfilData {
 export default function JavniProfilPage() {
   const t = useTranslations("profil");
   const params = useParams();
-  const router = useRouter();
   const id = params.id as string;
 
   const TIP_LABELA: Record<string, string> = {
@@ -73,25 +72,36 @@ export default function JavniProfilPage() {
   const [sveTrx, setSveTrx] = useState<Transakcija[]>([]);
 
   useEffect(() => {
+    let aktivno = true;
     fetch(`/api/profil/${id}`)
-      .then((r) => {
-        if (r.status === 403) { router.push("/tabla-jemstva"); return null; }
-        if (r.status === 404) { router.push("/404"); return null; }
-        return r.json();
+      .then(async (r) => {
+        const body = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
+          // na /tabla-jemstva i prikazivalo treperenje stanja te stranice.
+          // Umesto toga prikaži jasnu poruku na samoj profil stranici.
+          if (aktivno) {
+            setGreska(
+              r.status === 403 ? t("pristup_samo_verifikovani")
+                : r.status === 404 ? t("profil_nije_pronadjen")
+                : (body.error ?? t("greska_ucitavanja"))
+            );
+            setUcitavam(false);
+          }
+          return null;
+        }
+        return body;
       })
       .then((data) => {
-        if (!data) return;
-        if (data.error) { setGreska(data.error); }
-        else {
-          // redirect sopstveni profil
-          setProfil(data);
-          setSveTrx(data.transakcije);
-          setCursor(data.nextCursor);
-        }
+        if (!data || !aktivno) return;
+        setProfil(data);
+        setSveTrx(data.transakcije);
+        setCursor(data.nextCursor);
         setUcitavam(false);
       })
-      .catch(() => { setGreska(t("greska_ucitavanja")); setUcitavam(false); });
-  }, [id, router]);
+      .catch(() => { if (aktivno) { setGreska(t("greska_ucitavanja")); setUcitavam(false); } });
+    return () => { aktivno = false; };
+  }, [id, t]);
 
   const ucitajJos = useCallback(async () => {
     if (!cursor || ucitavamJos) return;
