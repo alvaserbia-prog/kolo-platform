@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
@@ -156,6 +156,15 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   }, [cropRadius, cropDisplay]);
 
   const onDragEnd = useCallback(() => { dragRef.current = null; }, []);
+
+  // Zaključaj skrol stranice dok je crop modal otvoren (sprečava pomeranje cele
+  // stranice pri prevlačenju kruga na dodirnim ekranima).
+  useEffect(() => {
+    if (!cropSrc) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, [cropSrc]);
 
   async function confirmCrop() {
     if (!cropSrc || !cropImgRef.current) return;
@@ -516,12 +525,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Crop modal */}
       {cropSrc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
           <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl max-w-full">
             <p className="text-sm text-kolo-muted">{t("crop_opis")}</p>
             <div
               className="relative cursor-grab active:cursor-grabbing rounded-xl overflow-hidden select-none"
-              style={{ width: cropDisplay.w, height: cropDisplay.h }}
+              style={{ width: cropDisplay.w, height: cropDisplay.h, touchAction: "none" }}
               onMouseDown={onDragStart}
               onMouseMove={onDragMove}
               onMouseUp={onDragEnd}
