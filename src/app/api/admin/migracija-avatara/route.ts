@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { put } from "@vercel/blob";
+import { blobToken } from "@/lib/blob";
 
 // Batch može da potraje (više uploada zaredom) — daj mu vremena.
 export const maxDuration = 60;
@@ -19,9 +20,10 @@ export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!jeSuperadmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  const token = blobToken();
+  if (!token) {
     return NextResponse.json(
-      { error: "Skladište slika nije konfigurisano (BLOB_READ_WRITE_TOKEN). Poveži Vercel Blob store." },
+      { error: "Skladište slika nije konfigurisano (Vercel Blob token nije pronađen). Poveži Blob store na projekat." },
       { status: 500 }
     );
   }
@@ -46,6 +48,7 @@ export async function POST() {
       const blob = await put(`avatari/${k.id}-${Date.now()}.${ext}`, buffer, {
         access: "public",
         contentType: mime,
+        token,
       });
       await prisma.user.update({ where: { id: k.id }, data: { avatar: blob.url } });
       migrirano++;

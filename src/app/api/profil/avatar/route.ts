@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { put, del } from "@vercel/blob";
+import { blobToken } from "@/lib/blob";
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -22,9 +23,10 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ error: "Slika je prevelika." }, { status: 400 });
   }
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  const token = blobToken();
+  if (!token) {
     return NextResponse.json(
-      { error: "Skladište slika nije konfigurisano (BLOB_READ_WRITE_TOKEN)." },
+      { error: "Skladište slika nije konfigurisano (Vercel Blob token nije pronađen)." },
       { status: 500 }
     );
   }
@@ -38,6 +40,7 @@ export async function PATCH(req: Request) {
   const blob = await put(`avatari/${session.user.id}-${Date.now()}.${ext}`, buffer, {
     access: "public",
     contentType: mime,
+    token,
   });
 
   const prethodni = await prisma.user.findUnique({
@@ -53,7 +56,7 @@ export async function PATCH(req: Request) {
   // Best-effort brisanje starog blob fajla (samo ako je bio na Blob-u; legacy
   // base64 avatari nemaju URL pa se preskaču). Ne sme da obori upload.
   if (prethodni?.avatar?.startsWith("http")) {
-    await del(prethodni.avatar).catch(() => {});
+    await del(prethodni.avatar, { token }).catch(() => {});
   }
 
   return NextResponse.json({ ok: true, avatar: blob.url });
