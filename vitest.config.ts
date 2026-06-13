@@ -7,7 +7,9 @@ export default defineConfig({
     },
   },
   test: {
+    // Podrazumevano node; pojedinačni komponentni testovi biraju jsdom preko
+    // `// @vitest-environment jsdom` na vrhu fajla.
     environment: "node",
-    include: ["__tests__/**/*.test.ts"],
+    include: ["__tests__/**/*.test.ts", "__tests__/**/*.test.tsx"],
   },
 });

@@ -27,6 +27,11 @@ export default function TablaJemstvaKlijent({
   const [radnja, setRadnja] = useState<string | null>(null);
   // Inline potvrda povlačenja (native confirm() je nepouzdan na mobilnim browserima)
   const [potvrdaPovuci, setPotvrdaPovuci] = useState<string | null>(null);
+  // Inline uklanjanje (admin) — native prompt() se guši na Brave/mobilnim browserima
+  const [ukloniId, setUkloniId] = useState<string | null>(null);
+  const [razlogUklanjanja, setRazlogUklanjanja] = useState("");
+  // Greška akcija (povuci/ukloni/kontakt/poruka) — uvek vidljiva, nezavisno od forme
+  const [akcijaGreska, setAkcijaGreska] = useState("");
 
   // Forma
   const [tekst, setTekst] = useState("");
@@ -72,43 +77,54 @@ export default function TablaJemstvaKlijent({
 
   async function povuci(id: string) {
     setPotvrdaPovuci(null);
+    setAkcijaGreska("");
     setRadnja(id);
     const res = await fetch(`/api/tabla-jemstva/${id}`, { method: "DELETE" });
     setRadnja(null);
     if (res.ok) await ucitaj();
-    else { const d = await res.json().catch(() => ({})); setGreska(d.error ?? t("greska_generalna")); }
+    else { const d = await res.json().catch(() => ({})); setAkcijaGreska(d.error ?? t("greska_generalna")); }
   }
 
   async function prikaziKontakt(id: string) {
+    setAkcijaGreska("");
     setRadnja(id);
     const res = await fetch(`/api/tabla-jemstva/${id}/kontakt`, { method: "POST" });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok) setKontakti((k) => ({ ...k, [id]: d.kontaktPodaci }));
-    else alert(d.error ?? t("greska_generalna"));
+    else setAkcijaGreska(d.error ?? t("greska_generalna"));
   }
 
   async function posaljiPoruku(id: string) {
+    setAkcijaGreska("");
     setRadnja(id);
     const res = await fetch(`/api/tabla-jemstva/${id}/poruka`, { method: "POST" });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok && d.konverzacijaId) router.push(`/poruke?k=${d.konverzacijaId}`);
-    else alert(d.error ?? t("greska_generalna"));
+    else setAkcijaGreska(d.error ?? t("greska_generalna"));
   }
 
-  async function ukloni(id: string) {
-    const razlog = prompt(t("prompt_razlog_uklanjanja"));
-    if (razlog === null) return;
+  // Uklanjanje koristi inline polje za razlog (ne native prompt — guši se na Brave/mobilnim browserima).
+  async function ukloni(id: string, razlog: string) {
+    const r = razlog.trim();
+    if (!r) return;
+    setAkcijaGreska("");
     setRadnja(id);
     const res = await fetch(`/api/admin/tabla-jemstva/${id}/ukloni`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ razlog: razlog.trim() }),
+      body: JSON.stringify({ razlog: r }),
     });
     setRadnja(null);
-    if (res.ok) await ucitaj();
-    else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska_generalna")); }
+    if (res.ok) {
+      setUkloniId(null);
+      setRazlogUklanjanja("");
+      await ucitaj();
+    } else {
+      const d = await res.json().catch(() => ({}));
+      setAkcijaGreska(d.error ?? t("greska_generalna"));
+    }
   }
 
   return (
@@ -181,6 +197,11 @@ export default function TablaJemstvaKlijent({
         </div>
       )}
 
+      {/* Greška akcija (povuci/ukloni/kontakt/poruka) — uvek vidljiva */}
+      {akcijaGreska && (
+        <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{akcijaGreska}</p>
+      )}
+
       {/* Lista zahteva */}
       {ucitavanje ? (
         <p className="text-sm text-kolo-muted">{t("ucitavanje")}</p>
@@ -222,8 +243,8 @@ export default function TablaJemstvaKlijent({
                       </button>
                     )
                   )}
-                  {isAdmin && (
-                    <button onClick={() => ukloni(z.id)} disabled={radnja === z.id}
+                  {isAdmin && ukloniId !== z.id && (
+                    <button onClick={() => { setUkloniId(z.id); setRazlogUklanjanja(""); setAkcijaGreska(""); }} disabled={radnja === z.id}
                       className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60 transition-colors">
                       {t("dugme_ukloni")}
                     </button>
@@ -232,6 +253,31 @@ export default function TablaJemstvaKlijent({
               </div>
 
               <p className="text-sm text-kolo-text mt-3 whitespace-pre-wrap">{z.tekstPredstavljanja}</p>
+
+              {/* Inline uklanjanje (admin) — polje za razlog umesto native prompt() */}
+              {isAdmin && ukloniId === z.id && (
+                <div className="mt-3 pt-3 border-t border-kolo-border space-y-2">
+                  <label className="block text-xs font-medium text-kolo-muted">{t("label_razlog_uklanjanja")}</label>
+                  <input
+                    type="text"
+                    value={razlogUklanjanja}
+                    onChange={(e) => setRazlogUklanjanja(e.target.value)}
+                    maxLength={300}
+                    placeholder={t("placeholder_razlog_uklanjanja")}
+                    className="w-full px-3 py-2 rounded-lg border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+                  />
+                  <div className="flex gap-2">
+                    <button onClick={() => ukloni(z.id, razlogUklanjanja)} disabled={radnja === z.id || razlogUklanjanja.trim().length === 0}
+                      className="px-3 py-1.5 rounded-lg bg-kolo-danger-light text-kolo-danger text-xs font-semibold hover:opacity-80 disabled:opacity-50 transition-opacity">
+                      {radnja === z.id ? "..." : t("dugme_potvrdi_uklanjanje")}
+                    </button>
+                    <button onClick={() => { setUkloniId(null); setRazlogUklanjanja(""); }} disabled={radnja === z.id}
+                      className="px-3 py-1.5 rounded-lg bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                      {t("dugme_otkazi")}
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Akcije — samo verifikovani: otkrivanje kontakta i/ili direktna poruka */}
               {verified && !z.mojZahtev && (
