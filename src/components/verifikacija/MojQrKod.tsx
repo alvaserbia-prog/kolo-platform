@@ -101,21 +101,21 @@ export default function MojQrKod() {
     : null;
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-      <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-4">
+    <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
         Pokaži kod za verifikaciju
       </div>
 
       {!token && (
         <>
-          <p className="text-sm text-black/70 mb-3">
+          <p className="text-sm text-kolo-muted mb-3">
             Daj nekome ko može da te verifikuje da skenira QR ili da unese 6-cifren broj.
             Kod važi 60 sekundi.
           </p>
           <button
             onClick={generisi}
             disabled={loading}
-            className="px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85 disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
           >
             {loading ? "Generišem..." : "Generiši kod"}
           </button>
@@ -124,14 +124,14 @@ export default function MojQrKod() {
 
       {token && !istekao && (
         <div className="space-y-3">
-          <div className="text-sm text-black/70">
+          <div className="text-sm text-kolo-muted">
             Kod važi još: <span className="font-mono font-semibold">{preostalo}s</span>
           </div>
-          <div className="flex justify-center bg-white p-4 rounded-xl border border-black/5">
+          <div className="flex justify-center bg-white p-4 rounded-xl border border-kolo-border">
             <QRCodeSVG value={token.token} size={200} />
           </div>
           <div className="text-center">
-            <div className="text-xs uppercase tracking-wide text-black/55">ili broj</div>
+            <div className="text-xs uppercase tracking-wide text-kolo-muted">ili broj</div>
             <div className="text-3xl font-mono font-bold tracking-wider mt-1">{formatBroj}</div>
           </div>
         </div>
@@ -139,18 +139,18 @@ export default function MojQrKod() {
 
       {istekao && (
         <div className="space-y-3">
-          <div className="text-sm text-red-700">Kod je istekao.</div>
+          <div className="text-sm text-kolo-danger">Kod je istekao.</div>
           <button
             onClick={generisi}
             disabled={loading}
-            className="px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85 disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
           >
             {loading ? "Generišem..." : "Obnovi kod"}
           </button>
         </div>
       )}
 
-      {error && <div className="mt-3 text-sm text-red-700">{error}</div>}
+      {error && <div className="mt-3 text-sm text-kolo-danger">{error}</div>}
     </div>
   );
 }

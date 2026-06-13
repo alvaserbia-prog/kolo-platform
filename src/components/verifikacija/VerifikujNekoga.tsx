@@ -25,11 +25,11 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
 
   if (!mozeDaVerifikuje) {
     return (
-      <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-        <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-2">
+      <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+        <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-2">
           Verifikuj nekoga
         </div>
-        <p className="text-sm text-black/70">
+        <p className="text-sm text-kolo-muted">
           Nemaš pravo da verifikuješ druge. Razlog: nisi verifikovan, indeks ti je ispod 10%,
           ili nemaš slobodan slot (pričekaj nadzor).
         </p>
@@ -71,33 +71,33 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
   }
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-      <div className="text-sm uppercase tracking-wide text-black/55 font-semibold mb-3">
+    <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-3">
         Verifikuj nekoga
       </div>
 
       {mod === "izbor" && (
         <>
-          <p className="text-sm text-black/70 mb-3">
+          <p className="text-sm text-kolo-muted mb-3">
             Reci osobi da otvori KOLO → Verifikacija → &quot;Generiši kod&quot;. Izaberi način:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => setMod("skener")}
-              className="px-4 py-3 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85"
+              className="px-4 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900"
             >
               Skeniraj QR kamerom
             </button>
             <button
               type="button"
               onClick={() => setMod("broj")}
-              className="px-4 py-3 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+              className="px-4 py-3 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
             >
               Unesi 6-cifren broj
             </button>
           </div>
-          {uspeh && <div className="mt-3 text-sm text-emerald-700">Verifikacija evidentirana: @<Pseudonim>{uspeh}</Pseudonim> (indeks +10%)</div>}
+          {uspeh && <div className="mt-3 text-sm text-kolo-green-700">Verifikacija evidentirana: @<Pseudonim>{uspeh}</Pseudonim> (indeks +10%)</div>}
         </>
       )}
 
@@ -121,7 +121,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
             value={tokenIliBroj}
             onChange={(e) => setTokenIliBroj(e.target.value)}
             placeholder="384 729 ili pun token"
-            className="w-full px-3 py-2 rounded-xl border border-black/15 text-base font-mono tracking-wider"
+            className="w-full px-3 py-2 rounded-xl border border-kolo-border text-base font-mono tracking-wider outline-none focus:border-kolo-green-500 transition-colors"
             autoFocus
             required
           />
@@ -142,7 +142,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
             <button
               type="submit"
               disabled={loading || !potvrdjeno || tokenIliBroj.trim().length < 6}
-              className="px-4 py-2 rounded-xl bg-black text-white text-sm font-medium hover:bg-black/85 disabled:opacity-50"
+              className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
             >
               {loading ? "Šaljem..." : "Potvrdi verifikaciju"}
             </button>
@@ -152,12 +152,12 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
                 setMod("izbor");
                 setError(null);
               }}
-              className="px-4 py-2 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+              className="px-4 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
             >
               Nazad
             </button>
           </div>
-          {error && <div className="text-sm text-red-700">{error}</div>}
+          {error && <div className="text-sm text-kolo-danger">{error}</div>}
         </form>
       )}
     </div>
