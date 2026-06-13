@@ -1739,7 +1739,10 @@
     "greska_objava": "Error while posting.",
     "greska_generalna": "Error.",
     "potvrda_povlacenja": "Withdraw your request?",
-    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):"
+    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):",
+    "label_razlog_uklanjanja": "Reason for removal (the user will see this):",
+    "placeholder_razlog_uklanjanja": "E.g. inappropriate content, false data, or outside the board's purpose.",
+    "dugme_potvrdi_uklanjanje": "Confirm removal"
   },
   "dobrodosli": {
     "korak1_oznaka": "Welcome",

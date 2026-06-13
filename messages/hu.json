@@ -1739,7 +1739,10 @@
     "greska_objava": "Error while posting.",
     "greska_generalna": "Error.",
     "potvrda_povlacenja": "Withdraw your request?",
-    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):"
+    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):",
+    "label_razlog_uklanjanja": "Az eltávolítás indoka (a felhasználó látni fogja):",
+    "placeholder_razlog_uklanjanja": "Pl. nem megfelelő tartalom, hamis adatok vagy a tábla céljától eltérő.",
+    "dugme_potvrdi_uklanjanje": "Eltávolítás megerősítése"
   },
   "dobrodosli": {
     "korak1_oznaka": "Welcome",

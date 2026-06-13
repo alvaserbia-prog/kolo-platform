@@ -1739,7 +1739,10 @@
     "greska_objava": "Greška pri objavi.",
     "greska_generalna": "Greška.",
     "potvrda_povlacenja": "Povući svoj zahtev?",
-    "prompt_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):"
+    "prompt_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
+    "label_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
+    "placeholder_razlog_uklanjanja": "Npr. neprikladan sadržaj, lažni podaci ili van svrhe table.",
+    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje"
   },
   "dobrodosli": {
     "korak1_oznaka": "Dobrodošli",
