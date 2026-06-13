@@ -64,6 +64,8 @@ function PorukeContent() {
     setPoruke(data.poruke ?? []);
     setDrugiPseudonim(data.drugiUser?.pseudonim ?? "");
     setDrugiId(data.drugiUser?.id ?? "");
+    // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
+    window.dispatchEvent(new Event("poruke-procitane"));
   }, []);
 
   // Inicijalno učitavanje konverzacija
