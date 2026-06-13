@@ -1111,7 +1111,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         </button>
       </div>
 
-      {/* Migracija avatara na Blob (jednokratno) */}
+      {/* Migracija avatara na R2 (jednokratno) */}
       <AvatarMigracijaKartica />
 
       <button onClick={onRefresh}
@@ -1122,7 +1122,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
   );
 }
 
-// ── Migracija avatara (legacy base64 → Vercel Blob) ───────────────────────────
+// ── Migracija avatara (legacy base64 → Cloudflare R2) ─────────────────────────
 // Jednokratni alat: poziva /api/admin/migracija-avatara u petlji dok ne ostane
 // nijedan base64 avatar. Tekst je inline (srpski) — admin panel je interni alat.
 function AvatarMigracijaKartica() {
@@ -1156,9 +1156,9 @@ function AvatarMigracijaKartica() {
   return (
     <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex items-center justify-between gap-4">
       <div className="min-w-0">
-        <p className="text-sm font-semibold text-kolo-muted">Migracija avatara na Blob</p>
+        <p className="text-sm font-semibold text-kolo-muted">Migracija avatara na R2</p>
         <p className="text-xs text-kolo-muted mt-0.5">
-          Prebacuje stare base64 avatare iz baze na Vercel Blob (jednokratno).
+          Prebacuje stare base64 avatare iz baze na Cloudflare R2 (jednokratno).
         </p>
         {poruka && (
           <p className={`text-sm mt-1 font-mono ${gotovo ? "text-kolo-green-700" : "text-kolo-muted"}`}>

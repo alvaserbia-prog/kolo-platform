@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { put } from "@vercel/blob";
+import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -89,23 +89,21 @@ export async function POST(req: NextRequest) {
   const imagePaths: string[] = [];
 
   if (imageFiles.length > 0) {
-    // Vercel Blob u produkciji (read-only/efemeran FS na serverless),
-    // fallback na lokalni disk za dev kad token nije postavljen.
-    const useBlob = !!process.env.BLOB_READ_WRITE_TOKEN;
+    // Cloudflare R2 u produkciji (read-only/efemeran FS na serverless),
+    // fallback na lokalni disk za dev kad R2 nije konfigurisan.
+    const useR2 = r2Konfigurisan();
     let dir: string | null = null;
-    if (!useBlob) {
+    if (!useR2) {
       dir = path.join(process.cwd(), "storage", "oglasi", listingId);
       await mkdir(dir, { recursive: true });
     }
     for (const file of imageFiles) {
       const ext = file.type === "image/png" ? ".png" : file.type === "image/webp" ? ".webp" : ".jpg";
       const fname = `${randomUUID()}${ext}`;
-      if (useBlob) {
-        const blob = await put(`oglasi/${listingId}/${fname}`, file, {
-          access: "public",
-          contentType: file.type,
-        });
-        imagePaths.push(blob.url);
+      if (useR2) {
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const url = await sacuvajNaR2(`oglasi/${listingId}/${fname}`, buffer, file.type);
+        imagePaths.push(url);
       } else {
         await writeFile(path.join(dir!, fname), Buffer.from(await file.arrayBuffer()));
         imagePaths.push(`storage/oglasi/${listingId}/${fname}`);

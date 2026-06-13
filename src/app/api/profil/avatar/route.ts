@@ -2,8 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { put, del } from "@vercel/blob";
-import { blobToken } from "@/lib/blob";
+import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -23,10 +22,9 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ error: "Slika je prevelika." }, { status: 400 });
   }
 
-  const token = blobToken();
-  if (!token) {
+  if (!r2Konfigurisan()) {
     return NextResponse.json(
-      { error: "Skladište slika nije konfigurisano (Vercel Blob token nije pronađen)." },
+      { error: "Skladište slika nije konfigurisano (Cloudflare R2)." },
       { status: 500 }
     );
   }
@@ -36,12 +34,8 @@ export async function PATCH(req: Request) {
   const buffer = Buffer.from(match[2], "base64");
 
   // Jedinstvena putanja po uploadu → URL je nepromenljiv i može da se kešira
-  // zauvek (cache-busting je besplatan). Stari blob brišemo niže.
-  const blob = await put(`avatari/${session.user.id}-${Date.now()}.${ext}`, buffer, {
-    access: "public",
-    contentType: mime,
-    token,
-  });
+  // zauvek (cache-busting je besplatan). Stari objekat brišemo niže.
+  const url = await sacuvajNaR2(`avatari/${session.user.id}-${Date.now()}.${ext}`, buffer, mime);
 
   const prethodni = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -50,16 +44,14 @@ export async function PATCH(req: Request) {
 
   await prisma.user.update({
     where: { id: session.user.id },
-    data: { avatar: blob.url },
+    data: { avatar: url },
   });
 
-  // Best-effort brisanje starog blob fajla (samo ako je bio na Blob-u; legacy
-  // base64 avatari nemaju URL pa se preskaču). Ne sme da obori upload.
-  if (prethodni?.avatar?.startsWith("http")) {
-    await del(prethodni.avatar, { token }).catch(() => {});
-  }
+  // Best-effort brisanje starog objekta (samo ako je bio na R2; legacy
+  // base64/Blob avatari se preskaču). Ne sme da obori upload.
+  await obrisiSaR2(prethodni?.avatar);
 
-  return NextResponse.json({ ok: true, avatar: blob.url });
+  return NextResponse.json({ ok: true, avatar: url });
 }
 
 export async function GET() {
