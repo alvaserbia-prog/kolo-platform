@@ -1111,9 +1111,64 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         </button>
       </div>
 
+      {/* Migracija avatara na Blob (jednokratno) */}
+      <AvatarMigracijaKartica />
+
       <button onClick={onRefresh}
         className="w-full py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors">
         {t("dashboard_osvjezi")}
+      </button>
+    </div>
+  );
+}
+
+// ── Migracija avatara (legacy base64 → Vercel Blob) ───────────────────────────
+// Jednokratni alat: poziva /api/admin/migracija-avatara u petlji dok ne ostane
+// nijedan base64 avatar. Tekst je inline (srpski) — admin panel je interni alat.
+function AvatarMigracijaKartica() {
+  const [radi, setRadi] = useState(false);
+  const [poruka, setPoruka] = useState<string | null>(null);
+  const [gotovo, setGotovo] = useState(false);
+
+  async function pokreni() {
+    setRadi(true);
+    setGotovo(false);
+    setPoruka("Migriram…");
+    let ukupno = 0;
+    try {
+      // Petlja po batch-evima dok server ne javi preostalo === 0.
+      for (let i = 0; i < 1000; i++) {
+        const res = await fetch("/api/admin/migracija-avatara", { method: "POST" });
+        const d = await res.json().catch(() => ({}));
+        if (!res.ok) { setPoruka(d.error ?? "Greška pri migraciji."); setRadi(false); return; }
+        ukupno += d.migrirano ?? 0;
+        setPoruka(`Migrirano: ${ukupno} · preostalo: ${d.preostalo ?? 0}`);
+        if ((d.preostalo ?? 0) === 0) break;
+        if ((d.migrirano ?? 0) === 0) break; // zaštita od beskonačne petlje
+      }
+      setGotovo(true);
+    } catch (e) {
+      setPoruka(String(e));
+    }
+    setRadi(false);
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex items-center justify-between gap-4">
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-kolo-muted">Migracija avatara na Blob</p>
+        <p className="text-xs text-kolo-muted mt-0.5">
+          Prebacuje stare base64 avatare iz baze na Vercel Blob (jednokratno).
+        </p>
+        {poruka && (
+          <p className={`text-sm mt-1 font-mono ${gotovo ? "text-kolo-green-700" : "text-kolo-muted"}`}>
+            {gotovo ? `✓ ${poruka}` : poruka}
+          </p>
+        )}
+      </div>
+      <button onClick={pokreni} disabled={radi}
+        className="px-4 py-2 bg-kolo-bg text-kolo-muted text-sm font-semibold rounded-xl hover:bg-kolo-border disabled:opacity-60 transition-colors shrink-0">
+        {radi ? "Radim…" : "Pokreni"}
       </button>
     </div>
   );
