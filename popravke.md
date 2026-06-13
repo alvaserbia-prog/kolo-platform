@@ -83,11 +83,15 @@ Sve urađeno na testu (`main` → `kolo-peach.vercel.app`) i objavljeno na produ
 - **Popravka:** brojač sad prikazuje „najmanje 10 karaktera" (crveno dok je ispod) + tekst ispod dugmeta navodi uslove (predstavljanje, kontakt, saglasnost).
 - **Fajlovi:** `src/app/(app)/tabla-jemstva/TablaJemstvaKlijent.tsx`, `messages/{sr,en,hu}.json` (`counter_min`, `uslovi_objave`)
 
-#### 2. Povlačenje zahteva / admin uklanjanje ne rade
-- **Simptom:** dugme „Povuci" (i admin „Ukloni") ništa ne rade.
-- **Uzrok:** koristili native `confirm()`/`prompt()` dijaloge, koje Brave/Safari na iOS-u potiskuju → vrate `false`/`null` i `DELETE` se nikad ne pošalje. Potvrđeno logovima.
-- **Popravka:** zamenjeno **inline potvrdom** u stranici („Da, povuci" / „Otkaži"); admin „Ukloni" → inline polje za razlog.
-- **Fajlovi:** `src/app/(app)/tabla-jemstva/TablaJemstvaKlijent.tsx`, `messages/{sr,en,hu}.json` (`dugme_potvrdi_povuci`, `dugme_otkazi`)
+#### 2. Povlačenje zahteva / admin „Ukloni" ne rade (native `confirm()`/`prompt()`)
+- **Prijava:** „povuci zahtev za jemstvo ne radi ni na kompu ni na telefonu".
+- **Dijagnoza:** u Vercel runtime logovima **nijedan DELETE/POST nije stizao do servera** — samo ponovljeni GET-ovi. Pošto je prijavilac admin (UO Fondacije), na tabli ne vidi korisničko „Povuci" nego admin **„Ukloni"**.
+- **Uzrok:** native `confirm()`/`prompt()` dijaloge Brave i mobilni browseri potiskuju → vrate `false`/`null` → kod odmah izlazi i `DELETE`/`POST` se nikad ne pošalje. Prva popravka sredila je samo korisničko „Povuci"; admin „Ukloni" je ostao na `prompt()`.
+- **Popravka:**
+  - „Povuci" → **inline potvrda** („Da, povuci" / „Otkaži"); „Ukloni" → **inline polje za razlog** + „Potvrdi uklanjanje" / „Otkaži" (bez ijednog native dijaloga; razlog obavezan kao i na serveru).
+  - Greške akcija prikazuju se u **uvek vidljivoj crvenoj traci** (ranije se greška renderovala samo u formi, koja je sakrivena kad korisnik ima aktivan zahtev).
+  - Komponentni testovi (jsdom + testing-library): „Povuci → Da, povuci" šalje `DELETE`; „Ukloni → razlog → Potvrdi" šalje `POST` **bez `prompt()`**. Svih 192 testa prolaze.
+- **Fajlovi:** `src/app/(app)/tabla-jemstva/TablaJemstvaKlijent.tsx`, `messages/{sr,en,hu}.json` (`dugme_potvrdi_povuci`, `dugme_otkazi`, `label_razlog_uklanjanja`, `placeholder_razlog_uklanjanja`, `dugme_potvrdi_uklanjanje`), novi `__tests__/tabla-jemstva-povuci.test.tsx`, `vitest.config.ts`, `package.json` (jsdom + testing-library)
 
 ---
 
