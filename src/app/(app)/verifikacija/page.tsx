@@ -104,7 +104,7 @@ export default async function VerifikacijaPage() {
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold">{t("page_naslov")}</h1>
+        <h1 className="kolo-naslov">{t("page_naslov")}</h1>
         <PageOpis>
           {t("page_opis")}
         </PageOpis>
