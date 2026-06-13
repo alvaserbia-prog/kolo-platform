@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import PageOpis from "@/components/PageOpis";
+import Pseudonim from "@/components/Pseudonim";
 
 // DB enum values — never change these (they are stored in the database)
 const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
@@ -300,7 +301,7 @@ function OglasKartica({
 
         <div className="flex justify-between items-center mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted">
-            {oglas.sellerPseudonim}
+            <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
           </span>
           {isVerified ? (

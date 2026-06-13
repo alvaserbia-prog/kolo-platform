@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 interface Projekat {
   id: string;
@@ -168,7 +169,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           {krug.clanovi.map((c, i) => (
             <div key={c.userId} className={`px-5 py-3 flex justify-between items-center ${i < krug.clanovi.length - 1 ? "border-b border-kolo-border" : ""}`}>
               <Link href={`/profil/${c.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline">
-                {c.pseudonim}
+                <Pseudonim>{c.pseudonim}</Pseudonim>
               </Link>
               <div className="flex items-center gap-2">
                 {c.isAdmin && <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded font-medium">{t("clan_admin_badge")}</span>}
@@ -210,7 +211,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
         <div className="space-y-3">
           {krug.pristupnice.map((p) => (
             <div key={p.id} className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex justify-between items-center">
-              <span className="text-sm font-medium text-kolo-text">{p.pseudonim}</span>
+              <span className="text-sm font-medium text-kolo-text"><Pseudonim>{p.pseudonim}</Pseudonim></span>
               <button onClick={() => odibriPristupnicu(p.id)}
                 className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
                 {t("odobri_pristupnicu")}

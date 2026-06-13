@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
 import { pageMetadata } from "@/lib/seo";
+import Pseudonim from "@/components/Pseudonim";
 import { getTranslations, getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 
@@ -111,7 +112,7 @@ export default async function OsnivackiDoprinosPage() {
           {osnivaci.map((o) => (
             <div key={o.redniBroj} className="bg-kolo-surface border border-kolo-border rounded-2xl px-6 py-4 flex items-center justify-between gap-4">
               <div className="min-w-0">
-                <div className="font-semibold text-kolo-text">{o.user.pseudonim}</div>
+                <div className="font-semibold text-kolo-text"><Pseudonim>{o.user.pseudonim}</Pseudonim></div>
                 {o.napomena && <div className="text-sm text-kolo-muted mt-0.5">{o.napomena}</div>}
               </div>
               <div className="shrink-0 text-right">

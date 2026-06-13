@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
+import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 
 interface Transakcija {
@@ -48,7 +49,6 @@ interface ProfilData {
 export default function JavniProfilPage() {
   const t = useTranslations("profil");
   const params = useParams();
-  const router = useRouter();
   const id = params.id as string;
 
   const TIP_LABELA: Record<string, string> = {
@@ -73,25 +73,36 @@ export default function JavniProfilPage() {
   const [sveTrx, setSveTrx] = useState<Transakcija[]>([]);
 
   useEffect(() => {
+    let aktivno = true;
     fetch(`/api/profil/${id}`)
-      .then((r) => {
-        if (r.status === 403) { router.push("/tabla-jemstva"); return null; }
-        if (r.status === 404) { router.push("/404"); return null; }
-        return r.json();
+      .then(async (r) => {
+        const body = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
+          // na /tabla-jemstva i prikazivalo treperenje stanja te stranice.
+          // Umesto toga prikaži jasnu poruku na samoj profil stranici.
+          if (aktivno) {
+            setGreska(
+              r.status === 403 ? t("pristup_samo_verifikovani")
+                : r.status === 404 ? t("profil_nije_pronadjen")
+                : (body.error ?? t("greska_ucitavanja"))
+            );
+            setUcitavam(false);
+          }
+          return null;
+        }
+        return body;
       })
       .then((data) => {
-        if (!data) return;
-        if (data.error) { setGreska(data.error); }
-        else {
-          // redirect sopstveni profil
-          setProfil(data);
-          setSveTrx(data.transakcije);
-          setCursor(data.nextCursor);
-        }
+        if (!data || !aktivno) return;
+        setProfil(data);
+        setSveTrx(data.transakcije);
+        setCursor(data.nextCursor);
         setUcitavam(false);
       })
-      .catch(() => { setGreska(t("greska_ucitavanja")); setUcitavam(false); });
-  }, [id, router]);
+      .catch(() => { if (aktivno) { setGreska(t("greska_ucitavanja")); setUcitavam(false); } });
+    return () => { aktivno = false; };
+  }, [id, t]);
 
   const ucitajJos = useCallback(async () => {
     if (!cursor || ucitavamJos) return;
@@ -136,7 +147,7 @@ export default function JavniProfilPage() {
       <div className="flex items-center gap-2 text-sm text-kolo-muted">
         <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">{t("krug_link")}</Link>
         <span>/</span>
-        <span className="text-kolo-text">{profil.pseudonim}</span>
+        <span className="text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></span>
       </div>
 
       {/* Hero kartica */}
@@ -162,7 +173,7 @@ export default function JavniProfilPage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 flex-wrap">
               <div>
-                <h1 className="text-xl font-bold text-kolo-text">{profil.pseudonim}</h1>
+                <h1 className="text-xl font-bold text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></h1>
                 {profil.punoIme && (
                   <p className="text-sm text-kolo-muted mt-0.5">{profil.punoIme}</p>
                 )}
@@ -277,7 +288,7 @@ export default function JavniProfilPage() {
                       <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? trx.type}</span>
                       {trx.description ?? (drugaStrana ? (
                         <Link href={`/profil/${drugaStrana.id}`} className="text-kolo-green-700 hover:underline">
-                          {drugaStrana.pseudonim}
+                          <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>
                         </Link>
                       ) : t("protokol"))}
                     </p>

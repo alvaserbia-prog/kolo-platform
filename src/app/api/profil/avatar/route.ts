@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
@@ -11,7 +12,9 @@ export async function PATCH(req: Request) {
   if (!avatar || typeof avatar !== "string") {
     return NextResponse.json({ error: "Neispravan format." }, { status: 400 });
   }
-  if (!avatar.startsWith("data:image/")) {
+  // Klijent šalje data:image/...;base64,<podaci> (iz crop canvasa).
+  const match = avatar.match(/^data:(image\/[a-zA-Z+]+);base64,(.+)$/);
+  if (!match) {
     return NextResponse.json({ error: "Dozvoljene su samo slike." }, { status: 400 });
   }
   // ~100KB limit za base64 (kompresovana slika)
@@ -19,15 +22,39 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ error: "Slika je prevelika." }, { status: 400 });
   }
 
-  await prisma.user.update({
+  if (!r2Konfigurisan()) {
+    return NextResponse.json(
+      { error: "Skladište slika nije konfigurisano (Cloudflare R2)." },
+      { status: 500 }
+    );
+  }
+
+  const mime = match[1];
+  const ext = mime.split("/")[1].replace("jpeg", "jpg");
+  const buffer = Buffer.from(match[2], "base64");
+
+  // Jedinstvena putanja po uploadu → URL je nepromenljiv i može da se kešira
+  // zauvek (cache-busting je besplatan). Stari objekat brišemo niže.
+  const url = await sacuvajNaR2(`avatari/${session.user.id}-${Date.now()}.${ext}`, buffer, mime);
+
+  const prethodni = await prisma.user.findUnique({
     where: { id: session.user.id },
-    data: { avatar },
+    select: { avatar: true },
   });
 
-  return NextResponse.json({ ok: true });
+  await prisma.user.update({
+    where: { id: session.user.id },
+    data: { avatar: url },
+  });
+
+  // Best-effort brisanje starog objekta (samo ako je bio na R2; legacy
+  // base64/Blob avatari se preskaču). Ne sme da obori upload.
+  await obrisiSaR2(prethodni?.avatar);
+
+  return NextResponse.json({ ok: true, avatar: url });
 }
 
-export async function GET(req: Request) {
+export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Neautorizovano" }, { status: 401 });
 

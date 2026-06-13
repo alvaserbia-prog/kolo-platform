@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 export interface NadzorPravilo {
   kod: string;
@@ -115,7 +116,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
                         <div className="flex flex-wrap gap-2">
                           {n.clanovi.map((c) => (
                             <Link key={c.id} href={`/profil/${c.id}`} className="text-kolo-green-700 hover:underline">
-                              {c.pseudonim}
+                              <Pseudonim>{c.pseudonim}</Pseudonim>
                             </Link>
                           ))}
                         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Pseudonim from "@/components/Pseudonim";
 
 /**
  * Mini stablo verifikacija (varijanta A) — gore verifikator, dole verifikovani.
@@ -61,7 +62,7 @@ export default function MiniStablo({
                 href={`/profil/${v.id}`}
                 className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
               >
-                @{v.pseudonim}
+                @<Pseudonim>{v.pseudonim}</Pseudonim>
               </Link>
             ))}
           </div>
@@ -78,7 +79,7 @@ export default function MiniStablo({
 
         {/* Sredina: ja */}
         <div className="px-4 py-2 rounded-xl bg-black text-white text-sm font-semibold">
-          {ja.pseudonim}
+          <Pseudonim>{ja.pseudonim}</Pseudonim>
           <span className="ml-2 text-white/70 text-xs font-mono">{ja.prikaz}</span>
         </div>
 
@@ -93,7 +94,7 @@ export default function MiniStablo({
                   href={`/profil/${v.id}`}
                   className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-black/5 hover:bg-black/10"
                 >
-                  <span className="text-sm font-medium">@{v.pseudonim}</span>
+                  <span className="text-sm font-medium">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
                   <StatusBadge status={v.statusNadzora} />
                 </Link>
               ))}

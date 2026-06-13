@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
+import { obrisiSaR2 } from "@/lib/skladiste";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -317,6 +318,10 @@ export async function DELETE(req: NextRequest) {
       data: { punoIme: null, opis: null },
     });
   });
+
+  // Obriši avatar sa R2 (ako je tamo) — sprečava orphan fajlove. Legacy
+  // base64/Blob avatari se preskaču unutar obrisiSaR2. Ne sme da obori brisanje.
+  await obrisiSaR2(user.avatar);
 
   return NextResponse.json({ ok: true });
 }

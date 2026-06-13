@@ -2,7 +2,7 @@
 
 /* ── Page heading ───────────────────────────────────────────────── */
 .kolo-naslov {
-  font-size: 3rem;
+  font-size: clamp(1.875rem, 6vw + 0.75rem, 3rem);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -108,6 +108,19 @@ body {
   -ms-hyphens: auto;
   hyphenate-limit-chars: 6 3 3;
   text-wrap: pretty;
+}
+
+/* ── Sprečavanje iOS auto-zoom-a pri fokusu na polja ──────────────── */
+/* Safari na iOS-u zumira stranicu kad polje ima font < 16px. Forsiramo
+   16px na svim poljima za unos na mobilnim širinama (Tailwind text-sm/xs
+   utility klase imaju veću specifičnost od element-selektora → !important).
+   Desktop tipografija ostaje netaknuta. */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
 }
 
 /* ── Toast animacija ─────────────────────────────────────────────── */

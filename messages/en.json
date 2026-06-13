@@ -162,7 +162,7 @@
     "greska_registracija": "Registration error."
   },
   "sistem": {
-    "dobrodoslice": "Welcome, {pseudonim}",
+    "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
     "zahtev_na_cekanju_naslov": "Request pending",
     "zahtev_na_cekanju_opis": "Documentation received and awaiting admin review (1–3 business days).",
     "nalog_nije_verifikovan_naslov": "Account not verified",
@@ -504,6 +504,7 @@
     "trx_otpis_zrno": "ZRNO deregistration",
     "greska_ucitavanja": "Error loading.",
     "profil_nije_pronadjen": "Profile not found.",
+    "pristup_samo_verifikovani": "Profiles can only be viewed by verified users.",
     "krug_link": "Krug",
     "clan_od": "Member since",
     "upisi_poen": "Record POEN",
@@ -576,7 +577,7 @@
     "opozovi_pitanje": "Revoke delegation?",
     "unesite_pozitivan": "Enter a positive integer.",
     "opis": "ZRNO records your position in the community and from it derives your vote in decision-making. Here you subscribe and redeem ZRNO and manage your vote.",
-    "zakazana_promena": "Scheduled: → {pseudonim} — takes effect at midnight",
+    "zakazana_promena": "Scheduled: → <ime>{pseudonim}</ime> — takes effect at midnight",
     "zakazan_opoziv": "Revocation scheduled — takes effect at midnight"
   },
   "programi": {
@@ -686,7 +687,7 @@
     "registar_opis": "Immutable overview of all closed Upper Kolo proposals with their outcome (art. 21).",
     "registar_nazad": "← Voting",
     "registar_prazno": "No closed decisions yet.",
-    "registar_predlagac": "Proposer: {pseudonim}",
+    "registar_predlagac": "Proposer: <ime>{pseudonim}</ime>",
     "registar_zatvoreno": "Closed: {datum}",
     "registar_za_zbir": "FOR: {zbir} voting power",
     "registar_protiv_zbir": "AGAINST: {zbir}",
@@ -1574,7 +1575,7 @@
     "objavi_oglas": "Post listing"
   },
   "pocetna": {
-    "dobrodoslice": "Welcome, {pseudonim}",
+    "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
     "opis_stranice": "Your starting point: Foundation news and community conversation. See what's new and what others are writing (writing is unlocked after verification).",
     "vesti_naslov": "Foundation News",
     "nema_objava": "No posts yet.",
@@ -1714,6 +1715,8 @@
     "forma_naslov": "Post your request",
     "label_predstavljanje": "Introduction",
     "placeholder_predstavljanje": "Where you are from and why you want to join.",
+    "counter_min": "at least {min} characters",
+    "uslovi_objave": "To publish you need: an introduction (at least 10 characters), contact details, and consent.",
     "label_kontakt": "Contact details",
     "placeholder_kontakt": "E.g. phone, email or another channel of your choice.",
     "napomena_predstavljanje_bold": "Introduction",
@@ -1727,6 +1730,8 @@
     "nema_zahteva": "There are currently no active requests.",
     "vas_zahtev": "(your request)",
     "dugme_povuci": "Withdraw",
+    "dugme_potvrdi_povuci": "Yes, withdraw",
+    "dugme_otkazi": "Cancel",
     "dugme_ukloni": "Remove",
     "kontakt_label": "Contact:",
     "dugme_prikazi_kontakt": "Show contact",
@@ -1734,7 +1739,10 @@
     "greska_objava": "Error while posting.",
     "greska_generalna": "Error.",
     "potvrda_povlacenja": "Withdraw your request?",
-    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):"
+    "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):",
+    "label_razlog_uklanjanja": "Reason for removal (the user will see this):",
+    "placeholder_razlog_uklanjanja": "E.g. inappropriate content, false data, or outside the board's purpose.",
+    "dugme_potvrdi_uklanjanje": "Confirm removal"
   },
   "dobrodosli": {
     "korak1_oznaka": "Welcome",
@@ -1954,7 +1962,7 @@
     "pokrovitelji_tab_novi": "New sponsor",
     "pokrovitelji_tab_doprinos": "Record contribution",
     "pokrovitelji_nema": "No registered sponsors.",
-    "pokrovitelji_pib_vlasnik": "PIB: {pib} · Owner: {vlasnik}",
+    "pokrovitelji_pib_vlasnik": "PIB: {pib} · Owner: <ime>{vlasnik}</ime>",
     "pokrovitelji_nivo": "Level {nivo}",
     "pokrovitelji_doprinos_count_sing": "{count} contribution",
     "pokrovitelji_doprinos_count_pl": "{count} contributions",
@@ -2063,7 +2071,7 @@
     "pokr_prijave_status_potpisana": "Signed — awaiting confirmation",
     "pokr_prijave_status_potvrdjena": "Confirmed",
     "pokr_prijave_status_odbijena": "Rejected",
-    "pokr_prijave_podneo": "submitted by {pseudonim}",
+    "pokr_prijave_podneo": "submitted by <ime>{pseudonim}</ime>",
     "pokr_prijave_detalji_btn": "Details",
     "pokr_prijave_potvrdi_btn": "Confirm",
     "pokr_prijave_odbij_btn": "Reject",

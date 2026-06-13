@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 type Stavka = {
   id: string;
@@ -93,7 +94,7 @@ function PotvrdaKartica({
         <p className="text-sm text-kolo-muted">
           {t("potvrda_podnosilac")}{" "}
           <Link href={`/profil/${stavka.podnosilacId}`} className="text-kolo-green-700 hover:underline">
-            @{stavka.podnosilacPseudonim}
+            @<Pseudonim>{stavka.podnosilacPseudonim}</Pseudonim>
           </Link>
         </p>
       </div>
