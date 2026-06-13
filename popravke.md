@@ -4,6 +4,19 @@ Evidencija ispravki na platformi. Najnovije na vrhu.
 
 ---
 
+## 2026-06-13 — Profil: neverifikovan blokiran na sopstvenom profilu + vlasnik ne vidi sva svoja polja
+
+- **Prijava:** „kad neverifikovan klikne 'Moj profil' iskače *Pregled profila dostupan je samo verifikovanim korisnicima* — a trebalo bi da može da podešava profil."
+- **Dijagnoza:** dve odvojene stavke u profil dropdownu — „Podesi profil" (`/profil`, podešavanja, radi za sve prijavljene) i „Moj profil" (`/profil/[id]`, javni prikaz profila). Podešavanja su radila; zaključan je bio javni prikaz, pa i kad korisnik gleda **sopstveni** profil.
+- **Uzrok:** `GET /api/profil/[id]` je vraćao `403` za **svakog** neverifikovanog, bez razlike između tuđeg i sopstvenog profila. Po Pravilniku (čl. 28–30, 67) ograničenje vidljivosti odnosi se samo na **tuđe** profile.
+- **Popravka:**
+  - Kapija sad vraća `403` samo kad profil **nije** sopstveni (`id !== session.user.id`). Neverifikovan vidi svoj profil; tuđi profili ostaju zaključani.
+  - Dodatno: na sopstvenom profilu **vlasnik vidi sva svoja polja** (lokacija, opis, puno ime, telefon, bilans, ZRNO, rang donacija, oglasi) bez obzira na togglove vidljivosti (`jeVlasnik = id === session.user.id`); togglovi i dalje važe za druge posetioce profila.
+- **Fajlovi:** `src/app/api/profil/[id]/route.ts`
+- **Objava:** `main` (test, `kolo-peach.vercel.app`) + `production` (ekolo.rs).
+
+---
+
 ## 2026-06-13 — Tabla jemstva: admin „Ukloni" ne radi (native `prompt()`)
 
 - **Prijava:** „povuci zahtev za jemstvo ne radi ni na kompu ni na telefonu".
