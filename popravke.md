@@ -4,6 +4,18 @@ Evidencija ispravki na platformi. Najnovije na vrhu.
 
 ---
 
+## 2026-06-13 — Badge nepročitanih poruka na ikonici „Poruke"
+
+- **Zahtev:** kad stigne nova poruka, crveni broj treba da se pojavi kod ikonice „Poruke", a ne kod notifikacija (zvonca).
+- **Uzrok:** svaka nova poruka je slala notifikaciju (`posaljiNotifikaciju`), pa je crveni badge iskakao na zvoncu; ikonica „Poruke" nije imala nikakav brojač.
+- **Popravka:**
+  - Nove poruke se više **ne** evidentiraju kao notifikacije (uklonjen `posaljiNotifikaciju` poziv pri slanju poruke).
+  - Novi endpoint `GET /api/poruke/brojac` vraća broj nepročitanih poruka upućenih korisniku.
+  - Ikonica „Poruke" u zaglavlju sada prikazuje **crveni badge** sa brojem nepročitanih (polling 15s + trenutno osvežavanje preko `poruke-procitane` događaja kad se konverzacija otvori i poruke označe pročitanim).
+- **Fajlovi:** novi `src/app/api/poruke/brojac/route.ts`, `src/components/Header.tsx`, `src/app/api/poruke/[konvId]/route.ts`, `src/app/(app)/poruke/page.tsx`
+
+---
+
 ## 2026-06-13 — Mobilni UX + ćirilica (9 prijava)
 
 Serija popravki prijavljenih tokom testiranja na mobilnom (Brave/iOS, `kolo-peach.vercel.app`). Sve objavljeno na `main` (test) i potom na `production` (ekolo.rs).
