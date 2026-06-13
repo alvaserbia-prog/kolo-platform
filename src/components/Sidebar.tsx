@@ -195,8 +195,9 @@ function SidebarContent({
     { href: "/tabla-jemstva", label: t("tabla_jemstva") },
   ];
 
-  // Padajuća grupa "Zajedničko dobro": ZRNO, Doprinos, Programi (+ Nadzor za nadzornike)
+  // Padajuća grupa "Zajedničko dobro": Sistem, ZRNO, Doprinos, Programi (+ Nadzor za nadzornike)
   const zajednickoDobro = [
+    { href: "/sistem", label: t("sistem") },
     { href: "/zrno", label: t("zrno") },
     { href: "/doprinos-oglasi", label: t("doprinos") },
     { href: "/programi", label: t("programi") },
@@ -211,18 +212,17 @@ function SidebarContent({
     ? [
         { links: [
           { href: "/pocetna", label: t("pocetna") },
-          { href: "/sistem", label: t("sistem") },
         ] },
         { links: [
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
         { links: poverenje },
-        { label: t("grupa_zajednicko_dobro"), collapsible: true, links: zajednickoDobro },
         { links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
         ] },
+        { label: t("grupa_zajednicko_dobro"), collapsible: true, links: zajednickoDobro },
         ...adminGrupa,
       ]
     : [
