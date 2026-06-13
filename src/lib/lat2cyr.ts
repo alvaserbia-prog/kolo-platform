@@ -35,6 +35,8 @@ const BELA_LISTA_OBRASCI: RegExp[] = [
   /\bopen[\s-]?source[a-z]*\b/gi,
   // email / e-mail (+ nastavci) — sama reč ostaje latinica (adrese su već zaštićene).
   /\be-?mail[a-z]*\b/gi,
+  // chat / Chat soba / chatu… → ostaje latinica (pozajmljenica, „Цхат“ izgleda pogrešno).
+  /\bchat[a-z]*\b/gi,
 ];
 
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
