@@ -1729,6 +1729,8 @@
     "nema_zahteva": "There are currently no active requests.",
     "vas_zahtev": "(your request)",
     "dugme_povuci": "Withdraw",
+    "dugme_potvrdi_povuci": "Yes, withdraw",
+    "dugme_otkazi": "Cancel",
     "dugme_ukloni": "Remove",
     "kontakt_label": "Contact:",
     "dugme_prikazi_kontakt": "Show contact",

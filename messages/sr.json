@@ -1729,6 +1729,8 @@
     "nema_zahteva": "Trenutno nema aktivnih zahteva.",
     "vas_zahtev": "(vaš zahtev)",
     "dugme_povuci": "Povuci",
+    "dugme_potvrdi_povuci": "Da, povuci",
+    "dugme_otkazi": "Otkaži",
     "dugme_ukloni": "Ukloni",
     "kontakt_label": "Kontakt:",
     "dugme_prikazi_kontakt": "Prikaži kontakt",

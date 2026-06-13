@@ -25,6 +25,8 @@ export default function TablaJemstvaKlijent({
   const [ucitavanje, setUcitavanje] = useState(true);
   const [kontakti, setKontakti] = useState<Record<string, string>>({});
   const [radnja, setRadnja] = useState<string | null>(null);
+  // Inline potvrda povlačenja (native confirm() je nepouzdan na mobilnim browserima)
+  const [potvrdaPovuci, setPotvrdaPovuci] = useState<string | null>(null);
 
   // Forma
   const [tekst, setTekst] = useState("");
@@ -69,12 +71,12 @@ export default function TablaJemstvaKlijent({
   }
 
   async function povuci(id: string) {
-    if (!confirm(t("potvrda_povlacenja"))) return;
+    setPotvrdaPovuci(null);
     setRadnja(id);
     const res = await fetch(`/api/tabla-jemstva/${id}`, { method: "DELETE" });
     setRadnja(null);
     if (res.ok) await ucitaj();
-    else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska_generalna")); }
+    else { const d = await res.json().catch(() => ({})); setGreska(d.error ?? t("greska_generalna")); }
   }
 
   async function prikaziKontakt(id: string) {
@@ -202,10 +204,23 @@ export default function TablaJemstvaKlijent({
                 </div>
                 <div className="flex gap-1.5 shrink-0">
                   {z.mojZahtev && (
-                    <button onClick={() => povuci(z.id)} disabled={radnja === z.id}
-                      className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
-                      {t("dugme_povuci")}
-                    </button>
+                    potvrdaPovuci === z.id ? (
+                      <>
+                        <button onClick={() => povuci(z.id)} disabled={radnja === z.id}
+                          className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:opacity-80 disabled:opacity-60 transition-opacity">
+                          {radnja === z.id ? "..." : t("dugme_potvrdi_povuci")}
+                        </button>
+                        <button onClick={() => setPotvrdaPovuci(null)} disabled={radnja === z.id}
+                          className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                          {t("dugme_otkazi")}
+                        </button>
+                      </>
+                    ) : (
+                      <button onClick={() => setPotvrdaPovuci(z.id)} disabled={radnja === z.id}
+                        className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                        {t("dugme_povuci")}
+                      </button>
+                    )
                   )}
                   {isAdmin && (
                     <button onClick={() => ukloni(z.id)} disabled={radnja === z.id}
