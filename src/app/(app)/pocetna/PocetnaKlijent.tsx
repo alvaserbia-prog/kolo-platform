@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
+import Pseudonim from "@/components/Pseudonim";
 
 interface BlogObjava {
   id: string;
@@ -105,7 +106,7 @@ export default function PocetnaKlijent({
   return (
     <div className="space-y-6">
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
-        {t("dobrodoslice", { pseudonim })}
+        {t.rich("dobrodoslice", { pseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
       </h1>
       <PageOpis>
         {t("opis_stranice")}
@@ -192,7 +193,7 @@ export default function PocetnaKlijent({
                           href={`/profil/${p.userId}`}
                           className="text-xs font-medium text-kolo-green-700 hover:underline"
                         >
-                          {p.pseudonim}
+                          <Pseudonim>{p.pseudonim}</Pseudonim>
                         </Link>
                         {p.verified && (
                           <span className="text-[10px] bg-kolo-green-100 text-kolo-green-700 px-1 rounded font-medium">

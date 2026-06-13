@@ -9,9 +9,19 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
 
   const { id } = await params;
+
+  // Kapija "samo verifikovani vide profile" odnosi se na TUĐE profile (Pravilnik čl. 28–30,
+  // 67): neverifikovan ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek
+  // sme da vidi — inače bi klik na "Moj profil" blokirao i njega samog.
+  if (!session.user.verified && id !== session.user.id) {
+    return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+  }
+
+  // Vlasnik na sopstvenom profilu vidi SVE svoje podatke bez obzira na togglove
+  // vidljivosti; togglovi i dalje važe za druge posetioce.
+  const jeVlasnik = id === session.user.id;
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
@@ -60,7 +70,7 @@ export async function GET(
   // Rang donacija
   let rangDonacija: number | null = null;
 
-  if (podaci?.prikaziRangDonacija) {
+  if (jeVlasnik || podaci?.prikaziRangDonacija) {
     const sviDonatori = await prisma.donationRecord.groupBy({
       by: ["userId"],
       where: { status: "CONFIRMED" },
@@ -98,7 +108,7 @@ export async function GET(
 
   // Oglasi
   let oglasi: { id: string; title: string; price: number; category: string; createdAt: Date }[] = [];
-  if (podaci?.prikaziOglase) {
+  if (jeVlasnik || podaci?.prikaziOglase) {
     oglasi = await prisma.marketplaceListing.findMany({
       where: { sellerId: id, status: "ACTIVE" },
       orderBy: { createdAt: "desc" },
@@ -117,17 +127,17 @@ export async function GET(
     createdAt: korisnik.createdAt,
     krug,
     // Opcioni podaci
-    lokacija: podaci?.prikaziLokaciju ? korisnik.location : null,
-    opis: podaci?.prikaziOpis ? podaci.opis : null,
-    punoIme: podaci?.prikaziPunoIme ? podaci.punoIme : null,
-    telefon: podaci?.prikaziTelefon ? korisnik.telefon : null,
-    bilans: podaci?.prikaziBilans ? (korisnik.wallet?.balance ?? 0) : null,
-    zrno: podaci?.prikaziZrno
+    lokacija: (jeVlasnik || podaci?.prikaziLokaciju) ? korisnik.location : null,
+    opis: (jeVlasnik || podaci?.prikaziOpis) ? podaci?.opis ?? null : null,
+    punoIme: (jeVlasnik || podaci?.prikaziPunoIme) ? podaci?.punoIme ?? null : null,
+    telefon: (jeVlasnik || podaci?.prikaziTelefon) ? korisnik.telefon : null,
+    bilans: (jeVlasnik || podaci?.prikaziBilans) ? (korisnik.wallet?.balance ?? 0) : null,
+    zrno: (jeVlasnik || podaci?.prikaziZrno)
       ? (korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0)
       : null,
     rangDonacija,
     transakcije: transakcijeSlice,
     nextCursor,
-    oglasi: podaci?.prikaziOglase ? oglasi : [],
+    oglasi: (jeVlasnik || podaci?.prikaziOglase) ? oglasi : [],
   });
 }

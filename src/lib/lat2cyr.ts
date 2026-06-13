@@ -35,6 +35,8 @@ const BELA_LISTA_OBRASCI: RegExp[] = [
   /\bopen[\s-]?source[a-z]*\b/gi,
   // email / e-mail (+ nastavci) — sama reč ostaje latinica (adrese su već zaštićene).
   /\be-?mail[a-z]*\b/gi,
+  // chat / Chat soba / chatu… → ostaje latinica (pozajmljenica, „Цхат“ izgleda pogrešno).
+  /\bchat[a-z]*\b/gi,
 ];
 
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
@@ -68,6 +70,13 @@ const SENTINEL_ZATV = "";
 const RE_URL = /\b(?:https?:\/\/|www\.)[^\s<>"']+/gi;
 const RE_EMAIL = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
 const RE_DOMEN = /\b[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.(?:rs|com|org|net|eu|io|info)\b/g;
+// ICU placeholderi ({pseudonim}, {count}) i rich-text/HTML tagovi (<strong>):
+// imena argumenata i tagova NE smeju u ćirilicu — inače next-intl ne nalazi
+// vrednost po imenu (FORMATTING_ERROR) ni rich tag. Maskira se SAMO oznaka;
+// tekst između tagova (npr. <strong>Naslov</strong>) i dalje ide u ćirilicu.
+// (Sve poruke koriste proste {ime} placeholdere — bez ugnežđenih { } / ICU plural.)
+const RE_ICU = /\{[^{}]*\}/g;
+const RE_TAG = /<\/?[A-Za-z][A-Za-z0-9-]*\s*\/?>/g;
 
 function ucinilVelikim(c: string): boolean {
   return c !== c.toLowerCase() && c === c.toUpperCase();
@@ -131,7 +140,9 @@ export function lat2cyr(input: string): string {
   let s = input
     .replace(RE_URL, masc)
     .replace(RE_EMAIL, masc)
-    .replace(RE_DOMEN, masc);
+    .replace(RE_DOMEN, masc)
+    .replace(RE_ICU, masc)
+    .replace(RE_TAG, masc);
 
   // 2) Maskiraj reči iz bele liste (kao cele reči, case-sensitive po unosu).
   for (const token of BELA_LISTA) {

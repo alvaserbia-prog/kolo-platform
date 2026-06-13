@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 interface Korisnik {
   id: string;
@@ -127,7 +128,7 @@ export default function ClanPretraga() {
                 }`}
               >
                 <div className="min-w-0">
-                  <span className="text-sm font-medium text-kolo-text truncate block">{k.pseudonim}</span>
+                  <span className="text-sm font-medium text-kolo-text truncate block"><Pseudonim>{k.pseudonim}</Pseudonim></span>
                   {k.location && (
                     <span className="text-xs text-kolo-muted">{k.location}</span>
                   )}

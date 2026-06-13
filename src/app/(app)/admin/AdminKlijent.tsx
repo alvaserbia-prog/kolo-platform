@@ -7,6 +7,7 @@ import OsnivaciTab from "./OsnivaciTab";
 import PokroviteljPrijaveTab from "./PokroviteljPrijaveTab";
 import NadzorTab, { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
+import Pseudonim from "@/components/Pseudonim";
 
 interface KorisnikInfo {
   id: string;
@@ -363,7 +364,7 @@ function KrugZahtevKartica({ z, onDone }: { z: PendingKrug; onDone: () => void }
         </div>
         <div className="text-right shrink-0 ml-4">
           <p className="text-xs text-kolo-muted">{t("krug_inicijator")}</p>
-          <p className="text-sm font-medium text-kolo-text">{z.inicijatorPseudonim}</p>
+          <p className="text-sm font-medium text-kolo-text"><Pseudonim>{z.inicijatorPseudonim}</Pseudonim></p>
         </div>
       </div>
 
@@ -534,7 +535,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
               <div key={p.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
                 <div className="flex justify-between items-start">
                   <div>
-                    <p className="font-semibold text-kolo-text text-sm">{p.pseudonim}</p>
+                    <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{p.pseudonim}</Pseudonim></p>
                     <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_predlozeni_poen")}</p>
                     {p.planIzvrsenja && <p className="text-xs text-kolo-muted mt-1 line-clamp-3"><span className="font-semibold">{t("ped_plan_label")}</span> {p.planIzvrsenja}</p>}
                     <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
@@ -565,7 +566,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
               <div key={e.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
                 <div className="flex justify-between items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-kolo-text text-sm">{e.pseudonim}</p>
+                    <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{e.pseudonim}</Pseudonim></p>
                     <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
                     <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{e.description}</p>
                     {e.dokaz && <p className="text-xs text-kolo-info mt-1 line-clamp-1">{t("ped_dokaz_label")} {e.dokaz}</p>}
@@ -905,7 +906,7 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
     <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">
       <div className="flex justify-between items-start">
         <div>
-          <p className="text-sm font-semibold text-kolo-text">{e.pseudonim}</p>
+          <p className="text-sm font-semibold text-kolo-text"><Pseudonim>{e.pseudonim}</Pseudonim></p>
           <p className="text-xs text-kolo-green-700 font-medium">{e.label}</p>
           {metaLines && <p className="text-xs text-kolo-muted mt-0.5">{metaLines}</p>}
         </div>
@@ -1282,9 +1283,64 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         </button>
       </div>
 
+      {/* Migracija avatara na R2 (jednokratno) */}
+      <AvatarMigracijaKartica />
+
       <button onClick={onRefresh}
         className="w-full py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors">
         {t("dashboard_osvjezi")}
+      </button>
+    </div>
+  );
+}
+
+// ── Migracija avatara (legacy base64 → Cloudflare R2) ─────────────────────────
+// Jednokratni alat: poziva /api/admin/migracija-avatara u petlji dok ne ostane
+// nijedan base64 avatar. Tekst je inline (srpski) — admin panel je interni alat.
+function AvatarMigracijaKartica() {
+  const [radi, setRadi] = useState(false);
+  const [poruka, setPoruka] = useState<string | null>(null);
+  const [gotovo, setGotovo] = useState(false);
+
+  async function pokreni() {
+    setRadi(true);
+    setGotovo(false);
+    setPoruka("Migriram…");
+    let ukupno = 0;
+    try {
+      // Petlja po batch-evima dok server ne javi preostalo === 0.
+      for (let i = 0; i < 1000; i++) {
+        const res = await fetch("/api/admin/migracija-avatara", { method: "POST" });
+        const d = await res.json().catch(() => ({}));
+        if (!res.ok) { setPoruka(d.error ?? "Greška pri migraciji."); setRadi(false); return; }
+        ukupno += d.migrirano ?? 0;
+        setPoruka(`Migrirano: ${ukupno} · preostalo: ${d.preostalo ?? 0}`);
+        if ((d.preostalo ?? 0) === 0) break;
+        if ((d.migrirano ?? 0) === 0) break; // zaštita od beskonačne petlje
+      }
+      setGotovo(true);
+    } catch (e) {
+      setPoruka(String(e));
+    }
+    setRadi(false);
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex items-center justify-between gap-4">
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-kolo-muted">Migracija avatara na R2</p>
+        <p className="text-xs text-kolo-muted mt-0.5">
+          Prebacuje stare base64 avatare iz baze na Cloudflare R2 (jednokratno).
+        </p>
+        {poruka && (
+          <p className={`text-sm mt-1 font-mono ${gotovo ? "text-kolo-green-700" : "text-kolo-muted"}`}>
+            {gotovo ? `✓ ${poruka}` : poruka}
+          </p>
+        )}
+      </div>
+      <button onClick={pokreni} disabled={radi}
+        className="px-4 py-2 bg-kolo-bg text-kolo-muted text-sm font-semibold rounded-xl hover:bg-kolo-border disabled:opacity-60 transition-colors shrink-0">
+        {radi ? "Radim…" : "Pokreni"}
       </button>
     </div>
   );
@@ -1414,7 +1470,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
               <div className="flex justify-between items-start gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-semibold text-kolo-text">{u.pseudonim}</span>
+                    <span className="text-sm font-semibold text-kolo-text"><Pseudonim>{u.pseudonim}</Pseudonim></span>
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                       {u.status}
                     </span>
@@ -1535,7 +1591,7 @@ function IzmeniKorisnikaForma({ korisnik, onClose, onDone }: {
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
         <div>
           <h3 className="text-base font-semibold text-kolo-text">{t("izmeni_korisnika_naslov")}</h3>
-          <p className="text-sm text-kolo-muted mt-0.5">{korisnik.pseudonim}</p>
+          <p className="text-sm text-kolo-muted mt-0.5"><Pseudonim>{korisnik.pseudonim}</Pseudonim></p>
         </div>
 
         <div>
@@ -1709,7 +1765,7 @@ function AdminPokroviteljiTab({
                 <div className="min-w-0">
                   <div className="font-medium text-kolo-text truncate">{p.naziv}</div>
                   <div className="text-xs text-kolo-muted mt-0.5">
-                    {t("pokrovitelji_pib_vlasnik", { pib: p.pib, vlasnik: p.vlasnikPseudonim })}
+                    {t.rich("pokrovitelji_pib_vlasnik", { pib: p.pib, vlasnik: p.vlasnikPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
                   </div>
                 </div>
                 <div className="shrink-0 text-right">
@@ -1881,7 +1937,7 @@ function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: ()
                     )}
                   </div>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {l.adminPseudonim}
+                    <Pseudonim>{l.adminPseudonim}</Pseudonim>
                     {l.detalji && <span className="text-kolo-muted"> — {l.detalji}</span>}
                   </p>
                 </div>
@@ -2063,7 +2119,7 @@ function VestiTab({ objave, onDone }: { objave: BlogObjavaAdmin[]; onDone: () =>
                       day: "2-digit", month: "2-digit", year: "numeric",
                       hour: "2-digit", minute: "2-digit",
                     })}{" "}
-                    · {o.authorPseudonim}
+                    · <Pseudonim>{o.authorPseudonim}</Pseudonim>
                   </p>
                   <p className="text-xs text-kolo-muted mt-1 line-clamp-2">
                     {o.content.slice(0, 200)}

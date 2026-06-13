@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 async function getKonv(konvId: string, meId: string) {
   const k = await prisma.konverzacija.findUnique({ where: { id: konvId } });
@@ -69,8 +68,6 @@ export async function POST(
   if (!tekst?.trim()) return NextResponse.json({ error: "Poruka ne sme biti prazna." }, { status: 400 });
   if (tekst.trim().length > 1000) return NextResponse.json({ error: "Poruka je predugačka (max 1000 znakova)." }, { status: 400 });
 
-  const primaocId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
-
   const [poruka] = await prisma.$transaction([
     prisma.poruka.create({
       data: { konverzacijaId: konvId, posiljacId: session.user.id, tekst: tekst.trim() },
@@ -81,13 +78,8 @@ export async function POST(
     }),
   ]);
 
-  await posaljiNotifikaciju(
-    primaocId,
-    "info",
-    `Nova poruka od ${session.user.pseudonim}`,
-    tekst.trim().length > 60 ? tekst.trim().slice(0, 60) + "…" : tekst.trim(),
-    `/poruke?k=${konvId}`
-  );
+  // Nove poruke se NE evidentiraju kao notifikacije (zvonce) — nepročitane poruke
+  // se broje crvenim badge-om na ikonici "Poruke" (GET /api/poruke/brojac).
 
   return NextResponse.json({
     id: poruka.id,

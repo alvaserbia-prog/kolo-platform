@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
@@ -157,6 +158,15 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
   const onDragEnd = useCallback(() => { dragRef.current = null; }, []);
 
+  // Zaključaj skrol stranice dok je crop modal otvoren (sprečava pomeranje cele
+  // stranice pri prevlačenju kruga na dodirnim ekranima).
+  useEffect(() => {
+    if (!cropSrc) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, [cropSrc]);
+
   async function confirmCrop() {
     if (!cropSrc || !cropImgRef.current) return;
     setAvatarLoading(true);
@@ -192,8 +202,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const data = await res.json();
     setAvatarLoading(false);
     if (!res.ok) { setAvatarError(data.error ?? tc("greska_ucitavanja")); return; }
-    setAvatar(base64);
-    window.dispatchEvent(new CustomEvent("avatar-updated", { detail: base64 }));
+    // Server vraća URL avatara na Vercel Blob-u (ne više base64).
+    const noviAvatar = data.avatar ?? base64;
+    setAvatar(noviAvatar);
+    window.dispatchEvent(new CustomEvent("avatar-updated", { detail: noviAvatar }));
   }
 
   async function promeniPseudonim(e: React.FormEvent) {
@@ -308,7 +320,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               <img src={avatar} alt={user.pseudonim} className="block w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-7xl">
-                {user.pseudonim.charAt(0).toUpperCase()}
+                <Pseudonim>{user.pseudonim.charAt(0).toUpperCase()}</Pseudonim>
               </div>
             )}
           </div>
@@ -338,7 +350,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("pseudonim_label")}</dt>
-              <dd className="font-medium text-kolo-text">{user.pseudonim}</dd>
+              <dd className="font-medium text-kolo-text"><Pseudonim>{user.pseudonim}</Pseudonim></dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("email_label")}</dt>
@@ -516,12 +528,12 @@ export default function ProfilKlijent({ user }: ProfilProps) {
 
       {/* Crop modal */}
       {cropSrc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
           <div className="bg-white rounded-2xl p-6 flex flex-col items-center gap-4 shadow-xl max-w-full">
             <p className="text-sm text-kolo-muted">{t("crop_opis")}</p>
             <div
               className="relative cursor-grab active:cursor-grabbing rounded-xl overflow-hidden select-none"
-              style={{ width: cropDisplay.w, height: cropDisplay.h }}
+              style={{ width: cropDisplay.w, height: cropDisplay.h, touchAction: "none" }}
               onMouseDown={onDragStart}
               onMouseMove={onDragMove}
               onMouseUp={onDragEnd}

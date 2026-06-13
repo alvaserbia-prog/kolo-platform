@@ -73,6 +73,16 @@ describe("lat2cyr — zaštićeni tokeni", () => {
     expect(lat2cyr("Pošalji email odmah")).toBe("Пошаљи email одмах");
     expect(lat2cyr("Tvoj e-mail je bitan")).toBe("Твој e-mail је битан");
   });
+  it("ICU placeholderi {ime} ostaju netaknuti (inače next-intl FORMATTING_ERROR)", () => {
+    expect(lat2cyr("Dobrodošli, {pseudonim}")).toBe("Добродошли, {pseudonim}");
+    expect(lat2cyr("Imate {count} poruka")).toBe("Имате {count} порука");
+    expect(lat2cyr("Bonus {iznos} POEN")).toBe("Бонус {iznos} ПОЕН");
+  });
+  it("rich-text tagovi (<strong>) ostaju, ali se sadržaj transliteriše", () => {
+    expect(lat2cyr("<strong>Predstavljanje</strong> vide svi")).toBe(
+      "<strong>Представљање</strong> виде сви",
+    );
+  });
 });
 
 describe("lat2cyr — brojevi i interpunkcija", () => {

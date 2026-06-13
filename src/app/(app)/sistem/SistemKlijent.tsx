@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
+import Pseudonim from "@/components/Pseudonim";
 
 type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos";
 type TxFilter = "sve" | "protokol" | "clanovi";
@@ -124,7 +125,7 @@ export default function SistemKlijent({
         className="kolo-naslov"
         style={{ letterSpacing: "-0.02em" }}
       >
-        {t("dobrodoslice", { pseudonim })}
+        {t.rich("dobrodoslice", { pseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
       </h1>
       <PageOpis>
         {t("opis_stranice")}
@@ -469,20 +470,20 @@ function PregledSekcija({
                   <div className="min-w-0">
                     {verified && tx.fromId ? (
                       <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {tx.fromPseudonim}
+                        <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                       </Link>
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{tx.fromPseudonim}</span>
+                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                     )}
                   </div>
                   <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
                   <div className="min-w-0">
                     {verified && tx.toId ? (
                       <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {tx.toPseudonim}
+                        <Pseudonim>{tx.toPseudonim}</Pseudonim>
                       </Link>
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{tx.toPseudonim}</span>
+                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )}
                   </div>
                   <span className="text-base font-bold text-kolo-text text-right">
@@ -494,15 +495,15 @@ function PregledSekcija({
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
                       {verified && tx.fromId ? (
-                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                       ) : (
-                        <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                       )}
                       <span className="text-kolo-muted shrink-0">→</span>
                       {verified && tx.toId ? (
-                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                       ) : (
-                        <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                       )}
                     </div>
                     <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
@@ -649,7 +650,7 @@ function ClanoviSekcija({
                     href={`/profil/${c.id}`}
                     className="font-medium text-kolo-green-700 hover:underline truncate"
                   >
-                    {c.pseudonim}
+                    <Pseudonim>{c.pseudonim}</Pseudonim>
                   </Link>
                   {c.verified ? (
                     <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
@@ -678,7 +679,7 @@ function ClanoviSekcija({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
-                      {c.pseudonim}
+                      <Pseudonim>{c.pseudonim}</Pseudonim>
                     </Link>
                     {c.verified ? (
                       <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
@@ -786,10 +787,10 @@ function TransakcijeSekcija({
                   {verified ? (
                     tx.fromId ? (
                       <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {tx.fromPseudonim}
+                        <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                       </Link>
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{tx.fromPseudonim}</span>
+                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                     )
                   ) : (
                     <span className="text-base text-kolo-muted">—</span>
@@ -802,10 +803,10 @@ function TransakcijeSekcija({
                   {verified ? (
                     tx.toId ? (
                       <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        {tx.toPseudonim}
+                        <Pseudonim>{tx.toPseudonim}</Pseudonim>
                       </Link>
                     ) : (
-                      <span className="text-base text-kolo-muted truncate block">{tx.toPseudonim}</span>
+                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )
                   ) : (
                     <span className="text-base text-kolo-muted">—</span>
@@ -822,9 +823,9 @@ function TransakcijeSekcija({
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
                     {verified ? (
                       tx.fromId ? (
-                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                       ) : (
-                        <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                       )
                     ) : (
                       <span className="text-kolo-muted">—</span>
@@ -832,9 +833,9 @@ function TransakcijeSekcija({
                     <span className="text-kolo-muted shrink-0">→</span>
                     {verified ? (
                       tx.toId ? (
-                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                       ) : (
-                        <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                       )
                     ) : (
                       <span className="text-kolo-muted">—</span>
@@ -911,7 +912,7 @@ function DonacijeSekcija({
                 href={`/profil/${d.userId}`}
                 className="font-medium text-kolo-green-700 hover:underline truncate"
               >
-                {d.pseudonim}
+                <Pseudonim>{d.pseudonim}</Pseudonim>
               </Link>
               <span className="text-right font-mono">
                 {d.amountRSD.toLocaleString("sr-RS")}
@@ -932,7 +933,7 @@ function DonacijeSekcija({
             <div className="sm:hidden px-4 py-3 space-y-1">
               <div className="flex items-center justify-between">
                 <Link href={`/profil/${d.userId}`} className="font-semibold text-kolo-green-700 hover:underline">
-                  {d.pseudonim}
+                  <Pseudonim>{d.pseudonim}</Pseudonim>
                 </Link>
                 <span className="font-mono text-sm font-bold text-kolo-text">
                   {d.poenEmitted.toLocaleString("sr-RS")} POEN
@@ -1070,18 +1071,18 @@ function IznosSekcija({
                 </span>
                 {tx.fromId ? (
                   <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
-                    {tx.fromPseudonim}
+                    <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                   </Link>
                 ) : (
-                  <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                  <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                 )}
                 <span className="text-kolo-muted text-center">→</span>
                 {tx.toId ? (
                   <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
-                    {tx.toPseudonim}
+                    <Pseudonim>{tx.toPseudonim}</Pseudonim>
                   </Link>
                 ) : (
-                  <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                  <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                 )}
                 <span className="font-mono font-semibold text-kolo-text text-right">
                   {tx.amount.toLocaleString("sr-RS")}
@@ -1092,15 +1093,15 @@ function IznosSekcija({
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
                     {tx.fromId ? (
-                      <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">{tx.fromPseudonim}</Link>
+                      <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                     ) : (
-                      <span className="text-kolo-muted truncate">{tx.fromPseudonim}</span>
+                      <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                     )}
                     <span className="text-kolo-muted shrink-0">→</span>
                     {tx.toId ? (
-                      <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">{tx.toPseudonim}</Link>
+                      <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                     ) : (
-                      <span className="text-kolo-muted truncate">{tx.toPseudonim}</span>
+                      <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )}
                   </div>
                   <span className="font-mono font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>

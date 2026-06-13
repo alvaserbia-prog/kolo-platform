@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
+import Pseudonim from "@/components/Pseudonim";
 
 
 type Transakcija = {
@@ -161,13 +162,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                     {t.primio ? (
                       t.drugiId ? (
                         <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                          {t.drugiPseudonim}
+                          <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                         </a>
                       ) : (
-                        <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
+                        <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
                       )
                     ) : (
-                      <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
+                      <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
                     )}
                   </div>
                   {/* Strelica */}
@@ -175,14 +176,14 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                   {/* Primalac */}
                   <div className="min-w-0">
                     {t.primio ? (
-                      <span className="text-base text-kolo-text font-medium truncate block">{pseudonim}</span>
+                      <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
                     ) : (
                       t.drugiId ? (
                         <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                          {t.drugiPseudonim}
+                          <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                         </a>
                       ) : (
-                        <span className="text-base text-kolo-muted truncate block">{t.drugiPseudonim}</span>
+                        <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
                       )
                     )}
                   </div>
@@ -204,24 +205,24 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                         {t.primio ? (
                           t.drugiId ? (
                             <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
-                              {t.drugiPseudonim}
+                              <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                             </a>
                           ) : (
-                            <span className="text-kolo-muted truncate">{t.drugiPseudonim}</span>
+                            <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
                           )
                         ) : (
-                          <span className="text-kolo-text font-medium truncate">{pseudonim}</span>
+                          <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
                         )}
                         <span className="text-kolo-muted shrink-0">→</span>
                         {t.primio ? (
-                          <span className="text-kolo-text font-medium truncate">{pseudonim}</span>
+                          <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
                         ) : (
                           t.drugiId ? (
                             <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
-                              {t.drugiPseudonim}
+                              <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                             </a>
                           ) : (
-                            <span className="text-kolo-muted truncate">{t.drugiPseudonim}</span>
+                            <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
                           )
                         )}
                       </div>
@@ -502,7 +503,7 @@ function QRModal({ pseudonim, memberHash, onClose }: { pseudonim: string; member
             level="M"
           />
         </div>
-        <p className="text-sm font-semibold text-kolo-green-700 font-mono">{pseudonim}</p>
+        <p className="text-sm font-semibold text-kolo-green-700 font-mono"><Pseudonim>{pseudonim}</Pseudonim></p>
         <div className="flex gap-2">
           <button
             onClick={kopiraj}

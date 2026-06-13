@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -79,8 +80,10 @@ export async function PATCH(
     // keepImages — niz indeksa postojećih slika koje treba zadržati
     const keepIndices: number[] = JSON.parse(keepRaw);
     const zadrzaneSlike = listing.images.filter((_, i) => keepIndices.includes(i));
+    const uklonjeneSlike = listing.images.filter((_, i) => !keepIndices.includes(i));
 
-    // Nove slike
+    // Nove slike — R2 u produkciji, fallback na lokalni disk za dev.
+    const useR2 = r2Konfigurisan();
     const noveSlike: string[] = [];
     const ukupno = zadrzaneSlike.length;
     for (let i = 0; i < MAX_IMAGES - ukupno; i++) {
@@ -91,13 +94,22 @@ export async function PATCH(
       if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
         return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
 
-      const dir = path.join(process.cwd(), "storage", "oglasi", id);
-      await mkdir(dir, { recursive: true });
       const ext = file.type === "image/png" ? ".png" : file.type === "image/webp" ? ".webp" : ".jpg";
       const fname = `${randomUUID()}${ext}`;
-      await writeFile(path.join(dir, fname), Buffer.from(await file.arrayBuffer()));
-      noveSlike.push(`storage/oglasi/${id}/${fname}`);
+      if (useR2) {
+        const buffer = Buffer.from(await file.arrayBuffer());
+        const url = await sacuvajNaR2(`oglasi/${id}/${fname}`, buffer, file.type);
+        noveSlike.push(url);
+      } else {
+        const dir = path.join(process.cwd(), "storage", "oglasi", id);
+        await mkdir(dir, { recursive: true });
+        await writeFile(path.join(dir, fname), Buffer.from(await file.arrayBuffer()));
+        noveSlike.push(`storage/oglasi/${id}/${fname}`);
+      }
     }
+
+    // Best-effort brisanje uklonjenih slika sa R2 (legacy/lokalne se preskaču).
+    for (const url of uklonjeneSlike) await obrisiSaR2(url);
 
     await prisma.marketplaceListing.update({
       where: { id },
