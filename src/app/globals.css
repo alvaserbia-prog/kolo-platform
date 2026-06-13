@@ -110,6 +110,19 @@ body {
   text-wrap: pretty;
 }
 
+/* ── Sprečavanje iOS auto-zoom-a pri fokusu na polja ──────────────── */
+/* Safari na iOS-u zumira stranicu kad polje ima font < 16px. Forsiramo
+   16px na svim poljima za unos na mobilnim širinama (Tailwind text-sm/xs
+   utility klase imaju veću specifičnost od element-selektora → !important).
+   Desktop tipografija ostaje netaknuta. */
+@media (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
 /* ── Toast animacija ─────────────────────────────────────────────── */
 
 @keyframes slide-up {
