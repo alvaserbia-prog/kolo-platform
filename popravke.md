@@ -43,8 +43,15 @@ Sve urađeno na testu (`main` → `kolo-peach.vercel.app`) i objavljeno na produ
 - **Fajl:** `src/app/api/transfer/route.ts`
 - **Bezbednosna napomena (bez izmene koda):** povodom sumnje da se API gađa bez prijave, pregledane su sve rute koje menjaju stanje + javna površina — **nema propusta** (zahtevi bez sesije dobijaju `401`, potvrđeno logovima). Poruka „Ne možete upisati POEN samom sebi" javljala se samo kada je klijent (Insomnia) iz svog cookie-jara slao važeći `next-auth.session-token`.
 
-### 👤 Profil
-- Uklonjen tvrdi redirect na 403/404 — umesto toga prikazuje se **jasna inline poruka**.
+### 👤 Profil — neverifikovan blokiran na sopstvenom profilu + vlasnik ne vidi sva svoja polja
+- **Prijava:** „kad neverifikovan klikne 'Moj profil' iskače *Pregled profila dostupan je samo verifikovanim korisnicima* — a trebalo bi da može da podešava profil."
+- **Dijagnoza:** dve odvojene stavke u dropdownu — „Podesi profil" (`/profil`, podešavanja, radi za sve) i „Moj profil" (`/profil/[id]`, javni prikaz). Podešavanja su radila; zaključan je bio javni prikaz, pa i kad korisnik gleda **sopstveni** profil.
+- **Uzrok:** `GET /api/profil/[id]` je vraćao `403` za **svakog** neverifikovanog, bez razlike tuđe/sopstveno. Po Pravilniku (čl. 28–30, 67) ograničenje vidljivosti odnosi se samo na **tuđe** profile.
+- **Popravka:**
+  - `403` samo kad profil **nije** sopstveni (`id !== session.user.id`). Neverifikovan vidi svoj profil; tuđi ostaju zaključani.
+  - Na sopstvenom profilu **vlasnik vidi sva svoja polja** (lokacija, opis, puno ime, telefon, bilans, ZRNO, rang donacija, oglasi) bez obzira na togglove vidljivosti (`jeVlasnik = id === session.user.id`); togglovi i dalje važe za druge posetioce.
+  - Ranije usput: uklonjen tvrdi redirect na 403/404 — umesto toga **jasna inline poruka**.
+- **Fajlovi:** `src/app/api/profil/[id]/route.ts`
 
 ---
 
