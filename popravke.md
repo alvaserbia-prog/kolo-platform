@@ -4,6 +4,19 @@ Evidencija ispravki na platformi. Najnovije na vrhu.
 
 ---
 
+## 2026-06-13 — Tabla jemstva: admin „Ukloni" ne radi (native `prompt()`)
+
+- **Prijava:** „povuci zahtev za jemstvo ne radi ni na kompu ni na telefonu".
+- **Dijagnoza:** u Vercel runtime logovima tokom testiranja **nijedan DELETE/POST nije stizao do servera** — samo ponovljeni GET-ovi (osvežavanja stranice). Pošto je prijavilac admin (UO Fondacije), na tabli ne vidi korisničko dugme „Povuci" nego admin dugme **„Ukloni"**.
+- **Uzrok:** „Ukloni" je koristilo native `prompt()` za razlog uklanjanja, a `prompt()` (kao i ranije `confirm()`) Brave i mobilni browseri potiskuju → vrati `null` → kod odmah izlazi (`if (razlog === null) return;`) i POST se nikad ne pošalje. Prethodna popravka (#6 ispod) sredila je samo korisničko „Povuci"; admin „Ukloni" je ostao na `prompt()`.
+- **Popravka:**
+  - „Ukloni" sada otvara **inline polje za razlog** + „Potvrdi uklanjanje" / „Otkaži" (bez ijednog native dijaloga). Razlog je obavezan (kao i na serveru).
+  - Greške akcija (povuci/ukloni/kontakt/poruka) prikazuju se u **uvek vidljivoj crvenoj traci** umesto kroz `alert()` ili skriveni `setGreska` (ranije se greška povlačenja renderovala samo u formi, koja je sakrivena kad korisnik ima aktivan zahtev — pa se greška nije videla).
+  - Komponentni testovi (jsdom + testing-library): „Povuci → Da, povuci" šalje `DELETE`; „Ukloni → razlog → Potvrdi" šalje `POST` **bez poziva `prompt()`**. Svih 192 testa prolaze.
+- **Fajlovi:** `src/app/(app)/tabla-jemstva/TablaJemstvaKlijent.tsx`, `messages/{sr,en,hu}.json` (`label_razlog_uklanjanja`, `placeholder_razlog_uklanjanja`, `dugme_potvrdi_uklanjanje`), novi `__tests__/tabla-jemstva-povuci.test.tsx`, `vitest.config.ts`, `package.json` (jsdom + testing-library)
+
+---
+
 ## 2026-06-13 — Badge nepročitanih poruka na ikonici „Poruke"
 
 - **Zahtev:** kad stigne nova poruka, crveni broj treba da se pojavi kod ikonice „Poruke", a ne kod notifikacija (zvonca).
