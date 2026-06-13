@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
+import Pseudonim from "@/components/Pseudonim";
 
 interface OglasProps {
   id: string;
@@ -172,7 +173,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
           )}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
-            <span>{t("prodavac")}: <strong className="text-kolo-muted">{oglas.sellerPseudonim}</strong></span>
+            <span>{t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
           </div>

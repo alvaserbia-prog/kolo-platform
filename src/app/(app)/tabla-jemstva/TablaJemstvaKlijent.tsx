@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 type Zahtev = {
   id: string;
@@ -195,7 +196,7 @@ export default function TablaJemstvaKlijent({
               <div className="flex justify-between items-start gap-4">
                 <div>
                   <p className="font-semibold text-kolo-text">
-                    {z.pseudonim}
+                    <Pseudonim>{z.pseudonim}</Pseudonim>
                     {z.mojZahtev && <span className="ml-2 text-xs text-kolo-green-700">{t("vas_zahtev")}</span>}
                   </p>
                   <p className="text-xs text-kolo-muted mt-0.5">

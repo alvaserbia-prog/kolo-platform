@@ -162,7 +162,7 @@
     "greska_registracija": "Greška pri registraciji."
   },
   "sistem": {
-    "dobrodoslice": "Dobrodošli, {pseudonim}",
+    "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",
     "zahtev_na_cekanju_naslov": "Zahtev je na čekanju",
     "zahtev_na_cekanju_opis": "Dokumentacija je primljena i čeka pregled admina (1–3 radna dana).",
     "nalog_nije_verifikovan_naslov": "Nalog još nije verifikovan",
@@ -576,7 +576,7 @@
     "opozovi_pitanje": "Opozovi delegaciju?",
     "unesite_pozitivan": "Unesite pozitivan ceo broj.",
     "opis": "ZRNO beleži tvoj položaj u zajednici i iz njega proizlazi tvoj glas u odlučivanju. Ovde upisuješ i otpisuješ ZRNO i upravljaš svojim glasom.",
-    "zakazana_promena": "Zakazano: → {pseudonim} — stupa na snagu u ponoć",
+    "zakazana_promena": "Zakazano: → <ime>{pseudonim}</ime> — stupa na snagu u ponoć",
     "zakazan_opoziv": "Zakazan opoziv — stupa na snagu u ponoć"
   },
   "programi": {
@@ -686,7 +686,7 @@
     "registar_opis": "Nepromenljiv pregled svih zatvorenih predloga Gornjeg Kola sa ishodom (čl. 21).",
     "registar_nazad": "← Glasanje",
     "registar_prazno": "Još uvek nema zatvorenih odluka.",
-    "registar_predlagac": "Predlagač: {pseudonim}",
+    "registar_predlagac": "Predlagač: <ime>{pseudonim}</ime>",
     "registar_zatvoreno": "Zatvoreno: {datum}",
     "registar_za_zbir": "ZA: {zbir} glasačke moći",
     "registar_protiv_zbir": "PROTIV: {zbir}",
@@ -1574,7 +1574,7 @@
     "objavi_oglas": "Objavi oglas"
   },
   "pocetna": {
-    "dobrodoslice": "Dobrodošao, {pseudonim}",
+    "dobrodoslice": "Dobrodošao, <ime>{pseudonim}</ime>",
     "opis_stranice": "Tvoja polazna tačka: vesti Fondacije i razgovor sa zajednicom. Ovde vidiš šta je novo i šta drugi pišu (pisanje se otključava verifikacijom).",
     "vesti_naslov": "Vesti Fondacije",
     "nema_objava": "Još uvek nema objava.",
@@ -1958,7 +1958,7 @@
     "pokrovitelji_tab_novi": "Novi pokrovitelj",
     "pokrovitelji_tab_doprinos": "Evidentiraj doprinos",
     "pokrovitelji_nema": "Nema registrovanih pokrovitelja.",
-    "pokrovitelji_pib_vlasnik": "PIB: {pib} · Vlasnik: {vlasnik}",
+    "pokrovitelji_pib_vlasnik": "PIB: {pib} · Vlasnik: <ime>{vlasnik}</ime>",
     "pokrovitelji_nivo": "Nivo {nivo}",
     "pokrovitelji_doprinos_count_sing": "{count} doprinos",
     "pokrovitelji_doprinos_count_pl": "{count} doprinosa",
@@ -2067,7 +2067,7 @@
     "pokr_prijave_status_potpisana": "Potpisana — čeka potvrdu",
     "pokr_prijave_status_potvrdjena": "Potvrđena",
     "pokr_prijave_status_odbijena": "Odbijena",
-    "pokr_prijave_podneo": "podneo {pseudonim}",
+    "pokr_prijave_podneo": "podneo <ime>{pseudonim}</ime>",
     "pokr_prijave_detalji_btn": "Detalji",
     "pokr_prijave_potvrdi_btn": "Potvrdi",
     "pokr_prijave_odbij_btn": "Odbij",

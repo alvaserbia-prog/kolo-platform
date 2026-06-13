@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
@@ -308,7 +309,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               <img src={avatar} alt={user.pseudonim} className="block w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-7xl">
-                {user.pseudonim.charAt(0).toUpperCase()}
+                <Pseudonim>{user.pseudonim.charAt(0).toUpperCase()}</Pseudonim>
               </div>
             )}
           </div>
@@ -338,7 +339,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <dl className="space-y-3 text-sm">
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("pseudonim_label")}</dt>
-              <dd className="font-medium text-kolo-text">{user.pseudonim}</dd>
+              <dd className="font-medium text-kolo-text"><Pseudonim>{user.pseudonim}</Pseudonim></dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("email_label")}</dt>

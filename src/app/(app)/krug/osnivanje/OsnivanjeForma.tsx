@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 
 function generisiIme(location: string) {
@@ -201,7 +202,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
             <div className="flex flex-wrap gap-2 mb-3">
               {osnivaci.map((o) => (
                 <div key={o.pseudonim} className="flex items-center gap-1.5 bg-kolo-green-100 border border-kolo-green-100 rounded-lg px-3 py-1.5">
-                  <span className="text-sm text-kolo-green-900 font-medium">{o.pseudonim}</span>
+                  <span className="text-sm text-kolo-green-900 font-medium"><Pseudonim>{o.pseudonim}</Pseudonim></span>
                   <button type="button" onClick={() => ukloniOsnivaoca(o.pseudonim)}
                     className="text-kolo-green-500 hover:text-kolo-green-700 text-sm leading-none">×</button>
                 </div>
@@ -230,7 +231,7 @@ export default function OsnivanjeForma({ userLocation }: Props) {
                           ? "bg-kolo-green-100 text-kolo-green-700"
                           : "text-kolo-muted hover:bg-kolo-green-100 hover:text-kolo-green-700"
                       }`}>
-                      {s.pseudonim}
+                      <Pseudonim>{s.pseudonim}</Pseudonim>
                     </button>
                   </li>
                 ))}

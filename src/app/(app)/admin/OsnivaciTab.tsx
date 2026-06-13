@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 type Osnivac = {
   id: string;
@@ -172,7 +173,7 @@ export default function OsnivaciTab({
               {osnivaci.map((o) => (
                 <tr key={o.id} className="border-b border-kolo-border last:border-0">
                   <td className="py-2">{o.redniBroj}</td>
-                  <td className="py-2 font-medium text-kolo-text">{o.user.pseudonim}</td>
+                  <td className="py-2 font-medium text-kolo-text"><Pseudonim>{o.user.pseudonim}</Pseudonim></td>
                   <td className="py-2">
                     {o.udeoBrojilac}/{o.udeoImenilac}
                     <span className="text-kolo-muted"> ({Math.round((o.udeoBrojilac / o.udeoImenilac) * 1000) / 10}%)</span>

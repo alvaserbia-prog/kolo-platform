@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
+import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 
 interface Transakcija {
@@ -136,7 +137,7 @@ export default function JavniProfilPage() {
       <div className="flex items-center gap-2 text-sm text-kolo-muted">
         <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">{t("krug_link")}</Link>
         <span>/</span>
-        <span className="text-kolo-text">{profil.pseudonim}</span>
+        <span className="text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></span>
       </div>
 
       {/* Hero kartica */}
@@ -162,7 +163,7 @@ export default function JavniProfilPage() {
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 flex-wrap">
               <div>
-                <h1 className="text-xl font-bold text-kolo-text">{profil.pseudonim}</h1>
+                <h1 className="text-xl font-bold text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></h1>
                 {profil.punoIme && (
                   <p className="text-sm text-kolo-muted mt-0.5">{profil.punoIme}</p>
                 )}
@@ -277,7 +278,7 @@ export default function JavniProfilPage() {
                       <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? trx.type}</span>
                       {trx.description ?? (drugaStrana ? (
                         <Link href={`/profil/${drugaStrana.id}`} className="text-kolo-green-700 hover:underline">
-                          {drugaStrana.pseudonim}
+                          <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>
                         </Link>
                       ) : t("protokol"))}
                     </p>

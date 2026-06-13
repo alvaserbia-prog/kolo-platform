@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 type Prijava = {
   id: string;
@@ -89,7 +90,7 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
             <div className="min-w-0">
               <p className="font-semibold text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· PIB {p.pib}</span></p>
               <p className="text-sm text-kolo-muted mt-0.5">
-                {VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString("sr-RS")} RSD · {t("pokr_prijave_podneo", { pseudonim: p.podnosilacPseudonim })}
+                {VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString("sr-RS")} RSD · {t.rich("pokr_prijave_podneo", { pseudonim: p.podnosilacPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
               </p>
               <p className="text-xs mt-1">
                 <span className={`font-semibold ${p.status === "POTVRDJENA" ? "text-kolo-green-700" : p.status === "ODBIJENA" ? "text-kolo-danger" : "text-kolo-gold-600"}`}>

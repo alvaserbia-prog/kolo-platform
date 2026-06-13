@@ -7,6 +7,7 @@ import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
 import PreporukaOdgovor from "./PreporukaOdgovor";
 import { jeAdmin } from "@/lib/dozvole";
 import { getTranslations } from "next-intl/server";
+import Pseudonim from "@/components/Pseudonim";
 
 export const metadata = { title: "Registar odluka — KOLO" };
 
@@ -56,7 +57,7 @@ export default async function RegistarOdlukaPage() {
                     {usvojen ? t("usvojeno") : t("neusvojeno")}
                   </span>
                 </div>
-                <p className="text-xs text-kolo-muted">{t("registar_predlagac", { pseudonim: o.authorPseudonim })} · {t("registar_zatvoreno", { datum })}</p>
+                <p className="text-xs text-kolo-muted">{t.rich("registar_predlagac", { pseudonim: o.authorPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })} · {t("registar_zatvoreno", { datum })}</p>
                 <p className="text-sm text-kolo-muted whitespace-pre-line">{o.description}</p>
                 <div className="flex gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
                   <span>{t("registar_za_zbir", { zbir: o.zaZbir })}</span>

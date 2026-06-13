@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 type Konverzacija = {
   id: string;
@@ -236,7 +237,7 @@ function PorukeContent() {
                           : "text-kolo-text hover:bg-kolo-green-100/50 hover:text-kolo-green-700"
                       }`}
                     >
-                      {u.pseudonim}
+                      <Pseudonim>{u.pseudonim}</Pseudonim>
                     </button>
                   </li>
                 ))}
@@ -261,7 +262,7 @@ function PorukeContent() {
                 }`}
               >
                 <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-sm font-semibold text-kolo-text truncate">{k.drugiPseudonim}</span>
+                  <span className="text-sm font-semibold text-kolo-text truncate"><Pseudonim>{k.drugiPseudonim}</Pseudonim></span>
                   <div className="flex items-center gap-1.5 shrink-0">
                     {k.neprocitano > 0 && (
                       <span className="w-4 h-4 bg-kolo-green-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
@@ -305,10 +306,10 @@ function PorukeContent() {
               </button>
               {drugiId ? (
                 <Link href={`/profil/${drugiId}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
-                  {drugiPseudonim}
+                  <Pseudonim>{drugiPseudonim}</Pseudonim>
                 </Link>
               ) : (
-                <span className="text-sm font-semibold text-kolo-text">{drugiPseudonim}</span>
+                <span className="text-sm font-semibold text-kolo-text"><Pseudonim>{drugiPseudonim}</Pseudonim></span>
               )}
             </div>
 

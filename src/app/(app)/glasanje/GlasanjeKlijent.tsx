@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Pseudonim from "@/components/Pseudonim";
 
 interface Predlog {
   id: string;
@@ -121,7 +122,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-kolo-text">{p.title}</p>
           <p className="text-xs text-kolo-muted mt-0.5">
-            {p.authorPseudonim} · {new Date(p.createdAt).toLocaleDateString("sr-RS")}
+            <Pseudonim>{p.authorPseudonim}</Pseudonim> · {new Date(p.createdAt).toLocaleDateString("sr-RS")}
           </p>
         </div>
         <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${statusZelen ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>

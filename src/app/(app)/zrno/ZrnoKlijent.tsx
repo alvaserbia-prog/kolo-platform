@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import GlasanjeKlijent from "@/app/(app)/glasanje/GlasanjeKlijent";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
+import Pseudonim from "@/components/Pseudonim";
 
 interface Predlog {
   id: string;
@@ -360,12 +361,12 @@ function DelegacijaTab({ glasackaMoc: moja, delegacija, onRefresh }: Props & { o
           <div className="bg-kolo-gold-100 border border-kolo-gold-400/30 rounded-xl px-4 py-3 text-sm flex justify-between items-center">
             <div>
               {delegacija.aktivna && (
-                <p className="font-medium text-kolo-gold-600">{t("delegat_label")} {delegacija.delegatPseudonim}</p>
+                <p className="font-medium text-kolo-gold-600">{t("delegat_label")} <Pseudonim>{delegacija.delegatPseudonim}</Pseudonim></p>
               )}
               {delegacija.imaZakazano ? (
                 <p className="text-xs text-kolo-gold-600 mt-0.5">
                   {delegacija.zakazaniPseudonim
-                    ? t("zakazana_promena", { pseudonim: delegacija.zakazaniPseudonim })
+                    ? t.rich("zakazana_promena", { pseudonim: delegacija.zakazaniPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })
                     : t("zakazan_opoziv")}
                 </p>
               ) : (

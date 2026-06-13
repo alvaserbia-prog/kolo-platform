@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
+import Pseudonim from "@/components/Pseudonim";
 
 interface Notifikacija {
   id: string;
@@ -190,7 +191,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
       {open && (
         <div className="absolute right-0 top-11 w-auto min-w-max bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-kolo-border">
-            <p className="text-sm font-semibold text-kolo-text truncate text-right">{pseudonim}</p>
+            <p className="text-sm font-semibold text-kolo-text truncate text-right"><Pseudonim>{pseudonim}</Pseudonim></p>
           </div>
           <div className="py-1">
             <button
