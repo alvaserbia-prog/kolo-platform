@@ -7,7 +7,7 @@ import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza";
 type TxFilter = "sve" | "protokol" | "clanovi";
 
 interface Transakcija {
@@ -256,31 +256,31 @@ export default function SistemKlijent({
           podnaslov={t("kartica_promet_opis")}
         />
 
-        {/* Faza sistema — ispod Opticaja */}
+        {/* Faza sistema — ispod Opticaja (sopstveni tab) */}
         <button
-          onClick={() => setSekcija("pregled")}
+          onClick={() => setSekcija("faza")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
-            sekcija === "pregled"
+            sekcija === "faza"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
           }`}
         >
-          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+          <p className={`text-base font-semibold mb-1 ${sekcija === "faza" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
               termin={t("faza_sistema")}
               objasnjenje={t("faza_sistema_opis")}
             />
           </p>
-          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "faza" ? "text-white" : "text-kolo-text"}`}>
             {faza2 ? t("faza_2") : t("faza_1")}
           </p>
-          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "faza" ? "bg-white/20" : "bg-kolo-bg"}`}>
             <div
-              className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+              className={`h-1.5 rounded-full transition-all ${sekcija === "faza" ? "bg-white/70" : "bg-kolo-green-500"}`}
               style={{ width: `${fazaPct}%` }}
             />
           </div>
-          <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+          <p className={`text-xs mt-1 ${sekcija === "faza" ? "text-white/60" : "text-kolo-muted"}`}>
             {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
           </p>
         </button>
@@ -330,6 +330,84 @@ export default function SistemKlijent({
           transakcije={transakcije}
         />
       )}
+      {sekcija === "faza" && <FazaSekcija />}
+    </div>
+  );
+}
+
+// ── Faza (preslikano sa /o-nama) ──────────────────────────────────────────────
+
+function FazaSekcija() {
+  const t = useTranslations("oNama");
+
+  const faze = [
+    { r1: t("faza1"), r2: t("faza1b"), aktivan: true },
+    { r1: t("faza2"), r2: t("faza2b"), aktivan: false },
+    { r1: t("faza3"), r2: t("faza3b"), aktivan: false },
+    { r1: t("faza4"), r2: t("faza4b"), aktivan: false },
+    { r1: t("faza5"), r2: t("faza5b"), aktivan: false },
+    { r1: t("faza6"), r2: t("faza6b"), aktivan: false },
+    { r1: t("faza7"), r2: t("faza7b"), aktivan: false },
+  ];
+
+  return (
+    <div className="space-y-5">
+      <div className="bg-white rounded-2xl border border-kolo-border p-5 md:p-6">
+        <span className="text-xs text-kolo-muted font-medium tracking-wide">{t("status_datum")}</span>
+        <h2 className="text-xl md:text-2xl font-bold text-kolo-green-900 mt-1 mb-3" style={{ letterSpacing: "-0.02em" }}>
+          {t("status_naslov")}
+        </h2>
+        <p className="text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
+          {t("status_opis")}
+        </p>
+
+        {/* Timeline */}
+        <div className="relative mt-8">
+          {/* Mobilni — vertikalni redosled */}
+          <div className="md:hidden relative">
+            <div
+              className="absolute w-0.5 bg-kolo-border"
+              style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
+            />
+            <div className="flex flex-col gap-3">
+              {faze.map((faza) => (
+                <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                  <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                    {faza.r1} {faza.r2}
+                    {faza.aktivan && (
+                      <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
+                    )}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop — horizontalni redosled */}
+          <div className="hidden md:block relative pt-5">
+            <div
+              className="absolute h-0.5 bg-kolo-border"
+              style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
+            />
+            <div className="relative grid grid-cols-7">
+              {faze.map((faza) => (
+                <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
+                  {faza.aktivan && (
+                    <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
+                      {t("faza_tu_smo_desktop")}
+                    </span>
+                  )}
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                  <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                    {faza.r1}<br />{faza.r2}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

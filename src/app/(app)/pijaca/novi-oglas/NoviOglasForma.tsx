@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import { JEDINICE_VREDNOSTI } from "@/lib/jedinice";
 
 // DB enum values — never change these (they are stored in the database)
 const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
@@ -29,6 +30,8 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [jedinica, setJedinica] = useState("");
+  const [kolicina, setKolicina] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState(defaultLocation);
   const [phone, setPhone] = useState("");
@@ -67,6 +70,8 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
       fd.append("title", title.trim());
       fd.append("description", description.trim());
       fd.append("price", String(priceNum));
+      fd.append("jedinica", jedinica);
+      fd.append("kolicina", kolicina.trim());
       fd.append("category", category);
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
@@ -132,6 +137,39 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
             placeholder="500"
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors"
           />
+        </div>
+
+        {/* Jedinica mere + stanje (opciono) */}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-sm font-semibold text-kolo-muted mb-2">
+              {t("jedinica_label")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
+            </label>
+            <select
+              value={jedinica}
+              onChange={(e) => setJedinica(e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors bg-white"
+            >
+              <option value="">{t("jedinica_bez")}</option>
+              {JEDINICE_VREDNOSTI.map((j) => (
+                <option key={j} value={j}>{t(`jed_${j}`)} ({j})</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-kolo-muted mb-2">
+              {t("stanje_label")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
+            </label>
+            <input
+              type="number"
+              min={1}
+              step={1}
+              value={kolicina}
+              onChange={(e) => setKolicina(e.target.value)}
+              placeholder={t("stanje_placeholder")}
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors"
+            />
+          </div>
         </div>
 
         {/* Kategorija */}

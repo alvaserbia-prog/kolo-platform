@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
+import { jeIspravnaJedinica } from "@/lib/jedinice";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -69,6 +70,8 @@ export async function PATCH(
     const priceRaw = fd.get("price") as string;
     const location = (fd.get("location") as string)?.trim() ?? "";
     const phone = (fd.get("phone") as string)?.trim() ?? "";
+    const jedinicaRaw = (fd.get("jedinica") as string)?.trim() ?? "";
+    const kolicinaRaw = (fd.get("kolicina") as string)?.trim() ?? "";
     const keepRaw = (fd.get("keepImages") as string) ?? "[]";
 
     if (!title || title.length < 3)
@@ -76,6 +79,12 @@ export async function PATCH(
     const price = Math.floor(Number(priceRaw));
     if (isNaN(price) || price <= 0)
       return NextResponse.json({ error: "Cena mora biti pozitivan broj." }, { status: 400 });
+
+    const jedinica = jedinicaRaw && jeIspravnaJedinica(jedinicaRaw) ? jedinicaRaw : null;
+    const kolicina =
+      kolicinaRaw && !isNaN(Number(kolicinaRaw)) && Number(kolicinaRaw) > 0
+        ? Math.floor(Number(kolicinaRaw))
+        : null;
 
     // keepImages — niz indeksa postojećih slika koje treba zadržati
     const keepIndices: number[] = JSON.parse(keepRaw);
@@ -117,6 +126,8 @@ export async function PATCH(
         title,
         description,
         price,
+        jedinica,
+        kolicina,
         location: location || null,
         phone: phone || null,
         images: [...zadrzaneSlike, ...noveSlike],
