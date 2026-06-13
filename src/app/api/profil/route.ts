@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
+import { del } from "@vercel/blob";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -317,6 +318,12 @@ export async function DELETE(req: NextRequest) {
       data: { punoIme: null, opis: null },
     });
   });
+
+  // Obriši avatar sa Vercel Blob-a (ako je tamo) — sprečava orphan fajlove.
+  // Legacy base64 avatari nemaju URL, pa se preskaču. Ne sme da obori brisanje.
+  if (user.avatar?.startsWith("http")) {
+    await del(user.avatar).catch(() => {});
+  }
 
   return NextResponse.json({ ok: true });
 }

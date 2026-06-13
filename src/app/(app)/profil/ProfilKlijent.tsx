@@ -202,8 +202,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const data = await res.json();
     setAvatarLoading(false);
     if (!res.ok) { setAvatarError(data.error ?? tc("greska_ucitavanja")); return; }
-    setAvatar(base64);
-    window.dispatchEvent(new CustomEvent("avatar-updated", { detail: base64 }));
+    // Server vraća URL avatara na Vercel Blob-u (ne više base64).
+    const noviAvatar = data.avatar ?? base64;
+    setAvatar(noviAvatar);
+    window.dispatchEvent(new CustomEvent("avatar-updated", { detail: noviAvatar }));
   }
 
   async function promeniPseudonim(e: React.FormEvent) {
