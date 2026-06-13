@@ -1907,6 +1907,7 @@
     "emisija_donacija_naslov": "Record donation",
     "emisija_pseudonim_label": "Donor pseudonym",
     "emisija_pseudonim_placeholder": "e.g. MilanPetrovic",
+    "emisija_nema_clanova": "No members match your search",
     "emisija_iznos_label": "Donation amount (RSD)",
     "emisija_pseudonim_obavezan": "Pseudonym is required.",
     "emisija_iznos_nevalidan": "Enter a positive amount.",

@@ -1907,6 +1907,7 @@
     "emisija_donacija_naslov": "Evidentiraj donaciju",
     "emisija_pseudonim_label": "Pseudonim donatora",
     "emisija_pseudonim_placeholder": "npr. MilanPetrovic",
+    "emisija_nema_clanova": "Nema članova za uneti pojam",
     "emisija_iznos_label": "Iznos donacije (RSD)",
     "emisija_pseudonim_obavezan": "Pseudonim je obavezan.",
     "emisija_iznos_nevalidan": "Unesite pozitivan iznos.",

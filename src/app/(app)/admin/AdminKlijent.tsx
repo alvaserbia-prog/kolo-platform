@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import OsnivaciTab from "./OsnivaciTab";
@@ -270,7 +270,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {tab === "dashboard" && <DashboardTab data={dashboard} onRefresh={() => router.refresh()} />}
 
       {/* Programi */}
-      {tab === "programi" && <AdminProgramiTab data={adminProgrami} onDone={() => router.refresh()} />}
+      {tab === "programi" && <AdminProgramiTab data={adminProgrami} opticaj={opticaj} onDone={() => router.refresh()} />}
 
       {/* Evidencija doprinosa */}
       {tab === "ped" && <AdminPedTab data={adminPed} onDone={() => router.refresh()} />}
@@ -295,7 +295,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} viewerJeSuperadmin={viewerJeSuperadmin} viewerId={viewerId} />}
 
       {/* Finansije */}
-      {tab === "emisija" && <EmisijaTab opticaj={opticaj} onSuccess={() => router.refresh()} />}
+      {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}
 
       {/* Nadzor integriteta (samo superadmin) */}
       {tab === "nadzor" && viewerJeSuperadmin && <NadzorTab nalazi={nadzorNalazi} />}
@@ -738,12 +738,13 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
 
 // ── Programi tab ──────────────────────────────────────────────────────────────
 
-function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: () => void }) {
+function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; opticaj: number; onDone: () => void }) {
   const t = useTranslations("admin");
   const [loadingToggle, setLoadingToggle] = useState<string | null>(null);
   const [loadingNocna, setLoadingNocna] = useState(false);
   const [nocnaRezultat, setNocnaRezultat] = useState<string | null>(null);
   const [loadingZrno, setLoadingZrno] = useState(false);
+  const dnevniLimit = Math.floor(opticaj * 0.1);
 
   async function toggleZrnoTrziste() {
     setLoadingZrno(true);
@@ -806,6 +807,20 @@ function AdminProgramiTab({ data, onDone }: { data: AdminProgramiData; onDone: (
 
   return (
     <div className="space-y-6">
+      {/* Opticaj + dnevni limit programa */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">{t("emisija_opticaj_label")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_opticaj_sub")}</p>
+        </div>
+        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+          <p className="text-xs text-kolo-muted mb-1">{t("emisija_dnevni_limit")}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_dnevni_limit_sub")}</p>
+        </div>
+      </div>
+
       {/* ZRNO tržište */}
       <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex justify-between items-center">
         <div>
@@ -934,13 +949,82 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
 
 // ── Emisija tab ────────────────────────────────────────────────────────────────
 
-function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => void }) {
+function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
   const t = useTranslations("admin");
   const [pseudonim, setPseudonim] = useState("");
   const [amountRSD, setAmountRSD] = useState("");
   const [loading, setLoading] = useState(false);
   const [rezultat, setRezultat] = useState<{ poenEmitted: number; noviNivo: number; noviKumulativ: number } | null>(null);
   const [error, setError] = useState("");
+
+  // Autocomplete članova (potencijalni donatori)
+  const [predlozi, setPredlozi] = useState<{ id: string; pseudonim: string; verified: boolean; location: string | null }[]>([]);
+  const [showPredlozi, setShowPredlozi] = useState(false);
+  const [aktivniIndex, setAktivniIndex] = useState(-1);
+  const [pretragaLoading, setPretragaLoading] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const listaRef = useRef<HTMLUListElement>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) setShowPredlozi(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const traziClanove = useCallback((q: string) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (q.trim().length < 2) { setPredlozi([]); setShowPredlozi(false); return; }
+    debounceRef.current = setTimeout(async () => {
+      setPretragaLoading(true);
+      try {
+        const res = await fetch(`/api/korisnici/pretraga?q=${encodeURIComponent(q.trim())}`);
+        const data = await res.json();
+        setPredlozi(Array.isArray(data) ? data : []);
+        setShowPredlozi(true);
+        setAktivniIndex(-1);
+      } finally {
+        setPretragaLoading(false);
+      }
+    }, 250);
+  }, []);
+
+  function handlePseudonimInput(val: string) {
+    setPseudonim(val);
+    traziClanove(val);
+  }
+
+  function odaberiClana(k: { pseudonim: string }) {
+    setPseudonim(k.pseudonim);
+    setShowPredlozi(false);
+    setPredlozi([]);
+    setAktivniIndex(-1);
+  }
+
+  function handlePseudonimKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!showPredlozi || predlozi.length === 0) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const novi = Math.min(aktivniIndex + 1, predlozi.length - 1);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const novi = Math.max(aktivniIndex - 1, 0);
+      setAktivniIndex(novi);
+      listaRef.current?.children[novi]?.scrollIntoView({ block: "nearest" });
+    } else if (e.key === "Enter") {
+      if (aktivniIndex >= 0 && aktivniIndex < predlozi.length) {
+        e.preventDefault();
+        odaberiClana(predlozi[aktivniIndex]);
+      }
+    } else if (e.key === "Escape") {
+      setShowPredlozi(false);
+      setAktivniIndex(-1);
+    }
+  }
 
   async function handleDonacija(e: { preventDefault: () => void }) {
     e.preventDefault();
@@ -965,71 +1049,54 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
     onSuccess();
   }
 
-  const dnevniLimit = Math.floor(opticaj * 0.1);
-
   return (
     <div className="space-y-5">
-      {/* Opticaj */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("emisija_opticaj_label")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_opticaj_sub")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("emisija_dnevni_limit")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_dnevni_limit_sub")}</p>
-        </div>
-      </div>
-
-      {/* Pragovi donacija */}
-      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-        <div className="px-4 py-3 border-b border-kolo-border">
-          <h3 className="text-sm font-semibold text-kolo-muted">{t("emisija_pragovi_naslov")}</h3>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_pragovi_sub")}</p>
-        </div>
-        <table className="w-full text-xs">
-          <thead>
-            <tr className="bg-kolo-bg">
-              <th className="px-4 py-2 text-center text-kolo-muted font-medium">{t("emisija_tbl_nivo")}</th>
-              <th className="px-4 py-2 text-left text-kolo-muted font-medium">{t("emisija_tbl_kumulativ")}</th>
-              <th className="px-4 py-2 text-right text-kolo-muted font-medium">{t("emisija_tbl_bonus")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              [1, "10.000",     "20.000"],
-              [2, "20.000",     "30.000"],
-              [3, "50.000",     "80.000"],
-              [4, "100.000",   "150.000"],
-              [5, "200.000",   "300.000"],
-              [6, "500.000",   "800.000"],
-              [7, "1.000.000", "1.500.000"],
-            ].map(([nivo, prag, bonus]) => (
-              <tr key={nivo} className="border-t border-kolo-border">
-                <td className="px-4 py-2 text-center font-medium text-kolo-text">{nivo}</td>
-                <td className="px-4 py-2 text-kolo-muted">{prag} RSD</td>
-                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{bonus}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Forma za donaciju */}
+      {/* Forma za donaciju (na vrhu) */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5">
         <h3 className="text-sm font-semibold text-kolo-muted mb-4">{t("emisija_donacija_naslov")}</h3>
         <form onSubmit={handleDonacija} noValidate className="space-y-3">
-          <div>
+          <div ref={wrapperRef} className="relative">
             <label className="block text-sm font-medium text-kolo-muted mb-1">{t("emisija_pseudonim_label")}</label>
-            <input
-              type="text"
-              value={pseudonim}
-              onChange={(e) => setPseudonim(e.target.value)}
-              placeholder={t("emisija_pseudonim_placeholder")}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                value={pseudonim}
+                onChange={(e) => handlePseudonimInput(e.target.value)}
+                onKeyDown={handlePseudonimKeyDown}
+                onFocus={() => { if (predlozi.length > 0) setShowPredlozi(true); }}
+                placeholder={t("emisija_pseudonim_placeholder")}
+                autoComplete="off"
+                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+              />
+              {pretragaLoading && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 border-2 border-kolo-green-600 border-t-transparent rounded-full animate-spin" />
+              )}
+            </div>
+            {showPredlozi && predlozi.length > 0 && (
+              <ul ref={listaRef} className="absolute z-30 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-y-auto max-h-56">
+                {predlozi.map((k, i) => (
+                  <li key={k.id}>
+                    <button
+                      type="button"
+                      onMouseDown={() => odaberiClana(k)}
+                      onMouseEnter={() => setAktivniIndex(i)}
+                      className={`w-full text-left px-4 py-2.5 flex items-center justify-between gap-3 transition-colors ${i === aktivniIndex ? "bg-kolo-green-100 text-kolo-green-800" : "hover:bg-kolo-green-50 hover:text-kolo-green-700"}`}
+                    >
+                      <div className="min-w-0">
+                        <span className="text-sm font-medium text-kolo-text truncate block"><Pseudonim>{k.pseudonim}</Pseudonim></span>
+                        {k.location && <span className="text-xs text-kolo-muted">{k.location}</span>}
+                      </div>
+                      {k.verified && <span className="shrink-0 text-xs font-semibold text-kolo-green-700 bg-kolo-green-100 px-2 py-0.5 rounded-full">✓</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {showPredlozi && pseudonim.trim().length >= 2 && predlozi.length === 0 && !pretragaLoading && (
+              <div className="absolute z-30 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg px-4 py-3 text-sm text-kolo-muted">
+                {t("emisija_nema_clanova")}
+              </div>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-kolo-muted mb-1">{t("emisija_iznos_label")}</label>
@@ -1063,6 +1130,40 @@ function EmisijaTab({ opticaj, onSuccess }: { opticaj: number; onSuccess: () => 
             {loading ? t("emisija_evidentiram") : t("emisija_btn")}
           </button>
         </form>
+      </div>
+
+      {/* Pragovi donacija — nivoi (ispod) */}
+      <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+        <div className="px-4 py-3 border-b border-kolo-border">
+          <h3 className="text-sm font-semibold text-kolo-muted">{t("emisija_pragovi_naslov")}</h3>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_pragovi_sub")}</p>
+        </div>
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="bg-kolo-bg">
+              <th className="px-4 py-2 text-center text-kolo-muted font-medium">{t("emisija_tbl_nivo")}</th>
+              <th className="px-4 py-2 text-left text-kolo-muted font-medium">{t("emisija_tbl_kumulativ")}</th>
+              <th className="px-4 py-2 text-right text-kolo-muted font-medium">{t("emisija_tbl_bonus")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              [1, "10.000",     "20.000"],
+              [2, "20.000",     "30.000"],
+              [3, "50.000",     "80.000"],
+              [4, "100.000",   "150.000"],
+              [5, "200.000",   "300.000"],
+              [6, "500.000",   "800.000"],
+              [7, "1.000.000", "1.500.000"],
+            ].map(([nivo, prag, bonus]) => (
+              <tr key={nivo} className="border-t border-kolo-border">
+                <td className="px-4 py-2 text-center font-medium text-kolo-text">{nivo}</td>
+                <td className="px-4 py-2 text-kolo-muted">{prag} RSD</td>
+                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{bonus}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
