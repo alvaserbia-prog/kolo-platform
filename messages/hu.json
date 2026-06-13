@@ -1714,6 +1714,8 @@
     "forma_naslov": "Post your request",
     "label_predstavljanje": "Introduction",
     "placeholder_predstavljanje": "Where you are from and why you want to join.",
+    "counter_min": "legalább {min} karakter",
+    "uslovi_objave": "A közzétételhez szükséges: bemutatkozás (legalább 10 karakter), elérhetőség és hozzájárulás.",
     "label_kontakt": "Contact details",
     "placeholder_kontakt": "E.g. phone, email or another channel of your choice.",
     "napomena_predstavljanje_bold": "Introduction",

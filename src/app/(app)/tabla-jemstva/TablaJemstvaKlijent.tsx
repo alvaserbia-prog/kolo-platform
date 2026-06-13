@@ -132,7 +132,9 @@ export default function TablaJemstvaKlijent({
               placeholder={t("placeholder_predstavljanje")}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 resize-none transition-colors"
             />
-            <p className="mt-1 text-xs text-kolo-muted">{tekst.length}/1000</p>
+            <p className={`mt-1 text-xs ${tekst.trim().length > 0 && tekst.trim().length < 10 ? "text-kolo-danger" : "text-kolo-muted"}`}>
+              {tekst.length}/1000 · {t("counter_min", { min: 10 })}
+            </p>
           </div>
           <div>
             <label className="block text-sm font-medium text-kolo-muted mb-1">{t("label_kontakt")}</label>
@@ -162,13 +164,18 @@ export default function TablaJemstvaKlijent({
             <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
           )}
 
-          <button
-            onClick={objavi}
-            disabled={radnja === "objava" || tekst.trim().length < 10 || kontakt.trim().length < 3 || !pristanak}
-            className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
-          >
-            {radnja === "objava" ? t("dugme_objavljujem") : t("dugme_objavi")}
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={objavi}
+              disabled={radnja === "objava" || tekst.trim().length < 10 || kontakt.trim().length < 3 || !pristanak}
+              className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
+            >
+              {radnja === "objava" ? t("dugme_objavljujem") : t("dugme_objavi")}
+            </button>
+            {radnja !== "objava" && (tekst.trim().length < 10 || kontakt.trim().length < 3 || !pristanak) && (
+              <p className="text-xs text-kolo-muted">{t("uslovi_objave")}</p>
+            )}
+          </div>
         </div>
       )}
 

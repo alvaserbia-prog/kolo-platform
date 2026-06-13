@@ -1714,6 +1714,8 @@
     "forma_naslov": "Objavi svoj zahtev",
     "label_predstavljanje": "Predstavljanje",
     "placeholder_predstavljanje": "Odakle ste i zašto želite da se priključite.",
+    "counter_min": "najmanje {min} karaktera",
+    "uslovi_objave": "Za objavu su potrebni: predstavljanje (najmanje 10 karaktera), kontakt podaci i saglasnost.",
     "label_kontakt": "Kontakt podaci",
     "placeholder_kontakt": "Npr. telefon, email ili drugi kanal po vašem izboru.",
     "napomena_predstavljanje_bold": "Predstavljanje",

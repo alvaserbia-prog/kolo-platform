@@ -1714,6 +1714,8 @@
     "forma_naslov": "Post your request",
     "label_predstavljanje": "Introduction",
     "placeholder_predstavljanje": "Where you are from and why you want to join.",
+    "counter_min": "at least {min} characters",
+    "uslovi_objave": "To publish you need: an introduction (at least 10 characters), contact details, and consent.",
     "label_kontakt": "Contact details",
     "placeholder_kontakt": "E.g. phone, email or another channel of your choice.",
     "napomena_predstavljanje_bold": "Introduction",
