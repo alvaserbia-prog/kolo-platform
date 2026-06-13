@@ -54,9 +54,16 @@ export async function sacuvajNaR2(
   telo: Buffer | Uint8Array,
   contentType: string
 ): Promise<string> {
+  // Buffer/Uint8Array → svež ArrayBuffer. ArrayBuffer je deo `BodyInit`, pa
+  // izbegavamo TS 5.7+ neslaganje (Uint8Array<ArrayBufferLike> nije BodyInit).
+  // aws4fetch hešira telo i šalje ga isto kao i typed array.
+  const ab = telo.buffer.slice(
+    telo.byteOffset,
+    telo.byteOffset + telo.byteLength
+  ) as ArrayBuffer;
   const res = await client().fetch(endpoint(kljuc), {
     method: "PUT",
-    body: telo,
+    body: ab,
     headers: { "Content-Type": contentType },
   });
   if (!res.ok) {
