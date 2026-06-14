@@ -223,14 +223,18 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
   const t = useTranslations("admin");
   const [tab, setTab] = useState<Tab>("dashboard");
 
-  // Skrolovanje trake sa tabovima (header) udesno preko strelice na desnom kraju
+  // Skrolovanje trake sa tabovima (header) levo/desno preko strelica na krajevima
   const tabsRef = useRef<HTMLDivElement>(null);
+  const [mozeLevo, setMozeLevo] = useState(false);
   const [mozeDesno, setMozeDesno] = useState(false);
 
   useEffect(() => {
     const el = tabsRef.current;
     if (!el) return;
-    const proveri = () => setMozeDesno(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    const proveri = () => {
+      setMozeLevo(el.scrollLeft > 1);
+      setMozeDesno(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    };
     proveri();
     el.addEventListener("scroll", proveri, { passive: true });
     window.addEventListener("resize", proveri);
@@ -286,6 +290,18 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             </button>
           ))}
         </div>
+        {mozeLevo && (
+          <button
+            type="button"
+            aria-label={t("tabovi_skroluj_levo")}
+            onClick={() => tabsRef.current?.scrollBy({ left: -240, behavior: "smooth" })}
+            className="absolute left-0 top-0 bottom-px flex items-center pr-8 pl-1 bg-gradient-to-r from-white via-white/95 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+          >
+            <span className="flex items-center justify-center w-6 h-6 rounded-full border border-kolo-border bg-white shadow-sm text-base leading-none">
+              ‹
+            </span>
+          </button>
+        )}
         {mozeDesno && (
           <button
             type="button"
