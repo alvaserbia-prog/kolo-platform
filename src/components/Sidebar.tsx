@@ -168,7 +168,6 @@ function SidebarContent({
   brojZaNadzor,
   onLinkClick,
   dnevniBrojevi,
-  prikaziJezik = true,
 }: {
   verified: boolean;
   isAdmin: boolean;
@@ -176,7 +175,6 @@ function SidebarContent({
   brojZaNadzor?: number;
   onLinkClick?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
-  prikaziJezik?: boolean;
 }) {
   const pathname = usePathname();
   const t = useTranslations("nav");
@@ -240,13 +238,8 @@ function SidebarContent({
 
   return (
     <>
-      {/* Brending je u headeru (gore-levo); ovde, na vrhu sidebara, samo jezik switcher (desktop) */}
-      {prikaziJezik && (
-        <div className="flex items-center justify-center px-4 pt-4 pb-1">
-          <JezikSvitcer />
-        </div>
-      )}
-      <nav className="flex-1 px-2.5 py-3 space-y-1 overflow-y-auto">
+      {/* Brending i jezik switcher su u headeru (gore-levo); sidebar je samo navigacija */}
+      <nav className="flex-1 px-2.5 pt-4 pb-3 space-y-1 overflow-y-auto">
         {grupe.map((grupa, gi) => (
           <div key={grupa.label ?? `grupa-${gi}`} className={gi > 0 ? "pt-2" : ""}>
             {grupa.collapsible ? (
@@ -332,7 +325,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
           </div>
           <JezikSvitcer />
         </div>
-        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} prikaziJezik={false} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>
     </>
   );

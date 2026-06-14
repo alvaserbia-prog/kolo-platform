@@ -5,6 +5,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 
@@ -28,12 +29,15 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 
         {/* Leva strana: logo (desktop) / hamburger + logo (mobilno) */}
         <div className="flex items-center shrink-0">
-          {/* Desktop: logo + naziv, klikabilno na početnu (iznad sidebara) */}
-          <Link href="/pocetna" className="hidden md:flex items-center w-52 px-4 gap-2.5 group">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/kolo-icon.png" alt="KOLO" width={32} height={32} className="rounded-lg shrink-0" />
-            <span className="font-bold text-white text-xl tracking-[0.2em] group-hover:opacity-90 transition-opacity">KOLO</span>
-          </Link>
+          {/* Desktop: logo + naziv (klikabilno na početnu) + jezik switcher desno od naziva */}
+          <div className="hidden md:flex items-center px-4 gap-3 shrink-0">
+            <Link href="/pocetna" className="flex items-center gap-2.5 group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kolo-icon.png" alt="KOLO" width={32} height={32} className="rounded-lg shrink-0" />
+              <span className="font-bold text-white text-xl tracking-[0.2em] group-hover:opacity-90 transition-opacity">KOLO</span>
+            </Link>
+            <JezikSvitcer />
+          </div>
           {/* Mobilno: hamburger + logo */}
           <div className="flex md:hidden items-center gap-1.5 pl-2 pr-1">
             <button
