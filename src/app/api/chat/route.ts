@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   }
   if (!session.user.verified) {
     return NextResponse.json(
-      { error: "Pisanje u chat sobu je dostupno samo verifikovanim članovima." },
+      { error: "Pisanje u pričaonicu je dostupno samo verifikovanim članovima." },
       { status: 403 }
     );
   }
