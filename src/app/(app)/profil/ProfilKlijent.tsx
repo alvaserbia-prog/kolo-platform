@@ -306,6 +306,36 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     await signOut({ callbackUrl: "/" });
   }
 
+  // Inline prekidač vidljivosti uz pojedinačno polje (oko Vidljivo/Skriveno).
+  const renderVidljivost = (field: keyof typeof togglei) => (
+    <button
+      type="button"
+      onClick={() => promeniToggle(field, !togglei[field])}
+      disabled={toggleLoading === field}
+      aria-label={togglei[field] ? t("vidljivo") : t("skriveno")}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors disabled:opacity-60 ${
+        togglei[field]
+          ? "bg-kolo-green-100 text-kolo-green-700"
+          : "bg-kolo-bg text-kolo-muted border border-kolo-border"
+      }`}
+    >
+      {togglei[field] ? (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      ) : (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+          <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+          <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+          <line x1="2" x2="22" y1="2" y2="22" />
+        </svg>
+      )}
+      {togglei[field] ? t("vidljivo") : t("skriveno")}
+    </button>
+  );
+
   return (
     <div className="space-y-6">
       <h1 className="kolo-naslov">{t("naslov")}</h1>
@@ -406,7 +436,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("ime_prezime_sekcija")}</h2>
           <form onSubmit={sacuvajPodatke} className="space-y-3">
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("puno_ime")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-sm text-kolo-muted">{t("puno_ime")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+                {renderVidljivost("prikaziPunoIme")}
+              </div>
               <input
                 type="text"
                 value={punoIme}
@@ -417,7 +450,10 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               />
             </div>
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("opis_zanimanje")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-sm text-kolo-muted">{t("opis_zanimanje")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+                {renderVidljivost("prikaziOpis")}
+              </div>
               <input
                 type="text"
                 value={opis}
@@ -443,11 +479,17 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("lokacija_kontakt")}</h2>
           <form onSubmit={sacuvajLokaciju} className="space-y-3">
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("mesto")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-sm text-kolo-muted">{t("mesto")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+                {renderVidljivost("prikaziLokaciju")}
+              </div>
               <LokacijaSearch value={location} onChange={setLocation} />
             </div>
             <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-sm text-kolo-muted">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+                {renderVidljivost("prikaziTelefon")}
+              </div>
               <input
                 type="tel"
                 value={telefon}
@@ -598,20 +640,17 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </Link>
 
-      {/* Vidljivost profila */}
+      {/* Vidljivost profila — preostale stavke bez polja za unos
+          (vidljivost imena, opisa, lokacije i telefona je uz sama polja gore). */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
         <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("vidljivost_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-5">{t("vidljivost_opis")}</p>
         <div className="space-y-0 divide-y divide-kolo-border">
           {([
-            { field: "prikaziLokaciju", label: t("toggle_lokacija") },
             { field: "prikaziBilans", label: t("toggle_bilans") },
             { field: "prikaziZrno", label: t("toggle_zrno") },
             { field: "prikaziRangDonacija", label: t("toggle_rang_donacija") },
             { field: "prikaziOglase", label: t("toggle_oglasi") },
-            { field: "prikaziOpis", label: t("toggle_opis") },
-            { field: "prikaziPunoIme", label: t("toggle_pravo_ime") },
-            { field: "prikaziTelefon", label: t("toggle_telefon") },
           ] as { field: keyof typeof togglei; label: string }[]).map(({ field, label }) => (
             <div key={field} className="flex items-center justify-between py-3">
               <span className="text-sm text-kolo-text">{label}</span>
@@ -634,24 +673,9 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </div>
 
-      {/* Podaci i privatnost */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Eksport podataka */}
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("eksport_naslov")}</h2>
-          <p className="text-xs text-kolo-muted mb-4">
-            {t("eksport_opis")}
-          </p>
-          <a
-            href="/api/profil/eksport"
-            download
-            className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
-          >
-            {t("eksport_dugme")}
-          </a>
-        </div>
-
-        {/* Prigovor na odluku */}
+      {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* Prigovor na odluku — levo */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
           <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("prigovor_naslov")}</h2>
           <p className="text-xs text-kolo-muted mb-4">
@@ -686,14 +710,30 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             </button>
           </form>
         </div>
-      </div>
 
-      {/* Brisanje naloga */}
-      <div className="bg-white rounded-2xl border border-red-200 p-6">
-        <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("brisi_naslov")}</h2>
-        <p className="text-xs text-kolo-muted mb-4">
-          {t("brisi_opis")}
-        </p>
+        {/* Desno: prenosivost podataka (gore) + gašenje profila (dole) */}
+        <div className="space-y-6">
+          {/* Pravo na prenosivost podataka */}
+          <div className="bg-white rounded-2xl border border-kolo-border p-6">
+            <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("eksport_naslov")}</h2>
+            <p className="text-xs text-kolo-muted mb-4">
+              {t("eksport_opis")}
+            </p>
+            <a
+              href="/api/profil/eksport"
+              download
+              className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
+            >
+              {t("eksport_dugme")}
+            </a>
+          </div>
+
+          {/* Gašenje profila (brisanje naloga) */}
+          <div className="bg-white rounded-2xl border border-red-200 p-6">
+            <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("brisi_naslov")}</h2>
+            <p className="text-xs text-kolo-muted mb-4">
+              {t("brisi_opis")}
+            </p>
         {!brisiModalOpen ? (
           <button
             onClick={() => setBrisiModalOpen(true)}
@@ -734,6 +774,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             </div>
           </div>
         )}
+          </div>
+        </div>
       </div>
     </div>
   );
