@@ -223,6 +223,23 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
   const t = useTranslations("admin");
   const [tab, setTab] = useState<Tab>("dashboard");
 
+  // Skrolovanje trake sa tabovima (header) udesno preko strelice na desnom kraju
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [mozeDesno, setMozeDesno] = useState(false);
+
+  useEffect(() => {
+    const el = tabsRef.current;
+    if (!el) return;
+    const proveri = () => setMozeDesno(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    proveri();
+    el.addEventListener("scroll", proveri, { passive: true });
+    window.addEventListener("resize", proveri);
+    return () => {
+      el.removeEventListener("scroll", proveri);
+      window.removeEventListener("resize", proveri);
+    };
+  }, []);
+
   const ukupnoPendingProgrami = adminProgrami.pendingEnrollments.length;
   const ukupnoPendingZaposl = adminPed.pendingPrijave.length + adminPed.pendingEvidencije.length;
   const ukupnoPendingDonacije = pendingDonacije.length;
@@ -250,20 +267,37 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       <h1 className="text-2xl font-semibold text-kolo-text">{t("panel_naslov")}</h1>
 
       {/* Tabs */}
-      <div className="flex gap-0 border-b border-kolo-border">
-        {tabs.map(([key, label]) => (
+      <div className="relative">
+        <div
+          ref={tabsRef}
+          className="flex gap-0 border-b border-kolo-border overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {tabs.map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setTab(key)}
+              className={`shrink-0 whitespace-nowrap px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+                tab === key
+                  ? "border-kolo-green-700 text-kolo-green-700"
+                  : "border-transparent text-kolo-muted hover:text-kolo-muted"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        {mozeDesno && (
           <button
-            key={key}
-            onClick={() => setTab(key)}
-            className={`px-5 py-2.5 text-sm font-medium border-b-2 transition-colors ${
-              tab === key
-                ? "border-kolo-green-700 text-kolo-green-700"
-                : "border-transparent text-kolo-muted hover:text-kolo-muted"
-            }`}
+            type="button"
+            aria-label={t("tabovi_skroluj_desno")}
+            onClick={() => tabsRef.current?.scrollBy({ left: 240, behavior: "smooth" })}
+            className="absolute right-0 top-0 bottom-px flex items-center pl-8 pr-1 bg-gradient-to-l from-white via-white/95 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
-            {label}
+            <span className="flex items-center justify-center w-6 h-6 rounded-full border border-kolo-border bg-white shadow-sm text-base leading-none">
+              ›
+            </span>
           </button>
-        ))}
+        )}
       </div>
 
       {/* Dashboard */}
