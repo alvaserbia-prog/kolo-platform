@@ -295,9 +295,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_levo")}
             onClick={() => tabsRef.current?.scrollBy({ left: -240, behavior: "smooth" })}
-            className="absolute left-0 top-0 bottom-px flex items-center pr-8 pl-1 bg-gradient-to-r from-white via-white/95 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute left-0 top-0 bottom-px flex items-center pr-3 bg-gradient-to-r from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
-            <span className="flex items-center justify-center w-6 h-6 rounded-full border border-kolo-border bg-white shadow-sm text-base leading-none">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ‹
             </span>
           </button>
@@ -307,9 +307,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_desno")}
             onClick={() => tabsRef.current?.scrollBy({ left: 240, behavior: "smooth" })}
-            className="absolute right-0 top-0 bottom-px flex items-center pl-8 pr-1 bg-gradient-to-l from-white via-white/95 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute right-0 top-0 bottom-px flex items-center pl-3 bg-gradient-to-l from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
-            <span className="flex items-center justify-center w-6 h-6 rounded-full border border-kolo-border bg-white shadow-sm text-base leading-none">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ›
             </span>
           </button>
