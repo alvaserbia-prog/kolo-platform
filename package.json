@@ -13,6 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed:dokaz": "tsx prisma/seed-dokaz-stvarnosti.ts",
+    "seed:botovi": "tsx prisma/seed-botovi-pijaca.ts",
     "smoke:dokaz": "tsx scripts/smoke-test-dokaz-stvarnosti.ts"
   },
   "prisma": {
