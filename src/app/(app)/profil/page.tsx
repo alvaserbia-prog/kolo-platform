@@ -18,7 +18,6 @@ export default async function ProfilPage() {
     <ProfilKlijent
       user={{
         id: user.id,
-        email: user.email ?? "",
         pseudonim: user.pseudonim,
         tipKorisnika: user.tipKorisnika,
         verified: user.verified,

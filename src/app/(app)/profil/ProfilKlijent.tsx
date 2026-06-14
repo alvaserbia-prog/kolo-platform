@@ -15,7 +15,6 @@ const MAX_DISPLAY = 440;
 interface ProfilProps {
   user: {
     id: string;
-    email: string;
     pseudonim: string;
     tipKorisnika: string;
     verified: boolean;
@@ -370,10 +369,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("pseudonim_label")}</dt>
               <dd className="font-medium text-kolo-text"><Pseudonim>{user.pseudonim}</Pseudonim></dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("email_label")}</dt>
-              <dd className="text-kolo-muted">{user.email}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("uloga_label")}</dt>
