@@ -67,10 +67,10 @@ export async function GET(
   const podaci = korisnik.podaci;
   const krug = korisnik.krugClanstva[0]?.krug ?? null;
 
-  // Rang donacija
+  // Rang donacija — uvek vidljiv
   let rangDonacija: number | null = null;
 
-  if (jeVlasnik || podaci?.prikaziRangDonacija) {
+  {
     const sviDonatori = await prisma.donationRecord.groupBy({
       by: ["userId"],
       where: { status: "CONFIRMED" },
@@ -106,16 +106,13 @@ export async function GET(
   const transakcijeSlice = imaJos ? transakcije.slice(0, 10) : transakcije;
   const nextCursor = imaJos ? transakcijeSlice[9].id : null;
 
-  // Oglasi
-  let oglasi: { id: string; title: string; price: number; category: string; createdAt: Date }[] = [];
-  if (jeVlasnik || podaci?.prikaziOglase) {
-    oglasi = await prisma.marketplaceListing.findMany({
-      where: { sellerId: id, status: "ACTIVE" },
-      orderBy: { createdAt: "desc" },
-      take: 6,
-      select: { id: true, title: true, price: true, category: true, createdAt: true },
-    });
-  }
+  // Oglasi — uvek vidljivi
+  const oglasi = await prisma.marketplaceListing.findMany({
+    where: { sellerId: id, status: "ACTIVE" },
+    orderBy: { createdAt: "desc" },
+    take: 6,
+    select: { id: true, title: true, price: true, category: true, createdAt: true },
+  });
 
   return NextResponse.json({
     id: korisnik.id,
@@ -131,13 +128,12 @@ export async function GET(
     opis: (jeVlasnik || podaci?.prikaziOpis) ? podaci?.opis ?? null : null,
     punoIme: (jeVlasnik || podaci?.prikaziPunoIme) ? podaci?.punoIme ?? null : null,
     telefon: (jeVlasnik || podaci?.prikaziTelefon) ? korisnik.telefon : null,
-    bilans: (jeVlasnik || podaci?.prikaziBilans) ? (korisnik.wallet?.balance ?? 0) : null,
-    zrno: (jeVlasnik || podaci?.prikaziZrno)
-      ? (korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0)
-      : null,
+    // POEN balans, ZRNO, rang donacija i oglasi su uvek vidljivi (ne podležu togglu)
+    bilans: korisnik.wallet?.balance ?? 0,
+    zrno: korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0,
     rangDonacija,
     transakcije: transakcijeSlice,
     nextCursor,
-    oglasi: (jeVlasnik || podaci?.prikaziOglase) ? oglasi : [],
+    oglasi,
   });
 }

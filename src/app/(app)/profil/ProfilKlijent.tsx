@@ -640,39 +640,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </Link>
 
-      {/* Vidljivost profila — preostale stavke bez polja za unos
-          (vidljivost imena, opisa, lokacije i telefona je uz sama polja gore). */}
-      <div className="bg-white rounded-2xl border border-kolo-border p-6">
-        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("vidljivost_naslov")}</h2>
-        <p className="text-xs text-kolo-muted mb-5">{t("vidljivost_opis")}</p>
-        <div className="space-y-0 divide-y divide-kolo-border">
-          {([
-            { field: "prikaziBilans", label: t("toggle_bilans") },
-            { field: "prikaziZrno", label: t("toggle_zrno") },
-            { field: "prikaziRangDonacija", label: t("toggle_rang_donacija") },
-            { field: "prikaziOglase", label: t("toggle_oglasi") },
-          ] as { field: keyof typeof togglei; label: string }[]).map(({ field, label }) => (
-            <div key={field} className="flex items-center justify-between py-3">
-              <span className="text-sm text-kolo-text">{label}</span>
-              <button
-                onClick={() => promeniToggle(field, !togglei[field])}
-                disabled={toggleLoading === field}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
-                  togglei[field] ? "bg-kolo-green-700" : "bg-kolo-border"
-                }`}
-                aria-label={`${label} — ${togglei[field] ? t("vidljivo") : t("skriveno")}`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-                    togglei[field] ? "translate-x-6" : "translate-x-1"
-                  }`}
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         {/* Prigovor na odluku — levo */}
