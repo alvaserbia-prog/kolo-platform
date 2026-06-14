@@ -140,10 +140,29 @@ async function main() {
     console.log(`✓ Bot: ${b.pseudonim.padEnd(13)} — ${b.email.padEnd(20)} (${b.location})`);
   }
 
-  // 2) Kreiraj oglase (idempotentno po sellerId + title)
+  // 2) Round-robin raspored: svako postavi po jedan oglas u krug, pa sledeći
+  // krug. Tako prva strana pijace (sort "novo" = createdAt desc) prikazuje
+  // izmešane oglase svih prodavaca, a ne blok jednog pa blok drugog.
+  const poProdavcu = BOTOVI.map((b) => OGLASI.filter((o) => o.seller === b.pseudonim));
+  const maxKom = Math.max(...poProdavcu.map((a) => a.length));
+  const raspored: Oglas[] = [];
+  for (let krug = 0; krug < maxKom; krug++) {
+    for (const lista of poProdavcu) {
+      if (lista[krug]) raspored.push(lista[krug]);
+    }
+  }
+
+  // createdAt po redosledu postavljanja: prvi u rasporedu je najstariji,
+  // poslednji najnoviji (pre ~2h, svaki prethodni ~5h ranije).
+  const sada = new Date();
+  const vremePostavljanja = (i: number): Date =>
+    new Date(sada.getTime() - (2 + (raspored.length - 1 - i) * 5) * 3_600_000);
+
+  // 3) Kreiraj/uskladi oglase (idempotentno po sellerId + title)
   console.log("");
   let kreirano = 0;
-  for (const o of OGLASI) {
+  for (let i = 0; i < raspored.length; i++) {
+    const o = raspored[i];
     const sellerId = poId[o.seller];
     if (!sellerId) {
       console.warn(`  (preskočeno) nema korisnika ${o.seller} za "${o.title}"`);
@@ -152,26 +171,20 @@ async function main() {
 
     const sellerLoc = BOTOVI.find((b) => b.pseudonim === o.seller)?.location;
     const zeljenaLok = o.location ?? sellerLoc;
+    const createdAt = vremePostavljanja(i);
 
     const postojeci = await prisma.marketplaceListing.findFirst({
       where: { sellerId, title: o.title },
-      select: { id: true, images: true, location: true },
+      select: { id: true },
     });
 
     if (postojeci) {
-      // Uskladi sliku i lokaciju sa željenim vrednostima.
-      const slikaOk = postojeci.images.length === 1 && postojeci.images[0] === o.image;
-      const lokOk = postojeci.location === zeljenaLok;
-      if (!slikaOk || !lokOk) {
-        await prisma.marketplaceListing.update({
-          where: { id: postojeci.id },
-          data: { images: [o.image], location: zeljenaLok },
-        });
-        const sta = [!slikaOk && "slika", !lokOk && "lokacija"].filter(Boolean).join(" + ");
-        console.log(`✎ (usklađeno: ${sta}) ${o.title}`);
-      } else {
-        console.log(`  (već tačno) ${o.title}`);
-      }
+      // Uskladi sliku, lokaciju i vreme postavljanja (zbog redosleda na pijaci).
+      await prisma.marketplaceListing.update({
+        where: { id: postojeci.id },
+        data: { images: [o.image], location: zeljenaLok, createdAt },
+      });
+      console.log(`✎ ${String(i + 1).padStart(2)}. ${o.seller.padEnd(13)} "${o.title}"`);
       continue;
     }
 
@@ -184,13 +197,14 @@ async function main() {
         category: o.category,
         location: zeljenaLok,
         images: [o.image],
+        createdAt,
       },
     });
-    console.log(`✓ ${o.seller.padEnd(13)} "${o.title}" — ${o.price.toLocaleString("sr-RS")} POEN`);
+    console.log(`✓ ${String(i + 1).padStart(2)}. ${o.seller.padEnd(13)} "${o.title}" — ${o.price.toLocaleString("sr-RS")} POEN`);
     kreirano++;
   }
 
-  console.log(`\n=== Završeno: ${BOTOVI.length} bot korisnika, ${kreirano} novih oglasa (od ${OGLASI.length}) ===`);
+  console.log(`\n=== Završeno: ${BOTOVI.length} bot korisnika, ${kreirano} novih oglasa (od ${OGLASI.length}), raspored round-robin ===`);
   await prisma.$disconnect();
 }
 
