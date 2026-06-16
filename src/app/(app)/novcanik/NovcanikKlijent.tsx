@@ -59,29 +59,31 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
     <div className="space-y-6">
       {/* Gornje kartice: levo ZRNO, desno balans */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* LEVO — ZRNO kartica (slobodna ZRNA, koeficijent, otpis) */}
-        <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col shadow-sm">
-          <p className="text-sm text-kolo-muted mb-1">{t("zrno_slobodno_label")}</p>
-          <p className="text-3xl sm:text-4xl font-bold text-kolo-text tabular-nums">
-            {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
-          </p>
-          <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
+        {/* LEVO — ZRNO kartica: dugme levo, koeficijent u sredini, broj ZRNA veliko desno */}
+        <div className="bg-white rounded-2xl border border-kolo-border p-6 shadow-sm flex items-center justify-between gap-4">
+          {/* LEVO — dugme Otpiši ZRNO */}
+          <Link
+            href="/zrno"
+            className="shrink-0 px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
+          >
+            {t("zrno_otpis_dugme")}
+          </Link>
 
-          <div className="mt-4 flex items-baseline justify-between border-t border-kolo-border pt-3">
-            <span className="text-sm text-kolo-muted">{t("zrno_koeficijent_label")}</span>
-            <span className="text-sm font-semibold text-kolo-text tabular-nums">
-              {zrno ? zrno.kurs.toLocaleString("sr-RS") : "—"}{" "}
-              <span className="text-kolo-muted font-normal">POEN/ZRNO</span>
-            </span>
+          {/* SREDINA — koeficijent */}
+          <div className="text-center min-w-0">
+            <p className="text-xs text-kolo-muted">{t("zrno_koeficijent_label")}</p>
+            <p className="text-base font-semibold text-kolo-text tabular-nums">
+              {zrno ? zrno.kurs.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-[10px] text-kolo-muted">POEN/ZRNO</p>
           </div>
 
-          <div className="mt-auto pt-4">
-            <Link
-              href="/zrno"
-              className="block w-full text-center px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
-            >
-              {t("zrno_otpis_dugme")}
-            </Link>
+          {/* DESNO — broj ZRNA veliki (kao POEN) */}
+          <div className="text-right min-w-0">
+            <p className="text-4xl sm:text-5xl font-bold text-kolo-text tabular-nums break-words">
+              {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
           </div>
         </div>
 
