@@ -102,6 +102,7 @@ export default function IndeksSekcija({
           verifikatori={verifikatorCvorovi}
           verifikovani={verifikovaniCvorovi}
           jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
+          className={ispuniVisinu ? "h-full" : ""}
         />
       )}
     </div>

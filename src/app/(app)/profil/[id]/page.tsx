@@ -236,13 +236,13 @@ export default function JavniProfilPage() {
           {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
           <div className="grid grid-cols-2 gap-4 flex-1">
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
-              <p className="text-xs text-kolo-muted mb-1">ZRNO</p>
+              <p className="text-base font-medium text-kolo-muted mb-1">ZRNO</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.zrno !== null ? profil.zrno.toLocaleString("sr-RS") : "—"}
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
-              <p className="text-xs text-kolo-muted mb-1">POEN</p>
+              <p className="text-base font-medium text-kolo-muted mb-1">POEN</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.bilans !== null ? profil.bilans.toLocaleString("sr-RS") : "—"}
               </p>
@@ -257,7 +257,7 @@ export default function JavniProfilPage() {
       {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
         {/* LEVO — lanac verifikacija (mini stablo) */}
-        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} />
+        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
 
         {/* DESNO — transakcije (fiksna visina + skrol) */}
         <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[560px]">
