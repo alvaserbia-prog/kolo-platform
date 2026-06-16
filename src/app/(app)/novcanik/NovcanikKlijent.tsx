@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
-import PageOpis from "@/components/PageOpis";
 import Pseudonim from "@/components/Pseudonim";
 
 
@@ -58,10 +57,6 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
   return (
     <div className="space-y-6">
-      <PageOpis>
-        {t("opis_stranice")}
-      </PageOpis>
-
       {/* Gornje kartice: levo ZRNO, desno balans */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* LEVO — ZRNO kartica (slobodna ZRNA, koeficijent, otpis) */}
