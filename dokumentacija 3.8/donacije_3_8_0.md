@@ -1,6 +1,8 @@
 # Pravilnik o pokroviteljstvu i donacijama
 
-*Verzija 3.8.0*
+*Verzija 3.8.1*
+
+*Izmene u verziji 3.8.1: uvedeno razlikovanje javne i anonimne donacije fizičkog lica — POEN se evidentira samo za javnu donaciju, uz javno prikazivanje imena i prezimena donatora u listi donacija; anonimna donacija ne nosi POEN.*
 
 *Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0; sadržinske odredbe nepromenjene.*
 
@@ -34,6 +36,8 @@ Svaki verifikovani korisnik sistema može donirati novac Fondaciji u dinarima il
 
 Donacija se vrši uplatom na račun Fondacije. Fondacija izdaje potvrdu o donaciji na zahtev donatora, u skladu sa zakonom. Poreski tretman donacije zavisi od statusa donatora, registrovanog statusa Fondacije i važećih poreskih propisa u trenutku donacije.
 
+Donator pri svakoj donaciji bira da li je donacija javna ili anonimna. Javnom donacijom donator pristaje da njegovo ime i prezime budu javno prikazani u listi donacija na platformi i samo se za javnu donaciju evidentira POEN prema članu 4. Anonimna donacija ne prikazuje ime donatora i za nju se POEN ne evidentira. Izbor se vrši za svaku donaciju posebno i primenjuje se na donacije izvršene nakon stupanja na snagu ovih odredbi.
+
 ### Član 4 — Nivoi donacija i koeficijent evidencije
 
 Što je veća kumulativna donacija korisnika, viši je koeficijent evidencije donacija — više POEN-a se evidentira po svakom dinaru naredne donacije.
@@ -60,9 +64,19 @@ Nivo je kumulativan i trajan — ne smanjuje se korišćenjem POEN-a niti bilo k
 
 ### Član 5 — Pravna kvalifikacija evidentiranja donacija
 
+POEN se evidentira isključivo za javne donacije u smislu člana 3. Za anonimne donacije POEN se ne evidentira i one ne ulaze u kumulativni nivo donacija iz člana 4.
+
 Evidentiranje POEN-a po osnovu donacije je automatski akt Protokola u smislu čl. 39 i čl. 73 Pravilnika o KOLO sistemu. Ne ulazi u dnevni limit emisije Programa Protokola.
 
 Evidentirani POEN-i imaju isti status kao svi drugi POEN-i u sistemu.
+
+### Član 5a — Lista donacija i javno priznanje donatora
+
+Platforma vodi listu donacija fizičkih lica dostupnu verifikovanim korisnicima. Donator koji je izvršio javnu donaciju identifikuje se u listi imenom i prezimenom koje je uneo u svom profilu; anonimni donatori se u listi ne identifikuju.
+
+Objavljivanje imena donatora predstavlja javno priznanje doprinosa i element transparentnosti rada Fondacije, i neposredno je vezano za evidentiranje POEN-a po osnovu javne donacije.
+
+Donator je svestan da javno povezivanje njegovog imena sa donacijom omogućava povezivanje njegovog pseudonimnog zapisa u sistemu sa njegovim identitetom. Davanje ovog pristanka dobrovoljno je i predstavlja uslov za evidentiranje POEN-a po osnovu donacije.
 
 ## III — Pokroviteljstvo pravnih lica
 

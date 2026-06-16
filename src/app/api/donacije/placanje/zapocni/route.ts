@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { iznosRSD?: unknown };
+  let body: { iznosRSD?: unknown; javno?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -54,12 +54,32 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Javna donacija (default) nosi POEN i javno ime; anonimna ne nosi POEN.
+  const javno = body.javno !== false;
+
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { id: true, email: true, wallet: { select: { id: true } } },
+    select: {
+      id: true,
+      email: true,
+      wallet: { select: { id: true } },
+      podaci: { select: { punoIme: true } },
+    },
   });
   if (!user?.wallet) {
     return NextResponse.json({ error: "Korisnik nema novčanik." }, { status: 400 });
+  }
+
+  // Javna donacija zahteva uneto ime i prezime (čl. 5a) — provera PRE naplate.
+  if (javno && !user.podaci?.punoIme?.trim()) {
+    return NextResponse.json(
+      {
+        error:
+          "Za javnu donaciju (sa POEN) unesite ime i prezime u profilu, ili izaberite anonimnu donaciju (bez POEN-a).",
+        trebaPunoIme: true,
+      },
+      { status: 400 }
+    );
   }
 
   // Jedinstveni broj porudžbine (oid) — bez separatora, alfanumerički.
@@ -75,6 +95,7 @@ export async function POST(req: NextRequest) {
       cumulativeRSD: 0,
       level: 0,
       poenEmitted: 0,
+      javno,
       status: "PENDING",
       nacinUplate: "KARTICA",
       provajder: cfg.provajder,

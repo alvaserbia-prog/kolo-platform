@@ -1,25 +1,31 @@
 import { describe, it, expect } from "vitest";
 import { izracunajPoenZaDonaciju, nivoZaKumulativ } from "@/lib/protokol/donacija";
 
-describe("nivoZaKumulativ", () => {
-  it("ispod prvog praga (1.000 RSD) → nivo 0, kurs 1,00", () => {
-    expect(nivoZaKumulativ(1_000)).toEqual({ nivo: 0, kurs: 1.0 });
-  });
-  it("2.000 RSD → nivo 1, kurs 1,00", () => {
+describe("nivoZaKumulativ — 2 nivoa (prag 5.000 RSD)", () => {
+  it("ispod praga 5.000 RSD → nivo 1, kurs 1,00", () => {
+    expect(nivoZaKumulativ(0)).toEqual({ nivo: 1, kurs: 1.0 });
     expect(nivoZaKumulativ(2_000)).toEqual({ nivo: 1, kurs: 1.0 });
+    expect(nivoZaKumulativ(4_999)).toEqual({ nivo: 1, kurs: 1.0 });
   });
-  it("110.000 RSD → nivo 6, kurs 1,50", () => {
-    expect(nivoZaKumulativ(110_000)).toEqual({ nivo: 6, kurs: 1.5 });
+  it("na pragu 5.000 RSD → nivo 2, kurs 1,10", () => {
+    expect(nivoZaKumulativ(5_000)).toEqual({ nivo: 2, kurs: 1.1 });
   });
-  it("preko najvišeg praga → nivo 11, kurs 2,00 (maks po v3.7.2)", () => {
-    expect(nivoZaKumulativ(5_000_000_000)).toEqual({ nivo: 11, kurs: 2.0 });
+  it("preko praga → nivo 2, kurs 1,10", () => {
+    expect(nivoZaKumulativ(5_000_000_000)).toEqual({ nivo: 2, kurs: 1.1 });
   });
 });
 
-describe("izracunajPoenZaDonaciju — koeficijentni model (čl. 4)", () => {
-  it("ispod prvog praga: 1.000 RSD → kurs 1,00 → 1.000 POEN", () => {
+describe("izracunajPoenZaDonaciju — koeficijentni model (2 nivoa)", () => {
+  it("nivo 1: 1.000 RSD → kurs 1,00 → 1.000 POEN", () => {
     const r = izracunajPoenZaDonaciju(0, 1_000);
-    expect(r).toMatchObject({ noviKumulativ: 1_000, noviNivo: 0, kurs: 1.0, poen: 1_000 });
+    expect(r).toMatchObject({ noviKumulativ: 1_000, noviNivo: 1, kurs: 1.0, poen: 1_000 });
+  });
+
+  it("nivo 1: tik ispod praga 4.999 RSD → kurs 1,00", () => {
+    const r = izracunajPoenZaDonaciju(0, 4_999);
+    expect(r.noviNivo).toBe(1);
+    expect(r.kurs).toBe(1.0);
+    expect(r.poen).toBe(4_999);
   });
 
   it("nivo 2: prva donacija 5.000 RSD → kurs 1,10 → 5.500 POEN", () => {
@@ -29,24 +35,12 @@ describe("izracunajPoenZaDonaciju — koeficijentni model (čl. 4)", () => {
     expect(r.poen).toBe(5_500);
   });
 
-  it("nivo 3: prva donacija 10.000 RSD → kurs 1,20 → 12.000 POEN", () => {
-    const r = izracunajPoenZaDonaciju(0, 10_000);
-    expect(r.noviNivo).toBe(3);
-    expect(r.poen).toBe(12_000);
-  });
-
-  it("nivo 9: prva donacija 1.000.000 RSD → kurs 1,80 → 1.800.000 POEN", () => {
-    const r = izracunajPoenZaDonaciju(0, 1_000_000);
-    expect(r.noviNivo).toBe(9);
-    expect(r.poen).toBe(1_800_000);
-  });
-
-  it("koeficijent novog kumulativa se primenjuje na celu novu donaciju", () => {
-    // dosad 50.000 (nivo 5), nova 60.000 → kumulativ 110.000 (nivo 6, kurs 1,50)
-    const r = izracunajPoenZaDonaciju(50_000, 60_000);
-    expect(r.noviKumulativ).toBe(110_000);
-    expect(r.noviNivo).toBe(6);
-    expect(r.poen).toBe(Math.round(60_000 * 1.5)); // 90.000
+  it("koeficijent novog kumulativa se primenjuje na celu novu donaciju (prelaz praga)", () => {
+    // dosad 3.000 (nivo 1), nova 4.000 → kumulativ 7.000 (nivo 2, kurs 1,10)
+    const r = izracunajPoenZaDonaciju(3_000, 4_000);
+    expect(r.noviKumulativ).toBe(7_000);
+    expect(r.noviNivo).toBe(2);
+    expect(r.poen).toBe(Math.round(4_000 * 1.1)); // 4.400
   });
 
   it("Math.round na nepravilnim iznosima", () => {

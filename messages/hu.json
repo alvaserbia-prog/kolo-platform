@@ -738,7 +738,7 @@
     "kopirano": "Másolva ✓",
     "tabela_naslov": "Adományozási rang táblázat",
     "tabela_nivo": "Szint",
-    "tabela_do": "Eddig (RSD)",
+    "tabela_do": "Tól (RSD)",
     "tabela_kurs": "Árfolyam",
     "vas_nivo_oznaka": "← az Ön szintje",
     "istorija_naslov": "Adományaim",
@@ -755,7 +755,17 @@
     "karticno_plati": "Pay by card",
     "karticno_min_iznos": "Please enter an amount (minimum 100 RSD).",
     "karticno_nije_moguce": "Payment is currently unavailable.",
-    "karticno_greska_komunikacije": "Communication error. Please try again."
+    "karticno_greska_komunikacije": "Communication error. Please try again.",
+    "vidljivost_naslov": "Adomány típusa",
+    "vidljivost_javna": "Nyilvános adomány (POEN-t kapok)",
+    "vidljivost_javna_opis": "Vezeték- és keresztneve nyilvánosan megjelenik az adományok listájában. Csak a nyilvános adomány jár POEN-nel.",
+    "vidljivost_anonimna": "Névtelen adomány (POEN nélkül)",
+    "vidljivost_anonimna_opis": "A neve nem jelenik meg. Névtelen adományért nem kerül POEN jóváírásra.",
+    "vidljivost_upozorenje": "Megjegyzés: ha neve nyilvánosan megjelenik az adomány mellett, álneve és egyéb nyilvántartásai összekapcsolhatók a személyazonosságával.",
+    "lista_naslov": "Adományok listája",
+    "lista_opis": "A nyilvános adományozók vezeték- és keresztnévvel jelennek meg; a névtelen adományozókat nem azonosítjuk.",
+    "lista_prazno": "Még nincs rögzített adomány.",
+    "lista_anoniman": "Névtelen adományozó"
   },
   "zaposljavnje": {
     "naslov": "Foglalkoztatás",
@@ -933,7 +943,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Rulebook on Sponsorship and Donations",
-        "opis": "Donation tiers for individuals (11 levels, coefficient 1.00–2.00) and sponsorship tiers for legal entities (7 levels, threshold RSD 10,000)."
+        "opis": "Donation tiers for individuals (2 levels, coefficient 1.00–1.10) and sponsorship tiers for legal entities (7 levels, threshold RSD 10,000)."
       },
       "operativni": {
         "naziv": "Rulebook on Operational Contribution",
@@ -1372,7 +1382,7 @@
     "n1_iznos": "1,000 / 1,000 / 500",
     "n1_opis": "When a verified user who personally knows you confirms you in the vouching chain, the Protocol automatically records 1,000 POEN to you and 1,000 POEN to the verifier — and, when the verification is subject to supervision, 500 POEN to the supervisor. Joining the system is simultaneously a contribution to it.",
     "n2_naslov": "Donation to the Foundation",
-    "n2_iznos": "11 tiers · up to 2.00×",
+    "n2_iznos": "2 tiers · up to 1.10×",
     "n2_opis": "You donate money to the Foundation. The Protocol records POEN according to a coefficient that grows gently with your total contribution. POEN from a donation does not confer ownership, cannot be converted to money and does not buy votes.",
     "n3_naslov": "Sponsorship",
     "n3_iznos": "7 tiers · threshold 10,000 RSD",

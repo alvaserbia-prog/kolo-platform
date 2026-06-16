@@ -66,6 +66,7 @@ Sistem u Fazi 1 obuhvata dvanaest radnji obrade definisanih Registrom radnji obr
 | Br. 10 | Posebne kategorije podataka (Modul 3 — Socijalni programi sa verifikatorskom potvrdom) | Izričit pristanak (čl. 17 st. 2 t. 1) | Aktivno |
 | Br. 11 | Podaci maloletnih lica (Modul 4) | Pristanak roditelja (čl. 16) | Neaktivno |
 | Br. 12 | Nadzor integriteta sistema verifikacija | Legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
+| Br. 13 | Objavljivanje imena donatora u listi donacija (javna donacija) | Pristanak (čl. 12 st. 1 t. 1) | Aktivno |
 
 Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v3.8.1) koji se primenjuje zajedno sa ovom procenom.
 
@@ -131,6 +132,7 @@ Rizici se procenjuju prema matrici verovatnoća × ozbiljnost, pri čemu se nivo
 | R10 — Narušavanje integriteta evidencije | 1 | 4 | 4 | Retroaktivna promena zapisa bi ugrozila zajedničko dobro. Mere: zero-sum invarijanta (zbir svih stanja jednak nuli) sa automatskom proverom, atomaran upis promena, vremensko označavanje zapisa, revizijski dnevnik administrativnih radnji i redovne provere konzistentnosti. |
 | R11 — Otkrivanje pripadnosti posebnoj kategoriji verifikatorima | 2 | 3 | 6 | U postupku potvrde socijalnog programa verifikatori podnosioca saznaju da se prijavio za određeni program, što može ukazati na posebnu kategoriju (npr. invaliditet, status roditelja). Mere: postupak se pokreće isključivo uz izričit pristanak; krug primalaca ograničen je na sopstvene verifikatore podnosioca, lica koja ga već lično poznaju; verifikatorima se ne prikazuje sadržaj prijave (datumi rođenja dece, rešenje, dob); obaveštavanje isključivo u platformi (in-app), bez spoljnih kanala; mogućnost povlačenja pristanka u svakom trenutku. |
 | R12 — Pogrešno označavanje poštenog korisnika u nadzoru integriteta | 2 | 2 | 4 | Sistem nadzora može pogrešno označiti pošten nalog ili zbijenu stvarnu zajednicu. Mere: sistem ne donosi automatske odluke (čl. 38 ZZPL-a) — samo označava za ljudski pregled; pravila prioritetizuju odsustvo stvarne aktivnosti („šupljinu"), a ne gustinu veza; mogućnost odbacivanja nalaza; pravo na prigovor; revizijski dnevnik; bez prikupljanja novih podataka. |
+| R13 — Deanonimizacija donatora kroz javnu listu donacija | 2 | 3 | 6 | Javno objavljivanje imena i prezimena donatora koji izabere javnu donaciju (uz evidentiranje POEN-a) omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom, čime se može deanonimizovati celokupna evidencija tog korisnika, pošto je donacija vezana za nalog/pseudonim. Svrha: transparentnost i javno priznanje doprinosa. Pravni osnov: pristanak (čl. 12 ZZPL). Kategorije podataka: ime i prezime, iznos i datum donacije, povezani pseudonim. Primaoci: verifikovani korisnici platforme. Mere: izbor je dobrovoljan i po pojedinačnoj donaciji; jasno upozorenje pre javne donacije; anonimna opcija bez POEN-a kao alternativa; pravilo se primenjuje samo ubuduće. |
 
 *Skala boja: zeleno = nizak rizik (1–4), žuto = srednji rizik (5–9), crveno = visok rizik (10–16). Nema identifikovanih visokih rizika u aktuelnoj konfiguraciji sistema.*
 

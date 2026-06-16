@@ -98,7 +98,7 @@ Pravni osnov: izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) dok korisn
 
 **4.5 Podaci o donacijama i pokroviteljstvu**
 
-Za donacije fizičkih lica prikupljamo: iznos donacije, datum donacije i identitet donatora. Identifikacija donatora obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa. Ove podatke čuva Fondacija.
+Za donacije fizičkih lica prikupljamo: iznos donacije, datum donacije i identitet donatora. Identifikacija donatora obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa. Ove podatke čuva Fondacija. Za javne donacije (u smislu Pravilnika o pokroviteljstvu i donacijama) javno objavljujemo ime i prezime donatora uz iznos i datum donacije, u listi donacija dostupnoj verifikovanim korisnicima. Pravni osnov je pristanak donatora (čl. 12 ZZPL), koji se daje izborom javne donacije radi evidentiranja POEN-a. Za anonimne donacije ime donatora se ne objavljuje i POEN se ne evidentira. Donator je svestan da javno povezivanje imena sa donacijom omogućava povezivanje njegovog pseudonimnog zapisa sa identitetom; otkrivanje je dobrovoljno i predstavlja uslov za evidentiranje POEN-a po osnovu donacije.
 
 Svrha obrade: ispunjenje zakonske obaveze finansijskog izveštavanja.
 
@@ -186,9 +186,11 @@ Tabla zahteva za jemstvo. Tekst predstavljanja iz pododeljke 4.8 dostupan je svi
 
 Korisnik može, na sopstvenu inicijativu i u svakom trenutku, odabrati da njegovo ime i prezime i broj telefona budu vidljivi svim verifikovanim korisnicima Platforme. Ovo otkrivanje je u potpunosti dobrovoljno i može se povući u svakom trenutku, nakon čega se podaci više ne prikazuju drugim korisnicima. Povlačenje ne utiče na podatke koji su eventualno već zabeleženi van Platforme od strane trećih lica.
 
+Posebno od ovog dobrovoljnog otkrivanja, kod javne donacije ime i prezime donatora objavljuju se u listi donacija kao uslov za evidentiranje POEN-a po osnovu te donacije, na osnovu pristanka iz odeljka 4.5. Ovo objavljivanje vezano je za konkretnu donaciju i njen pseudonimni zapis.
+
 Bez obzira na status korisnika i bez obzira na dobrovoljna otkrivanja, sledeći podaci nisu nikada javno dostupni: email adresa, tehnički logovi i evidencija pristupa, graf verifikacija, dobrovoljno uneti podaci koji nisu izričito otkriveni i posebne kategorije podataka.
 
-Javnost pseudonimne evidencije doprinosa je strukturalna karakteristika sistema, a ne opcija koju korisnik može isključiti. Korisnik koji ne prihvata ovaj uslov ne može koristiti Platformu.
+Javnost pseudonimne evidencije doprinosa je strukturalna karakteristika sistema, a ne opcija koju korisnik može isključiti. Korisnik koji ne prihvata ovaj uslov ne može koristiti Platformu. Za razliku od pseudonimne evidencije, javno prikazivanje imena i prezimena donatora jeste opciono — donator ga bira izborom između javne i anonimne donacije.
 
 I uz pseudonimnost, kombinacija iznosa, vremena i učestalosti transakcija može u određenim slučajevima omogućiti posrednu identifikaciju korisnika. Korisnik je svestan ovog ograničenja i prihvata ga registracijom.
 

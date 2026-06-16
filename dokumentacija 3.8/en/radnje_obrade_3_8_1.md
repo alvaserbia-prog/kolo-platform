@@ -169,6 +169,19 @@ Date of last amendment: 06.06.2026.
 | **Protection measures** | Access restricted to superadministrators; all actions on findings are recorded in the audit trail; pseudonymization; no collection of new data. **The system does not make automated decisions within the meaning of Art. 38 LPDP — it only flags accounts/groups, and the measure is taken by an authorised person.** Rules prioritise the absence of genuine activity ("hollowness"), not connection density, to avoid incorrect treatment of tight real-world communities. Ability to dismiss findings and right to object (Art. 37 LPDP). |
 | **Note — legitimate interest proportionality test** | The processing is necessary to prevent misuse that would devalue the ledger and governance; it is proportionate because no new data are introduced, the processing is pseudonymous, no automated decisions are made, and it is subject to human review and the right to object. The interest of the Foundation and honest users prevails over the minimal intrusion into the rights of data subjects. |
 
+**Processing activity no. 13 — Publication of the donor's name in the donation list**
+
+| **Purpose of processing** | Transparency and public recognition of public donations. |
+| --- | --- |
+| **Categories of data subjects** | Natural-person donors who have chosen a public donation. |
+| **Categories of data** | First and last name, donation amount and date, pseudonym. |
+| **Legal basis** | Consent (Art. 12 para. 1 item 1 LPDP), given by choosing a public donation for the purpose of recording POEN. For anonymous donations the name is not published and no POEN is recorded. |
+| **Recipients / processors** | [Hosting provider / processor name]. Verified platform users (donation list). |
+| **Transfer to a third country** | [Yes/No] |
+| **Retention period** | As for donation data — 10 years, in accordance with tax and accounting regulations. |
+| **Protection measures** | The choice is voluntary and made per individual donation; a clear warning before a public donation; the anonymous option without POEN as an alternative; the rule applies only prospectively; TLS encryption, access control. |
+| **Note** | Publicly linking the name to a donation makes it possible to connect the donor's pseudonymous record with their identity; the disclosure is voluntary and constitutes a condition for the recording of POEN on account of the donation. |
+
 **FINAL PROVISIONS**
 
 These Records are updated upon any change in processing activities, activation of new system modules, or change in technical and organizational protection measures. Updating the Records is an obligation of the controller in accordance with Art. 47 LPDP.
