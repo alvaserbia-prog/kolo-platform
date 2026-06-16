@@ -57,6 +57,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [cropSrc, setCropSrc] = useState<string | null>(null);
   const [cropDisplay, setCropDisplay] = useState({ w: 1, h: 1, scale: 1 });
   const [cropRadius, setCropRadius] = useState(120);
+  const [cropZoom, setCropZoom] = useState(1);
+  const cropMaxRadiusRef = useRef(120);
   const [circleCenter, setCircleCenter] = useState({ x: 0, y: 0 });
   const dragRef = useRef<{ startX: number; startY: number; cx: number; cy: number } | null>(null);
   const cropImgRef = useRef<HTMLImageElement>(null);
@@ -127,7 +129,9 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       const dw = img.width * scale;
       const dh = img.height * scale;
       const r = Math.min(dw, dh) / 2 - 12;
+      cropMaxRadiusRef.current = r;
       setCropDisplay({ w: dw, h: dh, scale });
+      setCropZoom(1);
       setCropRadius(r);
       setCircleCenter({ x: dw / 2, y: dh / 2 });
       setCropSrc(url);
@@ -154,6 +158,18 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   }, [cropRadius, cropDisplay]);
 
   const onDragEnd = useCallback(() => { dragRef.current = null; }, []);
+
+  // Zoom = uvećanje kadra. Veći zoom → manji krug (uzima se manji deo originala koji
+  // se skalira na 256px = jači zum). Posle promene ponovo uglavi centar u granice slike.
+  const onZoomChange = useCallback((z: number) => {
+    const r = cropMaxRadiusRef.current / z;
+    setCropZoom(z);
+    setCropRadius(r);
+    setCircleCenter((c) => ({
+      x: Math.min(cropDisplay.w - r, Math.max(r, c.x)),
+      y: Math.min(cropDisplay.h - r, Math.max(r, c.y)),
+    }));
+  }, [cropDisplay]);
 
   // Zaključaj skrol stranice dok je crop modal otvoren (sprečava pomeranje cele
   // stranice pri prevlačenju kruga na dodirnim ekranima).
@@ -580,6 +596,20 @@ export default function ProfilKlijent({ user }: ProfilProps) {
                 <rect width={cropDisplay.w} height={cropDisplay.h} fill="black" fillOpacity={0.55} mask="url(#cm)" />
                 <circle cx={circleCenter.x} cy={circleCenter.y} r={cropRadius} fill="none" stroke="white" strokeWidth={2} strokeDasharray="6 3" />
               </svg>
+            </div>
+            <div className="flex items-center gap-3 w-full">
+              <span className="text-lg leading-none text-kolo-muted select-none" aria-hidden>−</span>
+              <input
+                type="range"
+                min={1}
+                max={4}
+                step={0.02}
+                value={cropZoom}
+                onChange={(e) => onZoomChange(Number(e.target.value))}
+                aria-label={t("crop_zoom")}
+                className="flex-1 accent-kolo-green-700 cursor-pointer"
+              />
+              <span className="text-lg leading-none text-kolo-muted select-none" aria-hidden>＋</span>
             </div>
             <div className="flex gap-3 w-full">
               <button
