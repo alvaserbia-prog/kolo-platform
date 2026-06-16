@@ -125,7 +125,9 @@ export default function PocetnaKlijent({
           ) : (
             blog.map((o) => {
               const otvorena = otvorenaObjava === o.id;
-              const sazet = o.content.length > 280 && !otvorena;
+              // Ako je jedina objava, prikaži je celu (bez skraćivanja) da popuni prozor.
+              const jedina = blog.length === 1;
+              const sazet = o.content.length > 280 && !otvorena && !jedina;
               return (
                 <article
                   key={o.id}
@@ -144,7 +146,7 @@ export default function PocetnaKlijent({
                   <p className="text-sm text-kolo-text leading-relaxed whitespace-pre-wrap text-body">
                     {sazet ? o.content.slice(0, 280) + "…" : o.content}
                   </p>
-                  {o.content.length > 280 && (
+                  {o.content.length > 280 && !jedina && (
                     <button
                       onClick={() => setOtvorenaObjava(otvorena ? null : o.id)}
                       className="mt-2 text-sm font-medium text-kolo-green-700 hover:underline"
