@@ -107,7 +107,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
           {/* DESNO — stanje veliko */}
           <div className="text-right min-w-0">
-            <p className="text-4xl sm:text-5xl font-bold font-mono tracking-tight tabular-nums break-words">
+            <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
               {balance.toLocaleString("sr-RS")}
             </p>
             <p className="text-lg text-white/70 mt-0.5">POEN</p>
@@ -230,8 +230,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                       )
                     )}
                   </div>
-                  {/* Iznos */}
-                  <span className={`text-base font-bold text-right ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                  {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
+                  <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
                     {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
                   </span>
                 </div>
@@ -276,7 +276,7 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                         })}
                       </p>
                     </div>
-                    <span className={`text-sm font-bold text-right shrink-0 ${t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+                    <span className={`text-sm font-bold text-right shrink-0 ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
                       {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
                     </span>
                   </div>

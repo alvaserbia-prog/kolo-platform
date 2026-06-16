@@ -287,7 +287,7 @@ export default function JavniProfilPage() {
                       {new Date(trx.createdAt).toLocaleString("sr-RS", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
-                  <span className={`text-sm font-semibold shrink-0 ${jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>
+                  <span className={`text-sm font-semibold shrink-0 ${!jeIzlaz && trx.type !== "TRANSFER" ? "text-blue-600" : jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>
                     {jeIzlaz ? "−" : "+"}{trx.amount.toLocaleString("sr-RS")}
                   </span>
                 </li>
