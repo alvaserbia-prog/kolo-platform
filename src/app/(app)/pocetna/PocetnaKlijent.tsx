@@ -117,7 +117,7 @@ export default function PocetnaKlijent({
         </div>
 
         {/* Prozor vesti — fiksne visine kao Pričaonica (480px), sa skrolom */}
-        <div className="overflow-y-auto space-y-3 pr-1" style={{ height: 480 }}>
+        <div className="overflow-y-auto space-y-3 pr-1" style={{ height: 640 }}>
           {blog.length === 0 ? (
             <div className="h-full flex items-center justify-center bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
               {t("nema_objava")}
@@ -168,7 +168,7 @@ export default function PocetnaKlijent({
           </span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden flex flex-col" style={{ height: 480 }}>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden flex flex-col" style={{ height: 640 }}>
           {/* Spisak poruka */}
           <div
             ref={chatScrollRef}
