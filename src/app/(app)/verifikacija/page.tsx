@@ -27,7 +27,6 @@ import MiniStablo, {
 } from "@/components/verifikacija/MiniStablo";
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
-import PageOpis from "@/components/PageOpis";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { jeKorenJemstva } from "@/lib/dozvole";
 
@@ -105,9 +104,6 @@ export default async function VerifikacijaPage() {
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div className="space-y-1">
         <h1 className="kolo-naslov">{t("page_naslov")}</h1>
-        <PageOpis>
-          {t("page_opis")}
-        </PageOpis>
       </div>
 
       {/* Levo: indeks stvarnosti + tabla jemstva; desno: lanac verifikacija. Ujednačene visine. */}
