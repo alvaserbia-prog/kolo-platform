@@ -379,7 +379,7 @@ The entire RSD portion is your private responsibility under tax regulations.`,
         pitanje: `How does a donation to the Foundation work and how much POEN do I receive?`,
         odgovor: `Any verified user can make a donation by paying in dinars to the Foundation's bank account.
 
-Upon receipt of the payment, the Protocol automatically records POEN: the number of POEN equals the donation amount × the donation recording coefficient. The coefficient grows with the cumulative amount across 11 levels — from 1.00 (at a cumulative amount of 2,000 RSD) to 2.00 (at 5,000,000 RSD). The level is permanent and does not decrease as POEN is spent. (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient.)
+Upon receipt of the payment, the Protocol automatically records POEN: the number of POEN equals the donation amount × the donation recording coefficient. The coefficient grows with the cumulative amount across 11 levels — from 1.00 (Level 1, a donation below 5,000 RSD) to 2.00 (at a cumulative 5,000,000 RSD). The level is permanent and does not decrease as POEN is spent. (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient.)
 
 Donations help the Foundation cover its basic operating costs (server, tools, development, legal counsel, accounting). When income exceeds operating costs, the surplus is directed into the system's programmes.`,
       },
@@ -457,7 +457,7 @@ Note: this applies to exchanges on the marketplace. Operational contribution is 
         pitanje: `In which currency do I donate — can I send euros from abroad?`,
         odgovor: `You can donate in dinars or in another currency — including euros from abroad. A donation is made by payment to the Foundation's bank account.
 
-Upon receipt of the payment, the Protocol automatically credits POEN to you: the donation amount multiplied by the donation recording coefficient. That coefficient grows with your cumulative donation across 11 levels — from 1.00 (at the lowest level) to 2.00 (at the highest). The level reached is permanent and does not decrease as you spend POEN.
+Upon receipt of the payment, the Protocol automatically credits POEN to you: the donation amount multiplied by the donation recording coefficient. That coefficient grows with your cumulative donation across 11 levels — from 1.00 (at the lowest level, a donation below 5,000 RSD) to 2.00 (at the highest). The level reached is permanent and does not decrease as you spend POEN.
 
 (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient — it is a separate figure tied only to donations.)
 

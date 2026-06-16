@@ -389,7 +389,7 @@ Sav RSD deo je tvoja privatna odgovornost prema poreskim propisima.`,
         pitanje: `Kako radi donacija Fondaciji i koliko POEN-a dobijam?`,
         odgovor: `Donaciju može dati svaki verifikovani korisnik, uplatom u dinarima na račun Fondacije.
 
-Po prijemu uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa kumulativnim iznosom kroz 11 nivoa — od 1,00 (pri kumulativno 2.000 RSD) do 2,00 (pri 5.000.000 RSD). Nivo je trajan i ne smanjuje se korišćenjem POEN-a. (Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.)
+Po prijemu uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa kumulativnim iznosom kroz 11 nivoa — od 1,00 (Nivo 1, donacija ispod 5.000 RSD) do 2,00 (pri kumulativno 5.000.000 RSD). Nivo je trajan i ne smanjuje se korišćenjem POEN-a. (Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.)
 
 Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, alati, razvoj, pravnik, računovodstvo). Kad prihodi premaše operativne troškove, višak se usmerava u programe sistema.`,
       },
@@ -467,7 +467,7 @@ Napomena: ovo važi za razmenu na Pijaci. Operativni doprinos je drugi kanal i t
         pitanje: `U kojoj valuti doniram — mogu li poslati evre iz inostranstva?`,
         odgovor: `Možeš donirati u dinarima ili u drugoj valuti — dakle i evre iz inostranstva. Donacija se daje uplatom na račun Fondacije.
 
-Po prijemu uplate, Protokol ti automatski upiše POEN: iznos donacije pomnožen koeficijentom evidencije donacija. Taj koeficijent raste sa tvojom kumulativnom donacijom kroz 11 nivoa — od 1,00 (na najnižem nivou) do 2,00 (na najvišem). Dostignuti nivo je trajan i ne smanjuje se kako trošiš POEN.
+Po prijemu uplate, Protokol ti automatski upiše POEN: iznos donacije pomnožen koeficijentom evidencije donacija. Taj koeficijent raste sa tvojom kumulativnom donacijom kroz 11 nivoa — od 1,00 (na najnižem nivou, donacija ispod 5.000 RSD) do 2,00 (na najvišem). Dostignuti nivo je trajan i ne smanjuje se kako trošiš POEN.
 
 (Koeficijent evidencije donacija nije „kurs" niti obračunski koeficijent ZRNA — to je posebna veličina vezana samo za donacije.)
 

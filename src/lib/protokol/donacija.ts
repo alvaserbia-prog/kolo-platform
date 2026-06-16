@@ -3,18 +3,26 @@ import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
 
 /**
- * Nivoi donacija i koeficijent evidencije — 2 nivoa po pragu kumulativne
- * donacije od 5.000 RSD:
- *   - Nivo 1: kumulativ < 5.000 RSD → koeficijent 1,00×
- *   - Nivo 2: kumulativ ≥ 5.000 RSD → koeficijent 1,10×
+ * Nivoi donacija i koeficijent evidencije — 11 nivoa, koeficijent 1,00× →
+ * maks 2,00×. Nivo 1 nema donji prag: pokriva svaku donaciju ispod 5.000 RSD;
+ * Nivo 2 počinje na 5.000 RSD.
  *
  * Broj evidentiranih POEN-a = iznos donacije (RSD) × koeficijent evidencije
  * novodostignutog nivoa, primenjen na CELU novu donaciju. Nivo je kumulativan i
  * trajan. `do` je donji prag kumulativne donacije (RSD) za dati nivo.
  */
 export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
-  { nivo: 1, do:     0, kurs: 1.00 },
-  { nivo: 2, do: 5_000, kurs: 1.10 },
+  { nivo: 1,  do:               0, kurs: 1.00 },
+  { nivo: 2,  do:           5_000, kurs: 1.10 },
+  { nivo: 3,  do:          10_000, kurs: 1.20 },
+  { nivo: 4,  do:          20_000, kurs: 1.30 },
+  { nivo: 5,  do:          50_000, kurs: 1.40 },
+  { nivo: 6,  do:         100_000, kurs: 1.50 },
+  { nivo: 7,  do:         200_000, kurs: 1.60 },
+  { nivo: 8,  do:         500_000, kurs: 1.70 },
+  { nivo: 9,  do:       1_000_000, kurs: 1.80 },
+  { nivo: 10, do:       2_000_000, kurs: 1.90 },
+  { nivo: 11, do:       5_000_000, kurs: 2.00 },
 ];
 
 /**
