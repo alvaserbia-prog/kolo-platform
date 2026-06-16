@@ -90,12 +90,10 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
           </div>
         </div>
 
-        {/* DESNO — balans kartica */}
-        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex flex-col">
-          <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
-          <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
-          <p className="text-lg text-white/70 mt-0.5">POEN</p>
-          <div className="mt-auto pt-4 flex gap-3">
+        {/* DESNO — balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}
+        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
+          {/* LEVO — dugmad jedno ispod drugog */}
+          <div className="flex flex-col gap-3 shrink-0">
             <button
               onClick={() => setShowSend(true)}
               className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
@@ -108,6 +106,14 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             >
               {t("moj_qr")}
             </button>
+          </div>
+
+          {/* DESNO — stanje veliko */}
+          <div className="text-right min-w-0">
+            <p className="text-4xl sm:text-5xl font-bold font-mono tracking-tight tabular-nums break-words">
+              {balance.toLocaleString("sr-RS")}
+            </p>
+            <p className="text-lg text-white/70 mt-0.5">POEN</p>
           </div>
         </div>
       </div>
