@@ -150,8 +150,8 @@ export default function JavniProfilPage() {
 
       {/* Gornji raspored: levo manja pseudonim kartica, desno statistike + indeks */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-        {/* LEVO — pseudonim kartica (duplo manja) */}
-        <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5">
+        {/* LEVO — pseudonim kartica (ista visina kao lanac/transakcije) */}
+        <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5 flex flex-col lg:h-[560px]">
           <div className="flex flex-col items-center text-center">
             {/* Avatar */}
             {profil.avatar ? (
@@ -220,7 +220,7 @@ export default function JavniProfilPage() {
           </dl>
 
           {/* Akcijska dugmad */}
-          <div className="mt-4 flex gap-2">
+          <div className="mt-auto pt-4 flex gap-2">
             <Link
               href={`/novcanik?prima=${profil.pseudonim}`}
               className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
