@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
@@ -37,6 +38,16 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
   const [filter, setFilter] = useState<Filter>("sve");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
   const [showQR, setShowQR] = useState(false);
+  const [zrno, setZrno] = useState<{ slobodno: number; kurs: number } | null>(null);
+
+  useEffect(() => {
+    let aktivno = true;
+    fetch("/api/zrno")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (aktivno && d) setZrno({ slobodno: d.slobodno ?? 0, kurs: d.kurs ?? 0 }); })
+      .catch(() => {});
+    return () => { aktivno = false; };
+  }, []);
 
   const filtered = transakcije.filter((tx) => {
     if (filter === "primljeno") return tx.primio && tx.type === "TRANSFER";
@@ -51,24 +62,53 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         {t("opis_stranice")}
       </PageOpis>
 
-      {/* Balans kartica — upola uža, poravnata desno */}
-      <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg lg:w-1/2 lg:ml-auto">
-        <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
-        <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
-        <p className="text-lg text-white/70 mt-0.5">POEN</p>
-        <div className="mt-4 flex gap-3">
-          <button
-            onClick={() => setShowSend(true)}
-            className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
-          >
-            {t("posalji_poen")}
-          </button>
-          <button
-            onClick={() => setShowQR(true)}
-            className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
-          >
-            {t("moj_qr")}
-          </button>
+      {/* Gornje kartice: levo ZRNO, desno balans */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+        {/* LEVO — ZRNO kartica (slobodna ZRNA, koeficijent, otpis) */}
+        <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col shadow-sm">
+          <p className="text-sm text-kolo-muted mb-1">{t("zrno_slobodno_label")}</p>
+          <p className="text-3xl sm:text-4xl font-bold text-kolo-text tabular-nums">
+            {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
+          </p>
+          <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
+
+          <div className="mt-4 flex items-baseline justify-between border-t border-kolo-border pt-3">
+            <span className="text-sm text-kolo-muted">{t("zrno_koeficijent_label")}</span>
+            <span className="text-sm font-semibold text-kolo-text tabular-nums">
+              {zrno ? zrno.kurs.toLocaleString("sr-RS") : "—"}{" "}
+              <span className="text-kolo-muted font-normal">POEN/ZRNO</span>
+            </span>
+          </div>
+
+          <div className="mt-auto pt-4">
+            <Link
+              href="/zrno"
+              className="block w-full text-center px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
+            >
+              {t("zrno_otpis_dugme")}
+            </Link>
+          </div>
+        </div>
+
+        {/* DESNO — balans kartica */}
+        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex flex-col">
+          <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
+          <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
+          <p className="text-lg text-white/70 mt-0.5">POEN</p>
+          <div className="mt-auto pt-4 flex gap-3">
+            <button
+              onClick={() => setShowSend(true)}
+              className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+            >
+              {t("posalji_poen")}
+            </button>
+            <button
+              onClick={() => setShowQR(true)}
+              className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+            >
+              {t("moj_qr")}
+            </button>
+          </div>
         </div>
       </div>
 
