@@ -27,7 +27,6 @@ import MiniStablo, {
 } from "@/components/verifikacija/MiniStablo";
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
-import PageOpis from "@/components/PageOpis";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { jeKorenJemstva } from "@/lib/dozvole";
 
@@ -104,10 +103,7 @@ export default async function VerifikacijaPage() {
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div className="space-y-1">
-        <h1 className="text-2xl font-bold">{t("page_naslov")}</h1>
-        <PageOpis>
-          {t("page_opis")}
-        </PageOpis>
+        <h1 className="kolo-naslov">{t("page_naslov")}</h1>
       </div>
 
       {/* Levo: indeks stvarnosti + tabla jemstva; desno: lanac verifikacija. Ujednačene visine. */}
@@ -140,13 +136,20 @@ export default async function VerifikacijaPage() {
         />
       </div>
 
-      {/* Kod za verifikaciju */}
-      <div id="moj-kod">
-        <MojQrKod />
-      </div>
-
-      {/* "Verifikuj nekoga" se prikazuje samo onima koji to mogu — bez negativne poruke novajliji */}
-      {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
+      {/* Kartice "Pokaži kod" i "Verifikuj nekoga" — jedna pored druge (verifikovani);
+          neverifikovani vide samo kod, punom širinom. */}
+      {jeNeverifikovan ? (
+        <div id="moj-kod">
+          <MojQrKod />
+        </div>
+      ) : (
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
+          <div id="moj-kod">
+            <MojQrKod />
+          </div>
+          <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
+        </div>
+      )}
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageOpis from "@/components/PageOpis";
 import Pseudonim from "@/components/Pseudonim";
 
 interface BlogObjava {
@@ -108,29 +107,31 @@ export default function PocetnaKlijent({
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
         {t.rich("dobrodoslice", { pseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
       </h1>
-      <PageOpis>
-        {t("opis_stranice")}
-      </PageOpis>
 
+      {/* Levo Vesti Fondacije, desno Pričaonica */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
       {/* ── BLOG / VESTI FONDACIJE ──────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
+          <h2 className="text-2xl font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
         </div>
 
-        {blog.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-            {t("nema_objava")}
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {blog.map((o) => {
+        {/* Prozor vesti — jedna bela kartica iste visine kao Pričaonica, sa skrolom */}
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-y-auto divide-y divide-kolo-border" style={{ height: 640 }}>
+          {blog.length === 0 ? (
+            <div className="h-full flex items-center justify-center p-8 text-center text-sm text-kolo-muted">
+              {t("nema_objava")}
+            </div>
+          ) : (
+            blog.map((o) => {
               const otvorena = otvorenaObjava === o.id;
-              const sazet = o.content.length > 280 && !otvorena;
+              // Ako je jedina objava, prikaži je celu (bez skraćivanja) da popuni prozor.
+              const jedina = blog.length === 1;
+              const sazet = o.content.length > 280 && !otvorena && !jedina;
               return (
                 <article
                   key={o.id}
-                  className="bg-white rounded-2xl border border-kolo-border p-5"
+                  className="p-5"
                 >
                   <h3 className="text-base font-semibold text-kolo-text mb-1">
                     {o.title}
@@ -145,7 +146,7 @@ export default function PocetnaKlijent({
                   <p className="text-sm text-kolo-text leading-relaxed whitespace-pre-wrap text-body">
                     {sazet ? o.content.slice(0, 280) + "…" : o.content}
                   </p>
-                  {o.content.length > 280 && (
+                  {o.content.length > 280 && !jedina && (
                     <button
                       onClick={() => setOtvorenaObjava(otvorena ? null : o.id)}
                       className="mt-2 text-sm font-medium text-kolo-green-700 hover:underline"
@@ -155,21 +156,21 @@ export default function PocetnaKlijent({
                   )}
                 </article>
               );
-            })}
-          </div>
-        )}
+            })
+          )}
+        </div>
       </section>
 
-      {/* ── CHAT SOBA ───────────────────────────────────────────────── */}
+      {/* ── PRIČAONICA ──────────────────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">{t("chat_naslov")}</h2>
+          <h2 className="text-2xl font-semibold text-kolo-text">{t("chat_naslov")}</h2>
           <span className="text-xs text-kolo-muted">
             {t("chat_brisanje")}
           </span>
         </div>
 
-        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden flex flex-col" style={{ height: 480 }}>
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden flex flex-col" style={{ height: 640 }}>
           {/* Spisak poruka */}
           <div
             ref={chatScrollRef}
@@ -264,6 +265,7 @@ export default function PocetnaKlijent({
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import Pseudonim from "@/components/Pseudonim";
@@ -15,7 +15,6 @@ const MAX_DISPLAY = 440;
 interface ProfilProps {
   user: {
     id: string;
-    email: string;
     pseudonim: string;
     tipKorisnika: string;
     verified: boolean;
@@ -43,6 +42,7 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const t = useTranslations("profil");
   const tc = useTranslations("common");
   const router = useRouter();
+  const { update } = useSession();
 
   const TIPOVI_ODLUKA = [
     { value: "VERIFIKACIJA", label: t("prigovor_tip_verifikacija") },
@@ -69,9 +69,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [lzSuccess, setLzSuccess] = useState("");
   const [location, setLocation] = useState(user.location ?? "");
   const [telefon, setTelefon] = useState(user.telefon ?? "");
-  const [locError, setLocError] = useState("");
-  const [locSuccess, setLocSuccess] = useState("");
-  const [locLoading, setLocLoading] = useState(false);
   const [punoIme, setPunoIme] = useState(user.punoIme ?? "");
   const [opis, setOpis] = useState(user.opis ?? "");
   const [podaciError, setPodaciError] = useState("");
@@ -220,7 +217,9 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     const data = await res.json();
     if (!res.ok) { setPsError(data.error); return; }
     setPsSuccess(t("ps_uspeh"));
-    setTimeout(() => signOut({ callbackUrl: "/login" }), 1500);
+    setNoviPseudonim("");
+    await update();
+    router.refresh();
   }
 
   async function promeniLozinku(e: React.FormEvent) {
@@ -237,36 +236,35 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     setLzSuccess(t("lz_uspeh")); setStaraLozinka(""); setNovaLozinka("");
   }
 
-  async function sacuvajPodatke(e: React.FormEvent) {
+  // Jedinstveno čuvanje svih ličnih podataka (ime/opis idu na /podaci, mesto/telefon na /lokacija).
+  async function sacuvajSve(e: React.FormEvent) {
     e.preventDefault();
     setPodaciError(""); setPodaciSuccess("");
     setPodaciLoading(true);
-    const res = await fetch("/api/profil/podaci", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ punoIme, opis }),
-    });
-    const data = await res.json();
-    setPodaciLoading(false);
-    if (!res.ok) { setPodaciError(data.error ?? tc("greska_ucitavanja")); return; }
-    setPodaciSuccess(t("sacuvano"));
-    router.refresh();
-  }
-
-  async function sacuvajLokaciju(e: React.FormEvent) {
-    e.preventDefault();
-    setLocError(""); setLocSuccess("");
-    setLocLoading(true);
-    const res = await fetch("/api/profil/lokacija", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ location, telefon }),
-    });
-    const data = await res.json();
-    setLocLoading(false);
-    if (!res.ok) { setLocError(data.error ?? tc("greska_ucitavanja")); return; }
-    setLocSuccess(t("sacuvano"));
-    router.refresh();
+    try {
+      const [r1, r2] = await Promise.all([
+        fetch("/api/profil/podaci", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ punoIme, opis }),
+        }),
+        fetch("/api/profil/lokacija", {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ location, telefon }),
+        }),
+      ]);
+      if (!r1.ok || !r2.ok) {
+        const neuspeli = !r1.ok ? r1 : r2;
+        const greska = await neuspeli.json().catch(() => ({}));
+        setPodaciError(greska.error ?? tc("greska_ucitavanja"));
+        return;
+      }
+      setPodaciSuccess(t("sacuvano"));
+      router.refresh();
+    } finally {
+      setPodaciLoading(false);
+    }
   }
 
   const tipLabel: Record<string, string> = {
@@ -305,6 +303,26 @@ export default function ProfilKlijent({ user }: ProfilProps) {
     if (!res.ok) { setBrisiError(data.error ?? t("brisi_greska")); return; }
     await signOut({ callbackUrl: "/" });
   }
+
+  // On/off klizač vidljivosti na kraju polja (pali/gasi prikazivanje na javnom profilu).
+  const renderSwitch = (field: keyof typeof togglei) => (
+    <button
+      type="button"
+      onClick={() => promeniToggle(field, !togglei[field])}
+      disabled={toggleLoading === field}
+      aria-label={togglei[field] ? t("vidljivo") : t("skriveno")}
+      title={togglei[field] ? t("vidljivo") : t("skriveno")}
+      className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
+        togglei[field] ? "bg-kolo-green-700" : "bg-kolo-border"
+      }`}
+    >
+      <span
+        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+          togglei[field] ? "translate-x-6" : "translate-x-1"
+        }`}
+      />
+    </button>
+  );
 
   return (
     <div className="space-y-6">
@@ -353,10 +371,6 @@ export default function ProfilKlijent({ user }: ProfilProps) {
               <dd className="font-medium text-kolo-text"><Pseudonim>{user.pseudonim}</Pseudonim></dd>
             </div>
             <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("email_label")}</dt>
-              <dd className="text-kolo-muted">{user.email}</dd>
-            </div>
-            <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("uloga_label")}</dt>
               <dd className="text-kolo-muted">{tipLabel[user.tipKorisnika] ?? user.tipKorisnika}</dd>
             </div>
@@ -400,73 +414,75 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </div>
 
-      {/* Ime i prezime + Lokacija i kontakt — jedno pored drugog */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("ime_prezime_sekcija")}</h2>
-          <form onSubmit={sacuvajPodatke} className="space-y-3">
-            <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("puno_ime")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+      {/* Podaci i vidljivost — jedan meni: svako polje + on/off klizač prikazivanja na kraju */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("vidljivost_naslov")}</h2>
+        <p className="text-xs text-kolo-muted mb-5">{t("vidljivost_opis")}</p>
+        <form onSubmit={sacuvajSve} className="space-y-4">
+          {/* Puno ime */}
+          <div>
+            <label className="block text-sm text-kolo-muted mb-1.5">{t("puno_ime")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+            <div className="flex items-center gap-3">
               <input
                 type="text"
                 value={punoIme}
                 onChange={(e) => setPunoIme(e.target.value)}
                 placeholder={t("puno_ime_placeholder")}
                 maxLength={100}
-                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+                className="flex-1 min-w-0 px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
+              {renderSwitch("prikaziPunoIme")}
             </div>
-            <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("opis_zanimanje")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+          </div>
+          {/* Opis / zanimanje */}
+          <div>
+            <label className="block text-sm text-kolo-muted mb-1.5">{t("opis_zanimanje")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+            <div className="flex items-center gap-3">
               <input
                 type="text"
                 value={opis}
                 onChange={(e) => setOpis(e.target.value)}
                 placeholder={t("opis_placeholder")}
                 maxLength={200}
-                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+                className="flex-1 min-w-0 px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
+              {renderSwitch("prikaziOpis")}
             </div>
-            {podaciError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{podaciError}</p>}
-            {podaciSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{podaciSuccess}</p>}
-            <button
-              type="submit"
-              disabled={podaciLoading}
-              className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
-            >
-              {podaciLoading ? tc("cuvam") : tc("sacuvaj")}
-            </button>
-          </form>
-        </div>
-
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-4">{t("lokacija_kontakt")}</h2>
-          <form onSubmit={sacuvajLokaciju} className="space-y-3">
-            <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("mesto")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
-              <LokacijaSearch value={location} onChange={setLocation} />
+          </div>
+          {/* Mesto / lokacija */}
+          <div>
+            <label className="block text-sm text-kolo-muted mb-1.5">{t("mesto")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+            <div className="flex items-center gap-3">
+              <div className="flex-1 min-w-0">
+                <LokacijaSearch value={location} onChange={setLocation} />
+              </div>
+              {renderSwitch("prikaziLokaciju")}
             </div>
-            <div>
-              <label className="block text-sm text-kolo-muted mb-1.5">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+          </div>
+          {/* Telefon */}
+          <div>
+            <label className="block text-sm text-kolo-muted mb-1.5">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
+            <div className="flex items-center gap-3">
               <input
                 type="tel"
                 value={telefon}
                 onChange={(e) => setTelefon(e.target.value)}
                 placeholder={t("telefon_placeholder")}
-                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+                className="flex-1 min-w-0 px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
               />
+              {renderSwitch("prikaziTelefon")}
             </div>
-            {locError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{locError}</p>}
-            {locSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{locSuccess}</p>}
-            <button
-              type="submit"
-              disabled={locLoading}
-              className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
-            >
-              {locLoading ? tc("cuvam") : tc("sacuvaj")}
-            </button>
-          </form>
-        </div>
+          </div>
+          {podaciError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{podaciError}</p>}
+          {podaciSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{podaciSuccess}</p>}
+          <button
+            type="submit"
+            disabled={podaciLoading}
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
+          >
+            {podaciLoading ? tc("cuvam") : tc("sacuvaj")}
+          </button>
+        </form>
       </div>
 
       {/* Promena pseudonima + Promena lozinke — jedno pored drugog */}
@@ -598,60 +614,9 @@ export default function ProfilKlijent({ user }: ProfilProps) {
         </div>
       </Link>
 
-      {/* Vidljivost profila */}
-      <div className="bg-white rounded-2xl border border-kolo-border p-6">
-        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("vidljivost_naslov")}</h2>
-        <p className="text-xs text-kolo-muted mb-5">{t("vidljivost_opis")}</p>
-        <div className="space-y-0 divide-y divide-kolo-border">
-          {([
-            { field: "prikaziLokaciju", label: t("toggle_lokacija") },
-            { field: "prikaziBilans", label: t("toggle_bilans") },
-            { field: "prikaziZrno", label: t("toggle_zrno") },
-            { field: "prikaziRangDonacija", label: t("toggle_rang_donacija") },
-            { field: "prikaziOglase", label: t("toggle_oglasi") },
-            { field: "prikaziOpis", label: t("toggle_opis") },
-            { field: "prikaziPunoIme", label: t("toggle_pravo_ime") },
-            { field: "prikaziTelefon", label: t("toggle_telefon") },
-          ] as { field: keyof typeof togglei; label: string }[]).map(({ field, label }) => (
-            <div key={field} className="flex items-center justify-between py-3">
-              <span className="text-sm text-kolo-text">{label}</span>
-              <button
-                onClick={() => promeniToggle(field, !togglei[field])}
-                disabled={toggleLoading === field}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
-                  togglei[field] ? "bg-kolo-green-700" : "bg-kolo-border"
-                }`}
-                aria-label={`${label} — ${togglei[field] ? t("vidljivo") : t("skriveno")}`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
-                    togglei[field] ? "translate-x-6" : "translate-x-1"
-                  }`}
-                />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Podaci i privatnost */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Eksport podataka */}
-        <div className="bg-white rounded-2xl border border-kolo-border p-6">
-          <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("eksport_naslov")}</h2>
-          <p className="text-xs text-kolo-muted mb-4">
-            {t("eksport_opis")}
-          </p>
-          <a
-            href="/api/profil/eksport"
-            download
-            className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
-          >
-            {t("eksport_dugme")}
-          </a>
-        </div>
-
-        {/* Prigovor na odluku */}
+      {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        {/* Prigovor na odluku — levo */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
           <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("prigovor_naslov")}</h2>
           <p className="text-xs text-kolo-muted mb-4">
@@ -686,14 +651,30 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             </button>
           </form>
         </div>
-      </div>
 
-      {/* Brisanje naloga */}
-      <div className="bg-white rounded-2xl border border-red-200 p-6">
-        <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("brisi_naslov")}</h2>
-        <p className="text-xs text-kolo-muted mb-4">
-          {t("brisi_opis")}
-        </p>
+        {/* Desno: prenosivost podataka (gore) + gašenje profila (dole) */}
+        <div className="space-y-6">
+          {/* Pravo na prenosivost podataka */}
+          <div className="bg-white rounded-2xl border border-kolo-border p-6">
+            <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("eksport_naslov")}</h2>
+            <p className="text-xs text-kolo-muted mb-4">
+              {t("eksport_opis")}
+            </p>
+            <a
+              href="/api/profil/eksport"
+              download
+              className="inline-block px-4 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
+            >
+              {t("eksport_dugme")}
+            </a>
+          </div>
+
+          {/* Gašenje profila (brisanje naloga) */}
+          <div className="bg-white rounded-2xl border border-red-200 p-6">
+            <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("brisi_naslov")}</h2>
+            <p className="text-xs text-kolo-muted mb-4">
+              {t("brisi_opis")}
+            </p>
         {!brisiModalOpen ? (
           <button
             onClick={() => setBrisiModalOpen(true)}
@@ -734,6 +715,8 @@ export default function ProfilKlijent({ user }: ProfilProps) {
             </div>
           </div>
         )}
+          </div>
+        </div>
       </div>
     </div>
   );

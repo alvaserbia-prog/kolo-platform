@@ -17,7 +17,7 @@ export default async function AdminPage() {
   const [
     allUsers, protokol, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
-    blogObjave,
+    blogObjave, pendingDonacije, otvoreniPrigovori,
   ] = await Promise.all([
     prisma.user.findMany({
       select: { id: true, pseudonim: true, email: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
@@ -100,6 +100,16 @@ export default async function AdminPage() {
       orderBy: { publishedAt: "desc" },
       include: { author: { select: { pseudonim: true } } },
     }),
+    prisma.donationRecord.findMany({
+      where: { status: "PENDING" },
+      include: { user: { select: { pseudonim: true } } },
+      orderBy: { createdAt: "asc" },
+    }),
+    prisma.prigovorNaOdluku.findMany({
+      where: { status: { in: ["PENDING", "U_OBRADI"] } },
+      include: { user: { select: { pseudonim: true } } },
+      orderBy: { createdAt: "asc" },
+    }),
   ]);
 
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
@@ -126,6 +136,16 @@ export default async function AdminPage() {
     <AdminKlijent
       opticaj={opticaj}
       nadzorNalazi={nadzorNalazi}
+      pendingDonacije={pendingDonacije.map((d) => ({
+        id: d.id, pseudonim: d.user.pseudonim, amountRSD: Number(d.amountRSD),
+        cumulativeRSD: Number(d.cumulativeRSD), level: d.level, poenEmitted: d.poenEmitted,
+        nacinUplate: d.nacinUplate, referenceNumber: d.referenceNumber,
+        createdAt: d.createdAt.toISOString(),
+      }))}
+      otvoreniPrigovori={otvoreniPrigovori.map((p) => ({
+        id: p.id, pseudonim: p.user.pseudonim, opis: p.opis, tipOdluke: p.tipOdluke,
+        status: p.status, createdAt: p.createdAt.toISOString(),
+      }))}
       viewerJeSuperadmin={jeSuper}
       viewerId={session.user.id}
       users={allUsers.map((u) => ({

@@ -1,13 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
+
+interface FondTx {
+  id: string;
+  datum: string;
+  smer: "PRILIV" | "ODLIV";
+  kategorija: string;
+  opis: string;
+  userId: string | null;
+  iznosRSD: number;
+}
 type TxFilter = "sve" | "protokol" | "clanovi";
 
 interface Transakcija {
@@ -256,48 +266,55 @@ export default function SistemKlijent({
           podnaslov={t("kartica_promet_opis")}
         />
 
-        {/* Faza sistema — ispod Opticaja */}
+        {/* Faza sistema — ispod Opticaja (sopstveni tab) */}
         <button
-          onClick={() => setSekcija("pregled")}
+          onClick={() => setSekcija("faza")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
-            sekcija === "pregled"
+            sekcija === "faza"
               ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
               : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
           }`}
         >
-          <p className={`text-base font-semibold mb-1 ${sekcija === "pregled" ? "text-white/70" : "text-kolo-muted"}`}>
+          <p className={`text-base font-semibold mb-1 ${sekcija === "faza" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
               termin={t("faza_sistema")}
               objasnjenje={t("faza_sistema_opis")}
             />
           </p>
-          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
+          <p className={`text-2xl md:text-4xl font-bold leading-tight ${sekcija === "faza" ? "text-white" : "text-kolo-text"}`}>
             {faza2 ? t("faza_2") : t("faza_1")}
           </p>
-          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "pregled" ? "bg-white/20" : "bg-kolo-bg"}`}>
+          <div className={`w-full h-1.5 rounded-full mt-2 ${sekcija === "faza" ? "bg-white/20" : "bg-kolo-bg"}`}>
             <div
-              className={`h-1.5 rounded-full transition-all ${sekcija === "pregled" ? "bg-white/70" : "bg-kolo-green-500"}`}
+              className={`h-1.5 rounded-full transition-all ${sekcija === "faza" ? "bg-white/70" : "bg-kolo-green-500"}`}
               style={{ width: `${fazaPct}%` }}
             />
           </div>
-          <p className={`text-xs mt-1 ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
+          <p className={`text-xs mt-1 ${sekcija === "faza" ? "text-white/60" : "text-kolo-muted"}`}>
             {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
           </p>
         </button>
 
-        {/* Račun Fondacije — desno dole */}
-        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
-          <p className="text-base font-semibold mb-1 text-kolo-muted">
+        {/* Račun Fondacije — desno dole (klik → spisak transakcija) */}
+        <button
+          onClick={() => setSekcija("fondacija")}
+          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
+            sekcija === "fondacija"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-base font-semibold mb-1 ${sekcija === "fondacija" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
               termin={t("kartica_racun_fondacije")}
               objasnjenje={t("kartica_racun_fondacije_opis")}
             />
           </p>
-          <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
+          <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "fondacija" ? "text-white" : "text-kolo-text"}`}>
             {racunFondacije.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs mt-1 text-kolo-muted">{t("kartica_racun_fondacije_podnaslov")}</p>
-        </div>
+          <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
+        </button>
       </div>
 
       {/* Separator */}
@@ -330,6 +347,165 @@ export default function SistemKlijent({
           transakcije={transakcije}
         />
       )}
+      {sekcija === "faza" && <FazaSekcija />}
+      {sekcija === "fondacija" && <FondacijaSekcija />}
+    </div>
+  );
+}
+
+// ── Račun Fondacije — transakcije sa bankovnog računa (priliv/odliv, RSD) ──────
+function FondacijaSekcija() {
+  const t = useTranslations("sistem");
+  const [stavke, setStavke] = useState<FondTx[] | null>(null);
+
+  useEffect(() => {
+    let aktivno = true;
+    fetch("/api/javno/fondacija/transakcije")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (aktivno) setStavke(d?.stavke ?? []); })
+      .catch(() => { if (aktivno) setStavke([]); });
+    return () => { aktivno = false; };
+  }, []);
+
+  if (stavke === null) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+        {t("fondacija_ucitavanje")}
+      </div>
+    );
+  }
+  if (stavke.length === 0) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+        {t("fondacija_nema_tx")}
+      </div>
+    );
+  }
+
+  const datum = (iso: string) =>
+    new Date(iso).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" });
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+      <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        <span>{t("fondacija_col_opis")}</span>
+        <span className="text-right">{t("fondacija_col_iznos")}</span>
+        <span className="text-right">{t("col_datum")}</span>
+      </div>
+      {stavke.map((s, i) => (
+        <div key={s.id} className={i < stavke.length - 1 ? "border-b border-kolo-border/30" : ""}>
+          {/* Desktop */}
+          <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-3 items-center text-sm">
+            <div className="min-w-0">
+              {s.userId ? (
+                <Link href={`/profil/${s.userId}`} className="font-medium text-kolo-green-700 hover:underline truncate block">
+                  <Pseudonim>{s.opis}</Pseudonim>
+                </Link>
+              ) : (
+                <p className="text-kolo-text truncate">{s.opis}</p>
+              )}
+              <p className="text-xs text-kolo-muted">{s.kategorija}</p>
+            </div>
+            <span className={`text-right font-mono font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
+            </span>
+            <span className="text-right text-kolo-muted">{datum(s.datum)}</span>
+          </div>
+          {/* Mobilna */}
+          <div className="sm:hidden px-4 py-3 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              {s.userId ? (
+                <Link href={`/profil/${s.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline truncate block">
+                  <Pseudonim>{s.opis}</Pseudonim>
+                </Link>
+              ) : (
+                <p className="text-sm text-kolo-text truncate">{s.opis}</p>
+              )}
+              <p className="text-xs text-kolo-muted">{s.kategorija} · {datum(s.datum)}</p>
+            </div>
+            <span className={`shrink-0 font-mono text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Faza (preslikano sa /o-nama) ──────────────────────────────────────────────
+
+function FazaSekcija() {
+  const t = useTranslations("oNama");
+
+  const faze = [
+    { r1: t("faza1"), r2: t("faza1b"), aktivan: true },
+    { r1: t("faza2"), r2: t("faza2b"), aktivan: false },
+    { r1: t("faza3"), r2: t("faza3b"), aktivan: false },
+    { r1: t("faza4"), r2: t("faza4b"), aktivan: false },
+    { r1: t("faza5"), r2: t("faza5b"), aktivan: false },
+    { r1: t("faza6"), r2: t("faza6b"), aktivan: false },
+    { r1: t("faza7"), r2: t("faza7b"), aktivan: false },
+  ];
+
+  return (
+    <div className="space-y-5">
+      <div className="bg-white rounded-2xl border border-kolo-border p-5 md:p-6">
+        <span className="text-xs text-kolo-muted font-medium tracking-wide">{t("status_datum")}</span>
+        <h2 className="text-xl md:text-2xl font-bold text-kolo-green-900 mt-1 mb-3" style={{ letterSpacing: "-0.02em" }}>
+          {t("status_naslov")}
+        </h2>
+        <p className="text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
+          {t("status_opis")}
+        </p>
+
+        {/* Timeline */}
+        <div className="relative mt-8">
+          {/* Mobilni — vertikalni redosled */}
+          <div className="md:hidden relative">
+            <div
+              className="absolute w-0.5 bg-kolo-border"
+              style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
+            />
+            <div className="flex flex-col gap-3">
+              {faze.map((faza) => (
+                <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                  <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                    {faza.r1} {faza.r2}
+                    {faza.aktivan && (
+                      <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
+                    )}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop — horizontalni redosled */}
+          <div className="hidden md:block relative pt-5">
+            <div
+              className="absolute h-0.5 bg-kolo-border"
+              style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
+            />
+            <div className="relative grid grid-cols-7">
+              {faze.map((faza) => (
+                <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
+                  {faza.aktivan && (
+                    <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
+                      {t("faza_tu_smo_desktop")}
+                    </span>
+                  )}
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                  <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                    {faza.r1}<br />{faza.r2}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

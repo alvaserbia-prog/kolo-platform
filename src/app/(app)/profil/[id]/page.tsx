@@ -143,18 +143,17 @@ export default function JavniProfilPage() {
 
   return (
     <div className="space-y-4">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-kolo-muted">
-        <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">{t("krug_link")}</Link>
-        <span>/</span>
-        <span className="text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></span>
+      {/* Naslov */}
+      <div className="text-sm font-medium text-kolo-text">
+        <Pseudonim>{profil.pseudonim}</Pseudonim>
       </div>
 
-      {/* Hero kartica */}
-      <div className="bg-white rounded-2xl border border-kolo-border p-6">
-        <div className="flex items-start gap-4">
-          {/* Avatar */}
-          <div className="shrink-0">
+      {/* Gornji raspored: levo manja pseudonim kartica, desno statistike + indeks */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        {/* LEVO — pseudonim kartica (ista visina kao lanac/transakcije) */}
+        <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5 flex flex-col lg:h-[460px]">
+          <div className="flex flex-col items-center text-center">
+            {/* Avatar */}
             {profil.avatar ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -167,113 +166,105 @@ export default function JavniProfilPage() {
                 <span className="text-xl font-bold text-kolo-green-700">{inicijali}</span>
               </div>
             )}
+
+            <h1 className="text-lg font-bold text-kolo-text mt-3"><Pseudonim>{profil.pseudonim}</Pseudonim></h1>
+            {profil.punoIme && (
+              <p className="text-sm text-kolo-muted mt-0.5">{profil.punoIme}</p>
+            )}
+            {profil.lokacija && (
+              <p className="text-sm text-kolo-muted mt-0.5">{profil.lokacija}</p>
+            )}
+
+            <div className="flex flex-wrap justify-center gap-1.5 mt-2">
+              {profil.verified ? (
+                <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 rounded-full">
+                  {t("status_verifikovan")}
+                </span>
+              ) : (
+                <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 rounded-full">
+                  {t("status_ceka")}
+                </span>
+              )}
+              {profil.status === "SUSPENDED" && (
+                <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-danger-light text-kolo-danger rounded-full">
+                  {t("status_suspendovan")}
+                </span>
+              )}
+            </div>
+
+            {profil.opis && (
+              <p className="text-sm text-kolo-muted mt-2 line-clamp-3">{profil.opis}</p>
+            )}
           </div>
 
-          {/* Ime i badges */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-start justify-between gap-2 flex-wrap">
-              <div>
-                <h1 className="text-xl font-bold text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></h1>
-                {profil.punoIme && (
-                  <p className="text-sm text-kolo-muted mt-0.5">{profil.punoIme}</p>
-                )}
-                {profil.lokacija && (
-                  <p className="text-sm text-kolo-muted mt-0.5">{profil.lokacija}</p>
-                )}
-              </div>
-              <div className="flex flex-wrap gap-1.5 shrink-0">
-                {profil.verified ? (
-                  <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-green-100 text-kolo-green-700 rounded-full">
-                    {t("status_verifikovan")}
-                  </span>
-                ) : (
-                  <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-gold-100 text-kolo-gold-600 rounded-full">
-                    {t("status_ceka")}
-                  </span>
-                )}
-                {profil.status === "SUSPENDED" && (
-                  <span className="text-xs font-semibold px-2.5 py-1 bg-kolo-danger-light text-kolo-danger rounded-full">
-                    {t("status_suspendovan")}
-                  </span>
-                )}
-              </div>
+          {/* Info red */}
+          <dl className="mt-4 space-y-2.5 text-sm border-t border-kolo-border pt-4">
+            <div className="flex justify-between gap-2">
+              <dt className="text-kolo-muted">{t("clan_od")}</dt>
+              <dd className="text-kolo-muted">
+                {new Date(profil.createdAt).toLocaleDateString("sr-RS", { year: "numeric", month: "long" })}
+              </dd>
             </div>
-            {profil.opis && (
-              <p className="text-sm text-kolo-muted mt-2 line-clamp-2">{profil.opis}</p>
+            {profil.telefon && (
+              <div className="flex justify-between gap-2">
+                <dt className="text-kolo-muted">{t("telefon_label")}</dt>
+                <dd className="text-kolo-text">{profil.telefon}</dd>
+              </div>
             )}
+            {profil.rangDonacija !== null && (
+              <div className="flex justify-between gap-2">
+                <dt className="text-kolo-muted">{t("toggle_rang_donacija")}</dt>
+                <dd className="text-kolo-text font-medium">#{profil.rangDonacija}</dd>
+              </div>
+            )}
+          </dl>
+
+          {/* Akcijska dugmad */}
+          <div className="mt-auto pt-4 flex gap-2">
+            <Link
+              href={`/novcanik?prima=${profil.pseudonim}`}
+              className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
+            >
+              {t("upisi_poen")}
+            </Link>
+            <PorukaButton userId={profil.id} />
           </div>
         </div>
 
-        {/* Info red */}
-        <dl className="mt-5 space-y-2.5 text-sm border-t border-kolo-border pt-4">
-          {profil.krug && (
-            <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("krug_link")}</dt>
-              <dd>
-                <Link href={`/krug/${profil.krug.id}`} className="font-medium text-kolo-green-700 hover:underline">
-                  {profil.krug.name}
-                </Link>
-              </dd>
+        {/* DESNO — gore statistike (ZRNO levo, POEN desno), dole indeks stvarnosti */}
+        <div className="lg:col-span-6 flex flex-col gap-4">
+          {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
+          <div className="grid grid-cols-2 gap-4 flex-1">
+            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
+              <p className="text-base font-medium text-kolo-muted mb-1">ZRNO</p>
+              <p className="text-5xl font-bold text-kolo-text tabular-nums">
+                {profil.zrno !== null ? profil.zrno.toLocaleString("sr-RS") : "—"}
+              </p>
             </div>
-          )}
-          <div className="flex justify-between">
-            <dt className="text-kolo-muted">{t("clan_od")}</dt>
-            <dd className="text-kolo-muted">
-              {new Date(profil.createdAt).toLocaleDateString("sr-RS", { year: "numeric", month: "long" })}
-            </dd>
+            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
+              <p className="text-base font-medium text-kolo-muted mb-1">POEN</p>
+              <p className="text-5xl font-bold text-kolo-text tabular-nums">
+                {profil.bilans !== null ? profil.bilans.toLocaleString("sr-RS") : "—"}
+              </p>
+            </div>
           </div>
-          {profil.telefon && (
-            <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("telefon_label")}</dt>
-              <dd className="text-kolo-text">{profil.telefon}</dd>
-            </div>
-          )}
-        </dl>
 
-        {/* Akcijska dugmad */}
-        <div className="mt-4 flex gap-3">
-          <Link
-            href={`/novcanik?prima=${profil.pseudonim}`}
-            className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
-          >
-            {t("upisi_poen")}
-          </Link>
-          <PorukaButton userId={profil.id} />
+          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno) */}
+          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
         </div>
       </div>
 
-      {/* Indeks stvarnosti */}
-      <IndeksSekcija korisnikId={profil.id} />
+      {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
+        {/* LEVO — lanac verifikacija (mini stablo) */}
+        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
 
-      {/* Statistike */}
-      {(profil.bilans !== null || profil.zrno !== null || profil.rangDonacija !== null) && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {profil.bilans !== null && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">{t("poen_stanje_label")}</p>
-              <p className="text-lg font-bold text-kolo-text">{profil.bilans.toLocaleString("sr-RS")}</p>
-            </div>
-          )}
-          {profil.zrno !== null && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">ZRNO</p>
-              <p className="text-lg font-bold text-kolo-text">{profil.zrno.toLocaleString("sr-RS")}</p>
-            </div>
-          )}
-          {profil.rangDonacija !== null && (
-            <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center">
-              <p className="text-xs text-kolo-muted mb-1">{t("toggle_rang_donacija")}</p>
-              <p className="text-lg font-bold text-kolo-text">#{profil.rangDonacija}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Transakcije */}
-      <div className="bg-white rounded-2xl border border-kolo-border">
-        <div className="px-6 py-4 border-b border-kolo-border">
+        {/* DESNO — transakcije (fiksna visina + skrol) */}
+        <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[460px]">
+        <div className="px-6 py-4 border-b border-kolo-border shrink-0">
           <h2 className="text-sm font-semibold text-kolo-text">{t("transakcije_naslov")}</h2>
         </div>
+        <div className="flex-1 overflow-y-auto">
         {sveTrx.length === 0 ? (
           <p className="px-6 py-8 text-center text-sm text-kolo-muted">{t("nema_transakcija")}</p>
         ) : (
@@ -293,7 +284,7 @@ export default function JavniProfilPage() {
                       ) : t("protokol"))}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
-                      {new Date(trx.createdAt).toLocaleDateString("sr-RS", { day: "numeric", month: "short", year: "numeric" })}
+                      {new Date(trx.createdAt).toLocaleString("sr-RS", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
                   <span className={`text-sm font-semibold shrink-0 ${jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>
@@ -315,6 +306,8 @@ export default function JavniProfilPage() {
             </button>
           </div>
         )}
+        </div>
+        </div>
       </div>
 
       {/* Oglasi */}

@@ -195,8 +195,9 @@ function SidebarContent({
     { href: "/tabla-jemstva", label: t("tabla_jemstva") },
   ];
 
-  // Padajuća grupa "Zajedničko dobro": ZRNO, Doprinos, Programi (+ Nadzor za nadzornike)
+  // Padajuća grupa "Zajedničko dobro": Sistem, ZRNO, Doprinos, Programi (+ Nadzor za nadzornike)
   const zajednickoDobro = [
+    { href: "/sistem", label: t("sistem") },
     { href: "/zrno", label: t("zrno") },
     { href: "/doprinos-oglasi", label: t("doprinos") },
     { href: "/programi", label: t("programi") },
@@ -211,18 +212,17 @@ function SidebarContent({
     ? [
         { links: [
           { href: "/pocetna", label: t("pocetna") },
-          { href: "/sistem", label: t("sistem") },
         ] },
         { links: [
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
         { links: poverenje },
-        { label: t("grupa_zajednicko_dobro"), collapsible: true, links: zajednickoDobro },
         { links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
         ] },
+        { label: t("grupa_zajednicko_dobro"), collapsible: true, links: zajednickoDobro },
         ...adminGrupa,
       ]
     : [
@@ -238,12 +238,8 @@ function SidebarContent({
 
   return (
     <>
-      <div className="flex flex-col items-center px-4 pt-3 pb-2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/kolo-hero-logo.png" alt="KOLO" style={{ width: 92, height: 92, objectFit: "contain", borderRadius: "1.1rem" }} />
-        <span className="font-bold text-white text-3xl tracking-[0.2em] mt-1.5">KOLO</span>
-      </div>
-      <nav className="flex-1 px-2.5 py-3 space-y-1 overflow-y-auto">
+      {/* Brending i jezik switcher su u headeru (gore-levo); sidebar je samo navigacija */}
+      <nav className="flex-1 px-2.5 pt-4 pb-3 space-y-1 overflow-y-auto">
         {grupe.map((grupa, gi) => (
           <div key={grupa.label ?? `grupa-${gi}`} className={gi > 0 ? "pt-2" : ""}>
             {grupa.collapsible ? (

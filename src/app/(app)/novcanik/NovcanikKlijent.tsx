@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
-import PageOpis from "@/components/PageOpis";
 import Pseudonim from "@/components/Pseudonim";
 
 
@@ -37,6 +37,16 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
   const [filter, setFilter] = useState<Filter>("sve");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
   const [showQR, setShowQR] = useState(false);
+  const [zrno, setZrno] = useState<{ slobodno: number; kurs: number } | null>(null);
+
+  useEffect(() => {
+    let aktivno = true;
+    fetch("/api/zrno")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (aktivno && d) setZrno({ slobodno: d.slobodno ?? 0, kurs: d.kurs ?? 0 }); })
+      .catch(() => {});
+    return () => { aktivno = false; };
+  }, []);
 
   const filtered = transakcije.filter((tx) => {
     if (filter === "primljeno") return tx.primio && tx.type === "TRANSFER";
@@ -47,28 +57,61 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
 
   return (
     <div className="space-y-6">
-      <PageOpis>
-        {t("opis_stranice")}
-      </PageOpis>
+      {/* Gornje kartice: levo ZRNO, desno balans */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+        {/* LEVO — ZRNO kartica: broj ZRNA skroz levo, koeficijent u sredini, dugme skroz desno */}
+        <div className="bg-white rounded-2xl border border-kolo-border p-6 shadow-sm flex items-center justify-between gap-4">
+          {/* LEVO — broj ZRNA veliki (kao POEN) */}
+          <div className="text-left min-w-0">
+            <p className="text-4xl sm:text-5xl font-bold text-kolo-text tabular-nums break-words">
+              {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
+          </div>
 
-      {/* Balans kartica */}
-      <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
-        <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
-        <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
-        <p className="text-lg text-white/70 mt-0.5">POEN</p>
-        <div className="mt-4 flex gap-3">
-          <button
-            onClick={() => setShowSend(true)}
-            className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+          {/* SREDINA — koeficijent */}
+          <div className="text-center min-w-0">
+            <p className="text-xs text-kolo-muted">{t("zrno_koeficijent_label")}</p>
+            <p className="text-base font-semibold text-kolo-text tabular-nums">
+              {zrno ? zrno.kurs.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-[10px] text-kolo-muted">POEN/ZRNO</p>
+          </div>
+
+          {/* DESNO — dugme Otpiši ZRNO */}
+          <Link
+            href="/zrno"
+            className="shrink-0 px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
           >
-            {t("posalji_poen")}
-          </button>
-          <button
-            onClick={() => setShowQR(true)}
-            className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
-          >
-            {t("moj_qr")}
-          </button>
+            {t("zrno_otpis_dugme")}
+          </Link>
+        </div>
+
+        {/* DESNO — balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}
+        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
+          {/* LEVO — dugmad jedno ispod drugog */}
+          <div className="flex flex-col gap-3 shrink-0">
+            <button
+              onClick={() => setShowSend(true)}
+              className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+            >
+              {t("posalji_poen")}
+            </button>
+            <button
+              onClick={() => setShowQR(true)}
+              className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+            >
+              {t("moj_qr")}
+            </button>
+          </div>
+
+          {/* DESNO — stanje veliko */}
+          <div className="text-right min-w-0">
+            <p className="text-4xl sm:text-5xl font-bold font-mono tracking-tight tabular-nums break-words">
+              {balance.toLocaleString("sr-RS")}
+            </p>
+            <p className="text-lg text-white/70 mt-0.5">POEN</p>
+          </div>
         </div>
       </div>
 

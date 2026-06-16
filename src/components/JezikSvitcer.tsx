@@ -6,9 +6,9 @@ import { useLocale } from "next-intl";
 // (projekat koristi ravno stablo ruta; request.ts чita cookie i učitava prevode,
 // a ćirilica se izvodi transliteracijom iz "sr").
 const jezici = [
-  { kod: "sr", oznaka: "Lat", naziv: "Srpski — latinica" },
-  { kod: "sr-Cyrl", oznaka: "Ћир", naziv: "Српски — ћирилица" },
-  { kod: "en", oznaka: "EN", naziv: "English" },
+  { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
+  { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
+  { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
 ];
 
 function promeniJezik(kod: string) {
@@ -26,8 +26,7 @@ export default function JezikSvitcer() {
   const trenutni = useLocale();
 
   return (
-    // data-no-cyr: oznake jezika se NE transliterišu (treba da ostanu "Lat"/"Ћир"/"EN"/"HU").
-    <div data-no-cyr className="flex items-center gap-1">
+    <div className="flex items-center gap-1.5">
       {jezici.map((j) => (
         <button
           key={j.kod}
@@ -36,13 +35,18 @@ export default function JezikSvitcer() {
           aria-label={j.naziv}
           aria-pressed={trenutni === j.kod}
           suppressHydrationWarning
-          className={`px-1.5 py-0.5 rounded text-xs font-semibold leading-none transition-all ${
+          className={`rounded-md p-0.5 transition-all ${
             trenutni === j.kod
-              ? "bg-kolo-green-700 text-white opacity-100"
-              : "text-kolo-muted opacity-50 hover:opacity-100"
+              ? "ring-2 ring-white/90 opacity-100"
+              : "opacity-45 hover:opacity-90"
           }`}
         >
-          {j.oznaka}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={j.ikona}
+            alt={j.naziv}
+            className="block h-[18px] w-auto rounded-[3px]"
+          />
         </button>
       ))}
     </div>

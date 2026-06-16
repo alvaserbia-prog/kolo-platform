@@ -37,7 +37,19 @@ type LanacResponse = {
  * i mini stablo (lanac verifikacija). Dohvata iz javnog endpoint-a
  * /api/verifikacija/lanac/[korisnikId].
  */
-export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
+export default function IndeksSekcija({
+  korisnikId,
+  prikaziIndeks = true,
+  prikaziStablo = true,
+  indeksKaoBadge = false,
+  ispuniVisinu = false,
+}: {
+  korisnikId: string;
+  prikaziIndeks?: boolean;
+  prikaziStablo?: boolean;
+  indeksKaoBadge?: boolean;
+  ispuniVisinu?: boolean;
+}) {
   const [data, setData] = useState<LanacResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,7 +69,7 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
   if (error) return null;
   if (!data) {
     return (
-      <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+      <div className={`rounded-2xl border border-black/10 bg-white p-6 shadow-sm${ispuniVisinu ? " h-full" : ""}`}>
         <div className="text-sm text-black/55">Učitavanje indeksa...</div>
       </div>
     );
@@ -75,14 +87,24 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
   }));
 
   return (
-    <div className="space-y-4">
-      <IndeksPrikaz prikaz={data.korisnik.prikaz} tip={data.korisnik.tip} />
-      <MiniStablo
-        ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
-        verifikatori={verifikatorCvorovi}
-        verifikovani={verifikovaniCvorovi}
-        jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
-      />
+    <div className={ispuniVisinu ? "flex-1 flex flex-col" : "space-y-4"}>
+      {prikaziIndeks && (
+        <IndeksPrikaz
+          prikaz={data.korisnik.prikaz}
+          tip={data.korisnik.tip}
+          statusKaoBadge={indeksKaoBadge}
+          ispuniVisinu={ispuniVisinu}
+        />
+      )}
+      {prikaziStablo && (
+        <MiniStablo
+          ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
+          verifikatori={verifikatorCvorovi}
+          verifikovani={verifikovaniCvorovi}
+          jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
+          className={ispuniVisinu ? "h-full" : ""}
+        />
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ export default async function PijacaPage() {
     take: 60,
     select: {
       id: true, title: true, description: true, price: true,
+      jedinica: true, kolicina: true,
       category: true, images: true, location: true, createdAt: true,
       seller: { select: { pseudonim: true, verified: true } },
     },
@@ -45,6 +46,8 @@ export default async function PijacaPage() {
           title: l.title,
           description: l.description,
           price: l.price,
+          jedinica: l.jedinica ?? null,
+          kolicina: l.kolicina ?? null,
           category: l.category,
           slike: l.images.length,
           location: l.location ?? null,

@@ -149,7 +149,7 @@ async function seedUoClana(clan: UoClan) {
         toWalletId: user.wallet!.id,
         amount: POCETNA_EMISIJA,
         type: TransactionType.EMISIJA_VERIFIKACIJA,
-        description: "Početni doprinos UO Fondacije (čl. 14 Pravilnika o dokazu stvarnosti)",
+        description: "Osnivački doprinos (čl. 14 Pravilnika o dokazu stvarnosti)",
       },
     });
     await tx.user.update({

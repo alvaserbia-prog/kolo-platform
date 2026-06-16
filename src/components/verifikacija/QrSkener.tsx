@@ -81,7 +81,7 @@ export default function QrSkener({ onDetektovan, onZatvori }: Props) {
         style={{ aspectRatio: "1 / 1" }}
       />
       {error && (
-        <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3">
+        <div className="text-sm text-kolo-danger bg-kolo-danger-light border border-kolo-danger-light rounded-xl p-3">
           {error}
         </div>
       )}
@@ -89,19 +89,19 @@ export default function QrSkener({ onDetektovan, onZatvori }: Props) {
         <button
           type="button"
           onClick={preokreni}
-          className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+          className="px-3 py-1.5 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
         >
           Preokreni kameru ({aktivnaKamera === "environment" ? "zadnja" : "prednja"})
         </button>
         <button
           type="button"
           onClick={onZatvori}
-          className="px-3 py-1.5 rounded-xl bg-black/5 hover:bg-black/10 text-sm font-medium"
+          className="px-3 py-1.5 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
         >
           Zatvori skener
         </button>
       </div>
-      <p className="text-xs text-black/55 text-center">
+      <p className="text-xs text-kolo-muted text-center">
         Usmeri kameru ka QR kodu osobe koju verifikuješ.
       </p>
     </div>

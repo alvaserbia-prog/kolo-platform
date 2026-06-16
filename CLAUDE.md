@@ -2,7 +2,7 @@
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
-- **`main`** → TEST deploy (preview na **`kolo-peach.vercel.app`**, test Neon baza, pun seed). Ovde ide sav svakodnevni rad.
+- **`main`** → TEST deploy (test Neon baza, pun seed). Gleda se na **`kolo-peach.vercel.app`** (kratak alias, vidi topologiju ispod) ili na auto URL `kolo-git-main-alvaserbia-progs-projects.vercel.app`. Ovde ide sav svakodnevni rad.
 - **`production`** → UŽIVO na **ekolo.rs** (prod Neon baza, `seed-prod.ts`). Samo namerna „objava".
 
 **Pravila za Claude:**
@@ -13,15 +13,17 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 
-### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04)
-**PROMENA 2026-06-13:** `kolo-peach.vercel.app` je **ponovo aktivan TEST URL** za granu `main` (raniji status „ZAMRZNUT na buildu `d8bc6fc`" iz 2026-06-04 više ne važi — projekat ponovo prima deploye sa `main` i to je URL na koji vlasnik gleda test). **Jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`):
+### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04; kolo-peach re-pointovan 2026-06-12)
+**PROMENA 2026-06-04:** stari `kolo-platform` projekat (`prj_F8dvteluVkzxlGzIMfpvXqWJD2yC`) je **isključen** — više ne gradi (poslednji deploy `d8bc6fc`, ~3. jun). Sada **jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`).
+
+**PROMENA 2026-06-12:** domen **`kolo-peach.vercel.app` je prebačen sa starog (zamrznutog) projekta na projekat `kolo`, grana `main`** (Domains tab: `kolo-peach.vercel.app → main`). Više NIJE zamrznut — sada je **kratak alias za TEST** i služi poslednji `main` build sa test bazom. (Raniji tekst „kolo-peach ZAMRZNUT, ne koristiti" više NE važi.)
 
 | Grana | Vercel target | URL | Baza (Neon) |
 |---|---|---|---|
 | **`production`** | production | **ekolo.rs** / www.ekolo.rs | prod (`ep-empty-forest-alajuasx`) |
-| **`main`** | preview | **`kolo-peach.vercel.app`** | test (`ep-old-sky-aleg2alm`) |
+| **`main`** | preview | **`kolo-peach.vercel.app`** (= test alias) ili `kolo-git-main-alvaserbia-progs-projects.vercel.app` | test (`ep-old-sky-aleg2alm`) |
 
-- „pošalji na test" = push na `main` → gleda se na **`kolo-peach.vercel.app`**.
+- „pošalji na test" = push na `main` → gleda se na **`kolo-peach.vercel.app`** (ili dugi auto URL). Zbog CDN keša, za proveru sveže promene koristiti **incognito**.
 - „objava na ekolo.rs" = merge `main` → `production` + push (nepromenjeno).
 - **Env varijable po grani/scope-u:** Production scope (prod baza, tajne za ekolo.rs: `PLACANJE_AKTIVNO`, `NESTPAY_*`) vs Preview scope (test baza). Oba imaju `DATABASE_URL`, pa migracije rade i na test i na prod buildu.
 
@@ -254,8 +256,9 @@ docs/             — interne radne beleške (nije normativa)
 - `/poruke` split-panel; polling 5s; badge nepročitanih; Enter/Shift+Enter; mobilni view; „Kontaktiraj prodavca" na oglasu; notifikacija primaocu.
 
 ### Pijaca (Marketplace)
-- Listinzi; pretraga po kategoriji/lokaciji; sopstveni layout; detalji na `/pijaca/[id]`.
+- Listinzi; pretraga po kategoriji/lokaciji; sopstveni layout (`src/app/pijaca/`, van `(app)/` grupe — vidi BUG sa badge-om u „Sidebar badge"); detalji na `/pijaca/[id]`.
 - **Pregled oglasa javan svim posetiocima** (v3.7.3); **postavljanje/kupovina/kontakt samo verifikovani**.
+- **Slike oglasa na Vercel Blob (od 2026-06-11):** upload ide na `@vercel/blob` `put()` kad postoji `BLOB_READ_WRITE_TOKEN` (serverless FS na Vercel-u je read-only/efemeran — raniji `writeFile` u `storage/oglasi/` je padao sa EROFS); **disk fallback** za lokalni dev. Ruta `slika/[listingId]/[idx]` radi 308 redirect na CDN za apsolutne URL-ove; legacy disk putanje i dalje rade.
 
 ### Pretraga članova
 - `ClanPretraga` (debounce 250ms, keyboard nav). Klikabilni pseudonimi u tabelama.
@@ -327,7 +330,8 @@ docs/             — interne radne beleške (nije normativa)
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
-- Tabs: Dashboard, Na čekanju, Krugovi, Programi, Pokrovitelji (+ prijave), Korisnici, Osnivači, Finansije (+ veto/troškovi), Audit log. (Admin simulator UKLONJEN.)
+- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Finansije (Emisija + veto/troškovi), Osnivači, Vesti, Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Nadzor). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
 
 ## Uloge u sistemu
 - **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`tipKorisnika POCETNI`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
@@ -338,6 +342,11 @@ docs/             — interne radne beleške (nije normativa)
 - Verifikovan: Početna, Sistem, Novčanik, Pijaca, ZRNO
 - Admin (dodatno): Admin
 - Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Donacije, Pokroviteljstvo, Profil, Nadzor, Tabla jemstva) dostupne preko drugih ulaznih tačaka.
+
+### Sidebar badge — dve vrste (od 2026-06-11)
+- **„Viđeno" badge-evi (Novčanik, Pijaca):** broje stavke nastale POSLE poslednjeg otvaranja taba. Kolone `User.vidjenoNovcanikAt` / `vidjenoPijacaAt` (migracija `20260611120000_sidebar_vidjeno`); `GET /api/dnevni-brojevi` broji `createdAt > viđeno` (fallback ponoć ako tab nije otvaran); `POST /api/dnevni-brojevi/vidjeno {sekcija}` postavi „viđeno = sad" → badge na 0. Nulovanje okida `AppShell` `useEffect` na promenu `pathname` (`/novcanik` | `/pijaca`): optimističko nulovanje + POST + re-fetch.
+- **Akcioni badge-evi (Tabla jemstva, Admin, Nadzor):** broje otvorene stavke koje traže radnju (aktivni zahtevi za jemstvo, stavke na čekanju za admina, verifikacije za nadzor). **Namerno se NE nuluju na otvaranje** — padaju tek kad se sama stavka reši. Ako korisnik očekuje da nestanu „kad se očitaju", to je očekivano ponašanje, nije bug.
+- 🔴 **BUG (Pijaca badge se ne nuluje):** ruta `/pijaca` (index + `[id]`) je u `src/app/pijaca/` sa **sopstvenim** `layout.tsx` koji renderuje `Sidebar` direktno — **van `AppShell`-a**. Zato se „viđeno" `useEffect` (koji je u `AppShell`) NIKAD ne okine pri ulasku u Pijacu → `vidjenoPijacaAt` se ne pomera → badge ostaje. (Novčanik je u `(app)/` grupi pa radi.) Fix: okinuti `POST /api/dnevni-brojevi/vidjeno {sekcija:"pijaca"}` iz klijentske komponente na `/pijaca` (npr. `useEffect` u `PijacaKlijent`), ili dignuti „viđeno" logiku u `Sidebar` (deljen u oba layout-a).
 
 ## API endpointi (izbor)
 

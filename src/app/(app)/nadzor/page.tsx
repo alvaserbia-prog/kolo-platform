@@ -23,8 +23,8 @@ export default async function NadzorPage() {
   if (!user || !mozeNadzor(user)) {
     return (
       <div className="max-w-2xl mx-auto py-12 text-center">
-        <h1 className="text-2xl font-bold mb-2">{t("nema_ovlascenja_naslov")}</h1>
-        <p className="text-black/70">
+        <h1 className="text-2xl font-bold mb-2 text-kolo-text">{t("nema_ovlascenja_naslov")}</h1>
+        <p className="text-kolo-muted">
           {t("nema_ovlascenja_opis")}
         </p>
       </div>
@@ -36,14 +36,14 @@ export default async function NadzorPage() {
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">{t("page_naslov")}</h1>
-        <p className="text-sm text-black/70 mt-1">
+        <h1 className="kolo-naslov">{t("page_naslov")}</h1>
+        <p className="text-sm text-kolo-muted mt-1">
           {t("page_opis")}
         </p>
       </div>
 
       {lista.length === 0 ? (
-        <div className="rounded-2xl border border-black/10 bg-white p-8 text-center text-black/55">
+        <div className="rounded-2xl border border-kolo-border bg-white p-8 text-center text-kolo-muted">
           {t("prazna_lista")}
         </div>
       ) : (

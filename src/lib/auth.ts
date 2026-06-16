@@ -178,12 +178,13 @@ export const authOptions: NextAuthOptions = {
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id as string },
-            select: { verified: true, oauthPending: true, tipKorisnika: true, admin: true },
+            select: { verified: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
           });
           session.user.verified = dbUser?.verified ?? (token.verified as boolean);
           session.user.oauthPending = dbUser?.oauthPending ?? (token.oauthPending as boolean) ?? false;
           if (dbUser?.tipKorisnika) session.user.tipKorisnika = dbUser.tipKorisnika;
           if (dbUser?.admin) session.user.admin = dbUser.admin;
+          if (dbUser?.pseudonim) session.user.pseudonim = dbUser.pseudonim;
         } catch {
           session.user.verified = (token.verified as boolean) ?? false;
           session.user.oauthPending = (token.oauthPending as boolean) ?? false;

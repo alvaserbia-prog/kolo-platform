@@ -27,13 +27,18 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
     <header className="shrink-0 bg-kolo-bg flex items-center justify-center">
       <div className="relative flex w-full max-w-[1140px] h-16 items-center justify-between bg-kolo-green-900 before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
 
-        {/* Leva strana: jezik + hamburger (mobilno) */}
+        {/* Leva strana: logo (desktop) / hamburger + logo (mobilno) */}
         <div className="flex items-center shrink-0">
-          {/* Desktop: placeholder + zastavice */}
-          <div className="hidden md:flex items-center w-52 px-4 gap-3">
+          {/* Desktop: logo + naziv (klikabilno na početnu) + jezik switcher desno od naziva */}
+          <div className="hidden md:flex items-center px-4 gap-3 shrink-0">
+            <Link href="/pocetna" className="flex items-center gap-2.5 group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kolo-icon.png" alt="KOLO" width={32} height={32} className="rounded-lg shrink-0" />
+              <span className="font-bold text-white text-xl tracking-[0.2em] group-hover:opacity-90 transition-opacity">KOLO</span>
+            </Link>
             <JezikSvitcer />
           </div>
-          {/* Mobilno: hamburger + naziv */}
+          {/* Mobilno: hamburger + logo */}
           <div className="flex md:hidden items-center gap-1.5 pl-2 pr-1">
             <button
               onClick={onMenuOpen}
@@ -46,7 +51,11 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             </button>
-            <span className="font-bold text-white text-base tracking-widest">KOLO</span>
+            <Link href="/pocetna" className="flex items-center gap-1.5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/kolo-icon.png" alt="KOLO" width={26} height={26} className="rounded-md shrink-0" />
+              <span className="font-bold text-white text-base tracking-widest">KOLO</span>
+            </Link>
           </div>
         </div>
 

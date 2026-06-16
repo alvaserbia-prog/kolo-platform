@@ -404,6 +404,10 @@ model MarketplaceListing {
   title       String
   description String
   price       Int
+  // Opciona jedinica mere za cenu (kom, kg, g, l, ml, m, pak) i stanje na zalihama.
+  // Oba su informativna — ne utiču na tok kupovine (oglas se i dalje kupuje u celosti).
+  jedinica    String?
+  kolicina    Int?
   category    String
   images      String[]
   location    String?
