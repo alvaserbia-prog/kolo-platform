@@ -37,7 +37,15 @@ type LanacResponse = {
  * i mini stablo (lanac verifikacija). Dohvata iz javnog endpoint-a
  * /api/verifikacija/lanac/[korisnikId].
  */
-export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
+export default function IndeksSekcija({
+  korisnikId,
+  prikaziIndeks = true,
+  prikaziStablo = true,
+}: {
+  korisnikId: string;
+  prikaziIndeks?: boolean;
+  prikaziStablo?: boolean;
+}) {
   const [data, setData] = useState<LanacResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -76,13 +84,17 @@ export default function IndeksSekcija({ korisnikId }: { korisnikId: string }) {
 
   return (
     <div className="space-y-4">
-      <IndeksPrikaz prikaz={data.korisnik.prikaz} tip={data.korisnik.tip} />
-      <MiniStablo
-        ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
-        verifikatori={verifikatorCvorovi}
-        verifikovani={verifikovaniCvorovi}
-        jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
-      />
+      {prikaziIndeks && (
+        <IndeksPrikaz prikaz={data.korisnik.prikaz} tip={data.korisnik.tip} />
+      )}
+      {prikaziStablo && (
+        <MiniStablo
+          ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
+          verifikatori={verifikatorCvorovi}
+          verifikovani={verifikovaniCvorovi}
+          jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
+        />
+      )}
     </div>
   );
 }

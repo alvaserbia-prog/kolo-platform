@@ -261,13 +261,18 @@ export default function JavniProfilPage() {
             </div>
           </div>
 
-          {/* Donji deo: indeks stvarnosti */}
-          <IndeksSekcija korisnikId={profil.id} />
+          {/* Donji deo: indeks stvarnosti (procenat, bez stabla) */}
+          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} />
         </div>
       </div>
 
-      {/* Transakcije */}
-      <div className="bg-white rounded-2xl border border-kolo-border">
+      {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+        {/* LEVO — lanac verifikacija (mini stablo) */}
+        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} />
+
+        {/* DESNO — transakcije */}
+        <div className="bg-white rounded-2xl border border-kolo-border">
         <div className="px-6 py-4 border-b border-kolo-border">
           <h2 className="text-sm font-semibold text-kolo-text">{t("transakcije_naslov")}</h2>
         </div>
@@ -312,6 +317,7 @@ export default function JavniProfilPage() {
             </button>
           </div>
         )}
+        </div>
       </div>
 
       {/* Oglasi */}
