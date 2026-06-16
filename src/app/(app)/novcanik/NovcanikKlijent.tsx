@@ -59,15 +59,15 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
     <div className="space-y-6">
       {/* Gornje kartice: levo ZRNO, desno balans */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* LEVO — ZRNO kartica: dugme levo, koeficijent u sredini, broj ZRNA veliko desno */}
+        {/* LEVO — ZRNO kartica: broj ZRNA skroz levo, koeficijent u sredini, dugme skroz desno */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6 shadow-sm flex items-center justify-between gap-4">
-          {/* LEVO — dugme Otpiši ZRNO */}
-          <Link
-            href="/zrno"
-            className="shrink-0 px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
-          >
-            {t("zrno_otpis_dugme")}
-          </Link>
+          {/* LEVO — broj ZRNA veliki (kao POEN) */}
+          <div className="text-left min-w-0">
+            <p className="text-4xl sm:text-5xl font-bold text-kolo-text tabular-nums break-words">
+              {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
+            </p>
+            <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
+          </div>
 
           {/* SREDINA — koeficijent */}
           <div className="text-center min-w-0">
@@ -78,13 +78,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
             <p className="text-[10px] text-kolo-muted">POEN/ZRNO</p>
           </div>
 
-          {/* DESNO — broj ZRNA veliki (kao POEN) */}
-          <div className="text-right min-w-0">
-            <p className="text-4xl sm:text-5xl font-bold text-kolo-text tabular-nums break-words">
-              {zrno ? zrno.slobodno.toLocaleString("sr-RS") : "—"}
-            </p>
-            <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
-          </div>
+          {/* DESNO — dugme Otpiši ZRNO */}
+          <Link
+            href="/zrno"
+            className="shrink-0 px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
+          >
+            {t("zrno_otpis_dugme")}
+          </Link>
         </div>
 
         {/* DESNO — balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}

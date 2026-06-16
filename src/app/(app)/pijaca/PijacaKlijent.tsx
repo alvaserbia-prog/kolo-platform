@@ -52,6 +52,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const [minCena, setMinCena] = useState("");
   const [maxCena, setMaxCena] = useState("");
   const [showCena, setShowCena] = useState(false);
+  const [showKat, setShowKat] = useState(false);
+  const [showSort, setShowSort] = useState(false);
   const [kupiOglas, setKupiOglas] = useState<Listing | null>(null);
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
@@ -107,17 +109,43 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
           <div className="flex gap-2 flex-wrap items-center">
-            {/* Kategorija */}
-            <select
-              value={filterKat}
-              onChange={(e) => setFilterKat(e.target.value)}
-              className="px-3 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
-            >
-              <option value="Sve">{t("sve_kategorije")}</option>
-              {KATEGORIJE_VREDNOSTI.map((kat) => (
-                <option key={kat} value={kat}>{t(`kategorija_${kategorijaKljuc(kat)}`)}</option>
-              ))}
-            </select>
+            {/* Kategorija — dropdown (isti dizajn kao Cena) */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowKat((v) => !v)}
+                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
+                  filterKat !== "Sve"
+                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
+                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                }`}
+              >
+                {filterKat === "Sve" ? t("sve_kategorije") : t(`kategorija_${kategorijaKljuc(filterKat)}`)}
+              </button>
+              {showKat && (
+                <div className="absolute z-20 left-0 mt-1 min-w-[10rem] bg-white rounded-xl border border-kolo-border shadow-lg p-1">
+                  <button
+                    onClick={() => { setFilterKat("Sve"); setShowKat(false); }}
+                    className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                      filterKat === "Sve" ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
+                    }`}
+                  >
+                    {t("sve_kategorije")}
+                  </button>
+                  {KATEGORIJE_VREDNOSTI.map((kat) => (
+                    <button
+                      key={kat}
+                      onClick={() => { setFilterKat(kat); setShowKat(false); }}
+                      className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                        filterKat === kat ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
+                      }`}
+                    >
+                      {t(`kategorija_${kategorijaKljuc(kat)}`)}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Cena — dropdown sa min/max (u sredini) */}
             <div className="relative">
@@ -161,16 +189,35 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               )}
             </div>
 
-            {/* Sortiranje (Najnovije default) */}
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              className="px-3 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
-            >
-              <option value="novo">{t("sort_novo")}</option>
-              <option value="jeftino">{t("sort_jeftino")}</option>
-              <option value="skupo">{t("sort_skupo")}</option>
-            </select>
+            {/* Sortiranje — dropdown (isti dizajn kao Cena), default Najnovije */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowSort((v) => !v)}
+                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
+                  sort !== "novo"
+                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
+                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                }`}
+              >
+                {t(`sort_${sort}`)}
+              </button>
+              {showSort && (
+                <div className="absolute z-20 left-0 mt-1 min-w-[10rem] bg-white rounded-xl border border-kolo-border shadow-lg p-1">
+                  {(["novo", "jeftino", "skupo"] as const).map((val) => (
+                    <button
+                      key={val}
+                      onClick={() => { setSort(val); setShowSort(false); }}
+                      className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                        sort === val ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
+                      }`}
+                    >
+                      {t(`sort_${val}`)}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* DESNO — pretraga (pola sirine, pomerena desno) */}
