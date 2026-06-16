@@ -332,17 +332,17 @@ export default function ProfilKlijent({ user }: ProfilProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl border border-kolo-border p-6 flex flex-col items-center gap-5">
           <h2 className="text-base font-semibold text-kolo-muted self-start">{t("profilna_slika")}</h2>
-          <div className="w-56 h-56 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
+          <div className="w-80 h-80 rounded-full overflow-hidden ring-2 ring-kolo-border shrink-0">
             {avatar ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={avatar} alt={user.pseudonim} className="block w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-7xl">
+              <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-8xl">
                 <Pseudonim>{user.pseudonim.charAt(0).toUpperCase()}</Pseudonim>
               </div>
             )}
           </div>
-          <div className="flex flex-col items-center gap-1 mt-auto">
+          <div className="flex flex-col items-center gap-1 mt-2">
             <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-kolo-border text-sm text-kolo-text hover:bg-kolo-bg transition-colors">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
