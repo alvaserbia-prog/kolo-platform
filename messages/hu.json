@@ -886,11 +886,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -898,23 +898,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "3.8.0",
+      "ver": "3.9.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -934,21 +934,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 3.8.0-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 3.9.0-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 3.8.1-os verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 3.9.0-os verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 3.8.0-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 3.8.1-ös verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 3.9.0-ös verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 3.8.1-ös verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 3.9.0-ös verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 3.8.0-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 3.9.0-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 3.8.0-os verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 3.9.0-os verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 3.8.0-ös verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 3.9.0-ös verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1212,7 +1212,7 @@
     "stub3_naslov": "Irányítási szervek",
     "stub3_tekst": "Igazgatótanács és Igazgató. Az Igazgatótanács stratégiai döntéseket hoz. Az Igazgató az operatív irányítást végzi. A Felső Kolo aktiválásával az Alapítvány szolgáltatói és végrehajtói szerepbe lép — végrehajtja a döntéseket és indokolt válaszokat ad a Felső Kolo ajánlásaira.",
     "javno_tag": "Nyilvános és elérhető",
-    "dok_tag": "Dokumentumok (v3.8.0)",
+    "dok_tag": "Dokumentumok (v3.9.0)",
     "dok_whitepaper": "Fehér könyv",
     "dok_statut": "KOLO Alapítvány Alapszabálya",
     "dok_pravilnik_kolo": "KOLO rendszer szabályzata",
