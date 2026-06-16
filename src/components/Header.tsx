@@ -61,7 +61,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 
         {/* Sredina: Bagovi + Upiši POEN */}
         <div className="flex-1 flex justify-start md:justify-center pl-2 md:pl-0">
-          <div className="flex items-center gap-1.5 md:gap-2 md:ml-[1cm]">
+          <div className="flex items-center gap-3 md:gap-5 md:ml-[1cm]">
             {/* Prijavljeni bagovi i status rada na njima */}
             <Link
               href="/bagovi"
