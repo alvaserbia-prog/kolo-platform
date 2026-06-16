@@ -51,8 +51,8 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         {t("opis_stranice")}
       </PageOpis>
 
-      {/* Balans kartica */}
-      <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
+      {/* Balans kartica — upola uža, poravnata desno */}
+      <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg lg:w-1/2 lg:ml-auto">
         <p className="text-sm text-white/70 mb-1">{t("vase_stanje")}</p>
         <p className="text-3xl sm:text-4xl font-bold font-mono tracking-tight">{balance.toLocaleString("sr-RS")}</p>
         <p className="text-lg text-white/70 mt-0.5">POEN</p>
