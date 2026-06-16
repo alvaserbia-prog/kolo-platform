@@ -6,15 +6,12 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
-import { JEDINICE_VREDNOSTI } from "@/lib/jedinice";
 
 interface OglasProps {
   id: string;
   title: string;
   description: string;
   price: number;
-  jedinica: string | null;
-  kolicina: number | null;
   category: string;
   images: string[];
   location: string | null;
@@ -167,7 +164,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
             </div>
             <div className="shrink-0 text-right">
               <p className="text-2xl font-bold text-kolo-green-700">{oglas.price.toLocaleString("sr-RS")}</p>
-              <p className="text-sm text-kolo-green-700">POEN{oglas.jedinica ? ` / ${oglas.jedinica}` : ""}</p>
+              <p className="text-sm text-kolo-green-700">POEN</p>
             </div>
           </div>
 
@@ -177,9 +174,6 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
             <span>{t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
-            {oglas.kolicina != null && (
-              <span>{t("na_stanju")}: <strong className="text-kolo-muted">{oglas.kolicina.toLocaleString("sr-RS")}{oglas.jedinica ? ` ${oglas.jedinica}` : ""}</strong></span>
-            )}
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
           </div>
@@ -287,8 +281,6 @@ function IzmeniOglas({
   const [title, setTitle] = useState(oglas.title);
   const [description, setDescription] = useState(oglas.description);
   const [price, setPrice] = useState(String(oglas.price));
-  const [jedinica, setJedinica] = useState(oglas.jedinica ?? "");
-  const [kolicina, setKolicina] = useState(oglas.kolicina != null ? String(oglas.kolicina) : "");
   const [location, setLocation] = useState(oglas.location ?? "");
   const [phone, setPhone] = useState(oglas.phone ?? "");
   // indeksi postojećih slika koje treba zadržati
@@ -335,8 +327,6 @@ function IzmeniOglas({
       fd.append("title", titleVal);
       fd.append("description", description.trim());
       fd.append("price", String(p));
-      fd.append("jedinica", jedinica);
-      fd.append("kolicina", kolicina.trim());
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
       fd.append("keepImages", JSON.stringify(keepIndices));
@@ -379,29 +369,6 @@ function IzmeniOglas({
           <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("cena_label")}</label>
           <input type="number" min={1} step={1} value={price} onChange={(e) => setPrice(e.target.value)}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors" />
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-sm font-semibold text-kolo-muted mb-2">
-              {t("jedinica_label")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
-            </label>
-            <select value={jedinica} onChange={(e) => setJedinica(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors bg-white">
-              <option value="">{t("jedinica_bez")}</option>
-              {JEDINICE_VREDNOSTI.map((j) => (
-                <option key={j} value={j}>{t(`jed_${j}`)} ({j})</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-semibold text-kolo-muted mb-2">
-              {t("stanje_label")} <span className="text-kolo-muted font-normal">{t("lokacija_opciono")}</span>
-            </label>
-            <input type="number" min={1} step={1} value={kolicina} onChange={(e) => setKolicina(e.target.value)}
-              placeholder={t("stanje_placeholder")}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors" />
-          </div>
         </div>
 
         <div>

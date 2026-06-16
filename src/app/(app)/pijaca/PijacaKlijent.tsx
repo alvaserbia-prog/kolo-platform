@@ -28,8 +28,6 @@ interface Listing {
   title: string;
   description: string;
   price: number;
-  jedinica: string | null;
-  kolicina: number | null;
   category: string;
   slike: number;
   location: string | null;
@@ -347,16 +345,10 @@ function OglasKartica({
           <div className="shrink-0 bg-kolo-green-100 rounded-xl px-2.5 py-1.5 text-center">
             <p className="text-base font-bold text-kolo-green-700 leading-none">{oglas.price.toLocaleString("sr-RS")}</p>
             <p className="text-[10px] text-kolo-green-700 opacity-70">
-              POEN{oglas.jedinica ? ` / ${oglas.jedinica}` : ""}
+              POEN
             </p>
           </div>
         </div>
-
-        {oglas.kolicina != null && (
-          <span className="self-start text-[11px] font-medium text-kolo-muted bg-kolo-bg rounded-lg px-2 py-0.5">
-            {t("na_stanju")}: {oglas.kolicina.toLocaleString("sr-RS")}{oglas.jedinica ? ` ${oglas.jedinica}` : ""}
-          </span>
-        )}
 
         <div className="flex justify-between items-center mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted">
