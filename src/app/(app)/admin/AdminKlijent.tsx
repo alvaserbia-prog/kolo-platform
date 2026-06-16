@@ -1423,7 +1423,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
         <div>
           <p className="text-sm font-semibold text-kolo-muted">{t("dashboard_zero_sum_naslov")}</p>
           {zeroSum && (
-            <p className={`text-sm mt-0.5 font-mono ${zeroSum.ok ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+            <p className={`text-sm mt-0.5 ${zeroSum.ok ? "text-kolo-green-700" : "text-kolo-danger"}`}>
               {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString("sr-RS"), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
             </p>
           )}
@@ -1484,7 +1484,7 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
               <div className="flex items-center gap-3 shrink-0 text-xs text-kolo-muted">
                 <span>{t("krugovi_cl", { br: z.clanovi })}</span>
                 <span>{t("krugovi_proj", { br: z.projekti })}</span>
-                <span className="font-mono">{z.balance.toLocaleString("sr-RS")} P</span>
+                <span>{z.balance.toLocaleString("sr-RS")} P</span>
                 <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusKrugovi[z.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                   {z.status}
                 </span>

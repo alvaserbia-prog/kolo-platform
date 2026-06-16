@@ -406,7 +406,7 @@ function FondacijaSekcija() {
               )}
               <p className="text-xs text-kolo-muted">{s.kategorija}</p>
             </div>
-            <span className={`text-right font-mono font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+            <span className={`text-right font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
               {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
             </span>
             <span className="text-right text-kolo-muted">{datum(s.datum)}</span>
@@ -423,7 +423,7 @@ function FondacijaSekcija() {
               )}
               <p className="text-xs text-kolo-muted">{s.kategorija} · {datum(s.datum)}</p>
             </div>
-            <span className={`shrink-0 font-mono text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+            <span className={`shrink-0 text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
               {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
             </span>
           </div>
@@ -835,7 +835,7 @@ function ClanoviSekcija({
                   )}
                 </div>
                 <span className="text-sm text-kolo-muted truncate">{c.location ?? "—"}</span>
-                <span className="text-right font-mono text-sm font-semibold text-kolo-text">
+                <span className="text-right text-sm font-semibold text-kolo-text">
                   {c.balance.toLocaleString("sr-RS")}
                 </span>
                 <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
@@ -863,7 +863,7 @@ function ClanoviSekcija({
                       <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                     )}
                   </div>
-                  <span className="font-mono text-sm font-bold text-kolo-text">
+                  <span className="text-sm font-bold text-kolo-text">
                     {c.balance.toLocaleString("sr-RS")} POEN
                   </span>
                 </div>
@@ -1090,10 +1090,10 @@ function DonacijeSekcija({
               >
                 <Pseudonim>{d.pseudonim}</Pseudonim>
               </Link>
-              <span className="text-right font-mono">
+              <span className="text-right">
                 {d.amountRSD.toLocaleString("sr-RS")}
               </span>
-              <span className="text-right font-mono font-semibold text-kolo-text">
+              <span className="text-right font-semibold text-kolo-text">
                 {d.poenEmitted.toLocaleString("sr-RS")}
               </span>
               <span className="text-right text-kolo-muted">{t("nivo_label")} {d.level}</span>
@@ -1111,7 +1111,7 @@ function DonacijeSekcija({
                 <Link href={`/profil/${d.userId}`} className="font-semibold text-kolo-green-700 hover:underline">
                   <Pseudonim>{d.pseudonim}</Pseudonim>
                 </Link>
-                <span className="font-mono text-sm font-bold text-kolo-text">
+                <span className="text-sm font-bold text-kolo-text">
                   {d.poenEmitted.toLocaleString("sr-RS")} POEN
                 </span>
               </div>
@@ -1201,14 +1201,14 @@ function IznosSekcija({
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
           <p className="text-xs text-kolo-muted mb-1">{t("ukupno_prometa")}</p>
-          <p className="text-2xl font-bold font-mono text-kolo-text">
+          <p className="text-2xl font-bold text-kolo-text">
             {ukupanIznosTx.toLocaleString("sr-RS")}
           </p>
           <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
           <p className="text-xs text-kolo-muted mb-1">{t("danas")}</p>
-          <p className="text-2xl font-bold font-mono text-kolo-text">
+          <p className="text-2xl font-bold text-kolo-text">
             {danasIznosTx.toLocaleString("sr-RS")}
           </p>
           <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
@@ -1260,7 +1260,7 @@ function IznosSekcija({
                 ) : (
                   <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                 )}
-                <span className="font-mono font-semibold text-kolo-text text-right">
+                <span className="font-semibold text-kolo-text text-right">
                   {tx.amount.toLocaleString("sr-RS")}
                 </span>
               </div>
@@ -1280,7 +1280,7 @@ function IznosSekcija({
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )}
                   </div>
-                  <span className="font-mono font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
+                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
                 </div>
                 <p className="text-xs text-kolo-muted">
                   {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
