@@ -189,18 +189,19 @@ function SidebarContent({
     badge["/nadzor"] = brojZaNadzor;
   }
 
-  // Stavke poverenja: Verifikacija + Tabla jemstva
-  const poverenje = [
-    { href: "/verifikacija", label: t("verifikacija") },
-    { href: "/tabla-jemstva", label: t("tabla_jemstva") },
-  ];
+  const verifikacijaLink = { href: "/verifikacija", label: t("verifikacija") };
+  const tablaJemstvaLink = { href: "/tabla-jemstva", label: t("tabla_jemstva") };
 
-  // Padajuća grupa "Zajedničko dobro": Sistem, ZRNO, Doprinos, Programi (+ Nadzor za nadzornike)
+  // Padajuća grupa "Zajedničko dobro": Sistem, ZRNO, Doprinos, Programi, Tabla jemstva (+ Nadzor).
+  // Tabla jemstva stoji ovde SAMO za verifikovanog korisnika: njemu ona nije lični put do
+  // verifikacije nego doprinos mreži (jemčenje za druge), pa pripada uz Doprinos/Programe.
+  // Neverifikovani je vidi istaknuto u grupi "Poverenje" (njegov ulaz u verifikaciju).
   const zajednickoDobro = [
     { href: "/sistem", label: t("sistem") },
     { href: "/zrno", label: t("zrno") },
     { href: "/doprinos-oglasi", label: t("doprinos") },
     { href: "/programi", label: t("programi") },
+    tablaJemstvaLink,
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
   ];
 
@@ -217,7 +218,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { links: poverenje },
+        { label: t("grupa_poverenje"), links: [verifikacijaLink] },
         { links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
@@ -232,7 +233,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { links: poverenje },
+        { label: t("grupa_poverenje"), links: [verifikacijaLink, tablaJemstvaLink] },
         ...adminGrupa,
       ];
 
