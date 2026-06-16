@@ -28,10 +28,18 @@ export function raniPristupKonfigurisan(): boolean {
   return !!process.env.RANI_PRISTUP_KOD;
 }
 
-/** Da li uneti kod odgovara konfigurisanom pristupnom kodu. */
+/**
+ * Da li uneti kod odgovara konfigurisanom pristupnom kodu.
+ * Poređenje je neosetljivo na velika/mala slova i razmake sa krajeva
+ * (npr. "kolo2026", "KOLO2026" i "Kolo2026" se prihvataju jednako).
+ */
 export function tacanRaniPristupKod(kod?: string | null): boolean {
   const ocekivani = process.env.RANI_PRISTUP_KOD;
-  return !!ocekivani && typeof kod === "string" && kod === ocekivani;
+  return (
+    !!ocekivani &&
+    typeof kod === "string" &&
+    kod.trim().toLowerCase() === ocekivani.trim().toLowerCase()
+  );
 }
 
 /** Da li vrednost kolačića predstavlja validan, otključan rani pristup. */
