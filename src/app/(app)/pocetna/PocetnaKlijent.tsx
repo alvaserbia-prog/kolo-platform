@@ -116,10 +116,10 @@ export default function PocetnaKlijent({
           <h2 className="text-2xl font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
         </div>
 
-        {/* Prozor vesti — fiksne visine kao Pričaonica (480px), sa skrolom */}
-        <div className="overflow-y-auto space-y-3 pr-1" style={{ height: 640 }}>
+        {/* Prozor vesti — jedna bela kartica iste visine kao Pričaonica, sa skrolom */}
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-y-auto divide-y divide-kolo-border" style={{ height: 640 }}>
           {blog.length === 0 ? (
-            <div className="h-full flex items-center justify-center bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+            <div className="h-full flex items-center justify-center p-8 text-center text-sm text-kolo-muted">
               {t("nema_objava")}
             </div>
           ) : (
@@ -129,7 +129,7 @@ export default function PocetnaKlijent({
               return (
                 <article
                   key={o.id}
-                  className="bg-white rounded-2xl border border-kolo-border p-5"
+                  className="p-5"
                 >
                   <h3 className="text-base font-semibold text-kolo-text mb-1">
                     {o.title}
