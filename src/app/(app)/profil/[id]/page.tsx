@@ -151,7 +151,7 @@ export default function JavniProfilPage() {
       {/* Gornji raspored: levo manja pseudonim kartica, desno statistike + indeks */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         {/* LEVO — pseudonim kartica (ista visina kao lanac/transakcije) */}
-        <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5 flex flex-col lg:h-[560px]">
+        <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5 flex flex-col lg:h-[460px]">
           <div className="flex flex-col items-center text-center">
             {/* Avatar */}
             {profil.avatar ? (
@@ -260,7 +260,7 @@ export default function JavniProfilPage() {
         <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
 
         {/* DESNO — transakcije (fiksna visina + skrol) */}
-        <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[560px]">
+        <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[460px]">
         <div className="px-6 py-4 border-b border-kolo-border shrink-0">
           <h2 className="text-sm font-semibold text-kolo-text">{t("transakcije_naslov")}</h2>
         </div>
