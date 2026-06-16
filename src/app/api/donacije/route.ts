@@ -37,15 +37,15 @@ export async function GET() {
     .reduce((s, d) => s + Number(d.amountRSD), 0);
   const { nivo, kurs } = nivoZaKumulativ(totalRSD);
 
-  // Javna lista donacija (dostupna verifikovanim korisnicima): prikazuju se samo
-  // javne donacije čiji je donator uključio prikaz imena (čl. 5a). Time se
-  // istorijski donatori (koji nisu uključili `prikaziPunoIme`) NE otkrivaju
-  // ("samo ubuduće"), a donator zadržava pravo da sakrije ime preko profila.
+  // Javna lista donacija (dostupna verifikovanim korisnicima): prikazuje ime
+  // SNIMLJENO na zapisu javne donacije (`donatorIme`) — trajan podatak, kao i
+  // sama uplata. Istorijske/anonimne donacije imaju donatorIme = null pa se ne
+  // prikazuju ("samo ubuduće").
   const javneDonacije = await prisma.donationRecord.findMany({
     where: {
       status: "CONFIRMED",
       javno: true,
-      user: { podaci: { prikaziPunoIme: true, punoIme: { not: null } } },
+      donatorIme: { not: null },
     },
     orderBy: [{ confirmedAt: "desc" }, { createdAt: "desc" }],
     take: 50,
@@ -54,9 +54,9 @@ export async function GET() {
       amountRSD: true,
       level: true,
       poenEmitted: true,
+      donatorIme: true,
       confirmedAt: true,
       createdAt: true,
-      user: { select: { podaci: { select: { punoIme: true } } } },
     },
   });
 
@@ -76,8 +76,8 @@ export async function GET() {
     })),
     listaDonacija: javneDonacije.map((d) => ({
       id: d.id,
-      ime: d.javno ? d.user.podaci?.punoIme?.trim() || null : null,
-      anonimno: !d.javno,
+      ime: d.donatorIme,
+      anonimno: false,
       amountRSD: Number(d.amountRSD),
       level: d.level,
       poenEmitted: d.poenEmitted,

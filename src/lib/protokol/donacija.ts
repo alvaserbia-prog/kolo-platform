@@ -56,14 +56,15 @@ export function izracunajPoenZaDonaciju(
  *
  * Javna vs anonimna donacija (Pravilnik o pokroviteljstvu i donacijama čl. 3, 5):
  * - `javno = true` (podrazumevano): evidentira se POEN; ime i prezime donatora
- *   postaju javni (postavlja se `prikaziPunoIme`). Ulazi u kumulativni nivo.
+ *   SNIMA se na zapis (`donatorIme`) kao trajan podatak i prikazuje u listi
+ *   donacija. Ulazi u kumulativni nivo.
  * - `javno = false` (anonimna): POEN se NE evidentira (0), zapis NE ulazi u
- *   kumulativni nivo, ime ostaje skriveno.
+ *   kumulativni nivo, ime se ne beleži.
  *
  * Napomena: provera „javna donacija zahteva uneto ime i prezime" radi se na
  * ulaznim tačkama (kartično `zapocni`, admin ruta) PRE naplate/potvrde. Ovde se
  * NE baca greška ako ime nedostaje — da naplaćena donacija ne ostane bez POEN-a;
- * `prikaziPunoIme` se postavlja samo kad ime postoji.
+ * `donatorIme` se snima samo kad ime postoji.
  */
 export async function evidentirajDonaciju(
   userId: string,
@@ -98,6 +99,9 @@ export async function evidentirajDonaciju(
   const noviNivo = javno ? izracun.noviNivo : nivoZaKumulativ(dosadaRSD).nivo;
   const kurs = javno ? izracun.kurs : nivoZaKumulativ(dosadaRSD).kurs;
 
+  // Trajan snapshot imena za javnu donaciju (čl. 5a) — ne menja se kasnije.
+  const donatorIme = javno ? user.podaci?.punoIme?.trim() || null : null;
+
   if (options?.existingRecordId) {
     await prisma.donationRecord.update({
       where: { id: options.existingRecordId },
@@ -107,6 +111,7 @@ export async function evidentirajDonaciju(
         level: noviNivo,
         poenEmitted: poen,
         javno,
+        donatorIme,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options.adminId ?? null,
@@ -121,18 +126,11 @@ export async function evidentirajDonaciju(
         level: noviNivo,
         poenEmitted: poen,
         javno,
+        donatorIme,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options?.adminId ?? null,
       },
-    });
-  }
-
-  // Javna donacija: ime i prezime postaju javni (uslov za POEN, čl. 5a).
-  if (javno && user.podaci?.punoIme && user.podaci.punoIme.trim()) {
-    await prisma.userPodaci.update({
-      where: { userId },
-      data: { prikaziPunoIme: true },
     });
   }
 
