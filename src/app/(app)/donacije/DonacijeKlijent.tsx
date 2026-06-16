@@ -249,14 +249,14 @@ export default function DonacijeKlijent() {
                       {r.nivo}
                       {active && <span className="ml-2 text-xs text-kolo-green-700 font-semibold">{t("vas_nivo_oznaka")}</span>}
                     </td>
-                    <td className={`px-4 py-2.5 text-right font-mono text-xs ${active ? "text-kolo-green-900" : "text-kolo-muted"}`}>
+                    <td className={`px-4 py-2.5 text-right text-xs ${active ? "text-kolo-green-900" : "text-kolo-muted"}`}>
                       {r.do >= 1_000_000_000
                         ? "1 mlrd"
                         : r.do >= 1_000_000
                         ? `${(r.do / 1_000_000).toFixed(0)} mil`
                         : r.do.toLocaleString("sr-RS")}
                     </td>
-                    <td className={`px-4 py-2.5 text-right font-mono ${active ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                    <td className={`px-4 py-2.5 text-right ${active ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
                       {r.kurs.toFixed(2)}
                     </td>
                   </tr>
@@ -300,7 +300,7 @@ export default function DonacijeKlijent() {
                     {d.status === "CONFIRMED" ? t("potvrdeno") : t("ceka_potvrdu")}
                   </span>
                   {d.status === "CONFIRMED" && (
-                    <p className="text-xs text-kolo-green-700 font-mono mt-1">
+                    <p className="text-xs text-kolo-green-700 mt-1">
                       +{d.poenEmitted.toLocaleString("sr-RS")} POEN
                     </p>
                   )}
