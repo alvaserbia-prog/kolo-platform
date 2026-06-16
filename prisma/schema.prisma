@@ -255,6 +255,7 @@ model User {
   verifikacijaTokeni              VerifikacijaToken[]
   zahteviZaJemstvo                ZahtevZaJemstvo[]
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
+  prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
 }
@@ -1117,4 +1118,32 @@ model RizikNalaz {
 
   @@index([status, rizik(sort: Desc)])
   @@index([subjektId])
+}
+
+// ─── Prijava bagova (greške na platformi) ─────────────────────────────────────
+// Bilo koji prijavljen korisnik može da prijavi bag (grešku). Lista svih prijava
+// je javna (vidljiva svim prijavljenima) zajedno sa statusom — da svako vidi šta
+// je prijavljeno i da li se na tome radi. Status menja admin.
+
+enum BugStatus {
+  PRIJAVLJEN  // prijavljeno, još se ne radi
+  U_RADU      // radi se na tome
+  RESENO      // ispravljeno
+  ODBIJENO    // nije bag / neće se raditi
+}
+
+model Bug {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation("PrijaviocBaga", fields: [userId], references: [id])
+  naslov    String
+  opis      String
+  status    BugStatus @default(PRIJAVLJEN)
+  odgovor   String?   // beleška/odgovor admina (npr. zašto je odbijeno ili kad je rešeno)
+  resenoAt  DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([userId])
 }
