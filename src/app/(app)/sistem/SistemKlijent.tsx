@@ -1,13 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza";
+type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
+
+interface FondTx {
+  id: string;
+  datum: string;
+  smer: "PRILIV" | "ODLIV";
+  kategorija: string;
+  opis: string;
+  iznosRSD: number;
+}
 type TxFilter = "sve" | "protokol" | "clanovi";
 
 interface Transakcija {
@@ -285,19 +294,26 @@ export default function SistemKlijent({
           </p>
         </button>
 
-        {/* Račun Fondacije — desno dole */}
-        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
-          <p className="text-base font-semibold mb-1 text-kolo-muted">
+        {/* Račun Fondacije — desno dole (klik → spisak transakcija) */}
+        <button
+          onClick={() => setSekcija("fondacija")}
+          className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
+            sekcija === "fondacija"
+              ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+              : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+          }`}
+        >
+          <p className={`text-base font-semibold mb-1 ${sekcija === "fondacija" ? "text-white/70" : "text-kolo-muted"}`}>
             <Pojam
               termin={t("kartica_racun_fondacije")}
               objasnjenje={t("kartica_racun_fondacije_opis")}
             />
           </p>
-          <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
+          <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "fondacija" ? "text-white" : "text-kolo-text"}`}>
             {racunFondacije.toLocaleString("sr-RS")}
           </p>
-          <p className="text-xs mt-1 text-kolo-muted">{t("kartica_racun_fondacije_podnaslov")}</p>
-        </div>
+          <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
+        </button>
       </div>
 
       {/* Separator */}
@@ -331,6 +347,75 @@ export default function SistemKlijent({
         />
       )}
       {sekcija === "faza" && <FazaSekcija />}
+      {sekcija === "fondacija" && <FondacijaSekcija />}
+    </div>
+  );
+}
+
+// ── Račun Fondacije — transakcije sa bankovnog računa (priliv/odliv, RSD) ──────
+function FondacijaSekcija() {
+  const t = useTranslations("sistem");
+  const [stavke, setStavke] = useState<FondTx[] | null>(null);
+
+  useEffect(() => {
+    let aktivno = true;
+    fetch("/api/javno/fondacija/transakcije")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (aktivno) setStavke(d?.stavke ?? []); })
+      .catch(() => { if (aktivno) setStavke([]); });
+    return () => { aktivno = false; };
+  }, []);
+
+  if (stavke === null) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+        {t("fondacija_ucitavanje")}
+      </div>
+    );
+  }
+  if (stavke.length === 0) {
+    return (
+      <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+        {t("fondacija_nema_tx")}
+      </div>
+    );
+  }
+
+  const datum = (iso: string) =>
+    new Date(iso).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" });
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+      <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
+        <span>{t("fondacija_col_opis")}</span>
+        <span className="text-right">{t("fondacija_col_iznos")}</span>
+        <span className="text-right">{t("col_datum")}</span>
+      </div>
+      {stavke.map((s, i) => (
+        <div key={s.id} className={i < stavke.length - 1 ? "border-b border-kolo-border/30" : ""}>
+          {/* Desktop */}
+          <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-3 items-center text-sm">
+            <div className="min-w-0">
+              <p className="text-kolo-text truncate">{s.opis}</p>
+              <p className="text-xs text-kolo-muted">{s.kategorija}</p>
+            </div>
+            <span className={`text-right font-mono font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
+            </span>
+            <span className="text-right text-kolo-muted">{datum(s.datum)}</span>
+          </div>
+          {/* Mobilna */}
+          <div className="sm:hidden px-4 py-3 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-sm text-kolo-text truncate">{s.opis}</p>
+              <p className="text-xs text-kolo-muted">{s.kategorija} · {datum(s.datum)}</p>
+            </div>
+            <span className={`shrink-0 font-mono text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
