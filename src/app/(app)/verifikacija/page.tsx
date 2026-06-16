@@ -140,13 +140,20 @@ export default async function VerifikacijaPage() {
         />
       </div>
 
-      {/* Kod za verifikaciju */}
-      <div id="moj-kod">
-        <MojQrKod />
-      </div>
-
-      {/* "Verifikuj nekoga" se prikazuje samo onima koji to mogu — bez negativne poruke novajliji */}
-      {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
+      {/* Kartice "Pokaži kod" i "Verifikuj nekoga" — jedna pored druge (verifikovani);
+          neverifikovani vide samo kod, punom širinom. */}
+      {jeNeverifikovan ? (
+        <div id="moj-kod">
+          <MojQrKod />
+        </div>
+      ) : (
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
+          <div id="moj-kod">
+            <MojQrKod />
+          </div>
+          <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
+        </div>
+      )}
     </div>
   );
 }
