@@ -159,11 +159,11 @@ export default function JavniProfilPage() {
               <img
                 src={profil.avatar}
                 alt={profil.pseudonim}
-                className="w-16 h-16 rounded-full object-cover border-2 border-kolo-border"
+                className="w-28 h-28 rounded-full object-cover border-2 border-kolo-border"
               />
             ) : (
-              <div className="w-16 h-16 rounded-full bg-kolo-green-100 flex items-center justify-center border-2 border-kolo-border">
-                <span className="text-xl font-bold text-kolo-green-700">{inicijali}</span>
+              <div className="w-28 h-28 rounded-full bg-kolo-green-100 flex items-center justify-center border-2 border-kolo-border">
+                <span className="text-4xl font-bold text-kolo-green-700">{inicijali}</span>
               </div>
             )}
 
@@ -220,7 +220,7 @@ export default function JavniProfilPage() {
           </dl>
 
           {/* Akcijska dugmad */}
-          <div className="mt-auto pt-4 flex gap-2">
+          <div className="mt-4 flex gap-2">
             <Link
               href={`/novcanik?prima=${profil.pseudonim}`}
               className="flex-1 py-2.5 text-center rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
