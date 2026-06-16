@@ -1501,6 +1501,7 @@
     "zatrazi_verifikaciju_oglas": "Request verification to post a listing",
     "pretrazi_placeholder": "Search listings...",
     "sve_kategorije": "All",
+    "cena_filter": "Price",
     "min_poen": "Min POEN",
     "max_poen": "Max POEN",
     "sort_novo": "Newest",

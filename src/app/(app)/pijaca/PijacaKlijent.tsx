@@ -51,6 +51,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const [sort, setSort] = useState("novo");
   const [minCena, setMinCena] = useState("");
   const [maxCena, setMaxCena] = useState("");
+  const [showCena, setShowCena] = useState(false);
   const [kupiOglas, setKupiOglas] = useState<Listing | null>(null);
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
@@ -105,7 +106,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
       <div className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap items-center">
+            {/* Kategorija */}
             <select
               value={filterKat}
               onChange={(e) => setFilterKat(e.target.value)}
@@ -116,6 +118,50 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                 <option key={kat} value={kat}>{t(`kategorija_${kategorijaKljuc(kat)}`)}</option>
               ))}
             </select>
+
+            {/* Cena — dropdown sa min/max (u sredini) */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowCena((v) => !v)}
+                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
+                  minCena || maxCena
+                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
+                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                }`}
+              >
+                {t("cena_filter")}
+                {minCena || maxCena ? ` (${minCena || "0"}–${maxCena || "∞"})` : ""}
+              </button>
+              {showCena && (
+                <div className="absolute z-20 left-0 mt-1 bg-white rounded-xl border border-kolo-border shadow-lg p-3 flex items-center gap-2">
+                  <input
+                    type="number"
+                    min={0}
+                    placeholder={t("min_poen")}
+                    value={minCena}
+                    onChange={(e) => setMinCena(e.target.value)}
+                    className="w-24 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
+                  />
+                  <span className="text-kolo-border text-xs">—</span>
+                  <input
+                    type="number"
+                    min={0}
+                    placeholder={t("max_poen")}
+                    value={maxCena}
+                    onChange={(e) => setMaxCena(e.target.value)}
+                    className="w-24 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
+                  />
+                  {(minCena || maxCena) && (
+                    <button onClick={() => { setMinCena(""); setMaxCena(""); }} className="text-xs text-kolo-muted hover:text-kolo-text">
+                      ×
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Sortiranje (Najnovije default) */}
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
@@ -135,32 +181,6 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
             onChange={(e) => setPretraga(e.target.value)}
             className="w-full sm:w-1/2 sm:ml-auto px-4 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
           />
-        </div>
-
-        {/* Cena raspon */}
-        <div className="flex gap-2 items-center">
-          <input
-            type="number"
-            min={0}
-            placeholder={t("min_poen")}
-            value={minCena}
-            onChange={(e) => setMinCena(e.target.value)}
-            className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
-          />
-          <span className="text-kolo-border text-xs">—</span>
-          <input
-            type="number"
-            min={0}
-            placeholder={t("max_poen")}
-            value={maxCena}
-            onChange={(e) => setMaxCena(e.target.value)}
-            className="w-28 px-3 py-1.5 rounded-lg border border-kolo-border bg-white text-xs outline-none focus:border-kolo-green-700 transition-colors"
-          />
-          {(minCena || maxCena) && (
-            <button onClick={() => { setMinCena(""); setMaxCena(""); }} className="text-xs text-kolo-muted hover:text-kolo-text">
-              ×
-            </button>
-          )}
         </div>
       </div>
 
