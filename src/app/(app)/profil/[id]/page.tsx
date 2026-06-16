@@ -245,24 +245,24 @@ export default function JavniProfilPage() {
 
         {/* DESNO — gore statistike (ZRNO levo, POEN desno), dole indeks stvarnosti */}
         <div className="lg:col-span-6 space-y-4">
-          {/* Gornji deo: ZRNO (levo) i broj POEN-a (desno) */}
+          {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white rounded-2xl border border-kolo-border p-5 text-center flex flex-col justify-center">
+            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
               <p className="text-xs text-kolo-muted mb-1">ZRNO</p>
-              <p className="text-2xl font-bold text-kolo-text">
+              <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.zrno !== null ? profil.zrno.toLocaleString("sr-RS") : "—"}
               </p>
             </div>
-            <div className="bg-white rounded-2xl border border-kolo-border p-5 text-center flex flex-col justify-center">
-              <p className="text-xs text-kolo-muted mb-1">{t("poen_stanje_label")}</p>
-              <p className="text-2xl font-bold text-kolo-text">
+            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
+              <p className="text-xs text-kolo-muted mb-1">POEN</p>
+              <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.bilans !== null ? profil.bilans.toLocaleString("sr-RS") : "—"}
               </p>
             </div>
           </div>
 
-          {/* Donji deo: indeks stvarnosti (procenat, bez stabla) */}
-          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} />
+          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno) */}
+          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge />
         </div>
       </div>
 
@@ -295,7 +295,7 @@ export default function JavniProfilPage() {
                       ) : t("protokol"))}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
-                      {new Date(trx.createdAt).toLocaleDateString("sr-RS", { day: "numeric", month: "short", year: "numeric" })}
+                      {new Date(trx.createdAt).toLocaleString("sr-RS", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
                   <span className={`text-sm font-semibold shrink-0 ${jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>

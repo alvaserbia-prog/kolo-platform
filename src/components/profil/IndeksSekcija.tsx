@@ -41,10 +41,12 @@ export default function IndeksSekcija({
   korisnikId,
   prikaziIndeks = true,
   prikaziStablo = true,
+  indeksKaoBadge = false,
 }: {
   korisnikId: string;
   prikaziIndeks?: boolean;
   prikaziStablo?: boolean;
+  indeksKaoBadge?: boolean;
 }) {
   const [data, setData] = useState<LanacResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -85,7 +87,11 @@ export default function IndeksSekcija({
   return (
     <div className="space-y-4">
       {prikaziIndeks && (
-        <IndeksPrikaz prikaz={data.korisnik.prikaz} tip={data.korisnik.tip} />
+        <IndeksPrikaz
+          prikaz={data.korisnik.prikaz}
+          tip={data.korisnik.tip}
+          statusKaoBadge={indeksKaoBadge}
+        />
       )}
       {prikaziStablo && (
         <MiniStablo
