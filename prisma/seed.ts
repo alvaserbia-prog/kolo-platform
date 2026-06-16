@@ -243,8 +243,8 @@ async function seedAdmin() {
       include: { wallet: true },
     });
 
-    if (korisnik.wallet && !(await vecPostojiTransakcija(korisnik.wallet.id, TransactionType.EMISIJA_VERIFIKACIJA, "Početni doprinos UO"))) {
-      await emitujIzBanke(korisnik.wallet.id, POEN_VERIFIKACIJA, TransactionType.EMISIJA_VERIFIKACIJA, "Početni doprinos UO Fondacije");
+    if (korisnik.wallet && !(await vecPostojiTransakcija(korisnik.wallet.id, TransactionType.EMISIJA_VERIFIKACIJA, "Osnivački doprinos UO"))) {
+      await emitujIzBanke(korisnik.wallet.id, POEN_VERIFIKACIJA, TransactionType.EMISIJA_VERIFIKACIJA, "Osnivački doprinos UO Fondacije");
     }
 
     console.log(`✓ Admin: ${c.email} → ${c.pseudonim} (lozinka: ${ADMIN_LOZINKA})`);

@@ -143,15 +143,13 @@ export default function JavniProfilPage() {
 
   return (
     <div className="space-y-4">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-kolo-muted">
-        <Link href="/krug" className="hover:text-kolo-green-700 transition-colors">{t("krug_link")}</Link>
-        <span>/</span>
-        <span className="text-kolo-text"><Pseudonim>{profil.pseudonim}</Pseudonim></span>
+      {/* Naslov */}
+      <div className="text-sm font-medium text-kolo-text">
+        <Pseudonim>{profil.pseudonim}</Pseudonim>
       </div>
 
       {/* Gornji raspored: levo manja pseudonim kartica, desno statistike + indeks */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         {/* LEVO — pseudonim kartica (duplo manja) */}
         <div className="lg:col-span-6 bg-white rounded-2xl border border-kolo-border p-5">
           <div className="flex flex-col items-center text-center">
@@ -201,16 +199,6 @@ export default function JavniProfilPage() {
 
           {/* Info red */}
           <dl className="mt-4 space-y-2.5 text-sm border-t border-kolo-border pt-4">
-            {profil.krug && (
-              <div className="flex justify-between gap-2">
-                <dt className="text-kolo-muted">{t("krug_link")}</dt>
-                <dd>
-                  <Link href={`/krug/${profil.krug.id}`} className="font-medium text-kolo-green-700 hover:underline">
-                    {profil.krug.name}
-                  </Link>
-                </dd>
-              </div>
-            )}
             <div className="flex justify-between gap-2">
               <dt className="text-kolo-muted">{t("clan_od")}</dt>
               <dd className="text-kolo-muted">
@@ -244,9 +232,9 @@ export default function JavniProfilPage() {
         </div>
 
         {/* DESNO — gore statistike (ZRNO levo, POEN desno), dole indeks stvarnosti */}
-        <div className="lg:col-span-6 space-y-4">
+        <div className="lg:col-span-6 flex flex-col gap-4">
           {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 flex-1">
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
               <p className="text-xs text-kolo-muted mb-1">ZRNO</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
@@ -262,20 +250,21 @@ export default function JavniProfilPage() {
           </div>
 
           {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno) */}
-          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge />
+          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
         </div>
       </div>
 
       {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
         {/* LEVO — lanac verifikacija (mini stablo) */}
         <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} />
 
-        {/* DESNO — transakcije */}
-        <div className="bg-white rounded-2xl border border-kolo-border">
-        <div className="px-6 py-4 border-b border-kolo-border">
+        {/* DESNO — transakcije (fiksna visina + skrol) */}
+        <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[560px]">
+        <div className="px-6 py-4 border-b border-kolo-border shrink-0">
           <h2 className="text-sm font-semibold text-kolo-text">{t("transakcije_naslov")}</h2>
         </div>
+        <div className="flex-1 overflow-y-auto">
         {sveTrx.length === 0 ? (
           <p className="px-6 py-8 text-center text-sm text-kolo-muted">{t("nema_transakcija")}</p>
         ) : (
@@ -317,6 +306,7 @@ export default function JavniProfilPage() {
             </button>
           </div>
         )}
+        </div>
         </div>
       </div>
 

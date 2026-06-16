@@ -42,11 +42,13 @@ export default function IndeksSekcija({
   prikaziIndeks = true,
   prikaziStablo = true,
   indeksKaoBadge = false,
+  ispuniVisinu = false,
 }: {
   korisnikId: string;
   prikaziIndeks?: boolean;
   prikaziStablo?: boolean;
   indeksKaoBadge?: boolean;
+  ispuniVisinu?: boolean;
 }) {
   const [data, setData] = useState<LanacResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -67,7 +69,7 @@ export default function IndeksSekcija({
   if (error) return null;
   if (!data) {
     return (
-      <div className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+      <div className={`rounded-2xl border border-black/10 bg-white p-6 shadow-sm${ispuniVisinu ? " h-full" : ""}`}>
         <div className="text-sm text-black/55">Učitavanje indeksa...</div>
       </div>
     );
@@ -85,12 +87,13 @@ export default function IndeksSekcija({
   }));
 
   return (
-    <div className="space-y-4">
+    <div className={ispuniVisinu ? "flex-1 flex flex-col" : "space-y-4"}>
       {prikaziIndeks && (
         <IndeksPrikaz
           prikaz={data.korisnik.prikaz}
           tip={data.korisnik.tip}
           statusKaoBadge={indeksKaoBadge}
+          ispuniVisinu={ispuniVisinu}
         />
       )}
       {prikaziStablo && (

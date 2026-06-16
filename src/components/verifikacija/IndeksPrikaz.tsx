@@ -12,9 +12,14 @@ type Props = {
   podnaslov?: string;
   /** Profil varijanta: status kao badge levo, indeks desno (centrirano). */
   statusKaoBadge?: boolean;
+  /** Kartica popunjava punu visinu roditelja (h-full), sadržaj centriran. */
+  ispuniVisinu?: boolean;
 };
 
-export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge }: Props) {
+export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
+  const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
+    ispuniVisinu ? " h-full flex flex-col justify-center" : ""
+  }`;
   const tipLabela: Record<string, string> = {
     REGULARNI: "Verifikovan kroz lanac jemstva",
     NOSILAC_ZRNA: "Nosilac ZRNA",
@@ -42,7 +47,7 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge }:
 
   if (statusKaoBadge) {
     return (
-      <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <div className={rootCls}>
         <div className="grid grid-cols-2 gap-4 items-center">
           {/* LEVO — status badge */}
           <div className="flex justify-center">
@@ -62,7 +67,7 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge }:
   }
 
   return (
-    <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+    <div className={rootCls}>
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold">
         <Pojam
           termin="Indeks stvarnosti"
