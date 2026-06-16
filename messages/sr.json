@@ -715,8 +715,8 @@
   },
   "donacije": {
     "naslov": "Donacije Fondaciji",
-    "beta_naslov": "Beta faza — uskoro dostupno",
-    "beta_opis": "Tekući račun Fondacije biće otvoren pre Beta faze. Sve informacije ispod su pripremljene i biće aktivne.",
+    "beta_naslov": "Test faza — uskoro dostupno",
+    "beta_opis": "Tekući račun Fondacije biće otvoren pre Test faze. Sve informacije ispod su pripremljene i biće aktivne.",
     "objasnjenje": "Donirajte dinare Fondaciji bankovnom uplatnicom i dobijte POENE prema vašem rangu donacija. Viši rang znači povoljniji koeficijent evidencije — jednom ostvaren rang se zadržava.",
     "vas_rang": "Vaš rang donacija",
     "nivo": "Nivo {n}",

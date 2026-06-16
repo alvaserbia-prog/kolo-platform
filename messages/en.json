@@ -715,8 +715,8 @@
   },
   "donacije": {
     "naslov": "Donations to Foundation",
-    "beta_naslov": "Beta phase — coming soon",
-    "beta_opis": "The Foundation's bank account will be opened before the Beta phase. All information below is prepared and will be active.",
+    "beta_naslov": "Test phase — coming soon",
+    "beta_opis": "The Foundation's bank account will be opened before the Test phase. All information below is prepared and will be active.",
     "objasnjenje": "Donate dinars to the Foundation via bank transfer and receive POEN according to your donation rank. Higher rank means a better rate — once achieved, the rank is kept.",
     "vas_rang": "Your donation rank",
     "nivo": "Level {n}",
