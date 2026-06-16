@@ -1,4 +1,4 @@
-# KOLO Platforma — v3.8.0
+# KOLO Platforma — v3.9.0
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -41,35 +41,36 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
-## Kanonska dokumentacija (folder `dokumentacija 3.8/`)
-**Kanonski set je konsolidovan na jedinstvenu verziju 3.8.0** u folderu **`dokumentacija 3.8/`** (pažnja: ime sa razmakom). v3.8.0 je sadržinski jednaka prethodnom mešanom 3.7.x setu (folder `nova dokumentacija/`, sada istorija) uz otklonjene neusaglašenosti između akata — pa svi implementacioni nalazi niže koji referenciraju 3.7.x i dalje važe.
+## Kanonska dokumentacija (folder `dokumentacija 3.9/`)
+**Kanonski set je verzije 3.9.0** u folderu **`dokumentacija 3.9/`** (pažnja: ime sa razmakom). 3.9.0 nadograđuje prethodni 3.8.x set (folder `dokumentacija 3.8/`, sada istorija): prelazna odredba o početku sistema (Pravilnik čl. 82, „početni korisnici"), konkretizovani GDPR obrađivači (Vercel/Neon/Cloudflare R2/Resend, SAD) + DPO (Nikola Šarić), transparentnost donatora, jezici sr/en/hu. **Statut ostaje na 3.8.0** (sadržinski nepromenjen, fajl `statut_3_8_0.md`). Stariji implementacioni nalazi koji referenciraju 3.7.x/3.8.x i dalje važe.
 
-| Dokument | Fajl (`dokumentacija 3.8/`) | Verzija |
+| Dokument | Fajl (`dokumentacija 3.9/`) | Verzija |
 |---|---|---|
-| Pravilnik o KOLO sistemu | `Pravilnik_3_8_0.md` | **3.8.0** (82 člana, 12 glava) |
-| Politika privatnosti | `politika_3_8_0.md` | **3.8.0** |
-| Uslovi korišćenja | `uslovi_koriscenja_3_8_0.md` | **3.8.0** |
+| Pravilnik o KOLO sistemu | `Pravilnik_3_9_0.md` | **3.9.0** (82 člana, 12 glava) |
+| Politika privatnosti | `politika_3_9_0.md` | **3.9.0** |
+| Uslovi korišćenja | `uslovi_koriscenja_3_9_0.md` | **3.9.0** |
 | Statut Fondacije | `statut_3_8_0.md` | **3.8.0** |
-| Whitepaper | `whitepaper_3_8_0.md` | **3.8.0** (PDF `nova dokumentacija/KOLO_Whitepaper_3.7.2.pdf` zastareo) |
-| DPIA | `DPIA_3_8_0.md` | **3.8.0** |
-| Radnje obrade | `radnje_obrade_3_8_0.md` | **3.8.0** |
-| Rizici (Izjava o prihvatanju rizika) | `rizici_3_8_0.md` | **3.8.0** |
-| Pravilnik o hijerarhiji akata | `hijerarhija_3_8_0.md` | **3.8.0** (dopunjen: dodat Pravilnik o Gornjem Kolu; „kolektivni oblici") |
-| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_8_0.md` | **3.8.0** |
-| Pravilnik o pokroviteljstvu i donacijama | `donacije_3_8_0.md` | **3.8.0** (donacije 11 nivoa 1,00–2,00; pokroviteljstvo 7 nivoa; +preduzetnici) |
-| Pravilnik o operativnom doprinosu | `operativni_3_8_0.md` | **3.8.0** |
-| Pravilnik o osnivačkom doprinosu | `osnivacki_3_8_0.md` | **3.8.0** |
-| Pravilnik o programima podrške | `programi_podrske_3_8_0.md` | **3.8.0** (verifikatorska potvrda socijalnih programa) |
-| Pravilnik o Gornjem Kolu | `gornje_kolo_3_8_0.md` | **3.8.0** (glasanje, delegiranje; veto-prag = **3× operativni trošak prethodnog meseca**) |
-| Kontekst za razvoj | `Claude_context.md` | usaglašen sa 3.8.0 |
+| Whitepaper | `whitepaper_3_9_0.md` | **3.9.0** (PDF `nova dokumentacija/KOLO_Whitepaper_3.7.2.pdf` zastareo) |
+| DPIA | `DPIA_3_9_0.md` | **3.9.0** |
+| Radnje obrade | `radnje_obrade_3_9_0.md` | **3.9.0** |
+| Rizici (Izjava o prihvatanju rizika) | `rizici_3_9_0.md` | **3.9.0** |
+| Pravilnik o hijerarhiji akata | `hijerarhija_3_9_0.md` | **3.9.0** (dopunjen: dodat Pravilnik o Gornjem Kolu; „kolektivni oblici") |
+| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_9_0.md` | **3.9.0** |
+| Pravilnik o pokroviteljstvu i donacijama | `donacije_3_9_0.md` | **3.9.0** (donacije 11 nivoa 1,00–2,00; pokroviteljstvo 7 nivoa; +preduzetnici) |
+| Pravilnik o operativnom doprinosu | `operativni_3_9_0.md` | **3.9.0** |
+| Pravilnik o osnivačkom doprinosu | `osnivacki_3_9_0.md` | **3.9.0** |
+| Pravilnik o programima podrške | `programi_podrske_3_9_0.md` | **3.9.0** (verifikatorska potvrda socijalnih programa) |
+| Pravilnik o Gornjem Kolu | `gornje_kolo_3_9_0.md` | **3.9.0** (glasanje, delegiranje; veto-prag = **3× operativni trošak prethodnog meseca**) |
+| Kontekst za razvoj | `Claude_context.md` | usaglašen sa 3.9.0 |
 
 **Otklonjene neusaglašenosti pri konsolidaciji na 3.8.0:** whitepaper — prava neverifikovanog korisnika (razmena van prostora za oglašavanje + ažuriranje evidencije POEN-a) usklađena sa Pravilnikom čl. 28; e-mail za zaštitu podataka ujednačen na `privatnost@ekolo.rs` (DPIA/Radnje obrade); hijerarhija — dodat Pravilnik o Gornjem Kolu, naziv „kolektivni oblici"; programi podrške — verzija u footeru ujednačena; zastarele međudokumentne verzijske reference → 3.8.0.
 
-**✅ Rendering app-a (od 2026-06-08):** javne pravne stranice sada čitaju iz **`dokumentacija 3.8/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 3.8`). Prikazuju se NAJNOVIJE verzije: 3.8.0, a **DPIA/Politika privatnosti/Radnje obrade → 3.8.1**. Engleski prevod celog seta je u **`dokumentacija 3.8/en/`** (15 dokumenata, uz disklejmer „Serbian prevails"; loader bira EN za locale `en`, fallback na srpski). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
+**✅ Rendering app-a (od 2026-06-08):** javne pravne stranice sada čitaju iz **`dokumentacija 3.9/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 3.9`). Prikazuju se verzije **3.9.0** za sve akte (statut ostaje **3.8.0**). Engleski prevod celog seta je u **`dokumentacija 3.9/en/`** (15 dokumenata, uz disklejmer „Serbian prevails"; loader bira EN za locale `en`, fallback na srpski). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
 
 Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 
 **Promene po verzijama (changelog iz zaglavlja dokumenata):**
+- **3.9.0 (16.06.2026)** — lansirna verzija u folderu `dokumentacija 3.9/`. Pravilnik: prelazna odredba o početku sistema (čl. 82, „početni korisnici" = osnivači kao NOSILAC_ZRNA + UO ovlašćenja; izuzetak od čl. 19/32), renumeracija stupanja na snagu → čl. 83. GDPR (Politika/DPIA/Radnje obrade): imenovani obrađivači Vercel/Neon/Cloudflare R2/Resend (SAD), prekogranični prenos, DPO Nikola Šarić, R2 za slike, broj radnji/rizika 12→13. Uslovi: transparentnost donatora (čl. 17), jezici sr/en/hu (čl. 44). Hijerarhija: moduli koji nisu aktivni. Rokovi čuvanja i analitički kolačići (GA + Vercel Analytics) popunjeni. EN paritet svih akata. **Statut nepromenjen (3.8.0).** Loader (`pravni-dokument.ts`) i `messages` repointovani na 3.9.
 - **3.8.0 (06.06.2026)** — konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0 u folderu `dokumentacija 3.8/`, uz otklanjanje neusaglašenosti između akata (vidi „Otklonjene neusaglašenosti" iznad). Sadržinski jednako prethodnom 3.7.x setu osim navedenih ispravki.
 - **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
 - **Pravilnik 3.7.5** — zaštitni veto preformulisan: štiti **operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti** (čl. 2, 48), umesto ranijeg vezivanja za narušavanje principa/zakona/pravnog statusa (principi/licence ostaju zaštićeni čl. 50, 51).
@@ -81,6 +82,8 @@ Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (
 Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog modela vidljivosti, pregled funkcija, dpia-podloga) — NIJE kanonska normativa.
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
+
+> **CLAUDE.md sinhronizovan sa kodom do commita `120d578` (2026-06-16).** Posle 2026-06-13 najviše kozmetičkih UI izmena (Profil/Pijaca/Novčanik/Početna raspored, header jezik switcher, fontovi); činjenične izmene unete iznad: Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, terminologija „emisija" → „evidencija doprinosa".
 
 ## Status usklađenosti (24.05.2026 → 02.06.2026)
 **Kod je u velikoj meri usklađen sa v3.7.5/3.7.4/3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
@@ -138,7 +141,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 ### Dokaz stvarnosti (implementiran)
 - **Model verifikacije (Pravilnik o dokazu stvarnosti 3.7.3, čl. 1):** zasniva se na **neposrednom ličnom poznavanju i NE zahteva fizičko prisustvo** (usklađeno sa Politikom 3.7.4). Kontakt podaci sa table jemstva obrađuju se u toj svrsi.
-- Tri statusa: `NEVERIFIKOVAN` / `REGULARNI` (verifikovan običan) / `POCETNI` (UO Fondacije, počinju na 10%, izuzeti od anti-cirkularnog, bez kapaciteta/nadzora) / `NOSILAC_ZRNA` (drži ZRNO, nadzire verifikacije). Enum `TipKorisnika`.
+- Enum `TipKorisnika` ima **tri vrednosti**: `NEVERIFIKOVAN` / `REGULARNI` (verifikovan običan) / `NOSILAC_ZRNA` (drži ZRNO, nadzire verifikacije). **`POCETNI` NIJE u enum-u** — „početni korisnici" (UO Fondacije: počinju na 10%, izuzeti od anti-cirkularnog, bez nadzora) su **normativni pojam** (Pravilnik o dokazu stvarnosti, Glava VI; Pravilnik o KOLO sistemu čl. 82). U kodu su modelovani kao `NOSILAC_ZRNA` + `admin` kolona (`AdminNivo`). (Legacy `POCETNI` string ostaje samo kao JWT-fallback u `proxy.ts`, označen za uklanjanje.)
 - **Verifikacija = +10 procentnih poena** indeksa (raspon 0–100%).
 - **Funkcionalni prag:** indeks ≥ 10% = pun pristup; < 10% = verifikovan ali bez pristupa.
 - **Verifikacioni kapacitet** = `⌊indeks/10⌋`.
@@ -220,7 +223,7 @@ src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
 src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
-dokumentacija 3.8/ — kanonska dokumentacija (v3.8.0)
+dokumentacija 3.9/ — kanonska dokumentacija (v3.9.0)
 nova dokumentacija/ — prethodni mešani set (3.7.2–3.7.6), istorija; app rendering još čita odavde
 docs/             — interne radne beleške (nije normativa)
 ```
@@ -230,7 +233,7 @@ docs/             — interne radne beleške (nije normativa)
 ### Autentikacija i korisnici
 - Registracija (pseudonim, email, lozinka), login (NextAuth credentials), OAuth tok (`/api/oauth`, `/oauth/dovrsi`), reset lozinke (`/api/zaboravljena-lozinka`, `/api/reset-lozinka`).
 - **Verifikacija = dokaz stvarnosti kroz lanac jemstva, bez dokumenata/JMBG-a** (vidi „Dokaz stvarnosti"). Legacy LK/JMBG tok je UKLONJEN.
-- Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. Javni profil `/profil/[id]`.
+- Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. **Email se NE prikazuje u podešavanjima profila** (uklonjen, commit `4492bcf`; i dalje se koristi pri registraciji/loginu). **Promena pseudonima bez odjave** (commit `ba4c505`). Vidljivost se bira uz svako polje. Javni profil `/profil/[id]` (POEN/ZRNO/rang/oglasi uvek vidljivi).
 - Suspenzija/isključenje (admin).
 - **Brisanje naloga** (`DELETE /api/profil`): anonimizacija ličnih podataka, prenos POEN-a ili povrat Protokolu, otpis ZRNA, `deaktiviranAt`; anonimizacija veza u grafu verifikacija (čl. 34); numerička istorija ostaje pod ne-identifikujućim pseudonimom.
 - **Eksport ličnih podataka** (`GET /api/profil/eksport`): JSON. (Bez JMBG-a — više se ne prikuplja.)
@@ -258,7 +261,8 @@ docs/             — interne radne beleške (nije normativa)
 ### Pijaca (Marketplace)
 - Listinzi; pretraga po kategoriji/lokaciji; sopstveni layout (`src/app/pijaca/`, van `(app)/` grupe — vidi BUG sa badge-om u „Sidebar badge"); detalji na `/pijaca/[id]`.
 - **Pregled oglasa javan svim posetiocima** (v3.7.3); **postavljanje/kupovina/kontakt samo verifikovani**.
-- **Slike oglasa na Vercel Blob (od 2026-06-11):** upload ide na `@vercel/blob` `put()` kad postoji `BLOB_READ_WRITE_TOKEN` (serverless FS na Vercel-u je read-only/efemeran — raniji `writeFile` u `storage/oglasi/` je padao sa EROFS); **disk fallback** za lokalni dev. Ruta `slika/[listingId]/[idx]` radi 308 redirect na CDN za apsolutne URL-ove; legacy disk putanje i dalje rade.
+- **Bez jedinice mere i stanja (količine)** — uklonjeni iz UI i API (commit `ed846fd`); `src/lib/jedinice.ts` obrisan.
+- **Slike oglasa na Cloudflare R2 (od 2026-06-15, commit `8132edb`):** upload ide preko `sacuvajNaR2` (`src/lib/skladiste.ts`) kad je R2 konfigurisan; u bazu se upisuje javni URL. **Disk fallback** (`storage/oglasi/...`) za lokalni dev kad R2 nije konfigurisan. Ruta `slika/[listingId]/[idx]` radi 308 redirect na apsolutne https URL-ove (R2/CDN); legacy disk putanje i dalje rade. (Raniji Vercel Blob tok napušten — vidi Tech stack; `@vercel/blob` dep i `BLOB_READ_WRITE_TOKEN` reference ostaju neiskorišćene.)
 
 ### Pretraga članova
 - `ClanPretraga` (debounce 250ms, keyboard nav). Klikabilni pseudonimi u tabelama.
@@ -308,7 +312,7 @@ docs/             — interne radne beleške (nije normativa)
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
 
 ### Početna (`/pocetna`)
-- Vesti Fondacije (Blog, poslednjih 5) + globalna Chat soba (svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova).
+- Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
 
 ### Sistem (`/sistem`)
 - `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
@@ -316,32 +320,35 @@ docs/             — interne radne beleške (nije normativa)
 ### Blog (Vesti Fondacije)
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
 
-### Chat soba (globalna)
-- Jedna soba; svi prijavljeni vide, samo verifikovani pišu; auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage`.
+### Pričaonica (globalna soba; UI naziv, ranije „Chat soba")
+- Jedna soba; svi prijavljeni vide, samo verifikovani pišu; auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage` (interni identifikator nepromenjen).
 
 ### Doprinos zajedničkom dobru — Oglasi (Operativni program)
 - Predlagač objavljuje zadatak; verifikovan korisnik (indeks ≥ 10%) se prijavljuje (`/api/doprinos-oglasi/[id]/prijavi`), evidentira izvršenje (`/api/doprinos-oglasi/[id]/evidencija`).
 - ✅ **Usklađeno:** model je **predloženi POEN × min(1, L/P)** (`DoprinosOglas.predlozeniPoen`, `OglasEvidencija.predlozeniPoen`; `programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (verifikator ≠ izvršilac ≠ predlagač). Satnica (`hourlyRate`/`hoursWorked`) uklonjena. Konsolidovano sa starim PED tokom — `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; „PED" je samo enum/labela koja se rutira kroz doprinos-oglase.
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
-### Javne pravne stranice (rendruju iz `dokumentacija 3.8/`, EN iz `dokumentacija 3.8/en/`)
-- `/pravilnik` → `Pravilnik_3_8_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.8.0); `/privatnost` → `politika_3_8_1.md`; `/uslovi` → `uslovi_koriscenja_3_8_0.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_8_1.md`; `/radnje-obrade` → `radnje_obrade_3_8_1.md`; `/whitepaper` → `whitepaper_3_8_0.md`; `/rizici` → `rizici_3_8_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.8/en/<isti fajl>` (fallback srpski).
-- ✅ **Verzijske labele** — prikazuju 3.8.0 (DPIA/politika/radnje 3.8.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
+### Javne pravne stranice (rendruju iz `dokumentacija 3.9/`, EN iz `dokumentacija 3.9/en/`)
+- `/pravilnik` → `Pravilnik_3_9_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.9.0); `/privatnost` → `politika_3_9_0.md`; `/uslovi` → `uslovi_koriscenja_3_9_0.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_9_0.md`; `/radnje-obrade` → `radnje_obrade_3_9_0.md`; `/whitepaper` → `whitepaper_3_9_0.md`; `/rizici` → `rizici_3_9_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.9/en/<isti fajl>` (fallback srpski).
+- ✅ **Verzijske labele** — prikazuju 3.9.0 (statut 3.8.0); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
-- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Finansije (Emisija + veto/troškovi), Osnivači, Vesti, Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Finansije (evidencija doprinosa + veto/troškovi), Osnivači, Vesti, Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- **Terminologija „emisija" → „evidencija doprinosa" u Sistem/Admin UI** (commit `120d578`, samo `messages/*.json`) — **izuzev istorije transakcija**, gde tip transakcije ostaje vidljiv; u istoriji „Emisija" → prikaz **„Protokol"** uz boje iznosa (Protokol=plavo, primljeno=zeleno, dato=crveno; commit `8fd6d47`).
 - **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Nadzor). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
 
 ## Uloge u sistemu
-- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`tipKorisnika POCETNI`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
-- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Sada postoji samo kanonski `TipKorisnika` (`POCETNI`/`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`). **Admin = UO Fondacije = `POCETNI`** (autorizacija `/admin` panela ide preko `tipKorisnika === "POCETNI"`); **članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603140000_admin_pocetni_backfill` (postojeći admini → POCETNI) i `20260603150000_drop_role_enum`.
+- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
+- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = UO Fondacije** se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
 
-## Sidebar linkovi
-- Neverifikovan: Početna, Sistem, Novčanik, Pijaca, Verifikacija
-- Verifikovan: Početna, Sistem, Novčanik, Pijaca, ZRNO
-- Admin (dodatno): Admin
-- Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Programi, Doprinos-oglasi, Glasanje, Donacije, Pokroviteljstvo, Profil, Nadzor, Tabla jemstva) dostupne preko drugih ulaznih tačaka.
+## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
+Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
+- **Neverifikovan:** gornja grupa (Početna, Sistem, Novčanik, Pijaca) + grupa **„Poverenje"** (Verifikacija, **Tabla jemstva** — istaknuto, kao ulaz u verifikaciju).
+- **Verifikovan:** gornja grupa (Početna, Novčanik, Pijaca) → grupa **„Poverenje"** (Verifikacija) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, **Tabla jemstva**, + Nadzor ako je nadzornik). Za verifikovanog je tabla jemstva premeštena iz „Poverenje" u „Zajedničko dobro" (commit `7a04610`) — tu je doprinos mreži (jemčenje za druge), ne lični put do verifikacije.
+- **Admin (dodatno):** Admin.
+- „Postani pokrovitelj" → label **„Pokrovitelj"** (commit `80fe35b`). Jezik switcher (Lat/Ћир/EN) je u header-u, ne u sidebar-u.
+- Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Glasanje, Profil) dostupne preko drugih ulaznih tačaka.
 
 ### Sidebar badge — dve vrste (od 2026-06-11)
 - **„Viđeno" badge-evi (Novčanik, Pijaca):** broje stavke nastale POSLE poslednjeg otvaranja taba. Kolone `User.vidjenoNovcanikAt` / `vidjenoPijacaAt` (migracija `20260611120000_sidebar_vidjeno`); `GET /api/dnevni-brojevi` broji `createdAt > viđeno` (fallback ponoć ako tab nije otvaran); `POST /api/dnevni-brojevi/vidjeno {sekcija}` postavi „viđeno = sad" → badge na 0. Nulovanje okida `AppShell` `useEffect` na promenu `pathname` (`/novcanik` | `/pijaca`): optimističko nulovanje + POST + re-fetch.
@@ -396,7 +403,7 @@ docs/             — interne radne beleške (nije normativa)
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
 ## Reference
-- `dokumentacija 3.8/` — kanonski set v3.8.0 (vidi tabelu na vrhu). `nova dokumentacija/` = prethodni mešani set (istorija; app rendering još odatle)
+- `dokumentacija 3.9/` — kanonski set v3.9.0 (vidi tabelu na vrhu). `nova dokumentacija/` = prethodni mešani set (istorija; app rendering još odatle)
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 

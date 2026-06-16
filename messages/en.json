@@ -886,11 +886,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -898,23 +898,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "3.8.1"
+      "ver": "3.9.0"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.8.0"
+      "ver": "3.9.0"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "3.8.0",
+      "ver": "3.9.0",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -934,21 +934,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 3.8.0",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 3.9.0",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 3.8.1",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 3.9.0",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 3.8.0",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 3.8.1",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 3.9.0",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 3.8.1",
+    "meta_radnje_desc": "Register of personal data processing activities, version 3.9.0",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 3.8.0",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 3.9.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 3.8.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 3.9.0",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.8.0",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.9.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1212,7 +1212,7 @@
     "stub3_naslov": "Governance bodies",
     "stub3_tekst": "Board of Directors and Director. The Board makes strategic decisions. The Director manages operations. Upon activation of the Upper Kolo, the Foundation transitions to a service and executive role — implementing decisions and providing reasoned responses to Upper Kolo recommendations.",
     "javno_tag": "Public and available",
-    "dok_tag": "Documents (v3.8.0)",
+    "dok_tag": "Documents (v3.9.0)",
     "dok_whitepaper": "Whitepaper",
     "dok_statut": "KOLO Foundation Statute",
     "dok_pravilnik_kolo": "Rulebook on the KOLO System",
