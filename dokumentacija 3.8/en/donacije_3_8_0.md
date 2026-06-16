@@ -74,7 +74,7 @@ Recorded POEN have the same status as all other POEN in the system.
 
 ### Article 5a — Donation list and public recognition of donors
 
-The platform maintains a list of donations by natural persons, available to verified users. A donor who has made a public donation is identified in the list by the first and last name entered in their profile; anonymous donors are not identified in the list.
+The platform maintains a list of donations by natural persons, available to verified users. A donor who has made a public donation is identified in the list by first and last name. The first and last name are recorded with the donation at the moment it is registered and are kept as a permanent part of the donation record — like the payment details — and are not altered by subsequent profile changes nor removed from the list. Anonymous donors are not identified in the list.
 
 Publication of the donor's name constitutes public recognition of the contribution and an element of transparency in the Foundation's work, and is directly tied to the recording of POEN on account of the public donation.
 

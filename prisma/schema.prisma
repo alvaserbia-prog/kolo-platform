@@ -706,8 +706,13 @@ model DonationRecord {
   // Javna vs anonimna donacija (Pravilnik o pokroviteljstvu i donacijama, čl. 3,
   // 5a). Javna donacija (true) → ime i prezime donatora vidljivi u listi donacija
   // i evidentira se POEN. Anonimna (false) → bez imena i BEZ POEN-a.
-  // Postojeći zapisi se migracijom postavljaju na false ("samo ubuduće").
   javno           Boolean        @default(true)
+
+  // Ime i prezime donatora SNIMLJENO u trenutku evidentiranja javne donacije —
+  // trajan zapis (kao i podaci o uplati), nezavisan od kasnijih izmena profila.
+  // Lista donacija prikazuje upravo ovo polje. Null = anonimna ili istorijska
+  // donacija (pre uvođenja pravila) → ne prikazuje se u listi.
+  donatorIme      String?
 
   @@index([status, createdAt])
 }
