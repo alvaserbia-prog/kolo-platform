@@ -15,6 +15,7 @@ interface FondTx {
   smer: "PRILIV" | "ODLIV";
   kategorija: string;
   opis: string;
+  userId: string | null;
   iznosRSD: number;
 }
 type TxFilter = "sve" | "protokol" | "clanovi";
@@ -396,7 +397,13 @@ function FondacijaSekcija() {
           {/* Desktop */}
           <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-3 items-center text-sm">
             <div className="min-w-0">
-              <p className="text-kolo-text truncate">{s.opis}</p>
+              {s.userId ? (
+                <Link href={`/profil/${s.userId}`} className="font-medium text-kolo-green-700 hover:underline truncate block">
+                  <Pseudonim>{s.opis}</Pseudonim>
+                </Link>
+              ) : (
+                <p className="text-kolo-text truncate">{s.opis}</p>
+              )}
               <p className="text-xs text-kolo-muted">{s.kategorija}</p>
             </div>
             <span className={`text-right font-mono font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
@@ -407,7 +414,13 @@ function FondacijaSekcija() {
           {/* Mobilna */}
           <div className="sm:hidden px-4 py-3 flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-sm text-kolo-text truncate">{s.opis}</p>
+              {s.userId ? (
+                <Link href={`/profil/${s.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline truncate block">
+                  <Pseudonim>{s.opis}</Pseudonim>
+                </Link>
+              ) : (
+                <p className="text-sm text-kolo-text truncate">{s.opis}</p>
+              )}
               <p className="text-xs text-kolo-muted">{s.kategorija} · {datum(s.datum)}</p>
             </div>
             <span className={`shrink-0 font-mono text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>

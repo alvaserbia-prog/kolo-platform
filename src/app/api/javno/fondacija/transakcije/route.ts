@@ -6,18 +6,30 @@ import { prisma } from "@/lib/prisma";
  * Jedinstven spisak transakcija sa bankovnog racuna Fondacije (transparentnost):
  *  - priliv: donacije (CONFIRMED) + pokroviteljstvo (RSD)
  *  - odliv:  troskovi Fondacije (RSD)
- * Identitet donatora se NE otkriva (privatnost) — stavke su uopstene.
+ * Identitet donatora je transparentan (pseudonim donatora / naziv pokrovitelja).
  */
 export async function GET() {
   const [donacije, pokroviteljstvo, troskovi] = await Promise.all([
     prisma.donationRecord.findMany({
       where: { status: "CONFIRMED" },
-      select: { id: true, amountRSD: true, confirmedAt: true, createdAt: true },
+      select: {
+        id: true,
+        amountRSD: true,
+        confirmedAt: true,
+        createdAt: true,
+        user: { select: { id: true, pseudonim: true } },
+      },
       orderBy: { createdAt: "desc" },
       take: 200,
     }),
     prisma.pokroviteljDoprinos.findMany({
-      select: { id: true, rsdIznos: true, napomena: true, createdAt: true },
+      select: {
+        id: true,
+        rsdIznos: true,
+        napomena: true,
+        createdAt: true,
+        pokrovitelj: { select: { naziv: true } },
+      },
       orderBy: { createdAt: "desc" },
       take: 200,
     }),
@@ -34,7 +46,8 @@ export async function GET() {
       datum: (d.confirmedAt ?? d.createdAt).toISOString(),
       smer: "PRILIV" as const,
       kategorija: "Donacija",
-      opis: "Donacija",
+      opis: d.user?.pseudonim ?? "Donacija",
+      userId: d.user?.id ?? null,
       iznosRSD: Number(d.amountRSD),
     })),
     ...pokroviteljstvo.map((p) => ({
@@ -42,7 +55,8 @@ export async function GET() {
       datum: p.createdAt.toISOString(),
       smer: "PRILIV" as const,
       kategorija: "Pokroviteljstvo",
-      opis: p.napomena ?? "Pokroviteljstvo",
+      opis: p.pokrovitelj?.naziv ?? p.napomena ?? "Pokroviteljstvo",
+      userId: null,
       iznosRSD: Number(p.rsdIznos),
     })),
     ...troskovi.map((tr) => ({
@@ -51,6 +65,7 @@ export async function GET() {
       smer: "ODLIV" as const,
       kategorija: String(tr.kategorija),
       opis: tr.opis,
+      userId: null,
       iznosRSD: Number(tr.iznosRSD),
     })),
   ].sort((a, b) => new Date(b.datum).getTime() - new Date(a.datum).getTime());
