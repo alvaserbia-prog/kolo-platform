@@ -195,7 +195,7 @@ function SidebarContent({
   // Padajuća grupa "Zajedničko dobro": Sistem, ZRNO, Doprinos, Programi, Tabla jemstva (+ Nadzor).
   // Tabla jemstva stoji ovde SAMO za verifikovanog korisnika: njemu ona nije lični put do
   // verifikacije nego doprinos mreži (jemčenje za druge), pa pripada uz Doprinos/Programe.
-  // Neverifikovani je vidi istaknuto u grupi "Poverenje" (njegov ulaz u verifikaciju).
+  // Neverifikovani je vidi istaknuto uz Verifikaciju (njegov ulaz u verifikaciju).
   const zajednickoDobro = [
     { href: "/sistem", label: t("sistem") },
     { href: "/zrno", label: t("zrno") },
@@ -218,7 +218,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { label: t("grupa_poverenje"), links: [verifikacijaLink] },
+        { links: [verifikacijaLink] },
         { links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
@@ -233,7 +233,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { label: t("grupa_poverenje"), links: [verifikacijaLink, tablaJemstvaLink] },
+        { links: [verifikacijaLink, tablaJemstvaLink] },
         ...adminGrupa,
       ];
 
