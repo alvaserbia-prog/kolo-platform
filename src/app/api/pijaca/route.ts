@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
-import { jeIspravnaJedinica } from "@/lib/jedinice";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -41,7 +40,6 @@ export async function GET(req: NextRequest) {
     take: 60,
     select: {
       id: true, title: true, description: true, price: true,
-      jedinica: true, kolicina: true,
       category: true, images: true, location: true, createdAt: true,
       seller: { select: { pseudonim: true, verified: true } },
     },
@@ -65,8 +63,6 @@ export async function POST(req: NextRequest) {
   const category = (formData.get("category") as string)?.trim();
   const location = (formData.get("location") as string)?.trim() ?? "";
   const phone = (formData.get("phone") as string)?.trim() ?? "";
-  const jedinicaRaw = (formData.get("jedinica") as string)?.trim() ?? "";
-  const kolicinaRaw = (formData.get("kolicina") as string)?.trim() ?? "";
 
   if (!title || title.length < 3)
     return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
@@ -75,14 +71,6 @@ export async function POST(req: NextRequest) {
   const price = Math.floor(Number(priceRaw));
   if (!KATEGORIJE.includes(category))
     return NextResponse.json({ error: "Neispravna kategorija." }, { status: 400 });
-
-  // Jedinica je opciona; ako je data, mora biti iz dozvoljenog skupa.
-  const jedinica = jedinicaRaw && jeIspravnaJedinica(jedinicaRaw) ? jedinicaRaw : null;
-  // Količina (stanje) je opciona; pozitivan ceo broj ili ništa.
-  const kolicina =
-    kolicinaRaw && !isNaN(Number(kolicinaRaw)) && Number(kolicinaRaw) > 0
-      ? Math.floor(Number(kolicinaRaw))
-      : null;
 
   // Slike
   const imageFiles: File[] = [];
@@ -130,8 +118,6 @@ export async function POST(req: NextRequest) {
       title,
       description,
       price,
-      jedinica,
-      kolicina,
       category,
       images: imagePaths,
       location: location || null,
