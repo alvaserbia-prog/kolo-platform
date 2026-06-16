@@ -112,6 +112,8 @@ export default function PocetnaKlijent({
         {t("opis_stranice")}
       </PageOpis>
 
+      {/* Levo Vesti Fondacije, desno Pričaonica */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
       {/* ── BLOG / VESTI FONDACIJE ──────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
@@ -264,6 +266,7 @@ export default function PocetnaKlijent({
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }
