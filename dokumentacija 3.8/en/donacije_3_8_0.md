@@ -2,11 +2,13 @@
 
 # Rulebook on Sponsorship and Donations
 
-*Version 3.8.0*
+*Version 3.8.1*
 
 *Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; substantive provisions unchanged.*
 
 *Changes in version 3.7.3: sponsorship explicitly includes entrepreneurs, on equal footing with legal entities.*
+
+*Changes in version 3.8.1: introduced the distinction between a public and an anonymous donation by a natural person — POEN is recorded only for a public donation, with public display of the donor's first and last name in the donation list; an anonymous donation carries no POEN.*
 
 ## I — General Provisions
 
@@ -36,6 +38,8 @@ Any verified system user may donate money to the Foundation in dinars or another
 
 A donation is made by payment to the Foundation's account. The Foundation issues a donation receipt upon the donor's request, in accordance with the law. The tax treatment of a donation depends on the donor's status, the Foundation's registered status, and the applicable tax regulations at the time of the donation.
 
+With each donation, the donor chooses whether the donation is public or anonymous. By making a public donation, the donor agrees that their first and last name be publicly displayed in the donation list on the platform, and POEN is recorded under Article 4 only for a public donation. An anonymous donation does not display the donor's name, and no POEN is recorded for it. The choice is made for each donation separately and applies to donations made after the entry into force of these provisions.
+
 ### Article 4 — Donation tiers and recording coefficient
 
 The larger the user's cumulative donation, the higher the donation recording coefficient — more POEN are recorded per dinar of the next donation.
@@ -62,9 +66,19 @@ The tier is cumulative and permanent — it does not decrease through the use of
 
 ### Article 5 — Legal qualification of donation recording
 
+POEN is recorded exclusively for public donations within the meaning of Article 3. For anonymous donations, no POEN is recorded and they do not count toward the cumulative donation tier under Article 4.
+
 The recording of POEN on account of a donation is an automatic act of the Protocol within the meaning of Art. 39 and Art. 73 of the KOLO System Rulebook. It does not count against the daily emission limit of the Protocol Programme.
 
 Recorded POEN have the same status as all other POEN in the system.
+
+### Article 5a — Donation list and public recognition of donors
+
+The platform maintains a list of donations by natural persons, available to verified users. A donor who has made a public donation is identified in the list by the first and last name entered in their profile; anonymous donors are not identified in the list.
+
+Publication of the donor's name constitutes public recognition of the contribution and an element of transparency in the Foundation's work, and is directly tied to the recording of POEN on account of the public donation.
+
+The donor is aware that publicly linking their name to a donation makes it possible to connect their pseudonymous record in the system with their identity. Giving this consent is voluntary and constitutes a condition for the recording of POEN on account of the donation.
 
 ## III — Sponsorship by Legal Entities
 

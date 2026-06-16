@@ -703,6 +703,12 @@ model DonationRecord {
   oid             String?        @unique
   bankRef         String?
 
+  // Javna vs anonimna donacija (Pravilnik o pokroviteljstvu i donacijama, čl. 3,
+  // 5a). Javna donacija (true) → ime i prezime donatora vidljivi u listi donacija
+  // i evidentira se POEN. Anonimna (false) → bez imena i BEZ POEN-a.
+  // Postojeći zapisi se migracijom postavljaju na false ("samo ubuduće").
+  javno           Boolean        @default(true)
+
   @@index([status, createdAt])
 }
 

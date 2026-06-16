@@ -22,6 +22,7 @@ export async function GET() {
           level: true,
           poenEmitted: true,
           status: true,
+          javno: true,
           createdAt: true,
         },
       },
@@ -30,10 +31,34 @@ export async function GET() {
 
   if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
 
+  // Rang/nivo se računa samo iz javnih donacija (anonimne ne nose POEN).
   const totalRSD = user.donations
-    .filter((d) => d.status === "CONFIRMED")
+    .filter((d) => d.status === "CONFIRMED" && d.javno)
     .reduce((s, d) => s + Number(d.amountRSD), 0);
   const { nivo, kurs } = nivoZaKumulativ(totalRSD);
+
+  // Javna lista donacija (dostupna verifikovanim korisnicima): prikazuju se samo
+  // javne donacije čiji je donator uključio prikaz imena (čl. 5a). Time se
+  // istorijski donatori (koji nisu uključili `prikaziPunoIme`) NE otkrivaju
+  // ("samo ubuduće"), a donator zadržava pravo da sakrije ime preko profila.
+  const javneDonacije = await prisma.donationRecord.findMany({
+    where: {
+      status: "CONFIRMED",
+      javno: true,
+      user: { podaci: { prikaziPunoIme: true, punoIme: { not: null } } },
+    },
+    orderBy: [{ confirmedAt: "desc" }, { createdAt: "desc" }],
+    take: 50,
+    select: {
+      id: true,
+      amountRSD: true,
+      level: true,
+      poenEmitted: true,
+      confirmedAt: true,
+      createdAt: true,
+      user: { select: { podaci: { select: { punoIme: true } } } },
+    },
+  });
 
   return NextResponse.json({
     trenutniNivo: nivo,
@@ -46,7 +71,17 @@ export async function GET() {
       level: d.level,
       poenEmitted: d.poenEmitted,
       status: d.status,
+      javno: d.javno,
       createdAt: d.createdAt.toISOString(),
+    })),
+    listaDonacija: javneDonacije.map((d) => ({
+      id: d.id,
+      ime: d.javno ? d.user.podaci?.punoIme?.trim() || null : null,
+      anonimno: !d.javno,
+      amountRSD: Number(d.amountRSD),
+      level: d.level,
+      poenEmitted: d.poenEmitted,
+      createdAt: (d.confirmedAt ?? d.createdAt).toISOString(),
     })),
     rangTabela: RANG_TABELA,
   });

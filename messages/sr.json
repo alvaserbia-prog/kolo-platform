@@ -738,7 +738,7 @@
     "kopirano": "Kopirano ✓",
     "tabela_naslov": "Tabela rangova donacija",
     "tabela_nivo": "Nivo",
-    "tabela_do": "Do (RSD)",
+    "tabela_do": "Od (RSD)",
     "tabela_kurs": "Koeficijent",
     "vas_nivo_oznaka": "← vaš nivo",
     "istorija_naslov": "Moje donacije",
@@ -755,7 +755,17 @@
     "karticno_plati": "Plati karticom",
     "karticno_min_iznos": "Unesite iznos (najmanje 100 RSD).",
     "karticno_nije_moguce": "Plaćanje trenutno nije moguće.",
-    "karticno_greska_komunikacije": "Greška u komunikaciji. Pokušajte ponovo."
+    "karticno_greska_komunikacije": "Greška u komunikaciji. Pokušajte ponovo.",
+    "vidljivost_naslov": "Vrsta donacije",
+    "vidljivost_javna": "Javna donacija (dobijam POEN)",
+    "vidljivost_javna_opis": "Vaše ime i prezime biće javno prikazani u listi donacija. Samo javna donacija nosi POEN.",
+    "vidljivost_anonimna": "Anonimna donacija (bez POEN-a)",
+    "vidljivost_anonimna_opis": "Vaše ime se ne prikazuje. Za anonimnu donaciju se ne evidentira POEN.",
+    "vidljivost_upozorenje": "Napomena: javnim prikazom imena pored donacije vaš pseudonim i ostala evidencija mogu se povezati sa vašim identitetom.",
+    "lista_naslov": "Lista donacija",
+    "lista_opis": "Javni donatori su prikazani imenom i prezimenom; anonimni donatori se ne identifikuju.",
+    "lista_prazno": "Još nema evidentiranih donacija.",
+    "lista_anoniman": "Anoniman donator"
   },
   "zaposljavnje": {
     "naslov": "Zapošljavanje",
@@ -933,7 +943,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Pravilnik o pokroviteljstvu i donacijama",
-        "opis": "Nivoi donacija fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD)."
+        "opis": "Nivoi donacija fizičkih lica (2 nivoa, koeficijent 1,00–1,10) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD)."
       },
       "operativni": {
         "naziv": "Pravilnik o operativnom doprinosu",
@@ -1372,7 +1382,7 @@
     "n1_iznos": "1.000 / 1.000 / 500",
     "n1_opis": "Kad te verifikovani korisnik koji te lično poznaje potvrdi u lancu jemstva, Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN verifikatoru — a kad verifikacija podleže nadzoru, i 500 POEN nadzorniku. Ulazak u sistem je istovremeno doprinos sistemu.",
     "n2_naslov": "Donacija Fondaciji",
-    "n2_iznos": "11 nivoa · do 2,00×",
+    "n2_iznos": "2 nivoa · do 1,10×",
     "n2_opis": "Doniraš novac Fondaciji. Protokol upisuje POEN po koeficijentu koji blago raste sa tvojim ukupnim doprinosom — na primer 1,5× na 100.000 dinara. POEN iz donacije ne daje vlasništvo, ne pretvara se u novac i ne kupuje glasove: glas zavisi od ZRNA, a glasanje je kvadratno, pa veći donator ne može da nadglasa zajednicu.",
     "n3_naslov": "Pokroviteljstvo",
     "n3_iznos": "7 nivoa · prag 10.000 RSD",

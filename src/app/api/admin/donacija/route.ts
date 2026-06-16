@@ -16,6 +16,8 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   const { pseudonim, amountRSD, donationId } = body;
+  // Anonimna donacija (javno=false) ne nosi POEN. Default je javna.
+  const javnoBody = body.javno !== false;
 
   if (!amountRSD) {
     return NextResponse.json({ error: "Iznos je obavezan." }, { status: 400 });
@@ -29,15 +31,24 @@ export async function POST(req: NextRequest) {
     // Potvrdi postojeći PENDING zapis
     const donation = await prisma.donationRecord.findUnique({
       where: { id: donationId },
-      include: { user: { select: { pseudonim: true, id: true } } },
+      include: { user: { select: { pseudonim: true, id: true, podaci: { select: { punoIme: true } } } } },
     });
     if (!donation) return NextResponse.json({ error: "Donacija nije pronađena." }, { status: 404 });
     if (donation.status === "CONFIRMED") return NextResponse.json({ error: "Donacija je već potvrđena." }, { status: 400 });
+
+    // Vidljivost je određena pri kreiranju zapisa (kartica/forma).
+    if (donation.javno && !donation.user.podaci?.punoIme?.trim()) {
+      return NextResponse.json(
+        { error: "Javna donacija zahteva da donator ima uneto ime i prezime u profilu." },
+        { status: 400 }
+      );
+    }
 
     try {
       const result = await evidentirajDonaciju(donation.userId, iznos, {
         existingRecordId: donationId,
         adminId: session.user.id,
+        javno: donation.javno,
       });
 
       await logAdminAkcija(session.user.id, "DONACIJA_POTVRDJENA", donation.userId,
@@ -60,11 +71,21 @@ export async function POST(req: NextRequest) {
   if (!pseudonim) {
     return NextResponse.json({ error: "Pseudonim ili donationId je obavezan." }, { status: 400 });
   }
-  const user = await prisma.user.findUnique({ where: { pseudonim } });
+  const user = await prisma.user.findUnique({
+    where: { pseudonim },
+    include: { podaci: { select: { punoIme: true } } },
+  });
   if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
 
+  if (javnoBody && !user.podaci?.punoIme?.trim()) {
+    return NextResponse.json(
+      { error: "Javna donacija zahteva da donator ima uneto ime i prezime u profilu (ili evidentirajte kao anonimnu)." },
+      { status: 400 }
+    );
+  }
+
   try {
-    const result = await evidentirajDonaciju(user.id, iznos, { adminId: session.user.id });
+    const result = await evidentirajDonaciju(user.id, iznos, { adminId: session.user.id, javno: javnoBody });
 
     await logAdminAkcija(session.user.id, "DONACIJA_RUCNO_EVIDENTIRANA", user.id,
       `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);

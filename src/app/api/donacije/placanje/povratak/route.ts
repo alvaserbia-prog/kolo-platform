@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   const zapis = await prisma.donationRecord.findUnique({
     where: { oid },
-    select: { id: true, userId: true, amountRSD: true, status: true, provajder: true },
+    select: { id: true, userId: true, amountRSD: true, status: true, provajder: true, javno: true },
   });
   if (!zapis) return rezultat("greska");
 
@@ -71,7 +71,10 @@ export async function POST(req: NextRequest) {
 
   // Priznaj donaciju i emituj POEN (koeficijentni model). Koristi iznos iz zapisa.
   try {
-    await evidentirajDonaciju(zapis.userId, ocekivaniIznos, { existingRecordId: zapis.id });
+    await evidentirajDonaciju(zapis.userId, ocekivaniIznos, {
+      existingRecordId: zapis.id,
+      javno: zapis.javno,
+    });
     await prisma.donationRecord.update({
       where: { id: zapis.id },
       data: { bankRef: params["AuthCode"] || params["TransId"] || "OK" },

@@ -10,6 +10,17 @@ interface Donacija {
   level: number;
   poenEmitted: number;
   status: "PENDING" | "CONFIRMED";
+  javno: boolean;
+  createdAt: string;
+}
+
+interface JavnaDonacija {
+  id: string;
+  ime: string | null;
+  anonimno: boolean;
+  amountRSD: number;
+  level: number;
+  poenEmitted: number;
   createdAt: string;
 }
 
@@ -24,6 +35,7 @@ interface DonacijeData {
   trenutniKurs: number;
   kumulativRSD: number;
   donacije: Donacija[];
+  listaDonacija: JavnaDonacija[];
   rangTabela: RangRed[];
 }
 
@@ -37,6 +49,7 @@ export default function DonacijeKlijent() {
   const [loading, setLoading] = useState(true);
   const [kopirano, setKopirano] = useState(false);
   const [iznosKartica, setIznosKartica] = useState("");
+  const [javno, setJavno] = useState(true);
   const [karticaLoading, setKarticaLoading] = useState(false);
   const [karticaGreska, setKarticaGreska] = useState<string | null>(null);
   const [ishod, setIshod] = useState<"uspeh" | "neuspeh" | "greska" | null>(null);
@@ -61,7 +74,7 @@ export default function DonacijeKlijent() {
       const r = await fetch("/api/donacije/placanje/zapocni", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ iznosRSD: iznos }),
+        body: JSON.stringify({ iznosRSD: iznos, javno }),
       });
       const j = await r.json();
       if (!r.ok) {
@@ -170,6 +183,29 @@ export default function DonacijeKlijent() {
             {t("karticno_opis")}
           </p>
         </div>
+
+        {/* Izbor: javna (POEN, ime javno) ili anonimna (bez POEN) donacija */}
+        <div className="space-y-2">
+          <p className="text-xs font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
+          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+            <input type="radio" name="vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
+            <span className="text-xs">
+              <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
+              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
+            </span>
+          </label>
+          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${!javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+            <input type="radio" name="vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
+            <span className="text-xs">
+              <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
+              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
+            </span>
+          </label>
+          {javno && (
+            <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>
+          )}
+        </div>
+
         <div className="flex gap-2">
           <div className="relative flex-1">
             <input
@@ -305,6 +341,40 @@ export default function DonacijeKlijent() {
                     </p>
                   )}
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Javna lista donacija — javni donatori imenom, anonimni bez imena */}
+      <div>
+        <h2 className="text-base font-semibold text-kolo-text mb-1">{t("lista_naslov")}</h2>
+        <p className="text-xs text-kolo-muted mb-3">{t("lista_opis")}</p>
+        {data.listaDonacija.length === 0 ? (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+            {t("lista_prazno")}
+          </div>
+        ) : (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden">
+            {data.listaDonacija.map((d, i) => (
+              <div
+                key={d.id}
+                className={`px-4 py-3 flex items-center justify-between ${i < data.listaDonacija.length - 1 ? "border-b border-kolo-border" : ""}`}
+              >
+                <div>
+                  <p className="text-sm font-medium text-kolo-text">
+                    {d.anonimno ? t("lista_anoniman") : d.ime || t("lista_anoniman")}
+                  </p>
+                  <p className="text-xs text-kolo-muted mt-0.5">
+                    {new Date(d.createdAt).toLocaleDateString("sr-RS")} · {d.amountRSD.toLocaleString("sr-RS")} RSD
+                  </p>
+                </div>
+                {!d.anonimno && d.poenEmitted > 0 && (
+                  <p className="text-xs text-kolo-green-700 font-semibold">
+                    +{d.poenEmitted.toLocaleString("sr-RS")} POEN
+                  </p>
+                )}
               </div>
             ))}
           </div>

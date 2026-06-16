@@ -100,7 +100,7 @@ Legal basis: execution of a contractual relationship (Art. 12 para. 1 item 2 LPD
 
 **4.5 Donation and Sponsorship Data**
 
-For natural person donations we collect: the donation amount, the donation date, and the identity of the donor. Identification of the donor is provided through the banking system — the Foundation receives donations from verified bank accounts. These data are stored by the Foundation.
+For natural person donations we collect: the donation amount, the donation date, and the identity of the donor. Identification of the donor is provided through the banking system — the Foundation receives donations from verified bank accounts. These data are stored by the Foundation. For public donations (within the meaning of the Rulebook on Sponsorship and Donations) we publicly publish the donor's first and last name together with the amount and date of the donation, in the donation list available to verified users. The legal basis is the donor's consent (Art. 12 LPDP), given by choosing a public donation for the purpose of recording POEN. For anonymous donations the donor's name is not published and no POEN is recorded. The donor is aware that publicly linking their name to a donation makes it possible to connect their pseudonymous record with their identity; the disclosure is voluntary and constitutes a condition for the recording of POEN on account of the donation.
 
 Purpose of processing: fulfilment of the statutory obligation of financial reporting.
 
@@ -188,9 +188,11 @@ Guarantee board. The presentation text referred to in sub-section 4.8 is accessi
 
 The user may, on their own initiative and at any time, choose to make their name and surname and telephone number visible to all verified Platform users. This disclosure is entirely voluntary and may be withdrawn at any time, after which the data will no longer be displayed to other users. Withdrawal does not affect data that may already have been recorded outside the Platform by third parties.
 
+Separately from this voluntary disclosure, in the case of a public donation the donor's first and last name are published in the donation list as a condition for the recording of POEN on account of that donation, based on the consent referred to in section 4.5. This publication is tied to the specific donation and its pseudonymous record.
+
 Regardless of user status and regardless of voluntary disclosures, the following data are never publicly accessible: email address, technical logs and access log, verification graph, voluntarily entered data that have not been explicitly disclosed, and special categories of data.
 
-The public nature of the pseudonymous contribution ledger is a structural characteristic of the system, not an option the user may disable. A user who does not accept this condition may not use the Platform.
+The public nature of the pseudonymous contribution ledger is a structural characteristic of the system, not an option the user may disable. A user who does not accept this condition may not use the Platform. Unlike the pseudonymous ledger, the public display of a donor's first and last name is optional — the donor chooses it by selecting between a public and an anonymous donation.
 
 Even with pseudonymity, the combination of amounts, times, and frequency of transactions may in certain cases enable the indirect identification of the user. The user is aware of this limitation and accepts it upon registration.
 

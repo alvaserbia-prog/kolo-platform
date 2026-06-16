@@ -167,6 +167,19 @@ Datum poslednje izmene: 06.06.2026.
 | **Mere zaštite** | Pristup ograničen na superadministratore; sve radnje povodom nalaza beleže se u revizijskom dnevniku; pseudonimizacija; bez prikupljanja novih podataka. **Sistem ne donosi automatske odluke u smislu čl. 38 ZZPL-a — samo označava naloge/grupe, a meru donosi ovlašćeno lice.** Pravila prioritetizuju odsustvo stvarne aktivnosti („šupljinu"), a ne gustinu veza, radi izbegavanja pogrešnog tretiranja zbijenih stvarnih zajednica. Mogućnost odbacivanja nalaza i pravo na prigovor (čl. 37 ZZPL-a). |
 | **Napomena — test srazmernosti legitimnog interesa** | Obrada je neophodna za sprečavanje zloupotrebe koja bi obezvredila evidenciju i glasanje; srazmerna je jer ne uvodi nove podatke, radi nad pseudonimima, ne donosi automatske odluke i podleže ljudskom pregledu i prigovoru. Interes Fondacije i poštenih korisnika preteže nad minimalnim zadiranjem u prava lica. |
 
+**Radnja obrade br. 13 — Objavljivanje imena donatora u listi donacija**
+
+| **Svrha obrade** | Transparentnost i javno priznanje javnih donacija. |
+| --- | --- |
+| **Kategorije lica** | Donatori fizička lica koji su izabrali javnu donaciju. |
+| **Kategorije podataka** | Ime i prezime, iznos i datum donacije, pseudonim. |
+| **Pravni osnov** | Pristanak (čl. 12 st. 1 t. 1 ZZPL-a), dat izborom javne donacije radi evidentiranja POEN-a. Za anonimne donacije ime se ne objavljuje i POEN se ne evidentira. |
+| **Primaoci / obrađivači** | [Hosting provajder / naziv obrađivača]. Verifikovani korisnici platforme (lista donacija). |
+| **Prenos u treću zemlju** | [Da/Ne] |
+| **Rok čuvanja** | Kao za podatke o donacijama — 10 godina, u skladu sa poreskim i računovodstvenim propisima. |
+| **Mere zaštite** | Izbor je dobrovoljan i po pojedinačnoj donaciji; jasno upozorenje pre javne donacije; anonimna opcija bez POEN-a kao alternativa; pravilo se primenjuje samo ubuduće; TLS enkripcija, kontrola pristupa. |
+| **Napomena** | Javno povezivanje imena sa donacijom omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom; otkrivanje je dobrovoljno i predstavlja uslov za evidentiranje POEN-a po osnovu donacije. |
+
 **ZAVRŠNE ODREDBE**
 
 Ovaj registar se ažurira pri svakoj promeni radnji obrade, aktiviranju novih modula sistema ili promeni tehničkih i organizacionih mera zaštite. Ažuriranje registra je obaveza rukovaoca u skladu sa čl. 47 ZZPL-a.
