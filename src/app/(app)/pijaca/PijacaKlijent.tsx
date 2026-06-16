@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import PageOpis from "@/components/PageOpis";
 import Pseudonim from "@/components/Pseudonim";
 
 // DB enum values — never change these (they are stored in the database)
@@ -101,46 +100,44 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           <span className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</span>
         )}
       </div>
-      <PageOpis>
-        {t("opis")}
-      </PageOpis>
 
-      {/* Pretraga + filteri */}
+      {/* Filteri: levo padajuci meniji (kategorija + sortiranje), desno pretraga (pola sirine) */}
       <div className="space-y-3">
-        <input
-          type="text"
-          placeholder={t("pretrazi_placeholder")}
-          value={pretraga}
-          onChange={(e) => setPretraga(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
-        />
-        <div className="flex gap-2 flex-wrap">
-          {/* "All/Sve" button */}
-          <button
-            onClick={() => setFilterKat("Sve")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              filterKat === "Sve"
-                ? "bg-kolo-green-700 text-white"
-                : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
-            }`}
-          >
-            {t("sve_kategorije")}
-          </button>
-          {/* Category buttons — filter value stays as DB enum, label is translated */}
-          {KATEGORIJE_VREDNOSTI.map((kat) => (
-            <button
-              key={kat}
-              onClick={() => setFilterKat(kat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                filterKat === kat
-                  ? "bg-kolo-green-700 text-white"
-                  : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
-              }`}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+          {/* LEVO — padajuci meniji */}
+          <div className="flex gap-2 flex-wrap">
+            <select
+              value={filterKat}
+              onChange={(e) => setFilterKat(e.target.value)}
+              className="px-3 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
             >
-              {t(`kategorija_${kategorijaKljuc(kat)}`)}
-            </button>
-          ))}
+              <option value="Sve">{t("sve_kategorije")}</option>
+              {KATEGORIJE_VREDNOSTI.map((kat) => (
+                <option key={kat} value={kat}>{t(`kategorija_${kategorijaKljuc(kat)}`)}</option>
+              ))}
+            </select>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className="px-3 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
+            >
+              <option value="novo">{t("sort_novo")}</option>
+              <option value="jeftino">{t("sort_jeftino")}</option>
+              <option value="skupo">{t("sort_skupo")}</option>
+            </select>
+          </div>
+
+          {/* DESNO — pretraga (pola sirine, pomerena desno) */}
+          <input
+            type="text"
+            placeholder={t("pretrazi_placeholder")}
+            value={pretraga}
+            onChange={(e) => setPretraga(e.target.value)}
+            className="w-full sm:w-1/2 sm:ml-auto px-4 py-2 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-700 transition-colors"
+          />
         </div>
+
+        {/* Cena raspon */}
         <div className="flex gap-2 items-center">
           <input
             type="number"
@@ -164,21 +161,6 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               ×
             </button>
           )}
-        </div>
-        <div className="flex gap-2">
-          {(["novo", "jeftino", "skupo"] as const).map((val) => (
-            <button
-              key={val}
-              onClick={() => setSort(val)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                sort === val
-                  ? "bg-kolo-green-700 text-white border border-kolo-green-700"
-                  : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-900"
-              }`}
-            >
-              {t(`sort_${val}`)}
-            </button>
-          ))}
         </div>
       </div>
 
