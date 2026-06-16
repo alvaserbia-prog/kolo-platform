@@ -116,13 +116,14 @@ export default function PocetnaKlijent({
           <h2 className="text-2xl font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
         </div>
 
-        {blog.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
-            {t("nema_objava")}
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {blog.map((o) => {
+        {/* Prozor vesti — fiksne visine kao Pričaonica (480px), sa skrolom */}
+        <div className="overflow-y-auto space-y-3 pr-1" style={{ height: 480 }}>
+          {blog.length === 0 ? (
+            <div className="h-full flex items-center justify-center bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+              {t("nema_objava")}
+            </div>
+          ) : (
+            blog.map((o) => {
               const otvorena = otvorenaObjava === o.id;
               const sazet = o.content.length > 280 && !otvorena;
               return (
@@ -153,9 +154,9 @@ export default function PocetnaKlijent({
                   )}
                 </article>
               );
-            })}
-          </div>
-        )}
+            })
+          )}
+        </div>
       </section>
 
       {/* ── PRIČAONICA ──────────────────────────────────────────────── */}
