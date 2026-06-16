@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageOpis from "@/components/PageOpis";
 import Pseudonim from "@/components/Pseudonim";
 
 interface BlogObjava {
@@ -108,16 +107,13 @@ export default function PocetnaKlijent({
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
         {t.rich("dobrodoslice", { pseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
       </h1>
-      <PageOpis>
-        {t("opis_stranice")}
-      </PageOpis>
 
       {/* Levo Vesti Fondacije, desno Pričaonica */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
       {/* ── BLOG / VESTI FONDACIJE ──────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
+          <h2 className="text-2xl font-semibold text-kolo-text">{t("vesti_naslov")}</h2>
         </div>
 
         {blog.length === 0 ? (
@@ -165,7 +161,7 @@ export default function PocetnaKlijent({
       {/* ── PRIČAONICA ──────────────────────────────────────────────── */}
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-kolo-text">{t("chat_naslov")}</h2>
+          <h2 className="text-2xl font-semibold text-kolo-text">{t("chat_naslov")}</h2>
           <span className="text-xs text-kolo-muted">
             {t("chat_brisanje")}
           </span>
