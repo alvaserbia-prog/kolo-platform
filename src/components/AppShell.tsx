@@ -87,8 +87,10 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex flex-col overflow-x-hidden">
       <Header onMenuOpen={() => setMobileOpen(true)} />
-      <div className="flex flex-1 min-h-0 justify-center">
-      <div className="flex w-full max-w-[1140px] min-w-0">
+      {/* Skrol je na punoj širini viewporta → skrolbar je uz desnu ivicu ekrana
+          (ranije je bio na centriranom <main> pa je „visio" u sredini desno). */}
+      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="flex w-full max-w-[1140px] min-w-0 mx-auto">
         <Sidebar
           verified={verified}
           isAdmin={isAdmin}
@@ -98,7 +100,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
           onMobileClose={() => setMobileOpen(false)}
           dnevniBrojevi={dnevniBrojevi}
         />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 min-w-0">
           <div className="px-4 py-5 md:px-8 md:py-6">
             {children}
           </div>

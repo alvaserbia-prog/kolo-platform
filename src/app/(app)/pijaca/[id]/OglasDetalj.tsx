@@ -77,6 +77,21 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
     setLoading(false);
     if (res.ok) {
       setPoruka({ text: t("kupovina_uspesna_kratko"), ok: true });
+      // Otvori konverzaciju sa prodavcem i preusmeri na poruke radi dogovora
+      try {
+        const konvRes = await fetch("/api/poruke", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: oglas.sellerId }),
+        });
+        if (konvRes.ok) {
+          const konv = await konvRes.json();
+          setTimeout(() => router.push(`/poruke?k=${konv.konverzacijaId}`), 1200);
+          return;
+        }
+      } catch {
+        // ako otvaranje konverzacije ne uspe, padni na osvežavanje
+      }
       setTimeout(() => router.refresh(), 1500);
     } else {
       setPoruka({ text: data.error ?? t("greska_generalna"), ok: false });
