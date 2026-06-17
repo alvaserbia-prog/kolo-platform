@@ -2,9 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { verifikujResetToken } from "@/lib/passwordReset";
+import { rateLimit, klijentIP } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // Anti brute-force tokena: najviše 20 pokušaja po IP-u u 15 min.
+    const rl = rateLimit(`reset-primeni:${klijentIP(req)}`, 20, 15 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ error: "Previše pokušaja. Pokušajte kasnije." }, { status: 429 });
+    }
+
     const { token, novaLozinka } = await req.json();
 
     if (!token || typeof token !== "string") {

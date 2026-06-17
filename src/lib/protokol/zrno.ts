@@ -30,7 +30,8 @@ export async function trendsKurs(): Promise<number> {
   const zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika;
   if (zrnaUProtokolu <= 0) return protokolBalance; // edge case
 
-  return protokolBalance / zrnaUProtokolu;
+  // Zaokruženo na 2 decimale radi doslednosti sa naplatom (V5).
+  return Math.max(0.01, Number((protokolBalance / zrnaUProtokolu).toFixed(2)));
 }
 
 export async function poslednjiKurs(): Promise<number> {
@@ -57,20 +58,35 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   });
   const kodKorisnika = (ukupnoKodKorisnika._sum.slobodno ?? 0) + (ukupnoKodKorisnika._sum.aktivno ?? 0);
   const zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika;
-  const kurs = protokolBalance > 0 && zrnaUProtokolu > 0 ? protokolBalance / zrnaUProtokolu : 1;
+  // V5: kurs se zaokružuje na 2 decimale JEDNOM i ta ista vrednost se koristi i za
+  // prikaz/čuvanje i za sav obračun — tako je naplaćeni kurs identičan prikazanom.
+  // Klamp na min 0.01 da deljenje `poen/kurs` nikad ne pukne (degenerisan sitan kurs).
+  const kursRaw = protokolBalance > 0 && zrnaUProtokolu > 0 ? protokolBalance / zrnaUProtokolu : 1;
+  const kurs = Math.max(0.01, Number(kursRaw.toFixed(2)));
 
-  // Sačuvaj kurs
-  await prisma.zrnoDailyRate.upsert({
-    where: { date: danas },
-    create: { date: danas, kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
-    update: { kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
-  });
+  // K4: BRAVA DANA — `create` (ne `upsert`). Ako su ZRNO operacije za ovaj dan već
+  // pokrenute (cron retry ili cron + ručni admin okidač), drugi poziv dobije P2002
+  // na jedinstvenom `date` i ceo posao se preskače — bez duplog izdavanja ZRNA.
+  try {
+    await prisma.zrnoDailyRate.create({
+      data: { date: danas, kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
+    });
+  } catch (e) {
+    if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") {
+      return { kurs, zrnaUProtokolu, obradjenihUpisa: 0, obradjenihOtpisa: 0, preskoceno: true };
+    }
+    throw e;
+  }
 
   // 2. Obradi upise
   const upisi = await prisma.zrnoUpisZahtev.findMany({
     where: { date: danas, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
+
+  // K3: brojač ZRNA izdatih u OVOM prolazu. Bez njega svaki upis čita istu staru
+  // "slobodno" cifru, pa zbir izdatih može da pređe UKUPNO_ZRNA (1.000.000).
+  let izdato = 0;
 
   for (const z of upisi) {
     try {
@@ -89,8 +105,9 @@ export async function izvrsiZrnoOperacije(datum: Date) {
       if (zrnaDobija <= 0) { await cancel(z.id, "upis"); continue; }
       const poenPlaceno = Math.ceil(zrnaDobija * kurs);
 
-      // Proveri da ima dovoljno slobodnih ZRNA u Protokolu
-      const slobodnoUProtokolu = UKUPNO_ZRNA - kodKorisnika;
+      // Proveri da ima dovoljno slobodnih ZRNA u Protokolu — UMANJENO za već izdato
+      // u ovom prolazu (K3), inače se fiksna ponuda od 1.000.000 može probiti.
+      const slobodnoUProtokolu = UKUPNO_ZRNA - kodKorisnika - izdato;
       if (zrnaDobija > slobodnoUProtokolu) { await cancel(z.id, "upis"); continue; }
 
       await prisma.$transaction(async (tx) => {
@@ -127,6 +144,8 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           data: { status: "EXECUTED", zrnaKupljeno: zrnaDobija, poenPlaceno },
         });
       });
+      // Tek po uspešnoj transakciji uvećaj brojač izdatih ZRNA (K3).
+      izdato += zrnaDobija;
     } catch (err) {
       console.error(`Greška pri upisu ZRNA za ${z.userId}:`, err);
       await cancel(z.id, "upis");

@@ -22,9 +22,15 @@ export async function GET(
 
   const filePath = listing.images[index];
 
-  // Vercel Blob (ili bilo koji apsolutni URL) — preusmeri na CDN.
+  // Apsolutni URL — preusmeri na CDN, ALI samo ako pripada našem R2 javnom bazenu.
+  // Time se zatvara open-redirect: čak i ako bi neki budući tok upisao tuđi URL u
+  // `images[]`, ova ruta neće preusmeravati na proizvoljan host.
   if (/^https?:\/\//i.test(filePath)) {
-    return NextResponse.redirect(filePath, 308);
+    const r2Baza = (process.env.R2_PUBLIC_URL ?? "").replace(/\/$/, "");
+    if (r2Baza && filePath.startsWith(r2Baza + "/")) {
+      return NextResponse.redirect(filePath, 308);
+    }
+    return new NextResponse("Nedozvoljen izvor slike", { status: 404 });
   }
 
   // Legacy: slika na lokalnom disku (dev).

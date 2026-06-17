@@ -54,25 +54,38 @@ export async function POST(req: NextRequest) {
   }
 
   // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
-  await prisma.$transaction(async (tx) => {
-    await tx.wallet.update({
-      where: { id: posiljac.wallet!.id },
-      data: { balance: { decrement: iznos } },
+  // Skidanje POEN-a je ATOMSKO (updateMany sa uslovom balance >= iznos): garantuje da
+  // dva paralelna transfera ne mogu oba da prođu i odvedu stanje u minus (anti double-spend).
+  try {
+    await prisma.$transaction(async (tx) => {
+      const skinuto = await tx.wallet.updateMany({
+        where: { id: posiljac.wallet!.id, balance: { gte: iznos } },
+        data: { balance: { decrement: iznos } },
+      });
+      if (skinuto.count !== 1) {
+        // Stanje se u međuvremenu promenilo (paralelni transfer) — prekini ceo posao.
+        throw new Error("NEDOVOLJNO_SREDSTAVA");
+      }
+      await tx.wallet.update({
+        where: { id: primalac.wallet!.id },
+        data: { balance: { increment: iznos } },
+      });
+      await tx.transaction.create({
+        data: {
+          fromWalletId: posiljac.wallet!.id,
+          toWalletId: primalac.wallet!.id,
+          amount: iznos,
+          type: TransactionType.TRANSFER,
+          description: description?.trim() || null,
+        },
+      });
     });
-    await tx.wallet.update({
-      where: { id: primalac.wallet!.id },
-      data: { balance: { increment: iznos } },
-    });
-    await tx.transaction.create({
-      data: {
-        fromWalletId: posiljac.wallet!.id,
-        toWalletId: primalac.wallet!.id,
-        amount: iznos,
-        type: TransactionType.TRANSFER,
-        description: description?.trim() || null,
-      },
-    });
-  });
+  } catch (e) {
+    if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
+      return NextResponse.json({ error: "Nemate dovoljno POEN-a." }, { status: 400 });
+    }
+    throw e;
+  }
 
   await posaljiNotifikaciju(
     primalac.id,

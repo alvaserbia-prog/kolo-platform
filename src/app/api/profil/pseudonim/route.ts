@@ -2,15 +2,20 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { validanPseudonim } from "@/lib/validacija";
 
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const { pseudonim } = await req.json();
-  if (!pseudonim || pseudonim.length < 3 || pseudonim.length > 30) {
-    return NextResponse.json({ error: "Pseudonim mora imati između 3 i 30 karaktera." }, { status: 400 });
+  const body = await req.json();
+  if (!validanPseudonim(body?.pseudonim)) {
+    return NextResponse.json(
+      { error: "Pseudonim: 3–30 znakova, samo slova, brojevi, razmak, _ . -" },
+      { status: 400 }
+    );
   }
+  const pseudonim = (body.pseudonim as string).trim();
 
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });

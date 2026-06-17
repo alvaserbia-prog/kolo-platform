@@ -66,9 +66,20 @@ export async function POST(req: NextRequest) {
 
   if (!title || title.length < 3)
     return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
+  // Gornje granice dužine — sprečavaju bujanje baze i predimenzioniran javni odgovor.
+  if (title.length > 120)
+    return NextResponse.json({ error: "Naslov može imati najviše 120 karaktera." }, { status: 400 });
+  if (description.length > 4000)
+    return NextResponse.json({ error: "Opis može imati najviše 4000 karaktera." }, { status: 400 });
+  if (location.length > 80)
+    return NextResponse.json({ error: "Lokacija može imati najviše 80 karaktera." }, { status: 400 });
+  if (phone.length > 40)
+    return NextResponse.json({ error: "Telefon može imati najviše 40 karaktera." }, { status: 400 });
   if (!priceRaw || isNaN(Number(priceRaw)) || Number(priceRaw) <= 0)
     return NextResponse.json({ error: "Cena mora biti pozitivan ceo broj." }, { status: 400 });
   const price = Math.floor(Number(priceRaw));
+  if (price > 1_000_000_000)
+    return NextResponse.json({ error: "Cena je neuobičajeno velika." }, { status: 400 });
   if (!KATEGORIJE.includes(category))
     return NextResponse.json({ error: "Neispravna kategorija." }, { status: 400 });
 

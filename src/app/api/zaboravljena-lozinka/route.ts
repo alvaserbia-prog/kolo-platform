@@ -2,9 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { kreirajResetToken, posaljiResetEmail } from "@/lib/passwordReset";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { rateLimit, klijentIP } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   try {
+    // Anti-flood: najviše 5 zahteva za reset po IP-u u 15 min (sprečava spam mejlova).
+    const rl = rateLimit(`reset-zahtev:${klijentIP(req)}`, 5, 15 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ ok: true }); // tih odgovor (ne otkrivamo throttling)
+    }
+
     const { email } = await req.json();
 
     if (!email || typeof email !== "string" || !email.includes("@")) {

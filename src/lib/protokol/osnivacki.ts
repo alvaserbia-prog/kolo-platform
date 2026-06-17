@@ -133,8 +133,12 @@ export async function proveriIEvidentirajKorak(): Promise<{
   let trenutniPrag = kanal.poslednjiPrag;
   let evidentirano = 0;
 
+  // Snapshot ukupnog POEN-a PRE petlje. Svaki korak emituje 20.000 POEN i time
+  // povećava opticaj; da to NE bi samo guralo prag za sledeći korak (samopojačavajuća
+  // kaskada), prag se poredi prema stanju sistema na ulasku, a ne posle svake emisije.
+  const ukupanPoen = await izracunajUkupanPoen();
+
   while (trenutniKoraci < ITERATION_LIMIT) {
-    const ukupanPoen = await izracunajUkupanPoen();
     const sledeciPrag = trenutniPrag + PRAG_SKOK;
 
     if (ukupanPoen < sledeciPrag) break; // jos nije dostignut sledeci prag

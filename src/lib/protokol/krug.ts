@@ -27,14 +27,24 @@ export async function proveriIEmitujBonusPrag(krugId: string) {
     where: { krugId, leftAt: null },
   });
 
+  // Isplati SVE dostignute a još neisplaćene pragove (>=), ne samo tačno jednak —
+  // ako dva člana uđu skoro istovremeno i broj skoči npr. 9→11, prag 10 se inače
+  // preskoči (raniji `!==`) i legitiman bonus se izgubi.
   for (const prag of BONUS_PRAGOVI) {
-    if (brojClanova !== prag.clanovi) continue;
+    if (brojClanova < prag.clanovi) continue;
 
-    // Proveri da li je ovaj prag već isplaćen
-    const vec = await prisma.krugBonusLog.findFirst({
-      where: { krugId, threshold: prag.clanovi },
-    });
-    if (vec) continue;
+    // RACE-SAFE: prvo "rezerviši" prag kreiranjem log-zapisa (jedinstven [krugId, threshold]).
+    // Ako paralelni poziv pokuša isti prag, drugi dobije P2002 i preskače — tako se bonus
+    // emituje tačno jednom (anti dupli bonus). Tek po uspešnoj rezervaciji emitujemo POEN.
+    try {
+      await prisma.krugBonusLog.create({
+        data: { krugId, threshold: prag.clanovi, amount: prag.poen },
+      });
+    } catch (e) {
+      // P2002 = prag već isplaćen (ili ga upravo isplaćuje paralelni poziv) → preskoči.
+      if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") continue;
+      throw e;
+    }
 
     await emitujPoen(
       krug.wallet.id,
@@ -42,9 +52,5 @@ export async function proveriIEmitujBonusPrag(krugId: string) {
       TransactionType.EMISIJA_KRUG_BONUS,
       `Bonus krugovi "${krug.name}" — ${prag.clanovi} članova`
     );
-
-    await prisma.krugBonusLog.create({
-      data: { krugId, threshold: prag.clanovi, amount: prag.poen },
-    });
   }
 }

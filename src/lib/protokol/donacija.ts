@@ -80,7 +80,14 @@ export async function evidentirajDonaciju(
       podaci: { select: { punoIme: true } },
       donations: {
         // Samo javne donacije ulaze u kumulativni nivo (anonimne ne nose POEN).
-        where: { status: DonationStatus.CONFIRMED, javno: true },
+        // Tekući zapis (existingRecordId) se ISKLJUČUJE iz kumulativa — kartični tok
+        // ga atomski postavi na CONFIRMED PRE ove funkcije (anti-dupli-callback), pa bi
+        // se inače duplo brojao za izračun nivoa.
+        where: {
+          status: DonationStatus.CONFIRMED,
+          javno: true,
+          ...(options?.existingRecordId ? { id: { not: options.existingRecordId } } : {}),
+        },
         select: { amountRSD: true },
       },
     },

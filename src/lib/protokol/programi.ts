@@ -138,6 +138,20 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
   const opticaj = Math.abs(protokol?.balance ?? 0);
   const limit = Math.floor(opticaj * 0.1);
 
+  // K4: BRAVA DANA — `create` summary-ja za `danas` služi kao zaključavanje. Ako je
+  // noćna emisija već pokrenuta (cron retry ili cron + ručni admin okidač), drugi poziv
+  // dobije P2002 na jedinstvenom `date` i ceo posao se preskače — bez dvostruke emisije.
+  try {
+    await prisma.dailyEmissionSummary.create({
+      data: { date: danas, opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {} },
+    });
+  } catch (e) {
+    if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") {
+      return { opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {}, preskoceno: true };
+    }
+    throw e;
+  }
+
   // 2. Aktivni programi
   const aktivniProgrami = await prisma.protokolProgram.findMany({ where: { isActive: true } });
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
@@ -175,12 +189,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
   }
 
   if (items.length === 0) {
-    // Snimi prazan summary
-    await prisma.dailyEmissionSummary.upsert({
-      where: { date: danas },
-      create: { date: danas, opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {} },
-      update: {},
-    });
+    // Summary za danas je već kreiran (brava dana) — samo ga ostavi praznim.
     return { opticaj, limit, totalRequested: 0, totalEmitted: 0, koeficijent: 1, breakdown: {} };
   }
 
@@ -223,11 +232,10 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     totalEmitted += emitAmount;
   }
 
-  // 7. Summary
-  await prisma.dailyEmissionSummary.upsert({
+  // 7. Summary (row je već kreiran bravom dana — samo upiši konačne vrednosti)
+  await prisma.dailyEmissionSummary.update({
     where: { date: danas },
-    create: { date: danas, opticaj, limit, totalRequested, totalEmitted, koeficijent: koeficijent.toFixed(6), breakdown },
-    update: { opticaj, limit, totalRequested, totalEmitted, koeficijent: koeficijent.toFixed(6), breakdown },
+    data: { opticaj, limit, totalRequested, totalEmitted, koeficijent: koeficijent.toFixed(6), breakdown },
   });
 
   return { opticaj, limit, totalRequested, totalEmitted, koeficijent, breakdown };

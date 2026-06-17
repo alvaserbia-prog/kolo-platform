@@ -6,6 +6,20 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
+import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
+import { normalizujEmail } from "@/lib/validacija";
+import { rateLimit } from "@/lib/rate-limit";
+
+/**
+ * K5: "pun pristup" (vidljivost pseudonima/profila/grafa) zavisi od FUNKCIONALNOG
+ * praga indeksa (≥ 10%), ne od `verified` boolean-a. Pri poništenju lažne verifikacije
+ * indeks padne na 0 a `verified` ostaje true (korisnik ostaje REGULARNI, čl. 18) —
+ * zato se `session.user.verified` izvodi iz oba uslova, pa kapije po celom kodu
+ * automatski uskraćuju pristup kada indeks padne ispod praga.
+ */
+function imaPunPristup(verified: boolean, indeksStvarnosti: number): boolean {
+  return verified && indeksStvarnosti >= FUNKCIONALNI_PRAG_INDEKSA;
+}
 
 /**
  * Dok je MAINTENANCE_MODE uključen, prijava je dozvoljena samo ranim prihvatiocima
@@ -58,8 +72,12 @@ export const authOptions: NextAuthOptions = {
         if (!(await ulazDozvoljen())) return null;
         if (!credentials?.email || !credentials?.password) return null;
 
+        const emailNorm = normalizujEmail(credentials.email);
+        // Anti brute-force / credential-stuffing: 10 pokušaja po nalogu u 15 min.
+        if (!rateLimit(`login:${emailNorm}`, 10, 15 * 60 * 1000).ok) return null;
+
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: emailNorm },
         });
         if (!user || !user.passwordHash) return null;
 
@@ -74,7 +92,7 @@ export const authOptions: NextAuthOptions = {
           pseudonim: user.pseudonim,
           tipKorisnika: user.tipKorisnika,
           admin: user.admin,
-          verified: user.verified,
+          verified: imaPunPristup(user.verified, user.indeksStvarnosti),
           oauthPending: user.oauthPending,
         };
       },
@@ -87,8 +105,8 @@ export const authOptions: NextAuthOptions = {
       // Credentials — provera je u authorize()
       if (account?.provider === "credentials") return true;
 
-      // OAuth (Google / Facebook)
-      const email = user.email;
+      // OAuth (Google / Facebook) — email u kanonskoj formi (bez duplikata vs credentials nalog)
+      const email = normalizujEmail(user.email);
       if (!email) return false;
 
       const provider = account!.provider;
@@ -109,7 +127,7 @@ export const authOptions: NextAuthOptions = {
         user.pseudonim = existing.pseudonim;
         user.tipKorisnika = existing.tipKorisnika;
         user.admin = existing.admin;
-        user.verified = existing.verified;
+        user.verified = imaPunPristup(existing.verified, existing.indeksStvarnosti);
         user.oauthPending = existing.oauthPending;
         return true;
       }
@@ -170,11 +188,12 @@ export const authOptions: NextAuthOptions = {
         try {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id as string },
-            select: { verified: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
+            select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
           });
           if (dbUser) {
             token.admin = dbUser.admin;
-            token.verified = dbUser.verified;
+            // K5: pun pristup zavisi od indeksa ≥ 10%, ne samo od `verified`.
+            token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
             token.tipKorisnika = dbUser.tipKorisnika;
             token.pseudonim = dbUser.pseudonim;
             token.oauthPending = dbUser.oauthPending;
