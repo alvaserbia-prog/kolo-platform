@@ -41,8 +41,8 @@ async function revizija(idf: string) {
 
   const [listings, oglasi, poruke, konv1, konv2, notif, donacije, osnivac, krugClan] = await Promise.all([
     prisma.marketplaceListing.count({ where: { sellerId: u.id } }),
-    prisma.doprinosOglas.count({ where: { kreiraoId: u.id } }).catch(() => -1),
-    prisma.poruka.count({ where: { posaljilacId: u.id } }).catch(() => -1),
+    prisma.doprinosOglas.count({ where: { createdById: u.id } }).catch(() => -1),
+    prisma.poruka.count({ where: { posiljacId: u.id } }).catch(() => -1),
     prisma.konverzacija.count({ where: { user1Id: u.id } }).catch(() => -1),
     prisma.konverzacija.count({ where: { user2Id: u.id } }).catch(() => -1),
     prisma.notifikacija.count({ where: { userId: u.id } }).catch(() => -1),
