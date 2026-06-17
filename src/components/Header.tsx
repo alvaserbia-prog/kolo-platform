@@ -62,12 +62,14 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         {/* Sredina: Bagovi + Upiši POEN */}
         <div className="flex-1 flex justify-start md:justify-center pl-2 md:pl-0">
           <div className="flex items-center gap-3 md:gap-5 md:ml-[1cm]">
-            {/* Prijavljeni bagovi i status rada na njima */}
+            {/* Prijavljeni bagovi i status rada na njima.
+                Na mobilnom se sklanja iz top bara (premešteno u profilni meni)
+                da se gornja traka ne pretrpa i profilna ikonica ostane vidljiva. */}
             <Link
               href="/bagovi"
               title={t("bagovi")}
               aria-label={t("bagovi")}
-              className="flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 text-white/80 hover:text-white text-xs md:text-sm font-semibold rounded-xl border border-white/40 hover:bg-white/10 transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 text-white/80 hover:text-white text-xs md:text-sm font-semibold rounded-xl border border-white/40 hover:bg-white/10 transition-colors whitespace-nowrap"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/>
@@ -94,10 +96,10 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
             <>
               <BalansHeader userId={session.user.id} />
               <div className="hidden sm:block w-px h-4 bg-white/20" />
-              {/* Pomoć / onboarding */}
+              {/* Pomoć / onboarding — na mobilnom u profilnom meniju (vidi ProfilMeni) */}
               <Link
                 href="/dobrodosli"
-                className="w-9 h-9 flex items-center justify-center rounded-full text-white/60 ring-2 ring-white/20 hover:text-white hover:ring-white/50 transition-all shrink-0"
+                className="w-9 h-9 hidden md:flex items-center justify-center rounded-full text-white/60 ring-2 ring-white/20 hover:text-white hover:ring-white/50 transition-all shrink-0"
                 aria-label={t("aria_kako_funkcionise")}
                 title={t("aria_kako_funkcionise")}
               >
@@ -212,6 +214,35 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
         <div className="absolute right-0 top-11 w-auto min-w-max bg-white rounded-2xl shadow-xl border border-kolo-border z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-kolo-border">
             <p className="text-sm font-semibold text-kolo-text truncate text-right"><Pseudonim>{pseudonim}</Pseudonim></p>
+          </div>
+          {/* Mobilno: stavke koje na desktopu stoje u gornjoj traci (Bagovi, Pomoć).
+              Na mobilnom su sklonjene iz trake, pa ih ovde držimo dostupnim. */}
+          <div className="py-1 md:hidden border-b border-kolo-border">
+            <button
+              onClick={() => { setOpen(false); router.push("/bagovi"); }}
+              className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
+            >
+              {t("bagovi")}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/>
+                <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/>
+                <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/>
+                <path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/>
+                <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/>
+                <path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>
+              </svg>
+            </button>
+            <button
+              onClick={() => { setOpen(false); router.push("/dobrodosli"); }}
+              className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
+            >
+              {t("aria_kako_funkcionise")}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </button>
           </div>
           <div className="py-1">
             <button
