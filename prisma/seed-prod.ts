@@ -14,9 +14,9 @@ const OSNIVACKI_DOPRINOS = 1000; // POEN po osnivaču, emitovano iz protokola (z
 const OSNIVACI = [
   { email: "alva.serbia@gmail.com",  pseudonim: "Nikola",  memberHash: "osn00001", admin: AdminNivo.SUPERADMIN, location: "Sombor" },
   { email: "jelenacs53@gmail.com",   pseudonim: "Jelena",  memberHash: "osn00002", admin: AdminNivo.NONE,       location: "Sombor" },
-  { email: "dragonkiss025@gmail.com", pseudonim: "Danijel", memberHash: "osn00003", admin: AdminNivo.NONE,       location: "Sombor" },
+  { email: "kissdragon025@gmail.com", pseudonim: "Danijel", memberHash: "osn00003", admin: AdminNivo.NONE,       location: "Sombor" },
   { email: "info@noxuz.net",         pseudonim: "Stefan",  memberHash: "osn00004", admin: AdminNivo.NONE,       location: "Čačak" },
-  { email: "deimos025@gmail.com",    pseudonim: "Mihajlo", memberHash: "osn00005", admin: AdminNivo.NONE,       location: "Sombor" },
+  { email: "deimos25@gmail.com",     pseudonim: "Mihajlo", memberHash: "osn00005", admin: AdminNivo.NONE,       location: "Sombor" },
 ];
 
 async function main() {
@@ -49,6 +49,7 @@ async function main() {
       update: {
         pseudonim: o.pseudonim,
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        jeOsnivac: true,
         admin: o.admin,
         indeksStvarnosti: 10,
         verified: true,
@@ -58,6 +59,7 @@ async function main() {
         email: o.email,
         pseudonim: o.pseudonim,
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        jeOsnivac: true,
         admin: o.admin,
         indeksStvarnosti: 10,
         verified: true,

@@ -224,6 +224,7 @@ async function seedAdmin() {
       where: { email: c.email },
       update: {
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        jeOsnivac: true,
         admin: AdminNivo.SUPERADMIN,
         verified: true,
       },
@@ -232,6 +233,7 @@ async function seedAdmin() {
         passwordHash: hash,
         pseudonim: c.pseudonim,
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+        jeOsnivac: true,
         admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: 10,
         verified: true,
