@@ -35,6 +35,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
   const [slike, setSlike] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [uspeh, setUspeh] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
@@ -76,12 +77,34 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
       const data = await res.json();
 
       if (!res.ok) { setError(data.error ?? t("greska_objavljivanje")); return; }
-      router.push(`/pijaca/${data.id}`);
+      // Potvrda + redirect na Pijacu (ne direktno na detalj oglasa).
+      setUspeh(true);
+      setTimeout(() => router.push("/pijaca"), 1800);
     } catch {
       setError(t("greska_slanje"));
     } finally {
       setLoading(false);
     }
+  }
+
+  if (uspeh) {
+    return (
+      <div className="max-w-lg mx-auto py-16 text-center space-y-5">
+        <div className="mx-auto w-16 h-16 rounded-full bg-kolo-green-100 flex items-center justify-center">
+          <svg className="w-8 h-8 text-kolo-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <h1 className="kolo-naslov">{t("uspeh_naslov")}</h1>
+        <p className="text-sm text-kolo-muted">{t("uspeh_opis")}</p>
+        <button
+          onClick={() => router.push("/pijaca")}
+          className="px-6 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors"
+        >
+          {t("uspeh_dugme")}
+        </button>
+      </div>
+    );
   }
 
   return (

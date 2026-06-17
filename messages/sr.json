@@ -1623,7 +1623,10 @@
     "greska_objavljivanje": "Greška pri objavljivanju.",
     "greska_slanje": "Greška pri slanju. Pokušajte ponovo.",
     "objavljivanje": "Objavljivanje...",
-    "objavi_oglas": "Objavi oglas"
+    "objavi_oglas": "Objavi oglas",
+    "uspeh_naslov": "Vaš oglas je uspešno postavljen",
+    "uspeh_opis": "Preusmeravamo vas na Pijacu…",
+    "uspeh_dugme": "Idi na Pijacu"
   },
   "pocetna": {
     "dobrodoslice": "Dobrodošao, <ime>{pseudonim}</ime>",
