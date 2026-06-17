@@ -129,23 +129,23 @@ export default async function OsnivackiDoprinosPage() {
       {koraci.length > 0 && (
         <>
           <h2 className="font-semibold text-kolo-text mb-3">{t("koraci_naslov")}</h2>
-          <div className="bg-kolo-surface border border-kolo-border rounded-2xl overflow-hidden">
-            <table className="w-full text-sm">
+          <div className="bg-kolo-surface border border-kolo-border rounded-2xl overflow-x-auto">
+            <table className="w-full text-sm min-w-[34rem]">
               <thead>
                 <tr className="text-left text-kolo-muted border-b border-kolo-border">
-                  <th className="px-6 py-3 font-medium">{t("col_korak")}</th>
-                  <th className="px-6 py-3 font-medium">{t("col_prag")}</th>
-                  <th className="px-6 py-3 font-medium">{t("col_iznos")}</th>
-                  <th className="px-6 py-3 font-medium">{t("col_datum")}</th>
+                  <th className="px-3 sm:px-6 py-3 font-medium">{t("col_korak")}</th>
+                  <th className="px-3 sm:px-6 py-3 font-medium">{t("col_prag")}</th>
+                  <th className="px-3 sm:px-6 py-3 font-medium">{t("col_iznos")}</th>
+                  <th className="px-3 sm:px-6 py-3 font-medium">{t("col_datum")}</th>
                 </tr>
               </thead>
               <tbody>
                 {koraci.map((k) => (
                   <tr key={k.brojKoraka} className="border-b border-kolo-border last:border-0">
-                    <td className="px-6 py-3 text-kolo-text">{k.brojKoraka}/{ITERATION_LIMIT}</td>
-                    <td className="px-6 py-3 text-kolo-muted">{fmt(k.prag)}</td>
-                    <td className="px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} POEN</td>
-                    <td className="px-6 py-3 text-kolo-muted">
+                    <td className="px-3 sm:px-6 py-3 text-kolo-text">{k.brojKoraka}/{ITERATION_LIMIT}</td>
+                    <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.prag)}</td>
+                    <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} POEN</td>
+                    <td className="px-3 sm:px-6 py-3 text-kolo-muted whitespace-nowrap">
                       {new Date(k.createdAt).toLocaleDateString(
                         locale === "sr-Cyrl" ? "sr-RS" : locale === "hu" ? "hu-HU" : locale === "en" ? "en-US" : "sr-RS",
                         { day: "2-digit", month: "long", year: "numeric" }

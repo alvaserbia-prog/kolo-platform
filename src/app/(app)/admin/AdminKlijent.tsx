@@ -1188,7 +1188,8 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
           <h3 className="text-sm font-semibold text-kolo-muted">{t("emisija_pragovi_naslov")}</h3>
           <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_pragovi_sub")}</p>
         </div>
-        <table className="w-full text-xs">
+        <div className="overflow-x-auto">
+        <table className="w-full text-xs min-w-[22rem]">
           <thead>
             <tr className="bg-kolo-bg">
               <th className="px-4 py-2 text-center text-kolo-muted font-medium">{t("emisija_tbl_nivo")}</th>
@@ -1214,6 +1215,7 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
