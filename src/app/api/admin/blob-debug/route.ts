@@ -60,7 +60,7 @@ export async function GET() {
     siroviRezultat.izuzetak = e instanceof Error ? e.message : String(e);
   }
 
-  // --- 2) Test preko helpera sacuvajNaR2 (isti put kao oglasi) ---
+  // --- 2) Test preko helpera sacuvajNaR2 (isti put kao oglasi) — malo telo ---
   const helperRezultat: Record<string, unknown> = {};
   try {
     const url = await sacuvajNaR2(
@@ -76,5 +76,23 @@ export async function GET() {
     helperRezultat.greska = e instanceof Error ? e.message : String(e);
   }
 
-  return NextResponse.json({ ...konfiguracija, siroviRezultat, helperRezultat });
+  // --- 3) Test VELIKOG tela (~2MB) — reprodukuje uslov iz prave slike (411) ---
+  const velikoTeloRezultat: Record<string, unknown> = {};
+  try {
+    const veliki = Buffer.alloc(2 * 1024 * 1024, 1); // 2MB
+    velikoTeloRezultat.bajtova = veliki.byteLength;
+    const url = await sacuvajNaR2(
+      `dijagnostika/veliki-${Date.now()}.bin`,
+      veliki,
+      "application/octet-stream"
+    );
+    velikoTeloRezultat.uspeh = true;
+    velikoTeloRezultat.vracenURL = url;
+    await obrisiSaR2(url); // počisti
+  } catch (e) {
+    velikoTeloRezultat.uspeh = false;
+    velikoTeloRezultat.greska = e instanceof Error ? e.message : String(e);
+  }
+
+  return NextResponse.json({ ...konfiguracija, siroviRezultat, helperRezultat, velikoTeloRezultat });
 }

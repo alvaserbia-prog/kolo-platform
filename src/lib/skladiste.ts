@@ -61,10 +61,16 @@ export async function sacuvajNaR2(
     telo.byteOffset,
     telo.byteOffset + telo.byteLength
   ) as ArrayBuffer;
+  // R2 zahteva Content-Length na PUT-u. Za veće telo undici (Node) inače
+  // bira Transfer-Encoding: chunked → R2 vraća 411 MissingContentLength.
+  // Eksplicitno postavljamo dužinu da se to izbegne.
   const res = await client().fetch(endpoint(kljuc), {
     method: "PUT",
     body: ab,
-    headers: { "Content-Type": contentType },
+    headers: {
+      "Content-Type": contentType,
+      "Content-Length": String(ab.byteLength),
+    },
   });
   if (!res.ok) {
     const detalj = await res.text().catch(() => "");
