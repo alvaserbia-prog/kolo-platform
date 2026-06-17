@@ -9,6 +9,8 @@ import { authOptions } from "@/lib/auth";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import CirilicaProvider from "@/components/CirilicaProvider";
+import { Analitika } from "@/components/Analitika";
+import { CookieConsent } from "@/components/CookieConsent";
 import {
   SITE_URL,
   SITE_NAME,
@@ -104,28 +106,11 @@ export default async function RootLayout({
           <CirilicaProvider />
           <Providers session={session}>{children}</Providers>
         </NextIntlClientProvider>
+        {/* Vercel Analytics — bez kolačića (cookieless, agregatno), ne zahteva pristanak. */}
         <Analytics />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JY214NWCDK"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-JY214NWCDK');
-          `}
-        </Script>
-        {CLARITY_ID && (
-          <Script id="ms-clarity" strategy="afterInteractive">
-            {`(function(c,l,a,r,i,t,y){
-              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "${CLARITY_ID}");`}
-          </Script>
-        )}
+        {/* Google Analytics + Microsoft Clarity — učitavaju se SAMO uz pristanak (čl. 7 Politike). */}
+        <Analitika clarityId={CLARITY_ID} />
+        <CookieConsent />
       </body>
     </html>
   );
