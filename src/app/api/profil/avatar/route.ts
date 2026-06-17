@@ -30,6 +30,13 @@ export async function PATCH(req: Request) {
   }
 
   const mime = match[1];
+  // V1: striktna allowlist MIME tipova. Regex `image/[a-zA-Z+]+` bi inače propustio
+  // `image/svg+xml` — SVG može da nosi <script> i postaje stored-XSS kada se servira
+  // direktno sa R2/poddomena. Dozvoljavamo samo rasterske formate (kao Pijaca rute).
+  const DOZVOLJENI_MIME = ["image/jpeg", "image/png", "image/webp"];
+  if (!DOZVOLJENI_MIME.includes(mime)) {
+    return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
+  }
   const ext = mime.split("/")[1].replace("jpeg", "jpg");
   const buffer = Buffer.from(match[2], "base64");
 

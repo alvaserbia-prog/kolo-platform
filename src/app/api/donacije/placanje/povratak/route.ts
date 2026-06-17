@@ -69,7 +69,21 @@ export async function POST(req: NextRequest) {
     return rezultat("greska");
   }
 
+  // ATOMSKA IDEMPOTENCIJA: preuzmi zapis iz PENDING u CONFIRMED jednim uslovnim
+  // upitom. Banke znaju da pošalju callback više puta (mrežni retry); samo jedan
+  // poziv može da preuzme zapis i emituje POEN — ostali otpadaju (count !== 1).
+  const preuzeto = await prisma.donationRecord.updateMany({
+    where: { id: zapis.id, status: "PENDING" },
+    data: { status: "CONFIRMED" },
+  });
+  if (preuzeto.count !== 1) {
+    // Drugi (paralelni) callback je već preuzeo i obrađuje/obradio ovaj zapis.
+    return rezultat("uspeh");
+  }
+
   // Priznaj donaciju i emituj POEN (koeficijentni model). Koristi iznos iz zapisa.
+  // Napomena: kumulativ u `evidentirajDonaciju` isključuje upravo ovaj zapis (postavljen
+  // je na CONFIRMED gore), pa nema dvostrukog brojanja tekuće donacije.
   try {
     await evidentirajDonaciju(zapis.userId, ocekivaniIznos, {
       existingRecordId: zapis.id,

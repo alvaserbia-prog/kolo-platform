@@ -8,6 +8,7 @@
  * prostom većinom datih glasova; izjednačeno = neusvojeno (čl. 9).
  */
 import { prisma } from "@/lib/prisma";
+import { glasackaMoc } from "./zrno";
 
 export type FazaPredloga = "NAJAVLJEN" | "U_TOKU" | "ZATVOREN";
 
@@ -110,12 +111,27 @@ export async function dohvatiRegistarOdluka() {
 export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promise<void> {
   const istekli = await prisma.glasanjePredlog.findMany({
     where: { status: "ACTIVE", deadline: { lte: now } },
-    include: { glasovi: { select: { za: true, glasackaGlasova: true } } },
+    include: { glasovi: { select: { za: true, glasackaGlasova: true, userId: true } } },
   });
 
+  // M2: ZRNO se otključava u ponoć, a glas zadržava zamrznutu moć — pa se na zatvaranju
+  // moć svakog glasa OGRANIČAVA na trenutno ZAKLJUČANO (aktivno) ZRNO glasača. Ko je u
+  // međuvremenu otključao ZRNA, gubi taj deo težine; ko ga je zadržao — nije pogođen.
+  // Prvo razreši trenutno stanje ZRNA svih glasača, pa onda preračunaj zbirove.
+  const sviGlasaci = [...new Set(istekli.flatMap((p) => p.glasovi.map((g) => g.userId)))];
+  const stanja = sviGlasaci.length
+    ? await prisma.zrnoStanje.findMany({
+        where: { userId: { in: sviGlasaci } },
+        select: { userId: true, aktivno: true },
+      })
+    : [];
+  const aktivnoMap = new Map(stanja.map((s) => [s.userId, s.aktivno]));
+  const trenutnaMoc = (g: { userId: string; glasackaGlasova: number }) =>
+    Math.min(g.glasackaGlasova, glasackaMoc(aktivnoMap.get(g.userId) ?? 0));
+
   for (const p of istekli) {
-    const zaZbir = p.glasovi.filter((g) => g.za).reduce((s, g) => s + g.glasackaGlasova, 0);
-    const protivZbir = p.glasovi.filter((g) => !g.za).reduce((s, g) => s + g.glasackaGlasova, 0);
+    const zaZbir = p.glasovi.filter((g) => g.za).reduce((s, g) => s + trenutnaMoc(g), 0);
+    const protivZbir = p.glasovi.filter((g) => !g.za).reduce((s, g) => s + trenutnaMoc(g), 0);
     const usvojen = utvrdiIshod(zaZbir, protivZbir); // izjednačeno = neusvojeno (čl. 9)
     await prisma.glasanjePredlog.update({
       where: { id: p.id },

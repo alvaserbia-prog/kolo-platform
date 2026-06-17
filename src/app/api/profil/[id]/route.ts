@@ -106,6 +106,18 @@ export async function GET(
   const transakcijeSlice = imaJos ? transakcije.slice(0, 10) : transakcije;
   const nextCursor = imaJos ? transakcijeSlice[9].id : null;
 
+  // V3: neverifikovan korisnik (na sopstvenom profilu — jedini koji ovde dospeva bez
+  // punog pristupa) sme da vidi iznose/vremena, ali NE pseudonime druge strane ni
+  // stanje računa (Pravilnik čl. 28–30, 67). Maskiramo protivstranu i izostavljamo bilans.
+  const punPristup = session.user.verified;
+  const transakcijeIzlaz = punPristup
+    ? transakcijeSlice
+    : transakcijeSlice.map((t) => ({
+        ...t,
+        fromWallet: { user: null },
+        toWallet: { user: null },
+      }));
+
   // Oglasi — uvek vidljivi
   const oglasi = await prisma.marketplaceListing.findMany({
     where: { sellerId: id, status: "ACTIVE" },
@@ -129,10 +141,11 @@ export async function GET(
     punoIme: (jeVlasnik || podaci?.prikaziPunoIme) ? podaci?.punoIme ?? null : null,
     telefon: (jeVlasnik || podaci?.prikaziTelefon) ? korisnik.telefon : null,
     // POEN balans, ZRNO, rang donacija i oglasi su uvek vidljivi (ne podležu togglu)
-    bilans: korisnik.wallet?.balance ?? 0,
+    // — osim za neverifikovanog na sopstvenom profilu, kome se stanje računa ne prikazuje (V3).
+    bilans: punPristup ? (korisnik.wallet?.balance ?? 0) : null,
     zrno: korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0,
     rangDonacija,
-    transakcije: transakcijeSlice,
+    transakcije: transakcijeIzlaz,
     nextCursor,
     oglasi,
   });

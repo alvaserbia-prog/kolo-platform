@@ -73,12 +73,19 @@ export async function PATCH(
 
     if (!title || title.length < 3)
       return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
+    if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
+      return NextResponse.json({ error: "Neko polje premašuje dozvoljenu dužinu." }, { status: 400 });
     const price = Math.floor(Number(priceRaw));
-    if (isNaN(price) || price <= 0)
+    if (isNaN(price) || price <= 0 || price > 1_000_000_000)
       return NextResponse.json({ error: "Cena mora biti pozitivan broj." }, { status: 400 });
 
-    // keepImages — niz indeksa postojećih slika koje treba zadržati
-    const keepIndices: number[] = JSON.parse(keepRaw);
+    // keepImages — niz indeksa postojećih slika koje treba zadržati. Validiramo da je
+    // zaista niz brojeva (ne pada na neispravnom JSON-u, ne prihvata ne-niz vrednosti).
+    let keepParsed: unknown;
+    try { keepParsed = JSON.parse(keepRaw); } catch { keepParsed = []; }
+    const keepIndices: number[] = Array.isArray(keepParsed)
+      ? keepParsed.filter((x): x is number => Number.isInteger(x))
+      : [];
     const zadrzaneSlike = listing.images.filter((_, i) => keepIndices.includes(i));
     const uklonjeneSlike = listing.images.filter((_, i) => !keepIndices.includes(i));
 

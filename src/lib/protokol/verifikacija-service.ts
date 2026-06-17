@@ -21,7 +21,7 @@ import {
   proveriAntiCirkularno,
   raspolozivSlot,
 } from "@/lib/protokol/dokaz-stvarnosti";
-import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 export class VerifikacijaGreska extends Error {
   constructor(
@@ -104,14 +104,21 @@ export async function izvrsiVerifikaciju(
   // Faza 1: DB promene u jednoj transakciji
   // Skini sve whitespace karaktere (razmaci, tab, novi red) — QR ekran prikazuje "384 729"
   const trimmed = tokenIliBroj.replace(/\s+/g, "");
-  const {
-    verifikacijaId,
-    verifikatorPseudonim,
-    verifikatorWalletId,
-    verifikovaniPseudonim,
-    verifikovaniWalletId,
-    verifikovaniNoviIndeks,
-  } = await prisma.$transaction(async (tx) => {
+
+  // K6: SERIALIZABLE izolacija + jedinstven par (verifikatorId, verifikovaniId).
+  // Time se sprečava da dve istovremene verifikacije (npr. recipročno A→B i B→A, ili
+  // dupli A→B) obe prođu anti-cirkularnu proveru protiv grafa koji još ne sadrži onu
+  // drugu vezu. Konflikt serijalizacije (P2034) ili dupli par (P2002) → čista poruka.
+  let fazaJedan: {
+    verifikacijaId: string;
+    verifikatorPseudonim: string;
+    verifikatorWalletId: string;
+    verifikovaniPseudonim: string;
+    verifikovaniWalletId: string;
+    verifikovaniNoviIndeks: number;
+  };
+  try {
+    fazaJedan = await prisma.$transaction(async (tx) => {
       // Pronađi token: bilo po 64-char hex ili 6-cifrenom broju
       const token = await tx.verifikacijaToken.findFirst({
         where: {
@@ -324,7 +331,26 @@ export async function izvrsiVerifikaciju(
         verifikovaniWalletId: verifikovaniWallet.id,
         verifikovaniNoviIndeks: noviIndeks,
       };
-    });
+    }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+  } catch (e) {
+    if (e instanceof VerifikacijaGreska) throw e;
+    const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
+    if (code === "P2002") {
+      throw new VerifikacijaGreska("Ova verifikacija već postoji.", 409);
+    }
+    if (code === "P2034") {
+      throw new VerifikacijaGreska("Verifikacija je u toku — pokušaj ponovo.", 409);
+    }
+    throw e;
+  }
+  const {
+    verifikacijaId,
+    verifikatorPseudonim,
+    verifikatorWalletId,
+    verifikovaniPseudonim,
+    verifikovaniWalletId,
+    verifikovaniNoviIndeks,
+  } = fazaJedan;
 
   // Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu).
   // Koristi se walletId direktno iz Faze 1 (bez ponovnog findUnique-a) da bi se

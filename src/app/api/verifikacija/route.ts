@@ -15,11 +15,21 @@ import {
   izvrsiVerifikaciju,
   VerifikacijaGreska,
 } from "@/lib/protokol/verifikacija-service";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
+  }
+
+  // Anti brute-force 6-cifrenog koda: najviše 10 pokušaja u minuti po verifikatoru.
+  const rl = rateLimit(`verifikacija:${session.user.id}`, 10, 60_000);
+  if (!rl.ok) {
+    return NextResponse.json(
+      { error: `Previše pokušaja. Sačekaj ${rl.retryAfterSec}s.` },
+      { status: 429 }
+    );
   }
 
   let body: { token?: string; potvrdaPoznavanja?: boolean };

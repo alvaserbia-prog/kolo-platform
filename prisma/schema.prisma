@@ -398,6 +398,9 @@ model KrugBonusLog {
   threshold   Int
   amount      Int
   createdAt   DateTime  @default(now())
+
+  // Svaki prag rasta kruga se isplaćuje tačno jednom (race-safe rezervacija praga).
+  @@unique([krugId, threshold])
 }
 
 model MarketplaceListing {
@@ -1051,6 +1054,9 @@ model VerifikacionaVeza {
   nadzoranAt      DateTime?
 
   @@unique([verifikatorId, redniBroj])
+  // K6: isti verifikator ne sme dvaput da verifikuje istog korisnika (anti-inflacija
+  // indeksa + zatvara race na anti-cirkularnoj proveri kod recipročnih/duplih veza).
+  @@unique([verifikatorId, verifikovaniId])
   @@index([verifikatorId])
   @@index([verifikovaniId])
   @@index([nadzornikId])

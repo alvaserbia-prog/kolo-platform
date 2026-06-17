@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -40,9 +41,10 @@ export async function emitujPoen(
       },
     });
 
-    if (process.env.NODE_ENV !== "production") {
-      await checkZeroSum(tx);
-    }
+    // Zero-sum se proverava UVEK (i u produkciji). U dev-u nesklad obara transakciju
+    // (rana detekcija); u produkciji se NE baca — latentni nesklad iz prošlosti ne sme
+    // da zablokira sve buduće emisije — već se glasno loguje i šalje admin alarm.
+    await checkZeroSum(tx);
 
     return { protokol, wallet, transaction: tx_ };
   });
@@ -50,11 +52,18 @@ export async function emitujPoen(
 
 /**
  * Zero-sum provera: zbir svih balansa mora biti 0.
+ * Dev: baca grešku (rollback emisije). Produkcija: alarmira, ne baca.
  */
 async function checkZeroSum(tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0]) {
   const result = await tx.wallet.aggregate({ _sum: { balance: true } });
   const sum = result._sum.balance ?? 0;
   if (sum !== 0) {
-    throw new Error(`Zero-sum narušen! Zbir balansa: ${sum}`);
+    const poruka = `Zero-sum narušen! Zbir balansa: ${sum}`;
+    if (process.env.NODE_ENV === "production") {
+      console.error("[zero-sum]", poruka);
+      void posaljiAdminAlert("Zero-sum narušen", poruka);
+    } else {
+      throw new Error(poruka);
+    }
   }
 }

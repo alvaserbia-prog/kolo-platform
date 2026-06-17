@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
+import { normalizujEmail, validanEmail, validanPseudonim } from "@/lib/validacija";
+import { rateLimit, klijentIP } from "@/lib/rate-limit";
 
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
@@ -15,6 +17,12 @@ function generateMemberHash(): string {
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate-limit: najviše 10 registracija po IP-u na sat (anti-spam).
+    const rl = rateLimit(`registracija:${klijentIP(req)}`, 10, 60 * 60 * 1000);
+    if (!rl.ok) {
+      return NextResponse.json({ error: "Previše pokušaja. Pokušajte kasnije." }, { status: 429 });
+    }
+
     if (
       process.env.MAINTENANCE_MODE === "true" &&
       !validanRaniPristup(req.cookies.get(RANI_PRISTUP_COOKIE)?.value)
@@ -29,24 +37,34 @@ export async function POST(req: NextRequest) {
     const { email, pseudonim, password } = body;
     const location = typeof body.location === "string" ? body.location.trim() : null;
 
-    // Validacija
-    if (!email || !pseudonim || !password) {
+    // Validacija — striktne provere tipova (bez biblioteke): array/objekat sa `.length`
+    // ne sme da prođe kao string.
+    if (typeof email !== "string" || typeof pseudonim !== "string" || typeof password !== "string") {
       return NextResponse.json({ error: "Sva obavezna polja moraju biti popunjena." }, { status: 400 });
     }
-    if (password.length < 8) {
-      return NextResponse.json({ error: "Lozinka mora imati najmanje 8 karaktera." }, { status: 400 });
+    if (!validanEmail(email)) {
+      return NextResponse.json({ error: "Unesite ispravnu email adresu." }, { status: 400 });
     }
-    if (pseudonim.length < 3 || pseudonim.length > 30) {
-      return NextResponse.json({ error: "Pseudonim mora imati između 3 i 30 karaktera." }, { status: 400 });
+    if (password.length < 8 || password.length > 200) {
+      return NextResponse.json({ error: "Lozinka mora imati između 8 i 200 karaktera." }, { status: 400 });
+    }
+    if (!validanPseudonim(pseudonim)) {
+      return NextResponse.json(
+        { error: "Pseudonim: 3–30 znakova, samo slova, brojevi, razmak, _ . -" },
+        { status: 400 }
+      );
     }
     if (location !== null && location.length > 80) {
       return NextResponse.json({ error: "Mesto je predugačko." }, { status: 400 });
     }
 
-    // Provera jedinstvenosti
+    const emailNorm = normalizujEmail(email);
+    const pseudonimClean = pseudonim.trim();
+
+    // Provera jedinstvenosti (email u kanonskoj formi — bez duplikata zbog velikih slova)
     const [existingEmail, existingPseudonim] = await Promise.all([
-      prisma.user.findUnique({ where: { email } }),
-      prisma.user.findUnique({ where: { pseudonim } }),
+      prisma.user.findUnique({ where: { email: emailNorm } }),
+      prisma.user.findUnique({ where: { pseudonim: pseudonimClean } }),
     ]);
     if (existingEmail) {
       return NextResponse.json({ error: "Email je već registrovan." }, { status: 409 });
@@ -66,9 +84,9 @@ export async function POST(req: NextRequest) {
     // Kreira korisnika + wallet
     const user = await prisma.user.create({
       data: {
-        email,
+        email: emailNorm,
         passwordHash,
-        pseudonim,
+        pseudonim: pseudonimClean,
         memberHash: myHash,
         location: location || null,
         wallet: {
