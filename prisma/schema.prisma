@@ -194,6 +194,10 @@ model User {
   verifiedAt         DateTime?
   tipKorisnika           TipKorisnika @default(NEVERIFIKOVAN)
   admin                  AdminNivo    @default(NONE)
+  // Oznaka početnog nosioca ZRNA (osnivač). Zaseban marker pored tipKorisnika —
+  // status NOSILAC_ZRNA može steći i običan korisnik upisom ZRNA, pa nije pouzdan
+  // pokazatelj osnivača. Osnivač NE sme da verifikuje drugog osnivača (anti-malverzacija).
+  jeOsnivac              Boolean      @default(false)
   indeksStvarnosti       Int          @default(0)
   slotoviPotroseni       Int          @default(0)
   pocetnaEmisijaIzvrsena Boolean      @default(false)

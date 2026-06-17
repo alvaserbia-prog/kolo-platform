@@ -209,6 +209,18 @@ export async function izvrsiVerifikaciju(
         );
       }
 
+      // Anti-malverzacija: početni nosioci ZRNA (osnivači) NE smeju da verifikuju
+      // jedan drugog. Mogu da verifikuju sve ostale (bootstrap lanca jemstva), ali
+      // međusobna verifikacija bi im veštački napumpala indeks/poverenje u zatvorenom
+      // krugu. Osnivače razlikuje marker `jeOsnivac` (ne tipKorisnika — NOSILAC_ZRNA
+      // status može steći i običan korisnik upisom ZRNA).
+      if (verifikator.jeOsnivac && verifikovani.jeOsnivac) {
+        throw new VerifikacijaGreska(
+          "Početni nosioci ZRNA (osnivači) ne mogu verifikovati jedan drugog.",
+          403
+        );
+      }
+
       // Anti-cirkularno (čl. 12)
       const grafRaw = await tx.verifikacionaVeza.findMany({
         select: { verifikatorId: true, verifikovaniId: true },
