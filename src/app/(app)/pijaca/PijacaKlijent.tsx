@@ -350,20 +350,20 @@ function OglasKartica({
           </div>
         </div>
 
-        <div className="flex justify-between items-center mt-auto pt-2 border-t border-kolo-border">
-          <span className="text-xs text-kolo-muted">
+        <div className="flex justify-between items-center gap-2 mt-auto pt-2 border-t border-kolo-border">
+          <span className="text-xs text-kolo-muted truncate min-w-0">
             <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
           </span>
           {isVerified ? (
             <button
               onClick={onKupi}
-              className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
+              className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
             >
               {t("plati")}
             </button>
           ) : (
-            <Link href="/tabla-jemstva" className="text-xs text-kolo-gold-600 hover:underline">
+            <Link href="/tabla-jemstva" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">
               {t("zatrazi_verifikaciju_link")}
             </Link>
           )}

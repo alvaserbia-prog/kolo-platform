@@ -25,7 +25,7 @@ export default async function PijacaPage() {
   return (
     <>
       {!session && (
-        <div className="mb-5 bg-kolo-green-100 border border-kolo-green-500/20 rounded-2xl px-5 py-4 flex items-center justify-between gap-4">
+        <div className="mb-5 bg-kolo-green-100 border border-kolo-green-500/20 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <p className="text-sm text-kolo-green-900">
             {t("gost_tekst")}
           </p>

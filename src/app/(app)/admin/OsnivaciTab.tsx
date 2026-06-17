@@ -159,7 +159,8 @@ export default function OsnivaciTab({
         {osnivaci.length === 0 ? (
           <p className="text-sm text-kolo-muted">{t("osnivaci_nema")}</p>
         ) : (
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto">
+          <table className="w-full text-sm min-w-[30rem]">
             <thead>
               <tr className="text-left text-kolo-muted border-b border-kolo-border">
                 <th className="py-2 font-medium">{t("osnivaci_tbl_rb")}</th>
@@ -191,6 +192,7 @@ export default function OsnivaciTab({
               ))}
             </tbody>
           </table>
+          </div>
         )}
 
         {aktiviran && (
