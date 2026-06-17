@@ -6,11 +6,11 @@
     <rect x="12.85" y="2.6" width="2.3" height="13.8" rx="0.3"/>
     <rect x="3.2" y="8.35" width="21.6" height="2.3" rx="0.3"/>
   </g>
-  <!-- Četiri ocila (slovo „С" oko krsta; leva normalna, desna ogledana — otvor ka krstu) -->
+  <!-- Četiri ocila (slovo „С" oko krsta; otvori okrenuti SPOLJA — ka ivicama) -->
   <g fill="none" stroke="#ffffff" stroke-width="1.35" stroke-linecap="round">
-    <path transform="translate(7.7 5.5)"               d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
-    <path transform="translate(7.7 13.5)"              d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
-    <path transform="translate(20.3 5.5)  scale(-1 1)" d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
-    <path transform="translate(20.3 13.5) scale(-1 1)" d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
+    <path transform="translate(7.7 5.5)   scale(-1 1)" d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
+    <path transform="translate(7.7 13.5)  scale(-1 1)" d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
+    <path transform="translate(20.3 5.5)"               d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
+    <path transform="translate(20.3 13.5)"              d="M1.15 -1.45 A1.85 1.85 0 1 0 1.15 1.45"/>
   </g>
 </svg>
