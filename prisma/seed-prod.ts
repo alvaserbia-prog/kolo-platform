@@ -96,7 +96,7 @@ async function main() {
           toWalletId: user.wallet.id,
           amount: OSNIVACKI_DOPRINOS,
           type: TransactionType.EMISIJA_OSNIVACKI,
-          description: "Osnivački doprinos",
+          description: "Osnivanje",
         },
       }),
       prisma.wallet.update({ where: { id: user.wallet.id }, data: { balance: { increment: OSNIVACKI_DOPRINOS } } }),

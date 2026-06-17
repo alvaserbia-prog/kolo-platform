@@ -53,7 +53,9 @@ export default async function SistemPage() {
         toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
-    prisma.transaction.count(),
+    // Kartica „Transakcije" broji samo prenose između korisnika (TRANSFER),
+    // ne i evidentiranje Protokola (EMISIJA_*, UPIS/OTPIS_ZRNO).
+    prisma.transaction.count({ where: { type: "TRANSFER" } }),
     prisma.user.findMany({
       orderBy: [{ wallet: { balance: "desc" } }],
       select: {
@@ -78,7 +80,7 @@ export default async function SistemPage() {
       where: { createdAt: { gte: danas } },
     }),
     prisma.transaction.count({
-      where: { createdAt: { gte: danas } },
+      where: { type: "TRANSFER", createdAt: { gte: danas } },
     }),
     prisma.donationRecord.count({ where: { status: "CONFIRMED" } }),
     prisma.donationRecord.count({

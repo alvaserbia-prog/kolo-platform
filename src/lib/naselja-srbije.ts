@@ -34,7 +34,7 @@ const RAW: string[] = [
   "Mali Bajmok", "Mala Bosna", "Novi Žednik", "Palić", "Šupljak",
   "Tavankut", "Verušić",
   // Bačka Topola
-  "Bačka Topola", "Baćin", "Gunaroš", "Karađorđevo", "Кereštur",
+  "Bačka Topola", "Gunaroš", "Karađorđevo",
   "Mali Iđoš", "Novo Orahovo", "Panonija", "Stara Moravica",
   // Mali Iđoš
   "Lovćenac", "Feketić",
@@ -58,7 +58,7 @@ const RAW: string[] = [
   "Kula", "Crvenka", "Lipar", "Sivac",
   // Odžaci
   "Odžaci", "Bogojevo", "Bački Brestovac", "Bačko Novo Selo",
-  "Deronje", "Karavukovo", "Lalaš", "Ratkovo", "Srpski Miletić",
+  "Deronje", "Karavukovo", "Lalić", "Ratkovo", "Srpski Miletić",
 
   // ── VOJVODINA — JUŽNA BAČKA ──────────────────────────────────────────────
   // Novi Sad
@@ -866,6 +866,65 @@ const RAW: string[] = [
   "Vlasina Rid",
   // Vladičin Han opština
   "Masurče",
+
+  // ══════════════════════════════════════════════════════════════════════════
+  // BAČKA — KOMPLETAN POPIS NASELJENIH MESTA (svi okruzi sa bačkim opštinama)
+  // Severnobački + Zapadnobački + bačke opštine Južnobačkog okruga.
+  // Izvor: zvanična naseljena mesta po opštinama (popis), sr. latinica.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  // ── SEVERNOBAČKI OKRUG ───────────────────────────────────────────────────
+  // Grad Subotica (19)
+  "Subotica", "Bajmok", "Bački Vinogradi", "Bačko Dušanovo", "Bikovo",
+  "Višnjevac", "Gornji Tavankut", "Donji Tavankut", "Đurđin", "Kelebija",
+  "Ljutovo", "Mala Bosna", "Mišićevo", "Novi Žednik", "Palić",
+  "Stari Žednik", "Hajdukovo", "Čantavir", "Šupljak",
+  // Opština Bačka Topola
+  "Bačka Topola", "Bagremovo", "Bajša", "Bački Sokolac", "Gornja Rogatica",
+  "Gunaroš", "Zobnatica", "Karađorđevo", "Kavilo", "Krivaja",
+  "Mali Beograd", "Mićunovo", "Novo Orahovo", "Njegoševo", "Obornjača",
+  "Pačir", "Panonija", "Pobeda", "Svetićevo", "Stara Moravica", "Tomislavci",
+  // Opština Mali Iđoš (3)
+  "Mali Iđoš", "Lovćenac", "Feketić",
+
+  // ── ZAPADNOBAČKI OKRUG ───────────────────────────────────────────────────
+  // Grad Sombor (16)
+  "Sombor", "Aleksa Šantić", "Bački Breg", "Bački Monoštor", "Bezdan",
+  "Gakovo", "Doroslovo", "Kljajićevo", "Kolut", "Rastina",
+  "Riđica", "Svetozar Miletić", "Stanišić", "Stapar", "Telečka", "Čonoplja",
+  // Opština Apatin (5)
+  "Apatin", "Kupusina", "Prigrevica", "Svilojevo", "Sonta",
+  // Opština Kula (7)
+  "Kula", "Kruščić", "Lipar", "Nova Crvenka", "Ruski Krstur", "Sivac", "Crvenka",
+  // Opština Odžaci (9)
+  "Odžaci", "Bački Brestovac", "Bački Gračac", "Bogojevo", "Deronje",
+  "Karavukovo", "Lalić", "Ratkovo", "Srpski Miletić",
+
+  // ── JUŽNOBAČKI OKRUG (bačke opštine) ─────────────────────────────────────
+  // Grad Novi Sad — bačka naseljena mesta (11)
+  "Novi Sad", "Begeč", "Budisava", "Veternik", "Kać", "Kisač",
+  "Kovilj", "Rumenka", "Stepanovićevo", "Futog", "Čenej",
+  // Opština Bač (6)
+  "Bač", "Bačko Novo Selo", "Bođani", "Vajska", "Plavna", "Selenča",
+  // Opština Bačka Palanka (14)
+  "Bačka Palanka", "Vizić", "Gajdobra", "Despotovo", "Karađorđevo",
+  "Mladenovo", "Nova Gajdobra", "Obrovac", "Parage", "Pivnice",
+  "Silbaš", "Tovariševo", "Čelarevo", "Neštin",
+  // Opština Bački Petrovac (4)
+  "Bački Petrovac", "Gložan", "Kulpin", "Maglić",
+  // Opština Bečej (5)
+  "Bečej", "Bačko Gradište", "Bačko Petrovo Selo", "Mileševo", "Radičević",
+  // Opština Vrbas (7)
+  "Vrbas", "Bačko Dobro Polje", "Zmajevo", "Kosančić", "Kucura",
+  "Ravno Selo", "Savino Selo",
+  // Opština Žabalj (4)
+  "Žabalj", "Gospođinci", "Đurđevo", "Čurug",
+  // Opština Srbobran (3)
+  "Srbobran", "Nadalj", "Turija",
+  // Opština Temerin (3)
+  "Temerin", "Bački Jarak", "Sirig",
+  // Opština Titel (6)
+  "Titel", "Vilovo", "Gardinovci", "Lok", "Mošorin", "Šajkaš",
 ];
 
 // Dedupliciraj i sortiraj po abecedi (srpska latinica)
