@@ -353,8 +353,8 @@ function PorukaButton({ userId }: { userId: string }) {
       body: JSON.stringify({ userId }),
     });
     const data = await res.json();
-    if (res.ok && data.id) {
-      router.push(`/poruke?konverzacija=${data.id}`);
+    if (res.ok && data.konverzacijaId) {
+      router.push(`/poruke?k=${data.konverzacijaId}`);
     }
     setLoading(false);
   }

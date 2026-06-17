@@ -300,7 +300,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col relative before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
+      <aside className="hidden md:flex w-52 shrink-0 bg-kolo-green-900 flex-col relative self-start sticky top-0 h-[calc(100dvh-4rem)] before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
         <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 
