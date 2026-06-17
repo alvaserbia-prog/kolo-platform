@@ -1623,7 +1623,10 @@
     "greska_objavljivanje": "Error publishing listing.",
     "greska_slanje": "Error sending. Please try again.",
     "objavljivanje": "Publishing...",
-    "objavi_oglas": "Post listing"
+    "objavi_oglas": "Post listing",
+    "uspeh_naslov": "Your listing has been posted successfully",
+    "uspeh_opis": "Redirecting you to the Marketplace…",
+    "uspeh_dugme": "Go to Marketplace"
   },
   "pocetna": {
     "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",

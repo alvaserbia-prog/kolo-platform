@@ -1623,7 +1623,10 @@
     "greska_objavljivanje": "Error publishing listing.",
     "greska_slanje": "Error sending. Please try again.",
     "objavljivanje": "Publishing...",
-    "objavi_oglas": "Post listing"
+    "objavi_oglas": "Post listing",
+    "uspeh_naslov": "A hirdetése sikeresen közzé lett téve",
+    "uspeh_opis": "Átirányítás a Piactérre…",
+    "uspeh_dugme": "Tovább a Piactérre"
   },
   "pocetna": {
     "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
