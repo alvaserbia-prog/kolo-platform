@@ -17,13 +17,6 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
 
   if (!listing) notFound();
 
-  const walletBalance = session
-    ? ((await prisma.wallet.findUnique({
-        where: { userId: session.user.id },
-        select: { balance: true },
-      }))?.balance ?? 0)
-    : 0;
-
   return (
     <OglasDetalj
       oglas={{
@@ -45,7 +38,6 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         isMine: listing.seller.id === session?.user?.id,
       }}
       isVerified={session?.user?.verified ?? false}
-      walletBalance={walletBalance}
     />
   );
 }

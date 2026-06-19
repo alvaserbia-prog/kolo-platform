@@ -1571,7 +1571,7 @@
     "oglas_prodat": "Oglas je prodat",
     "oglas_deaktiviran": "Oglas je deaktiviran",
     "zatrazi_verifikaciju_kupovina": "Zatražite verifikaciju",
-    "zatrazi_verifikaciju_kupovina_tekst": "da biste mogli da kupujete.",
+    "zatrazi_verifikaciju_kupovina_tekst": "da biste mogli da kontaktirate prodavca.",
     "nedovoljno_poen": "Nedovoljno POEN-a. Imate {stanje} POEN, potrebno {cena}.",
     "kupovina_uspesna_kratko": "Kupovina uspešna!",
     "plati_iznos": "Plati {iznos} POEN",
