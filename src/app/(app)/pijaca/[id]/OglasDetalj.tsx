@@ -27,7 +27,6 @@ interface OglasProps {
 interface Props {
   oglas: OglasProps;
   isVerified: boolean;
-  walletBalance: number;
 }
 
 // Map a DB category value to its i18n key suffix
@@ -43,12 +42,10 @@ function kategorijaKljuc(kat: string): string {
   return map[kat] ?? "Ostalo";
 }
 
-export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props) {
+export default function OglasDetalj({ oglas, isVerified }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [activeSlika, setActiveSlika] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
   const [deaktiviranjeLoading, setDeaktiviranjeLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [chatLoading, setChatLoading] = useState(false);
@@ -68,35 +65,6 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
 
   const imaSlika = oglas.images.length > 0;
   const dostupan = oglas.status === "ACTIVE";
-
-  async function handleKupi() {
-    setLoading(true);
-    setPoruka(null);
-    const res = await fetch(`/api/pijaca/${oglas.id}/kupi`, { method: "POST" });
-    const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      setPoruka({ text: t("kupovina_uspesna_kratko"), ok: true });
-      // Otvori konverzaciju sa prodavcem i preusmeri na poruke radi dogovora
-      try {
-        const konvRes = await fetch("/api/poruke", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: oglas.sellerId }),
-        });
-        if (konvRes.ok) {
-          const konv = await konvRes.json();
-          setTimeout(() => router.push(`/poruke?k=${konv.konverzacijaId}`), 1200);
-          return;
-        }
-      } catch {
-        // ako otvaranje konverzacije ne uspe, padni na osvežavanje
-      }
-      setTimeout(() => router.refresh(), 1500);
-    } else {
-      setPoruka({ text: data.error ?? t("greska_generalna"), ok: false });
-    }
-  }
 
   async function handleDeaktiviraj() {
     setDeaktiviranjeLoading(true);
@@ -214,7 +182,7 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
             </div>
           )}
 
-          {/* Kupac */}
+          {/* Kupac → kontakt prodavca (razmenu članovi dogovaraju međusobno; Protokol ne posreduje) */}
           {dostupan && !oglas.isMine && (
             <div className="space-y-2">
               {!isVerified ? (
@@ -222,32 +190,15 @@ export default function OglasDetalj({ oglas, isVerified, walletBalance }: Props)
                   <Link href="/tabla-jemstva" className="font-semibold hover:underline">{t("zatrazi_verifikaciju_kupovina")}</Link>{" "}
                   {t("zatrazi_verifikaciju_kupovina_tekst")}
                 </div>
-              ) : walletBalance < oglas.price ? (
-                <div className="bg-kolo-danger-light border border-kolo-danger/20 rounded-xl px-4 py-3 text-sm text-kolo-danger">
-                  {t("nedovoljno_poen", { stanje: walletBalance.toLocaleString("sr-RS"), cena: oglas.price.toLocaleString("sr-RS") })}
-                </div>
-              ) : null}
-              {poruka && (
-                <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
-                  {poruka.text}
-                </p>
-              )}
-              {isVerified && (
+              ) : (
                 <button
-                  onClick={handleKupi}
-                  disabled={loading || walletBalance < oglas.price || !!poruka?.ok}
+                  onClick={handleKontakt}
+                  disabled={chatLoading}
                   className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                 >
-                  {loading ? t("obradjem") : t("plati_iznos", { iznos: oglas.price.toLocaleString("sr-RS") })}
+                  {chatLoading ? "..." : t("kontaktiraj_prodavca")}
                 </button>
               )}
-              <button
-                onClick={handleKontakt}
-                disabled={chatLoading}
-                className="w-full py-3 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors disabled:opacity-50"
-              >
-                {chatLoading ? "..." : t("kontaktiraj_prodavca")}
-              </button>
             </div>
           )}
 

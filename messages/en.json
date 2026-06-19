@@ -1571,7 +1571,7 @@
     "oglas_prodat": "This listing has been sold",
     "oglas_deaktiviran": "This listing has been deactivated",
     "zatrazi_verifikaciju_kupovina": "Request verification",
-    "zatrazi_verifikaciju_kupovina_tekst": "to be able to purchase.",
+    "zatrazi_verifikaciju_kupovina_tekst": "to be able to contact the seller.",
     "nedovoljno_poen": "Insufficient POEN. You have {stanje} POEN, {cena} required.",
     "kupovina_uspesna_kratko": "Purchase successful!",
     "plati_iznos": "Pay {iznos} POEN",
