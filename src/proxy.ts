@@ -7,6 +7,7 @@ const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
   "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/rani-pristup",
+  "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",
 ];
 
 // Putanje za ulazak u nalog. Kada je MAINTENANCE_MODE uključen (postavlja se
