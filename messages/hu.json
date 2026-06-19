@@ -1383,7 +1383,7 @@
     "k1_opis": "Email, pseudonym and password — that's all it takes. Throughout the interface you are represented solely by your pseudonym, your real name is not required, and the system does not even keep a record linking your pseudonym to your identity. Registration takes about a minute, is free and commits you to nothing.",
     "k1_detalj": "~ 1 minute",
     "k2_naslov": "Basic access",
-    "k2_opis": "Right after registering you can see the public exchange ledger and browse every marketplace listing — content, price and location. You can already exchange goods and services with others and take part in recording POEN, and through the guarantee board introduce yourself to the network to find someone to vouch for you. Posting listings, contacting advertisers and full access come only with verification.",
+    "k2_opis": "Right after registering you can see the public exchange ledger and browse every marketplace listing — content, price and location. You can already exchange goods and services with others and transfer POEN as giver or recipient, and through the guarantee board introduce yourself to the network to find someone to vouch for you. Posting listings, contacting advertisers and earning POEN through contribution come only with verification.",
     "k2_detalj": "no verification",
     "k3_naslov": "Verification through the vouching chain",
     "k3_opis": "A verified user who personally knows you confirms that you are a real person. KOLO achieves this technically, without collecting any document. Each confirmation further establishes you as a real network member — and the Protocol records 1,000 POEN for each.",
