@@ -9,6 +9,12 @@ declare module "next-auth" {
       admin: string;
       verified: boolean;
       oauthPending: boolean;
+      // Podaci nedovršene OAuth registracije (još nema reda u bazi)
+      pendingEmail?: string;
+      pendingProvider?: string;
+      pendingOauthId?: string;
+      pendingPunoIme?: string;
+      pendingAvatar?: string;
     } & DefaultSession["user"];
   }
 
@@ -19,16 +25,26 @@ declare module "next-auth" {
     admin?: string;
     verified: boolean;
     oauthPending?: boolean;
+    // Markeri/podaci za odloženo kreiranje OAuth naloga (signIn → /oauth/dovrsi)
+    needsRegistration?: boolean;
+    oauthProvider?: string;
+    oauthId?: string;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    id: string;
+    id?: string;
     pseudonim: string;
     tipKorisnika: string;
     admin?: string;
     verified: boolean;
     oauthPending?: boolean;
+    // Podaci nedovršene OAuth registracije
+    pendingEmail?: string;
+    pendingProvider?: string;
+    pendingOauthId?: string;
+    pendingPunoIme?: string;
+    pendingAvatar?: string;
   }
 }

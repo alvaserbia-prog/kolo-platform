@@ -56,6 +56,14 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // Nedovršena OAuth registracija (nalog još ne postoji u bazi, nema token.id):
+  // pusti samo na /oauth/dovrsi (već u PRESKOCI), sve ostalo preusmeri tamo dok
+  // korisnik ne izabere pseudonim. Sprečava da sesija bez id-a odluta na stranice
+  // koje očekuju validan nalog.
+  if (token.oauthPending) {
+    return NextResponse.redirect(new URL("/oauth/dovrsi", req.url));
+  }
+
   // Fallback na POCETNI tip za stare JWT-ove (pre uvođenja `admin` polja);
   // ukloniti u koraku 7 kad svi tokeni nose `admin`.
   const adminPristup =
