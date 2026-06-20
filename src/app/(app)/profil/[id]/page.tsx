@@ -44,6 +44,10 @@ interface ProfilData {
   transakcije: Transakcija[];
   nextCursor: string | null;
   oglasi: Oglas[];
+  adminOznake: {
+    dolazne: { pseudonim: string; oznaka: string }[];
+    odlazne: { pseudonim: string; oznaka: string }[];
+  } | null;
 }
 
 export default function JavniProfilPage() {
@@ -309,6 +313,59 @@ export default function JavniProfilPage() {
         </div>
         </div>
       </div>
+
+      {/* Oznake verifikatora — vidi samo UO Fondacije (admin). Nije javno. */}
+      {profil.adminOznake &&
+        (profil.adminOznake.dolazne.length > 0 || profil.adminOznake.odlazne.length > 0) && (
+          <div className="bg-white rounded-2xl border border-kolo-gold-200 border-2">
+            <div className="px-6 py-4 border-b border-kolo-border flex items-center gap-2">
+              <h2 className="text-sm font-semibold text-kolo-text">Oznake verifikatora</h2>
+              <span className="text-xs px-2 py-0.5 rounded-full bg-kolo-gold-100 text-kolo-gold-600">
+                samo UO Fondacije
+              </span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-kolo-border">
+              <div className="p-5">
+                <p className="text-xs uppercase tracking-wide text-kolo-muted font-semibold mb-2">
+                  Kako su ga označili verifikatori
+                </p>
+                {profil.adminOznake.dolazne.length === 0 ? (
+                  <p className="text-sm text-kolo-muted">—</p>
+                ) : (
+                  <ul className="space-y-1.5">
+                    {profil.adminOznake.dolazne.map((o, i) => (
+                      <li key={i} className="text-sm text-kolo-text">
+                        <span className="font-medium">„{o.oznaka}"</span>{" "}
+                        <span className="text-kolo-muted text-xs">
+                          — @<Pseudonim>{o.pseudonim}</Pseudonim>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div className="p-5">
+                <p className="text-xs uppercase tracking-wide text-kolo-muted font-semibold mb-2">
+                  Kako je on označio one koje je verifikovao
+                </p>
+                {profil.adminOznake.odlazne.length === 0 ? (
+                  <p className="text-sm text-kolo-muted">—</p>
+                ) : (
+                  <ul className="space-y-1.5">
+                    {profil.adminOznake.odlazne.map((o, i) => (
+                      <li key={i} className="text-sm text-kolo-text">
+                        <span className="text-kolo-muted text-xs">
+                          @<Pseudonim>{o.pseudonim}</Pseudonim> —
+                        </span>{" "}
+                        <span className="font-medium">„{o.oznaka}"</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
       {/* Oglasi */}
       {profil.oglasi.length > 0 && (

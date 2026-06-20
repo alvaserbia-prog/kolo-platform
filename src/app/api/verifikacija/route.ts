@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { token?: string; potvrdaPoznavanja?: boolean };
+  let body: { token?: string; potvrdaPoznavanja?: boolean; oznaka?: string };
   try {
     body = await req.json();
   } catch {
@@ -41,12 +41,14 @@ export async function POST(req: NextRequest) {
 
   const tokenIliBroj = typeof body.token === "string" ? body.token : "";
   const potvrdaPoznavanja = body.potvrdaPoznavanja === true;
+  const oznaka = typeof body.oznaka === "string" ? body.oznaka : undefined;
 
   try {
     const rez = await izvrsiVerifikaciju({
       verifikatorId: session.user.id,
       tokenIliBroj,
       potvrdaPoznavanja,
+      oznaka,
     });
     return NextResponse.json({
       verifikacijaId: rez.verifikacijaId,

@@ -18,6 +18,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
   const router = useRouter();
   const [mod, setMod] = useState<Mod>("izbor");
   const [tokenIliBroj, setTokenIliBroj] = useState("");
+  const [oznaka, setOznaka] = useState("");
   const [potvrdjeno, setPotvrdjeno] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -51,7 +52,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
       const res = await fetch("/api/verifikacija", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ token: ocisceno, potvrdaPoznavanja: true }),
+        body: JSON.stringify({ token: ocisceno, potvrdaPoznavanja: true, oznaka: oznaka.trim() || undefined }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -60,6 +61,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
       }
       setUspeh(data.verifikovaniPseudonim);
       setTokenIliBroj("");
+      setOznaka("");
       setPotvrdjeno(false);
       setMod("izbor");
       router.refresh();
@@ -125,6 +127,20 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
             autoFocus
             required
           />
+          <div>
+            <input
+              type="text"
+              value={oznaka}
+              onChange={(e) => setOznaka(e.target.value)}
+              maxLength={80}
+              placeholder="Oznaka (nadimak) — npr. „Pera sa pijace"
+              className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+            />
+            <p className="text-xs text-kolo-muted mt-1">
+              Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo
+              ti i Fondacija, nije javna. Možeš je kasnije izmeniti.
+            </p>
+          </div>
           <label className="flex items-start gap-2 text-sm">
             <input
               type="checkbox"
