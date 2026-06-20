@@ -251,15 +251,15 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
   const tabs: [Tab, string][] = [
     ["dashboard", t("tab_dashboard")],
+    ["korisnici", t("tab_korisnici")],
+    ["vesti", t("tab_vesti")],
+    ["donacije", `${t("tab_donacije")}${ukupnoPendingDonacije > 0 ? ` (${ukupnoPendingDonacije})` : ""}`],
     ["programi", `${t("tab_programi")}${ukupnoPendingProgrami > 0 ? ` (${ukupnoPendingProgrami})` : ""}`],
     ["ped", `${t("tab_ped")}${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
-    ["donacije", `${t("tab_donacije")}${ukupnoPendingDonacije > 0 ? ` (${ukupnoPendingDonacije})` : ""}`],
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
-    ["korisnici", t("tab_korisnici")],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
-    ["vesti", t("tab_vesti")],
     ["audit", t("tab_audit")],
     ...(viewerJeSuperadmin
       ? ([["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`]] as [Tab, string][])
