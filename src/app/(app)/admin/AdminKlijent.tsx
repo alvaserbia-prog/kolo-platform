@@ -1565,10 +1565,10 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
         ) : (
           filtered.map((u, i) => (
             <div key={u.id} className={`px-4 py-3 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}>
-              <div className="flex justify-between items-start gap-3">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-semibold text-kolo-text"><Pseudonim>{u.pseudonim}</Pseudonim></span>
+                    <span className="text-sm font-semibold text-kolo-text break-all"><Pseudonim>{u.pseudonim}</Pseudonim></span>
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                       {u.status}
                     </span>
@@ -1584,7 +1584,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                   </p>
                 </div>
                 {!jeSuperadmin(u) && (
-                  <div className="flex gap-1.5 shrink-0 flex-wrap justify-end">
+                  <div className="flex gap-1.5 flex-wrap justify-start sm:shrink-0 sm:justify-end">
                     <button onClick={() => setIzmeniKorisnik(u)} disabled={loadingId === u.id}
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
                       {t("korisnici_izmeni")}
