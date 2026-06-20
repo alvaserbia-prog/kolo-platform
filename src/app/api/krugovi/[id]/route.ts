@@ -8,6 +8,12 @@ export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Detalji Kruga (pseudonimi članova + saldo novčanika) NISU javni — gradirana
+  // vidljivost (Pravilnik čl. 67): neregistrovani vide samo agregate. Zahteva
+  // prijavu, isto kao i stranica /krug/[id].
+  const session = await getServerSession(authOptions);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+
   const { id } = await params;
 
   const krug = await prisma.krug.findUnique({

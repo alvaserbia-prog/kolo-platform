@@ -10,7 +10,7 @@ export const metadata = { title: "Postani pokrovitelj — KOLO" };
 
 export default async function PostaniPokroviteljPage() {
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/prijava");
+  if (!session) redirect("/login");
   const t = await getTranslations("postaniPokrovitelj");
 
   const [mojiPokrovitelji, sviPokrovitelji] = await Promise.all([
