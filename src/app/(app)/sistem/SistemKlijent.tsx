@@ -439,13 +439,13 @@ function FazaSekcija() {
   const t = useTranslations("oNama");
 
   const faze = [
-    { r1: t("faza1"), r2: t("faza1b"), aktivan: true },
-    { r1: t("faza2"), r2: t("faza2b"), aktivan: false },
-    { r1: t("faza3"), r2: t("faza3b"), aktivan: false },
-    { r1: t("faza4"), r2: t("faza4b"), aktivan: false },
-    { r1: t("faza5"), r2: t("faza5b"), aktivan: false },
-    { r1: t("faza6"), r2: t("faza6b"), aktivan: false },
-    { r1: t("faza7"), r2: t("faza7b"), aktivan: false },
+    { r1: t("faza1"), r2: t("faza1b"), opis: t("faza1_opis"), aktivan: false },
+    { r1: t("faza2"), r2: t("faza2b"), opis: t("faza2_opis"), aktivan: true },
+    { r1: t("faza3"), r2: t("faza3b"), opis: t("faza3_opis"), aktivan: false },
+    { r1: t("faza4"), r2: t("faza4b"), opis: t("faza4_opis"), aktivan: false },
+    { r1: t("faza5"), r2: t("faza5b"), opis: t("faza5_opis"), aktivan: false },
+    { r1: t("faza6"), r2: t("faza6b"), opis: t("faza6_opis"), aktivan: false },
+    { r1: t("faza7"), r2: t("faza7b"), opis: t("faza7_opis"), aktivan: false },
   ];
 
   return (
@@ -469,14 +469,17 @@ function FazaSekcija() {
             />
             <div className="flex flex-col gap-3">
               {faze.map((faza) => (
-                <div key={faza.r1 + faza.r2} className="relative flex items-center gap-3">
-                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
-                  <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
-                    {faza.r1} {faza.r2}
-                    {faza.aktivan && (
-                      <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
-                    )}
-                  </p>
+                <div key={faza.r1 + faza.r2} className="relative flex items-start gap-3">
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 mt-1 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                  <div className="min-w-0">
+                    <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1} {faza.r2}
+                      {faza.aktivan && (
+                        <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
+                      )}
+                    </p>
+                    <p className="text-xs text-kolo-muted leading-relaxed mt-0.5">{faza.opis}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -490,7 +493,7 @@ function FazaSekcija() {
             />
             <div className="relative grid grid-cols-7">
               {faze.map((faza) => (
-                <div key={faza.r1 + faza.r2} className="relative flex flex-col items-center gap-1.5 px-1">
+                <div key={faza.r1 + faza.r2} className="group relative flex flex-col items-center gap-1.5 px-1 cursor-help">
                   {faza.aktivan && (
                     <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
                       {t("faza_tu_smo_desktop")}
@@ -500,6 +503,9 @@ function FazaSekcija() {
                   <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
                     {faza.r1}<br />{faza.r2}
                   </p>
+                  <span className="pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block w-48 z-50 rounded-xl bg-kolo-text text-white text-xs leading-relaxed font-normal text-left p-3 shadow-xl">
+                    {faza.opis}
+                  </span>
                 </div>
               ))}
             </div>
