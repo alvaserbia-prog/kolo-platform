@@ -2,12 +2,6 @@
 
 *Verzija 3.9.0*
 
-*Izmene u verziji 3.8.1: uvedeno razlikovanje javne i anonimne donacije fizičkog lica — POEN se evidentira samo za javnu donaciju, uz javno prikazivanje imena i prezimena donatora u listi donacija; anonimna donacija ne nosi POEN.*
-
-*Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0; sadržinske odredbe nepromenjene.*
-
-*Izmene u verziji 3.7.3: pokroviteljstvo izričito obuhvata i preduzetnike, ravnopravno sa pravnim licima.*
-
 ## I — Opšte odredbe
 
 ### Član 1 — Predmet

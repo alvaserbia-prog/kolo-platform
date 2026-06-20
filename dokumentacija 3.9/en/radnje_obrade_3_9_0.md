@@ -6,10 +6,6 @@
 
 Date of last amendment: 16.06.2026.
 
-*Changes in version 3.9.0: the recipients/processors have been specified in all activities — Vercel Inc. (hosting) and Neon Inc. (database), USA; for images (activity 3) Cloudflare, Inc. (Cloudflare R2); for email (activity 12) Resend, Inc.; transfer to a third country (USA) with safeguards has been established; the data protection officer has been filled in (Nikola Šarić, alva.serbia@gmail.com); profile picture (avatar), description, and images attached to listings have been added to activity 3 as a category of data.*
-
-*Changes in version 3.8.1: Processing activity no. 12 — Integrity Monitoring of the Verification System (anti-fraud) has been added, based on legitimate interest, without the collection of new data and without automated decision-making.*
-
 *These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 3.9.0), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 3.9.0) and the Rulebook on Support Programmes (version 3.9.0).*
 
 **CONTROLLER DETAILS**

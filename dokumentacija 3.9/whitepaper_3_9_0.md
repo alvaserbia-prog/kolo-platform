@@ -4,10 +4,6 @@
 
 *Participatorni sistem zajedničkog dobra*
 
-*Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0; usklađen opis prava neverifikovanog korisnika (razmena van prostora za oglašavanje i učešće u ažuriranju evidencije POEN-a) sa Pravilnikom o KOLO sistemu (čl. 28); pokroviteljstvo u glosaru obuhvata i preduzetnike.*
-
-*Izmene u verziji 3.7.6: (1) zaštitni veto usklađen sa Pravilnikom o KOLO sistemu v3.7.5 — veto štiti operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti (umesto ranijeg vezivanja za narušavanje principa, kršenje zakona ili ugrožavanje pravnog statusa, koji ostaju zaštićeni četirima principima, licencama i zakonskim obavezama Upravnog odbora); (2) pokroviteljstvo izričito obuhvata i preduzetnike, ravnopravno sa pravnim licima (usklađeno sa Pravilnikom v3.7.4 i Pravilnikom o pokroviteljstvu v3.7.3).*
-
 **Sadržaj**
 
 Sažetak 3

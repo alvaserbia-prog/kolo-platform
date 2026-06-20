@@ -6,10 +6,6 @@
 
 *A Participatory Common-Good System*
 
-*Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; the description of unverified users' rights has been aligned with the KOLO System Rulebook (Art. 28) — exchange outside the advertising space and participation in POEN ledger updates; sponsorship in the glossary explicitly includes entrepreneurs.*
-
-*Changes in version 3.7.6: (1) the protective veto has been aligned with the KOLO System Rules v3.7.5 — the veto protects the operational and financial sustainability of the Foundation until it achieves financial self-sufficiency (replacing the earlier formulation that tied the veto to violations of principles, breaches of law, or threats to legal status, which remain protected by the four principles, the licences, and the statutory obligations of the Board of Directors); (2) sponsorship explicitly covers entrepreneurs on equal footing with legal entities (aligned with the Rules v3.7.4 and the Sponsorship Rules v3.7.3).*
-
 **Contents**
 
 Summary 3

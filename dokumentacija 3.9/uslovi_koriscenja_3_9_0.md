@@ -4,14 +4,6 @@
 
 *Datum stupanja na snagu: 16.06.2026.*
 
-*Izmene u verziji 3.9.0: u članu 17 dodata transparentnost donatora — javno objavljivanje imena, iznosa i datuma javne donacije, sa pseudonimom i linkom ka javnom profilu (uslov za evidentiranje POEN-a; anonimna donacija bez objavljivanja i bez POEN-a); u članu 44 utvrđeno da su pored srpskog dostupni i prevodi na engleskom i mađarskom (srpski merodavan); u članu 5 preciziran status osnivača (početni korisnici, javni identitet i udeli); upisan datum stupanja na snagu.*
-
-*Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0; sadržinske odredbe nepromenjene.*
-
-*Izmene u verziji 3.7.4: u članovima 14 i 16 precizirano da verifikovani korisnik može, polazeći od zahteva objavljenog na tabli zahteva za jemstvo, da započne neposredan razgovor (poruke) sa neverifikovanim podnosiocem, u kojem podnosilac sme da odgovara i pre verifikacije; neverifikovani korisnik i dalje ne može sam da započne komunikaciju niti da se obraća korisnicima koji ga nisu kontaktirali povodom njegovog zahteva.*
-
-*Izmene u verziji 3.7.3: u članovima 14 i 18 precizirano da je pregled oglasa u prostoru za razmenu javan, dok su postavljanje oglasa, pristup kontakt podacima i komunikacija povodom oglasa dostupni isključivo verifikovanim korisnicima.*
-
 ## I — Uvodne odredbe
 
 ### Član 1 — Predmet

@@ -10,10 +10,6 @@
 
 Date of preparation: 23.05.2026. — Date of last amendment: 16.06.2026.
 
-*Changes in version 3.9.0: the number of processing activities (thirteen — processing activity no. 13, public list of donations, added) and the number of risks (thirteen — R13 among the medium ones) have been aligned with the Records of Processing Activities v3.9.0; in section 2.5 the processors have been named (Vercel, Neon, Cloudflare R2, Resend, all in the USA) and the cross-border transfer has been expressly established.*
-
-*Changes in version 3.8.1: processing activity no. 12 (Integrity Monitoring of the Verification System) has been added — risk R12, measures in section 5.7, proportionality assessment in section 3.4.*
-
 *Classification: Internal*
 
 ## 1. General Information

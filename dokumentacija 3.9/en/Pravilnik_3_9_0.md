@@ -4,16 +4,6 @@
 
 *Version 3.9.0*
 
-*Changes in version 3.9.0: a transitional provision on the start of the system has been added (Art. 82) — the establishment of the first ZRNO Holders (the initial users, members of the Management Board of the Foundation) upon putting the system into operation, as a one-time exception to the conditions for ZRNO inscription (Art. 19) and the rules of the vouching chain (Art. 32), with a reference to the Rulebook on Proof of Reality (Chapter VI — Initial Mechanism); guiding notes in Art. 19 and 30. Without amendment to the four principles and without a new category of user status (Art. 27 unchanged).*
-
-*Changes in version 3.8.0: consolidation of all KOLO system documentation to a single version 3.8.0 and elimination of identified inconsistencies between acts; the substantive provisions of this Rulebook are unchanged compared to the previous version.*
-
-*Changes in version 3.7.5: the protective veto has been reformulated — it now protects the operational and financial sustainability of the Foundation until financial self-sufficiency is achieved (Art. 2, 48), instead of the previous linkage to principles/law/legal status (which remain protected under Art. 50, 51 and 70).*
-
-*Changes in version 3.7.4: sponsorship explicitly includes entrepreneurs, on equal footing with legal entities (Art. 2, 38, 40).*
-
-*Changes in version 3.7.3: the visibility of the platform's advertising space has been clarified — browsing listings is public, while posting listings, accessing contact details and communicating are available to verified users (Art. 16, 28, 67), and distinguished from the pseudonymous contribution ledger and the verification graph.*
-
 *KOLO is a mutual support system based on the idea that people can record what they contribute to each other and to the community. This Rulebook governs how that system works: who its actors are, what the common good they collectively build consists of, how contributions are recorded, and how decisions are made. The Rulebook is a binding act whose provisions govern the rights and obligations of users.*
 
 ## Chapter I — General Provisions

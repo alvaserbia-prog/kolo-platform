@@ -6,14 +6,6 @@
 
 *Date of entry into force: 16.06.2026.*
 
-*Changes in version 3.9.0: in Article 17, donor transparency added — public publication of the name, amount, and date of a public donation, together with the pseudonym and a link to the public profile (a condition for the recording of POENs; an anonymous donation involves no publication and no POEN); in Article 44, it is established that, in addition to Serbian, translations in English and Hungarian are available (Serbian being authoritative); in Article 5, the status of the founders is clarified (initial users, public identity and shares); the date of entry into force has been entered.*
-
-*Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; substantive provisions unchanged.*
-
-*Changes in version 3.7.4: in Articles 14 and 16 it is clarified that a verified user may, starting from a request published on the guarantee board, initiate a direct conversation (messages) with the unverified requester, in which the requester may respond even before verification; an unverified user still may not initiate communication themselves, nor contact users who have not contacted them regarding their request.*
-
-*Changes in version 3.7.3: in Articles 14 and 18 it is clarified that browsing listings in the exchange space is public, while posting listings, accessing contact details, and communicating regarding listings are available exclusively to verified users.*
-
 ## Chapter I — Introductory Provisions
 
 ### Article 1 — Subject Matter
