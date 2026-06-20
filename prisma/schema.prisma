@@ -1048,6 +1048,11 @@ model VerifikacionaVeza {
   verifikovaniId  String
   verifikovani    User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
   vremenskiZig    DateTime  @default(now())
+  // Slobodna oznaka (nadimak) koju verifikator dodeljuje verifikovanome — da bi lakše
+  // pratio koga je verifikovao. NIJE javna: vidljiva samo verifikatoru i UO Fondacije
+  // (admin). Ne objavljuje se drugim korisnicima i ne kači se na javnu evidenciju
+  // doprinosa (Pravilnik o dokazu stvarnosti, dopuna 3.9.1; čl. 31).
+  oznakaVerifikatora String?
   nadzornikId     String?
   nadzornik       User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
   podlezeNadzoru  Boolean

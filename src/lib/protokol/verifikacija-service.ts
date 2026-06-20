@@ -33,6 +33,20 @@ export class VerifikacijaGreska extends Error {
   }
 }
 
+/** Najveća dužina slobodne oznake (nadimka) koju verifikator daje verifikovanome. */
+export const MAX_OZNAKA_DUZINA = 80;
+
+/**
+ * Normalizuje oznaku verifikatora: trimuje, sažima razmake i seče na MAX_OZNAKA_DUZINA.
+ * Prazna/whitespace oznaka → null (briše postojeću).
+ */
+export function normalizujOznaku(oznaka: unknown): string | null {
+  if (typeof oznaka !== "string") return null;
+  const ocisceno = oznaka.replace(/\s+/g, " ").trim();
+  if (ocisceno.length === 0) return null;
+  return ocisceno.slice(0, MAX_OZNAKA_DUZINA);
+}
+
 /**
  * Generiše jednokratan token za verifikaciju za datog korisnika.
  * Token važi 60 sekundi. Vraća { token, brojCifara, expiresAt }.
@@ -75,6 +89,7 @@ export type IzvrsiVerifikacijuInput = {
   verifikatorId: string;
   tokenIliBroj: string; // 64-char hex ili 6-cifren broj
   potvrdaPoznavanja: boolean;
+  oznaka?: string; // opciona slobodna oznaka (nadimak) za verifikovanog — samo verifikator/UO
 };
 
 export type IzvrsiVerifikacijuRezultat = {
@@ -90,6 +105,7 @@ export async function izvrsiVerifikaciju(
   input: IzvrsiVerifikacijuInput
 ): Promise<IzvrsiVerifikacijuRezultat> {
   const { verifikatorId, tokenIliBroj, potvrdaPoznavanja } = input;
+  const oznaka = normalizujOznaku(input.oznaka);
 
   if (!potvrdaPoznavanja) {
     throw new VerifikacijaGreska(
@@ -255,6 +271,7 @@ export async function izvrsiVerifikaciju(
           verifikovaniId: verifikovani.id,
           redniBroj,
           podlezeNadzoru: treboNadzor,
+          oznakaVerifikatora: oznaka,
         },
       });
 
@@ -388,6 +405,41 @@ export async function izvrsiVerifikaciju(
     verifikovaniPseudonim,
     verifikovaniNoviIndeks,
   };
+}
+
+/**
+ * Postavlja/menja/briše oznaku verifikatora za jednu verifikacionu vezu.
+ * Sme je menjati ISKLJUČIVO verifikator koji je obavio tu verifikaciju (vlasnik veze).
+ * Prazna oznaka briše postojeću (postavlja na null).
+ */
+export async function postaviOznakuVerifikatora(input: {
+  verifikatorId: string;
+  verifikacijaId: string;
+  oznaka: string;
+}): Promise<{ verifikacijaId: string; oznaka: string | null }> {
+  const { verifikatorId, verifikacijaId } = input;
+  const oznaka = normalizujOznaku(input.oznaka);
+
+  const veza = await prisma.verifikacionaVeza.findUnique({
+    where: { id: verifikacijaId },
+    select: { verifikatorId: true },
+  });
+  if (!veza) {
+    throw new VerifikacijaGreska("Verifikacija ne postoji.", 404);
+  }
+  if (veza.verifikatorId !== verifikatorId) {
+    throw new VerifikacijaGreska(
+      "Oznaku može da menja samo verifikator koji je obavio verifikaciju.",
+      403
+    );
+  }
+
+  await prisma.verifikacionaVeza.update({
+    where: { id: verifikacijaId },
+    data: { oznakaVerifikatora: oznaka },
+  });
+
+  return { verifikacijaId, oznaka };
 }
 
 /**

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { jeAdmin } from "@/lib/dozvole";
 
 export async function GET(
   req: NextRequest,
@@ -118,6 +119,41 @@ export async function GET(
         toWallet: { user: null },
       }));
 
+  // Oznake verifikatora — vidljive ISKLJUČIVO UO Fondacije (admin), nikad drugim
+  // korisnicima (dopuna 3.9.1, Pravilnik o dokazu stvarnosti čl. 31). Admin vidi:
+  //  - kako su VERIFIKATORI ovog korisnika označili njega (dolazne oznake), i
+  //  - kako je OVAJ korisnik označio one koje je verifikovao (odlazne oznake).
+  let adminOznake:
+    | {
+        dolazne: { pseudonim: string; oznaka: string }[];
+        odlazne: { pseudonim: string; oznaka: string }[];
+      }
+    | null = null;
+  if (jeAdmin({ admin: session.user.admin })) {
+    const [dolazneRaw, odlazneRaw] = await Promise.all([
+      prisma.verifikacionaVeza.findMany({
+        where: { verifikovaniId: id, oznakaVerifikatora: { not: null } },
+        orderBy: { vremenskiZig: "asc" },
+        select: { oznakaVerifikatora: true, verifikator: { select: { pseudonim: true } } },
+      }),
+      prisma.verifikacionaVeza.findMany({
+        where: { verifikatorId: id, oznakaVerifikatora: { not: null } },
+        orderBy: { vremenskiZig: "asc" },
+        select: { oznakaVerifikatora: true, verifikovani: { select: { pseudonim: true } } },
+      }),
+    ]);
+    adminOznake = {
+      dolazne: dolazneRaw.map((v) => ({
+        pseudonim: v.verifikator.pseudonim,
+        oznaka: v.oznakaVerifikatora as string,
+      })),
+      odlazne: odlazneRaw.map((v) => ({
+        pseudonim: v.verifikovani.pseudonim,
+        oznaka: v.oznakaVerifikatora as string,
+      })),
+    };
+  }
+
   // Oglasi — uvek vidljivi
   const oglasi = await prisma.marketplaceListing.findMany({
     where: { sellerId: id, status: "ACTIVE" },
@@ -148,5 +184,6 @@ export async function GET(
     transakcije: transakcijeIzlaz,
     nextCursor,
     oglasi,
+    adminOznake,
   });
 }

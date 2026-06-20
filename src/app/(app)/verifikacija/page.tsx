@@ -27,6 +27,7 @@ import MiniStablo, {
 } from "@/components/verifikacija/MiniStablo";
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
+import MojeOznake, { type VerifikovanaOsoba } from "@/components/verifikacija/MojeOznake";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { jeKorenJemstva } from "@/lib/dozvole";
 
@@ -51,6 +52,8 @@ export default async function VerifikacijaPage() {
       verifikacijeKojeSamObavio: {
         orderBy: { vremenskiZig: "asc" },
         select: {
+          id: true,
+          oznakaVerifikatora: true,
           podlezeNadzoru: true,
           nadzornikId: true,
           verifikovani: { select: { id: true, pseudonim: true } },
@@ -90,6 +93,13 @@ export default async function VerifikacijaPage() {
           : "ceka-nadzor",
     })
   );
+
+  const mojeOznake: VerifikovanaOsoba[] = user.verifikacijeKojeSamObavio.map((v) => ({
+    verifikacijaId: v.id,
+    korisnikId: v.verifikovani.id,
+    pseudonim: v.verifikovani.pseudonim,
+    oznaka: v.oznakaVerifikatora,
+  }));
 
   const podnaslov =
     user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN
@@ -150,6 +160,8 @@ export default async function VerifikacijaPage() {
           <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
         </div>
       )}
+
+      {!jeNeverifikovan && <MojeOznake osobe={mojeOznake} />}
     </div>
   );
 }
