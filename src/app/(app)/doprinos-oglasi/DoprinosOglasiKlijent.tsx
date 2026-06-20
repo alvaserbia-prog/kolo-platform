@@ -57,7 +57,7 @@ export default function DoprinosOglasiKlijent({ oglasi, isVerified }: { oglasi: 
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
+      <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center text-sm">
         <div>
           <p className="text-lg font-bold text-kolo-text">{oglasi.length}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("aktivnih_zadataka")}</p>
@@ -65,10 +65,6 @@ export default function DoprinosOglasiKlijent({ oglasi, isVerified }: { oglasi: 
         <div>
           <p className="text-lg font-bold text-kolo-text">{t("predlozeni_poen_label")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("tezinski_koeficijent")}</p>
-        </div>
-        <div>
-          <p className="text-lg font-bold text-kolo-text">× min(1, L/P)</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("raspodela_limita")}</p>
         </div>
       </div>
 

@@ -63,8 +63,9 @@ export default function OAuthDovrsiPage() {
 
     if (!res.ok) { setError(data.error ?? "Greška. Pokušajte ponovo."); return; }
 
-    // Osveži sesiju da se oauthPending postavi na false
-    await update();
+    // Osveži sesiju: prosledi novi userId da JWT preuzme tek kreiran nalog
+    // (do ovog koraka korisnik nije imao red u bazi) i oauthPending → false.
+    await update({ userId: data.userId });
     try { sessionStorage.setItem("kolo-welcome", "1"); } catch { /* nedostupan */ }
     router.push("/dobrodosli");
   }

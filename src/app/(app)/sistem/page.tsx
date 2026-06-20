@@ -39,7 +39,7 @@ export default async function SistemPage() {
       where: { id: "banka-singleton" },
       select: { balance: true },
     }),
-    prisma.user.count(),
+    prisma.user.count({ where: { oauthPending: false, deaktiviranAt: null, status: "ACTIVE" } }),
     prisma.user.count({ where: { verified: true } }),
     prisma.dailyEmissionSummary.findMany({
       orderBy: { date: "desc" },
@@ -57,6 +57,13 @@ export default async function SistemPage() {
     // ne i evidentiranje Protokola (EMISIJA_*, UPIS/OTPIS_ZRNO).
     prisma.transaction.count({ where: { type: "TRANSFER" } }),
     prisma.user.findMany({
+      // Sakrij nezavršene OAuth naloge (privremeni pseudonim „korisnik_…",
+      // oauthPending=true) i deaktivirane/neaktivne naloge iz spiska članova.
+      where: {
+        oauthPending: false,
+        deaktiviranAt: null,
+        status: "ACTIVE",
+      },
       orderBy: [{ wallet: { balance: "desc" } }],
       select: {
         id: true,

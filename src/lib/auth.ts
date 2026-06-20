@@ -44,7 +44,7 @@ function generateMemberHash(): string {
   return hash;
 }
 
-async function uniqueMemberHash(): Promise<string> {
+export async function uniqueMemberHash(): Promise<string> {
   let hash = generateMemberHash();
   while (await prisma.user.findUnique({ where: { memberHash: hash } })) {
     hash = generateMemberHash();
@@ -132,55 +132,58 @@ export const authOptions: NextAuthOptions = {
         return true;
       }
 
-      // Novi korisnik — kreiraj nalog sa oauthPending=true
-      // Privremeni pseudonim (biće promenjen na /oauth/dovrsi)
-      const tempPseudonim = `korisnik_${Date.now()}`;
-      const memberHash = await uniqueMemberHash();
-
-      // Ime i avatar iz Google profila
-      const punoIme = user.name ?? undefined;
-      const avatar = user.image ?? undefined;
-
-      const newUser = await prisma.$transaction(async (tx) => {
-        const created = await tx.user.create({
-          data: {
-            email,
-            passwordHash: undefined,
-            pseudonim: tempPseudonim,
-            oauthProvider: provider,
-            oauthId,
-            oauthPending: true,
-            memberHash,
-            avatar,
-            wallet: { create: { type: WalletType.USER, balance: 0 } },
-          },
-        });
-        // Upiši punoIme u UserPodaci
-        if (punoIme) {
-          await tx.userPodaci.create({
-            data: { userId: created.id, punoIme },
-          });
-        }
-        return created;
-      });
-
-      user.id = newUser.id;
-      user.pseudonim = newUser.pseudonim;
-      user.tipKorisnika = newUser.tipKorisnika;
-      user.admin = newUser.admin;
-      user.verified = newUser.verified;
+      // Novi korisnik — NE pravimo nalog u bazi dok ne dovrši registraciju na
+      // /oauth/dovrsi (izbor pseudonima). Do tada podatke nosimo kroz JWT, pa
+      // napušteni pokušaji ne ostavljaju „nalog-duh" u bazi. Sam nalog kreira
+      // ruta /api/oauth/dovrsi pri izboru pseudonima.
       user.oauthPending = true;
+      user.needsRegistration = true;
+      user.oauthProvider = provider;
+      user.oauthId = oauthId;
+      user.email = email; // kanonska forma (već normalizovana iznad)
+      // user.name / user.image dolaze iz Google profila (punoIme/avatar)
       return true;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
-        token.id = user.id;
-        token.pseudonim = user.pseudonim;
-        token.tipKorisnika = user.tipKorisnika;
-        token.admin = user.admin;
-        token.verified = user.verified;
-        token.oauthPending = user.oauthPending ?? false;
+        if (user.needsRegistration) {
+          // Nedovršena OAuth registracija — nema reda u bazi; podaci žive u tokenu.
+          token.id = undefined;
+          token.oauthPending = true;
+          token.pendingEmail = user.email ?? undefined;
+          token.pendingProvider = user.oauthProvider;
+          token.pendingOauthId = user.oauthId;
+          token.pendingPunoIme = user.name ?? undefined;
+          token.pendingAvatar = user.image ?? undefined;
+        } else {
+          token.id = user.id;
+          token.pseudonim = user.pseudonim;
+          token.tipKorisnika = user.tipKorisnika;
+          token.admin = user.admin;
+          token.verified = user.verified;
+          token.oauthPending = user.oauthPending ?? false;
+        }
+      } else if (trigger === "update" && (session as { userId?: string } | undefined)?.userId) {
+        // /oauth/dovrsi je upravo kreirao nalog — preuzmi pravi id i očisti pending podatke.
+        const noviId = (session as { userId: string }).userId;
+        const dbUser = await prisma.user.findUnique({
+          where: { id: noviId },
+          select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
+        });
+        if (dbUser) {
+          token.id = noviId;
+          token.pseudonim = dbUser.pseudonim;
+          token.tipKorisnika = dbUser.tipKorisnika;
+          token.admin = dbUser.admin;
+          token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
+          token.oauthPending = dbUser.oauthPending;
+          token.pendingEmail = undefined;
+          token.pendingProvider = undefined;
+          token.pendingOauthId = undefined;
+          token.pendingPunoIme = undefined;
+          token.pendingAvatar = undefined;
+        }
       } else if (token.id) {
         // Osveži admin/verified/tipKorisnika iz baze pri svakom zahtevu —
         // inače middleware (getToken) gleda zastareo JWT i npr. novom adminu
@@ -206,12 +209,21 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      session.user.id = token.id;
+      session.user.id = token.id as string;
       session.user.pseudonim = token.pseudonim;
       session.user.tipKorisnika = token.tipKorisnika as string;
       session.user.admin = (token.admin as string) ?? "NONE";
       session.user.verified = (token.verified as boolean) ?? false;
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
+      // Nedovršena OAuth registracija — izloži podatke koje /api/oauth/dovrsi
+      // koristi za kreiranje naloga (nalog još ne postoji u bazi).
+      if (token.oauthPending && !token.id) {
+        session.user.pendingEmail = token.pendingEmail;
+        session.user.pendingProvider = token.pendingProvider;
+        session.user.pendingOauthId = token.pendingOauthId;
+        session.user.pendingPunoIme = token.pendingPunoIme;
+        session.user.pendingAvatar = token.pendingAvatar;
+      }
       return session;
     },
   },
