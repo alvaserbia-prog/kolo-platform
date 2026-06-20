@@ -4,12 +4,6 @@
 
 *Version 3.9.0*
 
-*Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; substantive provisions unchanged.*
-
-*Changes in version 3.7.3: sponsorship explicitly includes entrepreneurs, on equal footing with legal entities.*
-
-*Changes in version 3.8.1: introduced the distinction between a public and an anonymous donation by a natural person — POEN is recorded only for a public donation, with public display of the donor's first and last name in the donation list; an anonymous donation carries no POEN.*
-
 ## I — General Provisions
 
 ### Article 1 — Subject matter

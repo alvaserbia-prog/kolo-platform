@@ -4,10 +4,6 @@
 
 Datum poslednje izmene: 16.06.2026.
 
-*Izmene u verziji 3.9.0: konkretizovani primaoci/obrađivači u svim radnjama — Vercel Inc. (hosting) i Neon Inc. (baza podataka), SAD; za slike (radnja 3) Cloudflare, Inc. (Cloudflare R2); za email (radnja 12) Resend, Inc.; utvrđen prenos u treću zemlju (SAD) uz zaštitne mere; popunjeno lice za zaštitu podataka (Nikola Šarić, alva.serbia@gmail.com); u radnju 3 dodate profilna slika (avatar), opis i slike oglasa kao kategorija podataka.*
-
-*Izmene u verziji 3.8.1: dodata Radnja obrade br. 12 — Nadzor integriteta sistema verifikacija (anti-malverzacija), zasnovana na legitimnom interesu, bez prikupljanja novih podataka i bez automatskog odlučivanja.*
-
 *Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 3.9.0) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 3.9.0) i Pravilnikom o programima podrške (verzija 3.9.0).*
 
 **PODACI O RUKOVAOCU**

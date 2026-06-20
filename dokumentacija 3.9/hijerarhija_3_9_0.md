@@ -2,8 +2,6 @@
 
 *Verzija 3.9.0*
 
-*Izmene u verziji 3.9.0: u članu 7 dodat stav 5 — pravilnici za module koji još nisu aktivirani (zadruge, Modul Deca, sporovi) donose se pri aktiviranju, a do tada važe KOLO Pravilnik i ovaj pravilnik; u članu 9 precizirano da je imenovanje lica za zaštitu podataka sadržano u Politici i Registru; u članu 11 obrazac „saradnje sa zadrugom" zamenjen opštim obrascima za kolektivne oblike (po aktiviranju).*
-
 ## I — Uvodne odredbe
 
 ### Član 1 — Predmet

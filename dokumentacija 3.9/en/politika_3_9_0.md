@@ -6,20 +6,6 @@
 
 Date of last amendment: 16.06.2026.
 
-*Changes in version 3.9.0: in Article 8 the recipients/processors have been made concrete — hosting (Vercel Inc.), database (Neon Inc.), image storage (Cloudflare R2) and email service (Resend, Inc.), all established in the United States; in Article 9 the placeholder options have been removed and it is established that data are transferred and processed in the United States with safeguards (Art. 65–69 LPDP); in Article 4 the profile picture (avatar) and description have been added as voluntary data, with a note that images are stored with the image storage processor while only the URL is recorded in the database.*
-
-*Changes in version 3.8.1: sub-section 4.9 (Protection of System Integrity) has been added — it describes integrity monitoring of verifications based on legitimate interest, without the collection of new data and without automated decision-making; aligned with the Records of Processing Activities v3.9.0 (processing activity no. 12) and DPIA v3.9.0.*
-
-*Changes in version 3.8.0: consolidation of all documentation to a single version 3.8.0; email address for data protection aligned (privatnost@ekolo.rs) with other acts; substantive provisions unchanged.*
-
-*Changes in version 3.7.6: in sub-section 4.8 and Article 6 it is clarified that a verified user may, starting from a request published on the guarantee board, initiate a direct conversation (messages) with the unverified requester, who may respond in that conversation even before verification; the processing of the conversation content and the logging of the initiation of the conversation have been added to Article 5 (access log).*
-
-*Changes in version 3.7.5: in Article 4.6, the verifier confirmation of social programs is described — the application requires a full reality index and explicit consent, and the fulfilment of conditions is confirmed by the applicant's verifiers without access to the entered data (aligned with the Rulebook on Support Programs v3.7.5 and DPIA v3.7.5).*
-
-*Changes in version 3.7.4: aligned with the Rulebook on Proof of Reality v3.7.3 — verification is based on direct personal acquaintance and does not require physical presence, so the purpose of processing contact data from the guarantee board has been reformulated accordingly.*
-
-*Changes in version 3.7.3: in Article 6, the visibility of the platform exchange space is clarified — the content of listings (including the advertiser's pseudonym) is publicly visible, while contact details and linking to the contribution ledger remain accessible only to verified users.*
-
 This Privacy Policy is adopted on the basis of Art. 66 paragraph 2 and Art. 81 paragraph 4 of the Rulebook on the KOLO System and in accordance with the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP).
 
 ### Article 1 — Data Controller

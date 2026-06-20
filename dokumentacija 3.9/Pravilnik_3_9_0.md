@@ -2,16 +2,6 @@
 
 *Verzija 3.9.0*
 
-*Izmene u verziji 3.9.0: dodata prelazna odredba o početku sistema (čl. 82) — uspostavljanje prvih nosilaca ZRNA (početnih korisnika, članova Upravnog odbora) pri puštanju sistema u rad, kao jednokratan izuzetak od uslova upisa ZRNA (čl. 19) i pravila lanca jemstva (čl. 32), uz upućivanje na Pravilnik o dokazu stvarnosti (Glava VI — Početni mehanizam); uputne napomene u čl. 19 i 30. Bez izmene četiri principa i bez nove kategorije statusa korisnika (čl. 27 nepromenjen).*
-
-*Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije KOLO sistema na jedinstvenu verziju 3.8.0 i otklanjanje uočenih neusaglašenosti između akata; sadržinske odredbe ovog pravilnika nepromenjene u odnosu na prethodnu verziju.*
-
-*Izmene u verziji 3.7.5: zaštitni veto preformulisan — štiti operativnu i finansijsku održivost Fondacije do dostizanja finansijske samostalnosti (čl. 2, 48), umesto ranijeg vezivanja za principe/zakon/pravni status (koji ostaju zaštićeni čl. 50, 51 i 70).*
-
-*Izmene u verziji 3.7.4: pokroviteljstvo izričito obuhvata i preduzetnike, ravnopravno sa pravnim licima (čl. 2, 38, 40).*
-
-*Izmene u verziji 3.7.3: precizirana vidljivost platformskog prostora za oglašavanje — pregled oglasa je javan, dok su postavljanje oglasa, kontakt i komunikacija dostupni verifikovanim korisnicima (čl. 16, 28, 67), i razgraničeni od pseudonimne evidencije doprinosa i grafa verifikacija.*
-
 *KOLO je sistem međusobne podrške zasnovan na ideji: da ljudi mogu da evidentiraju šta doprinose jedni drugima i zajednici. Ovaj pravilnik uređuje kako taj sistem radi: ko su njegovi akteri, šta je zajedničko dobro koje zajedno grade, kako se doprinos evidentira i kako se donose odluke. Pravilnik je obavezujući akt čije odredbe uređuju prava i obaveze korisnika.*
 
 ## I — Opšte odredbe

@@ -4,8 +4,6 @@
 
 *Version 3.9.0*
 
-*Changes in version 3.9.0: in Article 7, paragraph 5 was added — rulebooks for modules whose activation has not yet occurred (cooperatives, the Children's Module, disputes) are adopted upon activation, and until then the KOLO Rulebook and this Rulebook apply; in Article 9, it was specified that the appointment of the data protection officer is contained in the Privacy Policy and the Record of Processing Activities; in Article 11, the "cooperative collaboration agreement" template was replaced with general templates for collective forms (upon activation).*
-
 ## I — Introductory Provisions
 
 ### Article 1 — Subject matter

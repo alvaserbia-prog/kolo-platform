@@ -8,10 +8,6 @@
 
 Datum izrade: 23.05.2026. — Datum poslednje izmene: 16.06.2026.
 
-*Izmene u verziji 3.9.0: usklađen broj radnji obrade (trinaest — uključena radnja br. 13, javna lista donacija) i broj rizika (trinaest — R13 među srednjim) sa Registrom radnji obrade v3.9.0; u tački 2.5 imenovani obrađivači (Vercel, Neon, Cloudflare R2, Resend, svi u SAD) i izričito utvrđen prekogranični prenos.*
-
-*Izmene u verziji 3.8.1: dodata radnja obrade br. 12 (Nadzor integriteta sistema verifikacija) — rizik R12, mere u tački 5.7, procena srazmernosti u tački 3.4.*
-
 *Klasifikacija: Interno*
 
 ## 1. Opšti podaci

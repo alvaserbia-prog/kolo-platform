@@ -4,8 +4,6 @@
 
 *Version 3.9.0*
 
-*Changes in version 3.9.0: alignment of the set version to 3.9.0; no substantive change. The notion of 'initial users' (Chapter VI — Initial Mechanism) is expressly linked to the transitional provision on the start of the system in the Rulebook on the KOLO System (Article 82).*
-
 *This Rulebook governs the operational mechanics of proof of reality — the user verification model of the KOLO system based on personal acquaintance. It is adopted on the basis of Art. 32 paragraph 4 and Art. 15 point 2 of the KOLO System Rulebook.*
 
 ## I — General Provisions

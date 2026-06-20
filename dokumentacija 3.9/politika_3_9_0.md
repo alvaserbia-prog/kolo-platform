@@ -4,20 +4,6 @@
 
 Datum poslednje izmene: 16.06.2026.
 
-*Izmene u verziji 3.9.0: u članu 8 konkretizovani primaoci/obrađivači — hosting (Vercel Inc.), baza podataka (Neon Inc.), skladište slika (Cloudflare R2) i email servis (Resend, Inc.), svi sa sedištem u SAD; u članu 9 uklonjene placeholder opcije i utvrđeno da se podaci prenose i obrađuju u SAD uz zaštitne mere (čl. 65–69 ZZPL); u članu 4 dodate profilna slika (avatar) i opis kao dobrovoljni podaci, uz napomenu da se slike čuvaju kod obrađivača za skladište slika, a u bazu se upisuje samo URL.*
-
-*Izmene u verziji 3.8.1: dodat pododeljak 4.9 (Zaštita integriteta sistema) — opisan nadzor integriteta verifikacija zasnovan na legitimnom interesu, bez prikupljanja novih podataka i bez automatskog odlučivanja; usklađeno sa Registrom radnji obrade v3.9.0 (radnja br. 12) i DPIA v3.9.0.*
-
-*Izmene u verziji 3.8.0: konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0; usklađen e-mail za zaštitu podataka (privatnost@ekolo.rs) sa ostalim aktima; sadržinske odredbe nepromenjene.*
-
-*Izmene u verziji 3.7.6: u pododeljku 4.8 i članu 6 precizirano da verifikovani korisnik može, polazeći od zahteva objavljenog na tabli zahteva za jemstvo, da započne neposredan razgovor (poruke) sa neverifikovanim podnosiocem, koji u tom razgovoru sme da odgovara i pre verifikacije; obrada sadržaja razgovora i beleženje započinjanja razgovora uvršteni su u član 5 (evidencija pristupa).*
-
-*Izmene u verziji 3.7.5: u članu 4.6 opisana verifikatorska potvrda socijalnih programa — prijava traži pun indeks stvarnosti i izričit pristanak, a ispunjenost uslova potvrđuju verifikatori podnosioca bez uvida u unete podatke (usklađeno sa Pravilnikom o programima podrške v3.7.5 i DPIA v3.7.5).*
-
-*Izmene u verziji 3.7.4: usklađeno sa Pravilnikom o dokazu stvarnosti v3.7.3 — verifikacija se zasniva na neposrednom ličnom poznavanju i ne zahteva fizičko prisustvo, pa je svrha obrade kontakt podataka sa table jemstva preformulisana u skladu s tim.*
-
-*Izmene u verziji 3.7.3: u članu 6 precizirana vidljivost platformskog prostora za razmenu — sadržaj oglasa (uključujući pseudonim oglašivača) javno je vidljiv, dok kontakt podaci i povezivanje sa evidencijom doprinosa ostaju dostupni samo verifikovanim korisnicima.*
-
 Ova politika privatnosti donosi se na osnovu člana 66 stav 2 i člana 81 stav 4 Pravilnika o KOLO sistemu i u skladu sa Zakonom o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL).
 
 ### Član 1 — Rukovalac podacima
