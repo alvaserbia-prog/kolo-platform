@@ -1584,7 +1584,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                   </p>
                 </div>
                 {!jeSuperadmin(u) && (
-                  <div className="flex gap-1.5 flex-wrap justify-start sm:shrink-0 sm:justify-end">
+                  <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:shrink-0 sm:justify-end">
                     <button onClick={() => setIzmeniKorisnik(u)} disabled={loadingId === u.id}
                       className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
                       {t("korisnici_izmeni")}
