@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
@@ -322,8 +323,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
       >
         <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-white/10">
           <div className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/kolo-icon.png" alt="KOLO" style={{ width: 38, height: 38, objectFit: "contain" }} />
+            <Image src="/kolo-icon.png" alt="KOLO" width={38} height={38} className="object-contain" />
             <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
           </div>
           <JezikSvitcer />
