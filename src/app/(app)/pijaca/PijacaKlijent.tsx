@@ -294,7 +294,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {filtrirani.map((l) => (
+          {filtrirani.map((l, i) => (
             <OglasKartica
               key={l.id}
               oglas={l}
@@ -302,6 +302,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               kontaktLoading={kontaktLoadingId === l.id}
               onKontakt={handleKontakt}
               t={t}
+              prioritet={i < 2}
             />
           ))}
         </div>
@@ -320,24 +321,31 @@ const OglasKartica = memo(function OglasKartica({
   kontaktLoading,
   onKontakt,
   t,
+  prioritet,
 }: {
   oglas: Listing;
   isVerified: boolean;
   kontaktLoading: boolean;
   onKontakt: (oglasId: string, sellerId: string) => void;
   t: TFunction;
+  prioritet: boolean;
 }) {
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
       {/* Slika ili placeholder — ceo blok vodi na oglas */}
       <Link href={`/pijaca/${oglas.id}`} className="relative w-full h-[180px] bg-kolo-bg flex items-center justify-center">
         {oglas.slike > 0 ? (
+          // `unoptimized` UKLONJEN: Next sad servira sliku u pravoj veličini (WebP/AVIF),
+          // ne original ~1600px za okvir od 180px — glavni krivac za LCP 8.8s na mobilnom.
+          // `sizes` opisuje stvarnu širinu (1 kolona mobilno, 2 desktop). Prve 2 kartice
+          // (iznad pregiba) dobijaju `priority` da browser odmah povuče LCP sliku.
           <Image
             src={`/api/pijaca/slika/${oglas.id}/0`}
             alt={oglas.title}
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="object-cover"
-            unoptimized
+            priority={prioritet}
           />
         ) : (
           <span className="text-4xl">{kategorijaEmoji(oglas.category)}</span>

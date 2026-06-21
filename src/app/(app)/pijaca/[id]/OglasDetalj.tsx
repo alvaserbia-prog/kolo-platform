@@ -110,8 +110,9 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
                 src={`/api/pijaca/slika/${oglas.id}/${activeSlika}`}
                 alt={oglas.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 600px"
                 className="object-contain"
-                unoptimized
+                priority
               />
             </div>
             {oglas.images.length > 1 && (
@@ -128,8 +129,8 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
                       src={`/api/pijaca/slika/${oglas.id}/${i}`}
                       alt=""
                       fill
+                      sizes="64px"
                       className="object-cover"
-                      unoptimized
                     />
                   </button>
                 ))}
@@ -394,8 +395,8 @@ function IzmeniOglas({
                     src={`/api/pijaca/slika/${oglas.id}/${idx}`}
                     alt=""
                     fill
+                    sizes="80px"
                     className="object-cover"
-                    unoptimized
                   />
                   <button
                     type="button"
