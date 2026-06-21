@@ -796,7 +796,7 @@
     "ips_min_iznos": "Adjon meg egy összeget (legalább {min} RSD).",
     "ips_limit": "Maximum IPS befizetésenként: {max} RSD. Nagyobb összegeket kártyával vagy hagyományos átutalással fizessen.",
     "ips_greska": "A QR-kód generálása jelenleg nem lehetséges.",
-    "ips_skeniraj_uputstvo": "Nyissa meg a mobilbanki alkalmazást → „Fizetés / QR beolvasása" → olvassa be ezt a kódot. Az összeg és a hivatkozási szám már ki van töltve — csak erősítse meg.",
+    "ips_skeniraj_uputstvo": "Nyissa meg a mobilbanki alkalmazást → „Fizetés / QR beolvasása” → olvassa be ezt a kódot. Az összeg és a hivatkozási szám már ki van töltve — csak erősítse meg.",
     "ips_iznos_label": "Összeg:",
     "ips_poziv_na_broj": "Hivatkozási szám:",
     "ips_model": "modell",
