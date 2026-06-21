@@ -59,6 +59,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: SITE_DESCRIPTION,
     applicationName: SITE_NAME,
+    // PWA manifest — omogućava „Dodaj na početni ekran" (uslov za Web Push na iOS-u).
+    manifest: "/manifest.webmanifest",
     // Van produkcije (test/preview) NE indeksirati — sprečava da *.vercel.app
     // kanibalizuje ekolo.rs kao duplikat sadržaja.
     robots: IS_PRODUCTION

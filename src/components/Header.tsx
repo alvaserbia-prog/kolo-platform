@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
+import PushObavestenja from "@/components/PushObavestenja";
 import { useMe, useMePatch, type Notifikacija } from "@/hooks/useMe";
 
 export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
@@ -165,8 +166,15 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
         aria-label={t("aria_profil")}
       >
         {avatar ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={avatar} alt={pseudonim} width={36} height={36} decoding="async" className="w-full h-full object-cover" />
+          avatar.startsWith("http") ? (
+            // R2 URL → next/image: optimizuje (256→36px, AVIF/WebP) i kešira dugo
+            // (minimumCacheTTL), pa se avatar ne preuzima iznova na svakoj stranici.
+            <Image src={avatar} alt={pseudonim} width={36} height={36} className="w-full h-full object-cover" />
+          ) : (
+            // Legacy base64 data: URI — next/image ne optimizuje data URL-ove.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={avatar} alt={pseudonim} width={36} height={36} decoding="async" className="w-full h-full object-cover" />
+          )
         ) : (
           <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-xs">
             {inicijal}
@@ -406,6 +414,10 @@ function BellNotifikacije() {
                 </button>
               ))
             )}
+          </div>
+          {/* Web Push — uključi obaveštenja na telefonu/uređaju (radi i kad je sajt zatvoren). */}
+          <div className="px-4 py-3 border-t border-kolo-border">
+            <PushObavestenja />
           </div>
         </div>
       )}

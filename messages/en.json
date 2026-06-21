@@ -46,6 +46,13 @@
     "aria_notifikacije": "Notifications",
     "poen_objasnjenje": "A record of your contribution to the community — like an entry in a ledger, not money. Cannot be bought, cannot be exchanged for cash, and has no value outside the system."
   },
+  "push": {
+    "na_telefonu": "Notifications on your phone",
+    "ukljuci": "Enable",
+    "ukljuceno": "Enabled",
+    "nepodrzano": "This browser does not support device notifications.",
+    "blokirano": "Notifications are blocked in your browser settings."
+  },
   "bagovi": {
     "naslov": "Bugs",
     "uvod": "A list of all reported issues (bugs) on the platform and whether they are being worked on. If you run into a problem, report it here.",
@@ -325,6 +332,9 @@
     "send_greska_pseudonim": "Enter recipient's pseudonym.",
     "send_greska_iznos": "Amount must be a positive integer.",
     "send_greska": "Recording error. Please try again.",
+    "send_uspeh_naslov": "Recorded!",
+    "send_uspeh_opis": "{iznos} POEN recorded to @{pseudonim}.",
+    "send_uspeh_dugme": "Done",
     "qr_naslov": "My QR for receiving",
     "qr_opis": "Show this code to receive POEN. Scan with phone.",
     "qr_iznos": "POEN amount",
