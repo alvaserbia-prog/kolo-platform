@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { QRCodeSVG } from "qrcode.react";
+import dynamic from "next/dynamic";
+
+// QR biblioteka se učitava tek kad zatreba (posle „Generiši") — van početnog
+// bundle-a donacija (manje „unused JavaScript" / TBT na učitavanju stranice).
+const QRCodeSVG = dynamic(() => import("qrcode.react").then((m) => m.QRCodeSVG), {
+  ssr: false,
+});
 
 interface IpsInfo {
   konfigurisan: boolean;

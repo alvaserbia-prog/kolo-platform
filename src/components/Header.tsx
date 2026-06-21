@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
@@ -23,8 +24,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
           {/* Desktop: logo + naziv (klikabilno na početnu) + jezik switcher desno od naziva */}
           <div className="hidden md:flex items-center px-4 gap-3 shrink-0">
             <Link href="/pocetna" className="flex items-center gap-2.5 group">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/kolo-icon.png" alt="KOLO" width={32} height={32} className="rounded-lg shrink-0" />
+              <Image src="/kolo-icon.png" alt="KOLO" width={32} height={32} priority className="rounded-lg shrink-0" />
               <span className="font-bold text-white text-xl tracking-[0.2em] group-hover:opacity-90 transition-opacity">KOLO</span>
             </Link>
             <JezikSvitcer />
@@ -43,8 +43,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
               </svg>
             </button>
             <Link href="/pocetna" className="flex items-center gap-1.5">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/kolo-icon.png" alt="KOLO" width={26} height={26} className="rounded-md shrink-0" />
+              <Image src="/kolo-icon.png" alt="KOLO" width={26} height={26} priority className="rounded-md shrink-0" />
               <span className="font-bold text-white text-base tracking-widest">KOLO</span>
             </Link>
           </div>
@@ -167,7 +166,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
       >
         {avatar ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={avatar} alt={pseudonim} className="w-full h-full object-cover" />
+          <img src={avatar} alt={pseudonim} width={36} height={36} decoding="async" className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-xs">
             {inicijal}
