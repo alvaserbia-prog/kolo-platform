@@ -285,8 +285,8 @@ function OglasKartica({
 }) {
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
-      {/* Slika ili placeholder */}
-      <div className="relative w-full h-[180px] bg-kolo-bg flex items-center justify-center">
+      {/* Slika ili placeholder — ceo blok vodi na oglas */}
+      <Link href={`/pijaca/${oglas.id}`} className="relative w-full h-[180px] bg-kolo-bg flex items-center justify-center">
         {oglas.slike > 0 ? (
           <Image
             src={`/api/pijaca/slika/${oglas.id}/0`}
@@ -301,7 +301,7 @@ function OglasKartica({
         <span className="absolute top-2 left-2 bg-white/90 text-kolo-muted text-xs font-medium px-2 py-0.5 rounded-lg">
           {t(`kategorija_${kategorijaKljuc(oglas.category)}`)}
         </span>
-      </div>
+      </Link>
 
       {/* Sadržaj */}
       <div className="p-4 flex flex-col gap-2 flex-1">
