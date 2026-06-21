@@ -356,7 +356,7 @@ function PorukeContent() {
                 <button
                   type="submit"
                   disabled={slanje || !tekst.trim()}
-                  className="px-4 py-2.5 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors disabled:opacity-50 shrink-0"
+                  className="px-4 py-2.5 border border-transparent leading-relaxed bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors disabled:opacity-50 shrink-0"
                 >
                   {slanje ? t("saljem") : t("posalji")}
                 </button>
