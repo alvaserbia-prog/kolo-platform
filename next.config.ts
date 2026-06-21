@@ -37,6 +37,9 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
   "connect-src 'self' https://www.google-analytics.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  // Service worker (Web Push) i PWA manifest — isti origin.
+  "worker-src 'self'",
+  "manifest-src 'self'",
   "frame-src 'self'",
   "upgrade-insecure-requests",
 ].join("; ");
@@ -60,6 +63,12 @@ const nextConfig: NextConfig = {
   images: {
     // AVIF/WebP za manju isporuku slika (Next image optimizacija).
     formats: ["image/avif", "image/webp"],
+    // Optimizovane slike (`/_next/image`) keširaju se DUGO. R2 izvor (`r2.dev`)
+    // ne šalje koristan `Cache-Control`, pa je Next podrazumevano keširao kratko
+    // (Lighthouse „Use efficient cache lifetimes" = ttl 0). Ovim Next drži
+    // optimizovanu varijantu 1 godinu bez obzira na izvor → slike Pijace i svaka
+    // `next/image` slika se ne preuzimaju iznova pri svakoj poseti.
+    minimumCacheTTL: 31536000,
     remotePatterns: r2Host ? [{ protocol: "https", hostname: r2Host }] : [],
   },
   experimental: {

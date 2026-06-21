@@ -46,6 +46,13 @@
     "aria_notifikacije": "Notifikacije",
     "poen_objasnjenje": "Zapis tvog doprinosa zajednici — kao upis u knjigu, a ne novac. Ne kupuje se, ne menja se za dinare i nema vrednost van sistema."
   },
+  "push": {
+    "na_telefonu": "Obaveštenja na telefonu",
+    "ukljuci": "Uključi",
+    "ukljuceno": "Uključeno",
+    "nepodrzano": "Ovaj browser ne podržava obaveštenja na uređaju.",
+    "blokirano": "Obaveštenja su blokirana u podešavanjima browsera."
+  },
   "bagovi": {
     "naslov": "Bagovi",
     "uvod": "Spisak svih prijavljenih grešaka (bagova) na platformi i da li se na njima radi. Ako naiđeš na grešku, prijavi je ovde.",
@@ -325,6 +332,9 @@
     "send_greska_pseudonim": "Unesite pseudonim primaoca.",
     "send_greska_iznos": "Iznos mora biti pozitivan ceo broj.",
     "send_greska": "Greška pri upisu. Pokušajte ponovo.",
+    "send_uspeh_naslov": "Upisano!",
+    "send_uspeh_opis": "Upisano je {iznos} POEN u evidenciju za @{pseudonim}.",
+    "send_uspeh_dugme": "Gotovo",
     "qr_naslov": "Moj QR za prijem",
     "qr_opis": "Pokažite ovaj kod da biste primili POEN. Skenirajte telefonom.",
     "qr_iznos": "Iznos POEN",

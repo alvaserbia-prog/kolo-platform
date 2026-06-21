@@ -261,6 +261,7 @@ model User {
   glasovi                GlasanjeGlas[]
   auditLogs              AuditLog[]                 @relation("AdminActions")
   notifikacije           Notifikacija[]
+  pushPretplate          PushPretplata[]
   konverzacije1          Konverzacija[]             @relation("KonvUser1")
   konverzacije2          Konverzacija[]             @relation("KonvUser2")
   porukePoslate          Poruka[]                   @relation("PorukePostavljene")
@@ -845,6 +846,23 @@ model Notifikacija {
 
   @@index([userId, procitana])
   @@index([userId, createdAt(sort: Desc)])
+}
+
+// Web Push pretplata uređaja (browser Push API). Jedan korisnik može imati više
+// pretplata (više uređaja/browsera). `endpoint` je jedinstven po pretplati;
+// `p256dh`/`auth` su ključevi za enkripciju payload-a (VAPID). Briše se kaskadno
+// pri brisanju naloga, a i kad push servis vrati 404/410 (pretplata istekla).
+model PushPretplata {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 model Konverzacija {

@@ -1,4 +1,5 @@
 import { prisma } from "./prisma";
+import { posaljiPush } from "./push";
 
 export async function posaljiNotifikaciju(
   userId: string,
@@ -10,6 +11,9 @@ export async function posaljiNotifikaciju(
   await prisma.notifikacija.create({
     data: { userId, tip, naslov, tekst, link },
   });
+  // Push na telefon/uređaj (ako je korisnik uključio obaveštenja). Ne blokira i
+  // ne baca — zvonce u aplikaciji radi nezavisno od push-a.
+  void posaljiPush(userId, { naslov, tekst, link, tip });
 }
 
 /**
