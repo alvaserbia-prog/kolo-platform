@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
@@ -138,12 +139,12 @@ export default async function Home() {
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ letterSpacing: "-0.02em" }}>
                 {t("hero_naslov")}
               </h1>
-              <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-7 whitespace-pre-line">
+              <p className="text-white/90 text-lg md:text-xl leading-relaxed mb-7 whitespace-pre-line">
                 {t("hero_podnaslov")}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/kako-funkcionise"
-                  className="px-6 py-3 bg-kolo-gold-600 text-white font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
+                  className="px-6 py-3 bg-kolo-gold-600 text-kolo-green-900 font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors text-sm">
                   {t("hero_cta_saznaj")} →
                 </Link>
                 <Link href="/registracija"
@@ -157,11 +158,14 @@ export default async function Home() {
               </div>
             </div>
             <div className="hidden md:flex items-center justify-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src="/kolo-hero-logo.png"
                 alt="KOLO"
-                style={{ width: 385, height: "auto", opacity: 0.97 }}
+                width={385}
+                height={403}
+                priority
+                sizes="385px"
+                style={{ height: "auto", opacity: 0.97 }}
               />
             </div>
           </div>
@@ -206,15 +210,15 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
-              </h3>
+              </h2>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_1_opis")}</p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_2_naslov")}
-              </h3>
+              </h2>
               <p className="text-sm text-kolo-text leading-relaxed">
                 {t("alternativa_2_opis_start")}
                 <strong className="text-kolo-green-900">{t("alternativa_2_istakni_poen")}</strong>
@@ -222,9 +226,9 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_3_naslov")}
-              </h3>
+              </h2>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_3_opis")}</p>
             </div>
           </div>
@@ -343,13 +347,14 @@ export default async function Home() {
                   className="bg-white rounded-2xl card-shadow overflow-hidden hover:shadow-md transition-shadow flex flex-col group"
                 >
                   {/* Slika */}
-                  <div className="w-full h-44 bg-kolo-bg overflow-hidden">
+                  <div className="relative w-full h-44 bg-kolo-bg overflow-hidden">
                     {oglas.images.length > 0 ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={`/api/pijaca/slika/${oglas.id}/0`}
                         alt={oglas.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 300px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-kolo-muted/30">
@@ -415,19 +420,20 @@ export default async function Home() {
               <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
                 {t("ko_stoji_naslov")}
               </span>
-              <div className="w-36 h-36 rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl">
+                <Image
                   src="/nikola-saric-mantil.png"
                   alt="Nikola Šarić"
-                  className="w-full h-full object-cover object-top"
+                  fill
+                  sizes="144px"
+                  className="object-cover object-top"
                   style={{ transform: "scale(1.28)", transformOrigin: "center 22%" }}
                 />
               </div>
               {/* Tekst ispod fotografije */}
               <div>
                 <p className="text-white font-bold text-lg leading-tight">Nikola Šarić</p>
-                <p className="text-white/70 text-sm mt-1 leading-snug">
+                <p className="text-white/90 text-sm mt-1 leading-snug">
                   {t("ko_stoji_lokacija")}
                 </p>
               </div>
@@ -474,7 +480,7 @@ export default async function Home() {
           <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
             {t("cta_naslov")}
           </h2>
-          <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
+          <p className="text-white/90 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
             {t("cta_opis")}
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
@@ -492,7 +498,7 @@ export default async function Home() {
             </a>
           </div>
           <div className="mt-8 pt-6 border-t border-white/15">
-            <p className="text-xs text-white/60">{t("cta_footer")}</p>
+            <p className="text-xs text-white/85">{t("cta_footer")}</p>
           </div>
         </section>
 

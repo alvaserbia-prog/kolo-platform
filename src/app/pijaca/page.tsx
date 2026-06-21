@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { getTranslations } from "next-intl/server";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { pageMetadata } from "@/lib/seo";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
 import Link from "next/link";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("pijaca");
+  return pageMetadata({
+    title: t("meta_title"),
+    description: t("meta_desc"),
+    path: "/pijaca",
+  });
+}
 
 export default async function PijacaPage() {
   const session = await getServerSession(authOptions);

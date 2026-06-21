@@ -4,7 +4,7 @@
  * Neophodni kolačići (sesija, prijava, bezbednost) NE prolaze kroz ovaj mehanizam
  * — oni su nužni za rad platforme i nisu podložni pristanku (Politika privatnosti
  * čl. 7). Ovde se uslovljava SAMO učitavanje analitike trećih lica
- * (Google Analytics, Microsoft Clarity) — vidi `Analitika.tsx`.
+ * (Google Analytics) — vidi `Analitika.tsx`.
  *
  * Stanje se čuva u localStorage; promena se emituje preko CustomEvent-a da bi
  * `Analitika` komponenta reagovala bez osvežavanja stranice.

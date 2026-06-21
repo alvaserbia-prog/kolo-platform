@@ -70,6 +70,12 @@ export async function sacuvajNaR2(
     headers: {
       "Content-Type": contentType,
       "Content-Length": String(ab.byteLength),
+      // Ključ objekta je UUID (sadržaj se nikad ne menja na istom ključu) → smemo
+      // dugi immutable keš. R2 čuva ovaj header i vraća ga na javnom (r2.dev/CDN)
+      // URL-u, pa browser ne preuzima istu sliku iznova (Lighthouse „efficient
+      // cache lifetimes"). Važi za nove uploade; postojeće slike dobiju keš tek
+      // pri sledećem upisu ili kroz Next image optimizaciju (/_next/image).
+      "Cache-Control": "public, max-age=31536000, immutable",
     },
   });
   if (!res.ok) {

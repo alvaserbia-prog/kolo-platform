@@ -22,7 +22,7 @@ const r2Host = (() => {
 // pristup bi zahtevao da svaka ruta postane dinamička (gubitak statičkog keša na
 // javnim stranicama) + izmene root layout-a. Ovde se mitigiraju glavni vektori
 // (object-src, base-uri, frame-ancestors) bez rušenja postojećeg toka. Domeni za
-// skripte/connect prate analitiku (GA, Clarity, Vercel) iz `Analitika.tsx`.
+// skripte/connect prate analitiku (GA, Vercel) iz `Analitika.tsx`.
 //
 // `form-action` NIJE naveden namerno — kartično plaćanje (NestPay) radi POST
 // auto-submit ka eksternom gateway-u banke; `form-action` nema fallback na
@@ -35,8 +35,8 @@ const CSP = [
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms https://va.vercel-scripts.com",
-  "connect-src 'self' https://www.google-analytics.com https://*.clarity.ms https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+  "connect-src 'self' https://www.google-analytics.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
   "frame-src 'self'",
   "upgrade-insecure-requests",
 ].join("; ");

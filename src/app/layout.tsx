@@ -20,8 +20,6 @@ import {
   hreflangAlternates,
 } from "@/lib/seo";
 
-const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
-
 // Podrazumevani font za latiničke korisnike. "latin-ext" pokriva srpske
 // dijakritike (č, ć, š, ž, đ); ćirilica NIJE ovde da ne bi opterećivala
 // kritičnu putanju (LCP) — ogromna većina koristi latinicu.
@@ -126,8 +124,8 @@ export default async function RootLayout({
         </NextIntlClientProvider>
         {/* Vercel Analytics — bez kolačića (cookieless, agregatno), ne zahteva pristanak. */}
         <Analytics />
-        {/* Google Analytics + Microsoft Clarity — učitavaju se SAMO uz pristanak (čl. 7 Politike). */}
-        <Analitika clarityId={CLARITY_ID} />
+        {/* Google Analytics — učitava se SAMO uz pristanak (čl. 7 Politike). */}
+        <Analitika />
         <CookieConsent />
       </body>
     </html>
