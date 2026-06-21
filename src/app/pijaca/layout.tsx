@@ -1,25 +1,18 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
 import PublicHeader from "@/components/PublicHeader";
-import { prisma } from "@/lib/prisma";
+import { sesija } from "@/lib/sesija";
 import { jeAdmin, mozeNadzor } from "@/lib/dozvole";
 
 export default async function PijacaLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions);
+  const session = await sesija();
 
   if (session) {
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-      select: { tipKorisnika: true },
-    });
-    const jeNadzornik = mozeNadzor(user);
-
+    // `session.user` već nosi tipKorisnika+admin → nadzor status bez DB poziva.
     return (
       <AppShell
         verified={session.user.verified}
         isAdmin={jeAdmin(session.user)}
-        jeNadzornik={jeNadzornik}
+        jeNadzornik={mozeNadzor(session.user)}
       >
         {children}
       </AppShell>

@@ -2,15 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-
-interface DnevniBrojevi {
-  novcanik: number;
-  pijaca: number;
-  tablaJemstva: number;
-  adminCekanje: number;
-}
+import { useMe, useMeEventBridge, useMePatch, ME_KEY } from "@/hooks/useMe";
 
 interface AppShellProps {
   verified: boolean;
@@ -21,37 +16,28 @@ interface AppShellProps {
 
 export default function AppShell({ verified, isAdmin, jeNadzornik, children }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dnevniBrojevi, setDnevniBrojevi] = useState<DnevniBrojevi | null>(null);
-  const [brojZaNadzor, setBrojZaNadzor] = useState<number>(0);
   const router = useRouter();
   const pathname = usePathname();
+  const qc = useQueryClient();
 
-  // Provera pristanaka: Politika privatnosti
-  // (Popup za prihvatanje Pravilnika je uklonjen — nudio je zastarelu verziju.)
+  // Jedan keširan izvor za ceo chrome (balans, badge-evi, notifikacije, nadzor,
+  // politika) — deli se sa Header-om kroz React Query keš. Ranije: 6 fetch-eva.
+  useMeEventBridge();
+  const { data: me } = useMe();
+  const patchMe = useMePatch();
+
+  const dnevniBrojevi = me?.dnevniBrojevi ?? null;
+  const brojZaNadzor = me?.nadzorBroj ?? 0;
+
+  // Provera pristanka na Politiku privatnosti (popup za Pravilnik je uklonjen).
   useEffect(() => {
     if (pathname === "/politika-prihvati") return;
-    fetch("/api/politika/prihvati")
-      .then((r) => r.ok ? r.json() : null)
-      .then((data) => {
-        if (data?.potrebno) {
-          router.replace("/politika-prihvati");
-        }
-      })
-      .catch(() => {});
-  // Proveravamo samo pri mountovanju
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (!verified) return;
-    fetch("/api/dnevni-brojevi")
-      .then((r) => r.ok ? r.json() : null)
-      .then((data) => { if (data) setDnevniBrojevi(data); })
-      .catch(() => {});
-  }, [verified]);
+    if (me?.politikaPotrebno) router.replace("/politika-prihvati");
+  }, [me?.politikaPotrebno, pathname, router]);
 
   // Kad korisnik otvori Novčanik/Pijaca → označi "viđeno" (badge ide na 0).
-  // Optimistički nuliramo lokalno, pa serveru javimo da pomeri "viđeno" vreme.
+  // Optimistički nuliramo lokalno (setQueryData), pa serveru javimo da pomeri
+  // "viđeno" vreme i invalidiramo keš da se uskladi.
   useEffect(() => {
     const sekcija =
       pathname.startsWith("/novcanik") ? "novcanik" :
@@ -59,30 +45,22 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
       null;
     if (!sekcija) return;
 
-    setDnevniBrojevi((prev) => (prev ? { ...prev, [sekcija]: 0 } : prev));
+    patchMe(
+      dnevniBrojevi
+        ? { dnevniBrojevi: { ...dnevniBrojevi, [sekcija]: 0 } }
+        : {},
+    );
     fetch("/api/dnevni-brojevi/vidjeno", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ sekcija }),
     })
-      // Posle pomeranja "viđeno" vremena osveži brojeve da ne dođe do trke
-      // sa inicijalnim GET-om (koji bi mogao da vrati staru, ne-nulu vrednost).
-      .then(() => fetch("/api/dnevni-brojevi"))
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => { if (data) setDnevniBrojevi(data); })
+      .then(() => qc.invalidateQueries({ queryKey: ME_KEY }))
       .catch(() => {});
+  // Pokreće se na promenu rute; dnevniBrojevi namerno van deps (čita se sveža
+  // vrednost samo radi optimističkog nulovanja).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
-
-  // Učitaj broj verifikacija za nadzor (samo POCETNI / NOSILAC_ZRNA)
-  useEffect(() => {
-    if (!jeNadzornik) return;
-    fetch("/api/nadzor")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        if (data?.verifikacije) setBrojZaNadzor(data.verifikacije.length);
-      })
-      .catch(() => {});
-  }, [jeNadzornik, pathname]);
 
   return (
     <div className="h-full bg-kolo-bg text-kolo-text flex flex-col overflow-x-hidden">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useCallback, memo } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -58,25 +58,32 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const [showSort, setShowSort] = useState(false);
   const [kontaktLoadingId, setKontaktLoadingId] = useState<string | null>(null);
 
-  const filtrirani = listings
-    .filter((l) => {
-      if (filterKat !== "Sve" && l.category !== filterKat) return false;
-      if (pretraga && !l.title.toLowerCase().includes(pretraga.toLowerCase())) return false;
-      // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
-      if (minCena && (l.price == null || l.price < Number(minCena))) return false;
-      if (maxCena && (l.price == null || l.price > Number(maxCena))) return false;
-      return true;
-    })
-    .sort((a, b) => {
-      // „Po dogovoru" oglasi idu na kraj pri sortiranju po ceni.
-      if (sort === "jeftino") return (a.price ?? Infinity) - (b.price ?? Infinity);
-      if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
+  // Filtriranje + sortiranje se računa SAMO kad se promene ulazi — ne na svaki
+  // render (npr. otvaranje dropdown-a `showKat`/`showCena` ili kontakt-loading
+  // više ne preračunava i ne presortirava celu listu).
+  const filtrirani = useMemo(() => {
+    return listings
+      .filter((l) => {
+        if (filterKat !== "Sve" && l.category !== filterKat) return false;
+        if (pretraga && !l.title.toLowerCase().includes(pretraga.toLowerCase())) return false;
+        // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
+        if (minCena && (l.price == null || l.price < Number(minCena))) return false;
+        if (maxCena && (l.price == null || l.price > Number(maxCena))) return false;
+        return true;
+      })
+      .sort((a, b) => {
+        // „Po dogovoru" oglasi idu na kraj pri sortiranju po ceni.
+        if (sort === "jeftino") return (a.price ?? Infinity) - (b.price ?? Infinity);
+        if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      });
+  }, [listings, filterKat, pretraga, sort, minCena, maxCena]);
 
   // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
   // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
-  async function handleKontakt(oglasId: string, sellerId: string) {
+  // useCallback: stabilna referenca → memo-izovane kartice se ne re-renderuju
+  // samo zato što se roditelj iznova iscrtao.
+  const handleKontakt = useCallback(async (oglasId: string, sellerId: string) => {
     setKontaktLoadingId(oglasId);
     const res = await fetch("/api/poruke", {
       method: "POST",
@@ -86,7 +93,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
     if (!res.ok) { setKontaktLoadingId(null); return; }
     const data = await res.json();
     router.push(`/poruke?k=${data.konverzacijaId}`);
-  }
+  }, [router]);
 
   return (
     <div className="space-y-5">
@@ -255,7 +262,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               oglas={l}
               isVerified={isVerified}
               kontaktLoading={kontaktLoadingId === l.id}
-              onKontakt={() => handleKontakt(l.id, l.sellerId)}
+              onKontakt={handleKontakt}
               t={t}
             />
           ))}
@@ -269,7 +276,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
 
 type TFunction = ReturnType<typeof useTranslations<"pijaca">>;
 
-function OglasKartica({
+const OglasKartica = memo(function OglasKartica({
   oglas,
   isVerified,
   kontaktLoading,
@@ -279,7 +286,7 @@ function OglasKartica({
   oglas: Listing;
   isVerified: boolean;
   kontaktLoading: boolean;
-  onKontakt: () => void;
+  onKontakt: (oglasId: string, sellerId: string) => void;
   t: TFunction;
 }) {
   return (
@@ -330,7 +337,7 @@ function OglasKartica({
           </span>
           {isVerified ? (
             <button
-              onClick={onKontakt}
+              onClick={() => onKontakt(oglas.id, oglas.sellerId)}
               disabled={kontaktLoading}
               className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
             >
@@ -345,7 +352,7 @@ function OglasKartica({
       </div>
     </div>
   );
-}
+});
 
 function kategorijaEmoji(kat: string) {
   const map: Record<string, string> = {

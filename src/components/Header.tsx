@@ -8,16 +8,7 @@ import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
-
-interface Notifikacija {
-  id: string;
-  tip: string;
-  naslov: string;
-  tekst: string;
-  procitana: boolean;
-  link: string | null;
-  createdAt: string;
-}
+import { useMe, useMePatch, type Notifikacija } from "@/hooks/useMe";
 
 export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   const { data: session } = useSession();
@@ -94,7 +85,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
         <div className="flex items-center gap-1.5 md:gap-3 pr-2 md:px-4">
           {session ? (
             <>
-              <BalansHeader userId={session.user.id} />
+              <BalansHeader />
               <div className="hidden sm:block w-px h-4 bg-white/20" />
               {/* Pomoć / onboarding — na mobilnom u profilnom meniju (vidi ProfilMeni) */}
               <Link
@@ -128,25 +119,12 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   );
 }
 
-function BalansHeader({ userId }: { userId: string }) {
+function BalansHeader() {
   const t = useTranslations("header");
-  const [balans, setBalans] = useState<number | null>(null);
-
-  function ucitajBalans() {
-    fetch("/api/profil/balans")
-      .then((r) => r.json())
-      .then((d) => setBalans(d.balance ?? 0))
-      .catch(() => setBalans(0));
-  }
-
-  useEffect(() => {
-    ucitajBalans();
-  }, [userId]);
-
-  useEffect(() => {
-    window.addEventListener("balans-updated", ucitajBalans);
-    return () => window.removeEventListener("balans-updated", ucitajBalans);
-  }, []);
+  // Balans dolazi iz keširanog /api/me (React Query) — osvežava ga `balans-updated`
+  // event preko useMeEventBridge (montiran u AppShell). Bez zasebnog fetch-a.
+  const { data: me } = useMe();
+  const balans = me?.balance ?? null;
 
   return (
     <span className="text-white/60 text-sm hidden sm:inline-flex items-center gap-1">
@@ -165,23 +143,10 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
   const router = useRouter();
   const t = useTranslations("header");
   const [open, setOpen] = useState(false);
-  const [avatar, setAvatar] = useState<string | null>(null);
+  // Avatar iz keširanog /api/me; `avatar-updated` event invalidira keš (bridge).
+  const { data: me } = useMe();
+  const avatar = me?.avatar ?? null;
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch("/api/profil/balans")
-      .then((r) => r.json())
-      .then((d) => setAvatar(d.avatar ?? null))
-      .catch(() => {});
-  }, [userId]);
-
-  useEffect(() => {
-    function onAvatarUpdated(e: Event) {
-      setAvatar((e as CustomEvent<string>).detail);
-    }
-    window.addEventListener("avatar-updated", onAvatarUpdated);
-    return () => window.removeEventListener("avatar-updated", onAvatarUpdated);
-  }, []);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -292,30 +257,10 @@ const TIP_BOJA: Record<string, string> = {
 };
 
 function PorukeIkona({ ariaLabel }: { ariaLabel: string }) {
-  const [neprocitano, setNeprocitano] = useState(0);
-
-  async function ucitaj() {
-    try {
-      const res = await fetch("/api/poruke/brojac");
-      if (!res.ok) return;
-      const data = await res.json();
-      setNeprocitano(data.neprocitano ?? 0);
-    } catch {
-      // tiho — badge ostaje na prethodnoj vrednosti
-    }
-  }
-
-  useEffect(() => {
-    ucitaj();
-    const interval = setInterval(ucitaj, 30_000);
-    // Stranica /poruke šalje "poruke-procitane" kad otvori konverzaciju i
-    // označi poruke pročitanim — tada odmah osvežavamo badge.
-    window.addEventListener("poruke-procitane", ucitaj);
-    return () => {
-      clearInterval(interval);
-      window.removeEventListener("poruke-procitane", ucitaj);
-    };
-  }, []);
+  // Broj nepročitanih iz keširanog /api/me. Stranica /poruke emituje
+  // „poruke-procitane" → bridge invalidira keš → badge se osveži.
+  const { data: me } = useMe();
+  const neprocitano = me?.neprocitanoPoruke ?? 0;
 
   return (
     <Link
@@ -338,19 +283,26 @@ function PorukeIkona({ ariaLabel }: { ariaLabel: string }) {
 function BellNotifikacije() {
   const router = useRouter();
   const t = useTranslations("header");
+  // Podaci iz keširanog /api/me; lokalni state samo za UI (dropdown/toast).
+  const { data: me } = useMe();
+  const patchMe = useMePatch();
+  const notifikacije = me?.notifikacije ?? [];
+  const neprocitano = me?.notifNeprocitano ?? 0;
   const [open, setOpen] = useState(false);
-  const [neprocitano, setNeprocitano] = useState(0);
-  const [notifikacije, setNotifikacije] = useState<Notifikacija[]>([]);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState<Notifikacija | null>(null);
   const prevNeprocitanoRef = useRef<number | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
+  // Toast za novo obaveštenje: okida se kada broj nepročitanih poraste između
+  // dve osvežene vrednosti keša (/api/me poll ili invalidacija).
   useEffect(() => {
-    ucitaj();
-    const interval = setInterval(ucitaj, 30_000);
-    return () => clearInterval(interval);
-  }, []);
+    if (prevNeprocitanoRef.current !== null && neprocitano > prevNeprocitanoRef.current) {
+      const najnovija = notifikacije.find((n) => !n.procitana);
+      if (najnovija) setToast(najnovija);
+    }
+    prevNeprocitanoRef.current = neprocitano;
+  }, [neprocitano, notifikacije]);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -362,45 +314,27 @@ function BellNotifikacije() {
 
   useEffect(() => {
     if (toast) {
-      const t = setTimeout(() => setToast(null), 5000);
-      return () => clearTimeout(t);
+      const id = setTimeout(() => setToast(null), 5000);
+      return () => clearTimeout(id);
     }
   }, [toast]);
 
-  async function ucitaj() {
-    let res: Response;
-    try {
-      res = await fetch("/api/notifikacije");
-    } catch {
-      return;
-    }
-    if (!res.ok) return;
-    const data = await res.json();
-    const noviCount: number = data.neprocitano ?? 0;
-    const lista: Notifikacija[] = data.notifikacije ?? [];
-    if (prevNeprocitanoRef.current !== null && noviCount > prevNeprocitanoRef.current) {
-      const najnovija = lista.find((n) => !n.procitana);
-      if (najnovija) setToast(najnovija);
-    }
-    prevNeprocitanoRef.current = noviCount;
-    setNeprocitano(noviCount);
-    setNotifikacije(lista);
-  }
-
   async function oznaciProcitane() {
     setLoading(true);
-    await fetch("/api/notifikacije", { method: "PATCH" });
-    setNeprocitano(0);
-    setNotifikacije((prev) => prev.map((n) => ({ ...n, procitana: true })));
+    // Optimistički u kešu: sve pročitano → badge 0.
+    patchMe({ notifNeprocitano: 0, notifikacije: notifikacije.map((n) => ({ ...n, procitana: true })) });
+    await fetch("/api/notifikacije", { method: "PATCH" }).catch(() => {});
     setLoading(false);
   }
 
   async function handleKlik(n: Notifikacija) {
     setOpen(false);
     if (!n.procitana) {
-      // Optimistički označi samo ovu kao pročitanu → badge padne za 1
-      setNotifikacije((prev) => prev.map((x) => (x.id === n.id ? { ...x, procitana: true } : x)));
-      setNeprocitano((c) => Math.max(0, c - 1));
+      // Optimistički označi samo ovu kao pročitanu → badge padne za 1.
+      patchMe({
+        notifNeprocitano: Math.max(0, neprocitano - 1),
+        notifikacije: notifikacije.map((x) => (x.id === n.id ? { ...x, procitana: true } : x)),
+      });
       fetch("/api/notifikacije", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
