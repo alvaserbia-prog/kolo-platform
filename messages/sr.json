@@ -1697,7 +1697,7 @@
     "uspeh_dugme": "Idi na Pijacu"
   },
   "pocetna": {
-    "dobrodoslice": "Dobrodošao, <ime>{pseudonim}</ime>",
+    "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",
     "opis_stranice": "Tvoja polazna tačka: vesti Fondacije i razgovor sa zajednicom. Ovde vidiš šta je novo i šta drugi pišu (pisanje se otključava verifikacijom).",
     "vesti_naslov": "Vesti Fondacije",
     "nema_objava": "Još uvek nema objava.",
