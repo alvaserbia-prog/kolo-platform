@@ -6,12 +6,16 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
+import CenaUnos from "@/components/CenaUnos";
+import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 
 interface OglasProps {
   id: string;
   title: string;
   description: string;
-  price: number;
+  cenaTip: string;
+  price: number | null;
+  cenaDo: number | null;
   category: string;
   images: string[];
   location: string | null;
@@ -146,8 +150,8 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
               <h1 className="text-xl font-bold text-kolo-text mt-0.5">{oglas.title}</h1>
             </div>
             <div className="shrink-0 text-right">
-              <p className="text-2xl font-bold text-kolo-green-700">{oglas.price.toLocaleString("sr-RS")}</p>
-              <p className="text-sm text-kolo-green-700">POEN</p>
+              <p className="text-2xl font-bold text-kolo-green-700">{formatCenaGlavni(oglas, t("cena_po_dogovoru"))}</p>
+              {prikaziJedinicuCene(oglas) && <p className="text-sm text-kolo-green-700">POEN</p>}
             </div>
           </div>
 
@@ -246,7 +250,9 @@ function IzmeniOglas({
   const t = useTranslations("pijaca");
   const [title, setTitle] = useState(oglas.title);
   const [description, setDescription] = useState(oglas.description);
-  const [price, setPrice] = useState(String(oglas.price));
+  const [cenaTip, setCenaTip] = useState<CenaTip>((oglas.cenaTip as CenaTip) ?? "FIKSNA");
+  const [price, setPrice] = useState(oglas.price != null ? String(oglas.price) : "");
+  const [cenaDo, setCenaDo] = useState(oglas.cenaDo != null ? String(oglas.cenaDo) : "");
   const [location, setLocation] = useState(oglas.location ?? "");
   const [phone, setPhone] = useState(oglas.phone ?? "");
   // indeksi postojećih slika koje treba zadržati
@@ -283,16 +289,18 @@ function IzmeniOglas({
     setError("");
 
     const titleVal = title.trim();
-    const p = Math.floor(Number(price));
     if (titleVal.length < 3) { setError(t("naslov_greska")); return; }
-    if (isNaN(p) || p <= 0) { setError(t("cena_greska")); return; }
+    const cena = parsirajCenu(cenaTip, price, cenaDo);
+    if (!cena.ok) { setError(cena.error ?? t("cena_greska")); return; }
 
     setLoading(true);
     try {
       const fd = new FormData();
       fd.append("title", titleVal);
       fd.append("description", description.trim());
-      fd.append("price", String(p));
+      fd.append("cenaTip", cenaTip);
+      fd.append("price", price);
+      fd.append("cenaDo", cenaDo);
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
       fd.append("keepImages", JSON.stringify(keepIndices));
@@ -331,11 +339,15 @@ function IzmeniOglas({
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors" />
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("cena_label")}</label>
-          <input type="number" min={1} step={1} value={price} onChange={(e) => setPrice(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors" />
-        </div>
+        <CenaUnos
+          cenaTip={cenaTip}
+          setCenaTip={setCenaTip}
+          price={price}
+          setPrice={setPrice}
+          cenaDo={cenaDo}
+          setCenaDo={setCenaDo}
+          t={t}
+        />
 
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">

@@ -87,16 +87,29 @@ async function posaljiEmail(naslov: string, tekst: string): Promise<void> {
  * @param naslov - Naslov događaja (npr. "Nova verifikacija")
  * @param tekst  - Telo poruke, redovi odvojeni \n
  */
+/** Oznaka okruženja iz kog je alert poslat — da se test ne meša sa produkcijom. */
+function okruzenjeTag(): string {
+  switch (process.env.VERCEL_ENV) {
+    case "production":
+      return "[PROD]";
+    case "preview":
+      return "[TEST]";
+    default:
+      return "[DEV]";
+  }
+}
+
 export async function posaljiAdminAlert(
   naslov: string,
   tekst: string
 ): Promise<void> {
+  const naslovTag = `${okruzenjeTag()} ${naslov}`;
   try {
     await Promise.all([
-      posaljiTelegram(naslov, tekst).catch((err) =>
+      posaljiTelegram(naslovTag, tekst).catch((err) =>
         console.error("[adminAlert] Telegram greška:", err)
       ),
-      posaljiEmail(naslov, tekst).catch((err) =>
+      posaljiEmail(naslovTag, tekst).catch((err) =>
         console.error("[adminAlert] Email greška:", err)
       ),
     ]);

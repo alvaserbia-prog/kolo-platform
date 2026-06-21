@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
+import { parsirajCenu } from "@/lib/cena-oglas";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -29,9 +30,10 @@ export async function GET(req: NextRequest) {
     if (maxCena > 0) (where.price as Record<string, number>).lte = maxCena;
   }
 
+  // „Po dogovoru" oglasi (price = null) uvek idu na kraj pri sortiranju po ceni.
   const orderBy =
-    sortiranje === "jeftino" ? { price: "asc" as const } :
-    sortiranje === "skupo"   ? { price: "desc" as const } :
+    sortiranje === "jeftino" ? { price: { sort: "asc" as const, nulls: "last" as const } } :
+    sortiranje === "skupo"   ? { price: { sort: "desc" as const, nulls: "last" as const } } :
                                { createdAt: "desc" as const };
 
   const listings = await prisma.marketplaceListing.findMany({
@@ -39,7 +41,8 @@ export async function GET(req: NextRequest) {
     orderBy,
     take: 60,
     select: {
-      id: true, title: true, description: true, price: true,
+      id: true, title: true, description: true,
+      cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
       seller: { select: { pseudonim: true, verified: true } },
     },
@@ -60,6 +63,8 @@ export async function POST(req: NextRequest) {
   const title = (formData.get("title") as string)?.trim();
   const description = (formData.get("description") as string)?.trim() ?? "";
   const priceRaw = formData.get("price") as string;
+  const cenaDoRaw = formData.get("cenaDo") as string;
+  const cenaTipRaw = formData.get("cenaTip") as string;
   const category = (formData.get("category") as string)?.trim();
   const location = (formData.get("location") as string)?.trim() ?? "";
   const phone = (formData.get("phone") as string)?.trim() ?? "";
@@ -75,11 +80,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Lokacija može imati najviše 80 karaktera." }, { status: 400 });
   if (phone.length > 40)
     return NextResponse.json({ error: "Telefon može imati najviše 40 karaktera." }, { status: 400 });
-  if (!priceRaw || isNaN(Number(priceRaw)) || Number(priceRaw) <= 0)
-    return NextResponse.json({ error: "Cena mora biti pozitivan ceo broj." }, { status: 400 });
-  const price = Math.floor(Number(priceRaw));
-  if (price > 1_000_000_000)
-    return NextResponse.json({ error: "Cena je neuobičajeno velika." }, { status: 400 });
+  const cena = parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
+  if (!cena.ok)
+    return NextResponse.json({ error: cena.error }, { status: 400 });
   if (!KATEGORIJE.includes(category))
     return NextResponse.json({ error: "Neispravna kategorija." }, { status: 400 });
 
@@ -128,7 +131,9 @@ export async function POST(req: NextRequest) {
       sellerId: session.user.id,
       title,
       description,
-      price,
+      cenaTip: cena.cenaTip,
+      price: cena.price,
+      cenaDo: cena.cenaDo,
       category,
       images: imagePaths,
       location: location || null,

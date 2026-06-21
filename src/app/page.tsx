@@ -10,6 +10,7 @@ import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 import { getTranslations, getLocale } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
+import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("landing");
@@ -29,7 +30,9 @@ async function getPijacaPreview() {
       select: {
         id: true,
         title: true,
+        cenaTip: true,
         price: true,
+        cenaDo: true,
         category: true,
         location: true,
         createdAt: true,
@@ -362,7 +365,7 @@ export default async function Home() {
                       {oglas.title}
                     </p>
                     <span className="text-sm font-bold text-kolo-green-700 shrink-0 whitespace-nowrap">
-                      {oglas.price.toLocaleString("sr-RS")} {t("pijaca_poen")}
+                      {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? ` ${t("pijaca_poen")}` : ""}
                     </span>
                   </div>
                 </Link>

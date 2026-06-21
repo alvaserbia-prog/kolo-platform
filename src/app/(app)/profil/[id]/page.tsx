@@ -6,6 +6,7 @@ import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
 import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
+import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 
 interface Transakcija {
   id: string;
@@ -20,7 +21,9 @@ interface Transakcija {
 interface Oglas {
   id: string;
   title: string;
-  price: number;
+  cenaTip: string;
+  price: number | null;
+  cenaDo: number | null;
   category: string;
   createdAt: string;
 }
@@ -385,7 +388,7 @@ export default function JavniProfilPage() {
                     <p className="text-xs text-kolo-muted mt-0.5">{oglas.category}</p>
                   </div>
                   <span className="text-sm font-semibold text-kolo-green-700 shrink-0 ml-4">
-                    {oglas.price.toLocaleString("sr-RS")} P
+                    {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " P" : ""}
                   </span>
                 </Link>
               </li>
