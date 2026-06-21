@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import IpsQrPlacanje from "./IpsQrPlacanje";
 
 interface Donacija {
   id: string;
@@ -230,6 +231,9 @@ export default function DonacijeKlijent() {
         </div>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
       </div>
+
+      {/* IPS QR — instant dinarska uplata skeniranjem mobilnom bankom */}
+      <IpsQrPlacanje />
 
       {/* Instrukcije za uplatu */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">

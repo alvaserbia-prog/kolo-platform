@@ -786,7 +786,21 @@
     "lista_naslov": "Donations list",
     "lista_opis": "Public donors are shown by first and last name; anonymous donors are not identified.",
     "lista_prazno": "No donations recorded yet.",
-    "lista_anoniman": "Anonymous donor"
+    "lista_anoniman": "Anonymous donor",
+    "ips_naslov": "Donate via IPS QR code (instant)",
+    "ips_opis": "Scan the QR with your mobile banking app — the dinar payment arrives in seconds, with no platform fee. POEN is recorded once the Foundation confirms the incoming payment.",
+    "ips_uskoro": "The Foundation's account for IPS payments will be opened soon. This option will activate automatically once the account is configured.",
+    "ips_generisi": "Generate QR",
+    "ips_generisem": "Generating…",
+    "ips_min_iznos": "Enter an amount (at least {min} RSD).",
+    "ips_limit": "Maximum per IPS payment: {max} RSD. For larger amounts use a card or a regular bank transfer.",
+    "ips_greska": "QR code generation is not possible right now.",
+    "ips_skeniraj_uputstvo": "Open your mobile banking app → \"Pay / Scan QR\" → scan this code. The amount and reference number are pre-filled — just confirm.",
+    "ips_iznos_label": "Amount:",
+    "ips_poziv_na_broj": "Reference number:",
+    "ips_model": "model",
+    "ips_napomena_potvrda": "After payment, the Foundation confirms the incoming funds by reference number and POEN is then recorded. The reference number is already in the QR code — do not change it.",
+    "ips_novi": "New IPS payment"
   },
   "zaposljavnje": {
     "naslov": "Employment",
