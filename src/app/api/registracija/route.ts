@@ -5,6 +5,8 @@ import { WalletType } from "@/generated/prisma/client";
 import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
 import { normalizujEmail, validanEmail, validanPseudonim } from "@/lib/validacija";
 import { rateLimit, klijentIP } from "@/lib/rate-limit";
+import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
@@ -94,6 +96,19 @@ export async function POST(req: NextRequest) {
         },
       },
     });
+
+    // Obavesti admine o novom nalogu (ne sme da obori registraciju ako zakaže):
+    //  - in-app bell za sve admine,
+    //  - Telegram bot + email (stiže na telefon/Windows).
+    try {
+      await obavestiAdmineNoviKorisnik(user.id, user.pseudonim);
+    } catch {
+      /* notifikacija nije kritična */
+    }
+    void posaljiAdminAlert(
+      "Nov korisnik se priključio",
+      `Pseudonim: ${user.pseudonim}\nNačin: registracija (email)\nVerifikovan: ne`,
+    );
 
     return NextResponse.json({ ok: true, id: user.id }, { status: 201 });
   } catch {

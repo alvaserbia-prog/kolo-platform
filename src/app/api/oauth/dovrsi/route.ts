@@ -4,6 +4,8 @@ import { authOptions, uniqueMemberHash } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { normalizujEmail } from "@/lib/validacija";
 import { WalletType } from "@/generated/prisma/client";
+import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -74,6 +76,17 @@ export async function POST(req: NextRequest) {
     }
     return u;
   });
+
+  // Obavesti admine o novom nalogu (in-app bell + Telegram/email; telefon/Windows).
+  try {
+    await obavestiAdmineNoviKorisnik(created.id, trimmed);
+  } catch {
+    /* notifikacija nije kritična */
+  }
+  void posaljiAdminAlert(
+    "Nov korisnik se priključio",
+    `Pseudonim: ${trimmed}\nNačin: ${session.user.pendingProvider ?? "OAuth"}\nVerifikovan: ne`,
+  );
 
   return NextResponse.json({ ok: true, userId: created.id });
 }
