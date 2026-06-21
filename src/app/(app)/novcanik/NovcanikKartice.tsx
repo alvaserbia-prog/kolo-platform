@@ -2,10 +2,17 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { QRCodeSVG } from "qrcode.react";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+
+// qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
+// LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne
+// opterećuje početni bundle Novčanika.
+const QRCodeSVG = dynamic(() => import("qrcode.react").then((m) => m.QRCodeSVG), {
+  ssr: false,
+});
 
 interface Props {
   balance: number;

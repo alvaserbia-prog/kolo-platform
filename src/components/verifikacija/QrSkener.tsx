@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Html5Qrcode } from "html5-qrcode";
+import type { Html5Qrcode } from "html5-qrcode";
 
 /**
  * Skener QR kodova preko kamere uređaja.
@@ -24,25 +24,31 @@ export default function QrSkener({ onDetektovan, onZatvori }: Props) {
 
   useEffect(() => {
     let cancelled = false;
-    const html5 = new Html5Qrcode(SKENER_REGION_ID);
-    skenerRef.current = html5;
 
-    html5
-      .start(
-        { facingMode: aktivnaKamera },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        (decodedText) => {
-          if (cancelled) return;
-          cancelled = true;
-          html5
-            .stop()
-            .catch(() => {})
-            .finally(() => onDetektovan(decodedText.trim()));
-        },
-        () => {
-          // ignore: ovo se zove često (jednom po frame-u kad nema match-a)
-        }
-      )
+    // html5-qrcode (~200KB) se učitava LENJO — tek kad se skener montira (otvori),
+    // a ne u glavnom bundle-u rute. Dinamički `import()` ga izdvaja u zaseban chunk.
+    import("html5-qrcode")
+      .then(({ Html5Qrcode }) => {
+        if (cancelled) return;
+        const html5 = new Html5Qrcode(SKENER_REGION_ID);
+        skenerRef.current = html5;
+
+        return html5.start(
+          { facingMode: aktivnaKamera },
+          { fps: 10, qrbox: { width: 250, height: 250 } },
+          (decodedText) => {
+            if (cancelled) return;
+            cancelled = true;
+            html5
+              .stop()
+              .catch(() => {})
+              .finally(() => onDetektovan(decodedText.trim()));
+          },
+          () => {
+            // ignore: ovo se zove često (jednom po frame-u kad nema match-a)
+          }
+        );
+      })
       .catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
         if (
