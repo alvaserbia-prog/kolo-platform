@@ -28,7 +28,13 @@ export async function GET(
   if (/^https?:\/\//i.test(filePath)) {
     const r2Baza = (process.env.R2_PUBLIC_URL ?? "").replace(/\/$/, "");
     if (r2Baza && filePath.startsWith(r2Baza + "/")) {
-      return NextResponse.redirect(filePath, 308);
+      const res = NextResponse.redirect(filePath, 308);
+      // Dug keš na redirect-u: next/image (i Vercel CDN) prate ovaj međukorak i
+      // bez ovoga pokupe `max-age=0` → optimizovana slika ostaje slabo keširana
+      // (Lighthouse „Use efficient cache lifetimes" = ttl 0). Slika oglasa je
+      // nepromenljiva (URL sadrži UUID fajla), pa je dug `immutable` keš bezbedan.
+      res.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+      return res;
     }
     return new NextResponse("Nedozvoljen izvor slike", { status: 404 });
   }
