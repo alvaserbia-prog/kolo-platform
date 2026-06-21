@@ -240,7 +240,7 @@ function SidebarContent({
   return (
     <>
       {/* Brending i jezik switcher su u headeru (gore-levo); sidebar je samo navigacija */}
-      <nav className="flex-1 px-2.5 pt-4 pb-3 space-y-1 overflow-y-auto">
+      <nav className="flex-1 pl-1 pr-2.5 pt-4 pb-3 space-y-1 overflow-y-auto">
         {grupe.map((grupa, gi) => (
           <div key={grupa.label ?? `grupa-${gi}`} className={gi > 0 ? "pt-2" : ""}>
             {grupa.collapsible ? (
