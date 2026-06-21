@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import OsnivaciTab from "./OsnivaciTab";
@@ -1493,9 +1493,13 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [izmeniKorisnik, setIzmeniKorisnik] = useState<KorisnikInfo | null>(null);
 
-  const filtered = users.filter((u) =>
-    u.pseudonim.toLowerCase().includes(filter.toLowerCase())
+  const q = filter.toLowerCase().trim();
+  const filtered = useMemo(
+    () => users.filter((u) => u.pseudonim.toLowerCase().includes(q)),
+    [users, q]
   );
+  const tl = useMemo(() => tipLabel(t), [t]);
+  const anl = useMemo(() => adminNivoLabel(t), [t]);
 
   async function akcija(userId: string, tip: "suspenduj" | "aktiviraj" | "iskljuci" | "lazni-verifikator") {
     if (tip === "iskljuci" && !confirm(t("korisnici_iskljuci_confirm"))) return;
@@ -1565,7 +1569,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     )}
                   </div>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {tipLabel(t)[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString("sr-RS")} P
+                    {tl[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString("sr-RS")} P
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                 </div>
@@ -1616,7 +1620,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                           : "bg-kolo-bg border border-kolo-border text-kolo-muted hover:bg-kolo-border disabled:opacity-60"
                       }`}
                     >
-                      {adminNivoLabel(t)[nivo]}
+                      {anl[nivo]}
                     </button>
                   ))}
                 </div>

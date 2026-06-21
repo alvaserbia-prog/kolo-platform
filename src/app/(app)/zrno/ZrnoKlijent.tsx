@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import GlasanjeKlijent from "@/app/(app)/glasanje/GlasanjeKlijent";
@@ -52,6 +52,7 @@ export default function ZrnoKlijent(props: Props) {
   const router = useRouter();
   const t = useTranslations("zrno");
   const tc = useTranslations("common");
+  const onRefresh = useCallback(() => router.refresh(), [router]);
 
   const tabs: [Tab, string][] = [
     ["pregled", t("tab_pregled")],
@@ -119,9 +120,9 @@ export default function ZrnoKlijent(props: Props) {
         ))}
       </div>
 
-      {tab === "pregled" && <PregledTab {...props} onRefresh={() => router.refresh()} />}
-      {tab === "trziste" && <TrzisteTab {...props} onRefresh={() => router.refresh()} />}
-      {tab === "glasanje" && <DelegacijaTab {...props} onRefresh={() => router.refresh()} />}
+      {tab === "pregled" && <PregledTab {...props} onRefresh={onRefresh} />}
+      {tab === "trziste" && <TrzisteTab {...props} onRefresh={onRefresh} />}
+      {tab === "glasanje" && <DelegacijaTab {...props} onRefresh={onRefresh} />}
 
       {/* Razdvajač */}
       <div className="border-t border-kolo-border pt-2" />

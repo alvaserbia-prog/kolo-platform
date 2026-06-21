@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, memo } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
@@ -764,6 +764,78 @@ function RangTooltip({ rang, label }: { rang: number; label: string }) {
 
 // ── Članovi ───────────────────────────────────────────────────────────────────
 
+const ClanRed = memo(function ClanRed({
+  c,
+  t,
+  jeZadnji,
+}: {
+  c: Clan;
+  t: ReturnType<typeof useTranslations>;
+  jeZadnji: boolean;
+}) {
+  return (
+    <div className={!jeZadnji ? "border-b border-kolo-border/30" : ""}>
+      {/* Desktop red */}
+      <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_100px] gap-4 px-5 py-3 items-center text-sm">
+        <div className="flex items-center gap-2 min-w-0">
+          <Link
+            href={`/profil/${c.id}`}
+            className="font-medium text-kolo-green-700 hover:underline truncate"
+          >
+            <Pseudonim>{c.pseudonim}</Pseudonim>
+          </Link>
+          {c.verified ? (
+            <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+          ) : (
+            <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
+          )}
+        </div>
+        <span className="text-sm text-kolo-muted truncate">{c.location ?? "—"}</span>
+        <span className="text-right text-sm font-semibold text-kolo-text">
+          {c.balance.toLocaleString("sr-RS")}
+        </span>
+        <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
+          <RangTooltip
+            rang={c.rangDonacije}
+            label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString("sr-RS") })}`}
+          />
+        </div>
+        <span className="text-right text-sm text-kolo-muted">
+          {new Date(c.createdAt).toLocaleDateString("sr-RS", {
+            day: "2-digit", month: "2-digit", year: "2-digit",
+          })}
+        </span>
+      </div>
+      {/* Mobilna kartica */}
+      <div className="sm:hidden px-4 py-3 space-y-1">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
+              <Pseudonim>{c.pseudonim}</Pseudonim>
+            </Link>
+            {c.verified ? (
+              <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+            ) : (
+              <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
+            )}
+          </div>
+          <span className="text-sm font-bold text-kolo-text">
+            {c.balance.toLocaleString("sr-RS")} POEN
+          </span>
+        </div>
+        <div className="flex items-center gap-3 text-xs text-kolo-muted">
+          <span>{t("rang_label")} {c.rangDonacije}</span>
+          <span className="ml-auto">
+            {new Date(c.createdAt).toLocaleDateString("sr-RS", {
+              day: "2-digit", month: "2-digit", year: "2-digit",
+            })}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+});
+
 function ClanoviSekcija({
   clanovi,
   verified,
@@ -790,8 +862,12 @@ function ClanoviSekcija({
     );
   }
 
-  const filtrirani = clanovi.filter((c) =>
-    c.pseudonim.toLowerCase().includes(pretraga.toLowerCase())
+  const filtrirani = useMemo(
+    () =>
+      clanovi.filter((c) =>
+        c.pseudonim.toLowerCase().includes(pretraga.toLowerCase())
+      ),
+    [clanovi, pretraga]
   );
 
   return (
@@ -821,68 +897,12 @@ function ClanoviSekcija({
           </div>
         ) : (
           filtrirani.map((c, i) => (
-            <div
+            <ClanRed
               key={c.id}
-              className={i < filtrirani.length - 1 ? "border-b border-kolo-border/30" : ""}
-            >
-              {/* Desktop red */}
-              <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_100px] gap-4 px-5 py-3 items-center text-sm">
-                <div className="flex items-center gap-2 min-w-0">
-                  <Link
-                    href={`/profil/${c.id}`}
-                    className="font-medium text-kolo-green-700 hover:underline truncate"
-                  >
-                    <Pseudonim>{c.pseudonim}</Pseudonim>
-                  </Link>
-                  {c.verified ? (
-                    <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
-                  ) : (
-                    <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
-                  )}
-                </div>
-                <span className="text-sm text-kolo-muted truncate">{c.location ?? "—"}</span>
-                <span className="text-right text-sm font-semibold text-kolo-text">
-                  {c.balance.toLocaleString("sr-RS")}
-                </span>
-                <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
-                  <RangTooltip
-                    rang={c.rangDonacije}
-                    label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString("sr-RS") })}`}
-                  />
-                </div>
-                <span className="text-right text-sm text-kolo-muted">
-                  {new Date(c.createdAt).toLocaleDateString("sr-RS", {
-                    day: "2-digit", month: "2-digit", year: "2-digit",
-                  })}
-                </span>
-              </div>
-              {/* Mobilna kartica */}
-              <div className="sm:hidden px-4 py-3 space-y-1">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
-                      <Pseudonim>{c.pseudonim}</Pseudonim>
-                    </Link>
-                    {c.verified ? (
-                      <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
-                    ) : (
-                      <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
-                    )}
-                  </div>
-                  <span className="text-sm font-bold text-kolo-text">
-                    {c.balance.toLocaleString("sr-RS")} POEN
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-kolo-muted">
-                  <span>{t("rang_label")} {c.rangDonacije}</span>
-                  <span className="ml-auto">
-                    {new Date(c.createdAt).toLocaleDateString("sr-RS", {
-                      day: "2-digit", month: "2-digit", year: "2-digit",
-                    })}
-                  </span>
-                </div>
-              </div>
-            </div>
+              c={c}
+              t={t}
+              jeZadnji={i === filtrirani.length - 1}
+            />
           ))
         )}
       </div>
@@ -902,11 +922,15 @@ function TransakcijeSekcija({
   const t = useTranslations("sistem");
   const [filter, setFilter] = useState<TxFilter>("sve");
 
-  const filtrirane = transakcije.filter((tx) => {
-    if (filter === "protokol") return tx.fromId === null || tx.toId === null;
-    if (filter === "clanovi") return tx.type === "TRANSFER";
-    return true;
-  });
+  const filtrirane = useMemo(
+    () =>
+      transakcije.filter((tx) => {
+        if (filter === "protokol") return tx.fromId === null || tx.toId === null;
+        if (filter === "clanovi") return tx.type === "TRANSFER";
+        return true;
+      }),
+    [transakcije, filter]
+  );
 
   const filteri: [TxFilter, string][] = [
     ["sve", t("filter_sve")],

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -57,7 +57,7 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
 
   const totalOcekivano = programi.reduce((s, p) => s + (p.enrollment?.ocekivaniDnevni ?? 0), 0);
 
-  async function prijavi(type: string, metadata?: Record<string, unknown>) {
+  const prijavi = useCallback(async (type: string, metadata?: Record<string, unknown>) => {
     setLoading(true); setPoruka(null);
     const res = await fetch(`/api/programi/${type}/prijava`, {
       method: "POST",
@@ -68,7 +68,11 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
     setLoading(false);
     setPoruka({ text: res.ok ? t("prijava_podneta") : (data.error ?? tc("greska_ucitavanja")), ok: res.ok, for: type });
     if (res.ok) { setActiveProgram(null); setTimeout(() => router.refresh(), 1200); }
-  }
+  }, [t, tc, router]);
+
+  const onExpand = useCallback((type: string) => {
+    setActiveProgram((prev) => (prev === type ? null : type));
+  }, []);
 
   const { opticaj, dnevniLimit, emitovanoAm, zahtevanoAm } = emisioniKontekst;
   const emitovanoPct = dnevniLimit > 0 && emitovanoAm !== null ? Math.min(100, Math.round((emitovanoAm / dnevniLimit) * 100)) : 0;
@@ -143,8 +147,8 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
-            onExpand={() => setActiveProgram(activeProgram === p.type ? null : p.type)}
-            onPrijavi={(meta) => prijavi(p.type, meta)}
+            onExpand={onExpand}
+            onPrijavi={prijavi}
           />
         ))}
       </div>
@@ -154,7 +158,7 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
 
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
-function ProgramKartica({
+const ProgramKartica = memo(function ProgramKartica({
   p, isVerified, imaPunIndeks, protokolBalance, loading, poruka, expanded, onExpand, onPrijavi,
 }: {
   p: ProgramInfo;
@@ -164,8 +168,8 @@ function ProgramKartica({
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
   expanded: boolean;
-  onExpand: () => void;
-  onPrijavi: (meta?: Record<string, unknown>) => void;
+  onExpand: (type: string) => void;
+  onPrijavi: (type: string, meta?: Record<string, unknown>) => void;
 }) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
@@ -174,6 +178,9 @@ function ProgramKartica({
 
   // Socijalni programi zahtevaju pun indeks stvarnosti (100%) — anti-malverzacija (čl. 4).
   const mozePrijaviti = isVerified && imaPunIndeks && p.programAktivan;
+
+  const handleExpand = useCallback(() => onExpand(p.type), [onExpand, p.type]);
+  const handlePrijavi = useCallback((meta?: Record<string, unknown>) => onPrijavi(p.type, meta), [onPrijavi, p.type]);
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -201,13 +208,13 @@ function ProgramKartica({
         {/* Akcija dugme */}
         <div className="ml-4 shrink-0">
           {!enStatus && mozePrijaviti && (
-            <button onClick={onExpand}
+            <button onClick={handleExpand}
               className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
               {t("prijavi_se")}
             </button>
           )}
           {enStatus === "REJECTED" && mozePrijaviti && (
-            <button onClick={onExpand}
+            <button onClick={handleExpand}
               className="px-3 py-1.5 border border-kolo-green-500 text-kolo-green-700 text-xs font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors">
               {t("pokusaj_ponovo")}
             </button>
@@ -221,8 +228,8 @@ function ProgramKartica({
           <PrijavnaForma
             type={p.type}
             loading={loading}
-            onSubmit={onPrijavi}
-            onCancel={onExpand}
+            onSubmit={handlePrijavi}
+            onCancel={handleExpand}
           />
           {poruka && (
             <p className={`mt-3 text-sm px-4 py-2 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
@@ -265,7 +272,7 @@ function ProgramKartica({
       })()}
     </div>
   );
-}
+});
 
 // ── Forme za prijavu ───────────────────────────────────────────────────────────
 
