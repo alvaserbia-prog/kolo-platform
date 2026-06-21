@@ -11,8 +11,13 @@ export default async function NoviOglasPage() {
 
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { location: true },
+    select: { location: true, telefon: true },
   });
 
-  return <NoviOglasForma defaultLocation={korisnik?.location ?? ""} />;
+  return (
+    <NoviOglasForma
+      defaultLocation={korisnik?.location ?? ""}
+      defaultPhone={korisnik?.telefon ?? ""}
+    />
+  );
 }

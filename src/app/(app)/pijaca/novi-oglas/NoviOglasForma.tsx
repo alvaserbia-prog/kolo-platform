@@ -65,7 +65,7 @@ async function kompresujSliku(file: File): Promise<File> {
   }
 }
 
-export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocation?: string }) {
+export default function NoviOglasForma({ defaultLocation = "", defaultPhone = "" }: { defaultLocation?: string; defaultPhone?: string }) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [title, setTitle] = useState("");
@@ -75,7 +75,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
   const [cenaDo, setCenaDo] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState(defaultLocation);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(defaultPhone);
   const [slike, setSlike] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [obrada, setObrada] = useState(false);

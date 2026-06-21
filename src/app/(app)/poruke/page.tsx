@@ -77,6 +77,9 @@ function PorukeContent() {
   useEffect(() => {
     if (aktivnaKonvId) {
       ucitajPoruke(aktivnaKonvId);
+      // Deep-link (npr. „Kontaktiraj prodavca") otvara konverzaciju direktno —
+      // na mobilnom prebaci na chat prikaz, inače ostaje skrivena lista.
+      setMobilniPrikaz("chat");
     } else {
       setPoruke([]);
       setDrugiPseudonim("");
