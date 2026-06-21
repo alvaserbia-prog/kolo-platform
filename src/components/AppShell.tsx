@@ -90,7 +90,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
       {/* Skrol je na punoj širini viewporta → skrolbar je uz desnu ivicu ekrana
           (ranije je bio na centriranom <main> pa je „visio" u sredini desno). */}
       <div className="flex-1 min-h-0 overflow-y-auto">
-      <div className="flex w-full min-w-0 pl-[max(0px,calc((100%_-_1140px)_/_2))]">
+      <div className="flex w-full min-w-0">
         <Sidebar
           verified={verified}
           isAdmin={isAdmin}
