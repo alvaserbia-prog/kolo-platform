@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
@@ -72,44 +73,43 @@ export default function JavniProfilPage() {
     OTPIS_ZRNO: t("trx_otpis_zrno"),
   };
 
-  const [profil, setProfil] = useState<ProfilData | null>(null);
-  const [greska, setGreska] = useState("");
-  const [ucitavam, setUcitavam] = useState(true);
   const [ucitavamJos, setUcitavamJos] = useState(false);
   const [cursor, setCursor] = useState<string | null>(null);
   const [sveTrx, setSveTrx] = useState<Transakcija[]>([]);
 
+  const {
+    data: profil = null,
+    isLoading: ucitavam,
+    error: upit_greska,
+  } = useQuery({
+    queryKey: ["profil", id],
+    queryFn: async (): Promise<ProfilData> => {
+      const r = await fetch(`/api/profil/${id}`);
+      const body = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
+        // na /tabla-jemstva i prikazivalo treperenje stanja te stranice.
+        // Umesto toga prikaži jasnu poruku na samoj profil stranici.
+        throw new Error(
+          r.status === 403 ? t("pristup_samo_verifikovani")
+            : r.status === 404 ? t("profil_nije_pronadjen")
+            : (body.error ?? t("greska_ucitavanja"))
+        );
+      }
+      return body;
+    },
+    retry: false,
+  });
+
+  const greska = upit_greska ? (upit_greska as Error).message : "";
+
+  // Iniciraj lokalnu listu transakcija/kursor iz učitanog profila (paginacija ih dalje proširuje).
   useEffect(() => {
-    let aktivno = true;
-    fetch(`/api/profil/${id}`)
-      .then(async (r) => {
-        const body = await r.json().catch(() => ({}));
-        if (!r.ok) {
-          // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
-          // na /tabla-jemstva i prikazivalo treperenje stanja te stranice.
-          // Umesto toga prikaži jasnu poruku na samoj profil stranici.
-          if (aktivno) {
-            setGreska(
-              r.status === 403 ? t("pristup_samo_verifikovani")
-                : r.status === 404 ? t("profil_nije_pronadjen")
-                : (body.error ?? t("greska_ucitavanja"))
-            );
-            setUcitavam(false);
-          }
-          return null;
-        }
-        return body;
-      })
-      .then((data) => {
-        if (!data || !aktivno) return;
-        setProfil(data);
-        setSveTrx(data.transakcije);
-        setCursor(data.nextCursor);
-        setUcitavam(false);
-      })
-      .catch(() => { if (aktivno) { setGreska(t("greska_ucitavanja")); setUcitavam(false); } });
-    return () => { aktivno = false; };
-  }, [id, t]);
+    if (profil) {
+      setSveTrx(profil.transakcije);
+      setCursor(profil.nextCursor);
+    }
+  }, [profil]);
 
   const ucitajJos = useCallback(async () => {
     if (!cursor || ucitavamJos) return;

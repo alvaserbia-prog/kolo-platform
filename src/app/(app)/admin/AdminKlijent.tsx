@@ -3,11 +3,16 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import OsnivaciTab from "./OsnivaciTab";
-import PokroviteljPrijaveTab from "./PokroviteljPrijaveTab";
-import NadzorTab, { NadzorNalaz } from "./NadzorTab";
+import dynamic from "next/dynamic";
+import type { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
 import Pseudonim from "@/components/Pseudonim";
+
+// Teški tabovi iz zasebnih fajlova — lazy-load (smanjuje početni admin bundle).
+// Svi su `export default`, pa dynamic koristi default export direktno.
+const OsnivaciTab = dynamic(() => import("./OsnivaciTab"), { ssr: false });
+const PokroviteljPrijaveTab = dynamic(() => import("./PokroviteljPrijaveTab"), { ssr: false });
+const NadzorTab = dynamic(() => import("./NadzorTab"), { ssr: false });
 
 interface KorisnikInfo {
   id: string;

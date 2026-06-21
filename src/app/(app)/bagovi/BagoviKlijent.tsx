@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
@@ -41,23 +42,21 @@ export default function BagoviKlijent() {
   const { data: session } = useSession();
   const jeAdmin = session?.user.admin === "ADMIN" || session?.user.admin === "SUPERADMIN";
 
-  const [bagovi, setBagovi] = useState<Bag[] | null>(null);
   const [naslov, setNaslov] = useState("");
   const [opis, setOpis] = useState("");
   const [slanje, setSlanje] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
   const [uspeh, setUspeh] = useState(false);
 
-  const ucitaj = useCallback(() => {
-    fetch("/api/bagovi")
-      .then((r) => r.json())
-      .then((d) => setBagovi(Array.isArray(d) ? d : []))
-      .catch(() => setBagovi([]));
-  }, []);
-
-  useEffect(() => {
-    ucitaj();
-  }, [ucitaj]);
+  const queryClient = useQueryClient();
+  const { data: bagovi = null, refetch } = useQuery({
+    queryKey: ["bagovi"],
+    queryFn: async (): Promise<Bag[]> => {
+      const r = await fetch("/api/bagovi");
+      const d = await r.json();
+      return Array.isArray(d) ? d : [];
+    },
+  });
 
   async function posalji(e: React.FormEvent) {
     e.preventDefault();
@@ -82,7 +81,7 @@ export default function BagoviKlijent() {
       setNaslov("");
       setOpis("");
       setUspeh(true);
-      ucitaj();
+      await refetch();
     } catch {
       setGreska(tc("greska_ucitavanja"));
     } finally {
@@ -91,7 +90,8 @@ export default function BagoviKlijent() {
   }
 
   async function promeniStatus(id: string, status: BugStatus) {
-    setBagovi((prev) =>
+    // Optimističko ažuriranje keša (instant promena statusa u UI), kao i ranije.
+    queryClient.setQueryData<Bag[] | null>(["bagovi"], (prev) =>
       prev ? prev.map((b) => (b.id === id ? { ...b, status } : b)) : prev
     );
     await fetch(`/api/admin/bagovi/${id}`, {
@@ -99,7 +99,7 @@ export default function BagoviKlijent() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
     }).catch(() => {});
-    ucitaj();
+    await refetch();
   }
 
   const sortirani = bagovi

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
@@ -22,8 +23,6 @@ export default function TablaJemstvaKlijent({
 }) {
   const t = useTranslations("tablaJemstva");
   const router = useRouter();
-  const [zahtevi, setZahtevi] = useState<Zahtev[]>([]);
-  const [ucitavanje, setUcitavanje] = useState(true);
   const [kontakti, setKontakti] = useState<Record<string, string>>({});
   const [radnja, setRadnja] = useState<string | null>(null);
   // Inline potvrda povlačenja (native confirm() je nepouzdan na mobilnim browserima)
@@ -40,19 +39,17 @@ export default function TablaJemstvaKlijent({
   const [pristanak, setPristanak] = useState(false);
   const [greska, setGreska] = useState("");
 
-  const ucitaj = useCallback(async () => {
-    setUcitavanje(true);
-    const res = await fetch("/api/tabla-jemstva");
-    if (res.ok) {
+  // React Query: lista zahteva je keširana (deli se i osvežava kroz keš), umesto
+  // ručnog useState+useEffect koji je refetchovao na svaku navigaciju.
+  const { data: zahtevi = [], isLoading: ucitavanje, refetch } = useQuery({
+    queryKey: ["tabla-jemstva"],
+    queryFn: async (): Promise<Zahtev[]> => {
+      const res = await fetch("/api/tabla-jemstva");
+      if (!res.ok) throw new Error("Greška pri dohvatanju table jemstva");
       const d = await res.json();
-      setZahtevi(d.zahtevi ?? []);
-    }
-    setUcitavanje(false);
-  }, []);
-
-  useEffect(() => {
-    ucitaj();
-  }, [ucitaj]);
+      return d.zahtevi ?? [];
+    },
+  });
 
   const mojAktivan = zahtevi.find((z) => z.mojZahtev);
 
@@ -70,7 +67,7 @@ export default function TablaJemstvaKlijent({
       setTekst("");
       setKontakt("");
       setPristanak(false);
-      await ucitaj();
+      await refetch();
     } else {
       setGreska(d.error ?? t("greska_objava"));
     }
@@ -82,7 +79,7 @@ export default function TablaJemstvaKlijent({
     setRadnja(id);
     const res = await fetch(`/api/tabla-jemstva/${id}`, { method: "DELETE" });
     setRadnja(null);
-    if (res.ok) await ucitaj();
+    if (res.ok) await refetch();
     else { const d = await res.json().catch(() => ({})); setAkcijaGreska(d.error ?? t("greska_generalna")); }
   }
 
@@ -121,7 +118,7 @@ export default function TablaJemstvaKlijent({
     if (res.ok) {
       setUkloniId(null);
       setRazlogUklanjanja("");
-      await ucitaj();
+      await refetch();
     } else {
       const d = await res.json().catch(() => ({}));
       setAkcijaGreska(d.error ?? t("greska_generalna"));
