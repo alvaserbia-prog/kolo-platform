@@ -110,16 +110,17 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
     >
       {/* Desktop prikaz */}
       <div className="hidden sm:grid grid-cols-[7rem_4.5rem_1fr_1.5rem_1fr_minmax(0,1.5fr)_7rem] gap-x-3 items-center">
-        {/* Datum */}
+        {/* Datum — timeZone zaključan da SSR (UTC) i klijent (lokalno) daju isti
+            string; inače React hydration mismatch (#418) → suvišno preiscrtavanje. */}
         <p className="text-sm text-kolo-muted leading-tight">
           {new Date(t.createdAt).toLocaleDateString("sr-RS", {
-            day: "2-digit", month: "2-digit", year: "numeric",
+            day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Belgrade",
           })}
         </p>
         {/* Vreme */}
         <p className="text-sm text-kolo-muted leading-tight">
           {new Date(t.createdAt).toLocaleTimeString("sr-RS", {
-            hour: "2-digit", minute: "2-digit",
+            hour: "2-digit", minute: "2-digit", timeZone: "Europe/Belgrade",
           })}
         </p>
         {/* Pošiljalac */}
@@ -192,7 +193,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
             <p className="text-xs text-kolo-muted mt-0.5">
               {new Date(t.createdAt).toLocaleString("sr-RS", {
                 day: "2-digit", month: "2-digit", year: "numeric",
-                hour: "2-digit", minute: "2-digit",
+                hour: "2-digit", minute: "2-digit", timeZone: "Europe/Belgrade",
               })}
             </p>
           </div>
