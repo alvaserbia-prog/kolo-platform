@@ -21,6 +21,11 @@ function imaPunPristup(verified: boolean, indeksStvarnosti: number): boolean {
   return verified && indeksStvarnosti >= FUNKCIONALNI_PRAG_INDEKSA;
 }
 
+// Koliko često jwt callback sme da osveži status (admin/verified/pseudonim) iz
+// baze. Između intervala se koriste vrednosti iz JWT-a, bez DB poziva — vidi
+// objašnjenje u jwt callbacku. 5 min = razuman kompromis brzina/svežina.
+const OSVEZI_INTERVAL_MS = 5 * 60 * 1000;
+
 /**
  * Dok je MAINTENANCE_MODE uključen, prijava je dozvoljena samo ranim prihvatiocima
  * koji su otključali pristup (validan kolačić ranog pristupa).
@@ -163,6 +168,7 @@ export const authOptions: NextAuthOptions = {
           token.admin = user.admin;
           token.verified = user.verified;
           token.oauthPending = user.oauthPending ?? false;
+          token.osvezenoAt = Date.now(); // sveže iz authorize() — preskoči odmah refetch
         }
       } else if (trigger === "update" && (session as { userId?: string } | undefined)?.userId) {
         // /oauth/dovrsi je upravo kreirao nalog — preuzmi pravi id i očisti pending podatke.
@@ -178,6 +184,7 @@ export const authOptions: NextAuthOptions = {
           token.admin = dbUser.admin;
           token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
           token.oauthPending = dbUser.oauthPending;
+          token.osvezenoAt = Date.now();
           token.pendingEmail = undefined;
           token.pendingProvider = undefined;
           token.pendingOauthId = undefined;
@@ -185,24 +192,35 @@ export const authOptions: NextAuthOptions = {
           token.pendingAvatar = undefined;
         }
       } else if (token.id) {
-        // Osveži admin/verified/tipKorisnika iz baze pri svakom zahtevu —
-        // inače middleware (getToken) gleda zastareo JWT i npr. novom adminu
-        // i dalje brani /admin dok se ne odjavi/prijavi.
-        try {
-          const dbUser = await prisma.user.findUnique({
-            where: { id: token.id as string },
-            select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
-          });
-          if (dbUser) {
-            token.admin = dbUser.admin;
-            // K5: pun pristup zavisi od indeksa ≥ 10%, ne samo od `verified`.
-            token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
-            token.tipKorisnika = dbUser.tipKorisnika;
-            token.pseudonim = dbUser.pseudonim;
-            token.oauthPending = dbUser.oauthPending;
+        // Osveži admin/verified/tipKorisnika iz baze — ali NE na svaki zahtev.
+        // Ranije je ovo bio `findUnique` po SVAKOM pozivu (a `getServerSession`
+        // se zove u 100+ fajlova, više puta po renderu), pa je svaki klik radio
+        // nekoliko trans-atlantskih DB poziva i kočio sajt 2–3s. Sada se osvežava
+        // najviše jednom u OSVEZI_INTERVAL_MS; između toga se koriste vrednosti
+        // iz JWT-a. Posledica: promena admin/verified/pseudonim statusa se vidi
+        // sa zakašnjenjem do tog intervala (npr. novom adminu /admin proradi za
+        // ≤ par minuta umesto odmah) — prihvatljiv kompromis za brzinu. Tok koji
+        // mora odmah da vidi promenu i dalje koristi `trigger === "update"` granu.
+        const sada = Date.now();
+        const osvezenoAt = (token.osvezenoAt as number | undefined) ?? 0;
+        if (sada - osvezenoAt > OSVEZI_INTERVAL_MS) {
+          try {
+            const dbUser = await prisma.user.findUnique({
+              where: { id: token.id as string },
+              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
+            });
+            if (dbUser) {
+              token.admin = dbUser.admin;
+              // K5: pun pristup zavisi od indeksa ≥ 10%, ne samo od `verified`.
+              token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
+              token.tipKorisnika = dbUser.tipKorisnika;
+              token.pseudonim = dbUser.pseudonim;
+              token.oauthPending = dbUser.oauthPending;
+              token.osvezenoAt = sada;
+            }
+          } catch {
+            // zadrži postojeće vrednosti iz JWT-a
           }
-        } catch {
-          // zadrži postojeće vrednosti iz JWT-a
         }
       }
       return token;

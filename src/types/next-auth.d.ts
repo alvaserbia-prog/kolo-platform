@@ -40,6 +40,8 @@ declare module "next-auth/jwt" {
     admin?: string;
     verified: boolean;
     oauthPending?: boolean;
+    // Vreme (ms) poslednjeg osvežavanja statusa iz baze — throttle u jwt callbacku
+    osvezenoAt?: number;
     // Podaci nedovršene OAuth registracije
     pendingEmail?: string;
     pendingProvider?: string;

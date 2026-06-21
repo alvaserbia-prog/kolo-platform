@@ -307,7 +307,7 @@ function PorukeIkona({ ariaLabel }: { ariaLabel: string }) {
 
   useEffect(() => {
     ucitaj();
-    const interval = setInterval(ucitaj, 15_000);
+    const interval = setInterval(ucitaj, 30_000);
     // Stranica /poruke šalje "poruke-procitane" kad otvori konverzaciju i
     // označi poruke pročitanim — tada odmah osvežavamo badge.
     window.addEventListener("poruke-procitane", ucitaj);
@@ -348,7 +348,7 @@ function BellNotifikacije() {
 
   useEffect(() => {
     ucitaj();
-    const interval = setInterval(ucitaj, 15_000);
+    const interval = setInterval(ucitaj, 30_000);
     return () => clearInterval(interval);
   }, []);
 

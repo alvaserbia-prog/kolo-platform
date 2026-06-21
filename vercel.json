@@ -1,5 +1,6 @@
 {
   "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
+  "regions": ["fra1"],
   "crons": [
     {
       "path": "/api/cron/zero-sum",
