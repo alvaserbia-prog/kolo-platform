@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import UspehKartica from "@/components/UspehKartica";
 
 // qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
 // LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne
@@ -123,6 +124,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   const [sugestije, setSugestije] = useState<string[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
   const [aktivniIndex, setAktivniIndex] = useState(-1);
+  const [uspeh, setUspeh] = useState<{ iznos: number; pseudonim: string } | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listaRef = useRef<HTMLUListElement>(null);
@@ -197,12 +199,23 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? t("send_greska")); return; }
-      onSuccess();
+      setUspeh({ iznos, pseudonim: pseudonim.trim() });
     } catch {
       setError(t("send_greska"));
     } finally {
       setLoading(false);
     }
+  }
+
+  if (uspeh) {
+    return (
+      <UspehKartica
+        naslov={t("send_uspeh_naslov")}
+        opis={t("send_uspeh_opis", { iznos: uspeh.iznos.toLocaleString("sr-RS"), pseudonim: uspeh.pseudonim })}
+        dugmeTekst={t("send_uspeh_dugme")}
+        onDugme={onSuccess}
+      />
+    );
   }
 
   return (
