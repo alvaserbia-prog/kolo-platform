@@ -14,7 +14,7 @@ export default async function PijacaPage() {
     orderBy: { createdAt: "desc" },
     take: 60,
     select: {
-      id: true, title: true, description: true,
+      id: true, title: true, description: true, tip: true,
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
       sellerId: true,
@@ -46,6 +46,7 @@ export default async function PijacaPage() {
           id: l.id,
           title: l.title,
           description: l.description,
+          tip: l.tip,
           cenaTip: l.cenaTip,
           price: l.price,
           cenaDo: l.cenaDo,

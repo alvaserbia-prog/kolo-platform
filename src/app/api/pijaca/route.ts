@@ -20,8 +20,10 @@ export async function GET(req: NextRequest) {
   const sortiranje = searchParams.get("sort") ?? "novo";
   const minCena = parseInt(searchParams.get("min") ?? "0") || 0;
   const maxCena = parseInt(searchParams.get("max") ?? "0") || 0;
+  const tip = (searchParams.get("tip") ?? "").toUpperCase();
 
   const where: Record<string, unknown> = { status: "ACTIVE" };
+  if (tip === "PONUDA" || tip === "POTRAZNJA") where.tip = tip;
   if (kategorija && KATEGORIJE.includes(kategorija)) where.category = kategorija;
   if (pretraga) where.title = { contains: pretraga, mode: "insensitive" };
   if (minCena > 0 || maxCena > 0) {
@@ -41,7 +43,7 @@ export async function GET(req: NextRequest) {
     orderBy,
     take: 60,
     select: {
-      id: true, title: true, description: true,
+      id: true, title: true, description: true, tip: true,
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
       seller: { select: { pseudonim: true, verified: true } },
@@ -65,6 +67,7 @@ export async function POST(req: NextRequest) {
   const priceRaw = formData.get("price") as string;
   const cenaDoRaw = formData.get("cenaDo") as string;
   const cenaTipRaw = formData.get("cenaTip") as string;
+  const tip = ((formData.get("tip") as string) ?? "PONUDA").toUpperCase() === "POTRAZNJA" ? "POTRAZNJA" : "PONUDA";
   const category = (formData.get("category") as string)?.trim();
   const location = (formData.get("location") as string)?.trim() ?? "";
   const phone = (formData.get("phone") as string)?.trim() ?? "";
@@ -80,7 +83,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Lokacija može imati najviše 80 karaktera." }, { status: 400 });
   if (phone.length > 40)
     return NextResponse.json({ error: "Telefon može imati najviše 40 karaktera." }, { status: 400 });
-  const cena = parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
+  // Kod potražnje budžet se uvek dogovara — cena se ne unosi (uvek DOGOVOR).
+  const cena = tip === "POTRAZNJA"
+    ? { ok: true as const, cenaTip: "DOGOVOR" as const, price: null, cenaDo: null }
+    : parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
   if (!cena.ok)
     return NextResponse.json({ error: cena.error }, { status: 400 });
   if (!KATEGORIJE.includes(category))
@@ -129,6 +135,7 @@ export async function POST(req: NextRequest) {
     data: {
       id: listingId,
       sellerId: session.user.id,
+      tip,
       title,
       description,
       cenaTip: cena.cenaTip,

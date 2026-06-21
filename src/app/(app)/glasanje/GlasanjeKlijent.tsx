@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -31,6 +31,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
   const t = useTranslations("glasanje");
   const router = useRouter();
   const [showNovi, setShowNovi] = useState(false);
+  const onRefresh = useCallback(() => router.refresh(), [router]);
 
   return (
     <div className="space-y-6">
@@ -72,7 +73,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
       ) : (
         <div className="space-y-3">
           {predlozi.map((p) => (
-            <PredlogKartica key={p.id} p={p} mojaGlasackaMoc={mojaGlasackaMoc} onRefresh={() => router.refresh()} />
+            <PredlogKartica key={p.id} p={p} mojaGlasackaMoc={mojaGlasackaMoc} onRefresh={onRefresh} />
           ))}
         </div>
       )}
@@ -82,7 +83,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
 
 // ── Kartica predloga ──────────────────────────────────────────────────────────
 
-function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGlasackaMoc: number; onRefresh: () => void }) {
+const PredlogKartica = memo(function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGlasackaMoc: number; onRefresh: () => void }) {
   const t = useTranslations("glasanje");
   const tc = useTranslations("common");
   const [loading, setLoading] = useState<boolean | null>(null);
@@ -176,7 +177,7 @@ function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGla
       {poruka && <p className="text-xs text-kolo-danger">{poruka}</p>}
     </div>
   );
-}
+});
 
 // ── Nova predlog forma ────────────────────────────────────────────────────────
 

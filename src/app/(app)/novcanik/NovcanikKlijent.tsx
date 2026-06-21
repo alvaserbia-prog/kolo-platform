@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo, memo } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
@@ -48,12 +48,12 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
     return () => { aktivno = false; };
   }, []);
 
-  const filtered = transakcije.filter((tx) => {
+  const filtered = useMemo(() => transakcije.filter((tx) => {
     if (filter === "primljeno") return tx.primio && tx.type === "TRANSFER";
     if (filter === "poslato") return !tx.primio && tx.type === "TRANSFER";
     if (filter === "emisije") return tx.type !== "TRANSFER";
     return true;
-  });
+  }), [transakcije, filter]);
 
   return (
     <div className="space-y-6">
@@ -188,108 +188,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_opis")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("col_iznos")}</span>
             </div>
-            {filtered.map((t, i) => (
-              <div
-                key={t.id}
-                className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
-              >
-                {/* Desktop prikaz */}
-                <div className="hidden sm:grid grid-cols-[7rem_4.5rem_1fr_1.5rem_1fr_minmax(0,1.5fr)_7rem] gap-x-3 items-center">
-                  {/* Datum */}
-                  <p className="text-sm text-kolo-muted leading-tight">
-                    {new Date(t.createdAt).toLocaleDateString("sr-RS", {
-                      day: "2-digit", month: "2-digit", year: "numeric",
-                    })}
-                  </p>
-                  {/* Vreme */}
-                  <p className="text-sm text-kolo-muted leading-tight">
-                    {new Date(t.createdAt).toLocaleTimeString("sr-RS", {
-                      hour: "2-digit", minute: "2-digit",
-                    })}
-                  </p>
-                  {/* Pošiljalac */}
-                  <div className="min-w-0">
-                    {t.primio ? (
-                      t.drugiId ? (
-                        <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                          <Pseudonim>{t.drugiPseudonim}</Pseudonim>
-                        </a>
-                      ) : (
-                        <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
-                      )
-                    ) : (
-                      <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
-                    )}
-                  </div>
-                  {/* Strelica */}
-                  <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
-                  {/* Primalac */}
-                  <div className="min-w-0">
-                    {t.primio ? (
-                      <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
-                    ) : (
-                      t.drugiId ? (
-                        <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
-                          <Pseudonim>{t.drugiPseudonim}</Pseudonim>
-                        </a>
-                      ) : (
-                        <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
-                      )
-                    )}
-                  </div>
-                  {/* Opis */}
-                  <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
-                  {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
-                  <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-                    {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
-                  </span>
-                </div>
-
-                {/* Mobilna kompaktna kartica */}
-                <div className="sm:hidden">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-1.5 text-sm min-w-0">
-                        {t.primio ? (
-                          t.drugiId ? (
-                            <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
-                              <Pseudonim>{t.drugiPseudonim}</Pseudonim>
-                            </a>
-                          ) : (
-                            <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
-                          )
-                        ) : (
-                          <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
-                        )}
-                        <span className="text-kolo-muted shrink-0">→</span>
-                        {t.primio ? (
-                          <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
-                        ) : (
-                          t.drugiId ? (
-                            <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
-                              <Pseudonim>{t.drugiPseudonim}</Pseudonim>
-                            </a>
-                          ) : (
-                            <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
-                          )
-                        )}
-                      </div>
-                      <p className="text-xs text-kolo-muted mt-0.5">
-                        {new Date(t.createdAt).toLocaleString("sr-RS", {
-                          day: "2-digit", month: "2-digit", year: "numeric",
-                          hour: "2-digit", minute: "2-digit",
-                        })}
-                      </p>
-                    </div>
-                    <span className={`text-sm font-bold text-right shrink-0 ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-                      {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
-                    </span>
-                  </div>
-                  {t.description && (
-                    <p className="mt-1 text-xs text-kolo-muted/70 truncate">{t.description}</p>
-                  )}
-                </div>
-              </div>
+            {filtered.map((tx, i) => (
+              <TxRed
+                key={tx.id}
+                t={tx}
+                pseudonim={pseudonim}
+                jePoslednji={i === filtered.length - 1}
+              />
             ))}
           </div>
         )}
@@ -297,6 +202,116 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
     </div>
   );
 }
+
+// ── Red istorije transakcija (memo) ───────────────────────────────────────────
+// Izdvojen u zasebnu memo-komponentu da otvaranje QR/Pošalji modala i razrešenje
+// /api/zrno fetch-a NE re-renderuju ceo spisak transakcija. `t` je transakcija
+// (kao u originalu); prevodi se ovde ne koriste.
+
+const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcija; pseudonim: string; jePoslednji: boolean }) {
+  return (
+    <div
+      className={`px-4 py-2.5 ${!jePoslednji ? "border-b border-kolo-border" : ""}`}
+    >
+      {/* Desktop prikaz */}
+      <div className="hidden sm:grid grid-cols-[7rem_4.5rem_1fr_1.5rem_1fr_minmax(0,1.5fr)_7rem] gap-x-3 items-center">
+        {/* Datum */}
+        <p className="text-sm text-kolo-muted leading-tight">
+          {new Date(t.createdAt).toLocaleDateString("sr-RS", {
+            day: "2-digit", month: "2-digit", year: "numeric",
+          })}
+        </p>
+        {/* Vreme */}
+        <p className="text-sm text-kolo-muted leading-tight">
+          {new Date(t.createdAt).toLocaleTimeString("sr-RS", {
+            hour: "2-digit", minute: "2-digit",
+          })}
+        </p>
+        {/* Pošiljalac */}
+        <div className="min-w-0">
+          {t.primio ? (
+            t.drugiId ? (
+              <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                <Pseudonim>{t.drugiPseudonim}</Pseudonim>
+              </a>
+            ) : (
+              <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
+            )
+          ) : (
+            <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
+          )}
+        </div>
+        {/* Strelica */}
+        <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
+        {/* Primalac */}
+        <div className="min-w-0">
+          {t.primio ? (
+            <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
+          ) : (
+            t.drugiId ? (
+              <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                <Pseudonim>{t.drugiPseudonim}</Pseudonim>
+              </a>
+            ) : (
+              <span className="text-base text-kolo-muted truncate block"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
+            )
+          )}
+        </div>
+        {/* Opis */}
+        <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
+        {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
+        <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+          {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+        </span>
+      </div>
+
+      {/* Mobilna kompaktna kartica */}
+      <div className="sm:hidden">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 text-sm min-w-0">
+              {t.primio ? (
+                t.drugiId ? (
+                  <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                    <Pseudonim>{t.drugiPseudonim}</Pseudonim>
+                  </a>
+                ) : (
+                  <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
+                )
+              ) : (
+                <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
+              )}
+              <span className="text-kolo-muted shrink-0">→</span>
+              {t.primio ? (
+                <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
+              ) : (
+                t.drugiId ? (
+                  <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                    <Pseudonim>{t.drugiPseudonim}</Pseudonim>
+                  </a>
+                ) : (
+                  <span className="text-kolo-muted truncate"><Pseudonim>{t.drugiPseudonim}</Pseudonim></span>
+                )
+              )}
+            </div>
+            <p className="text-xs text-kolo-muted mt-0.5">
+              {new Date(t.createdAt).toLocaleString("sr-RS", {
+                day: "2-digit", month: "2-digit", year: "numeric",
+                hour: "2-digit", minute: "2-digit",
+              })}
+            </p>
+          </div>
+          <span className={`text-sm font-bold text-right shrink-0 ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+            {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
+          </span>
+        </div>
+        {t.description && (
+          <p className="mt-1 text-xs text-kolo-muted/70 truncate">{t.description}</p>
+        )}
+      </div>
+    </div>
+  );
+});
 
 // ── Forma za upis POEN-a ──────────────────────────────────────────────────────
 

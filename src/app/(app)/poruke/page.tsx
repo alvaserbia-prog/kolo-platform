@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, Suspense } from "react";
+import { useState, useEffect, useRef, useCallback, memo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -52,7 +52,10 @@ function PorukeContent() {
     const res = await fetch("/api/poruke");
     if (res.ok) {
       const data = await res.json();
-      setKonverzacije(data.konverzacije ?? []);
+      const nove: Konverzacija[] = data.konverzacije ?? [];
+      // Bail-out: ako se lista nije promenila (polling na 5s), NE diraj state —
+      // inače bi se cela lista konverzacija re-renderovala svakih 5s bez razloga.
+      setKonverzacije((prev) => (istiKonv(prev, nove) ? prev : nove));
       if (typeof data.verified === "boolean") setVerified(data.verified);
     }
   }, []);
@@ -61,7 +64,10 @@ function PorukeContent() {
     const res = await fetch(`/api/poruke/${konvId}`);
     if (!res.ok) return;
     const data = await res.json();
-    setPoruke(data.poruke ?? []);
+    const nove: Poruka[] = data.poruke ?? [];
+    // Bail-out: ako nema novih poruka, zadrži istu referencu — time se gasi i
+    // re-render svih mehurića i nasilni scroll na dno svakih 5s (vidi efekat).
+    setPoruke((prev) => (istePoruke(prev, nove) ? prev : nove));
     setDrugiPseudonim(data.drugiUser?.pseudonim ?? "");
     setDrugiId(data.drugiUser?.id ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
@@ -97,10 +103,19 @@ function PorukeContent() {
     return () => clearInterval(interval);
   }, [aktivnaKonvId, ucitajPoruke, ucitajKonverzacije]);
 
-  // Scroll na dno pri novim porukama
+  // Scroll na dno pri novim porukama. Zbog bail-out-a u `ucitajPoruke`, `poruke`
+  // menja referencu SAMO kad stvarno ima novih poruka — pa se ovo više ne okida
+  // (i ne trza skrol) na svaki 5s poll bez promene.
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [poruke]);
+
+  // Stabilan handler za otvaranje konverzacije → memo-izovani redovi se ne
+  // re-renderuju samo zato što se roditelj iscrtao.
+  const otvoriKonv = useCallback((id: string) => {
+    router.push(`/poruke?k=${id}`);
+    setMobilniPrikaz("chat");
+  }, [router]);
 
   // Zatvori sugestije klikom van
   useEffect(() => {
@@ -259,32 +274,13 @@ function PorukeContent() {
             <p className="px-4 py-8 text-center text-xs text-kolo-muted whitespace-pre-line">{t("nema_konverzacija")}</p>
           ) : (
             konverzacije.map((k) => (
-              <button
+              <KonverzacijaRed
                 key={k.id}
-                onClick={() => { router.push(`/poruke?k=${k.id}`); setMobilniPrikaz("chat"); }}
-                className={`w-full text-left px-4 py-3 border-b border-kolo-border/50 last:border-0 hover:bg-kolo-bg transition-colors ${
-                  aktivnaKonvId === k.id ? "bg-kolo-green-100/40" : ""
-                }`}
-              >
-                <div className="flex items-center justify-between mb-0.5">
-                  <span className="text-sm font-semibold text-kolo-text truncate"><Pseudonim>{k.drugiPseudonim}</Pseudonim></span>
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    {k.neprocitano > 0 && (
-                      <span className="w-4 h-4 bg-kolo-green-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                        {k.neprocitano > 9 ? "9+" : k.neprocitano}
-                      </span>
-                    )}
-                    <span className="text-[10px] text-kolo-border">
-                      {new Date(k.poslednjeVreme).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
-                    </span>
-                  </div>
-                </div>
-                {k.poslednjaPorukaIznos && (
-                  <p className="text-xs text-kolo-muted truncate">
-                    {k.poslednjaPosiljacJa ? t("vi") : ""}{k.poslednjaPorukaIznos}
-                  </p>
-                )}
-              </button>
+                k={k}
+                aktivna={aktivnaKonvId === k.id}
+                onOtvori={otvoriKonv}
+                t={t}
+              />
             ))
           )}
         </div>
@@ -324,20 +320,7 @@ function PorukeContent() {
                 <p className="text-center text-xs text-kolo-muted py-8">{t("pocnite_konverzaciju")}</p>
               )}
               {poruke.map((p) => (
-                <div key={p.id} className={`flex ${p.moja ? "justify-end" : "justify-start"}`}>
-                  <div
-                    className={`max-w-xs lg:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
-                      p.moja
-                        ? "bg-kolo-green-700 text-white rounded-br-sm"
-                        : "bg-kolo-bg text-kolo-text border border-kolo-border rounded-bl-sm"
-                    }`}
-                  >
-                    <p className="whitespace-pre-wrap break-words">{p.tekst}</p>
-                    <p className={`text-[10px] mt-1 ${p.moja ? "text-white/70" : "text-kolo-border"}`}>
-                      {new Date(p.createdAt).toLocaleString("sr-RS", { hour: "2-digit", minute: "2-digit" })}
-                    </p>
-                  </div>
-                </div>
+                <PorukaBubble key={p.id} p={p} />
               ))}
               <div ref={chatEndRef} />
             </div>
@@ -371,6 +354,82 @@ function PorukeContent() {
     </div>
   );
 }
+
+// ── Bail-out poređenja (polling bez promene ne sme da okine re-render) ──────────
+function istePoruke(a: Poruka[], b: Poruka[]): boolean {
+  return a.length === b.length && a[a.length - 1]?.id === b[b.length - 1]?.id;
+}
+function istiKonv(a: Konverzacija[], b: Konverzacija[]): boolean {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].id !== b[i].id || a[i].neprocitano !== b[i].neprocitano || a[i].poslednjeVreme !== b[i].poslednjeVreme) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// ── Memo-izovane stavke listi ──────────────────────────────────────────────────
+type TF = ReturnType<typeof useTranslations<"poruke">>;
+
+const KonverzacijaRed = memo(function KonverzacijaRed({
+  k,
+  aktivna,
+  onOtvori,
+  t,
+}: {
+  k: Konverzacija;
+  aktivna: boolean;
+  onOtvori: (id: string) => void;
+  t: TF;
+}) {
+  return (
+    <button
+      onClick={() => onOtvori(k.id)}
+      className={`w-full text-left px-4 py-3 border-b border-kolo-border/50 last:border-0 hover:bg-kolo-bg transition-colors ${
+        aktivna ? "bg-kolo-green-100/40" : ""
+      }`}
+    >
+      <div className="flex items-center justify-between mb-0.5">
+        <span className="text-sm font-semibold text-kolo-text truncate"><Pseudonim>{k.drugiPseudonim}</Pseudonim></span>
+        <div className="flex items-center gap-1.5 shrink-0">
+          {k.neprocitano > 0 && (
+            <span className="w-4 h-4 bg-kolo-green-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+              {k.neprocitano > 9 ? "9+" : k.neprocitano}
+            </span>
+          )}
+          <span className="text-[10px] text-kolo-border">
+            {new Date(k.poslednjeVreme).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+          </span>
+        </div>
+      </div>
+      {k.poslednjaPorukaIznos && (
+        <p className="text-xs text-kolo-muted truncate">
+          {k.poslednjaPosiljacJa ? t("vi") : ""}{k.poslednjaPorukaIznos}
+        </p>
+      )}
+    </button>
+  );
+});
+
+const PorukaBubble = memo(function PorukaBubble({ p }: { p: Poruka }) {
+  return (
+    <div className={`flex ${p.moja ? "justify-end" : "justify-start"}`}>
+      <div
+        className={`max-w-xs lg:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+          p.moja
+            ? "bg-kolo-green-700 text-white rounded-br-sm"
+            : "bg-kolo-bg text-kolo-text border border-kolo-border rounded-bl-sm"
+        }`}
+      >
+        <p className="whitespace-pre-wrap break-words">{p.tekst}</p>
+        <p className={`text-[10px] mt-1 ${p.moja ? "text-white/70" : "text-kolo-border"}`}>
+          {new Date(p.createdAt).toLocaleString("sr-RS", { hour: "2-digit", minute: "2-digit" })}
+        </p>
+      </div>
+    </div>
+  );
+});
 
 export default function PorukeStrana() {
   return (

@@ -1,8 +1,6 @@
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
 import AppShell from "@/components/AppShell";
-import { prisma } from "@/lib/prisma";
+import { sesija } from "@/lib/sesija";
 import { jeAdmin, mozeNadzor } from "@/lib/dozvole";
 
 export default async function AppLayout({
@@ -10,14 +8,12 @@ export default async function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await sesija();
   if (!session) redirect("/");
 
-  const user = await prisma.user.findUnique({
-    where: { id: session.user.id },
-    select: { tipKorisnika: true },
-  });
-  const jeNadzornik = mozeNadzor(user);
+  // `session.user` već nosi `tipKorisnika` i `admin` (jwt/session callback), pa
+  // nadzor/admin status izvodimo iz sesije — bez dodatnog DB poziva po renderu.
+  const jeNadzornik = mozeNadzor(session.user);
 
   return (
     <AppShell

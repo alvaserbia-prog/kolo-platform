@@ -52,7 +52,7 @@ export default function PocetnaKlijent({
     }
   }, [poruke.length]);
 
-  // Polling za nove poruke svakih 5 sekundi
+  // Polling za nove poruke u pričaonici (10s — globalna soba, ne treba realtime)
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
@@ -73,7 +73,7 @@ export default function PocetnaKlijent({
       } catch {
         // ignoriši
       }
-    }, 5000);
+    }, 10000);
     return () => clearInterval(interval);
   }, [poruke]);
 

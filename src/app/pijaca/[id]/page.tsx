@@ -23,6 +23,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         id: listing.id,
         title: listing.title,
         description: listing.description,
+        tip: listing.tip,
         cenaTip: listing.cenaTip,
         price: listing.price,
         cenaDo: listing.cenaDo,
