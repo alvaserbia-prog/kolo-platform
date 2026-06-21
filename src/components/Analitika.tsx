@@ -35,11 +35,13 @@ export function Analitika({ clarityId }: { clarityId?: string }) {
 
   return (
     <>
+      {/* lazyOnload: analitika se učitava tek u idle vremenu posle load-a, da ne
+          otima glavnu nit tokom hidracije/LCP-a (smanjuje Total Blocking Time). */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-JY214NWCDK"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script id="google-analytics" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -48,7 +50,7 @@ export function Analitika({ clarityId }: { clarityId?: string }) {
         `}
       </Script>
       {clarityId && (
-        <Script id="ms-clarity" strategy="afterInteractive">
+        <Script id="ms-clarity" strategy="lazyOnload">
           {`(function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
             t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
