@@ -106,6 +106,23 @@ export default async function RootLayout({
   const messages = await getMessages();
   const session = await sesija();
 
+  // Klijentski i18n payload: NextIntlClientProvider serijalizuje poruke u HTML i
+  // šalje ih klijentu na SVAKOJ stranici. Ceo set je ~118KB; ovi namespace-ovi se
+  // koriste ISKLJUČIVO u serverskim komponentama (preko `getTranslations`) — javne
+  // sadržajne stranice (pravni akti, landing, „o sistemu"…). Izbacujemo ih iz
+  // klijentskog providera (~40KB manje) bez uticaja na server render (server čita
+  // pun set nezavisno od ovog prop-a). Denylist (ne allowlist): nov namespace se
+  // podrazumevano UKLJUČUJE → nema rizika od regresije kad se doda klijentski tekst.
+  // VAŽNO: namespace dodati ovde tek pošto se potvrdi da ga NE koristi nijedna
+  // klijentska komponenta (`useTranslations`).
+  const SERVER_ONLY_NS = new Set([
+    "pravne", "landing", "oSistemu", "kakoFunkcionise", "kakoFunkcionisePage",
+    "zajednickoDobroPage", "osnivackiDoprinosPage", "pokroviteljPage", "zaposljavnje",
+  ]);
+  const clientMessages = Object.fromEntries(
+    Object.entries(messages).filter(([ns]) => !SERVER_ONLY_NS.has(ns)),
+  );
+
   // Ćirilični korisnici dobijaju Inter sa ćirilicom (lenjo, bez preload-a);
   // svi ostali podrazumevani latinički Inter.
   const fontInter = locale === "sr-Cyrl" ? interCirilica : inter;
@@ -118,7 +135,7 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={clientMessages}>
           <CirilicaProvider />
           <Providers session={session}>{children}</Providers>
         </NextIntlClientProvider>

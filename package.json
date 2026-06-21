@@ -34,7 +34,6 @@
     "@vercel/blob": "^2.4.0",
     "aws4fetch": "^1.0.20",
     "bcryptjs": "^3.0.3",
-    "flag-icons": "^7.5.0",
     "html5-qrcode": "^2.3.8",
     "next": "16.2.2",
     "next-auth": "^4.24.13",

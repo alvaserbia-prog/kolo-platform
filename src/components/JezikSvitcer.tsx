@@ -45,6 +45,8 @@ export default function JezikSvitcer() {
           <img
             src={j.ikona}
             alt={j.naziv}
+            width={24}
+            height={18}
             className="block h-[18px] w-auto rounded-[3px]"
           />
         </button>
