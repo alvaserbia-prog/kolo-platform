@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Claude Code lične lokalne postavke (ne komituje se); settings.json i hooks/ se komituju
+/.claude/settings.local.json
+
 # dependencies
 /node_modules
 /.pnp

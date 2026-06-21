@@ -24,6 +24,46 @@ function kategorijaKljuc(kat: string): string {
 }
 
 const MAX_IMAGES = 5;
+const MAX_SIZE = 5 * 1024 * 1024;
+// Najveća dimenzija (px) na koju smanjujemo sliku pre uploada. Fotografije sa
+// telefona su često 4000×3000 i 4–12MB — bez ovoga bi premašile limit od 5MB.
+const MAX_DIM = 1600;
+
+// Smanji i kompresuj sliku u browseru (canvas → JPEG). Vraća original ako
+// kompresija nije moguća (npr. nepodržan format). Time fotografije sa telefona
+// pouzdano stanu ispod limita, a upload je brži na mobilnom internetu.
+async function kompresujSliku(file: File): Promise<File> {
+  if (!file.type.startsWith("image/")) return file;
+  try {
+    let bitmap: ImageBitmap;
+    try {
+      bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
+    } catch {
+      bitmap = await createImageBitmap(file);
+    }
+    let { width, height } = bitmap;
+    if (width > MAX_DIM || height > MAX_DIM) {
+      const scale = Math.min(MAX_DIM / width, MAX_DIM / height);
+      width = Math.round(width * scale);
+      height = Math.round(height * scale);
+    }
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) { bitmap.close?.(); return file; }
+    ctx.drawImage(bitmap, 0, 0, width, height);
+    bitmap.close?.();
+    const blob = await new Promise<Blob | null>((resolve) =>
+      canvas.toBlob((b) => resolve(b), "image/jpeg", 0.82)
+    );
+    if (!blob || blob.size >= file.size) return file;
+    const naziv = file.name.replace(/\.[^.]+$/, "") + ".jpg";
+    return new File([blob], naziv, { type: "image/jpeg" });
+  } catch {
+    return file;
+  }
+}
 
 export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocation?: string }) {
   const t = useTranslations("pijaca");
@@ -38,18 +78,30 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
   const [phone, setPhone] = useState("");
   const [slike, setSlike] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+  const [obrada, setObrada] = useState(false);
   const [error, setError] = useState("");
   const [uspeh, setUspeh] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
-    const files = Array.from(e.target.files ?? []);
-    const combined = [...slike, ...files].slice(0, MAX_IMAGES);
-    for (const f of combined) {
-      if (f.size > 5 * 1024 * 1024) { setError(t("slika_prevelika")); return; }
-    }
-    setSlike(combined);
+  async function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    const izabrane = Array.from(e.target.files ?? []);
+    // Reset vrednosti inputa: na mobilnom ponovni izbor iste slike inače ne okine onChange.
+    e.target.value = "";
+    if (izabrane.length === 0) return;
+
+    const slobodno = MAX_IMAGES - slike.length;
+    if (slobodno <= 0) return;
+
+    setObrada(true);
     setError("");
+    try {
+      const obradjene = await Promise.all(izabrane.slice(0, slobodno).map(kompresujSliku));
+      const validne = obradjene.filter((f) => f.size <= MAX_SIZE);
+      if (validne.length < obradjene.length) setError(t("slika_prevelika"));
+      if (validne.length > 0) setSlike((prev) => [...prev, ...validne].slice(0, MAX_IMAGES));
+    } finally {
+      setObrada(false);
+    }
   }
 
   function ukloniSliku(i: number) {
@@ -231,9 +283,16 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex flex-col items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl"
+                disabled={obrada}
+                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex flex-col items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl disabled:opacity-50"
               >
-                +
+                {obrada ? (
+                  <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  "+"
+                )}
               </button>
             )}
           </div>
@@ -253,7 +312,7 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
 
         <button
           type="submit"
-          disabled={!canSubmit || loading}
+          disabled={!canSubmit || loading || obrada}
           className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
           {loading ? t("objavljivanje") : t("objavi_oglas")}
