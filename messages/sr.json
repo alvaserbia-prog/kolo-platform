@@ -786,7 +786,21 @@
     "lista_naslov": "Lista donacija",
     "lista_opis": "Javni donatori su prikazani imenom i prezimenom; anonimni donatori se ne identifikuju.",
     "lista_prazno": "Još nema evidentiranih donacija.",
-    "lista_anoniman": "Anoniman donator"
+    "lista_anoniman": "Anoniman donator",
+    "ips_naslov": "Doniraj preko IPS QR koda (instant)",
+    "ips_opis": "Skenirajte QR mobilnom bankom — uplata u dinarima stiže za par sekundi, bez provizije platforme. POEN se evidentira nakon što Fondacija potvrdi priliv.",
+    "ips_uskoro": "Račun Fondacije za IPS uplate biće otvoren uskoro. Opcija će se aktivirati automatski čim račun bude podešen.",
+    "ips_generisi": "Generiši QR",
+    "ips_generisem": "Generišem…",
+    "ips_min_iznos": "Unesite iznos (najmanje {min} RSD).",
+    "ips_limit": "Maksimum po IPS uplati: {max} RSD. Veće iznose uplatite karticom ili klasičnom uplatom.",
+    "ips_greska": "Generisanje QR koda trenutno nije moguće.",
+    "ips_skeniraj_uputstvo": "Otvorite mobilno bankarstvo → opcija „Plati / Skeniraj QR" → skenirajte ovaj kôd. Iznos i poziv na broj su već popunjeni — samo potvrdite.",
+    "ips_iznos_label": "Iznos:",
+    "ips_poziv_na_broj": "Poziv na broj:",
+    "ips_model": "model",
+    "ips_napomena_potvrda": "Nakon uplate, Fondacija potvrđuje priliv po pozivu na broj i tada se evidentira POEN. Poziv na broj je već u QR kodu — ne menjajte ga.",
+    "ips_novi": "Nova IPS uplata"
   },
   "zaposljavnje": {
     "naslov": "Zapošljavanje",

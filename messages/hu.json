@@ -786,7 +786,21 @@
     "lista_naslov": "Adományok listája",
     "lista_opis": "A nyilvános adományozók vezeték- és keresztnévvel jelennek meg; a névtelen adományozókat nem azonosítjuk.",
     "lista_prazno": "Még nincs rögzített adomány.",
-    "lista_anoniman": "Névtelen adományozó"
+    "lista_anoniman": "Névtelen adományozó",
+    "ips_naslov": "Adományozás IPS QR-kóddal (azonnali)",
+    "ips_opis": "Olvassa be a QR-kódot a mobilbanki alkalmazással — a dinár befizetés másodpercek alatt megérkezik, platformdíj nélkül. A POEN akkor kerül rögzítésre, amikor az Alapítvány megerősíti a beérkező befizetést.",
+    "ips_uskoro": "Az Alapítvány IPS befizetésekhez használt számlája hamarosan megnyílik. Ez az opció automatikusan aktiválódik, amint a számla be van állítva.",
+    "ips_generisi": "QR generálása",
+    "ips_generisem": "Generálás…",
+    "ips_min_iznos": "Adjon meg egy összeget (legalább {min} RSD).",
+    "ips_limit": "Maximum IPS befizetésenként: {max} RSD. Nagyobb összegeket kártyával vagy hagyományos átutalással fizessen.",
+    "ips_greska": "A QR-kód generálása jelenleg nem lehetséges.",
+    "ips_skeniraj_uputstvo": "Nyissa meg a mobilbanki alkalmazást → „Fizetés / QR beolvasása" → olvassa be ezt a kódot. Az összeg és a hivatkozási szám már ki van töltve — csak erősítse meg.",
+    "ips_iznos_label": "Összeg:",
+    "ips_poziv_na_broj": "Hivatkozási szám:",
+    "ips_model": "modell",
+    "ips_napomena_potvrda": "A befizetés után az Alapítvány a hivatkozási szám alapján megerősíti a beérkező összeget, és ekkor rögzül a POEN. A hivatkozási szám már benne van a QR-kódban — ne módosítsa.",
+    "ips_novi": "Új IPS befizetés"
   },
   "zaposljavnje": {
     "naslov": "Foglalkoztatás",
