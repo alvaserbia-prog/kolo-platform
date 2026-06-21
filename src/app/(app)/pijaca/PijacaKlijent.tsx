@@ -32,6 +32,7 @@ interface Listing {
   slike: number;
   location: string | null;
   createdAt: string;
+  sellerId: string;
   sellerPseudonim: string;
   sellerVerified: boolean;
 }
@@ -52,9 +53,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const [showCena, setShowCena] = useState(false);
   const [showKat, setShowKat] = useState(false);
   const [showSort, setShowSort] = useState(false);
-  const [kupiOglas, setKupiOglas] = useState<Listing | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
+  const [kontaktLoading, setKontaktLoading] = useState(false);
 
   const filtrirani = listings
     .filter((l) => {
@@ -70,19 +69,19 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
-  async function handleKupi() {
-    if (!kupiOglas) return;
-    setLoading(true);
-    setPoruka(null);
-    const res = await fetch(`/api/pijaca/${kupiOglas.id}/kupi`, { method: "POST" });
+  // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
+  // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
+  async function handleKontakt(sellerId: string) {
+    setKontaktLoading(true);
+    const res = await fetch("/api/poruke", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: sellerId }),
+    });
+    setKontaktLoading(false);
+    if (!res.ok) return;
     const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      setPoruka({ text: t("kupovina_uspesna", { iznos: kupiOglas.price.toLocaleString("sr-RS") }), ok: true });
-      setTimeout(() => { setKupiOglas(null); setPoruka(null); router.refresh(); }, 2000);
-    } else {
-      setPoruka({ text: data.error ?? t("greska"), ok: false });
-    }
+    router.push(`/poruke?k=${data.konverzacijaId}`);
   }
 
   return (
@@ -251,47 +250,11 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               key={l.id}
               oglas={l}
               isVerified={isVerified}
-              onKupi={() => { setKupiOglas(l); setPoruka(null); }}
+              kontaktLoading={kontaktLoading}
+              onKontakt={() => handleKontakt(l.sellerId)}
               t={t}
             />
           ))}
-        </div>
-      )}
-
-      {/* Modal kupovine */}
-      {kupiOglas && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-4">
-          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 w-full max-w-sm mx-auto space-y-4">
-            <div>
-              <h3 className="text-lg font-bold text-kolo-text">{t("potvrdi_kupovinu")}</h3>
-              <p className="text-sm text-kolo-muted mt-1">{kupiOglas.title}</p>
-            </div>
-            <div className="bg-kolo-green-100 rounded-xl px-4 py-3 text-center">
-              <p className="text-2xl font-bold text-kolo-green-700">{kupiOglas.price.toLocaleString("sr-RS")} POEN</p>
-              <p className="text-xs text-kolo-green-700 opacity-70">{t("bice_prebaceno")}</p>
-            </div>
-            {poruka && (
-              <p className={`text-sm px-4 py-3 rounded-xl ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>
-                {poruka.text}
-              </p>
-            )}
-            <div className="flex gap-2">
-              <button
-                onClick={() => { setKupiOglas(null); setPoruka(null); }}
-                disabled={loading}
-                className="flex-1 py-3 rounded-xl bg-kolo-bg border border-kolo-border text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors"
-              >
-                {t("otkazi")}
-              </button>
-              <button
-                onClick={handleKupi}
-                disabled={loading || !!poruka?.ok}
-                className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
-              >
-                {loading ? t("obradjem") : t("plati")}
-              </button>
-            </div>
-          </div>
         </div>
       )}
     </div>
@@ -305,12 +268,14 @@ type TFunction = ReturnType<typeof useTranslations<"pijaca">>;
 function OglasKartica({
   oglas,
   isVerified,
-  onKupi,
+  kontaktLoading,
+  onKontakt,
   t,
 }: {
   oglas: Listing;
   isVerified: boolean;
-  onKupi: () => void;
+  kontaktLoading: boolean;
+  onKontakt: () => void;
   t: TFunction;
 }) {
   return (
@@ -357,10 +322,11 @@ function OglasKartica({
           </span>
           {isVerified ? (
             <button
-              onClick={onKupi}
-              className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
+              onClick={onKontakt}
+              disabled={kontaktLoading}
+              className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
             >
-              {t("plati")}
+              {kontaktLoading ? "..." : t("kontaktiraj")}
             </button>
           ) : (
             <Link href="/tabla-jemstva" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">

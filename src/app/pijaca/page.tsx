@@ -16,6 +16,7 @@ export default async function PijacaPage() {
     select: {
       id: true, title: true, description: true, price: true,
       category: true, images: true, location: true, createdAt: true,
+      sellerId: true,
       seller: { select: { pseudonim: true, verified: true } },
     },
   });
@@ -49,6 +50,7 @@ export default async function PijacaPage() {
           slike: l.images.length,
           location: l.location ?? null,
           createdAt: l.createdAt.toISOString(),
+          sellerId: l.sellerId,
           sellerPseudonim: l.seller.pseudonim,
           sellerVerified: l.seller.verified,
         }))}
