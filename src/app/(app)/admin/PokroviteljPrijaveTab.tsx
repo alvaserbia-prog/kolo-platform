@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
@@ -34,19 +35,16 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
     USLUGE: t("pokr_prijave_vrsta_usluge"),
   };
 
-  const [prijave, setPrijave] = useState<Prijava[]>([]);
-  const [ucitavanje, setUcitavanje] = useState(true);
+  const { data: prijave = [], isLoading: ucitavanje, refetch } = useQuery({
+    queryKey: ["admin-pokroviteljstvo-prijave"],
+    queryFn: async (): Promise<Prijava[]> => {
+      const res = await fetch("/api/admin/pokroviteljstvo/prijave");
+      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
+      return await res.json();
+    },
+  });
   const [radnja, setRadnja] = useState<string | null>(null);
   const [detalji, setDetalji] = useState<Detalji | null>(null);
-
-  const ucitaj = useCallback(async () => {
-    setUcitavanje(true);
-    const res = await fetch("/api/admin/pokroviteljstvo/prijave");
-    if (res.ok) setPrijave(await res.json());
-    setUcitavanje(false);
-  }, []);
-
-  useEffect(() => { ucitaj(); }, [ucitaj]);
 
   async function otvoriDetalje(id: string) {
     const res = await fetch(`/api/admin/pokroviteljstvo/prijave/${id}`);
@@ -60,7 +58,7 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     alert(res.ok ? t("pokr_prijave_potvrdjeno_msg", { bonus: (d.bonus ?? 0).toLocaleString("sr-RS") }) : (d.error ?? t("greska_generalna")));
-    if (res.ok) { setDetalji(null); await ucitaj(); onDone(); }
+    if (res.ok) { setDetalji(null); await refetch(); onDone(); }
   }
 
   async function odbij(id: string) {
@@ -74,7 +72,7 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
     });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
-    if (res.ok) { setDetalji(null); await ucitaj(); onDone(); }
+    if (res.ok) { setDetalji(null); await refetch(); onDone(); }
     else alert(d.error ?? t("greska_generalna"));
   }
 

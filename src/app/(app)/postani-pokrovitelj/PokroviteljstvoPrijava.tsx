@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
 type Prijava = {
@@ -19,8 +20,15 @@ const MAX_BYTES = 3_000_000;
 
 export default function PokroviteljstvoPrijava() {
   const t = useTranslations("postaniPokrovitelj");
-  const [prijave, setPrijave] = useState<Prijava[]>([]);
-  const [ucitavanje, setUcitavanje] = useState(true);
+  const { data: prijave = [], isLoading: ucitavanje, refetch } = useQuery({
+    queryKey: ["pokroviteljstvo-moje-prijave"],
+    queryFn: async (): Promise<Prijava[]> => {
+      const res = await fetch("/api/pokroviteljstvo/prijava");
+      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
+      const d = await res.json();
+      return d.prijave ?? [];
+    },
+  });
   const [radnja, setRadnja] = useState<string | null>(null);
   const [otvoreniUgovor, setOtvoreniUgovor] = useState<string | null>(null);
 
@@ -31,15 +39,6 @@ export default function PokroviteljstvoPrijava() {
   const [cenovnik, setCenovnik] = useState<string | null>(null);
   const [greska, setGreska] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
-
-  const ucitaj = useCallback(async () => {
-    setUcitavanje(true);
-    const res = await fetch("/api/pokroviteljstvo/prijava");
-    if (res.ok) setPrijave((await res.json()).prijave ?? []);
-    setUcitavanje(false);
-  }, []);
-
-  useEffect(() => { ucitaj(); }, [ucitaj]);
 
   function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -68,7 +67,7 @@ export default function PokroviteljstvoPrijava() {
     if (res.ok) {
       setNaziv(""); setPib(""); setVrsta("NOVAC"); setVrednost(""); setCenovnik(null);
       if (fileRef.current) fileRef.current.value = "";
-      await ucitaj();
+      await refetch();
     } else setGreska(d.error ?? t("forma_greska_slanja"));
   }
 
@@ -77,7 +76,7 @@ export default function PokroviteljstvoPrijava() {
     setRadnja(id);
     const res = await fetch(`/api/pokroviteljstvo/prijava/${id}/potpisi`, { method: "POST" });
     setRadnja(null);
-    if (res.ok) await ucitaj();
+    if (res.ok) await refetch();
     else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska")); }
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
@@ -35,9 +36,21 @@ export default function OsnivaciTab({
   onDone: () => void;
 }) {
   const t = useTranslations("admin");
-  const [osnivaci, setOsnivaci] = useState<Osnivac[]>([]);
-  const [status, setStatus] = useState<Status | null>(null);
-  const [ucitavanje, setUcitavanje] = useState(true);
+  const { data, isLoading: ucitavanje, refetch } = useQuery({
+    queryKey: ["admin-osnivaci"],
+    queryFn: async (): Promise<{ osnivaci: Osnivac[]; status: Status | null }> => {
+      const [oRes, sRes] = await Promise.all([
+        fetch("/api/admin/osnivaci"),
+        fetch("/api/javno/osnivacki-doprinos"),
+      ]);
+      if (!oRes.ok || !sRes.ok) throw new Error("Greška pri učitavanju osnivača");
+      const osnivaci = (await oRes.json()).osnivaci ?? [];
+      const status = (await sRes.json()).status ?? null;
+      return { osnivaci, status };
+    },
+  });
+  const osnivaci = data?.osnivaci ?? [];
+  const status = data?.status ?? null;
   const [radnja, setRadnja] = useState<string | null>(null);
 
   // Forma za dodavanje
@@ -47,19 +60,6 @@ export default function OsnivaciTab({
   const [redniBroj, setRedniBroj] = useState("");
   const [napomena, setNapomena] = useState("");
   const [greska, setGreska] = useState("");
-
-  const ucitaj = useCallback(async () => {
-    setUcitavanje(true);
-    const [oRes, sRes] = await Promise.all([
-      fetch("/api/admin/osnivaci"),
-      fetch("/api/javno/osnivacki-doprinos"),
-    ]);
-    if (oRes.ok) setOsnivaci((await oRes.json()).osnivaci ?? []);
-    if (sRes.ok) setStatus((await sRes.json()).status ?? null);
-    setUcitavanje(false);
-  }, []);
-
-  useEffect(() => { ucitaj(); }, [ucitaj]);
 
   const aktiviran = (status?.brojKoraka ?? 0) > 0;
   const zbirBrojilaca = osnivaci.reduce((s, o) => s + o.udeoBrojilac, 0);
@@ -85,7 +85,7 @@ export default function OsnivaciTab({
     setRadnja(null);
     if (res.ok) {
       setUserId(""); setBrojilac(""); setImenilac(""); setRedniBroj(""); setNapomena("");
-      await ucitaj();
+      await refetch();
     } else {
       setGreska(d.error ?? t("osnivaci_greska_dodavanja"));
     }
@@ -96,7 +96,7 @@ export default function OsnivaciTab({
     setRadnja(id);
     const res = await fetch(`/api/admin/osnivaci/${id}`, { method: "DELETE" });
     setRadnja(null);
-    if (res.ok) await ucitaj();
+    if (res.ok) await refetch();
     else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska_generalna")); }
   }
 
@@ -107,7 +107,7 @@ export default function OsnivaciTab({
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     alert(res.ok ? (d.poruka ?? "Gotovo.") : (d.error ?? t("greska_generalna")));
-    if (res.ok) { await ucitaj(); onDone(); }
+    if (res.ok) { await refetch(); onDone(); }
   }
 
   if (ucitavanje) return <p className="text-sm text-kolo-muted">{t("osnivaci_ucitavanje")}</p>;
