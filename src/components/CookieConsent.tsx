@@ -8,7 +8,7 @@ import { procitajPristanak, sacuvajPristanak } from "@/lib/cookieConsent";
  * Banner za pristanak na analitičke kolačiće (Politika privatnosti čl. 7).
  *
  * Prikazuje se samo dok korisnik nije odlučio. Odluka „Prihvati" omogućava
- * učitavanje analitike (Google Analytics, Microsoft Clarity) preko `Analitika`
+ * učitavanje analitike (Google Analytics) preko `Analitika`
  * komponente; „Odbij" trajno sprečava njihovo učitavanje. Neophodni (sesijski)
  * kolačići rade nezavisno od ovog izbora.
  */
@@ -36,7 +36,7 @@ export function CookieConsent() {
       <div className="mx-auto max-w-3xl rounded-xl border border-kolo-border bg-white shadow-lg p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
         <p className="text-sm text-kolo-text leading-relaxed flex-1">
           Koristimo neophodne kolačiće za rad platforme. Uz tvoj pristanak
-          koristimo i analitičke kolačiće (Google Analytics, Microsoft Clarity)
+          koristimo i analitičke kolačiće (Google Analytics)
           da bismo razumeli korišćenje i poboljšali sajt. Možeš ih prihvatiti ili
           odbiti — sajt radi i bez njih.{" "}
           <Link href="/privatnost" className="text-kolo-green-700 hover:underline whitespace-nowrap">
