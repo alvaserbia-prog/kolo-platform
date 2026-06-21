@@ -179,11 +179,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
         ) : (
           <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
             {/* Zaglavlje tabele — desktop */}
-            <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            <div className="hidden sm:grid grid-cols-[7rem_4.5rem_1fr_1.5rem_1fr_minmax(0,1.5fr)_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_datum")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_vreme")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_posiljac")}</span>
               <span />
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_primalac")}</span>
+              <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_opis")}</span>
               <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("col_iznos")}</span>
             </div>
             {filtered.map((t, i) => (
@@ -192,11 +194,16 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                 className={`px-4 py-2.5 ${i < filtered.length - 1 ? "border-b border-kolo-border" : ""}`}
               >
                 {/* Desktop prikaz */}
-                <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
+                <div className="hidden sm:grid grid-cols-[7rem_4.5rem_1fr_1.5rem_1fr_minmax(0,1.5fr)_7rem] gap-x-3 items-center">
+                  {/* Datum */}
+                  <p className="text-sm text-kolo-muted leading-tight">
+                    {new Date(t.createdAt).toLocaleDateString("sr-RS", {
+                      day: "2-digit", month: "2-digit", year: "numeric",
+                    })}
+                  </p>
                   {/* Vreme */}
                   <p className="text-sm text-kolo-muted leading-tight">
-                    {new Date(t.createdAt).toLocaleString("sr-RS", {
-                      day: "2-digit", month: "2-digit", year: "numeric",
+                    {new Date(t.createdAt).toLocaleTimeString("sr-RS", {
                       hour: "2-digit", minute: "2-digit",
                     })}
                   </p>
@@ -230,15 +237,13 @@ export default function NovcanikKlijent({ balance, pseudonim, memberHash, transa
                       )
                     )}
                   </div>
+                  {/* Opis */}
+                  <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
                   {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
                   <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
                     {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
                   </span>
                 </div>
-                {/* Desktop opis */}
-                {t.description && (
-                  <p className="hidden sm:block mt-0.5 text-xs text-kolo-muted/70 pl-[9.75rem] truncate">{t.description}</p>
-                )}
 
                 {/* Mobilna kompaktna kartica */}
                 <div className="sm:hidden">
