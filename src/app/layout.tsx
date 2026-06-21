@@ -22,18 +22,33 @@ import {
 
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
+// Podrazumevani font za latiničke korisnike. "latin-ext" pokriva srpske
+// dijakritike (č, ć, š, ž, đ); ćirilica NIJE ovde da ne bi opterećivala
+// kritičnu putanju (LCP) — ogromna većina koristi latinicu.
 const inter = Inter({
   variable: "--font-inter",
-  // "cyrillic" je obavezan da ćirilični tekst koristi isti font (Inter), a ne
-  // sistemski fallback — inače bi ćirilica izgledala vizuelno neujednačeno.
-  subsets: ["latin", "latin-ext", "cyrillic"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
 });
 
+// Ćirilica se učitava LENJO — koristi se samo kad je locale "sr-Cyrl".
+// `preload: false` znači da latinički korisnici nikad ne preuzimaju ovaj fajl.
+// Sadrži sva 3 subseta (jedna koherentna familija pokriva i latinicu i
+// ćirilicu) da next/font fallback ne bi "ukrao" ćirilične glifove. Deli isti
+// `--font-inter` var jer se primenjuje međusobno isključivo sa `inter`.
+const interCirilica = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "latin-ext", "cyrillic"],
+  display: "swap",
+  preload: false,
+});
+
+// Mono nije above-the-fold LCP tekst — ne preload-uje se da ne troši kritičnu putanju.
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -93,8 +108,12 @@ export default async function RootLayout({
   const messages = await getMessages();
   const session = await sesija();
 
+  // Ćirilični korisnici dobijaju Inter sa ćirilicom (lenjo, bez preload-a);
+  // svi ostali podrazumevani latinički Inter.
+  const fontInter = locale === "sr-Cyrl" ? interCirilica : inter;
+
   return (
-    <html lang={locale} className={`${inter.variable} ${jetbrainsMono.variable} h-full`}>
+    <html lang={locale} className={`${fontInter.variable} ${jetbrainsMono.variable} h-full`}>
       <body className="h-full antialiased">
         <Script
           id="organization-jsonld"
