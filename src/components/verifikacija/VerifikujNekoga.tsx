@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import Pseudonim from "@/components/Pseudonim";
+import UspehKartica from "@/components/UspehKartica";
 
 // Dinamički import — html5-qrcode koristi DOM i ne sme da se izvršava na serveru
 const QrSkener = dynamic(() => import("./QrSkener"), { ssr: false });
@@ -72,6 +72,25 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
     }
   }
 
+  if (uspeh) {
+    return (
+      <UspehKartica
+        naslov="Verifikacija uspešna"
+        opis={
+          <>
+            <span className="font-semibold text-kolo-text">@{uspeh}</span> je verifikovan i
+            dobio je pun pristup (indeks +10%).
+          </>
+        }
+        dugmeTekst="Verifikuj još nekoga"
+        onDugme={() => {
+          setUspeh(null);
+          setMod("izbor");
+        }}
+      />
+    );
+  }
+
   return (
     <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-3">
@@ -99,7 +118,6 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
               Unesi 6-cifren broj
             </button>
           </div>
-          {uspeh && <div className="mt-3 text-sm text-kolo-green-700">Verifikacija evidentirana: @<Pseudonim>{uspeh}</Pseudonim> (indeks +10%)</div>}
         </>
       )}
 

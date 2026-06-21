@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import UspehKartica from "@/components/UspehKartica";
 
 // qrcode.react (deljen chunk sa html5-qrcode, ~361KB) — lenjo: QR se crta tek kad
 // korisnik generiše kod, pa ne ulazi u početni bundle verifikacije.
@@ -33,6 +34,7 @@ export default function MojQrKod() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [obavestenje, setObavestenje] = useState<string | null>(null);
+  const [indeksPriUspehu, setIndeksPriUspehu] = useState<number | null>(null);
   const tikerRef = useRef<NodeJS.Timeout | null>(null);
   const pollerRef = useRef<NodeJS.Timeout | null>(null);
   const pocetniRef = useRef<MojIndeks | null>(null);
@@ -86,11 +88,9 @@ export default function MojQrKod() {
           pocetak &&
           (sada.tip !== pocetak.tip || sada.indeks > pocetak.indeks)
         ) {
-          setObavestenje(
-            `Uspešno verifikovan! Tvoj indeks: ${sada.indeks}%. Stranica se osvežava...`
-          );
+          setIndeksPriUspehu(sada.indeks);
+          setObavestenje("uspeh");
           if (pollerRef.current) clearInterval(pollerRef.current);
-          setTimeout(() => router.refresh(), 1200);
         }
       } catch {
         // ignoriši mrežne greške u pollingu
@@ -105,6 +105,22 @@ export default function MojQrKod() {
   const formatBroj = token
     ? `${token.brojCifara.slice(0, 3)} ${token.brojCifara.slice(3)}`
     : null;
+
+  if (obavestenje) {
+    return (
+      <UspehKartica
+        naslov="Verifikovani ste!"
+        opis={
+          <>
+            Tvoj indeks je sada {indeksPriUspehu ?? 10}% — imaš pun pristup: poruke,
+            postavljanje oglasa i kontakt sa oglasa.
+          </>
+        }
+        dugmeTekst="Idi na Pijacu"
+        onDugme={() => router.push("/pijaca")}
+      />
+    );
+  }
 
   return (
     <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
