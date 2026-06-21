@@ -16,11 +16,16 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  // Kad je prijava odbijena (pogrešan email/lozinka ili nepostojeći nalog),
+  // pored poruke pokazujemo upadljiv poziv na registraciju. NE razdvajamo
+  // „nema naloga" od „pogrešna lozinka" (sprečava user enumeration).
+  const [prikaziRegistraciju, setPrikaziRegistraciju] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setPrikaziRegistraciju(false);
 
     if (!email.trim()) { setError(t("greska_email_obavezan")); return; }
     if (!email.includes("@")) { setError(t("greska_email_neispravan")); return; }
@@ -36,6 +41,7 @@ export default function LoginForm() {
 
       if (!res || !res.ok || res.error) {
         setError(t("greska_pogresni_podaci"));
+        setPrikaziRegistraciju(true);
       } else {
         router.push(callbackUrl ?? "/dashboard");
         router.refresh();
@@ -92,9 +98,17 @@ export default function LoginForm() {
           </div>
 
           {error && (
-            <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">
-              {error}
-            </p>
+            <div className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">
+              <p>{error}</p>
+              {prikaziRegistraciju && (
+                <Link
+                  href="/registracija"
+                  className="mt-2 inline-flex items-center gap-1 font-semibold text-kolo-green-700 hover:underline"
+                >
+                  {t("greska_registruj_cta")} →
+                </Link>
+              )}
+            </div>
           )}
 
           <button

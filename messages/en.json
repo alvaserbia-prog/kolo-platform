@@ -110,6 +110,7 @@
     "greska_email_neispravan": "Enter a valid email address.",
     "greska_lozinka_obavezna": "Password is required.",
     "greska_pogresni_podaci": "Wrong email or password.",
+    "greska_registruj_cta": "Don't have an account? Sign up",
     "greska_prijava": "Sign in error. Please try again.",
     "nema_naloga": "Don't have an account?",
     "registrujte_se": "Register",
