@@ -11,7 +11,10 @@ import { dirname, join } from "node:path";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MESSAGES = join(ROOT, "messages");
 const IZVOR = "sr";
-const CILJEVI = ["en", "hu"]; // sr-Cyrl nema fajl (transliteracija), ne proverava se
+// sr-Cyrl nema fajl (transliteracija), ne proverava se.
+// "hu" je ZAMRZNUT (neaktivan) — messages/hu.json se NE održava do pune integracije
+// mađarskog (vidi src/i18n/routing.ts). Vratiti "hu" u listu kad se reaktivira.
+const CILJEVI = ["en"];
 
 function leafKeys(obj, prefix = "") {
   let keys = [];
