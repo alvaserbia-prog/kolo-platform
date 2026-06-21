@@ -22,13 +22,21 @@ export async function GET() {
   return NextResponse.json({ notifikacije, neprocitano });
 }
 
-// PATCH — označi sve kao pročitane
-export async function PATCH() {
+// PATCH — označi pročitane: { id } → samo tu notifikaciju, bez tela → sve
+export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
+  let id: string | undefined;
+  try {
+    const body = await req.json();
+    id = typeof body?.id === "string" ? body.id : undefined;
+  } catch {
+    // bez tela → označi sve
+  }
+
   await prisma.notifikacija.updateMany({
-    where: { userId: session.user.id, procitana: false },
+    where: { userId: session.user.id, procitana: false, ...(id ? { id } : {}) },
     data: { procitana: true },
   });
 

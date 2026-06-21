@@ -395,8 +395,18 @@ function BellNotifikacije() {
     setLoading(false);
   }
 
-  function handleKlik(n: Notifikacija) {
+  async function handleKlik(n: Notifikacija) {
     setOpen(false);
+    if (!n.procitana) {
+      // Optimistički označi samo ovu kao pročitanu → badge padne za 1
+      setNotifikacije((prev) => prev.map((x) => (x.id === n.id ? { ...x, procitana: true } : x)));
+      setNeprocitano((c) => Math.max(0, c - 1));
+      fetch("/api/notifikacije", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: n.id }),
+      }).catch(() => {});
+    }
     if (n.link) router.push(n.link);
   }
 
@@ -451,7 +461,7 @@ function BellNotifikacije() {
                   className={`w-full text-left px-4 py-3 hover:bg-kolo-bg transition-colors border-b border-kolo-border/50 last:border-0 ${!n.procitana ? "bg-kolo-green-100/30" : ""}`}
                 >
                   <div className="flex items-start gap-2">
-                    {!n.procitana && <div className="mt-1.5 w-2 h-2 rounded-full bg-kolo-green-700 shrink-0" />}
+                    {!n.procitana && <div className="mt-1.5 w-2 h-2 rounded-full bg-red-500 shrink-0" />}
                     <div className={!n.procitana ? "" : "pl-4"}>
                       <p className={`text-sm font-semibold ${TIP_BOJA[n.tip] ?? "text-kolo-text"}`}>{n.naslov}</p>
                       <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed">{n.tekst}</p>
