@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
+import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 
 // DB enum values — never change these (they are stored in the database)
 const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
@@ -27,7 +28,9 @@ interface Listing {
   id: string;
   title: string;
   description: string;
-  price: number;
+  cenaTip: string;
+  price: number | null;
+  cenaDo: number | null;
   category: string;
   slike: number;
   location: string | null;
@@ -59,13 +62,15 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
     .filter((l) => {
       if (filterKat !== "Sve" && l.category !== filterKat) return false;
       if (pretraga && !l.title.toLowerCase().includes(pretraga.toLowerCase())) return false;
-      if (minCena && l.price < Number(minCena)) return false;
-      if (maxCena && l.price > Number(maxCena)) return false;
+      // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
+      if (minCena && (l.price == null || l.price < Number(minCena))) return false;
+      if (maxCena && (l.price == null || l.price > Number(maxCena))) return false;
       return true;
     })
     .sort((a, b) => {
-      if (sort === "jeftino") return a.price - b.price;
-      if (sort === "skupo") return b.price - a.price;
+      // „Po dogovoru" oglasi idu na kraj pri sortiranju po ceni.
+      if (sort === "jeftino") return (a.price ?? Infinity) - (b.price ?? Infinity);
+      if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
       return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
@@ -308,10 +313,14 @@ function OglasKartica({
             <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{oglas.description}</p>
           </div>
           <div className="shrink-0 bg-kolo-green-100 rounded-xl px-2.5 py-1.5 text-center">
-            <p className="text-base font-bold text-kolo-green-700 leading-none">{oglas.price.toLocaleString("sr-RS")}</p>
-            <p className="text-[10px] text-kolo-green-700 opacity-70">
-              POEN
+            <p className="text-base font-bold text-kolo-green-700 leading-none">
+              {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}
             </p>
+            {prikaziJedinicuCene(oglas) && (
+              <p className="text-[10px] text-kolo-green-700 opacity-70">
+                POEN
+              </p>
+            )}
           </div>
         </div>
 

@@ -43,6 +43,13 @@ enum ListingStatus {
   EXPIRED
 }
 
+// Varijanta cene na oglasu Pijace (bira je oglašivač).
+enum CenaTip {
+  FIKSNA  // jedan iznos
+  RASPON  // od–do
+  DOGOVOR // bez iznosa, „po dogovoru"
+}
+
 enum TransactionType {
   TRANSFER
   EMISIJA_VERIFIKACIJA
@@ -411,7 +418,14 @@ model MarketplaceListing {
   buyer       User?         @relation("BuyerListings", fields: [buyerId], references: [id])
   title       String
   description String
-  price       Int
+  // Cena ima tri varijante (bira ih oglašivač):
+  //  - FIKSNA  → jedan iznos u `price` (cenaDo = null)
+  //  - RASPON  → `price` = donja granica, `cenaDo` = gornja granica
+  //  - DOGOVOR → bez iznosa („po dogovoru"); price = cenaDo = null
+  // `price` (donja granica/fiksna cena) ostaje numerička osnova za sortiranje i min/max filter.
+  cenaTip     CenaTip       @default(FIKSNA)
+  price       Int?
+  cenaDo      Int?
   // Opciona jedinica mere za cenu (kom, kg, g, l, ml, m, pak) i stanje na zalihama.
   // Oba su informativna — ne utiču na tok kupovine (oglas se i dalje kupuje u celosti).
   jedinica    String?

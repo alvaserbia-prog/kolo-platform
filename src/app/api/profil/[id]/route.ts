@@ -159,7 +159,7 @@ export async function GET(
     where: { sellerId: id, status: "ACTIVE" },
     orderBy: { createdAt: "desc" },
     take: 6,
-    select: { id: true, title: true, price: true, category: true, createdAt: true },
+    select: { id: true, title: true, cenaTip: true, price: true, cenaDo: true, category: true, createdAt: true },
   });
 
   return NextResponse.json({

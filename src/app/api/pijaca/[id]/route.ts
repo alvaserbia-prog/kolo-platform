@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
+import { parsirajCenu } from "@/lib/cena-oglas";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -67,6 +68,8 @@ export async function PATCH(
     const title = (fd.get("title") as string)?.trim();
     const description = (fd.get("description") as string)?.trim() ?? "";
     const priceRaw = fd.get("price") as string;
+    const cenaDoRaw = fd.get("cenaDo") as string;
+    const cenaTipRaw = fd.get("cenaTip") as string;
     const location = (fd.get("location") as string)?.trim() ?? "";
     const phone = (fd.get("phone") as string)?.trim() ?? "";
     const keepRaw = (fd.get("keepImages") as string) ?? "[]";
@@ -75,9 +78,9 @@ export async function PATCH(
       return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
     if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
       return NextResponse.json({ error: "Neko polje premašuje dozvoljenu dužinu." }, { status: 400 });
-    const price = Math.floor(Number(priceRaw));
-    if (isNaN(price) || price <= 0 || price > 1_000_000_000)
-      return NextResponse.json({ error: "Cena mora biti pozitivan broj." }, { status: 400 });
+    const cena = parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
+    if (!cena.ok)
+      return NextResponse.json({ error: cena.error }, { status: 400 });
 
     // keepImages — niz indeksa postojećih slika koje treba zadržati. Validiramo da je
     // zaista niz brojeva (ne pada na neispravnom JSON-u, ne prihvata ne-niz vrednosti).
@@ -123,7 +126,9 @@ export async function PATCH(
       data: {
         title,
         description,
-        price,
+        cenaTip: cena.cenaTip,
+        price: cena.price,
+        cenaDo: cena.cenaDo,
         location: location || null,
         phone: phone || null,
         images: [...zadrzaneSlike, ...noveSlike],

@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import CenaUnos from "@/components/CenaUnos";
+import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 
 // DB enum values — never change these (they are stored in the database)
 const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
@@ -28,7 +30,9 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [cenaTip, setCenaTip] = useState<CenaTip>("FIKSNA");
   const [price, setPrice] = useState("");
+  const [cenaDo, setCenaDo] = useState("");
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState(defaultLocation);
   const [phone, setPhone] = useState("");
@@ -52,13 +56,13 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
     setSlike((prev) => prev.filter((_, idx) => idx !== i));
   }
 
-  const canSubmit = title.trim().length >= 3 && Number(price) > 0 && category;
+  const cena = parsirajCenu(cenaTip, price, cenaDo);
+  const canSubmit = title.trim().length >= 3 && cena.ok && category;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    const priceNum = Math.floor(Number(price));
-    if (isNaN(priceNum) || priceNum <= 0) { setError(t("cena_greska_unos")); return; }
+    if (!cena.ok) { setError(cena.error ?? t("cena_greska_unos")); return; }
 
     setLoading(true);
     setError("");
@@ -67,7 +71,9 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
       const fd = new FormData();
       fd.append("title", title.trim());
       fd.append("description", description.trim());
-      fd.append("price", String(priceNum));
+      fd.append("cenaTip", cenaTip);
+      fd.append("price", price);
+      fd.append("cenaDo", cenaDo);
       fd.append("category", category);
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
@@ -144,18 +150,15 @@ export default function NoviOglasForma({ defaultLocation = "" }: { defaultLocati
         </div>
 
         {/* Cena */}
-        <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("cena_required")}</label>
-          <input
-            type="number"
-            min={1}
-            step={1}
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="500"
-            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors"
-          />
-        </div>
+        <CenaUnos
+          cenaTip={cenaTip}
+          setCenaTip={setCenaTip}
+          price={price}
+          setPrice={setPrice}
+          cenaDo={cenaDo}
+          setCenaDo={setCenaDo}
+          t={t}
+        />
 
         {/* Kategorija */}
         <div>

@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 
 interface Oglas {
   id: string;
   title: string;
-  price: number;
+  cenaTip: string;
+  price: number | null;
+  cenaDo: number | null;
   category: string;
   status: string;
   slike: number;
@@ -106,7 +109,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xs text-kolo-muted">{l.category}</span>
                   <span className="text-xs text-kolo-border">·</span>
-                  <span className="text-xs font-semibold text-kolo-green-700">{l.price.toLocaleString("sr-RS")} P</span>
+                  <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " P" : ""}</span>
                   {l.soldAt && (
                     <>
                       <span className="text-xs text-kolo-border">·</span>

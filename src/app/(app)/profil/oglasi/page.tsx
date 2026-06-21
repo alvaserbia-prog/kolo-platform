@@ -12,7 +12,8 @@ export default async function MojiOglasiPage() {
     where: { sellerId: session.user.id },
     orderBy: { createdAt: "desc" },
     select: {
-      id: true, title: true, price: true, category: true,
+      id: true, title: true,
+      cenaTip: true, price: true, cenaDo: true, category: true,
       status: true, images: true, createdAt: true, soldAt: true,
     },
   });
@@ -22,7 +23,9 @@ export default async function MojiOglasiPage() {
       listings={listings.map((l) => ({
         id: l.id,
         title: l.title,
+        cenaTip: l.cenaTip,
         price: l.price,
+        cenaDo: l.cenaDo,
         category: l.category,
         status: l.status,
         slike: l.images.length,
