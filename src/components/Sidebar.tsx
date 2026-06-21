@@ -214,12 +214,12 @@ function SidebarContent({
         { links: [
           { href: "/pocetna", label: t("pocetna") },
         ] },
-        { links: [
+        { label: t("grupa_ekonomija"), links: [
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { links: [verifikacijaLink] },
-        { links: [
+        { label: t("grupa_poverenje"), links: [verifikacijaLink] },
+        { label: t("grupa_podrzi"), links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
         ] },
@@ -233,7 +233,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { links: [verifikacijaLink, tablaJemstvaLink] },
+        { label: t("grupa_poverenje"), links: [verifikacijaLink, tablaJemstvaLink] },
         ...adminGrupa,
       ];
 
@@ -242,7 +242,9 @@ function SidebarContent({
       {/* Brending i jezik switcher su u headeru (gore-levo); sidebar je samo navigacija */}
       <nav className="flex-1 pl-1 pr-2.5 pt-4 pb-3 space-y-1 overflow-y-auto">
         {grupe.map((grupa, gi) => (
-          <div key={grupa.label ?? `grupa-${gi}`} className={gi > 0 ? "pt-2" : ""}>
+          // Svaka grupa (osim prve) odvojena je tankom horizontalnom linijom — celine ostaju
+          // jasno razdvojene bez obzira na nejednak broj stavki. Imenovane grupe nose i naslov.
+          <div key={grupa.label ?? `grupa-${gi}`} className={gi > 0 ? "mt-2 pt-2 border-t border-white/10" : ""}>
             {grupa.collapsible ? (
               <PadajucaGrupa
                 label={grupa.label!}
@@ -254,7 +256,7 @@ function SidebarContent({
             ) : (
               <>
                 {grupa.label && (
-                  <p className="px-3 pt-1 pb-1 text-[11px] font-semibold uppercase tracking-wider text-white/35">
+                  <p className="px-3 pt-0.5 pb-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/35">
                     {grupa.label}
                   </p>
                 )}
