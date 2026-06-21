@@ -11,10 +11,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const body = await req.json().catch(() => ({}));
-  const { title, description, source, predlozeniPoen, obrazlozenje, saOdobravanjem, positions, deadline, krugId } = body;
+  const { title, description, predlozeniPoen, obrazlozenje, saOdobravanjem, positions, deadline, krugId } = body;
 
   if (!title?.trim() || !description?.trim()) return NextResponse.json({ error: "Naziv i opis su obavezni." }, { status: 400 });
-  if (!["FONDACIJA", "KRUG", "PROJEKAT"].includes(source)) return NextResponse.json({ error: "Nevalidan izvor." }, { status: 400 });
 
   // Predloženi POEN — težinski koeficijent (čl. 5/6). Gornja granica po zadatku je
   // operativni parametar (čl. 26) koji utvrđuje UO/Gornje Kolo; ovde se primenjuje
@@ -31,7 +30,7 @@ export async function POST(req: NextRequest) {
     data: {
       title: title.trim(),
       description: description.trim(),
-      source,
+      source: "FONDACIJA", // izvor zadatka uvek Fondacija (admin = UO); selektor uklonjen iz forme
       predlozeniPoen: predlozeni,
       obrazlozenje: typeof obrazlozenje === "string" && obrazlozenje.trim() ? obrazlozenje.trim() : null,
       saOdobravanjem: Boolean(saOdobravanjem),

@@ -670,11 +670,10 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
   const t = useTranslations("admin");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [source, setSource] = useState<"FONDACIJA" | "KRUG" | "PROJEKAT">("FONDACIJA");
   const [predlozeniPoen, setPredlozeniPoen] = useState("");
   const [obrazlozenje, setObrazlozenje] = useState("");
   const [saOdobravanjem, setSaOdobravanjem] = useState(false);
-  const [positions, setPositions] = useState("1");
+  const [positions, setPositions] = useState("");
   const [deadline, setDeadline] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -693,11 +692,10 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
         body: JSON.stringify({
           title: title.trim(),
           description: description.trim(),
-          source,
           predlozeniPoen: predlozeni,
           obrazlozenje: obrazlozenje.trim() || undefined,
           saOdobravanjem,
-          positions: Number(positions),
+          positions: positions.trim() ? Number(positions) : undefined,
           deadline: deadline || null,
         }),
       });
@@ -726,24 +724,11 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
           className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_izvor_label")}</label>
-          <div className="flex gap-1.5 flex-wrap">
-            {(["FONDACIJA", "KRUG", "PROJEKAT"] as const).map((s) => (
-              <button key={s} type="button" onClick={() => setSource(s)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${source === s ? "bg-kolo-green-700 text-white" : "bg-kolo-bg text-kolo-muted"}`}>
-                {sourceLabel(t)[s]}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_predlozeni_poen_label")}</label>
-          <input type="number" min={100} step={100} value={predlozeniPoen} onChange={(e) => setPredlozeniPoen(e.target.value)}
-            placeholder={t("novi_oglas_predlozeni_poen_placeholder")}
-            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-        </div>
+      <div>
+        <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_predlozeni_poen_label")}</label>
+        <input type="number" min={100} step={100} value={predlozeniPoen} onChange={(e) => setPredlozeniPoen(e.target.value)}
+          placeholder={t("novi_oglas_predlozeni_poen_placeholder")}
+          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       </div>
 
       <div>
@@ -757,6 +742,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_br_izvršilaca_label")}</label>
           <input type="number" min={1} value={positions} onChange={(e) => setPositions(e.target.value)}
+            placeholder={t("novi_oglas_br_izvršilaca_placeholder")}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
         </div>
         <div>
