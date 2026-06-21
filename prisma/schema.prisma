@@ -43,6 +43,14 @@ enum ListingStatus {
   EXPIRED
 }
 
+// Smer oglasa na Pijaci: PONUDA = oglašivač nudi dobro/uslugu (klasičan oglas),
+// POTRAZNJA = oglašivač traži nekoga da uradi/napravi nešto („traži se").
+// Kod POTRAZNJA budžet se uvek dogovara (cenaTip = DOGOVOR, bez iznosa).
+enum TipOglasa {
+  PONUDA
+  POTRAZNJA
+}
+
 // Varijanta cene na oglasu Pijace (bira je oglašivač).
 enum CenaTip {
   FIKSNA  // jedan iznos
@@ -416,6 +424,8 @@ model MarketplaceListing {
   seller      User          @relation("SellerListings", fields: [sellerId], references: [id])
   buyerId     String?
   buyer       User?         @relation("BuyerListings", fields: [buyerId], references: [id])
+  // Smer oglasa (ponuda vs potražnja). Kod POTRAZNJA je cenaTip uvek DOGOVOR.
+  tip         TipOglasa     @default(PONUDA)
   title       String
   description String
   // Cena ima tri varijante (bira ih oglašivač):
@@ -440,6 +450,7 @@ model MarketplaceListing {
   updatedAt   DateTime      @updatedAt
 
   @@index([status, category, createdAt])
+  @@index([status, tip, createdAt])
 }
 
 model ProtokolProgram {

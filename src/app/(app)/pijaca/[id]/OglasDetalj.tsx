@@ -13,6 +13,7 @@ interface OglasProps {
   id: string;
   title: string;
   description: string;
+  tip: string;
   cenaTip: string;
   price: number | null;
   cenaDo: number | null;
@@ -53,6 +54,7 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
   const [deaktiviranjeLoading, setDeaktiviranjeLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [chatLoading, setChatLoading] = useState(false);
+  const jePotraznja = oglas.tip === "POTRAZNJA";
 
   async function handleKontakt() {
     setChatLoading(true);
@@ -150,8 +152,16 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
               <h1 className="text-xl font-bold text-kolo-text mt-0.5">{oglas.title}</h1>
             </div>
             <div className="shrink-0 text-right">
-              <p className="text-2xl font-bold text-kolo-green-700">{formatCenaGlavni(oglas, t("cena_po_dogovoru"))}</p>
-              {prikaziJedinicuCene(oglas) && <p className="text-sm text-kolo-green-700">POEN</p>}
+              {jePotraznja ? (
+                <span className="inline-block bg-kolo-gold-100 text-kolo-gold-600 rounded-lg px-3 py-1.5 text-sm font-bold uppercase tracking-wide">
+                  {t("trazi_se")}
+                </span>
+              ) : (
+                <>
+                  <p className="text-2xl font-bold text-kolo-green-700">{formatCenaGlavni(oglas, t("cena_po_dogovoru"))}</p>
+                  {prikaziJedinicuCene(oglas) && <p className="text-sm text-kolo-green-700">POEN</p>}
+                </>
+              )}
             </div>
           </div>
 
@@ -160,7 +170,7 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
           )}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
-            <span>{t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
+            <span>{jePotraznja ? t("narucilac") : t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
           </div>
@@ -200,7 +210,7 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
                   disabled={chatLoading}
                   className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                 >
-                  {chatLoading ? "..." : t("kontaktiraj_prodavca")}
+                  {chatLoading ? "..." : jePotraznja ? t("javi_se_narucilac") : t("kontaktiraj_prodavca")}
                 </button>
               )}
             </div>
@@ -248,6 +258,7 @@ function IzmeniOglas({
   onSuccess: () => void;
 }) {
   const t = useTranslations("pijaca");
+  const jePotraznja = oglas.tip === "POTRAZNJA";
   const [title, setTitle] = useState(oglas.title);
   const [description, setDescription] = useState(oglas.description);
   const [cenaTip, setCenaTip] = useState<CenaTip>((oglas.cenaTip as CenaTip) ?? "FIKSNA");
@@ -339,15 +350,17 @@ function IzmeniOglas({
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors" />
         </div>
 
-        <CenaUnos
-          cenaTip={cenaTip}
-          setCenaTip={setCenaTip}
-          price={price}
-          setPrice={setPrice}
-          cenaDo={cenaDo}
-          setCenaDo={setCenaDo}
-          t={t}
-        />
+        {!jePotraznja && (
+          <CenaUnos
+            cenaTip={cenaTip}
+            setCenaTip={setCenaTip}
+            price={price}
+            setPrice={setPrice}
+            cenaDo={cenaDo}
+            setCenaDo={setCenaDo}
+            t={t}
+          />
+        )}
 
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">

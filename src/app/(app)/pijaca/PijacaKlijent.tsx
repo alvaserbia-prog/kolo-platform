@@ -28,6 +28,7 @@ interface Listing {
   id: string;
   title: string;
   description: string;
+  tip: string;
   cenaTip: string;
   price: number | null;
   cenaDo: number | null;
@@ -48,6 +49,7 @@ interface Props {
 export default function PijacaKlijent({ listings, isVerified }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
+  const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
   const [filterKat, setFilterKat] = useState("Sve");
   const [pretraga, setPretraga] = useState("");
   const [sort, setSort] = useState("novo");
@@ -61,9 +63,16 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   // Filtriranje + sortiranje se računa SAMO kad se promene ulazi — ne na svaki
   // render (npr. otvaranje dropdown-a `showKat`/`showCena` ili kontakt-loading
   // više ne preračunava i ne presortirava celu listu).
+  // Brojači za prekidač Ponude | Potražnja (nezavisno od ostalih filtera).
+  const brojPonuda = useMemo(() => listings.filter((l) => l.tip !== "POTRAZNJA").length, [listings]);
+  const brojPotraznja = useMemo(() => listings.filter((l) => l.tip === "POTRAZNJA").length, [listings]);
+  const jePotraznja = tipPrikaza === "POTRAZNJA";
+
   const filtrirani = useMemo(() => {
     return listings
       .filter((l) => {
+        // Kod potražnje oglasi imaju tip POTRAZNJA; ponude su sve ostalo (uklj. legacy bez tip-a).
+        if (jePotraznja ? l.tip !== "POTRAZNJA" : l.tip === "POTRAZNJA") return false;
         if (filterKat !== "Sve" && l.category !== filterKat) return false;
         if (pretraga && !l.title.toLowerCase().includes(pretraga.toLowerCase())) return false;
         // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
@@ -77,7 +86,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
-  }, [listings, filterKat, pretraga, sort, minCena, maxCena]);
+  }, [listings, jePotraznja, filterKat, pretraga, sort, minCena, maxCena]);
 
   // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
   // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
@@ -102,14 +111,35 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
         {isVerified ? (
           <Link
-            href="/pijaca/novi-oglas"
+            href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
             className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
           >
-            {t("novi_oglas")}
+            {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
           </Link>
         ) : (
           <span className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</span>
         )}
+      </div>
+
+      {/* Prekidač: Ponude | Potražnja */}
+      <div className="inline-flex rounded-xl border border-kolo-border bg-white p-1">
+        {([
+          { val: "PONUDA" as const, label: t("tab_ponude"), broj: brojPonuda },
+          { val: "POTRAZNJA" as const, label: t("tab_potraznja"), broj: brojPotraznja },
+        ]).map(({ val, label, broj }) => (
+          <button
+            key={val}
+            type="button"
+            onClick={() => setTipPrikaza(val)}
+            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+              tipPrikaza === val
+                ? "bg-kolo-green-700 text-white"
+                : "text-kolo-muted hover:text-kolo-text"
+            }`}
+          >
+            {label} <span className="opacity-70">({broj})</span>
+          </button>
+        ))}
       </div>
 
       {/* Filteri: levo padajuci meniji (kategorija + sortiranje), desno pretraga (pola sirine) */}
@@ -155,7 +185,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               )}
             </div>
 
-            {/* Cena — dropdown sa min/max (u sredini) */}
+            {/* Cena — dropdown sa min/max (u sredini). Kod potražnje nema iznosa, pa se sakriva. */}
+            {!jePotraznja && (
             <div className="relative">
               <button
                 type="button"
@@ -196,8 +227,10 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                 </div>
               )}
             </div>
+            )}
 
-            {/* Sortiranje — dropdown (isti dizajn kao Cena), default Najnovije */}
+            {/* Sortiranje — dropdown (isti dizajn kao Cena), default Najnovije. Kod potražnje nema sortiranja po ceni. */}
+            {!jePotraznja && (
             <div className="relative">
               <button
                 type="button"
@@ -226,6 +259,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
                 </div>
               )}
             </div>
+            )}
           </div>
 
           {/* DESNO — pretraga (pola sirine, pomerena desno) */}
@@ -248,10 +282,14 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
             </svg>
           </div>
           <p className="text-sm font-semibold text-kolo-text">
-            {listings.length === 0 ? t("nema_oglasa_naslov") : t("nema_rezultata_naslov")}
+            {(jePotraznja ? brojPotraznja : brojPonuda) === 0
+              ? t(jePotraznja ? "nema_potraznja_naslov" : "nema_oglasa_naslov")
+              : t("nema_rezultata_naslov")}
           </p>
           <p className="text-sm text-kolo-muted">
-            {listings.length === 0 ? t("nema_oglasa_opis") : t("nema_rezultata_opis")}
+            {(jePotraznja ? brojPotraznja : brojPonuda) === 0
+              ? t(jePotraznja ? "nema_potraznja_opis" : "nema_oglasa_opis")
+              : t("nema_rezultata_opis")}
           </p>
         </div>
       ) : (
@@ -318,16 +356,22 @@ const OglasKartica = memo(function OglasKartica({
             </Link>
             <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{oglas.description}</p>
           </div>
-          <div className="shrink-0 bg-kolo-green-100 rounded-xl px-2.5 py-1.5 text-center">
-            <p className="text-base font-bold text-kolo-green-700 leading-none">
-              {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}
-            </p>
-            {prikaziJedinicuCene(oglas) && (
-              <p className="text-[10px] text-kolo-green-700 opacity-70">
-                POEN
+          {oglas.tip === "POTRAZNJA" ? (
+            <span className="shrink-0 bg-kolo-gold-100 text-kolo-gold-600 rounded-lg px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide self-start">
+              {t("trazi_se")}
+            </span>
+          ) : (
+            <div className="shrink-0 bg-kolo-green-100 rounded-xl px-2.5 py-1.5 text-center">
+              <p className="text-base font-bold text-kolo-green-700 leading-none">
+                {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}
               </p>
-            )}
-          </div>
+              {prikaziJedinicuCene(oglas) && (
+                <p className="text-[10px] text-kolo-green-700 opacity-70">
+                  POEN
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="flex justify-between items-center gap-2 mt-auto pt-2 border-t border-kolo-border">
@@ -341,7 +385,7 @@ const OglasKartica = memo(function OglasKartica({
               disabled={kontaktLoading}
               className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
             >
-              {kontaktLoading ? "..." : t("kontaktiraj")}
+              {kontaktLoading ? "..." : oglas.tip === "POTRAZNJA" ? t("javi_se") : t("kontaktiraj")}
             </button>
           ) : (
             <Link href="/tabla-jemstva" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">

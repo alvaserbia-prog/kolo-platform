@@ -4,10 +4,16 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import NoviOglasForma from "./NoviOglasForma";
 
-export default async function NoviOglasPage() {
+export default async function NoviOglasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tip?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
   if (!session.user.verified) redirect("/tabla-jemstva");
+
+  const { tip } = await searchParams;
 
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -18,6 +24,7 @@ export default async function NoviOglasPage() {
     <NoviOglasForma
       defaultLocation={korisnik?.location ?? ""}
       defaultPhone={korisnik?.telefon ?? ""}
+      initialTip={tip?.toUpperCase() === "POTRAZNJA" ? "POTRAZNJA" : "PONUDA"}
     />
   );
 }

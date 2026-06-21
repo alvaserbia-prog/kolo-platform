@@ -65,9 +65,11 @@ async function kompresujSliku(file: File): Promise<File> {
   }
 }
 
-export default function NoviOglasForma({ defaultLocation = "", defaultPhone = "" }: { defaultLocation?: string; defaultPhone?: string }) {
+export default function NoviOglasForma({ defaultLocation = "", defaultPhone = "", initialTip = "PONUDA" }: { defaultLocation?: string; defaultPhone?: string; initialTip?: "PONUDA" | "POTRAZNJA" }) {
   const t = useTranslations("pijaca");
   const router = useRouter();
+  const [tip, setTip] = useState<"PONUDA" | "POTRAZNJA">(initialTip);
+  const jePotraznja = tip === "POTRAZNJA";
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [cenaTip, setCenaTip] = useState<CenaTip>("FIKSNA");
@@ -108,24 +110,30 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
     setSlike((prev) => prev.filter((_, idx) => idx !== i));
   }
 
-  const cena = parsirajCenu(cenaTip, price, cenaDo);
+  // Kod potražnje nema iznosa — budžet se dogovara u porukama (cenaTip = DOGOVOR).
+  const cena = jePotraznja ? { ok: true } : parsirajCenu(cenaTip, price, cenaDo);
   const canSubmit = title.trim().length >= 3 && cena.ok && category;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
-    if (!cena.ok) { setError(cena.error ?? t("cena_greska_unos")); return; }
+    if (!jePotraznja) {
+      const provera = parsirajCenu(cenaTip, price, cenaDo);
+      if (!provera.ok) { setError(provera.error ?? t("cena_greska_unos")); return; }
+    }
 
     setLoading(true);
     setError("");
 
     try {
       const fd = new FormData();
+      fd.append("tip", tip);
       fd.append("title", title.trim());
       fd.append("description", description.trim());
-      fd.append("cenaTip", cenaTip);
-      fd.append("price", price);
-      fd.append("cenaDo", cenaDo);
+      // Kod potražnje server ignoriše cenu i forsira DOGOVOR; svejedno šaljemo bezbedne vrednosti.
+      fd.append("cenaTip", jePotraznja ? "DOGOVOR" : cenaTip);
+      fd.append("price", jePotraznja ? "" : price);
+      fd.append("cenaDo", jePotraznja ? "" : cenaDo);
       fd.append("category", category);
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
@@ -171,10 +179,33 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
         <button onClick={() => router.back()} className="text-kolo-muted hover:text-kolo-muted transition-colors">
           {t("nazad")}
         </button>
-        <h1 className="kolo-naslov">{t("novi_oglas_naslov")}</h1>
+        <h1 className="kolo-naslov">{jePotraznja ? t("nova_potraznja_naslov") : t("novi_oglas_naslov")}</h1>
       </div>
 
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
+        {/* Nudim / Tražim */}
+        <div>
+          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("tip_oglasa_label")}</label>
+          <div className="inline-flex rounded-xl border border-kolo-border bg-white p-1">
+            {([
+              { val: "PONUDA" as const, label: t("tip_nudim") },
+              { val: "POTRAZNJA" as const, label: t("tip_trazim") },
+            ]).map(({ val, label }) => (
+              <button
+                key={val}
+                type="button"
+                onClick={() => setTip(val)}
+                className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                  tip === val ? "bg-kolo-green-700 text-white" : "text-kolo-muted hover:text-kolo-text"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1.5 text-xs text-kolo-muted">{jePotraznja ? t("tip_trazim_hint") : t("tip_nudim_hint")}</p>
+        </div>
+
         {/* Naslov */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("naslov_required")}</label>
@@ -183,7 +214,7 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
             maxLength={80}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder={t("naslov_placeholder")}
+            placeholder={jePotraznja ? t("naslov_placeholder_potraznja") : t("naslov_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
           />
         </div>
@@ -196,21 +227,23 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
             maxLength={500}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder={t("opis_placeholder")}
+            placeholder={jePotraznja ? t("opis_placeholder_potraznja") : t("opis_placeholder")}
             className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none transition-colors"
           />
         </div>
 
-        {/* Cena */}
-        <CenaUnos
-          cenaTip={cenaTip}
-          setCenaTip={setCenaTip}
-          price={price}
-          setPrice={setPrice}
-          cenaDo={cenaDo}
-          setCenaDo={setCenaDo}
-          t={t}
-        />
+        {/* Cena — samo kod ponude; kod potražnje se budžet dogovara u porukama */}
+        {!jePotraznja && (
+          <CenaUnos
+            cenaTip={cenaTip}
+            setCenaTip={setCenaTip}
+            price={price}
+            setPrice={setPrice}
+            cenaDo={cenaDo}
+            setCenaDo={setCenaDo}
+            t={t}
+          />
+        )}
 
         {/* Kategorija */}
         <div>
@@ -259,7 +292,7 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
         {/* Slike */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">
-            {t("slike_label")} <span className="text-kolo-muted font-normal">{t("slike_do", { max: MAX_IMAGES })}</span>
+            {jePotraznja ? t("slike_label_potraznja") : t("slike_label")} <span className="text-kolo-muted font-normal">{t("slike_do", { max: MAX_IMAGES })}</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {slike.map((f, i) => (
@@ -315,7 +348,7 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
           disabled={!canSubmit || loading || obrada}
           className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
-          {loading ? t("objavljivanje") : t("objavi_oglas")}
+          {loading ? t("objavljivanje") : jePotraznja ? t("objavi_potraznja") : t("objavi_oglas")}
         </button>
       </form>
     </div>
