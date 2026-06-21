@@ -56,7 +56,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const [showCena, setShowCena] = useState(false);
   const [showKat, setShowKat] = useState(false);
   const [showSort, setShowSort] = useState(false);
-  const [kontaktLoading, setKontaktLoading] = useState(false);
+  const [kontaktLoadingId, setKontaktLoadingId] = useState<string | null>(null);
 
   const filtrirani = listings
     .filter((l) => {
@@ -76,15 +76,14 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
 
   // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
   // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
-  async function handleKontakt(sellerId: string) {
-    setKontaktLoading(true);
+  async function handleKontakt(oglasId: string, sellerId: string) {
+    setKontaktLoadingId(oglasId);
     const res = await fetch("/api/poruke", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userId: sellerId }),
     });
-    setKontaktLoading(false);
-    if (!res.ok) return;
+    if (!res.ok) { setKontaktLoadingId(null); return; }
     const data = await res.json();
     router.push(`/poruke?k=${data.konverzacijaId}`);
   }
@@ -255,8 +254,8 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
               key={l.id}
               oglas={l}
               isVerified={isVerified}
-              kontaktLoading={kontaktLoading}
-              onKontakt={() => handleKontakt(l.sellerId)}
+              kontaktLoading={kontaktLoadingId === l.id}
+              onKontakt={() => handleKontakt(l.id, l.sellerId)}
               t={t}
             />
           ))}
