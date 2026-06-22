@@ -217,9 +217,17 @@ export const authOptions: NextAuthOptions = {
               token.pseudonim = dbUser.pseudonim;
               token.oauthPending = dbUser.oauthPending;
               token.osvezenoAt = sada;
+            } else {
+              // Token nosi `id` koga više NEMA u bazi (obrisan nalog ili je baza
+              // reseed-ovana), a JWT cookie i dalje živi u browseru. Ako ostavimo
+              // token, korisnik „izgleda prijavljen" ali svaki UPIS puca: insert →
+              // FK prekršaj na userId (P2003), update → red ne postoji (P2025),
+              // što se na klijentu vidi kao „network error". Poništi `id` → session
+              // callback vraća null → korisnik se čisto preusmerava na prijavu.
+              token.id = undefined;
             }
           } catch {
-            // zadrži postojeće vrednosti iz JWT-a
+            // zadrži postojeće vrednosti iz JWT-a (tranzijentna DB greška)
           }
         }
       }
@@ -227,6 +235,15 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
+      // Sesija čiji korisnik više ne postoji u bazi — jwt callback je očistio
+      // `token.id`. Vrati null da `getServerSession` da null → (app)/layout
+      // preusmerava na prijavu (čista odjava umesto 500 pri svakom upisu).
+      // Izuzetak: nedovršena OAuth registracija legitimno nema `id` dok korisnik
+      // ne izabere pseudonim na /oauth/dovrsi (nosi `oauthPending`).
+      if (!token.id && !token.oauthPending) {
+        return null as unknown as typeof session;
+      }
+
       session.user.id = token.id as string;
       session.user.pseudonim = token.pseudonim;
       session.user.tipKorisnika = token.tipKorisnika as string;
