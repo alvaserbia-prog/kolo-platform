@@ -1578,7 +1578,10 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                   {u.email && (
-                    <p className="text-xs text-kolo-muted mt-0.5 break-all">{u.email}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5 break-all flex items-start gap-1">
+                      <span aria-hidden className="shrink-0">✉</span>
+                      <span className="min-w-0 break-all">{u.email}</span>
+                    </p>
                   )}
                 </div>
                 {!jeSuperadmin(u) && (
