@@ -1577,6 +1577,12 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     {tl[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString("sr-RS")} P
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
+                  {u.email && (
+                    <p className="text-xs text-kolo-muted mt-0.5 break-all flex items-start gap-1">
+                      <span aria-hidden className="shrink-0">✉</span>
+                      <span className="min-w-0 break-all">{u.email}</span>
+                    </p>
+                  )}
                 </div>
                 {!jeSuperadmin(u) && (
                   <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-wrap sm:shrink-0 sm:justify-end">
