@@ -24,9 +24,17 @@ type MojIndeks = {
 };
 
 /**
- * Generiše token za verifikaciju i prikazuje QR + 6-cifren broj + countdown 60s.
+ * Generiše token za verifikaciju i prikazuje QR + 6-cifren broj + countdown (2 sata).
  * Polluje moj-indeks endpoint i pokazuje obaveštenje kad se verifikacija desi.
  */
+function formatPreostalo(sekundi: number): string {
+  const h = Math.floor(sekundi / 3600);
+  const m = Math.floor((sekundi % 3600) / 60);
+  const s = sekundi % 60;
+  if (h > 0) return `${h}h ${String(m).padStart(2, "0")}m`;
+  if (m > 0) return `${m}m ${String(s).padStart(2, "0")}s`;
+  return `${s}s`;
+}
 export default function MojQrKod() {
   const router = useRouter();
   const [token, setToken] = useState<Token | null>(null);
@@ -132,7 +140,7 @@ export default function MojQrKod() {
         <>
           <p className="text-sm text-kolo-muted mb-3">
             Daj nekome ko može da te verifikuje da skenira QR ili da unese 6-cifren broj.
-            Kod važi 60 sekundi.
+            Kod važi 2 sata.
           </p>
           <button
             onClick={generisi}
@@ -147,7 +155,7 @@ export default function MojQrKod() {
       {token && !istekao && (
         <div className="space-y-3">
           <div className="text-sm text-kolo-muted">
-            Kod važi još: <span className="font-mono font-semibold">{preostalo}s</span>
+            Kod važi još: <span className="font-mono font-semibold">{formatPreostalo(preostalo)}</span>
           </div>
           <div className="flex justify-center bg-white p-4 rounded-xl border border-kolo-border">
             <QRCodeSVG value={token.token} size={200} />

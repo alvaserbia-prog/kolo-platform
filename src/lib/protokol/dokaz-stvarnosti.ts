@@ -15,7 +15,7 @@ export const MAX_INDEKS = 100; // čl. 3 stav 2
 export const POEN_VERIFIKATOR = 1000; // čl. 7
 export const POEN_VERIFIKOVANI = 1000; // čl. 7
 export const POEN_NADZORNIK = 500; // čl. 7
-export const TOKEN_VAZI_SEKUNDI = 60; // QR token TTL
+export const TOKEN_VAZI_SEKUNDI = 2 * 60 * 60; // QR token TTL = 2 sata
 
 export type GrafZapis = { verifikatorId: string; verifikovaniId: string };
 

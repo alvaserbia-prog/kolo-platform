@@ -49,7 +49,7 @@ export function normalizujOznaku(oznaka: unknown): string | null {
 
 /**
  * Generiše jednokratan token za verifikaciju za datog korisnika.
- * Token važi 60 sekundi. Vraća { token, brojCifara, expiresAt }.
+ * Token važi 2 sata. Vraća { token, brojCifara, expiresAt }.
  */
 export async function generisiTokenZaVerifikaciju(korisnikId: string) {
   const korisnik = await prisma.user.findUnique({ where: { id: korisnikId } });
@@ -377,7 +377,7 @@ export async function izvrsiVerifikaciju(
       verifikatorWalletId,
       POEN_VERIFIKATOR,
       TransactionType.EMISIJA_VERIFIKACIJA,
-      `Verifikacija ${verifikovaniPseudonim} (čl. 7 Pravilnika o dokazu stvarnosti)`
+      `Verifikacija ${verifikovaniPseudonim}`
     );
     await emitujPoen(
       verifikovaniWalletId,
