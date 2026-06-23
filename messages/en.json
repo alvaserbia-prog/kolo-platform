@@ -460,7 +460,7 @@
     "telefon_label": "Phone",
     "registrovan_label": "Registered",
     "status_verifikovan": "Verified",
-    "status_ceka": "Awaiting verification",
+    "status_ceka": "Not verified",
     "uloga_fizicko": "Individual",
     "uloga_clan_kruga": "Circle member",
     "uloga_admin": "Administrator",
