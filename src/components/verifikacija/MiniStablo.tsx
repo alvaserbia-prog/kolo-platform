@@ -68,7 +68,7 @@ export default function MiniStablo({
           </div>
         ) : jeJaPocetni ? (
           <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
-            Početni korisnik (UO Fondacije)
+            Početna verifikacija (osnivač)
           </div>
         ) : (
           <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
