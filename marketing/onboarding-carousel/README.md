@@ -18,7 +18,7 @@ Karusel za društvene mreže (Instagram / Facebook) — **čisto praktično uput
 4. **Korak 3 · Nalog napravljen** — *dobrodošli* ekran; potvrda da si ulogovan/a
 5. **Korak 4 · Verifikacija** — *verifikacija* ekran (0/0% neverifikovan); **zaokruženo** „Pokaži svoj kod nekome ko može da te verifikuje"
 6. **Ako ne znaš nikog** — *tabla jemstva* ekran; ostaviš predstavljanje, verifikovani ti se jave
-7. **Poziv na akciju** — ekolo.rs, javi se za pristupni kod (grafika)
+7. **Poziv na akciju** — ekolo.rs, „Uđi sa kodom kolo2026 i registruj se" (grafika)
 
 > **Pristupni kod:** na slajdu 2 u polju stoji `kolo2026`. Pošto je karusel javan, svako ko ga vidi može da ga iskoristi — ako želiš da kod ostane poluprivatan, javi pa ga zamaglim/zamenim placeholderom (npr. `kolo••••`).
 

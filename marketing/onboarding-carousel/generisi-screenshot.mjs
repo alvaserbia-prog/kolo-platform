@@ -128,13 +128,13 @@ slides.push(step({ n: 6, num: "★", side: "left", kicker: "NE ZNAŠ NIKOGA?", t
 // 7 — POZIV NA AKCIJU (grafika)
 slides.push(shell(`
 <div class="slide" style="justify-content:center">
-  <img src="${icon}" alt="KOLO" style="height:128px;border-radius:30px;margin-bottom:50px">
+  <img src="${icon}" alt="KOLO" style="align-self:flex-start;height:128px;width:auto;border-radius:30px;margin-bottom:50px">
   <div class="kicker"><span class="pip"></span>SPREMAN/NA SI?</div>
   <div style="font-size:92px;font-weight:800;color:${C.gold400};margin-top:32px;letter-spacing:-.01em">ekolo.rs</div>
-  <p class="lead" style="font-size:38px;margin-top:28px;max-width:900px">Javi nam se za <b>pristupni kod</b> i kreni. Platforma je u test fazi — uvodimo te lično.</p>
+  <p class="lead" style="font-size:38px;margin-top:28px;max-width:900px">Uđi sa kodom <b>kolo2026</b> i registruj se. Budi deo našeg tima od samog starta.</p>
   <div style="flex:1"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid rgba(255,255,255,.18);padding-top:38px">
-    <span style="font-size:36px;font-weight:800;color:#fff">KOLO se gradi sa tobom,<br>ne za tebe.</span>
+    <span style="font-size:36px;font-weight:800;color:#fff">KOLO — Sistem koji<br>stvaramo zajedno</span>
     <img src="${icon}" alt="" style="height:90px;border-radius:22px">
   </div>
 </div>`, { dark: true }));
