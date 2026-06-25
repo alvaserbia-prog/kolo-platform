@@ -31,6 +31,7 @@ export async function GET(
       id: true,
       pseudonim: true,
       tipKorisnika: true,
+      jeOsnivac: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
       verifikacijeKojeSuMeVerifikovale: {
@@ -92,6 +93,7 @@ export async function GET(
       id: user.id,
       pseudonim: user.pseudonim,
       tip: user.tipKorisnika,
+      jeOsnivac: user.jeOsnivac,
       indeks: user.indeksStvarnosti,
       kapacitet: kapacitet === "neograniceno" ? null : kapacitet,
       neograniceno: kapacitet === "neograniceno",

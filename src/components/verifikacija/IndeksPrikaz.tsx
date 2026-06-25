@@ -9,6 +9,8 @@ import Pojam from "@/components/Pojam";
 type Props = {
   prikaz: string; // "30/30%", "10/30%", "∞/10%", "0/0%"
   tip: string;
+  /** Početni korisnik (osnivač / UO Fondacije) — koren lanca jemstva. */
+  jeOsnivac?: boolean;
   podnaslov?: string;
   /** Profil varijanta: status kao badge levo, indeks desno (centrirano). */
   statusKaoBadge?: boolean;
@@ -16,7 +18,7 @@ type Props = {
   ispuniVisinu?: boolean;
 };
 
-export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
+export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
   const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
     ispuniVisinu ? " h-full flex flex-col justify-center" : ""
   }`;
@@ -31,6 +33,11 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge, i
     NOSILAC_ZRNA: "bg-kolo-gold-100 text-kolo-gold-600",
     NEVERIFIKOVAN: "bg-kolo-bg text-kolo-muted",
   };
+
+  // Osnivači (početni korisnici, UO Fondacije) su koren lanca jemstva — nemaju
+  // verifikatora iznad sebe, pa se njihov status prikazuje kao „Početna verifikacija".
+  const labela = jeOsnivac ? "Početna verifikacija" : (tipLabela[tip] ?? tip);
+  const stil = jeOsnivac ? "bg-kolo-gold-100 text-kolo-gold-600" : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
 
   const indeks = (
     <div className="text-center">
@@ -52,11 +59,9 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge, i
           {/* LEVO — status badge */}
           <div className="flex justify-center">
             <span
-              className={`inline-flex items-center text-center px-3 py-1.5 rounded-full text-sm font-semibold ${
-                badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted"
-              }`}
+              className={`inline-flex items-center text-center px-3 py-1.5 rounded-full text-sm font-semibold ${stil}`}
             >
-              {tipLabela[tip] ?? tip}
+              {labela}
             </span>
           </div>
           {/* DESNO — indeks stvarnosti (centrirano) */}
@@ -75,7 +80,7 @@ export default function IndeksPrikaz({ prikaz, tip, podnaslov, statusKaoBadge, i
         />
       </div>
       <div className="mt-1 text-5xl font-bold tabular-nums text-kolo-green-700">{prikaz}</div>
-      <div className="mt-2 text-sm text-kolo-muted">{tipLabela[tip] ?? tip}</div>
+      <div className="mt-2 text-sm text-kolo-muted">{labela}</div>
       {podnaslov && <div className="mt-1 text-xs text-kolo-muted">{podnaslov}</div>}
     </div>
   );
