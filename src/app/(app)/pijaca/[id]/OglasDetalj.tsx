@@ -105,13 +105,14 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
         {/* Slike */}
         {imaSlika ? (
           <div className="space-y-2">
-            <div className="relative w-full aspect-[4/3] bg-kolo-bg">
+            <div className="w-full bg-kolo-bg flex justify-center">
               <Image
                 src={`/api/pijaca/slika/${oglas.id}/${activeSlika}`}
                 alt={oglas.title}
-                fill
+                width={1200}
+                height={1200}
                 sizes="(max-width: 768px) 100vw, 600px"
-                className="object-contain"
+                className="w-auto h-auto max-h-[70vh] max-w-full object-contain"
                 priority
               />
             </div>
