@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
 import CenaUnos from "@/components/CenaUnos";
+import PodeliOglas from "@/components/PodeliOglas";
 import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 
 interface OglasProps {
@@ -95,10 +96,11 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3">
         <Link href="/pijaca" className="text-kolo-muted hover:text-kolo-muted transition-colors text-sm">
           {t("nazad_pijaca")}
         </Link>
+        <PodeliOglas naslov={oglas.title} />
       </div>
 
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
