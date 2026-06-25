@@ -11,15 +11,23 @@ type Zahtev = {
   pseudonim: string;
   tekstPredstavljanja: string;
   createdAt: string;
+  expiresAt: string;
   mojZahtev: boolean;
 };
+
+// Preostalo vreme do isteka, grubo u satima (zahtev traje 72h).
+function preostaloSati(expiresAt: string): number {
+  return Math.max(0, Math.round((new Date(expiresAt).getTime() - Date.now()) / (60 * 60 * 1000)));
+}
 
 export default function TablaJemstvaKlijent({
   verified,
   isAdmin,
+  mozeVerifikovati,
 }: {
   verified: boolean;
   isAdmin: boolean;
+  mozeVerifikovati: boolean;
 }) {
   const t = useTranslations("tablaJemstva");
   const router = useRouter();
@@ -27,6 +35,11 @@ export default function TablaJemstvaKlijent({
   const [radnja, setRadnja] = useState<string | null>(null);
   // Inline potvrda povlačenja (native confirm() je nepouzdan na mobilnim browserima)
   const [potvrdaPovuci, setPotvrdaPovuci] = useState<string | null>(null);
+  // Inline verifikacija sa kartice: koja kartica ima otvorenu potvrdu + checkbox + oznaka
+  const [verifikujId, setVerifikujId] = useState<string | null>(null);
+  const [potvrdaPoznavanja, setPotvrdaPoznavanja] = useState(false);
+  const [oznakaVerif, setOznakaVerif] = useState("");
+  const [verifUspeh, setVerifUspeh] = useState<string | null>(null);
   // Inline uklanjanje (admin) — native prompt() se guši na Brave/mobilnim browserima
   const [ukloniId, setUkloniId] = useState<string | null>(null);
   const [razlogUklanjanja, setRazlogUklanjanja] = useState("");
@@ -91,6 +104,38 @@ export default function TablaJemstvaKlijent({
     setRadnja(null);
     if (res.ok) setKontakti((k) => ({ ...k, [id]: d.kontaktPodaci }));
     else setAkcijaGreska(d.error ?? t("greska_generalna"));
+  }
+
+  function otvoriVerifikuj(id: string) {
+    setVerifikujId(id);
+    setPotvrdaPoznavanja(false);
+    setOznakaVerif("");
+    setAkcijaGreska("");
+  }
+
+  async function verifikuj(id: string) {
+    if (!potvrdaPoznavanja) return;
+    setAkcijaGreska("");
+    setRadnja(id);
+    const res = await fetch(`/api/tabla-jemstva/${id}/verifikuj`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        potvrdaPoznavanja: true,
+        oznaka: oznakaVerif.trim() || undefined,
+      }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok) {
+      setVerifikujId(null);
+      setPotvrdaPoznavanja(false);
+      setOznakaVerif("");
+      setVerifUspeh(d.verifikovaniPseudonim ?? "");
+      await refetch();
+    } else {
+      setAkcijaGreska(d.error ?? t("greska_generalna"));
+    }
   }
 
   async function posaljiPoruku(id: string) {
@@ -195,9 +240,16 @@ export default function TablaJemstvaKlijent({
         </div>
       )}
 
-      {/* Greška akcija (povuci/ukloni/kontakt/poruka) — uvek vidljiva */}
+      {/* Greška akcija (povuci/ukloni/kontakt/poruka/verifikuj) — uvek vidljiva */}
       {akcijaGreska && (
         <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{akcijaGreska}</p>
+      )}
+
+      {/* Uspešna verifikacija sa table */}
+      {verifUspeh !== null && (
+        <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">
+          {t("verifikacija_uspeh", { pseudonim: verifUspeh })}
+        </p>
       )}
 
       {/* Lista zahteva */}
@@ -219,6 +271,8 @@ export default function TablaJemstvaKlijent({
                   </p>
                   <p className="text-xs text-kolo-muted mt-0.5">
                     {new Date(z.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}
+                    <span className="mx-1.5">·</span>
+                    <span className="text-kolo-gold-600">{t("istice_za", { sati: preostaloSati(z.expiresAt) })}</span>
                   </p>
                 </div>
                 <div className="flex gap-1.5 shrink-0">
@@ -297,7 +351,44 @@ export default function TablaJemstvaKlijent({
                       className="px-3 py-1.5 rounded-lg bg-kolo-green-700 text-white text-xs font-semibold hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
                       {radnja === z.id ? "..." : t("dugme_posalji_poruku")}
                     </button>
+                    {mozeVerifikovati && verifikujId !== z.id && (
+                      <button onClick={() => otvoriVerifikuj(z.id)} disabled={radnja === z.id}
+                        className="px-3 py-1.5 rounded-lg bg-kolo-gold-400 text-black text-xs font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
+                        {t("dugme_verifikuj")}
+                      </button>
+                    )}
                   </div>
+
+                  {/* Inline potvrda verifikacije — lično poznavanje + opciona oznaka */}
+                  {mozeVerifikovati && verifikujId === z.id && (
+                    <div className="mt-2 pt-3 border-t border-kolo-border space-y-2">
+                      <input
+                        type="text"
+                        value={oznakaVerif}
+                        onChange={(e) => setOznakaVerif(e.target.value)}
+                        maxLength={80}
+                        placeholder={t("placeholder_oznaka")}
+                        className="w-full px-3 py-2 rounded-lg border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+                      />
+                      <p className="text-xs text-kolo-muted">{t("oznaka_opis")}</p>
+                      <label className="flex items-start gap-2 cursor-pointer">
+                        <input type="checkbox" checked={potvrdaPoznavanja}
+                          onChange={(e) => setPotvrdaPoznavanja(e.target.checked)}
+                          className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
+                        <span className="text-xs text-kolo-text">{t("potvrda_poznavanja")}</span>
+                      </label>
+                      <div className="flex gap-2">
+                        <button onClick={() => verifikuj(z.id)} disabled={radnja === z.id || !potvrdaPoznavanja}
+                          className="px-3 py-1.5 rounded-lg bg-kolo-gold-400 text-black text-xs font-semibold hover:bg-kolo-gold-600 disabled:opacity-50 transition-colors">
+                          {radnja === z.id ? "..." : t("dugme_potvrdi_verifikaciju")}
+                        </button>
+                        <button onClick={() => { setVerifikujId(null); setPotvrdaPoznavanja(false); }} disabled={radnja === z.id}
+                          className="px-3 py-1.5 rounded-lg bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                          {t("dugme_otkazi")}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

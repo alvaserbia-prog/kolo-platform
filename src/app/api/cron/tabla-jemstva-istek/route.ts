@@ -3,9 +3,9 @@ import { prisma } from "@/lib/prisma";
 
 /**
  * POST /api/cron/tabla-jemstva-istek
- * Označava aktivne zahteve za jemstvo starije od 30 dana kao ISTEKLE
- * (čl. 16 Uslova korišćenja — automatski istek roka od 30 dana od objave).
- * Preporučeno: dnevno.
+ * Označava aktivne zahteve za jemstvo kojima je prošao rok (expiresAt = 72h od
+ * objave) kao ISTEKLE (čl. 16 Uslova korišćenja). Vrti se na 6h da prozor isteka
+ * bude precizan za kratko (72h) trajanje.
  */
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-cron-secret");

@@ -234,7 +234,10 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { label: t("grupa_poverenje"), links: [verifikacijaLink, tablaJemstvaLink] },
+        // Neverifikovanom su Verifikacija i Tabla jemstva isti put, pa su spojeni u
+        // JEDNU stavku „Verifikacija" — sama stranica /verifikacija nosi i formu table
+        // jemstva (objava + status zahteva). Rasterećuje sidebar.
+        { label: t("grupa_poverenje"), links: [verifikacijaLink] },
         ...adminGrupa,
       ];
 
@@ -281,7 +284,7 @@ function SidebarContent({
       {!verified && (
         <div className="px-3 pb-3 pt-2 border-t border-white/10">
           <Link
-            href="/tabla-jemstva"
+            href="/verifikacija"
             onClick={onLinkClick}
             className="block w-full text-center px-3 py-2 bg-kolo-gold-400/20 text-kolo-gold-400 text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 hover:text-white transition-colors"
           >

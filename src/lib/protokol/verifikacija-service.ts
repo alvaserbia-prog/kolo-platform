@@ -94,12 +94,271 @@ export type IzvrsiVerifikacijuInput = {
 
 export type IzvrsiVerifikacijuRezultat = {
   verifikacijaId: string;
+  verifikovaniId: string;
   verifikovaniPseudonim: string;
+  verifikatorPseudonim: string;
+  verifikovaniNoviIndeks: number;
+};
+
+/** Rezultat Faze 1 (unutar transakcije) — nosi i walletId-eve za POEN emisiju u Fazi 2. */
+type FazaJedan = {
+  verifikacijaId: string;
+  verifikatorPseudonim: string;
+  verifikatorWalletId: string;
+  verifikovaniId: string;
+  verifikovaniPseudonim: string;
+  verifikovaniWalletId: string;
   verifikovaniNoviIndeks: number;
 };
 
 /**
- * Izvršava verifikaciju: token-match + provere + DB upis + POEN emisija.
+ * Jezgro verifikacije unutar otvorene transakcije: učita oba korisnika, sprovede
+ * SVE provere (čl. 4, 12, kapacitet/slot, osnivač≠osnivač, cap 100%), kreira
+ * VerifikacionaVeza, podigne indeks verifikovanog, zatvori njegov aktivan zahtev
+ * za jemstvo i potroši slot verifikatoru. Ne dira token — to je stvar pozivaoca
+ * (token put ga obeleži kao iskorišćen; put sa table jemstva ne koristi token).
+ *
+ * Deli ga oba ulaza (`izvrsiVerifikaciju` preko tokena i `izvrsiVerifikacijuSaTable`),
+ * da anti-malverzacija provere postoje na tačno jednom mestu.
+ */
+async function izvrsiJezgroVerifikacije(
+  tx: Prisma.TransactionClient,
+  verifikatorId: string,
+  verifikovaniId: string,
+  oznaka: string | null
+): Promise<FazaJedan> {
+  if (verifikovaniId === verifikatorId) {
+    throw new VerifikacijaGreska("Ne možeš da verifikuješ samog sebe.", 400);
+  }
+
+  // Učitaj verifikatora i verifikovanog
+  const verifikator = await tx.user.findUnique({ where: { id: verifikatorId } });
+  if (!verifikator) {
+    throw new VerifikacijaGreska("Verifikator ne postoji.", 404);
+  }
+  const verifikovani = await tx.user.findUnique({ where: { id: verifikovaniId } });
+  if (!verifikovani) {
+    throw new VerifikacijaGreska("Verifikovani korisnik ne postoji.", 404);
+  }
+
+  // Provera prava verifikatora (čl. 4)
+  if (!imaPristupVerifikaciji(verifikator.tipKorisnika, verifikator.indeksStvarnosti)) {
+    throw new VerifikacijaGreska(
+      "Nemaš pravo da verifikuješ druge (indeks ispod 10% ili nisi verifikovan).",
+      403
+    );
+  }
+
+  // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju nosioce ZRNA
+  // po redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija,
+  // ali bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa,
+  // ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
+  const verifikovaniJePoseban =
+    verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
+
+  // REGULARNI korisnik sa punim indeksom (100%) nema šta da dobije dodatnom
+  // verifikacijom. Posebni statusi nemaju gornju granicu evidencije (cap je 100).
+  if (
+    verifikovani.tipKorisnika === TipKorisnika.REGULARNI &&
+    verifikovani.indeksStvarnosti >= MAX_INDEKS
+  ) {
+    throw new VerifikacijaGreska(
+      "Ovaj korisnik već ima maksimalan indeks stvarnosti (100%).",
+      409
+    );
+  }
+
+  // Provera kapaciteta / slota
+  const kapacitet = izracunajKapacitet(
+    verifikator.tipKorisnika,
+    verifikator.indeksStvarnosti
+  );
+  if (!raspolozivSlot(kapacitet, verifikator.slotoviPotroseni)) {
+    throw new VerifikacijaGreska("Nemaš slobodan slot — pričekaj nadzor.", 409);
+  }
+
+  // Anti-malverzacija: početni nosioci ZRNA (osnivači) NE smeju da verifikuju
+  // jedan drugog. Mogu da verifikuju sve ostale (bootstrap lanca jemstva), ali
+  // međusobna verifikacija bi im veštački napumpala indeks/poverenje u zatvorenom
+  // krugu. Osnivače razlikuje marker `jeOsnivac` (ne tipKorisnika — NOSILAC_ZRNA
+  // status može steći i običan korisnik upisom ZRNA).
+  if (verifikator.jeOsnivac && verifikovani.jeOsnivac) {
+    throw new VerifikacijaGreska(
+      "Početni nosioci ZRNA (osnivači) ne mogu verifikovati jedan drugog.",
+      403
+    );
+  }
+
+  // Anti-cirkularno (čl. 12)
+  const grafRaw = await tx.verifikacionaVeza.findMany({
+    select: { verifikatorId: true, verifikovaniId: true },
+  });
+  const graf: GrafZapis[] = grafRaw.map((g) => ({
+    verifikatorId: g.verifikatorId,
+    verifikovaniId: g.verifikovaniId,
+  }));
+  const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, graf);
+  if (!acRezultat.dozvoljeno) {
+    throw new VerifikacijaGreska(acRezultat.razlog, 403);
+  }
+
+  // Izračunaj redniBroj
+  const brojObavljenih = await tx.verifikacionaVeza.count({ where: { verifikatorId } });
+  const redniBroj = brojObavljenih + 1;
+  const treboNadzor = podlezeNadzoru(verifikator.tipKorisnika);
+
+  // Kreiraj VerifikacionaVeza zapis
+  const veza = await tx.verifikacionaVeza.create({
+    data: {
+      verifikatorId,
+      verifikovaniId: verifikovani.id,
+      redniBroj,
+      podlezeNadzoru: treboNadzor,
+      oznakaVerifikatora: oznaka,
+    },
+  });
+
+  // Ažuriraj verifikovanog: indeks = broj veza × 10 (cap 100).
+  // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
+  const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
+    where: { verifikovaniId: verifikovani.id },
+  });
+  const izracunatiIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
+  // Za posebne statuse (POCETNI/NOSILAC_ZRNA) indeks je evidencija bez
+  // funkcionalnog efekta: zadržavamo status i nikad ne umanjujemo postojeći
+  // indeks (npr. bootstrap 10% početnog korisnika iz čl. 14, koji ne potiče iz
+  // lanca jemstva). NEVERIFIKOVAN/REGULARNI postaje (ostaje) REGULARNI.
+  const noviIndeks = verifikovaniJePoseban
+    ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
+    : izracunatiIndeks;
+  await tx.user.update({
+    where: { id: verifikovani.id },
+    data: {
+      tipKorisnika: verifikovaniJePoseban
+        ? verifikovani.tipKorisnika
+        : TipKorisnika.REGULARNI,
+      indeksStvarnosti: noviIndeks,
+      verified: true,
+      // Zadrži datum prve verifikacije pri dodatnim verifikacijama.
+      verifiedAt: verifikovani.verifiedAt ?? new Date(),
+    },
+  });
+
+  // Sprovedena verifikacija zatvara aktivan zahtev na tabli jemstva (ZAVRSEN).
+  await tx.zahtevZaJemstvo.updateMany({
+    where: { userId: verifikovani.id, status: "AKTIVAN" },
+    data: { status: "ZAVRSEN" },
+  });
+
+  // REGULARNI verifikator: slotoviPotroseni += 1
+  if (verifikator.tipKorisnika === TipKorisnika.REGULARNI) {
+    await tx.user.update({
+      where: { id: verifikatorId },
+      data: { slotoviPotroseni: { increment: 1 } },
+    });
+  }
+
+  // Osiguraj wallet za verifikovanog ako ga nema
+  let verifikovaniWallet = await tx.wallet.findUnique({
+    where: { userId: verifikovani.id },
+  });
+  if (!verifikovaniWallet) {
+    verifikovaniWallet = await tx.wallet.create({
+      data: { userId: verifikovani.id, type: "USER", balance: 0 },
+    });
+  }
+  // Osiguraj wallet za verifikatora (sanity — trebao bi da postoji)
+  let verifikatorWallet = await tx.wallet.findUnique({
+    where: { userId: verifikator.id },
+  });
+  if (!verifikatorWallet) {
+    verifikatorWallet = await tx.wallet.create({
+      data: { userId: verifikator.id, type: "USER", balance: 0 },
+    });
+  }
+
+  return {
+    verifikacijaId: veza.id,
+    verifikatorPseudonim: verifikator.pseudonim,
+    verifikatorWalletId: verifikatorWallet.id,
+    verifikovaniId: verifikovani.id,
+    verifikovaniPseudonim: verifikovani.pseudonim,
+    verifikovaniWalletId: verifikovaniWallet.id,
+    verifikovaniNoviIndeks: noviIndeks,
+  };
+}
+
+/** Mapira Prisma greške iz Faze 1 (serijalizacija/dupli par) u čiste poruke. */
+function mapTransakcijaGreska(e: unknown): never {
+  if (e instanceof VerifikacijaGreska) throw e;
+  const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
+  if (code === "P2002") {
+    throw new VerifikacijaGreska("Ova verifikacija već postoji.", 409);
+  }
+  if (code === "P2034") {
+    throw new VerifikacijaGreska("Verifikacija je u toku — pokušaj ponovo.", 409);
+  }
+  throw e;
+}
+
+/**
+ * Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu).
+ * Koristi se walletId direktno iz Faze 1 (bez ponovnog findUnique-a) da bi se
+ * izbegao connection-pool race u kojem novokreirani wallet nije još vidljiv.
+ */
+async function emitujPoenZaVerifikaciju(
+  fazaJedan: FazaJedan
+): Promise<IzvrsiVerifikacijuRezultat> {
+  const {
+    verifikacijaId,
+    verifikatorPseudonim,
+    verifikatorWalletId,
+    verifikovaniId,
+    verifikovaniPseudonim,
+    verifikovaniWalletId,
+    verifikovaniNoviIndeks,
+  } = fazaJedan;
+
+  try {
+    await emitujPoen(
+      verifikatorWalletId,
+      POEN_VERIFIKATOR,
+      TransactionType.EMISIJA_VERIFIKACIJA,
+      `Verifikacija ${verifikovaniPseudonim}`
+    );
+    await emitujPoen(
+      verifikovaniWalletId,
+      POEN_VERIFIKOVANI,
+      TransactionType.EMISIJA_VERIFIKACIJA,
+      `Primljena verifikacija od ${verifikatorPseudonim}`
+    );
+  } catch (e) {
+    console.error("[verifikacija-service] POEN emisija pukla posle Faze 1 — incident", {
+      verifikacijaId,
+      verifikatorWalletId,
+      verifikovaniWalletId,
+      error: e,
+    });
+    // Verifikacija je u bazi, slot iskorišćen, ali POEN nije emitovan.
+    // Bacamo dalje da UI moze da prikaze upozorenje korisniku.
+    throw new VerifikacijaGreska(
+      "Verifikacija je evidentirana, ali emisija POEN-a je pukla. Kontaktiraj administratora.",
+      500
+    );
+  }
+
+  return {
+    verifikacijaId,
+    verifikovaniId,
+    verifikovaniPseudonim,
+    verifikatorPseudonim,
+    verifikovaniNoviIndeks,
+  };
+}
+
+/**
+ * Izvršava verifikaciju preko TOKENA (QR / 6-cifren broj) — verifikacija uživo.
+ * Token-match + provere (jezgro) + DB upis + POEN emisija.
  */
 export async function izvrsiVerifikaciju(
   input: IzvrsiVerifikacijuInput
@@ -125,14 +384,7 @@ export async function izvrsiVerifikaciju(
   // Time se sprečava da dve istovremene verifikacije (npr. recipročno A→B i B→A, ili
   // dupli A→B) obe prođu anti-cirkularnu proveru protiv grafa koji još ne sadrži onu
   // drugu vezu. Konflikt serijalizacije (P2034) ili dupli par (P2002) → čista poruka.
-  let fazaJedan: {
-    verifikacijaId: string;
-    verifikatorPseudonim: string;
-    verifikatorWalletId: string;
-    verifikovaniPseudonim: string;
-    verifikovaniWalletId: string;
-    verifikovaniNoviIndeks: number;
-  };
+  let fazaJedan: FazaJedan;
   try {
     fazaJedan = await prisma.$transaction(async (tx) => {
       // Pronađi token: bilo po 64-char hex ili 6-cifrenom broju
@@ -175,164 +427,8 @@ export async function izvrsiVerifikaciju(
           410
         );
       }
-      if (token.korisnikId === verifikatorId) {
-        throw new VerifikacijaGreska("Ne možeš da verifikuješ samog sebe.", 400);
-      }
 
-      // Učitaj verifikatora i verifikovanog
-      const verifikator = await tx.user.findUnique({
-        where: { id: verifikatorId },
-      });
-      if (!verifikator) {
-        throw new VerifikacijaGreska("Verifikator ne postoji.", 404);
-      }
-      const verifikovani = await tx.user.findUnique({
-        where: { id: token.korisnikId },
-      });
-      if (!verifikovani) {
-        throw new VerifikacijaGreska("Verifikovani korisnik ne postoji.", 404);
-      }
-
-      // Provera prava verifikatora (čl. 4)
-      if (!imaPristupVerifikaciji(verifikator.tipKorisnika, verifikator.indeksStvarnosti)) {
-        throw new VerifikacijaGreska(
-          "Nemaš pravo da verifikuješ druge (indeks ispod 10% ili nisi verifikovan).",
-          403
-        );
-      }
-
-      // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju nosioce ZRNA
-      // po redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija,
-      // ali bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa,
-      // ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
-      const verifikovaniJePoseban =
-        verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
-
-      // REGULARNI korisnik sa punim indeksom (100%) nema šta da dobije dodatnom
-      // verifikacijom. Posebni statusi nemaju gornju granicu evidencije (cap je 100).
-      if (
-        verifikovani.tipKorisnika === TipKorisnika.REGULARNI &&
-        verifikovani.indeksStvarnosti >= MAX_INDEKS
-      ) {
-        throw new VerifikacijaGreska(
-          "Ovaj korisnik već ima maksimalan indeks stvarnosti (100%).",
-          409
-        );
-      }
-
-      // Provera kapaciteta / slota
-      const kapacitet = izracunajKapacitet(
-        verifikator.tipKorisnika,
-        verifikator.indeksStvarnosti
-      );
-      if (!raspolozivSlot(kapacitet, verifikator.slotoviPotroseni)) {
-        throw new VerifikacijaGreska(
-          "Nemaš slobodan slot — pričekaj nadzor.",
-          409
-        );
-      }
-
-      // Anti-malverzacija: početni nosioci ZRNA (osnivači) NE smeju da verifikuju
-      // jedan drugog. Mogu da verifikuju sve ostale (bootstrap lanca jemstva), ali
-      // međusobna verifikacija bi im veštački napumpala indeks/poverenje u zatvorenom
-      // krugu. Osnivače razlikuje marker `jeOsnivac` (ne tipKorisnika — NOSILAC_ZRNA
-      // status može steći i običan korisnik upisom ZRNA).
-      if (verifikator.jeOsnivac && verifikovani.jeOsnivac) {
-        throw new VerifikacijaGreska(
-          "Početni nosioci ZRNA (osnivači) ne mogu verifikovati jedan drugog.",
-          403
-        );
-      }
-
-      // Anti-cirkularno (čl. 12)
-      const grafRaw = await tx.verifikacionaVeza.findMany({
-        select: { verifikatorId: true, verifikovaniId: true },
-      });
-      const graf: GrafZapis[] = grafRaw.map((g) => ({
-        verifikatorId: g.verifikatorId,
-        verifikovaniId: g.verifikovaniId,
-      }));
-      const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, graf);
-      if (!acRezultat.dozvoljeno) {
-        throw new VerifikacijaGreska(acRezultat.razlog, 403);
-      }
-
-      // Izračunaj redniBroj
-      const brojObavljenih = await tx.verifikacionaVeza.count({
-        where: { verifikatorId },
-      });
-      const redniBroj = brojObavljenih + 1;
-      const treboNadzor = podlezeNadzoru(verifikator.tipKorisnika);
-
-      // Kreiraj VerifikacionaVeza zapis
-      const veza = await tx.verifikacionaVeza.create({
-        data: {
-          verifikatorId,
-          verifikovaniId: verifikovani.id,
-          redniBroj,
-          podlezeNadzoru: treboNadzor,
-          oznakaVerifikatora: oznaka,
-        },
-      });
-
-      // Ažuriraj verifikovanog: indeks = broj veza × 10 (cap 100).
-      // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
-      const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
-        where: { verifikovaniId: verifikovani.id },
-      });
-      const izracunatiIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
-      // Za posebne statuse (POCETNI/NOSILAC_ZRNA) indeks je evidencija bez
-      // funkcionalnog efekta: zadržavamo status i nikad ne umanjujemo postojeći
-      // indeks (npr. bootstrap 10% početnog korisnika iz čl. 14, koji ne potiče iz
-      // lanca jemstva). NEVERIFIKOVAN/REGULARNI postaje (ostaje) REGULARNI.
-      const noviIndeks = verifikovaniJePoseban
-        ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
-        : izracunatiIndeks;
-      await tx.user.update({
-        where: { id: verifikovani.id },
-        data: {
-          tipKorisnika: verifikovaniJePoseban
-            ? verifikovani.tipKorisnika
-            : TipKorisnika.REGULARNI,
-          indeksStvarnosti: noviIndeks,
-          verified: true,
-          // Zadrži datum prve verifikacije pri dodatnim verifikacijama.
-          verifiedAt: verifikovani.verifiedAt ?? new Date(),
-        },
-      });
-
-      // Sprovedena verifikacija zatvara aktivan zahtev na tabli jemstva (ZAVRSEN).
-      await tx.zahtevZaJemstvo.updateMany({
-        where: { userId: verifikovani.id, status: "AKTIVAN" },
-        data: { status: "ZAVRSEN" },
-      });
-
-      // REGULARNI verifikator: slotoviPotroseni += 1
-      if (verifikator.tipKorisnika === TipKorisnika.REGULARNI) {
-        await tx.user.update({
-          where: { id: verifikatorId },
-          data: { slotoviPotroseni: { increment: 1 } },
-        });
-      }
-
-      // Osiguraj wallet za verifikovanog ako ga nema
-      let verifikovaniWallet = await tx.wallet.findUnique({
-        where: { userId: verifikovani.id },
-      });
-      if (!verifikovaniWallet) {
-        verifikovaniWallet = await tx.wallet.create({
-          data: { userId: verifikovani.id, type: "USER", balance: 0 },
-        });
-      }
-      // Osiguraj wallet za verifikatora (sanity — trebao bi da postoji)
-      let verifikatorWallet = await tx.wallet.findUnique({
-        where: { userId: verifikator.id },
-      });
-      if (!verifikatorWallet) {
-        verifikatorWallet = await tx.wallet.create({
-          data: { userId: verifikator.id, type: "USER", balance: 0 },
-        });
-      }
+      const fj = await izvrsiJezgroVerifikacije(tx, verifikatorId, token.korisnikId, oznaka);
 
       // Obeleži token kao iskorišćen
       await tx.verifikacijaToken.update({
@@ -340,71 +436,62 @@ export async function izvrsiVerifikaciju(
         data: { used: true, usedAt: new Date() },
       });
 
-      return {
-        verifikacijaId: veza.id,
-        verifikatorPseudonim: verifikator.pseudonim,
-        verifikatorWalletId: verifikatorWallet.id,
-        verifikovaniPseudonim: verifikovani.pseudonim,
-        verifikovaniWalletId: verifikovaniWallet.id,
-        verifikovaniNoviIndeks: noviIndeks,
-      };
+      return fj;
     }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
   } catch (e) {
-    if (e instanceof VerifikacijaGreska) throw e;
-    const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
-    if (code === "P2002") {
-      throw new VerifikacijaGreska("Ova verifikacija već postoji.", 409);
-    }
-    if (code === "P2034") {
-      throw new VerifikacijaGreska("Verifikacija je u toku — pokušaj ponovo.", 409);
-    }
-    throw e;
+    mapTransakcijaGreska(e);
   }
-  const {
-    verifikacijaId,
-    verifikatorPseudonim,
-    verifikatorWalletId,
-    verifikovaniPseudonim,
-    verifikovaniWalletId,
-    verifikovaniNoviIndeks,
-  } = fazaJedan;
 
-  // Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu).
-  // Koristi se walletId direktno iz Faze 1 (bez ponovnog findUnique-a) da bi se
-  // izbegao connection-pool race u kojem novokreirani wallet nije još vidljiv.
-  try {
-    await emitujPoen(
-      verifikatorWalletId,
-      POEN_VERIFIKATOR,
-      TransactionType.EMISIJA_VERIFIKACIJA,
-      `Verifikacija ${verifikovaniPseudonim}`
-    );
-    await emitujPoen(
-      verifikovaniWalletId,
-      POEN_VERIFIKOVANI,
-      TransactionType.EMISIJA_VERIFIKACIJA,
-      `Primljena verifikacija od ${verifikatorPseudonim}`
-    );
-  } catch (e) {
-    console.error("[verifikacija-service] POEN emisija pukla posle Faze 1 — incident", {
-      verifikacijaId,
-      verifikatorWalletId,
-      verifikovaniWalletId,
-      error: e,
-    });
-    // Verifikacija je u bazi, slot iskorišćen, ali POEN nije emitovan.
-    // Bacamo dalje da UI moze da prikaze upozorenje korisniku.
+  return emitujPoenZaVerifikaciju(fazaJedan);
+}
+
+export type IzvrsiVerifikacijuSaTableInput = {
+  verifikatorId: string;
+  jemstvoId: string;
+  potvrdaPoznavanja: boolean;
+  oznaka?: string;
+};
+
+/**
+ * Izvršava verifikaciju DIREKTNO SA TABLE JEMSTVA: verifikator je našao osobu na
+ * tabli (gde se ona predstavila i time dala pristanak da bude verifikovana) i klikom
+ * potvrđuje lično poznavanje. Bez tokena — `verifikovaniId` se uzima iz aktivnog
+ * zahteva za jemstvo. Sve provere su iste (deljeno jezgro); odgovornost verifikatora
+ * i nadzor (P1–P15) ostaju jedini korektiv, uz naknadnu prijavu od strane verifikovanog.
+ */
+export async function izvrsiVerifikacijuSaTable(
+  input: IzvrsiVerifikacijuSaTableInput
+): Promise<IzvrsiVerifikacijuRezultat> {
+  const { verifikatorId, jemstvoId, potvrdaPoznavanja } = input;
+  const oznaka = normalizujOznaku(input.oznaka);
+
+  if (!potvrdaPoznavanja) {
     throw new VerifikacijaGreska(
-      "Verifikacija je evidentirana, ali emisija POEN-a je pukla. Kontaktiraj administratora.",
-      500
+      "Moraš potvrditi lično poznavanje i odgovornost za verifikaciju.",
+      400
     );
   }
 
-  return {
-    verifikacijaId,
-    verifikovaniPseudonim,
-    verifikovaniNoviIndeks,
-  };
+  let fazaJedan: FazaJedan;
+  try {
+    fazaJedan = await prisma.$transaction(async (tx) => {
+      const zahtev = await tx.zahtevZaJemstvo.findUnique({
+        where: { id: jemstvoId },
+        select: { userId: true, status: true, expiresAt: true },
+      });
+      if (!zahtev) {
+        throw new VerifikacijaGreska("Zahtev za jemstvo ne postoji.", 404);
+      }
+      if (zahtev.status !== "AKTIVAN" || zahtev.expiresAt.getTime() < Date.now()) {
+        throw new VerifikacijaGreska("Zahtev za jemstvo više nije aktivan.", 410);
+      }
+      return izvrsiJezgroVerifikacije(tx, verifikatorId, zahtev.userId, oznaka);
+    }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
+  } catch (e) {
+    mapTransakcijaGreska(e);
+  }
+
+  return emitujPoenZaVerifikaciju(fazaJedan);
 }
 
 /**

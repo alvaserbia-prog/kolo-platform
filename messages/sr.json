@@ -384,7 +384,12 @@
     "tabla_neverifikovan_naslov": "Ne poznaješ nikog u KOLO?",
     "tabla_verifikovan_naslov": "Tabla zahteva za jemstvo",
     "tabla_neverifikovan_opis": "Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi.",
-    "tabla_verifikovan_opis": "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."
+    "tabla_verifikovan_opis": "Pomozite novim korisnicima — pogledajte ko traži verifikaciju.",
+    "dugme_otkazi": "Otkaži",
+    "prijava_link": "Nešto nije u redu sa tvojom verifikacijom? Prijavi.",
+    "prijava_placeholder": "Ukratko opiši šta nije u redu (npr. ne poznaješ osobu koja te je verifikovala).",
+    "prijava_dugme": "Pošalji prijavu",
+    "prijava_poslata": "Prijava je poslata. Nadzor će je pregledati."
   },
   "krug": {
     "naslov": "Krugovi",
@@ -920,11 +925,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1875,7 +1880,17 @@
     "prompt_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
     "label_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
     "placeholder_razlog_uklanjanja": "Npr. neprikladan sadržaj, lažni podaci ili van svrhe table.",
-    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje"
+    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje",
+    "istice_za": "ističe za {sati}h",
+    "objava_uvod": "Predstavi se mreži verifikovanih — neko ko te poznaje može te verifikovati direktno odavde.",
+    "objava_aktivna_naslov": "Tvoj zahtev je objavljen",
+    "objava_aktivna_opis": "Vidljiv je verifikovanim članovima;",
+    "dugme_verifikuj": "Verifikujem",
+    "placeholder_oznaka": "Oznaka (nadimak) — npr. „Pera sa pijace”",
+    "oznaka_opis": "Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo ti i Fondacija.",
+    "potvrda_poznavanja": "Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću jemčim za njenu stvarnost, jedinstvenost i kontinuitet (čl. 5 Pravilnika o dokazu stvarnosti).",
+    "dugme_potvrdi_verifikaciju": "Potvrdi verifikaciju",
+    "verifikacija_uspeh": "Verifikovao/la si „{pseudonim}”. Dobio/la je pun pristup (indeks +10%)."
   },
   "dobrodosli": {
     "korak1_oznaka": "Dobrodošli",
