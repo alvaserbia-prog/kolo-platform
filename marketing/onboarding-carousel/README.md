@@ -3,7 +3,7 @@
 Karusel za društvene mreže (Instagram / Facebook) za uvođenje novih članova u zatvorenoj BETA fazi.
 
 ## Šta je u folderu
-- `png/slajd-01.png … slajd-09.png` — **9 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret — najbolji za IG karusel). **Trenutno = verzija sa PRAVIM screenshotovima ekrana** (telefonski okvir + tekst).
+- `png/slajd-01.png … slajd-09.png` — **9 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret — najbolji za IG karusel). **Trenutno = verzija sa PRAVIM screenshotovima ekrana**: uvećan telefonski okvir **sa strane, naizmenično levo/desno**, a tekst (kicker + naslov + opis) ide **pored** njega, vertikalno centriran. Naslovnica (1) i CTA (9) su brendirana grafika.
 - `screenshots/*.png` — sirovi screenshotovi ekrana aplikacije (ulaz za slajdove 2–8).
 - `slajdovi/*.html` — izvorni HTML svakog slajda (za sitne izmene teksta).
 - `generisi-screenshot.mjs` — generator karusela **sa screenshotovima** (aktuelna verzija u `png/`).
