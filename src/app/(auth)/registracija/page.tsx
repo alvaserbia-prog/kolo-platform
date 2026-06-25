@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
+import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -24,7 +25,8 @@ function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: str
 export default function RegistracijaPage() {
   const router = useRouter();
   const t = useTranslations("registracija");
-  const [form, setForm] = useState({ email: "", pseudonim: "", password: "", passwordConfirm: "" });
+  const [form, setForm] = useState({ email: "", pseudonim: "", password: "" });
+  const [prikaziLozinku, setPrikaziLozinku] = useState(false);
   const [mesto, setMesto] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -68,7 +70,6 @@ export default function RegistracijaPage() {
     if (form.pseudonim.trim().length < 3) { setError(t("greska_pseudonim_duljina")); return; }
     if (pseudonimStatus === "zauzet") { setError(t("greska_pseudonim_zauzet")); return; }
     if (form.password.length < 8) { setError(t("greska_lozinka_duljina")); return; }
-    if (form.password !== form.passwordConfirm) { setError(t("greska_lozinke_poklapaju")); return; }
     if (!uslovi || !privatnost) { setError(t("greska_uslovi")); return; }
 
     setLoading(true);
@@ -126,9 +127,13 @@ export default function RegistracijaPage() {
           {/* Lozinka */}
           <div>
             <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("lozinka")} *</label>
-            <input type="password" autoComplete="new-password" value={form.password} onChange={(e) => set("password", e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-              placeholder={t("placeholder_lozinka")} suppressHydrationWarning />
+            <div className="relative">
+              <input type={prikaziLozinku ? "text" : "password"} autoComplete="new-password" value={form.password} onChange={(e) => set("password", e.target.value)}
+                className="w-full px-4 py-3 pr-11 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
+                placeholder={t("placeholder_lozinka")} suppressHydrationWarning />
+              <PrikaziLozinkuDugme prikazan={prikaziLozinku} onToggle={() => setPrikaziLozinku((v) => !v)}
+                prikaziLabel={t("prikazi_lozinku")} sakrijLabel={t("sakrij_lozinku")} />
+            </div>
             {form.password.length > 0 && (
               <div className="mt-2">
                 <div className="flex gap-1 mb-1">
@@ -140,19 +145,6 @@ export default function RegistracijaPage() {
                   {lozinkaJacina.tekst}
                 </p>
               </div>
-            )}
-          </div>
-
-          {/* Potvrda */}
-          <div>
-            <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("potvrda_lozinke")} *</label>
-            <input type="password" autoComplete="new-password" value={form.passwordConfirm} onChange={(e) => set("passwordConfirm", e.target.value)}
-              className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${
-                form.passwordConfirm && form.password !== form.passwordConfirm ? "border-red-400" : "border-kolo-border focus:border-kolo-green-700"
-              }`}
-              placeholder={t("placeholder_lozinka")} suppressHydrationWarning />
-            {form.passwordConfirm && form.password !== form.passwordConfirm && (
-              <p className="mt-1 text-xs text-red-500">{t("lozinke_ne_poklapaju")}</p>
             )}
           </div>
 
