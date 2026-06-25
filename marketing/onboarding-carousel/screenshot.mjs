@@ -55,6 +55,12 @@ const browser = await chromium.launch(launchOpts);
 const pub = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: DSF, locale: "sr-Latn" });
 await initConsent(pub);
 await shot(pub, "landing", "/");
+await shot(pub, "rani-pristup", "/rani-pristup", {
+  prep: async (page) => {
+    // popuni pristupni kod da ekran izgleda realno
+    await page.fill('input[type="text"]', "kolo2026").catch(() => {});
+  },
+});
 await shot(pub, "registracija", "/registracija");
 await pub.close();
 

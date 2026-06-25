@@ -1,6 +1,6 @@
 // Generator karusela sa PRAVIM screenshotovima ekrana u telefonskom okviru.
 // Layout: veliki telefon SA STRANE (naizmenično levo/desno), tekst pored njega.
-// Slajdovi 1 i 9 su brendirana grafika; 2–8 nose screenshot (iz ./screenshots).
+// Tok: landing → test faza → (zaokružen) pristupni kod → registracija → ostatak.
 // Pokretanje iz korena:  node marketing/onboarding-carousel/generisi-screenshot.mjs
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -21,6 +21,8 @@ const C = {
   text: "#1A1A17", muted: "#6B6860",
 };
 
+const TOTAL = 10;
+
 const shell = (inner, { dark = false } = {}) => `<!doctype html><html lang="sr"><head><meta charset="utf-8"><style>
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1350px}
@@ -30,7 +32,7 @@ body{font-family:Inter,'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
 .dots{position:absolute;inset:0;opacity:${dark ? .10 : .5};pointer-events:none;
   background-image:radial-gradient(circle, ${dark ? "#ffffff" : "#d1cfc9"} 1.4px, transparent 1.4px);background-size:30px 30px}
 
-/* ── grafički slajd (cover/cta) ── */
+/* ── grafički slajd (cover/test-faza/cta) ── */
 .slide{position:absolute;inset:0;display:flex;flex-direction:column;padding:96px 90px}
 .kicker{display:inline-flex;align-items:center;gap:13px;font-weight:700;font-size:25px;
   letter-spacing:.13em;text-transform:uppercase;color:${dark ? C.gold400 : C.g700}}
@@ -58,14 +60,23 @@ h1 .gold{color:${C.gold400}}
 .phone .scr img{width:100%;height:100%;object-fit:cover;object-position:top}
 .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:140px;height:30px;
   background:#0c0c0c;border-radius:0 0 20px 20px;z-index:2}
+/* zaokruženje (callout) preko ekrana */
+.ring{position:absolute;border:6px solid ${C.gold400};border-radius:50%;
+  box-shadow:0 0 0 3px rgba(15,61,32,.25),0 6px 20px rgba(0,0,0,.25);transform:rotate(-3deg);z-index:4}
+.alabel{position:absolute;z-index:5;background:${C.gold400};color:${C.g900};font-weight:800;
+  font-size:24px;padding:10px 20px;border-radius:999px;white-space:nowrap;
+  box-shadow:0 8px 22px rgba(0,0,0,.3);transform:rotate(-3deg)}
 </style></head><body><div class="dots"></div>${inner}</body></html>`;
 
-// screenshot slajd: side = "left" | "right" (na kojoj strani je telefon)
-const sShot = ({ n, kicker, title, lead, shot, dark = false, side = "left" }) => shell(`
+// screenshot slajd: side = "left"|"right"; circle = {top,height,left,right,labelTop,label}
+const sShot = ({ n, kicker, title, lead, shot, dark = false, side = "left", circle }) => shell(`
 <div class="corner-logo"><img src="${dark ? icon : logoLight}" alt="KOLO"></div>
-<div class="corner-pg">${n} / 9</div>
+<div class="corner-pg">${n} / ${TOTAL}</div>
 <div class="row ${side === "right" ? "right" : ""}">
-  <div class="phone"><div class="scr"><div class="notch"></div><img src="${shotImg(shot)}" alt=""></div></div>
+  <div class="phone"><div class="scr"><div class="notch"></div><img src="${shotImg(shot)}" alt="">
+    ${circle ? `<div class="ring" style="top:${circle.top};height:${circle.height};left:${circle.left};right:${circle.right}"></div>
+    <div class="alabel" style="left:50%;top:${circle.labelTop};transform:translateX(-50%) rotate(-3deg)">${circle.label}</div>` : ""}
+  </div></div>
   <div class="col-text">
     <div class="kicker"><span class="pip"></span>${kicker}</div>
     <h1>${title}</h1>
@@ -89,35 +100,54 @@ slides.push(shell(`
   </div>
 </div>`, { dark: true }));
 
-// 2–8 screenshot slajdovi (telefon naizmenično levo/desno)
+// 2 — Šta je KOLO (landing)
 slides.push(sShot({ n: 2, side: "left", kicker: "ŠTA JE KOLO?", title: "Razmena u<br>tvom kraju",
   lead: "Rad, dobra i znanje sa ljudima oko sebe — <b>bez posrednika i provizije.</b>", shot: "landing" }));
 
+// 3 — POEN (novčanik)
 slides.push(sShot({ n: 3, side: "right", kicker: "POEN NIJE NOVAC", title: "Zapis o<br>doprinosu",
-  lead: "U novčaniku vidiš svoje POEN-e — <b>evidenciju, ne pare.</b> Ne menja se za dinare.", shot: "novcanik" }));
+  lead: "POEN je <b>evidencija, ne pare.</b> Ne menja se za dinare — beleži šta si dao zajednici.", shot: "novcanik" }));
 
-slides.push(sShot({ n: 4, side: "left", dark: true, kicker: "KORAK 1 · REGISTRACIJA", title: "Napravi<br>nalog",
+// 4 — TEST FAZA (grafika)
+slides.push(shell(`
+<div class="slide" style="justify-content:center;align-items:flex-start">
+  <img src="${icon}" alt="KOLO" style="height:120px;border-radius:28px;margin-bottom:50px">
+  <div class="kicker"><span class="pip"></span>VAŽNO PRE ULASKA</div>
+  <h1 style="font-size:90px;margin-top:30px">Zatvorena<br>test faza</h1>
+  <p class="lead" style="font-size:38px;margin-top:32px;max-width:920px">KOLO je trenutno u <b>zatvorenoj test fazi</b> — okuplja se prva grupa članova. Za ulazak ti treba <b>pristupni kod</b> koji dobiješ od nas.</p>
+  <div style="flex:1"></div>
+  <span style="display:inline-block;padding:18px 30px;border-radius:999px;font-weight:700;font-size:30px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)">💬 Piši nam za kod → ekolo.rs</span>
+</div>`, { dark: true }));
+
+// 5 — PRISTUPNI KOD (rani-pristup, ZAOKRUŽEN)
+slides.push(sShot({ n: 5, side: "right", kicker: "KORAK 1 · PRISTUPNI KOD",
+  title: "Unesi svoj<br>kod", shot: "rani-pristup",
+  lead: "Na <b>ekolo.rs/rani-pristup</b> unesi kod koji si dobio/la i otključaj prijavu i registraciju.",
+  circle: { top: "50%", height: "9.5%", left: "8%", right: "8%", labelTop: "40%", label: "✏️ unesi kod" } }));
+
+// 6 — REGISTRACIJA
+slides.push(sShot({ n: 6, side: "left", dark: true, kicker: "KORAK 2 · REGISTRACIJA", title: "Napravi<br>nalog",
   lead: "Pseudonim, email, lozinka — <b>bez dokumenata.</b> Javno se vidi samo pseudonim.", shot: "registracija" }));
 
-slides.push(sShot({ n: 5, side: "right", kicker: "KORAK 2 · VERIFIKACIJA", title: "Potvrde te<br>ljudi",
+// 7 — VERIFIKACIJA
+slides.push(sShot({ n: 7, side: "right", kicker: "KORAK 3 · VERIFIKACIJA", title: "Potvrde te<br>ljudi",
   lead: "Verifikuje te neko ko te <b>lično poznaje</b>. Indeks ≥ 10% = pun pristup.", shot: "verifikacija" }));
 
-slides.push(sShot({ n: 6, side: "left", dark: true, kicker: "NE ZNAŠ NIKOG?", title: "Tabla<br>jemstva",
-  lead: "Predstaviš se mreži, <b>verifikovani članovi ti se jave.</b> U beti te uvodimo lično. 🤝", shot: "tabla-jemstva" }));
+// 8 — TABLA JEMSTVA
+slides.push(sShot({ n: 8, side: "left", dark: true, kicker: "NE ZNAŠ NIKOG?", title: "Tabla<br>jemstva",
+  lead: "Predstaviš se mreži, <b>verifikovani članovi ti se jave.</b> U test fazi te uvodimo lično. 🤝", shot: "tabla-jemstva" }));
 
-slides.push(sShot({ n: 7, side: "right", kicker: "KORAK 3 · PRVA RAZMENA", title: "Pijaca",
+// 9 — PIJACA
+slides.push(sShot({ n: 9, side: "right", kicker: "KORAK 4 · PRVA RAZMENA", title: "Pijaca",
   lead: "Postaviš oglas, dogovoriš razmenu, <b>upišeš POEN.</b> Cena je u POEN-ima.", shot: "pijaca" }));
 
-slides.push(sShot({ n: 8, side: "left", dark: true, kicker: "ZAJEDNICA", title: "Uvek u<br>toku",
-  lead: "Vesti Fondacije i Pričaonica — <b>KOLO se gradi sa tobom.</b>", shot: "pocetna" }));
-
-// 9 — CTA (grafika)
+// 10 — CTA (grafika)
 slides.push(shell(`
 <div class="slide" style="justify-content:center">
   <img src="${icon}" alt="KOLO" style="height:128px;border-radius:30px;margin-bottom:52px">
-  <div class="kicker"><span class="pip"></span>OTVORI NALOG BESPLATNO</div>
+  <div class="kicker"><span class="pip"></span>OTVORI NALOG</div>
   <div style="font-size:92px;font-weight:800;color:${C.gold400};margin-top:34px;letter-spacing:-.01em">ekolo.rs</div>
-  <p class="lead" style="font-size:38px;margin-top:30px;max-width:900px">Trenutno smo u <b>zatvorenoj BETA fazi</b> — tvoj utisak direktno oblikuje platformu.</p>
+  <p class="lead" style="font-size:38px;margin-top:30px;max-width:900px">Trenutno smo u <b>zatvorenoj test fazi</b> — tvoj utisak direktno oblikuje platformu.</p>
   <div style="flex:1"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;width:100%;border-top:1px solid rgba(255,255,255,.18);padding-top:38px">
     <span style="font-size:36px;font-weight:800;color:#fff">KOLO se gradi sa tobom,<br>ne za tebe.</span>
@@ -128,4 +158,4 @@ slides.push(shell(`
 slides.forEach((html, i) => {
   writeFileSync(join(HERE, "slajdovi", `slajd-${String(i + 1).padStart(2, "0")}.html`), html);
 });
-console.log(`Napravljeno ${slides.length} slajdova (screenshot sa strane) u slajdovi/`);
+console.log(`Napravljeno ${slides.length} slajdova (tok sa pristupnim kodom) u slajdovi/`);
