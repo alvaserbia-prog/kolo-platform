@@ -123,7 +123,7 @@ slides.push(step({ n: 5, num: "4", side: "right", dark: true, kicker: "VERIFIKAC
 
 // 6 — (ako ne znaš nikog): tabla jemstva
 slides.push(step({ n: 6, num: "★", side: "left", kicker: "NE ZNAŠ NIKOGA?", title: "Tabla<br>jemstva", shot: "tabla-jemstva",
-  lead: `Ostavi kratko predstavljanje na <b>tabli jemstva</b> — i neko od verifikovanih članova će ti se javiti i <b>potvrditi tvoju stvarnost</b>. U test fazi te uvodimo lično. 🤝` }));
+  lead: `Ostavi kratko predstavljanje na <b>tabli jemstva</b> i neko od verifikovanih članova će ti se javiti i <b>potvrditi tvoju stvarnost</b>. U test fazi te uvodimo lično. 🤝` }));
 
 // 7 — POZIV NA AKCIJU (grafika)
 slides.push(shell(`
