@@ -29,7 +29,6 @@ import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
 import MojeOznake, { type VerifikovanaOsoba } from "@/components/verifikacija/MojeOznake";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { jeKorenJemstva } from "@/lib/dozvole";
 
 export default async function VerifikacijaPage() {
   const t = await getTranslations("verifikacija");
@@ -41,6 +40,7 @@ export default async function VerifikacijaPage() {
     select: {
       pseudonim: true,
       tipKorisnika: true,
+      jeOsnivac: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
       verifikacijeKojeSuMeVerifikovale: {
@@ -119,7 +119,7 @@ export default async function VerifikacijaPage() {
       {/* Levo: indeks stvarnosti + tabla jemstva; desno: lanac verifikacija. Ujednačene visine. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
-          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} podnaslov={podnaslov} />
+          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
 
           {/* Tabla jemstva — neverifikovanima put da ih neko upozna; verifikovanima poziv da pomognu novima */}
           <a
@@ -142,7 +142,7 @@ export default async function VerifikacijaPage() {
           ja={{ pseudonim: user.pseudonim, prikaz }}
           verifikatori={verifikatorCvorovi}
           verifikovani={verifikovaniCvorovi}
-          jeJaPocetni={jeKorenJemstva(user)}
+          jeJaPocetni={user.jeOsnivac}
         />
       </div>
 

@@ -6,13 +6,13 @@ import MiniStablo, {
   type CvorVerifikator,
   type CvorVerifikovani,
 } from "@/components/verifikacija/MiniStablo";
-import { jeKorenJemstva } from "@/lib/dozvole";
 
 type LanacResponse = {
   korisnik: {
     id: string;
     pseudonim: string;
     tip: string;
+    jeOsnivac: boolean;
     indeks: number;
     kapacitet: number | null;
     neograniceno: boolean;
@@ -92,6 +92,7 @@ export default function IndeksSekcija({
         <IndeksPrikaz
           prikaz={data.korisnik.prikaz}
           tip={data.korisnik.tip}
+          jeOsnivac={data.korisnik.jeOsnivac}
           statusKaoBadge={indeksKaoBadge}
           ispuniVisinu={ispuniVisinu}
         />
@@ -101,7 +102,7 @@ export default function IndeksSekcija({
           ja={{ pseudonim: data.korisnik.pseudonim, prikaz: data.korisnik.prikaz }}
           verifikatori={verifikatorCvorovi}
           verifikovani={verifikovaniCvorovi}
-          jeJaPocetni={jeKorenJemstva({ tipKorisnika: data.korisnik.tip })}
+          jeJaPocetni={data.korisnik.jeOsnivac}
           className={ispuniVisinu ? "h-full" : ""}
         />
       )}
