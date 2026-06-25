@@ -113,7 +113,9 @@
     "greska_prijava": "Bejelentkezési hiba. Kérjük próbálja újra.",
     "nema_naloga": "Nincs még fiókja?",
     "registrujte_se": "Regisztráljon",
-    "zaboravljena_lozinka": "Elfelejtett jelszó?"
+    "zaboravljena_lozinka": "Elfelejtett jelszó?",
+    "prikazi_lozinku": "Jelszó megjelenítése",
+    "sakrij_lozinku": "Jelszó elrejtése"
   },
   "zaboravljenaLozinka": {
     "naslov": "Elfelejtett jelszó",
@@ -144,7 +146,9 @@
     "preusmeravanje": "Átirányítás a bejelentkezéshez...",
     "greska_lozinka_kratka": "A jelszónak legalább 8 karakteresnek kell lennie.",
     "greska_lozinke_ne_poklapaju": "A jelszavak nem egyeznek.",
-    "greska_zahtev": "Hiba a jelszó megváltoztatásakor. Kérjük próbálja újra."
+    "greska_zahtev": "Hiba a jelszó megváltoztatásakor. Kérjük próbálja újra.",
+    "prikazi_lozinku": "Jelszó megjelenítése",
+    "sakrij_lozinku": "Jelszó elrejtése"
   },
   "registracija": {
     "naslov": "Regisztráció",
@@ -179,7 +183,9 @@
     "greska_lozinka_duljina": "A jelszónak legalább 8 karakterből kell állnia.",
     "greska_lozinke_poklapaju": "A jelszavak nem egyeznek.",
     "greska_uslovi": "El kell fogadnia a feltételeket és az adatvédelmi szabályzatot.",
-    "greska_registracija": "Regisztrációs hiba."
+    "greska_registracija": "Regisztrációs hiba.",
+    "prikazi_lozinku": "Jelszó megjelenítése",
+    "sakrij_lozinku": "Jelszó elrejtése"
   },
   "sistem": {
     "dobrodoslice": "Üdvözöljük, <ime>{pseudonim}</ime>",

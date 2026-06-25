@@ -121,7 +121,9 @@
     "greska_prijava": "Greška pri prijavi. Pokušajte ponovo.",
     "nema_naloga": "Nemate nalog?",
     "registrujte_se": "Registrujte se",
-    "zaboravljena_lozinka": "Zaboravljena lozinka?"
+    "zaboravljena_lozinka": "Zaboravljena lozinka?",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "zaboravljenaLozinka": {
     "naslov": "Zaboravljena lozinka",
@@ -152,7 +154,9 @@
     "preusmeravanje": "Preusmeravanje na prijavu...",
     "greska_lozinka_kratka": "Lozinka mora imati najmanje 8 karaktera.",
     "greska_lozinke_ne_poklapaju": "Lozinke se ne poklapaju.",
-    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo."
+    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo.",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "registracija": {
     "naslov": "Registracija",
@@ -187,7 +191,9 @@
     "greska_lozinka_duljina": "Lozinka mora imati najmanje 8 karaktera.",
     "greska_lozinke_poklapaju": "Lozinke se ne poklapaju.",
     "greska_uslovi": "Morate prihvatiti uslove i politiku privatnosti.",
-    "greska_registracija": "Greška pri registraciji."
+    "greska_registracija": "Greška pri registraciji.",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "sistem": {
     "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",

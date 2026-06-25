@@ -121,7 +121,9 @@
     "greska_prijava": "Sign in error. Please try again.",
     "nema_naloga": "Don't have an account?",
     "registrujte_se": "Register",
-    "zaboravljena_lozinka": "Forgot password?"
+    "zaboravljena_lozinka": "Forgot password?",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "zaboravljenaLozinka": {
     "naslov": "Forgot Password",
@@ -152,7 +154,9 @@
     "preusmeravanje": "Redirecting to sign in...",
     "greska_lozinka_kratka": "Password must be at least 8 characters.",
     "greska_lozinke_ne_poklapaju": "Passwords do not match.",
-    "greska_zahtev": "Error changing password. Please try again."
+    "greska_zahtev": "Error changing password. Please try again.",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "registracija": {
     "naslov": "Registration",
@@ -187,7 +191,9 @@
     "greska_lozinka_duljina": "Password must be at least 8 characters.",
     "greska_lozinke_poklapaju": "Passwords don't match.",
     "greska_uslovi": "You must accept the terms and privacy policy.",
-    "greska_registracija": "Registration error."
+    "greska_registracija": "Registration error.",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "sistem": {
     "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
