@@ -1,11 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 interface Props {
   // Naslov oglasa — koristi se kao tekst pri deljenju
   naslov: string;
+}
+
+// Jedna stavka u meniju za deljenje. Ima ILI `href` (otvara se kao link) ILI
+// `akcija` (npr. Instagram — kopiraj link + otvori), i ILI `boja` ILI `gradient`.
+interface Mreza {
+  naziv: string;
+  ikona: ReactNode;
+  boja?: string;
+  gradient?: string;
+  href?: string;
+  akcija?: () => void;
 }
 
 // Dugme za deljenje oglasa na društvenim mrežama.
@@ -16,6 +27,7 @@ export default function PodeliOglas({ naslov }: Props) {
   const t = useTranslations("pijaca");
   const [open, setOpen] = useState(false);
   const [kopirano, setKopirano] = useState(false);
+  const [instaPoruka, setInstaPoruka] = useState(false);
   const [url, setUrl] = useState("");
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -36,16 +48,9 @@ export default function PodeliOglas({ naslov }: Props) {
     return () => document.removeEventListener("mousedown", onClick);
   }, [open]);
 
-  async function handleClick() {
-    // Native Web Share API (mobilni / podržani browseri).
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share({ title: naslov, url });
-        return;
-      } catch {
-        // Korisnik je otkazao ili nije podržano — pad na meni.
-      }
-    }
+  // Otvara isključivo naš meni za deljenje (NE poziva native Web Share API —
+  // da se na mobilnom ne otvara i sistemski meni telefona uporedo sa našim).
+  function handleClick() {
     setOpen((v) => !v);
   }
 
@@ -54,15 +59,25 @@ export default function PodeliOglas({ naslov }: Props) {
       await navigator.clipboard.writeText(url);
       setKopirano(true);
       setTimeout(() => setKopirano(false), 2000);
+      return true;
     } catch {
-      // ignore
+      return false;
     }
+  }
+
+  // Instagram nema web „share URL" za proizvoljan link — zato kopiramo link u
+  // clipboard i otvaramo Instagram, uz poruku korisniku da ga nalepi (priča/poruka/bio).
+  async function podeliInstagram() {
+    await kopirajLink();
+    setInstaPoruka(true);
+    setTimeout(() => setInstaPoruka(false), 4000);
+    window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
   }
 
   const encUrl = encodeURIComponent(url);
   const encTekst = encodeURIComponent(naslov);
 
-  const mreze = [
+  const mreze: Mreza[] = [
     {
       naziv: "Facebook",
       href: `https://www.facebook.com/sharer/sharer.php?u=${encUrl}`,
@@ -103,6 +118,14 @@ export default function PodeliOglas({ naslov }: Props) {
         <path d="M21.95 4.27 18.6 20.1c-.25 1.1-.9 1.38-1.84.86l-5.1-3.76-2.46 2.37c-.27.27-.5.5-1.02.5l.37-5.2 9.46-8.55c.41-.36-.09-.57-.64-.2L5.9 13.1l-5.04-1.58c-1.1-.34-1.12-1.1.23-1.62l19.7-7.6c.92-.34 1.72.2 1.42 1.6Z" />
       ),
     },
+    {
+      naziv: "Instagram",
+      akcija: podeliInstagram,
+      gradient: "linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",
+      ikona: (
+        <path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2Zm0 1.8c-3.15 0-3.5.01-4.74.07-.9.04-1.38.19-1.7.31-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.12.32-.27.8-.31 1.7C3.21 8.5 3.2 8.85 3.2 12s.01 3.5.07 4.74c.04.9.19 1.38.31 1.7.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.12.8.27 1.7.31 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c.9-.04 1.38-.19 1.7-.31.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.12-.32.27-.8.31-1.7.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.04-.9-.19-1.38-.31-1.7a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.12-.8-.27-1.7-.31C15.5 4.01 15.15 4 12 4Zm0 3.07A4.93 4.93 0 1 1 12 16.93 4.93 4.93 0 0 1 12 7.07Zm0 1.8a3.13 3.13 0 1 0 0 6.26 3.13 3.13 0 0 0 0-6.26Zm5.13-3.18a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z" />
+      ),
+    },
   ];
 
   return (
@@ -127,24 +150,49 @@ export default function PodeliOglas({ naslov }: Props) {
         <div className="absolute right-0 z-20 mt-2 w-56 rounded-2xl border border-kolo-border bg-white p-3 shadow-lg">
           <p className="px-1 pb-2 text-xs font-semibold text-kolo-muted">{t("podeli_naslov")}</p>
           <div className="flex flex-wrap gap-2">
-            {mreze.map((m) => (
-              <a
-                key={m.naziv}
-                href={m.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
-                aria-label={m.naziv}
-                title={m.naziv}
-                className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90"
-                style={{ backgroundColor: m.boja }}
-              >
+            {mreze.map((m) => {
+              const style = m.gradient ? { background: m.gradient } : { backgroundColor: m.boja };
+              const ikonaSvg = (
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                   {m.ikona}
                 </svg>
-              </a>
-            ))}
+              );
+              const klasa = "flex h-10 w-10 items-center justify-center rounded-full text-white transition-opacity hover:opacity-90";
+              // Instagram (akcija): kopira link + otvara Instagram. Ostale: običan link.
+              return m.akcija ? (
+                <button
+                  key={m.naziv}
+                  type="button"
+                  onClick={m.akcija}
+                  aria-label={m.naziv}
+                  title={m.naziv}
+                  className={klasa}
+                  style={style}
+                >
+                  {ikonaSvg}
+                </button>
+              ) : (
+                <a
+                  key={m.naziv}
+                  href={m.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  aria-label={m.naziv}
+                  title={m.naziv}
+                  className={klasa}
+                  style={style}
+                >
+                  {ikonaSvg}
+                </a>
+              );
+            })}
           </div>
+          {instaPoruka && (
+            <p className="mt-2 rounded-lg bg-kolo-bg px-3 py-2 text-xs text-kolo-muted">
+              {t("podeli_instagram_info")}
+            </p>
+          )}
           <button
             type="button"
             onClick={kopirajLink}
