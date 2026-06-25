@@ -2,10 +2,11 @@
  * Rani pristup ("early access") — meki ulaz dok je platforma u režimu održavanja.
  *
  * Dok je MAINTENANCE_MODE=true (postavlja se ISKLJUČIVO na produkciji), prijava i
- * registracija su zaključane i sve ulazne rute vode na /uskoro. Ako je u okruženju
- * postavljen RANI_PRISTUP_KOD, osoba koja zna kod može da otključa ulaz: unese kod
- * na /rani-pristup, dobije kolačić, i od tada može da se prijavi/registruje i
- * koristi platformu — dok javnost i dalje vidi /uskoro.
+ * registracija su zaključane i sve ulazne rute vode na /rani-pristup. Ako je u
+ * okruženju postavljen RANI_PRISTUP_KOD, osoba koja zna kod može da otključa ulaz:
+ * unese kod na /rani-pristup, dobije kolačić, i od tada može da se prijavi/registruje
+ * i koristi platformu. (Stara ruta /uskoro je objedinjena i sada trajno redirektuje
+ * na /rani-pristup.)
  *
  * Ovo je svesno "meki" gate za pre-launch fazu (uključivanje ranih prihvatilaca):
  * vrednost kolačića JE sam kod (httpOnly + secure), pa rotacija RANI_PRISTUP_KOD-a

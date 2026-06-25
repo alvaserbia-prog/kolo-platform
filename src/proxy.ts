@@ -11,7 +11,7 @@ const JAVNE_RUTE = [
 ];
 
 // Putanje za ulazak u nalog. Kada je MAINTENANCE_MODE uključen (postavlja se
-// ISKLJUČIVO na produkciji, ne na testu), preusmeravaju se na /uskoro.
+// ISKLJUČIVO na produkciji, ne na testu), preusmeravaju se na /rani-pristup.
 const ZAKLJUCANE_ULAZNE_RUTE = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
@@ -37,7 +37,7 @@ export default async function proxy(req: NextRequest) {
     // Rani prihvatioci sa validnim pristupnim kodom (kolačić) prolaze gate.
     const raniPristup = validanRaniPristup(req.cookies.get(RANI_PRISTUP_COOKIE)?.value);
     if (!raniPristup) {
-      return NextResponse.redirect(new URL("/uskoro", req.url));
+      return NextResponse.redirect(new URL("/rani-pristup", req.url));
     }
   }
 
