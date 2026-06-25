@@ -1,30 +1,26 @@
-# KOLO — Onboarding karusel „Kako da uđeš u KOLO"
+# KOLO — Onboarding karusel „Registruj se u KOLO, korak po korak"
 
-Karusel za društvene mreže (Instagram / Facebook) za uvođenje novih članova u zatvorenoj test fazi.
+Karusel za društvene mreže (Instagram / Facebook) — **čisto praktično uputstvo kako da se neko registruje** (ne teorija): svaki slajd je jedan konkretan korak na pravom ekranu, sa **zaokruženom akcijom** (gde da klikneš / šta da uneseš).
 
 ## Šta je u folderu
-- `png/slajd-01.png … slajd-09.png` — **9 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret — najbolji za IG karusel). **Trenutno = verzija sa PRAVIM screenshotovima ekrana**: uvećan telefonski okvir **sa strane, naizmenično levo/desno**, a tekst (kicker + naslov + opis) ide **pored** njega, vertikalno centriran. Naslovnica (1) i CTA (9) su brendirana grafika; ostali nose snimak ekrana.
-- `screenshots/*.png` — sirovi screenshotovi ekrana aplikacije (ulaz za slajdove sa telefonom). Na slajdu 4 (`/rani-pristup`) polje za kod je **zaokruženo** (callout) preko snimka.
+- `png/slajd-01.png … slajd-07.png` — **7 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret). Uvećan telefonski okvir **sa strane, naizmenično levo/desno**, tekst pored njega; svaki korak ima **broj koraka** i **zaokruženu akciju** na ekranu. Naslovnica (1) i CTA (7) su brendirana grafika.
+- `screenshots/*.png` — sirovi screenshotovi pravih ekrana aplikacije (ulaz za slajdove). Verifikacija i tabla jemstva snimljeni iz ugla **neverifikovanog (novog) korisnika** (0/0%).
 - `slajdovi/*.html` — izvorni HTML svakog slajda (za sitne izmene teksta).
 - `generisi-screenshot.mjs` — generator karusela **sa screenshotovima** (aktuelna verzija u `png/`).
-- `generisi.mjs` — generator alternativne, **ilustrovane** verzije (bez screenshotova, samo grafika/emoji). Pokreni ga ako želiš taj izgled umesto screenshotova.
+- `generisi.mjs` — generator starije, **ilustrovane** verzije (bez screenshotova). Drugačiji koncept (teorijski) — koristi samo ako ti baš treba.
 - `screenshot.mjs` — Playwright skripta koja pravi `screenshots/*.png` sa lokalnog dev servera.
 - `seed-tabla.ts` — jednokratni seed par realnih zahteva na tabli jemstva (da ekran nije prazan).
 
-## Redosled slajdova (verzija sa screenshotovima)
-1. **Naslovnica** — „Kako da uđeš u KOLO" (grafika, hook + ekolo.rs)
-2. **Šta je KOLO** — *landing* ekran; topao edukativni tekst („Tvoj kraj, povezan")
-3. **Upoznaj POEN** — *novčanik* ekran; POEN kao zapis tvog doprinosa (pozitivno, bez negacija)
-4. **Korak 1 — Pristupni kod (test faza)** — *rani-pristup* ekran (`/rani-pristup`, „Uđi sa pristupnim kodom"), polje za kod **zaokruženo**; unese se kod koji dobiješ od nas → otključava prijavu/registraciju. *(Stari `/uskoro` sada 308-redirektuje ovamo — jedan objedinjeni ulaz.)*
-5. **Korak 2 — Registracija** — *registracija* ekran; pseudonim/email/lozinka, bez dokumenata, javno samo pseudonim
-6. **Korak 3 — Verifikacija** — *verifikacija* ekran; potvrde te ljudi koji te poznaju (indeks ≥ 10%)
-7. **Ne znaš nikog?** — *tabla jemstva* ekran; predstaviš se, verifikovani ti se jave
-8. **Korak 4 — Prva razmena** — *Pijaca* ekran; oglas, dogovor, upis POEN-a
-9. **Poziv na akciju** — ekolo.rs, zatvorena test faza, besplatno (grafika)
+## Redosled slajdova — praktično uputstvo (7 slajdova)
+1. **Naslovnica** — „Registruj se u KOLO" (grafika; „treba ti email i pristupni kod")
+2. **Korak 1 · Pristupni kod** — *rani-pristup* ekran; **zaokruženo** polje za kod → ukucaš kod i „Uđi"
+3. **Korak 2 · Registracija** — *registracija* ekran; **zaokruženo** dugme „Registruj se" → email/pseudonim/lozinka + uslovi
+4. **Korak 3 · Nalog napravljen** — *dobrodošli* ekran; potvrda da si ulogovan/a
+5. **Korak 4 · Verifikacija** — *verifikacija* ekran (0/0% neverifikovan); **zaokruženo** „Pokaži svoj kod nekome ko može da te verifikuje"
+6. **Ako ne znaš nikog** — *tabla jemstva* ekran; ostaviš predstavljanje, verifikovani ti se jave
+7. **Poziv na akciju** — ekolo.rs, javi se za pristupni kod (grafika)
 
-> **Pristupni kod:** na slajdu 4 u polju stoji `kolo2026`. Pošto je karusel javan, svako ko ga vidi može da ga iskoristi — ako želiš da kod ostane poluprivatan, javi pa ga zamaglim/zamenim placeholderom (npr. `kolo••••`).
->
-> Dostupna je i **ilustrovana** verzija istog karusela (`generisi.mjs`, bez screenshotova). Tekst za objavu i komentari ispod važe za obe.
+> **Pristupni kod:** na slajdu 2 u polju stoji `kolo2026`. Pošto je karusel javan, svako ko ga vidi može da ga iskoristi — ako želiš da kod ostane poluprivatan, javi pa ga zamaglim/zamenim placeholderom (npr. `kolo••••`).
 
 ---
 
