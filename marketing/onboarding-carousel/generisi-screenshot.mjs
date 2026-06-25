@@ -21,7 +21,7 @@ const C = {
   text: "#1A1A17", muted: "#6B6860",
 };
 
-const TOTAL = 10;
+const TOTAL = 9;
 
 const shell = (inner, { dark = false } = {}) => `<!doctype html><html lang="sr"><head><meta charset="utf-8"><style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -108,34 +108,28 @@ slides.push(sShot({ n: 2, side: "left", kicker: "ŠTA JE KOLO?", title: "Tvoj kr
 slides.push(sShot({ n: 3, side: "right", kicker: "UPOZNAJ POEN", title: "POEN — tvoj<br>doprinos",
   lead: "Kad nešto daš zajednici, dobiješ <b>POEN</b> — zapis koliko si doprineo. Vrednost koja raste zajedno s tobom.", shot: "novcanik" }));
 
-// 4 — TEST FAZA (snimak /uskoro, ZAOKRUŽEN link „Imaš pristupni kod?")
-slides.push(sShot({ n: 4, side: "left", kicker: "ZATVORENA TEST FAZA", title: "Ulaz je<br>preko koda", shot: "uskoro",
-  lead: `Dok se platforma priprema, prijava se otključava <b>pristupnim kodom.</b> Na ekolo.rs klikni „Imaš pristupni kod?" i otvori unos.`,
-  circle: { top: "63.5%", height: "8%", left: "26%", right: "26%", labelTop: "72.5%", label: "👆 klikni ovde" } }));
+// 4 — PRISTUPNI KOD (objedinjen ulaz /rani-pristup, ZAOKRUŽENO polje za kod)
+slides.push(sShot({ n: 4, side: "left", kicker: "KORAK 1 · TEST FAZA", title: "Uđi sa<br>kodom", shot: "rani-pristup",
+  lead: `Platforma je u test fazi. Na <b>ekolo.rs</b> unesi <b>pristupni kod</b> koji si dobio/la i otključaj prijavu i registraciju.`,
+  circle: { top: "56%", height: "9%", left: "10%", right: "10%", labelTop: "47%", label: "✏️ unesi kod" } }));
 
-// 5 — PRISTUPNI KOD (rani-pristup, ZAOKRUŽEN)
-slides.push(sShot({ n: 5, side: "right", kicker: "KORAK 1 · PRISTUPNI KOD",
-  title: "Unesi svoj<br>kod", shot: "rani-pristup",
-  lead: "Na <b>ekolo.rs/rani-pristup</b> unesi kod koji si dobio/la i otključaj prijavu i registraciju.",
-  circle: { top: "50%", height: "9.5%", left: "8%", right: "8%", labelTop: "40%", label: "✏️ unesi kod" } }));
-
-// 6 — REGISTRACIJA
-slides.push(sShot({ n: 6, side: "left", dark: true, kicker: "KORAK 2 · REGISTRACIJA", title: "Napravi<br>nalog",
+// 5 — REGISTRACIJA
+slides.push(sShot({ n: 5, side: "right", dark: true, kicker: "KORAK 2 · REGISTRACIJA", title: "Napravi<br>nalog",
   lead: "Pseudonim, email, lozinka — <b>bez dokumenata.</b> Javno se vidi samo pseudonim.", shot: "registracija" }));
 
-// 7 — VERIFIKACIJA
-slides.push(sShot({ n: 7, side: "right", kicker: "KORAK 3 · VERIFIKACIJA", title: "Potvrde te<br>ljudi",
+// 6 — VERIFIKACIJA
+slides.push(sShot({ n: 6, side: "left", kicker: "KORAK 3 · VERIFIKACIJA", title: "Potvrde te<br>ljudi",
   lead: "Verifikuje te neko ko te <b>lično poznaje</b>. Indeks ≥ 10% = pun pristup.", shot: "verifikacija" }));
 
-// 8 — TABLA JEMSTVA
-slides.push(sShot({ n: 8, side: "left", dark: true, kicker: "NE ZNAŠ NIKOG?", title: "Tabla<br>jemstva",
+// 7 — TABLA JEMSTVA
+slides.push(sShot({ n: 7, side: "right", dark: true, kicker: "NE ZNAŠ NIKOG?", title: "Tabla<br>jemstva",
   lead: "Predstaviš se mreži, <b>verifikovani članovi ti se jave.</b> U test fazi te uvodimo lično. 🤝", shot: "tabla-jemstva" }));
 
-// 9 — PIJACA
-slides.push(sShot({ n: 9, side: "right", kicker: "KORAK 4 · PRVA RAZMENA", title: "Pijaca",
+// 8 — PIJACA
+slides.push(sShot({ n: 8, side: "left", kicker: "KORAK 4 · PRVA RAZMENA", title: "Pijaca",
   lead: "Postaviš oglas, dogovoriš razmenu, <b>upišeš POEN.</b> Cena je u POEN-ima.", shot: "pijaca" }));
 
-// 10 — CTA (grafika)
+// 9 — CTA (grafika)
 slides.push(shell(`
 <div class="slide" style="justify-content:center">
   <img src="${icon}" alt="KOLO" style="height:128px;border-radius:30px;margin-bottom:52px">

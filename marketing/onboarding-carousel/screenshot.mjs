@@ -55,7 +55,7 @@ const browser = await chromium.launch(launchOpts);
 const pub = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: DSF, locale: "sr-Latn" });
 await initConsent(pub);
 await shot(pub, "landing", "/");
-await shot(pub, "uskoro", "/uskoro");
+// /uskoro 308-redirektuje na /rani-pristup (objedinjen ulaz) — hvatamo samo /rani-pristup
 await shot(pub, "rani-pristup", "/rani-pristup", {
   prep: async (page) => {
     // popuni pristupni kod da ekran izgleda realno
