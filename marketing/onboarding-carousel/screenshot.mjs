@@ -55,6 +55,7 @@ const browser = await chromium.launch(launchOpts);
 const pub = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: DSF, locale: "sr-Latn" });
 await initConsent(pub);
 await shot(pub, "landing", "/");
+await shot(pub, "uskoro", "/uskoro");
 await shot(pub, "rani-pristup", "/rani-pristup", {
   prep: async (page) => {
     // popuni pristupni kod da ekran izgleda realno

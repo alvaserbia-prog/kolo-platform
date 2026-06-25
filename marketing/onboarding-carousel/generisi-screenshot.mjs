@@ -101,23 +101,17 @@ slides.push(shell(`
 </div>`, { dark: true }));
 
 // 2 — Šta je KOLO (landing)
-slides.push(sShot({ n: 2, side: "left", kicker: "ŠTA JE KOLO?", title: "Razmena u<br>tvom kraju",
-  lead: "Rad, dobra i znanje sa ljudima oko sebe — <b>bez posrednika i provizije.</b>", shot: "landing" }));
+slides.push(sShot({ n: 2, side: "left", kicker: "ŠTA JE KOLO?", title: "Tvoj kraj,<br>povezan",
+  lead: "KOLO spaja komšije, majstore i domaćine na jednom mestu — razmenjuješ rad, dobra i znanje, a <b>svaki doprinos ostaje zabeležen.</b>", shot: "landing" }));
 
 // 3 — POEN (novčanik)
-slides.push(sShot({ n: 3, side: "right", kicker: "POEN NIJE NOVAC", title: "Zapis o<br>doprinosu",
-  lead: "POEN je <b>evidencija, ne pare.</b> Ne menja se za dinare — beleži šta si dao zajednici.", shot: "novcanik" }));
+slides.push(sShot({ n: 3, side: "right", kicker: "UPOZNAJ POEN", title: "POEN — tvoj<br>doprinos",
+  lead: "Kad nešto daš zajednici, dobiješ <b>POEN</b> — zapis koliko si doprineo. Vrednost koja raste zajedno s tobom.", shot: "novcanik" }));
 
-// 4 — TEST FAZA (grafika)
-slides.push(shell(`
-<div class="slide" style="justify-content:center;align-items:flex-start">
-  <img src="${icon}" alt="KOLO" style="height:120px;border-radius:28px;margin-bottom:50px">
-  <div class="kicker"><span class="pip"></span>VAŽNO PRE ULASKA</div>
-  <h1 style="font-size:90px;margin-top:30px">Zatvorena<br>test faza</h1>
-  <p class="lead" style="font-size:38px;margin-top:32px;max-width:920px">KOLO je trenutno u <b>zatvorenoj test fazi</b> — okuplja se prva grupa članova. Za ulazak ti treba <b>pristupni kod</b> koji dobiješ od nas.</p>
-  <div style="flex:1"></div>
-  <span style="display:inline-block;padding:18px 30px;border-radius:999px;font-weight:700;font-size:30px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)">💬 Piši nam za kod → ekolo.rs</span>
-</div>`, { dark: true }));
+// 4 — TEST FAZA (snimak /uskoro, ZAOKRUŽEN link „Imaš pristupni kod?")
+slides.push(sShot({ n: 4, side: "left", kicker: "ZATVORENA TEST FAZA", title: "Ulaz je<br>preko koda", shot: "uskoro",
+  lead: `Dok se platforma priprema, prijava se otključava <b>pristupnim kodom.</b> Na ekolo.rs klikni „Imaš pristupni kod?" i otvori unos.`,
+  circle: { top: "63.5%", height: "8%", left: "26%", right: "26%", labelTop: "72.5%", label: "👆 klikni ovde" } }));
 
 // 5 — PRISTUPNI KOD (rani-pristup, ZAOKRUŽEN)
 slides.push(sShot({ n: 5, side: "right", kicker: "KORAK 1 · PRISTUPNI KOD",

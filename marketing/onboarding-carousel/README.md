@@ -3,8 +3,8 @@
 Karusel za društvene mreže (Instagram / Facebook) za uvođenje novih članova u zatvorenoj test fazi.
 
 ## Šta je u folderu
-- `png/slajd-01.png … slajd-10.png` — **10 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret — najbolji za IG karusel). **Trenutno = verzija sa PRAVIM screenshotovima ekrana**: uvećan telefonski okvir **sa strane, naizmenično levo/desno**, a tekst (kicker + naslov + opis) ide **pored** njega, vertikalno centriran. Naslovnica (1), „test faza" (4) i CTA (10) su brendirana grafika.
-- `screenshots/*.png` — sirovi screenshotovi ekrana aplikacije (ulaz za slajdove sa telefonom). Na slajdu sa pristupnim kodom polje je **zaokruženo** (callout) preko snimka.
+- `png/slajd-01.png … slajd-10.png` — **10 gotovih slajdova** za objavu, format **1080 × 1350 px** (4:5, portret — najbolji za IG karusel). **Trenutno = verzija sa PRAVIM screenshotovima ekrana**: uvećan telefonski okvir **sa strane, naizmenično levo/desno**, a tekst (kicker + naslov + opis) ide **pored** njega, vertikalno centriran. Naslovnica (1) i CTA (10) su brendirana grafika; ostali nose snimak ekrana.
+- `screenshots/*.png` — sirovi screenshotovi ekrana aplikacije (ulaz za slajdove sa telefonom). Na slajdu 4 (`/uskoro`) zaokružen je link „Imaš pristupni kod?", a na slajdu 5 (`/rani-pristup`) polje za kod — oba kao **callout** preko snimka.
 - `slajdovi/*.html` — izvorni HTML svakog slajda (za sitne izmene teksta).
 - `generisi-screenshot.mjs` — generator karusela **sa screenshotovima** (aktuelna verzija u `png/`).
 - `generisi.mjs` — generator alternativne, **ilustrovane** verzije (bez screenshotova, samo grafika/emoji). Pokreni ga ako želiš taj izgled umesto screenshotova.
@@ -13,9 +13,9 @@ Karusel za društvene mreže (Instagram / Facebook) za uvođenje novih članova 
 
 ## Redosled slajdova (verzija sa screenshotovima)
 1. **Naslovnica** — „Kako da uđeš u KOLO" (grafika, hook + ekolo.rs)
-2. **Šta je KOLO** — *landing* ekran; razmena u tvom kraju, bez posrednika
-3. **POEN nije novac** — *novčanik* ekran; zapis o doprinosu, ne menja se za dinare
-4. **Zatvorena test faza** — grafika; objašnjava da je ulazak preko pristupnog koda
+2. **Šta je KOLO** — *landing* ekran; topao edukativni tekst („Tvoj kraj, povezan")
+3. **Upoznaj POEN** — *novčanik* ekran; POEN kao zapis tvog doprinosa (pozitivno, bez negacija)
+4. **Zatvorena test faza** — *uskoro* ekran (`/uskoro`), **zaokružen** link „Imaš pristupni kod?"; objašnjava da je ulazak preko koda
 5. **Korak 1 — Pristupni kod** — *rani-pristup* ekran (`/rani-pristup`), polje za kod **zaokruženo**; unese se kod koji dobiješ od nas → otključava prijavu/registraciju
 6. **Korak 2 — Registracija** — *registracija* ekran; pseudonim/email/lozinka, bez dokumenata, javno samo pseudonim
 7. **Korak 3 — Verifikacija** — *verifikacija* ekran; potvrde te ljudi koji te poznaju (indeks ≥ 10%)
