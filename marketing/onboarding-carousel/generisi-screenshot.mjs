@@ -93,8 +93,8 @@ slides.push(shell(`
 <div class="slide" style="justify-content:center;align-items:flex-start">
   <img src="${icon}" alt="KOLO" style="height:144px;border-radius:32px;margin-bottom:54px">
   <div class="kicker"><span class="pip"></span>PRAKTIČNO UPUTSTVO</div>
-  <h1 style="font-size:96px;margin-top:30px">Registruj se<br>u <span class="gold">KOLO</span></h1>
-  <p class="lead" style="font-size:40px;margin-top:30px;max-width:920px">Korak po korak, za par minuta. Treba ti samo <b>email</b> i <b>pristupni kod</b>.</p>
+  <h1 style="font-size:96px;margin-top:30px">Uključi se<br>u <span class="gold">KOLO</span></h1>
+  <p class="lead" style="font-size:40px;margin-top:30px;max-width:920px">Registracija korak po korak. Treba ti samo <b>email</b> i <b>pristupni kod</b>.</p>
   <div style="flex:1"></div>
   <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
     <span style="display:inline-block;padding:18px 30px;border-radius:999px;font-weight:700;font-size:30px;background:${C.gold400};color:${C.g900}">ekolo.rs · besplatno</span>
@@ -104,12 +104,12 @@ slides.push(shell(`
 
 // 2 — KORAK 1: pristupni kod
 slides.push(step({ n: 2, num: "1", side: "left", kicker: "PRISTUPNI KOD", title: "Unesi svoj<br>kod", shot: "rani-pristup",
-  lead: `Otvori <b>ekolo.rs</b>, ukucaj kod koji si dobio/la i pritisni <b>„Uđi"</b>.`,
+  lead: `Otvori <b>ekolo.rs</b>, ukucaj kod <b>kolo2026</b> i pritisni <b>„Uđi"</b>.`,
   circle: { top: "56%", height: "9%", left: "10%", right: "10%", labelTop: "47%", label: "✏️ unesi kod" } }));
 
 // 3 — KORAK 2: registracija
 slides.push(step({ n: 3, num: "2", side: "right", dark: true, kicker: "REGISTRACIJA", title: "Popuni i<br>registruj se", shot: "registracija",
-  lead: `Upiši <b>email</b>, izmisli <b>pseudonim</b> (tvoje javno ime) i lozinku, čekiraj uslove i klikni <b>„Registruj se"</b>.`,
+  lead: `Upiši <b>email</b>, <b>pseudonim</b> i lozinku, prihvati uslove i klikni <b>„Registruj se"</b>.`,
   circle: { top: "87.5%", height: "8%", left: "9%", right: "9%", labelTop: "79%", label: "👆 pritisni" } }));
 
 // 4 — KORAK 3: nalog napravljen (dobrodošli)
@@ -118,12 +118,12 @@ slides.push(step({ n: 4, num: "3", side: "left", kicker: "NALOG JE NAPRAVLJEN", 
 
 // 5 — KORAK 4: verifikacija
 slides.push(step({ n: 5, num: "4", side: "right", dark: true, kicker: "VERIFIKACIJA", title: "Postani<br>pun član", shot: "verifikacija",
-  lead: `Pokaži svoj kod nekome ko te <b>lično poznaje</b> — skenira ga i dobijaš pun pristup razmeni.`,
+  lead: `Pokaži svoj kod <b>verifikovanom članu</b> koji te poznaje — kada ga on skenira, dobijaš <b>pun pristup razmeni</b>.`,
   circle: { top: "35.5%", height: "6.5%", left: "4%", right: "4%" } }));
 
 // 6 — (ako ne znaš nikog): tabla jemstva
-slides.push(step({ n: 6, num: "★", side: "left", kicker: "NE ZNAŠ NIKOG?", title: "Tabla<br>jemstva", shot: "tabla-jemstva",
-  lead: `Ostavi kratko predstavljanje na <b>tabli jemstva</b> — verifikovani članovi ti se jave. U test fazi te uvodimo lično. 🤝` }));
+slides.push(step({ n: 6, num: "★", side: "left", kicker: "NE ZNAŠ NIKOGA?", title: "Tabla<br>jemstva", shot: "tabla-jemstva",
+  lead: `Ostavi kratko predstavljanje na <b>tabli jemstva</b> — i neko od verifikovanih članova će ti se javiti i <b>potvrditi tvoju stvarnost</b>. U test fazi te uvodimo lično. 🤝` }));
 
 // 7 — POZIV NA AKCIJU (grafika)
 slides.push(shell(`
