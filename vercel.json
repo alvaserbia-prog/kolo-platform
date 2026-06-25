@@ -20,7 +20,7 @@
     },
     {
       "path": "/api/cron/tabla-jemstva-istek",
-      "schedule": "0 4 * * *"
+      "schedule": "0 */6 * * *"
     },
     {
       "path": "/api/cron/programi-revizija",

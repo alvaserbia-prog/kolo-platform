@@ -7,7 +7,9 @@ const MAX_TEKST = 1000;
 const MIN_TEKST = 10;
 const MAX_KONTAKT = 500;
 const MIN_KONTAKT = 3;
-const TRAJANJE_DANA = 30;
+// Zahtev na tabli traje 72h, pa se gasi (ISTEKAO) — kratak prozor da tabla ostane
+// sveža; istekli korisnik objavljuje novi zahtev. Cron istek se vrti na 6h.
+const TRAJANJE_SATI = 72;
 
 // GET /api/tabla-jemstva — aktivni zahtevi (samo prijavljeni).
 // Tekst i pseudonim su vidljivi svim prijavljenima; kontakt se NE vraća ovde
@@ -24,6 +26,7 @@ export async function GET() {
       userId: true,
       tekstPredstavljanja: true,
       createdAt: true,
+      expiresAt: true,
       user: { select: { pseudonim: true } },
     },
   });
@@ -35,6 +38,7 @@ export async function GET() {
       pseudonim: z.user.pseudonim,
       tekstPredstavljanja: z.tekstPredstavljanja,
       createdAt: z.createdAt.toISOString(),
+      expiresAt: z.expiresAt.toISOString(),
       mojZahtev: z.userId === session.user.id,
     })),
   });
@@ -66,8 +70,7 @@ export async function POST(req: NextRequest) {
   if (postoji)
     return NextResponse.json({ error: "Već imate aktivan zahtev. Povucite ga pre objave novog." }, { status: 409 });
 
-  const expiresAt = new Date();
-  expiresAt.setDate(expiresAt.getDate() + TRAJANJE_DANA);
+  const expiresAt = new Date(Date.now() + TRAJANJE_SATI * 60 * 60 * 1000);
 
   const zahtev = await prisma.zahtevZaJemstvo.create({
     data: {

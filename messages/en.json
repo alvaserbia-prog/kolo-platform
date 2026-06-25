@@ -384,7 +384,12 @@
     "tabla_neverifikovan_naslov": "Don't know anyone in KOLO?",
     "tabla_verifikovan_naslov": "Guarantee board",
     "tabla_neverifikovan_opis": "Introduce yourself to the network on the guarantee board — someone there can meet you and confirm you.",
-    "tabla_verifikovan_opis": "Help new users — see who is requesting verification."
+    "tabla_verifikovan_opis": "Help new users — see who is requesting verification.",
+    "dugme_otkazi": "Cancel",
+    "prijava_link": "Something wrong with your verification? Report it.",
+    "prijava_placeholder": "Briefly describe what's wrong (e.g. you don't know the person who verified you).",
+    "prijava_dugme": "Send report",
+    "prijava_poslata": "Report sent. Oversight will review it."
   },
   "krug": {
     "naslov": "Circles",
@@ -920,11 +925,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -1875,7 +1880,17 @@
     "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):",
     "label_razlog_uklanjanja": "Reason for removal (the user will see this):",
     "placeholder_razlog_uklanjanja": "E.g. inappropriate content, false data, or outside the board's purpose.",
-    "dugme_potvrdi_uklanjanje": "Confirm removal"
+    "dugme_potvrdi_uklanjanje": "Confirm removal",
+    "istice_za": "expires in {sati}h",
+    "objava_uvod": "Introduce yourself to the verified network — someone who knows you can verify you directly from here.",
+    "objava_aktivna_naslov": "Your request is posted",
+    "objava_aktivna_opis": "Visible to verified members;",
+    "dugme_verifikuj": "Verify",
+    "placeholder_oznaka": "Label (nickname) — e.g. \"Pera from the market\"",
+    "oznaka_opis": "Optional. A private label to help you track who you verified — visible only to you and the Foundation.",
+    "potvrda_poznavanja": "I confirm that I personally know this person and vouch, on my own responsibility, for their reality, uniqueness and continuity (Art. 5 of the Proof of Reality Rulebook).",
+    "dugme_potvrdi_verifikaciju": "Confirm verification",
+    "verifikacija_uspeh": "You verified \"{pseudonim}\". They received full access (index +10%)."
   },
   "dobrodosli": {
     "korak1_oznaka": "Welcome",
