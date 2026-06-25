@@ -108,14 +108,14 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
         {imaSlika ? (
           <div className="space-y-2">
             <div className="w-full bg-kolo-bg flex justify-center">
-              <Image
+              {/* Običan <img> (ne next/image): browser uzima prave dimenzije slike,
+                  pa okvir ima tačan oblik slike — bez kvadratnih/letterbox traka.
+                  Uspravna ide po visini, položena po širini; identično mobilni i desktop. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={`/api/pijaca/slika/${oglas.id}/${activeSlika}`}
                 alt={oglas.title}
-                width={1200}
-                height={1200}
-                sizes="(max-width: 768px) 100vw, 600px"
                 className="w-auto h-auto max-h-[70vh] max-w-full object-contain"
-                priority
               />
             </div>
             {oglas.images.length > 1 && (
