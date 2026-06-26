@@ -1,0 +1,22 @@
+{
+  "name": "kolo-video",
+  "version": "1.0.0",
+  "description": "Vertikalni video klipovi (9:16) za zajednicu u Somboru — Remotion",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render Sombor out/sombor.mp4",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.380",
+    "@remotion/fonts": "^4.0.380",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.380"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.0",
+    "typescript": "5.9.2"
+  }
+}
