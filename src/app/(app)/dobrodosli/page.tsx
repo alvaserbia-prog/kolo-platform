@@ -15,14 +15,14 @@ import { useTranslations } from "next-intl";
 
 /** Konfiguracija ekrana: ključ u messages + opciona akciona veza (cta).
  *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva). */
-const EKRANI: { key: string; cta?: string; finalni?: boolean }[] = [
-  { key: "ekran1" },
-  { key: "ekran2" },
-  { key: "ekran3", cta: "/novcanik" },
-  { key: "ekran4", cta: "/verifikacija" },
-  { key: "ekran5", cta: "/pijaca" },
-  { key: "ekran6", cta: "/verifikacija" },
-  { key: "ekran7", finalni: true },
+const EKRANI: { key: string; pasusi: number; cta?: string; finalni?: boolean }[] = [
+  { key: "ekran1", pasusi: 3 },
+  { key: "ekran2", pasusi: 3 },
+  { key: "ekran3", pasusi: 4, cta: "/novcanik" },
+  { key: "ekran4", pasusi: 3, cta: "/verifikacija" },
+  { key: "ekran5", pasusi: 3, cta: "/pijaca" },
+  { key: "ekran6", pasusi: 3, cta: "/verifikacija" },
+  { key: "ekran7", pasusi: 3, finalni: true },
 ];
 
 export default function DobrodosliPage() {
@@ -49,11 +49,7 @@ export default function DobrodosliPage() {
   const prvi = korak === 0;
   const poslednji = korak === EKRANI.length - 1;
   const oznaka = t(`${ekran.key}_oznaka`);
-  const pasusi = [
-    t(`${ekran.key}_p1`),
-    t(`${ekran.key}_p2`),
-    t(`${ekran.key}_p3`),
-  ];
+  const pasusi = Array.from({ length: ekran.pasusi }, (_, i) => t(`${ekran.key}_p${i + 1}`));
 
   function zatvori() {
     if (prviPut) router.push("/sistem");
