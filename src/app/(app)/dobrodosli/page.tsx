@@ -1,72 +1,80 @@
 "use client";
 
 /**
- * /dobrodosli — kratak onboarding za nove korisnike.
- * Prikazuje se jednom, odmah posle registracije (umesto direktnog bacanja na QR).
- * Kasnije dostupan iz "?" u headeru.
+ * /dobrodosli — vodič kroz KOLO za nove korisnike.
+ * Prikazuje se jednom, odmah posle registracije (umesto direktnog bacanja na QR),
+ * a kasnije je uvek dostupan iz "?" u headeru (tada ceo vodič od početka).
+ *
+ * Ekrani su definisani u messages/ pod "dobrodosli" (ključevi ekranN_*),
+ * pa se tekst menja bez diranja ove komponente. Dodavanje/uklanjanje ekrana =
+ * izmena niza EKRANI ispod + odgovarajući ključevi u messages.
  */
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+/** Konfiguracija ekrana: ključ u messages + opciona akciona veza (cta).
+ *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva). */
+const EKRANI: { key: string; cta?: string; finalni?: boolean }[] = [
+  { key: "ekran1" },
+  { key: "ekran2" },
+  { key: "ekran3", cta: "/novcanik" },
+  { key: "ekran4", cta: "/verifikacija" },
+  { key: "ekran5", cta: "/pijaca" },
+  { key: "ekran6", cta: "/verifikacija" },
+  { key: "ekran7", finalni: true },
+];
+
 export default function DobrodosliPage() {
   const t = useTranslations("dobrodosli");
   const router = useRouter();
   const [korak, setKorak] = useState(0);
+  const [prviPut, setPrviPut] = useState(false);
 
-  interface Korak {
-    oznaka: string;
-    naslov: string;
-    pasusi: string[];
-  }
-
-  const KORACI: Korak[] = [
-    {
-      oznaka: t("korak1_oznaka"),
-      naslov: t("korak1_naslov"),
-      pasusi: [t("korak1_p1"), t("korak1_p2"), t("korak1_p3")],
-    },
-    {
-      oznaka: t("korak2_oznaka"),
-      naslov: t("korak2_naslov"),
-      pasusi: [t("korak2_p1"), t("korak2_p2"), t("korak2_p3")],
-    },
-    {
-      oznaka: t("korak3_oznaka"),
-      naslov: t("korak3_naslov"),
-      pasusi: [t("korak3_p1"), t("korak3_p2"), t("korak3_p3")],
-    },
-    {
-      oznaka: t("korak4_oznaka"),
-      naslov: t("korak4_naslov"),
-      pasusi: [t("korak4_p1"), t("korak4_p2"), t("korak4_p3")],
-    },
-  ];
-
-  // Jednokratni flag iz registracije/OAuth-a — očisti čim se welcome prikaže
+  // Jednokratni flag iz registracije/OAuth-a: ako postoji, ovo je prvi prolaz
+  // (gornje dugme = "Preskoči" → /sistem). Inače je vodič otvoren iz "?"
+  // (gornje dugme = "Zatvori" → nazad). Flag čistimo čim ga pročitamo.
   useEffect(() => {
-    try { sessionStorage.removeItem("kolo-welcome"); } catch { /* nedostupan */ }
+    try {
+      if (sessionStorage.getItem("kolo-welcome")) {
+        setPrviPut(true);
+        sessionStorage.removeItem("kolo-welcome");
+      }
+    } catch {
+      /* nedostupan */
+    }
   }, []);
 
-  const trenutni = KORACI[korak];
+  const ekran = EKRANI[korak];
   const prvi = korak === 0;
-  const poslednji = korak === KORACI.length - 1;
+  const poslednji = korak === EKRANI.length - 1;
+  const oznaka = t(`${ekran.key}_oznaka`);
+  const pasusi = [
+    t(`${ekran.key}_p1`),
+    t(`${ekran.key}_p2`),
+    t(`${ekran.key}_p3`),
+  ];
+
+  function zatvori() {
+    if (prviPut) router.push("/sistem");
+    else router.back();
+  }
 
   return (
     <div className="max-w-xl mx-auto py-8 space-y-6">
-      {/* Preskoči */}
+      {/* Preskoči (prvi prolaz) / Zatvori (otvoreno iz "?") */}
       <div className="flex justify-end">
         <button
-          onClick={() => router.push("/sistem")}
+          onClick={zatvori}
           className="text-sm text-kolo-muted hover:text-kolo-text transition-colors"
         >
-          {t("preskoči")}
+          {prviPut ? t("preskoči") : t("zatvori")}
         </button>
       </div>
 
       {/* Indikator koraka */}
       <div className="flex items-center justify-center gap-2">
-        {KORACI.map((_, i) => (
+        {EKRANI.map((_, i) => (
           <span
             key={i}
             className={`h-1.5 rounded-full transition-all ${
@@ -76,22 +84,32 @@ export default function DobrodosliPage() {
         ))}
       </div>
 
-      {/* Kartica */}
+      {/* Kartica u stilu vesti Fondacije */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-7 md:p-9">
         <p className="text-xs font-semibold uppercase tracking-wider text-kolo-green-700">
-          {t("korak_indikator", { broj: korak + 1, ukupno: KORACI.length, oznaka: trenutni.oznaka })}
+          {t("korak_indikator", { broj: korak + 1, ukupno: EKRANI.length, oznaka })}
         </p>
-        <h1 className="mt-2 text-2xl font-bold text-kolo-text">{trenutni.naslov}</h1>
+        <h1 className="mt-2 text-2xl font-bold text-kolo-text">{t(`${ekran.key}_naslov`)}</h1>
         <div className="mt-4 space-y-3">
-          {trenutni.pasusi.map((p, i) => (
-            <p key={i} className="text-sm leading-relaxed text-kolo-muted">
+          {pasusi.map((p, i) => (
+            <p key={i} className="text-sm leading-relaxed text-kolo-text text-body">
               {p}
             </p>
           ))}
         </div>
 
-        {/* Završni CTA-ovi na poslednjem koraku */}
-        {poslednji && (
+        {/* Opciona akciona veza za ovaj ekran (npr. "Otvori Pijacu") */}
+        {ekran.cta && !ekran.finalni && (
+          <button
+            onClick={() => router.push(ekran.cta!)}
+            className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
+          >
+            {t(`${ekran.key}_cta`)} →
+          </button>
+        )}
+
+        {/* Završni CTA-ovi na poslednjem ekranu */}
+        {ekran.finalni && (
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <button
               onClick={() => router.push("/verifikacija")}
@@ -120,7 +138,7 @@ export default function DobrodosliPage() {
         </button>
         {!poslednji && (
           <button
-            onClick={() => setKorak((k) => Math.min(KORACI.length - 1, k + 1))}
+            onClick={() => setKorak((k) => Math.min(EKRANI.length - 1, k + 1))}
             className="px-5 py-2.5 bg-kolo-green-700 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl transition-colors"
           >
             {t("dalje")}
