@@ -77,7 +77,15 @@ export default async function proxy(req: NextRequest) {
 }
 
 export const config = {
+  // Isključi iz proxy-ja sve što on ionako samo propušta (NextResponse.next):
+  // API rute, Next interne fajlove, statičke medije (png/svg/woff…) i SEO/metadata
+  // rute (manifest/robots/sitemap/og-image). Ranije ih je matcher hvatao, pa ih je
+  // funkcija kratko-spajala kroz PRESKOCI — ali se PRE toga IZVRŠAVALA i trošila
+  // Fluid Active CPU (proxy je bio najveći potrošač: /api/pijaca/slika/… i
+  // /manifest.webmanifest su nepotrebno išli kroz runtime). Isključenjem na nivou
+  // matchera funkcija se za njih UOPŠTE ne poziva. Bezbedno: auth na /api rutama je
+  // u samim handlerima, ne u proxy-ju (proxy je za /api ionako vraćao next()).
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|icon.png|kolo-logo.png|kolo-icon.png|kolo-hero-logo.png|nikola-saric.png|nikola-saric-mantil.png|flags).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.webmanifest|opengraph-image|twitter-image|.*\\.(?:png|jpg|jpeg|gif|svg|ico|webp|avif|woff|woff2)$).*)",
   ],
 };
