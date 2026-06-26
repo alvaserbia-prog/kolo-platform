@@ -110,7 +110,7 @@ slides.push(step({ n: 2, num: "1", side: "left", kicker: "PRISTUPNI KOD", title:
 // 3 — KORAK 2: registracija
 slides.push(step({ n: 3, num: "2", side: "right", dark: true, kicker: "REGISTRACIJA", title: "Popuni i<br>registruj se", shot: "registracija",
   lead: `Upiši <b>email</b>, <b>pseudonim</b> i lozinku, prihvati uslove i klikni <b>„Registruj se"</b>.`,
-  circle: { top: "87.5%", height: "8%", left: "9%", right: "9%", labelTop: "79%", label: "👆 pritisni" } }));
+  circle: { top: "79%", height: "7.5%", left: "9%", right: "9%", labelTop: "70.5%", label: "👆 pritisni" } }));
 
 // 4 — KORAK 3: nalog napravljen (dobrodošli)
 slides.push(step({ n: 4, num: "3", side: "left", kicker: "NALOG JE NAPRAVLJEN", title: "Ulogovan/a<br>si!", shot: "dobrodosli",
