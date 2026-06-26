@@ -28,6 +28,8 @@ import MiniStablo, {
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
 import MojeOznake, { type VerifikovanaOsoba } from "@/components/verifikacija/MojeOznake";
+import JemstvoObjava from "@/components/verifikacija/JemstvoObjava";
+import PrijaviVerifikaciju from "@/components/verifikacija/PrijaviVerifikaciju";
 import { TipKorisnika } from "@/generated/prisma/client";
 
 export default async function VerifikacijaPage() {
@@ -121,20 +123,21 @@ export default async function VerifikacijaPage() {
         <div className="flex flex-col gap-6">
           <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
 
-          {/* Tabla jemstva — neverifikovanima put da ih neko upozna; verifikovanima poziv da pomognu novima */}
-          <a
-            href="/tabla-jemstva"
-            className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-          >
-            <p className="font-semibold text-kolo-text">
-              {jeNeverifikovan ? t("tabla_neverifikovan_naslov") : t("tabla_verifikovan_naslov")}
-            </p>
-            <p className="text-sm text-kolo-muted mt-0.5">
-              {jeNeverifikovan
-                ? t("tabla_neverifikovan_opis")
-                : t("tabla_verifikovan_opis")}
-            </p>
-          </a>
+          {jeNeverifikovan ? (
+            // Opcija B: neverifikovanom je tabla jemstva ugrađena ovde — objavi zahtev
+            // i prati status na istom ekranu (sidebar stavka „Tabla jemstva" spojena u
+            // „Verifikacija").
+            <JemstvoObjava />
+          ) : (
+            // Verifikovanom: poziv da pomogne novima — vodi na punu tablu jemstva.
+            <a
+              href="/tabla-jemstva"
+              className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+            >
+              <p className="font-semibold text-kolo-text">{t("tabla_verifikovan_naslov")}</p>
+              <p className="text-sm text-kolo-muted mt-0.5">{t("tabla_verifikovan_opis")}</p>
+            </a>
+          )}
         </div>
 
         <MiniStablo
@@ -162,6 +165,9 @@ export default async function VerifikacijaPage() {
       )}
 
       {!jeNeverifikovan && <MojeOznake osobe={mojeOznake} />}
+
+      {/* Diskretna prijava pogrešne/neželjene verifikacije (hrani Nadzor integriteta) */}
+      {!jeNeverifikovan && verifikatorCvorovi.length > 0 && <PrijaviVerifikaciju />}
     </div>
   );
 }

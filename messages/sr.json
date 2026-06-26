@@ -121,7 +121,9 @@
     "greska_prijava": "Greška pri prijavi. Pokušajte ponovo.",
     "nema_naloga": "Nemate nalog?",
     "registrujte_se": "Registrujte se",
-    "zaboravljena_lozinka": "Zaboravljena lozinka?"
+    "zaboravljena_lozinka": "Zaboravljena lozinka?",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "zaboravljenaLozinka": {
     "naslov": "Zaboravljena lozinka",
@@ -152,7 +154,9 @@
     "preusmeravanje": "Preusmeravanje na prijavu...",
     "greska_lozinka_kratka": "Lozinka mora imati najmanje 8 karaktera.",
     "greska_lozinke_ne_poklapaju": "Lozinke se ne poklapaju.",
-    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo."
+    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo.",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "registracija": {
     "naslov": "Registracija",
@@ -187,7 +191,9 @@
     "greska_lozinka_duljina": "Lozinka mora imati najmanje 8 karaktera.",
     "greska_lozinke_poklapaju": "Lozinke se ne poklapaju.",
     "greska_uslovi": "Morate prihvatiti uslove i politiku privatnosti.",
-    "greska_registracija": "Greška pri registraciji."
+    "greska_registracija": "Greška pri registraciji.",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku"
   },
   "sistem": {
     "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",
@@ -378,7 +384,12 @@
     "tabla_neverifikovan_naslov": "Ne poznaješ nikog u KOLO?",
     "tabla_verifikovan_naslov": "Tabla zahteva za jemstvo",
     "tabla_neverifikovan_opis": "Predstavi se mreži na Tabli jemstva — tu te neko može upoznati i potvrditi.",
-    "tabla_verifikovan_opis": "Pomozite novim korisnicima — pogledajte ko traži verifikaciju."
+    "tabla_verifikovan_opis": "Pomozite novim korisnicima — pogledajte ko traži verifikaciju.",
+    "dugme_otkazi": "Otkaži",
+    "prijava_link": "Nešto nije u redu sa tvojom verifikacijom? Prijavi.",
+    "prijava_placeholder": "Ukratko opiši šta nije u redu (npr. ne poznaješ osobu koja te je verifikovala).",
+    "prijava_dugme": "Pošalji prijavu",
+    "prijava_poslata": "Prijava je poslata. Nadzor će je pregledati."
   },
   "krug": {
     "naslov": "Krugovi",
@@ -914,11 +925,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1869,30 +1880,61 @@
     "prompt_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
     "label_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
     "placeholder_razlog_uklanjanja": "Npr. neprikladan sadržaj, lažni podaci ili van svrhe table.",
-    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje"
+    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje",
+    "istice_za": "ističe za {sati}h",
+    "objava_uvod": "Predstavi se mreži verifikovanih — neko ko te poznaje može te verifikovati direktno odavde.",
+    "objava_aktivna_naslov": "Tvoj zahtev je objavljen",
+    "objava_aktivna_opis": "Vidljiv je verifikovanim članovima;",
+    "dugme_verifikuj": "Verifikujem",
+    "placeholder_oznaka": "Oznaka (nadimak) — npr. „Pera sa pijace”",
+    "oznaka_opis": "Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo ti i Fondacija.",
+    "potvrda_poznavanja": "Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću jemčim za njenu stvarnost, jedinstvenost i kontinuitet (čl. 5 Pravilnika o dokazu stvarnosti).",
+    "dugme_potvrdi_verifikaciju": "Potvrdi verifikaciju",
+    "verifikacija_uspeh": "Verifikovao/la si „{pseudonim}”. Dobio/la je pun pristup (indeks +10%)."
   },
   "dobrodosli": {
-    "korak1_oznaka": "Dobrodošli",
-    "korak1_naslov": "Dobrodošao/la u KOLO",
-    "korak1_p1": "KOLO je zajednica zasnovana na uzajamnosti i doprinosu — ne na novcu.",
-    "korak1_p2": "Ovde se beleži šta doprinosiš i šta razmenjuješ sa drugima, a poverenje se gradi tako što te ljudi koji te poznaju potvrde kao stvarnu osobu.",
-    "korak1_p3": "Provešćemo te kroz osnovno za 30 sekundi.",
-    "korak2_oznaka": "Šta je POEN",
-    "korak2_naslov": "Šta je POEN",
-    "korak2_p1": "POEN je zapis tvog doprinosa zajednici — kao upis u knjigu, a ne novac u novčaniku.",
-    "korak2_p2": "Nije novac, ne kupuje se i ne menja se za dinare, i nema vrednost van sistema. Njime se evidentira ono što uradiš, daš ili razmeniš unutar KOLO.",
-    "korak2_p3": "Ne moraš ništa da uplatiš da bi učestvovao.",
-    "korak3_oznaka": "Verifikacija",
-    "korak3_naslov": "Kako te mreža prihvata",
-    "korak3_p1": "Da bi dobio pun pristup, treba da te potvrdi neko ko je već u KOLO i ko te lično poznaje — bez ijednog dokumenta. To zovemo lanac jemstva.",
-    "korak3_p2": "Poznaješ nekog u KOLO? Pokaži mu svoj kod i potvrdiće te za par sekundi.",
-    "korak3_p3": "Ne poznaješ nikog? Predstavi se mreži na Tabli zahteva za jemstvo — tu te neko može upoznati i potvrditi.",
-    "korak4_oznaka": "Šta možeš odmah",
-    "korak4_naslov": "Šta možeš odmah",
-    "korak4_p1": "I pre verifikacije možeš da: razgledaš ponudu na Pijaci, čitaš vesti Fondacije i pratiš zajednicu.",
-    "korak4_p2": "Posle verifikacije se otključava sve ostalo — objava oglasa, poruke, pisanje u zajednici i učešće u sistemu.",
-    "korak4_p3": "Spreman/na?",
+    "ekran1_oznaka": "Dobrodošli",
+    "ekran1_naslov": "Dobrodošli na test verziju KOLO sistema",
+    "ekran1_p1": "Drago nam je što si tu. KOLO je zajednica u kojoj ljudi razmenjuju dobra, usluge i pomoć — bez novca.",
+    "ekran1_p2": "Ovde se ne zarađuje novac — već do onoga što ti treba dolaziš kroz razmenu i pomoć ljudi iz svog kraja, umesto da sve plaćaš. Daš nešto, dobiješ nešto i pomogneš zajednici da raste.",
+    "ekran1_p3": "Nema članarine i ništa ne ulažeš. Provešćemo te kroz osnovno — ovaj vodič uvek možeš ponovo da otvoriš klikom na „?” u vrhu.",
+    "ekran2_oznaka": "Kako radi",
+    "ekran2_naslov": "Kako KOLO radi, ukratko",
+    "ekran2_p1": "U KOLO ono što jedan da — drugi dobije. Ti ponudiš nešto što umeš ili imaš, a od drugih dobiješ ono što tebi treba.",
+    "ekran2_p2": "Svaka takva razmena se beleži u POEN-ima — to je trag o tome šta si doprineo i razmenio.",
+    "ekran2_p3": "Da bi mogao/la da učestvuješ, mreža prvo treba da te prepozna kao stvarnu osobu. O tome u nastavku.",
+    "ekran3_oznaka": "POEN",
+    "ekran3_naslov": "Šta je POEN",
+    "ekran3_p1": "POEN je zapis tvog doprinosa — beleži šta si dao i šta si dobio u mreži.",
+    "ekran3_p2": "POEN kruži: kad nekome daš dobro ili uslugu — dobiješ POEN; kad tebi nešto treba — daš POEN. Tako mreža pamti ko je koliko doprineo.",
+    "ekran3_p3": "Na primer: popraviš komšiji česmu — on ti to upiše u POEN-ima; kasnije za te POEN-e dobiješ med ili pomoć koja tebi treba.",
+    "ekran3_p4": "POEN nije novac: ne kupuje se, ne menja se za dinare i nema vrednost van sistema. Ništa ne moraš da uplatiš da bi učestvovao/la.",
+    "ekran3_cta": "Otvori Novčanik",
+    "ekran4_oznaka": "Verifikacija",
+    "ekran4_naslov": "Kako te mreža prihvata",
+    "ekran4_p1": "Da bi dobio/la pun pristup, treba da te potvrdi neko ko je već u sistemu i ko te lično poznaje. Taj krug poverenja zovemo lanac jemstva — i ne traži nijedan dokument.",
+    "ekran4_p2": "Poznaješ nekog u KOLO? Otvori Verifikaciju, pokaži mu svoj kod (dobiješ ga na toj stranici) i potvrdiće te za par sekundi.",
+    "ekran4_p3": "Ne poznaješ nikoga? Predstavi se mreži na Tabli zahteva za jemstvo — tu te neko može upoznati i potvrditi. Verifikacija ti donosi i 1.000 POEN dobrodošlice.",
+    "ekran4_cta": "Otvori Verifikaciju",
+    "ekran5_oznaka": "Pijaca",
+    "ekran5_naslov": "Razmena na Pijaci",
+    "ekran5_p1": "Na Pijaci ljudi nude i traže dobra i usluge. Pregled oglasa je otvoren svima — slobodno razgledaj.",
+    "ekran5_p2": "Kad nađeš nešto, dogovor obavljate međusobno, a razmenu beležite u POEN-ima — bez provizije i bez posrednika.",
+    "ekran5_p3": "Objavljivanje oglasa, kontakt sa oglašivačem i poruke otključavaju se kad se verifikuješ.",
+    "ekran5_cta": "Otvori Pijacu",
+    "ekran6_oznaka": "POEN sada",
+    "ekran6_naslov": "Kako trenutno dobijaš POEN",
+    "ekran6_p1": "Za sada POEN dobijaš na dva načina:",
+    "ekran6_p2": "Kroz verifikaciju — kad uđeš u lanac jemstva dobiješ 1.000 POEN dobrodošlice, a kasnije i sam/a potvrđuješ druge koje lično poznaješ.",
+    "ekran6_p3": "Kroz razmenu — kad nekome daš dobro ili uslugu, on ti to upiše u POEN-ima.",
+    "ekran6_cta": "Otvori Verifikaciju",
+    "ekran7_oznaka": "Zajednica",
+    "ekran7_naslov": "Ostani u toku",
+    "ekran7_p1": "Dok čekaš da te neko potvrdi, slobodno razgledaj Pijacu i prati nove vesti Fondacije na Početnoj — najave, izmene i sve važno za zajednicu.",
+    "ekran7_p2": "Imaš pitanje? Pitaj slobodno u zajedničkom chatu (Pričaonici) — tu je zajednica i rado pomaže.",
+    "ekran7_p3": "Spreman/na? Tvoj prvi korak je verifikacija:",
     "preskoči": "Preskoči",
+    "zatvori": "Zatvori",
     "korak_indikator": "Korak {broj} / {ukupno} · {oznaka}",
     "cta_poznajem": "Poznajem nekog → pokaži kod",
     "cta_ne_poznajem": "Ne poznajem nikog → Tabla jemstva",

@@ -47,15 +47,15 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 | Dokument | Fajl (`dokumentacija 3.9/`) | Verzija |
 |---|---|---|
 | Pravilnik o KOLO sistemu | `Pravilnik_3_9_0.md` | **3.9.0** (82 člana, 12 glava) |
-| Politika privatnosti | `politika_3_9_0.md` | **3.9.0** |
-| Uslovi korišćenja | `uslovi_koriscenja_3_9_0.md` | **3.9.0** |
+| Politika privatnosti | `politika_3_9_1.md` | **3.9.1** (dopuna: verifikacija sa table jemstva, 72h, prijava) |
+| Uslovi korišćenja | `uslovi_koriscenja_3_9_1.md` | **3.9.1** (dopuna: čl. 16 — verifikacija sa table, 72h) |
 | Statut Fondacije | `statut_3_8_0.md` | **3.8.0** |
 | Whitepaper | `whitepaper_3_9_0.md` | **3.9.0** (PDF `nova dokumentacija/KOLO_Whitepaper_3.7.2.pdf` zastareo) |
 | DPIA | `DPIA_3_9_0.md` | **3.9.0** |
 | Radnje obrade | `radnje_obrade_3_9_0.md` | **3.9.0** |
 | Rizici (Izjava o prihvatanju rizika) | `rizici_3_9_0.md` | **3.9.0** |
 | Pravilnik o hijerarhiji akata | `hijerarhija_3_9_0.md` | **3.9.0** (dopunjen: dodat Pravilnik o Gornjem Kolu; „kolektivni oblici") |
-| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_9_0.md` | **3.9.0** |
+| Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_9_1.md` | **3.9.1** (dopuna: čl. 5 — pokretanje verifikacije sa table jemstva) |
 | Pravilnik o pokroviteljstvu i donacijama | `donacije_3_9_0.md` | **3.9.0** (donacije 11 nivoa 1,00–2,00; pokroviteljstvo 7 nivoa; +preduzetnici) |
 | Pravilnik o operativnom doprinosu | `operativni_3_9_0.md` | **3.9.0** |
 | Pravilnik o osnivačkom doprinosu | `osnivacki_3_9_0.md` | **3.9.0** |
@@ -153,7 +153,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 ### Tabla zahteva za jemstvo (implementirana)
 - Neverifikovan korisnik se predstavlja mreži radi verifikacije (Pravilnik čl. 32, Uslovi).
-- Model `ZahtevZaJemstvo`; API `/api/tabla-jemstva*`; stranica `/tabla-jemstva`; admin uklanjanje; istek cron (`/api/cron/tabla-jemstva-istek`, rok ~30 dana po Politici).
+- Model `ZahtevZaJemstvo`; API `/api/tabla-jemstva*`; stranica `/tabla-jemstva`; admin uklanjanje; istek cron (`/api/cron/tabla-jemstva-istek`, rok **72h** od objave — dopuna 3.9.1; cron ostaje **dnevni** `0 4 * * *` — GET filtrira `expiresAt>now` u realnom vremenu, pa subdnevni schedule NE treba; subdnevni cron Vercel plan ODBIJA i obara build sa cron-pricing greškom). **Verifikacija sa table (dopuna 3.9.1):** verifikator (indeks ≥10%/NOSILAC_ZRNA) klikne „Verifikujem" na kartici → `POST /api/tabla-jemstva/[id]/verifikuj` → `izvrsiVerifikacijuSaTable` (deli jezgro sa token putem); objava zahteva = pristanak, bez trećeg koraka; verifikovani dobije notifikaciju + „Prijavi" (`/api/verifikacija/prijavi` → RizikNalaz). Za neverifikovanog je tabla ugrađena u `/verifikacija` (komponenta `JemstvoObjava`), sidebar stavka spojena.
 
 ### Pravna priroda POEN-a (Pravilnik čl. 12–13)
 POEN je **interna obračunska jedinica kojom se evidentira doprinos i drugi oblici učešća u zajedničkom dobru**. Analogija: zapis u matičnoj knjizi — **beleži činjenicu**, ali nije sredstvo van sistema. POEN **nema nosioca**, postoji isključivo kao zapis u Protokolu, izražava se celim brojevima i **ne predstavlja novac, valutu, elektronski novac, platno sredstvo, digitalnu imovinu, finansijski instrument ni hartiju od vrednosti**. Evidentiran doprinos **ne predstavlja potraživanje prema Fondaciji** ni osnov za imovinskopravni zahtev.
@@ -246,7 +246,7 @@ docs/             — interne radne beleške (nije normativa)
 - `PrigovorNaOdluku`: korisnik podnosi (`POST /api/prigovor`), admin odgovara (`PATCH /api/admin/prigovori/[id]`). Tipovi: VERIFIKACIJA, SUSPENZIJA, PROGRAM, OSTALO. Max 3 otvorena; odgovor u 30 dana; notifikacija.
 
 ### GDPR cron
-- `POST /api/cron/gdpr-cistenje` (1. u mesecu, 02:00): briše poruke kada je jedna strana deaktivirala nalog ILI je lastMessageAt > 24 meseca. (Legacy brisanje JMBG/slika uklonjeno — ti podaci više ne postoje.) Rokovi po Politici čl. 10: tehnički logovi 12 meseci, transakcije/donacije 10 godina, podaci table jemstva 30 dana.
+- `POST /api/cron/gdpr-cistenje` (1. u mesecu, 02:00): briše poruke kada je jedna strana deaktivirala nalog ILI je lastMessageAt > 24 meseca. (Legacy brisanje JMBG/slika uklonjeno — ti podaci više ne postoje.) Rokovi po Politici čl. 10: tehnički logovi 12 meseci, transakcije/donacije 10 godina, podaci table jemstva — aktivni zahtev 72h od objave (dopuna 3.9.1), pa brisanje iz prikaza.
 
 ### Audit log
 - `ADMIN_EKSPORT_PODATAKA` pri admin eksportu. (Legacy `PRISTUP_DOKUMENT_VERIFIKACIJA`/`PRISTUP_JMBG_PODACI` događaji više nisu relevantni — bez dokumenata/JMBG-a.)
@@ -329,7 +329,7 @@ docs/             — interne radne beleške (nije normativa)
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `dokumentacija 3.9/`, EN iz `dokumentacija 3.9/en/`)
-- `/pravilnik` → `Pravilnik_3_9_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.9.0); `/privatnost` → `politika_3_9_0.md`; `/uslovi` → `uslovi_koriscenja_3_9_0.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_9_0.md`; `/radnje-obrade` → `radnje_obrade_3_9_0.md`; `/whitepaper` → `whitepaper_3_9_0.md`; `/rizici` → `rizici_3_9_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.9/en/<isti fajl>` (fallback srpski).
+- `/pravilnik` → `Pravilnik_3_9_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.9.0); `/privatnost` → `politika_3_9_1.md`; `/uslovi` → `uslovi_koriscenja_3_9_1.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_9_0.md`; `/radnje-obrade` → `radnje_obrade_3_9_0.md`; `/whitepaper` → `whitepaper_3_9_0.md`; `/rizici` → `rizici_3_9_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.9/en/<isti fajl>` (fallback srpski).
 - ✅ **Verzijske labele** — prikazuju 3.9.0 (statut 3.8.0); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 

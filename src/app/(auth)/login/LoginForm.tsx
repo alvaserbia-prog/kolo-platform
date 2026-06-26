@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [prikaziLozinku, setPrikaziLozinku] = useState(false);
   const [error, setError] = useState("");
   // Kad je prijava odbijena (pogrešan email/lozinka ili nepostojeći nalog),
   // pored poruke pokazujemo upadljiv poziv na registraciju. NE razdvajamo
@@ -86,15 +88,23 @@ export default function LoginForm() {
             <label className="block text-sm font-medium text-kolo-text mb-1.5">
               {t("lozinka")}
             </label>
-            <input
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-              placeholder={t("placeholder_lozinka")}
-              suppressHydrationWarning
-            />
+            <div className="relative">
+              <input
+                type={prikaziLozinku ? "text" : "password"}
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 pr-11 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
+                placeholder={t("placeholder_lozinka")}
+                suppressHydrationWarning
+              />
+              <PrikaziLozinkuDugme
+                prikazan={prikaziLozinku}
+                onToggle={() => setPrikaziLozinku((v) => !v)}
+                prikaziLabel={t("prikazi_lozinku")}
+                sakrijLabel={t("sakrij_lozinku")}
+              />
+            </div>
           </div>
 
           {error && (

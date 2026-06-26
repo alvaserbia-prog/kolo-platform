@@ -121,7 +121,9 @@
     "greska_prijava": "Sign in error. Please try again.",
     "nema_naloga": "Don't have an account?",
     "registrujte_se": "Register",
-    "zaboravljena_lozinka": "Forgot password?"
+    "zaboravljena_lozinka": "Forgot password?",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "zaboravljenaLozinka": {
     "naslov": "Forgot Password",
@@ -152,7 +154,9 @@
     "preusmeravanje": "Redirecting to sign in...",
     "greska_lozinka_kratka": "Password must be at least 8 characters.",
     "greska_lozinke_ne_poklapaju": "Passwords do not match.",
-    "greska_zahtev": "Error changing password. Please try again."
+    "greska_zahtev": "Error changing password. Please try again.",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "registracija": {
     "naslov": "Registration",
@@ -187,7 +191,9 @@
     "greska_lozinka_duljina": "Password must be at least 8 characters.",
     "greska_lozinke_poklapaju": "Passwords don't match.",
     "greska_uslovi": "You must accept the terms and privacy policy.",
-    "greska_registracija": "Registration error."
+    "greska_registracija": "Registration error.",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password"
   },
   "sistem": {
     "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
@@ -378,7 +384,12 @@
     "tabla_neverifikovan_naslov": "Don't know anyone in KOLO?",
     "tabla_verifikovan_naslov": "Guarantee board",
     "tabla_neverifikovan_opis": "Introduce yourself to the network on the guarantee board — someone there can meet you and confirm you.",
-    "tabla_verifikovan_opis": "Help new users — see who is requesting verification."
+    "tabla_verifikovan_opis": "Help new users — see who is requesting verification.",
+    "dugme_otkazi": "Cancel",
+    "prijava_link": "Something wrong with your verification? Report it.",
+    "prijava_placeholder": "Briefly describe what's wrong (e.g. you don't know the person who verified you).",
+    "prijava_dugme": "Send report",
+    "prijava_poslata": "Report sent. Oversight will review it."
   },
   "krug": {
     "naslov": "Circles",
@@ -914,11 +925,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "3.9.0"
+      "ver": "3.9.1"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -1869,30 +1880,61 @@
     "prompt_razlog_uklanjanja": "Reason for removal (the user will see this):",
     "label_razlog_uklanjanja": "Reason for removal (the user will see this):",
     "placeholder_razlog_uklanjanja": "E.g. inappropriate content, false data, or outside the board's purpose.",
-    "dugme_potvrdi_uklanjanje": "Confirm removal"
+    "dugme_potvrdi_uklanjanje": "Confirm removal",
+    "istice_za": "expires in {sati}h",
+    "objava_uvod": "Introduce yourself to the verified network — someone who knows you can verify you directly from here.",
+    "objava_aktivna_naslov": "Your request is posted",
+    "objava_aktivna_opis": "Visible to verified members;",
+    "dugme_verifikuj": "Verify",
+    "placeholder_oznaka": "Label (nickname) — e.g. \"Pera from the market\"",
+    "oznaka_opis": "Optional. A private label to help you track who you verified — visible only to you and the Foundation.",
+    "potvrda_poznavanja": "I confirm that I personally know this person and vouch, on my own responsibility, for their reality, uniqueness and continuity (Art. 5 of the Proof of Reality Rulebook).",
+    "dugme_potvrdi_verifikaciju": "Confirm verification",
+    "verifikacija_uspeh": "You verified \"{pseudonim}\". They received full access (index +10%)."
   },
   "dobrodosli": {
-    "korak1_oznaka": "Welcome",
-    "korak1_naslov": "Welcome to KOLO",
-    "korak1_p1": "KOLO is a community built on mutual support and contribution — not on money.",
-    "korak1_p2": "Here we record what you contribute and exchange with others, and trust is built by having people who know you confirm you as a real person.",
-    "korak1_p3": "We'll walk you through the basics in 30 seconds.",
-    "korak2_oznaka": "What is POEN",
-    "korak2_naslov": "What is POEN",
-    "korak2_p1": "POEN is a record of your contribution to the community — like an entry in a ledger, not money in a wallet.",
-    "korak2_p2": "It is not money, cannot be bought or exchanged for currency, and has no value outside the system. It records what you do, give, or exchange within KOLO.",
-    "korak2_p3": "You don't need to pay anything to participate.",
-    "korak3_oznaka": "Verification",
-    "korak3_naslov": "How the network accepts you",
-    "korak3_p1": "To get full access, someone already in KOLO who knows you personally needs to confirm you — without any documents. We call this the vouching chain.",
-    "korak3_p2": "Do you know someone in KOLO? Show them your code and they'll confirm you in seconds.",
-    "korak3_p3": "Don't know anyone? Introduce yourself to the network on the guarantee board — someone there can meet you and confirm you.",
-    "korak4_oznaka": "What you can do now",
-    "korak4_naslov": "What you can do right now",
-    "korak4_p1": "Even before verification you can: browse the marketplace, read Foundation news, and follow the community.",
-    "korak4_p2": "After verification everything else unlocks — posting listings, messages, writing in the community and taking part in the system.",
-    "korak4_p3": "Ready?",
+    "ekran1_oznaka": "Welcome",
+    "ekran1_naslov": "Welcome to the KOLO system test version",
+    "ekran1_p1": "We're glad you're here. KOLO is a community where people exchange goods, services and help — without money.",
+    "ekran1_p2": "You don't earn money here — instead you get what you need through exchange and the help of people from your area, rather than paying for everything. Give something, get something, and help the community grow.",
+    "ekran1_p3": "There's no membership fee and you invest nothing. We'll walk you through the basics — you can reopen this guide anytime from the “?” at the top.",
+    "ekran2_oznaka": "How it works",
+    "ekran2_naslov": "How KOLO works, in short",
+    "ekran2_p1": "In KOLO, what one person gives — another receives. You offer something you can do or have, and from others you get what you need.",
+    "ekran2_p2": "Every such exchange is recorded in POEN — a trace of what you contributed and exchanged.",
+    "ekran2_p3": "To take part, the network first needs to recognize you as a real person. More on that next.",
+    "ekran3_oznaka": "POEN",
+    "ekran3_naslov": "What POEN is",
+    "ekran3_p1": "POEN is a record of your contribution — it tracks what you gave and what you got in the network.",
+    "ekran3_p2": "POEN circulates: when you give someone a good or service — you get POEN; when you need something — you give POEN. That's how the network remembers who contributed how much.",
+    "ekran3_p3": "For example: you fix a neighbor's tap — they record it for you in POEN; later you spend that POEN on honey or help you need.",
+    "ekran3_p4": "POEN is not money: it can't be bought, can't be exchanged for currency and has no value outside the system. You don't need to pay anything to take part.",
+    "ekran3_cta": "Open Wallet",
+    "ekran4_oznaka": "Verification",
+    "ekran4_naslov": "How the network accepts you",
+    "ekran4_p1": "To get full access, someone already in the system who knows you personally needs to confirm you. We call that circle of trust the vouching chain — and it requires no documents.",
+    "ekran4_p2": "Do you know someone in KOLO? Open Verification, show them your code (you get it on that page) and they'll confirm you in seconds.",
+    "ekran4_p3": "Don't know anyone? Introduce yourself to the network on the guarantee board — someone there can meet you and confirm you. Verification also gives you 1,000 POEN as a welcome.",
+    "ekran4_cta": "Open Verification",
+    "ekran5_oznaka": "Marketplace",
+    "ekran5_naslov": "Exchange on the marketplace",
+    "ekran5_p1": "On the marketplace people offer and look for goods and services. Browsing listings is open to everyone — feel free to look around.",
+    "ekran5_p2": "When you find something, you arrange it between yourselves and record the exchange in POEN — with no commission and no middlemen.",
+    "ekran5_p3": "Posting listings, contacting sellers and messaging unlock once you're verified.",
+    "ekran5_cta": "Open Marketplace",
+    "ekran6_oznaka": "Earning POEN",
+    "ekran6_naslov": "How you get POEN right now",
+    "ekran6_p1": "For now, you get POEN in two ways:",
+    "ekran6_p2": "Through verification — when you join the vouching chain you get 1,000 POEN as a welcome, and later you confirm others you personally know.",
+    "ekran6_p3": "Through exchange — when you give someone a good or service, they record it for you in POEN.",
+    "ekran6_cta": "Open Verification",
+    "ekran7_oznaka": "Community",
+    "ekran7_naslov": "Stay in the loop",
+    "ekran7_p1": "While you wait for someone to confirm you, feel free to browse the marketplace and follow the latest Foundation news on the home page — announcements, changes and everything important for the community.",
+    "ekran7_p2": "Got a question? Just ask in the shared chat — the community is there and happy to help.",
+    "ekran7_p3": "Ready? Your first step is verification:",
     "preskoči": "Skip",
+    "zatvori": "Close",
     "korak_indikator": "Step {broj} / {ukupno} · {oznaka}",
     "cta_poznajem": "I know someone → show code",
     "cta_ne_poznajem": "I don't know anyone → Guarantee board",

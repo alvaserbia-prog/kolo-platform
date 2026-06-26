@@ -1,6 +1,8 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, cleanup, fireEvent } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { ReactElement } from "react";
 import TablaJemstvaKlijent from "@/app/(app)/tabla-jemstva/TablaJemstvaKlijent";
 
 vi.mock("next-intl", () => ({
@@ -10,11 +12,18 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
+// Komponenta koristi React Query — testovi je moraju umotati u provider.
+function renderSaQuery(ui: ReactElement) {
+  const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  return render(<QueryClientProvider client={qc}>{ui}</QueryClientProvider>);
+}
+
 const ZAHTEV = {
   id: "zahtev-1",
   pseudonim: "TestKorisnik",
   tekstPredstavljanja: "Zdravo, predstavljam se mreži radi verifikacije.",
   createdAt: new Date().toISOString(),
+  expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString(),
   mojZahtev: true,
 };
 
@@ -37,7 +46,7 @@ afterEach(() => { cleanup(); });
 describe("TablaJemstvaKlijent — povlačenje zahteva", () => {
   it("klik Povuci → Da, povuci šalje DELETE na /api/tabla-jemstva/[id]", async () => {
     const calls = mockFetch();
-    render(<TablaJemstvaKlijent verified={false} isAdmin={false} />);
+    renderSaQuery(<TablaJemstvaKlijent verified={false} isAdmin={false} mozeVerifikovati={false} />);
 
     // Sačekaj da se učita lista
     await waitFor(() => expect(screen.getByText("dugme_povuci")).toBeTruthy());
@@ -61,7 +70,7 @@ describe("TablaJemstvaKlijent — povlačenje zahteva", () => {
     // Inline tok ne sme da zavisi od prompt-a.
     const promptSpy = vi.spyOn(window, "prompt").mockReturnValue(null);
     const calls = mockFetch({ ...ZAHTEV, id: "zahtev-1", mojZahtev: false });
-    render(<TablaJemstvaKlijent verified={true} isAdmin={true} />);
+    renderSaQuery(<TablaJemstvaKlijent verified={true} isAdmin={true} mozeVerifikovati={false} />);
 
     await waitFor(() => expect(screen.getByText("dugme_ukloni")).toBeTruthy());
     fireEvent.click(screen.getByText("dugme_ukloni"));

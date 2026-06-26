@@ -4,6 +4,7 @@ import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -27,7 +28,7 @@ export default function ResetLozinkaPage({ params }: { params: Promise<{ token: 
 
   const [tokenStatus, setTokenStatus] = useState<"checking" | "valid" | "invalid">("checking");
   const [novaLozinka, setNovaLozinka] = useState("");
-  const [potvrda, setPotvrda] = useState("");
+  const [prikaziLozinku, setPrikaziLozinku] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [uspesno, setUspesno] = useState(false);
@@ -56,10 +57,6 @@ export default function ResetLozinkaPage({ params }: { params: Promise<{ token: 
 
     if (novaLozinka.length < 8) {
       setError(t("greska_lozinka_kratka"));
-      return;
-    }
-    if (novaLozinka !== potvrda) {
-      setError(t("greska_lozinke_ne_poklapaju"));
       return;
     }
 
@@ -125,15 +122,23 @@ export default function ResetLozinkaPage({ params }: { params: Promise<{ token: 
               <label className="block text-sm font-medium text-kolo-text mb-1.5">
                 {t("nova_lozinka")}
               </label>
-              <input
-                type="password"
-                autoComplete="new-password"
-                value={novaLozinka}
-                onChange={(e) => setNovaLozinka(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-                placeholder={t("placeholder_lozinka")}
-                suppressHydrationWarning
-              />
+              <div className="relative">
+                <input
+                  type={prikaziLozinku ? "text" : "password"}
+                  autoComplete="new-password"
+                  value={novaLozinka}
+                  onChange={(e) => setNovaLozinka(e.target.value)}
+                  className="w-full px-4 py-3 pr-11 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
+                  placeholder={t("placeholder_lozinka")}
+                  suppressHydrationWarning
+                />
+                <PrikaziLozinkuDugme
+                  prikazan={prikaziLozinku}
+                  onToggle={() => setPrikaziLozinku((v) => !v)}
+                  prikaziLabel={tReg("prikazi_lozinku")}
+                  sakrijLabel={tReg("sakrij_lozinku")}
+                />
+              </div>
               {novaLozinka.length > 0 && (
                 <div className="mt-2">
                   <div className="flex gap-1 mb-1">
@@ -158,28 +163,6 @@ export default function ResetLozinkaPage({ params }: { params: Promise<{ token: 
                     {lozinkaJacina.tekst}
                   </p>
                 </div>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-kolo-text mb-1.5">
-                {t("potvrda")}
-              </label>
-              <input
-                type="password"
-                autoComplete="new-password"
-                value={potvrda}
-                onChange={(e) => setPotvrda(e.target.value)}
-                className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-colors ${
-                  potvrda && novaLozinka !== potvrda
-                    ? "border-red-400"
-                    : "border-kolo-border focus:border-kolo-green-700"
-                }`}
-                placeholder={t("placeholder_lozinka")}
-                suppressHydrationWarning
-              />
-              {potvrda && novaLozinka !== potvrda && (
-                <p className="mt-1 text-xs text-red-500">{t("greska_lozinke_ne_poklapaju")}</p>
               )}
             </div>
 
