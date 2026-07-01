@@ -38,6 +38,24 @@ self.addEventListener("push", (event) => {
   event.waitUntil(self.registration.showNotification(naslov, opcije));
 });
 
+// Aplikacija javi (postMessage) kad korisnik pročita poruke/notifikacije za
+// određeni cilj → zatvaramo pripadajuće sistemske notifikacije da crvena brojka
+// na ikonici (OS agregira prikazane notifikacije) padne. Bez ovoga badge ostaje
+// i posle čitanja, jer `showNotification` ne nestaje sam.
+self.addEventListener("message", (event) => {
+  const data = event.data || {};
+  if (data.type !== "zatvori-notifikacije") return;
+  event.waitUntil(
+    self.registration.getNotifications().then((notifikacije) => {
+      for (const n of notifikacije) {
+        const link = (n.data && n.data.link) || "";
+        // Bez `link` u poruci → zatvori sve; inače samo one čiji cilj počinje datim linkom.
+        if (!data.link || link === data.link || link.startsWith(data.link)) n.close();
+      }
+    }),
+  );
+});
+
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   const link = (event.notification.data && event.notification.data.link) || "/pocetna";

@@ -23,6 +23,21 @@ type Poruka = {
   createdAt: string;
 };
 
+// Javi service worker-u da zatvori prikazane push notifikacije date konverzacije
+// (tag/link = `/poruke?k=<id>`) kad je korisnik pročita → crvena brojka na
+// ikonici (OS agregira notifikacije) se skida. No-op ako SW/push nije aktivan.
+function zatvoriNotifikacijeKonverzacije(konvId: string) {
+  if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
+  navigator.serviceWorker.ready
+    .then((reg) => {
+      (reg.active ?? navigator.serviceWorker.controller)?.postMessage({
+        type: "zatvori-notifikacije",
+        link: `/poruke?k=${konvId}`,
+      });
+    })
+    .catch(() => {});
+}
+
 function PorukeContent() {
   const t = useTranslations("poruke");
   const router = useRouter();
@@ -72,6 +87,9 @@ function PorukeContent() {
     setDrugiId(data.drugiUser?.id ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
+    // Zatvori sistemske push notifikacije ove konverzacije da crvena brojka na
+    // ikonici (desktop/PWA) padne — inače ostaje jer notifikacija ne nestaje sama.
+    zatvoriNotifikacijeKonverzacije(konvId);
   }, []);
 
   // Inicijalno učitavanje konverzacija
