@@ -20,13 +20,19 @@ self.addEventListener("push", (event) => {
   }
 
   const naslov = data.naslov || "KOLO";
+  const link = data.link || "/pocetna";
   const opcije = {
     body: data.tekst || "",
     icon: "/kolo-icon.png",
     badge: "/kolo-icon.png",
-    // Iste vrste notifikacija se grupišu (npr. više poruka istog tipa).
-    tag: data.tip || "kolo",
-    data: { link: data.link || "/pocetna" },
+    // Grupiši po CILJU (link), ne po tipu: inače bi sve poruke — iz svih
+    // konverzacija — delile isti tag ("poruka") i tiho preklapale jedna drugu,
+    // pa bi korisnik video/čuo samo prvu. Sada svaka konverzacija ima svoj tag.
+    tag: `${data.tip || "kolo"}:${link}`,
+    // renotify: čak i kad novi push zameni notifikaciju istog tag-a, ponovo
+    // obavesti (zvuk/vibracija) umesto tihe zamene.
+    renotify: true,
+    data: { link },
   };
 
   event.waitUntil(self.registration.showNotification(naslov, opcije));

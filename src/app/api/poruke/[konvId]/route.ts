@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiPush } from "@/lib/push";
+import { zakaziPush } from "@/lib/push";
 
 async function getKonv(konvId: string, meId: string) {
   const k = await prisma.konverzacija.findUnique({ where: { id: konvId } });
@@ -81,9 +81,11 @@ export async function POST(
 
   // Nove poruke se NE evidentiraju kao notifikacije (zvonce) — nepročitane poruke
   // se broje crvenim badge-om na ikonici "Poruke" (GET /api/poruke/brojac).
-  // Push na telefon primaoca (ako je uključio obaveštenja). Ne blokira odgovor.
+  // Push na telefon primaoca (ako je uključio obaveštenja). `zakaziPush` koristi
+  // `after()` da push preživi kraj serverless odgovora — inače se funkcija zamrzne
+  // pre nego što webpush stigne da pošalje (push „nekad ne stigne"). Ne blokira odgovor.
   const primalacId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
-  void posaljiPush(primalacId, {
+  zakaziPush(primalacId, {
     naslov: `Nova poruka — ${session.user.pseudonim}`,
     tekst: poruka.tekst.length > 120 ? `${poruka.tekst.slice(0, 120)}…` : poruka.tekst,
     link: `/poruke?k=${konvId}`,
