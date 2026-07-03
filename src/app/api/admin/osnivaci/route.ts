@@ -17,15 +17,31 @@ async function proveriAdmin() {
  *   body: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena? }
  */
 
+/** Prevede Prisma/DB grešku u jasnu srpsku poruku (umesto opšteg 500). */
+function porudaZaGresku(e: unknown): string {
+  const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
+  if (code === "P2021" || code === "P2022") {
+    // Tabela/kolona ne postoji — migracija za osnivače nije primenjena na ovoj bazi.
+    return "Baza za osnivače nije podešena na ovom okruženju (migracija nije primenjena). Kontaktiraj razvoj.";
+  }
+  if (code === "P2002") return "Taj korisnik je već upisan kao osnivač, ili je taj redni broj već zauzet.";
+  if (code === "P2003") return "Izabrani korisnik ne postoji u bazi.";
+  return "Greška pri upisu osnivača. Kontaktiraj razvoj.";
+}
+
 export async function GET() {
   const auth = await proveriAdmin();
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
-  const osnivaci = await prisma.osnivac.findMany({
-    include: { user: { select: { pseudonim: true, email: true } } },
-    orderBy: { redniBroj: "asc" },
-  });
-  return NextResponse.json({ osnivaci });
+  try {
+    const osnivaci = await prisma.osnivac.findMany({
+      include: { user: { select: { pseudonim: true, email: true } } },
+      orderBy: { redniBroj: "asc" },
+    });
+    return NextResponse.json({ osnivaci });
+  } catch (e) {
+    return NextResponse.json({ error: porudaZaGresku(e) }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -42,17 +58,23 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Udeli moraju biti pozitivni." }, { status: 400 });
   }
 
-  // Kanal ne sme da bude vec aktiviran (brojKoraka > 0) ako se menja lista osnivaca
-  const kanal = await prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } });
-  if (kanal && kanal.brojKoraka > 0) {
-    return NextResponse.json({
-      error: "Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.",
-    }, { status: 409 });
+  try {
+    // Kanal ne sme da bude vec aktiviran (brojKoraka > 0) ako se menja lista osnivaca
+    const kanal = await prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } });
+    if (kanal && kanal.brojKoraka > 0) {
+      return NextResponse.json({
+        error: "Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.",
+      }, { status: 409 });
+    }
+
+    const osnivac = await prisma.osnivac.create({
+      data: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena },
+    });
+
+    return NextResponse.json({ osnivac });
+  } catch (e) {
+    const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
+    const status = code === "P2002" || code === "P2003" ? 409 : 500;
+    return NextResponse.json({ error: porudaZaGresku(e) }, { status });
   }
-
-  const osnivac = await prisma.osnivac.create({
-    data: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena },
-  });
-
-  return NextResponse.json({ osnivac });
 }

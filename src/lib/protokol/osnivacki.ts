@@ -77,21 +77,23 @@ export async function dohvatiStatusKanala(): Promise<KanalStatus> {
     izracunajUkupanPoen(),
   ]);
 
-  if (!kanal) {
-    throw new Error("OsnivackiKanal singleton nije inicijalizovan.");
-  }
+  // Ako singleton red još nije zaseban (npr. baza tek inicijalizovana), prikaži
+  // prazan kanal (0 koraka) umesto da rušimo ceo prikaz. Sam upis koraka
+  // (proveriIEvidentirajKorak) i dalje zahteva postojeći red.
+  const ukupnoEvidentirano = kanal?.ukupnoEvidentirano ?? 0;
+  const poslednjiPrag = kanal?.poslednjiPrag ?? 0;
 
   return {
-    ukupnoEvidentirano: kanal.ukupnoEvidentirano,
-    brojKoraka: kanal.brojKoraka,
-    zatvoren: kanal.zatvoren,
-    zatvorenAt: kanal.zatvorenAt,
-    poslednjiPrag: kanal.poslednjiPrag,
+    ukupnoEvidentirano,
+    brojKoraka: kanal?.brojKoraka ?? 0,
+    zatvoren: kanal?.zatvoren ?? false,
+    zatvorenAt: kanal?.zatvorenAt ?? null,
+    poslednjiPrag,
     gornjaGranica: GORNJA_GRANICA,
-    preostalo: GORNJA_GRANICA - kanal.ukupnoEvidentirano,
-    procenatIskoriscenja: Math.round((kanal.ukupnoEvidentirano / GORNJA_GRANICA) * 10000) / 100,
+    preostalo: GORNJA_GRANICA - ukupnoEvidentirano,
+    procenatIskoriscenja: Math.round((ukupnoEvidentirano / GORNJA_GRANICA) * 10000) / 100,
     ukupanPoenUSistemu: ukupanPoen,
-    sledeciPrag: kanal.poslednjiPrag + PRAG_SKOK,
+    sledeciPrag: poslednjiPrag + PRAG_SKOK,
   };
 }
 

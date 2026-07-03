@@ -38,19 +38,25 @@ export default function OsnivaciTab({
   const t = useTranslations("admin");
   const { data, isLoading: ucitavanje, refetch } = useQuery({
     queryKey: ["admin-osnivaci"],
-    queryFn: async (): Promise<{ osnivaci: Osnivac[]; status: Status | null }> => {
+    queryFn: async (): Promise<{ osnivaci: Osnivac[]; status: Status | null; backendGreska: string | null }> => {
       const [oRes, sRes] = await Promise.all([
         fetch("/api/admin/osnivaci"),
         fetch("/api/javno/osnivacki-doprinos"),
       ]);
-      if (!oRes.ok || !sRes.ok) throw new Error("Greška pri učitavanju osnivača");
-      const osnivaci = (await oRes.json()).osnivaci ?? [];
-      const status = (await sRes.json()).status ?? null;
-      return { osnivaci, status };
+      const oData = await oRes.json().catch(() => ({}));
+      const sData = await sRes.json().catch(() => ({}));
+      // Ne rušimo ceo prikaz ako jedan fetch padne — prikazujemo jasnu poruku.
+      const backendGreska = !oRes.ok ? (oData.error ?? "Greška pri učitavanju osnivača.") : null;
+      return {
+        osnivaci: oData.osnivaci ?? [],
+        status: sData.status ?? null,
+        backendGreska,
+      };
     },
   });
   const osnivaci = data?.osnivaci ?? [];
   const status = data?.status ?? null;
+  const backendGreska = data?.backendGreska ?? null;
   const [radnja, setRadnja] = useState<string | null>(null);
 
   // Forma za dodavanje
@@ -114,6 +120,12 @@ export default function OsnivaciTab({
 
   return (
     <div className="space-y-6">
+      {backendGreska && (
+        <div className="rounded-2xl border border-kolo-danger bg-kolo-danger-light px-4 py-3 text-sm text-kolo-danger">
+          {backendGreska}
+        </div>
+      )}
+
       {/* Status kanala */}
       {status && (
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
