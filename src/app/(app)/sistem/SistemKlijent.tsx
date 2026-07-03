@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
+import KorisnikAvatar from "@/components/KorisnikAvatar";
 
 type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
 
@@ -36,6 +37,7 @@ interface Clan {
   id: string;
   pseudonim: string;
   verified: boolean;
+  avatar: string | null;
   balance: number;
   krug: string | null;
   donacijeRSD: number;
@@ -778,6 +780,7 @@ const ClanRed = memo(function ClanRed({
       {/* Desktop red */}
       <div className="hidden sm:grid grid-cols-[1fr_1fr_90px_72px_100px] gap-4 px-5 py-3 items-center text-sm">
         <div className="flex items-center gap-2 min-w-0">
+          <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={28} />
           <Link
             href={`/profil/${c.id}`}
             className="font-medium text-kolo-green-700 hover:underline truncate"
@@ -809,8 +812,9 @@ const ClanRed = memo(function ClanRed({
       {/* Mobilna kartica */}
       <div className="sm:hidden px-4 py-3 space-y-1">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline">
+          <div className="flex items-center gap-2 min-w-0">
+            <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={28} />
+            <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline truncate">
               <Pseudonim>{c.pseudonim}</Pseudonim>
             </Link>
             {c.verified ? (
