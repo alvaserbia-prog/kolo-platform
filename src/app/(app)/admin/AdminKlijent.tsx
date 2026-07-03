@@ -30,9 +30,10 @@ interface KorisnikInfo {
 interface DashboardData {
   korisnici: { ukupno: number; verifikovanih: number; suspendovanih: number };
   krugovi: { ukupno: number; krugra: number };
-  finansije: { opticaj: number; protokolBalance: number };
+  finansije: { opticaj: number; protokolBalance: number; promet: number };
   zrno: { kodKorisnika: number; uProtokolu: number; ukupno: number };
   ukupnoTransakcija: number;
+  transakcije: { ukupno: number; protokola: number; clanova: number };
 }
 
 interface AuditLogEntry {
@@ -1353,6 +1354,17 @@ function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void })
 
 // ── Dashboard tab ─────────────────────────────────────────────────────────────
 
+function StatKartica({ label, value, color }: { label: string; value: number; color?: string }) {
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border p-3 md:p-4">
+      <p className="text-[10px] md:text-xs text-kolo-muted mb-1 leading-tight">{label}</p>
+      <p className={`text-base md:text-2xl font-bold tabular-nums leading-tight ${color ?? "text-kolo-text"}`}>
+        {value.toLocaleString("sr-RS")}
+      </p>
+    </div>
+  );
+}
+
 function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () => void }) {
   const t = useTranslations("admin");
   const [zeroSum, setZeroSum] = useState<{ zbir: number; ok: boolean } | null>(null);
@@ -1366,49 +1378,32 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
   }
 
   return (
-    <div className="space-y-5">
-      {/* Korisnici */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_korisnici_ukupno")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_verifikovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_suspendovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
-        </div>
+    <div className="space-y-3 md:space-y-4">
+      {/* Korisnici — ukupno / verifikovani / suspendovani u jednom redu */}
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
+        <StatKartica label={t("dashboard_korisnici_ukupno")} value={data.korisnici.ukupno} />
+        <StatKartica label={t("dashboard_verifikovani")} value={data.korisnici.verifikovanih} color="text-kolo-green-700" />
+        <StatKartica label={t("dashboard_suspendovani")} value={data.korisnici.suspendovanih} color="text-kolo-gold-600" />
       </div>
 
-      {/* Finansije */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_opticaj")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_ukupno_transakcija")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
-        </div>
+      {/* Opticaj (levo) + Promet (desno) */}
+      <div className="grid grid-cols-2 gap-2 md:gap-3">
+        <StatKartica label={t("dashboard_opticaj")} value={data.finansije.opticaj} />
+        <StatKartica label={t("dashboard_promet")} value={data.finansije.promet} />
       </div>
 
-      {/* ZRNO */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_zrno_kod_korisnika")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_zrno_u_protokolu")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uProtokolu.toLocaleString("sr-RS")}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_ukupno_zrna")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
-        </div>
+      {/* Transakcije — ukupno / Protokola / članova u jednom redu */}
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
+        <StatKartica label={t("dashboard_ukupno_transakcija")} value={data.transakcije.ukupno} />
+        <StatKartica label={t("dashboard_transakcije_protokola")} value={data.transakcije.protokola} />
+        <StatKartica label={t("dashboard_transakcije_clanova")} value={data.transakcije.clanova} />
+      </div>
+
+      {/* ZRNO — ukupno / u Protokolu / kod korisnika u jednom redu */}
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
+        <StatKartica label={t("dashboard_ukupno_zrna")} value={data.zrno.ukupno} color="text-kolo-muted" />
+        <StatKartica label={t("dashboard_zrno_u_protokolu")} value={data.zrno.uProtokolu} />
+        <StatKartica label={t("dashboard_zrno_kod_korisnika")} value={data.zrno.kodKorisnika} color="text-kolo-gold-600" />
       </div>
 
       {/* Zero-sum provjera */}

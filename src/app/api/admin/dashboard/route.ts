@@ -15,6 +15,7 @@ export async function GET() {
     ukupnoKrug, ukupnoKrugra,
     protokol, zrnoStanje,
     poslednjeEmisije, ukupnoTransakcija,
+    prometAgg, transakcijeProtokola,
     noviKorisnici,
   ] = await Promise.all([
     prisma.user.count(),
@@ -26,6 +27,8 @@ export async function GET() {
     prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
     prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     prisma.transaction.count(),
+    prisma.transaction.aggregate({ _sum: { amount: true } }),
+    prisma.transaction.count({ where: { OR: [{ fromWalletId: "banka-singleton" }, { toWalletId: "banka-singleton" }] } }),
     prisma.user.findMany({
       orderBy: { createdAt: "desc" },
       take: 30,
@@ -50,8 +53,9 @@ export async function GET() {
   return NextResponse.json({
     korisnici: { ukupno: ukupnoKorisnika, verifikovanih, suspendovanih },
     krugovi: { ukupno: ukupnoKrug, krugra: ukupnoKrugra },
-    finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
+    finansije: { opticaj, protokolBalance: protokol?.balance ?? 0, promet: prometAgg._sum.amount ?? 0 },
     zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: zrnaUProtokolu, ukupno: UKUPNO_ZRNA },
+    transakcije: { ukupno: ukupnoTransakcija, protokola: transakcijeProtokola, clanova: ukupnoTransakcija - transakcijeProtokola },
     programi: poslednjeEmisije.map((e) => ({
       date: e.date.toISOString(),
       emitted: e.totalEmitted,

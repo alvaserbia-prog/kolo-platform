@@ -44,6 +44,8 @@ export default async function AdminPage() {
       prisma.krugClanstvo.count({ where: { leftAt: null } }),
       prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
       prisma.transaction.count(),
+      prisma.transaction.aggregate({ _sum: { amount: true } }),
+      prisma.transaction.count({ where: { OR: [{ fromWalletId: "banka-singleton" }, { toWalletId: "banka-singleton" }] } }),
     ]),
     prisma.auditLog.findMany({
       orderBy: { createdAt: "desc" },
@@ -176,9 +178,10 @@ export default async function AdminPage() {
       dashboard={{
         korisnici: { ukupno: dashboardData[0], verifikovanih: dashboardData[1], suspendovanih: dashboardData[2] },
         krugovi: { ukupno: dashboardData[3], krugra: dashboardData[4] },
-        finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
+        finansije: { opticaj, protokolBalance: protokol?.balance ?? 0, promet: dashboardData[7]._sum.amount ?? 0 },
         zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: UKUPNO_ZRNA - zrnaKodKorisnika, ukupno: UKUPNO_ZRNA },
         ukupnoTransakcija: dashboardData[6],
+        transakcije: { ukupno: dashboardData[6], protokola: dashboardData[8], clanova: dashboardData[6] - dashboardData[8] },
       }}
       auditLogs={auditLogs.map((l) => ({
         id: l.id, adminPseudonim: l.admin.pseudonim, akcija: l.akcija,
