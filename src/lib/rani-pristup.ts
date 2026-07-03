@@ -30,16 +30,26 @@ export function raniPristupKonfigurisan(): boolean {
 }
 
 /**
+ * Normalizuje pristupni kod za poređenje: uklanja SVE razmake (uključujući
+ * unutrašnje) i svodi na mala slova. Tako se "KOLO 2026", "kolo2026" i
+ * " Kolo 2026 " tretiraju jednako — korisnik može da ukuca kod sa ili bez
+ * razmaka.
+ */
+function normalizujKod(kod: string): string {
+  return kod.replace(/\s+/g, "").toLowerCase();
+}
+
+/**
  * Da li uneti kod odgovara konfigurisanom pristupnom kodu.
- * Poređenje je neosetljivo na velika/mala slova i razmake sa krajeva
- * (npr. "kolo2026", "KOLO2026" i "Kolo2026" se prihvataju jednako).
+ * Poređenje je neosetljivo na velika/mala slova i na razmake (bilo gde u kodu)
+ * — npr. "kolo2026", "KOLO 2026" i "Kolo2026" se prihvataju jednako.
  */
 export function tacanRaniPristupKod(kod?: string | null): boolean {
   const ocekivani = process.env.RANI_PRISTUP_KOD;
   return (
     !!ocekivani &&
     typeof kod === "string" &&
-    kod.trim().toLowerCase() === ocekivani.trim().toLowerCase()
+    normalizujKod(kod) === normalizujKod(ocekivani)
   );
 }
 
