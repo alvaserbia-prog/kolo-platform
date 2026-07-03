@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     where,
     orderBy: { createdAt: "desc" },
     take: limit,
-    include: { user: { select: { id: true, pseudonim: true, verified: true } } },
+    include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
   });
 
   return NextResponse.json(
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
         userId: p.user.id,
         pseudonim: p.user.pseudonim,
         verified: p.user.verified,
+        avatar: p.user.avatar,
         content: p.content,
         createdAt: p.createdAt.toISOString(),
       }))
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
       userId: session.user.id,
       content,
     },
-    include: { user: { select: { id: true, pseudonim: true, verified: true } } },
+    include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
   });
 
   return NextResponse.json({
@@ -75,6 +76,7 @@ export async function POST(req: NextRequest) {
       userId: poruka.user.id,
       pseudonim: poruka.user.pseudonim,
       verified: poruka.user.verified,
+      avatar: poruka.user.avatar,
       content: poruka.content,
       createdAt: poruka.createdAt.toISOString(),
     },

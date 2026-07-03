@@ -18,6 +18,7 @@ interface ChatPoruka {
   userId: string;
   pseudonim: string;
   verified: boolean;
+  avatar: string | null;
   content: string;
   createdAt: string;
 }
@@ -186,8 +187,9 @@ export default function PocetnaKlijent({
                 return (
                   <div
                     key={p.id}
-                    className={`flex ${moja ? "justify-end" : "justify-start"}`}
+                    className={`flex items-end gap-2 ${moja ? "justify-end" : "justify-start"}`}
                   >
+                    {!moja && <ChatAvatar avatar={p.avatar} pseudonim={p.pseudonim} userId={p.userId} />}
                     <div className={`max-w-[75%] ${moja ? "items-end" : "items-start"} flex flex-col`}>
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <Link
@@ -220,6 +222,7 @@ export default function PocetnaKlijent({
                         {p.content}
                       </div>
                     </div>
+                    {moja && <ChatAvatar avatar={p.avatar} pseudonim={p.pseudonim} userId={p.userId} />}
                   </div>
                 );
               })
@@ -267,5 +270,40 @@ export default function PocetnaKlijent({
       </section>
       </div>
     </div>
+  );
+}
+
+// Mali avatar korisnika pored poruke u pričaonici. R2/http URL ili legacy base64;
+// fallback = inicijal pseudonima. Klik vodi na javni profil.
+function ChatAvatar({
+  avatar,
+  pseudonim,
+  userId,
+}: {
+  avatar: string | null;
+  pseudonim: string;
+  userId: string;
+}) {
+  const inicijal = (pseudonim?.trim()?.[0] ?? "?").toUpperCase();
+  return (
+    <Link
+      href={`/profil/${userId}`}
+      title={pseudonim}
+      className="shrink-0 w-7 h-7 rounded-full overflow-hidden bg-kolo-green-500 flex items-center justify-center text-white font-bold text-[11px] mb-0.5"
+    >
+      {avatar ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={avatar}
+          alt={pseudonim}
+          width={28}
+          height={28}
+          decoding="async"
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        inicijal
+      )}
+    </Link>
   );
 }

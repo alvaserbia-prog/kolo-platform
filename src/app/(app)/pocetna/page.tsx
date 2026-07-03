@@ -17,7 +17,7 @@ export default async function PocetnaPage() {
     prisma.chatMessage.findMany({
       orderBy: { createdAt: "desc" },
       take: 100,
-      include: { user: { select: { id: true, pseudonim: true, verified: true } } },
+      include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
     }),
   ]);
 
@@ -35,6 +35,7 @@ export default async function PocetnaPage() {
       userId: p.user.id,
       pseudonim: p.user.pseudonim,
       verified: p.user.verified,
+      avatar: p.user.avatar,
       content: p.content,
       createdAt: p.createdAt.toISOString(),
     }))
