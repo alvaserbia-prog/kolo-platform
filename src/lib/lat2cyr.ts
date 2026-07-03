@@ -28,6 +28,22 @@ const BELA_LISTA = [
   "Cloudflare", "Resend", "Instagram",
 ];
 
+// Engleski naslovi (knjige, programi, radionice, licence) — ostaju CELI u latinici.
+// Bez ovoga bi im se reči bez q/w/x/y transliterisale slovo-po-slovo
+// („The End of Money…" → „Тхе Енд оф Money…"), što izgleda kao loš prevod.
+// Lična imena (Thomas Greco, Michael Linton) se NE stavljaju ovde — po srpskom
+// pravopisu se strana imena preslikavaju u ćirilicu (Томас Греко) i to je ispravno.
+const BELA_LISTA_FRAZE = [
+  "Creative Commons Attribution-ShareAlike 4.0 International",
+  "The End of Money and the Future of Civilization",
+  "GNU Affero General Public License",
+  "Innovation in Exchange and Finance",
+  "Local Exchange Trading Systems",
+  "Local Exchange Trading System",
+  "Developer Certificate of Origin",
+  "Social and Solidarity Economy",
+].sort((a, b) => b.length - a.length); // duže fraze prve (npr. množina pre jednine)
+
 // Strane reči (pozajmljenice) koje ostaju u latinici u SVIM padežnim oblicima.
 // Obrasci su case-insensitive; originalni oblik se očuva (maskiranje vraća tekst
 // doslovno). Dodaj koren reči ovde da pokriješ sve nastavke odjednom.
@@ -154,6 +170,11 @@ export function lat2cyr(input: string): string {
     .replace(RE_DOMEN, masc)
     .replace(RE_ICU, masc)
     .replace(RE_TAG, masc);
+
+  // 1b) Maskiraj engleske naslove kao cele fraze (pre pojedinačnih reči).
+  for (const fraza of BELA_LISTA_FRAZE) {
+    if (s.includes(fraza)) s = s.split(fraza).join(masc(fraza));
+  }
 
   // 2) Maskiraj reči iz bele liste (kao cele reči, case-sensitive po unosu).
   for (const token of BELA_LISTA) {
