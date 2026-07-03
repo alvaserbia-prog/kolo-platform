@@ -15,6 +15,12 @@ const QRCodeSVG = dynamic(() => import("qrcode.react").then((m) => m.QRCodeSVG),
   ssr: false,
 });
 
+// Skener kamere (html5-qrcode ~200KB) — učitava se LENJO, tek kad kupac otvori
+// skener za plaćanje. Deli isti chunk sa skenerom u verifikaciji.
+const QrSkener = dynamic(() => import("@/components/verifikacija/QrSkener"), {
+  ssr: false,
+});
+
 interface Props {
   balance: number;
   pseudonim: string;
@@ -31,6 +37,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, zrnoSl
   const t = useTranslations("novcanik");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
   const [showQR, setShowQR] = useState(false);
+  const [showSkener, setShowSkener] = useState(false);
 
   return (
     <>
@@ -75,6 +82,12 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, zrnoSl
               {t("posalji_poen")}
             </button>
             <button
+              onClick={() => setShowSkener(true)}
+              className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+            >
+              {t("skeniraj_dugme")}
+            </button>
+            <button
               onClick={() => setShowQR(true)}
               className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
             >
@@ -107,7 +120,63 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, zrnoSl
       {showQR && (
         <QRModal pseudonim={pseudonim} memberHash={memberHash} onClose={() => setShowQR(false)} />
       )}
+
+      {/* Skener za plaćanje (kupac skenira QR prodavca) */}
+      {showSkener && (
+        <SkenerModal onClose={() => setShowSkener(false)} />
+      )}
     </>
+  );
+}
+
+// ── Skener modal (kupac skenira QR prodavca i plaća) ──────────────────────────
+
+function SkenerModal({ onClose }: { onClose: () => void }) {
+  const t = useTranslations("novcanik");
+  const router = useRouter();
+  const [greska, setGreska] = useState("");
+
+  function handleDetektovan(tekst: string) {
+    setGreska("");
+    // QR prodavca kodira URL: .../m/<hash>?amount=..&opis=..  ili
+    // .../novcanik?plati=<pseudonim>&iznos=..&description=..
+    // Kupac skenira → vodimo ga kroz isti tok plaćanja (formu za upis POEN-a).
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://ekolo.rs";
+    let putanja: string | null = null;
+    try {
+      const url = new URL(tekst.trim(), baseUrl);
+      if (url.pathname.startsWith("/m/") || url.pathname.startsWith("/novcanik")) {
+        putanja = url.pathname + url.search;
+      }
+    } catch {
+      // nije validan URL
+    }
+    if (!putanja) {
+      setGreska(t("skener_greska_qr"));
+      return;
+    }
+    onClose();
+    router.push(putanja);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4">
+        <div className="flex justify-between items-center">
+          <h3 className="text-base font-semibold text-kolo-text">{t("skener_naslov")}</h3>
+          <button onClick={onClose} className="text-kolo-muted hover:text-kolo-text text-xl leading-none">×</button>
+        </div>
+        <p className="text-sm text-kolo-muted">{t("skener_opis")}</p>
+        {greska && (
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
+        )}
+        <QrSkener
+          onDetektovan={handleDetektovan}
+          onZatvori={onClose}
+          uputstvo={t("skener_uputstvo")}
+        />
+      </div>
+    </div>
   );
 }
 

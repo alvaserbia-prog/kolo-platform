@@ -11,11 +11,13 @@ import type { Html5Qrcode } from "html5-qrcode";
 type Props = {
   onDetektovan: (token: string) => void;
   onZatvori: () => void;
+  /** Uputstvo ispod skenera. Podrazumevano: verifikacija. */
+  uputstvo?: string;
 };
 
 const SKENER_REGION_ID = "kolo-qr-skener-region";
 
-export default function QrSkener({ onDetektovan, onZatvori }: Props) {
+export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
   const [error, setError] = useState<string | null>(null);
   const [aktivnaKamera, setAktivnaKamera] = useState<"environment" | "user">(
     "environment"
@@ -108,7 +110,7 @@ export default function QrSkener({ onDetektovan, onZatvori }: Props) {
         </button>
       </div>
       <p className="text-xs text-kolo-muted text-center">
-        Usmeri kameru ka QR kodu osobe koju verifikuješ.
+        {uputstvo ?? "Usmeri kameru ka QR kodu osobe koju verifikuješ."}
       </p>
     </div>
   );
