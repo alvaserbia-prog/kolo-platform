@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-// POST /api/dnevni-brojevi/vidjeno  { sekcija: "novcanik" | "pijaca" }
+// POST /api/dnevni-brojevi/vidjeno  { sekcija: "pocetna" | "novcanik" | "pijaca" }
 // Označava da je korisnik otvorio tab → badge se nuluje (broji se "od sad").
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
   const { sekcija } = await req.json().catch(() => ({ sekcija: null }));
 
   const polje =
+    sekcija === "pocetna" ? "vidjenoPocetnaAt" :
     sekcija === "novcanik" ? "vidjenoNovcanikAt" :
     sekcija === "pijaca" ? "vidjenoPijacaAt" :
     null;

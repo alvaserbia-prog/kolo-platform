@@ -10,6 +10,7 @@ import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
  */
 
 export interface DnevniBrojevi {
+  pocetna: number;
   novcanik: number;
   pijaca: number;
   tablaJemstva: number;
@@ -29,16 +30,22 @@ export async function izracunajDnevniBrojeve(
   // otvaranja taba. Ako tab još nije otvaran (null), pada na ponoć ("novo danas").
   const meUser = await prisma.user.findUnique({
     where: { id: userId },
-    select: { vidjenoNovcanikAt: true, vidjenoPijacaAt: true },
+    select: { vidjenoNovcanikAt: true, vidjenoPijacaAt: true, vidjenoPocetnaAt: true },
   });
   const odNovcanik = meUser?.vidjenoNovcanikAt ?? danas;
   const odPijaca = meUser?.vidjenoPijacaAt ?? danas;
+  const odPocetna = meUser?.vidjenoPocetnaAt ?? danas;
 
   // "Novo od poslednje posete" — informativni brojači uz linkove
-  const [wallet, pijaca] = await Promise.all([
+  const [wallet, pijaca, chatNove, blogNove] = await Promise.all([
     prisma.wallet.findUnique({ where: { userId }, select: { id: true } }),
     prisma.marketplaceListing.count({ where: { createdAt: { gt: odPijaca } } }),
+    // Početna: nove poruke u Pričaonici (tuđe) + nove objave Fondacije (Blog)
+    // od poslednjeg otvaranja početne. Svoje chat poruke se ne broje.
+    prisma.chatMessage.count({ where: { createdAt: { gt: odPocetna }, userId: { not: userId } } }),
+    prisma.blogPost.count({ where: { publishedAt: { gt: odPocetna } } }),
   ]);
+  const pocetna = chatNove + blogNove;
 
   const novcanik = wallet
     ? await prisma.transaction.count({ where: { toWalletId: wallet.id, createdAt: { gt: odNovcanik } } })
@@ -74,7 +81,7 @@ export async function izracunajDnevniBrojeve(
       pokrovitelji + donacije + prigovori;
   }
 
-  return { novcanik, pijaca, tablaJemstva, adminCekanje };
+  return { pocetna, novcanik, pijaca, tablaJemstva, adminCekanje };
 }
 
 /** Broj verifikacija koje čekaju nadzor (samo za nosioce ZRNA / admine). */

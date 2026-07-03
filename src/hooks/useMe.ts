@@ -14,6 +14,7 @@ export interface Notifikacija {
 }
 
 export interface DnevniBrojevi {
+  pocetna: number;
   novcanik: number;
   pijaca: number;
   tablaJemstva: number;

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 
 interface DnevniBrojevi {
+  pocetna: number;
   novcanik: number;
   pijaca: number;
   tablaJemstva: number;
@@ -181,6 +182,7 @@ function SidebarContent({
   const t = useTranslations("nav");
 
   const badge: Record<string, number> = dnevniBrojevi ? {
+    "/pocetna": dnevniBrojevi.pocetna,
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
     "/tabla-jemstva": dnevniBrojevi.tablaJemstva,

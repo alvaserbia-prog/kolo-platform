@@ -40,6 +40,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   // "viđeno" vreme i invalidiramo keš da se uskladi.
   useEffect(() => {
     const sekcija =
+      pathname.startsWith("/pocetna") ? "pocetna" :
       pathname.startsWith("/novcanik") ? "novcanik" :
       pathname.startsWith("/pijaca") ? "pijaca" :
       null;

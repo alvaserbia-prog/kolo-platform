@@ -18,7 +18,6 @@ export async function GET() {
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const meId = session.user.id;
-  const verified = session.user.verified;
   const nadzornik = mozeNadzor(session.user);
   const sada = new Date();
 
@@ -53,8 +52,9 @@ export async function GET() {
       orderBy: { efektivnaOd: "desc" },
       select: { id: true },
     }),
-    // Badge brojevi su relevantni samo za verifikovane (sidebar „Zajedničko dobro").
-    verified ? izracunajDnevniBrojeve(meId, session.user) : Promise.resolve(null),
+    // Badge brojevi se računaju za sve prijavljene: i neverifikovani vide
+    // „Početna" (nove poruke u Pričaonici + objave Fondacije), Novčanik i Pijaca.
+    izracunajDnevniBrojeve(meId, session.user),
     nadzornik ? izracunajNadzorBroj(meId, session.user) : Promise.resolve(0),
   ]);
 
