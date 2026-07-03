@@ -19,8 +19,13 @@
 const BELA_LISTA = [
   "QR", "AGPL-3.0", "AGPL", "GPL", "CC BY-SA", "BY-SA", "CC",
   "PDF", "JSON", "API", "URL", "HTML", "CSS", "OAuth", "GDPR",
+  "JPG", "PNG", "GIF", "WebP", "SVG",
   "RSD", "EUR", "USD", "ISO", "NestPay", "Vercel", "Neon", "Prisma",
   "Next.js", "TypeScript", "PostgreSQL", "Whitepaper",
+  // Nazivi obrađivača/servisa i brendovi — ostaju u latinici (kao Vercel/Neon);
+  // bez ovoga „Cloudflare"→„Цлоудфларе", „Resend"→„Ресенд" (reči nemaju q/w/x/y
+  // da bi ih uhvatilo opšte pravilo za strane reči niže).
+  "Cloudflare", "Resend", "Instagram",
 ];
 
 // Strane reči (pozajmljenice) koje ostaju u latinici u SVIM padežnim oblicima.
@@ -50,6 +55,12 @@ const IZUZECI: Record<string, string> = {
   tanjug: "Тањуг",
   nadziveti: "надживети",
   nadzivljava: "надживљава",
+  // Brend „Google" se u srpskoj ćirilici piše fonetski „Гугл", a ne slovo-po-slovo
+  // („Гоогле"). Padežni oblici u tekstu su retki (uglavnom nepromenjen naziv).
+  google: "гугл",
+  googlea: "гугла",
+  googleu: "гуглу",
+  googleom: "гуглом",
 };
 
 // Osnovno preslikavanje pojedinačnih slova (mala slova; velika se izvode).
@@ -154,6 +165,26 @@ export function lat2cyr(input: string): string {
   for (const re of BELA_LISTA_OBRASCI) {
     s = s.replace(re, masc);
   }
+
+  // 2c) Strane reči sa q/w/x/y: srpska latinica NEMA ta slova, pa svaka reč koja
+  // ih sadrži je strana (ime, brend, engleski naziv). Bez ovoga bi ostala „mešana"
+  // (npr. „browser"→„броwсер", „Analytics"→„Аналyтицс", „Max"→„Маx", „Exchange",
+  // „Wikipedia", imena iz literature). Cela reč ostaje u latinici.
+  s = s.replace(/[A-Za-zčćšžđČĆŠŽĐ]*[qQwWxXyY][A-Za-zčćšžđČĆŠŽĐ]*/g, masc);
+
+  // 2d) Rimski brojevi (I–XII…) u naslovima glava i unakrsnim referencama moraju
+  // ostati latinica; inače „Glava IX"→„ИX", „Glava VI"→„ВИ", „Glava V"→„В".
+  // Hvatamo ih tamo gde su nedvosmisleno rimski: na početku naslova pre crte
+  // („VI — …") i posle reči „Glav…" („Glavom VIII", „Glavi V“). RImski token je
+  // niz iz {I,V,X,L,C,D,M}; pattern je uzak da ne dira srpske reči/veznik „I".
+  s = s.replace(
+    /(^|[\s(])([IVXLCDM]{1,5})(?=\s*[—–-])/g,
+    (_m, pre, rn) => pre + masc(rn),
+  );
+  s = s.replace(
+    /(\bGlav[A-Za-zčćšžđČĆŠŽĐ]*\s+)([IVXLCDM]{1,5})\b/g,
+    (_m, pre, rn) => pre + masc(rn),
+  );
 
   // 3) Izuzeci (nj/dž koji nisu digraf) pre osnovne konverzije.
   s = primeniIzuzetke(s);
