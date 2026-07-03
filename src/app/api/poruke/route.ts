@@ -13,8 +13,8 @@ export async function GET() {
     where: { OR: [{ user1Id: meId }, { user2Id: meId }] },
     orderBy: { lastMessageAt: "desc" },
     include: {
-      user1: { select: { id: true, pseudonim: true } },
-      user2: { select: { id: true, pseudonim: true } },
+      user1: { select: { id: true, pseudonim: true, avatar: true } },
+      user2: { select: { id: true, pseudonim: true, avatar: true } },
       poruke: {
         orderBy: { createdAt: "desc" },
         take: 1,
@@ -31,6 +31,7 @@ export async function GET() {
       id: k.id,
       drugiId: drugiUser.id,
       drugiPseudonim: drugiUser.pseudonim,
+      drugiAvatar: drugiUser.avatar,
       poslednjaPorukaIznos: poslednja?.tekst ?? null,
       poslednjaPosiljacJa: poslednja?.posiljacId === meId,
       poslednjeVreme: poslednja?.createdAt.toISOString() ?? k.createdAt.toISOString(),

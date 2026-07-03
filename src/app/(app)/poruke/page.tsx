@@ -5,11 +5,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import KorisnikAvatar from "@/components/KorisnikAvatar";
 
 type Konverzacija = {
   id: string;
   drugiId: string;
   drugiPseudonim: string;
+  drugiAvatar: string | null;
   poslednjaPorukaIznos: string | null;
   poslednjaPosiljacJa: boolean;
   poslednjeVreme: string;
@@ -34,6 +36,9 @@ function PorukeContent() {
   const [poruke, setPoruke] = useState<Poruka[]>([]);
   const [drugiPseudonim, setDrugiPseudonim] = useState("");
   const [drugiId, setDrugiId] = useState("");
+  const [drugiAvatar, setDrugiAvatar] = useState<string | null>(null);
+  const [mojAvatar, setMojAvatar] = useState<string | null>(null);
+  const [mojPseudonim, setMojPseudonim] = useState("");
   const [mobilniPrikaz, setMobilniPrikaz] = useState<"lista" | "chat">("lista");
   const [tekst, setTekst] = useState("");
   const [slanje, setSlanje] = useState(false);
@@ -70,6 +75,9 @@ function PorukeContent() {
     setPoruke((prev) => (istePoruke(prev, nove) ? prev : nove));
     setDrugiPseudonim(data.drugiUser?.pseudonim ?? "");
     setDrugiId(data.drugiUser?.id ?? "");
+    setDrugiAvatar(data.drugiUser?.avatar ?? null);
+    setMojAvatar(data.mojAvatar ?? null);
+    setMojPseudonim(data.mojPseudonim ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
   }, []);
@@ -90,6 +98,7 @@ function PorukeContent() {
       setPoruke([]);
       setDrugiPseudonim("");
       setDrugiId("");
+      setDrugiAvatar(null);
     }
   }, [aktivnaKonvId, ucitajPoruke]);
 
@@ -305,6 +314,12 @@ function PorukeContent() {
                   <polyline points="15 18 9 12 15 6" />
                 </svg>
               </button>
+              <KorisnikAvatar
+                avatar={drugiAvatar}
+                pseudonim={drugiPseudonim}
+                userId={drugiId || undefined}
+                size={32}
+              />
               {drugiId ? (
                 <Link href={`/profil/${drugiId}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
                   <Pseudonim>{drugiPseudonim}</Pseudonim>
@@ -320,7 +335,13 @@ function PorukeContent() {
                 <p className="text-center text-xs text-kolo-muted py-8">{t("pocnite_konverzaciju")}</p>
               )}
               {poruke.map((p) => (
-                <PorukaBubble key={p.id} p={p} />
+                <PorukaBubble
+                  key={p.id}
+                  p={p}
+                  avatar={p.moja ? mojAvatar : drugiAvatar}
+                  pseudonim={p.moja ? mojPseudonim : drugiPseudonim}
+                  userId={p.moja ? undefined : drugiId || undefined}
+                />
               ))}
               <div ref={chatEndRef} />
             </div>
@@ -390,31 +411,48 @@ const KonverzacijaRed = memo(function KonverzacijaRed({
         aktivna ? "bg-kolo-green-100/40" : ""
       }`}
     >
-      <div className="flex items-center justify-between mb-0.5">
-        <span className="text-sm font-semibold text-kolo-text truncate"><Pseudonim>{k.drugiPseudonim}</Pseudonim></span>
-        <div className="flex items-center gap-1.5 shrink-0">
-          {k.neprocitano > 0 && (
-            <span className="w-4 h-4 bg-kolo-green-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-              {k.neprocitano > 9 ? "9+" : k.neprocitano}
-            </span>
+      <div className="flex items-center gap-3">
+        {/* Avatar bez linka — red je već <button>, ugnežden link bi bio nevalidan */}
+        <KorisnikAvatar avatar={k.drugiAvatar} pseudonim={k.drugiPseudonim} size={40} />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between mb-0.5 gap-2">
+            <span className="text-sm font-semibold text-kolo-text truncate"><Pseudonim>{k.drugiPseudonim}</Pseudonim></span>
+            <div className="flex items-center gap-1.5 shrink-0">
+              {k.neprocitano > 0 && (
+                <span className="w-4 h-4 bg-kolo-green-700 text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {k.neprocitano > 9 ? "9+" : k.neprocitano}
+                </span>
+              )}
+              <span className="text-[10px] text-kolo-border">
+                {new Date(k.poslednjeVreme).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+              </span>
+            </div>
+          </div>
+          {k.poslednjaPorukaIznos && (
+            <p className="text-xs text-kolo-muted truncate">
+              {k.poslednjaPosiljacJa ? t("vi") : ""}{k.poslednjaPorukaIznos}
+            </p>
           )}
-          <span className="text-[10px] text-kolo-border">
-            {new Date(k.poslednjeVreme).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
-          </span>
         </div>
       </div>
-      {k.poslednjaPorukaIznos && (
-        <p className="text-xs text-kolo-muted truncate">
-          {k.poslednjaPosiljacJa ? t("vi") : ""}{k.poslednjaPorukaIznos}
-        </p>
-      )}
     </button>
   );
 });
 
-const PorukaBubble = memo(function PorukaBubble({ p }: { p: Poruka }) {
+const PorukaBubble = memo(function PorukaBubble({
+  p,
+  avatar,
+  pseudonim,
+  userId,
+}: {
+  p: Poruka;
+  avatar: string | null;
+  pseudonim: string;
+  userId?: string;
+}) {
   return (
-    <div className={`flex ${p.moja ? "justify-end" : "justify-start"}`}>
+    <div className={`flex items-end gap-2 ${p.moja ? "justify-end" : "justify-start"}`}>
+      {!p.moja && <KorisnikAvatar avatar={avatar} pseudonim={pseudonim} userId={userId} size={28} />}
       <div
         className={`max-w-xs lg:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
           p.moja
@@ -427,6 +465,7 @@ const PorukaBubble = memo(function PorukaBubble({ p }: { p: Poruka }) {
           {new Date(p.createdAt).toLocaleString("sr-RS", { hour: "2-digit", minute: "2-digit" })}
         </p>
       </div>
+      {p.moja && <KorisnikAvatar avatar={avatar} pseudonim={pseudonim} size={28} />}
     </div>
   );
 });

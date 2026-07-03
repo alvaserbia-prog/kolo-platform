@@ -23,7 +23,10 @@ export async function GET(
   if (!k) return NextResponse.json({ error: "Konverzacija nije pronađena." }, { status: 404 });
 
   const drugiId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
-  const drugiUser = await prisma.user.findUnique({ where: { id: drugiId }, select: { id: true, pseudonim: true } });
+  const [drugiUser, jaUser] = await Promise.all([
+    prisma.user.findUnique({ where: { id: drugiId }, select: { id: true, pseudonim: true, avatar: true } }),
+    prisma.user.findUnique({ where: { id: session.user.id }, select: { avatar: true } }),
+  ]);
 
   const poruke = await prisma.poruka.findMany({
     where: { konverzacijaId: konvId },
@@ -40,6 +43,8 @@ export async function GET(
 
   return NextResponse.json({
     drugiUser,
+    mojAvatar: jaUser?.avatar ?? null,
+    mojPseudonim: session.user.pseudonim,
     poruke: poruke.map((p) => ({
       id: p.id,
       tekst: p.tekst,
