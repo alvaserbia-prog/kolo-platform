@@ -58,12 +58,7 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-kolo-text">{t("naslov")}</h1>
-          <p className="mt-1 text-base text-kolo-muted">{t("podnaslov")}</p>
-        </div>
-
-        {/* Poziv na registraciju iznad forme za prijavu */}
+        {/* Poziv na registraciju — na samom vrhu, iznad naslova prijave */}
         <div className="mb-6 rounded-xl border border-kolo-green-700/30 bg-kolo-green-100 px-4 py-4">
           <p className="text-sm font-semibold text-kolo-green-900">{t("registruj_boks_naslov")}</p>
           <p className="mt-0.5 text-sm text-kolo-green-700">{t("registruj_boks_tekst")}</p>
@@ -83,6 +78,11 @@ export default function LoginForm() {
               {t("registruj_boks_google")}
             </button>
           </div>
+        </div>
+
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-kolo-text">{t("naslov")}</h1>
+          <p className="mt-1 text-base text-kolo-muted">{t("podnaslov")}</p>
         </div>
 
         {registered && (
