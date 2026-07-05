@@ -110,8 +110,6 @@ export default function SistemKlijent({
   danasLimit,
   danasKorisnika,
   danasTransakcija,
-  ukupnoVerifikacija,
-  danasVerifikacija,
   racunFondacije,
   ukupnoDonacija,
   danasDonacija,
@@ -248,24 +246,15 @@ export default function SistemKlijent({
         />
 
         {/* — Drugi red — */}
-        {/* Verifikacija (mreža poverenja) — ispod Članova */}
-        <div className="rounded-2xl p-4 md:p-5 text-left border bg-white border-kolo-border">
-          <p className="text-base font-semibold mb-1 text-kolo-muted">
-            <Pojam
-              termin={t("mreza_poverenja")}
-              objasnjenje={t("mreza_poverenja_opis")}
-            />
-          </p>
-          <p className="text-2xl md:text-4xl font-bold tabular-nums leading-tight text-kolo-text">
-            {ukupnoVerifikacija.toLocaleString("sr-RS")}
-          </p>
-          {danasVerifikacija > 0 && (
-            <span className="inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 bg-kolo-green-100 text-kolo-green-700">
-              +{danasVerifikacija.toLocaleString("sr-RS")} {t("danas")}
-            </span>
-          )}
-          <p className="text-xs mt-1 text-kolo-muted">{t("veza_u_lancu")}</p>
-        </div>
+        {/* Lokacije članova — ispod Članova (klik → spisak lokacija sa brojem članova) */}
+        <Kartica
+          aktivan={sekcija === "lokacije"}
+          onClick={() => setSekcija("lokacije")}
+          label={t("kartica_lokacije")}
+          broj={brojLokacija}
+          danas={0}
+          podnaslov={t("kartica_lokacije_opis")}
+        />
 
         {/* Ukupan promet — ispod Transakcija */}
         <Kartica
@@ -326,16 +315,6 @@ export default function SistemKlijent({
           </p>
           <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
         </button>
-
-        {/* Lokacije članova — treći red (klik → spisak lokacija + otključane opcije) */}
-        <Kartica
-          aktivan={sekcija === "lokacije"}
-          onClick={() => setSekcija("lokacije")}
-          label={t("kartica_lokacije")}
-          broj={brojLokacija}
-          danas={0}
-          podnaslov={t("kartica_lokacije_opis")}
-        />
       </div>
 
       {/* Separator */}
