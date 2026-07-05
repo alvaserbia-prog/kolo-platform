@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
@@ -25,14 +24,12 @@ interface Props {
   balance: number;
   pseudonim: string;
   memberHash: string;
-  zrnoSlobodno: number;
-  zrnoKurs: number;
   platiPseudonim?: string;
   prefillIznos?: string;
   prefillOpis?: string;
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, zrnoSlobodno, zrnoKurs, platiPseudonim, prefillIznos, prefillOpis }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis }: Props) {
   const router = useRouter();
   const t = useTranslations("novcanik");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
@@ -41,37 +38,9 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, zrnoSl
 
   return (
     <>
-      {/* Gornje kartice: levo ZRNO, desno balans */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* LEVO — ZRNO kartica: broj ZRNA skroz levo, koeficijent u sredini, dugme skroz desno */}
-        <div className="bg-white rounded-2xl border border-kolo-border p-6 shadow-sm flex items-center justify-between gap-4">
-          {/* LEVO — broj ZRNA veliki (kao POEN) */}
-          <div className="text-left min-w-0">
-            <p className="text-4xl sm:text-5xl font-bold text-kolo-text tabular-nums break-words">
-              {zrnoSlobodno.toLocaleString("sr-RS")}
-            </p>
-            <p className="text-lg text-kolo-muted mt-0.5">ZRNO</p>
-          </div>
-
-          {/* SREDINA — koeficijent */}
-          <div className="text-center min-w-0">
-            <p className="text-xs text-kolo-muted">{t("zrno_koeficijent_label")}</p>
-            <p className="text-base font-semibold text-kolo-text tabular-nums">
-              {zrnoKurs.toLocaleString("sr-RS")}
-            </p>
-            <p className="text-[10px] text-kolo-muted">POEN/ZRNO</p>
-          </div>
-
-          {/* DESNO — dugme Otpiši ZRNO */}
-          <Link
-            href="/zrno"
-            className="shrink-0 px-5 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors"
-          >
-            {t("zrno_otpis_dugme")}
-          </Link>
-        </div>
-
-        {/* DESNO — balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}
+      {/* Gornja kartica: balans POEN (ZRNO kartica privremeno uklonjena) */}
+      <div>
+        {/* Balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
           {/* LEVO — dugmad jedno ispod drugog */}
           <div className="flex flex-col gap-3 shrink-0">

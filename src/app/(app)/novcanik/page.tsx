@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { sesija } from "@/lib/sesija";
-import { poslednjiKurs } from "@/lib/protokol/zrno";
 import NovcanikKartice from "./NovcanikKartice";
 import IstorijaTransakcija, { IstorijaSkeleton } from "./IstorijaTransakcija";
 
@@ -17,9 +16,9 @@ export default async function NovcanikPage({
   if (!session) redirect("/login");
   const { plati, primalac, iznos, description } = await searchParams;
 
-  // Laki upiti potrebni za gornje kartice (stanje POEN + ZRNO). Iscrtavaju se
-  // ODMAH; ZRNO više ne čeka klijentski fetch posle hidracije (bivši LCP element).
-  const [wallet, dbUser, zrnoStanje, zrnoKurs] = await Promise.all([
+  // Laki upiti potrebni za gornju karticu (stanje POEN). ZRNO kartica je
+  // privremeno uklonjena iz Novčanika (ostaje dostupna preko sidebara /zrno).
+  const [wallet, dbUser] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
@@ -28,11 +27,6 @@ export default async function NovcanikPage({
       where: { id: session.user.id },
       select: { memberHash: true },
     }),
-    prisma.zrnoStanje.findUnique({
-      where: { userId: session.user.id },
-      select: { slobodno: true },
-    }),
-    poslednjiKurs(),
   ]);
 
   return (
@@ -41,8 +35,6 @@ export default async function NovcanikPage({
         balance={wallet?.balance ?? 0}
         pseudonim={session.user.pseudonim}
         memberHash={dbUser?.memberHash ?? ""}
-        zrnoSlobodno={zrnoStanje?.slobodno ?? 0}
-        zrnoKurs={zrnoKurs}
         platiPseudonim={plati ?? primalac}
         prefillIznos={iznos}
         prefillOpis={description}
