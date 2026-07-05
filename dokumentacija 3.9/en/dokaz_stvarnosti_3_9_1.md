@@ -8,6 +8,8 @@
 
 *Amendment 3.9.1 (Art. 5): consent and account binding may also be expressed by posting a request on the guarantee board — verification is then initiated directly from the request, as an alternative to the one-time code; the verified user is notified and may report the verification. The substance of verification (personal acquaintance, verifier's responsibility, all checks and oversight) remains unchanged.*
 
+*Amendment 3.9.1 (Art. 12–13): the anti-circular rule is aligned with the fact that a user has multiple verifiers. The prohibited zone is the union of the zones of all of the user's verifiers; for each verifier, the entire ancestral chain upward and the entire subtree downward (including the user's siblings and all their descendants) are excluded.*
+
 ## I — General Provisions
 
 ### Article 1
@@ -136,23 +138,25 @@ Until supervision is completed, the verifier's capacity slot remains consumed. R
 
 *Prohibited zone of the verifier*
 
+As a rule, a user has multiple verifiers — up to ten, in proportion to their reality index. A prohibited zone is determined for each of the user's verifiers individually, and their union constitutes the user's total prohibited zone.
+
 A verifier may not verify:
 
-— their own verifier (reciprocal prohibition);
+— any of their own verifiers (reciprocal prohibition);
 
-— users who have been verified by their verifier (prohibition on verifying tree siblings);
+— anyone in the ancestral chain of any of their verifiers — the sequence which, starting from that verifier, consists of that verifier's verifiers, their verifiers, and so on upward, to the roots of the verification graph;
 
-— anyone in their ancestral chain — the sequence consisting of the verifier, the verifier's verifier, and so on upward to the root of the verification tree;
+— anyone in the subtree of any of their verifiers — the set consisting of all users verified by that verifier, users verified by those users, and so on downward; this set also includes the user's siblings (other users verified by the same verifier) and all of their descendants;
 
-— anyone in their descendant chain — the sequence consisting of users verified by the verifier, users verified by those users, and so on downward.
+— anyone in their own descendant chain — users they have themselves verified, users verified by those users, and so on downward.
 
-A verifier may only verify users from other branches of the verification tree.
+A verifier may only verify users who are not located in any of the above zones — users from independent branches of the verification graph.
 
 ### Article 13
 
 *Purpose of the anti-circular rule*
 
-The anti-circular rule ensures that the verification tree grows laterally, through independent branches of the network. The vertical prohibition — both upward and downward — ensures that no user can accumulate verifications within a single chain. A user wishing to reach an index of 100% must be known to users from multiple different parts of the network. This is a structural barrier against coordinated manipulation: a fictitious person cannot be known across sufficiently different social circles to collect 10 independent verifications.
+The anti-circular rule ensures that the network of trust grows laterally, through independent branches. By excluding the entire subtree and the entire ancestral chain of each verifier, it ensures that no user can accumulate verifications within the same part of the network from which they themselves originated. A user wishing to reach an index of 100% must be known to users from multiple different, mutually independent parts of the network. This is a structural barrier against coordinated manipulation: a fictitious person cannot be known across sufficiently different social circles to collect ten independent verifications.
 
 ## VI — Initial Mechanism
 
