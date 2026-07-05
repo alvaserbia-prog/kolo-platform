@@ -169,9 +169,9 @@ export default function SistemKlijent({
           aktivan={sekcija === "clanovi"}
           onClick={() => setSekcija("clanovi")}
           label={t("kartica_clanovi")}
-          broj={ukupnoKorisnika}
+          broj={verifikovanih}
           danas={danasKorisnika}
-          podnaslov={t("kartica_verif_opis", { verif: verifikovanih, neverif: ukupnoKorisnika - verifikovanih })}
+          podnaslov={t("kartica_verif_opis", { ukupno: ukupnoKorisnika, neverif: ukupnoKorisnika - verifikovanih })}
         />
 
         {/* — Kolona 2 — */}

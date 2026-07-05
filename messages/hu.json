@@ -202,7 +202,7 @@
     "kartica_transakcije": "Tranzakciók",
     "kartica_krugovi": "Körök",
     "kartica_opticaj": "Forgalom",
-    "kartica_verif_opis": "{verif} ellenőrzött · {neverif} nem ellenőrzött",
+    "kartica_verif_opis": "összesen {ukupno} · {neverif} nem ellenőrzött",
     "kartica_tx_opis": "utolsó {count} a nézetben",
     "kartica_krugovi_opis": "aktív a hálózatban",
     "zero_sum_ok": "zero-sum",

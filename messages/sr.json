@@ -210,7 +210,7 @@
     "kartica_transakcije": "Transakcije",
     "kartica_krugovi": "Krugovi",
     "kartica_opticaj": "Opticaj",
-    "kartica_verif_opis": "{verif} verif. · {neverif} neverif.",
+    "kartica_verif_opis": "ukupno {ukupno} · {neverif} neverif.",
     "kartica_tx_opis": "poslednjih {count} u pregledu",
     "kartica_krugovi_opis": "aktivnih u mreži",
     "zero_sum_ok": "zero-sum",

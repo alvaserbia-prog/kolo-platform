@@ -210,7 +210,7 @@
     "kartica_transakcije": "Transactions",
     "kartica_krugovi": "Circles",
     "kartica_opticaj": "Circulation",
-    "kartica_verif_opis": "{verif} verified · {neverif} unverified",
+    "kartica_verif_opis": "{ukupno} total · {neverif} unverified",
     "kartica_tx_opis": "last {count} in view",
     "kartica_krugovi_opis": "active in network",
     "zero_sum_ok": "zero-sum",
