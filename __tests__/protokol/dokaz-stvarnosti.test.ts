@@ -159,7 +159,7 @@ describe("proveriAntiCirkularno", () => {
     ];
     const rez = proveriAntiCirkularno("B", "C", graf);
     expect(rez.dozvoljeno).toBe(false);
-    if (!rez.dozvoljeno) expect(rez.razlog).toContain("brat");
+    if (!rez.dozvoljeno) expect(rez.razlog).toContain("podstablu");
   });
 
   it("Ancestor: A→B→C, pokušaj C→A je odbijen", () => {
@@ -172,13 +172,63 @@ describe("proveriAntiCirkularno", () => {
     if (!rez.dozvoljeno) expect(rez.razlog).toContain("ancestralnom");
   });
 
-  it("Lateralna grana: A→B, A→D, B→E, pokušaj D→E je dozvoljen (rođaci)", () => {
+  it("Sinovac: A→B, A→D, B→E, pokušaj D→E je odbijen (podstablo verifikatora)", () => {
+    // E je dete D-ovog brata (B), tj. D-ov sinovac. Po v3.9.1 celo podstablo
+    // verifikatora (A) je zabranjeno, pa D ne može da verifikuje E.
     const graf: GrafZapis[] = [
       { verifikatorId: "A", verifikovaniId: "B" },
       { verifikatorId: "A", verifikovaniId: "D" },
       { verifikatorId: "B", verifikovaniId: "E" },
     ];
     const rez = proveriAntiCirkularno("D", "E", graf);
+    expect(rez.dozvoljeno).toBe(false);
+    if (!rez.dozvoljeno) expect(rez.razlog).toContain("podstablu");
+  });
+
+  it("Stric: G→P, G→U, P→X, pokušaj X→U je dozvoljen (druga grana)", () => {
+    // U je brat X-ovog verifikatora (P), tj. X-ov stric — u grani dede G,
+    // van P-ovog podstabla. Dozvoljeno.
+    const graf: GrafZapis[] = [
+      { verifikatorId: "G", verifikovaniId: "P" },
+      { verifikatorId: "G", verifikovaniId: "U" },
+      { verifikatorId: "P", verifikovaniId: "X" },
+    ];
+    const rez = proveriAntiCirkularno("X", "U", graf);
+    expect(rez.dozvoljeno).toBe(true);
+  });
+
+  it("Pravi rođaci: G→P, G→U, P→X, U→Y, pokušaj X→Y je dozvoljen", () => {
+    // Y je u stričevom (U) podstablu, van podstabla X-ovog verifikatora P. Dozvoljeno.
+    const graf: GrafZapis[] = [
+      { verifikatorId: "G", verifikovaniId: "P" },
+      { verifikatorId: "G", verifikovaniId: "U" },
+      { verifikatorId: "P", verifikovaniId: "X" },
+      { verifikatorId: "U", verifikovaniId: "Y" },
+    ];
+    const rez = proveriAntiCirkularno("X", "Y", graf);
+    expect(rez.dozvoljeno).toBe(true);
+  });
+
+  it("Unija verifikatora: P1→X, P2→X, P2→Y, pokušaj X→Y je odbijen", () => {
+    // X ima dva verifikatora (P1, P2). Y je u podstablu drugog verifikatora (P2),
+    // pa unija zona zabranjuje X→Y.
+    const graf: GrafZapis[] = [
+      { verifikatorId: "P1", verifikovaniId: "X" },
+      { verifikatorId: "P2", verifikovaniId: "X" },
+      { verifikatorId: "P2", verifikovaniId: "Y" },
+    ];
+    const rez = proveriAntiCirkularno("X", "Y", graf);
+    expect(rez.dozvoljeno).toBe(false);
+    if (!rez.dozvoljeno) expect(rez.razlog).toContain("podstablu");
+  });
+
+  it("Bez zajedničkog verifikatora: P1→X, P2→Y, pokušaj X→Y je dozvoljen", () => {
+    // Kontrast prethodnom: kad P2 NIJE i X-ov verifikator, Y je u nezavisnoj grani.
+    const graf: GrafZapis[] = [
+      { verifikatorId: "P1", verifikovaniId: "X" },
+      { verifikatorId: "P2", verifikovaniId: "Y" },
+    ];
+    const rez = proveriAntiCirkularno("X", "Y", graf);
     expect(rez.dozvoljeno).toBe(true);
   });
 
