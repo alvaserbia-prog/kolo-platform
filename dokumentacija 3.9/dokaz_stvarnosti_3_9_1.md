@@ -6,6 +6,8 @@
 
 *Dopuna 3.9.1 (čl. 5): saglasnost i vezivanje naloga mogu se izraziti i objavom zahteva na tabli jemstva — verifikacija se tada pokreće neposredno sa zahteva, kao alternativa jednokratnom kodu; verifikovani se obaveštava i može prijaviti verifikaciju. Suština verifikacije (lično poznavanje, odgovornost verifikatora, sve provere i nadzor) ostaje nepromenjena.*
 
+*Dopuna 3.9.1 (čl. 12–13): anti-cirkularno pravilo usklađeno sa činjenicom da korisnik ima više verifikatora. Zabranjena zona je unija zona svih verifikatora korisnika; iz svakog verifikatora isključuje se ceo ancestralni lanac naviše i celo podstablo naniže (uključujući braću korisnika i sve njihove potomke).*
+
 ## I — Opšte odredbe
 
 ### Član 1
@@ -134,23 +136,25 @@ Do obavljenog nadzora, slot kapaciteta verifikatora ostaje potrošen. Dopuna slo
 
 *Zabranjena zona verifikatora*
 
+Korisnik po pravilu ima više verifikatora — do deset, srazmerno svom indeksu stvarnosti. Zabranjena zona utvrđuje se za svakog verifikatora korisnika pojedinačno, a njihova unija čini ukupnu zabranjenu zonu korisnika.
+
 Verifikator ne može da verifikuje:
 
-— svog verifikatora (recipročna zabrana);
+— nijednog svog verifikatora (recipročna zabrana);
 
-— korisnike koje je njegov verifikator verifikovao (zabrana verifikacije braće u stablu);
+— nikog iz ancestralnog lanca bilo kog svog verifikatora — niza koji, polazeći od tog verifikatora, čine njegovi verifikatori, njihovi verifikatori, i tako naviše, do korenova verifikacionog grafa;
 
-— nikog u svom ancestralnom lancu — nizu koji čine verifikator, verifikatorov verifikator, i tako naviše do korena verifikacionog stabla;
+— nikog iz podstabla bilo kog svog verifikatora — skupa koji čine svi korisnici koje je taj verifikator verifikovao, korisnici koje su oni verifikovali, i tako naniže; ovaj skup obuhvata i braću korisnika (druge korisnike koje je isti verifikator verifikovao) i sve njihove potomke;
 
-— nikog u svom descendentnom lancu — nizu koji čine korisnici koje je verifikator verifikovao, korisnici koje su oni verifikovali, i tako naniže.
+— nikog iz sopstvenog descendentnog lanca — korisnika koje je sam verifikovao, korisnika koje su oni verifikovali, i tako naniže.
 
-Verifikator može da verifikuje isključivo korisnike iz drugih grana verifikacionog stabla.
+Verifikator može da verifikuje isključivo korisnike koji se ne nalaze ni u jednoj od navedenih zona — korisnike iz nezavisnih grana verifikacionog grafa.
 
 ### Član 13
 
 *Svrha anti-cirkularnog pravila*
 
-Anti-cirkularno pravilo obezbeđuje da verifikaciono stablo raste lateralno, kroz nezavisne grane mreže. Vertikalna zabrana — i naviše i naniže — obezbeđuje da nijedan korisnik ne može akumulirati verifikacije unutar jednog lanca. Korisnik koji želi da dostigne indeks od 100% mora da bude poznat korisnicima iz više različitih delova mreže. Ovo je strukturna barijera protiv koordinirane manipulacije: lažna osoba ne može da bude poznata u dovoljno različitih socijalnih krugova da prikupi 10 nezavisnih verifikacija.
+Anti-cirkularno pravilo obezbeđuje da mreža poverenja raste lateralno, kroz nezavisne grane. Isključivanjem celog podstabla i celog ancestralnog lanca svakog verifikatora obezbeđuje se da nijedan korisnik ne može akumulirati verifikacije unutar istog dela mreže iz kojeg je i sam potekao. Korisnik koji želi da dostigne indeks od 100% mora da bude poznat korisnicima iz više različitih, međusobno nezavisnih delova mreže. Ovo je strukturna barijera protiv koordinirane manipulacije: lažna osoba ne može da bude poznata u dovoljno različitih socijalnih krugova da prikupi deset nezavisnih verifikacija.
 
 ## VI — Početni mehanizam
 

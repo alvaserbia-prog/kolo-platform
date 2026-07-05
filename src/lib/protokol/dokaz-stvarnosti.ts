@@ -90,14 +90,19 @@ export function imaPristupVerifikaciji(tip: TipKorisnika, indeks: number): boole
 }
 
 /**
- * Strogo anti-cirkularno pravilo (čl. 12 Pravilnika).
+ * Strogo anti-cirkularno pravilo (čl. 12 Pravilnika, verzija 3.9.1).
  *
- * Verifikator NE sme da verifikuje:
+ * Korisnik po pravilu ima VIŠE verifikatora (do 10). Zabranjena zona je
+ * UNIJA zona svih njegovih verifikatora. Verifikator NE sme da verifikuje:
  *  - samog sebe
- *  - svog verifikatora (recipročno)
- *  - korisnika u svom ancestralnom lancu
- *  - korisnika u svom descendentnom lancu
- *  - braću (decu istog verifikatora)
+ *  - nijednog svog verifikatora (recipročno)
+ *  - nikog iz ancestralnog lanca bilo kog svog verifikatora (naviše, do korenova)
+ *  - nikog iz podstabla bilo kog svog verifikatora (naniže — uključuje braću
+ *    i sve njihove potomke)
+ *  - nikog iz sopstvenog descendentnog lanca (za korenske korisnike bez verifikatora)
+ *
+ * Graf verifikacija je DAG (više roditelja po čvoru), pa se roditelji čuvaju
+ * kao skup, a ne kao jedan čvor.
  *
  * @param verifikatorId  korisnik koji započinje verifikaciju
  * @param verifikovaniId korisnik koji bi bio verifikovan
@@ -116,69 +121,78 @@ export function proveriAntiCirkularno(
     };
   }
 
-  // 2. Izgradi mape: roditelj (child → parent) i deca (parent → children[])
-  const roditelj = new Map<string, string>();
+  // 2. Izgradi mape: roditelji (child → Set<parent>, DAG) i deca (parent → children[])
+  const roditelji = new Map<string, Set<string>>();
   const deca = new Map<string, string[]>();
   for (const v of graf) {
-    roditelj.set(v.verifikovaniId, v.verifikatorId);
-    const lista = deca.get(v.verifikatorId);
-    if (lista) lista.push(v.verifikovaniId);
+    const rlista = roditelji.get(v.verifikovaniId);
+    if (rlista) rlista.add(v.verifikatorId);
+    else roditelji.set(v.verifikovaniId, new Set([v.verifikatorId]));
+    const dlista = deca.get(v.verifikatorId);
+    if (dlista) dlista.push(v.verifikovaniId);
     else deca.set(v.verifikatorId, [v.verifikovaniId]);
   }
 
-  const verifikatorovVerifikator = roditelj.get(verifikatorId);
+  const direktniVerifikatori = roditelji.get(verifikatorId) ?? new Set<string>();
 
-  // 3. Recipročno: verifikovani je direktni verifikator-ov verifikator
-  if (verifikatorovVerifikator && verifikatorovVerifikator === verifikovaniId) {
+  // 3. Recipročno: verifikovani je jedan od direktnih verifikatora
+  if (direktniVerifikatori.has(verifikovaniId)) {
     return {
       dozvoljeno: false,
       razlog: "Korisnik je tvoj verifikator (recipročna zabrana, čl. 12 Pravilnika).",
     };
   }
 
-  // 4. Ancestralni lanac (uključuje i direktnog roditelja, ali on je pokriven gore)
+  // 4. Ancestralni lanac (unija) — sve iznad svakog direktnog verifikatora
   const ancestori = new Set<string>();
-  let cur: string | undefined = verifikatorovVerifikator;
-  while (cur) {
-    if (ancestori.has(cur)) break; // safety: krug
-    ancestori.add(cur);
-    cur = roditelj.get(cur);
+  const upStack: string[] = [];
+  for (const p of direktniVerifikatori) {
+    for (const pp of roditelji.get(p) ?? []) upStack.push(pp);
+  }
+  while (upStack.length > 0) {
+    const node = upStack.pop()!;
+    if (ancestori.has(node)) continue;
+    ancestori.add(node);
+    for (const pp of roditelji.get(node) ?? []) upStack.push(pp);
   }
   if (ancestori.has(verifikovaniId)) {
     return {
       dozvoljeno: false,
-      razlog: "Korisnik je u tvom ancestralnom lancu (čl. 12 Pravilnika).",
+      razlog: "Korisnik je u ancestralnom lancu tvog verifikatora (čl. 12 Pravilnika).",
     };
   }
 
-  // 5. Descendentni lanac (DFS)
-  const descendenti = new Set<string>();
-  const stack: string[] = [...(deca.get(verifikatorId) ?? [])];
-  while (stack.length > 0) {
-    const node = stack.pop()!;
-    if (descendenti.has(node)) continue;
-    descendenti.add(node);
-    const kids = deca.get(node);
-    if (kids) stack.push(...kids);
+  // 5. Sopstveni descendentni lanac (DFS naniže od samog verifikatora)
+  const sopstveniDescendenti = new Set<string>();
+  const downStack: string[] = [...(deca.get(verifikatorId) ?? [])];
+  while (downStack.length > 0) {
+    const node = downStack.pop()!;
+    if (sopstveniDescendenti.has(node)) continue;
+    sopstveniDescendenti.add(node);
+    for (const c of deca.get(node) ?? []) downStack.push(c);
   }
-  if (descendenti.has(verifikovaniId)) {
+  if (sopstveniDescendenti.has(verifikovaniId)) {
     return {
       dozvoljeno: false,
       razlog: "Korisnik je u tvom descendentnom lancu (čl. 12 Pravilnika).",
     };
   }
 
-  // 6. Braća (deca verifikator-ovog roditelja, isključujući njega samog)
-  if (verifikatorovVerifikator) {
-    const sva = deca.get(verifikatorovVerifikator) ?? [];
-    for (const sibling of sva) {
-      if (sibling !== verifikatorId && sibling === verifikovaniId) {
-        return {
-          dozvoljeno: false,
-          razlog: "Korisnik je tvoj brat u verifikacionom stablu (čl. 12 Pravilnika).",
-        };
-      }
-    }
+  // 6. Podstabla verifikatora (unija) — DFS naniže od svakog direktnog verifikatora;
+  //    obuhvata braću i sve njihove potomke.
+  const podstablaVerifikatora = new Set<string>();
+  const subStack: string[] = [...direktniVerifikatori];
+  while (subStack.length > 0) {
+    const node = subStack.pop()!;
+    if (podstablaVerifikatora.has(node)) continue;
+    podstablaVerifikatora.add(node);
+    for (const c of deca.get(node) ?? []) subStack.push(c);
+  }
+  if (podstablaVerifikatora.has(verifikovaniId)) {
+    return {
+      dozvoljeno: false,
+      razlog: "Korisnik je u podstablu tvog verifikatora (čl. 12 Pravilnika).",
+    };
   }
 
   return { dozvoljeno: true };
