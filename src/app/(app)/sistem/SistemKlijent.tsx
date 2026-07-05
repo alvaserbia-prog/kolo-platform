@@ -8,7 +8,7 @@ import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
 
-type Sekcija = "pregled" | "clanovi" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
+type Sekcija = "pregled" | "clanovi" | "lokacije" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
 
 interface FondTx {
   id: string;
@@ -129,6 +129,15 @@ export default function SistemKlijent({
   const zeroSum = opticaj + protokolBalance === 0;
   const faza2 = opticaj >= CILJ_OPTICAJ;
   const fazaPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
+
+  const brojLokacija = useMemo(() => {
+    const skup = new Set<string>();
+    for (const c of clanovi) {
+      const kljuc = normalizujLokaciju(c.location);
+      if (kljuc) skup.add(kljuc);
+    }
+    return skup.size;
+  }, [clanovi]);
 
   return (
     <div className="space-y-6">
@@ -317,6 +326,16 @@ export default function SistemKlijent({
           </p>
           <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
         </button>
+
+        {/* Lokacije članova — treći red (klik → spisak lokacija + otključane opcije) */}
+        <Kartica
+          aktivan={sekcija === "lokacije"}
+          onClick={() => setSekcija("lokacije")}
+          label={t("kartica_lokacije")}
+          broj={brojLokacija}
+          danas={0}
+          podnaslov={t("kartica_lokacije_opis")}
+        />
       </div>
 
       {/* Separator */}
@@ -335,6 +354,9 @@ export default function SistemKlijent({
       )}
       {sekcija === "clanovi" && (
         <ClanoviSekcija clanovi={clanovi} verified={verified} />
+      )}
+      {sekcija === "lokacije" && (
+        <LokacijeSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "transakcije" && (
         <TransakcijeSekcija transakcije={transakcije} verified={verified} />
@@ -909,6 +931,260 @@ function ClanoviSekcija({
             />
           ))
         )}
+      </div>
+    </div>
+  );
+}
+
+// ── Lokacije članova + otključane opcije ──────────────────────────────────────
+
+// Normalizuje slobodan tekst lokacije u ključ za grupisanje (trim, sažimanje
+// razmaka, mala slova). Vraća "" za praznu/nepostojeću lokaciju.
+function normalizujLokaciju(sirovo: string | null): string {
+  if (!sirovo) return "";
+  const ociscen = sirovo.trim().replace(/\s+/g, " ");
+  return ociscen ? ociscen.toLocaleLowerCase("sr-RS") : "";
+}
+
+interface LokAgg {
+  kljuc: string;
+  naziv: string;
+  ukupno: number;
+  verifikovanih: number;
+}
+
+// Pragovi za otključavanje kolektivnih oblika po broju VERIFIKOVANIH članova
+// sa istog područja. „Krug" (ranije zvan „zadruga") je aktivan mehanizam —
+// pet verifikovanih članova može osnovati Krug (Pravilnik čl. 55). Registrovana
+// „Zadruga" kao pravno lice je budući modul (Pravilnik Glava VIII, čl. 56);
+// prikazani prag je orijentacioni jer se parametri uređuju posebnim pravilnikom.
+const LOK_PRAG_KRUG = 5;
+const LOK_PRAG_ZADRUGA = 15;
+
+function LokacijeSekcija({
+  clanovi,
+  verified,
+}: {
+  clanovi: Clan[];
+  verified: boolean;
+}) {
+  const t = useTranslations("sistem");
+  const [pretraga, setPretraga] = useState("");
+
+  const { lokacije, bezLokacije } = useMemo(() => {
+    const mapa = new Map<
+      string,
+      { ukupno: number; verifikovanih: number; varijante: Map<string, number> }
+    >();
+    let bez = 0;
+    for (const c of clanovi) {
+      const kljuc = normalizujLokaciju(c.location);
+      if (!kljuc) {
+        bez++;
+        continue;
+      }
+      let e = mapa.get(kljuc);
+      if (!e) {
+        e = { ukupno: 0, verifikovanih: 0, varijante: new Map() };
+        mapa.set(kljuc, e);
+      }
+      e.ukupno++;
+      if (c.verified) e.verifikovanih++;
+      // Zabeleži originalno napisan oblik (npr. „Beograd" vs „beograd") radi prikaza.
+      const prikaz = (c.location ?? "").trim().replace(/\s+/g, " ");
+      e.varijante.set(prikaz, (e.varijante.get(prikaz) ?? 0) + 1);
+    }
+    const rezultat: LokAgg[] = Array.from(mapa.entries()).map(([kljuc, e]) => {
+      // Prikaži najčešće korišćeni oblik napisa.
+      let naziv = kljuc;
+      let max = -1;
+      for (const [v, n] of e.varijante) {
+        if (n > max) {
+          max = n;
+          naziv = v;
+        }
+      }
+      return { kljuc, naziv, ukupno: e.ukupno, verifikovanih: e.verifikovanih };
+    });
+    rezultat.sort(
+      (a, b) =>
+        b.verifikovanih - a.verifikovanih ||
+        b.ukupno - a.ukupno ||
+        a.naziv.localeCompare(b.naziv, "sr-RS")
+    );
+    return { lokacije: rezultat, bezLokacije: bez };
+  }, [clanovi]);
+
+  const filtrirane = useMemo(() => {
+    const q = pretraga.trim().toLocaleLowerCase("sr-RS");
+    if (!q) return lokacije;
+    return lokacije.filter((l) => l.naziv.toLocaleLowerCase("sr-RS").includes(q));
+  }, [lokacije, pretraga]);
+
+  return (
+    <div className="space-y-4">
+      {/* Objašnjenje koncepta */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-4 md:p-5">
+        <p className="text-sm text-kolo-text font-semibold">{t("lok_naslov")}</p>
+        <p className="text-sm text-kolo-muted mt-1">{t("lok_uvod")}</p>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-3 text-xs text-kolo-muted">
+          <span>
+            <span className="font-semibold text-kolo-text">{lokacije.length}</span>{" "}
+            {t("lok_ukupno_lokacija")}
+          </span>
+          {bezLokacije > 0 && (
+            <span>
+              <span className="font-semibold text-kolo-text">{bezLokacije}</span>{" "}
+              {t("lok_bez_lokacije")}
+            </span>
+          )}
+        </div>
+        {/* Legenda otključivih opcija */}
+        <div className="mt-3 pt-3 border-t border-kolo-border/50 space-y-1.5">
+          <p className="text-xs text-kolo-muted flex items-start gap-2">
+            <span className="shrink-0 text-[11px] font-semibold text-kolo-green-700 bg-kolo-green-100 px-1.5 py-0.5 rounded">
+              {LOK_PRAG_KRUG}+
+            </span>
+            <span>{t("lok_legenda_krug")}</span>
+          </p>
+          <p className="text-xs text-kolo-muted flex items-start gap-2">
+            <span className="shrink-0 text-[11px] font-semibold text-kolo-gold-600 bg-kolo-gold-100 px-1.5 py-0.5 rounded">
+              {LOK_PRAG_ZADRUGA}+
+            </span>
+            <span>{t("lok_legenda_zadruga")}</span>
+          </p>
+        </div>
+      </div>
+
+      {lokacije.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+          {t("lok_nema")}
+        </div>
+      ) : (
+        <>
+          {lokacije.length > 6 && (
+            <input
+              type="text"
+              value={pretraga}
+              onChange={(e) => setPretraga(e.target.value)}
+              placeholder={t("lok_pretraga")}
+              className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+            />
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            {filtrirane.map((l) => (
+              <LokacijaKartica key={l.kljuc} l={l} t={t} verified={verified} />
+            ))}
+          </div>
+          {filtrirane.length === 0 && (
+            <div className="text-center text-sm text-kolo-muted py-4">
+              {t("nema_rezultata")}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function LokacijaKartica({
+  l,
+  t,
+  verified,
+}: {
+  l: LokAgg;
+  t: ReturnType<typeof useTranslations>;
+  verified: boolean;
+}) {
+  const opcije = [
+    {
+      prag: LOK_PRAG_KRUG,
+      naziv: t("lok_opcija_krug"),
+      opis: t("lok_opcija_krug_opis"),
+      ruta: "/krug/osnivanje",
+      buduci: false,
+    },
+    {
+      prag: LOK_PRAG_ZADRUGA,
+      naziv: t("lok_opcija_zadruga"),
+      opis: t("lok_opcija_zadruga_opis"),
+      ruta: null,
+      buduci: true,
+    },
+  ];
+
+  return (
+    <div className="rounded-2xl border border-kolo-border bg-white p-4 md:p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="font-semibold text-kolo-text flex items-center gap-1.5 truncate">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="shrink-0 text-kolo-green-700">
+              <path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+              <circle cx="12" cy="10" r="2.4" stroke="currentColor" strokeWidth="1.8" />
+            </svg>
+            <span className="truncate">{l.naziv}</span>
+          </p>
+          <p className="text-xs text-kolo-muted mt-0.5">
+            {t("lok_clanova", { ukupno: l.ukupno, verif: l.verifikovanih })}
+          </p>
+        </div>
+        <div className="text-right shrink-0">
+          <p className="text-2xl md:text-3xl font-bold tabular-nums leading-none text-kolo-text">
+            {l.verifikovanih}
+          </p>
+          <p className="text-[11px] text-kolo-muted mt-0.5">{t("lok_verifikovanih")}</p>
+        </div>
+      </div>
+
+      <div className="mt-3 space-y-2">
+        {opcije.map((o) => {
+          const otkljucano = l.verifikovanih >= o.prag;
+          const preostalo = Math.max(0, o.prag - l.verifikovanih);
+          const pct = Math.min(100, Math.round((l.verifikovanih / o.prag) * 100));
+          return (
+            <div
+              key={o.naziv}
+              className="rounded-xl border border-kolo-border/60 bg-kolo-bg/40 p-3"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-medium text-kolo-text flex items-center gap-1.5">
+                  {o.naziv}
+                  {o.buduci && (
+                    <span className="text-[10px] uppercase tracking-wide font-semibold text-kolo-gold-600 bg-kolo-gold-100 px-1.5 py-0.5 rounded">
+                      {t("lok_buduci")}
+                    </span>
+                  )}
+                </span>
+                {otkljucano ? (
+                  <span className="shrink-0 text-xs font-semibold text-kolo-green-700 bg-kolo-green-100 px-2 py-0.5 rounded-full">
+                    ✓ {t("lok_otkljucano")}
+                  </span>
+                ) : (
+                  <span className="shrink-0 text-xs font-semibold text-kolo-muted">
+                    {t("lok_jos", { n: preostalo })}
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-kolo-muted mt-1">{o.opis}</p>
+              <div className="w-full h-1.5 rounded-full mt-2 bg-kolo-border/40">
+                <div
+                  className={`h-1.5 rounded-full transition-all ${
+                    otkljucano ? "bg-kolo-green-500" : "bg-kolo-gold-400"
+                  }`}
+                  style={{ width: `${pct}%` }}
+                />
+              </div>
+              {otkljucano && o.ruta && !o.buduci && verified && (
+                <Link
+                  href={o.ruta}
+                  className="inline-block mt-2 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-500 transition-colors"
+                >
+                  {t("lok_osnuj_krug")}
+                </Link>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
