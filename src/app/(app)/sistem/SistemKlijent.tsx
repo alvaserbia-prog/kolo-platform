@@ -168,32 +168,54 @@ export default function SistemKlijent({
         </div>
       )}
 
-      {/* Kartice pokazatelja */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-        {/* — Kolona 1 — */}
-        {/* Članovi */}
-        <Kartica
-          aktivan={sekcija === "clanovi"}
-          onClick={() => setSekcija("clanovi")}
-          label={t("kartica_clanovi")}
-          broj={verifikovanih}
-          danas={danasKorisnika}
-          podnaslov={t("kartica_verif_opis", { ukupno: ukupnoKorisnika, neverif: ukupnoKorisnika - verifikovanih })}
-        />
+      {/* Kartice pokazatelja — spoljni grid drži 4 „para".
+          Mobilni (1 kolona): parovi idu jedan ispod drugog, a UNUTAR para
+          su dve kartice jedna pored druge (mini-grid grid-cols-2).
+          Desktop (4 kolone): 4 para u redu, a UNUTAR para su dve kartice
+          jedna ispod druge (mini-grid md:grid-cols-1). */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-4">
+        {/* Par 1: Članovi + Lokacije */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
+          <Kartica
+            aktivan={sekcija === "clanovi"}
+            onClick={() => setSekcija("clanovi")}
+            label={t("kartica_clanovi")}
+            broj={verifikovanih}
+            danas={danasKorisnika}
+            podnaslov={t("kartica_verif_opis", { ukupno: ukupnoKorisnika, neverif: ukupnoKorisnika - verifikovanih })}
+          />
+          <Kartica
+            aktivan={sekcija === "lokacije"}
+            onClick={() => setSekcija("lokacije")}
+            label={t("kartica_lokacije")}
+            broj={brojLokacija}
+            danas={0}
+            podnaslov={t("kartica_lokacije_opis")}
+          />
+        </div>
 
-        {/* — Kolona 2 — */}
-        {/* Transakcije */}
-        <Kartica
-          aktivan={sekcija === "transakcije"}
-          onClick={() => setSekcija("transakcije")}
-          label={t("kartica_transakcije")}
-          broj={ukupnoTransakcija}
-          danas={danasTransakcija}
-          podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
-        />
+        {/* Par 2: Transakcije + Ukupan promet */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
+          <Kartica
+            aktivan={sekcija === "transakcije"}
+            onClick={() => setSekcija("transakcije")}
+            label={t("kartica_transakcije")}
+            broj={ukupnoTransakcija}
+            danas={danasTransakcija}
+            podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
+          />
+          <Kartica
+            aktivan={sekcija === "iznos"}
+            onClick={() => setSekcija("iznos")}
+            label={t("kartica_promet")}
+            broj={ukupanIznosTx}
+            danas={danasIznosTx}
+            podnaslov={t("kartica_promet_opis")}
+          />
+        </div>
 
-        {/* — Kolona 3 — */}
-        {/* Opticaj */}
+        {/* Par 3: Opticaj + Faza sistema */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
         <button
           onClick={() => setSekcija("pregled")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
@@ -233,40 +255,6 @@ export default function SistemKlijent({
             )}
           </div>
         </button>
-
-        {/* — Kolona 4 — */}
-        {/* Donacije */}
-        <Kartica
-          aktivan={sekcija === "donacije"}
-          onClick={() => setSekcija("donacije")}
-          label={t("kartica_donacije")}
-          broj={ukupnoDonacija}
-          danas={danasDonacija}
-          podnaslov={t("kartica_donacije_opis")}
-        />
-
-        {/* — Drugi red — */}
-        {/* Lokacije članova — ispod Članova (klik → spisak lokacija sa brojem članova) */}
-        <Kartica
-          aktivan={sekcija === "lokacije"}
-          onClick={() => setSekcija("lokacije")}
-          label={t("kartica_lokacije")}
-          broj={brojLokacija}
-          danas={0}
-          podnaslov={t("kartica_lokacije_opis")}
-        />
-
-        {/* Ukupan promet — ispod Transakcija */}
-        <Kartica
-          aktivan={sekcija === "iznos"}
-          onClick={() => setSekcija("iznos")}
-          label={t("kartica_promet")}
-          broj={ukupanIznosTx}
-          danas={danasIznosTx}
-          podnaslov={t("kartica_promet_opis")}
-        />
-
-        {/* Faza sistema — ispod Opticaja (sopstveni tab) */}
         <button
           onClick={() => setSekcija("faza")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
@@ -294,8 +282,18 @@ export default function SistemKlijent({
             {faza2 ? t("gornje_kolo_aktivno") : t("do_gornjeg_kola", { pct: fazaPct.toFixed(1) })}
           </p>
         </button>
+        </div>
 
-        {/* Račun Fondacije — desno dole (klik → spisak transakcija) */}
+        {/* Par 4: Donacije + Račun Fondacije */}
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-4">
+        <Kartica
+          aktivan={sekcija === "donacije"}
+          onClick={() => setSekcija("donacije")}
+          label={t("kartica_donacije")}
+          broj={ukupnoDonacija}
+          danas={danasDonacija}
+          podnaslov={t("kartica_donacije_opis")}
+        />
         <button
           onClick={() => setSekcija("fondacija")}
           className={`rounded-2xl p-4 md:p-5 text-left transition-all border ${
@@ -315,6 +313,7 @@ export default function SistemKlijent({
           </p>
           <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
         </button>
+        </div>
       </div>
 
       {/* Separator */}
