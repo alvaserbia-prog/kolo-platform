@@ -356,7 +356,7 @@ export default function SistemKlijent({
         <ClanoviSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "lokacije" && (
-        <LokacijeSekcija clanovi={clanovi} verified={verified} />
+        <LokacijeSekcija clanovi={clanovi} />
       )}
       {sekcija === "transakcije" && (
         <TransakcijeSekcija transakcije={transakcije} verified={verified} />
@@ -953,20 +953,16 @@ interface LokAgg {
   verifikovanih: number;
 }
 
-// Pragovi za otključavanje kolektivnih oblika po broju VERIFIKOVANIH članova
-// sa istog područja. „Krug" (ranije zvan „zadruga") je aktivan mehanizam —
-// pet verifikovanih članova može osnovati Krug (Pravilnik čl. 55). Registrovana
-// „Zadruga" kao pravno lice je budući modul (Pravilnik Glava VIII, čl. 56);
-// prikazani prag je orijentacioni jer se parametri uređuju posebnim pravilnikom.
-const LOK_PRAG_KRUG = 5;
-const LOK_PRAG_ZADRUGA = 15;
+// Prag za otključavanje kolektivnog oblika po broju VERIFIKOVANIH članova
+// sa istog područja. Registrovana „Zadruga" kao pravno lice je budući modul
+// (Pravilnik Glava VIII, čl. 56); prikazani prag je orijentacioni jer se
+// parametri uređuju posebnim pravilnikom.
+const LOK_PRAG_ZADRUGA = 50;
 
 function LokacijeSekcija({
   clanovi,
-  verified,
 }: {
   clanovi: Clan[];
-  verified: boolean;
 }) {
   const t = useTranslations("sistem");
   const [pretraga, setPretraga] = useState("");
@@ -1039,14 +1035,8 @@ function LokacijeSekcija({
             </span>
           )}
         </div>
-        {/* Legenda otključivih opcija */}
-        <div className="mt-3 pt-3 border-t border-kolo-border/50 space-y-1.5">
-          <p className="text-xs text-kolo-muted flex items-start gap-2">
-            <span className="shrink-0 text-[11px] font-semibold text-kolo-green-700 bg-kolo-green-100 px-1.5 py-0.5 rounded">
-              {LOK_PRAG_KRUG}+
-            </span>
-            <span>{t("lok_legenda_krug")}</span>
-          </p>
+        {/* Legenda otključive opcije */}
+        <div className="mt-3 pt-3 border-t border-kolo-border/50">
           <p className="text-xs text-kolo-muted flex items-start gap-2">
             <span className="shrink-0 text-[11px] font-semibold text-kolo-gold-600 bg-kolo-gold-100 px-1.5 py-0.5 rounded">
               {LOK_PRAG_ZADRUGA}+
@@ -1073,7 +1063,7 @@ function LokacijeSekcija({
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {filtrirane.map((l) => (
-              <LokacijaKartica key={l.kljuc} l={l} t={t} verified={verified} />
+              <LokacijaKartica key={l.kljuc} l={l} t={t} />
             ))}
           </div>
           {filtrirane.length === 0 && (
@@ -1090,25 +1080,15 @@ function LokacijeSekcija({
 function LokacijaKartica({
   l,
   t,
-  verified,
 }: {
   l: LokAgg;
   t: ReturnType<typeof useTranslations>;
-  verified: boolean;
 }) {
   const opcije = [
-    {
-      prag: LOK_PRAG_KRUG,
-      naziv: t("lok_opcija_krug"),
-      opis: t("lok_opcija_krug_opis"),
-      ruta: "/krug/osnivanje",
-      buduci: false,
-    },
     {
       prag: LOK_PRAG_ZADRUGA,
       naziv: t("lok_opcija_zadruga"),
       opis: t("lok_opcija_zadruga_opis"),
-      ruta: null,
       buduci: true,
     },
   ];
@@ -1174,14 +1154,6 @@ function LokacijaKartica({
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              {otkljucano && o.ruta && !o.buduci && verified && (
-                <Link
-                  href={o.ruta}
-                  className="inline-block mt-2 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-500 transition-colors"
-                >
-                  {t("lok_osnuj_krug")}
-                </Link>
-              )}
             </div>
           );
         })}
