@@ -16,6 +16,9 @@ export const POEN_VERIFIKATOR = 1000; // čl. 7
 export const POEN_VERIFIKOVANI = 1000; // čl. 7
 export const POEN_NADZORNIK = 500; // čl. 7
 export const TOKEN_VAZI_SEKUNDI = 2 * 60 * 60; // QR token TTL = 2 sata
+// Čl. 14 (v3.9.2): indeks stvarnosti početnih korisnika iznosi 100% od
+// uspostavljanja naloga i ne proizlazi iz lanca jemstva.
+export const POCETNI_INDEKS = 100;
 
 export type GrafZapis = { verifikatorId: string; verifikovaniId: string };
 
@@ -90,7 +93,22 @@ export function imaPristupVerifikaciji(tip: TipKorisnika, indeks: number): boole
 }
 
 /**
+ * Indeks početnog korisnika je fiksno 100 i ne menja se nijednom operacijom —
+ * ni verifikacijom, ni padom/prestankom jemca, ni kaskadom poništavanja
+ * (čl. 14 i 16 Pravilnika o dokazu stvarnosti, v3.9.2). Za ostale korisnike
+ * vraća izračunatu vrednost nepromenjenu.
+ */
+export function zasticeniIndeks(jePocetni: boolean, izracunato: number): number {
+  return jePocetni ? POCETNI_INDEKS : izracunato;
+}
+
+/**
  * Strogo anti-cirkularno pravilo (čl. 12 Pravilnika, verzija 3.9.1).
+ *
+ * NAPOMENA (v3.9.2): ova provera je PODSKUP simetrične zabranjene zone iz
+ * `zona.ts` (`proveriDozvoluVerifikacije`), koja je merodavna. Zadržana je u
+ * servisu kao invarijanta/safety-net — ako zona propusti nešto što ovo pravilo
+ * hvata, to je bug u zoni.
  *
  * Korisnik po pravilu ima VIŠE verifikatora (do 10). Zabranjena zona je
  * UNIJA zona svih njegovih verifikatora. Verifikator NE sme da verifikuje:

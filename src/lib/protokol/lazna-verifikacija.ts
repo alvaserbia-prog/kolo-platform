@@ -5,7 +5,9 @@ import {
   POEN_VERIFIKATOR,
   POEN_VERIFIKOVANI,
   izracunajIndeks,
+  zasticeniIndeks,
 } from "./dokaz-stvarnosti";
+import { preracunajZoneUBazi } from "./zona-sinhronizacija";
 import { jeSuperadmin } from "@/lib/dozvole";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
@@ -49,7 +51,7 @@ export async function ponistiLaznogVerifikatora(
 ): Promise<PonistavanjeRezultat> {
   const lazni = await prisma.user.findUnique({
     where: { id: laznoVerifikatorId },
-    select: { id: true, pseudonim: true, tipKorisnika: true, admin: true, status: true },
+    select: { id: true, pseudonim: true, tipKorisnika: true, admin: true, status: true, jeOsnivac: true },
   });
   if (!lazni) throw new LaznaVerifikacijaGreska("Korisnik nije pronađen.", 404);
   if (jeSuperadmin(lazni))
@@ -121,9 +123,21 @@ export async function ponistiLaznogVerifikatora(
           const ostalo = await tx.verifikacionaVeza.count({
             where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
           });
+          // Indeks početnog korisnika je fiksno 100 i kaskada ga ne dira
+          // (čl. 14, v3.9.2) — legacy zapisi gde je početni bio verifikovan
+          // se brišu, ali bez efekta na njegov indeks.
+          const pogodjeniMeta = await tx.user.findUnique({
+            where: { id: v.verifikovaniId },
+            select: { jeOsnivac: true },
+          });
           await tx.user.update({
             where: { id: v.verifikovaniId },
-            data: { indeksStvarnosti: izracunajIndeks(ostalo) },
+            data: {
+              indeksStvarnosti: zasticeniIndeks(
+                pogodjeniMeta?.jeOsnivac ?? false,
+                izracunajIndeks(ostalo)
+              ),
+            },
           });
           pogodjeni.push(v.verifikovaniId);
           red.push(v.verifikovaniId);
@@ -132,6 +146,7 @@ export async function ponistiLaznogVerifikatora(
       }
 
       // Lažni verifikator: isključenje + reset indeksa/slotova.
+      // (Indeks početnog korisnika ostaje 100 i u ovom slučaju — čl. 14.)
       await tx.user.update({
         where: { id: laznoVerifikatorId },
         data: {
@@ -139,10 +154,15 @@ export async function ponistiLaznogVerifikatora(
           suspendedAt: new Date(),
           suspendedReason:
             "Lažna verifikacija (Pravilnik o dokazu stvarnosti, čl. 18)",
-          indeksStvarnosti: 0,
+          indeksStvarnosti: zasticeniIndeks(lazni.jeOsnivac, 0),
           slotoviPotroseni: 0,
         },
       });
+
+      // Zabranjena zona posle kaskade: unija nije invertibilna, pa se pogođene
+      // zone NE oduzimaju inkrementalno — keš se preračunava od nule iz
+      // preostalog grafa (čl. 19–20, v3.9.2).
+      await preracunajZoneUBazi(tx);
     },
     { timeout: 30000 }
   );

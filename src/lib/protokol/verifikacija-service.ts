@@ -9,7 +9,6 @@ import crypto from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import {
-  GrafZapis,
   MAX_INDEKS,
   POEN_VERIFIKATOR,
   POEN_VERIFIKOVANI,
@@ -21,6 +20,12 @@ import {
   proveriAntiCirkularno,
   raspolozivSlot,
 } from "@/lib/protokol/dokaz-stvarnosti";
+import {
+  dodajVerifikacijuUZonu,
+  proveriDozvoluVerifikacije,
+  recomputeZonesSaGrafom,
+} from "@/lib/protokol/zona";
+import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
 import { Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 export class VerifikacijaGreska extends Error {
@@ -113,9 +118,10 @@ type FazaJedan = {
 
 /**
  * Jezgro verifikacije unutar otvorene transakcije: učita oba korisnika, sprovede
- * SVE provere (čl. 4, 12, kapacitet/slot, osnivač≠osnivač, cap 100%), kreira
- * VerifikacionaVeza, podigne indeks verifikovanog, zatvori njegov aktivan zahtev
- * za jemstvo i potroši slot verifikatoru. Ne dira token — to je stvar pozivaoca
+ * SVE provere (čl. 4; zabranjena zona čl. 12 u oba smera; početni nije meta,
+ * čl. 14; kapacitet/slot; cap 100%), kreira VerifikacionaVeza, proširi i
+ * sinhronizuje zabranjenu zonu, podigne indeks verifikovanog, zatvori njegov
+ * aktivan zahtev za jemstvo i potroši slot verifikatoru. Ne dira token — to je stvar pozivaoca
  * (token put ga obeleži kao iskorišćen; put sa table jemstva ne koristi token).
  *
  * Deli ga oba ulaza (`izvrsiVerifikaciju` preko tokena i `izvrsiVerifikacijuSaTable`),
@@ -149,10 +155,11 @@ async function izvrsiJezgroVerifikacije(
     );
   }
 
-  // Dokaz stvarnosti čl. 15: drugi korisnici MOGU da verifikuju nosioce ZRNA
-  // po redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija,
-  // ali bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa,
-  // ne iz indeksa (čl. 17). Status se NE menja u REGULARNI.
+  // Drugi korisnici MOGU da verifikuju nosioce ZRNA (koji NISU početni) po
+  // redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija, ali
+  // bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa, ne iz
+  // indeksa (čl. 17). Status se NE menja u REGULARNI. Početne korisnike
+  // (jeOsnivac) blokira zonska provera niže (čl. 14 st. 3, v3.9.2).
   const verifikovaniJePoseban =
     verifikovani.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
 
@@ -177,28 +184,32 @@ async function izvrsiJezgroVerifikacije(
     throw new VerifikacijaGreska("Nemaš slobodan slot — pričekaj nadzor.", 409);
   }
 
-  // Anti-malverzacija: početni nosioci ZRNA (osnivači) NE smeju da verifikuju
-  // jedan drugog. Mogu da verifikuju sve ostale (bootstrap lanca jemstva), ali
-  // međusobna verifikacija bi im veštački napumpala indeks/poverenje u zatvorenom
-  // krugu. Osnivače razlikuje marker `jeOsnivac` (ne tipKorisnika — NOSILAC_ZRNA
-  // status može steći i običan korisnik upisom ZRNA).
-  if (verifikator.jeOsnivac && verifikovani.jeOsnivac) {
-    throw new VerifikacijaGreska(
-      "Početni nosioci ZRNA (osnivači) ne mogu verifikovati jedan drugog.",
-      403
-    );
+  // Zabranjena zona (čl. 12, v3.9.2) + zabrana verifikovanja početnih (čl. 14).
+  // Stanje zone se preračunava iz izvora istine (graf veza) unutar iste
+  // SERIALIZABLE transakcije — keš tabela verification_zone se ne konsultuje
+  // pri validaciji, samo se dopunjava posle upisa. Zabrana verifikovanja
+  // početnog korisnika pokriva i raniju anti-malverzacijsku zabranu
+  // osnivač→osnivač (svaka verifikacija KA početnom je blokirana).
+  const { zapisi, pocetniIds } = await ucitajGrafIZone(tx);
+  const { stanje, graf: zonaGraf } = recomputeZonesSaGrafom(zapisi, pocetniIds);
+  const zonaRezultat = proveriDozvoluVerifikacije(
+    stanje,
+    pocetniIds,
+    verifikatorId,
+    verifikovani.id
+  );
+  if (!zonaRezultat.dozvoljeno) {
+    throw new VerifikacijaGreska(zonaRezultat.razlog, 403);
   }
 
-  // Anti-cirkularno (čl. 12)
-  const grafRaw = await tx.verifikacionaVeza.findMany({
-    select: { verifikatorId: true, verifikovaniId: true },
-  });
-  const graf: GrafZapis[] = grafRaw.map((g) => ({
-    verifikatorId: g.verifikatorId,
-    verifikovaniId: g.verifikovaniId,
-  }));
-  const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, graf);
+  // Invarijanta: staro anti-cirkularno pravilo (čl. 12, v3.9.1) je podskup
+  // zabranjene zone — ako zona propusti nešto što ono hvata, to je bug u zoni.
+  const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, zapisi);
   if (!acRezultat.dozvoljeno) {
+    console.error(
+      "[verifikacija-service] INVARIJANTA PREKRŠENA: zona dozvolila, anti-cirkularno odbilo",
+      { verifikatorId, verifikovaniId: verifikovani.id, razlog: acRezultat.razlog }
+    );
     throw new VerifikacijaGreska(acRezultat.razlog, 403);
   }
 
@@ -218,16 +229,23 @@ async function izvrsiJezgroVerifikacije(
     },
   });
 
+  // Proširi zabranjenu zonu novom ivicom (čl. 12, v3.9.2) i sinhronizuj keš
+  // verification_zone U ISTOJ transakciji sa zapisom. Upis punog stanja sa
+  // skipDuplicates je idempotentan i samoisceljujuć (dopuni i redove koji bi
+  // nedostajali pre inicijalnog backfill-a).
+  dodajVerifikacijuUZonu(stanje, zonaGraf, pocetniIds, verifikatorId, verifikovani.id);
+  await dopuniZonuPosleUpisa(tx, stanje);
+
   // Ažuriraj verifikovanog: indeks = broj veza × 10 (cap 100).
   // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
   const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
     where: { verifikovaniId: verifikovani.id },
   });
   const izracunatiIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
-  // Za posebne statuse (POCETNI/NOSILAC_ZRNA) indeks je evidencija bez
-  // funkcionalnog efekta: zadržavamo status i nikad ne umanjujemo postojeći
-  // indeks (npr. bootstrap 10% početnog korisnika iz čl. 14, koji ne potiče iz
-  // lanca jemstva). NEVERIFIKOVAN/REGULARNI postaje (ostaje) REGULARNI.
+  // Za nosioce ZRNA indeks je evidencija bez funkcionalnog efekta: zadržavamo
+  // status i nikad ne umanjujemo postojeći indeks. (Početni korisnici ovde ne
+  // stižu — čl. 14 st. 3 ih blokira kao metu; njihov indeks je fiksno 100.)
+  // NEVERIFIKOVAN/REGULARNI postaje (ostaje) REGULARNI.
   const noviIndeks = verifikovaniJePoseban
     ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
     : izracunatiIndeks;

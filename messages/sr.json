@@ -1915,7 +1915,9 @@
     "oznaka_opis": "Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo ti i Fondacija.",
     "potvrda_poznavanja": "Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću jemčim za njenu stvarnost, jedinstvenost i kontinuitet (čl. 5 Pravilnika o dokazu stvarnosti).",
     "dugme_potvrdi_verifikaciju": "Potvrdi verifikaciju",
-    "verifikacija_uspeh": "Verifikovao/la si „{pseudonim}”. Dobio/la je pun pristup (indeks +10%)."
+    "verifikacija_uspeh": "Verifikovao/la si „{pseudonim}”. Dobio/la je pun pristup (indeks +10%).",
+    "blokada_zona": "Verifikacija nije moguća — ovaj korisnik je u tvojoj zabranjenoj zoni ili si ti u njegovoj (čl. 12 Pravilnika o dokazu stvarnosti).",
+    "blokada_pocetni": "Početni korisnici se ne verifikuju u lancu jemstva (čl. 14 Pravilnika o dokazu stvarnosti)."
   },
   "dobrodosli": {
     "ekran1_oznaka": "Dobrodošli",

@@ -9,7 +9,9 @@ import {
   POEN_VERIFIKATOR,
   POEN_VERIFIKOVANI,
   izracunajIndeks,
+  zasticeniIndeks,
 } from "@/lib/protokol/dokaz-stvarnosti";
+import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -163,8 +165,17 @@ export async function DELETE(req: NextRequest) {
           const ostalo = await tx.verifikacionaVeza.count({
             where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
           });
-          const noviIndeks = izracunajIndeks(ostalo);
-          if (ostalo === 0) {
+          // Početnog korisnika (jeOsnivac) pad jemca ne pogađa: indeks ostaje
+          // fiksno 100 i status se ne vraća (čl. 14 i 16 dokaza stvarnosti, v3.9.2).
+          const pogodjeni = await tx.user.findUnique({
+            where: { id: v.verifikovaniId },
+            select: { jeOsnivac: true },
+          });
+          const noviIndeks = zasticeniIndeks(
+            pogodjeni?.jeOsnivac ?? false,
+            izracunajIndeks(ostalo)
+          );
+          if (ostalo === 0 && !pogodjeni?.jeOsnivac) {
             // Verifikovani se vraća u status NEVERIFIKOVAN
             await tx.user.update({
               where: { id: v.verifikovaniId },
@@ -228,6 +239,11 @@ export async function DELETE(req: NextRequest) {
           where: { nadzornikId: userId },
           data: { nadzornikId: null },
         });
+
+        // 2e) Zabranjena zona posle prestanka statusa (čl. 16 dokaza stvarnosti,
+        // v3.9.2): pogođeni deo grafa je obrisan, pa se keš verification_zone
+        // preračunava od nule iz preostalog grafa (unija nije invertibilna).
+        await preracunajZoneUBazi(tx);
       },
       { timeout: 30_000 }
     );

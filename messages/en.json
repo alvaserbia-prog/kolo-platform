@@ -1915,7 +1915,9 @@
     "oznaka_opis": "Optional. A private label to help you track who you verified — visible only to you and the Foundation.",
     "potvrda_poznavanja": "I confirm that I personally know this person and vouch, on my own responsibility, for their reality, uniqueness and continuity (Art. 5 of the Proof of Reality Rulebook).",
     "dugme_potvrdi_verifikaciju": "Confirm verification",
-    "verifikacija_uspeh": "You verified \"{pseudonim}\". They received full access (index +10%)."
+    "verifikacija_uspeh": "You verified \"{pseudonim}\". They received full access (index +10%).",
+    "blokada_zona": "Verification is not possible — this user is in your forbidden zone, or you are in theirs (Art. 12 of the Proof of Reality Rulebook).",
+    "blokada_pocetni": "Initial users are not verified through the chain of vouching (Art. 14 of the Proof of Reality Rulebook)."
   },
   "dobrodosli": {
     "ekran1_oznaka": "Welcome",

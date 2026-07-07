@@ -14,6 +14,11 @@ const TRAJANJE_SATI = 72;
 // GET /api/tabla-jemstva — aktivni zahtevi (samo prijavljeni).
 // Tekst i pseudonim su vidljivi svim prijavljenima; kontakt se NE vraća ovde
 // (otkriva se zasebno preko /[id]/kontakt, samo verifikovanima, uz logovanje).
+// Za posmatrača-verifikatora svaki zahtev nosi i `verifikacijaBlokirana`
+// ("zona" | "pocetni" | null): tabla ne sme da nudi kao mete korisnike iz
+// zabranjene zone posmatrača (u oba smera) ni početne korisnike (čl. 12 i 14
+// dokaza stvarnosti, v3.9.2). Server je i dalje merodavan — POST verifikuj
+// ponavlja iste provere nad izvorom istine.
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
@@ -27,9 +32,27 @@ export async function GET() {
       tekstPredstavljanja: true,
       createdAt: true,
       expiresAt: true,
-      user: { select: { pseudonim: true } },
+      user: { select: { pseudonim: true, jeOsnivac: true } },
     },
   });
+
+  // Zabranjena zona posmatrača, oba smera (keš tabela verification_zone).
+  const podnosioci = zahtevi.map((z) => z.userId);
+  const zonaParovi =
+    podnosioci.length > 0
+      ? await prisma.verifikacionaZona.findMany({
+          where: {
+            OR: [
+              { userId: session.user.id, forbiddenUserId: { in: podnosioci } },
+              { userId: { in: podnosioci }, forbiddenUserId: session.user.id },
+            ],
+          },
+        })
+      : [];
+  const uZoni = new Set<string>();
+  for (const p of zonaParovi) {
+    uZoni.add(p.userId === session.user.id ? p.forbiddenUserId : p.userId);
+  }
 
   return NextResponse.json({
     mojeVerifikovan: session.user.verified,
@@ -40,6 +63,11 @@ export async function GET() {
       createdAt: z.createdAt.toISOString(),
       expiresAt: z.expiresAt.toISOString(),
       mojZahtev: z.userId === session.user.id,
+      verifikacijaBlokirana: z.user.jeOsnivac
+        ? ("pocetni" as const)
+        : uZoni.has(z.userId)
+          ? ("zona" as const)
+          : null,
     })),
   });
 }
