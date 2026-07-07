@@ -13,6 +13,10 @@ type Zahtev = {
   createdAt: string;
   expiresAt: string;
   mojZahtev: boolean;
+  // Zašto posmatrač NE može da verifikuje ovaj zahtev (čl. 12 i 14 dokaza
+  // stvarnosti, v3.9.2): "zona" = zabranjena zona (oba smera), "pocetni" =
+  // početni korisnik se ne verifikuje u lancu jemstva.
+  verifikacijaBlokirana?: "zona" | "pocetni" | null;
 };
 
 // Preostalo vreme do isteka, grubo u satima (zahtev traje 72h).
@@ -351,7 +355,7 @@ export default function TablaJemstvaKlijent({
                       className="px-3 py-1.5 rounded-lg bg-kolo-green-700 text-white text-xs font-semibold hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
                       {radnja === z.id ? "..." : t("dugme_posalji_poruku")}
                     </button>
-                    {mozeVerifikovati && verifikujId !== z.id && (
+                    {mozeVerifikovati && !z.verifikacijaBlokirana && verifikujId !== z.id && (
                       <button onClick={() => otvoriVerifikuj(z.id)} disabled={radnja === z.id}
                         className="px-3 py-1.5 rounded-lg bg-kolo-gold-400 text-black text-xs font-semibold hover:bg-kolo-gold-600 disabled:opacity-60 transition-colors">
                         {t("dugme_verifikuj")}
@@ -359,8 +363,16 @@ export default function TablaJemstvaKlijent({
                     )}
                   </div>
 
+                  {/* Verifikacija nije moguća za posmatrača: zabranjena zona (čl. 12)
+                      ili početni korisnik (čl. 14) — dugme se ne nudi, uz objašnjenje */}
+                  {mozeVerifikovati && z.verifikacijaBlokirana && (
+                    <p className="text-xs text-kolo-muted italic">
+                      {z.verifikacijaBlokirana === "pocetni" ? t("blokada_pocetni") : t("blokada_zona")}
+                    </p>
+                  )}
+
                   {/* Inline potvrda verifikacije — lično poznavanje + opciona oznaka */}
-                  {mozeVerifikovati && verifikujId === z.id && (
+                  {mozeVerifikovati && !z.verifikacijaBlokirana && verifikujId === z.id && (
                     <div className="mt-2 pt-3 border-t border-kolo-border space-y-2">
                       <input
                         type="text"

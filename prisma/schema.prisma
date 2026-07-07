@@ -273,6 +273,8 @@ model User {
   verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[] @relation("Verifikovani")
   nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
   verifikacijaTokeni              VerifikacijaToken[]
+  zabranjenaZona                  VerifikacionaZona[] @relation("ZonaVlasnik")
+  uTudjimZonama                   VerifikacionaZona[] @relation("ZonaZabranjeni")
   zahteviZaJemstvo                ZahtevZaJemstvo[]
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
@@ -1108,6 +1110,26 @@ model VerifikacionaVeza {
   @@index([verifikatorId])
   @@index([verifikovaniId])
   @@index([nadzornikId])
+}
+
+// ─── Zabranjena zona verifikacije (dokaz stvarnosti 3.9.2, čl. 12) ───────────
+// Materijalizovana simetrična zabranjena zona: red (userId, forbiddenUserId)
+// znači da userId NE SME da verifikuje forbiddenUserId (provera ide u OBA smera,
+// čl. 12: "...niti korisnika u čijoj se zabranjenoj zoni sam nalazi").
+// Ovo je KEŠ — izvor istine je tabela VerifikacionaVeza; celokupno stanje se
+// deterministički izvodi iz grafa funkcijom recomputeZones (src/lib/protokol/zona.ts)
+// i sinhronizuje u istoj transakciji sa svakim upisom, poništavanjem ili
+// prestankom statusa. Skup je monoton pri upisu (unije), a pri poništavanju se
+// NE oduzima inkrementalno (unija nije invertibilna) nego preračunava od nule.
+model VerifikacionaZona {
+  userId          String
+  user            User   @relation("ZonaVlasnik", fields: [userId], references: [id], onDelete: Cascade)
+  forbiddenUserId String
+  forbiddenUser   User   @relation("ZonaZabranjeni", fields: [forbiddenUserId], references: [id], onDelete: Cascade)
+
+  @@id([userId, forbiddenUserId])
+  @@index([forbiddenUserId])
+  @@map("verification_zone")
 }
 
 model VerifikacijaToken {
