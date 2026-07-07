@@ -51,7 +51,9 @@ async function main() {
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         jeOsnivac: true,
         admin: o.admin,
-        indeksStvarnosti: 10,
+        // Čl. 14 (dokaz stvarnosti 3.9.2): indeks početnog korisnika je fiksno
+        // 100% od uspostavljanja naloga i ne proizlazi iz lanca jemstva.
+        indeksStvarnosti: 100,
         verified: true,
         location: o.location,
       },
@@ -61,7 +63,7 @@ async function main() {
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         jeOsnivac: true,
         admin: o.admin,
-        indeksStvarnosti: 10,
+        indeksStvarnosti: 100,
         verified: true,
         verifiedAt: new Date(),
         memberHash: o.memberHash,

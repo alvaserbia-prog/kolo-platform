@@ -227,6 +227,9 @@ async function seedAdmin() {
         jeOsnivac: true,
         admin: AdminNivo.SUPERADMIN,
         verified: true,
+        // Čl. 14 (dokaz stvarnosti 3.9.2): indeks početnog korisnika je fiksno
+        // 100% od uspostavljanja naloga i ne proizlazi iz lanca jemstva.
+        indeksStvarnosti: 100,
       },
       create: {
         email: c.email,
@@ -235,7 +238,7 @@ async function seedAdmin() {
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         jeOsnivac: true,
         admin: AdminNivo.SUPERADMIN,
-        indeksStvarnosti: 10,
+        indeksStvarnosti: 100,
         verified: true,
         verifiedAt: new Date(),
         memberHash: c.memberHash,
