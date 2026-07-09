@@ -17,9 +17,11 @@ import {
   type ZonaZapis,
 } from "@/lib/protokol/zona";
 import {
+  PRELAZNI_OPTICAJ_PRAG,
   POCETNI_INDEKS,
   izracunajIndeks,
   proveriAntiCirkularno,
+  proveriPrelaznoOgranicenje,
   zasticeniIndeks,
 } from "@/lib/protokol/dokaz-stvarnosti";
 
@@ -369,6 +371,30 @@ describe("rekomputacija i kaskada (čl. 19–20)", () => {
     const stanje: ZonaStanje = new Map();
     dodajVerifikacijuUZonu(stanje, graf, NIKO, "A", "B");
     expect(uZoni(stanje, "A", "B")).toBe(true);
+  });
+});
+
+describe("prelazno ograničenje broja verifikacija (čl. 22, v3.9.3)", () => {
+  it("prag je 100.000 POEN-a opticaja", () => {
+    expect(PRELAZNI_OPTICAJ_PRAG).toBe(100_000);
+  });
+
+  it("ispod praga: prva verifikacija dozvoljena, druga odbijena", () => {
+    expect(proveriPrelaznoOgranicenje(0, 0).dozvoljeno).toBe(true);
+    expect(proveriPrelaznoOgranicenje(99_999, 0).dozvoljeno).toBe(true);
+    const druga = proveriPrelaznoOgranicenje(99_999, 1);
+    expect(druga.dozvoljeno).toBe(false);
+    if (!druga.dozvoljeno) {
+      expect(druga.razlog).toContain("100.000");
+      expect(druga.razlog).toContain("samo jednu verifikaciju");
+    }
+    expect(proveriPrelaznoOgranicenje(50_000, 5).dozvoljeno).toBe(false);
+  });
+
+  it("na pragu i iznad: ograničenje ne važi (indeks raste po opštim pravilima)", () => {
+    expect(proveriPrelaznoOgranicenje(100_000, 1).dozvoljeno).toBe(true);
+    expect(proveriPrelaznoOgranicenje(100_000, 9).dozvoljeno).toBe(true);
+    expect(proveriPrelaznoOgranicenje(2_500_000, 3).dozvoljeno).toBe(true);
   });
 });
 
