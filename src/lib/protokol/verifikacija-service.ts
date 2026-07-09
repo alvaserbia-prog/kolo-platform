@@ -18,6 +18,7 @@ import {
   izracunajKapacitet,
   podlezeNadzoru,
   proveriAntiCirkularno,
+  proveriPrelaznoOgranicenje,
   raspolozivSlot,
 } from "@/lib/protokol/dokaz-stvarnosti";
 import {
@@ -27,6 +28,8 @@ import {
 } from "@/lib/protokol/zona";
 import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
 import { Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
+
+const PROTOKOL_WALLET_ID = "banka-singleton";
 
 export class VerifikacijaGreska extends Error {
   constructor(
@@ -184,6 +187,23 @@ async function izvrsiJezgroVerifikacije(
     throw new VerifikacijaGreska("Nemaš slobodan slot — pričekaj nadzor.", 409);
   }
 
+  // Prelazno ograničenje (čl. 22, v3.9.3): dok ukupan opticaj ne dostigne
+  // 100.000 POEN-a, korisnik može primiti najviše jednu verifikaciju — mreža
+  // se u početnom periodu širi isključivo pristupanjem novih korisnika.
+  // Opticaj = apsolutna vrednost protivzapisa Protokola (minus banke).
+  const protokolWallet = await tx.wallet.findUnique({
+    where: { id: PROTOKOL_WALLET_ID },
+    select: { balance: true },
+  });
+  const opticaj = Math.max(0, -(protokolWallet?.balance ?? 0));
+  const vecPrimljenihVerifikacija = await tx.verifikacionaVeza.count({
+    where: { verifikovaniId: verifikovani.id },
+  });
+  const prelazno = proveriPrelaznoOgranicenje(opticaj, vecPrimljenihVerifikacija);
+  if (!prelazno.dozvoljeno) {
+    throw new VerifikacijaGreska(prelazno.razlog, 409);
+  }
+
   // Zabranjena zona (čl. 12, v3.9.2) + zabrana verifikovanja početnih (čl. 14).
   // Stanje zone se preračunava iz izvora istine (graf veza) unutar iste
   // SERIALIZABLE transakcije — keš tabela verification_zone se ne konsultuje
@@ -238,10 +258,8 @@ async function izvrsiJezgroVerifikacije(
 
   // Ažuriraj verifikovanog: indeks = broj veza × 10 (cap 100).
   // Pri prvoj verifikaciji indeks je 10; svaka dodatna podiže za 10 p.p. do 100.
-  const brojVerifikacijaVerifikovanog = await tx.verifikacionaVeza.count({
-    where: { verifikovaniId: verifikovani.id },
-  });
-  const izracunatiIndeks = izracunajIndeks(brojVerifikacijaVerifikovanog);
+  // Broj veza = stanje pre upisa + upravo kreirana (unikatan par + SERIALIZABLE).
+  const izracunatiIndeks = izracunajIndeks(vecPrimljenihVerifikacija + 1);
   // Za nosioce ZRNA indeks je evidencija bez funkcionalnog efekta: zadržavamo
   // status i nikad ne umanjujemo postojeći indeks. (Početni korisnici ovde ne
   // stižu — čl. 14 st. 3 ih blokira kao metu; njihov indeks je fiksno 100.)

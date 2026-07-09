@@ -19,6 +19,11 @@ export const TOKEN_VAZI_SEKUNDI = 2 * 60 * 60; // QR token TTL = 2 sata
 // Čl. 14 (v3.9.2): indeks stvarnosti početnih korisnika iznosi 100% od
 // uspostavljanja naloga i ne proizlazi iz lanca jemstva.
 export const POCETNI_INDEKS = 100;
+// Čl. 22 (v3.9.3, prelazna odredba): dok ukupan opticaj ne dostigne ovaj prag,
+// korisnik može primiti najviše jednu verifikaciju — mreža se u početnom
+// periodu širi isključivo pristupanjem novih korisnika.
+export const PRELAZNI_OPTICAJ_PRAG = 100_000;
+export const PRELAZNI_MAX_PRIMLJENIH = 1;
 
 export type GrafZapis = { verifikatorId: string; verifikovaniId: string };
 
@@ -90,6 +95,30 @@ export function imaPristupVerifikaciji(tip: TipKorisnika, indeks: number): boole
   if (tip === TipKorisnika.NOSILAC_ZRNA) return true;
   if (tip === TipKorisnika.NEVERIFIKOVAN) return false;
   return indeks >= FUNKCIONALNI_PRAG_INDEKSA;
+}
+
+export type ProveraPrelaznogRezultat =
+  | { dozvoljeno: true }
+  | { dozvoljeno: false; razlog: string };
+
+/**
+ * Prelazno ograničenje broja verifikacija (čl. 22, v3.9.3): dok je opticaj
+ * ispod PRELAZNI_OPTICAJ_PRAG, korisnik može primiti najviše jednu verifikaciju.
+ * Primenjuje se prema stanju opticaja u trenutku verifikacije; na pragu
+ * (opticaj >= 100.000) ograničenje ne važi. Opticaj = apsolutna vrednost
+ * protivzapisa Protokola (negativan balans → pozitivan broj).
+ */
+export function proveriPrelaznoOgranicenje(
+  opticaj: number,
+  brojPrimljenihVerifikacija: number
+): ProveraPrelaznogRezultat {
+  if (opticaj >= PRELAZNI_OPTICAJ_PRAG) return { dozvoljeno: true };
+  if (brojPrimljenihVerifikacija < PRELAZNI_MAX_PRIMLJENIH) return { dozvoljeno: true };
+  return {
+    dozvoljeno: false,
+    razlog:
+      "U početnoj fazi sistema (do 100.000 POEN-a opticaja) korisnik može primiti samo jednu verifikaciju (čl. 22 Pravilnika o dokazu stvarnosti).",
+  };
 }
 
 /**
