@@ -1,6 +1,7 @@
 # KOLO — Kontekst za razvoj platforme
 
-*Usaglašeno sa kanonskom dokumentacijom verzije 3.9.0 (folder `dokumentacija 3.9/`).*
+*Usaglašeno sa kanonskom dokumentacijom verzije **3.9.3** (folder `dokumentacija 3.9/`). Ažurnjeno: 13.07.2026.*
+*Ključne izmene od 06.06.2026: Dokaz stvarnosti 3.9.3 (prelazna ograničenja), 3.9.2 (anti-cirkularno + početni 100%), Sistem Lokacija, QR skener plaćanja, avatari u tabelama.*
 
 ## Šta je KOLO
 Participatorni sistem zajedničkog dobra. Evidencija doprinosa,
@@ -91,23 +92,19 @@ postavljanje oglasa/kontakt, upis ZRNA, glasanje (Pravilnik čl. 28).
   verifikator 1.000, verifikovani 1.000, nadzornik 500 (kada
   verifikacija podleže nadzoru)
 - Minimizacija podataka — svesna dizajnerska odluka
-- Tabla zahteva za jemstvo: neverifikovani se predstavlja mreži;
-  istek 30 dana; opcija B — verifikovani može započeti razgovor
-  (poruke) sa podnosiocem koji sme da odgovara i pre verifikacije
+- **Tabla zahteva za jemstvo (v3.9.1+):** neverifikovani se predstavlja mreži; 
+  istek **72 sata** (dopuna 3.9.1); opcija B — verifikovani može započeti razgovor
+  (poruke) sa podnosiocem koji sme da odgovara i pre verifikacije;
+  direktna verifikacija sa table bez QR tokena — `POST /api/tabla-jemstva/[id]/verifikuj`
 
-### Anti-cirkularno pravilo
-- **Automatska provera Protokola** pri svakoj verifikaciji
-- Zabranjeno: verifikator ne sme verifikovati svog verifikatora
-  (recipročno), braću u stablu, ancestralni lanac naviše,
-  descendentni lanac naniže. Dozvoljene su samo druge grane stabla.
-- **Izuzetak: početni korisnici (članovi Upravnog odbora
-  Fondacije) NISU vezani anti-cirkularnim pravilom.** Njihove
-  verifikacije nisu ograničene strukturom verifikacionog stabla
-  jer njihova stvarnost proizlazi iz javnog registra APR-a, ne
-  iz lanca jemstva.
-- Početni korisnici imaju početni indeks 10% bez verifikacije,
-  njihov kapacitet se ne troši, njihove verifikacije ne podležu
-  nadzoru (ista prava kao nosioci ZRNA).
+### Anti-cirkularno pravilo (čl. 12–15, v3.9.2-3.9.3)
+- **Automatska provera Protokola** pri svakoj verifikaciji — unija podstabala svih verifikatora
+- **Simetrična zabranjena zona (v3.9.2):** verifikator verifikacijom **trajno preuzima verifikovanog i celu njegovu zonu** (uključujući kasnija proširenja dinamički); provera ide u **oba smera** — ni meta u podstablu verifikatora, ni verifikator u podstablu mete
+- Starije zabrane (recipročno, ancestralno, descendentno, braća) postaju deo ovog jedinstvenog anti-cirkularnog zahteva
+- Proširenja tuđim verifikacijama se NE prenose na početne — zona početnog raste samo njegovim sopstvenim verifikacijama
+- **Početni korisnici (indeks 100% fiksno, v3.9.2):** osnivačko jezgro Fondacije (APR registar ili odluka UO uz javni identitet), **NE MOGU biti verifikovani** u lancu jemstva (čl. 14 st. 3). Njihove verifikacije nisu ograničene anti-cirkularnim pravilom jer njihova stvarnost proizlazi iz javnog registra, ne iz lanca jemstva.
+- Početni korisnici imaju **indeks 100% od uspostavljanja naloga** (ne dobijaju kroz verifikacije), njihov kapacitet se ne troši, njihove verifikacije ne podležu nadzoru (ista prava kao nosioci ZRNA)
+- **Prelazna ograničenja (v3.9.3):** do opticaja od 100.000 POEN korisnik može primiti **max jednu verifikaciju** — mreža se u početnom periodu širi isključivo pristupanjem novih korisnika, ne rekapilarnom verifikacijom u dubini
 
 ## Četiri principa sistema (nepromenjivi)
 1. Nekonvertibilnost — nijedna jedinica se ne konvertuje u novac
@@ -275,54 +272,70 @@ subordinacije, lične obaveze rada ni naknade).
   pravnog sledbenika po Statutu).
 - Donacije su nepovratne, bez obzira na dalji razvoj sistema.
 
-## Kanonski dokumenti (verzija 3.9.0, folder `dokumentacija 3.9/`)
+## Kanonski dokumenti (verzija 3.9.3, folder `dokumentacija 3.9/`)
 
 **Obavezujući akti (hijerarhija):**
-- Statut KOLO Fondacije — `statut_3_8_0.md`
-- Pravilnik o hijerarhiji akata KOLO sistema — `hijerarhija_3_8_0.md`
-- Pravilnik o KOLO sistemu — `Pravilnik_3_8_0.md` (82 člana, 12 glava)
-- Pravilnik o dokazu stvarnosti — `dokaz_stvarnosti_3_8_0.md`
-- Pravilnik o pokroviteljstvu i donacijama — `donacije_3_8_0.md`
-  (donacije: **11 nivoa, koeficijent 1,00–2,00**; pokroviteljstvo:
+- Statut KOLO Fondacije — `statut_3_8_0.md` (3.8.0, nepromenjeno)
+- Pravilnik o hijerarhiji akata KOLO sistema — `hijerarhija_3_9_0.md` (3.9.0)
+- Pravilnik o KOLO sistemu — `Pravilnik_3_9_0.md` (3.9.0, 82 člana, 12 glava + čl. 82 početni korisnici, čl. 83 stupanje)
+- Pravilnik o dokazu stvarnosti — `dokaz_stvarnosti_3_9_3.md` (**3.9.3** — novi čl. 22, prelazno ograničenje do 100k POEN; 3.9.2 — čl. 12-15 simetrična zona + početni 100%)
+- Pravilnik o pokroviteljstvu i donacijama — `donacije_3_9_0.md` (3.9.0:
+  donacije: **11 nivoa, koeficijent 1,00–2,00**; pokroviteljstvo:
   7 nivoa; obuhvata pravna lica i **preduzetnike**)
-- Pravilnik o operativnom doprinosu — `operativni_3_8_0.md`
-  (predloženi POEN × min(1, L/P); dnevni limit 10% opticaja)
-- Pravilnik o osnivačkom doprinosu — `osnivacki_3_8_0.md`
-- Pravilnik o programima podrške — `programi_podrske_3_8_0.md`
-  (verifikatorska potvrda statusa; anti-malverzacija)
-- Pravilnik o Gornjem Kolu — `gornje_kolo_3_8_0.md`
-  (glasanje, kvorum se ne primenjuje, delegiranje, veto-prag)
+- Pravilnik o operativnom doprinosu — `operativni_3_9_0.md` (3.9.0:
+  predloženi POEN × min(1, L/P); dnevni limit 10% opticaja)
+- Pravilnik o osnivačkom doprinosu — `osnivacki_3_9_0.md` (3.9.0)
+- Pravilnik o programima podrške — `programi_podrske_3_9_0.md` (3.9.0:
+  verifikatorska potvrda statusa; anti-malverzacija)
+- Pravilnik o Gornjem Kolu — `gornje_kolo_3_9_0.md` (3.9.0:
+  glasanje, kvorum se ne primenjuje, delegiranje, veto-prag **3× troškovi**)
 
 **Akti zaštite podataka:**
-- Politika privatnosti — `politika_3_8_0.md`
-- Registar radnji obrade — `radnje_obrade_3_8_0.md` (11 radnji)
-- DPIA (procena uticaja na zaštitu podataka) — `DPIA_3_8_0.md`
+- Politika privatnosti — `politika_3_9_1.md` (**3.9.1** — dopuna: verifikacija sa table)
+- Registar radnji obrade — `radnje_obrade_3_9_0.md` (3.9.0, 13 radnji)
+- DPIA (procena uticaja na zaštitu podataka) — `DPIA_3_9_0.md` (3.9.0)
 
 **Platformski akti:**
-- Uslovi korišćenja — `uslovi_koriscenja_3_8_0.md`
-- Izjava o prihvatanju rizika — `rizici_3_8_0.md`
+- Uslovi korišćenja — `uslovi_koriscenja_3_9_1.md` (**3.9.1** — dopuna: čl. 16 verifikacija sa table)
+- Izjava o prihvatanju rizika — `rizici_3_9_0.md` (3.9.0)
 
 **Konceptualni (neobavezujući) dokument:**
-- Whitepaper — `whitepaper_3_8_0.md`
+- Whitepaper — `whitepaper_3_9_0.md` (3.9.0)
 
 Ignoriši sve starije verzije osim kad korisnik eksplicitno traži.
 Prethodni set (mešane verzije 3.7.2–3.7.6) je u `nova dokumentacija/`;
 v3.7.0 i v2.x su u `dokumentacija/` odnosno `.claude/OLD DOCS/`.
+**EN paritet:** svi dokumenti dostupni i na engleskom u `dokumentacija 3.9/en/` sa disklejmerom „Serbian prevails".
 
 ## Licence
 - Softver: AGPL-3.0
 - Sadržaj: CC BY-SA 4.0
+
+## Nedavne UI/UX izmene (od 05.07 do 13.07.2026)
+- **Sistem — Kartica Lokacije:** pregled područja članstva (10 najčešćih lokacija);
+  prag otključavanja kolektivnih oblika — Krug 5 verifikovanih, Zadruga 50 verifikovanih
+- **QR skener za plaćanje (Novčanik):** kupac može skenirati QR iz prodavčevog modala;
+  automatski se započinje transakcija sa iznosom
+- **Avatari u svim tabelama:** Članovi (Sistem), direktne poruke, Pričaonica — profilne slike uz pseudonime
+- **ZRNO kartica privremeno uklonjena** iz Novčanika (ostaje u sidebaru); može biti vraćena
+- **Login UI preuređen:** registracioni boks na vrhu, forma Prijave, zatim Google/Zaboravljena;
+  rani pristup prihvata kod čak i sa razmakom
 
 ## Konvencije koda
 - Sve poruke i UI na srpskom (latinica)
 - Commit posle svakog završenog koraka
 - pg_dump pre svake Prisma migracije
 - Testovi za svaku POEN aritmetičku operaciju
+- `verification_zone` keš tabela — redovna resinhronizacija u dnevnom cron-u
+- Avatari: R2 skladišta, fallback na disk za dev, legacy base64 tokom migracije
 
-## Trenutni status
-- Dokumentacija konsolidovana i usaglašena na verziju **3.9.0**
-  (06.06.2026); svi akti u folderu `dokumentacija 3.8/`.
+## Trenutni status (ažurirano 13.07.2026)
+- **Dokumentacija konsolidovana i usaglašena na verziju 3.9.3** (09.07.2026 — Pravilnik o dokazu stvarnosti sa prelaznom ograničenjem);
+  3.9.2 (07.07.2026 — anti-cirkularno + početni 100%); 3.9.1 (Politika + Uslovi sa verifikacijom sa table);
+  svi akti u folderu `dokumentacija 3.9/`.
+- **Kod usaglašen:** Dokaz stvarnosti 3.9.3/3.9.2 implementiran sa keš tabelom `verification_zone`, dnevnom resinhronizacijom,
+  prelimirnim ograničenjima; Sistem Lokacija, QR skener plaćanja, avatari u tabelama (do 13.07).
 - Trenutni fokus razvoja: NIJE na modulima (Krugovi, Zadruge,
   Socijalni programi, Deca, Internacionalizacija). Modul sekcija
   ostaje kao referenca o postojećoj arhitekturi, ali se sada
-  ne implementira.
+  ne implementira (odluka vlasnika).
