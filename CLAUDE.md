@@ -70,8 +70,14 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 
 **Promene po verzijama (changelog iz zaglavlja dokumenata):**
-- **Dokaz stvarnosti 3.9.3 (09.07.2026)** — prelazna odredba (novi čl. 22, Glava IX → „Prelazne i završne odredbe"; raniji čl. 22–23 postaju 23–24): dok ukupan opticaj ne dostigne **100.000 POEN**, korisnik može primiti **najviše jednu verifikaciju** — mreža se u početnom periodu širi isključivo pristupanjem novih korisnika. Primena po stanju opticaja u trenutku verifikacije; ranije verifikacije ostaju punovažne, bez retroaktivnosti. Kod: `proveriPrelaznoOgranicenje` (`PRELAZNI_OPTICAJ_PRAG=100_000`, `PRELAZNI_MAX_PRIMLJENIH=1`) u `dokaz-stvarnosti.ts`, provera u jezgru verifikacije (opticaj = |minus Protokola|), poruka greške razlikuje se od zone.
-- **Dokaz stvarnosti 3.9.2 (07.07.2026)** — simetrična zabranjena zona (čl. 12: verifikator verifikacijom trajno preuzima verifikovanog i celu njegovu zonu, uključujući kasnija proširenja; zabrana važi u oba smera; proširenja tuđim verifikacijama se NE prenose na početne korisnike) + čl. 13 (svrha simetrije: prinos ponovljenih verifikacija u istom socijalnom krugu opada). Čl. 14 novi tekst: početni korisnici = osnivačko jezgro Fondacije (APR registar ili odluka UO uz javni identitet), **indeks fiksno 100%** od uspostavljanja naloga, **ne mogu biti verifikovani u lancu jemstva**; čl. 15 st. 2 (verifikovanje početnih) brisan. Kod: tabela-keš `verification_zone`, čiste funkcije `zona.ts` (`recomputeZones` = hronološki replay), sync u transakciji verifikacije, puna rekomputacija posle kaskade/prestanka, backfill `POST /api/admin/verifikacija/zone-recompute`, migracija `20260707120000_verifikaciona_zona` (indeks osnivača → 100).
+- **Dokaz stvarnosti 3.9.3 (09.07.2026, commit `65fa879`)** — **prelazna odredba početka sistema** (novi čl. 22, Glava IX → „Prelazne i završne odredbe"; raniji čl. 22–23 postaju 23–24): 
+  - Dok ukupan opticaj ne dostigne **100.000 POEN**, korisnik može primiti **najviše jednu verifikaciju** — mreža se u početnom periodu širi isključivo pristupanjem novih korisnika (ne rekapilarnom verifikacijom u dubini).
+  - Primena po stanju opticaja u trenutku verifikacije; ranije verifikacije ostaju punovažne, bez retroaktivnosti.
+  - Kod: `proveriPrelaznoOgranicenje()` (`PRELAZNI_OPTICAJ_PRAG=100_000`, `PRELAZNI_MAX_PRIMLJENIH=1`) u `dokaz-stvarnosti.ts` — provera u jezgru verifikacije (opticaj = |minus Protokola|), poruka greške razlikuje se po situaciji (zona vs. početni vs. prelazno ograničenje).
+- **Dokaz stvarnosti 3.9.2 (07.07.2026, commit `d12050d`)** — **anti-cirkularno pravilo i početni korisnici 100%** — čl. 12–15:
+  - **Simetrična zabranjena zona (čl. 12–13):** verifikator verifikacijom **trajno preuzima verifikovanog i celu njegovu zonu** (uključujući kasnija proširenja — dinamički); zabrana važi u **oba smera** — unija podstabala svih verifikatora meta; proširenja tuđim verifikacijama se **ne prenose na početne** korisnike. Svrha: opadanje prinosa ponovljenih verifikacija u istom socijalnom krugu.
+  - **Početni korisnici (čl. 14):** osnivačko jezgro Fondacije (APR registar ili odluka UO uz javni identitet), **indeks fiksno 100%** od uspostavljanja naloga, **ne mogu biti verifikovani** u lancu jemstva; čl. 15 st. 2 (verifikovanje početnih) obrisan.
+  - Kod: tabela-keš `verification_zone` (integralno sa grafom), čiste funkcije `zona.ts` (`recomputeZones` = hronološki replay veza), sync u transakciji verifikacije, puna rekomputacija posle kaskade/prestanka. Migracija `20260707120000_verifikaciona_zona` (indeks osnivača → 100 fiksno).
 - **3.9.0 (16.06.2026)** — lansirna verzija u folderu `dokumentacija 3.9/`. Pravilnik: prelazna odredba o početku sistema (čl. 82, „početni korisnici" = osnivači kao NOSILAC_ZRNA + UO ovlašćenja; izuzetak od čl. 19/32), renumeracija stupanja na snagu → čl. 83. GDPR (Politika/DPIA/Radnje obrade): imenovani obrađivači Vercel/Neon/Cloudflare R2/Resend (SAD), prekogranični prenos, DPO Nikola Šarić, R2 za slike, broj radnji/rizika 12→13. Uslovi: transparentnost donatora (čl. 17), jezici sr/en/hu (čl. 44). Hijerarhija: moduli koji nisu aktivni. Rokovi čuvanja i analitički kolačići (GA + Vercel Analytics) popunjeni. EN paritet svih akata. **Statut nepromenjen (3.8.0).** Loader (`pravni-dokument.ts`) i `messages` repointovani na 3.9.
 - **3.8.0 (06.06.2026)** — konsolidacija celokupne dokumentacije na jedinstvenu verziju 3.8.0 u folderu `dokumentacija 3.8/`, uz otklanjanje neusaglašenosti između akata (vidi „Otklonjene neusaglašenosti" iznad). Sadržinski jednako prethodnom 3.7.x setu osim navedenih ispravki.
 - **Gornje Kolo 3.7.6** — prag gašenja zaštitnog veta (čl. 19) pojednostavljen: sada **jedan uslov — 3× operativni trošak prethodnog meseca**; ukinut raniji dvostruki kumulativni uslov iz 3.7.5 (24× prosečni mesečni trošak rezerve + 12-mes. samoodrživost).
@@ -85,11 +91,11 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
-> **CLAUDE.md sinhronizovan sa kodom do commita `120d578` (2026-06-16).** Posle 2026-06-13 najviše kozmetičkih UI izmena (Profil/Pijaca/Novčanik/Početna raspored, header jezik switcher, fontovi); činjenične izmene unete iznad: Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, terminologija „emisija" → „evidencija doprinosa".
+> **CLAUDE.md sinhronizovan sa kodom do commita `077fbca` (2026-07-09).** Ažurna do 2026-07-13 sa glavnim promenama: **Dokaz stvarnosti 3.9.3** (prelazno ograničenje do 100.000 POEN), **3.9.2** (simetrična zabranjena zona, početni korisnici 100%), **anti-cirkularno pravilo**, **Sistem kartica Lokacije**, **QR skener za plaćanje** u novčaniku, **avatari u svim tabelama/porukama**, **privremeno uklonjena ZRNO kartica iz Novčanika**.
 
-## Status usklađenosti (24.05.2026 → 02.06.2026)
-**Kod je u velikoj meri usklađen sa v3.7.5/3.7.4/3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
-- ✅ **Dokaz stvarnosti / Verifikacija** — implementiran (tri statusa, indeks 0–100, lanac jemstva, anti-cirkularno, QR token, kamera skener, nadzor, mini stablo)
+## Status usklađenosti (24.05.2026 → 13.07.2026)
+**Kod je u velikoj meri usklađen sa v3.9.3/3.9.2/3.9.0/3.8.0/v3.7.5/3.7.4/3.7.3/3.7.2.** Zadnjih ~30 dana su dodate Dokaz stvarnosti 3.9.3 i 3.9.2 sa anti-cirkularnim pravilom, početnim korisnicima, sistemom Lokacija, skenerom plaćanja, avatarima u svim tabelama. Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
+- ✅ **Dokaz stvarnosti / Verifikacija** — implementiran (v3.9.3/3.9.2: tri statusa, indeks 0–100, lanac jemstva, **anti-cirkularno pravilo sa simetričnom zonom**, **početni korisnici indeks 100% fiksno**, **prelazno ograničenje do 100.000 POEN max 1 verifikacija**, QR token, kamera skener, nadzor, mini stablo, `zona.ts` keš, resinhronizacija dnevnom cronnom)
 - ✅ **Legacy LK/JMBG verifikacija UKLONJENA** (commit `f2f6575`, migracija `20260526120000_ukloni_lk_jmbg`) — nema više upload-a dokumenata, JMBG-a, `VerifikacijaPristanak` tabele, admin pregleda dokumenata
 - ✅ **Tabla zahteva za jemstvo** — implementirana (`ZahtevZaJemstvo`, `/tabla-jemstva`, istek cron)
 - ✅ **Poništavanje lažne verifikacije** sa rekurzivnom kaskadom (`lazna-verifikacija.ts`)
@@ -107,6 +113,12 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **Tabela donacija usklađena** — `donacija.ts` `RANG_TABELA` ima **11 nivoa, 1,00×→2,00×**, identično `donacije_3_7_3.md` čl. 4 (testovi pokrivaju)
 - ✅ **Operativni doprinos usklađen** — model **predloženog POEN-a × min(1, L/P)** u okviru dnevnog limita (`programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (ne admin proizvoljno). Model satnice (`hourlyRate`/`hoursWorked`) uklonjen; PED i doprinos-oglasi konsolidovani u jedan tok
 - ✅ **„kurs" u srpskim prevodima** sređen → „Koeficijent" / „koeficijent evidencije" (`messages/sr.json`, ZRNO/donacije ekrani); interni identifikatori (`trendsKurs`, `.kurs`, `{kurs}`, ključevi) i en/hu „Rate"/„Árfolyam" ostaju
+- ✅ **UI izmene (od 2026-07-07 do 2026-07-13):**
+  - **Sistem kartica Lokacije** — pregled područja članstva, prag otključavanja Kruga (5 verifikovanih) / Zadruge (50 verifikovanih)
+  - **Avatari u svim tabelama** — Članovi, direktne poruke, Pričaonica (od 2026-07-11)
+  - **QR skener za plaćanje** — kupac može skenirati QR iz prodavčevog modala (od 2026-07-10)
+  - **ZRNO kartica privremeno uklonjena iz Novčanika** (do daljnjeg; ostaje u sidebaru)
+  - **Login UI preuredjen** — redosled registracije→prijava→Google; rani pristup sa razmakom u kodu
 - 🔴 Moduli (Zadruga, Modul Deca, internacionalizacija, Glava VIII) — nisu fokus razvoja po odluci vlasnika
 
 **Tri statusa korisnika:** Neverifikovani / Verifikovani / Nosilac ZRNA. NE POSTOJE organizatorske titule (zagovornik/aktivista/glasnik/šampion); NE POSTOJI "apostol" ni "Pokret" kao modul.
@@ -148,7 +160,9 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - **Funkcionalni prag:** indeks ≥ 10% = pun pristup; < 10% = verifikovan ali bez pristupa.
 - **Verifikacioni kapacitet** = `⌊indeks/10⌋`.
 - POEN emisija pri verifikaciji: **verifikator 1.000, verifikovani 1.000, nadzornik 500** (kada podleže nadzoru).
-- **Simetrična zabranjena zona (čl. 12, v3.9.2):** pored starih zabrana (recipročno, ancestralno, descendentno, braća) verifikator verifikacijom **trajno preuzima verifikovanog i celu njegovu zonu** (uključujući kasnija proširenja — dinamički); provera ide u **oba smera** (ni meta u zoni verifikatora, ni verifikator u zoni mete). Proširenja tuđim verifikacijama se **ne prenose na početne** — zona početnog raste samo njegovim sopstvenim verifikacijama. Keš tabela `verification_zone` (izvor istine = graf veza); čiste funkcije `zona.ts` (`recomputeZones` = hronološki replay, `proveriDozvoluVerifikacije`); sync u istoj transakciji sa upisom; posle kaskade/prestanka puna rekomputacija (`preracunajZoneUBazi`); backfill `POST /api/admin/verifikacija/zone-recompute` (jednokratno posle deploy-a). **Početni ne može biti meta verifikacije** (čl. 14 st. 3; posebna poruka greške, pokriva i raniju zabranu osnivač→osnivač); tabla jemstva vraća `verifikacijaBlokirana: "zona"|"pocetni"` po posmatraču i skriva dugme.
+- **Anti-cirkularno pravilo (čl. 12–13, v3.9.2-3.9.3):** verifikator verifikacijom **trajno preuzima verifikovanog i celu njegovu zonu** (uključujući kasnija proširenja — dinamički); provera ide u **oba smera** — ni meta ne može biti u bilo kojoj podstabli verifikatora, ni obrnuto. Sve starije zabrane (recipročno, ancestralno, descendentno, braća) postaju deo ovog jedinstvenog anti-cirkularnog zahteva. Proširenja tuđim verifikacijama se **ne prenose na početne** — zona početnog raste samo njegovim sopstvenim verifikacijama. 
+  - Keš tabela `verification_zone` (izvor istine = graf veza); čiste funkcije `zona.ts` (`recomputeZones` = hronološki replay, `proveriDozvoluVerifikacije`); sync u istoj transakciji sa upisom; posle kaskade/prestanka puna rekomputacija (`preracunajZoneUBazi`). Dnevni cron `POST /api/cron/nocna-emisija` resinhronizuje keš. Backfill `POST /api/admin/verifikacija/zone-recompute` (obavezno posle deploy-a kada se code izmenio).
+  - **Početni korisnici** (indeks 100%, osnivači) **ne mogu biti meta verifikacije** (čl. 14 st. 3; posebna poruka greške, pokriva i raniju zabranu osnivač→osnivač); tabla jemstva vraća `verifikacijaBlokirana: "zona"|"pocetni"` po posmatraču i skriva dugme.
 - Modeli: `VerifikacionaVeza` (graf), `VerifikacionaZona` (keš zone), `VerifikacijaToken` (QR, 60s).
 - UI: `/verifikacija` (QR + skener kamere), `/nadzor` (POCETNI/NOSILAC_ZRNA), profil sa javnim indeksom i mini stablom.
 - Lib: `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` (kaskadno poništavanje).
@@ -232,8 +246,9 @@ docs/             — interne radne beleške (nije normativa)
 
 ## Implementirane funkcionalnosti
 
-### Autentikacija i korisnici
+### Autentikacija i korisnici — Ažurirana (od 2026-07-07)
 - Registracija (pseudonim, email, lozinka), login (NextAuth credentials), OAuth tok (`/api/oauth`, `/oauth/dovrsi`), reset lozinke (`/api/zaboravljena-lozinka`, `/api/reset-lozinka`).
+- **Login UI (od 2026-07-07):** redosled kontrola — registracioni boks na vrhu, zatim forma Prijave, zatim Google/Zaboravljena lozinka; pojedinačne dugme akcije (bez duplikatnog "Nemate nalog"); **rani pristup** može prihvatiti pristupni kod čak i sa razmakom.
 - **Verifikacija = dokaz stvarnosti kroz lanac jemstva, bez dokumenata/JMBG-a** (vidi „Dokaz stvarnosti"). Legacy LK/JMBG tok je UKLONJEN.
 - Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. **Email se NE prikazuje u podešavanjima profila** (uklonjen, commit `4492bcf`; i dalje se koristi pri registraciji/loginu). **Promena pseudonima bez odjave** (commit `ba4c505`). Vidljivost se bira uz svako polje. Javni profil `/profil/[id]` (POEN/ZRNO/rang/oglasi uvek vidljivi).
 - Suspenzija/isključenje (admin).
@@ -253,9 +268,11 @@ docs/             — interne radne beleške (nije normativa)
 ### Audit log
 - `ADMIN_EKSPORT_PODATAKA` pri admin eksportu. (Legacy `PRISTUP_DOKUMENT_VERIFIKACIJA`/`PRISTUP_JMBG_PODACI` događaji više nisu relevantni — bez dokumenata/JMBG-a.)
 
-### Novčanik (POEN)
+### Novčanik (POEN) — Ažuriran (od 2026-07-09)
 - Prikaz stanja; prenos POEN-a (ažuriranje evidencije 1:1, bez provizije; `/api/transfer`); istorija sa filterima; klikabilni pseudonimi; QR modal (`/m/[hash]`).
 - Vidljivost transakcija gradirana po ulozi (vidi `/api/javno/feed`).
+- **⚠️ ZRNO kartica privremeno UKLONJENA (od 2026-07-09)** — ostaje dostupna u sidebaru, ali je skrivena iz glavne oblasti Novčanika. Može biti vraćena ili premešćena na drugu lokaciju po odluci.
+- **QR skener za plaćanje (novo, 2026-07-10):** kupac može da skenira QR kod iz prodavčevog QR modala; automatski se započinje transakcija sa predloženim iznosom.
 
 ### Poruke (Chat 1-na-1)
 - `/poruke` split-panel; polling 5s; badge nepročitanih; Enter/Shift+Enter; mobilni view; „Kontaktiraj prodavca" na oglasu; notifikacija primaocu.
@@ -266,8 +283,9 @@ docs/             — interne radne beleške (nije normativa)
 - **Bez jedinice mere i stanja (količine)** — uklonjeni iz UI i API (commit `ed846fd`); `src/lib/jedinice.ts` obrisan.
 - **Slike oglasa na Cloudflare R2 (od 2026-06-15, commit `8132edb`):** upload ide preko `sacuvajNaR2` (`src/lib/skladiste.ts`) kad je R2 konfigurisan; u bazu se upisuje javni URL. **Disk fallback** (`storage/oglasi/...`) za lokalni dev kad R2 nije konfigurisan. Ruta `slika/[listingId]/[idx]` radi 308 redirect na apsolutne https URL-ove (R2/CDN); legacy disk putanje i dalje rade. (Raniji Vercel Blob tok napušten — vidi Tech stack; `@vercel/blob` dep i `BLOB_READ_WRITE_TOKEN` reference ostaju neiskorišćene.)
 
-### Pretraga članova
+### Pretraga članova — Ažurirana (od 2026-07-11)
 - `ClanPretraga` (debounce 250ms, keyboard nav). Klikabilni pseudonimi u tabelama.
+- **Avatari u svim tabelama (od 2026-07-11):** kartica Članovi na Sistemu, direktne poruke, Pričaonica — prikazuju profilne slike uz pseudonime za brže prepoznavanje.
 
 ### Krugovi
 - Osnivanje (≥5 verifikovanih); Fondacija proverava formalnu ispravnost; pristupnica; napuštanje (`DELETE /api/krugovi/[id]`); aktivnosti (PRIKUPLJANJE/REDISTRIBUCIJA); bonus pragovi rasta (vidi sekciju Krug).
@@ -316,8 +334,9 @@ docs/             — interne radne beleške (nije normativa)
 ### Početna (`/pocetna`)
 - Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
 
-### Sistem (`/sistem`)
-- `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
+### Sistem (`/sistem`) — Ažuriran (od 2026-07-08)
+- `/dashboard` redirectuje na `/sistem`. Lični pregled + **5 kartica** (Članovi, **Lokacije**, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
+- **Kartica Lokacije (nova, 2026-07-08):** pregled **područja članova** — kolektivni oblici se otključavaju po pragovima (Krug: 5 verifikovanih, Zadruga: 50 verifikovanih — prilagođeni slučaj). Prikaz mape sa markacama članstva po lokaciji.
 
 ### Blog (Vesti Fondacije)
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
