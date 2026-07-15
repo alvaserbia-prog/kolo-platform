@@ -143,6 +143,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
   const router = useRouter();
   const t = useTranslations("header");
   const [open, setOpen] = useState(false);
+  const [imageError, setImageError] = useState(false);
   // Avatar iz keširanog /api/me; `avatar-updated` event invalidira keš (bridge).
   const { data: me } = useMe();
   const avatar = me?.avatar ?? null;
@@ -156,6 +157,11 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
     return () => document.removeEventListener("mousedown", handleClick);
   }, [open]);
 
+  // Resetuj error state kada se avatar prosledi (nova slika)
+  useEffect(() => {
+    setImageError(false);
+  }, [avatar]);
+
   const inicijal = pseudonim.charAt(0).toUpperCase();
 
   return (
@@ -165,15 +171,30 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
         className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-white/20 hover:ring-white/50 transition-all shrink-0"
         aria-label={t("aria_profil")}
       >
-        {avatar ? (
+        {avatar && !imageError ? (
           avatar.startsWith("http") ? (
             // R2 URL → next/image: optimizuje (256→36px, AVIF/WebP) i kešira dugo
             // (minimumCacheTTL), pa se avatar ne preuzima iznova na svakoj stranici.
-            <Image src={avatar} alt={pseudonim} width={36} height={36} className="w-full h-full object-cover" />
+            <Image
+              src={avatar}
+              alt={pseudonim}
+              width={36}
+              height={36}
+              className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
+            />
           ) : (
             // Legacy base64 data: URI — next/image ne optimizuje data URL-ove.
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={avatar} alt={pseudonim} width={36} height={36} decoding="async" className="w-full h-full object-cover" />
+            <img
+              src={avatar}
+              alt={pseudonim}
+              width={36}
+              height={36}
+              decoding="async"
+              className="w-full h-full object-cover"
+              onError={() => setImageError(true)}
+            />
           )
         ) : (
           <div className="w-full h-full bg-kolo-green-500 flex items-center justify-center text-white font-bold text-xs">
