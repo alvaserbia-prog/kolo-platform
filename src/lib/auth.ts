@@ -1,11 +1,9 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { cookies } from "next/headers";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
-import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 import { normalizujEmail } from "@/lib/validacija";
 import { rateLimit } from "@/lib/rate-limit";
@@ -26,19 +24,6 @@ function imaPunPristup(verified: boolean, indeksStvarnosti: number): boolean {
 // objašnjenje u jwt callbacku. 5 min = razuman kompromis brzina/svežina.
 const OSVEZI_INTERVAL_MS = 5 * 60 * 1000;
 
-/**
- * Dok je MAINTENANCE_MODE uključen, prijava je dozvoljena samo ranim prihvatiocima
- * koji su otključali pristup (validan kolačić ranog pristupa).
- */
-async function ulazDozvoljen(): Promise<boolean> {
-  if (process.env.MAINTENANCE_MODE !== "true") return true;
-  try {
-    const c = await cookies();
-    return validanRaniPristup(c.get(RANI_PRISTUP_COOKIE)?.value);
-  } catch {
-    return false;
-  }
-}
 
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
@@ -74,7 +59,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Lozinka", type: "password" },
       },
       async authorize(credentials) {
-        if (!(await ulazDozvoljen())) return null;
         if (!credentials?.email || !credentials?.password) return null;
 
         const emailNorm = normalizujEmail(credentials.email);
@@ -105,8 +89,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
-      if (!(await ulazDozvoljen())) return false;
-
       // Credentials — provera je u authorize()
       if (account?.provider === "credentials") return true;
 

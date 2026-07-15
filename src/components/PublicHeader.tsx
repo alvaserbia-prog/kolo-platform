@@ -9,7 +9,6 @@ import { getTranslations } from "next-intl/server";
 
 export default async function PublicHeader() {
   const session = await getServerSession(authOptions);
-  const maintenance = process.env.MAINTENANCE_MODE === "true";
   const t = await getTranslations("javneKomponente");
 
   return (
@@ -25,15 +24,10 @@ export default async function PublicHeader() {
           </div>
         </div>
 
-        <PublicNav isLoggedIn={!!session} maintenance={maintenance} />
+        <PublicNav isLoggedIn={!!session} />
 
         <div className="hidden md:flex items-center gap-3 shrink-0">
-          {maintenance ? (
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 border border-kolo-border rounded-full text-xs font-medium text-kolo-muted">
-              <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-600" />
-              {t("header_uskoro")}
-            </span>
-          ) : session ? (
+          {session ? (
             <Link
               href="/dashboard"
               className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"

@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
-import { RANI_PRISTUP_COOKIE, validanRaniPristup } from "@/lib/rani-pristup";
 import { normalizujEmail, validanEmail, validanPseudonim } from "@/lib/validacija";
 import { rateLimit, klijentIP } from "@/lib/rate-limit";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
@@ -23,16 +22,6 @@ export async function POST(req: NextRequest) {
     const rl = rateLimit(`registracija:${klijentIP(req)}`, 10, 60 * 60 * 1000);
     if (!rl.ok) {
       return NextResponse.json({ error: "Previše pokušaja. Pokušajte kasnije." }, { status: 429 });
-    }
-
-    if (
-      process.env.MAINTENANCE_MODE === "true" &&
-      !validanRaniPristup(req.cookies.get(RANI_PRISTUP_COOKIE)?.value)
-    ) {
-      return NextResponse.json(
-        { error: "Registracija je trenutno onemogućena. Platforma se priprema za pokretanje." },
-        { status: 503 },
-      );
     }
 
     const body = await req.json();

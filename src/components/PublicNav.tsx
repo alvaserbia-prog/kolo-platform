@@ -9,10 +9,9 @@ import { useTranslations } from "next-intl";
 
 type Props = {
   isLoggedIn: boolean;
-  maintenance?: boolean;
 };
 
-export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
+export default function PublicNav({ isLoggedIn }: Props) {
   const t = useTranslations("javneKomponente");
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname() || "/";
@@ -158,12 +157,7 @@ export default function PublicNav({ isLoggedIn, maintenance = false }: Props) {
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-3">
-              {maintenance ? (
-                <span className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-kolo-border rounded-xl text-base font-medium text-kolo-muted">
-                  <span className="w-1.5 h-1.5 rounded-full bg-kolo-gold-600" />
-                  {t("header_uskoro_pocinemo")}
-                </span>
-              ) : isLoggedIn ? (
+              {isLoggedIn ? (
                 <Link
                   href="/dashboard"
                   onClick={() => setMobileOpen(false)}
