@@ -51,6 +51,25 @@ export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
           }
         );
       })
+      .then(() => {
+        // Forsira video element da bude kvadratan — html5-qrcode generiše video
+        // sa specifičnim dimenzijama, trebaju nam CSS override-i
+        const container = document.getElementById(SKENER_REGION_ID);
+        if (!container) return;
+        const video = container.querySelector("video");
+        const canvas = container.querySelector("canvas");
+        if (video) {
+          video.style.width = "100%";
+          video.style.height = "100%";
+          video.style.objectFit = "cover";
+          video.style.display = "block";
+        }
+        if (canvas) {
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+          canvas.style.display = "block";
+        }
+      })
       .catch((e: unknown) => {
         const msg = e instanceof Error ? e.message : String(e);
         if (
@@ -87,21 +106,7 @@ export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
         id={SKENER_REGION_ID}
         className="w-full max-w-sm mx-auto rounded-xl overflow-hidden bg-black"
         style={{ aspectRatio: "1 / 1" }}
-      >
-        {/* Fallback CSS za video element — html5-qrcode generiše video koji može biti drugačitih dimenzija */}
-        <style>{`
-          #${SKENER_REGION_ID} video {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover;
-          }
-          #${SKENER_REGION_ID} canvas {
-            width: 100% !important;
-            height: 100% !important;
-            display: block !important;
-          }
-        `}</style>
-      </div>
+      />
       {error && (
         <div className="text-sm text-kolo-danger bg-kolo-danger-light border border-kolo-danger-light rounded-xl p-3">
           {error}
