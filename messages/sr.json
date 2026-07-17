@@ -123,6 +123,7 @@
     "greska_pogresni_podaci": "Pogrešan email ili lozinka.",
     "greska_registruj_cta": "Nemate nalog? Registrujte se",
     "greska_prijava": "Greška pri prijavi. Pokušajte ponovo.",
+    "greska_oauth": "Prijava preko Google-a nije uspela. Pokušajte ponovo.",
     "nema_naloga": "Nemate nalog?",
     "registrujte_se": "Registrujte se",
     "zaboravljena_lozinka": "Zaboravljena lozinka?",

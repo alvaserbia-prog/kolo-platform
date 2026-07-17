@@ -115,6 +115,7 @@
     "greska_lozinka_obavezna": "A jelszó kötelező.",
     "greska_pogresni_podaci": "Helytelen email vagy jelszó.",
     "greska_prijava": "Bejelentkezési hiba. Kérjük próbálja újra.",
+    "greska_oauth": "A Google-bejelentkezés nem sikerült. Kérjük, próbálja újra.",
     "nema_naloga": "Nincs még fiókja?",
     "registrujte_se": "Regisztráljon",
     "zaboravljena_lozinka": "Elfelejtett jelszó?",
