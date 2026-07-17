@@ -13,6 +13,11 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const registered = searchParams.get("registered");
   const callbackUrl = searchParams.get("callbackUrl");
+  // NextAuth posle neuspelog OAuth callback-a (npr. „state mismatch" / istekao
+  // state cookie) vraća na /login?error=... — bez ovoga korisnik ne vidi
+  // nikakvu poruku i deluje kao da je sajt pukao. Poruka je generička jer
+  // error kod ovde stiže samo iz OAuth (Google) toka.
+  const oauthError = searchParams.get("error");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -88,6 +93,12 @@ export default function LoginForm() {
         {registered && (
           <div className="mb-5 text-sm text-kolo-green-700 bg-kolo-green-100 rounded-xl px-4 py-3">
             {t("nalog_kreiran")}
+          </div>
+        )}
+
+        {oauthError && !error && (
+          <div className="mb-5 text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">
+            {t("greska_oauth")}
           </div>
         )}
 

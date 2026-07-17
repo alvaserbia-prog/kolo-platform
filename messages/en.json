@@ -123,6 +123,7 @@
     "greska_pogresni_podaci": "Wrong email or password.",
     "greska_registruj_cta": "Don't have an account? Sign up",
     "greska_prijava": "Sign in error. Please try again.",
+    "greska_oauth": "Google sign-in didn't complete. Please try again.",
     "nema_naloga": "Don't have an account?",
     "registrujte_se": "Register",
     "zaboravljena_lozinka": "Forgot password?",

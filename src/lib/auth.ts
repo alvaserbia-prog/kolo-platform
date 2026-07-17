@@ -42,10 +42,34 @@ export async function uniqueMemberHash(): Promise<string> {
   return hash;
 }
 
+// Da li cookie-ji idu sa `Secure` + `__Secure-` prefiksom — isto pravilo kojim
+// NextAuth v4 bira svoje default-e (https baza → secure). Lokalni dev (http)
+// mora bez prefiksa, inače browser odbija cookie.
+const koristiSecureCookies = (
+  process.env.NEXTAUTH_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "")
+).startsWith("https://");
+
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
+  },
+  cookies: {
+    // OAuth state cookie: NextAuth v4 default traje 15 min (900s). Korisnik koji
+    // na Google ekranu za izbor naloga provede duže (zaključan telefon, pauza)
+    // vraća se sa isteklim cookie-jem → „State cookie was missing" i prijava
+    // pada. Produženo na 1h; ostala podešavanja identična v4 default-u.
+    state: {
+      name: `${koristiSecureCookies ? "__Secure-" : ""}next-auth.state`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: koristiSecureCookies,
+        maxAge: 60 * 60,
+      },
+    },
   },
   providers: [
     GoogleProvider({
