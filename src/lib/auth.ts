@@ -205,11 +205,14 @@ export const authOptions: NextAuthOptions = {
         // najviše jednom u OSVEZI_INTERVAL_MS; između toga se koriste vrednosti
         // iz JWT-a. Posledica: promena admin/verified/pseudonim statusa se vidi
         // sa zakašnjenjem do tog intervala (npr. novom adminu /admin proradi za
-        // ≤ par minuta umesto odmah) — prihvatljiv kompromis za brzinu. Tok koji
-        // mora odmah da vidi promenu i dalje koristi `trigger === "update"` granu.
+        // ≤ par minuta umesto odmah) — prihvatljiv kompromis za brzinu.
+        // IZUZETAK: `trigger === "update"` (klijent pozvao `useSession().update()`)
+        // zaobilazi interval — tok koji mora ODMAH da vidi promenu (npr. korisnik
+        // upravo verifikovan → sme da postavlja oglase bez re-logina) eksplicitno
+        // forsira refetch, pa se nov status upiše u JWT cookie bez odjave.
         const sada = Date.now();
         const osvezenoAt = (token.osvezenoAt as number | undefined) ?? 0;
-        if (sada - osvezenoAt > OSVEZI_INTERVAL_MS) {
+        if (trigger === "update" || sada - osvezenoAt > OSVEZI_INTERVAL_MS) {
           try {
             const dbUser = await prisma.user.findUnique({
               where: { id: token.id as string },

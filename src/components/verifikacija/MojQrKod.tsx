@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import UspehKartica from "@/components/UspehKartica";
 
@@ -37,6 +38,11 @@ function formatPreostalo(sekundi: number): string {
 }
 export default function MojQrKod() {
   const router = useRouter();
+  // `update()` forsira refetch JWT-a iz baze (auth.ts preskače 5-min interval na
+  // "update" trigger) — bez ovoga bi tek verifikovan korisnik do 5 min i dalje
+  // bio "neverifikovan" (nema postavljanja oglasa) dok se ne izloguje/uloguje.
+  const { update: osveziSesiju } = useSession();
+  const osveziRef = useRef<Promise<unknown> | null>(null);
   const [token, setToken] = useState<Token | null>(null);
   const [preostalo, setPreostalo] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -99,6 +105,11 @@ export default function MojQrKod() {
           setIndeksPriUspehu(sada.indeks);
           setObavestenje("uspeh");
           if (pollerRef.current) clearInterval(pollerRef.current);
+          // Odmah upiši nov verified status u sesiju (JWT cookie) i osveži
+          // serverske komponente (sidebar, gejtovi) — korisnik ne mora re-login.
+          osveziRef.current = osveziSesiju()
+            .then(() => router.refresh())
+            .catch(() => {});
         }
       } catch {
         // ignoriši mrežne greške u pollingu
@@ -107,7 +118,7 @@ export default function MojQrKod() {
     return () => {
       if (pollerRef.current) clearInterval(pollerRef.current);
     };
-  }, [token, obavestenje, router]);
+  }, [token, obavestenje, router, osveziSesiju]);
 
   const istekao = preostalo === 0 && token !== null && !obavestenje;
   const formatBroj = token
@@ -125,7 +136,12 @@ export default function MojQrKod() {
           </>
         }
         dugmeTekst="Idi na Pijacu"
-        onDugme={() => router.push("/pijaca")}
+        onDugme={async () => {
+          // Sačekaj da osvežena sesija stigne u cookie pre navigacije — inače bi
+          // munjevit klik odveo na Pijacu sa još starim (neverifikovanim) JWT-om.
+          if (osveziRef.current) await osveziRef.current;
+          router.push("/pijaca");
+        }}
       />
     );
   }
