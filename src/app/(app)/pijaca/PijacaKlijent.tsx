@@ -307,6 +307,23 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
           ))}
         </div>
       )}
+
+      {/* Plutajuće dugme za novi oglas — uvek dostupno bez skrolovanja na vrh.
+          Na mobilnom samo krug sa plusom, na širim ekranima plus + tekst. */}
+      {isVerified && (
+        <Link
+          href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
+          aria-label={jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+          className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-kolo-green-700 text-white rounded-full shadow-lg hover:bg-kolo-green-900 active:scale-95 transition-all p-4 sm:py-3 sm:px-5"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          <span className="hidden sm:inline text-sm font-semibold">
+            {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+          </span>
+        </Link>
+      )}
     </div>
   );
 }
