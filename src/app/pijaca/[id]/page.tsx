@@ -6,17 +6,10 @@ import { prisma } from "@/lib/prisma";
 import { SITE_NAME, SITE_DESCRIPTION, absoluteUrl } from "@/lib/seo";
 import OglasDetalj from "../../(app)/pijaca/[id]/OglasDetalj";
 
-// Apsolutni URL slike oglasa za OG/Twitter karticu (Facebook, Viber, WhatsApp…).
-// R2/CDN slike su već apsolutne — koristimo ih direktno. Legacy disk putanje
-// služe se preko API rute (apsolutizovane na kanonski domen). Bez slike →
-// vraća undefined, pa OG nasleđuje podrazumevanu dinamičku sliku iz opengraph-image.tsx.
-function ogSlikaUrl(images: string[], id: string): string | undefined {
-  if (images.length === 0) return undefined;
-  const prva = images[0];
-  if (/^https?:\/\//i.test(prva)) return prva;
-  return absoluteUrl(`/api/pijaca/slika/${id}/0`);
-}
-
+// og:image NE navodimo ovde — obezbeđuje ga susedni `opengraph-image.tsx`
+// (1200×630 PNG sa fotografijom oglasa + og:image:width/height/type), što je
+// jedini oblik koji Viber/Messenger pouzdano prikazuju pri prvom deljenju.
+// Twitter/X bez sopstvene slike pada nazad na og:image.
 export async function generateMetadata({
   params,
 }: {
@@ -25,13 +18,12 @@ export async function generateMetadata({
   const { id } = await params;
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
-    select: { title: true, description: true, images: true },
+    select: { title: true, description: true },
   });
   if (!listing) return {};
 
   // Opis sa kartice (početni deo), fallback na opšti opis sistema.
   const opis = (listing.description?.trim() || SITE_DESCRIPTION).slice(0, 200);
-  const slika = ogSlikaUrl(listing.images, id);
   const putanja = `/pijaca/${id}`;
 
   return {
@@ -44,13 +36,11 @@ export async function generateMetadata({
       siteName: SITE_NAME,
       title: listing.title,
       description: opis,
-      ...(slika ? { images: [{ url: slika }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: listing.title,
       description: opis,
-      ...(slika ? { images: [slika] } : {}),
     },
   };
 }
