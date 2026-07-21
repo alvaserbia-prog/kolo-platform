@@ -71,15 +71,24 @@ export interface KanalStatus {
   sledeciPrag: number;
 }
 
+/**
+ * Singleton red kanala. Migracija ga ubacuje, ali baza podignuta bez migracionog
+ * SQL-a (db push / ručni reset) ostaje bez njega — zato se ovde kreira po potrebi
+ * umesto da se baca izuzetak koji obara status endpoint i admin tab.
+ */
+async function dohvatiIliKreirajKanal() {
+  return prisma.osnivackiKanal.upsert({
+    where: { id: "singleton" },
+    update: {},
+    create: { id: "singleton" },
+  });
+}
+
 export async function dohvatiStatusKanala(): Promise<KanalStatus> {
   const [kanal, ukupanPoen] = await Promise.all([
-    prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } }),
+    dohvatiIliKreirajKanal(),
     izracunajUkupanPoen(),
   ]);
-
-  if (!kanal) {
-    throw new Error("OsnivackiKanal singleton nije inicijalizovan.");
-  }
 
   return {
     ukupnoEvidentirano: kanal.ukupnoEvidentirano,
@@ -105,8 +114,7 @@ export async function proveriIEvidentirajKorak(): Promise<{
   zatvoren: boolean;
   poruka: string;
 }> {
-  const kanal = await prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } });
-  if (!kanal) throw new Error("OsnivackiKanal nije inicijalizovan.");
+  const kanal = await dohvatiIliKreirajKanal();
 
   if (kanal.zatvoren) {
     return { evidentiranoKoraka: 0, zatvoren: true, poruka: "Kanal je trajno zatvoren." };
