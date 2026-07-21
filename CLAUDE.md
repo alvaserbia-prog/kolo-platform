@@ -252,6 +252,7 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Audit log
 - `ADMIN_EKSPORT_PODATAKA` pri admin eksportu. (Legacy `PRISTUP_DOKUMENT_VERIFIKACIJA`/`PRISTUP_JMBG_PODACI` događaji više nisu relevantni — bez dokumenata/JMBG-a.)
+- **Puna pokrivenost mutirajućih admin ruta (od 2026-07-21):** `logAdminAkcija` (`src/lib/audit.ts`) sada zovu i: programi (odobri/odbij prijavu, toggle), doprinos-oglasi (kreiranje/zatvaranje oglasa, odobri/odbij prijavu i evidenciju — loguje se i kad akciju izvrši nosilac ZRNA, ne samo admin), glasanje (izvršenje odluke, veto, odgovor UO na preporuku), Fondacija troškovi (dodat/obrisan), pokrovitelj doprinos, krugovi (odobri/odbij osnivanje, pristupnica), osnivači (dodat/obrisan), manuelni okidači (noćna emisija, ZRNO noćna + toggle tržišta, osnivački triger). Ranije su se logovale samo akcije nad korisnicima, donacije, blog, politika, pokroviteljstvo potvrda/odbijanje, nadzor i tabla jemstva — zato je audit log u admin panelu delovao „zaglavljen" čim se dnevna aktivnost svede na nepokrivene akcije.
 
 ### Novčanik (POEN)
 - Prikaz stanja; prenos POEN-a (ažuriranje evidencije 1:1, bez provizije; `/api/transfer`); istorija sa filterima; klikabilni pseudonimi; QR modal (`/m/[hash]`).

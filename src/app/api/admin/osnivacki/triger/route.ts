@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * POST /api/admin/osnivacki/triger
@@ -16,6 +17,7 @@ export async function POST() {
 
   try {
     const rezultat = await proveriIEvidentirajKorak();
+    await logAdminAkcija(session.user.id, "OSNIVACKI_TRIGER_MANUELNO");
     return NextResponse.json(rezultat);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });

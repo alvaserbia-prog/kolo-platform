@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 async function proveriAdmin() {
   const session = await getServerSession(authOptions);
@@ -53,6 +54,9 @@ export async function POST(req: NextRequest) {
   const osnivac = await prisma.osnivac.create({
     data: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena },
   });
+
+  await logAdminAkcija(auth.session.user.id, "OSNIVAC_DODAT", userId,
+    `udeo ${udeoBrojilac}/${udeoImenilac}, r.br. ${redniBroj}`);
 
   return NextResponse.json({ osnivac });
 }

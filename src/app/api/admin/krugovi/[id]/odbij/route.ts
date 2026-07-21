@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 export async function POST(
   req: NextRequest,
@@ -27,6 +28,8 @@ export async function POST(
     where: { id },
     data: { status: "REJECTED", rejectionReason: razlog.trim(), reviewedAt: new Date(), reviewedById: session.user.id },
   });
+
+  await logAdminAkcija(session.user.id, "KRUG_ODBIJEN", id, `${zahtev.name}: ${razlog.trim()}`);
 
   const osnivac = (zahtev.osnivaci as string[])[0];
   if (osnivac) {

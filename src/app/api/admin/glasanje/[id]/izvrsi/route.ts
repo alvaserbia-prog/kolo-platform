@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { izvrsiOdluku, GlasanjeGreska } from "@/lib/protokol/glasanje";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/glasanje/[id]/izvrsi — Fondacija (UO) beleži izvršenje odluke (čl. 17)
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -13,6 +14,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   const { id } = await params;
   try {
     await izvrsiOdluku(id);
+    await logAdminAkcija(session.user.id, "ODLUKA_IZVRSENA", id);
     return NextResponse.json({ ok: true });
   } catch (e) {
     if (e instanceof GlasanjeGreska) return NextResponse.json({ error: e.message }, { status: e.status });

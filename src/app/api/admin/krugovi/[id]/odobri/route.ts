@@ -6,6 +6,7 @@ import { emitujPoen } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/krugovi/[id]/odobri — odobri osnivanje krugovi
 export async function POST(
@@ -78,6 +79,8 @@ export async function POST(
   await prisma.krugBonusLog.create({
     data: { krugId, threshold: 5, amount: 50_000 },
   });
+
+  await logAdminAkcija(session.user.id, "KRUG_ODOBREN", krugId, zahtev.name);
 
   // 6. Notifikacija svim osnivačima
   for (const userId of zahtev.osnivaci as string[]) {

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * POST /api/admin/doprinos-oglasi/prijave/[id]/odbij
@@ -65,6 +66,10 @@ export async function POST(
   });
 
   const oglas = await prisma.doprinosOglas.findUnique({ where: { id: prijava.oglasId }, select: { title: true } });
+
+  await logAdminAkcija(session.user.id, "DOPRINOS_PRIJAVA_ODBIJENA", prijava.userId,
+    `${oglas?.title ?? prijava.oglasId}${razlog ? ": " + razlog : ""}`);
+
   await posaljiNotifikaciju(
     prijava.userId,
     "info",

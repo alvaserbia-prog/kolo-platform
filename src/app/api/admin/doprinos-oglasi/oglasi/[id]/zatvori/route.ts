@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/doprinos-oglasi/oglasi/[id]/zatvori
 export async function POST(
@@ -14,6 +15,7 @@ export async function POST(
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
-  await prisma.doprinosOglas.update({ where: { id }, data: { status: "CLOSED" } });
+  const oglas = await prisma.doprinosOglas.update({ where: { id }, data: { status: "CLOSED" } });
+  await logAdminAkcija(session.user.id, "DOPRINOS_OGLAS_ZATVOREN", id, oglas.title);
   return NextResponse.json({ ok: true });
 }
