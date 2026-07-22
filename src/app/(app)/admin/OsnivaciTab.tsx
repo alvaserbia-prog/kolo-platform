@@ -14,6 +14,12 @@ type Osnivac = {
   user: { pseudonim: string; email?: string };
 };
 
+type Kanal = {
+  brojKoraka: number;
+  zatvoren: boolean;
+  osnivaciZakljucani: boolean;
+};
+
 type Status = {
   ukupnoEvidentirano: number;
   brojKoraka: number;
@@ -24,6 +30,7 @@ type Status = {
   procenatIskoriscenja: number;
   ukupanPoenUSistemu: number;
   sledeciPrag: number;
+  osnivaciZakljucani?: boolean;
 };
 
 const fmt = (n: number) => n.toLocaleString("sr-RS");
@@ -38,13 +45,13 @@ export default function OsnivaciTab({
   const t = useTranslations("admin");
   // Dva odvojena upita: pad statusa kanala ne sme da sakrije listu osnivača
   // (inače lista deluje prazno i admin duplira unos → P2002 na serveru).
-  const { data: listaOsnivaca, isLoading: ucitavanje, error: greskaListe, refetch: refetchLista } = useQuery({
+  const { data: listaData, isLoading: ucitavanje, error: greskaListe, refetch: refetchLista } = useQuery({
     queryKey: ["admin-osnivaci"],
-    queryFn: async (): Promise<Osnivac[]> => {
+    queryFn: async (): Promise<{ osnivaci: Osnivac[]; kanal: Kanal | null }> => {
       const res = await fetch("/api/admin/osnivaci");
       const d = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(d.error ?? t("osnivaci_greska_ucitavanja"));
-      return d.osnivaci ?? [];
+      return { osnivaci: d.osnivaci ?? [], kanal: d.kanal ?? null };
     },
   });
   const { data: statusData, error: greskaStatusa, refetch: refetchStatus } = useQuery({
@@ -57,7 +64,8 @@ export default function OsnivaciTab({
     },
   });
   const refetch = () => Promise.all([refetchLista(), refetchStatus()]);
-  const osnivaci = listaOsnivaca ?? [];
+  const osnivaci = listaData?.osnivaci ?? [];
+  const kanal = listaData?.kanal ?? null;
   const status = statusData ?? null;
   const [radnja, setRadnja] = useState<string | null>(null);
 
@@ -69,7 +77,17 @@ export default function OsnivaciTab({
   const [napomena, setNapomena] = useState("");
   const [greska, setGreska] = useState("");
 
-  const aktiviran = (status?.brojKoraka ?? 0) > 0;
+  // Inline izmena reda
+  const [izmenaId, setIzmenaId] = useState<string | null>(null);
+  const [izRedniBroj, setIzRedniBroj] = useState("");
+  const [izBrojilac, setIzBrojilac] = useState("");
+  const [izImenilac, setIzImenilac] = useState("");
+  const [izNapomena, setIzNapomena] = useState("");
+  const [greskaIzmene, setGreskaIzmene] = useState("");
+
+  const aktiviran = (kanal?.brojKoraka ?? status?.brojKoraka ?? 0) > 0;
+  const zakljucano = kanal?.osnivaciZakljucani ?? status?.osnivaciZakljucani ?? false;
+  const izmeneDozvoljene = !aktiviran && !zakljucano;
   const zbirBrojilaca = osnivaci.reduce((s, o) => s + o.udeoBrojilac, 0);
   const zajednickiImenilac = osnivaci[0]?.udeoImenilac ?? 0;
   const sviIstiImenilac = osnivaci.every((o) => o.udeoImenilac === zajednickiImenilac);
@@ -99,6 +117,39 @@ export default function OsnivaciTab({
     }
   }
 
+  function pocniIzmenu(o: Osnivac) {
+    setGreskaIzmene("");
+    setIzmenaId(o.id);
+    setIzRedniBroj(String(o.redniBroj));
+    setIzBrojilac(String(o.udeoBrojilac));
+    setIzImenilac(String(o.udeoImenilac));
+    setIzNapomena(o.napomena ?? "");
+  }
+
+  async function sacuvajIzmenu() {
+    if (!izmenaId) return;
+    setGreskaIzmene("");
+    setRadnja("izmena");
+    const res = await fetch(`/api/admin/osnivaci/${izmenaId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        udeoBrojilac: Number(izBrojilac),
+        udeoImenilac: Number(izImenilac),
+        redniBroj: Number(izRedniBroj),
+        napomena: izNapomena.trim() || undefined,
+      }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok) {
+      setIzmenaId(null);
+      await refetch();
+    } else {
+      setGreskaIzmene(d.error ?? t("osnivaci_greska_izmene"));
+    }
+  }
+
   async function obrisi(id: string) {
     if (!confirm(t("osnivaci_obrisi_confirm"))) return;
     setRadnja(id);
@@ -106,6 +157,26 @@ export default function OsnivaciTab({
     setRadnja(null);
     if (res.ok) await refetch();
     else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska_generalna")); }
+  }
+
+  async function zakljucaj() {
+    if (!confirm(t("osnivaci_zakljucaj_confirm"))) return;
+    setRadnja("zakljucaj");
+    const res = await fetch("/api/admin/osnivaci/zakljucaj", { method: "POST" });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok) await refetch();
+    else alert(d.error ?? t("greska_generalna"));
+  }
+
+  async function otkljucaj() {
+    if (!confirm(t("osnivaci_otkljucaj_confirm"))) return;
+    setRadnja("otkljucaj");
+    const res = await fetch("/api/admin/osnivaci/zakljucaj", { method: "DELETE" });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok) await refetch();
+    else alert(d.error ?? t("greska_generalna"));
   }
 
   async function evidentiraj() {
@@ -119,6 +190,8 @@ export default function OsnivaciTab({
   }
 
   if (ucitavanje) return <p className="text-sm text-kolo-muted">{t("osnivaci_ucitavanje")}</p>;
+
+  const inputCls = "w-full px-2 py-1 rounded-lg border border-kolo-border text-sm outline-none focus:border-kolo-green-700";
 
   return (
     <div className="space-y-6">
@@ -151,13 +224,13 @@ export default function OsnivaciTab({
           </div>
           <button
             onClick={evidentiraj}
-            disabled={radnja === "triger" || status.zatvoren}
+            disabled={radnja === "triger" || status.zatvoren || !zakljucano}
             className="mt-4 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
           >
             {radnja === "triger" ? t("osnivaci_evidentiraj_loading") : t("osnivaci_evidentiraj_btn")}
           </button>
           <p className="mt-2 text-xs text-kolo-muted">
-            {t("osnivaci_evidentiraj_napomena")}
+            {zakljucano ? t("osnivaci_evidentiraj_napomena") : t("osnivaci_evidentiraj_treba_zakljucati")}
           </p>
         </div>
       )}
@@ -189,38 +262,96 @@ export default function OsnivaciTab({
             </thead>
             <tbody>
               {osnivaci.map((o) => (
-                <tr key={o.id} className="border-b border-kolo-border last:border-0">
-                  <td className="py-2">{o.redniBroj}</td>
-                  <td className="py-2 font-medium text-kolo-text"><Pseudonim>{o.user.pseudonim}</Pseudonim></td>
-                  <td className="py-2">
-                    {o.udeoBrojilac}/{o.udeoImenilac}
-                    <span className="text-kolo-muted"> ({Math.round((o.udeoBrojilac / o.udeoImenilac) * 1000) / 10}%)</span>
-                  </td>
-                  <td className="py-2 text-kolo-muted">{o.napomena ?? "—"}</td>
-                  <td className="py-2 text-right">
-                    {!aktiviran && (
-                      <button onClick={() => obrisi(o.id)} disabled={radnja === o.id}
-                        className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg disabled:opacity-60">
-                        {t("osnivaci_obrisi_btn")}
+                izmenaId === o.id ? (
+                  <tr key={o.id} className="border-b border-kolo-border last:border-0 bg-kolo-bg/50">
+                    <td className="py-2 pr-2 w-16">
+                      <input type="number" value={izRedniBroj} onChange={(e) => setIzRedniBroj(e.target.value)} className={inputCls} />
+                    </td>
+                    <td className="py-2 font-medium text-kolo-text"><Pseudonim>{o.user.pseudonim}</Pseudonim></td>
+                    <td className="py-2 pr-2">
+                      <div className="flex items-center gap-1">
+                        <input type="number" value={izBrojilac} onChange={(e) => setIzBrojilac(e.target.value)} className={`${inputCls} w-16`} />
+                        <span className="text-kolo-muted">/</span>
+                        <input type="number" value={izImenilac} onChange={(e) => setIzImenilac(e.target.value)} className={`${inputCls} w-16`} />
+                      </div>
+                    </td>
+                    <td className="py-2 pr-2">
+                      <input type="text" value={izNapomena} onChange={(e) => setIzNapomena(e.target.value)} maxLength={200} className={inputCls} />
+                    </td>
+                    <td className="py-2 text-right whitespace-nowrap">
+                      <button onClick={sacuvajIzmenu} disabled={radnja === "izmena" || !izRedniBroj || !izBrojilac || !izImenilac}
+                        className="px-2.5 py-1 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg disabled:opacity-60">
+                        {t("osnivaci_sacuvaj_btn")}
                       </button>
-                    )}
-                  </td>
-                </tr>
+                      <button onClick={() => setIzmenaId(null)} disabled={radnja === "izmena"}
+                        className="ml-1 px-2.5 py-1 bg-kolo-bg text-kolo-muted text-xs font-semibold rounded-lg disabled:opacity-60">
+                        {t("osnivaci_otkazi_btn")}
+                      </button>
+                    </td>
+                  </tr>
+                ) : (
+                  <tr key={o.id} className="border-b border-kolo-border last:border-0">
+                    <td className="py-2">{o.redniBroj}</td>
+                    <td className="py-2 font-medium text-kolo-text"><Pseudonim>{o.user.pseudonim}</Pseudonim></td>
+                    <td className="py-2">
+                      {o.udeoBrojilac}/{o.udeoImenilac}
+                      <span className="text-kolo-muted"> ({Math.round((o.udeoBrojilac / o.udeoImenilac) * 1000) / 10}%)</span>
+                    </td>
+                    <td className="py-2 text-kolo-muted">{o.napomena ?? "—"}</td>
+                    <td className="py-2 text-right whitespace-nowrap">
+                      {izmeneDozvoljene && (
+                        <>
+                          <button onClick={() => pocniIzmenu(o)} disabled={radnja !== null}
+                            className="px-2.5 py-1 bg-kolo-bg text-kolo-text text-xs font-semibold rounded-lg disabled:opacity-60">
+                            {t("osnivaci_izmeni_btn")}
+                          </button>
+                          <button onClick={() => obrisi(o.id)} disabled={radnja === o.id}
+                            className="ml-1 px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg disabled:opacity-60">
+                            {t("osnivaci_obrisi_btn")}
+                          </button>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                )
               ))}
             </tbody>
           </table>
           </div>
         )}
 
-        {aktiviran && (
+        {greskaIzmene && <p className="mt-3 text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greskaIzmene}</p>}
+
+        {aktiviran ? (
           <p className="mt-3 text-xs text-kolo-muted">
             {t("osnivaci_kanal_zakljucan")}
           </p>
+        ) : zakljucano ? (
+          <div className="mt-4 flex items-center justify-between gap-3 bg-kolo-bg rounded-xl px-4 py-3">
+            <p className="text-sm text-kolo-text font-medium">🔒 {t("osnivaci_zakljucano_info")}</p>
+            <button onClick={otkljucaj} disabled={radnja === "otkljucaj"}
+              className="px-3 py-1.5 rounded-lg bg-white border border-kolo-border text-kolo-text text-xs font-semibold disabled:opacity-60">
+              {t("osnivaci_otkljucaj_btn")}
+            </button>
+          </div>
+        ) : (
+          <div className="mt-4">
+            <button
+              onClick={zakljucaj}
+              disabled={radnja === "zakljucaj" || !udeliValidni || !!greskaListe}
+              className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
+            >
+              🔒 {t("osnivaci_zakljucaj_btn")}
+            </button>
+            {!udeliValidni && (
+              <p className="mt-2 text-xs text-kolo-muted">{t("osnivaci_zakljucaj_uslov")}</p>
+            )}
+          </div>
         )}
       </div>
 
       {/* Forma za dodavanje */}
-      {!aktiviran && (
+      {izmeneDozvoljene && (
         <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
           <h2 className="text-base font-semibold text-kolo-text">{t("osnivaci_dodaj_naslov")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

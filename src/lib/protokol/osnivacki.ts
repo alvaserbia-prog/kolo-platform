@@ -69,6 +69,7 @@ export interface KanalStatus {
   procenatIskoriscenja: number; // 0-100
   ukupanPoenUSistemu: number;
   sledeciPrag: number;
+  osnivaciZakljucani: boolean;
 }
 
 /**
@@ -76,7 +77,7 @@ export interface KanalStatus {
  * SQL-a (db push / ručni reset) ostaje bez njega — zato se ovde kreira po potrebi
  * umesto da se baca izuzetak koji obara status endpoint i admin tab.
  */
-async function dohvatiIliKreirajKanal() {
+export async function dohvatiIliKreirajKanal() {
   return prisma.osnivackiKanal.upsert({
     where: { id: "singleton" },
     update: {},
@@ -101,6 +102,7 @@ export async function dohvatiStatusKanala(): Promise<KanalStatus> {
     procenatIskoriscenja: Math.round((kanal.ukupnoEvidentirano / GORNJA_GRANICA) * 10000) / 100,
     ukupanPoenUSistemu: ukupanPoen,
     sledeciPrag: kanal.poslednjiPrag + PRAG_SKOK,
+    osnivaciZakljucani: kanal.osnivaciZakljucani,
   };
 }
 
@@ -118,6 +120,14 @@ export async function proveriIEvidentirajKorak(): Promise<{
 
   if (kanal.zatvoren) {
     return { evidentiranoKoraka: 0, zatvoren: true, poruka: "Kanal je trajno zatvoren." };
+  }
+
+  if (!kanal.osnivaciZakljucani) {
+    return {
+      evidentiranoKoraka: 0,
+      zatvoren: false,
+      poruka: "Lista osnivača nije zaključana — koraci se ne evidentiraju dok admin ne zaključa osnivače.",
+    };
   }
 
   const osnivaci = await prisma.osnivac.findMany({ orderBy: { redniBroj: "asc" } });
