@@ -1,15 +1,15 @@
 /**
- * Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.7.2)
+ * Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.9.1)
  *
  * Pravila:
- * - Gornja granica: 2.400.000 POEN (120 koraka x 20.000)
+ * - Gornja granica: 2.400.000 POEN (100 koraka x 24.000)
  * - Korak se aktivira svaki put kad ukupan POEN u sistemu predje prag od 100k
- * - Pragovi: 100.000, 200.000, 300.000, ..., 12.000.000
- * - Kanal se trajno zatvara na 120. koraku
+ * - Pragovi: 100.000, 200.000, 300.000, ..., 10.000.000 (poslednji)
+ * - Kanal se trajno zatvara na 100. koraku
  *
  * NAPOMENA: Lista osnivaca i udeli se popunjavaju kroz admin interfejs
- * (interni akt Fondacije, cl. 12). Bez popunjenih osnivaca, kanal je
- * strukturalno spreman ali nista ne emituje.
+ * (interni akt Fondacije, cl. 12). Koraci se evidentiraju tek kad je
+ * lista osnivaca zakljucana (zbir udela = 1).
  */
 
 import { prisma } from "@/lib/prisma";
@@ -18,8 +18,8 @@ import { TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
-export const ITERATION_LIMIT = 120;
-export const KORAK_IZNOS = 20_000;
+export const ITERATION_LIMIT = 100;
+export const KORAK_IZNOS = 24_000;
 export const GORNJA_GRANICA = ITERATION_LIMIT * KORAK_IZNOS; // 2.400.000
 export const PRAG_SKOK = 100_000;
 
@@ -61,6 +61,7 @@ export async function izracunajUkupanPoen(): Promise<number> {
 export interface KanalStatus {
   ukupnoEvidentirano: number;
   brojKoraka: number;
+  ukupnoKoraka: number;
   zatvoren: boolean;
   zatvorenAt: Date | null;
   poslednjiPrag: number;
@@ -94,6 +95,7 @@ export async function dohvatiStatusKanala(): Promise<KanalStatus> {
   return {
     ukupnoEvidentirano: kanal.ukupnoEvidentirano,
     brojKoraka: kanal.brojKoraka,
+    ukupnoKoraka: ITERATION_LIMIT,
     zatvoren: kanal.zatvoren,
     zatvorenAt: kanal.zatvorenAt,
     poslednjiPrag: kanal.poslednjiPrag,

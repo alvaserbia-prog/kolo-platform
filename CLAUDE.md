@@ -58,7 +58,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 | Pravilnik o dokazu stvarnosti | `dokaz_stvarnosti_3_9_3.md` | **3.9.3** (dopuna: novi čl. 22 — prelazno ograničenje: do opticaja 100.000 POEN najviše jedna primljena verifikacija; + 3.9.2 simetrična zona, početni 100%) |
 | Pravilnik o pokroviteljstvu i donacijama | `donacije_3_9_0.md` | **3.9.0** (donacije 11 nivoa 1,00–2,00; pokroviteljstvo 7 nivoa; +preduzetnici) |
 | Pravilnik o operativnom doprinosu | `operativni_3_9_0.md` | **3.9.0** |
-| Pravilnik o osnivačkom doprinosu | `osnivacki_3_9_0.md` | **3.9.0** |
+| Pravilnik o osnivačkom doprinosu | `osnivacki_3_9_1.md` | **3.9.1** (korak 24.000 × 100, poslednji prag 10M) |
 | Pravilnik o programima podrške | `programi_podrske_3_9_0.md` | **3.9.0** (verifikatorska potvrda socijalnih programa) |
 | Pravilnik o Gornjem Kolu | `gornje_kolo_3_9_0.md` | **3.9.0** (glasanje, delegiranje; veto-prag = **3× operativni trošak prethodnog meseca**) |
 | Kontekst za razvoj | `Claude_context.md` | usaglašen sa 3.9.0 |
@@ -93,7 +93,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **Legacy LK/JMBG verifikacija UKLONJENA** (commit `f2f6575`, migracija `20260526120000_ukloni_lk_jmbg`) — nema više upload-a dokumenata, JMBG-a, `VerifikacijaPristanak` tabele, admin pregleda dokumenata
 - ✅ **Tabla zahteva za jemstvo** — implementirana (`ZahtevZaJemstvo`, `/tabla-jemstva`, istek cron)
 - ✅ **Poništavanje lažne verifikacije** sa rekurzivnom kaskadom (`lazna-verifikacija.ts`)
-- ✅ **Osnivački doprinos** — implementiran (granica 2.4M POEN, 120 koraka × 20.000, noćni cron, admin UI, javna transparentnost)
+- ✅ **Osnivački doprinos** — implementiran (granica 2.4M POEN, 100 koraka × 24.000 (v3.9.1), zaključavanje liste osnivača, noćni cron, admin UI, javna transparentnost)
 - ✅ **Pun tok pokroviteljstva** — prijava → ugovor → potpis → potvrda (`PokroviteljPrijava`, novac/roba/usluge)
 - ✅ **Zaštitni veto Fondacije** — implementiran (`SistemskiVeto`, `FondacijaTrosak`, transparentnost sredstava). 🟡 **Dva GAP-a po Pravilniku 3.7.5:** (a) prag gašenja je hardkodovan na `3× prosek mesečnih troškova` — Pravilnik čl. 49 delegira prag posebnom pravilniku; (b) **obrazloženje/opseg veta** treba da prati novu formulaciju 3.7.5 (zaštita operativne i finansijske održivosti Fondacije do finansijske samostalnosti), ne staru (narušavanje principa/zakona/pravnog statusa). Vidi GAP ispod
 - ✅ **Verzionisanje Pravilnika** (`PravilnikVerzija`/`PravilnikPrihvatanje`, `/pravilnik-prihvati`) — paralelno sa Politikom
@@ -308,8 +308,8 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Osnivački doprinos (implementiran)
 - Naknadna evidencija pre-launch rada (Pravilnik čl. 37; Pravilnik o osnivačkom doprinosu).
-- **Parametri:** korak 20.000 POEN, ukupno **120 koraka**, jedan korak po svakom dostignutom pragu od **100.000** ukupnih POEN-a u sistemu; gornja granica **2.400.000 POEN**; kanal se trajno zatvara na 120. koraku. Zaseban kanal — ne ulazi u dnevni limit.
-- Kod: `osnivacki.ts` (`ITERATION_LIMIT=120`, `KORAK_IZNOS=20_000`, `GORNJA_GRANICA=2_400_000`, `PRAG_SKOK=100_000`, raspodela među osnivačima largest-remainder metodom). Modeli: `OsnivackiKanal`, `Osnivac`, `OsnivackiKorakLog`, `OsnivackiKorakEmisija`. Admin `OsnivaciTab.tsx`, `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`; javno `/api/javno/osnivacki-doprinos`, stranica `/osnivacki-doprinos`. Noćni triger u cron-u.
+- **Parametri:** korak 24.000 POEN, ukupno **100 koraka** (v3.9.1; ranije 120 × 20.000), jedan korak po svakom dostignutom pragu od **100.000** ukupnih POEN-a u sistemu, poslednji prag **10.000.000**; gornja granica **2.400.000 POEN**; kanal se trajno zatvara na 100. koraku. Koraci se evidentiraju samo nad **zaključanom** listom osnivača (admin dugme, uslov zbir udela = 1/1). Zaseban kanal — ne ulazi u dnevni limit.
+- Kod: `osnivacki.ts` (`ITERATION_LIMIT=100`, `KORAK_IZNOS=24_000`, `GORNJA_GRANICA=2_400_000`, `PRAG_SKOK=100_000`, raspodela među osnivačima largest-remainder metodom). Modeli: `OsnivackiKanal`, `Osnivac`, `OsnivackiKorakLog`, `OsnivackiKorakEmisija`. Admin `OsnivaciTab.tsx`, `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`; javno `/api/javno/osnivacki-doprinos`, stranica `/osnivacki-doprinos`. Noćni triger u cron-u.
 
 ### Notifikacije
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
