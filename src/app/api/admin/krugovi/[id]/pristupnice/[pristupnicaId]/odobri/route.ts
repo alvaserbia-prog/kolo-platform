@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST — odobri pristupnicu (admin krugovi ili ADMIN)
 export async function POST(
@@ -53,6 +54,10 @@ export async function POST(
   await proveriIEmitujBonusPrag(krugId);
 
   const krug = await prisma.krug.findUnique({ where: { id: krugId }, select: { name: true } });
+
+  await logAdminAkcija(session.user.id, "KRUG_PRISTUPNICA_ODOBRENA", pristupnica.userId,
+    krug?.name ?? krugId);
+
   await posaljiNotifikaciju(
     pristupnica.userId,
     "info",

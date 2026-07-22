@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/programi/enrollments/[id]/odobri
 export async function POST(
@@ -56,6 +57,8 @@ export async function POST(
       ...(nextReverifikacija ? { nextReverifikacija } : {}),
     },
   });
+
+  await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODOBRENA", enrollment.userId, labelPrograma(enrollment.type));
 
   await posaljiNotifikaciju(
     enrollment.userId,

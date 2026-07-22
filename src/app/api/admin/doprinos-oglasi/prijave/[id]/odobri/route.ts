@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * POST /api/admin/doprinos-oglasi/prijave/[id]/odobri
@@ -79,6 +80,9 @@ export async function POST(
     where: { id },
     data: { status: "APPROVED", approvedById: session.user.id, approvedAt: new Date() },
   });
+
+  await logAdminAkcija(session.user.id, "DOPRINOS_PRIJAVA_ODOBRENA", prijava.userId,
+    oglasSaKapacitetom.title);
 
   await posaljiNotifikaciju(
     prijava.userId,

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * POST /api/admin/doprinos-oglasi/evidencija/[id]/odbij
@@ -39,7 +40,7 @@ export async function POST(
   const { id } = await params;
   const ev = await prisma.oglasEvidencija.findUnique({
     where: { id },
-    include: { oglas: { select: { createdById: true } } },
+    include: { oglas: { select: { createdById: true, title: true } } },
   });
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
@@ -58,6 +59,9 @@ export async function POST(
   }
 
   await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED", approvedById: session.user.id, approvedAt: new Date() } });
+
+  await logAdminAkcija(session.user.id, "DOPRINOS_EVIDENCIJA_ODBIJENA", ev.userId,
+    `${ev.oglas.title} (predloženo ${ev.predlozeniPoen} POEN)`);
 
   await posaljiNotifikaciju(
     ev.userId,

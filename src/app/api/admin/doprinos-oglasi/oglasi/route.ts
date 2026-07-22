@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/doprinos-oglasi/oglasi — kreiranje oglasa
 export async function POST(req: NextRequest) {
@@ -40,6 +41,9 @@ export async function POST(req: NextRequest) {
       createdById: session.user.id,
     },
   });
+
+  await logAdminAkcija(session.user.id, "DOPRINOS_OGLAS_KREIRAN", oglas.id,
+    `${oglas.title} (predloženo ${predlozeni} POEN)`);
 
   return NextResponse.json({ ok: true, id: oglas.id });
 }

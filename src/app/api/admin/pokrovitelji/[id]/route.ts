@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -82,14 +83,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     },
   });
 
-  await prisma.auditLog.create({
-    data: {
-      adminId: session.user.id,
-      akcija: "POKROVITELJ_AZURIRAN",
-      targetId: id,
-      detalji: JSON.stringify(body),
-    },
-  });
+  // U detalje idu samo imena izmenjenih polja — kontakt podaci (email/telefon)
+  // ne smeju u audit log (preduzetnik može biti fizičko lice).
+  await logAdminAkcija(session.user.id, "POKROVITELJ_AZURIRAN", id,
+    `izmenjena polja: ${Object.keys(body).join(", ") || "—"}`);
 
   return NextResponse.json({ ok: true });
 }

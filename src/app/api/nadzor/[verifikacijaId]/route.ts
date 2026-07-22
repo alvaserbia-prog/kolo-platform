@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { obaviNadzor, NadzorGreska } from "@/lib/protokol/nadzor-service";
+import { logAdminAkcija } from "@/lib/audit";
 
 export async function POST(
   _req: NextRequest,
@@ -26,6 +27,7 @@ export async function POST(
       verifikacijaId,
       nadzornikId: session.user.id,
     });
+    await logAdminAkcija(session.user.id, "NADZOR_POTVRDJEN", verifikacijaId);
     return NextResponse.json(rez);
   } catch (e) {
     if (e instanceof NadzorGreska) {

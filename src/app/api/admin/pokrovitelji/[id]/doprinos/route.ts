@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
 import { jeAdmin } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
+import { logAdminAkcija } from "@/lib/audit";
 
 // Gornja granica jednog evidentiranog doprinosa (RSD) — odbrana od slučajnog upisa
 // ogromnog iznosa koji bi emitovao bonus POEN bez pokrića.
@@ -51,6 +52,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     evidentiraoId: session.user.id,
     napomena,
   });
+
+  await logAdminAkcija(session.user.id, "POKROVITELJ_DOPRINOS_EVIDENTIRAN", id,
+    `${tip} ${rsdIznos} RSD${napomena ? " — " + napomena : ""}`);
 
   return NextResponse.json({
     ok: true,

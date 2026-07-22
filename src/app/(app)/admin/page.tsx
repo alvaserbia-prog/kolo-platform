@@ -13,6 +13,7 @@ const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIM
 export default async function AdminPage() {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) redirect("/dashboard");
+  const viewerJeSuperadmin = jeSuperadmin(session.user);
 
   const [
     allUsers, protokol, pendingKrugovi,
@@ -45,11 +46,14 @@ export default async function AdminPage() {
       prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
       prisma.transaction.count(),
     ]),
-    prisma.auditLog.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 50,
-      include: { admin: { select: { pseudonim: true } } },
-    }),
+    // Audit log je samo za superadmina (isto kao /api/admin/audit-log i Nadzor tab)
+    viewerJeSuperadmin
+      ? prisma.auditLog.findMany({
+          orderBy: { createdAt: "desc" },
+          take: 50,
+          include: { admin: { select: { pseudonim: true } } },
+        })
+      : Promise.resolve([]),
     prisma.krug.findMany({
       orderBy: { createdAt: "desc" },
       include: {
@@ -116,8 +120,7 @@ export default async function AdminPage() {
   const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
 
   // Nadzor integriteta — samo superadmin vidi obeležene naloge/grupe.
-  const jeSuper = jeSuperadmin(session.user);
-  const nadzorRedovi = jeSuper
+  const nadzorRedovi = viewerJeSuperadmin
     ? await prisma.rizikNalaz.findMany({ where: { status: "OTVOREN" }, orderBy: { rizik: "desc" }, take: 200 })
     : [];
   const nadzorNalazi = nadzorRedovi.map((r) => ({
@@ -146,7 +149,7 @@ export default async function AdminPage() {
         id: p.id, pseudonim: p.user.pseudonim, opis: p.opis, tipOdluke: p.tipOdluke,
         status: p.status, createdAt: p.createdAt.toISOString(),
       }))}
-      viewerJeSuperadmin={jeSuper}
+      viewerJeSuperadmin={viewerJeSuperadmin}
       viewerId={session.user.id}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,

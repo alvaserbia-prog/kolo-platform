@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/emisija/nocna — manualni okidač (samo admin)
 export async function POST() {
@@ -12,6 +13,7 @@ export async function POST() {
 
   try {
     const rezultat = await izvrsiNocnuEmisiju(new Date());
+    await logAdminAkcija(session.user.id, "NOCNA_EMISIJA_MANUELNO");
     return NextResponse.json({ ok: true, ...rezultat });
   } catch (err) {
     console.error("[Admin] Greška pri manualnoj nocnoj emisiji:", err);

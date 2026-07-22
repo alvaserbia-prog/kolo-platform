@@ -265,9 +265,11 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
-    ["audit", t("tab_audit")],
     ...(viewerJeSuperadmin
-      ? ([["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`]] as [Tab, string][])
+      ? ([
+          ["audit", t("tab_audit")],
+          ["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`],
+        ] as [Tab, string][])
       : []),
   ];
 
