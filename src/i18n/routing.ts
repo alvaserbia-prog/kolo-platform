@@ -2,7 +2,7 @@ import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
   // "sr" = srpski (latinica, default), "sr-Cyrl" = srpski (ćirilica, transliteracijom),
-  // "en" = engleski. Jezik se bira preko cookie-a (NEXT_LOCALE),
+  // "en" = engleski, "hr" = hrvatski. Jezik se bira preko cookie-a (NEXT_LOCALE),
   // bez URL prefiksa — projekat koristi RAVNO stablo ruta (nema app/[locale]/).
   //
   // ⚠️ NAPOMENA: URL prefiks (/en/…) za SEO zahteva restrukturaciju u app/[locale]/
@@ -14,7 +14,7 @@ export const routing = defineRouting({
   // scripts/check-i18n-parity.mjs). Da se reaktivira: vrati "hu" ovde + u
   // src/app/api/profil/jezik/route.ts + u parity skriptu, dopuni hu.json do
   // pariteta sa sr.json, i dodaj ga u src/components/JezikSvitcer.tsx.
-  locales: ["sr", "sr-Cyrl", "en"],
+  locales: ["sr", "sr-Cyrl", "en", "hr"],
   defaultLocale: "sr",
   localePrefix: "never",
 });
