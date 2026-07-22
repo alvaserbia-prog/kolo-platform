@@ -178,7 +178,7 @@ Stakinga, kamate ni prinosa nema. ZRNO ne nosi dividendu, kamatu ni pravo na lik
       },
       {
         id: 53,
-        pitanje: `Je li verifikaciona emisija (1.000 POEN) provizija za regrutovanje ili airdrop koji mogu da farmam?`,
+        pitanje: `Je li verifikacioni upis (1.000 POEN) provizija za regrutovanje ili airdrop koji mogu da farmam?`,
         odgovor: `Ne. To nije provizija za regrutovanje, nije airdrop, i ne može se farmati.
 
 Kada te neko verifikuje, Protokol upiše po 1.000 POEN i tebi i osobi koja te je verifikovala — jednokratno i simetrično, isti iznos za oboje. Nema „nivoa" iznad tebe ni ispod tebe i ništa ne „teče naviše" kroz neku mrežu ljudi koji bi se okoristili tvojom verifikacijom. To nije marketing sa provizijom.
@@ -294,14 +294,14 @@ Iznos je fiksan i evidentira se na dnevnom nivou dok status traje.`,
 
 Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo (po aktivaciji). Verifikovan korisnik se prijavljuje i izvršava ga, a izvršenje potvrđuje ovlašćeni verifikator pre nego što Protokol evidentira POEN.
 
-Nema fiksne „tarife po satu" — predloženi POEN je samo težinski orijentir, a stvarno evidentirani iznos raspoređuje se u okviru dnevnog limita emisije.`,
+Nema fiksne „tarife po satu" — predloženi POEN je samo težinski orijentir, a stvarno evidentirani iznos raspoređuje se u okviru dnevnog limita evidentiranja.`,
       },
       {
         id: 20,
         pitanje: `Mogu li biti u više programa istovremeno?`,
         odgovor: `Da, ako ispunjavaš kriterijume za više programa. Na primer, majka koja se školuje može biti i u Podršci Majkama i u Školovanju.
 
-Svaki program se prijavljuje posebno, a svi imaju zajednički dnevni limit emisije od 10% trenutnog opticaja sistema (kako se ne bi previše POEN-a emitovalo odjednom).`,
+Svaki program se prijavljuje posebno, a svi imaju zajednički dnevni limit evidentiranja od 10% trenutnog opticaja sistema (kako se ne bi previše POEN-a upisalo odjednom).`,
       },
       {
         id: 61,
@@ -360,7 +360,7 @@ Broj dece povećava ukupan iznos, ali ne prostim sabiranjem — svako naredno de
 
 Primer: za jedno dete od 3 godine to je (2.000 − 300) × 1,00 = 1.700 POEN dnevno. Za isto dete kao treće po redu bilo bi (2.000 − 300) × 1,50 = 2.550 POEN dnevno.
 
-Podrška se evidentira automatski na dnevnom nivou dok status traje, bez prijavljivanja pojedinačnih aktivnosti. Kao i kod ostalih programa, sve dnevne emisije dele zajednički dnevni okvir sistema, pa se u danima velikog opticaja iznosi mogu srazmerno umanjiti. Ovi parametri uređeni su programskim pravilnikom i mogu se menjati njegovom izmenom.`,
+Podrška se evidentira automatski na dnevnom nivou dok status traje, bez prijavljivanja pojedinačnih aktivnosti. Kao i kod ostalih programa, sva dnevna evidentiranja dele zajednički dnevni okvir sistema, pa se u danima velikog opticaja iznosi mogu srazmerno umanjiti. Ovi parametri uređeni su programskim pravilnikom i mogu se menjati njegovom izmenom.`,
       },
     ],
   },
@@ -556,11 +556,11 @@ Fondacija od tog trenutka prelazi iz suverenog u izvršni organ — sprovodi odl
         pitanje: `Šta sprečava zloupotrebu od strane admina ili osnivača?`,
         odgovor: `Više strukturnih zaštita radi paralelno.
 
-Zero-sum princip — svaka emisija POEN-a uvećava minus Protokola, niko ne može stvoriti POEN iz ničega.
+Zero-sum princip — svaki upis POEN-a uvećava minus Protokola, niko ne može stvoriti POEN iz ničega.
 
-Limit emisije programa — ukupna dnevna emisija svih programa zajedno ne sme preći 10% opticaja.
+Dnevni limit programa — ukupno dnevno evidentiranje svih programa zajedno ne sme preći 10% opticaja.
 
-Determinističke algoritamske emisije — Protokol nema diskrecione odluke, sve je u kodu.
+Deterministički algoritamski upisi — Protokol nema diskrecione odluke, sve je u kodu.
 
 Transparentnost — evidencija doprinosa je pseudonimna i nepromenljiva; vidljiva je verifikovanim članovima (gradirano po statusu), dok neregistrovani vide samo agregate.
 
