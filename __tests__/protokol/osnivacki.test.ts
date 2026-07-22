@@ -10,24 +10,24 @@ describe("raspodeliKorak — raspodela koraka osnivačkog doprinosa", () => {
     expect(raspodeliKorak([
       { udeoBrojilac: 1, udeoImenilac: 2 },
       { udeoBrojilac: 1, udeoImenilac: 2 },
-    ])).toEqual([10_000, 10_000]);
+    ])).toEqual([12_000, 12_000]);
   });
 
   it("nejednaki udeli (1/4, 3/4)", () => {
     expect(raspodeliKorak([
       { udeoBrojilac: 1, udeoImenilac: 4 },
       { udeoBrojilac: 3, udeoImenilac: 4 },
-    ])).toEqual([5_000, 15_000]);
+    ])).toEqual([6_000, 18_000]);
   });
 
-  it("tri jednaka udela — largest remainder, zbir tačno 20.000", () => {
+  it("tri jednaka udela — largest remainder, zbir tačno 24.000", () => {
     const r = raspodeliKorak([
       { udeoBrojilac: 1, udeoImenilac: 3 },
       { udeoBrojilac: 1, udeoImenilac: 3 },
       { udeoBrojilac: 1, udeoImenilac: 3 },
     ]);
     expect(r.reduce((s, x) => s + x, 0)).toBe(KORAK_IZNOS);
-    expect(r).toEqual([6_667, 6_667, 6_666]);
+    expect(r).toEqual([8_000, 8_000, 8_000]);
   });
 
   it("zbir je uvek tačno KORAK_IZNOS za proizvoljne udele sa zajedničkim imeniocem", () => {

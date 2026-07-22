@@ -200,7 +200,7 @@ Osnivački POEN ima isti status kao svaki drugi: nekonvertibilan je, nema vredno
 
 Krug osnivača je zatvoren. Lica sa tim statusom utvrđena su unapred internim aktom Fondacije i objavljena; nijedna kasnija odluka ne može proširiti taj krug.
 
-Ni tempo nije proizvoljan. Jedan korak od 20.000 POEN evidentira se tek kada ukupan broj POEN-a u sistemu poraste za narednih 100.000. Osnivački doprinos tako raste samo onoliko koliko raste i ceo sistem; kada se dostigne 120 koraka (ukupno 2.400.000 POEN), kanal se trajno i neopozivo zatvara.
+Ni tempo nije proizvoljan. Jedan korak od 24.000 POEN evidentira se tek kada ukupan broj POEN-a u sistemu poraste za narednih 100.000. Osnivački doprinos tako raste samo onoliko koliko raste i ceo sistem; kada se dostigne 100 koraka (ukupno 2.400.000 POEN), kanal se trajno i neopozivo zatvara.
 
 Veći saldo ne donosi veću moć. Glasanje u Gornjem Kolu je kvadratno — glasačka snaga raste kao kvadratni koren broja ZRNA, pa veliki saldo POEN-a ne daje kontrolu nad sistemom.
 

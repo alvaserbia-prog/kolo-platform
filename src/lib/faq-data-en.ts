@@ -190,7 +190,7 @@ Founding POEN has the same status as any other: it is non-convertible, has no va
 
 The circle of founders is closed. The persons with that status were established in advance by an internal act of the Foundation and are publicly disclosed; no subsequent decision can expand that circle.
 
-The pace is not arbitrary either. One step of 20,000 POEN is recorded only when the total number of POEN in the system grows by the next 100,000. The founding contribution thus grows only as fast as the whole system grows; when the 120th step is reached (a total of 2,400,000 POEN), the channel closes permanently and irrevocably.
+The pace is not arbitrary either. One step of 24,000 POEN is recorded only when the total number of POEN in the system grows by the next 100,000. The founding contribution thus grows only as fast as the whole system grows; when the 100th step is reached (a total of 2,400,000 POEN), the channel closes permanently and irrevocably.
 
 A larger balance does not confer greater power. Voting in the Upper Kolo is quadratic — voting power grows as the square root of the number of ZRNO, so a large POEN balance does not give control over the system.
 

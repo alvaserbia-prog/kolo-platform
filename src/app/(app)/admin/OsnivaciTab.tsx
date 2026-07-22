@@ -23,6 +23,7 @@ type Kanal = {
 type Status = {
   ukupnoEvidentirano: number;
   brojKoraka: number;
+  ukupnoKoraka?: number;
   zatvoren: boolean;
   poslednjiPrag: number;
   gornjaGranica: number;
@@ -212,7 +213,7 @@ export default function OsnivaciTab({
             )}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-            <Stat label={t("osnivaci_stat_koraka")} value={`${status.brojKoraka} / 120`} />
+            <Stat label={t("osnivaci_stat_koraka")} value={`${status.brojKoraka} / ${status.ukupnoKoraka ?? 100}`} />
             <Stat label={t("osnivaci_stat_evidentirano")} value={`${fmt(status.ukupnoEvidentirano)} POEN`} />
             <Stat label={t("osnivaci_stat_preostalo")} value={`${fmt(status.preostalo)} POEN`} />
             <Stat label={t("osnivaci_stat_iskoriscenos")} value={`${status.procenatIskoriscenja}%`} />
