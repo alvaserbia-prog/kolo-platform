@@ -1,4 +1,4 @@
-# KOLO Platforma — v3.9.0
+# KOLO Platforma — v4.0.0
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -41,8 +41,10 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
-## Kanonska dokumentacija (folder `dokumentacija 3.9/`)
-**Kanonski set je verzije 3.9.0** u folderu **`dokumentacija 3.9/`** (pažnja: ime sa razmakom). 3.9.0 nadograđuje prethodni 3.8.x set (folder `dokumentacija 3.8/`, sada istorija): prelazna odredba o početku sistema (Pravilnik čl. 82, „početni korisnici"), konkretizovani GDPR obrađivači (Vercel/Neon/Cloudflare R2/Resend, SAD) + DPO (Nikola Šarić), transparentnost donatora, jezici sr/en/hu. **Statut ostaje na 3.8.0** (sadržinski nepromenjen, fajl `statut_3_8_0.md`). Stariji implementacioni nalazi koji referenciraju 3.7.x/3.8.x i dalje važe.
+## Kanonska dokumentacija (folder `dokumentacija 4.0/`)
+**AŽURIRANO 2026-07-22:** kanonski set je sada **verzija 4.0.0** u folderu **`dokumentacija 4.0/`** (sr + `en/`). Povod: **KOLO Fondacija upisana u Registar zadužbina i fondacija 21.07.2026** (matični broj **28836627**, PIB **115840443** — javni podaci; broj rešenja se NE objavljuje, JMBG-ovi iz rešenja NIKAD ne idu u repo/sajt). Svi akti dignuti na 4.0.0 (sadržinski jednaki poslednjim 3.9.x verzijama + registracioni podaci u Politici čl. 1, Uslovima čl. 3, DPIA i Radnjama obrade + changelog red). **Statut je sada verzija 4.1** (`statut_4_1_0.md`, donet 16.05.2026, stupio na snagu upisom 21.07.2026; zamenjuje 3.8.0); postoje i Odluka o osnivanju 4.1 i Odluka o imenovanju UO 4.1 (Google Drive, sadrže lične podatke — ne objavljuju se). Loader `pravni-dokument.ts` (BAZA), sve `page.tsx` reference i `messages` verzijske labele (pravne.*.ver, meta_*_desc, dok_tag) repointovani na 4.0/4.1. Folder `dokumentacija 3.9/` je sada istorija. Tabela ispod opisuje prethodni 3.9 set (istorija promena važi i dalje).
+
+**Prethodni set (istorija):** verzije 3.9.0 u folderu `dokumentacija 3.9/` (pažnja: ime sa razmakom). 3.9.0 nadograđuje prethodni 3.8.x set (folder `dokumentacija 3.8/`, sada istorija): prelazna odredba o početku sistema (Pravilnik čl. 82, „početni korisnici"), konkretizovani GDPR obrađivači (Vercel/Neon/Cloudflare R2/Resend, SAD) + DPO (Nikola Šarić), transparentnost donatora, jezici sr/en/hu. **Statut ostaje na 3.8.0** (sadržinski nepromenjen, fajl `statut_3_8_0.md`). Stariji implementacioni nalazi koji referenciraju 3.7.x/3.8.x i dalje važe.
 
 | Dokument | Fajl (`dokumentacija 3.9/`) | Verzija |
 |---|---|---|
@@ -65,7 +67,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 
 **Otklonjene neusaglašenosti pri konsolidaciji na 3.8.0:** whitepaper — prava neverifikovanog korisnika (razmena van prostora za oglašavanje + ažuriranje evidencije POEN-a) usklađena sa Pravilnikom čl. 28; e-mail za zaštitu podataka ujednačen na `privatnost@ekolo.rs` (DPIA/Radnje obrade); hijerarhija — dodat Pravilnik o Gornjem Kolu, naziv „kolektivni oblici"; programi podrške — verzija u footeru ujednačena; zastarele međudokumentne verzijske reference → 3.8.0.
 
-**✅ Rendering app-a (od 2026-06-08):** javne pravne stranice sada čitaju iz **`dokumentacija 3.9/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 3.9`). Prikazuju se verzije **3.9.0** za sve akte (statut ostaje **3.8.0**). Engleski prevod celog seta je u **`dokumentacija 3.9/en/`** (15 dokumenata, uz disklejmer „Serbian prevails"; loader bira EN za locale `en`, fallback na srpski). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
+**✅ Rendering app-a (od 2026-07-22):** javne pravne stranice čitaju iz **`dokumentacija 4.0/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 4.0`; ranije 3.9). Prikazuju se verzije **3.9.0** za sve akte (statut ostaje **3.8.0**). Engleski prevod celog seta je u **`dokumentacija 3.9/en/`** (15 dokumenata, uz disklejmer „Serbian prevails"; loader bira EN za locale `en`, fallback na srpski). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
 
 Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 

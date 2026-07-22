@@ -396,9 +396,9 @@ Donacije pomažu Fondaciji da pokrije osnovne troškove rada (server, alati, raz
       {
         id: 24,
         pitanje: `Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su firme koje podržavaju rad Fondacije. Glavna razlika u odnosu na donaciju fizičkog lica je u tome što pokrovitelj može doprineti ne samo novcem, nego i u robi ili uslugama.
+        odgovor: `Pokrovitelji su pravna lica i preduzetnici koji podržavaju rad Fondacije. Glavna razlika u odnosu na donaciju fizičkog lica je u tome što pokrovitelj može doprineti ne samo novcem, nego i u robi ili uslugama.
 
-Firma nema sopstveni nalog — POEN bonus se evidentira na nalogu vlasnika ili suvlasnika koji je verifikovan korisnik, po fiksnoj tabeli sa 7 nivoa (od 10.000 RSD do 1.000.000 RSD).
+Pokrovitelj nema sopstveni nalog — POEN bonus se evidentira na nalogu vlasnika ili suvlasnika koji je verifikovan korisnik, odnosno samog preduzetnika, po fiksnoj tabeli sa 7 nivoa (od 10.000 RSD do 1.000.000 RSD).
 
 Svi pokrovitelji javno se vide na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
       },

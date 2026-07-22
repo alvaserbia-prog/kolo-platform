@@ -951,35 +951,35 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "3.9.1"
+      "ver": "4.0.0"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "3.9.1"
+      "ver": "4.0.0"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
-      "ver": "3.8.0"
+      "ver": "4.1"
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "3.9.0",
+      "ver": "4.0.0",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -999,21 +999,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 3.9.0",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.0.0",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 3.9.0",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.0.0",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
-    "meta_statut_desc": "KOLO Foundation Statute, version 3.8.0",
+    "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 3.9.0",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.0.0",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 3.9.0",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.0.0",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 3.9.0",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.0.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 3.9.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.0.0",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 3.9.0",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.0.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1243,8 +1243,8 @@
     "stavka4_tekst": "Data entered during testing has no real value and may be deleted or reset before opening. This phase serves verification, not actual exchange.",
     "stavka5_naslov": "When we open",
     "stavka5_tekst": "Once the platform is stable and the entire flow runs without errors, the Foundation Board decides to open public registration — that is the next phase, Critical mass. Opening does not depend on the number of POEN; that threshold (Gornje Kolo) comes later.",
-    "stavka6_naslov": "Foundation registration in progress",
-    "stavka6_tekst": "KOLO Foundation has been established as a legal entity headquartered in Sombor (Šetalište 16); registration with the Business Registers Agency is under way.",
+    "stavka6_naslov": "Foundation registered",
+    "stavka6_tekst": "KOLO Foundation is registered in the Register of Endowments and Foundations, headquartered in Sombor (Šetalište 16). Registration number: 28836627 · Tax ID (PIB): 115840443.",
     "cilj_tekst": "The goal of all these steps is for the Foundation to cease being the centre of the system as soon as possible.",
     "ukljucivanje_tag": "How you get involved",
     "ukljucivanje_naslov": "The system is built through different forms of contribution",
@@ -1283,11 +1283,11 @@
     "fondacija_naslov": "KOLO Foundation",
     "stub1_tekst": "The Foundation is the legal instrument of the system — a legal entity that receives donations and sponsorships in goods, services and money. It covers the operational costs of the platform, maintains the infrastructure and represents KOLO before the community and the state.",
     "stub2_naslov": "Headquarters and registration",
-    "stub2_tekst": "KOLO Foundation was established with its headquarters in Sombor (Šetalište 16). Registration with the Business Registers Agency is under way.",
+    "stub2_tekst": "KOLO Foundation is registered in the Register of Endowments and Foundations kept by the Serbian Business Registers Agency, headquartered in Sombor (Šetalište 16). Registration number: 28836627 · Tax ID (PIB): 115840443.",
     "stub3_naslov": "Governance bodies",
     "stub3_tekst": "Board of Directors and Director. The Board makes strategic decisions. The Director manages operations. Upon activation of the Upper Kolo, the Foundation transitions to a service and executive role — implementing decisions and providing reasoned responses to Upper Kolo recommendations.",
     "javno_tag": "Public and available",
-    "dok_tag": "Documents (v3.9.0)",
+    "dok_tag": "Documents (v4.0)",
     "dok_whitepaper": "Whitepaper",
     "dok_statut": "KOLO Foundation Statute",
     "dok_pravilnik_kolo": "Rulebook on the KOLO System",
@@ -1482,7 +1482,7 @@
     "n2_opis": "You donate money to the Foundation. The Protocol records POEN according to a coefficient that grows gently with your total contribution. POEN from a donation does not confer ownership, cannot be converted to money and does not buy votes.",
     "n3_naslov": "Sponsorship",
     "n3_iznos": "7 tiers · threshold 10,000 RSD",
-    "n3_opis": "A legal entity (company, association) signs a donation agreement with the Foundation in money, goods or services. The sponsor does not receive POEN; the verified-user owner receives a bonus according to a fixed 7-tier table.",
+    "n3_opis": "A legal entity or sole proprietor (company, association, trade) signs a donation agreement with the Foundation in money, goods or services. The sponsor does not receive POEN; the bonus is recorded, according to a fixed 7-tier table, to the verified owner or the sole proprietor themselves.",
     "n4_naslov": "Operational contribution",
     "n4_iznos": "per completed work",
     "n4_opis": "Concrete work for the community: ZRNO Holders (and in the first phase the Foundation Board) post a task, you apply and complete it, they confirm completion before the Protocol records POEN.",
@@ -1887,7 +1887,7 @@
     "napomena_predstavljanje_tekst": "is visible to all logged-in users.",
     "napomena_kontakt_bold": "Contact details",
     "napomena_kontakt_tekst": "are visible only to verified users, and only once they explicitly click \"Show contact\" — every disclosure is logged.",
-    "pristanak_tekst": "I agree to the posting terms stated above. The request is automatically removed after 30 days.",
+    "pristanak_tekst": "I agree to the posting terms stated above. The request is automatically removed after 72 hours.",
     "dugme_objavljujem": "Posting...",
     "dugme_objavi": "Post request",
     "ucitavanje": "Loading…",
