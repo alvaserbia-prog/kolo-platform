@@ -14,7 +14,7 @@ const IZVOR = "sr";
 // sr-Cyrl nema fajl (transliteracija), ne proverava se.
 // "hu" je ZAMRZNUT (neaktivan) — messages/hu.json se NE održava do pune integracije
 // mađarskog (vidi src/i18n/routing.ts). Vratiti "hu" u listu kad se reaktivira.
-const CILJEVI = ["en"];
+const CILJEVI = ["en", "hr"];
 
 function leafKeys(obj, prefix = "") {
   let keys = [];

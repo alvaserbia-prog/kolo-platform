@@ -9,6 +9,7 @@ const jezici = [
   { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
   { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
+  { kod: "hr", ikona: "/flags/hr.svg", naziv: "Hrvatski" },
 ];
 
 function promeniJezik(kod: string) {
