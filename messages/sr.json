@@ -951,35 +951,35 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "3.9.1"
+      "ver": "4.0.0"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "3.9.1"
+      "ver": "4.0.0"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
-      "ver": "3.8.0"
+      "ver": "4.1"
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "3.9.0",
+      "ver": "4.0.0",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -999,21 +999,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 3.9.0",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.0.0",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 3.9.0",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.0.0",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
-    "meta_statut_desc": "Statut KOLO Fondacije, verzija 3.8.0",
+    "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 3.9.0",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.0.0",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 3.9.0",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.0.0",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 3.9.0",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.0.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 3.9.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.0.0",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 3.9.0",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.0.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -1243,8 +1243,8 @@
     "stavka4_tekst": "Podaci uneti tokom testiranja nemaju realnu vrednost i mogu biti obrisani ili resetovani pre otvaranja. Ova faza služi proveri, ne stvarnoj razmeni.",
     "stavka5_naslov": "Kada otvaramo",
     "stavka5_tekst": "Kada platforma bude stabilna i ceo tok prođe bez grešaka, Upravni odbor donosi odluku o otvaranju javne registracije — to je sledeća faza, Kritična masa. Otvaranje ne zavisi od broja POEN-a; taj prag (Gornje Kolo) dolazi kasnije.",
-    "stavka6_naslov": "Fondacija u registraciji",
-    "stavka6_tekst": "KOLO Fondacija je osnovana kao pravno lice sa sedištem u Somboru (Šetalište 16); u toku je upis u Agenciju za privredne registre.",
+    "stavka6_naslov": "Fondacija registrovana",
+    "stavka6_tekst": "KOLO Fondacija je registrovana u Registru zadužbina i fondacija, sa sedištem u Somboru (Šetalište 16). Matični broj: 28836627 · PIB: 115840443.",
     "cilj_tekst": "Cilj svih ovih koraka je da Fondacija što pre prestane da bude centar sistema.",
     "ukljucivanje_tag": "Kako se uključuješ",
     "ukljucivanje_naslov": "Sistem se gradi kroz različite oblike doprinosa",
@@ -1283,11 +1283,11 @@
     "fondacija_naslov": "KOLO Fondacija",
     "stub1_tekst": "Fondacija je pravni instrument sistema — pravno lice koje prima donacije i sponzorstva u robi, uslugama i novcu. Ona pokriva operativne troškove platforme, drži infrastrukturu i zastupa KOLO pred zajednicom i državom.",
     "stub2_naslov": "Sedište i registracija",
-    "stub2_tekst": "KOLO Fondacija je osnovana sa sedištem u Somboru (Šetalište 16). U toku je upis u Agenciju za privredne registre.",
+    "stub2_tekst": "KOLO Fondacija je registrovana u Registru zadužbina i fondacija pri Agenciji za privredne registre, sa sedištem u Somboru (Šetalište 16). Matični broj: 28836627 · PIB: 115840443.",
     "stub3_naslov": "Organi",
     "stub3_tekst": "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija prelazi u servisnu i izvršnu ulogu — primenjuje odluke i upućuje obrazložene odgovore na preporuke Gornjeg Kola.",
     "javno_tag": "Javno i dostupno",
-    "dok_tag": "Dokumenti (v3.9.0)",
+    "dok_tag": "Dokumenti (v4.0)",
     "dok_whitepaper": "Whitepaper",
     "dok_statut": "Statut KOLO Fondacije",
     "dok_pravilnik_kolo": "Pravilnik o KOLO sistemu",
@@ -1482,7 +1482,7 @@
     "n2_opis": "Doniraš novac Fondaciji. Protokol upisuje POEN po koeficijentu koji blago raste sa tvojim ukupnim doprinosom — na primer 1,5× na 100.000 dinara. POEN iz donacije ne daje vlasništvo, ne pretvara se u novac i ne kupuje glasove: glas zavisi od ZRNA, a glasanje je kvadratno, pa veći donator ne može da nadglasa zajednicu.",
     "n3_naslov": "Pokroviteljstvo",
     "n3_iznos": "7 nivoa · prag 10.000 RSD",
-    "n3_opis": "Pravno lice (firma, udruženje) potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Pokrovitelj ne prima POEN; vlasnik koji je verifikovan korisnik dobija bonus po posebnoj tabeli sa 7 nivoa.",
+    "n3_opis": "Pravno lice ili preduzetnik (firma, udruženje, radnja) potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Pokrovitelj ne prima POEN; bonus se po posebnoj tabeli sa 7 nivoa evidentira verifikovanom vlasniku, odnosno samom preduzetniku.",
     "n4_naslov": "Operativni doprinos",
     "n4_iznos": "po obavljenom poslu",
     "n4_opis": "Konkretan rad za zajednicu: nosioci ZRNA (a u prvoj fazi Uprava Fondacije) objave zadatak, ti se prijaviš i izvršiš ga, pa oni potvrde izvršenje pre nego što Protokol upiše POEN.",
@@ -1887,7 +1887,7 @@
     "napomena_predstavljanje_tekst": "vide svi prijavljeni korisnici.",
     "napomena_kontakt_bold": "Kontakt podaci",
     "napomena_kontakt_tekst": "su vidljivi samo verifikovanim korisnicima, i to tek kada izričito kliknu „Prikaži kontakt“ — svako otkrivanje se beleži.",
-    "pristanak_tekst": "Saglasan/na sam sa gore navedenim uslovima objave. Zahtev se automatski uklanja nakon 30 dana.",
+    "pristanak_tekst": "Saglasan/na sam sa gore navedenim uslovima objave. Zahtev se automatski uklanja nakon 72 sata.",
     "dugme_objavljujem": "Objavljujem...",
     "dugme_objavi": "Objavi zahtev",
     "ucitavanje": "Učitavanje…",

@@ -386,9 +386,9 @@ Donations help the Foundation cover its basic operating costs (server, tools, de
       {
         id: 24,
         pitanje: `What are Sponsors and how are they different from donations?`,
-        odgovor: `Sponsors are companies that support the Foundation's work. The main difference from an individual donation is that a sponsor can contribute not only in cash but also in goods or services.
+        odgovor: `Sponsors are legal entities and sole proprietors that support the Foundation's work. The main difference from an individual donation is that a sponsor can contribute not only in cash but also in goods or services.
 
-A company does not have its own account — the POEN bonus is recorded on the account of the verified owner or co-owner, according to a fixed table with 7 levels (from 10,000 RSD to 1,000,000 RSD).
+A sponsor does not have its own account — the POEN bonus is recorded on the account of the verified owner or co-owner, or of the sole proprietor themselves, according to a fixed table with 7 levels (from 10,000 RSD to 1,000,000 RSD).
 
 All sponsors are publicly visible on the Sponsors page — for transparency and public recognition of their contribution.`,
       },
