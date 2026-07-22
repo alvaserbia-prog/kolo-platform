@@ -804,6 +804,7 @@ export function poBrojevima(brojevi: number[]): FaqPitanje[] {
 }
 
 import { FAQ_SEKCIJE_EN } from "./faq-data-en";
+import { FAQ_SEKCIJE_HR } from "./faq-data-hr";
 
 /**
  * Returns FAQ sections for a given locale.
@@ -811,6 +812,7 @@ import { FAQ_SEKCIJE_EN } from "./faq-data-en";
  */
 export function getFaqSekcije(locale: string): FaqSekcija[] {
   if (locale === "en") return FAQ_SEKCIJE_EN;
+  if (locale === "hr") return FAQ_SEKCIJE_HR;
   return FAQ_SEKCIJE;
 }
 
