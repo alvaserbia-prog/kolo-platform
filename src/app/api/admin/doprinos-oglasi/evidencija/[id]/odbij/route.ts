@@ -40,7 +40,7 @@ export async function POST(
   const { id } = await params;
   const ev = await prisma.oglasEvidencija.findUnique({
     where: { id },
-    include: { oglas: { select: { createdById: true } } },
+    include: { oglas: { select: { createdById: true, title: true } } },
   });
   if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
@@ -61,7 +61,7 @@ export async function POST(
   await prisma.oglasEvidencija.update({ where: { id }, data: { status: "REJECTED", approvedById: session.user.id, approvedAt: new Date() } });
 
   await logAdminAkcija(session.user.id, "DOPRINOS_EVIDENCIJA_ODBIJENA", ev.userId,
-    `evidencija ${id} (predloženo ${ev.predlozeniPoen} POEN)`);
+    `${ev.oglas.title} (predloženo ${ev.predlozeniPoen} POEN)`);
 
   await posaljiNotifikaciju(
     ev.userId,
