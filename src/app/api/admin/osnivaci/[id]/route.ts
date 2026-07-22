@@ -1,30 +1,78 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
+import { dohvatiIliKreirajKanal } from "@/lib/protokol/osnivacki";
 
 /**
- * DELETE /api/admin/osnivaci/[id]
- * Brisanje osnivaca — samo ako kanal nije jos aktiviran (brojKoraka = 0).
+ * PATCH  /api/admin/osnivaci/[id] — izmena osnivaca (udeo, redni broj, napomena)
+ * DELETE /api/admin/osnivaci/[id] — brisanje osnivaca
+ * Oboje samo dok kanal nije aktiviran (brojKoraka = 0) i lista nije zakljucana.
  */
-export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+
+async function proveriPristup() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!jeSuperadmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!session) return { ok: false, error: "Nije prijavljen.", status: 401 } as const;
+  if (!jeSuperadmin(session.user)) return { ok: false, error: "Samo admin.", status: 403 } as const;
+
+  const kanal = await dohvatiIliKreirajKanal();
+  if (kanal.brojKoraka > 0) {
+    return { ok: false, error: "Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.", status: 409 } as const;
+  }
+  if (kanal.osnivaciZakljucani) {
+    return { ok: false, error: "Lista osnivača je zaključana. Prvo je otključajte.", status: 409 } as const;
+  }
+  return { ok: true, session } as const;
+}
+
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await proveriPristup();
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const { id } = await params;
+  const body = await req.json();
+  const { udeoBrojilac, udeoImenilac, redniBroj, napomena } = body;
 
-  const kanal = await prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } });
-  if (kanal && kanal.brojKoraka > 0) {
-    return NextResponse.json({
-      error: "Kanal je vec aktiviran (broj koraka > 0). Brisanje osnivaca nije dozvoljeno.",
-    }, { status: 409 });
+  if (typeof udeoBrojilac !== "number" || typeof udeoImenilac !== "number" || typeof redniBroj !== "number") {
+    return NextResponse.json({ error: "Nedostaju polja." }, { status: 400 });
+  }
+  if (udeoBrojilac <= 0 || udeoImenilac <= 0) {
+    return NextResponse.json({ error: "Udeli moraju biti pozitivni." }, { status: 400 });
   }
 
+  try {
+    const osnivac = await prisma.osnivac.update({
+      where: { id },
+      data: {
+        udeoBrojilac,
+        udeoImenilac,
+        redniBroj,
+        napomena: typeof napomena === "string" && napomena.trim() ? napomena.trim() : null,
+      },
+    });
+    await logAdminAkcija(auth.session.user.id, "OSNIVAC_IZMENJEN", osnivac.userId,
+      `udeo ${osnivac.udeoBrojilac}/${osnivac.udeoImenilac}, r.br. ${osnivac.redniBroj}`);
+    return NextResponse.json({ osnivac });
+  } catch (e) {
+    if (e && typeof e === "object" && "code" in e && e.code === "P2002") {
+      return NextResponse.json({ error: "Redni broj je već zauzet drugim osnivačem." }, { status: 409 });
+    }
+    if (e && typeof e === "object" && "code" in e && e.code === "P2025") {
+      return NextResponse.json({ error: "Osnivač ne postoji." }, { status: 404 });
+    }
+    throw e;
+  }
+}
+
+export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const auth = await proveriPristup();
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+
+  const { id } = await params;
   const osnivac = await prisma.osnivac.delete({ where: { id } });
-  await logAdminAkcija(session.user.id, "OSNIVAC_OBRISAN", osnivac.userId,
+  await logAdminAkcija(auth.session.user.id, "OSNIVAC_OBRISAN", osnivac.userId,
     `udeo ${osnivac.udeoBrojilac}/${osnivac.udeoImenilac}, r.br. ${osnivac.redniBroj}`);
   return NextResponse.json({ ok: true });
 }

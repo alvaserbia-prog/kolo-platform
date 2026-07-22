@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
+import { dohvatiIliKreirajKanal } from "@/lib/protokol/osnivacki";
 
 async function proveriAdmin() {
   const session = await getServerSession(authOptions);
@@ -22,11 +23,21 @@ export async function GET() {
   const auth = await proveriAdmin();
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
-  const osnivaci = await prisma.osnivac.findMany({
-    include: { user: { select: { pseudonim: true, email: true } } },
-    orderBy: { redniBroj: "asc" },
+  const [osnivaci, kanal] = await Promise.all([
+    prisma.osnivac.findMany({
+      include: { user: { select: { pseudonim: true, email: true } } },
+      orderBy: { redniBroj: "asc" },
+    }),
+    dohvatiIliKreirajKanal(),
+  ]);
+  return NextResponse.json({
+    osnivaci,
+    kanal: {
+      brojKoraka: kanal.brojKoraka,
+      zatvoren: kanal.zatvoren,
+      osnivaciZakljucani: kanal.osnivaciZakljucani,
+    },
   });
-  return NextResponse.json({ osnivaci });
 }
 
 export async function POST(req: NextRequest) {
@@ -44,10 +55,15 @@ export async function POST(req: NextRequest) {
   }
 
   // Kanal ne sme da bude vec aktiviran (brojKoraka > 0) ako se menja lista osnivaca
-  const kanal = await prisma.osnivackiKanal.findUnique({ where: { id: "singleton" } });
-  if (kanal && kanal.brojKoraka > 0) {
+  const kanal = await dohvatiIliKreirajKanal();
+  if (kanal.brojKoraka > 0) {
     return NextResponse.json({
       error: "Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.",
+    }, { status: 409 });
+  }
+  if (kanal.osnivaciZakljucani) {
+    return NextResponse.json({
+      error: "Lista osnivača je zaključana. Prvo je otključajte.",
     }, { status: 409 });
   }
 

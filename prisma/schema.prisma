@@ -954,6 +954,8 @@ model OsnivackiKanal {
   zatvoren           Boolean  @default(false)    // postaje true kad brojKoraka = 120
   zatvorenAt         DateTime?
   poslednjiPrag      Int      @default(0)        // posljednji aktiviran prag (100.000, 200.000, ...)
+  osnivaciZakljucani Boolean  @default(false)    // admin zakljucao listu (uslov: zbir udela = 1); emisija ide samo kad je zakljucano
+  osnivaciZakljucaniAt DateTime?
   updatedAt          DateTime @updatedAt
 }
 
