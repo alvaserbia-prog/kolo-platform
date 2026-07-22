@@ -40,8 +40,8 @@ const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string;
   },
   "osnivacki": {
     naziv: "Pravilnik o osnivačkom doprinosu",
-    fajl: "osnivacki_3_9_0.md",
-    verzija: "3.8.0",
+    fajl: "osnivacki_3_9_1.md",
+    verzija: "3.9.1",
     opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
   },
   "gornje-kolo": {

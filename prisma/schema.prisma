@@ -950,7 +950,7 @@ model PravilnikPrihvatanje {
 model OsnivackiKanal {
   id                 String   @id @default("singleton")
   ukupnoEvidentirano Int      @default(0)        // ukupno POEN-a evidentirano kroz kanal (max 2.400.000)
-  brojKoraka         Int      @default(0)        // broj izvrsenih koraka (max 120)
+  brojKoraka         Int      @default(0)        // broj izvrsenih koraka (max 100)
   zatvoren           Boolean  @default(false)    // postaje true kad brojKoraka = 120
   zatvorenAt         DateTime?
   poslednjiPrag      Int      @default(0)        // posljednji aktiviran prag (100.000, 200.000, ...)
@@ -974,10 +974,10 @@ model Osnivac {
 
 model OsnivackiKorakLog {
   id                  String   @id @default(uuid())
-  brojKoraka          Int      @unique           // 1, 2, ..., 120
+  brojKoraka          Int      @unique           // 1, 2, ..., 100
   prag                Int                        // POEN prag koji je aktivirao korak (100k, 200k, ...)
   ukupanPoenUSistemu  Int                        // total POEN-a u sistemu u trenutku okidanja
-  iznosKoraka         Int      @default(20000)   // 20.000 POEN po koraku
+  iznosKoraka         Int      @default(24000)   // 24.000 POEN po koraku (v3.9.1)
   createdAt           DateTime @default(now())
   emisije             OsnivackiKorakEmisija[]
 }
