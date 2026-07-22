@@ -935,35 +935,35 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
-      "ver": "3.8.0"
+      "ver": "4.1"
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "3.9.0"
+      "ver": "4.0.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "3.9.0",
+      "ver": "4.0.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -983,21 +983,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 3.9.0-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.0.0-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 3.9.0-os verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.0.0-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
-    "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 3.8.0-es verzió",
+    "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 3.9.0-ös verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.0.0-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 3.9.0-ös verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.0.0-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 3.9.0-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.0.0-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 3.9.0-os verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.0.0-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 3.9.0-ös verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.0.0-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1227,8 +1227,8 @@
     "stavka4_tekst": "A tesztelés során bevitt adatoknak nincs valós értékük, és a megnyitás előtt törölhetők vagy visszaállíthatók. Ez a szakasz az ellenőrzést szolgálja, nem a tényleges cserét.",
     "stavka5_naslov": "Mikor nyitunk",
     "stavka5_tekst": "Amint a platform stabil és a teljes folyamat hibátlanul lefut, az Igazgatótanács dönt a nyilvános regisztráció megnyitásáról — ez a következő szakasz, a Kritikus tömeg. A megnyitás nem függ a POEN mennyiségétől; ez a küszöb (Gornje Kolo) később jön.",
-    "stavka6_naslov": "Az alapítvány bejegyzése folyamatban",
-    "stavka6_tekst": "A KOLO Alapítvány jogi személyként, Zombor székhellyel (Šetalište 16) jött létre; a Gazdasági Nyilvántartási Ügynökségnél a bejegyzés folyamatban van.",
+    "stavka6_naslov": "Az alapítvány bejegyezve",
+    "stavka6_tekst": "A KOLO Alapítvány be van jegyezve az Alapítványok Nyilvántartásába, székhelye Zombor (Šetalište 16). Nyilvántartási szám: 28836627 · Adószám (PIB): 115840443.",
     "cilj_tekst": "Minden lépés célja az, hogy az Alapítvány minél hamarabb ne legyen a rendszer középpontja.",
     "ukljucivanje_tag": "Hogyan csatlakozhatsz",
     "ukljucivanje_naslov": "A rendszer különféle hozzájárulási formákon keresztül épül",
@@ -1267,11 +1267,11 @@
     "fondacija_naslov": "KOLO Alapítvány",
     "stub1_tekst": "Az Alapítvány a rendszer jogi eszköze — olyan jogi személy, amely áruban, szolgáltatásban és pénzben fogad el adományokat és szponzorációkat. Fedezi a platform működési költségeit, fenntartja az infrastruktúrát és képviseli a KOLO-t a közösség és az állam előtt.",
     "stub2_naslov": "Székhely és bejegyzés",
-    "stub2_tekst": "A KOLO Alapítványt Sombor székhellyel alapították (Šetalište 16). A Gazdasági Nyilvántartó Ügynökségbe való bejegyzés folyamatban van.",
+    "stub2_tekst": "A KOLO Alapítvány be van jegyezve a Gazdasági Nyilvántartási Ügynökség által vezetett Alapítványok Nyilvántartásába, székhelye Zombor (Šetalište 16). Nyilvántartási szám: 28836627 · Adószám (PIB): 115840443.",
     "stub3_naslov": "Irányítási szervek",
     "stub3_tekst": "Igazgatótanács és Igazgató. Az Igazgatótanács stratégiai döntéseket hoz. Az Igazgató az operatív irányítást végzi. A Felső Kolo aktiválásával az Alapítvány szolgáltatói és végrehajtói szerepbe lép — végrehajtja a döntéseket és indokolt válaszokat ad a Felső Kolo ajánlásaira.",
     "javno_tag": "Nyilvános és elérhető",
-    "dok_tag": "Dokumentumok (v3.9.0)",
+    "dok_tag": "Dokumentumok (v4.0)",
     "dok_whitepaper": "Fehér könyv",
     "dok_statut": "KOLO Alapítvány Alapszabálya",
     "dok_pravilnik_kolo": "KOLO rendszer szabályzata",
@@ -1466,7 +1466,7 @@
     "n2_opis": "You donate money to the Foundation. The Protocol records POEN according to a coefficient that grows gently with your total contribution. POEN from a donation does not confer ownership, cannot be converted to money and does not buy votes.",
     "n3_naslov": "Sponsorship",
     "n3_iznos": "7 tiers · threshold 10,000 RSD",
-    "n3_opis": "A legal entity (company, association) signs a donation agreement with the Foundation in money, goods or services. The sponsor does not receive POEN; the verified-user owner receives a bonus according to a fixed 7-tier table.",
+    "n3_opis": "A legal entity or sole proprietor (company, association, trade) signs a donation agreement with the Foundation in money, goods or services. The sponsor does not receive POEN; the bonus is recorded, according to a fixed 7-tier table, to the verified owner or the sole proprietor themselves.",
     "n4_naslov": "Operational contribution",
     "n4_iznos": "per completed work",
     "n4_opis": "Concrete work for the community: ZRNO Holders (and in the first phase the Foundation Board) post a task, you apply and complete it, they confirm completion before the Protocol records POEN.",
@@ -1869,7 +1869,7 @@
     "napomena_predstavljanje_tekst": "is visible to all logged-in users.",
     "napomena_kontakt_bold": "Contact details",
     "napomena_kontakt_tekst": "are visible only to verified users, and only once they explicitly click \"Show contact\" — every disclosure is logged.",
-    "pristanak_tekst": "I agree to the posting terms stated above. The request is automatically removed after 30 days.",
+    "pristanak_tekst": "I agree to the posting terms stated above. The request is automatically removed after 72 hours.",
     "dugme_objavljujem": "Posting...",
     "dugme_objavi": "Post request",
     "ucitavanje": "Loading…",

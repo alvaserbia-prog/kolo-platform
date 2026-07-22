@@ -1,12 +1,12 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-const BAZA = path.join(process.cwd(), "dokumentacija 3.9");
+const BAZA = path.join(process.cwd(), "dokumentacija 4.0");
 
 /**
  * Učitava pravni markdown dokument za dati jezik.
  *
- * - "en": pokušava `nova dokumentacija/en/<file>`; ako prevod još NE postoji,
+ * - "en": pokušava `dokumentacija 4.0/en/<file>`; ako prevod još NE postoji,
  *   vraća srpski original (fallback) — stranica nikad ne puca.
  * - "sr" i "sr-Cyrl": srpski izvor (ćirilica se izvodi transliteracijom u prikazu,
  *   vidi CirilicaProvider) — isti fajl.
