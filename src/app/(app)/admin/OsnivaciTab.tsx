@@ -36,21 +36,29 @@ export default function OsnivaciTab({
   onDone: () => void;
 }) {
   const t = useTranslations("admin");
-  const { data, isLoading: ucitavanje, refetch } = useQuery({
+  // Dva odvojena upita: pad statusa kanala ne sme da sakrije listu osnivača
+  // (inače lista deluje prazno i admin duplira unos → P2002 na serveru).
+  const { data: listaOsnivaca, isLoading: ucitavanje, error: greskaListe, refetch: refetchLista } = useQuery({
     queryKey: ["admin-osnivaci"],
-    queryFn: async (): Promise<{ osnivaci: Osnivac[]; status: Status | null }> => {
-      const [oRes, sRes] = await Promise.all([
-        fetch("/api/admin/osnivaci"),
-        fetch("/api/javno/osnivacki-doprinos"),
-      ]);
-      if (!oRes.ok || !sRes.ok) throw new Error("Greška pri učitavanju osnivača");
-      const osnivaci = (await oRes.json()).osnivaci ?? [];
-      const status = (await sRes.json()).status ?? null;
-      return { osnivaci, status };
+    queryFn: async (): Promise<Osnivac[]> => {
+      const res = await fetch("/api/admin/osnivaci");
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(d.error ?? t("osnivaci_greska_ucitavanja"));
+      return d.osnivaci ?? [];
     },
   });
-  const osnivaci = data?.osnivaci ?? [];
-  const status = data?.status ?? null;
+  const { data: statusData, error: greskaStatusa, refetch: refetchStatus } = useQuery({
+    queryKey: ["admin-osnivacki-status"],
+    queryFn: async (): Promise<Status | null> => {
+      const res = await fetch("/api/javno/osnivacki-doprinos");
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(d.error ?? t("osnivaci_greska_ucitavanja"));
+      return d.status ?? null;
+    },
+  });
+  const refetch = () => Promise.all([refetchLista(), refetchStatus()]);
+  const osnivaci = listaOsnivaca ?? [];
+  const status = statusData ?? null;
   const [radnja, setRadnja] = useState<string | null>(null);
 
   // Forma za dodavanje
@@ -114,6 +122,13 @@ export default function OsnivaciTab({
 
   return (
     <div className="space-y-6">
+      {(greskaListe || greskaStatusa) && (
+        <div className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3 space-y-1">
+          {greskaListe && <p>{t("osnivaci_greska_liste")}: {(greskaListe as Error).message}</p>}
+          {greskaStatusa && <p>{t("osnivaci_greska_statusa")}: {(greskaStatusa as Error).message}</p>}
+        </div>
+      )}
+
       {/* Status kanala */}
       {status && (
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
@@ -157,7 +172,9 @@ export default function OsnivaciTab({
         </div>
 
         {osnivaci.length === 0 ? (
-          <p className="text-sm text-kolo-muted">{t("osnivaci_nema")}</p>
+          <p className="text-sm text-kolo-muted">
+            {greskaListe ? t("osnivaci_lista_nedostupna") : t("osnivaci_nema")}
+          </p>
         ) : (
           <div className="overflow-x-auto">
           <table className="w-full text-sm min-w-[30rem]">
@@ -241,7 +258,7 @@ export default function OsnivaciTab({
           {greska && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>}
           <button
             onClick={dodaj}
-            disabled={radnja === "dodaj" || !userId || !brojilac || !imenilac || !redniBroj}
+            disabled={radnja === "dodaj" || !!greskaListe || !userId || !brojilac || !imenilac || !redniBroj}
             className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
           >
             {radnja === "dodaj" ? t("osnivaci_dodajem") : t("osnivaci_dodaj_btn")}

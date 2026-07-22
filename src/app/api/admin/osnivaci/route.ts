@@ -50,9 +50,19 @@ export async function POST(req: NextRequest) {
     }, { status: 409 });
   }
 
-  const osnivac = await prisma.osnivac.create({
-    data: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena },
-  });
-
-  return NextResponse.json({ osnivac });
+  try {
+    const osnivac = await prisma.osnivac.create({
+      data: { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena },
+    });
+    return NextResponse.json({ osnivac });
+  } catch (e) {
+    if (e && typeof e === "object" && "code" in e && e.code === "P2002") {
+      const polja = String((e as { meta?: { target?: unknown } }).meta?.target ?? "");
+      const poruka = polja.includes("redniBroj")
+        ? "Redni broj je već zauzet drugim osnivačem."
+        : "Ovaj korisnik je već dodat kao osnivač.";
+      return NextResponse.json({ error: poruka }, { status: 409 });
+    }
+    throw e;
+  }
 }
