@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/zrno/nocna — manualni okidač ZRNO operacija
 export async function POST() {
@@ -13,6 +14,7 @@ export async function POST() {
 
   try {
     const rezultat = await izvrsiZrnoOperacije(new Date());
+    await logAdminAkcija(session.user.id, "ZRNO_NOCNA_MANUELNO");
     return NextResponse.json({ ok: true, ...rezultat });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Greška.";
@@ -34,6 +36,9 @@ export async function PATCH() {
     create: { id: "singleton", isActive: novoStanje, activatedAt: novoStanje ? new Date() : null },
     update: { isActive: novoStanje, activatedAt: novoStanje ? new Date() : undefined },
   });
+
+  await logAdminAkcija(session.user.id, "ZRNO_TRZISTE_PROMENJENO", undefined,
+    novoStanje ? "aktivirano" : "deaktivirano");
 
   return NextResponse.json({ ok: true, isActive: novoStanje });
 }

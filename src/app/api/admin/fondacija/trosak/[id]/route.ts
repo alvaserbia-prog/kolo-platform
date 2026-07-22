@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { azurirajVetoStatus } from "@/lib/protokol/fondacija";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * DELETE /api/admin/fondacija/trosak/[id]
@@ -16,7 +17,9 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
   if (!jeAdmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
 
   const { id } = await params;
-  await prisma.fondacijaTrosak.delete({ where: { id } });
+  const trosak = await prisma.fondacijaTrosak.delete({ where: { id } });
   await azurirajVetoStatus();
+  await logAdminAkcija(session.user.id, "FONDACIJA_TROSAK_OBRISAN", id,
+    `${trosak.kategorija}: ${Number(trosak.iznosRSD)} RSD — ${trosak.opis}`);
   return NextResponse.json({ ok: true });
 }

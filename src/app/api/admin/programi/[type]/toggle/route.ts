@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/programi/[type]/toggle — aktiviraj/deaktiviraj program
 export async function POST(
@@ -25,6 +26,9 @@ export async function POST(
     create: { type: programType, isActive: novoStanje, activatedAt: novoStanje ? new Date() : null },
     update: { isActive: novoStanje, activatedAt: novoStanje ? new Date() : undefined },
   });
+
+  await logAdminAkcija(session.user.id, "PROGRAM_STATUS_PROMENJEN", programType,
+    novoStanje ? "aktiviran" : "deaktiviran");
 
   return NextResponse.json({ ok: true, isActive: novoStanje });
 }

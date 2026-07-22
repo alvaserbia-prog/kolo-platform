@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { azurirajVetoStatus } from "@/lib/protokol/fondacija";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 const KATEGORIJE = ["PLATA", "INFRASTRUKTURA", "PRAVNI_TROSAK", "SOFTWARE", "ADMINISTRATIVNO", "OPERATIVNO", "DRUGO"] as const;
 type Kategorija = typeof KATEGORIJE[number];
@@ -56,6 +57,9 @@ export async function POST(req: NextRequest) {
 
   // Posle svake izmene troskova, azuriraj veto status (mozda saldo Fondacije promenio prag)
   await azurirajVetoStatus();
+
+  await logAdminAkcija(session.user.id, "FONDACIJA_TROSAK_DODAT", trosak.id,
+    `${kategorija}: ${iznosRSD} RSD — ${opis}`);
 
   return NextResponse.json({ trosak: { ...trosak, iznosRSD: Number(trosak.iznosRSD) } });
 }

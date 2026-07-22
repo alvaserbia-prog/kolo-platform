@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -75,14 +76,8 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  await prisma.auditLog.create({
-    data: {
-      adminId: session.user.id,
-      akcija: "POKROVITELJ_KREIRAN",
-      targetId: pokrovitelj.id,
-      detalji: `Naziv: ${pokrovitelj.naziv}, PIB: ${pokrovitelj.pib}, Vlasnik: ${vlasnik.pseudonim}`,
-    },
-  });
+  await logAdminAkcija(session.user.id, "POKROVITELJ_KREIRAN", pokrovitelj.id,
+    `Naziv: ${pokrovitelj.naziv}, PIB: ${pokrovitelj.pib}, Vlasnik: ${vlasnik.pseudonim}`);
 
   return NextResponse.json({ id: pokrovitelj.id }, { status: 201 });
 }

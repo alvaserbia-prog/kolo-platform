@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { logAdminAkcija } from "@/lib/audit";
 
 /**
  * DELETE /api/admin/osnivaci/[id]
@@ -22,6 +23,8 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
     }, { status: 409 });
   }
 
-  await prisma.osnivac.delete({ where: { id } });
+  const osnivac = await prisma.osnivac.delete({ where: { id } });
+  await logAdminAkcija(session.user.id, "OSNIVAC_OBRISAN", osnivac.userId,
+    `udeo ${osnivac.udeoBrojilac}/${osnivac.udeoImenilac}, r.br. ${osnivac.redniBroj}`);
   return NextResponse.json({ ok: true });
 }
