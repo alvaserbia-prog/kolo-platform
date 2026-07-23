@@ -4,8 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 // Dozvoljeni jezici (next-intl locale). Mora da prati src/i18n/routing.ts.
-// "hu" je zamrznut (neaktivan) — vidi routing.ts.
-const JEZICI = ["sr", "sr-Cyrl", "en", "hr"];
+// "hu" i "hr" su zamrznuti (neaktivni) — vidi routing.ts.
+const JEZICI = ["sr", "sr-Cyrl", "en"];
 
 /**
  * Trajno čuva izabrani jezik prijavljenog korisnika (za notifikacije/email i
