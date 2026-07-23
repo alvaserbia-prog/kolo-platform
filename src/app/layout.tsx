@@ -118,8 +118,8 @@ export default async function RootLayout({
   // VAŽNO: namespace dodati ovde tek pošto se potvrdi da ga NE koristi nijedna
   // klijentska komponenta (`useTranslations`).
   const SERVER_ONLY_NS = new Set([
-    "pravne", "landing", "oSistemu", "kakoFunkcionise", "kakoFunkcionisePage",
-    "zajednickoDobroPage", "osnivackiDoprinosPage", "pokroviteljPage", "zaposljavnje",
+    "pravne", "landing", "oSistemu", "kakoFunkcionisePage",
+    "zajednickoDobroPage", "osnivackiDoprinosPage", "pokroviteljPage",
   ]);
   const clientMessages = Object.fromEntries(
     Object.entries(messages).filter(([ns]) => !SERVER_ONLY_NS.has(ns)),
