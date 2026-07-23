@@ -12,8 +12,8 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MESSAGES = join(ROOT, "messages");
 const IZVOR = "sr";
 // sr-Cyrl nema fajl (transliteracija), ne proverava se.
-// "hu" je ZAMRZNUT (neaktivan) — messages/hu.json se NE održava do pune integracije
-// mađarskog (vidi src/i18n/routing.ts). Vratiti "hu" u listu kad se reaktivira.
+// "hu" i "hr" su ZAMRZNUTI (neaktivni) — messages/{hu,hr}.json se NE održavaju
+// do pune integracije (vidi src/i18n/routing.ts). Vratiti u listu pri reaktivaciji.
 const CILJEVI = ["en"];
 
 function leafKeys(obj, prefix = "") {
