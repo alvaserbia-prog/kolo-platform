@@ -1,12 +1,6 @@
 # Uslovi korišćenja KOLO platforme
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443). U dokument su uneti registracioni podaci Fondacije i ažurirane verzijske reference; Statut Fondacije važi u verziji 4.1. U ostalom delu sadržinski nepromenjeno.*
-
-*Datum stupanja na snagu: 16.06.2026. (dopuna 3.9.1: 25.06.2026; konsolidacija 4.0.0: 22.07.2026.)*
-
-*Dopuna 3.9.1 (čl. 16): verifikovani korisnik može verifikaciju neverifikovanog pokrenuti neposredno sa aktivnog zahteva na tabli (objava zahteva je saglasnost); rok aktivnog zahteva skraćen sa 30 dana na 72 sata; verifikovani se po verifikaciji obaveštava i može je prijaviti.*
+*Datum stupanja na snagu: 16.06.2026.*
 
 ## I — Uvodne odredbe
 

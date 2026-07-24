@@ -1,9 +1,5 @@
 # Pravilnik o hijerarhiji akata KOLO sistema
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 ## I — Uvodne odredbe
 
 ### Član 1 — Predmet

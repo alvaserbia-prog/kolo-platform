@@ -2,12 +2,6 @@
 
 # Records of Processing Activities of Personal Data
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443). The Foundation's registration details have been added and version references updated; the Statute of the Foundation applies in version 4.1. Otherwise unchanged in substance.*
-
-Date of last amendment: 16.06.2026.
-
 *These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.0.0), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.0.0) and the Rulebook on Support Programmes (version 4.0.0).*
 
 **CONTROLLER DETAILS**
