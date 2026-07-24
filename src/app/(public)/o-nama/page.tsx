@@ -101,6 +101,8 @@ export default async function ONamaPage() {
     { naziv: t("dok_pravilnik_pokroviteljstvo"), href: "/pravilnik/pokroviteljstvo-donacije" },
     { naziv: t("dok_pravilnik_operativni"), href: "/pravilnik/operativni" },
     { naziv: t("dok_pravilnik_osnivacki"), href: "/pravilnik/osnivacki" },
+    { naziv: t("dok_pravilnik_gornje_kolo"), href: "/pravilnik/gornje-kolo" },
+    { naziv: t("dok_pravilnik_programi_podrske"), href: "/pravilnik/programi-podrske" },
   ];
 
   const pravniDokumenti = [
