@@ -2,15 +2,9 @@
 
 # Data Protection Impact Assessment (DPIA)
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443). The Foundation's registration details have been added and version references updated; the Statute of the Foundation applies in version 4.1. Otherwise unchanged in substance.*
-
 *pursuant to Art. 54 of the Law on Personal Data Protection*
 
 *("Official Gazette of the RS", no. 87/2018)*
-
-Date of preparation: 23.05.2026. — Date of last amendment: 16.06.2026.
 
 *Classification: Internal*
 
@@ -23,7 +17,6 @@ Date of preparation: 23.05.2026. — Date of last amendment: 16.06.2026.
 | **Registered address** | Šetalište 16, 25000 Sombor, Republic of Serbia |
 | **Email for data protection** | privatnost@ekolo.rs |
 | **Data Protection Officer (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
-| **DPIA version** | 4.0.0 |
 | **Date of preparation** | 23.05.2026. (last amended 16.06.2026.) |
 | **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–10, no. 12 and no. 13 (including the activated Module 3 — Social Programs with verifier confirmation, Integrity Monitoring of the Verification System, and the public list of donations); inactive processing activity no. 11 (Module 4 — Children) |
 | **Related documents** | Rulebook on the KOLO System (v4.0.0), Privacy Policy (v4.0.0), Records of Processing Activities (v4.0.0), Rulebook on Support Programmes (v4.0.0), Rulebook on the Hierarchy of Acts (v4.0.0), Statute (v4.1), Whitepaper (v4.0.0) |

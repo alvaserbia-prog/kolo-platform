@@ -1,9 +1,5 @@
 # Pravilnik o KOLO sistemu
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 *KOLO je sistem međusobne podrške zasnovan na ideji: da ljudi mogu da evidentiraju šta doprinose jedni drugima i zajednici. Ovaj pravilnik uređuje kako taj sistem radi: ko su njegovi akteri, šta je zajedničko dobro koje zajedno grade, kako se doprinos evidentira i kako se donose odluke. Pravilnik je obavezujući akt čije odredbe uređuju prava i obaveze korisnika.*
 
 ## I — Opšte odredbe

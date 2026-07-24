@@ -1,7 +1,5 @@
 # Statut KOLO Fondacije
 
-*Verzija 4.1*
-
 *Donet od strane Upravnog odbora na sednici održanoj 16.05.2026. godine u Somboru; stupio na snagu upisom u Registar zadužbina i fondacija (21.07.2026). KOLO Fondacija — matični broj 28836627, PIB 115840443.*
 
 U skladu sa odredbama članova 33. stav 4. i 34. Zakona o zadužbinama i fondacijama („Službeni glasnik Republike Srbije" br. 88/2010, 99/2011 — dr. zakon i 44/2018 — dr. zakon), Upravni odbor na sednici održanoj dana 16.05.2026. godine u Somboru doneo je:

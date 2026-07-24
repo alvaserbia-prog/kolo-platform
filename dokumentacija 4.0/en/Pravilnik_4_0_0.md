@@ -2,10 +2,6 @@
 
 # Rulebook on the KOLO System
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
 *KOLO is a mutual support system based on the idea that people can record what they contribute to each other and to the community. This Rulebook governs how that system works: who its actors are, what the common good they collectively build consists of, how contributions are recorded, and how decisions are made. The Rulebook is a binding act whose provisions govern the rights and obligations of users.*
 
 ## Chapter I — General Provisions

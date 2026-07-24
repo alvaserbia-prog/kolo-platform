@@ -2,12 +2,6 @@
 
 # Rulebook on the Upper Kolo
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
-Date of preparation: 03.06.2026.
-
 *This Rulebook governs the voting procedures and operational rules of the Upper Kolo. It is adopted on the basis of Articles 41, 46, and 47 of the KOLO System Rulebook (v4.0.0), which expressly refer to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions

@@ -2,65 +2,7 @@
 
 # KOLO Whitepaper
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
 *A Participatory Common-Good System*
-
-**Contents**
-
-Summary 3
-
-- Problem 5
-
-- Vision 8
-
-- Common good and protocol 10
-
-- What KOLO is — the legal position of the system 13
-
-- System architecture 18
-
-- Accounting framework 21
-
-6.1 POEN 21
-
-6.2 ZRNO 23
-
-6.3 Accounting coefficient 26
-
-- Participants and proof of reality 28
-
-- Contribution to the common good 33
-
-8.1 Founding contribution 33
-
-8.2 Financial contribution 33
-
-8.3 Operational contribution 35
-
-- Modules 36
-
-- Governance 40
-
-- Game theory and incentives 43
-
-- Data protection 50
-
-- Development path 53
-
-- Conclusion 58
-
-Appendix A: International institutional framework 59
-
-Appendix B: Parameter tables 61
-
-Appendix C: Glossary 64
-
-Appendix D: Technical and organisational security measures 68
-
-Appendix E: Mapping of Ostrom design principles onto the KOLO architecture 72
 
 # Summary
 

@@ -1,14 +1,8 @@
 # Procena uticaja na zaštitu podataka o ličnosti (DPIA)
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443). U dokument su uneti registracioni podaci Fondacije i ažurirane verzijske reference; Statut Fondacije važi u verziji 4.1. U ostalom delu sadržinski nepromenjeno.*
-
 *u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti*
 
 *(„Sl. glasnik RS“, br. 87/2018)*
-
-Datum izrade: 23.05.2026. — Datum poslednje izmene: 16.06.2026.
 
 *Klasifikacija: Interno*
 
@@ -21,7 +15,6 @@ Datum izrade: 23.05.2026. — Datum poslednje izmene: 16.06.2026.
 | **Sedište** | Šetalište 16, 25000 Sombor, Republika Srbija |
 | **Email za zaštitu podataka** | privatnost@ekolo.rs |
 | **Lice za zaštitu podataka (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
-| **Verzija DPIA** | 4.0.0 |
 | **Datum izrade** | 23.05.2026. (poslednja izmena 16.06.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–10, br. 12 i br. 13 (uključujući aktivirani Modul 3 — Socijalni programi sa verifikatorskom potvrdom, Nadzor integriteta sistema verifikacija i javnu listu donacija); neaktivna radnja obrade br. 11 (Modul 4 — Deca) |
 | **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.0.0), Politika privatnosti (v4.0.0), Registar radnji obrade (v4.0.0), Pravilnik o programima podrške (v4.0.0), Pravilnik o hijerarhiji akata (v4.0.0), Statut (v4.1), Whitepaper (v4.0.0) |

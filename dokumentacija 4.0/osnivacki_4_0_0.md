@@ -1,12 +1,6 @@
 # Pravilnik o osnivačkom doprinosu
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 *Ovaj pravilnik uređuje operativnu mehaniku osnivačkog doprinosa — naknadnog evidentiranja rada obavljenog pre otvaranja platforme. Donosi se na osnovu člana 37 Pravilnika o KOLO sistemu.*
-
-*Dopuna 3.9.1 (čl. 6, 7, 8, 12, 14): iznos koraka promenjen sa 20.000 na 24.000 POEN-a, ukupan broj koraka sa 120 na 100; poslednji korak aktivira se na pragu od 10.000.000 POEN-a, posle čega se kanal trajno zatvara. Gornja granica od 2.400.000 POEN-a ostaje nepromenjena.*
 
 ## I — Opšte odredbe
 
@@ -149,5 +143,3 @@ Ovaj pravilnik donosi i menja Upravni odbor KOLO Fondacije, po postupku utvrđen
 *Stupanje na snagu*
 
 Ovaj pravilnik stupa na snagu danom donošenja od strane Upravnog odbora KOLO Fondacije.
-
-*Pravilnik o osnivačkom doprinosu v4.0.0*

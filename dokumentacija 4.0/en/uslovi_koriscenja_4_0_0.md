@@ -2,13 +2,7 @@
 
 # Terms of Use of the KOLO Platform
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443). The Foundation's registration details have been added and version references updated; the Statute of the Foundation applies in version 4.1. Otherwise unchanged in substance.*
-
-*Date of entry into force: 16.06.2026. (amendment 3.9.1: 25.06.2026; consolidation 4.0.0: 22.07.2026.)*
-
-*Amendment 3.9.1 (Art. 16): a verified user may initiate verification of an unverified user directly from an active request on the board (posting a request constitutes consent); the active-request period is shortened from 30 days to 72 hours; the verified user is notified after verification and may report it.*
+*Date of entry into force: 16.06.2026.*
 
 ## Chapter I — Introductory Provisions
 

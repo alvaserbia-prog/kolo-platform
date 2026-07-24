@@ -1,11 +1,5 @@
 # Pravilnik o Gornjem Kolu
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
-Datum izrade: 03.06.2026.
-
 *Ovaj pravilnik uređuje postupke glasanja i operativna pravila rada Gornjeg Kola. Donosi se na osnovu članova 41, 46 i 47 Pravilnika o KOLO sistemu (v4.0.0), koji izričito upućuju na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe

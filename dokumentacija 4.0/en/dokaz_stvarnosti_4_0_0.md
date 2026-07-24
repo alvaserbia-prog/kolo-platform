@@ -2,19 +2,7 @@
 
 # Rulebook on Proof of Reality
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
 *This Rulebook governs the operational mechanics of proof of reality — the user verification model of the KOLO system based on personal acquaintance. It is adopted on the basis of Art. 32 paragraph 4 and Art. 15 point 2 of the KOLO System Rulebook.*
-
-*Amendment 3.9.1 (Art. 5): consent and account binding may also be expressed by posting a request on the guarantee board — verification is then initiated directly from the request, as an alternative to the one-time code; the verified user is notified and may report the verification. The substance of verification (personal acquaintance, verifier's responsibility, all checks and oversight) remains unchanged.*
-
-*Amendment 3.9.1 (Art. 12–13): the anti-circular rule is aligned with the fact that a user has multiple verifiers. The prohibited zone is the union of the zones of all of the user's verifiers; for each verifier, the entire ancestral chain upward and the entire subtree downward (including the user's siblings and all their descendants) are excluded.*
-
-*Amendment 3.9.2 (Art. 12–15): the prohibited zone is determined symmetrically — by verifying, the verifier permanently takes the verified user and that user's entire prohibited zone, including its later expansions, into their own prohibited zone; expansions arising from verifications performed by other users do not carry over to initial users. The circle of initial users is extended to the founding core of the Foundation, their reality index is 100% from the establishment of the account, and initial users cannot be verified through the vouching chain (former Art. 15 paragraph 2 is deleted).*
-
-*Amendment 3.9.3 (new Art. 22, transitional provision): until total circulation reaches 100,000 POEN, a user may receive at most one verification through the vouching chain — in the initial period the network grows solely through the accession of new users. Former Art. 22 and 23 become Art. 23 and 24.*
 
 ## I — General Provisions
 
@@ -257,5 +245,3 @@ This Rulebook is adopted and amended by the Management Board (UO) of the KOLO Fo
 *Entry into force*
 
 This Rulebook enters into force on the date of its adoption by the Management Board (UO) of the KOLO Foundation.
-
-*Rulebook on Proof of Reality v4.0.0*

@@ -2,8 +2,6 @@
 
 # Statute of the KOLO Foundation
 
-*Version 4.1*
-
 *Adopted by the Board of Directors at the session held on 16.05.2026 in Sombor; entered into force upon entry in the Register of Endowments and Foundations (21.07.2026). KOLO Foundation — registration number 28836627, PIB 115840443.*
 
 In accordance with the provisions of Articles 33 paragraph 4 and 34 of the Law on Endowments and Foundations ("Official Gazette of the Republic of Serbia" no. 88/2010, 99/2011 — other law and 44/2018 — other law), the Board of Directors, at the session held on 16.05.2026 in Sombor, adopted:

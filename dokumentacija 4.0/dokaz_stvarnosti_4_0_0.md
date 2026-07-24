@@ -1,18 +1,6 @@
 # Pravilnik o dokazu stvarnosti
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 *Ovaj pravilnik uređuje operativnu mehaniku dokaza stvarnosti — model verifikacije korisnika KOLO sistema zasnovan na ličnom poznavanju. Donosi se na osnovu člana 32 stav 4 i člana 15 tačka 2 Pravilnika o KOLO sistemu.*
-
-*Dopuna 3.9.1 (čl. 5): saglasnost i vezivanje naloga mogu se izraziti i objavom zahteva na tabli jemstva — verifikacija se tada pokreće neposredno sa zahteva, kao alternativa jednokratnom kodu; verifikovani se obaveštava i može prijaviti verifikaciju. Suština verifikacije (lično poznavanje, odgovornost verifikatora, sve provere i nadzor) ostaje nepromenjena.*
-
-*Dopuna 3.9.1 (čl. 12–13): anti-cirkularno pravilo usklađeno sa činjenicom da korisnik ima više verifikatora. Zabranjena zona je unija zona svih verifikatora korisnika; iz svakog verifikatora isključuje se ceo ancestralni lanac naviše i celo podstablo naniže (uključujući braću korisnika i sve njihove potomke).*
-
-*Dopuna 3.9.2 (čl. 12–15): zabranjena zona utvrđuje se simetrično — verifikacijom verifikator trajno preuzima u svoju zabranjenu zonu verifikovanog korisnika i celokupnu njegovu zabranjenu zonu, uključujući kasnija proširenja; proširenja nastala verifikacijama drugih korisnika ne prenose se na početne korisnike. Krug početnih korisnika proširen je na osnivačko jezgro Fondacije, njihov indeks stvarnosti iznosi 100% od uspostavljanja naloga, a početni korisnici ne mogu biti verifikovani u lancu jemstva (briše se raniji čl. 15 stav 2).*
-
-*Dopuna 3.9.3 (novi čl. 22, prelazna odredba): dok ukupan opticaj ne dostigne 100.000 POEN-a, korisnik može primiti najviše jednu verifikaciju u lancu jemstva — mreža se u početnom periodu širi isključivo pristupanjem novih korisnika. Raniji čl. 22 i 23 postaju čl. 23 i 24.*
 
 ## I — Opšte odredbe
 
@@ -255,5 +243,3 @@ Ovaj pravilnik donosi i menja Upravni odbor KOLO Fondacije, po postupku utvrđen
 *Stupanje na snagu*
 
 Ovaj pravilnik stupa na snagu danom donošenja od strane Upravnog odbora KOLO Fondacije.
-
-*Pravilnik o dokazu stvarnosti v4.0.0*

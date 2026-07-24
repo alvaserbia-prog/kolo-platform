@@ -1,64 +1,6 @@
 # KOLO Whitepaper
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 *Participatorni sistem zajedničkog dobra*
-
-**Sadržaj**
-
-Sažetak 3
-
-- Problem 5
-
-- Vizija 8
-
-- Zajedničko dobro i protokol 10
-
-- Šta je KOLO — pravna pozicija sistema 13
-
-- Arhitektura sistema 18
-
-- Obračunski okvir 21
-
-6.1 POEN 21
-
-6.2 ZRNO 23
-
-6.3 Obračunski koeficijent 26
-
-- Učesnici i dokaz stvarnosti 28
-
-- Doprinos zajedničkom dobru 33
-
-8.1 Osnivački doprinos 33
-
-8.2 Finansijski doprinos 33
-
-8.3 Operativni doprinos 35
-
-- Moduli 36
-
-- Upravljanje 40
-
-- Teorija igara i podsticaji 43
-
-- Zaštita podataka 50
-
-- Putanja razvoja 53
-
-- Zaključak 58
-
-Prilog A: Međunarodni institucionalni okvir 59
-
-Prilog B: Tabele parametara 61
-
-Prilog C: Glosar 64
-
-Prilog D: Tehničke i organizacione mere bezbednosti 68
-
-Prilog E: Mapiranje Ostrom dizajn principa na KOLO arhitekturu 72
 
 # Sažetak
 

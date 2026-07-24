@@ -1,9 +1,5 @@
 # Pravilnik o operativnom doprinosu
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 *Ovaj pravilnik uređuje operativnu mehaniku operativnog doprinosa — postupak prijave, izvršenja i verifikacije aktivnosti van platforme čiji se doprinos evidentira u POEN-ima. Donosi se na osnovu člana 36 Pravilnika o KOLO sistemu.*
 
 ## I — Opšte odredbe
@@ -381,5 +377,3 @@ Ovaj pravilnik donosi i menja Upravni odbor KOLO Fondacije, po postupku utvrđen
 *Stupanje na snagu*
 
 Ovaj pravilnik stupa na snagu danom donošenja od strane Upravnog odbora KOLO Fondacije.
-
-*Pravilnik o operativnom doprinosu v4.0.0*

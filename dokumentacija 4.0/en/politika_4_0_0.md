@@ -2,14 +2,6 @@
 
 # Privacy Policy of the KOLO Platform
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443). The Foundation's registration details have been added and version references updated; the Statute of the Foundation applies in version 4.1. Otherwise unchanged in substance.*
-
-Date of last amendment: 22.07.2026. (consolidation 4.0.0; previous 25.06.2026.)
-
-*Amendment 3.9.1 (sub-section 4.8, Art. 6): verification may also be initiated directly from an active request on the board (posting a request constitutes consent); the active-request period is 72 hours; the verified user is notified and may report the verification, and the report is processed to protect system integrity (sub-section 4.9).*
-
 This Privacy Policy is adopted on the basis of Art. 66 paragraph 2 and Art. 81 paragraph 4 of the Rulebook on the KOLO System and in accordance with the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP).
 
 ### Article 1 — Data Controller
@@ -322,7 +314,7 @@ We may amend this Policy in accordance with the development of the Platform and 
 
 You will be notified of all amendments that significantly affect your rights via the email address registered on the account, at least 15 days before the amendments take effect.
 
-The current version is always available on the Platform. The date of the last amendment is indicated in the document header.
+The current version is always available on the Platform.
 
 ### Article 17 — Governing Law
 

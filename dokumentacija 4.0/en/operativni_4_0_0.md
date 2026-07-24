@@ -2,10 +2,6 @@
 
 # Rulebook on Operational Contribution
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
 *This Rulebook governs the operational mechanics of operational contribution — the process of applying for, performing, and verifying off-platform activities whose contribution is recorded in POEN. It is adopted on the basis of Article 36 of the KOLO System Rulebook.*
 
 ## I — General Provisions
@@ -383,5 +379,3 @@ This Rulebook is adopted and amended by the Management Board (UO) of the KOLO Fo
 *Entry into force*
 
 This Rulebook enters into force on the date of its adoption by the Management Board (UO) of the KOLO Foundation.
-
-*Rulebook on Operational Contribution v4.0.0*
