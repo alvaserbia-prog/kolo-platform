@@ -2,6 +2,8 @@
 
 # Rulebook on Support Programmes
 
+*This Rulebook governs the operational mechanics of the social support programmes — qualifying groups, status conditions, and POEN recording parameters. It is adopted on the basis of Article 57 of the KOLO System Rulebook.*
+
 ## I — General Provisions
 
 ### Article 1

@@ -2,6 +2,8 @@
 
 # Rulebook on the KOLO System
 
+*KOLO is a mutual support system based on the idea that people can record what they contribute to each other and to the community. This Rulebook governs how that system works: who its actors are, what the common good they collectively build consists of, how contributions are recorded, and how decisions are made. The Rulebook is a binding act whose provisions govern the rights and obligations of users.*
+
 ## Chapter I — General Provisions
 
 ### Article 1

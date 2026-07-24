@@ -1,5 +1,7 @@
 # Pravilnik o dokazu stvarnosti
 
+*Ovaj pravilnik uređuje operativnu mehaniku dokaza stvarnosti — model verifikacije korisnika KOLO sistema zasnovan na ličnom poznavanju. Donosi se na osnovu člana 32 stav 4 i člana 15 tačka 2 Pravilnika o KOLO sistemu.*
+
 ## I — Opšte odredbe
 
 ### Član 1

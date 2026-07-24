@@ -2,6 +2,8 @@
 
 # Rulebook on Founding Contribution
 
+*This Rulebook governs the operational mechanics of founding contribution — the retrospective recording of work performed before the platform was opened. It is adopted on the basis of Article 37 of the KOLO System Rulebook.*
+
 ## I — General Provisions
 
 ### Article 1

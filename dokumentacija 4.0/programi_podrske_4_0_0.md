@@ -1,5 +1,7 @@
 # Pravilnik o programima podrške
 
+*Ovaj pravilnik uređuje operativnu mehaniku socijalnih programa podrške — kvalifikovane grupe, uslove statusa i parametre evidentiranja POEN-a. Donosi se na osnovu člana 57 Pravilnika o KOLO sistemu.*
+
 ## I — Opšte odredbe
 
 ### Član 1

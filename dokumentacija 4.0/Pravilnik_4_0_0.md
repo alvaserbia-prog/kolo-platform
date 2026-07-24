@@ -1,5 +1,7 @@
 # Pravilnik o KOLO sistemu
 
+*KOLO je sistem međusobne podrške zasnovan na ideji: da ljudi mogu da evidentiraju šta doprinose jedni drugima i zajednici. Ovaj pravilnik uređuje kako taj sistem radi: ko su njegovi akteri, šta je zajedničko dobro koje zajedno grade, kako se doprinos evidentira i kako se donose odluke. Pravilnik je obavezujući akt čije odredbe uređuju prava i obaveze korisnika.*
+
 ## I — Opšte odredbe
 
 ### Član 1

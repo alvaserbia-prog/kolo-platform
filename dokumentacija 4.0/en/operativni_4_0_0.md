@@ -2,6 +2,8 @@
 
 # Rulebook on Operational Contribution
 
+*This Rulebook governs the operational mechanics of operational contribution — the process of applying for, performing, and verifying off-platform activities whose contribution is recorded in POEN. It is adopted on the basis of Article 36 of the KOLO System Rulebook.*
+
 ## I — General Provisions
 
 ### Article 1

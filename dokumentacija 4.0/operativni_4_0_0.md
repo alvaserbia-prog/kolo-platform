@@ -1,5 +1,7 @@
 # Pravilnik o operativnom doprinosu
 
+*Ovaj pravilnik uređuje operativnu mehaniku operativnog doprinosa — postupak prijave, izvršenja i verifikacije aktivnosti van platforme čiji se doprinos evidentira u POEN-ima. Donosi se na osnovu člana 36 Pravilnika o KOLO sistemu.*
+
 ## I — Opšte odredbe
 
 ### Član 1
