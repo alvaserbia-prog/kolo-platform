@@ -399,9 +399,9 @@ export default async function Home() {
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.brojTransfera.toLocaleString("sr-RS")}
+                  {agregati.opticaj.toLocaleString("sr-RS")}
                 </div>
-                <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
@@ -411,14 +411,11 @@ export default async function Home() {
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.opticaj.toLocaleString("sr-RS")}
+                  {agregati.brojTransfera.toLocaleString("sr-RS")}
                 </div>
-                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
               </div>
             </div>
-            <p className="text-xs text-kolo-muted mt-5 text-center">
-              {t("statistike_podnaslov")}
-            </p>
           </section>
         )}
 
