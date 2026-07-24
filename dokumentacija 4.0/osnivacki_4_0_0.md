@@ -1,5 +1,7 @@
 # Pravilnik o osnivačkom doprinosu
 
+*Ovaj pravilnik uređuje operativnu mehaniku osnivačkog doprinosa — naknadnog evidentiranja rada obavljenog pre otvaranja platforme. Donosi se na osnovu člana 37 Pravilnika o KOLO sistemu.*
+
 ## I — Opšte odredbe
 
 ### Član 1

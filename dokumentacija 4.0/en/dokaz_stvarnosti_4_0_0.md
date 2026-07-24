@@ -2,6 +2,8 @@
 
 # Rulebook on Proof of Reality
 
+*This Rulebook governs the operational mechanics of proof of reality — the user verification model of the KOLO system based on personal acquaintance. It is adopted on the basis of Art. 32 paragraph 4 and Art. 15 point 2 of the KOLO System Rulebook.*
+
 ## I — General Provisions
 
 ### Article 1
