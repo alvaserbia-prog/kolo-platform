@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-function DokumentRed({ naziv, href, zivoLabel }: { naziv: string; href: string; zivoLabel?: string }) {
+function DokumentRed({ naziv, href }: { naziv: string; href: string }) {
   const eksterni = href.startsWith("http");
   return (
     <a
@@ -32,12 +32,6 @@ function DokumentRed({ naziv, href, zivoLabel }: { naziv: string; href: string; 
       <span className="text-sm text-kolo-text group-hover:text-kolo-green-700 transition-colors font-medium flex-1">
         {naziv}
       </span>
-      {zivoLabel && (
-        <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wide text-kolo-green-700 bg-kolo-green-100 px-2 py-0.5 rounded-full shrink-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-kolo-green-700 animate-pulse" />
-          {zivoLabel}
-        </span>
-      )}
     </a>
   );
 }
@@ -468,9 +462,6 @@ export default async function ONamaPage() {
                   ))}
                 </div>
               </details>
-
-              {/* Uživo — stanje kanala osnivačkog doprinosa */}
-              <DokumentRed naziv={t("dok_osnivacki")} href="/osnivacki-doprinos" zivoLabel={t("uzivo")} />
             </div>
           </div>
 
