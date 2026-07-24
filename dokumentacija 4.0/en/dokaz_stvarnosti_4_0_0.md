@@ -6,8 +6,6 @@
 
 *Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
 
-*This Rulebook governs the operational mechanics of proof of reality — the user verification model of the KOLO system based on personal acquaintance. It is adopted on the basis of Art. 32 paragraph 4 and Art. 15 point 2 of the KOLO System Rulebook.*
-
 *Amendment 3.9.1 (Art. 5): consent and account binding may also be expressed by posting a request on the guarantee board — verification is then initiated directly from the request, as an alternative to the one-time code; the verified user is notified and may report the verification. The substance of verification (personal acquaintance, verifier's responsibility, all checks and oversight) remains unchanged.*
 
 *Amendment 3.9.1 (Art. 12–13): the anti-circular rule is aligned with the fact that a user has multiple verifiers. The prohibited zone is the union of the zones of all of the user's verifiers; for each verifier, the entire ancestral chain upward and the entire subtree downward (including the user's siblings and all their descendants) are excluded.*

@@ -4,8 +4,6 @@
 
 *Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
 
-*Ovaj pravilnik uređuje operativnu mehaniku dokaza stvarnosti — model verifikacije korisnika KOLO sistema zasnovan na ličnom poznavanju. Donosi se na osnovu člana 32 stav 4 i člana 15 tačka 2 Pravilnika o KOLO sistemu.*
-
 *Dopuna 3.9.1 (čl. 5): saglasnost i vezivanje naloga mogu se izraziti i objavom zahteva na tabli jemstva — verifikacija se tada pokreće neposredno sa zahteva, kao alternativa jednokratnom kodu; verifikovani se obaveštava i može prijaviti verifikaciju. Suština verifikacije (lično poznavanje, odgovornost verifikatora, sve provere i nadzor) ostaje nepromenjena.*
 
 *Dopuna 3.9.1 (čl. 12–13): anti-cirkularno pravilo usklađeno sa činjenicom da korisnik ima više verifikatora. Zabranjena zona je unija zona svih verifikatora korisnika; iz svakog verifikatora isključuje se ceo ancestralni lanac naviše i celo podstablo naniže (uključujući braću korisnika i sve njihove potomke).*

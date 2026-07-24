@@ -6,60 +6,6 @@
 
 *Participatorni sistem zajedničkog dobra*
 
-**Sadržaj**
-
-Sažetak 3
-
-- Problem 5
-
-- Vizija 8
-
-- Zajedničko dobro i protokol 10
-
-- Šta je KOLO — pravna pozicija sistema 13
-
-- Arhitektura sistema 18
-
-- Obračunski okvir 21
-
-6.1 POEN 21
-
-6.2 ZRNO 23
-
-6.3 Obračunski koeficijent 26
-
-- Učesnici i dokaz stvarnosti 28
-
-- Doprinos zajedničkom dobru 33
-
-8.1 Osnivački doprinos 33
-
-8.2 Finansijski doprinos 33
-
-8.3 Operativni doprinos 35
-
-- Moduli 36
-
-- Upravljanje 40
-
-- Teorija igara i podsticaji 43
-
-- Zaštita podataka 50
-
-- Putanja razvoja 53
-
-- Zaključak 58
-
-Prilog A: Međunarodni institucionalni okvir 59
-
-Prilog B: Tabele parametara 61
-
-Prilog C: Glosar 64
-
-Prilog D: Tehničke i organizacione mere bezbednosti 68
-
-Prilog E: Mapiranje Ostrom dizajn principa na KOLO arhitekturu 72
-
 # Sažetak
 
 Zajednice koje žele da organizuju sopstvenu razmenu suočavaju se sa tri problema koja nijedan postojeći model ne rešava istovremeno: skaliranje, poverenje i regulatorni okvir. Trampa ne skalira. Vremenske banke i LETS sistemi zahtevaju poverenje koje ne mogu da obezbede kad prerastu lokalnu grupu. Lokalne valute su zbog svojih strukturnih karakteristika podložne kvalifikaciji kao finansijski instrumenti, čime potpadaju pod regulatorne okvire koji im nisu namenjeni. Razvoj digitalne infrastrukture, pojava modela zasnovanih na zajedničkom dobru i institucionalno prepoznavanje socijalne ekonomije na nivou EU i UN-a stvaraju uslove u kojima celovito rešenje postaje izvodljivo.
