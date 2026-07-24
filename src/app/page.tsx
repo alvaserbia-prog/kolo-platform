@@ -66,25 +66,28 @@ async function getPijacaPreview() {
 
 // Naslovnu vidi samo gost (prijavljeni se preusmeravaju na /dashboard). Po
 // gradiranoj vidljivosti (Politika čl. 6), gost vidi SAMO agregate — ne
-// pojedinačne transakcije ni pseudonime. Tri pokazatelja: verifikovani članovi
-// (poverenje), aktivni oglasi (pregled oglasa je ionako javan, čl. 16) i
-// ukupno evidentiranih POEN-a. Opticaj se računa kao zbir pozitivnih
+// pojedinačne transakcije ni pseudonime. Četiri pokazatelja: verifikovani
+// članovi (poverenje), transakcije među članovima (samo tip TRANSFER — bez
+// emisija Protokola), aktivni oglasi (pregled oglasa je ionako javan, čl. 16)
+// i ukupno evidentiranih POEN-a. Opticaj se računa kao zbir pozitivnih
 // stanja (pod zero-sum jednako apsolutnoj vrednosti minusa Protokola) — bez
 // zavisnosti od ID-ja Protokol novčanika.
 async function getAgregati() {
   try {
-    const [brojClanova, brojOglasa, opticajAgg] = await Promise.all([
+    const [brojClanova, brojTransfera, brojOglasa, opticajAgg] = await Promise.all([
       prisma.user.count({ where: { verified: true } }),
+      prisma.transaction.count({ where: { type: "TRANSFER" } }),
       prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
       prisma.wallet.aggregate({ _sum: { balance: true }, where: { balance: { gt: 0 } } }),
     ]);
     return {
       brojClanova,
+      brojTransfera,
       brojOglasa,
       opticaj: Number(opticajAgg._sum.balance ?? 0),
     };
   } catch {
-    return { brojClanova: 0, brojOglasa: 0, opticaj: 0 };
+    return { brojClanova: 0, brojTransfera: 0, brojOglasa: 0, opticaj: 0 };
   }
 }
 
@@ -387,12 +390,18 @@ export default async function Home() {
             <h2 className="text-xl font-bold text-kolo-green-900 mb-5 text-center" style={{ letterSpacing: "-0.02em" }}>
               {t("statistike_naslov")}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
                   {agregati.brojClanova.toLocaleString("sr-RS")}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_clan")}</div>
+              </div>
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.brojTransfera.toLocaleString("sr-RS")}
+                </div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
