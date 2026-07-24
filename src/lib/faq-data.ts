@@ -270,7 +270,7 @@ Kad promeniš pseudonim, sve tvoje transakcije u istoriji prikazuju se pod novim
       {
         id: 17,
         pitanje: `Ko se može prijaviti za Podršku Majkama?`,
-        odgovor: `Majke.
+        odgovor: `Majke ili drugi primarni staratelj deteta.
 
 Iznos koji ti se evidentira zavisi od broja dece — što više dece, to veći ukupan iznos, ali sa blagim opadanjem po detetu (kroz koeficijent koji se primenjuje formulom).
 

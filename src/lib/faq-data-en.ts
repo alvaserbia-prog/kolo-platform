@@ -12,7 +12,7 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
 
 First, registration is free and you don't need to be verified to join. You can explore the rules, follow the system's general indicators, and browse listings on the marketplace — all of that works without verification.
 
-Second, for verification itself there is a dedicated space: the vouching request board. There you post a short introduction — where you're from and why you want to join — along with a contact phone number for verification purposes. Your introduction is visible to all logged-in members, while your phone number is visible only to verified users — those who can vouch for you. This lets the network get to know you even if you don't know anyone yet, and a verified member can reach out to establish contact and confirm your reality.
+Second, for verification itself there is a dedicated space: the vouching request board. There you post a short introduction — where you're from and why you want to join — along with a contact (phone, email, or another channel of your choice) through which you can be reached for verification. Your introduction is visible to all logged-in members, while your contact details are visible only to verified users — those who can verify you. This lets the network get to know you even if you don't know anyone yet, and a verified member can reach out to establish contact and confirm your reality.
 
 You can withdraw your request at any time.
 
@@ -29,7 +29,7 @@ POEN is also recorded through other channels — verification in the vouching ch
       },
       {
         id: 44,
-        pitanje: `How do I earn my first POEN if I have nothing to sell? What's my first step?`,
+        pitanje: `How do I get my first POEN if I have nothing to offer? What's my first step?`,
         odgovor: `You don't need any product to accumulate POEN — the first step is verification.
 
 Verification means that a verified user who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
@@ -92,7 +92,7 @@ If you encounter any of the above, do not share your data and report it to the F
       {
         id: 1,
         pitanje: `What is POEN and does it have a monetary value?`,
-        odgovor: `POEN is a ledger record that you have given something valuable to the community — through verifying other users, working for the community, making a donation, or sponsorship.
+        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, verification in the vouching chain, work for the community, a donation, or sponsorship.
 
 POEN is not money in a legal sense — it is not a means of payment, not electronic money, not a digital asset, and does not represent a debt of the Foundation to you.
 
@@ -103,14 +103,14 @@ The guideline of "1 POEN ≈ 1 RSD" serves only as a reference so you know the a
         pitanje: `Can I cash out POEN or sell it for money?`,
         odgovor: `No. You cannot exchange POEN for dinars, foreign currency, or any other means of payment. The Foundation does not buy back POEN.
 
-You can transfer it to another user, use it for goods and services in exchanges — including the marketplace — or use it to inscribe ZRNO.
+You can transfer it to another user in an exchange of goods and services — including the marketplace — or use it to inscribe ZRNO.
 
 Every transfer of POEN is always recorded in the ledger — and if someone privately arranges a cash deal alongside it, they do so at their own risk: the Foundation neither endorses nor is party to such an arrangement, nor can it prevent it.`,
       },
       {
         id: 3,
         pitanje: `Does POEN expire?`,
-        odgovor: `Not currently. POEN stays in your account until you spend it or deactivate your account.
+        odgovor: `Not currently. POEN stays recorded in your ledger until you transfer it to others or deactivate your account.
 
 Any future introduction of a POEN "ageing" mechanism (which would encourage circulation rather than accumulation) would be a fundamental change to the system and would require a vote of the Upper Kolo — the Foundation cannot do that on its own.`,
       },
@@ -168,7 +168,7 @@ There is no staking, interest or yield. ZRNO carries no dividend, interest or ri
       },
       {
         id: 53,
-        pitanje: `Is the verification emission (1,000 POEN) a recruitment commission or an airdrop I can farm?`,
+        pitanje: `Is the verification entry (1,000 POEN) a recruitment commission or an airdrop I can farm?`,
         odgovor: `No. It is not a recruitment commission, not an airdrop, and it cannot be farmed.
 
 When someone verifies you, the Protocol credits 1,000 POEN to both you and the person who verified you — once and symmetrically, the same amount for each. There are no "levels" above or below you and nothing "flows upward" through some network of people benefiting from your verification. This is not a marketing scheme with commissions.
@@ -225,7 +225,7 @@ Verification is a prerequisite for all major features: recording POEN through do
         pitanje: `What if I'm a foreigner — can I be a member?`,
         odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the vouching chain: a verified user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
 
-The system operates in Serbian.`,
+The system operates in Serbian and English.`,
       },
       {
         id: 9,
@@ -244,9 +244,7 @@ When you change your pseudonym, all your transactions in the history are display
       {
         id: 75,
         pitanje: `What language does the system use? Is there an English version?`,
-        odgovor: `The system currently operates only in Serbian (Latin script). The Rules, Terms, and other legally binding texts are in Serbian and those are authoritative.
-
-A foreign-language interface version does not currently exist.`,
+        odgovor: `The interface works in Serbian (Latin and Cyrillic script) and in English — you choose the language with the switcher in the header. The Rules, the Terms and the other legally binding texts were adopted in Serbian and the Serbian version is authoritative; their English translations exist as an unofficial aid to the reader.`,
       },
     ],
   },
@@ -262,7 +260,7 @@ A foreign-language interface version does not currently exist.`,
       {
         id: 17,
         pitanje: `Who can apply for Support for Mothers?`,
-        odgovor: `Mothers.
+        odgovor: `Mothers, or another primary caregiver of the child.
 
 The amount credited to you depends on the number of children — the more children, the larger the total amount, but with a slight decrease per child (through a coefficient applied by formula).
 
@@ -284,14 +282,14 @@ The amount is fixed and credited on a daily basis for as long as the status last
 
 Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A verified user applies and completes the task, and an authorised verifier confirms completion before the Protocol records POEN.
 
-There is no fixed "hourly rate" — the proposed POEN is only a weighting indicator, and the actual amount recorded is distributed within the daily emission limit.`,
+There is no fixed "hourly rate" — the proposed POEN is only a weighting indicator, and the actual amount recorded is distributed within the daily recording limit.`,
       },
       {
         id: 20,
         pitanje: `Can I be in multiple programmes at the same time?`,
         odgovor: `Yes, if you meet the criteria for more than one programme. For example, a mother who is studying may be in both Support for Mothers and Education.
 
-Each programme is applied for separately, and all share a common daily emission limit of 10% of the system's current circulation (so that too much POEN is not emitted at once).`,
+Each programme is applied for separately, and all share a common daily recording limit of 10% of the system's current circulation (so that too much POEN is not recorded at once).`,
       },
       {
         id: 61,
@@ -313,7 +311,7 @@ For Support for Mothers, for example, you yourself enter the child's name and da
 
 Your application is then reviewed and approved by the Foundation before the Protocol begins automatically crediting POEN to you. The data you enter is not public — it is seen only by the person processing the application, as it is sensitive data processed solely with your explicit consent, and you can withdraw that consent at any time (at which point the automatic POEN credit also stops).
 
-The exact conditions for confirming status for each group are still being worked out in a dedicated programme rules document — when it is ready, we will specify precisely what each group submits.`,
+The exact conditions for confirming status for each group are governed by the Rules on Support Programmes, published on the website.`,
       },
       {
         id: 63,
@@ -350,7 +348,7 @@ The number of children increases the total amount, but not by simple addition �
 
 Example: for a single child aged 3, that is (2,000 − 300) × 1.00 = 1,700 POEN per day. For the same child as the third in order it would be (2,000 − 300) × 1.50 = 2,550 POEN per day.
 
-Support is credited automatically on a daily basis for as long as the status lasts, without registering individual activities. As with all programmes, all daily emissions share the system's common daily budget, so on days of high circulation amounts may be proportionally reduced. These parameters are governed by the programme rules and can be changed by amending them.`,
+Support is credited automatically on a daily basis for as long as the status lasts, without registering individual activities. As with all programmes, all daily recordings share the system's common daily budget, so on days of high circulation amounts may be proportionally reduced. These parameters are governed by the programme rules and can be changed by amending them.`,
       },
     ],
   },
@@ -413,7 +411,7 @@ The legal classification of these exchanges for tax and fiscal purposes does not
         pitanje: `Is my listing on the marketplace publicly visible?`,
         odgovor: `Yes. The content of a listing — description, price in POEN, location and your pseudonym — is publicly visible to all visitors, including unregistered ones, so that exchange is accessible and easy to find.
 
-What is NOT public: your contact details (phone number) and the ability for someone to message you or make a purchase — those are available only to verified users. For unregistered and unverified visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
+What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to verified users. For unregistered and unverified visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
       },
       {
         id: 58,
@@ -535,9 +533,9 @@ The Foundation retains donation data in accordance with financial reporting regu
       {
         id: 26,
         pitanje: `Who controls KOLO?`,
-        odgovor: `Currently (the initial development phase), the "KOLO" Foundation is the formal legal entity, with a Board of Directors that makes all decisions.
+        odgovor: `Currently (Phase 1), all decisions are made by the KOLO Foundation through its Board of Directors.
 
-When the system reaches critical mass, the Upper Kolo is activated — the governing body of all verified members, which decides on key systemic matters through ZRNO-weighted voting.
+When the total number of recorded POEN reaches 1,000,000, the Upper Kolo is activated — the governing body of all ZRNO Holders, which decides on key systemic matters through quadratic voting.
 
 From that point the Foundation transitions from a sovereign to an executive body — it implements the decisions of the Upper Kolo rather than making them on its own.`,
       },
@@ -546,11 +544,11 @@ From that point the Foundation transitions from a sovereign to an executive body
         pitanje: `What prevents abuse by admins or founders?`,
         odgovor: `Several structural safeguards work in parallel.
 
-The zero-sum principle — every POEN emission increases the Protocol's negative balance; no one can create POEN from nothing.
+The zero-sum principle — every recording of POEN increases the Protocol's minus; no one can create POEN from nothing.
 
-The programme emission limit — the total daily emission from all programmes together must not exceed 10% of circulation.
+The programmes' daily recording limit — the total daily recording from all programmes together must not exceed 10% of circulation.
 
-Deterministic algorithmic emissions — the Protocol has no discretionary decisions; everything is in the code.
+Deterministic algorithmic records — the Protocol has no discretionary decisions; everything is in the code.
 
 Transparency — the contribution ledger is pseudonymous and immutable; visible to verified members (graded by status), while unregistered visitors see only aggregates.
 
@@ -559,7 +557,7 @@ And finally, the activation of the Upper Kolo, which transfers governance author
       {
         id: 28,
         pitanje: `What is the Upper Kolo and when is it activated?`,
-        odgovor: `The Upper Kolo is the governing body of all verified members of the platform — the highest decision-making body for the system. It is not an elected assembly but a dynamic body comprising all members who hold ZRNO at a given moment.
+        odgovor: `The Upper Kolo is the governing body of all ZRNO Holders — the highest decision-making body for the system. It is not an elected assembly but a dynamic body: it comprises everyone who holds ZRNO at a given moment.
 
 It is activated automatically when the Protocol's negative balance reaches −1,000,000 POEN (a sign that the system is sufficiently active and that members bear significant collective responsibility).
 
@@ -579,7 +577,7 @@ The goal is that wealthy individuals cannot "buy" a decision simply by holding a
 
 The veto is not discretionary — it must be reasoned with reference to a specific threat to sustainability; a veto without reasoning is itself an abuse. This is not political control but protection of the Foundation's continuity and sustainability.
 
-The veto is extinguished permanently and irrevocably when the Foundation's funds reach the financial self-sustainability threshold established by a dedicated set of rules — at which point sustainability is no longer threatened.`,
+The veto is extinguished permanently and irrevocably when the Foundation's funds reach the financial self-sustainability threshold — three times the operating costs of the previous month, established by the Rules on the Upper Kolo. At that point sustainability is no longer threatened.`,
       },
       {
         id: 72,
@@ -588,7 +586,7 @@ The veto is extinguished permanently and irrevocably when the Foundation's funds
 
 First threshold — activation of the Upper Kolo. When the total number of POEN recorded in the system reaches 1,000,000 (which in the Protocol's ledger corresponds to a state of −1,000,000), ZRNO inscription automatically opens and the Upper Kolo is established — the governing body of all ZRNO Holders. From that point members decide, through quadratic voting with active ZRNO, on the system's rules: amendments to the Rules, Programmes and other matters affecting the common good. The Foundation transitions from a sovereign to an executive and service body — it implements decisions, it does not make them on its own.
 
-Second threshold — extinction of the Protective Veto. While the Foundation is not financially self-sustaining, it holds a protective veto: it may refuse to implement a decision of the Upper Kolo that would jeopardise its operational sustainability — in particular decisions on spending funds (e.g. collective purchases) before sustainability is secured (the veto must be reasoned and is not arbitrary). That veto is extinguished permanently and irrevocably only when the Foundation's financial resources reach the financial self-sustainability threshold — and that threshold is established by a dedicated set of rules.
+Second threshold — extinction of the Protective Veto. While the Foundation is not financially self-sustaining, it holds a protective veto: it may refuse to implement a decision of the Upper Kolo that would jeopardise its operational sustainability — in particular decisions on spending funds (e.g. collective purchases) before sustainability is secured (the veto must be reasoned and is not arbitrary). That veto is extinguished permanently and irrevocably only when the Foundation's financial resources reach the financial self-sustainability threshold — three times the operating costs of the previous month, established by the Rules on the Upper Kolo.
 
 Until the Upper Kolo is activated (Phase 1) all decisions are made by the Foundation through the Board of Directors.`,
       },
@@ -662,7 +660,7 @@ Specific internal dispute resolution mechanisms may be established later (throug
       {
         id: 32,
         pitanje: `What happens when someone does not comply with the rules?`,
-        odgovor: `The system has a permanent memory — every transaction is permanently recorded under a pseudonym and visible to verified members, so bad behaviour remains visible to those participating in the system.
+        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to verified members, so bad behaviour remains visible to those participating in the system.
 
 The Foundation may temporarily suspend an account (for up to 30 days, with the user's right to be informed of the reasons and to respond) or exclude a user for a more serious breach of the rules.
 
