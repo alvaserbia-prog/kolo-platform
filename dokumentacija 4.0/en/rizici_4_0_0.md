@@ -2,10 +2,6 @@
 
 # Risk Acceptance Statement
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
 ### Article 1 — Subject matter and legal nature
 
 This Risk Acceptance Statement (hereinafter: the Statement) is a platform act of the KOLO system within the meaning of Article 10 of the Rulebook on the Hierarchy of Acts of the KOLO System. It describes the risks of participation in the KOLO system that the user should understand before joining the system.

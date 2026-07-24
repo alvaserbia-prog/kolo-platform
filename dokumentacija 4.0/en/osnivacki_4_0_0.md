@@ -2,12 +2,6 @@
 
 # Rulebook on Founding Contribution
 
-*Version 4.0.0*
-
-*Amendment 4.0.0 (22.07.2026): consolidation of the entire documentation set to version 4.0 upon the entry of the KOLO Foundation in the Register of Endowments and Foundations (registration number 28836627, PIB 115840443); version references updated. Unchanged in substance.*
-
-*Amendment 3.9.1 (Art. 6, 7, 8, 12, 14): the step amount is changed from 20,000 to 24,000 POEN and the total number of steps from 120 to 100; the last step is activated at the threshold of 10,000,000 POEN, after which the channel closes permanently. The upper limit of 2,400,000 POEN remains unchanged.*
-
 ## I — General Provisions
 
 ### Article 1
@@ -149,5 +143,3 @@ This Rulebook is adopted and amended by the Management Board (UO) of the KOLO Fo
 *Entry into force*
 
 This Rulebook enters into force on the date of its adoption by the Management Board (UO) of the KOLO Foundation.
-
-*Rulebook on Founding Contribution v4.0.0*

@@ -1,9 +1,5 @@
 # Izjava o prihvatanju rizika
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
-
 ### Član 1 — Predmet i pravna priroda
 
 Ova Izjava o prihvatanju rizika (u daljem tekstu: Izjava) je platformski akt KOLO sistema u smislu člana 10 Pravilnika o hijerarhiji akata KOLO sistema. Njome se opisuju rizici učešća u KOLO sistemu koje korisnik treba da razume pre pristupanja sistemu.

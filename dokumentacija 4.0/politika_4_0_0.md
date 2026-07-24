@@ -1,13 +1,5 @@
 # Politika privatnosti KOLO platforme
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443). U dokument su uneti registracioni podaci Fondacije i ažurirane verzijske reference; Statut Fondacije važi u verziji 4.1. U ostalom delu sadržinski nepromenjeno.*
-
-Datum poslednje izmene: 22.07.2026. (konsolidacija 4.0.0; prethodna 25.06.2026.)
-
-*Dopuna 3.9.1 (pododeljka 4.8, čl. 6): verifikacija se može pokrenuti i neposredno sa aktivnog zahteva na tabli (objava zahteva je pristanak); rok aktivnog zahteva je 72 sata; verifikovani se obaveštava i može prijaviti verifikaciju, a prijava se obrađuje radi zaštite integriteta sistema (pododeljka 4.9).*
-
 Ova politika privatnosti donosi se na osnovu člana 66 stav 2 i člana 81 stav 4 Pravilnika o KOLO sistemu i u skladu sa Zakonom o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL).
 
 ### Član 1 — Rukovalac podacima

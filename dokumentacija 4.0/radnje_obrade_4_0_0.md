@@ -1,11 +1,5 @@
 # Registar radnji obrade podataka o ličnosti
 
-*Verzija 4.0.0*
-
-*Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443). U dokument su uneti registracioni podaci Fondacije i ažurirane verzijske reference; Statut Fondacije važi u verziji 4.1. U ostalom delu sadržinski nepromenjeno.*
-
-Datum poslednje izmene: 16.06.2026.
-
 *Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 4.0.0) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 4.0.0) i Pravilnikom o programima podrške (verzija 4.0.0).*
 
 **PODACI O RUKOVAOCU**
