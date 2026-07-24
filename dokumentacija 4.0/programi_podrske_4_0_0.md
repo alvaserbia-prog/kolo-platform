@@ -4,8 +4,6 @@
 
 *Izmena 4.0.0 (22.07.2026): konsolidacija celokupne dokumentacije na verziju 4.0 povodom upisa KOLO Fondacije u Registar zadužbina i fondacija (matični broj 28836627, PIB 115840443); ažurirane verzijske reference. Sadržinski nepromenjeno.*
 
-*Ovaj pravilnik uređuje operativnu mehaniku socijalnih programa podrške — kvalifikovane grupe, uslove statusa i parametre evidentiranja POEN-a. Donosi se na osnovu člana 57 Pravilnika o KOLO sistemu.*
-
 ## I — Opšte odredbe
 
 ### Član 1

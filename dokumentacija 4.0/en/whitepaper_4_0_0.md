@@ -8,60 +8,6 @@
 
 *A Participatory Common-Good System*
 
-**Contents**
-
-Summary 3
-
-- Problem 5
-
-- Vision 8
-
-- Common good and protocol 10
-
-- What KOLO is — the legal position of the system 13
-
-- System architecture 18
-
-- Accounting framework 21
-
-6.1 POEN 21
-
-6.2 ZRNO 23
-
-6.3 Accounting coefficient 26
-
-- Participants and proof of reality 28
-
-- Contribution to the common good 33
-
-8.1 Founding contribution 33
-
-8.2 Financial contribution 33
-
-8.3 Operational contribution 35
-
-- Modules 36
-
-- Governance 40
-
-- Game theory and incentives 43
-
-- Data protection 50
-
-- Development path 53
-
-- Conclusion 58
-
-Appendix A: International institutional framework 59
-
-Appendix B: Parameter tables 61
-
-Appendix C: Glossary 64
-
-Appendix D: Technical and organisational security measures 68
-
-Appendix E: Mapping of Ostrom design principles onto the KOLO architecture 72
-
 # Summary
 
 Communities seeking to organise their own exchange face three problems that no existing model solves simultaneously: scaling, trust, and regulatory framework. Barter does not scale. Time banks and LETS systems require trust they cannot sustain once they outgrow a local group. Local currencies are, by virtue of their structural characteristics, susceptible to classification as financial instruments, thereby falling under regulatory frameworks that were never designed for them. The development of digital infrastructure, the emergence of commons-based models, and the institutional recognition of the social economy at the EU and UN level are creating conditions in which a comprehensive solution becomes feasible.

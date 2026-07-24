@@ -6,8 +6,6 @@
 
 Datum izrade: 03.06.2026.
 
-*Ovaj pravilnik uređuje postupke glasanja i operativna pravila rada Gornjeg Kola. Donosi se na osnovu članova 41, 46 i 47 Pravilnika o KOLO sistemu (v4.0.0), koji izričito upućuju na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
-
 ## I — Opšte odredbe
 
 ### Član 1 — Predmet
