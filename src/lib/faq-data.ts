@@ -543,9 +543,9 @@ Podatke o donacijama Fondacija čuva u skladu sa propisima o finansijskom izveš
       {
         id: 26,
         pitanje: `Ko kontroliše KOLO?`,
-        odgovor: `Trenutno (početna faza razvoja) Fondacija „KOLO" je formalni pravni subjekt sa Upravnim odborom koji donosi sve odluke.
+        odgovor: `Trenutno (Faza 1) sve odluke donosi KOLO Fondacija preko Upravnog odbora.
 
-Kad sistem dostigne kritičnu masu, aktivira se Gornje Kolo — upravljačko telo svih verifikovanih članova koje odlučuje o ključnim sistemskim pitanjima kroz glasanje sa ZRNOM.
+Kad ukupan broj evidentiranih POEN-a dostigne 1.000.000, aktivira se Gornje Kolo — upravljačko telo svih nosilaca ZRNA, koje o ključnim sistemskim pitanjima odlučuje kvadratnim glasanjem.
 
 Fondacija od tog trenutka prelazi iz suverenog u izvršni organ — sprovodi odluke Gornjeg Kola, ne donosi ih sama.`,
       },
@@ -567,7 +567,7 @@ I konačno, aktivacija Gornjeg Kola koja prebacuje nadležnost na članove.`,
       {
         id: 28,
         pitanje: `Šta je Gornje Kolo i kada se aktivira?`,
-        odgovor: `Gornje Kolo je upravljačko telo svih verifikovanih članova platforme — najviše telo odlučivanja o sistemu. Nije skupština koja se bira, već dinamičan sastav svih članova koji u datom trenutku imaju ZRNO.
+        odgovor: `Gornje Kolo je upravljačko telo svih nosilaca ZRNA — najviše telo odlučivanja o sistemu. Nije skupština koja se bira, već dinamičan sastav: čine ga svi koji u datom trenutku imaju ZRNO.
 
 Aktivira se automatski kad minus Protokola dostigne −1.000.000 POEN (znak da je sistem dovoljno aktivan i da članovi imaju značajnu kolektivnu odgovornost).
 
@@ -587,7 +587,7 @@ Cilj je da bogati pojedinci ne mogu „kupiti" odluku samo time što imaju mnogo
 
 Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti; veto bez obrazloženja sam je zloupotreba. To nije politička kontrola, već zaštita kontinuiteta i održivosti Fondacije.
 
-Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti utvrđen posebnim pravilnikom — tada održivost više nije ugrožena.`,
+Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti — trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu. Tada održivost više nije ugrožena.`,
       },
       {
         id: 72,
@@ -596,7 +596,7 @@ Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijs
 
 Prvi prag — aktivacija Gornjeg Kola. Kada ukupan broj upisanih POEN-a u sistemu dostigne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravno telo svih nosilaca ZRNA. Od tog trenutka članovi kroz kvadratno glasanje aktivnim ZRNOM odlučuju o pravilima sistema: izmenama Pravilnika, Programima i drugim pitanjima koja utiču na zajedničko dobro. Fondacija od suverenog prelazi u izvršni i servisni organ — sprovodi odluke, ne donosi ih sama.
 
-Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije finansijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu održivost — pre svega odluke o trošenju sredstava (npr. kolektivne nabavke) pre nego što je obezbeđena održivost (veto mora biti obrazložen, nije samovoljan). Taj veto se gasi trajno i jednosmerno tek kada finansijska sredstva Fondacije dostignu prag finansijske samostalnosti — a taj prag utvrđuje poseban pravilnik.
+Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije finansijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu održivost — pre svega odluke o trošenju sredstava (npr. kolektivne nabavke) pre nego što je obezbeđena održivost (veto mora biti obrazložen, nije samovoljan). Taj veto se gasi trajno i jednosmerno tek kada finansijska sredstva Fondacije dostignu prag finansijske samostalnosti — trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu.
 
 Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog odbora.`,
       },
@@ -670,7 +670,7 @@ Posebni interni mehanizmi rešavanja sporova mogu se uspostaviti kasnije (poseba
       {
         id: 32,
         pitanje: `Šta se dešava kada se neko ne pridržava pravila?`,
-        odgovor: `Sistem ima trajno pamćenje — svaka transakcija je trajno zabeležena pod pseudonimom i vidljiva verifikovanim članovima, pa loše ponašanje ostaje vidljivo onima koji učestvuju u sistemu.
+        odgovor: `Sistem ima trajno pamćenje — svako ažuriranje evidencije trajno je zabeleženo pod pseudonimom i vidljivo verifikovanim članovima, pa loše ponašanje ostaje vidljivo onima koji učestvuju u sistemu.
 
 Fondacija može privremeno suspendovati nalog (najviše 30 dana, uz pravo korisnika da bude obavešten o razlozima i da se izjasni) ili isključiti korisnika pri težoj povredi pravila.
 
