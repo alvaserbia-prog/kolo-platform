@@ -12,7 +12,7 @@ export const FAQ_SEKCIJE_HR: FaqSekcija[] = [
 
 Prvo, registracija je besplatna i ne moraš biti verificiran da bi ušao. Možeš se upoznati s pravilima, pratiti opće pokazatelje sustava i pogledati ponudu na Pijaci — sve to radi i bez verifikacije.
 
-Drugo, za samu verifikaciju postoji posebno mjesto: ploča zahtjeva za jamstvo. Tu objaviš kratko predstavljanje — odakle si i zašto se želiš uključiti — i kontakt-telefon na koji želiš da te kontaktiramo radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoj kontakt-telefon vide samo verificirani korisnici — oni koji te mogu verificirati. Tako te mreža upozna iako nikoga ne poznaješ unaprijed, pa netko od verificiranih može uspostaviti kontakt s tobom i potvrditi tvoju stvarnost.
+Drugo, za samu verifikaciju postoji posebno mjesto: ploča zahtjeva za jamstvo. Tu objaviš kratko predstavljanje — odakle si i zašto se želiš uključiti — i kontakt (telefon, email ili drugi kanal po tvom izboru) preko kojeg te mogu kontaktirati radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoje kontaktne podatke vide samo verificirani korisnici — oni koji te mogu verificirati. Tako te mreža upozna iako nikoga ne poznaješ unaprijed, pa netko od verificiranih može uspostaviti kontakt s tobom i potvrditi tvoju stvarnost.
 
 Zahtjev možeš povući u svakom trenutku.
 
@@ -29,7 +29,7 @@ POEN se evidentira i kroz druge kanale — verifikaciju u lancu jamstva, operati
       },
       {
         id: 44,
-        pitanje: `Kako da zaradim svoje prve POEN-e ako nemam što prodati? Koji je moj prvi korak?`,
+        pitanje: `Kako da dođem do svojih prvih POEN-a ako nemam što ponuditi? Koji je moj prvi korak?`,
         odgovor: `Ne moraš imati nijedan proizvod da bi prikupljao POEN — prvi korak je verifikacija.
 
 Verifikacija znači da te netko tko je već verificiran, a osobno te poznaje, potvrdi kao stvarnu osobu — na temelju tog poznanstva, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
@@ -92,7 +92,7 @@ Ako naiđeš na bilo što od ovoga, ne dijeli podatke i prijavi to Fondaciji.`,
       {
         id: 1,
         pitanje: `Što je POEN i ima li vrijednost u dinarima?`,
-        odgovor: `POEN je zapis u evidenciji da si zajednici dao nešto vrijedno — kroz verifikaciju drugih korisnika, rad za zajednicu, donaciju ili pokroviteljstvo.
+        odgovor: `POEN je zapis u evidenciji da si zajednici dao nešto vrijedno — kroz razmjenu s drugim korisnicima, verifikaciju u lancu jamstva, rad za zajednicu, donaciju ili pokroviteljstvo.
 
 POEN nije novac u pravnom smislu — nije sredstvo plaćanja, nije elektronički novac, nije digitalna imovina i ne predstavlja dug Fondacije prema tebi.
 
@@ -103,14 +103,14 @@ Odnos „1 POEN ≈ 1 RSD" služi samo kao orijentir da znaš o kolikoj je vrije
         pitanje: `Mogu li unovčiti POEN ili ga prodati za novac?`,
         odgovor: `Ne. POEN ne možeš zamijeniti za dinare, stranu valutu ni bilo koje drugo sredstvo plaćanja. Fondacija ne otkupljuje POEN.
 
-Možeš ga prenijeti drugom korisniku, koristiti za robu i usluge u razmjeni — uključujući Pijacu — ili kroz njega upisati ZRNO.
+Možeš ga prenijeti drugom korisniku pri razmjeni dobara i usluga — uključujući Pijacu — ili kroz njega upisati ZRNO.
 
 Sam prijenos POEN-a uvijek se bilježi u evidenciji — a ako se uz to netko privatno dogovori za novac, radi to na vlastitu odgovornost: Fondacija takav dogovor niti podržava, niti je njegov dio, niti ga može spriječiti.`,
       },
       {
         id: 3,
         pitanje: `Istječe li POEN?`,
-        odgovor: `Trenutačno ne. POEN ostaje na tvom računu dok ga ne potrošiš ili ne deaktiviraš korisnički račun.
+        odgovor: `Trenutačno ne. POEN ostaje zabilježen u tvom zapisu dok ga ne preneseš drugima ili ne deaktiviraš korisnički račun.
 
 Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi poticao cirkulaciju umjesto akumulacije) bilo bi bitna izmjena sustava i zahtijevalo bi glasovanje Gornjeg Kola — Fondacija to ne može donijeti sama.`,
       },
@@ -225,7 +225,7 @@ Verifikacija je preduvjet za sve glavne funkcionalnosti: upis POEN-a kroz donaci
         pitanje: `Što ako sam stranac — mogu li biti član?`,
         odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jamstva: verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
-Sustav radi na srpskom jeziku.`,
+Sustav radi na srpskom i engleskom jeziku.`,
       },
       {
         id: 9,
@@ -244,9 +244,7 @@ Kad promijeniš pseudonim, sve tvoje transakcije u povijesti prikazuju se pod no
       {
         id: 75,
         pitanje: `Na kojem jeziku radi sustav? Postoji li engleska verzija?`,
-        odgovor: `Sustav trenutačno radi samo na srpskom jeziku (latinica). Pravilnik, Uvjeti i ostali pravno obvezujući tekstovi su na srpskom i oni su mjerodavni.
-
-Strana verzija sučelja za sada ne postoji.`,
+        odgovor: `Sučelje radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš prekidačem u zaglavlju. Pravilnik, Uvjeti i ostali pravno obvezujući tekstovi doneseni su na srpskom i srpska je verzija mjerodavna; njihovi engleski prijevodi postoje kao neslužbena pomoć čitatelju.`,
       },
     ],
   },
@@ -262,7 +260,7 @@ Strana verzija sučelja za sada ne postoji.`,
       {
         id: 17,
         pitanje: `Tko se može prijaviti za Podršku Majkama?`,
-        odgovor: `Majke.
+        odgovor: `Majke ili drugi primarni skrbnik djeteta.
 
 Iznos koji ti se evidentira ovisi o broju djece — što više djece, to veći ukupan iznos, ali s blagim opadanjem po djetetu (kroz koeficijent koji se primjenjuje formulom).
 
@@ -313,7 +311,7 @@ Za Podršku Majkama, na primjer, sam(a) upišeš ime djeteta i datum rođenja kr
 
 Tvoju prijavu zatim pregledava i odobrava Fondacija prije nego što ti Protokol počne automatski upisivati POEN. Podaci koje uneseš nisu javni — vidi ih samo onaj tko obrađuje prijavu, jer je riječ o osjetljivim podacima koji se obrađuju samo uz tvoju izričitu privolu, a tu privolu možeš povući u svakom trenutku (tada prestaje i automatski upis POEN-a).
 
-Točni uvjeti kojima se potvrđuje status za svaku skupinu još se razrađuju posebnim pravilnikom — kad bude spreman, ovdje ćemo precizirati što točno svaka skupina unosi.`,
+Bliži uvjeti kojima se potvrđuje status za svaku skupinu uređeni su Pravilnikom o programima potpore, objavljenim na web-stranici.`,
       },
       {
         id: 63,
@@ -413,7 +411,7 @@ Pravna kvalifikacija ovih razmjena u poreznom i fiskalnom smislu ne ukida postoj
         pitanje: `Je li moj oglas na Pijaci javno vidljiv?`,
         odgovor: `Da. Sadržaj oglasa — opis, cijena u POEN-ima, lokacija i tvoj pseudonim — javno je vidljiv svim posjetiteljima, uključujući neregistrirane, da bi razmjena bila dostupna i lakša za pronalaženje.
 
-Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili kupi — to je dostupno samo verificiranim korisnicima. Za neregistrirane i neverificirane, tvoj pseudonim na oglasu ne vodi do tvog profila ni povijesti transakcija.`,
+Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili razmijeni s tobom — to je dostupno samo verificiranim korisnicima. Za neregistrirane i neverificirane, tvoj pseudonim na oglasu ne vodi do tvog profila ni povijesti transakcija.`,
       },
       {
         id: 58,
@@ -535,9 +533,9 @@ Podatke o donacijama Fondacija čuva u skladu s propisima o financijskom izvješ
       {
         id: 26,
         pitanje: `Tko kontrolira KOLO?`,
-        odgovor: `Trenutno (početna faza razvoja) Fondacija „KOLO" formalni je pravni subjekt s Upravnim odborom koji donosi sve odluke.
+        odgovor: `Trenutno (Faza 1) sve odluke donosi KOLO Fondacija preko Upravnog odbora.
 
-Kad sustav dosegne kritičnu masu, aktivira se Gornje Kolo — upravljačko tijelo svih verificiranih članova koje odlučuje o ključnim pitanjima sustava kroz glasovanje sa ZRNOM.
+Kad ukupan broj evidentiranih POEN-a dosegne 1.000.000, aktivira se Gornje Kolo — upravljačko tijelo svih nositelja ZRNA, koje o ključnim pitanjima sustava odlučuje kvadratnim glasovanjem.
 
 Fondacija od tog trenutka prelazi iz suverenog u izvršno tijelo — provodi odluke Gornjeg Kola, ne donosi ih sama.`,
       },
@@ -559,7 +557,7 @@ I konačno, aktivacija Gornjeg Kola koja prebacuje nadležnost na članove.`,
       {
         id: 28,
         pitanje: `Što je Gornje Kolo i kada se aktivira?`,
-        odgovor: `Gornje Kolo je upravljačko tijelo svih verificiranih članova platforme — najviše tijelo odlučivanja o sustavu. Nije skupština koja se bira, već dinamičan sastav svih članova koji u danom trenutku imaju ZRNO.
+        odgovor: `Gornje Kolo je upravljačko tijelo svih nositelja ZRNA — najviše tijelo odlučivanja o sustavu. Nije skupština koja se bira, već dinamičan sastav: čine ga svi koji u danom trenutku imaju ZRNO.
 
 Aktivira se automatski kad minus Protokola dosegne −1.000.000 POEN (znak da je sustav dovoljno aktivan i da članovi imaju značajnu kolektivnu odgovornost).
 
@@ -579,7 +577,7 @@ Cilj je da bogati pojedinci ne mogu „kupiti" odluku samo time što imaju mnogo
 
 Veto nije diskrecijski — mora biti obrazložen pozivanjem na konkretnu prijetnju održivosti; veto bez obrazloženja sam je zlouporaba. To nije politička kontrola, već zaštita kontinuiteta i održivosti Fondacije.
 
-Veto se gasi trajno i jednosmjerno kad sredstva Fondacije dosegnu prag financijske samostalnosti utvrđen posebnim pravilnikom — tada održivost više nije ugrožena.`,
+Veto se gasi trajno i jednosmjerno kad sredstva Fondacije dosegnu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu. Tada održivost više nije ugrožena.`,
       },
       {
         id: 72,
@@ -588,7 +586,7 @@ Veto se gasi trajno i jednosmjerno kad sredstva Fondacije dosegnu prag financijs
 
 Prvi prag — aktivacija Gornjeg Kola. Kada ukupan broj upisanih POEN-a u sustavu dosegne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravno tijelo svih nositelja ZRNA. Od tog trenutka članovi kroz kvadratno glasovanje aktivnim ZRNOM odlučuju o pravilima sustava: izmjenama Pravilnika, Programima i drugim pitanjima koja utječu na zajedničko dobro. Fondacija od suverenog prelazi u izvršno i servisno tijelo — provodi odluke, ne donosi ih sama.
 
-Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije financijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njezinu operativnu održivost — prije svega odluke o trošenju sredstava (npr. kolektivne nabave) prije nego što je osigurana održivost (veto mora biti obrazložen, nije samovoljan). Taj se veto gasi trajno i jednosmjerno tek kada financijska sredstva Fondacije dosegnu prag financijske samostalnosti — a taj prag utvrđuje poseban pravilnik.
+Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije financijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njezinu operativnu održivost — prije svega odluke o trošenju sredstava (npr. kolektivne nabave) prije nego što je osigurana održivost (veto mora biti obrazložen, nije samovoljan). Taj se veto gasi trajno i jednosmjerno tek kada financijska sredstva Fondacije dosegnu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu.
 
 Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog odbora.`,
       },
@@ -662,7 +660,7 @@ Posebni interni mehanizmi rješavanja sporova mogu se uspostaviti kasnije (poseb
       {
         id: 32,
         pitanje: `Što se događa kada se netko ne pridržava pravila?`,
-        odgovor: `Sustav ima trajno pamćenje — svaka je transakcija trajno zabilježena pod pseudonimom i vidljiva verificiranim članovima, pa loše ponašanje ostaje vidljivo onima koji sudjeluju u sustavu.
+        odgovor: `Sustav ima trajno pamćenje — svako ažuriranje evidencije trajno je zabilježeno pod pseudonimom i vidljivo verificiranim članovima, pa loše ponašanje ostaje vidljivo onima koji sudjeluju u sustavu.
 
 Fondacija može privremeno suspendirati račun (najviše 30 dana, uz pravo korisnika da bude obaviješten o razlozima i da se izjasni) ili isključiti korisnika pri težoj povredi pravila.
 
