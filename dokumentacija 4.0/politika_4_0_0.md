@@ -312,7 +312,7 @@ Ovu politiku možemo menjati u skladu sa razvojem Platforme i sistema.
 
 O svim izmenama koje značajno utiču na vaša prava bićete obavešteni putem email adrese registrovane na nalogu, najmanje 15 dana pre stupanja izmena na snagu.
 
-Aktuelna verzija uvek je dostupna na Platformi. Datum poslednje izmene naznačen je u zaglavlju dokumenta.
+Aktuelna verzija uvek je dostupna na Platformi.
 
 ### Član 17 — Merodavno pravo
 

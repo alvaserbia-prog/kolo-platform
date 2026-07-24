@@ -314,7 +314,7 @@ We may amend this Policy in accordance with the development of the Platform and 
 
 You will be notified of all amendments that significantly affect your rights via the email address registered on the account, at least 15 days before the amendments take effect.
 
-The current version is always available on the Platform. The date of the last amendment is indicated in the document header.
+The current version is always available on the Platform.
 
 ### Article 17 — Governing Law
 
