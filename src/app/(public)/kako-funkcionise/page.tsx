@@ -97,13 +97,6 @@ export default async function KakoFunkcionisePage() {
       iznos: t("n6_iznos"),
       boja: "bg-kolo-green-100 text-kolo-green-700",
     },
-    {
-      br: "7",
-      naslov: t("n7_naslov"),
-      opis: t("n7_opis"),
-      iznos: t("n7_iznos"),
-      boja: "bg-kolo-gold-100 text-kolo-gold-600",
-    },
   ];
 
   return (
