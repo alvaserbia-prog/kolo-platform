@@ -17,7 +17,8 @@
     "grupa_ekonomija": "Ekonomija",
     "grupa_poverenje": "Poverenje",
     "grupa_podrzi": "Podrži KOLO",
-    "grupa_zajednicko_dobro": "Zajedničko dobro"
+    "grupa_zajednicko_dobro": "Zajedničko dobro",
+    "faq": "Česta pitanja"
   },
   "header": {
     "moje_donacije": "Moje donacije",
@@ -34,6 +35,7 @@
     "upisi_poen": "Upiši POEN",
     "bagovi": "Prijavi grešku",
     "aria_kako_funkcionise": "Kako KOLO funkcioniše",
+    "faq": "Česta pitanja",
     "aria_poruke": "Poruke",
     "aria_profil": "Profil",
     "aria_notifikacije": "Notifikacije",
