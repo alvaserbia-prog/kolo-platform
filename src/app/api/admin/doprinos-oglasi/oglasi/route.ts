@@ -72,6 +72,8 @@ export async function GET(_req: NextRequest) {
     oglasi: oglasi.map((o) => ({
       id: o.id,
       title: o.title,
+      description: o.description,
+      obrazlozenje: o.obrazlozenje,
       source: o.source,
       predlozeniPoen: o.predlozeniPoen,
       saOdobravanjem: o.saOdobravanjem,
