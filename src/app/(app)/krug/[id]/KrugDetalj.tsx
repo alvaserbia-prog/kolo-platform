@@ -38,14 +38,27 @@ interface Props {
   imaPristupnicu: boolean;
   isVerified: boolean;
   isAdmin: boolean;
+  pocetniTab: Tab;
 }
 
-type Tab = "info" | "clanovi" | "projekti" | "pristupnice";
+export const KRUG_TABOVI = ["info", "clanovi", "projekti", "pristupnice"] as const;
+export type Tab = (typeof KRUG_TABOVI)[number];
 
-export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin }: Props) {
+export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin, pocetniTab }: Props) {
   const t = useTranslations("krug");
   const router = useRouter();
-  const [tab, setTab] = useState<Tab>("info");
+  const [tab, postaviTab] = useState<Tab>(pocetniTab);
+
+  // Aktivan tab u URL-u (?tab=...) bez nove navigacije — povratak (back) sa
+  // profila člana vraća na isti tab. replaceState: bez novih unosa u istoriji.
+  const setTab = (novi: Tab) => {
+    postaviTab(novi);
+    window.history.replaceState(
+      null,
+      "",
+      novi === "info" ? `/krug/${krug.id}` : `/krug/${krug.id}?tab=${novi}`,
+    );
+  };
   const [loading, setLoading] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
