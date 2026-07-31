@@ -118,10 +118,16 @@ export default async function VerifikacijaPage() {
         <h1 className="kolo-naslov">{t("page_naslov")}</h1>
       </div>
 
-      {/* Levo: indeks stvarnosti + tabla jemstva; desno: lanac verifikacija. Ujednačene visine. */}
+      {/* Levo: indeks stvarnosti → kartice "Pokaži kod" / "Verifikuj nekoga" → tabla
+          jemstva; desno: lanac verifikacija. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
           <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
+
+          <div id="moj-kod">
+            <MojQrKod />
+          </div>
+          {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
 
           {jeNeverifikovan ? (
             // Opcija B: neverifikovanom je tabla jemstva ugrađena ovde — objavi zahtev
@@ -148,21 +154,6 @@ export default async function VerifikacijaPage() {
           jeJaPocetni={user.jeOsnivac}
         />
       </div>
-
-      {/* Kartice "Pokaži kod" i "Verifikuj nekoga" — jedna pored druge (verifikovani);
-          neverifikovani vide samo kod, punom širinom. */}
-      {jeNeverifikovan ? (
-        <div id="moj-kod">
-          <MojQrKod />
-        </div>
-      ) : (
-        <div className="grid lg:grid-cols-2 gap-6 items-start">
-          <div id="moj-kod">
-            <MojQrKod />
-          </div>
-          <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />
-        </div>
-      )}
 
       {!jeNeverifikovan && <MojeOznake osobe={mojeOznake} />}
 
