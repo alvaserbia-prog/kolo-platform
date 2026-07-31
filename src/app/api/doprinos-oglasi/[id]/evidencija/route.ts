@@ -43,7 +43,7 @@ export async function POST(
   if (predlozeni > 10_000_000)
     return NextResponse.json({ error: "Predloženi POEN dnevnog izvršenja ne može preći 10.000.000." }, { status: 400 });
   if (oglas.predlozeniPoen > 0 && predlozeni > oglas.predlozeniPoen)
-    return NextResponse.json({ error: `Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (predloženi POEN zadatka).` }, { status: 400 });
+    return NextResponse.json({ error: `Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (maksimalni POEN zadatka).` }, { status: 400 });
 
   const prijava = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId, userId: session.user.id } },
@@ -66,7 +66,7 @@ export async function POST(
     });
     const dosadasnji = agg._sum.predlozeniPoen ?? 0;
     if (dosadasnji + predlozeni > oglas.predlozeniPoen)
-      return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi predloženi POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
+      return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
   }
 
   await prisma.oglasEvidencija.create({
