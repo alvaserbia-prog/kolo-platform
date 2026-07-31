@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import AdminKlijent from "./AdminKlijent";
+import AdminKlijent, { ADMIN_TABOVI, type Tab } from "./AdminKlijent";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
@@ -10,10 +10,23 @@ import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
-export default async function AdminPage() {
+export default async function AdminPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) redirect("/dashboard");
   const viewerJeSuperadmin = jeSuperadmin(session.user);
+
+  // Tab iz URL-a (?tab=...) — back navigacija vraća na isti tab. Audit i
+  // Nadzor su rezervisani za superadmina, pa se za ostale ignorišu.
+  const { tab } = await searchParams;
+  const pocetniTab: Tab =
+    (ADMIN_TABOVI as readonly string[]).includes(tab ?? "") &&
+    (viewerJeSuperadmin || (tab !== "audit" && tab !== "nadzor"))
+      ? (tab as Tab)
+      : "dashboard";
 
   const [
     allUsers, protokol, pendingKrugovi,
@@ -151,6 +164,7 @@ export default async function AdminPage() {
       }))}
       viewerJeSuperadmin={viewerJeSuperadmin}
       viewerId={session.user.id}
+      pocetniTab={pocetniTab}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,

@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { useMe, useMeEventBridge, useMePatch, ME_KEY } from "@/hooks/useMe";
+import { useSkrolPamcenje } from "@/hooks/useSkrolPamcenje";
 
 interface AppShellProps {
   verified: boolean;
@@ -19,6 +20,9 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   const router = useRouter();
   const pathname = usePathname();
   const qc = useQueryClient();
+  // Back/forward vraća poziciju skrola sadržaja (skrol je u div-u ispod, ne na
+  // window-u, pa browser/Next restauracija ne važi).
+  const skrolRef = useSkrolPamcenje<HTMLDivElement>();
 
   // Jedan keširan izvor za ceo chrome (balans, badge-evi, notifikacije, nadzor,
   // politika) — deli se sa Header-om kroz React Query keš. Ranije: 6 fetch-eva.
@@ -67,7 +71,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
       <Header onMenuOpen={() => setMobileOpen(true)} />
       {/* Skrol je na punoj širini viewporta → skrolbar je uz desnu ivicu ekrana
           (ranije je bio na centriranom <main> pa je „visio" u sredini desno). */}
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div ref={skrolRef} className="flex-1 min-h-0 overflow-y-auto">
       <div className="flex w-full min-w-0">
         <Sidebar
           verified={verified}

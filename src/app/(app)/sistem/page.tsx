@@ -4,11 +4,21 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
-import SistemKlijent from "./SistemKlijent";
+import SistemKlijent, { SEKCIJE, type Sekcija } from "./SistemKlijent";
 
-export default async function SistemPage() {
+export default async function SistemPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sekcija?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
+
+  // Sekcija iz URL-a (?sekcija=clanovi) — back navigacija vraća na istu sekciju.
+  const { sekcija } = await searchParams;
+  const pocetnaSekcija: Sekcija = (SEKCIJE as readonly string[]).includes(sekcija ?? "")
+    ? (sekcija as Sekcija)
+    : "pregled";
 
   const verified = session.user.verified;
 
@@ -217,6 +227,7 @@ export default async function SistemPage() {
       emisijeChart={emisijeChart}
       transakcije={txData}
       clanovi={clanovi}
+      pocetnaSekcija={pocetnaSekcija}
     />
   );
 }

@@ -202,6 +202,7 @@ interface AdminKlijentProps {
   otvoreniPrigovori: PrigovorItem[];
   viewerJeSuperadmin: boolean;
   viewerId: string;
+  pocetniTab: Tab;
 }
 
 const tipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
@@ -223,12 +224,21 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-type Tab = "dashboard" | "programi" | "ped" | "pokrovitelji" | "donacije" | "prigovori" | "korisnici" | "emisija" | "osnivaci" | "vesti" | "audit" | "nadzor";
+export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "emisija", "osnivaci", "vesti", "audit", "nadzor"] as const;
+export type Tab = (typeof ADMIN_TABOVI)[number];
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
-  const [tab, setTab] = useState<Tab>("dashboard");
+  const [tab, postaviTab] = useState<Tab>(pocetniTab);
+
+  // Aktivan tab u URL-u (?tab=...) bez nove navigacije — povratak (back) sa
+  // profila i sl. vraća na isti tab. replaceState: promena taba ne pravi novi
+  // unos u istoriji.
+  const setTab = (novi: Tab) => {
+    postaviTab(novi);
+    window.history.replaceState(null, "", novi === "dashboard" ? "/admin" : `/admin?tab=${novi}`);
+  };
 
   // Skrolovanje trake sa tabovima (header) levo/desno preko strelica na krajevima
   const tabsRef = useRef<HTMLDivElement>(null);
