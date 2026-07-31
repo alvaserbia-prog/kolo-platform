@@ -38,9 +38,11 @@ export async function PATCH(
   if (!title?.trim() || !description?.trim())
     return NextResponse.json({ error: "Naziv i opis su obavezni." }, { status: 400 });
 
-  const predlozeni = Number(predlozeniPoen);
-  if (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000)
-    return NextResponse.json({ error: "Predloženi POEN mora biti ceo broj između 100 i 10.000.000." }, { status: 400 });
+  // Prazno = 0 = bez ograničenja (isto kao pri kreiranju).
+  const predlozeni = predlozeniPoen === undefined || predlozeniPoen === null || predlozeniPoen === ""
+    ? 0 : Number(predlozeniPoen);
+  if (predlozeni !== 0 && (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000))
+    return NextResponse.json({ error: "Predloženi POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
 
   const brMesta = Number(positions ?? 1);
   if (!Number.isInteger(brMesta) || brMesta < 1 || brMesta > 1000)

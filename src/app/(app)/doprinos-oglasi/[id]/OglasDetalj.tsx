@@ -117,7 +117,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
             <p className="text-sm text-kolo-muted mt-2 leading-relaxed">{oglas.description}</p>
           </div>
           <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
-            <p className="text-lg font-bold text-kolo-green-700">{oglas.predlozeniPoen.toLocaleString("sr-RS")}</p>
+            <p className="text-lg font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? oglas.predlozeniPoen.toLocaleString("sr-RS") : t("neograniceno")}</p>
             <p className="text-xs text-kolo-green-700">{t("predlozeni_poen_label")}</p>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
             <p className="text-xs text-kolo-muted mt-0.5">{t("izvršilaca")}</p>
           </div>
           <div className="bg-kolo-bg rounded-xl p-3 text-center">
-            <p className="font-semibold text-kolo-green-700">{oglas.predlozeniPoen.toLocaleString("sr-RS")} P</p>
+            <p className="font-semibold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString("sr-RS")} P` : t("neograniceno")}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{t("predlozeni_tezina")}</p>
           </div>
         </div>
@@ -263,7 +263,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
   async function handleSubmit() {
     setError("");
     if (!predlozeniPoen || !Number.isInteger(predlozeni) || predlozeni < 1) { setError(t("ev_greska_poen_pozitivan")); return; }
-    if (predlozeni > maxPredlozeni) { setError(t("ev_greska_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") })); return; }
+    if (maxPredlozeni > 0 && predlozeni > maxPredlozeni) { setError(t("ev_greska_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") })); return; }
     if (!description.trim() || description.trim().length < 10) { setError(t("ev_greska_opis_min10")); return; }
 
     setLoading(true);
@@ -308,8 +308,8 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("predlozeni_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") })}</label>
-          <input type="number" min={1} max={maxPredlozeni} step={1} value={predlozeniPoen}
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">{maxPredlozeni > 0 ? t("predlozeni_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") }) : t("predlozeni_poen_bez_max")}</label>
+          <input type="number" min={1} max={maxPredlozeni > 0 ? maxPredlozeni : undefined} step={1} value={predlozeniPoen}
             onChange={(e) => setPredlozeniPoen(e.target.value)}
             placeholder={t("predlozeni_poen_placeholder")}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />

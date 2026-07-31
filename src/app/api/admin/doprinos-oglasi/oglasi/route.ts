@@ -19,9 +19,11 @@ export async function POST(req: NextRequest) {
   // Predloženi POEN — težinski koeficijent (čl. 5/6). Gornja granica po zadatku je
   // operativni parametar (čl. 26) koji utvrđuje UO/Gornje Kolo; ovde se primenjuje
   // samo zdravorazumski opseg kako bi se sprečili očigledno pogrešni unosi.
-  const predlozeni = Number(predlozeniPoen);
-  if (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000)
-    return NextResponse.json({ error: "Predloženi POEN mora biti ceo broj između 100 i 10.000.000." }, { status: 400 });
+  // Polje je opciono: prazno = 0 = bez ograničenja zbira dnevnih izvršenja po izvršiocu.
+  const predlozeni = predlozeniPoen === undefined || predlozeniPoen === null || predlozeniPoen === ""
+    ? 0 : Number(predlozeniPoen);
+  if (predlozeni !== 0 && (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000))
+    return NextResponse.json({ error: "Predloženi POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
 
   const brMesta = Number(positions ?? 1);
   if (!Number.isInteger(brMesta) || brMesta < 1 || brMesta > 1000)

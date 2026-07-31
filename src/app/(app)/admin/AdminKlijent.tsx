@@ -576,7 +576,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                   </div>
                   <p className="font-semibold text-kolo-text text-sm">{o.title}</p>
                   <p className="text-xs text-kolo-muted mt-1">
-                    {o.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
+                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
                   </p>
                 </div>
                 {o.status === "ACTIVE" && (
@@ -611,7 +611,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{p.pseudonim}</Pseudonim></p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_predlozeni_poen")}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen > 0 ? p.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}</p>
                     {p.planIzvrsenja && <p className="text-xs text-kolo-muted mt-1 line-clamp-3"><span className="font-semibold">{t("ped_plan_label")}</span> {p.planIzvrsenja}</p>}
                     <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
                   </div>
@@ -695,7 +695,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
   const t = useTranslations("admin");
   const [title, setTitle] = useState(oglas?.title ?? "");
   const [description, setDescription] = useState(oglas?.description ?? "");
-  const [predlozeniPoen, setPredlozeniPoen] = useState(oglas ? String(oglas.predlozeniPoen) : "");
+  const [predlozeniPoen, setPredlozeniPoen] = useState(oglas && oglas.predlozeniPoen > 0 ? String(oglas.predlozeniPoen) : "");
   const [obrazlozenje, setObrazlozenje] = useState(oglas?.obrazlozenje ?? "");
   const [saOdobravanjem, setSaOdobravanjem] = useState(oglas?.saOdobravanjem ?? false);
   const [positions, setPositions] = useState(oglas ? String(oglas.positions) : "");
@@ -708,7 +708,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!Number.isInteger(predlozeni) || predlozeni < 100) { setError(t("novi_oglas_poen_validacija")); return; }
+    if (predlozeniPoen.trim() !== "" && (!Number.isInteger(predlozeni) || predlozeni < 100)) { setError(t("novi_oglas_poen_validacija")); return; }
     setLoading(true);
     try {
       const res = await fetch(oglas ? `/api/admin/doprinos-oglasi/oglasi/${oglas.id}` : "/api/admin/doprinos-oglasi/oglasi", {
@@ -717,7 +717,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
         body: JSON.stringify({
           title: title.trim(),
           description: description.trim(),
-          predlozeniPoen: predlozeni,
+          predlozeniPoen: predlozeniPoen.trim() ? predlozeni : 0,
           obrazlozenje: obrazlozenje.trim() || undefined,
           saOdobravanjem,
           positions: positions.trim() ? Number(positions) : undefined,
@@ -786,7 +786,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
       <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2 text-xs text-kolo-gold-600">
-        {t("novi_oglas_napomena_box", { poen: predlozeni > 0 ? predlozeni.toLocaleString("sr-RS") : "—" })}
+        {t("novi_oglas_napomena_box", { poen: predlozeniPoen.trim() && predlozeni > 0 ? predlozeni.toLocaleString("sr-RS") : t("ped_neograniceno") })}
       </div>
 
       <div className="flex gap-2">
