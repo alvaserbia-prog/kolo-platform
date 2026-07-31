@@ -2,7 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect, notFound } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import KrugDetalj, { KRUG_TABOVI, type Tab } from "./KrugDetalj";
+import KrugDetalj from "./KrugDetalj";
+import { KRUG_TABOVI, type Tab } from "./tabovi";
 import { jeAdmin } from "@/lib/dozvole";
 
 export default async function KrugPage({

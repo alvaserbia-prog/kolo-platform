@@ -8,8 +8,7 @@ import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
 
-export const SEKCIJE = ["pregled", "clanovi", "lokacije", "transakcije", "donacije", "iznos", "faza", "fondacija"] as const;
-export type Sekcija = (typeof SEKCIJE)[number];
+import type { Sekcija } from "./sekcije";
 
 interface FondTx {
   id: string;

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import type { Tab } from "./tabovi";
 
 interface Projekat {
   id: string;
@@ -41,8 +42,6 @@ interface Props {
   pocetniTab: Tab;
 }
 
-export const KRUG_TABOVI = ["info", "clanovi", "projekti", "pristupnice"] as const;
-export type Tab = (typeof KRUG_TABOVI)[number];
 
 export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin, pocetniTab }: Props) {
   const t = useTranslations("krug");
