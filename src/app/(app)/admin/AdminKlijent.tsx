@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import type { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { ADMIN_TABOVI, type Tab } from "./tabovi";
 import Pseudonim from "@/components/Pseudonim";
 
 // Teški tabovi iz zasebnih fajlova — lazy-load (smanjuje početni admin bundle).
@@ -224,8 +225,6 @@ const statusBoja: Record<string, string> = {
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
 
-export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "emisija", "osnivaci", "vesti", "audit", "nadzor"] as const;
-export type Tab = (typeof ADMIN_TABOVI)[number];
 
 export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab }: AdminKlijentProps) {
   const router = useRouter();

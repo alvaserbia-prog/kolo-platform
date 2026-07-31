@@ -4,7 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
-import SistemKlijent, { SEKCIJE, type Sekcija } from "./SistemKlijent";
+import SistemKlijent from "./SistemKlijent";
+import { SEKCIJE, type Sekcija } from "./sekcije";
 
 export default async function SistemPage({
   searchParams,
