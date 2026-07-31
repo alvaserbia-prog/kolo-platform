@@ -42,7 +42,7 @@ export async function PATCH(
   const predlozeni = predlozeniPoen === undefined || predlozeniPoen === null || predlozeniPoen === ""
     ? 0 : Number(predlozeniPoen);
   if (predlozeni !== 0 && (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000))
-    return NextResponse.json({ error: "Predloženi POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
+    return NextResponse.json({ error: "Maksimalni POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
 
   const brMesta = Number(positions ?? 1);
   if (!Number.isInteger(brMesta) || brMesta < 1 || brMesta > 1000)
@@ -62,7 +62,7 @@ export async function PATCH(
   });
 
   await logAdminAkcija(session.user.id, "DOPRINOS_OGLAS_IZMENJEN", id,
-    `${izmenjen.title} (predloženo ${predlozeni} POEN)`);
+    `${izmenjen.title} (${predlozeni > 0 ? `maks ${predlozeni} POEN` : "bez maksimuma POEN-a"})`);
 
   return NextResponse.json({ ok: true, id });
 }
