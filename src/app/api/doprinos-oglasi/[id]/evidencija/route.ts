@@ -38,8 +38,11 @@ export async function POST(
   if (!oglas || oglas.status !== "ACTIVE") return NextResponse.json({ error: "Zadatak nije aktivan." }, { status: 400 });
 
   // Predloženi POEN pojedinačnog dnevnog izvršenja ne sme premašiti predloženi POEN
-  // celog zadatka (čl. 26 — gornja granica po dnevnom izvršenju).
-  if (predlozeni > oglas.predlozeniPoen)
+  // celog zadatka (čl. 26 — gornja granica po dnevnom izvršenju). Zadatak sa
+  // predlozeniPoen = 0 nema ograničenje — važi samo zdravorazumska granica unosa.
+  if (predlozeni > 10_000_000)
+    return NextResponse.json({ error: "Predloženi POEN dnevnog izvršenja ne može preći 10.000.000." }, { status: 400 });
+  if (oglas.predlozeniPoen > 0 && predlozeni > oglas.predlozeniPoen)
     return NextResponse.json({ error: `Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (predloženi POEN zadatka).` }, { status: 400 });
 
   const prijava = await prisma.oglasPrijava.findUnique({
@@ -55,13 +58,16 @@ export async function POST(
 
   // Kumulativni predloženi POEN svih dnevnih izvršenja (osim odbijenih) ne sme preći
   // predloženi POEN zadatka (čl. 11 — raspodela predloženog POEN-a po dnevnim izvršenjima).
-  const agg = await prisma.oglasEvidencija.aggregate({
-    where: { userId: session.user.id, oglasId, status: { not: "REJECTED" } },
-    _sum: { predlozeniPoen: true },
-  });
-  const dosadasnji = agg._sum.predlozeniPoen ?? 0;
-  if (dosadasnji + predlozeni > oglas.predlozeniPoen)
-    return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi predloženi POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
+  // Zadatak sa predlozeniPoen = 0 nema kumulativno ograničenje.
+  if (oglas.predlozeniPoen > 0) {
+    const agg = await prisma.oglasEvidencija.aggregate({
+      where: { userId: session.user.id, oglasId, status: { not: "REJECTED" } },
+      _sum: { predlozeniPoen: true },
+    });
+    const dosadasnji = agg._sum.predlozeniPoen ?? 0;
+    if (dosadasnji + predlozeni > oglas.predlozeniPoen)
+      return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi predloženi POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
+  }
 
   await prisma.oglasEvidencija.create({
     data: {

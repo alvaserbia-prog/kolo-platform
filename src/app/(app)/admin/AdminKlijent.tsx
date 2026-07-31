@@ -100,6 +100,8 @@ interface AdminProgramiData {
 interface AdminOglasItem {
   id: string;
   title: string;
+  description: string;
+  obrazlozenje: string | null;
   source: string;
   predlozeniPoen: number;
   saOdobravanjem: boolean;
@@ -480,6 +482,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
   const [view, setView] = useState<"oglasi" | "prijave" | "evidencije" | "novi">("oglasi");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
+  const [izmenaOglas, setIzmenaOglas] = useState<AdminOglasItem | null>(null);
 
   async function odobriPrijavu(id: string) {
     setLoading(id);
@@ -549,7 +552,14 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
       </div>
 
       {/* Oglasi */}
-      {view === "oglasi" && (
+      {view === "oglasi" && izmenaOglas && (
+        <NoviOglasForma
+          oglas={izmenaOglas}
+          onSuccess={() => { setIzmenaOglas(null); onDone(); }}
+          onCancel={() => setIzmenaOglas(null)}
+        />
+      )}
+      {view === "oglasi" && !izmenaOglas && (
         <div className="space-y-3">
           {data.oglasi.length === 0 ? (
             <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">{t("ped_nema_oglasa")}</div>
@@ -566,14 +576,22 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                   </div>
                   <p className="font-semibold text-kolo-text text-sm">{o.title}</p>
                   <p className="text-xs text-kolo-muted mt-1">
-                    {o.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
+                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
                   </p>
                 </div>
                 {o.status === "ACTIVE" && (
-                  <button onClick={() => zatvoriOglas(o.id)} disabled={loading === o.id}
-                    className="text-xs px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger rounded-xl hover:bg-kolo-danger-light disabled:opacity-60">
-                    {t("ped_zatvori")}
-                  </button>
+                  <div className="flex gap-2 shrink-0">
+                    {o.ukupnoPrijava === 0 && (
+                      <button onClick={() => setIzmenaOglas(o)} disabled={loading === o.id}
+                        className="text-xs px-3 py-1.5 border border-kolo-border text-kolo-text rounded-xl hover:bg-kolo-bg disabled:opacity-60">
+                        {t("ped_izmeni")}
+                      </button>
+                    )}
+                    <button onClick={() => zatvoriOglas(o.id)} disabled={loading === o.id}
+                      className="text-xs px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger rounded-xl hover:bg-kolo-danger-light disabled:opacity-60">
+                      {t("ped_zatvori")}
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -593,7 +611,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{p.pseudonim}</Pseudonim></p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_predlozeni_poen")}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen > 0 ? p.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}</p>
                     {p.planIzvrsenja && <p className="text-xs text-kolo-muted mt-1 line-clamp-3"><span className="font-semibold">{t("ped_plan_label")}</span> {p.planIzvrsenja}</p>}
                     <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
                   </div>
@@ -673,15 +691,15 @@ function OdbijForma({ onOdbij, loading }: { onOdbij: (razlog: string) => void; l
   );
 }
 
-function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
+function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem; onSuccess: () => void; onCancel?: () => void }) {
   const t = useTranslations("admin");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [predlozeniPoen, setPredlozeniPoen] = useState("");
-  const [obrazlozenje, setObrazlozenje] = useState("");
-  const [saOdobravanjem, setSaOdobravanjem] = useState(false);
-  const [positions, setPositions] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [title, setTitle] = useState(oglas?.title ?? "");
+  const [description, setDescription] = useState(oglas?.description ?? "");
+  const [predlozeniPoen, setPredlozeniPoen] = useState(oglas && oglas.predlozeniPoen > 0 ? String(oglas.predlozeniPoen) : "");
+  const [obrazlozenje, setObrazlozenje] = useState(oglas?.obrazlozenje ?? "");
+  const [saOdobravanjem, setSaOdobravanjem] = useState(oglas?.saOdobravanjem ?? false);
+  const [positions, setPositions] = useState(oglas ? String(oglas.positions) : "");
+  const [deadline, setDeadline] = useState(oglas?.deadline ? oglas.deadline.slice(0, 10) : "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -690,16 +708,16 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (!Number.isInteger(predlozeni) || predlozeni < 100) { setError(t("novi_oglas_poen_validacija")); return; }
+    if (predlozeniPoen.trim() !== "" && (!Number.isInteger(predlozeni) || predlozeni < 100)) { setError(t("novi_oglas_poen_validacija")); return; }
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/doprinos-oglasi/oglasi", {
-        method: "POST",
+      const res = await fetch(oglas ? `/api/admin/doprinos-oglasi/oglasi/${oglas.id}` : "/api/admin/doprinos-oglasi/oglasi", {
+        method: oglas ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: title.trim(),
           description: description.trim(),
-          predlozeniPoen: predlozeni,
+          predlozeniPoen: predlozeniPoen.trim() ? predlozeni : 0,
           obrazlozenje: obrazlozenje.trim() || undefined,
           saOdobravanjem,
           positions: positions.trim() ? Number(positions) : undefined,
@@ -716,7 +734,7 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
-      <p className="text-sm font-semibold text-kolo-muted">{t("novi_oglas_naslov_forme")}</p>
+      <p className="text-sm font-semibold text-kolo-muted">{oglas ? t("izmena_oglas_naslov_forme") : t("novi_oglas_naslov_forme")}</p>
 
       <div>
         <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_naziv_label")}</label>
@@ -768,13 +786,21 @@ function NoviOglasForma({ onSuccess }: { onSuccess: () => void }) {
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
       <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2 text-xs text-kolo-gold-600">
-        {t("novi_oglas_napomena_box", { poen: predlozeni > 0 ? predlozeni.toLocaleString("sr-RS") : "—" })}
+        {t("novi_oglas_napomena_box", { poen: predlozeniPoen.trim() && predlozeni > 0 ? predlozeni.toLocaleString("sr-RS") : t("ped_neograniceno") })}
       </div>
 
-      <button type="submit" disabled={loading || !title.trim() || !description.trim()}
-        className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
-        {loading ? t("novi_oglas_kreiranje") : t("novi_oglas_kreiraj")}
-      </button>
+      <div className="flex gap-2">
+        {oglas && onCancel && (
+          <button type="button" onClick={onCancel} disabled={loading}
+            className="flex-1 py-3 rounded-xl bg-white border border-kolo-border text-kolo-text text-sm font-semibold hover:bg-kolo-bg disabled:opacity-60">
+            {t("izmena_oglas_otkazi")}
+          </button>
+        )}
+        <button type="submit" disabled={loading || !title.trim() || !description.trim()}
+          className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
+          {loading ? (oglas ? t("izmena_oglas_cuvanje") : t("novi_oglas_kreiranje")) : (oglas ? t("izmena_oglas_sacuvaj") : t("novi_oglas_kreiraj"))}
+        </button>
+      </div>
     </form>
   );
 }

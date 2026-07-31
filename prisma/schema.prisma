@@ -525,7 +525,7 @@ model DoprinosOglas {
   title          String
   description    String
   source         OglasSource
-  predlozeniPoen Int           // predloženi POEN za potpuno izvršenje (čl. 5/6) — težinski koeficijent, nije garantovan iznos
+  predlozeniPoen Int           // predloženi POEN za potpuno izvršenje (čl. 5/6) — težinski koeficijent, nije garantovan iznos; 0 = bez ograničenja zbira dnevnih izvršenja
   obrazlozenje   String?       // obrazloženje predloženog POEN-a (čl. 6)
   saOdobravanjem Boolean       @default(false) // čl. 14 — prijava primljena tek po izričitom odobrenju plana izvršenja
   positions      Int           @default(1)

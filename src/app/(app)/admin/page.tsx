@@ -215,7 +215,8 @@ export default async function AdminPage() {
       }))}
       adminPed={{
         oglasi: zaposljavanjeData[0].map((o) => ({
-          id: o.id, title: o.title, source: o.source as string,
+          id: o.id, title: o.title, description: o.description, obrazlozenje: o.obrazlozenje,
+          source: o.source as string,
           predlozeniPoen: o.predlozeniPoen, saOdobravanjem: o.saOdobravanjem, positions: o.positions,
           deadline: o.deadline?.toISOString() ?? null, status: o.status as string,
           createdByPseudonim: o.createdBy.pseudonim, krugName: o.krug?.name ?? null,

@@ -131,7 +131,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
             <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{oglas.description}</p>
           </div>
           <div className="shrink-0 text-right">
-            <p className="text-sm font-bold text-kolo-green-700">{oglas.predlozeniPoen.toLocaleString("sr-RS")} P</p>
+            <p className="text-sm font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString("sr-RS")} P` : t("neograniceno")}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{t("predlozeni_kratko")}</p>
           </div>
         </div>
