@@ -2,13 +2,25 @@ import { getServerSession } from "next-auth";
 import { redirect, notFound } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import KrugDetalj from "./KrugDetalj";
+import KrugDetalj, { KRUG_TABOVI, type Tab } from "./KrugDetalj";
 import { jeAdmin } from "@/lib/dozvole";
 
-export default async function KrugPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function KrugPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ tab?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
   const { id } = await params;
+
+  // Tab iz URL-a (?tab=clanovi) — back navigacija vraća na isti tab.
+  const { tab } = await searchParams;
+  const pocetniTab: Tab = (KRUG_TABOVI as readonly string[]).includes(tab ?? "")
+    ? (tab as Tab)
+    : "info";
 
   const [krug, mojeMemberstvo, mojaPristupnica] = await Promise.all([
     prisma.krug.findUnique({
@@ -76,6 +88,7 @@ export default async function KrugPage({ params }: { params: Promise<{ id: strin
       imaPristupnicu={!!mojaPristupnica}
       isVerified={session.user.verified}
       isAdmin={jeAdmin(session.user)}
+      pocetniTab={pocetniTab}
     />
   );
 }

@@ -8,7 +8,8 @@ import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
 
-type Sekcija = "pregled" | "clanovi" | "lokacije" | "transakcije" | "donacije" | "iznos" | "faza" | "fondacija";
+export const SEKCIJE = ["pregled", "clanovi", "lokacije", "transakcije", "donacije", "iznos", "faza", "fondacija"] as const;
+export type Sekcija = (typeof SEKCIJE)[number];
 
 interface FondTx {
   id: string;
@@ -94,6 +95,7 @@ interface Props {
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
   clanovi: Clan[];
+  pocetnaSekcija: Sekcija;
 }
 
 const CILJ_OPTICAJ = 1_000_000;
@@ -120,9 +122,18 @@ export default function SistemKlijent({
   emisijeChart,
   transakcije,
   clanovi,
+  pocetnaSekcija,
 }: Props) {
-  const [sekcija, setSekcija] = useState<Sekcija>("pregled");
+  const [sekcija, postaviSekciju] = useState<Sekcija>(pocetnaSekcija);
   const t = useTranslations("sistem");
+
+  // Aktivna sekcija se ogleda u URL-u (?sekcija=...) bez nove navigacije,
+  // da povratak (back) sa profila vrati korisnika na istu sekciju, a ne na
+  // „Pregled". replaceState — promena sekcije ne pravi novi unos u istoriji.
+  const setSekcija = (s: Sekcija) => {
+    postaviSekciju(s);
+    window.history.replaceState(null, "", s === "pregled" ? "/sistem" : `/sistem?sekcija=${s}`);
+  };
 
   const zeroSum = opticaj + protokolBalance === 0;
   const faza2 = opticaj >= CILJ_OPTICAJ;
