@@ -162,16 +162,14 @@ export default function SistemKlijent({
 
       {/* Upozorenje za neverifikovane */}
       {!verified && (
-        <div className="box-warning flex items-center justify-between gap-4">
-          <div>
-            <p className="text-sm font-semibold">{t("nalog_nije_verifikovan_naslov")}</p>
-            <p className="text-sm mt-0.5 opacity-90">
-              {t("nalog_nije_verifikovan_opis", { iznos: "1.000 POEN" })}
-            </p>
-          </div>
+        <div className="box-warning">
+          <p className="text-sm font-semibold">{t("nalog_nije_verifikovan_naslov")}</p>
+          <p className="text-sm mt-0.5 opacity-90">
+            {t("nalog_nije_verifikovan_opis", { iznos: "1.000 POEN" })}
+          </p>
           <Link
             href="/tabla-jemstva"
-            className="shrink-0 px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
+            className="mt-3 inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
           >
             {t("verifikuj_dugme")}
           </Link>
@@ -357,6 +355,7 @@ export default function SistemKlijent({
           ukupanIznosTx={ukupanIznosTx}
           danasIznosTx={danasIznosTx}
           transakcije={transakcije}
+          verified={verified}
         />
       )}
       {sekcija === "faza" && <FazaSekcija />}
@@ -1457,10 +1456,12 @@ function IznosSekcija({
   ukupanIznosTx,
   danasIznosTx,
   transakcije,
+  verified,
 }: {
   ukupanIznosTx: number;
   danasIznosTx: number;
   transakcije: Transakcija[];
+  verified: boolean;
 }) {
   const t = useTranslations("sistem");
   const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
@@ -1515,7 +1516,9 @@ function IznosSekcija({
                     day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
                   })}
                 </span>
-                {tx.fromId ? (
+                {!verified ? (
+                  <span className="text-kolo-muted">—</span>
+                ) : tx.fromId ? (
                   <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                   </Link>
@@ -1523,7 +1526,9 @@ function IznosSekcija({
                   <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                 )}
                 <span className="text-kolo-muted text-center">→</span>
-                {tx.toId ? (
+                {!verified ? (
+                  <span className="text-kolo-muted">—</span>
+                ) : tx.toId ? (
                   <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{tx.toPseudonim}</Pseudonim>
                   </Link>
@@ -1538,13 +1543,17 @@ function IznosSekcija({
               <div className="sm:hidden space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
-                    {tx.fromId ? (
+                    {!verified ? (
+                      <span className="text-kolo-muted">—</span>
+                    ) : tx.fromId ? (
                       <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                     ) : (
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                     )}
                     <span className="text-kolo-muted shrink-0">→</span>
-                    {tx.toId ? (
+                    {!verified ? (
+                      <span className="text-kolo-muted">—</span>
+                    ) : tx.toId ? (
                       <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                     ) : (
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
