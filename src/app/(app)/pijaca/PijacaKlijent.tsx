@@ -46,8 +46,10 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
   const [minCena, setMinCena] = useState("");
   const [maxCena, setMaxCena] = useState("");
   const [showCena, setShowCena] = useState(false);
-  const [showKat, setShowKat] = useState(false);
   const [showSort, setShowSort] = useState(false);
+  // Blok čipova kategorija je sklopiv (dugme-strelica desno od tabova).
+  // Otvoren je odmah samo kad URL već nosi izabrane kategorije (?kat=).
+  const [showKategorije, setShowKategorije] = useState(initialKat.length > 0);
   const [kontaktLoadingId, setKontaktLoadingId] = useState<string | null>(null);
 
   // Stanje filtera živi u URL-u (?kat=slug1,slug2) — link je deljiv, a SSR
@@ -140,100 +142,79 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
         )}
       </div>
 
-      {/* Prekidač: Ponude | Potražnja */}
-      <div className="inline-flex rounded-xl border border-kolo-border bg-white p-1">
-        {([
-          { val: "PONUDA" as const, label: t("tab_ponude"), broj: brojPonuda },
-          { val: "POTRAZNJA" as const, label: t("tab_potraznja"), broj: brojPotraznja },
-        ]).map(({ val, label, broj }) => (
-          <button
-            key={val}
-            type="button"
-            onClick={() => setTipPrikaza(val)}
-            className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
-              tipPrikaza === val
-                ? "bg-kolo-green-700 text-white"
-                : "text-kolo-muted hover:text-kolo-text"
-            }`}
+      {/* Prekidač: Ponude | Potražnja + dugme-strelica koje otvara/zatvara kategorije */}
+      <div className="flex items-center gap-2">
+        <div className="inline-flex rounded-xl border border-kolo-border bg-white p-1">
+          {([
+            { val: "PONUDA" as const, label: t("tab_ponude"), broj: brojPonuda },
+            { val: "POTRAZNJA" as const, label: t("tab_potraznja"), broj: brojPotraznja },
+          ]).map(({ val, label, broj }) => (
+            <button
+              key={val}
+              type="button"
+              onClick={() => setTipPrikaza(val)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-semibold transition-colors ${
+                tipPrikaza === val
+                  ? "bg-kolo-green-700 text-white"
+                  : "text-kolo-muted hover:text-kolo-text"
+              }`}
+            >
+              {label} <span className="opacity-70">({broj})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Strelica na dole — otvara/zatvara čipove kategorija. Kad je blok
+            zatvoren a filter aktivan, dugme ostaje zeleno sa brojem izabranih. */}
+        <button
+          type="button"
+          onClick={() => setShowKategorije((v) => !v)}
+          aria-expanded={showKategorije}
+          aria-label={t("kategorija_filter")}
+          className={`inline-flex items-center gap-1 px-2.5 py-2 rounded-xl border bg-white transition-colors ${
+            selektovaneKat.length > 0
+              ? "border-kolo-green-700 text-kolo-green-700"
+              : "border-kolo-border text-kolo-muted hover:border-kolo-green-700 hover:text-kolo-green-700"
+          }`}
+        >
+          {selektovaneKat.length > 0 && (
+            <span className="text-xs font-semibold">{selektovaneKat.length}</span>
+          )}
+          <svg
+            width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+            className={`transition-transform ${showKategorije ? "rotate-180" : ""}`}
           >
-            {label} <span className="opacity-70">({broj})</span>
-          </button>
-        ))}
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
       </div>
 
-      {/* Čip filter kategorija — ispod tabova Ponude/Potražnja, iznad grida.
-          Multi-select sa OR logikom; stanje u URL-u (?kat=). Bez padajućeg menija. */}
-      <CategoryChips
-        mode="multi"
-        selected={selektovaneKat}
-        onChange={azurirajKategorije}
-        counts={brojaciKat}
-        leadingChip={
-          pracene.length > 0
-            ? {
-                label: t("samo_pracene"),
-                active: samoPraceneAktivno,
-                onClick: () => azurirajKategorije(samoPraceneAktivno ? [] : [...pracene]),
-              }
-            : undefined
-        }
-      />
+      {/* Čip filter kategorija — sklopiv blok ispod tabova, iznad grida.
+          Multi-select sa OR logikom; stanje u URL-u (?kat=). */}
+      {showKategorije && (
+        <CategoryChips
+          mode="multi"
+          selected={selektovaneKat}
+          onChange={azurirajKategorije}
+          counts={brojaciKat}
+          leadingChip={
+            pracene.length > 0
+              ? {
+                  label: t("samo_pracene"),
+                  active: samoPraceneAktivno,
+                  onClick: () => azurirajKategorije(samoPraceneAktivno ? [] : [...pracene]),
+                }
+              : undefined
+          }
+        />
+      )}
 
       {/* Filteri: levo padajuci meniji (cena + sortiranje), desno pretraga (pola sirine) */}
       <div className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
           <div className="flex gap-2 flex-wrap items-center">
-            {/* Kategorija — padajući meni (isti dizajn kao Cena/Sortiranje).
-                Deli isto multi-select stanje sa čipovima: klik na stavku
-                uključuje/isključuje kategoriju, „Sve kategorije" briše izbor. */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setShowKat((v) => !v)}
-                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
-                  selektovaneKat.length > 0
-                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
-                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
-                }`}
-              >
-                {selektovaneKat.length === 0
-                  ? t("sve_kategorije")
-                  : `${t("kategorija_filter")} (${selektovaneKat.length})`}
-              </button>
-              {showKat && (
-                <div className="absolute z-20 left-0 mt-1 min-w-[13rem] max-h-72 overflow-y-auto bg-white rounded-xl border border-kolo-border shadow-lg p-1">
-                  <button
-                    onClick={() => { azurirajKategorije([]); setShowKat(false); }}
-                    className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      selektovaneKat.length === 0 ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
-                    }`}
-                  >
-                    {t("sve_kategorije")}
-                  </button>
-                  {KATEGORIJE.map((kat) => {
-                    const aktivna = selektovaneKat.includes(kat);
-                    return (
-                      <button
-                        key={kat}
-                        onClick={() =>
-                          azurirajKategorije(
-                            aktivna ? selektovaneKat.filter((k) => k !== kat) : [...selektovaneKat, kat]
-                          )
-                        }
-                        className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                          aktivna ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
-                        }`}
-                      >
-                        {aktivna ? "✓ " : ""}{t(`kategorija_${kategorijaKljuc(kat)}`)}
-                        <span className="opacity-60"> ({brojaciKat[kat] ?? 0})</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
             {/* Cena — dropdown sa min/max. Kod potražnje nema iznosa, pa se sakriva. */}
             {!jePotraznja && (
             <div className="relative">
