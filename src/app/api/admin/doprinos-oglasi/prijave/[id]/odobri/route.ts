@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 /**
@@ -53,13 +53,15 @@ export async function POST(
   if (!oglasSaKapacitetom) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
 
   // Konflikt interesa: verifikator ne sme biti predlagač oglasa ni podnosilac prijave.
+  // Izuzetak: superadmin sme da odlučuje i na svom oglasu (u Fazi 1 UO objavljuje
+  // zadatke, pa bi zabrana blokirala jedinog verifikatora).
   if (session.user.id === prijava.userId) {
     return NextResponse.json(
       { error: "Ne možeš odlučivati o sopstvenoj prijavi." },
       { status: 403 }
     );
   }
-  if (session.user.id === oglasSaKapacitetom.createdById) {
+  if (!jeSuperadmin(session.user) && session.user.id === oglasSaKapacitetom.createdById) {
     return NextResponse.json(
       { error: "Predlagač oglasa ne može odlučivati o prijavama na svoj oglas." },
       { status: 403 }

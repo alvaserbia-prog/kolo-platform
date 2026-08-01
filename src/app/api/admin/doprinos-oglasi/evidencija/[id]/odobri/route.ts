@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 /**
@@ -58,13 +58,15 @@ export async function POST(
   if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
 
   // Konflikt interesa: verifikator ne sme biti izvršilac ni predlagač.
+  // Izuzetak: superadmin sme da verifikuje i na svom zadatku (u Fazi 1 UO objavljuje
+  // zadatke, pa bi zabrana blokirala jedinog verifikatora); sopstveno izvršenje ne može ni on.
   if (session.user.id === ev.userId) {
     return NextResponse.json(
       { error: "Ne možeš verifikovati sopstveno izvršenje." },
       { status: 403 }
     );
   }
-  if (session.user.id === ev.oglas.createdById) {
+  if (!jeSuperadmin(session.user) && session.user.id === ev.oglas.createdById) {
     return NextResponse.json(
       { error: "Predlagač zadatka ne može verifikovati izvršenje na svom zadatku." },
       { status: 403 }

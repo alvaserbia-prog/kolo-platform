@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 /**
@@ -47,13 +47,14 @@ export async function POST(
   if (prijava.status !== "PENDING") return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
   // Konflikt interesa: verifikator ne sme biti podnosilac prijave ni predlagač oglasa.
+  // Izuzetak: superadmin sme da odlučuje i na svom oglasu (vidi odobri/route.ts).
   if (session.user.id === prijava.userId) {
     return NextResponse.json(
       { error: "Ne možeš odlučivati o sopstvenoj prijavi." },
       { status: 403 }
     );
   }
-  if (session.user.id === prijava.oglas.createdById) {
+  if (!jeSuperadmin(session.user) && session.user.id === prijava.oglas.createdById) {
     return NextResponse.json(
       { error: "Predlagač oglasa ne može odlučivati o prijavama na svoj oglas." },
       { status: 403 }
