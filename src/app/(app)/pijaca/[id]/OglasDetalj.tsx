@@ -158,7 +158,7 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
           </div>
 
           {oglas.description && (
-            <p className="text-sm text-kolo-muted leading-relaxed">{oglas.description}</p>
+            <p className="text-sm text-kolo-muted leading-relaxed whitespace-pre-line">{oglas.description}</p>
           )}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
