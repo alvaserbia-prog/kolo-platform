@@ -46,6 +46,7 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
   const [minCena, setMinCena] = useState("");
   const [maxCena, setMaxCena] = useState("");
   const [showCena, setShowCena] = useState(false);
+  const [showKat, setShowKat] = useState(false);
   const [showSort, setShowSort] = useState(false);
   const [kontaktLoadingId, setKontaktLoadingId] = useState<string | null>(null);
 
@@ -183,6 +184,56 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
           <div className="flex gap-2 flex-wrap items-center">
+            {/* Kategorija — padajući meni (isti dizajn kao Cena/Sortiranje).
+                Deli isto multi-select stanje sa čipovima: klik na stavku
+                uključuje/isključuje kategoriju, „Sve kategorije" briše izbor. */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowKat((v) => !v)}
+                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
+                  selektovaneKat.length > 0
+                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
+                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                }`}
+              >
+                {selektovaneKat.length === 0
+                  ? t("sve_kategorije")
+                  : `${t("kategorija_filter")} (${selektovaneKat.length})`}
+              </button>
+              {showKat && (
+                <div className="absolute z-20 left-0 mt-1 min-w-[13rem] max-h-72 overflow-y-auto bg-white rounded-xl border border-kolo-border shadow-lg p-1">
+                  <button
+                    onClick={() => { azurirajKategorije([]); setShowKat(false); }}
+                    className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                      selektovaneKat.length === 0 ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
+                    }`}
+                  >
+                    {t("sve_kategorije")}
+                  </button>
+                  {KATEGORIJE.map((kat) => {
+                    const aktivna = selektovaneKat.includes(kat);
+                    return (
+                      <button
+                        key={kat}
+                        onClick={() =>
+                          azurirajKategorije(
+                            aktivna ? selektovaneKat.filter((k) => k !== kat) : [...selektovaneKat, kat]
+                          )
+                        }
+                        className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                          aktivna ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
+                        }`}
+                      >
+                        {aktivna ? "✓ " : ""}{t(`kategorija_${kategorijaKljuc(kat)}`)}
+                        <span className="opacity-60"> ({brojaciKat[kat] ?? 0})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             {/* Cena — dropdown sa min/max. Kod potražnje nema iznosa, pa se sakriva. */}
             {!jePotraznja && (
             <div className="relative">
