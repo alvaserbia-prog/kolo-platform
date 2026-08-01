@@ -55,9 +55,15 @@ export default async function ProgramiPage() {
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
   const dnevniLimit = Math.floor(opticaj * 0.1);
 
+  // Operativni doprinos (PED) nema enrollment — kartica vodi na zadatke (/doprinos-oglasi).
+  const pedAktivan = aktivniTipovi.has("PED");
+  const brojAktivnih = (pedAktivan ? 1 : 0) + programi.filter((p) => p.programAktivan).length;
+
   return (
     <ProgramiKlijent
       programi={programi}
+      pedAktivan={pedAktivan}
+      brojAktivnih={brojAktivnih}
       isVerified={session.user.verified}
       imaPunIndeks={(korisnik?.indeksStvarnosti ?? 0) >= 100}
       protokolBalance={protokol?.balance ?? 0}
