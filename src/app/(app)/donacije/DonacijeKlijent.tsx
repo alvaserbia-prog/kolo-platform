@@ -35,13 +35,21 @@ interface DonacijeData {
   trenutniNivo: number;
   trenutniKurs: number;
   kumulativRSD: number;
+  donatorskiBroj: number;
+  pozivNaBroj: string; // trajni broj člana za uplate, prikaz "42-15" (model 97)
+  racun: string | null; // iz IPS konfiguracije (18 cifara) — null dok se račun ne otvori
   donacije: Donacija[];
   listaDonacija: JavnaDonacija[];
   rangTabela: RangRed[];
 }
 
-// Poziv na broj = jedinstven za svakog člana (generisan od strane platforme; finalni format TBD)
-const FONDACIJA_RACUN = "840-123456789-00"; // Placeholder — zameniti pre Beta faze
+const FONDACIJA_RACUN_PLACEHOLDER = "840-123456789-00"; // dok račun nije otvoren (IPS_RACUN env)
+
+/** Prikaz računa 18 cifara u standardnom obliku 3-13-2. */
+function formatRacun(racun: string): string {
+  const c = racun.replace(/\D/g, "");
+  return c.length === 18 ? `${c.slice(0, 3)}-${c.slice(3, 16)}-${c.slice(16)}` : racun;
+}
 
 export default function DonacijeKlijent() {
   const t = useTranslations("donacije");
@@ -106,8 +114,10 @@ export default function DonacijeKlijent() {
 
   const sledeci = data.rangTabela.find((r) => r.nivo === data.trenutniNivo + 1);
 
+  const prikazRacuna = data.racun ? formatRacun(data.racun) : FONDACIJA_RACUN_PLACEHOLDER;
+
   function kopirajPodatke() {
-    const tekst = `Primalac: KOLO Fondacija\nRačun: ${FONDACIJA_RACUN}\nSvrha: Donacija`;
+    const tekst = `Primalac: KOLO Fondacija\nRačun: ${prikazRacuna}\nSvrha: Donacija\nModel: 97\nPoziv na broj: ${data!.pozivNaBroj}`;
     navigator.clipboard.writeText(tekst).then(() => {
       setKopirano(true);
       setTimeout(() => setKopirano(false), 2000);
@@ -176,6 +186,31 @@ export default function DonacijeKlijent() {
         )}
       </div>
 
+      {/* Vrsta donacije — javna (POEN, ime javno) ili anonimna (bez POEN); važi za IPS i karticu */}
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-2">
+        <p className="text-sm font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
+        <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+          <input type="radio" name="vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
+          <span className="text-xs">
+            <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
+            <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
+          </span>
+        </label>
+        <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${!javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+          <input type="radio" name="vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
+          <span className="text-xs">
+            <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
+            <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
+          </span>
+        </label>
+        {javno && (
+          <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>
+        )}
+      </div>
+
+      {/* IPS QR — instant dinarska uplata skeniranjem mobilnom bankom */}
+      <IpsQrPlacanje javno={javno} />
+
       {/* Kartično plaćanje (Banca Intesa / OTP — NestPay) */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
         <div>
@@ -183,28 +218,6 @@ export default function DonacijeKlijent() {
           <p className="text-xs text-kolo-muted mt-0.5">
             {t("karticno_opis")}
           </p>
-        </div>
-
-        {/* Izbor: javna (POEN, ime javno) ili anonimna (bez POEN) donacija */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
-          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
-            <input type="radio" name="vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
-            <span className="text-xs">
-              <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
-              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
-            </span>
-          </label>
-          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${!javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
-            <input type="radio" name="vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
-            <span className="text-xs">
-              <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
-              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
-            </span>
-          </label>
-          {javno && (
-            <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>
-          )}
         </div>
 
         <div className="flex gap-2">
@@ -232,9 +245,6 @@ export default function DonacijeKlijent() {
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
       </div>
 
-      {/* IPS QR — instant dinarska uplata skeniranjem mobilnom bankom */}
-      <IpsQrPlacanje />
-
       {/* Instrukcije za uplatu */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
         <p className="text-sm font-semibold text-kolo-text">{t("instrukcije")}</p>
@@ -245,12 +255,23 @@ export default function DonacijeKlijent() {
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("racun")}</span>
-            <span className="font-mono text-kolo-text">{FONDACIJA_RACUN}</span>
+            <span className="font-mono text-kolo-text">{prikazRacuna}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("svrha")}</span>
             <span className="font-medium text-kolo-text">{t("svrha_vrednost")}</span>
           </div>
+          <div className="flex justify-between">
+            <span className="text-kolo-muted">{t("model")}</span>
+            <span className="font-mono text-kolo-text">97</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-kolo-muted">{t("poziv_na_broj")}</span>
+            <span className="font-mono font-semibold text-kolo-green-700">{data.pozivNaBroj}</span>
+          </div>
+        </div>
+        <div className="rounded-xl bg-kolo-green-100/50 border border-kolo-green-700/20 p-3">
+          <p className="text-xs text-kolo-green-900">{t("vas_broj_opis")}</p>
         </div>
         <div className="pt-2 border-t border-kolo-border">
           <p className="text-xs text-kolo-muted mb-3">{t("napomena_uplata")}</p>

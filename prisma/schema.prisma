@@ -202,6 +202,11 @@ model User {
   oauthId            String?
   oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
+  // Trajni donatorski broj člana — osnova poziva na broj (model 97) za uplate
+  // (IPS QR + klasična uplatnica). Redni broj po datumu registracije (backfill u
+  // migraciji), novi nalozi dobijaju sledeći iz sekvence. Ostaje i posle
+  // anonimizacije naloga (neidentifikujući, kao i interni id).
+  donatorskiBroj     Int       @unique @default(autoincrement())
   status             UserStatus @default(ACTIVE)
   suspendedAt        DateTime?
   suspendedReason    String?

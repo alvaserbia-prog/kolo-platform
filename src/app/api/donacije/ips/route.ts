@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import crypto from "node:crypto";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
   MIN_IPS_RSD,
   ipsAktivno,
   dohvatiIpsConfig,
-  generisiPozivNaBroj,
-  nasumicnaOsnova,
+  pozivNaBrojZaClana,
   sklopiIpsString,
 } from "@/lib/placanje/ips-qr";
 
@@ -35,10 +33,11 @@ export async function GET() {
 }
 
 /**
- * POST — generiše dinamički IPS QR za donaciju. Kreira PENDING zapis donacije
- * sa jedinstvenim pozivom na broj (model 97) i vraća IPS string (za QR) +
- * podatke za prikaz. POEN se NE emituje ovde — admin potvrđuje priliv po
- * pozivu na broj u admin panelu (kao i kod ručne uplate).
+ * POST — generiše dinamički IPS QR za donaciju. Poziv na broj je TRAJNI broj
+ * člana (model 97 nad donatorskim brojem — isti kao za klasičnu uplatnicu);
+ * kreira/ažurira PENDING najavu donacije i vraća IPS string (za QR) + podatke
+ * za prikaz. POEN se NE emituje ovde — admin potvrđuje priliv po pozivu na
+ * broj u admin panelu (kao i kod ručne uplate).
  */
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -78,7 +77,12 @@ export async function POST(req: NextRequest) {
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { id: true, wallet: { select: { id: true } }, podaci: { select: { punoIme: true } } },
+    select: {
+      id: true,
+      donatorskiBroj: true,
+      wallet: { select: { id: true } },
+      podaci: { select: { punoIme: true } },
+    },
   });
   if (!user?.wallet) {
     return NextResponse.json({ error: "Korisnik nema novčanik." }, { status: 400 });
@@ -96,38 +100,38 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Jedinstven poziv na broj (model 97). Nekoliko pokušaja u slučaju (krajnje
-  // malo verovatne) kolizije nasumične osnove.
-  let pozivNaBroj = "";
-  for (let i = 0; i < 5; i++) {
-    const kandidat = generisiPozivNaBroj(nasumicnaOsnova(crypto.randomBytes(12)));
-    const postoji = await prisma.donationRecord.findFirst({
-      where: { referenceNumber: kandidat },
-      select: { id: true },
-    });
-    if (!postoji) {
-      pozivNaBroj = kandidat;
-      break;
-    }
-  }
-  if (!pozivNaBroj) {
-    return NextResponse.json({ error: "Greška pri generisanju poziva na broj. Pokušajte ponovo." }, { status: 500 });
-  }
+  // Trajni poziv na broj člana (model 97 nad donatorskim brojem) — isti za sve
+  // uplate ovog korisnika, pa se priliv u izvodu uparuje direktno sa članom.
+  const pozivNaBroj = pozivNaBrojZaClana(user.donatorskiBroj);
 
-  await prisma.donationRecord.create({
-    data: {
-      userId: user.id,
-      amountRSD: iznosRSD,
-      cumulativeRSD: 0,
-      level: 0,
-      poenEmitted: 0,
-      javno,
-      status: "PENDING",
-      nacinUplate: "IPS",
-      provajder: "IPS",
-      referenceNumber: pozivNaBroj,
-    },
+  // Jedna aktivna IPS najava po korisniku: postojeći PENDING zapis se ažurira
+  // (novi iznos/vrsta) umesto da se gomilaju napušteni zapisi. Iznos najave je
+  // ionako samo podsetnik — admin pri potvrdi upisuje iznos iz izvoda.
+  const postojeca = await prisma.donationRecord.findFirst({
+    where: { userId: user.id, status: "PENDING", nacinUplate: "IPS" },
+    select: { id: true },
   });
+  if (postojeca) {
+    await prisma.donationRecord.update({
+      where: { id: postojeca.id },
+      data: { amountRSD: iznosRSD, javno, referenceNumber: pozivNaBroj, createdAt: new Date() },
+    });
+  } else {
+    await prisma.donationRecord.create({
+      data: {
+        userId: user.id,
+        amountRSD: iznosRSD,
+        cumulativeRSD: 0,
+        level: 0,
+        poenEmitted: 0,
+        javno,
+        status: "PENDING",
+        nacinUplate: "IPS",
+        provajder: "IPS",
+        referenceNumber: pozivNaBroj,
+      },
+    });
+  }
 
   const ipsString = sklopiIpsString({ cfg, iznosRSD, pozivNaBroj });
 

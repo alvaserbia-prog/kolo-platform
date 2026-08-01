@@ -755,9 +755,9 @@
   },
   "donacije": {
     "naslov": "Donacije Fondaciji",
-    "beta_naslov": "Test faza — uskoro dostupno",
-    "beta_opis": "Tekući račun Fondacije biće otvoren pre Test faze. Sve informacije ispod su pripremljene i biće aktivne.",
-    "objasnjenje": "Donirajte dinare Fondaciji bankovnom uplatnicom i dobijte POENE prema vašem rangu donacija. Viši rang znači povoljniji koeficijent evidencije — jednom ostvaren rang se zadržava.",
+    "beta_naslov": "Tekući račun Fondacije biće uskoro otvoren",
+    "beta_opis": "Sve informacije ispod su pripremljene i biće aktivne čim se otvori račun.",
+    "objasnjenje": "Donirajte dinare Fondaciji bankovnom uplatnicom i dobijte POENE prema vašem rangu donacija. Viši rang znači povoljniji koeficijent evidencije.",
     "vas_rang": "Vaš rang donacija",
     "nivo": "Nivo {n}",
     "kumulativ": "Kumulativ:",
@@ -769,7 +769,7 @@
     "racun": "Račun:",
     "svrha": "Svrha uplate:",
     "svrha_vrednost": "Donacija",
-    "napomena_uplata": "Navedite svrhu \"Donacija\" — admin će upariti uplatu po vašem imenu. Iznos uplaćujete po sopstvenoj odluci.",
+    "napomena_uplata": "Obavezno unesite model 97 i vaš poziv na broj — po njemu se uplata prepoznaje kao vaša. Iznos uplaćujete po sopstvenoj odluci.",
     "kopiraj_btn": "Kopiraj podatke za uplatu",
     "kopirano": "Kopirano ✓",
     "tabela_naslov": "Tabela rangova donacija",
@@ -815,7 +815,10 @@
     "ips_poziv_na_broj": "Poziv na broj:",
     "ips_model": "model",
     "ips_napomena_potvrda": "Nakon uplate, Fondacija potvrđuje priliv po pozivu na broj i tada se evidentira POEN. Poziv na broj je već u QR kodu — ne menjajte ga.",
-    "ips_novi": "Nova IPS uplata"
+    "ips_novi": "Nova IPS uplata",
+    "model": "Model:",
+    "poziv_na_broj": "Poziv na broj:",
+    "vas_broj_opis": "Ovo je vaš trajni broj za uplate (model 97). Navedite ga uz svaku uplatu — po njemu se uplata prepoznaje kao vaša i POEN se upisuje vama. Banka odbija pogrešno ukucan broj, pa uplata ne može da ode pogrešnom članu."
   },
   "poruke": {
     "naslov": "Poruke",
@@ -2214,6 +2217,14 @@
     "pokr_prijave_ugovor_naslov": "Ugovor o donaciji",
     "pokr_prijave_cenovnik_naslov": "Maloprodajni cenovnik",
     "pokr_prijave_cenovnik_alt": "Cenovnik",
-    "pokr_prijave_zatvori": "Zatvori"
+    "pokr_prijave_zatvori": "Zatvori",
+    "donacije_nacin_ips": "IPS QR",
+    "donacije_izvod_naslov": "Evidentiraj uplatu iz izvoda",
+    "donacije_izvod_opis": "Unesite poziv na broj sa priliva (model 97) — on identifikuje člana. Kontrolne cifre se proveravaju, pa pogrešan prepis ne može da prođe.",
+    "donacije_izvod_pnb_placeholder": "Poziv na broj (npr. 42-15)",
+    "donacije_izvod_iznos_placeholder": "Iznos",
+    "donacije_izvod_evidentiraj": "Evidentiraj",
+    "donacije_izvod_anonimna": "Anonimna donacija (bez POEN-a)",
+    "donacije_iznos_korekcija": "Iznos za potvrdu — korigujte prema stvarnom prilivu iz izvoda"
   }
 }
