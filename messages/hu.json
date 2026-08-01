@@ -734,9 +734,9 @@
   },
   "donacije": {
     "naslov": "Adományok az Alapítványnak",
-    "beta_naslov": "Teszt fázis — hamarosan elérhető",
-    "beta_opis": "Az Alapítvány bankszámlája a teszt fázis előtt kerül megnyitásra. Az alábbi információk előkészítve és aktívak lesznek.",
-    "objasnjenje": "Adományozzon dinárt az Alapítványnak banki átutalással és kapjon POEN-t az adományozási rangja szerint. Magasabb rang jobb árfolyamot jelent — az elért rang megmarad.",
+    "beta_naslov": "Az Alapítvány bankszámlája hamarosan megnyílik",
+    "beta_opis": "Az alábbi információk előkészítve vannak, és a számla megnyitásával azonnal aktívvá válnak.",
+    "objasnjenje": "Adományozzon dinárt az Alapítványnak banki átutalással és kapjon POEN-t az adományozási rangja szerint. Magasabb rang kedvezőbb árfolyamot jelent.",
     "vas_rang": "Az Ön adományozási rangja",
     "nivo": "{n}. szint",
     "kumulativ": "Kumulatív:",

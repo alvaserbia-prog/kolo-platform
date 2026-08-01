@@ -36,11 +36,10 @@ interface IpsRezultat {
  * Dok račun Fondacije nije podešen (env), GET vraća konfigurisan=false i
  * prikazuje se napomena „uskoro" — bez greške.
  */
-export default function IpsQrPlacanje() {
+export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
   const t = useTranslations("donacije");
   const [info, setInfo] = useState<IpsInfo | null>(null);
   const [iznos, setIznos] = useState("");
-  const [javno, setJavno] = useState(true);
   const [loading, setLoading] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
   const [rezultat, setRezultat] = useState<IpsRezultat | null>(null);
@@ -101,34 +100,6 @@ export default function IpsQrPlacanje() {
 
       {!rezultat ? (
         <>
-          {/* Vidljivost (javna/anonimna) — isti izbor kao kartično */}
-          <div className="space-y-2">
-            <p className="text-xs font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
-            <label
-              className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${
-                javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"
-              }`}
-            >
-              <input type="radio" name="ips-vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
-              <span className="text-xs">
-                <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
-                <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
-              </span>
-            </label>
-            <label
-              className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${
-                !javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"
-              }`}
-            >
-              <input type="radio" name="ips-vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
-              <span className="text-xs">
-                <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
-                <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
-              </span>
-            </label>
-            {javno && <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>}
-          </div>
-
           <div className="flex gap-2">
             <div className="relative flex-1">
               <input

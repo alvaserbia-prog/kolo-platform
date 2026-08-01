@@ -176,6 +176,31 @@ export default function DonacijeKlijent() {
         )}
       </div>
 
+      {/* Vrsta donacije — javna (POEN, ime javno) ili anonimna (bez POEN); važi za IPS i karticu */}
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-2">
+        <p className="text-sm font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
+        <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+          <input type="radio" name="vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
+          <span className="text-xs">
+            <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
+            <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
+          </span>
+        </label>
+        <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${!javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
+          <input type="radio" name="vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
+          <span className="text-xs">
+            <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
+            <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
+          </span>
+        </label>
+        {javno && (
+          <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>
+        )}
+      </div>
+
+      {/* IPS QR — instant dinarska uplata skeniranjem mobilnom bankom */}
+      <IpsQrPlacanje javno={javno} />
+
       {/* Kartično plaćanje (Banca Intesa / OTP — NestPay) */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
         <div>
@@ -183,28 +208,6 @@ export default function DonacijeKlijent() {
           <p className="text-xs text-kolo-muted mt-0.5">
             {t("karticno_opis")}
           </p>
-        </div>
-
-        {/* Izbor: javna (POEN, ime javno) ili anonimna (bez POEN) donacija */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
-          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
-            <input type="radio" name="vidljivost" checked={javno} onChange={() => setJavno(true)} className="mt-0.5" />
-            <span className="text-xs">
-              <span className="font-semibold text-kolo-text">{t("vidljivost_javna")}</span>
-              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_javna_opis")}</span>
-            </span>
-          </label>
-          <label className={`flex items-start gap-2 rounded-xl border p-3 cursor-pointer transition-colors ${!javno ? "border-kolo-green-700/50 bg-kolo-green-100/40" : "border-kolo-border"}`}>
-            <input type="radio" name="vidljivost" checked={!javno} onChange={() => setJavno(false)} className="mt-0.5" />
-            <span className="text-xs">
-              <span className="font-semibold text-kolo-text">{t("vidljivost_anonimna")}</span>
-              <span className="block text-kolo-muted mt-0.5">{t("vidljivost_anonimna_opis")}</span>
-            </span>
-          </label>
-          {javno && (
-            <p className="text-xs text-kolo-gold-600">{t("vidljivost_upozorenje")}</p>
-          )}
         </div>
 
         <div className="flex gap-2">
@@ -231,9 +234,6 @@ export default function DonacijeKlijent() {
         </div>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
       </div>
-
-      {/* IPS QR — instant dinarska uplata skeniranjem mobilnom bankom */}
-      <IpsQrPlacanje />
 
       {/* Instrukcije za uplatu */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
