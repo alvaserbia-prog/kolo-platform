@@ -66,7 +66,6 @@ export default async function ProgramiPage() {
       brojAktivnih={brojAktivnih}
       isVerified={session.user.verified}
       imaPunIndeks={(korisnik?.indeksStvarnosti ?? 0) >= 100}
-      protokolBalance={protokol?.balance ?? 0}
       emisioniKontekst={{
         opticaj,
         dnevniLimit,

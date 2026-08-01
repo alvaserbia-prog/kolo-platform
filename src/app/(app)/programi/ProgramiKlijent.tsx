@@ -35,7 +35,6 @@ interface Props {
   brojAktivnih: number;
   isVerified: boolean;
   imaPunIndeks: boolean;
-  protokolBalance: number;
   emisioniKontekst: EmisioniKontekst;
 }
 
@@ -50,7 +49,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPunIndeks, protokolBalance, emisioniKontekst }: Props) {
+export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPunIndeks, emisioniKontekst }: Props) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -150,7 +149,6 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
             p={p}
             isVerified={isVerified}
             imaPunIndeks={imaPunIndeks}
-            protokolBalance={protokolBalance}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
@@ -199,12 +197,11 @@ function OperativniKartica({ aktivan }: { aktivan: boolean }) {
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 const ProgramKartica = memo(function ProgramKartica({
-  p, isVerified, imaPunIndeks, protokolBalance, loading, poruka, expanded, onExpand, onPrijavi,
+  p, isVerified, imaPunIndeks, loading, poruka, expanded, onExpand, onPrijavi,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
   imaPunIndeks: boolean;
-  protokolBalance: number;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
   expanded: boolean;
@@ -284,32 +281,6 @@ const ProgramKartica = memo(function ProgramKartica({
           {t("razlog_odbijanja")} {p.enrollment.rejectionReason}
         </div>
       )}
-
-      {/* Progress indikatori za zaključane faze */}
-      {!p.programAktivan && !enStatus && p.type === "POSEBNA_BRIGA" && (() => {
-        const PRAG = 1_000_000;
-        const opticaj = Math.abs(protokolBalance);
-        const pct = Math.min(100, Math.round((opticaj / PRAG) * 100));
-        return (
-          <div className="border-t border-kolo-border px-5 py-3">
-            <div className="flex justify-between text-xs text-kolo-muted mb-1">
-              <span>{t("prag_protokol")}</span>
-              <span>{opticaj.toLocaleString("sr-RS")} / 1.000.000 ({pct}%)</span>
-            </div>
-            <div className="h-1.5 bg-kolo-bg rounded-full overflow-hidden">
-              <div className="h-full bg-blue-400 rounded-full transition-all" style={{ width: `${pct}%` }} />
-            </div>
-          </div>
-        );
-      })()}
-
-      {!p.programAktivan && !enStatus && p.type === "SKOLOVANJE" && (() => {
-        return (
-          <div className="border-t border-kolo-border px-5 py-3 text-xs text-kolo-muted">
-            {t("skolovanje_info")}
-          </div>
-        );
-      })()}
     </div>
   );
 });
