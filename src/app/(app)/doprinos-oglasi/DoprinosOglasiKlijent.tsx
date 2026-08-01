@@ -21,6 +21,15 @@ interface OglasItem {
   mojaPrijava: string | null;
 }
 
+// Srpska promena po broju (bez ICU plural sintakse — lat2cyr transliteracija je ne podržava):
+// 1, 21, 31… → „aktivan zadatak"; 2–4, 22–24… → „aktivna zadatka"; ostalo → „aktivnih zadataka".
+function brojZadatakaKljuc(n: number): "aktivan_zadatak" | "aktivna_zadatka" | "aktivnih_zadataka" {
+  const jed = n % 10, sto = n % 100;
+  if (jed === 1 && sto !== 11) return "aktivan_zadatak";
+  if (jed >= 2 && jed <= 4 && (sto < 12 || sto > 14)) return "aktivna_zadatka";
+  return "aktivnih_zadataka";
+}
+
 const sourceCls: Record<string, string> = {
   FONDACIJA: "bg-kolo-green-100 text-kolo-green-700",
   KRUG: "bg-kolo-info-light text-kolo-info",
@@ -57,15 +66,9 @@ export default function DoprinosOglasiKlijent({ oglasi, isVerified }: { oglasi: 
         </div>
       )}
 
-      <div className="bg-white rounded-2xl border border-kolo-border p-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-center text-sm">
-        <div>
-          <p className="text-lg font-bold text-kolo-text">{oglasi.length}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("aktivnih_zadataka")}</p>
-        </div>
-        <div>
-          <p className="text-lg font-bold text-kolo-text">{t("predlozeni_poen_label")}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("tezinski_koeficijent")}</p>
-        </div>
+      <div className="bg-white rounded-2xl border border-kolo-border p-4 text-center text-sm">
+        <p className="text-lg font-bold text-kolo-text">{oglasi.length}</p>
+        <p className="text-xs text-kolo-muted mt-0.5">{t(brojZadatakaKljuc(oglasi.length))}</p>
       </div>
 
       {oglasi.length === 0 ? (
