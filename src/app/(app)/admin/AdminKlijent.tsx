@@ -1270,13 +1270,28 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
   const t = useTranslations("admin");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
+  // Iznos za potvrdu — prefill iz najave, admin koriguje prema stvarnom prilivu
+  // iz izvoda (IPS/uplatnica mogu stići sa drugačijim iznosom od najavljenog).
+  const [iznosi, setIznosi] = useState<Record<string, string>>({});
+
+  // Evidentiranje uplate iz izvoda (bez najave) — po pozivu na broj (model 97).
+  const [izvodPnb, setIzvodPnb] = useState("");
+  const [izvodIznos, setIzvodIznos] = useState("");
+  const [izvodAnonimna, setIzvodAnonimna] = useState(false);
+  const [izvodLoading, setIzvodLoading] = useState(false);
+  const [izvodPoruka, setIzvodPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
   async function potvrdi(d: DonacijaItem) {
+    const iznos = Math.round(Number(iznosi[d.id] ?? d.amountRSD));
+    if (!Number.isFinite(iznos) || iznos <= 0) {
+      setPoruke((p) => ({ ...p, [d.id]: { text: t("emisija_iznos_nevalidan"), ok: false } }));
+      return;
+    }
     setLoading(d.id);
     const res = await fetch("/api/admin/donacija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ donationId: d.id, amountRSD: d.amountRSD }),
+      body: JSON.stringify({ donationId: d.id, amountRSD: iznos }),
     });
     const data = await res.json();
     setLoading(null);
@@ -1284,13 +1299,82 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
     if (res.ok) setTimeout(onDone, 1200);
   }
 
-  if (donacije.length === 0) {
-    return <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">{t("donacije_nema")}</div>;
+  async function evidentirajIzIzvoda(e: { preventDefault: () => void }) {
+    e.preventDefault();
+    setIzvodPoruka(null);
+    const iznos = Math.round(Number(izvodIznos));
+    if (!izvodPnb.trim() || !Number.isFinite(iznos) || iznos <= 0) {
+      setIzvodPoruka({ text: t("emisija_iznos_nevalidan"), ok: false });
+      return;
+    }
+    setIzvodLoading(true);
+    const res = await fetch("/api/admin/donacija", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pozivNaBroj: izvodPnb.trim(), amountRSD: iznos, javno: !izvodAnonimna }),
+    });
+    const data = await res.json();
+    setIzvodLoading(false);
+    setIzvodPoruka({
+      text: res.ok
+        ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString("sr-RS") })
+        : (data.error ?? t("greska_generalna")),
+      ok: res.ok,
+    });
+    if (res.ok) {
+      setIzvodPnb(""); setIzvodIznos(""); setIzvodAnonimna(false);
+      setTimeout(onDone, 1200);
+    }
   }
+
+  const nacinLabel = (nacin: string) =>
+    nacin === "KARTICA" ? t("donacije_nacin_kartica")
+    : nacin === "IPS" ? t("donacije_nacin_ips")
+    : t("donacije_nacin_rucno");
 
   return (
     <div className="space-y-3">
-      {donacije.map((d) => {
+      {/* Uplata iz izvoda — poziv na broj identifikuje člana */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-5">
+        <h3 className="text-sm font-semibold text-kolo-muted mb-1">{t("donacije_izvod_naslov")}</h3>
+        <p className="text-xs text-kolo-muted mb-3">{t("donacije_izvod_opis")}</p>
+        <form onSubmit={evidentirajIzIzvoda} noValidate className="space-y-3">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="text"
+              value={izvodPnb}
+              onChange={(e) => setIzvodPnb(e.target.value)}
+              placeholder={t("donacije_izvod_pnb_placeholder")}
+              className="flex-1 px-3 py-2.5 rounded-xl border border-kolo-border text-sm font-mono outline-none focus:border-kolo-green-500 transition-colors"
+            />
+            <div className="relative sm:w-40">
+              <input
+                type="number"
+                inputMode="numeric"
+                min={1}
+                value={izvodIznos}
+                onChange={(e) => setIzvodIznos(e.target.value)}
+                placeholder={t("donacije_izvod_iznos_placeholder")}
+                className="w-full pl-3 pr-12 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-kolo-muted">RSD</span>
+            </div>
+            <button type="submit" disabled={izvodLoading}
+              className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60">
+              {izvodLoading ? t("donacije_potvrdjujem") : t("donacije_izvod_evidentiraj")}
+            </button>
+          </div>
+          <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
+            <input type="checkbox" checked={izvodAnonimna} onChange={(e) => setIzvodAnonimna(e.target.checked)} />
+            {t("donacije_izvod_anonimna")}
+          </label>
+          {izvodPoruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${izvodPoruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{izvodPoruka.text}</p>}
+        </form>
+      </div>
+
+      {donacije.length === 0 ? (
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">{t("donacije_nema")}</div>
+      ) : donacije.map((d) => {
         const poruka = poruke[d.id];
         return (
           <div key={d.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
@@ -1298,14 +1382,25 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-kolo-text text-sm">{d.pseudonim}</p>
                 <p className="text-xs text-kolo-muted mt-0.5">
-                  {d.nacinUplate === "KARTICA" ? t("donacije_nacin_kartica") : t("donacije_nacin_rucno")}
+                  {nacinLabel(d.nacinUplate)}
                   {d.referenceNumber ? ` · ${d.referenceNumber}` : ""}
                   {" · "}{new Date(d.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}
                 </p>
                 <p className="text-xs text-kolo-muted mt-1">{t("donacije_kumulativ", { val: d.cumulativeRSD.toLocaleString("sr-RS") })}</p>
               </div>
               <div className="shrink-0 text-right">
-                <p className="text-sm font-bold text-kolo-text">{d.amountRSD.toLocaleString("sr-RS")} RSD</p>
+                <div className="relative w-32">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={1}
+                    value={iznosi[d.id] ?? String(d.amountRSD)}
+                    onChange={(e) => setIznosi((p) => ({ ...p, [d.id]: e.target.value }))}
+                    title={t("donacije_iznos_korekcija")}
+                    className="w-full pl-2 pr-10 py-1.5 rounded-lg border border-kolo-border text-sm font-bold text-right outline-none focus:border-kolo-green-500 transition-colors"
+                  />
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-kolo-muted">RSD</span>
+                </div>
                 <button onClick={() => potvrdi(d)} disabled={loading === d.id}
                   className="mt-2 px-4 py-2 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 disabled:opacity-60">
                   {loading === d.id ? t("donacije_potvrdjujem") : t("donacije_potvrdi")}

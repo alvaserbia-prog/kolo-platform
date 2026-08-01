@@ -766,7 +766,7 @@
     "racun": "Account:",
     "svrha": "Payment purpose:",
     "svrha_vrednost": "Donation",
-    "napomena_uplata": "State purpose \"Donation\" — admin will match by your name. Amount is at your discretion.",
+    "napomena_uplata": "Always enter model 97 and your reference number — it identifies the payment as yours. The amount is at your discretion.",
     "kopiraj_btn": "Copy payment details",
     "kopirano": "Copied ✓",
     "tabela_naslov": "Donation rank table",
@@ -812,7 +812,10 @@
     "ips_poziv_na_broj": "Reference number:",
     "ips_model": "model",
     "ips_napomena_potvrda": "After payment, the Foundation confirms the incoming funds by reference number and POEN is then recorded. The reference number is already in the QR code — do not change it.",
-    "ips_novi": "New IPS payment"
+    "ips_novi": "New IPS payment",
+    "model": "Model:",
+    "poziv_na_broj": "Reference number:",
+    "vas_broj_opis": "This is your permanent payment reference (model 97). Include it with every payment — it identifies the payment as yours and POEN is credited to you. The bank rejects a mistyped number, so a payment cannot go to the wrong member."
   },
   "poruke": {
     "naslov": "Messages",
@@ -2211,6 +2214,14 @@
     "pokr_prijave_ugovor_naslov": "Donation agreement",
     "pokr_prijave_cenovnik_naslov": "Retail price list",
     "pokr_prijave_cenovnik_alt": "Price list",
-    "pokr_prijave_zatvori": "Close"
+    "pokr_prijave_zatvori": "Close",
+    "donacije_nacin_ips": "IPS QR",
+    "donacije_izvod_naslov": "Record a payment from the bank statement",
+    "donacije_izvod_opis": "Enter the reference number from the incoming payment (model 97) — it identifies the member. Check digits are validated, so a miscopied number cannot pass.",
+    "donacije_izvod_pnb_placeholder": "Reference number (e.g. 42-15)",
+    "donacije_izvod_iznos_placeholder": "Amount",
+    "donacije_izvod_evidentiraj": "Record",
+    "donacije_izvod_anonimna": "Anonymous donation (no POEN)",
+    "donacije_iznos_korekcija": "Amount to confirm — adjust to the actual incoming payment from the statement"
   }
 }
