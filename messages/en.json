@@ -1688,7 +1688,7 @@
   },
   "doprinosOglasi": {
     "naslov": "Contribution Tasks",
-    "opis": "Tasks for the common good. ZRNO holders propose tasks for the common good that all users can apply for.",
+    "opis": "Tasks for the common good. ZRNO holders propose tasks for interested users.",
     "neVerifikovanInfo": "Applying for tasks requires verification (reality index ≥ 10%). Browsing tasks is available to everyone.",
     "aktivan_zadatak": "active task",
     "aktivna_zadatka": "active tasks",
