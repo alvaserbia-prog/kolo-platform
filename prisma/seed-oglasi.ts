@@ -11,7 +11,7 @@ const oglasi = [
     title: "Domaći med od lipe — 1kg",
     description: "Pravi domaći med od lipe sa Fruške gore. Bez konzervansa, direktno od pčelara. Pakovanje 1kg u staklenci.",
     price: 2800,
-    category: "Hrana",
+    category: "hrana-i-pice",
     location: "Novi Sad",
     emailIdx: 1, // Petar_K
   },
@@ -19,7 +19,7 @@ const oglasi = [
     title: "Svež hleb od celog zrna — pečen svakog jutra",
     description: "Pečem hleb od integralnog brašna svako jutro. Moguća dostava u okolini Niša. Cena po vekni.",
     price: 350,
-    category: "Hrana",
+    category: "hrana-i-pice",
     location: "Niš",
     emailIdx: 2, // Ana_D
   },
@@ -27,7 +27,7 @@ const oglasi = [
     title: "Domaći ajvar — tegla 720ml",
     description: "Pravi domaći ajvar od crvenih babura, pečenih na vatri. Blagi ili ljuti — po izboru. Tegla 720ml.",
     price: 900,
-    category: "Hrana",
+    category: "hrana-i-pice",
     location: "Niš",
     emailIdx: 2, // Ana_D
   },
@@ -35,7 +35,7 @@ const oglasi = [
     title: "Organski paradajz sa bašte — 5kg",
     description: "Svež paradajz uzgojen bez pesticida i veštačkih đubriva. Berbane sorte: Volovsko srce i Roza. Dostava na adresi u Beogradu.",
     price: 1500,
-    category: "Hrana",
+    category: "njiva-basta-zivotinje",
     location: "Beograd",
     emailIdx: 0, // Mila_V
   },
@@ -45,7 +45,7 @@ const oglasi = [
     title: "Časovi srpskog jezika — priprema za maturu",
     description: "Držim privatne časove srpskog jezika za osnovce i srednjoškolce. Priprema za maturu i popravni. Online ili uživo u Beogradu.",
     price: 1500,
-    category: "Usluge",
+    category: "znanje-i-kreativa",
     location: "Beograd",
     emailIdx: 5, // Stefan_M
   },
@@ -53,7 +53,7 @@ const oglasi = [
     title: "Prevoz kombijem — selidbe i dostave",
     description: "Vršim prevoz stvari kombijem (12 m³). Selidbe, dostave namještaja, odvoz na deponiju. Cena po satu, okolina Kragujevca.",
     price: 2500,
-    category: "Usluge",
+    category: "prevoz-i-dostava",
     location: "Kragujevac",
     emailIdx: 3, // Marko_J
   },
@@ -61,7 +61,7 @@ const oglasi = [
     title: "Frizura kod kuće — ženska i muška",
     description: "Dolazim na adresu. Šišanje, farbanje, pranje. Radno iskustvo 10 godina. Subotica i okolina.",
     price: 1200,
-    category: "Usluge",
+    category: "nega-zdravlje-lepota",
     location: "Subotica",
     emailIdx: 4, // Jovana_R
   },
@@ -69,7 +69,7 @@ const oglasi = [
     title: "Popravka računara i instalacija softvera",
     description: "Popravka laptopova i desktop računara. Reinstalacija Windowsa, čišćenje od virusa, zamena delova. Dolazak na adresu ili donosite kod mene.",
     price: 2000,
-    category: "Usluge",
+    category: "popravke-i-gradjevina",
     location: "Beograd",
     emailIdx: 5, // Stefan_M
   },
@@ -79,7 +79,7 @@ const oglasi = [
     title: "Pleteni džemper po meri — vuna",
     description: "Pleštem džempere, šalove i kape po narudžbini. Čista vuna, sve veličine. Rok isporuke 2-3 nedelje. Uzorak boja po dogovoru.",
     price: 4500,
-    category: "Zanati",
+    category: "rucni-rad-i-pokloni",
     location: "Novi Sad",
     emailIdx: 1, // Petar_K
   },
@@ -87,7 +87,7 @@ const oglasi = [
     title: "Drvena polica ručne izrade — po meri",
     description: "Pravim police, kutije i sitni nameštaj od punog drveta. Bukva ili hrast. Dimenzije i boja po dogovoru. Rok isporuke 1-2 nedelje.",
     price: 6000,
-    category: "Zanati",
+    category: "rucni-rad-i-pokloni",
     location: "Kragujevac",
     emailIdx: 3, // Marko_J
   },
@@ -95,7 +95,7 @@ const oglasi = [
     title: "Keramičke šolje ručne izrade",
     description: "Pravim keramičke šolje, zdjele i ukrase. Svaki komad jedinstven, pečen u sopstvenoj peći. Zapremina šolje oko 300ml.",
     price: 1800,
-    category: "Zanati",
+    category: "rucni-rad-i-pokloni",
     location: "Niš",
     emailIdx: 2, // Ana_D
   },
@@ -105,7 +105,7 @@ const oglasi = [
     title: "iPhone 11 — 64GB, crni, dobro stanje",
     description: "Prodajem iPhone 11 64GB u dobrom stanju. Ekran bez ogrebotina, baterija 84%. Ide sa punjačem i maskom. Bez kartica operatera.",
     price: 38000,
-    category: "Elektronika",
+    category: "pokucstvo-i-tehnika",
     location: "Beograd",
     emailIdx: 0, // Mila_V
   },
@@ -113,7 +113,7 @@ const oglasi = [
     title: "Laptop Lenovo ThinkPad — i5, 8GB RAM",
     description: "Lenovo ThinkPad E14, Intel i5-10. gen, 8GB RAM, 256GB SSD. Windows 11 instaliran, punjen svakodnevno, bez pada. Ide sa torbicom.",
     price: 52000,
-    category: "Elektronika",
+    category: "pokucstvo-i-tehnika",
     location: "Subotica",
     emailIdx: 4, // Jovana_R
   },
@@ -121,7 +121,7 @@ const oglasi = [
     title: "Bežične slušalice Sony WH-1000XM4",
     description: "Sony WH-1000XM4 sa aktivnim poništavanjem buke. Kupljene pre godinu dana, korišćene u odličnom stanju. Ide kutija i kablovi.",
     price: 24000,
-    category: "Elektronika",
+    category: "pokucstvo-i-tehnika",
     location: "Novi Sad",
     emailIdx: 1, // Petar_K
   },
@@ -131,7 +131,7 @@ const oglasi = [
     title: "Zimska jakna North Face — vel. M",
     description: "North Face zimska jakna, veličina M, crna. Nošena jednu zimu, u odličnom stanju. Bez oštećenja i mrlja.",
     price: 8500,
-    category: "Odeća",
+    category: "odeca-i-obuca",
     location: "Kragujevac",
     emailIdx: 3, // Marko_J
   },
@@ -139,7 +139,7 @@ const oglasi = [
     title: "Ženski ljetni haljine — 3 komada, vel. S/M",
     description: "Prodajem 3 letnje haljine zajedno. Veličina S/M. Malo nošene, oprane i ispeglane. Slike svih 3 na zahtev.",
     price: 2500,
-    category: "Odeća",
+    category: "odeca-i-obuca",
     location: "Subotica",
     emailIdx: 4, // Jovana_R
   },
@@ -149,7 +149,7 @@ const oglasi = [
     title: "Bicikla gradska — Merida Speeder 100",
     description: "Merida Speeder 100, veličina okvira M, siva. Kupovna pre 2 godine, redovno servisirana. Nova guma napred, kočnice nove. Idealna za gradsku vožnju.",
     price: 22000,
-    category: "Ostalo",
+    category: "ostalo",
     location: "Beograd",
     emailIdx: 0, // Mila_V
   },
@@ -157,7 +157,7 @@ const oglasi = [
     title: "Knjige za pravni fakultet — komplet",
     description: "Prodajem komplet udžbenika za 1. i 2. godinu pravnog fakulteta. Autori: Jovičić, Marković, Stanković. Podvlačeno hemijskom, ali čitljivo.",
     price: 3200,
-    category: "Ostalo",
+    category: "ostalo",
     location: "Niš",
     emailIdx: 2, // Ana_D
   },
@@ -165,7 +165,7 @@ const oglasi = [
     title: "Dečiji bicikl 20\" — za uzrast 6-9 godina",
     description: "Dečiji bicikl sa pomoćnim točkićima, veličina 20 inča. Crvene boje, u dobrom stanju. Poklanjam kacigu uz kupovinu.",
     price: 4800,
-    category: "Ostalo",
+    category: "za-decu",
     location: "Kragujevac",
     emailIdx: 3, // Marko_J
   },

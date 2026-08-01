@@ -9,6 +9,7 @@ import Pseudonim from "@/components/Pseudonim";
 import CenaUnos from "@/components/CenaUnos";
 import PodeliOglas from "@/components/PodeliOglas";
 import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
+import { kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
 
 interface OglasProps {
   id: string;
@@ -33,19 +34,6 @@ interface OglasProps {
 interface Props {
   oglas: OglasProps;
   isVerified: boolean;
-}
-
-// Map a DB category value to its i18n key suffix
-function kategorijaKljuc(kat: string): string {
-  const map: Record<string, string> = {
-    "Hrana": "Hrana",
-    "Usluge": "Usluge",
-    "Zanati": "Zanati",
-    "Elektronika": "Elektronika",
-    "Odeća": "Odeca",
-    "Ostalo": "Ostalo",
-  };
-  return map[kat] ?? "Ostalo";
 }
 
 export default function OglasDetalj({ oglas, isVerified }: Props) {
@@ -455,11 +443,4 @@ function IzmeniOglas({
       </form>
     </div>
   );
-}
-
-function kategorijaEmoji(kat: string) {
-  const map: Record<string, string> = {
-    Hrana: "🥗", Usluge: "🤝", Zanati: "🔧", Elektronika: "💻", Odeća: "👕", Ostalo: "📦",
-  };
-  return map[kat] ?? "📦";
 }

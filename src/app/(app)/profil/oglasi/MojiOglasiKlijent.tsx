@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
+import { kategorijaKljuc } from "@/lib/kategorije";
 
 interface Oglas {
   id: string;
@@ -27,6 +28,7 @@ const statusBoja: Record<string, string> = {
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
   const t = useTranslations("profil");
+  const tPijaca = useTranslations("pijaca");
   const router = useRouter();
   const [filter, setFilter] = useState("sve");
   const [deaktivacija, setDeaktivacija] = useState<string | null>(null);
@@ -107,7 +109,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                   {l.title}
                 </Link>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-kolo-muted">{l.category}</span>
+                  <span className="text-xs text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
                   <span className="text-xs text-kolo-border">·</span>
                   <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " P" : ""}</span>
                   {l.soldAt && (

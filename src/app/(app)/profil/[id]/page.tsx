@@ -8,6 +8,7 @@ import IndeksSekcija from "@/components/profil/IndeksSekcija";
 import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
+import { kategorijaKljuc } from "@/lib/kategorije";
 
 interface Transakcija {
   id: string;
@@ -56,6 +57,7 @@ interface ProfilData {
 
 export default function JavniProfilPage() {
   const t = useTranslations("profil");
+  const tPijaca = useTranslations("pijaca");
   const params = useParams();
   const id = params.id as string;
 
@@ -385,7 +387,7 @@ export default function JavniProfilPage() {
                 >
                   <div className="min-w-0">
                     <p className="text-sm text-kolo-text font-medium truncate">{oglas.title}</p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{oglas.category}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{tPijaca(`kategorija_${kategorijaKljuc(oglas.category)}`)}</p>
                   </div>
                   <span className="text-sm font-semibold text-kolo-green-700 shrink-0 ml-4">
                     {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " P" : ""}
