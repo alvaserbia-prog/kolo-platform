@@ -4,18 +4,21 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
+import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
+import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
 
-const KATEGORIJE = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"];
 const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
 
 // GET /api/pijaca — lista aktivnih oglasa
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
-  const kategorija = searchParams.get("kategorija") ?? "";
+  // Multi-select kategorije (OR): ?kat=slug1,slug2. Legacy parametar
+  // `kategorija` (jedna vrednost) i dalje radi.
+  const kategorije = parsirajKatParam(searchParams.get("kat") ?? searchParams.get("kategorija"));
   const pretraga = searchParams.get("q") ?? "";
   const sortiranje = searchParams.get("sort") ?? "novo";
   const minCena = parseInt(searchParams.get("min") ?? "0") || 0;
@@ -24,7 +27,7 @@ export async function GET(req: NextRequest) {
 
   const where: Record<string, unknown> = { status: "ACTIVE" };
   if (tip === "PONUDA" || tip === "POTRAZNJA") where.tip = tip;
-  if (kategorija && KATEGORIJE.includes(kategorija)) where.category = kategorija;
+  if (kategorije.length > 0) where.category = { in: kategorije };
   if (pretraga) where.title = { contains: pretraga, mode: "insensitive" };
   if (minCena > 0 || maxCena > 0) {
     where.price = {};
@@ -89,7 +92,8 @@ export async function POST(req: NextRequest) {
     : parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
   if (!cena.ok)
     return NextResponse.json({ error: cena.error }, { status: 400 });
-  if (!KATEGORIJE.includes(category))
+  // Serverska validacija: kategorija mora biti jedan od 13 slugova.
+  if (!category || !jeKategorija(category))
     return NextResponse.json({ error: "Neispravna kategorija." }, { status: 400 });
 
   // Slike
@@ -147,6 +151,10 @@ export async function POST(req: NextRequest) {
       phone: phone || null,
     },
   });
+
+  // Faza 2 priprema: događaj o novom oglasu (obaveštenja pratiocima kategorija
+  // se još NE šalju). Ne sme da obori objavu oglasa ako pukne.
+  await emitujNoviOglas({ listingId: listing.id, category }).catch(() => {});
 
   return NextResponse.json({ id: listing.id });
   } catch (err) {

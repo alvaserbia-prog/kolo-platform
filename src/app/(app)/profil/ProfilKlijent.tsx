@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import Pseudonim from "@/components/Pseudonim";
+import CategoryChips from "@/components/CategoryChips";
 import { useTranslations } from "next-intl";
 
 const MAX_DISPLAY = 440;
@@ -36,9 +37,10 @@ interface ProfilProps {
     prikaziRangDonacija: boolean;
     prikaziOglase: boolean;
   };
+  praceneKategorije: string[];
 }
 
-export default function ProfilKlijent({ user }: ProfilProps) {
+export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) {
   const t = useTranslations("profil");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -76,6 +78,26 @@ export default function ProfilKlijent({ user }: ProfilProps) {
   const [podaciError, setPodaciError] = useState("");
   const [podaciSuccess, setPodaciSuccess] = useState("");
   const [podaciLoading, setPodaciLoading] = useState(false);
+
+  // Kategorije Pijace koje korisnik prati — optimistički upis na tap,
+  // uz vraćanje na prethodno stanje ako server odbije.
+  const [pracene, setPracene] = useState<string[]>(praceneKategorije);
+  const togglePracenje = useCallback(async (next: string[]) => {
+    setPracene((prethodno) => {
+      const dodata = next.find((k) => !prethodno.includes(k));
+      const uklonjena = prethodno.find((k) => !next.includes(k));
+      const slug = dodata ?? uklonjena;
+      if (!slug) return prethodno;
+      fetch("/api/profil/kategorije", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category: slug, prati: Boolean(dodata) }),
+      })
+        .then((res) => { if (!res.ok) setPracene(prethodno); })
+        .catch(() => setPracene(prethodno));
+      return next;
+    });
+  }, []);
 
   // Vidljivost profila
   const [togglei, setTogglei] = useState({
@@ -643,6 +665,14 @@ export default function ProfilKlijent({ user }: ProfilProps) {
           <span className="text-kolo-border">→</span>
         </div>
       </Link>
+
+      {/* Kategorije Pijace koje pratim — multi čipovi, optimistički upis na tap.
+          Vizuelno identično filteru na Pijaci, bez brojača. */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("pratim_kategorije_naslov")}</h2>
+        <p className="text-xs text-kolo-muted mb-4">{t("pratim_kategorije_opis")}</p>
+        <CategoryChips mode="multi" selected={pracene} onChange={togglePracenje} />
+      </div>
 
       {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">

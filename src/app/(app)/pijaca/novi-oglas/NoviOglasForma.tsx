@@ -5,23 +5,8 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import CenaUnos from "@/components/CenaUnos";
+import CategoryChips from "@/components/CategoryChips";
 import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
-
-// DB enum values — never change these (they are stored in the database)
-const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
-
-// Map a DB category value to its i18n key suffix
-function kategorijaKljuc(kat: string): string {
-  const map: Record<string, string> = {
-    "Hrana": "Hrana",
-    "Usluge": "Usluge",
-    "Zanati": "Zanati",
-    "Elektronika": "Elektronika",
-    "Odeća": "Odeca",
-    "Ostalo": "Ostalo",
-  };
-  return map[kat] ?? "Ostalo";
-}
 
 const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
@@ -245,25 +230,14 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
           />
         )}
 
-        {/* Kategorija */}
+        {/* Kategorija — čipovi, single izbor (radio ponašanje), obavezno polje */}
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("kategorija_label")}</label>
-          <div className="flex flex-wrap gap-2">
-            {KATEGORIJE_VREDNOSTI.map((kat) => (
-              <button
-                key={kat}
-                type="button"
-                onClick={() => setCategory(kat)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                  category === kat
-                    ? "bg-kolo-green-700 text-white"
-                    : "bg-white border border-kolo-border text-kolo-muted hover:border-kolo-muted"
-                }`}
-              >
-                {t(`kategorija_${kategorijaKljuc(kat)}`)}
-              </button>
-            ))}
-          </div>
+          <CategoryChips
+            mode="single"
+            selected={category ? [category] : []}
+            onChange={(next) => setCategory(next[0] ?? "")}
+          />
         </div>
 
         {/* Lokacija */}

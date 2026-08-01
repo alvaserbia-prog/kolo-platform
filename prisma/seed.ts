@@ -132,35 +132,35 @@ const KRUG_U_OSNIVANJU = {
 
 const PIJACA_OGLASI = [
   // Hrana
-  { title: "Domaći med od lipe — 1kg",      description: "Pravi domaći med od lipe sa Fruške gore. Bez konzervansa, direktno od pčelara.", price: 2800, category: "Hrana", location: "Novi Sad", seller: "Petar_K" },
-  { title: "Svež hleb od celog zrna",        description: "Pečem hleb od integralnog brašna svako jutro. Moguća dostava u okolini Niša.",  price: 350,  category: "Hrana", location: "Niš",       seller: "Ana_D"   },
-  { title: "Domaći ajvar — tegla 720ml",     description: "Pravi domaći ajvar od crvenih babura, pečenih na vatri. Blagi ili ljuti.",       price: 900,  category: "Hrana", location: "Niš",       seller: "Ana_D"   },
-  { title: "Organski paradajz sa bašte — 5kg", description: "Svež paradajz uzgojen bez pesticida. Sorte: Volovsko srce i Roza.",            price: 1500, category: "Hrana", location: "Beograd",   seller: "Mila_V"  },
-  { title: "Jabuke iz voćnjaka — 10kg",      description: "Sorta Ajdared, ručno brana, idealna za sokove i kompote.",                       price: 2200, category: "Hrana", location: "Kragujevac",seller: "Marko_J" },
-  { title: "Sir od kravljeg mleka — 1kg",    description: "Domaći beli sir, mlado proizveden, pakovan u vakum.",                            price: 1800, category: "Hrana", location: "Čačak",     seller: "Danica_P"},
+  { title: "Domaći med od lipe — 1kg",      description: "Pravi domaći med od lipe sa Fruške gore. Bez konzervansa, direktno od pčelara.", price: 2800, category: "hrana-i-pice", location: "Novi Sad", seller: "Petar_K" },
+  { title: "Svež hleb od celog zrna",        description: "Pečem hleb od integralnog brašna svako jutro. Moguća dostava u okolini Niša.",  price: 350,  category: "hrana-i-pice", location: "Niš",       seller: "Ana_D"   },
+  { title: "Domaći ajvar — tegla 720ml",     description: "Pravi domaći ajvar od crvenih babura, pečenih na vatri. Blagi ili ljuti.",       price: 900,  category: "hrana-i-pice", location: "Niš",       seller: "Ana_D"   },
+  { title: "Organski paradajz sa bašte — 5kg", description: "Svež paradajz uzgojen bez pesticida. Sorte: Volovsko srce i Roza.",            price: 1500, category: "njiva-basta-zivotinje", location: "Beograd",   seller: "Mila_V"  },
+  { title: "Jabuke iz voćnjaka — 10kg",      description: "Sorta Ajdared, ručno brana, idealna za sokove i kompote.",                       price: 2200, category: "njiva-basta-zivotinje", location: "Kragujevac",seller: "Marko_J" },
+  { title: "Sir od kravljeg mleka — 1kg",    description: "Domaći beli sir, mlado proizveden, pakovan u vakum.",                            price: 1800, category: "hrana-i-pice", location: "Čačak",     seller: "Danica_P"},
 
   // Usluge
-  { title: "Časovi srpskog jezika",          description: "Privatni časovi za osnovce i srednjoškolce. Online ili uživo u Beogradu.",       price: 1500, category: "Usluge",location: "Beograd",   seller: "Stefan_M"},
-  { title: "Prevoz kombijem — selidbe",      description: "Vršim prevoz stvari kombijem (12 m³). Selidbe, dostave nameštaja.",              price: 2500, category: "Usluge",location: "Kragujevac",seller: "Marko_J" },
-  { title: "Frizura kod kuće",               description: "Dolazim na adresu. Šišanje, farbanje, pranje. Iskustvo 10 godina.",              price: 1200, category: "Usluge",location: "Subotica",  seller: "Jovana_R"},
-  { title: "Popravka računara",              description: "Popravka laptopova i desktop računara. Reinstalacija Windowsa, čišćenje.",       price: 2000, category: "Usluge",location: "Beograd",   seller: "Stefan_M"},
-  { title: "Časovi gitare za početnike",     description: "Učim sviranje akustične gitare. Pogodno za sve uzraste.",                        price: 1300, category: "Usluge",location: "Užice",     seller: "Luka_S"  },
+  { title: "Časovi srpskog jezika",          description: "Privatni časovi za osnovce i srednjoškolce. Online ili uživo u Beogradu.",       price: 1500, category: "znanje-i-kreativa",location: "Beograd",   seller: "Stefan_M"},
+  { title: "Prevoz kombijem — selidbe",      description: "Vršim prevoz stvari kombijem (12 m³). Selidbe, dostave nameštaja.",              price: 2500, category: "prevoz-i-dostava",location: "Kragujevac",seller: "Marko_J" },
+  { title: "Frizura kod kuće",               description: "Dolazim na adresu. Šišanje, farbanje, pranje. Iskustvo 10 godina.",              price: 1200, category: "nega-zdravlje-lepota",location: "Subotica",  seller: "Jovana_R"},
+  { title: "Popravka računara",              description: "Popravka laptopova i desktop računara. Reinstalacija Windowsa, čišćenje.",       price: 2000, category: "popravke-i-gradjevina",location: "Beograd",   seller: "Stefan_M"},
+  { title: "Časovi gitare za početnike",     description: "Učim sviranje akustične gitare. Pogodno za sve uzraste.",                        price: 1300, category: "znanje-i-kreativa",location: "Užice",     seller: "Luka_S"  },
 
   // Zanati
-  { title: "Pleteni džemper po meri",        description: "Pleštem džempere, šalove i kape. Čista vuna, sve veličine. Rok 2-3 nedelje.",    price: 4500, category: "Zanati",location: "Novi Sad",  seller: "Petar_K" },
-  { title: "Drvena polica ručne izrade",     description: "Police, kutije i sitni nameštaj od bukve ili hrasta. Po meri.",                  price: 6000, category: "Zanati",location: "Kragujevac",seller: "Marko_J" },
-  { title: "Keramičke šolje",                description: "Pravim keramičke šolje, zdjele i ukrase. Svaki komad jedinstven.",               price: 1800, category: "Zanati",location: "Niš",       seller: "Ana_D"   },
+  { title: "Pleteni džemper po meri",        description: "Pleštem džempere, šalove i kape. Čista vuna, sve veličine. Rok 2-3 nedelje.",    price: 4500, category: "rucni-rad-i-pokloni",location: "Novi Sad",  seller: "Petar_K" },
+  { title: "Drvena polica ručne izrade",     description: "Police, kutije i sitni nameštaj od bukve ili hrasta. Po meri.",                  price: 6000, category: "rucni-rad-i-pokloni",location: "Kragujevac",seller: "Marko_J" },
+  { title: "Keramičke šolje",                description: "Pravim keramičke šolje, zdjele i ukrase. Svaki komad jedinstven.",               price: 1800, category: "rucni-rad-i-pokloni",location: "Niš",       seller: "Ana_D"   },
 
   // Elektronika
-  { title: "iPhone 11 — 64GB, crni",         description: "iPhone 11 64GB, dobro stanje. Baterija 84%. Punjač i maska.",                    price: 38000,category: "Elektronika",location: "Beograd", seller: "Mila_V" },
-  { title: "Laptop Lenovo ThinkPad",         description: "Lenovo ThinkPad E14, i5-10. gen, 8GB RAM, 256GB SSD. Win 11.",                   price: 52000,category: "Elektronika",location: "Subotica",seller: "Jovana_R"},
+  { title: "iPhone 11 — 64GB, crni",         description: "iPhone 11 64GB, dobro stanje. Baterija 84%. Punjač i maska.",                    price: 38000,category: "pokucstvo-i-tehnika",location: "Beograd", seller: "Mila_V" },
+  { title: "Laptop Lenovo ThinkPad",         description: "Lenovo ThinkPad E14, i5-10. gen, 8GB RAM, 256GB SSD. Win 11.",                   price: 52000,category: "pokucstvo-i-tehnika",location: "Subotica",seller: "Jovana_R"},
 
   // Odeća
-  { title: "Zimska jakna North Face vel. M", description: "North Face zimska jakna, crna, nošena jednu zimu. Bez oštećenja.",               price: 8500, category: "Odeća",  location: "Kragujevac",seller: "Marko_J" },
+  { title: "Zimska jakna North Face vel. M", description: "North Face zimska jakna, crna, nošena jednu zimu. Bez oštećenja.",               price: 8500, category: "odeca-i-obuca",  location: "Kragujevac",seller: "Marko_J" },
 
   // Ostalo
-  { title: "Bicikla gradska Merida",         description: "Merida Speeder 100, veličina M. Redovno servisirana, idealna za grad.",          price: 22000,category: "Ostalo", location: "Beograd",   seller: "Mila_V"  },
-  { title: "Knjige za pravni fakultet",      description: "Komplet udžbenika za 1. i 2. godinu pravnog. Podvlačeno hemijskom.",             price: 3200, category: "Ostalo", location: "Niš",       seller: "Ana_D"   },
+  { title: "Bicikla gradska Merida",         description: "Merida Speeder 100, veličina M. Redovno servisirana, idealna za grad.",          price: 22000,category: "ostalo", location: "Beograd",   seller: "Mila_V"  },
+  { title: "Knjige za pravni fakultet",      description: "Komplet udžbenika za 1. i 2. godinu pravnog. Podvlačeno hemijskom.",             price: 3200, category: "ostalo", location: "Niš",       seller: "Ana_D"   },
 ];
 
 // ─── Helper funkcije ─────────────────────────────────────────────────────────

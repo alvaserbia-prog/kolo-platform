@@ -245,6 +245,7 @@ model User {
   oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
   listings               MarketplaceListing[]       @relation("SellerListings")
   purchases              MarketplaceListing[]       @relation("BuyerListings")
+  praceneKategorije      FollowedCategory[]
   krugClanstva   KrugClanstvo[]
   pristupnice            KrugPristupnica[]
   osnivanjeZahtevi       KrugOsnivanjeZahtev[] @relation("Inicijator")
@@ -454,6 +455,20 @@ model MarketplaceListing {
 
   @@index([status, category, createdAt])
   @@index([status, tip, createdAt])
+}
+
+// Kategorije Pijace koje korisnik prati (čipovi u profilu; osnova za
+// buduća obaveštenja o novim oglasima — faza 2). Vrednost `category` je
+// jedan od 13 slugova iz src/lib/kategorije.ts (validira se u API sloju).
+model FollowedCategory {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category  String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, category])
+  @@index([category])
 }
 
 model ProtokolProgram {

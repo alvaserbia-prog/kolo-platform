@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { pageMetadata } from "@/lib/seo";
+import { parsirajKatParam } from "@/lib/kategorije";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
 import Link from "next/link";
 
@@ -16,9 +17,27 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function PijacaPage() {
+export default async function PijacaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ kat?: string }>;
+}) {
   const session = await getServerSession(authOptions);
   const t = await getTranslations("pijaca");
+
+  // Predizabrane kategorije iz URL-a (?kat=slug1,slug2) — deljivi linkovi, SSR.
+  const { kat } = await searchParams;
+  const initialKat = parsirajKatParam(kat);
+
+  // Kategorije koje ulogovani korisnik prati (čip „Samo praćene").
+  const pracene = session
+    ? (
+        await prisma.followedCategory.findMany({
+          where: { userId: session.user.id },
+          select: { category: true },
+        })
+      ).map((p) => p.category)
+    : [];
 
   const listings = await prisma.marketplaceListing.findMany({
     where: { status: "ACTIVE" },
@@ -70,6 +89,8 @@ export default async function PijacaPage() {
           sellerVerified: l.seller.verified,
         }))}
         isVerified={isVerified}
+        initialKat={initialKat}
+        pracene={pracene}
       />
     </>
   );
