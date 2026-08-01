@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { rasclaniPozivNaBroj } from "@/lib/placanje/ips-qr";
 
 // POST — potvrdi ili ručno evidentiraj donaciju
 export async function POST(req: NextRequest) {
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { pseudonim, amountRSD, donationId } = body;
+  const { pseudonim, pozivNaBroj, amountRSD, donationId } = body;
   // Anonimna donacija (javno=false) ne nosi POEN. Default je javna.
   const javnoBody = body.javno !== false;
 
@@ -67,14 +68,32 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // Ručno vezivanje — admin pronašao uplatu bez poziva na broj
-  if (!pseudonim) {
-    return NextResponse.json({ error: "Pseudonim ili donationId je obavezan." }, { status: 400 });
+  // Ručno evidentiranje uplate iz izvoda — po pozivu na broj (model 97 nad
+  // donatorskim brojem; primarni put) ili po pseudonimu (rezerva, npr. uplata
+  // bez poziva na broj).
+  if (!pseudonim && !pozivNaBroj) {
+    return NextResponse.json({ error: "Poziv na broj, pseudonim ili donationId je obavezan." }, { status: 400 });
   }
-  const user = await prisma.user.findUnique({
-    where: { pseudonim },
-    include: { podaci: { select: { punoIme: true } } },
-  });
+
+  let user;
+  if (pozivNaBroj) {
+    const donatorskiBroj = rasclaniPozivNaBroj(String(pozivNaBroj));
+    if (donatorskiBroj === null) {
+      return NextResponse.json(
+        { error: "Poziv na broj nije ispravan (kontrolne cifre se ne poklapaju — proverite prepis iz izvoda)." },
+        { status: 400 }
+      );
+    }
+    user = await prisma.user.findUnique({
+      where: { donatorskiBroj },
+      include: { podaci: { select: { punoIme: true } } },
+    });
+  } else {
+    user = await prisma.user.findUnique({
+      where: { pseudonim },
+      include: { podaci: { select: { punoIme: true } } },
+    });
+  }
   if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
 
   if (javnoBody && !user.podaci?.punoIme?.trim()) {

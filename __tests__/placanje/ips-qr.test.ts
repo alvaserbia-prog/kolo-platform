@@ -6,7 +6,9 @@ import {
   sklopiIpsString,
   dohvatiIpsConfig,
   ipsAktivno,
-  nasumicnaOsnova,
+  pozivNaBrojZaClana,
+  prikazPozivNaBroj,
+  rasclaniPozivNaBroj,
   type IpsConfig,
 } from "@/lib/placanje/ips-qr";
 
@@ -49,12 +51,58 @@ describe("generisiPozivNaBroj", () => {
   });
 });
 
-describe("nasumicnaOsnova", () => {
-  it("vraća 12 cifara bez vodeće nule", () => {
-    const o = nasumicnaOsnova(new Uint8Array([0, 0, 5, 9, 250, 11, 3, 7, 8, 1, 2, 4]));
-    expect(o).toHaveLength(12);
-    expect(/^\d{12}$/.test(o)).toBe(true);
-    expect(o[0]).not.toBe("0");
+describe("pozivNaBrojZaClana", () => {
+  it("kontrola (2 cifre) + donatorski broj", () => {
+    const pnb = pozivNaBrojZaClana(15);
+    expect(pnb.slice(2)).toBe("15");
+    expect(model97Kontrola("15")).toBe(pnb.slice(0, 2));
+  });
+
+  it("odbija nulu, negativan i necelobrojni broj", () => {
+    expect(() => pozivNaBrojZaClana(0)).toThrow();
+    expect(() => pozivNaBrojZaClana(-3)).toThrow();
+    expect(() => pozivNaBrojZaClana(1.5)).toThrow();
+  });
+});
+
+describe("prikazPozivNaBroj", () => {
+  it("razdvaja kontrolu crticom: '42-15'", () => {
+    const pnb = pozivNaBrojZaClana(15);
+    expect(prikazPozivNaBroj(pnb)).toBe(`${pnb.slice(0, 2)}-15`);
+  });
+});
+
+describe("rasclaniPozivNaBroj", () => {
+  it("round-trip za male i velike brojeve", () => {
+    for (const broj of [1, 2, 15, 51, 100, 482, 100_482, 999_999]) {
+      expect(rasclaniPozivNaBroj(pozivNaBrojZaClana(broj))).toBe(broj);
+    }
+  });
+
+  it("prihvata crtice, razmake i prefiks modela 97", () => {
+    const pnb = pozivNaBrojZaClana(482); // npr. "KK482"
+    expect(rasclaniPozivNaBroj(prikazPozivNaBroj(pnb))).toBe(482);
+    expect(rasclaniPozivNaBroj(` ${pnb.slice(0, 2)} ${pnb.slice(2)} `)).toBe(482);
+    expect(rasclaniPozivNaBroj(`97${pnb}`)).toBe(482);
+    expect(rasclaniPozivNaBroj(`97-${prikazPozivNaBroj(pnb)}`)).toBe(482);
+  });
+
+  it("vodeće nule u osnovi ne kvare kontrolu", () => {
+    const pnb = pozivNaBrojZaClana(15);
+    expect(rasclaniPozivNaBroj(`${pnb.slice(0, 2)}0015`)).toBe(15);
+  });
+
+  it("vraća null za pogrešnu kontrolu (greška u kucanju)", () => {
+    const pnb = pozivNaBrojZaClana(15);
+    const zamena = pnb.slice(0, 2) + "51"; // 15 → 51: kontrola za 15 ne važi za 51
+    expect(rasclaniPozivNaBroj(zamena)).toBeNull();
+  });
+
+  it("vraća null za prazan/prekratak/neispravan unos", () => {
+    expect(rasclaniPozivNaBroj("")).toBeNull();
+    expect(rasclaniPozivNaBroj("4")).toBeNull();
+    expect(rasclaniPozivNaBroj("42")).toBeNull();
+    expect(rasclaniPozivNaBroj("abc")).toBeNull();
   });
 });
 

@@ -109,18 +109,40 @@ export function generisiPozivNaBroj(osnova: string): string {
 }
 
 /**
- * Numerička osnova poziva na broj iz nasumičnih cifara (12), za sparivanje
- * priliva sa zapisom donacije. Vraća osnovu BEZ kontrole — kontrolu dodaje
- * `generisiPozivNaBroj`. (Slučajno + jedinstvenost se obezbeđuje u bazi.)
+ * Poziv na broj (bez modela) za člana: 2 kontrolne cifre (model 97) + trajni
+ * donatorski broj. Isti za SVE uplate člana — IPS QR i klasična uplatnica —
+ * pa se svaki priliv u izvodu odmah uparuje sa članom.
  */
-export function nasumicnaOsnova(randomBytes: Uint8Array): string {
-  let s = "";
-  for (const b of randomBytes) s += (b % 10).toString();
-  // 12 cifara; izbegni vodeću nulu (BigInt je svejedno, ali čistije za prikaz).
-  s = s.slice(0, 12);
-  if (s.length < 12) s = s.padEnd(12, "0");
-  if (s[0] === "0") s = "1" + s.slice(1);
-  return s;
+export function pozivNaBrojZaClana(donatorskiBroj: number): string {
+  if (!Number.isInteger(donatorskiBroj) || donatorskiBroj <= 0) {
+    throw new Error("Donatorski broj mora biti pozitivan ceo broj.");
+  }
+  return generisiPozivNaBroj(String(donatorskiBroj));
+}
+
+/** Prikaz poziva na broj za ljude: kontrola-osnova, npr. "42-15". */
+export function prikazPozivNaBroj(pozivNaBroj: string): string {
+  const cifre = pozivNaBroj.replace(/\D/g, "");
+  return cifre.length > 2 ? `${cifre.slice(0, 2)}-${cifre.slice(2)}` : cifre;
+}
+
+/**
+ * Rasčlanjuje poziv na broj (admin unos / prepis iz izvoda) na donatorski broj.
+ * Prihvata razmake i crtice, kao i opcioni prefiks modela "97". Vraća donatorski
+ * broj ili null ako kontrolne cifre ne odgovaraju (greška u kucanju) — vodeće
+ * nule u osnovi ne smetaju (mod 97 je nad numeričkom vrednošću).
+ */
+export function rasclaniPozivNaBroj(unos: string): number | null {
+  const cifre = (unos ?? "").replace(/\D/g, "");
+  const probaj = (s: string): number | null => {
+    if (s.length < 3) return null;
+    if (model97Kontrola(s.slice(2)) !== s.slice(0, 2)) return null;
+    const broj = Number(s.slice(2));
+    return Number.isSafeInteger(broj) && broj > 0 ? broj : null;
+  };
+  // Prvo ceo unos kao kontrola+osnova; ako ne prolazi a počinje sa "97",
+  // tretiraj taj prefiks kao oznaku modela i probaj ostatak.
+  return probaj(cifre) ?? (cifre.startsWith("97") ? probaj(cifre.slice(2)) : null);
 }
 
 /**

@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ, RANG_TABELA } from "@/lib/protokol/donacija";
+import { dohvatiIpsConfig, pozivNaBrojZaClana, prikazPozivNaBroj } from "@/lib/placanje/ips-qr";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -13,6 +14,7 @@ export async function GET() {
     where: { id: session.user.id },
     select: {
       memberHash: true,
+      donatorskiBroj: true,
       donations: {
         orderBy: { createdAt: "desc" },
         select: {
@@ -60,10 +62,19 @@ export async function GET() {
     },
   });
 
+  // Trajni broj za uplate (model 97 nad donatorskim brojem) — isti za IPS QR i
+  // klasičnu uplatnicu. Račun iz IPS konfiguracije kad je podešen (jedan izvor
+  // istine); dok nije, klijent prikazuje placeholder.
+  const ipsCfg = dohvatiIpsConfig();
+  const pozivNaBroj = prikazPozivNaBroj(pozivNaBrojZaClana(user.donatorskiBroj));
+
   return NextResponse.json({
     trenutniNivo: nivo,
     trenutniKurs: kurs,
     kumulativRSD: totalRSD,
+    donatorskiBroj: user.donatorskiBroj,
+    pozivNaBroj,
+    racun: ipsCfg?.racun ?? null,
     donacije: user.donations.map((d) => ({
       id: d.id,
       amountRSD: Number(d.amountRSD),
