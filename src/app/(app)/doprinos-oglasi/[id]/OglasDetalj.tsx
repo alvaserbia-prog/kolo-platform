@@ -103,23 +103,21 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
 
       {/* Header */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6 space-y-4">
-        <div className="flex justify-between items-start gap-4">
-          <div>
-            <div className="flex items-center gap-2 flex-wrap mb-2">
+        <div>
+          <div className="flex justify-between items-center gap-2 flex-wrap mb-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[oglas.source] ?? oglas.source}
               </span>
               {oglas.krugName && <span className="text-xs text-kolo-muted">{oglas.krugName}</span>}
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
               {oglas.saOdobravanjem && <span className="text-xs bg-kolo-info-light text-kolo-info px-2 py-0.5 rounded">{t("sa_odobravanjem")}</span>}
               {!aktivan && <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">{t("zatvoren")}</span>}
             </div>
-            <h1 className="text-xl font-bold text-kolo-text">{oglas.title}</h1>
-            <p className="text-sm text-kolo-muted mt-2 leading-relaxed">{oglas.description}</p>
           </div>
-          <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
-            <p className="text-lg font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? oglas.predlozeniPoen.toLocaleString("sr-RS") : t("neograniceno")}</p>
-            <p className="text-xs text-kolo-green-700">{t("predlozeni_poen_label")}</p>
-          </div>
+          <h1 className="text-xl font-bold text-kolo-text">{oglas.title}</h1>
+          <p className="text-sm text-kolo-muted mt-2 leading-relaxed">{oglas.description}</p>
         </div>
 
         {oglas.obrazlozenje && (
