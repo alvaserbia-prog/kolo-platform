@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -30,6 +31,8 @@ interface EmisioniKontekst {
 
 interface Props {
   programi: ProgramInfo[];
+  pedAktivan: boolean;
+  brojAktivnih: number;
   isVerified: boolean;
   imaPunIndeks: boolean;
   protokolBalance: number;
@@ -47,7 +50,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, protokolBalance, emisioniKontekst }: Props) {
+export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPunIndeks, protokolBalance, emisioniKontekst }: Props) {
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -91,21 +94,24 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
 
       {/* Emisioni kontekst */}
       <div className="bg-white rounded-2xl border border-kolo-border p-5 space-y-3">
-        <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wider">{t("emisioni_kontekst")}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+        <div className="grid grid-cols-2 gap-3 text-center">
           <div>
+            <p className="text-xs text-kolo-muted mb-0.5">{t("opticaj")}</p>
             <p className="text-base font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">{t("opticaj")}</p>
           </div>
           <div>
+            <p className="text-xs text-kolo-muted mb-0.5">{t("dnevni_limit")}</p>
             <p className="text-base font-bold text-kolo-text">{dnevniLimit.toLocaleString("sr-RS")}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">{t("dnevni_limit")}</p>
           </div>
           <div>
+            <p className="text-xs text-kolo-muted mb-0.5">{t("emitovano_danas")}</p>
             <p className={`text-base font-bold ${emitovanoAm !== null && emitovanoAm > 0 ? "text-kolo-green-700" : "text-kolo-muted"}`}>
               {emitovanoAm !== null ? emitovanoAm.toLocaleString("sr-RS") : "—"}
             </p>
-            <p className="text-xs text-kolo-muted mt-0.5">{t("emitovano_danas")}</p>
+          </div>
+          <div>
+            <p className="text-xs text-kolo-muted mb-0.5">{t("aktivni_programi")}</p>
+            <p className="text-base font-bold text-kolo-text">{brojAktivnih.toLocaleString("sr-RS")}</p>
           </div>
         </div>
         {dnevniLimit > 0 && (
@@ -137,6 +143,7 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
       )}
 
       <div className="space-y-3">
+        <OperativniKartica aktivan={pedAktivan} />
         {programi.map((p) => (
           <ProgramKartica
             key={p.type}
@@ -151,6 +158,39 @@ export default function ProgramiKlijent({ programi, isVerified, imaPunIndeks, pr
             onPrijavi={prijavi}
           />
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Kartica operativnog doprinosa (PED — ide kroz zadatke, ne kroz enrollment) ─
+
+function OperativniKartica({ aktivan }: { aktivan: boolean }) {
+  const t = useTranslations("programi");
+  const tc = useTranslations("common");
+
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+      <div className="px-5 py-4 flex justify-between items-start">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <p className="font-semibold text-kolo-text">{t("operativni_naslov")}</p>
+            {aktivan ? (
+              <span className="text-xs px-2 py-0.5 rounded border font-medium bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100">
+                {t("status_aktivan")}
+              </span>
+            ) : (
+              <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">{tc("neaktivan")}</span>
+            )}
+          </div>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("opis_operativni")}</p>
+        </div>
+        <div className="ml-4 shrink-0">
+          <Link href="/doprinos-oglasi"
+            className="inline-block px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors">
+            {t("operativni_link")}
+          </Link>
+        </div>
       </div>
     </div>
   );
