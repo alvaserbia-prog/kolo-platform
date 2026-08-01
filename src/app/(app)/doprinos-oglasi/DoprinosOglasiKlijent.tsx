@@ -113,10 +113,10 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
-      <div className="px-5 py-4">
+      <div className="px-6 py-5">
         <div className="flex justify-between items-start gap-3">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap mb-1">
+            <div className="flex items-center gap-2 flex-wrap mb-2">
               <span className={`text-xs font-semibold px-2 py-0.5 rounded ${sourceCls[oglas.source] ?? "bg-kolo-bg text-kolo-muted"}`}>
                 {sourceLabel[oglas.source] ?? oglas.source}
               </span>
@@ -131,7 +131,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
             <Link href={`/doprinos-oglasi/${oglas.id}`} className="font-semibold text-kolo-text hover:text-kolo-green-700 transition-colors">
               {oglas.title}
             </Link>
-            <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{oglas.description}</p>
+            <p className="text-xs text-kolo-muted mt-2 leading-relaxed line-clamp-2">{oglas.description}</p>
           </div>
           <div className="shrink-0 text-right">
             <p className="text-sm font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString("sr-RS")} P` : t("neograniceno")}</p>
@@ -139,7 +139,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-3">
+        <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-4 text-xs text-kolo-muted">
             <span>{oglas.odobreniClanovi}/{oglas.positions} {oglas.positions === 1 ? t("izvršilac_jedan") : t("izvršilaca")}</span>
             {oglas.deadline && (
