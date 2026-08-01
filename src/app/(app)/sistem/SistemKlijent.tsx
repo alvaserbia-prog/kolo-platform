@@ -342,7 +342,7 @@ export default function SistemKlijent({
         <ClanoviSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "lokacije" && (
-        <LokacijeSekcija clanovi={clanovi} />
+        <LokacijeSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "transakcije" && (
         <TransakcijeSekcija transakcije={transakcije} verified={verified} />
@@ -938,6 +938,7 @@ interface LokAgg {
   naziv: string;
   ukupno: number;
   verifikovanih: number;
+  clanovi: Clan[];
 }
 
 // Prag za otključavanje kolektivnog oblika po broju VERIFIKOVANIH članova
@@ -948,8 +949,10 @@ const LOK_PRAG_ZADRUGA = 50;
 
 function LokacijeSekcija({
   clanovi,
+  verified,
 }: {
   clanovi: Clan[];
+  verified: boolean;
 }) {
   const t = useTranslations("sistem");
   const [pretraga, setPretraga] = useState("");
@@ -957,7 +960,7 @@ function LokacijeSekcija({
   const { lokacije, bezLokacije } = useMemo(() => {
     const mapa = new Map<
       string,
-      { ukupno: number; verifikovanih: number; varijante: Map<string, number> }
+      { ukupno: number; verifikovanih: number; varijante: Map<string, number>; clanovi: Clan[] }
     >();
     let bez = 0;
     for (const c of clanovi) {
@@ -968,11 +971,14 @@ function LokacijeSekcija({
       }
       let e = mapa.get(kljuc);
       if (!e) {
-        e = { ukupno: 0, verifikovanih: 0, varijante: new Map() };
+        e = { ukupno: 0, verifikovanih: 0, varijante: new Map(), clanovi: [] };
         mapa.set(kljuc, e);
       }
       e.ukupno++;
       if (c.verified) e.verifikovanih++;
+      // Članovi stižu sortirani po stanju POEN-a (server), pa je redosled
+      // dodavanja ujedno i rang lista lokacije.
+      e.clanovi.push(c);
       // Zabeleži originalno napisan oblik (npr. „Beograd" vs „beograd") radi prikaza.
       const prikaz = (c.location ?? "").trim().replace(/\s+/g, " ");
       e.varijante.set(prikaz, (e.varijante.get(prikaz) ?? 0) + 1);
@@ -987,7 +993,7 @@ function LokacijeSekcija({
           naziv = v;
         }
       }
-      return { kljuc, naziv, ukupno: e.ukupno, verifikovanih: e.verifikovanih };
+      return { kljuc, naziv, ukupno: e.ukupno, verifikovanih: e.verifikovanih, clanovi: e.clanovi };
     });
     rezultat.sort(
       (a, b) =>
@@ -1050,7 +1056,7 @@ function LokacijeSekcija({
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {filtrirane.map((l) => (
-              <LokacijaKartica key={l.kljuc} l={l} t={t} />
+              <LokacijaKartica key={l.kljuc} l={l} t={t} verified={verified} />
             ))}
           </div>
           {filtrirane.length === 0 && (
@@ -1067,10 +1073,14 @@ function LokacijeSekcija({
 function LokacijaKartica({
   l,
   t,
+  verified,
 }: {
   l: LokAgg;
   t: ReturnType<typeof useTranslations>;
+  verified: boolean;
 }) {
+  const [otvoreno, setOtvoreno] = useState(false);
+
   const opcije = [
     {
       prag: LOK_PRAG_ZADRUGA,
@@ -1081,7 +1091,15 @@ function LokacijaKartica({
   ];
 
   return (
-    <div className="rounded-2xl border border-kolo-border bg-white p-4 md:p-5">
+    <div className="rounded-2xl border border-kolo-border bg-white overflow-hidden transition-all hover:border-kolo-green-500 hover:shadow-sm">
+      {/* Klikabilni deo kartice — otvara/zatvara rang listu članova lokacije.
+          Rang lista je van button-a jer sadrži linkove ka profilima. */}
+      <button
+        type="button"
+        onClick={() => setOtvoreno((o) => !o)}
+        aria-expanded={otvoreno}
+        className="w-full text-left p-4 md:p-5 cursor-pointer"
+      >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="font-semibold text-kolo-text flex items-center gap-1.5 truncate">
@@ -1145,6 +1163,72 @@ function LokacijaKartica({
           );
         })}
       </div>
+
+      {/* Poziv na rang listu */}
+      <div className="mt-3 pt-3 border-t border-kolo-border/50 flex items-center justify-between text-xs font-semibold text-kolo-green-700">
+        <span>{t("lok_rang_naslov")}</span>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          className={`transition-transform ${otvoreno ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+      </button>
+
+      {/* Padajuća rang lista članova lokacije (po stanju POEN-a) */}
+      {otvoreno && (
+        verified ? (
+          <div className="border-t border-kolo-border">
+            <div className="flex items-center justify-between px-4 md:px-5 py-2 bg-kolo-bg text-xs font-semibold text-kolo-muted">
+              <span>{t("col_pseudonim")}</span>
+              <span>{t("col_balans")}</span>
+            </div>
+            <div className="max-h-72 overflow-y-auto">
+              {l.clanovi.map((c, i) => (
+                <div
+                  key={c.id}
+                  className={`flex items-center gap-2.5 px-4 md:px-5 py-2.5 text-sm ${
+                    i < l.clanovi.length - 1 ? "border-b border-kolo-border/30" : ""
+                  }`}
+                >
+                  <span className="w-5 shrink-0 text-right text-xs font-semibold tabular-nums text-kolo-muted">
+                    {i + 1}.
+                  </span>
+                  <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={26} />
+                  <Link
+                    href={`/profil/${c.id}`}
+                    className="font-medium text-kolo-green-700 hover:underline truncate min-w-0"
+                  >
+                    <Pseudonim>{c.pseudonim}</Pseudonim>
+                  </Link>
+                  {c.verified ? (
+                    <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
+                  ) : (
+                    <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
+                  )}
+                  <span className="ml-auto shrink-0 text-sm font-semibold tabular-nums text-kolo-text">
+                    {c.balance.toLocaleString("sr-RS")}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="border-t border-kolo-border p-5 text-center">
+            <p className="text-sm text-kolo-muted mb-3">{t("clanovi_pregled_blokiran")}</p>
+            <Link
+              href="/tabla-jemstva"
+              className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
+            >
+              {t("verifikuj_dugme_link")}
+            </Link>
+          </div>
+        )
+      )}
     </div>
   );
 }

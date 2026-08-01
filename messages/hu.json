@@ -275,6 +275,7 @@
     "lok_jos": "még {n}",
     "lok_opcija_zadruga": "Bejegyzett Zadruga",
     "lok_opcija_zadruga_opis": "Szövetkezet mint bejegyzett jogi személy a szövetkezeti törvény szerint.",
+    "lok_rang_naslov": "Tagok ranglistája",
     "fondacija_ucitavanje": "Tranzakciók betöltése...",
     "fondacija_nema_tx": "Nincs rögzített tranzakció az Alapítvány számláján.",
     "fondacija_col_opis": "Leírás",
