@@ -116,8 +116,8 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
               {!aktivan && <span className="text-xs bg-kolo-bg text-kolo-muted px-2 py-0.5 rounded">{t("zatvoren")}</span>}
             </div>
           </div>
-          <h1 className="text-xl font-bold text-kolo-text">{oglas.title}</h1>
-          <p className="text-sm text-kolo-muted mt-2 leading-relaxed">{oglas.description}</p>
+          <h1 className="text-2xl font-bold text-kolo-text">{oglas.title}</h1>
+          <p className="text-sm text-kolo-muted mt-2 leading-relaxed whitespace-pre-line">{oglas.description}</p>
         </div>
 
         {oglas.obrazlozenje && (
