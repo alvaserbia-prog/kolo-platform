@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
+import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
 
-// POST /api/doprinos-oglasi/[id]/evidencija — unos radnih sati
+const DOKAZ_MAX_SIZE = 5 * 1024 * 1024; // 5MB, isto kao slike na Pijaci
+const DOKAZ_TIPOVI = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
+// POST /api/doprinos-oglasi/[id]/evidencija — unos dnevnog izvršenja.
+// Prima multipart/form-data (dokaz = screenshot koji ide na R2) ili JSON
+// (legacy, dokaz kao tekstualni link).
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -16,8 +23,30 @@ export async function POST(
     return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
 
   const { id: oglasId } = await params;
-  const body = await req.json().catch(() => ({}));
-  const { date, predlozeniPoen, description, dokaz } = body;
+
+  let date: unknown, predlozeniPoen: unknown, description: unknown, dokaz: unknown;
+  let dokazSlika: File | null = null;
+  if ((req.headers.get("content-type") ?? "").includes("multipart/form-data")) {
+    const fd = await req.formData().catch(() => null);
+    if (!fd) return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
+    date = fd.get("date");
+    predlozeniPoen = fd.get("predlozeniPoen");
+    description = fd.get("description");
+    const f = fd.get("dokazSlika");
+    if (f instanceof File && f.size > 0) dokazSlika = f;
+  } else {
+    const body = await req.json().catch(() => ({}));
+    ({ date, predlozeniPoen, description, dokaz } = body);
+  }
+
+  if (dokazSlika) {
+    if (dokazSlika.size > DOKAZ_MAX_SIZE)
+      return NextResponse.json({ error: "Screenshot dokaza može biti najviše 5MB." }, { status: 400 });
+    if (!DOKAZ_TIPOVI.includes(dokazSlika.type))
+      return NextResponse.json({ error: "Dozvoljeni formati dokaza: JPG, PNG, WebP." }, { status: 400 });
+    if (!r2Konfigurisan())
+      return NextResponse.json({ error: "Skladište slika nije konfigurisano — dokaz trenutno nije moguće priložiti." }, { status: 503 });
+  }
 
   // Validacije
   if (!date || !predlozeniPoen || !description) return NextResponse.json({ error: "Nedostaju podaci." }, { status: 400 });
@@ -26,7 +55,7 @@ export async function POST(
   if (typeof description !== "string" || description.trim().length < 10) return NextResponse.json({ error: "Opis mora imati najmanje 10 karaktera." }, { status: 400 });
 
   // Datum — max 3 dana unazad
-  const datumEv = new Date(date);
+  const datumEv = new Date(String(date));
   datumEv.setHours(0, 0, 0, 0);
   const danas = new Date(); danas.setHours(0, 0, 0, 0);
   const razlikaMs = danas.getTime() - datumEv.getTime();
@@ -69,6 +98,14 @@ export async function POST(
       return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
   }
 
+  // Dokaz: screenshot → R2 (javni URL u bazu), ili legacy tekstualni link.
+  let dokazUrl: string | null = typeof dokaz === "string" && dokaz.trim() ? dokaz.trim() : null;
+  if (dokazSlika) {
+    const ext = dokazSlika.type === "image/png" ? ".png" : dokazSlika.type === "image/webp" ? ".webp" : ".jpg";
+    const buffer = Buffer.from(await dokazSlika.arrayBuffer());
+    dokazUrl = await sacuvajNaR2(`dokazi/${oglasId}/${randomUUID()}${ext}`, buffer, dokazSlika.type);
+  }
+
   await prisma.oglasEvidencija.create({
     data: {
       userId: session.user.id,
@@ -76,7 +113,7 @@ export async function POST(
       prijavaId: prijava.id,
       date: datumEv,
       predlozeniPoen: predlozeni,
-      dokaz: typeof dokaz === "string" && dokaz.trim() ? dokaz.trim() : null,
+      dokaz: dokazUrl,
       description: description.trim(),
     },
   });
