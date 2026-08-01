@@ -29,15 +29,15 @@ export default async function PijacaPage({
   const { kat } = await searchParams;
   const initialKat = parsirajKatParam(kat);
 
-  // Kategorije koje ulogovani korisnik prati (čip „Samo praćene").
-  const pracene = session
-    ? (
-        await prisma.followedCategory.findMany({
-          where: { userId: session.user.id },
-          select: { category: true },
-        })
-      ).map((p) => p.category)
-    : [];
+  // Praćene kategorije (čip „Samo praćene") + lokacija iz profila
+  // (početna referenca za filter udaljenosti).
+  const korisnik = session
+    ? await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { location: true, praceneKategorije: { select: { category: true } } },
+      })
+    : null;
+  const pracene = korisnik?.praceneKategorije.map((p) => p.category) ?? [];
 
   const listings = await prisma.marketplaceListing.findMany({
     where: { status: "ACTIVE" },
@@ -91,6 +91,7 @@ export default async function PijacaPage({
         isVerified={isVerified}
         initialKat={initialKat}
         pracene={pracene}
+        mojaLokacija={korisnik?.location ?? null}
       />
     </>
   );

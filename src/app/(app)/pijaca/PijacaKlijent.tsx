@@ -7,8 +7,13 @@ import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
 import CategoryChips from "@/components/CategoryChips";
+import LokacijaSearch from "@/components/LokacijaSearch";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { KATEGORIJE, kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
+import { koordinateZaMesto, udaljenostKm, type Koordinate } from "@/lib/udaljenost";
+
+// Ponuđeni poluprečnici filtera lokacije (km).
+const RADIUS_OPCIJE = [10, 25, 50, 100] as const;
 
 interface Listing {
   id: string;
@@ -34,9 +39,11 @@ interface Props {
   initialKat?: string[];
   // Kategorije koje ulogovani korisnik prati (za čip „Samo praćene").
   pracene?: string[];
+  // Lokacija iz profila ulogovanog korisnika — početna referenca za udaljenost.
+  mojaLokacija?: string | null;
 }
 
-export default function PijacaKlijent({ listings, isVerified, initialKat = [], pracene = [] }: Props) {
+export default function PijacaKlijent({ listings, isVerified, initialKat = [], pracene = [], mojaLokacija = null }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
@@ -47,6 +54,11 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
   const [maxCena, setMaxCena] = useState("");
   const [showCena, setShowCena] = useState(false);
   const [showSort, setShowSort] = useState(false);
+  // Filter lokacije: referentno mesto (podrazumevano iz profila) + poluprečnik.
+  // Filtrira tek kad je izabran poluprečnik I mesto je prepoznato.
+  const [showLokacija, setShowLokacija] = useState(false);
+  const [lokacijaFilter, setLokacijaFilter] = useState(mojaLokacija ?? "");
+  const [radiusKm, setRadiusKm] = useState<number | null>(null);
   // Blok čipova kategorija je sklopiv (dugme-strelica desno od tabova).
   // Otvoren je odmah samo kad URL već nosi izabrane kategorije (?kat=).
   const [showKategorije, setShowKategorije] = useState(initialKat.length > 0);
@@ -88,6 +100,11 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
     return brojaci;
   }, [listings, jePotraznja]);
 
+  // Koordinate referentnog mesta (centar opštine); null kad tekst nije prepoznat.
+  const refKoord = useMemo(() => koordinateZaMesto(lokacijaFilter), [lokacijaFilter]);
+  // Filter udaljenosti je aktivan samo kad postoje i poluprečnik i prepoznato mesto.
+  const radiusAktivan = radiusKm != null && refKoord != null;
+
   const filtrirani = useMemo(() => {
     return listings
       .filter((l) => {
@@ -99,6 +116,12 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
         // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
         if (minCena && (l.price == null || l.price < Number(minCena))) return false;
         if (maxCena && (l.price == null || l.price > Number(maxCena))) return false;
+        // Udaljenost: oglas bez lokacije ili sa neprepoznatom lokacijom ispada
+        // iz filtera po krugu (udaljenost mu se ne može odrediti).
+        if (radiusAktivan) {
+          const koord = koordinateZaMesto(l.location);
+          if (!koord || udaljenostKm(refKoord!, koord) > radiusKm!) return false;
+        }
         return true;
       })
       .sort((a, b) => {
@@ -107,7 +130,7 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
         if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
-  }, [listings, jePotraznja, selektovaneKat, pretraga, sort, minCena, maxCena]);
+  }, [listings, jePotraznja, selektovaneKat, pretraga, sort, minCena, maxCena, radiusAktivan, refKoord, radiusKm]);
 
   // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
   // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
@@ -215,6 +238,63 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
           <div className="flex gap-2 flex-wrap items-center">
+            {/* Lokacija — dropdown: referentno mesto + poluprečnik (u krugu od N km).
+                Udaljenost se računa po centrima opština (~km tačnost). */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setShowLokacija((v) => !v)}
+                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
+                  radiusAktivan
+                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
+                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                }`}
+              >
+                {radiusAktivan
+                  ? `${lokacijaFilter.split(",")[0].trim()} · ${t("radius_do", { km: radiusKm! })}`
+                  : t("lokacija_filter")}
+              </button>
+              {showLokacija && (
+                <div className="absolute z-20 left-0 mt-1 w-72 bg-white rounded-xl border border-kolo-border shadow-lg p-3 space-y-2">
+                  <LokacijaSearch
+                    value={lokacijaFilter}
+                    onChange={setLokacijaFilter}
+                    placeholder={t("lokacija_placeholder")}
+                  />
+                  {lokacijaFilter.trim() !== "" && !refKoord && (
+                    <p className="text-xs text-kolo-gold-600">{t("lokacija_nepoznata")}</p>
+                  )}
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setRadiusKm(null)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                        radiusKm == null
+                          ? "bg-kolo-green-700 text-white"
+                          : "bg-white border border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                      }`}
+                    >
+                      {t("radius_bilo_gde")}
+                    </button>
+                    {RADIUS_OPCIJE.map((km) => (
+                      <button
+                        key={km}
+                        type="button"
+                        onClick={() => setRadiusKm(km)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                          radiusKm === km
+                            ? "bg-kolo-green-700 text-white"
+                            : "bg-white border border-kolo-border text-kolo-text hover:border-kolo-green-700"
+                        }`}
+                      >
+                        {t("radius_do", { km })}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Cena — dropdown sa min/max. Kod potražnje nema iznosa, pa se sakriva. */}
             {!jePotraznja && (
             <div className="relative">
@@ -333,6 +413,7 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
               onKontakt={handleKontakt}
               t={t}
               prioritet={i < 2}
+              udaljenost={izracunajUdaljenost(refKoord, l.location)}
             />
           ))}
         </div>
@@ -358,6 +439,15 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
   );
 }
 
+// Zaokružena udaljenost (km) od referentnog mesta do lokacije oglasa;
+// null kad referenca nije zadata ili lokacija oglasa nije prepoznata.
+function izracunajUdaljenost(refKoord: Koordinate | null, lokacija: string | null): number | null {
+  if (!refKoord) return null;
+  const koord = koordinateZaMesto(lokacija);
+  if (!koord) return null;
+  return Math.round(udaljenostKm(refKoord, koord));
+}
+
 // ── Kartica oglasa ─────────────────────────────────────────────────────────────
 
 type TFunction = ReturnType<typeof useTranslations<"pijaca">>;
@@ -369,6 +459,7 @@ const OglasKartica = memo(function OglasKartica({
   onKontakt,
   t,
   prioritet,
+  udaljenost,
 }: {
   oglas: Listing;
   isVerified: boolean;
@@ -376,6 +467,7 @@ const OglasKartica = memo(function OglasKartica({
   onKontakt: (oglasId: string, sellerId: string) => void;
   t: TFunction;
   prioritet: boolean;
+  udaljenost: number | null;
 }) {
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
@@ -433,6 +525,9 @@ const OglasKartica = memo(function OglasKartica({
           <span className="text-xs text-kolo-muted truncate min-w-0">
             <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
+            {udaljenost != null && (
+              <span className="ml-1 text-kolo-green-700 font-medium">· ~{udaljenost} km</span>
+            )}
           </span>
           {isVerified ? (
             <button
