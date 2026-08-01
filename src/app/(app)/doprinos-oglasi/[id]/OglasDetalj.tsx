@@ -210,9 +210,17 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
             const badge = evStatusBadge[e.status];
             return (
               <div key={e.id} className={`px-5 py-3 flex justify-between items-center gap-3 ${i < oglas.mojeEvidencije.length - 1 ? "border-b border-kolo-border" : ""}`}>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}</p>
-                  <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
+                <div className="flex-1 min-w-0 flex items-center gap-3">
+                  {e.dokaz && /\.(jpe?g|png|webp)(\?.*)?$/i.test(e.dokaz) && /^https?:\/\//.test(e.dokaz) && (
+                    <a href={e.dokaz} target="_blank" rel="noopener noreferrer" className="shrink-0">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={e.dokaz} alt={t("dokaz_label")} className="h-10 w-10 rounded-lg border border-kolo-border object-cover" />
+                    </a>
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
+                  </div>
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-sm font-semibold text-kolo-text">
@@ -242,7 +250,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
   const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [predlozeniPoen, setPredlozeniPoen] = useState("");
   const [description, setDescription] = useState("");
-  const [dokaz, setDokaz] = useState("");
+  const [dokazSlika, setDokazSlika] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -259,18 +267,26 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
     if (!predlozeniPoen || !Number.isInteger(predlozeni) || predlozeni < 1) { setError(t("ev_greska_poen_pozitivan")); return; }
     if (maxPredlozeni > 0 && predlozeni > maxPredlozeni) { setError(t("ev_greska_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") })); return; }
     if (!description.trim() || description.trim().length < 10) { setError(t("ev_greska_opis_min10")); return; }
+    if (dokazSlika) {
+      if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(dokazSlika.type)) { setError(t("ev_greska_dokaz_format")); return; }
+      if (dokazSlika.size > 5 * 1024 * 1024) { setError(t("ev_greska_dokaz_velicina")); return; }
+    }
 
     setLoading(true);
     try {
+      const fd = new FormData();
+      fd.append("date", date);
+      fd.append("predlozeniPoen", String(predlozeni));
+      fd.append("description", description.trim());
+      if (dokazSlika) fd.append("dokazSlika", dokazSlika);
       const res = await fetch(`/api/doprinos-oglasi/${oglasId}/evidencija`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date, predlozeniPoen: predlozeni, description: description.trim(), dokaz: dokaz.trim() || undefined }),
+        body: fd,
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? t("greska")); return; }
       setSuccess(true);
-      setDescription(""); setPredlozeniPoen(""); setDokaz("");
+      setDescription(""); setPredlozeniPoen(""); setDokazSlika(null);
       setTimeout(onSuccess, 1200);
     } finally {
       setLoading(false);
@@ -319,9 +335,10 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
 
       <div>
         <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("dokaz_label")}</label>
-        <input type="text" value={dokaz} onChange={(e) => setDokaz(e.target.value)}
-          placeholder={t("dokaz_placeholder")}
-          className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
+        <input type="file" accept="image/jpeg,image/png,image/webp"
+          onChange={(e) => setDokazSlika(e.target.files?.[0] ?? null)}
+          className="w-full text-sm text-kolo-muted file:mr-3 file:px-4 file:py-2 file:rounded-xl file:border-0 file:bg-kolo-green-100 file:text-kolo-green-700 file:text-xs file:font-semibold file:cursor-pointer" />
+        <p className="text-xs text-kolo-muted mt-1">{t("dokaz_napomena")}</p>
       </div>
 
       {error && <p className="text-xs text-kolo-danger">{error}</p>}

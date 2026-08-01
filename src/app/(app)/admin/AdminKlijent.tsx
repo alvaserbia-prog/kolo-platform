@@ -653,7 +653,20 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{e.pseudonim}</Pseudonim></p>
                     <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
                     <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{e.description}</p>
-                    {e.dokaz && <p className="text-xs text-kolo-info mt-1 line-clamp-1">{t("ped_dokaz_label")} {e.dokaz}</p>}
+                    {e.dokaz && (/\.(jpe?g|png|webp)(\?.*)?$/i.test(e.dokaz) && /^https?:\/\//.test(e.dokaz) ? (
+                      // Screenshot dokaz (R2) — sličica koja se otvara u punoj veličini.
+                      <a href={e.dokaz} target="_blank" rel="noopener noreferrer" className="inline-block mt-2">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={e.dokaz} alt={t("ped_dokaz_label")} className="h-24 rounded-lg border border-kolo-border object-cover" />
+                      </a>
+                    ) : (
+                      <p className="text-xs text-kolo-info mt-1 line-clamp-1">
+                        {t("ped_dokaz_label")}{" "}
+                        {/^https?:\/\//.test(e.dokaz) ? (
+                          <a href={e.dokaz} target="_blank" rel="noopener noreferrer" className="underline break-all">{e.dokaz}</a>
+                        ) : e.dokaz}
+                      </p>
+                    ))}
                   </div>
                   <div className="shrink-0 text-right">
                     <p className="text-sm font-bold text-kolo-text">{e.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_p_predlozeno")}</p>
