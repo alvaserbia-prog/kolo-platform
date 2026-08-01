@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { MINIMUM_POEN_ZA_UPIS_ZRNA } from "@/lib/protokol/zrno";
+import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 
 // POST /api/zrno/upis — rezervacija upisa ZRNA (izvršava se u ponoć)
 export async function POST(req: NextRequest) {
@@ -28,8 +29,7 @@ export async function POST(req: NextRequest) {
   if (poenIznos > maxPoen)
     return NextResponse.json({ error: `Maksimalno ${maxPoen.toLocaleString("sr-RS")} POEN dnevno (1% balansa).` }, { status: 400 });
 
-  const danas = new Date();
-  danas.setHours(0, 0, 0, 0);
+  const danas = beogradskiDan();
 
   const vec = await prisma.zrnoUpisZahtev.findUnique({
     where: { userId_date: { userId: session.user.id, date: danas } },

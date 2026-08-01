@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 
 // POST /api/zrno/otkljucaj — AKTIVNO → SLOBODNO (period čekanja 1 dan)
 export async function POST(req: NextRequest) {
@@ -21,8 +22,7 @@ export async function POST(req: NextRequest) {
   if (kolicina > stanje.aktivno)
     return NextResponse.json({ error: `Imate ${stanje.aktivno} aktivnih ZRNA.` }, { status: 400 });
 
-  const danas = new Date();
-  danas.setHours(0, 0, 0, 0);
+  const danas = beogradskiDan();
 
   await prisma.zrnoStatusZahtev.create({
     data: { userId: session.user.id, kolicina, akcija: "OTKLJUCAJ", date: danas },

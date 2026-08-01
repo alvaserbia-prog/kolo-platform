@@ -3,14 +3,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 
 // GET /api/zrno — stanje ZRNA korisnika
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const danas = new Date();
-  danas.setHours(0, 0, 0, 0);
+  const danas = beogradskiDan();
 
   const [stanje, upisZahtev, otpisZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),

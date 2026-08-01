@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
+import { danObracuna } from "./obracunski-dan";
 import { MAX_INDEKS } from "./dokaz-stvarnosti";
 import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
@@ -127,11 +128,8 @@ type EmisijaItem = {
 };
 
 export async function izvrsiNocnuEmisiju(datum: Date) {
-  // Zero out time for date comparison
-  const danas = new Date(datum);
-  danas.setHours(0, 0, 0, 0);
-  const sutra = new Date(danas);
-  sutra.setDate(sutra.getDate() + 1);
+  // Obračunski dan po srpskom vremenu (cron 22:00 UTC = ponoć po lokalnom leti)
+  const danas = danObracuna(datum);
 
   // 1. Opticaj i limit
   const protokol = await prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID } });
