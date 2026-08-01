@@ -6,23 +6,9 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
+import CategoryChips from "@/components/CategoryChips";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
-
-// DB enum values — never change these (they are stored in the database)
-const KATEGORIJE_VREDNOSTI = ["Hrana", "Usluge", "Zanati", "Elektronika", "Odeća", "Ostalo"] as const;
-
-// Map a DB category value to its i18n key suffix
-function kategorijaKljuc(kat: string): string {
-  const map: Record<string, string> = {
-    "Hrana": "Hrana",
-    "Usluge": "Usluge",
-    "Zanati": "Zanati",
-    "Elektronika": "Elektronika",
-    "Odeća": "Odeca",
-    "Ostalo": "Ostalo",
-  };
-  return map[kat] ?? "Ostalo";
-}
+import { KATEGORIJE, kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
 
 interface Listing {
   id: string;
@@ -44,21 +30,42 @@ interface Listing {
 interface Props {
   listings: Listing[];
   isVerified: boolean;
+  // Predizabrane kategorije iz URL-a (?kat=slug1,slug2) — validirane na serveru.
+  initialKat?: string[];
+  // Kategorije koje ulogovani korisnik prati (za čip „Samo praćene").
+  pracene?: string[];
 }
 
-export default function PijacaKlijent({ listings, isVerified }: Props) {
+export default function PijacaKlijent({ listings, isVerified, initialKat = [], pracene = [] }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
-  const [filterKat, setFilterKat] = useState("Sve");
+  const [selektovaneKat, setSelektovaneKat] = useState<string[]>(initialKat);
   const [pretraga, setPretraga] = useState("");
   const [sort, setSort] = useState("novo");
   const [minCena, setMinCena] = useState("");
   const [maxCena, setMaxCena] = useState("");
   const [showCena, setShowCena] = useState(false);
-  const [showKat, setShowKat] = useState(false);
   const [showSort, setShowSort] = useState(false);
   const [kontaktLoadingId, setKontaktLoadingId] = useState<string | null>(null);
+
+  // Stanje filtera živi u URL-u (?kat=slug1,slug2) — link je deljiv, a SSR
+  // otvara stranicu sa predizabranim čipovima. replaceState ne okida novu
+  // server navigaciju (filtriranje je ionako klijentsko).
+  const azurirajKategorije = useCallback((next: string[]) => {
+    setSelektovaneKat(next);
+    const params = new URLSearchParams(window.location.search);
+    if (next.length > 0) params.set("kat", next.join(","));
+    else params.delete("kat");
+    const qs = params.toString();
+    window.history.replaceState(null, "", qs ? `${window.location.pathname}?${qs}` : window.location.pathname);
+  }, []);
+
+  // „Samo praćene" je aktivno kad je izbor identičan skupu praćenih kategorija.
+  const samoPraceneAktivno =
+    pracene.length > 0 &&
+    selektovaneKat.length === pracene.length &&
+    pracene.every((k) => selektovaneKat.includes(k));
 
   // Filtriranje + sortiranje se računa SAMO kad se promene ulazi — ne na svaki
   // render (npr. otvaranje dropdown-a `showKat`/`showCena` ili kontakt-loading
@@ -68,12 +75,23 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
   const brojPotraznja = useMemo(() => listings.filter((l) => l.tip === "POTRAZNJA").length, [listings]);
   const jePotraznja = tipPrikaza === "POTRAZNJA";
 
+  // Brojači po kategoriji za čipove — aktivni oglasi tekućeg taba (Ponude/Potražnja).
+  const brojaciKat = useMemo(() => {
+    const brojaci: Record<string, number> = Object.fromEntries(KATEGORIJE.map((k) => [k, 0]));
+    for (const l of listings) {
+      if (jePotraznja ? l.tip !== "POTRAZNJA" : l.tip === "POTRAZNJA") continue;
+      brojaci[l.category] = (brojaci[l.category] ?? 0) + 1;
+    }
+    return brojaci;
+  }, [listings, jePotraznja]);
+
   const filtrirani = useMemo(() => {
     return listings
       .filter((l) => {
         // Kod potražnje oglasi imaju tip POTRAZNJA; ponude su sve ostalo (uklj. legacy bez tip-a).
         if (jePotraznja ? l.tip !== "POTRAZNJA" : l.tip === "POTRAZNJA") return false;
-        if (filterKat !== "Sve" && l.category !== filterKat) return false;
+        // Multi-select kategorije, OR logika: prazan izbor = sve kategorije.
+        if (selektovaneKat.length > 0 && !selektovaneKat.includes(l.category)) return false;
         if (pretraga && !l.title.toLowerCase().includes(pretraga.toLowerCase())) return false;
         // „Po dogovoru" (price = null) ne ulazi u numerički filter cene.
         if (minCena && (l.price == null || l.price < Number(minCena))) return false;
@@ -86,7 +104,7 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         if (sort === "skupo") return (b.price ?? -Infinity) - (a.price ?? -Infinity);
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
-  }, [listings, jePotraznja, filterKat, pretraga, sort, minCena, maxCena]);
+  }, [listings, jePotraznja, selektovaneKat, pretraga, sort, minCena, maxCena]);
 
   // Razmenu članovi dogovaraju međusobno (obligaciono pravo); Protokol ne posreduje.
   // Pijaca samo povezuje kupca i prodavca — otvara 1-na-1 razgovor.
@@ -142,50 +160,30 @@ export default function PijacaKlijent({ listings, isVerified }: Props) {
         ))}
       </div>
 
-      {/* Filteri: levo padajuci meniji (kategorija + sortiranje), desno pretraga (pola sirine) */}
+      {/* Čip filter kategorija — ispod tabova Ponude/Potražnja, iznad grida.
+          Multi-select sa OR logikom; stanje u URL-u (?kat=). Bez padajućeg menija. */}
+      <CategoryChips
+        mode="multi"
+        selected={selektovaneKat}
+        onChange={azurirajKategorije}
+        counts={brojaciKat}
+        leadingChip={
+          pracene.length > 0
+            ? {
+                label: t("samo_pracene"),
+                active: samoPraceneAktivno,
+                onClick: () => azurirajKategorije(samoPraceneAktivno ? [] : [...pracene]),
+              }
+            : undefined
+        }
+      />
+
+      {/* Filteri: levo padajuci meniji (cena + sortiranje), desno pretraga (pola sirine) */}
       <div className="space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           {/* LEVO — padajuci meniji */}
           <div className="flex gap-2 flex-wrap items-center">
-            {/* Kategorija — dropdown (isti dizajn kao Cena) */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setShowKat((v) => !v)}
-                className={`px-3 py-2 rounded-xl border bg-white text-sm transition-colors ${
-                  filterKat !== "Sve"
-                    ? "border-kolo-green-700 text-kolo-green-900 font-medium"
-                    : "border-kolo-border text-kolo-text hover:border-kolo-green-700"
-                }`}
-              >
-                {filterKat === "Sve" ? t("sve_kategorije") : t(`kategorija_${kategorijaKljuc(filterKat)}`)}
-              </button>
-              {showKat && (
-                <div className="absolute z-20 left-0 mt-1 min-w-[10rem] bg-white rounded-xl border border-kolo-border shadow-lg p-1">
-                  <button
-                    onClick={() => { setFilterKat("Sve"); setShowKat(false); }}
-                    className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                      filterKat === "Sve" ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
-                    }`}
-                  >
-                    {t("sve_kategorije")}
-                  </button>
-                  {KATEGORIJE_VREDNOSTI.map((kat) => (
-                    <button
-                      key={kat}
-                      onClick={() => { setFilterKat(kat); setShowKat(false); }}
-                      className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${
-                        filterKat === kat ? "bg-kolo-green-100 text-kolo-green-900 font-medium" : "text-kolo-text hover:bg-kolo-bg"
-                      }`}
-                    >
-                      {t(`kategorija_${kategorijaKljuc(kat)}`)}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Cena — dropdown sa min/max (u sredini). Kod potražnje nema iznosa, pa se sakriva. */}
+            {/* Cena — dropdown sa min/max. Kod potražnje nema iznosa, pa se sakriva. */}
             {!jePotraznja && (
             <div className="relative">
               <button
@@ -422,10 +420,3 @@ const OglasKartica = memo(function OglasKartica({
     </div>
   );
 });
-
-function kategorijaEmoji(kat: string) {
-  const map: Record<string, string> = {
-    Hrana: "🥗", Usluge: "🤝", Zanati: "🔧", Elektronika: "💻", Odeća: "👕", Ostalo: "📦",
-  };
-  return map[kat] ?? "📦";
-}

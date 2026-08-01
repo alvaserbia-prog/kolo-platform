@@ -10,12 +10,13 @@ export default async function ProfilPage() {
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
-    include: { wallet: true, podaci: true },
+    include: { wallet: true, podaci: true, praceneKategorije: { select: { category: true } } },
   });
   if (!user) redirect("/login");
 
   return (
     <ProfilKlijent
+      praceneKategorije={user.praceneKategorije.map((p) => p.category)}
       user={{
         id: user.id,
         pseudonim: user.pseudonim,
