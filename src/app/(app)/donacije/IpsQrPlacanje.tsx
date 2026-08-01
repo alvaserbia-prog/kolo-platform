@@ -81,16 +81,6 @@ export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
 
   if (!info) return null; // tih dok se učitava info
 
-  // Račun još nije otvoren/podešen → napomena, bez forme.
-  if (!info.konfigurisan) {
-    return (
-      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-2">
-        <p className="text-sm font-semibold text-kolo-text">{t("ips_naslov")}</p>
-        <p className="text-xs text-kolo-muted">{t("ips_uskoro")}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-4">
       <div>
@@ -116,13 +106,17 @@ export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
             </div>
             <button
               onClick={generisi}
-              disabled={loading}
+              disabled={loading || !info.konfigurisan}
               className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50"
             >
               {loading ? t("ips_generisem") : t("ips_generisi")}
             </button>
           </div>
-          {info.maxRSD && (
+          {/* Račun još nije otvoren/podešen → forma je pripremljena, dugme neaktivno. */}
+          {!info.konfigurisan && (
+            <p className="text-xs text-kolo-gold-600">{t("ips_uskoro")}</p>
+          )}
+          {info.konfigurisan && info.maxRSD && (
             <p className="text-xs text-kolo-muted">
               {t("ips_limit", { max: info.maxRSD.toLocaleString("sr-RS") })}
             </p>
