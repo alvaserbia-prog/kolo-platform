@@ -6,8 +6,8 @@ import { KATEGORIJE, kategorijaKljuc } from "@/lib/kategorije";
 // Čipovi kategorija Pijace — jedna komponenta, dva moda:
 //  - "multi"  → višestruki izbor (filter na Pijaci, praćene kategorije u profilu)
 //  - "single" → radio ponašanje (forma za objavu oglasa)
-// Svih 13 kategorija je stalno vidljivo u flex-wrap rasporedu; nema padajućih
-// menija ni akordeona. Ceo čip je tap zona (min. 44px visine).
+// Svih 13 kategorija je stalno vidljivo u flex-wrap rasporedu. Veličina čipa
+// prati dugmad prekidača Ponude|Potražnja (px-4 py-1.5, zahtev vlasnika).
 // `counts` (samo filter): prikazuje broj u čipu; kategorija sa 0 oglasa je
 // prigušena, ali i dalje klikabilna.
 
@@ -41,13 +41,13 @@ export default function CategoryChips({ mode, selected, onChange, counts, leadin
   }
 
   return (
-    <div className="flex flex-wrap gap-2" role={mode === "single" ? "radiogroup" : "group"}>
+    <div className="flex flex-wrap gap-1.5" role={mode === "single" ? "radiogroup" : "group"}>
       {leadingChip && (
         <button
           type="button"
           onClick={leadingChip.onClick}
           aria-pressed={leadingChip.active}
-          className={`min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
             leadingChip.active
               ? "bg-kolo-green-700 text-white"
               : "bg-white border border-kolo-gold-600/40 text-kolo-gold-600 hover:border-kolo-gold-600"
@@ -68,7 +68,7 @@ export default function CategoryChips({ mode, selected, onChange, counts, leadin
             role={mode === "single" ? "radio" : undefined}
             aria-checked={mode === "single" ? aktivna : undefined}
             aria-pressed={mode === "multi" ? aktivna : undefined}
-            className={`min-h-[44px] px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               aktivna
                 ? "bg-kolo-green-700 text-white"
                 : `bg-white border border-kolo-border text-kolo-text hover:border-kolo-green-700 ${
