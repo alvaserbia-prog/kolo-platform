@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient, WalletType, TipKorisnika, AdminNivo, TransactionType } from "../src/generated/prisma/client";
+import { PrismaClient, WalletType, TipKorisnika, AdminNivo, TransactionType, ProgramType } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
@@ -28,6 +28,15 @@ async function main() {
     create: { id: BANKA_ID, type: WalletType.PROTOKOL, balance: 0 },
   });
   console.log("✓ Banka (Protokol) wallet");
+
+  // Operativni doprinos (PED) je aktivan od starta — noćna emisija i kartica
+  // na /programi čitaju ovaj red (socijalni programi se aktiviraju odlukom UO).
+  await prisma.protokolProgram.upsert({
+    where: { type: ProgramType.PED },
+    update: { isActive: true },
+    create: { type: ProgramType.PED, isActive: true, activatedAt: new Date() },
+  });
+  console.log("✓ Program PED (operativni doprinos) aktivan");
 
   // Stari admin@ekolo.rs se uklanja. Pristanci i wallet idu prvi (FK bez cascade).
   const stariAdmin = await prisma.user.findUnique({ where: { email: "admin@ekolo.rs" } });
