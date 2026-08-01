@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { danObracuna, prethodniDan } from "./obracunski-dan";
 import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 export const UKUPNO_ZRNA = 1_000_000;
@@ -43,8 +44,13 @@ export async function poslednjiKurs(): Promise<number> {
 // ── Noćna obrada ZRNO operacija ───────────────────────────────────────────────
 
 export async function izvrsiZrnoOperacije(datum: Date) {
-  const danas = new Date(datum);
-  danas.setHours(0, 0, 0, 0);
+  // Obračunski dan po srpskom vremenu koji ovaj prolaz OTVARA (kurs/brava dana).
+  const danas = danObracuna(datum);
+  // Zahtevi se izvršavaju „u ponoć istog obračunskog perioda": prolaz na ponoći
+  // obrađuje zahteve podnete zaključno sa danom koji se upravo završio. `lte`
+  // (umesto tačnog datuma) pokupi i starije PENDING zahteve koje je raniji
+  // raspored crona (00:00 UTC — već „sutrašnji" dan) preskakao po datumu.
+  const doDana = prethodniDan(danas);
 
   // 1. Izračunaj kurs za danas
   const protokol = await prisma.wallet.findUnique({
@@ -80,7 +86,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
   // 2. Obradi upise
   const upisi = await prisma.zrnoUpisZahtev.findMany({
-    where: { date: danas, status: "PENDING" },
+    where: { date: { lte: doDana }, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
 
@@ -154,7 +160,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
   // 3. Obradi otpise
   const otpisi = await prisma.zrnoOtpisZahtev.findMany({
-    where: { date: danas, status: "PENDING" },
+    where: { date: { lte: doDana }, status: "PENDING" },
     include: { user: { include: { wallet: true, zrnoStanje: true } } },
   });
 
@@ -209,7 +215,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
   // 4. Obradi promene statusa
   const statusZahtevi = await prisma.zrnoStatusZahtev.findMany({
-    where: { date: danas, status: "PENDING" },
+    where: { date: { lte: doDana }, status: "PENDING" },
     include: { user: { include: { zrnoStanje: true } } },
   });
 

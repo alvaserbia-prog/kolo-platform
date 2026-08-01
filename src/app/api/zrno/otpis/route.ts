@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 
 // POST /api/zrno/otpis — rezervacija otpisa ZRNA (izvršava se u ponoć)
 export async function POST(req: NextRequest) {
@@ -24,8 +25,7 @@ export async function POST(req: NextRequest) {
   if (kolicina > stanje.slobodno)
     return NextResponse.json({ error: `Imate ${stanje.slobodno} slobodnih ZRNA.` }, { status: 400 });
 
-  const danas = new Date();
-  danas.setHours(0, 0, 0, 0);
+  const danas = beogradskiDan();
 
   const vec = await prisma.zrnoOtpisZahtev.findUnique({
     where: { userId_date: { userId: session.user.id, date: danas } },

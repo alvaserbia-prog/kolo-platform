@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 import { fazaPredloga, zatvoriIstekleIObjaviIshod } from "@/lib/protokol/glasanje";
 import ZrnoKlijent from "./ZrnoKlijent";
 
@@ -10,8 +11,7 @@ export default async function ZrnoPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
-  const danas = new Date();
-  danas.setHours(0, 0, 0, 0);
+  const danas = beogradskiDan();
   const now = new Date();
 
   // Zatvori istekle predloge i utvrdi ishod pre čitanja (čl. 13)
