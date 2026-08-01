@@ -1714,7 +1714,6 @@
     "zatvoren": "Zatvoren",
     "obrazlozenje_label": "Obrazloženje predloženog POEN-a",
     "predlozeni_tezina": "maksimalno POEN-a",
-    "formula_napomena": "Predloženi POEN nije garantovan iznos. Evidentirani POEN = predloženi × min(1, L/P), gde je L dnevni limit (10% opticaja), a P zbir predloženih POEN-a svih potvrđenih izvršenja u periodu (čl. 22–24).",
     "rok_za_prijavu": "Rok za prijavu",
     "status_primljen_izvršilac": "Primljeni ste kao izvršilac. Možete evidentirati dnevna izvršenja.",
     "status_prijava_ceka": "Prijava je podneta i čeka odobrenje plana izvršenja od verifikatora.",

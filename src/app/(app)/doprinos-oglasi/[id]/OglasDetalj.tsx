@@ -138,10 +138,6 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
           </div>
         </div>
 
-        <p className="text-xs text-kolo-muted leading-relaxed">
-          {t("formula_napomena")}
-        </p>
-
         {oglas.deadline && (
           <p className="text-xs text-kolo-muted">
             {t("rok_za_prijavu")}: <strong className="text-kolo-muted">{new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</strong>

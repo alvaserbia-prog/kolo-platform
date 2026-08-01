@@ -1695,7 +1695,6 @@
     "zatvoren": "Closed",
     "obrazlozenje_label": "Justification for proposed POEN",
     "predlozeni_tezina": "maximum POEN",
-    "formula_napomena": "The proposed POEN is not a guaranteed amount. Recorded POEN = proposed × min(1, L/P), where L is the daily limit (10% of circulation) and P is the sum of proposed POEN of all confirmed completions in the period (art. 22–24).",
     "rok_za_prijavu": "Application deadline",
     "status_primljen_izvršilac": "You have been accepted as a contributor. You may record daily completions.",
     "status_prijava_ceka": "Your application has been submitted and is awaiting plan approval from a verifier.",
