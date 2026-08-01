@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 /**
@@ -51,7 +51,9 @@ export async function POST(
       { status: 403 }
     );
   }
-  if (session.user.id === ev.oglas.createdById) {
+  // Izuzetak od predlagačke zabrane: superadmin sme da odlučuje i na svom zadatku
+  // (vidi evidencija/[id]/odobri/route.ts); sopstveno izvršenje ne može ni on.
+  if (!jeSuperadmin(session.user) && session.user.id === ev.oglas.createdById) {
     return NextResponse.json(
       { error: "Predlagač zadatka ne može odlučivati o izvršenju na svom zadatku." },
       { status: 403 }
