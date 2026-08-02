@@ -755,7 +755,7 @@
     "naslov": "Donacije Fondaciji",
     "beta_naslov": "Tekući račun Fondacije biće uskoro otvoren",
     "beta_opis": "Sve informacije ispod su pripremljene i biće aktivne čim se otvori račun.",
-    "objasnjenje": "Donirajte dinare Fondaciji bankovnom uplatnicom i dobijte POENE prema vašem rangu donacija. Viši rang znači povoljniji koeficijent evidencije.",
+    "objasnjenje": "Donirajte dinare Fondaciji bankovnom uplatnicom i dobijte POENE prema vašem rangu donacija.",
     "vas_rang": "Vaš rang donacija",
     "nivo": "Nivo {n}",
     "kumulativ": "Kumulativ:",
@@ -816,7 +816,8 @@
     "ips_novi": "Nova IPS uplata",
     "model": "Model:",
     "poziv_na_broj": "Poziv na broj:",
-    "vas_broj_opis": "Ovo je vaš trajni broj za uplate (model 97). Navedite ga uz svaku uplatu — po njemu se uplata prepoznaje kao vaša i POEN se upisuje vama. Banka odbija pogrešno ukucan broj, pa uplata ne može da ode pogrešnom članu."
+    "vas_broj_opis": "Ovo je vaš trajni broj za uplate (model 97). Navedite ga uz svaku uplatu — po njemu se uplata prepoznaje kao vaša i POEN se upisuje vama. Banka odbija pogrešno ukucan broj, pa uplata ne može da ode pogrešnom članu.",
+    "rang_pojasnjenje": "Viši rang znači povoljniji koeficijent evidencije."
   },
   "poruke": {
     "naslov": "Poruke",

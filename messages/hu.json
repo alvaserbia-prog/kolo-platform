@@ -737,7 +737,7 @@
     "naslov": "Adományok az Alapítványnak",
     "beta_naslov": "Az Alapítvány bankszámlája hamarosan megnyílik",
     "beta_opis": "Az alábbi információk előkészítve vannak, és a számla megnyitásával azonnal aktívvá válnak.",
-    "objasnjenje": "Adományozzon dinárt az Alapítványnak banki átutalással és kapjon POEN-t az adományozási rangja szerint. Magasabb rang kedvezőbb árfolyamot jelent.",
+    "objasnjenje": "Adományozzon dinárt az Alapítványnak banki átutalással és kapjon POEN-t az adományozási rangja szerint.",
     "vas_rang": "Az Ön adományozási rangja",
     "nivo": "{n}. szint",
     "kumulativ": "Kumulatív:",
@@ -798,7 +798,8 @@
     "ips_novi": "Új IPS befizetés",
     "model": "Modell:",
     "poziv_na_broj": "Hivatkozási szám:",
-    "vas_broj_opis": "Ez az Ön állandó befizetési hivatkozási száma (97-es modell). Minden befizetésnél adja meg — ez alapján azonosítjuk a befizetést, és a POEN Önnek kerül jóváírásra. A bank a hibásan beírt számot elutasítja, így a befizetés nem kerülhet rossz taghoz."
+    "vas_broj_opis": "Ez az Ön állandó befizetési hivatkozási száma (97-es modell). Minden befizetésnél adja meg — ez alapján azonosítjuk a befizetést, és a POEN Önnek kerül jóváírásra. A bank a hibásan beírt számot elutasítja, így a befizetés nem kerülhet rossz taghoz.",
+    "rang_pojasnjenje": "Magasabb rang kedvezőbb árfolyamot jelent."
   },
   "poruke": {
     "naslov": "Üzenetek",

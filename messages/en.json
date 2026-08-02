@@ -755,7 +755,7 @@
     "naslov": "Donations to Foundation",
     "beta_naslov": "The Foundation's bank account will be opened soon",
     "beta_opis": "All information below is prepared and will become active as soon as the account is opened.",
-    "objasnjenje": "Donate dinars to the Foundation via bank transfer and receive POEN according to your donation rank. A higher rank means a better rate.",
+    "objasnjenje": "Donate dinars to the Foundation via bank transfer and receive POEN according to your donation rank.",
     "vas_rang": "Your donation rank",
     "nivo": "Level {n}",
     "kumulativ": "Cumulative:",
@@ -816,7 +816,8 @@
     "ips_novi": "New IPS payment",
     "model": "Model:",
     "poziv_na_broj": "Reference number:",
-    "vas_broj_opis": "This is your permanent payment reference (model 97). Include it with every payment — it identifies the payment as yours and POEN is credited to you. The bank rejects a mistyped number, so a payment cannot go to the wrong member."
+    "vas_broj_opis": "This is your permanent payment reference (model 97). Include it with every payment — it identifies the payment as yours and POEN is credited to you. The bank rejects a mistyped number, so a payment cannot go to the wrong member.",
+    "rang_pojasnjenje": "A higher rank means a better rate."
   },
   "poruke": {
     "naslov": "Messages",
