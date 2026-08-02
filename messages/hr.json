@@ -600,7 +600,7 @@
     "kurs": "Koeficijent",
     "kurs_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Glasačka moć: floor(√{aktivno}) = {moc} glasova",
-    "trziste_neaktivno": "ZRNO tržište još nije aktivno. Aktivira se kada Protokol dostigne −1.000.000 POEN.",
+    "trziste_neaktivno": "ZRNO još nije aktivno. Aktivira se kada Protokol dostigne −1.000.000 POEN.",
     "tab_pregled": "Pregled",
     "tab_trziste": "Tržište",
     "tab_delegacija": "Delegacija",

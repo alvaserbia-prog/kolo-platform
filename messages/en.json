@@ -600,7 +600,7 @@
     "kurs": "Rate",
     "kurs_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Voting power: floor(√{aktivno}) = {moc} votes",
-    "trziste_neaktivno": "ZRNO market is not yet active. Activates when the Protocol reaches −1,000,000 POEN.",
+    "trziste_neaktivno": "ZRNO is not yet active. Activates when the Protocol reaches −1,000,000 POEN.",
     "tab_pregled": "Overview",
     "tab_trziste": "Market",
     "tab_delegacija": "Delegation",

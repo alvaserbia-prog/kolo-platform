@@ -582,7 +582,7 @@
     "kurs": "Árfolyam",
     "kurs_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Szavazati erő: floor(√{aktivno}) = {moc} szavazat",
-    "trziste_neaktivno": "A ZRNO piac még nem aktív. Aktiválódik, amikor a Protokoll eléri a −1 000 000 POEN-t.",
+    "trziste_neaktivno": "A ZRNO még nem aktív. Aktiválódik, amikor a Protokoll eléri a −1 000 000 POEN-t.",
     "tab_pregled": "Áttekintés",
     "tab_trziste": "Piac",
     "tab_delegacija": "Delegálás",
