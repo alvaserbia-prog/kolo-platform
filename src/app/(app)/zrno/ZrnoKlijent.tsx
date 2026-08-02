@@ -74,25 +74,25 @@ export default function ZrnoKlijent(props: Props) {
       <PageOpis>{t("opis")}</PageOpis>
 
       {/* Stanje */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("slobodno")}</p>
-          <p className="text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString("sr-RS")}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("slobodno_opis")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("aktivno")}</p>
-          <p className="text-xl font-bold text-kolo-gold-600">{props.aktivno.toLocaleString("sr-RS")}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-gold-600">{props.aktivno.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("aktivno_opis")}</p>
         </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">
             <Pojam
               termin={t("kurs")}
               objasnjenje="Odnos ukupnih POEN-a i raspoloživih ZRNA — pokazuje koliko ti je POEN-a potrebno da upišeš jedno ZRNO. Nije cena i nije kurs."
             />
           </p>
-          <p className="text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("kurs_opis")}</p>
         </div>
       </div>
