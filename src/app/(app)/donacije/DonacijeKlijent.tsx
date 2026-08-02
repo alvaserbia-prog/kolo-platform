@@ -158,34 +158,6 @@ export default function DonacijeKlijent() {
         <p className="text-sm text-kolo-muted">{t("objasnjenje")}</p>
       </div>
 
-      {/* Rang */}
-      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm font-semibold text-kolo-text">{t("vas_rang")}</p>
-            <p className="text-3xl font-bold text-kolo-green-700 mt-1">{t("nivo", { n: data.trenutniNivo })}</p>
-            <p className="text-xs text-kolo-muted mt-0.5">
-              {t("kumulativ")} {data.kumulativRSD.toLocaleString("sr-RS")} RSD
-            </p>
-          </div>
-          <div className="text-right">
-            <p className="text-xs text-kolo-muted">{t("trenutni_kurs")}</p>
-            <p className="text-2xl font-bold text-kolo-gold-600">{data.trenutniKurs.toFixed(2)}</p>
-            <p className="text-xs text-kolo-muted">{t("kurs_opis")}</p>
-          </div>
-        </div>
-        {sledeci && (
-          <div className="mt-4 pt-4 border-t border-kolo-border">
-            <p className="text-xs text-kolo-muted">
-              {t("do_nivoa", { n: sledeci.nivo, kurs: sledeci.kurs.toFixed(2) })}{" "}
-              <span className="font-semibold text-kolo-text">
-                {(sledeci.do - data.kumulativRSD).toLocaleString("sr-RS")} RSD
-              </span>
-            </p>
-          </div>
-        )}
-      </div>
-
       {/* Vrsta donacije — javna (POEN, ime javno) ili anonimna (bez POEN); važi za IPS i karticu */}
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 space-y-2">
         <p className="text-sm font-semibold text-kolo-text">{t("vidljivost_naslov")}</p>
@@ -281,6 +253,35 @@ export default function DonacijeKlijent() {
           >
             {kopirano ? t("kopirano") : t("kopiraj_btn")}
           </button>
+        </div>
+      </div>
+
+      {/* Rang */}
+      <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-semibold text-kolo-text">{t("vas_rang")}</p>
+            <p className="text-3xl font-bold text-kolo-green-700 mt-1">{t("nivo", { n: data.trenutniNivo })}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">
+              {t("kumulativ")} {data.kumulativRSD.toLocaleString("sr-RS")} RSD
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs text-kolo-muted">{t("trenutni_kurs")}</p>
+            <p className="text-2xl font-bold text-kolo-gold-600">{data.trenutniKurs.toFixed(2)}</p>
+            <p className="text-xs text-kolo-muted">{t("kurs_opis")}</p>
+          </div>
+        </div>
+        <div className="mt-4 pt-4 border-t border-kolo-border space-y-1">
+          <p className="text-xs text-kolo-muted">{t("rang_pojasnjenje")}</p>
+          {sledeci && (
+            <p className="text-xs text-kolo-muted">
+              {t("do_nivoa", { n: sledeci.nivo, kurs: sledeci.kurs.toFixed(2) })}{" "}
+              <span className="font-semibold text-kolo-text">
+                {(sledeci.do - data.kumulativRSD).toLocaleString("sr-RS")} RSD
+              </span>
+            </p>
+          )}
         </div>
       </div>
 
