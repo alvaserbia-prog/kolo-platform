@@ -19,7 +19,68 @@ interface DnevnikRed {
   createdAt: string;
 }
 
-const TAKE = 100;
+const TAKE = 200;
+
+// Pauza duža od 30 min između dva klika istog korisnika = nova sesija.
+const SESIJA_PAUZA_MS = 30 * 60 * 1000;
+
+interface Sesija {
+  key: string;
+  userId: string;
+  pseudonim: string;
+  pocetak: string; // najstariji zapis u sesiji
+  kraj: string; // najnoviji zapis u sesiji
+  stavke: DnevnikRed[]; // hronološki (od najstarije)
+}
+
+/**
+ * Grupisanje zapisa (stigli sortirani od najnovijeg) u sesije po korisniku:
+ * uzastopni zapisi istog korisnika sa razmakom < 30 min čine jednu sesiju.
+ * Rezultat je sortiran po kraju sesije (najskorija prva).
+ */
+function grupisiUSesije(logs: DnevnikRed[]): Sesija[] {
+  const poKorisniku = new Map<string, DnevnikRed[]>();
+  for (const l of logs) {
+    const niz = poKorisniku.get(l.userId);
+    if (niz) niz.push(l);
+    else poKorisniku.set(l.userId, [l]);
+  }
+
+  const sesije: Sesija[] = [];
+  for (const stavke of poKorisniku.values()) {
+    // stavke su od najnovije ka najstarijoj (redosled iz API-ja očuvan)
+    let tekuca: DnevnikRed[] = [];
+    const zatvori = () => {
+      if (tekuca.length === 0) return;
+      const najnovija = tekuca[0];
+      const najstarija = tekuca[tekuca.length - 1];
+      sesije.push({
+        key: `${najnovija.userId}-${najnovija.createdAt}`,
+        userId: najnovija.userId,
+        pseudonim: najnovija.pseudonim,
+        pocetak: najstarija.createdAt,
+        kraj: najnovija.createdAt,
+        stavke: [...tekuca].reverse(),
+      });
+    };
+    for (const s of stavke) {
+      if (tekuca.length > 0) {
+        const prethodna = tekuca[tekuca.length - 1];
+        const razmak =
+          new Date(prethodna.createdAt).getTime() - new Date(s.createdAt).getTime();
+        if (razmak > SESIJA_PAUZA_MS) {
+          zatvori();
+          tekuca = [];
+        }
+      }
+      tekuca.push(s);
+    }
+    zatvori();
+  }
+
+  sesije.sort((a, b) => new Date(b.kraj).getTime() - new Date(a.kraj).getTime());
+  return sesije;
+}
 
 function formatVreme(iso: string | null) {
   if (!iso) return "—";
@@ -27,6 +88,13 @@ function formatVreme(iso: string | null) {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+function formatSat(iso: string) {
+  return new Date(iso).toLocaleTimeString("sr-RS", {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -42,6 +110,7 @@ export default function AktivnostTab() {
   const [view, setView] = useState<"pregled" | "dnevnik">("pregled");
   const [pregled, setPregled] = useState<PregledRed[] | null>(null);
   const [dnevnik, setDnevnik] = useState<DnevnikRed[]>([]);
+  const [otvorene, setOtvorene] = useState<Set<string>>(new Set());
   const [imaJos, setImaJos] = useState(false);
   const [q, setQ] = useState("");
   const [aktivanQ, setAktivanQ] = useState("");
@@ -76,6 +145,7 @@ export default function AktivnostTab() {
         const data = await res.json();
         const novi: DnevnikRed[] = data.dnevnik;
         setDnevnik((prev) => (pre ? [...prev, ...novi] : novi));
+        if (!pre) setOtvorene(new Set());
         setImaJos(novi.length === TAKE);
       } catch {
         setGreska(true);
@@ -199,32 +269,65 @@ export default function AktivnostTab() {
                 {loading ? "…" : t("aktivnost_nema")}
               </p>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-left text-xs text-kolo-muted border-b border-kolo-border">
-                      <th className="px-4 py-2.5 font-medium">{t("aktivnost_kolona_vreme")}</th>
-                      <th className="px-4 py-2.5 font-medium">{t("aktivnost_kolona_korisnik")}</th>
-                      <th className="px-4 py-2.5 font-medium">{t("aktivnost_kolona_stranica")}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {dnevnik.map((r) => (
-                      <tr key={r.id} className="border-b border-kolo-border last:border-0">
-                        <td className="px-4 py-2.5 text-kolo-muted whitespace-nowrap">
-                          {formatVreme(r.createdAt)}
-                        </td>
-                        <td className="px-4 py-2.5">
-                          <Pseudonim>{r.pseudonim}</Pseudonim>
-                        </td>
-                        <td className="px-4 py-2.5 font-mono text-xs text-kolo-text break-all">
-                          {r.putanja}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              grupisiUSesije(dnevnik).map((s, i, sve) => {
+                const otvorena = otvorene.has(s.key);
+                const istiDan =
+                  new Date(s.pocetak).toDateString() === new Date(s.kraj).toDateString();
+                return (
+                  <div
+                    key={s.key}
+                    className={i < sve.length - 1 ? "border-b border-kolo-border" : ""}
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setOtvorene((prev) => {
+                          const nove = new Set(prev);
+                          if (nove.has(s.key)) nove.delete(s.key);
+                          else nove.add(s.key);
+                          return nove;
+                        })
+                      }
+                      className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-kolo-bg transition-colors"
+                    >
+                      <div className="min-w-0 flex items-center gap-2 flex-wrap">
+                        <span
+                          className={`text-kolo-muted text-xs transition-transform ${otvorena ? "rotate-90" : ""}`}
+                        >
+                          ›
+                        </span>
+                        <Pseudonim>{s.pseudonim}</Pseudonim>
+                        <span className="text-xs text-kolo-muted">
+                          {t("aktivnost_sesija_stranica", { count: s.stavke.length })}
+                        </span>
+                      </div>
+                      <span className="text-xs text-kolo-muted shrink-0">
+                        {formatVreme(s.pocetak)}
+                        {s.stavke.length > 1 && (
+                          <> – {istiDan ? formatSat(s.kraj) : formatVreme(s.kraj)}</>
+                        )}
+                      </span>
+                    </button>
+                    {otvorena && (
+                      <div className="px-4 pb-3 pl-10">
+                        {s.stavke.map((r) => (
+                          <div
+                            key={r.id}
+                            className="flex items-baseline gap-3 py-1 border-l-2 border-kolo-border pl-3"
+                          >
+                            <span className="text-xs text-kolo-muted shrink-0 tabular-nums">
+                              {formatSat(r.createdAt)}
+                            </span>
+                            <span className="font-mono text-xs text-kolo-text break-all">
+                              {r.putanja}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })
             )}
           </div>
 
