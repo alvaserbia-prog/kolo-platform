@@ -266,6 +266,7 @@ model User {
   kreiraniPredlozi       GlasanjePredlog[]
   glasovi                GlasanjeGlas[]
   auditLogs              AuditLog[]                 @relation("AdminActions")
+  aktivnosti             AktivnostLog[]
   notifikacije           Notifikacija[]
   pushPretplate          PushPretplata[]
   konverzacije1          Konverzacija[]             @relation("KonvUser1")
@@ -735,6 +736,21 @@ model AuditLog {
   detalji   String?
   createdAt DateTime @default(now())
 
+  @@index([createdAt(sort: Desc)])
+}
+
+// Dnevnik aktivnosti prijavljenih korisnika: koja stranica je otvorena i kada.
+// Beleži se SAMO za prijavljene korisnike (gosti nikad); ponovna poseta iste
+// stranice unutar 5 min se ne duplira. Retencija 12 meseci (GDPR cron —
+// „tehnički logovi", Politika čl. 10). Vidljivo isključivo superadminu.
+model AktivnostLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  putanja   String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt(sort: Desc)])
   @@index([createdAt(sort: Desc)])
 }
 
