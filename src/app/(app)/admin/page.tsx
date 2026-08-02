@@ -20,12 +20,12 @@ export default async function AdminPage({
   if (!session || !jeAdmin(session.user)) redirect("/dashboard");
   const viewerJeSuperadmin = jeSuperadmin(session.user);
 
-  // Tab iz URL-a (?tab=...) — back navigacija vraća na isti tab. Audit i
-  // Nadzor su rezervisani za superadmina, pa se za ostale ignorišu.
+  // Tab iz URL-a (?tab=...) — back navigacija vraća na isti tab. Audit,
+  // Aktivnost i Nadzor su rezervisani za superadmina, pa se za ostale ignorišu.
   const { tab } = await searchParams;
   const pocetniTab: Tab =
     (ADMIN_TABOVI as readonly string[]).includes(tab ?? "") &&
-    (viewerJeSuperadmin || (tab !== "audit" && tab !== "nadzor"))
+    (viewerJeSuperadmin || (tab !== "audit" && tab !== "nadzor" && tab !== "aktivnost"))
       ? (tab as Tab)
       : "dashboard";
 
