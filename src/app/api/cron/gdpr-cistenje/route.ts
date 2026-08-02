@@ -9,6 +9,9 @@ import { prisma } from "@/lib/prisma";
  * Briše poruke u konverzacijama u kojima je poslednja poruka starija od
  * 24 meseca (i obe strane su deaktivirane ili konverzacija je neaktivna).
  * Ako je JEDNA strana i dalje aktivna, poruke se čuvaju dok ona ne deaktivira nalog.
+ *
+ * Briše i zapise dnevnika aktivnosti (AktivnostLog) starije od 12 meseci —
+ * rok za tehničke logove po Politici čl. 10.
  */
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-cron-secret");
@@ -41,10 +44,18 @@ export async function POST(req: NextRequest) {
     obrPoruke = deleted.count;
   }
 
-  console.log(`[GDPR Cron] Poruke obrisane: ${obrPoruke}`);
+  // --- Retencija dnevnika aktivnosti — 12 meseci (tehnički logovi) ---
+  const dvanaestMeseciUnazad = new Date(sada);
+  dvanaestMeseciUnazad.setMonth(dvanaestMeseciUnazad.getMonth() - 12);
+  const obrAktivnosti = await prisma.aktivnostLog.deleteMany({
+    where: { createdAt: { lte: dvanaestMeseciUnazad } },
+  });
+
+  console.log(`[GDPR Cron] Poruke obrisane: ${obrPoruke}, zapisi aktivnosti obrisani: ${obrAktivnosti.count}`);
 
   return NextResponse.json({
     ok: true,
     porukeObrisane: obrPoruke,
+    aktivnostiObrisane: obrAktivnosti.count,
   });
 }

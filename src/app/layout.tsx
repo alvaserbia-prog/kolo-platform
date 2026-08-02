@@ -9,6 +9,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import CirilicaProvider from "@/components/CirilicaProvider";
 import { Analitika } from "@/components/Analitika";
+import { AktivnostTracker } from "@/components/AktivnostTracker";
 import { CookieConsent } from "@/components/CookieConsent";
 import {
   SITE_URL,
@@ -139,7 +140,11 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider messages={clientMessages}>
           <CirilicaProvider />
-          <Providers session={session}>{children}</Providers>
+          <Providers session={session}>
+            {/* Dnevnik aktivnosti — beleži posete stranica prijavljenih korisnika. */}
+            <AktivnostTracker />
+            {children}
+          </Providers>
         </NextIntlClientProvider>
         {/* Vercel Analytics — bez kolačića (cookieless, agregatno), ne zahteva pristanak. */}
         <Analytics />

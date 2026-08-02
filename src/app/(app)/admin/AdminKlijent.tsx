@@ -14,6 +14,7 @@ import Pseudonim from "@/components/Pseudonim";
 const OsnivaciTab = dynamic(() => import("./OsnivaciTab"), { ssr: false });
 const PokroviteljPrijaveTab = dynamic(() => import("./PokroviteljPrijaveTab"), { ssr: false });
 const NadzorTab = dynamic(() => import("./NadzorTab"), { ssr: false });
+const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
 
 interface KorisnikInfo {
   id: string;
@@ -279,6 +280,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ...(viewerJeSuperadmin
       ? ([
           ["audit", t("tab_audit")],
+          ["aktivnost", t("tab_aktivnost")],
           ["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`],
         ] as [Tab, string][])
       : []),
@@ -376,6 +378,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Audit log */}
       {tab === "audit" && <AuditLogTab logs={auditLogs} onRefresh={() => router.refresh()} />}
+
+      {/* Dnevnik aktivnosti korisnika (samo superadmin) */}
+      {tab === "aktivnost" && viewerJeSuperadmin && <AktivnostTab />}
     </div>
   );
 }
