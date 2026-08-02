@@ -311,6 +311,10 @@ export async function DELETE(req: NextRequest) {
     await tx.verifikacijaToken.deleteMany({ where: { korisnikId: userId } });
     await tx.passwordResetToken.deleteMany({ where: { userId } });
 
+    // Obriši dnevnik aktivnosti (poseta stranica) — lični podatak, ne čuva se
+    // posle prestanka statusa (za razliku od numeričke istorije transakcija).
+    await tx.aktivnostLog.deleteMany({ where: { userId } });
+
     // Anonimizuj lične podatke User entiteta
     await tx.user.update({
       where: { id: userId },
