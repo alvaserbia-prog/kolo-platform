@@ -628,7 +628,7 @@
     "otpis_napomena": "Only free ZRNO. Request executed at midnight.",
     "trziste_neaktivno_tab": "ZRNO market is not active.",
     "delegacija_naslov": "Vote delegation",
-    "delegacija_opis": "Votes are delegated (not ZRNO). Your voting power ({moc} votes) is transferred to the delegate. Change takes effect at midnight.",
+    "delegacija_opis": "Transfer your votes ({moc} votes) to a delegate of your choice — your ZRNO stays yours. The change takes effect at midnight. You can always take your votes back and vote on your own behalf, or transfer them to another delegate.",
     "delegat_label": "Delegate:",
     "aktivna": "Active",
     "cekanje_ponoc": "Pending (midnight)",

@@ -628,7 +628,7 @@
     "otpis_napomena": "Samo slobodna ZRNA. Zahtjev se izvršava u ponoć.",
     "trziste_neaktivno_tab": "ZRNO tržište nije aktivno.",
     "delegacija_naslov": "Delegacija glasova",
-    "delegacija_opis": "Delegiraju se glasovi (ne ZRNA). Vaša glasačka moć ({moc} glasova) prenosi se delegatu. Promjena stupa na snagu u ponoć.",
+    "delegacija_opis": "Prenesite svoje glasove ({moc} glasova) delegatu po izboru — ZRNA ostaju vaša. Promjena stupa na snagu u ponoć. Svoje glasove uvijek možete povući i glasati sami u svoje ime, ili ih prenijeti drugom delegatu.",
     "delegat_label": "Delegat:",
     "aktivna": "Aktivna",
     "cekanje_ponoc": "Na čekanju (ponoć)",
