@@ -33,8 +33,6 @@ const ZAHTEV = {
     cimeSeBavi: "Limar, radnja kod pijace",
     legacyTekst: null,
   },
-  nepotpuna: false,
-  uFeedu: true,
   nedostaje: [] as string[],
   createdAt: new Date().toISOString(),
   expiresAt: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString(),

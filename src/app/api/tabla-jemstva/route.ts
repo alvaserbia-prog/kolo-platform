@@ -6,8 +6,7 @@ import {
   TRAJANJE_DANA,
   validirajKarticu,
   karticaZaPosmatraca,
-  jeKompletnaZaFeed,
-  nedostajeZaFeed,
+  nedostajePodataka,
 } from "@/lib/jemstvo-kartica";
 
 // GET /api/tabla-jemstva — zid: aktivne kartice (samo prijavljeni).
@@ -75,9 +74,8 @@ export async function GET() {
         id: z.id,
         pseudonim: z.user.pseudonim,
         kartica,
-        nepotpuna: z.status === "NEPOTPUN",
-        uFeedu: jeKompletnaZaFeed(z),
-        nedostaje: moj ? nedostajeZaFeed(z) : [],
+        // Savet vlasniku, ne uslov — kartica se verifikuje i bez ovoga.
+        nedostaje: moj ? nedostajePodataka(z) : [],
         createdAt: z.createdAt.toISOString(),
         expiresAt: z.expiresAt.toISOString(),
         mojZahtev: moj,
@@ -93,8 +91,8 @@ export async function GET() {
 
 // POST /api/tabla-jemstva — objavi karticu prepoznavanja (samo neverifikovani;
 // jedan aktivan zahtev). Sva polja kartice su opciona; proverava se ispravnost
-// unetog, ne popunjenost. Kartica bez imena i mesta stoji na zidu, ali je sistem
-// ne dovodi nikome u feed.
+// unetog, ne popunjenost. Kartica bez imena i mesta ide i na zid i u feed —
+// samo se rangira na kraj. Nijedan podatak nije uslov za verifikaciju.
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
@@ -133,7 +131,7 @@ export async function POST(req: NextRequest) {
 }
 
 // PATCH /api/tabla-jemstva — dopuni sopstvenu karticu (bez ponovne objave).
-// Služi vlasniku legacy (NEPOTPUN) kartice i svakome ko želi da doda podatak.
+// Dopuna je uvek dobrovoljna: kartica je verifikovana i bez nje.
 // Rok isteka se NE produžava dopunom — inače bi kartica mogla da stoji večno.
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -152,11 +150,7 @@ export async function PATCH(req: NextRequest) {
 
   await prisma.zahtevZaJemstvo.update({
     where: { id: moj.id },
-    data: {
-      ...kartica,
-      // Dopunjena kartica prestaje da bude legacy — vraća se u redovan tok.
-      status: "AKTIVAN",
-    },
+    data: { ...kartica, status: "AKTIVAN" },
   });
 
   return NextResponse.json({ ok: true, id: moj.id });

@@ -532,7 +532,10 @@ export async function izvrsiVerifikacijuSaTable(
       if (!zahtev) {
         throw new VerifikacijaGreska("Zahtev za jemstvo ne postoji.", 404);
       }
-      if (zahtev.status !== "AKTIVAN" || zahtev.expiresAt.getTime() < Date.now()) {
+      // NEPOTPUN (legacy objava) se namerno tretira kao aktivna: popunjenost
+      // polja kartice NIJE uslov za verifikaciju — verifikuje se čovek, ne kartica.
+      const aktivna = zahtev.status === "AKTIVAN" || zahtev.status === "NEPOTPUN";
+      if (!aktivna || zahtev.expiresAt.getTime() < Date.now()) {
         throw new VerifikacijaGreska("Zahtev za jemstvo više nije aktivan.", 410);
       }
       return izvrsiJezgroVerifikacije(tx, verifikatorId, zahtev.userId, oznaka);

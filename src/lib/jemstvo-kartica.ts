@@ -73,8 +73,8 @@ export function validirajKarticu(unos: KarticaUnos): ValidacijaRezultat {
   const nadimak = tekst(unos.nadimak, MAX_NADIMAK);
   const cimeSeBavi = tekst(unos.cimeSeBavi, MAX_CIME_SE_BAVI);
 
-  // Mesto mora biti iz šifarnika — feed rangira po tačnom poklapanju mesta,
-  // pa slobodan unos („N.Sad", „novi sad") tiho isključi čoveka iz feed-a.
+  // Mesto mora biti iz šifarnika — feed rangira po poklapanju mesta, pa slobodan
+  // unos („N.Sad", „novi sad") ne bi ništa pogodio. Prazno mesto je dozvoljeno.
   let mesto: string | null = null;
   if (unos.mesto !== undefined && unos.mesto !== null && unos.mesto !== "") {
     const m = tekst(unos.mesto, 80);
@@ -136,20 +136,14 @@ export function validirajKarticu(unos: KarticaUnos): ValidacijaRezultat {
 }
 
 /**
- * Da li kartica sme da uđe u feed prepoznavanja.
- * Bez mesta se kartica ne može nikome dovesti (rangiranje stoji na mestu), a bez
- * imena nema šta da se prepozna. Kartica koja ovo ne ispunjava i dalje stoji na
- * zidu — samo je sistem ne gura nikome.
+ * Šta bi vlasniku pomoglo da ga lakše prepoznaju (ime, mesto).
+ *
+ * ⚠️ Ovo je SAVET, NIKAD USLOV. Nijedan upisan podatak ne sme biti preduslov za
+ * verifikaciju: čovek koga neko stvarno poznaje mora moći da bude verifikovan i
+ * sa poluprazne kartice. Mesto samo pomaže rangiranju feed-a — kartica bez njega
+ * i dalje ide svima, samo na kraj reda.
  */
-export function jeKompletnaZaFeed(k: {
-  ime: string | null;
-  mesto: string | null;
-}): boolean {
-  return !!(k.ime && k.mesto);
-}
-
-/** Šta nedostaje da kartica uđe u feed (za poruku vlasniku — nikad mrtvo dugme). */
-export function nedostajeZaFeed(k: { ime: string | null; mesto: string | null }): string[] {
+export function nedostajePodataka(k: { ime: string | null; mesto: string | null }): string[] {
   const fali: string[] = [];
   if (!k.ime) fali.push("ime");
   if (!k.mesto) fali.push("mesto");
@@ -211,7 +205,7 @@ export interface KarticaPrikaz {
   mesto: string | null;
   nadimak: string | null;
   cimeSeBavi: string | null;
-  /** Legacy slobodan tekst (samo NEPOTPUN kartice) — vidi ga verifikovan član. */
+  /** Legacy slobodan tekst (objave pre redizajna) — vidi ga verifikovan član. */
   legacyTekst: string | null;
 }
 
