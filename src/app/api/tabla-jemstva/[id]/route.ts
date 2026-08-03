@@ -16,7 +16,8 @@ export async function DELETE(_req: NextRequest, { params }: { params: Promise<{ 
   if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
   if (zahtev.userId !== session.user.id)
     return NextResponse.json({ error: "Nije vaš zahtev." }, { status: 403 });
-  if (zahtev.status !== "AKTIVAN")
+  // NEPOTPUN = legacy kartica koja čeka dopunu; vlasnik sme i nju da povuče.
+  if (zahtev.status !== "AKTIVAN" && zahtev.status !== "NEPOTPUN")
     return NextResponse.json({ error: "Zahtev nije aktivan." }, { status: 400 });
 
   await prisma.zahtevZaJemstvo.update({

@@ -281,9 +281,16 @@ async function izvrsiJezgroVerifikacije(
   });
 
   // Sprovedena verifikacija zatvara aktivan zahtev na tabli jemstva (ZAVRSEN).
+  // Uz zatvaranje se brišu i skriveni kontakt podaci sa kartice prepoznavanja
+  // (telefon i saglasnost za poziv): svrha zbog koje su prikupljeni je ispunjena,
+  // pa se dalje ne čuvaju — minimizacija podataka (Politika čl. 4).
   await tx.zahtevZaJemstvo.updateMany({
-    where: { userId: verifikovani.id, status: "AKTIVAN" },
-    data: { status: "ZAVRSEN" },
+    where: { userId: verifikovani.id, status: { in: ["AKTIVAN", "NEPOTPUN"] } },
+    data: {
+      status: "ZAVRSEN",
+      telefon: null,
+      telefonSaglasnost: false,
+    },
   });
 
   // REGULARNI verifikator: slotoviPotroseni += 1

@@ -44,13 +44,16 @@ export async function izracunajDnevniBrojeve(
     ? await prisma.transaction.count({ where: { toWalletId: wallet.id, createdAt: { gt: odNovcanik } } })
     : 0;
 
-  // Akcioni badge: otvoreni zahtevi za jemstvo na koje korisnik može da odgovori
-  // (aktivni, nisu istekli, nisu njegovi)
+  // Akcioni badge: kartice na koje korisnik može da odgovori — aktivne, nisu
+  // istekle, nisu njegove i on na njih JOŠ NIJE odgovorio u feed-u
+  // prepoznavanja. Bez poslednjeg uslova badge nikad ne bi pao, jer odgovor
+  // „ne poznajem" ne uklanja karticu sa table (samo iz njegovog feed-a).
   const tablaJemstva = await prisma.zahtevZaJemstvo.count({
     where: {
       status: "AKTIVAN",
       expiresAt: { gt: sada },
       userId: { not: userId },
+      prepoznavanja: { none: { korisnikId: userId } },
     },
   });
 

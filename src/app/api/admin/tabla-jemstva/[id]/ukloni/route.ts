@@ -24,12 +24,19 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     select: { status: true, userId: true, user: { select: { pseudonim: true } } },
   });
   if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
-  if (zahtev.status !== "AKTIVAN")
+  if (zahtev.status !== "AKTIVAN" && zahtev.status !== "NEPOTPUN")
     return NextResponse.json({ error: "Zahtev nije aktivan." }, { status: 400 });
 
+  // Uklanjanje briše i skriveni kontakt — uklonjena objava nema svrhu
+  // zbog koje su prikupljeni (minimizacija, Politika čl. 4).
   await prisma.zahtevZaJemstvo.update({
     where: { id },
-    data: { status: "UKLONJEN", uklonjenRazlog: razlog },
+    data: {
+      status: "UKLONJEN",
+      uklonjenRazlog: razlog,
+      telefon: null,
+      telefonSaglasnost: false,
+    },
   });
 
   await logAdminAkcija(session.user.id, "JEMSTVO_ZAHTEV_UKLONJEN", id, `${zahtev.user.pseudonim}: ${razlog}`);
