@@ -12,7 +12,6 @@
     "verifikuj_nalog": "Ellenőrzés kérése →",
     "doprinos": "Tasks",
     "tabla_jemstva": "Kezességi tábla",
-    "graf": "Hitelesítési gráf",
     "postani_pokrovitelj": "Szponzor",
     "nadzor": "Felügyelet",
     "grupa_ekonomija": "Gazdaság",
@@ -392,7 +391,9 @@
     "tabla_neverifikovan_naslov": "Don't know anyone in KOLO?",
     "tabla_verifikovan_naslov": "Guarantee board",
     "tabla_neverifikovan_opis": "Introduce yourself to the network on the guarantee board — someone there can meet you and confirm you.",
-    "tabla_verifikovan_opis": "Help new users — see who is requesting verification."
+    "tabla_verifikovan_opis": "Help new users — see who is requesting verification.",
+    "graf_kartica_naslov": "Hitelesítési gráf",
+    "graf_kartica_opis": "Nézd meg a teljes kezességi hálózatot — ki kit hitelesített, és hol állsz te."
   },
   "graf": {
     "naslov": "Hitelesítési gráf",
