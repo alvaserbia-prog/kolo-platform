@@ -37,7 +37,7 @@ export async function POST(
     enrollment.userId,
     "info",
     `Prijava na program odbijena`,
-    `Vaša prijava na program "${labelPrograma(enrollment.type)}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
     "/programi"
   );
 

@@ -76,7 +76,7 @@ export async function GET(req: NextRequest) {
       en.user.id,
       "info",
       "Socijalni program privremeno obustavljen",
-      `Program "${labelPrograma(en.type)}" je obustavljen. ${razlog} Možete se ponovo prijaviti kada uslovi budu ispunjeni.`,
+      `Program „${labelPrograma(en.type)}" je obustavljen. ${razlog} Možeš ponovo da se prijaviš kada uslovi budu ispunjeni.`,
       "/programi"
     );
   }

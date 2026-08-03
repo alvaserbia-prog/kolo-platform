@@ -36,8 +36,8 @@ export async function POST(
     await posaljiNotifikaciju(
       osnivac,
       "info",
-      `Osnivanje krugovi odbijeno`,
-      `Zahtev za osnivanje krugovi "${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
+      `Osnivanje kruga odbijeno`,
+      `Tvoj zahtev za osnivanje kruga „${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
       "/krug"
     );
   }

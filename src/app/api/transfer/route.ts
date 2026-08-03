@@ -90,8 +90,8 @@ export async function POST(req: NextRequest) {
   await posaljiNotifikaciju(
     primalac.id,
     "transfer_primljen",
-    `Primili ste ${iznos.toLocaleString("sr-RS")} POEN`,
-    `${posiljac.pseudonim} vam je poslao/la ${iznos.toLocaleString("sr-RS")} POEN.${description ? ` Poruka: "${description}"` : ""}`,
+    `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
+    `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
     "/novcanik"
   );
 

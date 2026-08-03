@@ -115,7 +115,7 @@ export async function POST(
       verifikatorId,
       "info",
       "Zahtev za potvrdu socijalnog programa",
-      `Korisnik ${korisnik.pseudonim} se prijavio za program "${labelPrograma(programType)}" i navodi vas kao verifikatora. Potvrdite ispunjenost uslova pod punom odgovornošću, ili obrazložite odbijanje.`,
+      `Korisnik ${korisnik.pseudonim} se prijavio za program „${labelPrograma(programType)}" i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.`,
       "/programi/potvrde"
     );
   }

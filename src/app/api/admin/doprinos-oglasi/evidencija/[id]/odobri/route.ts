@@ -87,7 +87,7 @@ export async function POST(
     ev.userId,
     "info",
     "Izvršenje potvrđeno",
-    `Vaše dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
+    `Tvoje dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
     "/doprinos-oglasi"
   );
 

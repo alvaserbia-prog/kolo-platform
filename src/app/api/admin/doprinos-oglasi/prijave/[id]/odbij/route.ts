@@ -74,8 +74,8 @@ export async function POST(
   await posaljiNotifikaciju(
     prijava.userId,
     "info",
-    "Prijava za posao odbijena",
-    `Vaša prijava za oglas "${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    "Prijava za zadatak odbijena",
+    `Tvoja prijava za zadatak „${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
     "/programi"
   );
 

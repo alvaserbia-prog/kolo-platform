@@ -64,7 +64,7 @@ export async function POST(
     enrollment.userId,
     "info",
     `Prijava na program odobrena`,
-    `Vaša prijava na program "${labelPrograma(enrollment.type)}" je odobrena.`,
+    `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odobrena.`,
     "/programi"
   );
 

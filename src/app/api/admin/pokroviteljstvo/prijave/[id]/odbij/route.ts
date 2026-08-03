@@ -24,7 +24,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       rez.podnosilacId,
       "pokroviteljstvo_odbijeno",
       "Prijava pokroviteljstva odbijena",
-      `Vaša prijava pokroviteljstva je odbijena. Razlog: ${razlog}. Možete podneti novu prijavu.`,
+      `Tvoja prijava pokroviteljstva je odbijena. Razlog: ${razlog}. Možeš da podneseš novu prijavu.`,
       "/postani-pokrovitelj"
     );
     return NextResponse.json({ ok: true });

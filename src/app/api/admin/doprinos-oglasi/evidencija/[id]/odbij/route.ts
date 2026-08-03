@@ -69,7 +69,7 @@ export async function POST(
     ev.userId,
     "info",
     "Dnevno izvršenje odbijeno",
-    `Vaše dnevno izvršenje je odbijeno. Za to izvršenje se ne evidentira POEN (čl. 18).`,
+    `Tvoje dnevno izvršenje je odbijeno. Za to izvršenje se ne evidentira POEN (čl. 18).`,
     "/doprinos-oglasi"
   );
 

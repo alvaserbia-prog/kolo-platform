@@ -89,8 +89,8 @@ export async function POST(
   await posaljiNotifikaciju(
     prijava.userId,
     "info",
-    "Prijava za posao prihvaćena!",
-    `Vaša prijava za oglas "${oglasSaKapacitetom.title}" je prihvaćena. Možete početi sa evidencijom radnih sati.`,
+    "Prijava za zadatak prihvaćena!",
+    `Tvoja prijava za zadatak „${oglasSaKapacitetom.title}" je prihvaćena. Možeš da počneš sa evidencijom izvršenja.`,
     "/programi"
   );
 
