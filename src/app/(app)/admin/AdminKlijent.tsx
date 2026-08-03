@@ -21,6 +21,7 @@ interface KorisnikInfo {
   id: string;
   pseudonim: string;
   email: string | null;
+  location: string | null;
   tipKorisnika: string;
   admin: string;
   verified: boolean;
@@ -1655,7 +1656,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
 
   const q = filter.toLowerCase().trim();
   const filtered = useMemo(
-    () => users.filter((u) => u.pseudonim.toLowerCase().includes(q)),
+    () => users.filter((u) => u.pseudonim.toLowerCase().includes(q) || (u.location ?? "").toLowerCase().includes(q)),
     [users, q]
   );
   const tl = useMemo(() => tipLabel(t), [t]);
@@ -1736,6 +1737,12 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     <p className="text-xs text-kolo-muted mt-0.5 break-all flex items-start gap-1">
                       <span aria-hidden className="shrink-0">✉</span>
                       <span className="min-w-0 break-all">{u.email}</span>
+                    </p>
+                  )}
+                  {u.location && (
+                    <p className="text-xs text-kolo-muted mt-0.5 flex items-start gap-1">
+                      <span aria-hidden className="shrink-0">📍</span>
+                      <span className="min-w-0 break-words">{u.location}</span>
                     </p>
                   )}
                 </div>
