@@ -56,7 +56,7 @@ export async function PATCH(
       prigovor.userId,
       "info",
       status === "RESENO" ? "Prigovor rešen" : "Prigovor odbijen",
-      odgovor?.trim() || (status === "RESENO" ? "Vaš prigovor je rešen." : "Vaš prigovor je odbijen."),
+      odgovor?.trim() || (status === "RESENO" ? "Tvoj prigovor je rešen." : "Tvoj prigovor je odbijen."),
       "/profil"
     );
   }

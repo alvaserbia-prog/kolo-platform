@@ -1,10 +1,12 @@
-// Udaljenost između mesta u Srbiji — na osnovu centara opština.
+// Udaljenost između mesta u Srbiji.
 // Lokacije oglasa/korisnika su slobodan tekst (LokacijaSearch nudi naselja iz
-// naselja-srbije.ts); ovde se naziv razrešava u koordinate centra OPŠTINE
-// kojoj naselje pripada, pa je udaljenost približna (~km tačnost) — dovoljno
-// za filter „u krugu od N km" i informativni prikaz na kartici oglasa.
+// naselja-srbije.ts). Naziv se razrešava u koordinate SAMOG NASELJA
+// (naselja-koordinate.ts, GeoNames) kad postoje; za naselja bez sopstvenih
+// koordinata pada se nazad na centar OPŠTINE kojoj naselje pripada.
+// Tačnost je ~km — dovoljno za informativni prikaz na kartici oglasa.
 
 import { NASELJE_OPSTINA, OPSTINA_KOORDINATE } from "./naselja-geo";
+import { NASELJE_KOORDINATE } from "./naselja-koordinate";
 
 export type Koordinate = readonly [number, number];
 
@@ -19,17 +21,25 @@ function normalizuj(s: string): string {
     .trim();
 }
 
-// Indeks: normalizovan naziv naselja/opštine → koordinate centra opštine.
-// Gradi se jednom pri učitavanju modula (~1.000 unosa).
+// Indeks: normalizovan naziv naselja/opštine → koordinate.
+// Gradi se jednom pri učitavanju modula (~1.000 unosa). Redosled prioriteta:
+// 1) centri opština, 2) koordinate samih naselja (pregaze centar opštine i za
+//    istoimeni grad-sedište, npr. „Sombor" dobija tačku grada; generator
+//    preskače naselja čije ime sudara sa imenom DRUGE opštine),
+// 3) preostala naselja bez sopstvenih koordinata → centar svoje opštine.
 const INDEKS: Map<string, Koordinate> = (() => {
   const m = new Map<string, Koordinate>();
   for (const [opstina, koord] of Object.entries(OPSTINA_KOORDINATE)) {
     m.set(normalizuj(opstina), koord);
   }
+  for (const [naselje, koord] of Object.entries(NASELJE_KOORDINATE)) {
+    m.set(normalizuj(naselje), koord);
+  }
   for (const [naselje, opstina] of Object.entries(NASELJE_OPSTINA)) {
     const koord = OPSTINA_KOORDINATE[opstina];
     const kljuc = normalizuj(naselje);
-    // Naziv opštine ima prednost nad istoimenim naseljem u drugoj opštini.
+    // Naziv opštine/naselja sa koordinatama ima prednost nad istoimenim
+    // naseljem u drugoj opštini (prvo upisano važi).
     if (koord && !m.has(kljuc)) m.set(kljuc, koord);
   }
   return m;

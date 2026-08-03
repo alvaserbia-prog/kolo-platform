@@ -44,7 +44,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     zahtev.userId,
     "JEMSTVO_UKLONJEN",
     "Zahtev za jemstvo uklonjen",
-    `Vaš zahtev na tabli jemstva je uklonjen. Razlog: ${razlog}`,
+    `Tvoj zahtev na tabli jemstva je uklonjen. Razlog: ${razlog}`,
     "/tabla-jemstva"
   );
 

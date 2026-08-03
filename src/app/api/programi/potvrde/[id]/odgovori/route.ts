@@ -67,7 +67,7 @@ export async function POST(
         potvrda.enrollment.userId,
         "info",
         "Svi verifikatori su potvrdili",
-        `Svi vaši verifikatori su potvrdili prijavu za program "${programLabel}". Prijava čeka odluku Fondacije.`,
+        `Svi tvoji verifikatori su potvrdili prijavu za program „${programLabel}". Prijava čeka odluku Fondacije.`,
         "/programi"
       );
     }
@@ -94,7 +94,7 @@ export async function POST(
     potvrda.enrollment.userId,
     "info",
     "Prijava na program odbijena",
-    `Vaša prijava za program "${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
+    `Tvoja prijava za program „${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
     "/programi"
   );
   void posaljiAdminAlert(

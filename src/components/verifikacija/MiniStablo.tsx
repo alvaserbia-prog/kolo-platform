@@ -5,7 +5,12 @@ import Pseudonim from "@/components/Pseudonim";
 
 /**
  * Mini stablo verifikacija (varijanta A) — gore verifikator, dole verifikovani.
- * Klikom na pseudonim ide se na /profil/[id] tog korisnika.
+ * Podrazumevano: klikom na pseudonim ide se na /profil/[id] tog korisnika.
+ *
+ * Koristi se na dva mesta:
+ *  - /verifikacija (sopstveni lanac; podrazumevani tekstovi u prvom licu);
+ *  - panel grafa verifikacija (tuđi lanac; `onKlik` bira čvor u grafu umesto
+ *    navigacije, a `tekstovi` prebacuju prazna stanja u treće lice).
  */
 export type CvorVerifikator = {
   id: string;
@@ -25,6 +30,18 @@ type Props = {
   verifikovani: CvorVerifikovani[];
   jeJaPocetni?: boolean;
   className?: string;
+  /** Naslov kartice (podrazumevano „Lanac verifikacija"). */
+  naslov?: string;
+  /** Ako je zadato, klik na osobu poziva ovo umesto navigacije na profil. */
+  onKlik?: (id: string) => void;
+  /** Tekstovi praznih stanja (podrazumevano prvo lice — sopstvena kartica). */
+  tekstovi?: {
+    bezVerifikatora?: string;
+    osnivac?: string;
+    bezVerifikovanih?: string;
+  };
+  /** Oznaka nadzora uz verifikovane (podrazumevano da; graf je ne prikazuje). */
+  prikaziNadzor?: boolean;
 };
 
 function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) {
@@ -39,17 +56,51 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
   );
 }
 
+/** Link na profil ili dugme (kada je zadat onKlik) — isti izgled. */
+function Stavka({
+  id,
+  onKlik,
+  className,
+  children,
+}: {
+  id: string;
+  onKlik?: (id: string) => void;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (onKlik) {
+    return (
+      <button type="button" onClick={() => onKlik(id)} className={`text-left ${className}`}>
+        {children}
+      </button>
+    );
+  }
+  return (
+    <Link href={`/profil/${id}`} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 export default function MiniStablo({
   ja,
   verifikatori,
   verifikovani,
   jeJaPocetni,
   className = "",
+  naslov = "Lanac verifikacija",
+  onKlik,
+  tekstovi,
+  prikaziNadzor = true,
 }: Props) {
+  const bezVerifikatora = tekstovi?.bezVerifikatora ?? "Još nisi verifikovan";
+  const osnivac = tekstovi?.osnivac ?? "Početna verifikacija (osnivač)";
+  const bezVerifikovanih = tekstovi?.bezVerifikovanih ?? "Još nikog nisi verifikovao";
+
   return (
     <div className={`rounded-2xl border border-kolo-border bg-white p-6 shadow-sm ${className}`}>
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
-        Lanac verifikacija
+        {naslov}
       </div>
 
       {/* Gore: verifikatori (može ih biti više) */}
@@ -57,46 +108,48 @@ export default function MiniStablo({
         {verifikatori.length > 0 ? (
           <div className="flex flex-wrap justify-center gap-2 max-w-md">
             {verifikatori.map((v) => (
-              <Link
+              <Stavka
                 key={v.id}
-                href={`/profil/${v.id}`}
+                id={v.id}
+                onKlik={onKlik}
                 className="px-3 py-1.5 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
               >
                 @<Pseudonim>{v.pseudonim}</Pseudonim>
-              </Link>
+              </Stavka>
             ))}
           </div>
         ) : jeJaPocetni ? (
           <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
-            Početna verifikacija (osnivač)
+            {osnivac}
           </div>
         ) : (
           <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-sm text-kolo-muted italic">
-            Još nisi verifikovan
+            {bezVerifikatora}
           </div>
         )}
         <div className="text-kolo-muted text-lg">↓</div>
 
-        {/* Sredina: ja */}
+        {/* Sredina: nosilac kartice */}
         <div className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold">
           <Pseudonim>{ja.pseudonim}</Pseudonim>
           <span className="ml-2 text-white/70 text-xs font-mono">{ja.prikaz}</span>
         </div>
 
-        {/* Dole: ja sam verifikovao */}
+        {/* Dole: koga je verifikovao */}
         {verifikovani.length > 0 && (
           <>
             <div className="text-kolo-muted text-lg">↓</div>
             <div className="grid grid-cols-2 gap-2 w-full max-w-md">
               {verifikovani.map((v) => (
-                <Link
+                <Stavka
                   key={v.id}
-                  href={`/profil/${v.id}`}
+                  id={v.id}
+                  onKlik={onKlik}
                   className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
                 >
                   <span className="text-sm font-medium">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
-                  <StatusBadge status={v.statusNadzora} />
-                </Link>
+                  {prikaziNadzor && <StatusBadge status={v.statusNadzora} />}
+                </Stavka>
               ))}
             </div>
           </>
@@ -105,7 +158,7 @@ export default function MiniStablo({
           <>
             <div className="text-kolo-muted text-lg">↓</div>
             <div className="px-3 py-1.5 rounded-xl bg-kolo-bg text-xs text-kolo-muted italic">
-              Još nikog nisi verifikovao
+              {bezVerifikovanih}
             </div>
           </>
         )}

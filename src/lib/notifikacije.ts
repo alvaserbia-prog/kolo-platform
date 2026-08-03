@@ -1,12 +1,29 @@
 import { prisma } from "./prisma";
 import { posaljiPush } from "./push";
+import { posaljiEmailKorisniku } from "./email";
+
+export interface NotifikacijaOpcije {
+  /**
+   * Da li uz zvonce ide i email. Podrazumevano `true` — obaveštenja se šalju kad
+   * se desilo nešto što traži pažnju, pa korisnik treba da sazna i van aplikacije.
+   * Isključi (`false`) kad je mejl suvišan: primalac isti događaj već dobija
+   * drugim kanalom (npr. admin preko `posaljiAdminAlert`).
+   *
+   * Sam korisnik gasi sve mejlove ovog tipa u profilu (`User.emailObavestenja`)
+   * ili linkom iz podnožja mejla — provera je u `posaljiEmailKorisniku`.
+   */
+  email?: boolean;
+  /** Tekst dugmeta u mejlu; podrazumevano „Otvori u aplikaciji". */
+  emailDugme?: string;
+}
 
 export async function posaljiNotifikaciju(
   userId: string,
   tip: string,
   naslov: string,
   tekst: string,
-  link?: string
+  link?: string,
+  opcije?: NotifikacijaOpcije,
 ) {
   await prisma.notifikacija.create({
     data: { userId, tip, naslov, tekst, link },
@@ -14,6 +31,15 @@ export async function posaljiNotifikaciju(
   // Push na telefon/uređaj (ako je korisnik uključio obaveštenja). Ne blokira i
   // ne baca — zvonce u aplikaciji radi nezavisno od push-a.
   void posaljiPush(userId, { naslov, tekst, link, tip });
+  // Email (Resend) — isti tekst kao zvonce. Takođe ne blokira i ne baca.
+  if (opcije?.email !== false) {
+    void posaljiEmailKorisniku(userId, {
+      naslov,
+      tekst,
+      link,
+      linkTekst: opcije?.emailDugme,
+    });
+  }
 }
 
 /**
@@ -33,6 +59,9 @@ export async function obavestiAdmineNoviKorisnik(noviUserId: string, pseudonim: 
         "Nov korisnik se priključio",
         `Korisnik „${pseudonim}" je upravo napravio nalog.`,
         `/profil/${noviUserId}`,
+        // Bez mejla: admini isti događaj već dobijaju preko `posaljiAdminAlert`
+        // (email + Telegram) iz rute registracije — inače bi stigao dvaput.
+        { email: false },
       ),
     ),
   );

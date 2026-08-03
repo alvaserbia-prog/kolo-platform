@@ -156,6 +156,13 @@ enum UserStatus {
   EXCLUDED
 }
 
+enum SistemskoStatus {
+  NACRT
+  U_SLANJU
+  POSLATO
+  PREKINUTO
+}
+
 enum DonationStatus {
   PENDING
   CONFIRMED
@@ -233,6 +240,14 @@ model User {
   // Izabrani jezik korisnika (next-intl locale): "sr" | "sr-Cyrl" | "en" | "hu".
   // Koristi se za jezik notifikacija/email-ova i podrazumevani prikaz po prijavi.
   jezik              String    @default("sr")
+  // Email obaveštenja o događajima koji traže pažnju (verifikacija, odluke o
+  // prijavama, nove poruke...). Opt-out: podrazumevano uključeno, korisnik gasi
+  // u profilu ili linkom iz mejla. NE utiče na sistemske mejlove bez kojih nalog
+  // ne radi (reset lozinke) — oni idu uvek.
+  emailObavestenja   Boolean   @default(true)
+  // Trajni token za odjavu iz mejlova bez prijave (link u podnožju svakog mejla).
+  // Generiše se lenjo, pri prvom slanju. Ne otkriva identitet ni email adresu.
+  emailOdjavaToken   String?   @unique
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]
@@ -286,8 +301,42 @@ model User {
   prepoznavanja                   Prepoznavanje[]
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
+  sistemskaObavestenja            SistemskoObavestenje[]     @relation("KreiraoObavestenje")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
+}
+
+/// Cirkularno SISTEMSKO obaveštenje svim korisnicima — izmene Uslova/Politike
+/// (Uslovi čl. 40, Politika čl. 16), planirani zastoj duži od 24h (Uslovi čl. 33)
+/// i slična obaveštenja koja Fondacija duguje korisnicima.
+///
+/// NE poštuje `User.emailObavestenja` — to je obaveza iz akata, ne izbor. Zato je
+/// `pravniOsnov` obavezan i upisuje se u audit log: sistemska pošta bez osnova iz
+/// akata je bilten, a bilten traži zaseban pristanak i dopunu Politike (čl. 8,
+/// gde je Resend deklarisan isključivo za sistemska obaveštenja).
+///
+/// Slanje je nastavljivo: `kursorId` je poslednji obrađeni `User.id` u stabilnom
+/// redosledu po id-u, pa ponovno pokretanje nastavlja odatle i ne šalje dvaput.
+model SistemskoObavestenje {
+  id          String          @id @default(uuid())
+  naslov      String
+  tekst       String
+  /// Relativna putanja u aplikaciji (npr. "/uslovi"), opciono.
+  link        String?
+  /// Odredba akta iz koje proizlazi obaveza slanja (npr. "Uslovi čl. 40").
+  pravniOsnov String
+  status      SistemskoStatus @default(NACRT)
+  ukupno      Int             @default(0)
+  poslato     Int             @default(0)
+  neuspesno   Int             @default(0)
+  kursorId    String?
+  kreiraoId   String
+  kreirao     User            @relation("KreiraoObavestenje", fields: [kreiraoId], references: [id])
+  createdAt   DateTime        @default(now())
+  pokrenutoAt DateTime?
+  zavrsenoAt  DateTime?
+
+  @@index([status, createdAt(sort: Desc)])
 }
 
 model PasswordResetToken {
