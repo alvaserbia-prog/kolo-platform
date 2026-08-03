@@ -11,6 +11,7 @@ Vercel **Production Branch = `production`**. Podela okruženja:
   - „pošalji na test" → commit + push na `main`.
   - „objavi na ekolo.rs" → merge `main` → `production` + push na `production`.
 - Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
+- **Posle puša NE proveravati Vercel buildove** (nema `list_deployments`/`get_deployment` u petlji, nema čekanja da build pređe u READY). Push je kraj posla — javi šta je gurnuto i na koju granu, i tu stani. Vlasnik sam gleda sajt; ako nešto pukne, reći će. Buildove proveravati **samo kad vlasnik izričito pita** („da li je prošlo", „puca li build") ili kad je promena takva da build realno može da padne (migracija, izmena `vercel.json`/`package.json`, nova env varijabla).
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 
 ### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04; kolo-peach re-pointovan 2026-06-12)
