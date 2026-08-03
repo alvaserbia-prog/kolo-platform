@@ -222,11 +222,17 @@ const adminNivoLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<
 });
 const ADMIN_NIVOI = ["NONE", "ADMIN", "SUPERADMIN"] as const;
 
+// ACTIVE se namerno NE prikazuje na kartici — to je podrazumevano stanje skoro
+// svakog naloga, pa badge samo pravi šum. Vide se samo odstupanja.
 const statusBoja: Record<string, string> = {
-  ACTIVE:    "bg-kolo-green-100 text-kolo-green-700",
   SUSPENDED: "bg-kolo-gold-100 text-kolo-gold-600",
   EXCLUDED:  "bg-kolo-danger-light text-kolo-danger",
 };
+
+const statusLabel = (t: (k: string) => string): Record<string, string> => ({
+  SUSPENDED: t("korisnici_status_suspendovan"),
+  EXCLUDED:  t("korisnici_status_iskljucen"),
+});
 
 
 export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab }: AdminKlijentProps) {
@@ -1661,6 +1667,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
   );
   const tl = useMemo(() => tipLabel(t), [t]);
   const anl = useMemo(() => adminNivoLabel(t), [t]);
+  const sl = useMemo(() => statusLabel(t), [t]);
 
   async function akcija(userId: string, tip: "suspenduj" | "aktiviraj" | "iskljuci" | "lazni-verifikator") {
     if (tip === "iskljuci" && !confirm(t("korisnici_iskljuci_confirm"))) return;
@@ -1720,9 +1727,11 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm font-semibold text-kolo-text break-all"><Pseudonim>{u.pseudonim}</Pseudonim></span>
-                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
-                      {u.status}
-                    </span>
+                    {u.status !== "ACTIVE" && (
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusBoja[u.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
+                        {sl[u.status] ?? u.status}
+                      </span>
+                    )}
                     {!u.verified && (
                       <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-kolo-bg text-kolo-muted">
                         {t("korisnici_neverifikovan_badge")}

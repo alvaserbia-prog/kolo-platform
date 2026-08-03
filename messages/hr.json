@@ -2154,6 +2154,8 @@
     "korisnici_pretrazi_placeholder": "Pretraži po pseudonimu ili lokaciji...",
     "korisnici_nema": "Nema korisnika.",
     "korisnici_neverifikovan_badge": "neverificiran",
+    "korisnici_status_suspendovan": "Suspendiran",
+    "korisnici_status_iskljucen": "Isključen",
     "korisnici_izmeni": "Uredi",
     "korisnici_suspenduj": "Suspendiraj",
     "korisnici_aktiviraj": "Aktiviraj",

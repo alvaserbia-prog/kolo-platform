@@ -2158,6 +2158,8 @@
     "korisnici_pretrazi_placeholder": "Search by pseudonym or location...",
     "korisnici_nema": "No users.",
     "korisnici_neverifikovan_badge": "unverified",
+    "korisnici_status_suspendovan": "Suspended",
+    "korisnici_status_iskljucen": "Excluded",
     "korisnici_izmeni": "Edit",
     "korisnici_suspenduj": "Suspend",
     "korisnici_aktiviraj": "Activate",
