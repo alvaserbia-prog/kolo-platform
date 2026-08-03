@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         donation.userId,
         "donacija_potvrdjena",
         "Donacija potvrđena!",
-        `Vaša donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Dobili ste ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+        `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
         "/donacije"
       );
 
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
       user.id,
       "donacija_potvrdjena",
       "Donacija potvrđena!",
-      `Vaša donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Dobili ste ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+      `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
       "/donacije"
     );
 

@@ -62,7 +62,7 @@ export async function POST(
     pristupnica.userId,
     "info",
     "Pristupnica prihvaćena!",
-    `Postali ste član krugovi "${krug?.name ?? krugId}".`,
+    `Postao/la si član kruga „${krug?.name ?? krugId}".`,
     `/krug/${krugId}`
   );
 

@@ -87,8 +87,8 @@ export async function POST(
     await posaljiNotifikaciju(
       userId,
       "info",
-      `Krug "${zahtev.name}" odobrena!`,
-      `Osnivanje krugovi je odobreno. Krug je dobila 50.000 POEN startnog kapitala.`,
+      `Krug „${zahtev.name}" je odobren!`,
+      `Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.`,
       `/krug/${krugId}`
     );
   }

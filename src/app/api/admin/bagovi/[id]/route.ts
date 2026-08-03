@@ -56,7 +56,13 @@ export async function PATCH(
       : status === "ODBIJENO"
       ? "Prijava baga je odbijena"
       : "Status prijave baga je promenjen",
-    `„${bag.naslov}"`,
+    status === "U_RADU"
+      ? `Primili smo tvoju prijavu „${bag.naslov}" i radimo na njoj.`
+      : status === "RESENO"
+      ? `Greška koju si prijavio/la — „${bag.naslov}" — je otklonjena. Hvala ti.`
+      : status === "ODBIJENO"
+      ? `Tvoja prijava „${bag.naslov}" nije prihvaćena kao greška.`
+      : `Status tvoje prijave „${bag.naslov}" je promenjen.`,
     "/bagovi"
   );
 
