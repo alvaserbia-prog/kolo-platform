@@ -18,8 +18,6 @@ type MojZahtev = {
   expiresAt: string;
   mojZahtev: boolean;
   kartica: Kartica;
-  nepotpuna: boolean;
-  uFeedu: boolean;
   nedostaje: string[];
 };
 
@@ -127,7 +125,7 @@ export default function JemstvoObjava() {
           <KarticaPrikaz kartica={moj.kartica} kompaktno />
         </div>
 
-        {!moj.uFeedu && (
+        {moj.nedostaje.length > 0 && (
           <p className="text-sm text-kolo-gold-600 box-warning px-4 py-3">
             {t("poziv_na_dopunu", { polja: moj.nedostaje.join(", ") })}
           </p>

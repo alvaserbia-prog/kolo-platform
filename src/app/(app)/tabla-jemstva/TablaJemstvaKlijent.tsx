@@ -15,8 +15,6 @@ type Zahtev = {
   id: string;
   pseudonim: string;
   kartica: Kartica;
-  nepotpuna: boolean;
-  uFeedu: boolean;
   createdAt: string;
   expiresAt: string;
   mojZahtev: boolean;
@@ -243,10 +241,7 @@ export default function TablaJemstvaKlijent({
                     >
                       {radnja === z.id ? "..." : t("dugme_posalji_poruku")}
                     </button>
-                    {mozeVerifikovati &&
-                      !z.verifikacijaBlokirana &&
-                      !z.nepotpuna &&
-                      verifikujId !== z.id && (
+                    {mozeVerifikovati && !z.verifikacijaBlokirana && verifikujId !== z.id && (
                         <button
                           onClick={() => otvoriVerifikuj(z.id)}
                           disabled={radnja === z.id}
@@ -257,11 +252,6 @@ export default function TablaJemstvaKlijent({
                       )}
                   </div>
 
-                  {/* Legacy kartica se ne može verifikovati dok je vlasnik ne dopuni. */}
-                  {mozeVerifikovati && z.nepotpuna && (
-                    <p className="text-xs text-kolo-muted italic">{t("blokada_nepotpuna")}</p>
-                  )}
-
                   {/* Verifikacija nije moguća za posmatrača: zabranjena zona (čl. 12)
                       ili početni korisnik (čl. 14) — dugme se ne nudi, uz objašnjenje */}
                   {mozeVerifikovati && z.verifikacijaBlokirana && (
@@ -271,10 +261,7 @@ export default function TablaJemstvaKlijent({
                   )}
 
                   {/* Inline potvrda verifikacije — lično poznavanje + opciona oznaka */}
-                  {mozeVerifikovati &&
-                    !z.verifikacijaBlokirana &&
-                    !z.nepotpuna &&
-                    verifikujId === z.id && (
+                  {mozeVerifikovati && !z.verifikacijaBlokirana && verifikujId === z.id && (
                       <div className="mt-2 pt-3 border-t border-kolo-border space-y-2">
                         <input
                           type="text"

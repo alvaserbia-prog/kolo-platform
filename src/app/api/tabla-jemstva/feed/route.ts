@@ -15,10 +15,13 @@ import { karticaZaPosmatraca, naseljaIsteOpstine, opstinaZa } from "@/lib/jemstv
 //   2. ista opština
 //   3. ostalo — namerno se NE izbacuje, da feed u malim sredinama ne bude prazan
 //
-// Isključeni su: sopstveni zahtev, već odgovoreni, nepotpune kartice (bez imena
-// i mesta se ne mogu nikome dovesti), početni korisnici i svako ko je sa
-// posmatračem u zabranjenoj zoni — koristi se POSTOJEĆI keš `verifikacionaZona`
-// (isti izvor kao provera pri samoj verifikaciji), bez nove logike.
+// ⚠️ Prazna polja NIKOGA ne izbacuju iz feed-a. Kartica bez mesta ili imena ide
+// na kraj reda, ali ide — inače bi popunjenost polja postala prećutan uslov za
+// verifikaciju, a nijedan podatak to ne sme da bude.
+//
+// Isključeni su samo: sopstveni zahtev, već odgovoreni, početni korisnici i
+// svako ko je sa posmatračem u zabranjenoj zoni — koristi se POSTOJEĆI keš
+// `verifikacionaZona` (isti izvor kao provera pri verifikaciji), bez nove logike.
 
 const BLISKO_GODISTE = 7;
 const MAX_KARTICA = 30;
@@ -54,11 +57,9 @@ export async function GET() {
 
   const kandidati = await prisma.zahtevZaJemstvo.findMany({
     where: {
-      status: "AKTIVAN",
+      status: { in: ["AKTIVAN", "NEPOTPUN"] },
       expiresAt: { gt: new Date() },
       userId: { not: meId },
-      ime: { not: null },
-      mesto: { not: null },
       id: { notIn: odgovoreni.map((o) => o.zahtevId) },
       user: { jeOsnivac: false },
     },

@@ -19,10 +19,12 @@ import {
  * postoji na JEDNOM mestu (ranije je bila prepisana u dva fajla).
  *
  * Načela UI-ja iz dogovora:
- *  - sva polja su opciona — nikoga ne zaustavljamo na vratima;
+ *  - sva polja su opciona — nikoga ne zaustavljamo na vratima. Nijedan podatak
+ *    nije uslov za verifikaciju: verifikuje se čovek, ne kartica. Prazna polja
+ *    utiču SAMO na redosled u feed-u;
  *  - dugme nikad nije mrtvo: klik uvek daje odgovor šta fali, umesto tihe blokade;
- *  - korak pregleda pre objave („Da li bi ti prepoznao ovu osobu iz ovoga?") —
- *    gola kartica se vidi kao gola i čovek se sam vrati da je dopuni;
+ *  - korak pregleda pre objave — gola kartica se vidi kao gola i čovek se sam
+ *    vrati da je dopuni, bez ijedne prisile;
  *  - inputi su 16px (text-base) da iOS ne zumira ekran pri fokusu;
  *  - nikakav native confirm()/prompt() — Brave i Safari na iOS-u ih tiho gase.
  */
@@ -79,7 +81,8 @@ export default function KarticaForma({
   const nestoPopunjeno = Boolean(
     v.ime || v.prezime || v.godiste || v.mesto || v.nadimak || v.cimeSeBavi
   );
-  const uFeedu = Boolean(v.ime.trim() && v.mesto.trim());
+  // Savet, ne uslov: kartica se objavljuje i verifikuje i bez ovoga.
+  const lakseNalazenje = Boolean(v.ime.trim() && v.mesto.trim());
 
   // Dugme je uvek aktivno; razlog se saopštava na klik, ne prećutnom blokadom.
   function kaPregledu() {
@@ -135,7 +138,7 @@ export default function KarticaForma({
           />
         </div>
 
-        {!uFeedu && (
+        {!lakseNalazenje && (
           <p className="text-sm text-kolo-gold-600 box-warning px-4 py-3">{t("upozorenje_feed")}</p>
         )}
 

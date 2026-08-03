@@ -1,8 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   validirajKarticu,
-  jeKompletnaZaFeed,
-  nedostajeZaFeed,
+  nedostajePodataka,
   inicijali,
   decenija,
   opstinaZa,
@@ -66,17 +65,19 @@ describe("validirajKarticu", () => {
   });
 });
 
-describe("ulazak u feed", () => {
-  it("traži ime i mesto — bez mesta se kartica ne može nikome dovesti", () => {
-    expect(jeKompletnaZaFeed({ ime: "Milan", mesto: "Kula" })).toBe(true);
-    expect(jeKompletnaZaFeed({ ime: "Milan", mesto: null })).toBe(false);
-    expect(jeKompletnaZaFeed({ ime: null, mesto: "Kula" })).toBe(false);
+describe("savet vlasniku o dopuni", () => {
+  it("kaže tačno šta fali (nikad ćutanje)", () => {
+    expect(nedostajePodataka({ ime: null, mesto: null })).toEqual(["ime", "mesto"]);
+    expect(nedostajePodataka({ ime: "Milan", mesto: null })).toEqual(["mesto"]);
+    expect(nedostajePodataka({ ime: "Milan", mesto: "Kula" })).toEqual([]);
   });
 
-  it("kaže tačno šta fali (nikad ćutanje)", () => {
-    expect(nedostajeZaFeed({ ime: null, mesto: null })).toEqual(["ime", "mesto"]);
-    expect(nedostajeZaFeed({ ime: "Milan", mesto: null })).toEqual(["mesto"]);
-    expect(nedostajeZaFeed({ ime: "Milan", mesto: "Kula" })).toEqual([]);
+  it("prazna kartica je i dalje potpuno validna — ništa nije uslov", () => {
+    // Regresija: popunjenost polja je nakratko blokirala verifikaciju.
+    // Verifikuje se čovek, ne kartica.
+    const r = validirajKarticu({});
+    expect(r.ok).toBe(true);
+    expect(nedostajePodataka({ ime: null, mesto: null }).length).toBe(2);
   });
 });
 
