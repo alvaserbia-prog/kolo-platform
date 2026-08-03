@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { koordinateZaMesto, udaljenostIzmedjuMesta, udaljenostKm } from "@/lib/udaljenost";
+import { NASELJE_KOORDINATE } from "@/lib/naselja-koordinate";
+import { NASELJE_OPSTINA, OPSTINA_KOORDINATE } from "@/lib/naselja-geo";
 
 describe("koordinateZaMesto", () => {
   it("prepoznaje grad direktno", () => {
@@ -7,11 +9,34 @@ describe("koordinateZaMesto", () => {
     expect(koordinateZaMesto("Beograd")).not.toBeNull();
   });
 
-  it("prepoznaje selo preko opštine (Stapar → Sombor)", () => {
+  it("selo sa sopstvenim koordinatama se razlikuje od centra opštine", () => {
+    // Stapar (opština Sombor) ima svoju tačku u naselja-koordinate.ts —
+    // ranije je padao na centar opštine pa je Sombor–Stapar bilo 0 km.
     const stapar = koordinateZaMesto("Stapar");
-    const sombor = koordinateZaMesto("Sombor");
     expect(stapar).not.toBeNull();
-    expect(stapar).toEqual(sombor);
+    expect(stapar).not.toEqual(OPSTINA_KOORDINATE["Sombor"]);
+    const d = udaljenostIzmedjuMesta("Sombor", "Stapar")!;
+    expect(d).toBeGreaterThan(5);
+    expect(d).toBeLessThan(25);
+  });
+
+  it("selo bez sopstvenih koordinata pada nazad na centar opštine", () => {
+    const bezSvojih = Object.keys(NASELJE_OPSTINA).find(
+      (n) => !(n in NASELJE_KOORDINATE) && !(n in OPSTINA_KOORDINATE)
+    );
+    expect(bezSvojih).toBeDefined();
+    expect(koordinateZaMesto(bezSvojih!)).toEqual(
+      OPSTINA_KOORDINATE[NASELJE_OPSTINA[bezSvojih!]]
+    );
+  });
+
+  it("koordinate naselja ne pregaze lookup istoimene druge opštine", () => {
+    // npr. selo Bela Crkva (Krupanj) ne sme da pomeri opštinu Bela Crkva —
+    // generator takva naselja preskače; grad-sedište sme preciznije od centra.
+    for (const opstina of Object.keys(OPSTINA_KOORDINATE)) {
+      if (opstina in NASELJE_KOORDINATE) continue;
+      expect(koordinateZaMesto(opstina), opstina).toEqual(OPSTINA_KOORDINATE[opstina]);
+    }
   });
 
   it("toleriše velika/mala slova i dijakritike", () => {
