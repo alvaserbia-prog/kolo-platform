@@ -17,8 +17,10 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { rasporediGraf, type Koordinata } from "@/lib/protokol/graf";
+import { formatIndeksZaPrikaz } from "@/lib/protokol/dokaz-stvarnosti";
+import MiniStablo from "@/components/verifikacija/MiniStablo";
 
 type CvorStanje = "JA" | "MOGU" | "ZONA" | "PUN";
 
@@ -94,7 +96,6 @@ function uViewBox(svg: SVGSVGElement, clientX: number, clientY: number) {
 
 export default function GrafKlijent() {
   const t = useTranslations("graf");
-  const locale = useLocale();
 
   const [podaci, setPodaci] = useState<GrafPodaci | null>(null);
   const [greska, setGreska] = useState<string | null>(null);
@@ -241,11 +242,6 @@ export default function GrafKlijent() {
   );
 
   const izabraniCvor = izabran ? cvorMapa.get(izabran) ?? null : null;
-
-  const formatDatuma = useCallback(
-    (iso: string) => new Date(iso).toLocaleDateString(locale === "sr" ? "sr-Latn-RS" : locale),
-    [locale]
-  );
 
   // Scena (ivice + čvorovi) — memoizovana da pan/zoom menja samo transform <g>.
   const scena = useMemo(() => {
@@ -520,63 +516,37 @@ export default function GrafKlijent() {
                 </div>
               )}
 
-              <div>
-                <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wide mb-1">
-                  {t("panel_verifikatori")}
-                </p>
-                {verifikatoriIzabranog.length === 0 ? (
-                  <p className="text-xs text-kolo-muted">{t("panel_nema")}</p>
-                ) : (
-                  <ul className="space-y-1">
-                    {verifikatoriIzabranog.map((iv, i) => {
-                      const drugi = cvorMapa.get(iv.od);
-                      return (
-                        <li key={i}>
-                          <button
-                            type="button"
-                            onClick={() => setIzabran(iv.od)}
-                            className="w-full text-left text-xs rounded-lg px-2 py-1.5 hover:bg-kolo-bg transition-colors"
-                          >
-                            <span className="font-medium text-kolo-text">
-                              #{drugi?.broj ?? "?"} {drugi?.pseudonim ?? ""}
-                            </span>
-                            <span className="text-kolo-muted"> · {formatDatuma(iv.datum)}</span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold text-kolo-muted uppercase tracking-wide mb-1">
-                  {t("panel_verifikovao")}
-                </p>
-                {verifikovaoIzabrani.length === 0 ? (
-                  <p className="text-xs text-kolo-muted">{t("panel_nema")}</p>
-                ) : (
-                  <ul className="space-y-1">
-                    {verifikovaoIzabrani.map((iv, i) => {
-                      const drugi = cvorMapa.get(iv.ka);
-                      return (
-                        <li key={i}>
-                          <button
-                            type="button"
-                            onClick={() => setIzabran(iv.ka)}
-                            className="w-full text-left text-xs rounded-lg px-2 py-1.5 hover:bg-kolo-bg transition-colors"
-                          >
-                            <span className="font-medium text-kolo-text">
-                              #{drugi?.broj ?? "?"} {drugi?.pseudonim ?? ""}
-                            </span>
-                            <span className="text-kolo-muted"> · {formatDatuma(iv.datum)}</span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </div>
+              {/* Lanac verifikacija izabranog člana — ista kartica kao na
+                  /verifikacija; klik na osobu bira taj čvor u grafu. */}
+              <MiniStablo
+                className="!p-4 shadow-none"
+                naslov={t("lanac_naslov")}
+                ja={{
+                  pseudonim: izabraniCvor.pseudonim,
+                  prikaz: formatIndeksZaPrikaz(
+                    izabraniCvor.tip,
+                    izabraniCvor.indeks,
+                    izabraniCvor.slotoviPotroseni
+                  ),
+                }}
+                jeJaPocetni={izabraniCvor.jeOsnivac}
+                verifikatori={verifikatoriIzabranog.map((iv) => ({
+                  id: iv.od,
+                  pseudonim: cvorMapa.get(iv.od)?.pseudonim ?? `#${cvorMapa.get(iv.od)?.broj ?? "?"}`,
+                }))}
+                verifikovani={verifikovaoIzabrani.map((iv) => ({
+                  id: iv.ka,
+                  pseudonim: cvorMapa.get(iv.ka)?.pseudonim ?? `#${cvorMapa.get(iv.ka)?.broj ?? "?"}`,
+                  statusNadzora: iv.nadzor,
+                }))}
+                onKlik={(id) => setIzabran(id)}
+                prikaziNadzor={false}
+                tekstovi={{
+                  bezVerifikatora: t("lanac_bez_verifikatora"),
+                  osnivac: t("lanac_osnivac"),
+                  bezVerifikovanih: t("lanac_bez_verifikovanih"),
+                }}
+              />
 
               <Link
                 href={`/profil/${izabraniCvor.id}`}
