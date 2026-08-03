@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiPush } from "@/lib/push";
+import { posaljiEmailKorisniku } from "@/lib/email";
 
 async function getKonv(konvId: string, meId: string) {
   const k = await prisma.konverzacija.findUnique({ where: { id: konvId } });
@@ -88,12 +89,38 @@ export async function POST(
   // se broje crvenim badge-om na ikonici "Poruke" (GET /api/poruke/brojac).
   // Push na telefon primaoca (ako je uključio obaveštenja). Ne blokira odgovor.
   const primalacId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
+  const isecak = poruka.tekst.length > 120 ? `${poruka.tekst.slice(0, 120)}…` : poruka.tekst;
   void posaljiPush(primalacId, {
     naslov: `Nova poruka — ${session.user.pseudonim}`,
-    tekst: poruka.tekst.length > 120 ? `${poruka.tekst.slice(0, 120)}…` : poruka.tekst,
+    tekst: isecak,
     link: `/poruke?k=${konvId}`,
     tip: "poruka",
   });
+
+  // Email primaocu — samo za PRVU nepročitanu poruku u nizu. Dok primalac ne
+  // otvori konverzaciju, dalje poruke ne šalju mejl (inače bi razgovor od deset
+  // poruka poslao deset mejlova). Kad pročita, sledeća poruka opet šalje.
+  void (async () => {
+    try {
+      const neprocitane = await prisma.poruka.count({
+        where: {
+          konverzacijaId: konvId,
+          posiljacId: session.user.id,
+          procitana: false,
+          id: { not: poruka.id },
+        },
+      });
+      if (neprocitane > 0) return;
+      await posaljiEmailKorisniku(primalacId, {
+        naslov: `Nova poruka — ${session.user.pseudonim}`,
+        tekst: isecak,
+        link: `/poruke?k=${konvId}`,
+        linkTekst: "Otvori poruku",
+      });
+    } catch (err) {
+      console.error("[poruke] Email obaveštenje nije poslato:", err);
+    }
+  })();
 
   return NextResponse.json({
     id: poruka.id,

@@ -315,6 +315,30 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Notifikacije
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
+- **Tri kanala iz jednog poziva (od 2026-08-03):** `posaljiNotifikaciju()` upiše zvonce (`Notifikacija`), pošalje **web push** (`push.ts`, VAPID) i **email** (`email.ts`, Resend). Push i email idu kao `void` — ne blokiraju odgovor i ne bacaju.
+
+### Email korisnicima (Resend)
+- **`src/lib/email.ts`** je jedini ulaz: `emailLayout()` (zajednički HTML šablon svih mejlova), `posaljiEmailRaw()` (Resend fetch, vraća bool), `posaljiEmailKorisniku()` (obaveštenja, poštuje opt-out), `bazniUrl()` (allowlist host-ova protiv host-header poisoning-a).
+- **Dva režima:**
+  - **Sistemski mejl** — reset/postavljanje lozinke (`passwordReset.ts`). Ide **uvek**, ne poštuje opt-out (bez njega nalog nije povratljiv), bez linka za odjavu.
+  - **Obaveštenja** — sve ostalo. `posaljiEmailKorisniku()` preskače nalog bez email adrese, ugašen nalog (`deaktiviranAt`) i korisnika sa `emailObavestenja=false`; u podnožje ubacuje link za odjavu.
+- **Opt-out:** `User.emailObavestenja` (Boolean, default `true`) + `User.emailOdjavaToken` (nasumičan, generiše se lenjo pri prvom slanju). Migracija `20260803120000_email_obavestenja`. Prekidač u profilu → `PATCH /api/profil/obavestenja`; odjava bez prijave → stranica `/odjava-obavestenja/[token]` → `POST /api/email/odjava`. **Odjava je POST, ne GET** — klijenti za poštu prefetch-uju linkove, pa bi GET odjavio korisnika koji nije kliknuo.
+- **Pokrivenost:** email ide uz **svaku** notifikaciju (23 pozivna mesta — verifikacija, donacije, pokroviteljstvo, programi, doprinos-oglasi, krugovi, prigovori, transfer POEN-a, nadzor, tabla jemstva…), plus dva mesta van `posaljiNotifikaciju`:
+  - **Nove poruke** (`/api/poruke/[konvId]`) — mejl samo za **prvu nepročitanu** poruku u nizu; dok primalac ne otvori konverzaciju, dalje poruke ne šalju mejl.
+  - **Verifikacija QR/token putem** (`/api/verifikacija`) — ranije **nije slala nikakvo obaveštenje** (put sa table jemstva jeste); sada šalje isto obaveštenje kao tabla.
+- **Izuzetak `{ email: false }`:** admin notifikacija „Nov korisnik se priključio" — admini isti događaj već dobijaju preko `posaljiAdminAlert` (email + Telegram), inače bi stigao dvaput.
+- **Jezik:** mejlovi su na srpskom, kao i tekst zvonca (tekstovi notifikacija se generišu na pozivnim mestima i nisu prevedeni). `User.jezik` se ovde još ne koristi.
+- **Admin upozorenja** (`adminAlert.ts`) su zaseban kanal: idu na `ADMIN_EMAIL` + Telegram, nikad korisniku (18 događaja — registracija, prijava verifikacije, ZRNO zahtevi, programi, krugovi, prigovori, bagovi, zero-sum, nadzor).
+
+### Cirkularna sistemska obaveštenja (svim korisnicima)
+- **Namena je uska i propisana aktima:** izmene Uslova/Politike (**Uslovi čl. 40, Politika čl. 16** — najmanje 15 dana unapred), planirani zastoj > 24h (**Uslovi čl. 33**), obaveštenje o suspenziji/isključenju (**Uslovi čl. 27, 28**). Zato ova pošta **NE poštuje `emailObavestenja` opt-out** i mejl **nema link za odjavu** — u podnožju stoji pravni osnov i objašnjenje zašto se ne može isključiti.
+- 🔴 **NIJE kanal za vesti/bilten.** Politika čl. 8 (i DPIA, Radnje obrade) deklariše Resend „**isključivo za dostavljanje sistemskih obaveštenja**". Bilten je **druga svrha obrade** → traži dopunu Politike/DPIA/Radnji obrade, **novu verziju Politike sa ponovnom saglasnošću** (`PolitikaVerzija` + nov DB red) i **zaseban pristanak**. Dok se to ne uradi, slanje biltena ovim kanalom je nedozvoljeno.
+- **Kod:** model `SistemskoObavestenje` + enum `SistemskoStatus` (NACRT/U_SLANJU/POSLATO/PREKINUTO), migracija `20260803140000_sistemsko_obavestenje`; logika `src/lib/sistemsko-obavestenje.ts`; batch slanje `posaljiEmailBatch()` u `email.ts` (Resend `/emails/batch`, **max 100 po pozivu**, pauza 250ms ≈ 4 zahteva/s zbog limita od 10/s, odn. 2/s na starijim nalozima).
+- **`pravniOsnov` je obavezno polje** (npr. „Uslovi čl. 40") — ide u audit log i u podnožje mejla. Bez odredbe iz akata to je bilten, ne sistemsko obaveštenje.
+- **Slanje je nastavljivo, bez cron-a:** Vercel plan **odbija subdnevni cron** (vidi Tablu jemstva), pa jedan poziv rute obradi koliko stigne u budžetu od 45s i zapamti `kursorId` (poslednji obrađeni `User.id`, stabilan rastući redosled). Admin ekran sam poziva rutu u petlji dok `zavrseno` ne bude `true`; ponovni poziv **ne šalje istom korisniku dvaput**. Neuspela porcija se ponavlja jednom, pa se odbroji u `neuspesno` i slanje ide dalje.
+- **Primaoci:** svi nalozi sa email adresom koji nisu ugašeni (`deaktiviranAt: null`). **Suspendovani su namerno unutra** — obaveštenje im se duguje isto (Uslovi čl. 27, 40).
+- **Rute (samo SUPERADMIN** — cirkularna pošta je sistemska poluga): `GET/POST /api/admin/sistemsko-obavestenje`, `POST /api/admin/sistemsko-obavestenje/[id]/{proba,posalji,prekini}`. Admin tab **Obaveštenja** (`ObavestenjaTab.tsx`), vidljiv samo superadminu. Audit: `SISTEMSKO_OBAVESTENJE_{NACRT,POSLATO,PREKINUTO}` (loguje se pokretanje, ne svaki nastavak).
+- 🟡 **Pre prvog masovnog slanja:** domen `ekolo.rs` do sada šalje po nekoliko mejlova dnevno. Nagli skok na hiljade poruka obara reputaciju domena i pogađa i mejlove za reset lozinke — slati postepeno ili sa zasebnog poddomena.
 
 ### Početna (`/pocetna`)
 - Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
@@ -339,7 +363,7 @@ docs/             — interne radne beleške (nije normativa)
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
-- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Finansije (evidencija doprinosa + veto/troškovi), Osnivači, Vesti, Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Finansije (evidencija doprinosa + veto/troškovi), Osnivači, Vesti, **Obaveštenja** (cirkularna sistemska pošta, samo superadmin), Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
 - **Terminologija „emisija" → „evidencija doprinosa" u Sistem/Admin UI** (commit `120d578`, samo `messages/*.json`) — **izuzev istorije transakcija**, gde tip transakcije ostaje vidljiv; u istoriji „Emisija" → prikaz **„Protokol"** uz boje iznosa (Protokol=plavo, primljeno=zeleno, dato=crveno; commit `8fd6d47`).
 - **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Nadzor). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
 
@@ -363,7 +387,7 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 ## API endpointi (izbor)
 
 ### Korisnici / profil
-`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci}` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
+`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci,obavestenja}` · `POST /api/email/odjava` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
 
 ### Novčanik / transfer
 `POST /api/transfer` · `GET /api/novcanik/transakcije`

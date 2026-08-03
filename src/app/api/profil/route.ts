@@ -327,6 +327,9 @@ export async function DELETE(req: NextRequest) {
         avatar: null,
         oauthProvider: null,
         oauthId: null,
+        // Token za odjavu sa mejlova više nema svrhu (email je obrisan) — brišemo
+        // ga da ne ostane trajan identifikator vezan za nalog.
+        emailOdjavaToken: null,
         status: UserStatus.EXCLUDED,
         deaktiviranAt: new Date(),
       },
