@@ -224,8 +224,16 @@ function PorukeContent() {
     }
   }
 
+  // Visina ekrana poruka je FIKSNA i tačno jednaka raspoloživom prostoru — tako
+  // polje za pisanje i dugme „Pošalji" uvek stoje na dnu vidljivog ekrana i NE
+  // mora se skrolovati na dole da bi se do njih došlo (skroluje samo lista
+  // poruka). Odbija se stvarni hrom: Header `h-16` (4rem) + vertikalni padding
+  // `main`-a iz AppShell-a (`py-5` = 2.5rem mobilno, `md:py-6` = 3rem desktop).
+  // `dvh` umesto `vh` — na mobilnom je `100vh` visina BEZ URL trake browsera, pa
+  // je kutija ispadala viša od vidljivog dela ekrana i unos je bio ispod ivice.
+  // Ako se promeni visina Header-a ili padding u AppShell-u, ispraviti i ovde.
   return (
-    <div className="flex h-full overflow-hidden rounded-2xl border border-kolo-border bg-white shadow-sm" style={{ minHeight: "calc(100vh - 3.5rem - 2rem)" }}>
+    <div className="flex h-[calc(100dvh_-_6.5rem)] md:h-[calc(100dvh_-_7rem)] overflow-hidden rounded-2xl border border-kolo-border bg-white shadow-sm">
       {/* Leva tabla — lista konverzacija */}
       <div className={`w-full md:w-72 shrink-0 border-r border-kolo-border flex flex-col ${mobilniPrikaz === "chat" ? "hidden md:flex" : "flex"}`}>
         <div className="px-4 py-3 border-b border-kolo-border">
