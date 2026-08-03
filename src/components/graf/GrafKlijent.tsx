@@ -103,6 +103,7 @@ export default function GrafKlijent() {
   const [transform, setTransform] = useState<Transform>({ k: 1, tx: 0, ty: 0 });
 
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
   const pokazivaci = useRef(new Map<number, { x: number; y: number }>());
   const vukao = useRef(false);
   const pocetak = useRef({ x: 0, y: 0 });
@@ -235,6 +236,15 @@ export default function GrafKlijent() {
     setTransform({ k: 1, tx: -moja.x, ty: -moja.y });
     setIzabran(podaci.ja);
   }, [podaci, koordinate]);
+
+  // Na uskim ekranima panel stoji ispod grafa — po izboru čvora dovuci ga u
+  // kadar da se informacije vide bez ručnog skrolovanja.
+  useEffect(() => {
+    if (!izabran) return;
+    if (window.matchMedia("(max-width: 1023px)").matches) {
+      panelRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [izabran]);
 
   const cvorMapa = useMemo(
     () => new Map((podaci?.cvorovi ?? []).map((c) => [c.id, c])),
@@ -432,7 +442,7 @@ export default function GrafKlijent() {
             ref={svgRef}
             viewBox={`${VB.x} ${VB.y} ${VB.w} ${VB.h}`}
             preserveAspectRatio="xMidYMid meet"
-            className="w-full h-[55vh] min-h-[380px] select-none"
+            className="w-full h-[38vh] min-h-[280px] lg:h-[60vh] lg:min-h-[420px] select-none"
             style={{ touchAction: "none" }}
             onWheel={naTockic}
             onPointerDown={naPritisak}
@@ -450,7 +460,7 @@ export default function GrafKlijent() {
         </div>
 
         {/* Panel izabranog čvora */}
-        <div className="bg-white rounded-2xl border border-kolo-border p-4 lg:sticky lg:top-4">
+        <div ref={panelRef} className="bg-white rounded-2xl border border-kolo-border p-4 lg:sticky lg:top-4">
           {!izabraniCvor ? (
             <p className="text-sm text-kolo-muted">{t("panel_uputstvo")}</p>
           ) : (
