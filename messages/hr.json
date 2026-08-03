@@ -446,6 +446,7 @@
     "razlog_prelazno": "U početnoj fazi sustava (do 100.000 POEN opticaja) korisnik može primiti samo jednu verifikaciju (čl. 22 Pravilnika o dokazu stvarnosti).",
     "razlog_zona": "Nalazi se u tvojoj zabranjenoj zoni (čl. 12 Pravilnika o dokazu stvarnosti).",
     "razlog_zona_obrnuto": "Ti se nalaziš u njegovoj zabranjenoj zoni, pa verifikacija nije dopuštena (čl. 12 Pravilnika o dokazu stvarnosti).",
+    "razlog_prva_generacija": "Dopušteno po iznimci za prvu generaciju — oboje ste neposredno verificirani od istog početnog korisnika (čl. 12 st. 5 Pravilnika o dokazu stvarnosti).",
     "tip_osnivac": "Početni korisnik",
     "tip_nosilac": "Nositelj ZRNA",
     "tip_regularni": "Verificirani korisnik",

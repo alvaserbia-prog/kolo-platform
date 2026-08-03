@@ -446,6 +446,7 @@
     "razlog_prelazno": "In the initial phase of the system (until 100,000 POEN in circulation) a user may receive only one verification (Art. 22 of the Proof of Reality Rulebook).",
     "razlog_zona": "This member is in your forbidden zone (Art. 12 of the Proof of Reality Rulebook).",
     "razlog_zona_obrnuto": "You are in this member's forbidden zone, so verification is not allowed (Art. 12 of the Proof of Reality Rulebook).",
+    "razlog_prva_generacija": "Allowed under the first-generation exception — you were both directly verified by the same initial user (Art. 12 (5) of the Proof of Reality Rulebook).",
     "tip_osnivac": "Initial user",
     "tip_nosilac": "ZRNO holder",
     "tip_regularni": "Verified user",

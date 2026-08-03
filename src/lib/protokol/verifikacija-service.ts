@@ -23,7 +23,7 @@ import {
 } from "@/lib/protokol/dokaz-stvarnosti";
 import {
   dodajVerifikacijuUZonu,
-  proveriDozvoluVerifikacije,
+  proveriDozvoluVerifikacijeSaIzuzetkom,
   recomputeZonesSaGrafom,
 } from "@/lib/protokol/zona";
 import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
@@ -204,7 +204,9 @@ async function izvrsiJezgroVerifikacije(
     throw new VerifikacijaGreska(prelazno.razlog, 409);
   }
 
-  // Zabranjena zona (čl. 12, v3.9.2) + zabrana verifikovanja početnih (čl. 14).
+  // Zabranjena zona (čl. 12, v3.9.2) + zabrana verifikovanja početnih (čl. 14)
+  // + izuzetak za prvu generaciju (čl. 12 st. 5, v4.0.1: neposredno verifikovani
+  // istog početnog korisnika mogu jedni druge, dok ih linija grafa ne poveže).
   // Stanje zone se preračunava iz izvora istine (graf veza) unutar iste
   // SERIALIZABLE transakcije — keš tabela verification_zone se ne konsultuje
   // pri validaciji, samo se dopunjava posle upisa. Zabrana verifikovanja
@@ -212,8 +214,9 @@ async function izvrsiJezgroVerifikacije(
   // osnivač→osnivač (svaka verifikacija KA početnom je blokirana).
   const { zapisi, pocetniIds } = await ucitajGrafIZone(tx);
   const { stanje, graf: zonaGraf } = recomputeZonesSaGrafom(zapisi, pocetniIds);
-  const zonaRezultat = proveriDozvoluVerifikacije(
+  const zonaRezultat = proveriDozvoluVerifikacijeSaIzuzetkom(
     stanje,
+    zonaGraf,
     pocetniIds,
     verifikatorId,
     verifikovani.id
@@ -224,13 +227,17 @@ async function izvrsiJezgroVerifikacije(
 
   // Invarijanta: staro anti-cirkularno pravilo (čl. 12, v3.9.1) je podskup
   // zabranjene zone — ako zona propusti nešto što ono hvata, to je bug u zoni.
-  const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, zapisi);
-  if (!acRezultat.dozvoljeno) {
-    console.error(
-      "[verifikacija-service] INVARIJANTA PREKRŠENA: zona dozvolila, anti-cirkularno odbilo",
-      { verifikatorId, verifikovaniId: verifikovani.id, razlog: acRezultat.razlog }
-    );
-    throw new VerifikacijaGreska(acRezultat.razlog, 403);
+  // Preskače se kad je verifikacija dozvoljena po izuzetku za prvu generaciju:
+  // staro pravilo izuzetak ne poznaje, pa bi braću pogrešno prijavilo.
+  if (!zonaRezultat.izuzetak) {
+    const acRezultat = proveriAntiCirkularno(verifikatorId, verifikovani.id, zapisi);
+    if (!acRezultat.dozvoljeno) {
+      console.error(
+        "[verifikacija-service] INVARIJANTA PREKRŠENA: zona dozvolila, anti-cirkularno odbilo",
+        { verifikatorId, verifikovaniId: verifikovani.id, razlog: acRezultat.razlog }
+      );
+      throw new VerifikacijaGreska(acRezultat.razlog, 403);
+    }
   }
 
   // Izračunaj redniBroj
