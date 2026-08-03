@@ -156,6 +156,13 @@ enum UserStatus {
   EXCLUDED
 }
 
+enum SistemskoStatus {
+  NACRT
+  U_SLANJU
+  POSLATO
+  PREKINUTO
+}
+
 enum DonationStatus {
   PENDING
   CONFIRMED
@@ -293,8 +300,42 @@ model User {
   zahteviZaJemstvo                ZahtevZaJemstvo[]
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
+  sistemskaObavestenja            SistemskoObavestenje[]     @relation("KreiraoObavestenje")
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
+}
+
+/// Cirkularno SISTEMSKO obaveštenje svim korisnicima — izmene Uslova/Politike
+/// (Uslovi čl. 40, Politika čl. 16), planirani zastoj duži od 24h (Uslovi čl. 33)
+/// i slična obaveštenja koja Fondacija duguje korisnicima.
+///
+/// NE poštuje `User.emailObavestenja` — to je obaveza iz akata, ne izbor. Zato je
+/// `pravniOsnov` obavezan i upisuje se u audit log: sistemska pošta bez osnova iz
+/// akata je bilten, a bilten traži zaseban pristanak i dopunu Politike (čl. 8,
+/// gde je Resend deklarisan isključivo za sistemska obaveštenja).
+///
+/// Slanje je nastavljivo: `kursorId` je poslednji obrađeni `User.id` u stabilnom
+/// redosledu po id-u, pa ponovno pokretanje nastavlja odatle i ne šalje dvaput.
+model SistemskoObavestenje {
+  id          String          @id @default(uuid())
+  naslov      String
+  tekst       String
+  /// Relativna putanja u aplikaciji (npr. "/uslovi"), opciono.
+  link        String?
+  /// Odredba akta iz koje proizlazi obaveza slanja (npr. "Uslovi čl. 40").
+  pravniOsnov String
+  status      SistemskoStatus @default(NACRT)
+  ukupno      Int             @default(0)
+  poslato     Int             @default(0)
+  neuspesno   Int             @default(0)
+  kursorId    String?
+  kreiraoId   String
+  kreirao     User            @relation("KreiraoObavestenje", fields: [kreiraoId], references: [id])
+  createdAt   DateTime        @default(now())
+  pokrenutoAt DateTime?
+  zavrsenoAt  DateTime?
+
+  @@index([status, createdAt(sort: Desc)])
 }
 
 model PasswordResetToken {

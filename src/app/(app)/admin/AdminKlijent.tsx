@@ -15,6 +15,7 @@ const OsnivaciTab = dynamic(() => import("./OsnivaciTab"), { ssr: false });
 const PokroviteljPrijaveTab = dynamic(() => import("./PokroviteljPrijaveTab"), { ssr: false });
 const NadzorTab = dynamic(() => import("./NadzorTab"), { ssr: false });
 const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
+const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 
 interface KorisnikInfo {
   id: string;
@@ -279,6 +280,8 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
       ? ([
+          // Cirkularna pošta svim korisnicima je sistemska poluga — samo superadmin.
+          ["obavestenja", t("tab_obavestenja")],
           ["audit", t("tab_audit")],
           ["aktivnost", t("tab_aktivnost")],
           ["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`],
@@ -377,6 +380,8 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {tab === "vesti" && <VestiTab objave={blogObjave} onDone={() => router.refresh()} />}
 
       {/* Audit log */}
+      {tab === "obavestenja" && viewerJeSuperadmin && <ObavestenjaTab />}
+
       {tab === "audit" && <AuditLogTab logs={auditLogs} onRefresh={() => router.refresh()} />}
 
       {/* Dnevnik aktivnosti korisnika (samo superadmin) */}

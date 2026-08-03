@@ -168,6 +168,61 @@ export async function dohvatiOdjavaToken(userId: string): Promise<string | null>
   }
 }
 
+/** Najveći broj poruka u jednom Resend batch pozivu (ograničenje servisa). */
+export const BATCH_MAX = 100;
+
+export interface BatchStavka {
+  to: string;
+  subject: string;
+  html: string;
+}
+
+/**
+ * Pošalji do `BATCH_MAX` poruka jednim pozivom (Resend batch endpoint).
+ * Vraća `true` ako je servis prihvatio celu porciju. Ne baca.
+ *
+ * Batch se koristi samo za cirkularna sistemska obaveštenja — pojedinačna
+ * obaveštenja idu preko `posaljiEmailRaw`, jednu po jednu.
+ */
+export async function posaljiEmailBatch(
+  stavke: BatchStavka[],
+  kontekst = "batch",
+): Promise<boolean> {
+  if (stavke.length === 0) return true;
+  if (stavke.length > BATCH_MAX) {
+    console.error(`[${kontekst}] Porcija veća od ${BATCH_MAX} — odbijeno`);
+    return false;
+  }
+
+  const RESEND_KEY = process.env.RESEND_API_KEY;
+  const RESEND_FROM = process.env.RESEND_FROM ?? "KOLO <noreply@ekolo.rs>";
+  if (!RESEND_KEY) {
+    console.error(`[${kontekst}] RESEND_API_KEY nije postavljen — porcija nije poslata`);
+    return false;
+  }
+
+  try {
+    const res = await fetch("https://api.resend.com/emails/batch", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(stavke.map((s) => ({ from: RESEND_FROM, ...s }))),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text().catch(() => "");
+      console.error(`[${kontekst}] Resend HTTP ${res.status}: ${errText}`);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error(`[${kontekst}] Neočekivana greška pri slanju porcije:`, err);
+    return false;
+  }
+}
+
 export interface ObavestenjeEmail {
   /** Naslov mejla i naslov u telu (isti tekst kao zvonce). */
   naslov: string;
