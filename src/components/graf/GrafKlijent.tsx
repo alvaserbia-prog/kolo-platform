@@ -540,6 +540,7 @@ export default function GrafKlijent() {
                   statusNadzora: iv.nadzor,
                 }))}
                 onKlik={(id) => setIzabran(id)}
+                prikaziNadzor={false}
                 tekstovi={{
                   bezVerifikatora: t("lanac_bez_verifikatora"),
                   osnivac: t("lanac_osnivac"),
