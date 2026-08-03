@@ -4,7 +4,9 @@
  * Čiste funkcije bez Prisma poziva — prima podatke, vraća odluke.
  * Sve funkcije su deterministički testabilne.
  */
-import { TipKorisnika } from "@/generated/prisma/client";
+// Enum iz browser-bezbednog ulaza (bez PrismaClient-a): ovaj modul je čist
+// domen i uvozi ga i klijentski kod (raspored grafa verifikacija).
+import { TipKorisnika } from "@/generated/prisma/enums";
 
 export const BESKONACNI_KAPACITET = "neograniceno" as const;
 export type Kapacitet = number | typeof BESKONACNI_KAPACITET;
