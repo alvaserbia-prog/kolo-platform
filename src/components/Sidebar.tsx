@@ -52,6 +52,8 @@ function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
       return <svg {...p}><path d="m2 7 2-4h16l2 4" /><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7" /><path d="M2 7h20" /><path d="M9 21v-6h6v6" /></svg>;
     case "/verifikacija":
       return <svg {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
+    case "/graf":
+      return <svg {...p}><circle cx="12" cy="5" r="2.5" /><circle cx="5" cy="18" r="2.5" /><circle cx="19" cy="18" r="2.5" /><path d="m10.7 7 -4 8.7" /><path d="m13.3 7 4 8.7" /><path d="M7.5 18h9" /></svg>;
     case "/tabla-jemstva":
       return <svg {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
     case "/zrno":
@@ -219,7 +221,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        { label: t("grupa_poverenje"), links: [verifikacijaLink] },
+        { label: t("grupa_poverenje"), links: [verifikacijaLink, { href: "/graf", label: t("graf") }] },
         { label: t("grupa_podrzi"), links: [
           { href: "/donacije", label: t("donacije") },
           { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
