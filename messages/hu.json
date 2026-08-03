@@ -441,6 +441,7 @@
     "razlog_prelazno": "A rendszer kezdeti szakaszában (100 000 POEN forgalomig) egy felhasználó csak egy hitelesítést kaphat (a Valóságigazolási szabályzat 22. cikke).",
     "razlog_zona": "Ez a tag a te tiltott zónádban van (a Valóságigazolási szabályzat 12. cikke).",
     "razlog_zona_obrnuto": "Te vagy ennek a tagnak a tiltott zónájában, ezért a hitelesítés nem engedélyezett (a Valóságigazolási szabályzat 12. cikke).",
+    "razlog_prva_generacija": "A első generációs kivétel alapján engedélyezett — mindkettőtöket ugyanaz a kezdeti felhasználó hitelesített közvetlenül (a Valóságigazolási szabályzat 12. cikk (5) bek.).",
     "tip_osnivac": "Kezdeti felhasználó",
     "tip_nosilac": "ZRNO-birtokos",
     "tip_regularni": "Hitelesített felhasználó",

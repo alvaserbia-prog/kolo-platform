@@ -177,7 +177,8 @@ export type StanjeRazlog =
   | "indeks_pun"
   | "prelazno"
   | "zona"
-  | "zona_obrnuto";
+  | "zona_obrnuto"
+  | "prva_generacija";
 
 export type StanjeCvoraUlaz = {
   id: string;
@@ -192,7 +193,11 @@ export function stanjeCvora(
   cvor: StanjeCvoraUlaz,
   uZoniPosmatraca: boolean,
   posmatracUZoniCvora: boolean,
-  opticaj: number
+  opticaj: number,
+  // Izuzetak za prvu generaciju (čl. 12 st. 5, v4.0.1): posmatrač i čvor su
+  // neposredno verifikovani istog početnog korisnika i nisu povezani linijom —
+  // zona ih ne razdvaja, čvor je MOGU (uz poseban razlog za panel).
+  izuzetakPrvaGeneracija = false
 ): { stanje: CvorStanje; razlog?: StanjeRazlog } {
   if (cvor.id === posmatracId) return { stanje: "JA" };
   if (cvor.jeOsnivac) return { stanje: "PUN", razlog: "osnivac" };
@@ -205,7 +210,11 @@ export function stanjeCvora(
   ) {
     return { stanje: "PUN", razlog: "prelazno" };
   }
-  if (uZoniPosmatraca) return { stanje: "ZONA", razlog: "zona" };
-  if (posmatracUZoniCvora) return { stanje: "ZONA", razlog: "zona_obrnuto" };
+  if (uZoniPosmatraca || posmatracUZoniCvora) {
+    if (izuzetakPrvaGeneracija) return { stanje: "MOGU", razlog: "prva_generacija" };
+    return uZoniPosmatraca
+      ? { stanje: "ZONA", razlog: "zona" }
+      : { stanje: "ZONA", razlog: "zona_obrnuto" };
+  }
   return { stanje: "MOGU" };
 }

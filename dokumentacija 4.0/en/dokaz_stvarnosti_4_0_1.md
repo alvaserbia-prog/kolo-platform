@@ -148,11 +148,15 @@ A verifier may only verify users who are not located in any of the above zones �
 
 The prohibited zone is determined symmetrically. By performing a verification, the verifier permanently takes into their own prohibited zone the verified user and that user's entire prohibited zone, including its later expansions. No one may verify a user who is located in their prohibited zone, nor a user in whose prohibited zone they themselves are located. Expansions of the zone arising from verifications performed by other users do not carry over to initial users; the prohibited zone of an initial user expands solely through verifications they themselves perform.
 
+By way of exception from the preceding paragraphs of this Article, users who were directly verified by the same initial user may verify one another (the first-generation exception). The exception does not apply between users who, at the moment of verification, are already connected by an ascending or descending line of the verification graph — including the reciprocal prohibition — nor does it extend to their further descendants. A verification performed under this exception produces regular effects in all other respects: the symmetric takeover of the zone under the preceding paragraph, as well as the transitional limit under Article 22, apply without modification.
+
 ### Article 13
 
 *Purpose of the anti-circular rule*
 
 The anti-circular rule ensures that the network of trust grows laterally, through independent branches. By excluding the entire subtree and the entire ancestral chain of each verifier, it ensures that no user can accumulate verifications within the same part of the network from which they themselves originated. A user wishing to reach an index of 100% must be known to users from multiple different, mutually independent parts of the network. This is a structural barrier against coordinated manipulation: a fictitious person cannot be known across sufficiently different social circles to collect ten independent verifications. The symmetry of the zone ensures that every verification within the same part of the network reduces the possibility of further verifications in that part, so that the yield of repeated verifications within the same social circle declines.
+
+The first-generation exception (Article 12, paragraph 5) takes into account the particular position of users directly verified by the same initial user: in the network's initial period there are as yet no independent branches in which such users could be known, so the full application of the rule would permanently constrain them merely for having joined first. Since every verification performed under the exception creates a line that excludes further verifications between the connected users, the yield of repeated verifications declines within this exception as well.
 
 ## VI — Initial Mechanism
 

@@ -146,11 +146,15 @@ Verifikator može da verifikuje isključivo korisnike koji se ne nalaze ni u jed
 
 Zabranjena zona utvrđuje se simetrično. Verifikacijom verifikator trajno preuzima u svoju zabranjenu zonu verifikovanog korisnika i celokupnu njegovu zabranjenu zonu, uključujući i njena kasnija proširenja. Niko ne može verifikovati korisnika koji se nalazi u njegovoj zabranjenoj zoni, niti korisnika u čijoj se zabranjenoj zoni sam nalazi. Proširenja zone nastala verifikacijama drugih korisnika ne prenose se na početne korisnike; zabranjena zona početnog korisnika širi se isključivo verifikacijama koje sam obavi.
 
+Izuzetno od prethodnih stavova ovog člana, korisnici koje je neposredno verifikovao isti početni korisnik mogu verifikovati jedni druge (izuzetak za prvu generaciju). Izuzetak ne važi između korisnika koji su u trenutku verifikacije već povezani uzlaznom ili silaznom linijom verifikacionog grafa — uključujući recipročnu zabranu — niti se prostire na njihove dalje potomke. Verifikacija obavljena po ovom izuzetku u svemu ostalom proizvodi redovna dejstva: simetrično preuzimanje zone iz prethodnog stava, kao i prelazno ograničenje iz člana 22, primenjuju se bez izmena.
+
 ### Član 13
 
 *Svrha anti-cirkularnog pravila*
 
 Anti-cirkularno pravilo obezbeđuje da mreža poverenja raste lateralno, kroz nezavisne grane. Isključivanjem celog podstabla i celog ancestralnog lanca svakog verifikatora obezbeđuje se da nijedan korisnik ne može akumulirati verifikacije unutar istog dela mreže iz kojeg je i sam potekao. Korisnik koji želi da dostigne indeks od 100% mora da bude poznat korisnicima iz više različitih, međusobno nezavisnih delova mreže. Ovo je strukturna barijera protiv koordinirane manipulacije: lažna osoba ne može da bude poznata u dovoljno različitih socijalnih krugova da prikupi deset nezavisnih verifikacija. Simetrija zone obezbeđuje da svaka verifikacija unutar istog dela mreže smanjuje mogućnost daljih verifikacija u tom delu, čime prinos ponovljenih verifikacija u istom socijalnom krugu opada.
+
+Izuzetak za prvu generaciju (član 12 stav 5) uzima u obzir poseban položaj korisnika koje je neposredno verifikovao isti početni korisnik: u početnom razdoblju mreža još nema nezavisne grane u kojima bi ti korisnici mogli biti poznati, pa bi ih puna primena pravila trajno ograničila samo zato što su pristupili prvi. Budući da svaka verifikacija obavljena po izuzetku stvara liniju koja dalje verifikacije između povezanih korisnika isključuje, prinos ponovljenih verifikacija opada i unutar ovog izuzetka.
 
 ## VI — Početni mehanizam
 
