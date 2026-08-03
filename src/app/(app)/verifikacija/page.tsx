@@ -76,6 +76,10 @@ export default async function VerifikacijaPage() {
   const mozeDaVerifikuje =
     imaPristupVerifikaciji(user.tipKorisnika, user.indeksStvarnosti) &&
     raspolozivSlot(kapacitet, user.slotoviPotroseni);
+  const imaPristupGrafu = imaPristupVerifikaciji(
+    user.tipKorisnika,
+    user.indeksStvarnosti
+  );
 
   const verifikatorCvorovi: CvorVerifikator[] = user.verifikacijeKojeSuMeVerifikovale.map(
     (v) => ({
@@ -146,13 +150,26 @@ export default async function VerifikacijaPage() {
           )}
         </div>
 
-        <MiniStablo
-          className="h-full"
-          ja={{ pseudonim: user.pseudonim, prikaz }}
-          verifikatori={verifikatorCvorovi}
-          verifikovani={verifikovaniCvorovi}
-          jeJaPocetni={user.jeOsnivac}
-        />
+        <div className="flex flex-col gap-6">
+          <MiniStablo
+            className="flex-1"
+            ja={{ pseudonim: user.pseudonim, prikaz }}
+            verifikatori={verifikatorCvorovi}
+            verifikovani={verifikovaniCvorovi}
+            jeJaPocetni={user.jeOsnivac}
+          />
+          {/* Ulaz na graf verifikacija — mala kartica ispod lanca; samo za
+              korisnike sa pristupom (indeks ≥ 10%), jer je graf zaključan za ostale. */}
+          {imaPristupGrafu && (
+            <a
+              href="/graf"
+              className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+            >
+              <p className="font-semibold text-kolo-text">{t("graf_kartica_naslov")}</p>
+              <p className="text-sm text-kolo-muted mt-0.5">{t("graf_kartica_opis")}</p>
+            </a>
+          )}
+        </div>
       </div>
 
       {!jeNeverifikovan && <MojeOznake osobe={mojeOznake} />}
