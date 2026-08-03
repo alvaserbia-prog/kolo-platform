@@ -156,6 +156,19 @@
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku"
   },
+  "odjavaObavestenja": {
+    "naslov": "Odjava sa obaveštenja",
+    "podnaslov": "Isključite email obaveštenja sa KOLO platforme.",
+    "podnaslov_gotovo": "Obaveštenja su isključena.",
+    "objasnjenje": "Ako kliknete na dugme ispod, više vam nećemo slati email obaveštenja o verifikaciji, porukama i odlukama. Zvonce u aplikaciji nastavlja da radi.",
+    "napomena_lozinka": "Email za resetovanje lozinke i dalje stiže — bez njega ne biste mogli da povratite pristup nalogu.",
+    "dugme": "Isključi email obaveštenja",
+    "dugme_loading": "Isključujem…",
+    "uspesno": "Isključili smo email obaveštenja za vaš nalog.",
+    "ponovo_uputstvo": "Kad god poželite, možete ih ponovo uključiti u svom profilu.",
+    "na_profil": "Otvori profil",
+    "greska": "Nešto nije uspelo. Pokušajte ponovo ili isključite obaveštenja u profilu."
+  },
   "registracija": {
     "naslov": "Registracija",
     "podnaslov": "Pridružite se KOLO zajednici",
@@ -629,7 +642,13 @@
     "prodato": "Prodato",
     "ukloni": "Ukloni",
     "pratim_kategorije_naslov": "Kategorije koje pratim",
-    "pratim_kategorije_opis": "Izaberite kategorije Pijace koje vas zanimaju — izbor se čuva odmah. Na Pijaci ih uključujete čipom „Samo praćene“."
+    "pratim_kategorije_opis": "Izaberite kategorije Pijace koje vas zanimaju — izbor se čuva odmah. Na Pijaci ih uključujete čipom „Samo praćene“.",
+    "email_naslov": "Email obaveštenja",
+    "email_opis": "Kada se desi nešto što traži vašu pažnju — verifikacija, nova poruka, odluka po prijavi — šaljemo vam i email, pored zvonca u aplikaciji.",
+    "email_toggle": "Šaljite mi email obaveštenja",
+    "email_napomena_lozinka": "Email za resetovanje lozinke stiže uvek, nezavisno od ovog prekidača.",
+    "email_ukljuceno": "Uključeno",
+    "email_iskljuceno": "Isključeno"
   },
   "zrno": {
     "naslov": "ZRNO",

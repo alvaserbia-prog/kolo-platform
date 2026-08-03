@@ -146,6 +146,19 @@
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése"
   },
+  "odjavaObavestenja": {
+    "naslov": "Leiratkozás az értesítésekről",
+    "podnaslov": "Kapcsold ki a KOLO platform e-mail értesítéseit.",
+    "podnaslov_gotovo": "Az értesítések ki vannak kapcsolva.",
+    "objasnjenje": "Ha az alábbi gombra kattintasz, többé nem küldünk e-mail értesítést hitelesítésről, üzenetekről és döntésekről. Az alkalmazásbeli csengő továbbra is működik.",
+    "napomena_lozinka": "A jelszó-visszaállító e-mail továbbra is megérkezik — nélküle nem tudnád visszaszerezni a hozzáférést a fiókodhoz.",
+    "dugme": "E-mail értesítések kikapcsolása",
+    "dugme_loading": "Kikapcsolás…",
+    "uspesno": "Kikapcsoltuk a fiókod e-mail értesítéseit.",
+    "ponovo_uputstvo": "Bármikor újra bekapcsolhatod a profilodban.",
+    "na_profil": "Profil megnyitása",
+    "greska": "Valami nem sikerült. Próbáld újra, vagy kapcsold ki az értesítéseket a profilodban."
+  },
   "registracija": {
     "naslov": "Regisztráció",
     "podnaslov": "Csatlakozzon a KOLO közösséghez",
@@ -611,7 +624,13 @@
     "prodato": "Sold",
     "ukloni": "Remove",
     "pratim_kategorije_naslov": "Követett kategóriák",
-    "pratim_kategorije_opis": "Válassza ki a Piac kategóriáit, amelyek érdeklik — a választás azonnal mentődik. A Piacon a „Csak követett“ csippel alkalmazhatja őket."
+    "pratim_kategorije_opis": "Válassza ki a Piac kategóriáit, amelyek érdeklik — a választás azonnal mentődik. A Piacon a „Csak követett“ csippel alkalmazhatja őket.",
+    "email_naslov": "E-mail értesítések",
+    "email_opis": "Ha valami a figyelmedet igényli — hitelesítés, új üzenet, döntés a jelentkezésedről —, az alkalmazásbeli csengő mellett e-mailt is küldünk.",
+    "email_toggle": "Kérek e-mail értesítéseket",
+    "email_napomena_lozinka": "A jelszó-visszaállító e-mail mindig megérkezik, ettől a kapcsolótól függetlenül.",
+    "email_ukljuceno": "Bekapcsolva",
+    "email_iskljuceno": "Kikapcsolva"
   },
   "zrno": {
     "naslov": "ZRNO",

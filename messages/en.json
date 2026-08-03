@@ -156,6 +156,19 @@
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password"
   },
+  "odjavaObavestenja": {
+    "naslov": "Unsubscribe from notifications",
+    "podnaslov": "Turn off email notifications from the KOLO platform.",
+    "podnaslov_gotovo": "Notifications are turned off.",
+    "objasnjenje": "If you click the button below, we will stop sending you email notifications about verifications, messages and decisions. The in-app bell keeps working.",
+    "napomena_lozinka": "Password reset emails still arrive — without them you could not regain access to your account.",
+    "dugme": "Turn off email notifications",
+    "dugme_loading": "Turning off…",
+    "uspesno": "We have turned off email notifications for your account.",
+    "ponovo_uputstvo": "You can turn them back on any time in your profile.",
+    "na_profil": "Open profile",
+    "greska": "Something went wrong. Try again, or turn notifications off in your profile."
+  },
   "registracija": {
     "naslov": "Registration",
     "podnaslov": "Join the KOLO community",
@@ -629,7 +642,13 @@
     "prodato": "Sold",
     "ukloni": "Remove",
     "pratim_kategorije_naslov": "Categories I follow",
-    "pratim_kategorije_opis": "Pick the Marketplace categories you are interested in — your choice is saved instantly. On the Marketplace, use the “Followed only” chip to apply them."
+    "pratim_kategorije_opis": "Pick the Marketplace categories you are interested in — your choice is saved instantly. On the Marketplace, use the “Followed only” chip to apply them.",
+    "email_naslov": "Email notifications",
+    "email_opis": "When something needs your attention — a verification, a new message, a decision on your application — we also send you an email, alongside the in-app bell.",
+    "email_toggle": "Send me email notifications",
+    "email_napomena_lozinka": "Password reset emails are always sent, regardless of this switch.",
+    "email_ukljuceno": "On",
+    "email_iskljuceno": "Off"
   },
   "zrno": {
     "naslov": "ZRNO",

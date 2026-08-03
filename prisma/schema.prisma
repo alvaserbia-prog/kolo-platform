@@ -233,6 +233,14 @@ model User {
   // Izabrani jezik korisnika (next-intl locale): "sr" | "sr-Cyrl" | "en" | "hu".
   // Koristi se za jezik notifikacija/email-ova i podrazumevani prikaz po prijavi.
   jezik              String    @default("sr")
+  // Email obaveštenja o događajima koji traže pažnju (verifikacija, odluke o
+  // prijavama, nove poruke...). Opt-out: podrazumevano uključeno, korisnik gasi
+  // u profilu ili linkom iz mejla. NE utiče na sistemske mejlove bez kojih nalog
+  // ne radi (reset lozinke) — oni idu uvek.
+  emailObavestenja   Boolean   @default(true)
+  // Trajni token za odjavu iz mejlova bez prijave (link u podnožju svakog mejla).
+  // Generiše se lenjo, pri prvom slanju. Ne otkriva identitet ni email adresu.
+  emailOdjavaToken   String?   @unique
   deaktiviranAt      DateTime?
   pristankiPolitike  PolitikaPrihvatanje[]
   pristankiPravilnika PravilnikPrihvatanje[]

@@ -39,6 +39,7 @@ export default async function ProfilPage() {
         prikaziZrno: user.podaci?.prikaziZrno ?? true,
         prikaziRangDonacija: user.podaci?.prikaziRangDonacija ?? true,
         prikaziOglase: user.podaci?.prikaziOglase ?? true,
+        emailObavestenja: user.emailObavestenja,
       }}
     />
   );

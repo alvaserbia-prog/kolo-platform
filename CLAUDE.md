@@ -315,6 +315,20 @@ docs/             — interne radne beleške (nije normativa)
 
 ### Notifikacije
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
+- **Tri kanala iz jednog poziva (od 2026-08-03):** `posaljiNotifikaciju()` upiše zvonce (`Notifikacija`), pošalje **web push** (`push.ts`, VAPID) i **email** (`email.ts`, Resend). Push i email idu kao `void` — ne blokiraju odgovor i ne bacaju.
+
+### Email korisnicima (Resend)
+- **`src/lib/email.ts`** je jedini ulaz: `emailLayout()` (zajednički HTML šablon svih mejlova), `posaljiEmailRaw()` (Resend fetch, vraća bool), `posaljiEmailKorisniku()` (obaveštenja, poštuje opt-out), `bazniUrl()` (allowlist host-ova protiv host-header poisoning-a).
+- **Dva režima:**
+  - **Sistemski mejl** — reset/postavljanje lozinke (`passwordReset.ts`). Ide **uvek**, ne poštuje opt-out (bez njega nalog nije povratljiv), bez linka za odjavu.
+  - **Obaveštenja** — sve ostalo. `posaljiEmailKorisniku()` preskače nalog bez email adrese, ugašen nalog (`deaktiviranAt`) i korisnika sa `emailObavestenja=false`; u podnožje ubacuje link za odjavu.
+- **Opt-out:** `User.emailObavestenja` (Boolean, default `true`) + `User.emailOdjavaToken` (nasumičan, generiše se lenjo pri prvom slanju). Migracija `20260803120000_email_obavestenja`. Prekidač u profilu → `PATCH /api/profil/obavestenja`; odjava bez prijave → stranica `/odjava-obavestenja/[token]` → `POST /api/email/odjava`. **Odjava je POST, ne GET** — klijenti za poštu prefetch-uju linkove, pa bi GET odjavio korisnika koji nije kliknuo.
+- **Pokrivenost:** email ide uz **svaku** notifikaciju (23 pozivna mesta — verifikacija, donacije, pokroviteljstvo, programi, doprinos-oglasi, krugovi, prigovori, transfer POEN-a, nadzor, tabla jemstva…), plus dva mesta van `posaljiNotifikaciju`:
+  - **Nove poruke** (`/api/poruke/[konvId]`) — mejl samo za **prvu nepročitanu** poruku u nizu; dok primalac ne otvori konverzaciju, dalje poruke ne šalju mejl.
+  - **Verifikacija QR/token putem** (`/api/verifikacija`) — ranije **nije slala nikakvo obaveštenje** (put sa table jemstva jeste); sada šalje isto obaveštenje kao tabla.
+- **Izuzetak `{ email: false }`:** admin notifikacija „Nov korisnik se priključio" — admini isti događaj već dobijaju preko `posaljiAdminAlert` (email + Telegram), inače bi stigao dvaput.
+- **Jezik:** mejlovi su na srpskom, kao i tekst zvonca (tekstovi notifikacija se generišu na pozivnim mestima i nisu prevedeni). `User.jezik` se ovde još ne koristi.
+- **Admin upozorenja** (`adminAlert.ts`) su zaseban kanal: idu na `ADMIN_EMAIL` + Telegram, nikad korisniku (18 događaja — registracija, prijava verifikacije, ZRNO zahtevi, programi, krugovi, prigovori, bagovi, zero-sum, nadzor).
 
 ### Početna (`/pocetna`)
 - Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
@@ -363,7 +377,7 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 ## API endpointi (izbor)
 
 ### Korisnici / profil
-`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci}` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
+`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci,obavestenja}` · `POST /api/email/odjava` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
 
 ### Novčanik / transfer
 `POST /api/transfer` · `GET /api/novcanik/transakcije`
