@@ -110,7 +110,8 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
         autoComplete="off"
         aria-autocomplete="list"
         aria-expanded={showSugestije && sugestije.length > 0}
-        className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 transition-colors"
+        // 16px (text-base): manji font tera iOS Safari da zumira ekran pri fokusu.
+        className="w-full px-4 py-3 rounded-xl border border-kolo-border text-base outline-none focus:border-kolo-green-600 transition-colors"
       />
       {showSugestije && sugestije.length > 0 && (
         <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-y-auto max-h-60">

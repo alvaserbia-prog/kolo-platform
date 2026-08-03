@@ -3,10 +3,18 @@ import { prisma } from "@/lib/prisma";
 
 /**
  * POST /api/cron/tabla-jemstva-istek
- * Označava aktivne zahteve za jemstvo kojima je prošao rok (expiresAt = 72h od
- * objave) kao ISTEKLE (čl. 16 Uslova korišćenja). Dnevni cron je dovoljan: GET
- * tabla u realnom vremenu filtrira `expiresAt > now`, pa korisnici nikad ne vide
- * istekle; ovaj cron samo čisti status (ISTEKAO) radi evidencije.
+ * Označava zahteve za jemstvo kojima je prošao rok (expiresAt = 8 dana od
+ * objave) kao ISTEKLE. Dnevni cron je dovoljan: GET tabla u realnom vremenu
+ * filtrira `expiresAt > now`, pa korisnici nikad ne vide istekle; ovaj cron samo
+ * čisti status (ISTEKAO) radi evidencije.
+ *
+ * Uz istek se brišu i skriveni kontakt podaci (telefon, saglasnost, link):
+ * prikupljeni su radi jedne objave i posle njenog isteka nemaju svrhu
+ * (minimizacija podataka, Politika čl. 4).
+ *
+ * NAPOMENA: rok je produžen sa 72h na 8 dana jer je struktuirana kartica znatno
+ * skuplja za popunjavanje od jedne rečenice. Politika 3.9.1 i Uslovi čl. 16 još
+ * uvek navode 72h — usklađivanje akata je zasebna, naknadna radnja.
  */
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-cron-secret");
@@ -15,8 +23,8 @@ export async function POST(req: NextRequest) {
   }
 
   const istekli = await prisma.zahtevZaJemstvo.updateMany({
-    where: { status: "AKTIVAN", expiresAt: { lte: new Date() } },
-    data: { status: "ISTEKAO" },
+    where: { status: { in: ["AKTIVAN", "NEPOTPUN"] }, expiresAt: { lte: new Date() } },
+    data: { status: "ISTEKAO", telefon: null, telefonSaglasnost: false, linkProfila: null },
   });
 
   console.log(`[Tabla jemstva] Istekli zahtevi: ${istekli.count}`);

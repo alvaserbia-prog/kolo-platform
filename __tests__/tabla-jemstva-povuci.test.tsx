@@ -21,9 +21,24 @@ function renderSaQuery(ui: ReactElement) {
 const ZAHTEV = {
   id: "zahtev-1",
   pseudonim: "TestKorisnik",
-  tekstPredstavljanja: "Zdravo, predstavljam se mreži radi verifikacije.",
+  kartica: {
+    puna: true,
+    ime: "Milan",
+    prezime: "Jovanović",
+    inicijali: "M. J.",
+    godiste: 1978,
+    decenija: "1970-e",
+    mesto: "Kula",
+    nadimak: "Miša Kovačev",
+    cimeSeBavi: "Limar, radnja kod pijace",
+    legacyTekst: null,
+  },
+  nepotpuna: false,
+  uFeedu: true,
+  nedostaje: [] as string[],
+  linkProfila: null,
   createdAt: new Date().toISOString(),
-  expiresAt: new Date(Date.now() + 72 * 60 * 60 * 1000).toISOString(),
+  expiresAt: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString(),
   mojZahtev: true,
 };
 
