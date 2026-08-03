@@ -40,6 +40,8 @@ type Props = {
     osnivac?: string;
     bezVerifikovanih?: string;
   };
+  /** Oznaka nadzora uz verifikovane (podrazumevano da; graf je ne prikazuje). */
+  prikaziNadzor?: boolean;
 };
 
 function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) {
@@ -89,6 +91,7 @@ export default function MiniStablo({
   naslov = "Lanac verifikacija",
   onKlik,
   tekstovi,
+  prikaziNadzor = true,
 }: Props) {
   const bezVerifikatora = tekstovi?.bezVerifikatora ?? "Još nisi verifikovan";
   const osnivac = tekstovi?.osnivac ?? "Početna verifikacija (osnivač)";
@@ -145,7 +148,7 @@ export default function MiniStablo({
                   className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
                 >
                   <span className="text-sm font-medium">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
-                  <StatusBadge status={v.statusNadzora} />
+                  {prikaziNadzor && <StatusBadge status={v.statusNadzora} />}
                 </Stavka>
               ))}
             </div>
