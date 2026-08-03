@@ -45,6 +45,7 @@ export async function GET() {
         location: true,
         telefon: true,
         memberHash: true,
+        emailObavestenja: true,
         createdAt: true,
         deaktiviranAt: true,
       },

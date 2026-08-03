@@ -15,6 +15,7 @@ import {
   izvrsiVerifikaciju,
   VerifikacijaGreska,
 } from "@/lib/protokol/verifikacija-service";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest) {
@@ -50,6 +51,18 @@ export async function POST(req: NextRequest) {
       potvrdaPoznavanja,
       oznaka,
     });
+
+    // Obavesti verifikovanog (zvonce + push + email), sa pozivom na prijavu ako
+    // ne poznaje verifikatora — isto kao put sa table jemstva. Ne blokira odgovor.
+    void posaljiNotifikaciju(
+      rez.verifikovaniId,
+      "VERIFIKOVAN",
+      "Verifikovan/a si",
+      `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
+        `Ako ne poznaješ ovu osobu, prijavi verifikaciju.`,
+      "/verifikacija"
+    );
+
     return NextResponse.json({
       verifikacijaId: rez.verifikacijaId,
       verifikovaniPseudonim: rez.verifikovaniPseudonim,

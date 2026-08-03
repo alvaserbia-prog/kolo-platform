@@ -36,6 +36,7 @@ interface ProfilProps {
     prikaziZrno: boolean;
     prikaziRangDonacija: boolean;
     prikaziOglase: boolean;
+    emailObavestenja: boolean;
   };
   praceneKategorije: string[];
 }
@@ -122,6 +123,24 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
       body: JSON.stringify({ [field]: vrednost }),
     });
     setToggleLoading(null);
+  }
+
+  // Email obaveštenja (opt-out). Zasebno od vidljivosti profila — kolona je na
+  // User-u, ne na UserPodaci, pa ide na svoju rutu.
+  const [emailObavestenja, setEmailObavestenja] = useState(user.emailObavestenja);
+  const [emailLoading, setEmailLoading] = useState(false);
+
+  async function promeniEmailObavestenja(vrednost: boolean) {
+    setEmailLoading(true);
+    setEmailObavestenja(vrednost);
+    const res = await fetch("/api/profil/obavestenja", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emailObavestenja: vrednost }),
+    }).catch(() => null);
+    // Vrati prekidač ako upis nije prošao — da prikaz ne laže o stanju.
+    if (!res?.ok) setEmailObavestenja(!vrednost);
+    setEmailLoading(false);
   }
 
   // Prigovor
@@ -672,6 +691,35 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
         <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("pratim_kategorije_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-4">{t("pratim_kategorije_opis")}</p>
         <CategoryChips mode="multi" selected={pracene} onChange={togglePracenje} />
+      </div>
+
+      {/* Email obaveštenja — jedan prekidač. Gasi SVE obaveštajne mejlove; mejl za
+          reset lozinke ne zavisi od ovoga jer bez njega nalog nije povratljiv. */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("email_naslov")}</h2>
+        <p className="text-xs text-kolo-muted mb-4">{t("email_opis")}</p>
+        <div className="flex justify-between items-center gap-4">
+          <div>
+            <p className="text-sm font-semibold text-kolo-text">{t("email_toggle")}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("email_napomena_lozinka")}</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => promeniEmailObavestenja(!emailObavestenja)}
+            disabled={emailLoading}
+            aria-label={emailObavestenja ? t("email_ukljuceno") : t("email_iskljuceno")}
+            title={emailObavestenja ? t("email_ukljuceno") : t("email_iskljuceno")}
+            className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
+              emailObavestenja ? "bg-kolo-green-700" : "bg-kolo-border"
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+                emailObavestenja ? "translate-x-6" : "translate-x-1"
+              }`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
