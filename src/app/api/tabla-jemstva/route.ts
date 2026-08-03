@@ -15,8 +15,8 @@ import {
 // Vidljivost je gradirana (Pravilnik čl. 28–30, 67; Politika čl. 6):
 //   verifikovan član → puna kartica
 //   neverifikovan    → inicijali, mesto, decenija rođenja
-// Telefon i link se NIKAD ne vraćaju ovde (telefon vidi samo UO; link tek onaj
-// ko je potvrdio prepoznavanje — vidi /[id]/prepoznajem).
+// Telefon se NIKAD ne vraća ovde — vidi ga isključivo UO, kroz zaseban spisak
+// neprepoznatih kandidata, uz logovanje pristupa.
 //
 // Za posmatrača-verifikatora svaka kartica nosi i `verifikacijaBlokirana`
 // ("zona" | "pocetni" | null): tabla ne sme da nudi kao mete korisnike iz

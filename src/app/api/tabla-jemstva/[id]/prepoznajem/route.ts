@@ -11,9 +11,9 @@ import { logAdminAkcija } from "@/lib/audit";
 // članu vrteo iste ljude u krug.
 //
 // VAŽNO — prepoznavanje NIJE jemstvo. Odgovor „DA" otvara isključivo kanal
-// komunikacije (istu konverzaciju kao dugme „Pošalji poruku" na zidu). Formalni čin jemstva je zaseban
-// akt, sa zasebnom potvrdom odgovornosti i zasebnim upisom u lanac
-// (/[id]/verifikuj) — ta dva koraka se ne spajaju ni u UI ni u bazi.
+// komunikacije (istu konverzaciju kao dugme „Pošalji poruku" na zidu). Formalni
+// čin jemstva je zaseban akt, sa zasebnom potvrdom odgovornosti i zasebnim
+// upisom u lanac (/[id]/verifikuj) — ne spajaju se ni u UI ni u bazi.
 const DOZVOLJENI = ["DA", "NE", "NISAM_SIGURAN"] as const;
 type Odgovor = (typeof DOZVOLJENI)[number];
 
