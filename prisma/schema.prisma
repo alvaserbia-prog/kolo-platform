@@ -1199,11 +1199,10 @@ model VerifikacijaToken {
 // Sva polja kartice su OPCIONA (nikoga ne zaustavljamo na vratima), ali kartica
 // bez `ime` + `mesto` NE ULAZI u feed — bez mesta se ne može nikome dovesti.
 //
-// `telefon` i `linkProfila` su SKRIVENI — nikad se ne prikazuju na kartici:
-//   - telefon vidi isključivo UO, i to samo kad je `telefonSaglasnost` = true
-//     (svrha: da Fondacija pozove čoveka koga niko od članova nije prepoznao);
-//   - link se otkriva tek onome ko je već potvrdio prepoznavanje (odgovor DA).
-// Oba se brišu kad korisnik bude verifikovan. Svaki pristup se loguje.
+// `telefon` je SKRIVEN — nikad se ne prikazuje na kartici. Vidi ga isključivo
+// UO, i to samo kad je `telefonSaglasnost` = true (svrha: da Fondacija pozove
+// čoveka koga niko od članova nije prepoznao). Briše se kad korisnik bude
+// verifikovan, kad objava istekne i kad se ukloni. Svaki pristup se loguje.
 
 enum JemstvoStatus {
   AKTIVAN
@@ -1233,10 +1232,9 @@ model ZahtevZaJemstvo {
   nadimak    String? // nadimak ili kućno ime — najjači signal u malim mestima
   cimeSeBavi String? // „čime se baviš / po čemu te znaju", max 100 znakova
 
-  // ── Skriveni kontakt (nikad na kartici) ──
+  // ── Skriveni kontakt (nikad na kartici, vidi ga samo UO) ──
   telefon           String?
   telefonSaglasnost Boolean @default(false)
-  linkProfila       String?
 
   // ── Legacy (redizajn): stari slobodan tekst se NE parsira automatski —
   //    pogrešno izvučeno ime je gore od nikakvog. Čuva se kao arhiva, a

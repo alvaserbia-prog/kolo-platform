@@ -59,14 +59,6 @@ describe("validirajKarticu", () => {
     expect(validirajKarticu({ telefon: "123", telefonSaglasnost: true }).ok).toBe(false);
   });
 
-  it("normalizuje link i odbija besmislicu", () => {
-    const r = validirajKarticu({ linkProfila: "facebook.com/neko" });
-    expect(r.ok).toBe(true);
-    if (r.ok) expect(r.kartica.linkProfila).toBe("https://facebook.com/neko");
-
-    expect(validirajKarticu({ linkProfila: "ovo nije link" }).ok).toBe(false);
-  });
-
   it("seče „čime se baviš” na 100 znakova — kartica ne sme da postane oglas", () => {
     const r = validirajKarticu({ cimeSeBavi: "a".repeat(500) });
     expect(r.ok).toBe(true);

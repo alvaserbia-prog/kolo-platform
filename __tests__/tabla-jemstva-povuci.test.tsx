@@ -36,7 +36,6 @@ const ZAHTEV = {
   nepotpuna: false,
   uFeedu: true,
   nedostaje: [] as string[],
-  linkProfila: null,
   createdAt: new Date().toISOString(),
   expiresAt: new Date(Date.now() + 8 * 24 * 60 * 60 * 1000).toISOString(),
   mojZahtev: true,

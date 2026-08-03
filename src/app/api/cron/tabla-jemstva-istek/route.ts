@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
  * filtrira `expiresAt > now`, pa korisnici nikad ne vide istekle; ovaj cron samo
  * čisti status (ISTEKAO) radi evidencije.
  *
- * Uz istek se brišu i skriveni kontakt podaci (telefon, saglasnost, link):
+ * Uz istek se briše i skriveni kontakt (telefon i saglasnost za poziv):
  * prikupljeni su radi jedne objave i posle njenog isteka nemaju svrhu
  * (minimizacija podataka, Politika čl. 4).
  *
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
   const istekli = await prisma.zahtevZaJemstvo.updateMany({
     where: { status: { in: ["AKTIVAN", "NEPOTPUN"] }, expiresAt: { lte: new Date() } },
-    data: { status: "ISTEKAO", telefon: null, telefonSaglasnost: false, linkProfila: null },
+    data: { status: "ISTEKAO", telefon: null, telefonSaglasnost: false },
   });
 
   console.log(`[Tabla jemstva] Istekli zahtevi: ${istekli.count}`);

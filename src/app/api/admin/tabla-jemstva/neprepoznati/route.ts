@@ -39,7 +39,6 @@ export async function GET() {
       nadimak: true,
       cimeSeBavi: true,
       telefon: true,
-      linkProfila: true,
       createdAt: true,
       expiresAt: true,
       user: { select: { pseudonim: true } },
@@ -67,7 +66,6 @@ export async function GET() {
       nadimak: z.nadimak,
       cimeSeBavi: z.cimeSeBavi,
       telefon: z.telefon,
-      linkProfila: z.linkProfila,
       // Koliko ih je uopšte videlo i odgovorilo „ne / nisam siguran".
       odgovoreno: z._count.prepoznavanja,
       createdAt: z.createdAt.toISOString(),

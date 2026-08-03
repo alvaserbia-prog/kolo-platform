@@ -11,9 +11,8 @@ import type { KarticaPrikaz as Kartica } from "@/lib/jemstvo-kartica";
  * Feed prepoznavanja — primarni ulaz za verifikovanog člana.
  * Jedna kartica, jedno pitanje: „Poznaješ li ovu osobu?".
  *
- * VAŽNO: odgovor „Da" NIJE jemstvo. On samo otvara kanal komunikacije (i, ako
- * ga je čovek ostavio, link ka profilu). Formalni čin jemstva je zaseban korak
- * sa zasebnom potvrdom, na zidu ili na stranici verifikacije.
+ * VAŽNO: odgovor „Da" NIJE jemstvo. On samo otvara kanal komunikacije. Formalni
+ * čin jemstva je zaseban korak sa zasebnom potvrdom, na zidu.
  */
 type Stavka = {
   id: string;
@@ -29,7 +28,7 @@ export default function FeedPrepoznavanja() {
   const [i, setI] = useState(0);
   const [radi, setRadi] = useState(false);
   const [greska, setGreska] = useState("");
-  const [otvoren, setOtvoren] = useState<{ konverzacijaId: string; link: string | null } | null>(null);
+  const [otvoren, setOtvoren] = useState<string | null>(null);
 
   const { data: kartice = [], isLoading, refetch } = useQuery({
     queryKey: ["jemstvo-feed"],
@@ -59,7 +58,7 @@ export default function FeedPrepoznavanja() {
       return;
     }
     if (odgovor === "DA" && d.konverzacijaId) {
-      setOtvoren({ konverzacijaId: d.konverzacijaId, link: d.linkProfila ?? null });
+      setOtvoren(d.konverzacijaId);
       return;
     }
     dalje();
@@ -128,21 +127,11 @@ export default function FeedPrepoznavanja() {
           </p>
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => router.push(`/poruke?k=${otvoren.konverzacijaId}`)}
+              onClick={() => router.push(`/poruke?k=${otvoren}`)}
               className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors"
             >
               {t("dugme_otvori_razgovor")}
             </button>
-            {otvoren.link && (
-              <a
-                href={otvoren.link}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="px-4 py-2 rounded-xl bg-kolo-bg border border-kolo-border text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors"
-              >
-                {t("dugme_otvori_profil")}
-              </a>
-            )}
             <button
               onClick={dalje}
               className="px-4 py-2 rounded-xl bg-kolo-bg border border-kolo-border text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors"

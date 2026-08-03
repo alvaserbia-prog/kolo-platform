@@ -27,7 +27,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (zahtev.status !== "AKTIVAN" && zahtev.status !== "NEPOTPUN")
     return NextResponse.json({ error: "Zahtev nije aktivan." }, { status: 400 });
 
-  // Uklanjanje briše i skrivene kontakt podatke — uklonjena objava nema svrhu
+  // Uklanjanje briše i skriveni kontakt — uklonjena objava nema svrhu
   // zbog koje su prikupljeni (minimizacija, Politika čl. 4).
   await prisma.zahtevZaJemstvo.update({
     where: { id },
@@ -36,7 +36,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       uklonjenRazlog: razlog,
       telefon: null,
       telefonSaglasnost: false,
-      linkProfila: null,
     },
   });
 

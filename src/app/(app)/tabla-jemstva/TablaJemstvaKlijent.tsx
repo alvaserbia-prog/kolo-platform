@@ -17,7 +17,6 @@ type Zahtev = {
   kartica: Kartica;
   nepotpuna: boolean;
   uFeedu: boolean;
-  linkProfila: string | null;
   createdAt: string;
   expiresAt: string;
   mojZahtev: boolean;
@@ -244,16 +243,6 @@ export default function TablaJemstvaKlijent({
                     >
                       {radnja === z.id ? "..." : t("dugme_posalji_poruku")}
                     </button>
-                    {z.linkProfila && (
-                      <a
-                        href={z.linkProfila}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="px-3 py-1.5 rounded-lg bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold hover:bg-kolo-border transition-colors"
-                      >
-                        {t("dugme_otvori_profil")}
-                      </a>
-                    )}
                     {mozeVerifikovati &&
                       !z.verifikacijaBlokirana &&
                       !z.nepotpuna &&

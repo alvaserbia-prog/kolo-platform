@@ -26,7 +26,6 @@ type Kandidat = {
   nadimak: string | null;
   cimeSeBavi: string | null;
   telefon: string | null;
-  linkProfila: string | null;
   odgovoreno: number;
   createdAt: string;
 };
@@ -97,16 +96,6 @@ export default function NeprepoznatiSpisak() {
                 >
                   {k.telefon}
                 </a>
-                {k.linkProfila && (
-                  <a
-                    href={k.linkProfila}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="text-xs text-kolo-muted hover:text-kolo-text underline"
-                  >
-                    {t("dugme_otvori_profil")}
-                  </a>
-                )}
                 <span className="text-xs text-kolo-muted">
                   {t("uo_odgovoreno", { broj: k.odgovoreno })}
                 </span>

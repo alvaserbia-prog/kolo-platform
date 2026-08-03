@@ -6,7 +6,6 @@ import LokacijaSearch from "@/components/LokacijaSearch";
 import KarticaPrikaz from "@/components/jemstvo/KarticaPrikaz";
 import {
   MAX_CIME_SE_BAVI,
-  MAX_LINK,
   MAX_NADIMAK,
   MAX_TELEFON,
   TRAJANJE_DANA,
@@ -37,7 +36,6 @@ export interface KarticaVrednosti {
   cimeSeBavi: string;
   telefon: string;
   telefonSaglasnost: boolean;
-  linkProfila: string;
 }
 
 export const PRAZNA_KARTICA: KarticaVrednosti = {
@@ -49,7 +47,6 @@ export const PRAZNA_KARTICA: KarticaVrednosti = {
   cimeSeBavi: "",
   telefon: "",
   telefonSaglasnost: false,
-  linkProfila: "",
 };
 
 const INPUT =
@@ -137,8 +134,6 @@ export default function KarticaForma({
             }}
           />
         </div>
-
-        <p className="text-sm font-medium text-kolo-text">{t("pregled_pitanje")}</p>
 
         {!uFeedu && (
           <p className="text-sm text-kolo-gold-600 box-warning px-4 py-3">{t("upozorenje_feed")}</p>
@@ -280,19 +275,6 @@ export default function KarticaForma({
           <span className="text-xs text-kolo-text">{t("saglasnost_telefon")}</span>
         </label>
 
-        <div>
-          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("label_link")}</label>
-          <input
-            type="url"
-            inputMode="url"
-            value={v.linkProfila}
-            onChange={(e) => set("linkProfila", e.target.value)}
-            maxLength={MAX_LINK}
-            placeholder={t("ph_link")}
-            className={INPUT}
-          />
-          <p className="mt-1 text-xs text-kolo-muted">{t("pomoc_link")}</p>
-        </div>
       </div>
 
       {!rezimDopune && (

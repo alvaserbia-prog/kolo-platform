@@ -65,21 +65,6 @@ export async function GET() {
     uZoni.add(p.userId === session.user.id ? p.forbiddenUserId : p.userId);
   }
 
-  // Link ka profilu vidi samo onaj ko je već potvrdio prepoznavanje (odgovor DA).
-  const mojaDa = await prisma.prepoznavanje.findMany({
-    where: { korisnikId: session.user.id, odgovor: "DA" },
-    select: { zahtevId: true },
-  });
-  const potvrdjeni = new Set(mojaDa.map((p) => p.zahtevId));
-  const linkovi =
-    potvrdjeni.size > 0
-      ? await prisma.zahtevZaJemstvo.findMany({
-          where: { id: { in: [...potvrdjeni] }, linkProfila: { not: null } },
-          select: { id: true, linkProfila: true },
-        })
-      : [];
-  const linkPoId = new Map(linkovi.map((l) => [l.id, l.linkProfila]));
-
   return NextResponse.json({
     mojeVerifikovan: session.user.verified,
     zahtevi: zahtevi.map((z) => {
@@ -93,7 +78,6 @@ export async function GET() {
         nepotpuna: z.status === "NEPOTPUN",
         uFeedu: jeKompletnaZaFeed(z),
         nedostaje: moj ? nedostajeZaFeed(z) : [],
-        linkProfila: linkPoId.get(z.id) ?? null,
         createdAt: z.createdAt.toISOString(),
         expiresAt: z.expiresAt.toISOString(),
         mojZahtev: moj,

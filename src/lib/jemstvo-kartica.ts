@@ -17,7 +17,6 @@ export const MAX_PREZIME = 40;
 export const MAX_NADIMAK = 60;
 export const MAX_CIME_SE_BAVI = 100;
 export const MAX_TELEFON = 30;
-export const MAX_LINK = 300;
 
 // Donja granica je zaštita od očiglednih grešaka u kucanju, gornja od naloga
 // za maloletnike (Modul Deca nije aktivan — vidi Pravilnik čl. 58).
@@ -37,7 +36,6 @@ export interface KarticaUnos {
   cimeSeBavi?: unknown;
   telefon?: unknown;
   telefonSaglasnost?: unknown;
-  linkProfila?: unknown;
 }
 
 export interface Kartica {
@@ -49,7 +47,6 @@ export interface Kartica {
   cimeSeBavi: string | null;
   telefon: string | null;
   telefonSaglasnost: boolean;
-  linkProfila: string | null;
 }
 
 export type ValidacijaRezultat =
@@ -112,23 +109,6 @@ export function validirajKarticu(unos: KarticaUnos): ValidacijaRezultat {
     }
   }
 
-  let linkProfila: string | null = null;
-  if (unos.linkProfila !== undefined && unos.linkProfila !== null && unos.linkProfila !== "") {
-    const l = tekst(unos.linkProfila, MAX_LINK);
-    if (l) {
-      let u: URL;
-      try {
-        u = new URL(l.startsWith("http") ? l : `https://${l}`);
-      } catch {
-        return { ok: false, greska: "Link ka profilu nije ispravna adresa." };
-      }
-      if (u.protocol !== "https:" && u.protocol !== "http:") {
-        return { ok: false, greska: "Link ka profilu nije ispravna adresa." };
-      }
-      linkProfila = u.toString();
-    }
-  }
-
   const telefonSaglasnost = unos.telefonSaglasnost === true;
   // Saglasnost bez broja nema dejstvo; broj bez saglasnosti se ne bi smeo koristiti
   // za poziv, pa ga ni ne čuvamo — minimizacija podataka (Politika čl. 4).
@@ -151,7 +131,6 @@ export function validirajKarticu(unos: KarticaUnos): ValidacijaRezultat {
       cimeSeBavi,
       telefon,
       telefonSaglasnost: telefon ? telefonSaglasnost : false,
-      linkProfila,
     },
   };
 }

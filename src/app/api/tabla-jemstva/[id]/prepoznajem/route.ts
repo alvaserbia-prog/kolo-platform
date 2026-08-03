@@ -11,8 +11,7 @@ import { logAdminAkcija } from "@/lib/audit";
 // članu vrteo iste ljude u krug.
 //
 // VAŽNO — prepoznavanje NIJE jemstvo. Odgovor „DA" otvara isključivo kanal
-// komunikacije (istu konverzaciju kao dugme „Pošalji poruku" na zidu) i otkriva
-// link ka profilu, ako ga je podnosilac ostavio. Formalni čin jemstva je zaseban
+// komunikacije (istu konverzaciju kao dugme „Pošalji poruku" na zidu). Formalni čin jemstva je zaseban
 // akt, sa zasebnom potvrdom odgovornosti i zasebnim upisom u lanac
 // (/[id]/verifikuj) — ta dva koraka se ne spajaju ni u UI ni u bazi.
 const DOZVOLJENI = ["DA", "NE", "NISAM_SIGURAN"] as const;
@@ -39,7 +38,6 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       userId: true,
       status: true,
       expiresAt: true,
-      linkProfila: true,
       user: { select: { pseudonim: true } },
     },
   });
@@ -72,7 +70,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   });
 
   // Evidencija pristupa (čl. 5 Registra radnji obrade) — trenutak u kome član
-  // dobija kanal i (eventualno) link ka profilu.
+  // dobija kanal ka podnosiocu.
   await logAdminAkcija(
     meId,
     "PREPOZNAVANJE_POTVRDJENO",
@@ -80,9 +78,5 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     `Potvrđeno prepoznavanje i otvorena konverzacija sa korisnikom ${zahtev.user.pseudonim}`
   );
 
-  return NextResponse.json({
-    ok: true,
-    konverzacijaId: konv.id,
-    linkProfila: zahtev.linkProfila,
-  });
+  return NextResponse.json({ ok: true, konverzacijaId: konv.id });
 }
