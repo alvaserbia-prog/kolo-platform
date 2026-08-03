@@ -44,15 +44,33 @@ type Props = {
   prikaziNadzor?: boolean;
 };
 
+/**
+ * Oznaka nadzora — stoji sa strane pseudonima.
+ * „nadzirano" = zelena kvačica (bez teksta); „čeka nadzor" = zlatna oznaka.
+ */
 function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) {
   if (status === "ne-podleze") return null;
-  const klasa =
-    status === "nadzirano"
-      ? "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100"
-      : "bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100";
-  const tekst = status === "nadzirano" ? "Nadzirano" : "Čeka nadzor";
+  if (status === "nadzirano") {
+    return (
+      <svg
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        aria-hidden="true"
+        className="w-4 h-4 shrink-0 text-kolo-green-700"
+      >
+        <title>Nadzirano</title>
+        <path
+          fillRule="evenodd"
+          d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+          clipRule="evenodd"
+        />
+      </svg>
+    );
+  }
   return (
-    <span className={`text-[10px] px-1.5 py-0.5 rounded-md border ${klasa}`}>{tekst}</span>
+    <span className="text-[10px] px-1.5 py-0.5 rounded-md border shrink-0 bg-kolo-gold-100 text-kolo-gold-600 border-kolo-gold-100">
+      Čeka nadzor
+    </span>
   );
 }
 
@@ -145,9 +163,9 @@ export default function MiniStablo({
                   key={v.id}
                   id={v.id}
                   onKlik={onKlik}
-                  className="flex flex-col items-start gap-1 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
                 >
-                  <span className="text-sm font-medium">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
+                  <span className="text-sm font-medium truncate">@<Pseudonim>{v.pseudonim}</Pseudonim></span>
                   {prikaziNadzor && <StatusBadge status={v.statusNadzora} />}
                 </Stavka>
               ))}
