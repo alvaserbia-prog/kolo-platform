@@ -220,6 +220,107 @@ export type ProveraZoneRezultat =
   | { dozvoljeno: true }
   | { dozvoljeno: false; vrsta: "POCETNI_META" | "ZONA"; razlog: string };
 
+/** Pomoćna izgradnja mapa grafa (roditelji/deca) bez računanja zona. */
+export function izgradiZonaGraf(zapisi: GrafZapis[]): ZonaGraf {
+  const graf = prazanZonaGraf();
+  for (const z of zapisi) {
+    if (z.verifikatorId === z.verifikovaniId) continue;
+    uSkup(graf.roditelji, z.verifikovaniId, z.verifikatorId);
+    uSkup(graf.deca, z.verifikatorId, z.verifikovaniId);
+  }
+  return graf;
+}
+
+/** Da li postoji usmerena putanja od → ka u grafu (silazna linija). */
+function postojiPutanja(graf: ZonaGraf, od: string, ka: string): boolean {
+  const stek = [...(graf.deca.get(od) ?? [])];
+  const videli = new Set<string>();
+  while (stek.length > 0) {
+    const n = stek.pop()!;
+    if (n === ka) return true;
+    if (videli.has(n)) continue;
+    videli.add(n);
+    for (const c of graf.deca.get(n) ?? []) stek.push(c);
+  }
+  return false;
+}
+
+/**
+ * Izuzetak za prvu generaciju (čl. 12 stav 5, dokaz stvarnosti v4.0.1):
+ * korisnici koje je NEPOSREDNO verifikovao isti početni korisnik mogu
+ * verifikovati jedni druge, iako su po opštim pravilima braća u istoj zoni.
+ *
+ * Izuzetak NE važi:
+ *  - ako su dvojica već povezana usmerenom putanjom grafa u bilo kom smeru
+ *    (uzlazna/silazna linija — obuhvata i recipročnu zabranu, jer je ivica
+ *    putanja dužine 1); linije nastaju upravo verifikacijama po izuzetku,
+ *    pa svaka iskorišćena verifikacija gasi deo preostalih mogućnosti;
+ *  - za dalje potomke (izuzetak se ne prostire niz granu);
+ *  - kada je bilo koja strana početni korisnik.
+ *
+ * Prelazno ograničenje (čl. 22) se proverava NEZAVISNO i ovaj izuzetak ga ne
+ * dira — do opticaja od 100.000 POEN-a izuzetak je faktički neaktivan, jer
+ * svaki neposredno verifikovani već ima jednu primljenu verifikaciju.
+ */
+export function izuzetakZaPrvuGeneraciju(
+  graf: ZonaGraf,
+  pocetniIds: Set<string>,
+  verifikatorId: string,
+  verifikovaniId: string
+): boolean {
+  if (verifikatorId === verifikovaniId) return false;
+  if (pocetniIds.has(verifikatorId) || pocetniIds.has(verifikovaniId)) return false;
+  const roditeljiA = graf.roditelji.get(verifikatorId);
+  const roditeljiB = graf.roditelji.get(verifikovaniId);
+  if (!roditeljiA || !roditeljiB) return false;
+  let zajednickiPocetni = false;
+  for (const p of roditeljiA) {
+    if (pocetniIds.has(p) && roditeljiB.has(p)) {
+      zajednickiPocetni = true;
+      break;
+    }
+  }
+  if (!zajednickiPocetni) return false;
+  return (
+    !postojiPutanja(graf, verifikatorId, verifikovaniId) &&
+    !postojiPutanja(graf, verifikovaniId, verifikatorId)
+  );
+}
+
+export type ProveraZoneSaIzuzetkomRezultat =
+  | { dozvoljeno: true; izuzetak: boolean }
+  | { dozvoljeno: false; vrsta: "POCETNI_META" | "ZONA"; razlog: string };
+
+/**
+ * Merodavna provera dozvole verifikacije A→B: osnovna pravila zone (čl. 12,
+ * čl. 14) + izuzetak za prvu generaciju (čl. 12 stav 5, v4.0.1). Kada zona
+ * blokira, a izuzetak važi, verifikacija je dozvoljena uz `izuzetak: true`
+ * (pozivalac tada preskače staru anti-cirkularnu invarijantu, koja izuzetak
+ * ne poznaje).
+ */
+export function proveriDozvoluVerifikacijeSaIzuzetkom(
+  stanje: ZonaStanje,
+  graf: ZonaGraf,
+  pocetniIds: Set<string>,
+  verifikatorId: string,
+  verifikovaniId: string
+): ProveraZoneSaIzuzetkomRezultat {
+  const osnovna = proveriDozvoluVerifikacije(
+    stanje,
+    pocetniIds,
+    verifikatorId,
+    verifikovaniId
+  );
+  if (osnovna.dozvoljeno) return { dozvoljeno: true, izuzetak: false };
+  if (
+    osnovna.vrsta === "ZONA" &&
+    izuzetakZaPrvuGeneraciju(graf, pocetniIds, verifikatorId, verifikovaniId)
+  ) {
+    return { dozvoljeno: true, izuzetak: true };
+  }
+  return osnovna;
+}
+
 /**
  * Provera dozvole verifikacije A→B (čl. 12 i čl. 14 st. 3, v3.9.2):
  *  1. B nije početni korisnik — početni se ne verifikuju u lancu jemstva;

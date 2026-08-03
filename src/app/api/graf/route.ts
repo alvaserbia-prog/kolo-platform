@@ -22,6 +22,7 @@ import {
   raspolozivSlot,
 } from "@/lib/protokol/dokaz-stvarnosti";
 import { odrediStabloRoditelja, stanjeCvora } from "@/lib/protokol/graf";
+import { izgradiZonaGraf, izuzetakZaPrvuGeneraciju } from "@/lib/protokol/zona";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -117,8 +118,15 @@ export async function GET() {
 
   const stablo = odrediStabloRoditelja(ivice);
 
+  // Izuzetak za prvu generaciju (čl. 12 st. 5, v4.0.1): graf veza + skup
+  // početnih, za proveru posmatrač↔čvor kod zonom blokiranih parova.
+  const zonaGraf = izgradiZonaGraf(ivice);
+  const pocetniIds = new Set(korisnici.filter((u) => u.jeOsnivac).map((u) => u.id));
+
   const cvorovi = korisnici.map((u) => {
     const kapacitet = izracunajKapacitet(u.tipKorisnika, u.indeksStvarnosti);
+    const uZoni = zabranjeniZaMene.has(u.id);
+    const uZoniObrnuto = jaSamUZoni.has(u.id);
     const { stanje, razlog } = stanjeCvora(
       posmatrac.id,
       {
@@ -128,9 +136,11 @@ export async function GET() {
         indeks: u.indeksStvarnosti,
         primljenoVerifikacija: primljeno.get(u.id) ?? 0,
       },
-      zabranjeniZaMene.has(u.id),
-      jaSamUZoni.has(u.id),
-      opticaj
+      uZoni,
+      uZoniObrnuto,
+      opticaj,
+      (uZoni || uZoniObrnuto) &&
+        izuzetakZaPrvuGeneraciju(zonaGraf, pocetniIds, posmatrac.id, u.id)
     );
     return {
       id: u.id,
