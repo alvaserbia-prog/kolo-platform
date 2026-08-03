@@ -283,6 +283,7 @@ model User {
   zabranjenaZona                  VerifikacionaZona[] @relation("ZonaVlasnik")
   uTudjimZonama                   VerifikacionaZona[] @relation("ZonaZabranjeni")
   zahteviZaJemstvo                ZahtevZaJemstvo[]
+  prepoznavanja                   Prepoznavanje[]
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
   createdAt              DateTime  @default(now())
@@ -1188,7 +1189,21 @@ model VerifikacijaToken {
 // ─── Tabla zahteva za jemstvo ─────────────────────────────────────────────────
 // Neverifikovan korisnik se predstavlja mreži verifikovanih radi uspostavljanja
 // kontakta neophodnog za verifikaciju (čl. 32 Pravilnika, čl. 16 Uslova korišćenja).
-// Tekst je vidljiv svim prijavljenima; kontakt samo verifikovanima, uz logovanje.
+//
+// REDIZAJN „kartica prepoznavanja" — objava se više NE PIŠE kao slobodan tekst,
+// nego se SASTAVLJA iz polja. Razlog: slobodan tekst se u praksi popunjavao kao
+// oglas („bavim se pčelarstvom") — formalno validno, a niko ne može da prepozna
+// osobu. Struktuirana polja + poznato mesto omogućavaju da sistem sam dovede
+// kandidata onome ko ga najverovatnije poznaje (vidi Prepoznavanje).
+//
+// Sva polja kartice su OPCIONA (nikoga ne zaustavljamo na vratima), ali kartica
+// bez `ime` + `mesto` NE ULAZI u feed — bez mesta se ne može nikome dovesti.
+//
+// `telefon` i `linkProfila` su SKRIVENI — nikad se ne prikazuju na kartici:
+//   - telefon vidi isključivo UO, i to samo kad je `telefonSaglasnost` = true
+//     (svrha: da Fondacija pozove čoveka koga niko od članova nije prepoznao);
+//   - link se otkriva tek onome ko je već potvrdio prepoznavanje (odgovor DA).
+// Oba se brišu kad korisnik bude verifikovan. Svaki pristup se loguje.
 
 enum JemstvoStatus {
   AKTIVAN
@@ -1196,22 +1211,69 @@ enum JemstvoStatus {
   ISTEKAO
   UKLONJEN
   ZAVRSEN
+  NEPOTPUN // legacy objava (slobodan tekst) — stoji na zidu, ne ulazi u feed
+}
+
+enum PrepoznavanjeOdgovor {
+  DA
+  NE
+  NISAM_SIGURAN
 }
 
 model ZahtevZaJemstvo {
-  id                  String        @id @default(uuid())
-  userId              String
-  user                User          @relation(fields: [userId], references: [id])
-  tekstPredstavljanja String
-  kontaktPodaci       String
-  status              JemstvoStatus @default(AKTIVAN)
-  uklonjenRazlog      String?
-  createdAt           DateTime      @default(now())
-  expiresAt           DateTime
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  // ── Kartica prepoznavanja (vidljiva verifikovanom članu) ──
+  ime        String?
+  prezime    String?
+  godiste    Int? // godina rođenja — razlikuje imenjake, nagoveštava generaciju
+  mesto      String? // iz šifarnika NASELJA_SRBIJE (validira se na serveru)
+  nadimak    String? // nadimak ili kućno ime — najjači signal u malim mestima
+  cimeSeBavi String? // „čime se baviš / po čemu te znaju", max 100 znakova
+
+  // ── Skriveni kontakt (nikad na kartici) ──
+  telefon           String?
+  telefonSaglasnost Boolean @default(false)
+  linkProfila       String?
+
+  // ── Legacy (redizajn): stari slobodan tekst se NE parsira automatski —
+  //    pogrešno izvučeno ime je gore od nikakvog. Čuva se kao arhiva, a
+  //    zahtev dobija status NEPOTPUN uz poziv vlasniku da dopuni karticu.
+  //    `tekstPredstavljanja`/`kontaktPodaci` ostaju jedan ciklus radi povratka.
+  legacyTekst         String?
+  tekstPredstavljanja String?
+  kontaktPodaci       String?
+
+  status         JemstvoStatus @default(AKTIVAN)
+  uklonjenRazlog String?
+  createdAt      DateTime      @default(now())
+  expiresAt      DateTime
+
+  prepoznavanja Prepoznavanje[]
 
   @@index([userId])
   @@index([status])
   @@index([expiresAt])
+  @@index([status, mesto]) // feed: kandidati iz istog mesta
+}
+
+// Odgovor verifikovanog člana na pitanje „Poznaješ li ovu osobu?".
+// SVA TRI odgovora se upisuju — bez upisa „NE"/„NISAM_SIGURAN" feed bi vrteo
+// iste ljude u krug. Odgovor DA otvara SAMO kanal komunikacije; formalni čin
+// jemstva je zaseban akt (VerifikacionaVeza) i ova tabela ga NE zamenjuje.
+model Prepoznavanje {
+  id         String               @id @default(uuid())
+  zahtevId   String
+  zahtev     ZahtevZaJemstvo      @relation(fields: [zahtevId], references: [id], onDelete: Cascade)
+  korisnikId String
+  korisnik   User                 @relation(fields: [korisnikId], references: [id])
+  odgovor    PrepoznavanjeOdgovor
+  createdAt  DateTime             @default(now())
+
+  @@unique([zahtevId, korisnikId])
+  @@index([korisnikId])
 }
 
 // ─── Nadzor integriteta verifikacija (anti-malverzacija, 1. krug) ─────────────
