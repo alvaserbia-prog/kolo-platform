@@ -15,6 +15,7 @@ export default async function MojiOglasiPage() {
       id: true, title: true,
       cenaTip: true, price: true, cenaDo: true, category: true,
       status: true, images: true, createdAt: true, soldAt: true,
+      uklonjenRazlog: true,
     },
   });
 
@@ -31,6 +32,7 @@ export default async function MojiOglasiPage() {
         slike: l.images.length,
         createdAt: l.createdAt.toISOString(),
         soldAt: l.soldAt?.toISOString() ?? null,
+        uklonjenRazlog: l.uklonjenRazlog,
       }))}
     />
   );

@@ -15,7 +15,11 @@ export async function GET(req: NextRequest) {
   const since = url.searchParams.get("since");
   const limit = Math.min(Number(url.searchParams.get("limit") ?? "100"), 200);
 
-  const where = since ? { createdAt: { gt: new Date(since) } } : {};
+  // Uklonjene poruke (Uslovi čl. 25 st. 2) nestaju iz sobe za sve — i za autora.
+  const where = {
+    uklonjenoAt: null,
+    ...(since ? { createdAt: { gt: new Date(since) } } : {}),
+  };
   const poruke = await prisma.chatMessage.findMany({
     where,
     orderBy: { createdAt: "desc" },

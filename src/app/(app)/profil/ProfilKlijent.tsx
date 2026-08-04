@@ -51,6 +51,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
     { value: "VERIFIKACIJA", label: t("prigovor_tip_verifikacija") },
     { value: "SUSPENZIJA", label: t("prigovor_tip_suspenzija") },
     { value: "PROGRAM", label: t("prigovor_tip_program") },
+    { value: "OGLAS", label: t("prigovor_tip_oglas") },
     { value: "OSTALO", label: t("prigovor_tip_ostalo") },
   ];
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
