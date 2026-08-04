@@ -90,6 +90,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         sellerPseudonim: listing.seller.pseudonim,
         sellerVerified: listing.seller.verified,
         isMine: listing.seller.id === session?.user?.id,
+        pregledi: listing.pregledi,
       }}
       isVerified={session?.user?.verified ?? false}
     />

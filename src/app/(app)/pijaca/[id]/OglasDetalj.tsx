@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -29,6 +29,8 @@ interface OglasProps {
   sellerPseudonim: string;
   sellerVerified: boolean;
   isMine: boolean;
+  /** Broj pregleda — prikazuje se samo oglašivaču. */
+  pregledi: number;
 }
 
 interface Props {
@@ -44,6 +46,21 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
   const [editMode, setEditMode] = useState(false);
   const [chatLoading, setChatLoading] = useState(false);
   const jePotraznja = oglas.tip === "POTRAZNJA";
+
+  // Zabeleži pregled oglasa — jednom po pretraživaču dnevno, da povratak na
+  // isti oglas ne naduvava brojač. Sopstvene preglede odbija server.
+  useEffect(() => {
+    if (oglas.isMine) return;
+    const kljuc = `pregled:${oglas.id}`;
+    const danas = new Date().toISOString().slice(0, 10);
+    try {
+      if (localStorage.getItem(kljuc) === danas) return;
+      localStorage.setItem(kljuc, danas);
+    } catch {
+      // Privatni režim / blokirano skladište — svejedno prijavi pregled.
+    }
+    void fetch(`/api/pijaca/${oglas.id}/pregled`, { method: "POST" }).catch(() => {});
+  }, [oglas.id, oglas.isMine]);
 
   async function handleKontakt() {
     setChatLoading(true);
@@ -165,6 +182,13 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
             <span>{jePotraznja ? t("narucilac") : t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
             <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
+            {/* Brojač vidi samo oglašivač — povratna informacija njemu, a ne
+                javna objava koliko je Pijaca (ne)posećena. */}
+            {oglas.isMine && (
+              <span>
+                {t("pregleda")}: <strong className="text-kolo-muted">{oglas.pregledi}</strong>
+              </span>
+            )}
           </div>
 
           {oglas.phone && isVerified && (
