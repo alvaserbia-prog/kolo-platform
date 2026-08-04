@@ -9,6 +9,7 @@ import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
 
 import type { Sekcija } from "./sekcije";
+import { profilHref } from "@/lib/profil-link";
 
 interface FondTx {
   id: string;
@@ -409,7 +410,7 @@ function FondacijaSekcija() {
           <div className="hidden sm:grid grid-cols-[1fr_140px_110px] gap-4 px-5 py-3 items-center text-sm">
             <div className="min-w-0">
               {s.userId ? (
-                <Link href={`/profil/${s.userId}`} className="font-medium text-kolo-green-700 hover:underline truncate block">
+                <Link href={profilHref({ id: s.userId, pseudonim: s.opis })} className="font-medium text-kolo-green-700 hover:underline truncate block">
                   <Pseudonim>{s.opis}</Pseudonim>
                 </Link>
               ) : (
@@ -426,7 +427,7 @@ function FondacijaSekcija() {
           <div className="sm:hidden px-4 py-3 flex items-center justify-between gap-3">
             <div className="min-w-0">
               {s.userId ? (
-                <Link href={`/profil/${s.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline truncate block">
+                <Link href={profilHref({ id: s.userId, pseudonim: s.opis })} className="text-sm font-medium text-kolo-green-700 hover:underline truncate block">
                   <Pseudonim>{s.opis}</Pseudonim>
                 </Link>
               ) : (
@@ -662,7 +663,7 @@ function PregledSekcija({
                   </p>
                   <div className="min-w-0">
                     {verified && tx.fromId ? (
-                      <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                         <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                       </Link>
                     ) : (
@@ -672,7 +673,7 @@ function PregledSekcija({
                   <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
                   <div className="min-w-0">
                     {verified && tx.toId ? (
-                      <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                         <Pseudonim>{tx.toPseudonim}</Pseudonim>
                       </Link>
                     ) : (
@@ -688,13 +689,13 @@ function PregledSekcija({
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
                       {verified && tx.fromId ? (
-                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
+                        <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                       ) : (
                         <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                       )}
                       <span className="text-kolo-muted shrink-0">→</span>
                       {verified && tx.toId ? (
-                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
+                        <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                       ) : (
                         <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                       )}
@@ -791,7 +792,7 @@ const ClanRed = memo(function ClanRed({
         <div className="flex items-center gap-2 min-w-0">
           <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={28} />
           <Link
-            href={`/profil/${c.id}`}
+            href={profilHref(c)}
             className="font-medium text-kolo-green-700 hover:underline truncate"
           >
             <Pseudonim>{c.pseudonim}</Pseudonim>
@@ -823,7 +824,7 @@ const ClanRed = memo(function ClanRed({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 min-w-0">
             <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={28} />
-            <Link href={`/profil/${c.id}`} className="font-semibold text-kolo-green-700 hover:underline truncate">
+            <Link href={profilHref(c)} className="font-semibold text-kolo-green-700 hover:underline truncate">
               <Pseudonim>{c.pseudonim}</Pseudonim>
             </Link>
             {c.verified ? (
@@ -1200,7 +1201,7 @@ function LokacijaKartica({
                   </span>
                   <KorisnikAvatar avatar={c.avatar} pseudonim={c.pseudonim} userId={c.id} size={26} />
                   <Link
-                    href={`/profil/${c.id}`}
+                    href={profilHref(c)}
                     className="font-medium text-kolo-green-700 hover:underline truncate min-w-0"
                   >
                     <Pseudonim>{c.pseudonim}</Pseudonim>
@@ -1315,7 +1316,7 @@ function TransakcijeSekcija({
                 <div className="min-w-0">
                   {verified ? (
                     tx.fromId ? (
-                      <Link href={`/profil/${tx.fromId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                         <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                       </Link>
                     ) : (
@@ -1331,7 +1332,7 @@ function TransakcijeSekcija({
                 <div className="min-w-0">
                   {verified ? (
                     tx.toId ? (
-                      <Link href={`/profil/${tx.toId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                         <Pseudonim>{tx.toPseudonim}</Pseudonim>
                       </Link>
                     ) : (
@@ -1352,7 +1353,7 @@ function TransakcijeSekcija({
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
                     {verified ? (
                       tx.fromId ? (
-                        <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
+                        <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                       ) : (
                         <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                       )
@@ -1362,7 +1363,7 @@ function TransakcijeSekcija({
                     <span className="text-kolo-muted shrink-0">→</span>
                     {verified ? (
                       tx.toId ? (
-                        <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
+                        <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                       ) : (
                         <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                       )
@@ -1438,7 +1439,7 @@ function DonacijeSekcija({
             {/* Desktop */}
             <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-3 items-center text-sm">
               <Link
-                href={`/profil/${d.userId}`}
+                href={profilHref({ id: d.userId, pseudonim: d.pseudonim })}
                 className="font-medium text-kolo-green-700 hover:underline truncate"
               >
                 <Pseudonim>{d.pseudonim}</Pseudonim>
@@ -1461,7 +1462,7 @@ function DonacijeSekcija({
             {/* Mobilna kartica */}
             <div className="sm:hidden px-4 py-3 space-y-1">
               <div className="flex items-center justify-between">
-                <Link href={`/profil/${d.userId}`} className="font-semibold text-kolo-green-700 hover:underline">
+                <Link href={profilHref({ id: d.userId, pseudonim: d.pseudonim })} className="font-semibold text-kolo-green-700 hover:underline">
                   <Pseudonim>{d.pseudonim}</Pseudonim>
                 </Link>
                 <span className="text-sm font-bold text-kolo-text">
@@ -1603,7 +1604,7 @@ function IznosSekcija({
                 {!verified ? (
                   <span className="text-kolo-muted">—</span>
                 ) : tx.fromId ? (
-                  <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate">
+                  <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{tx.fromPseudonim}</Pseudonim>
                   </Link>
                 ) : (
@@ -1613,7 +1614,7 @@ function IznosSekcija({
                 {!verified ? (
                   <span className="text-kolo-muted">—</span>
                 ) : tx.toId ? (
-                  <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate">
+                  <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{tx.toPseudonim}</Pseudonim>
                   </Link>
                 ) : (
@@ -1630,7 +1631,7 @@ function IznosSekcija({
                     {!verified ? (
                       <span className="text-kolo-muted">—</span>
                     ) : tx.fromId ? (
-                      <Link href={`/profil/${tx.fromId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
+                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
                     ) : (
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
                     )}
@@ -1638,7 +1639,7 @@ function IznosSekcija({
                     {!verified ? (
                       <span className="text-kolo-muted">—</span>
                     ) : tx.toId ? (
-                      <Link href={`/profil/${tx.toId}`} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
+                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
                     ) : (
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )}

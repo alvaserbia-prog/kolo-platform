@@ -9,6 +9,7 @@ import Pseudonim from "@/components/Pseudonim";
 import { useTranslations } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { kategorijaKljuc } from "@/lib/kategorije";
+import { profilHref } from "@/lib/profil-link";
 
 interface Transakcija {
   id: string;
@@ -59,7 +60,9 @@ export default function JavniProfilPage() {
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
   const params = useParams();
-  const id = params.id as string;
+  // U adresi stoji pseudonim (`/profil/Marko`); API prima i njega i interni id i
+  // napušteni pseudonim, pa se ovde ništa ne razrešava — samo prosleđuje.
+  const adresa = params.id as string;
 
   const TIP_LABELA: Record<string, string> = {
     TRANSFER: t("trx_transfer"),
@@ -84,9 +87,9 @@ export default function JavniProfilPage() {
     isLoading: ucitavam,
     error: upit_greska,
   } = useQuery({
-    queryKey: ["profil", id],
+    queryKey: ["profil", adresa],
     queryFn: async (): Promise<ProfilData> => {
-      const r = await fetch(`/api/profil/${id}`);
+      const r = await fetch(`/api/profil/${encodeURIComponent(adresa)}`);
       const body = await r.json().catch(() => ({}));
       if (!r.ok) {
         // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
@@ -105,6 +108,17 @@ export default function JavniProfilPage() {
 
   const greska = upit_greska ? (upit_greska as Error).message : "";
 
+  // Adresu svedi na aktuelni pseudonim kad je otvorena preko internog id-a ili preko
+  // ranijeg pseudonima. `replaceState` (a ne router) — samo prepisuje ono što piše u
+  // traci, bez novog učitavanja i bez unosa u istoriju pregledača.
+  useEffect(() => {
+    if (!profil?.pseudonim) return;
+    const kanonska = `/profil/${encodeURIComponent(profil.pseudonim)}`;
+    if (window.location.pathname !== kanonska) {
+      window.history.replaceState(null, "", kanonska);
+    }
+  }, [profil?.pseudonim]);
+
   // Iniciraj lokalnu listu transakcija/kursor iz učitanog profila (paginacija ih dalje proširuje).
   useEffect(() => {
     if (profil) {
@@ -116,12 +130,12 @@ export default function JavniProfilPage() {
   const ucitajJos = useCallback(async () => {
     if (!cursor || ucitavamJos) return;
     setUcitavamJos(true);
-    const res = await fetch(`/api/profil/${id}?cursor=${cursor}`);
+    const res = await fetch(`/api/profil/${encodeURIComponent(adresa)}?cursor=${cursor}`);
     const data = await res.json();
     setSveTrx((prev) => [...prev, ...data.transakcije]);
     setCursor(data.nextCursor);
     setUcitavamJos(false);
-  }, [cursor, id, ucitavamJos]);
+  }, [adresa, cursor, ucitavamJos]);
 
   if (ucitavam) {
     return (
@@ -287,7 +301,7 @@ export default function JavniProfilPage() {
                     <p className="text-sm text-kolo-text truncate">
                       <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? trx.type}</span>
                       {trx.description ?? (drugaStrana ? (
-                        <Link href={`/profil/${drugaStrana.id}`} className="text-kolo-green-700 hover:underline">
+                        <Link href={profilHref(drugaStrana)} className="text-kolo-green-700 hover:underline">
                           <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>
                         </Link>
                       ) : t("protokol"))}

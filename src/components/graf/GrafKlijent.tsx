@@ -21,6 +21,7 @@ import { useTranslations } from "next-intl";
 import { rasporediGraf, type Koordinata } from "@/lib/protokol/graf";
 import { formatIndeksZaPrikaz } from "@/lib/protokol/dokaz-stvarnosti";
 import MiniStablo from "@/components/verifikacija/MiniStablo";
+import { profilHref } from "@/lib/profil-link";
 
 type CvorStanje = "JA" | "MOGU" | "ZONA" | "PUN";
 
@@ -559,7 +560,7 @@ export default function GrafKlijent() {
               />
 
               <Link
-                href={`/profil/${izabraniCvor.id}`}
+                href={profilHref(izabraniCvor)}
                 className="block text-center text-xs font-semibold text-kolo-green-700 hover:text-kolo-green-900 border border-kolo-border rounded-xl px-3 py-2 transition-colors"
               >
                 {t("profil_link")}

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 interface BlogObjava {
   id: string;
@@ -193,7 +194,7 @@ export default function PocetnaKlijent({
                     <div className={`max-w-[75%] ${moja ? "items-end" : "items-start"} flex flex-col`}>
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <Link
-                          href={`/profil/${p.userId}`}
+                          href={profilHref({ id: p.userId, pseudonim: p.pseudonim })}
                           className="text-xs font-medium text-kolo-green-700 hover:underline"
                         >
                           <Pseudonim>{p.pseudonim}</Pseudonim>
@@ -287,7 +288,7 @@ function ChatAvatar({
   const inicijal = (pseudonim?.trim()?.[0] ?? "?").toUpperCase();
   return (
     <Link
-      href={`/profil/${userId}`}
+      href={profilHref({ id: userId, pseudonim })}
       title={pseudonim}
       className="shrink-0 w-7 h-7 rounded-full overflow-hidden bg-kolo-green-500 flex items-center justify-center text-white font-bold text-[11px] mb-0.5"
     >

@@ -3,6 +3,7 @@
 import { useState, useMemo, memo } from "react";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 export type Transakcija = {
   id: string;
@@ -127,7 +128,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
         <div className="min-w-0">
           {t.primio ? (
             t.drugiId ? (
-              <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+              <a href={profilHref({ id: t.drugiId, pseudonim: t.drugiPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                 <Pseudonim>{t.drugiPseudonim}</Pseudonim>
               </a>
             ) : (
@@ -145,7 +146,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
             <span className="text-base text-kolo-text font-medium truncate block"><Pseudonim>{pseudonim}</Pseudonim></span>
           ) : (
             t.drugiId ? (
-              <a href={`/profil/${t.drugiId}`} className="text-base text-kolo-green-700 hover:underline truncate block">
+              <a href={profilHref({ id: t.drugiId, pseudonim: t.drugiPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
                 <Pseudonim>{t.drugiPseudonim}</Pseudonim>
               </a>
             ) : (
@@ -168,7 +169,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
             <div className="flex items-center gap-1.5 text-sm min-w-0">
               {t.primio ? (
                 t.drugiId ? (
-                  <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                  <a href={profilHref({ id: t.drugiId, pseudonim: t.drugiPseudonim })} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                   </a>
                 ) : (
@@ -182,7 +183,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
                 <span className="text-kolo-text font-medium truncate"><Pseudonim>{pseudonim}</Pseudonim></span>
               ) : (
                 t.drugiId ? (
-                  <a href={`/profil/${t.drugiId}`} className="text-kolo-green-700 hover:underline truncate">
+                  <a href={profilHref({ id: t.drugiId, pseudonim: t.drugiPseudonim })} className="text-kolo-green-700 hover:underline truncate">
                     <Pseudonim>{t.drugiPseudonim}</Pseudonim>
                   </a>
                 ) : (

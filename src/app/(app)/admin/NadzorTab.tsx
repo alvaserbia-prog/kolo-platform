@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 export interface NadzorPravilo {
   kod: string;
@@ -115,7 +116,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
                         <div className="text-kolo-muted mb-1">{t("nadzor_nalozi_u_grupi")}</div>
                         <div className="flex flex-wrap gap-2">
                           {n.clanovi.map((c) => (
-                            <Link key={c.id} href={`/profil/${c.id}`} className="text-kolo-green-700 hover:underline">
+                            <Link key={c.id} href={profilHref(c)} className="text-kolo-green-700 hover:underline">
                               <Pseudonim>{c.pseudonim}</Pseudonim>
                             </Link>
                           ))}
@@ -126,7 +127,7 @@ export default function NadzorTab({ nalazi }: { nalazi: NadzorNalaz[] }) {
                     <div className="flex gap-2 pt-1">
                       {n.subjektId && (
                         <Link
-                          href={`/profil/${n.subjektId}`}
+                          href={profilHref({ id: n.subjektId, pseudonim: n.pseudonim })}
                           className="px-3 py-1.5 rounded border border-kolo-border text-kolo-text hover:bg-kolo-bg"
                         >
                           {t("nadzor_otvori_profil")}

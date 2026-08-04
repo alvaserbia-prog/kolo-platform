@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 /**
  * Mini stablo verifikacija (varijanta A) — gore verifikator, dole verifikovani.
- * Podrazumevano: klikom na pseudonim ide se na /profil/[id] tog korisnika.
+ * Podrazumevano: klikom na pseudonim ide se na /profil/<pseudonim> tog korisnika.
  *
  * Koristi se na dva mesta:
  *  - /verifikacija (sopstveni lanac; podrazumevani tekstovi u prvom licu);
@@ -77,11 +78,13 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
 /** Link na profil ili dugme (kada je zadat onKlik) — isti izgled. */
 function Stavka({
   id,
+  pseudonim,
   onKlik,
   className,
   children,
 }: {
   id: string;
+  pseudonim: string;
   onKlik?: (id: string) => void;
   className: string;
   children: React.ReactNode;
@@ -94,7 +97,7 @@ function Stavka({
     );
   }
   return (
-    <Link href={`/profil/${id}`} className={className}>
+    <Link href={profilHref({ id, pseudonim })} className={className}>
       {children}
     </Link>
   );
@@ -129,6 +132,7 @@ export default function MiniStablo({
               <Stavka
                 key={v.id}
                 id={v.id}
+                pseudonim={v.pseudonim}
                 onKlik={onKlik}
                 className="px-3 py-1.5 rounded-xl bg-kolo-bg hover:bg-kolo-green-100 text-sm font-medium"
               >
@@ -162,6 +166,7 @@ export default function MiniStablo({
                 <Stavka
                   key={v.id}
                   id={v.id}
+                  pseudonim={v.pseudonim}
                   onKlik={onKlik}
                   className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-kolo-bg hover:bg-kolo-green-100"
                 >

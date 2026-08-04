@@ -209,6 +209,13 @@ model User {
   oauthId            String?
   oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
+  // Pseudonim u malim slovima — jedini ključ po kome se pseudonim traži i po kome
+  // se čuva jedinstvenost. Bez ovoga bi "Marko" i "marko" bila dva različita naloga
+  // (Postgres `@unique` je osetljiv na veličinu slova), što je i rupa za imitaciju i
+  // dvosmislenost otkad adresa profila glasi `/profil/<pseudonim>`. Prikazuje se
+  // uvek `pseudonim` (sa velikim slovima kako ga je korisnik upisao).
+  // Održava se ISKLJUČIVO preko `src/lib/pseudonim.ts` — ne upisivati ručno.
+  pseudonimLower     String    @unique
   // Trajni donatorski broj člana — osnova poziva na broj (model 97) za uplate
   // (IPS QR + klasična uplatnica). Redni broj po datumu registracije (backfill u
   // migraciji), novi nalozi dobijaju sledeći iz sekvence. Ostaje i posle
@@ -302,8 +309,31 @@ model User {
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
   sistemskaObavestenja            SistemskoObavestenje[]     @relation("KreiraoObavestenje")
+  pseudonimIstorija               PseudonimIstorija[]
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
+}
+
+/// Napušteni pseudonimi. Dve svrhe, obe posledica toga što pseudonim stoji u
+/// adresi profila (`/profil/<pseudonim>`):
+///
+///  1. **Stari linkovi ostaju živi.** Posle preimenovanja `/profil/StaroIme` i
+///     dalje vodi na istog čoveka (stranica potom prepiše adresu u novu).
+///  2. **Napušteno ime se ne može preuzeti.** Bez ovoga bi neko drugi uzeo
+///     oslobođeni pseudonim, pa bi ranije podeljeni link tiho vodio na DRUGU
+///     osobu — što je gore od mrtvog linka, jer izgleda ispravno.
+///
+/// Red se briše kad se korisnik vrati na svoje staro ime i pri gašenju naloga
+/// (čl. 34 — anonimizacija; napušteni pseudonim je i dalje trag o nalogu).
+model PseudonimIstorija {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pseudonim      String
+  pseudonimLower String   @unique
+  promenjenAt    DateTime @default(now())
+
+  @@index([userId])
 }
 
 /// Cirkularno SISTEMSKO obaveštenje svim korisnicima — izmene Uslova/Politike
