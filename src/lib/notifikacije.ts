@@ -58,6 +58,8 @@ export async function obavestiAdmineNoviKorisnik(noviUserId: string, pseudonim: 
         "NOV_KORISNIK",
         "Nov korisnik se priključio",
         `Korisnik „${pseudonim}" je upravo napravio nalog.`,
+        // Namerno interni id, ne pseudonim: link se ČUVA u bazi i u mejlu, a
+        // pseudonim se može promeniti — id ne može. Profil prima oba.
         `/profil/${noviUserId}`,
         // Bez mejla: admini isti događaj već dobijaju preko `posaljiAdminAlert`
         // (email + Telegram) iz rute registracije — inače bi stigao dvaput.

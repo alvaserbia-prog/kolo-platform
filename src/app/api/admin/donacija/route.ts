@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { evidentirajDonaciju } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
+import { gdePseudonim } from "@/lib/pseudonim";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
@@ -89,8 +90,8 @@ export async function POST(req: NextRequest) {
       include: { podaci: { select: { punoIme: true } } },
     });
   } else {
-    user = await prisma.user.findUnique({
-      where: { pseudonim },
+    user = await prisma.user.findFirst({
+      where: gdePseudonim(pseudonim),
       include: { podaci: { select: { punoIme: true } } },
     });
   }

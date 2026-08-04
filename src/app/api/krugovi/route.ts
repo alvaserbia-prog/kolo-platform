@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { kljucPseudonima } from "@/lib/validacija";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // GET /api/krugovi — lista svih aktivnih krug
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
 
   // Pronađi korisnike po pseudonimu (forma šalje pseudonime)
   const osnivaciKorisnici = await prisma.user.findMany({
-    where: { pseudonim: { in: osnivaci } },
+    where: { pseudonimLower: { in: osnivaci.map(kljucPseudonima) } },
     select: { id: true, verified: true, pseudonim: true },
   });
 

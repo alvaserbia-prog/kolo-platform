@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions, uniqueMemberHash } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { normalizujEmail } from "@/lib/validacija";
+import { normalizujEmail, validanPseudonim, PSEUDONIM_PRAVILO } from "@/lib/validacija";
+import { poljaPseudonima, porukaZauzeca, proveriZauzece } from "@/lib/pseudonim";
 import { WalletType } from "@/generated/prisma/client";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
@@ -18,21 +19,23 @@ export async function POST(req: NextRequest) {
   const body = await req.json();
   const { pseudonim } = body;
 
-  if (!pseudonim || pseudonim.trim().length < 3 || pseudonim.trim().length > 30) {
-    return NextResponse.json({ error: "Pseudonim mora imati između 3 i 30 karaktera." }, { status: 400 });
+  if (!validanPseudonim(pseudonim)) {
+    return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
   }
   const trimmed = pseudonim.trim();
 
-  const zauzet = await prisma.user.findFirst({ where: { pseudonim: trimmed } });
-  if (zauzet) {
-    return NextResponse.json({ error: "Pseudonim je zauzet." }, { status: 409 });
+  // Nalog se ovde tek dobija pseudonim (nije preimenovanje), pa se izuzima sopstveni
+  // red — placeholder koji je eventualno stajao u njemu ne ide u istoriju napuštenih.
+  const zauzece = await proveriZauzece(trimmed, session.user.id);
+  if (zauzece) {
+    return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
   }
 
   // Legacy slučaj: red već postoji u bazi (stari tok ili napola dovršen nalog) — ažuriraj ga.
   if (session.user.id) {
     await prisma.user.update({
       where: { id: session.user.id },
-      data: { pseudonim: trimmed, oauthPending: false },
+      data: { ...poljaPseudonima(trimmed), oauthPending: false },
     });
     return NextResponse.json({ ok: true, userId: session.user.id });
   }
@@ -49,7 +52,7 @@ export async function POST(req: NextRequest) {
   if (postojeci) {
     await prisma.user.update({
       where: { id: postojeci.id },
-      data: { pseudonim: trimmed, oauthPending: false },
+      data: { ...poljaPseudonima(trimmed), oauthPending: false },
     });
     return NextResponse.json({ ok: true, userId: postojeci.id });
   }
@@ -60,7 +63,7 @@ export async function POST(req: NextRequest) {
       data: {
         email,
         passwordHash: undefined,
-        pseudonim: trimmed,
+        ...poljaPseudonima(trimmed),
         oauthProvider: session.user.pendingProvider,
         oauthId: session.user.pendingOauthId,
         oauthPending: false,

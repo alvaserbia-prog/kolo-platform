@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { gdePseudonim } from "@/lib/pseudonim";
 import { TransactionType } from "@/generated/prisma/client";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
@@ -27,8 +28,10 @@ export async function POST(req: NextRequest) {
   }
 
   // Pronađi primaoca
-  const primalac = await prisma.user.findUnique({
-    where: { pseudonim },
+  // Pseudonim se traži bez obzira na veličinu slova — ko ukuca `marko` misli na
+  // `Marko`, a drugog `marko` po jedinstvenosti ne može ni biti.
+  const primalac = await prisma.user.findFirst({
+    where: gdePseudonim(pseudonim),
     include: { wallet: true },
   });
   if (!primalac) {

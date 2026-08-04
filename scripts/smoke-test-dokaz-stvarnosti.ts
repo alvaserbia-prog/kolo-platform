@@ -65,6 +65,7 @@ async function kreirajKorisnika(broj: number, tip: TipKorisnika) {
     data: {
       email: `${PREFIX}${broj}@test.local`,
       pseudonim,
+      pseudonimLower: pseudonim.toLowerCase(),
       passwordHash: null,
       tipKorisnika: tip,
       indeksStvarnosti: tip === TipKorisnika.NOSILAC_ZRNA ? 10 : 0,

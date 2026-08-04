@@ -124,6 +124,7 @@ async function main() {
         email: b.email,
         passwordHash: hash,
         pseudonim: b.pseudonim,
+        pseudonimLower: b.pseudonim.toLowerCase(),
         verified: true,
         verifiedAt: daniPre(20 + Math.floor(Math.random() * 60)),
         memberHash: b.memberHash,
