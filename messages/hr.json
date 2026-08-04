@@ -1547,6 +1547,7 @@
     "opis": "Mjesto gdje članovi nude i traže dobra i usluge. Ponudu može razgledati svatko; za objavu oglasa i kontakt s oglašivačem potrebna je verifikacija.",
     "novi_oglas": "+ Novi oglas",
     "zatrazi_verifikaciju_oglas": "Zatražite verifikaciju kako biste objavili oglas",
+    "dugme_zatrazi_verifikaciju": "Zatraži verifikaciju",
     "pretrazi_placeholder": "Pretraži oglase...",
     "cena_filter": "Cijena",
     "min_poen": "Min POEN",

@@ -1551,6 +1551,7 @@
     "opis": "A place where members offer and seek goods and services. Anyone can browse listings; posting a listing or contacting an advertiser requires verification.",
     "novi_oglas": "+ New listing",
     "zatrazi_verifikaciju_oglas": "Request verification to post a listing",
+    "dugme_zatrazi_verifikaciju": "Request verification",
     "pretrazi_placeholder": "Search listings...",
     "cena_filter": "Price",
     "min_poen": "Min POEN",

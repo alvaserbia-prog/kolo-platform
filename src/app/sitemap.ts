@@ -1,5 +1,15 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl, hreflangAlternates } from "@/lib/seo";
+import { prisma } from "@/lib/prisma";
+
+// Sitemap se osvežava na sat vremena — nov oglas tako uđe u indeks bez novog
+// deploy-a, a baza se ne poziva na svaki zahtev robota.
+export const revalidate = 3600;
+
+// Gornja granica broja oglasa u sitemap-u. Standard dozvoljava 50.000 URL-ova
+// po fajlu; ovoliko je daleko ispod, a čuva veličinu odgovora. Kad se pređe,
+// treba podeliti sitemap na više fajlova (sitemap index).
+const MAX_OGLASA = 5000;
 
 /**
  * Javne stranice za sitemap. Autentifikovane (app) i API rute se NE navode —
@@ -25,8 +35,8 @@ const JAVNE_PUTANJE: { path: string; priority: number; changeFrequency: Metadata
   { path: "/rizici", priority: 0.3, changeFrequency: "yearly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return JAVNE_PUTANJE.map(({ path, priority, changeFrequency }) => ({
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const staticne: MetadataRoute.Sitemap = JAVNE_PUTANJE.map(({ path, priority, changeFrequency }) => ({
     url: absoluteUrl(path),
     changeFrequency,
     priority,
@@ -37,4 +47,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ),
     },
   }));
+
+  // Aktivni oglasi. Stranica oglasa je javna (Pravilnik čl. 16) i ima svoj
+  // naslov, opis i OG sliku — bez ovoga je Gugl nije mogao naći, jer se do nje
+  // stizalo samo preko liste na /pijaca. Ovo je jedini stalan izvor priliva
+  // ljudi koji traže konkretnu stvar.
+  //
+  // Bez hreflang varijanti: sadržaj oglasa piše korisnik i ne prevodi se.
+  //
+  // Ako baza nije dostupna (npr. build bez DATABASE_URL), sitemap se svodi na
+  // statične stranice umesto da obori build.
+  let oglasi: MetadataRoute.Sitemap = [];
+  try {
+    const listings = await prisma.marketplaceListing.findMany({
+      where: { status: "ACTIVE" },
+      select: { id: true, updatedAt: true },
+      orderBy: { createdAt: "desc" },
+      take: MAX_OGLASA,
+    });
+    oglasi = listings.map((l) => ({
+      url: absoluteUrl(`/pijaca/${l.id}`),
+      lastModified: l.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+  } catch (e) {
+    console.error("[sitemap] oglasi nisu učitani", e);
+  }
+
+  return [...staticne, ...oglasi];
 }

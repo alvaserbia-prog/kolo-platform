@@ -158,18 +158,31 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
 
   return (
     <div className="space-y-5">
-      {/* Zaglavlje */}
-      <div className="flex justify-between items-center">
-        <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
-        {isVerified ? (
-          <Link
-            href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
-            className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
-          >
-            {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
-          </Link>
-        ) : (
-          <span className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</span>
+      {/* Zaglavlje. Neverifikovanom je ovde ranije stajala samo siva rečenica
+          („zatražite verifikaciju…") — bez dugmeta i bez linka, pa je čovek koji
+          je došao da postavi oglas ostajao u ćorsokaku. Sada i on ima dugme, ka
+          tabli jemstva, a objašnjenje stoji ispod. */}
+      <div className="space-y-1">
+        <div className="flex justify-between items-center gap-3">
+          <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
+          {isVerified ? (
+            <Link
+              href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
+              className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
+            >
+              {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+            </Link>
+          ) : (
+            <Link
+              href="/tabla-jemstva"
+              className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
+            >
+              {t("dugme_zatrazi_verifikaciju")}
+            </Link>
+          )}
+        </div>
+        {!isVerified && (
+          <p className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</p>
         )}
       </div>
 
