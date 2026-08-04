@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
-import { validanPseudonim } from "@/lib/validacija";
+import { validanPseudonim, PSEUDONIM_PRAVILO } from "@/lib/validacija";
+import { porukaZauzeca, proveriZauzece } from "@/lib/pseudonim";
 
 export async function GET(req: NextRequest) {
   const pseudonim = req.nextUrl.searchParams.get("p")?.trim();
   if (!validanPseudonim(pseudonim)) {
-    return NextResponse.json({ slobodan: false, greska: "Dozvoljeni znakovi: slova, brojevi, razmak, _ . - (3–30)" });
+    return NextResponse.json({ slobodan: false, greska: PSEUDONIM_PRAVILO });
   }
-  const postoji = await prisma.user.findUnique({
-    where: { pseudonim },
-    select: { id: true },
+  // Zauzeto je i ime koje je neko ranije napustio — stari linkovi vode na njega.
+  const zauzece = await proveriZauzece(pseudonim);
+  return NextResponse.json({
+    slobodan: !zauzece,
+    ...(zauzece ? { greska: porukaZauzeca(zauzece) } : {}),
   });
-  return NextResponse.json({ slobodan: !postoji });
 }

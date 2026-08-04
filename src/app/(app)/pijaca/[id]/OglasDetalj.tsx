@@ -31,14 +31,18 @@ interface OglasProps {
   isMine: boolean;
   /** Broj pregleda — prikazuje se samo oglašivaču. */
   pregledi: number;
+  /** Razlog uklanjanja — šalje se samo vlasniku (Uslovi čl. 25 st. 2). */
+  uklonjenRazlog: string | null;
 }
 
 interface Props {
   oglas: OglasProps;
   isVerified: boolean;
+  /** Prijavljen posetilac sme da prijavi sporan oglas; gost ne. */
+  jePrijavljen: boolean;
 }
 
-export default function OglasDetalj({ oglas, isVerified }: Props) {
+export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [activeSlika, setActiveSlika] = useState(0);
@@ -211,6 +215,18 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
               {t("oglas_deaktiviran")}
             </div>
           )}
+          {/* Uklonjen oglas — razlog vidi samo vlasnik (Uslovi čl. 25 st. 2). */}
+          {oglas.status === "UKLONJEN" && (
+            <div className="bg-kolo-danger-light rounded-xl px-4 py-3 text-sm text-kolo-danger space-y-1">
+              <div className="font-semibold">{t("oglas_uklonjen")}</div>
+              {oglas.isMine && oglas.uklonjenRazlog && (
+                <>
+                  <div>{t("oglas_uklonjen_razlog", { razlog: oglas.uklonjenRazlog })}</div>
+                  <div className="text-xs opacity-80">{t("oglas_uklonjen_prigovor")}</div>
+                </>
+              )}
+            </div>
+          )}
 
           {/* Kupac → kontakt prodavca (razmenu članovi dogovaraju međusobno; Protokol ne posreduje) */}
           {dostupan && !oglas.isMine && (
@@ -256,9 +272,115 @@ export default function OglasDetalj({ oglas, isVerified }: Props) {
               </button>
             </div>
           )}
+
+          {/* Prijava spornog oglasa (Uslovi čl. 25 st. 2). Otvorena svim
+              prijavljenima — pregled oglasa je javan, pa i neverifikovani vidi
+              sporan sadržaj i treba da može da ga prijavi. */}
+          {dostupan && !oglas.isMine && jePrijavljen && (
+            <PrijaviOglas oglasId={oglas.id} />
+          )}
         </div>
       </div>
     </div>
+  );
+}
+
+// ── Prijava oglasa ─────────────────────────────────────────────────────────────
+
+const RAZLOZI = ["ZABRANJENO_DOBRO", "OBMANA", "UVREDLJIVO", "LICNI_PODACI", "PREVARA", "DRUGO"] as const;
+
+function PrijaviOglas({ oglasId }: { oglasId: string }) {
+  const t = useTranslations("pijaca");
+  const [otvoreno, setOtvoreno] = useState(false);
+  const [razlog, setRazlog] = useState<(typeof RAZLOZI)[number]>("ZABRANJENO_DOBRO");
+  const [opis, setOpis] = useState("");
+  const [salje, setSalje] = useState(false);
+  const [poslato, setPoslato] = useState(false);
+  const [greska, setGreska] = useState("");
+
+  async function posalji(e: React.FormEvent) {
+    e.preventDefault();
+    setSalje(true);
+    setGreska("");
+    try {
+      const res = await fetch(`/api/pijaca/${oglasId}/prijavi`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ razlog, opis: opis.trim() || undefined }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setGreska(data.error ?? t("prijava_greska"));
+        return;
+      }
+      setPoslato(true);
+      setOtvoreno(false);
+    } finally {
+      setSalje(false);
+    }
+  }
+
+  if (poslato) {
+    return (
+      <div className="pt-2 border-t border-kolo-border text-xs text-kolo-muted">
+        {t("prijava_poslata")}
+      </div>
+    );
+  }
+
+  if (!otvoreno) {
+    return (
+      <div className="pt-2 border-t border-kolo-border">
+        <button
+          onClick={() => setOtvoreno(true)}
+          className="text-xs text-kolo-muted hover:text-kolo-danger transition-colors"
+        >
+          {t("prijavi_oglas")}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={posalji} className="pt-2 border-t border-kolo-border space-y-2">
+      <div className="text-xs font-semibold text-kolo-text">{t("prijavi_oglas")}</div>
+      <select
+        value={razlog}
+        onChange={(e) => setRazlog(e.target.value as (typeof RAZLOZI)[number])}
+        className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm"
+      >
+        {RAZLOZI.map((r) => (
+          <option key={r} value={r}>
+            {t(`prijava_razlog_${r.toLowerCase()}`)}
+          </option>
+        ))}
+      </select>
+      <textarea
+        value={opis}
+        onChange={(e) => setOpis(e.target.value)}
+        rows={2}
+        maxLength={500}
+        placeholder={t("prijava_opis_placeholder")}
+        className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm"
+      />
+      {greska && <div className="text-xs text-kolo-danger">{greska}</div>}
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          disabled={salje}
+          className="flex-1 py-2 rounded-xl bg-kolo-danger text-white text-sm font-semibold hover:opacity-90 disabled:opacity-50"
+        >
+          {salje ? "..." : t("prijava_posalji")}
+        </button>
+        <button
+          type="button"
+          onClick={() => setOtvoreno(false)}
+          className="flex-1 py-2 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold hover:bg-kolo-border"
+        >
+          {t("odustani")}
+        </button>
+      </div>
+    </form>
   );
 }
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 type Stavka = {
   id: string;
@@ -93,7 +94,7 @@ function PotvrdaKartica({
         <p className="font-semibold text-kolo-text">{stavka.program}</p>
         <p className="text-sm text-kolo-muted">
           {t("potvrda_podnosilac")}{" "}
-          <Link href={`/profil/${stavka.podnosilacId}`} className="text-kolo-green-700 hover:underline">
+          <Link href={profilHref({ id: stavka.podnosilacId, pseudonim: stavka.podnosilacPseudonim })} className="text-kolo-green-700 hover:underline">
             @<Pseudonim>{stavka.podnosilacPseudonim}</Pseudonim>
           </Link>
         </p>

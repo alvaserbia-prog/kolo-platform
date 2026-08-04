@@ -91,8 +91,12 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         sellerVerified: listing.seller.verified,
         isMine: listing.seller.id === session?.user?.id,
         pregledi: listing.pregledi,
+        // Razlog uklanjanja se saopštava vlasniku (Uslovi čl. 25 st. 2), ne javnosti.
+        uklonjenRazlog:
+          listing.seller.id === session?.user?.id ? (listing.uklonjenRazlog ?? null) : null,
       }}
       isVerified={session?.user?.verified ?? false}
+      jePrijavljen={!!session?.user}
     />
   );
 }

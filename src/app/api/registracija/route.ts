@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
-import { normalizujEmail, validanEmail, validanPseudonim } from "@/lib/validacija";
+import { normalizujEmail, validanEmail, validanPseudonim, PSEUDONIM_PRAVILO } from "@/lib/validacija";
+import { poljaPseudonima, porukaZauzeca, proveriZauzece } from "@/lib/pseudonim";
 import { rateLimit, klijentIP } from "@/lib/rate-limit";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
@@ -40,10 +41,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Lozinka mora imati između 8 i 200 karaktera." }, { status: 400 });
     }
     if (!validanPseudonim(pseudonim)) {
-      return NextResponse.json(
-        { error: "Pseudonim: 3–30 znakova, samo slova, brojevi, razmak, _ . -" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
     }
     if (location !== null && location.length > 80) {
       return NextResponse.json({ error: "Mesto je predugačko." }, { status: 400 });
@@ -52,16 +50,17 @@ export async function POST(req: NextRequest) {
     const emailNorm = normalizujEmail(email);
     const pseudonimClean = pseudonim.trim();
 
-    // Provera jedinstvenosti (email u kanonskoj formi — bez duplikata zbog velikih slova)
-    const [existingEmail, existingPseudonim] = await Promise.all([
+    // Provera jedinstvenosti (email i pseudonim u kanonskoj formi — bez duplikata
+    // zbog velikih slova; pseudonim se proverava i protiv napuštenih imena)
+    const [existingEmail, zauzece] = await Promise.all([
       prisma.user.findUnique({ where: { email: emailNorm } }),
-      prisma.user.findUnique({ where: { pseudonim: pseudonimClean } }),
+      proveriZauzece(pseudonimClean),
     ]);
     if (existingEmail) {
       return NextResponse.json({ error: "Email je već registrovan." }, { status: 409 });
     }
-    if (existingPseudonim) {
-      return NextResponse.json({ error: "Pseudonim je zauzet." }, { status: 409 });
+    if (zauzece) {
+      return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
     }
 
     // Generiši jedinstven member hash
@@ -77,7 +76,7 @@ export async function POST(req: NextRequest) {
       data: {
         email: emailNorm,
         passwordHash,
-        pseudonim: pseudonimClean,
+        ...poljaPseudonima(pseudonimClean),
         memberHash: myHash,
         location: location || null,
         wallet: {

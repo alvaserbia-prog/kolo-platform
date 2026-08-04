@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import type { Tab } from "./tabovi";
+import { profilHref } from "@/lib/profil-link";
 
 interface Projekat {
   id: string;
@@ -180,7 +181,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
           {krug.clanovi.map((c, i) => (
             <div key={c.userId} className={`px-5 py-3 flex justify-between items-center ${i < krug.clanovi.length - 1 ? "border-b border-kolo-border" : ""}`}>
-              <Link href={`/profil/${c.userId}`} className="text-sm font-medium text-kolo-green-700 hover:underline">
+              <Link href={profilHref({ id: c.userId, pseudonim: c.pseudonim })} className="text-sm font-medium text-kolo-green-700 hover:underline">
                 <Pseudonim>{c.pseudonim}</Pseudonim>
               </Link>
               <div className="flex items-center gap-2">

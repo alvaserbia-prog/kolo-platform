@@ -57,6 +57,7 @@ async function main() {
       where: { email: o.email },
       update: {
         pseudonim: o.pseudonim,
+        pseudonimLower: o.pseudonim.toLowerCase(),
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         jeOsnivac: true,
         admin: o.admin,
@@ -69,6 +70,7 @@ async function main() {
       create: {
         email: o.email,
         pseudonim: o.pseudonim,
+        pseudonimLower: o.pseudonim.toLowerCase(),
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         jeOsnivac: true,
         admin: o.admin,

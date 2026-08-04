@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { razresiKorisnikaIzAdrese } from "@/lib/pseudonim";
 
 export async function GET(
   req: NextRequest,
@@ -11,7 +12,15 @@ export async function GET(
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
-  const { id } = await params;
+  const { id: adresa } = await params;
+
+  // U adresi stoji pseudonim (`/profil/Marko`), ali i dalje rade interni id (stari
+  // linkovi, linkovi zapisani u notifikacijama) i napušteni pseudonim (link podeljen
+  // pre preimenovanja). Sve troje se ovde svodi na interni id.
+  const id = await razresiKorisnikaIzAdrese(adresa);
+  if (!id) {
+    return NextResponse.json({ error: "Profil nije pronađen." }, { status: 404 });
+  }
 
   // Kapija "samo verifikovani vide profile" odnosi se na TUĐE profile (Pravilnik čl. 28–30,
   // 67): neverifikovan ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek

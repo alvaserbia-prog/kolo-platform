@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 type Props = {
   id: string;
@@ -53,14 +54,14 @@ export default function VerifikacijaCard({
       <div className="min-w-0 flex-1">
         <div className="text-sm">
           <Link
-            href={`/profil/${verifikator.id}`}
+            href={profilHref(verifikator)}
             className="font-semibold hover:underline"
           >
             @<Pseudonim>{verifikator.pseudonim}</Pseudonim>
           </Link>
           <span className="text-kolo-muted"> → </span>
           <Link
-            href={`/profil/${verifikovani.id}`}
+            href={profilHref(verifikovani)}
             className="font-semibold hover:underline"
           >
             @<Pseudonim>{verifikovani.pseudonim}</Pseudonim>

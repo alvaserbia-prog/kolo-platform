@@ -51,6 +51,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
     { value: "VERIFIKACIJA", label: t("prigovor_tip_verifikacija") },
     { value: "SUSPENZIJA", label: t("prigovor_tip_suspenzija") },
     { value: "PROGRAM", label: t("prigovor_tip_program") },
+    { value: "OGLAS", label: t("prigovor_tip_oglas") },
     { value: "OSTALO", label: t("prigovor_tip_ostalo") },
   ];
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
@@ -557,6 +558,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
                 onChange={(e) => setNoviPseudonim(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500"
               />
+              <p className="text-xs text-kolo-muted">{t("pseudonim_pravilo")}</p>
               {psError && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{psError}</p>}
               {psSuccess && <p className="text-sm text-kolo-green-700 bg-kolo-green-100 rounded-lg px-3 py-2">{psSuccess}</p>}
               <button type="submit" className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors">

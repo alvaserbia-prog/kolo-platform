@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
+import { profilHref } from "@/lib/profil-link";
 
 type Konverzacija = {
   id: string;
@@ -329,7 +330,7 @@ function PorukeContent() {
                 size={32}
               />
               {drugiId ? (
-                <Link href={`/profil/${drugiId}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
+                <Link href={profilHref({ id: drugiId, pseudonim: drugiPseudonim })} className="text-sm font-semibold text-kolo-green-700 hover:underline">
                   <Pseudonim>{drugiPseudonim}</Pseudonim>
                 </Link>
               ) : (

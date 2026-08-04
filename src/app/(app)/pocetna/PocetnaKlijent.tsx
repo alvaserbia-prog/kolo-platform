@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 interface BlogObjava {
   id: string;
@@ -29,6 +30,8 @@ interface Props {
   currentUserId: string;
   blog: BlogObjava[];
   chatInicijalno: ChatPoruka[];
+  /** UO Fondacije — može ukloniti spornu poruku iz sobe (Uslovi čl. 25 st. 2). */
+  jeAdminViewer: boolean;
 }
 
 export default function PocetnaKlijent({
@@ -37,6 +40,7 @@ export default function PocetnaKlijent({
   currentUserId,
   blog,
   chatInicijalno,
+  jeAdminViewer,
 }: Props) {
   const t = useTranslations("pocetna");
   const [poruke, setPoruke] = useState<ChatPoruka[]>(chatInicijalno);
@@ -45,6 +49,26 @@ export default function PocetnaKlijent({
   const [greska, setGreska] = useState<string | null>(null);
   const [otvorenaObjava, setOtvorenaObjava] = useState<string | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Uklanjanje sporne poruke iz Pričaonice (Uslovi čl. 25 st. 2 — obuhvata „svu
+   * drugu komunikaciju putem Platforme"). Razlog je obavezan jer se šalje autoru.
+   * Bez ovoga bi jedina poluga nad spornom porukom bila isključenje korisnika.
+   */
+  async function ukloniPoruku(id: string) {
+    const razlog = prompt("Razlog uklanjanja (vidi ga autor poruke):")?.trim();
+    if (!razlog) return;
+    const res = await fetch(`/api/admin/chat/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ razlog }),
+    });
+    if (res.ok) setPoruke((prev) => prev.filter((p) => p.id !== id));
+    else {
+      const data = await res.json().catch(() => ({}));
+      setGreska(data.error ?? "Greška pri uklanjanju poruke.");
+    }
+  }
 
   // Skroluj na dno chata pri inicijalizaciji i pri svakoj novoj poruci
   useEffect(() => {
@@ -193,7 +217,7 @@ export default function PocetnaKlijent({
                     <div className={`max-w-[75%] ${moja ? "items-end" : "items-start"} flex flex-col`}>
                       <div className="flex items-center gap-1.5 mb-0.5">
                         <Link
-                          href={`/profil/${p.userId}`}
+                          href={profilHref({ id: p.userId, pseudonim: p.pseudonim })}
                           className="text-xs font-medium text-kolo-green-700 hover:underline"
                         >
                           <Pseudonim>{p.pseudonim}</Pseudonim>
@@ -211,6 +235,15 @@ export default function PocetnaKlijent({
                             minute: "2-digit",
                           })}
                         </span>
+                        {jeAdminViewer && (
+                          <button
+                            onClick={() => ukloniPoruku(p.id)}
+                            title={t("chat_ukloni_poruku")}
+                            className="text-[10px] text-kolo-muted hover:text-kolo-danger transition-colors"
+                          >
+                            ✕
+                          </button>
+                        )}
                       </div>
                       <div
                         className={`px-3 py-2 rounded-2xl text-sm whitespace-pre-wrap break-words ${
@@ -287,7 +320,7 @@ function ChatAvatar({
   const inicijal = (pseudonim?.trim()?.[0] ?? "?").toUpperCase();
   return (
     <Link
-      href={`/profil/${userId}`}
+      href={profilHref({ id: userId, pseudonim })}
       title={pseudonim}
       className="shrink-0 w-7 h-7 rounded-full overflow-hidden bg-kolo-green-500 flex items-center justify-center text-white font-bold text-[11px] mb-0.5"
     >

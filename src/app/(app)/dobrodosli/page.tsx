@@ -14,15 +14,19 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 /** Konfiguracija ekrana: ključ u messages + opciona akciona veza (cta).
- *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva). */
+ *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva).
+ *
+ *  Redosled je namerno akcioni, ne opisni: novi korisnik ima tačno jedan
+ *  zadatak (da ga neko potvrdi), pa dva puta do potvrde idu odmah na ekranima
+ *  2 i 3 — teorija (POEN, Pijaca) tek posle. */
 const EKRANI: { key: string; pasusi: number; cta?: string; finalni?: boolean }[] = [
-  { key: "ekran1", pasusi: 3 },
-  { key: "ekran2", pasusi: 3 },
-  { key: "ekran3", pasusi: 4, cta: "/novcanik" },
-  { key: "ekran4", pasusi: 3, cta: "/verifikacija" },
-  { key: "ekran5", pasusi: 3, cta: "/pijaca" },
-  { key: "ekran6", pasusi: 3, cta: "/verifikacija" },
-  { key: "ekran7", pasusi: 3, finalni: true },
+  { key: "ekran1", pasusi: 3 },                          // dobrodošlica + šta je zadatak
+  { key: "ekran2", pasusi: 3, cta: "/verifikacija" },    // Put A — poznaje nekog (QR/kod)
+  { key: "ekran3", pasusi: 4, cta: "/tabla-jemstva" },   // Put B — kartica prepoznavanja
+  { key: "ekran4", pasusi: 3 },                          // šta se otključava potvrdom
+  { key: "ekran5", pasusi: 3, cta: "/novcanik" },        // POEN
+  { key: "ekran6", pasusi: 3, cta: "/pijaca" },          // šta može odmah, pre potvrde
+  { key: "ekran7", pasusi: 3, finalni: true },           // uradi jednu stvar sada
 ];
 
 export default function DobrodosliPage() {

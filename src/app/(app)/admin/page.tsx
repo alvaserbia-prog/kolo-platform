@@ -32,7 +32,7 @@ export default async function AdminPage({
   const [
     allUsers, protokol, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
-    blogObjave, pendingDonacije, otvoreniPrigovori,
+    blogObjave, pendingDonacije, otvoreniPrigovori, otvorenihPrijavaOglasa,
   ] = await Promise.all([
     prisma.user.findMany({
       select: { id: true, pseudonim: true, email: true, location: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
@@ -128,6 +128,8 @@ export default async function AdminPage({
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
     }),
+    // Badge na tabu Pijaca — sami oglasi se učitavaju lenjo, iz taba.
+    prisma.prijavaOglasa.count({ where: { status: "OTVORENA" } }),
   ]);
 
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
@@ -166,6 +168,7 @@ export default async function AdminPage({
       viewerJeSuperadmin={viewerJeSuperadmin}
       viewerId={session.user.id}
       pocetniTab={pocetniTab}
+      otvorenihPrijavaOglasa={otvorenihPrijavaOglasa}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, location: u.location, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,

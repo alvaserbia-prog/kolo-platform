@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { gdePseudonim } from "@/lib/pseudonim";
 
 // POST /api/zrno/delegiraj — delegiraj glasove
 export async function POST(req: NextRequest) {
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest) {
   if (!delegatPseudonim)
     return NextResponse.json({ error: "Unesite pseudonim delegata." }, { status: 400 });
 
-  const delegat = await prisma.user.findUnique({ where: { pseudonim: delegatPseudonim }, select: { id: true } });
+  const delegat = await prisma.user.findFirst({ where: gdePseudonim(delegatPseudonim), select: { id: true } });
   if (!delegat) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
   if (delegat.id === session.user.id)
     return NextResponse.json({ error: "Ne možete delegirati sebi." }, { status: 400 });

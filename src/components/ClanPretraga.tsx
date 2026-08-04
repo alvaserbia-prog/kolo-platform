@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 interface Korisnik {
   id: string;
@@ -64,7 +65,7 @@ export default function ClanPretraga() {
     setQuery("");
     setShow(false);
     setRezultati([]);
-    router.push(`/profil/${korisnik.id}`);
+    router.push(profilHref(korisnik));
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {

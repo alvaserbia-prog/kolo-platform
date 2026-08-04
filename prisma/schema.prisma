@@ -41,6 +41,7 @@ enum ListingStatus {
   ACTIVE
   SOLD
   EXPIRED
+  UKLONJEN // Fondacija uklonila zbog povrede Uslova/Pravilnika/zakona
 }
 
 // Smer oglasa na Pijaci: PONUDA = oglašivač nudi dobro/uslugu (klasičan oglas),
@@ -209,6 +210,13 @@ model User {
   oauthId            String?
   oauthPending       Boolean   @default(false)
   pseudonim          String    @unique
+  // Pseudonim u malim slovima — jedini ključ po kome se pseudonim traži i po kome
+  // se čuva jedinstvenost. Bez ovoga bi "Marko" i "marko" bila dva različita naloga
+  // (Postgres `@unique` je osetljiv na veličinu slova), što je i rupa za imitaciju i
+  // dvosmislenost otkad adresa profila glasi `/profil/<pseudonim>`. Prikazuje se
+  // uvek `pseudonim` (sa velikim slovima kako ga je korisnik upisao).
+  // Održava se ISKLJUČIVO preko `src/lib/pseudonim.ts` — ne upisivati ručno.
+  pseudonimLower     String    @unique
   // Trajni donatorski broj člana — osnova poziva na broj (model 97) za uplate
   // (IPS QR + klasična uplatnica). Redni broj po datumu registracije (backfill u
   // migraciji), novi nalozi dobijaju sledeći iz sekvence. Ostaje i posle
@@ -265,6 +273,7 @@ model User {
   oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
   listings               MarketplaceListing[]       @relation("SellerListings")
   purchases              MarketplaceListing[]       @relation("BuyerListings")
+  prijaveOglasa          PrijavaOglasa[]            @relation("PrijaviocOglasa")
   praceneKategorije      FollowedCategory[]
   krugClanstva   KrugClanstvo[]
   pristupnice            KrugPristupnica[]
@@ -302,8 +311,31 @@ model User {
   pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
   prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
   sistemskaObavestenja            SistemskoObavestenje[]     @relation("KreiraoObavestenje")
+  pseudonimIstorija               PseudonimIstorija[]
   createdAt              DateTime  @default(now())
   updatedAt              DateTime  @updatedAt
+}
+
+/// Napušteni pseudonimi. Dve svrhe, obe posledica toga što pseudonim stoji u
+/// adresi profila (`/profil/<pseudonim>`):
+///
+///  1. **Stari linkovi ostaju živi.** Posle preimenovanja `/profil/StaroIme` i
+///     dalje vodi na istog čoveka (stranica potom prepiše adresu u novu).
+///  2. **Napušteno ime se ne može preuzeti.** Bez ovoga bi neko drugi uzeo
+///     oslobođeni pseudonim, pa bi ranije podeljeni link tiho vodio na DRUGU
+///     osobu — što je gore od mrtvog linka, jer izgleda ispravno.
+///
+/// Red se briše kad se korisnik vrati na svoje staro ime i pri gašenju naloga
+/// (čl. 34 — anonimizacija; napušteni pseudonim je i dalje trag o nalogu).
+model PseudonimIstorija {
+  id             String   @id @default(uuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pseudonim      String
+  pseudonimLower String   @unique
+  promenjenAt    DateTime @default(now())
+
+  @@index([userId])
 }
 
 /// Cirkularno SISTEMSKO obaveštenje svim korisnicima — izmene Uslova/Politike
@@ -510,11 +542,58 @@ model MarketplaceListing {
   // isti posetilac se broji jednom dnevno (guard je u pretraživaču). Vidi ga
   // SAMO oglašivač — povratna informacija da oglas nije otišao u prazno.
   pregledi    Int           @default(0)
+  // Uklanjanje od strane Fondacije (Uslovi čl. 21 st. 2 i čl. 25 st. 2). Razlog je
+  // obavezan jer se korisniku mora saopštiti — nije opcioni komentar za internu upotrebu.
+  uklonjenAt     DateTime?
+  uklonjenRazlog String?
+  uklonioId      String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 
+  prijave     PrijavaOglasa[]
+
   @@index([status, category, createdAt])
   @@index([status, tip, createdAt])
+}
+
+/**
+ * Prijava oglasa od strane korisnika (Uslovi čl. 25 st. 2 — Fondacija može ukloniti
+ * sadržaj „koji je prijavljen od strane drugih korisnika kao problematičan").
+ * Jedan korisnik može prijaviti isti oglas samo jednom (@@unique) — inače je
+ * brojač prijava merilo glasnosti, a ne ozbiljnosti.
+ */
+model PrijavaOglasa {
+  id          String              @id @default(uuid())
+  oglasId     String
+  oglas       MarketplaceListing  @relation(fields: [oglasId], references: [id], onDelete: Cascade)
+  prijaviocId String
+  prijavioc   User                @relation("PrijaviocOglasa", fields: [prijaviocId], references: [id])
+  razlog      PrijavaRazlog
+  opis        String?
+  status      PrijavaOglasaStatus @default(OTVORENA)
+  resioId     String?
+  resenoAt    DateTime?
+  createdAt   DateTime            @default(now())
+
+  @@unique([oglasId, prijaviocId])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([oglasId])
+}
+
+/** Razlozi prijave — prate zabrane iz Uslova čl. 20, 21, 22 i 24. */
+enum PrijavaRazlog {
+  ZABRANJENO_DOBRO // čl. 21 — dobra/usluge čiji je promet zabranjen
+  OBMANA           // čl. 20 — lažan ili obmanjujuć prikaz dobra/usluge
+  UVREDLJIVO       // čl. 22 — uznemiravanje, pretnje, diskriminacija
+  LICNI_PODACI     // čl. 24 — lični podaci trećih lica
+  PREVARA          // čl. 24 — prevara, manipulacija, nezakonita aktivnost
+  DRUGO
+}
+
+enum PrijavaOglasaStatus {
+  OTVORENA
+  RESENA   // oglas uklonjen povodom prijave
+  ODBACENA // pregledano, nema povrede
 }
 
 // Kategorije Pijace koje korisnik prati (čipovi u profilu). Pri objavi oglasa
@@ -1171,6 +1250,12 @@ model ChatMessage {
   user      User     @relation("ChatPoruke", fields: [userId], references: [id])
   content   String
   createdAt DateTime @default(now())
+  // Uklanjanje od strane Fondacije (Uslovi čl. 25 st. 2 — obuhvata „svu drugu
+  // komunikaciju putem Platforme"). Meko brisanje: poruka nestaje iz sobe, ali
+  // ostaje trag ko je i zašto uklonio dok je noćni cron ne pobriše sa ostalima.
+  uklonjenoAt    DateTime?
+  uklonjenRazlog String?
+  uklonioId      String?
 
   @@index([createdAt(sort: Desc)])
   @@index([userId])
