@@ -57,10 +57,12 @@ export async function POST(req: NextRequest) {
     void posaljiNotifikaciju(
       rez.verifikovaniId,
       "VERIFIKOVAN",
-      "Verifikovan/a si",
+      "Verifikovan/a si — možeš da postaviš oglas",
       `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
-        `Ako ne poznaješ ovu osobu, prijavi verifikaciju.`,
-      "/verifikacija"
+        `Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. ` +
+        `Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.`,
+      "/pijaca/novi-oglas",
+      { emailDugme: "Postavi oglas" }
     );
 
     return NextResponse.json({

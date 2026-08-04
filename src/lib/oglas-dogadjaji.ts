@@ -1,15 +1,71 @@
-// Događaji Pijace — priprema za fazu 2 (obaveštenja pratiocima kategorija).
-// Pri objavi oglasa emituje se događaj {listingId, category}; za sada se
-// korisnicima NE šalje ništa (admin Telegram bot ostaje netaknut). U fazi 2
-// će se ovde, na osnovu tabele FollowedCategory, slati obaveštenja
-// korisnicima koji prate kategoriju oglasa.
+// Događaji Pijace — obaveštenja o novim oglasima.
+//
+// Kad neko objavi oglas, korisnici koji prate tu kategoriju (`FollowedCategory`,
+// čipovi u profilu) dobijaju zvonce + push + mejl sa linkom na oglas. Bez ovoga
+// je objava oglasa bila „u prazno": niko ne sazna da je oglas stigao, oglašivač
+// ne dobije nijedan odziv, pa drugi oglas i ne postavi.
+//
+// Oglašivač se nikad ne obaveštava o sopstvenom oglasu.
+
+import { prisma } from "./prisma";
+import { posaljiNotifikaciju } from "./notifikacije";
+import { kategorijaNaziv } from "./kategorije";
+
+// Gornja granica primalaca u jednom pozivu — objava oglasa ne sme da visi dok
+// se šalju hiljade obaveštenja. Iznad ove granice višak se preskače i beleži u
+// log (tada je vreme za pravi red poslova, ne za tiho odsecanje).
+const MAX_PRIMALACA = 500;
+// Koliko obaveštenja ide uporedo (svako je DB upis + push + mejl).
+const PORCIJA = 10;
 
 export interface NoviOglasDogadjaj {
   listingId: string;
   category: string;
+  /** Oglašivač — izuzet iz obaveštenja. */
+  sellerId: string;
+  naslov: string;
+  tip: "PONUDA" | "POTRAZNJA";
 }
 
 export async function emitujNoviOglas(dogadjaj: NoviOglasDogadjaj): Promise<void> {
-  // Faza 2: raspodela obaveštenja pratiocima kategorije (FollowedCategory).
-  console.info("[pijaca] novi oglas", dogadjaj.listingId, dogadjaj.category);
+  const pratioci = await prisma.followedCategory.findMany({
+    where: {
+      category: dogadjaj.category,
+      userId: { not: dogadjaj.sellerId },
+      user: { deaktiviranAt: null, status: "ACTIVE" },
+    },
+    select: { userId: true },
+    take: MAX_PRIMALACA + 1,
+  });
+
+  if (pratioci.length > MAX_PRIMALACA) {
+    console.warn(
+      `[pijaca] oglas ${dogadjaj.listingId}: kategoriju „${dogadjaj.category}" prati više od ` +
+        `${MAX_PRIMALACA} korisnika — obavešteno prvih ${MAX_PRIMALACA}.`,
+    );
+  }
+  const primaoci = pratioci.slice(0, MAX_PRIMALACA);
+  if (primaoci.length === 0) return;
+
+  const naziv = kategorijaNaziv(dogadjaj.category);
+  const naslov =
+    dogadjaj.tip === "POTRAZNJA" ? `Nova potražnja: ${naziv}` : `Nov oglas: ${naziv}`;
+  const tekst =
+    dogadjaj.tip === "POTRAZNJA"
+      ? `Neko traži: „${dogadjaj.naslov}". Kategoriju „${naziv}" pratiš na Pijaci.`
+      : `„${dogadjaj.naslov}" je objavljeno u kategoriji „${naziv}", koju pratiš na Pijaci.`;
+  const link = `/pijaca/${dogadjaj.listingId}`;
+
+  for (let i = 0; i < primaoci.length; i += PORCIJA) {
+    await Promise.all(
+      primaoci.slice(i, i + PORCIJA).map((p) =>
+        posaljiNotifikaciju(p.userId, "NOV_OGLAS", naslov, tekst, link, {
+          emailDugme: "Pogledaj oglas",
+        }).catch((e) => {
+          // Jedan neuspeo primalac ne sme da zaustavi ostale.
+          console.error("[pijaca] obaveštenje o oglasu nije poslato", p.userId, e);
+        }),
+      ),
+    );
+  }
 }

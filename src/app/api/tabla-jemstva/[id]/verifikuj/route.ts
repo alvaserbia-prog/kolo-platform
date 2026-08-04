@@ -57,13 +57,17 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
     // Obavesti verifikovanog — bez kapije, sa pozivom na prijavu ako ne poznaje
     // verifikatora (hrani nadzor integriteta). Ne blokira odgovor.
+    // Link vodi pravo na postavljanje oglasa: to je trenutak najveće
+    // motivacije, a Pijaca je prvo što se verifikacijom otključava.
     void posaljiNotifikaciju(
       rez.verifikovaniId,
       "VERIFIKOVAN",
-      "Verifikovan/a si",
+      "Verifikovan/a si — možeš da postaviš oglas",
       `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
-        `Ako ne poznaješ ovu osobu, prijavi verifikaciju.`,
-      "/verifikacija"
+        `Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. ` +
+        `Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.`,
+      "/pijaca/novi-oglas",
+      { emailDugme: "Postavi oglas" }
     );
 
     return NextResponse.json({
