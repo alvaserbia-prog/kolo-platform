@@ -18,12 +18,15 @@ interface Oglas {
   slike: number;
   createdAt: string;
   soldAt: string | null;
+  /** Razlog uklanjanja od strane Fondacije (Uslovi čl. 25 st. 2). */
+  uklonjenRazlog: string | null;
 }
 
 const statusBoja: Record<string, string> = {
-  ACTIVE:  "bg-kolo-green-100 text-kolo-green-700",
-  SOLD:    "bg-kolo-info-light text-kolo-info",
-  EXPIRED: "bg-kolo-bg text-kolo-muted",
+  ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
+  SOLD:     "bg-kolo-info-light text-kolo-info",
+  EXPIRED:  "bg-kolo-bg text-kolo-muted",
+  UKLONJEN: "bg-kolo-danger-light text-kolo-danger",
 };
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
@@ -37,6 +40,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
     ACTIVE: t("oglas_aktivan"),
     SOLD: t("oglas_prodat"),
     EXPIRED: t("oglas_istekao"),
+    UKLONJEN: tPijaca("oglas_uklonjen"),
   };
 
   const filtrirani = listings.filter((l) => {
@@ -119,6 +123,12 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                     </>
                   )}
                 </div>
+                {/* Razlog uklanjanja — vlasnik mora da zna zašto (Uslovi čl. 25 st. 2). */}
+                {l.status === "UKLONJEN" && l.uklonjenRazlog && (
+                  <div className="mt-1.5 text-xs text-kolo-danger">
+                    {tPijaca("oglas_uklonjen_razlog", { razlog: l.uklonjenRazlog })}
+                  </div>
+                )}
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <span className={`text-xs px-2 py-0.5 rounded-md font-medium ${statusBoja[l.status] ?? "bg-kolo-bg text-kolo-muted"}`}>

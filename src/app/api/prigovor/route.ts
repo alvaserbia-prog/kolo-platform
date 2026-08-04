@@ -36,7 +36,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Opis prigovora mora imati najmanje 10 karaktera." }, { status: 400 });
   }
 
-  const tipovi = ["VERIFIKACIJA", "SUSPENZIJA", "PROGRAM", "OSTALO"];
+  // OGLAS — prigovor na uklonjen oglas ili poruku (Uslovi čl. 25 st. 2, čl. 30).
+  const tipovi = ["VERIFIKACIJA", "SUSPENZIJA", "PROGRAM", "OGLAS", "OSTALO"];
   if (!tipovi.includes(tipOdluke)) {
     return NextResponse.json({ error: "Nepoznat tip odluke." }, { status: 400 });
   }

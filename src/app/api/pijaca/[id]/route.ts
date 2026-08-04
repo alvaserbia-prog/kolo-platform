@@ -27,8 +27,19 @@ export async function GET(
     },
   });
   if (!listing) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+
+  // Trag uklanjanja se ne prosipa u javni odgovor: razlog je saopštenje vlasniku
+  // (Uslovi čl. 25 st. 2), a ne podatak o kom se obaveštava svet. `uklonioId`
+  // ne izlazi nikome — ko je odlučio je stvar audit loga, ne javnog API-ja.
+  const { uklonjenRazlog, uklonioId: _uklonioId, ...javno } = listing;
+  const jeVlasnik = listing.sellerId === session?.user?.id;
+
   return NextResponse.json({
-    listing: { ...listing, phone: session?.user?.verified ? listing.phone : null },
+    listing: {
+      ...javno,
+      phone: session?.user?.verified ? listing.phone : null,
+      uklonjenRazlog: jeVlasnik ? uklonjenRazlog : null,
+    },
   });
 }
 

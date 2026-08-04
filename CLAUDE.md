@@ -196,6 +196,22 @@ U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugr
 - **Postavljanje oglasa, pristup kontaktu oglašivača i komunikacija** — samo verifikovani korisnici.
 - **Svi korisnici** mogu da razmenjuju dobra/usluge i da iniciraju ažuriranje evidencije POEN-a u korist drugih; neverifikovani van platformskog prostora za oglašavanje.
 
+### Moderacija sadržaja (Uslovi čl. 20, 21, 22, 24, 25 — implementirana 2026-08-04)
+Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim suspenzije/isključenja celog naloga — nije postojala admin ruta, tab, status ni prijava.
+
+- **Reaktivna, ne preventivna.** Uslovi čl. 25 st. 1: Fondacija nije obavezna da unapred pregleda sadržaj. Zato **nema filtera reči ni pre-moderacije** — okidač je prijava korisnika ili uočena povreda. Ne uvoditi automatsku filtraciju.
+- **🔴 Uklanjanje, NIKAD prepravka.** Akti daju pravo uklanjanja (čl. 21 st. 2, čl. 25 st. 2), ne izmene tuđeg oglasa. Prepravkom bi Fondacija postala koautor sadržaja i izgubila zaštitu iz čl. 25 st. 1. Vlasnik dobija razlog i sam ispravlja i ponovo objavljuje. **Ne dodavati admin edit oglasa.**
+- **Razlog je OBAVEZAN** pri svakom uklanjanju (čl. 25 st. 2 traži obaveštenje „uz navođenje razloga") — rute vraćaju 400 bez njega. Ide vlasniku kroz `posaljiNotifikaciju` (zvonce + push + email) i u audit log.
+- **Uklanjanje je MEKO i povratno.** Oglas → `ListingStatus.UKLONJEN` + `uklonjenAt/uklonjenRazlog/uklonioId`; poruka Pričaonice → `uklonjenoAt/uklonjenRazlog/uklonioId`. Svi javni upiti već filtriraju `status: "ACTIVE"` (odnosno `uklonjenoAt: null`), pa se sadržaj gubi iz svih prikaza bez dodatnih izmena. `POST .../vrati` poništava grešku i usvojen prigovor.
+- **Razlog vidi samo vlasnik.** `GET /api/pijaca/[id]` skida `uklonioId` svima i `uklonjenRazlog` svima osim vlasniku (ranije bi `...listing` spread procurio oba).
+- **Prijave korisnika** (`PrijavaOglasa`, enumi `PrijavaRazlog`/`PrijavaOglasaStatus`): otvorene **svim prijavljenima** (i neverifikovanima — pregled oglasa je javan, pa i oni vide sporan sadržaj; prijava nije komunikacija sa oglašivačem). `@@unique([oglasId, prijaviocId])` — jedan korisnik, jedna prijava; ponovljen pokušaj vraća isti odgovor (da li je već prijavio je podatak o tuđoj prijavi). Uklanjanje oglasa automatski zatvara sve otvorene prijave nad njim u `RESENA`.
+- **Pričaonica.** Čl. 25 st. 1 obuhvata „svu drugu komunikaciju putem Platforme". Bez ovoga bi jedina poluga nad spornom porukom u globalnoj sobi bila isključenje korisnika (nesrazmerno, čl. 28). Sadržaj poruke se **ne prepisuje u audit log** — log nosi pseudonim i razlog.
+- **Eskalacija, ne automatska sankcija.** `PRAG_ZA_UPOZORENJE = 3` uklonjena oglasa istog korisnika → `posaljiAdminAlert` sa predlogom da se razmotri suspenzija (čl. 27) ili isključenje (čl. 28). Sistem sam ne sankcioniše.
+- **Prigovor:** `PrigovorNaOdluku.tipOdluke` dobio vrednost **`OGLAS`** (uz VERIFIKACIJA/SUSPENZIJA/PROGRAM/OSTALO) — put žalbe po čl. 30.
+- **Rute:** `GET /api/admin/pijaca` (?prikaz=prijavljeni|aktivni|uklonjeni, ?q=), `POST /api/admin/pijaca/[id]/{ukloni,vrati}`, `POST /api/admin/pijaca/prijave/[id]/odbaci`, `POST /api/pijaca/[id]/prijavi`, `DELETE /api/admin/chat/[id]`. Audit: `OGLAS_UKLONJEN`, `OGLAS_VRACEN`, `PRIJAVA_OGLASA_ODBACENA`, `CHAT_PORUKA_UKLONJENA`.
+- **Kod:** `src/lib/moderacija.ts` (čiste funkcije + pravni komentari, testovi `__tests__/moderacija.test.ts`), admin tab `src/app/(app)/admin/PijacaTab.tsx` (lenjo učitava svoje podatke), komponenta `PrijaviOglas` u `OglasDetalj.tsx`. Migracija `20260804120000_moderacija_sadrzaja`. Badge: tab Pijaca + sidebar `adminCekanje` broje otvorene prijave.
+- **✅ Usput rešeno — suspenzija nije važila za već prijavljene.** `auth.ts` je blokirao samo NOVO prijavljivanje (`authorize`), a JWT refresh (linija ~219) osvežavao je `admin/verified/tipKorisnika/pseudonim` ali **ne i `status`** — suspendovan korisnik je nastavljao da radi i postavlja oglase dok mu cookie ne istekne. Sada refresh poništava `token.id` kad `status !== "ACTIVE"` → čista odjava. Deluje sa zakašnjenjem do `OSVEZI_INTERVAL_MS` (isti kompromis kao za ostala polja).
+
 ### Krug (kolektivni oblik — Pravilnik Glava VIII, čl. 55)
 - Kolektivni oblik bez pravnog subjektiviteta; ima evidencioni identifikator i zajednički POEN zapis u Protokolu.
 - Ovlašćena lica, min. broj članova i ostali parametri uređeni su **posebnim pravilnikom** (čl. 55); vrednosti u kodu („najmanje 5 verifikovanih", 1–3 ovlašćena lica) potiču iz tog pravilnika/koda.
