@@ -16,6 +16,7 @@ const PokroviteljPrijaveTab = dynamic(() => import("./PokroviteljPrijaveTab"), {
 const NadzorTab = dynamic(() => import("./NadzorTab"), { ssr: false });
 const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
+const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 
 interface KorisnikInfo {
   id: string;
@@ -207,6 +208,8 @@ interface AdminKlijentProps {
   viewerJeSuperadmin: boolean;
   viewerId: string;
   pocetniTab: Tab;
+  /** Otvorene prijave oglasa — badge na tabu Pijaca (Uslovi čl. 25 st. 2). */
+  otvorenihPrijavaOglasa: number;
 }
 
 const tipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
@@ -235,7 +238,7 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 });
 
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -283,6 +286,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["ped", `${t("tab_ped")}${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
     ["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
+    ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
@@ -373,6 +377,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Korisnici */}
       {tab === "korisnici" && <KorisniciTab users={users} onDone={() => router.refresh()} viewerJeSuperadmin={viewerJeSuperadmin} viewerId={viewerId} />}
+
+      {/* Pijaca — moderacija oglasa (Uslovi čl. 21, 25) */}
+      {tab === "pijaca" && <PijacaTab />}
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}
@@ -1438,6 +1445,7 @@ const prigovorTipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Recor
   VERIFIKACIJA: t("prigovori_tip_verifikacija"),
   SUSPENZIJA: t("prigovori_tip_suspenzija"),
   PROGRAM: t("prigovori_tip_program"),
+  OGLAS: t("prigovori_tip_oglas"),
   OSTALO: t("prigovori_tip_ostalo"),
 });
 

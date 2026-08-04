@@ -216,9 +216,15 @@ export const authOptions: NextAuthOptions = {
           try {
             const dbUser = await prisma.user.findUnique({
               where: { id: token.id as string },
-              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
+              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, status: true },
             });
-            if (dbUser) {
+            if (dbUser && dbUser.status !== "ACTIVE") {
+              // Suspenzija/isključenje (Uslovi čl. 27, 28) ranije je blokiralo samo
+              // NOVO prijavljivanje (`authorize`), pa je već prijavljen korisnik
+              // nastavljao da radi — i da postavlja oglase — dok mu JWT ne istekne.
+              // Poništenje `id` ovde vraća null sesiju → čista odjava.
+              token.id = undefined;
+            } else if (dbUser) {
               token.admin = dbUser.admin;
               // K5: pun pristup zavisi od indeksa ≥ 10%, ne samo od `verified`.
               token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);

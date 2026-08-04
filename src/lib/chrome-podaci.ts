@@ -63,7 +63,7 @@ export async function izracunajDnevniBrojeve(
     // Krugovi izbačeni iz admin panela → ne broje se ovde (nemaju tab gde bi se rešili).
     const [
       programi, oglasPrijave, oglasEvidencije,
-      pokrovitelji, donacije, prigovori,
+      pokrovitelji, donacije, prigovori, prijaveOglasa,
     ] = await Promise.all([
       prisma.programEnrollment.count({ where: { status: "PENDING" } }),
       prisma.oglasPrijava.count({ where: { status: "PENDING" } }),
@@ -71,10 +71,12 @@ export async function izracunajDnevniBrojeve(
       prisma.pokroviteljPrijava.count({ where: { status: "POTPISANA" } }),
       prisma.donationRecord.count({ where: { status: "PENDING" } }),
       prisma.prigovorNaOdluku.count({ where: { status: { in: ["PENDING", "U_OBRADI"] } } }),
+      // Prijavljeni oglasi na Pijaci — red čekanja za moderaciju (Uslovi čl. 25).
+      prisma.prijavaOglasa.count({ where: { status: "OTVORENA" } }),
     ]);
     adminCekanje =
       programi + oglasPrijave + oglasEvidencije +
-      pokrovitelji + donacije + prigovori;
+      pokrovitelji + donacije + prigovori + prijaveOglasa;
   }
 
   return { novcanik, pijaca, tablaJemstva, adminCekanje };

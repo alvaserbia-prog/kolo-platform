@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import PocetnaKlijent from "./PocetnaKlijent";
+import { jeAdmin } from "@/lib/dozvole";
 
 export default async function PocetnaPage() {
   const session = await getServerSession(authOptions);
@@ -15,6 +16,7 @@ export default async function PocetnaPage() {
       include: { author: { select: { pseudonim: true } } },
     }),
     prisma.chatMessage.findMany({
+      where: { uklonjenoAt: null },
       orderBy: { createdAt: "desc" },
       take: 100,
       include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
@@ -48,6 +50,7 @@ export default async function PocetnaPage() {
       currentUserId={session.user.id}
       blog={blog}
       chatInicijalno={chat}
+      jeAdminViewer={jeAdmin(session.user)}
     />
   );
 }

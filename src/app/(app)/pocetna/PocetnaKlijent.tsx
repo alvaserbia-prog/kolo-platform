@@ -30,6 +30,8 @@ interface Props {
   currentUserId: string;
   blog: BlogObjava[];
   chatInicijalno: ChatPoruka[];
+  /** UO Fondacije — može ukloniti spornu poruku iz sobe (Uslovi čl. 25 st. 2). */
+  jeAdminViewer: boolean;
 }
 
 export default function PocetnaKlijent({
@@ -38,6 +40,7 @@ export default function PocetnaKlijent({
   currentUserId,
   blog,
   chatInicijalno,
+  jeAdminViewer,
 }: Props) {
   const t = useTranslations("pocetna");
   const [poruke, setPoruke] = useState<ChatPoruka[]>(chatInicijalno);
@@ -46,6 +49,26 @@ export default function PocetnaKlijent({
   const [greska, setGreska] = useState<string | null>(null);
   const [otvorenaObjava, setOtvorenaObjava] = useState<string | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * Uklanjanje sporne poruke iz Pričaonice (Uslovi čl. 25 st. 2 — obuhvata „svu
+   * drugu komunikaciju putem Platforme"). Razlog je obavezan jer se šalje autoru.
+   * Bez ovoga bi jedina poluga nad spornom porukom bila isključenje korisnika.
+   */
+  async function ukloniPoruku(id: string) {
+    const razlog = prompt("Razlog uklanjanja (vidi ga autor poruke):")?.trim();
+    if (!razlog) return;
+    const res = await fetch(`/api/admin/chat/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ razlog }),
+    });
+    if (res.ok) setPoruke((prev) => prev.filter((p) => p.id !== id));
+    else {
+      const data = await res.json().catch(() => ({}));
+      setGreska(data.error ?? "Greška pri uklanjanju poruke.");
+    }
+  }
 
   // Skroluj na dno chata pri inicijalizaciji i pri svakoj novoj poruci
   useEffect(() => {
@@ -212,6 +235,15 @@ export default function PocetnaKlijent({
                             minute: "2-digit",
                           })}
                         </span>
+                        {jeAdminViewer && (
+                          <button
+                            onClick={() => ukloniPoruku(p.id)}
+                            title={t("chat_ukloni_poruku")}
+                            className="text-[10px] text-kolo-muted hover:text-kolo-danger transition-colors"
+                          >
+                            ✕
+                          </button>
+                        )}
                       </div>
                       <div
                         className={`px-3 py-2 rounded-2xl text-sm whitespace-pre-wrap break-words ${
