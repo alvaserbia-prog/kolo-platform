@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 /**
  * Lista osoba koje sam verifikovao, sa privatnom oznakom (nadimkom) koju mogu da
@@ -50,7 +51,7 @@ function Red({ osoba }: { osoba: VerifikovanaOsoba }) {
   return (
     <li className="flex flex-wrap items-center gap-2 px-4 py-3">
       <Link
-        href={`/profil/${osoba.korisnikId}`}
+        href={profilHref({ id: osoba.korisnikId, pseudonim: osoba.pseudonim })}
         className="text-sm font-medium text-kolo-green-700 hover:underline shrink-0 min-w-[7rem]"
       >
         @<Pseudonim>{osoba.pseudonim}</Pseudonim>

@@ -11,6 +11,7 @@ import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 import PushObavestenja from "@/components/PushObavestenja";
 import { useMe, useMePatch, type Notifikacija } from "@/hooks/useMe";
+import { profilHref } from "@/lib/profil-link";
 
 export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
   const { data: session } = useSession();
@@ -239,7 +240,7 @@ function ProfilMeni({ userId, pseudonim }: { userId: string; pseudonim: string }
           </div>
           <div className="py-1">
             <button
-              onClick={() => { setOpen(false); router.push(`/profil/${userId}`); }}
+              onClick={() => { setOpen(false); router.push(profilHref({ id: userId, pseudonim })); }}
               className="w-full text-right px-4 py-2.5 text-sm text-kolo-text hover:bg-kolo-bg transition-colors flex items-center justify-end gap-3"
             >
               {t("moj_profil")}

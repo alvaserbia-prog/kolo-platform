@@ -12,6 +12,7 @@ import {
   zasticeniIndeks,
 } from "@/lib/protokol/dokaz-stvarnosti";
 import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
+import { gdePseudonim, poljaPseudonima } from "@/lib/pseudonim";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -256,8 +257,8 @@ export async function DELETE(req: NextRequest) {
   if (balans > 0) {
     if (primalacPseudonim) {
       // Prenesi zadatom korisniku
-      const primalac = await prisma.user.findUnique({
-        where: { pseudonim: primalacPseudonim },
+      const primalac = await prisma.user.findFirst({
+        where: gdePseudonim(primalacPseudonim),
         include: { wallet: true },
       });
 
@@ -315,13 +316,18 @@ export async function DELETE(req: NextRequest) {
     // posle prestanka statusa (za razliku od numeričke istorije transakcija).
     await tx.aktivnostLog.deleteMany({ where: { userId } });
 
+    // Obriši napuštene pseudonime — i oni su trag o nalogu (čl. 34, anonimizacija).
+    // Posledica: ranija imena ovog naloga postaju slobodna za druge, što je ovde
+    // ispravno — nalog više ne postoji, pa nema šta da se zaštiti od preuzimanja.
+    await tx.pseudonimIstorija.deleteMany({ where: { userId } });
+
     // Anonimizuj lične podatke User entiteta
     await tx.user.update({
       where: { id: userId },
       data: {
         email: null,
         passwordHash: null,
-        pseudonim: `obrisani-korisnik-${userId.slice(0, 8)}`,
+        ...poljaPseudonima(`obrisani-korisnik-${userId.slice(0, 8)}`),
         telefon: null,
         location: null,
         avatar: null,

@@ -106,6 +106,7 @@ async function seedUoClana(clan: UoClan) {
         email: clan.email,
         passwordHash: null, // bez lozinke — UO član postavlja kroz reset password tok
         pseudonim: clan.pseudonim,
+        pseudonimLower: clan.pseudonim.toLowerCase(),
         tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
         admin: AdminNivo.SUPERADMIN,
         indeksStvarnosti: 10,

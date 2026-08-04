@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { validanPseudonim } from "@/lib/validacija";
+import { validanPseudonim, PSEUDONIM_PRAVILO } from "@/lib/validacija";
+import { porukaZauzeca, promeniPseudonim, proveriZauzece } from "@/lib/pseudonim";
 
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -10,10 +11,7 @@ export async function PATCH(req: NextRequest) {
 
   const body = await req.json();
   if (!validanPseudonim(body?.pseudonim)) {
-    return NextResponse.json(
-      { error: "Pseudonim: 3–30 znakova, samo slova, brojevi, razmak, _ . -" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
   }
   const pseudonim = (body.pseudonim as string).trim();
 
@@ -28,12 +26,17 @@ export async function PATCH(req: NextRequest) {
     }
   }
 
-  const exists = await prisma.user.findUnique({ where: { pseudonim } });
-  if (exists) return NextResponse.json({ error: "Pseudonim je zauzet." }, { status: 409 });
+  // Zauzeto = aktivan nalog ILI ime koje je neko drugi ranije napustio (stari
+  // linkovi i dalje vode na njega, pa se ne sme preuzeti).
+  const zauzece = await proveriZauzece(pseudonim, user.id);
+  if (zauzece) {
+    return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
+  }
 
-  await prisma.user.update({
-    where: { id: session.user.id },
-    data: { pseudonim, pseudonimChangedAt: new Date() },
+  await prisma.$transaction(async (tx) => {
+    await promeniPseudonim(tx, user.id, user.pseudonim, pseudonim, {
+      pseudonimChangedAt: new Date(),
+    });
   });
 
   return NextResponse.json({ ok: true });

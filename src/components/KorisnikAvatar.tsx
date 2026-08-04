@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { profilHref } from "@/lib/profil-link";
 
 // Mali okrugli avatar korisnika. Podržava R2/http URL i legacy base64 data URI;
 // fallback = inicijal pseudonima na zelenoj pozadini. Ako je prosleđen `userId`,
@@ -37,7 +38,7 @@ export default function KorisnikAvatar({
 
   if (userId) {
     return (
-      <Link href={`/profil/${userId}`} title={pseudonim} className={base} style={style}>
+      <Link href={profilHref({ id: userId, pseudonim })} title={pseudonim} className={base} style={style}>
         {sadrzaj}
       </Link>
     );

@@ -31,6 +31,9 @@ export default function RegistracijaPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [pseudonimStatus, setPseudonimStatus] = useState<"idle" | "checking" | "slobodan" | "zauzet">("idle");
+  // Razlog odbijanja sa servera — „zauzet" i „nedozvoljeni znakovi" su različite
+  // stvari otkad pseudonim stoji u adresi profila, pa generička poruka zbunjuje.
+  const [pseudonimGreska, setPseudonimGreska] = useState<string>("");
   const [uslovi, setUslovi] = useState(false);
   const [privatnost, setPrivatnost] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -52,6 +55,7 @@ export default function RegistracijaPage() {
         const res = await fetch(`/api/provjeri-pseudonim?p=${encodeURIComponent(p)}`, { signal: controller.signal });
         const data = await res.json();
         setPseudonimStatus(data.slobodan ? "slobodan" : "zauzet");
+        setPseudonimGreska(data.slobodan ? "" : (data.greska ?? ""));
       } catch {
         setPseudonimStatus("idle");
       } finally {
@@ -120,7 +124,9 @@ export default function RegistracijaPage() {
               {pseudonimStatus === "slobodan" && <span className="absolute right-3 top-3 text-kolo-green-700">✓</span>}
               {pseudonimStatus === "zauzet" && <span className="absolute right-3 top-3 text-red-500">✕</span>}
             </div>
-            {pseudonimStatus === "zauzet" && <p className="mt-1 text-xs text-red-500">{t("pseudonim_zauzet")}</p>}
+            {pseudonimStatus === "zauzet" && (
+              <p className="mt-1 text-xs text-red-500">{pseudonimGreska || t("pseudonim_zauzet")}</p>
+            )}
             {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">{t("pseudonim_slobodan_opis")}</p>}
           </div>
 
