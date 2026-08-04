@@ -538,6 +538,10 @@ model MarketplaceListing {
   phone       String?
   status      ListingStatus @default(ACTIVE)
   soldAt      DateTime?
+  // Broj otvaranja stranice oglasa. Ne broje se pregledi samog oglašivača, a
+  // isti posetilac se broji jednom dnevno (guard je u pretraživaču). Vidi ga
+  // SAMO oglašivač — povratna informacija da oglas nije otišao u prazno.
+  pregledi    Int           @default(0)
   // Uklanjanje od strane Fondacije (Uslovi čl. 21 st. 2 i čl. 25 st. 2). Razlog je
   // obavezan jer se korisniku mora saopštiti — nije opcioni komentar za internu upotrebu.
   uklonjenAt     DateTime?
@@ -592,9 +596,10 @@ enum PrijavaOglasaStatus {
   ODBACENA // pregledano, nema povrede
 }
 
-// Kategorije Pijace koje korisnik prati (čipovi u profilu; osnova za
-// buduća obaveštenja o novim oglasima — faza 2). Vrednost `category` je
-// jedan od 13 slugova iz src/lib/kategorije.ts (validira se u API sloju).
+// Kategorije Pijace koje korisnik prati (čipovi u profilu). Pri objavi oglasa
+// pratioci dobijaju obaveštenje — `emitujNoviOglas` u src/lib/oglas-dogadjaji.ts.
+// Vrednost `category` je jedan od 13 slugova iz src/lib/kategorije.ts
+// (validira se u API sloju).
 model FollowedCategory {
   id        String   @id @default(uuid())
   userId    String

@@ -152,9 +152,15 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Faza 2 priprema: događaj o novom oglasu (obaveštenja pratiocima kategorija
-  // se još NE šalju). Ne sme da obori objavu oglasa ako pukne.
-  await emitujNoviOglas({ listingId: listing.id, category }).catch(() => {});
+  // Obavesti korisnike koji prate ovu kategoriju. Ne sme da obori objavu oglasa
+  // ako pukne — oglas je već upisan.
+  await emitujNoviOglas({
+    listingId: listing.id,
+    category,
+    sellerId: session.user.id,
+    naslov: title,
+    tip,
+  }).catch((e) => console.error("[POST /api/pijaca] obaveštenja", e));
 
   return NextResponse.json({ id: listing.id });
   } catch (err) {
