@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getLocale } from "next-intl/server";
+import { prevedi, type Parametri } from "@/lib/prevod-servera";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -47,6 +49,9 @@ export async function GET(req: NextRequest) {
     },
   });
 
+  // Opis se prevodi na jeziku posmatrača. Stavke bez ključa (stare i one iz
+  // nekonvertovanih kanala) prikazuju sačuvan srpski `description`.
+  const locale = await getLocale();
   const result = txs.map((t) => {
     const primio = t.toWalletId === wallet.id;
     const drugiPseudonim =
@@ -59,7 +64,9 @@ export async function GET(req: NextRequest) {
       amount: t.amount,
       type: t.type,
       typeLabel: TIP_LABELA[t.type] ?? t.type,
-      description: t.description,
+      description: t.opisKljuc
+        ? prevedi(locale, t.opisKljuc, (t.opisParametri ?? undefined) as Parametri | undefined, t.description ?? "")
+        : t.description,
       primio,
       drugiPseudonim,
       createdAt: t.createdAt.toISOString(),

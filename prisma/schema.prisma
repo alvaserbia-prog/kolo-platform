@@ -425,7 +425,12 @@ model Transaction {
   toWallet     Wallet          @relation("ToWallet", fields: [toWalletId], references: [id])
   amount       Int
   type         TransactionType
+  /** Gotov srpski opis — UVEK popunjen (rezerva i stari redovi). */
   description  String?
+  /** Ključ u messages/*.json, npr. "transakcije.verifikacija". */
+  opisKljuc    String?
+  /** Vrednosti za {pseudonim}, {iznos}, {krug}... */
+  opisParametri Json?
   createdAt    DateTime        @default(now())
 }
 

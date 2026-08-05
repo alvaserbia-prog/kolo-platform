@@ -417,3 +417,28 @@ parametri, naslov, tekst, link})` + dva ključa u `messages/*.json`
 > **Pravilo naučeno usput:** tekst koji **čovek otkuca** (obrazloženje UO na
 > prigovor, razlog odbijanja) NE dobija ključ — to je autorski sadržaj i ide kako
 > je napisan. Ključ dobija samo standardna rečenica sistema.
+
+---
+
+## 6d. Faza 7 — istorija transakcija (2026-08-05)
+
+Isti problem kao obaveštenja: `emitujPoen` je upisivao **gotovu srpsku rečenicu**
+u `Transaction.description`, pa nije imalo šta da se prevede.
+
+- Migracija `20260805130000_transakcija_opis_kljuc` — `opisKljuc` + `opisParametri`,
+  **plus retroaktivni backfill** (odluka #10) koji prepoznaje devet oblika koje je
+  kod do sada upisivao.
+- `emitujPoen(..., opis?: {kljuc, parametri})`; svih 8 fajlova sa pozivima prebačeno.
+- `/api/novcanik/transakcije` prevodi opis na jeziku posmatrača.
+
+> ✅ **Migracija je PROBANA na pravom PostgreSQL-u** (16.13, lokalna instanca),
+> nad uzorkom sa svih devet oblika + jednim nepoznatim. Svih devet prepoznato
+> tačno; nepoznat opis ostaje `opisKljuc = NULL` i prikazuje se kao i pre —
+> **namerno, jer je pogrešno protumačen opis gori od neprevedenog.**
+> Ovo je bilo obavezno: migracije se primenjuju u `buildCommand`, pa bi greška u
+> SQL-u oborila deploy.
+
+**Poznato ograničenje:** iznos u starim redovima (`Bonus za donaciju iznos 5.000`)
+backfill hvata kao **tekst**, ne broj — već je formatiran srpski i ne preračunava se.
+Nove stavke prosleđuju sirov broj i formatiraju se po jeziku. Ispravljanje starih
+tražilo bi parsiranje srpskog formata, što nosi rizik bez stvarne koristi.

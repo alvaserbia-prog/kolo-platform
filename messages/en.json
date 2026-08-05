@@ -2348,5 +2348,16 @@
     "transfer_primljen_poruka_tekst": "{pseudonim} recorded {iznos} POEN in your ledger. Message: “{poruka}”",
     "program_odbijen_razlog_naslov": "Programme application rejected",
     "program_odbijen_razlog_tekst": "Your application for the “{program}” programme has been rejected. Reason: {razlog}"
+  },
+  "transakcije": {
+    "verifikacija": "Verification of {pseudonim}",
+    "primljena_verifikacija": "Verification received from {pseudonim}",
+    "nadzor": "Supervision of verification {verifikator} → {verifikovani}",
+    "donacija": "Donation bonus, amount {iznos}",
+    "pokroviteljstvo": "Sponsorship bonus, amount {iznos}",
+    "osnivacki": "Founding contribution — step {korak}/{ukupno}",
+    "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",
+    "krug_osnivanje": "Circle founded “{krug}”",
+    "program": "Programme {program}"
   }
 }

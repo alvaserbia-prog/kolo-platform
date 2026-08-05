@@ -72,7 +72,7 @@ export async function POST(
     walletId,
     50_000,
     TransactionType.EMISIJA_KRUG_OSNIVANJE,
-    `Osnivanje krugovi "${zahtev.name}"`
+    `Osnivanje krugovi "${zahtev.name}"`, { kljuc: "transakcije.krug_osnivanje", parametri: { krug: zahtev.name } }
   );
 
   // Logovati osnivački prag (threshold=5) u BonusLog radi konzistentnosti

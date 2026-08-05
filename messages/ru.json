@@ -2348,5 +2348,16 @@
     "transfer_primljen_poruka_tekst": "{pseudonim} je upisao/la {iznos} POEN u tvoju evidenciju. Poruka: „{poruka}”",
     "program_odbijen_razlog_naslov": "Prijava na program odbijena",
     "program_odbijen_razlog_tekst": "Tvoja prijava na program „{program}” je odbijena. Razlog: {razlog}"
+  },
+  "transakcije": {
+    "verifikacija": "Verifikacija {pseudonim}",
+    "primljena_verifikacija": "Primljena verifikacija od {pseudonim}",
+    "nadzor": "Nadzor verifikacije {verifikator} → {verifikovani}",
+    "donacija": "Bonus za donaciju iznos {iznos}",
+    "pokroviteljstvo": "Bonus za pokroviteljstvo iznos {iznos}",
+    "osnivacki": "Osnivački doprinos — korak {korak}/{ukupno}",
+    "krug_bonus": "Bonus krugovi „{krug}” — {clanovi} članova",
+    "krug_osnivanje": "Osnivanje krugovi „{krug}”",
+    "program": "Program {program}"
   }
 }
