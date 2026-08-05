@@ -10,8 +10,9 @@
 > **Grana razvoja:** `claude/russian-translation-prep-lisiof`.
 > Deploy pravila: vidi `CLAUDE.md` „Deploy i grane".
 
-**Stanje: PRIPREMA ZAVRŠENA (2026-08-05).** Odluke vlasnika zaključane, obim
-izmeren nad kodom. Prevod još NIJE započet.
+**Stanje: FAZA 1 ZAVRŠENA (2026-08-05).** Odluke vlasnika zaključane, obim izmeren
+nad kodom, mašinerija jezika postavljena. Prevod još NIJE započet — `messages/ru.json`
+je za sada kopija `sr.json`, a ruski NIJE izložen u prekidaču jezika.
 
 ---
 
@@ -32,6 +33,7 @@ izmeren nad kodom. Prevod još NIJE započet.
 | 11 | **Naselja** | **Srpska ćirilica** | Preko postojećeg `lat2cyr`, bez ručnog rada |
 | 12 | **Fiksirane engleske reči** | **Ne prevode se** | Spisak u §5 |
 | 13 | **SEO / `/ru/` URL** | **Ne sada** | Kao engleski — prekidač na istom URL-u |
+| 14 | **`email`** | **Ostaje „email"** | Ne prevodi se u *электронная почта* |
 
 ### Obrazloženje odluka koje nisu očigledne
 
@@ -244,9 +246,9 @@ Brojano nad `messages/sr.json`:
 | `Google` | 3 |
 | `DCO`, `PDF`, `APR` | 1–2 |
 
-🟡 **Otvoreno:** `email` (29 pojava). Po pravilu #12 ostaje „email"; Rusi to normalno
-pišu ćirilicom (*электронная почта*), pa ostavljeno može delovati kao propust u
-prevodu. Promena je jedna zamena kroz `ru.json` ako se vlasnik predomisli.
+**`email`** (29 pojava) — **odluka #14: ostaje „email"**, ne prevodi se u
+*электронная почта*. (Razmotreno i odbačeno: Rusi termin normalno pišu ćirilicom,
+ali vlasnik je izabrao dosledno pravilo #12.)
 
 ---
 
@@ -268,13 +270,39 @@ prevodu. Promena je jedna zamena kroz `ru.json` ako se vlasnik predomisli.
 
 ---
 
+## 6a. Urađeno u fazi 1 (2026-08-05)
+
+| Fajl | Izmena |
+|---|---|
+| `messages/ru.json` | **nosač** — kopija `sr.json` (2.277 ključeva). Puni se u fazi 4. |
+| `public/flags/ru.svg` | zastavica |
+| `src/i18n/routing.ts` | `"ru"` dodat u `locales` |
+| `src/app/api/profil/jezik/route.ts` | `"ru"` dodat u `JEZICI` |
+| `scripts/check-i18n-parity.mjs` | `CILJEVI = ["en", "ru"]` |
+| `src/lib/seo.ts` | `OG_LOCALE.ru = "ru_RU"` |
+| `src/app/layout.tsx` | ćirilični font za `sr-Cyrl` **i** `ru` (§3.6) |
+| `src/lib/pravni-dokument.ts` | generalizovan na mapu `PREVEDENI` umesto tvrdog `if (locale === "en")` |
+| `src/components/JezikSvitcer.tsx` | stavka dodata **zakomentarisana** |
+
+**Zašto je `ru.json` kopija, a ne prazan fajl:** da mašinerija radi i da provera
+pariteta čuva fajl od faze 1 — svaki nov ključ u `sr.json` odmah pada na `i18n:check`,
+umesto da se otkrije tek pri prevodu.
+
+**Zašto ruski NIJE u prekidaču:** dok je `ru.json` kopija, izbor „ru" bi prikazao
+srpski tekst. Aktivacija na kraju faze 4 = odkomentarisati jedan red u `JezikSvitcer.tsx`.
+
+**Provereno:** `npm run i18n:check` ✅ · `npm test` 360/360 ✅ · `npm run build` ✅
+(jedino upozorenje: sitemap ne može do baze u kontejneru — nevezano za izmene).
+
+---
+
 ## 7. Predložen redosled faza
 
 Svaka faza = svoj commit. Faze 1–3 su priprema koda; prevod počinje od faze 4.
 
 | Faza | Sadržaj | Zavisi od |
 |---|---|---|
-| **1** | Mehanika jezika: routing, `/api/profil/jezik`, prekidač, zastavica, parity, `seo.ts`, **font (§3.6)** | — |
+| **1** ✅ | Mehanika jezika: routing, `/api/profil/jezik`, zastavica, parity, `seo.ts`, **font (§3.6)**, loader pravnih akata | — |
 | **2** | Izvlačenje zakucanog teksta iz ekrana (§3.1) → `sr.json` naraste | — |
 | **3** | Datumi/brojevi helper (§3.5) | — |
 | **4** | `messages/ru.json` — prevod 1.892 ključa + prepis admina | 1, 2 |

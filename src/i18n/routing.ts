@@ -2,7 +2,7 @@ import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
   // "sr" = srpski (latinica, default), "sr-Cyrl" = srpski (ćirilica, transliteracijom),
-  // "en" = engleski. Jezik se bira preko cookie-a (NEXT_LOCALE),
+  // "en" = engleski, "ru" = ruski. Jezik se bira preko cookie-a (NEXT_LOCALE),
   // bez URL prefiksa — projekat koristi RAVNO stablo ruta (nema app/[locale]/).
   //
   // ⚠️ NAPOMENA: URL prefiks (/en/…) za SEO zahteva restrukturaciju u app/[locale]/
@@ -17,7 +17,13 @@ export const routing = defineRouting({
   // Da se jezik reaktivira: vrati ga ovde + u src/app/api/profil/jezik/route.ts
   // + u parity skriptu (i dopuni do pariteta sa sr.json ako je kaskao),
   // i dodaj ga u src/components/JezikSvitcer.tsx.
-  locales: ["sr", "sr-Cyrl", "en"],
+  //
+  // 🇷🇺 RUSKI je u pripremi (vidi docs/i18n-ruski-plan.md). Locale je AKTIVAN
+  // ovde da bi mašinerija radila i da bi provera pariteta čuvala messages/ru.json
+  // od faze 1 — ali NIJE izložen u prekidaču jezika dok prevod ne bude gotov
+  // (faza 4). Do tada je messages/ru.json kopija sr.json, pa bi izbor "ru"
+  // prikazao srpski tekst. Aktivacija = odkomentarisati stavku u JezikSvitcer.tsx.
+  locales: ["sr", "sr-Cyrl", "en", "ru"],
   defaultLocale: "sr",
   localePrefix: "never",
 });

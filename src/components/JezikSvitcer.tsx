@@ -9,6 +9,11 @@ const jezici = [
   { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
   { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
+  // 🇷🇺 Ruski je u pripremi — locale je aktivan (routing.ts) i zastavica postoji
+  // (/flags/ru.svg), ali stavka je namerno isključena dok messages/ru.json ne bude
+  // preveden (faza 4, docs/i18n-ruski-plan.md). Do tada je ru.json kopija sr.json,
+  // pa bi izbor "ru" prikazao srpski tekst. Aktivacija = odkomentarisati red ispod.
+  // { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский" },
   // "hr" (Hrvatski, /flags/hr.svg) je zamrznut — vidi src/i18n/routing.ts.
 ];
 

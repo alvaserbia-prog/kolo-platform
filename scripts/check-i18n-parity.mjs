@@ -14,7 +14,13 @@ const IZVOR = "sr";
 // sr-Cyrl nema fajl (transliteracija), ne proverava se.
 // "hu" i "hr" su ZAMRZNUTI (neaktivni) — messages/{hu,hr}.json se NE održavaju
 // do pune integracije (vidi src/i18n/routing.ts). Vratiti u listu pri reaktivaciji.
-const CILJEVI = ["en"];
+//
+// "ru" se proverava od faze 1 (vidi docs/i18n-ruski-plan.md), još dok je fajl
+// kopija sr.json — baš zato da nijedan novi ključ ne prođe nezapažen tokom
+// prevoda. Namespace "admin" u ru.json OSTAJE srpski po odluci vlasnika; to ne
+// remeti paritet jer se poredе KLJUČEVI, ne vrednosti. NE dodavati izuzetke
+// ovde — time bi se izgubila zaštita nad ostalim namespace-ovima.
+const CILJEVI = ["en", "ru"];
 
 function leafKeys(obj, prefix = "") {
   let keys = [];
