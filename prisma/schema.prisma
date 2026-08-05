@@ -1010,8 +1010,15 @@ model Notifikacija {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   tip       String
+  // `naslov`/`tekst` su UVEK popunjeni srpskim tekstom — i kao rezerva i zbog
+  // starih redova koji nemaju ključ. Kad je `kljuc` postavljen, prikaz i mejl
+  // sklapaju rečenicu iz prevoda na jeziku primaoca (vidi src/lib/prevod-servera.ts).
   naslov    String
   tekst     String
+  /** Ključ u messages/*.json (npr. "notifikacije.transfer_primljen"). */
+  kljuc     String?
+  /** Vrednosti za popunjavanje ({pseudonim}, {iznos}...). */
+  parametri Json?
   procitana Boolean  @default(false)
   link      String?
   createdAt DateTime @default(now())

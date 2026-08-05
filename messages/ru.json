@@ -2332,5 +2332,21 @@
     "ph_pseudonim": "VasPseudonim",
     "cuvanje": "Čuvanje...",
     "zavrsi": "Završi registraciju"
+  },
+  "notifikacije": {
+    "transfer_primljen_naslov": "Upisano ti je {iznos} POEN",
+    "transfer_primljen_tekst": "{pseudonim} je upisao/la {iznos} POEN u tvoju evidenciju.",
+    "prigovor_resen_naslov": "Prigovor rešen",
+    "prigovor_odbijen_naslov": "Prigovor odbijen",
+    "prigovor_resen_tekst": "Tvoj prigovor je rešen.",
+    "prigovor_odbijen_tekst": "Tvoj prigovor je odbijen.",
+    "program_odobren_naslov": "Prijava na program odobrena",
+    "program_odobren_tekst": "Tvoja prijava na program „{program}” je odobrena.",
+    "program_odbijen_naslov": "Prijava na program odbijena",
+    "program_odbijen_tekst": "Tvoja prijava na program „{program}” je odbijena.",
+    "transfer_primljen_poruka_naslov": "Upisano ti je {iznos} POEN",
+    "transfer_primljen_poruka_tekst": "{pseudonim} je upisao/la {iznos} POEN u tvoju evidenciju. Poruka: „{poruka}”",
+    "program_odbijen_razlog_naslov": "Prijava na program odbijena",
+    "program_odbijen_razlog_tekst": "Tvoja prijava na program „{program}” je odbijena. Razlog: {razlog}"
   }
 }

@@ -52,12 +52,18 @@ export async function PATCH(
   );
 
   if (status === "RESENO" || status === "ODBIJENO") {
+    const reseno = status === "RESENO";
+    const rucniOdgovor = odgovor?.trim();
+    const koren = reseno ? "notifikacije.prigovor_resen" : "notifikacije.prigovor_odbijen";
     await posaljiNotifikaciju(
       prigovor.userId,
       "info",
-      status === "RESENO" ? "Prigovor rešen" : "Prigovor odbijen",
-      odgovor?.trim() || (status === "RESENO" ? "Tvoj prigovor je rešen." : "Tvoj prigovor je odbijen."),
-      "/profil"
+      reseno ? "Prigovor rešen" : "Prigovor odbijen",
+      rucniOdgovor || (reseno ? "Tvoj prigovor je rešen." : "Tvoj prigovor je odbijen."),
+      "/profil",
+      // Obrazloženje koje je UO otkucao je autorski tekst i ide kako je napisano —
+      // zato se BEZ ključa, pa se ne prevodi. Samo standardna rečenica je prevodiva.
+      rucniOdgovor ? undefined : { kljuc: koren },
     );
   }
 

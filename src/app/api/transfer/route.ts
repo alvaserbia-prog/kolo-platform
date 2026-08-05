@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
 import { TransactionType } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -90,13 +90,18 @@ export async function POST(req: NextRequest) {
     throw e;
   }
 
-  await posaljiNotifikaciju(
-    primalac.id,
-    "transfer_primljen",
-    `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
-    "/novcanik"
-  );
+  // Iznos se NE formatira ovde: broj ide kao parametar, a razdvajač hiljada se
+  // bira pri prikazu, po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000).
+  await obavesti(primalac.id, {
+    tip: "transfer_primljen",
+    kljuc: description
+      ? "notifikacije.transfer_primljen_poruka"
+      : "notifikacije.transfer_primljen",
+    parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
+    naslov: `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
+    tekst: `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
+    link: "/novcanik",
+  });
 
   return NextResponse.json({ ok: true });
 }

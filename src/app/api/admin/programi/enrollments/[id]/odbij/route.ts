@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma } from "@/lib/protokol/programi";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
@@ -33,13 +33,14 @@ export async function POST(
   await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODBIJENA", enrollment.userId,
     `${labelPrograma(enrollment.type)}${razlog ? ": " + razlog : ""}`);
 
-  await posaljiNotifikaciju(
-    enrollment.userId,
-    "info",
-    `Prijava na program odbijena`,
-    `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
-    "/programi"
-  );
+  await obavesti(enrollment.userId, {
+    tip: "info",
+    kljuc: razlog ? "notifikacije.program_odbijen_razlog" : "notifikacije.program_odbijen",
+    parametri: { program: labelPrograma(enrollment.type), razlog: razlog ?? "" },
+    naslov: "Prijava na program odbijena",
+    tekst: `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    link: "/programi",
+  });
 
   return NextResponse.json({ ok: true });
 }

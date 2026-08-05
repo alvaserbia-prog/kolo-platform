@@ -10,7 +10,7 @@
 > **Grana razvoja:** `claude/russian-translation-prep-lisiof`.
 > Deploy pravila: vidi `CLAUDE.md` „Deploy i grane".
 
-**Stanje: FAZA 1 ZAVRŠENA (2026-08-05).** Odluke vlasnika zaključane, obim izmeren
+**Stanje: FAZE 1–3 ZAVRŠENE, 6 DELIMIČNO (2026-08-05).** Odluke vlasnika zaključane, obim izmeren
 nad kodom, mašinerija jezika postavljena. Prevod još NIJE započet — `messages/ru.json`
 je za sada kopija `sr.json`, a ruski NIJE izložen u prekidaču jezika.
 
@@ -367,3 +367,53 @@ Svih 178 poziva u ekranima prebačeno sa zakucanog `"sr-RS"` na aktivni jezik.
   pri prikazu, na jeziku posmatrača.
 
 **Provereno:** `tsc` čist · `i18n:check` OK · `npm test` 360/360 · build prolazi.
+
+
+---
+
+## 6c. Faza 10 (delimično) i faza 6 (infrastruktura) — 2026-08-05
+
+### Faza 10 — manifest da, OG slika NE (i to je tačan zaključak)
+`public/manifest.webmanifest` je postao ruta (`src/app/manifest.webmanifest/route.ts`)
+i sada daje opis na jeziku korisnika — manifest traži **pregledač**, koji šalje
+kolačić `NEXT_LOCALE`.
+
+🔴 **OG slika ostaje srpska — trajno, ne kao dug.** Plan je tražio da se lokalizuje
+i da joj se doda ćirilični font. To **nije izvodljivo i nema smisla**: OG sliku
+povlače pauci društvenih mreža (Facebook, Twitter), koji **ne šalju kolačić** —
+strana ne može da zna jezik posmatrača. Uz `localePrefix: "never"` (odluka #13)
+postoji tačno jedna OG slika za sve jezike. Stavku brisati iz plana, ne prenositi
+dalje. (Font bez ćirilice zato takođe nije problem.)
+
+### Faza 6 — infrastruktura gotova, pozivna mesta 4/29
+**Urađeno:**
+- Migracija `20260805120000_notifikacija_kljuc` — `Notifikacija.kljuc` + `parametri`.
+  Postojeći redovi ostaju netaknuti (`kljuc = NULL`) i prikazuju se iz `naslov`/`tekst`;
+  **nema backfill-a i nema rizika po istoriju.**
+- `src/lib/prevod-servera.ts` — `prevedi(locale, kljuc, parametri, rezerva)`.
+  Namerno **ne koristi** `getTranslations`: mejl i push idu kao `void` posle
+  odgovora, kad kontekst zahteva više ne postoji, a jezik se čita iz baze.
+  Brojevi se formatiraju po jeziku primaoca, `sr-Cyrl` ide kroz `lat2cyr`.
+- `obavesti()` u `notifikacije.ts` — ključ + parametri; `posaljiNotifikaciju()`
+  **ostaje i radi**, pa nekonvertovana mesta ne pucaju.
+- `/api/notifikacije` prevodi zvonce na jeziku **posmatrača**; mejl i push idu na
+  jeziku **iz naloga** (`User.jezik` — polje koje do sada niko nije čitao).
+
+**Provereno kraj-do-kraja:**
+```
+sr : Marko je upisao/la 12.345 POEN u tvoju evidenciju. Poruka: „hvala”
+en : Marko recorded 12,345 POEN in your ledger. Message: “hvala”
+cyr: Уписано ти је 12.345 ПОЕН
+```
+
+**Konvertovano (4/29):** transfer POEN-a, prigovor (rešen/odbijen), program
+odobren, program odbijen.
+
+**Ostaje 25 pozivnih mesta.** Obrazac je dokazan i mehanički — svako mesto:
+`posaljiNotifikaciju(id, tip, naslov, tekst, link)` → `obavesti(id, {tip, kljuc,
+parametri, naslov, tekst, link})` + dva ključa u `messages/*.json`
+(`<kljuc>_naslov`, `<kljuc>_tekst`).
+
+> **Pravilo naučeno usput:** tekst koji **čovek otkuca** (obrazloženje UO na
+> prigovor, razlog odbijanja) NE dobija ključ — to je autorski sadržaj i ide kako
+> je napisan. Ključ dobija samo standardna rečenica sistema.

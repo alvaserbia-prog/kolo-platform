@@ -2332,5 +2332,21 @@
     "ph_pseudonim": "YourPseudonym",
     "cuvanje": "Saving...",
     "zavrsi": "Finish registration"
+  },
+  "notifikacije": {
+    "transfer_primljen_naslov": "{iznos} POEN recorded for you",
+    "transfer_primljen_tekst": "{pseudonim} recorded {iznos} POEN in your ledger.",
+    "prigovor_resen_naslov": "Complaint resolved",
+    "prigovor_odbijen_naslov": "Complaint rejected",
+    "prigovor_resen_tekst": "Your complaint has been resolved.",
+    "prigovor_odbijen_tekst": "Your complaint has been rejected.",
+    "program_odobren_naslov": "Programme application approved",
+    "program_odobren_tekst": "Your application for the “{program}” programme has been approved.",
+    "program_odbijen_naslov": "Programme application rejected",
+    "program_odbijen_tekst": "Your application for the “{program}” programme has been rejected.",
+    "transfer_primljen_poruka_naslov": "{iznos} POEN recorded for you",
+    "transfer_primljen_poruka_tekst": "{pseudonim} recorded {iznos} POEN in your ledger. Message: “{poruka}”",
+    "program_odbijen_razlog_naslov": "Programme application rejected",
+    "program_odbijen_razlog_tekst": "Your application for the “{program}” programme has been rejected. Reason: {razlog}"
   }
 }

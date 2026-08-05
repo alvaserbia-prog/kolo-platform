@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
@@ -60,13 +60,14 @@ export async function POST(
 
   await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODOBRENA", enrollment.userId, labelPrograma(enrollment.type));
 
-  await posaljiNotifikaciju(
-    enrollment.userId,
-    "info",
-    `Prijava na program odobrena`,
-    `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odobrena.`,
-    "/programi"
-  );
+  await obavesti(enrollment.userId, {
+    tip: "info",
+    kljuc: "notifikacije.program_odobren",
+    parametri: { program: labelPrograma(enrollment.type) },
+    naslov: "Prijava na program odobrena",
+    tekst: `Tvoja prijava na program „${labelPrograma(enrollment.type)}" je odobrena.`,
+    link: "/programi",
+  });
 
   return NextResponse.json({ ok: true });
 }
