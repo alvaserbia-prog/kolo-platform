@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { intlTag } from "@/lib/format";
 import ClanPretraga from "@/components/ClanPretraga";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface Krug {
   id: string;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export default function KrugKlijent({ krugovi, mojaKrug, imaOsnivanjeZahtev, isVerified }: Props) {
+  const locale = useLocale();
   const t = useTranslations("krug");
   return (
     <div className="space-y-6">
@@ -91,7 +93,7 @@ export default function KrugKlijent({ krugovi, mojaKrug, imaOsnivanjeZahtev, isV
                 </div>
                 <div className="shrink-0 text-right space-y-1">
                   <div className="bg-kolo-green-100 rounded-xl px-3 py-1.5 text-center">
-                    <p className="text-sm font-bold text-kolo-green-700">{z.balance.toLocaleString("sr-RS")}</p>
+                    <p className="text-sm font-bold text-kolo-green-700">{z.balance.toLocaleString(intlTag(locale))}</p>
                     <p className="text-xs text-kolo-green-700">POEN</p>
                   </div>
                   <p className="text-xs text-kolo-muted text-center">{z.clanovi} {z.clanovi === 1 ? t("clan_count_1") : t("clan_count_vise")}</p>

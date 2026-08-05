@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface OglasItem {
   id: string;
@@ -93,6 +94,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
   prijavaStatusBadge: Record<string, { label: string; cls: string }>;
   sourceLabel: Record<string, string>;
 }) {
+  const locale = useLocale();
   const t = useTranslations("doprinosOglasi");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -134,7 +136,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
             <p className="text-xs text-kolo-muted mt-2 leading-relaxed line-clamp-2">{oglas.description}</p>
           </div>
           <div className="shrink-0 text-right">
-            <p className="text-sm font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString("sr-RS")} P` : t("neograniceno")}</p>
+            <p className="text-sm font-bold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString(intlTag(locale))} P` : t("neograniceno")}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{t("predlozeni_kratko")}</p>
           </div>
         </div>
@@ -143,7 +145,7 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
           <div className="flex items-center gap-4 text-xs text-kolo-muted">
             <span>{oglas.odobreniClanovi}/{oglas.positions} {oglas.positions === 1 ? t("izvršilac_jedan") : t("izvršilaca")}</span>
             {oglas.deadline && (
-              <span>{t("rok")}: {new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
+              <span>{t("rok")}: {new Date(oglas.deadline).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short" })}</span>
             )}
           </div>
           <div className="flex items-center gap-2">

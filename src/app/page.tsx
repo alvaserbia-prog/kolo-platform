@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { intlTag } from "@/lib/format";
 import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -393,25 +394,25 @@ export default async function Home() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.brojClanova.toLocaleString("sr-RS")}
+                  {agregati.brojClanova.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_clan")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.opticaj.toLocaleString("sr-RS")}
+                  {agregati.opticaj.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.brojOglasa.toLocaleString("sr-RS")}
+                  {agregati.brojOglasa.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_oglas")}</div>
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.brojTransfera.toLocaleString("sr-RS")}
+                  {agregati.brojTransfera.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
               </div>

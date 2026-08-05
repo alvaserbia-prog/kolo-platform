@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
@@ -43,6 +44,7 @@ interface Props {
 }
 
 export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) {
+  const locale = useLocale();
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [activeSlika, setActiveSlika] = useState(0);
@@ -185,7 +187,7 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
             <span>{jePotraznja ? t("narucilac") : t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
-            <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString("sr-RS")}</span>
+            <span>{t("objavljeno")}: {new Date(oglas.createdAt).toLocaleDateString(intlTag(locale))}</span>
             {/* Brojač vidi samo oglašivač — povratna informacija njemu, a ne
                 javna objava koliko je Pijaca (ne)posećena. */}
             {oglas.isMine && (

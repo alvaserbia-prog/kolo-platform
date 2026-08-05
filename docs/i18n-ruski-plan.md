@@ -329,3 +329,41 @@ Svaka faza = svoj commit. Faze 1–3 su priprema koda; prevod počinje od faze 4
 - 🟡 **Migracija istorije transakcija** (§3.4) dira žive podatke. Testirati na test
   bazi (`main`) pre objave. Migracije se primenjuju automatski pri deploy-u.
 - 🟡 **Cirkularna obaveštenja** ostaju srpska — vidi obrazloženje uz odluku #8.
+
+---
+
+## 6b. Urađeno u fazi 2 i 3 (2026-08-05)
+
+### Pre faza — očišćeno 125 mrtvih ključeva
+Skeniranje svih ključeva protiv stvarne upotrebe (dinamički pozivi detektovani po
+fajlu i izuzeti). Ostaci uklonjenih funkcija: LK/JMBG verifikacija (18), jedinica
+mere + tok kupovine na Pijaci (23), zastareli linkovi u `sistem`/`zrno` (58), i dr.
+**Obim prevoda pao sa 2.277 na 2.152 ključa.**
+
+### Faza 2 — izvučen zakucan tekst (58 novih ključeva)
+Ekrani bez i18n: ceo tok verifikacije (`VerifikujNekoga`, `MojQrKod`, `QrSkener`,
+`MiniStablo`, `IndeksPrikaz`, `MojeOznake`), `CookieConsent`, `oauth/dovrsi`.
+Engleski preveden odmah; ruski čeka fazu 4.
+
+`MiniStablo` je imao srpske podrazumevane tekstove koje **nijedan pozivalac ne
+prosleđuje** — sada padaju na prevod, uz zadržanu mogućnost nadjačavanja.
+
+### Faza 3 — formatiranje po jeziku
+Nov `src/lib/format.ts` (`intlTag`, `fmtBroj`, `fmtDatum`, `fmtDatumVreme`).
+Svih 178 poziva u ekranima prebačeno sa zakucanog `"sr-RS"` na aktivni jezik.
+
+> 🟢 **Usput ispravljen postojeći bug:** `toLocaleDateString("sr-RS")` vraća
+> **ćirilične** nazive meseci („05. август 2026.") — i latiničnim korisnicima.
+> Mapa u `format.ts` eksplicitno navodi pismo (`sr-Latn-RS`), pa latinica sada
+> dobija „05. avgust 2026.". Englezi su do sada takođe videli srpski format.
+
+**Namerno NIJE dirano:**
+- `normalizujLokaciju` (`SistemKlijent`) — `toLocaleLowerCase` se koristi za
+  **grupisanje** lokacija, ne za prikaz. Fiksiran na `sr-Latn-RS`: da zavisi od
+  jezika posmatrača, isti gradovi bi se različito grupisali Srbinu i Rusu.
+- **API rute i `src/lib/protokol/*`** (~30 poziva) — tamo se broj upisuje u tekst
+  obaveštenja i u `Transaction.description`, tj. **u bazu**. To se rešava u
+  fazama 6 i 7, kad tekst postane ključ + parametri; formatiranje se tada radi
+  pri prikazu, na jeziku posmatrača.
+
+**Provereno:** `tsc` čist · `i18n:check` OK · `npm test` 360/360 · build prolazi.

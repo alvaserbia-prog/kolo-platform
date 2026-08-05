@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface MojaPrijava {
   id: string;
@@ -49,6 +50,7 @@ const sourceCls: Record<string, string> = {
 };
 
 export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; isVerified: boolean }) {
+  const locale = useLocale();
   const t = useTranslations("doprinosOglasi");
   const router = useRouter();
   const [loadingPrijava, setLoadingPrijava] = useState(false);
@@ -133,14 +135,14 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
             <p className="text-xs text-kolo-muted mt-0.5">{t("izvršilaca")}</p>
           </div>
           <div className="bg-kolo-bg rounded-xl p-3 text-center">
-            <p className="font-semibold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString("sr-RS")} P` : t("neograniceno")}</p>
+            <p className="font-semibold text-kolo-green-700">{oglas.predlozeniPoen > 0 ? `${oglas.predlozeniPoen.toLocaleString(intlTag(locale))} P` : t("neograniceno")}</p>
             <p className="text-xs text-kolo-muted mt-0.5">{t("predlozeni_tezina")}</p>
           </div>
         </div>
 
         {oglas.deadline && (
           <p className="text-xs text-kolo-muted">
-            {t("rok_za_prijavu")}: <strong className="text-kolo-muted">{new Date(oglas.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</strong>
+            {t("rok_za_prijavu")}: <strong className="text-kolo-muted">{new Date(oglas.deadline).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" })}</strong>
           </p>
         )}
 
@@ -218,15 +220,15 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
                     </a>
                   )}
                   <div className="min-w-0">
-                    <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}</p>
+                    <p className="text-sm text-kolo-text">{new Date(e.date).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short", year: "numeric" })}</p>
                     <p className="text-xs text-kolo-muted mt-0.5 line-clamp-1">{e.description}</p>
                   </div>
                 </div>
                 <div className="shrink-0 text-right">
                   <p className="text-sm font-semibold text-kolo-text">
                     {e.status === "EMITTED"
-                      ? t("ev_iznos_evidentirano", { iznos: e.amount.toLocaleString("sr-RS") })
-                      : t("ev_iznos_predlozeno", { iznos: e.predlozeniPoen.toLocaleString("sr-RS") })}
+                      ? t("ev_iznos_evidentirano", { iznos: e.amount.toLocaleString(intlTag(locale)) })
+                      : t("ev_iznos_predlozeno", { iznos: e.predlozeniPoen.toLocaleString(intlTag(locale)) })}
                   </p>
                   <p className={`text-xs font-medium ${badge?.cls ?? ""}`}>{badge?.label}</p>
                 </div>
@@ -246,6 +248,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
   maxPredlozeni: number;
   onSuccess: () => void;
 }) {
+  const locale = useLocale();
   const t = useTranslations("doprinosOglasi");
   const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [predlozeniPoen, setPredlozeniPoen] = useState("");
@@ -265,7 +268,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
   async function handleSubmit() {
     setError("");
     if (!predlozeniPoen || !Number.isInteger(predlozeni) || predlozeni < 1) { setError(t("ev_greska_poen_pozitivan")); return; }
-    if (maxPredlozeni > 0 && predlozeni > maxPredlozeni) { setError(t("ev_greska_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") })); return; }
+    if (maxPredlozeni > 0 && predlozeni > maxPredlozeni) { setError(t("ev_greska_poen_max", { max: maxPredlozeni.toLocaleString(intlTag(locale)) })); return; }
     if (!description.trim() || description.trim().length < 10) { setError(t("ev_greska_opis_min10")); return; }
     if (dokazSlika) {
       if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(dokazSlika.type)) { setError(t("ev_greska_dokaz_format")); return; }
@@ -306,7 +309,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold text-kolo-muted">{t("evidentiraj_dnevno")}</h3>
         {predlozeni > 0 && (
-          <span className="text-sm font-bold text-kolo-green-700">{t("ev_iznos_predlozeno", { iznos: predlozeni.toLocaleString("sr-RS") })}</span>
+          <span className="text-sm font-bold text-kolo-green-700">{t("ev_iznos_predlozeno", { iznos: predlozeni.toLocaleString(intlTag(locale)) })}</span>
         )}
       </div>
 
@@ -318,7 +321,7 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-kolo-muted mb-1">{maxPredlozeni > 0 ? t("predlozeni_poen_max", { max: maxPredlozeni.toLocaleString("sr-RS") }) : t("predlozeni_poen_bez_max")}</label>
+          <label className="block text-xs font-semibold text-kolo-muted mb-1">{maxPredlozeni > 0 ? t("predlozeni_poen_max", { max: maxPredlozeni.toLocaleString(intlTag(locale)) }) : t("predlozeni_poen_bez_max")}</label>
           <input type="number" min={1} max={maxPredlozeni > 0 ? maxPredlozeni : undefined} step={1} value={predlozeniPoen}
             onChange={(e) => setPredlozeniPoen(e.target.value)}
             placeholder={t("predlozeni_poen_placeholder")}

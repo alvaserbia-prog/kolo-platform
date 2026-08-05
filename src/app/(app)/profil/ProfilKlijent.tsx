@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import Pseudonim from "@/components/Pseudonim";
 import CategoryChips from "@/components/CategoryChips";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const MAX_DISPLAY = 440;
 
@@ -42,6 +43,7 @@ interface ProfilProps {
 }
 
 export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) {
+  const locale = useLocale();
   const t = useTranslations("profil");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -466,7 +468,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
             )}
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("registrovan_label")}</dt>
-              <dd className="text-kolo-muted">{new Date(user.createdAt).toLocaleDateString("sr-RS")}</dd>
+              <dd className="text-kolo-muted">{new Date(user.createdAt).toLocaleDateString(intlTag(locale))}</dd>
             </div>
           </dl>
         </div>
@@ -569,7 +571,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
             <p className="text-sm text-kolo-muted">
               {t("pseudonim_30_dana")}{" "}
               {user.pseudonimChangedAt && (
-                <>{t("sledeca_promena")} {new Date(new Date(user.pseudonimChangedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("sr-RS")}.</>
+                <>{t("sledeca_promena")} {new Date(new Date(user.pseudonimChangedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString(intlTag(locale))}.</>
               )}
             </p>
           )}

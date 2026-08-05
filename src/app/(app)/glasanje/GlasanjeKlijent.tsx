@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
 interface Predlog {
@@ -84,6 +85,7 @@ export default function GlasanjeKlijent({ predlozi, mojaGlasackaMoc }: Props) {
 // ── Kartica predloga ──────────────────────────────────────────────────────────
 
 const PredlogKartica = memo(function PredlogKartica({ p, mojaGlasackaMoc, onRefresh }: { p: Predlog; mojaGlasackaMoc: number; onRefresh: () => void }) {
+  const locale = useLocale();
   const t = useTranslations("glasanje");
   const tc = useTranslations("common");
   const [loading, setLoading] = useState<boolean | null>(null);
@@ -123,7 +125,7 @@ const PredlogKartica = memo(function PredlogKartica({ p, mojaGlasackaMoc, onRefr
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-kolo-text">{p.title}</p>
           <p className="text-xs text-kolo-muted mt-0.5">
-            <Pseudonim>{p.authorPseudonim}</Pseudonim> · {new Date(p.createdAt).toLocaleDateString("sr-RS")}
+            <Pseudonim>{p.authorPseudonim}</Pseudonim> · {new Date(p.createdAt).toLocaleDateString(intlTag(locale))}
           </p>
         </div>
         <span className={`shrink-0 text-xs px-2 py-0.5 rounded font-medium ${statusZelen ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-bg text-kolo-muted"}`}>
@@ -168,10 +170,10 @@ const PredlogKartica = memo(function PredlogKartica({ p, mojaGlasackaMoc, onRefr
       )}
 
       {najavljen && (
-        <p className="text-xs text-kolo-muted">{t("glasanje_pocinje", { datum: new Date(p.glasanjePocetak).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" }) })}</p>
+        <p className="text-xs text-kolo-muted">{t("glasanje_pocinje", { datum: new Date(p.glasanjePocetak).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" }) })}</p>
       )}
       {uToku && (
-        <p className="text-xs text-kolo-muted">{t("rok")} {new Date(p.deadline).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
+        <p className="text-xs text-kolo-muted">{t("rok")} {new Date(p.deadline).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" })}</p>
       )}
 
       {poruka && <p className="text-xs text-kolo-danger">{poruka}</p>}
