@@ -10,7 +10,25 @@
 > **Grana razvoja:** `claude/russian-translation-prep-lisiof`.
 > Deploy pravila: vidi `CLAUDE.md` „Deploy i grane".
 
-**Stanje: FAZE 1–3 ZAVRŠENE, 6 DELIMIČNO (2026-08-05).** Odluke vlasnika zaključane, obim izmeren
+**Stanje na 2026-08-05.** Priprema koda je u velikoj meri gotova; **sam prevod
+teksta nije započet.** `messages/ru.json` je i dalje kopija `sr.json`, a ruski
+NIJE izložen u prekidaču jezika.
+
+| Faza | Sadržaj | Stanje |
+|---|---|---|
+| — | Čišćenje mrtvih ključeva | ✅ 125 obrisano |
+| **1** | Mehanika jezika (locale, font, paritet, loader) | ✅ |
+| **2** | Izvlačenje zakucanog teksta iz ekrana | ✅ 58 ključeva |
+| **3** | Datumi i brojevi po jeziku | ✅ 178 mesta |
+| **4** | **Prevod `messages/ru.json`** | ⬜ **nije započeto (~1.900 ključeva)** |
+| **5** | `faq-data-ru.ts` | ⬜ nije započeto (71 pitanje) |
+| **6** | Obaveštenja (zvonce/push/mejl) | 🟡 infrastruktura ✅, 4/29 pozivnih mesta |
+| **7** | Istorija transakcija + migracija | ✅ (migracija probana na PostgreSQL-u) |
+| **8** | Poruke o greškama iz API-ja | ⬜ nije započeto (560 stringova) |
+| **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
+| **10** | Manifest / OG slika / metapodaci | 🟡 manifest ✅, OG slika otpada (v. §6c) |
+
+**Sledeći korak:** faza 4 (prevod) — sve što je ispred nje je urađeno. Odluke vlasnika zaključane, obim izmeren
 nad kodom, mašinerija jezika postavljena. Prevod još NIJE započet — `messages/ru.json`
 je za sada kopija `sr.json`, a ruski NIJE izložen u prekidaču jezika.
 
