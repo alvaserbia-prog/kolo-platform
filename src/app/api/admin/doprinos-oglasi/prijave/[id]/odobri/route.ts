@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -86,13 +86,14 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_PRIJAVA_ODOBRENA", prijava.userId,
     oglasSaKapacitetom.title);
 
-  await posaljiNotifikaciju(
-    prijava.userId,
-    "info",
-    "Prijava za zadatak prihvaćena!",
-    `Tvoja prijava za zadatak „${oglasSaKapacitetom.title}" je prihvaćena. Možeš da počneš sa evidencijom izvršenja.`,
-    "/programi"
-  );
+  await obavesti(prijava.userId, {
+    tip: "info",
+    kljuc: "notifikacije.prijava_zadatak_prihvacena",
+    parametri: { zadatak: oglasSaKapacitetom.title },
+    naslov: "Prijava za zadatak prihvaćena!",
+    tekst: `Tvoja prijava za zadatak „${oglasSaKapacitetom.title}" je prihvaćena. Možeš da počneš sa evidencijom izvršenja.`,
+    link: "/programi",
+  });
 
   return NextResponse.json({ ok: true });
 }

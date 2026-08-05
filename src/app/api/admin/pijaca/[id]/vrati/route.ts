@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/pijaca/[id]/vrati — poništenje uklanjanja.
@@ -31,13 +31,14 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   });
 
   await logAdminAkcija(session.user.id, "OGLAS_VRACEN", id, `${oglas.seller.pseudonim} — ${oglas.title}`);
-  await posaljiNotifikaciju(
-    oglas.sellerId,
-    "OGLAS_VRACEN",
-    "Oglas vraćen na Pijacu",
-    `Tvoj oglas „${oglas.title}" je vraćen i ponovo je vidljiv na Pijaci.`,
-    `/pijaca/${id}`,
-  );
+  await obavesti(oglas.sellerId, {
+    tip: "OGLAS_VRACEN",
+    kljuc: "notifikacije.oglas_vracen",
+    parametri: { oglas: oglas.title },
+    naslov: "Oglas vraćen na Pijacu",
+    tekst: `Tvoj oglas „${oglas.title}" je vraćen i ponovo je vidljiv na Pijaci.`,
+    link: `/pijaca/${id}`,
+  });
 
   return NextResponse.json({ ok: true });
 }

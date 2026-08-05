@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 
 /**
@@ -46,25 +46,28 @@ export async function PATCH(
 
   await logAdminAkcija(session.user.id, "BAG_STATUS", bag.userId, `Bag ${id} → ${status}`);
 
-  await posaljiNotifikaciju(
-    bag.userId,
-    "info",
-    status === "U_RADU"
-      ? "Radi se na tvojoj prijavi"
-      : status === "RESENO"
-      ? "Prijavljeni bag je rešen"
-      : status === "ODBIJENO"
-      ? "Prijava baga je odbijena"
-      : "Status prijave baga je promenjen",
-    status === "U_RADU"
-      ? `Primili smo tvoju prijavu „${bag.naslov}" i radimo na njoj.`
-      : status === "RESENO"
-      ? `Greška koju si prijavio/la — „${bag.naslov}" — je otklonjena. Hvala ti.`
-      : status === "ODBIJENO"
-      ? `Tvoja prijava „${bag.naslov}" nije prihvaćena kao greška.`
-      : `Status tvoje prijave „${bag.naslov}" je promenjen.`,
-    "/bagovi"
-  );
+  // Četiri ishoda → četiri ključa; mapa je čitljivija od ugnežđenih ternara.
+  const BAG_KLJUC: Record<string, string> = {
+    U_RADU: "bag_u_radu",
+    RESENO: "bag_reseno",
+    ODBIJENO: "bag_odbijeno",
+  };
+  const bagKljuc = BAG_KLJUC[status] ?? "bag_promenjen";
+  const BAG_SR: Record<string, [string, string]> = {
+    bag_u_radu: ["Radi se na tvojoj prijavi", `Primili smo tvoju prijavu „${bag.naslov}" i radimo na njoj.`],
+    bag_reseno: ["Prijavljeni bag je rešen", `Greška koju si prijavio/la — „${bag.naslov}" — je otklonjena. Hvala ti.`],
+    bag_odbijeno: ["Prijava baga je odbijena", `Tvoja prijava „${bag.naslov}" nije prihvaćena kao greška.`],
+    bag_promenjen: ["Status prijave baga je promenjen", `Status tvoje prijave „${bag.naslov}" je promenjen.`],
+  };
+  const [bagNaslov, bagTekst] = BAG_SR[bagKljuc];
+  await obavesti(bag.userId, {
+    tip: "info",
+    kljuc: `notifikacije.${bagKljuc}`,
+    parametri: { naslov: bag.naslov },
+    naslov: bagNaslov,
+    tekst: bagTekst,
+    link: "/bagovi",
+  });
 
   return NextResponse.json({ ok: true });
 }

@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
 import { MAX_INDEKS } from "@/lib/protokol/dokaz-stvarnosti";
 import { dohvatiVerifikatore, kreirajPotvrde } from "@/lib/protokol/program-potvrda";
@@ -111,13 +111,14 @@ export async function POST(
 
   // In-app notifikacija svakom verifikatoru (jedini kanal — nema email/push).
   for (const verifikatorId of verifikatori) {
-    await posaljiNotifikaciju(
-      verifikatorId,
-      "info",
-      "Zahtev za potvrdu socijalnog programa",
-      `Korisnik ${korisnik.pseudonim} se prijavio za program „${labelPrograma(programType)}" i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.`,
-      "/programi/potvrde"
-    );
+    await obavesti(verifikatorId, {
+      tip: "info",
+      kljuc: "notifikacije.zahtev_potvrda_programa",
+      parametri: { pseudonim: korisnik.pseudonim, program: labelPrograma(programType) },
+      naslov: "Zahtev za potvrdu socijalnog programa",
+      tekst: `Korisnik ${korisnik.pseudonim} se prijavio za program „${labelPrograma(programType)}" i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.`,
+      link: "/programi/potvrde",
+    });
   }
 
   void posaljiAdminAlert(

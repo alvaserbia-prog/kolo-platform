@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -71,13 +71,16 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_PRIJAVA_ODBIJENA", prijava.userId,
     `${oglas?.title ?? prijava.oglasId}${razlog ? ": " + razlog : ""}`);
 
-  await posaljiNotifikaciju(
-    prijava.userId,
-    "info",
-    "Prijava za zadatak odbijena",
-    `Tvoja prijava za zadatak „${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
-    "/programi"
-  );
+  await obavesti(prijava.userId, {
+    tip: "info",
+    kljuc: razlog
+      ? "notifikacije.prijava_zadatak_odbijena_razlog"
+      : "notifikacije.prijava_zadatak_odbijena",
+    parametri: { zadatak: oglas?.title ?? "", razlog: razlog ?? "" },
+    naslov: "Prijava za zadatak odbijena",
+    tekst: `Tvoja prijava za zadatak „${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    link: "/programi",
+  });
 
   return NextResponse.json({ ok: true });
 }

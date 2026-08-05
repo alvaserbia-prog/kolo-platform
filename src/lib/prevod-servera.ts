@@ -46,11 +46,19 @@ export function prevedi(
 
   // Brojevi se formatiraju po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000),
   // zato pozivna mesta prosleđuju SIROV broj, a ne već sklopljen tekst.
+  //
+  // Parametar koji počinje sa "@" je i sam KLJUČ i prevodi se ugnežđeno — npr.
+  // naziv kategorije Pijace ("@pijaca.kategorija_hrana"). Bez toga bi u rusko
+  // obaveštenje ušao srpski naziv kategorije.
   const popunjen = parametri
     ? sablon.replace(/\{(\w+)\}/g, (celo, ime: string) => {
         if (!(ime in parametri)) return celo;
         const v = parametri[ime];
-        return typeof v === "number" ? fmtBroj(v, jezik) : String(v);
+        if (typeof v === "number") return fmtBroj(v, jezik);
+        const s = String(v);
+        if (!s.startsWith("@")) return s;
+        const ugnezden = s.slice(1);
+        return dohvati(PORUKE[jezik], ugnezden) ?? dohvati(PORUKE.sr, ugnezden) ?? ugnezden;
       })
     : sablon;
 

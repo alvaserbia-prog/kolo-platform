@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/tabla-jemstva/[id]/ukloni — Fondacija uklanja neprikladan zahtev
@@ -40,13 +40,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   });
 
   await logAdminAkcija(session.user.id, "JEMSTVO_ZAHTEV_UKLONJEN", id, `${zahtev.user.pseudonim}: ${razlog}`);
-  await posaljiNotifikaciju(
-    zahtev.userId,
-    "JEMSTVO_UKLONJEN",
-    "Zahtev za jemstvo uklonjen",
-    `Tvoj zahtev na tabli jemstva je uklonjen. Razlog: ${razlog}`,
-    "/tabla-jemstva"
-  );
+  await obavesti(zahtev.userId, {
+    tip: "JEMSTVO_UKLONJEN",
+    kljuc: "notifikacije.jemstvo_uklonjen",
+    parametri: { razlog },
+    naslov: "Zahtev za jemstvo uklonjen",
+    tekst: `Tvoj zahtev na tabli jemstva je uklonjen. Razlog: ${razlog}`,
+    link: "/tabla-jemstva",
+  });
 
   return NextResponse.json({ ok: true });
 }

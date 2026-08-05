@@ -5,7 +5,7 @@ import { evidentirajDonaciju } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { rasclaniPozivNaBroj } from "@/lib/placanje/ips-qr";
 
@@ -55,13 +55,14 @@ export async function POST(req: NextRequest) {
 
       await logAdminAkcija(session.user.id, "DONACIJA_POTVRDJENA", donation.userId,
         `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
-      await posaljiNotifikaciju(
-        donation.userId,
-        "donacija_potvrdjena",
-        "Donacija potvrđena!",
-        `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-        "/donacije"
-      );
+      await obavesti(donation.userId, {
+        tip: "donacija_potvrdjena",
+        kljuc: "notifikacije.donacija_potvrdjena",
+        parametri: { rsd: iznos, poen: result.poenEmitted },
+        naslov: "Donacija potvrđena!",
+        tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+        link: "/donacije",
+      });
 
       return NextResponse.json({ ok: true, ...result });
     } catch (e: unknown) {
@@ -109,13 +110,14 @@ export async function POST(req: NextRequest) {
 
     await logAdminAkcija(session.user.id, "DONACIJA_RUCNO_EVIDENTIRANA", user.id,
       `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
-    await posaljiNotifikaciju(
-      user.id,
-      "donacija_potvrdjena",
-      "Donacija potvrđena!",
-      `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-      "/donacije"
-    );
+    await obavesti(user.id, {
+      tip: "donacija_potvrdjena",
+      kljuc: "notifikacije.donacija_potvrdjena",
+      parametri: { rsd: iznos, poen: result.poenEmitted },
+      naslov: "Donacija potvrđena!",
+      tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+      link: "/donacije",
+    });
 
     return NextResponse.json({ ok: true, ...result });
   } catch (e: unknown) {

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { proveriRazlog, tekstObavestenjaPoruka } from "@/lib/moderacija";
 
@@ -42,13 +42,14 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   });
 
   await logAdminAkcija(session.user.id, "CHAT_PORUKA_UKLONJENA", id, `${poruka.user.pseudonim}: ${razlog}`);
-  await posaljiNotifikaciju(
-    poruka.userId,
-    "CHAT_PORUKA_UKLONJENA",
-    "Poruka uklonjena iz Pričaonice",
-    tekstObavestenjaPoruka(razlog),
-    "/pocetna",
-  );
+  await obavesti(poruka.userId, {
+    tip: "CHAT_PORUKA_UKLONJENA",
+    kljuc: "notifikacije.chat_uklonjena",
+    parametri: { razlog },
+    naslov: "Poruka uklonjena iz Pričaonice",
+    tekst: tekstObavestenjaPoruka(razlog),
+    link: "/pocetna",
+  });
 
   return NextResponse.json({ ok: true });
 }

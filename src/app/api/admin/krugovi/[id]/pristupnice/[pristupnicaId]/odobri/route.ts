@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -58,13 +58,14 @@ export async function POST(
   await logAdminAkcija(session.user.id, "KRUG_PRISTUPNICA_ODOBRENA", pristupnica.userId,
     krug?.name ?? krugId);
 
-  await posaljiNotifikaciju(
-    pristupnica.userId,
-    "info",
-    "Pristupnica prihvaćena!",
-    `Postao/la si član kruga „${krug?.name ?? krugId}".`,
-    `/krug/${krugId}`
-  );
+  await obavesti(pristupnica.userId, {
+    tip: "info",
+    kljuc: "notifikacije.pristupnica_prihvacena",
+    parametri: { krug: krug?.name ?? krugId },
+    naslov: "Pristupnica prihvaćena!",
+    tekst: `Postao/la si član kruga „${krug?.name ?? krugId}".`,
+    link: `/krug/${krugId}`,
+  });
 
   return NextResponse.json({ ok: true });
 }

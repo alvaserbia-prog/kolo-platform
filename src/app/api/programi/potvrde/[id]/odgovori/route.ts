@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { labelPrograma } from "@/lib/protokol/programi";
 
@@ -63,13 +63,14 @@ export async function POST(
         "Prijava spremna za odobravanje",
         `Program: ${potvrda.enrollment.type}\nSvi verifikatori su potvrdili — prijava čeka odluku Fondacije.`
       );
-      await posaljiNotifikaciju(
-        potvrda.enrollment.userId,
-        "info",
-        "Svi verifikatori su potvrdili",
-        `Svi tvoji verifikatori su potvrdili prijavu za program „${programLabel}". Prijava čeka odluku Fondacije.`,
-        "/programi"
-      );
+      await obavesti(potvrda.enrollment.userId, {
+        tip: "info",
+        kljuc: "notifikacije.svi_verifikatori_potvrdili",
+        parametri: { program: programLabel },
+        naslov: "Svi verifikatori su potvrdili",
+        tekst: `Svi tvoji verifikatori su potvrdili prijavu za program „${programLabel}". Prijava čeka odluku Fondacije.`,
+        link: "/programi",
+      });
     }
 
     return NextResponse.json({ ok: true, svePotvrdjeno });
@@ -90,13 +91,14 @@ export async function POST(
     });
   });
 
-  await posaljiNotifikaciju(
-    potvrda.enrollment.userId,
-    "info",
-    "Prijava na program odbijena",
-    `Tvoja prijava za program „${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
-    "/programi"
-  );
+  await obavesti(potvrda.enrollment.userId, {
+    tip: "info",
+    kljuc: "notifikacije.program_odbijen_verifikator",
+    parametri: { program: programLabel, obrazlozenje },
+    naslov: "Prijava na program odbijena",
+    tekst: `Tvoja prijava za program „${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
+    link: "/programi",
+  });
   void posaljiAdminAlert(
     "Prijava na program odbijena (verifikator)",
     `Program: ${potvrda.enrollment.type}\nVerifikator: ${verifikatorPseudonim}\nObrazloženje: ${obrazlozenje}`

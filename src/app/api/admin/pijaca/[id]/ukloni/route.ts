@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { jeAdmin } from "@/lib/dozvole";
 import { proveriRazlog, tekstObavestenjaOglas, PRAG_ZA_UPOZORENJE } from "@/lib/moderacija";
@@ -59,13 +59,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   // Obaveštenje vlasniku sa razlogom NIJE opcija nego obaveza (čl. 25 st. 2).
   // Jedan poziv pokriva zvonce, push i email.
-  await posaljiNotifikaciju(
-    oglas.sellerId,
-    "OGLAS_UKLONJEN",
-    "Oglas uklonjen",
-    tekstObavestenjaOglas(oglas.title, razlog),
-    "/profil/oglasi",
-  );
+  await obavesti(oglas.sellerId, {
+    tip: "OGLAS_UKLONJEN",
+    kljuc: "notifikacije.oglas_uklonjen",
+    parametri: { oglas: oglas.title, razlog },
+    naslov: "Oglas uklonjen",
+    tekst: tekstObavestenjaOglas(oglas.title, razlog),
+    link: "/profil/oglasi",
+  });
 
   // Ponovljeno kršenje je osnov za suspenziju/isključenje (Uslovi čl. 27, 28) —
   // javi kad se nakupi, ali ne sankcioniši automatski.

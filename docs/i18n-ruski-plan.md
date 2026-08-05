@@ -22,7 +22,7 @@ NIJE izložen u prekidaču jezika.
 | **3** | Datumi i brojevi po jeziku | ✅ 178 mesta |
 | **4** | **Prevod `messages/ru.json`** | ⬜ **nije započeto (~1.900 ključeva)** |
 | **5** | `faq-data-ru.ts` | ⬜ nije započeto (71 pitanje) |
-| **6** | Obaveštenja (zvonce/push/mejl) | 🟡 infrastruktura ✅, 4/29 pozivnih mesta |
+| **6** | Obaveštenja (zvonce/push/mejl) | ✅ 27/29 (dva namerno srpska) |
 | **7** | Istorija transakcija + migracija | ✅ (migracija probana na PostgreSQL-u) |
 | **8** | Poruke o greškama iz API-ja | ⬜ nije započeto (560 stringova) |
 | **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
@@ -460,3 +460,29 @@ u `Transaction.description`, pa nije imalo šta da se prevede.
 backfill hvata kao **tekst**, ne broj — već je formatiran srpski i ne preračunava se.
 Nove stavke prosleđuju sirov broj i formatiraju se po jeziku. Ispravljanje starih
 tražilo bi parsiranje srpskog formata, što nosi rizik bez stvarne koristi.
+
+
+---
+
+## 6e. Faza 6 dovršena (2026-08-05)
+
+Svih 29 pozivnih mesta obrađeno: **27 konvertovano**, 2 namerno ostavljena srpska.
+
+**Namerno NIJE konvertovano:**
+- `nadzor-integriteta.ts` — nalaz vidi samo nadzor/UO (izuzetak §6.10).
+- `admin/prigovori` kad UO **otkuca obrazloženje** — autorski tekst ide kako je
+  napisan. Bez obrazloženja standardna rečenica jeste prevodiva.
+
+**Nova konvencija — ugnežđen ključ (`@`).** Parametar čija vrednost počinje sa `@`
+sam je ključ i prevodi se rekurzivno:
+```ts
+parametri: { kategorija: `@pijaca.kategorija_${kategorijaKljuc(slug)}` }
+```
+Bez toga bi u rusku rečenicu ušao **srpski naziv kategorije**. Provereno:
+```
+sr : „Med” je objavljeno u kategoriji „Hrana i piće”, koju pratiš na Pijaci.
+en : “Med” was posted in the “Food & drink” category, which you follow on the Market.
+cyr: „Мед” је објављено у категорији „Храна и пиће”, коју пратиш на Пијаци.
+```
+
+Ukupno **68 novih ključeva** u `notifikacije.*` (sr + en).

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import {
   ponistiLaznogVerifikatora,
   LaznaVerifikacijaGreska,
@@ -30,13 +30,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     );
 
     for (const uid of rez.pogodjeniKorisnici) {
-      await posaljiNotifikaciju(
-        uid,
-        "VERIFIKACIJA_PONISTENA",
-        "Verifikacija poništena",
-        "Verifikator u tvom lancu jemstva je označen kao lažan, pa je tvoja verifikacija poništena. Indeks stvarnosti ti je 0% — zadržavaš nalog i osnovne funkcije (upis POEN-a, Pijaca, donacije), ali nemaš pristup operativnom doprinosu i programima podrške.",
-        "/profil"
-      );
+      await obavesti(uid, {
+        tip: "VERIFIKACIJA_PONISTENA",
+        kljuc: "notifikacije.verifikacija_ponistena",
+        naslov: "Verifikacija poništena",
+        tekst: "Verifikator u tvom lancu jemstva je označen kao lažan, pa je tvoja verifikacija poništena. Indeks stvarnosti ti je 0% — zadržavaš nalog i osnovne funkcije (upis POEN-a, Pijaca, donacije), ali nemaš pristup operativnom doprinosu i programima podrške.",
+        link: "/profil",
+      });
     }
 
     return NextResponse.json({ ok: true, ...rez });

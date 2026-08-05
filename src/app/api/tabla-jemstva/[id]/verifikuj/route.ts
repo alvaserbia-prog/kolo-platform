@@ -17,7 +17,7 @@ import {
   izvrsiVerifikacijuSaTable,
   VerifikacijaGreska,
 } from "@/lib/protokol/verifikacija-service";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -59,16 +59,18 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     // verifikatora (hrani nadzor integriteta). Ne blokira odgovor.
     // Link vodi pravo na postavljanje oglasa: to je trenutak najveće
     // motivacije, a Pijaca je prvo što se verifikacijom otključava.
-    void posaljiNotifikaciju(
-      rez.verifikovaniId,
-      "VERIFIKOVAN",
-      "Verifikovan/a si — možeš da postaviš oglas",
-      `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
+    void obavesti(rez.verifikovaniId, {
+      tip: "VERIFIKOVAN",
+      kljuc: "notifikacije.verifikovan",
+      parametri: { verifikator: rez.verifikatorPseudonim },
+      naslov: "Verifikovan/a si — možeš da postaviš oglas",
+      tekst:
+        `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
         `Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. ` +
         `Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.`,
-      "/pijaca/novi-oglas",
-      { emailDugme: "Postavi oglas" }
-    );
+      link: "/pijaca/novi-oglas",
+      emailDugme: "Postavi oglas",
+    });
 
     return NextResponse.json({
       verifikacijaId: rez.verifikacijaId,

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -83,13 +83,14 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_EVIDENCIJA_ODOBRENA", ev.userId,
     `${ev.oglas.title} (predloženo ${ev.predlozeniPoen} POEN)`);
 
-  await posaljiNotifikaciju(
-    ev.userId,
-    "info",
-    "Izvršenje potvrđeno",
-    `Tvoje dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
-    "/doprinos-oglasi"
-  );
+  await obavesti(ev.userId, {
+    tip: "info",
+    kljuc: "notifikacije.izvrsenje_potvrdjeno",
+    parametri: { zadatak: ev.oglas.title, poen: ev.predlozeniPoen },
+    naslov: "Izvršenje potvrđeno",
+    tekst: `Tvoje dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
+    link: "/doprinos-oglasi",
+  });
 
   return NextResponse.json({ ok: true, predlozeniPoen: ev.predlozeniPoen });
 }

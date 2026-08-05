@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -65,13 +65,13 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_EVIDENCIJA_ODBIJENA", ev.userId,
     `${ev.oglas.title} (predloženo ${ev.predlozeniPoen} POEN)`);
 
-  await posaljiNotifikaciju(
-    ev.userId,
-    "info",
-    "Dnevno izvršenje odbijeno",
-    `Tvoje dnevno izvršenje je odbijeno. Za to izvršenje se ne evidentira POEN (čl. 18).`,
-    "/doprinos-oglasi"
-  );
+  await obavesti(ev.userId, {
+    tip: "info",
+    kljuc: "notifikacije.izvrsenje_odbijeno",
+    naslov: "Dnevno izvršenje odbijeno",
+    tekst: "Tvoje dnevno izvršenje je odbijeno. Za to izvršenje se ne evidentira POEN (čl. 18).",
+    link: "/doprinos-oglasi",
+  });
 
   return NextResponse.json({ ok: true });
 }

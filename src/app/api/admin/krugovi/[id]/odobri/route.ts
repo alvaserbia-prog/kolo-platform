@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -84,13 +84,14 @@ export async function POST(
 
   // 6. Notifikacija svim osnivačima
   for (const userId of zahtev.osnivaci as string[]) {
-    await posaljiNotifikaciju(
-      userId,
-      "info",
-      `Krug „${zahtev.name}" je odobren!`,
-      `Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.`,
-      `/krug/${krugId}`
-    );
+    await obavesti(userId, {
+      tip: "info",
+      kljuc: "notifikacije.krug_odobren",
+      parametri: { krug: zahtev.name },
+      naslov: `Krug „${zahtev.name}" je odobren!`,
+      tekst: "Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.",
+      link: `/krug/${krugId}`,
+    });
   }
 
   return NextResponse.json({ ok: true, krugId });

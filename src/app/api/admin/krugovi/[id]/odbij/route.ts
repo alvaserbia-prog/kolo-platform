@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -33,13 +33,14 @@ export async function POST(
 
   const osnivac = (zahtev.osnivaci as string[])[0];
   if (osnivac) {
-    await posaljiNotifikaciju(
-      osnivac,
-      "info",
-      `Osnivanje kruga odbijeno`,
-      `Tvoj zahtev za osnivanje kruga „${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
-      "/krug"
-    );
+    await obavesti(osnivac, {
+      tip: "info",
+      kljuc: "notifikacije.krug_odbijen",
+      parametri: { krug: zahtev.name, razlog: razlog.trim() },
+      naslov: "Osnivanje kruga odbijeno",
+      tekst: `Tvoj zahtev za osnivanje kruga „${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
+      link: "/krug",
+    });
   }
 
   return NextResponse.json({ ok: true });
