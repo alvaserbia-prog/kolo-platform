@@ -20,7 +20,7 @@ NIJE izložen u prekidaču jezika.
 | **1** | Mehanika jezika (locale, font, paritet, loader) | ✅ |
 | **2** | Izvlačenje zakucanog teksta iz ekrana | ✅ 58 ključeva |
 | **3** | Datumi i brojevi po jeziku | ✅ 178 mesta |
-| **4** | **Prevod `messages/ru.json`** | ⬜ **nije započeto (~1.900 ključeva)** |
+| **4** | **Prevod `messages/ru.json`** | 🟡 **1.309 / 2.203 (59%)** |
 | **5** | `faq-data-ru.ts` | ⬜ nije započeto (71 pitanje) |
 | **6** | Obaveštenja (zvonce/push/mejl) | ✅ 27/29 (dva namerno srpska) |
 | **7** | Istorija transakcija + migracija | ✅ (migracija probana na PostgreSQL-u) |
@@ -28,7 +28,12 @@ NIJE izložen u prekidaču jezika.
 | **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
 | **10** | Manifest / OG slika / metapodaci | 🟡 manifest ✅, OG slika otpada (v. §6c) |
 
-**Sledeći korak:** faza 8, pa faza 4 (prevod).
+**Sledeći korak:** dovršiti fazu 4 — preostali namespace-ovi su **javne
+prezentacione stranice** (`oNama` 128, `oSistemu` 123, `landing` 100,
+`kakoFunkcionisePage` 83, `pravne` 69) i **app ekrani** (`donacije` 66,
+`doprinosOglasi` 65, `krug` 61, `glasanje` 55, `dobrodosli` 47,
+`postaniPokrovitelj` 44, `zajednickoDobroPage` 20, `osnivackiDoprinosPage` 18).
+Zatim faza 5 (FAQ) i faza 9 (pravni akti).
 
 ---
 
@@ -512,3 +517,46 @@ deterministički ključ (`"Nedovoljno POEN-a."` → `nedovoljno_poen_a`), pa:
 🟡 **Vrednosti su za sada srpske u sva tri jezika** — prevod ide u fazi 4 zajedno
 sa ostatkom. Engleski korisnici time ne gube ništa: i do sada su viđali srpske
 poruke o greškama.
+
+
+---
+
+## 6g. Faza 4 — stanje prevoda (2026-08-05)
+
+**Prevedeno 1.309 od 2.203 ključeva (59%).** `admin` (380) se po odluci #2 ne
+prevodi — u `ru.json` stoji prepisan srpski, pa paritet ostaje strog.
+
+**Gotovo:** ceo rečnik grešaka (277), obaveštenja (70), Pijaca (136), profil (122),
+Sistem (94), tabla jemstva (85), verifikacija (66), novčanik (44), graf (39),
+javne komponente (36), programi (51), ZRNO (24), i celo jezgro (prijava,
+registracija, zaglavlje, navigacija, poruke, mejlovi, kolačići…).
+
+**Ostaje:** prezentacione stranice (`oNama`, `oSistemu`, `landing`,
+`kakoFunkcionisePage`, `pravne`) i app ekrani (`donacije`, `doprinosOglasi`,
+`krug`, `glasanje`, `dobrodosli`, `postaniPokrovitelj`, dve manje stranice).
+
+### Rečnik — držati doslednim u nastavku
+
+| Srpski | Ruski |
+|---|---|
+| POEN · ZRNO · KOLO | **ПОЕН · ЗРНО · КОЛО** (ćirilicom, odluka #1) |
+| Pijaca | Рынок |
+| Novčanik | Кошелёк |
+| Pričaonica | Беседка |
+| Tabla jemstva | Доска поручительства |
+| Lanac jemstva | Цепь поручительства |
+| Indeks stvarnosti | Индекс реальности |
+| Verifikacija / verifikator | Верификация / поручитель |
+| Krug | Круг |
+| Fondacija | Фонд |
+| Gornje Kolo | Верхнее Коло |
+| Prigovor | Возражение |
+| Oglas | Объявление |
+| Doprinos | Вклад |
+| Evidencija / evidentirano | Учёт / учтено |
+| Osnivački doprinos | Учредительный вклад |
+| Pokrovitelj | Покровитель |
+| Nosilac ZRNA | Держатель ЗРНА |
+| Zadruga | Кооператив |
+| email | **email** (ne prevodi se, odluka #14) |
+| RSD, PIB, QR, Whitepaper | ne prevode se (odluka #12) |
