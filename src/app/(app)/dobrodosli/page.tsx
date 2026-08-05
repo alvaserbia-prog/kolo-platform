@@ -12,21 +12,64 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import GdeSeNalazi, { type Gde } from "@/components/dobrodosli/GdeSeNalazi";
 
-/** Konfiguracija ekrana: ključ u messages + opciona akciona veza (cta).
+/** Akciona veza ekrana: dugme + crtež koji pokazuje gde ta stranica stoji u
+ *  navigaciji (vidi GdeSeNalazi). Ekran može imati više akcija (korak 6). */
+type Akcija = { href: string; ctaKey: string; gde: Gde };
+
+/** Konfiguracija ekrana: ključ u messages + akcione veze.
  *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva).
  *
  *  Redosled je namerno akcioni, ne opisni: novi korisnik ima tačno jedan
  *  zadatak (da ga neko potvrdi), pa dva puta do potvrde idu odmah na ekranima
- *  2 i 3 — teorija (POEN, Pijaca) tek posle. */
-const EKRANI: { key: string; pasusi: number; cta?: string; finalni?: boolean }[] = [
-  { key: "ekran1", pasusi: 3 },                          // dobrodošlica + šta je zadatak
-  { key: "ekran2", pasusi: 3, cta: "/verifikacija" },    // Put A — poznaje nekog (QR/kod)
-  { key: "ekran3", pasusi: 4, cta: "/tabla-jemstva" },   // Put B — kartica prepoznavanja
-  { key: "ekran4", pasusi: 3 },                          // šta se otključava potvrdom
-  { key: "ekran5", pasusi: 3, cta: "/novcanik" },        // POEN
-  { key: "ekran6", pasusi: 3, cta: "/pijaca" },          // šta može odmah, pre potvrde
-  { key: "ekran7", pasusi: 3, finalni: true },           // uradi jednu stvar sada
+ *  2 i 3 — teorija (POEN, Pijaca, profil) tek posle. */
+const EKRANI: { key: string; pasusi: number; akcije?: Akcija[]; finalni?: boolean }[] = [
+  // dobrodošlica + šta je zadatak + gde je uopšte meni
+  { key: "ekran1", pasusi: 4 },
+  // Put A — poznaje nekog (QR/kod)
+  {
+    key: "ekran2",
+    pasusi: 3,
+    akcije: [
+      {
+        href: "/verifikacija",
+        ctaKey: "ekran2_cta",
+        gde: { vrsta: "meni", stavka: "verifikacija", grupa: "grupa_poverenje" },
+      },
+    ],
+  },
+  // Put B — kartica prepoznavanja
+  {
+    key: "ekran3",
+    pasusi: 4,
+    akcije: [
+      {
+        href: "/tabla-jemstva",
+        ctaKey: "ekran3_cta",
+        gde: { vrsta: "meni", stavka: "tabla_jemstva", grupa: "grupa_poverenje" },
+      },
+    ],
+  },
+  // šta se otključava potvrdom
+  { key: "ekran4", pasusi: 3 },
+  // POEN
+  {
+    key: "ekran5",
+    pasusi: 3,
+    akcije: [{ href: "/novcanik", ctaKey: "ekran5_cta", gde: { vrsta: "meni", stavka: "novcanik" } }],
+  },
+  // dok čeka potvrdu: profil (van menija — preko profilne slike) + Pijaca
+  {
+    key: "ekran6",
+    pasusi: 5,
+    akcije: [
+      { href: "/profil", ctaKey: "ekran6_cta_profil", gde: { vrsta: "profil" } },
+      { href: "/pijaca", ctaKey: "ekran6_cta_pijaca", gde: { vrsta: "meni", stavka: "pijaca" } },
+    ],
+  },
+  // uradi jednu stvar sada
+  { key: "ekran7", pasusi: 3, finalni: true },
 ];
 
 export default function DobrodosliPage() {
@@ -98,15 +141,19 @@ export default function DobrodosliPage() {
           ))}
         </div>
 
-        {/* Opciona akciona veza za ovaj ekran (npr. "Otvori Pijacu") */}
-        {ekran.cta && !ekran.finalni && (
-          <button
-            onClick={() => router.push(ekran.cta!)}
-            className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
-          >
-            {t(`${ekran.key}_cta`)} →
-          </button>
-        )}
+        {/* Akcione veze ekrana: dugme + crtež gde se stranica nalazi u navigaciji */}
+        {!ekran.finalni &&
+          ekran.akcije?.map((akcija) => (
+            <div key={akcija.href} className="mt-5 flex flex-col items-start">
+              <button
+                onClick={() => router.push(akcija.href)}
+                className="inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
+              >
+                {t(akcija.ctaKey)} →
+              </button>
+              <GdeSeNalazi gde={akcija.gde} />
+            </div>
+          ))}
 
         {/* Završni CTA-ovi na poslednjem ekranu */}
         {ekran.finalni && (
