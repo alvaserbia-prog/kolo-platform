@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -20,7 +21,7 @@ export async function PATCH(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const jezik = typeof body.jezik === "string" ? body.jezik : "";
   if (!JEZICI.includes(jezik)) {
-    return NextResponse.json({ error: "Nepoznat jezik." }, { status: 400 });
+    return await greska("Nepoznat jezik.", 400);
   }
 
   await prisma.user.update({

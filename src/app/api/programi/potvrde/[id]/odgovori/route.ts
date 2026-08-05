@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -15,7 +16,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
@@ -23,10 +24,7 @@ export async function POST(
   const obrazlozenje = typeof body.obrazlozenje === "string" ? body.obrazlozenje.trim() : "";
 
   if (!potvrdi && obrazlozenje.length === 0)
-    return NextResponse.json(
-      { error: "Odbijanje zahteva obrazloženje." },
-      { status: 400 }
-    );
+    return await greska("Odbijanje zahteva obrazloženje.", 400);
 
   const potvrda = await prisma.programPotvrda.findUnique({
     where: { id },
@@ -34,13 +32,13 @@ export async function POST(
       enrollment: { select: { id: true, type: true, userId: true, status: true } },
     },
   });
-  if (!potvrda) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
+  if (!potvrda) return await greska("Zahtev nije pronađen.", 404);
   if (potvrda.verifikatorId !== session.user.id)
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   if (potvrda.status !== "CEKA")
-    return NextResponse.json({ error: "Već ste odgovorili na ovaj zahtev." }, { status: 400 });
+    return await greska("Već ste odgovorili na ovaj zahtev.", 400);
   if (potvrda.enrollment.status !== "PENDING")
-    return NextResponse.json({ error: "Prijava više nije na čekanju." }, { status: 400 });
+    return await greska("Prijava više nije na čekanju.", 400);
 
   const programLabel = labelPrograma(potvrda.enrollment.type);
   const verifikatorPseudonim = session.user.pseudonim;

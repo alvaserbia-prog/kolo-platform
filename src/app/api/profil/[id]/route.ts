@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -10,7 +11,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const { id: adresa } = await params;
 
@@ -19,14 +20,14 @@ export async function GET(
   // pre preimenovanja). Sve troje se ovde svodi na interni id.
   const id = await razresiKorisnikaIzAdrese(adresa);
   if (!id) {
-    return NextResponse.json({ error: "Profil nije pronađen." }, { status: 404 });
+    return await greska("Profil nije pronađen.", 404);
   }
 
   // Kapija "samo verifikovani vide profile" odnosi se na TUĐE profile (Pravilnik čl. 28–30,
   // 67): neverifikovan ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek
   // sme da vidi — inače bi klik na "Moj profil" blokirao i njega samog.
   if (!session.user.verified && id !== session.user.id) {
-    return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+    return await greska("Verifikacija potrebna.", 403);
   }
 
   // Vlasnik na sopstvenom profilu vidi SVE svoje podatke bez obzira na togglove
@@ -71,7 +72,7 @@ export async function GET(
   });
 
   if (!korisnik || korisnik.status === "EXCLUDED") {
-    return NextResponse.json({ error: "Profil nije pronađen." }, { status: 404 });
+    return await greska("Profil nije pronađen.", 404);
   }
 
   const podaci = korisnik.podaci;

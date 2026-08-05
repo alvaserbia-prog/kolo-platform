@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +12,7 @@ const MAX_SLIKA = 4_000_000; // ~3MB base64
 // GET /api/pokroviteljstvo/prijava — sopstvene prijave
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const prijave = await prisma.pokroviteljPrijava.findMany({
     where: { podnosilacId: session.user.id },
@@ -45,9 +46,9 @@ export async function GET() {
 // POST /api/pokroviteljstvo/prijava — podnošenje prijave pokroviteljstva (čl. 7)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified)
-    return NextResponse.json({ error: "Samo verifikovani korisnici mogu pokrenuti pokroviteljstvo." }, { status: 403 });
+    return await greska("Samo verifikovani korisnici mogu pokrenuti pokroviteljstvo.", 403);
 
   const body = await req.json().catch(() => ({}));
   const naziv = (body.naziv ?? "").trim();
@@ -57,15 +58,15 @@ export async function POST(req: NextRequest) {
   const cenovnikSlika: string | null = body.cenovnikSlika ?? null;
 
   if (!naziv || !pib)
-    return NextResponse.json({ error: "Naziv pravnog lica ili preduzetnika i PIB su obavezni." }, { status: 400 });
+    return await greska("Naziv pravnog lica ili preduzetnika i PIB su obavezni.", 400);
   if (!DOZVOLJENE_VRSTE.includes(vrstaDonacije))
-    return NextResponse.json({ error: "Neispravna vrsta donacije." }, { status: 400 });
+    return await greska("Neispravna vrsta donacije.", 400);
   if (!vrednostRsd || isNaN(vrednostRsd) || vrednostRsd <= 0)
-    return NextResponse.json({ error: "Vrednost donacije mora biti pozitivna." }, { status: 400 });
+    return await greska("Vrednost donacije mora biti pozitivna.", 400);
   if ((vrstaDonacije === "ROBA" || vrstaDonacije === "USLUGE") && !cenovnikSlika)
-    return NextResponse.json({ error: "Za robu i usluge obavezan je maloprodajni cenovnik." }, { status: 400 });
+    return await greska("Za robu i usluge obavezan je maloprodajni cenovnik.", 400);
   if (cenovnikSlika && cenovnikSlika.length > MAX_SLIKA)
-    return NextResponse.json({ error: "Cenovnik je prevelik (maks. ~3MB)." }, { status: 400 });
+    return await greska("Cenovnik je prevelik (maks. ~3MB).", 400);
 
   const ugovorTekst = generisiUgovorTekst({ naziv, pib, vrstaDonacije, vrednostRsd });
 

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -8,23 +9,23 @@ import { obavesti } from "@/lib/notifikacije";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   let body: { pseudonim?: string; amount?: unknown; description?: string };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
+    return await greska("Neispravan zahtev.", 400);
   }
   const { pseudonim, amount, description } = body;
 
   // Validacija ulaza
   if (!pseudonim || !amount) {
-    return NextResponse.json({ error: "Primalac i iznos su obavezni." }, { status: 400 });
+    return await greska("Primalac i iznos su obavezni.", 400);
   }
   const iznos = Math.floor(Number(amount));
   if (!Number.isInteger(iznos) || iznos <= 0) {
-    return NextResponse.json({ error: "Iznos mora biti pozitivan ceo broj." }, { status: 400 });
+    return await greska("Iznos mora biti pozitivan ceo broj.", 400);
   }
 
   // Pronađi primaoca
@@ -35,13 +36,13 @@ export async function POST(req: NextRequest) {
     include: { wallet: true },
   });
   if (!primalac) {
-    return NextResponse.json({ error: "Korisnik sa tim pseudonimom ne postoji." }, { status: 404 });
+    return await greska("Korisnik sa tim pseudonimom ne postoji.", 404);
   }
   if (primalac.id === session.user.id) {
-    return NextResponse.json({ error: "Ne možete upisati POEN samom sebi." }, { status: 400 });
+    return await greska("Ne možete upisati POEN samom sebi.", 400);
   }
   if (!primalac.wallet) {
-    return NextResponse.json({ error: "Primalac nema novčanik." }, { status: 500 });
+    return await greska("Primalac nema novčanik.", 500);
   }
 
   // Pronađi pošiljaoca
@@ -50,10 +51,10 @@ export async function POST(req: NextRequest) {
     include: { wallet: true },
   });
   if (!posiljac?.wallet) {
-    return NextResponse.json({ error: "Nemate novčanik." }, { status: 500 });
+    return await greska("Nemate novčanik.", 500);
   }
   if (posiljac.wallet.balance < iznos) {
-    return NextResponse.json({ error: `Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.` }, { status: 400 });
+    return await greska(`Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.`, 400);
   }
 
   // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
@@ -85,7 +86,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
-      return NextResponse.json({ error: "Nemate dovoljno POEN-a." }, { status: 400 });
+      return await greska("Nemate dovoljno POEN-a.", 400);
     }
     throw e;
   }

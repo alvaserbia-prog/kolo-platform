@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -13,7 +14,7 @@ import { jeSuperadmin } from "@/lib/dozvole";
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
+    return await greska("Nije ovlašćen.", 403);
   }
 
   const verzije = await prisma.politikaVerzija.findMany({
@@ -29,20 +30,20 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
+    return await greska("Nije ovlašćen.", 403);
   }
 
   const body = await req.json();
   const { verzija, naslov, efektivnaOd } = body;
 
   if (!verzija || !naslov || !efektivnaOd) {
-    return NextResponse.json({ error: "Polja verzija, naslov i efektivnaOd su obavezna." }, { status: 400 });
+    return await greska("Polja verzija, naslov i efektivnaOd su obavezna.", 400);
   }
 
   // Proveri jedinstvenost verzije
   const postoji = await prisma.politikaVerzija.findUnique({ where: { verzija } });
   if (postoji) {
-    return NextResponse.json({ error: "Ta verzija već postoji." }, { status: 409 });
+    return await greska("Ta verzija već postoji.", 409);
   }
 
   const novaVerzija = await prisma.politikaVerzija.create({

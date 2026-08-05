@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { verifikujResetToken } from "@/lib/passwordReset";
@@ -9,29 +10,29 @@ export async function POST(req: NextRequest) {
     // Anti brute-force tokena: najviše 20 pokušaja po IP-u u 15 min.
     const rl = rateLimit(`reset-primeni:${klijentIP(req)}`, 20, 15 * 60 * 1000);
     if (!rl.ok) {
-      return NextResponse.json({ error: "Previše pokušaja. Pokušajte kasnije." }, { status: 429 });
+      return await greska("Previše pokušaja. Pokušajte kasnije.", 429);
     }
 
     const { token, novaLozinka } = await req.json();
 
     if (!token || typeof token !== "string") {
-      return NextResponse.json({ error: "Token je obavezan." }, { status: 400 });
+      return await greska("Token je obavezan.", 400);
     }
     if (!novaLozinka || typeof novaLozinka !== "string") {
-      return NextResponse.json({ error: "Nova lozinka je obavezna." }, { status: 400 });
+      return await greska("Nova lozinka je obavezna.", 400);
     }
     if (novaLozinka.length < 8) {
-      return NextResponse.json({ error: "Lozinka mora imati najmanje 8 karaktera." }, { status: 400 });
+      return await greska("Lozinka mora imati najmanje 8 karaktera.", 400);
     }
 
     const verified = await verifikujResetToken(token);
     if (!verified) {
-      return NextResponse.json({ error: "Link je nevažeći ili je istekao." }, { status: 400 });
+      return await greska("Link je nevažeći ili je istekao.", 400);
     }
 
     const user = await prisma.user.findUnique({ where: { id: verified.userId } });
     if (!user || user.status !== "ACTIVE") {
-      return NextResponse.json({ error: "Nalog nije dostupan." }, { status: 400 });
+      return await greska("Nalog nije dostupan.", 400);
     }
 
     const passwordHash = await bcrypt.hash(novaLozinka, 12);
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[reset-lozinka] greška:", err);
-    return NextResponse.json({ error: "Interna greška servera." }, { status: 500 });
+    return await greska("Interna greška servera.", 500);
   }
 }
 

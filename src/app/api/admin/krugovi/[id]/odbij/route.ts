@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,17 +13,17 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const { razlog } = await req.json();
 
   if (!razlog?.trim())
-    return NextResponse.json({ error: "Razlog je obavezan." }, { status: 400 });
+    return await greska("Razlog je obavezan.", 400);
 
   const zahtev = await prisma.krugOsnivanjeZahtev.findUnique({ where: { id } });
   if (!zahtev || zahtev.status !== "PENDING")
-    return NextResponse.json({ error: "Zahtev nije pronađen ili nije na čekanju." }, { status: 400 });
+    return await greska("Zahtev nije pronađen ili nije na čekanju.", 400);
 
   await prisma.krugOsnivanjeZahtev.update({
     where: { id },

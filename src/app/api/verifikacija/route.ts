@@ -9,6 +9,7 @@
  * Po uspehu: kreira VerifikacionaVeza, troši slot, emituje POEN za oba.
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import {
@@ -21,23 +22,20 @@ import { rateLimit } from "@/lib/rate-limit";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
+    return await greska("Nisi prijavljen.", 401);
   }
 
   // Anti brute-force 6-cifrenog koda: najviše 10 pokušaja u minuti po verifikatoru.
   const rl = rateLimit(`verifikacija:${session.user.id}`, 10, 60_000);
   if (!rl.ok) {
-    return NextResponse.json(
-      { error: `Previše pokušaja. Sačekaj ${rl.retryAfterSec}s.` },
-      { status: 429 }
-    );
+    return await greska(`Previše pokušaja. Sačekaj ${rl.retryAfterSec}s.`, 429);
   }
 
   let body: { token?: string; potvrdaPoznavanja?: boolean; oznaka?: string };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Nevažeći JSON." }, { status: 400 });
+    return await greska("Nevažeći JSON.", 400);
   }
 
   const tokenIliBroj = typeof body.token === "string" ? body.token : "";
@@ -74,9 +72,9 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     if (e instanceof VerifikacijaGreska) {
-      return NextResponse.json({ error: e.message }, { status: e.statusCode });
+      return await greska(e.message, e.statusCode);
     }
     console.error("[POST /api/verifikacija]", e);
-    return NextResponse.json({ error: "Greška servera" }, { status: 500 });
+    return await greska("Greška servera", 500);
   }
 }

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -19,18 +20,15 @@ type Odgovor = (typeof DOZVOLJENI)[number];
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified)
-    return NextResponse.json(
-      { error: "Prepoznavanje je dostupno samo verifikovanim članovima." },
-      { status: 403 }
-    );
+    return await greska("Prepoznavanje je dostupno samo verifikovanim članovima.", 403);
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const odgovor = body.odgovor as Odgovor;
   if (!DOZVOLJENI.includes(odgovor))
-    return NextResponse.json({ error: "Nepoznat odgovor." }, { status: 400 });
+    return await greska("Nepoznat odgovor.", 400);
 
   const zahtev = await prisma.zahtevZaJemstvo.findUnique({
     where: { id },
@@ -41,13 +39,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       user: { select: { pseudonim: true } },
     },
   });
-  if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
+  if (!zahtev) return await greska("Zahtev nije pronađen.", 404);
   if (zahtev.status !== "AKTIVAN" || zahtev.expiresAt.getTime() < Date.now())
-    return NextResponse.json({ error: "Zahtev više nije aktivan." }, { status: 410 });
+    return await greska("Zahtev više nije aktivan.", 410);
 
   const meId = session.user.id;
   if (zahtev.userId === meId)
-    return NextResponse.json({ error: "Ne možete odgovarati na sopstveni zahtev." }, { status: 400 });
+    return await greska("Ne možete odgovarati na sopstveni zahtev.", 400);
 
   await prisma.prepoznavanje.upsert({
     where: { zahtevId_korisnikId: { zahtevId: id, korisnikId: meId } },

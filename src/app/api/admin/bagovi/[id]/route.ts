@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -16,7 +17,7 @@ export async function PATCH(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
+    return await greska("Nije ovlašćen.", 403);
   }
 
   const { id } = await params;
@@ -25,14 +26,14 @@ export async function PATCH(
 
   const validStatusi = ["PRIJAVLJEN", "U_RADU", "RESENO", "ODBIJENO"];
   if (!validStatusi.includes(status)) {
-    return NextResponse.json({ error: "Nevalidan status." }, { status: 400 });
+    return await greska("Nevalidan status.", 400);
   }
 
   const bag = await prisma.bug.findUnique({
     where: { id },
     select: { userId: true, naslov: true },
   });
-  if (!bag) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
+  if (!bag) return await greska("Prijava nije pronađena.", 404);
 
   const zatvoreno = status === "RESENO" || status === "ODBIJENO";
   await prisma.bug.update({

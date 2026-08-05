@@ -7,6 +7,7 @@
  * SAMO SUPERADMIN.
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -17,7 +18,7 @@ import { teloObavestenja } from "@/lib/sistemsko-obavestenje";
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const { id } = await params;
@@ -30,9 +31,9 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     }),
   ]);
 
-  if (!o) return NextResponse.json({ error: "Obaveštenje ne postoji." }, { status: 404 });
+  if (!o) return await greska("Obaveštenje ne postoji.", 404);
   if (!ja?.email) {
-    return NextResponse.json({ error: "Tvoj nalog nema email adresu." }, { status: 400 });
+    return await greska("Tvoj nalog nema email adresu.", 400);
   }
 
   const poslat = await posaljiEmailRaw(
@@ -43,7 +44,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   );
 
   if (!poslat) {
-    return NextResponse.json({ error: "Slanje nije uspelo — proveri Resend podešavanja." }, { status: 502 });
+    return await greska("Slanje nije uspelo — proveri Resend podešavanja.", 502);
   }
   return NextResponse.json({ ok: true, poslatoNa: ja.email });
 }

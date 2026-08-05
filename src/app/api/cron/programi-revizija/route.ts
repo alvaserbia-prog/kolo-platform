@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
@@ -31,7 +32,7 @@ export async function GET(req: NextRequest) {
   const bearerSecret = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
   const secret = bearerSecret ?? req.headers.get("x-cron-secret");
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
-    return NextResponse.json({ error: "Neautorizovano." }, { status: 401 });
+    return await greska("Neautorizovano.", 401);
   }
 
   const sada = new Date();

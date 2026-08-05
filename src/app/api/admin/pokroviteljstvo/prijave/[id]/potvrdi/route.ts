@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { potvrdiPrijavu } from "@/lib/protokol/pokrovitelj";
@@ -10,7 +11,7 @@ import { jeAdmin } from "@/lib/dozvole";
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   try {
@@ -31,6 +32,6 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     });
     return NextResponse.json({ ok: true, ...rez });
   } catch (e) {
-    return NextResponse.json({ error: e instanceof Error ? e.message : "Greška." }, { status: 400 });
+    return await greska(e instanceof Error ? e.message : "Greška.", 400);
   }
 }

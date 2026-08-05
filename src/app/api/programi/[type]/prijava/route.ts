@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -25,43 +26,37 @@ export async function POST(
   { params }: { params: Promise<{ type: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified)
-    return NextResponse.json({ error: "Mora biti verifikovan." }, { status: 403 });
+    return await greska("Mora biti verifikovan.", 403);
   if (!(await imaFunkcionalniPristup(session.user.id)))
-    return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
+    return await greska("Potreban je indeks stvarnosti od najmanje 10%.", 403);
 
   const { type } = await params;
   if (!DOZVOLJENI_TIPOVI.includes(type as ProgramType))
-    return NextResponse.json({ error: "Nepoznat tip programa." }, { status: 400 });
+    return await greska("Nepoznat tip programa.", 400);
 
   const programType = type as ProgramType;
 
   // Proveri da program postoji i da je aktivan
   const program = await prisma.protokolProgram.findUnique({ where: { type: programType } });
   if (!program?.isActive)
-    return NextResponse.json({ error: "Program nije aktivan." }, { status: 400 });
+    return await greska("Program nije aktivan.", 400);
 
   // Pun indeks stvarnosti (100% = svih 10 verifikacija) — uslov za socijalni program.
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
     select: { indeksStvarnosti: true, pseudonim: true },
   });
-  if (!korisnik) return NextResponse.json({ error: "Korisnik ne postoji." }, { status: 404 });
+  if (!korisnik) return await greska("Korisnik ne postoji.", 404);
   if (korisnik.indeksStvarnosti < MAX_INDEKS)
-    return NextResponse.json(
-      { error: "Za socijalni program potreban je pun indeks stvarnosti (100%) — sve verifikacije." },
-      { status: 403 }
-    );
+    return await greska("Za socijalni program potreban je pun indeks stvarnosti (100%) — sve verifikacije.", 403);
 
   const body = await req.json().catch(() => ({}));
 
   // Izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova.
   if (body.pristanakVerifikatori !== true)
-    return NextResponse.json(
-      { error: "Potreban je pristanak da vaši verifikatori potvrde ispunjenost uslova." },
-      { status: 400 }
-    );
+    return await greska("Potreban je pristanak da vaši verifikatori potvrde ispunjenost uslova.", 400);
 
   // Proveri duplikat — ponovna prijava dozvoljena samo iz REJECTED ili INACTIVE
   // (odbijena, odnosno obustavljena reverizijom/padom indeksa).
@@ -70,17 +65,14 @@ export async function POST(
   });
   const mozeReapply = vec != null && (vec.status === "REJECTED" || vec.status === "INACTIVE");
   if (vec && !mozeReapply)
-    return NextResponse.json({ error: "Već ste prijavljeni na ovaj program." }, { status: 400 });
+    return await greska("Već ste prijavljeni na ovaj program.", 400);
 
   const metadata = buildMetadata(programType, body);
 
   // Verifikatori koji će potvrđivati (pri indeksu 100% biće ih 10).
   const verifikatori = await dohvatiVerifikatore(prisma, session.user.id);
   if (verifikatori.length === 0)
-    return NextResponse.json(
-      { error: "Nemate verifikatore koji mogu da potvrde prijavu." },
-      { status: 403 }
-    );
+    return await greska("Nemate verifikatore koji mogu da potvrde prijavu.", 403);
 
   // Kreiranje/obnova prijave + potvrda za verifikatore — atomarno.
   await prisma.$transaction(async (tx) => {

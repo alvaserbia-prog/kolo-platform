@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,13 +8,13 @@ import { prisma } from "@/lib/prisma";
 // Telo: { subscription: PushSubscriptionJSON, userAgent?: string }
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   let body: { subscription?: { endpoint?: string; keys?: { p256dh?: string; auth?: string } }; userAgent?: string };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Neispravno telo." }, { status: 400 });
+    return await greska("Neispravno telo.", 400);
   }
 
   const sub = body.subscription;
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
   const p256dh = sub?.keys?.p256dh;
   const auth = sub?.keys?.auth;
   if (!endpoint || !p256dh || !auth) {
-    return NextResponse.json({ error: "Nepotpuna pretplata." }, { status: 400 });
+    return await greska("Nepotpuna pretplata.", 400);
   }
 
   // Upsert po endpoint-u: isti uređaj koji se ponovo pretplati ne pravi duplikat,
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
 // Telo: { endpoint: string }
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   let endpoint: string | undefined;
   try {
@@ -58,7 +59,7 @@ export async function DELETE(req: NextRequest) {
   } catch {
     // bez tela → ništa za brisanje
   }
-  if (!endpoint) return NextResponse.json({ error: "Nedostaje endpoint." }, { status: 400 });
+  if (!endpoint) return await greska("Nedostaje endpoint.", 400);
 
   await prisma.pushPretplata.deleteMany({
     where: { endpoint, userId: session.user.id },

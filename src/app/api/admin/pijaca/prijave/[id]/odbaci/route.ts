@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -13,16 +14,16 @@ import { jeAdmin } from "@/lib/dozvole";
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const prijava = await prisma.prijavaOglasa.findUnique({
     where: { id },
     select: { status: true, oglasId: true, oglas: { select: { title: true } } },
   });
-  if (!prijava) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
+  if (!prijava) return await greska("Prijava nije pronađena.", 404);
   if (prijava.status !== "OTVORENA")
-    return NextResponse.json({ error: "Prijava je već rešena." }, { status: 400 });
+    return await greska("Prijava je već rešena.", 400);
 
   await prisma.prijavaOglasa.update({
     where: { id },

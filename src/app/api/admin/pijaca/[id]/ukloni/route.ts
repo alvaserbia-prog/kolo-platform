@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -17,12 +18,12 @@ import { proveriRazlog, tekstObavestenjaOglas, PRAG_ZA_UPOZORENJE } from "@/lib/
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const provera = proveriRazlog(body.razlog);
-  if (!provera.ok) return NextResponse.json({ error: provera.greska }, { status: 400 });
+  if (!provera.ok) return await greska(provera.greska, 400);
   const { razlog } = provera;
 
   const oglas = await prisma.marketplaceListing.findUnique({
@@ -34,9 +35,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       seller: { select: { pseudonim: true } },
     },
   });
-  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!oglas) return await greska("Oglas nije pronađen.", 404);
   if (oglas.status === "UKLONJEN")
-    return NextResponse.json({ error: "Oglas je već uklonjen." }, { status: 400 });
+    return await greska("Oglas je već uklonjen.", 400);
 
   await prisma.$transaction([
     prisma.marketplaceListing.update({

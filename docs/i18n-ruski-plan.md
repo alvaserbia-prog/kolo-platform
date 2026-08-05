@@ -24,7 +24,7 @@ NIJE izložen u prekidaču jezika.
 | **5** | `faq-data-ru.ts` | ⬜ nije započeto (71 pitanje) |
 | **6** | Obaveštenja (zvonce/push/mejl) | ✅ 27/29 (dva namerno srpska) |
 | **7** | Istorija transakcija + migracija | ✅ (migracija probana na PostgreSQL-u) |
-| **8** | Poruke o greškama iz API-ja | ⬜ nije započeto (560 stringova) |
+| **8** | Poruke o greškama iz API-ja | ✅ 601 poziva kroz `greska()` |
 | **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
 | **10** | Manifest / OG slika / metapodaci | 🟡 manifest ✅, OG slika otpada (v. §6c) |
 
@@ -484,3 +484,31 @@ cyr: „Мед” је објављено у категорији „Храна 
 ```
 
 Ukupno **68 novih ključeva** u `notifikacije.*` (sr + en).
+
+
+---
+
+## 6f. Faza 8 — poruke o greškama (2026-08-05)
+
+**Plan je predviđao veći zahvat nego što je bio potreban.** Prvobitna zamisao:
+server vraća ključ, klijent ga prevodi — što traži izmene i na svim ekranima.
+
+Ispalo je da to nije potrebno: **API rute su u kontekstu zahteva i nose kolačić
+`NEXT_LOCALE`**, pa server može sam da prevede poruku. Nijedan ekran nije diran.
+
+**Srpski tekst je ujedno ključ.** `kljucGreske()` iz rečenice izvodi
+deterministički ključ (`"Nedovoljno POEN-a."` → `nedovoljno_poen_a`), pa:
+- pozivna mesta ostaju čitljiva — piše se rečenica, ne šifra;
+- nema ručnog imenovanja ključeva ni mogućnosti da se ime i tekst razmimoiđu;
+- ako prevod nedostaje, vraća se srpski original — ruta nikad ne puca.
+
+**Obim:** 601 poziv `greska()` u 152 fajla; **0 preostalih neprevodivih puteva.**
+`messages.greske` ima **277** stavki. Obuhvaćene su i poruke iz izuzetaka
+(`e.message`) i iz čuvara koji vraćaju `{ ok:false, error, status }`.
+
+> Sudar ključeva: samo `"Neautorizovano"` i `"Neautorizovano."` daju isti ključ —
+> ista poruka, pa spajanje **ujednačava rečnik grešaka** umesto da šteti.
+
+🟡 **Vrednosti su za sada srpske u sva tri jezika** — prevod ide u fazi 4 zajedno
+sa ostatkom. Engleski korisnici time ne gube ništa: i do sada su viđali srpske
+poruke o greškama.

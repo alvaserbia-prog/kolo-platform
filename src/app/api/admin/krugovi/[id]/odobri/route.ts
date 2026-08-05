@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -15,18 +16,18 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
 
   const zahtev = await prisma.krugOsnivanjeZahtev.findUnique({ where: { id } });
-  if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
+  if (!zahtev) return await greska("Zahtev nije pronađen.", 404);
   if (zahtev.status !== "PENDING")
-    return NextResponse.json({ error: "Zahtev nije na čekanju." }, { status: 400 });
+    return await greska("Zahtev nije na čekanju.", 400);
 
   // Proveri naziv
   const vec = await prisma.krug.findUnique({ where: { name: zahtev.name } });
-  if (vec) return NextResponse.json({ error: "Krug sa ovim nazivom već postoji." }, { status: 400 });
+  if (vec) return await greska("Krug sa ovim nazivom već postoji.", 400);
 
   const krugId = crypto.randomUUID();
   const walletId = crypto.randomUUID();

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -9,12 +10,12 @@ import { logAdminAkcija } from "@/lib/audit";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const body = await req.json().catch(() => ({}));
   const { title, description, predlozeniPoen, obrazlozenje, saOdobravanjem, positions, deadline, krugId } = body;
 
-  if (!title?.trim() || !description?.trim()) return NextResponse.json({ error: "Naziv i opis su obavezni." }, { status: 400 });
+  if (!title?.trim() || !description?.trim()) return await greska("Naziv i opis su obavezni.", 400);
 
   // Predloženi POEN — težinski koeficijent (čl. 5/6). Gornja granica po zadatku je
   // operativni parametar (čl. 26) koji utvrđuje UO/Gornje Kolo; ovde se primenjuje
@@ -23,11 +24,11 @@ export async function POST(req: NextRequest) {
   const predlozeni = predlozeniPoen === undefined || predlozeniPoen === null || predlozeniPoen === ""
     ? 0 : Number(predlozeniPoen);
   if (predlozeni !== 0 && (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000))
-    return NextResponse.json({ error: "Maksimalni POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
+    return await greska("Maksimalni POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno).", 400);
 
   const brMesta = Number(positions ?? 1);
   if (!Number.isInteger(brMesta) || brMesta < 1 || brMesta > 1000)
-    return NextResponse.json({ error: "Broj izvršilaca mora biti između 1 i 1000." }, { status: 400 });
+    return await greska("Broj izvršilaca mora biti između 1 i 1000.", 400);
 
   const oglas = await prisma.doprinosOglas.create({
     data: {
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
 export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const oglasi = await prisma.doprinosOglas.findMany({
     include: {

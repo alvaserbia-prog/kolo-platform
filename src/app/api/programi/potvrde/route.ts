@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +10,7 @@ import { labelPrograma } from "@/lib/protokol/programi";
 // programa i pseudonim podnosioca, koga lično poznaje kao svog verifikovanog.
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const potvrde = await prisma.programPotvrda.findMany({
     where: { verifikatorId: session.user.id, status: "CEKA" },

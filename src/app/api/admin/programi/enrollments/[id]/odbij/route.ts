@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -14,16 +15,16 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const razlog = (body.razlog ?? "").trim();
 
   const enrollment = await prisma.programEnrollment.findUnique({ where: { id } });
-  if (!enrollment) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
+  if (!enrollment) return await greska("Prijava nije pronađena.", 404);
   if (enrollment.status !== "PENDING")
-    return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
+    return await greska("Prijava nije na čekanju.", 400);
 
   await prisma.programEnrollment.update({
     where: { id },

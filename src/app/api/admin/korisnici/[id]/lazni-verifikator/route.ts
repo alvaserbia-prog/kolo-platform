@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { logAdminAkcija } from "@/lib/audit";
@@ -15,7 +16,7 @@ import { jeSuperadmin } from "@/lib/dozvole";
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
 
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     return NextResponse.json({ ok: true, ...rez });
   } catch (e) {
     if (e instanceof LaznaVerifikacijaGreska)
-      return NextResponse.json({ error: e.message }, { status: e.status });
+      return await greska(e.message, e.status);
     throw e;
   }
 }

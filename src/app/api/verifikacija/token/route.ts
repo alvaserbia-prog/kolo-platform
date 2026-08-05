@@ -8,6 +8,7 @@
  * verifikator skenira njegov QR ili unese 6-cifren broj.
  */
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import {
@@ -31,13 +32,10 @@ function dozvoljen(userId: string): boolean {
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
+    return await greska("Nisi prijavljen.", 401);
   }
   if (!dozvoljen(session.user.id)) {
-    return NextResponse.json(
-      { error: "Previše zahteva, sačekaj malo." },
-      { status: 429 }
-    );
+    return await greska("Previše zahteva, sačekaj malo.", 429);
   }
 
   try {
@@ -47,9 +45,9 @@ export async function POST() {
     return NextResponse.json({ token, brojCifara, expiresAt: expiresAt.toISOString() });
   } catch (e) {
     if (e instanceof VerifikacijaGreska) {
-      return NextResponse.json({ error: e.message }, { status: e.statusCode });
+      return await greska(e.message, e.statusCode);
     }
     console.error("[POST /api/verifikacija/token]", e);
-    return NextResponse.json({ error: "Greška servera" }, { status: 500 });
+    return await greska("Greška servera", 500);
   }
 }

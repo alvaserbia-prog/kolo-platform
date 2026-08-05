@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getLocale } from "next-intl/server";
 import { prevedi, type Parametri } from "@/lib/prevod-servera";
 import { getServerSession } from "next-auth";
@@ -19,13 +20,13 @@ const TIP_LABELA: Record<string, string> = {
 
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const wallet = await prisma.wallet.findUnique({
     where: { userId: session.user.id },
     select: { id: true, balance: true },
   });
-  if (!wallet) return NextResponse.json({ error: "Nema novčanika." }, { status: 404 });
+  if (!wallet) return await greska("Nema novčanika.", 404);
 
   const filter = req.nextUrl.searchParams.get("filter") ?? "sve";
 

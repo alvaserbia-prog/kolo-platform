@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { getLocale } from "next-intl/server";
 import { authOptions } from "@/lib/auth";
@@ -8,7 +9,7 @@ import { prevedi, type Parametri } from "@/lib/prevod-servera";
 // GET — lista notifikacija za trenutnog korisnika
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   const redovi = await prisma.notifikacija.findMany({
     where: { userId: session.user.id },
@@ -44,7 +45,7 @@ export async function GET() {
 // PATCH — označi pročitane: { id } → samo tu notifikaciju, bez tela → sve
 export async function PATCH(req: Request) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   let id: string | undefined;
   try {
