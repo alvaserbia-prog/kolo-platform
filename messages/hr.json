@@ -2403,5 +2403,24 @@
     "krug_bonus": "Bonus krugovi „{krug}” — {clanovi} članova",
     "krug_osnivanje": "Osnivanje krugovi „{krug}”",
     "program": "Program {program}"
+  },
+  "mejl": {
+    "pozdrav": "Pozdrav",
+    "odjava": "Isključi ovakva obaveštenja",
+    "otvori_u_aplikaciji": "Otvori u aplikaciji",
+    "lozinka_reset_naslov": "Resetovanje lozinke",
+    "lozinka_postavi_naslov": "Postavljanje lozinke",
+    "lozinka_reset_subject": "Resetovanje lozinke — KOLO",
+    "lozinka_postavi_subject": "Postavljanje lozinke — KOLO",
+    "lozinka_reset_dugme": "Postavi novu lozinku",
+    "lozinka_postavi_dugme": "Postavi lozinku",
+    "lozinka_reset_uvod": "Primili smo zahtev za resetovanje lozinke za vaš KOLO nalog.",
+    "lozinka_postavi_uvod": "Primili smo zahtev za postavljanje lozinke za vaš KOLO nalog. Trenutno se prijavljujete preko Google-a — postavljanjem lozinke moći ćete da se prijavljujete i preko forme sa email-om i lozinkom.",
+    "lozinka_reset_akcija": "Da postavite novu lozinku, kliknite na dugme ispod.",
+    "lozinka_postavi_akcija": "Da postavite lozinku, kliknite na dugme ispod.",
+    "lozinka_ignorisi": "Ako niste vi pokrenuli ovaj zahtev, slobodno ignorišite ovu poruku.",
+    "lozinka_vazenje": "Link važi <strong>1 sat</strong>.",
+    "dugme_ne_radi": "Ako dugme ne radi, otvorite ovaj link u pregledaču:",
+    "automatska_poruka": "KOLO Platforma — automatska poruka. Ne odgovarajte na ovaj email."
   }
 }

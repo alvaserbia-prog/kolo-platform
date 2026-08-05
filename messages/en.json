@@ -2415,5 +2415,24 @@
     "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",
     "krug_osnivanje": "Circle founded “{krug}”",
     "program": "Programme {program}"
+  },
+  "mejl": {
+    "pozdrav": "Hello",
+    "odjava": "Turn off notifications like this",
+    "otvori_u_aplikaciji": "Open in the app",
+    "lozinka_reset_naslov": "Password reset",
+    "lozinka_postavi_naslov": "Set a password",
+    "lozinka_reset_subject": "Password reset — KOLO",
+    "lozinka_postavi_subject": "Set a password — KOLO",
+    "lozinka_reset_dugme": "Set a new password",
+    "lozinka_postavi_dugme": "Set password",
+    "lozinka_reset_uvod": "We received a request to reset the password for your KOLO account.",
+    "lozinka_postavi_uvod": "We received a request to set a password for your KOLO account. You currently sign in with Google — once you set a password you will also be able to sign in with your email and password.",
+    "lozinka_reset_akcija": "To set a new password, click the button below.",
+    "lozinka_postavi_akcija": "To set a password, click the button below.",
+    "lozinka_ignorisi": "If you did not request this, you can safely ignore this message.",
+    "lozinka_vazenje": "The link is valid for <strong>1 hour</strong>.",
+    "dugme_ne_radi": "If the button does not work, open this link in your browser:",
+    "automatska_poruka": "KOLO Platform — automated message. Please do not reply to this email."
   }
 }

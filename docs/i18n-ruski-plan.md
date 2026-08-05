@@ -28,9 +28,7 @@ NIJE izložen u prekidaču jezika.
 | **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
 | **10** | Manifest / OG slika / metapodaci | 🟡 manifest ✅, OG slika otpada (v. §6c) |
 
-**Sledeći korak:** faza 4 (prevod) — sve što je ispred nje je urađeno. Odluke vlasnika zaključane, obim izmeren
-nad kodom, mašinerija jezika postavljena. Prevod još NIJE započet — `messages/ru.json`
-je za sada kopija `sr.json`, a ruski NIJE izložen u prekidaču jezika.
+**Sledeći korak:** faza 8, pa faza 4 (prevod).
 
 ---
 

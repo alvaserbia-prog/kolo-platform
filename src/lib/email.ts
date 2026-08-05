@@ -21,6 +21,7 @@
  * koristi — prevođenje bi tražilo da se prevedu i sami tekstovi notifikacija.
  */
 import { randomBytes } from "crypto";
+import { prevedi } from "./prevod-servera";
 import { prisma } from "./prisma";
 
 /** Dozvoljeni host-ovi za linkove u mejlu — sprečava host-header poisoning. */
@@ -69,10 +70,13 @@ export interface EmailLayoutOpts {
   dugme?: { tekst: string; link: string };
   /** Dodatni red u podnožju (npr. link za odjavu) — sme da sadrži HTML. */
   podnozje?: string;
+  /** Jezik primaoca (`User.jezik`). Bez njega šablon ostaje srpski. */
+  jezik?: string | null;
 }
 
 /** Zajednički HTML šablon svih KOLO mejlova (jedna vizuelna forma). */
 export function emailLayout(o: EmailLayoutOpts): string {
+  const t = (k: string) => prevedi(o.jezik, `mejl.${k}`);
   const pasusi = o.telo
     .map((p) => `<p style="margin:0 0 12px;line-height:1.55;">${p}</p>`)
     .join("");
@@ -85,7 +89,7 @@ export function emailLayout(o: EmailLayoutOpts): string {
         </a>
       </p>
       <p style="margin:0 0 8px;font-size:12px;color:#6b7280;">
-        Ako dugme ne radi, otvorite ovaj link u pregledaču:
+        ${t("dugme_ne_radi")}
       </p>
       <p style="margin:0 0 24px;font-size:12px;word-break:break-all;color:#16a34a;">
         ${o.dugme.link}
@@ -95,11 +99,11 @@ export function emailLayout(o: EmailLayoutOpts): string {
   return `
     <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:24px;color:#374151;">
       <h2 style="margin:0 0 16px;font-size:18px;color:#111827;">${esc(o.naslov)}</h2>
-      ${o.pozdrav ? `<p style="margin:0 0 12px;">Pozdrav <strong>${esc(o.pozdrav)}</strong>,</p>` : ""}
+      ${o.pozdrav ? `<p style="margin:0 0 12px;">${t("pozdrav")} <strong>${esc(o.pozdrav)}</strong>,</p>` : ""}
       ${pasusi}
       ${dugme}
       <p style="margin:24px 0 0;padding-top:16px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;">
-        KOLO Platforma — automatska poruka. Ne odgovarajte na ovaj email.
+        ${t("automatska_poruka")}
         ${o.podnozje ? `<br>${o.podnozje}` : ""}
       </p>
     </div>
@@ -253,6 +257,7 @@ export async function posaljiEmailKorisniku(
         pseudonim: true,
         emailObavestenja: true,
         deaktiviranAt: true,
+        jezik: true,
       },
     });
     if (!user?.email) return;
@@ -262,7 +267,7 @@ export async function posaljiEmailKorisniku(
     const baza = bazniUrl();
     const token = await dohvatiOdjavaToken(userId);
     const podnozje = token
-      ? `<a href="${baza}/odjava-obavestenja/${token}" style="color:#9ca3af;">Isključi ovakva obaveštenja</a>`
+      ? `<a href="${baza}/odjava-obavestenja/${token}" style="color:#9ca3af;">${prevedi(user.jezik, "mejl.odjava")}</a>`
       : undefined;
 
     const html = emailLayout({
@@ -270,9 +275,10 @@ export async function posaljiEmailKorisniku(
       pozdrav: user.pseudonim,
       telo: [esc(o.tekst)],
       dugme: o.link
-        ? { tekst: o.linkTekst ?? "Otvori u aplikaciji", link: `${baza}${o.link}` }
+        ? { tekst: o.linkTekst ?? prevedi(user.jezik, "mejl.otvori_u_aplikaciji"), link: `${baza}${o.link}` }
         : undefined,
       podnozje,
+      jezik: user.jezik,
     });
 
     await posaljiEmailRaw(user.email, `${o.naslov} — KOLO`, html, "obavestenje");
