@@ -77,7 +77,8 @@
     "opis": "Leírás",
     "poen_dan": "POEN/nap",
     "detalji": "Részletek →",
-    "pretrazi_clanove": "Search members..."
+    "pretrazi_clanove": "Search members...",
+    "mesto_iz_spiska": "Válasszon egy települést a felkínált listából — csak egy helyet adjon meg."
   },
   "login": {
     "naslov": "Bejelentkezés",
@@ -156,7 +157,7 @@
     "pseudonim": "Álnév",
     "lozinka": "Jelszó",
     "mesto": "Hely",
-    "mesto_opis": "Segít a közeli hirdetések megjelenítésében. Kihagyhatja, és később is megadhatja.",
+    "mesto_opis": "Válasszon egy települést a listából. Segít a közeli hirdetések megjelenítésében. Kihagyhatja, és később is megadhatja.",
     "opciono": "(opcionális)",
     "placeholder_pseudonim": "AzÖnÁlneve",
     "placeholder_lozinka": "••••••••",

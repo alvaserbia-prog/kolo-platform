@@ -3,6 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -19,10 +20,29 @@ export async function PATCH(req: NextRequest) {
     return await greska("Neispravan format telefona.", 400);
   }
 
+  const trenutni = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { location: true },
+  });
+
+  // Novo mesto mora biti JEDNO naselje iz šifarnika (upisuje se kanonski naziv).
+  // Zatečena vrednost se ne dira: nalozi upisani dok je polje bilo slobodan tekst
+  // ne smeju da ostanu zaključani — izmena telefona ne sme da padne zbog stare
+  // lokacije koju korisnik nije ni pipnuo.
+  let mesto: string | null = null;
+  if (location) {
+    if (location === trenutni?.location) {
+      mesto = location;
+    } else {
+      mesto = razresiNaselje(location);
+      if (!mesto) return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
+    }
+  }
+
   await prisma.user.update({
     where: { id: session.user.id },
     data: {
-      location: location === "" ? null : location,
+      location: mesto,
       telefon: telefon === "" ? null : telefon,
     },
   });
