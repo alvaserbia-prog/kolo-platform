@@ -1,16 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { NASELJA_SRBIJE } from "@/lib/naselja-srbije";
-
-function normalizuj(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[čć]/g, "c")
-    .replace(/[š]/g, "s")
-    .replace(/[ž]/g, "z")
-    .replace(/[đ]/g, "d");
-}
+import { normalizujNaselje as normalizuj, razresiNaselje } from "@/lib/naselje";
 
 interface Props {
   value: string;
@@ -20,10 +13,12 @@ interface Props {
 }
 
 export default function LokacijaSearch({ value, onChange, placeholder = "npr. Novi Sad", className = "" }: Props) {
+  const tc = useTranslations("common");
   const [query, setQuery] = useState(value);
   const [sugestije, setSugestije] = useState<string[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
   const [aktivniIndex, setAktivniIndex] = useState(-1);
+  const [greska, setGreska] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listaRef = useRef<HTMLUListElement>(null);
 
@@ -42,10 +37,36 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  /**
+   * Unos se zaključuje na napuštanju polja: ono što pogađa naselje iz šifarnika
+   * upisuje se u KANONSKOM obliku („stanisic" → „Stanišić", „Stanišić (Sombor)"
+   * → „Stanišić"), a ono što ne pogađa nijedno naselje dobija vidljivu grešku.
+   * Bez ovoga je polje bilo slobodan tekst — padajuća lista je samo predlagala.
+   */
+  function zakljuciUnos() {
+    const s = query.trim();
+    if (!s) {
+      setGreska(false);
+      if (value !== "") onChange("");
+      return;
+    }
+    const naselje = razresiNaselje(s);
+    if (naselje) {
+      setGreska(false);
+      if (naselje !== query) setQuery(naselje);
+      if (naselje !== value) onChange(naselje);
+    } else {
+      // Vrednost se NE briše — čovek vidi šta je otkucao i može da ispravi;
+      // isti uslov proverava i server, pa neispravno mesto ne može da se sačuva.
+      setGreska(true);
+    }
+  }
+
   function handleInput(val: string) {
     setQuery(val);
     onChange(val);
     setAktivniIndex(-1);
+    setGreska(false);
     if (val.trim().length < 2) {
       setSugestije([]);
       setShowSugestije(false);
@@ -66,6 +87,7 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
     setSugestije([]);
     setShowSugestije(false);
     setAktivniIndex(-1);
+    setGreska(false);
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -105,13 +127,17 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
             setShowSugestije(true);
           }
         }}
+        onBlur={zakljuciUnos}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         autoComplete="off"
         aria-autocomplete="list"
         aria-expanded={showSugestije && sugestije.length > 0}
+        aria-invalid={greska}
         // 16px (text-base): manji font tera iOS Safari da zumira ekran pri fokusu.
-        className="w-full px-4 py-3 rounded-xl border border-kolo-border text-base outline-none focus:border-kolo-green-600 transition-colors"
+        className={`w-full px-4 py-3 rounded-xl border text-base outline-none transition-colors ${
+          greska ? "border-red-400 focus:border-red-500" : "border-kolo-border focus:border-kolo-green-600"
+        }`}
       />
       {showSugestije && sugestije.length > 0 && (
         <ul ref={listaRef} className="absolute z-20 left-0 right-0 mt-1 bg-white border border-kolo-border rounded-xl shadow-lg overflow-y-auto max-h-60">
@@ -132,6 +158,11 @@ export default function LokacijaSearch({ value, onChange, placeholder = "npr. No
             </li>
           ))}
         </ul>
+      )}
+      {greska && (
+        <p role="alert" className="mt-1 text-xs text-red-600">
+          {tc("mesto_iz_spiska")}
+        </p>
       )}
     </div>
   );

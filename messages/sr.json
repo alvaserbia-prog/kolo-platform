@@ -84,7 +84,8 @@
     "opis": "Opis",
     "poen_dan": "POEN/dan",
     "detalji": "Detalji →",
-    "pretrazi_clanove": "Pretraži članove..."
+    "pretrazi_clanove": "Pretraži članove...",
+    "mesto_iz_spiska": "Izaberi mesto iz ponuđenog spiska naselja — upiši samo jedno mesto."
   },
   "login": {
     "naslov": "Prijava",
@@ -163,7 +164,7 @@
     "pseudonim": "Pseudonim",
     "lozinka": "Lozinka",
     "mesto": "Mesto",
-    "mesto_opis": "Pomaže da vidite oglase u blizini. Možete preskočiti i dodati kasnije.",
+    "mesto_opis": "Bira se iz spiska naselja — jedno mesto. Pomaže da vidite oglase u blizini. Možete preskočiti i dodati kasnije.",
     "opciono": "(opciono)",
     "placeholder_pseudonim": "VasePseudonim",
     "placeholder_lozinka": "••••••••",

@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -90,6 +91,14 @@ export async function PATCH(
       return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
     if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
       return await greska("Neko polje premašuje dozvoljenu dužinu.", 400);
+    // Novo mesto mora biti JEDNO naselje iz šifarnika; zatečena vrednost oglasa
+    // upisanog dok je polje bilo slobodan tekst se propušta neizmenjena, da izmena
+    // cene ili slika ne padne zbog stare lokacije.
+    let mesto: string | null = null;
+    if (location) {
+      mesto = location === listing.location ? location : razresiNaselje(location);
+      if (!mesto) return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
+    }
     const cena = parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
     if (!cena.ok)
       return await greska(cena.error, 400);
@@ -141,7 +150,7 @@ export async function PATCH(
         cenaTip: cena.cenaTip,
         price: cena.price,
         cenaDo: cena.cenaDo,
-        location: location || null,
+        location: mesto,
         phone: phone || null,
         images: [...zadrzaneSlike, ...noveSlike],
       },

@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { kljucPseudonima } from "@/lib/validacija";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 // GET /api/krugovi — lista svih aktivnih krug
@@ -44,6 +45,10 @@ export async function POST(req: NextRequest) {
 
   if (!name || name.length < 3)
     return await greska("Naziv mora imati najmanje 3 karaktera.", 400);
+  // Sedište kruga je opciono, ali kad se navede mora biti naselje iz šifarnika.
+  const mesto = location ? razresiNaselje(location) : null;
+  if (location && !mesto)
+    return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
   if (osnivaci.length < 4)
     return await greska("Potrebno je navesti pseudonime najmanje 4 osnivača (pored vas, ukupno 5).", 400);
 
@@ -81,7 +86,7 @@ export async function POST(req: NextRequest) {
     data: {
       name,
       description: description || null,
-      location: location || null,
+      location: mesto,
       inicijatorId: session.user.id,
       osnivaci: sviOsnivaci,
     },
