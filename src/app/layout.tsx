@@ -107,7 +107,24 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
   const messages = await getMessages();
-  const session = await sesija();
+
+  // Pad autentikacije (nedostupna baza, nedostajuća `NEXTAUTH_SECRET`…) NE sme
+  // da obori ceo dokument. Ako `RootLayout` baci, Next ne može serverski da
+  // renderuje NIŠTA — ni `error.tsx`, koji živi unutar ovog layout-a — pa šalje
+  // prazan HTML i tek na klijentu (posle hidratacije) prikaže `global-error.tsx`.
+  // Korisnik do tada gleda belinu, a bez JavaScript-a i trajno.
+  // Zato ovde gutamo grešku: layout se renderuje kao da korisnik nije prijavljen,
+  // a stranica koja stvarno zavisi od baze pukne sama i pokaže SERVERSKI
+  // renderovan ekran „Radimo na sistemu".
+  // ⚠️ Guta se SAMO ovde, ne u `sesija()` — rute i stranice koje na osnovu
+  // sesije odlučuju o pristupu moraju i dalje da puknu, a ne da tiho tretiraju
+  // prijavljenog korisnika kao gosta.
+  let session = null;
+  try {
+    session = await sesija();
+  } catch (greska) {
+    console.error("[layout] sesija nedostupna — render bez sesije", greska);
+  }
 
   // Klijentski i18n payload: NextIntlClientProvider serijalizuje poruke u HTML i
   // šalje ih klijentu na SVAKOJ stranici. Ceo set je ~118KB; ovi namespace-ovi se
