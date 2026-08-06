@@ -2315,7 +2315,15 @@
     "obav_prekini": "Prekini",
     "obav_potvrda": "Poruka će biti poslana na {broj} adresa i ne može se povući. Nastaviti?",
     "obav_napredak": "Poslano {poslato} od {ukupno} · neuspjelo {neuspesno}",
-    "obav_greska": "Nešto nije uspjelo. Pokušajte ponovno."
+    "obav_greska": "Nešto nije uspjelo. Pokušajte ponovno.",
+    "donacije_nacin_ips": "IPS QR",
+    "donacije_izvod_naslov": "Evidentiraj uplatu iz izvoda",
+    "donacije_izvod_opis": "Unesite poziv na broj sa priliva (model 97) — on identifikuje člana. Kontrolne cifre se proveravaju, pa pogrešan prepis ne može da prođe.",
+    "donacije_izvod_pnb_placeholder": "Poziv na broj (npr. 42-15)",
+    "donacije_izvod_iznos_placeholder": "Iznos",
+    "donacije_izvod_evidentiraj": "Evidentiraj",
+    "donacije_izvod_anonimna": "Anonimna donacija (bez POEN-a)",
+    "donacije_iznos_korekcija": "Iznos za potvrdu — korigujte prema stvarnom prilivu iz izvoda"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

@@ -10,7 +10,8 @@ const jezici = [
   { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
   { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
   { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский" },
-  // "hr" (Hrvatski, /flags/hr.svg) je zamrznut — vidi src/i18n/routing.ts.
+  { kod: "hr", ikona: "/flags/hr.svg", naziv: "Hrvatski" },
+  { kod: "hu", ikona: "/flags/hu.svg", naziv: "Magyar" },
 ];
 
 function promeniJezik(kod: string) {
