@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 import { normalizujEmail, validanEmail, validanPseudonim, PSEUDONIM_PRAVILO } from "@/lib/validacija";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { poljaPseudonima, porukaZauzeca, proveriZauzece } from "@/lib/pseudonim";
 import { rateLimit, klijentIP } from "@/lib/rate-limit";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
@@ -47,6 +48,14 @@ export async function POST(req: NextRequest) {
     if (location !== null && location.length > 80) {
       return await greska("Mesto je predugačko.", 400);
     }
+    // Mesto je opciono, ali kad se navede mora biti JEDNO naselje iz šifarnika —
+    // slobodan tekst („Stanišić (Sombor)") se ne poklapa ni sa filterom po mestu
+    // ni sa koordinatama za udaljenost. Upisuje se kanonski naziv.
+    let mesto: string | null = null;
+    if (location) {
+      mesto = razresiNaselje(location);
+      if (!mesto) return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
+    }
 
     const emailNorm = normalizujEmail(email);
     const pseudonimClean = pseudonim.trim();
@@ -79,7 +88,7 @@ export async function POST(req: NextRequest) {
         passwordHash,
         ...poljaPseudonima(pseudonimClean),
         memberHash: myHash,
-        location: location || null,
+        location: mesto,
         wallet: {
           create: { type: WalletType.USER, balance: 0 },
         },

@@ -7,6 +7,7 @@ import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
 import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -85,6 +86,11 @@ export async function POST(req: NextRequest) {
     return await greska("Opis može imati najviše 4000 karaktera.", 400);
   if (location.length > 80)
     return await greska("Lokacija može imati najviše 80 karaktera.", 400);
+  // Lokacija oglasa je opciona, ali kad se navede mora biti JEDNO naselje iz
+  // šifarnika — po njoj se filtrira Pijaca i računa udaljenost do posmatrača.
+  const mesto = location ? razresiNaselje(location) : null;
+  if (location && !mesto)
+    return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
   if (phone.length > 40)
     return await greska("Telefon može imati najviše 40 karaktera.", 400);
   // Kod potražnje budžet se uvek dogovara — cena se ne unosi (uvek DOGOVOR).
@@ -148,7 +154,7 @@ export async function POST(req: NextRequest) {
       cenaDo: cena.cenaDo,
       category,
       images: imagePaths,
-      location: location || null,
+      location: mesto,
       phone: phone || null,
     },
   });

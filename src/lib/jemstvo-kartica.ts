@@ -6,8 +6,8 @@
 // osobu. Struktuirana polja + mesto iz šifarnika omogućavaju da sistem sam
 // dovede kandidata onome ko ga najverovatnije poznaje.
 
-import { NASELJA_SRBIJE } from "@/lib/naselja-srbije";
 import { NASELJE_OPSTINA } from "@/lib/naselja-geo";
+import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 
 /** Koliko dana objava stoji na tabli pre isteka. */
 export const TRAJANJE_DANA = 8;
@@ -24,8 +24,6 @@ export const GODISTE_MIN = 1900;
 export function godisteMax(): number {
   return new Date().getFullYear() - 15;
 }
-
-const NASELJA_SET = new Set(NASELJA_SRBIJE);
 
 export interface KarticaUnos {
   ime?: unknown;
@@ -79,10 +77,12 @@ export function validirajKarticu(unos: KarticaUnos): ValidacijaRezultat {
   if (unos.mesto !== undefined && unos.mesto !== null && unos.mesto !== "") {
     const m = tekst(unos.mesto, 80);
     if (m) {
-      if (!NASELJA_SET.has(m)) {
-        return { ok: false, greska: "Mesto mora biti izabrano iz ponuđenog spiska naselja." };
+      // Razrešavanje je zajedničko sa ostatkom platforme (`naselje.ts`): prima i
+      // unos bez dijakritika i „Selo (Opština)", a upisuje kanonski naziv.
+      mesto = razresiNaselje(m);
+      if (!mesto) {
+        return { ok: false, greska: PORUKA_MESTO_IZ_SPISKA };
       }
-      mesto = m;
     }
   }
 
