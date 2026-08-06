@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback, memo, Suspense } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import KorisnikAvatar from "@/components/KorisnikAvatar";
 import { profilHref } from "@/lib/profil-link";
@@ -413,6 +414,7 @@ const KonverzacijaRed = memo(function KonverzacijaRed({
   onOtvori: (id: string) => void;
   t: TF;
 }) {
+  const locale = useLocale();
   return (
     <button
       onClick={() => onOtvori(k.id)}
@@ -433,7 +435,7 @@ const KonverzacijaRed = memo(function KonverzacijaRed({
                 </span>
               )}
               <span className="text-[10px] text-kolo-border">
-                {new Date(k.poslednjeVreme).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                {new Date(k.poslednjeVreme).toLocaleString(intlTag(locale), { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
               </span>
             </div>
           </div>
@@ -459,6 +461,7 @@ const PorukaBubble = memo(function PorukaBubble({
   pseudonim: string;
   userId?: string;
 }) {
+  const locale = useLocale();
   return (
     <div className={`flex items-end gap-2 ${p.moja ? "justify-end" : "justify-start"}`}>
       {!p.moja && <KorisnikAvatar avatar={avatar} pseudonim={pseudonim} userId={userId} size={28} />}
@@ -471,7 +474,7 @@ const PorukaBubble = memo(function PorukaBubble({
       >
         <p className="whitespace-pre-wrap break-words">{p.tekst}</p>
         <p className={`text-[10px] mt-1 ${p.moja ? "text-white/70" : "text-kolo-border"}`}>
-          {new Date(p.createdAt).toLocaleString("sr-RS", { hour: "2-digit", minute: "2-digit" })}
+          {new Date(p.createdAt).toLocaleString(intlTag(locale), { hour: "2-digit", minute: "2-digit" })}
         </p>
       </div>
       {p.moja && <KorisnikAvatar avatar={avatar} pseudonim={pseudonim} size={28} />}

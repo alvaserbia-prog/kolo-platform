@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import type { Tab } from "./tabovi";
 import { profilHref } from "@/lib/profil-link";
@@ -45,6 +46,7 @@ interface Props {
 
 
 export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin, pocetniTab }: Props) {
+  const locale = useLocale();
   const t = useTranslations("krug");
   const router = useRouter();
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -111,7 +113,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
             {krug.description && <p className="text-sm text-kolo-muted mt-2">{krug.description}</p>}
           </div>
           <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
-            <p className="text-xl font-bold text-kolo-green-700">{krug.balance.toLocaleString("sr-RS")}</p>
+            <p className="text-xl font-bold text-kolo-green-700">{krug.balance.toLocaleString(intlTag(locale))}</p>
             <p className="text-xs text-kolo-green-700">POEN</p>
           </div>
         </div>
@@ -167,7 +169,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("info_stanje")}</span>
-            <span className="font-bold text-kolo-green-700">{krug.balance.toLocaleString("sr-RS")} POEN</span>
+            <span className="font-bold text-kolo-green-700">{krug.balance.toLocaleString(intlTag(locale))} POEN</span>
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("info_aktivnih_projekata")}</span>
@@ -186,7 +188,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
               </Link>
               <div className="flex items-center gap-2">
                 {c.isAdmin && <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-2 py-0.5 rounded font-medium">{t("clan_admin_badge")}</span>}
-                <span className="text-xs text-kolo-muted">{new Date(c.joinedAt).toLocaleDateString("sr-RS")}</span>
+                <span className="text-xs text-kolo-muted">{new Date(c.joinedAt).toLocaleDateString(intlTag(locale))}</span>
               </div>
             </div>
           ))}

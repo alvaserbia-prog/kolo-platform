@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 
 // POST /api/admin/pijaca/[id]/vrati — poništenje uklanjanja.
@@ -14,16 +15,16 @@ import { jeAdmin } from "@/lib/dozvole";
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const oglas = await prisma.marketplaceListing.findUnique({
     where: { id },
     select: { title: true, status: true, sellerId: true, seller: { select: { pseudonim: true } } },
   });
-  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!oglas) return await greska("Oglas nije pronađen.", 404);
   if (oglas.status !== "UKLONJEN")
-    return NextResponse.json({ error: "Oglas nije uklonjen." }, { status: 400 });
+    return await greska("Oglas nije uklonjen.", 400);
 
   await prisma.marketplaceListing.update({
     where: { id },
@@ -31,13 +32,14 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
   });
 
   await logAdminAkcija(session.user.id, "OGLAS_VRACEN", id, `${oglas.seller.pseudonim} — ${oglas.title}`);
-  await posaljiNotifikaciju(
-    oglas.sellerId,
-    "OGLAS_VRACEN",
-    "Oglas vraćen na Pijacu",
-    `Tvoj oglas „${oglas.title}" je vraćen i ponovo je vidljiv na Pijaci.`,
-    `/pijaca/${id}`,
-  );
+  await obavesti(oglas.sellerId, {
+    tip: "OGLAS_VRACEN",
+    kljuc: "notifikacije.oglas_vracen",
+    parametri: { oglas: oglas.title },
+    naslov: "Oglas vraćen na Pijacu",
+    tekst: `Tvoj oglas „${oglas.title}" je vraćen i ponovo je vidljiv na Pijaci.`,
+    link: `/pijaca/${id}`,
+  });
 
   return NextResponse.json({ ok: true });
 }

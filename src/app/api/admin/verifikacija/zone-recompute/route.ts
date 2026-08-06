@@ -12,6 +12,7 @@
  * verifikacije/poništavanja, pa je ovaj endpoint bezbedan za višestruki poziv.
  */
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -22,7 +23,7 @@ import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   try {
@@ -41,6 +42,6 @@ export async function POST() {
     return NextResponse.json({ ok: true, ...rezultat });
   } catch (e) {
     console.error("[POST /api/admin/verifikacija/zone-recompute]", e);
-    return NextResponse.json({ error: "Greška servera" }, { status: 500 });
+    return await greska("Greška servera", 500);
   }
 }

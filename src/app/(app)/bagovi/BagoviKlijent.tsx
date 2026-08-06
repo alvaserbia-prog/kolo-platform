@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { intlTag } from "@/lib/format";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
 type BugStatus = "PRIJAVLJEN" | "U_RADU" | "RESENO" | "ODBIJENO";
@@ -37,6 +38,7 @@ const STATUS_STIL: Record<BugStatus, string> = {
 const SVI_STATUSI: BugStatus[] = ["PRIJAVLJEN", "U_RADU", "RESENO", "ODBIJENO"];
 
 export default function BagoviKlijent() {
+  const locale = useLocale();
   const t = useTranslations("bagovi");
   const tc = useTranslations("common");
   const { data: session } = useSession();
@@ -171,7 +173,7 @@ export default function BagoviKlijent() {
                       <Pseudonim>{b.prijavio}</Pseudonim>
                       {b.mojBag && <span className="text-kolo-green-700"> · {t("ti")}</span>}
                       {" · "}
-                      {new Date(b.createdAt).toLocaleDateString("sr-RS")}
+                      {new Date(b.createdAt).toLocaleDateString(intlTag(locale))}
                     </p>
                   </div>
                   <span

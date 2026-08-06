@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
 type Prijava = {
@@ -21,6 +22,7 @@ type Prijava = {
 type Detalji = Prijava & { ugovorTekst: string; cenovnikSlika: string | null };
 
 export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }) {
+  const locale = useLocale();
   const t = useTranslations("admin");
 
   const STATUS_LABEL: Record<Prijava["status"], string> = {
@@ -57,7 +59,7 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
     const res = await fetch(`/api/admin/pokroviteljstvo/prijave/${id}/potvrdi`, { method: "POST" });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
-    alert(res.ok ? t("pokr_prijave_potvrdjeno_msg", { bonus: (d.bonus ?? 0).toLocaleString("sr-RS") }) : (d.error ?? t("greska_generalna")));
+    alert(res.ok ? t("pokr_prijave_potvrdjeno_msg", { bonus: (d.bonus ?? 0).toLocaleString(intlTag(locale)) }) : (d.error ?? t("greska_generalna")));
     if (res.ok) { setDetalji(null); await refetch(); onDone(); }
   }
 
@@ -88,7 +90,7 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
             <div className="min-w-0">
               <p className="font-semibold text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· PIB {p.pib}</span></p>
               <p className="text-sm text-kolo-muted mt-0.5">
-                {VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString("sr-RS")} RSD · {t.rich("pokr_prijave_podneo", { pseudonim: p.podnosilacPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
+                {VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString(intlTag(locale))} RSD · {t.rich("pokr_prijave_podneo", { pseudonim: p.podnosilacPseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
               </p>
               <p className="text-xs mt-1">
                 <span className={`font-semibold ${p.status === "POTVRDJENA" ? "text-kolo-green-700" : p.status === "ODBIJENA" ? "text-kolo-danger" : "text-kolo-gold-600"}`}>

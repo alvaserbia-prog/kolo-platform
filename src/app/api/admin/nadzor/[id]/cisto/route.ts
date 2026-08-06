@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -10,12 +11,12 @@ import { jeSuperadmin } from "@/lib/dozvole";
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
   const nalaz = await prisma.rizikNalaz.findUnique({ where: { id }, select: { status: true, pseudonim: true, tip: true } });
-  if (!nalaz) return NextResponse.json({ error: "Nalaz nije pronađen." }, { status: 404 });
-  if (nalaz.status !== "OTVOREN") return NextResponse.json({ error: "Nalaz nije otvoren." }, { status: 400 });
+  if (!nalaz) return await greska("Nalaz nije pronađen.", 404);
+  if (nalaz.status !== "OTVOREN") return await greska("Nalaz nije otvoren.", 400);
 
   await prisma.rizikNalaz.update({
     where: { id },

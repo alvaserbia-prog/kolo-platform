@@ -37,6 +37,7 @@ export const OG_LOCALE: Record<string, string> = {
   "sr-Cyrl": "sr_RS",
   en: "en_US",
   hu: "hu_HU",
+  ru: "ru_RU",
 };
 
 /**

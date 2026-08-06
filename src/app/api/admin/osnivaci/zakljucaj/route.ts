@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -23,16 +24,16 @@ async function proveriAdmin() {
 
 export async function POST() {
   const auth = await proveriAdmin();
-  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+  if (!auth.ok) return await greska(auth.error, auth.status);
 
   const kanal = await dohvatiIliKreirajKanal();
   if (kanal.osnivaciZakljucani) {
-    return NextResponse.json({ error: "Lista osnivača je već zaključana." }, { status: 409 });
+    return await greska("Lista osnivača je već zaključana.", 409);
   }
 
   const osnivaci = await prisma.osnivac.findMany({ orderBy: { redniBroj: "asc" } });
   if (osnivaci.length === 0) {
-    return NextResponse.json({ error: "Nema definisanih osnivača — nema šta da se zaključa." }, { status: 400 });
+    return await greska("Nema definisanih osnivača — nema šta da se zaključa.", 400);
   }
 
   const imenilac = osnivaci[0].udeoImenilac;
@@ -55,7 +56,7 @@ export async function POST() {
 
 export async function DELETE() {
   const auth = await proveriAdmin();
-  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+  if (!auth.ok) return await greska(auth.error, auth.status);
 
   const kanal = await dohvatiIliKreirajKanal();
   if (kanal.brojKoraka > 0) {
