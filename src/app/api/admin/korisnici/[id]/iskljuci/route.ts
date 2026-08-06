@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -10,7 +9,7 @@ import { jeSuperadmin } from "@/lib/dozvole";
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
@@ -20,9 +19,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     where: { id },
     select: { tipKorisnika: true, admin: true, status: true, pseudonim: true },
   });
-  if (!korisnik) return await greska("Korisnik nije pronađen.", 404);
-  if (jeSuperadmin(korisnik)) return await greska("Ne može se isključiti admin.", 400);
-  if (korisnik.status === "EXCLUDED") return await greska("Korisnik je već isključen.", 400);
+  if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se isključiti admin." }, { status: 400 });
+  if (korisnik.status === "EXCLUDED") return NextResponse.json({ error: "Korisnik je već isključen." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {
     // Isključi iz krugovi

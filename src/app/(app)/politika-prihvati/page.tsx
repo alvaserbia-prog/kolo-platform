@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 interface Verzija {
   id: string;
@@ -25,7 +24,6 @@ function odredisteNakonPristanka(): string {
 }
 
 export default function PolitikaPrihvatiPage() {
-  const locale = useLocale();
   const t = useTranslations("politikaPrihvati");
   const router = useRouter();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
@@ -80,7 +78,7 @@ export default function PolitikaPrihvatiPage() {
           {verzija && (
             <p className="text-sm text-kolo-muted">
               {t("verzija_label")} <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
-              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString(intlTag(locale))}</strong>
+              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
             </p>
           )}
         </div>

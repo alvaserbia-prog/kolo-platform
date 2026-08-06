@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { jeAdmin } from "@/lib/dozvole";
 import { proveriRazlog, tekstObavestenjaOglas, PRAG_ZA_UPOZORENJE } from "@/lib/moderacija";
@@ -18,12 +17,12 @@ import { proveriRazlog, tekstObavestenjaOglas, PRAG_ZA_UPOZORENJE } from "@/lib/
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const provera = proveriRazlog(body.razlog);
-  if (!provera.ok) return await greska(provera.greska, 400);
+  if (!provera.ok) return NextResponse.json({ error: provera.greska }, { status: 400 });
   const { razlog } = provera;
 
   const oglas = await prisma.marketplaceListing.findUnique({
@@ -35,9 +34,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       seller: { select: { pseudonim: true } },
     },
   });
-  if (!oglas) return await greska("Oglas nije pronađen.", 404);
+  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
   if (oglas.status === "UKLONJEN")
-    return await greska("Oglas je već uklonjen.", 400);
+    return NextResponse.json({ error: "Oglas je već uklonjen." }, { status: 400 });
 
   await prisma.$transaction([
     prisma.marketplaceListing.update({
@@ -60,14 +59,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   // Obaveštenje vlasniku sa razlogom NIJE opcija nego obaveza (čl. 25 st. 2).
   // Jedan poziv pokriva zvonce, push i email.
-  await obavesti(oglas.sellerId, {
-    tip: "OGLAS_UKLONJEN",
-    kljuc: "notifikacije.oglas_uklonjen",
-    parametri: { oglas: oglas.title, razlog },
-    naslov: "Oglas uklonjen",
-    tekst: tekstObavestenjaOglas(oglas.title, razlog),
-    link: "/profil/oglasi",
-  });
+  await posaljiNotifikaciju(
+    oglas.sellerId,
+    "OGLAS_UKLONJEN",
+    "Oglas uklonjen",
+    tekstObavestenjaOglas(oglas.title, razlog),
+    "/profil/oglasi",
+  );
 
   // Ponovljeno kršenje je osnov za suspenziju/isključenje (Uslovi čl. 27, 28) —
   // javi kad se nakupi, ali ne sankcioniši automatski.

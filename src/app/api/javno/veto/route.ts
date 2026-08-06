@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { dohvatiVetoStatus } from "@/lib/protokol/fondacija";
 
 /**
@@ -11,6 +10,6 @@ export async function GET() {
     const status = await dohvatiVetoStatus();
     return NextResponse.json(status);
   } catch (e) {
-    return await greska(String(e), 500);
+    return NextResponse.json({ error: String(e) }, { status: 500 });
   }
 }

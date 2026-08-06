@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { kategorijaKljuc } from "@/lib/kategorije";
 
@@ -31,7 +30,6 @@ const statusBoja: Record<string, string> = {
 };
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
-  const locale = useLocale();
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
   const router = useRouter();
@@ -121,7 +119,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                   {l.soldAt && (
                     <>
                       <span className="text-xs text-kolo-border">·</span>
-                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.soldAt).toLocaleDateString(intlTag(locale))}</span>
+                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.soldAt).toLocaleDateString("sr-RS")}</span>
                     </>
                   )}
                 </div>

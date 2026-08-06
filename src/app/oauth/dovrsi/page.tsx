@@ -3,10 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
 
 export default function OAuthDovrsiPage() {
-  const t = useTranslations("oauthDovrsi");
   const { data: session, update } = useSession();
   const router = useRouter();
   const [pseudonim, setPseudonim] = useState("");
@@ -50,9 +48,9 @@ export default function OAuthDovrsiPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    if (pseudonim.trim().length < 3) { setError(t("greska_pseudonim_kratak")); return; }
-    if (pseudonimStatus === "zauzet") { setError(t("greska_pseudonim_zauzet")); return; }
-    if (!uslovi || !privatnost) { setError(t("greska_uslovi")); return; }
+    if (pseudonim.trim().length < 3) { setError("Pseudonim mora imati najmanje 3 karaktera."); return; }
+    if (pseudonimStatus === "zauzet") { setError("Ovaj pseudonim je zauzet."); return; }
+    if (!uslovi || !privatnost) { setError("Morate prihvatiti uslove i politiku privatnosti."); return; }
 
     setLoading(true);
     const res = await fetch("/api/oauth/dovrsi", {
@@ -63,7 +61,7 @@ export default function OAuthDovrsiPage() {
     const data = await res.json();
     setLoading(false);
 
-    if (!res.ok) { setError(data.error ?? t("greska_opsta")); return; }
+    if (!res.ok) { setError(data.error ?? "Greška. Pokušajte ponovo."); return; }
 
     // Osveži sesiju: prosledi novi userId da JWT preuzme tek kreiran nalog
     // (do ovog koraka korisnik nije imao red u bazi) i oauthPending → false.
@@ -107,7 +105,7 @@ export default function OAuthDovrsiPage() {
                   : pseudonimStatus === "slobodan" ? "border-kolo-green-500 focus:border-kolo-green-700"
                   : "border-kolo-border focus:border-kolo-green-700"
                 }`}
-                placeholder={t("ph_pseudonim")}
+                placeholder="VasePseudonim"
                 suppressHydrationWarning
               />
               {pseudonimStatus === "checking" && <span className="absolute right-3 top-3.5 text-xs text-kolo-muted">...</span>}
@@ -146,7 +144,7 @@ export default function OAuthDovrsiPage() {
             className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-500 transition-colors disabled:opacity-50"
             suppressHydrationWarning
           >
-            {loading ? t("cuvanje") : t("zavrsi")}
+            {loading ? "Čuvanje..." : "Završi registraciju"}
           </button>
         </form>
       </div>

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -8,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 // Koristi se za crveni badge na ikonici "Poruke" u zaglavlju.
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Unauthorized", 401);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const meId = session.user.id;
 
   const neprocitano = await prisma.poruka.count({

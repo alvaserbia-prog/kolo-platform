@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -32,9 +31,9 @@ export async function GET() {
 // POST /api/krugovi — zahtev za osnivanje (samo verifikovani)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!session.user.verified)
-    return await greska("Samo verifikovani korisnici mogu podneti zahtev.", 403);
+    return NextResponse.json({ error: "Samo verifikovani korisnici mogu podneti zahtev." }, { status: 403 });
 
   const body = await req.json();
   const name = (body.name ?? "").trim();
@@ -43,14 +42,14 @@ export async function POST(req: NextRequest) {
   const osnivaci: string[] = body.osnivaci ?? [];
 
   if (!name || name.length < 3)
-    return await greska("Naziv mora imati najmanje 3 karaktera.", 400);
+    return NextResponse.json({ error: "Naziv mora imati najmanje 3 karaktera." }, { status: 400 });
   if (osnivaci.length < 4)
-    return await greska("Potrebno je navesti pseudonime najmanje 4 osnivača (pored vas, ukupno 5).", 400);
+    return NextResponse.json({ error: "Potrebno je navesti pseudonime najmanje 4 osnivača (pored vas, ukupno 5)." }, { status: 400 });
 
   // Proveri da naziv nije zauzet
   const postojeca = await prisma.krug.findUnique({ where: { name } });
   if (postojeca)
-    return await greska("Krug sa ovim nazivom već postoji.", 400);
+    return NextResponse.json({ error: "Krug sa ovim nazivom već postoji." }, { status: 400 });
 
   // Pronađi korisnike po pseudonimu (forma šalje pseudonime)
   const osnivaciKorisnici = await prisma.user.findMany({
@@ -59,15 +58,15 @@ export async function POST(req: NextRequest) {
   });
 
   if (osnivaciKorisnici.length !== osnivaci.length)
-    return await greska("Jedan ili više osnivača nije pronađen.", 400);
+    return NextResponse.json({ error: "Jedan ili više osnivača nije pronađen." }, { status: 400 });
   if (osnivaciKorisnici.some((k) => !k.verified))
-    return await greska("Svi osnivači moraju biti verifikovani.", 400);
+    return NextResponse.json({ error: "Svi osnivači moraju biti verifikovani." }, { status: 400 });
 
   const osnivaciIds = osnivaciKorisnici.map((k) => k.id).filter((id) => id !== session.user.id);
   const sviOsnivaci = [session.user.id, ...osnivaciIds];
 
   if (sviOsnivaci.length < 5)
-    return await greska("Potrebno je 5 različitih osnivača. Ne unosite sopstveni pseudonim u listu.", 400);
+    return NextResponse.json({ error: "Potrebno je 5 različitih osnivača. Ne unosite sopstveni pseudonim u listu." }, { status: 400 });
 
   // Proveri verifikaciju inicijatora (već provereno gore, ali proveri i njega)
   const inicijator = await prisma.user.findUnique({
@@ -75,7 +74,7 @@ export async function POST(req: NextRequest) {
     select: { verified: true },
   });
   if (!inicijator?.verified)
-    return await greska("Inicijator mora biti verifikovan.", 403);
+    return NextResponse.json({ error: "Inicijator mora biti verifikovan." }, { status: 403 });
 
   await prisma.krugOsnivanjeZahtev.create({
     data: {

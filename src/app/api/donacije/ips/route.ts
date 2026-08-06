@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -18,7 +17,7 @@ import {
  */
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const cfg = dohvatiIpsConfig();
   if (!cfg || !ipsAktivno()) {
@@ -42,9 +41,9 @@ export async function GET() {
  */
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!session.user.verified)
-    return await greska("Samo verifikovani korisnik može da donira.", 403);
+    return NextResponse.json({ error: "Samo verifikovani korisnik može da donira." }, { status: 403 });
 
   const cfg = dohvatiIpsConfig();
   if (!cfg || !ipsAktivno()) {
@@ -58,7 +57,7 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return await greska("Neispravan zahtev.", 400);
+    return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
   }
 
   const iznosRSD = Math.round(Number(body.iznosRSD));
@@ -86,7 +85,7 @@ export async function POST(req: NextRequest) {
     },
   });
   if (!user?.wallet) {
-    return await greska("Korisnik nema novčanik.", 400);
+    return NextResponse.json({ error: "Korisnik nema novčanik." }, { status: 400 });
   }
 
   // Javna donacija zahteva uneto ime i prezime (čl. 5a) — provera PRE generisanja.

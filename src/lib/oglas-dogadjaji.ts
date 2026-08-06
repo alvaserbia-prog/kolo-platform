@@ -8,8 +8,8 @@
 // Oglašivač se nikad ne obaveštava o sopstvenom oglasu.
 
 import { prisma } from "./prisma";
-import { obavesti } from "./notifikacije";
-import { kategorijaNaziv, kategorijaKljuc } from "./kategorije";
+import { posaljiNotifikaciju } from "./notifikacije";
+import { kategorijaNaziv } from "./kategorije";
 
 // Gornja granica primalaca u jednom pozivu — objava oglasa ne sme da visi dok
 // se šalju hiljade obaveštenja. Iznad ove granice višak se preskače i beleži u
@@ -59,20 +59,7 @@ export async function emitujNoviOglas(dogadjaj: NoviOglasDogadjaj): Promise<void
   for (let i = 0; i < primaoci.length; i += PORCIJA) {
     await Promise.all(
       primaoci.slice(i, i + PORCIJA).map((p) =>
-        obavesti(p.userId, {
-          tip: "NOV_OGLAS",
-          kljuc: dogadjaj.tip === "POTRAZNJA"
-            ? "notifikacije.nov_oglas_potraznja"
-            : "notifikacije.nov_oglas_ponuda",
-          // "@" = ugnežđen ključ: naziv kategorije se prevodi na jeziku primaoca,
-          // inače bi Rus dobio srpski naziv kategorije usred ruske rečenice.
-          parametri: {
-            naslov: dogadjaj.naslov,
-            kategorija: `@pijaca.kategorija_${kategorijaKljuc(dogadjaj.category)}`,
-          },
-          naslov,
-          tekst,
-          link,
+        posaljiNotifikaciju(p.userId, "NOV_OGLAS", naslov, tekst, link, {
           emailDugme: "Pogledaj oglas",
         }).catch((e) => {
           // Jedan neuspeo primalac ne sme da zaustavi ostale.

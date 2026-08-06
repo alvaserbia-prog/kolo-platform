@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -13,17 +12,17 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
   const { razlog } = await req.json();
 
   if (!razlog?.trim())
-    return await greska("Razlog je obavezan.", 400);
+    return NextResponse.json({ error: "Razlog je obavezan." }, { status: 400 });
 
   const zahtev = await prisma.krugOsnivanjeZahtev.findUnique({ where: { id } });
   if (!zahtev || zahtev.status !== "PENDING")
-    return await greska("Zahtev nije pronađen ili nije na čekanju.", 400);
+    return NextResponse.json({ error: "Zahtev nije pronađen ili nije na čekanju." }, { status: 400 });
 
   await prisma.krugOsnivanjeZahtev.update({
     where: { id },
@@ -34,14 +33,13 @@ export async function POST(
 
   const osnivac = (zahtev.osnivaci as string[])[0];
   if (osnivac) {
-    await obavesti(osnivac, {
-      tip: "info",
-      kljuc: "notifikacije.krug_odbijen",
-      parametri: { krug: zahtev.name, razlog: razlog.trim() },
-      naslov: "Osnivanje kruga odbijeno",
-      tekst: `Tvoj zahtev za osnivanje kruga „${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
-      link: "/krug",
-    });
+    await posaljiNotifikaciju(
+      osnivac,
+      "info",
+      `Osnivanje kruga odbijeno`,
+      `Tvoj zahtev za osnivanje kruga „${zahtev.name}" je odbijen. Razlog: ${razlog.trim()}`,
+      "/krug"
+    );
   }
 
   return NextResponse.json({ ok: true });

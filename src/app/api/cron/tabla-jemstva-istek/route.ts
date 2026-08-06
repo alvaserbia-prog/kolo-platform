@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 
 /**
@@ -20,7 +19,7 @@ import { prisma } from "@/lib/prisma";
 export async function POST(req: NextRequest) {
   const secret = req.headers.get("x-cron-secret");
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
-    return await greska("Neautorizovano.", 401);
+    return NextResponse.json({ error: "Neautorizovano." }, { status: 401 });
   }
 
   const istekli = await prisma.zahtevZaJemstvo.updateMany({

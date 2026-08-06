@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -8,22 +7,22 @@ import { porukaZauzeca, promeniPseudonim, proveriZauzece } from "@/lib/pseudonim
 
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const body = await req.json();
   if (!validanPseudonim(body?.pseudonim)) {
-    return await greska(PSEUDONIM_PRAVILO, 400);
+    return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
   }
   const pseudonim = (body.pseudonim as string).trim();
 
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
-  if (!user) return await greska("Korisnik nije pronađen.", 404);
+  if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
 
   // Provera 30-dnevnog ograničenja
   if (user.pseudonimChangedAt) {
     const elapsed = Date.now() - user.pseudonimChangedAt.getTime();
     if (elapsed < 30 * 24 * 60 * 60 * 1000) {
-      return await greska("Pseudonim možete menjati jednom u 30 dana.", 400);
+      return NextResponse.json({ error: "Pseudonim možete menjati jednom u 30 dana." }, { status: 400 });
     }
   }
 
@@ -31,7 +30,7 @@ export async function PATCH(req: NextRequest) {
   // linkovi i dalje vode na njega, pa se ne sme preuzeti).
   const zauzece = await proveriZauzece(pseudonim, user.id);
   if (zauzece) {
-    return await greska(porukaZauzeca(zauzece), 409);
+    return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
   }
 
   await prisma.$transaction(async (tx) => {

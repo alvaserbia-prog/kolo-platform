@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { intlTag } from "@/lib/format";
-import { useLocale } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Pseudonim from "@/components/Pseudonim";
@@ -21,7 +19,6 @@ export default function VerifikacijaCard({
   verifikovani,
   datum,
 }: Props) {
-  const locale = useLocale();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +41,7 @@ export default function VerifikacijaCard({
     }
   }
 
-  const datumLepo = new Date(datum).toLocaleString(intlTag(locale), {
+  const datumLepo = new Date(datum).toLocaleString("sr-RS", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",

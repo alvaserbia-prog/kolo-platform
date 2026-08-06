@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -15,9 +14,12 @@ import { logAdminAkcija } from "@/lib/audit";
 // a svako otvaranje se beleži u evidenciji pristupa.
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!session.user.verified)
-    return await greska("Slanje poruke povodom zahteva za jemstvo dostupno je samo verifikovanim korisnicima.", 403);
+    return NextResponse.json(
+      { error: "Slanje poruke povodom zahteva za jemstvo dostupno je samo verifikovanim korisnicima." },
+      { status: 403 }
+    );
 
   const { id } = await params;
   const zahtev = await prisma.zahtevZaJemstvo.findUnique({
@@ -29,13 +31,13 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
       user: { select: { pseudonim: true } },
     },
   });
-  if (!zahtev) return await greska("Zahtev nije pronađen.", 404);
+  if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
   if (zahtev.status !== "AKTIVAN" || zahtev.expiresAt.getTime() < Date.now())
-    return await greska("Zahtev više nije aktivan.", 410);
+    return NextResponse.json({ error: "Zahtev više nije aktivan." }, { status: 410 });
 
   const meId = session.user.id;
   if (zahtev.userId === meId)
-    return await greska("Ne možete poslati poruku samom sebi.", 400);
+    return NextResponse.json({ error: "Ne možete poslati poruku samom sebi." }, { status: 400 });
 
   // Uvek sortiraj IDs da bi @@unique radio (isti obrazac kao /api/poruke).
   const [u1, u2] = [meId, zahtev.userId].sort();

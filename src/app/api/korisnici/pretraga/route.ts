@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,11 +6,11 @@ import { rateLimit } from "@/lib/rate-limit";
 
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   // V2: pretraga otkriva pseudonime — dostupna samo korisnicima sa punim pristupom
   // (verifikovan, indeks ≥ 10%). Neverifikovani ne smeju da vide pseudonime drugih.
   if (!session.user.verified) {
-    return await greska("Verifikacija potrebna.", 403);
+    return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
   }
   // Anti-scraping: 30 pretraga u 10s po korisniku.
   if (!rateLimit(`pretraga:${session.user.id}`, 30, 10_000).ok) {

@@ -207,7 +207,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
         item.walletId,
         emitAmount,
         TransactionType.EMISIJA_PROGRAM,
-        `Program ${labelPrograma(item.type)}`, { kljuc: "transakcije.program", parametri: { program: labelPrograma(item.type) } }
+        `Program ${labelPrograma(item.type)}`
       );
     }
 

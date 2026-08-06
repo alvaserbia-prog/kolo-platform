@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 
 // GET /api/blog/[id] — javni prikaz pojedinačne objave
@@ -15,7 +14,7 @@ export async function GET(
   });
 
   if (!objava) {
-    return await greska("Objava nije pronađena.", 404);
+    return NextResponse.json({ error: "Objava nije pronađena." }, { status: 404 });
   }
 
   return NextResponse.json({

@@ -1,16 +1,14 @@
 import { getServerSession } from "next-auth";
-import { intlTag } from "@/lib/format";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import { getTranslations, getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import PokroviteljstvoPrijava from "./PokroviteljstvoPrijava";
 
 export const metadata = { title: "Postani pokrovitelj — KOLO" };
 
 export default async function PostaniPokroviteljPage() {
-  const locale = await getLocale();
   const session = await getServerSession(authOptions);
   if (!session) redirect("/prijava");
   const t = await getTranslations("postaniPokrovitelj");
@@ -118,7 +116,7 @@ export default async function PostaniPokroviteljPage() {
                     {t("nivo_oznaka", { n: p.trenutniNivo })}
                   </div>
                   <div className="text-xs text-kolo-muted mt-0.5">
-                    {Number(p.rsdKumulativ).toLocaleString(intlTag(locale))} RSD
+                    {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
                   </div>
                 </div>
               </div>
@@ -152,7 +150,7 @@ export default async function PostaniPokroviteljPage() {
                   </div>
                   <div className="text-sm text-kolo-muted mt-1">{t("nivo_oznaka", { n: p.trenutniNivo })}</div>
                   <div className="text-xs text-kolo-muted">
-                    {Number(p.rsdKumulativ).toLocaleString(intlTag(locale))} RSD
+                    {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
                   </div>
                 </div>
               </div>

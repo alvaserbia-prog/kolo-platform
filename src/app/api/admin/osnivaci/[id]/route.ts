@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -30,17 +29,17 @@ async function proveriPristup() {
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const auth = await proveriPristup();
-  if (!auth.ok) return await greska(auth.error, auth.status);
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const { id } = await params;
   const body = await req.json();
   const { udeoBrojilac, udeoImenilac, redniBroj, napomena } = body;
 
   if (typeof udeoBrojilac !== "number" || typeof udeoImenilac !== "number" || typeof redniBroj !== "number") {
-    return await greska("Nedostaju polja.", 400);
+    return NextResponse.json({ error: "Nedostaju polja." }, { status: 400 });
   }
   if (udeoBrojilac <= 0 || udeoImenilac <= 0) {
-    return await greska("Udeli moraju biti pozitivni.", 400);
+    return NextResponse.json({ error: "Udeli moraju biti pozitivni." }, { status: 400 });
   }
 
   try {
@@ -58,10 +57,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ osnivac });
   } catch (e) {
     if (e && typeof e === "object" && "code" in e && e.code === "P2002") {
-      return await greska("Redni broj je već zauzet drugim osnivačem.", 409);
+      return NextResponse.json({ error: "Redni broj je već zauzet drugim osnivačem." }, { status: 409 });
     }
     if (e && typeof e === "object" && "code" in e && e.code === "P2025") {
-      return await greska("Osnivač ne postoji.", 404);
+      return NextResponse.json({ error: "Osnivač ne postoji." }, { status: 404 });
     }
     throw e;
   }
@@ -69,7 +68,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const auth = await proveriPristup();
-  if (!auth.ok) return await greska(auth.error, auth.status);
+  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const { id } = await params;
   const osnivac = await prisma.osnivac.delete({ where: { id } });

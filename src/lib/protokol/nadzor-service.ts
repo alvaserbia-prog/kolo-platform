@@ -120,7 +120,7 @@ export async function obaviNadzor(input: {
         nadzornikWallet.id,
         POEN_NADZORNIK,
         TransactionType.EMISIJA_NADZOR,
-        `Nadzor verifikacije ${verifikatorPseudonim} → ${verifikovaniPseudonim}`, { kljuc: "transakcije.nadzor", parametri: { verifikator: verifikatorPseudonim, verifikovani: verifikovaniPseudonim } }
+        `Nadzor verifikacije ${verifikatorPseudonim} → ${verifikovaniPseudonim}`
       );
     } catch (e) {
       console.error("[nadzor-service] POEN emisija pukla — incident", {

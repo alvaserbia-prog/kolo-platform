@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -10,7 +9,7 @@ import { jeAdmin } from "@/lib/dozvole";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
   const body = await req.json();
@@ -19,23 +18,23 @@ export async function POST(req: NextRequest) {
   const publishedAtRaw = body.publishedAt;
 
   if (!title) {
-    return await greska("Naslov je obavezan.", 400);
+    return NextResponse.json({ error: "Naslov je obavezan." }, { status: 400 });
   }
   if (title.length > 200) {
-    return await greska("Naslov najviše 200 znakova.", 400);
+    return NextResponse.json({ error: "Naslov najviše 200 znakova." }, { status: 400 });
   }
   if (!content) {
-    return await greska("Sadržaj je obavezan.", 400);
+    return NextResponse.json({ error: "Sadržaj je obavezan." }, { status: 400 });
   }
   if (content.length > 20000) {
-    return await greska("Sadržaj najviše 20.000 znakova.", 400);
+    return NextResponse.json({ error: "Sadržaj najviše 20.000 znakova." }, { status: 400 });
   }
 
   let publishedAt: Date | undefined;
   if (publishedAtRaw) {
     const d = new Date(publishedAtRaw);
     if (isNaN(d.getTime())) {
-      return await greska("Neispravan datum objave.", 400);
+      return NextResponse.json({ error: "Neispravan datum objave." }, { status: 400 });
     }
     publishedAt = d;
   }
@@ -58,7 +57,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
   const objave = await prisma.blogPost.findMany({

@@ -118,7 +118,7 @@ export async function evidentirajDoprinos(params: {
       vlasnikWalletId,
       bonusiZbir,
       "EMISIJA_POKROVITELJ",
-      `Bonus za pokroviteljstvo iznos ${bonusiZbir.toLocaleString("sr-RS")}`, { kljuc: "transakcije.pokroviteljstvo", parametri: { iznos: bonusiZbir } }
+      `Bonus za pokroviteljstvo iznos ${bonusiZbir.toLocaleString("sr-RS")}`
     );
 
     // Poveži sve bonus zapise sa istom transakcijom

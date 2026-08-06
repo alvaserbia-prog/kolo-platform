@@ -1,31 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
 import { TransactionType } from "@/generated/prisma/client";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   let body: { pseudonim?: string; amount?: unknown; description?: string };
   try {
     body = await req.json();
   } catch {
-    return await greska("Neispravan zahtev.", 400);
+    return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
   }
   const { pseudonim, amount, description } = body;
 
   // Validacija ulaza
   if (!pseudonim || !amount) {
-    return await greska("Primalac i iznos su obavezni.", 400);
+    return NextResponse.json({ error: "Primalac i iznos su obavezni." }, { status: 400 });
   }
   const iznos = Math.floor(Number(amount));
   if (!Number.isInteger(iznos) || iznos <= 0) {
-    return await greska("Iznos mora biti pozitivan ceo broj.", 400);
+    return NextResponse.json({ error: "Iznos mora biti pozitivan ceo broj." }, { status: 400 });
   }
 
   // Pronađi primaoca
@@ -36,13 +35,13 @@ export async function POST(req: NextRequest) {
     include: { wallet: true },
   });
   if (!primalac) {
-    return await greska("Korisnik sa tim pseudonimom ne postoji.", 404);
+    return NextResponse.json({ error: "Korisnik sa tim pseudonimom ne postoji." }, { status: 404 });
   }
   if (primalac.id === session.user.id) {
-    return await greska("Ne možete upisati POEN samom sebi.", 400);
+    return NextResponse.json({ error: "Ne možete upisati POEN samom sebi." }, { status: 400 });
   }
   if (!primalac.wallet) {
-    return await greska("Primalac nema novčanik.", 500);
+    return NextResponse.json({ error: "Primalac nema novčanik." }, { status: 500 });
   }
 
   // Pronađi pošiljaoca
@@ -51,10 +50,10 @@ export async function POST(req: NextRequest) {
     include: { wallet: true },
   });
   if (!posiljac?.wallet) {
-    return await greska("Nemate novčanik.", 500);
+    return NextResponse.json({ error: "Nemate novčanik." }, { status: 500 });
   }
   if (posiljac.wallet.balance < iznos) {
-    return await greska(`Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.`, 400);
+    return NextResponse.json({ error: `Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.` }, { status: 400 });
   }
 
   // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
@@ -86,23 +85,18 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
-      return await greska("Nemate dovoljno POEN-a.", 400);
+      return NextResponse.json({ error: "Nemate dovoljno POEN-a." }, { status: 400 });
     }
     throw e;
   }
 
-  // Iznos se NE formatira ovde: broj ide kao parametar, a razdvajač hiljada se
-  // bira pri prikazu, po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000).
-  await obavesti(primalac.id, {
-    tip: "transfer_primljen",
-    kljuc: description
-      ? "notifikacije.transfer_primljen_poruka"
-      : "notifikacije.transfer_primljen",
-    parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
-    naslov: `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    tekst: `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
-    link: "/novcanik",
-  });
+  await posaljiNotifikaciju(
+    primalac.id,
+    "transfer_primljen",
+    `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
+    `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
+    "/novcanik"
+  );
 
   return NextResponse.json({ ok: true });
 }

@@ -9,7 +9,6 @@
  * Oznaka nije javna: vidljiva je samo verifikatoru i UO Fondacije (admin).
  */
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import {
@@ -20,20 +19,20 @@ import {
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return await greska("Nisi prijavljen.", 401);
+    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
   }
 
   let body: { verifikacijaId?: string; oznaka?: string };
   try {
     body = await req.json();
   } catch {
-    return await greska("Nevažeći JSON.", 400);
+    return NextResponse.json({ error: "Nevažeći JSON." }, { status: 400 });
   }
 
   const verifikacijaId = typeof body.verifikacijaId === "string" ? body.verifikacijaId : "";
   const oznaka = typeof body.oznaka === "string" ? body.oznaka : "";
   if (!verifikacijaId) {
-    return await greska("verifikacijaId je obavezan.", 400);
+    return NextResponse.json({ error: "verifikacijaId je obavezan." }, { status: 400 });
   }
 
   try {
@@ -45,9 +44,9 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ ok: true, oznaka: rez.oznaka });
   } catch (e) {
     if (e instanceof VerifikacijaGreska) {
-      return await greska(e.message, e.statusCode);
+      return NextResponse.json({ error: e.message }, { status: e.statusCode });
     }
     console.error("[PATCH /api/verifikacija/oznaka]", e);
-    return await greska("Greška servera", 500);
+    return NextResponse.json({ error: "Greška servera" }, { status: 500 });
   }
 }

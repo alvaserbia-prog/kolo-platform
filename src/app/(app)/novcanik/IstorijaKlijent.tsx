@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useMemo, memo } from "react";
-import { intlTag } from "@/lib/format";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
 
@@ -106,7 +105,6 @@ export default function IstorijaKlijent({ transakcije, pseudonim }: { transakcij
 // bez potrebe. `t` je transakcija (kao u originalu); prevodi se ovde ne koriste.
 
 const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcija; pseudonim: string; jePoslednji: boolean }) {
-  const locale = useLocale();
   return (
     <div
       className={`px-4 py-2.5 ${!jePoslednji ? "border-b border-kolo-border" : ""}`}
@@ -116,13 +114,13 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
         {/* Datum — timeZone zaključan da SSR (UTC) i klijent (lokalno) daju isti
             string; inače React hydration mismatch (#418) → suvišno preiscrtavanje. */}
         <p className="text-sm text-kolo-muted leading-tight">
-          {new Date(t.createdAt).toLocaleDateString(intlTag(locale), {
+          {new Date(t.createdAt).toLocaleDateString("sr-RS", {
             day: "2-digit", month: "2-digit", year: "numeric", timeZone: "Europe/Belgrade",
           })}
         </p>
         {/* Vreme */}
         <p className="text-sm text-kolo-muted leading-tight">
-          {new Date(t.createdAt).toLocaleTimeString(intlTag(locale), {
+          {new Date(t.createdAt).toLocaleTimeString("sr-RS", {
             hour: "2-digit", minute: "2-digit", timeZone: "Europe/Belgrade",
           })}
         </p>
@@ -160,7 +158,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
         <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
         {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
         <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-          {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
+          {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
         </span>
       </div>
 
@@ -194,14 +192,14 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
               )}
             </div>
             <p className="text-xs text-kolo-muted mt-0.5">
-              {new Date(t.createdAt).toLocaleString(intlTag(locale), {
+              {new Date(t.createdAt).toLocaleString("sr-RS", {
                 day: "2-digit", month: "2-digit", year: "numeric",
                 hour: "2-digit", minute: "2-digit", timeZone: "Europe/Belgrade",
               })}
             </p>
           </div>
           <span className={`text-sm font-bold text-right shrink-0 ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
-            {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
+            {t.primio ? "+" : "−"}{t.amount.toLocaleString("sr-RS")}
           </span>
         </div>
         {t.description && (

@@ -12,8 +12,6 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { intlTag } from "@/lib/format";
-import { useLocale } from "next-intl";
 import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
 
@@ -53,7 +51,6 @@ const PRIKAZI: [Prikaz, string][] = [
 ];
 
 export default function PijacaTab() {
-  const locale = useLocale();
   const [prikaz, setPrikaz] = useState<Prikaz>("prijavljeni");
   const [q, setQ] = useState("");
   const [oglasi, setOglasi] = useState<Oglas[]>([]);
@@ -206,7 +203,7 @@ export default function PijacaTab() {
                   </Link>
                   <div className="text-xs text-kolo-muted mt-0.5">
                     <Pseudonim>{o.sellerPseudonim}</Pseudonim>
-                    {o.location ? ` · ${o.location}` : ""} · {new Date(o.createdAt).toLocaleDateString(intlTag(locale))}
+                    {o.location ? ` · ${o.location}` : ""} · {new Date(o.createdAt).toLocaleDateString("sr-RS")}
                   </div>
                 </div>
                 {o.status === "UKLONJEN" ? (
@@ -240,7 +237,7 @@ export default function PijacaTab() {
                         {p.opis && <div className="text-kolo-muted mt-0.5">{p.opis}</div>}
                         <div className="text-kolo-muted mt-0.5">
                           Prijavio: <Pseudonim>{p.prijaviocPseudonim}</Pseudonim> ·{" "}
-                          {new Date(p.createdAt).toLocaleDateString(intlTag(locale))}
+                          {new Date(p.createdAt).toLocaleDateString("sr-RS")}
                           {p.status !== "OTVORENA" && ` · ${p.status === "RESENA" ? "rešena" : "odbačena"}`}
                         </div>
                       </div>

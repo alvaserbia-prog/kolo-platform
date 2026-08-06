@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect, useMemo, memo } from "react";
-import { intlTag } from "@/lib/format";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
@@ -125,7 +124,6 @@ export default function SistemKlijent({
   clanovi,
   pocetnaSekcija,
 }: Props) {
-  const locale = useLocale();
   const [sekcija, postaviSekciju] = useState<Sekcija>(pocetnaSekcija);
   const t = useTranslations("sistem");
 
@@ -242,11 +240,11 @@ export default function SistemKlijent({
             />
           </p>
           <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "pregled" ? "text-white" : "text-kolo-text"}`}>
-            {opticaj.toLocaleString(intlTag(locale))}
+            {opticaj.toLocaleString("sr-RS")}
           </p>
           {danasEmitovano > 0 && (
             <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 ${sekcija === "pregled" ? "bg-white/20 text-white/80" : "bg-kolo-green-100 text-kolo-green-700"}`}>
-              +{danasEmitovano.toLocaleString(intlTag(locale))} {t("danas")}
+              +{danasEmitovano.toLocaleString("sr-RS")} {t("danas")}
             </span>
           )}
           <div className={`flex items-center gap-1.5 mt-1 text-xs ${sekcija === "pregled" ? "text-white/60" : "text-kolo-muted"}`}>
@@ -320,7 +318,7 @@ export default function SistemKlijent({
             />
           </p>
           <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${sekcija === "fondacija" ? "text-white" : "text-kolo-text"}`}>
-            {racunFondacije.toLocaleString(intlTag(locale))}
+            {racunFondacije.toLocaleString("sr-RS")}
           </p>
           <p className={`text-xs mt-1 ${sekcija === "fondacija" ? "text-white/60" : "text-kolo-muted"}`}>{t("kartica_racun_fondacije_podnaslov")}</p>
         </button>
@@ -369,7 +367,6 @@ export default function SistemKlijent({
 
 // ── Račun Fondacije — transakcije sa bankovnog računa (priliv/odliv, RSD) ──────
 function FondacijaSekcija() {
-  const locale = useLocale();
   const t = useTranslations("sistem");
   const [stavke, setStavke] = useState<FondTx[] | null>(null);
 
@@ -398,7 +395,7 @@ function FondacijaSekcija() {
   }
 
   const datum = (iso: string) =>
-    new Date(iso).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "2-digit", year: "2-digit" });
+    new Date(iso).toLocaleDateString("sr-RS", { day: "2-digit", month: "2-digit", year: "2-digit" });
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -422,7 +419,7 @@ function FondacijaSekcija() {
               <p className="text-xs text-kolo-muted">{s.kategorija}</p>
             </div>
             <span className={`text-right font-semibold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
-              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString(intlTag(locale))}
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
             </span>
             <span className="text-right text-kolo-muted">{datum(s.datum)}</span>
           </div>
@@ -439,7 +436,7 @@ function FondacijaSekcija() {
               <p className="text-xs text-kolo-muted">{s.kategorija} · {datum(s.datum)}</p>
             </div>
             <span className={`shrink-0 text-sm font-bold ${s.smer === "PRILIV" ? "text-kolo-green-700" : "text-kolo-danger"}`}>
-              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString(intlTag(locale))}
+              {s.smer === "PRILIV" ? "+" : "−"}{s.iznosRSD.toLocaleString("sr-RS")}
             </span>
           </div>
         </div>
@@ -548,7 +545,6 @@ function Kartica({
   danas: number;
   podnaslov: string;
 }) {
-  const locale = useLocale();
   return (
     <button
       onClick={onClick}
@@ -562,11 +558,11 @@ function Kartica({
         {label}
       </p>
       <p className={`text-2xl md:text-4xl font-bold tabular-nums leading-tight ${aktivan ? "text-white" : "text-kolo-text"}`}>
-        {broj.toLocaleString(intlTag(locale))}
+        {broj.toLocaleString("sr-RS")}
       </p>
       {danas > 0 && (
         <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mt-1 ${aktivan ? "bg-white/20 text-white/80" : "bg-kolo-green-100 text-kolo-green-700"}`}>
-          +{danas.toLocaleString(intlTag(locale))} danas
+          +{danas.toLocaleString("sr-RS")} danas
         </span>
       )}
       <p className={`text-xs mt-1 ${aktivan ? "text-white/60" : "text-kolo-muted"}`}>
@@ -593,7 +589,6 @@ function PregledSekcija({
   emisijeChart: EmisijaChart[];
   transakcije: Transakcija[];
 }) {
-  const locale = useLocale();
   const t = useTranslations("sistem");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
   const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
@@ -614,7 +609,7 @@ function PregledSekcija({
             />
           </p>
           <p className="text-xs text-kolo-muted">
-            {t("rast_opticaja_cilj", { cilj: CILJ_OPTICAJ.toLocaleString(intlTag(locale)) })}
+            {t("rast_opticaja_cilj", { cilj: CILJ_OPTICAJ.toLocaleString("sr-RS") })}
           </p>
         </div>
         <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
@@ -627,7 +622,7 @@ function PregledSekcija({
           <span>
             {t("rast_opticaja_trenutno")}{" "}
             <strong className="text-kolo-text">
-              {opticaj.toLocaleString(intlTag(locale))} POEN
+              {opticaj.toLocaleString("sr-RS")} POEN
             </strong>
           </span>
           <span className="font-medium text-kolo-green-700">
@@ -661,7 +656,7 @@ function PregledSekcija({
                 {/* Desktop grid */}
                 <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
                   <p className="text-sm text-kolo-muted leading-tight">
-                    {new Date(tx.createdAt).toLocaleString(intlTag(locale), {
+                    {new Date(tx.createdAt).toLocaleString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "numeric",
                       hour: "2-digit", minute: "2-digit",
                     })}
@@ -686,7 +681,7 @@ function PregledSekcija({
                     )}
                   </div>
                   <span className="text-base font-bold text-kolo-text text-right">
-                    {tx.amount.toLocaleString(intlTag(locale))}
+                    {tx.amount.toLocaleString("sr-RS")}
                   </span>
                 </div>
                 {/* Mobilna kartica */}
@@ -705,10 +700,10 @@ function PregledSekcija({
                         <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                       )}
                     </div>
-                    <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
+                    <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
                   </div>
                   <p className="text-xs text-kolo-muted">
-                    {new Date(tx.createdAt).toLocaleString(intlTag(locale), { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                    {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                   </p>
                 </div>
                 {tx.description && (
@@ -728,7 +723,7 @@ function PregledSekcija({
               {t("emisija_14_dana")}
             </p>
             <p className="text-xs text-kolo-muted">
-              {t("emisija_limit_danas", { limit: danasLimit.toLocaleString(intlTag(locale)) })}
+              {t("emisija_limit_danas", { limit: danasLimit.toLocaleString("sr-RS") })}
             </p>
           </div>
           <div className="flex items-end gap-1.5 h-24">
@@ -744,7 +739,7 @@ function PregledSekcija({
                     style={{ height: `${Math.max(pct, 4)}%` }}
                   >
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block bg-kolo-text text-white text-xs rounded px-1.5 py-0.5 whitespace-nowrap z-10">
-                      {e.emitted.toLocaleString(intlTag(locale))}
+                      {e.emitted.toLocaleString("sr-RS")}
                     </div>
                   </div>
                   <span className="text-[10px] text-kolo-muted rotate-45 origin-left translate-y-1">
@@ -757,7 +752,7 @@ function PregledSekcija({
           <p className="text-xs text-kolo-muted mt-4">
             {t("emisija_danas")}{" "}
             <strong className="text-kolo-text">
-              {danasEmitovano.toLocaleString(intlTag(locale))} POEN
+              {danasEmitovano.toLocaleString("sr-RS")} POEN
             </strong>
           </p>
         </div>
@@ -790,7 +785,6 @@ const ClanRed = memo(function ClanRed({
   t: ReturnType<typeof useTranslations>;
   jeZadnji: boolean;
 }) {
-  const locale = useLocale();
   return (
     <div className={!jeZadnji ? "border-b border-kolo-border/30" : ""}>
       {/* Desktop red */}
@@ -811,16 +805,16 @@ const ClanRed = memo(function ClanRed({
         </div>
         <span className="text-sm text-kolo-muted truncate">{c.location ?? "—"}</span>
         <span className="text-right text-sm font-semibold text-kolo-text">
-          {c.balance.toLocaleString(intlTag(locale))}
+          {c.balance.toLocaleString("sr-RS")}
         </span>
         <div className="flex items-center justify-end gap-1 text-sm text-kolo-muted">
           <RangTooltip
             rang={c.rangDonacije}
-            label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString(intlTag(locale)) })}`}
+            label={`${t("rang_tooltip", { rang: c.rangDonacije, rsd: c.donacijeRSD.toLocaleString("sr-RS") })}`}
           />
         </div>
         <span className="text-right text-sm text-kolo-muted">
-          {new Date(c.createdAt).toLocaleDateString(intlTag(locale), {
+          {new Date(c.createdAt).toLocaleDateString("sr-RS", {
             day: "2-digit", month: "2-digit", year: "2-digit",
           })}
         </span>
@@ -840,13 +834,13 @@ const ClanRed = memo(function ClanRed({
             )}
           </div>
           <span className="text-sm font-bold text-kolo-text">
-            {c.balance.toLocaleString(intlTag(locale))} POEN
+            {c.balance.toLocaleString("sr-RS")} POEN
           </span>
         </div>
         <div className="flex items-center gap-3 text-xs text-kolo-muted">
           <span>{t("rang_label")} {c.rangDonacije}</span>
           <span className="ml-auto">
-            {new Date(c.createdAt).toLocaleDateString(intlTag(locale), {
+            {new Date(c.createdAt).toLocaleDateString("sr-RS", {
               day: "2-digit", month: "2-digit", year: "2-digit",
             })}
           </span>
@@ -937,10 +931,7 @@ function ClanoviSekcija({
 function normalizujLokaciju(sirovo: string | null): string {
   if (!sirovo) return "";
   const ociscen = sirovo.trim().replace(/\s+/g, " ");
-  // NAMERNO fiksna srpska latinica: ovo je normalizacija za grupisanje
-  // lokacija, ne prikaz. Da zavisi od jezika posmatrača, isti gradovi bi
-  // se različito grupisali Srbinu i Rusu.
-  return ociscen ? ociscen.toLocaleLowerCase("sr-Latn-RS") : "";
+  return ociscen ? ociscen.toLocaleLowerCase("sr-RS") : "";
 }
 
 interface LokAgg {
@@ -964,7 +955,6 @@ function LokacijeSekcija({
   clanovi: Clan[];
   verified: boolean;
 }) {
-  const locale = useLocale();
   const t = useTranslations("sistem");
   const [pretraga, setPretraga] = useState("");
 
@@ -1010,15 +1000,15 @@ function LokacijeSekcija({
       (a, b) =>
         b.verifikovanih - a.verifikovanih ||
         b.ukupno - a.ukupno ||
-        a.naziv.localeCompare(b.naziv, intlTag(locale))
+        a.naziv.localeCompare(b.naziv, "sr-RS")
     );
     return { lokacije: rezultat, bezLokacije: bez };
   }, [clanovi]);
 
   const filtrirane = useMemo(() => {
-    const q = pretraga.trim().toLocaleLowerCase(intlTag(locale));
+    const q = pretraga.trim().toLocaleLowerCase("sr-RS");
     if (!q) return lokacije;
-    return lokacije.filter((l) => l.naziv.toLocaleLowerCase(intlTag(locale)).includes(q));
+    return lokacije.filter((l) => l.naziv.toLocaleLowerCase("sr-RS").includes(q));
   }, [lokacije, pretraga]);
 
   return (
@@ -1090,7 +1080,6 @@ function LokacijaKartica({
   t: ReturnType<typeof useTranslations>;
   verified: boolean;
 }) {
-  const locale = useLocale();
   const [otvoreno, setOtvoreno] = useState(false);
 
   const opcije = [
@@ -1223,7 +1212,7 @@ function LokacijaKartica({
                     <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
                   )}
                   <span className="ml-auto shrink-0 text-sm font-semibold tabular-nums text-kolo-text">
-                    {c.balance.toLocaleString(intlTag(locale))}
+                    {c.balance.toLocaleString("sr-RS")}
                   </span>
                 </div>
               ))}
@@ -1254,7 +1243,6 @@ function TransakcijeSekcija({
   transakcije: Transakcija[];
   verified: boolean;
 }) {
-  const locale = useLocale();
   const t = useTranslations("sistem");
   const [filter, setFilter] = useState<TxFilter>("sve");
 
@@ -1319,7 +1307,7 @@ function TransakcijeSekcija({
               <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
                 {/* Vreme */}
                 <p className="text-sm text-kolo-muted leading-tight">
-                  {new Date(tx.createdAt).toLocaleString(intlTag(locale), {
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "2-digit", year: "numeric",
                     hour: "2-digit", minute: "2-digit",
                   })}
@@ -1356,7 +1344,7 @@ function TransakcijeSekcija({
                 </div>
                 {/* Iznos */}
                 <span className="text-base font-bold text-kolo-text text-right">
-                  {tx.amount.toLocaleString(intlTag(locale))}
+                  {tx.amount.toLocaleString("sr-RS")}
                 </span>
               </div>
               {/* Mobilna kartica */}
@@ -1383,10 +1371,10 @@ function TransakcijeSekcija({
                       <span className="text-kolo-muted">—</span>
                     )}
                   </div>
-                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
+                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
                 </div>
                 <p className="text-xs text-kolo-muted">
-                  {new Date(tx.createdAt).toLocaleString(intlTag(locale), { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                 </p>
               </div>
               {/* Opis transakcije */}
@@ -1412,7 +1400,6 @@ function DonacijeSekcija({
   pokrovitelji: PokroviteljItem[];
   verified: boolean;
 }) {
-  const locale = useLocale();
   const t = useTranslations("sistem");
 
   if (!verified) {
@@ -1458,14 +1445,14 @@ function DonacijeSekcija({
                 <Pseudonim>{d.pseudonim}</Pseudonim>
               </Link>
               <span className="text-right">
-                {d.amountRSD.toLocaleString(intlTag(locale))}
+                {d.amountRSD.toLocaleString("sr-RS")}
               </span>
               <span className="text-right font-semibold text-kolo-text">
-                {d.poenEmitted.toLocaleString(intlTag(locale))}
+                {d.poenEmitted.toLocaleString("sr-RS")}
               </span>
               <span className="text-right text-kolo-muted">{t("nivo_label")} {d.level}</span>
               <span className="text-right text-kolo-muted">
-                {new Date(d.confirmedAt).toLocaleDateString(intlTag(locale), {
+                {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
                   day: "2-digit",
                   month: "2-digit",
                   year: "2-digit",
@@ -1479,14 +1466,14 @@ function DonacijeSekcija({
                   <Pseudonim>{d.pseudonim}</Pseudonim>
                 </Link>
                 <span className="text-sm font-bold text-kolo-text">
-                  {d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                  {d.poenEmitted.toLocaleString("sr-RS")} POEN
                 </span>
               </div>
               <div className="flex items-center gap-3 text-xs text-kolo-muted">
-                <span>{d.amountRSD.toLocaleString(intlTag(locale))} RSD</span>
+                <span>{d.amountRSD.toLocaleString("sr-RS")} RSD</span>
                 <span>{t("nivo_label")} {d.level}</span>
                 <span className="ml-auto">
-                  {new Date(d.confirmedAt).toLocaleDateString(intlTag(locale), {
+                  {new Date(d.confirmedAt).toLocaleDateString("sr-RS", {
                     day: "2-digit",
                     month: "2-digit",
                     year: "2-digit",
@@ -1528,7 +1515,7 @@ function DonacijeSekcija({
                 <div className="shrink-0 text-right">
                   <p className="text-sm font-semibold text-kolo-green-700">{t("nivo_label")} {p.trenutniNivo}</p>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {Number(p.rsdKumulativ).toLocaleString(intlTag(locale))} RSD
+                    {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
                   </p>
                 </div>
               </div>
@@ -1561,7 +1548,6 @@ function IznosSekcija({
   transakcije: Transakcija[];
   verified: boolean;
 }) {
-  const locale = useLocale();
   const t = useTranslations("sistem");
   const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
   const ukupnoTransferi = transferi.reduce((s, tx) => s + tx.amount, 0);
@@ -1572,14 +1558,14 @@ function IznosSekcija({
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
           <p className="text-xs text-kolo-muted mb-1">{t("ukupno_prometa")}</p>
           <p className="text-2xl font-bold text-kolo-text">
-            {ukupanIznosTx.toLocaleString(intlTag(locale))}
+            {ukupanIznosTx.toLocaleString("sr-RS")}
           </p>
           <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-5">
           <p className="text-xs text-kolo-muted mb-1">{t("danas")}</p>
           <p className="text-2xl font-bold text-kolo-text">
-            {danasIznosTx.toLocaleString(intlTag(locale))}
+            {danasIznosTx.toLocaleString("sr-RS")}
           </p>
           <p className="text-xs text-kolo-muted mt-1">{t("poen_izmedju_clanova")}</p>
         </div>
@@ -1591,7 +1577,7 @@ function IznosSekcija({
               {t("poslednjih_transfera", { count: transferi.length })}
             </p>
             <p className="text-xs text-kolo-muted">
-              {t("ukupno_poen", { iznos: ukupnoTransferi.toLocaleString(intlTag(locale)) })}
+              {t("ukupno_poen", { iznos: ukupnoTransferi.toLocaleString("sr-RS") })}
             </p>
           </div>
           <div className="hidden sm:grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 px-5 py-2 border-b border-kolo-border bg-kolo-bg/50 text-xs font-semibold text-kolo-muted">
@@ -1611,7 +1597,7 @@ function IznosSekcija({
               {/* Desktop grid */}
               <div className="hidden sm:grid grid-cols-[7rem_1fr_1rem_1fr_6rem] gap-x-3 items-center text-sm">
                 <span className="text-xs text-kolo-muted">
-                  {new Date(tx.createdAt).toLocaleString(intlTag(locale), {
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
                   })}
                 </span>
@@ -1635,7 +1621,7 @@ function IznosSekcija({
                   <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                 )}
                 <span className="font-semibold text-kolo-text text-right">
-                  {tx.amount.toLocaleString(intlTag(locale))}
+                  {tx.amount.toLocaleString("sr-RS")}
                 </span>
               </div>
               {/* Mobilna kartica */}
@@ -1658,10 +1644,10 @@ function IznosSekcija({
                       <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
                     )}
                   </div>
-                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
+                  <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString("sr-RS")}</span>
                 </div>
                 <p className="text-xs text-kolo-muted">
-                  {new Date(tx.createdAt).toLocaleString(intlTag(locale), { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                  {new Date(tx.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                 </p>
               </div>
             </div>

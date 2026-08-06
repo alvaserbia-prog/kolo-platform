@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { randomUUID } from "crypto";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -19,9 +18,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije autorizovano.", 401);
+  if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
   if (!(await imaFunkcionalniPristup(session.user.id)))
-    return await greska("Potreban je indeks stvarnosti od najmanje 10%.", 403);
+    return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
 
   const { id: oglasId } = await params;
 
@@ -29,7 +28,7 @@ export async function POST(
   let dokazSlika: File | null = null;
   if ((req.headers.get("content-type") ?? "").includes("multipart/form-data")) {
     const fd = await req.formData().catch(() => null);
-    if (!fd) return await greska("Neispravan zahtev.", 400);
+    if (!fd) return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
     date = fd.get("date");
     predlozeniPoen = fd.get("predlozeniPoen");
     description = fd.get("description");
@@ -42,18 +41,18 @@ export async function POST(
 
   if (dokazSlika) {
     if (dokazSlika.size > DOKAZ_MAX_SIZE)
-      return await greska("Screenshot dokaza može biti najviše 5MB.", 400);
+      return NextResponse.json({ error: "Screenshot dokaza može biti najviše 5MB." }, { status: 400 });
     if (!DOKAZ_TIPOVI.includes(dokazSlika.type))
-      return await greska("Dozvoljeni formati dokaza: JPG, PNG, WebP.", 400);
+      return NextResponse.json({ error: "Dozvoljeni formati dokaza: JPG, PNG, WebP." }, { status: 400 });
     if (!r2Konfigurisan())
-      return await greska("Skladište slika nije konfigurisano — dokaz trenutno nije moguće priložiti.", 503);
+      return NextResponse.json({ error: "Skladište slika nije konfigurisano — dokaz trenutno nije moguće priložiti." }, { status: 503 });
   }
 
   // Validacije
-  if (!date || !predlozeniPoen || !description) return await greska("Nedostaju podaci.", 400);
+  if (!date || !predlozeniPoen || !description) return NextResponse.json({ error: "Nedostaju podaci." }, { status: 400 });
   const predlozeni = Number(predlozeniPoen);
-  if (!Number.isInteger(predlozeni) || predlozeni < 1) return await greska("Predloženi POEN mora biti pozitivan ceo broj.", 400);
-  if (typeof description !== "string" || description.trim().length < 10) return await greska("Opis mora imati najmanje 10 karaktera.", 400);
+  if (!Number.isInteger(predlozeni) || predlozeni < 1) return NextResponse.json({ error: "Predloženi POEN mora biti pozitivan ceo broj." }, { status: 400 });
+  if (typeof description !== "string" || description.trim().length < 10) return NextResponse.json({ error: "Opis mora imati najmanje 10 karaktera." }, { status: 400 });
 
   // Datum — max 3 dana unazad
   const datumEv = new Date(String(date));
@@ -61,30 +60,30 @@ export async function POST(
   const danas = new Date(); danas.setHours(0, 0, 0, 0);
   const razlikaMs = danas.getTime() - datumEv.getTime();
   const razlikaDana = Math.floor(razlikaMs / (1000 * 60 * 60 * 24));
-  if (razlikaDana < 0 || razlikaDana > 3) return await greska("Evidencija moguća max 3 dana unazad.", 400);
+  if (razlikaDana < 0 || razlikaDana > 3) return NextResponse.json({ error: "Evidencija moguća max 3 dana unazad." }, { status: 400 });
 
   // Oglas i primljena prijava
   const oglas = await prisma.doprinosOglas.findUnique({ where: { id: oglasId } });
-  if (!oglas || oglas.status !== "ACTIVE") return await greska("Zadatak nije aktivan.", 400);
+  if (!oglas || oglas.status !== "ACTIVE") return NextResponse.json({ error: "Zadatak nije aktivan." }, { status: 400 });
 
   // Predloženi POEN pojedinačnog dnevnog izvršenja ne sme premašiti predloženi POEN
   // celog zadatka (čl. 26 — gornja granica po dnevnom izvršenju). Zadatak sa
   // predlozeniPoen = 0 nema ograničenje — važi samo zdravorazumska granica unosa.
   if (predlozeni > 10_000_000)
-    return await greska("Predloženi POEN dnevnog izvršenja ne može preći 10.000.000.", 400);
+    return NextResponse.json({ error: "Predloženi POEN dnevnog izvršenja ne može preći 10.000.000." }, { status: 400 });
   if (oglas.predlozeniPoen > 0 && predlozeni > oglas.predlozeniPoen)
-    return await greska(`Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (maksimalni POEN zadatka).`, 400);
+    return NextResponse.json({ error: `Predloženi POEN dnevnog izvršenja ne može preći ${oglas.predlozeniPoen.toLocaleString("sr-RS")} (maksimalni POEN zadatka).` }, { status: 400 });
 
   const prijava = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId, userId: session.user.id } },
   });
-  if (!prijava || prijava.status !== "APPROVED") return await greska("Vaša prijava za ovaj zadatak nije primljena.", 403);
+  if (!prijava || prijava.status !== "APPROVED") return NextResponse.json({ error: "Vaša prijava za ovaj zadatak nije primljena." }, { status: 403 });
 
   // Provera duplikata za isti dan
   const postoji = await prisma.oglasEvidencija.findUnique({
     where: { userId_oglasId_date: { userId: session.user.id, oglasId, date: datumEv } },
   });
-  if (postoji) return await greska("Evidencija za taj dan je već uneta.", 400);
+  if (postoji) return NextResponse.json({ error: "Evidencija za taj dan je već uneta." }, { status: 400 });
 
   // Kumulativni predloženi POEN svih dnevnih izvršenja (osim odbijenih) ne sme preći
   // predloženi POEN zadatka (čl. 11 — raspodela predloženog POEN-a po dnevnim izvršenjima).
@@ -96,7 +95,7 @@ export async function POST(
     });
     const dosadasnji = agg._sum.predlozeniPoen ?? 0;
     if (dosadasnji + predlozeni > oglas.predlozeniPoen)
-      return await greska(`Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).`, 400);
+      return NextResponse.json({ error: `Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).` }, { status: 400 });
   }
 
   // Dokaz: screenshot → R2 (javni URL u bazu), ili legacy tekstualni link.

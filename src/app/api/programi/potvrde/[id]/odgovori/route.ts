@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { labelPrograma } from "@/lib/protokol/programi";
 
@@ -16,7 +15,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
@@ -24,7 +23,10 @@ export async function POST(
   const obrazlozenje = typeof body.obrazlozenje === "string" ? body.obrazlozenje.trim() : "";
 
   if (!potvrdi && obrazlozenje.length === 0)
-    return await greska("Odbijanje zahteva obrazloženje.", 400);
+    return NextResponse.json(
+      { error: "Odbijanje zahteva obrazloženje." },
+      { status: 400 }
+    );
 
   const potvrda = await prisma.programPotvrda.findUnique({
     where: { id },
@@ -32,13 +34,13 @@ export async function POST(
       enrollment: { select: { id: true, type: true, userId: true, status: true } },
     },
   });
-  if (!potvrda) return await greska("Zahtev nije pronađen.", 404);
+  if (!potvrda) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
   if (potvrda.verifikatorId !== session.user.id)
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   if (potvrda.status !== "CEKA")
-    return await greska("Već ste odgovorili na ovaj zahtev.", 400);
+    return NextResponse.json({ error: "Već ste odgovorili na ovaj zahtev." }, { status: 400 });
   if (potvrda.enrollment.status !== "PENDING")
-    return await greska("Prijava više nije na čekanju.", 400);
+    return NextResponse.json({ error: "Prijava više nije na čekanju." }, { status: 400 });
 
   const programLabel = labelPrograma(potvrda.enrollment.type);
   const verifikatorPseudonim = session.user.pseudonim;
@@ -61,14 +63,13 @@ export async function POST(
         "Prijava spremna za odobravanje",
         `Program: ${potvrda.enrollment.type}\nSvi verifikatori su potvrdili — prijava čeka odluku Fondacije.`
       );
-      await obavesti(potvrda.enrollment.userId, {
-        tip: "info",
-        kljuc: "notifikacije.svi_verifikatori_potvrdili",
-        parametri: { program: programLabel },
-        naslov: "Svi verifikatori su potvrdili",
-        tekst: `Svi tvoji verifikatori su potvrdili prijavu za program „${programLabel}". Prijava čeka odluku Fondacije.`,
-        link: "/programi",
-      });
+      await posaljiNotifikaciju(
+        potvrda.enrollment.userId,
+        "info",
+        "Svi verifikatori su potvrdili",
+        `Svi tvoji verifikatori su potvrdili prijavu za program „${programLabel}". Prijava čeka odluku Fondacije.`,
+        "/programi"
+      );
     }
 
     return NextResponse.json({ ok: true, svePotvrdjeno });
@@ -89,14 +90,13 @@ export async function POST(
     });
   });
 
-  await obavesti(potvrda.enrollment.userId, {
-    tip: "info",
-    kljuc: "notifikacije.program_odbijen_verifikator",
-    parametri: { program: programLabel, obrazlozenje },
-    naslov: "Prijava na program odbijena",
-    tekst: `Tvoja prijava za program „${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
-    link: "/programi",
-  });
+  await posaljiNotifikaciju(
+    potvrda.enrollment.userId,
+    "info",
+    "Prijava na program odbijena",
+    `Tvoja prijava za program „${programLabel}" je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: ${obrazlozenje}`,
+    "/programi"
+  );
   void posaljiAdminAlert(
     "Prijava na program odbijena (verifikator)",
     `Program: ${potvrda.enrollment.type}\nVerifikator: ${verifikatorPseudonim}\nObrazloženje: ${obrazlozenje}`
