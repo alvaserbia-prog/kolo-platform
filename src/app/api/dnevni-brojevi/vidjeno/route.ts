@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 // Označava da je korisnik otvorio tab → badge se nuluje (broji se "od sad").
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   const { sekcija } = await req.json().catch(() => ({ sekcija: null }));
 
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest) {
     null;
 
   if (!polje) {
-    return NextResponse.json({ error: "Nepoznata sekcija." }, { status: 400 });
+    return await greska("Nepoznata sekcija.", 400);
   }
 
   await prisma.user.update({

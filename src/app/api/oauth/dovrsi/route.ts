@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions, uniqueMemberHash } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -13,14 +14,14 @@ export async function POST(req: NextRequest) {
 
   // Pristup samo nedovršenoj OAuth registraciji.
   if (!session?.user?.oauthPending) {
-    return NextResponse.json({ error: "Nalog je već podešen." }, { status: 400 });
+    return await greska("Nalog je već podešen.", 400);
   }
 
   const body = await req.json();
   const { pseudonim } = body;
 
   if (!validanPseudonim(pseudonim)) {
-    return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
+    return await greska(PSEUDONIM_PRAVILO, 400);
   }
   const trimmed = pseudonim.trim();
 
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest) {
   // red — placeholder koji je eventualno stajao u njemu ne ide u istoriju napuštenih.
   const zauzece = await proveriZauzece(trimmed, session.user.id);
   if (zauzece) {
-    return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
+    return await greska(porukaZauzeca(zauzece), 409);
   }
 
   // Legacy slučaj: red već postoji u bazi (stari tok ili napola dovršen nalog) — ažuriraj ga.
@@ -43,7 +44,7 @@ export async function POST(req: NextRequest) {
   // Novi tok: nalog se kreira tek sada (do ovog koraka ničega nije bilo u bazi).
   const email = normalizujEmail(session.user.pendingEmail);
   if (!email) {
-    return NextResponse.json({ error: "Nedostaju podaci o nalogu. Prijavite se ponovo." }, { status: 400 });
+    return await greska("Nedostaju podaci o nalogu. Prijavite se ponovo.", 400);
   }
 
   // Idempotentno: ako je nalog s ovim email-om u međuvremenu nastao (dupli submit),

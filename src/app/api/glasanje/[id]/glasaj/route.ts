@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,28 +13,28 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   // Glasanje Gornjeg Kola je operativno tek u Fazi 2 (čl. 3, 24)
   const fazaSistema = await dohvatiFazuStatus();
   if (fazaSistema.faza !== "FAZA_2")
-    return NextResponse.json({ error: "Glasanje Gornjeg Kola je operativno tek u Fazi 2." }, { status: 403 });
+    return await greska("Glasanje Gornjeg Kola je operativno tek u Fazi 2.", 403);
 
   const { id } = await params;
   const predlog = await prisma.glasanjePredlog.findUnique({ where: { id } });
-  if (!predlog) return NextResponse.json({ error: "Predlog nije pronađen." }, { status: 404 });
+  if (!predlog) return await greska("Predlog nije pronađen.", 404);
 
   const faza = fazaPredloga(predlog);
   if (faza === "NAJAVLJEN") {
     const datum = predlog.glasanjePocetak.toLocaleDateString("sr-RS");
-    return NextResponse.json({ error: `Glasanje još nije počelo (počinje ${datum}).` }, { status: 400 });
+    return await greska(`Glasanje još nije počelo (počinje ${datum}).`, 400);
   }
   if (faza !== "U_TOKU")
-    return NextResponse.json({ error: "Glasanje je završeno." }, { status: 400 });
+    return await greska("Glasanje je završeno.", 400);
 
   const glasovi = await izracunajGlasove(session.user.id);
   if (glasovi <= 0)
-    return NextResponse.json({ error: "Nemate glasačku moć (potrebno aktivno ZRNO)." }, { status: 403 });
+    return await greska("Nemate glasačku moć (potrebno aktivno ZRNO).", 403);
 
   const body = await req.json();
   const za = body.za === true;

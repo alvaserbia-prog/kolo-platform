@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { intlTag } from "@/lib/format";
+import { useTranslations, useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 
 // QR biblioteka se učitava tek kad zatreba (posle „Generiši") — van početnog
@@ -37,6 +38,7 @@ interface IpsRezultat {
  * prikazuje se napomena „uskoro" — bez greške.
  */
 export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
+  const locale = useLocale();
   const t = useTranslations("donacije");
   const [info, setInfo] = useState<IpsInfo | null>(null);
   const [iznos, setIznos] = useState("");
@@ -56,7 +58,7 @@ export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
     const n = Math.round(Number(iznos));
     const min = info?.minRSD ?? 100;
     if (!Number.isFinite(n) || n < min) {
-      setGreska(t("ips_min_iznos", { min: min.toLocaleString("sr-RS") }));
+      setGreska(t("ips_min_iznos", { min: min.toLocaleString(intlTag(locale)) }));
       return;
     }
     setLoading(true);
@@ -118,7 +120,7 @@ export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
           )}
           {info.konfigurisan && info.maxRSD && (
             <p className="text-xs text-kolo-muted">
-              {t("ips_limit", { max: info.maxRSD.toLocaleString("sr-RS") })}
+              {t("ips_limit", { max: info.maxRSD.toLocaleString(intlTag(locale)) })}
             </p>
           )}
           {greska && <p className="text-xs text-red-500">{greska}</p>}
@@ -145,7 +147,7 @@ export default function IpsQrPlacanje({ javno }: { javno: boolean }) {
             </div>
             <div className="flex justify-between">
               <span className="text-kolo-muted">{t("ips_iznos_label")}</span>
-              <span className="font-semibold text-kolo-text">{rezultat.iznosRSD.toLocaleString("sr-RS")} RSD</span>
+              <span className="font-semibold text-kolo-text">{rezultat.iznosRSD.toLocaleString(intlTag(locale))} RSD</span>
             </div>
             <div className="flex justify-between">
               <span className="text-kolo-muted">{t("ips_poziv_na_broj")}</span>

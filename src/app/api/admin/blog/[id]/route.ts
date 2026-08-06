@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,7 +13,7 @@ export async function PATCH(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const { id } = await params;
@@ -21,27 +22,27 @@ export async function PATCH(
   const content = body.content !== undefined ? body.content.toString().trim() : undefined;
 
   if (title !== undefined) {
-    if (!title) return NextResponse.json({ error: "Naslov je obavezan." }, { status: 400 });
+    if (!title) return await greska("Naslov je obavezan.", 400);
     if (title.length > 200)
-      return NextResponse.json({ error: "Naslov najviše 200 znakova." }, { status: 400 });
+      return await greska("Naslov najviše 200 znakova.", 400);
   }
   if (content !== undefined) {
-    if (!content) return NextResponse.json({ error: "Sadržaj je obavezan." }, { status: 400 });
+    if (!content) return await greska("Sadržaj je obavezan.", 400);
     if (content.length > 20000)
-      return NextResponse.json({ error: "Sadržaj najviše 20.000 znakova." }, { status: 400 });
+      return await greska("Sadržaj najviše 20.000 znakova.", 400);
   }
 
   let publishedAt: Date | undefined;
   if (body.publishedAt) {
     const d = new Date(body.publishedAt);
     if (isNaN(d.getTime())) {
-      return NextResponse.json({ error: "Neispravan datum objave." }, { status: 400 });
+      return await greska("Neispravan datum objave.", 400);
     }
     publishedAt = d;
   }
 
   const exists = await prisma.blogPost.findUnique({ where: { id } });
-  if (!exists) return NextResponse.json({ error: "Objava nije pronađena." }, { status: 404 });
+  if (!exists) return await greska("Objava nije pronađena.", 404);
 
   await prisma.blogPost.update({
     where: { id },
@@ -64,12 +65,12 @@ export async function DELETE(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const { id } = await params;
   const exists = await prisma.blogPost.findUnique({ where: { id } });
-  if (!exists) return NextResponse.json({ error: "Objava nije pronađena." }, { status: 404 });
+  if (!exists) return await greska("Objava nije pronađena.", 404);
 
   await prisma.blogPost.delete({ where: { id } });
   await logAdminAkcija(session.user.id, "BLOG_OBJAVA_OBRISANA", id, exists.title);

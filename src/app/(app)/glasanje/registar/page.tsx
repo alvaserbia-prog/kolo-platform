@@ -1,4 +1,5 @@
 import { getServerSession } from "next-auth";
+import { intlTag } from "@/lib/format";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "@/lib/auth";
@@ -6,7 +7,7 @@ import { dohvatiRegistarOdluka } from "@/lib/protokol/glasanje";
 import IzvrsenjeKontrole from "./IzvrsenjeKontrole";
 import PreporukaOdgovor from "./PreporukaOdgovor";
 import { jeAdmin } from "@/lib/dozvole";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import Pseudonim from "@/components/Pseudonim";
 
 export const metadata = { title: "Registar odluka — KOLO" };
@@ -14,6 +15,7 @@ export const metadata = { title: "Registar odluka — KOLO" };
 // Registar odluka Gornjeg Kola (Pravilnik o Gornjem Kolu 3.7.6, čl. 21).
 // Nepromenljiv, javno vidljiv pregled svih zatvorenih predloga sa ishodom.
 export default async function RegistarOdlukaPage() {
+  const locale = await getLocale();
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
   const korisnikJeAdmin = jeAdmin(session.user);
@@ -43,7 +45,7 @@ export default async function RegistarOdlukaPage() {
         <div className="space-y-3">
           {odluke.map((o) => {
             const usvojen = o.ishodUsvojen === true;
-            const datum = new Date(o.rok).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" });
+            const datum = new Date(o.rok).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" });
             return (
               <div key={o.id} className="bg-white rounded-2xl border border-kolo-border p-5 space-y-2">
                 <div className="flex items-start justify-between gap-3">

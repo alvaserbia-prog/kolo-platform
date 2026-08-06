@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,22 +13,22 @@ const DOZVOLJENI: AdminNivo[] = ["NONE", "ADMIN", "SUPERADMIN"];
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return NextResponse.json({ error: "Samo superadmin može menjati admin role." }, { status: 403 });
+    return await greska("Samo superadmin može menjati admin role.", 403);
 
   const { id } = await params;
   if (id === session.user.id)
-    return NextResponse.json({ error: "Ne možeš menjati sopstvenu rolu." }, { status: 400 });
+    return await greska("Ne možeš menjati sopstvenu rolu.", 400);
 
   const body = await req.json().catch(() => ({}));
   const nivo = body.nivo as AdminNivo;
   if (!DOZVOLJENI.includes(nivo))
-    return NextResponse.json({ error: "Neispravan nivo role." }, { status: 400 });
+    return await greska("Neispravan nivo role.", 400);
 
   const korisnik = await prisma.user.findUnique({
     where: { id },
     select: { pseudonim: true, admin: true },
   });
-  if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!korisnik) return await greska("Korisnik nije pronađen.", 404);
 
   if (korisnik.admin === nivo)
     return NextResponse.json({ ok: true, nepromenjeno: true });

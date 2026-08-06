@@ -7,6 +7,7 @@
  * (indeks stvarnosti ≥ 10%).
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -20,8 +21,8 @@ export async function GET(
   ctx: { params: Promise<{ korisnikId: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
 
   const { korisnikId } = await ctx.params;
 
@@ -56,7 +57,7 @@ export async function GET(
   });
 
   if (!user) {
-    return NextResponse.json({ error: "Korisnik ne postoji." }, { status: 404 });
+    return await greska("Korisnik ne postoji.", 404);
   }
 
   const kapacitet = izracunajKapacitet(user.tipKorisnika, user.indeksStvarnosti);

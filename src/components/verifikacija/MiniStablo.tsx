@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
 
@@ -50,6 +51,7 @@ type Props = {
  * „nadzirano" = zelena kvačica (bez teksta); „čeka nadzor" = zlatna oznaka.
  */
 function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) {
+  const t = useTranslations("verifikacija");
   if (status === "ne-podleze") return null;
   if (status === "nadzirano") {
     return (
@@ -59,7 +61,7 @@ function StatusBadge({ status }: { status: CvorVerifikovani["statusNadzora"] }) 
         aria-hidden="true"
         className="w-4 h-4 shrink-0 text-kolo-green-700"
       >
-        <title>Nadzirano</title>
+        <title>{t("stablo_nadzirano")}</title>
         <path
           fillRule="evenodd"
           d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
@@ -109,19 +111,22 @@ export default function MiniStablo({
   verifikovani,
   jeJaPocetni,
   className = "",
-  naslov = "Lanac verifikacija",
+  naslov,
   onKlik,
   tekstovi,
   prikaziNadzor = true,
 }: Props) {
-  const bezVerifikatora = tekstovi?.bezVerifikatora ?? "Još nisi verifikovan";
-  const osnivac = tekstovi?.osnivac ?? "Početna verifikacija (osnivač)";
-  const bezVerifikovanih = tekstovi?.bezVerifikovanih ?? "Još nikog nisi verifikovao";
+  const t = useTranslations("verifikacija");
+  // Pozivalac sme da nadjača tekst (`tekstovi`/`naslov`); podrazumevano ide prevod.
+  const naslovFinal = naslov ?? t("stablo_naslov");
+  const bezVerifikatora = tekstovi?.bezVerifikatora ?? t("stablo_bez_verifikatora");
+  const osnivac = tekstovi?.osnivac ?? t("stablo_osnivac");
+  const bezVerifikovanih = tekstovi?.bezVerifikovanih ?? t("stablo_bez_verifikovanih");
 
   return (
     <div className={`rounded-2xl border border-kolo-border bg-white p-6 shadow-sm ${className}`}>
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
-        {naslov}
+        {naslovFinal}
       </div>
 
       {/* Gore: verifikatori (može ih biti više) */}

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(
@@ -10,6 +11,6 @@ export async function GET(
     where: { memberHash: hash },
     select: { pseudonim: true },
   });
-  if (!user) return NextResponse.json({ error: "Not found" }, { status: 404 });
+  if (!user) return await greska("Not found", 404);
   return NextResponse.json({ pseudonim: user.pseudonim });
 }

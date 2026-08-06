@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { intlTag } from "@/lib/format";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
@@ -121,6 +122,7 @@ export default function Header({ onMenuOpen }: { onMenuOpen?: () => void }) {
 }
 
 function BalansHeader() {
+  const locale = useLocale();
   const t = useTranslations("header");
   // Balans dolazi iz keširanog /api/me (React Query) — osvežava ga `balans-updated`
   // event preko useMeEventBridge (montiran u AppShell). Bez zasebnog fetch-a.
@@ -130,7 +132,7 @@ function BalansHeader() {
   return (
     <span className="text-white/60 text-sm hidden sm:inline-flex items-center gap-1">
       <span className="font-semibold text-white text-sm">
-        {balans === null ? "..." : balans.toLocaleString("sr-RS")}
+        {balans === null ? "..." : balans.toLocaleString(intlTag(locale))}
       </span>
       <Pojam
         termin="POEN"
@@ -322,6 +324,7 @@ function PorukeIkona({ ariaLabel }: { ariaLabel: string }) {
 }
 
 function BellNotifikacije() {
+  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("header");
   // Podaci iz keširanog /api/me; lokalni state samo za UI (dropdown/toast).
@@ -441,7 +444,7 @@ function BellNotifikacije() {
                       <p className={`text-sm font-semibold ${TIP_BOJA[n.tip] ?? "text-kolo-text"}`}>{n.naslov}</p>
                       <p className="text-xs text-kolo-muted mt-0.5 leading-relaxed">{n.tekst}</p>
                       <p className="text-[10px] text-kolo-border mt-1">
-                        {new Date(n.createdAt).toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                        {new Date(n.createdAt).toLocaleString(intlTag(locale), { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}
                       </p>
                     </div>
                   </div>

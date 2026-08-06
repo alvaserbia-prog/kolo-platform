@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { sesija } from "@/lib/sesija";
 import { prisma } from "@/lib/prisma";
 import { mozeNadzor } from "@/lib/dozvole";
@@ -15,7 +16,7 @@ import { izracunajDnevniBrojeve, izracunajNadzorBroj } from "@/lib/chrome-podaci
  */
 export async function GET() {
   const session = await sesija();
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
 
   const meId = session.user.id;
   const verified = session.user.verified;

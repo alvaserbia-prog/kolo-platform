@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -16,7 +17,7 @@ export async function PATCH(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
+    return await greska("Nije ovlašćen.", 403);
   }
 
   const { id } = await params;
@@ -25,14 +26,14 @@ export async function PATCH(
 
   const validStatusi = ["U_OBRADI", "RESENO", "ODBIJENO"];
   if (!validStatusi.includes(status)) {
-    return NextResponse.json({ error: "Nevalidan status." }, { status: 400 });
+    return await greska("Nevalidan status.", 400);
   }
 
   const prigovor = await prisma.prigovorNaOdluku.findUnique({
     where: { id },
     include: { user: { select: { pseudonim: true } } },
   });
-  if (!prigovor) return NextResponse.json({ error: "Prigovor nije pronađen." }, { status: 404 });
+  if (!prigovor) return await greska("Prigovor nije pronađen.", 404);
 
   await prisma.prigovorNaOdluku.update({
     where: { id },
@@ -52,12 +53,18 @@ export async function PATCH(
   );
 
   if (status === "RESENO" || status === "ODBIJENO") {
+    const reseno = status === "RESENO";
+    const rucniOdgovor = odgovor?.trim();
+    const koren = reseno ? "notifikacije.prigovor_resen" : "notifikacije.prigovor_odbijen";
     await posaljiNotifikaciju(
       prigovor.userId,
       "info",
-      status === "RESENO" ? "Prigovor rešen" : "Prigovor odbijen",
-      odgovor?.trim() || (status === "RESENO" ? "Tvoj prigovor je rešen." : "Tvoj prigovor je odbijen."),
-      "/profil"
+      reseno ? "Prigovor rešen" : "Prigovor odbijen",
+      rucniOdgovor || (reseno ? "Tvoj prigovor je rešen." : "Tvoj prigovor je odbijen."),
+      "/profil",
+      // Obrazloženje koje je UO otkucao je autorski tekst i ide kako je napisano —
+      // zato se BEZ ključa, pa se ne prevodi. Samo standardna rečenica je prevodiva.
+      rucniOdgovor ? undefined : { kljuc: koren },
     );
   }
 

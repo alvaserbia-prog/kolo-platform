@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { intlTag } from "@/lib/format";
+import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
 interface PregledRed {
@@ -82,9 +83,9 @@ function grupisiUSesije(logs: DnevnikRed[]): Sesija[] {
   return sesije;
 }
 
-function formatVreme(iso: string | null) {
+function formatVreme(iso: string | null, locale: string) {
   if (!iso) return "—";
-  return new Date(iso).toLocaleString("sr-RS", {
+  return new Date(iso).toLocaleString(intlTag(locale), {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -93,8 +94,8 @@ function formatVreme(iso: string | null) {
   });
 }
 
-function formatSat(iso: string) {
-  return new Date(iso).toLocaleTimeString("sr-RS", {
+function formatSat(iso: string, locale: string) {
+  return new Date(iso).toLocaleTimeString(intlTag(locale), {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -106,6 +107,7 @@ function formatSat(iso: string) {
  * `GET /api/admin/aktivnost`.
  */
 export default function AktivnostTab() {
+  const locale = useLocale();
   const t = useTranslations("admin");
   const [view, setView] = useState<"pregled" | "dnevnik">("pregled");
   const [pregled, setPregled] = useState<PregledRed[] | null>(null);
@@ -234,7 +236,7 @@ export default function AktivnostTab() {
                         <Pseudonim>{r.pseudonim}</Pseudonim>
                       </td>
                       <td className="px-4 py-2.5 text-kolo-muted">
-                        {formatVreme(r.poslednjaAktivnost)}
+                        {formatVreme(r.poslednjaAktivnost, locale)}
                       </td>
                       <td className="px-4 py-2.5 text-right text-kolo-muted">{r.brojPoseta}</td>
                     </tr>
@@ -302,9 +304,9 @@ export default function AktivnostTab() {
                         </span>
                       </div>
                       <span className="text-xs text-kolo-muted shrink-0">
-                        {formatVreme(s.pocetak)}
+                        {formatVreme(s.pocetak, locale)}
                         {s.stavke.length > 1 && (
-                          <> – {istiDan ? formatSat(s.kraj) : formatVreme(s.kraj)}</>
+                          <> – {istiDan ? formatSat(s.kraj, locale) : formatVreme(s.kraj, locale)}</>
                         )}
                       </span>
                     </button>
@@ -316,7 +318,7 @@ export default function AktivnostTab() {
                             className="flex items-baseline gap-3 py-1 border-l-2 border-kolo-border pl-3"
                           >
                             <span className="text-xs text-kolo-muted shrink-0 tabular-nums">
-                              {formatSat(r.createdAt)}
+                              {formatSat(r.createdAt, locale)}
                             </span>
                             <span className="font-mono text-xs text-kolo-text break-all">
                               {r.putanja}

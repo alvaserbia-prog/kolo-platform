@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 // Dozvoljeni jezici (next-intl locale). Mora da prati src/i18n/routing.ts.
 // "hu" i "hr" su zamrznuti (neaktivni) — vidi routing.ts.
-const JEZICI = ["sr", "sr-Cyrl", "en"];
+const JEZICI = ["sr", "sr-Cyrl", "en", "ru"];
 
 /**
  * Trajno čuva izabrani jezik prijavljenog korisnika (za notifikacije/email i
@@ -18,7 +19,7 @@ export async function PATCH(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const jezik = typeof body.jezik === "string" ? body.jezik : "";
   if (!JEZICI.includes(jezik)) {
-    return NextResponse.json({ error: "Nepoznat jezik." }, { status: 400 });
+    return await greska("Nepoznat jezik.", 400);
   }
 
   await prisma.user.update({

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -24,7 +25,7 @@ import {
 // ponavlja iste provere nad izvorom istine.
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const zahtevi = await prisma.zahtevZaJemstvo.findMany({
     where: { status: { in: ["AKTIVAN", "NEPOTPUN"] }, expiresAt: { gt: new Date() } },
@@ -95,19 +96,16 @@ export async function GET() {
 // samo se rangira na kraj. Nijedan podatak nije uslov za verifikaciju.
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
   if (session.user.verified)
-    return NextResponse.json(
-      { error: "Već ste verifikovani — tabla je namenjena neverifikovanim korisnicima." },
-      { status: 403 }
-    );
+    return await greska("Već ste verifikovani — tabla je namenjena neverifikovanim korisnicima.", 403);
 
   const body = await req.json().catch(() => ({}));
   if (body.pristanak !== true)
-    return NextResponse.json({ error: "Morate dati saglasnost za objavljivanje." }, { status: 400 });
+    return await greska("Morate dati saglasnost za objavljivanje.", 400);
 
   const provera = validirajKarticu(body);
-  if (!provera.ok) return NextResponse.json({ error: provera.greska }, { status: 400 });
+  if (!provera.ok) return await greska(provera.greska, 400);
   const kartica = provera.kartica;
 
   const postoji = await prisma.zahtevZaJemstvo.findFirst({
@@ -115,10 +113,7 @@ export async function POST(req: NextRequest) {
     select: { id: true },
   });
   if (postoji)
-    return NextResponse.json(
-      { error: "Već imate aktivan zahtev. Povucite ga pre objave novog." },
-      { status: 409 }
-    );
+    return await greska("Već imate aktivan zahtev. Povucite ga pre objave novog.", 409);
 
   const expiresAt = new Date(Date.now() + TRAJANJE_DANA * 24 * 60 * 60 * 1000);
 
@@ -135,18 +130,18 @@ export async function POST(req: NextRequest) {
 // Rok isteka se NE produžava dopunom — inače bi kartica mogla da stoji večno.
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const body = await req.json().catch(() => ({}));
   const provera = validirajKarticu(body);
-  if (!provera.ok) return NextResponse.json({ error: provera.greska }, { status: 400 });
+  if (!provera.ok) return await greska(provera.greska, 400);
   const kartica = provera.kartica;
 
   const moj = await prisma.zahtevZaJemstvo.findFirst({
     where: { userId: session.user.id, status: { in: ["AKTIVAN", "NEPOTPUN"] } },
     select: { id: true },
   });
-  if (!moj) return NextResponse.json({ error: "Nemate aktivan zahtev." }, { status: 404 });
+  if (!moj) return await greska("Nemate aktivan zahtev.", 404);
 
   await prisma.zahtevZaJemstvo.update({
     where: { id: moj.id },

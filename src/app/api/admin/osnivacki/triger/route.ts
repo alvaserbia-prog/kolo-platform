@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
@@ -12,14 +13,14 @@ import { logAdminAkcija } from "@/lib/audit";
  */
 export async function POST() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!jeSuperadmin(session.user)) return NextResponse.json({ error: "Samo admin." }, { status: 403 });
+  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!jeSuperadmin(session.user)) return await greska("Samo admin.", 403);
 
   try {
     const rezultat = await proveriIEvidentirajKorak();
     await logAdminAkcija(session.user.id, "OSNIVACKI_TRIGER_MANUELNO");
     return NextResponse.json(rezultat);
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    return await greska(String(e), 500);
   }
 }
