@@ -15,7 +15,7 @@ const OPIS: Record<string, string> = {
   sr: "Sistem uzajamnosti zasnovan na doprinosu zajednici",
   "sr-Cyrl": "Систем узајамности заснован на доприносу заједници",
   en: "A system of mutuality based on contribution to the community",
-  ru: "Sistem uzajamnosti zasnovan na doprinosu zajednici", // faza 4
+  ru: "Система взаимности, основанная на вкладе в сообщество",
 };
 
 export async function GET() {

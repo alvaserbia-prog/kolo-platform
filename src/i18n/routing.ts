@@ -18,11 +18,8 @@ export const routing = defineRouting({
   // + u parity skriptu (i dopuni do pariteta sa sr.json ako je kaskao),
   // i dodaj ga u src/components/JezikSvitcer.tsx.
   //
-  // 🇷🇺 RUSKI je u pripremi (vidi docs/i18n-ruski-plan.md). Locale je AKTIVAN
-  // ovde da bi mašinerija radila i da bi provera pariteta čuvala messages/ru.json
-  // od faze 1 — ali NIJE izložen u prekidaču jezika dok prevod ne bude gotov
-  // (faza 4). Do tada je messages/ru.json kopija sr.json, pa bi izbor "ru"
-  // prikazao srpski tekst. Aktivacija = odkomentarisati stavku u JezikSvitcer.tsx.
+  // 🇷🇺 RUSKI je aktivan i izložen u prekidaču jezika (od 2026-08-05).
+  // Prevod: messages/ru.json — vidi docs/i18n-ruski-plan.md.
   locales: ["sr", "sr-Cyrl", "en", "ru"],
   defaultLocale: "sr",
   localePrefix: "never",

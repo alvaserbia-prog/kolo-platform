@@ -6,8 +6,6 @@ import { prisma } from "@/lib/prisma";
 
 // Dozvoljeni jezici (next-intl locale). Mora da prati src/i18n/routing.ts.
 // "hu" i "hr" su zamrznuti (neaktivni) — vidi routing.ts.
-// "ru" je u pripremi: prihvata se ovde (locale je aktivan), ali još nije u
-// prekidaču jezika — vidi docs/i18n-ruski-plan.md.
 const JEZICI = ["sr", "sr-Cyrl", "en", "ru"];
 
 /**

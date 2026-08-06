@@ -6,8 +6,8 @@ const BAZA = path.join(process.cwd(), "dokumentacija 4.0");
 // Jezici koji imaju sopstveni podfolder sa prevodima (`dokumentacija 4.0/<kod>/`).
 // "sr" i "sr-Cyrl" NISU ovde: srpski je original u korenu, a ćirilica se izvodi
 // transliteracijom u prikazu (vidi CirilicaProvider) — isti fajl.
-// "ru" je u pripremi: folder se popunjava u fazi 9 (docs/i18n-ruski-plan.md); dok
-// je prazan, fallback ispod tiho vraća srpski original.
+// "ru": folder `dokumentacija 4.0/ru/` još nije popunjen (faza 9) — dok je prazan,
+// fallback ispod tiho vraća srpski original, pa stranica radi.
 const PREVEDENI: Record<string, string> = {
   en: "en",
   ru: "ru",

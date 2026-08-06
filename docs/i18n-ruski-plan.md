@@ -10,9 +10,10 @@
 > **Grana razvoja:** `claude/russian-translation-prep-lisiof`.
 > Deploy pravila: vidi `CLAUDE.md` „Deploy i grane".
 
-**Stanje na 2026-08-05.** Priprema koda je u velikoj meri gotova; **sam prevod
-teksta nije započet.** `messages/ru.json` je i dalje kopija `sr.json`, a ruski
-NIJE izložen u prekidaču jezika.
+**Stanje na 2026-08-05: RUSKI JE UKLJUČEN.** Prekidač jezika ima 🇷🇺 zastavicu;
+interfejs, obaveštenja, mejlovi, istorija transakcija i poruke o greškama idu na
+ruskom. Preostaju **FAQ (faza 5)** i **pravni akti (faza 9)** — dok se ne prevedu,
+FAQ se prikazuje na srpskom, a pravni akti tiho padaju na srpski original.
 
 | Faza | Sadržaj | Stanje |
 |---|---|---|
@@ -20,7 +21,7 @@ NIJE izložen u prekidaču jezika.
 | **1** | Mehanika jezika (locale, font, paritet, loader) | ✅ |
 | **2** | Izvlačenje zakucanog teksta iz ekrana | ✅ 58 ključeva |
 | **3** | Datumi i brojevi po jeziku | ✅ 178 mesta |
-| **4** | **Prevod `messages/ru.json`** | 🟡 **1.309 / 2.203 (59%)** |
+| **4** | **Prevod `messages/ru.json`** | ✅ **2.203 / 2.203** |
 | **5** | `faq-data-ru.ts` | ⬜ nije započeto (71 pitanje) |
 | **6** | Obaveštenja (zvonce/push/mejl) | ✅ 27/29 (dva namerno srpska) |
 | **7** | Istorija transakcija + migracija | ✅ (migracija probana na PostgreSQL-u) |
@@ -28,12 +29,8 @@ NIJE izložen u prekidaču jezika.
 | **9** | Pravni akti na ruskom | ⬜ nije započeto (~62.500 reči) |
 | **10** | Manifest / OG slika / metapodaci | 🟡 manifest ✅, OG slika otpada (v. §6c) |
 
-**Sledeći korak:** dovršiti fazu 4 — preostali namespace-ovi su **javne
-prezentacione stranice** (`oNama` 128, `oSistemu` 123, `landing` 100,
-`kakoFunkcionisePage` 83, `pravne` 69) i **app ekrani** (`donacije` 66,
-`doprinosOglasi` 65, `krug` 61, `glasanje` 55, `dobrodosli` 47,
-`postaniPokrovitelj` 44, `zajednickoDobroPage` 20, `osnivackiDoprinosPage` 18).
-Zatim faza 5 (FAQ) i faza 9 (pravni akti).
+**Sledeći korak:** faza 5 (FAQ, 71 pitanje → `src/lib/faq-data-ru.ts`) i
+faza 9 (pravni akti → `dokumentacija 4.0/ru/`).
 
 ---
 
@@ -560,3 +557,30 @@ registracija, zaglavlje, navigacija, poruke, mejlovi, kolačići…).
 | Zadruga | Кооператив |
 | email | **email** (ne prevodi se, odluka #14) |
 | RSD, PIB, QR, Whitepaper | ne prevode se (odluka #12) |
+
+
+---
+
+## 6h. Faza 4 ZAVRŠENA — ruski uključen (2026-08-05)
+
+**Prevedeno svih 2.203 ključa** (`admin` 380 po odluci #2 ostaje srpski).
+Zastavica 🇷🇺 je uključena u `JezikSvitcer.tsx` — ruski je od sada izbor korisnika.
+
+**36 ključeva namerno ostaje identično** srpskom: „Email", brojevi verzija
+(4.0.0, 4.1), rezervisani tekstovi (`••••••••`, `vas@email.com`), formati
+(`{count}/5`, `1.000 / 1.000 / 500`) i vlastita imena (WIR, LETS, Sardex,
+Fureai Kippu, Whitepaper, DPIA, FAQ, PIB).
+
+**Provereno kraj-do-kraja na ruskom:**
+```
+obaveštenje : Marko записал(а) 12 345 ПОЕН в ваш учёт. Сообщение: «спасибо»
+transakcija : Бонус круга «Сомбор» — участников: 10
+greška API  : У вас недостаточно ПОЕН.
+ugnežđen ključ: «Мёд» опубликовано в категории «Еда и напитки»…
+mejl        : Здравствуйте
+```
+Primetiti: broj je formatiran po ruskom (`12 345`, razmak), naziv kategorije je
+preveden ugnežđeno, jedinica je ćirilicom (ПОЕН) — sve tri mašinerije rade.
+
+**Šta još nije na ruskom:** FAQ (faza 5) i pravni akti (faza 9). Oboje ima tih
+fallback na srpski, pa ništa ne puca.
