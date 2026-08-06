@@ -16,6 +16,7 @@ const OsnivaciTab = dynamic(() => import("./OsnivaciTab"), { ssr: false });
 const PokroviteljPrijaveTab = dynamic(() => import("./PokroviteljPrijaveTab"), { ssr: false });
 const NadzorTab = dynamic(() => import("./NadzorTab"), { ssr: false });
 const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
+const LevakTab = dynamic(() => import("./LevakTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 
@@ -296,6 +297,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
           ["obavestenja", t("tab_obavestenja")],
           ["audit", t("tab_audit")],
           ["aktivnost", t("tab_aktivnost")],
+          ["levak", t("tab_levak")],
           ["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`],
         ] as [Tab, string][])
       : []),
@@ -401,6 +403,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Dnevnik aktivnosti korisnika (samo superadmin) */}
       {tab === "aktivnost" && viewerJeSuperadmin && <AktivnostTab />}
+
+      {/* Levak: agregatni pogled na isti dnevnik aktivnosti — superadmin, kao i Aktivnost. */}
+      {tab === "levak" && viewerJeSuperadmin && <LevakTab />}
     </div>
   );
 }
