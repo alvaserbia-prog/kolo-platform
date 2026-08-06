@@ -10,7 +10,6 @@
  * Body: { razlog?: string }
  */
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -21,11 +20,14 @@ const MAX_RAZLOG = 500;
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const rl = rateLimit(`prijava-verifikacije:${session.user.id}`, 5, 60 * 60_000);
   if (!rl.ok) {
-    return await greska("Previše prijava. Pokušaj kasnije.", 429);
+    return NextResponse.json(
+      { error: "Previše prijava. Pokušaj kasnije." },
+      { status: 429 }
+    );
   }
 
   const body = await req.json().catch(() => ({}));

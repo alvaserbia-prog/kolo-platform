@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -38,7 +37,6 @@ function formatPreostalo(sekundi: number): string {
   return `${s}s`;
 }
 export default function MojQrKod() {
-  const t = useTranslations("verifikacija");
   const router = useRouter();
   // `update()` forsira refetch JWT-a iz baze (auth.ts preskače 5-min interval na
   // "update" trigger) — bez ovoga bi tek verifikovan korisnik do 5 min i dalje
@@ -63,7 +61,7 @@ export default function MojQrKod() {
       const res = await fetch("/api/verifikacija/token", { method: "POST" });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error ?? t("greska_opsta"));
+        setError(data.error ?? "Greška");
         setLoading(false);
         return;
       }
@@ -74,7 +72,7 @@ export default function MojQrKod() {
         pocetniRef.current = await indeksRes.json();
       }
     } catch {
-      setError(t("greska_mreza"));
+      setError("Mreža nije dostupna");
     } finally {
       setLoading(false);
     }
@@ -130,13 +128,14 @@ export default function MojQrKod() {
   if (obavestenje) {
     return (
       <UspehKartica
-        naslov={t("qr_uspeh_naslov")}
+        naslov="Verifikovani ste!"
         opis={
           <>
-            {t("qr_uspeh_opis", { indeks: indeksPriUspehu ?? 10 })}
+            Tvoj indeks je sada {indeksPriUspehu ?? 10}% — imaš pun pristup: poruke,
+            postavljanje oglasa i kontakt sa oglasa.
           </>
         }
-        dugmeTekst={t("qr_uspeh_dugme")}
+        dugmeTekst="Idi na Pijacu"
         onDugme={async () => {
           // Sačekaj da osvežena sesija stigne u cookie pre navigacije — inače bi
           // munjevit klik odveo na Pijacu sa još starim (neverifikovanim) JWT-om.
@@ -150,20 +149,21 @@ export default function MojQrKod() {
   return (
     <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
-        {t("qr_naslov")}
+        Pokaži kod za verifikaciju
       </div>
 
       {!token && (
         <>
           <p className="text-sm text-kolo-muted mb-3">
-            {t("qr_uputstvo")}
+            Daj nekome ko može da te verifikuje da skenira QR ili da unese 6-cifren broj.
+            Kod važi 2 sata.
           </p>
           <button
             onClick={generisi}
             disabled={loading}
             className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
           >
-            {loading ? t("qr_generisem") : t("qr_generisi")}
+            {loading ? "Generišem..." : "Generiši kod"}
           </button>
         </>
       )}
@@ -171,13 +171,13 @@ export default function MojQrKod() {
       {token && !istekao && (
         <div className="space-y-3">
           <div className="text-sm text-kolo-muted">
-            {t("qr_vazi_jos")} <span className="font-mono font-semibold">{formatPreostalo(preostalo)}</span>
+            Kod važi još: <span className="font-mono font-semibold">{formatPreostalo(preostalo)}</span>
           </div>
           <div className="flex justify-center bg-white p-4 rounded-xl border border-kolo-border">
             <QRCodeSVG value={token.token} size={200} />
           </div>
           <div className="text-center">
-            <div className="text-xs uppercase tracking-wide text-kolo-muted">{t("qr_ili_broj")}</div>
+            <div className="text-xs uppercase tracking-wide text-kolo-muted">ili broj</div>
             <div className="text-3xl font-mono font-bold tracking-wider mt-1">{formatBroj}</div>
           </div>
         </div>
@@ -185,13 +185,13 @@ export default function MojQrKod() {
 
       {istekao && (
         <div className="space-y-3">
-          <div className="text-sm text-kolo-danger">{t("qr_istekao")}</div>
+          <div className="text-sm text-kolo-danger">Kod je istekao.</div>
           <button
             onClick={generisi}
             disabled={loading}
             className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
           >
-            {loading ? t("qr_generisem") : t("qr_obnovi")}
+            {loading ? "Generišem..." : "Obnovi kod"}
           </button>
         </div>
       )}

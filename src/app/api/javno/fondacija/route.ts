@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
 
@@ -31,6 +30,6 @@ export async function GET() {
       ukupnoZapisaTroskova: ukupnoTroskova,
     });
   } catch (e) {
-    return await greska(String(e), 500);
+    return NextResponse.json({ error: String(e) }, { status: 500 });
   }
 }

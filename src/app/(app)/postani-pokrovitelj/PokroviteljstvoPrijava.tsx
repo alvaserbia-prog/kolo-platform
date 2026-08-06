@@ -1,9 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 type Prijava = {
   id: string;
@@ -20,7 +19,6 @@ type Prijava = {
 const MAX_BYTES = 3_000_000;
 
 export default function PokroviteljstvoPrijava() {
-  const locale = useLocale();
   const t = useTranslations("postaniPokrovitelj");
   const { data: prijave = [], isLoading: ucitavanje, refetch } = useQuery({
     queryKey: ["pokroviteljstvo-moje-prijave"],
@@ -161,7 +159,7 @@ export default function PokroviteljstvoPrijava() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="font-medium text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· {t("forma_pib_label")} {p.pib}</span></p>
-                    <p className="text-sm text-kolo-muted mt-0.5">{VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString(intlTag(locale))} RSD</p>
+                    <p className="text-sm text-kolo-muted mt-0.5">{VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString("sr-RS")} RSD</p>
                     <p className="text-xs mt-1 font-semibold text-kolo-gold-600">{STATUS_LABEL[p.status]}</p>
                     {p.status === "ODBIJENA" && p.odbijenoRazlog && (
                       <p className="text-xs text-kolo-danger mt-0.5">{t("odbijena_razlog")} {p.odbijenoRazlog}</p>

@@ -4,7 +4,6 @@
  * Vraća indeks stvarnosti, tip, kapacitet i slotove logovanog korisnika.
  */
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -17,7 +16,7 @@ import {
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return await greska("Nisi prijavljen.", 401);
+    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
   }
 
   const user = await prisma.user.findUnique({
@@ -30,7 +29,7 @@ export async function GET() {
     },
   });
   if (!user) {
-    return await greska("Korisnik ne postoji.", 404);
+    return NextResponse.json({ error: "Korisnik ne postoji." }, { status: 404 });
   }
 
   const kapacitet = izracunajKapacitet(user.tipKorisnika, user.indeksStvarnosti);

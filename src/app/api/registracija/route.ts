@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
@@ -23,7 +22,7 @@ export async function POST(req: NextRequest) {
     // Rate-limit: najviše 10 registracija po IP-u na sat (anti-spam).
     const rl = rateLimit(`registracija:${klijentIP(req)}`, 10, 60 * 60 * 1000);
     if (!rl.ok) {
-      return await greska("Previše pokušaja. Pokušajte kasnije.", 429);
+      return NextResponse.json({ error: "Previše pokušaja. Pokušajte kasnije." }, { status: 429 });
     }
 
     const body = await req.json();
@@ -33,19 +32,19 @@ export async function POST(req: NextRequest) {
     // Validacija — striktne provere tipova (bez biblioteke): array/objekat sa `.length`
     // ne sme da prođe kao string.
     if (typeof email !== "string" || typeof pseudonim !== "string" || typeof password !== "string") {
-      return await greska("Sva obavezna polja moraju biti popunjena.", 400);
+      return NextResponse.json({ error: "Sva obavezna polja moraju biti popunjena." }, { status: 400 });
     }
     if (!validanEmail(email)) {
-      return await greska("Unesite ispravnu email adresu.", 400);
+      return NextResponse.json({ error: "Unesite ispravnu email adresu." }, { status: 400 });
     }
     if (password.length < 8 || password.length > 200) {
-      return await greska("Lozinka mora imati između 8 i 200 karaktera.", 400);
+      return NextResponse.json({ error: "Lozinka mora imati između 8 i 200 karaktera." }, { status: 400 });
     }
     if (!validanPseudonim(pseudonim)) {
-      return await greska(PSEUDONIM_PRAVILO, 400);
+      return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
     }
     if (location !== null && location.length > 80) {
-      return await greska("Mesto je predugačko.", 400);
+      return NextResponse.json({ error: "Mesto je predugačko." }, { status: 400 });
     }
 
     const emailNorm = normalizujEmail(email);
@@ -58,10 +57,10 @@ export async function POST(req: NextRequest) {
       proveriZauzece(pseudonimClean),
     ]);
     if (existingEmail) {
-      return await greska("Email je već registrovan.", 409);
+      return NextResponse.json({ error: "Email je već registrovan." }, { status: 409 });
     }
     if (zauzece) {
-      return await greska(porukaZauzeca(zauzece), 409);
+      return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
     }
 
     // Generiši jedinstven member hash
@@ -101,6 +100,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true, id: user.id }, { status: 201 });
   } catch {
-    return await greska("Interna greška servera.", 500);
+    return NextResponse.json({ error: "Interna greška servera." }, { status: 500 });
   }
 }

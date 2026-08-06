@@ -7,24 +7,23 @@
  * Ne utiče na sistemske mejlove (reset lozinke) — oni idu uvek.
  */
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function PATCH(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   let body: { emailObavestenja?: unknown };
   try {
     body = await req.json();
   } catch {
-    return await greska("Nevažeći JSON.", 400);
+    return NextResponse.json({ error: "Nevažeći JSON." }, { status: 400 });
   }
 
   if (typeof body.emailObavestenja !== "boolean") {
-    return await greska("Nedostaje emailObavestenja.", 400);
+    return NextResponse.json({ error: "Nedostaje emailObavestenja." }, { status: 400 });
   }
 
   await prisma.user.update({

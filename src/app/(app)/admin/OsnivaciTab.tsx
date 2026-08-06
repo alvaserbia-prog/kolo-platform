@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 
 type Osnivac = {
@@ -35,7 +34,7 @@ type Status = {
   osnivaciZakljucani?: boolean;
 };
 
-const fmt = (n: number, locale: string) => n.toLocaleString(intlTag(locale));
+const fmt = (n: number) => n.toLocaleString("sr-RS");
 
 export default function OsnivaciTab({
   verifikovaniKorisnici,
@@ -44,7 +43,6 @@ export default function OsnivaciTab({
   verifikovaniKorisnici: { id: string; pseudonim: string }[];
   onDone: () => void;
 }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   // Dva odvojena upita: pad statusa kanala ne sme da sakrije listu osnivača
   // (inače lista deluje prazno i admin duplira unos → P2002 na serveru).
@@ -216,11 +214,11 @@ export default function OsnivaciTab({
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
             <Stat label={t("osnivaci_stat_koraka")} value={`${status.brojKoraka} / ${status.ukupnoKoraka ?? 100}`} />
-            <Stat label={t("osnivaci_stat_evidentirano")} value={`${fmt(status.ukupnoEvidentirano, locale)} POEN`} />
-            <Stat label={t("osnivaci_stat_preostalo")} value={`${fmt(status.preostalo, locale)} POEN`} />
+            <Stat label={t("osnivaci_stat_evidentirano")} value={`${fmt(status.ukupnoEvidentirano)} POEN`} />
+            <Stat label={t("osnivaci_stat_preostalo")} value={`${fmt(status.preostalo)} POEN`} />
             <Stat label={t("osnivaci_stat_iskoriscenos")} value={`${status.procenatIskoriscenja}%`} />
-            <Stat label={t("osnivaci_stat_poen_u_sistemu")} value={fmt(status.ukupanPoenUSistemu, locale)} />
-            <Stat label={t("osnivaci_stat_sledeci_prag")} value={fmt(status.sledeciPrag, locale)} />
+            <Stat label={t("osnivaci_stat_poen_u_sistemu")} value={fmt(status.ukupanPoenUSistemu)} />
+            <Stat label={t("osnivaci_stat_sledeci_prag")} value={fmt(status.sledeciPrag)} />
           </div>
           <div className="mt-4 h-2 rounded-full bg-kolo-bg overflow-hidden">
             <div className="h-full bg-kolo-green-700" style={{ width: `${Math.min(100, status.procenatIskoriscenja)}%` }} />

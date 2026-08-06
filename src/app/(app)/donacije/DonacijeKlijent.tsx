@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { intlTag } from "@/lib/format";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import IpsQrPlacanje from "./IpsQrPlacanje";
 
 interface Donacija {
@@ -53,7 +52,6 @@ function formatRacun(racun: string): string {
 }
 
 export default function DonacijeKlijent() {
-  const locale = useLocale();
   const t = useTranslations("donacije");
   const tc = useTranslations("common");
   const [data, setData] = useState<DonacijeData | null>(null);
@@ -265,7 +263,7 @@ export default function DonacijeKlijent() {
             <p className="text-sm font-semibold text-kolo-text">{t("vas_rang")}</p>
             <p className="text-3xl font-bold text-kolo-green-700 mt-1">{t("nivo", { n: data.trenutniNivo })}</p>
             <p className="text-xs text-kolo-muted mt-0.5">
-              {t("kumulativ")} {data.kumulativRSD.toLocaleString(intlTag(locale))} RSD
+              {t("kumulativ")} {data.kumulativRSD.toLocaleString("sr-RS")} RSD
             </p>
           </div>
           <div className="text-right">
@@ -280,7 +278,7 @@ export default function DonacijeKlijent() {
             <p className="text-xs text-kolo-muted">
               {t("do_nivoa", { n: sledeci.nivo, kurs: sledeci.kurs.toFixed(2) })}{" "}
               <span className="font-semibold text-kolo-text">
-                {(sledeci.do - data.kumulativRSD).toLocaleString(intlTag(locale))} RSD
+                {(sledeci.do - data.kumulativRSD).toLocaleString("sr-RS")} RSD
               </span>
             </p>
           )}
@@ -318,7 +316,7 @@ export default function DonacijeKlijent() {
                         ? "1 mlrd"
                         : r.do >= 1_000_000
                         ? `${(r.do / 1_000_000).toFixed(0)} mil`
-                        : r.do.toLocaleString(intlTag(locale))}
+                        : r.do.toLocaleString("sr-RS")}
                     </td>
                     <td className={`px-4 py-2.5 text-right ${active ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
                       {r.kurs.toFixed(2)}
@@ -347,10 +345,10 @@ export default function DonacijeKlijent() {
               >
                 <div>
                   <p className="text-sm font-medium text-kolo-text">
-                    {d.amountRSD.toLocaleString(intlTag(locale))} RSD
+                    {d.amountRSD.toLocaleString("sr-RS")} RSD
                   </p>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {new Date(d.createdAt).toLocaleDateString(intlTag(locale))} · {t("nivo", { n: d.level })}
+                    {new Date(d.createdAt).toLocaleDateString("sr-RS")} · {t("nivo", { n: d.level })}
                   </p>
                 </div>
                 <div className="text-right">
@@ -365,7 +363,7 @@ export default function DonacijeKlijent() {
                   </span>
                   {d.status === "CONFIRMED" && (
                     <p className="text-xs text-kolo-green-700 mt-1">
-                      +{d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                      +{d.poenEmitted.toLocaleString("sr-RS")} POEN
                     </p>
                   )}
                 </div>
@@ -395,12 +393,12 @@ export default function DonacijeKlijent() {
                     {d.anonimno ? t("lista_anoniman") : d.ime || t("lista_anoniman")}
                   </p>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {new Date(d.createdAt).toLocaleDateString(intlTag(locale))} · {d.amountRSD.toLocaleString(intlTag(locale))} RSD
+                    {new Date(d.createdAt).toLocaleDateString("sr-RS")} · {d.amountRSD.toLocaleString("sr-RS")} RSD
                   </p>
                 </div>
                 {!d.anonimno && d.poenEmitted > 0 && (
                   <p className="text-xs text-kolo-green-700 font-semibold">
-                    +{d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                    +{d.poenEmitted.toLocaleString("sr-RS")} POEN
                   </p>
                 )}
               </div>

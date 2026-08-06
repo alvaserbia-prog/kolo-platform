@@ -12,7 +12,6 @@
  * primenjuje verifikacija-service (osnivač, indeks 100%, prelazno čl. 22).
  */
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -35,7 +34,7 @@ const ZAGLAVLJA = {
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return await greska("Nije prijavljen.", 401, { headers: ZAGLAVLJA });
+    return NextResponse.json({ error: "Nije prijavljen." }, { status: 401, headers: ZAGLAVLJA });
   }
 
   const posmatrac = await prisma.user.findUnique({

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +10,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const { id: krugId } = await params;
 
@@ -20,7 +19,7 @@ export async function POST(
     where: { krugId, userId: session.user.id, leftAt: null, isAdmin: true },
   });
   if (!membership)
-    return await greska("Samo admin krugovi može kreirati projekte.", 403);
+    return NextResponse.json({ error: "Samo admin krugovi može kreirati projekte." }, { status: 403 });
 
   const body = await req.json();
   const title = (body.title ?? "").trim();
@@ -28,9 +27,9 @@ export async function POST(
   const type = body.type as ProjectType;
 
   if (!title || title.length < 3)
-    return await greska("Naziv projekta mora imati najmanje 3 karaktera.", 400);
+    return NextResponse.json({ error: "Naziv projekta mora imati najmanje 3 karaktera." }, { status: 400 });
   if (!["PRIKUPLJANJE", "REDISTRIBUCIJA"].includes(type))
-    return await greska("Neispravna vrsta projekta.", 400);
+    return NextResponse.json({ error: "Neispravna vrsta projekta." }, { status: 400 });
 
   await prisma.krugProjekat.create({
     data: { krugId, title, description, type },

@@ -176,13 +176,6 @@ export default function KarticaForma({
         <p className="text-sm text-kolo-muted mt-0.5">{t("forma_uvod")}</p>
       </div>
 
-      {/* Pravilo popunjavanja stoji PRE polja. Ranije je stizalo tek posle
-          klika (greška „popuni bar jedno polje") ili na koraku pregleda
-          (savet o mestu) — dakle tek pošto čovek pogreši. */}
-      <p className="text-sm text-kolo-green-900 bg-kolo-green-100 rounded-xl px-4 py-3">
-        {t("forma_pravilo")}
-      </p>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="block text-sm font-medium text-kolo-muted mb-1">{t("label_ime")}</label>

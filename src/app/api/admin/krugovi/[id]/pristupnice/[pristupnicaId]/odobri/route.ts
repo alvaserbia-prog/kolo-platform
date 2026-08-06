@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -14,7 +13,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string; pristupnicaId: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const { id: krugId, pristupnicaId } = await params;
 
@@ -24,22 +23,22 @@ export async function POST(
     where: { krugId, userId: session.user.id, leftAt: null, isAdmin: true },
   });
   if (!isAdmin && !isKrugAdmin)
-    return await greska("Nemaš pravo da odobriš pristupnicu.", 403);
+    return NextResponse.json({ error: "Nemaš pravo da odobriš pristupnicu." }, { status: 403 });
 
   const pristupnica = await prisma.krugPristupnica.findUnique({
     where: { id: pristupnicaId },
   });
   if (!pristupnica || pristupnica.krugId !== krugId)
-    return await greska("Pristupnica nije pronađena.", 404);
+    return NextResponse.json({ error: "Pristupnica nije pronađena." }, { status: 404 });
   if (pristupnica.status !== "PENDING")
-    return await greska("Pristupnica nije na čekanju.", 400);
+    return NextResponse.json({ error: "Pristupnica nije na čekanju." }, { status: 400 });
 
   // Čl. 28 — korisnik ne sme biti u drugoj zadruzi
   const vec = await prisma.krugClanstvo.findFirst({
     where: { userId: pristupnica.userId, leftAt: null },
   });
   if (vec)
-    return await greska("Korisnik je već član druge krugovi.", 400);
+    return NextResponse.json({ error: "Korisnik je već član druge krugovi." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {
     await tx.krugClanstvo.create({
@@ -59,14 +58,13 @@ export async function POST(
   await logAdminAkcija(session.user.id, "KRUG_PRISTUPNICA_ODOBRENA", pristupnica.userId,
     krug?.name ?? krugId);
 
-  await obavesti(pristupnica.userId, {
-    tip: "info",
-    kljuc: "notifikacije.pristupnica_prihvacena",
-    parametri: { krug: krug?.name ?? krugId },
-    naslov: "Pristupnica prihvaćena!",
-    tekst: `Postao/la si član kruga „${krug?.name ?? krugId}".`,
-    link: `/krug/${krugId}`,
-  });
+  await posaljiNotifikaciju(
+    pristupnica.userId,
+    "info",
+    "Pristupnica prihvaćena!",
+    `Postao/la si član kruga „${krug?.name ?? krugId}".`,
+    `/krug/${krugId}`
+  );
 
   return NextResponse.json({ ok: true });
 }

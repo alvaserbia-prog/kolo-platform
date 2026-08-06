@@ -72,9 +72,6 @@ const EKRANI: { key: string; pasusi: number; akcije?: Akcija[]; finalni?: boolea
   { key: "ekran7", pasusi: 3, finalni: true },
 ];
 
-/** sessionStorage ključ za korak na koji se korisnik vraća posle CTA odlaska. */
-const KLJUC_KORAK = "kolo-dobrodosli-korak";
-
 export default function DobrodosliPage() {
   const t = useTranslations("dobrodosli");
   const router = useRouter();
@@ -84,38 +81,16 @@ export default function DobrodosliPage() {
   // Jednokratni flag iz registracije/OAuth-a: ako postoji, ovo je prvi prolaz
   // (gornje dugme = "Preskoči" → /sistem). Inače je vodič otvoren iz "?"
   // (gornje dugme = "Zatvori" → nazad). Flag čistimo čim ga pročitamo.
-  //
-  // Uz to vraćamo korak na koji se čovek vratio: CTA dugmad vode van vodiča
-  // (npr. na tablu jemstva), a povratak je do sada uvek počinjao od ekrana 1 —
-  // ko izađe da pogleda pa se vrati, morao je ponovo da proklikta ceo vodič.
-  // Korak upisuje `idiNa` pri odlasku, ovde ga trošimo (pročitaj pa obriši),
-  // tako da vodič otvoren iz "?" i dalje kreće od početka.
   useEffect(() => {
     try {
       if (sessionStorage.getItem("kolo-welcome")) {
         setPrviPut(true);
         sessionStorage.removeItem("kolo-welcome");
       }
-      const sacuvan = sessionStorage.getItem(KLJUC_KORAK);
-      if (sacuvan !== null) {
-        sessionStorage.removeItem(KLJUC_KORAK);
-        const n = Number(sacuvan);
-        if (Number.isInteger(n) && n >= 0 && n < EKRANI.length) setKorak(n);
-      }
     } catch {
       /* nedostupan */
     }
   }, []);
-
-  /** Odlazak sa vodiča preko CTA dugmeta — zapamti korak radi povratka. */
-  function idiNa(href: string) {
-    try {
-      sessionStorage.setItem(KLJUC_KORAK, String(korak));
-    } catch {
-      /* nedostupan — u najgorem slučaju vodič kreće od početka, kao ranije */
-    }
-    router.push(href);
-  }
 
   const ekran = EKRANI[korak];
   const prvi = korak === 0;
@@ -171,7 +146,7 @@ export default function DobrodosliPage() {
           ekran.akcije?.map((akcija) => (
             <div key={akcija.href} className="mt-5 flex flex-col items-start">
               <button
-                onClick={() => idiNa(akcija.href)}
+                onClick={() => router.push(akcija.href)}
                 className="inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
               >
                 {t(akcija.ctaKey)} →
@@ -184,13 +159,13 @@ export default function DobrodosliPage() {
         {ekran.finalni && (
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <button
-              onClick={() => idiNa("/verifikacija")}
+              onClick={() => router.push("/verifikacija")}
               className="flex-1 px-4 py-3 bg-kolo-green-700 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl transition-colors"
             >
               {t("cta_poznajem")}
             </button>
             <button
-              onClick={() => idiNa("/tabla-jemstva")}
+              onClick={() => router.push("/tabla-jemstva")}
               className="flex-1 px-4 py-3 bg-white border border-kolo-green-700 text-kolo-green-700 hover:bg-kolo-green-100 text-sm font-semibold rounded-xl transition-colors"
             >
               {t("cta_ne_poznajem")}

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +10,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const userId = session.user.id;
 
@@ -35,18 +34,18 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const userId = session.user.id;
   const body = await req.json();
   const { verzijaId } = body;
 
   if (!verzijaId) {
-    return await greska("verzijaId je obavezno.", 400);
+    return NextResponse.json({ error: "verzijaId je obavezno." }, { status: 400 });
   }
 
   const verzija = await prisma.politikaVerzija.findUnique({ where: { id: verzijaId } });
-  if (!verzija) return await greska("Verzija nije pronađena.", 404);
+  if (!verzija) return NextResponse.json({ error: "Verzija nije pronađena." }, { status: 404 });
 
   await prisma.politikaPrihvatanje.upsert({
     where: { userId_verzijaId: { userId, verzijaId } },

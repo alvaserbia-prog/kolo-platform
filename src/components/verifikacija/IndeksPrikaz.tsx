@@ -4,7 +4,6 @@
  * Veliki prikaz indeksa stvarnosti u formatu "X/Y%" ili "∞/Y%".
  * Pravilnik o dokazu stvarnosti v3.5.0.
  */
-import { useTranslations } from "next-intl";
 import Pojam from "@/components/Pojam";
 
 type Props = {
@@ -20,14 +19,13 @@ type Props = {
 };
 
 export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
-  const t = useTranslations("verifikacija");
   const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
     ispuniVisinu ? " h-full flex flex-col justify-center" : ""
   }`;
   const tipLabela: Record<string, string> = {
-    REGULARNI: t("tip_regularni"),
-    NOSILAC_ZRNA: t("tip_nosilac_zrna"),
-    NEVERIFIKOVAN: t("tip_neverifikovan"),
+    REGULARNI: "Verifikovan kroz lanac jemstva",
+    NOSILAC_ZRNA: "Nosilac ZRNA",
+    NEVERIFIKOVAN: "Neverifikovan",
   };
 
   const badgeStil: Record<string, string> = {
@@ -38,15 +36,15 @@ export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, status
 
   // Osnivači (početni korisnici, UO Fondacije) su koren lanca jemstva — nemaju
   // verifikatora iznad sebe, pa se njihov status prikazuje kao „Početna verifikacija".
-  const labela = jeOsnivac ? t("tip_pocetna") : (tipLabela[tip] ?? tip);
+  const labela = jeOsnivac ? "Početna verifikacija" : (tipLabela[tip] ?? tip);
   const stil = jeOsnivac ? "bg-kolo-gold-100 text-kolo-gold-600" : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
 
   const indeks = (
     <div className="min-w-0 text-center">
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold">
         <Pojam
-          termin={t("indeks_termin")}
-          objasnjenje={t("indeks_objasnjenje")}
+          termin="Indeks stvarnosti"
+          objasnjenje="Koliko te je mreža potvrdila kao stvarnu osobu. Raste sa svakom verifikacijom; na 10% dobijaš pun pristup."
         />
       </div>
       <div className="mt-1 text-[clamp(1.75rem,7vw,3rem)] font-bold tabular-nums leading-none whitespace-nowrap text-kolo-green-700">{prikaz}</div>
@@ -77,8 +75,8 @@ export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, status
     <div className={rootCls}>
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold">
         <Pojam
-          termin={t("indeks_termin")}
-          objasnjenje={t("indeks_objasnjenje")}
+          termin="Indeks stvarnosti"
+          objasnjenje="Koliko te je mreža potvrdila kao stvarnu osobu. Raste sa svakom verifikacijom; na 10% dobijaš pun pristup."
         />
       </div>
       <div className="mt-1 text-5xl font-bold tabular-nums text-kolo-green-700">{prikaz}</div>

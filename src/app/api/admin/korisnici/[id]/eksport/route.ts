@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -16,7 +15,7 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return await greska("Nije ovlašćen.", 403);
+    return NextResponse.json({ error: "Nije ovlašćen." }, { status: 403 });
   }
 
   const { id: userId } = await params;
@@ -66,7 +65,7 @@ export async function GET(
     }),
   ]);
 
-  if (!user) return await greska("Korisnik nije pronađen.", 404);
+  if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
 
   await logAdminAkcija(
     session.user.id,

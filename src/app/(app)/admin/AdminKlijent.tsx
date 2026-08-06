@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import type { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
@@ -408,7 +407,6 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 // ── Kartica za zahtev za osnivanje krugovi ────────────────────────────────────
 
 function KrugZahtevKartica({ z, onDone }: { z: PendingKrug; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [razlog, setRazlog] = useState("");
   const [showOdbij, setShowOdbij] = useState(false);
@@ -464,7 +462,7 @@ function KrugZahtevKartica({ z, onDone }: { z: PendingKrug; onDone: () => void }
 
       <div className="flex gap-4 text-xs text-kolo-muted">
         <span>{z.brOsnivaca} {t("krug_inicijator")}</span>
-        <span>{new Date(z.createdAt).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" })}</span>
+        <span>{new Date(z.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</span>
       </div>
 
       {!poruka && (
@@ -513,7 +511,6 @@ const sourceCls: Record<string, string> = {
 };
 
 function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [view, setView] = useState<"oglasi" | "prijave" | "evidencije" | "novi">("oglasi");
   const [loading, setLoading] = useState<string | null>(null);
@@ -547,7 +544,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
     const res = await fetch(`/api/admin/doprinos-oglasi/evidencija/${id}/odobri`, { method: "POST" });
     const d = await res.json();
     setLoading(null);
-    setPoruke((p) => ({ ...p, [id]: { text: res.ok ? t("ped_potvrdjeno_msg", { poen: d.predlozeniPoen?.toLocaleString(intlTag(locale)) }) : (d.error ?? t("greska_generalna")), ok: res.ok } }));
+    setPoruke((p) => ({ ...p, [id]: { text: res.ok ? t("ped_potvrdjeno_msg", { poen: d.predlozeniPoen?.toLocaleString("sr-RS") }) : (d.error ?? t("greska_generalna")), ok: res.ok } }));
     if (res.ok) setTimeout(onDone, 1000);
   }
 
@@ -612,7 +609,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                   </div>
                   <p className="font-semibold text-kolo-text text-sm">{o.title}</p>
                   <p className="text-xs text-kolo-muted mt-1">
-                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
+                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
                   </p>
                 </div>
                 {o.status === "ACTIVE" && (
@@ -647,9 +644,9 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{p.pseudonim}</Pseudonim></p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen > 0 ? p.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen > 0 ? p.predlozeniPoen.toLocaleString("sr-RS") : t("ped_neograniceno")} {t("ped_predlozeni_poen")}</p>
                     {p.planIzvrsenja && <p className="text-xs text-kolo-muted mt-1 line-clamp-3"><span className="font-semibold">{t("ped_plan_label")}</span> {p.planIzvrsenja}</p>}
-                    <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString(intlTag(locale))}</p>
+                    <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString("sr-RS")}</p>
                   </div>
                   <div className="flex gap-2">
                     <OdbijForma onOdbij={(r) => odbijPrijavu(p.id, r)} loading={loading === p.id} />
@@ -678,7 +675,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                 <div className="flex justify-between items-start gap-3">
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{e.pseudonim}</Pseudonim></p>
-                    <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short" })}</p>
+                    <p className="text-xs text-kolo-muted mt-0.5">{e.oglasTitle} · {new Date(e.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</p>
                     <p className="text-xs text-kolo-muted mt-1 line-clamp-2">{e.description}</p>
                     {e.dokaz && (/\.(jpe?g|png|webp)(\?.*)?$/i.test(e.dokaz) && /^https?:\/\//.test(e.dokaz) ? (
                       // Screenshot dokaz (R2) — sličica koja se otvara u punoj veličini.
@@ -696,7 +693,7 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                     ))}
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="text-sm font-bold text-kolo-text">{e.predlozeniPoen.toLocaleString(intlTag(locale))} {t("ped_p_predlozeno")}</p>
+                    <p className="text-sm font-bold text-kolo-text">{e.predlozeniPoen.toLocaleString("sr-RS")} {t("ped_p_predlozeno")}</p>
                     <div className="flex gap-2 mt-2">
                       <button onClick={() => odbijEvidenciju(e.id)} disabled={loading === e.id}
                         className="px-3 py-1.5 border border-kolo-danger/20 text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60">
@@ -741,7 +738,6 @@ function OdbijForma({ onOdbij, loading }: { onOdbij: (razlog: string) => void; l
 }
 
 function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem; onSuccess: () => void; onCancel?: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [title, setTitle] = useState(oglas?.title ?? "");
   const [description, setDescription] = useState(oglas?.description ?? "");
@@ -836,7 +832,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
       {error && <p className="text-xs text-kolo-danger">{error}</p>}
 
       <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2 text-xs text-kolo-gold-600">
-        {t("novi_oglas_napomena_box", { poen: predlozeniPoen.trim() && predlozeni > 0 ? predlozeni.toLocaleString(intlTag(locale)) : t("ped_neograniceno") })}
+        {t("novi_oglas_napomena_box", { poen: predlozeniPoen.trim() && predlozeni > 0 ? predlozeni.toLocaleString("sr-RS") : t("ped_neograniceno") })}
       </div>
 
       <div className="flex gap-2">
@@ -858,7 +854,6 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
 // ── Programi tab ──────────────────────────────────────────────────────────────
 
 function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; opticaj: number; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [loadingToggle, setLoadingToggle] = useState<string | null>(null);
   const [loadingNocna, setLoadingNocna] = useState(false);
@@ -879,7 +874,7 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
     const res = await fetch("/api/admin/zrno/nocna", { method: "POST" });
     const d = await res.json();
     setLoadingZrno(false);
-    alert(res.ok ? `ZRNO: kurs ${Number(d.kurs).toFixed(2)}, u Protokolu: ${d.zrnaUProtokolu?.toLocaleString(intlTag(locale))}` : d.error);
+    alert(res.ok ? `ZRNO: kurs ${Number(d.kurs).toFixed(2)}, u Protokolu: ${d.zrnaUProtokolu?.toLocaleString("sr-RS")}` : d.error);
     onDone();
   }
 
@@ -897,7 +892,7 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
     const data = await res.json();
     setLoadingNocna(false);
     if (res.ok) {
-      setNocnaRezultat(t("programi_nocna_rezultat", { emitted: data.totalEmitted?.toLocaleString(intlTag(locale)), requested: data.totalRequested?.toLocaleString(intlTag(locale)), koef: Number(data.koeficijent).toFixed(4) }));
+      setNocnaRezultat(t("programi_nocna_rezultat", { emitted: data.totalEmitted?.toLocaleString("sr-RS"), requested: data.totalRequested?.toLocaleString("sr-RS"), koef: Number(data.koeficijent).toFixed(4) }));
       onDone();
     } else {
       setNocnaRezultat(t("programi_greska_prefix", { msg: data.error }));
@@ -931,12 +926,12 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("emisija_opticaj_label")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_opticaj_sub")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("emisija_dnevni_limit")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{dnevniLimit.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_dnevni_limit_sub")}</p>
         </div>
       </div>
@@ -978,7 +973,7 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
             <div>
               <span className="text-sm font-medium text-kolo-text">{p.label}</span>
               {p.activatedAt && p.isActive && (
-                <span className="ml-2 text-xs text-kolo-muted">{t("programi_aktiviran_label", { datum: new Date(p.activatedAt).toLocaleDateString(intlTag(locale)) })}</span>
+                <span className="ml-2 text-xs text-kolo-muted">{t("programi_aktiviran_label", { datum: new Date(p.activatedAt).toLocaleDateString("sr-RS") })}</span>
               )}
             </div>
             <button onClick={() => toggleProgram(p.type)} disabled={loadingToggle === p.type}
@@ -1013,12 +1008,12 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
           </div>
           {data.poslednjeEmisije.map((s, i) => (
             <div key={s.date} className={`px-5 py-3 flex justify-between items-center text-sm ${i < data.poslednjeEmisije.length - 1 ? "border-b border-kolo-border" : ""}`}>
-              <span className="text-kolo-muted">{new Date(s.date).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short" })}</span>
-              <span className="font-semibold text-kolo-green-700">{s.totalEmitted.toLocaleString(intlTag(locale))} P</span>
+              <span className="text-kolo-muted">{new Date(s.date).toLocaleDateString("sr-RS", { day: "2-digit", month: "short" })}</span>
+              <span className="font-semibold text-kolo-green-700">{s.totalEmitted.toLocaleString("sr-RS")} P</span>
               {s.koeficijent < 1 && (
                 <span className="text-xs text-kolo-gold-600">{t("programi_koef_label", { val: s.koeficijent.toFixed(3) })}</span>
               )}
-              <span className="text-xs text-kolo-muted">{t("programi_lim_label", { val: s.limit.toLocaleString(intlTag(locale)) })}</span>
+              <span className="text-xs text-kolo-muted">{t("programi_lim_label", { val: s.limit.toLocaleString("sr-RS") })}</span>
             </div>
           ))}
         </div>
@@ -1032,7 +1027,6 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
   onOdobri: (dailyAmount?: number) => void;
   onOdbij: () => void;
 }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [dailyAmount, setDailyAmount] = useState("");
 
@@ -1046,7 +1040,7 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
           <p className="text-xs text-kolo-green-700 font-medium">{e.label}</p>
           {metaLines && <p className="text-xs text-kolo-muted mt-0.5">{metaLines}</p>}
         </div>
-        <span className="text-xs text-kolo-muted">{new Date(e.createdAt).toLocaleDateString(intlTag(locale))}</span>
+        <span className="text-xs text-kolo-muted">{new Date(e.createdAt).toLocaleDateString("sr-RS")}</span>
       </div>
       {e.type === "SKOLOVANJE" && (
         <input type="number" min={100} placeholder={t("programi_dnevni_iznos_placeholder")} value={dailyAmount}
@@ -1071,7 +1065,6 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
 // ── Emisija tab ────────────────────────────────────────────────────────────────
 
 function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [pseudonim, setPseudonim] = useState("");
   const [amountRSD, setAmountRSD] = useState("");
@@ -1237,11 +1230,11 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
             <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-3 text-sm text-kolo-green-700">
               <p className="font-semibold">{t("emisija_evidentirana")}</p>
               {rezultat.poenEmitted > 0 ? (
-                <p className="mt-1">{t("emisija_emitovano", { poen: rezultat.poenEmitted.toLocaleString(intlTag(locale)), nivo: rezultat.noviNivo })}</p>
+                <p className="mt-1">{t("emisija_emitovano", { poen: rezultat.poenEmitted.toLocaleString("sr-RS"), nivo: rezultat.noviNivo })}</p>
               ) : (
                 <p className="mt-1 text-kolo-muted">{t("emisija_prag_nedostignut")}</p>
               )}
-              <p className="text-xs mt-1">{t("emisija_kumulativ", { val: rezultat.noviKumulativ.toLocaleString(intlTag(locale)) })}</p>
+              <p className="text-xs mt-1">{t("emisija_kumulativ", { val: rezultat.noviKumulativ.toLocaleString("sr-RS") })}</p>
             </div>
           )}
           <button
@@ -1298,7 +1291,6 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
 // ── Donacije tab ─────────────────────────────────────────────────────────────
 
 function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
@@ -1327,7 +1319,7 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
     });
     const data = await res.json();
     setLoading(null);
-    setPoruke((p) => ({ ...p, [d.id]: { text: res.ok ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString(intlTag(locale)) }) : (data.error ?? t("greska_generalna")), ok: res.ok } }));
+    setPoruke((p) => ({ ...p, [d.id]: { text: res.ok ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString("sr-RS") }) : (data.error ?? t("greska_generalna")), ok: res.ok } }));
     if (res.ok) setTimeout(onDone, 1200);
   }
 
@@ -1349,7 +1341,7 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
     setIzvodLoading(false);
     setIzvodPoruka({
       text: res.ok
-        ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString(intlTag(locale)) })
+        ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString("sr-RS") })
         : (data.error ?? t("greska_generalna")),
       ok: res.ok,
     });
@@ -1416,9 +1408,9 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
                 <p className="text-xs text-kolo-muted mt-0.5">
                   {nacinLabel(d.nacinUplate)}
                   {d.referenceNumber ? ` · ${d.referenceNumber}` : ""}
-                  {" · "}{new Date(d.createdAt).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short", year: "numeric" })}
+                  {" · "}{new Date(d.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "short", year: "numeric" })}
                 </p>
-                <p className="text-xs text-kolo-muted mt-1">{t("donacije_kumulativ", { val: d.cumulativeRSD.toLocaleString(intlTag(locale)) })}</p>
+                <p className="text-xs text-kolo-muted mt-1">{t("donacije_kumulativ", { val: d.cumulativeRSD.toLocaleString("sr-RS") })}</p>
               </div>
               <div className="shrink-0 text-right">
                 <div className="relative w-32">
@@ -1470,7 +1462,6 @@ function PrigovoriTab({ prigovori, onDone }: { prigovori: PrigovorItem[]; onDone
 }
 
 function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [odgovor, setOdgovor] = useState("");
   const [loading, setLoading] = useState<string | null>(null);
@@ -1502,7 +1493,7 @@ function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void })
         </div>
         <p className="font-semibold text-kolo-text text-sm">{p.pseudonim}</p>
         <p className="text-sm text-kolo-muted mt-1 whitespace-pre-wrap">{p.opis}</p>
-        <p className="text-xs text-kolo-muted mt-1">{new Date(p.createdAt).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "long", year: "numeric" })}</p>
+        <p className="text-xs text-kolo-muted mt-1">{new Date(p.createdAt).toLocaleDateString("sr-RS", { day: "2-digit", month: "long", year: "numeric" })}</p>
       </div>
       <textarea value={odgovor} onChange={(e) => setOdgovor(e.target.value)} rows={2}
         placeholder={t("prigovori_odgovor_placeholder")}
@@ -1533,7 +1524,6 @@ function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void })
 // ── Dashboard tab ─────────────────────────────────────────────────────────────
 
 function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [zeroSum, setZeroSum] = useState<{ zbir: number; ok: boolean } | null>(null);
   const [loadingZS, setLoadingZS] = useState(false);
@@ -1551,15 +1541,15 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_korisnici_ukupno")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_verifikovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_suspendovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1567,11 +1557,11 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_opticaj")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.finansije.opticaj.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_ukupno_transakcija")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.ukupnoTransakcija.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1579,15 +1569,15 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_zrno_kod_korisnika")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.zrno.kodKorisnika.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_zrno_u_protokolu")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uProtokolu.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.zrno.uProtokolu.toLocaleString("sr-RS")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
           <p className="text-xs text-kolo-muted mb-1">{t("dashboard_ukupno_zrna")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString(intlTag(locale))}</p>
+          <p className="text-xl md:text-2xl font-bold text-kolo-muted">{data.zrno.ukupno.toLocaleString("sr-RS")}</p>
         </div>
       </div>
 
@@ -1597,7 +1587,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
           <p className="text-sm font-semibold text-kolo-muted">{t("dashboard_zero_sum_naslov")}</p>
           {zeroSum && (
             <p className={`text-sm mt-0.5 ${zeroSum.ok ? "text-kolo-green-700" : "text-kolo-danger"}`}>
-              {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString(intlTag(locale)), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
+              {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString("sr-RS"), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
             </p>
           )}
         </div>
@@ -1622,7 +1612,6 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
   krugoviLista: KrugListItem[];
   onDone: () => void;
 }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const statusKrugovi: Record<string, string> = {
     ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
@@ -1658,7 +1647,7 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
               <div className="flex items-center gap-3 shrink-0 text-xs text-kolo-muted">
                 <span>{t("krugovi_cl", { br: z.clanovi })}</span>
                 <span>{t("krugovi_proj", { br: z.projekti })}</span>
-                <span>{z.balance.toLocaleString(intlTag(locale))} P</span>
+                <span>{z.balance.toLocaleString("sr-RS")} P</span>
                 <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusKrugovi[z.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
                   {z.status}
                 </span>
@@ -1674,7 +1663,6 @@ function KrugoviLista({ pendingKrugovi, krugoviLista, onDone }: {
 // ── Korisnici tab ─────────────────────────────────────────────────────────────
 
 function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: KorisnikInfo[]; onDone: () => void; viewerJeSuperadmin: boolean; viewerId: string }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
@@ -1759,7 +1747,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     )}
                   </div>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {tl[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString(intlTag(locale))} P
+                    {tl[u.tipKorisnika] ?? u.tipKorisnika} · {u.balance.toLocaleString("sr-RS")} P
                     {u.suspendedReason && <span className="ml-1 text-kolo-gold-600">— {u.suspendedReason}</span>}
                   </p>
                   {u.email && (
@@ -1937,7 +1925,6 @@ function AdminPokroviteljiTab({
   krugovi: { id: string; name: string }[];
   onDone: () => void;
 }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [subTab, setSubTab] = useState<"lista" | "prijave" | "novi" | "doprinos">("lista");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -2008,7 +1995,7 @@ function AdminPokroviteljiTab({
     if (res.ok) {
       const noviNivoi: { nivo: number; bonusPoen: number }[] = data.noviNivoi ?? [];
       if (noviNivoi.length > 0) {
-        const tekst = noviNivoi.map((n: { nivo: number; bonusPoen: number }) => t("pokrovitelji_nivo_bonus", { nivo: n.nivo, bonus: n.bonusPoen.toLocaleString(intlTag(locale)) })).join(", ");
+        const tekst = noviNivoi.map((n: { nivo: number; bonusPoen: number }) => t("pokrovitelji_nivo_bonus", { nivo: n.nivo, bonus: n.bonusPoen.toLocaleString("sr-RS") })).join(", ");
         setPoruka({ text: t("pokrovitelji_doprinos_evidentiran_msg", { nivoi: tekst }), ok: true });
       } else {
         setPoruka({ text: t("pokrovitelji_doprinos_evidentiran_no_nivo"), ok: true });
@@ -2064,7 +2051,7 @@ function AdminPokroviteljiTab({
                     {t("pokrovitelji_nivo", { nivo: p.trenutniNivo })}
                   </span>
                   <div className="text-xs text-kolo-muted mt-0.5">
-                    {p.rsdKumulativ.toLocaleString(intlTag(locale))} RSD · {p.brDoprinosa !== 1 ? t("pokrovitelji_doprinos_count_pl", { count: p.brDoprinosa }) : t("pokrovitelji_doprinos_count_sing", { count: p.brDoprinosa })}
+                    {p.rsdKumulativ.toLocaleString("sr-RS")} RSD · {p.brDoprinosa !== 1 ? t("pokrovitelji_doprinos_count_pl", { count: p.brDoprinosa }) : t("pokrovitelji_doprinos_count_sing", { count: p.brDoprinosa })}
                   </div>
                 </div>
               </div>
@@ -2150,7 +2137,7 @@ function AdminPokroviteljiTab({
               <option value="">{t("pokrovitelji_doprinos_select_placeholder")}</option>
               {pokrovitelji.filter((p) => p.status === "ACTIVE").map((p) => (
                 <option key={p.id} value={p.id}>
-                  {p.naziv} ({t("pokrovitelji_nivo", { nivo: p.trenutniNivo })}, {p.rsdKumulativ.toLocaleString(intlTag(locale))} RSD)
+                  {p.naziv} ({t("pokrovitelji_nivo", { nivo: p.trenutniNivo })}, {p.rsdKumulativ.toLocaleString("sr-RS")} RSD)
                 </option>
               ))}
             </select>
@@ -2202,7 +2189,6 @@ function AdminPokroviteljiTab({
 // ── Audit log tab ─────────────────────────────────────────────────────────────
 
 function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   return (
     <div className="space-y-4">
@@ -2234,7 +2220,7 @@ function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: ()
                   </p>
                 </div>
                 <span className="text-xs text-kolo-muted shrink-0">
-                  {new Date(l.createdAt).toLocaleString(intlTag(locale), {
+                  {new Date(l.createdAt).toLocaleString("sr-RS", {
                     day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit",
                   })}
                 </span>
@@ -2250,7 +2236,6 @@ function AuditLogTab({ logs, onRefresh }: { logs: AuditLogEntry[]; onRefresh: ()
 // ── Vesti (blog Fondacije) ────────────────────────────────────────────────────
 
 function VestiTab({ objave, onDone }: { objave: BlogObjavaAdmin[]; onDone: () => void }) {
-  const locale = useLocale();
   const t = useTranslations("admin");
   const [editId, setEditId] = useState<string | null>(null);
   const [naslov, setNaslov] = useState("");
@@ -2408,7 +2393,7 @@ function VestiTab({ objave, onDone }: { objave: BlogObjavaAdmin[]; onDone: () =>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-semibold text-kolo-text">{o.title}</p>
                   <p className="text-xs text-kolo-muted mt-0.5">
-                    {new Date(o.publishedAt).toLocaleString(intlTag(locale), {
+                    {new Date(o.publishedAt).toLocaleString("sr-RS", {
                       day: "2-digit", month: "2-digit", year: "numeric",
                       hour: "2-digit", minute: "2-digit",
                     })}{" "}

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -61,9 +60,9 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
   if (!session.user.verified)
-    return await greska("Samo verifikovani korisnici mogu postavljati oglase.", 403);
+    return NextResponse.json({ error: "Samo verifikovani korisnici mogu postavljati oglase." }, { status: 403 });
 
   const formData = await req.formData();
   const title = (formData.get("title") as string)?.trim();
@@ -77,25 +76,25 @@ export async function POST(req: NextRequest) {
   const phone = (formData.get("phone") as string)?.trim() ?? "";
 
   if (!title || title.length < 3)
-    return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+    return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
   // Gornje granice dužine — sprečavaju bujanje baze i predimenzioniran javni odgovor.
   if (title.length > 120)
-    return await greska("Naslov može imati najviše 120 karaktera.", 400);
+    return NextResponse.json({ error: "Naslov može imati najviše 120 karaktera." }, { status: 400 });
   if (description.length > 4000)
-    return await greska("Opis može imati najviše 4000 karaktera.", 400);
+    return NextResponse.json({ error: "Opis može imati najviše 4000 karaktera." }, { status: 400 });
   if (location.length > 80)
-    return await greska("Lokacija može imati najviše 80 karaktera.", 400);
+    return NextResponse.json({ error: "Lokacija može imati najviše 80 karaktera." }, { status: 400 });
   if (phone.length > 40)
-    return await greska("Telefon može imati najviše 40 karaktera.", 400);
+    return NextResponse.json({ error: "Telefon može imati najviše 40 karaktera." }, { status: 400 });
   // Kod potražnje budžet se uvek dogovara — cena se ne unosi (uvek DOGOVOR).
   const cena = tip === "POTRAZNJA"
     ? { ok: true as const, cenaTip: "DOGOVOR" as const, price: null, cenaDo: null }
     : parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
   if (!cena.ok)
-    return await greska(cena.error, 400);
+    return NextResponse.json({ error: cena.error }, { status: 400 });
   // Serverska validacija: kategorija mora biti jedan od 13 slugova.
   if (!category || !jeKategorija(category))
-    return await greska("Neispravna kategorija.", 400);
+    return NextResponse.json({ error: "Neispravna kategorija." }, { status: 400 });
 
   // Slike
   const imageFiles: File[] = [];
@@ -105,9 +104,9 @@ export async function POST(req: NextRequest) {
   }
   for (const file of imageFiles) {
     if (file.size > MAX_SIZE)
-      return await greska("Svaka slika može biti najviše 5MB.", 400);
+      return NextResponse.json({ error: "Svaka slika može biti najviše 5MB." }, { status: 400 });
     if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
-      return await greska("Dozvoljeni formati: JPG, PNG, WebP.", 400);
+      return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
   }
 
   const listingId = randomUUID();
@@ -167,6 +166,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error("[POST /api/pijaca]", err);
-    return await greska(`Interna greška: ${msg}`, 500);
+    return NextResponse.json({ error: `Interna greška: ${msg}` }, { status: 500 });
   }
 }

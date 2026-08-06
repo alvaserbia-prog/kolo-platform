@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,28 +11,28 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije autorizovano.", 401);
-  if (!session.user.verified) return await greska("Potrebna je verifikacija.", 403);
+  if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
+  if (!session.user.verified) return NextResponse.json({ error: "Potrebna je verifikacija." }, { status: 403 });
   if (!(await imaFunkcionalniPristup(session.user.id)))
-    return await greska("Potreban je indeks stvarnosti od najmanje 10%.", 403);
+    return NextResponse.json({ error: "Potreban je indeks stvarnosti od najmanje 10%." }, { status: 403 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const planIzvrsenja = typeof body.planIzvrsenja === "string" ? body.planIzvrsenja.trim() : "";
 
   const oglas = await prisma.doprinosOglas.findUnique({ where: { id } });
-  if (!oglas) return await greska("Oglas nije pronađen.", 404);
-  if (oglas.status !== "ACTIVE") return await greska("Oglas više nije aktivan.", 400);
-  if (oglas.deadline && new Date() > oglas.deadline) return await greska("Rok za prijavu je istekao.", 400);
+  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (oglas.status !== "ACTIVE") return NextResponse.json({ error: "Oglas više nije aktivan." }, { status: 400 });
+  if (oglas.deadline && new Date() > oglas.deadline) return NextResponse.json({ error: "Rok za prijavu je istekao." }, { status: 400 });
 
   // Plan izvršenja je obavezan za zadatke „sa odobravanjem" (čl. 11, 14).
   if (oglas.saOdobravanjem && planIzvrsenja.length < 10)
-    return await greska("Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 karaktera).", 400);
+    return NextResponse.json({ error: "Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 karaktera)." }, { status: 400 });
 
   const postoji = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId: id, userId: session.user.id } },
   });
-  if (postoji) return await greska("Već ste podneli prijavu.", 400);
+  if (postoji) return NextResponse.json({ error: "Već ste podneli prijavu." }, { status: 400 });
 
   // Popunjenost mesta — broje se primljeni izvršioci (APPROVED). Čl. 13: naknadne
   // prijave preko predviđenog broja se ne primaju.
@@ -41,7 +40,7 @@ export async function POST(
     where: { oglasId: id, status: "APPROVED" },
   });
   if (primljeni >= oglas.positions)
-    return await greska("Sva mesta za izvršioce su popunjena.", 400);
+    return NextResponse.json({ error: "Sva mesta za izvršioce su popunjena." }, { status: 400 });
 
   // Prijem prijave (čl. 13): bez odobravanja — automatski (APPROVED); sa odobravanjem
   // — čeka izričito odobrenje plana od verifikatora (PENDING).

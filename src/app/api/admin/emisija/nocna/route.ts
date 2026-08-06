@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
@@ -10,7 +9,7 @@ import { logAdminAkcija } from "@/lib/audit";
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   try {
     const rezultat = await izvrsiNocnuEmisiju(new Date());
@@ -19,6 +18,6 @@ export async function POST() {
   } catch (err) {
     console.error("[Admin] Greška pri manualnoj nocnoj emisiji:", err);
     const msg = err instanceof Error ? err.message : "Greška.";
-    return await greska(msg, 500);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }

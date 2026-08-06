@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "@/lib/protokol/emisija";
 import { TransactionType } from "@/generated/prisma/client";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -16,18 +15,18 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
 
   const zahtev = await prisma.krugOsnivanjeZahtev.findUnique({ where: { id } });
-  if (!zahtev) return await greska("Zahtev nije pronađen.", 404);
+  if (!zahtev) return NextResponse.json({ error: "Zahtev nije pronađen." }, { status: 404 });
   if (zahtev.status !== "PENDING")
-    return await greska("Zahtev nije na čekanju.", 400);
+    return NextResponse.json({ error: "Zahtev nije na čekanju." }, { status: 400 });
 
   // Proveri naziv
   const vec = await prisma.krug.findUnique({ where: { name: zahtev.name } });
-  if (vec) return await greska("Krug sa ovim nazivom već postoji.", 400);
+  if (vec) return NextResponse.json({ error: "Krug sa ovim nazivom već postoji." }, { status: 400 });
 
   const krugId = crypto.randomUUID();
   const walletId = crypto.randomUUID();
@@ -73,7 +72,7 @@ export async function POST(
     walletId,
     50_000,
     TransactionType.EMISIJA_KRUG_OSNIVANJE,
-    `Osnivanje krugovi "${zahtev.name}"`, { kljuc: "transakcije.krug_osnivanje", parametri: { krug: zahtev.name } }
+    `Osnivanje krugovi "${zahtev.name}"`
   );
 
   // Logovati osnivački prag (threshold=5) u BonusLog radi konzistentnosti
@@ -85,14 +84,13 @@ export async function POST(
 
   // 6. Notifikacija svim osnivačima
   for (const userId of zahtev.osnivaci as string[]) {
-    await obavesti(userId, {
-      tip: "info",
-      kljuc: "notifikacije.krug_odobren",
-      parametri: { krug: zahtev.name },
-      naslov: `Krug „${zahtev.name}" je odobren!`,
-      tekst: "Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.",
-      link: `/krug/${krugId}`,
-    });
+    await posaljiNotifikaciju(
+      userId,
+      "info",
+      `Krug „${zahtev.name}" je odobren!`,
+      `Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.`,
+      `/krug/${krugId}`
+    );
   }
 
   return NextResponse.json({ ok: true, krugId });

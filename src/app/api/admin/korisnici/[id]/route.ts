@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -11,7 +10,7 @@ import { porukaZauzeca, promeniPseudonim, proveriZauzece } from "@/lib/pseudonim
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
@@ -21,15 +20,15 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     where: { id },
     select: { pseudonim: true, tipKorisnika: true, admin: true },
   });
-  if (!korisnik) return await greska("Korisnik nije pronađen.", 404);
-  if (jeSuperadmin(korisnik)) return await greska("Ne može se editovati admin.", 400);
+  if (!korisnik) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (jeSuperadmin(korisnik)) return NextResponse.json({ error: "Ne može se editovati admin." }, { status: 400 });
 
   const data: { email?: string } = {};
   const izmenjena: string[] = [];
 
   if (email?.trim()) {
     const existing = await prisma.user.findFirst({ where: { email: email.trim(), id: { not: id } } });
-    if (existing) return await greska("Email je već u upotrebi.", 409);
+    if (existing) return NextResponse.json({ error: "Email je već u upotrebi." }, { status: 409 });
     data.email = email.trim();
     izmenjena.push("email");
   }
@@ -39,16 +38,16 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   let noviPseudonim: string | null = null;
   if (pseudonim?.trim()) {
     if (!validanPseudonim(pseudonim)) {
-      return await greska(PSEUDONIM_PRAVILO, 400);
+      return NextResponse.json({ error: PSEUDONIM_PRAVILO }, { status: 400 });
     }
     const zauzece = await proveriZauzece(pseudonim, id);
-    if (zauzece) return await greska(porukaZauzeca(zauzece), 409);
+    if (zauzece) return NextResponse.json({ error: porukaZauzeca(zauzece) }, { status: 409 });
     noviPseudonim = pseudonim.trim();
     izmenjena.push("pseudonim");
   }
 
   if (izmenjena.length === 0)
-    return await greska("Nema podataka za izmenu.", 400);
+    return NextResponse.json({ error: "Nema podataka za izmenu." }, { status: 400 });
 
   await prisma.$transaction(async (tx) => {
     if (noviPseudonim) {

@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { intlTag } from "@/lib/format";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
 
@@ -43,7 +42,6 @@ export default function PocetnaKlijent({
   chatInicijalno,
   jeAdminViewer,
 }: Props) {
-  const locale = useLocale();
   const t = useTranslations("pocetna");
   const [poruke, setPoruke] = useState<ChatPoruka[]>(chatInicijalno);
   const [input, setInput] = useState("");
@@ -164,7 +162,7 @@ export default function PocetnaKlijent({
                     {o.title}
                   </h3>
                   <p className="text-xs text-kolo-muted mb-3">
-                    {new Date(o.publishedAt).toLocaleDateString(intlTag(locale), {
+                    {new Date(o.publishedAt).toLocaleDateString("sr-RS", {
                       day: "2-digit",
                       month: "2-digit",
                       year: "numeric",
@@ -230,7 +228,7 @@ export default function PocetnaKlijent({
                           </span>
                         )}
                         <span className="text-[10px] text-kolo-muted">
-                          {new Date(p.createdAt).toLocaleString(intlTag(locale), {
+                          {new Date(p.createdAt).toLocaleString("sr-RS", {
                             day: "2-digit",
                             month: "2-digit",
                             hour: "2-digit",

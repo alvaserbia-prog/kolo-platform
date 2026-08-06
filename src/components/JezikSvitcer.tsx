@@ -9,7 +9,6 @@ const jezici = [
   { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
   { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
-  { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский" },
   // "hr" (Hrvatski, /flags/hr.svg) je zamrznut — vidi src/i18n/routing.ts.
 ];
 

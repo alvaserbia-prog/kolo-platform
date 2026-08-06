@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -18,7 +17,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const korisnikJeAdmin = jeAdmin(session.user);
   let jeNosilacZrna = false;
@@ -30,7 +29,10 @@ export async function POST(
     jeNosilacZrna = me?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
   }
   if (!korisnikJeAdmin && !jeNosilacZrna) {
-    return await greska("Odlučivanje o prijavi dostupno je samo nosiocima ZRNA i Upravnom odboru (čl. 36).", 403);
+    return NextResponse.json(
+      { error: "Odlučivanje o prijavi dostupno je samo nosiocima ZRNA i Upravnom odboru (čl. 36)." },
+      { status: 403 }
+    );
   }
 
   const { id } = await params;
@@ -41,16 +43,22 @@ export async function POST(
     where: { id },
     include: { oglas: { select: { createdById: true } } },
   });
-  if (!prijava) return await greska("Prijava nije pronađena.", 404);
-  if (prijava.status !== "PENDING") return await greska("Prijava nije na čekanju.", 400);
+  if (!prijava) return NextResponse.json({ error: "Prijava nije pronađena." }, { status: 404 });
+  if (prijava.status !== "PENDING") return NextResponse.json({ error: "Prijava nije na čekanju." }, { status: 400 });
 
   // Konflikt interesa: verifikator ne sme biti podnosilac prijave ni predlagač oglasa.
   // Izuzetak: superadmin sme da odlučuje i na svom oglasu (vidi odobri/route.ts).
   if (session.user.id === prijava.userId) {
-    return await greska("Ne možeš odlučivati o sopstvenoj prijavi.", 403);
+    return NextResponse.json(
+      { error: "Ne možeš odlučivati o sopstvenoj prijavi." },
+      { status: 403 }
+    );
   }
   if (!jeSuperadmin(session.user) && session.user.id === prijava.oglas.createdById) {
-    return await greska("Predlagač oglasa ne može odlučivati o prijavama na svoj oglas.", 403);
+    return NextResponse.json(
+      { error: "Predlagač oglasa ne može odlučivati o prijavama na svoj oglas." },
+      { status: 403 }
+    );
   }
 
   await prisma.oglasPrijava.update({
@@ -63,16 +71,13 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_PRIJAVA_ODBIJENA", prijava.userId,
     `${oglas?.title ?? prijava.oglasId}${razlog ? ": " + razlog : ""}`);
 
-  await obavesti(prijava.userId, {
-    tip: "info",
-    kljuc: razlog
-      ? "notifikacije.prijava_zadatak_odbijena_razlog"
-      : "notifikacije.prijava_zadatak_odbijena",
-    parametri: { zadatak: oglas?.title ?? "", razlog: razlog ?? "" },
-    naslov: "Prijava za zadatak odbijena",
-    tekst: `Tvoja prijava za zadatak „${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
-    link: "/programi",
-  });
+  await posaljiNotifikaciju(
+    prijava.userId,
+    "info",
+    "Prijava za zadatak odbijena",
+    `Tvoja prijava za zadatak „${oglas?.title ?? ""}" je odbijena.${razlog ? ` Razlog: ${razlog}` : ""}`,
+    "/programi"
+  );
 
   return NextResponse.json({ ok: true });
 }

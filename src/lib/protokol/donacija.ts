@@ -146,7 +146,7 @@ export async function evidentirajDonaciju(
       user.wallet.id,
       poen,
       TransactionType.EMISIJA_DONACIJA,
-      `Bonus za donaciju iznos ${poen.toLocaleString("sr-RS")}`, { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
+      `Bonus za donaciju iznos ${poen.toLocaleString("sr-RS")}`
     );
   }
 

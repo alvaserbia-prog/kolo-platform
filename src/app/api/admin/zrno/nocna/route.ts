@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
@@ -11,7 +10,7 @@ import { logAdminAkcija } from "@/lib/audit";
 export async function POST() {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   try {
     const rezultat = await izvrsiZrnoOperacije(new Date());
@@ -19,7 +18,7 @@ export async function POST() {
     return NextResponse.json({ ok: true, ...rezultat });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Greška.";
-    return await greska(msg, 500);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
 
@@ -27,7 +26,7 @@ export async function POST() {
 export async function PATCH() {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
   const current = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
   const novoStanje = !(current?.isActive ?? false);

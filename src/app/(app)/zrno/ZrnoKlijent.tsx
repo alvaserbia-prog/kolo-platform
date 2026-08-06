@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import GlasanjeKlijent from "@/app/(app)/glasanje/GlasanjeKlijent";
 import PageOpis from "@/components/PageOpis";
 import Pojam from "@/components/Pojam";
@@ -47,7 +46,6 @@ interface Props {
 }
 
 export default function ZrnoKlijent(props: Props) {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("zrno");
   const onRefresh = useCallback(() => router.refresh(), [router]);
@@ -69,12 +67,12 @@ export default function ZrnoKlijent(props: Props) {
       <div className="grid grid-cols-3 gap-2 sm:gap-3">
         <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("slobodno")}</p>
-          <p className="text-lg sm:text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString(intlTag(locale))}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-text">{props.slobodno.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("slobodno_opis")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("aktivno")}</p>
-          <p className="text-lg sm:text-xl font-bold text-kolo-gold-600">{props.aktivno.toLocaleString(intlTag(locale))}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-gold-600">{props.aktivno.toLocaleString("sr-RS")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("aktivno_opis")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
@@ -84,7 +82,7 @@ export default function ZrnoKlijent(props: Props) {
               objasnjenje="Odnos ukupnih POEN-a i raspoloživih ZRNA — pokazuje koliko ti je POEN-a potrebno da upišeš jedno ZRNO. Nije cena i nije kurs."
             />
           </p>
-          <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString(intlTag(locale), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString("sr-RS", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           <p className="text-xs text-kolo-muted mt-0.5">{t("kurs_opis")}</p>
         </div>
       </div>

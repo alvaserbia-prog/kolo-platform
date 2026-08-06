@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika } from "@/generated/prisma/client";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -28,7 +27,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const korisnikJeAdmin = jeAdmin(session.user);
   let jeNosilacZrna = false;
@@ -40,7 +39,10 @@ export async function POST(
     jeNosilacZrna = me?.tipKorisnika === TipKorisnika.NOSILAC_ZRNA;
   }
   if (!korisnikJeAdmin && !jeNosilacZrna) {
-    return await greska("Verifikacija evidencije dostupna je samo nosiocima ZRNA i Upravnom odboru (čl. 36).", 403);
+    return NextResponse.json(
+      { error: "Verifikacija evidencije dostupna je samo nosiocima ZRNA i Upravnom odboru (čl. 36)." },
+      { status: 403 }
+    );
   }
 
   const { id } = await params;
@@ -52,17 +54,23 @@ export async function POST(
     },
   });
 
-  if (!ev) return await greska("Evidencija nije pronađena.", 404);
-  if (ev.status !== "PENDING") return await greska("Evidencija nije na čekanju.", 400);
+  if (!ev) return NextResponse.json({ error: "Evidencija nije pronađena." }, { status: 404 });
+  if (ev.status !== "PENDING") return NextResponse.json({ error: "Evidencija nije na čekanju." }, { status: 400 });
 
   // Konflikt interesa: verifikator ne sme biti izvršilac ni predlagač.
   // Izuzetak: superadmin sme da verifikuje i na svom zadatku (u Fazi 1 UO objavljuje
   // zadatke, pa bi zabrana blokirala jedinog verifikatora); sopstveno izvršenje ne može ni on.
   if (session.user.id === ev.userId) {
-    return await greska("Ne možeš verifikovati sopstveno izvršenje.", 403);
+    return NextResponse.json(
+      { error: "Ne možeš verifikovati sopstveno izvršenje." },
+      { status: 403 }
+    );
   }
   if (!jeSuperadmin(session.user) && session.user.id === ev.oglas.createdById) {
-    return await greska("Predlagač zadatka ne može verifikovati izvršenje na svom zadatku.", 403);
+    return NextResponse.json(
+      { error: "Predlagač zadatka ne može verifikovati izvršenje na svom zadatku." },
+      { status: 403 }
+    );
   }
 
   // Potvrda — evidencija ulazi u raspodelu narednog noćnog obračuna (čl. 22, 24, 25).
@@ -75,14 +83,13 @@ export async function POST(
   await logAdminAkcija(session.user.id, "DOPRINOS_EVIDENCIJA_ODOBRENA", ev.userId,
     `${ev.oglas.title} (predloženo ${ev.predlozeniPoen} POEN)`);
 
-  await obavesti(ev.userId, {
-    tip: "info",
-    kljuc: "notifikacije.izvrsenje_potvrdjeno",
-    parametri: { zadatak: ev.oglas.title, poen: ev.predlozeniPoen },
-    naslov: "Izvršenje potvrđeno",
-    tekst: `Tvoje dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
-    link: "/doprinos-oglasi",
-  });
+  await posaljiNotifikaciju(
+    ev.userId,
+    "info",
+    "Izvršenje potvrđeno",
+    `Tvoje dnevno izvršenje za „${ev.oglas.title}" je potvrđeno (predloženi POEN: ${ev.predlozeniPoen.toLocaleString("sr-RS")}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.`,
+    "/doprinos-oglasi"
+  );
 
   return NextResponse.json({ ok: true, predlozeniPoen: ev.predlozeniPoen });
 }

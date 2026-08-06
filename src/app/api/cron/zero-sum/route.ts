@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
 
@@ -14,7 +13,7 @@ export async function GET(req: NextRequest) {
   const bearerSecret = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
   const secret = bearerSecret ?? req.headers.get("x-cron-secret");
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
-    return await greska("Neautorizovano.", 401);
+    return NextResponse.json({ error: "Neautorizovano." }, { status: 401 });
   }
 
   const result = await prisma.wallet.aggregate({ _sum: { balance: true } });

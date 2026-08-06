@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -12,7 +11,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
 
   const { id } = await params;
 
@@ -27,7 +26,7 @@ export async function GET(
     },
   });
 
-  if (!predlog) return await greska("Predlog nije pronađen.", 404);
+  if (!predlog) return NextResponse.json({ error: "Predlog nije pronađen." }, { status: 404 });
 
   const mojGlas = predlog.glasovi.find((g) => g.userId === session.user.id);
   const zaGlasova = predlog.glasovi.filter((g) => g.za).reduce((s, g) => s + g.glasackaGlasova, 0);

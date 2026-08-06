@@ -7,7 +7,6 @@
  * SAMO SUPERADMIN.
  */
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -17,7 +16,7 @@ import { logAdminAkcija } from "@/lib/audit";
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return await greska("Pristup odbijen.", 403);
+    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
   }
 
   const { id } = await params;
@@ -26,9 +25,9 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     where: { id },
     select: { status: true, poslato: true },
   });
-  if (!o) return await greska("Obaveštenje ne postoji.", 404);
+  if (!o) return NextResponse.json({ error: "Obaveštenje ne postoji." }, { status: 404 });
   if (o.status === "POSLATO") {
-    return await greska("Slanje je već završeno.", 409);
+    return NextResponse.json({ error: "Slanje je već završeno." }, { status: 409 });
   }
 
   await prisma.sistemskoObavestenje.update({

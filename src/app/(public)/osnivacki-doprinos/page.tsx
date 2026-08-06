@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth";
-import { intlTag } from "@/lib/format";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { dohvatiStatusKanala, GORNJA_GRANICA, ITERATION_LIMIT } from "@/lib/protokol/osnivacki";
@@ -21,7 +20,7 @@ export default async function OsnivackiDoprinosPage() {
   const t = await getTranslations("osnivackiDoprinosPage");
   const locale = await getLocale();
 
-  const fmt = (n: number) => n.toLocaleString(intlTag(locale));
+  const fmt = (n: number) => n.toLocaleString(locale === "sr-Cyrl" ? "sr-RS" : locale === "hu" ? "hu-HU" : locale === "en" ? "en-US" : locale === "hr" ? "hr-HR" : "sr-RS");
 
   // Pseudonimi osnivača vidljivi su isključivo verifikovanim članovima (Pravilnik o
   // osnivačkom doprinosu čl. 12 — „javnost udela" znači prema zajednici verifikovanih,
@@ -148,7 +147,7 @@ export default async function OsnivackiDoprinosPage() {
                     <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} POEN</td>
                     <td className="px-3 sm:px-6 py-3 text-kolo-muted whitespace-nowrap">
                       {new Date(k.createdAt).toLocaleDateString(
-                        intlTag(locale),
+                        locale === "sr-Cyrl" ? "sr-RS" : locale === "hu" ? "hu-HU" : locale === "en" ? "en-US" : locale === "hr" ? "hr-HR" : "sr-RS",
                         { day: "2-digit", month: "long", year: "numeric" }
                       )}
                     </td>

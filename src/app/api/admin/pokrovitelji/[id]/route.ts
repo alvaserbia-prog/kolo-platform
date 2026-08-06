@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +8,7 @@ import { logAdminAkcija } from "@/lib/audit";
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return await greska("Nemate pristup.", 403);
+    return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 
   const { id } = await params;
@@ -29,7 +28,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
   });
 
   if (!pokrovitelj) {
-    return await greska("Pokrovitelj nije pronađen.", 404);
+    return NextResponse.json({ error: "Pokrovitelj nije pronađen." }, { status: 404 });
   }
 
   return NextResponse.json({
@@ -66,7 +65,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return await greska("Nemate pristup.", 403);
+    return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
   }
 
   const { id } = await params;

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Unauthorized", 401);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const meId = session.user.id;
 
   const konverzacije = await prisma.konverzacija.findMany({
@@ -46,20 +45,20 @@ export async function GET() {
 // POST — otvori ili kreiraj konverzaciju sa korisnikom (po userId)
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Unauthorized", 401);
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   // INICIRANJE konverzacije je dostupno samo verifikovanima. Neverifikovani ne
   // može da pokrene konverzaciju; ka neverifikovanom se kreće isključivo preko
   // table zahteva za jemstvo (POST /api/tabla-jemstva/[id]/poruka), gde on potom
   // SME da uzvrati (Uslovi čl. 16, Politika čl. 6).
-  if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
+  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
   const meId = session.user.id;
 
   const { userId } = await req.json();
   if (!userId || userId === meId)
-    return await greska("Neispravan korisnik.", 400);
+    return NextResponse.json({ error: "Neispravan korisnik." }, { status: 400 });
 
   const drugiUser = await prisma.user.findUnique({ where: { id: userId }, select: { id: true } });
-  if (!drugiUser) return await greska("Korisnik ne postoji.", 404);
+  if (!drugiUser) return NextResponse.json({ error: "Korisnik ne postoji." }, { status: 404 });
 
   // Uvek sortiraj IDs da bi @@unique radio
   const [u1, u2] = [meId, userId].sort();

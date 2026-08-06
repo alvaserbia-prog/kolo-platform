@@ -189,7 +189,7 @@ export async function proveriIEvidentirajKorak(): Promise<{
         wallet.id,
         iznos,
         TransactionType.EMISIJA_OSNIVACKI,
-        `Osnivacki doprinos — korak ${trenutniKoraci + 1}/${ITERATION_LIMIT}`, { kljuc: "transakcije.osnivacki", parametri: { korak: trenutniKoraci + 1, ukupno: ITERATION_LIMIT } },
+        `Osnivacki doprinos — korak ${trenutniKoraci + 1}/${ITERATION_LIMIT}`,
       );
 
       await prisma.osnivackiKorakEmisija.create({

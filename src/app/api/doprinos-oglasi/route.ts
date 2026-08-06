@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 // GET /api/doprinos-oglasi — lista aktivnih oglasa
 export async function GET(_req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return await greska("Nije autorizovano.", 401);
+  if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
 
   const oglasi = await prisma.doprinosOglas.findMany({
     where: { status: "ACTIVE" },

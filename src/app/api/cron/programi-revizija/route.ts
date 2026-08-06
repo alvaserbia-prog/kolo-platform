@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
-import { obavesti } from "@/lib/notifikacije";
+import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { labelPrograma, razlogObustaveProgram } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
@@ -32,7 +31,7 @@ export async function GET(req: NextRequest) {
   const bearerSecret = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
   const secret = bearerSecret ?? req.headers.get("x-cron-secret");
   if (!process.env.CRON_SECRET || secret !== process.env.CRON_SECRET) {
-    return await greska("Neautorizovano.", 401);
+    return NextResponse.json({ error: "Neautorizovano." }, { status: 401 });
   }
 
   const sada = new Date();
@@ -73,14 +72,13 @@ export async function GET(req: NextRequest) {
     const razlog = istekla
       ? "Istekao je rok za godišnju reviziju statusa, a status nije ponovo potvrđen."
       : "Vaš indeks stvarnosti je pao ispod 100%, pa je osnov za program prestao da važi.";
-    await obavesti(en.user.id, {
-      tip: "info",
-      kljuc: "notifikacije.program_obustavljen",
-      parametri: { program: labelPrograma(en.type), razlog },
-      naslov: "Socijalni program privremeno obustavljen",
-      tekst: `Program „${labelPrograma(en.type)}" je obustavljen. ${razlog} Možeš ponovo da se prijaviš kada uslovi budu ispunjeni.`,
-      link: "/programi",
-    });
+    await posaljiNotifikaciju(
+      en.user.id,
+      "info",
+      "Socijalni program privremeno obustavljen",
+      `Program „${labelPrograma(en.type)}" je obustavljen. ${razlog} Možeš ponovo da se prijaviš kada uslovi budu ispunjeni.`,
+      "/programi"
+    );
   }
 
   const ukupno = istekloRevizija + palIndeks;

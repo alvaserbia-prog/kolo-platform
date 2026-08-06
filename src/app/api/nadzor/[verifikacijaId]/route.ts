@@ -6,7 +6,6 @@
  * nadzornik dobija 500 POEN-a.
  */
 import { NextRequest, NextResponse } from "next/server";
-import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { obaviNadzor, NadzorGreska } from "@/lib/protokol/nadzor-service";
@@ -18,7 +17,7 @@ export async function POST(
 ) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return await greska("Nisi prijavljen.", 401);
+    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
   }
 
   const { verifikacijaId } = await ctx.params;
@@ -32,9 +31,9 @@ export async function POST(
     return NextResponse.json(rez);
   } catch (e) {
     if (e instanceof NadzorGreska) {
-      return await greska(e.message, e.statusCode);
+      return NextResponse.json({ error: e.message }, { status: e.statusCode });
     }
     console.error("[POST /api/nadzor/[verifikacijaId]]", e);
-    return await greska("Greška servera", 500);
+    return NextResponse.json({ error: "Greška servera" }, { status: 500 });
   }
 }

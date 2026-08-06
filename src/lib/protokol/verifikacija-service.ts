@@ -374,13 +374,13 @@ async function emitujPoenZaVerifikaciju(
       verifikatorWalletId,
       POEN_VERIFIKATOR,
       TransactionType.EMISIJA_VERIFIKACIJA,
-      `Verifikacija ${verifikovaniPseudonim}`, { kljuc: "transakcije.verifikacija", parametri: { pseudonim: verifikovaniPseudonim } }
+      `Verifikacija ${verifikovaniPseudonim}`
     );
     await emitujPoen(
       verifikovaniWalletId,
       POEN_VERIFIKOVANI,
       TransactionType.EMISIJA_VERIFIKACIJA,
-      `Primljena verifikacija od ${verifikatorPseudonim}`, { kljuc: "transakcije.primljena_verifikacija", parametri: { pseudonim: verifikatorPseudonim } }
+      `Primljena verifikacija od ${verifikatorPseudonim}`
     );
   } catch (e) {
     console.error("[verifikacija-service] POEN emisija pukla posle Faze 1 — incident", {

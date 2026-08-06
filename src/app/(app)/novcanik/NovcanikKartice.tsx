@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
 
@@ -31,7 +30,6 @@ interface Props {
 }
 
 export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis }: Props) {
-  const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
@@ -69,7 +67,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           {/* DESNO — stanje veliko */}
           <div className="text-right min-w-0">
             <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
-              {balance.toLocaleString(intlTag(locale))}
+              {balance.toLocaleString("sr-RS")}
             </p>
             <p className="text-lg text-white/70 mt-0.5">POEN</p>
           </div>
@@ -154,7 +152,6 @@ function SkenerModal({ onClose }: { onClose: () => void }) {
 // ── Forma za upis POEN-a ──────────────────────────────────────────────────────
 
 function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initialOpis }: { onClose: () => void; onSuccess: () => void; initialPseudonim?: string; initialIznos?: string; initialOpis?: string }) {
-  const locale = useLocale();
   const t = useTranslations("novcanik");
   const tc = useTranslations("common");
   const [pseudonim, setPseudonim] = useState(initialPseudonim ?? "");
@@ -252,7 +249,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
     return (
       <UspehKartica
         naslov={t("send_uspeh_naslov")}
-        opis={t("send_uspeh_opis", { iznos: uspeh.iznos.toLocaleString(intlTag(locale)), pseudonim: uspeh.pseudonim })}
+        opis={t("send_uspeh_opis", { iznos: uspeh.iznos.toLocaleString("sr-RS"), pseudonim: uspeh.pseudonim })}
         dugmeTekst={t("send_uspeh_dugme")}
         onDugme={onSuccess}
       />
