@@ -9,18 +9,16 @@ export const routing = defineRouting({
   // (vidi docs/i18n-engleski-plan.md). Dok se to ne uradi, ostaje "never" — inače
   // next-intl middleware preusmerava na nepostojeće [locale] rute → 404 ceo sajt.
   //
-  // 🅷🆄 MAĐARSKI i 🇭🇷 HRVATSKI su ZAMRZNUTI (neaktivni): namerno NISU u listi
-  // locale-a niti u prekidaču jezika. messages/hu.json i messages/hr.json su
-  // sačuvani ali se NE održavaju (izbačeni iz scripts/check-i18n-parity.mjs).
-  // hr je kompletan prevod (2026-07-22: pun paritet + FAQ u faq-data-hr.ts,
-  // zastavica public/flags/hr.svg) — čeka doterivanje pre uključivanja.
-  // Da se jezik reaktivira: vrati ga ovde + u src/app/api/profil/jezik/route.ts
-  // + u parity skriptu (i dopuni do pariteta sa sr.json ako je kaskao),
-  // i dodaj ga u src/components/JezikSvitcer.tsx.
+  // 🇭🇷 HRVATSKI i 🅷🆄 MAĐARSKI su ODMRZNUTI 2026-08-06: dopunjeni do punog
+  // pariteta, vraćeni u proveru (scripts/check-i18n-parity.mjs) i izloženi u
+  // prekidaču jezika. Ranije su bili neaktivni i zato su odlutali — svaki nov
+  // ključ ostajao je srpski. Ne zamrzavati ih ponovo bez izbacivanja iz parity
+  // skripte, inače provera prestaje da hvata regresiju.
+  // 🅷🆄 Mađarski nema FAQ prevod (faq-data-hu.ts) — pada na srpski, vidi faq-data.ts.
   //
   // 🇷🇺 RUSKI je aktivan i izložen u prekidaču jezika (od 2026-08-05).
   // Prevod: messages/ru.json — vidi docs/i18n-ruski-plan.md.
-  locales: ["sr", "sr-Cyrl", "en", "ru"],
+  locales: ["sr", "sr-Cyrl", "en", "ru", "hr", "hu"],
   defaultLocale: "sr",
   localePrefix: "never",
 });
