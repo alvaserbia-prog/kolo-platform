@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useCallback, memo } from "react";
+import { intlTag } from "@/lib/format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type EnrollmentStatus = "PENDING" | "ACTIVE" | "INACTIVE" | "REJECTED";
 
@@ -50,6 +51,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 
 
 export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPunIndeks, emisioniKontekst }: Props) {
+  const locale = useLocale();
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const router = useRouter();
@@ -85,7 +87,7 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
         <h1 className="kolo-naslov">{t("naslov")}</h1>
         {totalOcekivano > 0 && (
           <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-2 text-center">
-            <p className="text-sm font-bold text-kolo-green-700">{totalOcekivano.toLocaleString("sr-RS")}</p>
+            <p className="text-sm font-bold text-kolo-green-700">{totalOcekivano.toLocaleString(intlTag(locale))}</p>
             <p className="text-xs text-kolo-green-700">{tc("poen_dan")}</p>
           </div>
         )}
@@ -96,21 +98,21 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
         <div className="grid grid-cols-2 gap-3 text-center">
           <div>
             <p className="text-xs text-kolo-muted mb-0.5">{t("opticaj")}</p>
-            <p className="text-base font-bold text-kolo-text">{opticaj.toLocaleString("sr-RS")}</p>
+            <p className="text-base font-bold text-kolo-text">{opticaj.toLocaleString(intlTag(locale))}</p>
           </div>
           <div>
             <p className="text-xs text-kolo-muted mb-0.5">{t("dnevni_limit")}</p>
-            <p className="text-base font-bold text-kolo-text">{dnevniLimit.toLocaleString("sr-RS")}</p>
+            <p className="text-base font-bold text-kolo-text">{dnevniLimit.toLocaleString(intlTag(locale))}</p>
           </div>
           <div>
             <p className="text-xs text-kolo-muted mb-0.5">{t("emitovano_danas")}</p>
             <p className={`text-base font-bold ${emitovanoAm !== null && emitovanoAm > 0 ? "text-kolo-green-700" : "text-kolo-muted"}`}>
-              {emitovanoAm !== null ? emitovanoAm.toLocaleString("sr-RS") : "—"}
+              {emitovanoAm !== null ? emitovanoAm.toLocaleString(intlTag(locale)) : "—"}
             </p>
           </div>
           <div>
             <p className="text-xs text-kolo-muted mb-0.5">{t("aktivni_programi")}</p>
-            <p className="text-base font-bold text-kolo-text">{brojAktivnih.toLocaleString("sr-RS")}</p>
+            <p className="text-base font-bold text-kolo-text">{brojAktivnih.toLocaleString(intlTag(locale))}</p>
           </div>
         </div>
         {dnevniLimit > 0 && (
@@ -208,6 +210,7 @@ const ProgramKartica = memo(function ProgramKartica({
   onExpand: (type: string) => void;
   onPrijavi: (type: string, meta?: Record<string, unknown>) => void;
 }) {
+  const locale = useLocale();
   const t = useTranslations("programi");
   const tc = useTranslations("common");
   const statusBadge = useStatusBadge();
@@ -236,7 +239,7 @@ const ProgramKartica = memo(function ProgramKartica({
           </div>
           {enStatus === "ACTIVE" && p.enrollment!.ocekivaniDnevni > 0 && (
             <p className="text-sm text-kolo-green-700 font-medium mt-1">
-              {p.enrollment!.ocekivaniDnevni.toLocaleString("sr-RS")} {tc("poen_dan")}
+              {p.enrollment!.ocekivaniDnevni.toLocaleString(intlTag(locale))} {tc("poen_dan")}
             </p>
           )}
           <p className="text-xs text-kolo-muted mt-0.5">{opisPrograma(p.type, t)}</p>

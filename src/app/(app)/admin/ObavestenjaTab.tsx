@@ -12,7 +12,8 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { intlTag } from "@/lib/format";
+import { useTranslations, useLocale } from "next-intl";
 
 type Status = "NACRT" | "U_SLANJU" | "POSLATO" | "PREKINUTO";
 
@@ -32,6 +33,7 @@ interface Obavestenje {
 }
 
 export default function ObavestenjaTab() {
+  const locale = useLocale();
   const t = useTranslations("admin");
 
   const [obavestenja, setObavestenja] = useState<Obavestenje[]>([]);
@@ -235,7 +237,7 @@ export default function ObavestenjaTab() {
                       <p className="text-sm font-semibold text-kolo-text truncate">{o.naslov}</p>
                       <p className="text-xs text-kolo-muted mt-0.5">
                         {o.pravniOsnov} · {o.kreiraoPseudonim} ·{" "}
-                        {new Date(o.createdAt).toLocaleDateString("sr-RS")}
+                        {new Date(o.createdAt).toLocaleDateString(intlTag(locale))}
                       </p>
                     </div>
                     <span className="text-xs font-semibold text-kolo-muted shrink-0">

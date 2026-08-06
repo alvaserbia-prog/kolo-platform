@@ -50,7 +50,7 @@ export async function proveriIEmitujBonusPrag(krugId: string) {
       krug.wallet.id,
       prag.poen,
       TransactionType.EMISIJA_KRUG_BONUS,
-      `Bonus krugovi "${krug.name}" — ${prag.clanovi} članova`
+      `Bonus krugovi "${krug.name}" — ${prag.clanovi} članova`, { kljuc: "transakcije.krug_bonus", parametri: { krug: krug.name, clanovi: prag.clanovi } }
     );
   }
 }

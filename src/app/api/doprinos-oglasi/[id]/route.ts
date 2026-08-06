@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -9,7 +10,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije autorizovano." }, { status: 401 });
+  if (!session) return await greska("Nije autorizovano.", 401);
 
   const { id } = await params;
 
@@ -32,7 +33,7 @@ export async function GET(
     },
   });
 
-  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!oglas) return await greska("Oglas nije pronađen.", 404);
 
   return NextResponse.json({
     oglas: {

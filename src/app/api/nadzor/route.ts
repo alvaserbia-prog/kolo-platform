@@ -5,6 +5,7 @@
  * Filtrira van svoje sopstvene verifikacije.
  */
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -14,7 +15,7 @@ import { mozeNadzor } from "@/lib/dozvole";
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Nisi prijavljen." }, { status: 401 });
+    return await greska("Nisi prijavljen.", 401);
   }
 
   const user = await prisma.user.findUnique({
@@ -22,10 +23,7 @@ export async function GET() {
     select: { tipKorisnika: true },
   });
   if (!user || !mozeNadzor(user)) {
-    return NextResponse.json(
-      { error: "Nemaš ovlašćenje za nadzor (čl. 10 Pravilnika)." },
-      { status: 403 }
-    );
+    return await greska("Nemaš ovlašćenje za nadzor (čl. 10 Pravilnika).", 403);
   }
 
   const lista = await listajVerifikacijeZaNadzor(session.user.id);

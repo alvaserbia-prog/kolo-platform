@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
@@ -13,7 +14,7 @@ const MAX_RSD_DOPRINOS = 1_000_000_000;
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Nemate pristup." }, { status: 403 });
+    return await greska("Nemate pristup.", 403);
   }
 
   const { id } = await params;
@@ -21,13 +22,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { rsdIznos, tip, napomena } = body;
 
   if (!rsdIznos || typeof rsdIznos !== "number" || !Number.isFinite(rsdIznos) || rsdIznos <= 0) {
-    return NextResponse.json({ error: "Neispravan iznos." }, { status: 400 });
+    return await greska("Neispravan iznos.", 400);
   }
   if (rsdIznos > MAX_RSD_DOPRINOS) {
-    return NextResponse.json({ error: "Iznos je neuobičajeno velik." }, { status: 400 });
+    return await greska("Iznos je neuobičajeno velik.", 400);
   }
   if (tip !== "NOVAC" && tip !== "ROBA" && tip !== "USLUGE") {
-    return NextResponse.json({ error: "Neispravan tip doprinosa." }, { status: 400 });
+    return await greska("Neispravan tip doprinosa.", 400);
   }
 
   // Anti dupli-klik: odbij identičan doprinos (isti iznos/tip/napomena) u poslednjih 15s.
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     select: { id: true },
   });
   if (skoro) {
-    return NextResponse.json({ error: "Isti doprinos je upravo evidentiran (mogući dupli klik)." }, { status: 409 });
+    return await greska("Isti doprinos je upravo evidentiran (mogući dupli klik).", 409);
   }
 
   const rezultat = await evidentirajDoprinos({

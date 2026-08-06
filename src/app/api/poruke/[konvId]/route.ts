@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -17,11 +18,11 @@ export async function GET(
   { params }: { params: Promise<{ konvId: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
   const { konvId } = await params;
 
   const k = await getKonv(konvId, session.user.id);
-  if (!k) return NextResponse.json({ error: "Konverzacija nije pronađena." }, { status: 404 });
+  if (!k) return await greska("Konverzacija nije pronađena.", 404);
 
   const drugiId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
   const [drugiUser, jaUser] = await Promise.all([
@@ -61,7 +62,7 @@ export async function POST(
   { params }: { params: Promise<{ konvId: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!session) return await greska("Unauthorized", 401);
   const { konvId } = await params;
 
   // Slanje je dozvoljeno svakom UČESNIKU konverzacije (getKonv to proverava).
@@ -69,11 +70,11 @@ export async function POST(
   // može biti učesnik samo u konverzaciji koju je verifikovani pokrenuo povodom
   // njegovog zahteva za jemstvo (Uslovi čl. 16, Politika čl. 6) — tu sme da uzvrati.
   const k = await getKonv(konvId, session.user.id);
-  if (!k) return NextResponse.json({ error: "Konverzacija nije pronađena." }, { status: 404 });
+  if (!k) return await greska("Konverzacija nije pronađena.", 404);
 
   const { tekst } = await req.json();
-  if (!tekst?.trim()) return NextResponse.json({ error: "Poruka ne sme biti prazna." }, { status: 400 });
-  if (tekst.trim().length > 1000) return NextResponse.json({ error: "Poruka je predugačka (max 1000 znakova)." }, { status: 400 });
+  if (!tekst?.trim()) return await greska("Poruka ne sme biti prazna.", 400);
+  if (tekst.trim().length > 1000) return await greska("Poruka je predugačka (max 1000 znakova).", 400);
 
   const [poruka] = await prisma.$transaction([
     prisma.poruka.create({

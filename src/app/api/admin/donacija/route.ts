@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { evidentirajDonaciju } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiNotifikaciju } from "@/lib/notifikacije";
+import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { rasclaniPozivNaBroj } from "@/lib/placanje/ips-qr";
 
@@ -13,7 +14,7 @@ import { rasclaniPozivNaBroj } from "@/lib/placanje/ips-qr";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const body = await req.json();
@@ -22,11 +23,11 @@ export async function POST(req: NextRequest) {
   const javnoBody = body.javno !== false;
 
   if (!amountRSD) {
-    return NextResponse.json({ error: "Iznos je obavezan." }, { status: 400 });
+    return await greska("Iznos je obavezan.", 400);
   }
   const iznos = Number(amountRSD);
   if (isNaN(iznos) || iznos <= 0) {
-    return NextResponse.json({ error: "Iznos mora biti pozitivan broj." }, { status: 400 });
+    return await greska("Iznos mora biti pozitivan broj.", 400);
   }
 
   if (donationId) {
@@ -35,15 +36,12 @@ export async function POST(req: NextRequest) {
       where: { id: donationId },
       include: { user: { select: { pseudonim: true, id: true, podaci: { select: { punoIme: true } } } } },
     });
-    if (!donation) return NextResponse.json({ error: "Donacija nije pronađena." }, { status: 404 });
-    if (donation.status === "CONFIRMED") return NextResponse.json({ error: "Donacija je već potvrđena." }, { status: 400 });
+    if (!donation) return await greska("Donacija nije pronađena.", 404);
+    if (donation.status === "CONFIRMED") return await greska("Donacija je već potvrđena.", 400);
 
     // Vidljivost je određena pri kreiranju zapisa (kartica/forma).
     if (donation.javno && !donation.user.podaci?.punoIme?.trim()) {
-      return NextResponse.json(
-        { error: "Javna donacija zahteva da donator ima uneto ime i prezime u profilu." },
-        { status: 400 }
-      );
+      return await greska("Javna donacija zahteva da donator ima uneto ime i prezime u profilu.", 400);
     }
 
     try {
@@ -55,17 +53,18 @@ export async function POST(req: NextRequest) {
 
       await logAdminAkcija(session.user.id, "DONACIJA_POTVRDJENA", donation.userId,
         `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
-      await posaljiNotifikaciju(
-        donation.userId,
-        "donacija_potvrdjena",
-        "Donacija potvrđena!",
-        `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-        "/donacije"
-      );
+      await obavesti(donation.userId, {
+        tip: "donacija_potvrdjena",
+        kljuc: "notifikacije.donacija_potvrdjena",
+        parametri: { rsd: iznos, poen: result.poenEmitted },
+        naslov: "Donacija potvrđena!",
+        tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+        link: "/donacije",
+      });
 
       return NextResponse.json({ ok: true, ...result });
     } catch (e: unknown) {
-      return NextResponse.json({ error: e instanceof Error ? e.message : "Greška." }, { status: 400 });
+      return await greska(e instanceof Error ? e.message : "Greška.", 400);
     }
   }
 
@@ -73,17 +72,14 @@ export async function POST(req: NextRequest) {
   // donatorskim brojem; primarni put) ili po pseudonimu (rezerva, npr. uplata
   // bez poziva na broj).
   if (!pseudonim && !pozivNaBroj) {
-    return NextResponse.json({ error: "Poziv na broj, pseudonim ili donationId je obavezan." }, { status: 400 });
+    return await greska("Poziv na broj, pseudonim ili donationId je obavezan.", 400);
   }
 
   let user;
   if (pozivNaBroj) {
     const donatorskiBroj = rasclaniPozivNaBroj(String(pozivNaBroj));
     if (donatorskiBroj === null) {
-      return NextResponse.json(
-        { error: "Poziv na broj nije ispravan (kontrolne cifre se ne poklapaju — proverite prepis iz izvoda)." },
-        { status: 400 }
-      );
+      return await greska("Poziv na broj nije ispravan (kontrolne cifre se ne poklapaju — proverite prepis iz izvoda).", 400);
     }
     user = await prisma.user.findUnique({
       where: { donatorskiBroj },
@@ -95,13 +91,10 @@ export async function POST(req: NextRequest) {
       include: { podaci: { select: { punoIme: true } } },
     });
   }
-  if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!user) return await greska("Korisnik nije pronađen.", 404);
 
   if (javnoBody && !user.podaci?.punoIme?.trim()) {
-    return NextResponse.json(
-      { error: "Javna donacija zahteva da donator ima uneto ime i prezime u profilu (ili evidentirajte kao anonimnu)." },
-      { status: 400 }
-    );
+    return await greska("Javna donacija zahteva da donator ima uneto ime i prezime u profilu (ili evidentirajte kao anonimnu).", 400);
   }
 
   try {
@@ -109,17 +102,18 @@ export async function POST(req: NextRequest) {
 
     await logAdminAkcija(session.user.id, "DONACIJA_RUCNO_EVIDENTIRANA", user.id,
       `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
-    await posaljiNotifikaciju(
-      user.id,
-      "donacija_potvrdjena",
-      "Donacija potvrđena!",
-      `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-      "/donacije"
-    );
+    await obavesti(user.id, {
+      tip: "donacija_potvrdjena",
+      kljuc: "notifikacije.donacija_potvrdjena",
+      parametri: { rsd: iznos, poen: result.poenEmitted },
+      naslov: "Donacija potvrđena!",
+      tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
+      link: "/donacije",
+    });
 
     return NextResponse.json({ ok: true, ...result });
   } catch (e: unknown) {
-    return NextResponse.json({ error: e instanceof Error ? e.message : "Greška." }, { status: 400 });
+    return await greska(e instanceof Error ? e.message : "Greška.", 400);
   }
 }
 
@@ -127,7 +121,7 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const donations = await prisma.donationRecord.findMany({

@@ -9,6 +9,7 @@
  * SAMO SUPERADMIN.
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -22,7 +23,7 @@ export const maxDuration = 60;
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const { id } = await params;
@@ -31,7 +32,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     where: { id },
     select: { status: true, naslov: true, pravniOsnov: true },
   });
-  if (!pre) return NextResponse.json({ error: "Obaveštenje ne postoji." }, { status: 404 });
+  if (!pre) return await greska("Obaveštenje ne postoji.", 404);
 
   // Loguj samo stvarno pokretanje, ne i svaki nastavak — inače bi jedan krug
   // slanja zatrpao audit log sa desetinama identičnih redova.
@@ -49,6 +50,6 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json(napredak);
   } catch (e) {
     console.error("[POST /api/admin/sistemsko-obavestenje/[id]/posalji]", e);
-    return NextResponse.json({ error: "Greška pri slanju." }, { status: 500 });
+    return await greska("Greška pri slanju.", 500);
   }
 }

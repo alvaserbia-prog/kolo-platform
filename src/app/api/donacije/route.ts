@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,8 +8,8 @@ import { dohvatiIpsConfig, pozivNaBrojZaClana, prikazPozivNaBroj } from "@/lib/p
 
 export async function GET() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!session.user.verified) return NextResponse.json({ error: "Nije verifikovan." }, { status: 403 });
+  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session.user.verified) return await greska("Nije verifikovan.", 403);
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
@@ -31,7 +32,7 @@ export async function GET() {
     },
   });
 
-  if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!user) return await greska("Korisnik nije pronađen.", 404);
 
   // Rang/nivo se računa samo iz javnih donacija (anonimne ne nose POEN).
   const totalRSD = user.donations

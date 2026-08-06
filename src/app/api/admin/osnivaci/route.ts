@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -21,7 +22,7 @@ async function proveriAdmin() {
 
 export async function GET() {
   const auth = await proveriAdmin();
-  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+  if (!auth.ok) return await greska(auth.error, auth.status);
 
   const [osnivaci, kanal] = await Promise.all([
     prisma.osnivac.findMany({
@@ -42,29 +43,25 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const auth = await proveriAdmin();
-  if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
+  if (!auth.ok) return await greska(auth.error, auth.status);
 
   const body = await req.json();
   const { userId, udeoBrojilac, udeoImenilac, redniBroj, napomena } = body;
 
   if (!userId || typeof udeoBrojilac !== "number" || typeof udeoImenilac !== "number" || typeof redniBroj !== "number") {
-    return NextResponse.json({ error: "Nedostaju polja." }, { status: 400 });
+    return await greska("Nedostaju polja.", 400);
   }
   if (udeoBrojilac <= 0 || udeoImenilac <= 0) {
-    return NextResponse.json({ error: "Udeli moraju biti pozitivni." }, { status: 400 });
+    return await greska("Udeli moraju biti pozitivni.", 400);
   }
 
   // Kanal ne sme da bude vec aktiviran (brojKoraka > 0) ako se menja lista osnivaca
   const kanal = await dohvatiIliKreirajKanal();
   if (kanal.brojKoraka > 0) {
-    return NextResponse.json({
-      error: "Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.",
-    }, { status: 409 });
+    return await greska("Kanal je vec aktiviran (broj koraka > 0). Izmena liste osnivaca nije dozvoljena.", 409);
   }
   if (kanal.osnivaciZakljucani) {
-    return NextResponse.json({
-      error: "Lista osnivača je zaključana. Prvo je otključajte.",
-    }, { status: 409 });
+    return await greska("Lista osnivača je zaključana. Prvo je otključajte.", 409);
   }
 
   try {
@@ -82,7 +79,7 @@ export async function POST(req: NextRequest) {
       const poruka = polja.includes("redniBroj")
         ? "Redni broj je već zauzet drugim osnivačem."
         : "Ovaj korisnik je već dodat kao osnivač.";
-      return NextResponse.json({ error: poruka }, { status: 409 });
+      return await greska(poruka, 409);
     }
     throw e;
   }

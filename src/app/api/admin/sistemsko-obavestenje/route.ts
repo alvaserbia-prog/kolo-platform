@@ -8,6 +8,7 @@
  * POST — nov nacrt { naslov, tekst, link?, pravniOsnov }
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -18,7 +19,7 @@ import { prebrojPrimaoce } from "@/lib/sistemsko-obavestenje";
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   const [obavestenja, primalaca] = await Promise.all([
@@ -57,14 +58,14 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user)) {
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
   }
 
   let body: { naslov?: unknown; tekst?: unknown; link?: unknown; pravniOsnov?: unknown };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Nevažeći JSON." }, { status: 400 });
+    return await greska("Nevažeći JSON.", 400);
   }
 
   const naslov = typeof body.naslov === "string" ? body.naslov.trim() : "";
@@ -72,31 +73,25 @@ export async function POST(req: NextRequest) {
   const pravniOsnov = typeof body.pravniOsnov === "string" ? body.pravniOsnov.trim() : "";
   const linkRaw = typeof body.link === "string" ? body.link.trim() : "";
 
-  if (!naslov) return NextResponse.json({ error: "Naslov je obavezan." }, { status: 400 });
+  if (!naslov) return await greska("Naslov je obavezan.", 400);
   if (naslov.length > 150) {
-    return NextResponse.json({ error: "Naslov najviše 150 znakova." }, { status: 400 });
+    return await greska("Naslov najviše 150 znakova.", 400);
   }
-  if (!tekst) return NextResponse.json({ error: "Tekst je obavezan." }, { status: 400 });
+  if (!tekst) return await greska("Tekst je obavezan.", 400);
   if (tekst.length > 5000) {
-    return NextResponse.json({ error: "Tekst najviše 5.000 znakova." }, { status: 400 });
+    return await greska("Tekst najviše 5.000 znakova.", 400);
   }
   // Osnov je obavezan jer ova pošta preskače opt-out — bez odredbe iz akata to
   // je bilten, a bilten traži zaseban pristanak i dopunu Politike (čl. 8).
   if (!pravniOsnov) {
-    return NextResponse.json(
-      { error: "Pravni osnov je obavezan (npr. „Uslovi čl. 40“)." },
-      { status: 400 }
-    );
+    return await greska("Pravni osnov je obavezan (npr. „Uslovi čl. 40“).", 400);
   }
   if (pravniOsnov.length > 200) {
-    return NextResponse.json({ error: "Pravni osnov najviše 200 znakova." }, { status: 400 });
+    return await greska("Pravni osnov najviše 200 znakova.", 400);
   }
   // Samo interne putanje — mejl ne sme da vodi van platforme.
   if (linkRaw && !linkRaw.startsWith("/")) {
-    return NextResponse.json(
-      { error: "Link mora biti putanja unutar platforme (počinje sa /)." },
-      { status: 400 }
-    );
+    return await greska("Link mora biti putanja unutar platforme (počinje sa /).", 400);
   }
 
   const o = await prisma.sistemskoObavestenje.create({

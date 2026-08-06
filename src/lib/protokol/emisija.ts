@@ -9,11 +9,22 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
  * Protokol ide u minus, korisnik prima POEN.
  * Mora se zvati unutar prisma.$transaction ako je deo šire operacije.
  */
+/**
+ * `opis` nosi ključ + parametre da bi se stavka u istoriji mogla prikazati na
+ * jeziku posmatrača. `description` i dalje ide u bazu kao gotov srpski tekst —
+ * rezerva, i ono što vide stari redovi i nekonvertovana pozivna mesta.
+ */
+export type OpisTransakcije = {
+  kljuc: string;
+  parametri?: Record<string, string | number>;
+};
+
 export async function emitujPoen(
   toWalletId: string,
   amount: number,
   type: TransactionType,
-  description?: string
+  description?: string,
+  opis?: OpisTransakcije,
 ) {
   if (amount <= 0) throw new Error("Iznos emisije mora biti pozitivan.");
 
@@ -38,6 +49,8 @@ export async function emitujPoen(
         amount,
         type,
         description,
+        opisKljuc: opis?.kljuc,
+        opisParametri: opis?.parametri,
       },
     });
 
