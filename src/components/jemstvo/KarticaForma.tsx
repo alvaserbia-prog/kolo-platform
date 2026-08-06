@@ -8,7 +8,6 @@ import {
   MAX_CIME_SE_BAVI,
   MAX_NADIMAK,
   MAX_TELEFON,
-  TRAJANJE_DANA,
   decenija,
   inicijali,
 } from "@/lib/jemstvo-kartica";
@@ -68,7 +67,6 @@ export default function KarticaForma({
 }) {
   const t = useTranslations("tablaJemstva");
   const [v, setV] = useState<KarticaVrednosti>(pocetne);
-  const [pristanak, setPristanak] = useState(rezimDopune);
   const [pregled, setPregled] = useState(false);
   const [greska, setGreska] = useState("");
   const [radi, setRadi] = useState(false);
@@ -88,10 +86,6 @@ export default function KarticaForma({
   function kaPregledu() {
     if (!nestoPopunjeno) {
       setGreska(t("greska_prazna_kartica"));
-      return;
-    }
-    if (!pristanak) {
-      setGreska(t("greska_pristanak"));
       return;
     }
     if (v.telefon.trim() && !v.telefonSaglasnost) {
@@ -286,21 +280,6 @@ export default function KarticaForma({
         </label>
 
       </div>
-
-      {!rezimDopune && (
-        <label className="flex items-start gap-2.5 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={pristanak}
-            onChange={(e) => {
-              setPristanak(e.target.checked);
-              setGreska("");
-            }}
-            className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0"
-          />
-          <span className="text-xs text-kolo-muted">{t("pristanak_tekst", { dana: TRAJANJE_DANA })}</span>
-        </label>
-      )}
 
       {greska && (
         <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
