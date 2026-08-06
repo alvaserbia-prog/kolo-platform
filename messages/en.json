@@ -84,7 +84,8 @@
     "opis": "Description",
     "poen_dan": "POEN/day",
     "detalji": "Details →",
-    "pretrazi_clanove": "Search members..."
+    "pretrazi_clanove": "Search members...",
+    "mesto_iz_spiska": "Choose a place from the offered list of settlements — enter only one place."
   },
   "login": {
     "naslov": "Sign In",
@@ -163,7 +164,7 @@
     "pseudonim": "Pseudonym",
     "lozinka": "Password",
     "mesto": "Place",
-    "mesto_opis": "Helps you see listings nearby. You can skip and add it later.",
+    "mesto_opis": "Pick one place from the list of settlements. Helps you see listings nearby. You can skip and add it later.",
     "opciono": "(optional)",
     "placeholder_pseudonim": "YourPseudonym",
     "placeholder_lozinka": "••••••••",

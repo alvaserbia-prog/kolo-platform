@@ -7,19 +7,9 @@
 
 import { NASELJE_OPSTINA, OPSTINA_KOORDINATE } from "./naselja-geo";
 import { NASELJE_KOORDINATE } from "./naselja-koordinate";
+import { normalizujNaselje as normalizuj, razresiNaselje } from "./naselje";
 
 export type Koordinate = readonly [number, number];
-
-// Ista normalizacija kao u LokacijaSearch: mala slova, bez dijakritika.
-function normalizuj(s: string): string {
-  return s
-    .toLowerCase()
-    .replace(/[čć]/g, "c")
-    .replace(/[š]/g, "s")
-    .replace(/[ž]/g, "z")
-    .replace(/[đ]/g, "d")
-    .trim();
-}
 
 // Indeks: normalizovan naziv naselja/opštine → koordinate.
 // Gradi se jednom pri učitavanju modula (~1.000 unosa). Redosled prioriteta:
@@ -45,14 +35,16 @@ const INDEKS: Map<string, Koordinate> = (() => {
   return m;
 })();
 
-// Razreši slobodan tekst lokacije u koordinate. Toleriše dodatak iza zareza
-// („Novi Sad, Liman") tako što proba i deo pre prvog zareza.
+// Razreši lokaciju u koordinate. Nove lokacije se upisuju kao naselje iz
+// šifarnika, ali u bazi postoje i zatečeni slobodni unosi iz vremena kad je polje
+// bilo obično tekstualno („Novi Sad, Liman", „Stanišić (Sombor)") — njih razrešava
+// `razresiNaselje`, pa i takvi oglasi i dalje prikazuju udaljenost.
 export function koordinateZaMesto(naziv: string | null | undefined): Koordinate | null {
   if (!naziv) return null;
   const cel = normalizuj(naziv);
   if (INDEKS.has(cel)) return INDEKS.get(cel)!;
-  const preZareza = normalizuj(naziv.split(",")[0]);
-  return INDEKS.get(preZareza) ?? null;
+  const naselje = razresiNaselje(naziv);
+  return naselje ? INDEKS.get(normalizuj(naselje)) ?? null : null;
 }
 
 // Haversine — udaljenost velikog kruga u kilometrima.
