@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -45,6 +46,6 @@ export async function GET() {
 
     return NextResponse.json({ status, osnivaci, poslednjikoraci: koraci });
   } catch (e) {
-    return NextResponse.json({ error: String(e) }, { status: 500 });
+    return await greska(String(e), 500);
   }
 }

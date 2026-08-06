@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -26,7 +27,7 @@ export async function GET(
       seller: { select: { pseudonim: true, verified: true } },
     },
   });
-  if (!listing) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!listing) return await greska("Oglas nije pronađen.", 404);
 
   // Trag uklanjanja se ne prosipa u javni odgovor: razlog je saopštenje vlasniku
   // (Uslovi čl. 25 st. 2), a ne podatak o kom se obaveštava svet. `uklonioId`
@@ -50,15 +51,15 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const { id } = await params;
   const listing = await prisma.marketplaceListing.findUnique({ where: { id } });
-  if (!listing) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!listing) return await greska("Oglas nije pronađen.", 404);
   if (listing.sellerId !== session.user.id)
-    return NextResponse.json({ error: "Nemaš pravo da menjaš ovaj oglas." }, { status: 403 });
+    return await greska("Nemaš pravo da menjaš ovaj oglas.", 403);
   if (listing.status !== "ACTIVE")
-    return NextResponse.json({ error: "Oglas nije aktivan." }, { status: 400 });
+    return await greska("Oglas nije aktivan.", 400);
 
   const contentType = req.headers.get("content-type") ?? "";
 
@@ -69,7 +70,7 @@ export async function PATCH(
       await prisma.marketplaceListing.update({ where: { id }, data: { status: "EXPIRED" } });
       return NextResponse.json({ ok: true });
     }
-    return NextResponse.json({ error: "Nepoznata akcija." }, { status: 400 });
+    return await greska("Nepoznata akcija.", 400);
   }
 
   // Izmena oglasa dolazi kao multipart/form-data
@@ -86,12 +87,12 @@ export async function PATCH(
     const keepRaw = (fd.get("keepImages") as string) ?? "[]";
 
     if (!title || title.length < 3)
-      return NextResponse.json({ error: "Naslov mora imati najmanje 3 karaktera." }, { status: 400 });
+      return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
     if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
-      return NextResponse.json({ error: "Neko polje premašuje dozvoljenu dužinu." }, { status: 400 });
+      return await greska("Neko polje premašuje dozvoljenu dužinu.", 400);
     const cena = parsirajCenu(cenaTipRaw, priceRaw, cenaDoRaw);
     if (!cena.ok)
-      return NextResponse.json({ error: cena.error }, { status: 400 });
+      return await greska(cena.error, 400);
 
     // keepImages — niz indeksa postojećih slika koje treba zadržati. Validiramo da je
     // zaista niz brojeva (ne pada na neispravnom JSON-u, ne prihvata ne-niz vrednosti).
@@ -111,9 +112,9 @@ export async function PATCH(
       const file = fd.get(`nova_slika_${i}`) as File | null;
       if (!file || file.size === 0) continue;
       if (file.size > MAX_SIZE)
-        return NextResponse.json({ error: "Slika je prevelika (max 5MB)." }, { status: 400 });
+        return await greska("Slika je prevelika (max 5MB).", 400);
       if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
-        return NextResponse.json({ error: "Dozvoljeni formati: JPG, PNG, WebP." }, { status: 400 });
+        return await greska("Dozvoljeni formati: JPG, PNG, WebP.", 400);
 
       const ext = file.type === "image/png" ? ".png" : file.type === "image/webp" ? ".webp" : ".jpg";
       const fname = `${randomUUID()}${ext}`;
@@ -149,6 +150,6 @@ export async function PATCH(
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("[PATCH /api/pijaca/[id]]", err);
-    return NextResponse.json({ error: "Interna greška servera." }, { status: 500 });
+    return await greska("Interna greška servera.", 500);
   }
 }

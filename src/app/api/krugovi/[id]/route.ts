@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -24,7 +25,7 @@ export async function GET(
     },
   });
 
-  if (!krug) return NextResponse.json({ error: "Krug nije pronađena." }, { status: 404 });
+  if (!krug) return await greska("Krug nije pronađena.", 404);
 
   return NextResponse.json({ krug });
 }
@@ -35,7 +36,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const { id } = await params;
 
@@ -43,7 +44,7 @@ export async function DELETE(
     where: { krugId: id, userId: session.user.id, leftAt: null },
   });
   if (!membership)
-    return NextResponse.json({ error: "Niste član ove krugovi." }, { status: 400 });
+    return await greska("Niste član ove krugovi.", 400);
 
   await prisma.krugClanstvo.update({
     where: { id: membership.id },

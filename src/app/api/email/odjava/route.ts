@@ -10,6 +10,7 @@
  * Body: { token: string }
  */
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
@@ -17,11 +18,11 @@ export async function POST(req: NextRequest) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Nevažeći JSON." }, { status: 400 });
+    return await greska("Nevažeći JSON.", 400);
   }
 
   const token = typeof body.token === "string" ? body.token : "";
-  if (!token) return NextResponse.json({ error: "Nedostaje token." }, { status: 400 });
+  if (!token) return await greska("Nedostaje token.", 400);
 
   const user = await prisma.user.findUnique({
     where: { emailOdjavaToken: token },

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -15,7 +16,7 @@ export async function PATCH(
 ) {
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
-    return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
+    return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
 
@@ -23,30 +24,27 @@ export async function PATCH(
     where: { id },
     include: { _count: { select: { prijave: true } } },
   });
-  if (!oglas) return NextResponse.json({ error: "Oglas nije pronađen." }, { status: 404 });
+  if (!oglas) return await greska("Oglas nije pronađen.", 404);
   if (oglas.status !== "ACTIVE")
-    return NextResponse.json({ error: "Zatvoren oglas ne može da se menja." }, { status: 400 });
+    return await greska("Zatvoren oglas ne može da se menja.", 400);
   if (oglas._count.prijave > 0)
-    return NextResponse.json(
-      { error: "Oglas ima prijave — izmena više nije moguća. Zatvorite oglas i kreirajte novi." },
-      { status: 400 }
-    );
+    return await greska("Oglas ima prijave — izmena više nije moguća. Zatvorite oglas i kreirajte novi.", 400);
 
   const body = await req.json().catch(() => ({}));
   const { title, description, predlozeniPoen, obrazlozenje, saOdobravanjem, positions, deadline } = body;
 
   if (!title?.trim() || !description?.trim())
-    return NextResponse.json({ error: "Naziv i opis su obavezni." }, { status: 400 });
+    return await greska("Naziv i opis su obavezni.", 400);
 
   // Prazno = 0 = bez ograničenja (isto kao pri kreiranju).
   const predlozeni = predlozeniPoen === undefined || predlozeniPoen === null || predlozeniPoen === ""
     ? 0 : Number(predlozeniPoen);
   if (predlozeni !== 0 && (!Number.isInteger(predlozeni) || predlozeni < 100 || predlozeni > 10_000_000))
-    return NextResponse.json({ error: "Maksimalni POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno)." }, { status: 400 });
+    return await greska("Maksimalni POEN mora biti ceo broj između 100 i 10.000.000, ili prazno (neograničeno).", 400);
 
   const brMesta = Number(positions ?? 1);
   if (!Number.isInteger(brMesta) || brMesta < 1 || brMesta > 1000)
-    return NextResponse.json({ error: "Broj izvršilaca mora biti između 1 i 1000." }, { status: 400 });
+    return await greska("Broj izvršilaca mora biti između 1 i 1000.", 400);
 
   const izmenjen = await prisma.doprinosOglas.update({
     where: { id },

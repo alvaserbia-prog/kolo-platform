@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
 import { kreirajResetToken, posaljiResetEmail } from "@/lib/passwordReset";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
     const { email } = await req.json();
 
     if (!email || typeof email !== "string" || !email.includes("@")) {
-      return NextResponse.json({ error: "Unesite ispravnu email adresu." }, { status: 400 });
+      return await greska("Unesite ispravnu email adresu.", 400);
     }
 
     const trazeniEmail = email.trim().toLowerCase();
@@ -29,7 +30,7 @@ export async function POST(req: NextRequest) {
         const token = await kreirajResetToken(user.id);
         const imaLozinku = !!user.passwordHash;
         const origin = new URL(req.url).origin;
-        await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku, origin);
+        await posaljiResetEmail(user.email!, token, user.pseudonim, imaLozinku, origin, user.jezik);
       } catch (err) {
         console.error("[zaboravljena-lozinka] greška pri slanju:", err);
       }
@@ -43,6 +44,6 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch {
-    return NextResponse.json({ error: "Interna greška servera." }, { status: 500 });
+    return await greska("Interna greška servera.", 500);
   }
 }

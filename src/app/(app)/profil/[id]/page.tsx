@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import IndeksSekcija from "@/components/profil/IndeksSekcija";
 import Pseudonim from "@/components/Pseudonim";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { kategorijaKljuc } from "@/lib/kategorije";
 import { profilHref } from "@/lib/profil-link";
@@ -57,6 +58,7 @@ interface ProfilData {
 }
 
 export default function JavniProfilPage() {
+  const locale = useLocale();
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
   const params = useParams();
@@ -225,7 +227,7 @@ export default function JavniProfilPage() {
             <div className="flex justify-between gap-2">
               <dt className="text-kolo-muted">{t("clan_od")}</dt>
               <dd className="text-kolo-muted">
-                {new Date(profil.createdAt).toLocaleDateString("sr-RS", { year: "numeric", month: "long" })}
+                {new Date(profil.createdAt).toLocaleDateString(intlTag(locale), { year: "numeric", month: "long" })}
               </dd>
             </div>
             {profil.telefon && (
@@ -261,13 +263,13 @@ export default function JavniProfilPage() {
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
               <p className="text-base font-medium text-kolo-muted mb-1">ZRNO</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
-                {profil.zrno !== null ? profil.zrno.toLocaleString("sr-RS") : "—"}
+                {profil.zrno !== null ? profil.zrno.toLocaleString(intlTag(locale)) : "—"}
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
               <p className="text-base font-medium text-kolo-muted mb-1">POEN</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
-                {profil.bilans !== null ? profil.bilans.toLocaleString("sr-RS") : "—"}
+                {profil.bilans !== null ? profil.bilans.toLocaleString(intlTag(locale)) : "—"}
               </p>
             </div>
           </div>
@@ -307,11 +309,11 @@ export default function JavniProfilPage() {
                       ) : t("protokol"))}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
-                      {new Date(trx.createdAt).toLocaleString("sr-RS", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                      {new Date(trx.createdAt).toLocaleString(intlTag(locale), { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
                   </div>
                   <span className={`text-sm font-semibold shrink-0 ${!jeIzlaz && trx.type !== "TRANSFER" ? "text-blue-600" : jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>
-                    {jeIzlaz ? "−" : "+"}{trx.amount.toLocaleString("sr-RS")}
+                    {jeIzlaz ? "−" : "+"}{trx.amount.toLocaleString(intlTag(locale))}
                   </span>
                 </li>
               );

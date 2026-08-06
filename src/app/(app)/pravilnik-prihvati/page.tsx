@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface Verzija {
   id: string;
@@ -13,6 +14,7 @@ interface Verzija {
 }
 
 export default function PravilnikPrihvatiPage() {
+  const locale = useLocale();
   const t = useTranslations("pravilnikPrihvati");
   const router = useRouter();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
@@ -67,7 +69,7 @@ export default function PravilnikPrihvatiPage() {
           {verzija && (
             <p className="text-sm text-kolo-muted">
               {t("verzija_label")} <strong>{verzija.verzija}</strong>: {verzija.naslov}<br />
-              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString("sr-RS")}</strong>
+              {t("na_snazi_od")} <strong>{new Date(verzija.efektivnaOd).toLocaleDateString(intlTag(locale))}</strong>
             </p>
           )}
         </div>

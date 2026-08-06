@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -31,14 +32,14 @@ export async function POST(req: NextRequest) {
   try {
     ({ putanja } = await req.json());
   } catch {
-    return NextResponse.json({ error: "Neispravan zahtev." }, { status: 400 });
+    return await greska("Neispravan zahtev.", 400);
   }
   if (
     typeof putanja !== "string" ||
     !putanja.startsWith("/") ||
     putanja.length > MAX_PUTANJA
   ) {
-    return NextResponse.json({ error: "Neispravna putanja." }, { status: 400 });
+    return await greska("Neispravna putanja.", 400);
   }
 
   const poslednja = await prisma.aktivnostLog.findFirst({

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { Html5Qrcode } from "html5-qrcode";
 
 /**
@@ -18,6 +19,7 @@ type Props = {
 const SKENER_REGION_ID = "kolo-qr-skener-region";
 
 export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
+  const t = useTranslations("verifikacija");
   const [error, setError] = useState<string | null>(null);
   const [aktivnaKamera, setAktivnaKamera] = useState<"environment" | "user">(
     "environment"
@@ -78,10 +80,10 @@ export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
           msg.includes("denied")
         ) {
           setError(
-            "Nemam dozvolu za pristup kameri. Odobri dozvolu u podešavanjima browser-a."
+            t("skener_bez_dozvole")
           );
         } else if (msg.includes("NotFound") || msg.includes("NotReadable")) {
-          setError("Kamera nije pronađena ili je zauzeta od drugog programa.");
+          setError(t("skener_nema_kamere"));
         } else {
           setError(`Greška kamere: ${msg}`);
         }
@@ -94,7 +96,7 @@ export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
         sk.stop().catch(() => {});
       }
     };
-  }, [aktivnaKamera, onDetektovan]);
+  }, [aktivnaKamera, onDetektovan, t]);
 
   function preokreni() {
     setAktivnaKamera((c) => (c === "environment" ? "user" : "environment"));
@@ -129,7 +131,7 @@ export default function QrSkener({ onDetektovan, onZatvori, uputstvo }: Props) {
         </button>
       </div>
       <p className="text-xs text-kolo-muted text-center">
-        {uputstvo ?? "Usmeri kameru ka QR kodu osobe koju verifikuješ."}
+        {uputstvo ?? t("skener_uputstvo")}
       </p>
     </div>
   );

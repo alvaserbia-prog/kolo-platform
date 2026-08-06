@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
+import { intlTag } from "@/lib/format";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,6 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PokroviteljiPage() {
+  const locale = await getLocale();
   const t = await getTranslations("pokroviteljPage");
 
   const pokrovitelji = await prisma.pokrovitelj.findMany({
@@ -59,7 +61,7 @@ export default async function PokroviteljiPage() {
                   {t("nivo")} {p.trenutniNivo}
                 </div>
                 <div className="text-xs text-kolo-muted mt-0.5">
-                  {Number(p.rsdKumulativ).toLocaleString("sr-RS")} RSD
+                  {Number(p.rsdKumulativ).toLocaleString(intlTag(locale))} RSD
                 </div>
               </div>
             </div>

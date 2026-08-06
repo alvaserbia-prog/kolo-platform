@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -8,7 +9,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Pristup samo za prijavljene." }, { status: 401 });
+    return await greska("Pristup samo za prijavljene.", 401);
   }
 
   const url = new URL(req.url);
@@ -46,23 +47,20 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return NextResponse.json({ error: "Pristup samo za prijavljene." }, { status: 401 });
+    return await greska("Pristup samo za prijavljene.", 401);
   }
   if (!session.user.verified) {
-    return NextResponse.json(
-      { error: "Pisanje u pričaonicu je dostupno samo verifikovanim članovima." },
-      { status: 403 }
-    );
+    return await greska("Pisanje u pričaonicu je dostupno samo verifikovanim članovima.", 403);
   }
 
   const body = await req.json();
   const content = (body.content ?? "").toString().trim();
 
   if (!content) {
-    return NextResponse.json({ error: "Poruka ne sme biti prazna." }, { status: 400 });
+    return await greska("Poruka ne sme biti prazna.", 400);
   }
   if (content.length > 1000) {
-    return NextResponse.json({ error: "Poruka najviše 1000 znakova." }, { status: 400 });
+    return await greska("Poruka najviše 1000 znakova.", 400);
   }
 
   const poruka = await prisma.chatMessage.create({

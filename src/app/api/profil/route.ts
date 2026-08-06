@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -49,7 +50,7 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
  */
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const userId = session.user.id;
 
@@ -71,9 +72,9 @@ export async function DELETE(req: NextRequest) {
     },
   });
 
-  if (!user) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!user) return await greska("Korisnik nije pronađen.", 404);
   if (user.status === UserStatus.EXCLUDED || user.deaktiviranAt) {
-    return NextResponse.json({ error: "Nalog je već deaktiviran." }, { status: 409 });
+    return await greska("Nalog je već deaktiviran.", 409);
   }
 
   // --- 1. Otpis ZRNA bez POEN emisije (čl. 34 st. 1) ---
@@ -263,7 +264,7 @@ export async function DELETE(req: NextRequest) {
       });
 
       if (!primalac || !primalac.wallet) {
-        return NextResponse.json({ error: "Primalac POEN-a nije pronađen." }, { status: 400 });
+        return await greska("Primalac POEN-a nije pronađen.", 400);
       }
 
       await prisma.$transaction(async (tx) => {

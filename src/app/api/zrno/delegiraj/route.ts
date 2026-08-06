@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -7,18 +8,18 @@ import { gdePseudonim } from "@/lib/pseudonim";
 // POST /api/zrno/delegiraj — delegiraj glasove
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
-  if (!session.user.verified) return NextResponse.json({ error: "Verifikacija potrebna." }, { status: 403 });
+  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
 
   const body = await req.json();
   const delegatPseudonim = (body.pseudonim ?? "").trim();
   if (!delegatPseudonim)
-    return NextResponse.json({ error: "Unesite pseudonim delegata." }, { status: 400 });
+    return await greska("Unesite pseudonim delegata.", 400);
 
   const delegat = await prisma.user.findFirst({ where: gdePseudonim(delegatPseudonim), select: { id: true } });
-  if (!delegat) return NextResponse.json({ error: "Korisnik nije pronađen." }, { status: 404 });
+  if (!delegat) return await greska("Korisnik nije pronađen.", 404);
   if (delegat.id === session.user.id)
-    return NextResponse.json({ error: "Ne možete delegirati sebi." }, { status: 400 });
+    return await greska("Ne možete delegirati sebi.", 400);
 
   // Zakazana promena — stupa na snagu u ponoć (efektivna delegacija ostaje do tada).
   await prisma.zrnoDelegacija.upsert({
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
 // DELETE /api/zrno/delegiraj — zakaži opoziv delegacije (izvršava se u ponoć)
 export async function DELETE() {
   const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Nije prijavljen." }, { status: 401 });
+  if (!session) return await greska("Nije prijavljen.", 401);
 
   const postoji = await prisma.zrnoDelegacija.findUnique({ where: { delegatorId: session.user.id } });
   if (!postoji) return NextResponse.json({ ok: true });

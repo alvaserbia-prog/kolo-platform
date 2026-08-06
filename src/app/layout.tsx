@@ -127,8 +127,10 @@ export default async function RootLayout({
   );
 
   // Ćirilični korisnici dobijaju Inter sa ćirilicom (lenjo, bez preload-a);
-  // svi ostali podrazumevani latinički Inter.
-  const fontInter = locale === "sr-Cyrl" ? interCirilica : inter;
+  // svi ostali podrazumevani latinički Inter. Obuhvata i "ru" — bez toga bi ruski
+  // tekst pao na sistemski fallback font (osnovni Inter nema ćirilične glifove).
+  const CIRILICNI_LOCALE = new Set(["sr-Cyrl", "ru"]);
+  const fontInter = CIRILICNI_LOCALE.has(locale) ? interCirilica : inter;
 
   return (
     <html lang={locale} className={`${fontInter.variable} ${jetbrainsMono.variable} h-full`}>
