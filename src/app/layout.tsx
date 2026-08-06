@@ -140,6 +140,10 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {/* SVE što zove `useTranslations` MORA biti unutar ovog providera — inače
+            next-intl baca praznu grešku i obara SSR cele stranice. CookieConsent
+            je bio ispod njega dok je imao zakucan srpski tekst; kad je prebačen na
+            prevode, rušio je svaku stranicu (uključujući 404). Ne vaditi ga odavde. */}
         <NextIntlClientProvider messages={clientMessages}>
           <CirilicaProvider />
           <Providers session={session}>
@@ -147,12 +151,12 @@ export default async function RootLayout({
             <AktivnostTracker />
             {children}
           </Providers>
+          <CookieConsent />
         </NextIntlClientProvider>
         {/* Vercel Analytics — bez kolačića (cookieless, agregatno), ne zahteva pristanak. */}
         <Analytics />
         {/* Google Analytics — učitava se SAMO uz pristanak (čl. 7 Politike). */}
         <Analitika />
-        <CookieConsent />
       </body>
     </html>
   );
