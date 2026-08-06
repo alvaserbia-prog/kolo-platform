@@ -38,6 +38,7 @@ export const OG_LOCALE: Record<string, string> = {
   en: "en_US",
   hu: "hu_HU",
   ru: "ru_RU",
+  hr: "hr_HR",
 };
 
 /**

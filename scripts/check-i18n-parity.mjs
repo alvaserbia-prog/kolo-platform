@@ -12,13 +12,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MESSAGES = join(ROOT, "messages");
 const IZVOR = "sr";
 // sr-Cyrl nema fajl (transliteracija), ne proverava se.
-// "hu" i "hr" su ZAMRZNUTI (neaktivni) — messages/{hu,hr}.json se NE održavaju
-// do pune integracije (vidi src/i18n/routing.ts). Vratiti u listu pri reaktivaciji.
-//
 // Namespace "admin" u ru.json OSTAJE srpski po odluci vlasnika; to ne remeti
 // paritet jer se porede KLJUČEVI, ne vrednosti. NE dodavati izuzetke ovde —
 // time bi se izgubila zaštita nad ostalim namespace-ovima.
-const CILJEVI = ["en", "ru"];
+const CILJEVI = ["en", "ru", "hr", "hu"];
 
 function leafKeys(obj, prefix = "") {
   let keys = [];

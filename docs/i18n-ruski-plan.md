@@ -584,3 +584,63 @@ preveden ugnežđeno, jedinica je ćirilicom (ПОЕН) — sve tri mašinerije 
 
 **Šta još nije na ruskom:** FAQ (faza 5) i pravni akti (faza 9). Oboje ima tih
 fallback na srpski, pa ništa ne puca.
+
+---
+
+## 7. Engleski, hrvatski i mađarski (2026-08-06)
+
+Isti postupak primenjen na preostala tri jezika. **Admin panel ostaje srpski u
+svim jezicima** (odluka vlasnika, ista kao za ruski).
+
+### Zatečeno stanje (mereno, ne pretpostavljeno)
+`CLAUDE.md` je tvrdio da je hrvatski „kompletan prevod". **Merenje to nije
+potvrdilo** — 385 ključeva dodatih tokom ruskog upisano je u `hr` kao doslovan
+srpski, jer je jezik bio zamrznut i van provere pariteta.
+
+| | Rupa | Uzrok |
+|---|---|---|
+| engleski | 334 | 277 poruka o greškama koje je faza 8 upisala kao srpske |
+| mađarski | ~500 | zamrznut → svaki nov ključ ostao srpski |
+| hrvatski | 69 stvarnih | vidi ispod |
+
+### 🔴 Zašto brojka „isto kao srpski" za hrvatski vara
+Srpski i hrvatski su bliski — **1.383 identične vrednosti su većinom ISPRAVAN
+hrvatski** („Početna", „Novčanik", „Lozinka", „Korisnik nije pronađen."). Ne
+prevoditi ih po broju, nego po sadržaju.
+
+Umesto toga korišćen je detektor srpskih oblika (ijekavica + leksika):
+`zahtev→zahtjev`, `uslov→uvjet`, `ceo→cijeli`, `mesto→mjesto`,
+`predlog→prijedlog`, `obaveštenje→obavijest`, `sopstveni→vlastiti`,
+`korišćenje→korištenje`. Rezultat: **69 stvarnih** (57 + 12 nedostajućih).
+
+> ⚠️ Zamka pri pisanju detektora: JavaScript `\b` ne prepoznaje `č`, pa je
+> `\bko\b` lažno pogađalo „Zajedni**č**ko". Ne oslanjati se na `\b` uz dijakritike.
+
+Držana postojeća hrvatska terminologija: **Račun** (ne „nalog"), **obavijest**,
+**zahtjev**, **Uvjeti korištenja**, **Zaklada**.
+
+### Odmrznuti hrvatski i mađarski
+Vraćeni u `routing.locales`, `/api/profil/jezik`, **proveru pariteta**, `seo.ts`,
+manifest i prekidač jezika (zastavice su već postojale).
+
+> **Zamrzavanje je i bio uzrok drifta** — jezik van parity provere tiho zaostaje
+> sa svakim novim ključem. Ako se neki jezik ponovo zamrzava, mora se izbaciti i
+> iz `CILJEVI` u parity skripti, uz svest da će odlutati.
+
+🅷🆄 **Mađarski nema FAQ prevod** (`faq-data-hu.ts` ne postoji) — pada na srpski.
+Hrvatski i engleski ga imaju.
+
+### Provereno u pregledaču (ne samo build)
+Podignut produkcioni server, pozvane stranice po svakom jeziku:
+
+| locale | `/` `/uslovi` `/o-nama` `/zajednicko-dobro` | naslovna |
+|---|---|---|
+| sr | 200 200 200 200 | Udružimo snage u svom kraju |
+| en | 200 200 200 200 | Let's join forces where we live |
+| ru | 200 200 200 200 | Объединим силы в своём краю |
+| hr | 200 200 200 200 | Udružimo snage u svom kraju |
+| hu | 200 200 200 200 | Fogjunk össze a saját környékünkön |
+| sr-Cyrl | 200 200 200 200 | — |
+
+Baner za kolačiće (koji je 2026-08-05 oborio sajt) proveren posebno u sva četiri
+jezika. Svih 6 zastavica prisutno u prekidaču.
