@@ -5,7 +5,7 @@ import { jeAdmin } from "@/lib/dozvole";
 const JAVNE_RUTE = [
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
-  "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro",
+  "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/odrzavanje",
   "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",
 ];
 
@@ -13,6 +13,18 @@ const ZAKLJUCANE_ULAZNE_RUTE = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
 ];
+
+/**
+ * Prekidač za PLANIRANO održavanje. Uključuje se env varijablom `ODRZAVANJE=1`
+ * (Vercel → Environment Variables, scope Production) + redeploy — env se
+ * primenjuje tek na sledeći build.
+ *
+ * Namerno je env varijabla, a NE zapis u bazi: održavanje se najčešće uključuje
+ * upravo zbog radova na bazi, pa prekidač ne sme da zavisi od nje.
+ *
+ * Za NEPLANIRAN pad ovo se ne dira — tada nastupa `app/global-error.tsx`.
+ */
+const ODRZAVANJE_UKLJUCENO = process.env.ODRZAVANJE === "1";
 
 const PRESKOCI = [
   "/login", "/registracija", "/oauth",
@@ -24,8 +36,61 @@ const PRESKOCI = [
   "/sitemap.xml", "/robots.txt", "/opengraph-image", "/twitter-image", "/manifest.webmanifest",
 ];
 
+/**
+ * Vraća odgovor za režim održavanja, ili `null` ako zahtev treba pustiti dalje.
+ *
+ * Šta NE zaključava:
+ * - `/api/*`, `_next/*` i statičke fajlove — isključeni su na nivou `matcher`-a,
+ *   pa cron rute (noćna emisija, istek table jemstva) rade i tokom održavanja,
+ *   a sam ekran može da učita logo i CSS;
+ * - admine (UO) — inače vlasnik ne bi mogao da proveri sajt dok traju radovi.
+ *   Provera ide preko JWT-a (`getToken`), bez upita u bazu, pa važi i kad je
+ *   baza ta koja je nedostupna;
+ * - `/login` i `/oauth` — bez njih bi admin koji NIJE već prijavljen ostao
+ *   zaključan napolju čim uključi održavanje, jer se obilaznica oslanja na
+ *   postojeći kolačić sesije. Običan korisnik se sme prijaviti, ali ga posle
+ *   prijave svejedno dočeka ekran održavanja.
+ *
+ * ⚠️ Odgovor je HTTP 200, ne 503: `NextResponse.rewrite` preuzima status
+ * odredišne rute i ne može ga nadjačati. Zato stranica nosi `noindex`
+ * (metadata + `X-Robots-Tag`), da privremeni ekran ne uđe u indeks umesto
+ * pravog sadržaja. `Retry-After` ostaje kao signal keševima i botovima.
+ */
+async function odrzavanjeOdgovor(req: NextRequest, pathname: string) {
+  const propusti =
+    pathname === "/odrzavanje" ||
+    pathname === "/login" ||
+    pathname.startsWith("/oauth");
+  if (propusti) return null;
+
+  // Ako čitanje tokena pukne (npr. nedostaje `NEXTAUTH_SECRET`), NE puštamo
+  // grešku iz middleware-a — ona bi oborila SVAKI zahtev i umesto lepog ekrana
+  // dala Vercel-ovu stranicu greške. Neuspela provera znači „nije admin".
+  let token = null;
+  try {
+    token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  } catch (greska) {
+    console.error("[odrzavanje] provera admina neuspela", greska);
+  }
+  if (jeAdmin({ admin: token?.admin as string | undefined })) return null;
+
+  const url = req.nextUrl.clone();
+  url.pathname = "/odrzavanje";
+  url.search = "";
+  const odgovor = NextResponse.rewrite(url);
+  odgovor.headers.set("Retry-After", "3600");
+  odgovor.headers.set("Cache-Control", "no-store");
+  odgovor.headers.set("X-Robots-Tag", "noindex");
+  return odgovor;
+}
+
 export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  if (ODRZAVANJE_UKLJUCENO) {
+    const odgovor = await odrzavanjeOdgovor(req, pathname);
+    if (odgovor) return odgovor;
+  }
 
   if (PRESKOCI.some((r) => pathname.startsWith(r))) {
     return NextResponse.next();
