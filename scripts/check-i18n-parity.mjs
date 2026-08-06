@@ -34,7 +34,28 @@ function load(locale) {
   return JSON.parse(readFileSync(join(MESSAGES, `${locale}.json`), "utf8"));
 }
 
+function flat(locale) {
+  const obj = load(locale);
+  const out = {};
+  for (const k of leafKeys(obj)) {
+    out[k] = k.split(".").reduce((o, p) => o[p], obj);
+  }
+  return out;
+}
+
+/**
+ * Vrednosti koje SMEJU biti iste kao engleske — nisu neprevedene, nego se ne
+ * prevode: lična imena, nazivi brendova. Držati spisak kratkim; sve ostalo što
+ * je identično engleskom je propušten prevod.
+ */
+const DOZVOLJENO_ISTO_KAO_EN = new Set([
+  "oSistemu.topla_voda_citat_izvor",
+  "oSistemu.margaret_izvor",
+]);
+
 const izvorKeys = new Set(leafKeys(load(IZVOR)));
+const srV = flat(IZVOR);
+const enV = flat("en");
 let greske = 0;
 
 for (const cilj of CILJEVI) {
@@ -50,6 +71,28 @@ for (const cilj of CILJEVI) {
       console.error(`  Višak (${visak.length}): ${visak.slice(0, 30).join(", ")}${visak.length > 30 ? " …" : ""}`);
   } else {
     console.log(`✓ ${cilj}.json — paritet OK (${ciljKeys.size} ključeva)`);
+  }
+
+  // Paritet ključeva NE hvata neprevedenu vrednost. Mađarski je tako godinu dana
+  // vukao 893 engleske rečenice (34% fajla) uz „paritet OK" — ključ je postojao,
+  // sadržaj je bio engleski. Vrednost identična engleskoj, a različita od srpske,
+  // znači da je red prekopiran iz en.json i nikad preveden.
+  if (cilj !== "en") {
+    const ciljV = flat(cilj);
+    const neprevedeno = [...ciljKeys].filter(
+      (k) =>
+        !DOZVOLJENO_ISTO_KAO_EN.has(k) &&
+        typeof enV[k] === "string" &&
+        ciljV[k] === enV[k] &&
+        ciljV[k] !== srV[k],
+    );
+    if (neprevedeno.length) {
+      greske++;
+      console.error(
+        `\n✗ ${cilj}.json — ${neprevedeno.length} vrednost(i) je ostalo na engleskom: ${neprevedeno.slice(0, 20).join(", ")}${neprevedeno.length > 20 ? " …" : ""}`,
+      );
+      console.error(`  Prevedi ih, ili dodaj u DOZVOLJENO_ISTO_KAO_EN ako se namerno ne prevode (imena, brendovi).`);
+    }
   }
 }
 
