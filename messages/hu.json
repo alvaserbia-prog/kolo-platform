@@ -76,6 +76,8 @@
     "iznos": "Összeg",
     "opis": "Leírás",
     "poen_dan": "POEN/nap",
+    "poen": "POEN",
+    "zrno": "ZRNO",
     "detalji": "Részletek →",
     "pretrazi_clanove": "Tagok keresése…",
     "mesto_iz_spiska": "Válasszon egy települést a felkínált listából — csak egy helyet adjon meg."

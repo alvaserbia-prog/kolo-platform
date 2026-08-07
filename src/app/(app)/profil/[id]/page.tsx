@@ -61,6 +61,7 @@ export default function JavniProfilPage() {
   const locale = useLocale();
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
+  const tc = useTranslations("common");
   const params = useParams();
   // U adresi stoji pseudonim (`/profil/Marko`); API prima i njega i interni id i
   // napušteni pseudonim, pa se ovde ništa ne razrešava — samo prosleđuje.
@@ -261,13 +262,13 @@ export default function JavniProfilPage() {
           {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
           <div className="grid grid-cols-2 gap-4 flex-1">
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
-              <p className="text-base font-medium text-kolo-muted mb-1">ZRNO</p>
+              <p className="text-base font-medium text-kolo-muted mb-1">{tc("zrno")}</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.zrno !== null ? profil.zrno.toLocaleString(intlTag(locale)) : "—"}
               </p>
             </div>
             <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
-              <p className="text-base font-medium text-kolo-muted mb-1">POEN</p>
+              <p className="text-base font-medium text-kolo-muted mb-1">{tc("poen")}</p>
               <p className="text-5xl font-bold text-kolo-text tabular-nums">
                 {profil.bilans !== null ? profil.bilans.toLocaleString(intlTag(locale)) : "—"}
               </p>

@@ -34,6 +34,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
+  const tc = useTranslations("common");
   const [showSend, setShowSend] = useState(!!platiPseudonim);
   const [showQR, setShowQR] = useState(false);
   const [showSkener, setShowSkener] = useState(false);
@@ -71,7 +72,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
             <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
               {balance.toLocaleString(intlTag(locale))}
             </p>
-            <p className="text-lg text-white/70 mt-0.5">POEN</p>
+            <p className="text-lg text-white/70 mt-0.5">{tc("poen")}</p>
           </div>
         </div>
       </div>

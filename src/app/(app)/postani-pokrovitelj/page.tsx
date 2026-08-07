@@ -14,6 +14,7 @@ export default async function PostaniPokroviteljPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/prijava");
   const t = await getTranslations("postaniPokrovitelj");
+  const tc = await getTranslations("common");
 
   const [mojiPokrovitelji, sviPokrovitelji] = await Promise.all([
     session.user.verified
@@ -80,7 +81,7 @@ export default async function PostaniPokroviteljPage() {
           ].map((r) => (
             <div key={r.nivo} className="flex justify-between py-1.5 border-b border-kolo-border last:border-0">
               <span className="text-kolo-muted">{t("nivo_red", { nivo: r.nivo, rsd: r.rsd })}</span>
-              <span className="font-semibold text-kolo-green-700">{r.poen} POEN</span>
+              <span className="font-semibold text-kolo-green-700">{r.poen} {tc("poen")}</span>
             </div>
           ))}
         </div>

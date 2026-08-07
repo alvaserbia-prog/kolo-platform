@@ -18,6 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function KakoFunkcionisePage() {
   const locale = await getLocale();
   const t = await getTranslations("kakoFunkcionisePage");
+  const tc = await getTranslations("common");
   const faqPitanja = getFaqPoBrojevima([4, 16, 5], locale);
 
   const koraci = [
@@ -246,10 +247,11 @@ export default async function KakoFunkcionisePage() {
           <div className="bg-white rounded-2xl card-shadow p-6 md:p-8 space-y-5">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-kolo-green-100 text-kolo-green-700 flex items-center justify-center font-bold text-lg">
-                P
+                {/* Inicijal se izvodi iz naziva jedinice — na ćirilici/ruskom „П", ne „P". */}
+                {tc("poen").charAt(0)}
               </div>
               <div>
-                <p className="font-bold text-kolo-green-900 text-lg">POEN</p>
+                <p className="font-bold text-kolo-green-900 text-lg">{tc("poen")}</p>
                 <p className="text-sm text-kolo-muted">{t("poen_jedinica_label")}</p>
               </div>
             </div>
@@ -304,10 +306,10 @@ export default async function KakoFunkcionisePage() {
           <div className="bg-white rounded-2xl card-shadow p-6 md:p-8 space-y-5">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-kolo-gold-100 text-kolo-gold-600 flex items-center justify-center font-bold text-lg">
-                Z
+                {tc("zrno").charAt(0)}
               </div>
               <div>
-                <p className="font-bold text-kolo-green-900 text-lg">ZRNO</p>
+                <p className="font-bold text-kolo-green-900 text-lg">{tc("zrno")}</p>
                 <p className="text-sm text-kolo-muted">{t("zrno_jedinica_label")}</p>
               </div>
             </div>

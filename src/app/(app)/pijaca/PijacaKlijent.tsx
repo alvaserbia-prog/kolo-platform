@@ -487,6 +487,10 @@ const OglasKartica = memo(function OglasKartica({
   prioritet: boolean;
   udaljenost: number | null;
 }) {
+  // Naziv jedinice ide kroz prevod, ne kao literal: na ćirilici i ruskom je
+  // „ПОЕН", pa je hardkodovana latinica ostavljala latinicu usred ćiriličnog teksta.
+  const tc = useTranslations("common");
+
   return (
     <div className="bg-white rounded-2xl card-shadow border border-kolo-border overflow-hidden flex flex-col">
       {/* Slika ili placeholder — ceo blok vodi na oglas */}
@@ -532,7 +536,7 @@ const OglasKartica = memo(function OglasKartica({
               </p>
               {prikaziJedinicuCene(oglas) && (
                 <p className="text-[10px] text-kolo-green-700 opacity-70">
-                  POEN
+                  {tc("poen")}
                 </p>
               )}
             </div>

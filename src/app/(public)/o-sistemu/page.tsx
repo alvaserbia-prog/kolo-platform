@@ -17,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function OSistemuPage() {
   const locale = await getLocale();
   const t = await getTranslations("oSistemu");
+  const tc = await getTranslations("common");
   const faqPitanja = getFaqPoBrojevima([1, 4, 28], locale);
 
   const sistemi = [
@@ -137,7 +138,7 @@ export default async function OSistemuPage() {
               {t("zajednicko_p2_pre")}<strong className="text-kolo-green-900">{t("zajednicko_p2_sredina")}</strong>{t("zajednicko_p2_post")}
             </p>
             <p>
-              <strong className="text-kolo-green-900">POEN</strong>{t("zajednicko_p3_pre")}
+              <strong className="text-kolo-green-900">{tc("poen")}</strong>{t("zajednicko_p3_pre")}
             </p>
           </div>
         </div>
@@ -435,7 +436,7 @@ export default async function OSistemuPage() {
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
-              {t("familija_p1_pre")}<strong className="text-kolo-green-900">POEN</strong>{t("familija_p1_poen")}<strong className="text-kolo-green-900">ZRNO</strong>{t("familija_p1_zrno")}
+              {t("familija_p1_pre")}<strong className="text-kolo-green-900">{tc("poen")}</strong>{t("familija_p1_poen")}<strong className="text-kolo-green-900">{tc("zrno")}</strong>{t("familija_p1_zrno")}
             </p>
             <p>
               {t("familija_p2")}

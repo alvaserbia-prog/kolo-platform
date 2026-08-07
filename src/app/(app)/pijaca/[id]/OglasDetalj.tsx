@@ -46,6 +46,7 @@ interface Props {
 export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) {
   const locale = useLocale();
   const t = useTranslations("pijaca");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [activeSlika, setActiveSlika] = useState(0);
   const [deaktiviranjeLoading, setDeaktiviranjeLoading] = useState(false);
@@ -174,7 +175,7 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
               ) : (
                 <>
                   <p className="text-2xl font-bold text-kolo-green-700">{formatCenaGlavni(oglas, t("cena_po_dogovoru"))}</p>
-                  {prikaziJedinicuCene(oglas) && <p className="text-sm text-kolo-green-700">POEN</p>}
+                  {prikaziJedinicuCene(oglas) && <p className="text-sm text-kolo-green-700">{tc("poen")}</p>}
                 </>
               )}
             </div>

@@ -48,6 +48,7 @@ interface Props {
 export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerified, isAdmin, pocetniTab }: Props) {
   const locale = useLocale();
   const t = useTranslations("krug");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
 
@@ -114,7 +115,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           </div>
           <div className="shrink-0 bg-kolo-green-100 rounded-2xl px-4 py-3 text-center">
             <p className="text-xl font-bold text-kolo-green-700">{krug.balance.toLocaleString(intlTag(locale))}</p>
-            <p className="text-xs text-kolo-green-700">POEN</p>
+            <p className="text-xs text-kolo-green-700">{tc("poen")}</p>
           </div>
         </div>
 
@@ -169,7 +170,7 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("info_stanje")}</span>
-            <span className="font-bold text-kolo-green-700">{krug.balance.toLocaleString(intlTag(locale))} POEN</span>
+            <span className="font-bold text-kolo-green-700">{krug.balance.toLocaleString(intlTag(locale))} {tc("poen")}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-kolo-muted">{t("info_aktivnih_projekata")}</span>
