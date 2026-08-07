@@ -5,13 +5,15 @@ import { useLocale } from "next-intl";
 // Jezik/pismo se bira preko cookie-a (NEXT_LOCALE) + osvežavanja — bez URL prefiksa
 // (projekat koristi ravno stablo ruta; request.ts чita cookie i učitava prevode,
 // a ćirilica se izvodi transliteracijom iz "sr").
+// Redosled: domaći jezici prvo, engleski poslednji (odluka vlasnika) — engleski
+// je međunarodni rezervni izbor, ne jedan od jezika regiona.
 const jezici = [
   { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
   { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
-  { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
   { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский" },
   { kod: "hr", ikona: "/flags/hr.svg", naziv: "Hrvatski" },
   { kod: "hu", ikona: "/flags/hu.svg", naziv: "Magyar" },
+  { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
 ];
 
 function promeniJezik(kod: string) {
