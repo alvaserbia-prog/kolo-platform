@@ -128,7 +128,6 @@ export default function PublicNav({ isLoggedIn }: Props) {
               </span>
             </Link>
             <div className="flex items-center gap-3">
-              <JezikSvitcer />
               <button
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center w-10 h-10 rounded-lg text-kolo-text hover:bg-kolo-bg transition-colors"
@@ -196,6 +195,12 @@ export default function PublicNav({ isLoggedIn }: Props) {
               >
                 {t("nav_kontakt")}
               </a>
+            </div>
+
+            {/* Jezik na dnu menija — isti razlog kao u sidebar-u: red od 6 zastavica
+                ne staje pored logotipa i dugmeta za zatvaranje u zaglavlju. */}
+            <div className="pt-4 border-t border-kolo-border">
+              <JezikSvitcer />
             </div>
           </nav>
         </div>

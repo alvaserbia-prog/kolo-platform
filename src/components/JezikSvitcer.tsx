@@ -25,11 +25,16 @@ function promeniJezik(kod: string) {
   window.location.reload();
 }
 
-export default function JezikSvitcer() {
+/**
+ * `flex-wrap` je obavezan: sa 6 jezika red je ~205px širok, a mobilni sidebar
+ * (w-64) i mobilni meni javnih stranica imaju uže mesto od toga. Bez prelamanja
+ * zastavice su izlazile iz okvira i prelazile preko naziva „KOLO".
+ */
+export default function JezikSvitcer({ className = "" }: { className?: string }) {
   const trenutni = useLocale();
 
   return (
-    <div className="flex items-center gap-1.5">
+    <div className={`flex flex-wrap items-center gap-x-1.5 gap-y-1.5 ${className}`}>
       {jezici.map((j) => (
         <button
           key={j.kod}
