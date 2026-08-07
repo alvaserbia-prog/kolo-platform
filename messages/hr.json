@@ -89,6 +89,10 @@
     "pretrazi_clanove": "Pretraži članove...",
     "mesto_iz_spiska": "Odaberi mjesto s ponuđenog popisa naselja — upiši samo jedno mjesto."
   },
+  "seo": {
+    "site_naslov": "KOLO — Sustav uzajamnosti utemeljen na doprinosu zajednici",
+    "site_opis": "KOLO je sustav evidencije doprinosa zajedničkom dobru, utemeljen na uzajamnosti. POEN bilježi što si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno."
+  },
   "login": {
     "naslov": "Prijava",
     "podnaslov": "Dobro došli natrag u KOLO",

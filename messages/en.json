@@ -89,6 +89,10 @@
     "pretrazi_clanove": "Search members...",
     "mesto_iz_spiska": "Choose a place from the offered list of settlements — enter only one place."
   },
+  "seo": {
+    "site_naslov": "KOLO — A system of mutuality based on contribution to the community",
+    "site_opis": "KOLO is a system for recording contributions to the common good, based on mutuality. POEN records what you have given to the community; ZRNO gives you a voice in decisions. Membership is free."
+  },
   "login": {
     "naslov": "Sign In",
     "podnaslov": "Welcome back to Circle",

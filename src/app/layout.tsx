@@ -6,7 +6,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { sesija } from "@/lib/sesija";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getLocale } from "next-intl/server";
+import { getMessages, getLocale, getTranslations } from "next-intl/server";
 import CirilicaProvider from "@/components/CirilicaProvider";
 import { Analitika } from "@/components/Analitika";
 import { AktivnostTracker } from "@/components/AktivnostTracker";
@@ -14,7 +14,6 @@ import { CookieConsent } from "@/components/CookieConsent";
 import {
   SITE_URL,
   SITE_NAME,
-  SITE_DESCRIPTION,
   IS_PRODUCTION,
   absoluteUrl,
   OG_LOCALE,
@@ -52,13 +51,20 @@ const jetbrainsMono = JetBrains_Mono({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
+  // Naslov i opis u <head> (ono što Google prikaže u rezultatima pretrage i što
+  // se vidi kad se link deli) idu kroz prevod. Ranije su bili zakucani na
+  // srpskom, pa je ruski posetilac na ruskoj stranici dobijao srpski opis.
+  const tSeo = await getTranslations("seo");
+  const naslov = tSeo("site_naslov");
+  const opis = tSeo("site_opis");
+
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici",
+      default: naslov,
       template: `%s — ${SITE_NAME}`,
     },
-    description: SITE_DESCRIPTION,
+    description: opis,
     applicationName: SITE_NAME,
     // PWA manifest — omogućava „Dodaj na početni ekran" (uslov za Web Push na iOS-u).
     manifest: "/manifest.webmanifest",
@@ -76,14 +82,14 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: OG_LOCALE[locale] ?? "sr_RS",
       url: SITE_URL,
       siteName: SITE_NAME,
-      title: "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici",
-      description: SITE_DESCRIPTION,
+      title: naslov,
+      description: opis,
       // og:image obezbeđuje opengraph-image.tsx (dinamička 1200×630) — ne dupliramo ovde.
     },
     twitter: {
       card: "summary_large_image",
-      title: "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici",
-      description: SITE_DESCRIPTION,
+      title: naslov,
+      description: opis,
     },
     icons: {
       icon: "/kolo-icon.png",
@@ -92,21 +98,26 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** Organization strukturirani podaci (JSON-LD) — pomaže Google Knowledge panelu. */
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "KOLO",
-  url: SITE_URL,
-  logo: absoluteUrl("/kolo-logo.png"),
-  description: SITE_DESCRIPTION,
-};
+/** Organization strukturirani podaci (JSON-LD) — pomaže Google Knowledge panelu.
+ *  Opis prima spolja, iz prevoda: ovo je isti tekst koji Google prikazuje uz
+ *  rezultat, pa mora da bude na jeziku posetioca. */
+function organizationJsonLd(opis: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "KOLO",
+    url: SITE_URL,
+    logo: absoluteUrl("/kolo-logo.png"),
+    description: opis,
+  };
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const tSeo = await getTranslations("seo");
 
   // Pad autentikacije (nedostupna baza, nedostajuća `NEXTAUTH_SECRET`…) NE sme
   // da obori ceo dokument. Ako `RootLayout` baci, Next ne može serverski da
@@ -155,7 +166,9 @@ export default async function RootLayout({
         <Script
           id="organization-jsonld"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd(tSeo("site_opis"))),
+          }}
         />
         {/* SVE što zove `useTranslations` MORA biti unutar ovog providera — inače
             next-intl baca praznu grešku i obara SSR cele stranice. CookieConsent

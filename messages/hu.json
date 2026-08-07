@@ -82,6 +82,10 @@
     "pretrazi_clanove": "Tagok keresése…",
     "mesto_iz_spiska": "Válasszon egy települést a felkínált listából — csak egy helyet adjon meg."
   },
+  "seo": {
+    "site_naslov": "KOLO — A közösséghez való hozzájáruláson alapuló kölcsönösségi rendszer",
+    "site_opis": "A KOLO a közjóhoz való hozzájárulás nyilvántartásának rendszere, amely a kölcsönösségen alapul. A POEN rögzíti, mit adtál a közösségnek, a ZRNO pedig szavazatot ad neked a döntésekben. A tagság ingyenes."
+  },
   "login": {
     "naslov": "Bejelentkezés",
     "podnaslov": "Üdvözöljük vissza a Kör-ben",
