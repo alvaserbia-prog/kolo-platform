@@ -803,15 +803,29 @@ export function poBrojevima(brojevi: number[]): FaqPitanje[] {
 
 import { FAQ_SEKCIJE_EN } from "./faq-data-en";
 import { FAQ_SEKCIJE_HR } from "./faq-data-hr";
+import { FAQ_SEKCIJE_RU } from "./faq-data-ru";
+import { FAQ_SEKCIJE_HU } from "./faq-data-hu";
 
 /**
- * Returns FAQ sections for a given locale.
- * English returns English data; all other locales (sr, sr-Cyrl, hu, …) fall back to Serbian.
+ * Svaki prevedeni jezik ima svoj FAQ set; „sr" i „sr-Cyrl" koriste original
+ * (ćirilica se izvodi transliteracijom u prikazu, isti podaci).
+ *
+ * ⚠️ `id` sekcija i pitanja MORAJU biti isti u svim jezicima — `getFaqPoBrojevima`
+ * bira pitanja po broju, pa bi razmimoilaženje tiho izbacilo pitanje iz prikaza.
+ * Proverava se testom `__tests__/faq-paritet.test.ts`.
+ */
+const PO_JEZIKU: Record<string, FaqSekcija[]> = {
+  en: FAQ_SEKCIJE_EN,
+  hr: FAQ_SEKCIJE_HR,
+  ru: FAQ_SEKCIJE_RU,
+  hu: FAQ_SEKCIJE_HU,
+};
+
+/**
+ * Returns FAQ sections for a given locale; falls back to Serbian.
  */
 export function getFaqSekcije(locale: string): FaqSekcija[] {
-  if (locale === "en") return FAQ_SEKCIJE_EN;
-  if (locale === "hr") return FAQ_SEKCIJE_HR;
-  return FAQ_SEKCIJE;
+  return PO_JEZIKU[locale] ?? FAQ_SEKCIJE;
 }
 
 /**

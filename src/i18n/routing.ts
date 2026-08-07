@@ -14,7 +14,9 @@ export const routing = defineRouting({
   // prekidaču jezika. Ranije su bili neaktivni i zato su odlutali — svaki nov
   // ključ ostajao je srpski. Ne zamrzavati ih ponovo bez izbacivanja iz parity
   // skripte, inače provera prestaje da hvata regresiju.
-  // 🅷🆄 Mađarski nema FAQ prevod (faq-data-hu.ts) — pada na srpski, vidi faq-data.ts.
+  //
+  // FAQ ima sopstveni set po jeziku (faq-data-<kod>.ts) i NIJE u messages/, pa ga
+  // parity skripta ne vidi — pokriva ga __tests__/faq-paritet.test.ts.
   //
   // 🇷🇺 RUSKI je aktivan i izložen u prekidaču jezika (od 2026-08-05).
   // Prevod: messages/ru.json — vidi docs/i18n-ruski-plan.md.
