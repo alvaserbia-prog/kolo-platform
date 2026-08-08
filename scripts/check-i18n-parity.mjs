@@ -53,6 +53,20 @@ const DOZVOLJENO_ISTO_KAO_EN = new Set([
   "oSistemu.margaret_izvor",
 ]);
 
+/**
+ * Namespace-ovi koji se NAMERNO ne prevode — vrednost mora da bude identična
+ * srpskoj u svakom jeziku.
+ *
+ * `admin` = panel UO Fondacije: terminologija mora da prati akte (srpski
+ * original), a UO radi na srpskom. Odluka vlasnika.
+ *
+ * Bez ove provere se pravilo tiho gubilo: paritet ključeva prolazi, provera
+ * „ostalo na engleskom" ne pogađa prevod na hrvatski/ruski, pa je svaki nov
+ * admin ekran ulazio preveden. Zatečeno stanje pre uvođenja: hr 162 prevedene
+ * vrednosti (Lijevak, Vijesti, Financije…), en 382, ru 17 (ceo tab Levak).
+ */
+const SAMO_SRPSKI_NS = ["admin"];
+
 const izvorKeys = new Set(leafKeys(load(IZVOR)));
 const srV = flat(IZVOR);
 const enV = flat("en");
@@ -93,6 +107,22 @@ for (const cilj of CILJEVI) {
       );
       console.error(`  Prevedi ih, ili dodaj u DOZVOLJENO_ISTO_KAO_EN ako se namerno ne prevode (imena, brendovi).`);
     }
+  }
+
+  // Obrnut smer: namespace koji NE sme da bude preveden.
+  const ciljSve = flat(cilj);
+  const prevedeno = [...ciljKeys].filter(
+    (k) =>
+      SAMO_SRPSKI_NS.some((ns) => k.startsWith(ns + ".")) &&
+      typeof srV[k] === "string" &&
+      ciljSve[k] !== srV[k],
+  );
+  if (prevedeno.length) {
+    greske++;
+    console.error(
+      `\n✗ ${cilj}.json — ${prevedeno.length} vrednost(i) u [${SAMO_SRPSKI_NS.join(", ")}] je prevedeno, a ne sme: ${prevedeno.slice(0, 20).join(", ")}${prevedeno.length > 20 ? " …" : ""}`,
+    );
+    console.error(`  Prepiši srpsku vrednost iz ${IZVOR}.json (admin panel se ne prevodi — odluka vlasnika).`);
   }
 }
 
