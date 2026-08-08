@@ -9,7 +9,10 @@ export default async function PocetnaPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
 
-  const [blogObjave, chatPoruke] = await Promise.all([
+  // Brojač na vrhu početne: članovi, oglasi, razmene, opticaj. Isti izvor kao
+  // kartice na /sistem — „razmene" su prenosi između korisnika (TRANSFER), a
+  // „opticaj" apsolutna vrednost protivzapisa Protokola.
+  const [blogObjave, chatPoruke, clanovi, oglasi, razmene, protokol] = await Promise.all([
     prisma.blogPost.findMany({
       orderBy: { publishedAt: "desc" },
       take: 5,
@@ -21,6 +24,10 @@ export default async function PocetnaPage() {
       take: 100,
       include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
     }),
+    prisma.user.count({ where: { deaktiviranAt: null } }),
+    prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
+    prisma.transaction.count({ where: { type: "TRANSFER" } }),
+    prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
   ]);
 
   const blog = blogObjave.map((o) => ({
@@ -51,6 +58,12 @@ export default async function PocetnaPage() {
       blog={blog}
       chatInicijalno={chat}
       jeAdminViewer={jeAdmin(session.user)}
+      brojac={{
+        clanovi,
+        oglasi,
+        razmene,
+        opticaj: protokol ? Math.abs(protokol.balance) : 0,
+      }}
     />
   );
 }

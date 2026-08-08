@@ -8,6 +8,7 @@ import { parsirajCenu } from "@/lib/cena-oglas";
 import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
 import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
+import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -58,13 +59,16 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ listings });
 }
 
-// POST /api/pijaca — kreiraj oglas (samo verifikovani)
+// POST /api/pijaca — kreiraj oglas
+//
+// Otvoreno i neverifikovanom korisniku (Pravilnik 4.1.0 čl. 16 st. 5, čl. 28 st. 2),
+// ali samo za PONUDU, uz sadržinski minimum i najviše tri aktivna oglasa. Prvi takav
+// oglas mu beleži doprinos sadržaju platforme (čl. 40a) — doprinos se BELEŽI ovde, a
+// evidentira tek kad ga neko verifikuje ili mu upiše POEN.
 export async function POST(req: NextRequest) {
   try {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
-  if (!session.user.verified)
-    return await greska("Samo verifikovani korisnici mogu postavljati oglase.", 403);
 
   const formData = await req.formData();
   const title = (formData.get("title") as string)?.trim();
@@ -116,6 +120,37 @@ export async function POST(req: NextRequest) {
       return await greska("Dozvoljeni formati: JPG, PNG, WebP.", 400);
   }
 
+  // Prava objave se čitaju IZ BAZE, ne iz sesije: `verified` u tokenu se osvežava
+  // sa zakašnjenjem, pa bi tek verifikovan korisnik još neko vreme dobijao pravila
+  // za neverifikovane (limit od tri oglasa, zabrana potražnje).
+  const korisnik = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { verified: true },
+  });
+  if (!korisnik) return await greska("Nalog ne postoji.", 401);
+
+  const brojAktivnihOglasa = korisnik.verified
+    ? 0
+    : await prisma.marketplaceListing.count({
+        where: { sellerId: session.user.id, status: "ACTIVE" },
+      });
+
+  // Provera se radi PRE slanja slika na R2 — odbijen oglas ne sme da ostavi
+  // datoteke za sobom.
+  const oglasZaProveru = {
+    tip,
+    description,
+    category,
+    location: mesto,
+    images: imageFiles.map((_, i) => String(i)),
+  };
+  const smem = smeDaPostaviOglas({
+    verifikovan: korisnik.verified,
+    brojAktivnihOglasa,
+    oglas: oglasZaProveru,
+  });
+  if (!smem.ok) return await greska(smem.razlog, smem.status);
+
   const listingId = randomUUID();
   const imagePaths: string[] = [];
 
@@ -158,6 +193,12 @@ export async function POST(req: NextRequest) {
       phone: phone || null,
     },
   });
+
+  // Doprinos sadržaju platforme (čl. 40a). Beleži se za PRVU ponudu koja ispunjava
+  // sadržinski minimum — i verifikovanom i neverifikovanom korisniku. Do okidača
+  // (verifikacija ili primljen POEN) to NIJE zapis POEN-a: ništa se ne emituje, ni
+  // opticaj ni ijedan sistemski prag se ne pomera.
+  await zabeleziDoprinos(session.user.id, { id: listing.id, ...oglasZaProveru, images: imagePaths });
 
   // Obavesti korisnike koji prate ovu kategoriju. Ne sme da obori objavu oglasa
   // ako pukne — oglas je već upisan.

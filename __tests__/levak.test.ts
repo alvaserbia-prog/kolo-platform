@@ -6,7 +6,6 @@ const DAN = 24 * 60 * 60 * 1000;
 function prazanUlaz(korisnici: LevakUlaz["korisnici"]): LevakUlaz {
   return {
     korisnici,
-    saKarticom: new Set(),
     otvoriliPoverenje: new Set(),
     otvoriliFormu: new Set(),
     prviOglas: new Map(),
@@ -45,7 +44,6 @@ describe("izracunajLevak", () => {
     const registracija = new Date("2026-07-06T09:00:00Z"); // ponedeljak
     const ulaz: LevakUlaz = {
       korisnici: [{ id: "a", createdAt: registracija, verifiedAt: new Date("2026-07-20T09:00:00Z") }],
-      saKarticom: new Set(["a"]),
       otvoriliPoverenje: new Set(["a"]),
       otvoriliFormu: new Set(["a"]),
       // oglas mesec dana kasnije — i dalje se broji u julskoj kohorti
@@ -63,22 +61,22 @@ describe("izracunajLevak", () => {
     const ulaz: LevakUlaz = {
       ...prazanUlaz(korisnici),
       otvoriliPoverenje: new Set(["a", "b"]), // 2 od 4 = 50%
-      saKarticom: new Set(["a"]), // 1 od 2 = 50%
+      otvoriliFormu: new Set(["a"]), // 1 od 2 = 50%
     };
     const g = izracunajLevak(ulaz)[0];
     expect(korak(g, "otvorili_poverenje").prolaz).toBe(50);
-    expect(korak(g, "objavili_karticu").prolaz).toBe(50);
+    expect(korak(g, "otvorili_formu").prolaz).toBe(50);
   });
 
-  it("verifikacija bez kartice (QR put) daje prolaz preko 100% i to nije greška", () => {
+  it("verifikacija bez oglasa (jednokratan kod) daje prolaz preko 100% i to nije greška", () => {
     const d = new Date("2026-08-03T09:00:00Z");
     const ulaz = prazanUlaz([
       { id: "a", createdAt: d, verifiedAt: new Date("2026-08-04T09:00:00Z") },
       { id: "b", createdAt: d, verifiedAt: new Date("2026-08-04T09:00:00Z") },
     ]);
-    ulaz.saKarticom = new Set(["a"]);
+    ulaz.prviOglas = new Map([["a", new Date("2026-08-04T09:00:00Z")]]);
     const g = izracunajLevak(ulaz)[0];
-    expect(korak(g, "objavili_karticu").broj).toBe(1);
+    expect(korak(g, "objavili_oglas").broj).toBe(1);
     expect(korak(g, "verifikovani").broj).toBe(2);
     expect(korak(g, "verifikovani").prolaz).toBe(200);
   });
@@ -91,7 +89,6 @@ describe("izracunajLevak", () => {
         { id: "b", createdAt: reg, verifiedAt: new Date(reg.getTime() + 4 * DAN) },
         { id: "c", createdAt: reg, verifiedAt: null }, // neverifikovan ne ulazi u prosek
       ],
-      saKarticom: new Set(),
       otvoriliPoverenje: new Set(),
       otvoriliFormu: new Set(),
       prviOglas: new Map([["a", new Date(reg.getTime() + 5 * DAN)]]), // 3 dana posle verifikacije

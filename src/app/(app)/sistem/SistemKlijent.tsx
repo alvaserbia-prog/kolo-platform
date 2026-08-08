@@ -171,7 +171,7 @@ export default function SistemKlijent({
             {t("nalog_nije_verifikovan_opis", { iznos: "1.000 POEN" })}
           </p>
           <Link
-            href="/tabla-jemstva"
+            href="/verifikacija"
             className="mt-3 inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
           >
             {t("verifikuj_dugme")}
@@ -875,7 +875,7 @@ function ClanoviSekcija({
           {t("clanovi_pregled_blokiran")}
         </p>
         <Link
-          href="/tabla-jemstva"
+          href="/verifikacija"
           className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
         >
           {t("verifikuj_dugme_link")}
@@ -1235,7 +1235,7 @@ function LokacijaKartica({
           <div className="border-t border-kolo-border p-5 text-center">
             <p className="text-sm text-kolo-muted mb-3">{t("clanovi_pregled_blokiran")}</p>
             <Link
-              href="/tabla-jemstva"
+              href="/verifikacija"
               className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
             >
               {t("verifikuj_dugme_link")}
@@ -1425,7 +1425,7 @@ function DonacijeSekcija({
           {t("donacije_pregled_blokiran")}
         </p>
         <Link
-          href="/tabla-jemstva"
+          href="/verifikacija"
           className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
         >
           {t("verifikuj_dugme_link")}

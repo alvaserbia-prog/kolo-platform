@@ -26,7 +26,7 @@ type MojIndeks = {
 };
 
 /**
- * Generiše token za verifikaciju i prikazuje QR + 6-cifren broj + countdown (2 sata).
+ * Generiše token za verifikaciju i prikazuje QR + 6-cifren broj + countdown (24 sata).
  * Polluje moj-indeks endpoint i pokazuje obaveštenje kad se verifikacija desi.
  */
 function formatPreostalo(sekundi: number): string {

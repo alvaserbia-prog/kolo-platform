@@ -17,7 +17,10 @@ export const MAX_INDEKS = 100; // čl. 3 stav 2
 export const POEN_VERIFIKATOR = 1000; // čl. 7
 export const POEN_VERIFIKOVANI = 1000; // čl. 7
 export const POEN_NADZORNIK = 500; // čl. 7
-export const TOKEN_VAZI_SEKUNDI = 2 * 60 * 60; // QR token TTL = 2 sata
+// QR token TTL. Produžen sa 2 na 24 sata otkad je tabla jemstva ukinuta: dogovor
+// o verifikaciji se sada vodi kroz poruke povodom oglasa, pa dve osobe retko stoje
+// jedna pored druge u trenutku kad kod nastane.
+export const TOKEN_VAZI_SEKUNDI = 24 * 60 * 60;
 // Čl. 14 (v3.9.2): indeks stvarnosti početnih korisnika iznosi 100% od
 // uspostavljanja naloga i ne proizlazi iz lanca jemstva.
 export const POCETNI_INDEKS = 100;

@@ -3,7 +3,11 @@ import { greska } from "@/lib/greska-api";
 import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
 import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 import { proveriIAktivirajFazu2 } from "@/lib/protokol/faza-sistema";
-import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
+import {
+  najaviBlizinuKoraka,
+  proveriIEvidentirajKorak,
+  RUCNO_OKIDANJE_KORAKA,
+} from "@/lib/protokol/osnivacki";
 
 // POST /api/cron/nocna-emisija — pokreće se u ponoć (zaštićeno CRON_SECRET)
 export async function POST(req: NextRequest) {
@@ -20,13 +24,18 @@ export async function POST(req: NextRequest) {
       izvrsiZrnoOperacije(datum),
     ]);
 
-    // 2. Osnivački doprinos (čl. 9 Pravilnika o osnivačkom doprinosu) — automatsko
-    // evidentiranje koraka po dostignutim pragovima. Sekvencijalno, nakon emisija,
-    // pre Faze 2 — POEN osnivačkog doprinosa ulazi u kumulativni rast (čl. 7).
-    // Izolovano: greška ovde ne sme da blokira proveru Faze 2.
+    // 2. Osnivački doprinos (čl. 9 Pravilnika o osnivačkom doprinosu). Sekvencijalno,
+    // nakon emisija, pre Faze 2 — POEN osnivačkog doprinosa ulazi u kumulativni rast
+    // (čl. 7). Izolovano: greška ovde ne sme da blokira proveru Faze 2.
+    //
+    // Dok je `RUCNO_OKIDANJE_KORAKA` uključeno, cron samo JAVLJA UO da je prag blizu;
+    // emisija ide preko ručnog dugmeta. Brana iz plana (odeljak 05) — čovek vidi skok
+    // opticaja pre nego što 24.000 POEN-a ode osnivačima.
     let osnivacki: unknown = null;
     try {
-      osnivacki = await proveriIEvidentirajKorak();
+      osnivacki = RUCNO_OKIDANJE_KORAKA
+        ? await najaviBlizinuKoraka()
+        : await proveriIEvidentirajKorak();
     } catch (e) {
       console.error("[CRON] Greška pri osnivačkom doprinosu:", e);
       osnivacki = { error: String(e) };

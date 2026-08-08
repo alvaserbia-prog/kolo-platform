@@ -96,7 +96,7 @@ export default function JavniProfilPage() {
       const body = await r.json().catch(() => ({}));
       if (!r.ok) {
         // Bez tvrdog redirecta (router.push) — to je ranije bacalo korisnika
-        // na /tabla-jemstva i prikazivalo treperenje stanja te stranice.
+        // na drugu stranicu i prikazivalo treperenje njenog stanja.
         // Umesto toga prikaži jasnu poruku na samoj profil stranici.
         throw new Error(
           r.status === 403 ? t("pristup_samo_verifikovani")

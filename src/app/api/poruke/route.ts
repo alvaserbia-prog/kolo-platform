@@ -47,10 +47,12 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Unauthorized", 401);
-  // INICIRANJE konverzacije je dostupno samo verifikovanima. Neverifikovani ne
-  // može da pokrene konverzaciju; ka neverifikovanom se kreće isključivo preko
-  // table zahteva za jemstvo (POST /api/tabla-jemstva/[id]/poruka), gde on potom
-  // SME da uzvrati (Uslovi čl. 16, Politika čl. 6).
+  // INICIRANJE konverzacije je dostupno samo verifikovanima (Pravilnik 4.1.0
+  // čl. 16 st. 5, čl. 28 st. 2). Neverifikovani ne može da se obrati kome hoće;
+  // razgovor sa njim pokreće verifikovani korisnik povodom njegovog oglasa, a on
+  // u tom razgovoru SME da odgovara — POST /api/poruke/[konvId] proverava samo
+  // članstvo u razgovoru, bez uslova verifikacije. To je isti mehanizam koji je
+  // napravljen za ukinutu tablu jemstva; on ostaje i preuzima njen posao.
   if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
   const meId = session.user.id;
 

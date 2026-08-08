@@ -158,31 +158,21 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
 
   return (
     <div className="space-y-5">
-      {/* Zaglavlje. Neverifikovanom je ovde ranije stajala samo siva rečenica
-          („zatražite verifikaciju…") — bez dugmeta i bez linka, pa je čovek koji
-          je došao da postavi oglas ostajao u ćorsokaku. Sada i on ima dugme, ka
-          tabli jemstva, a objašnjenje stoji ispod. */}
+      {/* Zaglavlje. Objava je sada otvorena i neverifikovanom (Pravilnik 4.1.0
+          čl. 16 st. 5), pa dugme vodi na formu i njemu — samo bez potražnje, koju
+          ne sme da objavi. Objašnjenje šta važi za njega stoji ispod. */}
       <div className="space-y-1">
         <div className="flex justify-between items-center gap-3">
           <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
-          {isVerified ? (
-            <Link
-              href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
-              className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
-            >
-              {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
-            </Link>
-          ) : (
-            <Link
-              href="/tabla-jemstva"
-              className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
-            >
-              {t("dugme_zatrazi_verifikaciju")}
-            </Link>
-          )}
+          <Link
+            href={isVerified && jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
+            className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
+          >
+            {isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+          </Link>
         </div>
         {!isVerified && (
-          <p className="text-xs text-kolo-muted">{t("zatrazi_verifikaciju_oglas")}</p>
+          <p className="text-xs text-kolo-muted">{t("neverif_objava_hint")}</p>
         )}
       </div>
 
@@ -546,6 +536,11 @@ const OglasKartica = memo(function OglasKartica({
         <div className="flex justify-between items-center gap-2 mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted truncate min-w-0">
             <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
+            {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.0) — vide je
+                i neprijavljeni posetioci. Za razmenu odgovaraju sami korisnici. */}
+            {!oglas.sellerVerified && (
+              <span className="ml-1 text-kolo-gold-600 font-medium">· {t("oznaka_neverifikovan")}</span>
+            )}
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
             {udaljenost != null && (
               <span className="ml-1 text-kolo-green-700 font-medium">· ~{udaljenost} km</span>
@@ -560,7 +555,7 @@ const OglasKartica = memo(function OglasKartica({
               {kontaktLoading ? "..." : oglas.tip === "POTRAZNJA" ? t("javi_se") : t("kontaktiraj")}
             </button>
           ) : (
-            <Link href="/tabla-jemstva" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">
+            <Link href="/verifikacija" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">
               {t("zatrazi_verifikaciju_link")}
             </Link>
           )}

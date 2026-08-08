@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { razresiNaselje, jeNaseljeIzSifarnika, normalizujNaselje } from "@/lib/naselje";
 import { koordinateZaMesto } from "@/lib/udaljenost";
-import { validirajKarticu } from "@/lib/jemstvo-kartica";
 
 describe("razresiNaselje", () => {
   it("prepoznaje tačan naziv iz šifarnika", () => {
@@ -51,18 +50,5 @@ describe("zatečeni slobodan unos i dalje daje koordinate", () => {
 
   it("nepoznato mesto nema koordinate", () => {
     expect(koordinateZaMesto("negde kod Sombora")).toBeNull();
-  });
-});
-
-describe("kartica jemstva koristi isti razrešivač", () => {
-  it("upisuje kanonski naziv umesto unetog oblika", () => {
-    const r = validirajKarticu({ mesto: "stanisic (sombor)" });
-    expect(r.ok).toBe(true);
-    if (r.ok) expect(r.kartica.mesto).toBe("Stanišić");
-  });
-
-  it("odbija mesto koje nije u šifarniku", () => {
-    const r = validirajKarticu({ mesto: "negde kod Sombora" });
-    expect(r.ok).toBe(false);
   });
 });

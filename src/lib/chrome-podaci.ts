@@ -12,7 +12,6 @@ import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
 export interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
-  tablaJemstva: number;
   adminCekanje: number;
 }
 
@@ -23,7 +22,6 @@ export async function izracunajDnevniBrojeve(
 ): Promise<DnevniBrojevi> {
   const danas = new Date();
   danas.setHours(0, 0, 0, 0);
-  const sada = new Date();
 
   // "Viđeno" vremena: badge broji samo ono što je stiglo POSLE poslednjeg
   // otvaranja taba. Ako tab još nije otvaran (null), pada na ponoć ("novo danas").
@@ -43,19 +41,6 @@ export async function izracunajDnevniBrojeve(
   const novcanik = wallet
     ? await prisma.transaction.count({ where: { toWalletId: wallet.id, createdAt: { gt: odNovcanik } } })
     : 0;
-
-  // Akcioni badge: kartice na koje korisnik može da odgovori — aktivne, nisu
-  // istekle, nisu njegove i on na njih JOŠ NIJE odgovorio u feed-u
-  // prepoznavanja. Bez poslednjeg uslova badge nikad ne bi pao, jer odgovor
-  // „ne poznajem" ne uklanja karticu sa table (samo iz njegovog feed-a).
-  const tablaJemstva = await prisma.zahtevZaJemstvo.count({
-    where: {
-      status: "AKTIVAN",
-      expiresAt: { gt: sada },
-      userId: { not: userId },
-      prepoznavanja: { none: { korisnikId: userId } },
-    },
-  });
 
   // Akcioni badge za admina: zbir stavki "na čekanju" koje traže admin radnju
   let adminCekanje = 0;
@@ -79,7 +64,7 @@ export async function izracunajDnevniBrojeve(
       pokrovitelji + donacije + prigovori + prijaveOglasa;
   }
 
-  return { novcanik, pijaca, tablaJemstva, adminCekanje };
+  return { novcanik, pijaca, adminCekanje };
 }
 
 /** Broj verifikacija koje čekaju nadzor (samo za nosioce ZRNA / admine). */

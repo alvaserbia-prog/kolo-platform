@@ -28,9 +28,13 @@ interface Props {
   platiPseudonim?: string;
   prefillIznos?: string;
   prefillOpis?: string;
+  /** Doprinos sadržaju koji čeka okidač (0 = nema). Nikad se ne sabira sa stanjem. */
+  zabelezenDoprinos?: number;
+  /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
+  smeDaSalje?: boolean;
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -47,12 +51,14 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
           {/* LEVO — dugmad jedno ispod drugog */}
           <div className="flex flex-col gap-3 shrink-0">
-            <button
-              onClick={() => setShowSend(true)}
-              className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
-            >
-              {t("posalji_poen")}
-            </button>
+            {smeDaSalje && (
+              <button
+                onClick={() => setShowSend(true)}
+                className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+              >
+                {t("posalji_poen")}
+              </button>
+            )}
             <button
               onClick={() => setShowSkener(true)}
               className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
@@ -75,6 +81,28 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
             <p className="text-lg text-white/70 mt-0.5">{tc("poen")}</p>
           </div>
         </div>
+
+        {/* Zabeležen doprinos stoji ISPOD kartice, kao zaseban red — namerno nije
+            sabran sa stanjem: do okidača to nije zapis POEN-a (Pravilnik čl. 40a
+            st. 3). Naziv je „Zabeležen doprinos", nikad „POEN na čekanju" — POEN
+            postoji isključivo kao zapis u Protokolu (čl. 12). */}
+        {zabelezenDoprinos > 0 && (
+          <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-sm font-semibold text-kolo-text">{t("zabelezen_naslov")}</p>
+              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
+                {zabelezenDoprinos.toLocaleString(intlTag(locale))} {tc("poen")}
+              </p>
+            </div>
+            <p className="text-sm text-kolo-muted mt-1">{t("zabelezen_opis")}</p>
+          </div>
+        )}
+
+        {/* Neverifikovanom se objašnjava zašto dugmeta za upis nema. Bez ovoga
+            izgleda kao da je nešto pokvareno. */}
+        {!smeDaSalje && (
+          <p className="mt-3 text-sm text-kolo-muted">{t("samo_primalac")}</p>
+        )}
       </div>
 
       {/* Forma za upis POEN-a */}
