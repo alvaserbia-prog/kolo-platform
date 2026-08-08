@@ -1,12 +1,12 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-const BAZA = path.join(process.cwd(), "dokumentacija 4.0");
+const BAZA = path.join(process.cwd(), "dokumentacija 4.1");
 
-// Jezici koji imaju sopstveni podfolder sa prevodima (`dokumentacija 4.0/<kod>/`).
+// Jezici koji imaju sopstveni podfolder sa prevodima (`dokumentacija 4.1/<kod>/`).
 // "sr" i "sr-Cyrl" NISU ovde: srpski je original u korenu, a ćirilica se izvodi
 // transliteracijom u prikazu (vidi CirilicaProvider) — isti fajl.
-// "ru": folder `dokumentacija 4.0/ru/` još nije popunjen (faza 9) — dok je prazan,
+// "ru": folder `dokumentacija 4.1/ru/` još nije popunjen (faza 9) — dok je prazan,
 // fallback ispod tiho vraća srpski original, pa stranica radi.
 const PREVEDENI: Record<string, string> = {
   en: "en",
@@ -16,7 +16,7 @@ const PREVEDENI: Record<string, string> = {
 /**
  * Učitava pravni markdown dokument za dati jezik.
  *
- * Za jezik sa sopstvenim folderom pokušava `dokumentacija 4.0/<kod>/<file>`; ako
+ * Za jezik sa sopstvenim folderom pokušava `dokumentacija 4.1/<kod>/<file>`; ako
  * prevod tog akta još NE postoji, vraća srpski original — stranica nikad ne puca,
  * pa se prevodi mogu dodavati dokument po dokument.
  *
