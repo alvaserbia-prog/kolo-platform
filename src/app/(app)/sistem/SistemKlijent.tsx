@@ -595,6 +595,7 @@ function PregledSekcija({
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
+  const tc = useTranslations("common");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
   const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
 
@@ -627,7 +628,7 @@ function PregledSekcija({
           <span>
             {t("rast_opticaja_trenutno")}{" "}
             <strong className="text-kolo-text">
-              {opticaj.toLocaleString(intlTag(locale))} POEN
+              {opticaj.toLocaleString(intlTag(locale))} {tc("poen")}
             </strong>
           </span>
           <span className="font-medium text-kolo-green-700">
@@ -757,7 +758,7 @@ function PregledSekcija({
           <p className="text-xs text-kolo-muted mt-4">
             {t("emisija_danas")}{" "}
             <strong className="text-kolo-text">
-              {danasEmitovano.toLocaleString(intlTag(locale))} POEN
+              {danasEmitovano.toLocaleString(intlTag(locale))} {tc("poen")}
             </strong>
           </p>
         </div>
@@ -790,6 +791,7 @@ const ClanRed = memo(function ClanRed({
   t: ReturnType<typeof useTranslations>;
   jeZadnji: boolean;
 }) {
+  const tc = useTranslations("common");
   const locale = useLocale();
   return (
     <div className={!jeZadnji ? "border-b border-kolo-border/30" : ""}>
@@ -840,7 +842,7 @@ const ClanRed = memo(function ClanRed({
             )}
           </div>
           <span className="text-sm font-bold text-kolo-text">
-            {c.balance.toLocaleString(intlTag(locale))} POEN
+            {c.balance.toLocaleString(intlTag(locale))} {tc("poen")}
           </span>
         </div>
         <div className="flex items-center gap-3 text-xs text-kolo-muted">
@@ -1414,6 +1416,7 @@ function DonacijeSekcija({
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
+  const tc = useTranslations("common");
 
   if (!verified) {
     return (
@@ -1443,7 +1446,7 @@ function DonacijeSekcija({
         <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-2.5 bg-kolo-bg border-b border-kolo-border text-xs font-semibold text-kolo-muted">
           <span>{t("col_donator")}</span>
           <span className="text-right">RSD</span>
-          <span className="text-right">POEN</span>
+          <span className="text-right">{tc("poen")}</span>
           <span className="text-right">{t("col_nivo")}</span>
           <span className="text-right">{t("col_datum")}</span>
         </div>
@@ -1479,7 +1482,7 @@ function DonacijeSekcija({
                   <Pseudonim>{d.pseudonim}</Pseudonim>
                 </Link>
                 <span className="text-sm font-bold text-kolo-text">
-                  {d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                  {d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                 </span>
               </div>
               <div className="flex items-center gap-3 text-xs text-kolo-muted">

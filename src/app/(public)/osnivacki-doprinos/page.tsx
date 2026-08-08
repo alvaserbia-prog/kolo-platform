@@ -19,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function OsnivackiDoprinosPage() {
   const t = await getTranslations("osnivackiDoprinosPage");
+  const tc = await getTranslations("common");
   const locale = await getLocale();
 
   const fmt = (n: number) => n.toLocaleString(intlTag(locale));
@@ -82,11 +83,11 @@ export default async function OsnivackiDoprinosPage() {
             </div>
             <div>
               <div className="text-xs text-kolo-muted">{t("evidentirano")}</div>
-              <div className="font-semibold text-kolo-text">{fmt(status.ukupnoEvidentirano)} POEN</div>
+              <div className="font-semibold text-kolo-text">{fmt(status.ukupnoEvidentirano)} {tc("poen")}</div>
             </div>
             <div>
               <div className="text-xs text-kolo-muted">{t("preostalo")}</div>
-              <div className="font-semibold text-kolo-text">{fmt(status.preostalo)} POEN</div>
+              <div className="font-semibold text-kolo-text">{fmt(status.preostalo)} {tc("poen")}</div>
             </div>
             <div>
               <div className="text-xs text-kolo-muted">{t("iskorisceno")}</div>
@@ -145,7 +146,7 @@ export default async function OsnivackiDoprinosPage() {
                   <tr key={k.brojKoraka} className="border-b border-kolo-border last:border-0">
                     <td className="px-3 sm:px-6 py-3 text-kolo-text">{k.brojKoraka}/{ITERATION_LIMIT}</td>
                     <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.prag)}</td>
-                    <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} POEN</td>
+                    <td className="px-3 sm:px-6 py-3 text-kolo-muted">{fmt(k.iznosKoraka)} {tc("poen")}</td>
                     <td className="px-3 sm:px-6 py-3 text-kolo-muted whitespace-nowrap">
                       {new Date(k.createdAt).toLocaleDateString(
                         intlTag(locale),

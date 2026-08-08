@@ -19,7 +19,15 @@ export const SITE_NAME = "KOLO";
 /** Da li je trenutni deploy produkcija (jedino okruženje koje sme da se indeksira). */
 export const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
 
-/** Podrazumevani opis sistema (fallback kad stranica nema svoj). */
+/**
+ * Podrazumevani opis sistema (fallback kad stranica nema svoj) — SRPSKI.
+ *
+ * ⚠️ Prevedena varijanta je u `messages/*.json` pod `seo.site_opis` i koristi se
+ * u `app/layout.tsx` (naslov, description, OG/Twitter, JSON-LD). Ova konstanta
+ * ostaje samo kao fallback za mesta koja nemaju pristup locale-u. Ako dodaješ
+ * novi opis u <head>, uzmi ga iz prevoda — ovo je ono što je Google prikazivao
+ * na srpskom i ruskim i mađarskim posetiocima.
+ */
 export const SITE_DESCRIPTION =
   "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. " +
   "POEN beleži šta si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno.";

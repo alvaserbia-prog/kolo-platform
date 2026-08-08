@@ -365,7 +365,7 @@ export default function DonacijeKlijent() {
                   </span>
                   {d.status === "CONFIRMED" && (
                     <p className="text-xs text-kolo-green-700 mt-1">
-                      +{d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                      +{d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                     </p>
                   )}
                 </div>
@@ -400,7 +400,7 @@ export default function DonacijeKlijent() {
                 </div>
                 {!d.anonimno && d.poenEmitted > 0 && (
                   <p className="text-xs text-kolo-green-700 font-semibold">
-                    +{d.poenEmitted.toLocaleString(intlTag(locale))} POEN
+                    +{d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                   </p>
                 )}
               </div>
