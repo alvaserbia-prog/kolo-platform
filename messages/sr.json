@@ -11,7 +11,6 @@
     "admin": "Admin",
     "verifikuj_nalog": "Zatraži verifikaciju →",
     "doprinos": "Zadaci",
-    "tabla_jemstva": "Tabla jemstva",
     "postani_pokrovitelj": "Pokrovitelj",
     "nadzor": "Nadzor",
     "grupa_ekonomija": "Ekonomija",
@@ -337,7 +336,10 @@
     "opis_stranice": "Tvoj zapis POEN-a — koliko ti je evidentirano i šta se sve dešavalo. POEN beleži tvoj doprinos; nije novac i ne menja se za dinare. Odavde možeš upisati POEN drugom korisniku.",
     "prazno_naslov": "Još nemaš evidentiran nijedan POEN.",
     "prazno_opis": "POEN se beleži kroz učešće u zajednici — pri verifikaciji, razmeni dobara i usluga ili doprinosu. Počni tako što ćeš se verifikovati.",
-    "prazno_verif_link": "Zatraži verifikaciju →"
+    "prazno_verif_link": "Zatraži verifikaciju →",
+    "zabelezen_naslov": "Zabeležen doprinos",
+    "zabelezen_opis": "Evidentira se kad te neko verifikuje ili kad ti neko upiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
+    "samo_primalac": "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji."
   },
   "verifikacija": {
     "naslov": "Verifikacija identiteta",
@@ -351,8 +353,6 @@
     "podnaslov_neverifikovan": "Pokaži svoj kod nekome ko može da te verifikuje.",
     "kapacitet_neograniceno": "Kapacitet: neograničeno",
     "slotovi_prikaz": "Slotovi: {raspolozivo} raspoloživo / {potroseno} potrošeno",
-    "tabla_verifikovan_naslov": "Tabla zahteva za jemstvo",
-    "tabla_verifikovan_opis": "Pomozite novim korisnicima — pogledajte ko traži verifikaciju.",
     "graf_kartica_naslov": "Graf verifikacija",
     "graf_kartica_opis": "Pogledaj celu mrežu jemstva — ko je koga verifikovao i gde si ti.",
     "dugme_otkazi": "Otkaži",
@@ -405,7 +405,11 @@
     "oznake_opis": "Privatne oznake za osobe koje si verifikovao — da lakše znaš koga si doveo. Vide ih samo ti i Fondacija; nisu javne i ne prikazuju se drugim korisnicima.",
     "oznake_ph": "Dodaj oznaku (nadimak)…",
     "greska_opsta": "Greška",
-    "greska_mreza": "Mreža nije dostupna"
+    "greska_mreza": "Mreža nije dostupna",
+    "pijaca_neverifikovan_naslov": "Objavi ponudu na Pijaci",
+    "pijaca_neverifikovan_opis": "Ako nemaš koga da zamoliš za kod, objavi šta nudiš. Tako te članovi iz tvog kraja vide i mogu da te prepoznaju.",
+    "pijaca_verifikovan_naslov": "Pomozi novima",
+    "pijaca_verifikovan_opis": "Pogledaj ponude neverifikovanih iz svog kraja — ako nekoga stvarno poznaješ, možeš da mu jemčiš."
   },
   "graf": {
     "naslov": "Graf verifikacija",
@@ -861,11 +865,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -873,23 +877,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.0.0",
+      "ver": "4.1.0",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -909,21 +913,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.0.0",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.1.0",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.0.0",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.1.0",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.0.0",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.1.0",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.0.0",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.1.0",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.0.0",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.1.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.0.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.1.0",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.0.0",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.1.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -1194,7 +1198,7 @@
     "stub3_naslov": "Organi",
     "stub3_tekst": "Upravni odbor i Direktor. Upravni odbor donosi strateške odluke. Direktor vodi operativu. Aktivacijom Gornjeg Kola Fondacija prelazi u servisnu i izvršnu ulogu — primenjuje odluke i upućuje obrazložene odgovore na preporuke Gornjeg Kola.",
     "javno_tag": "Javno i dostupno",
-    "dok_tag": "Dokumenti (v4.0)",
+    "dok_tag": "Dokumenti (v4.1)",
     "dok_whitepaper": "Whitepaper",
     "dok_statut": "Statut KOLO Fondacije",
     "dok_pravilnik_kolo": "Pravilnik o KOLO sistemu",
@@ -1508,8 +1512,6 @@
     "naslov": "Pijaca",
     "opis": "Mesto gde članovi nude i traže dobra i usluge. Ponudu može da razgleda svako; za objavu oglasa i kontakt sa oglašivačem potrebna je verifikacija.",
     "novi_oglas": "+ Novi oglas",
-    "zatrazi_verifikaciju_oglas": "Zatražite verifikaciju da biste objavili oglas",
-    "dugme_zatrazi_verifikaciju": "Zatraži verifikaciju",
     "pretrazi_placeholder": "Pretraži oglase...",
     "cena_filter": "Cena",
     "min_poen": "Min POEN",
@@ -1640,7 +1642,13 @@
     "opis_placeholder_potraznja": "Opišite šta vam treba...",
     "slike_label_potraznja": "Slike (referentne)",
     "objavi_potraznja": "Objavi potražnju",
-    "uspeh_dugme": "Idi na Pijacu"
+    "uspeh_dugme": "Idi na Pijacu",
+    "neverif_objava_hint": "Možeš da objaviš ponudu i pre verifikacije — tako te članovi iz tvog kraja vide.",
+    "neverif_naslov": "Objavljuješ pre verifikacije",
+    "neverif_opis": "Možeš da objaviš samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, opis od najmanje {min} znakova, kategoriju i mesto. Prvi takav oglas nosi ti doprinos od {iznos} POEN, koji se evidentira kad te neko verifikuje ili ti upiše POEN.",
+    "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
+    "oznaka_neverifikovan": "neverifikovan",
+    "oznaka_neverifikovan_opis": "Oglašivač još nije verifikovan u lancu jemstva. Za razmenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara."
   },
   "pocetna": {
     "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",
@@ -1658,7 +1666,11 @@
     "chat_samo_verif": "Pisanje u pričaonicu dostupno je samo verifikovanim članovima.",
     "chat_zatrazi_verif": "Zatraži verifikaciju →",
     "greska_slanje": "Greška pri slanju.",
-    "greska_mreza": "Greška u mreži."
+    "greska_mreza": "Greška u mreži.",
+    "brojac_clanovi": "Članova",
+    "brojac_oglasi": "Oglasa",
+    "brojac_razmene": "Razmena",
+    "brojac_opticaj": "Opticaj (POEN)"
   },
   "postaniPokrovitelj": {
     "naslov": "Pokroviteljstvo",
@@ -1781,90 +1793,11 @@
     "prazna_lista": "Nema verifikacija koje čekaju nadzor."
   },
   "tablaJemstva": {
-    "page_naslov": "Tabla zahteva za jemstvo",
-    "page_opis": "Neverifikovani korisnici se ovde predstavljaju karticom prepoznavanja. Članovima mreže sistem sam dovodi ljude iz njihovog kraja i pita ih da li ih poznaju — verifikacija se uvek zasniva na ličnom poznavanju (lanac jemstva).",
-    "forma_naslov": "Predstavi se mreži",
-    "dugme_objavljujem": "Objavljujem...",
-    "dugme_objavi": "Objavi zahtev",
-    "ucitavanje": "Učitavanje…",
-    "nema_zahteva": "Trenutno nema aktivnih zahteva.",
-    "vas_zahtev": "(vaš zahtev)",
-    "dugme_povuci": "Povuci",
-    "dugme_potvrdi_povuci": "Da, povuci",
-    "dugme_otkazi": "Otkaži",
-    "dugme_ukloni": "Ukloni",
-    "dugme_posalji_poruku": "Pošalji poruku",
-    "greska_objava": "Greška pri objavi.",
-    "greska_generalna": "Greška.",
-    "label_razlog_uklanjanja": "Razlog uklanjanja (korisnik će ga videti):",
-    "placeholder_razlog_uklanjanja": "Npr. neprikladan sadržaj, lažni podaci ili van svrhe table.",
-    "dugme_potvrdi_uklanjanje": "Potvrdi uklanjanje",
-    "objava_aktivna_naslov": "Tvoj zahtev je objavljen",
-    "objava_aktivna_opis": "Vidljiv je verifikovanim članovima;",
-    "dugme_verifikuj": "Verifikujem",
-    "placeholder_oznaka": "Oznaka (nadimak) — npr. „Pera sa pijace”",
-    "oznaka_opis": "Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo ti i Fondacija.",
-    "potvrda_poznavanja": "Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću jemčim za njenu stvarnost, jedinstvenost i kontinuitet (čl. 5 Pravilnika o dokazu stvarnosti).",
-    "dugme_potvrdi_verifikaciju": "Potvrdi verifikaciju",
-    "verifikacija_uspeh": "Verifikovao/la si „{pseudonim}”. Dobio/la je pun pristup (indeks +10%).",
-    "blokada_zona": "Verifikacija nije moguća — ovaj korisnik je u tvojoj zabranjenoj zoni ili si ti u njegovoj (čl. 12 Pravilnika o dokazu stvarnosti).",
-    "blokada_pocetni": "Početni korisnici se ne verifikuju u lancu jemstva (čl. 14 Pravilnika o dokazu stvarnosti).",
-    "forma_uvod": "Ovo nije oglas. Cilj je da te neko iz tvog kraja prepozna kao osobu koju stvarno zna. Popuni onoliko koliko je potrebno da bi te komšija prepoznao — sva polja su opciona.",
-    "forma_pravilo": "Sva polja su slobodna. Ostavi bar jedan podatak i mesto — po mestu te sistem prvo pokazuje ljudima iz tvog kraja.",
-    "dopuna_naslov": "Dopuni svoju karticu",
-    "label_ime": "Ime",
-    "ph_ime": "npr. Milan",
-    "label_prezime": "Prezime",
-    "ph_prezime": "npr. Jovanović",
-    "label_godiste": "Godina rođenja",
-    "ph_godiste": "npr. 1978",
-    "pomoc_godiste": "Razlikuje imenjake i nagoveštava generaciju.",
-    "label_mesto": "Mesto",
-    "ph_mesto": "npr. Kula",
-    "pomoc_mesto": "Bira se iz spiska naselja — po mestu ti sistem nalazi komšije.",
-    "label_nadimak": "Nadimak ili kućno ime",
-    "ph_nadimak": "npr. Miša Kovačev",
-    "pomoc_nadimak": "U manjim mestima ljudi se pamte po nadimku, ne po prezimenu.",
-    "label_cime_se_bavi": "Čime se baviš / po čemu te ljudi znaju",
-    "ph_cime_se_bavi": "npr. Limar, radnja kod pijace u Kuli",
-    "pomoc_cime_se_bavi": "Kratko — ovo nije oglas.",
-    "skriveno_naslov": "Ovo niko ne vidi na tvojoj kartici",
-    "skriveno_opis": "Broj telefona se ne prikazuje na tabli — vidi ga samo Upravni odbor Fondacije, i to samo ako te niko od članova ne prepozna.",
-    "label_telefon": "Broj telefona",
-    "ph_telefon": "npr. 064 123 4567",
-    "saglasnost_telefon": "Saglasan/na sam da me neko iz Fondacije pozove ako me niko od članova ne prepozna.",
-    "dugme_pregledaj": "Nastavi",
-    "pregled_naslov": "Ovako te vidi neko ko te ne zna",
-    "pregled_opis": "Ovo je tačno ono što će videti članovi mreže.",
-    "dugme_dopuni": "Dopuni",
-    "dugme_sacuvaj_dopunu": "Sačuvaj",
-    "dugme_dopuni_karticu": "Dopuni karticu",
-    "upozorenje_feed": "Kartica bez imena i mesta ide svima, ali na kraj reda — sa mestom te sistem prvo pokazuje ljudima iz tvog kraja.",
-    "poziv_na_dopunu": "Da bi te sistem prvo pokazivao ljudima iz tvog kraja, dodaj: {polja}. Nije uslov — mogu te verifikovati i ovako.",
-    "greska_prazna_kartica": "Popuni bar jedno polje kartice pre objave.",
-    "greska_telefon_saglasnost": "Broj telefona čuvamo samo uz saglasnost za poziv — označi kvačicu ili obriši broj.",
-    "istice_za_dana": "ističe za {dana} d.",
-    "zid_naslov": "Sve objavljene kartice",
-    "feed_naslov": "Poznaješ li nekoga od njih?",
-    "feed_pitanje": "Poznaješ li ovu osobu?",
-    "feed_brojac": "{i} / {ukupno}",
-    "feed_prazan": "Trenutno nema kartica koje čekaju tvoj odgovor.",
-    "feed_napomena_nije_jemstvo": "„Da“ samo otvara razgovor — to nije jemstvo. Za jemstvo postoji zaseban korak.",
-    "dugme_da": "Da, poznajem",
-    "dugme_ne": "Ne",
-    "dugme_nisam_siguran": "Nisam siguran/na",
-    "dugme_sledeca": "Sledeća",
-    "dugme_otvori_razgovor": "Otvori razgovor",
-    "prepoznavanje_otvoren_kanal": "Razgovor je otvoren. Ovo nije jemstvo — ako posle razgovora želiš da jemčiš, to se radi zasebno, sa kartice na zidu.",
-    "blizina_mesto_generacija": "Iz tvog kraja, sličnog godišta.",
-    "blizina_mesto": "Iz tvog kraja.",
-    "blizina_ostalo": "Iz drugog kraja — prikazuje se jer nema više kandidata blizu tebe.",
-    "uo_naslov": "Niko ih nije prepoznao",
-    "uo_opis": "Objavili su karticu i dali saglasnost da ih Fondacija pozove.",
-    "uo_dugme_prikazi": "Prikaži spisak i brojeve",
-    "uo_prazno": "Nema takvih kandidata.",
-    "uo_odgovoreno": "odgovora: {broj}",
-    "dugme_sakrij": "Sakrij"
+    "ukinuta_naslov": "Tabla zahteva za jemstvo više ne postoji",
+    "ukinuta_opis": "Do verifikacije se sada dolazi preko Pijace: objaviš ponudu, članovi iz tvog kraja je vide i, ako te neko stvarno poznaje, jemči za tebe. Kartica prepoznavanja je ukinuta, a podaci sa nje obrisani.",
+    "ukinuta_dugme_objavi": "Objavi ponudu",
+    "ukinuta_dugme_pijaca": "Otvori Pijacu",
+    "ukinuta_dugme_verifikacija": "Verifikacija"
   },
   "dobrodosli": {
     "ekran1_oznaka": "Dobrodošli",
@@ -2337,7 +2270,6 @@
     "levak_kolona_prolaz": "Prolaz",
     "levak_k_registrovani": "Registrovali se",
     "levak_k_otvorili_poverenje": "Otvorili verifikaciju ili tablu",
-    "levak_k_objavili_karticu": "Objavili karticu prepoznavanja",
     "levak_k_verifikovani": "Neko ih verifikovao",
     "levak_k_otvorili_formu": "Otvorili formu za oglas",
     "levak_k_objavili_oglas": "Objavili oglas",
@@ -2412,8 +2344,6 @@
     "pristupnica_prihvacena_tekst": "Postao/la si član kruga „{krug}”.",
     "verifikacija_ponistena_naslov": "Verifikacija poništena",
     "verifikacija_ponistena_tekst": "Verifikator u tvom lancu jemstva je označen kao lažan, pa je tvoja verifikacija poništena. Indeks stvarnosti ti je 0% — zadržavaš nalog i osnovne funkcije (upis POEN-a, Pijaca, donacije), ali nemaš pristup operativnom doprinosu i programima podrške.",
-    "jemstvo_uklonjen_naslov": "Zahtev za jemstvo uklonjen",
-    "jemstvo_uklonjen_tekst": "Tvoj zahtev na tabli jemstva je uklonjen. Razlog: {razlog}",
     "verifikovan_naslov": "Verifikovan/a si — možeš da postaviš oglas",
     "verifikovan_tekst": "„{verifikator}” te je verifikovao/la i dobio/la si pun pristup. Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.",
     "program_obustavljen_naslov": "Socijalni program privremeno obustavljen",
@@ -2444,7 +2374,8 @@
     "osnivacki": "Osnivački doprinos — korak {korak}/{ukupno}",
     "krug_bonus": "Bonus krugovi „{krug}” — {clanovi} članova",
     "krug_osnivanje": "Osnivanje krugovi „{krug}”",
-    "program": "Program {program}"
+    "program": "Program {program}",
+    "doprinos_sadrzaju": "Doprinos sadržaju platforme"
   },
   "mejl": {
     "pozdrav": "Pozdrav",
@@ -2479,7 +2410,6 @@
     "evidencija_nije_na_cekanju": "Evidencija nije na čekanju.",
     "evidencija_nije_pronadjena": "Evidencija nije pronađena.",
     "evidencija_za_taj_dan_je_vec_uneta": "Evidencija za taj dan je već uneta.",
-    "feed_prepoznavanja_dostupan_je_samo_verifikovanim_clanovima": "Feed prepoznavanja dostupan je samo verifikovanim članovima.",
     "glasanje_gornjeg_kola_je_operativno_tek_u_fazi_2": "Glasanje Gornjeg Kola je operativno tek u Fazi 2.",
     "glasanje_je_zavrseno": "Glasanje je završeno.",
     "greska_pri_izvrsavanju_emisije": "Greška pri izvršavanju emisije.",
@@ -2655,7 +2585,6 @@
     "predlog_nije_pronadjen": "Predlog nije pronađen.",
     "predlozeni_poen_dnevnog_izvrsenja_ne_moze_preci_10_000_000": "Predloženi POEN dnevnog izvršenja ne može preći 10.000.000.",
     "predlozeni_poen_mora_biti_pozitivan_ceo_broj": "Predloženi POEN mora biti pozitivan ceo broj.",
-    "prepoznavanje_je_dostupno_samo_verifikovanim_clanovima": "Prepoznavanje je dostupno samo verifikovanim članovima.",
     "previse_pokusaja_pokusajte_kasnije": "Previše pokušaja. Pokušajte kasnije.",
     "previse_prijava_pokusaj_kasnije": "Previše prijava. Pokušaj kasnije.",
     "previse_zahteva_sacekaj_malo": "Previše zahteva, sačekaj malo.",
@@ -2695,7 +2624,6 @@
     "skladiste_slika_nije_konfigurisano_dokaz_trenutno_nije_moguce_priloziti": "Skladište slika nije konfigurisano — dokaz trenutno nije moguće priložiti.",
     "slanje_je_vec_zavrseno": "Slanje je već završeno.",
     "slanje_nije_uspelo_proveri_resend_podesavanja": "Slanje nije uspelo — proveri Resend podešavanja.",
-    "slanje_poruke_povodom_zahteva_za_jemstvo_dostupno_je_samo_verifikovanim_korisnic": "Slanje poruke povodom zahteva za jemstvo dostupno je samo verifikovanim korisnicima.",
     "slika_je_prevelika_max_5mb": "Slika je prevelika (max 5MB).",
     "slika_je_prevelika": "Slika je prevelika.",
     "sva_mesta_za_izvrsioce_su_popunjena": "Sva mesta za izvršioce su popunjena.",
@@ -2726,7 +2654,6 @@
     "vec_ste_odgovorili_na_ovaj_zahtev": "Već ste odgovorili na ovaj zahtev.",
     "vec_ste_podneli_prijavu": "Već ste podneli prijavu.",
     "vec_ste_prijavljeni_na_ovaj_program": "Već ste prijavljeni na ovaj program.",
-    "vec_ste_verifikovani_tabla_je_namenjena_neverifikovanim_korisnicima": "Već ste verifikovani — tabla je namenjena neverifikovanim korisnicima.",
     "vec_ste_clan_krugovi_prvo_istupite_iz_trenutne": "Već ste član krugovi. Prvo istupite iz trenutne.",
     "vlasnik_mora_biti_verifikovan_clan": "Vlasnik mora biti verifikovan član.",
     "vrednost_donacije_mora_biti_pozitivna": "Vrednost donacije mora biti pozitivna.",
@@ -2742,6 +2669,13 @@
     "zahtev_vise_nije_aktivan": "Zahtev više nije aktivan.",
     "zatvoren_oglas_ne_moze_da_se_menja": "Zatvoren oglas ne može da se menja.",
     "verifikacijaid_je_obavezan": "verifikacijaId je obavezan.",
-    "verzijaid_je_obavezno": "verzijaId je obavezno."
+    "verzijaid_je_obavezno": "verzijaId je obavezno.",
+    "oglas_mora_imati_bar_jednu_fotografiju": "Oglas mora imati bar jednu fotografiju.",
+    "opis_mora_imati_najmanje_40_znakova": "Opis mora imati najmanje 40 znakova.",
+    "kategorija_je_obavezna": "Kategorija je obavezna.",
+    "mesto_je_obavezno": "Mesto je obavezno.",
+    "dok_nisi_verifikovan_a_mozes_da_objavis_samo_ponudu_oglas_kojim_nudis_dobro_ili_": "Dok nisi verifikovan/a možeš da objaviš samo ponudu — oglas kojim nudiš dobro ili uslugu.",
+    "dok_nisi_verifikovan_a_mozes_imati_najvise_3_aktivna_oglasa": "Dok nisi verifikovan/a možeš imati najviše 3 aktivna oglasa.",
+    "dok_nisi_verifikovan_a_mozes_samo_da_primas_poen_upis_u_tudju_evidenciju_otvara_": "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji."
   }
 }

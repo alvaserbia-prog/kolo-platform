@@ -10,7 +10,6 @@ import JezikSvitcer from "@/components/JezikSvitcer";
 interface DnevniBrojevi {
   novcanik: number;
   pijaca: number;
-  tablaJemstva: number;
   adminCekanje: number;
 }
 
@@ -52,8 +51,6 @@ function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
       return <svg {...p}><path d="m2 7 2-4h16l2 4" /><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7" /><path d="M2 7h20" /><path d="M9 21v-6h6v6" /></svg>;
     case "/verifikacija":
       return <svg {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
-    case "/tabla-jemstva":
-      return <svg {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
     case "/zrno":
       return <svg {...p}><path d="M7 20h10" /><path d="M12 20V11" /><path d="M12 11C9 11 7 9 7 6c3 0 5 2 5 5Z" /><path d="M12 11c0-3 2-5 5-5 0 3-2 5-5 5Z" /></svg>;
     case "/doprinos-oglasi":
@@ -183,7 +180,6 @@ function SidebarContent({
   const badge: Record<string, number> = dnevniBrojevi ? {
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
-    "/tabla-jemstva": dnevniBrojevi.tablaJemstva,
     "/admin": dnevniBrojevi.adminCekanje,
   } : {};
   if (jeNadzornik && brojZaNadzor && brojZaNadzor > 0) {
@@ -191,17 +187,14 @@ function SidebarContent({
   }
 
   const verifikacijaLink = { href: "/verifikacija", label: t("verifikacija") };
-  const tablaJemstvaLink = { href: "/tabla-jemstva", label: t("tabla_jemstva") };
 
-  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi, Tabla jemstva (+ Nadzor), ZRNO.
-  // Tabla jemstva stoji ovde SAMO za verifikovanog korisnika: njemu ona nije lični put do
-  // verifikacije nego doprinos mreži (jemčenje za druge), pa pripada uz Doprinos/Programe.
-  // Neverifikovani je vidi istaknuto uz Verifikaciju (njegov ulaz u verifikaciju).
+  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
+  // Tabla jemstva je ukinuta — put do verifikacije više ne ide preko zasebnog zida
+  // nego kroz Pijacu (Pravilnik 4.1.0 čl. 32 st. 4), koja je već u gornjoj grupi.
   const zajednickoDobro = [
     { href: "/sistem", label: t("sistem") },
     { href: "/doprinos-oglasi", label: t("doprinos") },
     { href: "/programi", label: t("programi") },
-    tablaJemstvaLink,
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
     { href: "/zrno", label: t("zrno") },
   ];
@@ -234,9 +227,7 @@ function SidebarContent({
           { href: "/novcanik", label: t("novcanik") },
           { href: "/pijaca", label: t("pijaca") },
         ] },
-        // Neverifikovanom su Verifikacija i Tabla jemstva isti put, pa su spojeni u
-        // JEDNU stavku „Verifikacija" — sama stranica /verifikacija nosi i formu table
-        // jemstva (objava + status zahteva). Rasterećuje sidebar.
+        // Neverifikovanom je put do verifikacije jedna stavka — „Verifikacija".
         { label: t("grupa_poverenje"), links: [verifikacijaLink] },
         ...adminGrupa,
       ];

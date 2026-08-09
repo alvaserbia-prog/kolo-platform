@@ -4,8 +4,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
-import { TransactionType } from "@/generated/prisma/client";
+import { DoprinosOkidac, TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
+import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -53,6 +54,17 @@ export async function POST(req: NextRequest) {
   if (!posiljac?.wallet) {
     return await greska("Nemate novčanik.", 500);
   }
+  // Neverifikovani korisnik u ažuriranju evidencije učestvuje ISKLJUČIVO kao
+  // primalac (Pravilnik 4.1.0 čl. 28 st. 2). Uslov se vezuje za tip naloga, ne za
+  // indeks stvarnosti: ko je jednom verifikovan sme da upisuje POEN i ako mu indeks
+  // kasnije padne. Čita se iz baze, ne iz sesije — token se osvežava sa zakašnjenjem,
+  // pa bi tek verifikovan korisnik još neko vreme bio odbijan.
+  if (!smeDaSalje(posiljac.tipKorisnika)) {
+    return await greska(
+      "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.",
+      403,
+    );
+  }
   if (posiljac.wallet.balance < iznos) {
     return await greska(`Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.`, 400);
   }
@@ -90,6 +102,11 @@ export async function POST(req: NextRequest) {
     }
     throw e;
   }
+
+  // Primljen POEN je jedan od dva okidača za evidentiranje doprinosa sadržaju
+  // (čl. 40a st. 3). Zove se VAN transakcije — `emitujPoen()` otvara sopstvenu.
+  // Ne baca: prenos je već upisan i ne sme da padne zbog ovog kanala.
+  await probajEvidentirati(primalac.id, DoprinosOkidac.PRIMLJEN_POEN, posiljac.id);
 
   // Iznos se NE formatira ovde: broj ide kao parametar, a razdvajač hiljada se
   // bira pri prikazu, po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000).

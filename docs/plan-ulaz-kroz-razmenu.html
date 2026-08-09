@@ -1,0 +1,700 @@
+<title>Ulazak u KOLO kroz razmenu — plan sprovođenja</title>
+<style>
+  :root {
+    --paper:      #F4F5F1;
+    --surface:    #FBFCFA;
+    --ink:        #191E1B;
+    --muted:      #5C6561;
+    --faint:      #858E89;
+    --rule:       #D9DCD3;
+    --rule-soft:  #E7E9E3;
+    --accent:     #2C5A4C;
+    --accent-bg:  #E4EDE8;
+    --alert:      #A03A28;
+    --alert-bg:   #F5E5E1;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #131614;
+      --surface:   #1A1E1B;
+      --ink:       #E6E9E2;
+      --muted:     #97A099;
+      --faint:     #79837C;
+      --rule:      #2C312D;
+      --rule-soft: #232823;
+      --accent:    #74AE97;
+      --accent-bg: #1C2A25;
+      --alert:     #DE8570;
+      --alert-bg:  #2E1F1B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:     #131614;
+    --surface:   #1A1E1B;
+    --ink:       #E6E9E2;
+    --muted:     #97A099;
+    --faint:     #79837C;
+    --rule:      #2C312D;
+    --rule-soft: #232823;
+    --accent:    #74AE97;
+    --accent-bg: #1C2A25;
+    --alert:     #DE8570;
+    --alert-bg:  #2E1F1B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 47rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  /* ---------- zaglavlje ---------- */
+  .mast { display: flex; flex-direction: column; gap: .85rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 2.85rem);
+    line-height: 1.14;
+    letter-spacing: -.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+    max-width: 38rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.4rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    color: var(--faint);
+    border-top: 1px solid var(--rule);
+    padding-top: .85rem;
+  }
+
+  /* ---------- odeljci ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.62rem;
+    line-height: 1.22;
+    letter-spacing: -.005em;
+    margin: 1.6rem 0 0;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .06em;
+    flex: none;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 650;
+    font-size: 1.02rem;
+    letter-spacing: -.005em;
+    margin: 1.1rem 0 0;
+    text-wrap: balance;
+  }
+  h4 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: .9rem 0 0;
+  }
+  p { margin: 0; max-width: 40rem; }
+  ul, ol { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .45rem; max-width: 40rem; }
+  li { padding-left: .15rem; }
+  li::marker { color: var(--faint); }
+  strong { font-weight: 650; }
+  code {
+    font-family: var(--mono);
+    font-size: .855em;
+    background: var(--rule-soft);
+    padding: .1em .34em;
+    border-radius: 2px;
+    word-break: break-word;
+  }
+
+  /* ---------- oznake stanja ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: .22rem .5rem;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+  .chip.usvojeno { color: var(--accent); border-color: var(--accent); background: var(--accent-bg); }
+  .chip.rizik    { color: var(--alert); border-color: var(--alert); background: var(--alert-bg); }
+
+  /* ---------- izdvojeno ---------- */
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-bg);
+    padding: .95rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-radius: 0 3px 3px 0;
+  }
+  .note.warn { border-left-color: var(--alert); background: var(--alert-bg); }
+  .note .lbl {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .note.warn .lbl { color: var(--alert); }
+  .note p { max-width: none; }
+
+  /* ---------- nacrt odredbe ---------- */
+  .odredba {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .hdr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .55rem;
+    border-bottom: 1px solid var(--rule-soft);
+    padding-bottom: .55rem;
+  }
+  .odredba .clan {
+    font-family: var(--mono);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink);
+  }
+  .odredba .kako {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .odredba .tekst {
+    font-family: var(--serif);
+    font-size: .97rem;
+    line-height: 1.62;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .tekst p { max-width: none; }
+  .odredba .obrazlozenje {
+    font-size: .87rem;
+    color: var(--muted);
+    max-width: none;
+    border-top: 1px dashed var(--rule);
+    padding-top: .55rem;
+  }
+  del { color: var(--alert); text-decoration-thickness: 1px; }
+  ins { text-decoration: none; box-shadow: inset 0 -.42em 0 var(--accent-bg); }
+
+  /* ---------- tabele ---------- */
+  .tbl-scroll { overflow-x: auto; margin: .2rem 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .9rem;
+    min-width: 30rem;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: .5rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--ink);
+    padding: .4rem .7rem .4rem 0;
+    vertical-align: bottom;
+  }
+  td {
+    border-bottom: 1px solid var(--rule-soft);
+    padding: .5rem .7rem .5rem 0;
+    vertical-align: top;
+  }
+  td.num, th.num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding-right: 0;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- koraci ---------- */
+  .koraci { display: flex; flex-direction: column; gap: .8rem; counter-reset: k; }
+  .korak {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: .1rem 1rem;
+    align-items: baseline;
+  }
+  .korak::before {
+    counter-increment: k;
+    content: counter(k, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: .78rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .korak > div { display: flex; flex-direction: column; gap: .3rem; }
+  .korak .kt { font-weight: 650; }
+  .korak .kd { font-size: .92rem; color: var(--muted); max-width: 38rem; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: .4rem 0;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  a { color: var(--accent); text-underline-offset: .18em; }
+  a:focus-visible, :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  @media (max-width: 40rem) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.25rem 1.1rem 4rem; gap: 2.25rem; }
+    .korak { grid-template-columns: 1.9rem 1fr; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">KOLO Platforma · radni dokument pred sednicu UO</div>
+    <h1>Ulazak u KOLO kroz razmenu</h1>
+    <p class="standfirst">Plan sprovođenja izmene pravila ulaska: nacrt izmena akata po članovima, tehnički plan, redosled i rokovi. Pripremljeno na osnovu stvarnog stanja produkcione baze na dan 8. avgusta 2026.</p>
+    <div class="meta">
+      <span>8. avgust 2026</span>
+      <span>Ciljni datum stupanja na snagu: 10. septembar 2026</span>
+      <span>Akti: 4.0.0 → 4.1.0</span>
+    </div>
+  </header>
+
+  <!-- ============ 0 ============ -->
+  <section>
+    <h2><span class="num">00</span> Stanje pre izmene</h2>
+    <p>Svi brojevi su očitani iz produkcione baze 8. avgusta 2026, isključivo čitanjem. Oni menjaju težinu nekoliko ranijih pretpostavki, pa stoje na početku, a ne u prilogu.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <caption>Produkciona baza, 8. avgust 2026</caption>
+        <thead>
+          <tr><th>Pokazatelj</th><th class="num">Vrednost</th><th>Šta iz toga sledi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Aktivnih naloga</td><td class="num">42</td><td>26 regularnih, 5 nosilaca ZRNA, 11 neverifikovanih</td></tr>
+          <tr><td>Neverifikovanih sa POEN‑om</td><td class="num">0</td><td>Prelazna odredba za pravilo „ne šalje” nije potrebna</td></tr>
+          <tr><td>Transfera koje je poslao neverifikovan, ikad</td><td class="num">0</td><td>Ukidanjem tog prava niko stvarno ništa ne gubi</td></tr>
+          <tr><td>Opticaj</td><td class="num">59.500</td><td>Do praga od 100.000 fali <strong>40.500</strong></td></tr>
+          <tr><td>Osnivačkih koraka evidentirano</td><td class="num">0</td><td>Lista osnivača je <strong>zaključana</strong>, poslednji prag 0</td></tr>
+          <tr><td>Oglasa ukupno</td><td class="num">30</td><td>26 aktivnih, 4 istekla — <strong>svi tipa PONUDA</strong></td></tr>
+          <tr><td>Ljudi koji su okačili bar jedan oglas</td><td class="num">11</td><td>Od 31 verifikovanog, njih 20 nikad ništa nije objavilo</td></tr>
+          <tr><td>Kartica na tabli jemstva, ikad</td><td class="num">15</td><td>0 sa telefonom, 0 aktivnih danas</td></tr>
+          <tr><td>Zapisa prepoznavanja</td><td class="num">0</td><td>Feed prepoznavanja nije upotrebljen nijednom</td></tr>
+          <tr><td>Verifikacija koje čekaju nadzor</td><td class="num">0</td><td>Nadzor danas nije usko grlo</td></tr>
+          <tr><td>Verifikatora bez slobodnog slota</td><td class="num">0</td><td>26 regularnih × 1 slot + neograničeno kod osnivača</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Četiri nalaza koji nose plan</h3>
+
+    <div class="note warn">
+      <span class="lbl">Rizik — određuje redosled</span>
+      <p><strong>Prvi osnivački korak od 24.000 POEN‑a okida se na 100.000 ukupnog POEN‑a, a fali 40.500.</strong> Lista osnivača je zaključana i nijedan korak još nije evidentiran, pa je taj prag prvi koji sistem dodiruje. Po usvojenom modelu to je dvanaest ljudi koji prođu ceo tok. Da se POEN emituje pri samoj objavi oglasa, bio bi to i četrdeset jedan lažni nalog. Odloženo evidentiranje zato nije doterivanje predloga nego uslov da paket može da izađe.</p>
+      <p>Isti prag od 100.000 gasi i prelazno ograničenje iz čl. 22 Pravilnika o dokazu stvarnosti, posle čega korisnik sme da primi više od jedne verifikacije. Dva krupna događaja padaju na isti broj i treba ih očekivati zajedno.</p>
+    </div>
+
+    <p><strong>Tabla jemstva je prazna.</strong> Petnaest kartica ikad, nijedna sa telefonom, nijedna aktivna danas, i <strong>nula zapisa prepoznavanja</strong>. Feed prepoznavanja pušten je 3. avgusta i za pet dana nije upotrebljen nijednom. To je jači argument za ukidanje od bilo kog napisanog, i tako treba da stoji pred Upravnim odborom. Brisanje košta petnaest redova bez ijednog telefonskog broja.</p>
+
+    <p><strong>Nijedna potražnja nikad nije objavljena</strong> — svih trideset oglasa su ponude. Ograničenje neverifikovanih na ponude ne oduzima ništa što iko koristi.</p>
+
+    <p><strong>Pijaca ne ćuti samo zbog neverifikovanih.</strong> Oglase je okačilo jedanaest ljudi, a verifikovanih ima trideset jedan — dvadeset članova sa punim pravom objave nikad nije objavilo ništa. To je zaseban problem koji ovaj paket ne dira, i vredi ga znati pre nego što se rezultat pripiše ili ospori ovoj izmeni.</p>
+  </section>
+
+  <!-- ============ 1 ============ -->
+  <section>
+    <h2><span class="num">01</span> Odluke pod kojima je plan pisan</h2>
+
+    <h4>Usvojeno</h4>
+    <ul>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Bez admina u toku.</strong> Oglas ide odmah, bez ljudskog odobrenja. Reaktivna moderacija iz Uslova čl. 25 st. 1 ostaje netaknuta.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Okidač: verifikacija ili bilo koji primljen POEN.</strong> Bez praga.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Zabrana slanja vezuje se za tip naloga</strong> <code>NEVERIFIKOVAN</code>, ne za indeks. Ko je jednom verifikovan, sme da šalje i ako mu indeks kasnije padne.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Kanal ne ulazi u dnevni limit.</strong></li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Tabla jemstva se ukida u celosti.</strong></li>
+    </ul>
+
+    <div class="note warn">
+      <span class="lbl">Posledica okidača bez praga</span>
+      <p>Verifikovan član može da napravi pedeset naloga, okači pedeset oglasa i pošalje svakom po <strong>1 POEN</strong> — Protokol tada evidentira 50.000 POEN‑a po ceni od 50. Ne može da ih izvuče, ali opticaj skače i osnivački korak se okida. Pošto je pravilo usvojeno takvo, u odeljak <strong>05</strong> ulaze dve jeftine brane koje ne diraju samo pravilo: upozorenje UO na obrazac, i privremeno ručno okidanje osnivačkog koraka. Ovo se dalje ne otvara.</p>
+    </div>
+
+    <h4>Pretpostavke — plan je pisan po njima, menjaju se jednom rečju</h4>
+    <ul>
+      <li><span class="chip">pretpostavka</span> Sadržinski minimum oglasa: bar jedna fotografija, opis od najmanje 40 znakova, kategorija i mesto.</li>
+      <li><span class="chip">pretpostavka</span> Najviše <strong>3 aktivna oglasa</strong> za neverifikovanog korisnika.</li>
+      <li><span class="chip">pretpostavka</span> Ako se oglas ukloni zbog povrede Uslova pre evidentiranja, zabeleženi doprinos propada. Već evidentiran se ne dira.</li>
+      <li><span class="chip">pretpostavka</span> Zabeleženi doprinos <strong>ne ističe</strong> i vidi ga <strong>samo vlasnik naloga</strong>.</li>
+      <li><span class="chip">pretpostavka</span> Naziv na ekranu: <strong>„Zabeležen doprinos”</strong>, nikad „POEN na čekanju” — po čl. 12 POEN postoji isključivo kao zapis u Protokolu.</li>
+      <li><span class="chip">pretpostavka</span> Jednokratni kod za verifikaciju produžava se sa 2 sata na <strong>24 sata</strong>, jer se dogovor sada vodi preko poruka.</li>
+      <li><span class="chip">pretpostavka</span> Retroaktiva postojećim članovima: zasluga se beleži odmah, a evidentira se kroz isti okidač. Nema skoka od 31.000 POEN‑a u jednom danu.</li>
+      <li><span class="chip">pretpostavka</span> Ide i nova verzija Pravilnika sa ponovnom saglasnošću, ne samo Politike — menja se obim prava, ne samo obrada podataka.</li>
+      <li><span class="chip">pretpostavka</span> Brojač na početnoj: članovi, oglasi, razmene, opticaj.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">Jedno ostaje neodgovoreno</span>
+      <p>Iz brojeva se ne vidi da li je nadzor ikad stvarno izvršen ili nijedan regularan član nikad nikoga nije verifikovao — u drugom slučaju bi prvi regularni verifikator u novom toku bio i prvo bojevo gađanje tog puta. Ne blokira ništa, utiče samo na to koliko pažnje ide na testiranje nadzora (odeljak 07). Razrešava se jednim upitom nad <code>VerifikacionaVeza</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section>
+    <h2><span class="num">02</span> Pravilnik o KOLO sistemu · 4.0.0 → 4.1.0</h2>
+
+    <div class="note">
+      <span class="lbl">Redakcijska napomena</span>
+      <p>Nov član se umeće kao <strong>čl. 40a</strong>, a ne kao novi čl. 41. Glava VI se završava na čl. 40, pa bi umetanje punog broja pomerilo svih preostalih 43 člana i sve unakrsne reference u ostalim aktima. Slovna oznaka to izbegava u celosti.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 15</span> <span class="kako">dopuna — osmi kanal</span></div>
+      <div class="tekst">
+        <p>U nabrajanju kanala evidentiranja dodaje se tačka:</p>
+        <p><ins>8) doprinos sadržaju platforme.</ins></p>
+        <p>U stavu koji upućuje na razradu: „Kanali pod tačkama 1, 3, 4 <ins>, 7 i 8</ins> <del>i 7</del> uređeni su Glavom VI ovog pravilnika.”</p>
+      </div>
+      <p class="obrazlozenje">Bez ove dopune nov kanal nema osnov — čl. 15 je zatvorena lista kroz koju Protokol sme da upiše nove zapise.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 16, stav 5</span> <span class="kako">izmena — ko sme da objavljuje</span></div>
+      <div class="tekst">
+        <p><del>Postavljanje oglasa, pristup kontakt podacima oglašivača i komunikacija povodom oglasa dostupni su isključivo verifikovanim korisnicima.</del></p>
+        <p><ins>Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je i neverifikovanim korisnicima, pod uslovima i ograničenjima utvrđenim Uslovima korišćenja. Postavljanje oglasa kojim se dobro ili usluga traži, pristup kontakt podacima oglašivača i pokretanje komunikacije povodom oglasa dostupni su isključivo verifikovanim korisnicima. Neverifikovani oglašivač može da odgovara u razgovoru koji je verifikovani korisnik pokrenuo povodom njegovog oglasa.</ins></p>
+      </div>
+      <p class="obrazlozenje">Razlika između pokretanja i odgovaranja je nosiva — neverifikovani i dalje ne može da se obrati kome hoće, ali može da odgovori onome ko mu se javio na ponudu.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 28, stav 2</span> <span class="kako">zamena — nov obim prava</span></div>
+      <div class="tekst">
+        <p><ins>Neverifikovani korisnik ima pravo pregleda javnog sadržaja sistema, uključujući pregled oglasa u platformskom prostoru za oglašavanje. Može da razmenjuje dobra i usluge i da u platformskom prostoru za oglašavanje postavi oglas kojim nudi dobro ili uslugu, pod ograničenjima iz Uslova korišćenja.</ins></p>
+        <p><ins>U ažuriranju evidencije POEN‑a neverifikovani korisnik može da učestvuje isključivo kao primalac. Ažuriranje evidencije u korist drugog korisnika dostupno je po verifikaciji. Zapisi POEN‑a evidentirani pre verifikacije ostaju punovažni i ne poništavaju se.</ins></p>
+        <p><ins>Neverifikovanom korisniku doprinos se može evidentirati isključivo kroz kanal doprinosa sadržaju platforme (čl. 15 tačka 8 i čl. 40a). Kroz ostale kanale doprinos mu se ne evidentira, niti može upisati ZRNO.</ins></p>
+        <p><ins>Neverifikovani korisnik ne može da pristupa kontakt podacima oglašivača niti da pokreće komunikaciju putem Platforme. Može da odgovara u razgovoru koji je verifikovani korisnik pokrenuo povodom njegovog oglasa.</ins></p>
+      </div>
+      <p class="obrazlozenje">Tri stvarne izmene u jednom članu: dodaje se pravo objave ponude, <strong>oduzima se pravo davanja POEN‑a</strong> koje po važećem tekstu izričito postoji, i probija se dosadašnja apsolutna zabrana evidentiranja doprinosa neverifikovanom — bez tog trećeg reza nov kanal ne bi mogao da radi. Oduzimanje mora da se izgovori i pred UO i u obaveštenju korisnicima; u praksi ne pogađa nikoga, jer nijedan neverifikovan nikad nije poslao POEN.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 32, stav 4</span> <span class="kako">zamena umesto brisanja</span></div>
+      <div class="tekst">
+        <p><del>Platforma može da obezbedi mehanizam kroz koji neverifikovani korisnik može da se predstavi mreži postojećih verifikovanih korisnika radi uspostavljanja kontakta neophodnog za sprovođenje verifikacije. […]</del></p>
+        <p><ins>Kontakt neophodan za sprovođenje verifikacije neverifikovani korisnik uspostavlja kroz platformski prostor za oglašavanje (čl. 16). Postojanje tog puta ne menja prirodu, postupak ni uslove verifikacije utvrđene ovim pravilnikom i Pravilnikom o dokazu stvarnosti.</ins></p>
+      </div>
+      <p class="obrazlozenje">Prvobitni predlog je bio prosto brisanje. Zamena je bolja: održava normativnu nit između ulaska i verifikacije, koja bi golim brisanjem pukla — akti bi tvrdili da se ulazi preko poznanstva, a ne bi rekli gde se to poznanstvo sklapa.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 35</span> <span class="kako">usklađivanje broja</span></div>
+      <div class="tekst">
+        <p>„Ova glava razrađuje <del>četiri</del> <ins>pet</ins> od tih kanala — operativni doprinos, donacije, pokroviteljstvo<ins>,</ins> osnivački doprinos <ins>i doprinos sadržaju platforme</ins>.”</p>
+      </div>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 40a — NOV</span> <span class="kako">Doprinos sadržaju platforme</span></div>
+      <div class="tekst">
+        <p><ins>Sadržaj koji korisnici stvaraju u sistemu deo je zajedničkog dobra i licencira se u skladu sa članom 7 ovog pravilnika. Platformski prostor za oglašavanje bez sadržaja ne ispunjava svoju svrhu; korisnik koji ga prvi put popuni sopstvenom ponudom taj nedostatak otklanja i time doprinosi zajedničkom dobru.</ins></p>
+        <p><ins>Korisniku se jednokratno evidentira doprinos u iznosu od 1.000 POEN‑a za prvi oglas kojim nudi dobro ili uslugu, a koji ispunjava sadržinski minimum utvrđen Uslovima korišćenja. Kanal se koristi najviše jednom po korisniku, nezavisno od broja objavljenih oglasa.</ins></p>
+        <p><ins>Doprinos se beleži u trenutku objave oglasa, a evidentira se u Protokolu kada nastupi prvi od sledećih događaja: verifikacija korisnika u lancu jemstva, ili ažuriranje evidencije POEN‑a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN‑a i ne ulazi u ukupan broj evidentiranih POEN‑a u sistemu.</ins></p>
+        <p><ins>Ako oglas bude uklonjen zbog povrede Uslova korišćenja pre nego što doprinos bude evidentiran, zabeleženi doprinos se poništava.</ins></p>
+        <p><ins>Evidentiranje doprinosa sadržaju platforme je automatski akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa podrške.</ins></p>
+      </div>
+      <p class="obrazlozenje">Treći stav je pravno srce izmene: on razdvaja <em>beleženje</em> od <em>evidentiranja</em> i time drži zero‑sum i sve pragove sistema izvan domašaja praznih naloga. Peti stav je odluka koju je vlasnik izričito potvrdio.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 67</span> <span class="kako">dopuna — vidljivost</span></div>
+      <div class="tekst">
+        <p><ins>Korisnik u svakom trenutku vidi sopstvene zapise i sopstveni zabeleženi doprinos koji još nije evidentiran. Zabeleženi doprinos nije vidljiv drugim korisnicima i ne ulazi u javne agregate dok ne bude evidentiran.</ins></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section>
+    <h2><span class="num">03</span> Ostali akti</h2>
+
+    <h3>Pravilnik o dokazu stvarnosti · 4.0.1 → 4.1.0</h3>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 5</span> <span class="kako">brisanje stava + terminološka ispravka</span></div>
+      <div class="tekst">
+        <p>Briše se ceo stav koji glasi: <del>„Saglasnost i vezivanje naloga mogu se izraziti i objavom zahteva na tabli zahteva za jemstvo […]”</del> — tabla prestaje da postoji, ostaje jednokratni kod.</p>
+        <p>U stavu o jednokratnom kodu: „<del>verifikovani korisnik</del> <ins>korisnik koji traži verifikaciju</ins> generiše jednokratan kod kojim pristaje na verifikaciju”.</p>
+      </div>
+      <p class="obrazlozenje">Terminološka ispravka nije kozmetika. Po novom toku kod gotovo uvek generiše <strong>neverifikovan</strong> korisnik, pa bi važeća formulacija čitaocu tvrdila suprotno od onoga što sistem radi. Kod je oduvek radio ispravno — sporan je bio tekst.</p>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Član 7</span> <span class="kako">ispravka — trenutak upisa nadzorniku</span></div>
+      <div class="tekst">
+        <p><ins>Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje nove zapise POEN‑a: verifikatoru 1.000 POEN‑a i verifikovanom 1.000 POEN‑a.</ins></p>
+        <p><ins>Ako verifikacija podleže nadzoru, Protokol upisuje 500 POEN‑a nadzorniku u trenutku kada nadzornik potvrdi verifikaciju (čl. 11), a ne u trenutku verifikacije.</ins></p>
+        <p><ins>Kada verifikacija ne podleže nadzoru, ukupna evidencija iznosi 2.000 POEN‑a. Kada podleže nadzoru, ukupna evidencija po okončanju nadzora iznosi 2.500 POEN‑a.</ins></p>
+      </div>
+      <p class="obrazlozenje">Važeći čl. 7 tvrdi da se svih 2.500 upisuje odjednom, a čl. 11 istog pravilnika kaže da se nadzornik saznaje naknadno. Kod radi po čl. 11 — <code>nadzor-service.ts</code> emituje 500 tek pri potvrdi nadzora i tada vraća slot verifikatoru. Ispravlja se, dakle, tekst, ne ponašanje.</p>
+    </div>
+
+    <h3>Uslovi korišćenja · 4.0.0 → 4.1.0</h3>
+    <ul>
+      <li>Sadržinski minimum oglasa — bar jedna fotografija, opis od najmanje 40 znakova, kategorija i mesto.</li>
+      <li>Najviše tri aktivna oglasa za neverifikovanog korisnika.</li>
+      <li>Oglasi neverifikovanih nose <strong>javnu oznaku</strong> da oglašivač nije verifikovan; oznaku vide i neprijavljeni posetioci.</li>
+      <li>Neverifikovani korisnik ne može da inicira ažuriranje evidencije POEN‑a u korist drugog.</li>
+      <li>Neverifikovani može da postavi samo oglas kojim <strong>nudi</strong>, ne i kojim traži.</li>
+      <li>Brišu se odredbe o tabli zahteva za jemstvo (čl. 14 i čl. 16) — uključujući rok od 72 sata, čime se usput uklanja i zatečena neusklađenost sa produženim rokom u kodu.</li>
+      <li>Odgovornost za razmenu ostaje na korisnicima i posebno se ističe za ponude neverifikovanih.</li>
+    </ul>
+
+    <h3>Politika privatnosti, DPIA, Registar radnji obrade · 4.0.0 → 4.1.0</h3>
+    <ul>
+      <li><strong>Briše se cela radnja obrade „kartica prepoznavanja”</strong> — ime, prezime, godište, mesto, nadimak, čime se bavi, telefon i saglasnost za pozivanje. Broj radnji obrade se smanjuje.</li>
+      <li>Briše se rok čuvanja podataka sa table jemstva.</li>
+      <li>Dodaje se: oglas neverifikovanog korisnika (pseudonim, sadržaj, cena, mesto, fotografije) javno je vidljiv svim posetiocima.</li>
+      <li>DPIA: briše se rizik objave ličnih podataka radi prepoznavanja; dodaje se manji rizik javne vidljivosti oglasa neverifikovanog.</li>
+    </ul>
+
+    <div class="note">
+      <span class="lbl">Ovo izgovoriti naglas pred UO</span>
+      <p>Paket koji otvara Pijacu istovremeno <strong>ukida najosetljiviju obradu ličnih podataka koju sistem ima</strong>, i to obradu koja je u praksi dala nula rezultata. Ovo je jedina izmena u istoriji projekta koja skida obradu umesto da je dodaje.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section>
+    <h2><span class="num">04</span> Tehnički plan</h2>
+
+    <h3>Migracije</h3>
+    <div class="koraci">
+      <div class="korak"><div>
+        <span class="kt"><code>20260809120000_doprinos_sadrzaju</code></span>
+        <span class="kd">Model <code>DoprinosSadrzaju</code> — <code>userId</code> sa <code>@unique</code> (jednokratnost kanala se time obezbeđuje u bazi, ne u kodu), <code>oglasId</code>, <code>iznos</code>, <code>status</code>, <code>okidac</code>, vremenske oznake i veza ka transakciji. Enumi <code>DoprinosStatus { ZABELEZEN, EVIDENTIRAN, PONISTEN }</code> i <code>DoprinosOkidac { VERIFIKACIJA, PRIMLJEN_POEN }</code>. U <code>TransactionType</code> se dodaje <code>EMISIJA_SADRZAJ</code>.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt"><code>20260809120100_tabla_jemstva_podaci</code></span>
+        <span class="kd">Brišu se svi redovi iz <code>Prepoznavanje</code> i <code>ZahtevZaJemstvo</code> — petnaest redova, nijedan sa telefonom. Zaseban fajl, jer nova vrednost enuma iz prethodne migracije ne sme da se koristi u istoj transakciji u kojoj je dodata.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt"><code>_tabla_jemstva_drop</code> — <em>odložiti jedan ciklus</em></span>
+        <span class="kd">Uklanjanje samih tabela i enuma <code>JemstvoStatus</code>. Po konvenciji repozitorijuma struktura ostaje jedan ciklus radi povratka; podaci su već obrisani, pa minimizacija ništa ne čeka.</span>
+      </div></div>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Pravilo bez izuzetka</span>
+      <p>Primenjena migracija se <strong>nikad</strong> ne menja — Prisma je proverava kontrolnom sumom i <code>migrate deploy</code> puca, a migracije se izvršavaju u build‑u, pa bi to oborilo deploy. Svaka ispravka ide kao nova migracija.</p>
+    </div>
+
+    <h3>Biblioteka i testovi</h3>
+    <p>Nov modul <code>src/lib/protokol/doprinos-sadrzaju.ts</code>, po ustaljenom obrascu — čiste funkcije bez Prisma poziva odvojene od servisnih:</p>
+    <ul>
+      <li><code>IZNOS = 1000</code>, <code>MIN_OPIS = 40</code>, <code>MAX_AKTIVNIH_OGLASA = 3</code></li>
+      <li><code>oglasIspunjavaMinimum()</code>, <code>smeDaPostaviOglas()</code>, <code>smeDaSalje()</code> — čiste, testabilne</li>
+      <li><code>zabeleziDoprinos(userId, oglasId)</code> — idempotentno preko <code>@unique</code></li>
+      <li><code>probajEvidentirati(userId, okidac)</code> — nalazi <code>ZABELEZEN</code>, zove <code>emitujPoen()</code> <strong>van</strong> transakcije i prelazi u <code>EVIDENTIRAN</code></li>
+      <li><code>ponistiZabelezen(oglasId)</code> — pri uklanjanju oglasa pre evidentiranja</li>
+    </ul>
+    <p>Testovi u <code>__tests__/protokol/doprinos-sadrzaju.test.ts</code>: jednokratnost po čoveku, oba okidača, poništenje, i da se ništa ne emituje pre okidača.</p>
+
+    <div class="note">
+      <span class="lbl">Obavezan obrazac</span>
+      <p><code>emitujPoen()</code> otvara sopstvenu transakciju i <strong>ne sme</strong> da se pozove unutar druge <code>prisma.$transaction()</code>. Izmene u bazi idu u jednoj transakciji, emisije sekvencijalno posle nje.</p>
+    </div>
+
+    <h3>Serverske izmene</h3>
+    <div class="tbl-scroll">
+      <table>
+        <caption>Rute — šta se dira</caption>
+        <thead><tr><th>Ruta</th><th>Izmena</th></tr></thead>
+        <tbody>
+          <tr><td><code>POST /api/pijaca</code></td><td>Provera <code>session.user.verified</code> zamenjuje se uslovom koji pušta neverifikovanog samo za <code>tip = PONUDA</code>, uz minimum sadržaja i najviše tri aktivna. Posle upisa oglasa poziva se <code>zabeleziDoprinos()</code>.</td></tr>
+          <tr><td><code>PATCH /api/pijaca/[id]</code></td><td>Neverifikovani ne sme da prebaci sopstveni oglas u <code>POTRAZNJA</code>.</td></tr>
+          <tr><td><code>POST /api/transfer</code></td><td>Novo: 403 kad je pošiljalac <code>NEVERIFIKOVAN</code>. Posle uspešnog prenosa <code>probajEvidentirati(primalac, PRIMLJEN_POEN)</code> van transakcije.</td></tr>
+          <tr><td><code>verifikacija-service.ts</code></td><td>Po uspešnoj verifikaciji <code>probajEvidentirati(verifikovani, VERIFIKACIJA)</code>, uz postojeće emisije.</td></tr>
+          <tr><td><code>POST /api/admin/pijaca/[id]/ukloni</code></td><td>Poziva <code>ponistiZabelezen()</code> ako doprinos još nije evidentiran.</td></tr>
+          <tr><td><code>GET /api/profil/balans</code></td><td>Dodaje se zabeleženi doprinos — <strong>odvojeno polje</strong>, nikad sabrano sa stanjem računa.</td></tr>
+          <tr><td><code>GET /api/pijaca</code>, <code>/[id]</code></td><td>U odgovor ulazi podatak da li je oglašivač verifikovan, za javnu oznaku.</td></tr>
+          <tr><td>Brišu se</td><td><code>/api/tabla-jemstva/**</code>, <code>/api/admin/tabla-jemstva/**</code>, <code>/api/cron/tabla-jemstva-istek</code>, i odgovarajući cron iz <code>vercel.json</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Jedina stvar koja radi bez ijedne linije koda</span>
+      <p>Nit razgovora na oglasu <strong>već postoji</strong>. <code>POST /api/poruke</code> traži verifikaciju da bi se razgovor pokrenuo, a <code>POST /api/poruke/[konvId]</code> proverava samo članstvo u razgovoru i <strong>nema</strong> proveru verifikacije — dakle neverifikovani već sme da odgovori. To je isti mehanizam koji je napravljen za tablu jemstva; on se ne briše sa njom, nego ostaje i preuzima posao.</p>
+    </div>
+
+    <h3>Ekrani</h3>
+    <ul>
+      <li><strong>Forma oglasa</strong> — otvara se neverifikovanom, tip zaključan na ponudu, brojač preostalih oglasa, jasna poruka o minimumu sadržaja.</li>
+      <li><strong>Kartica i stranica oglasa</strong> — oznaka „neverifikovan oglašivač”, vidljiva i neprijavljenima.</li>
+      <li><strong>Novčanik</strong> — „Zabeležen doprinos 1.000 POEN — evidentira se kad te neko verifikuje ili kad ti neko upiše POEN”, uz objašnjenje zašto dugmeta za slanje nema.</li>
+      <li><strong>/verifikacija</strong> — uklanjaju se <code>JemstvoObjava</code> i <code>KarticaForma</code>; kod se produžava na 24 sata.</li>
+      <li><strong>/tabla-jemstva</strong> — preusmerenje na Pijacu uz kratko objašnjenje šta je tablu zamenilo.</li>
+      <li><strong>Sidebar</strong> — stavka se uklanja iz obe grupe, zajedno sa badge brojačem u <code>/api/dnevni-brojevi</code>.</li>
+      <li><strong>Početna</strong> — brojač: članovi, oglasi, razmene, opticaj.</li>
+      <li>Brišu se <code>src/components/jemstvo/**</code>, <code>src/lib/jemstvo-kartica.ts</code> i pripadajući testovi.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section>
+    <h2><span class="num">05</span> Brana protiv naduvavanja opticaja</h2>
+    <p>Pošto je okidač usvojen bez praga, zaštita se seli sa pravila na osmatranje. Ništa od ovoga ne menja usvojenu odluku.</p>
+    <div class="koraci">
+      <div class="korak"><div>
+        <span class="kt">Upozorenje na obrazac</span>
+        <span class="kd"><code>posaljiAdminAlert</code> kada isti verifikovan član okine evidentiranje za tri ili više različitih neverifikovanih naloga u sedam dana. Čisto osmatranje — ništa se ne blokira automatski.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt">Osnivački korak privremeno na ruku</span>
+        <span class="kd">Dok se kanal ne slegne, noćni cron ne evidentira korak sam nego javlja UO da je prag blizu. Emisija ostaje na postojećem ručnom dugmetu <code>/api/admin/osnivacki/triger</code>. Ovo je najjeftinija moguća brana: čovek vidi skok pre nego što 24.000 POEN‑a ode osnivačima.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt">Trag u audit logu</span>
+        <span class="kd"><code>DOPRINOS_SADRZAJU_ZABELEZEN</code>, <code>_EVIDENTIRAN</code>, <code>_PONISTEN</code> — da se obrazac može rekonstruisati unazad, a ne samo primetiti uživo.</span>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section>
+    <h2><span class="num">06</span> Objava i ponovna saglasnost</h2>
+    <ul>
+      <li>Nov red <code>PolitikaVerzija</code> i nov red <code>PravilnikVerzija</code> kroz admin — bez toga se ekrani za ponovnu saglasnost ne pale.</li>
+      <li>Cirkularno obaveštenje kroz <code>SistemskoObavestenje</code>, pravni osnov <strong>„Uslovi čl. 40, Politika čl. 16”</strong>. Ova pošta ne poštuje opt‑out i nema link za odjavu — to je dozvoljeno upravo zato što je osnov naveden.</li>
+      <li>Tri poruke, tri publike: <strong>svima</strong> šta se menja i da tabla odlazi; <strong>neverifikovanima</strong> da im je oglas javan, da POEN ne mogu da pošalju i da za razmenu odgovaraju međusobno; <strong>verifikovanima</strong> šta jemčenje nosi i da poništenje ruši sve verifikacije koje su obavili.</li>
+      <li>Ranije upozorenje o reputaciji domena pri masovnom slanju <strong>ovde ne važi</strong> — 42 naloga nije masovno slanje.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section>
+    <h2><span class="num">07</span> Redosled i rokovi</h2>
+    <p>Rok od najmanje 15 dana između objave i stupanja na snagu (Uslovi čl. 40, Politika čl. 16) je ono što određuje ceo kalendar. Za stupanje 10. septembra, objava mora najkasnije <strong>26. avgusta</strong>. Akti su, dakle, na kritičnom putu — kod nije.</p>
+    <div class="tbl-scroll">
+      <table>
+        <caption>Kalendar do stupanja na snagu</caption>
+        <thead><tr><th>Do kada</th><th>Šta</th><th>Gde</th></tr></thead>
+        <tbody>
+          <tr><td class="num">9–12. avg</td><td>Konačna redakcija izmena akata po nacrtu iz odeljaka 02 i 03</td><td>—</td></tr>
+          <tr><td class="num">13–15. avg</td><td>Sednica UO, usvajanje paketa</td><td>—</td></tr>
+          <tr><td class="num">15–31. avg</td><td>Kod: migracije, biblioteka, rute, ekrani, ukidanje table</td><td><code>main</code> → test</td></tr>
+          <tr><td class="num">do 26. avg</td><td><strong>Objava izmena korisnicima</strong> + nove verzije Politike i Pravilnika</td><td>ekolo.rs</td></tr>
+          <tr><td class="num">1–8. sep</td><td>Provera na testu, ispravke, ponovna saglasnost teče</td><td>test</td></tr>
+          <tr><td class="num">10. sep</td><td>Stupanje na snagu i objava</td><td><code>production</code></td></tr>
+          <tr><td class="num">posle</td><td>Retroaktiva — sama se odvija kroz okidač, bez posebnog poteza</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section>
+    <h2><span class="num">08</span> Šta se meri posle</h2>
+    <p>Cilj do 10. septembra je 100 registrovanih, 50 verifikovanih i 50 razmena. Ovih šest brojeva pokazuju da li mehanizam radi ili se samo vrti.</p>
+    <ul>
+      <li><strong>Koliko neverifikovanih objavi oglas</strong> — danas ih je 11 i nijedan nema oglas. Prvi broj koji se pomera.</li>
+      <li><strong>Zabeleženi naspram evidentiranih doprinosa</strong> — razlika je tačan broj ljudi koji su nešto ponudili a niko im se nije javio. To je pravo merilo uspeha, ne broj registracija.</li>
+      <li><strong>Verifikacije koje obave regularni članovi</strong> — do sada verovatno nijedna. Prva je i prva provera puta nadzora.</li>
+      <li><strong>Prosečan broj dana od verifikacije do nadzora</strong> — raste kad nadzor postane usko grlo.</li>
+      <li><strong>Verifikatori bez slobodnog slota</strong> — pali se pre proseka dana, jer verifikator bez slota ne može nikoga da uvede.</li>
+      <li><strong>Opticaj i razdaljina do 100.000</strong> — dvostruki prag; kad se približi, oba događaja iz odeljka 00 dolaze zajedno.</li>
+    </ul>
+  </section>
+
+  <hr>
+  <p class="kicker">Brojevi očitani iz produkcione baze 8. avgusta 2026. Nacrti odredaba su radni tekst za sednicu, ne usvojeni akt.</p>
+
+</div>

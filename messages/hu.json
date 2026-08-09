@@ -11,7 +11,6 @@
     "admin": "Admin",
     "verifikuj_nalog": "Ellenőrzés kérése →",
     "doprinos": "Feladatok",
-    "tabla_jemstva": "Kezességi tábla",
     "postani_pokrovitelj": "Szponzor",
     "nadzor": "Felügyelet",
     "grupa_ekonomija": "Gazdaság",
@@ -330,7 +329,10 @@
     "prazno_verif_link": "Hitelesítés kérése →",
     "send_uspeh_naslov": "Rögzítve!",
     "send_uspeh_opis": "{iznos} POEN rögzítve @{pseudonim} nyilvántartásába.",
-    "send_uspeh_dugme": "Kész"
+    "send_uspeh_dugme": "Kész",
+    "zabelezen_naslov": "Feljegyzett hozzájárulás",
+    "zabelezen_opis": "Akkor kerül bevezetésre, amikor valaki hitelesít téged, vagy POEN-t ír be neked. Addig nem POEN-bejegyzés, és nem része az egyenlegnek.",
+    "samo_primalac": "Amíg nem vagy hitelesítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a hitelesítés után nyílik meg."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -344,8 +346,6 @@
     "podnaslov_neverifikovan": "Mutasd meg a kódodat annak, aki hitelesíteni tud.",
     "kapacitet_neograniceno": "Kapacitás: korlátlan",
     "slotovi_prikaz": "Helyek: {raspolozivo} szabad / {potroseno} felhasznált",
-    "tabla_verifikovan_naslov": "Kezességi tábla",
-    "tabla_verifikovan_opis": "Segíts az új felhasználóknak — nézd meg, ki kér hitelesítést.",
     "graf_kartica_naslov": "Hitelesítési gráf",
     "graf_kartica_opis": "Nézd meg a teljes kezességi hálózatot — ki kit hitelesített, és hol állsz te.",
     "vn_naslov": "Valaki hitelesítése",
@@ -398,7 +398,11 @@
     "prijava_link": "Valami nem stimmel a hitelesítéseddel? Jelentsd.",
     "prijava_placeholder": "Írd le röviden, mi a gond (pl. nem ismered azt, aki hitelesített).",
     "prijava_dugme": "Jelentés küldése",
-    "prijava_poslata": "A jelentés elküldve. A felügyelet átnézi."
+    "prijava_poslata": "A jelentés elküldve. A felügyelet átnézi.",
+    "pijaca_neverifikovan_naslov": "Tegyél közzé ajánlatot a Piacon",
+    "pijaca_neverifikovan_opis": "Ha nincs kitől kódot kérned, tedd közzé, amit kínálsz. Így látnak meg a környékedről való tagok, és felismerhetnek.",
+    "pijaca_verifikovan_naslov": "Segíts az újaknak",
+    "pijaca_verifikovan_opis": "Nézd át a környékedről való nem hitelesítettek ajánlatait — ha valakit valóban ismersz, kezességet vállalhatsz érte."
   },
   "graf": {
     "naslov": "Hitelesítési gráf",
@@ -854,11 +858,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -866,23 +870,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.0.0"
+      "ver": "4.1.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.0.0",
+      "ver": "4.1.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -902,21 +906,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.0.0-s verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.1.0-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.0.0-s verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.1.0-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.0.0-s verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.1.0-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.0.0-s verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.1.0-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.0.0-s verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.1.0-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.0.0-s verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.1.0-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.0.0-s verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.1.0-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1187,7 +1191,7 @@
     "stub3_naslov": "Irányítási szervek",
     "stub3_tekst": "Igazgatótanács és Igazgató. Az Igazgatótanács stratégiai döntéseket hoz. Az Igazgató az operatív irányítást végzi. A Felső Kolo aktiválásával az Alapítvány szolgáltatói és végrehajtói szerepbe lép — végrehajtja a döntéseket és indokolt válaszokat ad a Felső Kolo ajánlásaira.",
     "javno_tag": "Nyilvános és elérhető",
-    "dok_tag": "Dokumentumok (v4.0)",
+    "dok_tag": "Dokumentumok (v4.1)",
     "dok_whitepaper": "Fehér könyv",
     "dok_statut": "KOLO Alapítvány Alapszabálya",
     "dok_pravilnik_kolo": "KOLO rendszer szabályzata",
@@ -1501,8 +1505,6 @@
     "naslov": "Piac",
     "opis": "A place where members offer and seek goods and services. Anyone can browse listings; posting a listing or contacting a seller requires verification.",
     "novi_oglas": "+ Új hirdetés",
-    "zatrazi_verifikaciju_oglas": "Kérj hitelesítést a hirdetés feladásához",
-    "dugme_zatrazi_verifikaciju": "Ellenőrzés kérése",
     "pretrazi_placeholder": "Hirdetések keresése…",
     "cena_filter": "Ár",
     "min_poen": "Min POEN",
@@ -1633,7 +1635,13 @@
     "objavi_potraznja": "Kereslet közzététele",
     "uspeh_dugme": "Tovább a Piactérre",
     "meta_title": "Piac — KOLO",
-    "meta_desc": "Böngéssz a KOLO közösség hirdetései között: javak, szolgáltatások és mesterségek. A böngészés nyilvános; hirdetésfeladáshoz és kapcsolatfelvételhez hitelesítés szükséges."
+    "meta_desc": "Böngéssz a KOLO közösség hirdetései között: javak, szolgáltatások és mesterségek. A böngészés nyilvános; hirdetésfeladáshoz és kapcsolatfelvételhez hitelesítés szükséges.",
+    "neverif_objava_hint": "Ajánlatot a hitelesítés előtt is közzétehetsz — így látnak meg a környékedről való tagok.",
+    "neverif_naslov": "Hitelesítés előtt hirdetsz",
+    "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, legalább {min} karakteres leírás, kategória és helység kell. Az első ilyen hirdetés {iznos} POEN hozzájárulást hoz neked, amelyet akkor vezetnek be, amikor valaki hitelesít téged, vagy POEN-t ír be neked.",
+    "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
+    "oznaka_neverifikovan": "nem hitelesített",
+    "oznaka_neverifikovan_opis": "A hirdető még nincs hitelesítve a kezességi láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel."
   },
   "pocetna": {
     "dobrodoslice": "Üdvözlünk, <ime>{pseudonim}</ime>",
@@ -1651,7 +1659,11 @@
     "chat_samo_verif": "A csevegőszobába csak hitelesített tagok írhatnak.",
     "chat_zatrazi_verif": "Hitelesítés kérése →",
     "greska_slanje": "Hiba az üzenet küldésekor.",
-    "greska_mreza": "Hálózati hiba."
+    "greska_mreza": "Hálózati hiba.",
+    "brojac_clanovi": "Tag",
+    "brojac_oglasi": "Hirdetés",
+    "brojac_razmene": "Csere",
+    "brojac_opticaj": "Forgalomban (POEN)"
   },
   "postaniPokrovitelj": {
     "naslov": "Patronálás",
@@ -1774,90 +1786,11 @@
     "prazna_lista": "Nincs felügyeletre váró hitelesítés."
   },
   "tablaJemstva": {
-    "page_naslov": "Kezességi tábla",
-    "page_opis": "A nem hitelesített felhasználók itt egy felismerési kártyával mutatkoznak be. A rendszer a tagoknak a saját környékükről hoz embereket, és megkérdezi, ismerik-e őket — a hitelesítés mindig személyes ismeretségen alapul (kezességi lánc).",
-    "forma_naslov": "Mutatkozz be a hálózatnak",
-    "dugme_objavljujem": "Közzététel…",
-    "dugme_objavi": "Kérelem közzététele",
-    "ucitavanje": "Betöltés…",
-    "nema_zahteva": "Jelenleg nincs aktív kérelem.",
-    "vas_zahtev": "(a te kérelmed)",
-    "dugme_povuci": "Visszavonás",
-    "dugme_potvrdi_povuci": "Igen, visszavonom",
-    "dugme_otkazi": "Mégse",
-    "dugme_ukloni": "Eltávolítás",
-    "dugme_posalji_poruku": "Üzenet küldése",
-    "greska_objava": "Hiba a közzétételkor.",
-    "greska_generalna": "Hiba.",
-    "label_razlog_uklanjanja": "Az eltávolítás indoka (a felhasználó látni fogja):",
-    "placeholder_razlog_uklanjanja": "Pl. nem megfelelő tartalom, hamis adatok vagy a tábla céljától eltérő.",
-    "dugme_potvrdi_uklanjanje": "Eltávolítás megerősítése",
-    "forma_uvod": "Ez nem hirdetés. A cél az, hogy valaki a környékedről felismerjen mint olyan személyt, akit valóban ismer. Annyit tölts ki, amennyi egy szomszédnak elég — minden mező opcionális.",
-    "forma_pravilo": "Minden mező szabadon hagyható. Adj meg legalább egy adatot és a településed — a település alapján mutat téged a rendszer először a környékbelieknek.",
-    "dopuna_naslov": "Egészítsd ki a kártyád",
-    "label_ime": "Keresztnév",
-    "ph_ime": "pl. Milan",
-    "label_prezime": "Vezetéknév",
-    "ph_prezime": "pl. Jovanović",
-    "label_godiste": "Születési év",
-    "ph_godiste": "pl. 1978",
-    "pomoc_godiste": "Megkülönbözteti a névrokonokat és jelzi a generációt.",
-    "label_mesto": "Helység",
-    "ph_mesto": "pl. Kula",
-    "pomoc_mesto": "A településlistából választható — a rendszer helység alapján találja meg a szomszédaidat.",
-    "label_nadimak": "Becenév vagy helyi családnév",
-    "ph_nadimak": "pl. Miša Kovačev",
-    "pomoc_nadimak": "Kisebb helyeken az embereket becenéven jegyzik meg, nem vezetéknéven.",
-    "label_cime_se_bavi": "Mivel foglalkozol / miről ismernek",
-    "ph_cime_se_bavi": "pl. Bádogos, üzlet a kulai piac mellett",
-    "pomoc_cime_se_bavi": "Röviden — ez nem hirdetés.",
-    "skriveno_naslov": "Ezt senki sem látja a kártyádon",
-    "skriveno_opis": "A telefonszám soha nem jelenik meg a táblán — csak az Alapítvány kuratóriuma látja, és csak akkor, ha egyetlen tag sem ismer fel.",
-    "label_telefon": "Telefonszám",
-    "ph_telefon": "pl. 064 123 4567",
-    "saglasnost_telefon": "Hozzájárulok, hogy az Alapítvány munkatársa felhívjon, ha egyetlen tag sem ismer fel.",
-    "dugme_pregledaj": "Tovább",
-    "pregled_naslov": "Így lát téged egy idegen",
-    "pregled_opis": "Pontosan ezt fogják látni a hálózat tagjai.",
-    "dugme_dopuni": "Kiegészítés",
-    "dugme_sacuvaj_dopunu": "Mentés",
-    "dugme_dopuni_karticu": "Kártya kiegészítése",
-    "upozorenje_feed": "A név és helység nélküli kártya is eljut mindenkihez, csak a sor végén — helységgel a rendszer először a környékbelieknek mutat.",
-    "poziv_na_dopunu": "Hogy a rendszer először a környékbelieknek mutasson, add meg: {polja}. Nem feltétel — enélkül is hitelesíthetnek.",
-    "greska_prazna_kartica": "Közzététel előtt tölts ki legalább egy mezőt.",
-    "greska_telefon_saglasnost": "A telefonszámot csak a hívásra adott hozzájárulással tároljuk — jelöld be a négyzetet, vagy töröld a számot.",
-    "istice_za_dana": "lejár {dana} nap múlva",
-    "zid_naslov": "Minden közzétett kártya",
-    "feed_naslov": "Ismersz közülük valakit?",
-    "feed_pitanje": "Ismered ezt a személyt?",
-    "feed_brojac": "{i} / {ukupno}",
-    "feed_prazan": "Jelenleg nincs válaszra váró kártya.",
-    "feed_napomena_nije_jemstvo": "Az „Igen” csak beszélgetést nyit — ez nem kezesség. A kezesség külön lépés.",
-    "dugme_da": "Igen, ismerem",
-    "dugme_ne": "Nem",
-    "dugme_nisam_siguran": "Nem vagyok biztos",
-    "dugme_sledeca": "Következő",
-    "dugme_otvori_razgovor": "Beszélgetés megnyitása",
-    "prepoznavanje_otvoren_kanal": "A beszélgetés megnyílt. Ez nem kezesség — ha a beszélgetés után kezeskedni szeretnél, azt külön kell megtenni a táblán lévő kártyáról.",
-    "blizina_mesto_generacija": "A környékedről, hasonló korú.",
-    "blizina_mesto": "A környékedről.",
-    "blizina_ostalo": "Más vidékről — azért látszik, mert nincs több közeli jelölt.",
-    "uo_naslov": "Senki sem ismerte fel őket",
-    "uo_opis": "Közzétettek egy kártyát és hozzájárultak, hogy az Alapítvány felhívja őket.",
-    "uo_dugme_prikazi": "Lista és számok megjelenítése",
-    "uo_prazno": "Nincs ilyen jelölt.",
-    "uo_odgovoreno": "válaszok: {broj}",
-    "dugme_sakrij": "Elrejtés",
-    "objava_aktivna_naslov": "A kártyád közzé van téve",
-    "objava_aktivna_opis": "Látható a hitelesített tagok számára;",
-    "dugme_verifikuj": "Hitelesítem",
-    "placeholder_oznaka": "Megjelölés (becenév) — pl. „Pera a piacról”",
-    "oznaka_opis": "Opcionális. Privát megjelölés, hogy könnyebben kövesd, kit hitelesítettél — csak te és az Alapítvány látja.",
-    "potvrda_poznavanja": "Megerősítem, hogy ezt a személyt személyesen ismerem, és saját felelősségemre kezeskedem valós létéért, egyediségéért és folytonosságáért (a valóság bizonyításáról szóló szabályzat 5. cikke).",
-    "dugme_potvrdi_verifikaciju": "Hitelesítés megerősítése",
-    "verifikacija_uspeh": "Hitelesítetted őt: „{pseudonim}”. Teljes hozzáférést kapott (index +10%).",
-    "blokada_zona": "A hitelesítés nem lehetséges — ez a felhasználó a te tiltott zónádban van, vagy te vagy az övében (a valóság bizonyításáról szóló szabályzat 12. cikke).",
-    "blokada_pocetni": "A kezdő felhasználókat nem hitelesítik a kezességi láncban (a valóság bizonyításáról szóló szabályzat 14. cikke)."
+    "ukinuta_naslov": "A kezességi kérelmek táblája megszűnt",
+    "ukinuta_opis": "A hitelesítéshez most a Piacon át vezet az út: közzéteszel egy ajánlatot, a környékedről való tagok látják, és ha valaki valóban ismer téged, kezességet vállal érted. A felismerési kártya megszűnt, adatai törölve.",
+    "ukinuta_dugme_objavi": "Ajánlat közzététele",
+    "ukinuta_dugme_pijaca": "Piac megnyitása",
+    "ukinuta_dugme_verifikacija": "Hitelesítés"
   },
   "dobrodosli": {
     "ekran1_oznaka": "Üdvözlünk",
@@ -2330,7 +2263,6 @@
     "levak_kolona_prolaz": "Prolaz",
     "levak_k_registrovani": "Registrovali se",
     "levak_k_otvorili_poverenje": "Otvorili verifikaciju ili tablu",
-    "levak_k_objavili_karticu": "Objavili karticu prepoznavanja",
     "levak_k_verifikovani": "Neko ih verifikovao",
     "levak_k_otvorili_formu": "Otvorili formu za oglas",
     "levak_k_objavili_oglas": "Objavili oglas",
@@ -2405,8 +2337,6 @@
     "pristupnica_prihvacena_tekst": "A(z) „{krug}” kör tagja lettél.",
     "verifikacija_ponistena_naslov": "Hitelesítés érvénytelenítve",
     "verifikacija_ponistena_tekst": "A kezességi láncodban egy kezest hamisnak jelöltek, ezért a hitelesítésedet érvénytelenítettük. A valóságindexed 0% — a fiókod és az alapfunkciók megmaradnak (POEN rögzítése, Piac, adományok), de elveszíted a hozzáférést az operatív hozzájáruláshoz és a támogatási programokhoz.",
-    "jemstvo_uklonjen_naslov": "Kezességi kérelem eltávolítva",
-    "jemstvo_uklonjen_tekst": "A kezességi táblán lévő kérelmedet eltávolítottuk. Ok: {razlog}",
     "verifikovan_naslov": "Hitelesítve vagy — feladhatsz hirdetést",
     "verifikovan_tekst": "„{verifikator}” hitelesített téged, és teljes hozzáférést kaptál. Mostantól hirdetést adhatsz fel a Piacon, üzenetet írhatsz és ZRNO-t jegyezhetsz. Ha nem ismered ezt a személyt, jelentsd a hitelesítést a Hitelesítés oldalon.",
     "program_obustavljen_naslov": "Szociális program ideiglenesen felfüggesztve",
@@ -2437,7 +2367,8 @@
     "osnivacki": "Alapítói hozzájárulás — {korak}/{ukupno} lépés",
     "krug_bonus": "Kör-bónusz „{krug}” — tagok száma: {clanovi}",
     "krug_osnivanje": "Kör alapítása „{krug}”",
-    "program": "Program: {program}"
+    "program": "Program: {program}",
+    "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",
@@ -2472,7 +2403,6 @@
     "evidencija_nije_na_cekanju": "A bejegyzés nincs függőben.",
     "evidencija_nije_pronadjena": "A bejegyzés nem található.",
     "evidencija_za_taj_dan_je_vec_uneta": "Az adott napra már rögzítettek bejegyzést.",
-    "feed_prepoznavanja_dostupan_je_samo_verifikovanim_clanovima": "A felismerési lista csak hitelesített tagok számára érhető el.",
     "glasanje_gornjeg_kola_je_operativno_tek_u_fazi_2": "A Felső Kolo szavazása csak a 2. szakaszban indul el.",
     "glasanje_je_zavrseno": "A szavazás lezárult.",
     "greska_pri_izvrsavanju_emisije": "Hiba a kibocsátás rögzítésekor.",
@@ -2648,7 +2578,6 @@
     "predlog_nije_pronadjen": "A javaslat nem található.",
     "predlozeni_poen_dnevnog_izvrsenja_ne_moze_preci_10_000_000": "A napi teljesítésre javasolt POEN nem haladhatja meg a 10.000.000-t.",
     "predlozeni_poen_mora_biti_pozitivan_ceo_broj": "A javasolt POEN pozitív egész szám kell legyen.",
-    "prepoznavanje_je_dostupno_samo_verifikovanim_clanovima": "A felismerés csak hitelesített tagok számára érhető el.",
     "previse_pokusaja_pokusajte_kasnije": "Túl sok próbálkozás. Próbálja újra később.",
     "previse_prijava_pokusaj_kasnije": "Túl sok bejelentés. Próbálja újra később.",
     "previse_zahteva_sacekaj_malo": "Túl sok kérés, várjon egy kicsit.",
@@ -2688,7 +2617,6 @@
     "skladiste_slika_nije_konfigurisano_dokaz_trenutno_nije_moguce_priloziti": "A képtár nincs beállítva — igazolás jelenleg nem csatolható.",
     "slanje_je_vec_zavrseno": "A küldés már befejeződött.",
     "slanje_nije_uspelo_proveri_resend_podesavanja": "A küldés nem sikerült — ellenőrizze a Resend beállításait.",
-    "slanje_poruke_povodom_zahteva_za_jemstvo_dostupno_je_samo_verifikovanim_korisnic": "Kezességi kérelemmel kapcsolatos üzenetet csak hitelesített felhasználók küldhetnek.",
     "slika_je_prevelika_max_5mb": "A kép túl nagy (max. 5MB).",
     "slika_je_prevelika": "A kép túl nagy.",
     "sva_mesta_za_izvrsioce_su_popunjena": "A végrehajtói helyek beteltek.",
@@ -2719,7 +2647,6 @@
     "vec_ste_odgovorili_na_ovaj_zahtev": "Erre a kérelemre már válaszolt.",
     "vec_ste_podneli_prijavu": "Már benyújtott jelentkezést.",
     "vec_ste_prijavljeni_na_ovaj_program": "Már jelentkezett erre a programra.",
-    "vec_ste_verifikovani_tabla_je_namenjena_neverifikovanim_korisnicima": "Ön már hitelesített — a tábla a nem hitelesített felhasználóknak szól.",
     "vec_ste_clan_krugovi_prvo_istupite_iz_trenutne": "Ön már egy kör tagja. Előbb lépjen ki a jelenlegiből.",
     "vlasnik_mora_biti_verifikovan_clan": "A tulajdonosnak hitelesített tagnak kell lennie.",
     "vrednost_donacije_mora_biti_pozitivna": "Az adomány értékének pozitívnak kell lennie.",
@@ -2735,7 +2662,14 @@
     "zahtev_vise_nije_aktivan": "A kérelem már nem aktív.",
     "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható.",
     "verifikacijaid_je_obavezan": "A verifikacijaId megadása kötelező.",
-    "verzijaid_je_obavezno": "A verzijaId megadása kötelező."
+    "verzijaid_je_obavezno": "A verzijaId megadása kötelező.",
+    "oglas_mora_imati_bar_jednu_fotografiju": "A hirdetéshez legalább egy fénykép szükséges.",
+    "opis_mora_imati_najmanje_40_znakova": "A leírásnak legalább 40 karakter hosszúnak kell lennie.",
+    "kategorija_je_obavezna": "A kategória megadása kötelező.",
+    "mesto_je_obavezno": "A helység megadása kötelező.",
+    "dok_nisi_verifikovan_a_mozes_da_objavis_samo_ponudu_oglas_kojim_nudis_dobro_ili_": "Amíg nem vagy hitelesítve, csak ajánlatot tehetsz közzé — olyan hirdetést, amelyben terméket vagy szolgáltatást kínálsz.",
+    "dok_nisi_verifikovan_a_mozes_imati_najvise_3_aktivna_oglasa": "Amíg nem vagy hitelesítve, legfeljebb 3 aktív hirdetésed lehet.",
+    "dok_nisi_verifikovan_a_mozes_samo_da_primas_poen_upis_u_tudju_evidenciju_otvara_": "Amíg nem vagy hitelesítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a hitelesítés után nyílik meg."
   },
   "push": {
     "na_telefonu": "Értesítések a telefonon",

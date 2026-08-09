@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
+import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -113,10 +114,34 @@ export async function PATCH(
     const zadrzaneSlike = listing.images.filter((_, i) => keepIndices.includes(i));
     const uklonjeneSlike = listing.images.filter((_, i) => !keepIndices.includes(i));
 
+    // Neverifikovanom oglašivaču sadržinski minimum važi i pri IZMENI, ne samo pri
+    // objavi — inače bi se zaobišao u dva poteza: objavi pun oglas, pa mu skini
+    // slike i skrati opis. Proverava se PRE slanja na R2, da odbijena izmena ne
+    // ostavi datoteke za sobom. (Smer oglasa se ovom rutom uopšte ne menja, pa
+    // neverifikovani ne može ni da prebaci sopstvenu ponudu u potražnju.)
+    const ukupno = zadrzaneSlike.length;
+    const brojNovih = Array.from({ length: MAX_IMAGES - ukupno }, (_, i) =>
+      fd.get(`nova_slika_${i}`) as File | null,
+    ).filter((f) => f && f.size > 0).length;
+
+    const vlasnik = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { verified: true },
+    });
+    if (!vlasnik?.verified) {
+      const minimum = oglasIspunjavaMinimum({
+        tip: listing.tip,
+        description,
+        category: listing.category,
+        location: mesto,
+        images: Array(ukupno + brojNovih).fill(""),
+      });
+      if (!minimum.ok) return await greska(minimum.razlog, minimum.status);
+    }
+
     // Nove slike — R2 u produkciji, fallback na lokalni disk za dev.
     const useR2 = r2Konfigurisan();
     const noveSlike: string[] = [];
-    const ukupno = zadrzaneSlike.length;
     for (let i = 0; i < MAX_IMAGES - ukupno; i++) {
       const file = fd.get(`nova_slika_${i}`) as File | null;
       if (!file || file.size === 0) continue;

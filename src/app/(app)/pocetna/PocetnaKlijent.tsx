@@ -33,6 +33,8 @@ interface Props {
   chatInicijalno: ChatPoruka[];
   /** UO Fondacije — može ukloniti spornu poruku iz sobe (Uslovi čl. 25 st. 2). */
   jeAdminViewer: boolean;
+  /** Brojač stanja sistema na vrhu strane. */
+  brojac: { clanovi: number; oglasi: number; razmene: number; opticaj: number };
 }
 
 export default function PocetnaKlijent({
@@ -42,6 +44,7 @@ export default function PocetnaKlijent({
   blog,
   chatInicijalno,
   jeAdminViewer,
+  brojac,
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("pocetna");
@@ -134,6 +137,24 @@ export default function PocetnaKlijent({
       <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>
         {t.rich("dobrodoslice", { pseudonim, ime: (c) => <Pseudonim>{c}</Pseudonim> })}
       </h1>
+
+      {/* Brojač stanja sistema. Stoji na vrhu jer je jedini zajednički pokazatelj
+          da mreža raste — sve ostalo na strani je tekst pojedinaca. */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {([
+          ["brojac_clanovi", brojac.clanovi],
+          ["brojac_oglasi", brojac.oglasi],
+          ["brojac_razmene", brojac.razmene],
+          ["brojac_opticaj", brojac.opticaj],
+        ] as const).map(([kljuc, vrednost]) => (
+          <div key={kljuc} className="bg-white rounded-2xl border border-kolo-border px-4 py-3">
+            <p className="text-2xl font-bold tabular-nums text-kolo-text">
+              {vrednost.toLocaleString(intlTag(locale))}
+            </p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t(kljuc)}</p>
+          </div>
+        ))}
+      </div>
 
       {/* Levo Vesti Fondacije, desno Pričaonica */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -290,7 +311,7 @@ export default function PocetnaKlijent({
                   {t("chat_samo_verif")}
                 </span>
                 <Link
-                  href="/tabla-jemstva"
+                  href="/verifikacija"
                   className="shrink-0 px-3 py-1.5 bg-kolo-gold-600 text-white text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
                 >
                   {t("chat_zatrazi_verif")}

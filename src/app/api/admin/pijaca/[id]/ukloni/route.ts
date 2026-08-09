@@ -8,6 +8,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { jeAdmin } from "@/lib/dozvole";
 import { proveriRazlog, tekstObavestenjaOglas, PRAG_ZA_UPOZORENJE } from "@/lib/moderacija";
+import { ponistiZabelezen } from "@/lib/protokol/doprinos-sadrzaju";
 
 // POST /api/admin/pijaca/[id]/ukloni — Fondacija uklanja oglas koji krši Uslove,
 // Pravilnik ili zakon (Uslovi čl. 21 st. 2, čl. 25 st. 2).
@@ -57,6 +58,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   ]);
 
   await logAdminAkcija(session.user.id, "OGLAS_UKLONJEN", id, `${oglas.seller.pseudonim} — ${oglas.title}: ${razlog}`);
+
+  // Oglas uklonjen zbog povrede Uslova pre nego što je doprinos evidentiran →
+  // zabeleženi doprinos propada (Pravilnik čl. 40a st. 4). Već evidentiran se NE
+  // dira: zapis POEN-a je nastao i ne poništava se unazad.
+  await ponistiZabelezen(id, session.user.id);
 
   // Obaveštenje vlasniku sa razlogom NIJE opcija nego obaveza (čl. 25 st. 2).
   // Jedan poziv pokriva zvonce, push i email.

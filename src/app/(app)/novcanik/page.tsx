@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { sesija } from "@/lib/sesija";
 import NovcanikKartice from "./NovcanikKartice";
 import IstorijaTransakcija, { IstorijaSkeleton } from "./IstorijaTransakcija";
+import { dohvatiZabelezen } from "@/lib/protokol/doprinos-sadrzaju";
 
 export default async function NovcanikPage({
   searchParams,
@@ -18,15 +19,18 @@ export default async function NovcanikPage({
 
   // Laki upiti potrebni za gornju karticu (stanje POEN). ZRNO kartica je
   // privremeno uklonjena iz Novčanika (ostaje dostupna preko sidebara /zrno).
-  const [wallet, dbUser] = await Promise.all([
+  const [wallet, dbUser, zabelezenDoprinos] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
     }),
     prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { memberHash: true },
+      select: { memberHash: true, tipKorisnika: true },
     }),
+    // Zabeležen doprinos vidi SAMO vlasnik naloga (Pravilnik čl. 67) i nikad se
+    // ne sabira sa stanjem — do evidentiranja to nije zapis POEN-a (čl. 40a st. 3).
+    dohvatiZabelezen(session.user.id),
   ]);
 
   return (
@@ -38,6 +42,10 @@ export default async function NovcanikPage({
         platiPseudonim={plati ?? primalac}
         prefillIznos={iznos}
         prefillOpis={description}
+        zabelezenDoprinos={zabelezenDoprinos}
+        // Neverifikovani u ažuriranju evidencije učestvuje samo kao primalac
+        // (čl. 28 st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto.
+        smeDaSalje={dbUser?.tipKorisnika !== "NEVERIFIKOVAN"}
       />
 
       {/* Istorija transakcija je najteži upit (100 redova + ugnežđeni JOIN-ovi):

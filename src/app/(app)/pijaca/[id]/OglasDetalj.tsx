@@ -185,6 +185,15 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
             <p className="text-sm text-kolo-muted leading-relaxed whitespace-pre-line">{oglas.description}</p>
           )}
 
+          {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.0). Vide je i
+              neprijavljeni posetioci — pregled oglasa je javan, pa i upozorenje
+              mora biti. Za razmenu odgovaraju sami korisnici (Pravilnik čl. 16). */}
+          {!oglas.sellerVerified && (
+            <p className="text-xs text-kolo-gold-600 bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2">
+              {t("oznaka_neverifikovan_opis")}
+            </p>
+          )}
+
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
             <span>{jePotraznja ? t("narucilac") : t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>
             {oglas.location && <span>{t("lokacija")}: <strong className="text-kolo-muted">{oglas.location}</strong></span>}
@@ -236,7 +245,7 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
             <div className="space-y-2">
               {!isVerified ? (
                 <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 text-sm text-kolo-gold-600">
-                  <Link href="/tabla-jemstva" className="font-semibold hover:underline">{t("zatrazi_verifikaciju_kupovina")}</Link>{" "}
+                  <Link href="/verifikacija" className="font-semibold hover:underline">{t("zatrazi_verifikaciju_kupovina")}</Link>{" "}
                   {t("zatrazi_verifikaciju_kupovina_tekst")}
                 </div>
               ) : (

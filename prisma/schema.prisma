@@ -54,8 +54,8 @@ enum TipOglasa {
 
 // Varijanta cene na oglasu Pijace (bira je oglašivač).
 enum CenaTip {
-  FIKSNA  // jedan iznos
-  RASPON  // od–do
+  FIKSNA // jedan iznos
+  RASPON // od–do
   DOGOVOR // bez iznosa, „po dogovoru"
 }
 
@@ -71,6 +71,7 @@ enum TransactionType {
   UPIS_ZRNO
   OTPIS_ZRNO
   EMISIJA_OSNIVACKI
+  EMISIJA_SADRZAJ // doprinos sadržaju platforme (Pravilnik čl. 15 t. 8, čl. 40a)
 }
 
 enum TipKorisnika {
@@ -106,8 +107,8 @@ enum PredlogStatus {
 
 // Stanje izvršenja usvojene odluke Gornjeg Kola (čl. 17, 18)
 enum IzvrsenjeStatus {
-  ZA_IZVRSENJE      // usvojeno, čeka izvršenje od strane Fondacije
-  IZVRSENO          // Fondacija izvršila odluku
+  ZA_IZVRSENJE // usvojeno, čeka izvršenje od strane Fondacije
+  IZVRSENO // Fondacija izvršila odluku
   VETO_OBUSTAVLJENO // izvršenje obustavljeno zaštitnim vetom (čl. 18, 48)
 }
 
@@ -203,117 +204,118 @@ enum OglasPrijavaStatus {
 // ─── Modeli ───────────────────────────────────────────────────────────────────
 
 model User {
-  id                 String    @id @default(uuid())
-  email              String?   @unique
-  passwordHash       String?
-  oauthProvider      String?
-  oauthId            String?
-  oauthPending       Boolean   @default(false)
-  pseudonim          String    @unique
+  id                               String                    @id @default(uuid())
+  email                            String?                   @unique
+  passwordHash                     String?
+  oauthProvider                    String?
+  oauthId                          String?
+  oauthPending                     Boolean                   @default(false)
+  pseudonim                        String                    @unique
   // Pseudonim u malim slovima — jedini ključ po kome se pseudonim traži i po kome
   // se čuva jedinstvenost. Bez ovoga bi "Marko" i "marko" bila dva različita naloga
   // (Postgres `@unique` je osetljiv na veličinu slova), što je i rupa za imitaciju i
   // dvosmislenost otkad adresa profila glasi `/profil/<pseudonim>`. Prikazuje se
   // uvek `pseudonim` (sa velikim slovima kako ga je korisnik upisao).
   // Održava se ISKLJUČIVO preko `src/lib/pseudonim.ts` — ne upisivati ručno.
-  pseudonimLower     String    @unique
+  pseudonimLower                   String                    @unique
   // Trajni donatorski broj člana — osnova poziva na broj (model 97) za uplate
   // (IPS QR + klasična uplatnica). Redni broj po datumu registracije (backfill u
   // migraciji), novi nalozi dobijaju sledeći iz sekvence. Ostaje i posle
   // anonimizacije naloga (neidentifikujući, kao i interni id).
-  donatorskiBroj     Int       @unique @default(autoincrement())
-  status             UserStatus @default(ACTIVE)
-  suspendedAt        DateTime?
-  suspendedReason    String?
-  verified           Boolean   @default(false)
-  verifiedAt         DateTime?
-  tipKorisnika           TipKorisnika @default(NEVERIFIKOVAN)
-  admin                  AdminNivo    @default(NONE)
+  donatorskiBroj                   Int                       @unique @default(autoincrement())
+  status                           UserStatus                @default(ACTIVE)
+  suspendedAt                      DateTime?
+  suspendedReason                  String?
+  verified                         Boolean                   @default(false)
+  verifiedAt                       DateTime?
+  tipKorisnika                     TipKorisnika              @default(NEVERIFIKOVAN)
+  admin                            AdminNivo                 @default(NONE)
   // Oznaka početnog nosioca ZRNA (osnivač). Zaseban marker pored tipKorisnika —
   // status NOSILAC_ZRNA može steći i običan korisnik upisom ZRNA, pa nije pouzdan
   // pokazatelj osnivača. Osnivač NE sme da verifikuje drugog osnivača (anti-malverzacija).
-  jeOsnivac              Boolean      @default(false)
-  indeksStvarnosti       Int          @default(0)
-  slotoviPotroseni       Int          @default(0)
-  pocetnaEmisijaIzvrsena Boolean      @default(false)
-  pseudonimChangedAt DateTime?
+  jeOsnivac                        Boolean                   @default(false)
+  indeksStvarnosti                 Int                       @default(0)
+  slotoviPotroseni                 Int                       @default(0)
+  pocetnaEmisijaIzvrsena           Boolean                   @default(false)
+  pseudonimChangedAt               DateTime?
   // "Viđeno" vremena za sidebar badge-eve: badge broji samo stavke novije od ovog
   // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
-  vidjenoNovcanikAt  DateTime?
-  vidjenoPijacaAt    DateTime?
-  memberHash         String    @unique
-  location           String?
-  telefon            String?
-  avatar             String?
+  vidjenoNovcanikAt                DateTime?
+  vidjenoPijacaAt                  DateTime?
+  memberHash                       String                    @unique
+  location                         String?
+  telefon                          String?
+  avatar                           String?
   // Izabrani jezik korisnika (next-intl locale): "sr" | "sr-Cyrl" | "en" | "hu".
   // Koristi se za jezik notifikacija/email-ova i podrazumevani prikaz po prijavi.
-  jezik              String    @default("sr")
+  jezik                            String                    @default("sr")
   // Email obaveštenja o događajima koji traže pažnju (verifikacija, odluke o
   // prijavama, nove poruke...). Opt-out: podrazumevano uključeno, korisnik gasi
   // u profilu ili linkom iz mejla. NE utiče na sistemske mejlove bez kojih nalog
   // ne radi (reset lozinke) — oni idu uvek.
-  emailObavestenja   Boolean   @default(true)
+  emailObavestenja                 Boolean                   @default(true)
   // Trajni token za odjavu iz mejlova bez prijave (link u podnožju svakog mejla).
   // Generiše se lenjo, pri prvom slanju. Ne otkriva identitet ni email adresu.
-  emailOdjavaToken   String?   @unique
-  deaktiviranAt      DateTime?
-  pristankiPolitike  PolitikaPrihvatanje[]
-  pristankiPravilnika PravilnikPrihvatanje[]
-  osnivacZapis        Osnivac?                   @relation("Osnivac")
-  kreiraniTroskovi    FondacijaTrosak[]          @relation("KreiraoTrosak")
-  wallet             Wallet?
-  podaci                 UserPodaci?
-  donations              DonationRecord[]
-  kreiraniPokrovitelji   Pokrovitelj[]              @relation("AdminKreiraoP")
-  vlasnikPokrovitelja    Pokrovitelj[]              @relation("VlasnikP")
-  evidentiraniDoprinosi  PokroviteljDoprinos[]      @relation("EvidentiraoDoprinos")
-  pokroviteljBonusi      PokroviteljBonusEmisija[]  @relation("PrimalacBonusa")
-  kreiraniOglasi         DoprinosOglas[]            @relation("KreiraniOglasi")
-  oglasPrijave           OglasPrijava[]             @relation("OglasPrijave")
-  oglasEvidencije        OglasEvidencija[]          @relation("OglasEvidencije")
-  listings               MarketplaceListing[]       @relation("SellerListings")
-  purchases              MarketplaceListing[]       @relation("BuyerListings")
-  prijaveOglasa          PrijavaOglasa[]            @relation("PrijaviocOglasa")
-  praceneKategorije      FollowedCategory[]
-  krugClanstva   KrugClanstvo[]
-  pristupnice            KrugPristupnica[]
-  osnivanjeZahtevi       KrugOsnivanjeZahtev[] @relation("Inicijator")
-  programEnrollments     ProgramEnrollment[]
-  programPotvrde         ProgramPotvrda[]           @relation("VerifikatorPotvrda")
-  zrnoStanje             ZrnoStanje?
-  zrnoUpisZahtevi        ZrnoUpisZahtev[]
-  zrnoOtpisZahtevi       ZrnoOtpisZahtev[]
-  zrnoStatusZahtevi      ZrnoStatusZahtev[]
-  delegiraoKome          ZrnoDelegacija?            @relation("Delegator")
-  delegatZa              ZrnoDelegacija[]           @relation("Delegat")
-  zakazanZaDelegata      ZrnoDelegacija[]           @relation("ZakazaniDelegat")
-  kreiraniPredlozi       GlasanjePredlog[]
-  glasovi                GlasanjeGlas[]
-  auditLogs              AuditLog[]                 @relation("AdminActions")
-  aktivnosti             AktivnostLog[]
-  notifikacije           Notifikacija[]
-  pushPretplate          PushPretplata[]
-  konverzacije1          Konverzacija[]             @relation("KonvUser1")
-  konverzacije2          Konverzacija[]             @relation("KonvUser2")
-  porukePoslate          Poruka[]                   @relation("PorukePostavljene")
-  prigovori              PrigovorNaOdluku[]
-  blogObjave             BlogPost[]                 @relation("BlogAutor")
-  chatPoruke             ChatMessage[]              @relation("ChatPoruke")
-  passwordResetTokens    PasswordResetToken[]
-  verifikacijeKojeSamObavio       VerifikacionaVeza[] @relation("Verifikator")
-  verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[] @relation("Verifikovani")
-  nadzori                         VerifikacionaVeza[] @relation("Nadzornik")
-  verifikacijaTokeni              VerifikacijaToken[]
-  zabranjenaZona                  VerifikacionaZona[] @relation("ZonaVlasnik")
-  uTudjimZonama                   VerifikacionaZona[] @relation("ZonaZabranjeni")
-  zahteviZaJemstvo                ZahtevZaJemstvo[]
-  prepoznavanja                   Prepoznavanje[]
-  pokroviteljPrijave              PokroviteljPrijava[]       @relation("PodnosilacPrijave")
-  prijavljeniBagovi               Bug[]                      @relation("PrijaviocBaga")
-  sistemskaObavestenja            SistemskoObavestenje[]     @relation("KreiraoObavestenje")
-  pseudonimIstorija               PseudonimIstorija[]
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
+  emailOdjavaToken                 String?                   @unique
+  deaktiviranAt                    DateTime?
+  pristankiPolitike                PolitikaPrihvatanje[]
+  pristankiPravilnika              PravilnikPrihvatanje[]
+  osnivacZapis                     Osnivac?                  @relation("Osnivac")
+  kreiraniTroskovi                 FondacijaTrosak[]         @relation("KreiraoTrosak")
+  wallet                           Wallet?
+  podaci                           UserPodaci?
+  donations                        DonationRecord[]
+  kreiraniPokrovitelji             Pokrovitelj[]             @relation("AdminKreiraoP")
+  vlasnikPokrovitelja              Pokrovitelj[]             @relation("VlasnikP")
+  evidentiraniDoprinosi            PokroviteljDoprinos[]     @relation("EvidentiraoDoprinos")
+  pokroviteljBonusi                PokroviteljBonusEmisija[] @relation("PrimalacBonusa")
+  kreiraniOglasi                   DoprinosOglas[]           @relation("KreiraniOglasi")
+  oglasPrijave                     OglasPrijava[]            @relation("OglasPrijave")
+  oglasEvidencije                  OglasEvidencija[]         @relation("OglasEvidencije")
+  listings                         MarketplaceListing[]      @relation("SellerListings")
+  purchases                        MarketplaceListing[]      @relation("BuyerListings")
+  prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
+  doprinosSadrzaju                 DoprinosSadrzaju?
+  praceneKategorije                FollowedCategory[]
+  krugClanstva                     KrugClanstvo[]
+  pristupnice                      KrugPristupnica[]
+  osnivanjeZahtevi                 KrugOsnivanjeZahtev[]     @relation("Inicijator")
+  programEnrollments               ProgramEnrollment[]
+  programPotvrde                   ProgramPotvrda[]          @relation("VerifikatorPotvrda")
+  zrnoStanje                       ZrnoStanje?
+  zrnoUpisZahtevi                  ZrnoUpisZahtev[]
+  zrnoOtpisZahtevi                 ZrnoOtpisZahtev[]
+  zrnoStatusZahtevi                ZrnoStatusZahtev[]
+  delegiraoKome                    ZrnoDelegacija?           @relation("Delegator")
+  delegatZa                        ZrnoDelegacija[]          @relation("Delegat")
+  zakazanZaDelegata                ZrnoDelegacija[]          @relation("ZakazaniDelegat")
+  kreiraniPredlozi                 GlasanjePredlog[]
+  glasovi                          GlasanjeGlas[]
+  auditLogs                        AuditLog[]                @relation("AdminActions")
+  aktivnosti                       AktivnostLog[]
+  notifikacije                     Notifikacija[]
+  pushPretplate                    PushPretplata[]
+  konverzacije1                    Konverzacija[]            @relation("KonvUser1")
+  konverzacije2                    Konverzacija[]            @relation("KonvUser2")
+  porukePoslate                    Poruka[]                  @relation("PorukePostavljene")
+  prigovori                        PrigovorNaOdluku[]
+  blogObjave                       BlogPost[]                @relation("BlogAutor")
+  chatPoruke                       ChatMessage[]             @relation("ChatPoruke")
+  passwordResetTokens              PasswordResetToken[]
+  verifikacijeKojeSamObavio        VerifikacionaVeza[]       @relation("Verifikator")
+  verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[]       @relation("Verifikovani")
+  nadzori                          VerifikacionaVeza[]       @relation("Nadzornik")
+  verifikacijaTokeni               VerifikacijaToken[]
+  zabranjenaZona                   VerifikacionaZona[]       @relation("ZonaVlasnik")
+  uTudjimZonama                    VerifikacionaZona[]       @relation("ZonaZabranjeni")
+  zahteviZaJemstvo                 ZahtevZaJemstvo[]
+  prepoznavanja                    Prepoznavanje[]
+  pokroviteljPrijave               PokroviteljPrijava[]      @relation("PodnosilacPrijave")
+  prijavljeniBagovi                Bug[]                     @relation("PrijaviocBaga")
+  sistemskaObavestenja             SistemskoObavestenje[]    @relation("KreiraoObavestenje")
+  pseudonimIstorija                PseudonimIstorija[]
+  createdAt                        DateTime                  @default(now())
+  updatedAt                        DateTime                  @updatedAt
 }
 
 /// Napušteni pseudonimi. Dve svrhe, obe posledica toga što pseudonim stoji u
@@ -372,13 +374,13 @@ model SistemskoObavestenje {
 }
 
 model PasswordResetToken {
-  id         String    @id @default(uuid())
-  userId     String
-  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tokenHash  String    @unique
-  expiresAt  DateTime
-  usedAt     DateTime?
-  createdAt  DateTime  @default(now())
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
 
   @@index([userId])
   @@index([expiresAt])
@@ -393,108 +395,114 @@ model UserPodaci {
   updatedAt DateTime @updatedAt
 
   // Vidljivost profila
-  prikaziLokaciju      Boolean @default(true)
-  prikaziOpis          Boolean @default(false)
-  prikaziPunoIme       Boolean @default(false)
-  prikaziTelefon       Boolean @default(false)
-  prikaziBilans        Boolean @default(true)
-  prikaziZrno          Boolean @default(true)
-  prikaziRangDonacija  Boolean @default(true)
-  prikaziOglase        Boolean @default(true)
+  prikaziLokaciju     Boolean @default(true)
+  prikaziOpis         Boolean @default(false)
+  prikaziPunoIme      Boolean @default(false)
+  prikaziTelefon      Boolean @default(false)
+  prikaziBilans       Boolean @default(true)
+  prikaziZrno         Boolean @default(true)
+  prikaziRangDonacija Boolean @default(true)
+  prikaziOglase       Boolean @default(true)
 }
 
 model Wallet {
-  id          String        @id @default(uuid())
-  userId      String?       @unique
-  user        User?         @relation(fields: [userId], references: [id])
-  krugId String?       @unique
-  krug   Krug?    @relation("KrugWallet", fields: [krugId], references: [id])
-  balance     Int           @default(0)
-  type        WalletType
-  outgoingTx  Transaction[] @relation("FromWallet")
-  incomingTx  Transaction[] @relation("ToWallet")
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id         String        @id @default(uuid())
+  userId     String?       @unique
+  user       User?         @relation(fields: [userId], references: [id])
+  krugId     String?       @unique
+  krug       Krug?         @relation("KrugWallet", fields: [krugId], references: [id])
+  balance    Int           @default(0)
+  type       WalletType
+  outgoingTx Transaction[] @relation("FromWallet")
+  incomingTx Transaction[] @relation("ToWallet")
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 }
 
 model Transaction {
-  id           String          @id @default(uuid())
-  fromWalletId String?
-  fromWallet   Wallet?         @relation("FromWallet", fields: [fromWalletId], references: [id])
-  toWalletId   String
-  toWallet     Wallet          @relation("ToWallet", fields: [toWalletId], references: [id])
-  amount       Int
-  type         TransactionType
-  /** Gotov srpski opis — UVEK popunjen (rezerva i stari redovi). */
-  description  String?
-  /** Ključ u messages/*.json, npr. "transakcije.verifikacija". */
-  opisKljuc    String?
-  /** Vrednosti za {pseudonim}, {iznos}, {krug}... */
+  id            String          @id @default(uuid())
+  fromWalletId  String?
+  fromWallet    Wallet?         @relation("FromWallet", fields: [fromWalletId], references: [id])
+  toWalletId    String
+  toWallet      Wallet          @relation("ToWallet", fields: [toWalletId], references: [id])
+  amount        Int
+  type          TransactionType
+  /**
+   * Gotov srpski opis — UVEK popunjen (rezerva i stari redovi).
+   */
+  description   String?
+  /**
+   * Ključ u messages/*.json, npr. "transakcije.verifikacija".
+   */
+  opisKljuc     String?
+  /**
+   * Vrednosti za {pseudonim}, {iznos}, {krug}...
+   */
   opisParametri Json?
-  createdAt    DateTime        @default(now())
+  createdAt     DateTime        @default(now())
 }
 
 model Krug {
-  id             String          @id @default(uuid())
-  name           String          @unique
+  id             String            @id @default(uuid())
+  name           String            @unique
   description    String?
   location       String?
-  status         KrugStatus @default(ACTIVE)
-  wallet         Wallet?         @relation("KrugWallet")
+  status         KrugStatus        @default(ACTIVE)
+  wallet         Wallet?           @relation("KrugWallet")
   memberships    KrugClanstvo[]
   pristupnice    KrugPristupnica[]
   projects       KrugProjekat[]
   bonusLogs      KrugBonusLog[]
-  doprinosOglasi DoprinosOglas[] @relation("KrugOglasi")
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
+  doprinosOglasi DoprinosOglas[]   @relation("KrugOglasi")
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
 }
 
 model KrugClanstvo {
-  id          String    @id @default(uuid())
-  userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  krugId String
-  krug   Krug @relation(fields: [krugId], references: [id])
-  isAdmin     Boolean   @default(false)
-  joinedAt    DateTime  @default(now())
-  leftAt      DateTime?
+  id       String    @id @default(uuid())
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
+  krugId   String
+  krug     Krug      @relation(fields: [krugId], references: [id])
+  isAdmin  Boolean   @default(false)
+  joinedAt DateTime  @default(now())
+  leftAt   DateTime?
 
   @@index([userId, leftAt])
   @@index([krugId, leftAt])
 }
 
 model KrugOsnivanjeZahtev {
-  id              String                   @id @default(uuid())
+  id              String              @id @default(uuid())
   name            String
   description     String?
   location        String?
   inicijatorId    String
-  inicijator      User                     @relation("Inicijator", fields: [inicijatorId], references: [id])
+  inicijator      User                @relation("Inicijator", fields: [inicijatorId], references: [id])
   osnivaci        String[]
   status          KrugOsnivanjeStatus @default(PENDING)
   rejectionReason String?
   reviewedAt      DateTime?
   reviewedById    String?
-  createdAt       DateTime                 @default(now())
+  createdAt       DateTime            @default(now())
 }
 
 model KrugPristupnica {
-  id          String            @id @default(uuid())
-  userId      String
-  user        User              @relation(fields: [userId], references: [id])
-  krugId String
-  krug   Krug         @relation(fields: [krugId], references: [id])
-  status      PristupnicaStatus @default(PENDING)
-  createdAt   DateTime          @default(now())
+  id        String            @id @default(uuid())
+  userId    String
+  user      User              @relation(fields: [userId], references: [id])
+  krugId    String
+  krug      Krug              @relation(fields: [krugId], references: [id])
+  status    PristupnicaStatus @default(PENDING)
+  createdAt DateTime          @default(now())
 
   @@unique([userId, krugId])
 }
 
 model KrugProjekat {
   id          String      @id @default(uuid())
-  krugId String
-  krug   Krug   @relation(fields: [krugId], references: [id])
+  krugId      String
+  krug        Krug        @relation(fields: [krugId], references: [id])
   type        ProjectType
   title       String
   description String
@@ -504,58 +512,59 @@ model KrugProjekat {
 }
 
 model KrugBonusLog {
-  id          String    @id @default(uuid())
-  krugId String
-  krug   Krug @relation(fields: [krugId], references: [id])
-  threshold   Int
-  amount      Int
-  createdAt   DateTime  @default(now())
+  id        String   @id @default(uuid())
+  krugId    String
+  krug      Krug     @relation(fields: [krugId], references: [id])
+  threshold Int
+  amount    Int
+  createdAt DateTime @default(now())
 
   // Svaki prag rasta kruga se isplaćuje tačno jednom (race-safe rezervacija praga).
   @@unique([krugId, threshold])
 }
 
 model MarketplaceListing {
-  id          String        @id @default(uuid())
-  sellerId    String
-  seller      User          @relation("SellerListings", fields: [sellerId], references: [id])
-  buyerId     String?
-  buyer       User?         @relation("BuyerListings", fields: [buyerId], references: [id])
+  id             String        @id @default(uuid())
+  sellerId       String
+  seller         User          @relation("SellerListings", fields: [sellerId], references: [id])
+  buyerId        String?
+  buyer          User?         @relation("BuyerListings", fields: [buyerId], references: [id])
   // Smer oglasa (ponuda vs potražnja). Kod POTRAZNJA je cenaTip uvek DOGOVOR.
-  tip         TipOglasa     @default(PONUDA)
-  title       String
-  description String
+  tip            TipOglasa     @default(PONUDA)
+  title          String
+  description    String
   // Cena ima tri varijante (bira ih oglašivač):
   //  - FIKSNA  → jedan iznos u `price` (cenaDo = null)
   //  - RASPON  → `price` = donja granica, `cenaDo` = gornja granica
   //  - DOGOVOR → bez iznosa („po dogovoru"); price = cenaDo = null
   // `price` (donja granica/fiksna cena) ostaje numerička osnova za sortiranje i min/max filter.
-  cenaTip     CenaTip       @default(FIKSNA)
-  price       Int?
-  cenaDo      Int?
+  cenaTip        CenaTip       @default(FIKSNA)
+  price          Int?
+  cenaDo         Int?
   // Opciona jedinica mere za cenu (kom, kg, g, l, ml, m, pak) i stanje na zalihama.
   // Oba su informativna — ne utiču na tok kupovine (oglas se i dalje kupuje u celosti).
-  jedinica    String?
-  kolicina    Int?
-  category    String
-  images      String[]
-  location    String?
-  phone       String?
-  status      ListingStatus @default(ACTIVE)
-  soldAt      DateTime?
+  jedinica       String?
+  kolicina       Int?
+  category       String
+  images         String[]
+  location       String?
+  phone          String?
+  status         ListingStatus @default(ACTIVE)
+  soldAt         DateTime?
   // Broj otvaranja stranice oglasa. Ne broje se pregledi samog oglašivača, a
   // isti posetilac se broji jednom dnevno (guard je u pretraživaču). Vidi ga
   // SAMO oglašivač — povratna informacija da oglas nije otišao u prazno.
-  pregledi    Int           @default(0)
+  pregledi       Int           @default(0)
   // Uklanjanje od strane Fondacije (Uslovi čl. 21 st. 2 i čl. 25 st. 2). Razlog je
   // obavezan jer se korisniku mora saopštiti — nije opcioni komentar za internu upotrebu.
   uklonjenAt     DateTime?
   uklonjenRazlog String?
   uklonioId      String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 
-  prijave     PrijavaOglasa[]
+  prijave   PrijavaOglasa[]
+  doprinosi DoprinosSadrzaju[]
 
   @@index([status, category, createdAt])
   @@index([status, tip, createdAt])
@@ -585,20 +594,74 @@ model PrijavaOglasa {
   @@index([oglasId])
 }
 
-/** Razlozi prijave — prate zabrane iz Uslova čl. 20, 21, 22 i 24. */
+/**
+ * Razlozi prijave — prate zabrane iz Uslova čl. 20, 21, 22 i 24.
+ */
 enum PrijavaRazlog {
   ZABRANJENO_DOBRO // čl. 21 — dobra/usluge čiji je promet zabranjen
-  OBMANA           // čl. 20 — lažan ili obmanjujuć prikaz dobra/usluge
-  UVREDLJIVO       // čl. 22 — uznemiravanje, pretnje, diskriminacija
-  LICNI_PODACI     // čl. 24 — lični podaci trećih lica
-  PREVARA          // čl. 24 — prevara, manipulacija, nezakonita aktivnost
+  OBMANA // čl. 20 — lažan ili obmanjujuć prikaz dobra/usluge
+  UVREDLJIVO // čl. 22 — uznemiravanje, pretnje, diskriminacija
+  LICNI_PODACI // čl. 24 — lični podaci trećih lica
+  PREVARA // čl. 24 — prevara, manipulacija, nezakonita aktivnost
   DRUGO
 }
 
 enum PrijavaOglasaStatus {
   OTVORENA
-  RESENA   // oglas uklonjen povodom prijave
+  RESENA // oglas uklonjen povodom prijave
   ODBACENA // pregledano, nema povrede
+}
+
+/// Stanje doprinosa sadržaju platforme (Pravilnik čl. 40a st. 3).
+/// ZABELEZEN nije zapis POEN-a — do evidentiranja ne ulazi ni u jedno stanje
+/// računa, ni u opticaj, ni u javne agregate. To razdvajanje je pravno srce
+/// kanala: drži zero-sum i sve pragove sistema van domašaja praznih naloga.
+enum DoprinosStatus {
+  ZABELEZEN
+  EVIDENTIRAN
+  PONISTEN // oglas uklonjen zbog povrede Uslova pre evidentiranja (čl. 40a st. 4)
+}
+
+/// Događaj koji je pretvorio zabeležen doprinos u zapis POEN-a (čl. 40a st. 3).
+enum DoprinosOkidac {
+  VERIFIKACIJA
+  PRIMLJEN_POEN
+}
+
+/// Doprinos sadržaju platforme — osmi kanal evidentiranja (Pravilnik čl. 15 t. 8,
+/// čl. 40a). Korisniku se jednokratno evidentira 1.000 POEN-a za prvi oglas kojim
+/// nudi dobro ili uslugu i koji ispunjava sadržinski minimum iz Uslova.
+///
+/// `userId` je @unique — jednokratnost kanala po čoveku obezbeđuje BAZA, ne kod.
+/// Bez toga bi dve paralelne objave oglasa mogle da zabeleže dva doprinosa.
+///
+/// Evidentiranje je automatski akt Protokola i NE ulazi u dnevni limit (čl. 40a st. 5).
+model DoprinosSadrzaju {
+  id     String @id @default(uuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// Oglas povodom kog je doprinos zabeležen. Ostaje i posle brisanja oglasa
+  /// (SetNull) — činjenica doprinosa se ne gubi sa sadržajem.
+  oglasId String?
+  oglas   MarketplaceListing? @relation(fields: [oglasId], references: [id], onDelete: SetNull)
+
+  iznos  Int             @default(1000)
+  status DoprinosStatus  @default(ZABELEZEN)
+  okidac DoprinosOkidac?
+
+  /// Transakcija kojom je doprinos evidentiran u Protokolu (postoji tek u EVIDENTIRAN).
+  transakcijaId String?
+
+  zabelezenAt      DateTime  @default(now())
+  evidentiranAt    DateTime?
+  ponistenAt       DateTime?
+  /// Ko je okinuo evidentiranje — verifikator, odnosno pošiljalac POEN-a.
+  /// Plain string (bez FK) — služi osmatranju obrasca iz odeljka 05, ne integritetu.
+  okidacKorisnikId String?
+
+  @@index([status])
+  @@index([okidacKorisnikId, evidentiranAt])
 }
 
 // Kategorije Pijace koje korisnik prati (čipovi u profilu). Pri objavi oglasa
@@ -624,22 +687,22 @@ model ProtokolProgram {
 }
 
 model ProgramEnrollment {
-  id                    String               @id @default(uuid())
+  id                    String           @id @default(uuid())
   userId                String
-  user                  User                 @relation(fields: [userId], references: [id])
+  user                  User             @relation(fields: [userId], references: [id])
   type                  ProgramType
-  status                EnrollmentStatus     @default(PENDING)
+  status                EnrollmentStatus @default(PENDING)
   metadata              Json?
   dailyAmount           Int?
   // Izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova
   // (Pravilnik o programima podrške čl. 4 — pravni osnov obrade je pristanak).
-  pristanakVerifikatori Boolean              @default(false)
+  pristanakVerifikatori Boolean          @default(false)
   approvedById          String?
   approvedAt            DateTime?
   rejectionReason       String?
   nextReverifikacija    DateTime?
-  createdAt             DateTime             @default(now())
-  updatedAt             DateTime             @updatedAt
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
   potvrde               ProgramPotvrda[]
 
   @@unique([userId, type])
@@ -668,7 +731,7 @@ model ProgramPotvrda {
 
 model DailyEmissionSummary {
   id             String   @id @default(uuid())
-  date           DateTime @db.Date @unique
+  date           DateTime @unique @db.Date
   opticaj        Int
   limit          Int
   totalRequested Int
@@ -681,24 +744,24 @@ model DailyEmissionSummary {
 // ─── Program Doprinosa Zajedničkom Dobru — Oglasi ─────────────────────────────
 
 model DoprinosOglas {
-  id             String        @id @default(uuid())
+  id             String            @id @default(uuid())
   title          String
   description    String
   source         OglasSource
-  predlozeniPoen Int           // predloženi POEN za potpuno izvršenje (čl. 5/6) — težinski koeficijent, nije garantovan iznos; 0 = bez ograničenja zbira dnevnih izvršenja
-  obrazlozenje   String?       // obrazloženje predloženog POEN-a (čl. 6)
-  saOdobravanjem Boolean       @default(false) // čl. 14 — prijava primljena tek po izričitom odobrenju plana izvršenja
-  positions      Int           @default(1)
-  deadline       DateTime?     // rok za prijavu
-  status         OglasStatus   @default(ACTIVE)
+  predlozeniPoen Int // predloženi POEN za potpuno izvršenje (čl. 5/6) — težinski koeficijent, nije garantovan iznos; 0 = bez ograničenja zbira dnevnih izvršenja
+  obrazlozenje   String? // obrazloženje predloženog POEN-a (čl. 6)
+  saOdobravanjem Boolean           @default(false) // čl. 14 — prijava primljena tek po izričitom odobrenju plana izvršenja
+  positions      Int               @default(1)
+  deadline       DateTime? // rok za prijavu
+  status         OglasStatus       @default(ACTIVE)
   createdById    String
-  createdBy      User          @relation("KreiraniOglasi", fields: [createdById], references: [id])
-  krugId    String?
-  krug      Krug?    @relation("KrugOglasi", fields: [krugId], references: [id])
+  createdBy      User              @relation("KreiraniOglasi", fields: [createdById], references: [id])
+  krugId         String?
+  krug           Krug?             @relation("KrugOglasi", fields: [krugId], references: [id])
   prijave        OglasPrijava[]
   evidencije     OglasEvidencija[]
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
 
   @@index([status, createdAt(sort: Desc)])
 }
@@ -709,7 +772,7 @@ model OglasPrijava {
   oglas           DoprinosOglas      @relation(fields: [oglasId], references: [id])
   userId          String
   user            User               @relation("OglasPrijave", fields: [userId], references: [id])
-  planIzvrsenja   String?            // plan izvršenja (čl. 11) — obavezan za zadatke „sa odobravanjem"
+  planIzvrsenja   String? // plan izvršenja (čl. 11) — obavezan za zadatke „sa odobravanjem"
   status          OglasPrijavaStatus @default(PENDING)
   approvedById    String?
   approvedAt      DateTime?
@@ -722,22 +785,22 @@ model OglasPrijava {
 }
 
 model OglasEvidencija {
-  id           String             @id @default(uuid())
-  userId       String
-  user         User               @relation("OglasEvidencije", fields: [userId], references: [id])
-  oglasId      String
-  oglas        DoprinosOglas      @relation(fields: [oglasId], references: [id])
-  prijavaId    String
-  prijava      OglasPrijava       @relation(fields: [prijavaId], references: [id])
-  date         DateTime           @db.Date  // dan na koji se odnosi izvršenje
-  predlozeniPoen Int              // predloženi POEN za ovo dnevno izvršenje (čl. 18) — težina u raspodeli
-  amount       Int                @default(0) // evidentirani POEN nakon noćne raspodele (čl. 24); 0 dok nije obračunato
-  dokaz        String?            // link/opis dokaza izvršenja (čl. 18)
-  description  String
-  status       EvidencijaStatus   @default(PENDING)  // PENDING→APPROVED (potvrđeno, ulazi u raspodelu)→EMITTED / REJECTED
-  approvedById String?
-  approvedAt   DateTime?
-  createdAt    DateTime           @default(now())
+  id             String           @id @default(uuid())
+  userId         String
+  user           User             @relation("OglasEvidencije", fields: [userId], references: [id])
+  oglasId        String
+  oglas          DoprinosOglas    @relation(fields: [oglasId], references: [id])
+  prijavaId      String
+  prijava        OglasPrijava     @relation(fields: [prijavaId], references: [id])
+  date           DateTime         @db.Date // dan na koji se odnosi izvršenje
+  predlozeniPoen Int // predloženi POEN za ovo dnevno izvršenje (čl. 18) — težina u raspodeli
+  amount         Int              @default(0) // evidentirani POEN nakon noćne raspodele (čl. 24); 0 dok nije obračunato
+  dokaz          String? // link/opis dokaza izvršenja (čl. 18)
+  description    String
+  status         EvidencijaStatus @default(PENDING) // PENDING→APPROVED (potvrđeno, ulazi u raspodelu)→EMITTED / REJECTED
+  approvedById   String?
+  approvedAt     DateTime?
+  createdAt      DateTime         @default(now())
 
   @@unique([userId, oglasId, date])
   @@index([date, status])
@@ -805,7 +868,7 @@ model ZrnoStatusZahtev {
 }
 
 model ZrnoDailyRate {
-  date           DateTime @db.Date @unique
+  date           DateTime @unique @db.Date
   kurs           Decimal  @db.Decimal(20, 2)
   protokolMinus  Int
   zrnaUProtokolu Int
@@ -828,28 +891,28 @@ model ZrnoDelegacija {
 // ─── Glasanje ─────────────────────────────────────────────────────────────────
 
 model GlasanjePredlog {
-  id              String        @id @default(uuid())
-  title           String
-  description     String
-  authorId        String
-  author          User          @relation(fields: [authorId], references: [id])
-  vrsta           PredlogVrsta  @default(ODLUKA) // odluka (obavezujuća) ili dinarska preporuka (čl. 20)
-  glasanjePocetak DateTime      // ponoć narednog obračunskog perioda (čl. 11)
-  deadline        DateTime      // kraj glasanja = kraj tog perioda
-  status          PredlogStatus @default(ACTIVE)
-  ishodUsvojen    Boolean?      // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
-  zaZbir          Int?          // zbir glasačke moći „za" u trenutku zatvaranja
-  protivZbir      Int?          // zbir glasačke moći „protiv" u trenutku zatvaranja
-  izvrsenjeStatus IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
-  vetoObrazlozenje String?      // obavezno obrazloženje zaštitnog veta (čl. 18)
-  izvrsenoAt      DateTime?
-  vetoAt          DateTime?
-  uoOdgovor       UoOdgovor?    // obrazložen odgovor UO na usvojenu preporuku (čl. 20)
-  uoObrazlozenje  String?
-  uoOdgovorAt     DateTime?
-  glasovi         GlasanjeGlas[]
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  id               String           @id @default(uuid())
+  title            String
+  description      String
+  authorId         String
+  author           User             @relation(fields: [authorId], references: [id])
+  vrsta            PredlogVrsta     @default(ODLUKA) // odluka (obavezujuća) ili dinarska preporuka (čl. 20)
+  glasanjePocetak  DateTime // ponoć narednog obračunskog perioda (čl. 11)
+  deadline         DateTime // kraj glasanja = kraj tog perioda
+  status           PredlogStatus    @default(ACTIVE)
+  ishodUsvojen     Boolean? // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
+  zaZbir           Int? // zbir glasačke moći „za" u trenutku zatvaranja
+  protivZbir       Int? // zbir glasačke moći „protiv" u trenutku zatvaranja
+  izvrsenjeStatus  IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
+  vetoObrazlozenje String? // obavezno obrazloženje zaštitnog veta (čl. 18)
+  izvrsenoAt       DateTime?
+  vetoAt           DateTime?
+  uoOdgovor        UoOdgovor? // obrazložen odgovor UO na usvojenu preporuku (čl. 20)
+  uoObrazlozenje   String?
+  uoOdgovorAt      DateTime?
+  glasovi          GlasanjeGlas[]
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 }
 
 model GlasanjeGlas {
@@ -909,21 +972,21 @@ model DonationRecord {
 
   // Kartično plaćanje (NestPay: Banca Intesa / OTP). RUCNO = klasična uplata
   // na račun koju admin ručno potvrđuje. KARTICA = naplata preko gateway-a.
-  nacinUplate     String         @default("RUCNO")
-  provajder       String?
-  oid             String?        @unique
-  bankRef         String?
+  nacinUplate String  @default("RUCNO")
+  provajder   String?
+  oid         String? @unique
+  bankRef     String?
 
   // Javna vs anonimna donacija (Pravilnik o pokroviteljstvu i donacijama, čl. 3,
   // 5a). Javna donacija (true) → ime i prezime donatora vidljivi u listi donacija
   // i evidentira se POEN. Anonimna (false) → bez imena i BEZ POEN-a.
-  javno           Boolean        @default(true)
+  javno Boolean @default(true)
 
   // Ime i prezime donatora SNIMLJENO u trenutku evidentiranja javne donacije —
   // trajan zapis (kao i podaci o uplati), nezavisan od kasnijih izmena profila.
   // Lista donacija prikazuje upravo ovo polje. Null = anonimna ili istorijska
   // donacija (pre uvođenja pravila) → ne prikazuje se u listi.
-  donatorIme      String?
+  donatorIme String?
 
   @@index([status, createdAt])
 }
@@ -931,24 +994,24 @@ model DonationRecord {
 // ─── Pokrovitelji ─────────────────────────────────────────────────────────────
 
 model Pokrovitelj {
-  id             String      @id @default(uuid())
+  id             String                    @id @default(uuid())
   naziv          String
-  pib            String      @unique
+  pib            String                    @unique
   adresa         String?
   kontaktEmail   String?
   kontaktTelefon String?
   vlasnikId      String
-  vlasnik        User        @relation("VlasnikP", fields: [vlasnikId], references: [id])
+  vlasnik        User                      @relation("VlasnikP", fields: [vlasnikId], references: [id])
   kreiraoId      String
-  kreirao        User        @relation("AdminKreiraoP", fields: [kreiraoId], references: [id])
-  rsdKumulativ   Decimal     @default(0) @db.Decimal(12, 2)
-  trenutniNivo   Int         @default(0)
-  status         String      @default("ACTIVE")  // ACTIVE | SUSPENDED
+  kreirao        User                      @relation("AdminKreiraoP", fields: [kreiraoId], references: [id])
+  rsdKumulativ   Decimal                   @default(0) @db.Decimal(12, 2)
+  trenutniNivo   Int                       @default(0)
+  status         String                    @default("ACTIVE") // ACTIVE | SUSPENDED
   doprinosi      PokroviteljDoprinos[]
   bonusiEmisije  PokroviteljBonusEmisija[]
   prijave        PokroviteljPrijava[]
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
 
   @@index([vlasnikId])
   @@index([status])
@@ -982,15 +1045,15 @@ model PokroviteljPrijava {
 }
 
 model PokroviteljDoprinos {
-  id            String                  @id @default(uuid())
+  id            String        @id @default(uuid())
   pokroviteljId String
-  pokrovitelj   Pokrovitelj             @relation(fields: [pokroviteljId], references: [id])
-  rsdIznos      Decimal                 @db.Decimal(12, 2)
+  pokrovitelj   Pokrovitelj   @relation(fields: [pokroviteljId], references: [id])
+  rsdIznos      Decimal       @db.Decimal(12, 2)
   tip           VrstaDonacije
   evidentiraoId String
-  evidentirao   User                    @relation("EvidentiraoDoprinos", fields: [evidentiraoId], references: [id])
+  evidentirao   User          @relation("EvidentiraoDoprinos", fields: [evidentiraoId], references: [id])
   napomena      String?
-  createdAt     DateTime                @default(now())
+  createdAt     DateTime      @default(now())
 
   @@index([pokroviteljId, createdAt(sort: Desc)])
 }
@@ -1020,9 +1083,13 @@ model Notifikacija {
   // sklapaju rečenicu iz prevoda na jeziku primaoca (vidi src/lib/prevod-servera.ts).
   naslov    String
   tekst     String
-  /** Ključ u messages/*.json (npr. "notifikacije.transfer_primljen"). */
+  /**
+   * Ključ u messages/*.json (npr. "notifikacije.transfer_primljen").
+   */
   kljuc     String?
-  /** Vrednosti za popunjavanje ({pseudonim}, {iznos}...). */
+  /**
+   * Vrednosti za popunjavanje ({pseudonim}, {iznos}...).
+   */
   parametri Json?
   procitana Boolean  @default(false)
   link      String?
@@ -1081,10 +1148,10 @@ model Poruka {
 
 model PolitikaVerzija {
   id          String                @id @default(uuid())
-  verzija     String                @unique  // npr. "1.0", "1.1"
+  verzija     String                @unique // npr. "1.0", "1.1"
   naslov      String
   efektivnaOd DateTime
-  kreirao     String                // adminId
+  kreirao     String // adminId
   createdAt   DateTime              @default(now())
   pristanci   PolitikaPrihvatanje[]
 }
@@ -1106,10 +1173,10 @@ model PolitikaPrihvatanje {
 
 model PravilnikVerzija {
   id          String                 @id @default(uuid())
-  verzija     String                 @unique  // npr. "3.7.0"
+  verzija     String                 @unique // npr. "3.7.0"
   naslov      String
   efektivnaOd DateTime
-  kreirao     String                 // adminId
+  kreirao     String // adminId
   createdAt   DateTime               @default(now())
   pristanci   PravilnikPrihvatanje[]
 }
@@ -1130,49 +1197,49 @@ model PravilnikPrihvatanje {
 // ─── Osnivacki doprinos (Pravilnik o osnivackom doprinosu v3.7.0) ────────────
 
 model OsnivackiKanal {
-  id                 String   @id @default("singleton")
-  ukupnoEvidentirano Int      @default(0)        // ukupno POEN-a evidentirano kroz kanal (max 2.400.000)
-  brojKoraka         Int      @default(0)        // broj izvrsenih koraka (max 100)
-  zatvoren           Boolean  @default(false)    // postaje true kad brojKoraka = 120
-  zatvorenAt         DateTime?
-  poslednjiPrag      Int      @default(0)        // posljednji aktiviran prag (100.000, 200.000, ...)
-  osnivaciZakljucani Boolean  @default(false)    // admin zakljucao listu (uslov: zbir udela = 1); emisija ide samo kad je zakljucano
+  id                   String    @id @default("singleton")
+  ukupnoEvidentirano   Int       @default(0) // ukupno POEN-a evidentirano kroz kanal (max 2.400.000)
+  brojKoraka           Int       @default(0) // broj izvrsenih koraka (max 100)
+  zatvoren             Boolean   @default(false) // postaje true kad brojKoraka = 120
+  zatvorenAt           DateTime?
+  poslednjiPrag        Int       @default(0) // posljednji aktiviran prag (100.000, 200.000, ...)
+  osnivaciZakljucani   Boolean   @default(false) // admin zakljucao listu (uslov: zbir udela = 1); emisija ide samo kad je zakljucano
   osnivaciZakljucaniAt DateTime?
-  updatedAt          DateTime @updatedAt
+  updatedAt            DateTime  @updatedAt
 }
 
 model Osnivac {
-  id            String   @id @default(uuid())
-  userId        String   @unique
-  user          User     @relation("Osnivac", fields: [userId], references: [id])
-  udeoBrojilac  Int                              // npr. 50 (znaci 50/zbir)
-  udeoImenilac  Int                              // npr. 100 (znaci 50/100 = 50%)
-  redniBroj     Int      @unique                 // redosled u javnom registru
-  napomena      String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  emisije       OsnivackiKorakEmisija[]
+  id           String                  @id @default(uuid())
+  userId       String                  @unique
+  user         User                    @relation("Osnivac", fields: [userId], references: [id])
+  udeoBrojilac Int // npr. 50 (znaci 50/zbir)
+  udeoImenilac Int // npr. 100 (znaci 50/100 = 50%)
+  redniBroj    Int                     @unique // redosled u javnom registru
+  napomena     String?
+  createdAt    DateTime                @default(now())
+  updatedAt    DateTime                @updatedAt
+  emisije      OsnivackiKorakEmisija[]
 }
 
 model OsnivackiKorakLog {
-  id                  String   @id @default(uuid())
-  brojKoraka          Int      @unique           // 1, 2, ..., 100
-  prag                Int                        // POEN prag koji je aktivirao korak (100k, 200k, ...)
-  ukupanPoenUSistemu  Int                        // total POEN-a u sistemu u trenutku okidanja
-  iznosKoraka         Int      @default(24000)   // 24.000 POEN po koraku (v3.9.1)
-  createdAt           DateTime @default(now())
-  emisije             OsnivackiKorakEmisija[]
+  id                 String                  @id @default(uuid())
+  brojKoraka         Int                     @unique // 1, 2, ..., 100
+  prag               Int // POEN prag koji je aktivirao korak (100k, 200k, ...)
+  ukupanPoenUSistemu Int // total POEN-a u sistemu u trenutku okidanja
+  iznosKoraka        Int                     @default(24000) // 24.000 POEN po koraku (v3.9.1)
+  createdAt          DateTime                @default(now())
+  emisije            OsnivackiKorakEmisija[]
 }
 
 model OsnivackiKorakEmisija {
-  id           String            @id @default(uuid())
-  korakLogId   String
-  korakLog     OsnivackiKorakLog @relation(fields: [korakLogId], references: [id])
-  osnivacId    String
-  osnivac      Osnivac           @relation(fields: [osnivacId], references: [id])
-  iznosPoen    Int                                // emitovano ovom osnivacu u ovom koraku
-  transactionId String?                           // veza na Transaction
-  createdAt    DateTime          @default(now())
+  id            String            @id @default(uuid())
+  korakLogId    String
+  korakLog      OsnivackiKorakLog @relation(fields: [korakLogId], references: [id])
+  osnivacId     String
+  osnivac       Osnivac           @relation(fields: [osnivacId], references: [id])
+  iznosPoen     Int // emitovano ovom osnivacu u ovom koraku
+  transactionId String? // veza na Transaction
+  createdAt     DateTime          @default(now())
 
   @@unique([korakLogId, osnivacId])
 }
@@ -1181,24 +1248,24 @@ model OsnivackiKorakEmisija {
 
 enum FondacijaTrosakKategorija {
   PLATA
-  INFRASTRUKTURA   // hosting, domeni, serveri
-  PRAVNI_TROSAK    // advokati, sudski vestaci, registracije
-  SOFTWARE         // pretplate na alate, licence
-  ADMINISTRATIVNO  // bankarski troskovi, pisarnica, materijal
-  OPERATIVNO       // ostali operativni troskovi
+  INFRASTRUKTURA // hosting, domeni, serveri
+  PRAVNI_TROSAK // advokati, sudski vestaci, registracije
+  SOFTWARE // pretplate na alate, licence
+  ADMINISTRATIVNO // bankarski troskovi, pisarnica, materijal
+  OPERATIVNO // ostali operativni troskovi
   DRUGO
 }
 
 model FondacijaTrosak {
-  id           String                    @id @default(uuid())
-  datum        DateTime                  @db.Date
-  iznosRSD     Decimal                   @db.Decimal(12, 2)
-  kategorija   FondacijaTrosakKategorija
-  opis         String
-  dokumentUrl  String?                   // link na racun/ugovor (opciono)
-  kreiraoId    String
-  kreirao      User                      @relation("KreiraoTrosak", fields: [kreiraoId], references: [id])
-  createdAt    DateTime                  @default(now())
+  id          String                    @id @default(uuid())
+  datum       DateTime                  @db.Date
+  iznosRSD    Decimal                   @db.Decimal(12, 2)
+  kategorija  FondacijaTrosakKategorija
+  opis        String
+  dokumentUrl String? // link na racun/ugovor (opciono)
+  kreiraoId   String
+  kreirao     User                      @relation("KreiraoTrosak", fields: [kreiraoId], references: [id])
+  createdAt   DateTime                  @default(now())
 
   @@index([datum])
   @@index([kategorija, datum])
@@ -1206,10 +1273,10 @@ model FondacijaTrosak {
 
 model SistemskiVeto {
   id              String    @id @default("singleton")
-  aktivan         Boolean   @default(false)     // true kad Protokol < -1M I trajnoUgasen = false
-  trajnoUgasen    Boolean   @default(false)     // jednosmerni flag (cl. 71)
+  aktivan         Boolean   @default(false) // true kad Protokol < -1M I trajnoUgasen = false
+  trajnoUgasen    Boolean   @default(false) // jednosmerni flag (cl. 71)
   datumAktivacije DateTime?
-  datumGasenja    DateTime?                     // kada je trajnoUgasen postao true
+  datumGasenja    DateTime? // kada je trajnoUgasen postao true
   updatedAt       DateTime  @updatedAt
 }
 
@@ -1223,17 +1290,17 @@ enum PrigovorStatus {
 }
 
 model PrigovorNaOdluku {
-  id           String         @id @default(uuid())
-  userId       String
-  user         User           @relation(fields: [userId], references: [id])
-  opis         String
-  tipOdluke    String         // "VERIFIKACIJA" | "SUSPENZIJA" | "PROGRAM" | "OSTALO"
-  status       PrigovorStatus @default(PENDING)
-  odgovor      String?
-  odgovorioId  String?
-  odgovorioAt  DateTime?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id          String         @id @default(uuid())
+  userId      String
+  user        User           @relation(fields: [userId], references: [id])
+  opis        String
+  tipOdluke   String // "VERIFIKACIJA" | "SUSPENZIJA" | "PROGRAM" | "OSTALO"
+  status      PrigovorStatus @default(PENDING)
+  odgovor     String?
+  odgovorioId String?
+  odgovorioAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 
   @@index([status, createdAt(sort: Desc)])
   @@index([userId])
@@ -1257,11 +1324,11 @@ model BlogPost {
 // ─── Chat soba (globalna) ────────────────────────────────────────────────────
 
 model ChatMessage {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation("ChatPoruke", fields: [userId], references: [id])
-  content   String
-  createdAt DateTime @default(now())
+  id             String    @id @default(uuid())
+  userId         String
+  user           User      @relation("ChatPoruke", fields: [userId], references: [id])
+  content        String
+  createdAt      DateTime  @default(now())
   // Uklanjanje od strane Fondacije (Uslovi čl. 25 st. 2 — obuhvata „svu drugu
   // komunikaciju putem Platforme"). Meko brisanje: poruka nestaje iz sobe, ali
   // ostaje trag ko je i zašto uklonio dok je noćni cron ne pobriše sa ostalima.
@@ -1276,22 +1343,22 @@ model ChatMessage {
 // ─── Dokaz stvarnosti — graf verifikacija (Pravilnik v3.5.0) ─────────────────
 
 model VerifikacionaVeza {
-  id              String    @id @default(uuid())
-  verifikatorId   String
-  verifikator     User      @relation("Verifikator", fields: [verifikatorId], references: [id])
-  redniBroj       Int
-  verifikovaniId  String
-  verifikovani    User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
-  vremenskiZig    DateTime  @default(now())
+  id                 String    @id @default(uuid())
+  verifikatorId      String
+  verifikator        User      @relation("Verifikator", fields: [verifikatorId], references: [id])
+  redniBroj          Int
+  verifikovaniId     String
+  verifikovani       User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
+  vremenskiZig       DateTime  @default(now())
   // Slobodna oznaka (nadimak) koju verifikator dodeljuje verifikovanome — da bi lakše
   // pratio koga je verifikovao. NIJE javna: vidljiva samo verifikatoru i UO Fondacije
   // (admin). Ne objavljuje se drugim korisnicima i ne kači se na javnu evidenciju
   // doprinosa (Pravilnik o dokazu stvarnosti, dopuna 3.9.1; čl. 31).
   oznakaVerifikatora String?
-  nadzornikId     String?
-  nadzornik       User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
-  podlezeNadzoru  Boolean
-  nadzoranAt      DateTime?
+  nadzornikId        String?
+  nadzornik          User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
+  podlezeNadzoru     Boolean
+  nadzoranAt         DateTime?
 
   @@unique([verifikatorId, redniBroj])
   // K6: isti verifikator ne sme dvaput da verifikuje istog korisnika (anti-inflacija
@@ -1432,18 +1499,18 @@ model Prepoznavanje {
 // gašenje uvek povlači čovek. `subjektId` je plain string (bez FK na User) da
 // model ostane labavo spregnut. Status CISTO = superadmin odbacio kao lažnu uzbunu.
 model RizikNalaz {
-  id         String    @id @default(uuid())
-  tip        String    // "NALOG" | "GRUPA"
-  subjektId  String?   // userId za NALOG; null za GRUPA
-  pseudonim  String?   // za prikaz (NALOG)
-  clanovi    String?   // JSON [{id,pseudonim}] za GRUPA
-  pravila    String    // JSON [{kod,nivo,opis}]
-  rizik      Int       // ukupan skor (zbir težina pravila)
-  nivo       String    // najviši nivo: "INFO" | "UPOZORENJE" | "HITNO"
-  status     String    @default("OTVOREN") // "OTVOREN" | "CISTO"
-  resenById  String?
-  resenAt    DateTime?
-  createdAt  DateTime  @default(now())
+  id        String    @id @default(uuid())
+  tip       String // "NALOG" | "GRUPA"
+  subjektId String? // userId za NALOG; null za GRUPA
+  pseudonim String? // za prikaz (NALOG)
+  clanovi   String? // JSON [{id,pseudonim}] za GRUPA
+  pravila   String // JSON [{kod,nivo,opis}]
+  rizik     Int // ukupan skor (zbir težina pravila)
+  nivo      String // najviši nivo: "INFO" | "UPOZORENJE" | "HITNO"
+  status    String    @default("OTVOREN") // "OTVOREN" | "CISTO"
+  resenById String?
+  resenAt   DateTime?
+  createdAt DateTime  @default(now())
 
   @@index([status, rizik(sort: Desc)])
   @@index([subjektId])
@@ -1455,10 +1522,10 @@ model RizikNalaz {
 // je prijavljeno i da li se na tome radi. Status menja admin.
 
 enum BugStatus {
-  PRIJAVLJEN  // prijavljeno, još se ne radi
-  U_RADU      // radi se na tome
-  RESENO      // ispravljeno
-  ODBIJENO    // nije bag / neće se raditi
+  PRIJAVLJEN // prijavljeno, još se ne radi
+  U_RADU // radi se na tome
+  RESENO // ispravljeno
+  ODBIJENO // nije bag / neće se raditi
 }
 
 model Bug {
@@ -1468,7 +1535,7 @@ model Bug {
   naslov    String
   opis      String
   status    BugStatus @default(PRIJAVLJEN)
-  odgovor   String?   // beleška/odgovor admina (npr. zašto je odbijeno ili kad je rešeno)
+  odgovor   String? // beleška/odgovor admina (npr. zašto je odbijeno ili kad je rešeno)
   resenoAt  DateTime?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

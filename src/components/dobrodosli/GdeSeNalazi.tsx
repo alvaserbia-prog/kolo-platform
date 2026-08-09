@@ -16,7 +16,7 @@
 import { useTranslations } from "next-intl";
 
 /** Ključ stavke u `nav` prostoru imena (isti koji koristi Sidebar). */
-export type NavStavka = "verifikacija" | "tabla_jemstva" | "novcanik" | "pijaca" | "pocetna";
+export type NavStavka = "verifikacija" | "novcanik" | "pijaca" | "pocetna";
 
 export type Gde =
   | { vrsta: "meni"; stavka: NavStavka; grupa?: "grupa_poverenje" | "grupa_zajednicko_dobro" }

@@ -19,7 +19,7 @@ import GdeSeNalazi, { type Gde } from "@/components/dobrodosli/GdeSeNalazi";
 type Akcija = { href: string; ctaKey: string; gde: Gde };
 
 /** Konfiguracija ekrana: ključ u messages + akcione veze.
- *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / tabla jemstva).
+ *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / objava ponude).
  *
  *  Redosled je namerno akcioni, ne opisni: novi korisnik ima tačno jedan
  *  zadatak (da ga neko potvrdi), pa dva puta do potvrde idu odmah na ekranima
@@ -39,15 +39,15 @@ const EKRANI: { key: string; pasusi: number; akcije?: Akcija[]; finalni?: boolea
       },
     ],
   },
-  // Put B — kartica prepoznavanja
+  // Put B — ne poznaje nikoga: objavi ponudu na Pijaci i neka te mreža nađe
   {
     key: "ekran3",
     pasusi: 4,
     akcije: [
       {
-        href: "/tabla-jemstva",
+        href: "/pijaca/novi-oglas",
         ctaKey: "ekran3_cta",
-        gde: { vrsta: "meni", stavka: "tabla_jemstva", grupa: "grupa_poverenje" },
+        gde: { vrsta: "meni", stavka: "pijaca" },
       },
     ],
   },
@@ -190,7 +190,7 @@ export default function DobrodosliPage() {
               {t("cta_poznajem")}
             </button>
             <button
-              onClick={() => idiNa("/tabla-jemstva")}
+              onClick={() => idiNa("/pijaca/novi-oglas")}
               className="flex-1 px-4 py-3 bg-white border border-kolo-green-700 text-kolo-green-700 hover:bg-kolo-green-100 text-sm font-semibold rounded-xl transition-colors"
             >
               {t("cta_ne_poznajem")}
