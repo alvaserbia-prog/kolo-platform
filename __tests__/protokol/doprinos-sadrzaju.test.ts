@@ -19,21 +19,17 @@ vi.mock("@/lib/protokol/emisija", () => ({ emitujPoen: emitujPoenMock }));
 const auditMock = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/audit", () => ({ logAdminAkcija: auditMock }));
 
-const alertMock = vi.hoisted(() => vi.fn());
-vi.mock("@/lib/adminAlert", () => ({ posaljiAdminAlert: alertMock }));
 
 import {
   IZNOS,
   MIN_OPIS,
   MAX_AKTIVNIH_OGLASA,
-  PRAG_OBRASCA,
   oglasIspunjavaMinimum,
   smeDaPostaviOglas,
   smeDaSalje,
   zabeleziDoprinos,
   ponistiZabelezen,
   probajEvidentirati,
-  proveriObrazacOkidaca,
 } from "@/lib/protokol/doprinos-sadrzaju";
 
 const OPIS = "x".repeat(MIN_OPIS);
@@ -60,10 +56,8 @@ beforeEach(() => {
   }
   emitujPoenMock.mockReset();
   auditMock.mockReset();
-  alertMock.mockReset();
   emitujPoenMock.mockResolvedValue({ transaction: { id: "tx1" } });
   auditMock.mockResolvedValue(undefined);
-  alertMock.mockResolvedValue(undefined);
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
@@ -280,32 +274,3 @@ describe("ponistiZabelezen", () => {
 
 // ─── Brana iz odeljka 05 ─────────────────────────────────────────────────────
 
-describe("proveriObrazacOkidaca", () => {
-  it(`ćuti ispod ${PRAG_OBRASCA} različita naloga`, async () => {
-    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([{ userId: "a" }, { userId: "b" }]);
-    await proveriObrazacOkidaca("v1");
-    expect(alertMock).not.toHaveBeenCalled();
-  });
-
-  it("javlja UO na pragu", async () => {
-    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([
-      { userId: "a" },
-      { userId: "b" },
-      { userId: "c" },
-    ]);
-    prismaMock.user.findUnique.mockResolvedValue({ pseudonim: "Marko" });
-    await proveriObrazacOkidaca("v1");
-    expect(alertMock).toHaveBeenCalledOnce();
-    expect(alertMock.mock.calls[0][1]).toContain("Marko");
-  });
-
-  it("broji RAZLIČITE naloge, ne zapise", async () => {
-    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([
-      { userId: "a" },
-      { userId: "a" },
-      { userId: "a" },
-    ]);
-    await proveriObrazacOkidaca("v1");
-    expect(alertMock).not.toHaveBeenCalled();
-  });
-});

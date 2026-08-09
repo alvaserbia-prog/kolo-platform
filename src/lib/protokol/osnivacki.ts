@@ -15,7 +15,6 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { TransactionType } from "@/generated/prisma/client";
-import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -23,22 +22,6 @@ export const ITERATION_LIMIT = 100;
 export const KORAK_IZNOS = 24_000;
 export const GORNJA_GRANICA = ITERATION_LIMIT * KORAK_IZNOS; // 2.400.000
 export const PRAG_SKOK = 100_000;
-
-/**
- * PRIVREMENO: noćni cron NE evidentira korak sam, nego javlja UO da je prag blizu.
- * Emisija ostaje na postojećem ručnom dugmetu (`POST /api/admin/osnivacki/triger`).
- *
- * Razlog je otvaranje kanala „doprinos sadržaju platforme" (Pravilnik čl. 40a):
- * opticaj sada može da poraste i od naloga koji su tek ušli, a prvi osnivački korak
- * od 24.000 POEN-a okida se na 100.000 ukupnog POEN-a. Dok se kanal ne slegne, čovek
- * treba da vidi skok PRE nego što 24.000 POEN-a ode osnivačima.
- *
- * Prebacivanje na `false` vraća potpuno automatsko evidentiranje — jedna linija.
- */
-export const RUCNO_OKIDANJE_KORAKA = true;
-
-/** Koliko POEN-a pre praga cron počinje da javlja („prag je blizu"). */
-const NAJAVA_POJAS = 10_000;
 
 /**
  * Raspodela jednog koraka (KORAK_IZNOS) među osnivačima srazmerno udelima (čl. 12).
@@ -126,41 +109,6 @@ export async function dohvatiStatusKanala(): Promise<KanalStatus> {
 }
 
 /**
- * Noćna provera bez emisije: javlja UO da je prag dostignut ili blizu, a korak
- * ostavlja čoveku (vidi `RUCNO_OKIDANJE_KORAKA`). Ne dira bazu.
- *
- * Ćuti kad nema šta da se javi — kanal zatvoren, osnivači nezaključani (tada korak
- * ionako ne bi prošao) ili je prag još daleko. Noćni alarm koji stiže svake noći
- * prestane da se čita.
- */
-export async function najaviBlizinuKoraka(): Promise<{
-  javljeno: boolean;
-  poruka: string;
-}> {
-  const status = await dohvatiStatusKanala();
-
-  if (status.zatvoren) return { javljeno: false, poruka: "Kanal je trajno zatvoren." };
-  if (!status.osnivaciZakljucani)
-    return { javljeno: false, poruka: "Lista osnivača nije zaključana — korak ionako ne bi prošao." };
-
-  const doPraga = status.sledeciPrag - status.ukupanPoenUSistemu;
-  if (doPraga > NAJAVA_POJAS)
-    return { javljeno: false, poruka: `Do sledećeg praga fali ${doPraga.toLocaleString("sr-RS")} POEN.` };
-
-  const dostignut = doPraga <= 0;
-  const poruka = dostignut
-    ? `Prag od ${status.sledeciPrag.toLocaleString("sr-RS")} POEN je DOSTIGNUT ` +
-      `(ukupno u sistemu: ${status.ukupanPoenUSistemu.toLocaleString("sr-RS")}). ` +
-      `Korak od ${KORAK_IZNOS.toLocaleString("sr-RS")} POEN čeka ručno okidanje u admin panelu ` +
-      `(Osnivači → evidentiraj korak). Pre okidanja proveriti da rast opticaja nije došao od praznih naloga.`
-    : `Do praga od ${status.sledeciPrag.toLocaleString("sr-RS")} POEN fali još ` +
-      `${doPraga.toLocaleString("sr-RS")} POEN. Korak se NE evidentira sam — okida se ručno.`;
-
-  await posaljiAdminAlert("Osnivački korak — prag", poruka);
-  return { javljeno: true, poruka };
-}
-
-/**
  * Provera i evidentiranje koraka.
  * Poziva se rucno (admin) ili iz noćnog cron-a.
  * Vraca koliko koraka je evidentirano u ovom pozivu (moze biti vise od 1 ako je opticaj naglo skocio).
@@ -205,7 +153,7 @@ export async function proveriIEvidentirajKorak(): Promise<{
   let trenutniPrag = kanal.poslednjiPrag;
   let evidentirano = 0;
 
-  // Snapshot ukupnog POEN-a PRE petlje. Svaki korak emituje 20.000 POEN i time
+  // Snapshot ukupnog POEN-a PRE petlje. Svaki korak emituje KORAK_IZNOS POEN-a i time
   // povećava opticaj; da to NE bi samo guralo prag za sledeći korak (samopojačavajuća
   // kaskada), prag se poredi prema stanju sistema na ulasku, a ne posle svake emisije.
   const ukupanPoen = await izracunajUkupanPoen();
