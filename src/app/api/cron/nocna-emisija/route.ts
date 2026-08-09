@@ -3,11 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { izvrsiNocnuEmisiju } from "@/lib/protokol/programi";
 import { izvrsiZrnoOperacije } from "@/lib/protokol/zrno";
 import { proveriIAktivirajFazu2 } from "@/lib/protokol/faza-sistema";
-import {
-  najaviBlizinuKoraka,
-  proveriIEvidentirajKorak,
-  RUCNO_OKIDANJE_KORAKA,
-} from "@/lib/protokol/osnivacki";
+import { proveriIEvidentirajKorak } from "@/lib/protokol/osnivacki";
 
 // POST /api/cron/nocna-emisija — pokreće se u ponoć (zaštićeno CRON_SECRET)
 export async function POST(req: NextRequest) {
@@ -28,14 +24,12 @@ export async function POST(req: NextRequest) {
     // nakon emisija, pre Faze 2 — POEN osnivačkog doprinosa ulazi u kumulativni rast
     // (čl. 7). Izolovano: greška ovde ne sme da blokira proveru Faze 2.
     //
-    // Dok je `RUCNO_OKIDANJE_KORAKA` uključeno, cron samo JAVLJA UO da je prag blizu;
-    // emisija ide preko ručnog dugmeta. Brana iz plana (odeljak 05) — čovek vidi skok
-    // opticaja pre nego što 24.000 POEN-a ode osnivačima.
+    // Evidentira sam, bez ljudske potvrde. Ako je opticaj preskočio više pragova
+    // odjednom (velika bulk emisija), `proveriIEvidentirajKorak` pali korake
+    // uzastopno dok ne nadoknadi sve preskočene.
     let osnivacki: unknown = null;
     try {
-      osnivacki = RUCNO_OKIDANJE_KORAKA
-        ? await najaviBlizinuKoraka()
-        : await proveriIEvidentirajKorak();
+      osnivacki = await proveriIEvidentirajKorak();
     } catch (e) {
       console.error("[CRON] Greška pri osnivačkom doprinosu:", e);
       osnivacki = { error: String(e) };

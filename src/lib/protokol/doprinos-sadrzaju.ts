@@ -22,7 +22,6 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { logAdminAkcija } from "@/lib/audit";
-import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { DoprinosOkidac, DoprinosStatus, TransactionType } from "@/generated/prisma/client";
 import { IZNOS, oglasIspunjavaMinimum, type OglasMinimum } from "@/lib/doprinos-pravila";
 
@@ -165,7 +164,6 @@ export async function probajEvidentirati(
       userId,
       `${zabelezen.iznos} POEN, okidač ${okidac}`,
     );
-    if (okidacKorisnikId) void proveriObrazacOkidaca(okidacKorisnikId);
     return true;
   } catch (e) {
     console.error("[doprinos-sadrzaju] evidentiranje nije uspelo", { userId, okidac, e });
@@ -180,49 +178,4 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
     select: { iznos: true },
   });
   return d?.iznos ?? 0;
-}
-
-// ─── Brana protiv naduvavanja opticaja (plan, odeljak 05) ────────────────────
-
-/** Koliko različitih naloga u prozoru pali upozorenje. */
-export const PRAG_OBRASCA = 3;
-const PROZOR_DANA = 7;
-
-/**
- * Okidač je usvojen bez praga: dovoljan je jedan primljen POEN da se doprinos
- * evidentira. Isti verifikovan član zato može da otvori više praznih naloga,
- * okači im oglase i svakom pošalje po 1 POEN — Protokol tada evidentira 1.000
- * POEN-a po nalogu, po ceni od 1.
- *
- * Zaštita je namerno OSMATRANJE, ne blokada: ništa se ne zaustavlja automatski,
- * UO dobija upozorenje i sam procenjuje. Kombinuje se sa privremenim ručnim
- * okidanjem osnivačkog koraka — čovek vidi skok pre nego što 24.000 POEN-a ode.
- */
-export async function proveriObrazacOkidaca(okidacKorisnikId: string): Promise<void> {
-  try {
-    const od = new Date(Date.now() - PROZOR_DANA * 24 * 60 * 60 * 1000);
-    const nalozi = await prisma.doprinosSadrzaju.findMany({
-      where: {
-        okidacKorisnikId,
-        status: DoprinosStatus.EVIDENTIRAN,
-        evidentiranAt: { gte: od },
-      },
-      select: { userId: true },
-    });
-    const razliciti = new Set(nalozi.map((n) => n.userId));
-    if (razliciti.size < PRAG_OBRASCA) return;
-
-    const clan = await prisma.user.findUnique({
-      where: { id: okidacKorisnikId },
-      select: { pseudonim: true },
-    });
-    await posaljiAdminAlert(
-      "Obrazac evidentiranja doprinosa sadržaju",
-      `Član „${clan?.pseudonim ?? okidacKorisnikId}" okinuo je evidentiranje doprinosa za ` +
-        `${razliciti.size} različitih naloga u poslednjih ${PROZOR_DANA} dana ` +
-        `(${razliciti.size * IZNOS} POEN). Ništa nije blokirano — proveriti da li su nalozi stvarni.`,
-    );
-  } catch (e) {
-    console.error("[doprinos-sadrzaju] provera obrasca nije uspela", { okidacKorisnikId, e });
-  }
 }
