@@ -2,14 +2,14 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_1_0.md`). Pri podizanju verzije seta lako je repointovati jednu
- * stranicu a drugu zaboraviti, ili preimenovati srpski original a ostaviti prevod
- * — loader tada tiho padne na srpski i čitalac na engleskom dobije stari tekst,
- * bez ijedne greške u logu.
+ * (`Pravilnik_4_1_0.md`, `uslovi_koriscenja_4_1_1.md`). Pri podizanju verzije lako je
+ * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
+ * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
+ * stari tekst, bez ijedne greške u logu.
  *
  * Ovaj test zato proverava tri stvari:
  *  1. svaki akt koji app traži postoji na SVA tri jezika (sr, en, ru);
- *  2. ključne odredbe verzije 4.1.0 su stvarno unutra, na svakom jeziku;
+ *  2. ključne odredbe verzija 4.1.0 i 4.1.1 su stvarno unutra, na svakom jeziku;
  *  3. ukinute odredbe (tabla zahteva za jemstvo) nisu preživele nigde.
  */
 import { describe, it, expect } from "vitest";
@@ -24,8 +24,8 @@ const JEZICI = ["sr", "en", "ru"] as const;
 const AKTI = [
   "Pravilnik_4_1_0.md",
   "dokaz_stvarnosti_4_1_0.md",
-  "uslovi_koriscenja_4_1_0.md",
-  "politika_4_1_0.md",
+  "uslovi_koriscenja_4_1_1.md",
+  "politika_4_1_1.md",
   "DPIA_4_1_0.md",
   "radnje_obrade_4_1_0.md",
   "statut_4_1_0.md",
@@ -39,17 +39,30 @@ const AKTI = [
   "programi_podrske_4_1_0.md",
 ];
 
-/** Odredbe uvedene verzijom 4.1.0 — po jeziku, da fallback na srpski ne prođe neopaženo. */
-const UVEDENO: Record<string, Record<string, string>> = {
+/**
+ * Odredbe uvedene verzijama seta — po jeziku, da fallback na srpski ne prođe neopaženo.
+ *
+ * Uslovi i Politika su na 4.1.1 (postupak izmene), ostali akti na 4.1.0; zato se
+ * ovde drže odredbe obe verzije zajedno.
+ */
+const UVEDENO: Record<string, Record<string, string[]>> = {
   "Pravilnik_4_1_0.md": {
-    sr: "### Član 40a",
-    en: "### Article 40a",
-    ru: "### Статья 40a",
+    sr: ["### Član 40a"],
+    en: ["### Article 40a"],
+    ru: ["### Статья 40a"],
   },
-  "uslovi_koriscenja_4_1_0.md": {
-    sr: "Oglas neverifikovanog korisnika",
-    en: "Listing by an Unverified User",
-    ru: "Объявление неверифицированного пользователя",
+  "uslovi_koriscenja_4_1_1.md": {
+    sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
+    en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
+    ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
+  },
+  // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
+  // odredbe bi gejt (zamrzavanje naloga do prihvatanja) obuhvatio i te obrade, pa
+  // pristanak ne bi bio slobodno dat.
+  "politika_4_1_1.md": {
+    sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
+    en: ["is not consent for processing whose legal basis is consent"],
+    ru: ["не является согласием на обработку"],
   },
 };
 
@@ -83,7 +96,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.1.0", () => {
+describe("kanonski set akata 4.1.0 / 4.1.1", () => {
   it.each(AKTI)("%s postoji na sva tri jezika", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -101,11 +114,13 @@ describe("kanonski set akata 4.1.0", () => {
     }
   });
 
-  it("odredbe uvedene u 4.1.0 postoje na svakom jeziku", async () => {
+  it("odredbe uvedene u 4.1.0 i 4.1.1 postoje na svakom jeziku", async () => {
     for (const [akt, poJeziku] of Object.entries(UVEDENO)) {
       for (const jez of JEZICI) {
         const tekst = await ucitajPravniDokument(akt, jez);
-        expect(tekst, `${jez}/${akt} nema „${poJeziku[jez]}"`).toContain(poJeziku[jez]);
+        for (const odredba of poJeziku[jez]) {
+          expect(tekst, `${jez}/${akt} nema „${odredba}"`).toContain(odredba);
+        }
       }
     }
   });

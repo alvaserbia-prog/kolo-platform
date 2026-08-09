@@ -338,9 +338,19 @@ Sporovi u vezi sa zaštitom podataka o ličnosti rešavaju se u skladu sa zakono
 
 ### Član 40 — Postupak izmene
 
-Fondacija donosi i menja ove Uslove. O izmenama koje značajno utiču na prava korisnika, Fondacija obaveštava korisnike putem elektronske adrese registrovane na nalogu, najmanje 15 dana pre stupanja izmena na snagu.
+Fondacija donosi i menja ove Uslove.
 
-Nastavak korišćenja Platforme nakon stupanja izmena na snagu smatra se prihvatanjem izmenjenih Uslova. Korisnik koji ne prihvata izmene može istupiti iz sistema u skladu sa Članom 26 ovih Uslova.
+Izmena izgleda, rasporeda, tehničkih rešenja i funkcija Platforme koja ne menja tekst ovih Uslova ne smatra se izmenom Uslova i ne zahteva prethodno obaveštavanje korisnika.
+
+Izmene koje sužavaju prava korisnika ili proširuju obradu podataka o ličnosti stupaju na snagu najranije 15 dana od dana obaveštavanja korisnika putem elektronske adrese registrovane na nalogu.
+
+Ostale izmene stupaju na snagu danom donošenja, uz obaveštavanje korisnika bez odlaganja. To su naročito: otklanjanje grešaka, jezičke i redakcijske ispravke, izmene koje proširuju prava korisnika ili sužavaju obradu podataka o ličnosti, i izmene nametnute propisom ili odlukom nadležnog organa.
+
+Fondacija može prihvatanje izmenjenih Uslova zatražiti izričito, pri prvoj narednoj prijavi korisnika na nalog, i do prihvatanja ograničiti pristup nalogu. Ograničenje ne dira u pravo korisnika da preuzme svoje podatke, da zatraži brisanje naloga i da istupi iz sistema u skladu sa Članom 26 ovih Uslova — te radnje ostaju dostupne i pre prihvatanja.
+
+Ako izričito prihvatanje nije zatraženo, nastavak korišćenja Platforme nakon stupanja izmena na snagu smatra se prihvatanjem izmenjenih Uslova. Korisnik koji ne prihvata izmene može istupiti iz sistema u skladu sa Članom 26 ovih Uslova.
+
+Odbijanje da se da pristanak za obrade čiji je pravni osnov pristanak (Član 4 Politike privatnosti) ne može biti razlog za ograničenje pristupa nalogu.
 
 Aktuelna verzija Uslova uvek je dostupna na Platformi.
 

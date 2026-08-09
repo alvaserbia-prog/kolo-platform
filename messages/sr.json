@@ -865,11 +865,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -913,9 +913,9 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.1.0",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.1.1",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.1.0",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.1.1",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
@@ -1862,7 +1862,9 @@
     "opis": "Molimo vas da pročitate i prihvatite novu verziju Politike privatnosti kako biste nastavili sa korišćenjem platforme.",
     "procitajte_na": "Politiku privatnosti možete pročitati na",
     "ovoj_stranici": "ovoj stranici",
-    "ne_slazete_se": ". Ukoliko se ne slažete, možete obrisati nalog u podešavanjima profila.",
+    "ne_slazete_se": ". Ukoliko se ne slažete, ne morate prihvatiti — do prihvatanja pristup nalogu ostaje ograničen.",
+    "pre_prihvatanja": "I pre prihvatanja možete preuzeti svoje podatke ili ugasiti nalog u",
+    "podesavanja_profila": "podešavanjima profila",
     "dugme_prihvatam": "Prihvatam Politiku privatnosti",
     "dugme_prihvatam_loading": "Prihvatam...",
     "greska_prihvatanje": "Greška pri prihvatanju. Pokušajte ponovo.",

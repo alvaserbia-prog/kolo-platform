@@ -340,9 +340,19 @@ Sporovi u vezi sa zaštitom osobnih podataka rješavaju se u skladu sa zakonom. 
 
 ### Članak 40. — Postupak izmjene
 
-Zaklada donosi i mijenja ove Uvjete. O izmjenama koje znatno utječu na prava korisnika Zaklada obavještava korisnike putem elektroničke adrese registrirane na računu, najmanje 15 dana prije stupanja izmjena na snagu.
+Zaklada donosi i mijenja ove Uvjete.
 
-Nastavak korištenja Platforme nakon stupanja izmjena na snagu smatra se prihvaćanjem izmijenjenih Uvjeta. Korisnik koji ne prihvaća izmjene može istupiti iz sustava u skladu s Člankom 26. ovih Uvjeta.
+Izmjena izgleda, rasporeda, tehničkih rješenja i funkcija Platforme koja ne mijenja tekst ovih Uvjeta ne smatra se izmjenom Uvjeta i ne zahtijeva prethodno obavještavanje korisnika.
+
+Izmjene koje sužavaju prava korisnika ili proširuju obradu osobnih podataka stupaju na snagu najranije 15 dana od dana obavještavanja korisnika putem elektroničke adrese registrirane na računu.
+
+Ostale izmjene stupaju na snagu danom donošenja, uz obavještavanje korisnika bez odgode. To su osobito: otklanjanje pogrešaka, jezične i redakcijske ispravke, izmjene koje proširuju prava korisnika ili sužavaju obradu osobnih podataka te izmjene nametnute propisom ili odlukom nadležnog tijela.
+
+Zaklada može prihvaćanje izmijenjenih Uvjeta zatražiti izrijekom, pri prvoj sljedećoj prijavi korisnika na račun, i do prihvaćanja ograničiti pristup računu. Ograničenje ne dira u pravo korisnika da preuzme svoje podatke, da zatraži brisanje računa i da istupi iz sustava u skladu s Člankom 26. ovih Uvjeta — te radnje ostaju dostupne i prije prihvaćanja.
+
+Ako izričito prihvaćanje nije zatraženo, nastavak korištenja Platforme nakon stupanja izmjena na snagu smatra se prihvaćanjem izmijenjenih Uvjeta. Korisnik koji ne prihvaća izmjene može istupiti iz sustava u skladu s Člankom 26. ovih Uvjeta.
+
+Odbijanje davanja privole za obrade čija je pravna osnova privola (Članak 4. Politike privatnosti) ne može biti razlog za ograničenje pristupa računu.
 
 Aktualna je verzija Uvjeta uvijek dostupna na Platformi.
 

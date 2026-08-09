@@ -865,11 +865,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -913,9 +913,9 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.1.0",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.1.1",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.1.0",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.1.1",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
@@ -1862,7 +1862,9 @@
     "opis": "Please read and accept the new version of the Privacy Policy to continue using the platform.",
     "procitajte_na": "You can read the Privacy Policy on",
     "ovoj_stranici": "this page",
-    "ne_slazete_se": ". If you disagree, you can delete your account in the profile settings.",
+    "ne_slazete_se": ". If you disagree, you do not have to accept — until you do, access to the account remains restricted.",
+    "pre_prihvatanja": "Even before accepting, you can download your data or delete your account in the",
+    "podesavanja_profila": "profile settings",
     "dugme_prihvatam": "I accept the Privacy Policy",
     "dugme_prihvatam_loading": "Accepting...",
     "greska_prihvatanje": "Error while accepting. Please try again.",

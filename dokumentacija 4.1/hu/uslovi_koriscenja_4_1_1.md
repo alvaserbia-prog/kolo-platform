@@ -340,9 +340,19 @@ Az adatvédelemmel kapcsolatos jogviták a jogszabályok szerint rendezendők. A
 
 ### 40. cikk — A módosítás eljárása
 
-A jelen Feltételeket az Alapítvány alkotja és módosítja. A felhasználók jogait jelentősen érintő módosításokról az Alapítvány a fiókhoz regisztrált elektronikus címen értesíti a felhasználókat, legalább 15 nappal a módosítások hatálybalépése előtt.
+A jelen Feltételeket az Alapítvány alkotja és módosítja.
 
-A Platform használatának folytatása a módosítások hatálybalépését követően a módosított Feltételek elfogadásának minősül. Az a felhasználó, aki a módosításokat nem fogadja el, a jelen Feltételek 26. cikke szerint kiléphet a rendszerből.
+A Platform megjelenésének, elrendezésének, technikai megoldásainak vagy funkcióinak olyan megváltoztatása, amely a jelen Feltételek szövegét nem érinti, nem minősül a Feltételek módosításának, és nem igényli a felhasználók előzetes értesítését.
+
+A felhasználók jogait szűkítő vagy a személyes adatok kezelését kiterjesztő módosítások legkorábban a felhasználóknak a fiókhoz regisztrált elektronikus címen történő értesítésétől számított 15. napon lépnek hatályba.
+
+Az egyéb módosítások az elfogadás napján lépnek hatályba, a felhasználók késedelem nélküli értesítése mellett. Ilyenek különösen: a hibák javítása, a nyelvi és szerkesztési helyesbítések, a felhasználók jogait kiterjesztő vagy a személyes adatok kezelését szűkítő módosítások, valamint a jogszabály vagy illetékes hatóság határozata által előírt módosítások.
+
+Az Alapítvány a módosított Feltételek kifejezett elfogadását kérheti a felhasználó soron következő bejelentkezésekor, és az elfogadásig korlátozhatja a fiókhoz való hozzáférést. A korlátozás nem érinti a felhasználó jogát arra, hogy adatait letöltse, a fiók törlését kérje, és a jelen Feltételek 26. cikke szerint kilépjen a rendszerből — ezek a műveletek az elfogadás előtt is elérhetők maradnak.
+
+Ha kifejezett elfogadást nem kérnek, a Platform használatának folytatása a módosítások hatálybalépését követően a módosított Feltételek elfogadásának minősül. Az a felhasználó, aki a módosításokat nem fogadja el, a jelen Feltételek 26. cikke szerint kiléphet a rendszerből.
+
+A hozzájáruláson mint jogalapon nyugvó adatkezelésekhez (az Adatvédelmi szabályzat 4. cikke) való hozzájárulás megtagadása nem lehet a fiókhoz való hozzáférés korlátozásának indoka.
 
 A Feltételek hatályos változata mindig elérhető a Platformon.
 

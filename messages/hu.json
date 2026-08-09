@@ -858,11 +858,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.1.0"
+      "ver": "4.1.1"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -906,9 +906,9 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.1.0-s verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.1.1-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.1.0-s verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.1.1-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
@@ -1855,7 +1855,9 @@
     "opis": "A platform további használatához olvasd el és fogadd el az Adatvédelmi szabályzat új változatát.",
     "procitajte_na": "Az Adatvédelmi szabályzatot itt olvashatod el:",
     "ovoj_stranici": "ezen az oldalon",
-    "ne_slazete_se": ". Ha nem értesz egyet, a profilbeállításokban törölheted a fiókodat.",
+    "ne_slazete_se": ". Ha nem értesz egyet, nem kell elfogadnod — az elfogadásig a fiókhoz való hozzáférés korlátozott marad.",
+    "pre_prihvatanja": "Már az elfogadás előtt is letöltheted az adataidat vagy törölheted a fiókodat a",
+    "podesavanja_profila": "profilbeállításokban",
     "dugme_prihvatam": "Elfogadom az Adatvédelmi szabályzatot",
     "dugme_prihvatam_loading": "Elfogadás…",
     "greska_prihvatanje": "Hiba az elfogadáskor. Próbáld újra.",

@@ -340,9 +340,19 @@ Disputes relating to the protection of personal data are resolved in accordance 
 
 ### Article 40 — Amendment Procedure
 
-The Foundation adopts and amends these Terms. Users are notified of amendments that significantly affect their rights via the email address registered on the account, at least 15 days before the amendments take effect.
+The Foundation adopts and amends these Terms.
 
-Continued use of the Platform after the amendments take effect is deemed acceptance of the amended Terms. A user who does not accept the amendments may withdraw from the system in accordance with Article 26 of these Terms.
+A change to the appearance, layout, technical solutions or functions of the Platform that does not alter the text of these Terms is not deemed an amendment to the Terms and does not require prior notification of users.
+
+Amendments that narrow users' rights or expand the processing of personal data take effect no earlier than 15 days from the day users are notified via the email address registered on the account.
+
+Other amendments take effect on the day of adoption, with users notified without delay. These include in particular: correction of errors, linguistic and editorial corrections, amendments that expand users' rights or narrow the processing of personal data, and amendments imposed by regulation or by a decision of a competent authority.
+
+The Foundation may require express acceptance of the amended Terms upon the user's next login to the account, and may restrict access to the account until acceptance. The restriction does not affect the user's right to download their data, to request deletion of the account and to withdraw from the system in accordance with Article 26 of these Terms — those actions remain available before acceptance as well.
+
+If express acceptance is not required, continued use of the Platform after the amendments take effect is deemed acceptance of the amended Terms. A user who does not accept the amendments may withdraw from the system in accordance with Article 26 of these Terms.
+
+Refusal to give consent for processing whose legal basis is consent (Article 4 of the Privacy Policy) may not be a ground for restricting access to the account.
 
 The current version of the Terms is always available on the Platform.
 

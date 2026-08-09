@@ -312,7 +312,13 @@ Rezultati DPIA dostupni su licu za zaštitu podataka i služe kao osnov za prime
 
 Ovu politiku možemo menjati u skladu sa razvojem Platforme i sistema.
 
-O svim izmenama koje značajno utiču na vaša prava bićete obavešteni putem email adrese registrovane na nalogu, najmanje 15 dana pre stupanja izmena na snagu.
+O izmenama koje sužavaju vaša prava ili proširuju obradu podataka o ličnosti bićete obavešteni putem email adrese registrovane na nalogu, najmanje 15 dana pre stupanja izmena na snagu.
+
+Ostale izmene stupaju na snagu danom donošenja, uz obaveštavanje bez odlaganja. To su naročito: otklanjanje grešaka i jezičke ispravke, izmene koje proširuju vaša prava ili sužavaju obradu podataka o ličnosti, izmene nametnute propisom ili odlukom nadležnog organa, i usklađivanje opisa obrade sa izmenama izgleda i funkcija Platforme koje ne menjaju kategorije podataka, svrhe ni pravni osnov obrade.
+
+Možemo zatražiti da izmenjenu politiku izričito prihvatite pri prvoj narednoj prijavi na nalog i da do prihvatanja ograničimo pristup nalogu. Ograničenje ne dira u ostvarivanje vaših prava iz Člana 13 ove politike — pre svega prava na pristup, prenosivost i brisanje: preuzimanje podataka i brisanje naloga ostaju dostupni i pre prihvatanja.
+
+Prihvatanje ove politike nije pristanak za obrade čiji je pravni osnov pristanak (Član 4). Te pristanke dajete odvojeno, dobrovoljni su i možete ih povući u svakom trenutku; odbijanje ili povlačenje takvog pristanka ne može biti razlog za ograničenje pristupa nalogu.
 
 Aktuelna verzija uvek je dostupna na Platformi.
 

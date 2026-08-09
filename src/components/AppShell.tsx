@@ -34,8 +34,17 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   const brojZaNadzor = me?.nadzorBroj ?? 0;
 
   // Provera pristanka na Politiku privatnosti (popup za Pravilnik je uklonjen).
+  //
+  // `/profil` je namerno izuzet iz gejta: Politika čl. 16 i Uslovi čl. 40 (v4.1.1)
+  // izričito kažu da ograničenje pristupa do prihvatanja NE dira u pravo na pristup,
+  // prenosivost i brisanje podataka. Ta prava se ostvaruju upravo na podešavanjima
+  // profila (eksport + gašenje naloga), a ekran za prihvatanje na njih i linkuje —
+  // bez ovog izuzetka bi taj link vraćao korisnika nazad na sam gejt.
+  //
+  // Poređenje je TAČNO `/profil`, ne `startsWith`: `/profil/<pseudonim>` je tuđi javni
+  // profil, a `/profil/oglasi` moji oglasi — to nisu prava iz ZZPL-a i ostaju iza gejta.
   useEffect(() => {
-    if (pathname === "/politika-prihvati") return;
+    if (pathname === "/politika-prihvati" || pathname === "/profil") return;
     if (me?.politikaPotrebno) router.replace("/politika-prihvati");
   }, [me?.politikaPotrebno, pathname, router]);
 
