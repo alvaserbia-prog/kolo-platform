@@ -185,7 +185,7 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
             <p className="text-sm text-kolo-muted leading-relaxed whitespace-pre-line">{oglas.description}</p>
           )}
 
-          {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.0). Vide je i
+          {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.1). Vide je i
               neprijavljeni posetioci — pregled oglasa je javan, pa i upozorenje
               mora biti. Za razmenu odgovaraju sami korisnici (Pravilnik čl. 16). */}
           {!oglas.sellerVerified && (

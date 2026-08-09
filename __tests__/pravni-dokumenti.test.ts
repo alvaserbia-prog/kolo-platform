@@ -2,14 +2,14 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_1_0.md`, `uslovi_koriscenja_4_1_1.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_1_1.md`, `uslovi_koriscenja_4_1_1.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
  *
  * Ovaj test zato proverava tri stvari:
  *  1. svaki akt koji app traži postoji na SVA tri jezika (sr, en, ru);
- *  2. ključne odredbe verzija 4.1.0 i 4.1.1 su stvarno unutra, na svakom jeziku;
+ *  2. ključne odredbe seta su stvarno unutra, na svakom jeziku;
  *  3. ukinute odredbe (tabla zahteva za jemstvo) nisu preživele nigde.
  */
 import { describe, it, expect } from "vitest";
@@ -22,31 +22,31 @@ const JEZICI = ["sr", "en", "ru"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
-  "Pravilnik_4_1_0.md",
-  "dokaz_stvarnosti_4_1_0.md",
+  "Pravilnik_4_1_1.md",
+  "dokaz_stvarnosti_4_1_1.md",
   "uslovi_koriscenja_4_1_1.md",
   "politika_4_1_1.md",
-  "DPIA_4_1_0.md",
-  "radnje_obrade_4_1_0.md",
+  "DPIA_4_1_1.md",
+  "radnje_obrade_4_1_1.md",
   "statut_4_1_0.md",
-  "whitepaper_4_1_0.md",
-  "rizici_4_1_0.md",
-  "hijerarhija_4_1_0.md",
-  "donacije_4_1_0.md",
-  "operativni_4_1_0.md",
-  "osnivacki_4_1_0.md",
-  "gornje_kolo_4_1_0.md",
-  "programi_podrske_4_1_0.md",
+  "whitepaper_4_1_1.md",
+  "rizici_4_1_1.md",
+  "hijerarhija_4_1_1.md",
+  "donacije_4_1_1.md",
+  "operativni_4_1_1.md",
+  "osnivacki_4_1_1.md",
+  "gornje_kolo_4_1_1.md",
+  "programi_podrske_4_1_1.md",
 ];
 
 /**
- * Odredbe uvedene verzijama seta — po jeziku, da fallback na srpski ne prođe neopaženo.
+ * Ključne odredbe seta — po jeziku, da fallback na srpski ne prođe neopaženo.
  *
- * Uslovi i Politika su na 4.1.1 (postupak izmene), ostali akti na 4.1.0; zato se
- * ovde drže odredbe obe verzije zajedno.
+ * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog) i u 4.1.1
+ * (postupak izmene): sadržaj starije verzije nije nestao podizanjem broja seta.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_1_0.md": {
+  "Pravilnik_4_1_1.md": {
     sr: ["### Član 40a"],
     en: ["### Article 40a"],
     ru: ["### Статья 40a"],
@@ -96,7 +96,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.1.0 / 4.1.1", () => {
+describe("kanonski set akata 4.1.1", () => {
   it.each(AKTI)("%s postoji na sva tri jezika", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -114,7 +114,7 @@ describe("kanonski set akata 4.1.0 / 4.1.1", () => {
     }
   });
 
-  it("odredbe uvedene u 4.1.0 i 4.1.1 postoje na svakom jeziku", async () => {
+  it("ključne odredbe seta postoje na svakom jeziku", async () => {
     for (const [akt, poJeziku] of Object.entries(UVEDENO)) {
       for (const jez of JEZICI) {
         const tekst = await ucitajPravniDokument(akt, jez);

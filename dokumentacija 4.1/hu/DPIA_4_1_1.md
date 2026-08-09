@@ -19,7 +19,7 @@
 | **Adatvédelmi tisztviselő (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Készítés dátuma** | 2026.05.23. (utolsó módosítás 2026.06.16.) |
 | **A vizsgálat tárgya** | KOLO rendszer — 1. szakasz, az 1–10., a 12. és a 13. sz. aktív adatkezelési tevékenység (ideértve az aktivált 3. modult — Szociális programok hitelesítői megerősítéssel, a hitelesítési rendszer integritásának felügyeletét és az adományok nyilvános listáját); a 11. sz. adatkezelési tevékenység (4. modul — Gyermekek) nem aktív |
-| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.1.0), Adatvédelmi szabályzat (v4.1.0), Az adatkezelési tevékenységek nyilvántartása (v4.1.0), Szabályzat a támogatási programokról (v4.1.0), Szabályzat az aktusok hierarchiájáról (v4.1.0), Alapszabály (v4.1), Whitepaper (v4.1.0) |
+| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.1.1), Adatvédelmi szabályzat (v4.1.1), Az adatkezelési tevékenységek nyilvántartása (v4.1.1), Szabályzat a támogatási programokról (v4.1.1), Szabályzat az aktusok hierarchiájáról (v4.1.1), Alapszabály (v4.1), Whitepaper (v4.1.1) |
 | **Következő felülvizsgálat** | A 4. modul aktiválása előtt, a szociális programok megerősítési mechanizmusának módosításakor, vagy legkésőbb az utolsó módosítástól számított 12 hónapon belül |
 
 Ez az adatvédelmi hatásvizsgálat (a továbbiakban: DPIA) a személyes adatok védelméről szóló törvény („SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 54. cikkével összhangban készül. A DPIA a KOLO rendszerről szóló szabályzat IX. fejezetének rendelkezésein (60–67. cikk), a KOLO platform adatvédelmi szabályzatán és a személyes adatok kezelési tevékenységeinek nyilvántartásán alapul.
@@ -46,7 +46,7 @@ Harmadik tervezési döntés — adattakarékosság. A platform kizárólag a re
 
 ## 2.3. Az adatkezelési tevékenységek áttekintése
 
-A rendszer az 1. szakaszban tizenhárom, az adatkezelési tevékenységek nyilvántartásában (v4.1.0) meghatározott tevékenységet foglal magában. Az 1–10., a 12. és a 13. tevékenység aktív (a 3. modult — Szociális programok — ez a vizsgálat aktiválja, a 13. tevékenység pedig az adományok nyilvános listáját foglalja magában); a 11. tevékenység a 4. modul aktiválásáig nem aktív.
+A rendszer az 1. szakaszban tizenhárom, az adatkezelési tevékenységek nyilvántartásában (v4.1.1) meghatározott tevékenységet foglal magában. Az 1–10., a 12. és a 13. tevékenység aktív (a 3. modult — Szociális programok — ez a vizsgálat aktiválja, a 13. tevékenység pedig az adományok nyilvános listáját foglalja magában); a 11. tevékenység a 4. modul aktiválásáig nem aktív.
 
 | **Tevékenység** | **Megnevezés** | **Jogalap** | **Állapot** |
 | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ A rendszer az 1. szakaszban tizenhárom, az adatkezelési tevékenységek nyilv�
 | 12. sz. | A hitelesítési rendszer integritásának felügyelete | Jogos érdek (12. cikk 1. bek. 6. pont) | Aktív |
 | 13. sz. | Az adományozók nevének közzététele az adományok listáján (nyilvános adomány) | Hozzájárulás (12. cikk 1. bek. 1. pont) | Aktív |
 
-Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.1.0) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
+Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.1.1) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
 
 ## 2.4. Az adatáramlás
 
@@ -199,7 +199,7 @@ Az anonimizálás mechanikája a jogállás megszűnésekor: az e-mail-cím tör
 
 ## 8.1. 3. modul — Szociális programok (e vizsgálattal aktiválva)
 
-A 3. modul e vizsgálattal aktiválódik, a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (v4.1.0) összhangban. A rendszer az adatok különleges kategóriáinak kezelését vezeti be — szülői jogállás, életkor, fogyatékosság (az illetékes hatóság határozata — nem diagnózis), hallgatói jogállás (ZZPL 17. cikk). A jogalap a felhasználó kifejezett hozzájárulása (ZZPL 17. cikk 2. bek. 1. pont). Az Alapítvány nem őrzi a benyújtott dokumentáció másolatait — csak a csoporthoz tartozásról szóló minimális bejegyzés és a jogállás igazolásának dátuma marad.
+A 3. modul e vizsgálattal aktiválódik, a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (v4.1.1) összhangban. A rendszer az adatok különleges kategóriáinak kezelését vezeti be — szülői jogállás, életkor, fogyatékosság (az illetékes hatóság határozata — nem diagnózis), hallgatói jogállás (ZZPL 17. cikk). A jogalap a felhasználó kifejezett hozzájárulása (ZZPL 17. cikk 2. bek. 1. pont). Az Alapítvány nem őrzi a benyújtott dokumentáció másolatait — csak a csoporthoz tartozásról szóló minimális bejegyzés és a jogállás igazolásának dátuma marad.
 
 A programok integritásának a valótlan kérelmekkel szembeni védelme érdekében a jóváhagyás előtt a feltételek teljesülését a kérelmező valamennyi hitelesítője megerősíti, teljes felelősséggel és személyes ismeretség alapján, a megadott adatokba való betekintés nélkül; az elutasítás indokolást igényel, a kérelem pedig nem hagyható jóvá, amíg mindannyian meg nem erősítik (kemény zárolás). Ez az eljárás vezeti be az R11 kockázatot (különleges kategóriához tartozás feltárása a saját hitelesítők előtt), amelyre az intézkedéseket az 5.6. pont állapítja meg.
 

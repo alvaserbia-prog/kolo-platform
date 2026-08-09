@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     return await greska("Nemate novčanik.", 500);
   }
   // Neverifikovani korisnik u ažuriranju evidencije učestvuje ISKLJUČIVO kao
-  // primalac (Pravilnik 4.1.0 čl. 28 st. 2). Uslov se vezuje za tip naloga, ne za
+  // primalac (Pravilnik 4.1.1 čl. 28 st. 2). Uslov se vezuje za tip naloga, ne za
   // indeks stvarnosti: ko je jednom verifikovan sme da upisuje POEN i ako mu indeks
   // kasnije padne. Čita se iz baze, ne iz sesije — token se osvežava sa zakašnjenjem,
   // pa bi tek verifikovan korisnik još neko vreme bio odbijan.

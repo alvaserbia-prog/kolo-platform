@@ -17,7 +17,7 @@
 | **Lice za zaštitu podataka (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Datum izrade** | 23.05.2026. (poslednja izmena 16.06.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–10, br. 12 i br. 13 (uključujući aktivirani Modul 3 — Socijalni programi sa verifikatorskom potvrdom, Nadzor integriteta sistema verifikacija i javnu listu donacija); neaktivna radnja obrade br. 11 (Modul 4 — Deca) |
-| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.1.0), Politika privatnosti (v4.1.0), Registar radnji obrade (v4.1.0), Pravilnik o programima podrške (v4.1.0), Pravilnik o hijerarhiji akata (v4.1.0), Statut (v4.1), Whitepaper (v4.1.0) |
+| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.1.1), Politika privatnosti (v4.1.1), Registar radnji obrade (v4.1.1), Pravilnik o programima podrške (v4.1.1), Pravilnik o hijerarhiji akata (v4.1.1), Statut (v4.1), Whitepaper (v4.1.1) |
 | **Sledeća revizija** | Pre aktiviranja Modula 4, pri izmeni mehanizma potvrde socijalnih programa, ili najkasnije 12 meseci od poslednje izmene |
 
 Ova procena uticaja na zaštitu podataka o ličnosti (u daljem tekstu: DPIA) izrađuje se u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL). DPIA se zasniva na odredbama Glave IX Pravilnika o KOLO sistemu (čl. 60–67), Politici privatnosti KOLO platforme i Registru radnji obrade podataka o ličnosti.
@@ -44,7 +44,7 @@ Treća dizajnerska odluka — minimizacija podataka. Platforma prikuplja samo po
 
 ## 2.3. Pregled radnji obrade
 
-Sistem u Fazi 1 obuhvata trinaest radnji obrade definisanih Registrom radnji obrade (v4.1.0). Radnje 1–10, 12 i 13 su aktivne (Modul 3 — Socijalni programi je aktiviran ovom procenom, a radnja 13 obuhvata javnu listu donacija); radnja 11 je neaktivna do aktiviranja Modula 4.
+Sistem u Fazi 1 obuhvata trinaest radnji obrade definisanih Registrom radnji obrade (v4.1.1). Radnje 1–10, 12 i 13 su aktivne (Modul 3 — Socijalni programi je aktiviran ovom procenom, a radnja 13 obuhvata javnu listu donacija); radnja 11 je neaktivna do aktiviranja Modula 4.
 
 | **Radnja** | **Naziv** | **Pravni osnov** | **Status** |
 | --- | --- | --- | --- |
@@ -62,7 +62,7 @@ Sistem u Fazi 1 obuhvata trinaest radnji obrade definisanih Registrom radnji obr
 | Br. 12 | Nadzor integriteta sistema verifikacija | Legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
 | Br. 13 | Objavljivanje imena donatora u listi donacija (javna donacija) | Pristanak (čl. 12 st. 1 t. 1) | Aktivno |
 
-Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.1.0) koji se primenjuje zajedno sa ovom procenom.
+Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.1.1) koji se primenjuje zajedno sa ovom procenom.
 
 ## 2.4. Tok podataka
 
@@ -197,7 +197,7 @@ Mehanika anonimizacije pri prestanku statusa: email adresa se briše, veze u gra
 
 ## 8.1. Modul 3 — Socijalni programi (aktiviran ovom procenom)
 
-Modul 3 se aktivira ovom procenom, u skladu sa čl. 57 Pravilnika i Pravilnikom o programima podrške (v4.1.0). Sistem uvodi obradu posebnih kategorija podataka — status roditelja, starosna dob, invaliditet (rešenje nadležnog organa — ne dijagnoza), studentski status (čl. 17 ZZPL-a). Pravni osnov je izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Fondacija ne čuva kopije podnesene dokumentacije — ostaje samo minimalni zapis o pripadnosti grupi i datum verifikacije.
+Modul 3 se aktivira ovom procenom, u skladu sa čl. 57 Pravilnika i Pravilnikom o programima podrške (v4.1.1). Sistem uvodi obradu posebnih kategorija podataka — status roditelja, starosna dob, invaliditet (rešenje nadležnog organa — ne dijagnoza), studentski status (čl. 17 ZZPL-a). Pravni osnov je izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Fondacija ne čuva kopije podnesene dokumentacije — ostaje samo minimalni zapis o pripadnosti grupi i datum verifikacije.
 
 Radi zaštite integriteta programa od neistinitih prijava, pre odobravanja ispunjenost uslova potvrđuju svi verifikatori podnosioca, pod punom odgovornošću i na osnovu ličnog poznavanja, bez uvida u unete podatke; odbijanje zahteva obrazloženje, a prijava se ne odobrava dok svi ne potvrde (tvrda blokada). Ovaj postupak uvodi rizik R11 (otkrivanje pripadnosti posebnoj kategoriji sopstvenim verifikatorima), za koji su mere utvrđene u tački 5.6.
 

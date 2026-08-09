@@ -13,7 +13,7 @@
 /**
  * Redosled koraka levka. Prolaz svakog koraka se računa u odnosu na prethodni.
  *
- * Otkad je tabla jemstva ukinuta (Pravilnik 4.1.0 čl. 32 st. 4), put je obrnut u
+ * Otkad je tabla jemstva ukinuta (Pravilnik 4.1.1 čl. 32 st. 4), put je obrnut u
  * odnosu na raniji: čovek prvo objavi ponudu, pa ga tek onda neko prepozna i
  * verifikuje. Zato „verifikovani" sada stoji POSLE „objavili_oglas", a koraka
  * „objavili_karticu" više nema — kartice prepoznavanja nema.

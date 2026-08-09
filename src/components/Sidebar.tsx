@@ -190,7 +190,7 @@ function SidebarContent({
 
   // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
   // Tabla jemstva je ukinuta — put do verifikacije više ne ide preko zasebnog zida
-  // nego kroz Pijacu (Pravilnik 4.1.0 čl. 32 st. 4), koja je već u gornjoj grupi.
+  // nego kroz Pijacu (Pravilnik 4.1.1 čl. 32 st. 4), koja je već u gornjoj grupi.
   const zajednickoDobro = [
     { href: "/sistem", label: t("sistem") },
     { href: "/doprinos-oglasi", label: t("doprinos") },

@@ -2,7 +2,7 @@
 
 # Az adatkezelési tevékenységek nyilvántartása
 
-*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.1.0 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.1.0 verzió) és a támogatási programokról szóló szabályzattal (4.1.0 verzió) együtt alkalmazandó.*
+*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.1.1 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.1.1 verzió) és a támogatási programokról szóló szabályzattal (4.1.1 verzió) együtt alkalmazandó.*
 
 **AZ ADATKEZELŐ ADATAI**
 
@@ -128,7 +128,7 @@
 
 **10. sz. adatkezelési tevékenység — Az adatok különleges kategóriái (3. modul — Szociális programok)**
 
-| **Állapot** | AKTÍV — a 3. modul a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (4.1.0 v.) összhangban aktiválódik; az aktiválást a DPIA frissítése kíséri (4.1.0 v.). |
+| **Állapot** | AKTÍV — a 3. modul a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (4.1.1 v.) összhangban aktiválódik; az aktiválást a DPIA frissítése kíséri (4.1.1 v.). |
 | --- | --- |
 | **Az adatkezelés célja** | A minősített csoportokhoz tartozó felhasználók hozzájárulásának automatikus nyilvántartásba vétele POEN-ben, a kérelmező hitelesítőinek a feltételek teljesülésére vonatkozó megerősítésével (a programok integritásának védelme a valótlan kérelmekkel szemben). |
 | **Az érintettek kategóriái** | A minősített csoportokhoz tartozó felhasználók (szülők, idősebb személyek, fogyatékossággal élő személyek, hallgatók) és hitelesítőik. |

@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
 
 // POST /api/pijaca — kreiraj oglas
 //
-// Otvoreno i neverifikovanom korisniku (Pravilnik 4.1.0 čl. 16 st. 5, čl. 28 st. 2),
+// Otvoreno i neverifikovanom korisniku (Pravilnik 4.1.1 čl. 16 st. 5, čl. 28 st. 2),
 // ali samo za PONUDU, uz sadržinski minimum i najviše tri aktivna oglasa. Prvi takav
 // oglas mu beleži doprinos sadržaju platforme (čl. 40a) — doprinos se BELEŽI ovde, a
 // evidentira tek kad ga neko verifikuje ili mu upiše POEN.

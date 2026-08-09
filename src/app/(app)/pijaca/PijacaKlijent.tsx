@@ -158,7 +158,7 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
 
   return (
     <div className="space-y-5">
-      {/* Zaglavlje. Objava je sada otvorena i neverifikovanom (Pravilnik 4.1.0
+      {/* Zaglavlje. Objava je sada otvorena i neverifikovanom (Pravilnik 4.1.1
           čl. 16 st. 5), pa dugme vodi na formu i njemu — samo bez potražnje, koju
           ne sme da objavi. Objašnjenje šta važi za njega stoji ispod. */}
       <div className="space-y-1">
@@ -536,7 +536,7 @@ const OglasKartica = memo(function OglasKartica({
         <div className="flex justify-between items-center gap-2 mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted truncate min-w-0">
             <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
-            {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.0) — vide je
+            {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.1) — vide je
                 i neprijavljeni posetioci. Za razmenu odgovaraju sami korisnici. */}
             {!oglas.sellerVerified && (
               <span className="ml-1 text-kolo-gold-600 font-medium">· {t("oznaka_neverifikovan")}</span>
