@@ -24,7 +24,7 @@ Terms defined in the Rulebook have the same meaning in these Terms. In addition,
 
 **Exchange space** — the part of the Platform intended for advertising and arranging the exchange of goods and services between users.
 
-**Guarantee board** — the Platform mechanism through which an unverified user may present themselves to the network of existing verified users for the purpose of establishing contact necessary for the conduct of verification.
+**Listing** — a publication in the exchange space by which a user offers or seeks a good or a service. By a listing offering a good or a service, an unverified user also presents themselves to the network of existing verified users for the purpose of establishing contact necessary for the conduct of verification (Article 16).
 
 **Session** — the period of active use of the Platform between the user's login and logout.
 
@@ -362,7 +362,9 @@ If any provision of these Terms is found to be void or unenforceable, the remain
 
 ### Article 44 — Language
 
-These Terms are drawn up in the Serbian language, which is authoritative. Localized translations in English and Hungarian are available on the Platform's digital interface for ease of understanding. In the event of any discrepancy between a translation and the Serbian text, the Serbian text prevails.
+These Terms are drawn up in the Serbian language, which is authoritative. Localized translations in English, Russian, Croatian, and Hungarian are available on the Platform's digital interface for ease of understanding. In the event of any discrepancy between a translation and the Serbian text, the Serbian text prevails.
+
+The same applies to the other acts of the KOLO system: the Serbian text is the only authoritative one, and translations are informative in character.
 
 ### Article 45 — Entry into Force
 

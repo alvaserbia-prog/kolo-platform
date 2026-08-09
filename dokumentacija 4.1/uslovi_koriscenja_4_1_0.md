@@ -22,7 +22,7 @@ Izrazi definisani u Pravilniku imaju isto značenje u ovim Uslovima. Pored toga,
 
 **Prostor za razmenu** — deo Platforme namenjen oglašavanju i dogovaranju razmene dobara i usluga između korisnika.
 
-**Tabla zahteva za jemstvo** — mehanizam Platforme putem kojeg neverifikovani korisnik može da se predstavi mreži postojećih verifikovanih korisnika radi uspostavljanja kontakta neophodnog za sprovođenje verifikacije.
+**Oglas** — objava u prostoru za razmenu kojom korisnik nudi ili traži dobro ili uslugu. Oglasom kojim nudi dobro ili uslugu neverifikovani korisnik se ujedno predstavlja mreži postojećih verifikovanih korisnika radi uspostavljanja kontakta neophodnog za sprovođenje verifikacije (Član 16).
 
 **Sesija** — period aktivne upotrebe Platforme između prijavljivanja i odjavljivanja korisnika.
 
@@ -360,7 +360,9 @@ Ako se bilo koja odredba ovih Uslova utvrdi kao ništava ili neizvršiva, preost
 
 ### Član 44 — Jezik
 
-Ovi Uslovi sačinjeni su na srpskom jeziku, koji je merodavan. Lokalizovani prevodi na engleskom i mađarskom jeziku dostupni su na digitalnom interfejsu Platforme radi lakšeg razumevanja. U slučaju neslaganja prevoda sa srpskim tekstom, merodavan je srpski tekst.
+Ovi Uslovi sačinjeni su na srpskom jeziku, koji je merodavan. Lokalizovani prevodi na engleskom, ruskom, hrvatskom i mađarskom jeziku dostupni su na digitalnom interfejsu Platforme radi lakšeg razumevanja. U slučaju neslaganja prevoda sa srpskim tekstom, merodavan je srpski tekst.
+
+Isto važi i za ostale akte KOLO sistema: srpski tekst je jedini merodavan, a prevodi imaju informativni karakter.
 
 ### Član 45 — Stupanje na snagu
 

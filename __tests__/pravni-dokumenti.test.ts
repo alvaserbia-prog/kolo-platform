@@ -53,11 +53,18 @@ const UVEDENO: Record<string, Record<string, string>> = {
   },
 };
 
-/** Ukinute odredbe — ne smeju da prežive ni u jednom aktu, ni na jednom jeziku. */
-const UKINUTO: Record<string, string[]> = {
-  sr: ["tabli zahteva za jemstvo", "Tabla zahteva za jemstvo omogućava"],
-  en: ["on the guarantee board", "The guarantee board enables"],
-  ru: ["на доске запросов", "Доска запросов о поручительстве позволяет"],
+/**
+ * Ukinute odredbe — ne smeju da prežive ni u jednom aktu, ni na jednom jeziku.
+ *
+ * Provera je namerno na KORENU pojma, ne na celoj rečenici: prva verzija ovog
+ * testa tražila je tačne fraze i zato je propustila definiciju pojma u čl. 2
+ * Uslova („Tabla zahteva za jemstvo — mehanizam Platforme…"). Ko ukida institut,
+ * mora da ga ukine i u rečniku pojmova, ne samo tamo gde se primenjuje.
+ */
+const UKINUTO: Record<string, RegExp[]> = {
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */
@@ -107,8 +114,8 @@ describe("kanonski set akata 4.1.0", () => {
     for (const akt of AKTI) {
       for (const jez of JEZICI) {
         const tekst = bezNapomenaOIzmeni(await ucitajPravniDokument(akt, jez));
-        for (const fraza of UKINUTO[jez]) {
-          expect(tekst, `${jez}/${akt} još sadrži „${fraza}"`).not.toContain(fraza);
+        for (const obrazac of UKINUTO[jez]) {
+          expect(tekst, `${jez}/${akt} još sadrži ${obrazac}`).not.toMatch(obrazac);
         }
       }
     }
