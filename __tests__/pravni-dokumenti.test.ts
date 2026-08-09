@@ -2,14 +2,14 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_1_0.md`). Pri podizanju verzije seta lako je repointovati jednu
+ * (`Pravilnik_4_2_0.md`). Pri podizanju verzije seta lako je repointovati jednu
  * stranicu a drugu zaboraviti, ili preimenovati srpski original a ostaviti prevod
  * — loader tada tiho padne na srpski i čitalac na engleskom dobije stari tekst,
  * bez ijedne greške u logu.
  *
  * Ovaj test zato proverava tri stvari:
  *  1. svaki akt koji app traži postoji na SVA tri jezika (sr, en, ru);
- *  2. ključne odredbe verzije 4.1.0 su stvarno unutra, na svakom jeziku;
+ *  2. ključne odredbe verzije 4.2.0 su stvarno unutra, na svakom jeziku;
  *  3. ukinute odredbe (tabla zahteva za jemstvo) nisu preživele nigde.
  */
 import { describe, it, expect } from "vitest";
@@ -17,41 +17,60 @@ import { promises as fs } from "fs";
 import path from "path";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
-const BAZA = path.join(process.cwd(), "dokumentacija 4.1");
+const BAZA = path.join(process.cwd(), "dokumentacija 4.2");
 const JEZICI = ["sr", "en", "ru"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
-  "Pravilnik_4_1_0.md",
-  "dokaz_stvarnosti_4_1_0.md",
-  "uslovi_koriscenja_4_1_0.md",
-  "politika_4_1_0.md",
-  "DPIA_4_1_0.md",
-  "radnje_obrade_4_1_0.md",
+  "Pravilnik_4_2_0.md",
+  "dokaz_stvarnosti_4_2_0.md",
+  "uslovi_koriscenja_4_2_0.md",
+  "politika_4_2_0.md",
+  "DPIA_4_2_0.md",
+  "radnje_obrade_4_2_0.md",
   "statut_4_1_0.md",
-  "whitepaper_4_1_0.md",
-  "rizici_4_1_0.md",
-  "hijerarhija_4_1_0.md",
-  "donacije_4_1_0.md",
-  "operativni_4_1_0.md",
-  "osnivacki_4_1_0.md",
-  "gornje_kolo_4_1_0.md",
-  "programi_podrske_4_1_0.md",
+  "whitepaper_4_2_0.md",
+  "rizici_4_2_0.md",
+  "hijerarhija_4_2_0.md",
+  "donacije_4_2_0.md",
+  "operativni_4_2_0.md",
+  "osnivacki_4_2_0.md",
+  "gornje_kolo_4_2_0.md",
+  "programi_podrske_4_2_0.md",
 ];
 
-/** Odredbe uvedene verzijom 4.1.0 — po jeziku, da fallback na srpski ne prođe neopaženo. */
+/** Odredbe uvedene verzijom 4.2.0 — po jeziku, da fallback na srpski ne prođe neopaženo. */
 const UVEDENO: Record<string, Record<string, string>> = {
-  "Pravilnik_4_1_0.md": {
+  "Pravilnik_4_2_0.md": {
     sr: "### Član 40a",
     en: "### Article 40a",
     ru: "### Статья 40a",
   },
-  "uslovi_koriscenja_4_1_0.md": {
+  "uslovi_koriscenja_4_2_0.md": {
     sr: "Oglas neverifikovanog korisnika",
     en: "Listing by an Unverified User",
     ru: "Объявление неверифицированного пользователя",
   },
 };
+
+/**
+ * Spisak kanala iz čl. 15 — brojana lista, pa se greška ne vidi golim okom.
+ *
+ * U 4.2.0 je kanal „rast kolektivnih oblika" brisan (modul nije aktiviran), pa je
+ * spisak pao sa OSAM na SEDAM tačaka, a kanal koji je bio tačka 8 preimenovan je u
+ * „doprinos razmeni na platformi" i postao tačka 7. Renumeracija je opasna zato što
+ * ostatak akata upućuje na TAČKU po broju (čl. 28: „član 15 tačka 7"): ako se
+ * prevod ne renumeriše zajedno sa originalom, upućivanje tiho pokaže na pogrešan
+ * kanal — tekst i dalje deluje ispravno.
+ */
+const POSLEDNJI_KANAL: Record<string, string> = {
+  sr: "7) doprinos razmeni na platformi.",
+  en: "7) contribution to exchange on the platform.",
+  ru: "7) вклад в обмен на платформе.",
+};
+
+/** Osma tačka ne sme da postoji ni na jednom jeziku — spisak se završava na sedmoj. */
+const OSMA_TACKA = /^8\)\s/m;
 
 /**
  * Ukinute odredbe — ne smeju da prežive ni u jednom aktu, ni na jednom jeziku.
@@ -83,7 +102,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.1.0", () => {
+describe("kanonski set akata 4.2.0", () => {
   it.each(AKTI)("%s postoji na sva tri jezika", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -101,7 +120,7 @@ describe("kanonski set akata 4.1.0", () => {
     }
   });
 
-  it("odredbe uvedene u 4.1.0 postoje na svakom jeziku", async () => {
+  it("odredbe uvedene u 4.2.0 postoje na svakom jeziku", async () => {
     for (const [akt, poJeziku] of Object.entries(UVEDENO)) {
       for (const jez of JEZICI) {
         const tekst = await ucitajPravniDokument(akt, jez);
@@ -116,6 +135,39 @@ describe("kanonski set akata 4.1.0", () => {
         const tekst = bezNapomenaOIzmeni(await ucitajPravniDokument(akt, jez));
         for (const obrazac of UKINUTO[jez]) {
           expect(tekst, `${jez}/${akt} još sadrži ${obrazac}`).not.toMatch(obrazac);
+        }
+      }
+    }
+  });
+
+  it("čl. 15 ima sedam kanala i završava se doprinosom razmeni", async () => {
+    for (const jez of JEZICI) {
+      const tekst = await ucitajPravniDokument("Pravilnik_4_2_0.md", jez);
+      expect(tekst, `${jez}: nema „${POSLEDNJI_KANAL[jez]}"`).toContain(POSLEDNJI_KANAL[jez]);
+      expect(tekst, `${jez}: spisak kanala još ima osmu tačku`).not.toMatch(OSMA_TACKA);
+    }
+  });
+
+  it("rast kolektivnih oblika nije više kanal ni u jednom aktu", async () => {
+    // Traži se BROJANA STAVKA, ne sam pojam: pojam ostaje u Glavi VIII (Krug i
+    // zadruga postoje kao moduli) i u odredbi koja izričito kaže da rast NIJE kanal.
+    const kaoStavka = /^\d\)\s.*(rast kolektivnih|growth of collective|рост коллективных)/im;
+    for (const akt of AKTI) {
+      for (const jez of JEZICI) {
+        const tekst = await ucitajPravniDokument(akt, jez);
+        expect(tekst, `${jez}/${akt} još nabraja rast kolektivnih oblika kao kanal`).not.toMatch(kaoStavka);
+      }
+    }
+  });
+
+  it("stari naziv kanala (doprinos sadržaju platforme) ne postoji nigde", async () => {
+    const stari = [/doprinos[uae]?\s+sadržaju\s+platforme/i, /contribution to platform content/i,
+                   /вклад[ае]?\s+в\s+содержание\s+платформы/i];
+    for (const akt of AKTI) {
+      for (const jez of JEZICI) {
+        const tekst = await ucitajPravniDokument(akt, jez);
+        for (const obrazac of stari) {
+          expect(tekst, `${jez}/${akt} još nosi stari naziv kanala ${obrazac}`).not.toMatch(obrazac);
         }
       }
     }

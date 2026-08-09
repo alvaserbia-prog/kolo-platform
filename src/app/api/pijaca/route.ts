@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
 //
 // Otvoreno i neverifikovanom korisniku (Pravilnik 4.1.0 čl. 16 st. 5, čl. 28 st. 2),
 // ali samo za PONUDU, uz sadržinski minimum i najviše tri aktivna oglasa. Prvi takav
-// oglas mu beleži doprinos sadržaju platforme (čl. 40a) — doprinos se BELEŽI ovde, a
+// oglas mu beleži doprinos razmeni na platformi (čl. 40a) — doprinos se BELEŽI ovde, a
 // evidentira tek kad ga neko verifikuje ili mu upiše POEN.
 export async function POST(req: NextRequest) {
   try {
@@ -194,7 +194,7 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Doprinos sadržaju platforme (čl. 40a). Beleži se za PRVU ponudu koja ispunjava
+  // Doprinos razmeni na platformi (čl. 40a). Beleži se za PRVI oglas koji ispunjava
   // sadržinski minimum — i verifikovanom i neverifikovanom korisniku. Do okidača
   // (verifikacija ili primljen POEN) to NIJE zapis POEN-a: ništa se ne emituje, ni
   // opticaj ni ijedan sistemski prag se ne pomera.

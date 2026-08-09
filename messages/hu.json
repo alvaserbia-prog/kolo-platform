@@ -858,11 +858,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -870,23 +870,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.1.0"
+      "ver": "4.2.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.1.0",
+      "ver": "4.2.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -906,21 +906,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.1.0-s verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.2.0-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.1.0-s verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.2.0-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.1.0-s verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.2.0-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.1.0-s verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.0-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.1.0-s verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.2.0-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.1.0-s verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.2.0-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.1.0-s verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.2.0-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1191,7 +1191,7 @@
     "stub3_naslov": "Irányítási szervek",
     "stub3_tekst": "Igazgatótanács és Igazgató. Az Igazgatótanács stratégiai döntéseket hoz. Az Igazgató az operatív irányítást végzi. A Felső Kolo aktiválásával az Alapítvány szolgáltatói és végrehajtói szerepbe lép — végrehajtja a döntéseket és indokolt válaszokat ad a Felső Kolo ajánlásaira.",
     "javno_tag": "Nyilvános és elérhető",
-    "dok_tag": "Dokumentumok (v4.1)",
+    "dok_tag": "Dokumentumok (v4.2)",
     "dok_whitepaper": "Fehér könyv",
     "dok_statut": "KOLO Alapítvány Alapszabálya",
     "dok_pravilnik_kolo": "KOLO rendszer szabályzata",
@@ -1376,7 +1376,7 @@
     "evidencija_tag": "Hozzájárulások nyilvántartása",
     "evidencija_naslov": "Hat csatorna, amelyen a Protokoll POEN-t rögzít",
     "poen_ne_kupuje": "A POEN pénzért nem vásárolható meg.",
-    "poen_kanali": "It is recorded exclusively through six contribution channels — the Protocol records them automatically, identically for everyone, without exception.",
+    "poen_kanali": "It is recorded exclusively through seven contribution channels — the Protocol records them automatically, identically for everyone, without exception.",
     "poen_preraspodela": "Amikor valakivel cserélsz, a POEN egyszerűen átkerül az egyik féltől a másikhoz: a meglévő bejegyzések oszlanak el újra, semmi új nem keletkezik.",
     "n1_naslov": "Valóságigazolás",
     "n1_iznos": "1000 / 1000 / 500",
@@ -2375,7 +2375,7 @@
     "krug_bonus": "Kör-bónusz „{krug}” — tagok száma: {clanovi}",
     "krug_osnivanje": "Kör alapítása „{krug}”",
     "program": "Program: {program}",
-    "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához"
+    "doprinos_sadrzaju": "Hozzájárulás a platformon zajló cseréhez"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",

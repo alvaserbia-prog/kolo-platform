@@ -1,6 +1,8 @@
 /**
- * Pravila doprinosa sadržaju platforme — ČISTE funkcije, bez baze.
- * Osnov: Pravilnik o KOLO sistemu 4.1.0 čl. 40a, Uslovi korišćenja 4.1.0.
+ * Pravila doprinosa razmeni na platformi — ČISTE funkcije, bez baze.
+ * Osnov: Pravilnik o KOLO sistemu 4.2.0 čl. 15 t. 7 i čl. 40a, Uslovi korišćenja 4.2.0.
+ * (Do 4.1.0 kanal se zvao „doprinos sadržaju platforme" i bio je tačka 8 — spisak
+ * kanala je u 4.2.0 pao sa osam na sedam, brisanjem rasta kolektivnih oblika.)
  *
  * Izdvojeno iz `src/lib/protokol/doprinos-sadrzaju.ts` (koji radi sa Prismom) zato
  * što ova pravila koristi i FORMA OGLASA u pretraživaču. Da su u istom modulu,
@@ -11,10 +13,10 @@
 /** Iznos jednokratnog doprinosa (čl. 40a st. 2). */
 export const IZNOS = 1000;
 
-/** Sadržinski minimum oglasa — najmanja dužina opisa (Uslovi 4.1.0). */
+/** Sadržinski minimum oglasa — najmanja dužina opisa (Uslovi 4.2.0). */
 export const MIN_OPIS = 40;
 
-/** Najviše aktivnih oglasa za neverifikovanog korisnika (Uslovi 4.1.0). */
+/** Najviše aktivnih oglasa za neverifikovanog korisnika (Uslovi 4.2.0). */
 export const MAX_AKTIVNIH_OGLASA = 3;
 
 /**

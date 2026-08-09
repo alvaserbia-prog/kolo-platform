@@ -43,8 +43,14 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
-## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
-**AŽURIRANO 2026-08-09:** kanonski set je sada **verzija 4.1.0** u folderu **`dokumentacija 4.1/`** (sr + `en/` + `ru/`). Povod je izmena pravila ulaska u KOLO (ukidanje table jemstva, osmi kanal evidentiranja — vidi „Ulazak u KOLO kroz razmenu"). Sadržinski su izmenjeni **Pravilnik** (čl. 15, 16, 28, 32, 35, nov **čl. 40a**, 67), **Pravilnik o dokazu stvarnosti** (čl. 5, 7), **Uslovi** (čl. 14, nov predmet čl. 16, čl. 18, 20, 22, 25), **Politika** (4.8 + vidljivost, revizijski dnevnik, rokovi, prava), **DPIA** (radnja 9, rizik R5, odeljak 5.3) i **Radnje obrade** (radnja 9); ostali akti su sadržinski nepromenjeni i samo dignuti na 4.1.0 radi jedinstvene verzije seta. **Statut ostaje 4.1** (`statut_4_1_0.md`, sopstvena numeracija — ne dira se). Folder `dokumentacija 4.0/` je sada istorija.
+## Kanonska dokumentacija (folder `dokumentacija 4.2/`)
+**AŽURIRANO 2026-08-09 (drugi put istog dana — set 4.2.0):** kanonski set je sada **verzija 4.2.0** u folderu **`dokumentacija 4.2/`**. Dve izmene, obe odluka vlasnika:
+1. 🔴 **Kanal „rast kolektivnih oblika" je BRISAN iz čl. 15** — modul kolektivnih oblika nije aktiviran, pa kanal u praksi nije ni radio. Spisak kanala pao je sa **osam na sedam** i ceo je **renumerisan** (raniji 6→5, 7→6, 8→7). Uz brisanje je iz Glave VIII uklonjen i „mehanizam rasta" za Krug i za zadrugu — inače bi Pravilnik opisivao emisiju bez kanala koji je ovlašćuje. Kod usklađen: `proveriIEmitujBonusPrag()` i emisija od 50.000 POEN pri osnivanju uklonjeni.
+2. **Kanal „doprinos sadržaju platforme" preimenovan je u „doprinos razmeni na platformi"** i postao je **tačka 7**. Uz ime se promenila i sadržina: kvalifikuje se **i PONUDA i POTRAŽNJA** (čl. 40a st. 2 — „nudi ili traži"), ne više samo ponuda. Za neverifikovanog se ništa ne menja — njemu je potražnja zatvorena po čl. 16 st. 5.
+
+Iznos (1.000 POEN), jednokratnost po nalogu, sadržinski minimum i razdvajanje BELEŽENJA od EVIDENTIRANJA ostaju nepromenjeni.
+
+**Prethodni set (istorija) — 4.1.0** u folderu `dokumentacija 4.1/` (sr + `en/` + `ru/`). Povod je izmena pravila ulaska u KOLO (ukidanje table jemstva, osmi kanal evidentiranja — vidi „Ulazak u KOLO kroz razmenu"). Sadržinski su izmenjeni **Pravilnik** (čl. 15, 16, 28, 32, 35, nov **čl. 40a**, 67), **Pravilnik o dokazu stvarnosti** (čl. 5, 7), **Uslovi** (čl. 14, nov predmet čl. 16, čl. 18, 20, 22, 25), **Politika** (4.8 + vidljivost, revizijski dnevnik, rokovi, prava), **DPIA** (radnja 9, rizik R5, odeljak 5.3) i **Radnje obrade** (radnja 9); ostali akti su sadržinski nepromenjeni i samo dignuti na verziju seta. **Statut ostaje 4.1** (`statut_4_1_0.md`, sopstvena numeracija — ne dira se). Folder `dokumentacija 4.0/` je sada istorija.
 
 🔴 **Akti su DONETI i punovažni od dana donošenja, bez roka od 15 dana i bez ponovne saglasnosti** — odluka vlasnika, jer sistem još nije zvanično u radu. Zato se NE kreiraju novi redovi `PolitikaVerzija`/`PravilnikVerzija` i NE šalje cirkularno obaveštenje; ekrani za ponovnu saglasnost ostaju ugašeni. **Posledica koju treba znati:** zatečeni pristanci u bazi vode na prethodnu verziju akata, pa se prikazani tekst (markdown 4.1.0) i evidentirana saglasnost razilaze. To je prihvatljivo dok sistem ne krene; **za prvu izmenu posle puštanja u rad OBAVEZNO ide pun postupak** (nov red verzije + obaveštenje + 15 dana, Uslovi čl. 40, Politika čl. 16).
 
@@ -73,7 +79,7 @@ Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih gru
 
 **Otklonjene neusaglašenosti pri konsolidaciji na 3.8.0:** whitepaper — prava neverifikovanog korisnika (razmena van prostora za oglašavanje + ažuriranje evidencije POEN-a) usklađena sa Pravilnikom čl. 28; e-mail za zaštitu podataka ujednačen na `privatnost@ekolo.rs` (DPIA/Radnje obrade); hijerarhija — dodat Pravilnik o Gornjem Kolu, naziv „kolektivni oblici"; programi podrške — verzija u footeru ujednačena; zastarele međudokumentne verzijske reference → 3.8.0.
 
-**✅ Rendering app-a (od 2026-08-09):** javne pravne stranice čitaju iz **`dokumentacija 4.1/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 4.1`). Prikazuju se verzije **4.1.0** za sve akte (statut **4.1**). Prevodi celog seta su u **`dokumentacija 4.1/en/`**, **`/ru/`**, **`/hr/`** i **`/hu/`** (po 15 dokumenata × 4 jezika, uz disklejmer da je merodavan srpski original; loader bira prevod po locale-u, tih fallback na srpski ako fajl nedostaje). **hr i hu dodati 2026-08-09** — do tada su ta dva locale-a tiho dobijala srpski tekst jer ih loader nije mapirao; sada je set potpun na svih 5 jezika iz `src/i18n/routing.ts`. Integritet seta čuva test `__tests__/pravni-dokumenti.test.ts` (postojanje svih 15 akata po jeziku, prisustvo odredaba 4.1.0, odsustvo ukinutih instituta, disklejmer, i provera da se reči jednog jezika ne provuku u drugi). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
+**✅ Rendering app-a (od 2026-08-09):** javne pravne stranice čitaju iz **`dokumentacija 4.2/`** (loader `src/lib/pravni-dokument.ts`, baza = `dokumentacija 4.2`). Prikazuju se verzije **4.2.0** za sve akte (statut **4.1**, sopstvena numeracija — fajl ostaje `statut_4_1_0.md`). Prevodi celog seta su u **`dokumentacija 4.2/en/`**, **`/ru/`**, **`/hr/`** i **`/hu/`** (po 15 dokumenata × 4 jezika, uz disklejmer da je merodavan srpski original; loader bira prevod po locale-u, tih fallback na srpski ako fajl nedostaje). **hr i hu dodati 2026-08-09** — do tada su ta dva locale-a tiho dobijala srpski tekst jer ih loader nije mapirao; sada je set potpun na svih 5 jezika iz `src/i18n/routing.ts`. Integritet seta čuva test `__tests__/pravni-dokumenti.test.ts` (postojanje svih 15 akata po jeziku, prisustvo odredaba 4.2.0, **spisak od tačno sedam kanala u čl. 15**, odsustvo ukinutih instituta i starog naziva kanala, disklejmer, i provera da se reči jednog jezika ne provuku u drugi). Dodatno su linkovani i **Pravilnik o Gornjem Kolu** i **Pravilnik o programima podrške** (slug `gornje-kolo`, `programi-podrske`). `nova dokumentacija/` je sada samo istorija.
 
 Prethodni mešani set (`nova dokumentacija/`, verzije 3.7.2–3.7.6) i stariji (`dokumentacija/` v3.7.0, `.claude/OLD DOCS/` v2.x) zadržani su kao istorija.
 
@@ -139,9 +145,10 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda**.
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. **Po v3.7.3 (Pravilnik čl. 31, DPIA, Whitepaper) ne postoji centralizovana evidencija koja povezuje pseudonim sa identitetom** — Fondacija tu vezu NE poseduje; dokaz stvarnosti ne prikuplja dokumente, a ime/telefon su dobrovoljni i nisu uslov. **Pseudonim u evidenciji doprinosa vidljiv je samo verifikovanim korisnicima** (Pravilnik čl. 67, Politika čl. 6); neregistrovani vide samo agregate. **Izuzetak:** pseudonim **oglašivača na Pijaci** je javan (čl. 16) — ali se za neprijavljene/neverifikovane NE povezuje sa evidencijom doprinosa, stanjem ni profilom.
 7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola; baza je „ukupan broj evidentiranih POEN-a na početku perioda"). Odnosi se samo na **operativni doprinos i socijalne programe**; ostali kanali (automatski akti Protokola) ne ulaze u limit.
-8. **Kanali evidentiranja POEN-a (Pravilnik čl. 15 — osam kanala)**:
+8. **Kanali evidentiranja POEN-a (Pravilnik 4.2.0 čl. 15 — sedam kanala)**:
    - **Ulaze u dnevni limit:** Operativni doprinos (izvršenje **verifikuju nosioci ZRNA u Fazi 2, odn. UO Fondacije u Fazi 1**, čl. 36); Socijalni programi (Podrška Majkama/primarnim starateljima, Podrška Starijima, Posebna Briga, Školovanje).
-   - **Ne ulaze u dnevni limit (automatski akt Protokola):** verifikacija u lancu jemstva (dokaz stvarnosti), finansijski doprinos (donacije), pokroviteljstvo, rast kolektivnih oblika (bonus Kruga), osnivački doprinos, **doprinos sadržaju platforme (čl. 40a — osmi kanal, od 2026-08-09)**.
+   - **Ne ulaze u dnevni limit (automatski akt Protokola):** verifikacija u lancu jemstva (dokaz stvarnosti), finansijski doprinos (donacije), pokroviteljstvo, osnivački doprinos, **doprinos razmeni na platformi (čl. 40a — sedmi kanal)**.
+   - 🔴 **Rast kolektivnih oblika VIŠE NIJE kanal** (brisan u 4.2.0). Krug i zadruga postoje kao moduli, ali im Protokol po broju članova ne evidentira ništa. Ne vraćati bonus bez izmene čl. 15.
 9. **Gradirana vidljivost podataka po ulozi (Pravilnik čl. 28–30, 67; Politika čl. 6; Uslovi):**
    - **Neregistrovan posetilac**: opšti pokazatelji sistema (agregati) + **pregled oglasa na Pijaci** (sadržaj, cena, lokacija, pseudonim oglašivača — čl. 16). NE vidi pojedinačne transakcije, evidenciju doprinosa, profile, ni kontakt oglašivača.
    - **Neverifikovan prijavljen korisnik** (izmenjeno 2026-08-09): iznose/vremena ažuriranja evidencije POEN-a **bez pseudonima strana** i bez stanja računa; svoje notifikacije; pregled oglasa. **Može da postavi oglas kojim NUDI dobro/uslugu** (najviše 3 aktivna, uz sadržinski minimum) i da razmenjuje dobra/usluge. U ažuriranju evidencije POEN-a učestvuje **samo kao primalac**. Sme da **odgovara** u razgovoru koji je verifikovani pokrenuo povodom njegovog oglasa. Kroz kanal doprinosa sadržaju (čl. 40a) može mu se evidentirati doprinos.
@@ -162,7 +169,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - UI: `/verifikacija` (QR + skener kamere), `/nadzor` (POCETNI/NOSILAC_ZRNA), profil sa javnim indeksom i mini stablom.
 - Lib: `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` (kaskadno poništavanje).
 
-### Ulazak u KOLO kroz razmenu — doprinos sadržaju platforme (2026-08-09)
+### Ulazak u KOLO kroz razmenu — doprinos razmeni na platformi (2026-08-09)
 Zamenjuje **tablu zahteva za jemstvo**, koja je UKINUTA. Osnov: Pravilnik 4.1.0 čl. 15 t. 8, čl. 16 st. 5, čl. 28 st. 2, čl. 32 st. 4, čl. 35, nov **čl. 40a**, čl. 67; dokaz stvarnosti 4.1.0 čl. 5 i 7; Uslovi/Politika/DPIA/Radnje obrade 4.1.0. Plan sprovođenja: `docs/plan-ulaz-kroz-razmenu.html`.
 
 **Povod za ukidanje table:** za pet dana rada feed prepoznavanja nije upotrebljen **nijednom** (15 kartica ikad, 0 sa telefonom, 0 zapisa prepoznavanja). Uz to je kartica bila najosetljivija obrada ličnih podataka u sistemu — ovo je jedina izmena u istoriji projekta koja **skida** obradu umesto da je dodaje.
@@ -170,7 +177,7 @@ Zamenjuje **tablu zahteva za jemstvo**, koja je UKINUTA. Osnov: Pravilnik 4.1.0 
 - **Nov put do verifikacije:** neverifikovani objavi **ponudu na Pijaci** → mreža ga povodom oglasa prepozna → verifikacija jednokratnim kodom. Kontakt se uspostavlja kroz platformski prostor za oglašavanje (čl. 32 st. 4), ne kroz zaseban zid.
 - **Šta neverifikovani SME:** oglas tipa **PONUDA** (ne i POTRAZNJA), najviše **3 aktivna**, uz **sadržinski minimum** (bar 1 fotografija, opis ≥ **40** znakova, kategorija, mesto). Sme da **odgovara** u razgovoru koji je verifikovani pokrenuo povodom njegovog oglasa — mehanizam je već postojao za tablu i preuzeo je njen posao bez ijedne nove linije (`POST /api/poruke` traži verifikaciju, `POST /api/poruke/[konvId]` proverava samo članstvo).
 - **🔴 Šta je neverifikovanom ODUZETO:** više **ne može da inicira prenos POEN-a** — u ažuriranju evidencije učestvuje isključivo kao **primalac** (čl. 28 st. 2). Uslov se vezuje za **tip naloga** (`NEVERIFIKOVAN`), NE za indeks: ko je jednom verifikovan sme da upisuje POEN i ako mu indeks kasnije padne. Čita se **iz baze**, ne iz sesije (token se osvežava sa zakašnjenjem).
-- **Osmi kanal — doprinos sadržaju platforme (čl. 40a):** jednokratno **1.000 POEN** za prvi oglas kojim korisnik nudi dobro/uslugu i koji ispunjava minimum. Kanal je **automatski akt Protokola** i NE ulazi u dnevni limit.
+- **Sedmi kanal — doprinos razmeni na platformi (čl. 15 t. 7, čl. 40a):** jednokratno **1.000 POEN** za prvi oglas kojim korisnik **nudi ili traži** dobro/uslugu i koji ispunjava minimum. Kanal je **automatski akt Protokola** i NE ulazi u dnevni limit. (Do 4.1.0 se zvao „doprinos sadržaju platforme", bio je tačka 8 i priznavao samo PONUDU.)
 - **🔴 BELEŽENJE ≠ EVIDENTIRANJE — pravno srce izmene, ali SAMO za neverifikovanog (čl. 40a st. 3–4, izmenjeno 2026-08-09).**
   - **Verifikovan** objavi kvalifikovan oglas → doprinos se **odmah evidentira** (`EVIDENTIRAN`, okidač `OBJAVA_VERIFIKOVAN`). Uslov je **tip naloga**, ne indeks, i čita se **iz baze**.
   - **Neverifikovan** objavi → doprinos se samo **beleži** (`ZABELEZEN`); zapis POEN-a nastaje tek kad nastupi okidač: verifikacija u lancu jemstva ILI **primljen POEN**. Do tada nije zapis POEN-a, ne ulazi u stanje, opticaj ni javne agregate.
@@ -189,7 +196,7 @@ Zamenjuje **tablu zahteva za jemstvo**, koja je UKINUTA. Osnov: Pravilnik 4.1.0 
 - **`probajEvidentirati()` MORA van `prisma.$transaction()`** — `emitujPoen()` otvara sopstvenu. Ne baca: ni verifikacija ni prenos POEN-a ne smeju da padnu zbog ovog kanala. Prelaz se **rezerviše** uslovnim `updateMany` pre emisije; ako emisija pukne, doprinos se vraća u `ZABELEZEN`.
 - **Šta je obrisano:** `/api/tabla-jemstva/**`, `/api/admin/tabla-jemstva/**`, `/api/cron/tabla-jemstva-istek` (+ cron iz `vercel.json`), `src/components/jemstvo/**`, `src/components/verifikacija/JemstvoObjava.tsx`, `src/lib/jemstvo-kartica.ts`, `izvrsiVerifikacijuSaTable()`, sidebar stavka i njen badge. **Struktura tabela `ZahtevZaJemstvo`/`Prepoznavanje` ostaje jedan ciklus** radi povratka (podaci su već obrisani, pa minimizacija ne čeka) — uklanja je posebna migracija `_tabla_jemstva_drop`. `/tabla-jemstva` ostaje kao stranica koja objašnjava šta ju je zamenilo (stari linkovi u notifikacijama i mejlovima).
 - **🟡 Levak (`src/lib/levak.ts`) je prerođen:** korak `objavili_karticu` obrisan, a `verifikovani` premešten **posle** `objavili_oglas` — po novom putu čovek prvo objavi ponudu, pa ga tek onda neko verifikuje.
-- **✅ Akti su doneti i punovažni** (set 4.1.0 u `dokumentacija 4.1/`, na snazi danom donošenja). Odlukom vlasnika izostavljeni su rok od 15 dana, ponovna saglasnost i cirkularno obaveštenje — sistem još nije zvanično u radu. Vidi „Kanonska dokumentacija" za posledicu po zatečene pristanke i za obavezu punog postupka pri prvoj izmeni posle puštanja u rad.
+- **✅ Akti su doneti i punovažni** (set 4.2.0 u `dokumentacija 4.2/`, na snazi danom donošenja). Odlukom vlasnika izostavljeni su rok od 15 dana, ponovna saglasnost i cirkularno obaveštenje — sistem još nije zvanično u radu. Vidi „Kanonska dokumentacija" za posledicu po zatečene pristanke i za obavezu punog postupka pri prvoj izmeni posle puštanja u rad.
 
 ### Mesto / lokacija = jedno naselje iz šifarnika (2026-08-06)
 - **Povod:** nov član je kao lokaciju upisao **„Stanišić (Sombor)"** — i selo i opštinu. Bilo je moguće jer je polje bilo **slobodan tekst**: `LokacijaSearch` je padajućom listom samo *predlagao* naselja, a `onChange` je upisivao svaki otkucani znak. Strogu proveru je imala **samo kartica jemstva** (`validirajKarticu`), nigde drugde. Posledica nije kozmetička: takav zapis ne pogađa nijedno naselje iz šifarnika, pa nema koordinate (udaljenost na Pijaci) i ne poklapa se sa filterom po mestu.
@@ -243,10 +250,9 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 ### Krug (kolektivni oblik — Pravilnik Glava VIII, čl. 55)
 - Kolektivni oblik bez pravnog subjektiviteta; ima evidencioni identifikator i zajednički POEN zapis u Protokolu.
 - Ovlašćena lica, min. broj članova i ostali parametri uređeni su **posebnim pravilnikom** (čl. 55); vrednosti u kodu („najmanje 5 verifikovanih", 1–3 ovlašćena lica) potiču iz tog pravilnika/koda.
-- **Rast kolektivnih oblika** je kanal evidentiranja (čl. 15) — Mehanizam platforme (NE ulazi u dnevni limit, svaki prag se loguje jednom u `KrugBonusLog`):
-  - 5 članova (osnivanje): **50.000 POEN** | 10: 100.000 | 20: 200.000 | 50: 500.000 | 100: 1.000.000 | 200: 2.000.000 | 500: 5.000.000
-  - Formula: `broj_članova × 10.000 POEN`
-- Logika: `src/lib/protokol/krug.ts` → `proveriIEmitujBonusPrag()`.
+- 🔴 **Rast kolektivnih oblika VIŠE NIJE kanal evidentiranja (brisan iz čl. 15 u 4.2.0).** Krugu se po broju članova **ne evidentira ništa**: ni 50.000 POEN pri osnivanju, ni pragovi 10/20/50/100/200/500. Modul `src/lib/protokol/krug.ts` (`proveriIEmitujBonusPrag()`) je **obrisan**, a emisija iz `/api/admin/krugovi/[id]/odobri` uklonjena.
+- **Već isplaćeni bonusi ostaju** — ne poništavaju se unazad; `KrugBonusLog` i `TransactionType.EMISIJA_KRUG_BONUS`/`EMISIJA_KRUG_OSNIVANJE` ostaju da bi stare transakcije i dalje imale zapis i labelu.
+- Ne vraćati bonus bez prethodne izmene čl. 15 — emisija bez kanala je upis POEN-a bez pravnog osnova.
 
 ### Programi Protokola
 - **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** Fondacija/Gornje Kolo/nosioci ZRNA objavljuju **zadatak**; korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
@@ -284,7 +290,7 @@ src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
 src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
-dokumentacija 3.9/ — kanonska dokumentacija (v3.9.0)
+dokumentacija 4.2/ — kanonska dokumentacija (v4.2.0, sr + en/ru/hr/hu)
 nova dokumentacija/ — prethodni mešani set (3.7.2–3.7.6), istorija; app rendering još čita odavde
 docs/             — interne radne beleške (nije normativa)
 ```
@@ -489,13 +495,12 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 - `programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
 - `pokrovitelj.ts` — pun tok prijave, fiksna tabela 7 nivoa, `bonusZaNivo()`, `izracunajNivo()`
 - `donacija.ts` — `nivoZaKumulativ()`, `izracunajPoenZaDonaciju()`, `evidentirajDonaciju()` (11 nivoa, maks 2,00× ✅)
-- `krug.ts` — bonus rasta Kruga (ne ulazi u dnevni limit)
 - `zrno.ts` — `UKUPNO_ZRNA`, `MINIMUM_POEN_ZA_UPIS_ZRNA`, obračunski koeficijent (`trendsKurs`/`poslednjiKurs`), noćna obrada, `glasackaMoc()`
 - `osnivacki.ts` — osnivački kanal (100 × 24.000, granica 2.4M, raspodela; korak na svakih 100.000 opticaja, automatski i uzastopno pri preskočenim pragovima)
 - `fondacija.ts` — saldo Fondacije + zaštitni veto (🟡 prag 3× hardkodovan)
 - `faza-sistema.ts` — Faza 1/2, auto prelaz na 1.000.000 POEN
 - `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` — dokaz stvarnosti i nadzor
-- `doprinos-sadrzaju.ts` — osmi kanal (čl. 40a); čista pravila u `src/lib/doprinos-pravila.ts`
+- `doprinos-sadrzaju.ts` — sedmi kanal, doprinos razmeni na platformi (čl. 40a); čista pravila u `src/lib/doprinos-pravila.ts`. **Interni identifikatori zadržavaju staro ime** (`DoprinosSadrzaju`, `EMISIJA_SADRZAJ`, `/api/admin/doprinos-sadrzaju`) — kao `banka-singleton` za Protokol; preimenovanje bi tražilo migraciju bez koristi.
 - `pristup.ts` — provere pristupa po statusu/indeksu
 - `src/lib/notifikacije.ts` — `posaljiNotifikaciju()`; `src/lib/faq-data.ts` — `FAQ_SEKCIJE`
 

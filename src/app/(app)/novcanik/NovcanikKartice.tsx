@@ -28,7 +28,7 @@ interface Props {
   platiPseudonim?: string;
   prefillIznos?: string;
   prefillOpis?: string;
-  /** Doprinos sadržaju koji čeka okidač (0 = nema). Nikad se ne sabira sa stanjem. */
+  /** Doprinos razmeni koji čeka okidač (0 = nema). Nikad se ne sabira sa stanjem. */
   zabelezenDoprinos?: number;
   /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
   smeDaSalje?: boolean;

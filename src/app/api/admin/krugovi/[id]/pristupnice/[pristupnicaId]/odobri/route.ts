@@ -3,7 +3,6 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
 import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
@@ -51,8 +50,9 @@ export async function POST(
     });
   });
 
-  // Proveri bonus prag (van $transaction)
-  await proveriIEmitujBonusPrag(krugId);
+  // Nema provere bonus praga. Rast kolektivnih oblika više nije kanal evidentiranja
+  // (Pravilnik 4.2.0 čl. 15), pa novi član ne okida emisiju POEN-a krugu — modul
+  // `protokol/krug.ts` sa pragovima 10/20/50/100/200/500 je obrisan.
 
   const krug = await prisma.krug.findUnique({ where: { id: krugId }, select: { name: true } });
 

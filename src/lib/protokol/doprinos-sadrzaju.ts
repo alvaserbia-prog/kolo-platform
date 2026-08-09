@@ -1,6 +1,6 @@
 /**
- * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
- * Osnov: Pravilnik o KOLO sistemu 4.1.0 čl. 15 tačka 8 i čl. 40a.
+ * Doprinos razmeni na platformi — sedmi kanal evidentiranja POEN-a.
+ * Osnov: Pravilnik o KOLO sistemu 4.2.0 čl. 15 tačka 7 i čl. 40a.
  *
  * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
  * ali samo za nalog čija stvarnost nije potvrđena:
@@ -51,7 +51,13 @@ export * from "@/lib/doprinos-pravila";
  * potvrđena nije prazan nalog — za njega čekanje ne štiti ni od čega.
  * NEVERIFIKOVANOM ostaje zabeležen dok ne nastupi okidač (st. 4).
  *
- * Ne beleži ništa ako oglas nije ponuda ili ne ispunjava sadržinski minimum.
+ * Kvalifikuje se i PONUDA i POTRAŽNJA (Pravilnik 4.2.0 čl. 40a st. 2 — „nudi ili
+ * traži"): kanal se od 4.2.0 zove „doprinos razmeni na platformi", a razmenu
+ * jednako pokreće onaj ko prvi kaže šta traži kao i onaj ko kaže šta nudi.
+ * Neverifikovanom je POTRAŽNJA i dalje zatvorena (čl. 16 st. 5), pa se za njega
+ * ništa ne menja — filtriranje po tipu naloga radi `smeDaPostaviOglas`.
+ *
+ * Ne beleži ništa ako oglas ne ispunjava sadržinski minimum.
  * Ne baca: neuspeh beleženja ne sme da obori objavu oglasa koji je već upisan.
  *
  * MORA se zvati VAN `prisma.$transaction()` — evidentiranje vodi u `emitujPoen()`,
@@ -61,7 +67,6 @@ export async function zabeleziDoprinos(
   userId: string,
   oglas: OglasMinimum & { id: string },
 ): Promise<boolean> {
-  if (oglas.tip !== "PONUDA") return false;
   if (!oglasIspunjavaMinimum(oglas).ok) return false;
 
   try {
@@ -161,7 +166,7 @@ export async function probajEvidentirati(
         wallet.id,
         zabelezen.iznos,
         TransactionType.EMISIJA_SADRZAJ,
-        "Doprinos sadržaju platforme",
+        "Doprinos razmeni na platformi",
         { kljuc: "transakcije.doprinos_sadrzaju" },
       );
       transakcijaId = transaction.id;

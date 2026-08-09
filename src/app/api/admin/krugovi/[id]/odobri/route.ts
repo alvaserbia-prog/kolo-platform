@@ -3,8 +3,6 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { emitujPoen } from "@/lib/protokol/emisija";
-import { TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
@@ -68,18 +66,13 @@ export async function POST(
     });
   });
 
-  // 5. Emisija 50.000 POEN (Čl. 37) — van transakcije jer koristi sopstvenu tx
-  await emitujPoen(
-    walletId,
-    50_000,
-    TransactionType.EMISIJA_KRUG_OSNIVANJE,
-    `Osnivanje krugovi "${zahtev.name}"`, { kljuc: "transakcije.krug_osnivanje", parametri: { krug: zahtev.name } }
-  );
-
-  // Logovati osnivački prag (threshold=5) u BonusLog radi konzistentnosti
-  await prisma.krugBonusLog.create({
-    data: { krugId, threshold: 5, amount: 50_000 },
-  });
+  // 5. Bez emisije POEN-a pri osnivanju. Rast kolektivnih oblika više NIJE kanal
+  // evidentiranja (Pravilnik 4.2.0 čl. 15 — kanal brisan, spisak sa 8 pao na 7;
+  // Glava VIII: „Krug nema mehanizam rasta"). Ranije se ovde emitovalo 50.000 POEN
+  // za osnivački prag od 5 članova. Emisija bez kanala iz čl. 15 bila bi upis novih
+  // zapisa POEN-a bez pravnog osnova, pa je uklonjena zajedno sa pragovima iz
+  // `protokol/krug.ts`. Već isplaćeni bonusi ostaju — ne poništavaju se retroaktivno,
+  // a `KrugBonusLog` ostaje kao njihov trag.
 
   await logAdminAkcija(session.user.id, "KRUG_ODOBREN", krugId, zahtev.name);
 
@@ -90,7 +83,7 @@ export async function POST(
       kljuc: "notifikacije.krug_odobren",
       parametri: { krug: zahtev.name },
       naslov: `Krug „${zahtev.name}" je odobren!`,
-      tekst: "Osnivanje kruga je odobreno. Krugu je evidentirano 50.000 POEN po osnovu rasta kolektivnih oblika.",
+      tekst: "Osnivanje kruga je odobreno.",
       link: `/krug/${krugId}`,
     });
   }

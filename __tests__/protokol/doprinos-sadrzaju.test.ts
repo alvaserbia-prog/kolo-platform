@@ -165,9 +165,28 @@ describe("zabeleziDoprinos", () => {
     });
   });
 
-  it("ne beleži za potražnju", async () => {
-    await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas({ tip: "POTRAZNJA" }) })).resolves.toBe(false);
-    expect(prismaMock.doprinosSadrzaju.create).not.toHaveBeenCalled();
+  // Od 4.2.0 kanal se zove „doprinos razmeni na platformi" i čl. 40a st. 2 glasi
+  // „nudi ILI TRAŽI" — potražnja se od tada kvalifikuje jednako kao ponuda.
+  // Neverifikovanog to ne dotiče: njemu je potražnja zatvorena na nivou objave
+  // (`smeDaPostaviOglas`, čl. 16 st. 5), pa do ovog poziva ni ne stigne.
+  it("beleži i za potražnju (čl. 40a st. 2 — nudi ili traži)", async () => {
+    prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
+    await expect(
+      zabeleziDoprinos("u1", { id: "o1", ...oglas({ tip: "POTRAZNJA" }) }),
+    ).resolves.toBe(true);
+    expect(prismaMock.doprinosSadrzaju.create).toHaveBeenCalledWith({
+      data: { userId: "u1", oglasId: "o1", iznos: IZNOS },
+    });
+  });
+
+  it("neverifikovanom potražnja ne prolazi ni objavu, pa do kanala ne stiže", () => {
+    const rez = smeDaPostaviOglas({
+      verifikovan: false,
+      brojAktivnihOglasa: 0,
+      oglas: oglas({ tip: "POTRAZNJA" }),
+    });
+    expect(rez.ok).toBe(false);
+    if (!rez.ok) expect(rez.status).toBe(403);
   });
 
   it("ne beleži za oglas ispod minimuma", async () => {
