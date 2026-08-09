@@ -504,11 +504,17 @@ A felhasználók által a rendszerben létrehozott tartalom a közjó része, é
 
 A felhasználó javára egyszeri alkalommal 1.000 POEN összegű hozzájárulás kerül nyilvántartásba az első olyan hirdetésért, amellyel javat vagy szolgáltatást kínál, és amely megfelel a Felhasználási feltételekben megállapított tartalmi minimumnak. A csatorna felhasználónként legfeljebb egyszer vehető igénybe, a közzétett hirdetések számától függetlenül.
 
-A hozzájárulás a hirdetés közzétételének pillanatában kerül feljegyzésre, a Protokollban pedig akkor kerül nyilvántartásba, amikor a következő események közül az első bekövetkezik: a felhasználó hitelesítése a kezességi láncban, vagy a POEN-nyilvántartás frissítése az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
+Hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba.
+
+Nem hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül feljegyzésre, a Protokollban pedig akkor kerül nyilvántartásba, amikor a következő események közül az első bekövetkezik: a felhasználó hitelesítése a kezességi láncban, vagy a POEN-nyilvántartás frissítése az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
+
+Az előző két bekezdésben tett megkülönböztetés célja annak megakadályozása, hogy a valódiságukban meg nem erősített fiókok még azelőtt növeljék a nyilvántartásba vett POEN-ek teljes számát, hogy a rendszerben a tényleges részvétel nyoma megjelenne.
 
 Ha a hirdetés a Felhasználási feltételek megsértése miatt eltávolításra kerül azelőtt, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás megsemmisül.
 
 A platform tartalmához való hozzájárulás nyilvántartásba vétele a Protokoll automatikus aktusa, és nem számít bele a működési hozzájárulásról szóló szabályzatban és a Támogatási Programok szabályzataiban megállapított napi korlátba.
+
+Annak a felhasználónak, aki e bekezdés hatálybalépésének napján hitelesített, és akinek hozzájárulása feljegyzésre került, de nyilvántartásba nem, a hozzájárulás egyszeri alkalommal, azonos összegben kerül nyilvántartásba.
 
 ## VII — A rendszer irányítása
 
@@ -748,7 +754,7 @@ A nyilvántartás átláthatósága biztosítja a rendszer felhasználók által
 
 A nyilvántartás átláthatósága nem terjed ki azokra az adatokra, amelyek közzététele sértené a felhasználók magánéletét — a hitelesítési gráfra, az önkéntesen megadott adatokra és az adatok különleges kategóriáira. Az álneves hozzájárulási nyilvántartás a hitelesített felhasználók számára elérhető, míg a látogatók és a nem hitelesített felhasználók a 28. cikkel összhangban általános mutatókat (összesítéseket) látnak. A platform hirdetési terében a hirdetések megtekintése külön kerül rendezésre (16. cikk), és eltér a hozzájárulási nyilvántartástól. Az adatok nyilvános hozzáférhetőségének terjedelmét az adatvédelmi szabályzat állapítja meg.
 
-A felhasználó minden pillanatban látja saját bejegyzéseit és saját feljegyzett, még nyilvántartásba nem vett hozzájárulását (40.a cikk 3. bekezdés). A feljegyzett hozzájárulás a többi felhasználó számára nem látható, és a nyilvántartásba vételig nem számít bele a nyilvános összesítésekbe.
+A felhasználó minden pillanatban látja saját bejegyzéseit és saját feljegyzett, még nyilvántartásba nem vett hozzájárulását (40.a cikk 4. bekezdés). A feljegyzett hozzájárulás a többi felhasználó számára nem látható, és a nyilvántartásba vételig nem számít bele a nyilvános összesítésekbe.
 
 ## X — A KOLO rendszer jogi természete és a négy elv
 

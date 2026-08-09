@@ -130,7 +130,7 @@ Verifikovani korisnik može, polazeći od objavljenog oglasa, da započne neposr
 
 Verifikovani korisnik koji ima pravo verifikacije može verifikovati oglašivača ako ga lično poznaje, jednokratnim kodom koji oglašivač generiše. Verifikacija se sprovodi pod istim uslovima i proverama utvrđenim Pravilnikom o dokazu stvarnosti (uključujući anti-cirkularno pravilo, kapacitet i nadzor).
 
-Za prvi oglas kojim nudi dobro ili uslugu i koji ispunjava sadržinski minimum korisniku se evidentira doprinos sadržaju platforme pod uslovima iz Člana 40a Pravilnika o KOLO sistemu. Doprinos se beleži pri objavi, a evidentira tek po nastupanju okidača utvrđenog tim članom.
+Za prvi oglas kojim nudi dobro ili uslugu i koji ispunjava sadržinski minimum korisniku se evidentira doprinos sadržaju platforme pod uslovima iz Člana 40a Pravilnika o KOLO sistemu. Verifikovanom korisniku doprinos se evidentira pri objavi. Neverifikovanom korisniku doprinos se pri objavi beleži, a evidentira tek po nastupanju okidača utvrđenog tim članom.
 
 Fondacija može ukloniti oglas koji krši ove Uslove, Pravilnik ili zakon, uz obaveštenje korisniku i navođenje razloga (Član 21 i Član 25). Ako oglas bude uklonjen pre nego što doprinos bude evidentiran, zabeleženi doprinos se poništava.
 

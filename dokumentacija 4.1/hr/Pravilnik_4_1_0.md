@@ -504,11 +504,17 @@ Sadržaj koji korisnici stvaraju u sustavu dio je zajedničkog dobra i licencira
 
 Korisniku se jednokratno evidentira doprinos u iznosu od 1.000 POEN-a za prvi oglas kojim nudi dobro ili uslugu, a koji ispunjava sadržajni minimum utvrđen Uvjetima korištenja. Kanal se koristi najviše jednom po korisniku, neovisno o broju objavljenih oglasa.
 
-Doprinos se bilježi u trenutku objave oglasa, a evidentira se u Protokolu kada nastupi prvi od sljedećih događaja: verifikacija korisnika u lancu jamstva, ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu.
+Verificiranom korisniku doprinos se evidentira u trenutku objave oglasa.
+
+Neverificiranom korisniku doprinos se u trenutku objave oglasa bilježi, a evidentira se u Protokolu kada nastupi prvi od sljedećih događaja: verifikacija korisnika u lancu jamstva, ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu.
+
+Razlikovanje iz prethodnih dvaju stavaka služi tome da računi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a prije nego što se u sustavu pojavi trag stvarnog sudjelovanja.
 
 Ako oglas bude uklonjen zbog povrede Uvjeta korištenja prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava.
 
 Evidentiranje doprinosa sadržaju platforme automatski je akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa Podrške.
+
+Korisniku koji je verificiran na dan stupanja na snagu ovoga stavka, a čiji je doprinos zabilježen a nije evidentiran, doprinos se evidentira jednokratno, u istom iznosu.
 
 ## VII — Upravljanje sustavom
 
@@ -748,7 +754,7 @@ Transparentnost evidencije osigurava nadzor sustava od strane korisnika i smanju
 
 Transparentnost evidencije ne obuhvaća podatke čija bi objava narušila privatnost korisnika — graf verifikacija, dobrovoljno unesene podatke i posebne kategorije podataka. Pseudonimna je evidencija doprinosa dostupna verificiranim korisnicima, dok posjetitelji i neverificirani korisnici vide opće pokazatelje (agregate) u skladu s člankom 28. Pregled oglasa u platformskom prostoru za oglašavanje uređuje se posebno (čl. 16.) i razlikuje se od evidencije doprinosa. Opseg javne dostupnosti podataka utvrđuje se Politikom privatnosti.
 
-Korisnik u svakom trenutku vidi vlastite zapise i vlastiti zabilježeni doprinos koji još nije evidentiran (članak 40.a stavak 3.). Zabilježeni doprinos nije vidljiv drugim korisnicima i ne ulazi u javne agregate dok ne bude evidentiran.
+Korisnik u svakom trenutku vidi vlastite zapise i vlastiti zabilježeni doprinos koji još nije evidentiran (članak 40.a stavak 4.). Zabilježeni doprinos nije vidljiv drugim korisnicima i ne ulazi u javne agregate dok ne bude evidentiran.
 
 ## X — Pravna priroda KOLO sustava i četiri načela
 
