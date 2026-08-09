@@ -9,6 +9,7 @@ import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
 import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
+import { probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -199,6 +200,10 @@ export async function POST(req: NextRequest) {
   // (verifikacija ili primljen POEN) to NIJE zapis POEN-a: ništa se ne emituje, ni
   // opticaj ni ijedan sistemski prag se ne pomera.
   await zabeleziDoprinos(session.user.id, { id: listing.id, ...oglasZaProveru, images: imagePaths });
+
+  // Nov oglas pomera brojač koraka 3 na putanji doprinosa razmeni (čl. 40a).
+  // Sekvencijalno i van transakcije — vodi u sopstvenu emisiju. Ne baca.
+  await probajNapredovati(session.user.id);
 
   // Obavesti korisnike koji prate ovu kategoriju. Ne sme da obori objavu oglasa
   // ako pukne — oglas je već upisan.

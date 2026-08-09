@@ -74,7 +74,9 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
     const res = await fetch("/api/poruke", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: oglas.sellerId }),
+      // `oglasId` beleži upit povodom oglasa — uslov koraka 3 na putanji
+      // doprinosa razmeni (Pravilnik čl. 40a). Razgovor se otvara i bez njega.
+      body: JSON.stringify({ userId: oglas.sellerId, oglasId: oglas.id }),
     });
     setChatLoading(false);
     if (!res.ok) return;
@@ -285,6 +287,12 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
             </div>
           )}
 
+          {/* Razmena povodom oglasa — obostrana potvrda (Pravilnik čl. 40a).
+              Vidi je i oglašivač i sagovornik; uklonjen oglas je izuzet. */}
+          {oglas.status !== "UKLONJEN" && jePrijavljen && (
+            <RazmenaBlok oglasId={oglas.id} isMine={oglas.isMine} />
+          )}
+
           {/* Prijava spornog oglasa (Uslovi čl. 25 st. 2). Otvorena svim
               prijavljenima — pregled oglasa je javan, pa i neverifikovani vidi
               sporan sadržaj i treba da može da ga prijavi. */}
@@ -293,6 +301,151 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ── Razmena povodom oglasa ─────────────────────────────────────────────────────
+
+type RazmenaStavka = {
+  sagovornikId: string;
+  sagovornikPseudonim: string;
+  status: "PREDLOZENA" | "REALIZOVANA" | "ODBIJENA";
+  potvrdioOglasivac: boolean;
+  potvrdioSagovornik: boolean;
+  cekaMene: boolean;
+};
+
+/**
+ * Obostrana potvrda razmene. Razmena ulazi u brojač putanje (čl. 40a) tek kad je
+ * označe OBE strane — jednostrana tvrdnja ne vredi ništa, inače bi se lestvica
+ * prolazila sama sa sobom. Fondacija ovim ne posreduje u razmeni (čl. 16).
+ */
+function RazmenaBlok({ oglasId, isMine }: { oglasId: string; isMine: boolean }) {
+  const t = useTranslations("pijaca");
+  const [razmene, setRazmene] = useState<RazmenaStavka[]>([]);
+  const [upiti, setUpiti] = useState<Array<{ id: string; pseudonim: string }>>([]);
+  const [ucitano, setUcitano] = useState(false);
+  const [radiId, setRadiId] = useState<string | null>(null);
+  const [greskaTekst, setGreskaTekst] = useState("");
+
+  async function ucitaj() {
+    const res = await fetch(`/api/pijaca/${oglasId}/razmena`);
+    if (!res.ok) return setUcitano(true);
+    const data = await res.json();
+    setRazmene(data.razmene ?? []);
+    setUpiti(data.upiti ?? []);
+    setUcitano(true);
+  }
+
+  useEffect(() => {
+    void ucitaj();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [oglasId]);
+
+  async function posalji(akcija: "potvrdi" | "odbij", sagovornikId?: string) {
+    setRadiId(sagovornikId ?? "ja");
+    setGreskaTekst("");
+    try {
+      const res = await fetch(`/api/pijaca/${oglasId}/razmena`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ akcija, sagovornikId }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setGreskaTekst(data.error ?? t("razmena_greska"));
+        return;
+      }
+      await ucitaj();
+    } finally {
+      setRadiId(null);
+    }
+  }
+
+  if (!ucitano) return null;
+
+  // Oglašivač bira među onima koji su mu se javili; sagovornik označava sebe.
+  const mojaRazmena = isMine ? null : (razmene[0] ?? null);
+  const bezRazmene = isMine
+    ? upiti.filter((u) => !razmene.some((r) => r.sagovornikId === u.id))
+    : [];
+
+  if (isMine && upiti.length === 0 && razmene.length === 0) return null;
+
+  return (
+    <div className="pt-3 border-t border-kolo-border space-y-2">
+      <div className="text-xs font-semibold text-kolo-text">{t("razmena_naslov")}</div>
+      <p className="text-xs text-kolo-muted">
+        {isMine ? t("razmena_opis_oglasivac") : t("razmena_opis_sagovornik")}
+      </p>
+
+      {razmene.map((r) => (
+        <div
+          key={r.sagovornikId}
+          className="flex items-center justify-between gap-2 text-xs bg-kolo-bg rounded-xl px-3 py-2"
+        >
+          <span className="text-kolo-muted">
+            {isMine ? <Pseudonim>{r.sagovornikPseudonim}</Pseudonim> : t("razmena_ja")}
+          </span>
+          {r.status === "REALIZOVANA" ? (
+            <span className="font-semibold text-kolo-green-700">{t("razmena_realizovana")}</span>
+          ) : r.status === "ODBIJENA" ? (
+            <span className="text-kolo-muted">{t("razmena_odbijena")}</span>
+          ) : r.cekaMene ? (
+            <span className="flex gap-2">
+              <button
+                onClick={() => posalji("potvrdi", isMine ? r.sagovornikId : undefined)}
+                disabled={radiId !== null}
+                className="px-3 py-1 rounded-lg bg-kolo-green-700 text-white font-semibold disabled:opacity-50"
+              >
+                {t("razmena_oznaci")}
+              </button>
+              <button
+                onClick={() => posalji("odbij", isMine ? r.sagovornikId : undefined)}
+                disabled={radiId !== null}
+                className="px-3 py-1 rounded-lg border border-kolo-border text-kolo-muted disabled:opacity-50"
+              >
+                {t("razmena_odbij")}
+              </button>
+            </span>
+          ) : (
+            <span className="text-kolo-muted">{t("razmena_ceka_drugu_stranu")}</span>
+          )}
+        </div>
+      ))}
+
+      {/* Oglašivač — oni koji su se javili, a razmena još nije ni predložena. */}
+      {bezRazmene.map((u) => (
+        <div
+          key={u.id}
+          className="flex items-center justify-between gap-2 text-xs bg-kolo-bg rounded-xl px-3 py-2"
+        >
+          <span className="text-kolo-muted">
+            <Pseudonim>{u.pseudonim}</Pseudonim>
+          </span>
+          <button
+            onClick={() => posalji("potvrdi", u.id)}
+            disabled={radiId !== null}
+            className="px-3 py-1 rounded-lg bg-kolo-green-700 text-white font-semibold disabled:opacity-50"
+          >
+            {t("razmena_oznaci")}
+          </button>
+        </div>
+      ))}
+
+      {/* Sagovornik koji još nije ništa označio. */}
+      {!isMine && !mojaRazmena && (
+        <button
+          onClick={() => posalji("potvrdi")}
+          disabled={radiId !== null}
+          className="w-full py-2 rounded-xl border border-kolo-green-500 text-kolo-green-700 text-xs font-semibold hover:bg-kolo-green-100 transition-colors disabled:opacity-50"
+        >
+          {t("razmena_oznaci")}
+        </button>
+      )}
+
+      {greskaTekst && <div className="text-xs text-kolo-danger">{greskaTekst}</div>}
     </div>
   );
 }

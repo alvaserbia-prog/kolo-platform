@@ -7,6 +7,7 @@ import { gdePseudonim } from "@/lib/pseudonim";
 import { DoprinosOkidac, TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
+import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
 
 export async function POST(req: NextRequest) {
@@ -119,6 +120,14 @@ export async function POST(req: NextRequest) {
   // (čl. 40a st. 3). Zove se VAN transakcije — `emitujPoen()` otvara sopstvenu.
   // Ne baca: prenos je već upisan i ne sme da padne zbog ovog kanala.
   await probajEvidentirati(primalac.id, DoprinosOkidac.PRIMLJEN_POEN, posiljac.id);
+  // Primljen POEN je okidač i za zabeležene korake putanje doprinosa razmeni.
+  await probajEvidentiratiKorake(primalac.id);
+
+  // Prenos POEN-a pomera brojač OBEMA stranama: pošiljaocu može da otvori korak 2
+  // (POEN ka sagovorniku van lanca), a obojici može da zatvori sagovornika ako je
+  // ovim POEN vraćen u roku od 60 dana. Sekvencijalno i van transakcije; ne baca.
+  await probajNapredovati(posiljac.id);
+  await probajNapredovati(primalac.id);
 
   // Iznos se NE formatira ovde: broj ide kao parametar, a razdvajač hiljada se
   // bira pri prikazu, po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000).

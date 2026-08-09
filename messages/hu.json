@@ -334,7 +334,20 @@
     "zabelezen_opis": "Akkor kerül bevezetésre, amikor valaki hitelesít téged, vagy POEN-t ír be neked. Addig nem POEN-bejegyzés, és nem része az egyenlegnek.",
     "samo_primalac": "Amíg nem vagy hitelesítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a hitelesítés után nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
-    "nadoknada_opis": "Az általad végzett hamis hitelesítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor rögzíthetsz, ha a bejegyzésed túllépi a nullát."
+    "nadoknada_opis": "Az általad végzett hamis hitelesítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor rögzíthetsz, ha a bejegyzésed túllépi a nullát.",
+    "putanja_naslov": "A cseréhez való hozzájárulás útja",
+    "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorrendben nyílnak meg, és felhasználónként összesen legfeljebb 5.000 POEN kerül nyilvántartásba.",
+    "putanja_ukupno": "{evidentirano} / {kapa} POEN",
+    "putanja_korak_1": "Az első, a tartalmi minimumnak megfelelő hirdetés és az első csere, amelyben valaki a te javadra jegyez be POEN-t",
+    "putanja_korak_2": "Az első csere, amelyben te jegyzel be POEN-t a láncodon kívüli felhasználónak",
+    "putanja_korak_3": "Három hirdetés, amelyek közül kettő különböző felhasználóktól kapott megkeresést",
+    "putanja_korak_4": "Csere 5 különböző, a láncodon kívüli személlyel",
+    "putanja_korak_5": "Csere 10 különböző, a láncodon kívüli személlyel",
+    "putanja_evidentiran": "Nyilvántartva",
+    "putanja_zabelezen": "Feljegyezve — a bejegyzés a hitelesítéskor jön létre",
+    "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
+    "putanja_zakljucan": "Még nem nyílt meg",
+    "putanja_pravila": "A számlálóba csak azok a hirdetéshez kötődő cserék kerülnek, amelyeket mindkét fél megtörténtnek jelölt, és csak a kezességi láncodon kívüli partnerekkel. Minden partner egyszer számít. Ha a POEN 60 napon belül visszakerül ugyanahhoz a személyhez, a partner kiesik a számlálóból. A nem hitelesített felhasználóval folytatott csere feljegyzésre kerül, de csak az ő hitelesítése után számít. Jelenleg a számlálóban: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -1643,7 +1656,17 @@
     "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, legalább {min} karakteres leírás, kategória és helység kell. Az első ilyen hirdetés {iznos} POEN hozzájárulást hoz neked, amelyet akkor vezetnek be, amikor valaki hitelesít téged, vagy POEN-t ír be neked.",
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
     "oznaka_neverifikovan": "nem hitelesített",
-    "oznaka_neverifikovan_opis": "A hirdető még nincs hitelesítve a kezességi láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel."
+    "oznaka_neverifikovan_opis": "A hirdető még nincs hitelesítve a kezességi láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
+    "razmena_naslov": "Csere a hirdetés kapcsán",
+    "razmena_opis_oglasivac": "Ha a cserét mindkét fél megjelöli, bekerül a cseréhez való hozzájárulás útjába. Az Alapítvány nem közvetít a cserében és nem is szavatol érte.",
+    "razmena_opis_sagovornik": "Ha a csere megtörtént, jelöld meg — ha a másik fél is megjelöli, bekerül a cseréhez való hozzájárulás útjába.",
+    "razmena_oznaci": "A csere megtörtént",
+    "razmena_odbij": "Nem volt csere",
+    "razmena_ceka_drugu_stranu": "A másik félre vár",
+    "razmena_realizovana": "Mindkét fél megjelölte",
+    "razmena_odbijena": "Elutasítva",
+    "razmena_ja": "Te",
+    "razmena_greska": "Nem sikerült. Próbáld újra."
   },
   "pocetna": {
     "dobrodoslice": "Üdvözlünk, <ime>{pseudonim}</ime>",
@@ -2397,7 +2420,9 @@
     "doprinos_sadrzaju_naslov": "{iznos} POEN rögzítve a hozzájárulásodért",
     "doprinos_sadrzaju_tekst": "A jószágot vagy szolgáltatást kínáló hirdetésedért rögzítettük a platform tartalmához való hozzájárulásodat — {iznos} POEN (Szabályzat 40a. cikk).",
     "nadoknada_naslov": "Megtérítés keletkezett a bejegyzéseden",
-    "nadoknada_tekst": "Az általad végzett hitelesítés érvénytelenítése {iznos} POEN megtérítést keletkeztetett, mert az érvénytelenített POEN nem volt fedezve. A megtérítés nem tartozás és nem hajtható be; a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva."
+    "nadoknada_tekst": "Az általad végzett hitelesítés érvénytelenítése {iznos} POEN megtérítést keletkeztetett, mert az érvénytelenített POEN nem volt fedezve. A megtérítés nem tartozás és nem hajtható be; a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva.",
+    "doprinos_razmeni_naslov": "Cseréhez való hozzájárulást jegyeztünk be neked — {korak}. lépés",
+    "doprinos_razmeni_tekst": "Teljesítetted a cseréhez való hozzájárulás útjának {korak}. lépését, és {iznos} POEN került nyilvántartásba (Szabályzat 40a. cikk)."
   },
   "transakcije": {
     "verifikacija": "Hitelesítés: {pseudonim}",
@@ -2409,7 +2434,8 @@
     "krug_bonus": "Kör-bónusz „{krug}” — tagok száma: {clanovi}",
     "krug_osnivanje": "Kör alapítása „{krug}”",
     "program": "Program: {program}",
-    "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához"
+    "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához",
+    "doprinos_razmeni": "Hozzájárulás a cseréhez — {korak}. lépés"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",

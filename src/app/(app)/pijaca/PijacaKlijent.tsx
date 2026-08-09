@@ -149,7 +149,9 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
     const res = await fetch("/api/poruke", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: sellerId }),
+      // `oglasId` beleži upit povodom oglasa — uslov koraka 3 na putanji
+      // doprinosa razmeni (Pravilnik čl. 40a).
+      body: JSON.stringify({ userId: sellerId, oglasId }),
     });
     if (!res.ok) { setKontaktLoadingId(null); return; }
     const data = await res.json();

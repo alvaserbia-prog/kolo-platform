@@ -5,6 +5,8 @@ import { sesija } from "@/lib/sesija";
 import NovcanikKartice from "./NovcanikKartice";
 import IstorijaTransakcija, { IstorijaSkeleton } from "./IstorijaTransakcija";
 import { dohvatiZabelezen } from "@/lib/protokol/doprinos-sadrzaju";
+import { dohvatiZabelezeneKorake } from "@/lib/protokol/doprinos-razmeni";
+import PutanjaRazmene, { PutanjaSkeleton } from "./PutanjaRazmene";
 
 export default async function NovcanikPage({
   searchParams,
@@ -19,7 +21,7 @@ export default async function NovcanikPage({
 
   // Laki upiti potrebni za gornju karticu (stanje POEN). ZRNO kartica je
   // privremeno uklonjena iz Novčanika (ostaje dostupna preko sidebara /zrno).
-  const [wallet, dbUser, zabelezenDoprinos] = await Promise.all([
+  const [wallet, dbUser, zabelezenOglas, zabelezeniKoraci] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
@@ -31,7 +33,11 @@ export default async function NovcanikPage({
     // Zabeležen doprinos vidi SAMO vlasnik naloga (Pravilnik čl. 67) i nikad se
     // ne sabira sa stanjem — do evidentiranja to nije zapis POEN-a (čl. 40a st. 3).
     dohvatiZabelezen(session.user.id),
+    // Koraci 2–5 putanje (čl. 40a) čekaju iste okidače kao korak 1, pa u kartici
+    // stoje kao jedan red „zabeležen doprinos", ne kao dva odvojena iznosa.
+    dohvatiZabelezeneKorake(session.user.id),
   ]);
+  const zabelezenDoprinos = zabelezenOglas + zabelezeniKoraci;
 
   return (
     <div className="space-y-6">
@@ -47,6 +53,12 @@ export default async function NovcanikPage({
         // (čl. 28 st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto.
         smeDaSalje={dbUser?.tipKorisnika !== "NEVERIFIKOVAN"}
       />
+
+      {/* Putanja doprinosa razmeni (čl. 40a). Očitava brojače iz više tabela, pa
+          se striminguje odvojeno — kartice ne čekaju na nju. */}
+      <Suspense fallback={<PutanjaSkeleton />}>
+        <PutanjaRazmene userId={session.user.id} />
+      </Suspense>
 
       {/* Istorija transakcija je najteži upit (100 redova + ugnežđeni JOIN-ovi):
           striminguje se odvojeno da kartice ne čekaju na nju. */}
