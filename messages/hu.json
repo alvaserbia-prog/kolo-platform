@@ -2195,12 +2195,12 @@
     "osnivaci_otkljucaj_confirm": "Otključati listu osnivača za izmene? Dok je otključana, koraci se ne evidentiraju.",
     "osnivaci_evidentiraj_treba_zakljucati": "Koraci se evidentiraju tek kad je lista osnivača zaključana (zbir udela 100%).",
     "doprinos_zatecene_naslov": "Zatečeni doprinosi za sadržaj (jednokratno)",
-    "doprinos_zatecene_opis": "Verifikovanim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Neverifikovani se preskaču — oni i dalje čekaju okidač.",
+    "doprinos_zatecene_opis": "Verifikovanim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Neverifikovani se preskaču — oni i dalje čekaju okidač. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Opticaj skače za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira automatski na svakih 100.000 POEN, prva noćna emisija posle ovoga može da upali korak. Ponovno pokretanje ne evidentira dvaput.",
     "doprinos_zatecene_confirm": "Evidentirati sada sve zatečene doprinose verifikovanih članova? Opticaj će porasti i to može da upali osnivački korak.",
-    "doprinos_zatecene_gotovo": "Razrešeno: {evidentirano}. U opticaj ušlo {poen} POEN. Preskočeno neverifikovanih: {preskoceno}.",
+    "doprinos_zatecene_gotovo": "Razrešeno: {evidentirano}. U opticaj ušlo {poen} POEN. Preskočeno neverifikovanih: {preskoceno}. Poslato obaveštenja: {obavesteno}.",
     "osnivaci_obrisi_confirm": "Obrisati osnivača?",
     "osnivaci_ucitavanje": "Učitavanje…",
     "pokr_prijave_ucitavanje": "Učitavanje…",
@@ -2365,7 +2365,9 @@
     "bag_odbijeno_naslov": "Hibabejelentés elutasítva",
     "bag_odbijeno_tekst": "A(z) „{naslov}” bejelentésedet nem fogadtuk el hibaként.",
     "bag_promenjen_naslov": "A hibabejelentés állapota megváltozott",
-    "bag_promenjen_tekst": "A(z) „{naslov}” bejelentésed állapota megváltozott."
+    "bag_promenjen_tekst": "A(z) „{naslov}” bejelentésed állapota megváltozott.",
+    "doprinos_sadrzaju_naslov": "{iznos} POEN rögzítve a hozzájárulásodért",
+    "doprinos_sadrzaju_tekst": "A jószágot vagy szolgáltatást kínáló hirdetésedért rögzítettük a platform tartalmához való hozzájárulásodat — {iznos} POEN (Szabályzat 40a. cikk)."
   },
   "transakcije": {
     "verifikacija": "Hitelesítés: {pseudonim}",

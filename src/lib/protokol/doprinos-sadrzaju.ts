@@ -31,6 +31,7 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { logAdminAkcija } from "@/lib/audit";
+import { obavesti } from "@/lib/notifikacije";
 import { DoprinosOkidac, DoprinosStatus, TransactionType } from "@/generated/prisma/client";
 import { IZNOS, oglasIspunjavaMinimum, type OglasMinimum } from "@/lib/doprinos-pravila";
 
@@ -109,6 +110,40 @@ export async function ponistiZabelezen(oglasId: string, adminId?: string): Promi
 
   if (adminId) await logAdminAkcija(adminId, "DOPRINOS_SADRZAJU_PONISTEN", oglasId);
   return true;
+}
+
+/**
+ * Javlja korisniku da mu je doprinos evidentiran i pamti da je javljeno.
+ *
+ * Zašto zaseban `obavestenAt`, a ne `evidentiranAt`: zapis POEN-a ne sme da čeka
+ * na obaveštenje (mejl/push idu van transakcije i umeju da padnu), a obaveštenje
+ * ne sme da ode dvaput. `EVIDENTIRAN` uz `obavestenAt: null` znači „duguje se
+ * javljanje" — to stanje `evidentirajZateceneVerifikovane()` naknadno pokupi.
+ *
+ * Ne baca: doprinos je već evidentiran u trenutku poziva i ne poništava se zato
+ * što obaveštenje nije prošlo.
+ */
+async function javiEvidentiran(userId: string, doprinosId: string, iznos: number): Promise<boolean> {
+  try {
+    await obavesti(userId, {
+      tip: "doprinos_sadrzaju",
+      kljuc: "notifikacije.doprinos_sadrzaju",
+      parametri: { iznos: iznos.toLocaleString("sr-RS") },
+      naslov: `Evidentiran ti je doprinos od ${iznos.toLocaleString("sr-RS")} POEN`,
+      tekst:
+        `Za oglas kojim nudiš dobro ili uslugu evidentiran ti je doprinos sadržaju ` +
+        `platforme — ${iznos.toLocaleString("sr-RS")} POEN (Pravilnik čl. 40a).`,
+      link: "/novcanik",
+    });
+    await prisma.doprinosSadrzaju.update({
+      where: { id: doprinosId },
+      data: { obavestenAt: new Date() },
+    });
+    return true;
+  } catch (e) {
+    console.error("[doprinos-sadrzaju] obaveštenje nije poslato", { userId, doprinosId, e });
+    return false;
+  }
 }
 
 /**
@@ -192,6 +227,10 @@ export async function probajEvidentirati(
       userId,
       `${zabelezen.iznos} POEN, okidač ${okidac}`,
     );
+
+    // Čovek mora da sazna da mu je POEN evidentiran — inače mu se stanje promeni
+    // bez ijednog traga u zvoncetu. Ide POSLE emisije, jer se javlja o svršenom činu.
+    await javiEvidentiran(userId, zabelezen.id, zabelezen.iznos);
     return true;
   } catch (e) {
     console.error("[doprinos-sadrzaju] evidentiranje nije uspelo", { userId, okidac, e });
@@ -224,12 +263,19 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
  * OPTICAJ SKAČE za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira
  * automatski na svakih 100.000 POEN opticaja, prva noćna emisija posle ovoga može
  * da upali jedan ili više koraka. To je očekivano, nije greška.
+ *
+ * Uz razrešavanje, dugme NAKNADNO JAVLJA i onima kojima je doprinos već evidentiran
+ * a obaveštenje nije otišlo (`EVIDENTIRAN` + `obavestenAt: null`) — to je tačno
+ * stanje koje je nastalo prvim pritiskom na dugme, pre nego što je obaveštenje
+ * postojalo. Ponovni pritisak je bezopasan: ništa se ne emituje dvaput i nikome
+ * se ne javlja dvaput.
  */
 export async function evidentirajZateceneVerifikovane(): Promise<{
   ukupnoZabelezenih: number;
   evidentirano: number;
   preskocenoNeverifikovanih: number;
   poenUOpticaj: number;
+  naknadnoObavesteno: number;
 }> {
   const zabelezeni = await prisma.doprinosSadrzaju.findMany({
     where: { status: DoprinosStatus.ZABELEZEN },
@@ -252,10 +298,22 @@ export async function evidentirajZateceneVerifikovane(): Promise<{
     }
   }
 
+  // Zaostala obaveštenja. Upit ide POSLE petlje, pa hvata i one koje je ona upravo
+  // evidentirala a kojima javljanje nije prošlo (mejl/push umeju da padnu).
+  const neobavesteni = await prisma.doprinosSadrzaju.findMany({
+    where: { status: DoprinosStatus.EVIDENTIRAN, obavestenAt: null },
+    select: { id: true, userId: true, iznos: true },
+  });
+  let naknadnoObavesteno = 0;
+  for (const d of neobavesteni) {
+    if (await javiEvidentiran(d.userId, d.id, d.iznos)) naknadnoObavesteno += 1;
+  }
+
   return {
     ukupnoZabelezenih: zabelezeni.length,
     evidentirano,
     preskocenoNeverifikovanih: preskoceno,
     poenUOpticaj: poen,
+    naknadnoObavesteno,
   };
 }
