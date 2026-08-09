@@ -328,15 +328,16 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Zaglavlje drži samo logo i naziv; jezik stoji na dnu drawer-a. */}
+        {/* Jezik stoji uz desnu ivicu zaglavlja, pored naziva. Stalo je tek otkad je
+            switcher padajući (~70px): red od 6 zastavica je bio širi od prostora koji
+            u drawer-u od 256px ostane pored logotipa, pa je prelazio preko „KOLO".
+            Spisak se širi ulevo (`poravnaj="desno"`) da ne izađe iz drawer-a. */}
         <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
           <Image src="/kolo-icon.png" alt="KOLO" width={38} height={38} className="object-contain" />
           <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
+          <JezikSvitcer className="ml-auto" poravnaj="desno" />
         </div>
         <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
-        <div className="shrink-0 px-4 pt-3 pb-4 border-t border-white/10 flex">
-          <JezikSvitcer nagore />
-        </div>
       </aside>
     </>
   );
