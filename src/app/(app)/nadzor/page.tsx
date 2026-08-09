@@ -1,6 +1,7 @@
 /**
  * /nadzor — stranica za nadzor verifikacija.
- * Vidljiva samo POCETNI / NOSILAC_ZRNA (čl. 10 Pravilnika o dokazu stvarnosti v3.5.0).
+ * Vidljiva samo nosiocima ZRNA (čl. 10 Pravilnika o dokazu stvarnosti 4.2.0 —
+ * podela po fazama je ukinuta, nadzornik je svaki nosilac ZRNA).
  */
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -59,6 +60,12 @@ export default async function NadzorPage() {
               }}
               verifikovani={{ id: v.verifikovani.id, pseudonim: v.verifikovani.pseudonim }}
               datum={v.vremenskiZig.toISOString()}
+              ranijiZapisi={v.nadzorZapisi.map((z) => ({
+                id: z.id,
+                ishod: z.ishod,
+                razlog: z.razlog,
+                createdAt: z.createdAt.toISOString(),
+              }))}
             />
           ))}
         </div>

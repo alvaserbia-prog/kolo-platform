@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
+import { raspolozivo } from "@/lib/protokol/nadoknada";
 import Pojam from "@/components/Pojam";
 import Pseudonim from "@/components/Pseudonim";
 import PushObavestenja from "@/components/PushObavestenja";
@@ -132,7 +133,9 @@ function BalansHeader() {
   return (
     <span className="text-white/60 text-sm hidden sm:inline-flex items-center gap-1">
       <span className="font-semibold text-white text-sm">
-        {balans === null ? "..." : balans.toLocaleString(intlTag(locale))}
+        {/* Negativan zapis (nadoknada, čl. 20b) se u zaglavlju prikazuje kao 0 —
+            raspoloživo je nula, a sama nadoknada ima svoj red u Novčaniku. */}
+        {balans === null ? "..." : raspolozivo(balans).toLocaleString(intlTag(locale))}
       </span>
       <Pojam
         termin="POEN"

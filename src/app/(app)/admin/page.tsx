@@ -25,7 +25,8 @@ export default async function AdminPage({
   const { tab } = await searchParams;
   const pocetniTab: Tab =
     (ADMIN_TABOVI as readonly string[]).includes(tab ?? "") &&
-    (viewerJeSuperadmin || (tab !== "audit" && tab !== "nadzor" && tab !== "aktivnost"))
+    (viewerJeSuperadmin ||
+      (tab !== "audit" && tab !== "nadzor" && tab !== "odluke" && tab !== "aktivnost"))
       ? (tab as Tab)
       : "dashboard";
 
@@ -139,6 +140,10 @@ export default async function AdminPage({
   const nadzorRedovi = viewerJeSuperadmin
     ? await prisma.rizikNalaz.findMany({ where: { status: "OTVOREN" }, orderBy: { rizik: "desc" }, take: 200 })
     : [];
+  // Badge na tabu Odluke — sami predmeti se učitavaju lenjo, iz taba (čl. 11a).
+  const otvorenihPredmeta = viewerJeSuperadmin
+    ? await prisma.nadzorniPredmet.count({ where: { status: "OTVOREN" } })
+    : 0;
   const nadzorNalazi = nadzorRedovi.map((r) => ({
     id: r.id,
     tip: r.tip,
@@ -155,6 +160,7 @@ export default async function AdminPage({
     <AdminKlijent
       opticaj={opticaj}
       nadzorNalazi={nadzorNalazi}
+      otvorenihPredmeta={otvorenihPredmeta}
       pendingDonacije={pendingDonacije.map((d) => ({
         id: d.id, pseudonim: d.user.pseudonim, amountRSD: Number(d.amountRSD),
         cumulativeRSD: Number(d.cumulativeRSD), level: d.level, poenEmitted: d.poenEmitted,

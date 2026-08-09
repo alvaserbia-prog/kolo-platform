@@ -1,0 +1,342 @@
+"use client";
+
+/**
+ * Odluke — nadzorni predmeti koje su otvorili nadzornici
+ * (Pravilnik o dokazu stvarnosti 4.2.0, čl. 11a i 18).
+ *
+ * Razdvojen je od taba „Nadzor": Nadzor je AUTOMAT (noćni radnik obeležava sumnjive
+ * naloge u `RizikNalaz`), a Odluke su LJUDSKA prijava — nadzornik je pogledao
+ * konkretnu verifikaciju i evidentirao „za proveru" ili „sporno".
+ *
+ * 🔴 Panel ne odlučuje — odlučuje Upravni odbor. Dve odluke i ništa treće:
+ *   — „nema osnova" → verifikacija ostaje, predmet se briše posle 90 dana;
+ *   — „utvrdi lažnu" → poništava se TA verifikacija; ako je utvrđeno i da iza naloga
+ *     ne stoji stvarna osoba, padaju sve verifikacije koje taj nalog dodiruju.
+ *
+ * Ne dodavati „poništi sve verifikacije ovog verifikatora" — to je upravo ono što je
+ * 4.2.0 uklonila, jer je stvarnim ljudima oduzimalo status zbog tuđe radnje (čl. 19).
+ */
+
+import { useState, useEffect, useCallback } from "react";
+import { useLocale } from "next-intl";
+import { intlTag } from "@/lib/format";
+import Pseudonim from "@/components/Pseudonim";
+
+type Prikaz = "otvoreni" | "reseni";
+
+interface Zapis {
+  id: string;
+  ishod: string;
+  razlog: string | null;
+  subjekt: string | null;
+  opis: string | null;
+  nadzornik: string;
+  createdAt: string;
+}
+
+interface Predmet {
+  id: string;
+  status: string;
+  subjekt: string;
+  razlog: string;
+  opis: string | null;
+  otvorenAt: string;
+  resenAt: string | null;
+  resenBy: string | null;
+  beleska: string | null;
+  verifikacijaId: string;
+  verifikator: { id: string; pseudonim: string; indeksStvarnosti: number; slotoviPotroseni: number };
+  verifikovani: {
+    id: string;
+    pseudonim: string;
+    indeksStvarnosti: number;
+    createdAt: string;
+    utvrdjenNepostojeci: string | null;
+  };
+  vremenskiZig: string;
+  zapisi: Zapis[];
+}
+
+const PRIKAZI: [Prikaz, string][] = [
+  ["otvoreni", "Otvoreni"],
+  ["reseni", "Rešeni"],
+];
+
+const RAZLOG_TEKST: Record<string, string> = {
+  ne_poznaju_se: "Ne poznaju se",
+  nalog_bez_znakova: "Nalog bez znakova stvarnosti",
+  dvostruki_nalog: "Dvostruki nalog",
+  obrazac_verifikacija: "Obrazac verifikacija",
+  prijava_verifikovanog: "Prijava verifikovanog",
+  ostalo: "Ostalo",
+};
+
+const SUBJEKT_TEKST: Record<string, string> = {
+  VERIFIKATOR: "verifikator",
+  VERIFIKOVANI: "verifikovani",
+  OBA: "oba korisnika",
+  DEO_MREZE: "deo mreže",
+};
+
+const ISHOD_STIL: Record<string, string> = {
+  SPORNO: "bg-red-100 text-red-700 border-red-200",
+  ZA_PROVERU: "bg-amber-100 text-amber-700 border-amber-200",
+  UREDNO: "bg-emerald-100 text-emerald-700 border-emerald-200",
+};
+
+const ISHOD_TEKST: Record<string, string> = {
+  SPORNO: "Sporno",
+  ZA_PROVERU: "Za proveru",
+  UREDNO: "Uredno",
+};
+
+const STATUS_TEKST: Record<string, string> = {
+  OTVOREN: "Otvoren",
+  UTVRDJENA_LAZNA: "Utvrđena lažna verifikacija",
+  NEMA_OSNOVA: "Nema osnova",
+};
+
+export default function OdlukeTab() {
+  const locale = useLocale();
+  const [prikaz, setPrikaz] = useState<Prikaz>("otvoreni");
+  const [predmeti, setPredmeti] = useState<Predmet[]>([]);
+  const [ucitava, setUcitava] = useState(true);
+  const [greska, setGreska] = useState("");
+  const [radiId, setRadiId] = useState<string | null>(null);
+  // Id predmeta čija je forma odluke otvorena, sa upisanom beleškom i markerom.
+  const [odlucujeId, setOdlucujeId] = useState<string | null>(null);
+  const [beleska, setBeleska] = useState("");
+  const [nepostojeci, setNepostojeci] = useState(false);
+
+  const ucitaj = useCallback(async () => {
+    setUcitava(true);
+    try {
+      const res = await fetch(`/api/admin/nadzor/predmeti?prikaz=${prikaz}`);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setGreska(data.error ?? "Greška pri učitavanju.");
+        return;
+      }
+      setPredmeti(data.predmeti ?? []);
+      setGreska("");
+    } finally {
+      setUcitava(false);
+    }
+  }, [prikaz]);
+
+  useEffect(() => {
+    void ucitaj();
+  }, [ucitaj]);
+
+  function zatvoriFormu() {
+    setOdlucujeId(null);
+    setBeleska("");
+    setNepostojeci(false);
+  }
+
+  async function posalji(id: string, putanja: string, telo: Record<string, unknown>) {
+    setRadiId(id);
+    setGreska("");
+    try {
+      const res = await fetch(`/api/admin/nadzor/predmeti/${id}/${putanja}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(telo),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setGreska(data.error ?? "Greška.");
+        return;
+      }
+      zatvoriFormu();
+      await ucitaj();
+    } finally {
+      setRadiId(null);
+    }
+  }
+
+  async function nemaOsnova(id: string) {
+    if (!confirm("Zatvoriti predmet nalazom da za sumnju nema osnova? Verifikacija ostaje na snazi.")) return;
+    await posalji(id, "nema-osnova", { beleska: beleska.trim() || null });
+  }
+
+  async function utvrdi(p: Predmet) {
+    const opseg = nepostojeci
+      ? `Padaju SVE verifikacije koje nalog ${p.verifikovani.pseudonim} dodiruje.`
+      : "Poništava se samo ova verifikacija.";
+    if (!confirm(`Utvrditi lažnu verifikaciju?\n\n${opseg}\n\nOvo se ne može poništiti.`)) return;
+    await posalji(p.id, "utvrdi", {
+      nepostojeciNalog: nepostojeci,
+      beleska: beleska.trim() || null,
+    });
+  }
+
+  const dat = (s: string) => new Date(s).toLocaleString(intlTag(locale));
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-lg font-semibold text-kolo-text">Odluke o spornim verifikacijama</h2>
+        <p className="text-sm text-kolo-muted">
+          Predmeti koje su otvorili nadzornici ishodom „za proveru" ili „sporno" (čl. 11a).
+          Predmet sam po sebi ne proizvodi dejstvo prema korisniku — lažnu verifikaciju
+          utvrđuje Upravni odbor (čl. 18).
+        </p>
+      </div>
+
+      <div className="flex gap-2">
+        {PRIKAZI.map(([p, naziv]) => (
+          <button
+            key={p}
+            onClick={() => setPrikaz(p)}
+            className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+              prikaz === p
+                ? "bg-kolo-green-700 text-white border-kolo-green-700"
+                : "bg-white text-kolo-text border-kolo-border hover:bg-kolo-bg"
+            }`}
+          >
+            {naziv}
+          </button>
+        ))}
+      </div>
+
+      {greska && (
+        <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {greska}
+        </div>
+      )}
+
+      {ucitava ? (
+        <div className="rounded-lg border border-kolo-border bg-white p-8 text-center text-kolo-muted">
+          Učitavanje…
+        </div>
+      ) : predmeti.length === 0 ? (
+        <div className="rounded-lg border border-kolo-border bg-white p-8 text-center text-kolo-muted">
+          Nema predmeta.
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {predmeti.map((p) => (
+            <div key={p.id} className="rounded-lg border border-kolo-border bg-white p-4 space-y-3">
+              <div className="flex flex-wrap items-start justify-between gap-2">
+                <div className="text-sm">
+                  <div className="font-medium text-kolo-text">
+                    <Pseudonim>{p.verifikator.pseudonim}</Pseudonim>
+                    {" → "}
+                    <Pseudonim>{p.verifikovani.pseudonim}</Pseudonim>
+                  </div>
+                  <div className="text-xs text-kolo-muted mt-0.5">
+                    Verifikacija {dat(p.vremenskiZig)} · predmet otvoren {dat(p.otvorenAt)}
+                  </div>
+                </div>
+                <span
+                  className={`px-2.5 py-1 rounded-full border text-xs ${
+                    ISHOD_STIL[p.zapisi.at(-1)?.ishod ?? "ZA_PROVERU"] ?? ISHOD_STIL.ZA_PROVERU
+                  }`}
+                >
+                  {SUBJEKT_TEKST[p.subjekt] ?? p.subjekt} · {RAZLOG_TEKST[p.razlog] ?? p.razlog}
+                </span>
+              </div>
+
+              {p.opis && <p className="text-sm text-kolo-text">{p.opis}</p>}
+
+              <div className="grid gap-2 sm:grid-cols-2 text-xs text-kolo-muted">
+                <div>
+                  Verifikator: indeks {p.verifikator.indeksStvarnosti}% · potrošenih slotova{" "}
+                  {p.verifikator.slotoviPotroseni}
+                </div>
+                <div>
+                  Verifikovani: indeks {p.verifikovani.indeksStvarnosti}% · nalog od{" "}
+                  {new Date(p.verifikovani.createdAt).toLocaleDateString(intlTag(locale))}
+                  {p.verifikovani.utvrdjenNepostojeci && " · već utvrđen nepostojećim"}
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-kolo-bg p-2 space-y-1">
+                {p.zapisi.map((z) => (
+                  <div key={z.id} className="text-xs text-kolo-muted">
+                    <span className={`px-1.5 py-0.5 rounded border ${ISHOD_STIL[z.ishod]}`}>
+                      {ISHOD_TEKST[z.ishod] ?? z.ishod}
+                    </span>{" "}
+                    {z.nadzornik} · {dat(z.createdAt)}
+                    {z.razlog && ` · ${RAZLOG_TEKST[z.razlog] ?? z.razlog}`}
+                    {z.opis && ` — ${z.opis}`}
+                  </div>
+                ))}
+              </div>
+
+              {p.status !== "OTVOREN" ? (
+                <div className="text-xs text-kolo-muted">
+                  {STATUS_TEKST[p.status] ?? p.status}
+                  {p.resenBy && ` · ${p.resenBy}`}
+                  {p.resenAt && ` · ${dat(p.resenAt)}`}
+                  {p.beleska && ` — ${p.beleska}`}
+                </div>
+              ) : odlucujeId === p.id ? (
+                <div className="space-y-2 border-t border-kolo-border pt-3">
+                  <textarea
+                    value={beleska}
+                    onChange={(e) => setBeleska(e.target.value)}
+                    placeholder="Beleška uz odluku (opciono) — ide u audit log."
+                    rows={2}
+                    className="w-full rounded-lg border border-kolo-border px-3 py-2 text-sm"
+                  />
+                  <label className="flex items-start gap-2 text-sm text-kolo-text">
+                    <input
+                      type="checkbox"
+                      checked={nepostojeci}
+                      onChange={(e) => setNepostojeci(e.target.checked)}
+                      className="mt-1"
+                    />
+                    <span>
+                      Utvrđeno je i da iza naloga <strong>{p.verifikovani.pseudonim}</strong> ne
+                      stoji stvarna osoba, odnosno da nalog nije jedinstven.
+                      <span className="block text-xs text-kolo-muted">
+                        Bez ovoga pada samo ova verifikacija, a verifikovani zadržava status i
+                        sopstvene verifikacije (čl. 19). Sa ovim padaju sve verifikacije koje
+                        nalog dodiruje, a kaskada staje na prvom stvarnom čoveku (čl. 20).
+                      </span>
+                    </span>
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => utvrdi(p)}
+                      disabled={radiId === p.id}
+                      className="px-3 py-1.5 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
+                    >
+                      Utvrdi lažnu verifikaciju
+                    </button>
+                    <button
+                      onClick={() => nemaOsnova(p.id)}
+                      disabled={radiId === p.id}
+                      className="px-3 py-1.5 text-sm rounded-lg border border-kolo-border hover:bg-kolo-bg disabled:opacity-50"
+                    >
+                      Nema osnova
+                    </button>
+                    <button
+                      onClick={zatvoriFormu}
+                      className="px-3 py-1.5 text-sm text-kolo-muted hover:text-kolo-text"
+                    >
+                      Odustani
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  onClick={() => {
+                    setOdlucujeId(p.id);
+                    setBeleska("");
+                    setNepostojeci(false);
+                  }}
+                  className="px-3 py-1.5 text-sm rounded-lg border border-kolo-border hover:bg-kolo-bg"
+                >
+                  Odluči
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

@@ -22,12 +22,14 @@ const JEZICI = ["sr", "en", "ru"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
-  "Pravilnik_4_1_1.md",
-  "dokaz_stvarnosti_4_1_1.md",
+  // Set je MEŠOVIT: ova četiri akta su na 4.2.0 (paket „nadzor dobija glas"),
+  // ostalih jedanaest na 4.1.1. Verzija po aktu, ne po setu.
+  "Pravilnik_4_2_0.md",
+  "dokaz_stvarnosti_4_2_0.md",
+  "DPIA_4_2_0.md",
+  "radnje_obrade_4_2_0.md",
   "uslovi_koriscenja_4_1_1.md",
   "politika_4_1_1.md",
-  "DPIA_4_1_1.md",
-  "radnje_obrade_4_1_1.md",
   "statut_4_1_0.md",
   "whitepaper_4_1_1.md",
   "rizici_4_1_1.md",
@@ -42,14 +44,29 @@ const AKTI = [
 /**
  * Ključne odredbe seta — po jeziku, da fallback na srpski ne prođe neopaženo.
  *
- * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog) i u 4.1.1
- * (postupak izmene): sadržaj starije verzije nije nestao podizanjem broja seta.
+ * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog), i u 4.1.1
+ * (postupak izmene; doprinos verifikovanom odmah), i u 4.2.0 (nadzorni predmet,
+ * nadoknada): sadržaj starije verzije nije nestao podizanjem broja.
+ *
+ * 🔴 Provera „Verifikovanom korisniku doprinos" postoji zato što su 4.2.0 dokumenta
+ * nastala iz 4.1.0 osnove dok je `main` u međuvremenu izdao 4.1.1. Bez nje bi objava
+ * 4.2.0 tiho poništila izmenu čl. 40a iz 4.1.1 i niko to ne bi primetio.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_1_1.md": {
-    sr: ["### Član 40a"],
-    en: ["### Article 40a"],
-    ru: ["### Статья 40a"],
+  "Pravilnik_4_2_0.md": {
+    sr: ["### Član 40a", "Verifikovanom korisniku doprinos se evidentira", "član 20b"],
+    en: ["### Article 40a", "Article 20b"],
+    ru: ["### Статья 40a", "статьёй 20b"],
+  },
+  "dokaz_stvarnosti_4_2_0.md": {
+    sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
+    en: ["### Article 11a", "### Article 20b", "### Article 20c"],
+    ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
+  },
+  "radnje_obrade_4_2_0.md": {
+    sr: ["Radnja obrade br. 14"],
+    en: ["Processing activity No. 14"],
+    ru: ["Операция обработки № 14"],
   },
   "uslovi_koriscenja_4_1_1.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
@@ -133,6 +150,40 @@ describe("kanonski set akata 4.1.1", () => {
           expect(tekst, `${jez}/${akt} još sadrži ${obrazac}`).not.toMatch(obrazac);
         }
       }
+    }
+  });
+
+  /**
+   * 4.2.0 briše reč „trajno" iz čl. 12 dokaza stvarnosti. Nije kozmetika: dok je
+   * preuzimanje zone trajno, poništenjem verifikacije bi korisniku ostao zatvoren
+   * deo mreže, pa ga niko odatle ne bi mogao ponovo verifikovati — i pravo na
+   * povratak iz čl. 20c ne bi radilo. Kod zonu ionako preračunava iz važećih veza.
+   */
+  it("zabranjena zona se više ne opisuje kao trajna", async () => {
+    const TRAJNO: Record<string, RegExp> = {
+      sr: /trajno preuzima/i,
+      en: /permanently takes/i,
+      ru: /навсегда принимает/i,
+    };
+    for (const jez of JEZICI) {
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_0.md", jez);
+      expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
+    }
+  });
+
+  /**
+   * Kaskada više ne obara sve verifikacije jednog verifikatora (čl. 19). Ako se ta
+   * rečenica vrati u tekst, stvarni ljudi ponovo gube status zbog tuđe radnje.
+   */
+  it("ne postoji više poništavanje SVIH verifikacija lažnog verifikatora", async () => {
+    const STARO: Record<string, RegExp> = {
+      sr: /poništavaju se sve verifikacije koje je lažni verifikator obavio/i,
+      en: /all verifications performed by the false verifier are annulled/i,
+      ru: /аннулируются все верификации, проведённые ложным верификатором/i,
+    };
+    for (const jez of JEZICI) {
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_0.md", jez);
+      expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
 
