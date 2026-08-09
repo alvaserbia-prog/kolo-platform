@@ -1,5 +1,6 @@
 {
-  "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
+  "_privremeno": "PRIVREMENO — ukloniti čim test build prođe. Test baza je zaglavljena na neuspeloj migraciji `20260809140000_nadzor_ishod_i_predmet` (P3009): ista migracija joj je ranije uspešno legla pod imenom `..130000..`, pa je posle preimenovanja foldera pokušala da se primeni drugi put i pukla na `type NadzorIshod already exists`. Dve `resolve` naredbe brišu neuspeli zapis i upisuju tekuće ime kao primenjeno. Guard `VERCEL_ENV != production` znači da se na produkciji NE izvršava nijedna — prod baza je uredno primila `..150000..` i ne sme se dirati.",
+  "buildCommand": "if [ \"$VERCEL_ENV\" != \"production\" ] && [ -n \"$DATABASE_URL\" ]; then prisma migrate resolve --rolled-back 20260809140000_nadzor_ishod_i_predmet || true; prisma migrate resolve --applied 20260809150000_nadzor_ishod_i_predmet || true; fi; if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
   "regions": ["fra1"],
   "crons": [
     {
