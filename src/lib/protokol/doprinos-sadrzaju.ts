@@ -2,17 +2,26 @@
  * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
  * Osnov: Pravilnik o KOLO sistemu 4.1.0 čl. 15 tačka 8 i čl. 40a.
  *
- * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak:
+ * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
+ * ali samo za nalog čija stvarnost nije potvrđena:
  *
- *   objava oglasa  →  ZABELEZEN   (nije zapis POEN-a, ne ulazi ni u jedno stanje,
- *                                  ni u opticaj, ni u javne agregate)
- *   verifikacija ILI primljen POEN  →  EVIDENTIRAN  (zapis POEN-a u Protokolu)
+ *   VERIFIKOVAN objavi oglas    →  EVIDENTIRAN odmah (čl. 40a st. 3)
+ *
+ *   NEVERIFIKOVAN objavi oglas  →  ZABELEZEN (nije zapis POEN-a, ne ulazi ni u
+ *                                  jedno stanje, ni u opticaj, ni u agregate)
+ *   pa verifikacija ILI primljen POEN  →  EVIDENTIRAN (čl. 40a st. 4)
  *
  * Bez tog razdvajanja bi neko mogao da otvori pedeset praznih naloga, okači
  * pedeset oglasa i time naduva opticaj — a opticaj okida osnivački korak od
  * 24.000 POEN-a i gasi prelazno ograničenje iz čl. 22 Pravilnika o dokazu
  * stvarnosti. Ovako prazan nalog ne pomera nijedan sistemski broj dok mu se
  * neko stvarno ne javi.
+ *
+ * Čekanje se NE primenjuje na verifikovanog jer tu ne štiti ni od čega: nalog
+ * čija je stvarnost potvrđena nije prazan nalog. Ranija verzija čl. 40a nije
+ * pravila tu razliku, pa je verifikovanom članu doprinos stajao zabeležen i
+ * čekao okidač koji mu je već bio iza leđa (verifikacija) — vidi prelazni stav
+ * čl. 40a i `evidentirajZateceneVerifikovane()`.
  *
  * Obrazac poziva (obavezan):
  *   - DB promene u jednoj `prisma.$transaction()`
@@ -37,8 +46,16 @@ export * from "@/lib/doprinos-pravila";
  * po čoveku obezbeđuje jedinstveni indeks nad `userId`, ne kod — dve paralelne
  * objave ne mogu da zabeleže dva doprinosa.
  *
+ * VERIFIKOVANOM korisniku doprinos se odmah i evidentira (čl. 40a st. 3): čekanje
+ * na okidač postoji da prazan nalog ne naduva opticaj, a nalog čija je stvarnost
+ * potvrđena nije prazan nalog — za njega čekanje ne štiti ni od čega.
+ * NEVERIFIKOVANOM ostaje zabeležen dok ne nastupi okidač (st. 4).
+ *
  * Ne beleži ništa ako oglas nije ponuda ili ne ispunjava sadržinski minimum.
  * Ne baca: neuspeh beleženja ne sme da obori objavu oglasa koji je već upisan.
+ *
+ * MORA se zvati VAN `prisma.$transaction()` — evidentiranje vodi u `emitujPoen()`,
+ * koji otvara sopstvenu.
  */
 export async function zabeleziDoprinos(
   userId: string,
@@ -60,6 +77,17 @@ export async function zabeleziDoprinos(
   }
 
   await logAdminAkcija(userId, "DOPRINOS_SADRZAJU_ZABELEZEN", oglas.id, `${IZNOS} POEN`);
+
+  // Uslov je TIP NALOGA, ne indeks: ko je jednom verifikovan ostaje verifikovan i
+  // ako mu indeks kasnije padne. Čita se iz baze — sesija se osvežava sa zakašnjenjem.
+  const korisnik = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { tipKorisnika: true },
+  });
+  if (korisnik && korisnik.tipKorisnika !== "NEVERIFIKOVAN") {
+    await probajEvidentirati(userId, DoprinosOkidac.OBJAVA_VERIFIKOVAN);
+  }
+
   return true;
 }
 
@@ -178,4 +206,56 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
     select: { iznos: true },
   });
   return d?.iznos ?? 0;
+}
+
+/**
+ * Jednokratno evidentiranje zatečenih doprinosa verifikovanih korisnika
+ * (čl. 40a, prelazni stav).
+ *
+ * Do izmene čl. 40a doprinos je verifikovanom korisniku samo BELEŽEN i čekao je
+ * okidač — a verifikacija mu je već bila iza leđa, pa mu je ostajao samo primljen
+ * POEN. Ovim se ta grupa razrešava; neverifikovani ostaju da čekaju.
+ *
+ * Ide sekvencijalno kroz `probajEvidentirati` — svaki poziv otvara sopstvenu
+ * emisiju, pa se ne sme paralelizovati ni umotati u transakciju. Idempotentno:
+ * rezervacija prelaza u `probajEvidentirati` znači da ponovno pokretanje ne može
+ * dvaput da evidentira isti doprinos.
+ *
+ * OPTICAJ SKAČE za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira
+ * automatski na svakih 100.000 POEN opticaja, prva noćna emisija posle ovoga može
+ * da upali jedan ili više koraka. To je očekivano, nije greška.
+ */
+export async function evidentirajZateceneVerifikovane(): Promise<{
+  ukupnoZabelezenih: number;
+  evidentirano: number;
+  preskocenoNeverifikovanih: number;
+  poenUOpticaj: number;
+}> {
+  const zabelezeni = await prisma.doprinosSadrzaju.findMany({
+    where: { status: DoprinosStatus.ZABELEZEN },
+    select: { userId: true, iznos: true, user: { select: { tipKorisnika: true } } },
+  });
+
+  let evidentirano = 0;
+  let preskoceno = 0;
+  let poen = 0;
+
+  for (const d of zabelezeni) {
+    if (d.user.tipKorisnika === "NEVERIFIKOVAN") {
+      preskoceno += 1;
+      continue;
+    }
+    const uspeh = await probajEvidentirati(d.userId, DoprinosOkidac.OBJAVA_VERIFIKOVAN);
+    if (uspeh) {
+      evidentirano += 1;
+      poen += d.iznos;
+    }
+  }
+
+  return {
+    ukupnoZabelezenih: zabelezeni.length,
+    evidentirano,
+    preskocenoNeverifikovanih: preskoceno,
+    poenUOpticaj: poen,
+  };
 }

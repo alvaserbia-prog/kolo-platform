@@ -132,7 +132,7 @@ A hitelesített felhasználó a közzétett hirdetésből kiindulva közvetlen b
 
 Az a hitelesített felhasználó, aki hitelesítési joggal rendelkezik, hitelesítheti a hirdetőt, ha őt személyesen ismeri, a hirdető által generált egyszeri kóddal. A hitelesítés a valóságbizonyítékról szóló szabályzatban meghatározott azonos feltételek és ellenőrzések mellett történik (ideértve a körkörösség elleni szabályt, a kapacitást és a felügyeletet).
 
-Az első olyan hirdetésért, amellyel javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, a felhasználó javára a platform tartalmához való hozzájárulás kerül nyilvántartásba a KOLO rendszerről szóló szabályzat 40.a cikkében foglalt feltételek szerint. A hozzájárulás a közzétételkor feljegyzésre kerül, és csak az említett cikkben meghatározott kiváltó esemény bekövetkeztekor kerül nyilvántartásba.
+Az első olyan hirdetésért, amellyel javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, a felhasználó javára a platform tartalmához való hozzájárulás kerül nyilvántartásba a KOLO rendszerről szóló szabályzat 40.a cikkében foglalt feltételek szerint. Hitelesített felhasználó esetében a hozzájárulás a közzétételkor kerül nyilvántartásba. Nem hitelesített felhasználó esetében a hozzájárulás a közzétételkor feljegyzésre kerül, és csak az említett cikkben meghatározott kiváltó esemény bekövetkeztekor kerül nyilvántartásba.
 
 Az Alapítvány eltávolíthatja azt a hirdetést, amely sérti a jelen Feltételeket, a Szabályzatot vagy a jogszabályt, a felhasználó értesítése és az indok megjelölése mellett (21. és 25. cikk). Ha a hirdetést azelőtt távolítják el, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás érvényét veszti.
 

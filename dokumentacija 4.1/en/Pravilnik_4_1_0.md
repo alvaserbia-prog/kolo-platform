@@ -504,11 +504,17 @@ The content users create within the system is part of the common good and is lic
 
 A user has a contribution of 1,000 POENs recorded once, for the first listing in which they offer a good or a service and which meets the content minimum established by the Terms of Use. The channel is used at most once per user, regardless of the number of listings posted.
 
-The contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the vouching chain, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+For a verified user, the contribution is recorded at the moment the listing is posted.
+
+For an unverified user, the contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the vouching chain, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+
+The distinction drawn in the two preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
 
 If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled.
 
 The recording of a contribution to platform content is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
+
+For a user who is verified on the day this paragraph enters into force and whose contribution has been noted but not recorded, the contribution is recorded once, in the same amount.
 
 ## Chapter VII — System Governance
 
@@ -748,7 +754,7 @@ The transparency of the ledger ensures user oversight of the system and reduces 
 
 The transparency of the ledger does not encompass data whose publication would infringe users' privacy — the verification graph, voluntarily entered data, and special categories of data. The pseudonymous contribution ledger is accessible to verified users, while visitors and unverified users see general indicators (aggregates) in accordance with Article 28. The viewing of listings in the platform's advertising space is governed separately (Art. 16) and is distinct from the contribution ledger. The scope of public data availability is established by the Privacy Policy.
 
-A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a paragraph 3). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
+A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a paragraph 4). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
 
 ## Chapter X — The Legal Nature of the KOLO System and the Four Principles
 

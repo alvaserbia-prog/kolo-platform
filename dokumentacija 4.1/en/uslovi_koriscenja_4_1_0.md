@@ -132,7 +132,7 @@ A verified user may, starting from a published listing, initiate a direct conver
 
 A verified user who has the right to verify may verify the advertiser if they know them personally, using a one-time code that the advertiser generates. Verification is carried out under the same conditions and checks established by the Rulebook on Proof of Reality (including the anti-circular rule, capacity, and oversight).
 
-For the first listing in which they offer a good or a service and which meets the content minimum, a contribution to platform content is recorded for the user under the conditions set out in Art. 40a of the Rulebook on the KOLO System. The contribution is noted upon posting and recorded only once the trigger established by that Article occurs.
+For the first listing in which they offer a good or a service and which meets the content minimum, a contribution to platform content is recorded for the user under the conditions set out in Art. 40a of the Rulebook on the KOLO System. For a verified user, the contribution is recorded upon posting. For an unverified user, the contribution is noted upon posting and recorded only once the trigger established by that Article occurs.
 
 The Foundation may remove a listing that breaches these Terms, the Rulebook, or the law, with notice to the user stating the reason (Article 21 and Article 25). If the listing is removed before the contribution has been recorded, the noted contribution is annulled.
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 
 // Jezik/pismo se bira preko cookie-a (NEXT_LOCALE) + osvežavanja — bez URL prefiksa
@@ -8,12 +9,12 @@ import { useLocale } from "next-intl";
 // Redosled: domaći jezici prvo, engleski poslednji (odluka vlasnika) — engleski
 // je međunarodni rezervni izbor, ne jedan od jezika regiona.
 const jezici = [
-  { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica" },
-  { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица" },
-  { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский" },
-  { kod: "hr", ikona: "/flags/hr.svg", naziv: "Hrvatski" },
-  { kod: "hu", ikona: "/flags/hu.svg", naziv: "Magyar" },
-  { kod: "en", ikona: "/flags/gb.svg", naziv: "English" },
+  { kod: "sr", ikona: "/flags/rs.svg", naziv: "Srpski — latinica", kratko: "SR" },
+  { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица", kratko: "СР" },
+  { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский", kratko: "RU" },
+  { kod: "hr", ikona: "/flags/hr.svg", naziv: "Hrvatski", kratko: "HR" },
+  { kod: "hu", ikona: "/flags/hu.svg", naziv: "Magyar", kratko: "HU" },
+  { kod: "en", ikona: "/flags/gb.svg", naziv: "English", kratko: "EN" },
 ];
 
 function promeniJezik(kod: string) {
@@ -27,40 +28,142 @@ function promeniJezik(kod: string) {
   window.location.reload();
 }
 
+type Props = {
+  className?: string;
+  /** "tamna" = na zelenoj podlozi (app header, sidebar), "svetla" = na beloj (javni header). */
+  tema?: "tamna" | "svetla";
+  /** Panel se otvara nagore — za mesta gde switcher stoji na dnu (mobilni meni, drawer). */
+  nagore?: boolean;
+};
+
 /**
- * `flex-wrap` je obavezan: sa 6 jezika red je ~205px širok, a mobilni sidebar
- * (w-64) i mobilni meni javnih stranica imaju uže mesto od toga. Bez prelamanja
- * zastavice su izlazile iz okvira i prelazile preko naziva „KOLO".
+ * Padajući izbor jezika. NIJE red zastavica: red je rastao sa svakim novim
+ * jezikom (6 jezika ≈ 205px) i lomio zaglavlje — javni header na 1140px nema
+ * toliko mesta pored logotipa, 6 linkova navigacije i dva dugmeta, pa se sadržaj
+ * prelamao u dva reda. Dugme ovde ima STALNU širinu (~70px) bez obzira na broj
+ * jezika, a spisak se otvara preko sadržaja i skroluje (max-h) — dodavanje
+ * sedmog, desetog ili dvadesetog jezika ne dira raspored zaglavlja.
+ *
+ * `data-no-cyr`: nazivi jezika i skraćenice se NE transliterišu u ćirilicu kada
+ * je aktivan locale "sr-Cyrl" (inače bi „Hrvatski" postao „Хрватски"); vidi
+ * CirilicaProvider.
  */
-export default function JezikSvitcer({ className = "" }: { className?: string }) {
+export default function JezikSvitcer({ className = "", tema = "tamna", nagore = false }: Props) {
   const trenutni = useLocale();
+  const [otvoren, setOtvoren] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const aktivan = jezici.find((j) => j.kod === trenutni) ?? jezici[0];
+
+  useEffect(() => {
+    if (!otvoren) return;
+    function naKlik(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOtvoren(false);
+    }
+    function naEsc(e: KeyboardEvent) {
+      if (e.key === "Escape") setOtvoren(false);
+    }
+    document.addEventListener("mousedown", naKlik);
+    document.addEventListener("keydown", naEsc);
+    return () => {
+      document.removeEventListener("mousedown", naKlik);
+      document.removeEventListener("keydown", naEsc);
+    };
+  }, [otvoren]);
+
+  const svetla = tema === "svetla";
 
   return (
-    <div className={`flex flex-wrap items-center gap-x-1.5 gap-y-1.5 ${className}`}>
-      {jezici.map((j) => (
-        <button
-          key={j.kod}
-          onClick={() => promeniJezik(j.kod)}
-          title={j.naziv}
-          aria-label={j.naziv}
-          aria-pressed={trenutni === j.kod}
-          suppressHydrationWarning
-          className={`rounded-md p-0.5 transition-all ${
-            trenutni === j.kod
-              ? "ring-2 ring-white/90 opacity-100"
-              : "opacity-45 hover:opacity-90"
+    <div className={`relative ${className}`} ref={ref} data-no-cyr>
+      <button
+        type="button"
+        onClick={() => setOtvoren((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={otvoren}
+        aria-label={aktivan.naziv}
+        title={aktivan.naziv}
+        suppressHydrationWarning
+        className={`flex items-center gap-1.5 rounded-lg px-1.5 py-1 transition-colors ${
+          svetla
+            ? "border border-kolo-border hover:bg-kolo-bg text-kolo-text"
+            : "border border-white/25 hover:bg-white/10 text-white/90"
+        }`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={aktivan.ikona}
+          alt=""
+          width={24}
+          height={18}
+          className="block h-[18px] w-auto rounded-[3px]"
+        />
+        <span className="text-[11px] font-semibold tracking-wide leading-none">
+          {aktivan.kratko}
+        </span>
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`shrink-0 opacity-70 transition-transform ${otvoren ? "rotate-180" : ""}`}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      {otvoren && (
+        <div
+          role="listbox"
+          className={`absolute left-0 z-[70] min-w-[190px] max-h-[60vh] overflow-y-auto rounded-xl border border-kolo-border bg-white py-1 shadow-xl ${
+            nagore ? "bottom-full mb-2" : "top-full mt-2"
           }`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={j.ikona}
-            alt={j.naziv}
-            width={24}
-            height={18}
-            className="block h-[18px] w-auto rounded-[3px]"
-          />
-        </button>
-      ))}
+          {jezici.map((j) => {
+            const izabran = j.kod === trenutni;
+            return (
+              <button
+                key={j.kod}
+                type="button"
+                role="option"
+                aria-selected={izabran}
+                onClick={() => promeniJezik(j.kod)}
+                className={`flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors hover:bg-kolo-bg ${
+                  izabran ? "font-semibold text-kolo-green-700" : "text-kolo-text"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={j.ikona}
+                  alt=""
+                  width={24}
+                  height={18}
+                  className="block h-[18px] w-auto rounded-[3px] shrink-0"
+                />
+                <span className="flex-1 whitespace-nowrap">{j.naziv}</span>
+                {izabran && (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="shrink-0"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

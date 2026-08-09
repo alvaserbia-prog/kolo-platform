@@ -20,7 +20,7 @@ export default async function PublicHeader() {
             <span className="font-bold text-kolo-green-900 text-xl tracking-tight">KOLO</span>
           </Link>
           <div className="hidden md:flex">
-            <JezikSvitcer />
+            <JezikSvitcer tema="svetla" />
           </div>
         </div>
 

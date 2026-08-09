@@ -192,6 +192,26 @@ export default function OsnivaciTab({
     if (res.ok) { await refetch(); onDone(); }
   }
 
+  // Jednokratna prelazna radnja (čl. 40a, prelazni stav) — razrešava doprinose koji
+  // stoje ZABELEZEN kod verifikovanih članova. Idempotentno; drugi klik ne radi ništa.
+  async function razresiZatecene() {
+    if (!confirm(t("doprinos_zatecene_confirm"))) return;
+    setRadnja("zatecene");
+    const res = await fetch("/api/admin/doprinos-sadrzaju/zatecene", { method: "POST" });
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    alert(
+      res.ok
+        ? t("doprinos_zatecene_gotovo", {
+            evidentirano: d.evidentirano ?? 0,
+            poen: fmt(d.poenUOpticaj ?? 0, locale),
+            preskoceno: d.preskocenoNeverifikovanih ?? 0,
+          })
+        : (d.error ?? t("greska_generalna")),
+    );
+    if (res.ok) { await refetch(); onDone(); }
+  }
+
   if (ucitavanje) return <p className="text-sm text-kolo-muted">{t("osnivaci_ucitavanje")}</p>;
 
   const inputCls = "w-full px-2 py-1 rounded-lg border border-kolo-border text-sm outline-none focus:border-kolo-green-700";
@@ -237,6 +257,20 @@ export default function OsnivaciTab({
           </p>
         </div>
       )}
+
+      {/* Prelazna radnja: doprinosi verifikovanih koji su ostali zabeleženi (čl. 40a). */}
+      <div className="bg-white rounded-2xl border border-kolo-border p-6">
+        <h2 className="text-base font-semibold text-kolo-text mb-2">{t("doprinos_zatecene_naslov")}</h2>
+        <p className="text-sm text-kolo-muted mb-4">{t("doprinos_zatecene_opis")}</p>
+        <button
+          onClick={razresiZatecene}
+          disabled={radnja === "zatecene"}
+          className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
+        >
+          {radnja === "zatecene" ? t("doprinos_zatecene_loading") : t("doprinos_zatecene_btn")}
+        </button>
+        <p className="mt-2 text-xs text-kolo-muted">{t("doprinos_zatecene_napomena")}</p>
+      </div>
 
       {/* Lista osnivaca */}
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
