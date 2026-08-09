@@ -131,3 +131,69 @@ describe("kanonski set akata 4.1.0", () => {
     }
   });
 });
+
+/**
+ * Hrvatski i mađarski prevod nastaju postupno — akt po akt. Ovaj blok zato
+ * proverava SAMO one fajlove koji već postoje, pa nedovršen set ne obara test.
+ *
+ * Provera na curenje jezika nije teorijska: pri prvom mađarskom aktu se kroz
+ * tekst provukla hrvatska reč „Zaklada" umesto „Alapítvány", pet puta. Kad se
+ * isti dokument piše na dva bliska zadatka zaredom, takav propust je tih —
+ * fajl je i dalje validan markdown i stranica se uredno prikaže.
+ */
+describe("prevodi u nastajanju (hr, hu)", () => {
+  const U_NASTAJANJU = ["hr", "hu"] as const;
+
+  const DISKLEJMER: Record<string, string> = {
+    hr: "Neslužbeni prijevod",
+    hu: "Nem hivatalos fordítás",
+  };
+
+  /** Reči koje u datom jeziku ne smeju da se pojave — znak da je tekst procurio iz drugog. */
+  const TUDJE_RECI: Record<string, RegExp[]> = {
+    hr: [/\bAlapítvány\b/, /\bfelhasználó/i, /\bhitelesít/i, /\bszabályzat/i],
+    hu: [/\bZaklada\b/, /\bkorisnik/i, /\bverifikacij/i, /\bpravilnik/i],
+  };
+
+  async function postojeci(jez: string) {
+    const nadjeni: string[] = [];
+    for (const akt of AKTI) {
+      try {
+        await fs.access(path.join(BAZA, jez, akt));
+        nadjeni.push(akt);
+      } catch {
+        // Prevod još nije napisan — preskače se.
+      }
+    }
+    return nadjeni;
+  }
+
+  it.each(U_NASTAJANJU)("%s: svaki napisan prevod nosi disklejmer o merodavnom originalu", async (jez) => {
+    for (const akt of await postojeci(jez)) {
+      const tekst = await fs.readFile(path.join(BAZA, jez, akt), "utf-8");
+      expect(tekst.slice(0, 400), `${jez}/${akt} nema disklejmer`).toContain(DISKLEJMER[jez]);
+    }
+  });
+
+  it.each(U_NASTAJANJU)("%s: nijedan prevod ne sadrži reči drugog jezika", async (jez) => {
+    for (const akt of await postojeci(jez)) {
+      const tekst = await fs.readFile(path.join(BAZA, jez, akt), "utf-8");
+      for (const obrazac of TUDJE_RECI[jez]) {
+        expect(tekst, `${jez}/${akt} sadrži tuđu reč ${obrazac}`).not.toMatch(obrazac);
+      }
+    }
+  });
+
+  it.each(U_NASTAJANJU)("%s: loader servira prevod kad postoji, inače srpski original", async (jez) => {
+    const napisani = await postojeci(jez);
+    for (const akt of AKTI) {
+      const tekst = await ucitajPravniDokument(akt, jez);
+      if (napisani.includes(akt)) {
+        expect(tekst, `${jez}/${akt} nije serviran`).toContain(DISKLEJMER[jez]);
+      } else {
+        expect(tekst, `${jez}/${akt} bez prevoda mora pasti na srpski`).not.toContain(DISKLEJMER[jez]);
+        expect(tekst.length).toBeGreaterThan(500);
+      }
+    }
+  });
+});
