@@ -206,6 +206,7 @@ export default function OsnivaciTab({
             evidentirano: d.evidentirano ?? 0,
             poen: fmt(d.poenUOpticaj ?? 0, locale),
             preskoceno: d.preskocenoNeverifikovanih ?? 0,
+            obavesteno: d.naknadnoObavesteno ?? 0,
           })
         : (d.error ?? t("greska_generalna")),
     );

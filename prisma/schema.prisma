@@ -658,6 +658,10 @@ model DoprinosSadrzaju {
   zabelezenAt      DateTime  @default(now())
   evidentiranAt    DateTime?
   ponistenAt       DateTime?
+  /// Kad je korisniku javljeno da mu je doprinos evidentiran. Odvojeno od
+  /// `evidentiranAt` jer obaveštenje sme da zakasni (ili da se ponovi ručno),
+  /// a zapis POEN-a ne sme da čeka na njega. Null uz EVIDENTIRAN = duguje se javljanje.
+  obavestenAt      DateTime?
   /// Ko je okinuo evidentiranje — verifikator, odnosno pošiljalac POEN-a.
   /// Plain string (bez FK) — služi osmatranju obrasca iz odeljka 05, ne integritetu.
   okidacKorisnikId String?
