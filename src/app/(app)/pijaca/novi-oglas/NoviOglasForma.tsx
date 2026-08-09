@@ -7,6 +7,7 @@ import LokacijaSearch from "@/components/LokacijaSearch";
 import CenaUnos from "@/components/CenaUnos";
 import CategoryChips from "@/components/CategoryChips";
 import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
+import { IZNOS, MIN_OPIS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
 
 const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
@@ -50,10 +51,24 @@ async function kompresujSliku(file: File): Promise<File> {
   }
 }
 
-export default function NoviOglasForma({ defaultLocation = "", defaultPhone = "", initialTip = "PONUDA" }: { defaultLocation?: string; defaultPhone?: string; initialTip?: "PONUDA" | "POTRAZNJA" }) {
+export default function NoviOglasForma({
+  defaultLocation = "",
+  defaultPhone = "",
+  initialTip = "PONUDA",
+  verifikovan = true,
+  preostaloOglasa = null,
+}: {
+  defaultLocation?: string;
+  defaultPhone?: string;
+  initialTip?: "PONUDA" | "POTRAZNJA";
+  /** Neverifikovanom je tip zaključan na ponudu i važi sadržinski minimum. */
+  verifikovan?: boolean;
+  /** Koliko još aktivnih oglasa neverifikovani sme (null za verifikovanog). */
+  preostaloOglasa?: number | null;
+}) {
   const t = useTranslations("pijaca");
   const router = useRouter();
-  const [tip, setTip] = useState<"PONUDA" | "POTRAZNJA">(initialTip);
+  const [tip, setTip] = useState<"PONUDA" | "POTRAZNJA">(verifikovan ? initialTip : "PONUDA");
   const jePotraznja = tip === "POTRAZNJA";
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -97,7 +112,18 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
 
   // Kod potražnje nema iznosa — budžet se dogovara u porukama (cenaTip = DOGOVOR).
   const cena = jePotraznja ? { ok: true } : parsirajCenu(cenaTip, price, cenaDo);
-  const canSubmit = title.trim().length >= 3 && cena.ok && category;
+
+  // Sadržinski minimum (Uslovi 4.1.0) — uslov za objavu SAMO neverifikovanom.
+  // Ista funkcija radi i na serveru; ovde je da čovek ne šalje oglas u prazno.
+  const minimum = oglasIspunjavaMinimum({
+    tip,
+    description,
+    category,
+    location: location.trim() || null,
+    images: slike.map((f) => f.name),
+  });
+  const canSubmit =
+    title.trim().length >= 3 && cena.ok && !!category && (verifikovan || minimum.ok);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -167,8 +193,23 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
         <h1 className="kolo-naslov">{jePotraznja ? t("nova_potraznja_naslov") : t("novi_oglas_naslov")}</h1>
       </div>
 
+      {/* Neverifikovanom se objašnjava i šta sme i šta time dobija. Bez ovoga bi
+          zaključan izbor tipa i odbijanje zbog minimuma izgledali kao kvar. */}
+      {!verifikovan && (
+        <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 space-y-1.5">
+          <p className="text-sm font-semibold text-kolo-gold-700">{t("neverif_naslov")}</p>
+          <p className="text-sm text-kolo-muted">
+            {t("neverif_opis", { min: MIN_OPIS, iznos: IZNOS.toLocaleString("sr-RS") })}
+          </p>
+          {preostaloOglasa !== null && (
+            <p className="text-xs text-kolo-muted">{t("neverif_preostalo", { broj: preostaloOglasa })}</p>
+          )}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} noValidate className="space-y-5">
-        {/* Nudim / Tražim */}
+        {/* Nudim / Tražim — neverifikovani sme samo ponudu, pa mu se izbor ne prikazuje */}
+        {verifikovan && (
         <div>
           <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("tip_oglasa_label")}</label>
           <div className="inline-flex rounded-xl border border-kolo-border bg-white p-1">
@@ -190,6 +231,7 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
           </div>
           <p className="mt-1.5 text-xs text-kolo-muted">{jePotraznja ? t("tip_trazim_hint") : t("tip_nudim_hint")}</p>
         </div>
+        )}
 
         {/* Naslov */}
         <div>
@@ -315,6 +357,12 @@ export default function NoviOglasForma({ defaultLocation = "", defaultPhone = ""
 
         {error && (
           <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-xl px-4 py-3">{error}</p>
+        )}
+
+        {/* Kad je dugme ugašeno zbog sadržinskog minimuma, mora se videti ŠTA fali —
+            inače neverifikovani gleda mrtvo dugme bez objašnjenja. */}
+        {!verifikovan && !minimum.ok && title.trim().length >= 3 && (
+          <p className="text-sm text-kolo-muted">{minimum.razlog}</p>
         )}
 
         <button

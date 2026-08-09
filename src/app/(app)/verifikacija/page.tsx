@@ -28,7 +28,6 @@ import MiniStablo, {
 import MojQrKod from "@/components/verifikacija/MojQrKod";
 import VerifikujNekoga from "@/components/verifikacija/VerifikujNekoga";
 import MojeOznake, { type VerifikovanaOsoba } from "@/components/verifikacija/MojeOznake";
-import JemstvoObjava from "@/components/verifikacija/JemstvoObjava";
 import PrijaviVerifikaciju from "@/components/verifikacija/PrijaviVerifikaciju";
 import { TipKorisnika } from "@/generated/prisma/client";
 
@@ -122,8 +121,8 @@ export default async function VerifikacijaPage() {
         <h1 className="kolo-naslov">{t("page_naslov")}</h1>
       </div>
 
-      {/* Levo: indeks stvarnosti → kartice "Pokaži kod" / "Verifikuj nekoga" → tabla
-          jemstva; desno: lanac verifikacija. */}
+      {/* Levo: indeks stvarnosti → kartice "Pokaži kod" / "Verifikuj nekoga" → ulaz
+          na Pijacu; desno: lanac verifikacija. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
           <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
@@ -133,21 +132,20 @@ export default async function VerifikacijaPage() {
           </div>
           {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
 
-          {jeNeverifikovan ? (
-            // Opcija B: neverifikovanom je tabla jemstva ugrađena ovde — objavi zahtev
-            // i prati status na istom ekranu (sidebar stavka „Tabla jemstva" spojena u
-            // „Verifikacija").
-            <JemstvoObjava />
-          ) : (
-            // Verifikovanom: poziv da pomogne novima — vodi na punu tablu jemstva.
-            <a
-              href="/tabla-jemstva"
-              className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-            >
-              <p className="font-semibold text-kolo-text">{t("tabla_verifikovan_naslov")}</p>
-              <p className="text-sm text-kolo-muted mt-0.5">{t("tabla_verifikovan_opis")}</p>
-            </a>
-          )}
+          {/* Put do verifikacije više ne ide preko zasebnog zida na kome se čovek
+              predstavlja, nego kroz Pijacu (Pravilnik 4.1.0 čl. 32 st. 4): neverifikovani
+              objavi ponudu, mreža ga povodom nje prepozna. Zato obe kartice vode na Pijacu. */}
+          <a
+            href={jeNeverifikovan ? "/pijaca/novi-oglas" : "/pijaca"}
+            className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+          >
+            <p className="font-semibold text-kolo-text">
+              {t(jeNeverifikovan ? "pijaca_neverifikovan_naslov" : "pijaca_verifikovan_naslov")}
+            </p>
+            <p className="text-sm text-kolo-muted mt-0.5">
+              {t(jeNeverifikovan ? "pijaca_neverifikovan_opis" : "pijaca_verifikovan_opis")}
+            </p>
+          </a>
         </div>
 
         <div className="flex flex-col gap-6">

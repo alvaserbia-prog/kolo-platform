@@ -59,7 +59,7 @@ export default async function PostaniPokroviteljPage() {
           <p className="text-sm text-kolo-muted mb-3">
             {t("verifikacija_opis")}
           </p>
-          <Link href="/tabla-jemstva" className="text-sm font-medium text-kolo-gold-600 hover:underline">
+          <Link href="/verifikacija" className="text-sm font-medium text-kolo-gold-600 hover:underline">
             {t("verifikacija_link")}
           </Link>
         </div>

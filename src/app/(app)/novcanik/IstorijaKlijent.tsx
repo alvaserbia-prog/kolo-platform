@@ -66,7 +66,7 @@ export default function IstorijaKlijent({ transakcije, pseudonim }: { transakcij
             <p className="text-sm text-kolo-muted max-w-md mx-auto">
               {t("prazno_opis")}
             </p>
-            <a href="/tabla-jemstva" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
+            <a href="/verifikacija" className="inline-block mt-1 text-sm font-semibold text-kolo-green-700 hover:underline">
               {t("prazno_verif_link")}
             </a>
           </div>

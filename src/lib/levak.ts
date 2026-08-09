@@ -10,14 +10,20 @@
  * Sve funkcije ovde su čiste (bez baze), da bi se mogle testirati.
  */
 
-/** Redosled koraka levka. Prolaz svakog koraka se računa u odnosu na prethodni. */
+/**
+ * Redosled koraka levka. Prolaz svakog koraka se računa u odnosu na prethodni.
+ *
+ * Otkad je tabla jemstva ukinuta (Pravilnik 4.1.0 čl. 32 st. 4), put je obrnut u
+ * odnosu na raniji: čovek prvo objavi ponudu, pa ga tek onda neko prepozna i
+ * verifikuje. Zato „verifikovani" sada stoji POSLE „objavili_oglas", a koraka
+ * „objavili_karticu" više nema — kartice prepoznavanja nema.
+ */
 export const KORACI = [
   "registrovani",
-  "otvorili_poverenje", // posetio /verifikacija ili /tabla-jemstva
-  "objavili_karticu",
-  "verifikovani",
+  "otvorili_poverenje", // posetio /verifikacija
   "otvorili_formu", // posetio /pijaca/novi-oglas
   "objavili_oglas",
+  "verifikovani",
 ] as const;
 
 export type Korak = (typeof KORACI)[number];
@@ -31,9 +37,7 @@ export interface KorisnikRed {
 
 export interface LevakUlaz {
   korisnici: KorisnikRed[];
-  /** userId koji su ikad objavili karticu prepoznavanja (svi statusi) */
-  saKarticom: Set<string>;
-  /** userId koji su ikad otvorili /verifikacija ili /tabla-jemstva */
+  /** userId koji su ikad otvorili /verifikacija */
   otvoriliPoverenje: Set<string>;
   /** userId koji su ikad otvorili /pijaca/novi-oglas */
   otvoriliFormu: Set<string>;
@@ -80,18 +84,16 @@ function koraciZa(korisnici: KorisnikRed[], ulaz: LevakUlaz): LevakKorak[] {
   const brojevi: Record<Korak, number> = {
     registrovani: korisnici.length,
     otvorili_poverenje: 0,
-    objavili_karticu: 0,
-    verifikovani: 0,
     otvorili_formu: 0,
     objavili_oglas: 0,
+    verifikovani: 0,
   };
 
   for (const k of korisnici) {
     if (ulaz.otvoriliPoverenje.has(k.id)) brojevi.otvorili_poverenje++;
-    if (ulaz.saKarticom.has(k.id)) brojevi.objavili_karticu++;
-    if (k.verifiedAt) brojevi.verifikovani++;
     if (ulaz.otvoriliFormu.has(k.id)) brojevi.otvorili_formu++;
     if (ulaz.prviOglas.has(k.id)) brojevi.objavili_oglas++;
+    if (k.verifiedAt) brojevi.verifikovani++;
   }
 
   return KORACI.map((korak, i) => {
@@ -102,7 +104,7 @@ function koraciZa(korisnici: KorisnikRed[], ulaz: LevakUlaz): LevakKorak[] {
       korak,
       broj,
       // Prolaz preko 100% je moguć i nije greška: koraci nisu strogo ulančani
-      // (može se biti verifikovan bez objavljene kartice — QR putem).
+      // (može se biti verifikovan bez objavljenog oglasa — jednokratnim kodom).
       prolaz: prethodni === 0 ? null : Math.round((broj / prethodni) * 100),
     };
   });

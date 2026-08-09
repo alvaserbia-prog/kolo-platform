@@ -27,7 +27,8 @@ import {
   recomputeZonesSaGrafom,
 } from "@/lib/protokol/zona";
 import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
-import { Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { DoprinosOkidac, Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -57,7 +58,7 @@ export function normalizujOznaku(oznaka: unknown): string | null {
 
 /**
  * Generiše jednokratan token za verifikaciju za datog korisnika.
- * Token važi 2 sata. Vraća { token, brojCifara, expiresAt }.
+ * Token važi 24 sata. Vraća { token, brojCifara, expiresAt }.
  */
 export async function generisiTokenZaVerifikaciju(korisnikId: string) {
   const korisnik = await prisma.user.findUnique({ where: { id: korisnikId } });
@@ -111,6 +112,7 @@ export type IzvrsiVerifikacijuRezultat = {
 /** Rezultat Faze 1 (unutar transakcije) — nosi i walletId-eve za POEN emisiju u Fazi 2. */
 type FazaJedan = {
   verifikacijaId: string;
+  verifikatorId: string;
   verifikatorPseudonim: string;
   verifikatorWalletId: string;
   verifikovaniId: string;
@@ -123,12 +125,11 @@ type FazaJedan = {
  * Jezgro verifikacije unutar otvorene transakcije: učita oba korisnika, sprovede
  * SVE provere (čl. 4; zabranjena zona čl. 12 u oba smera; početni nije meta,
  * čl. 14; kapacitet/slot; cap 100%), kreira VerifikacionaVeza, proširi i
- * sinhronizuje zabranjenu zonu, podigne indeks verifikovanog, zatvori njegov
- * aktivan zahtev za jemstvo i potroši slot verifikatoru. Ne dira token — to je stvar pozivaoca
- * (token put ga obeleži kao iskorišćen; put sa table jemstva ne koristi token).
+ * sinhronizuje zabranjenu zonu, podigne indeks verifikovanog i potroši slot
+ * verifikatoru. Ne dira token — to je stvar pozivaoca.
  *
- * Deli ga oba ulaza (`izvrsiVerifikaciju` preko tokena i `izvrsiVerifikacijuSaTable`),
- * da anti-malverzacija provere postoje na tačno jednom mestu.
+ * Otkad je tabla zahteva za jemstvo ukinuta, jedini ulaz je jednokratan kod
+ * (`izvrsiVerifikaciju`); jezgro ostaje izdvojeno da provere stoje na jednom mestu.
  */
 async function izvrsiJezgroVerifikacije(
   tx: Prisma.TransactionClient,
@@ -287,19 +288,6 @@ async function izvrsiJezgroVerifikacije(
     },
   });
 
-  // Sprovedena verifikacija zatvara aktivan zahtev na tabli jemstva (ZAVRSEN).
-  // Uz zatvaranje se brišu i skriveni kontakt podaci sa kartice prepoznavanja
-  // (telefon i saglasnost za poziv): svrha zbog koje su prikupljeni je ispunjena,
-  // pa se dalje ne čuvaju — minimizacija podataka (Politika čl. 4).
-  await tx.zahtevZaJemstvo.updateMany({
-    where: { userId: verifikovani.id, status: { in: ["AKTIVAN", "NEPOTPUN"] } },
-    data: {
-      status: "ZAVRSEN",
-      telefon: null,
-      telefonSaglasnost: false,
-    },
-  });
-
   // REGULARNI verifikator: slotoviPotroseni += 1
   if (verifikator.tipKorisnika === TipKorisnika.REGULARNI) {
     await tx.user.update({
@@ -329,6 +317,7 @@ async function izvrsiJezgroVerifikacije(
 
   return {
     verifikacijaId: veza.id,
+    verifikatorId: verifikator.id,
     verifikatorPseudonim: verifikator.pseudonim,
     verifikatorWalletId: verifikatorWallet.id,
     verifikovaniId: verifikovani.id,
@@ -396,6 +385,12 @@ async function emitujPoenZaVerifikaciju(
       500
     );
   }
+
+  // Verifikacija je prvi od dva okidača za evidentiranje doprinosa sadržaju
+  // platforme (Pravilnik čl. 40a st. 3): ko je pre verifikacije objavio ponudu koja
+  // ispunjava sadržinski minimum, tek sada dobija zapis od 1.000 POEN-a. Ne baca —
+  // verifikacija je već upisana i ne sme da padne zbog ovog kanala.
+  await probajEvidentirati(verifikovaniId, DoprinosOkidac.VERIFIKACIJA, fazaJedan.verifikatorId);
 
   return {
     verifikacijaId,
@@ -495,57 +490,6 @@ export async function izvrsiVerifikaciju(
   return emitujPoenZaVerifikaciju(fazaJedan);
 }
 
-export type IzvrsiVerifikacijuSaTableInput = {
-  verifikatorId: string;
-  jemstvoId: string;
-  potvrdaPoznavanja: boolean;
-  oznaka?: string;
-};
-
-/**
- * Izvršava verifikaciju DIREKTNO SA TABLE JEMSTVA: verifikator je našao osobu na
- * tabli (gde se ona predstavila i time dala pristanak da bude verifikovana) i klikom
- * potvrđuje lično poznavanje. Bez tokena — `verifikovaniId` se uzima iz aktivnog
- * zahteva za jemstvo. Sve provere su iste (deljeno jezgro); odgovornost verifikatora
- * i nadzor (P1–P15) ostaju jedini korektiv, uz naknadnu prijavu od strane verifikovanog.
- */
-export async function izvrsiVerifikacijuSaTable(
-  input: IzvrsiVerifikacijuSaTableInput
-): Promise<IzvrsiVerifikacijuRezultat> {
-  const { verifikatorId, jemstvoId, potvrdaPoznavanja } = input;
-  const oznaka = normalizujOznaku(input.oznaka);
-
-  if (!potvrdaPoznavanja) {
-    throw new VerifikacijaGreska(
-      "Moraš potvrditi lično poznavanje i odgovornost za verifikaciju.",
-      400
-    );
-  }
-
-  let fazaJedan: FazaJedan;
-  try {
-    fazaJedan = await prisma.$transaction(async (tx) => {
-      const zahtev = await tx.zahtevZaJemstvo.findUnique({
-        where: { id: jemstvoId },
-        select: { userId: true, status: true, expiresAt: true },
-      });
-      if (!zahtev) {
-        throw new VerifikacijaGreska("Zahtev za jemstvo ne postoji.", 404);
-      }
-      // NEPOTPUN (legacy objava) se namerno tretira kao aktivna: popunjenost
-      // polja kartice NIJE uslov za verifikaciju — verifikuje se čovek, ne kartica.
-      const aktivna = zahtev.status === "AKTIVAN" || zahtev.status === "NEPOTPUN";
-      if (!aktivna || zahtev.expiresAt.getTime() < Date.now()) {
-        throw new VerifikacijaGreska("Zahtev za jemstvo više nije aktivan.", 410);
-      }
-      return izvrsiJezgroVerifikacije(tx, verifikatorId, zahtev.userId, oznaka);
-    }, { isolationLevel: Prisma.TransactionIsolationLevel.Serializable });
-  } catch (e) {
-    mapTransakcijaGreska(e);
-  }
-
-  return emitujPoenZaVerifikaciju(fazaJedan);
-}
 
 /**
  * Postavlja/menja/briše oznaku verifikatora za jednu verifikacionu vezu.

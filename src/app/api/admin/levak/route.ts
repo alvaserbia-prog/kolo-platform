@@ -21,16 +21,14 @@ export async function GET() {
   if (!session || !jeSuperadmin(session.user))
     return NextResponse.json({ error: "Pristup odbijen." }, { status: 403 });
 
-  const [korisnici, karticeRedovi, poverenjeRedovi, formaRedovi, oglasi, najstarijaAktivnost] =
+  const [korisnici, poverenjeRedovi, formaRedovi, oglasi, najstarijaAktivnost] =
     await Promise.all([
       prisma.user.findMany({
         select: { id: true, createdAt: true, verifiedAt: true },
         orderBy: { createdAt: "asc" },
       }),
-      // Svi statusi kartice: objava se broji i ako je kartica istekla ili je
-      // verifikacija sprovedena. (Povučena kartica se briše — takav korisnik
-      // se ovde ne broji; to je poznato ograničenje, ne greška u računu.)
-      prisma.zahtevZaJemstvo.findMany({ select: { userId: true }, distinct: ["userId"] }),
+      // Stara putanja `/tabla-jemstva` se i dalje broji: tabla je ukinuta, ali
+      // istorijske posete postojećih kohorti ostaju deo njihovog puta.
       prisma.aktivnostLog.groupBy({
         by: ["userId"],
         where: {
@@ -64,7 +62,6 @@ export async function GET() {
 
   const ulaz: LevakUlaz = {
     korisnici,
-    saKarticom: new Set(karticeRedovi.map((z) => z.userId)),
     otvoriliPoverenje: new Set(poverenjeRedovi.map((r) => r.userId)),
     otvoriliFormu: new Set(formaRedovi.map((r) => r.userId)),
     prviOglas,

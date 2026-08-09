@@ -2,7 +2,7 @@
  * POST /api/verifikacija/token
  *
  * Generiše jednokratan QR token za logovanog korisnika.
- * Token važi 2 sata. Vraća { token, brojCifara, expiresAt }.
+ * Token važi 24 sata. Vraća { token, brojCifara, expiresAt }.
  *
  * Korisnik koji hoće da bude verifikovan poziva ovaj endpoint pre nego što
  * verifikator skenira njegov QR ili unese 6-cifren broj.
