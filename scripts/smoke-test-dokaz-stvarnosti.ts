@@ -184,7 +184,7 @@ async function main() {
   }
 
   // 6. u4 (drugi POCETNI) nadzire verifikaciju v2 (u2 → u3)
-  await obaviNadzor({ verifikacijaId: v2.verifikacijaId, nadzornikId: u4.id });
+  await obaviNadzor({ verifikacijaId: v2.verifikacijaId, nadzornikId: u4.id, ishod: "UREDNO" });
   const u2PosleNadzora = await prisma.user.findUniqueOrThrow({
     where: { id: u2.id },
     select: { slotoviPotroseni: true },

@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
+import { jeNadoknada, iznosNadoknade, raspolozivo } from "@/lib/protokol/nadoknada";
 
 // qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
 // LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne
@@ -43,6 +44,11 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
   const [showQR, setShowQR] = useState(false);
   const [showSkener, setShowSkener] = useState(false);
 
+  // Nadoknada po poništenju lažne verifikacije (dokaz stvarnosti čl. 20b). Negativan
+  // zapis JESTE nadoknada — nema zasebne kolone. Prikazuje se kao zaseban red, a ne
+  // kao „minus stanje", jer nije dug i ne može se naplatiti.
+  const uNadoknadi = jeNadoknada(balance);
+
   return (
     <>
       {/* Gornja kartica: balans POEN (ZRNO kartica privremeno uklonjena) */}
@@ -51,7 +57,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
           {/* LEVO — dugmad jedno ispod drugog */}
           <div className="flex flex-col gap-3 shrink-0">
-            {smeDaSalje && (
+            {smeDaSalje && !uNadoknadi && (
               <button
                 onClick={() => setShowSend(true)}
                 className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
@@ -76,11 +82,27 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           {/* DESNO — stanje veliko */}
           <div className="text-right min-w-0">
             <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
-              {balance.toLocaleString(intlTag(locale))}
+              {raspolozivo(balance).toLocaleString(intlTag(locale))}
             </p>
             <p className="text-lg text-white/70 mt-0.5">{tc("poen")}</p>
           </div>
         </div>
+
+        {/* Nadoknada (čl. 20b) stoji ISPOD kartice, kao zaseban red. Nije prikazana
+            kao negativno stanje jer nije dug: Fondacija po njoj nema potraživanje i
+            ne može je naplatiti. Razmena dobara i usluga se njome ne ograničava —
+            ograničen je samo upis POEN-a drugome, dok zapis ne pređe nulu. */}
+        {uNadoknadi && (
+          <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-sm font-semibold text-amber-900">{t("nadoknada_naslov")}</p>
+              <p className="text-lg font-bold tabular-nums text-amber-800">
+                {iznosNadoknade(balance).toLocaleString(intlTag(locale))} {tc("poen")}
+              </p>
+            </div>
+            <p className="text-sm text-amber-800/80 mt-1">{t("nadoknada_opis")}</p>
+          </div>
+        )}
 
         {/* Zabeležen doprinos stoji ISPOD kartice, kao zaseban red — namerno nije
             sabran sa stanjem: do okidača to nije zapis POEN-a (Pravilnik čl. 40a

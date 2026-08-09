@@ -7,6 +7,7 @@ import { gdePseudonim } from "@/lib/pseudonim";
 import { DoprinosOkidac, TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
+import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -63,6 +64,17 @@ export async function POST(req: NextRequest) {
     return await greska(
       "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.",
       403,
+    );
+  }
+  // Nadoknada (negativan zapis po čl. 20b Pravilnika o dokazu stvarnosti) ne
+  // sprečava razmenu dobara i usluga, ali POEN-i koji pristignu prvo popunjavaju
+  // nadoknadu — dok zapis ne pređe nulu nema čime da se upisuje drugome.
+  if (jeNadoknada(posiljac.wallet.balance)) {
+    return await greska(
+      `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POEN-a. ` +
+        `POEN-i koji ti pristignu prvo je popunjavaju; upis u tuđu evidenciju je moguć tek kad zapis pređe nulu. ` +
+        `Razmena dobara i usluga ti nije ograničena.`,
+      400
     );
   }
   if (posiljac.wallet.balance < iznos) {

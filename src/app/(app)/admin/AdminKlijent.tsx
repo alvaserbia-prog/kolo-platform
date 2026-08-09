@@ -19,6 +19,7 @@ const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
 const LevakTab = dynamic(() => import("./LevakTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
+const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
 
 interface KorisnikInfo {
   id: string;
@@ -205,6 +206,8 @@ interface AdminKlijentProps {
   krugoviLista2: { id: string; name: string }[];
   blogObjave: BlogObjavaAdmin[];
   nadzorNalazi: NadzorNalaz[];
+  /** Otvoreni nadzorni predmeti — badge na tabu Odluke (dokaz stvarnosti čl. 11a). */
+  otvorenihPredmeta: number;
   pendingDonacije: DonacijaItem[];
   otvoreniPrigovori: PrigovorItem[];
   viewerJeSuperadmin: boolean;
@@ -240,7 +243,7 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 });
 
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -299,6 +302,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
           ["aktivnost", t("tab_aktivnost")],
           ["levak", t("tab_levak")],
           ["nadzor", `${t("tab_nadzor")}${nadzorNalazi.length > 0 ? ` (${nadzorNalazi.length})` : ""}`],
+          ["odluke", `${t("tab_odluke")}${otvorenihPredmeta > 0 ? ` (${otvorenihPredmeta})` : ""}`],
         ] as [Tab, string][])
       : []),
   ];
@@ -387,8 +391,11 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}
 
-      {/* Nadzor integriteta (samo superadmin) */}
+      {/* Nadzor integriteta — automat (samo superadmin) */}
       {tab === "nadzor" && viewerJeSuperadmin && <NadzorTab nalazi={nadzorNalazi} />}
+
+      {/* Odluke — nadzorni predmeti koje su otvorili nadzornici (samo superadmin) */}
+      {tab === "odluke" && viewerJeSuperadmin && <OdlukeTab />}
 
       {/* Osnivači */}
       {tab === "osnivaci" && <OsnivaciTab verifikovaniKorisnici={verifikovaniKorisnici} onDone={() => router.refresh()} />}

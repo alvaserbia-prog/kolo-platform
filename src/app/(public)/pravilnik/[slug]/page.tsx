@@ -10,8 +10,8 @@ import { pageMetadata } from "@/lib/seo";
 const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
   "kolo-sistem": {
     naziv: "Pravilnik o KOLO sistemu",
-    fajl: "Pravilnik_4_1_1.md",
-    verzija: "4.1.1",
+    fajl: "Pravilnik_4_2_0.md",
+    verzija: "4.2.0",
     opis: "Osnovni akt sistema — 12 glava, 82 člana.",
   },
   "hijerarhija": {
@@ -22,8 +22,8 @@ const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string;
   },
   "dokaz-stvarnosti": {
     naziv: "Pravilnik o dokazu stvarnosti",
-    fajl: "dokaz_stvarnosti_4_1_1.md",
-    verzija: "4.1.1",
+    fajl: "dokaz_stvarnosti_4_2_0.md",
+    verzija: "4.2.0",
     opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
   },
   "pokroviteljstvo-donacije": {

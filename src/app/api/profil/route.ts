@@ -255,6 +255,10 @@ export async function DELETE(req: NextRequest) {
   const svezWallet = await prisma.wallet.findUnique({ where: { userId } });
   const balans = svezWallet?.balance ?? 0;
 
+  // Negativan zapis (nadoknada, čl. 20b Pravilnika o dokazu stvarnosti) se NAMERNO
+  // ne dira: izuzetno od čl. 34 Pravilnika o KOLO sistemu ne poništava se prestankom
+  // statusa i ne prelazi na Protokol. Kad bi se poništio, istupanje iz sistema bi
+  // brisalo nadoknadu, a teret bi pao na sve ostale korisnike.
   if (balans > 0) {
     if (primalacPseudonim) {
       // Prenesi zadatom korisniku

@@ -339,7 +339,9 @@
     "prazno_verif_link": "Request verification →",
     "zabelezen_naslov": "Recorded contribution",
     "zabelezen_opis": "It is entered once someone verifies you or transfers POEN to you. Until then it is not a POEN entry and is not part of your balance.",
-    "samo_primalac": "Until you are verified you can only receive POEN. Entering POEN for others opens up upon verification."
+    "samo_primalac": "Until you are verified you can only receive POEN. Entering POEN for others opens up upon verification.",
+    "nadoknada_naslov": "Restitution",
+    "nadoknada_opis": "It arose from the annulment of a false verification you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; recording POEN for someone else becomes possible once your record passes zero."
   },
   "verifikacija": {
     "naslov": "Identity verification",
@@ -877,11 +879,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -893,7 +895,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.1.1",
+      "ver": "4.2.0",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -919,15 +921,15 @@
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.1.1",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.2.0",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.1.1",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.2.0",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.1.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.1.1",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.1.1",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.2.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1787,10 +1789,35 @@
   },
   "nadzor": {
     "page_naslov": "Oversight",
-    "page_opis": "Verifications awaiting confirmation. Once oversight is confirmed, the verifier gets their slot back and you receive 500 POEN (art. 7, 10–11).",
+    "page_opis": "Verifications awaiting a supervision outcome. For each one you record whether it is sound, needs a second look, or is disputed. The first supervisor to record an outcome receives 500 POEN — whichever outcome it is (art. 7, 10–11).",
     "nema_ovlascenja_naslov": "You don't have permission",
-    "nema_ovlascenja_opis": "Oversight is performed only by Foundation board members and ZRNO holders (art. 10 of the Proof of Reality Rulebook).",
-    "prazna_lista": "No verifications are awaiting oversight."
+    "nema_ovlascenja_opis": "Supervision is carried out by ZRNO holders (art. 10 of the Rulebook on Proof of Reality).",
+    "prazna_lista": "No verifications are awaiting supervision.",
+    "greska": "Error",
+    "greska_mreza": "Network unavailable",
+    "potroseno_slotova": "slots used by the verifier: {broj}",
+    "vec_gledali": "Supervisors who already looked at this record: {broj} — another opinion is being sought.",
+    "ishod_uredno": "Sound",
+    "ishod_za_proveru": "Needs review",
+    "ishod_sporno": "Disputed",
+    "opis_za_proveru": "This is not an accusation but a request for a second look. The record stays visible to other supervisors, and the verifier's slot is not restored until someone records „sound“.",
+    "opis_sporno": "You are marking the verification as untrue. A supervision case is opened for the Management Board; the case itself has no effect on the user.",
+    "polje_subjekt": "Who is suspected",
+    "polje_razlog": "Reason",
+    "polje_opis": "Brief description",
+    "subjekt_verifikator": "Verifier",
+    "subjekt_verifikovani": "Verified user",
+    "subjekt_oba": "Both users",
+    "subjekt_deo_mreze": "Part of the network",
+    "razlog_ne_poznaju_se": "They do not know each other",
+    "razlog_nalog_bez_znakova": "Account shows no signs of a real person",
+    "razlog_dvostruki_nalog": "Duplicate account",
+    "razlog_obrazac_verifikacija": "Pattern of verifications",
+    "razlog_prijava_verifikovanog": "Report by the verified user",
+    "razlog_ostalo": "Other",
+    "saljem": "Sending...",
+    "evidentiraj": "Record outcome",
+    "odustani": "Cancel"
   },
   "tablaJemstva": {
     "ukinuta_naslov": "The vouching request board no longer exists",
@@ -2286,7 +2313,8 @@
     "levak_dana_oglas": "Prosečno dana od verifikacije do prvog oglasa",
     "levak_napomena_dnevnik": "Koraci „Otvorili verifikaciju ili tablu“ i „Otvorili formu za oglas“ čitaju se iz dnevnika aktivnosti, koji počinje {datum}. Za starije kohorte ta dva reda pokazuju nulu jer podataka nema, ne zato što niko nije otvarao stranicu.",
     "levak_ucitavanje": "Učitavanje…",
-    "levak_greska": "Greška pri učitavanju levka."
+    "levak_greska": "Greška pri učitavanju levka.",
+    "tab_odluke": "Decisions"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2352,7 +2380,7 @@
     "pristupnica_prihvacena_naslov": "Membership application accepted!",
     "pristupnica_prihvacena_tekst": "You have become a member of the circle “{krug}”.",
     "verifikacija_ponistena_naslov": "Verification annulled",
-    "verifikacija_ponistena_tekst": "A guarantor in your chain was marked as false, so your verification has been annulled. Your reality index is 0% — you keep your account and basic functions (recording POEN, the Market, donations), but you lose access to operational contribution and support programmes.",
+    "verifikacija_ponistena_tekst": "The Management Board determined that a verification in your chain of guaranty was false, so it has been annulled. Your reality index is reduced by 10 percentage points and a place in your chain has been freed — once someone else verifies you, both the index and the POEN return. Your other verifications remain in force.",
     "verifikovan_naslov": "You are verified — you can post a listing",
     "verifikovan_tekst": "“{verifikator}” has verified you and you now have full access. You can post listings on the Market, send messages and record ZRNO. If you do not know this person, report the verification on the Verification page.",
     "program_obustavljen_naslov": "Social programme temporarily suspended",
@@ -2374,7 +2402,9 @@
     "bag_promenjen_naslov": "Bug report status changed",
     "bag_promenjen_tekst": "The status of your report “{naslov}” has changed.",
     "doprinos_sadrzaju_naslov": "{iznos} POEN recorded for your contribution",
-    "doprinos_sadrzaju_tekst": "Your contribution to the platform's content has been recorded — {iznos} POEN — for the listing offering a good or service (Rulebook art. 40a)."
+    "doprinos_sadrzaju_tekst": "Your contribution to the platform's content has been recorded — {iznos} POEN — for the listing offering a good or service (Rulebook art. 40a).",
+    "nadoknada_naslov": "A restitution entry has appeared on your record",
+    "nadoknada_tekst": "Annulment of a verification you performed created a restitution of {iznos} POEN, because the annulled POEN were not covered. Restitution is not a debt and cannot be collected; POEN you receive fill it first. Exchange of goods and services is not restricted for you."
   },
   "transakcije": {
     "verifikacija": "Verification of {pseudonim}",

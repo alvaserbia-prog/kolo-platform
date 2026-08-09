@@ -339,7 +339,9 @@
     "prazno_verif_link": "Zatraži verifikaciju →",
     "zabelezen_naslov": "Zabeležen doprinos",
     "zabelezen_opis": "Evidentira se kad te neko verifikuje ili kad ti neko upiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
-    "samo_primalac": "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji."
+    "samo_primalac": "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.",
+    "nadoknada_naslov": "Nadoknada",
+    "nadoknada_opis": "Nastala je poništenjem lažne verifikacije koju si obavio. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena; upis POEN-a drugome moguć je kad zapis pređe nulu."
   },
   "verifikacija": {
     "naslov": "Verifikacija identiteta",
@@ -877,11 +879,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -893,7 +895,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.1.1",
+      "ver": "4.2.0",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -919,15 +921,15 @@
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.1.1",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.2.0",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.1.1",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.2.0",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.1.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.1.1",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.1.1",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.2.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -1787,10 +1789,35 @@
   },
   "nadzor": {
     "page_naslov": "Nadzor",
-    "page_opis": "Verifikacije koje čekaju potvrdu. Po potvrđenom nadzoru, verifikator dobija slot nazad i ti dobijaš 500 POEN (čl. 7, 10–11).",
+    "page_opis": "Verifikacije koje čekaju ishod nadzora. Za svaku upisuješ da li je uredna, da li traži da je pogleda još neko, ili je sporna. Prvi nadzornik koji upiše ishod dobija 500 POEN — bez obzira koji je ishod (čl. 7, 10–11).",
     "nema_ovlascenja_naslov": "Nemaš ovlašćenje",
-    "nema_ovlascenja_opis": "Nadzor obavljaju samo članovi UO Fondacije i nosioci ZRNA (čl. 10 Pravilnika o dokazu stvarnosti).",
-    "prazna_lista": "Nema verifikacija koje čekaju nadzor."
+    "nema_ovlascenja_opis": "Nadzor obavljaju nosioci ZRNA (čl. 10 Pravilnika o dokazu stvarnosti).",
+    "prazna_lista": "Nema verifikacija koje čekaju nadzor.",
+    "greska": "Greška",
+    "greska_mreza": "Mreža nije dostupna",
+    "potroseno_slotova": "verifikator potrošio slotova: {broj}",
+    "vec_gledali": "Zapis je već pogledalo nadzornika: {broj} — traži se još jedno mišljenje.",
+    "ishod_uredno": "Uredno",
+    "ishod_za_proveru": "Za proveru",
+    "ishod_sporno": "Sporno",
+    "opis_za_proveru": "Nije optužba nego poziv da još neko pogleda. Zapis ostaje na spisku ostalim nadzornicima, a verifikatoru se slot ne dopunjava dok neko ne upiše „uredno“.",
+    "opis_sporno": "Označavaš da verifikacija nije istinita. Otvara se nadzorni predmet za Upravni odbor; sam predmet ne proizvodi dejstvo prema korisniku.",
+    "polje_subjekt": "Na koga se sumnja",
+    "polje_razlog": "Razlog",
+    "polje_opis": "Kratak opis o čemu se radi",
+    "subjekt_verifikator": "Verifikator",
+    "subjekt_verifikovani": "Verifikovani",
+    "subjekt_oba": "Oba korisnika",
+    "subjekt_deo_mreze": "Deo mreže",
+    "razlog_ne_poznaju_se": "Ne poznaju se",
+    "razlog_nalog_bez_znakova": "Nalog bez znakova stvarnosti",
+    "razlog_dvostruki_nalog": "Dvostruki nalog",
+    "razlog_obrazac_verifikacija": "Obrazac verifikacija",
+    "razlog_prijava_verifikovanog": "Prijava verifikovanog",
+    "razlog_ostalo": "Ostalo",
+    "saljem": "Šaljem...",
+    "evidentiraj": "Evidentiraj ishod",
+    "odustani": "Odustani"
   },
   "tablaJemstva": {
     "ukinuta_naslov": "Tabla zahteva za jemstvo više ne postoji",
@@ -2286,7 +2313,8 @@
     "levak_dana_oglas": "Prosečno dana od verifikacije do prvog oglasa",
     "levak_napomena_dnevnik": "Koraci „Otvorili verifikaciju ili tablu“ i „Otvorili formu za oglas“ čitaju se iz dnevnika aktivnosti, koji počinje {datum}. Za starije kohorte ta dva reda pokazuju nulu jer podataka nema, ne zato što niko nije otvarao stranicu.",
     "levak_ucitavanje": "Učitavanje…",
-    "levak_greska": "Greška pri učitavanju levka."
+    "levak_greska": "Greška pri učitavanju levka.",
+    "tab_odluke": "Odluke"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2352,7 +2380,7 @@
     "pristupnica_prihvacena_naslov": "Pristupnica prihvaćena!",
     "pristupnica_prihvacena_tekst": "Postao/la si član kruga „{krug}”.",
     "verifikacija_ponistena_naslov": "Verifikacija poništena",
-    "verifikacija_ponistena_tekst": "Verifikator u tvom lancu jemstva je označen kao lažan, pa je tvoja verifikacija poništena. Indeks stvarnosti ti je 0% — zadržavaš nalog i osnovne funkcije (upis POEN-a, Pijaca, donacije), ali nemaš pristup operativnom doprinosu i programima podrške.",
+    "verifikacija_ponistena_tekst": "Upravni odbor je utvrdio da je verifikacija u tvom lancu jemstva lažna, pa je poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
     "verifikovan_naslov": "Verifikovan/a si — možeš da postaviš oglas",
     "verifikovan_tekst": "„{verifikator}” te je verifikovao/la i dobio/la si pun pristup. Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.",
     "program_obustavljen_naslov": "Socijalni program privremeno obustavljen",
@@ -2374,7 +2402,9 @@
     "bag_promenjen_naslov": "Status prijave baga je promenjen",
     "bag_promenjen_tekst": "Status tvoje prijave „{naslov}” je promenjen.",
     "doprinos_sadrzaju_naslov": "Evidentiran ti je doprinos od {iznos} POEN",
-    "doprinos_sadrzaju_tekst": "Za oglas kojim nudiš dobro ili uslugu evidentiran ti je doprinos sadržaju platforme — {iznos} POEN (Pravilnik čl. 40a)."
+    "doprinos_sadrzaju_tekst": "Za oglas kojim nudiš dobro ili uslugu evidentiran ti je doprinos sadržaju platforme — {iznos} POEN (Pravilnik čl. 40a).",
+    "nadoknada_naslov": "Nastala je nadoknada na tvom zapisu",
+    "nadoknada_tekst": "Poništenjem verifikacije koju si obavio nastala je nadoknada od {iznos} POEN-a, jer poništeni POEN-i nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena."
   },
   "transakcije": {
     "verifikacija": "Verifikacija {pseudonim}",

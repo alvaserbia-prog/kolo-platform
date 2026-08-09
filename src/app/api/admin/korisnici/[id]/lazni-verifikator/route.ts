@@ -5,15 +5,19 @@ import { authOptions } from "@/lib/auth";
 import { logAdminAkcija } from "@/lib/audit";
 import { obavesti } from "@/lib/notifikacije";
 import {
-  ponistiLaznogVerifikatora,
+  ponistiNepostojeciNalog,
   LaznaVerifikacijaGreska,
 } from "@/lib/protokol/lazna-verifikacija";
 import { jeSuperadmin } from "@/lib/dozvole";
 
-// POST — označi korisnika kao lažnog verifikatora (Pravilnik o dokazu stvarnosti, čl. 18).
-// Rekurzivno poništava sve verifikacije iz njegovog podstabla, vraća POEN Protokolu
-// (uz dozvoljen minus) i isključuje ga.
-export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+// POST — Upravni odbor utvrđuje da iza naloga ne stoji stvarna osoba, odnosno da
+// nalog nije jedinstven (Pravilnik o dokazu stvarnosti 4.2.0, čl. 18).
+//
+// 🔴 Do 4.2.0 je ova ruta obarala CELO podstablo verifikatora — stvarni ljudi su
+// gubili status zbog tuđe radnje. Sada padaju samo verifikacije koje ovaj nalog
+// dodiruju (primljene i obavljene, čl. 20), a kaskada staje na prvom stvarnom
+// čoveku: on gubi tu jednu vezu i može ponovo biti verifikovan (čl. 20c).
+export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || !jeSuperadmin(session.user))
     return await greska("Pristup odbijen.", 403);
@@ -21,13 +25,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { id } = await params;
 
   try {
-    const rez = await ponistiLaznogVerifikatora(id);
+    const rez = await ponistiNepostojeciNalog(id);
 
     await logAdminAkcija(
       session.user.id,
-      "LAZNA_VERIFIKACIJA_PONISTENA",
+      "NALOG_UTVRDJEN_NEPOSTOJECIM",
       id,
-      `${rez.pseudonim}: rekurzivno poništeno ${rez.poistenoVerifikacija} verifikacija`
+      `${rez.pseudonim}: poništeno ${rez.ponistenoVerifikacija} verifikacija`
     );
 
     for (const uid of rez.pogodjeniKorisnici) {
@@ -35,8 +39,22 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
         tip: "VERIFIKACIJA_PONISTENA",
         kljuc: "notifikacije.verifikacija_ponistena",
         naslov: "Verifikacija poništena",
-        tekst: "Verifikator u tvom lancu jemstva je označen kao lažan, pa je tvoja verifikacija poništena. Indeks stvarnosti ti je 0% — zadržavaš nalog i osnovne funkcije (upis POEN-a, Pijaca, donacije), ali nemaš pristup operativnom doprinosu i programima podrške.",
+        tekst:
+          "Za nalog iz tvog lanca jemstva utvrđeno je da iza njega ne stoji stvarna osoba, pa je verifikacija koja ide preko njega poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
         link: "/profil",
+      });
+    }
+
+    // Nadoknada je poseban događaj i tiče se drugog čoveka od onog iznad —
+    // verifikatora kome je nepokriveni deo prešao na zapis (čl. 20b).
+    for (const n of rez.nadoknade) {
+      await obavesti(n.userId, {
+        tip: "NADOKNADA",
+        kljuc: "notifikacije.nadoknada",
+        parametri: { iznos: n.iznos },
+        naslov: "Nastala je nadoknada na tvom zapisu",
+        tekst: `Poništenjem verifikacije koju si obavio nastala je nadoknada od ${n.iznos} POEN-a, jer poništeni POEN-i nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena.`,
+        link: "/novcanik",
       });
     }
 

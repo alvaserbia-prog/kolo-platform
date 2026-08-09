@@ -332,7 +332,9 @@
     "send_uspeh_dugme": "Kész",
     "zabelezen_naslov": "Feljegyzett hozzájárulás",
     "zabelezen_opis": "Akkor kerül bevezetésre, amikor valaki hitelesít téged, vagy POEN-t ír be neked. Addig nem POEN-bejegyzés, és nem része az egyenlegnek.",
-    "samo_primalac": "Amíg nem vagy hitelesítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a hitelesítés után nyílik meg."
+    "samo_primalac": "Amíg nem vagy hitelesítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a hitelesítés után nyílik meg.",
+    "nadoknada_naslov": "Megtérítés",
+    "nadoknada_opis": "Az általad végzett hamis hitelesítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor rögzíthetsz, ha a bejegyzésed túllépi a nullát."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -870,11 +872,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.1.1"
+      "ver": "4.2.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -886,7 +888,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.1.1",
+      "ver": "4.2.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -912,15 +914,15 @@
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.1.1-s verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.2.0-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.1.1-s verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.0-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.1.1-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.1.1-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.1.1-s verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.2.0-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1780,10 +1782,35 @@
   },
   "nadzor": {
     "page_naslov": "Felügyelet",
-    "page_opis": "Megerősítésre váró hitelesítések. A felügyelet megerősítése után a hitelesítő visszakapja a helyét, te pedig 500 POEN-t kapsz (7., 10–11. cikk).",
+    "page_opis": "Felügyeleti eredményre váró hitelesítések. Mindegyiknél rögzíted, hogy rendben van-e, kell-e még egy szempár, vagy vitatott. Az első felügyelő, aki eredményt rögzít, 500 POEN-t kap — bármelyik eredmény is az (7., 10–11. cikk).",
     "nema_ovlascenja_naslov": "Nincs jogosultságod",
-    "nema_ovlascenja_opis": "Felügyeletet csak az Alapítvány igazgatósági tagjai és a ZRNO-tartók gyakorolnak (a Valóságigazolási szabályzat 10. cikke).",
-    "prazna_lista": "Nincs felügyeletre váró hitelesítés."
+    "nema_ovlascenja_opis": "A felügyeletet a ZRNO birtokosai látják el (a valóság bizonyításáról szóló szabályzat 10. cikke).",
+    "prazna_lista": "Nincs felügyeletre váró hitelesítés.",
+    "greska": "Hiba",
+    "greska_mreza": "A hálózat nem érhető el",
+    "potroseno_slotova": "a hitelesítő által felhasznált helyek: {broj}",
+    "vec_gledali": "A bejegyzést már megnézte ennyi felügyelő: {broj} — további vélemény szükséges.",
+    "ishod_uredno": "Rendben",
+    "ishod_za_proveru": "Ellenőrzésre",
+    "ishod_sporno": "Vitatott",
+    "opis_za_proveru": "Ez nem vád, hanem kérés, hogy még valaki megnézze. A bejegyzés a többi felügyelő listáján marad, a hitelesítő helye pedig nem áll vissza, amíg valaki nem rögzíti a „rendben“ eredményt.",
+    "opis_sporno": "Azt jelölöd, hogy a hitelesítés nem valós. Felügyeleti ügy nyílik az Igazgatótanács számára; maga az ügy nem jár joghatással a felhasználóra.",
+    "polje_subjekt": "Kire irányul a gyanú",
+    "polje_razlog": "Indok",
+    "polje_opis": "Rövid leírás",
+    "subjekt_verifikator": "Hitelesítő",
+    "subjekt_verifikovani": "Hitelesített",
+    "subjekt_oba": "Mindkét felhasználó",
+    "subjekt_deo_mreze": "A hálózat egy része",
+    "razlog_ne_poznaju_se": "Nem ismerik egymást",
+    "razlog_nalog_bez_znakova": "A fiók nem mutatja valós személy jeleit",
+    "razlog_dvostruki_nalog": "Kettős fiók",
+    "razlog_obrazac_verifikacija": "Hitelesítési minta",
+    "razlog_prijava_verifikovanog": "A hitelesített bejelentése",
+    "razlog_ostalo": "Egyéb",
+    "saljem": "Küldés...",
+    "evidentiraj": "Eredmény rögzítése",
+    "odustani": "Mégse"
   },
   "tablaJemstva": {
     "ukinuta_naslov": "A kezességi kérelmek táblája megszűnt",
@@ -2279,7 +2306,8 @@
     "levak_dana_oglas": "Prosečno dana od verifikacije do prvog oglasa",
     "levak_napomena_dnevnik": "Koraci „Otvorili verifikaciju ili tablu“ i „Otvorili formu za oglas“ čitaju se iz dnevnika aktivnosti, koji počinje {datum}. Za starije kohorte ta dva reda pokazuju nulu jer podataka nema, ne zato što niko nije otvarao stranicu.",
     "levak_ucitavanje": "Učitavanje…",
-    "levak_greska": "Greška pri učitavanju levka."
+    "levak_greska": "Greška pri učitavanju levka.",
+    "tab_odluke": "Döntések"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2345,7 +2373,7 @@
     "pristupnica_prihvacena_naslov": "Belépési kérelem elfogadva!",
     "pristupnica_prihvacena_tekst": "A(z) „{krug}” kör tagja lettél.",
     "verifikacija_ponistena_naslov": "Hitelesítés érvénytelenítve",
-    "verifikacija_ponistena_tekst": "A kezességi láncodban egy kezest hamisnak jelöltek, ezért a hitelesítésedet érvénytelenítettük. A valóságindexed 0% — a fiókod és az alapfunkciók megmaradnak (POEN rögzítése, Piac, adományok), de elveszíted a hozzáférést az operatív hozzájáruláshoz és a támogatási programokhoz.",
+    "verifikacija_ponistena_tekst": "Az Igazgatótanács megállapította, hogy a kezességi láncodban szereplő egyik hitelesítés hamis volt, ezért érvénytelenítették. A valóságindexed 10 százalékponttal csökkent, és felszabadult egy hely a láncodban — ha valaki más hitelesít, az index és a POEN is visszatér. A többi hitelesítésed érvényben marad.",
     "verifikovan_naslov": "Hitelesítve vagy — feladhatsz hirdetést",
     "verifikovan_tekst": "„{verifikator}” hitelesített téged, és teljes hozzáférést kaptál. Mostantól hirdetést adhatsz fel a Piacon, üzenetet írhatsz és ZRNO-t jegyezhetsz. Ha nem ismered ezt a személyt, jelentsd a hitelesítést a Hitelesítés oldalon.",
     "program_obustavljen_naslov": "Szociális program ideiglenesen felfüggesztve",
@@ -2367,7 +2395,9 @@
     "bag_promenjen_naslov": "A hibabejelentés állapota megváltozott",
     "bag_promenjen_tekst": "A(z) „{naslov}” bejelentésed állapota megváltozott.",
     "doprinos_sadrzaju_naslov": "{iznos} POEN rögzítve a hozzájárulásodért",
-    "doprinos_sadrzaju_tekst": "A jószágot vagy szolgáltatást kínáló hirdetésedért rögzítettük a platform tartalmához való hozzájárulásodat — {iznos} POEN (Szabályzat 40a. cikk)."
+    "doprinos_sadrzaju_tekst": "A jószágot vagy szolgáltatást kínáló hirdetésedért rögzítettük a platform tartalmához való hozzájárulásodat — {iznos} POEN (Szabályzat 40a. cikk).",
+    "nadoknada_naslov": "Megtérítés keletkezett a bejegyzéseden",
+    "nadoknada_tekst": "Az általad végzett hitelesítés érvénytelenítése {iznos} POEN megtérítést keletkeztetett, mert az érvénytelenített POEN nem volt fedezve. A megtérítés nem tartozás és nem hajtható be; a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva."
   },
   "transakcije": {
     "verifikacija": "Hitelesítés: {pseudonim}",

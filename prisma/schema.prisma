@@ -236,6 +236,12 @@ model User {
   jeOsnivac                        Boolean                   @default(false)
   indeksStvarnosti                 Int                       @default(0)
   slotoviPotroseni                 Int                       @default(0)
+  // Upravni odbor je utvrdio da iza naloga ne stoji stvarna osoba, ili da nalog nije
+  // jedinstven (dokaz stvarnosti 4.2.0, čl. 18). Takav nalog nikoga ne može poznavati,
+  // pa padaju SVE verifikacije koje ga dodiruju — i primljene i obavljene (čl. 20).
+  // Kaskada se time zaustavlja na prvom nalogu koji NIJE ovako označen: stvaran čovek
+  // gubi samo vezu ka lažnom nalogu, a sopstvene verifikacije zadržava.
+  utvrdjenNepostojeci              DateTime?
   pocetnaEmisijaIzvrsena           Boolean                   @default(false)
   pseudonimChangedAt               DateTime?
   // "Viđeno" vremena za sidebar badge-eve: badge broji samo stavke novije od ovog
@@ -305,6 +311,8 @@ model User {
   verifikacijeKojeSamObavio        VerifikacionaVeza[]       @relation("Verifikator")
   verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[]       @relation("Verifikovani")
   nadzori                          VerifikacionaVeza[]       @relation("Nadzornik")
+  nadzorZapisi                     NadzorZapis[]             @relation("NadzorZapisi")
+  predmetiReseni                   NadzorniPredmet[]         @relation("PredmetiReseni")
   verifikacijaTokeni               VerifikacijaToken[]
   zabranjenaZona                   VerifikacionaZona[]       @relation("ZonaVlasnik")
   uTudjimZonama                    VerifikacionaZona[]       @relation("ZonaZabranjeni")
@@ -1361,10 +1369,18 @@ model VerifikacionaVeza {
   // (admin). Ne objavljuje se drugim korisnicima i ne kači se na javnu evidenciju
   // doprinosa (Pravilnik o dokazu stvarnosti, dopuna 3.9.1; čl. 31).
   oznakaVerifikatora String?
+  // Poslednji nadzornik i trenutak poslednjeg evidentiranog ishoda. Pun trag ide u
+  // NadzorZapis — po ishodu "za proveru" zapis gleda više nadzornika, a jedno polje
+  // ne može da nosi dvoje ljudi (dokaz stvarnosti 4.2.0, čl. 11).
   nadzornikId        String?
   nadzornik          User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
   podlezeNadzoru     Boolean
   nadzoranAt         DateTime?
+  // Merodavan ishod = poslednji evidentirani. UREDNO je jedini koji dopunjava slot
+  // kapaciteta verifikatora (čl. 11 st. 2 al. 1).
+  nadzorIshod        NadzorIshod?
+  nadzorZapisi       NadzorZapis[]
+  nadzorniPredmet    NadzorniPredmet?
 
   @@unique([verifikatorId, redniBroj])
   // K6: isti verifikator ne sme dvaput da verifikuje istog korisnika (anti-inflacija
@@ -1373,6 +1389,75 @@ model VerifikacionaVeza {
   @@index([verifikatorId])
   @@index([verifikovaniId])
   @@index([nadzornikId])
+}
+
+// ─── Nadzor verifikacija — ishod i predmet (dokaz stvarnosti 4.2.0) ──────────
+// Do 4.2.0 nadzornik je mogao samo da POTVRDI verifikaciju ili da ne uradi ništa —
+// polja za "proverio sam i nešto ne štima" nije bilo, pa je podsticaj gurao ka
+// propuštanju. Sada svaki nadzor ostavlja zabeležen ishod (čl. 11).
+
+enum NadzorIshod {
+  UREDNO // nema primedbi → dopunjava se slot kapaciteta verifikatora
+  ZA_PROVERU // nadzorniku nije jasno → zapis ide drugom nadzorniku, slot se NE dopunjava
+  SPORNO // nadzornik smatra da verifikacija nije istinita → slot se NE dopunjava
+}
+
+enum NadzorSubjekt {
+  VERIFIKATOR
+  VERIFIKOVANI
+  OBA
+  DEO_MREZE
+}
+
+enum NadzorniPredmetStatus {
+  OTVOREN
+  UTVRDJENA_LAZNA
+  NEMA_OSNOVA
+}
+
+// Jedan red po nadzorniku po verifikaciji. `@@unique` je ono što tehnički sprovodi
+// zabranu iz čl. 10 st. 4 — isti nadzornik ne sme dvaput da gleda isti zapis.
+model NadzorZapis {
+  id              String            @id @default(uuid())
+  verifikacijaId  String
+  verifikacija    VerifikacionaVeza @relation(fields: [verifikacijaId], references: [id], onDelete: Cascade)
+  nadzornikId     String
+  nadzornik       User              @relation("NadzorZapisi", fields: [nadzornikId], references: [id])
+  ishod           NadzorIshod
+  // Obavezni uz ZA_PROVERU i SPORNO, prazni uz UREDNO (čl. 11 st. 3).
+  subjekt         NadzorSubjekt?
+  razlog          String? // šifra sa liste iz čl. 11 st. 4
+  opis            String? // samo uz razlog "ostalo"
+  // 500 POEN ide PRVOM nadzorniku koji evidentira ishod, bez obzira koji je (čl. 7 st. 2).
+  // Drugi ne dobija ništa — inače bi se isplatilo lančano dodavati nadzornike.
+  poenEvidentiran Boolean           @default(false)
+  createdAt       DateTime          @default(now())
+
+  @@unique([verifikacijaId, nadzornikId])
+  @@index([verifikacijaId])
+  @@index([nadzornikId])
+}
+
+// Nadzorni predmet (čl. 11a). Alat, ne organ — odlučuje UO po čl. 18.
+// Jedan po verifikaciji: drugi nadzornik koji doda ishod ažurira postojeći predmet.
+// Vidi ga SAMO superadmin. Cascade je namerna: poništenjem verifikacije nestaje i
+// predmet, a trag radnje ostaje u audit logu.
+model NadzorniPredmet {
+  id             String                @id @default(uuid())
+  verifikacijaId String                @unique
+  verifikacija   VerifikacionaVeza     @relation(fields: [verifikacijaId], references: [id], onDelete: Cascade)
+  status         NadzorniPredmetStatus @default(OTVOREN)
+  subjekt        NadzorSubjekt
+  razlog         String
+  opis           String?
+  otvorenAt      DateTime              @default(now())
+  resenById      String?
+  resenBy        User?                 @relation("PredmetiReseni", fields: [resenById], references: [id])
+  resenAt        DateTime?
+  beleska        String?
+
+  @@index([status, otvorenAt])
+  @@index([resenById])
 }
 
 // ─── Zabranjena zona verifikacije (dokaz stvarnosti 3.9.2, čl. 12) ───────────
