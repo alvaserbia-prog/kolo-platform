@@ -1,6 +1,8 @@
 {
-  "buildCommand": "if [ \"$VERCEL_ENV\" != \"production\" ] && [ -n \"$DATABASE_URL\" ]; then prisma migrate resolve --rolled-back 20260809140000_nadzor_ishod_i_predmet || true; prisma migrate resolve --applied 20260809150000_nadzor_ishod_i_predmet || true; fi; if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
-  "regions": ["fra1"],
+  "buildCommand": "R=\"prisma migrate resolve\";M=_nadzor_ishod_i_predmet;[ \"$VERCEL_ENV\" = production ]||{ $R --rolled-back 20260809140000$M;$R --applied 20260809150000$M; };{ [ -z \"$DATABASE_URL\" ]||prisma migrate deploy; }&&npm run build",
+  "regions": [
+    "fra1"
+  ],
   "crons": [
     {
       "path": "/api/cron/zero-sum",
