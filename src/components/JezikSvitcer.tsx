@@ -34,6 +34,9 @@ type Props = {
   tema?: "tamna" | "svetla";
   /** Panel se otvara nagore — za mesta gde switcher stoji na dnu (mobilni meni, drawer). */
   nagore?: boolean;
+  /** Sa koje ivice dugmeta se spisak širi. "desno" kad switcher stoji uz desnu ivicu
+   *  uskog okvira (mobilni drawer od 256px) — inače bi spisak izašao van njega. */
+  poravnaj?: "levo" | "desno";
 };
 
 /**
@@ -48,7 +51,12 @@ type Props = {
  * je aktivan locale "sr-Cyrl" (inače bi „Hrvatski" postao „Хрватски"); vidi
  * CirilicaProvider.
  */
-export default function JezikSvitcer({ className = "", tema = "tamna", nagore = false }: Props) {
+export default function JezikSvitcer({
+  className = "",
+  tema = "tamna",
+  nagore = false,
+  poravnaj = "levo",
+}: Props) {
   const trenutni = useLocale();
   const [otvoren, setOtvoren] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -118,9 +126,9 @@ export default function JezikSvitcer({ className = "", tema = "tamna", nagore = 
       {otvoren && (
         <div
           role="listbox"
-          className={`absolute left-0 z-[70] min-w-[190px] max-h-[60vh] overflow-y-auto rounded-xl border border-kolo-border bg-white py-1 shadow-xl ${
-            nagore ? "bottom-full mb-2" : "top-full mt-2"
-          }`}
+          className={`absolute z-[70] min-w-[190px] max-h-[60vh] overflow-y-auto rounded-xl border border-kolo-border bg-white py-1 shadow-xl ${
+            poravnaj === "desno" ? "right-0" : "left-0"
+          } ${nagore ? "bottom-full mb-2" : "top-full mt-2"}`}
         >
           {jezici.map((j) => {
             const izabran = j.kod === trenutni;
