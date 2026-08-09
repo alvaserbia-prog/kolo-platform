@@ -197,10 +197,9 @@ export default function PublicNav({ isLoggedIn }: Props) {
               </a>
             </div>
 
-            {/* Jezik na dnu menija — isti razlog kao u sidebar-u: red od 6 zastavica
-                ne staje pored logotipa i dugmeta za zatvaranje u zaglavlju. */}
-            <div className="pt-4 border-t border-kolo-border">
-              <JezikSvitcer />
+            {/* Jezik na dnu menija; panel se otvara nagore da ne izađe iz ekrana. */}
+            <div className="pt-4 border-t border-kolo-border flex">
+              <JezikSvitcer tema="svetla" nagore />
             </div>
           </nav>
         </div>

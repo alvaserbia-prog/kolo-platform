@@ -328,16 +328,14 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Zaglavlje drži samo logo i naziv. Jezik switcher je premešten na dno:
-            sa 6 jezika red zastavica je širi od prostora koji ostane pored naziva
-            u drawer-u od 256px, pa je prelazio preko „KOLO". Dole ima punu širinu. */}
+        {/* Zaglavlje drži samo logo i naziv; jezik stoji na dnu drawer-a. */}
         <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
           <Image src="/kolo-icon.png" alt="KOLO" width={38} height={38} className="object-contain" />
           <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
         </div>
         <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
-        <div className="shrink-0 px-4 pt-3 pb-4 border-t border-white/10">
-          <JezikSvitcer />
+        <div className="shrink-0 px-4 pt-3 pb-4 border-t border-white/10 flex">
+          <JezikSvitcer nagore />
         </div>
       </aside>
     </>
