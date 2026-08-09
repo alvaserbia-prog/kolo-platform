@@ -133,7 +133,7 @@ export default async function VerifikacijaPage() {
           {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
 
           {/* Put do verifikacije više ne ide preko zasebnog zida na kome se čovek
-              predstavlja, nego kroz Pijacu (Pravilnik 4.1.0 čl. 32 st. 4): neverifikovani
+              predstavlja, nego kroz Pijacu (Pravilnik 4.1.1 čl. 32 st. 4): neverifikovani
               objavi ponudu, mreža ga povodom nje prepozna. Zato obe kartice vode na Pijacu. */}
           <a
             href={jeNeverifikovan ? "/pijaca/novi-oglas" : "/pijaca"}

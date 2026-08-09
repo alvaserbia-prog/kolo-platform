@@ -108,6 +108,20 @@ export default function PolitikaPrihvatiPage() {
         >
           {prihvatanje ? t("dugme_prihvatam_loading") : t("dugme_prihvatam")}
         </button>
+
+        {/*
+          Izlaz iz gejta. Politika čl. 16 i Uslovi čl. 40 (v4.1.1): ograničenje pristupa
+          do prihvatanja ne dira u prava na pristup, prenosivost i brisanje podataka.
+          `/profil` je zato izuzet iz redirect-a u AppShell-u — link mora da vodi negde
+          gde se stvarno stiže, inače je odredba mrtvo slovo.
+        */}
+        <p className="text-xs text-kolo-muted mt-4 text-center">
+          {t("pre_prihvatanja")}{" "}
+          <Link href="/profil" className="text-kolo-green-700 underline">
+            {t("podesavanja_profila")}
+          </Link>
+          .
+        </p>
       </div>
     </div>
   );

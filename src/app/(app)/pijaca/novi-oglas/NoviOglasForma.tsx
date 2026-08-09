@@ -113,7 +113,7 @@ export default function NoviOglasForma({
   // Kod potražnje nema iznosa — budžet se dogovara u porukama (cenaTip = DOGOVOR).
   const cena = jePotraznja ? { ok: true } : parsirajCenu(cenaTip, price, cenaDo);
 
-  // Sadržinski minimum (Uslovi 4.1.0) — uslov za objavu SAMO neverifikovanom.
+  // Sadržinski minimum (Uslovi 4.1.1) — uslov za objavu SAMO neverifikovanom.
   // Ista funkcija radi i na serveru; ovde je da čovek ne šalje oglas u prazno.
   const minimum = oglasIspunjavaMinimum({
     tip,

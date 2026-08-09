@@ -314,7 +314,13 @@ Rezultati DPIA dostupni su službeniku za zaštitu podataka i služe kao temelj 
 
 Ovu politiku možemo mijenjati u skladu s razvojem Platforme i sustava.
 
-O svim izmjenama koje znatno utječu na vaša prava bit ćete obaviješteni putem email adrese registrirane na računu, najmanje 15 dana prije stupanja izmjena na snagu.
+O izmjenama koje sužavaju vaša prava ili proširuju obradu osobnih podataka bit ćete obaviješteni putem email adrese registrirane na računu, najmanje 15 dana prije stupanja izmjena na snagu.
+
+Ostale izmjene stupaju na snagu danom donošenja, uz obavještavanje bez odgode. To su osobito: otklanjanje pogrešaka i jezične ispravke, izmjene koje proširuju vaša prava ili sužavaju obradu osobnih podataka, izmjene nametnute propisom ili odlukom nadležnog tijela te usklađivanje opisa obrade s izmjenama izgleda i funkcija Platforme koje ne mijenjaju kategorije podataka, svrhe ni pravnu osnovu obrade.
+
+Možemo zatražiti da izmijenjenu politiku izrijekom prihvatite pri prvoj sljedećoj prijavi na račun i da do prihvaćanja ograničimo pristup računu. Ograničenje ne dira u ostvarivanje vaših prava iz Članka 13. ove politike — prije svega prava na pristup, prenosivost i brisanje: preuzimanje podataka i brisanje računa ostaju dostupni i prije prihvaćanja.
+
+Prihvaćanje ove politike nije privola za obrade čija je pravna osnova privola (Članak 4.). Te privole dajete odvojeno, dobrovoljne su i možete ih povući u svakom trenutku; odbijanje ili povlačenje takve privole ne može biti razlog za ograničenje pristupa računu.
 
 Aktualna je verzija uvijek dostupna na Platformi.
 

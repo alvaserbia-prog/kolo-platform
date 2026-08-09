@@ -19,7 +19,7 @@
 | **Data Protection Officer (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Date of preparation** | 23.05.2026. (last amended 16.06.2026.) |
 | **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–10, no. 12 and no. 13 (including the activated Module 3 — Social Programs with verifier confirmation, Integrity Monitoring of the Verification System, and the public list of donations); inactive processing activity no. 11 (Module 4 — Children) |
-| **Related documents** | Rulebook on the KOLO System (v4.1.0), Privacy Policy (v4.1.0), Records of Processing Activities (v4.1.0), Rulebook on Support Programmes (v4.1.0), Rulebook on the Hierarchy of Acts (v4.1.0), Statute (v4.1), Whitepaper (v4.1.0) |
+| **Related documents** | Rulebook on the KOLO System (v4.1.1), Privacy Policy (v4.1.1), Records of Processing Activities (v4.1.1), Rulebook on Support Programmes (v4.1.1), Rulebook on the Hierarchy of Acts (v4.1.1), Statute (v4.1), Whitepaper (v4.1.1) |
 | **Next review** | Before activation of Module 4, upon amendment of the social program confirmation mechanism, or at the latest 12 months from the last amendment |
 
 This data protection impact assessment (hereinafter: DPIA) is prepared in accordance with Art. 54 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP). The DPIA is based on the provisions of Chapter IX of the Rulebook on the KOLO System (Art. 60–67), the Privacy Policy of the KOLO Platform, and the Records of Processing Activities of Personal Data.
@@ -46,7 +46,7 @@ Third design decision — data minimization. The Platform collects only the data
 
 ## 2.3. Overview of Processing Activities
 
-The system in Phase 1 encompasses thirteen processing activities defined by the Records of Processing Activities (v4.1.0). Activities 1–10, 12 and 13 are active (Module 3 — Social Programs is activated by this assessment, and activity 13 covers the public list of donations); activity 11 is inactive until the activation of Module 4.
+The system in Phase 1 encompasses thirteen processing activities defined by the Records of Processing Activities (v4.1.1). Activities 1–10, 12 and 13 are active (Module 3 — Social Programs is activated by this assessment, and activity 13 covers the public list of donations); activity 11 is inactive until the activation of Module 4.
 
 | **Activity** | **Name** | **Legal basis** | **Status** |
 | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ The system in Phase 1 encompasses thirteen processing activities defined by the 
 | No. 12 | Integrity monitoring of the verification system | Legitimate interest (Art. 12 para. 1 item 6) | Active |
 | No. 13 | Publication of the donor's name in the donation list (public donation) | Consent (Art. 12 para. 1 item 1) | Active |
 
-Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.1.0) applied together with this assessment.
+Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.1.1) applied together with this assessment.
 
 ## 2.4. Data Flow
 
@@ -199,7 +199,7 @@ Mechanics of anonymization upon status termination: the email address is deleted
 
 ## 8.1. Module 3 — Social Programs (activated by this assessment)
 
-Module 3 is activated by this assessment, in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.1.0). The system introduces the processing of special categories of data — parental status, age, disability (competent authority's decision — not diagnosis), student status (Art. 17 LPDP). The legal basis is the explicit consent of the user (Art. 17 para. 2 item 1 LPDP). The Foundation does not retain copies of submitted documentation — only the minimum record of group membership and the date of verification remains.
+Module 3 is activated by this assessment, in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.1.1). The system introduces the processing of special categories of data — parental status, age, disability (competent authority's decision — not diagnosis), student status (Art. 17 LPDP). The legal basis is the explicit consent of the user (Art. 17 para. 2 item 1 LPDP). The Foundation does not retain copies of submitted documentation — only the minimum record of group membership and the date of verification remains.
 
 To protect the integrity of programs from false applications, before approval the fulfilment of conditions is confirmed by all of the applicant's verifiers, under full responsibility and on the basis of personal acquaintance, without access to the entered data; a refusal requires a reason, and the application is not approved until all confirm (hard block). This procedure introduces risk R11 (disclosure of special-category membership to the applicant's own verifiers), for which measures are established in section 5.6.
 

@@ -2,7 +2,7 @@
 
 # Registar radnji obrade osobnih podataka
 
-*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.1.0) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.1.0) i Pravilnikom o programima podrške (verzija 4.1.0).*
+*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.1.1) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.1.1) i Pravilnikom o programima podrške (verzija 4.1.1).*
 
 **PODACI O VODITELJU OBRADE**
 
@@ -128,7 +128,7 @@
 
 **Radnja obrade br. 10 — Posebne kategorije podataka (Modul 3. — Socijalni programi)**
 
-| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.1.0); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.1.0). |
+| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.1.1); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.1.1). |
 | --- | --- |
 | **Svrha obrade** | Automatsko evidentiranje doprinosa u POEN-ima za korisnike koji pripadaju kvalificiranim skupinama, uz potvrdu ispunjenosti uvjeta od strane verifikatora podnositelja (zaštita integriteta programa od neistinitih prijava). |
 | **Kategorije osoba** | Korisnici koji pripadaju kvalificiranim skupinama (roditelji, starije osobe, osobe s invaliditetom, studenti) i njihovi verifikatori. |

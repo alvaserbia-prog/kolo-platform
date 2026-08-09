@@ -1,7 +1,7 @@
 /**
  * /tabla-jemstva — stranica ostaje samo kao razmena adrese.
  *
- * Tabla zahteva za jemstvo je ukinuta (Pravilnik 4.1.0 čl. 32 st. 4, Uslovi čl. 14
+ * Tabla zahteva za jemstvo je ukinuta (Pravilnik 4.1.1 čl. 32 st. 4, Uslovi čl. 14
  * i 16 brisani). Adresa se NE gasi ćutke i ne preusmerava automatski: postoje stari
  * linkovi u notifikacijama i mejlovima, a čovek koji dođe preko njih mora da sazna
  * ŠTA je tablu zamenilo — inače izgleda kao da je put do verifikacije nestao.

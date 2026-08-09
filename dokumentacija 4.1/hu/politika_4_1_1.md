@@ -314,7 +314,13 @@ A DPIA eredményei az adatvédelmi tisztviselő számára hozzáférhetők, és 
 
 Ezt a szabályzatot a Platform és a rendszer fejlődésének megfelelően módosíthatjuk.
 
-Minden olyan módosításról, amely jelentősen érinti az Ön jogait, a fiókhoz regisztrált email címen értesítjük, legalább 15 nappal a módosítások hatálybalépése előtt.
+Az Ön jogait szűkítő vagy a személyes adatok kezelését kiterjesztő módosításokról a fiókhoz regisztrált email címen értesítjük, legalább 15 nappal a módosítások hatálybalépése előtt.
+
+Az egyéb módosítások az elfogadás napján lépnek hatályba, késedelem nélküli értesítés mellett. Ilyenek különösen: a hibák javítása és a nyelvi helyesbítések, az Ön jogait kiterjesztő vagy a személyes adatok kezelését szűkítő módosítások, a jogszabály vagy illetékes hatóság határozata által előírt módosítások, valamint az adatkezelés leírásának összehangolása a Platform megjelenésének és funkcióinak olyan változásaival, amelyek az adatok kategóriáit, az adatkezelés céljait és jogalapját nem érintik.
+
+Kérhetjük, hogy a módosított szabályzatot a fiókba való soron következő bejelentkezéskor kifejezetten elfogadja, és az elfogadásig korlátozhatjuk a fiókhoz való hozzáférést. A korlátozás nem érinti a jelen szabályzat 13. cikke szerinti jogainak gyakorlását — mindenekelőtt a hozzáféréshez, az adathordozhatósághoz és a törléshez való jogot: az adatok letöltése és a fiók törlése az elfogadás előtt is elérhető marad.
+
+A jelen szabályzat elfogadása nem minősül hozzájárulásnak azokhoz az adatkezelésekhez, amelyek jogalapja a hozzájárulás (4. cikk). Ezeket a hozzájárulásokat külön adja meg, önkéntesek, és bármikor visszavonhatók; az ilyen hozzájárulás megtagadása vagy visszavonása nem lehet a fiókhoz való hozzáférés korlátozásának indoka.
 
 A hatályos változat mindig elérhető a Platformon.
 

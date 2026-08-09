@@ -2,7 +2,7 @@
 
 # Records of Processing Activities of Personal Data
 
-*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.1.0), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.1.0) and the Rulebook on Support Programmes (version 4.1.0).*
+*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.1.1), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.1.1) and the Rulebook on Support Programmes (version 4.1.1).*
 
 **CONTROLLER DETAILS**
 
@@ -128,7 +128,7 @@
 
 **Processing activity no. 10 — Special categories of data (Module 3 — Social Programs)**
 
-| **Status** | ACTIVE — Module 3 is activated in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.1.0); activation is accompanied by an updated DPIA (v4.1.0). |
+| **Status** | ACTIVE — Module 3 is activated in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.1.1); activation is accompanied by an updated DPIA (v4.1.1). |
 | --- | --- |
 | **Purpose of processing** | Automatic recording of contributions in POENs for users belonging to qualifying groups, with confirmation of fulfilment of conditions by the applicant's verifiers (protecting the integrity of programs from false applications). |
 | **Categories of data subjects** | Users belonging to qualifying groups (parents, elderly persons, persons with disabilities, students) and their verifiers. |

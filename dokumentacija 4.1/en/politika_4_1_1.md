@@ -314,7 +314,13 @@ The results of the DPIA are available to the data protection officer and serve a
 
 We may amend this Policy in accordance with the development of the Platform and the system.
 
-You will be notified of all amendments that significantly affect your rights via the email address registered on the account, at least 15 days before the amendments take effect.
+You will be notified of amendments that narrow your rights or expand the processing of personal data via the email address registered on the account, at least 15 days before the amendments take effect.
+
+Other amendments take effect on the day of adoption, with notification without delay. These include in particular: correction of errors and linguistic corrections, amendments that expand your rights or narrow the processing of personal data, amendments imposed by regulation or by a decision of a competent authority, and alignment of the description of processing with changes to the appearance and functions of the Platform that do not change the categories of data, the purposes or the legal basis of processing.
+
+We may require you to expressly accept the amended Policy upon your next login to the account, and restrict access to the account until acceptance. The restriction does not affect the exercise of your rights under Article 13 of this Policy — above all the rights of access, portability and erasure: downloading your data and deleting your account remain available before acceptance as well.
+
+Acceptance of this Policy is not consent for processing whose legal basis is consent (Article 4). You give those consents separately; they are voluntary and you may withdraw them at any time, and refusal or withdrawal of such consent may not be a ground for restricting access to the account.
 
 The current version is always available on the Platform.
 

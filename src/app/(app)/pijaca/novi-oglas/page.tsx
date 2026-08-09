@@ -15,7 +15,7 @@ export default async function NoviOglasPage({
 
   const { tip } = await searchParams;
 
-  // Forma je otvorena i neverifikovanom korisniku (Pravilnik 4.1.0 čl. 16 st. 5).
+  // Forma je otvorena i neverifikovanom korisniku (Pravilnik 4.1.1 čl. 16 st. 5).
   // Verifikovanost se čita IZ BAZE, ne iz sesije: token se osvežava sa zakašnjenjem,
   // pa bi tek verifikovan korisnik još neko vreme gledao zaključan izbor tipa oglasa.
   const korisnik = await prisma.user.findUnique({

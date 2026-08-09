@@ -1,6 +1,6 @@
 /**
  * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
- * Osnov: Pravilnik o KOLO sistemu 4.1.0 čl. 15 tačka 8 i čl. 40a.
+ * Osnov: Pravilnik o KOLO sistemu 4.1.1 čl. 15 tačka 8 i čl. 40a.
  *
  * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
  * ali samo za nalog čija stvarnost nije potvrđena:

@@ -47,7 +47,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Unauthorized", 401);
-  // INICIRANJE konverzacije je dostupno samo verifikovanima (Pravilnik 4.1.0
+  // INICIRANJE konverzacije je dostupno samo verifikovanima (Pravilnik 4.1.1
   // čl. 16 st. 5, čl. 28 st. 2). Neverifikovani ne može da se obrati kome hoće;
   // razgovor sa njim pokreće verifikovani korisnik povodom njegovog oglasa, a on
   // u tom razgovoru SME da odgovara — POST /api/poruke/[konvId] proverava samo
