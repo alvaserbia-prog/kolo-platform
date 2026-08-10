@@ -103,7 +103,7 @@ export default function JezikSvitcer({
           alt=""
           width={24}
           height={18}
-          className="block h-[18px] w-auto rounded-[3px]"
+          className="block h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
         />
         <span className="text-[11px] font-semibold tracking-wide leading-none">
           {aktivan.kratko}
@@ -143,13 +143,15 @@ export default function JezikSvitcer({
                   izabran ? "font-semibold text-kolo-green-700" : "text-kolo-text"
                 }`}
               >
+                {/* Kutija je fiksna 24×18 da sve zastavice budu jednake i kad neka
+                    bude nacrtana u drugom odnosu stranica. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={j.ikona}
                   alt=""
                   width={24}
                   height={18}
-                  className="block h-[18px] w-auto rounded-[3px] shrink-0"
+                  className="block h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
                 />
                 <span className="flex-1 whitespace-nowrap">{j.naziv}</span>
                 {/* Mesto za kvačicu se drži i na neizabranim redovima: inače je izabrani
