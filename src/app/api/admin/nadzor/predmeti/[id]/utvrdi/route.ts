@@ -102,7 +102,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       kljuc: "notifikacije.verifikacija_ponistena",
       naslov: "Verifikacija poništena",
       tekst:
-        "Upravni odbor je utvrdio da je verifikacija u tvom lancu jemstva lažna, pa je poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
+        "Upravni odbor je utvrdio da je verifikacija u tvom lancu potvrda lažna, pa je poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
       link: "/profil",
     });
   }

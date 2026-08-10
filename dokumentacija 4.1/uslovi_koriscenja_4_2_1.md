@@ -96,7 +96,7 @@ Korisnik Platforme može imati status neverifikovanog korisnika, verifikovanog k
 
 ### Član 14 — Neverifikovani korisnik
 
-Neverifikovani korisnik je lice registrovano na Platformi čija stvarnost nije potvrđena kroz lanac jemstva.
+Neverifikovani korisnik je lice registrovano na Platformi čija stvarnost nije potvrđena kroz lanac potvrda.
 
 Neverifikovani korisnik može da pregleda opšte pokazatelje sistema, da se upozna sa pravilima i da vidi iznose i vremenske oznake POEN transakcija bez pseudonima strana i bez uvida u stanja računa.
 
@@ -108,7 +108,7 @@ Neverifikovani korisnik ne može da verifikuje druge korisnike. Doprinos mu se m
 
 ### Član 15 — Verifikovani korisnik i nosilac ZRNA
 
-Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac jemstva i čiji je indeks stvarnosti najmanje 10%.
+Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac potvrda i čiji je indeks stvarnosti najmanje 10%.
 
 Verifikovani korisnik ima pun pristup Platformi: može da razmenjuje dobra i usluge u prostoru za razmenu, da mu se evidentira doprinos u POEN-ima, da verifikuje druge korisnike u skladu sa pravilima o dokazu stvarnosti, da donira Fondaciji i da učestvuje u kolektivnim oblicima kada budu aktivirani. Verifikovani korisnik ima uvid u pseudonime svih korisnika, stanja POEN računa i sve transakcije sa pseudonimima strana.
 
@@ -124,7 +124,7 @@ Oglas neverifikovanog korisnika mora da ispuni sadržinski minimum: najmanje jed
 
 Neverifikovani korisnik može istovremeno imati najviše tri aktivna oglasa.
 
-Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu jemstva. Oznaka je dostupna svima kojima je dostupan i sam oglas, uključujući neprijavljena lica.
+Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda. Oznaka je dostupna svima kojima je dostupan i sam oglas, uključujući neprijavljena lica.
 
 Verifikovani korisnik može, polazeći od objavljenog oglasa, da započne neposredan razgovor (poruke) sa oglašivačem. U tako započetom razgovoru neverifikovani oglašivač može da odgovara iako još nije verifikovan. Obrada podataka u razgovoru uređena je Politikom privatnosti Platforme.
 
@@ -200,7 +200,7 @@ Razmena redistribuira postojeće POEN-e i ne uvećava njihov ukupan broj u siste
 
 Za ispunjenje, kvalitet i rizik u razmeni odgovaraju korisnici koji u njoj učestvuju, prema opštim pravilima obligacionog prava.
 
-Ovo posebno važi za razmenu po oglasu neverifikovanog korisnika: stvarnost oglašivača nije potvrđena kroz lanac jemstva, na šta oglas i upozorava vidljivom oznakom (Član 16). Korisnik koji stupa u takvu razmenu čini to na sopstveni rizik. Fondacija ni u tom slučaju nije strana u razmeni, ne posreduje u njoj i ne odgovara za ispunjenje obaveza korisnika.
+Ovo posebno važi za razmenu po oglasu neverifikovanog korisnika: stvarnost oglašivača nije potvrđena kroz lanac potvrda, na šta oglas i upozorava vidljivom oznakom (Član 16). Korisnik koji stupa u takvu razmenu čini to na sopstveni rizik. Fondacija ni u tom slučaju nije strana u razmeni, ne posreduje u njoj i ne odgovara za ispunjenje obaveza korisnika.
 
 Platforma ne traži od korisnika da razmenu posebno označe, potvrde ni ocene. Jedini zapis o razmeni je ažuriranje evidencije POEN-a koje korisnici sami sprovedu; po njemu se očitava i putanja doprinosa razmeni (Član 40b Pravilnika o KOLO sistemu).
 
@@ -304,7 +304,7 @@ Fondacija ne garantuje da sistem neće biti pogođen tehničkim problemima, bezb
 
 Korisnik je odgovoran za tačnost podataka koje dostavlja sistemu, za ispunjenje obaveza preuzetih u razmeni sa drugim korisnicima, za sve aktivnosti izvršene sa njegovog naloga i za posledice kršenja ovih Uslova.
 
-Korisnik koji učestvuje u lancu jemstva odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
+Korisnik koji učestvuje u lancu potvrda odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
 
 ### Član 36 — Rizici učešća u sistemu
 

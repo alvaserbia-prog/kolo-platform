@@ -68,7 +68,7 @@ Zaklada može prestati postojati. U tom slučaju uloga čuvara zajedničkog dobr
 
 Za ispunjenje, kvalitetu i rizik u razmjeni dobara i usluga odgovaraju korisnici koji u njoj sudjeluju, prema općim pravilima obveznog prava. Zaklada ne posreduje u razmjeni i nije stranka u pravnom odnosu između korisnika koji razmjenjuju dobra i usluge.
 
-Korisnik je odgovoran za točnost podataka koje dostavlja sustavu. Korisnik koji sudjeluje u lancu jamstva odgovoran je za istinitost potvrde stvarnosti u skladu s pravilima o dokazu stvarnosti.
+Korisnik je odgovoran za točnost podataka koje dostavlja sustavu. Korisnik koji sudjeluje u lancu potvrda odgovoran je za istinitost potvrde stvarnosti u skladu s pravilima o dokazu stvarnosti.
 
 ### Članak 10. — Porezni rizik
 

@@ -66,7 +66,7 @@ Fondacija može prestati da postoji. U tom slučaju, uloga čuvara zajedničkog 
 
 Za ispunjenje, kvalitet i rizik u razmeni dobara i usluga odgovaraju korisnici koji u njoj učestvuju, prema opštim pravilima obligacionog prava. Fondacija ne posreduje u razmeni i nije strana u pravnom odnosu između korisnika koji razmenjuju dobra i usluge.
 
-Korisnik je odgovoran za tačnost podataka koje dostavlja sistemu. Korisnik koji učestvuje u lancu jemstva odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
+Korisnik je odgovoran za tačnost podataka koje dostavlja sistemu. Korisnik koji učestvuje u lancu potvrda odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
 
 ### Član 10 — Poreski rizik
 

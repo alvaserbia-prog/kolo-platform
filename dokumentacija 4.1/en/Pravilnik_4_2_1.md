@@ -66,13 +66,13 @@ Individual terms in this Rulebook have the following meanings:
 
 **Proof of reality** — a model of user verification based on personal acquaintance, which confirms the reality, uniqueness, and continuity of a user.
 
-**Vouching chain** — the mechanism of proof of reality in which verified users confirm the reality of new users on the basis of direct personal acquaintance.
+**Chain of confirmations** — the mechanism of proof of reality in which verified users confirm the reality of new users on the basis of direct personal acquaintance.
 
 **Reality index** — a numerical value (0–100%) expressing the degree of a user's confirmation and determining the scope of access to system functions and verification capacity.
 
-**Unverified user** — a person registered on the platform whose reality has not been confirmed through the vouching chain.
+**Unverified user** — a person registered on the platform whose reality has not been confirmed through the chain of confirmations.
 
-**Verified user** — a person whose reality has been confirmed through the vouching chain in accordance with the proof-of-reality rules.
+**Verified user** — a person whose reality has been confirmed through the chain of confirmations in accordance with the proof-of-reality rules.
 
 **ZRNO Holder** — a verified user to whom ZRNO has been inscribed in the Protocol.
 
@@ -220,7 +220,7 @@ The Protocol inscribes new POEN records through the following contribution recor
 
 1) operational contribution;
 
-2) verification of other users in the vouching chain;
+2) verification of other users in the chain of confirmations;
 
 3) financial contribution;
 
@@ -256,7 +256,7 @@ The preview of listings in the platform's advertising space — the content of a
 
 Posting a listing offering a good or a service is available to unverified users as well, under the conditions and limitations established by the Terms of Use. Posting a listing seeking a good or a service, accessing the advertiser's contact details, and initiating communication regarding a listing are available exclusively to verified users. An unverified advertiser may reply within a conversation started by a verified user regarding their listing.
 
-A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the vouching chain. The mark is available to everyone to whom the listing itself is available.
+A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the chain of confirmations. The mark is available to everyone to whom the listing itself is available.
 
 For non-registered and unverified persons, the advertiser's pseudonym in the advertising space is not linked to the contribution ledger, account balance, or user profile. The rules of the platform's advertising space are governed by the Terms of Use.
 
@@ -316,7 +316,7 @@ The difference between the accounting coefficient at the time of inscription and
 
 ZRNO cannot be transferred to another user.
 
-ZRNO is bound to the user whose reality has been confirmed through the vouching chain.
+ZRNO is bound to the user whose reality has been confirmed through the chain of confirmations.
 
 There is no market for ZRNO, there is no price for ZRNO, and there is no possibility of trading it.
 
@@ -366,7 +366,7 @@ Status determines the scope of a user's rights and capabilities in the system.
 
 ### Article 28
 
-An unverified user is a person registered on the platform whose reality has not been confirmed through the vouching chain.
+An unverified user is a person registered on the platform whose reality has not been confirmed through the chain of confirmations.
 
 An unverified user has the right to view public system content, including viewing listings in the platform's advertising space. They may exchange goods and services and post a listing in the platform's advertising space offering a good or a service, under the limitations set out in the Terms of Use.
 
@@ -378,9 +378,9 @@ An unverified user may not access advertisers' contact details or initiate commu
 
 ### Article 29
 
-A verified user is a person whose reality has been confirmed through the vouching chain in accordance with the proof-of-reality rules.
+A verified user is a person whose reality has been confirmed through the chain of confirmations in accordance with the proof-of-reality rules.
 
-A verified user may exchange goods and services, have contributions recorded in POENs, participate in collective forms and social programs, and confirm the reality of other users in the vouching chain.
+A verified user may exchange goods and services, have contributions recorded in POENs, participate in collective forms and social programs, and confirm the reality of other users in the chain of confirmations.
 
 A verified user inscribes ZRNO when they satisfy the inscription conditions, thereby becoming a ZRNO Holder.
 
@@ -402,15 +402,15 @@ Verification of reality is the processing of personal data. The legal basis for 
 
 ### Article 32
 
-A user's reality is confirmed through the vouching chain: verified users confirm the reality of new users on the basis of direct personal acquaintance. Every new user enters the system because someone who is already verified knows them and confirms that they exist.
+A user's reality is confirmed through the chain of confirmations: verified users confirm the reality of new users on the basis of direct personal acquaintance. Every new user enters the system because someone who is already verified knows them and confirms that they exist.
 
 Every user has a reality index — a numerical value expressing the degree of confirmation of the user. The reality index determines the scope of access to system functions and the user's capacity to confirm the reality of others.
 
-The set of confirmations in the vouching chain constitutes the verification graph. The verification graph is a record of personal data; it is maintained on the infrastructure on which the Protocol operates, with data minimization. The graph also covers supervision data — the supervision outcome and, where suspicion is expressed, the subject of suspicion and the reason code (Article 11 of the Rulebook on Proof of Reality). Those data are not public and Article 67 of this Rulebook applies to them.
+The set of confirmations in the chain of confirmations constitutes the verification graph. The verification graph is a record of personal data; it is maintained on the infrastructure on which the Protocol operates, with data minimization. The graph also covers supervision data — the supervision outcome and, where suspicion is expressed, the subject of suspicion and the reason code (Article 11 of the Rulebook on Proof of Reality). Those data are not public and Article 67 of this Rulebook applies to them.
 
 An unverified user establishes the contact necessary for the conduct of verification through the platform's advertising space (Article 16): by posting a listing offering a good or a service, they present themselves to the network of existing verified users. The existence of that path does not change the nature, procedure, or conditions of verification established by this Rulebook and the Rulebook on Proof of Reality. The rules for publication, content, and data processing are established by the Terms of Use and the Privacy Policy.
 
-The rules for calculating the reality index, the rules for expanding the vouching network, and the measures against abuse of the vouching chain are established by a special rulebook.
+The rules for calculating the reality index, the rules for expanding the network of confirmations, and the measures against abuse of the chain of confirmations are established by a special rulebook.
 
 ### Article 33
 
@@ -510,7 +510,7 @@ The contribution under the preceding paragraph is the first step of the exchange
 
 For a verified user, the contribution is recorded at the moment the listing is posted.
 
-For an unverified user, the contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the vouching chain, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+For an unverified user, the contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the chain of confirmations, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
 
 The distinction drawn in the two preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
 
@@ -546,7 +546,7 @@ An exchange within the meaning of this Article is an update of the POEN ledger b
 
 The Platform does not require users to separately mark or confirm an exchange. The path is read from the POEN records and the posted listings themselves; there are no other records of an exchange.
 
-A user is outside another user's circle of acquaintance if neither of the two is within the other's forbidden zone within the meaning of the Rulebook on Proof of Reality. The forbidden zone covers the ascending and descending line of the vouching chain and the relations treated as equivalent to them, so a person outside the circle of acquaintance is one whom the vouching chain does not connect to the user.
+A user is outside another user's circle of acquaintance if neither of the two is within the other's forbidden zone within the meaning of the Rulebook on Proof of Reality. The forbidden zone covers the ascending and descending line of the chain of confirmations and the relations treated as equivalent to them, so a person outside the circle of acquaintance is one whom the chain of confirmations does not connect to the user.
 
 Each user counts once in the path, regardless of the number of exchanges with them.
 
@@ -738,7 +738,7 @@ The rules for access, the scope of permitted activities, exchange restrictions, 
 
 Internationalization is the infrastructural expansion of the system into new regions. The system expands its infrastructure, ledger, and rules to new territories, retaining a unified Protocol and a unified common-good ledger.
 
-Expansion into new regions requires adaptations in several dimensions: the legal framework of the target jurisdiction, linguistic localization of the platform, establishment of a local vouching chain, and the possible formation of local cooperatives.
+Expansion into new regions requires adaptations in several dimensions: the legal framework of the target jurisdiction, linguistic localization of the platform, establishment of a local chain of confirmations, and the possible formation of local cooperatives.
 
 The prerequisite for activating this module is a stable system with an active Upper Kolo, sufficient experience with the system's operation in the primary region, and a legal analysis for the target jurisdictions. The decision to expand is made by the Upper Kolo.
 
@@ -882,7 +882,7 @@ The Foundation does not guarantee that the system will function without interrup
 
 For performance, quality, and risk in the exchange of goods and services, the users who participate in it are responsible, pursuant to the general rules of the law of obligations.
 
-The user is responsible for the accuracy of the data they submit to the system. A user who participates in the vouching chain is responsible for the truthfulness of the reality confirmation in accordance with the proof-of-reality rules.
+The user is responsible for the accuracy of the data they submit to the system. A user who participates in the chain of confirmations is responsible for the truthfulness of the reality confirmation in accordance with the proof-of-reality rules.
 
 A user who abuses the system is subject to measures in accordance with the rules on status termination and suspension.
 
@@ -940,7 +940,7 @@ The hierarchy of acts, their mutual ranking, and the rules for resolving inconsi
 
 When the system is put into operation, there are no previously verified users who could confirm the reality of the first users, nor recorded POENs from which ZRNO could be inscribed. For this reason, the first ZRNO Holders — the initial users, members of the Management Board of the Foundation — are established directly, by a decision of the Management Board of the Foundation.
 
-The initial users are exempt, as a one-time event of the start of the system, from the conditions for ZRNO inscription under Article 19 (the minimum of recorded POENs) and from the rules of the vouching chain under Article 32 and the Rulebook on Proof of Reality that presuppose the existence of a prior verifier. They constitute the origin of the vouching chain; their initial reality index, exemption from supervision, and exemption from the anti-circular rule are governed by the Rulebook on Proof of Reality (Chapter VI — Initial Mechanism).
+The initial users are exempt, as a one-time event of the start of the system, from the conditions for ZRNO inscription under Article 19 (the minimum of recorded POENs) and from the rules of the chain of confirmations under Article 32 and the Rulebook on Proof of Reality that presuppose the existence of a prior verifier. They constitute the origin of the chain of confirmations; their initial reality index, exemption from supervision, and exemption from the anti-circular rule are governed by the Rulebook on Proof of Reality (Chapter VI — Initial Mechanism).
 
 The initial users are not a separate status within the meaning of Article 27: they are ZRNO Holders with the attributes established by the Rulebook on Proof of Reality, and may at the same time exercise the operational powers of the Management Board in Phase 1. Once the system is established, all new ZRNO Holders acquire their status by the ordinary route (Art. 19, 29, and 30).
 

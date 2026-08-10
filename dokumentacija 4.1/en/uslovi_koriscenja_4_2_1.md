@@ -98,7 +98,7 @@ A Platform user may hold the status of an unverified user, verified user, or ZRN
 
 ### Article 14 — Unverified User
 
-An unverified user is a person registered on the Platform whose reality has not been confirmed through the vouching chain.
+An unverified user is a person registered on the Platform whose reality has not been confirmed through the chain of confirmations.
 
 An unverified user may view general system indicators, familiarize themselves with the rules, and view the amounts and timestamps of POEN transactions without the parties' pseudonyms and without access to account balances.
 
@@ -110,7 +110,7 @@ An unverified user may not verify other users. A contribution may be recorded fo
 
 ### Article 15 — Verified User and ZRNO Holder
 
-A verified user is a person whose reality has been confirmed through the vouching chain and whose reality index is at least 10%.
+A verified user is a person whose reality has been confirmed through the chain of confirmations and whose reality index is at least 10%.
 
 A verified user has full access to the Platform: they may exchange goods and services in the exchange space, have contributions recorded in POENs, verify other users in accordance with the proof-of-reality rules, donate to the Foundation, and participate in collective forms when these are activated. A verified user has access to the pseudonyms of all users, POEN account balances, and all transactions with the pseudonyms of parties.
 
@@ -126,7 +126,7 @@ A listing posted by an unverified user must meet the content minimum: at least o
 
 An unverified user may have at most three active listings at any one time.
 
-A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the vouching chain. The mark is available to everyone to whom the listing itself is available, including non-registered persons.
+A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the chain of confirmations. The mark is available to everyone to whom the listing itself is available, including non-registered persons.
 
 A verified user may, starting from a published listing, initiate a direct conversation (messages) with the advertiser. In such an initiated conversation, the unverified advertiser may respond even before being verified. The processing of data in the conversation is governed by the Platform's Privacy Policy.
 
@@ -202,7 +202,7 @@ Exchange redistributes existing POENs and does not increase their total number i
 
 The users who participate in the exchange are responsible for its performance, quality, and risk, pursuant to the general rules of the law of obligations.
 
-This applies in particular to an exchange based on a listing by an unverified user: the advertiser's reality has not been confirmed through the vouching chain, which the listing itself indicates by a visible mark (Article 16). A user entering such an exchange does so at their own risk. In that case too, the Foundation is not a party to the exchange, does not mediate in it, and is not liable for the performance of users' obligations.
+This applies in particular to an exchange based on a listing by an unverified user: the advertiser's reality has not been confirmed through the chain of confirmations, which the listing itself indicates by a visible mark (Article 16). A user entering such an exchange does so at their own risk. In that case too, the Foundation is not a party to the exchange, does not mediate in it, and is not liable for the performance of users' obligations.
 
 The Platform does not require users to separately mark, confirm, or rate an exchange. The only record of an exchange is the update of the POEN ledger which the users carry out themselves; the exchange contribution path is also read from it (Art. 40b of the Rulebook on the KOLO System).
 
@@ -306,7 +306,7 @@ The Foundation does not guarantee that the system will not be affected by techni
 
 The user is responsible for the accuracy of data submitted to the system, for the performance of obligations assumed in exchange with other users, for all activities carried out from their account, and for the consequences of breaching these Terms.
 
-A user who participates in the vouching chain is responsible for the truthfulness of the reality confirmation in accordance with the proof-of-reality rules.
+A user who participates in the chain of confirmations is responsible for the truthfulness of the reality confirmation in accordance with the proof-of-reality rules.
 
 ### Article 36 — Risks of Participation in the System
 

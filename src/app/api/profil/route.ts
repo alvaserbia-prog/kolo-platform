@@ -92,7 +92,7 @@ export async function DELETE(req: NextRequest) {
   }
 
   // --- 2. Anonimizacija grafa verifikacija (čl. 34 st. 4) ---
-  // Pri prestanku statusa korisnika brišu se njegove veze u grafu jemstva,
+  // Pri prestanku statusa korisnika brišu se njegove veze u grafu potvrda,
   // a POEN-i emitovani povodom tih verifikacija vraćaju se Protokolu:
   //   — verifikatorima koji su obrisanog verifikovali: skida se POEN_VERIFIKATOR,
   //     vraća im se slot (ako su REGULARNI);
@@ -167,7 +167,7 @@ export async function DELETE(req: NextRequest) {
           const ostalo = await tx.verifikacionaVeza.count({
             where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
           });
-          // Početnog korisnika (jeOsnivac) pad jemca ne pogađa: indeks ostaje
+          // Početnog korisnika (jeOsnivac) pad verifikatora ne pogađa: indeks ostaje
           // fiksno 100 i status se ne vraća (čl. 14 i 16 dokaza stvarnosti, v3.9.2).
           const pogodjeni = await tx.user.findUnique({
             where: { id: v.verifikovaniId },

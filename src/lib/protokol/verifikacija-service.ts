@@ -161,7 +161,7 @@ async function izvrsiJezgroVerifikacije(
   }
 
   // Drugi korisnici MOGU da verifikuju nosioce ZRNA (koji NISU početni) po
-  // redovnim pravilima lanca jemstva. Njihov indeks raste kao evidencija, ali
+  // redovnim pravilima lanca potvrda. Njihov indeks raste kao evidencija, ali
   // bez funkcionalnog efekta — pristup i kapacitet proizlaze iz statusa, ne iz
   // indeksa (čl. 17). Status se NE menja u REGULARNI. Početne korisnike
   // (jeOsnivac) blokira zonska provera niže (čl. 14 st. 3, v3.9.2).

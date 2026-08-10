@@ -191,9 +191,12 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
               neprijavljeni posetioci — pregled oglasa je javan, pa i upozorenje
               mora biti. Za razmenu odgovaraju sami korisnici (Pravilnik čl. 16). */}
           {!oglas.sellerVerified && (
-            <p className="text-xs text-kolo-gold-600 bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2">
-              {t("oznaka_neverifikovan_opis")}
-            </p>
+            <div className="flex items-start gap-2 text-xs text-kolo-gold-600 bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2">
+              <span className="shrink-0 bg-white/95 border-2 border-kolo-gold-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
+                {t("oznaka_neverifikovan")}
+              </span>
+              <span>{t("oznaka_neverifikovan_opis")}</span>
+            </div>
           )}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">

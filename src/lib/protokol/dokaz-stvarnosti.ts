@@ -22,7 +22,7 @@ export const POEN_NADZORNIK = 500; // čl. 7
 // jedna pored druge u trenutku kad kod nastane.
 export const TOKEN_VAZI_SEKUNDI = 24 * 60 * 60;
 // Čl. 14 (v3.9.2): indeks stvarnosti početnih korisnika iznosi 100% od
-// uspostavljanja naloga i ne proizlazi iz lanca jemstva.
+// uspostavljanja naloga i ne proizlazi iz lanca potvrda.
 export const POCETNI_INDEKS = 100;
 // Čl. 22 (v3.9.3, prelazna odredba): dok ukupan opticaj ne dostigne ovaj prag,
 // korisnik može primiti najviše jednu verifikaciju — mreža se u početnom
@@ -128,7 +128,7 @@ export function proveriPrelaznoOgranicenje(
 
 /**
  * Indeks početnog korisnika je fiksno 100 i ne menja se nijednom operacijom —
- * ni verifikacijom, ni padom/prestankom jemca, ni kaskadom poništavanja
+ * ni verifikacijom, ni padom/prestankom verifikatora, ni kaskadom poništavanja
  * (čl. 14 i 16 Pravilnika o dokazu stvarnosti, v3.9.2). Za ostale korisnike
  * vraća izračunatu vrednost nepromenjenu.
  */

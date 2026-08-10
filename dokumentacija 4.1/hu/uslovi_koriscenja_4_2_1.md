@@ -98,7 +98,7 @@ A Platform felhasználója lehet nem hitelesített felhasználó, hitelesített 
 
 ### 14. cikk — Nem hitelesített felhasználó
 
-A nem hitelesített felhasználó a Platformon regisztrált olyan személy, akinek valóságát a kezességi láncon keresztül nem erősítették meg.
+A nem hitelesített felhasználó a Platformon regisztrált olyan személy, akinek valóságát a megerősítési láncon keresztül nem erősítették meg.
 
 A nem hitelesített felhasználó megtekintheti a rendszer általános mutatóit, megismerheti a szabályokat, és láthatja a POEN-tranzakciók összegét és időbélyegét a felek álneve nélkül és a számlaegyenlegekbe való betekintés nélkül.
 
@@ -110,7 +110,7 @@ A nem hitelesített felhasználó nem hitelesíthet más felhasználókat. Hozz�
 
 ### 15. cikk — Hitelesített felhasználó és ZRNO-tulajdonos
 
-A hitelesített felhasználó olyan személy, akinek valóságát a kezességi láncon keresztül megerősítették, és akinek valóságindexe legalább 10 %.
+A hitelesített felhasználó olyan személy, akinek valóságát a megerősítési láncon keresztül megerősítették, és akinek valóságindexe legalább 10 %.
 
 A hitelesített felhasználó teljes hozzáféréssel rendelkezik a Platformhoz: javakat és szolgáltatásokat cserélhet a csereterületen, hozzájárulása POEN-ben nyilvántartásba vehető, a valóságbizonyíték szabályai szerint más felhasználókat hitelesíthet, adományozhat az Alapítványnak, és részt vehet a kollektív formákban, amint azok aktiválódnak. A hitelesített felhasználó betekintést nyer valamennyi felhasználó álnevébe, a POEN-számlaegyenlegekbe és minden tranzakcióba a felek álnevével együtt.
 
@@ -126,7 +126,7 @@ A nem hitelesített felhasználó hirdetésének meg kell felelnie a tartalmi mi
 
 A nem hitelesített felhasználónak egyidejűleg legfeljebb három aktív hirdetése lehet.
 
-A nem hitelesített felhasználó hirdetése látható jelölést visel arról, hogy a hirdető nincs hitelesítve a kezességi láncban. A jelölés mindenki számára elérhető, akinek maga a hirdetés is elérhető, ideértve a be nem jelentkezett személyeket is.
+A nem hitelesített felhasználó hirdetése látható jelölést visel arról, hogy a hirdető nincs hitelesítve a megerősítési láncban. A jelölés mindenki számára elérhető, akinek maga a hirdetés is elérhető, ideértve a be nem jelentkezett személyeket is.
 
 A hitelesített felhasználó a közzétett hirdetésből kiindulva közvetlen beszélgetést (üzeneteket) kezdeményezhet a hirdetővel. Az így megkezdett beszélgetésben a nem hitelesített hirdető akkor is válaszolhat, ha még nincs hitelesítve. A beszélgetésben történő adatkezelést a Platform Adatvédelmi szabályzata szabályozza.
 
@@ -202,7 +202,7 @@ A csere a meglévő POEN-eket újraosztja, és nem növeli azok teljes számát 
 
 A csere teljesítéséért, minőségéért és kockázatáért az abban részt vevő felhasználók felelnek a kötelmi jog általános szabályai szerint.
 
-Ez különösen érvényes a nem hitelesített felhasználó hirdetése alapján történő cserére: a hirdető valósága nincs megerősítve a kezességi láncon keresztül, amire a hirdetés látható jelöléssel figyelmeztet is (16. cikk). Az a felhasználó, aki ilyen cserébe bocsátkozik, ezt saját kockázatára teszi. Az Alapítvány ebben az esetben sem fél a cserében, abban nem közvetít, és nem felel a felhasználók kötelezettségeinek teljesítéséért.
+Ez különösen érvényes a nem hitelesített felhasználó hirdetése alapján történő cserére: a hirdető valósága nincs megerősítve a megerősítési láncon keresztül, amire a hirdetés látható jelöléssel figyelmeztet is (16. cikk). Az a felhasználó, aki ilyen cserébe bocsátkozik, ezt saját kockázatára teszi. Az Alapítvány ebben az esetben sem fél a cserében, abban nem közvetít, és nem felel a felhasználók kötelezettségeinek teljesítéséért.
 
 A Platform nem kívánja meg a felhasználóktól, hogy a cserét külön megjelöljék, megerősítsék vagy értékeljék. A cseréről az egyetlen nyilvántartás a POEN-nyilvántartás frissítése, amelyet a felhasználók maguk hajtanak végre; ebből olvasható ki a cseréhez való hozzájárulás útja is (a KOLO rendszerről szóló szabályzat 40.b cikke).
 
@@ -306,7 +306,7 @@ Az Alapítvány nem szavatolja, hogy a rendszert nem érintik technikai problém
 
 A felhasználó felelős a rendszernek megadott adatok pontosságáért, a más felhasználókkal folytatott cserében vállalt kötelezettségek teljesítéséért, a fiókjából végrehajtott valamennyi tevékenységért, valamint a jelen Feltételek megsértésének következményeiért.
 
-Az a felhasználó, aki a kezességi láncban részt vesz, a valóságbizonyítékról szóló szabályok szerint felel a valóság megerősítésének valóságtartalmáért.
+Az a felhasználó, aki a megerősítési láncban részt vesz, a valóságbizonyítékról szóló szabályok szerint felel a valóság megerősítésének valóságtartalmáért.
 
 ### 36. cikk — A rendszerben való részvétel kockázatai
 

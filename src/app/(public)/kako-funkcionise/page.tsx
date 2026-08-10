@@ -68,7 +68,7 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n2_naslov"),
       opis: t("n2_opis"),
       iznos: t("n2_iznos"),
-      boja: "bg-kolo-gold-100 text-kolo-gold-600",
+      boja: "bg-kolo-green-100 text-kolo-green-700",
     },
     {
       br: "3",
@@ -96,6 +96,13 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n6_naslov"),
       opis: t("n6_opis"),
       iznos: t("n6_iznos"),
+      boja: "bg-kolo-green-100 text-kolo-green-700",
+    },
+    {
+      br: "7",
+      naslov: t("n7_naslov"),
+      opis: t("n7_opis"),
+      iznos: t("n7_iznos"),
       boja: "bg-kolo-green-100 text-kolo-green-700",
     },
   ];

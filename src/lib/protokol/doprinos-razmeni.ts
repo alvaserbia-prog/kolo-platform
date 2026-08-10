@@ -12,7 +12,7 @@
  * dodatna potvrda ne bi donela nijedan podatak koji transakcija sama ne nosi.
  *
  * Šta lestvica plaća: širenje mreže razmene. Otud dva sita — sagovornik mora
- * biti van lanca jemstva (graf verifikacija) i verifikovan.
+ * biti van lanca potvrda (graf verifikacija) i verifikovan.
  *
  * Obrazac poziva je isti kao kod čl. 40a i OBAVEZAN je:
  *   - DB promene u jednoj `prisma.$transaction()`

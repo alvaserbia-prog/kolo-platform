@@ -7,16 +7,16 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `I don't know anyone already in KOLO — how can I get verified if verification requires someone on the inside to vouch for me?`,
+        pitanje: `I don't know anyone already in KOLO — how can I get verified if verification requires someone on the inside to confirm me?`,
         odgovor: `You can get verified even if you don't know anyone already in the system. Verification is based on personal acquaintance, but three things open the door for you even without prior connections.
 
 First, registration is free and you don't need to be verified to join. You can explore the rules, follow the system's general indicators, and browse listings on the marketplace — all of that works without verification.
 
-Second, for verification itself there is a dedicated space: the vouching request board. There you post a short introduction — where you're from and why you want to join — along with a contact (phone, email, or another channel of your choice) through which you can be reached for verification. Your introduction is visible to all logged-in members, while your contact details are visible only to verified users — those who can verify you. This lets the network get to know you even if you don't know anyone yet, and a verified member can reach out to establish contact and confirm your reality.
+Second, you don't need to know anyone to begin. Post a listing on the Marketplace — your first three need no confirmation at all — and wait for someone to get in touch. Once you have completed the exchange, the person who now knows you can confirm that you are real.
 
-You can withdraw your request at any time.
+You can take your listing down at any time.
 
-Third, the chain has to start somewhere — and it starts with the initial users. These are members of the Foundation's Board of Directors, whose reality stems from the public register rather than anyone's prior confirmation. They can verify new people without restrictions, so the first round of verifications doesn't depend on knowing anyone in advance — the acquaintance is formed later, through the contact the vouching board makes possible.`,
+Third, the chain has to start somewhere — and it starts with the initial users. These are members of the Foundation's Board of Directors, whose reality stems from the public register rather than anyone's prior confirmation. They can verify new people without restrictions, so the first round of verifications doesn't depend on knowing anyone in advance — the acquaintance is formed later, through the exchange itself.`,
       },
       {
         id: 43,
@@ -25,7 +25,7 @@ Third, the chain has to start somewhere — and it starts with the initial users
 
 Donations and sponsorships are voluntary and are not a requirement for using the system. A donation supports the Foundation's basic operating costs (server, tools, development, legal and accounting services); upon receipt of a donation, the Protocol records POEN in your ledger according to the system's rules. That recording is not a purchase of POEN — POEN has no value outside the system, cannot be resold or converted back to money, and a donation is non-refundable regardless of the POEN recorded.
 
-POEN is also recorded through other channels — verification in the vouching chain, operational contribution, and exchanges with other users — so making a payment is neither the only nor a required path. For example, when you are verified, 1,000 POEN is recorded in your ledger.`,
+POEN is also recorded through other channels — verification in the chain of confirmations, operational contribution, and exchanges with other users — so making a payment is neither the only nor a required path. For example, when you are verified, 1,000 POEN is recorded in your ledger.`,
       },
       {
         id: 44,
@@ -64,7 +64,7 @@ You can leave the system at any time by deleting your account from the profile s
 
 Your real name is not required. At registration we ask only for a pseudonym, an email address and a password. We do not ask for a national ID number, identity card, passport or any other document — and we never ask you to photograph anything.
 
-Verification doesn't require documents either. Your reality is confirmed by a user who personally knows you, through the vouching chain — there is no document upload or paper check.
+Verification doesn't require documents either. Your reality is confirmed by a user who personally knows you, through the chain of confirmations — there is no document upload or paper check.
 
 The Foundation does not maintain a record that links your pseudonym to your identity. That link simply does not exist in the system.
 
@@ -83,6 +83,31 @@ POEN has no value outside the system — it cannot be cashed in, resold, or boug
 
 If you encounter any of the above, do not share your data and report it to the Foundation.`,
       },
+      {
+        id: 81,
+        pitanje: `How do I get my first POENs if I have nothing to offer?`,
+        odgovor: `The first listing in which you offer something earns you 1,000 POENs through the contribution-to-exchange channel. The listing must have a photograph, a description, a category and a place.
+
+POENs are also recorded for you when someone else records them for a completed exchange — as an unverified user you can receive them, you just cannot transfer them to anyone yourself.
+
+And as soon as you are verified, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
+      },
+      {
+        id: 82,
+        pitanje: `I am buying from an advertiser who is not verified — how big is the risk?`,
+        odgovor: `A verified member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unverified advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
+
+For that reason, send POENs only after you have received the goods or the service.
+
+You are answerable to each other for quality, delivery and performance under general rules — the Foundation and the Protocol do not interfere.`,
+      },
+      {
+        id: 83,
+        pitanje: `How many listings can I post before verification?`,
+        odgovor: `Three active ones, and offers only — something you are offering. Each listing must have a photograph, a description of at least 40 characters, a category and a place.
+
+A want ad — a listing in which you ask for something — contacting advertisers and starting a conversation come with verification. If someone gets in touch about your listing, you may reply even before that.`,
+      },
     ],
   },
   {
@@ -92,7 +117,7 @@ If you encounter any of the above, do not share your data and report it to the F
       {
         id: 1,
         pitanje: `What is POEN and does it have a monetary value?`,
-        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, verification in the vouching chain, work for the community, a donation, or sponsorship.
+        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, verification in the chain of confirmations, work for the community, a donation, or sponsorship.
 
 POEN is not money in a legal sense — it is not a means of payment, not electronic money, not a digital asset, and does not represent a debt of the Foundation to you.
 
@@ -129,7 +154,7 @@ Any future introduction of a POEN "ageing" mechanism (which would encourage circ
         pitanje: `What exactly does the "two separate acts" principle mean?`,
         odgovor: `The two-separate-acts principle describes the legal nature of every POEN credit from the Protocol.
 
-Act 1: the user contributes to the common good or holds a status that confirms such contribution (makes a donation, contributes through an operational programme, verifies a new user in the vouching chain, holds a status that triggers a social programme, or submits a sponsorship application).
+Act 1: the user contributes to the common good or holds a status that confirms such contribution (makes a donation, contributes through an operational programme, verifies a new user in the chain of confirmations, holds a status that triggers a social programme, or submits a sponsorship application).
 
 Act 2: the Protocol algorithmically and deterministically records POEN according to the Rules — without discretion, without a contract, without counter-performance.
 
@@ -175,7 +200,7 @@ When someone verifies you, the Protocol credits 1,000 POEN to both you and the p
 
 The credit is not compensation for your data either — it is an automatic act of the Protocol under the rule: when a verification record is made, the system deterministically credits POEN without any contract or negotiation.
 
-Farming makes no sense for several reasons. POEN cannot be cashed out — you cannot exchange it for dinars or for anything outside the system, so there is nothing to "extract". The principle is one person — one account, and verification rests on personal acquaintance and the responsibility of the verifier who vouches for the reality of the person; you cannot invent non-existent people. Moreover, the sum of all records is always zero: every credited POEN has an equal negative in the Protocol's ledger, so no one creates value from nothing.
+Farming makes no sense for several reasons. POEN cannot be cashed out — you cannot exchange it for dinars or for anything outside the system, so there is nothing to "extract". The principle is one person — one account, and verification rests on personal acquaintance and the responsibility of the verifier who answers for the truth of that statement; you cannot invent non-existent people. Moreover, the sum of all records is always zero: every credited POEN has an equal negative in the Protocol's ledger, so no one creates value from nothing.
 
 If someone does fraudulently verify — confirms someone who doesn't exist or has another account — it is found to be a false verification and reversed, with cascading consequences for all such links.`,
       },
@@ -212,7 +237,7 @@ All data is public: total recorded amount, number of steps, remainder to the cap
         pitanje: `How do I get verified and what do I gain from it?`,
         odgovor: `Verification is optional, but it is a prerequisite for full access to the platform's features.
 
-Verification is carried out through the vouching chain: a verified user who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal documents. The verifier does not request or collect documents.
+Verification is carried out through the chain of confirmations: a verified user who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal documents. The verifier does not request or collect documents.
 
 Each verification increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
 
@@ -223,7 +248,7 @@ Verification is a prerequisite for all major features: recording POEN through do
       {
         id: 8,
         pitanje: `What if I'm a foreigner — can I be a member?`,
-        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the vouching chain: a verified user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
+        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a verified user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
 
 The system operates in Serbian and English.`,
       },
@@ -701,7 +726,7 @@ The marketplace is an exception: your listings (description, price, location and
         pitanje: `How is my privacy protected?`,
         odgovor: `Data minimisation is one of the four principles of the system — the platform collects only the data necessary for the system to function.
 
-Verification is carried out in the vouching chain: other verified users confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal data.
+Verification is carried out in the chain of confirmations: other verified users confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal data.
 
 All admin actions involving any personal data are recorded in a permanent log. The Foundation does not share data with third parties except pursuant to an order from a competent authority.
 
@@ -732,7 +757,7 @@ This is a fundamental difference between POEN and financial assets, and one of t
         pitanje: `Can I use the system without providing my name and phone number? What do I miss out on?`,
         odgovor: `Yes, you can. At registration only a pseudonym (a username of your own choosing), an email address and a password are required — nothing more.
 
-Your real name and phone number are entirely voluntary. They are not a condition for being verified through the vouching chain, nor a condition for accessing any feature of the system. The Foundation does not maintain a record linking your pseudonym to your identity.
+Your real name and phone number are entirely voluntary. They are not a condition for being verified through the chain of confirmations, nor a condition for accessing any feature of the system. The Foundation does not maintain a record linking your pseudonym to your identity.
 
 What do you miss out on if you don't provide them? Practically only easier contact with other people. On the marketplace, for example, others find it harder to contact you and arrange an in-person exchange without that information.
 
@@ -760,7 +785,7 @@ This is a known limitation of pseudonymous systems. We separate identifying from
       {
         id: 73,
         pitanje: `Can I get verified remotely, from abroad?`,
-        odgovor: `Yes. Verification (proof of reality) is based on direct personal acquaintance — a verified user who personally knows you confirms your reality and vouches for it with their responsibility. The Rules do not require physical presence at the moment of verification, so it can take place remotely, as long as the verifier genuinely knows you well enough to vouch for you.
+        odgovor: `Yes. Verification (proof of reality) is based on direct personal acquaintance — a verified user who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of verification, so it can take place remotely, as long as the verifier genuinely knows you well enough to confirm your reality.
 
 The system's protection does not rest on you being in the same room, but on personal acquaintance, on the verifier's responsibility (a false verification results in the reversal of verifications and sanctions) and on the structure of the network — to reach a full reality index you must be known to people from several independent parts of the network.
 

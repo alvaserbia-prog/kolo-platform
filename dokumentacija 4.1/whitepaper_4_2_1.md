@@ -10,7 +10,7 @@ KOLO je participatorni sistem zajedničkog dobra koji adresira ove probleme evid
 
 U centru sistema je zajedničko dobro — kolektivno dobro svih učesnika nad kojim nijedan pojedinac, uključujući osnivača, nema individualno svojinsko pravo, a koje ne predstavlja kolektivnu svojinu u smislu važećih imovinskopravnih kategorija srpskog prava. Doprinosi i položaj evidentiraju se kroz protokol i njegove dve obračunske jedinice: POEN i ZRNO. Protokol je tehnički mehanizam zajedničkog dobra — vodi evidenciju, obračunava odnose i izvršava pravila koja postavljaju ljudi.
 
-Integritet sistema počiva na modelu dokaza stvarnosti — lancu jemstva zasnovanom na ličnom poznavanju — u kome postojeći učesnici potvrđuju stvarnost, jedinstvenost i kontinuitet novih korisnika. Ovaj model je svesna dizajnerska odluka koja minimizira prikupljanje ličnih podataka, u skladu sa principom minimizacije podataka ugrađenim u sistem.
+Integritet sistema počiva na modelu dokaza stvarnosti — lancu potvrda zasnovanom na ličnom poznavanju — u kome postojeći učesnici potvrđuju stvarnost, jedinstvenost i kontinuitet novih korisnika. Ovaj model je svesna dizajnerska odluka koja minimizira prikupljanje ličnih podataka, u skladu sa principom minimizacije podataka ugrađenim u sistem.
 
 Oko zajedničkog dobra stoje dva aktera. KOLO Fondacija je pravni instrument — pravno lice registrovano u Somboru po Zakonu o zadužbinama i fondacijama, koje daje zajedničkom dobru i protokolu pravni oblik prepoznatljiv državi i pravu, prima dinarske donacije i drži infrastrukturu na kojoj protokol radi. Fondacija nije vlasnik sistema. KOLO Zajednicu čine svi korisnici sistema — oni ga koriste, doprinose mu i upravljaju njime kao kolektivni čuvari zajedničkog dobra.
 
@@ -316,7 +316,7 @@ Obračunski koeficijent u trenutku otpisa može biti viši ili niži od koeficij
 
 ### Neprenosivost
 
-ZRNO se ne može prenositi između korisnika. Ne postoji mehanizam — ni u protokolu ni van njega — kojim bi korisnik mogao da prenese svoj zapis ZRNA drugom korisniku. Ovo nije tehničko ograničenje koje bi se moglo zaobići — ovo je pravilo dizajna sistema. ZRNO je neprenosan zapis vezan za identitet korisnika potvrđen kroz lanac jemstva — čak i ako bi korisnik pokušao da ustupi pristup nalogu, ZRNO ostaje vezano za fizičku osobu čiju su stvarnost potvrdili verifikatori, čime se sprečava funkcionalni transfer. Neprenosivost ZRNA znači da ne postoji tržište za ZRNO, ne postoji cena ZRNA i ne postoji mogućnost špekulacije ZRNOM.
+ZRNO se ne može prenositi između korisnika. Ne postoji mehanizam — ni u protokolu ni van njega — kojim bi korisnik mogao da prenese svoj zapis ZRNA drugom korisniku. Ovo nije tehničko ograničenje koje bi se moglo zaobići — ovo je pravilo dizajna sistema. ZRNO je neprenosan zapis vezan za identitet korisnika potvrđen kroz lanac potvrda — čak i ako bi korisnik pokušao da ustupi pristup nalogu, ZRNO ostaje vezano za fizičku osobu čiju su stvarnost potvrdili verifikatori, čime se sprečava funkcionalni transfer. Neprenosivost ZRNA znači da ne postoji tržište za ZRNO, ne postoji cena ZRNA i ne postoji mogućnost špekulacije ZRNOM.
 
 ### Pozicija nosioca ZRNA u obračunskom sistemu
 
@@ -374,13 +374,13 @@ KOLO sistem razlikuje tri statusa učesnika: neverifikovani korisnik, verifikova
 
 ## Dokaz stvarnosti
 
-Svaki korisnik KOLO sistema mora da potvrdi svoju stvarnost, jedinstvenost i kontinuitet kroz model verifikacije zasnovan na ličnom poznavanju — lanac jemstva u kome postojeći učesnici potvrđuju nove. Model ne zahteva prikupljanje ličnih dokumenata. Svaki korisnik ima indeks stvarnosti (0–100%) koji određuje obim pristupa funkcijama sistema i verifikacioni kapacitet.
+Svaki korisnik KOLO sistema mora da potvrdi svoju stvarnost, jedinstvenost i kontinuitet kroz model verifikacije zasnovan na ličnom poznavanju — lanac potvrda u kome postojeći učesnici potvrđuju nove. Model ne zahteva prikupljanje ličnih dokumenata. Svaki korisnik ima indeks stvarnosti (0–100%) koji određuje obim pristupa funkcijama sistema i verifikacioni kapacitet.
 
 Dokaz stvarnosti je preduslov za pun pristup sistemu. Bez potvrđene stvarnosti korisnika, sistem ne može da obezbedi integritet evidencije jer ne može da garantuje da iza svakog zapisa stoji stvarna, jedinstvena osoba. Korisnik se registruje na platformi kao neverifikovani i može da koristi osnovne funkcije, ali pun pristup — razmena, evidencija doprinosa, upis ZRNA, učešće u upravljanju — zahteva potvrđenu stvarnost.
 
-### Lanac jemstva
+### Lanac potvrda
 
-Dokaz stvarnosti funkcioniše kao lanac jemstva u kome postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Model potvrđuje tri stvari: stvarnost (korisnik postoji kao fizičko lice), jedinstvenost (nema drugi nalog u sistemu) i kontinuitet (ista osoba koja je prvobitno verifikovana i dalje koristi nalog).
+Dokaz stvarnosti funkcioniše kao lanac potvrda u kome postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Model potvrđuje tri stvari: stvarnost (korisnik postoji kao fizičko lice), jedinstvenost (nema drugi nalog u sistemu) i kontinuitet (ista osoba koja je prvobitno verifikovana i dalje koristi nalog).
 
 Svaki korisnik ima indeks stvarnosti koji raste sa brojem nezavisnih verifikacija od strane različitih verifikovanih korisnika. Indeks određuje obim pristupa funkcijama sistema i verifikacioni kapacitet korisnika. Korisnik sa minimalnim indeksom ima pun pristup svim funkcijama platforme; za maksimalni indeks potrebne su verifikacije iz više nezavisnih delova mreže.
 
@@ -406,17 +406,17 @@ Graf verifikacija, čak i pseudoniman, predstavlja obradu podataka o ličnosti u
 
 ### Dinarski tok — odvojena identifikacija
 
-Za dinarski tok važe odvojeni mehanizmi identifikacije: verifikacija donatora se obezbeđuje kroz bankovni sistem — fondacija prima donacije sa verifikovanih bankovnih računa; verifikacija pokrovitelja (pravnih lica i preduzetnika) se obezbeđuje na osnovu ugovora o donaciji sa fondacijom. Ovi mehanizmi se odnose na identifikaciju za potrebe finansijskog toka fondacije, ne na dokaz stvarnosti korisnika u smislu lanca jemstva.
+Za dinarski tok važe odvojeni mehanizmi identifikacije: verifikacija donatora se obezbeđuje kroz bankovni sistem — fondacija prima donacije sa verifikovanih bankovnih računa; verifikacija pokrovitelja (pravnih lica i preduzetnika) se obezbeđuje na osnovu ugovora o donaciji sa fondacijom. Ovi mehanizmi se odnose na identifikaciju za potrebe finansijskog toka fondacije, ne na dokaz stvarnosti korisnika u smislu lanca potvrda.
 
 ## Neverifikovani korisnik
 
-Neverifikovani korisnik je lice registrovano na platformi čija stvarnost još nije potvrđena kroz lanac jemstva. Može da pregleda sistem i upozna se sa pravilima, ali nema pristup razmeni, evidenciji POEN-a ni doniranju.
+Neverifikovani korisnik je lice registrovano na platformi čija stvarnost još nije potvrđena kroz lanac potvrda. Može da pregleda sistem i upozna se sa pravilima, ali nema pristup razmeni, evidenciji POEN-a ni doniranju.
 
-Prelaz u status verifikovanog korisnika odvija se kad postojeći verifikovani korisnik potvrdi stvarnost, jedinstvenost i kontinuitet novog korisnika kroz lanac jemstva, čime korisnik stiče indeks stvarnosti od najmanje 10% i pun pristup sistemu.
+Prelaz u status verifikovanog korisnika odvija se kad postojeći verifikovani korisnik potvrdi stvarnost, jedinstvenost i kontinuitet novog korisnika kroz lanac potvrda, čime korisnik stiče indeks stvarnosti od najmanje 10% i pun pristup sistemu.
 
 ## Verifikovani korisnik
 
-Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac jemstva i čiji je indeks stvarnosti najmanje 10%. Verifikovani korisnik razmenjuje dobra i usluge sa drugim korisnicima unutar sistema. Doprinosi zajedničkom dobru kroz aktivnosti čiji se doprinos evidentira u POEN-ima. Može da donira dinarska sredstva fondaciji. Može da učestvuje u krugovima i zadrugama kad se ti moduli aktiviraju (poglavlje 9).
+Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac potvrda i čiji je indeks stvarnosti najmanje 10%. Verifikovani korisnik razmenjuje dobra i usluge sa drugim korisnicima unutar sistema. Doprinosi zajedničkom dobru kroz aktivnosti čiji se doprinos evidentira u POEN-ima. Može da donira dinarska sredstva fondaciji. Može da učestvuje u krugovima i zadrugama kad se ti moduli aktiviraju (poglavlje 9).
 
 Verifikovani korisnik nema ZRNO evidentirano u protokolu. To znači da ili još nije ispunio uslove za upis ZRNA (odeljak 6.2), ili je odlučio da ga ne upiše. Verifikovani korisnik u potpunosti koristi obračunski okvir — razmenjuje, doprinosi, stiče evidenciju POEN-a — ali nema evidentiran položaj u smislu ZRNA i ne učestvuje u upravljanju kroz Gornje Kolo (poglavlje 10).
 
@@ -564,7 +564,7 @@ Pravna dimenzija: obrada podataka maloletnih lica podleže pojačanim zahtevima.
 
 Internacionalizacija je infrastrukturno širenje sistema na nove regije. KOLO se ne replicira — ne stvara kopije sistema sa odvojenom evidencijom. Sistem proširuje svoju infrastrukturu, evidenciju i pravila na nove teritorije, zadržavajući jedinstven protokol i jedinstvenu evidenciju zajedničkog dobra.
 
-Širenje na nove regije zahteva prilagodbe u više dimenzija: pravni okvir ciljne jurisdikcije (posebno u pogledu zaštite podataka, poreskog tretmana i statusa fondacije), jezička lokalizacija platforme, uspostavljanje lokalnog lanca jemstva za dokaz stvarnosti i eventualno formiranje lokalnih zadruga (Modul 2) kao organizacionih jedinica na novoj teritoriji.
+Širenje na nove regije zahteva prilagodbe u više dimenzija: pravni okvir ciljne jurisdikcije (posebno u pogledu zaštite podataka, poreskog tretmana i statusa fondacije), jezička lokalizacija platforme, uspostavljanje lokalnog lanca potvrda za dokaz stvarnosti i eventualno formiranje lokalnih zadruga (Modul 2) kao organizacionih jedinica na novoj teritoriji.
 
 Preduslov za aktiviranje ovog modula je stabilan sistem sa aktivnim Gornjim Kolom, dovoljno iskustva sa funkcionisanjem sistema u osnovnoj regiji i pravna analiza za ciljne jurisdikcije. Odluku o širenju donosi Gornje Kolo.
 
@@ -626,19 +626,19 @@ Korisnik sistema ima i drugu motivaciju. Aktivnosti koje predstavljaju korisnič
 
 Ova dva podsticaja — neposredna korist od razmene i dugoročna pozicija kroz akumulaciju — nisu uvek usklađena. Razmena dobara i usluga redistribuira postojeće POEN-e između učesnika (zero-sum, odeljak 6.1) — korisnik koji daje dobro ili uslugu smanjuje sopstveni broj evidentiranih POEN-a, čime smanjuje i sopstvenu sposobnost da upiše ZRNO. Aktivnosti kroz koje nastaju novi POEN-i — donacije, verifikacija, operativni doprinos, dostizanje pragova — uvećavaju broj evidentiranih POEN-a korisnika bez toga da ga drugi gube. Racionalan korisnik koji želi da maksimizuje sopstvenu poziciju za upis ZRNA ima strukturni podsticaj da favorizuje aktivnosti kroz koje nastaju novi POEN-i nad razmenom koja ih redistribuira. Ova tenzija između akumulacije i cirkulacije — analogna problemu koji literatura o komplementarnim valutama identifikuje kao centralnu dizajnersku dilemu (Gesell, 1916; Lietaer, 2001; Greco, 2009) — zaslužuje posebnu analizu i data je u odeljku „Tenzija između akumulacije i cirkulacije” u nastavku ovog poglavlja.
 
-U ranoj fazi sistema sa malim brojem korisnika, neposredna korist od razmene može biti ograničena. Ovo je klasičan problem pokretanja (cold-start problem) — sistem ima vrednost tek kad ima dovoljno učesnika, ali učesnici nemaju razlog da se pridruže dok sistem nema vrednost. KOLO adresira ovaj problem na dva načina. Prvo, prvi korisnici dolaze iz postojećih socijalnih mreža — kroz lanac jemstva u kome postojeći učesnici dovode ljude koje lično poznaju, čime se obezbeđuje da rana zajednica ima prethodno uspostavljene odnose poverenja i realne mogućnosti razmene. Drugo, evidencija POEN-a koja se akumulira od prvog dana zadržava vrednost i kad sistem naraste — rani učesnici koji su stekli evidenciju pri nižem obračunskom koeficijentu imaju poziciju koja odražava njihov doprinos u fazi kad je doprinos bio najvredniji za uspostavljanje sistema. Ova struktura podstiče rano učešće bez toga da obećava prinos — korist ranog učesnika zavisi od toga da li sistem zaista naraste, što nije garantovano.
+U ranoj fazi sistema sa malim brojem korisnika, neposredna korist od razmene može biti ograničena. Ovo je klasičan problem pokretanja (cold-start problem) — sistem ima vrednost tek kad ima dovoljno učesnika, ali učesnici nemaju razlog da se pridruže dok sistem nema vrednost. KOLO adresira ovaj problem na dva načina. Prvo, prvi korisnici dolaze iz postojećih socijalnih mreža — kroz lanac potvrda u kome postojeći učesnici dovode ljude koje lično poznaju, čime se obezbeđuje da rana zajednica ima prethodno uspostavljene odnose poverenja i realne mogućnosti razmene. Drugo, evidencija POEN-a koja se akumulira od prvog dana zadržava vrednost i kad sistem naraste — rani učesnici koji su stekli evidenciju pri nižem obračunskom koeficijentu imaju poziciju koja odražava njihov doprinos u fazi kad je doprinos bio najvredniji za uspostavljanje sistema. Ova struktura podstiče rano učešće bez toga da obećava prinos — korist ranog učesnika zavisi od toga da li sistem zaista naraste, što nije garantovano.
 
 Ova struktura adresira problem besplatnog jahanja (free-rider problem) koji Olson (1965) identifikuje kao centralnu prepreku kolektivnoj akciji — ali samo na nivou aktivnosti kroz koje nastaju novi POEN-i: korisnik koji donira, verifikuje ili obavlja operativne zadatke istovremeno doprinosi zajedničkom dobru i gradi sopstvenu poziciju. Na nivou razmene, odnos je drugačiji — korisnik koji razmenjuje doprinosi zajedničkom dobru (uvećava obim aktivnosti i čini sistem korisnijim za sve ostale učesnike), ali u istom činu umanjuje sopstveni broj evidentiranih POEN-a. Na nivou finansiranja infrastrukture, problem besplatnog jahanja ostaje — korisnik koji ne donira koristi infrastrukturu koju finansiraju donatori. Ovo je strukturna asimetrija koju sistem ne eliminiše, već ublažava: struktura podsticaja za donatore, opisana u nastavku ovog poglavlja, obezbeđuje da doniranje bude racionalno za korisnike koji aktivno koriste sistem, ali ne primorava nikog da donira.
 
 ## Podsticaji verifikatora
 
-Verifikator je korisnik koji jemči za stvarnost drugog korisnika na osnovu ličnog poznavanja (poglavlje 7). Verifikator ima dva podsticaja.
+Verifikator je korisnik koji potvrđuje stvarnost drugog korisnika na osnovu ličnog poznavanja (poglavlje 7). Verifikator ima dva podsticaja.
 
 Prvi je evidencija doprinosa. Protokol evidentira svaki čin verifikacije kao doprinos zajedničkom dobru — verifikator stiče POEN-e za svaku uspešno izvršenu verifikaciju. Čin verifikacije je doprinos integritetu sistema jer obezbeđuje da iza svakog zapisa u evidenciji stoji stvarna, jedinstvena osoba.
 
 Drugi je širenje mreže. Verifikator koji dovede novog korisnika u sistem širi mrežu razmene koja je korisna i njemu — više potencijalnih partnera za razmenu. Ovaj podsticaj je usklađen sa kolektivnim interesom jer je rast mreže koristan za sve učesnike.
 
-Verifikator ima i strukturno ograničenje — stavlja sopstvenu poziciju u sistemu kao ulog za tačnost verifikacije. Graduirane sankcije za lažnu verifikaciju — zabrana vršenja daljih verifikacija, oduzimanje prava na ZRNO, ukidanje naloga — obezbeđuju da trošak lažne verifikacije bude proporcionalan koristi od nje. Verifikator koji lažno jemči rizikuje sopstvenu akumuliranu evidenciju POEN-a i evidentiran položaj u sistemu. Ova struktura čini da je racionalan izbor verifikatora da jemči samo za osobe čiju stvarnost zaista poznaje — korist od jedne lažne verifikacije (POEN-i za verifikaciju) je nesrazmerno manja od potencijalnog gubitka (celokupna pozicija u sistemu).
+Verifikator ima i strukturno ograničenje — stavlja sopstvenu poziciju u sistemu kao ulog za tačnost verifikacije. Graduirane sankcije za lažnu verifikaciju — zabrana vršenja daljih verifikacija, oduzimanje prava na ZRNO, ukidanje naloga — obezbeđuju da trošak lažne verifikacije bude proporcionalan koristi od nje. Verifikator koji lažno potvrdi rizikuje sopstvenu akumuliranu evidenciju POEN-a i evidentiran položaj u sistemu. Ova struktura čini da je racionalan izbor verifikatora da potvrdi samo osobe čiju stvarnost zaista poznaje — korist od jedne lažne verifikacije (POEN-i za verifikaciju) je nesrazmerno manja od potencijalnog gubitka (celokupna pozicija u sistemu).
 
 ## Podsticaji nosioca ZRNA
 
@@ -682,7 +682,7 @@ Ovaj dizajnerski izbor ima posledice koje sistem prepoznaje. Korisnici koji imaj
 
 Svaki sistem sa evidencijom i obračunom privlači pokušaje zloupotrebe. Ostrom (1990) identifikuje mehanizme praćenja i graduirane sankcije kao ključne dizajn principe za zaštitu zajedničkih dobara. KOLO sistem ima nekoliko strukturnih osobina koje čine zloupotrebu skupljom od saradnje.
 
-Dokaz stvarnosti kao barijera. Kreiranje lažnog profila u KOLO sistemu zahteva da najmanje jedan verifikovani korisnik jemči za lažnu osobu, čime stavlja sopstvenu poziciju u sistemu kao ulog — graduirane sankcije uključuju zabranu verifikacije, oduzimanje prava na ZRNO i ukidanje naloga. Trošak napada nije falsifikovanje dokumenta, već korupcija stvarne osobe u mreži poverenja, što je nesrazmerno skuplje i rizičnije od kreiranja anonimnog naloga na klasičnoj internet platformi. Anti-cirkularno pravilo dodatno otežava manipulaciju jer zahteva verifikatore iz različitih delova grafa. Ova analiza važi za sistem u kome je graf verifikacija dovoljno gust da korupcija jednog čvora nema sistemski efekat. Kako sistem raste — naročito geografski, van regije gde postoji gusta mreža poznanstava — rizik od koordiniranih lažnih jemstava raste, a efikasnost anti-cirkularnog pravila opada. Otvorena pitanja skaliranja dokaza stvarnosti navedena su u poglavlju 13.
+Dokaz stvarnosti kao barijera. Kreiranje lažnog profila u KOLO sistemu zahteva da najmanje jedan verifikovani korisnik potvrdi lažnu osobu, čime stavlja sopstvenu poziciju u sistemu kao ulog — graduirane sankcije uključuju zabranu verifikacije, oduzimanje prava na ZRNO i ukidanje naloga. Trošak napada nije falsifikovanje dokumenta, već korupcija stvarne osobe u mreži poverenja, što je nesrazmerno skuplje i rizičnije od kreiranja anonimnog naloga na klasičnoj internet platformi. Anti-cirkularno pravilo dodatno otežava manipulaciju jer zahteva verifikatore iz različitih delova grafa. Ova analiza važi za sistem u kome je graf verifikacija dovoljno gust da korupcija jednog čvora nema sistemski efekat. Kako sistem raste — naročito geografski, van regije gde postoji gusta mreža poznanstava — rizik od koordiniranih lažnih potvrda raste, a efikasnost anti-cirkularnog pravila opada. Otvorena pitanja skaliranja dokaza stvarnosti navedena su u poglavlju 13.
 
 Evidencija kao trag. Svaka aktivnost u sistemu se evidentira. Svaka razmena ima dva učesnika. Svaki doprinos ima zapis. Lažna evidencija — dva korisnika koji lažno razmenjuju da bi redistribuirali POEN-e bez stvarne razmene dobara ili usluga — ostavlja trag koji se razlikuje od legitimne aktivnosti po obrascima: razmena uvek između istih učesnika, u istim iznosima, u pravilnim intervalima. S obzirom da razmena ne uvećava ukupan broj POEN-a u sistemu (zero-sum, odeljak 6.1), korist od lažne razmene je ograničena na preraspodelu postojećih zapisa — što znači da jedan od dva učesnika gubi POEN-e da bi ih drugi dobio. Lažna razmena zato zahteva dogovor dva korisnika od kojih jedan pristaje na gubitak, što smanjuje krug mogućih zloupotreba na koordinirane parove sa eksternim motivom.
 
@@ -792,7 +792,7 @@ U ovoj fazi se aktivira celokupna osnova sistema — svi elementi opisani u pogl
 
 Protokol počinje da vodi evidenciju. Prvi zapisi POEN-a nastaju kroz prve doprinose korisnika.
 
-Aktivira se dokaz stvarnosti (poglavlje 7). Prva grupa korisnika prolazi verifikaciju kroz lanac jemstva. Članovi Upravnog odbora fondacije kao polazni korisnici obezbeđuju verifikacioni kapacitet za pokretanje lanca jemstva.
+Aktivira se dokaz stvarnosti (poglavlje 7). Prva grupa korisnika prolazi verifikaciju kroz lanac potvrda. Članovi Upravnog odbora fondacije kao polazni korisnici obezbeđuju verifikacioni kapacitet za pokretanje lanca potvrda.
 
 Aktivira se finansijski doprinos (poglavlje 8). Prve donacije počinju da pristižu. Finansijski tok između zajednice i fondacije se uspostavlja u praksi. Fondacija počinje da troši dinarska sredstva na infrastrukturu i programe.
 
@@ -834,11 +834,11 @@ Modularna faza nema kraj. Sistem nastavlja da se razvija — novi moduli, nova p
 
 Sistem prepoznaje pitanja na koja trenutno nema konačan odgovor. Ova pitanja su ovde navedena jer je poštenje prema učesnicima i regulatorima važnije od privida kompletnosti.
 
-Nasleđe. Pozicija sistema je da POEN-i i ZRNO nemaju imovinskopravni karakter i da se ne mogu naslediti kao imovina — POEN nema nosioca i ne može se konvertovati u novac, a ZRNO je neprenosivo i vezano za identitet fizičke osobe potvrđen kroz lanac jemstva. Po saznavanju o smrti korisnika, slobodno ZRNO se vraća u fond raspoloživih ZRNA u protokolu bez evidencije POEN-a, aktivno ZRNO se deaktivira i vraća u fond, a identifikacioni podaci se brišu po proceduri iz poglavlja 12 — zapisi u evidenciji doprinosa ostaju pod identifikatorom koji više ne omogućava identifikaciju. Ova pozicija bi mogla biti osporena s obzirom na to da evidencija ima intrasistematsku upotrebnu vrednost; konačno rešenje može zavisiti od razvoja sudske prakse o statusu digitalnih zapisa u naslednom pravu.
+Nasleđe. Pozicija sistema je da POEN-i i ZRNO nemaju imovinskopravni karakter i da se ne mogu naslediti kao imovina — POEN nema nosioca i ne može se konvertovati u novac, a ZRNO je neprenosivo i vezano za identitet fizičke osobe potvrđen kroz lanac potvrda. Po saznavanju o smrti korisnika, slobodno ZRNO se vraća u fond raspoloživih ZRNA u protokolu bez evidencije POEN-a, aktivno ZRNO se deaktivira i vraća u fond, a identifikacioni podaci se brišu po proceduri iz poglavlja 12 — zapisi u evidenciji doprinosa ostaju pod identifikatorom koji više ne omogućava identifikaciju. Ova pozicija bi mogla biti osporena s obzirom na to da evidencija ima intrasistematsku upotrebnu vrednost; konačno rešenje može zavisiti od razvoja sudske prakse o statusu digitalnih zapisa u naslednom pravu.
 
 Regionalna federacija. Modul internacionalizacije (poglavlje 9) predviđa širenje sistema sa jedinstvenom evidencijom — ne federaciju nezavisnih sistema. Međutim, zajednice u drugim gradovima ili zemljama mogu želeti da pokrenu sopstveni sistem sa odvojenom evidencijom ali kompatibilnim pravilima. Pitanje da li takvi sistemi mogu biti federisani — da dele pravila ali vode odvojenu evidenciju — i da li bi POEN u jednom sistemu imao efekat u drugom, trenutni dizajn ne adresira. Ovo pitanje postaje relevantno tek kad sistem dostigne obim koji to zahteva i razlikuje se od internacionalizacije koja zadržava jedinstven protokol.
 
-Skaliranje dokaza stvarnosti. Model dokaza stvarnosti — lanac jemstva zasnovan na ličnom poznavanju (poglavlje 7) — adresira skaliranje verifikacije decentralizovano: svaki verifikovani korisnik može da verifikuje druge u okviru svog verifikacionog kapaciteta, a nosioci ZRNA nadziru širenje i obezbeđuju integritet grafa verifikacija. Međutim, otvorena pitanja ostaju. Anti-cirkularno pravilo ograničava brzinu širenja mreže u ranim fazama. Rizik od koordiniranih lažnih jemstava raste sa veličinom sistema i sa smanjenjem gustine socijalnih veza (up. Douceur, 2002, o Sybil napadima u distribuiranim sistemima). Pitanje kako se obezbeđuje integritet grafa verifikacija sa stotinama hiljada korisnika — posebno u kontekstu geografskog širenja van regije u kojoj postoji gusta mreža poznanstava — ostaje otvoreno i zavisi od iskustva sa ranijim fazama i od mogućih tehničkih nadogradnji modela.
+Skaliranje dokaza stvarnosti. Model dokaza stvarnosti — lanac potvrda zasnovan na ličnom poznavanju (poglavlje 7) — adresira skaliranje verifikacije decentralizovano: svaki verifikovani korisnik može da verifikuje druge u okviru svog verifikacionog kapaciteta, a nosioci ZRNA nadziru širenje i obezbeđuju integritet grafa verifikacija. Međutim, otvorena pitanja ostaju. Anti-cirkularno pravilo ograničava brzinu širenja mreže u ranim fazama. Rizik od koordiniranih lažnih potvrda raste sa veličinom sistema i sa smanjenjem gustine socijalnih veza (up. Douceur, 2002, o Sybil napadima u distribuiranim sistemima). Pitanje kako se obezbeđuje integritet grafa verifikacija sa stotinama hiljada korisnika — posebno u kontekstu geografskog širenja van regije u kojoj postoji gusta mreža poznanstava — ostaje otvoreno i zavisi od iskustva sa ranijim fazama i od mogućih tehničkih nadogradnji modela.
 
 Odnos sa poreskim sistemom. Razmena dobara i usluga unutar KOLO sistema može imati poreske implikacije za korisnike. Ako korisnik razmenjuje uslugu sa drugim korisnikom, da li ta razmena podleže porezu na dohodak? Da li PDV-u? Trenutna pozicija sistema je da su POEN-i evidencija bez imovinske vrednosti, ali poreske vlasti mogu da zauzmu drugačiji stav — naročito ako se razmena unutar sistema kvalifikuje kao trampa u smislu poreskih propisa. Ovo pitanje zahteva pravnu analizu i potencijalno konsultaciju sa poreskim organima. Iskustva komplementarnih sistema u drugim jurisdikcijama — od Chiemgauera u Nemačkoj do WIR-a u Švajcarskoj — pokazuju da poreski tretman značajno varira i da nije moguće pretpostaviti ishod bez formalne analize.
 
@@ -1010,9 +1010,9 @@ Pojmovi su grupisani tematski radi lakšeg snalaženja. Svaka definicija je konz
 
 ### Učesnici
 
-**Neverifikovani korisnik — **Lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac jemstva. Može da pregleda sistem, da razmenjuje dobra i usluge van prostora za oglašavanje i da učestvuje u ažuriranju evidencije POEN-a (kao davalac ili primalac), i priprema se za verifikaciju. Nema pristup evidentiranju doprinosa (emisiji POEN-a kroz kanale), doniranju, postavljanju oglasa ni upravljanju. Ulazni status. Poglavlje 7.
+**Neverifikovani korisnik — **Lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac potvrda. Može da pregleda sistem, da razmenjuje dobra i usluge van prostora za oglašavanje i da učestvuje u ažuriranju evidencije POEN-a (kao davalac ili primalac), i priprema se za verifikaciju. Nema pristup evidentiranju doprinosa (emisiji POEN-a kroz kanale), doniranju, postavljanju oglasa ni upravljanju. Ulazni status. Poglavlje 7.
 
-**Verifikovani korisnik — **Lice čija je stvarnost potvrđena kroz lanac jemstva i čiji je indeks stvarnosti najmanje 10%. Razmenjuje, doprinosi, stiče evidenciju POEN-a, donira, učestvuje u krugovima i zadrugama. Potpun i legitiman status. Poglavlje 7.
+**Verifikovani korisnik — **Lice čija je stvarnost potvrđena kroz lanac potvrda i čiji je indeks stvarnosti najmanje 10%. Razmenjuje, doprinosi, stiče evidenciju POEN-a, donira, učestvuje u krugovima i zadrugama. Potpun i legitiman status. Poglavlje 7.
 
 **Nosilac ZRNA — **Verifikovani korisnik kod koga je upisano ZRNO u protokolu. Indeks stvarnosti uvek 100%. Sve funkcije verifikovanog korisnika plus učešće u upravljanju kroz Gornje Kolo, pozicija u obračunskom sistemu, trajni verifikator sa punim kapacitetom i funkcija nadzornika širenja. Poglavlje 7.
 
@@ -1020,13 +1020,13 @@ Pojmovi su grupisani tematski radi lakšeg snalaženja. Svaka definicija je konz
 
 **Dokaz stvarnosti — **Model verifikacije korisnika zasnovan na ličnom poznavanju. Potvrđuje tri stvari: stvarnost (korisnik postoji kao fizičko lice), jedinstvenost (nema drugi nalog u sistemu) i kontinuitet (ista osoba koja je prvobitno verifikovana). Ne zahteva prikupljanje ličnih dokumenata. Poglavlje 7.
 
-**Lanac jemstva — **Mehanizam dokaza stvarnosti u kome postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Poglavlje 7.
+**Lanac potvrda — **Mehanizam dokaza stvarnosti u kome postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Poglavlje 7.
 
 **Indeks stvarnosti — **Numerička vrednost (0–100%) koja raste sa brojem nezavisnih verifikacija. Određuje obim pristupa funkcijama sistema i verifikacioni kapacitet korisnika. Minimum 10% za pun pristup. Poglavlje 7.
 
 **Anti-cirkularno pravilo — **Pravilo koje sprečava zatvorene petlje u verifikacionom grafu. Definiše zabranjenu zonu za svakog verifikatora i obezbeđuje da verifikaciono stablo raste lateralno. Poglavlje 7.
 
-**Polazni mehanizam (bootstrap) — **Mehanizam pokretanja lanca jemstva u kome članovi Upravnog odbora fondacije dobijaju početni indeks bez verifikacije od strane drugih korisnika. Poglavlje 7.
+**Polazni mehanizam (bootstrap) — **Mehanizam pokretanja lanca potvrda u kome članovi Upravnog odbora fondacije dobijaju početni indeks bez verifikacije od strane drugih korisnika. Poglavlje 7.
 
 **Nadzornik širenja — **Funkcija provere legitimnosti izvršene verifikacije pre dopunjavanja kapaciteta verifikatora. U Fazi 1 vrše članovi UO fondacije, u Fazi 2 nosioci ZRNA. Poglavlje 7.
 
@@ -1160,7 +1160,7 @@ Ovaj prilog mapira svaki od osam principa na konkretne elemente KOLO arhitekture
 
 *Ostrom: *Granice zajedničkog dobra i krug korisnika koji imaju pravo pristupa moraju biti jasno definisani.
 
-*KOLO: *Sistem razlikuje tri statusa učesnika sa eksplicitno definisanim pravima pristupa za svaki status. Neverifikovani korisnik ima pristup pregledu sistema, razmeni van prostora za oglašavanje i učešću u ažuriranju evidencije POEN-a. Verifikovani korisnik (indeks stvarnosti ≥ 10%) ima pun pristup razmeni i evidenciji doprinosa. Nosilac ZRNA ima dodatna prava upravljanja i poziciju u obračunskom sistemu. Prelaz između statusa je definisan protokolom — merljivi uslovi, bez diskrecije. Dokaz stvarnosti kroz lanac jemstva (poglavlje 7) obezbeđuje da iza svakog korisnika stoji stvarna, jedinstvena osoba. Granice zajedničkog dobra su definisane licencama (AGPL-3.0 i CC BY-SA 4.0, poglavlje 3) i četirima strukturnim principima (poglavlje 4).
+*KOLO: *Sistem razlikuje tri statusa učesnika sa eksplicitno definisanim pravima pristupa za svaki status. Neverifikovani korisnik ima pristup pregledu sistema, razmeni van prostora za oglašavanje i učešću u ažuriranju evidencije POEN-a. Verifikovani korisnik (indeks stvarnosti ≥ 10%) ima pun pristup razmeni i evidenciji doprinosa. Nosilac ZRNA ima dodatna prava upravljanja i poziciju u obračunskom sistemu. Prelaz između statusa je definisan protokolom — merljivi uslovi, bez diskrecije. Dokaz stvarnosti kroz lanac potvrda (poglavlje 7) obezbeđuje da iza svakog korisnika stoji stvarna, jedinstvena osoba. Granice zajedničkog dobra su definisane licencama (AGPL-3.0 i CC BY-SA 4.0, poglavlje 3) i četirima strukturnim principima (poglavlje 4).
 
 *Poklapanje: *Strukturno. Granice su jasnije nego u većini Ostrom primera jer su ugrađene u softver, ne u društvene konvencije.
 
@@ -1192,7 +1192,7 @@ Ovaj prilog mapira svaki od osam principa na konkretne elemente KOLO arhitekture
 
 *Ostrom: *Korisnici koji krše pravila dobijaju sankcije proporcionalne ozbiljnosti i kontekstu prekršaja.
 
-*KOLO: *Sistem primenjuje graduirane sankcije za kršenja — posebno za lažnu verifikaciju: zabrana vršenja daljih verifikacija, oduzimanje prava na ZRNO, ukidanje naloga (poglavlje 7). Sankcije su proporcionalne — trošak lažne verifikacije raste sa pozicijom verifikatora u sistemu. Verifikator koji lažno jemči rizikuje celokupnu akumuliranu evidenciju POEN-a i evidentiran položaj (poglavlje 11). Nekonvertibilnost obezbeđuje da je interna pozicija jedina stvar koju korisnik može da izgubi — ali za aktivnog korisnika to je značajan gubitak.
+*KOLO: *Sistem primenjuje graduirane sankcije za kršenja — posebno za lažnu verifikaciju: zabrana vršenja daljih verifikacija, oduzimanje prava na ZRNO, ukidanje naloga (poglavlje 7). Sankcije su proporcionalne — trošak lažne verifikacije raste sa pozicijom verifikatora u sistemu. Verifikator koji lažno potvrdi rizikuje celokupnu akumuliranu evidenciju POEN-a i evidentiran položaj (poglavlje 11). Nekonvertibilnost obezbeđuje da je interna pozicija jedina stvar koju korisnik može da izgubi — ali za aktivnog korisnika to je značajan gubitak.
 
 *Poklapanje: *Strukturno. Graduiranost je eksplicitna i proporcionalna.
 

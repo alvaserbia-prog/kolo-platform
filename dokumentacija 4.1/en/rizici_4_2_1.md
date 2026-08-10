@@ -68,7 +68,7 @@ The Foundation may cease to exist. In that case, the role of guardian of the com
 
 For the performance, quality, and risk in the exchange of goods and services, the users participating in such exchange are responsible in accordance with the general rules of the law of obligations. The Foundation does not mediate in exchange and is not a party to the legal relationship between users who exchange goods and services.
 
-The user is responsible for the accuracy of the data they provide to the system. A user participating in the vouching chain is responsible for the truthfulness of their confirmation of reality in accordance with the rules on proof of reality.
+The user is responsible for the accuracy of the data they provide to the system. A user participating in the chain of confirmations is responsible for the truthfulness of their confirmation of reality in accordance with the rules on proof of reality.
 
 ### Article 10 — Tax risk
 

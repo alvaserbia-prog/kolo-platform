@@ -18,7 +18,9 @@ import path from "path";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 
 const BAZA = path.join(process.cwd(), "dokumentacija 4.1");
-const JEZICI = ["sr", "en", "ru"] as const;
+// hr i hu dodati 2026-08-10: prevodi postoje od 4.1.0, ali ih test nije gledao,
+// pa su mogli da odlutaju bez ijedne crvene provere — isto kako su i nastali.
+const JEZICI = ["sr", "en", "ru", "hr", "hu"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
@@ -107,10 +109,19 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
  * Uslova („Tabla zahteva za jemstvo — mehanizam Platforme…"). Ko ukida institut,
  * mora da ga ukine i u rečniku pojmova, ne samo tamo gde se primenjuje.
  */
+/**
+ * Uz ukinutu tablu, ovde stoji i ukinuta TERMINOLOGIJA: od 4.2.1 institut se
+ * zove „lanac potvrda", ne „lanac jemstva". Jemstvo je obavezivanje za tuđe
+ * buduće ispunjenje, a verifikator tvrdi činjenicu koja u tom trenutku jeste
+ * ili nije istinita — što potvrđuje i Glava VIII, koja obara verifikaciju zbog
+ * NEISTINITE IZJAVE i nigde ne stavlja verifikatora na tuđe mesto.
+ */
 const UKINUTO: Record<string, RegExp[]> = {
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i],
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */
@@ -122,15 +133,19 @@ function bezNapomenaOIzmeni(tekst: string): string {
         !red.includes("Napomena o izmeni") &&
         !red.includes("Note on the amendment") &&
         !red.includes("Примечание об изменении") &&
+        !red.includes("Napomena o izmjeni") &&
+        !red.includes("Megjegyzés a módosításról") &&
         !red.startsWith("| **Napomena** |") &&
         !red.startsWith("| **Note** |") &&
-        !red.startsWith("| **Примечание** |"),
+        !red.startsWith("| **Примечание** |") &&
+        !red.startsWith("| **Napomena** |") &&
+        !red.startsWith("| **Megjegyzés** |"),
     )
     .join("\n");
 }
 
 describe("kanonski set akata 4.2.1", () => {
-  it.each(AKTI)("%s postoji na sva tri jezika", async (akt) => {
+  it.each(AKTI)("%s postoji na svim jezicima", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
       await expect(
@@ -151,7 +166,10 @@ describe("kanonski set akata 4.2.1", () => {
     for (const [akt, poJeziku] of Object.entries(UVEDENO)) {
       for (const jez of JEZICI) {
         const tekst = await ucitajPravniDokument(akt, jez);
-        for (const odredba of poJeziku[jez]) {
+        // hr i hu nemaju svoje markere po aktu — za njih se drži postojanje,
+        // dužina, terminologija i dve namenske provere ispod. Markeri po odredbi
+        // za svih 14 akata × 2 jezika bili bi nagađanje formulacije prevoda.
+        for (const odredba of poJeziku[jez] ?? []) {
           expect(tekst, `${jez}/${akt} nema „${odredba}"`).toContain(odredba);
         }
       }
@@ -180,6 +198,8 @@ describe("kanonski set akata 4.2.1", () => {
       sr: /trajno preuzima/i,
       en: /permanently takes/i,
       ru: /навсегда принимает/i,
+      hr: /trajno preuzima/i,
+      hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
       const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);
@@ -196,6 +216,8 @@ describe("kanonski set akata 4.2.1", () => {
       sr: /poništavaju se sve verifikacije koje je lažni verifikator obavio/i,
       en: /all verifications performed by the false verifier are annulled/i,
       ru: /аннулируются все верификации, проведённые ложным верификатором/i,
+      hr: /poništavaju se sve verifikacije koje je lažni verifikator obavio/i,
+      hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
       const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);

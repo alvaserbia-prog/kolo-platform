@@ -31,6 +31,9 @@ interface Listing {
 interface Props {
   listings: Listing[];
   isVerified: boolean;
+  // Da li je posetilac prijavljen. Bez ovoga je dugme na kartici nudilo
+  // verifikaciju i onome ko još nema nalog — korak koji ne može ni da počne.
+  prijavljen?: boolean;
   // Predizabrane kategorije iz URL-a (?kat=slug1,slug2) — validirane na serveru.
   initialKat?: string[];
   // Kategorije koje ulogovani korisnik prati (za čip „Samo praćene").
@@ -39,7 +42,7 @@ interface Props {
   mojaLokacija?: string | null;
 }
 
-export default function PijacaKlijent({ listings, isVerified, initialKat = [], pracene = [], mojaLokacija = null }: Props) {
+export default function PijacaKlijent({ listings, isVerified, prijavljen = true, initialKat = [], pracene = [], mojaLokacija = null }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
@@ -173,8 +176,13 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
             {isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
           </Link>
         </div>
-        {!isVerified && (
-          <p className="text-xs text-kolo-muted">{t("neverif_objava_hint")}</p>
+        {!isVerified && prijavljen && (
+          <Link
+            href="/pijaca/novi-oglas"
+            className="block rounded-xl bg-kolo-green-100 text-kolo-green-900 text-sm font-semibold px-4 py-2.5 hover:bg-kolo-green-200 transition-colors"
+          >
+            {t("traka_neverifikovan")} →
+          </Link>
         )}
       </div>
 
@@ -419,6 +427,7 @@ export default function PijacaKlijent({ listings, isVerified, initialKat = [], p
               key={l.id}
               oglas={l}
               isVerified={isVerified}
+              prijavljen={prijavljen}
               kontaktLoading={kontaktLoadingId === l.id}
               onKontakt={handleKontakt}
               t={t}
@@ -465,6 +474,7 @@ type TFunction = ReturnType<typeof useTranslations<"pijaca">>;
 const OglasKartica = memo(function OglasKartica({
   oglas,
   isVerified,
+  prijavljen,
   kontaktLoading,
   onKontakt,
   t,
@@ -473,6 +483,7 @@ const OglasKartica = memo(function OglasKartica({
 }: {
   oglas: Listing;
   isVerified: boolean;
+  prijavljen: boolean;
   kontaktLoading: boolean;
   onKontakt: (oglasId: string, sellerId: string) => void;
   t: TFunction;
@@ -506,6 +517,14 @@ const OglasKartica = memo(function OglasKartica({
         <span className="absolute top-2 left-2 bg-white/90 text-kolo-muted text-xs font-medium px-2 py-0.5 rounded-lg">
           {t(`kategorija_${kategorijaKljuc(oglas.category)}`)}
         </span>
+        {/* Pečat da oglašivač nije verifikovan (Uslovi čl. 16, Pravilnik čl. 16).
+            Vide ga svi kojima je vidljiv i oglas, uključujući neprijavljene.
+            Ranije je stajao kao sitan tekst uz pseudonim i lako se previđao. */}
+        {!oglas.sellerVerified && (
+          <span className="absolute top-2 right-2 bg-white/95 text-kolo-gold-600 border-2 border-kolo-gold-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
+            {t("oznaka_neverifikovan")}
+          </span>
+        )}
       </Link>
 
       {/* Sadržaj */}
@@ -538,11 +557,6 @@ const OglasKartica = memo(function OglasKartica({
         <div className="flex justify-between items-center gap-2 mt-auto pt-2 border-t border-kolo-border">
           <span className="text-xs text-kolo-muted truncate min-w-0">
             <Pseudonim>{oglas.sellerPseudonim}</Pseudonim>
-            {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.1) — vide je
-                i neprijavljeni posetioci. Za razmenu odgovaraju sami korisnici. */}
-            {!oglas.sellerVerified && (
-              <span className="ml-1 text-kolo-gold-600 font-medium">· {t("oznaka_neverifikovan")}</span>
-            )}
             {oglas.location && <span className="ml-1">· {oglas.location}</span>}
             {udaljenost != null && (
               <span className="ml-1 text-kolo-green-700 font-medium">· ~{udaljenost} km</span>
@@ -557,8 +571,14 @@ const OglasKartica = memo(function OglasKartica({
               {kontaktLoading ? "..." : oglas.tip === "POTRAZNJA" ? t("javi_se") : t("kontaktiraj")}
             </button>
           ) : (
-            <Link href="/verifikacija" className="shrink-0 text-xs text-kolo-gold-600 hover:underline">
-              {t("zatrazi_verifikaciju_link")}
+            /* Neverifikovanom se više ne nudi verifikacija kao prvi korak: gost
+               nema ni nalog, a prijavljenom je najbliži potez sopstveni oglas —
+               kroz njega ga mreža i nađe (Pravilnik čl. 32 st. 4). */
+            <Link
+              href={prijavljen ? "/pijaca/novi-oglas" : "/prijava"}
+              className="shrink-0 text-xs text-kolo-green-700 font-semibold hover:underline"
+            >
+              {prijavljen ? t("cta_postavi_oglas") : t("cta_prijavi_se")}
             </Link>
           )}
         </div>

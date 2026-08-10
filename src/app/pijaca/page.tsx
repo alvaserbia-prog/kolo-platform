@@ -89,6 +89,7 @@ export default async function PijacaPage({
           sellerVerified: l.seller.verified,
         }))}
         isVerified={isVerified}
+        prijavljen={!!session?.user}
         initialKat={initialKat}
         pracene={pracene}
         mojaLokacija={korisnik?.location ?? null}

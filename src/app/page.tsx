@@ -102,7 +102,7 @@ export default async function Home() {
   const [pijacaOglasi, agregati, faqPitanja] = await Promise.all([
     getPijacaPreview(),
     getAgregati(),
-    Promise.resolve(getFaqPoBrojevima([1, 2, 40], locale)),
+    Promise.resolve(getFaqPoBrojevima([1, 2, 42], locale)),
   ]);
 
   // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.
@@ -129,6 +129,7 @@ export default async function Home() {
     { br: "1", naslov: t("kako_funkcionise_korak_1_naslov"), opis: t("kako_funkcionise_korak_1_opis") },
     { br: "2", naslov: t("kako_funkcionise_korak_2_naslov"), opis: t("kako_funkcionise_korak_2_opis") },
     { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis") },
+    { br: "4", naslov: t("kako_funkcionise_korak_4_naslov"), opis: t("kako_funkcionise_korak_4_opis") },
   ];
 
   return (
@@ -214,7 +215,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
               <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
@@ -236,6 +237,12 @@ export default async function Home() {
                 {t("alternativa_3_naslov")}
               </h2>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_3_opis")}</p>
+            </div>
+            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
+              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+                {t("alternativa_4_naslov")}
+              </h2>
+              <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_4_opis")}</p>
             </div>
           </div>
 

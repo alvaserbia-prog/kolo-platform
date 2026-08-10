@@ -10,7 +10,7 @@ import Pojam from "@/components/Pojam";
 type Props = {
   prikaz: string; // "30/30%", "10/30%", "∞/10%", "0/0%"
   tip: string;
-  /** Početni korisnik (osnivač / UO Fondacije) — koren lanca jemstva. */
+  /** Početni korisnik (osnivač / UO Fondacije) — koren lanca potvrda. */
   jeOsnivac?: boolean;
   podnaslov?: string;
   /** Profil varijanta: status kao badge levo, indeks desno (centrirano). */
@@ -36,7 +36,7 @@ export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, status
     NEVERIFIKOVAN: "bg-kolo-bg text-kolo-muted",
   };
 
-  // Osnivači (početni korisnici, UO Fondacije) su koren lanca jemstva — nemaju
+  // Osnivači (početni korisnici, UO Fondacije) su koren lanca potvrda — nemaju
   // verifikatora iznad sebe, pa se njihov status prikazuje kao „Početna verifikacija".
   const labela = jeOsnivac ? t("tip_pocetna") : (tipLabela[tip] ?? tip);
   const stil = jeOsnivac ? "bg-kolo-gold-100 text-kolo-gold-600" : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");

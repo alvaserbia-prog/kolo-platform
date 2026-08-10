@@ -66,13 +66,13 @@ E szabályzatban az egyes kifejezések a következő jelentéssel bírnak:
 
 **Valóságbizonyíték** — a felhasználók hitelesítésének személyes ismeretségen alapuló modellje, amellyel a felhasználó valódisága, egyedisége és folytonossága nyer megerősítést.
 
-**Kezességi lánc** — a valóságbizonyíték azon mechanizmusa, amelyben a hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valódiságát.
+**Megerősítési lánc** — a valóságbizonyíték azon mechanizmusa, amelyben a hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valódiságát.
 
 **Valóságindex** — számszerű érték (0–100 %), amely kifejezi a felhasználó megerősítettségének fokát, és meghatározza a rendszer funkcióihoz való hozzáférés terjedelmét, valamint a hitelesítési kapacitást.
 
-**Nem hitelesített felhasználó** — a platformon regisztrált személy, akinek valódisága nem nyert megerősítést a kezességi láncon keresztül.
+**Nem hitelesített felhasználó** — a platformon regisztrált személy, akinek valódisága nem nyert megerősítést a megerősítési láncon keresztül.
 
-**Hitelesített felhasználó** — az a személy, akinek valódisága a valóságbizonyítékra vonatkozó szabályokkal összhangban a kezességi láncon keresztül megerősítést nyert.
+**Hitelesített felhasználó** — az a személy, akinek valódisága a valóságbizonyítékra vonatkozó szabályokkal összhangban a megerősítési láncon keresztül megerősítést nyert.
 
 **ZRNO-tulajdonos** — az a hitelesített felhasználó, akinek a Protokollban ZRNO-t írtak be.
 
@@ -220,7 +220,7 @@ A javak és szolgáltatások cseréje újraosztja a meglévő POEN-eket, és nem
 
 1) működési hozzájárulás;
 
-2) más felhasználók hitelesítése a kezességi láncban;
+2) más felhasználók hitelesítése a megerősítési láncban;
 
 3) pénzügyi hozzájárulás;
 
@@ -256,7 +256,7 @@ A platform hirdetési terében a hirdetések megtekintése — az ajánlat vagy 
 
 Javat vagy szolgáltatást kínáló hirdetés közzététele a nem hitelesített felhasználók számára is elérhető, a Felhasználási feltételekben megállapított feltételek és korlátozások mellett. Javat vagy szolgáltatást kereső hirdetés közzététele, a hirdető elérhetőségi adataihoz való hozzáférés és a hirdetés kapcsán történő kommunikáció kezdeményezése kizárólag hitelesített felhasználók számára elérhető. A nem hitelesített hirdető válaszolhat abban a beszélgetésben, amelyet hitelesített felhasználó indított a hirdetése kapcsán.
 
-A nem hitelesített felhasználó hirdetése látható jelzést visel arról, hogy a hirdető nem hitelesített a kezességi láncban. A jelzés mindazok számára elérhető, akik számára maga a hirdetés is elérhető.
+A nem hitelesített felhasználó hirdetése látható jelzést visel arról, hogy a hirdető nem hitelesített a megerősítési láncban. A jelzés mindazok számára elérhető, akik számára maga a hirdetés is elérhető.
 
 A hirdető álneve a hirdetési térben a be nem jelentkezett és nem hitelesített személyek számára nem kapcsolódik össze a hozzájárulási nyilvántartással, a számlaállással vagy a felhasználói profillal. A platform hirdetési terének szabályait a Felhasználási feltételek rendezik.
 
@@ -316,7 +316,7 @@ A beírás és a leírás pillanatában érvényes elszámolási együttható k�
 
 A ZRNO nem ruházható át másik felhasználóra.
 
-A ZRNO ahhoz a felhasználóhoz kötődik, akinek valódisága a kezességi láncon keresztül nyert megerősítést.
+A ZRNO ahhoz a felhasználóhoz kötődik, akinek valódisága a megerősítési láncon keresztül nyert megerősítést.
 
 A ZRNO-ra nincs piac, nincs ZRNO-ár, és nincs lehetőség vele kereskedni.
 
@@ -366,7 +366,7 @@ A jogállás meghatározza a felhasználó rendszerbeli jogainak és lehetőség
 
 ### 28. cikk
 
-A nem hitelesített felhasználó a platformon regisztrált személy, akinek valódisága nem nyert megerősítést a kezességi láncon keresztül.
+A nem hitelesített felhasználó a platformon regisztrált személy, akinek valódisága nem nyert megerősítést a megerősítési láncon keresztül.
 
 A nem hitelesített felhasználónak joga van megtekinteni a rendszer nyilvános tartalmát, ideértve a platform hirdetési terében szereplő hirdetéseket. Cserélhet javakat és szolgáltatásokat, és a platform hirdetési terében javat vagy szolgáltatást kínáló hirdetést tehet közzé, a Felhasználási feltételekből eredő korlátozások mellett.
 
@@ -378,9 +378,9 @@ A nem hitelesített felhasználó nem férhet hozzá a hirdető elérhetőségi 
 
 ### 29. cikk
 
-A hitelesített felhasználó az a személy, akinek valódisága a valóságbizonyítékra vonatkozó szabályokkal összhangban a kezességi láncon keresztül megerősítést nyert.
+A hitelesített felhasználó az a személy, akinek valódisága a valóságbizonyítékra vonatkozó szabályokkal összhangban a megerősítési láncon keresztül megerősítést nyert.
 
-A hitelesített felhasználó cserélhet javakat és szolgáltatásokat, hozzájárulása POEN-ben nyilvántartásba vehető, részt vehet a kollektív formákban és a szociális programokban, valamint megerősítheti más felhasználók valódiságát a kezességi láncban.
+A hitelesített felhasználó cserélhet javakat és szolgáltatásokat, hozzájárulása POEN-ben nyilvántartásba vehető, részt vehet a kollektív formákban és a szociális programokban, valamint megerősítheti más felhasználók valódiságát a megerősítési láncban.
 
 A hitelesített felhasználó akkor ír be ZRNO-t, amikor teljesíti a beírás feltételeit, és ezzel ZRNO-tulajdonossá válik.
 
@@ -402,15 +402,15 @@ A valódiság hitelesítése személyes adatok kezelése. Ezen adatkezelés joga
 
 ### 32. cikk
 
-A felhasználó valódisága a kezességi láncon keresztül nyer megerősítést: a hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valódiságát. Minden új felhasználó azért kerül a rendszerbe, mert valaki, aki már hitelesített, ismeri őt, és megerősíti, hogy létezik.
+A felhasználó valódisága a megerősítési láncon keresztül nyer megerősítést: a hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valódiságát. Minden új felhasználó azért kerül a rendszerbe, mert valaki, aki már hitelesített, ismeri őt, és megerősíti, hogy létezik.
 
 Minden felhasználó rendelkezik valóságindexszel — számszerű értékkel, amely kifejezi a felhasználó megerősítettségének fokát. A valóságindex meghatározza a rendszer funkcióihoz való hozzáférés terjedelmét, valamint a felhasználó kapacitását mások valódiságának megerősítésére.
 
-A kezességi láncban tett megerősítések összessége alkotja a hitelesítési gráfot. A hitelesítési gráf személyes adatok nyilvántartása; azon az infrastruktúrán vezetendő, amelyen a Protokoll működik, adattakarékosság mellett. A gráf a felügyeleti adatokat is felöleli — a felügyelet eredményét, gyanú kifejezése esetén pedig a gyanú alanyát és az indok kódját is (a valóság bizonyításáról szóló szabályzat 11. cikke). Ezek az adatok nem nyilvánosak, és rájuk a jelen szabályzat 67. cikke alkalmazandó.
+A megerősítési láncban tett megerősítések összessége alkotja a hitelesítési gráfot. A hitelesítési gráf személyes adatok nyilvántartása; azon az infrastruktúrán vezetendő, amelyen a Protokoll működik, adattakarékosság mellett. A gráf a felügyeleti adatokat is felöleli — a felügyelet eredményét, gyanú kifejezése esetén pedig a gyanú alanyát és az indok kódját is (a valóság bizonyításáról szóló szabályzat 11. cikke). Ezek az adatok nem nyilvánosak, és rájuk a jelen szabályzat 67. cikke alkalmazandó.
 
 A hitelesítés lefolytatásához szükséges kapcsolatot a nem hitelesített felhasználó a platform hirdetési terén keresztül létesíti (16. cikk): javat vagy szolgáltatást kínáló hirdetés közzétételével bemutatkozik a meglévő hitelesített felhasználók hálózatának. E út megléte nem változtatja meg az e szabályzatban és a valóságbizonyítékról szóló szabályzatban megállapított hitelesítés természetét, eljárását vagy feltételeit. A közzététel, a tartalom és az adatkezelés szabályait a Felhasználási feltételek és az adatvédelmi szabályzat állapítják meg.
 
-A valóságindex kiszámításának szabályait, a kezességi hálózat terjeszkedésének szabályait és a kezességi lánccal való visszaélés elleni intézkedéseket külön szabályzat állapítja meg.
+A valóságindex kiszámításának szabályait, a megerősítési hálózat terjeszkedésének szabályait és a megerősítési lánccal való visszaélés elleni intézkedéseket külön szabályzat állapítja meg.
 
 ### 33. cikk
 
@@ -510,7 +510,7 @@ Az előző bekezdés szerinti hozzájárulás a 40.b cikk szerinti, cseréhez va
 
 Hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba.
 
-Nem hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül feljegyzésre, a Protokollban pedig akkor kerül nyilvántartásba, amikor a következő események közül az első bekövetkezik: a felhasználó hitelesítése a kezességi láncban, vagy a POEN-nyilvántartás frissítése az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
+Nem hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül feljegyzésre, a Protokollban pedig akkor kerül nyilvántartásba, amikor a következő események közül az első bekövetkezik: a felhasználó hitelesítése a megerősítési láncban, vagy a POEN-nyilvántartás frissítése az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
 
 Az előző két bekezdésben tett megkülönböztetés célja annak megakadályozása, hogy a valódiságukban meg nem erősített fiókok még azelőtt növeljék a nyilvántartásba vett POEN-ek teljes számát, hogy a rendszerben a tényleges részvétel nyoma megjelenne.
 
@@ -546,7 +546,7 @@ E cikk értelmében cserének minősül a POEN-nyilvántartás két felhasznál�
 
 A Platform nem kívánja meg a felhasználóktól, hogy a cserét külön megjelöljék vagy megerősítsék. Az út magukból a POEN-bejegyzésekből és a közzétett hirdetésekből olvasható ki; a cseréről más nyilvántartás nem készül.
 
-A felhasználó akkor van kívül egy másik felhasználó ismeretségi körén, ha egyikük sem található a másik tiltott zónájában a valóságbizonyítékról szóló szabályzat értelmében. A tiltott zóna a kezességi lánc felmenő és lemenő ágát, valamint az azokkal egy tekintet alá eső viszonyokat foglalja magában, így az ismeretségi körön kívül az áll, akit a kezességi lánc nem köt össze a felhasználóval.
+A felhasználó akkor van kívül egy másik felhasználó ismeretségi körén, ha egyikük sem található a másik tiltott zónájában a valóságbizonyítékról szóló szabályzat értelmében. A tiltott zóna a megerősítési lánc felmenő és lemenő ágát, valamint az azokkal egy tekintet alá eső viszonyokat foglalja magában, így az ismeretségi körön kívül az áll, akit a megerősítési lánc nem köt össze a felhasználóval.
 
 Minden felhasználó egyszer számít az úton, függetlenül a vele lebonyolított cserék számától.
 
@@ -738,7 +738,7 @@ A hozzáférés szabályait, az engedélyezett tevékenységek terjedelmét, a c
 
 Az internacionalizáció a rendszer új régiókra való infrastrukturális kiterjesztése. A rendszer kiterjeszti infrastruktúráját, nyilvántartását és szabályait új területekre, megtartva az egységes Protokollt és a közjó egységes nyilvántartását.
 
-Az új régiókra való terjeszkedés több dimenzióban igényel alkalmazkodást: a célországi joghatóság jogi kerete, a platform nyelvi lokalizációja, a helyi kezességi lánc kiépítése és esetlegesen helyi szövetkezetek létrehozása.
+Az új régiókra való terjeszkedés több dimenzióban igényel alkalmazkodást: a célországi joghatóság jogi kerete, a platform nyelvi lokalizációja, a helyi megerősítési lánc kiépítése és esetlegesen helyi szövetkezetek létrehozása.
 
 E modul aktiválásának előfeltétele a stabil, aktív Felső Kolóval rendelkező rendszer, elegendő tapasztalat a rendszer alaprégióban való működésével kapcsolatban, valamint a célországi joghatóságokra vonatkozó jogi elemzés. A terjeszkedésről a Felső Kolo dönt.
 
@@ -882,7 +882,7 @@ Az Alapítvány nem szavatolja, hogy a rendszer megszakítás nélkül fog műk�
 
 A javak és szolgáltatások cseréjének teljesítéséért, minőségéért és kockázatáért az abban részt vevő felhasználók felelnek, a kötelmi jog általános szabályai szerint.
 
-A felhasználó felel a rendszernek szolgáltatott adatok pontosságáért. A kezességi láncban részt vevő felhasználó felel a valódiság megerősítésének valóságtartalmáért, a valóságbizonyítékra vonatkozó szabályokkal összhangban.
+A felhasználó felel a rendszernek szolgáltatott adatok pontosságáért. A megerősítési láncban részt vevő felhasználó felel a valódiság megerősítésének valóságtartalmáért, a valóságbizonyítékra vonatkozó szabályokkal összhangban.
 
 Az a felhasználó, aki visszaél a rendszerrel, a jogállás megszűnésére és felfüggesztésére vonatkozó szabályokkal összhangban álló intézkedések alá esik.
 
@@ -940,7 +940,7 @@ Az aktusok hierarchiáját, egymáshoz viszonyított rangjukat és az ellentmond
 
 A rendszer üzembe helyezésekor nincsenek korábban hitelesített felhasználók, akik megerősíthetnék az első felhasználók valódiságát, sem nyilvántartásba vett POEN-ek, amelyekből ZRNO-t lehetne beírni. Ezért az első ZRNO-tulajdonosok — a kezdeti felhasználók, az Alapítvány Igazgatótanácsának tagjai — közvetlenül, az Alapítvány Igazgatótanácsának határozatával kerülnek megállapításra.
 
-A kezdeti felhasználók a rendszer indulásának egyszeri eseményeként mentesülnek a ZRNO beírásának 19. cikk szerinti feltétele (a nyilvántartásba vett POEN-ek minimuma), valamint a 32. cikk és a valóságbizonyítékról szóló szabályzat azon kezességi lánc szabályai alól, amelyek korábbi hitelesítő létét feltételezik. Ők képezik a kezességi lánc kiindulópontját; kezdeti valóságindexüket, a felügyelet alóli mentességüket és az anticirkuláris szabály alóli mentességüket a valóságbizonyítékról szóló szabályzat rendezi (VI. fejezet — Kezdeti mechanizmus).
+A kezdeti felhasználók a rendszer indulásának egyszeri eseményeként mentesülnek a ZRNO beírásának 19. cikk szerinti feltétele (a nyilvántartásba vett POEN-ek minimuma), valamint a 32. cikk és a valóságbizonyítékról szóló szabályzat azon megerősítési lánc szabályai alól, amelyek korábbi hitelesítő létét feltételezik. Ők képezik a megerősítési lánc kiindulópontját; kezdeti valóságindexüket, a felügyelet alóli mentességüket és az anticirkuláris szabály alóli mentességüket a valóságbizonyítékról szóló szabályzat rendezi (VI. fejezet — Kezdeti mechanizmus).
 
 A kezdeti felhasználók nem képeznek külön jogállást a 27. cikk értelmében: ők a valóságbizonyítékról szóló szabályzatban megállapított jellemzőkkel bíró ZRNO-tulajdonosok, és egyidejűleg gyakorolhatják az Igazgatótanács operatív jogosítványait az 1. szakaszban. A rendszer megszilárdulását követően minden új ZRNO-tulajdonos rendes úton szerzi meg jogállását (19., 29. és 30. cikk).
 

@@ -24,7 +24,7 @@ const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string;
     naziv: "Pravilnik o dokazu stvarnosti",
     fajl: "dokaz_stvarnosti_4_2_1.md",
     verzija: "4.2.0",
-    opis: "Operativna mehanika verifikacije korisnika kroz lanac jemstva.",
+    opis: "Operativna mehanika verifikacije korisnika kroz lanac potvrda.",
   },
   "pokroviteljstvo-donacije": {
     naziv: "Pravilnik o pokroviteljstvu i donacijama",

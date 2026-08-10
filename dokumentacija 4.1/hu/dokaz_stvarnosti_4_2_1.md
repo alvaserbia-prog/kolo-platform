@@ -10,7 +10,7 @@
 
 *A szabályzat tárgya*
 
-E szabályzat rendezi a valóságindexet, a kezességi láncot, a hitelesítési bejegyzést, a hitelesítésért járó POEN nyilvántartását, a hitelesítési kapacitást, a felügyeletet és a felügyelet eredményét, a felügyeleti ügyet, a körkörösség elleni szabályt, a kezdeti mechanizmust, a státusz megszűnésének a hitelesítésekre gyakorolt következményeit, a hamis hitelesítés megállapításának eljárását, valamint a hálózatból kivont POEN-bejegyzések megtérítését.
+E szabályzat rendezi a valóságindexet, a megerősítési láncot, a hitelesítési bejegyzést, a hitelesítésért járó POEN nyilvántartását, a hitelesítési kapacitást, a felügyeletet és a felügyelet eredményét, a felügyeleti ügyet, a körkörösség elleni szabályt, a kezdeti mechanizmust, a státusz megszűnésének a hitelesítésekre gyakorolt következményeit, a hamis hitelesítés megállapításának eljárását, valamint a hálózatból kivont POEN-bejegyzések megtérítését.
 
 Azok a kifejezések, amelyeket e szabályzat nem határoz meg, a KOLO rendszerről szóló szabályzatban megállapított jelentéssel bírnak.
 
@@ -26,7 +26,7 @@ Ez a szabályzat a KOLO rendszerről szóló szabályzat V. fejezetének rendelk
 
 *Fogalom és kiszámítás*
 
-A valóságindex olyan számérték, amely a felhasználó kezességi láncban való hitelesítettségének fokát fejezi ki. Minden hitelesítés 10 százalékponttal növeli a hitelesített felhasználó indexét. Az index tartománya 0 %-tól 100 %-ig terjed.
+A valóságindex olyan számérték, amely a felhasználó megerősítési láncban való hitelesítettségének fokát fejezi ki. Minden hitelesítés 10 százalékponttal növeli a hitelesített felhasználó indexét. Az index tartománya 0 %-tól 100 %-ig terjed.
 
 Az a felhasználó, akinek indexe eléri a 100 %-ot, tovább nem hitelesíthető. A 100 % feletti hitelesítések nem kerülnek nyilvántartásba.
 
@@ -40,17 +40,17 @@ A legalább 10 %-os indexszel rendelkező felhasználó teljes hozzáféréssel 
 
 A kezdeti felhasználók és a ZRNO-tulajdonosok esetében a valóságindex funkcionális hatás nélküli nyilvántartás — a kapacitás és a hozzáférés a státuszukból ered, nem az indexből.
 
-## III — A kezességi lánc
+## III — A megerősítési lánc
 
 ### 5. cikk
 
 *A hitelesítés mechanizmusa*
 
-A hitelesítés a kezességi láncban történik: a hitelesített felhasználó közvetlen ismeretség alapján erősíti meg az új felhasználó valóságát. A hitelesítő három dolgot erősít meg: a valóságot (a felhasználó természetes személyként létezik), az egyediséget (nincs másik fiókja a rendszerben) és a folytonosságot (ugyanaz a személy fér hozzá a rendszerhez).
+A hitelesítés a megerősítési láncban történik: a hitelesített felhasználó közvetlen ismeretség alapján erősíti meg az új felhasználó valóságát. A hitelesítő három dolgot erősít meg: a valóságot (a felhasználó természetes személyként létezik), az egyediséget (nincs másik fiókja a rendszerben) és a folytonosságot (ugyanaz a személy fér hozzá a rendszerhez).
 
 A hitelesítés a személyes ismeretség aktusa, nem pedig okmányellenőrzés. A hitelesítő nem gyűjti és nem továbbítja a hitelesített személyes okmányait.
 
-A hitelesítés olyan közvetlen személyes ismeretségen alapul, amely elegendő ahhoz, hogy a hitelesítő saját felelősségére kezeskedjen a hitelesített felhasználó valóságáért, egyediségéért és folytonosságáért. E szabályzat nem írja elő ezen ismeretség megszerzésének módját, és nem követeli meg a fizikai jelenlétet a hitelesítés pillanatában; a hitelesítő maga ítéli meg, hogy eléggé ismeri-e a felhasználót ahhoz, hogy érte kezeskedjen.
+A hitelesítés olyan közvetlen személyes ismeretségen alapul, amely elegendő ahhoz, hogy a hitelesítő saját felelősségére megerősítse a hitelesített felhasználó valóságáért, egyediségéért és folytonosságáért. E szabályzat nem írja elő ezen ismeretség megszerzésének módját, és nem követeli meg a fizikai jelenlétet a hitelesítés pillanatában; a hitelesítő maga ítéli meg, hogy eléggé ismeri-e a felhasználót ahhoz, hogy megerősítse a valódiságát.
 
 A Platform technikai mechanizmust biztosít a hozzájárulásra és a fiók összekapcsolására: a hitelesítést kérő felhasználó egyszeri kódot generál, amellyel hozzájárul a hitelesítéshez és fiókját ehhez az aktushoz köti, az őt ismerő hitelesítő pedig e kóddal folytatja le a hitelesítést. Ez a mechanizmus nem gyűjti a hitelesített személyes adatait, és nem a jelenlét bizonyítéka, hanem a hitelesített hozzájárulásának és a fiók azonosságának megerősítése.
 
@@ -212,9 +212,9 @@ Az első generációra vonatkozó kivétel (12. cikk (5) bekezdés) figyelembe v
 
 A rendszer kezdeti felhasználói azok a személyek, akik az Alapítvány alapító magját alkotják: a Gazdasági Nyilvántartási Ügynökség (APR) nyilvántartásába az Alapítvány alapítójaként vagy szerveinek tagjaként bejegyzett személyek, valamint azok a személyek, akiket az Igazgatótanács a rendszer létrehozásakor határozattal kijelöl, személyazonosságuk platformon való nyilvános közzététele mellett.
 
-A kezdeti felhasználók valóságindexe a fiók létrehozásától 100 %, és nem a kezességi láncból ered. Az APR nyilvántartásában szereplő személyek valósága a nyilvános nyilvántartásból ered; az Igazgatótanács határozatával kijelölt személyek valóságát az Igazgatótanács közvetlenül erősíti meg, nyilvánosan közzétett személyazonosság mellett.
+A kezdeti felhasználók valóságindexe a fiók létrehozásától 100 %, és nem a megerősítési láncból ered. Az APR nyilvántartásában szereplő személyek valósága a nyilvános nyilvántartásból ered; az Igazgatótanács határozatával kijelölt személyek valóságát az Igazgatótanács közvetlenül erősíti meg, nyilvánosan közzétett személyazonosság mellett.
 
-A kezdeti felhasználók a kezességi láncban nem hitelesíthetők.
+A kezdeti felhasználók a megerősítési láncban nem hitelesíthetők.
 
 ### 15. cikk
 
@@ -236,7 +236,7 @@ Az indexveszteség nem terjed tovább — azok a felhasználók, akiket az érin
 
 *Az index nullára esése*
 
-Az a felhasználó, akinek indexe a hitelesítő státuszának megszűnése folytán 0 %-ra esik, megtartja hitelesített felhasználói státuszát. A felhasználó elveszíti a platform funkcióihoz való hozzáférést, de megtartja fiókját, és a kezességi láncon keresztül ismét hitelesíthető.
+Az a felhasználó, akinek indexe a hitelesítő státuszának megszűnése folytán 0 %-ra esik, megtartja hitelesített felhasználói státuszát. A felhasználó elveszíti a platform funkcióihoz való hozzáférést, de megtartja fiókját, és a megerősítési láncon keresztül ismét hitelesíthető.
 
 Az a felhasználó, aki ZRNO-tulajdonos, nem szenvedi el az indexesés funkcionális hatását — a hozzáférés és a kapacitás a ZRNO-tulajdonosi státuszból ered, nem az indexből.
 
@@ -320,7 +320,7 @@ Az e cikk szerinti negatív POEN-bejegyzés az egyetlen kivétel a KOLO rendszer
 
 *Az önhibáján kívül érvénytelenített hitelesítésű felhasználó helyzete*
 
-Annak a felhasználónak, akinek hitelesítése érvénytelenítésre került, és akiről nem állapították meg, hogy nem létező vagy nem egyedi, a valóságindexe 10 százalékponttal csökken, az e hitelesítésből eredő, 7. cikk szerinti POEN-bejegyzései érvénytelenné válnak, és felszabadul egy hely a kezességi láncban.
+Annak a felhasználónak, akinek hitelesítése érvénytelenítésre került, és akiről nem állapították meg, hogy nem létező vagy nem egyedi, a valóságindexe 10 százalékponttal csökken, az e hitelesítésből eredő, 7. cikk szerinti POEN-bejegyzései érvénytelenné válnak, és felszabadul egy hely a megerősítési láncban.
 
 Az ilyen felhasználó POEN-bejegyzéseinek érvénytelenítését az egyenlege korlátozza — a bejegyzés legfeljebb nulláig eshet. A fedezetlen rész a 20b. cikk szerinti megtérítésként átszáll a hitelesítőre, és nem terheli a felhasználót. Aki semmit nem vétett, nem marad negatív értékben.
 
@@ -342,7 +342,7 @@ A 20b. cikk szerinti megtérítés magával az érvénytelenítéssel áll be, �
 
 *A hitelesítések számának átmeneti korlátozása*
 
-Amíg a teljes forgalomban lévő mennyiség el nem éri a 100.000 POEN-t, a felhasználó legfeljebb egy hitelesítést fogadhat a kezességi láncban. A forgalomban lévő mennyiség a rendszerben nyilvántartott POEN-ek teljes száma — a Protokoll ellenbejegyzésének abszolút értéke.
+Amíg a teljes forgalomban lévő mennyiség el nem éri a 100.000 POEN-t, a felhasználó legfeljebb egy hitelesítést fogadhat a megerősítési láncban. A forgalomban lévő mennyiség a rendszerben nyilvántartott POEN-ek teljes száma — a Protokoll ellenbejegyzésének abszolút értéke.
 
 Az (1) bekezdés szerinti korlátozás a forgalomban lévő mennyiség hitelesítéskori állapota szerint alkalmazandó. A korlátozás hatálya alatt kapott hitelesítések érvényben maradnak; a 100.000 POEN forgalom elérésekor a valóságindex e szabályzat általános szabályai szerint növekszik, ideértve az V. fejezet szerinti tiltott zónát is.
 
