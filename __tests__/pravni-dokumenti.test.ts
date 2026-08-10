@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_1_1.md`, `uslovi_koriscenja_4_1_1.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_2_1.md`, `uslovi_koriscenja_4_2_1.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -22,23 +22,24 @@ const JEZICI = ["sr", "en", "ru"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
-  // Set je MEŠOVIT: ova četiri akta su na 4.2.0 (paket „nadzor dobija glas"),
-  // ostalih jedanaest na 4.1.1. Verzija po aktu, ne po setu.
-  "Pravilnik_4_2_0.md",
-  "dokaz_stvarnosti_4_2_0.md",
-  "DPIA_4_2_0.md",
-  "radnje_obrade_4_2_0.md",
-  "uslovi_koriscenja_4_1_1.md",
-  "politika_4_1_1.md",
+  // Set je od 4.2.1 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
+  // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
+  // reference na verziju koja kao dokument više ne postoji.
+  "Pravilnik_4_2_1.md",
+  "dokaz_stvarnosti_4_2_1.md",
+  "DPIA_4_2_1.md",
+  "radnje_obrade_4_2_1.md",
+  "uslovi_koriscenja_4_2_1.md",
+  "politika_4_2_1.md",
   "statut_4_1_0.md",
-  "whitepaper_4_1_1.md",
-  "rizici_4_1_1.md",
-  "hijerarhija_4_1_1.md",
-  "donacije_4_1_1.md",
-  "operativni_4_1_1.md",
-  "osnivacki_4_1_1.md",
-  "gornje_kolo_4_1_1.md",
-  "programi_podrske_4_1_1.md",
+  "whitepaper_4_2_1.md",
+  "rizici_4_2_1.md",
+  "hijerarhija_4_2_1.md",
+  "donacije_4_2_1.md",
+  "operativni_4_2_1.md",
+  "osnivacki_4_2_1.md",
+  "gornje_kolo_4_2_1.md",
+  "programi_podrske_4_2_1.md",
 ];
 
 /**
@@ -53,22 +54,37 @@ const AKTI = [
  * 4.2.0 tiho poništila izmenu čl. 40a iz 4.1.1 i niko to ne bi primetio.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_2_0.md": {
-    sr: ["### Član 40a", "Verifikovanom korisniku doprinos se evidentira", "član 20b"],
-    en: ["### Article 40a", "Article 20b"],
-    ru: ["### Статья 40a", "статьёй 20b"],
+  "Pravilnik_4_2_1.md": {
+    sr: [
+      "### Član 40a",
+      "Verifikovanom korisniku doprinos se evidentira",
+      "član 20b",
+      // 4.2.1 — putanja doprinosa razmeni. Kapa i prag su brojevi koje kod drži
+      // u konstantama; ako se u aktu izmene a u kodu ne, ili obrnuto, razilaze se
+      // norma i primena — pa se traže doslovno.
+      "### Član 40b",
+      "ne može preći 5.000 POEN-a po korisniku",
+      "najmanje 1.000 POEN-a",
+    ],
+    en: ["### Article 40a", "Article 20b", "### Article 40b", "may not exceed 5,000 POENs per user"],
+    ru: ["### Статья 40a", "статьёй 20b", "### Статья 40b", "не может превышать 5 000 ПОЕН"],
   },
-  "dokaz_stvarnosti_4_2_0.md": {
+  "dokaz_stvarnosti_4_2_1.md": {
     sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_2_0.md": {
-    sr: ["Radnja obrade br. 14"],
-    en: ["Processing activity No. 14"],
-    ru: ["Операция обработки № 14"],
+  "radnje_obrade_4_2_1.md": {
+    sr: ["Radnja obrade br. 14", "Radnja obrade br. 15"],
+    en: ["Processing activity No. 14", "Processing activity No. 15"],
+    ru: ["Операция обработки № 14", "Операция обработки № 15"],
   },
-  "uslovi_koriscenja_4_1_1.md": {
+  "DPIA_4_2_1.md": {
+    sr: ["R15 —", "## 5.10."],
+    en: ["R15 —", "## 5.10."],
+    ru: ["R15 —", "## 5.10."],
+  },
+  "uslovi_koriscenja_4_2_1.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
     en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
     ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
@@ -76,7 +92,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
   // odredbe bi gejt (zamrzavanje naloga do prihvatanja) obuhvatio i te obrade, pa
   // pristanak ne bi bio slobodno dat.
-  "politika_4_1_1.md": {
+  "politika_4_2_1.md": {
     sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
     en: ["is not consent for processing whose legal basis is consent"],
     ru: ["не является согласием на обработку"],
@@ -113,7 +129,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.1.1", () => {
+describe("kanonski set akata 4.2.1", () => {
   it.each(AKTI)("%s postoji na sva tri jezika", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -166,7 +182,7 @@ describe("kanonski set akata 4.1.1", () => {
       ru: /навсегда принимает/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_0.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -182,8 +198,26 @@ describe("kanonski set akata 4.1.1", () => {
       ru: /аннулируются все верификации, проведённые ложным верификатором/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_0.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
+    }
+  });
+
+  /**
+   * Prva verzija putanje razmene imala je obostrano označavanje razmene (model
+   * `Razmena`, dva klika). Vlasnik ga je uklonio: razmena je upis POEN-a i ništa
+   * drugo. Ako se u akte vrati zahtev da korisnici razmenu označe, norma bi
+   * tražila mehanizam koji u kodu ne postoji.
+   */
+  it("razmena se ne označava — akti to izričito kažu", async () => {
+    const BEZ_OZNACAVANJA: Record<string, RegExp> = {
+      sr: /ne traži od korisnika da razmenu posebno označe/i,
+      en: /does not require users to separately mark/i,
+      ru: /не требует от пользователей отдельно отмечать/i,
+    };
+    for (const jez of JEZICI) {
+      const tekst = await ucitajPravniDokument("Pravilnik_4_2_1.md", jez);
+      expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
 
