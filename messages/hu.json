@@ -347,7 +347,7 @@
     "putanja_zabelezen": "Feljegyezve — a bejegyzés a hitelesítéskor jön létre",
     "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
     "putanja_zakljucan": "Még nem nyílt meg",
-    "putanja_pravila": "A számlálóba csak azok a hirdetéshez kötődő cserék kerülnek, amelyeket mindkét fél megtörténtnek jelölt, és csak a kezességi láncodon kívüli partnerekkel. Minden partner egyszer számít. Ha a POEN 60 napon belül visszakerül ugyanahhoz a személyhez, a partner kiesik a számlálóból. A nem hitelesített felhasználóval folytatott csere feljegyzésre kerül, de csak az ő hitelesítése után számít. Jelenleg a számlálóban: {sagovornika}."
+    "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű POEN-bejegyzések kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a kezességi gráfban). Minden partner egyszer számít, függetlenül a bejegyzések számától. A még nem hitelesített felhasználóval történt bejegyzés feljegyzésre kerül, de csak az ő hitelesítése után számít. Jelenleg a számlálóban: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -1656,17 +1656,7 @@
     "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, legalább {min} karakteres leírás, kategória és helység kell. Az első ilyen hirdetés {iznos} POEN hozzájárulást hoz neked, amelyet akkor vezetnek be, amikor valaki hitelesít téged, vagy POEN-t ír be neked.",
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
     "oznaka_neverifikovan": "nem hitelesített",
-    "oznaka_neverifikovan_opis": "A hirdető még nincs hitelesítve a kezességi láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
-    "razmena_naslov": "Csere a hirdetés kapcsán",
-    "razmena_opis_oglasivac": "Ha a cserét mindkét fél megjelöli, bekerül a cseréhez való hozzájárulás útjába. Az Alapítvány nem közvetít a cserében és nem is szavatol érte.",
-    "razmena_opis_sagovornik": "Ha a csere megtörtént, jelöld meg — ha a másik fél is megjelöli, bekerül a cseréhez való hozzájárulás útjába.",
-    "razmena_oznaci": "A csere megtörtént",
-    "razmena_odbij": "Nem volt csere",
-    "razmena_ceka_drugu_stranu": "A másik félre vár",
-    "razmena_realizovana": "Mindkét fél megjelölte",
-    "razmena_odbijena": "Elutasítva",
-    "razmena_ja": "Te",
-    "razmena_greska": "Nem sikerült. Próbáld újra."
+    "oznaka_neverifikovan_opis": "A hirdető még nincs hitelesítve a kezességi láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel."
   },
   "pocetna": {
     "dobrodoslice": "Üdvözlünk, <ime>{pseudonim}</ime>",

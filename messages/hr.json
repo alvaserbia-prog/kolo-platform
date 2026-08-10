@@ -354,7 +354,7 @@
     "putanja_zabelezen": "Zabilježeno — zapis nastaje po verifikaciji",
     "putanja_na_redu": "Ispunjeno — evidentira se uskoro",
     "putanja_zakljucan": "Još nije otključano",
-    "putanja_pravila": "U brojač ulaze samo razmjene povodom oglasa koje su obje strane označile kao ostvarene, sa sugovornicima izvan tvog lanca jamstva. Svaki sugovornik broji se jednom. Ako se POEN vrati istoj osobi u roku od 60 dana, sugovornik ispada iz brojača. Razmjena s neverificiranim korisnikom se bilježi, a broji tek kad on bude verificiran. Trenutačno u brojaču: {sagovornika}."
+    "putanja_pravila": "U brojač ulaze upisi POEN-a od najmanje 1.000 POEN s ljudima koji nisu u tvom krugu poznanstava (graf jamstva). Svaki sugovornik broji se jednom, bez obzira na broj upisa. Upis s korisnikom koji još nije verificiran se bilježi, a broji tek kad on bude verificiran. Trenutačno u brojaču: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Verifikacija identiteta",
@@ -1663,17 +1663,7 @@
     "neverif_opis": "Možeš objaviti samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, opis od najmanje {min} znakova, kategoriju i mjesto. Prvi takav oglas nosi ti doprinos od {iznos} POEN, koji se evidentira kad te netko verificira ili ti upiše POEN.",
     "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
     "oznaka_neverifikovan": "neverificiran",
-    "oznaka_neverifikovan_opis": "Oglašivač još nije verificiran u lancu jamstva. Za razmjenu odgovarate međusobno — Zaklada ne posreduje i ne odgovara.",
-    "razmena_naslov": "Razmjena povodom oglasa",
-    "razmena_opis_oglasivac": "Kad razmjenu označe obje strane, ona ulazi u putanju doprinosa razmjeni. Zaklada u razmjeni ne posreduje i ne jamči za nju.",
-    "razmena_opis_sagovornik": "Ako je razmjena obavljena, označi je — kad je označi i druga strana, ulazi u putanju doprinosa razmjeni.",
-    "razmena_oznaci": "Razmjena je obavljena",
-    "razmena_odbij": "Nije bilo razmjene",
-    "razmena_ceka_drugu_stranu": "Čeka drugu stranu",
-    "razmena_realizovana": "Označeno s obje strane",
-    "razmena_odbijena": "Odbijeno",
-    "razmena_ja": "Ti",
-    "razmena_greska": "Nije uspjelo. Pokušaj ponovno."
+    "oznaka_neverifikovan_opis": "Oglašivač još nije verificiran u lancu jamstva. Za razmjenu odgovarate međusobno — Zaklada ne posreduje i ne odgovara."
   },
   "pocetna": {
     "dobrodoslice": "Dobrodošli, <ime>{pseudonim}</ime>",

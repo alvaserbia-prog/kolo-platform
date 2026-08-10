@@ -6,31 +6,35 @@
  * 5.000 POEN. Korak 1 je ZATEČENI doprinos sadržaju i ostaje netaknut — i po
  * iznosu i po odloženom evidentiranju; ovaj modul vodi korake 2–5.
  *
- * Šta lestvica plaća: širenje mreže razmene. Zato brojač ima tri sita —
- * obostrana potvrda razmene, sagovornik van lanca jemstva, i nepostojanje
- * povratnog toka POEN-a u roku od 60 dana. Bez njih bi se putanja prolazila
- * dogovorom dvoje ljudi za jedno popodne.
+ * 🔴 Razmena se NE označava i NE vodi kao zaseban zapis. Brojač čita same upise
+ * POEN-a (`TransactionType.TRANSFER`): svaki čovek van kruga poznanstava sa kojim
+ * je POEN prošao broji se jednom. Upis POEN-a već jeste izjava obe strane, pa
+ * dodatna potvrda ne bi donela nijedan podatak koji transakcija sama ne nosi.
+ *
+ * Šta lestvica plaća: širenje mreže razmene. Otud dva sita — sagovornik mora
+ * biti van lanca jemstva (graf verifikacija) i verifikovan.
  *
  * Obrazac poziva je isti kao kod čl. 40a i OBAVEZAN je:
  *   - DB promene u jednoj `prisma.$transaction()`
  *   - `probajNapredovati()` SEKVENCIJALNO POSLE nje — vodi u `emitujPoen()`,
  *     koji otvara sopstvenu transakciju.
- * Nijedna funkcija odavde ne baca: razmena, prenos POEN-a i objava oglasa su
- * već upisani u trenutku poziva i ne smeju da padnu zbog ovog kanala.
+ * Nijedna funkcija odavde ne baca: prenos POEN-a i objava oglasa su već upisani
+ * u trenutku poziva i ne smeju da padnu zbog ovog kanala.
  */
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { logAdminAkcija } from "@/lib/audit";
 import { obavesti } from "@/lib/notifikacije";
-import { DoprinosStatus, RazmenaStatus, TransactionType } from "@/generated/prisma/client";
+import { DoprinosStatus, TransactionType } from "@/generated/prisma/client";
 import {
   IZNOS_KORAKA,
+  MIN_IZNOS_TRANSAKCIJE,
   POSLEDNJI_KORAK,
   brojOglasaSaRazlicitimUpitima,
   dostignutKorak,
   sagovorniciUBrojacu,
-  type PoenTok,
-  type RazmenaZapis,
+  upisaoSagovorniku,
+  type PoenSagovornik,
   type Ucinak,
 } from "@/lib/doprinos-razmeni-pravila";
 
@@ -45,13 +49,98 @@ const PRVI_KORAK_OVDE = 2;
 // ─── Očitavanje učinka ───────────────────────────────────────────────────────
 
 /**
- * Skuplja sve što lestvica broji. Jedan prolaz kroz bazu po pozivu — zove se
- * posle svakog događaja koji može da pomeri brojač (razmena, prenos POEN-a,
- * objava oglasa, upit, verifikacija sagovornika).
+ * Ljudi sa kojima je korisnik razmenio POEN, spojeni po čoveku (ne po
+ * transakciji) i obogaćeni sa dva sita: da li su van kruga poznanstava i da li
+ * su verifikovani.
+ *
+ * Novčanici Krugova nemaju `userId` i ispadaju sami. Emisije Protokola se ne
+ * gledaju — POEN koji je nastao, a nije prešao između dvoje ljudi, nije razmena.
+ */
+async function dohvatiSagovornike(userId: string): Promise<PoenSagovornik[]> {
+  const wallet = await prisma.wallet.findUnique({
+    where: { userId },
+    select: { id: true },
+  });
+  if (!wallet) return [];
+
+  const transakcije = await prisma.transaction.findMany({
+    where: {
+      type: TransactionType.TRANSFER,
+      OR: [{ fromWalletId: wallet.id }, { toWalletId: wallet.id }],
+    },
+    select: {
+      fromWalletId: true,
+      amount: true,
+      fromWallet: { select: { userId: true } },
+      toWallet: { select: { userId: true } },
+    },
+  });
+
+  // Spajanje po čoveku: sagovornik se za celu lestvicu broji jednom, bez obzira
+  // na broj transakcija. Prag se meri PO TRANSAKCIJI — sitni upisi se ne
+  // sabiraju u jednu „pravu" razmenu, jer bi se prag time zaobišao deljenjem.
+  const poCoveku = new Map<string, { pravaTransakcija: boolean; jaSamUpisao: boolean }>();
+  for (const t of transakcije) {
+    const jaSamPosiljalac = t.fromWalletId === wallet.id;
+    const drugiId = jaSamPosiljalac ? t.toWallet?.userId : t.fromWallet?.userId;
+    if (!drugiId || drugiId === userId) continue;
+    const prava = t.amount >= MIN_IZNOS_TRANSAKCIJE;
+    const zapis = poCoveku.get(drugiId);
+    if (zapis) {
+      zapis.pravaTransakcija ||= prava;
+      zapis.jaSamUpisao ||= prava && jaSamPosiljalac;
+    } else {
+      poCoveku.set(drugiId, {
+        pravaTransakcija: prava,
+        jaSamUpisao: prava && jaSamPosiljalac,
+      });
+    }
+  }
+  if (poCoveku.size === 0) return [];
+
+  const ids = [...poCoveku.keys()];
+  const [korisnici, uLancu] = await Promise.all([
+    prisma.user.findMany({
+      where: { id: { in: ids } },
+      select: { id: true, tipKorisnika: true },
+    }),
+    // Krug poznanstava = zabranjena zona verifikacije, u OBA smera. Ista tabela
+    // po kojoj se sudi ko koga sme da verifikuje: uzlazna i silazna linija,
+    // braća i preuzete zone. Ko nije ni u čijoj zoni — van je kruga.
+    prisma.verifikacionaZona.findMany({
+      where: {
+        OR: [
+          { userId, forbiddenUserId: { in: ids } },
+          { userId: { in: ids }, forbiddenUserId: userId },
+        ],
+      },
+      select: { userId: true, forbiddenUserId: true },
+    }),
+  ]);
+
+  const tipovi = new Map(korisnici.map((k) => [k.id, k.tipKorisnika]));
+  const uKrugu = new Set<string>();
+  for (const z of uLancu) uKrugu.add(z.userId === userId ? z.forbiddenUserId : z.userId);
+
+  return ids.map((drugiId) => {
+    const tok = poCoveku.get(drugiId)!;
+    const tip = tipovi.get(drugiId);
+    return {
+      drugiId,
+      pravaTransakcija: tok.pravaTransakcija,
+      vanLanca: !uKrugu.has(drugiId),
+      verifikovan: tip !== undefined && tip !== "NEVERIFIKOVAN",
+      jaSamUpisao: tok.jaSamUpisao,
+    };
+  });
+}
+
+/**
+ * Skuplja sve što lestvica broji. Zove se posle svakog događaja koji može da
+ * pomeri brojač (prenos POEN-a, objava oglasa, upit, verifikacija sagovornika).
  */
 export async function preracunajUcinak(userId: string): Promise<Ucinak> {
-  const [wallet, prviOglas, razmeneDb, brojOglasa, upiti] = await Promise.all([
-    prisma.wallet.findUnique({ where: { userId }, select: { id: true } }),
+  const [prviOglas, brojOglasa, upiti, sagovornici] = await Promise.all([
     // Korak 1 se očitava iz zatečenog kanala. PONISTEN se ne računa — oglas je
     // uklonjen zbog povrede Uslova, pa doprinos ne postoji ni kao zabeležen.
     prisma.doprinosSadrzaju.findFirst({
@@ -60,19 +149,6 @@ export async function preracunajUcinak(userId: string): Promise<Ucinak> {
         status: { in: [DoprinosStatus.ZABELEZEN, DoprinosStatus.EVIDENTIRAN] },
       },
       select: { id: true },
-    }),
-    prisma.razmena.findMany({
-      where: {
-        status: RazmenaStatus.REALIZOVANA,
-        OR: [{ oglasivacId: userId }, { sagovornikId: userId }],
-      },
-      select: {
-        oglasivacId: true,
-        sagovornikId: true,
-        vanLanca: true,
-        oglasivac: { select: { tipKorisnika: true } },
-        sagovornik: { select: { tipKorisnika: true } },
-      },
     }),
     // Oglas uklonjen zbog povrede Uslova se ne broji (Uslovi čl. 25 st. 2) —
     // inače bi se korak 3 prolazio i sadržajem koji je Fondacija skinula.
@@ -83,61 +159,16 @@ export async function preracunajUcinak(userId: string): Promise<Ucinak> {
       where: { oglas: { sellerId: userId, status: { not: "UKLONJEN" } } },
       select: { oglasId: true, posiljacId: true },
     }),
+    dohvatiSagovornike(userId),
   ]);
-
-  const razmene: RazmenaZapis[] = razmeneDb.map((r) => {
-    const jaSamOglasivac = r.oglasivacId === userId;
-    const drugi = jaSamOglasivac ? r.sagovornik : r.oglasivac;
-    return {
-      sagovornikId: jaSamOglasivac ? r.sagovornikId : r.oglasivacId,
-      vanLanca: r.vanLanca,
-      sagovornikVerifikovan: drugi.tipKorisnika !== "NEVERIFIKOVAN",
-    };
-  });
-
-  const tokovi = wallet ? await dohvatiPoenTokove(wallet.id) : [];
-  const sagovornici = sagovorniciUBrojacu(razmene, tokovi);
-
-  // Korak 2 traži da je POEN otišao KA sagovorniku koji je prošao sva tri sita.
-  const poslaoKome = new Set(tokovi.filter((t) => t.smer === "KA").map((t) => t.drugiId));
-  const poslaoPoenSagovorniku = [...sagovornici].some((id) => poslaoKome.has(id));
 
   return {
     prviOglasZabelezen: prviOglas !== null,
-    poslaoPoenSagovorniku,
+    upisaoSagovorniku: upisaoSagovorniku(sagovornici),
     brojOglasa,
     oglasaSaRazlicitimUpitima: brojOglasaSaRazlicitimUpitima(upiti),
-    brojSagovornika: sagovornici.size,
+    brojSagovornika: sagovorniciUBrojacu(sagovornici).size,
   };
-}
-
-/**
- * Tokovi POEN-a između korisnika i ostalih ljudi. Uzimaju se SAMO prenosi između
- * korisnika (`TRANSFER`) — emisije Protokola nisu razmena i ne mogu zatvoriti krug.
- * Novčanici Krugova nemaju `userId` i ispadaju sami.
- */
-async function dohvatiPoenTokove(walletId: string): Promise<PoenTok[]> {
-  const transakcije = await prisma.transaction.findMany({
-    where: {
-      type: TransactionType.TRANSFER,
-      OR: [{ fromWalletId: walletId }, { toWalletId: walletId }],
-    },
-    select: {
-      fromWalletId: true,
-      createdAt: true,
-      fromWallet: { select: { userId: true } },
-      toWallet: { select: { userId: true } },
-    },
-  });
-
-  const tokovi: PoenTok[] = [];
-  for (const t of transakcije) {
-    const jaSamPosiljalac = t.fromWalletId === walletId;
-    const drugiId = jaSamPosiljalac ? t.toWallet?.userId : t.fromWallet?.userId;
-    if (!drugiId) continue;
-    tokovi.push({ drugiId, smer: jaSamPosiljalac ? "KA" : "OD", kada: t.createdAt });
-  }
-  return tokovi;
 }
 
 // ─── Napredovanje po lestvici ────────────────────────────────────────────────
@@ -147,10 +178,11 @@ async function dohvatiPoenTokove(walletId: string): Promise<PoenTok[]> {
  * indeks nad `(userId, korak)` znači da dva paralelna okidača ne mogu da zabeleže
  * isti korak dvaput, a opseg 2–5 drži doživotnu kapu.
  *
- * Već zabeležen korak se NE poništava kad brojač kasnije padne. Povratni tok
- * POEN-a posle dodeljenog koraka izbacuje sagovornika iz brojača za BUDUĆE
- * korake, ali zapis POEN-a koji je već nastao ne poništava unazad — poništavanje
- * evidencije ima svoj postupak (dokaz stvarnosti Glava VIII) i ne radi se usput.
+ * Već zabeležen korak se NE poništava kad brojač kasnije padne. Brojač jeste
+ * živa vrednost — ko kasnije verifikuje nekoga sa kim je razmenjivao, tog čoveka
+ * gubi iz brojača, jer mu više nije van kruga poznanstava. To utiče na BUDUĆE
+ * korake; zapis POEN-a koji je već nastao ne poništava se unazad (poništavanje
+ * evidencije ima svoj postupak — dokaz stvarnosti Glava VIII).
  *
  * MORA se zvati VAN `prisma.$transaction()`. Ne baca.
  *
@@ -317,155 +349,8 @@ async function javiEvidentiranKorak(
   }
 }
 
-// ─── Razmena povodom oglasa ──────────────────────────────────────────────────
-
-export type PotvrdaRezultat =
-  | { ok: true; status: RazmenaStatus }
-  | { ok: false; razlog: string; status: 400 | 403 | 404 };
-
 /**
- * Označava razmenu povodom oglasa kao realizovanu, iz ugla jedne strane.
- * Razmena postaje `REALIZOVANA` tek kad je označe OBE strane — zapis je
- * evidencija saglasnih izjava, ne potvrda Fondacije (Pravilnik čl. 16: za
- * razmenu odgovaraju sami korisnici, Protokol ne posreduje).
- *
- * Oglašivač može da imenuje samo onoga ko mu se povodom oglasa javio; sagovornik
- * može sam sebe. Time nijedna strana ne može da izmisli razmenu sa nekim ko za
- * oglas ne zna.
- *
- * MORA se zvati VAN `prisma.$transaction()` — po realizaciji vodi u
- * `probajNapredovati()`, a taj u `emitujPoen()`.
- */
-export async function potvrdiRazmenu(input: {
-  oglasId: string;
-  korisnikId: string;
-  /** Koga oglašivač imenuje. Ignoriše se kad potvrđuje sagovornik. */
-  sagovornikId?: string;
-}): Promise<PotvrdaRezultat> {
-  const oglas = await prisma.marketplaceListing.findUnique({
-    where: { id: input.oglasId },
-    select: { id: true, sellerId: true, status: true },
-  });
-  if (!oglas) return { ok: false, razlog: "Oglas nije pronađen.", status: 404 };
-  if (oglas.status === "UKLONJEN")
-    return { ok: false, razlog: "Oglas je uklonjen.", status: 400 };
-
-  const jeOglasivac = oglas.sellerId === input.korisnikId;
-  const sagovornikId = jeOglasivac ? input.sagovornikId : input.korisnikId;
-  if (!sagovornikId)
-    return { ok: false, razlog: "Nije naveden sagovornik razmene.", status: 400 };
-  if (sagovornikId === oglas.sellerId)
-    return { ok: false, razlog: "Razmena traži dve strane.", status: 400 };
-
-  const postojeca = await prisma.razmena.findUnique({
-    where: { oglasId_sagovornikId: { oglasId: oglas.id, sagovornikId } },
-    select: { id: true, status: true },
-  });
-
-  // Oglašivač ne može da izmisli sagovornika: ili se taj već javio povodom
-  // oglasa, ili je sam otvorio zapis razmene.
-  if (jeOglasivac && !postojeca) {
-    const upit = await prisma.oglasUpit.findUnique({
-      where: { oglasId_posiljacId: { oglasId: oglas.id, posiljacId: sagovornikId } },
-      select: { id: true },
-    });
-    if (!upit)
-      return {
-        ok: false,
-        razlog: "Taj korisnik se nije javio povodom ovog oglasa.",
-        status: 400,
-      };
-  }
-
-  if (postojeca?.status === RazmenaStatus.ODBIJENA)
-    return { ok: false, razlog: "Razmena je već odbijena.", status: 400 };
-  if (postojeca?.status === RazmenaStatus.REALIZOVANA)
-    return { ok: true, status: RazmenaStatus.REALIZOVANA };
-
-  const sada = new Date();
-  const mojaPotvrda = jeOglasivac
-    ? { potvrdioOglasivacAt: sada }
-    : { potvrdioSagovornikAt: sada };
-
-  const razmena = await prisma.razmena.upsert({
-    where: { oglasId_sagovornikId: { oglasId: oglas.id, sagovornikId } },
-    create: { oglasId: oglas.id, oglasivacId: oglas.sellerId, sagovornikId, ...mojaPotvrda },
-    update: mojaPotvrda,
-    select: { id: true, potvrdioOglasivacAt: true, potvrdioSagovornikAt: true },
-  });
-
-  if (!razmena.potvrdioOglasivacAt || !razmena.potvrdioSagovornikAt)
-    return { ok: true, status: RazmenaStatus.PREDLOZENA };
-
-  // Obe strane su se izjasnile — razmena je realizovana. „Van lanca" se utvrđuje
-  // OVDE i trajno pamti: kasniji rast lanca ne poništava izbrojane sagovornike.
-  const vanLanca = await suVanLanca(oglas.sellerId, sagovornikId);
-  const zatvoreno = await prisma.razmena.updateMany({
-    where: { id: razmena.id, status: RazmenaStatus.PREDLOZENA },
-    data: { status: RazmenaStatus.REALIZOVANA, realizovanoAt: sada, vanLanca },
-  });
-
-  // Napreduju obe strane — razmena je za oboje jedan sagovornik više. Van
-  // transakcije i sekvencijalno (svaki poziv vodi u sopstvenu emisiju).
-  if (zatvoreno.count === 1) {
-    await probajNapredovati(oglas.sellerId);
-    await probajNapredovati(sagovornikId);
-  }
-  return { ok: true, status: RazmenaStatus.REALIZOVANA };
-}
-
-/** Odbijanje tvrdnje o razmeni — druga strana kaže da je nije bilo. */
-export async function odbijRazmenu(input: {
-  oglasId: string;
-  korisnikId: string;
-  sagovornikId?: string;
-}): Promise<PotvrdaRezultat> {
-  const oglas = await prisma.marketplaceListing.findUnique({
-    where: { id: input.oglasId },
-    select: { sellerId: true },
-  });
-  if (!oglas) return { ok: false, razlog: "Oglas nije pronađen.", status: 404 };
-
-  const jeOglasivac = oglas.sellerId === input.korisnikId;
-  const sagovornikId = jeOglasivac ? input.sagovornikId : input.korisnikId;
-  if (!sagovornikId)
-    return { ok: false, razlog: "Nije naveden sagovornik razmene.", status: 400 };
-
-  // Realizovana razmena se ne obara odbijanjem — po njoj su već mogli nastati
-  // zapisi POEN-a, a oni se poništavaju samo propisanim postupkom.
-  const odbijeno = await prisma.razmena.updateMany({
-    where: {
-      oglasId: input.oglasId,
-      sagovornikId,
-      status: RazmenaStatus.PREDLOZENA,
-    },
-    data: { status: RazmenaStatus.ODBIJENA, odbioId: input.korisnikId },
-  });
-  if (odbijeno.count === 0)
-    return { ok: false, razlog: "Nema razmene koja čeka izjašnjenje.", status: 400 };
-  return { ok: true, status: RazmenaStatus.ODBIJENA };
-}
-
-/**
- * Da li su dvoje van međusobnog lanca jemstva. Očitava se iz keša
- * `verification_zone` — iste tabele po kojoj se sudi ko koga sme da verifikuje.
- * Zona obuhvata uzlaznu i silaznu liniju, braću i preuzete zone, pa je „nije ni
- * u čijoj zoni" upravo „van lanca".
- */
-async function suVanLanca(a: string, b: string): Promise<boolean> {
-  const uZoni = await prisma.verifikacionaZona.count({
-    where: {
-      OR: [
-        { userId: a, forbiddenUserId: b },
-        { userId: b, forbiddenUserId: a },
-      ],
-    },
-  });
-  return uZoni === 0;
-}
-
-/**
- * Preračunava putanju svima koji su sa ovim korisnikom obavili razmenu.
+ * Preračunava putanju svima sa kojima je ovaj korisnik razmenio POEN.
  *
  * Zove se po VERIFIKACIJI: razmena sa neverifikovanim korisnikom se beleži, a u
  * brojač ulazi tek kad on bude verifikovan — pa u tom trenutku tuđi brojači
@@ -476,18 +361,8 @@ async function suVanLanca(a: string, b: string): Promise<boolean> {
  */
 export async function osveziSagovornike(userId: string): Promise<void> {
   try {
-    const razmene = await prisma.razmena.findMany({
-      where: {
-        status: RazmenaStatus.REALIZOVANA,
-        OR: [{ oglasivacId: userId }, { sagovornikId: userId }],
-      },
-      select: { oglasivacId: true, sagovornikId: true },
-    });
-    const drugi = new Set<string>();
-    for (const r of razmene) {
-      drugi.add(r.oglasivacId === userId ? r.sagovornikId : r.oglasivacId);
-    }
-    for (const id of drugi) await probajNapredovati(id);
+    const sagovornici = await dohvatiSagovornike(userId);
+    for (const s of sagovornici) await probajNapredovati(s.drugiId);
   } catch (e) {
     console.error("[doprinos-razmeni] osvežavanje sagovornika nije uspelo", { userId, e });
   }

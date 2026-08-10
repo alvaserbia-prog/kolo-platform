@@ -11,6 +11,12 @@
  *   4. razmene sa 5 različitih osoba van tvog lanca
  *   5. razmene sa 10 različitih osoba van tvog lanca
  *
+ * 🔴 „Razmena" je ovde UPIS POEN-a od najmanje `MIN_IZNOS_TRANSAKCIJE`, ništa
+ * drugo. Nema ručnog označavanja razmene i nema zapisa o njoj: broje se same
+ * transakcije. Razlog je što upis POEN-a već jeste izjava obe strane — jedan ga
+ * je poslao, drugi ga je zadržao — pa dodatna potvrda ne bi donela nijedan
+ * podatak koji transakcija sama ne nosi.
+ *
  * Koraci se otključavaju REDOM — korak 4 ne može pre koraka 3, čak i kad je broj
  * sagovornika odavno dovoljan. Korak 1 je ZATEČENI doprinos sadržaju (čl. 40a) i
  * ovde se samo očitava; njegov iznos i odloženo evidentiranje se ne diraju.
@@ -30,86 +36,85 @@ export const POSLEDNJI_KORAK = 5;
 /** Doživotna kapa po korisniku — zbir svih pet koraka. */
 export const KAPA = IZNOS_KORAKA * POSLEDNJI_KORAK;
 
+/**
+ * Najmanji upis POEN-a koji brojač prihvata kao pravu razmenu.
+ *
+ * Bez praga bi lestvica prolazila upisima od jednog POEN-a: deset ljudi, deset
+ * simboličnih upisa, 4.000 POEN. Prag je namerno jednak iznosu jednog koraka —
+ * razmena mora vredeti bar onoliko koliko korak nosi.
+ *
+ * Meri se PO TRANSAKCIJI, ne po zbiru sa istim čovekom: pet upisa od po 200 POEN
+ * nisu razmena od 1.000, nego pet sitnih. Ko razmenjuje nešto što vredi manje,
+ * i dalje to radi normalno — samo ne pomera lestvicu.
+ */
+export const MIN_IZNOS_TRANSAKCIJE = 1000;
+
 /** Korak 3: koliko oglasa i koliko njih sa upitom različitih korisnika. */
 export const PRAG_OGLASA = 3;
 export const PRAG_OGLASA_SA_UPITOM = 2;
 
 /**
- * Koraci 4 i 5: koliko različitih sagovornika van lanca.
+ * Koraci 4 i 5: koliko različitih sagovornika van kruga poznanstava.
  *
- * 🟡 Korak 5 traži deset realizovanih razmena sa deset različitih ljudi van
- * lanca. U zatečenom obimu sistema (nekoliko desetina transakcija) to je vrh
- * putanje koji će praktično stajati mesecima — lestvica će se u početku
- * zaustavljati na koraku 3. Ako treba da radi odmah, spušta se OVDE, na jednom
- * mestu, bez ijedne druge izmene.
+ * 🟡 Korak 5 traži deset ljudi van lanca. U zatečenom obimu sistema (nekoliko
+ * desetina transakcija) to je vrh putanje koji će praktično stajati mesecima —
+ * lestvica će se u početku zaustavljati na koraku 3. Ako treba da radi odmah,
+ * spušta se OVDE, na jednom mestu, bez ijedne druge izmene.
  */
 export const PRAG_SAGOVORNIKA_KORAK_4 = 5;
 export const PRAG_SAGOVORNIKA_KORAK_5 = 10;
 
 /**
- * Rok povratnog toka POEN-a. Ako se POEN vrati istoj osobi u ovom roku,
- * sagovornik ispada iz brojača — to je razmena koja je u evidenciji zatvorila
- * krug sama sa sobom, a lestvica plaća širenje mreže, ne vrtenje u mestu.
+ * Jedan čovek sa kojim je korisnik razmenio POEN, sa svime što brojač o njemu
+ * treba da zna. Više transakcija sa istim čovekom daje JEDAN ovakav zapis —
+ * sagovornik se za celu lestvicu broji jednom.
  */
-export const POVRATNI_ROK_DANA = 60;
-export const POVRATNI_ROK_MS = POVRATNI_ROK_DANA * 24 * 60 * 60 * 1000;
-
-/** Jedna realizovana razmena, iz ugla korisnika za koga se broji. */
-export type RazmenaZapis = {
-  sagovornikId: string;
+export type PoenSagovornik = {
+  drugiId: string;
   /**
-   * Da li su strane bile van međusobnog lanca jemstva. Vrednost je SNIMLJENA u
-   * trenutku razmene i ovde se samo čita — kasniji rast lanca ne poništava
-   * izbrojane sagovornike.
+   * Da li je između njih dvoje prošao bar jedan upis od `MIN_IZNOS_TRANSAKCIJE`
+   * ili više. Sitniji upisi postoje, ali brojač ih ne prihvata kao razmenu.
+   */
+  pravaTransakcija: boolean;
+  /**
+   * Da li je van kruga poznanstava: nijedno od njih dvoje nije u zabranjenoj
+   * zoni onog drugog (graf verifikacija). Ista tabela po kojoj se sudi ko koga
+   * sme da verifikuje.
    */
   vanLanca: boolean;
   /**
    * Da li je sagovornik verifikovan. Razmena sa neverifikovanim korisnikom se
-   * beleži, a u brojač ulazi tek kad on bude verifikovan — zato je ovo TEKUĆE
-   * stanje sagovornika, a ne snimak.
+   * beleži, a u brojač ulazi tek kad on bude verifikovan — inače bi se lestvica
+   * prolazila upisima u prazne naloge.
    */
-  sagovornikVerifikovan: boolean;
+  verifikovan: boolean;
+  /**
+   * Da li je korisnik NJEMU upisao POEN u pravoj transakciji (bar jednom) —
+   * uslov koraka 2. Smer se gleda samo tu; koracima 4 i 5 smer nije bitan.
+   */
+  jaSamUpisao: boolean;
 };
 
-/** Jedan tok POEN-a između korisnika i sagovornika. `KA` = ka sagovorniku. */
-export type PoenTok = { drugiId: string; smer: "KA" | "OD"; kada: Date };
-
-/**
- * Da li je POEN između korisnika i ovog sagovornika zatvorio krug u roku.
- * Traži se par tokova u SUPROTNIM smerovima čiji su trenuci najviše
- * `POVRATNI_ROK_DANA` dana razmaknuti; smer prvog nije bitan (i „vratio mi je"
- * i „vratio sam mu" zatvaraju isti krug).
- */
-export function postojiPovrat(tokovi: PoenTok[], drugiId: string): boolean {
-  const ka = tokovi.filter((t) => t.drugiId === drugiId && t.smer === "KA");
-  const od = tokovi.filter((t) => t.drugiId === drugiId && t.smer === "OD");
-  for (const a of ka) {
-    for (const b of od) {
-      if (Math.abs(a.kada.getTime() - b.kada.getTime()) <= POVRATNI_ROK_MS) return true;
-    }
-  }
-  return false;
+/** Tri sita brojača: prava transakcija, van kruga poznanstava, verifikovan. */
+function ulaziUBrojac(s: PoenSagovornik): boolean {
+  return s.pravaTransakcija && s.vanLanca && s.verifikovan;
 }
 
 /**
- * Sagovornici koji ulaze u brojač lestvice. Tri sita, sva tri iz pravila brojača:
- *  - razmena mora biti van lanca (utvrđeno u trenutku razmene, trajno);
- *  - sagovornik mora biti verifikovan (do tada je razmena samo zabeležena);
- *  - između njih dvoje ne sme biti povratnog toka POEN-a u roku od 60 dana.
- *
- * Svaki sagovornik broji se JEDNOM za celu lestvicu — otud skup, ne broj razmena.
+ * Sagovornici koji ulaze u brojač lestvice. Smer upisa nije bitan za korake 4 i
+ * 5 — bitno je da je POEN prošao između dvoje ljudi koje graf ne povezuje.
  */
-export function sagovorniciUBrojacu(
-  razmene: RazmenaZapis[],
-  tokovi: PoenTok[],
-): Set<string> {
+export function sagovorniciUBrojacu(sagovornici: PoenSagovornik[]): Set<string> {
   const skup = new Set<string>();
-  for (const r of razmene) {
-    if (!r.vanLanca || !r.sagovornikVerifikovan) continue;
-    if (postojiPovrat(tokovi, r.sagovornikId)) continue;
-    skup.add(r.sagovornikId);
+  for (const s of sagovornici) {
+    if (ulaziUBrojac(s)) skup.add(s.drugiId);
   }
   return skup;
+}
+
+/** Korak 2: postoji li sagovornik iz brojača kome je korisnik upisao POEN. */
+export function upisaoSagovorniku(sagovornici: PoenSagovornik[]): boolean {
+  return sagovornici.some((s) => ulaziUBrojac(s) && s.jaSamUpisao);
 }
 
 /**
@@ -160,8 +165,8 @@ export function brojOglasaSaRazlicitimUpitima(
 export type Ucinak = {
   /** Korak 1 — postoji zabeležen ili evidentiran doprinos sadržaju (čl. 40a). */
   prviOglasZabelezen: boolean;
-  /** Korak 2 — postoji sagovornik iz brojača kome je korisnik upisao POEN. */
-  poslaoPoenSagovorniku: boolean;
+  /** Korak 2 — korisnik je upisao POEN nekome iz brojača. */
+  upisaoSagovorniku: boolean;
   /** Korak 3 — broj oglasa korisnika (uklonjeni zbog povrede Uslova se ne broje). */
   brojOglasa: number;
   /** Korak 3 — oglasi uparivi sa upitima različitih korisnika. */
@@ -173,7 +178,7 @@ export type Ucinak = {
 export function prazanUcinak(): Ucinak {
   return {
     prviOglasZabelezen: false,
-    poslaoPoenSagovorniku: false,
+    upisaoSagovorniku: false,
     brojOglasa: 0,
     oglasaSaRazlicitimUpitima: 0,
     brojSagovornika: 0,
@@ -186,7 +191,7 @@ export function korakIspunjen(korak: number, u: Ucinak): boolean {
     case 1:
       return u.prviOglasZabelezen;
     case 2:
-      return u.poslaoPoenSagovorniku;
+      return u.upisaoSagovorniku;
     case 3:
       return u.brojOglasa >= PRAG_OGLASA && u.oglasaSaRazlicitimUpitima >= PRAG_OGLASA_SA_UPITOM;
     case 4:
@@ -207,26 +212,4 @@ export function dostignutKorak(u: Ucinak): number {
   let k = 0;
   while (k < POSLEDNJI_KORAK && korakIspunjen(k + 1, u)) k += 1;
   return k;
-}
-
-/** Šta korisniku još nedostaje za sledeći korak — za prikaz putanje. */
-export function opisNapretka(u: Ucinak): {
-  dostignut: number;
-  sledeci: number | null;
-  /** Postignuto/potrebno za sledeći korak; `null` kad je lestvica završena. */
-  napredak: { imam: number; treba: number } | null;
-} {
-  const dostignut = dostignutKorak(u);
-  if (dostignut >= POSLEDNJI_KORAK) return { dostignut, sledeci: null, napredak: null };
-  const sledeci = dostignut + 1;
-  const napredak =
-    sledeci === 1 || sledeci === 2
-      ? { imam: 0, treba: 1 }
-      : sledeci === 3
-        ? { imam: Math.min(u.brojOglasa, PRAG_OGLASA), treba: PRAG_OGLASA }
-        : {
-            imam: u.brojSagovornika,
-            treba: sledeci === 4 ? PRAG_SAGOVORNIKA_KORAK_4 : PRAG_SAGOVORNIKA_KORAK_5,
-          };
-  return { dostignut, sledeci, napredak };
 }

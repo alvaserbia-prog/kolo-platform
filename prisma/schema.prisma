@@ -284,8 +284,6 @@ model User {
   prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
   doprinosSadrzaju                 DoprinosSadrzaju?
   doprinosiRazmeni                 DoprinosRazmeni[]
-  razmeneKaoOglasivac              Razmena[]                 @relation("RazmenaOglasivac")
-  razmeneKaoSagovornik             Razmena[]                 @relation("RazmenaSagovornik")
   oglasUpiti                       OglasUpit[]
   praceneKategorije                FollowedCategory[]
   krugClanstva                     KrugClanstvo[]
@@ -578,7 +576,6 @@ model MarketplaceListing {
 
   prijave   PrijavaOglasa[]
   doprinosi DoprinosSadrzaju[]
-  razmene   Razmena[]
   upiti     OglasUpit[]
 
   @@index([status, category, createdAt])
@@ -686,53 +683,6 @@ model DoprinosSadrzaju {
 }
 
 // ─── Doprinos razmeni — putanja prvog kruga (čl. 40a, lestvica od 5 koraka) ───
-
-/// Stanje razmene povodom oglasa. U brojač putanje ulazi ISKLJUČIVO `REALIZOVANA`
-/// — razmena koju su OBE strane označile kao obavljenu. Jednostrana tvrdnja ne
-/// vredi ništa: bez druge strane bi lestvica bila samoposluživanje.
-enum RazmenaStatus {
-  PREDLOZENA
-  REALIZOVANA
-  ODBIJENA
-}
-
-/// Razmena dobra ili usluge povodom oglasa, sa obostranom potvrdom.
-///
-/// Fondacija ovim NE posreduje u razmeni i ne jemči za nju (Pravilnik čl. 16) —
-/// zapis je evidencija da su se dva korisnika izjasnila da je razmena obavljena,
-/// i služi isključivo brojaču putanje iz čl. 40a.
-model Razmena {
-  id      String             @id @default(uuid())
-  oglasId String
-  oglas   MarketplaceListing @relation(fields: [oglasId], references: [id], onDelete: Cascade)
-
-  /// Oglašivač (vlasnik oglasa) — denormalizovan iz oglasa radi upita po strani.
-  oglasivacId  String
-  oglasivac    User   @relation("RazmenaOglasivac", fields: [oglasivacId], references: [id], onDelete: Cascade)
-  sagovornikId String
-  sagovornik   User   @relation("RazmenaSagovornik", fields: [sagovornikId], references: [id], onDelete: Cascade)
-
-  potvrdioOglasivacAt  DateTime?
-  potvrdioSagovornikAt DateTime?
-  /// Ko je odbio tvrdnju o razmeni (postoji samo uz ODBIJENA).
-  odbioId              String?
-
-  status        RazmenaStatus @default(PREDLOZENA)
-  realizovanoAt DateTime?
-
-  /// Da li su strane bile van međusobnog lanca jemstva. Utvrđuje se U TRENUTKU
-  /// realizacije i TRAJNO pamti — kasniji rast lanca ne poništava izbrojane
-  /// sagovornike. Zato je kolona, a ne izvedena vrednost iz `verification_zone`.
-  vanLanca Boolean @default(false)
-
-  createdAt DateTime @default(now())
-
-  /// Jedan oglas + jedan sagovornik = jedna razmena. Sagovornik se za celu
-  /// lestvicu ionako broji jednom, pa ponavljanje preko istog oglasa nema smisla.
-  @@unique([oglasId, sagovornikId])
-  @@index([oglasivacId, status])
-  @@index([sagovornikId, status])
-}
 
 /// Upit povodom oglasa — trag da se neko javio oglašivaču (korak 3 lestvice).
 ///

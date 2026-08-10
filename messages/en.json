@@ -354,7 +354,7 @@
     "putanja_zabelezen": "Noted — the record is created upon verification",
     "putanja_na_redu": "Met — being recorded shortly",
     "putanja_zakljucan": "Not unlocked yet",
-    "putanja_pravila": "Only exchanges tied to a listing and marked as completed by both sides count, and only with counterparts outside your chain of vouching. Each counterpart counts once. If POEN returns to the same person within 60 days, that counterpart drops out of the count. An exchange with an unverified user is noted, but counts only once they are verified. Currently counted: {sagovornika}."
+    "putanja_pravila": "The count includes POEN records of at least 1,000 POEN with people outside your circle of acquaintance (the vouching graph). Each counterpart counts once, however many records there are. A record with a user who is not yet verified is noted, but counts only once they are verified. Currently counted: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Identity verification",
@@ -1663,17 +1663,7 @@
     "neverif_opis": "You may post an offer only — something you provide. The listing needs a photo, a description of at least {min} characters, a category and a place. Your first such listing earns you a contribution of {iznos} POEN, recorded once someone verifies you or transfers POEN to you.",
     "neverif_preostalo": "Active listings you may still post: {broj}.",
     "oznaka_neverifikovan": "unverified",
-    "oznaka_neverifikovan_opis": "This advertiser is not yet verified in the chain of vouching. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
-    "razmena_naslov": "Exchange for this listing",
-    "razmena_opis_oglasivac": "Once both sides mark the exchange, it enters the exchange contribution path. The Foundation does not mediate or vouch for the exchange.",
-    "razmena_opis_sagovornik": "If the exchange took place, mark it — once the other side marks it too, it enters the exchange contribution path.",
-    "razmena_oznaci": "The exchange took place",
-    "razmena_odbij": "There was no exchange",
-    "razmena_ceka_drugu_stranu": "Waiting for the other side",
-    "razmena_realizovana": "Marked by both sides",
-    "razmena_odbijena": "Declined",
-    "razmena_ja": "You",
-    "razmena_greska": "That did not work. Please try again."
+    "oznaka_neverifikovan_opis": "This advertiser is not yet verified in the chain of vouching. You deal with each other directly — the Foundation neither mediates nor bears responsibility."
   },
   "pocetna": {
     "dobrodoslice": "Welcome, <ime>{pseudonim}</ime>",
