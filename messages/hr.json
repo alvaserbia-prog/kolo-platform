@@ -342,7 +342,7 @@
     "samo_primalac": "Dok nisi potvrđen/a možeš samo primati POEN. Upis u tuđu evidenciju otvara se nakon potvrde.",
     "nadoknada_naslov": "Naknada",
     "nadoknada_opis": "Nastala je poništenjem lažne potvrde koju si obavio. Nije dug i ne može se naplatiti — POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena; upis POEN drugome moguć je kad zapis prijeđe nulu.",
-    "putanja_naslov": "Putanja doprinosa razmjeni",
+    "putanja_naslov": "Doprinosi razmjeni",
     "putanja_opis": "Pet koraka, svaki 1.000 POEN. Otključavaju se redom, a ukupno se po korisniku evidentira najviše 5.000 POEN.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
     "putanja_korak_1": "Prvi oglas sa sadržajnim minimumom i prva razmjena u kojoj ti netko evidentira POEN u korist",
