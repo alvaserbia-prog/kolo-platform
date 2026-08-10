@@ -1,0 +1,667 @@
+<title>Potvrda i verifikacija — popis i razgraničenje</title>
+<style>
+:root{
+  --paper:#F6F7F4; --surface:#FFFFFF; --surface-2:#EFF1ED;
+  --ink:#191C19; --ink-2:#4C534D; --ink-3:#7E857F;
+  --rule:#D7DCD6; --rule-2:#E7EBE6;
+  --v:#2B3F6B; --v-bg:#E7ECF6; --v-rule:#9DB0D6;
+  --p:#2C6A5C; --p-bg:#E2EEEA; --p-rule:#8FC0B4;
+  --warn:#93411E; --warn-bg:#F7E9E1; --warn-rule:#D9A184;
+  --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#131612; --surface:#1A1E1A; --surface-2:#222722;
+  --ink:#E8EBE6; --ink-2:#A9B1AA; --ink-3:#79817B;
+  --rule:#2F352F; --rule-2:#252A25;
+  --v:#9EB6E6; --v-bg:#1C2436; --v-rule:#3E5382;
+  --p:#77C6B2; --p-bg:#162925; --p-rule:#2F6455;
+  --warn:#E09669; --warn-bg:#2C1E15; --warn-rule:#7A4526;
+}}
+:root[data-theme="dark"]{
+  --paper:#131612; --surface:#1A1E1A; --surface-2:#222722;
+  --ink:#E8EBE6; --ink-2:#A9B1AA; --ink-3:#79817B;
+  --rule:#2F352F; --rule-2:#252A25;
+  --v:#9EB6E6; --v-bg:#1C2436; --v-rule:#3E5382;
+  --p:#77C6B2; --p-bg:#162925; --p-rule:#2F6455;
+  --warn:#E09669; --warn-bg:#2C1E15; --warn-rule:#7A4526;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.62;margin:0;padding:0;-webkit-text-size-adjust:100%}
+.wrap{max-width:940px;margin:0 auto;padding:56px 22px 120px;display:flex;flex-direction:column;gap:0}
+p,li{max-width:74ch}
+a{color:var(--v)}
+code{font-family:var(--mono);font-size:.855em;background:var(--surface-2);
+  padding:.09em .34em;border-radius:3px;color:var(--ink-2);word-break:break-word}
+h1,h2,h3,h4{text-wrap:balance;font-weight:600;margin:0}
+.eyebrow{font-family:var(--sans);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 14px}
+h1{font-size:38px;line-height:1.14;letter-spacing:-.012em;margin:0 0 16px}
+.lede{font-size:19px;color:var(--ink-2);margin:0;max-width:66ch}
+hr.rule{border:0;border-top:1px solid var(--rule);margin:44px 0}
+
+/* brojke */
+.brojke{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:34px 0 0}
+.brojka{background:var(--surface);padding:16px 18px;display:flex;flex-direction:column;gap:3px}
+.brojka b{font-size:27px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.brojka span{font-family:var(--sans);font-size:11.5px;letter-spacing:.05em;color:var(--ink-3);line-height:1.35}
+
+/* legenda */
+.legenda{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;
+  font-family:var(--sans);font-size:13px;color:var(--ink-2);margin:26px 0 0}
+.t{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.06em;
+  display:inline-block;min-width:17px;text-align:center;padding:1px 4px;border-radius:2px;margin-right:3px}
+.tv{background:var(--v-bg);color:var(--v);border:1px solid var(--v-rule)}
+.tp{background:var(--p-bg);color:var(--p);border:1px solid var(--p-rule)}
+
+h2.deo{font-size:13px;font-family:var(--sans);letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);border-top:2px solid var(--ink);padding-top:12px;margin:56px 0 8px}
+h2.deo + p.uvod{color:var(--ink-2);margin:0 0 30px}
+
+/* registar instituta */
+.inst{border-left:3px solid var(--rule);padding:2px 0 2px 22px;margin:0 0 34px;
+  display:flex;flex-direction:column;gap:11px}
+.inst.fv{border-left-color:var(--v-rule)}
+.inst.fp{border-left-color:var(--p-rule)}
+.inst h3{font-size:22px;letter-spacing:-.008em;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.sec{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink-3)}
+.inst p{margin:0}
+.inst .kaze{font-family:var(--sans);font-size:13.5px;line-height:1.55;color:var(--ink-2);
+  background:var(--surface);border:1px solid var(--rule-2);padding:12px 14px;display:flex;
+  flex-direction:column;gap:7px;max-width:none}
+.kaze b{font-family:var(--sans);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:700}
+.presuda{font-family:var(--sans);font-size:13.5px;font-weight:600;display:inline-flex;
+  align-items:center;gap:8px;padding:7px 12px;border:1px solid;align-self:flex-start}
+.presuda.ostaje-v{background:var(--v-bg);border-color:var(--v-rule);color:var(--v)}
+.presuda.ostaje-p{background:var(--p-bg);border-color:var(--p-rule);color:var(--p)}
+.presuda.sredi{background:var(--warn-bg);border-color:var(--warn-rule);color:var(--warn)}
+
+/* nalaz */
+.nalaz{border:1px solid var(--warn-rule);background:var(--surface);margin:0 0 22px}
+.nalaz .n-glava{background:var(--warn-bg);color:var(--warn);font-family:var(--sans);
+  font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 16px;border-bottom:1px solid var(--warn-rule)}
+.nalaz .n-telo{padding:16px 16px 18px;display:flex;flex-direction:column;gap:11px}
+.nalaz h4{font-size:18px;margin:0}
+.nalaz p{margin:0;font-size:16px}
+.citat{font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--ink-2);
+  background:var(--surface-2);border-left:2px solid var(--rule);padding:10px 13px;max-width:none;
+  overflow-x:auto}
+
+/* tabele */
+.tw{overflow-x:auto;border:1px solid var(--rule);background:var(--surface);margin:0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-family:var(--sans)}
+th{text-align:left;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;padding:10px 13px;border-bottom:1px solid var(--rule);white-space:nowrap;
+  background:var(--surface-2);position:sticky;top:0}
+td{padding:9px 13px;border-bottom:1px solid var(--rule-2);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+td.c1{white-space:nowrap}
+td.c1 code{background:none;padding:0;color:var(--v)}
+td.c2,th.c2{white-space:nowrap;width:1%}
+.popis{margin:0 0 30px;display:flex;flex-direction:column;gap:10px}
+.popis h3{font-size:17px;font-family:var(--sans);font-weight:700;letter-spacing:-.005em;
+  display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.ct{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-3);
+  border:1px solid var(--rule);padding:1px 6px;border-radius:2px}
+.popis .tw{max-height:none}
+.popis td:last-child{font-family:var(--serif);font-size:15px;min-width:290px}
+
+.napomena{font-family:var(--sans);font-size:13.5px;color:var(--ink-3);margin:10px 0 0;max-width:74ch}
+footer{margin-top:58px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:var(--sans);font-size:12.5px;color:var(--ink-3)}
+@media (max-width:640px){
+  body{font-size:16px}
+  h1{font-size:29px}
+  .wrap{padding:38px 16px 80px}
+  .inst{padding-left:15px}
+  .popis td:last-child{min-width:230px}
+}
+</style>
+
+<div class="wrap">
+
+<p class="eyebrow">KOLO platforma · terminološki popis · 10.08.2026</p>
+<h1>Potvrda i verifikacija:<br>gde se sve pominju i šta je šta</h1>
+<p class="lede">Dve reči danas nose <b>osam različitih instituta</b>. Pre nego što se odluči da li jedna zamenjuje drugu, evo šta svaka od njih zapravo označava na kom mestu — i tri mesta na kojima sistem sam sebi protivreči.</p>
+
+<div class="brojke">
+  <div class="brojka"><b>283</b><span>stringa u <code>sr.json</code></span></div>
+  <div class="brojka"><b>1.572</b><span>pojave „verifik“ u <code>src/</code></span></div>
+  <div class="brojka"><b>721</b><span>pojava u aktima 4.2.1</span></div>
+  <div class="brojka"><b>8</b><span>zasebnih instituta</span></div>
+  <div class="brojka"><b>3</b><span>stvarna nereda</span></div>
+</div>
+
+<p class="legenda">
+  <span><span class="t tv">V</span> tekst sadrži „verifik…“</span>
+  <span><span class="t tp">P</span> tekst sadrži „potvrd…“</span>
+  <span>Leva linija uz institut: <b style="color:var(--v)">plava</b> = porodica verifikacije, <b style="color:var(--p)">zelena</b> = porodica potvrde.</span>
+</p>
+
+<hr class="rule">
+
+<h2 class="deo">Prvi deo · Registar instituta</h2>
+<p class="uvod">Osam radnji koje danas dele dve reči. Za svaku: šta je zapravo, gde živi, i šta bih zadržao.</p>
+
+<div class="inst fv">
+  <h3><span class="sec">§1</span> Verifikacija — dokaz stvarnosti</h3>
+  <p>Jedan čovek pod punom odgovornošću <b>tvrdi činjenicu</b>: da druga osoba postoji, da je jedinstvena i da nalogu pristupa baš ona. Nosi najteže posledice u celom sistemu — indeks +10 procentnih poena, upis 1.000 / 1.000 / 500 POEN, širenje zabranjene zone, a ako se utvrdi da je izjava neistinita, nadoknadu koja verifikatora gura u minus.</p>
+  <div class="kaze">
+    <span><b>Akti</b> <code>dokaz_stvarnosti_4_2_1</code> (106 pojava) · <code>Pravilnik_4_2_1</code> čl. 15, 32, 34 · <code>whitepaper</code> (95)</span>
+    <span><b>Baza</b> <code>VerifikacionaVeza</code> · <code>VerifikacijaToken</code> · <code>VerifikacionaZona</code> · <code>NEVERIFIKOVAN</code> · <code>EMISIJA_VERIFIKACIJA</code></span>
+    <span><b>Ekran</b> <code>/verifikacija</code> · 157 stringova</span>
+  </div>
+  <p class="presuda ostaje-v">Ostaje „verifikacija“ — reč mora da nosi težinu koju „potvrda“ nema</p>
+</div>
+
+<div class="inst fp">
+  <h3><span class="sec">§2</span> Lanac potvrda — struktura koju te radnje grade</h3>
+  <p>Mreža pojedinačnih izjava iz §1. Preimenovan iz „lanca jemstva“ juče, u verziji 4.2.1, i to s pravom: svaka karika je jedan iskaz jednog čoveka, a ne obavezivanje za tuđe ispunjenje.</p>
+  <div class="kaze">
+    <span><b>Akti</b> 57 pojava izraza „lanac potvrda“ u 6 akata — najviše u Pravilniku (19) i whitepaperu (20)</span>
+    <span><b>Ekran</b> stranica <code>/graf</code> · 38 stringova</span>
+  </div>
+  <p class="presuda ostaje-p">Ostaje „potvrda“ — ali vidi Nalaz B: stranica se i dalje zove „Graf verifikacija“</p>
+</div>
+
+<div class="inst fv">
+  <h3><span class="sec">§3</span> Nadzor verifikacije</h3>
+  <p>Nosilac ZRNA pregleda tuđu verifikaciju i upisuje ishod: <code>UREDNO</code>, <code>ZA_PROVERU</code> ili <code>SPORNO</code>. Prvi koji upiše bilo koji ishod dobija 500 POEN.</p>
+  <div class="kaze">
+    <span><b>Baza</b> <code>NadzorZapis</code> · <code>NadzorIshod</code> · <code>NadzorniPredmet</code></span>
+    <span><b>Ekran</b> <code>/nadzor</code> · 11 stringova</span>
+  </div>
+  <p class="presuda ostaje-v">Čist — ekran već govori „ishod“ i „uredno“, nigde „potvrdi“. Ovo je uzor kako se izbegava sudar.</p>
+</div>
+
+<div class="inst fp">
+  <h3><span class="sec">§4</span> Verifikatorska potvrda socijalnog programa</h3>
+  <p><b>Nema veze sa stvarnošću osobe.</b> Svih deset verifikatora podnosioca potvrđuje da on ispunjava uslov programa — da je majka, da je stariji, da se školuje. Ista osoba kao u §1, potpuno druga tvrdnja, i verifikatori pritom <i>ne vide</i> unete podatke.</p>
+  <div class="kaze">
+    <span><b>Akti</b> <code>programi_podrske_4_2_1</code> — izraz „verifikatorska potvrda“</span>
+    <span><b>Baza</b> <code>ProgramPotvrda</code> · <code>PotvrdaStatus</code> · relacija <code>VerifikatorPotvrda</code></span>
+    <span><b>Ekran</b> <code>/programi/potvrde</code> — „Zahtevi za potvrdu“ · 24 stringa</span>
+  </div>
+  <p class="presuda ostaje-p">Ostaje „potvrda“. Ovo je razlog broj jedan zašto §1 ne sme da se preimenuje — ime bi se sudarilo.</p>
+</div>
+
+<div class="inst fp">
+  <h3><span class="sec">§5</span> Potvrda izvršenja zadatka</h3>
+  <p>Operativni doprinos, čl. 36: čovek izvrši objavljen zadatak, pa nosioci ZRNA (u prvoj fazi Upravni odbor) ocenjuju da je posao stvarno urađen pre nego što Protokol upiše POEN.</p>
+  <div class="kaze">
+    <span><b>Akti</b> <code>operativni_4_2_1</code> (43 pojave „verifik“, 3 „potvrd“) · <code>Pravilnik</code> čl. 36</span>
+    <span><b>Baza</b> <code>OglasEvidencija</code> · <code>EvidencijaStatus</code></span>
+    <span><b>Ekran</b> <code>/doprinos-oglasi</code>, admin PED · 16 stringova</span>
+  </div>
+  <p class="presuda sredi">Ovde je nered — vidi Nalaz A. Isti čin ima dva imena, i u aktima i na ekranu.</p>
+</div>
+
+<div class="inst fp">
+  <h3><span class="sec">§6</span> Potvrda prijema sredstava</h3>
+  <p>Fondacija utvrđuje da je dinarski priliv stvarno stigao — po donaciji ili po ugovoru o pokroviteljstvu — i tek tada se upisuje bonus POEN. Uz to se istom rečju zove i <i>isprava</i>: „Fondacija izdaje potvrdu o donaciji na zahtev donatora“, što je poreski dokument, ne radnja.</p>
+  <div class="kaze">
+    <span><b>Akti</b> <code>donacije_4_2_1</code> · <code>Pravilnik</code> Glava o donacijama</span>
+    <span><b>Baza</b> <code>PokroviteljPrijavaStatus.POTVRDJENA</code> · <code>potvrdioId</code> · <code>potvrdjenoAt</code></span>
+    <span><b>Ekran</b> Donacije, Pokrovitelji, admin · 28 stringova</span>
+  </div>
+  <p class="presuda ostaje-p">Ostaje „potvrda“ — uz napomenu da radnju i ispravu vredi razlikovati u tekstu</p>
+</div>
+
+<div class="inst fv">
+  <h3><span class="sec">§7</span> Reverifikacija programa</h3>
+  <p>Periodična ponovna provera da korisnik i dalje ispunjava uslov socijalnog programa — Posebna briga na 365 dana, Školovanje na 183.</p>
+  <div class="kaze">
+    <span><b>Akti</b> <b style="color:var(--warn)">nijedna pojava</b> — reč postoji samo u kodu i na ekranu</span>
+    <span><b>Baza</b> <code>ProgramEnrollment.nextReverifikacija</code> · cron <code>/api/cron/programi-revizija</code></span>
+  </div>
+  <p class="presuda sredi">Vidi Nalaz C — institut radi u kodu, a akti ga ne poznaju pod tim imenom</p>
+</div>
+
+<div class="inst fp">
+  <h3><span class="sec">§8</span> Obično dugme „Potvrdi“</h3>
+  <p>Svakodnevno značenje reči, bez ikakvog instituta iza sebe: „Potvrdi brisanje naloga“, „Potvrdi veto“, „Potvrdi odbijanje“, „Da li ste sigurni…“.</p>
+  <div class="kaze"><span><b>Ekran</b> <code>common.potvrdi</code> i 6 srodnih mesta</span></div>
+  <p class="presuda ostaje-p">Nedodirljivo — ovo je razlog broj dva zašto §1 ne sme da postane „potvrda“</p>
+</div>
+
+<h2 class="deo">Drugi deo · Tri stvarna nereda</h2>
+<p class="uvod">Ovo je ono što bih sredio bez obzira na odluku o velikom preimenovanju. Sve troje je zateklo mene, ne tebe — nijedno nije nastalo juče.</p>
+
+<div class="nalaz">
+  <div class="n-glava">Nalaz A · akti sami sebi protivreče</div>
+  <div class="n-telo">
+    <h4>Potvrda izvršenja zadatka ima dva imena u istom pravilniku</h4>
+    <p>Pravilnik o operativnom doprinosu definiše ulogu jednom rečju, a opisuje njen posao drugom — u razmaku od nekoliko pasusa:</p>
+    <div class="citat">„<b>Verifikator</b> — lice ili telo ovlašćeno da <b>potvrdi</b> izvršenje zadatka…“<br><br>„Nakon izvršenja, nosioci ZRNA <b>verifikuju</b> izvršenje pre evidencije doprinosa.“</div>
+    <p>Ekran ponavlja isti razdor: status se zove <code>ev_ceka_verifikaciju</code> („Čeka verifikaciju“), a sledeći status <code>ev_potvrdeno</code> („Potvrđeno — u raspodeli“). Ista stavka, dva rečnika, jedan pored drugog u istoj listi.</p>
+    <p><b>Predlog:</b> ovde je „potvrda izvršenja“ tačnija — ne tvrdi se ničija stvarnost, nego da je posao urađen. Time se i reč „verifikacija“ oslobađa za §1, gde joj je mesto.</p>
+  </div>
+</div>
+
+<div class="nalaz">
+  <div class="n-glava">Nalaz B · ekran za pristanak tvrdi netačnu stvar</div>
+  <div class="n-telo">
+    <h4>„Verifikacija se od sada zove lanac potvrda“</h4>
+    <p>To je tekst koji <b>svaki član trenutno vidi</b> na ekranu za pristanak, jer je migracijom upisana verzija 4.2.1 i gejt je otvoren svima. Ključ je <code>politikaPrihvati.opis</code>.</p>
+    <p>Nije tačno. Preimenovan je <b>lanac</b> — iz „lanca jemstva“ u „lanac potvrda“. Verifikacija nije preimenovana ni u jednom aktu; i dalje je tako zove i Pravilnik i dokaz stvarnosti. Rečenica navodi člana da pomisli da je institut iz §1 promenio ime.</p>
+    <p>Isti nesklad, blaže: stranica se zove <b>„Graf verifikacija“</b>, a njen opis odmah ispod glasi <i>„Mreža potvrda: ko je koga verifikovao…“</i> — dva imena za istu sliku u dve uzastopne rečenice.</p>
+  </div>
+</div>
+
+<div class="nalaz">
+  <div class="n-glava">Nalaz C · institut bez osnova u aktima</div>
+  <div class="n-telo">
+    <h4>Reverifikacija postoji u kodu, ali je nema ni u jednom aktu</h4>
+    <p>Cron <code>/api/cron/programi-revizija</code> svake noći gasi prijave kojima je istekao rok, a ekran obećava „Reverifikacija svakih 6 meseci“. Pretraga svih petnaest akata 4.2.1 daje <b>nula pojava</b> te reči.</p>
+    <p>Rokovi (365 i 183 dana) žive samo u <code>programi.ts</code>. Ako se dira terminologija, ovo je prilika da se institut i imenuje u Pravilniku o programima podrške — sada radi na osnovu koda, ne akta.</p>
+  </div>
+</div>
+
+<h2 class="deo">Treći deo · Potpun popis, složen po institutu</h2>
+<p class="uvod">Svih 283 stringa iz <code>sr.json</code>, razvrstanih po tome <i>koju</i> od osam stvari zapravo opisuju. Oznaka pokazuje koja se reč u tekstu pojavljuje — gde stoje obe, tekst meša rečnike u istoj rečenici i vredi ga pogledati prvo.</p>
+<section class="popis" id="popis-V-STVARNOST">
+<h3><span class="sec">§1</span> Verifikacija — dokaz stvarnosti <span class="ct">157</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>nav.verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija</td></tr>
+<tr><td class="c1"><code>nav.verifikuj_nalog</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>common.verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovan</td></tr>
+<tr><td class="c1"><code>common.neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Neverifikovan</td></tr>
+<tr><td class="c1"><code>login.nalog_kreiran</code></td><td class="c2"><span class="t tv">V</span></td><td>Nalog je kreiran. Prijavi se za nastavak — verifikuje te neko ko te poznaje, ili se možeš predstaviti mreži.</td></tr>
+<tr><td class="c1"><code>odjavaObavestenja.objasnjenje</code></td><td class="c2"><span class="t tv">V</span></td><td>Ako kliknete na dugme ispod, više vam nećemo slati email obaveštenja o verifikaciji, porukama i odlukama. Zvonce u aplikaciji nastavlja da radi.</td></tr>
+<tr><td class="c1"><code>sistem.nalog_nije_verifikovan_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Nalog još nije verifikovan</td></tr>
+<tr><td class="c1"><code>sistem.nalog_nije_verifikovan_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Verifikacija ti otključava pun pristup — Pijacu, poruke i učešće u zajednici. Pri potvrdi se u tvom zapisu evidentira i prvih {iznos} doprinosa.</td></tr>
+<tr><td class="c1"><code>sistem.verifikuj_dugme</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>sistem.clanovi_pregled_blokiran</code></td><td class="c2"><span class="t tv">V</span></td><td>Pregled svih članova dostupan je verifikovanim članovima.</td></tr>
+<tr><td class="c1"><code>sistem.verifikuj_dugme_link</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>sistem.lok_uvod</code></td><td class="c2"><span class="t tv">V</span></td><td>Pregled područja odakle dolaze članovi. Kada se na jednom području okupi dovoljno verifikovanih članova, otključavaju se zajednički oblici organizovanja.</td></tr>
+<tr><td class="c1"><code>sistem.lok_clanova</code></td><td class="c2"><span class="t tv">V</span></td><td>{ukupno} članova · {verif} verifikovanih</td></tr>
+<tr><td class="c1"><code>sistem.lok_verifikovanih</code></td><td class="c2"><span class="t tv">V</span></td><td>verifikovanih</td></tr>
+<tr><td class="c1"><code>sistem.donacije_pregled_blokiran</code></td><td class="c2"><span class="t tv">V</span></td><td>Pregled donacija dostupan je verifikovanim članovima.</td></tr>
+<tr><td class="c1"><code>novcanik.prazno_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>POEN se beleži kroz učešće u zajednici — pri verifikaciji, razmeni dobara i usluga ili doprinosu. Počni tako što ćeš se verifikovati.</td></tr>
+<tr><td class="c1"><code>novcanik.prazno_verif_link</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>novcanik.zabelezen_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Evidentira se kad te neko verifikuje ili kad ti neko upiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.</td></tr>
+<tr><td class="c1"><code>novcanik.samo_primalac</code></td><td class="c2"><span class="t tv">V</span></td><td>Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.</td></tr>
+<tr><td class="c1"><code>novcanik.nadoknada_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Nastala je poništenjem lažne verifikacije koju si obavio. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena; upis POEN-a drugome moguć je kad zapis pređe nulu.</td></tr>
+<tr><td class="c1"><code>novcanik.putanja_zabelezen</code></td><td class="c2"><span class="t tv">V</span></td><td>Zabeleženo — zapis nastaje po verifikaciji</td></tr>
+<tr><td class="c1"><code>verifikacija.naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija identiteta</td></tr>
+<tr><td class="c1"><code>verifikacija.podnaslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacijom dobijate pristup celom sistemu i bonus od {iznos}.</td></tr>
+<tr><td class="c1"><code>verifikacija.dugme</code></td><td class="c2"><span class="t tv">V</span></td><td>Pošalji na verifikaciju</td></tr>
+<tr><td class="c1"><code>verifikacija.page_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija</td></tr>
+<tr><td class="c1"><code>verifikacija.podnaslov_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Pokaži svoj kod nekome ko može da te verifikuje.</td></tr>
+<tr><td class="c1"><code>verifikacija.prijava_link</code></td><td class="c2"><span class="t tv">V</span></td><td>Nešto nije u redu sa tvojom verifikacijom? Prijavi.</td></tr>
+<tr><td class="c1"><code>verifikacija.prijava_placeholder</code></td><td class="c2"><span class="t tv">V</span></td><td>Ukratko opiši šta nije u redu (npr. ne poznaješ osobu koja te je verifikovala).</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikuj nekoga</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_nema_prava</code></td><td class="c2"><span class="t tv">V</span></td><td>Nemaš pravo da verifikuješ druge. Razlog: nisi verifikovan, indeks ti je ispod 10%, ili nemaš slobodan slot (pričekaj nadzor).</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_potvrdi_obavezno</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Moraš potvrditi lično poznavanje i odgovornost.</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_uspeh_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija uspešna</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_uspeh_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>je verifikovan i dobio je pun pristup (indeks +10%).</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_uspeh_dugme</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikuj još nekoga</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_uputstvo</code></td><td class="c2"><span class="t tv">V</span></td><td>Reci osobi da otvori KOLO → Verifikacija → „Generiši kod”. Izaberi način:</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_oznaka_napomena</code></td><td class="c2"><span class="t tv">V</span></td><td>Opciono. Privatna oznaka da lakše pratiš koga si verifikovao — vide je samo ti i Fondacija, nije javna. Možeš je kasnije izmeniti.</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_potvrda</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Potvrđujem da ovu osobu poznajem lično i da svojom odgovornošću tvrdim da je stvarna, jedinstvena i da nalogu pristupa ista osoba (čl. 5 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>verifikacija.vn_dugme_potvrdi</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Potvrdi verifikaciju</td></tr>
+<tr><td class="c1"><code>verifikacija.qr_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Pokaži kod za verifikaciju</td></tr>
+<tr><td class="c1"><code>verifikacija.qr_uputstvo</code></td><td class="c2"><span class="t tv">V</span></td><td>Daj nekome ko može da te verifikuje da skenira QR ili da unese 6-cifren broj. Kod važi 2 sata.</td></tr>
+<tr><td class="c1"><code>verifikacija.qr_uspeh_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovani ste!</td></tr>
+<tr><td class="c1"><code>verifikacija.skener_uputstvo</code></td><td class="c2"><span class="t tv">V</span></td><td>Usmeri kameru ka QR kodu osobe koju verifikuješ.</td></tr>
+<tr><td class="c1"><code>verifikacija.stablo_bez_verifikatora</code></td><td class="c2"><span class="t tv">V</span></td><td>Još nisi verifikovan</td></tr>
+<tr><td class="c1"><code>verifikacija.stablo_osnivac</code></td><td class="c2"><span class="t tv">V</span></td><td>Početna verifikacija (osnivač)</td></tr>
+<tr><td class="c1"><code>verifikacija.stablo_bez_verifikovanih</code></td><td class="c2"><span class="t tv">V</span></td><td>Još nikog nisi verifikovao</td></tr>
+<tr><td class="c1"><code>verifikacija.indeks_objasnjenje</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Koliko te je mreža potvrdila kao stvarnu osobu. Raste sa svakom verifikacijom; na 10% dobijaš pun pristup.</td></tr>
+<tr><td class="c1"><code>verifikacija.tip_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Neverifikovan</td></tr>
+<tr><td class="c1"><code>verifikacija.tip_pocetna</code></td><td class="c2"><span class="t tv">V</span></td><td>Početna verifikacija</td></tr>
+<tr><td class="c1"><code>verifikacija.oznake_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Privatne oznake za osobe koje si verifikovao — da lakše znaš koga si doveo. Vide ih samo ti i Fondacija; nisu javne i ne prikazuju se drugim korisnicima.</td></tr>
+<tr><td class="c1"><code>verifikacija.pijaca_neverifikovan_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Objavi ponudu na Pijaci</td></tr>
+<tr><td class="c1"><code>verifikacija.pijaca_neverifikovan_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Ako nemaš koga da zamoliš za kod, objavi šta nudiš. Tako te članovi iz tvog kraja vide i mogu da te prepoznaju.</td></tr>
+<tr><td class="c1"><code>verifikacija.pijaca_verifikovan_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Pomozi novima</td></tr>
+<tr><td class="c1"><code>verifikacija.pijaca_verifikovan_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Pogledaj ponude neverifikovanih iz svog kraja — ako nekoga stvarno poznaješ, možeš da ga potvrdiš.</td></tr>
+<tr><td class="c1"><code>krug.osnivanje_info_uslov</code></td><td class="c2"><span class="t tv">V</span></td><td>5 verifikovanih članova</td></tr>
+<tr><td class="c1"><code>profil.status_verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovan</td></tr>
+<tr><td class="c1"><code>profil.status_ceka</code></td><td class="c2"><span class="t tv">V</span></td><td>Nije verifikovan</td></tr>
+<tr><td class="c1"><code>profil.tip_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Neverifikovan</td></tr>
+<tr><td class="c1"><code>profil.tip_regularni</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovan</td></tr>
+<tr><td class="c1"><code>profil.prigovor_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Ukoliko smatrate da je neka odluka sistema (verifikacija, suspenzija, upis u program) donesena pogrešno, možete podneti prigovor. Odgovorićemo u roku od 30 dana.</td></tr>
+<tr><td class="c1"><code>profil.prigovor_tip_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija identiteta</td></tr>
+<tr><td class="c1"><code>profil.trx_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija</td></tr>
+<tr><td class="c1"><code>profil.pristup_samo_verifikovani</code></td><td class="c2"><span class="t tv">V</span></td><td>Pregled profila dostupan je samo verifikovanim korisnicima.</td></tr>
+<tr><td class="c1"><code>profil.email_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Kada se desi nešto što traži vašu pažnju — verifikacija, nova poruka, odluka po prijavi — šaljemo vam i email, pored zvonca u aplikaciji.</td></tr>
+<tr><td class="c1"><code>programi.nije_verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Za prijavu na programe potrebna je verifikacija identiteta.</td></tr>
+<tr><td class="c1"><code>poruke.neverifikovan_info</code></td><td class="c2"><span class="t tv">V</span></td><td>Kao neverifikovan korisnik možete da odgovorite samo na poruke verifikovanih članova koji su vam se javili povodom vašeg oglasa.</td></tr>
+<tr><td class="c1"><code>landing.kome_6_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Prvi klijenti, neformalni rad i prostor da razviješ svoje. Prva tri oglasa možeš postaviti odmah, bez ijedne potvrde.</td></tr>
+<tr><td class="c1"><code>landing.primer_korak_2_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Ani se pokvari veš mašina. Lazar je popravi, a Ana mu upiše 4.000 POEN. Sad Ana zna Lazara — i može da potvrdi njegovu stvarnost.</td></tr>
+<tr><td class="c1"><code>landing.kako_funkcionise_korak_2_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Prva tri oglasa možeš postaviti odmah, bez ijedne potvrde. Tako te članovi iz tvog kraja vide.</td></tr>
+<tr><td class="c1"><code>landing.kako_funkcionise_korak_3_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Neko te potvrdi</td></tr>
+<tr><td class="c1"><code>landing.statistike_clan</code></td><td class="c2"><span class="t tv">V</span></td><td>verifikovanih članova</td></tr>
+<tr><td class="c1"><code>oNama.faza2_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Sistem je u otvorenoj fazi testiranja — stvarni korisnici proveravaju ceo tok u realnim uslovima: registraciju, verifikaciju, POEN, Pijacu i programe.</td></tr>
+<tr><td class="c1"><code>oNama.faza3_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Otvara se javna registracija. Cilj je dostići broj verifikovanih ljudi dovoljan da razmena i uzajamnost u prvoj zajednici žive same od sebe.</td></tr>
+<tr><td class="c1"><code>oNama.stavka1_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Ceo tok kroz koji prolazi korisnik — registracija, verifikacija lancem potvrda, upis i prenos POEN-a, Pijaca, programi i donacije — proverava se u realnim uslovima.</td></tr>
+<tr><td class="c1"><code>oNama.k1_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Rani pristup i verifikacija</td></tr>
+<tr><td class="c1"><code>oNama.k1_tekst</code></td><td class="c2"><span class="t tv">V</span></td><td>Ako želiš da znaš kad sistem bude otvoren — registruj se za rani pristup. Prvi verifikovani korisnici postavljaju temelje zajednice, i njihov se rad u toj ranoj fazi posebno prepoznaje kroz operativni doprinos.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.k2_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Odmah po registraciji vidiš javnu evidenciju razmena i pregledaš sve oglase na Pijaci — sadržaj, cenu i lokaciju. Već sada možeš da objaviš svoju ponudu (prva tri oglasa) i da razmenjuješ dobra i usluge, a POEN ti se može upisati — dok ga sam ne možeš prenositi drugome. Postavljanje potražnje, kontakt sa oglašivačima i pokretanje razgovora stižu sa verifikacijom.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.k2_detalj</code></td><td class="c2"><span class="t tv">V</span></td><td>bez verifikacije</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.k3_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Verifikovani korisnik koji te lično poznaje potvrđuje da si stvarna osoba. KOLO to obezbeđuje tehnički, bez prikupljanja ijednog dokumenta. Svaka potvrda te dodatno učvršćuje kao stvarnog korisnika mreže — i za svaku ti Protokol upisuje 1.000 POEN.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.k4_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Pun pristup mreži: postavljaš oglase na Pijaci, razmenjuješ sa drugim korisnicima, doprinosiš sistemu i prijavljuješ se za Socijalne programe. Kad si i sam jednom potvrđen, i ti možeš da uvedeš i potvrdiš ljude koje lično poznaješ.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.n5_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Konkretan rad za zajednicu: nosioci ZRNA (a u prvoj fazi Upravni odbor Fondacije) objave zadatak, ti se prijaviš i izvršiš ga, pa oni potvrde izvršenje pre nego što Protokol upiše POEN.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.n4_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Pravno lice ili preduzetnik (firma, udruženje, radnja) potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Pokrovitelj ne prima POEN; bonus se po posebnoj tabeli sa 7 nivoa evidentira verifikovanom vlasniku, odnosno samom preduzetniku.</td></tr>
+<tr><td class="c1"><code>osnivackiDoprinosPage.registar_blokiran</code></td><td class="c2"><span class="t tv">V</span></td><td>Registar osnivača sa pseudonimima i udelima dostupan je verifikovanim članovima.</td></tr>
+<tr><td class="c1"><code>cestoPage.meta_desc</code></td><td class="c2"><span class="t tv">V</span></td><td>Odgovori na najčešća pitanja o KOLO sistemu — POEN, ZRNO, verifikacija, Protokol, Fondacija i pijaca.</td></tr>
+<tr><td class="c1"><code>pijaca.opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Mesto gde članovi nude i traže dobra i usluge. Ponudu može da razgleda svako; za objavu oglasa i kontakt sa oglašivačem potrebna je verifikacija.</td></tr>
+<tr><td class="c1"><code>pijaca.zatrazi_verifikaciju_link</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>pijaca.gost_tekst</code></td><td class="c2"><span class="t tv">V</span></td><td>Pogledajte šta nudi KOLO krug. Za razmenu je potrebna verifikacija.</td></tr>
+<tr><td class="c1"><code>pijaca.meta_desc</code></td><td class="c2"><span class="t tv">V</span></td><td>Pijaca KOLA — dobra, usluge i zanati iz tvog kraja, razmena neposredno između ljudi. Prve oglase možeš postaviti bez verifikacije.</td></tr>
+<tr><td class="c1"><code>pijaca.zatrazi_verifikaciju_kupovina</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatražite verifikaciju</td></tr>
+<tr><td class="c1"><code>pijaca.zatrazi_verifikaciju_kupovina_tekst</code></td><td class="c2"><span class="t tv">V</span></td><td>da biste mogli da kontaktirate oglašivača.</td></tr>
+<tr><td class="c1"><code>pijaca.neverif_objava_hint</code></td><td class="c2"><span class="t tv">V</span></td><td>Možeš da objaviš ponudu i pre verifikacije — tako te članovi iz tvog kraja vide.</td></tr>
+<tr><td class="c1"><code>pijaca.neverif_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Objavljuješ pre verifikacije</td></tr>
+<tr><td class="c1"><code>pijaca.oznaka_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>NEVERIFIKOVAN</td></tr>
+<tr><td class="c1"><code>pijaca.traka_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Postavi svoj prvi oglas</td></tr>
+<tr><td class="c1"><code>pocetna.opis_stranice</code></td><td class="c2"><span class="t tv">V</span></td><td>Tvoja polazna tačka: vesti Fondacije i razgovor sa zajednicom. Ovde vidiš šta je novo i šta drugi pišu (pisanje se otključava verifikacijom).</td></tr>
+<tr><td class="c1"><code>pocetna.chat_samo_verif</code></td><td class="c2"><span class="t tv">V</span></td><td>Pisanje u pričaonicu dostupno je samo verifikovanim članovima.</td></tr>
+<tr><td class="c1"><code>pocetna.chat_zatrazi_verif</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>tablaJemstva.ukinuta_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Do verifikacije se sada dolazi preko Pijace: objaviš ponudu, članovi iz tvog kraja je vide i, ako te neko stvarno poznaje, potvrdi tvoju stvarnost. Kartica prepoznavanja je ukinuta, a podaci sa nje obrisani.</td></tr>
+<tr><td class="c1"><code>tablaJemstva.ukinuta_dugme_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran1_p2</code></td><td class="c2"><span class="t tp">P</span></td><td>Nalog ti je otvoren, ali je još zaključan. Otključava se kada neko ko te lično poznaje potvrdi da si stvarna osoba.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran2_p1</code></td><td class="c2"><span class="t tv">V</span></td><td>Otvori Verifikaciju i klikni „Pokaži kod”. Dobićeš QR kod i šestocifreni broj.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran2_p2</code></td><td class="c2"><span class="t tv">V</span></td><td>Pokaži mu QR uživo ili mu pošalji šestocifreni broj porukom. On kod sebe otvara Verifikaciju, klikne „Verifikuj nekoga” i skenira ili ukuca taj broj. Time postaješ verifikovani član.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran2_p3</code></td><td class="c2"><span class="t tp">P</span></td><td>Kod važi 2 sata. Ako istekne, napravi novi istim dugmetom. Čim te potvrdi, dobijaš 1.000 POEN i pun pristup.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran2_cta</code></td><td class="c2"><span class="t tv">V</span></td><td>Otvori Verifikaciju</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran3_p1</code></td><td class="c2"><span class="t tp">P</span></td><td>Onda objavi na Pijaci šta nudiš. Prva tri oglasa možeš postaviti odmah, bez ijedne potvrde — i tako te članovi iz tvog kraja vide.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran3_p3</code></td><td class="c2"><span class="t tp">P</span></td><td>Oglas stoji dok ga ne skloniš. Ko te prepozna, javi ti se povodom oglasa — i može da potvrdi tvoju stvarnost.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran3_p4</code></td><td class="c2"><span class="t tv">V</span></td><td>Ostavi i broj telefona uz saglasnost. Ako te za tih 8 dana niko ne prepozna, pozvaće te član Upravnog odbora Fondacije. Broj vidi samo Upravni odbor i briše se čim se verifikuješ ili kad kartica istekne.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran4_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Šta dobijaš čim te neko potvrdi</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran4_p1</code></td><td class="c2"><span class="t tp">P</span></td><td>Jedna potvrda je dovoljna i podiže tvoj indeks stvarnosti na 10%, a to je tačno prag za pun pristup.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran5_p3</code></td><td class="c2"><span class="t tp">P</span></td><td>Za sada POEN stiže na dva načina: 1.000 kad te neko potvrdi i onoliko koliko se dogovorite pri svakoj razmeni.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran6_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Šta možeš odmah, pre potvrde</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran6_p1</code></td><td class="c2"><span class="t tp">P</span></td><td>Dok čekaš da te neko potvrdi, dve stvari možeš da uradiš odmah.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran6_p3</code></td><td class="c2"><span class="t tv">V</span></td><td>Uređivanje profila ne utiče na verifikaciju. Za prepoznavanje se koristi tvoj oglas na Pijaci, ne profil.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran6_p4</code></td><td class="c2"><span class="t tv">V</span></td><td>Drugo, otvori Pijacu i razgledaj šta ljudi nude i traže. Pregled oglasa je otvoren svima, bez verifikacije. Prati i vesti Fondacije na Početnoj: tu idu najave, izmene pravila i sve važno za zajednicu.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran6_p5</code></td><td class="c2"><span class="t tv">V</span></td><td>Postavljanje sopstvenih oglasa, kontakt sa oglašivačem i poruke otključavaju se verifikacijom.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran7_p1</code></td><td class="c2"><span class="t tv">V</span></td><td>Ako poznaješ nekog u KOLU, otvori Verifikaciju, klikni „Pokaži kod” i pošalji mu ga. Ako ne poznaješ nikog, objavi ponudu na Pijaci i sačekaj da ti se neko javi. I jedno i drugo traje par minuta.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran7_p2</code></td><td class="c2"><span class="t tp">P</span></td><td>Kad te neko potvrdi, stiže ti obaveštenje na zvonce i na mejl.</td></tr>
+<tr><td class="c1"><code>admin.tip_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Neverifikovan</td></tr>
+<tr><td class="c1"><code>admin.tip_regularni</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovan</td></tr>
+<tr><td class="c1"><code>admin.dashboard_verifikovani</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovani</td></tr>
+<tr><td class="c1"><code>admin.prigovori_tip_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija</td></tr>
+<tr><td class="c1"><code>admin.korisnici_neverifikovan_badge</code></td><td class="c2"><span class="t tv">V</span></td><td>neverifikovan</td></tr>
+<tr><td class="c1"><code>admin.korisnici_lazni_verifikator</code></td><td class="c2"><span class="t tv">V</span></td><td>Lažni verifikator</td></tr>
+<tr><td class="c1"><code>admin.korisnici_lazni_confirm</code></td><td class="c2"><span class="t tv">V</span></td><td>Označiti kao lažnog verifikatora?
+
+Sve verifikacije iz njegovog podstabla biće rekurzivno poništene, upisani POEN (1.000/1.000/500) vraćen Protokolu (moguć minus), a korisnik isključen. Pogođeni korisnici padaju na 0% indeksa.</td></tr>
+<tr><td class="c1"><code>admin.korisnici_ponisteno_msg</code></td><td class="c2"><span class="t tv">V</span></td><td>Poništeno {count} verifikacija u podstablu.</td></tr>
+<tr><td class="c1"><code>admin.pokrovitelji_vlasnik_label</code></td><td class="c2"><span class="t tv">V</span></td><td>Vlasnik (verifikovan član) *</td></tr>
+<tr><td class="c1"><code>admin.doprinos_zatecene_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovanim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Neverifikovani se preskaču — oni i dalje čekaju okidač. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.</td></tr>
+<tr><td class="c1"><code>admin.doprinos_zatecene_confirm</code></td><td class="c2"><span class="t tv">V</span></td><td>Evidentirati sada sve zatečene doprinose verifikovanih članova? Opticaj će porasti i to može da upali osnivački korak.</td></tr>
+<tr><td class="c1"><code>admin.doprinos_zatecene_gotovo</code></td><td class="c2"><span class="t tv">V</span></td><td>Razrešeno: {evidentirano}. U opticaj ušlo {poen} POEN. Preskočeno neverifikovanih: {preskoceno}. Poslato obaveštenja: {obavesteno}.</td></tr>
+<tr><td class="c1"><code>admin.levak_k_otvorili_poverenje</code></td><td class="c2"><span class="t tv">V</span></td><td>Otvorili verifikaciju ili tablu</td></tr>
+<tr><td class="c1"><code>admin.levak_k_verifikovani</code></td><td class="c2"><span class="t tv">V</span></td><td>Neko ih verifikovao</td></tr>
+<tr><td class="c1"><code>admin.levak_dana_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Prosečno dana od registracije do verifikacije</td></tr>
+<tr><td class="c1"><code>admin.levak_dana_oglas</code></td><td class="c2"><span class="t tv">V</span></td><td>Prosečno dana od verifikacije do prvog oglasa</td></tr>
+<tr><td class="c1"><code>admin.levak_napomena_dnevnik</code></td><td class="c2"><span class="t tv">V</span></td><td>Koraci „Otvorili verifikaciju ili tablu“ i „Otvorili formu za oglas“ čitaju se iz dnevnika aktivnosti, koji počinje {datum}. Za starije kohorte ta dva reda pokazuju nulu jer podataka nema, ne zato što niko nije otvarao stranicu.</td></tr>
+<tr><td class="c1"><code>notifikacije.verifikacija_ponistena_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija poništena</td></tr>
+<tr><td class="c1"><code>notifikacije.verifikovan_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovan/a si — možeš da postaviš oglas</td></tr>
+<tr><td class="c1"><code>notifikacije.verifikovan_tekst</code></td><td class="c2"><span class="t tv">V</span></td><td>„{verifikator}” te je verifikovao/la i dobio/la si pun pristup. Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.</td></tr>
+<tr><td class="c1"><code>notifikacije.nadoknada_tekst</code></td><td class="c2"><span class="t tv">V</span></td><td>Poništenjem verifikacije koju si obavio nastala je nadoknada od {iznos} POEN-a, jer poništeni POEN-i nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena.</td></tr>
+<tr><td class="c1"><code>transakcije.verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija {pseudonim}</td></tr>
+<tr><td class="c1"><code>transakcije.primljena_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Primljena verifikacija od {pseudonim}</td></tr>
+<tr><td class="c1"><code>greske.inicijator_mora_biti_verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Inicijator mora biti verifikovan.</td></tr>
+<tr><td class="c1"><code>greske.mora_biti_verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Mora biti verifikovan.</td></tr>
+<tr><td class="c1"><code>greske.nije_verifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Nije verifikovan.</td></tr>
+<tr><td class="c1"><code>greske.pisanje_u_pricaonicu_je_dostupno_samo_verifikovanim_clanovima</code></td><td class="c2"><span class="t tv">V</span></td><td>Pisanje u pričaonicu je dostupno samo verifikovanim članovima.</td></tr>
+<tr><td class="c1"><code>greske.potrebna_je_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Potrebna je verifikacija.</td></tr>
+<tr><td class="c1"><code>greske.samo_verifikovani_korisnici_mogu_podneti_pristupnicu</code></td><td class="c2"><span class="t tv">V</span></td><td>Samo verifikovani korisnici mogu podneti pristupnicu.</td></tr>
+<tr><td class="c1"><code>greske.samo_verifikovani_korisnici_mogu_podneti_zahtev</code></td><td class="c2"><span class="t tv">V</span></td><td>Samo verifikovani korisnici mogu podneti zahtev.</td></tr>
+<tr><td class="c1"><code>greske.samo_verifikovani_korisnici_mogu_pokrenuti_pokroviteljstvo</code></td><td class="c2"><span class="t tv">V</span></td><td>Samo verifikovani korisnici mogu pokrenuti pokroviteljstvo.</td></tr>
+<tr><td class="c1"><code>greske.samo_verifikovani_korisnici_mogu_postavljati_oglase</code></td><td class="c2"><span class="t tv">V</span></td><td>Samo verifikovani korisnici mogu postavljati oglase.</td></tr>
+<tr><td class="c1"><code>greske.samo_verifikovani_korisnik_moze_da_donira</code></td><td class="c2"><span class="t tv">V</span></td><td>Samo verifikovani korisnik može da donira.</td></tr>
+<tr><td class="c1"><code>greske.svi_osnivaci_moraju_biti_verifikovani</code></td><td class="c2"><span class="t tv">V</span></td><td>Svi osnivači moraju biti verifikovani.</td></tr>
+<tr><td class="c1"><code>greske.verifikacija_potrebna</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija potrebna.</td></tr>
+<tr><td class="c1"><code>greske.vlasnik_mora_biti_verifikovan_clan</code></td><td class="c2"><span class="t tv">V</span></td><td>Vlasnik mora biti verifikovan član.</td></tr>
+<tr><td class="c1"><code>greske.za_socijalni_program_potreban_je_pun_indeks_stvarnosti_100_sve_verifikacije</code></td><td class="c2"><span class="t tv">V</span></td><td>Za socijalni program potreban je pun indeks stvarnosti (100%) — sve verifikacije.</td></tr>
+<tr><td class="c1"><code>greske.verifikacijaid_je_obavezan</code></td><td class="c2"><span class="t tv">V</span></td><td>verifikacijaId je obavezan.</td></tr>
+<tr><td class="c1"><code>greske.dok_nisi_verifikovan_a_mozes_da_objavis_samo_ponudu_oglas_kojim_nudis_dobro_ili_</code></td><td class="c2"><span class="t tv">V</span></td><td>Dok nisi verifikovan/a možeš da objaviš samo ponudu — oglas kojim nudiš dobro ili uslugu.</td></tr>
+<tr><td class="c1"><code>greske.dok_nisi_verifikovan_a_mozes_imati_najvise_3_aktivna_oglasa</code></td><td class="c2"><span class="t tv">V</span></td><td>Dok nisi verifikovan/a možeš imati najviše 3 aktivna oglasa.</td></tr>
+<tr><td class="c1"><code>greske.dok_nisi_verifikovan_a_mozes_samo_da_primas_poen_upis_u_tudju_evidenciju_otvara_</code></td><td class="c2"><span class="t tv">V</span></td><td>Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-V-LANAC">
+<h3><span class="sec">§2</span> Lanac potvrda / graf <span class="ct">38</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>novcanik.putanja_pravila</code></td><td class="c2"><span class="t tv">V</span></td><td>U brojač ulaze upisi POEN-a od najmanje 1.000 POEN sa ljudima koji nisu u tvom krugu poznanstava (graf verifikacija). Svaki sagovornik broji se jednom, bez obzira na broj upisa. Upis sa korisnikom koji još nije verifikovan se beleži, a broji tek kad on bude verifikovan. Trenutno u brojaču: {sagovornika}.</td></tr>
+<tr><td class="c1"><code>verifikacija.graf_kartica_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Graf verifikacija</td></tr>
+<tr><td class="c1"><code>verifikacija.graf_kartica_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Pogledaj celu mrežu potvrda — ko je koga verifikovao i gde si ti.</td></tr>
+<tr><td class="c1"><code>verifikacija.stablo_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Lanac verifikacija</td></tr>
+<tr><td class="c1"><code>verifikacija.tip_regularni</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Verifikovan kroz lanac potvrda</td></tr>
+<tr><td class="c1"><code>graf.naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Graf verifikacija</td></tr>
+<tr><td class="c1"><code>graf.opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Mreža potvrda: ko je koga verifikovao i gde se ti nalaziš. Čvorovi su javne brojčane oznake članova — klikni na broj za detalje.</td></tr>
+<tr><td class="c1"><code>graf.zakljucano_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Graf postaje dostupan po prvoj verifikaciji</td></tr>
+<tr><td class="c1"><code>graf.zakljucano_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Prikaz mreže potvrda vide samo verifikovani korisnici (indeks stvarnosti ≥ 10%). Zatraži verifikaciju da bi dobio pristup.</td></tr>
+<tr><td class="c1"><code>graf.zakljucano_dugme</code></td><td class="c2"><span class="t tv">V</span></td><td>Idi na verifikaciju</td></tr>
+<tr><td class="c1"><code>graf.legenda_mogu</code></td><td class="c2"><span class="t tv">V</span></td><td>Mogu da verifikujem</td></tr>
+<tr><td class="c1"><code>graf.legenda_pun</code></td><td class="c2"><span class="t tv">V</span></td><td>Ne može primiti verifikaciju</td></tr>
+<tr><td class="c1"><code>graf.bez_slota_upozorenje</code></td><td class="c2"><span class="t tv">V</span></td><td>Trenutno nemaš slobodan verifikacioni slot — plavi čvorovi su isprekidani dok se kapacitet ne oslobodi (kapacitet raste sa indeksom).</td></tr>
+<tr><td class="c1"><code>graf.statistika</code></td><td class="c2"><span class="t tv">V</span></td><td>{clanovi} članova · {veze} verifikacija</td></tr>
+<tr><td class="c1"><code>graf.lanac_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Lanac verifikacija</td></tr>
+<tr><td class="c1"><code>graf.lanac_bez_verifikatora</code></td><td class="c2"><span class="t tv">V</span></td><td>Nema verifikatora</td></tr>
+<tr><td class="c1"><code>graf.lanac_osnivac</code></td><td class="c2"><span class="t tv">V</span></td><td>Početna verifikacija (osnivač)</td></tr>
+<tr><td class="c1"><code>graf.lanac_bez_verifikovanih</code></td><td class="c2"><span class="t tv">V</span></td><td>Još nikog nije verifikovao</td></tr>
+<tr><td class="c1"><code>graf.stanje_mogu</code></td><td class="c2"><span class="t tv">V</span></td><td>Možeš da ga verifikuješ</td></tr>
+<tr><td class="c1"><code>graf.stanje_pun</code></td><td class="c2"><span class="t tv">V</span></td><td>Ne može primiti verifikaciju</td></tr>
+<tr><td class="c1"><code>graf.razlog_osnivac</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Početni korisnik — ne može biti verifikovan u lancu potvrda (čl. 14 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>graf.razlog_indeks_pun</code></td><td class="c2"><span class="t tv">V</span></td><td>Indeks 100% — dodatna verifikacija se ne evidentira (čl. 3 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>graf.razlog_prelazno</code></td><td class="c2"><span class="t tv">V</span></td><td>U početnoj fazi sistema (do 100.000 POEN opticaja) korisnik može primiti samo jednu verifikaciju (čl. 22 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>graf.razlog_zona_obrnuto</code></td><td class="c2"><span class="t tv">V</span></td><td>Ti se nalaziš u njegovoj zabranjenoj zoni, pa verifikacija nije dozvoljena (čl. 12 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>graf.razlog_prva_generacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Dozvoljeno po izuzetku za prvu generaciju — oboje ste neposredno verifikovani od istog početnog korisnika (čl. 12 st. 5 Pravilnika o dokazu stvarnosti).</td></tr>
+<tr><td class="c1"><code>graf.tip_regularni</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovani korisnik</td></tr>
+<tr><td class="c1"><code>graf.tip_neverifikovan</code></td><td class="c2"><span class="t tv">V</span></td><td>Neverifikovan</td></tr>
+<tr><td class="c1"><code>pravne.rb.dokaz-stvarnosti.opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Operativna mehanika verifikacije korisnika kroz lanac potvrda: indeks stvarnosti, verifikacioni kapacitet, anti-cirkularno pravilo.</td></tr>
+<tr><td class="c1"><code>landing.kako_funkcionise_korak_3_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Onaj ko te lično poznaje potvrđuje tvoju stvarnost. Protokol upisuje 1.000 POEN tebi i 1.000 njemu — obojica ste u lancu potvrda.</td></tr>
+<tr><td class="c1"><code>oSistemu.familija_p3</code></td><td class="c2"><span class="t tp">P</span></td><td>I još nešto što u tim mrežama ne postoji: u KOLU stvarnost svakog člana potvrđuje neko ko ga lično poznaje, i za to odgovara. Lanac potvrda je ono što mrežu drži stvarnom.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.k3_naslov</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Verifikacija kroz lanac potvrda</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.n1_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Kad te verifikovani korisnik koji te lično poznaje potvrdi u lancu potvrda, Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN verifikatoru — a kad verifikacija podleže nadzoru, i 500 POEN nadzorniku. Ulazak u sistem je istovremeno doprinos sistemu.</td></tr>
+<tr><td class="c1"><code>kakoFunkcionisePage.cta_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Pravila su jasna. Registracija je besplatna. Verifikacija te uvodi u lanac potvrda — Protokol automatski upisuje 1.000 POEN tebi i 1.000 POEN verifikatoru. Javna evidencija i oglasi na Pijaci dostupni su i bez registracije.</td></tr>
+<tr><td class="c1"><code>pijaca.neverif_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Možeš da objaviš samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, opis od najmanje {min} znakova, kategoriju i mesto. Prvi takav oglas nosi ti doprinos od {iznos} POEN, koji se evidentira kad te neko verifikuje ili ti upiše POEN.</td></tr>
+<tr><td class="c1"><code>pijaca.oznaka_neverifikovan_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Oglašivač još nije verifikovan u lancu potvrda. Za razmenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.</td></tr>
+<tr><td class="c1"><code>dobrodosli.ekran4_p3</code></td><td class="c2"><span class="t tp">P</span></td><td>Postaješ i karika u lancu potvrda: od tog trenutka i ti možeš da potvrdiš ljude koje lično poznaješ.</td></tr>
+<tr><td class="c1"><code>politikaPrihvati.opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Doneti su novi akti KOLO sistema. Verifikacija se od sada zove lanac potvrda, a doprinos razmeni ima pet koraka. Pročitaj i potvrdi da pristaješ kako bi nastavio da koristiš platformu.</td></tr>
+<tr><td class="c1"><code>notifikacije.verifikacija_ponistena_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Upravni odbor je utvrdio da je verifikacija u tvom lancu potvrda lažna, pa je poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-NADZOR">
+<h3><span class="sec">§3</span> Nadzor verifikacije <span class="ct">11</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>nadzor.page_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacije koje čekaju ishod nadzora. Za svaku upisuješ da li je uredna, da li traži da je pogleda još neko, ili je sporna. Prvi nadzornik koji upiše ishod dobija 500 POEN — bez obzira koji je ishod (čl. 7, 10–11).</td></tr>
+<tr><td class="c1"><code>nadzor.prazna_lista</code></td><td class="c2"><span class="t tv">V</span></td><td>Nema verifikacija koje čekaju nadzor.</td></tr>
+<tr><td class="c1"><code>nadzor.potroseno_slotova</code></td><td class="c2"><span class="t tv">V</span></td><td>verifikator potrošio slotova: {broj}</td></tr>
+<tr><td class="c1"><code>nadzor.opis_za_proveru</code></td><td class="c2"><span class="t tv">V</span></td><td>Nije optužba nego poziv da još neko pogleda. Zapis ostaje na spisku ostalim nadzornicima, a verifikatoru se slot ne dopunjava dok neko ne upiše „uredno“.</td></tr>
+<tr><td class="c1"><code>nadzor.opis_sporno</code></td><td class="c2"><span class="t tv">V</span></td><td>Označavaš da verifikacija nije istinita. Otvara se nadzorni predmet za Upravni odbor; sam predmet ne proizvodi dejstvo prema korisniku.</td></tr>
+<tr><td class="c1"><code>nadzor.subjekt_verifikator</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikator</td></tr>
+<tr><td class="c1"><code>nadzor.subjekt_verifikovani</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikovani</td></tr>
+<tr><td class="c1"><code>nadzor.razlog_obrazac_verifikacija</code></td><td class="c2"><span class="t tv">V</span></td><td>Obrazac verifikacija</td></tr>
+<tr><td class="c1"><code>nadzor.razlog_prijava_verifikovanog</code></td><td class="c2"><span class="t tv">V</span></td><td>Prijava verifikovanog</td></tr>
+<tr><td class="c1"><code>admin.nadzor_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Nadzor integriteta verifikacija</td></tr>
+<tr><td class="c1"><code>transakcije.nadzor</code></td><td class="c2"><span class="t tv">V</span></td><td>Nadzor verifikacije {verifikator} → {verifikovani}</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-P-PROGRAM">
+<h3><span class="sec">§4</span> Verifikatorska potvrda socijalnog programa <span class="ct">24</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>programi.nepun_indeks</code></td><td class="c2"><span class="t tv">V</span></td><td>Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset verifikacija. Svi vaši verifikatori potvrđuju ispunjenost uslova pre odobravanja.</td></tr>
+<tr><td class="c1"><code>programi.pristanak_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Pristajem da mojih deset verifikatora bude zamoljeno da pod punom odgovornošću potvrde da ispunjavam uslov za ovaj program. Verifikatori ne vide unete podatke. Prijavu odobrava Fondacija tek kada svi potvrde.</td></tr>
+<tr><td class="c1"><code>programi.potvrde_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Zahtevi za potvrdu</td></tr>
+<tr><td class="c1"><code>programi.potvrde_opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Korisnici koje ste verifikovali prijavili su se za socijalni program i naveli vas kao verifikatora. Potvrdite pod punom odgovornošću da osoba ispunjava uslov, ili obrazložite zašto ne možete da potvrdite. Ne vidite unete podatke prijave.</td></tr>
+<tr><td class="c1"><code>programi.potvrde_prazno</code></td><td class="c2"><span class="t tp">P</span></td><td>Trenutno nemate zahteva za potvrdu.</td></tr>
+<tr><td class="c1"><code>programi.potvrda_obrazlozenje_obavezno</code></td><td class="c2"><span class="t tp">P</span></td><td>Obrazloženje je obavezno pri odbijanju.</td></tr>
+<tr><td class="c1"><code>programi.potvrda_potvrdeno</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno.</td></tr>
+<tr><td class="c1"><code>programi.potvrda_odbijeno</code></td><td class="c2"><span class="t tp">P</span></td><td>Odbijeno.</td></tr>
+<tr><td class="c1"><code>programi.potvrda_greska</code></td><td class="c2"><span class="t tp">P</span></td><td>Greška. Pokušajte ponovo.</td></tr>
+<tr><td class="c1"><code>programi.potvrda_podnosilac</code></td><td class="c2"><span class="t tp">P</span></td><td>Podnosilac:</td></tr>
+<tr><td class="c1"><code>programi.potvrda_dugme_potvrdi</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđujem pod punom odgovornošću</td></tr>
+<tr><td class="c1"><code>programi.potvrda_dugme_odbij</code></td><td class="c2"><span class="t tp">P</span></td><td>Ne mogu da potvrdim</td></tr>
+<tr><td class="c1"><code>programi.potvrda_obrazlozenje_placeholder</code></td><td class="c2"><span class="t tp">P</span></td><td>Obrazloženje (obavezno) — zašto ne možete da potvrdite</td></tr>
+<tr><td class="c1"><code>programi.potvrda_nazad</code></td><td class="c2"><span class="t tp">P</span></td><td>Nazad</td></tr>
+<tr><td class="c1"><code>programi.potvrda_posalji_odbijanje</code></td><td class="c2"><span class="t tp">P</span></td><td>Pošalji odbijanje</td></tr>
+<tr><td class="c1"><code>pravne.rb.programi-podrske.opis</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) — uslovi, koeficijenti i verifikatorska potvrda.</td></tr>
+<tr><td class="c1"><code>notifikacije.svi_verifikatori_potvrdili_naslov</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Svi verifikatori su potvrdili</td></tr>
+<tr><td class="c1"><code>notifikacije.svi_verifikatori_potvrdili_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Svi tvoji verifikatori su potvrdili prijavu za program „{program}”. Prijava čeka odluku Fondacije.</td></tr>
+<tr><td class="c1"><code>notifikacije.program_odbijen_verifikator_naslov</code></td><td class="c2"><span class="t tv">V</span></td><td>Prijava na program odbijena</td></tr>
+<tr><td class="c1"><code>notifikacije.program_odbijen_verifikator_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Tvoja prijava za program „{program}” je odbijena jer je jedan verifikator nije potvrdio. Obrazloženje: {obrazlozenje}</td></tr>
+<tr><td class="c1"><code>notifikacije.zahtev_potvrda_programa_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Zahtev za potvrdu socijalnog programa</td></tr>
+<tr><td class="c1"><code>notifikacije.zahtev_potvrda_programa_tekst</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Korisnik {pseudonim} se prijavio za program „{program}” i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.</td></tr>
+<tr><td class="c1"><code>greske.nemate_verifikatore_koji_mogu_da_potvrde_prijavu</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Nemate verifikatore koji mogu da potvrde prijavu.</td></tr>
+<tr><td class="c1"><code>greske.potreban_je_pristanak_da_vasi_verifikatori_potvrde_ispunjenost_uslova</code></td><td class="c2"><span class="t tv">V</span><span class="t tp">P</span></td><td>Potreban je pristanak da vaši verifikatori potvrde ispunjenost uslova.</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-P-IZVRSENJE">
+<h3><span class="sec">§5</span> Potvrda izvršenja zadatka <span class="ct">16</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>programi.opis_operativni</code></td><td class="c2"><span class="t tv">V</span></td><td>Zadaci za zajedničko dobro · predloženi POEN po zadatku · izvršenje verifikuju nosioci ZRNA</td></tr>
+<tr><td class="c1"><code>pravne.rb.operativni.opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Mehanika operativnog programa — objavljivanje zadataka i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije u prvoj fazi.</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.neVerifikovanInfo</code></td><td class="c2"><span class="t tv">V</span></td><td>Za prijavu na zadatke potrebna je verifikacija (indeks stvarnosti ≥ 10%). Pregled zadataka je dostupan svima.</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.status_prijava_ceka</code></td><td class="c2"><span class="t tv">V</span></td><td>Prijava je podneta i čeka odobrenje plana izvršenja od verifikatora.</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.prijava_podneta_ceka</code></td><td class="c2"><span class="t tv">V</span></td><td>Prijava podneta — čeka odobrenje plana od verifikatora.</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.ev_ceka_verifikaciju</code></td><td class="c2"><span class="t tv">V</span></td><td>Čeka verifikaciju</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.ev_potvrdeno</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno — u raspodeli</td></tr>
+<tr><td class="c1"><code>doprinosOglasi.ev_uspeh</code></td><td class="c2"><span class="t tv">V</span></td><td>Dnevno izvršenje podneto. Verifikator (nosilac ZRNA / UO) potvrđuje izvršenje.</td></tr>
+<tr><td class="c1"><code>admin.ped_oglas_za_verifikaciju</code></td><td class="c2"><span class="t tv">V</span></td><td>za verifikaciju</td></tr>
+<tr><td class="c1"><code>admin.ped_potvrdjeno_msg</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno ({poen} predloženi POEN). Evidentiranje na kraju obračunskog perioda.</td></tr>
+<tr><td class="c1"><code>admin.novi_oglas_sa_odobravanjem_label</code></td><td class="c2"><span class="t tv">V</span></td><td>Zadatak 'sa odobravanjem' — prijava se prima tek kad verifikator odobri plan izvršenja (čl. 14)</td></tr>
+<tr><td class="c1"><code>notifikacije.izvrsenje_potvrdjeno_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Izvršenje potvrđeno</td></tr>
+<tr><td class="c1"><code>notifikacije.izvrsenje_potvrdjeno_tekst</code></td><td class="c2"><span class="t tp">P</span></td><td>Tvoje dnevno izvršenje za „{zadatak}” je potvrđeno (predloženi POEN: {poen}). Evidentirani POEN se obračunava na kraju obračunskog perioda srazmerno dnevnom limitu.</td></tr>
+<tr><td class="c1"><code>greske.ne_mozes_verifikovati_sopstveno_izvrsenje</code></td><td class="c2"><span class="t tv">V</span></td><td>Ne možeš verifikovati sopstveno izvršenje.</td></tr>
+<tr><td class="c1"><code>greske.predlagac_zadatka_ne_moze_verifikovati_izvrsenje_na_svom_zadatku</code></td><td class="c2"><span class="t tv">V</span></td><td>Predlagač zadatka ne može verifikovati izvršenje na svom zadatku.</td></tr>
+<tr><td class="c1"><code>greske.verifikacija_evidencije_dostupna_je_samo_nosiocima_zrna_i_upravnom_odboru_cl_36</code></td><td class="c2"><span class="t tv">V</span></td><td>Verifikacija evidencije dostupna je samo nosiocima ZRNA i Upravnom odboru (čl. 36).</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-P-PRIJEM">
+<h3><span class="sec">§6</span> Potvrda prijema sredstava <span class="ct">28</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>donacije.potvrdeno</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno</td></tr>
+<tr><td class="c1"><code>donacije.ceka_potvrdu</code></td><td class="c2"><span class="t tp">P</span></td><td>Čeka potvrdu</td></tr>
+<tr><td class="c1"><code>donacije.ips_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Skenirajte QR mobilnom bankom — uplata u dinarima stiže za par sekundi, bez provizije platforme. POEN se evidentira nakon što Fondacija potvrdi priliv.</td></tr>
+<tr><td class="c1"><code>donacije.ips_skeniraj_uputstvo</code></td><td class="c2"><span class="t tp">P</span></td><td>Otvorite mobilno bankarstvo → opcija „Plati / Skeniraj QR” → skenirajte ovaj kôd. Iznos i poziv na broj su već popunjeni — samo potvrdite.</td></tr>
+<tr><td class="c1"><code>donacije.ips_napomena_potvrda</code></td><td class="c2"><span class="t tp">P</span></td><td>Nakon uplate, Fondacija potvrđuje priliv po pozivu na broj i tada se evidentira POEN. Poziv na broj je već u QR kodu — ne menjajte ga.</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.verifikacija_potrebna</code></td><td class="c2"><span class="t tv">V</span></td><td>Potrebna je verifikacija</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.verifikacija_opis</code></td><td class="c2"><span class="t tv">V</span></td><td>Da biste mogli biti vlasnik pokrovitelja, potrebno je da verifikujete nalog.</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.verifikacija_link</code></td><td class="c2"><span class="t tv">V</span></td><td>Zatraži verifikaciju →</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.forma_opis</code></td><td class="c2"><span class="t tp">P</span></td><td>Podnesite prijavu u ime pravnog lica ili preduzetnika. Platforma generiše ugovor o donaciji koji potpisujete; po potvrdi prijema od strane Fondacije, evidentira se bonus POEN.</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.status_potpisana</code></td><td class="c2"><span class="t tp">P</span></td><td>Potpisana — čeka potvrdu Fondacije</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.status_potvrdjena</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđena</td></tr>
+<tr><td class="c1"><code>postaniPokrovitelj.potpis_potvrda</code></td><td class="c2"><span class="t tp">P</span></td><td>Potpisati ugovor o donaciji u ime pravnog lica ili preduzetnika?</td></tr>
+<tr><td class="c1"><code>admin.donacije_potvrdi</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi</td></tr>
+<tr><td class="c1"><code>admin.donacije_potvrdjujem</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđujem...</td></tr>
+<tr><td class="c1"><code>admin.donacije_potvrdjena_msg</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno · {poen} POEN</td></tr>
+<tr><td class="c1"><code>admin.pokr_prijave_status_potpisana</code></td><td class="c2"><span class="t tp">P</span></td><td>Potpisana — čeka potvrdu</td></tr>
+<tr><td class="c1"><code>admin.pokr_prijave_status_potvrdjena</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđena</td></tr>
+<tr><td class="c1"><code>admin.pokr_prijave_potvrdi_btn</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi</td></tr>
+<tr><td class="c1"><code>admin.pokr_prijave_potvrdi_confirm</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrditi prijem doprinosa? Emitovaće se bonus POEN prema nivoima.</td></tr>
+<tr><td class="c1"><code>admin.pokr_prijave_potvrdjeno_msg</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrđeno. Bonus: {bonus} POEN.</td></tr>
+<tr><td class="c1"><code>admin.donacije_iznos_korekcija</code></td><td class="c2"><span class="t tp">P</span></td><td>Iznos za potvrdu — korigujte prema stvarnom prilivu iz izvoda</td></tr>
+<tr><td class="c1"><code>notifikacije.pokroviteljstvo_potvrdjeno_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Pokroviteljstvo potvrđeno</td></tr>
+<tr><td class="c1"><code>notifikacije.pokroviteljstvo_potvrdjeno_tekst</code></td><td class="c2"><span class="t tp">P</span></td><td>Doprinos pokroviteljstva je potvrđen i dodat kumulativnom doprinosu.</td></tr>
+<tr><td class="c1"><code>notifikacije.pokroviteljstvo_potvrdjeno_bonus_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Pokroviteljstvo potvrđeno</td></tr>
+<tr><td class="c1"><code>notifikacije.pokroviteljstvo_potvrdjeno_bonus_tekst</code></td><td class="c2"><span class="t tp">P</span></td><td>Doprinos pokroviteljstva je potvrđen. Evidentirano je {bonus} bonus POEN.</td></tr>
+<tr><td class="c1"><code>notifikacije.donacija_potvrdjena_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Donacija potvrđena!</td></tr>
+<tr><td class="c1"><code>notifikacije.donacija_potvrdjena_tekst</code></td><td class="c2"><span class="t tp">P</span></td><td>Tvoja donacija od {rsd} RSD je potvrđena. Evidentirano ti je {poen} POEN.</td></tr>
+<tr><td class="c1"><code>greske.donacija_je_vec_potvrdjena</code></td><td class="c2"><span class="t tp">P</span></td><td>Donacija je već potvrđena.</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-REVERIF">
+<h3><span class="sec">§7</span> Reverifikacija programa <span class="ct">2</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>programi.skolovanje_napomena</code></td><td class="c2"><span class="t tv">V</span></td><td>Admin postavlja dnevni iznos. Reverifikacija svakih 6 meseci.</td></tr>
+<tr><td class="c1"><code>programi.opis_skolovanje</code></td><td class="c2"><span class="t tv">V</span></td><td>Iznos postavlja admin · reverifikacija svakih 6 meseci</td></tr>
+</tbody></table></div></section>
+<section class="popis" id="popis-DUGME">
+<h3><span class="sec">§8</span> Obično dugme „Potvrdi“ <span class="ct">7</span></h3>
+<div class="tw"><table><thead><tr><th class="c1">Ključ u <code>sr.json</code></th><th class="c2">Reč</th><th>Tekst koji član vidi</th></tr></thead><tbody>
+<tr><td class="c1"><code>common.potvrdi</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi</td></tr>
+<tr><td class="c1"><code>krug.istupi_potvrda</code></td><td class="c2"><span class="t tp">P</span></td><td>Da li ste sigurni da želite da istupite iz krugovi?</td></tr>
+<tr><td class="c1"><code>profil.brisi_potvrda_naslov</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrda brisanja naloga</td></tr>
+<tr><td class="c1"><code>profil.brisi_potvrdi</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi brisanje</td></tr>
+<tr><td class="c1"><code>glasanje.potvrdi_veto</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi veto</td></tr>
+<tr><td class="c1"><code>admin.krug_potvrdi_odbijanje</code></td><td class="c2"><span class="t tp">P</span></td><td>Potvrdi odbijanje</td></tr>
+<tr><td class="c1"><code>admin.obav_potvrda</code></td><td class="c2"><span class="t tp">P</span></td><td>Poruka će biti poslata na {broj} adresa i ne može se povući. Nastaviti?</td></tr>
+</tbody></table></div></section>
+<h2 class="deo">Četvrti deo · Akti 4.2.1</h2>
+<p class="uvod">Petnaest akata, srpski original. Prevodi na en/ru/hr/hu nose iste brojeve.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Akt</th><th class="num">verifik…</th><th class="num">potvrd…</th><th>Šta nosi</th></tr></thead>
+<tbody>
+<tr><td><code>dokaz_stvarnosti_4_2_1</code></td><td class="num">106</td><td class="num">14</td><td>§1 §2 §3 — matični akt verifikacije</td></tr>
+<tr><td><code>whitepaper_4_2_1</code></td><td class="num">95</td><td class="num">24</td><td>§1 §2 — objašnjenje sistema</td></tr>
+<tr><td><code>Pravilnik_4_2_1</code></td><td class="num">51</td><td class="num">20</td><td>§1 §2 §5 §6 — čl. 15, 32, 34, 36, 40a</td></tr>
+<tr><td><code>operativni_4_2_1</code></td><td class="num">43</td><td class="num">3</td><td>§5 — <b style="color:var(--warn)">Nalaz A</b></td></tr>
+<tr><td><code>radnje_obrade_4_2_1</code></td><td class="num">35</td><td class="num">8</td><td>§1 — registar obrada</td></tr>
+<tr><td><code>DPIA_4_2_1</code></td><td class="num">31</td><td class="num">11</td><td>§1 — procena uticaja</td></tr>
+<tr><td><code>uslovi_koriscenja_4_2_1</code></td><td class="num">31</td><td class="num">8</td><td>§1 §2</td></tr>
+<tr><td><code>politika_4_2_1</code></td><td class="num">24</td><td class="num">5</td><td>§1 §2</td></tr>
+<tr><td><code>programi_podrske_4_2_1</code></td><td class="num">6</td><td class="num">5</td><td>§4 §7 — „verifikatorska potvrda“</td></tr>
+<tr><td><code>donacije_4_2_1</code></td><td class="num">4</td><td class="num">5</td><td>§6 — radnja i isprava</td></tr>
+<tr><td><code>rizici_4_2_1</code></td><td class="num">0</td><td class="num">1</td><td>§2 — jedan pomen lanca potvrda</td></tr>
+<tr><td><code>gornje_kolo_4_2_1</code></td><td class="num">0</td><td class="num">0</td><td>ne pominje nijednu od dve reči</td></tr>
+<tr><td><code>hijerarhija_4_2_1</code></td><td class="num">0</td><td class="num">0</td><td>—</td></tr>
+<tr><td><code>osnivacki_4_2_1</code></td><td class="num">0</td><td class="num">0</td><td>—</td></tr>
+<tr><td><code>statut_4_1_0</code></td><td class="num">0</td><td class="num">0</td><td>—</td></tr>
+</tbody></table></div>
+
+<h2 class="deo">Peti deo · Baza i kod</h2>
+<p class="uvod">Imena koja član nikad ne vidi, ali koja se pri preimenovanju povlače uz migraciju. Ovo je deo cene.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Identifikator</th><th class="c2">Vrsta</th><th>Institut</th></tr></thead>
+<tbody>
+<tr><td><code>VerifikacionaVeza</code></td><td class="c2">model</td><td>§1 — jedan red = jedna verifikacija</td></tr>
+<tr><td><code>VerifikacijaToken</code></td><td class="c2">model</td><td>§1 — jednokratni kod, 24h</td></tr>
+<tr><td><code>VerifikacionaZona</code></td><td class="c2">model</td><td>§1 — keš zabranjene zone</td></tr>
+<tr><td><code>NadzorZapis</code>, <code>NadzorniPredmet</code></td><td class="c2">model</td><td>§3</td></tr>
+<tr><td><code>ProgramPotvrda</code></td><td class="c2">model</td><td>§4</td></tr>
+<tr><td><code>TipKorisnika.NEVERIFIKOVAN</code></td><td class="c2">enum</td><td>§1 — status naloga</td></tr>
+<tr><td><code>TransactionType.EMISIJA_VERIFIKACIJA</code></td><td class="c2">enum</td><td>§1 — upis 1.000/1.000/500</td></tr>
+<tr><td><code>NadzorSubjekt.VERIFIKATOR</code> / <code>.VERIFIKOVANI</code></td><td class="c2">enum</td><td>§3</td></tr>
+<tr><td><code>PotvrdaStatus</code> (CEKA / POTVRDJENO / ODBIJENO)</td><td class="c2">enum</td><td>§4</td></tr>
+<tr><td><code>PokroviteljPrijavaStatus.POTVRDJENA</code></td><td class="c2">enum</td><td>§6</td></tr>
+<tr><td><code>potvrdioId</code>, <code>potvrdjenoAt</code></td><td class="c2">kolona</td><td>§6</td></tr>
+<tr><td><code>pristanakVerifikatori</code>, <code>nextReverifikacija</code></td><td class="c2">kolona</td><td>§4, §7</td></tr>
+<tr><td><code>oznakaVerifikatora</code></td><td class="c2">kolona</td><td>§1 — privatna oznaka</td></tr>
+<tr><td><code>VERIFIKACIJA_PONISTENA</code>, <code>LAZNA_VERIFIKACIJA_UTVRDJENA</code></td><td class="c2">audit</td><td>§1</td></tr>
+<tr><td><code>DONACIJA_POTVRDJENA</code>, <code>POKROVITELJSTVO_POTVRDJENO</code></td><td class="c2">audit</td><td>§6</td></tr>
+<tr><td><code>/api/verifikacija</code>, <code>/api/nadzor/[verifikacijaId]</code></td><td class="c2">ruta</td><td>§1, §3</td></tr>
+<tr><td><code>/api/programi/potvrde</code></td><td class="c2">ruta</td><td>§4</td></tr>
+<tr><td><code>/api/admin/pokroviteljstvo/prijave/[id]/potvrdi</code></td><td class="c2">ruta</td><td>§6</td></tr>
+<tr><td><code>dokaz-stvarnosti.ts</code>, <code>verifikacija-service.ts</code>, <code>lazna-verifikacija.ts</code>, <code>zona.ts</code></td><td class="c2">lib</td><td>§1</td></tr>
+<tr><td><code>nadzor-service.ts</code>, <code>nadzor-pravila.ts</code>, <code>nadzor-integriteta.ts</code></td><td class="c2">lib</td><td>§3</td></tr>
+</tbody></table></div>
+<p class="napomena">Uz to: 142 fajla u <code>src/</code> sa 1.572 pojave, i po ~98 stringova u <code>en</code>, <code>ru</code>, <code>hu</code> i 185 u <code>hr</code>.</p>
+
+<h2 class="deo">Šesti deo · Ako se ipak preimenuje</h2>
+<p class="uvod">Tri putanje, od najjeftinije do najskuplje. Prve dve ne diraju akte.</p>
+
+<div class="tw"><table>
+<thead><tr><th>Putanja</th><th>Obim</th><th>Šta se dobija</th><th>Šta se gubi</th></tr></thead>
+<tbody>
+<tr>
+  <td><b>1. Samo nesklad</b><br><span style="color:var(--ink-3)">Nalazi A, B, C</span></td>
+  <td>~15 stringova, jedan pasus u pravilniku o operativnom doprinosu</td>
+  <td>Sistem prestaje da protivreči sam sebi; ekran za pristanak više ne tvrdi netačnu stvar</td>
+  <td>Ništa</td>
+</tr>
+<tr>
+  <td><b>2. Glagol na svakodnevnim ekranima</b></td>
+  <td>~25 stringova u <code>sr</code> (+4 jezika), bez akata, baze i koda</td>
+  <td>Nov član nigde ne mora da vari stranu reč: „ko te je potvrdio“, „potvrdi da poznaješ ovu osobu“</td>
+  <td>Akti i dalje govore „verifikacija“ — što je u redu, jer su akti pravni tekst</td>
+</tr>
+<tr>
+  <td><b>3. Puno preimenovanje</b></td>
+  <td>721 pojava u aktima × 5 jezika, bump celog seta na 4.3.0, 1.572 pojave u kodu, migracija enuma i modela</td>
+  <td>Jedna reč u celom sistemu</td>
+  <td>Ta reč se sudara sa §4, §6 i §8; nadzor postaje „potvrda potvrde“; nosilac ZRNA na dva ekrana dobija „zahtev za potvrdu“ za dve nespojive stvari</td>
+</tr>
+</tbody></table></div>
+
+<p class="napomena">Preporuka ostaje ona od malopre: putanja 1 obavezno, putanja 2 ako želiš da ekrani govore običnim jezikom. Putanja 3 rešava jezički osećaj a stvara tri dvosmislenosti u sistemu u kojem se za neistinitu <i>verifikaciju</i> ide u minus, a za neistinitu <i>potvrdu programa</i> ne ide.</p>
+
+<footer>Popis napravljen 10.08.2026 nad granom <code>claude/potvrda-umjesto-verifikacije-d0yev9</code>. Izvori: <code>messages/sr.json</code>, <code>dokumentacija 4.1/</code>, <code>prisma/schema.prisma</code>, <code>src/</code>. Ništa u kodu nije menjano.</footer>
+
+</div>
