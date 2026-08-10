@@ -103,7 +103,7 @@ export default function JezikSvitcer({
           alt=""
           width={24}
           height={18}
-          className="block h-[18px] w-auto rounded-[3px]"
+          className="block h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
         />
         <span className="text-[11px] font-semibold tracking-wide leading-none">
           {aktivan.kratko}
@@ -126,7 +126,7 @@ export default function JezikSvitcer({
       {otvoren && (
         <div
           role="listbox"
-          className={`absolute z-[70] min-w-[190px] max-h-[60vh] overflow-y-auto rounded-xl border border-kolo-border bg-white py-1 shadow-xl ${
+          className={`absolute z-[70] min-w-[236px] max-h-[60vh] overflow-y-auto rounded-xl border border-kolo-border bg-white py-1 shadow-xl ${
             poravnaj === "desno" ? "right-0" : "left-0"
           } ${nagore ? "bottom-full mb-2" : "top-full mt-2"}`}
         >
@@ -139,34 +139,39 @@ export default function JezikSvitcer({
                 role="option"
                 aria-selected={izabran}
                 onClick={() => promeniJezik(j.kod)}
-                className={`flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm transition-colors hover:bg-kolo-bg ${
+                className={`flex w-full items-center gap-3 px-3.5 py-2 text-left text-sm transition-colors hover:bg-kolo-bg ${
                   izabran ? "font-semibold text-kolo-green-700" : "text-kolo-text"
                 }`}
               >
+                {/* Kutija je fiksna 24×18 da sve zastavice budu jednake i kad neka
+                    bude nacrtana u drugom odnosu stranica. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={j.ikona}
                   alt=""
                   width={24}
                   height={18}
-                  className="block h-[18px] w-auto rounded-[3px] shrink-0"
+                  className="block h-[18px] w-6 shrink-0 rounded-[3px] object-cover"
                 />
                 <span className="flex-1 whitespace-nowrap">{j.naziv}</span>
-                {izabran && (
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="shrink-0"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                )}
+                {/* Mesto za kvačicu se drži i na neizabranim redovima: inače je izabrani
+                    red (podebljan + kvačica) najširi, pa mu tekst ide uz samu ivicu. */}
+                <span className="w-3.5 shrink-0 flex justify-end" aria-hidden="true">
+                  {izabran && (
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  )}
+                </span>
               </button>
             );
           })}
