@@ -67,8 +67,6 @@ export const EKSPLICITNO = {
   "verifikacija.prijava_link": "Nešto nije u redu sa tvojom potvrdom? Prijavi.",
   "verifikacija.prijava_placeholder":
     "Ukratko opiši šta nije u redu (npr. ne poznaješ osobu koja te je potvrdila).",
-  "verifikacija.pijaca_verifikovan_opis":
-    "Pogledaj ponude onih bez potvrde iz svog kraja — ako nekoga stvarno poznaješ, možeš da ga potvrdiš.",
 
   // ── sidebar ──────────────────────────────────────────────────────────────
   "nav.verifikacija": "Potvrde",

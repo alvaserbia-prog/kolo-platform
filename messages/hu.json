@@ -415,9 +415,7 @@
     "prijava_dugme": "Jelentés küldése",
     "prijava_poslata": "A jelentés elküldve. A felügyelet átnézi.",
     "pijaca_neverifikovan_naslov": "Tegyél közzé ajánlatot a Piacon",
-    "pijaca_neverifikovan_opis": "Ha nincs kitől kódot kérned, tedd közzé, amit kínálsz. Így látnak meg a környékedről való tagok, és felismerhetnek.",
-    "pijaca_verifikovan_naslov": "Segíts az újaknak",
-    "pijaca_verifikovan_opis": "Nézd át a környékedről való nem megerősítettek ajánlatait — ha valakit valóban ismersz, kezességet vállalhatsz érte."
+    "pijaca_neverifikovan_opis": "Ha nincs kitől kódot kérned, tedd közzé, amit kínálsz. Így látnak meg a környékedről való tagok, és felismerhetnek."
   },
   "graf": {
     "naslov": "Megerősítési hálózat",
@@ -1912,6 +1910,8 @@
     "dugme_prihvatam": "Elfogadom",
     "dugme_prihvatam_loading": "Elfogadás...",
     "greska_prihvatanje": "Hiba az elfogadáskor. Próbáld újra.",
+    "greska_ucitavanje": "Nem tudjuk betölteni a szabályzatokat. Ellenőrizd a kapcsolatot, és próbáld újra.",
+    "dugme_pokusaj_ponovo": "Próbáld újra",
     "ucitavanje": "Betöltés…"
   },
   "pravilnikPrihvati": {

@@ -422,9 +422,7 @@
     "greska_opsta": "Greška",
     "greska_mreza": "Mreža nije dostupna",
     "pijaca_neverifikovan_naslov": "Objavi ponudu na Tržnici",
-    "pijaca_neverifikovan_opis": "Ako nemaš koga zamoliti za kod, objavi što nudiš. Tako te vide članovi iz tvoga kraja i mogu te prepoznati.",
-    "pijaca_verifikovan_naslov": "Pomozi novima",
-    "pijaca_verifikovan_opis": "Pogledaj ponude onih bez potvrde iz svoga kraja — ako nekoga uistinu poznaješ, možeš mu jamčiti."
+    "pijaca_neverifikovan_opis": "Ako nemaš koga zamoliti za kod, objavi što nudiš. Tako te vide članovi iz tvoga kraja i mogu te prepoznati."
   },
   "graf": {
     "naslov": "Mreža potvrda",
@@ -1919,6 +1917,8 @@
     "dugme_prihvatam": "Pristajem",
     "dugme_prihvatam_loading": "Pristajem...",
     "greska_prihvatanje": "Greška pri prihvaćanju. Pokušajte ponovno.",
+    "greska_ucitavanje": "Ne možemo učitati akte. Provjeri vezu i pokušaj ponovno.",
+    "dugme_pokusaj_ponovo": "Pokušaj ponovno",
     "ucitavanje": "Učitavanje..."
   },
   "pravilnikPrihvati": {
