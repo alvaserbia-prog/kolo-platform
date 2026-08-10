@@ -422,9 +422,7 @@
     "greska_opsta": "Greška",
     "greska_mreza": "Mreža nije dostupna",
     "pijaca_neverifikovan_naslov": "Objavi ponudu na Pijaci",
-    "pijaca_neverifikovan_opis": "Ako nemaš koga da zamoliš za kod, objavi šta nudiš. Tako te članovi iz tvog kraja vide i mogu da te prepoznaju.",
-    "pijaca_verifikovan_naslov": "Pomozi novima",
-    "pijaca_verifikovan_opis": "Pogledaj ponude onih bez potvrde iz svog kraja — ako nekoga stvarno poznaješ, možeš da ga potvrdiš."
+    "pijaca_neverifikovan_opis": "Ako nemaš koga da zamoliš za kod, objavi šta nudiš. Tako te članovi iz tvog kraja vide i mogu da te prepoznaju."
   },
   "graf": {
     "naslov": "Mreža potvrda",

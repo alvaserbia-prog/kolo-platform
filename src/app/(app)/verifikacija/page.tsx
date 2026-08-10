@@ -132,20 +132,26 @@ export default async function VerifikacijaPage() {
           </div>
           {!jeNeverifikovan && <VerifikujNekoga mozeDaVerifikuje={mozeDaVerifikuje} />}
 
-          {/* Put do verifikacije više ne ide preko zasebnog zida na kome se čovek
-              predstavlja, nego kroz Pijacu (Pravilnik 4.1.1 čl. 32 st. 4): neverifikovani
-              objavi ponudu, mreža ga povodom nje prepozna. Zato obe kartice vode na Pijacu. */}
-          <a
-            href={jeNeverifikovan ? "/pijaca/novi-oglas" : "/pijaca"}
-            className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-          >
-            <p className="font-semibold text-kolo-text">
-              {t(jeNeverifikovan ? "pijaca_neverifikovan_naslov" : "pijaca_verifikovan_naslov")}
-            </p>
-            <p className="text-sm text-kolo-muted mt-0.5">
-              {t(jeNeverifikovan ? "pijaca_neverifikovan_opis" : "pijaca_verifikovan_opis")}
-            </p>
-          </a>
+          {/* Put do potvrde više ne ide preko zasebnog zida na kome se čovek
+              predstavlja, nego kroz Pijacu (Pravilnik 4.1.1 čl. 32 st. 4): onaj bez
+              potvrde objavi ponudu, mreža ga povodom nje prepozna. Zato kartica vodi
+              na objavu oglasa — i stoji SAMO njemu. Potvrđenom članu je ranije stajala
+              kartica „Pomozi novima" ka Pijaci; uklonjena je jer nije nudila ništa što
+              Pijaca (već u sidebar-u) ne nudi, a obećavala je pregled ponuda „onih bez
+              potvrde iz svog kraja" — takav filter ne postoji. */}
+          {jeNeverifikovan && (
+            <a
+              href="/pijaca/novi-oglas"
+              className="flex-1 block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
+            >
+              <p className="font-semibold text-kolo-text">
+                {t("pijaca_neverifikovan_naslov")}
+              </p>
+              <p className="text-sm text-kolo-muted mt-0.5">
+                {t("pijaca_neverifikovan_opis")}
+              </p>
+            </a>
+          )}
         </div>
 
         <div className="flex flex-col gap-6">

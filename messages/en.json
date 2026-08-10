@@ -422,9 +422,7 @@
     "greska_opsta": "Error",
     "greska_mreza": "Network unavailable",
     "pijaca_neverifikovan_naslov": "Post an offer on the Marketplace",
-    "pijaca_neverifikovan_opis": "If you have nobody to ask for a code, post what you offer. That is how members from your area see you and can recognise you.",
-    "pijaca_verifikovan_naslov": "Help the newcomers",
-    "pijaca_verifikovan_opis": "Look through offers by unconfirmed people from your area — if you genuinely know someone, you can confirm them."
+    "pijaca_neverifikovan_opis": "If you have nobody to ask for a code, post what you offer. That is how members from your area see you and can recognise you."
   },
   "graf": {
     "naslov": "Confirmation network",
