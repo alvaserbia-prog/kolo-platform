@@ -64,13 +64,13 @@ Pojedini izrazi u ovom pravilniku imaju sledeće značenje:
 
 **Dokaz stvarnosti** — model verifikacije korisnika zasnovan na ličnom poznavanju, kojim se potvrđuju stvarnost, jedinstvenost i kontinuitet korisnika.
 
-**Lanac jemstva** — mehanizam dokaza stvarnosti u kome verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja.
+**Lanac potvrda** — mehanizam dokaza stvarnosti u kome verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja.
 
 **Indeks stvarnosti** — numerička vrednost (0–100%) koja izražava stepen potvrđenosti korisnika i određuje obim pristupa funkcijama sistema i verifikacioni kapacitet.
 
-**Neverifikovani korisnik** — lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac jemstva.
+**Neverifikovani korisnik** — lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac potvrda.
 
-**Verifikovani korisnik** — lice čija je stvarnost potvrđena kroz lanac jemstva u skladu sa pravilima o dokazu stvarnosti.
+**Verifikovani korisnik** — lice čija je stvarnost potvrđena kroz lanac potvrda u skladu sa pravilima o dokazu stvarnosti.
 
 **Nosilac ZRNA** — verifikovani korisnik kome je u Protokolu upisano ZRNO.
 
@@ -218,7 +218,7 @@ Nove zapise POEN-a Protokol upisuje kroz sledeće kanale evidentiranja doprinosa
 
 1) operativni doprinos;
 
-2) verifikacija drugih korisnika u lancu jemstva;
+2) verifikacija drugih korisnika u lancu potvrda;
 
 3) finansijski doprinos;
 
@@ -254,7 +254,7 @@ Pregled oglasa u platformskom prostoru za oglašavanje — sadržaj ponude ili z
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je i neverifikovanim korisnicima, pod uslovima i ograničenjima utvrđenim Uslovima korišćenja. Postavljanje oglasa kojim se dobro ili usluga traži, pristup kontakt podacima oglašivača i pokretanje komunikacije povodom oglasa dostupni su isključivo verifikovanim korisnicima. Neverifikovani oglašivač može da odgovara u razgovoru koji je verifikovani korisnik pokrenuo povodom njegovog oglasa.
 
-Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu jemstva. Oznaka je dostupna svima kojima je dostupan i sam oglas.
+Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda. Oznaka je dostupna svima kojima je dostupan i sam oglas.
 
 Pseudonim oglašivača u prostoru za oglašavanje ne povezuje se, za neprijavljena i neverifikovana lica, sa evidencijom doprinosa, stanjem računa ni profilom korisnika. Pravila platformskog prostora za oglašavanje uređuju se Uslovima korišćenja.
 
@@ -314,7 +314,7 @@ Razlika između obračunskog koeficijenta u trenutku upisa i u trenutku otpisa n
 
 ZRNO se ne može preneti drugom korisniku.
 
-ZRNO je vezano za korisnika čija je stvarnost potvrđena kroz lanac jemstva.
+ZRNO je vezano za korisnika čija je stvarnost potvrđena kroz lanac potvrda.
 
 Za ZRNO ne postoji tržište, ne postoji cena ZRNA i ne postoji mogućnost trgovanja njime.
 
@@ -364,7 +364,7 @@ Status određuje obim prava i mogućnosti korisnika u sistemu.
 
 ### Član 28
 
-Neverifikovani korisnik je lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac jemstva.
+Neverifikovani korisnik je lice registrovano na platformi čija stvarnost nije potvrđena kroz lanac potvrda.
 
 Neverifikovani korisnik ima pravo pregleda javnog sadržaja sistema, uključujući pregled oglasa u platformskom prostoru za oglašavanje. Može da razmenjuje dobra i usluge i da u platformskom prostoru za oglašavanje postavi oglas kojim nudi dobro ili uslugu, pod ograničenjima iz Uslova korišćenja.
 
@@ -376,9 +376,9 @@ Neverifikovani korisnik ne može da pristupa kontakt podacima oglašivača niti 
 
 ### Član 29
 
-Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac jemstva u skladu sa pravilima o dokazu stvarnosti.
+Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac potvrda u skladu sa pravilima o dokazu stvarnosti.
 
-Verifikovani korisnik može da razmenjuje dobra i usluge, da mu se evidentira doprinos u POEN-ima, da učestvuje u kolektivnim oblicima i socijalnim programima, i da potvrđuje stvarnost drugih korisnika u lancu jemstva.
+Verifikovani korisnik može da razmenjuje dobra i usluge, da mu se evidentira doprinos u POEN-ima, da učestvuje u kolektivnim oblicima i socijalnim programima, i da potvrđuje stvarnost drugih korisnika u lancu potvrda.
 
 Verifikovani korisnik upisuje ZRNO kada ispuni uslove za upis i time postaje nosilac ZRNA.
 
@@ -400,15 +400,15 @@ Verifikacija stvarnosti je obrada podataka o ličnosti. Pravni osnov te obrade j
 
 ### Član 32
 
-Stvarnost korisnika potvrđuje se kroz lanac jemstva: verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Svaki novi korisnik ulazi u sistem jer ga neko ko je već verifikovan poznaje i potvrđuje da postoji.
+Stvarnost korisnika potvrđuje se kroz lanac potvrda: verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Svaki novi korisnik ulazi u sistem jer ga neko ko je već verifikovan poznaje i potvrđuje da postoji.
 
 Svaki korisnik ima indeks stvarnosti — numeričku vrednost koja izražava stepen potvrđenosti korisnika. Indeks stvarnosti određuje obim pristupa funkcijama sistema i kapacitet korisnika da potvrđuje stvarnost drugih.
 
-Skup potvrda u lancu jemstva čini graf verifikacija. Graf verifikacija je evidencija podataka o ličnosti; vodi se na infrastrukturi na kojoj radi Protokol, uz minimizaciju podataka. Graf obuhvata i podatke o nadzoru verifikacija — ishod nadzora, a uz izraženu sumnju i subjekt sumnje i šifru razloga (član 11 Pravilnika o dokazu stvarnosti). Ti podaci nisu javni i na njih se primenjuje član 67 ovog pravilnika.
+Skup potvrda u lancu potvrda čini graf verifikacija. Graf verifikacija je evidencija podataka o ličnosti; vodi se na infrastrukturi na kojoj radi Protokol, uz minimizaciju podataka. Graf obuhvata i podatke o nadzoru verifikacija — ishod nadzora, a uz izraženu sumnju i subjekt sumnje i šifru razloga (član 11 Pravilnika o dokazu stvarnosti). Ti podaci nisu javni i na njih se primenjuje član 67 ovog pravilnika.
 
 Kontakt neophodan za sprovođenje verifikacije neverifikovani korisnik uspostavlja kroz platformski prostor za oglašavanje (član 16): objavom oglasa kojim nudi dobro ili uslugu predstavlja se mreži postojećih verifikovanih korisnika. Postojanje tog puta ne menja prirodu, postupak ni uslove verifikacije utvrđene ovim pravilnikom i Pravilnikom o dokazu stvarnosti. Pravila objavljivanja, sadržaja i obrade podataka utvrđuju se Uslovima korišćenja i Politikom privatnosti.
 
-Pravila izračunavanja indeksa stvarnosti, pravila širenja mreže jemstva i mere protiv zloupotrebe lanca jemstva utvrđuju se posebnim pravilnikom.
+Pravila izračunavanja indeksa stvarnosti, pravila širenja mreže potvrda i mere protiv zloupotrebe lanca potvrda utvrđuju se posebnim pravilnikom.
 
 ### Član 33
 
@@ -508,7 +508,7 @@ Doprinos iz prethodnog stava je prvi korak putanje doprinosa razmeni iz člana 4
 
 Verifikovanom korisniku doprinos se evidentira u trenutku objave oglasa.
 
-Neverifikovanom korisniku doprinos se u trenutku objave oglasa beleži, a evidentira se u Protokolu kada nastupi prvi od sledećih događaja: verifikacija korisnika u lancu jemstva, ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sistemu.
+Neverifikovanom korisniku doprinos se u trenutku objave oglasa beleži, a evidentira se u Protokolu kada nastupi prvi od sledećih događaja: verifikacija korisnika u lancu potvrda, ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sistemu.
 
 Razlikovanje iz prethodna dva stava služi tome da nalozi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a pre nego što se u sistemu pojavi trag stvarnog učešća.
 
@@ -544,7 +544,7 @@ Razmenom u smislu ovog člana smatra se ažuriranje evidencije POEN-a između dv
 
 Platforma ne traži od korisnika da razmenu posebno označe ni potvrde. Putanja se očitava iz samih zapisa POEN-a i objavljenih oglasa; drugih zapisa o razmeni nema.
 
-Korisnik je van kruga poznanstava drugog korisnika ako se nijedan od njih dvojice ne nalazi u zabranjenoj zoni onog drugog u smislu Pravilnika o dokazu stvarnosti. Zabranjena zona obuhvata uzlaznu i silaznu liniju lanca jemstva i sa njima izjednačene odnose, pa je van kruga poznanstava onaj koga lanac jemstva ne povezuje sa korisnikom.
+Korisnik je van kruga poznanstava drugog korisnika ako se nijedan od njih dvojice ne nalazi u zabranjenoj zoni onog drugog u smislu Pravilnika o dokazu stvarnosti. Zabranjena zona obuhvata uzlaznu i silaznu liniju lanca potvrda i sa njima izjednačene odnose, pa je van kruga poznanstava onaj koga lanac potvrda ne povezuje sa korisnikom.
 
 Svaki korisnik računa se u putanji jednom, nezavisno od broja razmena sa njim.
 
@@ -736,7 +736,7 @@ Pravila pristupa, obim dozvoljenih aktivnosti, ograničenja razmene i mere zašt
 
 Internacionalizacija je infrastrukturno širenje sistema na nove regije. Sistem proširuje svoju infrastrukturu, evidenciju i pravila na nove teritorije, zadržavajući jedinstven Protokol i jedinstvenu evidenciju zajedničkog dobra.
 
-Širenje na nove regije zahteva prilagodbe u više dimenzija: pravni okvir ciljne jurisdikcije, jezička lokalizacija platforme, uspostavljanje lokalnog lanca jemstva i eventualno formiranje lokalnih zadruga.
+Širenje na nove regije zahteva prilagodbe u više dimenzija: pravni okvir ciljne jurisdikcije, jezička lokalizacija platforme, uspostavljanje lokalnog lanca potvrda i eventualno formiranje lokalnih zadruga.
 
 Preduslov za aktiviranje ovog modula je stabilan sistem sa aktivnim Gornjim Kolom, dovoljno iskustva sa funkcionisanjem sistema u osnovnoj regiji i pravna analiza za ciljne jurisdikcije. Odluku o širenju donosi Gornje Kolo.
 
@@ -880,7 +880,7 @@ Fondacija ne garantuje da će sistem funkcionisati bez prekida, da infrastruktur
 
 Za ispunjenje, kvalitet i rizik u razmeni dobara i usluga odgovaraju korisnici koji u njoj učestvuju, prema opštim pravilima obligacionog prava.
 
-Korisnik je odgovoran za tačnost podataka koje dostavlja sistemu. Korisnik koji učestvuje u lancu jemstva odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
+Korisnik je odgovoran za tačnost podataka koje dostavlja sistemu. Korisnik koji učestvuje u lancu potvrda odgovoran je za istinitost potvrde stvarnosti u skladu sa pravilima o dokazu stvarnosti.
 
 Korisnik koji zloupotrebi sistem podleže merama u skladu sa pravilima o prestanku i suspenziji statusa.
 
@@ -938,7 +938,7 @@ Hijerarhija akata, njihov međusobni rang i pravila za rešavanje nesaglasnosti 
 
 Pri puštanju sistema u rad ne postoje prethodno verifikovani korisnici koji bi potvrdili stvarnost prvih korisnika, niti evidentirani POEN-i iz kojih bi se upisalo ZRNO. Zbog toga se prvi nosioci ZRNA — početni korisnici, članovi Upravnog odbora Fondacije — uspostavljaju neposredno, odlukom Upravnog odbora Fondacije.
 
-Početni korisnici izuzeti su, kao jednokratan događaj početka sistema, od uslova upisa ZRNA iz člana 19 (minimum evidentiranih POEN-a) i od pravila lanca jemstva iz člana 32 i Pravilnika o dokazu stvarnosti koja pretpostavljaju postojanje prethodnog verifikatora. Oni čine ishodište lanca jemstva; njihov početni indeks stvarnosti, izuzeće od nadzora i izuzeće od anti-cirkularnog pravila uređeni su Pravilnikom o dokazu stvarnosti (Glava VI — Početni mehanizam).
+Početni korisnici izuzeti su, kao jednokratan događaj početka sistema, od uslova upisa ZRNA iz člana 19 (minimum evidentiranih POEN-a) i od pravila lanca potvrda iz člana 32 i Pravilnika o dokazu stvarnosti koja pretpostavljaju postojanje prethodnog verifikatora. Oni čine ishodište lanca potvrda; njihov početni indeks stvarnosti, izuzeće od nadzora i izuzeće od anti-cirkularnog pravila uređeni su Pravilnikom o dokazu stvarnosti (Glava VI — Početni mehanizam).
 
 Početni korisnici nisu poseban status u smislu člana 27: oni su nosioci ZRNA sa svojstvima utvrđenim Pravilnikom o dokazu stvarnosti, i istovremeno mogu vršiti operativna ovlašćenja Upravnog odbora u Fazi 1. Po uspostavljanju sistema svi novi nosioci ZRNA stiču status redovnim putem (čl. 19, 29 i 30).
 

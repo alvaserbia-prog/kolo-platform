@@ -40,7 +40,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
         kljuc: "notifikacije.verifikacija_ponistena",
         naslov: "Verifikacija poništena",
         tekst:
-          "Za nalog iz tvog lanca jemstva utvrđeno je da iza njega ne stoji stvarna osoba, pa je verifikacija koja ide preko njega poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
+          "Za nalog iz tvog lanca potvrda utvrđeno je da iza njega ne stoji stvarna osoba, pa je verifikacija koja ide preko njega poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
         link: "/profil",
       });
     }

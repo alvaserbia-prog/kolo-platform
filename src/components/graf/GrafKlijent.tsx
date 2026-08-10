@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Graf verifikacija — SVG prikaz cele mreže jemstva.
+ * Graf verifikacija — SVG prikaz cele mreže potvrda.
  *
  * - Čvor je javno samo BROJ (donatorski broj); klik otvara panel sa pseudonimom,
  *   indeksom, kapacitetom i vezama (ko ga je verifikovao / koga je verifikovao).

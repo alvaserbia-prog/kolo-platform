@@ -9,7 +9,7 @@ import { ImageResponse } from "next/og";
  * kao asset, pa radi i u serverless i u edge okruženju.
  */
 export const runtime = "edge";
-export const alt = "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici";
+export const alt = "KOLO — mreža za razmenu rada, dobara i znanja";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

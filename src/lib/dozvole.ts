@@ -40,7 +40,7 @@ export function mozeNadzor(u?: KorisnikDozvole | null): boolean {
   return u?.tipKorisnika === NOSILAC_ZRNA || jeAdmin(u);
 }
 
-/** Koren lanca jemstva — bootstrap poverenja (superadmin verifikuje prve ljude). */
+/** Koren lanca potvrda — bootstrap poverenja (superadmin verifikuje prve ljude). */
 export function jeKorenJemstva(u?: KorisnikDozvole | null): boolean {
   return jeSuperadmin(u);
 }

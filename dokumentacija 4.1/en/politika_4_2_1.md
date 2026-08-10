@@ -58,7 +58,7 @@ The user is responsible for ensuring that the pseudonym does not contain persona
 
 **4.2 Proof-of-Reality Data**
 
-Proof of reality is a model of user verification based on personal acquaintance in the vouching chain — existing verified users confirm the reality of new users on the basis of direct personal acquaintance. Proof of reality does not require the collection of personal documents, identity card numbers, or the unique citizen identification number.
+Proof of reality is a model of user verification based on personal acquaintance in the chain of confirmations — existing verified users confirm the reality of new users on the basis of direct personal acquaintance. Proof of reality does not require the collection of personal documents, identity card numbers, or the unique citizen identification number.
 
 Within proof of reality we collect: the verification graph (a record of who verified whom, in pseudonymous form), the reality index (a numerical value expressing the degree of user verification), and verification records (verifier's pseudonym, verification sequence number, verified person's pseudonym, timestamp, and supervisor's pseudonym).
 
@@ -132,7 +132,7 @@ An unverified user may post a listing offering a good or a service (Article 16 o
 
 The listing contains: the advertiser's pseudonym, the title and description of the good or service, the category, the price, the place (a settlement from the register), photographs the user attaches themselves, and, at their own choice, a telephone number.
 
-The listing is publicly visible to all visitors of the Platform, including non-registered persons, and is indexed by search engines. The telephone number is not public — it is accessible exclusively to verified users. The listing carries a visible mark indicating that the advertiser is not verified in the vouching chain.
+The listing is publicly visible to all visitors of the Platform, including non-registered persons, and is indexed by search engines. The telephone number is not public — it is accessible exclusively to verified users. The listing carries a visible mark indicating that the advertiser is not verified in the chain of confirmations.
 
 The user chooses what to publish. A photograph of their face, name, and surname are neither requested nor required; a user who includes them in a listing does so on their own initiative and thereby publishes them publicly.
 
@@ -188,7 +188,7 @@ Legal basis: legitimate interest (Art. 12 para. 1 item 6 LPDP).
 
 The KOLO Platform applies a visibility model corresponding to the user's status in the system.
 
-Unverified users — persons registered on the Platform whose reality has not been confirmed through the vouching chain — may view general system indicators, familiarize themselves with the rules, browse listings, and post a listing offering a good or a service, to the extent established by this Article. They do not have access to other users' pseudonyms, individual transactions, or account balances.
+Unverified users — persons registered on the Platform whose reality has not been confirmed through the chain of confirmations — may view general system indicators, familiarize themselves with the rules, browse listings, and post a listing offering a good or a service, to the extent established by this Article. They do not have access to other users' pseudonyms, individual transactions, or account balances.
 
 Verified users — persons whose reality has been confirmed and whose reality index is at least 10% — may view the pseudonyms of all users, the amounts and timestamps of all POEN transactions, the pseudonyms of parties to each transaction, and POEN account balances.
 

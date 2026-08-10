@@ -68,7 +68,7 @@ Az Alapítvány megszűnhet. Ebben az esetben a közjó őrzőjének szerepe és
 
 A javak és szolgáltatások cseréjének teljesítéséért, minőségéért és kockázatáért az abban részt vevő felhasználók felelnek a kötelmi jog általános szabályai szerint. Az Alapítvány nem közvetít a cserében, és nem fél a javakat és szolgáltatásokat cserélő felhasználók közötti jogviszonyban.
 
-A felhasználó felelős a rendszernek megadott adatok pontosságáért. Az a felhasználó, aki a kezességi láncban részt vesz, a valóságbizonyítékról szóló szabályok szerint felel a valóság megerősítésének valóságtartalmáért.
+A felhasználó felelős a rendszernek megadott adatok pontosságáért. Az a felhasználó, aki a megerősítési láncban részt vesz, a valóságbizonyítékról szóló szabályok szerint felel a valóság megerősítésének valóságtartalmáért.
 
 ### 10. cikk — Adókockázat
 

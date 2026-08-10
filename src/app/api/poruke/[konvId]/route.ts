@@ -34,7 +34,16 @@ export async function GET(
     where: { konverzacijaId: konvId },
     orderBy: { createdAt: "asc" },
     take: 50,
-    select: { id: true, tekst: true, posiljacId: true, procitana: true, createdAt: true },
+    select: {
+      id: true,
+      tekst: true,
+      posiljacId: true,
+      procitana: true,
+      createdAt: true,
+      // Povod razgovora: kartica oglasa stoji iznad poruke kojom je pokrenut,
+      // da se i posle mesec dana zna o čemu se pričalo.
+      oglas: { select: { id: true, title: true, images: true } },
+    },
   });
 
   // Označi primljene poruke kao pročitane
@@ -43,8 +52,19 @@ export async function GET(
     data: { procitana: true },
   });
 
+  // Povod koji još čeka na prvu poruku — podsetnik iznad polja za kucanje.
+  const cekaPovod = await prisma.konverzacija.findUnique({
+    where: { id: konvId },
+    select: { povodOglas: { select: { id: true, title: true, images: true, sellerId: true } } },
+  });
+  const povod =
+    cekaPovod?.povodOglas && cekaPovod.povodOglas.sellerId !== session.user.id
+      ? { id: cekaPovod.povodOglas.id, naslov: cekaPovod.povodOglas.title, imaSliku: cekaPovod.povodOglas.images.length > 0 }
+      : null;
+
   return NextResponse.json({
     drugiUser,
+    povod,
     mojAvatar: jaUser?.avatar ?? null,
     mojPseudonim: session.user.pseudonim,
     poruke: poruke.map((p) => ({
@@ -52,6 +72,7 @@ export async function GET(
       tekst: p.tekst,
       moja: p.posiljacId === session.user.id,
       createdAt: p.createdAt.toISOString(),
+      oglas: p.oglas ? { id: p.oglas.id, naslov: p.oglas.title, imaSliku: p.oglas.images.length > 0 } : null,
     })),
   });
 }
@@ -76,13 +97,30 @@ export async function POST(
   if (!tekst?.trim()) return await greska("Poruka ne sme biti prazna.", 400);
   if (tekst.trim().length > 1000) return await greska("Poruka je predugačka (max 1000 znakova).", 400);
 
+  // Povod čeka otkad je kliknuto „Kontaktiraj". Troši ga PRVA poruka onoga ko
+  // nije vlasnik oglasa — vlasnik odgovara na svoj oglas, njemu kartica ne treba.
+  const konvPovod = await prisma.konverzacija.findUnique({
+    where: { id: konvId },
+    select: { povodOglasId: true, povodOglas: { select: { sellerId: true } } },
+  });
+  const povodOglasId =
+    konvPovod?.povodOglasId && konvPovod.povodOglas?.sellerId !== session.user.id
+      ? konvPovod.povodOglasId
+      : null;
+
   const [poruka] = await prisma.$transaction([
     prisma.poruka.create({
-      data: { konverzacijaId: konvId, posiljacId: session.user.id, tekst: tekst.trim() },
+      data: {
+        konverzacijaId: konvId,
+        posiljacId: session.user.id,
+        tekst: tekst.trim(),
+        oglasId: povodOglasId,
+      },
     }),
     prisma.konverzacija.update({
       where: { id: konvId },
-      data: { lastMessageAt: new Date() },
+      // Povod je iskorišćen — briše se, da ga naredne poruke ne ponove.
+      data: { lastMessageAt: new Date(), ...(povodOglasId ? { povodOglasId: null } : {}) },
     }),
   ]);
 

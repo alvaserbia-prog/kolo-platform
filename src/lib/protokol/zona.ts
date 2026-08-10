@@ -323,7 +323,7 @@ export function proveriDozvoluVerifikacijeSaIzuzetkom(
 
 /**
  * Provera dozvole verifikacije A→B (čl. 12 i čl. 14 st. 3, v3.9.2):
- *  1. B nije početni korisnik — početni se ne verifikuju u lancu jemstva;
+ *  1. B nije početni korisnik — početni se ne verifikuju u lancu potvrda;
  *  2. B ∉ Zone(A) — meta nije u zabranjenoj zoni verifikatora;
  *  3. A ∉ Zone(B) — verifikator se ne nalazi u zabranjenoj zoni mete.
  * Poruke razlikuju zabranjenu zonu od zabrane verifikovanja početnog korisnika.
@@ -346,7 +346,7 @@ export function proveriDozvoluVerifikacije(
       dozvoljeno: false,
       vrsta: "POCETNI_META",
       razlog:
-        "Početni korisnici ne mogu biti verifikovani u lancu jemstva — njihova stvarnost proizlazi iz javne evidencije, odnosno odluke Upravnog odbora (čl. 14 Pravilnika o dokazu stvarnosti).",
+        "Početni korisnici ne mogu biti verifikovani u lancu potvrda — njihova stvarnost proizlazi iz javne evidencije, odnosno odluke Upravnog odbora (čl. 14 Pravilnika o dokazu stvarnosti).",
     };
   }
   if (uZoni(stanje, verifikatorId, verifikovaniId)) {

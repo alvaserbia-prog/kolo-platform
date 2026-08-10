@@ -574,9 +574,11 @@ model MarketplaceListing {
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
-  prijave   PrijavaOglasa[]
-  doprinosi DoprinosSadrzaju[]
-  upiti     OglasUpit[]
+  prijave      PrijavaOglasa[]
+  doprinosi    DoprinosSadrzaju[]
+  upiti        OglasUpit[]
+  poruke       Poruka[]           @relation("PorukaOglas")
+  povodKonverz Konverzacija[]     @relation("KonvPovod")
 
   @@index([status, category, createdAt])
   @@index([status, tip, createdAt])
@@ -1194,6 +1196,13 @@ model Konverzacija {
   lastMessageAt DateTime @default(now())
   createdAt     DateTime @default(now())
 
+  /// Oglas sa kog je kliknuto „Kontaktiraj", a poruka još nije napisana.
+  /// Čovek često otvori razgovor pa napiše tek kasnije, iz liste razgovora —
+  /// zato povod čeka OVDE, a ne u adresi stranice. Troši ga prva poruka onoga
+  /// ko nije vlasnik oglasa i prelazi na `Poruka.oglasId`.
+  povodOglasId String?
+  povodOglas   MarketplaceListing? @relation("KonvPovod", fields: [povodOglasId], references: [id], onDelete: SetNull)
+
   @@unique([user1Id, user2Id])
   @@index([user1Id, lastMessageAt(sort: Desc)])
   @@index([user2Id, lastMessageAt(sort: Desc)])
@@ -1209,7 +1218,17 @@ model Poruka {
   procitana      Boolean      @default(false)
   createdAt      DateTime     @default(now())
 
+  /// Oglas povodom kog je poruka poslata. Konverzacija je jedna po PARU ljudi,
+  /// pa povod ne može da stoji na njoj — isti dvoje se tokom vremena javljaju
+  /// povodom više oglasa. SetNull: brisanje oglasa ne briše tuđu poruku.
+  ///
+  /// Odvojeno od `OglasUpit`, koji broji upite za korak 3: ovo je PRIKAZ u
+  /// razgovoru (sličica i link), a ne merilo.
+  oglasId String?
+  oglas   MarketplaceListing? @relation("PorukaOglas", fields: [oglasId], references: [id], onDelete: SetNull)
+
   @@index([konverzacijaId, createdAt])
+  @@index([oglasId])
 }
 
 // ─── Politika privatnosti — verzionisanje i pristanci ────────────────────────
@@ -1411,13 +1430,13 @@ model ChatMessage {
 // ─── Dokaz stvarnosti — graf verifikacija (Pravilnik v3.5.0) ─────────────────
 
 model VerifikacionaVeza {
-  id                 String    @id @default(uuid())
+  id                 String           @id @default(uuid())
   verifikatorId      String
-  verifikator        User      @relation("Verifikator", fields: [verifikatorId], references: [id])
+  verifikator        User             @relation("Verifikator", fields: [verifikatorId], references: [id])
   redniBroj          Int
   verifikovaniId     String
-  verifikovani       User      @relation("Verifikovani", fields: [verifikovaniId], references: [id])
-  vremenskiZig       DateTime  @default(now())
+  verifikovani       User             @relation("Verifikovani", fields: [verifikovaniId], references: [id])
+  vremenskiZig       DateTime         @default(now())
   // Slobodna oznaka (nadimak) koju verifikator dodeljuje verifikovanome — da bi lakše
   // pratio koga je verifikovao. NIJE javna: vidljiva samo verifikatoru i UO Fondacije
   // (admin). Ne objavljuje se drugim korisnicima i ne kači se na javnu evidenciju
@@ -1427,7 +1446,7 @@ model VerifikacionaVeza {
   // NadzorZapis — po ishodu "za proveru" zapis gleda više nadzornika, a jedno polje
   // ne može da nosi dvoje ljudi (dokaz stvarnosti 4.2.0, čl. 11).
   nadzornikId        String?
-  nadzornik          User?     @relation("Nadzornik", fields: [nadzornikId], references: [id])
+  nadzornik          User?            @relation("Nadzornik", fields: [nadzornikId], references: [id])
   podlezeNadzoru     Boolean
   nadzoranAt         DateTime?
   // Merodavan ishod = poslednji evidentirani. UREDNO je jedini koji dopunjava slot

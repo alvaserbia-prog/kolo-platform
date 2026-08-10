@@ -2,7 +2,7 @@
  * PATCH /api/verifikacija/oznaka
  *
  * Verifikator postavlja/menja/briše slobodnu oznaku (nadimak) za osobu koju je
- * verifikovao — radi lakšeg praćenja sopstvenog lanca jemstva.
+ * verifikovao — radi lakšeg praćenja sopstvenog lanca potvrda.
  * Body: { verifikacijaId: string, oznaka: string }  (prazna oznaka briše)
  *
  * Oznaku sme da menja ISKLJUČIVO verifikator koji je obavio tu verifikaciju.

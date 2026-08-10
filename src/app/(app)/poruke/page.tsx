@@ -25,6 +25,8 @@ type Poruka = {
   tekst: string;
   moja: boolean;
   createdAt: string;
+  /** Oglas povodom kog je razgovor pokrenut — kartica stoji iznad poruke. */
+  oglas?: { id: string; naslov: string; imaSliku: boolean } | null;
 };
 
 function PorukeContent() {
@@ -39,6 +41,8 @@ function PorukeContent() {
   const [drugiPseudonim, setDrugiPseudonim] = useState("");
   const [drugiId, setDrugiId] = useState("");
   const [drugiAvatar, setDrugiAvatar] = useState<string | null>(null);
+  // Oglas povodom kog je razgovor otvoren, a poruka još nije napisana.
+  const [povod, setPovod] = useState<{ id: string; naslov: string; imaSliku: boolean } | null>(null);
   const [mojAvatar, setMojAvatar] = useState<string | null>(null);
   const [mojPseudonim, setMojPseudonim] = useState("");
   const [mobilniPrikaz, setMobilniPrikaz] = useState<"lista" | "chat">("lista");
@@ -79,6 +83,7 @@ function PorukeContent() {
     setDrugiId(data.drugiUser?.id ?? "");
     setDrugiAvatar(data.drugiUser?.avatar ?? null);
     setMojAvatar(data.mojAvatar ?? null);
+    setPovod(data.povod ?? null);
     setMojPseudonim(data.mojPseudonim ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
@@ -101,6 +106,7 @@ function PorukeContent() {
       setDrugiPseudonim("");
       setDrugiId("");
       setDrugiAvatar(null);
+      setPovod(null);
     }
   }, [aktivnaKonvId, ucitajPoruke]);
 
@@ -215,6 +221,8 @@ function PorukeContent() {
     const novaPoruka: Poruka = await res.json();
     setPoruke((prev) => [...prev, novaPoruka]);
     setTekst("");
+    // Povod je prešao na poruku — podsetnik iznad polja više nije potreban.
+    setPovod(null);
     await ucitajKonverzacije();
     inputRef.current?.focus();
   }
@@ -358,6 +366,22 @@ function PorukeContent() {
 
             {/* Input */}
             <div className="px-4 py-3 border-t border-kolo-border">
+              {/* Povodom čega je razgovor otvoren. Stoji dok se ne napiše prva
+                  poruka — tada prelazi na nju, kao kartica iznad teksta. */}
+              {povod && (
+                <a
+                  href={`/pijaca/${povod.id}`}
+                  className="flex items-center gap-2 mb-2 px-2 py-1.5 rounded-xl bg-kolo-bg border border-kolo-border hover:bg-white transition-colors"
+                >
+                  {povod.imaSliku ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={`/api/pijaca/slika/${povod.id}/0`} alt="" className="w-8 h-8 rounded-lg object-cover shrink-0 bg-white" />
+                  ) : (
+                    <span className="w-8 h-8 rounded-lg bg-white shrink-0 flex items-center justify-center text-sm">🏷️</span>
+                  )}
+                  <span className="text-xs font-semibold text-kolo-green-700 underline truncate">{povod.naslov}</span>
+                </a>
+              )}
               <form onSubmit={posalji} className="flex items-end gap-2">
                 <textarea
                   ref={inputRef}
@@ -472,6 +496,24 @@ const PorukaBubble = memo(function PorukaBubble({
             : "bg-kolo-bg text-kolo-text border border-kolo-border rounded-bl-sm"
         }`}
       >
+        {p.oglas && (
+          <a
+            href={`/pijaca/${p.oglas.id}`}
+            className={`flex items-center gap-2 mb-2 pb-2 border-b rounded-lg ${
+              p.moja ? "border-white/25 hover:bg-white/10" : "border-kolo-border hover:bg-white"
+            } transition-colors`}
+          >
+            {p.oglas.imaSliku ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={`/api/pijaca/slika/${p.oglas.id}/0`} alt="" className="w-9 h-9 rounded-lg object-cover shrink-0 bg-white" />
+            ) : (
+              <span className="w-9 h-9 rounded-lg bg-white/80 shrink-0 flex items-center justify-center text-base">🏷️</span>
+            )}
+            <span className={`text-xs font-semibold underline truncate ${p.moja ? "text-white" : "text-kolo-green-700"}`}>
+              {p.oglas.naslov}
+            </span>
+          </a>
+        )}
         <p className="whitespace-pre-wrap break-words">{p.tekst}</p>
         <p className={`text-[10px] mt-1 ${p.moja ? "text-white/70" : "text-kolo-border"}`}>
           {new Date(p.createdAt).toLocaleString(intlTag(locale), { hour: "2-digit", minute: "2-digit" })}

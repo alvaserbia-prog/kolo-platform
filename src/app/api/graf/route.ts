@@ -1,5 +1,5 @@
 /**
- * GET /api/graf — podaci za prikaz cele mreže jemstva (graf verifikacija).
+ * GET /api/graf — podaci za prikaz cele mreže potvrda (graf verifikacija).
  *
  * Pristup: isključivo verifikovani korisnici (indeks ≥ 10% / nosilac ZRNA) —
  * graf verifikacija se NIKADA ne izlaže javno (Politika privatnosti čl. 6).

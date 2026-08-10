@@ -58,7 +58,7 @@ A felhasználó felelős azért, hogy az álnév ne tartalmazzon olyan személye
 
 **4.2 A valóságbizonyíték adatai**
 
-A valóságbizonyíték a felhasználók hitelesítésének a kezességi láncon belüli személyes ismeretségen alapuló modellje — a meglévő hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valóságát. A valóságbizonyíték nem igényli személyi okmányok, személyi igazolvány szám vagy egységes személyazonosító szám gyűjtését.
+A valóságbizonyíték a felhasználók hitelesítésének a megerősítési láncon belüli személyes ismeretségen alapuló modellje — a meglévő hitelesített felhasználók közvetlen ismeretség alapján erősítik meg az új felhasználók valóságát. A valóságbizonyíték nem igényli személyi okmányok, személyi igazolvány szám vagy egységes személyazonosító szám gyűjtését.
 
 A valóságbizonyíték keretében a következőket gyűjtjük: hitelesítési gráf (nyilvántartás arról, hogy ki kit hitelesített, álnevesített formában), valóságindex (a felhasználó hitelesítettségi fokát kifejező számérték) és hitelesítési bejegyzések (a hitelesítő álneve, a hitelesítés sorszáma, a hitelesített álneve, időbélyeg és a felügyelő álneve).
 
@@ -132,7 +132,7 @@ A nem hitelesített felhasználó javat vagy szolgáltatást kínáló hirdetés
 
 A hirdetés a következőket tartalmazza: a hirdető álneve, a jószág vagy szolgáltatás címe és leírása, kategória, ár, helység (a településjegyzékből), a felhasználó által csatolt fényképek, valamint saját választása szerint telefonszám.
 
-A hirdetés a Platform minden látogatója számára nyilvánosan látható, ideértve a be nem jelentkezett személyeket is, és a keresőmotorok indexelik. A telefonszám nem nyilvános — kizárólag hitelesített felhasználók számára elérhető. A hirdetés látható jelölést visel arról, hogy a hirdető nincs hitelesítve a kezességi láncban.
+A hirdetés a Platform minden látogatója számára nyilvánosan látható, ideértve a be nem jelentkezett személyeket is, és a keresőmotorok indexelik. A telefonszám nem nyilvános — kizárólag hitelesített felhasználók számára elérhető. A hirdetés látható jelölést visel arról, hogy a hirdető nincs hitelesítve a megerősítési láncban.
 
 A felhasználó maga választja meg, mit tesz közzé. Arckép, valamint családi és utónév megadása sem nem kért, sem nem szükséges; az a felhasználó, aki ezeket a hirdetésbe foglalja, saját kezdeményezésére teszi, és ezzel nyilvánosan közzéteszi őket.
 
@@ -188,7 +188,7 @@ Jogalap: jogos érdek (ZZPL 12. cikk (1) bekezdés 6. pont).
 
 A KOLO Platform olyan láthatósági modellt alkalmaz, amely megfelel a felhasználó rendszerbeli státuszának.
 
-A nem hitelesített felhasználók — a Platformon regisztrált olyan személyek, akiknek valóságát a kezességi láncon keresztül nem erősítették meg — megtekinthetik a rendszer általános mutatóit, megismerhetik a szabályokat, böngészhetik a hirdetéseket és javat vagy szolgáltatást kínáló hirdetést tehetnek közzé, az e cikkben meghatározott mértékben. Nem tekinthetnek be más felhasználók álnevébe, az egyes tranzakciókba, sem a számlaegyenlegekbe.
+A nem hitelesített felhasználók — a Platformon regisztrált olyan személyek, akiknek valóságát a megerősítési láncon keresztül nem erősítették meg — megtekinthetik a rendszer általános mutatóit, megismerhetik a szabályokat, böngészhetik a hirdetéseket és javat vagy szolgáltatást kínáló hirdetést tehetnek közzé, az e cikkben meghatározott mértékben. Nem tekinthetnek be más felhasználók álnevébe, az egyes tranzakciókba, sem a számlaegyenlegekbe.
 
 A hitelesített felhasználók — azok a személyek, akiknek valósága megerősítést nyert, és akiknek valóságindexe legalább 10 % — láthatják valamennyi felhasználó álnevét, valamennyi POEN-tranzakció összegét és időbélyegét, az egyes tranzakciók feleinek álnevét és a POEN-számlaegyenlegeket.
 

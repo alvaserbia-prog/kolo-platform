@@ -67,19 +67,37 @@ export async function POST(req: NextRequest) {
   const drugiUser = await prisma.user.findUnique({ where: { id: userId }, select: { id: true } });
   if (!drugiUser) return await greska("Korisnik ne postoji.", 404);
 
+  // Povod razgovora za PRIKAZ (sličica i link u razgovoru) — odvojeno od
+  // `zabeleziUpit`, koji broji upite za korak 3. Prihvata se samo ako oglas
+  // stvarno pripada drugoj strani: inače bi se moglo prikačiti bilo šta.
+  //
+  // Čeka na konverzaciji, ne u adresi stranice: čovek često otvori razgovor pa
+  // napiše tek kasnije, iz liste razgovora, kad adrese sa oglasom više nema.
+  let povodOglasId: string | null = null;
+  if (typeof oglasId === "string" && oglasId) {
+    const oglas = await prisma.marketplaceListing.findFirst({
+      where: { id: oglasId, sellerId: userId },
+      select: { id: true },
+    });
+    povodOglasId = oglas?.id ?? null;
+  }
+
   // Uvek sortiraj IDs da bi @@unique radio
   const [u1, u2] = [meId, userId].sort();
 
   const konv = await prisma.konverzacija.upsert({
     where: { user1Id_user2Id: { user1Id: u1, user2Id: u2 } },
-    create: { user1Id: u1, user2Id: u2 },
-    update: {},
+    create: { user1Id: u1, user2Id: u2, povodOglasId },
+    // Klik sa drugog oglasa zamenjuje povod koji još nije iskorišćen; klik bez
+    // oglasa (pretraga člana) ne briše onaj koji čeka.
+    update: povodOglasId ? { povodOglasId } : {},
     select: { id: true },
   });
 
   // Upit se beleži tek pošto je razgovor otvoren — i ne obara odgovor ako padne.
   // `zabeleziUpit` sam proverava da oglas postoji i da pošiljalac nije oglašivač.
   if (typeof oglasId === "string" && oglasId) await zabeleziUpit(oglasId, meId);
+
 
   return NextResponse.json({ konverzacijaId: konv.id });
 }

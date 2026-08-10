@@ -1,5 +1,5 @@
 /**
- * /graf — Graf verifikacija: prikaz cele mreže jemstva.
+ * /graf — Graf verifikacija: prikaz cele mreže potvrda.
  *
  * Vidljiv isključivo verifikovanim korisnicima (indeks ≥ 10% / nosilac ZRNA) —
  * graf verifikacija se ne izlaže javno (Politika privatnosti čl. 6).

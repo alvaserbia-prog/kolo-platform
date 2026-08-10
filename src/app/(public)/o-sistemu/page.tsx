@@ -441,6 +441,9 @@ export default async function OSistemuPage() {
             <p>
               {t("familija_p2")}
             </p>
+            <p>
+              {t("familija_p3")}
+            </p>
           </div>
         </div>
       </section>

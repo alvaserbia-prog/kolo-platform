@@ -10,7 +10,7 @@
 
 *Subject matter*
 
-This Rulebook governs: the reality index, the vouching chain, the verification record, the POEN ledger entry for verification, verification capacity, supervision and the supervision outcome, the supervision case, the anti-circular rule, the initial mechanism, the consequences of loss of status on verifications, the procedure for establishing a false verification, and restitution for POEN records withdrawn from the network.
+This Rulebook governs: the reality index, the chain of confirmations, the verification record, the POEN ledger entry for verification, verification capacity, supervision and the supervision outcome, the supervision case, the anti-circular rule, the initial mechanism, the consequences of loss of status on verifications, the procedure for establishing a false verification, and restitution for POEN records withdrawn from the network.
 
 Terms not defined in this Rulebook shall have the meaning established in the KOLO System Rulebook.
 
@@ -26,7 +26,7 @@ This Rulebook elaborates the provisions of Chapter V of the KOLO System Rulebook
 
 *Concept and calculation*
 
-The reality index is a numerical value expressing the degree to which a user has been verified within the vouching chain. Each verification increases the verified user's index by 10 percentage points. The range of the index is from 0% to 100%.
+The reality index is a numerical value expressing the degree to which a user has been verified within the chain of confirmations. Each verification increases the verified user's index by 10 percentage points. The range of the index is from 0% to 100%.
 
 A user whose index reaches 100% cannot be further verified. Verifications beyond 100% are not recorded.
 
@@ -40,17 +40,17 @@ A user with an index of at least 10% has full access to all platform functions �
 
 For initial users and ZRNO Holders the reality index is a record without functional effect — capacity and access derive from their status, not from the index.
 
-## III — Vouching Chain
+## III — Chain of Confirmations
 
 ### Article 5
 
 *Verification mechanism*
 
-Verification is carried out within the vouching chain: a verified user confirms the reality of a new user on the basis of personal acquaintance. The verifier confirms three things: reality (the user exists as a natural person), uniqueness (they have no other account in the system), and continuity (the same person who accesses the system).
+Verification is carried out within the chain of confirmations: a verified user confirms the reality of a new user on the basis of personal acquaintance. The verifier confirms three things: reality (the user exists as a natural person), uniqueness (they have no other account in the system), and continuity (the same person who accesses the system).
 
 Verification is an act of personal acquaintance, not of document verification. The verifier does not collect or submit the personal documents of the person being verified.
 
-Verification is based on direct personal acquaintance sufficient for the verifier to vouch on their own responsibility for the reality, uniqueness, and continuity of the verified user. This Rulebook does not prescribe the manner of acquiring such acquaintance nor require physical presence at the moment of verification; the verifier alone assesses whether they know the user well enough to vouch for them.
+Verification is based on direct personal acquaintance sufficient for the verifier to confirm, on their own responsibility, the reality, uniqueness, and continuity of the verified user. This Rulebook does not prescribe the manner of acquiring such acquaintance nor require physical presence at the moment of verification; the verifier alone assesses whether they know the user well well enough to confirm their reality.
 
 The platform provides a technical mechanism for consent and account binding: the user seeking verification generates a one-time code by which they consent to the verification and bind their account to that act, and a verifier who knows them carries out the verification using that code. This mechanism does not collect the personal data of the person being verified and does not constitute proof of presence, but rather confirmation of the verified person's consent and account identity.
 
@@ -212,9 +212,9 @@ The first-generation exception (Article 12, paragraph 5) takes into account the 
 
 The initial users of the system are the persons forming the founding core of the Foundation: persons entered in the register of the Serbian Business Registers Agency as the founder or as members of the Foundation's bodies, and persons designated by a decision of the Management Board (UO) at the establishment of the system, with their identity publicly disclosed on the platform.
 
-The reality index of initial users is 100% from the establishment of the account and does not derive from the vouching chain. The reality of persons from the SBRA register derives from the public record; the reality of persons designated by a decision of the Management Board is confirmed directly by the Management Board, with their identity publicly disclosed.
+The reality index of initial users is 100% from the establishment of the account and does not derive from the chain of confirmations. The reality of persons from the SBRA register derives from the public record; the reality of persons designated by a decision of the Management Board is confirmed directly by the Management Board, with their identity publicly disclosed.
 
-Initial users cannot be verified through the vouching chain.
+Initial users cannot be verified through the chain of confirmations.
 
 ### Article 15
 
@@ -236,7 +236,7 @@ The loss of index does not propagate further — users verified by the affected 
 
 *Index falling to zero*
 
-A user whose index falls to 0% as a result of the loss of a verifier's status retains the status of a verified user. The user loses access to platform functions but retains their account and may be re-verified through the vouching chain.
+A user whose index falls to 0% as a result of the loss of a verifier's status retains the status of a verified user. The user loses access to platform functions but retains their account and may be re-verified through the chain of confirmations.
 
 A user who is a ZRNO Holder does not suffer the functional effect of an index drop — access and capacity derive from ZRNO Holder status, not from the index.
 
@@ -320,7 +320,7 @@ A negative POEN record under this Article is the sole exception to the prohibiti
 
 *Position of a user whose verification is annulled through no fault of their own*
 
-For a user whose verification has been annulled, and for whom it has not been established that they are non-existent or non-unique, the reality index is reduced by 10 percentage points, the POEN records under Article 7 arising from that verification are annulled, and a place in the vouching chain is freed.
+For a user whose verification has been annulled, and for whom it has not been established that they are non-existent or non-unique, the reality index is reduced by 10 percentage points, the POEN records under Article 7 arising from that verification are annulled, and a place in the chain of confirmations is freed.
 
 The annulment of such a user's POEN records is limited by their balance — the record may fall to zero at most. The uncovered part passes to the verifier as restitution under Article 20b and does not burden the user. Whoever is at no fault does not remain in a negative value.
 
@@ -342,7 +342,7 @@ Restitution under Article 20b arises by the annulment itself and is not a measur
 
 *Transitional limit on the number of verifications*
 
-Until total circulation reaches 100,000 POEN, a user may receive at most one verification through the vouching chain. Circulation is the total number of POEN recorded in the system — the absolute value of the Protocol's counter-entry.
+Until total circulation reaches 100,000 POEN, a user may receive at most one verification through the chain of confirmations. Circulation is the total number of POEN recorded in the system — the absolute value of the Protocol's counter-entry.
 
 The limit under paragraph 1 is applied according to the state of circulation at the moment of verification. Verifications received while the limit is in force remain valid; once circulation reaches 100,000 POEN, the reality index grows under the general rules of this Rulebook, including the prohibited zone under Chapter V.
 

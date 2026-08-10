@@ -10,7 +10,7 @@
 
 *Predmet pravilnika*
 
-Ovim se pravilnikom uređuju indeks stvarnosti, lanac jamstva, verifikacijski zapis, evidencija POEN-a za verifikaciju, verifikacijski kapacitet, nadzor i ishod nadzora, nadzorni predmet, anticirkularno pravilo, početni mehanizam, posljedice prestanka statusa na verifikacije, postupak utvrđivanja lažne verifikacije i naknada za izvučene zapise POEN-a.
+Ovim se pravilnikom uređuju indeks stvarnosti, lanac potvrda, verifikacijski zapis, evidencija POEN-a za verifikaciju, verifikacijski kapacitet, nadzor i ishod nadzora, nadzorni predmet, anticirkularno pravilo, početni mehanizam, posljedice prestanka statusa na verifikacije, postupak utvrđivanja lažne verifikacije i naknada za izvučene zapise POEN-a.
 
 Izrazi koji nisu definirani ovim pravilnikom imaju značenje utvrđeno Pravilnikom o KOLO sustavu.
 
@@ -26,7 +26,7 @@ Ovaj pravilnik razrađuje odredbe Glave V. Pravilnika o KOLO sustavu. U slučaju
 
 *Pojam i izračun*
 
-Indeks stvarnosti numerička je vrijednost koja izražava stupanj verificiranosti korisnika u lancu jamstva. Svaka verifikacija uvećava indeks verificiranog korisnika za 10 postotnih bodova. Raspon indeksa jest od 0 % do 100 %.
+Indeks stvarnosti numerička je vrijednost koja izražava stupanj verificiranosti korisnika u lancu potvrda. Svaka verifikacija uvećava indeks verificiranog korisnika za 10 postotnih bodova. Raspon indeksa jest od 0 % do 100 %.
 
 Korisnik čiji indeks dosegne 100 % ne može biti dalje verificiran. Verifikacije iznad 100 % ne evidentiraju se.
 
@@ -40,17 +40,17 @@ Korisnik s indeksom od najmanje 10 % ima pun pristup svim funkcijama platforme �
 
 Za početne korisnike i nositelje ZRNA indeks stvarnosti evidencija je bez funkcionalnog učinka — kapacitet i pristup proizlaze iz njihova statusa, a ne iz indeksa.
 
-## III — Lanac jamstva
+## III — Lanac potvrda
 
 ### Članak 5.
 
 *Mehanizam verifikacije*
 
-Verifikacija se obavlja u lancu jamstva: verificirani korisnik potvrđuje stvarnost novog korisnika na temelju neposrednog poznanstva. Verifikator potvrđuje tri stvari: stvarnost (korisnik postoji kao fizička osoba), jedinstvenost (nema drugi račun u sustavu) i kontinuitet (ista osoba koja pristupa sustavu).
+Verifikacija se obavlja u lancu potvrda: verificirani korisnik potvrđuje stvarnost novog korisnika na temelju neposrednog poznanstva. Verifikator potvrđuje tri stvari: stvarnost (korisnik postoji kao fizička osoba), jedinstvenost (nema drugi račun u sustavu) i kontinuitet (ista osoba koja pristupa sustavu).
 
 Verifikacija je čin osobnog poznanstva, a ne provjere dokumenata. Verifikator ne prikuplja niti dostavlja osobne dokumente verificiranoga.
 
-Verifikacija se temelji na neposrednom osobnom poznanstvu dostatnom da verifikator svojom odgovornošću jamči za stvarnost, jedinstvenost i kontinuitet verificiranog korisnika. Ovaj pravilnik ne propisuje način stjecanja tog poznanstva niti zahtijeva fizičku prisutnost u trenutku verifikacije; verifikator sam procjenjuje poznaje li korisnika dovoljno da za njega jamči.
+Verifikacija se temelji na neposrednom osobnom poznanstvu dostatnom da verifikator svojom odgovornošću potvrdi stvarnost, jedinstvenost i kontinuitet verificiranog korisnika. Ovaj pravilnik ne propisuje način stjecanja tog poznanstva niti zahtijeva fizičku prisutnost u trenutku verifikacije; verifikator sam procjenjuje poznaje li korisnika dovoljno da potvrdi njegovu stvarnost.
 
 Platforma osigurava tehnički mehanizam suglasnosti i vezivanja računa: korisnik koji traži verifikaciju generira jednokratni kod kojim pristaje na verifikaciju i veže svoj račun za taj čin, a verifikator koji ga poznaje tim kodom provodi verifikaciju. Taj mehanizam ne prikuplja osobne podatke verificiranoga i ne predstavlja dokaz prisutnosti, nego potvrdu suglasnosti verificiranoga i identiteta računa.
 
@@ -212,9 +212,9 @@ Iznimka za prvu generaciju (članak 12. stavak 5.) uzima u obzir poseban položa
 
 Početni korisnici sustava osobe su koje čine osnivačku jezgru Zaklade: osobe upisane u registar Agencije za privredne registre kao osnivač ili članovi tijela Zaklade te osobe koje Upravni odbor odredi odlukom pri uspostavi sustava, uz javnu objavu njihova identiteta na platformi.
 
-Indeks stvarnosti početnih korisnika iznosi 100 % od uspostave računa i ne proizlazi iz lanca jamstva. Stvarnost osoba iz registra APR proizlazi iz javne evidencije; stvarnost osoba određenih odlukom Upravnog odbora potvrđuje Upravni odbor neposredno, uz javno objavljen identitet.
+Indeks stvarnosti početnih korisnika iznosi 100 % od uspostave računa i ne proizlazi iz lanca potvrda. Stvarnost osoba iz registra APR proizlazi iz javne evidencije; stvarnost osoba određenih odlukom Upravnog odbora potvrđuje Upravni odbor neposredno, uz javno objavljen identitet.
 
-Početni korisnici ne mogu biti verificirani u lancu jamstva.
+Početni korisnici ne mogu biti verificirani u lancu potvrda.
 
 ### Članak 15.
 
@@ -236,7 +236,7 @@ Gubitak indeksa ne prenosi se dalje — korisnici koje su pogođeni korisnici ve
 
 *Pad indeksa na nulu*
 
-Korisnik čiji indeks padne na 0 % uslijed prestanka statusa verifikatora zadržava status verificiranog korisnika. Korisnik gubi pristup funkcijama platforme, ali zadržava račun i može ponovno biti verificiran kroz lanac jamstva.
+Korisnik čiji indeks padne na 0 % uslijed prestanka statusa verifikatora zadržava status verificiranog korisnika. Korisnik gubi pristup funkcijama platforme, ali zadržava račun i može ponovno biti verificiran kroz lanac potvrda.
 
 Korisnik koji je nositelj ZRNA ne trpi funkcionalni učinak pada indeksa — pristup i kapacitet proizlaze iz statusa nositelja ZRNA, a ne iz indeksa.
 
@@ -320,7 +320,7 @@ Negativan zapis POEN-a po ovom je članku jedina iznimka od zabrane iz članka 1
 
 *Položaj korisnika čija je verifikacija poništena bez njegove krivnje*
 
-Korisniku čija je verifikacija poništena, a za kojega nije utvrđeno da je nepostojeći ili nejedinstven, indeks se stvarnosti umanjuje za 10 postotnih bodova, poništavaju mu se zapisi POEN-a iz članka 7. po toj verifikaciji i oslobađa mu se mjesto u lancu jamstva.
+Korisniku čija je verifikacija poništena, a za kojega nije utvrđeno da je nepostojeći ili nejedinstven, indeks se stvarnosti umanjuje za 10 postotnih bodova, poništavaju mu se zapisi POEN-a iz članka 7. po toj verifikaciji i oslobađa mu se mjesto u lancu potvrda.
 
 Poništenje zapisa POEN-a takva korisnika ograničeno je njegovim stanjem — zapis može pasti najviše do nule. Nepokriveni dio prelazi na verifikatora kao naknada iz članka 20b. i ne tereti korisnika. Tko ništa nije skrivio, ne ostaje u negativnoj vrijednosti.
 
@@ -342,7 +342,7 @@ Naknada iz članka 20b. nastupa samim poništenjem i nije mjera iz stavka 1. ovo
 
 *Prijelazno ograničenje broja verifikacija*
 
-Dok ukupan optjecaj ne dosegne 100.000 POEN-a, korisnik može primiti najviše jednu verifikaciju u lancu jamstva. Optjecaj je ukupan broj evidentiranih POEN-a u sustavu — apsolutna vrijednost protuzapisa Protokola.
+Dok ukupan optjecaj ne dosegne 100.000 POEN-a, korisnik može primiti najviše jednu verifikaciju u lancu potvrda. Optjecaj je ukupan broj evidentiranih POEN-a u sustavu — apsolutna vrijednost protuzapisa Protokola.
 
 Ograničenje iz stavka 1. primjenjuje se prema stanju optjecaja u trenutku verifikacije. Verifikacije primljene za vrijeme važenja ograničenja ostaju punovažne; po dostizanju optjecaja od 100.000 POEN-a indeks stvarnosti raste po općim pravilima ovog pravilnika, uključujući zabranjenu zonu iz Glave V.
 

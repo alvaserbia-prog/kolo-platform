@@ -91,7 +91,7 @@ export default function PolitikaPrihvatiPage() {
 
         <p className="text-sm text-kolo-muted mb-6">
           {t("procitajte_na")}{" "}
-          <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">
+          <Link href="/pravilnik" target="_blank" className="text-kolo-green-700 underline">
             {t("ovoj_stranici")}
           </Link>
           {t("ne_slazete_se")}

@@ -12,11 +12,11 @@ export const FAQ_SEKCIJE_HR: FaqSekcija[] = [
 
 Prvo, registracija je besplatna i ne moraš biti verificiran da bi ušao. Možeš se upoznati s pravilima, pratiti opće pokazatelje sustava i pogledati ponudu na Pijaci — sve to radi i bez verifikacije.
 
-Drugo, za samu verifikaciju postoji posebno mjesto: ploča zahtjeva za jamstvo. Tu objaviš kratko predstavljanje — odakle si i zašto se želiš uključiti — i kontakt (telefon, email ili drugi kanal po tvom izboru) preko kojeg te mogu kontaktirati radi verifikacije. Tvoje predstavljanje vide svi prijavljeni članovi, a tvoje kontaktne podatke vide samo verificirani korisnici — oni koji te mogu verificirati. Tako te mreža upozna iako nikoga ne poznaješ unaprijed, pa netko od verificiranih može uspostaviti kontakt s tobom i potvrditi tvoju stvarnost.
+Drugo, ne moraš nikoga poznavati da bi počeo. Postavi oglas na Pijaci — prva tri možeš postaviti bez ijedne potvrde — i pričekaj da ti se netko javi. Kad razmjenu obavite, onaj tko te sada poznaje može potvrditi tvoju stvarnost.
 
-Zahtjev možeš povući u svakom trenutku.
+Oglas možeš skloniti u svakom trenutku.
 
-I treće, lanac negdje mora početi — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu verificirati nove ljude bez ograničenja, pa prvi krug verifikacija ne ovisi o tome poznaješ li nekoga unaprijed — poznanstvo se stvara kasnije, kroz kontakt koji ploča jamstva omogući.`,
+I treće, lanac negdje mora početi — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu verificirati nove ljude bez ograničenja, pa prvi krug verifikacija ne ovisi o tome poznaješ li nekoga unaprijed — poznanstvo se stvara kasnije, kroz samu razmjenu.`,
       },
       {
         id: 43,
@@ -25,7 +25,7 @@ I treće, lanac negdje mora početi — i počinje od početnih korisnika. To su
 
 Donacija i pokroviteljstvo su dobrovoljni i nisu uvjet za korištenje. Donacijom podržavaš osnovne troškove Fondacije (server, alati, razvoj, pravne i računovodstvene usluge); po primitku donacije Protokol evidentira POEN u tvom zapisu, prema pravilima sustava. Takvo evidentiranje nije kupnja POEN-a — POEN nema vrijednost izvan sustava, ne preprodaje se i ne vraća u novac, a donacija je nepovratna neovisno o evidentiranom POEN-u.
 
-POEN se evidentira i kroz druge kanale — verifikaciju u lancu jamstva, operativni doprinos i razmjenu s drugim korisnicima — pa uplata nije jedini niti obvezan put. Na primjer, pri verifikaciji se u tvom zapisu evidentira 1.000 POEN.`,
+POEN se evidentira i kroz druge kanale — verifikaciju u lancu potvrda, operativni doprinos i razmjenu s drugim korisnicima — pa uplata nije jedini niti obvezan put. Na primjer, pri verifikaciji se u tvom zapisu evidentira 1.000 POEN.`,
       },
       {
         id: 44,
@@ -64,7 +64,7 @@ Iz sustava možeš izaći u svakom trenutku, brisanjem korisničkog računa iz p
 
 Pravo ime nije obvezno. Pri registraciji od tebe se traži samo pseudonim, email adresa i lozinka. Ne tražimo ni JMBG, ni osobnu iskaznicu, ni putovnicu, niti bilo kakav dokument — i nikada ne tražimo da nešto slikaš.
 
-Ni verifikacija ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te osobno poznaje, kroz lanac jamstva — nema učitavanja osobne iskaznice ni provjere papira.
+Ni verifikacija ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te osobno poznaje, kroz lanac potvrda — nema učitavanja osobne iskaznice ni provjere papira.
 
 Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom. Ta veza u sustavu jednostavno ne postoji.
 
@@ -83,6 +83,31 @@ POEN nema vrijednost izvan sustava — ne unovčava se, ne preprodaje i Fondacij
 
 Ako naiđeš na bilo što od ovoga, ne dijeli podatke i prijavi to Fondaciji.`,
       },
+      {
+        id: 81,
+        pitanje: `Kako do prvih POEN-a ako nemam što ponuditi?`,
+        odgovor: `Prvi oglas kojim nešto nudiš nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati fotografiju, opis, kategoriju i mjesto.
+
+POEN ti se upisuje i kad ti netko drugi upiše za obavljenu razmjenu — kao neverificiran možeš ga primati, samo ga ne možeš sam prenositi drugome.
+
+A čim se verificiraš, možeš objaviti i potražnju — što tebi treba — pa da se javi onaj tko to ima.`,
+      },
+      {
+        id: 82,
+        pitanje: `Kupujem od oglašivača koji nije verificiran — koliki je rizik?`,
+        odgovor: `Verificiran član je onaj čiju je stvarnost netko potvrdio — nepoznat tebi, ali ne i mreži. Neverificiran oglašivač je onaj čiju stvarnost još nitko nije potvrdio, i njegov oglas to jasno nosi.
+
+Zato POEN šaljite isključivo po primitku robe ili usluge.
+
+Za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Zaklada i Protokol se u to ne miješaju.`,
+      },
+      {
+        id: 83,
+        pitanje: `Koliko oglasa mogu postaviti prije verifikacije?`,
+        odgovor: `Tri aktivna, i to samo ponude — nešto što nudiš. Svaki oglas mora imati fotografiju, opis od najmanje 40 znakova, kategoriju i mjesto.
+
+Potražnja — oglas kojim nešto tražiš — kontakt s oglašivačima i pokretanje razgovora stižu s verifikacijom. Ako ti se netko javi povodom tvog oglasa, možeš mu odgovoriti i prije toga.`,
+      },
     ],
   },
   {
@@ -92,7 +117,7 @@ Ako naiđeš na bilo što od ovoga, ne dijeli podatke i prijavi to Fondaciji.`,
       {
         id: 1,
         pitanje: `Što je POEN i ima li vrijednost u dinarima?`,
-        odgovor: `POEN je zapis u evidenciji da si zajednici dao nešto vrijedno — kroz razmjenu s drugim korisnicima, verifikaciju u lancu jamstva, rad za zajednicu, donaciju ili pokroviteljstvo.
+        odgovor: `POEN je zapis u evidenciji da si zajednici dao nešto vrijedno — kroz razmjenu s drugim korisnicima, verifikaciju u lancu potvrda, rad za zajednicu, donaciju ili pokroviteljstvo.
 
 POEN nije novac u pravnom smislu — nije sredstvo plaćanja, nije elektronički novac, nije digitalna imovina i ne predstavlja dug Fondacije prema tebi.
 
@@ -129,7 +154,7 @@ Eventualno uvođenje mehanizma „starenja" POEN-a (koji bi poticao cirkulaciju 
         pitanje: `Što točno znači princip dva odvojena akta?`,
         odgovor: `Princip dva odvojena akta opisuje pravnu prirodu svakog evidentiranja POEN-a iz Protokola.
 
-Akt 1: korisnik doprinese zajedničkom dobru ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verificira novog korisnika u lancu jamstva, ima status koji pokreće socijalni program ili podnese prijavu pokroviteljstva).
+Akt 1: korisnik doprinese zajedničkom dobru ili ima status koji to potvrđuje (donira, doprinosi kroz operativni program, verificira novog korisnika u lancu potvrda, ima status koji pokreće socijalni program ili podnese prijavu pokroviteljstva).
 
 Akt 2: Protokol algoritamski i deterministički evidentira POEN po pravilima Pravilnika — bez diskrecije, bez ugovora, bez protučinidbe.
 
@@ -175,7 +200,7 @@ Kada te netko verificira, Protokol upiše po 1.000 POEN i tebi i osobi koja te v
 
 Upis nije ni naknada za tvoje podatke — to je automatski akt Protokola po pravilu: kad se evidentira verifikacijski zapis, sustav deterministički upiše POEN bez ikakvog ugovora ili pogađanja.
 
-Farmanje nema smisla iz nekoliko razloga. POEN se ne unovčava — ne mijenjaš ga za dinare niti za bilo što izvan sustava, pa nemaš što „izvući". Princip je jedan čovjek — jedan korisnički račun, a verifikacija počiva na osobnom poznanstvu i odgovornosti verifikatora koji svojom potvrdom jamči za stvarnost osobe; ne možeš izmišljati nepostojeće ljude. Osim toga, zbroj svih zapisa uvijek je nula: svaki upisani POEN ima isti takav minus u evidenciji Protokola, pa nitko ne stvara vrijednost ni iz čega.
+Farmanje nema smisla iz nekoliko razloga. POEN se ne unovčava — ne mijenjaš ga za dinare niti za bilo što izvan sustava, pa nemaš što „izvući". Princip je jedan čovjek — jedan korisnički račun, a verifikacija počiva na osobnom poznanstvu i odgovornosti verifikatora koji svojom potvrdom odgovara za istinitost te tvrdnje; ne možeš izmišljati nepostojeće ljude. Osim toga, zbroj svih zapisa uvijek je nula: svaki upisani POEN ima isti takav minus u evidenciji Protokola, pa nitko ne stvara vrijednost ni iz čega.
 
 Ako netko ipak lažno verificira — potvrdi nekoga tko ne postoji ili ima drugi korisnički račun — to se utvrđuje kao lažna verifikacija i poništava, s kaskadnim posljedicama po sve takve veze.`,
       },
@@ -212,7 +237,7 @@ Svi podaci su javni: ukupan evidentiran iznos, broj koraka, preostalo do granice
         pitanje: `Kako se verificiram i što time dobivam?`,
         odgovor: `Verifikacija je opcionalna, ali je preduvjet za pun pristup funkcijama platforme.
 
-Verifikacija se obavlja kroz lanac jamstva: verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke verificiranoga. Verifikator ne traži niti prikuplja dokumente.
+Verifikacija se obavlja kroz lanac potvrda: verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke verificiranoga. Verifikator ne traži niti prikuplja dokumente.
 
 Svaka verifikacija uvećava tvoj indeks stvarnosti za 10 postotnih bodova (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
 
@@ -223,7 +248,7 @@ Verifikacija je preduvjet za sve glavne funkcionalnosti: upis POEN-a kroz donaci
       {
         id: 8,
         pitanje: `Što ako sam stranac — mogu li biti član?`,
-        odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac jamstva: verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+        odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
 Sustav radi na srpskom i engleskom jeziku.`,
       },
@@ -424,7 +449,7 @@ A baš u tome je smisao KOLA: da razmjena koju biste ionako obavili „iz ruke u
 
 Možeš i kombinirati: dio obavite kao čistu trampu, a dio upišete kroz POEN. Tada se bilježi samo onaj dio za koji ste ažurirali evidenciju; čista trampa izvan toga ostaje neevidentirana.
 
-U svakom slučaju, za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Fondacija i Protokol se u to ne miješaju i ne jamče za njega.`,
+U svakom slučaju, za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Fondacija i Protokol se u to ne miješaju i ne odgovaraju za njega.`,
       },
       {
         id: 59,
@@ -701,7 +726,7 @@ Iznimka je Pijaca: tvoji oglasi (opis, cijena, lokacija i pseudonim) javno su vi
         pitanje: `Kako se štiti moja privatnost?`,
         odgovor: `Minimizacija podataka jedan je od četiri principa sustava — platforma prikuplja samo podatke nužne za funkcioniranje sustava.
 
-Verifikacija se obavlja u lancu jamstva: drugi verificirani korisnici potvrđuju tvoju stvarnost na temelju osobnog poznavanja, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta računa koji ne prikuplja osobne podatke verificiranog.
+Verifikacija se obavlja u lancu potvrda: drugi verificirani korisnici potvrđuju tvoju stvarnost na temelju osobnog poznavanja, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta računa koji ne prikuplja osobne podatke verificiranog.
 
 Sve admin akcije pristupa eventualnim osobnim podacima bilježe se u trajnom logu. Fondacija ne dijeli podatke s trećim osobama osim po nalogu nadležnog tijela.
 
@@ -732,7 +757,7 @@ Ovo je temeljna razlika između POEN-a i financijske imovine, i jedan je od razl
         pitanje: `Mogu li koristiti sustav bez imena i telefona? Što gubim?`,
         odgovor: `Da, možeš. Pri registraciji obavezni su samo pseudonim (korisničko ime koje sam biraš), email i lozinka — ništa više.
 
-Pravo ime i broj telefona potpuno su dobrovoljni. Nisu uvjet da budeš verificiran kroz lanac jamstva, niti uvjet za pristup bilo kojoj funkciji sustava. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom.
+Pravo ime i broj telefona potpuno su dobrovoljni. Nisu uvjet da budeš verificiran kroz lanac potvrda, niti uvjet za pristup bilo kojoj funkciji sustava. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom.
 
 Što gubiš ako ih ne daš? Praktično samo lakši kontakt s drugim ljudima. Na prostoru za razmjenu (Pijaca), na primjer, drugi te bez tih podataka teže mogu kontaktirati i dogovoriti razmjenu uživo.
 
@@ -760,7 +785,7 @@ Ovo je poznato ograničenje pseudonimnih sustava. Razdvajamo identifikacijske od
       {
         id: 73,
         pitanje: `Mogu li se verificirati na daljinu, iz inozemstva?`,
-        odgovor: `Da. Verifikacija (dokaz stvarnosti) zasniva se na neposrednom osobnom poznavanju — verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost i svojom odgovornošću jamči za nju. Pravilnik ne zahtijeva fizičku prisutnost u trenutku verifikacije, pa se ona može obaviti i na daljinu, sve dok te verifikator doista poznaje dovoljno da za tebe jamči.
+        odgovor: `Da. Verifikacija (dokaz stvarnosti) zasniva se na neposrednom osobnom poznavanju — verificirani korisnik koji te osobno poznaje potvrđuje tvoju stvarnost i svojom odgovornošću odgovara za istinitost te tvrdnje. Pravilnik ne zahtijeva fizičku prisutnost u trenutku verifikacije, pa se ona može obaviti i na daljinu, sve dok te verifikator doista poznaje dovoljno da potvrdi tvoju stvarnost.
 
 Zaštita sustava ne počiva na tome da ste u istoj prostoriji, nego na osobnom poznavanju, na odgovornosti verifikatora (lažna verifikacija povlači poništavanje verifikacija i sankcije) i na strukturi mreže — da bi dosegnuo pun indeks stvarnosti, moraš biti poznat ljudima iz više neovisnih dijelova mreže.
 

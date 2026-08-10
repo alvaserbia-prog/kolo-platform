@@ -1,5 +1,5 @@
 /**
- * Graf verifikacija — prikaz cele mreže jemstva za verifikovane korisnike
+ * Graf verifikacija — prikaz cele mreže potvrda za verifikovane korisnike
  * (Pravilnik o dokazu stvarnosti: čl. 12 zona, čl. 14 početni, čl. 22 prelazno).
  *
  * Čiste funkcije bez Prisma poziva — deterministički testabilne. Raspored je

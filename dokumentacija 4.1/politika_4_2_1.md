@@ -56,7 +56,7 @@ Korisnik je odgovoran da pseudonim ne sadrži lične podatke koji bi mogli doves
 
 **4.2 Podaci dokaza stvarnosti**
 
-Dokaz stvarnosti je model verifikacije korisnika zasnovan na ličnom poznavanju u lancu jemstva — postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Dokaz stvarnosti ne zahteva prikupljanje ličnih dokumenata, broja lične karte ni jedinstvenog matičnog broja građana.
+Dokaz stvarnosti je model verifikacije korisnika zasnovan na ličnom poznavanju u lancu potvrda — postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Dokaz stvarnosti ne zahteva prikupljanje ličnih dokumenata, broja lične karte ni jedinstvenog matičnog broja građana.
 
 U okviru dokaza stvarnosti prikupljamo: graf verifikacija (evidenciju o tome ko je koga verifikovao, u pseudonimnom obliku), indeks stvarnosti (numeričku vrednost koja izražava stepen verifikovanosti korisnika) i verifikacione zapise (pseudonim verifikatora, redni broj verifikacije, pseudonim verifikovanog, vremenski žig i pseudonim nadzornika).
 
@@ -130,7 +130,7 @@ Neverifikovani korisnik može da postavi oglas kojim nudi dobro ili uslugu (čla
 
 Oglas sadrži: pseudonim oglašivača, naslov i opis dobra ili usluge, kategoriju, cenu, mesto (naselje iz šifarnika), fotografije koje korisnik sam prilaže i, po sopstvenom izboru, broj telefona.
 
-Oglas je javno vidljiv svim posetiocima Platforme, uključujući neprijavljena lica, i indeksira se od strane pretraživača. Broj telefona nije javan — dostupan je isključivo verifikovanim korisnicima. Oglas nosi vidljivu oznaku da oglašivač nije verifikovan u lancu jemstva.
+Oglas je javno vidljiv svim posetiocima Platforme, uključujući neprijavljena lica, i indeksira se od strane pretraživača. Broj telefona nije javan — dostupan je isključivo verifikovanim korisnicima. Oglas nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda.
 
 Korisnik sam bira šta će objaviti. Fotografija lica, ime i prezime nisu traženi ni potrebni; korisnik koji ih uključi u oglas čini to na sopstvenu inicijativu i time ih objavljuje javno.
 
@@ -186,7 +186,7 @@ Pravni osnov: legitimni interes (čl. 12 st. 1 t. 6 ZZPL-a).
 
 KOLO Platforma primenjuje model vidljivosti koji odgovara statusu korisnika u sistemu.
 
-Neverifikovani korisnici — lica registrovana na Platformi čija stvarnost nije potvrđena kroz lanac jemstva — mogu videti opšte pokazatelje sistema, upoznati se sa pravilima, pregledati oglase i postaviti oglas kojim nude dobro ili uslugu, u obimu utvrđenom ovim članom. Nemaju uvid u pseudonime drugih korisnika, pojedinačne transakcije ni stanja računa.
+Neverifikovani korisnici — lica registrovana na Platformi čija stvarnost nije potvrđena kroz lanac potvrda — mogu videti opšte pokazatelje sistema, upoznati se sa pravilima, pregledati oglase i postaviti oglas kojim nude dobro ili uslugu, u obimu utvrđenom ovim članom. Nemaju uvid u pseudonime drugih korisnika, pojedinačne transakcije ni stanja računa.
 
 Verifikovani korisnici — lica čija je stvarnost potvrđena i čiji je indeks stvarnosti najmanje 10% — mogu videti pseudonime svih korisnika, iznose i vremenske oznake svih POEN transakcija, pseudonime strana u svakoj transakciji i stanja POEN računa.
 
