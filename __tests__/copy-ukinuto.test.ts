@@ -84,3 +84,64 @@ describe("ukinuti instituti ne žive u copy-ju", () => {
     }
   });
 });
+
+/**
+ * Terminologija „verifikacija → potvrda" (2026-08-10).
+ *
+ * Institut se u interfejsu zove POTVRDA, a poznavanje je njegov osnov, ne ime
+ * („potvrdi nekoga koga poznaješ"). Reč „verifikacija" nije anglicizam nego
+ * latinizam standardan u srpskom pravnom jeziku — zato OSTAJE u aktima, gde
+ * se meri odgovornost, i izlazi samo iz copy-ja, gde se govori čoveku.
+ *
+ * Imenica za ulogu se NE uvodi: „potvrđivač potvrđuje" muca, pa se svuda gde
+ * je stajao „verifikator" imenuje prava uloga — „tvoj lanac" u socijalnim
+ * programima, „nosilac ZRNA" u operativnom doprinosu.
+ *
+ * Ovo NIJE provera akata: `dokumentacija 4.1/` i dalje govori „verifikacija"
+ * i to je namerno (vidi `pravni-dokumenti.test.ts`).
+ */
+const DOZVOLJENO_U_COPYJU = [
+  /\{(?:ne)?verif\w*\}/i, // promenljive koje kod ubacuje: {verifikator}, {verifikovani}, {verif}
+  /verifikacijaId/, // ime polja u poruci o grešci
+];
+
+const STARA_TERMINOLOGIJA: Record<string, RegExp> = {
+  sr: /verifik/i,
+  hr: /verifik|verificir/i,
+  en: /\bverif/i,
+  ru: /верифи/i,
+  hu: /hitelesít/i,
+};
+
+describe("copy govori o potvrdi, ne o verifikaciji", () => {
+  it.each(Object.keys(STARA_TERMINOLOGIJA))("messages/%s.json", async (jezik) => {
+    const sirovo = await fs.readFile(path.join(KOREN, "messages", `${jezik}.json`), "utf-8");
+    const pogodci: string[] = [];
+
+    for (const [kljuc, tekst] of stringovi(JSON.parse(sirovo))) {
+      if (!STARA_TERMINOLOGIJA[jezik].test(tekst)) continue;
+      // Skini dozvoljene ostatke pa proveri ima li još nečega.
+      let ostatak = tekst;
+      for (const dozvoljen of DOZVOLJENO_U_COPYJU) {
+        ostatak = ostatak.replace(new RegExp(dozvoljen.source, "gi"), "");
+      }
+      if (STARA_TERMINOLOGIJA[jezik].test(ostatak)) pogodci.push(`${kljuc}: ${tekst.slice(0, 120)}`);
+    }
+
+    expect(pogodci).toEqual([]);
+  });
+
+  it.each([
+    ["sr", "faq-data.ts"],
+    ["en", "faq-data-en.ts"],
+    ["ru", "faq-data-ru.ts"],
+    ["hr", "faq-data-hr.ts"],
+    ["hu", "faq-data-hu.ts"],
+  ])("src/lib/%s → %s", async (jezik, fajl) => {
+    const tekst = await fs.readFile(path.join(KOREN, "src", "lib", fajl), "utf-8");
+    expect(
+      STARA_TERMINOLOGIJA[jezik].test(tekst),
+      `${fajl} i dalje govori „verifikacija" umesto „potvrda"`,
+    ).toBe(false);
+  });
+});
