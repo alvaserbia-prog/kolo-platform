@@ -1,0 +1,263 @@
+<title>Prva strana sa „potvrđivačem“ — kako bi zvučala</title>
+<style>
+:root{
+  --bg:#FAFAF8; --surface:#FFFFFF; --surface-2:#F3F2EE; --border:#E8E6E1;
+  --ink:#1A1A17; --muted:#6B6860; --muted-2:#8E8B82;
+  --g900:#0F3D20; --g700:#1B6B3A; --g500:#2E9D54; --g100:#E8F5EC;
+  --gold600:#D99520; --gold400:#F5B842; --gold100:#FDF4E0;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131412; --surface:#1B1D1A; --surface-2:#232520; --border:#2E312B;
+  --ink:#EDEDE8; --muted:#A5A29A; --muted-2:#807D75;
+  --g900:#7FD09B; --g700:#5DBE81; --g500:#43B36C; --g100:#152A1C;
+  --gold600:#E8A93C; --gold400:#F5B842; --gold100:#2B2113;
+}}
+:root[data-theme="dark"]{
+  --bg:#131412; --surface:#1B1D1A; --surface-2:#232520; --border:#2E312B;
+  --ink:#EDEDE8; --muted:#A5A29A; --muted-2:#807D75;
+  --g900:#7FD09B; --g700:#5DBE81; --g500:#43B36C; --g100:#152A1C;
+  --gold600:#E8A93C; --gold400:#F5B842; --gold100:#2B2113;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);margin:0;
+  font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;padding:48px 20px 110px}
+h1,h2,h3,h4{margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);padding:.1em .35em;
+  border-radius:3px;color:var(--muted)}
+
+.eyebrow{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-bottom:13px}
+h1.top{font-size:36px;line-height:1.13;font-weight:800;margin-bottom:14px}
+.lede{font-size:18px;color:var(--muted);max-width:64ch}
+
+.zakljucak{border:1px solid var(--border);border-left:3px solid var(--gold600);
+  background:var(--surface);padding:20px 22px;margin:32px 0 0;display:flex;flex-direction:column;gap:10px}
+.zakljucak h2{font-size:19px;font-weight:700}
+.zakljucak p{font-size:15.5px;color:var(--muted);max-width:70ch}
+
+.legenda{display:flex;flex-wrap:wrap;gap:9px 22px;font-size:13px;color:var(--muted);
+  margin:30px 0 0;padding:13px 16px;background:var(--surface-2);border:1px solid var(--border)}
+mark.nova{background:var(--gold100);color:var(--ink);box-shadow:inset 0 -2px 0 var(--gold400);
+  padding:0 2px;border-radius:2px}
+mark.stara{background:transparent;color:inherit;border-bottom:1.5px dotted var(--g500);padding:0}
+
+h2.deo{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);
+  border-top:2px solid var(--ink);padding-top:11px;margin:58px 0 22px}
+
+/* ── mokap prve strane ───────────────────────────── */
+.strana{border:1px solid var(--border);background:var(--surface);overflow:hidden}
+.strana .traka{background:var(--surface-2);border-bottom:1px solid var(--border);
+  padding:8px 16px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sek{padding:34px 30px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:14px}
+.sek:last-child{border-bottom:0}
+.sek > .oznaka{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);
+  font-weight:700}
+.hero{background:linear-gradient(160deg,var(--g100) 0%,transparent 78%);padding-top:44px;padding-bottom:44px}
+.hero h2{font-size:34px;line-height:1.12;font-weight:800;
+  background:linear-gradient(120deg,var(--g900) 0%,var(--g500) 55%,var(--g700) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.sub{font-size:18px;color:var(--muted);max-width:52ch}
+.dugmad{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.btn{font-size:14.5px;font-weight:600;padding:10px 18px;border-radius:7px;border:1px solid var(--g700);
+  background:var(--g700);color:#fff}
+:root[data-theme="dark"] .btn,:root:not([data-theme="light"]) .btn{color:#0F1A12}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn{color:#fff}}
+.btn.sek2{background:transparent;color:var(--g700)}
+.znak{font-size:12.5px;color:var(--muted-2);margin-left:4px}
+.sek h3{font-size:21px;font-weight:700}
+.mreza{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border)}
+.kut{background:var(--surface);padding:15px 16px;display:flex;flex-direction:column;gap:6px}
+.kut b{font-size:14.5px;font-weight:700}
+.kut p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.kut .poenta{font-size:13px;color:var(--g700);font-style:italic}
+.citat{border-left:3px solid var(--gold400);padding:4px 0 4px 18px;font-size:17px;
+  color:var(--ink);line-height:1.55;white-space:pre-line;max-width:60ch}
+.koraci{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+.korak{background:var(--surface);padding:14px 16px;display:flex;gap:14px;align-items:baseline}
+.korak .br{font-family:var(--mono);font-size:12px;color:var(--g700);font-weight:700;min-width:18px}
+.korak b{font-size:14.5px;display:block;margin-bottom:2px}
+.korak p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;
+  background:var(--border);border:1px solid var(--border)}
+.stat div{background:var(--surface);padding:16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--g700)}
+.stat span{font-size:12.5px;color:var(--muted)}
+.napomena-sek{font-size:13px;color:var(--muted-2);max-width:66ch}
+
+/* ── tabele ─────────────────────────────────────── */
+.tw{overflow-x:auto;border:1px solid var(--border);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{text-align:left;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--muted-2);
+  font-weight:700;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+tr:last-child td{border-bottom:0}
+td.pre{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--muted-2)}
+td.posle{color:var(--ink)}
+.lose{color:#B33A3A;font-weight:600}
+:root[data-theme="dark"] .lose,:root:not([data-theme="light"]) .lose{color:#E8877F}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .lose{color:#B33A3A}}
+.ok{color:var(--g700);font-weight:600}
+p.blok{font-size:15.5px;color:var(--muted);max-width:72ch;margin:0 0 16px}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted-2)}
+@media (max-width:640px){
+  h1.top{font-size:27px} .hero h2{font-size:26px} .sek{padding:24px 18px} .wrap{padding:34px 15px 80px}
+}
+</style>
+
+<div class="wrap">
+
+<p class="eyebrow">KOLO · predlog teksta · 10.08.2026</p>
+<h1 class="top">Prva strana sa „potvrđivačem“</h1>
+<p class="lede">Prepisana Početna sa ekolo.rs, reč po reč, sa zamenjenom terminologijom. Ispod nje — jedan problem koji se pojavi tek kad se reč stavi u rečenicu.</p>
+
+<div class="zakljucak">
+  <h2>Kratak odgovor: Početna se skoro ne menja</h2>
+  <p>Od svih tekstova na prvoj strani, <b>samo jedan</b> sadrži reč „verifikacija“ — brojač <i>„verifikovanih članova“</i>. Sve ostalo već govori „potvrda“: <i>„Neko te potvrdi“</i>, <i>„bez ijedne potvrde“</i>, <i>„potvrđuje tvoju stvarnost“</i>, <i>„obojica ste u lancu potvrda“</i>.</p>
+  <p>A reč <b>„potvrđivač“</b> se na Početnoj ne bi pojavila nijednom — jer Početna ulogu nikad ne imenuje, nego je opisuje glagolom. To je zapravo dobra vest o tekstu: pisan je tako da čovek ne mora da nauči nijedan pojam da bi razumeo šta se dešava.</p>
+</div>
+
+<p class="legenda">
+  <span><mark class="nova">zlatno</mark> — menja se sada</span>
+  <span><mark class="stara">zeleno tačkasto</mark> — već govori „potvrda“, zatečeno</span>
+</p>
+
+<h2 class="deo">Prva strana, prepisana</h2>
+
+<div class="strana">
+  <div class="traka"><span>ekolo.rs — Početna</span><span>predlog teksta, nije uživo</span></div>
+
+  <div class="sek hero">
+    <h2>Udružimo snage u svom kraju</h2>
+    <p class="sub">Ono što jedni imaju, drugima treba — razmenjujemo neposredno.</p>
+    <div class="dugmad"><span class="btn">Otvori nalog besplatno</span><span class="btn sek2">Kako to radi</span><span class="znak">Bez obaveza</span></div>
+  </div>
+
+  <div class="sek">
+    <span class="oznaka">Problem koji osećamo</span>
+    <div class="mreza">
+      <div class="kut"><b>Ne znamo šta jedemo.</b><p>Kupujemo hranu koja je putovala hiljade kilometara, dok neko iz našeg komšiluka proizvodi baš to — med, jaja, sir, voće, povrće.</p><p class="poenta">Ono što nam treba raste pored nas, ali do nas ne stiže.</p></div>
+      <div class="kut"><b>Proizvođači ne mogu do nas.</b><p>Potrošnja je utabana kroz veletrgovine i lance u koje mali proizvođač ne može da uđe. Oni su zatvoreni za njega, a mi smo zatvoreni u njima.</p><p class="poenta">Tražnja postoji, ponuda postoji — kanal ne postoji.</p></div>
+      <div class="kut"><b>Znanja i veštine su nevidljivi.</b><p>Komšija je majstor, komšinica pravi najbolji sir u kraju, njihov sin drži časove. Ali to zna samo njihova bliža okolina.</p><p class="poenta">Sve to nam treba svaki dan — ali niko to ne povezuje i ne beleži.</p></div>
+    </div>
+  </div>
+
+  <div class="sek">
+    <h3>KOLO je odgovor koji gradimo zajedno</h3>
+    <p class="citat">„Kad su ljudi bili žedni, iskopali su bunar.
+Iz njega je pio svako, i niko više nije bio žedan.
+Bunar je bio njihov — i nije bio ničiji.
+KOLO je takav bunar.”</p>
+    <p style="color:var(--muted);max-width:60ch">Mreža ljudi koji jedni drugima nude rad, dobra i znanje — bez posrednika.</p>
+    <div class="mreza">
+      <div class="kut"><b>Ljudi, a ne anonimno tržište</b><p>Komšija, prijatelj, prijatelj prijatelja — a onda i onaj koga još ne poznaješ. Svaki doprinos ostaje vidljiv.</p></div>
+      <div class="kut"><b>Doprinos koji se pamti</b><p>Svaki put kad nekome u mreži daš robu, uslugu ili znanje — to se beleži. Ta beleška se zove <b>POEN</b> — interna obračunska jedinica mreže. Nije novac, ne menja se za dinare, ne ide na berzu.</p></div>
+      <div class="kut"><b>Pravila su ista za sve</b><p>Pravila sistema i način donošenja odluka su javno zapisani i dostupni svima. Zajedničkim resursima upravlja sama zajednica, ne neko sa strane.</p></div>
+      <div class="kut"><b>I sa onima koje još ne poznaješ</b><p>Razmeniš sa nekim iz susednog sela — i mreža je porasla za jednu vezu koje pre nije bilo. Sistem to beleži.</p></div>
+    </div>
+  </div>
+
+  <div class="sek">
+    <span class="oznaka">Za koga je KOLO?</span>
+    <div class="mreza">
+      <div class="kut"><b>Poljoprivrednici i lokalni proizvođači</b><p>Tvoji domaći proizvodi direktno do ljudi koji ih traže — bez otkupljivača, bez provizije.</p></div>
+      <div class="kut"><b>Zanatlije i majstori</b><p>Ljudi u tvom kraju vide šta radiš i mogu te preporučiti — na osnovu stvarnog iskustva, bez provizije.</p></div>
+      <div class="kut"><b>Penzioneri sa znanjem</b><p>Znaš da popravljaš, savetuješ, predaješ — razmeni to za domaće proizvode ili usluge koje ti trebaju.</p></div>
+      <div class="kut"><b>Domaća proizvodnja i ručni rad</b><p>Ponudi zimnicu, peciva i ručni rad u svom kraju — i razmeni sa komšinicama za ono što tebi treba.</p></div>
+      <div class="kut"><b>Majke i roditelji</b><p>Čuvanje dece, nabavka zdrave hrane, svakodnevna pomoć — od ljudi koje poznaješ ili koje poznaje neko kome veruješ.</p></div>
+      <div class="kut"><b>Za one koji počinju</b><p>Prvi klijenti, neformalni rad i prostor da razviješ svoje. Prva tri oglasa možeš postaviti odmah, <mark class="stara">bez ijedne potvrde</mark>.</p></div>
+      <div class="kut"><b>Programeri i freelanceri</b><p>Otvoren kod (AGPL-3.0), sadržaj pod CC BY-SA 4.0. Možeš da proveriš kako sistem radi.</p></div>
+      <div class="kut"><b>Postojeće zadruge i udruženja</b><p>KOLO dodaje evidenciju razmene i vezu sa drugim zadrugama i pojedincima.</p></div>
+      <div class="kut"><b>Lokalpatrioti</b><p>Sve što razmeniš sa drugima ostaje u zajednici.</p></div>
+    </div>
+  </div>
+
+  <div class="sek">
+    <span class="oznaka">Primer iz prakse</span>
+    <div class="koraci">
+      <div class="korak"><span class="br">1</span><div><b>Ana razmenjuje</b><p>Ana i Milan se do tada nisu poznavali. Ana da Milanu 5 tegli meda, a Milan joj u evidenciji upiše 4.000 POEN.</p></div></div>
+      <div class="korak"><span class="br">2</span><div><b>Lazar pomaže</b><p>Ani se pokvari veš mašina. Lazar je popravi, a Ana mu upiše 4.000 POEN. Sad Ana zna Lazara — i <mark class="stara">može da potvrdi njegovu stvarnost</mark>.</p></div></div>
+      <div class="korak"><span class="br">3</span><div><b>Krug se nastavlja</b><p>Marija ispeče Lazaru domaći hleb, a Lazar joj upiše 500 POEN.</p></div></div>
+      <div class="korak"><span class="br">4</span><div><b>Zajednica jača</b><p>Marija ga uputi na Stefana, koji rezbari drvene kuhinjske pribore. … i krug se nastavlja.</p></div></div>
+    </div>
+    <p class="napomena-sek"><b>POEN nije novac</b> — to je zapis o tome koliko je ko doprineo zajednici. Med, popravka i hleb iz primera su stvarni; POEN samo beleži razmenu.</p>
+  </div>
+
+  <div class="sek">
+    <h3>Kako funkcioniše, ukratko</h3>
+    <div class="koraci">
+      <div class="korak"><span class="br">1</span><div><b>Registruješ se</b><p>Besplatno, oko minut. Biraš pseudonim umesto pravog imena; dokumenti nisu potrebni.</p></div></div>
+      <div class="korak"><span class="br">2</span><div><b>Objaviš šta nudiš</b><p>Prva tri oglasa možeš postaviti odmah, <mark class="stara">bez ijedne potvrde</mark>. Tako te članovi iz tvog kraja vide.</p></div></div>
+      <div class="korak"><span class="br">3</span><div><b><mark class="stara">Neko te potvrdi</mark></b><p>Onaj ko te lično poznaje <mark class="stara">potvrđuje tvoju stvarnost</mark>. Protokol upisuje 1.000 POEN tebi i 1.000 njemu — obojica ste <mark class="stara">u lancu potvrda</mark>.</p></div></div>
+      <div class="korak"><span class="br">4</span><div><b>Doprinosiš i koristiš</b><p>Razmenjuješ robu i usluge, pozivaš ljude koje poznaješ, uključuješ se u zajednicu i, ako želiš, doniraš Fondaciji.</p></div></div>
+    </div>
+  </div>
+
+  <div class="sek">
+    <h3>Kolo je krenulo</h3>
+    <div class="stat">
+      <div><b>—</b><span><mark class="nova">potvrđenih članova</mark></span></div>
+      <div><b>—</b><span>transakcija među članovima</span></div>
+      <div><b>—</b><span>aktivnih oglasa na Pijaci</span></div>
+      <div><b>—</b><span>evidentiranih POEN-a</span></div>
+    </div>
+    <p class="napomena-sek">Jedina izmena na celoj strani. Ključ <code>landing.statistike_clan</code>.</p>
+  </div>
+
+  <div class="sek">
+    <h3>Ko stoji iza KOLA</h3>
+    <p style="color:var(--muted);max-width:66ch"><b>Lekar iz Sombora.</b> Petnaest godina proučava kako zajednice širom sveta — od Švajcarske i Italije do Kanade i Japana — razmenjuju rad, dobra i znanje bez novca.</p>
+    <p class="citat" style="font-size:15.5px">„Svaki dan u ordinaciji vidim ljude kojima sistem treba da pomogne, ali ne može. Svako ima svoje mesto u društvu i nešto čime može da doprinese. Samo im treba infrastruktura — alat i zajednica iza njega.”</p>
+  </div>
+
+  <div class="sek">
+    <h3>Pridruži se — ili prati kako sistem raste</h3>
+    <p style="color:var(--muted);max-width:60ch">Mreža se tek gradi — uđi među prvima. Registracija je besplatna, a prva tri oglasa možeš postaviti odmah.</p>
+    <div class="dugmad"><span class="btn">Registruj se</span><span class="btn sek2">Prati razvoj</span></div>
+    <p class="napomena-sek">Ono što koristi tebi, koristi i tvojoj zajednici.</p>
+  </div>
+</div>
+
+<h2 class="deo">Problem koji se vidi tek u rečenici</h2>
+<p class="blok">Početna prolazi bez ogrebotine. Ali čim se uđe dublje u sajt, „potvrđivač“ udara u nešto: <b>u 32 rečenice imenica i glagol stoje jedno pored drugog.</b> Danas to radi jer su to dve različite reči — <i>verifikator</i> nešto <i>potvrđuje</i>. Ako imenica postane „potvrđivač“, rečenica počne da muca.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:47%">Danas</th><th>Sa „potvrđivačem“</th></tr></thead>
+<tbody>
+<tr><td class="pre">Svi verifikatori su potvrdili</td><td class="posle">Svi <span class="lose">potvrđivači su potvrdili</span></td></tr>
+<tr><td class="pre">Nemate verifikatore koji mogu da potvrde prijavu.</td><td class="posle">Nemate <span class="lose">potvrđivače koji mogu da potvrde</span> prijavu.</td></tr>
+<tr><td class="pre">Potreban je pristanak da vaši verifikatori potvrde ispunjenost uslova.</td><td class="posle">Potreban je pristanak da vaši <span class="lose">potvrđivači potvrde</span> ispunjenost uslova.</td></tr>
+<tr><td class="pre">…prijava se ne odobrava dok svi verifikatori ne potvrde</td><td class="posle">…dok svi <span class="lose">potvrđivači ne potvrde</span></td></tr>
+<tr><td class="pre">Socijalni programi — uslovi, koeficijenti i verifikatorska potvrda.</td><td class="posle">…i <span class="lose">potvrđivačka potvrda</span>.</td></tr>
+<tr><td class="pre">Verifikator (nosilac ZRNA / UO) potvrđuje izvršenje.</td><td class="posle"><span class="lose">Potvrđivač … potvrđuje</span> izvršenje.</td></tr>
+<tr><td class="pre">…dovoljnom da verifikator svojom odgovornošću potvrdi stvarnost…</td><td class="posle">…da <span class="lose">potvrđivač … potvrdi</span> stvarnost…</td></tr>
+</tbody></table></div>
+<p class="napomena-sek" style="margin-top:12px">11 takvih rečenica na ekranima, 21 u aktima. Nijedna nije greška — sve su nastale prirodno, zato što su imenica i glagol bili različite reči.</p>
+
+<h2 class="deo">Šta bih uradio</h2>
+<p class="blok">Reč <b>„potvrđivač“</b> je uredno građena i uklapa se u kuću — sajt već ima <i>predlagač</i> i <i>oglašivač</i>. Nije to loša reč. Problem nije reč, nego to što bi radila isti posao kao glagol koji stoji do nje.</p>
+
+<div class="tw"><table>
+<thead><tr><th style="width:30%">Potez</th><th>Ishod</th></tr></thead>
+<tbody>
+<tr>
+  <td><b class="ok">Početna</b><br><span style="color:var(--muted-2);font-size:13px">jedan string</span></td>
+  <td><i>„verifikovanih članova“</i> → <b>„potvrđenih članova“</b>. Uradio bih odmah, bez obzira na sve ostalo — jedina je reč koja odudara od ostatka strane.</td>
+</tr>
+<tr>
+  <td><b class="ok">Ostali ekrani</b><br><span style="color:var(--muted-2);font-size:13px">glagol umesto imenice</span></td>
+  <td>Tamo gde je moguće — <i>„ko te je potvrdio“</i>, <i>„onaj ko te potvrdio“</i> — umesto uvođenja nove imenice. Isto rešenje koje Početna već koristi, i zato ona i zvuči prirodno.</td>
+</tr>
+<tr>
+  <td><b>Imenica „potvrđivač“</b><br><span style="color:var(--muted-2);font-size:13px">svuda</span></td>
+  <td>Tražilo bi da se 32 rečenice prepišu iz početka da ne mucaju — i u aktima, gde je <i>„verifikatorska potvrda“</i> naziv instituta socijalnih programa. Ako se ipak ide na to, te rečenice su spisak posla, ne prepreka.</td>
+</tr>
+</tbody></table></div>
+
+<footer>Tekst preuzet iz <code>messages/sr.json</code>, prostor <code>landing</code>, na dan 10.08.2026. Prikaz je predlog teksta — ništa nije menjano u kodu ni objavljeno na ekolo.rs.</footer>
+
+</div>
