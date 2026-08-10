@@ -335,7 +335,7 @@
     "samo_primalac": "Amíg nem vagy megerősítve, csak POEN-t fogadhatsz. A más nyilvántartásába való beírás a megerősítés után nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
     "nadoknada_opis": "Az általad végzett hamis megerősítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor rögzíthetsz, ha a bejegyzésed túllépi a nullát.",
-    "putanja_naslov": "A cseréhez való hozzájárulás útja",
+    "putanja_naslov": "Cseréhez való hozzájárulások",
     "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorrendben nyílnak meg, és felhasználónként összesen legfeljebb 5.000 POEN kerül nyilvántartásba.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
     "putanja_korak_1": "Az első, a tartalmi minimumnak megfelelő hirdetés és az első csere, amelyben valaki a te javadra jegyez be POEN-t",

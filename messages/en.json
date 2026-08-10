@@ -342,7 +342,7 @@
     "samo_primalac": "Until you are confirmed you can only receive POEN. Entering POEN for others opens up upon confirmation.",
     "nadoknada_naslov": "Restitution",
     "nadoknada_opis": "It arose from the annulment of a false confirmation you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; recording POEN for someone else becomes possible once your record passes zero.",
-    "putanja_naslov": "Exchange contribution path",
+    "putanja_naslov": "Exchange contributions",
     "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and no user is recorded more than 5,000 POEN in total.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
     "putanja_korak_1": "First listing meeting the content minimum, and the first exchange in which someone records POEN in your favour",
