@@ -1912,6 +1912,8 @@
     "dugme_prihvatam": "Elfogadom",
     "dugme_prihvatam_loading": "Elfogadás...",
     "greska_prihvatanje": "Hiba az elfogadáskor. Próbáld újra.",
+    "greska_ucitavanje": "Nem tudjuk betölteni a szabályzatokat. Ellenőrizd a kapcsolatot, és próbáld újra.",
+    "dugme_pokusaj_ponovo": "Próbáld újra",
     "ucitavanje": "Betöltés…"
   },
   "pravilnikPrihvati": {

@@ -1919,6 +1919,8 @@
     "dugme_prihvatam": "Я согласен",
     "dugme_prihvatam_loading": "Подтверждаю...",
     "greska_prihvatanje": "Ошибка при принятии. Попробуйте ещё раз.",
+    "greska_ucitavanje": "Не удаётся загрузить акты. Проверьте соединение и попробуйте ещё раз.",
+    "dugme_pokusaj_ponovo": "Попробовать ещё раз",
     "ucitavanje": "Загрузка..."
   },
   "pravilnikPrihvati": {

@@ -1919,6 +1919,8 @@
     "dugme_prihvatam": "I accept",
     "dugme_prihvatam_loading": "Accepting...",
     "greska_prihvatanje": "Error while accepting. Please try again.",
+    "greska_ucitavanje": "We cannot load the acts. Check your connection and try again.",
+    "dugme_pokusaj_ponovo": "Try again",
     "ucitavanje": "Loading..."
   },
   "pravilnikPrihvati": {

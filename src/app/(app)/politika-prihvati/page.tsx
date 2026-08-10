@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { useMePatch, ME_KEY } from "@/hooks/useMe";
 
 interface Verzija {
   id: string;
@@ -28,24 +30,53 @@ export default function PolitikaPrihvatiPage() {
   const locale = useLocale();
   const t = useTranslations("politikaPrihvati");
   const router = useRouter();
+  const qc = useQueryClient();
+  const patchMe = useMePatch();
   const [verzija, setVerzija] = useState<Verzija | null>(null);
   const [loading, setLoading] = useState(true);
-  const [prihvatanje, setPrihvatanje] = useState(false);
   const [error, setError] = useState("");
+  const [prihvatanje, setPrihvatanje] = useState(false);
+  const [ucitavanjePuklo, setUcitavanjePuklo] = useState(false);
 
-  useEffect(() => {
+  /**
+   * Izlaz sa gejta. Keširani `['me']` (AppShell čita `politikaPotrebno` odatle,
+   * poll na 30s) MORA da se ispravi PRE navigacije — inače nas AppShell odmah
+   * vrati ovamo, mi opet vidimo „potrebno: false" i vratimo se na /sistem, pa
+   * u krug: stranica vidljivo blinka dok poll ne stigne. (Desilo se u praksi
+   * 10.08.2026 — 98 pregleda stranice za par minuta kod jednog naloga.)
+   */
+  const izadji = useCallback(() => {
+    patchMe({ politikaPotrebno: false });
+    qc.invalidateQueries({ queryKey: ME_KEY });
+    router.replace(odredisteNakonPristanka());
+  }, [patchMe, qc, router]);
+
+  const ucitaj = useCallback(() => {
+    setUcitavanjePuklo(false);
+    setLoading(true);
     fetch("/api/politika/prihvati")
-      .then((r) => r.ok ? r.json() : null)
+      .then((r) => {
+        if (!r.ok) throw new Error("Neuspeo zahtev");
+        return r.json();
+      })
       .then((data) => {
         if (!data?.potrebno) {
-          router.replace(odredisteNakonPristanka());
+          izadji();
           return;
         }
         setVerzija(data.verzija);
         setLoading(false);
       })
-      .catch(() => { setLoading(false); });
-  }, [router]);
+      // Pad zahteva NE sme da nas odvede na /sistem: tamo gejt vidi da pristanak
+      // nedostaje i vraća nas nazad, u petlju bez kraja. Ostajemo ovde i nudimo
+      // ponovni pokušaj.
+      .catch(() => {
+        setUcitavanjePuklo(true);
+        setLoading(false);
+      });
+  }, [izadji]);
+
+  useEffect(() => { ucitaj(); }, [ucitaj]);
 
   async function prihvati() {
     if (!verzija) return;
@@ -61,13 +92,29 @@ export default function PolitikaPrihvatiPage() {
       setPrihvatanje(false);
       return;
     }
-    router.replace(odredisteNakonPristanka());
+    izadji();
   }
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-kolo-bg">
         <p className="text-kolo-muted text-sm">{t("ucitavanje")}</p>
+      </div>
+    );
+  }
+
+  if (ucitavanjePuklo) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-kolo-bg p-4">
+        <div className="bg-white rounded-2xl border border-kolo-border p-8 max-w-md w-full shadow-sm text-center">
+          <p className="text-sm text-kolo-text mb-4">{t("greska_ucitavanje")}</p>
+          <button
+            onClick={ucitaj}
+            className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors"
+          >
+            {t("dugme_pokusaj_ponovo")}
+          </button>
+        </div>
       </div>
     );
   }

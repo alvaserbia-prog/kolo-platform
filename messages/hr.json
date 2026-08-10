@@ -1919,6 +1919,8 @@
     "dugme_prihvatam": "Pristajem",
     "dugme_prihvatam_loading": "Pristajem...",
     "greska_prihvatanje": "Greška pri prihvaćanju. Pokušajte ponovno.",
+    "greska_ucitavanje": "Ne možemo učitati akte. Provjeri vezu i pokušaj ponovno.",
+    "dugme_pokusaj_ponovo": "Pokušaj ponovno",
     "ucitavanje": "Učitavanje..."
   },
   "pravilnikPrihvati": {
