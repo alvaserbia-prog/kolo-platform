@@ -7,16 +7,16 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `I don't know anyone already in KOLO — how can I get verified if verification requires someone on the inside to confirm me?`,
-        odgovor: `You can get verified even if you don't know anyone already in the system. Verification is based on personal acquaintance, but three things open the door for you even without prior connections.
+        pitanje: `I don't know anyone already in KOLO — how can I get confirmed if confirmation requires someone on the inside to confirm me?`,
+        odgovor: `You can get confirmed even if you don't know anyone already in the system. Confirmation is based on personal acquaintance, but three things open the door for you even without prior connections.
 
-First, registration is free and you don't need to be verified to join. You can explore the rules, follow the system's general indicators, and browse listings on the marketplace — all of that works without verification.
+First, registration is free and you don't need to be confirmed to join. You can explore the rules, follow the system's general indicators, and browse listings on the marketplace — all of that works without confirmation.
 
 Second, you don't need to know anyone to begin. Post a listing on the Marketplace — your first three need no confirmation at all — and wait for someone to get in touch. Once you have completed the exchange, the person who now knows you can confirm that you are real.
 
 You can take your listing down at any time.
 
-Third, the chain has to start somewhere — and it starts with the initial users. These are members of the Foundation's Board of Directors, whose reality stems from the public register rather than anyone's prior confirmation. They can verify new people without restrictions, so the first round of verifications doesn't depend on knowing anyone in advance — the acquaintance is formed later, through the exchange itself.`,
+Third, the chain has to start somewhere — and it starts with the initial users. These are members of the Foundation's Board of Directors, whose reality stems from the public register rather than anyone's prior confirmation. They can confirm new people without restrictions, so the first round of confirmations doesn't depend on knowing anyone in advance — the acquaintance is formed later, through the exchange itself.`,
       },
       {
         id: 43,
@@ -25,20 +25,20 @@ Third, the chain has to start somewhere — and it starts with the initial users
 
 Donations and sponsorships are voluntary and are not a requirement for using the system. A donation supports the Foundation's basic operating costs (server, tools, development, legal and accounting services); upon receipt of a donation, the Protocol records POEN in your ledger according to the system's rules. That recording is not a purchase of POEN — POEN has no value outside the system, cannot be resold or converted back to money, and a donation is non-refundable regardless of the POEN recorded.
 
-POEN is also recorded through other channels — verification in the chain of confirmations, operational contribution, and exchanges with other users — so making a payment is neither the only nor a required path. For example, when you are verified, 1,000 POEN is recorded in your ledger.`,
+POEN is also recorded through other channels — confirmation in the chain of confirmations, operational contribution, and exchanges with other users — so making a payment is neither the only nor a required path. For example, when you are confirmed, 1,000 POEN is recorded in your ledger.`,
       },
       {
         id: 44,
         pitanje: `How do I get my first POEN if I have nothing to offer? What's my first step?`,
-        odgovor: `You don't need any product to accumulate POEN — the first step is verification.
+        odgovor: `You don't need any product to accumulate POEN — the first step is confirmation.
 
-Verification means that a verified user who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
+Confirmation means that a confirmed user who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
 
-Once you are verified, several ways open up to accumulate more:
+Once you are confirmed, several ways open up to accumulate more:
 
-You can verify other people you genuinely know — for each verification you perform, 1,000 POEN is credited to you.
+You can confirm other people you genuinely know — for each confirmation you perform, 1,000 POEN is credited to you.
 
-You can apply for an operational contribution task — work for the common good published by the Foundation (and later by ZRNO Holders). When you complete the task and an authorised verifier confirms completion, POEN is credited to you.
+You can apply for an operational contribution task — work for the common good published by the Foundation (and later by ZRNO Holders). When you complete the task and an authorised the person who confirmed you confirms completion, POEN is credited to you.
 
 If you belong to one of the groups covered by the social programmes (mothers, elderly, special care, education), you declare your status and the Protocol credits POEN to you automatically on a daily basis, without registering individual activities.
 
@@ -64,11 +64,11 @@ You can leave the system at any time by deleting your account from the profile s
 
 Your real name is not required. At registration we ask only for a pseudonym, an email address and a password. We do not ask for a national ID number, identity card, passport or any other document — and we never ask you to photograph anything.
 
-Verification doesn't require documents either. Your reality is confirmed by a user who personally knows you, through the chain of confirmations — there is no document upload or paper check.
+Confirmation doesn't require documents either. Your reality is confirmed by a user who personally knows you, through the chain of confirmations — there is no document upload or paper check.
 
 The Foundation does not maintain a record that links your pseudonym to your identity. That link simply does not exist in the system.
 
-You can optionally add your real name and phone number later if you choose to — entirely voluntarily, and visible only to verified users. You can withdraw that disclosure at any time.
+You can optionally add your real name and phone number later if you choose to — entirely voluntarily, and visible only to confirmed users. You can withdraw that disclosure at any time.
 
 Note: choose a pseudonym that does not contain your personal data. In a small community, the combination of a pseudonym, location and activity may indirectly point to who you are — be aware of that.`,
       },
@@ -77,7 +77,7 @@ Note: choose a pseudonym that does not contain your personal data. In a small co
         pitanje: `What will KOLO never ask of me (protection from fraud)?`,
         odgovor: `Registration is free. The Foundation will never ask you to send money in order to join the system.
 
-The Foundation will never ask for your password, PIN, payment card number, national ID number, or a photo of your identity card or passport. Verification is carried out through personal acquaintance — no documents whatsoever.
+The Foundation will never ask for your password, PIN, payment card number, national ID number, or a photo of your identity card or passport. Confirmation is carried out through personal acquaintance — no documents whatsoever.
 
 POEN has no value outside the system — it cannot be cashed in, resold, or bought back by the Foundation. Any offer that promises earnings, a refund, or conversion of POEN into cash is not part of KOLO; it is an attempt at fraud.
 
@@ -88,14 +88,14 @@ If you encounter any of the above, do not share your data and report it to the F
         pitanje: `How do I get my first POENs if I have nothing to offer?`,
         odgovor: `The first listing in which you offer something earns you 1,000 POENs through the contribution-to-exchange channel. The listing must have a photograph, a description, a category and a place.
 
-POENs are also recorded for you when someone else records them for a completed exchange — as an unverified user you can receive them, you just cannot transfer them to anyone yourself.
+POENs are also recorded for you when someone else records them for a completed exchange — as an unconfirmed user you can receive them, you just cannot transfer them to anyone yourself.
 
-And as soon as you are verified, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
+And as soon as you are confirmed, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
       },
       {
         id: 82,
-        pitanje: `I am buying from an advertiser who is not verified — how big is the risk?`,
-        odgovor: `A verified member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unverified advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
+        pitanje: `I am buying from an advertiser who is not confirmed — how big is the risk?`,
+        odgovor: `A confirmed member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unconfirmed advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
 
 For that reason, send POENs only after you have received the goods or the service.
 
@@ -103,10 +103,10 @@ You are answerable to each other for quality, delivery and performance under gen
       },
       {
         id: 83,
-        pitanje: `How many listings can I post before verification?`,
+        pitanje: `How many listings can I post before confirmation?`,
         odgovor: `Three active ones, and offers only — something you are offering. Each listing must have a photograph, a description of at least 40 characters, a category and a place.
 
-A want ad — a listing in which you ask for something — contacting advertisers and starting a conversation come with verification. If someone gets in touch about your listing, you may reply even before that.`,
+A want ad — a listing in which you ask for something — contacting advertisers and starting a conversation come with confirmation. If someone gets in touch about your listing, you may reply even before that.`,
       },
     ],
   },
@@ -117,7 +117,7 @@ A want ad — a listing in which you ask for something — contacting advertiser
       {
         id: 1,
         pitanje: `What is POEN and does it have a monetary value?`,
-        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, verification in the chain of confirmations, work for the community, a donation, or sponsorship.
+        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, confirmation in the chain of confirmations, work for the community, a donation, or sponsorship.
 
 POEN is not money in a legal sense — it is not a means of payment, not electronic money, not a digital asset, and does not represent a debt of the Foundation to you.
 
@@ -154,7 +154,7 @@ Any future introduction of a POEN "ageing" mechanism (which would encourage circ
         pitanje: `What exactly does the "two separate acts" principle mean?`,
         odgovor: `The two-separate-acts principle describes the legal nature of every POEN credit from the Protocol.
 
-Act 1: the user contributes to the common good or holds a status that confirms such contribution (makes a donation, contributes through an operational programme, verifies a new user in the chain of confirmations, holds a status that triggers a social programme, or submits a sponsorship application).
+Act 1: the user contributes to the common good or holds a status that confirms such contribution (makes a donation, contributes through an operational programme, confirms a new user in the chain of confirmations, holds a status that triggers a social programme, or submits a sponsorship application).
 
 Act 2: the Protocol algorithmically and deterministically records POEN according to the Rules — without discretion, without a contract, without counter-performance.
 
@@ -193,16 +193,16 @@ There is no staking, interest or yield. ZRNO carries no dividend, interest or ri
       },
       {
         id: 53,
-        pitanje: `Is the verification entry (1,000 POEN) a recruitment commission or an airdrop I can farm?`,
+        pitanje: `Is the confirmation entry (1,000 POEN) a recruitment commission or an airdrop I can farm?`,
         odgovor: `No. It is not a recruitment commission, not an airdrop, and it cannot be farmed.
 
-When someone verifies you, the Protocol credits 1,000 POEN to both you and the person who verified you — once and symmetrically, the same amount for each. There are no "levels" above or below you and nothing "flows upward" through some network of people benefiting from your verification. This is not a marketing scheme with commissions.
+When someone confirms you, the Protocol credits 1,000 POEN to both you and the person who confirmed you — once and symmetrically, the same amount for each. There are no "levels" above or below you and nothing "flows upward" through some network of people benefiting from your confirmation. This is not a marketing scheme with commissions.
 
-The credit is not compensation for your data either — it is an automatic act of the Protocol under the rule: when a verification record is made, the system deterministically credits POEN without any contract or negotiation.
+The credit is not compensation for your data either — it is an automatic act of the Protocol under the rule: when a confirmation record is made, the system deterministically credits POEN without any contract or negotiation.
 
-Farming makes no sense for several reasons. POEN cannot be cashed out — you cannot exchange it for dinars or for anything outside the system, so there is nothing to "extract". The principle is one person — one account, and verification rests on personal acquaintance and the responsibility of the verifier who answers for the truth of that statement; you cannot invent non-existent people. Moreover, the sum of all records is always zero: every credited POEN has an equal negative in the Protocol's ledger, so no one creates value from nothing.
+Farming makes no sense for several reasons. POEN cannot be cashed out — you cannot exchange it for dinars or for anything outside the system, so there is nothing to "extract". The principle is one person — one account, and confirmation rests on personal acquaintance and the responsibility of the person who confirmed you who answers for the truth of that statement; you cannot invent non-existent people. Moreover, the sum of all records is always zero: every credited POEN has an equal negative in the Protocol's ledger, so no one creates value from nothing.
 
-If someone does fraudulently verify — confirms someone who doesn't exist or has another account — it is found to be a false verification and reversed, with cascading consequences for all such links.`,
+If someone does fraudulently confirm — confirms someone who doesn't exist or has another account — it is found to be a false confirmation and reversed, with cascading consequences for all such links.`,
       },
       {
         id: 54,
@@ -234,21 +234,21 @@ All data is public: total recorded amount, number of steps, remainder to the cap
       },
       {
         id: 7,
-        pitanje: `How do I get verified and what do I gain from it?`,
-        odgovor: `Verification is optional, but it is a prerequisite for full access to the platform's features.
+        pitanje: `How do I get confirmed and what do I gain from it?`,
+        odgovor: `Confirmation is optional, but it is a prerequisite for full access to the platform's features.
 
-Verification is carried out through the chain of confirmations: a verified user who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal documents. The verifier does not request or collect documents.
+Confirmation is carried out through the chain of confirmations: a confirmed user who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal documents. The person who confirms you does not request or collect documents.
 
-Each verification increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
+Each confirmation increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
 
-Upon recording of the verification entry, the Protocol automatically credits 1,000 POEN to you, 1,000 POEN to the verifier, and 500 POEN to the supervisor.
+Upon recording of the confirmation entry, the Protocol automatically credits 1,000 POEN to you, 1,000 POEN to the person who confirmed you, and 500 POEN to the supervisor.
 
-Verification is a prerequisite for all major features: recording POEN through donations and sponsorships, inscribing ZRNO, participating in Programmes, and full access to the marketplace and communication with other members.`,
+Confirmation is a prerequisite for all major features: recording POEN through donations and sponsorships, inscribing ZRNO, participating in Programmes, and full access to the marketplace and communication with other members.`,
       },
       {
         id: 8,
         pitanje: `What if I'm a foreigner — can I be a member?`,
-        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a verified user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
+        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a confirmed user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
 
 The system operates in Serbian and English.`,
       },
@@ -280,7 +280,7 @@ When you change your pseudonym, all your transactions in the history are display
       {
         id: 16,
         pitanje: `What are Programmes and which ones exist?`,
-        odgovor: `Some forms of community participation are ongoing and diffuse — caring for children, caring for elderly people — and cannot be recorded as individual exchanges. For that, social programmes exist: mothers as primary carers, elderly users, special care, and education. When you verify that you belong to such a group, the Protocol automatically credits POEN to you on a daily basis, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.`,
+        odgovor: `Some forms of community participation are ongoing and diffuse — caring for children, caring for elderly people — and cannot be recorded as individual exchanges. For that, social programmes exist: mothers as primary carers, elderly users, special care, and education. When you confirm that you belong to such a group, the Protocol automatically credits POEN to you on a daily basis, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.`,
       },
       {
         id: 17,
@@ -305,7 +305,7 @@ The amount is fixed and credited on a daily basis for as long as the status last
         pitanje: `How does operational contribution work?`,
         odgovor: `Operational contribution records forms of work for the common good that would otherwise remain invisible (voluntary work, caring for the elderly, work in community activities, creative contributions).
 
-Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A verified user applies and completes the task, and an authorised verifier confirms completion before the Protocol records POEN.
+Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A confirmed user applies and completes the task, and an authorised the person who confirmed you confirms completion before the Protocol records POEN.
 
 There is no fixed "hourly rate" — the proposed POEN is only a weighting indicator, and the actual amount recorded is distributed within the daily recording limit.`,
       },
@@ -321,9 +321,9 @@ Each programme is applied for separately, and all share a common daily recording
         pitanje: `What is "Support for the Elderly" — who qualifies and how do I apply?`,
         odgovor: `Support for the Elderly is one of the social programmes. Elderly users are one of the qualifying groups — a group whose participation in the community the Protocol recognises even though it does not manifest through individual exchanges.
 
-When you confirm (verify) the data that demonstrates you belong to that group, the Protocol automatically credits POEN to you, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.
+When you confirm (confirm) the data that demonstrates you belong to that group, the Protocol automatically credits POEN to you, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.
 
-Applications are made through the platform and are open to verified users.
+Applications are made through the platform and are open to confirmed users.
 
 Users aged 50 and over qualify. The daily amount grows with age: 1,000 POEN at age 50, increased by 100 POEN for each subsequent year. A user aged 65 thus receives 2,500 POEN per day, and a user aged 80 receives 4,000 POEN per day. Detailed conditions and the method of proving age are governed by the programme rules.`,
       },
@@ -400,7 +400,7 @@ The entire RSD portion is your private responsibility under tax regulations.`,
       {
         id: 23,
         pitanje: `How does a donation to the Foundation work and how much POEN do I receive?`,
-        odgovor: `Any verified user can make a donation by paying in dinars to the Foundation's bank account.
+        odgovor: `Any confirmed user can make a donation by paying in dinars to the Foundation's bank account.
 
 Upon receipt of the payment, the Protocol automatically records POEN: the number of POEN equals the donation amount × the donation recording coefficient. The coefficient grows with the cumulative amount across 11 levels — from 1.00 (Level 1, a donation below 5,000 RSD) to 2.00 (at a cumulative 5,000,000 RSD). The level is permanent and does not decrease as POEN is spent. (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient.)
 
@@ -411,7 +411,7 @@ Donations help the Foundation cover its basic operating costs (server, tools, de
         pitanje: `What are Sponsors and how are they different from donations?`,
         odgovor: `Sponsors are legal entities and sole proprietors that support the Foundation's work. The main difference from an individual donation is that a sponsor can contribute not only in cash but also in goods or services.
 
-A sponsor does not have its own account — the POEN bonus is recorded on the account of the verified owner or co-owner, or of the sole proprietor themselves, according to a fixed table with 7 levels (from 10,000 RSD to 1,000,000 RSD).
+A sponsor does not have its own account — the POEN bonus is recorded on the account of the confirmed owner or co-owner, or of the sole proprietor themselves, according to a fixed table with 7 levels (from 10,000 RSD to 1,000,000 RSD).
 
 All sponsors are publicly visible on the Sponsors page — for transparency and public recognition of their contribution.`,
       },
@@ -420,7 +420,7 @@ All sponsors are publicly visible on the Sponsors page — for transparency and 
         pitanje: `Can a company be a direct member?`,
         odgovor: `No. Direct members are exclusively natural persons.
 
-Companies participate through Sponsorship — they support the Foundation, and the owner or co-owner as a verified member receives a POEN bonus.`,
+Companies participate through Sponsorship — they support the Foundation, and the owner or co-owner as a confirmed member receives a POEN bonus.`,
       },
       {
         id: 39,
@@ -436,7 +436,7 @@ The legal classification of these exchanges for tax and fiscal purposes does not
         pitanje: `Is my listing on the marketplace publicly visible?`,
         odgovor: `Yes. The content of a listing — description, price in POEN, location and your pseudonym — is publicly visible to all visitors, including unregistered ones, so that exchange is accessible and easy to find.
 
-What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to verified users. For unregistered and unverified visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
+What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to confirmed users. For unregistered and unconfirmed visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
       },
       {
         id: 58,
@@ -484,7 +484,7 @@ Upon receipt of the payment, the Protocol automatically credits POEN to you: the
 
 (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient — it is a separate figure tied only to donations.)
 
-Any verified user can make a donation. The Foundation issues a donation receipt on request, in accordance with the law.`,
+Any confirmed user can make a donation. The Foundation issues a donation receipt on request, in accordance with the law.`,
       },
     ],
   },
@@ -545,7 +545,7 @@ As a reference for the scale of value, the guideline of 1 POEN being roughly 1 d
         pitanje: `Is the Foundation subject to anti-money-laundering regulations (AML/KYC) and does it identify donors?`,
         odgovor: `The Foundation is not a financial institution and does not handle users' money — POEN is not money, and exchanges between users are not payment transactions. By the nature of its activities, the Foundation is not subject to anti-money-laundering and counter-terrorist-financing regulations.
 
-Donors are not accepted anonymously, however. Donations from individuals are received by payment to the Foundation's bank account from verified bank accounts — so the identification of the payer and the verification of the source of funds is carried out by the banking system itself, under its own regulations. Sponsors are legal entities and sole traders who are identified by a donation agreement.
+Donors are not accepted anonymously, however. Donations from individuals are received by payment to the Foundation's bank account from bank accounts with an identified holder — so the identification of the payer and the confirmation of the source of funds is carried out by the banking system itself, under its own regulations. Sponsors are legal entities and sole traders who are identified by a donation agreement.
 
 The Foundation retains donation data in accordance with financial reporting regulations and makes it available to competent authorities — including the Tax Administration and the Anti-Money-Laundering Administration — when required by law.`,
       },
@@ -575,7 +575,7 @@ The programmes' daily recording limit — the total daily recording from all pro
 
 Deterministic algorithmic records — the Protocol has no discretionary decisions; everything is in the code.
 
-Transparency — the contribution ledger is pseudonymous and immutable; visible to verified members (graded by status), while unregistered visitors see only aggregates.
+Transparency — the contribution ledger is pseudonymous and immutable; visible to confirmed members (graded by status), while unregistered visitors see only aggregates.
 
 And finally, the activation of the Upper Kolo, which transfers governance authority to the members.`,
       },
@@ -623,14 +623,14 @@ Until the Upper Kolo is activated (Phase 1) all decisions are made by the Founda
     pitanja: [
       {
         id: 69,
-        pitanje: `If I submit a PR (code contribution) — do I receive POEN? Is it an operational contribution? Do I have to be verified?`,
+        pitanje: `If I submit a PR (code contribution) — do I receive POEN? Is it an operational contribution? Do I have to be confirmed?`,
         odgovor: `A code contribution falls under operational contribution — the same channel through which work for the common good is recorded.
 
 Code and content are the common good: the software is under AGPL-3.0, the content under CC BY-SA 4.0. Code contributions are accepted under the DCO principle (a "Signed-off-by" sign-off) — that is confirmation of the origin of the contribution, not a transfer of copyright to the Foundation (it is not a CLA). Your attribution for that contribution is permanent and remains even if you later delete your account.
 
-To have POEN recorded, you need to be a verified user with a reality index of at least 10%.
+To have POEN recorded, you need to be a confirmed user with a reality index of at least 10%.
 
-The mechanism works as follows: the task is published by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo after activation; you apply and complete it, and an authorised verifier confirms completion before POEN is recorded.`,
+The mechanism works as follows: the task is published by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo after activation; you apply and complete it, and an authorised the person who confirmed you confirms completion before POEN is recorded.`,
       },
       {
         id: 70,
@@ -639,7 +639,7 @@ The mechanism works as follows: the task is published by the Foundation (in the 
 
 What does exist is an export of your own data: at any time you can request all your data in a structured, machine-readable format (JSON) — that is your statutory right to data portability. But that is an export of your personal data, not an open programmatic interface over the entire system.
 
-It is also important to understand why: the system has graduated visibility — pseudonyms and individual transactions are visible only to verified users, while unregistered visitors see only aggregate indicators. Any future API would have to respect those same rules, otherwise it would circumvent the privacy protection.`,
+It is also important to understand why: the system has graduated visibility — pseudonyms and individual transactions are visible only to confirmed users, while unregistered visitors see only aggregate indicators. Any future API would have to respect those same rules, otherwise it would circumvent the privacy protection.`,
       },
       {
         id: 71,
@@ -685,7 +685,7 @@ Specific internal dispute resolution mechanisms may be established later (throug
       {
         id: 32,
         pitanje: `What happens when someone does not comply with the rules?`,
-        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to verified members, so bad behaviour remains visible to those participating in the system.
+        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to confirmed members, so bad behaviour remains visible to those participating in the system.
 
 The Foundation may temporarily suspend an account (for up to 30 days, with the user's right to be informed of the reasons and to respond) or exclude a user for a more serious breach of the rules.
 
@@ -694,7 +694,7 @@ An excluded user loses access, POEN and ZRNO are returned to the Protocol, and t
       {
         id: 33,
         pitanje: `Can I file a complaint against a Foundation decision?`,
-        odgovor: `Yes. Any verified member may submit a formal complaint through the platform — regarding verification, suspension, a programme decision, or any other decision.
+        odgovor: `Yes. Any confirmed member may submit a formal complaint through the platform — regarding confirmation, suspension, a programme decision, or any other decision.
 
 The Foundation must resolve the complaint within 30 days, with reasons given.
 
@@ -713,20 +713,20 @@ You may have a maximum of 3 open complaints at any one time.`,
 
 An unregistered visitor sees only general system indicators (aggregates) — number of members, number of ledger updates, POEN in circulation. They do not see individual transactions or pseudonyms.
 
-A registered but unverified user sees amounts and timestamps of ledger updates, but without the pseudonyms of the parties and without account balances.
+A registered but unconfirmed user sees amounts and timestamps of ledger updates, but without the pseudonyms of the parties and without account balances.
 
-A verified user (reality index ≥ 10%) sees the pseudonyms of all users, all transactions with the parties' pseudonyms, account balances and profiles.
+A confirmed user (reality index ≥ 10%) sees the pseudonyms of all users, all transactions with the parties' pseudonyms, account balances and profiles.
 
-Your real name and phone number are voluntary and are not a condition for using the system. The Foundation does not maintain a record linking your pseudonym to your identity — you choose whether and to whom (verified users only) you reveal your name and phone number, and you can withdraw that disclosure.
+Your real name and phone number are voluntary and are not a condition for using the system. The Foundation does not maintain a record linking your pseudonym to your identity — you choose whether and to whom (confirmed users only) you reveal your name and phone number, and you can withdraw that disclosure.
 
-The marketplace is an exception: your listings (description, price, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your transaction history are visible only to verified users.`,
+The marketplace is an exception: your listings (description, price, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your transaction history are visible only to confirmed users.`,
       },
       {
         id: 35,
         pitanje: `How is my privacy protected?`,
         odgovor: `Data minimisation is one of the four principles of the system — the platform collects only the data necessary for the system to function.
 
-Verification is carried out in the chain of confirmations: other verified users confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the verified person's personal data.
+Confirmation is carried out in the chain of confirmations: other confirmed users confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal data.
 
 All admin actions involving any personal data are recorded in a permanent log. The Foundation does not share data with third parties except pursuant to an order from a competent authority.
 
@@ -757,11 +757,11 @@ This is a fundamental difference between POEN and financial assets, and one of t
         pitanje: `Can I use the system without providing my name and phone number? What do I miss out on?`,
         odgovor: `Yes, you can. At registration only a pseudonym (a username of your own choosing), an email address and a password are required — nothing more.
 
-Your real name and phone number are entirely voluntary. They are not a condition for being verified through the chain of confirmations, nor a condition for accessing any feature of the system. The Foundation does not maintain a record linking your pseudonym to your identity.
+Your real name and phone number are entirely voluntary. They are not a condition for being confirmed through the chain of confirmations, nor a condition for accessing any feature of the system. The Foundation does not maintain a record linking your pseudonym to your identity.
 
 What do you miss out on if you don't provide them? Practically only easier contact with other people. On the marketplace, for example, others find it harder to contact you and arrange an in-person exchange without that information.
 
-If you do decide to add them, you choose whether your name and phone number will be visible to verified users — and you can withdraw that disclosure at any time, after which the data is no longer shown to others.
+If you do decide to add them, you choose whether your name and phone number will be visible to confirmed users — and you can withdraw that disclosure at any time, after which the data is no longer shown to others.
 
 Your email address is never publicly visible, regardless of anything else.`,
       },
@@ -774,9 +774,9 @@ Your transactions in the ledger are held under a pseudonym, not your real name. 
 
 Several things do protect you, however:
 
-The Foundation does not maintain a table linking your pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose whether and to whom (verified users only) to reveal them, and you can withdraw that disclosure at any time.
+The Foundation does not maintain a table linking your pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose whether and to whom (confirmed users only) to reveal them, and you can withdraw that disclosure at any time.
 
-Visibility is graded: unregistered visitors see only aggregates, and individual transactions with pseudonyms are visible only to verified members. Email, technical logs and the verification graph are never public.
+Visibility is graded: unregistered visitors see only aggregates, and individual transactions with pseudonyms are visible only to confirmed members. Email, technical logs and the confirmation network are never public.
 
 You are also responsible for ensuring that your pseudonym does not contain personal data that would give you away.
 
@@ -784,12 +784,12 @@ This is a known limitation of pseudonymous systems. We separate identifying from
       },
       {
         id: 73,
-        pitanje: `Can I get verified remotely, from abroad?`,
-        odgovor: `Yes. Verification (proof of reality) is based on direct personal acquaintance — a verified user who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of verification, so it can take place remotely, as long as the verifier genuinely knows you well enough to confirm your reality.
+        pitanje: `Can I get confirmed remotely, from abroad?`,
+        odgovor: `Yes. Confirmation (proof of reality) is based on direct personal acquaintance — a confirmed user who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of confirmation, so it can take place remotely, as long as the person who confirmed you genuinely knows you well enough to confirm your reality.
 
-The system's protection does not rest on you being in the same room, but on personal acquaintance, on the verifier's responsibility (a false verification results in the reversal of verifications and sanctions) and on the structure of the network — to reach a full reality index you must be known to people from several independent parts of the network.
+The system's protection does not rest on you being in the same room, but on personal acquaintance, on the person who confirmed you's responsibility (a false confirmation results in the reversal of confirmations and sanctions) and on the structure of the network — to reach a full reality index you must be known to people from several independent parts of the network.
 
-You are therefore not excluded if you are abroad: you can register, choose a pseudonym and follow the system, and full access to features is unlocked as soon as someone who knows you verifies you — in person or remotely.
+You are therefore not excluded if you are abroad: you can register, choose a pseudonym and follow the system, and full access to features is unlocked as soon as someone who knows you confirms you — in person or remotely.
 
 Citizenship is not a requirement — what matters is that you are a real person.`,
       },
