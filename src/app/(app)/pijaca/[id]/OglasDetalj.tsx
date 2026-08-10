@@ -74,7 +74,9 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
     const res = await fetch("/api/poruke", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: oglas.sellerId }),
+      // `oglasId` beleži upit povodom oglasa — uslov koraka 3 na putanji
+      // doprinosa razmeni (Pravilnik čl. 40a). Razgovor se otvara i bez njega.
+      body: JSON.stringify({ userId: oglas.sellerId, oglasId: oglas.id }),
     });
     setChatLoading(false);
     if (!res.ok) return;

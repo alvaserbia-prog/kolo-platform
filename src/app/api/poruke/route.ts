@@ -3,6 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
 
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
@@ -56,7 +57,10 @@ export async function POST(req: NextRequest) {
   if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
   const meId = session.user.id;
 
-  const { userId } = await req.json();
+  // `oglasId` je opcion i šalje se kad razgovor kreće sa stranice oglasa —
+  // po njemu se beleži upit, koji je jedan od uslova koraka 3 putanje doprinosa
+  // razmeni (Pravilnik čl. 40a). Razgovor se otvara i bez njega.
+  const { userId, oglasId } = await req.json();
   if (!userId || userId === meId)
     return await greska("Neispravan korisnik.", 400);
 
@@ -72,6 +76,10 @@ export async function POST(req: NextRequest) {
     update: {},
     select: { id: true },
   });
+
+  // Upit se beleži tek pošto je razgovor otvoren — i ne obara odgovor ako padne.
+  // `zabeleziUpit` sam proverava da oglas postoji i da pošiljalac nije oglašivač.
+  if (typeof oglasId === "string" && oglasId) await zabeleziUpit(oglasId, meId);
 
   return NextResponse.json({ konverzacijaId: konv.id });
 }

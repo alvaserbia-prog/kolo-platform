@@ -341,7 +341,20 @@
     "zabelezen_opis": "It is entered once someone verifies you or transfers POEN to you. Until then it is not a POEN entry and is not part of your balance.",
     "samo_primalac": "Until you are verified you can only receive POEN. Entering POEN for others opens up upon verification.",
     "nadoknada_naslov": "Restitution",
-    "nadoknada_opis": "It arose from the annulment of a false verification you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; recording POEN for someone else becomes possible once your record passes zero."
+    "nadoknada_opis": "It arose from the annulment of a false verification you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; recording POEN for someone else becomes possible once your record passes zero.",
+    "putanja_naslov": "Exchange contribution path",
+    "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and no user is recorded more than 5,000 POEN in total.",
+    "putanja_ukupno": "{evidentirano} / {kapa} POEN",
+    "putanja_korak_1": "First listing meeting the content minimum, and the first exchange in which someone records POEN in your favour",
+    "putanja_korak_2": "First exchange in which you record POEN for a user outside your chain",
+    "putanja_korak_3": "Three listings, two of which received an enquiry from different users",
+    "putanja_korak_4": "Exchanges with 5 different people outside your chain",
+    "putanja_korak_5": "Exchanges with 10 different people outside your chain",
+    "putanja_evidentiran": "Recorded",
+    "putanja_zabelezen": "Noted — the record is created upon verification",
+    "putanja_na_redu": "Met — being recorded shortly",
+    "putanja_zakljucan": "Not unlocked yet",
+    "putanja_pravila": "The count includes POEN records of at least 1,000 POEN with people outside your circle of acquaintance (the vouching graph). Each counterpart counts once, however many records there are. A record with a user who is not yet verified is noted, but counts only once they are verified. Currently counted: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Identity verification",
@@ -2404,7 +2417,9 @@
     "doprinos_sadrzaju_naslov": "{iznos} POEN recorded for your contribution",
     "doprinos_sadrzaju_tekst": "Your contribution to the platform's content has been recorded — {iznos} POEN — for the listing offering a good or service (Rulebook art. 40a).",
     "nadoknada_naslov": "A restitution entry has appeared on your record",
-    "nadoknada_tekst": "Annulment of a verification you performed created a restitution of {iznos} POEN, because the annulled POEN were not covered. Restitution is not a debt and cannot be collected; POEN you receive fill it first. Exchange of goods and services is not restricted for you."
+    "nadoknada_tekst": "Annulment of a verification you performed created a restitution of {iznos} POEN, because the annulled POEN were not covered. Restitution is not a debt and cannot be collected; POEN you receive fill it first. Exchange of goods and services is not restricted for you.",
+    "doprinos_razmeni_naslov": "An exchange contribution has been recorded for you — step {korak}",
+    "doprinos_razmeni_tekst": "You have completed step {korak} of the exchange contribution path and {iznos} POEN has been recorded for you (Rulebook art. 40a)."
   },
   "transakcije": {
     "verifikacija": "Verification of {pseudonim}",
@@ -2416,7 +2431,8 @@
     "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",
     "krug_osnivanje": "Circle founded “{krug}”",
     "program": "Programme {program}",
-    "doprinos_sadrzaju": "Contribution to platform content"
+    "doprinos_sadrzaju": "Contribution to platform content",
+    "doprinos_razmeni": "Exchange contribution — step {korak}"
   },
   "mejl": {
     "pozdrav": "Hello",

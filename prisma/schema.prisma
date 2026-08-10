@@ -72,6 +72,7 @@ enum TransactionType {
   OTPIS_ZRNO
   EMISIJA_OSNIVACKI
   EMISIJA_SADRZAJ // doprinos sadržaju platforme (Pravilnik čl. 15 t. 8, čl. 40a)
+  EMISIJA_RAZMENA // doprinos razmeni — koraci 2–5 putanje prvog kruga (čl. 40a)
 }
 
 enum TipKorisnika {
@@ -282,6 +283,8 @@ model User {
   purchases                        MarketplaceListing[]      @relation("BuyerListings")
   prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
   doprinosSadrzaju                 DoprinosSadrzaju?
+  doprinosiRazmeni                 DoprinosRazmeni[]
+  oglasUpiti                       OglasUpit[]
   praceneKategorije                FollowedCategory[]
   krugClanstva                     KrugClanstvo[]
   pristupnice                      KrugPristupnica[]
@@ -573,6 +576,7 @@ model MarketplaceListing {
 
   prijave   PrijavaOglasa[]
   doprinosi DoprinosSadrzaju[]
+  upiti     OglasUpit[]
 
   @@index([status, category, createdAt])
   @@index([status, tip, createdAt])
@@ -676,6 +680,56 @@ model DoprinosSadrzaju {
 
   @@index([status])
   @@index([okidacKorisnikId, evidentiranAt])
+}
+
+// ─── Doprinos razmeni — putanja prvog kruga (čl. 40a, lestvica od 5 koraka) ───
+
+/// Upit povodom oglasa — trag da se neko javio oglašivaču (korak 3 lestvice).
+///
+/// Nastaje kad verifikovani korisnik pokrene razgovor sa oglasnе stranice. Ne
+/// čuva sadržaj poruke: za brojač je merodavna samo činjenica da se javio KO i
+/// POVODOM ČEGA. Jedan upit po paru (oglas, pošiljalac) — ponovljeno javljanje
+/// istom oglasu ne umnožava brojač.
+model OglasUpit {
+  id         String             @id @default(uuid())
+  oglasId    String
+  oglas      MarketplaceListing @relation(fields: [oglasId], references: [id], onDelete: Cascade)
+  posiljacId String
+  posiljac   User               @relation(fields: [posiljacId], references: [id], onDelete: Cascade)
+  createdAt  DateTime           @default(now())
+
+  @@unique([oglasId, posiljacId])
+  @@index([posiljacId])
+}
+
+/// Doprinos razmeni — koraci 2–5 putanje prvog kruga (Pravilnik čl. 40a).
+///
+/// Korak 1 (prvi oglas + prvi primljen POEN) je zatečeni doprinos sadržaju i vodi
+/// se u `DoprinosSadrzaju` — OVDE GA NEMA. Zato je `korak` u opsegu 2–5, a
+/// doživotna kapa od 5.000 POEN-a proizlazi iz zbira: 1.000 (čl. 40a, korak 1) +
+/// 4 × 1.000 (ova tabela). Kapu drži BAZA, ne kod: `@@unique([userId, korak])` uz
+/// ograničenje opsega znači da korisnik ne može imati više od četiri reda ovde.
+model DoprinosRazmeni {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  /// Redni broj koraka na lestvici (2–5).
+  korak  Int
+  iznos  Int            @default(1000)
+  status DoprinosStatus @default(ZABELEZEN)
+
+  /// Transakcija kojom je korak evidentiran u Protokolu (postoji tek u EVIDENTIRAN).
+  transakcijaId String?
+
+  zabelezenAt   DateTime  @default(now())
+  evidentiranAt DateTime?
+  /// Kad je korisniku javljeno. Isti razlog za odvajanje kao kod `DoprinosSadrzaju`:
+  /// zapis POEN-a ne sme da čeka na mejl/push, a javljanje ne sme da ode dvaput.
+  obavestenAt   DateTime?
+
+  @@unique([userId, korak])
+  @@index([status])
 }
 
 // Kategorije Pijace koje korisnik prati (čipovi u profilu). Pri objavi oglasa

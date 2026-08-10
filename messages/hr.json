@@ -341,7 +341,20 @@
     "zabelezen_opis": "Evidentira se kad te netko verificira ili kad ti netko upiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
     "samo_primalac": "Dok nisi verificiran/a možeš samo primati POEN. Upis u tuđu evidenciju otvara se nakon verifikacije.",
     "nadoknada_naslov": "Naknada",
-    "nadoknada_opis": "Nastala je poništenjem lažne verifikacije koju si obavio. Nije dug i ne može se naplatiti — POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena; upis POEN drugome moguć je kad zapis prijeđe nulu."
+    "nadoknada_opis": "Nastala je poništenjem lažne verifikacije koju si obavio. Nije dug i ne može se naplatiti — POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena; upis POEN drugome moguć je kad zapis prijeđe nulu.",
+    "putanja_naslov": "Putanja doprinosa razmjeni",
+    "putanja_opis": "Pet koraka, svaki 1.000 POEN. Otključavaju se redom, a ukupno se po korisniku evidentira najviše 5.000 POEN.",
+    "putanja_ukupno": "{evidentirano} / {kapa} POEN",
+    "putanja_korak_1": "Prvi oglas sa sadržajnim minimumom i prva razmjena u kojoj ti netko evidentira POEN u korist",
+    "putanja_korak_2": "Prva razmjena u kojoj ti evidentiraš POEN korisniku izvan svog lanca",
+    "putanja_korak_3": "Tri oglasa, od kojih su dva dobila upit od različitih korisnika",
+    "putanja_korak_4": "Razmjene s 5 različitih osoba izvan tvog lanca",
+    "putanja_korak_5": "Razmjene s 10 različitih osoba izvan tvog lanca",
+    "putanja_evidentiran": "Evidentirano",
+    "putanja_zabelezen": "Zabilježeno — zapis nastaje po verifikaciji",
+    "putanja_na_redu": "Ispunjeno — evidentira se uskoro",
+    "putanja_zakljucan": "Još nije otključano",
+    "putanja_pravila": "U brojač ulaze upisi POEN-a od najmanje 1.000 POEN s ljudima koji nisu u tvom krugu poznanstava (graf jamstva). Svaki sugovornik broji se jednom, bez obzira na broj upisa. Upis s korisnikom koji još nije verificiran se bilježi, a broji tek kad on bude verificiran. Trenutačno u brojaču: {sagovornika}."
   },
   "verifikacija": {
     "naslov": "Verifikacija identiteta",
@@ -2404,7 +2417,9 @@
     "doprinos_sadrzaju_naslov": "Evidentiran ti je doprinos od {iznos} POEN",
     "doprinos_sadrzaju_tekst": "Za oglas kojim nudiš dobro ili uslugu evidentiran ti je doprinos sadržaju platforme — {iznos} POEN (Pravilnik čl. 40a).",
     "nadoknada_naslov": "Nastala je naknada na tvom zapisu",
-    "nadoknada_tekst": "Poništenjem verifikacije koju si obavio nastala je naknada od {iznos} POEN, jer poništeni POEN nisu bili pokriveni. Naknada nije dug i ne može se naplatiti; POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena."
+    "nadoknada_tekst": "Poništenjem verifikacije koju si obavio nastala je naknada od {iznos} POEN, jer poništeni POEN nisu bili pokriveni. Naknada nije dug i ne može se naplatiti; POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena.",
+    "doprinos_razmeni_naslov": "Evidentiran ti je doprinos razmjeni — korak {korak}",
+    "doprinos_razmeni_tekst": "Prošao/la si {korak}. korak putanje doprinosa razmjeni i evidentirano ti je {iznos} POEN (Pravilnik čl. 40a)."
   },
   "transakcije": {
     "verifikacija": "Verifikacija {pseudonim}",
@@ -2416,7 +2431,8 @@
     "krug_bonus": "Bonus krugovi „{krug}” — {clanovi} članova",
     "krug_osnivanje": "Osnivanje krugovi „{krug}”",
     "program": "Program {program}",
-    "doprinos_sadrzaju": "Doprinos sadržaju platforme"
+    "doprinos_sadrzaju": "Doprinos sadržaju platforme",
+    "doprinos_razmeni": "Doprinos razmjeni — korak {korak}"
   },
   "mejl": {
     "pozdrav": "Pozdrav",

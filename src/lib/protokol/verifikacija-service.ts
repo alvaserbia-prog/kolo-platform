@@ -29,6 +29,7 @@ import {
 import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
 import { DoprinosOkidac, Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
+import { probajEvidentiratiKorake, osveziSagovornike } from "@/lib/protokol/doprinos-razmeni";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -391,6 +392,14 @@ async function emitujPoenZaVerifikaciju(
   // ispunjava sadržinski minimum, tek sada dobija zapis od 1.000 POEN-a. Ne baca —
   // verifikacija je već upisana i ne sme da padne zbog ovog kanala.
   await probajEvidentirati(verifikovaniId, DoprinosOkidac.VERIFIKACIJA, fazaJedan.verifikatorId);
+
+  // Ista dva okidača važe i za korake 2–5 putanje doprinosa razmeni.
+  await probajEvidentiratiKorake(verifikovaniId);
+  // Verifikacija pomera i TUĐE brojače: razmena sa neverifikovanim korisnikom se
+  // beleži, a u brojač ulazi tek kad on bude verifikovan. Zato se preračunavaju
+  // svi koji su sa njim već obavili razmenu. Sekvencijalno — svaki poziv vodi u
+  // sopstvenu emisiju; ne baca, verifikacija je već upisana.
+  await osveziSagovornike(verifikovaniId);
 
   return {
     verifikacijaId,
