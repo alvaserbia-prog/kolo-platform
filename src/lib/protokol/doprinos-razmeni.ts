@@ -3,8 +3,8 @@
  *
  * Nadogradnja osmog kanala: umesto jednokratnih 1.000 POEN-a za prvi oglas,
  * korisnik prolazi lestvicu od pet koraka × 1.000 POEN, uz doživotnu kapu od
- * 5.000 POEN. Korak 1 je ZATEČENI doprinos sadržaju i ostaje netaknut — i po
- * iznosu i po odloženom evidentiranju; ovaj modul vodi korake 2–5.
+ * 5.000 POEN. Korak 1 je ZATEČENI doprinos sadržaju iz čl. 40a i ostaje netaknut —
+ * i po iznosu i po odloženom evidentiranju; ovaj modul vodi korake 2–5.
  *
  * 🔴 Razmena se NE označava i NE vodi kao zaseban zapis. Brojač čita same upise
  * POEN-a (`TransactionType.TRANSFER`): svaki čovek van kruga poznanstava sa kojim
@@ -219,6 +219,10 @@ export async function probajNapredovati(userId: string): Promise<number> {
     // Isto pravilo kao u čl. 40a: nalogu čija je stvarnost potvrđena doprinos se
     // evidentira odmah, neverifikovanom ostaje zabeležen do verifikacije. Tip
     // naloga se čita IZ BAZE — sesija se osvežava sa zakašnjenjem.
+    //
+    // Odobrenje Fondacije (čl. 40a st. 4) se ovde NE traži: koraci 2–5 zahtevaju
+    // prepis POEN-a, koji nalog bez potvrde ionako ne sme da inicira (čl. 28 st. 2),
+    // pa do njih ne može ni da stigne pre verifikacije.
     const korisnik = await prisma.user.findUnique({
       where: { id: userId },
       select: { tipKorisnika: true },

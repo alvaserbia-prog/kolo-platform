@@ -333,10 +333,15 @@ describe("probajNapredovati", () => {
     expect(emitujPoenMock).toHaveBeenCalledTimes(1);
   });
 
+  // Koraci 2–5 traže prepis POEN-a, koji nalog bez potvrde ne sme da inicira
+  // (čl. 28 st. 2) — zato se ovde ne traži odobrenje Fondacije kao kod čl. 40a,
+  // nego korak ostaje zabeležen do verifikacije.
   it("neverifikovanom korisniku korak ostaje ZABELEZEN — ništa se ne emituje", async () => {
     postaviUcinakUBazi({ upisi: [{ drugiId: "b", iznos: 1500, jaSaljem: true }] });
     prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NEVERIFIKOVAN" });
     prismaMock.doprinosRazmeni.create.mockResolvedValue({});
+    prismaMock.doprinosRazmeni.findMany.mockResolvedValue([{ id: "k2", korak: 2, iznos: 1000 }]);
+    prismaMock.doprinosRazmeni.updateMany.mockResolvedValue({ count: 1 });
 
     expect(await probajNapredovati("ja")).toBe(1);
     expect(emitujPoenMock).not.toHaveBeenCalled();

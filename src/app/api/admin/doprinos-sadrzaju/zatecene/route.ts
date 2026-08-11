@@ -10,7 +10,8 @@ import { evidentirajZateceneVerifikovane } from "@/lib/protokol/doprinos-sadrzaj
  * POST /api/admin/doprinos-sadrzaju/zatecene
  *
  * Jednokratno razrešava doprinose koji stoje ZABELEZEN kod verifikovanih korisnika
- * (čl. 40a, prelazni stav). Idempotentno — ponovno pokretanje ne evidentira dvaput.
+ * (čl. 40a, prelazni stav). Neverifikovane NE dira — njih Fondacija odobrava jedan
+ * po jedan u tabu „Prvi oglasi". Idempotentno — ponovno pokretanje ne evidentira dvaput.
  *
  * Namerno je na dugmetu, a ne u migraciji: emisija ide kroz `emitujPoen` (zero-sum,
  * audit), i opticaj skače za 1.000 × broj razrešenih, što može da upali osnivački

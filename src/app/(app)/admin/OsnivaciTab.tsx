@@ -193,7 +193,7 @@ export default function OsnivaciTab({
   }
 
   // Jednokratna prelazna radnja (čl. 40a, prelazni stav) — razrešava doprinose koji
-  // stoje ZABELEZEN kod verifikovanih članova. Idempotentno; drugi klik ne radi ništa.
+  // stoje ZABELEZEN kod potvrđenih članova. Idempotentno; drugi klik ne radi ništa.
   async function razresiZatecene() {
     if (!confirm(t("doprinos_zatecene_confirm"))) return;
     setRadnja("zatecene");

@@ -4,5 +4,7 @@
 // „nadzor" = automat (RizikNalaz, noćni radnik). „odluke" = ljudska prijava —
 // nadzorni predmeti koje su otvorili nadzornici (dokaz stvarnosti 4.2.0, čl. 11a).
 // Dva različita posla, namerno dva taba.
-export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
+// „prvi-oglasi" = odobravanje doprinosa iz čl. 40a za naloge bez potvrde. Nije
+// moderacija (to je „pijaca"): oglas ostaje, odlučuje se samo o 1.000 POEN.
+export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
 export type Tab = (typeof ADMIN_TABOVI)[number];

@@ -332,20 +332,20 @@
     "send_uspeh_opis": "{iznos} POEN átírva @{pseudonim} nyilvántartásába.",
     "send_uspeh_dugme": "Kész",
     "zabelezen_naslov": "Feljegyzett hozzájárulás",
-    "zabelezen_opis": "Akkor kerül bevezetésre, amikor valaki megerősít téged, vagy POEN-t ír át neked. Addig nem POEN-bejegyzés, és nem része az egyenlegnek.",
+    "zabelezen_opis": "Akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja az első hirdetésedet, amikor valaki megerősít téged, vagy amikor valaki POEN-t ír át a nyilvántartásodba. Addig nem POEN-bejegyzés, és nem számít bele az egyenlegbe.",
     "samo_primalac": "Amíg nem vagy megerősítve, csak POEN-t fogadhatsz. A más nyilvántartásába való átírás a megerősítés után nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
     "nadoknada_opis": "Az általad végzett hamis megerősítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor írhatsz át, ha a bejegyzésed túllépi a nullát.",
     "putanja_naslov": "Cseréhez való hozzájárulások",
     "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorrendben nyílnak meg, és felhasználónként összesen legfeljebb 5.000 POEN kerül nyilvántartásba.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
-    "putanja_korak_1": "Az első, a tartalmi minimumnak megfelelő hirdetés és az első csere, amelyben valaki POEN-t ír át a nyilvántartásodba",
+    "putanja_korak_1": "Az első, jószágot vagy szolgáltatást kínáló hirdetés, amely megfelel a tartalmi minimumnak",
     "putanja_korak_2": "Az első csere, amelyben te írsz át POEN-t a láncodon kívüli felhasználónak",
     "putanja_korak_3": "Három hirdetés, amelyek közül kettő különböző felhasználóktól kapott megkeresést",
     "putanja_korak_4": "Csere 5 különböző, a láncodon kívüli személlyel",
     "putanja_korak_5": "Csere 10 különböző, a láncodon kívüli személlyel",
     "putanja_evidentiran": "Nyilvántartva",
-    "putanja_zabelezen": "Feljegyezve — a bejegyzés a megerősítéskor jön létre",
+    "putanja_zabelezen": "Feljegyezve — a bejegyzés a jóváhagyás vagy a megerősítés után jön létre",
     "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
     "putanja_zakljucan": "Még nem nyílt meg",
     "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}."
@@ -872,11 +872,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -884,23 +884,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.2.1",
+      "ver": "4.2.2",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -920,21 +920,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.2.1-s verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.2.2-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.2.1-s verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.2.2-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.2.1-s verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.2.2-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.1-s verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.2-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.2.1-s verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.2.2-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.2.1-s verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.2.2-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.2.1-s verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.2.2-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1660,7 +1660,7 @@
     "meta_desc": "A KOLO Piaca — javak, szolgáltatások és mesterségek a környékedről, közvetlen csere emberek között. Az első hirdetéseket megerősítés nélkül is feladhatod.",
     "neverif_objava_hint": "Ajánlatot a megerősítés előtt is közzétehetsz — így látnak meg a környékedről való tagok.",
     "neverif_naslov": "Megerősítés előtt hirdetsz",
-    "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, legalább {min} karakteres leírás, kategória és helység kell. Az első ilyen hirdetés {iznos} POEN hozzájárulást hoz neked, amelyet akkor vezetnek be, amikor valaki megerősít téged, vagy POEN-t ír át neked.",
+    "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, legalább {min} karakteres leírás, kategória és helység kell. A hirdetés azonnal megjelenik; a {iznos} POEN hozzájárulás akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja a hirdetést.",
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
     "oznaka_neverifikovan": "NINCS MEGERŐSÍTVE",
     "oznaka_neverifikovan_opis": "A hirdető még nincs megerősítve a megerősítési láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
@@ -1871,7 +1871,7 @@
     "ekran5_naslov": "Mi az a POEN",
     "ekran5_p1": "A POEN a hozzájárulás nyilvántartási bejegyzése — azt rögzíti, mit adtál és mit kaptál a hálózatban. Nem pénz: nem vásárolható meg, nem váltható dinárra, és a rendszeren kívül nincs értéke.",
     "ekran5_p2": "Például: megjavítod a szomszéd csapját, ő átírja ezeket a POEN-eket a nyilvántartásodba; később egy harmadik embertől mézet kapsz értük. Hogy egy csere hány POEN-t ér, azt ti ketten állapítjátok meg.",
-    "ekran5_p3": "Egyelőre kétféleképpen érkezik POEN: 1000, amikor valaki megerősít téged, és amennyiben az egyes cseréknél megállapodtok.",
+    "ekran5_p3": "Egyelőre háromféleképpen érkezik POEN: 1000 az első hirdetésért, amellyel javat vagy szolgáltatást kínálsz — amikor az Alapítvány jóváhagyja; 1000, amikor valaki megerősít téged; és amennyiben az egyes cseréknél megállapodtok.",
     "ekran5_cta": "Nyisd meg a nyilvántartásod",
     "ekran6_oznaka": "Amíg vársz",
     "ekran6_naslov": "Mit tehetsz máris, a megerősítés előtt",
@@ -1879,7 +1879,7 @@
     "ekran6_p2": "Először: rendezd be a profilodat — tölts fel fényképet, add meg a nevedet, a helységet és néhány szót magadról. Minden mezőnél te döntöd el, láthatják-e mások. Az emberek ezt látják, amikor megkeresed őket, ezért a fénykép nélküli fiók gyengébb visszajelzést kap. Az e-mail-értesítések kapcsolója is itt van.",
     "ekran6_p3": "A profil szerkesztése nem befolyásolja a megerősítést. A felismerés a piaci hirdetésed alapján történik, nem a profilod alapján.",
     "ekran6_p4": "Másodszor: nyisd meg a piacot, és nézd meg, mit kínálnak és mit keresnek az emberek. A hirdetések böngészése mindenki előtt nyitva áll, megerősítés nélkül is. Kövesd a főoldalon az Alapítvány híreit is: a közlemények, a szabályváltozások és minden, ami a közösség számára fontos, oda kerül.",
-    "ekran6_p5": "A saját hirdetések feladását, a hirdetők elérését és az üzeneteket a megerősítés oldja fel.",
+    "ekran6_p5": "Ajánlatot azonnal közzétehetsz, még a megerősítés előtt is — az első ilyen hirdetésért 1000 POEN-t kapsz, amikor az Alapítvány jóváhagyja. A megerősítés a keresleti hirdetést, a hirdetők elérését és a beszélgetés kezdeményezését oldja fel.",
     "ekran6_cta_profil": "Profil szerkesztése",
     "ekran6_cta_pijaca": "Piac megnyitása",
     "ekran7_oznaka": "Következő lépés",
@@ -2068,6 +2068,7 @@
     "tab_donacije": "Donacije",
     "tab_prigovori": "Prigovori",
     "tab_pijaca": "Pijaca",
+    "tab_prvi_oglasi": "Első hirdetések",
     "donacije_nema": "Nema donacija na čekanju.",
     "donacije_potvrdi": "Potvrdi",
     "donacije_potvrdjujem": "Potvrđujem...",
@@ -2250,12 +2251,12 @@
     "osnivaci_otkljucaj_confirm": "Otključati listu osnivača za izmene? Dok je otključana, koraci se ne evidentiraju.",
     "osnivaci_evidentiraj_treba_zakljucati": "Koraci se evidentiraju tek kad je lista osnivača zaključana (zbir udela 100%).",
     "doprinos_zatecene_naslov": "Zatečeni doprinosi za sadržaj (jednokratno)",
-    "doprinos_zatecene_opis": "Verifikovanim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Nemegerősítetti se preskaču — oni i dalje čekaju okidač. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
+    "doprinos_zatecene_opis": "Azoknál a megerősített tagoknál, akiknél az 1.000 POEN hozzájárulás fel van jegyezve, de nincs nyilvántartásba véve, most bevezetésre kerül (40a. cikk, átmeneti rendelkezés). A megerősítés nélküli tagok kimaradnak — őket egyenként hagyod jóvá az Első hirdetések fülön. Emellett értesítést kapnak azok is, akiknél a bevezetés megtörtént, de az értesítés nem ment ki.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Opticaj skače za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira automatski na svakih 100.000 POEN, prva noćna emisija posle ovoga može da upali korak. Ponovno pokretanje ne evidentira dvaput.",
-    "doprinos_zatecene_confirm": "Evidentirati sada sve zatečene doprinose megerősítettih članova? Opticaj će porasti i to može da upali osnivački korak.",
-    "doprinos_zatecene_gotovo": "Razrešeno: {evidentirano}. U opticaj ušlo {poen} POEN. Preskočeno nemegerősítettih: {preskoceno}. Poslato obaveštenja: {obavesteno}.",
+    "doprinos_zatecene_confirm": "Bevezetjük most a megerősített tagok összes fennálló hozzájárulását? A forgalom nő, ami elindíthat egy alapítói lépést.",
+    "doprinos_zatecene_gotovo": "Rendezve: {evidentirano}. Forgalomba került: {poen} POEN. Kihagyva megerősítés nélkül: {preskoceno}. Kiküldött értesítések: {obavesteno}.",
     "osnivaci_obrisi_confirm": "Obrisati osnivača?",
     "osnivaci_ucitavanje": "Učitavanje…",
     "pokr_prijave_ucitavanje": "Učitavanje…",
@@ -2424,6 +2425,10 @@
     "bag_promenjen_tekst": "A(z) „{naslov}” bejelentésed állapota megváltozott.",
     "doprinos_sadrzaju_naslov": "{iznos} POEN rögzítve a hozzájárulásodért",
     "doprinos_sadrzaju_tekst": "A jószágot vagy szolgáltatást kínáló hirdetésedért rögzítettük a platform tartalmához való hozzájárulásodat — {iznos} POEN (Szabályzat 40a. cikk).",
+    "doprinos_na_cekanju_naslov": "Egy első hirdetés jóváhagyásra vár",
+    "doprinos_na_cekanju_tekst": "„{pseudonim}\" felhasználó (megerősítés nélkül) közzétette első hirdetését. 1.000 POEN hozzájárulás vár jóváhagyásra az Első hirdetések fülön.",
+    "doprinos_odbijen_naslov": "Az első hirdetésedhez tartozó hozzájárulást nem hagyták jóvá",
+    "doprinos_odbijen_tekst": "A hirdetésedhez tartozó, platform tartalmához való hozzájárulást nem hagyták jóvá. Indok: {razlog} A hirdetés a Piacon marad. Ha kiegészíted vagy jobbat teszel közzé, a hozzájárulást újra elbírálják.",
     "nadoknada_naslov": "Megtérítés keletkezett a bejegyzéseden",
     "nadoknada_tekst": "Az általad végzett megerősítés érvénytelenítése {iznos} POEN megtérítést keletkeztetett, mert az érvénytelenített POEN nem volt fedezve. A megtérítés nem tartozás és nem hajtható be; a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva.",
     "doprinos_razmeni_naslov": "Cseréhez való hozzájárulást jegyeztünk be neked — {korak}. lépés",

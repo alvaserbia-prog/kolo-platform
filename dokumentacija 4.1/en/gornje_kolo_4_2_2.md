@@ -2,7 +2,7 @@
 
 # Rulebook on the Upper Kolo
 
-*This Rulebook governs the voting procedures and operational rules of the Upper Kolo. It is adopted on the basis of Articles 41, 46, and 47 of the KOLO System Rulebook (v4.2.1), which expressly refer to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the voting procedures and operational rules of the Upper Kolo. It is adopted on the basis of Articles 41, 46, and 47 of the KOLO System Rulebook (v4.2.2), which expressly refer to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
