@@ -88,7 +88,7 @@ Ako naiđeš na bilo što od ovoga, ne dijeli podatke i prijavi to Fondaciji.`,
         pitanje: `Kako do prvih POEN-a ako nemam što ponuditi?`,
         odgovor: `Prvi oglas kojim nešto nudiš nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati fotografiju, opis, kategoriju i mjesto.
 
-POEN ti se upisuje i kad ti netko drugi upiše za obavljenu razmjenu — kao bez potvrde možeš ga primati, samo ga ne možeš sam prenositi drugome.
+POEN ti se upisuje i kad ti ga netko drugi prepiše za obavljenu razmjenu — kao nepotvrđen možeš ga primati, samo ga ne možeš sam prepisivati drugome.
 
 A čim se potvrđuješ, možeš objaviti i potražnju — što tebi treba — pa da se javi onaj tko to ima.`,
       },
@@ -445,9 +445,9 @@ Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili r
 
 Takva razmjena odvija se izvan sustava. Ako se uz nju ne ažurira evidencija POEN-a, ona ostaje vaš osobni dogovor i nigdje se ne bilježi kao tvoj doprinos.
 
-A baš u tome je smisao KOLA: da razmjena koju biste ionako obavili „iz ruke u ruku" dobije zapis. Kad uz razmjenu ažurirate evidenciju, zapis onoga tko daje uvećava se, a zapis onoga tko prima umanjuje za isti iznos — i ostaje trag o tome tko je koliko dao zajednici.
+A baš u tome je smisao KOLA: da razmjena koju biste ionako obavili „iz ruke u ruku" dobije zapis. Kad uz razmjenu ažurirate evidenciju, zapis onoga tko daje umanjuje se, a zapis onoga tko prima uvećava za isti iznos — i ostaje trag o tome tko je koliko dao zajednici.
 
-Možeš i kombinirati: dio obavite kao čistu trampu, a dio upišete kroz POEN. Tada se bilježi samo onaj dio za koji ste ažurirali evidenciju; čista trampa izvan toga ostaje neevidentirana.
+Možeš i kombinirati: dio obavite kao čistu trampu, a dio prepišete kroz POEN. Tada se bilježi samo onaj dio za koji ste ažurirali evidenciju; čista trampa izvan toga ostaje neevidentirana.
 
 U svakom slučaju, za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Fondacija i Protokol se u to ne miješaju i ne odgovaraju za njega.`,
       },

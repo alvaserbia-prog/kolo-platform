@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     },
   });
   if (!user?.wallet) {
-    return await greska("Korisnik nema novčanik.", 400);
+    return await greska("Korisnik nema zapis u Protokolu.", 400);
   }
 
   // Javna donacija zahteva uneto ime i prezime (čl. 5a) — provera PRE generisanja.

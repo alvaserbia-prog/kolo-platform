@@ -376,6 +376,12 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
           />
         </div>
         {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{error}</p>}
+        {/* Šta prepis JESTE, rečeno na mestu gde se radi. Reč „prepis" u govoru
+            vuče na dve pogrešne strane — „prepisati kuću" (prenos svojine, a POEN
+            nije imovinsko pravo, čl. 12–13) i „prepisati" kao kopirati (kopija bi
+            značila da POEN nastaje ni iz čega, protiv zero-suma). Ova rečenica
+            gasi obe. */}
+        <p className="text-xs text-kolo-muted leading-snug">{t("send_napomena")}</p>
         <div className="flex gap-3 pt-1">
           <button
             type="button"

@@ -35,11 +35,11 @@ const IZUZETI_NAMESPACE = new Set(["tablaJemstva"]);
  * prvom izmenom copy-ja, jer je u prevodima nosi pet različitih korena.
  */
 const ZABRANJENO: Record<string, RegExp[]> = {
-  sr: [/tabl[aeiou]\s+(zahteva\s+za\s+)?jemstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /mrež[aeiu]\s+jemstva/i],
-  hr: [/ploč[aeiu]\s+(zahtjeva\s+za\s+)?jamstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i],
-  en: [/(guarantee|vouching)\s+(request\s+)?board/i, /recognition\s+card/i, /vouching\s+(chain|network)/i],
-  ru: [/доск[аеиу]\s+(запросов\s+о\s+)?поручительств/i, /карточк[ауи]\s+узнавания/i, /цепочк[аеиу]\s+поручительства/i],
-  hu: [/kezességi\s+(kérelmek\s+)?tábl/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i],
+  sr: [/tabl[aeiou]\s+(zahteva\s+za\s+)?jemstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /mrež[aeiu]\s+jemstva/i, /graf[au]?\s+jemstva/i],
+  hr: [/ploč[aeiu]\s+(zahtjeva\s+za\s+)?jamstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /graf[au]?\s+jamstva/i],
+  en: [/(guarantee|vouching)\s+(request\s+)?board/i, /recognition\s+card/i, /vouching\s+(chain|network|graph)/i],
+  ru: [/доск[аеиу]\s+(запросов\s+о\s+)?поручительств/i, /карточк[ауи]\s+узнавания/i, /цепочк[аеиу]\s+поручительства/i, /граф[ае]?\s+поручительства/i],
+  hu: [/kezességi\s+(kérelmek\s+)?tábl/i, /felismerési\s+kártya/i, /kezességi\s+(lánc|gráf)/i],
 };
 
 /** Svaki string u prevodima, sa punom putanjom ključa. */
@@ -143,5 +143,84 @@ describe("copy govori o potvrdi, ne o verifikaciji", () => {
       STARA_TERMINOLOGIJA[jezik].test(tekst),
       `${fajl} i dalje govori „verifikacija" umesto „potvrda"`,
     ).toBe(false);
+  });
+});
+
+/**
+ * POEN nije novac — ni u imenu ekrana, ni u glagolu (2026-08-11).
+ *
+ * Dve izmene koje ovaj blok čuva:
+ *
+ * 1. Ekran se zove POEN, ne Novčanik. Novčanik je posuda za novac, a POEN
+ *    postoji isključivo kao zapis u Protokolu (Pravilnik čl. 12) — nema
+ *    nosioca i ne drži se. Ime je birano po simetriji sa stavkom ZRNO i zato
+ *    je isto na svih pet jezika. Najgori je bio prevod: `Pénztárca` doslovno
+ *    sadrži `pénz` = novac.
+ *
+ * 2. UPIS i PREPIS nisu isto. Kroz kanale iz čl. 15 POEN NASTAJE — Protokol
+ *    ide u minus za isti iznos, ukupan broj POEN-a raste; to je „upis".
+ *    Između dva korisnika POEN NE nastaje — jedan zapis se umanjuje, drugi
+ *    uvećava, zbir ostaje isti; to je „prepis". Dok su obe operacije nosile
+ *    reč „upis", iz interfejsa se nije videlo kad sistem stvara POEN a kad ga
+ *    samo premešta.
+ *
+ * Doslovan prevod „prepisa" se NE koristi: `transcription`, `prijepis` i
+ * `переписывание` u prvom značenju znače KOPIJU, a kopija ostavlja original
+ * na mestu — tačno suprotno od zero-suma. Zato en ide na `re-register`
+ * (upis na drugo ime u registru), a mađarski na `átírás`, koji taj posao
+ * već obavlja u sopstvenom registru (prepis vozila, nekretnine).
+ */
+const NOVAC_U_IMENU: Record<string, RegExp> = {
+  sr: /novčanik/i,
+  hr: /novčanik/i,
+  en: /\bwallet/i,
+  ru: /кошел/i,
+  hu: /pénztárc|tárcá|tárca/i,
+};
+
+/** Ključevi kojima se imenuje prepis — moraju nositi koren prepisa, ne upisa. */
+const KLJUCEVI_PREPISA = ["header.upisi_poen", "profil.upisi_poen", "novcanik.posalji_poen", "novcanik.send_naslov", "novcanik.send_dugme"];
+
+const KOREN_PREPISA: Record<string, RegExp> = {
+  sr: /prepi[sš]/i,
+  hr: /prepi[sš]/i,
+  en: /re-register/i,
+  ru: /перепис/i,
+  hu: /átír/i,
+};
+
+function uzmi(podaci: unknown, kljuc: string): string | undefined {
+  let cur: unknown = podaci;
+  for (const deo of kljuc.split(".")) {
+    if (!cur || typeof cur !== "object") return undefined;
+    cur = (cur as Record<string, unknown>)[deo];
+  }
+  return typeof cur === "string" ? cur : undefined;
+}
+
+describe("POEN nije novac", () => {
+  it.each(Object.keys(NOVAC_U_IMENU))("messages/%s.json ne imenuje novčanik", async (jezik) => {
+    const sirovo = await fs.readFile(path.join(KOREN, "messages", `${jezik}.json`), "utf-8");
+    const pogodci: string[] = [];
+
+    for (const [kljuc, tekst] of stringovi(JSON.parse(sirovo))) {
+      if (NOVAC_U_IMENU[jezik].test(tekst)) pogodci.push(`${kljuc}: ${tekst.slice(0, 120)}`);
+    }
+
+    expect(pogodci).toEqual([]);
+  });
+
+  it.each(Object.keys(KOREN_PREPISA))("messages/%s.json razlikuje prepis od upisa", async (jezik) => {
+    const podaci = JSON.parse(await fs.readFile(path.join(KOREN, "messages", `${jezik}.json`), "utf-8"));
+
+    for (const kljuc of KLJUCEVI_PREPISA) {
+      const tekst = uzmi(podaci, kljuc);
+      expect(tekst, `nema ključa ${kljuc}`).toBeTypeOf("string");
+      expect(KOREN_PREPISA[jezik].test(tekst!), `${kljuc} = "${tekst}" — prenos POEN-a je prepis, ne upis`).toBe(true);
+    }
+
+    // Napomena uz obrazac gasi dva pogrešna čitanja reči „prepis": prenos
+    // svojine („prepisati kuću") i kopiju. Bez nje reč radi protiv sistema.
+    expect(uzmi(podaci, "novcanik.send_napomena")).toBeTypeOf("string");
   });
 });

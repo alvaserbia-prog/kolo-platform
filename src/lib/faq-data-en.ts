@@ -88,7 +88,7 @@ If you encounter any of the above, do not share your data and report it to the F
         pitanje: `How do I get my first POENs if I have nothing to offer?`,
         odgovor: `The first listing in which you offer something earns you 1,000 POENs through the contribution-to-exchange channel. The listing must have a photograph, a description, a category and a place.
 
-POENs are also recorded for you when someone else records them for a completed exchange — as an unconfirmed user you can receive them, you just cannot transfer them to anyone yourself.
+POENs are also recorded for you when someone else re-registers them to you for a completed exchange — as an unconfirmed user you can receive them, you just cannot re-register them to anyone yourself.
 
 And as soon as you are confirmed, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
       },
@@ -445,9 +445,9 @@ What is NOT public: your contact details (phone number) and the ability for some
 
 Such an exchange takes place outside the system. If the ledger is not updated with POEN alongside it, it remains your personal arrangement and is recorded nowhere as your contribution.
 
-And that is precisely the point of KOLO: so that an exchange you would otherwise carry out "hand to hand" gets a record. When you update the ledger alongside an exchange, the record of the giver increases and the record of the receiver decreases by the same amount — and a trace of who gave how much to the community is preserved.
+And that is precisely the point of KOLO: so that an exchange you would otherwise carry out "hand to hand" gets a record. When you update the ledger alongside an exchange, the record of the giver decreases and the record of the receiver increases by the same amount — and a trace of who gave how much to the community is preserved.
 
-You can also combine: do part of it as pure barter and record part of it through POEN. Then only the portion for which you updated the ledger is recorded; the pure barter beyond that remains unrecorded.
+You can also combine: do part of it as pure barter and re-register part of it through POEN. Then only the portion for which you updated the ledger is recorded; the pure barter beyond that remains unrecorded.
 
 In any case, you and the other party are responsible for quality, delivery and fulfilment of the arrangement under general rules — the Foundation and the Protocol do not intervene and do not guarantee it.`,
       },

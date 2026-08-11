@@ -45,8 +45,11 @@ function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
       return <svg {...p}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M9 22V12h6v10" /></svg>;
     case "/sistem":
       return <svg {...p}><path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5" /><path d="m3 17 9 5 9-5" /></svg>;
+    // Knjiga zapisa, ne novčanik: POEN je zapis u Protokolu, a ne sredstvo koje
+    // se drži (Pravilnik čl. 12). Ikonica novčanika je vraćala asocijaciju na
+    // novac jaču od same reči u labeli.
     case "/novcanik":
-      return <svg {...p}><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" /><path d="M3 5v14a2 2 0 0 0 2 2h16v-5" /><path d="M18 12a2 2 0 0 0 0 4h4v-4Z" /></svg>;
+      return <svg {...p}><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v15" /><path d="M4 4.5v15A2.5 2.5 0 0 0 6.5 22H20" /><path d="M20 18H6.5a2.5 2.5 0 0 0 0 4" /><path d="M9 7h7" /><path d="M9 11h7" /></svg>;
     case "/pijaca":
       return <svg {...p}><path d="m2 7 2-4h16l2 4" /><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7" /><path d="M2 7h20" /><path d="M9 21v-6h6v6" /></svg>;
     case "/verifikacija":

@@ -46,13 +46,13 @@ Potvrda znači da te neko ko je i sam potvrđen, a lično te poznaje, potvrdi ka
 
 Kad te neko potvrdi, otvara ti se nekoliko načina da prikupiš još:
 
-Možeš sam da potvrdiš druge ljude koje stvarno poznaješ — za svaku obavljenu perifikaciju upiše ti se 1.000 POEN.
+Možeš sam da potvrdiš druge ljude koje stvarno poznaješ — za svaku obavljenu potvrdu upiše ti se 1.000 POEN.
 
 Možeš da se prijaviš za zadatak iz operativnog doprinosa — to je rad za zajedničko dobro koji objavi Fondacija (kasnije i nosioci ZRNA). Kad izvršiš zadatak i nosilac ZRNA potvrdi izvršenje, upiše ti se POEN.
 
 Ako pripadaš nekoj od grupa koje pokrivaju socijalni programi (majke, stariji, posebna briga, školovanje), prijaviš svoj status i Protokol ti upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti.
 
-I najjednostavnije od svega: ne moraš da prodaješ proizvod. Razmena u sistemu obuhvata i usluge i znanje — možeš nekome pomoći oko nečega, podučiti ga, pričuvati decu, uraditi neki posao. Druga strana ti tada upiše POEN za to što si učinio.`,
+I najjednostavnije od svega: ne moraš da prodaješ proizvod. Razmena u sistemu obuhvata i usluge i znanje — možeš nekome pomoći oko nečega, podučiti ga, pričuvati decu, uraditi neki posao. Druga strana ti tada prepiše POEN za to što si učinio.`,
       },
       {
         id: 45,
@@ -98,7 +98,7 @@ Ako naiđeš na bilo šta od ovoga, ne deli podatke i prijavi to Fondaciji.`,
         pitanje: `Kako do prvih POEN-a ako nemam šta da ponudim?`,
         odgovor: `Prvi oglas kojim nešto nudiš nosi ti 1.000 POEN kroz doprinos razmeni. Oglas mora imati fotografiju, opis, kategoriju i mesto.
 
-POEN ti se upisuje i kad ti neko drugi upiše za obavljenu razmenu — dok te niko nije potvrdio možeš da ga primaš, samo ne i da ga sam prenosiš drugome.
+POEN ti se upisuje i kad ti ga neko drugi prepiše za obavljenu razmenu — dok te niko nije potvrdio možeš da ga primaš, samo ne i da ga sam prepisuješ drugome.
 
 A čim te neko potvrdi, možeš da objaviš i potražnju — šta tebi treba — pa da se javi onaj ko to ima.`,
       },
@@ -206,7 +206,7 @@ Stakinga, kamate ni prinosa nema. ZRNO ne nosi dividendu, kamatu ni pravo na lik
         pitanje: `Je li upis po potvrdi (1.000 POEN) provizija za regrutovanje ili airdrop koji mogu da farmam?`,
         odgovor: `Ne. To nije provizija za regrutovanje, nije airdrop, i ne može se farmati.
 
-Kada te neko potvrdi, Protokol upiše po 1.000 POEN i tebi i osobi koja te je porifikovala — jednokratno i simetrično, isti iznos za oboje. Nema „nivoa" iznad tebe ni ispod tebe i ništa ne „teče naviše" kroz neku mrežu ljudi koji bi se okoristili tvojom potvrdom. To nije marketing sa provizijom.
+Kada te neko potvrdi, Protokol upiše po 1.000 POEN i tebi i osobi koja te je potvrdila — jednokratno i simetrično, isti iznos za oboje. Nema „nivoa" iznad tebe ni ispod tebe i ništa ne „teče naviše" kroz neku mrežu ljudi koji bi se okoristili tvojom potvrdom. To nije marketing sa provizijom.
 
 Upis nije ni naknada za tvoje podatke — to je automatski akt Protokola po pravilu: kad se evidentira zapis o potvrdi, sistem deterministički upiše POEN bez ikakvog ugovora ili pogađanja.
 
@@ -455,9 +455,9 @@ Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti neko piše ili ra
 
 Takva razmena se odvija van sistema. Ako se uz nju ne ažurira evidencija POEN-a, ona ostaje vaš lični dogovor i nigde se ne beleži kao tvoj doprinos.
 
-A baš tu je smisao KOLA: da razmena koju biste inače obavili „od ruke do ruke" dobije zapis. Kad uz razmenu ažurirate evidenciju, zapis onoga ko daje uvećava se, a zapis onoga ko prima umanjuje za isti iznos — i ostaje trag o tome ko je koliko dao zajednici.
+A baš tu je smisao KOLA: da razmena koju biste inače obavili „od ruke do ruke" dobije zapis. Kad uz razmenu ažurirate evidenciju, zapis onoga ko daje umanjuje se, a zapis onoga ko prima uvećava za isti iznos — i ostaje trag o tome ko je koliko dao zajednici.
 
-Možeš i da kombinuješ: deo uradite kao čistu trampu, a deo upišete kroz POEN. Tada se beleži samo onaj deo za koji ste ažurirali evidenciju; čista trampa van toga ostaje neevidentirana.
+Možeš i da kombinuješ: deo uradite kao čistu trampu, a deo prepišete kroz POEN. Tada se beleži samo onaj deo za koji ste ažurirali evidenciju; čista trampa van toga ostaje neevidentirana.
 
 U svakom slučaju, za kvalitet, isporuku i ispunjenje dogovora odgovarate vas dvoje, po opštim pravilima — Fondacija i Protokol se u to ne mešaju i ne odgovaraju za njega.`,
       },
