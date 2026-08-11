@@ -99,7 +99,7 @@ Ha ilyennel találkozol, ne adj ki adatot, és jelentsd az Alapítványnak.`,
         pitanje: `Hogyan jutok az első POEN-hez, ha nincs mit kínálnom?`,
         odgovor: `Az első hirdetés, amellyel kínálsz valamit, 1.000 POEN-t hoz neked a cseréhez való hozzájárulás csatornáján. A hirdetésnek fényképet, leírást, kategóriát és helységet kell tartalmaznia.
 
-POEN akkor is jóváírásra kerül neked, ha valaki más írja be egy lebonyolított cseréért — nem megerősítettként kaphatod, csak magad nem utalhatod tovább másnak.
+POEN akkor is jóváírásra kerül neked, ha valaki más írja át neked egy lebonyolított cseréért — nem megerősítettként kaphatod, csak magad nem írhatod át másnak.
 
 Amint pedig megerősítettél, keresési hirdetést is közzétehetsz — azt, amire neked van szükséged —, hogy jelentkezzen az, akinek megvan.`,
       },
@@ -456,9 +456,9 @@ Ami NEM nyilvános: az elérhetőséged (telefonszám), valamint az a lehetősé
 
 Az ilyen csere a rendszeren kívül zajlik. Ha mellette nem frissül a POEN-nyilvántartás, akkor a ti személyes megállapodásotok marad, és sehol nem rögzül a hozzájárulásodként.
 
-Márpedig épp ez a KOLO értelme: hogy az a csere, amelyet egyébként „kézből kézbe" bonyolítanátok, bejegyzést kapjon. Amikor a csere mellett frissítitek a nyilvántartást, az adó fél bejegyzése nő, a kapó félé pedig ugyanannyival csökken — és nyoma marad annak, ki mennyit adott a közösségnek.
+Márpedig épp ez a KOLO értelme: hogy az a csere, amelyet egyébként „kézből kézbe" bonyolítanátok, bejegyzést kapjon. Amikor a csere mellett frissítitek a nyilvántartást, az adó fél bejegyzése csökken, a kapó félé pedig ugyanannyival nő — és nyoma marad annak, ki mennyit adott a közösségnek.
 
-Kombinálhatod is: egy részt tiszta barterként végeztek, egy részt pedig POEN-ben rögzítetek. Ekkor csak az a rész rögzül, amelyre a nyilvántartást frissítettétek; az ezen felüli tiszta barter nyilvántartatlan marad.
+Kombinálhatod is: egy részt tiszta barterként végeztek, egy részt pedig POEN-ben írtok át. Ekkor csak az a rész rögzül, amelyre a nyilvántartást frissítettétek; az ezen felüli tiszta barter nyilvántartatlan marad.
 
 Mindenesetre a minőségért, a szállításért és a megállapodás teljesítéséért ti ketten feleltek az általános szabályok szerint — az Alapítvány és a Protokoll ebbe nem avatkozik bele, és ezért nem is felel.`,
       },

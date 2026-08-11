@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
     where: { userId: session.user.id },
     select: { id: true, balance: true },
   });
-  if (!wallet) return await greska("Nema novčanika.", 404);
+  if (!wallet) return await greska("Nema zapisa u Protokolu.", 404);
 
   const filter = req.nextUrl.searchParams.get("filter") ?? "sve";
 

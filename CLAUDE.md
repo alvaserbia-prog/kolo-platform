@@ -141,7 +141,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
 2. **Nema negativnog stanja**: korisnici i Krugovi nikad ispod 0. Samo Protokol može u minus.
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznosi su **obračunski koeficijent ZRNA** (DECIMAL(20,2); u kodu još uvek nazvan „kurs") i RSD iznosi (DECIMAL(12,2)).
-4. **Prenos 1:1 (ažuriranje evidencije)**: prenos POEN-a između korisnika je **ažuriranje evidencije** (zapis davaoca se umanjuje, zapis primaoca uvećava), bez provizije; Protokol nije posrednik i **to nije platna transakcija ni prenos monetarne vrednosti** (Pravilnik čl. 14, 16). Izbegavati „slanje/primanje POEN-a". **Dva registra:** UI za običnog korisnika koristi **„Upiši POEN"** (zapis/record); pravni/normativni tekst zadržava **„ažuriranje evidencije"** (razlika od „**upisa novih zapisa kroz kanale**" iz čl. 15 — jedino to menja ukupan broj POEN-a, zero-sum). **Interni identifikatori `/api/transfer` i `TransactionType.TRANSFER` zadržani.**
+4. **Prenos 1:1 (ažuriranje evidencije)**: prenos POEN-a između korisnika je **ažuriranje evidencije** (zapis davaoca se umanjuje, zapis primaoca uvećava), bez provizije; Protokol nije posrednik i **to nije platna transakcija ni prenos monetarne vrednosti** (Pravilnik čl. 14, 16). Izbegavati „slanje/primanje POEN-a". **Dva registra:** UI za običnog korisnika koristi **„Prepiši POEN"** (od 2026-08-11, vidi „Upis vs. prepis"); pravni/normativni tekst zadržava **„ažuriranje evidencije"** (razlika od „**upisa novih zapisa kroz kanale**" iz čl. 15 — jedino to menja ukupan broj POEN-a, zero-sum). **Interni identifikatori `/api/transfer` i `TransactionType.TRANSFER` zadržani.**
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda**.
 6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. **Po v3.7.3 (Pravilnik čl. 31, DPIA, Whitepaper) ne postoji centralizovana evidencija koja povezuje pseudonim sa identitetom** — Fondacija tu vezu NE poseduje; dokaz stvarnosti ne prikuplja dokumente, a ime/telefon su dobrovoljni i nisu uslov. **Pseudonim u evidenciji doprinosa vidljiv je samo verifikovanim korisnicima** (Pravilnik čl. 67, Politika čl. 6); neregistrovani vide samo agregate. **Izuzetak:** pseudonim **oglašivača na Pijaci** je javan (čl. 16) — ali se za neprijavljene/neverifikovane NE povezuje sa evidencijom doprinosa, stanjem ni profilom.
 7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola; baza je „ukupan broj evidentiranih POEN-a na početku perioda"). Odnosi se samo na **operativni doprinos i socijalne programe**; ostali kanali (automatski akti Protokola) ne ulaze u limit.
@@ -225,6 +225,29 @@ Sada `AppShell` samo renderuje `<PolitikaPristanak />` preko svega (`fixed inset
 - **Dugme mora ostati dostižno:** karta je poravnata uz vrh uz `overflow-y-auto`, ne centrirana u punoj visini ekrana — ispod fiksnog zaglavlja je dno karte na niskim telefonima umelo da izađe iz vidika.
 - **Dnevnik aktivnosti** (`/api/aktivnost`) preskače ponovljenu **istu** putanju unutar 5 minuta, ali smenjivanje dve putanje beleži svaki put — zato se ovakva petlja u njemu vidi kao naizmenični spisak, i zato je taj spisak dobar detektor.
 - **Ispravljeno usput:** `kakoFunkcionisePage.k2_opis` je tvrdio da neverifikovan sme da prenosi POEN „kao davalac ili primalac" — čl. 28 st. 2 to zabranjuje. Onboarding (`dobrodosli`) i FAQ 42 su i dalje slali ljude na **ukinutu Tablu jemstva**; linkovi su odavno vodili na Pijacu, zaostao je bio samo tekst.
+
+### Upis vs. prepis + „Novčanik" → „POEN" (2026-08-11)
+
+Dve izmene **samo u interfejsu** — akti se ne diraju. Normativni tekst i dalje govori „ažuriranje evidencije" (čl. 14, 16) i „upis novih zapisa kroz kanale" (čl. 15); to je i dalje tačno i nije u sukobu sa ovim.
+
+**1. Prenos POEN-a je PREPIS, ne upis.** Do sada je ista reč pokrivala dve suprotne operacije: kroz kanale iz čl. 15 POEN **nastaje** (Protokol ide u minus, ukupan broj raste), a između dva korisnika POEN **ne nastaje** (jedan zapis se umanjuje, drugi uvećava, zbir isti). Dugme je pri tom glasilo „Upiši POEN" — pa se iz interfejsa nije videlo kad sistem stvara POEN a kad ga samo premešta.
+- 🔴 **Doslovan prevod „prepisa" se NE koristi.** `transcription` (en), `prijepis` (hr) i `переписывание` u prvom značenju znače **kopiju**, a kopija ostavlja original na mestu — suprotno od zero-suma. Parovi po jezicima: sr/hr `upis / prepis`, ru `внесение / переписать (на)`, hu `bejegyzés / átírás`, en `recording / re-register` (engleski nema idiom; `transfer` je odbačen jer je to reč koju akti izbegavaju, `assign`/`convey` jer vuku na svojinu).
+- **Predlog razrešava dvosmislenost:** „prepisati **na** nekoga" u srpskom, hrvatskom i ruskom znači samo promenu nosioca zapisa (kopija nema „na koga"). Zato tekstovi svuda imaju dopunu („prepiše **u tvoj zapis**"), ne goli glagol.
+- 🔴 **Uz obrazac stoji definiciona rečenica** (`novcanik.send_napomena`): *„Prepis ne stvara nove POEN-e: tvoj zapis se umanjuje za onoliko za koliko se njegov uvećava."* Ona gasi dva pogrešna čitanja — „prepisati kuću" (prenos svojine; POEN nije imovinsko pravo, čl. 12–13) i „prepisati" kao kopirati. **Ne uklanjati je** — bez nje reč radi protiv sistema.
+- **Gde „upis" OSTAJE:** svih osam kanala iz čl. 15 („Protokol upiše 1.000 POEN"), **upis/otpis ZRNA** (druga jedinica, ustaljeno u aktima i rutama), popunjavanje polja („upiši ime"), upis ishoda nadzora, upis u program.
+
+**2. Ekran „Novčanik" se zove „POEN".** Novčanik je posuda za novac, a POEN postoji isključivo kao zapis u Protokolu (čl. 12) — nema nosioca i ne drži se. Ime je birano po **simetriji sa postojećom stavkom ZRNO** i zato je **isto na svih pet jezika** (nema šta da se prevodi). Najgori je bio prevod: hu `Pénztárca` doslovno sadrži `pénz` = novac.
+- U rečenicama se koristi **„tvoj zapis"** („prepisano u tvoj zapis"), ne novo ime ekrana.
+- **Ikonica je promenjena iz novčanika u knjigu zapisa** — ikonica je vraćala asocijaciju jaču od same labele.
+- **Interni identifikatori se NE diraju:** ruta `/novcanik`, `User.vidjenoNovcanikAt`, `dnevniBrojevi.novcanik`, `Wallet` model, `/api/transfer`, `TransactionType.TRANSFER`. Isti obrazac kao `banka-singleton` za Protokol i `ChatMessage` za Pričaonicu.
+
+**Brana:** `__tests__/copy-ukinuto.test.ts`, blok „POEN nije novac" — obara build ako se reč za novčanik vrati u `messages/*.json` ili `faq-data*.ts` na bilo kom jeziku, ako neki od ključeva za prepis (`header.upisi_poen`, `profil.upisi_poen`, `novcanik.posalji_poen`, `novcanik.send_naslov`, `novcanik.send_dugme`) izgubi koren prepisa, ili ako nestane definiciona rečenica.
+
+🟡 **Usput ispravljeno (zatečene greške, nisu deo ove izmene):**
+- **Smer zapisa u FAQ-u o trampi bio je OBRNUT na svih pet jezika** — „zapis onoga ko daje **uvećava** se, a zapis onoga ko prima **umanjuje**". Ispravljeno.
+- „vouching graph" / „graf jamstva" / «граф поручительства» / „kezességi gráf" preživeli su rename iz 4.2.1 u `putanja_pravila` na četiri jezika (sr je bio ispravan). Ispravljeno + dopunjene regex brane u testu.
+- Dve reči pokvarene ranijom zamenom u srpskom FAQ-u: „perifikaciju", „porifikovala".
+- `skener_uputstvo` je govorio „osobe kojoj **plaćaš**" (hu čak `Beolvasás fizetéshez` = „skeniraj za plaćanje").
 
 ### Povod razgovora — oglas u razgovoru (2026-08-10)
 
@@ -428,10 +451,10 @@ docs/             — interne radne beleške (nije normativa)
 - `ADMIN_EKSPORT_PODATAKA` pri admin eksportu. (Legacy `PRISTUP_DOKUMENT_VERIFIKACIJA`/`PRISTUP_JMBG_PODACI` događaji više nisu relevantni — bez dokumenata/JMBG-a.)
 - **Puna pokrivenost mutirajućih admin ruta (od 2026-07-21):** `logAdminAkcija` (`src/lib/audit.ts`) sada zovu i: programi (odobri/odbij prijavu, toggle), doprinos-oglasi (kreiranje/zatvaranje oglasa, odobri/odbij prijavu i evidenciju — loguje se i kad akciju izvrši nosilac ZRNA, ne samo admin), glasanje (izvršenje odluke, veto, odgovor UO na preporuku), Fondacija troškovi (dodat/obrisan), pokrovitelj doprinos, krugovi (odobri/odbij osnivanje, pristupnica), osnivači (dodat/obrisan), manuelni okidači (noćna emisija, ZRNO noćna + toggle tržišta, osnivački triger). Ranije su se logovale samo akcije nad korisnicima, donacije, blog, politika, pokroviteljstvo potvrda/odbijanje, nadzor i tabla jemstva — zato je audit log u admin panelu delovao „zaglavljen" čim se dnevna aktivnost svede na nepokrivene akcije. Dodato i: `NADZOR_POTVRDJEN` (nadzornik potvrdio verifikaciju); `POKROVITELJ_AZURIRAN` više ne loguje ceo body (kontakt podaci ne idu u log — samo imena izmenjenih polja); dva direktna `auditLog.create` poziva (pokrovitelji) prebačena na `logAdminAkcija`; konvencije dokumentovane u `audit.ts`. **Audit tab + server fetch = samo superadmin** (usklađeno sa `/api/admin/audit-log`).
 
-### Novčanik (POEN)
-- Prikaz stanja; prenos POEN-a (ažuriranje evidencije 1:1, bez provizije; `/api/transfer`); istorija sa filterima; klikabilni pseudonimi; QR modal (`/m/[hash]`).
+### POEN (ranije „Novčanik"; ruta i dalje `/novcanik`)
+- Prikaz stanja; prepis POEN-a (ažuriranje evidencije 1:1, bez provizije; `/api/transfer`); istorija sa filterima; klikabilni pseudonimi; QR modal (`/m/[hash]`).
 - **Zabeležen doprinos** (čl. 40a) stoji kao ZASEBAN red ispod kartice stanja i **nikad se ne sabira** sa stanjem — do okidača to nije zapis POEN-a. Naziv na ekranu je „Zabeležen doprinos", NIKAD „POEN na čekanju" (čl. 12). Vidi ga samo vlasnik naloga (čl. 67).
-- **Neverifikovanom se dugme za upis POEN-a ne prikazuje** (čl. 28 st. 2), uz objašnjenje zašto — inače izgleda kao kvar.
+- **Neverifikovanom se dugme za prepis POEN-a ne prikazuje** (čl. 28 st. 2), uz objašnjenje zašto — inače izgleda kao kvar.
 - Vidljivost transakcija gradirana po ulozi (vidi `/api/javno/feed`).
 
 ### Poruke (Chat 1-na-1)
@@ -547,8 +570,8 @@ docs/             — interne radne beleške (nije normativa)
 
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
 Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
-- **Neverifikovan:** gornja grupa (Početna, Sistem, Novčanik, Pijaca) + grupa **„Poverenje"** (Verifikacija).
-- **Verifikovan:** gornja grupa (Početna, Novčanik, Pijaca) → grupa **„Poverenje"** (Verifikacija) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, + Nadzor ako je nadzornik).
+- **Neverifikovan:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (Verifikacija).
+- **Verifikovan:** gornja grupa (Početna, **POEN**, Pijaca) → grupa **„Poverenje"** (Verifikacija) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, + Nadzor ako je nadzornik).
 - **Stavka „Tabla jemstva" i njen badge UKLONJENI (2026-08-09)** — tabla je ukinuta; put do verifikacije vodi kroz Pijacu, koja je već u gornjoj grupi.
 - **Admin (dodatno):** Admin.
 - „Postani pokrovitelj" → label **„Pokrovitelj"** (commit `80fe35b`). Jezik switcher (Lat/Ћир/EN) je u header-u, ne u sidebar-u.

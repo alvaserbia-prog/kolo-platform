@@ -42,10 +42,10 @@ export async function POST(req: NextRequest) {
     return await greska("Korisnik sa tim pseudonimom ne postoji.", 404);
   }
   if (primalac.id === session.user.id) {
-    return await greska("Ne možete upisati POEN samom sebi.", 400);
+    return await greska("Ne možete prepisati POEN samom sebi.", 400);
   }
   if (!primalac.wallet) {
-    return await greska("Primalac nema novčanik.", 500);
+    return await greska("Primalac nema zapis u Protokolu.", 500);
   }
 
   // Pronađi pošiljaoca
@@ -54,26 +54,26 @@ export async function POST(req: NextRequest) {
     include: { wallet: true },
   });
   if (!posiljac?.wallet) {
-    return await greska("Nemate novčanik.", 500);
+    return await greska("Nemate zapis u Protokolu.", 500);
   }
   // Neverifikovani korisnik u ažuriranju evidencije učestvuje ISKLJUČIVO kao
   // primalac (Pravilnik 4.1.1 čl. 28 st. 2). Uslov se vezuje za tip naloga, ne za
-  // indeks stvarnosti: ko je jednom verifikovan sme da upisuje POEN i ako mu indeks
+  // indeks stvarnosti: ko je jednom verifikovan sme da prepisuje POEN i ako mu indeks
   // kasnije padne. Čita se iz baze, ne iz sesije — token se osvežava sa zakašnjenjem,
   // pa bi tek verifikovan korisnik još neko vreme bio odbijan.
   if (!smeDaSalje(posiljac.tipKorisnika)) {
     return await greska(
-      "Dok nisi verifikovan/a možeš samo da primaš POEN. Upis u tuđu evidenciju otvara se po verifikaciji.",
+      "Dok nisi verifikovan/a možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po verifikaciji.",
       403,
     );
   }
   // Nadoknada (negativan zapis po čl. 20b Pravilnika o dokazu stvarnosti) ne
   // sprečava razmenu dobara i usluga, ali POEN-i koji pristignu prvo popunjavaju
-  // nadoknadu — dok zapis ne pređe nulu nema čime da se upisuje drugome.
+  // nadoknadu — dok zapis ne pređe nulu nema čime da se prepisuje drugome.
   if (jeNadoknada(posiljac.wallet.balance)) {
     return await greska(
       `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POEN-a. ` +
-        `POEN-i koji ti pristignu prvo je popunjavaju; upis u tuđu evidenciju je moguć tek kad zapis pređe nulu. ` +
+        `POEN-i koji ti pristignu prvo je popunjavaju; prepis u tuđi zapis je moguć tek kad zapis pređe nulu. ` +
         `Razmena dobara i usluga ti nije ograničena.`,
       400
     );
@@ -137,8 +137,8 @@ export async function POST(req: NextRequest) {
       ? "notifikacije.transfer_primljen_poruka"
       : "notifikacije.transfer_primljen",
     parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
-    naslov: `Upisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    tekst: `${posiljac.pseudonim} je upisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoju evidenciju.${description ? ` Poruka: "${description}"` : ""}`,
+    naslov: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
+    tekst: `${posiljac.pseudonim} ti je prepisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis.${description ? ` Poruka: "${description}"` : ""}`,
     link: "/novcanik",
   });
 

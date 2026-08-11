@@ -94,7 +94,7 @@ export async function evidentirajDonaciju(
   });
 
   if (!user) throw new Error("Korisnik nije pronađen.");
-  if (!user.wallet) throw new Error("Korisnik nema novčanik.");
+  if (!user.wallet) throw new Error("Korisnik nema zapis u Protokolu.");
   if (!user.verified) throw new Error("Korisnik nije verifikovan.");
 
   const dosadaRSD = user.donations.reduce((sum, d) => sum + Number(d.amountRSD), 0);
