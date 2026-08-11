@@ -48,20 +48,20 @@ const AKTI = [
  * Ključne odredbe seta — po jeziku, da fallback na srpski ne prođe neopaženo.
  *
  * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog), i u 4.2.0
- * (nadzorni predmet, nadoknada), i u 4.2.2 (doprinos se evidentira u trenutku objave
- * SVAKOME): sadržaj starije verzije nije nestao podizanjem broja.
+ * (nadzorni predmet, nadoknada), i u 4.2.2 (doprinos naloga bez potvrde evidentira
+ * se kad ga Fondacija odobri): sadržaj starije verzije nije nestao podizanjem broja.
  *
- * 🔴 Provera „u trenutku objave oglasa, nezavisno" nasleđuje ulogu ranije provere
+ * 🔴 Provera „kada Fondacija odobri oglas" nasleđuje ulogu ranije provere
  * „Verifikovanom korisniku doprinos": 4.2.0 dokumenta su nastala iz 4.1.0 osnove dok
  * je `main` u međuvremenu izdao 4.1.1, pa bi objava tiho poništila izmenu čl. 40a i
- * niko to ne bi primetio. Sada čuva izmenu iz 4.2.2 — da se odloženo evidentiranje
- * neverifikovanom korisniku ne vrati u akt mimo odluke vlasnika.
+ * niko to ne bi primetio. Sada čuva odobrenje iz 4.2.2 — bez njega bi se akt vratio
+ * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
   "Pravilnik_4_2_2.md": {
     sr: [
       "### Član 40a",
-      "Doprinos se evidentira u trenutku objave oglasa, nezavisno od toga da li je stvarnost korisnika potvrđena",
+      "evidentira se u Protokolu kada Fondacija odobri oglas",
       "član 20b",
       // 4.2.2 — putanja doprinosa razmeni. Kapa i prag su brojevi koje kod drži
       // u konstantama; ako se u aktu izmene a u kodu ne, ili obrnuto, razilaze se
@@ -72,14 +72,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ],
     en: [
       "### Article 40a",
-      "The contribution is recorded at the moment the listing is posted, irrespective of whether",
+      "is recorded in the Protocol when the Foundation approves the listing",
       "Article 20b",
       "### Article 40b",
       "may not exceed 5,000 POENs per user",
     ],
     ru: [
       "### Статья 40a",
-      "Вклад учитывается в момент размещения объявления, независимо от того",
+      "учитывается в Протоколе, когда Фонд одобрит объявление",
       "статьёй 20b",
       "### Статья 40b",
       "не может превышать 5 000 ПОЕН",

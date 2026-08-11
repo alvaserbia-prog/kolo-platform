@@ -508,15 +508,19 @@ A felhasználó javára 1.000 POEN összegű hozzájárulás kerül nyilvántart
 
 Az előző bekezdés szerinti hozzájárulás a 40.b cikk szerinti, cseréhez való hozzájárulás útjának első lépése.
 
-A hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba, függetlenül attól, hogy a felhasználó valódiságát a megerősítési láncban megerősítették-e.
+Hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba.
 
-A korábbi megkülönböztetés — amely szerint annak a felhasználónak, akinek valódiságát nem erősítették meg, a hozzájárulás a közzétételkor csupán feljegyzésre került, és csak a hitelesítéskor vagy a javára történő első POEN-nyilvántartás-frissítéskor került nyilvántartásba — a továbbiakban nem alkalmazandó. A tényleges részvétel nélküli fiókokkal szemben a rendszert a hirdetés tartalmi minimuma és a nem hitelesített felhasználó aktív hirdetéseinek a Felhasználási feltételekben megállapított darabszám-korlátja védi.
+Nem hitelesített felhasználó esetében a hirdetés azonnal közzétételre kerül, a hozzájárulás pedig a közzététel pillanatában feljegyzésre kerül, és akkor kerül nyilvántartásba a Protokollban, amikor az Alapítvány jóváhagyja a hirdetést. A hozzájárulás jóváhagyás nélkül is nyilvántartásba kerül, ha azt megelőzően sor kerül a felhasználó hitelesítésére a megerősítési láncban, vagy a POEN-nyilvántartás frissítésére az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
+
+Az Alapítvány a jóváhagyásról ésszerű határidőn belül dönt, ellenőrizve, hogy a hirdetés megfelel-e a tartalmi minimumnak, és hogy jószág vagy szolgáltatás tényleges kínálatát jelenti-e. Ha a hozzájárulást nem hagyják jóvá, a felhasználót az indokok megjelölésével értesítik; a hirdetés ezzel nem kerül eltávolításra, a hozzájárulást pedig ugyanazon felhasználó kiegészített vagy új hirdetése kapcsán újra elbírálják.
+
+Az előző bekezdésekben tett megkülönböztetés célja annak megakadályozása, hogy a valódiságukban meg nem erősített fiókok még azelőtt növeljék a nyilvántartásba vett POEN-ek teljes számát, hogy a rendszerben a tényleges részvétel nyoma megjelenne.
 
 Ha a hirdetés a Felhasználási feltételek megsértése miatt eltávolításra kerül azelőtt, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás megsemmisül. A már nyilvántartásba vett hozzájárulást a hirdetés eltávolítása nem semmisíti meg.
 
 A platform tartalmához való hozzájárulás nyilvántartásba vétele a Protokoll automatikus aktusa, és nem számít bele a működési hozzájárulásról szóló szabályzatban és a Támogatási Programok szabályzataiban megállapított napi korlátba.
 
-Annak a felhasználónak, akinek hozzájárulása e bekezdés hatálybalépésének napjáig feljegyzésre került, de nyilvántartásba nem, a hozzájárulás egyszeri alkalommal, azonos összegben kerül nyilvántartásba, függetlenül attól, hogy valódiságát megerősítették-e.
+Annak a felhasználónak, aki e bekezdés hatálybalépésének napján hitelesített, és akinek hozzájárulása feljegyzésre került, de nyilvántartásba nem, a hozzájárulás egyszeri alkalommal, azonos összegben kerül nyilvántartásba.
 
 ### 40.b cikk
 
@@ -526,7 +530,7 @@ Az első hirdetés megnyitja a felhasználó előtt a csere terét, de önmagáb
 
 Az út lépései:
 
-1) a 40.a cikk szerinti hozzájárulás — az első hirdetés, amellyel a felhasználó javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, az említett cikk feltételei szerint, a hirdetés közzétételének pillanatában nyilvántartásba véve;
+1) a 40.a cikk szerinti hozzájárulás — az első hirdetés, amellyel a felhasználó javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, az említett cikk feltételei szerint nyilvántartásba véve;
 
 2) az első csere, amelyben a felhasználó az ismeretségi körén kívüli felhasználó javára frissíti a POEN-nyilvántartást;
 
@@ -554,7 +558,7 @@ Megkeresésnek minősül a hirdetés kapcsán indított beszélgetés. A megkere
 
 A feltételek teljesülését a nyilvántartásba vétel időpontjában fennálló állapot szerint kell megítélni. A körülmények utóbb bekövetkező változása — különösen, ha a felhasználó a csere után hitelesíti azt a felhasználót, akivel cserélt, és ezzel bevonja őt az ismeretségi körébe — a további lépésekre hat ki, de a már nyilvántartásba vett hozzájárulást nem szünteti meg. A nyilvántartásba vett hozzájárulás kizárólag a valóságbizonyítékról szóló szabályzatban megállapított eljárásban szüntethető meg.
 
-A teljesített lépés a feltételeinek teljesülése pillanatában kerül nyilvántartásba, függetlenül attól, hogy a felhasználó valódiságát megerősítették-e — akárcsak a 40.a cikk szerinti hozzájárulás.
+Annak a felhasználónak, akinek valóságát nem erősítették meg, a teljesített lépés feljegyzésre kerül, és a 40.a cikk feltételei szerint kerül nyilvántartásba.
 
 A hozzájárulás úton keresztüli nyilvántartásba vétele a Protokoll automatikus aktusa, és nem számít bele a működési hozzájárulásról szóló szabályzatban és a Támogatási Programok szabályzataiban megállapított napi limitbe.
 

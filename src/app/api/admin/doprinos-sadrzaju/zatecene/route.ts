@@ -4,14 +4,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
-import { evidentirajZatecene } from "@/lib/protokol/doprinos-sadrzaju";
+import { evidentirajZateceneVerifikovane } from "@/lib/protokol/doprinos-sadrzaju";
 
 /**
  * POST /api/admin/doprinos-sadrzaju/zatecene
  *
- * Jednokratno razrešava SVE doprinose koji stoje ZABELEZEN (čl. 40a, prelazni stav) —
- * od 2026-08-11 i one neverifikovanih korisnika, jer se doprinos svakome evidentira
- * u trenutku objave. Idempotentno — ponovno pokretanje ne evidentira dvaput.
+ * Jednokratno razrešava doprinose koji stoje ZABELEZEN kod verifikovanih korisnika
+ * (čl. 40a, prelazni stav). Neverifikovane NE dira — njih Fondacija odobrava jedan
+ * po jedan u tabu „Prvi oglasi". Idempotentno — ponovno pokretanje ne evidentira dvaput.
  *
  * Namerno je na dugmetu, a ne u migraciji: emisija ide kroz `emitujPoen` (zero-sum,
  * audit), i opticaj skače za 1.000 × broj razrešenih, što može da upali osnivački
@@ -23,7 +23,7 @@ export async function POST() {
   if (!jeSuperadmin(session.user)) return await greska("Samo superadmin.", 403);
 
   try {
-    const rezultat = await evidentirajZatecene();
+    const rezultat = await evidentirajZateceneVerifikovane();
     await logAdminAkcija(
       session.user.id,
       "DOPRINOS_SADRZAJU_ZATECENI_EVIDENTIRANI",

@@ -2,26 +2,29 @@
  * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
  * Osnov: Pravilnik o KOLO sistemu 4.1.1 čl. 15 tačka 8 i čl. 40a.
  *
- * 🔴 ČEKANJA VIŠE NEMA (odluka vlasnika, 2026-08-11). Svakom korisniku — i onom
- * čija stvarnost još nije potvrđena — doprinos se evidentira u trenutku objave
- * kvalifikovanog oglasa:
+ * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
+ * ali samo za nalog čija stvarnost nije potvrđena:
  *
- *   BILO KO objavi kvalifikovanu ponudu  →  EVIDENTIRAN odmah (čl. 40a st. 3)
+ *   VERIFIKOVAN objavi oglas    →  EVIDENTIRAN odmah (čl. 40a st. 3)
  *
- * Do ove izmene je neverifikovanom korisniku doprinos samo BELEŽEN, pa je zapis
- * POEN-a nastajao tek kad nastupi okidač (verifikacija ili primljen POEN). Svrha
- * tog čekanja bila je da pedeset praznih naloga sa pedeset oglasa ne naduva
- * opticaj — a opticaj okida osnivački korak od 24.000 POEN-a i gasi prelazno
- * ograničenje iz čl. 22 Pravilnika o dokazu stvarnosti. Vlasnik je ocenio da je
- * važnije da novi čovek odmah vidi šta je dobio za objavljen oglas; ta izloženost
- * je svesno prihvaćena i ostaje samo u sadržinskom minimumu i u ograničenju od
- * tri aktivna oglasa (Uslovi), koje prazan nalog mora da ispuni.
+ *   NEVERIFIKOVAN objavi oglas  →  ZABELEZEN — oglas je odmah na Pijaci, ali
+ *                                  doprinos nije zapis POEN-a: ne ulazi ni u
+ *                                  jedno stanje, ni u opticaj, ni u agregate
+ *   pa ODOBRENJE FONDACIJE (glavni put, čl. 40a st. 4) — ili verifikacija u
+ *   lancu potvrda, ili primljen POEN  →  EVIDENTIRAN
  *
- * `DoprinosStatus.ZABELEZEN` zato više ne nastaje redovnim putem. Ostaje kao
- * prelazno stanje unutar `probajEvidentirati()` (rezervacija pre emisije, povratak
- * ako emisija pukne) i za zatečene redove iz vremena čekanja — njih razrešava
- * `evidentirajZatecene()`, a usput ih pokupi i svaki okidač koji je i ranije
- * postojao (verifikacija, primljen POEN).
+ * 🔴 Odobrenje Fondacije je uvedeno 2026-08-11 odlukom vlasnika i **glavni je
+ * put** za nalog bez potvrde: čovek objavi oglas odmah, a 1.000 POEN dobija kad
+ * admin pogleda oglas i odobri ga (admin tab „Prvi oglasi"). Bez toga bi pedeset
+ * praznih naloga sa pedeset oglasa naduvalo opticaj — a opticaj okida osnivački
+ * korak od 24.000 POEN-a i gasi prelazno ograničenje iz čl. 22 Pravilnika o
+ * dokazu stvarnosti.
+ *
+ * Ostala dva okidača (verifikacija, primljen POEN) ostaju kao ranije: i jedno i
+ * drugo je trag stvarnog učešća, pa odobrenje tada nije potrebno.
+ *
+ * Čekanje se NE primenjuje na verifikovanog jer tu ne štiti ni od čega: nalog
+ * čija je stvarnost potvrđena nije prazan nalog.
  *
  * Obrazac poziva (obavezan):
  *   - DB promene u jednoj `prisma.$transaction()`
@@ -32,6 +35,7 @@ import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { logAdminAkcija } from "@/lib/audit";
 import { obavesti } from "@/lib/notifikacije";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { DoprinosOkidac, DoprinosStatus, TransactionType } from "@/generated/prisma/client";
 import { IZNOS, oglasIspunjavaMinimum, type OglasMinimum } from "@/lib/doprinos-pravila";
 
@@ -47,10 +51,11 @@ export * from "@/lib/doprinos-pravila";
  * po čoveku obezbeđuje jedinstveni indeks nad `userId`, ne kod — dve paralelne
  * objave ne mogu da zabeleže dva doprinosa.
  *
- * Doprinos se odmah i evidentira (čl. 40a st. 3), bez obzira na to da li je
- * korisnikova stvarnost potvrđena. Beleženje i evidentiranje su od 2026-08-11 isti
- * trenutak; `ZABELEZEN` ostaje samo kao prelazno stanje unutar `probajEvidentirati()`
- * (i za zatečene redove iz vremena kad se čekalo na okidač).
+ * VERIFIKOVANOM korisniku doprinos se odmah i evidentira (čl. 40a st. 3): čekanje
+ * postoji da prazan nalog ne naduva opticaj, a nalog čija je stvarnost potvrđena
+ * nije prazan nalog. NEVERIFIKOVANOM ostaje zabeležen dok ga Fondacija ne odobri
+ * (ili dok ne nastupi verifikacija odn. primljen POEN — st. 4); admin se o tome
+ * obaveštava odmah, jer bez toga niko ne bi znao da red čekanja postoji.
  *
  * Ne beleži ništa ako oglas nije ponuda ili ne ispunjava sadržinski minimum.
  * Ne baca: neuspeh beleženja ne sme da obori objavu oglasa koji je već upisan.
@@ -79,12 +84,136 @@ export async function zabeleziDoprinos(
 
   await logAdminAkcija(userId, "DOPRINOS_SADRZAJU_ZABELEZEN", oglas.id, `${IZNOS} POEN`);
 
-  // Bez provere tipa naloga: od 2026-08-11 doprinos se evidentira svakome u trenutku
-  // objave. Ne baca — ako emisija pukne, doprinos ostaje ZABELEZEN i pokupi ga prvi
-  // sledeći okidač (verifikacija, primljen POEN) ili admin dugme.
-  await probajEvidentirati(userId, DoprinosOkidac.OBJAVA);
+  // Uslov je TIP NALOGA, ne indeks: ko je jednom verifikovan ostaje verifikovan i
+  // ako mu indeks kasnije padne. Čita se iz baze — sesija se osvežava sa zakašnjenjem.
+  const korisnik = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { tipKorisnika: true, pseudonim: true },
+  });
+  if (korisnik && korisnik.tipKorisnika !== "NEVERIFIKOVAN") {
+    await probajEvidentirati(userId, DoprinosOkidac.OBJAVA);
+  } else {
+    await najaviNaCekanju(userId, korisnik?.pseudonim ?? "", oglas.id);
+  }
 
   return true;
+}
+
+/**
+ * Javlja adminima (UO) da prvi oglas naloga bez potvrde čeka odobrenje.
+ *
+ * Dva kanala, kao i za novog korisnika: zvonce svakom aktivnom adminu (bez mejla,
+ * da isti događaj ne stigne dvaput) + `posaljiAdminAlert` (mejl + Telegram).
+ * Bez ovoga bi red čekanja postojao a niko ne bi znao da postoji — čovek bi
+ * čekao odobrenje koje niko ne gleda.
+ *
+ * Ne baca: objava oglasa je već upisana i ne sme da padne zbog obaveštenja.
+ */
+async function najaviNaCekanju(userId: string, pseudonim: string, oglasId: string): Promise<void> {
+  try {
+    const admini = await prisma.user.findMany({
+      where: { admin: { in: ["ADMIN", "SUPERADMIN"] }, deaktiviranAt: null },
+      select: { id: true },
+    });
+    await Promise.all(
+      admini.map((a) =>
+        obavesti(a.id, {
+          tip: "DOPRINOS_NA_CEKANJU",
+          kljuc: "notifikacije.doprinos_na_cekanju",
+          parametri: { pseudonim },
+          naslov: "Prvi oglas čeka odobrenje",
+          tekst: `Korisnik „${pseudonim}" (bez potvrde) objavio je prvi oglas. Doprinos od ${IZNOS} POEN čeka odobrenje.`,
+          link: "/admin?tab=prvi-oglasi",
+          email: false,
+        }),
+      ),
+    );
+    await posaljiAdminAlert(
+      "Prvi oglas čeka odobrenje",
+      `Korisnik „${pseudonim}" (nalog bez potvrde) objavio je prvi oglas.\n` +
+        `Doprinos od ${IZNOS} POEN čeka odobrenje u admin panelu → Prvi oglasi.\n` +
+        `Oglas: /pijaca/${oglasId}`,
+    );
+  } catch (e) {
+    console.error("[doprinos-sadrzaju] javljanje adminima nije uspelo", { userId, oglasId, e });
+  }
+}
+
+/**
+ * Fondacija odobrava doprinos za prvi oglas (čl. 40a st. 4) — glavni put za nalog
+ * bez potvrde. Emituje 1.000 POEN i javlja korisniku.
+ *
+ * Idempotentno: prelaz se rezerviše uslovnim `updateMany` u `probajEvidentirati`,
+ * pa dva klika ne mogu da emituju dvaput.
+ */
+export async function odobriDoprinos(
+  doprinosId: string,
+  adminId: string,
+): Promise<{ ok: boolean; greska?: string }> {
+  const d = await prisma.doprinosSadrzaju.findUnique({
+    where: { id: doprinosId },
+    select: { userId: true, status: true },
+  });
+  if (!d) return { ok: false, greska: "Doprinos ne postoji." };
+  if (d.status !== DoprinosStatus.ZABELEZEN)
+    return { ok: false, greska: "Doprinos više ne čeka odobrenje." };
+
+  const uspeh = await probajEvidentirati(d.userId, DoprinosOkidac.ODOBRENJE, adminId);
+  if (!uspeh) return { ok: false, greska: "Evidentiranje nije uspelo — pokušaj ponovo." };
+
+  await logAdminAkcija(adminId, "DOPRINOS_SADRZAJU_ODOBREN", d.userId, `${IZNOS} POEN`);
+  return { ok: true };
+}
+
+/**
+ * Fondacija odbija doprinos za prvi oglas — oglas ostaje na Pijaci, samo se ne
+ * evidentira doprinos. Razlog je OBAVEZAN i ide korisniku.
+ *
+ * 🔴 Odbijanje BRIŠE zapis, pa kanal ostaje slobodan: čovek ispravi oglas ili
+ * objavi bolji i doprinos se ponovo beleži. To NIJE isto što i poništenje zbog
+ * povrede Uslova (`ponistiZabelezen`), koje kanal namerno troši — tamo je oglas
+ * uklonjen zbog prekršaja, ovde je samo ocenjeno da ne zaslužuje doprinos.
+ * Trag ostaje u revizijskom dnevniku (razlog, korisnik, oglas).
+ */
+export async function odbijDoprinos(
+  doprinosId: string,
+  adminId: string,
+  razlog: string,
+): Promise<{ ok: boolean; greska?: string }> {
+  const tekst = razlog.trim();
+  if (!tekst) return { ok: false, greska: "Razlog je obavezan — šalje se korisniku." };
+
+  const d = await prisma.doprinosSadrzaju.findUnique({
+    where: { id: doprinosId },
+    select: { userId: true, status: true, oglasId: true },
+  });
+  if (!d) return { ok: false, greska: "Doprinos ne postoji." };
+  if (d.status !== DoprinosStatus.ZABELEZEN)
+    return { ok: false, greska: "Doprinos više ne čeka odobrenje." };
+
+  const obrisano = await prisma.doprinosSadrzaju.deleteMany({
+    where: { id: doprinosId, status: DoprinosStatus.ZABELEZEN },
+  });
+  if (obrisano.count !== 1) return { ok: false, greska: "Doprinos više ne čeka odobrenje." };
+
+  await logAdminAkcija(adminId, "DOPRINOS_SADRZAJU_ODBIJEN", d.userId, `${d.oglasId ?? "—"}: ${tekst}`);
+
+  try {
+    await obavesti(d.userId, {
+      tip: "doprinos_odbijen",
+      kljuc: "notifikacije.doprinos_odbijen",
+      parametri: { razlog: tekst },
+      naslov: "Doprinos za prvi oglas nije odobren",
+      tekst:
+        `Doprinos sadržaju platforme za tvoj oglas nije odobren. Razlog: ${tekst}\n` +
+        `Oglas ostaje na Pijaci. Kad ga dopuniš ili objaviš bolji, doprinos se ponovo razmatra.`,
+      link: "/pijaca",
+    });
+  } catch (e) {
+    // Odbijanje je već upisano; neuspelo javljanje ga ne poništava.
+    console.error("[doprinos-sadrzaju] obaveštenje o odbijanju nije poslato", { doprinosId, e });
+  }
+  return { ok: true };
 }
 
 /**
@@ -113,7 +242,7 @@ export async function ponistiZabelezen(oglasId: string, adminId?: string): Promi
  * Zašto zaseban `obavestenAt`, a ne `evidentiranAt`: zapis POEN-a ne sme da čeka
  * na obaveštenje (mejl/push idu van transakcije i umeju da padnu), a obaveštenje
  * ne sme da ode dvaput. `EVIDENTIRAN` uz `obavestenAt: null` znači „duguje se
- * javljanje" — to stanje `evidentirajZatecene()` naknadno pokupi.
+ * javljanje" — to stanje `evidentirajZateceneVerifikovane()` naknadno pokupi.
  *
  * Ne baca: doprinos je već evidentiran u trenutku poziva i ne poništava se zato
  * što obaveštenje nije prošlo.
@@ -243,13 +372,13 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
 }
 
 /**
- * Jednokratno evidentiranje SVIH zatečenih doprinosa (čl. 40a, prelazni stav).
+ * Jednokratno evidentiranje zatečenih doprinosa verifikovanih korisnika
+ * (čl. 40a, prelazni stav).
  *
- * Dva talasa zatečenih redova, oba iz vremena kad se čekalo na okidač:
- *  - verifikovani, kojima je okidač već bio iza leđa (razrešeno 2026-08-09);
- *  - neverifikovani, koji od 2026-08-11 više nemaju šta da čekaju — doprinos se
- *    svakome evidentira u trenutku objave, pa im se duguje unazad.
- * Nijedan zabeležen doprinos se više ne preskače.
+ * Do izmene čl. 40a doprinos je verifikovanom korisniku samo BELEŽEN i čekao je
+ * okidač — a verifikacija mu je već bila iza leđa, pa mu je ostajao samo primljen
+ * POEN. Ovim se ta grupa razrešava; **neverifikovani se namerno preskaču** — njih
+ * rešava odobrenje u tabu „Prvi oglasi", jedan po jedan, ne dugmetom za sve.
  *
  * Ide sekvencijalno kroz `probajEvidentirati` — svaki poziv otvara sopstvenu
  * emisiju, pa se ne sme paralelizovati ni umotati u transakciju. Idempotentno:
@@ -266,21 +395,27 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
  * postojalo. Ponovni pritisak je bezopasan: ništa se ne emituje dvaput i nikome
  * se ne javlja dvaput.
  */
-export async function evidentirajZatecene(): Promise<{
+export async function evidentirajZateceneVerifikovane(): Promise<{
   ukupnoZabelezenih: number;
   evidentirano: number;
+  preskocenoNeverifikovanih: number;
   poenUOpticaj: number;
   naknadnoObavesteno: number;
 }> {
   const zabelezeni = await prisma.doprinosSadrzaju.findMany({
     where: { status: DoprinosStatus.ZABELEZEN },
-    select: { userId: true, iznos: true },
+    select: { userId: true, iznos: true, user: { select: { tipKorisnika: true } } },
   });
 
   let evidentirano = 0;
+  let preskoceno = 0;
   let poen = 0;
 
   for (const d of zabelezeni) {
+    if (d.user.tipKorisnika === "NEVERIFIKOVAN") {
+      preskoceno += 1;
+      continue;
+    }
     const uspeh = await probajEvidentirati(d.userId, DoprinosOkidac.OBJAVA);
     if (uspeh) {
       evidentirano += 1;
@@ -302,6 +437,7 @@ export async function evidentirajZatecene(): Promise<{
   return {
     ukupnoZabelezenih: zabelezeni.length,
     evidentirano,
+    preskocenoNeverifikovanih: preskoceno,
     poenUOpticaj: poen,
     naknadnoObavesteno,
   };

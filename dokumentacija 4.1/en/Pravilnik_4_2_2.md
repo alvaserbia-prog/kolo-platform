@@ -508,15 +508,19 @@ A user has a contribution of 1,000 POENs recorded for the first listing in which
 
 The contribution under the preceding paragraph is the first step of the exchange contribution path under Article 40b.
 
-The contribution is recorded at the moment the listing is posted, irrespective of whether the user's reality has been confirmed in the chain of confirmations.
+For a verified user, the contribution is recorded at the moment the listing is posted.
 
-The earlier distinction — under which, for a user whose reality had not been confirmed, the contribution was merely noted upon posting and recorded only upon verification or upon the first POEN ledger update in their favor — no longer applies. The system is protected against accounts without genuine participation by the content minimum for listings and by the limit on the number of active listings of an unverified user, established by the Terms of Use.
+For an unverified user, the listing is published immediately, while the contribution is noted at the moment of posting and is recorded in the Protocol when the Foundation approves the listing. The contribution is also recorded without such approval if, before it, the user is verified in the chain of confirmations or a POEN ledger update is made in their favor. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+
+The Foundation decides on approval within a reasonable time, by checking that the listing meets the content minimum and that it represents a genuine offer of a good or a service. If the contribution is not approved, the user is notified with a statement of reasons; the listing is not removed thereby, and the contribution is considered again in respect of a supplemented or a new listing by the same user.
+
+The distinction drawn in the preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
 
 If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled. A contribution already recorded is not annulled by the removal of the listing.
 
 The recording of a contribution to platform content is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
 
-For a user whose contribution has been noted but not recorded as at the day this paragraph enters into force, the contribution is recorded once, in the same amount, irrespective of whether their reality has been confirmed.
+For a user who is verified on the day this paragraph enters into force and whose contribution has been noted but not recorded, the contribution is recorded once, in the same amount.
 
 ### Article 40b
 
@@ -526,7 +530,7 @@ A first listing opens the space for exchange to a user, but does not by itself b
 
 The steps of the path are:
 
-1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article, at the moment the listing is posted;
+1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article;
 
 2) the first exchange in which the user updates the POEN ledger in favor of a user outside their circle of acquaintance;
 
@@ -554,7 +558,7 @@ An enquiry is the initiation of a conversation in relation to a listing. What is
 
 The fulfilment of conditions is assessed according to the state at the moment of recording. A subsequent change of circumstances — in particular where a user, after an exchange, verifies the user with whom they exchanged and thereby brings them into their circle of acquaintance — affects further steps, but does not annul a contribution already recorded. A recorded contribution is annulled solely under the procedure established by the Rulebook on Proof of Reality.
 
-A step passed is recorded at the moment its conditions are met, irrespective of whether the user's reality has been confirmed — as is the contribution under Article 40a.
+For a user whose reality has not been confirmed, a step passed is noted, and is recorded under the conditions of Article 40a.
 
 Recording a contribution through the path is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
 

@@ -508,15 +508,19 @@ Korisniku se evidentira doprinos u iznosu od 1.000 POEN-a za prvi oglas kojim nu
 
 Doprinos iz prethodnoga stavka prvi je korak putanje doprinosa razmjeni iz članka 40.b.
 
-Doprinos se evidentira u trenutku objave oglasa, neovisno o tome je li stvarnost korisnika potvrđena u lancu potvrda.
+Verificiranom korisniku doprinos se evidentira u trenutku objave oglasa.
 
-Ranije razlikovanje — prema kojemu se korisniku čija stvarnost nije potvrđena doprinos u trenutku objave samo bilježio, a evidentirao tek po verifikaciji ili po prvom ažuriranju evidencije POEN-a u njegovu korist — više se ne primjenjuje. Od računa bez stvarnog sudjelovanja sustav se štiti sadržajnim minimumom oglasa i ograničenjem broja aktivnih oglasa neverificiranog korisnika, utvrđenima Uvjetima korištenja.
+Neverificiranom korisniku oglas se objavljuje odmah, a doprinos se u trenutku objave bilježi i evidentira se u Protokolu kada Zaklada odobri oglas. Doprinos se evidentira i bez odobrenja ako prije toga nastupi verifikacija korisnika u lancu potvrda ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu.
+
+Zaklada odlučuje o odobrenju u razumnom roku, provjerom da oglas ispunjava sadržajni minimum i da predstavlja stvarnu ponudu dobra ili usluge. Ako doprinos ne bude odobren, korisnik se obavještava uz navođenje razloga; oglas se time ne uklanja, a doprinos se ponovno razmatra povodom dopunjenoga ili novog oglasa istog korisnika.
+
+Razlikovanje iz prethodnih stavaka služi tome da računi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a prije nego što se u sustavu pojavi trag stvarnog sudjelovanja.
 
 Ako oglas bude uklonjen zbog povrede Uvjeta korištenja prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava. Već evidentiran doprinos uklanjanjem se oglasa ne poništava.
 
 Evidentiranje doprinosa sadržaju platforme automatski je akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa Podrške.
 
-Korisniku čiji je doprinos zabilježen a nije evidentiran do dana stupanja na snagu ovoga stavka, doprinos se evidentira jednokratno, u istom iznosu, neovisno o tome je li njegova stvarnost potvrđena.
+Korisniku koji je verificiran na dan stupanja na snagu ovoga stavka, a čiji je doprinos zabilježen a nije evidentiran, doprinos se evidentira jednokratno, u istom iznosu.
 
 ### Članak 40.b
 
@@ -526,7 +530,7 @@ Prvi oglas korisniku otvara prostor za razmjenu, ali ga sam u nju ne uvodi: ogla
 
 Koraci putanje jesu:
 
-1) doprinos iz članka 40.a — prvi oglas kojim korisnik nudi dobro ili uslugu i koji ispunjava sadržajni minimum, evidentiran pod uvjetima iz toga članka, u trenutku objave oglasa;
+1) doprinos iz članka 40.a — prvi oglas kojim korisnik nudi dobro ili uslugu i koji ispunjava sadržajni minimum, evidentiran pod uvjetima iz toga članka;
 
 2) prva razmjena u kojoj korisnik ažurira evidenciju POEN-a u korist korisnika izvan svoga kruga poznanstava;
 
@@ -554,7 +558,7 @@ Upitom se smatra pokretanje razgovora povodom oglasa. Bilježi se činjenica upi
 
 Ispunjenost se uvjeta ocjenjuje prema stanju u trenutku evidentiranja. Kasnija promjena okolnosti — osobito ako korisnik nakon razmjene verificira korisnika s kojim je razmjenjivao i time ga uvede u svoj krug poznanstava — utječe na daljnje korake, ali ne poništava već evidentiran doprinos. Evidentiran se doprinos poništava isključivo u postupku utvrđenom Pravilnikom o dokazu stvarnosti.
 
-Prijeđeni se korak evidentira u trenutku ispunjenja njegovih uvjeta, neovisno o tome je li stvarnost korisnika potvrđena — kao i doprinos iz članka 40.a.
+Za korisnika čija stvarnost nije potvrđena prijeđeni se korak bilježi, a evidentira se pod uvjetima iz članka 40.a.
 
 Evidentiranje doprinosa kroz putanju automatski je akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa Podrške.
 
