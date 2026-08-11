@@ -6,9 +6,11 @@ import { prisma } from "@/lib/prisma";
 import { kljucPseudonima } from "@/lib/validacija";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { KRUG_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // GET /api/krugovi — lista svih aktivnih krug
 export async function GET() {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const krugovi = await prisma.krug.findMany({
     where: { status: "ACTIVE" },
     orderBy: { createdAt: "asc" },
@@ -32,6 +34,7 @@ export async function GET() {
 
 // POST /api/krugovi — zahtev za osnivanje (samo verifikovani)
 export async function POST(req: NextRequest) {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified)

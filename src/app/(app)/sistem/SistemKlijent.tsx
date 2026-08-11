@@ -11,6 +11,7 @@ import KorisnikAvatar from "@/components/KorisnikAvatar";
 
 import type { Sekcija } from "./sekcije";
 import { profilHref } from "@/lib/profil-link";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 interface FondTx {
   id: string;
@@ -1503,7 +1504,8 @@ function DonacijeSekcija({
 
       </>)}
 
-      {/* Ranglista pokrovitelja */}
+      {/* Ranglista pokrovitelja — skrivena dok je kanal ugašen (vidi `lib/moduli.ts`) */}
+      {POKROVITELJSTVO_AKTIVNO && (
       <div>
         <h2 className="text-sm font-semibold text-kolo-text mb-3">{t("ranglista_pokrovitelja")}</h2>
         {pokrovitelji.length === 0 ? (
@@ -1547,6 +1549,7 @@ function DonacijeSekcija({
           </Link>
         </div>
       </div>
+      )}
     </div>
   );
 }

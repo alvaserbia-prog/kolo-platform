@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 interface DnevniBrojevi {
   novcanik: number;
@@ -216,9 +217,13 @@ function SidebarContent({
           { href: "/pijaca", label: t("pijaca") },
         ] },
         { label: t("grupa_poverenje"), links: [verifikacijaLink] },
+        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — dok kanal ne
+        // krene, u grupi ostaju samo donacije.
         { label: t("grupa_podrzi"), links: [
           { href: "/donacije", label: t("donacije") },
-          { href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") },
+          ...(POKROVITELJSTVO_AKTIVNO
+            ? [{ href: "/postani-pokrovitelj", label: t("postani_pokrovitelj") }]
+            : []),
         ] },
         { label: t("grupa_zajednicko_dobro"), collapsible: true, links: zajednickoDobro },
         ...adminGrupa,

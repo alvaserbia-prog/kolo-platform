@@ -9,6 +9,7 @@ import type { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { ADMIN_TABOVI, type Tab } from "./tabovi";
 import Pseudonim from "@/components/Pseudonim";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 // Teški tabovi iz zasebnih fajlova — lazy-load (smanjuje početni admin bundle).
 // Svi su `export default`, pa dynamic koristi default export direktno.
@@ -289,7 +290,11 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["donacije", `${t("tab_donacije")}${ukupnoPendingDonacije > 0 ? ` (${ukupnoPendingDonacije})` : ""}`],
     ["programi", `${t("tab_programi")}${ukupnoPendingProgrami > 0 ? ` (${ukupnoPendingProgrami})` : ""}`],
     ["ped", `${t("tab_ped")}${ukupnoPendingZaposl > 0 ? ` (${ukupnoPendingZaposl})` : ""}`],
-    ["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`],
+    // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — tab se ne prikazuje,
+    // a rute koje bi on zvao ionako vraćaju 410.
+    ...(POKROVITELJSTVO_AKTIVNO
+      ? ([["pokrovitelji", `${t("tab_pokrovitelji")}${adminPokrovitelji.length > 0 ? ` (${adminPokrovitelji.length})` : ""}`]] as [Tab, string][])
+      : []),
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
     ["emisija", t("tab_emisija")],
@@ -367,7 +372,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {tab === "ped" && <AdminPedTab data={adminPed} onDone={() => router.refresh()} />}
 
       {/* Pokrovitelji */}
-      {tab === "pokrovitelji" && (
+      {POKROVITELJSTVO_AKTIVNO && tab === "pokrovitelji" && (
         <AdminPokroviteljiTab
           pokrovitelji={adminPokrovitelji}
           verifikovaniKorisnici={verifikovaniKorisnici}

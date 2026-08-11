@@ -6,9 +6,11 @@ import { potvrdiPrijavu } from "@/lib/protokol/pokrovitelj";
 import { logAdminAkcija } from "@/lib/audit";
 import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // POST /api/admin/pokroviteljstvo/prijave/[id]/potvrdi — Fondacija potvrđuje prijem (čl. 8)
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
     return await greska("Pristup odbijen.", 403);

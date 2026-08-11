@@ -5,8 +5,10 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
+import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 export async function GET() {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
     return await greska("Nemate pristup.", 403);
@@ -40,6 +42,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
     return await greska("Nemate pristup.", 403);

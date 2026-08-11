@@ -4,8 +4,10 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
+import { KRUG_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 export async function GET() {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user))
     return await greska("Pristup odbijen.", 403);

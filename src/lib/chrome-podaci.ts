@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { jeAdmin, mozeNadzor, type KorisnikDozvole } from "@/lib/dozvole";
 import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 /**
  * Zajednička logika za podatke „chrome"-a (Header + Sidebar badge-evi).
@@ -53,7 +54,11 @@ export async function izracunajDnevniBrojeve(
       prisma.programEnrollment.count({ where: { status: "PENDING" } }),
       prisma.oglasPrijava.count({ where: { status: "PENDING" } }),
       prisma.oglasEvidencija.count({ where: { status: "PENDING" } }),
-      prisma.pokroviteljPrijava.count({ where: { status: "POTPISANA" } }),
+      // Dok je pokroviteljstvo ugašeno, taba nema pa se prijave ne mogu ni rešiti —
+      // brojanje bi ostavilo badge koji ne pada ni na jednu radnju.
+      POKROVITELJSTVO_AKTIVNO
+        ? prisma.pokroviteljPrijava.count({ where: { status: "POTPISANA" } })
+        : Promise.resolve(0),
       prisma.donationRecord.count({ where: { status: "PENDING" } }),
       prisma.prigovorNaOdluku.count({ where: { status: { in: ["PENDING", "U_OBRADI"] } } }),
       // Prijavljeni oglasi na Pijaci — red čekanja za moderaciju (Uslovi čl. 25).

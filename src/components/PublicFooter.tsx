@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import { getTranslations } from "next-intl/server";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 export default async function PublicFooter() {
   const t = await getTranslations("javneKomponente");
@@ -40,7 +41,7 @@ export default async function PublicFooter() {
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_o_nama")}</Link></li>
               <li><Link href="/cesto-postavljena-pitanja" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_faq")}</Link></li>
-              <li><Link href="/pokrovitelji" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pokrovitelji")}</Link></li>
+              {POKROVITELJSTVO_AKTIVNO && <li><Link href="/pokrovitelji" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pokrovitelji")}</Link></li>}
               <li><a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kontakt")}</a></li>
             </ul>
           </div>

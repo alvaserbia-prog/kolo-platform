@@ -3,12 +3,14 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { KRUG_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // GET /api/krugovi/[id] — detalji krugovi
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const { id } = await params;
 
   const krug = await prisma.krug.findUnique({
@@ -35,6 +37,7 @@ export async function DELETE(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 

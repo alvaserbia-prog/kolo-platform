@@ -6,12 +6,14 @@ import { evidentirajDoprinos } from "@/lib/protokol/pokrovitelj";
 import { jeAdmin } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
+import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // Gornja granica jednog evidentiranog doprinosa (RSD) — odbrana od slučajnog upisa
 // ogromnog iznosa koji bi emitovao bonus POEN bez pokrića.
 const MAX_RSD_DOPRINOS = 1_000_000_000;
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session || !jeAdmin(session.user)) {
     return await greska("Nemate pristup.", 403);

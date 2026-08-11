@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import KrugDetalj from "./KrugDetalj";
 import { KRUG_TABOVI, type Tab } from "./tabovi";
 import { jeAdmin } from "@/lib/dozvole";
+import { KRUG_AKTIVAN } from "@/lib/moduli";
 
 export default async function KrugPage({
   params,
@@ -13,6 +14,7 @@ export default async function KrugPage({
   params: Promise<{ id: string }>;
   searchParams: Promise<{ tab?: string }>;
 }) {
+  if (!KRUG_AKTIVAN) notFound();
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
   const { id } = await params;

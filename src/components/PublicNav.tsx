@@ -6,6 +6,7 @@ import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import JezikSvitcer from "@/components/JezikSvitcer";
 import { useTranslations } from "next-intl";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 type Props = {
   isLoggedIn: boolean;
@@ -185,7 +186,7 @@ export default function PublicNav({ isLoggedIn }: Props) {
             </div>
 
             <div className="pt-4 border-t border-kolo-border space-y-2 text-sm">
-              {mobileFooterLink("/pokrovitelji", t("nav_pokrovitelji"))}
+              {POKROVITELJSTVO_AKTIVNO && mobileFooterLink("/pokrovitelji", t("nav_pokrovitelji"))}
               {mobileFooterLink("/uslovi", t("nav_uslovi"))}
               {mobileFooterLink("/privatnost", t("nav_politika"))}
               <a

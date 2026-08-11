@@ -7,12 +7,14 @@ import { proveriIEmitujBonusPrag } from "@/lib/protokol/krug";
 import { obavesti } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
+import { KRUG_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // POST — odobri pristupnicu (admin krugovi ili ADMIN)
 export async function POST(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string; pristupnicaId: string }> }
 ) {
+  if (!KRUG_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 

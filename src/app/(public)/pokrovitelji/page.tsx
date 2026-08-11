@@ -3,6 +3,8 @@ import { intlTag } from "@/lib/format";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
 import { getTranslations, getLocale } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PokroviteljiPage() {
+  if (!POKROVITELJSTVO_AKTIVNO) notFound();
   const locale = await getLocale();
   const t = await getTranslations("pokroviteljPage");
 

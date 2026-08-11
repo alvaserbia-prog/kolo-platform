@@ -136,6 +136,25 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - **Nema instaliranog zod, decimal.js, ni sličnih library-a** — validacija ručno, Decimal tipovi se konvertuju sa `Number()`
 - **Skladište slika = Cloudflare R2** (S3-kompatibilan, `aws4fetch`). Sve slike (avatari + slike oglasa na Pijaci) idu na R2; u bazu se upisuje samo **javni URL** (ne base64, ne binarno). Helper `src/lib/skladiste.ts` (`sacuvajNaR2`, `obrisiSaR2`, `r2Konfigurisan`). Env (Vercel, sva okruženja): `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL`. Dev fallback (kad R2 nije konfigurisan): lokalni disk `storage/oglasi/...` za oglase; avatar traži R2. Legacy base64 avatari rade dok se ne migriraju (admin Dashboard → „Migracija avatara na R2"; endpoint `/api/admin/migracija-avatara`). `/api/pijaca/slika/...` preusmerava na bilo koji apsolutni https URL (R2/CDN). (Raniji Vercel Blob tok napušten; `@vercel/blob` dep ostaje neiskorišćen.)
 
+## Ugašeni moduli — Krugovi i Pokroviteljstvo (2026-08-11)
+
+Odlukom vlasnika **Krugovi** i **Pokroviteljstvo** privremeno nisu u radu; vraćaju se kad dođe vreme za implementaciju. **Zadruga** se ne pominje jer nikad nije ni bila implementirana (Glava VIII, čl. 56) — ostala su samo pominjanja u tekstu.
+
+**Prekidač je jedan fajl — `src/lib/moduli.ts`** (`KRUG_AKTIVAN`, `POKROVITELJSTVO_AKTIVNO`). Povratak = `false` → `true`, bez ijedne dalje izmene. Fajl je namerno **bez ijednog `import`-a** — uvoze ga i serverske i klijentske komponente.
+
+🔴 **Ne brisati tabele, podatke ni migracije.** `Krug` ima sopstveni `Wallet`, čiji balans ulazi u opticaj (`osnivacki.ts` — „suma svih korisničkih + Krug balansa"). Brisanje redova bi oborilo **zero-sum** i smanjilo opticaj, čime bi se pomerili pragovi **osnivačkog koraka** (na svakih 100.000 POEN). Ispravno gašenje Kruga sa balansom išlo bi kroz protivzapis Protokola, kao pri gašenju naloga — dok je modul samo ugašen, ništa od toga nije potrebno. Iz istog razloga ostaju enum vrednosti `WalletType.KRUG`, `TransactionType.EMISIJA_KRUG_OSNIVANJE`, `EMISIJA_KRUG_BONUS`, `EMISIJA_POKROVITELJ` — nose ih istorijske transakcije.
+
+**Akti se NE menjaju.** Krug je **modul** (Glava VIII), a **čl. 54** daje Fondaciji u Fazi 1 ovlašćenje da module aktivira i deaktivira — to je gotov pravni osnov. Pokroviteljstvo **nije modul** nego kanal evidentiranja (čl. 15, čl. 38–40): kanal još nije pušten u rad, nije ukinut. 🔴 **Pravilnik o pokroviteljstvu i donacijama ostaje javno vidljiv** na `/pravilnik/pokroviteljstvo-donacije` — to je **jedan akt** (`donacije_4_2_1.md`) koji uređuje i **donacije**, a one su i dalje aktivne.
+
+**Šta prekidač radi:** stranice `notFound()` (404), API rute **410 Gone** (`PORUKA_MODUL_UGASEN` kroz `greska()`, pa poruka ide prevedena), nav stavke / admin tab / kartice / FAQ pitanja se ne renderuju.
+
+Pogođena mesta: 18 API ruta (24 handlera); stranice `(app)/krug/**`, `(app)/postani-pokrovitelj`, `(public)/pokrovitelji`; `Sidebar` (stavka „Pokrovitelj"), `PublicNav`, `PublicFooter`, `sitemap.ts`; ranglista pokrovitelja na `/sistem`; admin tab **Pokrovitelji**; `chrome-podaci.ts` (badge `adminCekanje` ne broji `PokroviteljPrijava`, jer taba nema pa se ne bi ni mogle rešiti).
+
+- **FAQ se filtrira u `FaqStranica.tsx`, ne u `getFaqSekcije()`** — `__tests__/faq-paritet.test.ts` poredi **identitet** nizova po jeziku (`toBe`) i pun izvorni set, pa bi filtriranje u akcesoru oborilo test. Sakrivena pitanja su u `FAQ_SAKRIVENA_PITANJA` (24 i 25); tekst pitanja ostaje u `faq-data*.ts` na svih 5 jezika.
+- Naslov FAQ sekcije `pijaca-donacije` privremeno je bez pomena pokrovitelja (5 jezika) — vratiti uz prekidač.
+- **Krug je i pre ovoga bio poluugašen:** nijedna navigacija nije vodila na `/krug`, a admin **Krugovi tab** je ranije uklonjen (`KrugoviLista` je mrtva komponenta). `krug` polje u tipovima na `/sistem` i `/profil/[id]` se ne renderuje — ostavljeno namerno, radi manjeg diffa.
+- `validacija.ts` i dalje drži `"krug"` među rezervisanim pseudonimima (ruta postoji, samo vraća 404).
+
 ## Fundamentalna pravila sistema
 
 1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
