@@ -49,6 +49,25 @@ export const KRUG_AKTIVAN = false;
 export const POKROVITELJSTVO_AKTIVNO = false;
 
 /**
+ * Ekran „Sistem je unapređen — novi akti" pri prijavi (Uslovi čl. 40, Politika čl. 16).
+ *
+ * `false` = od korisnika se NE traži pristanak; prekrivač se nikad ne prikazuje,
+ * a `/politika-prihvati` propušta dalje. Odluka vlasnika 11.08.2026: akti 4.2.1
+ * su doneti i punovažni danom donošenja, sistem još nije zvanično u radu, pa
+ * ekran samo smeta ljudima koji prvi put dolaze.
+ *
+ * 🔴 **Mehanizam se NE briše, samo se ne traži.** Verzije i pristanci
+ * (`PolitikaVerzija`, `PolitikaPrihvatanje`) ostaju u bazi, zajedno sa svime što
+ * je do sada upisano — postojeći pristanci su dokaz i ne smeju da se izgube.
+ *
+ * 🔴 **Za prvu izmenu akata POSLE puštanja sistema u rad ovo MORA nazad na
+ * `true`.** Uslovi čl. 40 i Politika čl. 16 tada traže pun postupak: obaveštenje
+ * najmanje 15 dana unapred, nov red `PolitikaVerzija` i ponovnu saglasnost.
+ * Isključivanje važi samo dok sistem nije zvanično počeo.
+ */
+export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
+
+/**
  * FAQ pitanja koja se ne prikazuju dok je odgovarajući modul ugašen.
  *
  * Brojevi su `id` iz `faq-data*.ts` i isti su na svih pet jezika (paritet čuva

@@ -229,6 +229,12 @@ Akti: **`dokaz_stvarnosti_4_2_0.md`** (čl. 1, 6, 7, 10, 11, nov **11a**, 12 st.
 - **Pijaca:** oznaka da oglašivač nije verifikovan je **pečat preko fotografije** (bio je sitan tekst uz pseudonim); dugme na kartici razdvojeno po ulozi — gost „Prijavi se", prijavljen neverifikovan „Postavi oglas", verifikovan „Kontaktiraj". Gostu se ranije nudila verifikacija, a on nema ni nalog.
 - **Ekran pri prijavi:** migracija `20260810170000_pristanak_4_2_1` upisuje red `PolitikaVerzija` „4.2.1", pa postojeći gejt u `AppShell` svakome prikaže „Sistem je unapređen — novi akti" sa dugmetom **Pristajem**. Ekran linkuje na `/pravilnik` (ceo set). Migracijom, jer se ovde ne emituje POEN.
 
+### Pristanak na akte se NE traži (prekidač, 2026-08-11)
+`PRISTANAK_NA_AKTE_TRAZI_SE = false` u `src/lib/moduli.ts`. Odluka vlasnika: akti 4.2.1 su punovažni danom donošenja, sistem još nije zvanično u radu, a ekran je smetao ljudima koji prvi put dolaze. Provera je na **jednom mestu** — `pristanakStatus()` u `src/lib/politika.ts` — pa i shell i sam ekran ćute; `/politika-prihvati` propušta dalje.
+- **Mehanizam se ne briše.** `PolitikaVerzija`/`PolitikaPrihvatanje` i svi zatečeni pristanci ostaju u bazi (dokaz), red „4.2.1" iz migracije takođe. Povratak je `true`, bez ijedne dalje izmene.
+- 🔴 **Za prvu izmenu akata POSLE puštanja sistema u rad prekidač MORA nazad na `true`** — Uslovi čl. 40 i Politika čl. 16 tada traže obaveštenje 15 dana unapred, nov red `PolitikaVerzija` i ponovnu saglasnost.
+- Opis ispod (prekrivač, izvor istine, petlje) i dalje važi — opisuje mehanizam koji radi čim se prekidač vrati.
+
 ### 🔴 Gejt za pristanak je PREKRIVAČ, ne preusmeravanje (2026-08-11)
 Do ove izmene je `AppShell` na svaku promenu rute radio `router.replace("/politika-prihvati")`. Dva kvara, oba viđena u dnevniku aktivnosti (admin → Aktivnost) čim je gejt upaljen za 4.2.1:
 - **Mašinska petlja („blicanje"):** posle upisa pristanka ekran je navigirao na `/sistem`, ali keširani `/api/me` (poll na 30s) je i dalje govorio da pristanak nedostaje → gejt vraća → ekran pita server, dobija „nije potrebno" → opet `/sistem`. Jedan nalog: **98 pregleda stranice za par minuta**. Uz to je pad `GET /api/politika/prihvati` slao korisnika na `/sistem`, gde gejt zna samo da pristanak nedostaje — ta petlja se ne bi prekinula sama.
