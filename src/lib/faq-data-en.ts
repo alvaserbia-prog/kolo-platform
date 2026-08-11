@@ -379,7 +379,9 @@ Support is credited automatically on a daily basis for as long as the status las
   },
   {
     id: "pijaca-donacije",
-    naslov: "Marketplace, Donations, Sponsors",
+        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
+    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
+    naslov: "Marketplace and Donations",
     pitanja: [
       {
         id: 21,

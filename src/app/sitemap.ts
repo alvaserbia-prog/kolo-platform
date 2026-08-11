@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl, hreflangAlternates } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 // Sitemap se osvežava na sat vremena — nov oglas tako uđe u indeks bez novog
 // deploy-a, a baza se ne poziva na svaki zahtev robota.
@@ -22,7 +23,10 @@ const JAVNE_PUTANJE: { path: string; priority: number; changeFrequency: Metadata
   { path: "/o-nama", priority: 0.7, changeFrequency: "monthly" },
   { path: "/cesto-postavljena-pitanja", priority: 0.8, changeFrequency: "monthly" },
   { path: "/pijaca", priority: 0.7, changeFrequency: "daily" },
-  { path: "/pokrovitelji", priority: 0.6, changeFrequency: "monthly" },
+  // Stranica pokrovitelja vraća 404 dok je kanal ugašen — u sitemap-u nema šta da traži.
+  ...(POKROVITELJSTVO_AKTIVNO
+    ? [{ path: "/pokrovitelji", priority: 0.6, changeFrequency: "monthly" as const }]
+    : []),
   { path: "/zajednicko-dobro", priority: 0.6, changeFrequency: "monthly" },
   { path: "/osnivacki-doprinos", priority: 0.5, changeFrequency: "monthly" },
   { path: "/whitepaper", priority: 0.5, changeFrequency: "yearly" },

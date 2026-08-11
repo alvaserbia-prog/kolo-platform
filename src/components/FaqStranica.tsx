@@ -2,12 +2,22 @@
 
 import { useState, useMemo } from "react";
 import { getFaqSekcije } from "@/lib/faq-data";
+import { FAQ_SAKRIVENA_PITANJA } from "@/lib/moduli";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function FaqStranica() {
   const locale = useLocale();
   const t = useTranslations("cestoPage");
-  const FAQ_SEKCIJE = getFaqSekcije(locale);
+  // Pitanja o ugašenim modulima se ne prikazuju. Filtrira se ovde, a ne u
+  // `getFaqSekcije()`, da bi paritet prevoda i dalje merio pun izvorni set
+  // (`__tests__/faq-paritet.test.ts` poredi identitet nizova po jeziku).
+  const FAQ_SEKCIJE = useMemo(
+    () =>
+      getFaqSekcije(locale)
+        .map((s) => ({ ...s, pitanja: s.pitanja.filter((p) => !FAQ_SAKRIVENA_PITANJA.includes(p.id)) }))
+        .filter((s) => s.pitanja.length > 0),
+    [locale],
+  );
 
   const [pretraga, setPretraga] = useState("");
   const [otvoreni, setOtvoreni] = useState<Set<number>>(new Set());

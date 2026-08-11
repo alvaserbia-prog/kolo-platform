@@ -389,7 +389,9 @@ export const FAQ_SEKCIJE_RU: FaqSekcija[] = [
   },
   {
     id: "pijaca-donacije",
-    naslov: "Рынок, пожертвования, покровители",
+        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
+    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
+    naslov: "Рынок и пожертвования",
     pitanja: [
       {
         id: 21,

@@ -389,7 +389,9 @@ Podrška se evidentira automatski na dnevnom nivou dok status traje, bez prijavl
   },
   {
     id: "pijaca-donacije",
-    naslov: "Pijaca, donacije, pokrovitelji",
+        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
+    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
+    naslov: "Pijaca i donacije",
     pitanja: [
       {
         id: 21,

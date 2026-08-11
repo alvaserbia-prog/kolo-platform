@@ -5,12 +5,14 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { generisiUgovorTekst } from "@/lib/protokol/pokrovitelj";
 import { VrstaDonacije } from "@/generated/prisma/client";
+import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 const DOZVOLJENE_VRSTE: VrstaDonacije[] = ["NOVAC", "ROBA", "USLUGE"];
 const MAX_SLIKA = 4_000_000; // ~3MB base64
 
 // GET /api/pokroviteljstvo/prijava — sopstvene prijave
 export async function GET() {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 
@@ -45,6 +47,7 @@ export async function GET() {
 
 // POST /api/pokroviteljstvo/prijava — podnošenje prijave pokroviteljstva (čl. 7)
 export async function POST(req: NextRequest) {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified)

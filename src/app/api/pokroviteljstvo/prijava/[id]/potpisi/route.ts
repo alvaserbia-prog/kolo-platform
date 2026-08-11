@@ -3,9 +3,11 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
 // POST /api/pokroviteljstvo/prijava/[id]/potpisi — korisnik potpisuje ugovor (čl. 8)
 export async function POST(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 

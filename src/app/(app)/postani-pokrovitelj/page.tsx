@@ -1,15 +1,17 @@
 import { getServerSession } from "next-auth";
 import { intlTag } from "@/lib/format";
-import { redirect } from "next/navigation";
+import { redirect, notFound } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
+import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import PokroviteljstvoPrijava from "./PokroviteljstvoPrijava";
 
 export const metadata = { title: "Postani pokrovitelj — KOLO" };
 
 export default async function PostaniPokroviteljPage() {
+  if (!POKROVITELJSTVO_AKTIVNO) notFound();
   const locale = await getLocale();
   const session = await getServerSession(authOptions);
   if (!session) redirect("/prijava");
