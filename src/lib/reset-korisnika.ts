@@ -1,0 +1,390 @@
+/**
+ * Vraćanje zatečenog naloga na stanje sa dana registracije („kao da je prvi put
+ * došao na sajt") — alat za probu korisničkog puta bez pravljenja novog naloga.
+ *
+ * Zašto uopšte postoji: jedini način da se vidi kako platforma izgleda novom
+ * čoveku bio je da se otvori nov nalog, a svaki takav nalog ostaje u bazi, ulazi
+ * u brojače članova i u levak. Ovo umesto toga vraća POSTOJEĆI nalog na nulu i
+ * čuva pristupne podatke (email, lozinku, pseudonim, `memberHash`), pa se čovek
+ * prijavljuje istim podacima i zatiče prazan sistem.
+ *
+ * 🔴 Nalog se NE briše i NE anonimizuje — za to postoji `DELETE /api/profil`
+ * (čl. 34, prestanak statusa). Ovde nalog ostaje živ, samo mu se skida sve što
+ * je stekao. Zato ovde nema ni protivzapisa u istoriji: zapisi se brišu, a ne
+ * poništavaju.
+ *
+ * Zero-sum ostaje očuvan (čl. 14): koliko se skine sa zapisa korisnika, toliko
+ * se vrati na protivzapis Protokola. Isto važi za POEN koji su povodom njegovih
+ * verifikacija dobili DRUGI ljudi — te veze padaju, pa im se i POEN vraća
+ * Protokolu, indeks preračunava, a slot oslobađa (isti postupak kao pri
+ * prestanku statusa).
+ *
+ * 🔴 Radnja je nepovratna i pogađa i druge naloge (verifikacije, razgovore,
+ * oglase). Zato je ograničena na superadmina i traži da se pseudonim otkuca —
+ * vidi rutu `POST /api/admin/korisnici/[id]/reset`.
+ */
+import { prisma } from "@/lib/prisma";
+import {
+  ListingStatus,
+  PredlogStatus,
+  TipKorisnika,
+  UserStatus,
+} from "@/generated/prisma/client";
+import {
+  POEN_NADZORNIK,
+  POEN_VERIFIKATOR,
+  POEN_VERIFIKOVANI,
+  izracunajIndeks,
+  zasticeniIndeks,
+} from "@/lib/protokol/dokaz-stvarnosti";
+import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
+import { obrisiSaR2 } from "@/lib/skladiste";
+
+const PROTOKOL_WALLET_ID = "banka-singleton";
+
+export class ResetGreska extends Error {
+  status: number;
+  constructor(poruka: string, status = 400) {
+    super(poruka);
+    this.name = "ResetGreska";
+    this.status = status;
+  }
+}
+
+export type ResetRezultat = {
+  pseudonim: string;
+  /** POEN skinut sa zapisa korisnika i vraćen na protivzapis Protokola. */
+  poenVracenProtokolu: number;
+  /** POEN skinut drugim korisnicima zbog pada verifikacija ovog naloga. */
+  poenVracenOdDrugih: number;
+  zrnaOtpisana: number;
+  ponistenoVerifikacija: number;
+  obrisanoOglasa: number;
+  /** Zbir svih obrisanih redova (razgovori, notifikacije, prijave…). */
+  obrisanoZapisa: number;
+};
+
+/**
+ * Vrati nalog na stanje sa dana registracije.
+ *
+ * @param userId interni ID naloga (ne pseudonim — pseudonim se menja)
+ * @throws ResetGreska kad nalog ne sme da se resetuje (admin, osnivač, pokrovitelj…)
+ */
+export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezultat> {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    include: {
+      wallet: true,
+      zrnoStanje: true,
+      osnivacZapis: true,
+      podaci: true,
+    },
+  });
+  if (!user) throw new ResetGreska("Korisnik nije pronađen.", 404);
+
+  // ── Brane ──────────────────────────────────────────────────────────────────
+  // Nalozi koji nose sistemsku ulogu se ne diraju: resetovanje bi im oduzelo
+  // ovlašćenja i pokidalo lanac potvrda (superadmin je koren lanca).
+  if (user.admin !== "NONE") {
+    throw new ResetGreska("Nalog sa admin ovlašćenjem se ne resetuje. Prvo mu skini admin rolu.", 400);
+  }
+  if (user.jeOsnivac || user.osnivacZapis) {
+    throw new ResetGreska("Nalog početnog korisnika (osnivača) se ne resetuje.", 400);
+  }
+  if (user.deaktiviranAt) {
+    throw new ResetGreska("Nalog je ugašen — reset ne oživljava obrisan nalog.", 409);
+  }
+
+  const brojPokrovitelja = await prisma.pokrovitelj.count({ where: { vlasnikId: userId } });
+  if (brojPokrovitelja > 0) {
+    throw new ResetGreska("Nalog je vlasnik pokrovitelja — reset bi pokidao evidenciju pokroviteljstva.", 400);
+  }
+
+  // Registar odluka Gornjeg Kola je nepromenljiv (Pravilnik o Gornjem Kolu čl. 21),
+  // pa se zatvoren predlog ne briše ni zbog reseta test naloga.
+  const zatvoreniPredlozi = await prisma.glasanjePredlog.count({
+    where: { authorId: userId, status: PredlogStatus.CLOSED },
+  });
+  if (zatvoreniPredlozi > 0) {
+    throw new ResetGreska(
+      "Nalog je autor predloga koji je već u registru odluka — registar je nepromenljiv, pa se ovaj nalog ne resetuje.",
+      400,
+    );
+  }
+
+  let obrisanoZapisa = 0;
+  const prebroj = (r: { count: number }) => {
+    obrisanoZapisa += r.count;
+    return r.count;
+  };
+
+  // ── 1. Graf verifikacija ───────────────────────────────────────────────────
+  // Padaju sve veze koje nalog dodiruje — i primljene i obavljene. POEN
+  // emitovan povodom njih vraća se Protokolu i drugoj strani (capped na stanje,
+  // čl. 14: niko osim Protokola ne ide u minus), indeks se preračunava, a slot
+  // verifikatoru oslobađa. Isti postupak kao pri prestanku statusa (čl. 34).
+  const vezeKaoVerifikator = await prisma.verifikacionaVeza.findMany({ where: { verifikatorId: userId } });
+  const vezeKaoVerifikovani = await prisma.verifikacionaVeza.findMany({ where: { verifikovaniId: userId } });
+  let poenVracenOdDrugih = 0;
+
+  if (vezeKaoVerifikator.length > 0 || vezeKaoVerifikovani.length > 0) {
+    await prisma.$transaction(
+      async (tx) => {
+        /** Skida POEN sa tuđeg zapisa i vraća ga Protokolu; nikad ispod nule. */
+        async function vratiPoenProtokolu(targetUserId: string, iznos: number) {
+          if (iznos <= 0) return;
+          const w = await tx.wallet.findUnique({ where: { userId: targetUserId } });
+          if (!w) return;
+          const stvarno = Math.min(w.balance, iznos);
+          if (stvarno <= 0) return;
+          await tx.wallet.update({ where: { id: w.id }, data: { balance: { decrement: stvarno } } });
+          await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: stvarno } } });
+          poenVracenOdDrugih += stvarno;
+        }
+
+        // 1a) Veze u kojima je ovaj nalog VERIFIKATOR — pada verifikovani.
+        for (const v of vezeKaoVerifikator) {
+          await vratiPoenProtokolu(v.verifikovaniId, POEN_VERIFIKOVANI);
+          if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+            // Nadzornikovih 500 pada samo ako je ishod bio UREDNO (čl. 20a).
+            await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
+          }
+
+          const ostalo = await tx.verifikacionaVeza.count({
+            where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
+          });
+          const pogodjeni = await tx.user.findUnique({
+            where: { id: v.verifikovaniId },
+            select: { jeOsnivac: true },
+          });
+          if (ostalo === 0 && !pogodjeni?.jeOsnivac) {
+            await tx.user.update({
+              where: { id: v.verifikovaniId },
+              data: {
+                tipKorisnika: TipKorisnika.NEVERIFIKOVAN,
+                verified: false,
+                verifiedAt: null,
+                indeksStvarnosti: 0,
+              },
+            });
+          } else {
+            await tx.user.update({
+              where: { id: v.verifikovaniId },
+              data: { indeksStvarnosti: zasticeniIndeks(pogodjeni?.jeOsnivac ?? false, izracunajIndeks(ostalo)) },
+            });
+          }
+        }
+
+        // 1b) Veze u kojima je ovaj nalog VERIFIKOVANI — pada verifikator.
+        for (const v of vezeKaoVerifikovani) {
+          await vratiPoenProtokolu(v.verifikatorId, POEN_VERIFIKATOR);
+          if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+            await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
+          }
+          const verifikator = await tx.user.findUnique({
+            where: { id: v.verifikatorId },
+            select: { tipKorisnika: true, slotoviPotroseni: true },
+          });
+          if (verifikator?.tipKorisnika === TipKorisnika.REGULARNI && verifikator.slotoviPotroseni > 0) {
+            await tx.user.update({
+              where: { id: v.verifikatorId },
+              data: { slotoviPotroseni: { decrement: 1 } },
+            });
+          }
+        }
+
+        // 1c) Obriši veze (NadzorZapis i NadzorniPredmet padaju kaskadno).
+        await tx.verifikacionaVeza.deleteMany({
+          where: { OR: [{ verifikatorId: userId }, { verifikovaniId: userId }] },
+        });
+        // 1d) Tuđe veze koje je ovaj nalog nadzirao ostaju — samo bez nadzornika.
+        await tx.verifikacionaVeza.updateMany({ where: { nadzornikId: userId }, data: { nadzornikId: null } });
+
+        // 1e) Keš zabranjene zone se preračunava od nule — unija nije invertibilna.
+        await preracunajZoneUBazi(tx);
+      },
+      { timeout: 30_000 },
+    );
+  }
+
+  // Nadzori nad tuđim verifikacijama koje ovaj nalog nije dodirivao kao strana
+  // (veze su ostale, otpada samo zapis nadzora).
+  prebroj(await prisma.nadzorZapis.deleteMany({ where: { nadzornikId: userId } }));
+  await prisma.nadzorniPredmet.updateMany({ where: { resenById: userId }, data: { resenById: null } });
+
+  // ── 2. ZRNO ────────────────────────────────────────────────────────────────
+  // Otpis bez evidentiranja POEN-a: ZRNA se vraćaju u raspoloživa u Protokolu
+  // (imenilac obračunskog koeficijenta), kao pri prestanku statusa (čl. 34 st. 1).
+  const zrnaOtpisana = (user.zrnoStanje?.aktivno ?? 0) + (user.zrnoStanje?.slobodno ?? 0);
+  await prisma.zrnoDelegacija.updateMany({ where: { delegatId: userId }, data: { delegatId: null } });
+  await prisma.zrnoDelegacija.updateMany({
+    where: { zakazaniDelegatId: userId },
+    data: { zakazaniDelegatId: null, imaZakazano: false },
+  });
+  prebroj(await prisma.zrnoDelegacija.deleteMany({ where: { delegatorId: userId } }));
+  prebroj(await prisma.zrnoUpisZahtev.deleteMany({ where: { userId } }));
+  prebroj(await prisma.zrnoOtpisZahtev.deleteMany({ where: { userId } }));
+  prebroj(await prisma.zrnoStatusZahtev.deleteMany({ where: { userId } }));
+  prebroj(await prisma.zrnoStanje.deleteMany({ where: { userId } }));
+
+  // ── 3. POEN ────────────────────────────────────────────────────────────────
+  // Stanje ide na nulu, protivzapis Protokola se pomera za isti iznos (zero-sum).
+  // `increment` pokriva i negativno stanje (nadoknada, čl. 20b): tada Protokol
+  // ide dublje u minus, koliko je nadoknade otpisano.
+  const svezWallet = await prisma.wallet.findUnique({ where: { userId } });
+  const balans = svezWallet?.balance ?? 0;
+  if (svezWallet) {
+    await prisma.$transaction(async (tx) => {
+      if (balans !== 0) {
+        await tx.wallet.update({ where: { id: svezWallet.id }, data: { balance: 0 } });
+        await tx.wallet.update({
+          where: { id: PROTOKOL_WALLET_ID },
+          data: { balance: { increment: balans } },
+        });
+      }
+      // Istorija se briše, ne poništava — nalog treba da zatekne prazan izvod.
+      // Zero-sum se time ne dira: merodavna su stanja zapisa, ne redovi istorije.
+      prebroj(
+        await tx.transaction.deleteMany({
+          where: { OR: [{ fromWalletId: svezWallet.id }, { toWalletId: svezWallet.id }] },
+        }),
+      );
+    });
+  }
+
+  // ── 4. Pijaca ──────────────────────────────────────────────────────────────
+  // Prijave na oglas i upiti padaju kaskadno uz oglas; poruke i razgovori koji
+  // su nastali povodom oglasa gube samo vezu (SetNull).
+  const oglasi = await prisma.marketplaceListing.findMany({
+    where: { sellerId: userId },
+    select: { id: true, images: true },
+  });
+  const obrisanoOglasa = prebroj(await prisma.marketplaceListing.deleteMany({ where: { sellerId: userId } }));
+  // Oglasi drugih ljudi koje je ovaj nalog „kupio" vraćaju se u ponudu.
+  await prisma.marketplaceListing.updateMany({
+    where: { buyerId: userId },
+    data: { buyerId: null, soldAt: null, status: ListingStatus.ACTIVE },
+  });
+  prebroj(await prisma.oglasUpit.deleteMany({ where: { posiljacId: userId } }));
+  prebroj(await prisma.prijavaOglasa.deleteMany({ where: { prijaviocId: userId } }));
+  prebroj(await prisma.followedCategory.deleteMany({ where: { userId } }));
+
+  // ── 5. Kanali doprinosa (čl. 40a i 40b) ────────────────────────────────────
+  prebroj(await prisma.doprinosSadrzaju.deleteMany({ where: { userId } }));
+  prebroj(await prisma.doprinosRazmeni.deleteMany({ where: { userId } }));
+
+  // ── 6. Programi i doprinos-oglasi ──────────────────────────────────────────
+  prebroj(await prisma.programPotvrda.deleteMany({ where: { verifikatorId: userId } }));
+  prebroj(await prisma.programEnrollment.deleteMany({ where: { userId } }));
+  prebroj(await prisma.oglasEvidencija.deleteMany({ where: { userId } }));
+  prebroj(await prisma.oglasPrijava.deleteMany({ where: { userId } }));
+  const sopstveniDoprinosOglasi = await prisma.doprinosOglas.findMany({
+    where: { createdById: userId },
+    select: { id: true },
+  });
+  if (sopstveniDoprinosOglasi.length > 0) {
+    const ids = sopstveniDoprinosOglasi.map((o) => o.id);
+    prebroj(await prisma.oglasEvidencija.deleteMany({ where: { oglasId: { in: ids } } }));
+    prebroj(await prisma.oglasPrijava.deleteMany({ where: { oglasId: { in: ids } } }));
+    prebroj(await prisma.doprinosOglas.deleteMany({ where: { id: { in: ids } } }));
+  }
+
+  // ── 7. Komunikacija ────────────────────────────────────────────────────────
+  const konverzacije = await prisma.konverzacija.findMany({
+    where: { OR: [{ user1Id: userId }, { user2Id: userId }] },
+    select: { id: true },
+  });
+  if (konverzacije.length > 0) {
+    const ids = konverzacije.map((k) => k.id);
+    prebroj(await prisma.poruka.deleteMany({ where: { konverzacijaId: { in: ids } } }));
+    prebroj(await prisma.konverzacija.deleteMany({ where: { id: { in: ids } } }));
+  }
+  prebroj(await prisma.chatMessage.deleteMany({ where: { userId } }));
+  prebroj(await prisma.notifikacija.deleteMany({ where: { userId } }));
+  prebroj(await prisma.pushPretplata.deleteMany({ where: { userId } }));
+
+  // ── 8. Krugovi, glasanje, donacije, prigovori ──────────────────────────────
+  prebroj(await prisma.krugClanstvo.deleteMany({ where: { userId } }));
+  prebroj(await prisma.krugPristupnica.deleteMany({ where: { userId } }));
+  prebroj(await prisma.krugOsnivanjeZahtev.deleteMany({ where: { inicijatorId: userId } }));
+  prebroj(await prisma.glasanjeGlas.deleteMany({ where: { userId } }));
+  const sopstveniPredlozi = await prisma.glasanjePredlog.findMany({
+    where: { authorId: userId },
+    select: { id: true },
+  });
+  if (sopstveniPredlozi.length > 0) {
+    const ids = sopstveniPredlozi.map((p) => p.id);
+    prebroj(await prisma.glasanjeGlas.deleteMany({ where: { predlogId: { in: ids } } }));
+    prebroj(await prisma.glasanjePredlog.deleteMany({ where: { id: { in: ids } } }));
+  }
+  prebroj(await prisma.donationRecord.deleteMany({ where: { userId } }));
+  prebroj(await prisma.pokroviteljPrijava.deleteMany({ where: { podnosilacId: userId } }));
+  prebroj(await prisma.prigovorNaOdluku.deleteMany({ where: { userId } }));
+  prebroj(await prisma.bug.deleteMany({ where: { userId } }));
+
+  // ── 9. Tragovi naloga ──────────────────────────────────────────────────────
+  prebroj(await prisma.verifikacijaToken.deleteMany({ where: { korisnikId: userId } }));
+  prebroj(await prisma.passwordResetToken.deleteMany({ where: { userId } }));
+  prebroj(await prisma.aktivnostLog.deleteMany({ where: { userId } }));
+  prebroj(await prisma.pseudonimIstorija.deleteMany({ where: { userId } }));
+  // Pristanci na akte se brišu jer ih ni nov nalog nema — po prijavi se ponovo
+  // prikazuje ekran sa pristankom, isti koji vidi čovek koji se tek registrovao.
+  prebroj(await prisma.politikaPrihvatanje.deleteMany({ where: { userId } }));
+  prebroj(await prisma.pravilnikPrihvatanje.deleteMany({ where: { userId } }));
+  prebroj(await prisma.userPodaci.deleteMany({ where: { userId } }));
+
+  // ── 10. Sam nalog ──────────────────────────────────────────────────────────
+  // Ostaju: id, email, lozinka, pseudonim, memberHash, donatorskiBroj i wallet —
+  // sve ostalo se vraća na podrazumevano. `createdAt` ide na sada, da nalog i u
+  // pregledima („član od", levak, brojači novih članova) izgleda kao današnji.
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      tipKorisnika: TipKorisnika.NEVERIFIKOVAN,
+      verified: false,
+      verifiedAt: null,
+      indeksStvarnosti: 0,
+      slotoviPotroseni: 0,
+      utvrdjenNepostojeci: null,
+      pocetnaEmisijaIzvrsena: false,
+      status: UserStatus.ACTIVE,
+      suspendedAt: null,
+      suspendedReason: null,
+      telefon: null,
+      avatar: null,
+      vidjenoNovcanikAt: null,
+      vidjenoPijacaAt: null,
+      pseudonimChangedAt: null,
+      emailObavestenja: true,
+      createdAt: new Date(),
+    },
+  });
+
+  // Slike sa R2 tek na kraju — orphan fajl ne sme da obori reset.
+  for (const o of oglasi) {
+    for (const url of o.images) {
+      try {
+        await obrisiSaR2(url);
+      } catch {
+        /* skladište nije merodavno za ishod reseta */
+      }
+    }
+  }
+  if (user.avatar) {
+    try {
+      await obrisiSaR2(user.avatar);
+    } catch {
+      /* isto */
+    }
+  }
+
+  return {
+    pseudonim: user.pseudonim,
+    poenVracenProtokolu: balans,
+    poenVracenOdDrugih,
+    zrnaOtpisana,
+    ponistenoVerifikacija: vezeKaoVerifikator.length + vezeKaoVerifikovani.length,
+    obrisanoOglasa,
+    obrisanoZapisa,
+  };
+}

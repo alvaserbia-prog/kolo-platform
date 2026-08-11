@@ -20,6 +20,7 @@ const AktivnostTab = dynamic(() => import("./AktivnostTab"), { ssr: false });
 const LevakTab = dynamic(() => import("./LevakTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
+const PrviOglasiTab = dynamic(() => import("./PrviOglasiTab"), { ssr: false });
 const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
 
 interface KorisnikInfo {
@@ -216,6 +217,8 @@ interface AdminKlijentProps {
   pocetniTab: Tab;
   /** Otvorene prijave oglasa — badge na tabu Pijaca (Uslovi čl. 25 st. 2). */
   otvorenihPrijavaOglasa: number;
+  /** Prvi oglasi koji čekaju odobrenje doprinosa — badge na tabu Prvi oglasi (čl. 40a). */
+  prvihOglasaNaCekanju: number;
 }
 
 const tipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
@@ -244,7 +247,7 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 });
 
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -297,6 +300,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       : []),
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
+    ["prvi-oglasi", `${t("tab_prvi_oglasi")}${prvihOglasaNaCekanju > 0 ? ` (${prvihOglasaNaCekanju})` : ""}`],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
@@ -392,6 +396,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Pijaca — moderacija oglasa (Uslovi čl. 21, 25) */}
       {tab === "pijaca" && <PijacaTab />}
+
+      {/* Prvi oglasi — odobravanje doprinosa iz čl. 40a (nalozi bez potvrde). */}
+      {tab === "prvi-oglasi" && <PrviOglasiTab onDone={() => router.refresh()} />}
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}
@@ -1730,6 +1737,35 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
     }
   }
 
+  // Vraća nalog na dan registracije — za probu kako platforma izgleda novom
+  // čoveku, bez otvaranja novog naloga. Nepovratno, pa se pseudonim otkuca:
+  // klik ne sme da promaši red u spisku.
+  async function resetujNalog(u: KorisnikInfo) {
+    const upisano = prompt(t("korisnici_reset_prompt", { pseudonim: u.pseudonim }));
+    if (upisano === null) return;
+    setLoadingId(u.id);
+    const res = await fetch(`/api/admin/korisnici/${u.id}/reset`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pseudonim: upisano }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setLoadingId(null);
+    if (res.ok) {
+      alert(
+        t("korisnici_reset_gotovo", {
+          pseudonim: d.pseudonim ?? u.pseudonim,
+          poen: (d.poenVracenProtokolu ?? 0).toLocaleString(intlTag(locale)),
+          potvrde: d.ponistenoVerifikacija ?? 0,
+          oglasi: d.obrisanoOglasa ?? 0,
+        }),
+      );
+      onDone();
+    } else {
+      alert(d.error ?? t("greska_generalna"));
+    }
+  }
+
   async function postaviAdminRolu(userId: string, nivo: string) {
     if (nivo === "SUPERADMIN" && !confirm(t("korisnici_superadmin_confirm"))) return;
     setLoadingId(userId);
@@ -1820,6 +1856,15 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                       <button onClick={() => akcija(u.id, "lazni-verifikator")} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-danger-light text-kolo-danger text-xs font-semibold rounded-lg hover:bg-kolo-danger-light disabled:opacity-60 transition-colors">
                         {t("korisnici_lazni_verifikator")}
+                      </button>
+                    )}
+                    {/* Vraćanje naloga na dan registracije — proba novog korisničkog
+                        puta bez otvaranja novog naloga. Samo superadmin, i samo za
+                        tuđ nalog (sopstveni bi se resetovao pod nogama). */}
+                    {viewerJeSuperadmin && u.id !== viewerId && u.admin === "NONE" && u.status !== "EXCLUDED" && (
+                      <button onClick={() => resetujNalog(u)} disabled={loadingId === u.id}
+                        className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                        {t("korisnici_reset")}
                       </button>
                     )}
                   </div>

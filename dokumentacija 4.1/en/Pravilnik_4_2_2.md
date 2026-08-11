@@ -510,11 +510,13 @@ The contribution under the preceding paragraph is the first step of the exchange
 
 For a verified user, the contribution is recorded at the moment the listing is posted.
 
-For an unverified user, the contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the chain of confirmations, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+For an unverified user, the listing is published immediately, while the contribution is noted at the moment of posting and is recorded in the Protocol when the Foundation approves the listing. The contribution is also recorded without such approval if, before it, the user is verified in the chain of confirmations or a POEN ledger update is made in their favor. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
 
-The distinction drawn in the two preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
+The Foundation decides on approval within a reasonable time, by checking that the listing meets the content minimum and that it represents a genuine offer of a good or a service. If the contribution is not approved, the user is notified with a statement of reasons; the listing is not removed thereby, and the contribution is considered again in respect of a supplemented or a new listing by the same user.
 
-If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled.
+The distinction drawn in the preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
+
+If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled. A contribution already recorded is not annulled by the removal of the listing.
 
 The recording of a contribution to platform content is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
 
@@ -528,7 +530,7 @@ A first listing opens the space for exchange to a user, but does not by itself b
 
 The steps of the path are:
 
-1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article (for a verified user upon posting; for an unverified user upon verification or upon the first POEN ledger update in their favor);
+1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article;
 
 2) the first exchange in which the user updates the POEN ledger in favor of a user outside their circle of acquaintance;
 
@@ -800,7 +802,7 @@ The transparency of the ledger ensures user oversight of the system and reduces 
 
 The transparency of the ledger does not encompass data whose publication would infringe users' privacy — the verification graph, voluntarily entered data, and special categories of data. The pseudonymous contribution ledger is accessible to verified users, while visitors and unverified users see general indicators (aggregates) in accordance with Article 28. The viewing of listings in the platform's advertising space is governed separately (Art. 16) and is distinct from the contribution ledger. The scope of public data availability is established by the Privacy Policy.
 
-A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a paragraph 4). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
+A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
 
 ## Chapter X — The Legal Nature of the KOLO System and the Four Principles
 

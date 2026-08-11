@@ -339,20 +339,20 @@
     "prazno_opis": "POEN se beleži kroz učešće u zajednici — kad te neko potvrdi, kroz razmenu dobara i usluga ili doprinos. Počni tako što ćeš zamoliti nekoga da te potvrdi.",
     "prazno_verif_link": "Zamoli za potvrdu →",
     "zabelezen_naslov": "Zabeležen doprinos",
-    "zabelezen_opis": "Evidentira se kad te neko potvrdi ili kad ti neko prepiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
+    "zabelezen_opis": "Evidentira se kad Fondacija odobri tvoj prvi oglas, kad te neko potvrdi ili kad ti neko prepiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
     "samo_primalac": "Dok te niko nije potvrdio možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po potvrdi.",
     "nadoknada_naslov": "Nadoknada",
     "nadoknada_opis": "Nastala je poništenjem lažne potvrde koju si dao. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis pređe nulu.",
     "putanja_naslov": "Doprinosi razmeni",
     "putanja_opis": "Pet koraka, svaki 1.000 POEN. Otključavaju se redom, a ukupno se po korisniku evidentira najviše 5.000 POEN.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
-    "putanja_korak_1": "Prvi oglas sa sadržinskim minimumom i prva razmena u kojoj ti neko prepiše POEN u tvoj zapis",
+    "putanja_korak_1": "Prvi oglas kojim nudiš dobro ili uslugu, sa sadržinskim minimumom",
     "putanja_korak_2": "Prva razmena u kojoj ti prepišeš POEN korisniku van svog lanca",
     "putanja_korak_3": "Tri oglasa, od kojih su dva dobila upit od različitih korisnika",
     "putanja_korak_4": "Razmene sa 5 različitih osoba van tvog lanca",
     "putanja_korak_5": "Razmene sa 10 različitih osoba van tvog lanca",
     "putanja_evidentiran": "Evidentirano",
-    "putanja_zabelezen": "Zabeleženo — zapis nastaje po potvrdi",
+    "putanja_zabelezen": "Zabeleženo — zapis nastaje po odobrenju ili potvrdi",
     "putanja_na_redu": "Ispunjeno — evidentira se uskoro",
     "putanja_zakljucan": "Još nije otključano",
     "putanja_pravila": "U brojač ulaze prepisi POEN-a od najmanje 1.000 POEN sa ljudima koji nisu u tvom krugu poznanstava (mreža potvrda). Svaki sagovornik broji se jednom, bez obzira na broj prepisa. Prepis sa korisnikom koga još niko nije potvrdio se beleži, a broji tek kad on bude potvrđen. Trenutno u brojaču: {sagovornika}."
@@ -879,11 +879,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -891,23 +891,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.2.1",
+      "ver": "4.2.2",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -927,21 +927,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.2.1",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.2.2",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.2.1",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.2.2",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.2.1",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.2.2",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.2.1",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.2.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.2.1",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.2.2",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.2.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.2.2",
     "meta_pravilnik_title": "Pravilnici KOLO sistema — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.2.1",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.2.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -1667,7 +1667,7 @@
     "uspeh_dugme": "Idi na Pijacu",
     "neverif_objava_hint": "Možeš da objaviš ponudu i pre nego što te neko potvrdi — tako te članovi iz tvog kraja vide.",
     "neverif_naslov": "Objavljuješ pre potvrde",
-    "neverif_opis": "Možeš da objaviš samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, opis od najmanje {min} znakova, kategoriju i mesto. Prvi takav oglas nosi ti doprinos od {iznos} POEN, koji se evidentira kad te neko potvrdi ili ti prepiše POEN.",
+    "neverif_opis": "Možeš da objaviš samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, opis od najmanje {min} znakova, kategoriju i mesto. Oglas ide na Pijacu odmah; doprinos od {iznos} POEN evidentira ti se kad Fondacija odobri oglas.",
     "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
     "oznaka_neverifikovan": "BEZ POTVRDE",
     "oznaka_neverifikovan_opis": "Oglašivača još niko nije potvrdio u lancu potvrda. Za razmenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
@@ -1878,7 +1878,7 @@
     "ekran5_naslov": "Šta je POEN",
     "ekran5_p1": "POEN je zapis doprinosa — beleži šta si dao i šta si dobio u mreži. Nije novac: ne kupuje se, ne menja se za dinare i nema vrednost van sistema.",
     "ekran5_p2": "Primer: popraviš komšiji česmu, on ti te POEN-e prepiše u tvoj zapis; kasnije za njih od trećeg čoveka dobiješ med. Koliko POEN-a vredi koja razmena — dogovarate vas dvoje.",
-    "ekran5_p3": "Za sada POEN stiže na dva načina: 1.000 kad te neko potvrdi i onoliko koliko se dogovorite pri svakoj razmeni.",
+    "ekran5_p3": "Za sada POEN stiže na tri načina: 1.000 za prvi oglas kojim nudiš dobro ili uslugu — kad Fondacija odobri oglas; 1.000 kad te neko potvrdi; i onoliko koliko se dogovorite pri svakoj razmeni.",
     "ekran5_cta": "Otvori svoj zapis",
     "ekran6_oznaka": "Dok čekaš",
     "ekran6_naslov": "Šta možeš odmah, pre potvrde",
@@ -1886,7 +1886,7 @@
     "ekran6_p2": "Prvo, sredi svoj profil: postavi sliku, upiši ime, lokaciju i nekoliko reči o sebi. Uz svako polje biraš da li ga drugi vide. To je ono što ljudi vide kad im se javiš, pa nalog bez slike dobija slabiji odziv. Tu je i prekidač za obaveštenja na mejl.",
     "ekran6_p3": "Uređivanje profila ne utiče na potvrdu. Za prepoznavanje se koristi tvoj oglas na Pijaci, ne profil.",
     "ekran6_p4": "Drugo, otvori Pijacu i razgledaj šta ljudi nude i traže. Pregled oglasa je otvoren svima, i pre potvrde. Prati i vesti Fondacije na Početnoj: tu idu najave, izmene pravila i sve važno za zajednicu.",
-    "ekran6_p5": "Postavljanje sopstvenih oglasa, kontakt sa oglašivačem i poruke otključavaju se potvrdom.",
+    "ekran6_p5": "Ponudu možeš da objaviš odmah, i pre potvrde — za prvi takav oglas dobijaš 1.000 POEN kad ga Fondacija odobri. Potvrdom se otključavaju oglas tipa potražnja, kontakt sa oglašivačem i pokretanje razgovora.",
     "ekran6_cta_profil": "Podesi profil",
     "ekran6_cta_pijaca": "Otvori Pijacu",
     "ekran7_oznaka": "Sledeći korak",
@@ -2075,6 +2075,7 @@
     "tab_donacije": "Donacije",
     "tab_prigovori": "Prigovori",
     "tab_pijaca": "Pijaca",
+    "tab_prvi_oglasi": "Prvi oglasi",
     "donacije_nema": "Nema donacija na čekanju.",
     "donacije_potvrdi": "Potvrdi",
     "donacije_potvrdjujem": "Potvrđujem...",
@@ -2114,6 +2115,9 @@
     "korisnici_suspenzija_razlog_prompt": "Razlog suspenzije:",
     "korisnici_superadmin_confirm": "Dodeliti SUPERADMIN? Dobija sve poluge, uključujući opasne i sistemske radnje.",
     "korisnici_ponisteno_msg": "Poništeno {count} potvrda u podstablu.",
+    "korisnici_reset": "Resetuj nalog",
+    "korisnici_reset_prompt": "Vratiti nalog „{pseudonim}“ na dan registracije?\n\nNepovratno: padaju sve potvrde koje nalog dodiruje (i one koje je dao drugima, sa POEN-om koji je tada upisan), POEN i ZRNO idu na nulu, a brišu se oglasi, razgovori, obaveštenja, istorija i pristanci na akte. Ostaju email, lozinka i pseudonim — prijava radi istim podacima.\n\nZa potvrdu otkucaj pseudonim:",
+    "korisnici_reset_gotovo": "Nalog „{pseudonim}“ je vraćen na dan registracije. Protokolu je vraćeno {poen} POEN, palo je {potvrde} potvrda, obrisano je {oglasi} oglasa.",
     "izmeni_korisnika_naslov": "Izmeni podatke korisnika",
     "izmeni_email_label": "Email",
     "izmeni_pseudonim_label": "Pseudonim",
@@ -2254,7 +2258,7 @@
     "osnivaci_otkljucaj_confirm": "Otključati listu osnivača za izmene? Dok je otključana, koraci se ne evidentiraju.",
     "osnivaci_evidentiraj_treba_zakljucati": "Koraci se evidentiraju tek kad je lista osnivača zaključana (zbir udela 100%).",
     "doprinos_zatecene_naslov": "Zatečeni doprinosi za sadržaj (jednokratno)",
-    "doprinos_zatecene_opis": "Potvrđenim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Oni bez potvrde se preskaču — i dalje čekaju okidač. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
+    "doprinos_zatecene_opis": "Potvrđenim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Članovi bez potvrde se preskaču — njih odobravaš pojedinačno u tabu Prvi oglasi. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Opticaj skače za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira automatski na svakih 100.000 POEN, prva noćna emisija posle ovoga može da upali korak. Ponovno pokretanje ne evidentira dvaput.",
@@ -2428,6 +2432,10 @@
     "bag_promenjen_tekst": "Status tvoje prijave „{naslov}” je promenjen.",
     "doprinos_sadrzaju_naslov": "Evidentiran ti je doprinos od {iznos} POEN",
     "doprinos_sadrzaju_tekst": "Za oglas kojim nudiš dobro ili uslugu evidentiran ti je doprinos sadržaju platforme — {iznos} POEN (Pravilnik čl. 40a).",
+    "doprinos_na_cekanju_naslov": "Prvi oglas čeka odobrenje",
+    "doprinos_na_cekanju_tekst": "Korisnik „{pseudonim}\" (bez potvrde) objavio je prvi oglas. Doprinos od 1.000 POEN čeka odobrenje u tabu Prvi oglasi.",
+    "doprinos_odbijen_naslov": "Doprinos za prvi oglas nije odobren",
+    "doprinos_odbijen_tekst": "Doprinos sadržaju platforme za tvoj oglas nije odobren. Razlog: {razlog} Oglas ostaje na Pijaci. Kad ga dopuniš ili objaviš bolji, doprinos se ponovo razmatra.",
     "nadoknada_naslov": "Nastala je nadoknada na tvom zapisu",
     "nadoknada_tekst": "Poništenjem potvrde koju si dao nastala je nadoknada od {iznos} POEN-a, jer poništeni POEN-i nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena.",
     "doprinos_razmeni_naslov": "Evidentiran ti je doprinos razmeni — korak {korak}",

@@ -339,20 +339,20 @@
     "prazno_opis": "POEN is recorded through community participation — through confirmation, exchanging goods and services, or making contributions. Start by getting confirmed.",
     "prazno_verif_link": "Request confirmation →",
     "zabelezen_naslov": "Recorded contribution",
-    "zabelezen_opis": "It is entered once someone confirms you or re-registers POEN to you. Until then it is not a POEN entry and is not part of your balance.",
+    "zabelezen_opis": "It is recorded once the Foundation approves your first listing, once someone confirms you, or once someone re-registers POEN into your record. Until then it is not a POEN record and does not count towards your balance.",
     "samo_primalac": "Until you are confirmed you can only receive POEN. Re-registering POEN into someone else's record opens up upon confirmation.",
     "nadoknada_naslov": "Restitution",
     "nadoknada_opis": "It arose from the annulment of a false confirmation you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; re-registering POEN to someone else becomes possible once your record passes zero.",
     "putanja_naslov": "Exchange contributions",
     "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and no user is recorded more than 5,000 POEN in total.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
-    "putanja_korak_1": "First listing meeting the content minimum, and the first exchange in which someone re-registers POEN into your record",
+    "putanja_korak_1": "First listing offering a good or a service that meets the content minimum",
     "putanja_korak_2": "First exchange in which you re-register POEN to a user outside your chain",
     "putanja_korak_3": "Three listings, two of which received an enquiry from different users",
     "putanja_korak_4": "Exchanges with 5 different people outside your chain",
     "putanja_korak_5": "Exchanges with 10 different people outside your chain",
     "putanja_evidentiran": "Recorded",
-    "putanja_zabelezen": "Noted — the record is created upon confirmation",
+    "putanja_zabelezen": "Noted — the record follows approval or confirmation",
     "putanja_na_redu": "Met — being recorded shortly",
     "putanja_zakljucan": "Not unlocked yet",
     "putanja_pravila": "The count includes re-registrations of at least 1,000 POEN with people outside your circle of acquaintance (the network of confirmations). Each counterpart counts once, however many re-registrations there are. A re-registration with a user who is not yet confirmed is noted, but counts only once they are confirmed. Currently counted: {sagovornika}."
@@ -879,11 +879,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -891,23 +891,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.2.1"
+      "ver": "4.2.2"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.2.1",
+      "ver": "4.2.2",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -927,21 +927,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.2.1",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.2.2",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.2.1",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.2.2",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.2.1",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.2.2",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.2.1",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.2.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.2.1",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.2.2",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.2.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.2.2",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.2.1",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.2.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1667,7 +1667,7 @@
     "uspeh_dugme": "Go to Marketplace",
     "neverif_objava_hint": "You can post an offer before confirmation — that is how members from your area get to see you.",
     "neverif_naslov": "Posting before confirmation",
-    "neverif_opis": "You may post an offer only — something you provide. The listing needs a photo, a description of at least {min} characters, a category and a place. Your first such listing earns you a contribution of {iznos} POEN, recorded once someone confirms you or re-registers POEN to you.",
+    "neverif_opis": "You may post an offer only — something you provide. The listing needs a photo, a description of at least {min} characters, a category and a place. The listing goes live immediately; the contribution of {iznos} POEN is recorded once the Foundation approves the listing.",
     "neverif_preostalo": "Active listings you may still post: {broj}.",
     "oznaka_neverifikovan": "NOT CONFIRMED",
     "oznaka_neverifikovan_opis": "This advertiser is not yet confirmed in the chain of vouching. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
@@ -1878,7 +1878,7 @@
     "ekran5_naslov": "What POEN is",
     "ekran5_p1": "POEN is a record of contribution — it notes what you gave and what you received in the network. It is not money: it cannot be bought, cannot be exchanged for dinars and has no value outside the system.",
     "ekran5_p2": "For example: you fix a neighbour's tap, they re-register those POEN into your record; later you get honey from a third person for them. How much POEN an exchange is worth — the two of you agree.",
-    "ekran5_p3": "For now POEN arrives in two ways: 1,000 when someone confirms you, and whatever you agree on in each exchange.",
+    "ekran5_p3": "For now POEN arrives in three ways: 1,000 for your first listing offering a good or a service — once the Foundation approves it; 1,000 when someone confirms you; and whatever you agree on in each exchange.",
     "ekran5_cta": "Open your record",
     "ekran6_oznaka": "While you wait",
     "ekran6_naslov": "What you can do right away, before confirmation",
@@ -1886,7 +1886,7 @@
     "ekran6_p2": "First, set up your profile: add a photo, your name, location and a few words about yourself. For each field you choose whether others can see it. This is what people see when you contact them, so an account without a photo gets a weaker response. The switch for email notifications is there too.",
     "ekran6_p3": "Editing your profile does not affect confirmation. Recognition uses your Marketplace listing, not your profile.",
     "ekran6_p4": "Second, open the marketplace and look at what people are offering and looking for. Browsing listings is open to everyone, without confirmation. Follow the Foundation's news on the home page too: announcements, rule changes and everything important for the community go there.",
-    "ekran6_p5": "Posting your own listings, contacting an advertiser and messages are unlocked by confirmation.",
+    "ekran6_p5": "You can post an offer straight away, before confirmation — for your first such listing you receive 1,000 POEN once the Foundation approves it. Confirmation unlocks want-ads, contacting an advertiser and starting a conversation.",
     "ekran6_cta_profil": "Edit profile",
     "ekran6_cta_pijaca": "Open marketplace",
     "ekran7_oznaka": "Next step",
@@ -2075,6 +2075,7 @@
     "tab_donacije": "Donacije",
     "tab_prigovori": "Prigovori",
     "tab_pijaca": "Pijaca",
+    "tab_prvi_oglasi": "First listings",
     "donacije_nema": "Nema donacija na čekanju.",
     "donacije_potvrdi": "Potvrdi",
     "donacije_potvrdjujem": "Potvrđujem...",
@@ -2114,6 +2115,9 @@
     "korisnici_suspenzija_razlog_prompt": "Razlog suspenzije:",
     "korisnici_superadmin_confirm": "Dodeliti SUPERADMIN? Dobija sve poluge, uključujući opasne i sistemske radnje.",
     "korisnici_ponisteno_msg": "Voided {count} confirmations in the subtree.",
+    "korisnici_reset": "Resetuj nalog",
+    "korisnici_reset_prompt": "Vratiti nalog „{pseudonim}“ na dan registracije?\n\nNepovratno: padaju sve potvrde koje nalog dodiruje (i one koje je dao drugima, sa POEN-om koji je tada upisan), POEN i ZRNO idu na nulu, a brišu se oglasi, razgovori, obaveštenja, istorija i pristanci na akte. Ostaju email, lozinka i pseudonim — prijava radi istim podacima.\n\nZa potvrdu otkucaj pseudonim:",
+    "korisnici_reset_gotovo": "Nalog „{pseudonim}“ je vraćen na dan registracije. Protokolu je vraćeno {poen} POEN, palo je {potvrde} potvrda, obrisano je {oglasi} oglasa.",
     "izmeni_korisnika_naslov": "Izmeni podatke korisnika",
     "izmeni_email_label": "Email",
     "izmeni_pseudonim_label": "Pseudonim",
@@ -2254,12 +2258,12 @@
     "osnivaci_otkljucaj_confirm": "Otključati listu osnivača za izmene? Dok je otključana, koraci se ne evidentiraju.",
     "osnivaci_evidentiraj_treba_zakljucati": "Koraci se evidentiraju tek kad je lista osnivača zaključana (zbir udela 100%).",
     "doprinos_zatecene_naslov": "Zatečeni doprinosi za sadržaj (jednokratno)",
-    "doprinos_zatecene_opis": "Confirmedm članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Not confirmedi se preskaču — oni i dalje čekaju okidač. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
+    "doprinos_zatecene_opis": "Confirmed members whose 1,000 POEN contribution is noted but not recorded have it recorded now (Art. 40a, transitional provision). Members without a confirmation are skipped — you approve those one by one in the First listings tab. Those whose contribution was recorded without a notification going out are notified as well.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Opticaj skače za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira automatski na svakih 100.000 POEN, prva noćna emisija posle ovoga može da upali korak. Ponovno pokretanje ne evidentira dvaput.",
     "doprinos_zatecene_confirm": "Record all pending contributions of confirmed members now? Circulation will rise, which may trigger a founding step.",
-    "doprinos_zatecene_gotovo": "Razrešeno: {evidentirano}. U opticaj ušlo {poen} POEN. Preskočeno not confirmedih: {preskoceno}. Poslato obaveštenja: {obavesteno}.",
+    "doprinos_zatecene_gotovo": "Resolved: {evidentirano}. Entered circulation: {poen} POEN. Skipped (unconfirmed): {preskoceno}. Notifications sent: {obavesteno}.",
     "osnivaci_obrisi_confirm": "Obrisati osnivača?",
     "osnivaci_ucitavanje": "Učitavanje…",
     "pokr_prijave_ucitavanje": "Učitavanje…",
@@ -2428,6 +2432,10 @@
     "bag_promenjen_tekst": "The status of your report “{naslov}” has changed.",
     "doprinos_sadrzaju_naslov": "{iznos} POEN recorded for your contribution",
     "doprinos_sadrzaju_tekst": "Your contribution to the platform's content has been recorded — {iznos} POEN — for the listing offering a good or service (Rulebook art. 40a).",
+    "doprinos_na_cekanju_naslov": "A first listing is awaiting approval",
+    "doprinos_na_cekanju_tekst": "User “{pseudonim}” (unconfirmed) has posted their first listing. A contribution of 1,000 POEN awaits approval in the First listings tab.",
+    "doprinos_odbijen_naslov": "The contribution for your first listing was not approved",
+    "doprinos_odbijen_tekst": "The contribution to platform content for your listing was not approved. Reason: {razlog} The listing stays on the Marketplace. Once you improve it or post a better one, the contribution is considered again.",
     "nadoknada_naslov": "A restitution entry has appeared on your record",
     "nadoknada_tekst": "Annulment of a confirmation you performed created a restitution of {iznos} POEN, because the annulled POEN were not covered. Restitution is not a debt and cannot be collected; POEN you receive fill it first. Exchange of goods and services is not restricted for you.",
     "doprinos_razmeni_naslov": "An exchange contribution has been recorded for you — step {korak}",
