@@ -443,6 +443,19 @@ docs/             — interne radne beleške (nije normativa)
 - **Verifikacija = dokaz stvarnosti kroz lanac potvrda, bez dokumenata/JMBG-a** (vidi „Dokaz stvarnosti"). Legacy LK/JMBG tok je UKLONJEN.
 - Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. **Email se NE prikazuje u podešavanjima profila** (uklonjen, commit `4492bcf`; i dalje se koristi pri registraciji/loginu). **Promena pseudonima bez odjave** (commit `ba4c505`). Vidljivost se bira uz svako polje. Javni profil `/profil/[id]` (POEN/ZRNO/rang/oglasi uvek vidljivi) — **adresa je sada pseudonim**, vidi sekciju ispod.
 
+### Reset naloga na dan registracije (2026-08-11)
+Alat za probu kako platforma izgleda **novom čoveku**, bez otvaranja novog naloga (svaki nov nalog ostaje u bazi, ulazi u brojače članova i u levak). Admin → **Korisnici** → dugme **„Resetuj nalog"** uz red korisnika.
+- **Nalog se NE briše i NE anonimizuje** — za to postoji `DELETE /api/profil` (čl. 34). Ovde nalog ostaje živ, samo mu se skida sve stečeno; ostaju `id`, email, lozinka, pseudonim, `memberHash`, `donatorskiBroj` i `Wallet` red, pa se čovek prijavljuje **istim podacima**.
+- **Zero-sum ostaje očuvan** (čl. 14): koliko se skine sa zapisa korisnika, toliko se doda na protivzapis Protokola. `increment: balans` pokriva i **negativno stanje** (nadoknada, čl. 20b) — tada Protokol ide dublje u minus.
+- 🔴 **Radnja pogađa i DRUGE naloge.** Padaju sve verifikacije koje nalog dodiruje — i primljene i obavljene — pa drugoj strani POEN ide nazad Protokolu (capped na stanje), indeks se preračunava, slot oslobađa, a zona se preračunava od nule. Isti postupak kao pri prestanku statusa. Nadzornikovih 500 pada samo ako je ishod bio `UREDNO` (čl. 20a). Brišu se i zajednički razgovori.
+- **Istorija se BRIŠE, ne poništava** — nalog treba da zatekne prazan izvod, pa se `Transaction` redovi tog wallet-a brišu. Zero-sum se time ne dira: merodavna su stanja zapisa, ne redovi istorije.
+- **`createdAt` ide na sada** — inače bi „član od", levak i brojači novih članova i dalje pokazivali stari datum.
+- **Pristanci na akte se brišu**, jer ih ni nov nalog nema (registracija ne pravi `PolitikaPrihvatanje`) — po prijavi se prikaže isti ekran sa pristankom koji vidi i tek registrovan čovek.
+- **Brane:** samo **SUPERADMIN**; pseudonim se **otkuca** u telu zahteva i mora da se poklopi (klik ne sme da promaši red u spisku); odbija se nalog sa admin ovlašćenjem, **osnivač**, vlasnik pokrovitelja, ugašen nalog, sopstveni nalog i autor predloga koji je već u **registru odluka** (registar je nepromenljiv, čl. 21 Gornjeg Kola). Audit: `NALOG_RESETOVAN_NA_PRVI_DAN`.
+- 🟡 **Ista ruta postoji i na produkciji** — nema env prekidača, brana su superadmin + otkucan pseudonim.
+- **Klijentski „prvi put" se ne resetuje sa servera:** `sessionStorage["kolo-welcome"]` (koji vodič `/dobrodosli` čita kao prvi prolaz) i `localStorage` žive u pregledaču. Za pun utisak prvog dolaska prijaviti se u **incognito** prozoru.
+- Kod: `src/lib/reset-korisnika.ts`, ruta `POST /api/admin/korisnici/[id]/reset`, dugme u `AdminKlijent.tsx` (`KorisniciTab`).
+
 ### Pseudonim u adresi profila (2026-08-04)
 - Link ka profilu je **`/profil/Marko`** umesto `/profil/<uuid>`. Ruta prima **tri stvari** i sve tri svodi na interni id (`razresiKorisnikaIzAdrese` u `src/lib/pseudonim.ts`): aktuelni pseudonim → interni id (stari linkovi, linkovi zapisani u notifikacijama) → **napušteni pseudonim** (link podeljen pre preimenovanja). Stranica potom prepiše adresu u aktuelnu (`history.replaceState`, bez novog učitavanja).
 - **Šta gde ide:** u interfejsu se linkuje preko `profilHref()` (`src/lib/profil-link.ts`) → pseudonim. U sve što se **čuva** (link u notifikaciji, mejlu) ide **interni id** — pseudonim se menja, id ne. Ne obrtati ovo.
