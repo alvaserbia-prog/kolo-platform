@@ -508,17 +508,15 @@ A user has a contribution of 1,000 POENs recorded for the first listing in which
 
 The contribution under the preceding paragraph is the first step of the exchange contribution path under Article 40b.
 
-For a verified user, the contribution is recorded at the moment the listing is posted.
+The contribution is recorded at the moment the listing is posted, irrespective of whether the user's reality has been confirmed in the chain of confirmations.
 
-For an unverified user, the contribution is noted at the moment the listing is posted, and is recorded in the Protocol when the first of the following events occurs: verification of the user in the chain of confirmations, or a POEN ledger update in favor of that user. Until it is recorded, the contribution does not constitute a POEN record and does not enter the total number of recorded POENs in the system.
+The earlier distinction — under which, for a user whose reality had not been confirmed, the contribution was merely noted upon posting and recorded only upon verification or upon the first POEN ledger update in their favor — no longer applies. The system is protected against accounts without genuine participation by the content minimum for listings and by the limit on the number of active listings of an unverified user, established by the Terms of Use.
 
-The distinction drawn in the two preceding paragraphs serves to prevent accounts whose reality has not been confirmed from increasing the total number of recorded POENs before a trace of genuine participation appears in the system.
-
-If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled.
+If the listing is removed for a breach of the Terms of Use before the contribution has been recorded, the noted contribution is annulled. A contribution already recorded is not annulled by the removal of the listing.
 
 The recording of a contribution to platform content is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
 
-For a user who is verified on the day this paragraph enters into force and whose contribution has been noted but not recorded, the contribution is recorded once, in the same amount.
+For a user whose contribution has been noted but not recorded as at the day this paragraph enters into force, the contribution is recorded once, in the same amount, irrespective of whether their reality has been confirmed.
 
 ### Article 40b
 
@@ -528,7 +526,7 @@ A first listing opens the space for exchange to a user, but does not by itself b
 
 The steps of the path are:
 
-1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article (for a verified user upon posting; for an unverified user upon verification or upon the first POEN ledger update in their favor);
+1) the contribution under Article 40a — the first listing in which the user offers a good or a service and which meets the content minimum, recorded under the conditions of that Article, at the moment the listing is posted;
 
 2) the first exchange in which the user updates the POEN ledger in favor of a user outside their circle of acquaintance;
 
@@ -556,7 +554,7 @@ An enquiry is the initiation of a conversation in relation to a listing. What is
 
 The fulfilment of conditions is assessed according to the state at the moment of recording. A subsequent change of circumstances — in particular where a user, after an exchange, verifies the user with whom they exchanged and thereby brings them into their circle of acquaintance — affects further steps, but does not annul a contribution already recorded. A recorded contribution is annulled solely under the procedure established by the Rulebook on Proof of Reality.
 
-For a user whose reality has not been confirmed, a step passed is noted, and is recorded under the conditions of Article 40a.
+A step passed is recorded at the moment its conditions are met, irrespective of whether the user's reality has been confirmed — as is the contribution under Article 40a.
 
 Recording a contribution through the path is an automatic act of the Protocol and does not enter the daily limit established by the Rulebook on Operational Contribution and the Support Program rulebooks.
 
@@ -800,7 +798,7 @@ The transparency of the ledger ensures user oversight of the system and reduces 
 
 The transparency of the ledger does not encompass data whose publication would infringe users' privacy — the verification graph, voluntarily entered data, and special categories of data. The pseudonymous contribution ledger is accessible to verified users, while visitors and unverified users see general indicators (aggregates) in accordance with Article 28. The viewing of listings in the platform's advertising space is governed separately (Art. 16) and is distinct from the contribution ledger. The scope of public data availability is established by the Privacy Policy.
 
-A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a paragraph 4). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
+A user may at all times see their own records and their own noted contribution not yet recorded (Article 40a). A noted contribution is not visible to other users and does not enter public aggregates until it is recorded.
 
 ## Chapter X — The Legal Nature of the KOLO System and the Four Principles
 

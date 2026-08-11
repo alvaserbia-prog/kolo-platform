@@ -640,8 +640,10 @@ enum DoprinosStatus {
 enum DoprinosOkidac {
   VERIFIKACIJA
   PRIMLJEN_POEN
-  /// Verifikovan korisnik objavio kvalifikovan oglas — evidentira se odmah (čl. 40a st. 3).
-  OBJAVA_VERIFIKOVAN
+  /// Korisnik objavio kvalifikovan oglas — evidentira se odmah (čl. 40a st. 3).
+  /// Od 2026-08-11 važi za svakoga; ranije se zvao OBJAVA_VERIFIKOVAN, jer se
+  /// neverifikovanom doprinos tada samo beležio i čekao drugi okidač.
+  OBJAVA
 }
 
 /// Doprinos sadržaju platforme — osmi kanal evidentiranja (Pravilnik čl. 15 t. 8,

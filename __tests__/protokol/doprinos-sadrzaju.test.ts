@@ -31,7 +31,7 @@ import {
   smeDaPostaviOglas,
   smeDaSalje,
   zabeleziDoprinos,
-  evidentirajZateceneVerifikovane,
+  evidentirajZatecene,
   ponistiZabelezen,
   probajEvidentirati,
 } from "@/lib/protokol/doprinos-sadrzaju";
@@ -193,42 +193,45 @@ describe("zabeleziDoprinos", () => {
     await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(false);
   });
 
-  it("NEVERIFIKOVANOM beleženje ništa ne emituje — čeka okidač (čl. 40a st. 4)", async () => {
-    prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
-    await zabeleziDoprinos("u1", { id: "o1", ...oglas() });
-    expect(emitujPoenMock).not.toHaveBeenCalled();
-  });
-
-  it("VERIFIKOVANOM se evidentira odmah po objavi (čl. 40a st. 3)", async () => {
-    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "REGULARNI" });
+  /** Podesi mock-ove tako da evidentiranje odmah po objavi prođe do emisije. */
+  function evidentiranjeProlaziOdmah() {
     prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
     prismaMock.doprinosSadrzaju.findFirst.mockResolvedValue({ id: "d1", iznos: IZNOS });
     prismaMock.wallet.findUnique.mockResolvedValue({ id: "w1" });
     prismaMock.doprinosSadrzaju.updateMany.mockResolvedValue({ count: 1 });
+  }
+
+  // 🔴 Jezgro izmene od 2026-08-11: doprinos se evidentira u trenutku objave svakome,
+  // pa i nalogu čija stvarnost nije potvrđena. Ranije je njemu samo beležen.
+  it("NEVERIFIKOVANOM se evidentira odmah po objavi (čl. 40a st. 3)", async () => {
+    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NEVERIFIKOVAN" });
+    evidentiranjeProlaziOdmah();
 
     await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
 
     expect(emitujPoenMock).toHaveBeenCalledTimes(1);
     expect(emitujPoenMock.mock.calls[0][1]).toBe(IZNOS);
-    // Okidač mora da bude istinit: nije verifikacija, nego objava verifikovanog.
-    expect(prismaMock.doprinosSadrzaju.updateMany.mock.calls[0][0].data.okidac).toBe(
-      "OBJAVA_VERIFIKOVAN",
-    );
+    expect(prismaMock.doprinosSadrzaju.updateMany.mock.calls[0][0].data.okidac).toBe("OBJAVA");
   });
 
-  it("NOSILAC_ZRNA se tretira kao verifikovan", async () => {
-    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NOSILAC_ZRNA" });
-    prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
-    prismaMock.doprinosSadrzaju.findFirst.mockResolvedValue({ id: "d1", iznos: IZNOS });
-    prismaMock.wallet.findUnique.mockResolvedValue({ id: "w1" });
-    prismaMock.doprinosSadrzaju.updateMany.mockResolvedValue({ count: 1 });
-
+  it("tip naloga se uopšte ne čita — evidentira se svakome", async () => {
+    evidentiranjeProlaziOdmah();
     await zabeleziDoprinos("u1", { id: "o1", ...oglas() });
+    expect(prismaMock.user.findUnique).not.toHaveBeenCalled();
     expect(emitujPoenMock).toHaveBeenCalledTimes(1);
   });
 
-  it("neuspeh evidentiranja ne obara objavu — beleženje ostaje uspešno", async () => {
+  it("VERIFIKOVANOM se evidentira odmah po objavi (čl. 40a st. 3)", async () => {
     prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "REGULARNI" });
+    evidentiranjeProlaziOdmah();
+
+    await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
+
+    expect(emitujPoenMock).toHaveBeenCalledTimes(1);
+    expect(prismaMock.doprinosSadrzaju.updateMany.mock.calls[0][0].data.okidac).toBe("OBJAVA");
+  });
+
+  it("neuspeh evidentiranja ne obara objavu — beleženje ostaje uspešno", async () => {
     prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
     prismaMock.doprinosSadrzaju.findFirst.mockRejectedValue(new Error("baza pukla"));
 
@@ -346,11 +349,11 @@ describe("ponistiZabelezen", () => {
 
 // ─── Brana iz odeljka 05 ─────────────────────────────────────────────────────
 
-// ─── Prelazna radnja: zatečeni doprinosi verifikovanih ───────────────────────
+// ─── Prelazna radnja: zatečeni doprinosi ─────────────────────────────────────
 
-describe("evidentirajZateceneVerifikovane", () => {
-  /** Pomoćnik: red iz findMany sa ugnežđenim tipom naloga. */
-  const red = (userId: string, tip: string) => ({ userId, iznos: IZNOS, user: { tipKorisnika: tip } });
+describe("evidentirajZatecene", () => {
+  /** Pomoćnik: red iz spiska zabeleženih. Tip naloga se više ne čita. */
+  const red = (userId: string) => ({ userId, iznos: IZNOS });
 
   /**
    * Funkcija čita dva spiska: zabeležene (za evidentiranje) i evidentirane bez
@@ -373,48 +376,37 @@ describe("evidentirajZateceneVerifikovane", () => {
     prismaMock.doprinosSadrzaju.updateMany.mockResolvedValue({ count: 1 });
   }
 
-  it("razrešava verifikovane, a neverifikovane preskače", async () => {
-    spiskovi([red("u1", "REGULARNI"), red("u2", "NEVERIFIKOVAN"), red("u3", "NOSILAC_ZRNA")]);
+  it("razrešava sve zatečene, i one bez potvrde", async () => {
+    spiskovi([red("u1"), red("u2"), red("u3")]);
     evidentiranjeProlazi();
 
-    const r = await evidentirajZateceneVerifikovane();
+    const r = await evidentirajZatecene();
 
     expect(r.ukupnoZabelezenih).toBe(3);
-    expect(r.evidentirano).toBe(2);
-    expect(r.preskocenoNeverifikovanih).toBe(1);
-    expect(r.poenUOpticaj).toBe(2 * IZNOS);
-    expect(emitujPoenMock).toHaveBeenCalledTimes(2);
-  });
-
-  it("neverifikovanom ne emituje ništa — njegov doprinos i dalje čeka okidač", async () => {
-    spiskovi([red("u1", "NEVERIFIKOVAN")]);
-    evidentiranjeProlazi();
-
-    const r = await evidentirajZateceneVerifikovane();
-    expect(r.evidentirano).toBe(0);
-    expect(emitujPoenMock).not.toHaveBeenCalled();
+    expect(r.evidentirano).toBe(3);
+    expect(r.poenUOpticaj).toBe(3 * IZNOS);
+    expect(emitujPoenMock).toHaveBeenCalledTimes(3);
   });
 
   it("idempotentno: drugi prolaz ne evidentira dvaput (rezervacija ne prolazi)", async () => {
-    spiskovi([red("u1", "REGULARNI")]);
+    spiskovi([red("u1")]);
     prismaMock.doprinosSadrzaju.findFirst.mockResolvedValue({ id: "d", iznos: IZNOS });
     prismaMock.wallet.findUnique.mockResolvedValue({ id: "w" });
     prismaMock.doprinosSadrzaju.updateMany
       .mockResolvedValueOnce({ count: 1 })
       .mockResolvedValueOnce({ count: 0 });
 
-    expect((await evidentirajZateceneVerifikovane()).evidentirano).toBe(1);
-    expect((await evidentirajZateceneVerifikovane()).evidentirano).toBe(0);
+    expect((await evidentirajZatecene()).evidentirano).toBe(1);
+    expect((await evidentirajZatecene()).evidentirano).toBe(0);
     expect(emitujPoenMock).toHaveBeenCalledTimes(1);
   });
 
   it("prazan spisak ne radi ništa", async () => {
     spiskovi([]);
-    const r = await evidentirajZateceneVerifikovane();
+    const r = await evidentirajZatecene();
     expect(r).toEqual({
       ukupnoZabelezenih: 0,
       evidentirano: 0,
-      preskocenoNeverifikovanih: 0,
       poenUOpticaj: 0,
       naknadnoObavesteno: 0,
     });
@@ -423,7 +415,7 @@ describe("evidentirajZateceneVerifikovane", () => {
   it("naknadno javlja onima kojima je doprinos evidentiran bez obaveštenja", async () => {
     spiskovi([], [{ id: "d9", userId: "u9", iznos: IZNOS }]);
 
-    const r = await evidentirajZateceneVerifikovane();
+    const r = await evidentirajZatecene();
 
     expect(r.evidentirano).toBe(0);
     expect(emitujPoenMock).not.toHaveBeenCalled(); // POEN je već emitovan ranije
@@ -436,7 +428,7 @@ describe("evidentirajZateceneVerifikovane", () => {
 
   it("kome je javljeno, tome se ne javlja opet — upit hvata samo obavestenAt: null", async () => {
     spiskovi([]);
-    const r = await evidentirajZateceneVerifikovane();
+    const r = await evidentirajZatecene();
     expect(r.naknadnoObavesteno).toBe(0);
     expect(obavestiMock).not.toHaveBeenCalled();
     const upit = prismaMock.doprinosSadrzaju.findMany.mock.calls.at(-1)?.[0];

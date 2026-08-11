@@ -192,8 +192,8 @@ export default function OsnivaciTab({
     if (res.ok) { await refetch(); onDone(); }
   }
 
-  // Jednokratna prelazna radnja (čl. 40a, prelazni stav) — razrešava doprinose koji
-  // stoje ZABELEZEN kod verifikovanih članova. Idempotentno; drugi klik ne radi ništa.
+  // Jednokratna prelazna radnja (čl. 40a, prelazni stav) — razrešava sve doprinose
+  // koji stoje ZABELEZEN, i one bez potvrde. Idempotentno; drugi klik ne radi ništa.
   async function razresiZatecene() {
     if (!confirm(t("doprinos_zatecene_confirm"))) return;
     setRadnja("zatecene");
@@ -205,7 +205,6 @@ export default function OsnivaciTab({
         ? t("doprinos_zatecene_gotovo", {
             evidentirano: d.evidentirano ?? 0,
             poen: fmt(d.poenUOpticaj ?? 0, locale),
-            preskoceno: d.preskocenoNeverifikovanih ?? 0,
             obavesteno: d.naknadnoObavesteno ?? 0,
           })
         : (d.error ?? t("greska_generalna")),

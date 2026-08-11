@@ -3,8 +3,9 @@
  *
  * Nadogradnja osmog kanala: umesto jednokratnih 1.000 POEN-a za prvi oglas,
  * korisnik prolazi lestvicu od pet koraka × 1.000 POEN, uz doživotnu kapu od
- * 5.000 POEN. Korak 1 je ZATEČENI doprinos sadržaju i ostaje netaknut — i po
- * iznosu i po odloženom evidentiranju; ovaj modul vodi korake 2–5.
+ * 5.000 POEN. Korak 1 je ZATEČENI doprinos sadržaju iz čl. 40a i ostaje netaknut
+ * po iznosu; ovaj modul vodi korake 2–5. Od 2026-08-11 se svaki pređen korak
+ * evidentira odmah, i korisniku čija stvarnost nije potvrđena — kao i čl. 40a.
  *
  * 🔴 Razmena se NE označava i NE vodi kao zaseban zapis. Brojač čita same upise
  * POEN-a (`TransactionType.TRANSFER`): svaki čovek van kruga poznanstava sa kojim
@@ -216,16 +217,10 @@ export async function probajNapredovati(userId: string): Promise<number> {
 
     if (novih === 0) return 0;
 
-    // Isto pravilo kao u čl. 40a: nalogu čija je stvarnost potvrđena doprinos se
-    // evidentira odmah, neverifikovanom ostaje zabeležen do verifikacije. Tip
-    // naloga se čita IZ BAZE — sesija se osvežava sa zakašnjenjem.
-    const korisnik = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { tipKorisnika: true },
-    });
-    if (korisnik && korisnik.tipKorisnika !== "NEVERIFIKOVAN") {
-      await probajEvidentiratiKorake(userId);
-    }
+    // Isto pravilo kao u čl. 40a: pređen korak se evidentira odmah, bez obzira na to
+    // da li je korisnikova stvarnost potvrđena (izmena od 2026-08-11 — ranije je
+    // neverifikovanom ostajao zabeležen do verifikacije).
+    await probajEvidentiratiKorake(userId);
     return novih;
   } catch (e) {
     console.error("[doprinos-razmeni] napredovanje nije uspelo", { userId, e });
@@ -234,9 +229,10 @@ export async function probajNapredovati(userId: string): Promise<number> {
 }
 
 /**
- * Pretvara zabeležene korake u zapise POEN-a. Poziva se pri verifikaciji i pri
- * primljenom POEN-u — istim okidačima kao čl. 40a, jer je uslov isti: nalog čija
- * stvarnost nije potvrđena ne sme da pomera opticaj.
+ * Pretvara zabeležene korake u zapise POEN-a. Zove se odmah po beleženju koraka, a
+ * uz to i pri verifikaciji i pri primljenom POEN-u — ti pozivi su od 2026-08-11
+ * samo mreža ispod: hvataju korake koji su ostali zabeleženi jer je emisija pukla,
+ * i zatečene redove iz vremena kad se čekalo na okidač.
  *
  * MORA se zvati VAN `prisma.$transaction()`. Ne baca.
  *
@@ -395,7 +391,11 @@ export async function zabeleziUpit(oglasId: string, posiljacId: string): Promise
 
 // ─── Prikaz ──────────────────────────────────────────────────────────────────
 
-/** Zbir koraka koji čekaju okidač — prikazuje se uz zabeležen doprinos čl. 40a. */
+/**
+ * Zbir koraka koji još nisu pretvoreni u zapis POEN-a — prikazuje se uz zabeležen
+ * doprinos čl. 40a. Od 2026-08-11 to su samo zatečeni redovi i retke neuspele
+ * emisije; redovnim putem korak ne ostaje zabeležen.
+ */
 export async function dohvatiZabelezeneKorake(userId: string): Promise<number> {
   const redovi = await prisma.doprinosRazmeni.findMany({
     where: { userId, status: DoprinosStatus.ZABELEZEN },

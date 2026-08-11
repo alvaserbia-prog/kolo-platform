@@ -195,10 +195,9 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  // Doprinos sadržaju platforme (čl. 40a). Beleži se za PRVU ponudu koja ispunjava
-  // sadržinski minimum — i verifikovanom i neverifikovanom korisniku. Do okidača
-  // (verifikacija ili primljen POEN) to NIJE zapis POEN-a: ništa se ne emituje, ni
-  // opticaj ni ijedan sistemski prag se ne pomera.
+  // Doprinos sadržaju platforme (čl. 40a) — 1.000 POEN za PRVU ponudu koja ispunjava
+  // sadržinski minimum. Od 2026-08-11 se evidentira ODMAH, i korisniku čija stvarnost
+  // još nije potvrđena; ranije je njemu samo beležen i čekao je okidač.
   await zabeleziDoprinos(session.user.id, { id: listing.id, ...oglasZaProveru, images: imagePaths });
 
   // Nov oglas pomera brojač koraka 3 na putanji doprinosa razmeni (čl. 40a).

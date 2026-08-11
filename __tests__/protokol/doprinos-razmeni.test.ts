@@ -333,13 +333,18 @@ describe("probajNapredovati", () => {
     expect(emitujPoenMock).toHaveBeenCalledTimes(1);
   });
 
-  it("neverifikovanom korisniku korak ostaje ZABELEZEN — ništa se ne emituje", async () => {
+  // Izmena od 2026-08-11: korak se evidentira odmah i korisniku čija stvarnost nije
+  // potvrđena — isto pravilo kao u čl. 40a. Ranije mu je ostajao ZABELEZEN.
+  it("neverifikovanom korisniku se korak evidentira odmah, bez čitanja tipa naloga", async () => {
     postaviUcinakUBazi({ upisi: [{ drugiId: "b", iznos: 1500, jaSaljem: true }] });
     prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NEVERIFIKOVAN" });
     prismaMock.doprinosRazmeni.create.mockResolvedValue({});
+    prismaMock.doprinosRazmeni.findMany.mockResolvedValue([{ id: "k2", korak: 2, iznos: 1000 }]);
+    prismaMock.doprinosRazmeni.updateMany.mockResolvedValue({ count: 1 });
+    emitujPoenMock.mockResolvedValue({ transaction: { id: "t2" } });
 
     expect(await probajNapredovati("ja")).toBe(1);
-    expect(emitujPoenMock).not.toHaveBeenCalled();
+    expect(emitujPoenMock).toHaveBeenCalledTimes(1);
   });
 
   it("nikada ne beleži korak preko petog — kapa je 5.000 POEN", async () => {

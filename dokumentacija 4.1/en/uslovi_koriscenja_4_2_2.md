@@ -132,7 +132,7 @@ A verified user may, starting from a published listing, initiate a direct conver
 
 A verified user who has the right to verify may verify the advertiser if they know them personally, using a one-time code that the advertiser generates. Verification is carried out under the same conditions and checks established by the Rulebook on Proof of Reality (including the anti-circular rule, capacity, and oversight).
 
-For the first listing in which they offer a good or a service and which meets the content minimum, a contribution to platform content is recorded for the user under the conditions set out in Art. 40a of the Rulebook on the KOLO System. For a verified user, the contribution is recorded upon posting. For an unverified user, the contribution is noted upon posting and recorded only once the trigger established by that Article occurs.
+For the first listing in which they offer a good or a service and which meets the content minimum, a contribution to platform content is recorded for the user under the conditions set out in Art. 40a of the Rulebook on the KOLO System. The contribution is recorded upon the posting of the listing, irrespective of whether the user's reality has been confirmed.
 
 That contribution is the first step of the exchange contribution path (Art. 40b of the Rulebook on the KOLO System). When a user initiates a conversation in relation to a listing, the Platform records the fact of the enquiry — which user made contact and in relation to which listing — as that is one of the conditions of that path. The content of the messages is not processed for that purpose. The processing is regulated in more detail by the Platform's Privacy Policy.
 

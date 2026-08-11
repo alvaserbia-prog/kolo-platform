@@ -508,17 +508,15 @@ Korisniku se evidentira doprinos u iznosu od 1.000 POEN-a za prvi oglas kojim nu
 
 Doprinos iz prethodnoga stavka prvi je korak putanje doprinosa razmjeni iz članka 40.b.
 
-Verificiranom korisniku doprinos se evidentira u trenutku objave oglasa.
+Doprinos se evidentira u trenutku objave oglasa, neovisno o tome je li stvarnost korisnika potvrđena u lancu potvrda.
 
-Neverificiranom korisniku doprinos se u trenutku objave oglasa bilježi, a evidentira se u Protokolu kada nastupi prvi od sljedećih događaja: verifikacija korisnika u lancu potvrda, ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu.
+Ranije razlikovanje — prema kojemu se korisniku čija stvarnost nije potvrđena doprinos u trenutku objave samo bilježio, a evidentirao tek po verifikaciji ili po prvom ažuriranju evidencije POEN-a u njegovu korist — više se ne primjenjuje. Od računa bez stvarnog sudjelovanja sustav se štiti sadržajnim minimumom oglasa i ograničenjem broja aktivnih oglasa neverificiranog korisnika, utvrđenima Uvjetima korištenja.
 
-Razlikovanje iz prethodnih dvaju stavaka služi tome da računi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a prije nego što se u sustavu pojavi trag stvarnog sudjelovanja.
-
-Ako oglas bude uklonjen zbog povrede Uvjeta korištenja prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava.
+Ako oglas bude uklonjen zbog povrede Uvjeta korištenja prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava. Već evidentiran doprinos uklanjanjem se oglasa ne poništava.
 
 Evidentiranje doprinosa sadržaju platforme automatski je akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa Podrške.
 
-Korisniku koji je verificiran na dan stupanja na snagu ovoga stavka, a čiji je doprinos zabilježen a nije evidentiran, doprinos se evidentira jednokratno, u istom iznosu.
+Korisniku čiji je doprinos zabilježen a nije evidentiran do dana stupanja na snagu ovoga stavka, doprinos se evidentira jednokratno, u istom iznosu, neovisno o tome je li njegova stvarnost potvrđena.
 
 ### Članak 40.b
 
@@ -528,7 +526,7 @@ Prvi oglas korisniku otvara prostor za razmjenu, ali ga sam u nju ne uvodi: ogla
 
 Koraci putanje jesu:
 
-1) doprinos iz članka 40.a — prvi oglas kojim korisnik nudi dobro ili uslugu i koji ispunjava sadržajni minimum, evidentiran pod uvjetima iz toga članka (verificiranom korisniku pri objavi, neverificiranom po verifikaciji ili po prvom ažuriranju evidencije POEN-a u njegovu korist);
+1) doprinos iz članka 40.a — prvi oglas kojim korisnik nudi dobro ili uslugu i koji ispunjava sadržajni minimum, evidentiran pod uvjetima iz toga članka, u trenutku objave oglasa;
 
 2) prva razmjena u kojoj korisnik ažurira evidenciju POEN-a u korist korisnika izvan svoga kruga poznanstava;
 
@@ -556,7 +554,7 @@ Upitom se smatra pokretanje razgovora povodom oglasa. Bilježi se činjenica upi
 
 Ispunjenost se uvjeta ocjenjuje prema stanju u trenutku evidentiranja. Kasnija promjena okolnosti — osobito ako korisnik nakon razmjene verificira korisnika s kojim je razmjenjivao i time ga uvede u svoj krug poznanstava — utječe na daljnje korake, ali ne poništava već evidentiran doprinos. Evidentiran se doprinos poništava isključivo u postupku utvrđenom Pravilnikom o dokazu stvarnosti.
 
-Za korisnika čija stvarnost nije potvrđena prijeđeni se korak bilježi, a evidentira se pod uvjetima iz članka 40.a.
+Prijeđeni se korak evidentira u trenutku ispunjenja njegovih uvjeta, neovisno o tome je li stvarnost korisnika potvrđena — kao i doprinos iz članka 40.a.
 
 Evidentiranje doprinosa kroz putanju automatski je akt Protokola i ne ulazi u dnevni limit utvrđen Pravilnikom o operativnom doprinosu i pravilnicima Programa Podrške.
 
@@ -800,7 +798,7 @@ Transparentnost evidencije osigurava nadzor sustava od strane korisnika i smanju
 
 Transparentnost evidencije ne obuhvaća podatke čija bi objava narušila privatnost korisnika — graf verifikacija, dobrovoljno unesene podatke i posebne kategorije podataka. Pseudonimna je evidencija doprinosa dostupna verificiranim korisnicima, dok posjetitelji i neverificirani korisnici vide opće pokazatelje (agregate) u skladu s člankom 28. Pregled oglasa u platformskom prostoru za oglašavanje uređuje se posebno (čl. 16.) i razlikuje se od evidencije doprinosa. Opseg javne dostupnosti podataka utvrđuje se Politikom privatnosti.
 
-Korisnik u svakom trenutku vidi vlastite zapise i vlastiti zabilježeni doprinos koji još nije evidentiran (članak 40.a stavak 4.). Zabilježeni doprinos nije vidljiv drugim korisnicima i ne ulazi u javne agregate dok ne bude evidentiran.
+Korisnik u svakom trenutku vidi vlastite zapise i vlastiti zabilježeni doprinos koji još nije evidentiran (članak 40.a). Zabilježeni doprinos nije vidljiv drugim korisnicima i ne ulazi u javne agregate dok ne bude evidentiran.
 
 ## X — Pravna priroda KOLO sustava i četiri načela
 

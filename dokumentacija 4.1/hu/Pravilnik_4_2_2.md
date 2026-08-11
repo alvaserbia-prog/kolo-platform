@@ -508,17 +508,15 @@ A felhasználó javára 1.000 POEN összegű hozzájárulás kerül nyilvántart
 
 Az előző bekezdés szerinti hozzájárulás a 40.b cikk szerinti, cseréhez való hozzájárulás útjának első lépése.
 
-Hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba.
+A hozzájárulás a hirdetés közzétételének pillanatában kerül nyilvántartásba, függetlenül attól, hogy a felhasználó valódiságát a megerősítési láncban megerősítették-e.
 
-Nem hitelesített felhasználó esetében a hozzájárulás a hirdetés közzétételének pillanatában kerül feljegyzésre, a Protokollban pedig akkor kerül nyilvántartásba, amikor a következő események közül az első bekövetkezik: a felhasználó hitelesítése a megerősítési láncban, vagy a POEN-nyilvántartás frissítése az adott felhasználó javára. A nyilvántartásba vételig a hozzájárulás nem minősül POEN-bejegyzésnek, és nem számít bele a rendszerben nyilvántartásba vett POEN-ek teljes számába.
+A korábbi megkülönböztetés — amely szerint annak a felhasználónak, akinek valódiságát nem erősítették meg, a hozzájárulás a közzétételkor csupán feljegyzésre került, és csak a hitelesítéskor vagy a javára történő első POEN-nyilvántartás-frissítéskor került nyilvántartásba — a továbbiakban nem alkalmazandó. A tényleges részvétel nélküli fiókokkal szemben a rendszert a hirdetés tartalmi minimuma és a nem hitelesített felhasználó aktív hirdetéseinek a Felhasználási feltételekben megállapított darabszám-korlátja védi.
 
-Az előző két bekezdésben tett megkülönböztetés célja annak megakadályozása, hogy a valódiságukban meg nem erősített fiókok még azelőtt növeljék a nyilvántartásba vett POEN-ek teljes számát, hogy a rendszerben a tényleges részvétel nyoma megjelenne.
-
-Ha a hirdetés a Felhasználási feltételek megsértése miatt eltávolításra kerül azelőtt, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás megsemmisül.
+Ha a hirdetés a Felhasználási feltételek megsértése miatt eltávolításra kerül azelőtt, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás megsemmisül. A már nyilvántartásba vett hozzájárulást a hirdetés eltávolítása nem semmisíti meg.
 
 A platform tartalmához való hozzájárulás nyilvántartásba vétele a Protokoll automatikus aktusa, és nem számít bele a működési hozzájárulásról szóló szabályzatban és a Támogatási Programok szabályzataiban megállapított napi korlátba.
 
-Annak a felhasználónak, aki e bekezdés hatálybalépésének napján hitelesített, és akinek hozzájárulása feljegyzésre került, de nyilvántartásba nem, a hozzájárulás egyszeri alkalommal, azonos összegben kerül nyilvántartásba.
+Annak a felhasználónak, akinek hozzájárulása e bekezdés hatálybalépésének napjáig feljegyzésre került, de nyilvántartásba nem, a hozzájárulás egyszeri alkalommal, azonos összegben kerül nyilvántartásba, függetlenül attól, hogy valódiságát megerősítették-e.
 
 ### 40.b cikk
 
@@ -528,7 +526,7 @@ Az első hirdetés megnyitja a felhasználó előtt a csere terét, de önmagáb
 
 Az út lépései:
 
-1) a 40.a cikk szerinti hozzájárulás — az első hirdetés, amellyel a felhasználó javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, az említett cikk feltételei szerint nyilvántartásba véve (hitelesített felhasználó esetében a közzétételkor, nem hitelesített esetében a hitelesítéskor vagy a javára történő első POEN-nyilvántartás-frissítéskor);
+1) a 40.a cikk szerinti hozzájárulás — az első hirdetés, amellyel a felhasználó javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, az említett cikk feltételei szerint, a hirdetés közzétételének pillanatában nyilvántartásba véve;
 
 2) az első csere, amelyben a felhasználó az ismeretségi körén kívüli felhasználó javára frissíti a POEN-nyilvántartást;
 
@@ -556,7 +554,7 @@ Megkeresésnek minősül a hirdetés kapcsán indított beszélgetés. A megkere
 
 A feltételek teljesülését a nyilvántartásba vétel időpontjában fennálló állapot szerint kell megítélni. A körülmények utóbb bekövetkező változása — különösen, ha a felhasználó a csere után hitelesíti azt a felhasználót, akivel cserélt, és ezzel bevonja őt az ismeretségi körébe — a további lépésekre hat ki, de a már nyilvántartásba vett hozzájárulást nem szünteti meg. A nyilvántartásba vett hozzájárulás kizárólag a valóságbizonyítékról szóló szabályzatban megállapított eljárásban szüntethető meg.
 
-Annak a felhasználónak, akinek valóságát nem erősítették meg, a teljesített lépés feljegyzésre kerül, és a 40.a cikk feltételei szerint kerül nyilvántartásba.
+A teljesített lépés a feltételeinek teljesülése pillanatában kerül nyilvántartásba, függetlenül attól, hogy a felhasználó valódiságát megerősítették-e — akárcsak a 40.a cikk szerinti hozzájárulás.
 
 A hozzájárulás úton keresztüli nyilvántartásba vétele a Protokoll automatikus aktusa, és nem számít bele a működési hozzájárulásról szóló szabályzatban és a Támogatási Programok szabályzataiban megállapított napi limitbe.
 
@@ -800,7 +798,7 @@ A nyilvántartás átláthatósága biztosítja a rendszer felhasználók által
 
 A nyilvántartás átláthatósága nem terjed ki azokra az adatokra, amelyek közzététele sértené a felhasználók magánéletét — a hitelesítési gráfra, az önkéntesen megadott adatokra és az adatok különleges kategóriáira. Az álneves hozzájárulási nyilvántartás a hitelesített felhasználók számára elérhető, míg a látogatók és a nem hitelesített felhasználók a 28. cikkel összhangban általános mutatókat (összesítéseket) látnak. A platform hirdetési terében a hirdetések megtekintése külön kerül rendezésre (16. cikk), és eltér a hozzájárulási nyilvántartástól. Az adatok nyilvános hozzáférhetőségének terjedelmét az adatvédelmi szabályzat állapítja meg.
 
-A felhasználó minden pillanatban látja saját bejegyzéseit és saját feljegyzett, még nyilvántartásba nem vett hozzájárulását (40.a cikk 4. bekezdés). A feljegyzett hozzájárulás a többi felhasználó számára nem látható, és a nyilvántartásba vételig nem számít bele a nyilvános összesítésekbe.
+A felhasználó minden pillanatban látja saját bejegyzéseit és saját feljegyzett, még nyilvántartásba nem vett hozzájárulását (40.a cikk). A feljegyzett hozzájárulás a többi felhasználó számára nem látható, és a nyilvántartásba vételig nem számít bele a nyilvános összesítésekbe.
 
 ## X — A KOLO rendszer jogi természete és a négy elv
 

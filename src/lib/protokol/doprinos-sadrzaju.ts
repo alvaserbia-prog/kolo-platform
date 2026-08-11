@@ -2,26 +2,26 @@
  * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
  * Osnov: Pravilnik o KOLO sistemu 4.1.1 čl. 15 tačka 8 i čl. 40a.
  *
- * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
- * ali samo za nalog čija stvarnost nije potvrđena:
+ * 🔴 ČEKANJA VIŠE NEMA (odluka vlasnika, 2026-08-11). Svakom korisniku — i onom
+ * čija stvarnost još nije potvrđena — doprinos se evidentira u trenutku objave
+ * kvalifikovanog oglasa:
  *
- *   VERIFIKOVAN objavi oglas    →  EVIDENTIRAN odmah (čl. 40a st. 3)
+ *   BILO KO objavi kvalifikovanu ponudu  →  EVIDENTIRAN odmah (čl. 40a st. 3)
  *
- *   NEVERIFIKOVAN objavi oglas  →  ZABELEZEN (nije zapis POEN-a, ne ulazi ni u
- *                                  jedno stanje, ni u opticaj, ni u agregate)
- *   pa verifikacija ILI primljen POEN  →  EVIDENTIRAN (čl. 40a st. 4)
+ * Do ove izmene je neverifikovanom korisniku doprinos samo BELEŽEN, pa je zapis
+ * POEN-a nastajao tek kad nastupi okidač (verifikacija ili primljen POEN). Svrha
+ * tog čekanja bila je da pedeset praznih naloga sa pedeset oglasa ne naduva
+ * opticaj — a opticaj okida osnivački korak od 24.000 POEN-a i gasi prelazno
+ * ograničenje iz čl. 22 Pravilnika o dokazu stvarnosti. Vlasnik je ocenio da je
+ * važnije da novi čovek odmah vidi šta je dobio za objavljen oglas; ta izloženost
+ * je svesno prihvaćena i ostaje samo u sadržinskom minimumu i u ograničenju od
+ * tri aktivna oglasa (Uslovi), koje prazan nalog mora da ispuni.
  *
- * Bez tog razdvajanja bi neko mogao da otvori pedeset praznih naloga, okači
- * pedeset oglasa i time naduva opticaj — a opticaj okida osnivački korak od
- * 24.000 POEN-a i gasi prelazno ograničenje iz čl. 22 Pravilnika o dokazu
- * stvarnosti. Ovako prazan nalog ne pomera nijedan sistemski broj dok mu se
- * neko stvarno ne javi.
- *
- * Čekanje se NE primenjuje na verifikovanog jer tu ne štiti ni od čega: nalog
- * čija je stvarnost potvrđena nije prazan nalog. Ranija verzija čl. 40a nije
- * pravila tu razliku, pa je verifikovanom članu doprinos stajao zabeležen i
- * čekao okidač koji mu je već bio iza leđa (verifikacija) — vidi prelazni stav
- * čl. 40a i `evidentirajZateceneVerifikovane()`.
+ * `DoprinosStatus.ZABELEZEN` zato više ne nastaje redovnim putem. Ostaje kao
+ * prelazno stanje unutar `probajEvidentirati()` (rezervacija pre emisije, povratak
+ * ako emisija pukne) i za zatečene redove iz vremena čekanja — njih razrešava
+ * `evidentirajZatecene()`, a usput ih pokupi i svaki okidač koji je i ranije
+ * postojao (verifikacija, primljen POEN).
  *
  * Obrazac poziva (obavezan):
  *   - DB promene u jednoj `prisma.$transaction()`
@@ -47,10 +47,10 @@ export * from "@/lib/doprinos-pravila";
  * po čoveku obezbeđuje jedinstveni indeks nad `userId`, ne kod — dve paralelne
  * objave ne mogu da zabeleže dva doprinosa.
  *
- * VERIFIKOVANOM korisniku doprinos se odmah i evidentira (čl. 40a st. 3): čekanje
- * na okidač postoji da prazan nalog ne naduva opticaj, a nalog čija je stvarnost
- * potvrđena nije prazan nalog — za njega čekanje ne štiti ni od čega.
- * NEVERIFIKOVANOM ostaje zabeležen dok ne nastupi okidač (st. 4).
+ * Doprinos se odmah i evidentira (čl. 40a st. 3), bez obzira na to da li je
+ * korisnikova stvarnost potvrđena. Beleženje i evidentiranje su od 2026-08-11 isti
+ * trenutak; `ZABELEZEN` ostaje samo kao prelazno stanje unutar `probajEvidentirati()`
+ * (i za zatečene redove iz vremena kad se čekalo na okidač).
  *
  * Ne beleži ništa ako oglas nije ponuda ili ne ispunjava sadržinski minimum.
  * Ne baca: neuspeh beleženja ne sme da obori objavu oglasa koji je već upisan.
@@ -79,15 +79,10 @@ export async function zabeleziDoprinos(
 
   await logAdminAkcija(userId, "DOPRINOS_SADRZAJU_ZABELEZEN", oglas.id, `${IZNOS} POEN`);
 
-  // Uslov je TIP NALOGA, ne indeks: ko je jednom verifikovan ostaje verifikovan i
-  // ako mu indeks kasnije padne. Čita se iz baze — sesija se osvežava sa zakašnjenjem.
-  const korisnik = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { tipKorisnika: true },
-  });
-  if (korisnik && korisnik.tipKorisnika !== "NEVERIFIKOVAN") {
-    await probajEvidentirati(userId, DoprinosOkidac.OBJAVA_VERIFIKOVAN);
-  }
+  // Bez provere tipa naloga: od 2026-08-11 doprinos se evidentira svakome u trenutku
+  // objave. Ne baca — ako emisija pukne, doprinos ostaje ZABELEZEN i pokupi ga prvi
+  // sledeći okidač (verifikacija, primljen POEN) ili admin dugme.
+  await probajEvidentirati(userId, DoprinosOkidac.OBJAVA);
 
   return true;
 }
@@ -118,7 +113,7 @@ export async function ponistiZabelezen(oglasId: string, adminId?: string): Promi
  * Zašto zaseban `obavestenAt`, a ne `evidentiranAt`: zapis POEN-a ne sme da čeka
  * na obaveštenje (mejl/push idu van transakcije i umeju da padnu), a obaveštenje
  * ne sme da ode dvaput. `EVIDENTIRAN` uz `obavestenAt: null` znači „duguje se
- * javljanje" — to stanje `evidentirajZateceneVerifikovane()` naknadno pokupi.
+ * javljanje" — to stanje `evidentirajZatecene()` naknadno pokupi.
  *
  * Ne baca: doprinos je već evidentiran u trenutku poziva i ne poništava se zato
  * što obaveštenje nije prošlo.
@@ -248,12 +243,13 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
 }
 
 /**
- * Jednokratno evidentiranje zatečenih doprinosa verifikovanih korisnika
- * (čl. 40a, prelazni stav).
+ * Jednokratno evidentiranje SVIH zatečenih doprinosa (čl. 40a, prelazni stav).
  *
- * Do izmene čl. 40a doprinos je verifikovanom korisniku samo BELEŽEN i čekao je
- * okidač — a verifikacija mu je već bila iza leđa, pa mu je ostajao samo primljen
- * POEN. Ovim se ta grupa razrešava; neverifikovani ostaju da čekaju.
+ * Dva talasa zatečenih redova, oba iz vremena kad se čekalo na okidač:
+ *  - verifikovani, kojima je okidač već bio iza leđa (razrešeno 2026-08-09);
+ *  - neverifikovani, koji od 2026-08-11 više nemaju šta da čekaju — doprinos se
+ *    svakome evidentira u trenutku objave, pa im se duguje unazad.
+ * Nijedan zabeležen doprinos se više ne preskače.
  *
  * Ide sekvencijalno kroz `probajEvidentirati` — svaki poziv otvara sopstvenu
  * emisiju, pa se ne sme paralelizovati ni umotati u transakciju. Idempotentno:
@@ -270,28 +266,22 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
  * postojalo. Ponovni pritisak je bezopasan: ništa se ne emituje dvaput i nikome
  * se ne javlja dvaput.
  */
-export async function evidentirajZateceneVerifikovane(): Promise<{
+export async function evidentirajZatecene(): Promise<{
   ukupnoZabelezenih: number;
   evidentirano: number;
-  preskocenoNeverifikovanih: number;
   poenUOpticaj: number;
   naknadnoObavesteno: number;
 }> {
   const zabelezeni = await prisma.doprinosSadrzaju.findMany({
     where: { status: DoprinosStatus.ZABELEZEN },
-    select: { userId: true, iznos: true, user: { select: { tipKorisnika: true } } },
+    select: { userId: true, iznos: true },
   });
 
   let evidentirano = 0;
-  let preskoceno = 0;
   let poen = 0;
 
   for (const d of zabelezeni) {
-    if (d.user.tipKorisnika === "NEVERIFIKOVAN") {
-      preskoceno += 1;
-      continue;
-    }
-    const uspeh = await probajEvidentirati(d.userId, DoprinosOkidac.OBJAVA_VERIFIKOVAN);
+    const uspeh = await probajEvidentirati(d.userId, DoprinosOkidac.OBJAVA);
     if (uspeh) {
       evidentirano += 1;
       poen += d.iznos;
@@ -312,7 +302,6 @@ export async function evidentirajZateceneVerifikovane(): Promise<{
   return {
     ukupnoZabelezenih: zabelezeni.length,
     evidentirano,
-    preskocenoNeverifikovanih: preskoceno,
     poenUOpticaj: poen,
     naknadnoObavesteno,
   };

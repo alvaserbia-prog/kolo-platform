@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_2_1.md`, `uslovi_koriscenja_4_2_1.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_2_2.md`, `uslovi_koriscenja_4_2_2.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -24,69 +24,83 @@ const JEZICI = ["sr", "en", "ru", "hr", "hu"] as const;
 
 /** Svi akti koje javne stranice traže — mora se poklapati sa `page.tsx` referencama. */
 const AKTI = [
-  // Set je od 4.2.1 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
+  // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_2_1.md",
-  "dokaz_stvarnosti_4_2_1.md",
-  "DPIA_4_2_1.md",
-  "radnje_obrade_4_2_1.md",
-  "uslovi_koriscenja_4_2_1.md",
-  "politika_4_2_1.md",
+  "Pravilnik_4_2_2.md",
+  "dokaz_stvarnosti_4_2_2.md",
+  "DPIA_4_2_2.md",
+  "radnje_obrade_4_2_2.md",
+  "uslovi_koriscenja_4_2_2.md",
+  "politika_4_2_2.md",
   "statut_4_1_0.md",
-  "whitepaper_4_2_1.md",
-  "rizici_4_2_1.md",
-  "hijerarhija_4_2_1.md",
-  "donacije_4_2_1.md",
-  "operativni_4_2_1.md",
-  "osnivacki_4_2_1.md",
-  "gornje_kolo_4_2_1.md",
-  "programi_podrske_4_2_1.md",
+  "whitepaper_4_2_2.md",
+  "rizici_4_2_2.md",
+  "hijerarhija_4_2_2.md",
+  "donacije_4_2_2.md",
+  "operativni_4_2_2.md",
+  "osnivacki_4_2_2.md",
+  "gornje_kolo_4_2_2.md",
+  "programi_podrske_4_2_2.md",
 ];
 
 /**
  * Ključne odredbe seta — po jeziku, da fallback na srpski ne prođe neopaženo.
  *
- * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog), i u 4.1.1
- * (postupak izmene; doprinos verifikovanom odmah), i u 4.2.0 (nadzorni predmet,
- * nadoknada): sadržaj starije verzije nije nestao podizanjem broja.
+ * Drže se odredbe uvedene i u 4.1.0 (osmi kanal, oglas neverifikovanog), i u 4.2.0
+ * (nadzorni predmet, nadoknada), i u 4.2.2 (doprinos se evidentira u trenutku objave
+ * SVAKOME): sadržaj starije verzije nije nestao podizanjem broja.
  *
- * 🔴 Provera „Verifikovanom korisniku doprinos" postoji zato što su 4.2.0 dokumenta
- * nastala iz 4.1.0 osnove dok je `main` u međuvremenu izdao 4.1.1. Bez nje bi objava
- * 4.2.0 tiho poništila izmenu čl. 40a iz 4.1.1 i niko to ne bi primetio.
+ * 🔴 Provera „u trenutku objave oglasa, nezavisno" nasleđuje ulogu ranije provere
+ * „Verifikovanom korisniku doprinos": 4.2.0 dokumenta su nastala iz 4.1.0 osnove dok
+ * je `main` u međuvremenu izdao 4.1.1, pa bi objava tiho poništila izmenu čl. 40a i
+ * niko to ne bi primetio. Sada čuva izmenu iz 4.2.2 — da se odloženo evidentiranje
+ * neverifikovanom korisniku ne vrati u akt mimo odluke vlasnika.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_2_1.md": {
+  "Pravilnik_4_2_2.md": {
     sr: [
       "### Član 40a",
-      "Verifikovanom korisniku doprinos se evidentira",
+      "Doprinos se evidentira u trenutku objave oglasa, nezavisno od toga da li je stvarnost korisnika potvrđena",
       "član 20b",
-      // 4.2.1 — putanja doprinosa razmeni. Kapa i prag su brojevi koje kod drži
+      // 4.2.2 — putanja doprinosa razmeni. Kapa i prag su brojevi koje kod drži
       // u konstantama; ako se u aktu izmene a u kodu ne, ili obrnuto, razilaze se
       // norma i primena — pa se traže doslovno.
       "### Član 40b",
       "ne može preći 5.000 POEN-a po korisniku",
       "najmanje 1.000 POEN-a",
     ],
-    en: ["### Article 40a", "Article 20b", "### Article 40b", "may not exceed 5,000 POENs per user"],
-    ru: ["### Статья 40a", "статьёй 20b", "### Статья 40b", "не может превышать 5 000 ПОЕН"],
+    en: [
+      "### Article 40a",
+      "The contribution is recorded at the moment the listing is posted, irrespective of whether",
+      "Article 20b",
+      "### Article 40b",
+      "may not exceed 5,000 POENs per user",
+    ],
+    ru: [
+      "### Статья 40a",
+      "Вклад учитывается в момент размещения объявления, независимо от того",
+      "статьёй 20b",
+      "### Статья 40b",
+      "не может превышать 5 000 ПОЕН",
+    ],
   },
-  "dokaz_stvarnosti_4_2_1.md": {
+  "dokaz_stvarnosti_4_2_2.md": {
     sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_2_1.md": {
+  "radnje_obrade_4_2_2.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15"],
     en: ["Processing activity No. 14", "Processing activity No. 15"],
     ru: ["Операция обработки № 14", "Операция обработки № 15"],
   },
-  "DPIA_4_2_1.md": {
+  "DPIA_4_2_2.md": {
     sr: ["R15 —", "## 5.10."],
     en: ["R15 —", "## 5.10."],
     ru: ["R15 —", "## 5.10."],
   },
-  "uslovi_koriscenja_4_2_1.md": {
+  "uslovi_koriscenja_4_2_2.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
     en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
     ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
@@ -94,7 +108,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
   // odredbe bi gejt (zamrzavanje naloga do prihvatanja) obuhvatio i te obrade, pa
   // pristanak ne bi bio slobodno dat.
-  "politika_4_2_1.md": {
+  "politika_4_2_2.md": {
     sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
     en: ["is not consent for processing whose legal basis is consent"],
     ru: ["не является согласием на обработку"],
@@ -110,7 +124,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
  * mora da ga ukine i u rečniku pojmova, ne samo tamo gde se primenjuje.
  */
 /**
- * Uz ukinutu tablu, ovde stoji i ukinuta TERMINOLOGIJA: od 4.2.1 institut se
+ * Uz ukinutu tablu, ovde stoji i ukinuta TERMINOLOGIJA: od 4.2.2 institut se
  * zove „lanac potvrda", ne „lanac jemstva". Jemstvo je obavezivanje za tuđe
  * buduće ispunjenje, a verifikator tvrdi činjenicu koja u tom trenutku jeste
  * ili nije istinita — što potvrđuje i Glava VIII, koja obara verifikaciju zbog
@@ -144,7 +158,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.2.1", () => {
+describe("kanonski set akata 4.2.2", () => {
   it.each(AKTI)("%s postoji na svim jezicima", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -202,7 +216,7 @@ describe("kanonski set akata 4.2.1", () => {
       hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_2.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -220,7 +234,7 @@ describe("kanonski set akata 4.2.1", () => {
       hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_1.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_2.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
@@ -238,7 +252,7 @@ describe("kanonski set akata 4.2.1", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_2_1.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_2_2.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
