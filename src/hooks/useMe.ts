@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export interface Notifikacija {
   id: string;
@@ -76,9 +76,19 @@ export function useMeEventBridge() {
   }, [qc]);
 }
 
-/** Optimistički lokalni patch keša `['me']` (npr. badge na 0 pre potvrde servera). */
+/**
+ * Optimistički lokalni patch keša `['me']` (npr. badge na 0 pre potvrde servera).
+ *
+ * 🔴 `useCallback` NIJE ukras: bez njega se pri svakom iscrtavanju vraća NOVA
+ * funkcija. Ko je stavi u zavisnosti nekog `useCallback`/`useEffect`-a dobija
+ * efekat koji se okida u krug. Tako je 11.08.2026 ekran za pristanak zvao
+ * `/api/politika/prihvati` 3488 puta za tri sata i vidljivo treperio.
+ */
 export function useMePatch() {
   const qc = useQueryClient();
-  return (delta: Partial<MeData>) =>
-    qc.setQueryData<MeData>(ME_KEY, (prev) => (prev ? { ...prev, ...delta } : prev));
+  return useCallback(
+    (delta: Partial<MeData>) =>
+      qc.setQueryData<MeData>(ME_KEY, (prev) => (prev ? { ...prev, ...delta } : prev)),
+    [qc],
+  );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
@@ -51,6 +51,12 @@ export default function PolitikaPristanak({
   const [prihvatanje, setPrihvatanje] = useState(false);
   const [ucitavanjePuklo, setUcitavanjePuklo] = useState(false);
 
+  // 🔴 `onGotovo` stiže kao inline funkcija sa stranice, dakle NOVA pri svakom
+  // iscrtavanju. U zavisnostima `useCallback`-a ispod bi zato rušio stabilnost
+  // i vraćao petlju provera (vidi komentar uz `useEffect`). Zato ide u ref.
+  const onGotovoRef = useRef(onGotovo);
+  useEffect(() => { onGotovoRef.current = onGotovo; }, [onGotovo]);
+
   /**
    * Keširani `['me']` (odatle AppShell čita `politikaPotrebno`, poll na 30s) MORA
    * da se ispravi čim pristanak legne — inače bi prekrivač ostao na ekranu do
@@ -59,8 +65,8 @@ export default function PolitikaPristanak({
   const zavrsi = useCallback(() => {
     patchMe({ politikaPotrebno: false });
     qc.invalidateQueries({ queryKey: ME_KEY });
-    onGotovo?.();
-  }, [patchMe, qc, onGotovo]);
+    onGotovoRef.current?.();
+  }, [patchMe, qc]);
 
   const ucitaj = useCallback(() => {
     setUcitavanjePuklo(false);
@@ -88,7 +94,15 @@ export default function PolitikaPristanak({
       });
   }, [zavrsi]);
 
-  useEffect(() => { ucitaj(); }, [ucitaj]);
+  // 🔴 Provera se pokreće TAČNO JEDNOM, pri montiranju — namerno prazne
+  // zavisnosti, ne `[ucitaj]`. Dok je u zavisnostima stajala funkcija, dovoljno
+  // je bilo da se ona ponovo napravi pri iscrtavanju pa da se dobije krug:
+  // provera → `setState` → iscrtavanje → provera. U noći 11.08.2026 je tako
+  // otišlo 3488 zahteva na `/api/politika/prihvati` za tri sata, a kartica je
+  // vidljivo treperila (pojavi se sa odgovorom, nestane sa sledećom proverom).
+  // Ponovni pokušaj posle greške ide dugmetom, ne efektom.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { ucitaj(); }, []);
 
   async function prihvati() {
     if (!verzija) return;
