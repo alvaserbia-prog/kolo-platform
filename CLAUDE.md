@@ -207,6 +207,19 @@ Akti: **`dokaz_stvarnosti_4_2_0.md`** (čl. 1, 6, 7, 10, 11, nov **11a**, 12 st.
 - **Put do učešća ide u četiri koraka** na Početnoj (registracija → objava oglasa → potvrda → doprinos). Objava je sada prvi potez novog čoveka, a iznos od 1.000 POEN pominje se tek uz potvrdu.
 - **Pijaca:** oznaka da oglašivač nije verifikovan je **pečat preko fotografije** (bio je sitan tekst uz pseudonim); dugme na kartici razdvojeno po ulozi — gost „Prijavi se", prijavljen neverifikovan „Postavi oglas", verifikovan „Kontaktiraj". Gostu se ranije nudila verifikacija, a on nema ni nalog.
 - **Ekran pri prijavi:** migracija `20260810170000_pristanak_4_2_1` upisuje red `PolitikaVerzija` „4.2.1", pa postojeći gejt u `AppShell` svakome prikaže „Sistem je unapređen — novi akti" sa dugmetom **Pristajem**. Ekran linkuje na `/pravilnik` (ceo set). Migracijom, jer se ovde ne emituje POEN.
+
+### 🔴 Gejt za pristanak je PREKRIVAČ, ne preusmeravanje (2026-08-11)
+Do ove izmene je `AppShell` na svaku promenu rute radio `router.replace("/politika-prihvati")`. Dva kvara, oba viđena u dnevniku aktivnosti (admin → Aktivnost) čim je gejt upaljen za 4.2.1:
+- **Mašinska petlja („blicanje"):** posle upisa pristanka ekran je navigirao na `/sistem`, ali keširani `/api/me` (poll na 30s) je i dalje govorio da pristanak nedostaje → gejt vraća → ekran pita server, dobija „nije potrebno" → opet `/sistem`. Jedan nalog: **98 pregleda stranice za par minuta**. Uz to je pad `GET /api/politika/prihvati` slao korisnika na `/sistem`, gde gejt zna samo da pristanak nedostaje — ta petlja se ne bi prekinula sama.
+- **Ljudska petlja:** ko ne pritisne „Pristajem" nego klikne dalje po meniju, bio bi izbačen sa **svake** stranice (`/novcanik` ↔ `/politika-prihvati`, pa `/pijaca`, pa `/profil/<pseudonim>`…). Jedan nalog: **120 pregleda za sat vremena**.
+
+Sada `AppShell` samo renderuje `<PolitikaPristanak />` preko svega (`fixed inset-0 z-[100]`), **bez promene rute** — nema navigacije, nema skoka, nema šta da uđe u petlju, a pristup je jednako zatvoren. Ista komponenta služi i stranicu `/politika-prihvati` (`kaoStranica`), koja ostaje zbog linkova zapisanih u ranijim notifikacijama i mejlovima.
+- **Ne vraćati redirect gejt.** Ako zatreba da se gejt proširi, širi se uslov `prikaziPristanak`, ne način prikaza.
+- **Izuzeci ostaju `/profil` i `/politika-prihvati`** (prava iz ZZPL-a, odn. stranica koja već prikazuje isti ekran). **Pijaca nema gejt** ni ranije ni sada — `src/app/pijaca/` ima sopstveni layout van `AppShell`-a.
+- **Keš `['me']` se ispravlja PRE zatvaranja ekrana** (`patchMe({politikaPotrebno:false})` + invalidate), inače prekrivač visi do sledećeg poll-a.
+- **Pad zahteva ne sklanja ekran** — prikazuje se poruka i dugme „Pokušaj ponovo" (`greska_ucitavanje`, `dugme_pokusaj_ponovo`, svih 5 jezika).
+- **Dugme mora ostati dostižno:** karta je poravnata uz vrh uz `overflow-y-auto`, ne centrirana u punoj visini ekrana — ispod fiksnog zaglavlja je dno karte na niskim telefonima umelo da izađe iz vidika.
+- **Dnevnik aktivnosti** (`/api/aktivnost`) preskače ponovljenu **istu** putanju unutar 5 minuta, ali smenjivanje dve putanje beleži svaki put — zato se ovakva petlja u njemu vidi kao naizmenični spisak, i zato je taj spisak dobar detektor.
 - **Ispravljeno usput:** `kakoFunkcionisePage.k2_opis` je tvrdio da neverifikovan sme da prenosi POEN „kao davalac ili primalac" — čl. 28 st. 2 to zabranjuje. Onboarding (`dobrodosli`) i FAQ 42 su i dalje slali ljude na **ukinutu Tablu jemstva**; linkovi su odavno vodili na Pijacu, zaostao je bio samo tekst.
 
 ### Povod razgovora — oglas u razgovoru (2026-08-10)

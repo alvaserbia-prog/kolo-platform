@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import PolitikaPristanak from "./PolitikaPristanak";
 import { useMe, useMeEventBridge, useMePatch, ME_KEY } from "@/hooks/useMe";
 import { useSkrolPamcenje } from "@/hooks/useSkrolPamcenje";
 
@@ -17,7 +18,6 @@ interface AppShellProps {
 
 export default function AppShell({ verified, isAdmin, jeNadzornik, children }: AppShellProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
   const qc = useQueryClient();
   // Back/forward vraća poziciju skrola sadržaja (skrol je u div-u ispod, ne na
@@ -33,42 +33,30 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
   const dnevniBrojevi = me?.dnevniBrojevi ?? null;
   const brojZaNadzor = me?.nadzorBroj ?? 0;
 
-  // Provera pristanka na Politiku privatnosti (popup za Pravilnik je uklonjen).
+  // Gejt za pristanak na nove akte (Uslovi čl. 40, Politika čl. 16).
   //
-  // `/profil` je namerno izuzet iz gejta: Politika čl. 16 i Uslovi čl. 40 (v4.1.1)
-  // izričito kažu da ograničenje pristupa do prihvatanja NE dira u pravo na pristup,
+  // 🔴 Prekrivač, NE preusmeravanje (izmena 11.08.2026). Ranije je gejt na svaku
+  // promenu rute radio `router.replace("/politika-prihvati")`. Dve posledice, obe
+  // viđene u dnevniku aktivnosti: (a) ko ne bi pritisnuo „Pristajem" nego kliknuo
+  // dalje po meniju, bio bi izbačen sa svake stranice — smenjivanje `/novcanik` ↔
+  // `/politika-prihvati` u krug; (b) kad bi server već znao za pristanak, a
+  // keširani `['me']` još ne, ekran je „blicao" između dve rute dok poll ne stigne.
+  // Prekrivač ne dira rutu, pa nijedno od toga nije moguće — a pristup je jednako
+  // zatvoren, jer stoji preko svega dok se ne pristane.
+  //
+  // `/profil` je namerno izuzet: Politika čl. 16 i Uslovi čl. 40 (v4.1.1) izričito
+  // kažu da ograničenje pristupa do prihvatanja NE dira u pravo na pristup,
   // prenosivost i brisanje podataka. Ta prava se ostvaruju upravo na podešavanjima
-  // profila (eksport + gašenje naloga), a ekran za prihvatanje na njih i linkuje —
-  // bez ovog izuzetka bi taj link vraćao korisnika nazad na sam gejt.
+  // profila (eksport + gašenje naloga), a ekran za prihvatanje na njih i linkuje.
   //
   // Poređenje je TAČNO `/profil`, ne `startsWith`: `/profil/<pseudonim>` je tuđi javni
   // profil, a `/profil/oglasi` moji oglasi — to nisu prava iz ZZPL-a i ostaju iza gejta.
   //
-  // Brana protiv petlje (`gejtPokusaji`): ako nas ekran za pristanak vrati
-  // nazad — jer server već zna za pristanak, a keširani `['me']` još drži staru
-  // vrednost — dva redirect-a se smenjuju u krug i stranica vidljivo blinka.
-  // Prvi put samo osvežimo `['me']` iz baze; ako se bouncing nastavi, prestajemo
-  // da preusmeravamo. Brojač se resetuje čim se gejt legitimno zatvori, a
-  // ubrzano brojimo samo uzastopne skokove (razmak < 2s) — obična navigacija
-  // korisnika koji nije pristao ne troši pokušaje.
-  const gejtPokusaji = useRef(0);
-  const gejtPoslednji = useRef(0);
-  useEffect(() => {
-    if (pathname === "/politika-prihvati" || pathname === "/profil") return;
-    if (!me?.politikaPotrebno) { gejtPokusaji.current = 0; return; }
-
-    const sada = Date.now();
-    gejtPokusaji.current = sada - gejtPoslednji.current < 2_000 ? gejtPokusaji.current + 1 : 1;
-    gejtPoslednji.current = sada;
-
-    if (gejtPokusaji.current === 3) {
-      qc.invalidateQueries({ queryKey: ME_KEY });
-      return;
-    }
-    if (gejtPokusaji.current > 3) return;
-
-    router.replace("/politika-prihvati");
-  }, [me?.politikaPotrebno, pathname, router, qc]);
+  // `/politika-prihvati` je izuzet jer sama stranica već prikazuje isti ekran.
+  const prikaziPristanak =
+    !!me?.politikaPotrebno &&
+    pathname !== "/politika-prihvati" &&
+    pathname !== "/profil";
 
   // Kad korisnik otvori Novčanik/Pijaca → označi "viđeno" (badge ide na 0).
   // Optimistički nuliramo lokalno (setQueryData), pa serveru javimo da pomeri
@@ -120,6 +108,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
         </main>
       </div>
       </div>
+      {prikaziPristanak && <PolitikaPristanak />}
     </div>
   );
 }
