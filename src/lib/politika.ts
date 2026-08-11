@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { PRISTANAK_NA_AKTE_TRAZI_SE } from "@/lib/moduli";
 
 /**
  * Da li korisniku treba pristanak na akte (Uslovi čl. 40, Politika čl. 16).
@@ -16,6 +17,11 @@ import { prisma } from "@/lib/prisma";
  * u dva uzastopna upita. Upravo takav razlaz proizvodi bljesak.
  */
 export async function pristanakStatus(userId: string) {
+  // Prekidač iz `moduli.ts`: kad se pristanak ne traži, ovo je jedino mesto na
+  // kom se to proverava — i shell i sam ekran čitaju odavde, pa ne postoji put
+  // kojim bi se ekran ipak pojavio. Verzije i zatečeni pristanci ostaju u bazi.
+  if (!PRISTANAK_NA_AKTE_TRAZI_SE) return { potrebno: false as const, verzija: null };
+
   const najnovija = await prisma.politikaVerzija.findFirst({
     where: { efektivnaOd: { lte: new Date() } },
     orderBy: [{ efektivnaOd: "desc" }, { createdAt: "desc" }, { id: "desc" }],
