@@ -3,6 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { pristanakStatus } from "@/lib/politika";
 
 /**
  * GET /api/politika/prihvati — vraća najnoviju verziju politike koju korisnik NIJE prihvatio
@@ -13,24 +14,11 @@ export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 
-  const userId = session.user.id;
+  // Isti izvor istine kao `/api/me` — vidi `pristanakStatus`. Dva odvojena upita
+  // su umela da se raziđu, pa je ekran za pristanak bljesnuo i nestao.
+  const { potrebno, verzija } = await pristanakStatus(session.user.id);
 
-  // Najnovija aktivna verzija (efektivnaOd <= now)
-  const najnovija = await prisma.politikaVerzija.findFirst({
-    where: { efektivnaOd: { lte: new Date() } },
-    orderBy: { efektivnaOd: "desc" },
-  });
-
-  if (!najnovija) return NextResponse.json({ potrebno: false });
-
-  // Da li je korisnik već prihvatio?
-  const prihvaceno = await prisma.politikaPrihvatanje.findUnique({
-    where: { userId_verzijaId: { userId, verzijaId: najnovija.id } },
-  });
-
-  if (prihvaceno) return NextResponse.json({ potrebno: false });
-
-  return NextResponse.json({ potrebno: true, verzija: najnovija });
+  return NextResponse.json(potrebno ? { potrebno, verzija } : { potrebno: false });
 }
 
 export async function POST(req: NextRequest) {

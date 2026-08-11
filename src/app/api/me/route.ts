@@ -4,6 +4,7 @@ import { sesija } from "@/lib/sesija";
 import { prisma } from "@/lib/prisma";
 import { mozeNadzor } from "@/lib/dozvole";
 import { izracunajDnevniBrojeve, izracunajNadzorBroj } from "@/lib/chrome-podaci";
+import { pristanakStatus } from "@/lib/politika";
 
 /**
  * GET /api/me — KONSOLIDOVAN endpoint za ceo „chrome" (Header + Sidebar).
@@ -21,7 +22,6 @@ export async function GET() {
   const meId = session.user.id;
   const verified = session.user.verified;
   const nadzornik = mozeNadzor(session.user);
-  const sada = new Date();
 
   const [
     wallet,
@@ -29,7 +29,7 @@ export async function GET() {
     neprocitanoPoruke,
     notifikacije,
     notifNeprocitano,
-    najnovijaPolitika,
+    pristanak,
     dnevniBrojevi,
     nadzorBroj,
   ] = await Promise.all([
@@ -49,25 +49,13 @@ export async function GET() {
       select: { id: true, tip: true, naslov: true, tekst: true, procitana: true, link: true, createdAt: true },
     }),
     prisma.notifikacija.count({ where: { userId: meId, procitana: false } }),
-    prisma.politikaVerzija.findFirst({
-      where: { efektivnaOd: { lte: sada } },
-      orderBy: { efektivnaOd: "desc" },
-      select: { id: true },
-    }),
+    // Isti izvor istine kao `GET /api/politika/prihvati` — dva odvojena upita su
+    // umela da se raziđu, pa je ekran za pristanak bljesnuo i odmah nestao.
+    pristanakStatus(meId),
     // Badge brojevi su relevantni samo za verifikovane (sidebar „Zajedničko dobro").
     verified ? izracunajDnevniBrojeve(meId, session.user) : Promise.resolve(null),
     nadzornik ? izracunajNadzorBroj(meId, session.user) : Promise.resolve(0),
   ]);
-
-  // Politika: potrebna ako postoji aktivna verzija koju korisnik nije prihvatio.
-  let politikaPotrebno = false;
-  if (najnovijaPolitika) {
-    const prihvaceno = await prisma.politikaPrihvatanje.findUnique({
-      where: { userId_verzijaId: { userId: meId, verzijaId: najnovijaPolitika.id } },
-      select: { prihvacen: true },
-    });
-    politikaPotrebno = !prihvaceno;
-  }
 
   return NextResponse.json({
     balance: wallet?.balance ?? 0,
@@ -77,6 +65,6 @@ export async function GET() {
     notifNeprocitano,
     dnevniBrojevi,
     nadzorBroj,
-    politikaPotrebno,
+    politikaPotrebno: pristanak.potrebno,
   });
 }

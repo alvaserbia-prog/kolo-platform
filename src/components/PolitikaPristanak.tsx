@@ -65,7 +65,9 @@ export default function PolitikaPristanak({
   const ucitaj = useCallback(() => {
     setUcitavanjePuklo(false);
     setLoading(true);
-    fetch("/api/politika/prihvati")
+    // `no-store`: odgovor sme da važi samo u trenutku u kom je dat. Keširan
+    // „potreban je pristanak" bi vraćao ekran čoveku koji je već pristao.
+    fetch("/api/politika/prihvati", { cache: "no-store" })
       .then((r) => {
         if (!r.ok) throw new Error("Neuspeo zahtev");
         return r.json();
@@ -114,7 +116,16 @@ export default function PolitikaPristanak({
     ? "flex items-start justify-center min-h-[60vh] p-4 py-8"
     : "fixed inset-0 z-[100] overflow-y-auto bg-kolo-bg/95 backdrop-blur-sm flex items-start justify-center p-4 py-8 overscroll-contain";
 
+  // 🔴 Prekrivač se NE prikazuje dok se ne potvrdi da je pristanak stvarno
+  // potreban. `AppShell` ga montira po `politikaPotrebno` iz keširanog
+  // `/api/me`, a ta vrednost ume da bude zastarela (poll na 30s; odgovor koji
+  // je krenuo pre upisa pristanka ume da stigne posle njega). Ako bismo tada
+  // odmah nacrtali karticu, čovek koji je već pristao vidi kako mu ekran
+  // bljesne i nestane. Zato: dok traje provera — ništa. Merodavan je server.
+  // Stranica `/politika-prihvati` je otvorena namerno, pa tamo poruka o
+  // učitavanju ostaje (prazan ekran bi izgledao kao kvar).
   if (loading) {
+    if (!kaoStranica) return null;
     return (
       <div className={omot}>
         <p className="text-kolo-muted text-sm mt-12">{t("ucitavanje")}</p>
