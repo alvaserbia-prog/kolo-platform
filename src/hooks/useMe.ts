@@ -33,7 +33,10 @@ export interface MeData {
 export const ME_KEY = ["me"] as const;
 
 async function dohvatiMe(): Promise<MeData> {
-  const res = await fetch("/api/me");
+  // `no-store`: sadržaj je po korisniku i menja se stalno (balans, badge-evi,
+  // pristanak na akte). Keširan odgovor bi vraćao tuđe/zastarelo stanje —
+  // npr. „potreban je pristanak" čoveku koji je već pristao.
+  const res = await fetch("/api/me", { cache: "no-store" });
   if (!res.ok) throw new Error("Greška pri dohvatanju /api/me");
   return res.json();
 }
