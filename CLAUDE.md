@@ -215,7 +215,8 @@ Do ove izmene je `AppShell` na svaku promenu rute radio `router.replace("/politi
 
 Sada `AppShell` samo renderuje `<PolitikaPristanak />` preko svega (`fixed inset-0 z-[100]`), **bez promene rute** — nema navigacije, nema skoka, nema šta da uđe u petlju, a pristup je jednako zatvoren. Ista komponenta služi i stranicu `/politika-prihvati` (`kaoStranica`), koja ostaje zbog linkova zapisanih u ranijim notifikacijama i mejlovima.
 - **Ne vraćati redirect gejt.** Ako zatreba da se gejt proširi, širi se uslov `prikaziPristanak`, ne način prikaza.
-- **Izuzeci ostaju `/profil` i `/politika-prihvati`** (prava iz ZZPL-a, odn. stranica koja već prikazuje isti ekran). **Pijaca nema gejt** ni ranije ni sada — `src/app/pijaca/` ima sopstveni layout van `AppShell`-a.
+- **Izuzeci ostaju `/profil` i `/politika-prihvati`** (prava iz ZZPL-a, odn. stranica koja već prikazuje isti ekran). Pijaca JESTE pokrivena: `src/app/pijaca/layout.tsx` za prijavljenog korisnika renderuje `AppShell` (za gosta `PublicHeader`), pa prekrivač važi i tamo.
+- 🟡 **Gejt je isključivo klijentski.** Nijedna API ruta ne proverava pristanak (`proxy.ts` takođe ne) — ko zna adresu endpointa, može da radi i bez pristanka. Za sada je to prihvaćeno: ekran je obaveštenje o izmeni akata, ne bezbednosna granica. Ako zatreba stvarno zatvaranje, mesto je `proxy.ts` ili zajednička provera u rutama, ne prekrivač.
 - **Keš `['me']` se ispravlja PRE zatvaranja ekrana** (`patchMe({politikaPotrebno:false})` + invalidate), inače prekrivač visi do sledećeg poll-a.
 - **Pad zahteva ne sklanja ekran** — prikazuje se poruka i dugme „Pokušaj ponovo" (`greska_ucitavanje`, `dugme_pokusaj_ponovo`, svih 5 jezika).
 - **Dugme mora ostati dostižno:** karta je poravnata uz vrh uz `overflow-y-auto`, ne centrirana u punoj visini ekrana — ispod fiksnog zaglavlja je dno karte na niskim telefonima umelo da izađe iz vidika.
