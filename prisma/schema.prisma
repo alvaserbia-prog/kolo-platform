@@ -249,6 +249,14 @@ model User {
   // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
   vidjenoNovcanikAt                DateTime?
   vidjenoPijacaAt                  DateTime?
+  // Kad je čovek prvi put video vodič `/dobrodosli`. Dok je NULL, prva prijava
+  // vodi na vodič — isto što registracija radi odmah po otvaranju naloga.
+  // Do sada je „prvi prolaz" živeo samo u `sessionStorage` pregledača, pa vodič
+  // nije video ni onaj ko se registruje pa zatvori prozor, ni nalog vraćen na
+  // dan registracije (server ne može da dopre do memorije pregledača).
+  // Zatečeni nalozi su u migraciji popunjeni tekućim vremenom — vodič im se ne
+  // otvara naknadno.
+  vodicVidjenAt                    DateTime?
   memberHash                       String                    @unique
   location                         String?
   telefon                          String?
