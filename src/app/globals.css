@@ -14,6 +14,23 @@
   margin-top: 1.25rem;
 }
 
+/* ── Veliki broj na kartici (POEN, ZRNO, stanje) ───────────────── */
+/* Broj se NIKAD ne prelama u dva reda i ne izlazi iz kartice: umesto
+   toga se font smanjuje kako broj raste. Meri se ŠIRINA KARTICE (cqi),
+   ne širina ekrana — iste kartice stoje i u dve kolone na telefonu i
+   u širokom rasporedu na ekranu. `--znakova` je broj znakova zapisa
+   (sa razdvojnicima hiljada), postavlja se iz komponente; kad ga nema,
+   pretpostavlja se šest znakova („13.400"). */
+.broj-kartica {
+  container-type: inline-size;
+}
+.broj-kartica-vrednost {
+  font-size: clamp(0.875rem, calc(145cqi / var(--znakova, 6)), 3rem);
+  line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── KOLO Design System ────────────────────────────────────────── */
 
 :root {
