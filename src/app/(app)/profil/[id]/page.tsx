@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type CSSProperties } from "react";
 import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
@@ -167,6 +167,15 @@ export default function JavniProfilPage() {
 
   const inicijali = profil.pseudonim.slice(0, 2).toUpperCase();
 
+  // Veličina slova za ZRNO/POEN se izvodi iz dužine dužeg zapisa (vidi
+  // `.broj-kartica` u globals.css) — inače „13.400" izlazi iz kartice na
+  // telefonu, a jednocifreno „0" pored njega izgleda nesrazmerno veliko.
+  const zrnoTekst = profil.zrno !== null ? profil.zrno.toLocaleString(intlTag(locale)) : "—";
+  const poenTekst = profil.bilans !== null ? profil.bilans.toLocaleString(intlTag(locale)) : "—";
+  const znakovaStil = {
+    "--znakova": String(Math.max(zrnoTekst.length, poenTekst.length)),
+  } as CSSProperties;
+
   return (
     <div className="space-y-4">
       {/* Naslov */}
@@ -259,18 +268,21 @@ export default function JavniProfilPage() {
 
         {/* DESNO — gore statistike (ZRNO levo, POEN desno), dole indeks stvarnosti */}
         <div className="lg:col-span-6 flex flex-col gap-4">
-          {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji */}
+          {/* Gornji deo: ZRNO (levo) i POEN (desno) — velike kartice u liniji.
+              Obe vrednosti dobijaju ISTU veličinu slova (računa se po dužem od
+              dva zapisa), da broj u jednoj kartici ne bi bio duplo veći od broja
+              u drugoj. */}
           <div className="grid grid-cols-2 gap-4 flex-1">
-            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
+            <div className="broj-kartica bg-white rounded-2xl border border-kolo-border p-4 sm:p-6 text-center flex flex-col justify-center">
               <p className="text-base font-medium text-kolo-muted mb-1">{tc("zrno")}</p>
-              <p className="text-5xl font-bold text-kolo-text tabular-nums">
-                {profil.zrno !== null ? profil.zrno.toLocaleString(intlTag(locale)) : "—"}
+              <p className="broj-kartica-vrednost font-bold text-kolo-text" style={znakovaStil}>
+                {zrnoTekst}
               </p>
             </div>
-            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center flex flex-col justify-center">
+            <div className="broj-kartica bg-white rounded-2xl border border-kolo-border p-4 sm:p-6 text-center flex flex-col justify-center">
               <p className="text-base font-medium text-kolo-muted mb-1">{tc("poen")}</p>
-              <p className="text-5xl font-bold text-kolo-text tabular-nums">
-                {profil.bilans !== null ? profil.bilans.toLocaleString(intlTag(locale)) : "—"}
+              <p className="broj-kartica-vrednost font-bold text-kolo-text" style={znakovaStil}>
+                {poenTekst}
               </p>
             </div>
           </div>
