@@ -72,6 +72,33 @@ export default function OsnivaciTab({
   const status = statusData ?? null;
   const [radnja, setRadnja] = useState<string | null>(null);
 
+  // Revizija kanala doprinosa za prvi oglas (čl. 40a) — učitava se NA ZAHTEV:
+  // prolazi kroz sve oglase i sve zapise, pa nema razloga da se vrti svaki put
+  // kad neko otvori Osnivače.
+  type RevizijaStavka = { userId: string; pseudonim: string; oglasId?: string };
+  const [revizija, setRevizija] = useState<{
+    kvalifikovanih: number;
+    saZapisom: number;
+    nedostaju: RevizijaStavka[];
+    zabelezenVerifikovan: RevizijaStavka[];
+    zabelezenNeverifikovan: number;
+    evidentiranBezObavestenja: RevizijaStavka[];
+    evidentiranBezTransakcije: RevizijaStavka[];
+    ponisten: number;
+    evidentiranoPoen: number;
+  } | null>(null);
+
+  // Čita, ne menja ništa — prvo se vidi kome doprinos fali, pa se tek onda
+  // pokreće ispravka; obrnut redosled bi značio emisiju naslepo.
+  async function ucitajReviziju() {
+    setRadnja("revizija");
+    const res = await fetch("/api/admin/doprinos-sadrzaju/zatecene");
+    const d = await res.json().catch(() => ({}));
+    setRadnja(null);
+    if (res.ok) setRevizija(d);
+    else alert(d.error ?? t("greska_generalna"));
+  }
+
   // Forma za dodavanje
   const [userId, setUserId] = useState("");
   const [brojilac, setBrojilac] = useState("");
@@ -263,13 +290,44 @@ export default function OsnivaciTab({
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
         <h2 className="text-base font-semibold text-kolo-text mb-2">{t("doprinos_zatecene_naslov")}</h2>
         <p className="text-sm text-kolo-muted mb-4">{t("doprinos_zatecene_opis")}</p>
-        <button
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={ucitajReviziju}
+            disabled={radnja !== null}
+            className="px-4 py-2 rounded-xl border border-kolo-border text-kolo-text text-sm font-semibold hover:bg-kolo-bg transition-colors disabled:opacity-50"
+          >
+            {radnja === "revizija" ? t("doprinos_revizija_loading") : t("doprinos_revizija_btn")}
+          </button>
+          <button
           onClick={razresiZatecene}
           disabled={radnja === "zatecene"}
           className="px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
         >
           {radnja === "zatecene" ? t("doprinos_zatecene_loading") : t("doprinos_zatecene_btn")}
         </button>
+        </div>
+
+        {revizija && (
+          <div className="mt-4 rounded-xl border border-kolo-border bg-kolo-bg p-4 space-y-2 text-sm">
+            <p className="text-kolo-text">
+              {t("doprinos_revizija_zbir", {
+                kvalifikovanih: revizija.kvalifikovanih,
+                saZapisom: revizija.saZapisom,
+                poen: fmt(revizija.evidentiranoPoen, locale),
+              })}
+            </p>
+            <RevizijaRed naslov={t("doprinos_revizija_nedostaju")} stavke={revizija.nedostaju} kritican />
+            <RevizijaRed naslov={t("doprinos_revizija_zabelezen_verifikovan")} stavke={revizija.zabelezenVerifikovan} />
+            <RevizijaRed naslov={t("doprinos_revizija_bez_obavestenja")} stavke={revizija.evidentiranBezObavestenja} />
+            <RevizijaRed naslov={t("doprinos_revizija_bez_transakcije")} stavke={revizija.evidentiranBezTransakcije} kritican />
+            <p className="text-xs text-kolo-muted">
+              {t("doprinos_revizija_uredno", {
+                ceka: revizija.zabelezenNeverifikovan,
+                ponisten: revizija.ponisten,
+              })}
+            </p>
+          </div>
+        )}
         <p className="mt-2 text-xs text-kolo-muted">{t("doprinos_zatecene_napomena")}</p>
       </div>
 
@@ -434,6 +492,32 @@ export default function OsnivaciTab({
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Jedan red revizije. Prazan skup je dobra vest, pa se prikazuje kvačicom umesto
+ * da nestane — inače se ne vidi razlika između „provereno, nema nikoga" i
+ * „provera nije ni pokrenuta".
+ */
+function RevizijaRed({
+  naslov,
+  stavke,
+  kritican = false,
+}: {
+  naslov: string;
+  stavke: Array<{ userId: string; pseudonim: string }>;
+  kritican?: boolean;
+}) {
+  const prazan = stavke.length === 0;
+  return (
+    <div className="text-sm">
+      <span className={prazan ? "text-kolo-muted" : kritican ? "text-kolo-danger font-semibold" : "text-kolo-text font-semibold"}>
+        {prazan ? "\u2713 " : `${stavke.length} \u00b7 `}
+        {naslov}
+      </span>
+      {!prazan && <span className="text-kolo-muted"> — {stavke.map((s) => s.pseudonim).join(", ")}</span>}
     </div>
   );
 }

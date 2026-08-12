@@ -12,6 +12,7 @@ const prismaMock = vi.hoisted(() => ({
   },
   wallet: { findUnique: vi.fn() },
   user: { findUnique: vi.fn(), findMany: vi.fn() },
+  marketplaceListing: { findMany: vi.fn() },
 }));
 vi.mock("@/lib/prisma", () => ({ prisma: prismaMock }));
 
@@ -37,6 +38,7 @@ import {
   smeDaSalje,
   zabeleziDoprinos,
   evidentirajZateceneVerifikovane,
+  revidirajDoprinose,
   odbijDoprinos,
   odobriDoprinos,
   ponistiZabelezen,
@@ -77,6 +79,9 @@ beforeEach(() => {
   // Podrazumevano NEVERIFIKOVAN — verifikovanom se doprinos evidentira odmah,
   // pa bi tihi default menjao ishod pola testova ispod.
   prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NEVERIFIKOVAN" });
+  // Revizija (koju prelazna radnja zove prva) podrazumevano ne nalazi ništa —
+  // testovi je zasebno podešavaju kad ih zanima.
+  prismaMock.marketplaceListing.findMany.mockResolvedValue([]);
   vi.spyOn(console, "error").mockImplementation(() => {});
 });
 
@@ -495,8 +500,13 @@ describe("evidentirajZateceneVerifikovane", () => {
     neobavesteni: { id: string; userId: string; iznos: number }[] = [],
   ) {
     prismaMock.doprinosSadrzaju.findMany.mockImplementation(
-      async (arg: { where: { status: string } }) =>
-        arg.where.status === "ZABELEZEN" ? zabelezeni : neobavesteni,
+      async (arg: { where: { status?: string } }) => {
+        // Prelazna radnja prvo pokrene reviziju, koja čita SVE zapise. Ti testovi
+        // gledaju samo razrešavanje, pa revizija vraća prazno — inače bi njeni
+        // redovi (drugog oblika) ispali kao „neobavešteni".
+        if (arg.where.status === undefined) return [];
+        return arg.where.status === "ZABELEZEN" ? zabelezeni : neobavesteni;
+      },
     );
   }
 
@@ -546,6 +556,7 @@ describe("evidentirajZateceneVerifikovane", () => {
     spiskovi([]);
     const r = await evidentirajZateceneVerifikovane();
     expect(r).toEqual({
+      naknadnoZabelezeno: 0,
       ukupnoZabelezenih: 0,
       evidentirano: 0,
       preskocenoNeverifikovanih: 0,
@@ -575,5 +586,84 @@ describe("evidentirajZateceneVerifikovane", () => {
     expect(obavestiMock).not.toHaveBeenCalled();
     const upit = prismaMock.doprinosSadrzaju.findMany.mock.calls.at(-1)?.[0];
     expect(upit.where).toMatchObject({ status: "EVIDENTIRAN", obavestenAt: null });
+  });
+});
+
+// ─── Revizija kanala ─────────────────────────────────────────────────────────
+
+describe("revidirajDoprinose", () => {
+  function redOglasa(izmene: Record<string, unknown> = {}) {
+    return {
+      id: "o1", sellerId: "u1", description: OPIS, category: "hrana",
+      location: "Sombor", images: ["https://r2/s.jpg"],
+      seller: { pseudonim: "Marko" }, ...izmene,
+    };
+  }
+  function redZapisa(izmene: Record<string, unknown> = {}) {
+    return {
+      userId: "u1", status: "EVIDENTIRAN", iznos: IZNOS,
+      obavestenAt: new Date(), transakcijaId: "tx1",
+      user: { pseudonim: "Marko", tipKorisnika: "REGULARNI" }, ...izmene,
+    };
+  }
+
+  it("prijavljuje onoga ko ima kvalifikovan oglas a nema zapis", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([redOglasa()]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([]);
+    const r = await revidirajDoprinose();
+    expect(r.kvalifikovanih).toBe(1);
+    expect(r.saZapisom).toBe(0);
+    expect(r.nedostaju).toEqual([{ userId: "u1", pseudonim: "Marko", oglasId: "o1" }]);
+  });
+
+  it("oglas ispod minimuma se ne računa kao kvalifikovan", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([redOglasa({ images: [] })]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([]);
+    const r = await revidirajDoprinose();
+    expect(r.kvalifikovanih).toBe(0);
+    expect(r.nedostaju).toEqual([]);
+  });
+
+  it("uzima PRVI kvalifikovan oglas po korisniku (čl. 40a st. 2)", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([
+      redOglasa({ id: "stari", images: [] }),
+      redOglasa({ id: "prvi_dobar" }),
+      redOglasa({ id: "kasniji" }),
+    ]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([]);
+    const r = await revidirajDoprinose();
+    expect(r.nedostaju).toEqual([{ userId: "u1", pseudonim: "Marko", oglasId: "prvi_dobar" }]);
+  });
+
+  it("razdvaja zabeležen kod redovnog člana od zabeleženog kod novog", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([
+      redZapisa({ userId: "a", status: "ZABELEZEN", user: { pseudonim: "A", tipKorisnika: "REGULARNI" } }),
+      redZapisa({ userId: "b", status: "ZABELEZEN", user: { pseudonim: "B", tipKorisnika: "NEVERIFIKOVAN" } }),
+    ]);
+    const r = await revidirajDoprinose();
+    expect(r.zabelezenVerifikovan).toEqual([{ userId: "a", pseudonim: "A" }]);
+    expect(r.zabelezenNeverifikovan).toBe(1);
+  });
+
+  it("hvata evidentiran doprinos bez obaveštenja i bez transakcije", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([
+      redZapisa({ userId: "a", obavestenAt: null, user: { pseudonim: "A", tipKorisnika: "REGULARNI" } }),
+      redZapisa({ userId: "b", transakcijaId: null, user: { pseudonim: "B", tipKorisnika: "REGULARNI" } }),
+    ]);
+    const r = await revidirajDoprinose();
+    expect(r.evidentiranBezObavestenja).toEqual([{ userId: "a", pseudonim: "A" }]);
+    expect(r.evidentiranBezTransakcije).toEqual([{ userId: "b", pseudonim: "B" }]);
+    expect(r.evidentiranoPoen).toBe(2 * IZNOS);
+  });
+
+  it("ko ima zapis nije u nedostajućima, ma kakav status bio", async () => {
+    prismaMock.marketplaceListing.findMany.mockResolvedValue([redOglasa()]);
+    prismaMock.doprinosSadrzaju.findMany.mockResolvedValue([redZapisa({ status: "PONISTEN" })]);
+    const r = await revidirajDoprinose();
+    expect(r.saZapisom).toBe(1);
+    expect(r.nedostaju).toEqual([]);
+    expect(r.ponisten).toBe(1);
   });
 });

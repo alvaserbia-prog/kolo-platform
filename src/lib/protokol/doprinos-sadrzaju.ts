@@ -371,6 +371,153 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
   return d?.iznos ?? 0;
 }
 
+export type RevizijaStavka = { userId: string; pseudonim: string; oglasId?: string };
+
+export type RevizijaDoprinosa = {
+  /** Korisnika sa bar jednim oglasom koji ispunjava uslove kanala (čl. 40a st. 2). */
+  kvalifikovanih: number;
+  /** Od toga: koliko ih ima zapis o doprinosu, u bilo kom statusu. */
+  saZapisom: number;
+  /** 🔴 Kvalifikovan oglas, a zapisa NEMA — jedina prava rupa. */
+  nedostaju: RevizijaStavka[];
+  /** Zabeležen kod redovnog člana — duguje mu se evidentiranje (dugme ispod). */
+  zabelezenVerifikovan: RevizijaStavka[];
+  /** Zabeležen kod člana bez potvrde — čeka odobrenje u tabu „Prvi oglasi". */
+  zabelezenNeverifikovan: number;
+  /** POEN je upisan, ali čoveku nije javljeno. */
+  evidentiranBezObavestenja: RevizijaStavka[];
+  /** Evidentiran bez veze na transakciju — trag da je upis transakcije pukao. */
+  evidentiranBezTransakcije: RevizijaStavka[];
+  /** Poništen jer je oglas uklonjen zbog povrede Uslova (st. 4). */
+  ponisten: number;
+  /** Zbir POEN-a koji je kroz kanal stvarno evidentiran. */
+  evidentiranoPoen: number;
+};
+
+/**
+ * Revizija kanala: ko je objavio kvalifikovan oglas, a nije dobio svojih 1.000 POEN.
+ *
+ * ČITA, ne menja ništa — namerno odvojeno od radnji koje emituju POEN. Prvo se
+ * vidi šta fali, pa se tek onda pokreće ispravka.
+ *
+ * Uslov „kvalifikovan oglas" se NE prepisuje u SQL nego se svaki oglas propušta
+ * kroz `oglasIspunjavaMinimum` — istu funkciju po kojoj se doprinos i beleži. Da
+ * je uslov napisan dvaput, revizija bi mogla da pokaže da je sve u redu upravo
+ * zato što ponavlja istu grešku kao i beleženje.
+ *
+ * Ugašeni nalozi se preskaču: njihovi zapisi se po čl. 34 anonimizuju.
+ */
+export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
+  const [oglasi, zapisi] = await Promise.all([
+    prisma.marketplaceListing.findMany({
+      where: { tip: "PONUDA", status: { not: "UKLONJEN" }, seller: { deaktiviranAt: null } },
+      orderBy: { createdAt: "asc" },
+      select: {
+        id: true,
+        sellerId: true,
+        description: true,
+        category: true,
+        location: true,
+        images: true,
+        seller: { select: { pseudonim: true } },
+      },
+    }),
+    prisma.doprinosSadrzaju.findMany({
+      where: { user: { deaktiviranAt: null } },
+      select: {
+        userId: true,
+        status: true,
+        iznos: true,
+        obavestenAt: true,
+        transakcijaId: true,
+        user: { select: { pseudonim: true, tipKorisnika: true } },
+      },
+    }),
+  ]);
+
+  // Prvi kvalifikovan oglas po korisniku — „prvi oglas kojim nudi" iz čl. 40a.
+  const prviKvalifikovan = new Map<string, { oglasId: string; pseudonim: string }>();
+  for (const o of oglasi) {
+    if (prviKvalifikovan.has(o.sellerId)) continue;
+    const provera = oglasIspunjavaMinimum({
+      tip: "PONUDA",
+      description: o.description,
+      category: o.category,
+      location: o.location,
+      images: o.images,
+    });
+    if (provera.ok) {
+      prviKvalifikovan.set(o.sellerId, { oglasId: o.id, pseudonim: o.seller.pseudonim });
+    }
+  }
+
+  const rez: RevizijaDoprinosa = {
+    kvalifikovanih: prviKvalifikovan.size,
+    saZapisom: 0,
+    nedostaju: [],
+    zabelezenVerifikovan: [],
+    zabelezenNeverifikovan: 0,
+    evidentiranBezObavestenja: [],
+    evidentiranBezTransakcije: [],
+    ponisten: 0,
+    evidentiranoPoen: 0,
+  };
+
+  const imaZapis = new Set(zapisi.map((z) => z.userId));
+  for (const [userId, o] of prviKvalifikovan) {
+    if (imaZapis.has(userId)) rez.saZapisom += 1;
+    else rez.nedostaju.push({ userId, pseudonim: o.pseudonim, oglasId: o.oglasId });
+  }
+
+  for (const z of zapisi) {
+    const stavka = { userId: z.userId, pseudonim: z.user.pseudonim };
+    if (z.status === DoprinosStatus.ZABELEZEN) {
+      if (z.user.tipKorisnika === "NEVERIFIKOVAN") rez.zabelezenNeverifikovan += 1;
+      else rez.zabelezenVerifikovan.push(stavka);
+    } else if (z.status === DoprinosStatus.EVIDENTIRAN) {
+      rez.evidentiranoPoen += z.iznos;
+      if (z.obavestenAt === null) rez.evidentiranBezObavestenja.push(stavka);
+      if (z.transakcijaId === null) rez.evidentiranBezTransakcije.push(stavka);
+    } else {
+      rez.ponisten += 1;
+    }
+  }
+
+  return rez;
+}
+
+/**
+ * Beleži doprinos onima koji imaju kvalifikovan oglas, a nemaju nijedan zapis.
+ *
+ * Rupa je stvarna: `zabeleziDoprinos` se zove VAN transakcije i bez ponavljanja,
+ * pa oglas objavljen u zahtevu koji pukne na pola ostaje bez doprinosa zauvek, a
+ * retroaktivna migracija je pokrila samo oglase zatečene na dan uvođenja kanala.
+ *
+ * Uzima se PRVI kvalifikovan oglas i uvek se beleži kao ZABELEZEN — evidentiranje
+ * ostaje na redovnom putu (dugme za redovne članove, odnosno odobrenje u tabu
+ * „Prvi oglasi" za članove bez potvrde). Idempotentno: jedinstveni indeks nad
+ * `userId` odbija drugi zapis.
+ */
+async function zabeleziNedostajuce(): Promise<number> {
+  const revizija = await revidirajDoprinose();
+  let n = 0;
+  for (const s of revizija.nedostaju) {
+    if (!s.oglasId) continue;
+    try {
+      await prisma.doprinosSadrzaju.create({
+        data: { userId: s.userId, oglasId: s.oglasId, iznos: IZNOS },
+      });
+      await logAdminAkcija(s.userId, "DOPRINOS_SADRZAJU_ZABELEZEN", s.oglasId, `${IZNOS} POEN (naknadno)`);
+      n += 1;
+    } catch (e) {
+      if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002")
+        continue;
+      console.error("[doprinos-sadrzaju] naknadno beleženje nije uspelo", { userId: s.userId, e });
+    }
+  }
+  return n;
+}
+
 /**
  * Jednokratno evidentiranje zatečenih doprinosa verifikovanih korisnika
  * (čl. 40a, prelazni stav).
@@ -396,12 +543,17 @@ export async function dohvatiZabelezen(userId: string): Promise<number> {
  * se ne javlja dvaput.
  */
 export async function evidentirajZateceneVerifikovane(): Promise<{
+  naknadnoZabelezeno: number;
   ukupnoZabelezenih: number;
   evidentirano: number;
   preskocenoNeverifikovanih: number;
   poenUOpticaj: number;
   naknadnoObavesteno: number;
 }> {
+  // Prvo se popuni ono što uopšte nije zabeleženo — bez toga bi razrešavanje
+  // preskočilo ljude kojima zapis nikad nije ni nastao.
+  const naknadnoZabelezeno = await zabeleziNedostajuce();
+
   const zabelezeni = await prisma.doprinosSadrzaju.findMany({
     where: { status: DoprinosStatus.ZABELEZEN },
     select: { userId: true, iznos: true, user: { select: { tipKorisnika: true } } },
@@ -435,6 +587,7 @@ export async function evidentirajZateceneVerifikovane(): Promise<{
   }
 
   return {
+    naknadnoZabelezeno,
     ukupnoZabelezenih: zabelezeni.length,
     evidentirano,
     preskocenoNeverifikovanih: preskoceno,
