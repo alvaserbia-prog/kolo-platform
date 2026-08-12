@@ -130,8 +130,16 @@ export default function DobrodosliPage() {
   const oznaka = t(`${ekran.key}_oznaka`);
   const pasusi = Array.from({ length: ekran.pasusi }, (_, i) => t(`${ekran.key}_p${i + 1}`));
 
+  /**
+   * Izlaz iz vodiča.
+   *
+   * Na prvom prolazu vodi na **Pijacu**, ne na Sistem: prvi potez novog čoveka
+   * je objava oglasa (Početna, „put do učešća"), a Sistem je pregled brojeva
+   * koji tek registrovanom nalogu ništa ne govori — svi su na nuli.
+   * Vodič otvoren iz „?" u zaglavlju se samo zatvara, nazad odakle je otvoren.
+   */
   function zatvori() {
-    if (prviPut) router.push("/sistem");
+    if (prviPut) router.push("/pijaca");
     else router.back();
   }
 

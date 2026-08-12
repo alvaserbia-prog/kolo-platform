@@ -489,6 +489,7 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 - Nosilac je **`User.vodicVidjenAt`** (migracija `20260812120000_vodic_vidjen`). 🔴 Migracija **popunjava zatečene naloge tekućim vremenom** — bez toga bi svima pri prvoj sledećoj prijavi iskočio vodič.
 - `/api/me` vraća `vodicPotreban` (`vodicVidjenAt == null`); `LoginForm` po njemu bira odredište posle prijave i usput postavlja isti `kolo-welcome` znak, pa gornje dugme glasi „Preskoči", a ne „Zatvori". **`callbackUrl` ima prednost** (ko je došao sa dubokog linka ide tamo gde je pošao), a pad `/api/me` ne zadržava prijavu — tada se ide na uobičajeno odredište.
 - **Upis „viđeno" ide pri OTVARANJU vodiča** (`POST /api/profil/vodic` iz `useEffect`), ne na izlasku: ko zatvori prozor na trećem ekranu vodič JE video, a i nijedan izlaz (Preskoči, Zatvori, CTA dugmad) ne može da promakne. Ruta piše `updateMany` sa uslovom `vodicVidjenAt: null`, pa otvaranje iz „?" u zaglavlju ne pomera zabeleženi trenutak.
+- **Izlaz iz vodiča na prvom prolazu vodi na `/pijaca`**, ne na `/sistem` (odluka vlasnika 2026-08-12): prvi potez novog čoveka je objava oglasa, a Sistem je pregled brojeva koji tek registrovanom nalogu ništa ne govori. Vodič otvoren iz „?" i dalje se samo zatvara (`router.back()`).
 - 🟡 **Gejt nije brana nego usluga** — ništa ne sprečava čoveka da ode bilo gde iz menija. Namerno: prekrivač preko svega je već jednom napravio petlju (vidi „Gejt za pristanak je PREKRIVAČ").
 
 ### Pseudonim u adresi profila (2026-08-04)
