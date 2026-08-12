@@ -354,6 +354,9 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
       avatar: null,
       vidjenoNovcanikAt: null,
       vidjenoPijacaAt: null,
+      // Vodič `/dobrodosli` ponovo čeka na prvoj prijavi — bez ovoga bi reset
+      // vratio podatke na nulu, a čovek bi i dalje sleteo pravo na Sistem.
+      vodicVidjenAt: null,
       pseudonimChangedAt: null,
       emailObavestenja: true,
       createdAt: new Date(),

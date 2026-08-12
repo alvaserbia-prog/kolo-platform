@@ -105,6 +105,13 @@ export default function DobrodosliPage() {
     } catch {
       /* nedostupan */
     }
+    // Zabeleži da je vodič viđen — time prestaje automatsko vođenje ovamo pri
+    // prijavi (`User.vodicVidjenAt`). Upis ide pri otvaranju, ne na izlasku: ko
+    // zatvori prozor na trećem ekranu, vodič JE video, a i nijedan izlaz iz
+    // vodiča ne bi mogao da promakne. Ruta piše samo kad je polje prazno, pa
+    // otvaranje iz „?" ne pomera zabeleženi trenutak. Pad se ćutke prelazi —
+    // najgore što se dešava jeste da se vodič ponudi i pri sledećoj prijavi.
+    void fetch("/api/profil/vodic", { method: "POST" }).catch(() => {});
   }, []);
 
   /** Odlazak sa vodiča preko CTA dugmeta — zapamti korak radi povratka. */

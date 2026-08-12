@@ -29,6 +29,36 @@ export default function LoginForm() {
   const [prikaziRegistraciju, setPrikaziRegistraciju] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Gde ide čovek posle uspešne prijave.
+   *
+   * Nalog koji vodič još nije video (`vodicVidjenAt` prazan — tek registrovan
+   * nalog, ili nalog vraćen na dan registracije) vodi se na `/dobrodosli`, isto
+   * kao odmah po registraciji. Do sada je taj „prvi prolaz" postojao samo kao
+   * zapis u `sessionStorage`, koji postavlja jedino obrazac za registraciju —
+   * pa se pri prijavi vodič nije otvarao nikome.
+   *
+   * Pad zahteva ne sme da zadrži prijavu: tada se ide na uobičajeno odredište.
+   */
+  async function prvoOdrediste(): Promise<string> {
+    try {
+      const res = await fetch("/api/me", { cache: "no-store" });
+      if (!res.ok) return "/dashboard";
+      const me = await res.json();
+      if (!me?.vodicPotreban) return "/dashboard";
+      // Isti jednokratni znak koji postavlja registracija — vodič po njemu zna
+      // da je ovo prvi prolaz (gornje dugme „Preskoči", a ne „Zatvori").
+      try {
+        sessionStorage.setItem("kolo-welcome", "1");
+      } catch {
+        /* nedostupan — vodič se i dalje otvara, samo sa dugmetom „Zatvori" */
+      }
+      return "/dobrodosli";
+    } catch {
+      return "/dashboard";
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
@@ -50,7 +80,7 @@ export default function LoginForm() {
         setError(t("greska_pogresni_podaci"));
         setPrikaziRegistraciju(true);
       } else {
-        router.push(callbackUrl ?? "/dashboard");
+        router.push(callbackUrl ?? (await prvoOdrediste()));
         router.refresh();
       }
     } catch {

@@ -34,7 +34,7 @@ export async function GET() {
     nadzorBroj,
   ] = await Promise.all([
     prisma.wallet.findUnique({ where: { userId: meId }, select: { balance: true } }),
-    prisma.user.findUnique({ where: { id: meId }, select: { avatar: true } }),
+    prisma.user.findUnique({ where: { id: meId }, select: { avatar: true, vodicVidjenAt: true } }),
     prisma.poruka.count({
       where: {
         procitana: false,
@@ -66,5 +66,8 @@ export async function GET() {
     dnevniBrojevi,
     nadzorBroj,
     politikaPotrebno: pristanak.potrebno,
+    // Prva prijava naloga koji vodič još nije video vodi na `/dobrodosli`
+    // (obrazac prijave to čita; vidi `LoginForm`).
+    vodicPotreban: user?.vodicVidjenAt == null,
   });
 }
