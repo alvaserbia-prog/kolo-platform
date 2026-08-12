@@ -126,7 +126,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - ✅ **„kurs" u srpskim prevodima** sređen → „Koeficijent" / „koeficijent evidencije" (`messages/sr.json`, ZRNO/donacije ekrani); interni identifikatori (`trendsKurs`, `.kurs`, `{kurs}`, ključevi) i en/hu „Rate"/„Árfolyam" ostaju
 - 🔴 Moduli (Zadruga, Modul Deca, internacionalizacija, Glava VIII) — nisu fokus razvoja po odluci vlasnika
 
-**Tri statusa korisnika:** Neverifikovani / Verifikovani / Nosilac ZRNA. NE POSTOJE organizatorske titule (zagovornik/aktivista/glasnik/šampion); NE POSTOJI "apostol" ni "Pokret" kao modul.
+**Tri statusa korisnika:** Neverifikovani / Verifikovani / Nosilac ZRNA — tako se zovu u **bazi i aktima**; u **interfejsu** su od 2026-08-12 **nov član / redovan član / nosilac ZRNA** (vidi „Copy govori o potvrdi"). NE POSTOJE organizatorske titule (zagovornik/aktivista/glasnik/šampion); NE POSTOJI "apostol" ni "Pokret" kao modul.
 
 ## Tech stack
 - Next.js 16 (App Router), TypeScript
@@ -221,6 +221,39 @@ Akti: **`dokaz_stvarnosti_4_2_0.md`** (čl. 1, 6, 7, 10, 11, nov **11a**, 12 st.
 🔴 **Šta OSTAJE „jemstvo":** „tabla zahteva za jemstvo" u Politici, DPIA i Radnjama obrade (tamo je institut opisan kao UKINUT — bez imena se ne vidi koja je obrada prestala); naslov stranice `/tabla-jemstva`; interni identifikatori (`jeKorenJemstva()`, ruta, namespace `tablaJemstva`, tabele `ZahtevZaJemstvo`/`Prepoznavanje`); i obično značenje reči („Fondacija ne jamči", en `does not guarantee`, hr `ne jamči`).
 
 **Brana:** `__tests__/copy-ukinuto.test.ts` obara build ako se stara terminologija vrati u `messages/*.json` ili `faq-data*.ts`, `pravni-dokumenti.test.ts` ako se vrati u akte. Rupa je bila stvarna — prevodi FAQ-a su nosili „vouching chain" i „lanac jamstva" i posle prve zamene, jer je provera gledala samo ukinutu tablu. Isti test sada pokriva i **hr i hu** (prevodi postoje od 4.1.0, ali ih nijedna provera nije gledala).
+
+### Copy govori o potvrdi; statusi su „nov" i „redovan član" (2026-08-12)
+
+Dve izmene istog dana, obe **samo u interfejsu** — akti, Prisma šema i identifikatori u kodu se ne diraju.
+
+**1. Reč „verifikacija" izlazi iz copy-ja.** Ne zato što je anglicizam — nije, to je latinizam standardan u srpskom pravnom jeziku (*verifikacija mandata*) — nego zato što akt i ekran rade različit posao. U aktu se meri odgovornost i reč mora da nosi težinu; na ekranu se govori čoveku, a **poznavanje je osnov instituta, ne njegovo ime**: dokaz stvarnosti kaže da se verifikacija „zasniva na neposrednom ličnom poznavanju dovoljnom da verifikator … potvrdi stvarnost". Zato ekran pita ono što čovek ume da proceni („potvrdi nekoga koga poznaješ"), a akt zadržava predmet za koji se odgovara.
+- Stranica **Potvrde** (ruta i dalje `/verifikacija`), glagol **potvrdi**, **lanac potvrda**, **mreža potvrda** (bivši „graf verifikacija").
+- 🔴 **Imenica za ulogu se NE uvodi.** „Potvrđivač potvrđuje" muca, a takvih rečenica ima **32** (11 u copy-ju, 21 u aktima) — sve rade upravo zato što su imenica i glagol različite reči. Umesto nove imenice imenuje se prava uloga: **„tvoj lanac"** u socijalnim programima, **„nosilac ZRNA"** u operativnom doprinosu. Ne vraćati „potvrđivač", „potvrdilac" ni „verifikator" u copy.
+
+**2. Statusi dobijaju imena umesto trpnog prideva:**
+> posetilac → **nov član** → **redovan član** → nosilac ZRNA
+
+- „Redovan" je standardan srpski izraz za člana sa svim pravima (nasuprot pridruženom/vanrednom), a enum u bazi se već zove `REGULARNI` — oznaka na ekranu se poklapa sa imenom u šemi, što nigde drugde u sistemu nije slučaj.
+- „Nov" umesto negacije: *nepotvrđen*/*nepunopravan* imenuju manjak na čoveku, „nov" imenuje trenutak koji prolazi. **Nov član JESTE član** — ima nalog, objavljuje ponude (najviše 3), prima POEN, odgovara na poruke povodom svog oglasa. Ceo red je bez ijedne negacije.
+- 🔴 **Zašto NE druge reči:** „pridruženi član" se sudara sa dugmetom **„Pridruži se"** (registracija), pa bi se čitalo kao „upisao sam se", ne kao manja prava; **„nepoznat"** je zauzet porukama o grešci („Nepoznat jezik", „Nepoznata akcija"); **„poznat član"** se u srpskom čita kao *slavan*; „pristupnik" pada na `pristupnicu` za Krug. Odbačene iz tih razloga, ne stilski.
+
+🔴 **Pečat na Pijaci NAMERNO ostaje `BEZ POTVRDE`.** On radi zaštitni posao prema kupcu — kaže da iza oglašivača još niko nije stao. „NOV" bi rekao samo da je skoro došao, a čovek može ostati bez potvrde godinu dana. Pečat i oznaka statusa rade različit posao i smeju da se razlikuju.
+
+🔴 **Baza se NE menja.** `VerifikacionaVeza`, `VerifikacijaToken`, `VerifikacionaZona`, `TipKorisnika.NEVERIFIKOVAN`, `EMISIJA_VERIFIKACIJA`, `NadzorSubjekt.VERIFIKATOR` ostaju — akti i dalje govore „verifikacija", a baza je zapis pravne činjenice, bliža aktu nego ekranu. Isti presedan kao `PROTOKOL_WALLET_ID = "banka-singleton"` uz UI „Protokol" i model `ChatMessage` uz UI „Pričaonica". Ostaju i placeholderi `{verifikator}`/`{verifikovani}` i polje `verifikacijaId` u poruci o grešci — kod ih traži po imenu.
+
+**Zamena ide PO KLJUČU, ne po reči** (`scripts/statusi-clanova.mjs` + `primeni-statuse.mjs`, uz `terminologija-sr.mjs` / `terminologija-prevodi.mjs`), jer „potvrđeno" u sistemu znači još četiri stvari koje se ne smeju pomeriti: potvrda **donacije**, potvrda **pokroviteljstva**, potvrda **izvršenja zadatka** i **verifikatorska potvrda socijalnog programa**.
+
+**Oznaka statusa čita INDEKS, ne tip naloga.** `imaPristupVerifikaciji` traži indeks ≥ 10%, a oznaka se birala po `tipKorisnika` — ta dva se razilaze kad se poništi lažna potvrda: nalog ostaje `REGULARNI`, indeks padne ispod praga. `IndeksPrikaz` sada prima `indeks` i tada prikazuje **„Nema pristup"** (`verifikacija.tip_bez_pristupa`). Ne vraćati izbor po tipu.
+
+**Brana:** `__tests__/copy-ukinuto.test.ts`, blok „copy govori o potvrdi" — obara build ako se `verifik`/`verif`/`верифи`/`hitelesít` vrati u `messages/*.json` ili `faq-data*.ts` na bilo kom jeziku (uz izuzetak za placeholdere). **Ne gleda akte** — oni namerno i dalje govore „verifikacija".
+
+🟡 **Usput ispravljene zatečene greške:**
+- „Kod važi **2 sata**" → **24 sata** (`TOKEN_VAZI_SEKUNDI` je na 24h od ukidanja table, tekst je zaostao) — stranica Potvrde i onboarding.
+- „Verifikacija **identiteta**" → identitet se ne proverava, što isti sajt tvrdi dva ekrana dalje.
+- Uputstvo je slalo na dugme „Generiši kod", koje se zove **„Pokaži kod"**.
+- „Početna verifikacija (osnivač)" → po čl. 14 dokaza stvarnosti početni korisnik **ne može biti verifikovan**; sada „Početni korisnik (osnivač)".
+- 🔴 **Ruski prevod je od 4.2.1 govorio „цепь поручительства" — lanac JEMSTVA**, ukinut tom istom verzijom. Preživelo je osam mesta jer je brana tražila „цепочка", a prevod koristi „цепь"; isto i mađarski „kezességi gráf" naspram provere koja je gledala samo „kezességi lánc". Obrasci u brani prošireni. **Pouka: pri ukidanju izraza pokriti sve imenice koje ukinuta reč nosi uz sebe, ne samo jednu.**
+- U `en` i `ru` je desetak admin poruka stajalo **neprevedeno, na srpskom**.
 
 ### Copy sajta uz 4.2.1 (2026-08-10)
 
@@ -638,9 +671,10 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
 Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
-- **Neverifikovan:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (Verifikacija).
-- **Verifikovan:** gornja grupa (Početna, **POEN**, Pijaca) → grupa **„Poverenje"** (Verifikacija) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, + Nadzor ako je nadzornik).
-- **Stavka „Tabla jemstva" i njen badge UKLONJENI (2026-08-09)** — tabla je ukinuta; put do verifikacije vodi kroz Pijacu, koja je već u gornjoj grupi.
+- **Nov član:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (**Potvrde**).
+- **Redovan član:** gornja grupa (Početna, **POEN**, Pijaca) → grupa **„Poverenje"** (**Potvrde**) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, + Nadzor ako je nadzornik).
+- Stavka se od 2026-08-12 zove **„Potvrde"** (`nav.verifikacija`), a poziv za nove **„Zamoli za potvrdu →"** (`nav.verifikuj_nalog`); **ruta ostaje `/verifikacija`** — stari linkovi iz notifikacija i mejlova moraju da rade.
+- **Stavka „Tabla jemstva" i njen badge UKLONJENI (2026-08-09)** — tabla je ukinuta; put do potvrde vodi kroz Pijacu, koja je već u gornjoj grupi.
 - **Admin (dodatno):** Admin.
 - „Postani pokrovitelj" → label **„Pokrovitelj"** (commit `80fe35b`). Jezik switcher (Lat/Ћир/EN) je u header-u, ne u sidebar-u.
 - Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Glasanje, Profil) dostupne preko drugih ulaznih tačaka.
