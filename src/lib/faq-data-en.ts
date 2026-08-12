@@ -32,7 +32,7 @@ POEN is also recorded through other channels — confirmation in the chain of co
         pitanje: `How do I get my first POEN if I have nothing to offer? What's my first step?`,
         odgovor: `You don't need any product to accumulate POEN — the first step is confirmation.
 
-Confirmation means that a confirmed user who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
+Confirmation means that a full member who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
 
 Once you are confirmed, several ways open up to accumulate more:
 
@@ -68,7 +68,7 @@ Confirmation doesn't require documents either. Your reality is confirmed by a us
 
 The Foundation does not maintain a record that links your pseudonym to your identity. That link simply does not exist in the system.
 
-You can optionally add your real name and phone number later if you choose to — entirely voluntarily, and visible only to confirmed users. You can withdraw that disclosure at any time.
+You can optionally add your real name and phone number later if you choose to — entirely voluntarily, and visible only to full members. You can withdraw that disclosure at any time.
 
 Note: choose a pseudonym that does not contain your personal data. In a small community, the combination of a pseudonym, location and activity may indirectly point to who you are — be aware of that.`,
       },
@@ -88,14 +88,14 @@ If you encounter any of the above, do not share your data and report it to the F
         pitanje: `How do I get my first POENs if I have nothing to offer?`,
         odgovor: `The first listing in which you offer something earns you 1,000 POENs through the contribution-to-exchange channel. The listing must have a photograph, a description, a category and a place.
 
-POENs are also recorded for you when someone else re-registers them to you for a completed exchange — as an unconfirmed user you can receive them, you just cannot re-register them to anyone yourself.
+POENs are also recorded for you when someone else re-registers them to you for a completed exchange — as an unfull member you can receive them, you just cannot re-register them to anyone yourself.
 
 And as soon as you are confirmed, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
       },
       {
         id: 82,
         pitanje: `I am buying from an advertiser who is not confirmed — how big is the risk?`,
-        odgovor: `A confirmed member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unconfirmed advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
+        odgovor: `A full member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unconfirmed advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
 
 For that reason, send POENs only after you have received the goods or the service.
 
@@ -237,7 +237,7 @@ All data is public: total recorded amount, number of steps, remainder to the cap
         pitanje: `How do I get confirmed and what do I gain from it?`,
         odgovor: `Confirmation is optional, but it is a prerequisite for full access to the platform's features.
 
-Confirmation is carried out through the chain of confirmations: a confirmed user who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal documents. The person who confirms you does not request or collect documents.
+Confirmation is carried out through the chain of confirmations: a full member who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal documents. The person who confirms you does not request or collect documents.
 
 Each confirmation increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
 
@@ -248,7 +248,7 @@ Confirmation is a prerequisite for all major features: recording POEN through do
       {
         id: 8,
         pitanje: `What if I'm a foreigner — can I be a member?`,
-        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a confirmed user who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
+        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a full member who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
 
 The system operates in Serbian and English.`,
       },
@@ -305,7 +305,7 @@ The amount is fixed and credited on a daily basis for as long as the status last
         pitanje: `How does operational contribution work?`,
         odgovor: `Operational contribution records forms of work for the common good that would otherwise remain invisible (voluntary work, caring for the elderly, work in community activities, creative contributions).
 
-Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A confirmed user applies and completes the task, and an authorised the person who confirmed you confirms completion before the Protocol records POEN.
+Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A full member applies and completes the task, and an authorised the person who confirmed you confirms completion before the Protocol records POEN.
 
 There is no fixed "hourly rate" — the proposed POEN is only a weighting indicator, and the actual amount recorded is distributed within the daily recording limit.`,
       },
@@ -323,7 +323,7 @@ Each programme is applied for separately, and all share a common daily recording
 
 When you confirm (confirm) the data that demonstrates you belong to that group, the Protocol automatically credits POEN to you, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.
 
-Applications are made through the platform and are open to confirmed users.
+Applications are made through the platform and are open to full members.
 
 Users aged 50 and over qualify. The daily amount grows with age: 1,000 POEN at age 50, increased by 100 POEN for each subsequent year. A user aged 65 thus receives 2,500 POEN per day, and a user aged 80 receives 4,000 POEN per day. Detailed conditions and the method of proving age are governed by the programme rules.`,
       },
@@ -402,7 +402,7 @@ The entire RSD portion is your private responsibility under tax regulations.`,
       {
         id: 23,
         pitanje: `How does a donation to the Foundation work and how much POEN do I receive?`,
-        odgovor: `Any confirmed user can make a donation by paying in dinars to the Foundation's bank account.
+        odgovor: `Any full member can make a donation by paying in dinars to the Foundation's bank account.
 
 Upon receipt of the payment, the Protocol automatically records POEN: the number of POEN equals the donation amount × the donation recording coefficient. The coefficient grows with the cumulative amount across 11 levels — from 1.00 (Level 1, a donation below 5,000 RSD) to 2.00 (at a cumulative 5,000,000 RSD). The level is permanent and does not decrease as POEN is spent. (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient.)
 
@@ -422,7 +422,7 @@ All sponsors are publicly visible on the Sponsors page — for transparency and 
         pitanje: `Can a company be a direct member?`,
         odgovor: `No. Direct members are exclusively natural persons.
 
-Companies participate through Sponsorship — they support the Foundation, and the owner or co-owner as a confirmed member receives a POEN bonus.`,
+Companies participate through Sponsorship — they support the Foundation, and the owner or co-owner as a full member receives a POEN bonus.`,
       },
       {
         id: 39,
@@ -438,7 +438,7 @@ The legal classification of these exchanges for tax and fiscal purposes does not
         pitanje: `Is my listing on the marketplace publicly visible?`,
         odgovor: `Yes. The content of a listing — description, price in POEN, location and your pseudonym — is publicly visible to all visitors, including unregistered ones, so that exchange is accessible and easy to find.
 
-What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to confirmed users. For unregistered and unconfirmed visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
+What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to full members. For unregistered and unconfirmed visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
       },
       {
         id: 58,
@@ -486,7 +486,7 @@ Upon receipt of the payment, the Protocol automatically credits POEN to you: the
 
 (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient — it is a separate figure tied only to donations.)
 
-Any confirmed user can make a donation. The Foundation issues a donation receipt on request, in accordance with the law.`,
+Any full member can make a donation. The Foundation issues a donation receipt on request, in accordance with the law.`,
       },
     ],
   },
@@ -577,7 +577,7 @@ The programmes' daily recording limit — the total daily recording from all pro
 
 Deterministic algorithmic records — the Protocol has no discretionary decisions; everything is in the code.
 
-Transparency — the contribution ledger is pseudonymous and immutable; visible to confirmed members (graded by status), while unregistered visitors see only aggregates.
+Transparency — the contribution ledger is pseudonymous and immutable; visible to full members (graded by status), while unregistered visitors see only aggregates.
 
 And finally, the activation of the Upper Kolo, which transfers governance authority to the members.`,
       },
@@ -630,7 +630,7 @@ Until the Upper Kolo is activated (Phase 1) all decisions are made by the Founda
 
 Code and content are the common good: the software is under AGPL-3.0, the content under CC BY-SA 4.0. Code contributions are accepted under the DCO principle (a "Signed-off-by" sign-off) — that is confirmation of the origin of the contribution, not a transfer of copyright to the Foundation (it is not a CLA). Your attribution for that contribution is permanent and remains even if you later delete your account.
 
-To have POEN recorded, you need to be a confirmed user with a reality index of at least 10%.
+To have POEN recorded, you need to be a full member with a reality index of at least 10%.
 
 The mechanism works as follows: the task is published by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo after activation; you apply and complete it, and an authorised the person who confirmed you confirms completion before POEN is recorded.`,
       },
@@ -641,7 +641,7 @@ The mechanism works as follows: the task is published by the Foundation (in the 
 
 What does exist is an export of your own data: at any time you can request all your data in a structured, machine-readable format (JSON) — that is your statutory right to data portability. But that is an export of your personal data, not an open programmatic interface over the entire system.
 
-It is also important to understand why: the system has graduated visibility — pseudonyms and individual transactions are visible only to confirmed users, while unregistered visitors see only aggregate indicators. Any future API would have to respect those same rules, otherwise it would circumvent the privacy protection.`,
+It is also important to understand why: the system has graduated visibility — pseudonyms and individual transactions are visible only to full members, while unregistered visitors see only aggregate indicators. Any future API would have to respect those same rules, otherwise it would circumvent the privacy protection.`,
       },
       {
         id: 71,
@@ -687,7 +687,7 @@ Specific internal dispute resolution mechanisms may be established later (throug
       {
         id: 32,
         pitanje: `What happens when someone does not comply with the rules?`,
-        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to confirmed members, so bad behaviour remains visible to those participating in the system.
+        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to full members, so bad behaviour remains visible to those participating in the system.
 
 The Foundation may temporarily suspend an account (for up to 30 days, with the user's right to be informed of the reasons and to respond) or exclude a user for a more serious breach of the rules.
 
@@ -696,7 +696,7 @@ An excluded user loses access, POEN and ZRNO are returned to the Protocol, and t
       {
         id: 33,
         pitanje: `Can I file a complaint against a Foundation decision?`,
-        odgovor: `Yes. Any confirmed member may submit a formal complaint through the platform — regarding confirmation, suspension, a programme decision, or any other decision.
+        odgovor: `Yes. Any full member may submit a formal complaint through the platform — regarding confirmation, suspension, a programme decision, or any other decision.
 
 The Foundation must resolve the complaint within 30 days, with reasons given.
 
@@ -715,20 +715,20 @@ You may have a maximum of 3 open complaints at any one time.`,
 
 An unregistered visitor sees only general system indicators (aggregates) — number of members, number of ledger updates, POEN in circulation. They do not see individual transactions or pseudonyms.
 
-A registered but unconfirmed user sees amounts and timestamps of ledger updates, but without the pseudonyms of the parties and without account balances.
+A registered but unfull member sees amounts and timestamps of ledger updates, but without the pseudonyms of the parties and without account balances.
 
-A confirmed user (reality index ≥ 10%) sees the pseudonyms of all users, all transactions with the parties' pseudonyms, account balances and profiles.
+A full member (reality index ≥ 10%) sees the pseudonyms of all users, all transactions with the parties' pseudonyms, account balances and profiles.
 
-Your real name and phone number are voluntary and are not a condition for using the system. The Foundation does not maintain a record linking your pseudonym to your identity — you choose whether and to whom (confirmed users only) you reveal your name and phone number, and you can withdraw that disclosure.
+Your real name and phone number are voluntary and are not a condition for using the system. The Foundation does not maintain a record linking your pseudonym to your identity — you choose whether and to whom (full members only) you reveal your name and phone number, and you can withdraw that disclosure.
 
-The marketplace is an exception: your listings (description, price, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your transaction history are visible only to confirmed users.`,
+The marketplace is an exception: your listings (description, price, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your transaction history are visible only to full members.`,
       },
       {
         id: 35,
         pitanje: `How is my privacy protected?`,
         odgovor: `Data minimisation is one of the four principles of the system — the platform collects only the data necessary for the system to function.
 
-Confirmation is carried out in the chain of confirmations: other confirmed users confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal data.
+Confirmation is carried out in the chain of confirmations: other full members confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal data.
 
 All admin actions involving any personal data are recorded in a permanent log. The Foundation does not share data with third parties except pursuant to an order from a competent authority.
 
@@ -763,7 +763,7 @@ Your real name and phone number are entirely voluntary. They are not a condition
 
 What do you miss out on if you don't provide them? Practically only easier contact with other people. On the marketplace, for example, others find it harder to contact you and arrange an in-person exchange without that information.
 
-If you do decide to add them, you choose whether your name and phone number will be visible to confirmed users — and you can withdraw that disclosure at any time, after which the data is no longer shown to others.
+If you do decide to add them, you choose whether your name and phone number will be visible to full members — and you can withdraw that disclosure at any time, after which the data is no longer shown to others.
 
 Your email address is never publicly visible, regardless of anything else.`,
       },
@@ -776,9 +776,9 @@ Your transactions in the ledger are held under a pseudonym, not your real name. 
 
 Several things do protect you, however:
 
-The Foundation does not maintain a table linking your pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose whether and to whom (confirmed users only) to reveal them, and you can withdraw that disclosure at any time.
+The Foundation does not maintain a table linking your pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose whether and to whom (full members only) to reveal them, and you can withdraw that disclosure at any time.
 
-Visibility is graded: unregistered visitors see only aggregates, and individual transactions with pseudonyms are visible only to confirmed members. Email, technical logs and the confirmation network are never public.
+Visibility is graded: unregistered visitors see only aggregates, and individual transactions with pseudonyms are visible only to full members. Email, technical logs and the confirmation network are never public.
 
 You are also responsible for ensuring that your pseudonym does not contain personal data that would give you away.
 
@@ -787,7 +787,7 @@ This is a known limitation of pseudonymous systems. We separate identifying from
       {
         id: 73,
         pitanje: `Can I get confirmed remotely, from abroad?`,
-        odgovor: `Yes. Confirmation (proof of reality) is based on direct personal acquaintance — a confirmed user who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of confirmation, so it can take place remotely, as long as the person who confirmed you genuinely knows you well enough to confirm your reality.
+        odgovor: `Yes. Confirmation (proof of reality) is based on direct personal acquaintance — a full member who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of confirmation, so it can take place remotely, as long as the person who confirmed you genuinely knows you well enough to confirm your reality.
 
 The system's protection does not rest on you being in the same room, but on personal acquaintance, on the person who confirmed you's responsibility (a false confirmation results in the reversal of confirmations and sanctions) and on the structure of the network — to reach a full reality index you must be known to people from several independent parts of the network.
 
