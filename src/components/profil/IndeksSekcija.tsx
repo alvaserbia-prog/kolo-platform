@@ -92,6 +92,7 @@ export default function IndeksSekcija({
         <IndeksPrikaz
           prikaz={data.korisnik.prikaz}
           tip={data.korisnik.tip}
+          indeks={data.korisnik.indeks}
           jeOsnivac={data.korisnik.jeOsnivac}
           statusKaoBadge={indeksKaoBadge}
           ispuniVisinu={ispuniVisinu}

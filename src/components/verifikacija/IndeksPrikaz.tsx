@@ -6,10 +6,19 @@
  */
 import { useTranslations } from "next-intl";
 import Pojam from "@/components/Pojam";
+import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 
 type Props = {
   prikaz: string; // "30/30%", "10/30%", "∞/10%", "0/0%"
   tip: string;
+  /**
+   * Indeks stvarnosti. Oznaka „Redovan član" tvrdi da čovek ima pun pristup, a
+   * pristup ne zavisi od tipa naloga nego od indeksa (`imaPristupVerifikaciji`).
+   * Ta dva se razilaze kad se poništi lažna potvrda: nalog ostaje REGULARNI, a
+   * indeks padne ispod praga — bez ovoga bi ekran pisao pun status preko
+   * zaključanog naloga.
+   */
+  indeks?: number;
   /** Početni korisnik (osnivač / UO Fondacije) — koren lanca potvrda. */
   jeOsnivac?: boolean;
   podnaslov?: string;
@@ -19,7 +28,7 @@ type Props = {
   ispuniVisinu?: boolean;
 };
 
-export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
+export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
   const t = useTranslations("verifikacija");
   const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
     ispuniVisinu ? " h-full flex flex-col justify-center" : ""
@@ -36,12 +45,25 @@ export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, status
     NEVERIFIKOVAN: "bg-kolo-bg text-kolo-muted",
   };
 
-  // Osnivači (početni korisnici, UO Fondacije) su koren lanca potvrda — nemaju
-  // verifikatora iznad sebe, pa se njihov status prikazuje kao „Početna verifikacija".
-  const labela = jeOsnivac ? t("tip_pocetna") : (tipLabela[tip] ?? tip);
-  const stil = jeOsnivac ? "bg-kolo-gold-100 text-kolo-gold-600" : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
+  // Redovan član kome je indeks pao ispod praga (poništena lažna potvrda) i dalje
+  // je REGULARNI, ali nema pristup — pa mu se ne sme prikazati pun status.
+  const bezPristupa =
+    tip === "REGULARNI" && indeks !== undefined && indeks < FUNKCIONALNI_PRAG_INDEKSA;
 
-  const indeks = (
+  // Osnivači (početni korisnici, UO Fondacije) su koren lanca potvrda — nemaju
+  // nikoga iznad sebe, pa se njihov status prikazuje kao „Početni korisnik".
+  const labela = jeOsnivac
+    ? t("tip_pocetna")
+    : bezPristupa
+      ? t("tip_bez_pristupa")
+      : (tipLabela[tip] ?? tip);
+  const stil = jeOsnivac
+    ? "bg-kolo-gold-100 text-kolo-gold-600"
+    : bezPristupa
+      ? "bg-kolo-bg text-kolo-muted"
+      : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
+
+  const indeksBlok = (
     <div className="min-w-0 text-center">
       <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold">
         <Pojam
@@ -67,7 +89,7 @@ export default function IndeksPrikaz({ prikaz, tip, jeOsnivac, podnaslov, status
             </span>
           </div>
           {/* DESNO — indeks stvarnosti (centrirano) */}
-          {indeks}
+          {indeksBlok}
         </div>
       </div>
     );

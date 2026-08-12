@@ -68,7 +68,7 @@ Ni potvrda ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te osob
 
 Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom. Ta veza u sustavu jednostavno ne postoji.
 
-Ime i broj telefona možeš kasnije unijeti samo ako to sam želiš — potpuno dobrovoljno i samo potvrđenim korisnicima. To otkrivanje možeš povući u svakom trenutku.
+Ime i broj telefona možeš kasnije unijeti samo ako to sam želiš — potpuno dobrovoljno i samo redovnim članovima. To otkrivanje možeš povući u svakom trenutku.
 
 Napomena: biraj pseudonim koji ne sadrži tvoje osobne podatke. U maloj sredini kombinacija pseudonima, lokacije i aktivnosti može posredno ukazati na to tko si — toga budi svjestan.`,
       },
@@ -95,7 +95,7 @@ A čim se potvrđuješ, možeš objaviti i potražnju — što tebi treba — pa
       {
         id: 82,
         pitanje: `Kupujem od oglašivača koji nije potvrđen — koliki je rizik?`,
-        odgovor: `Potvrđen član je onaj čiju je stvarnost netko potvrdio — nepoznat tebi, ali ne i mreži. Bez potvrde oglašivač je onaj čiju stvarnost još nitko nije potvrdio, i njegov oglas to jasno nosi.
+        odgovor: `Redovni član je onaj čiju je stvarnost netko potvrdio — nepoznat tebi, ali ne i mreži. Bez potvrde oglašivač je onaj čiju stvarnost još nitko nije potvrdio, i njegov oglas to jasno nosi.
 
 Zato POEN šaljite isključivo po primitku robe ili usluge.
 
@@ -237,7 +237,7 @@ Svi podaci su javni: ukupan evidentiran iznos, broj koraka, preostalo do granice
         pitanje: `Kako se potvrđujem i što time dobivam?`,
         odgovor: `Potvrda je opcionalna, ali je preduvjet za pun pristup funkcijama platforme.
 
-Potvrda se obavlja kroz lanac potvrda: potvrđeni korisnik koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke potvrđenoga. Onaj tko potvrđuje ne traži niti prikuplja dokumente.
+Potvrda se obavlja kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke potvrđenoga. Onaj tko potvrđuje ne traži niti prikuplja dokumente.
 
 Svaka potvrda uvećava tvoj indeks stvarnosti za 10 postotnih bodova (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
 
@@ -248,7 +248,7 @@ Potvrda je preduvjet za sve glavne funkcionalnosti: upis POEN-a kroz donacije i 
       {
         id: 8,
         pitanje: `Što ako sam stranac — mogu li biti član?`,
-        odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: potvrđeni korisnik koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+        odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
 
 Sustav radi na srpskom i engleskom jeziku.`,
       },
@@ -305,7 +305,7 @@ Iznos je fiksan i evidentira se na dnevnoj razini dok status traje.`,
         pitanje: `Kako radi operativni doprinos?`,
         odgovor: `Operativni doprinos evidentira oblike rada za zajedničko dobro koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
 
-Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nositelji ZRNA i Gornje Kolo (po aktivaciji). Potvrđeni korisnik se prijavljuje i izvršava ga, a izvršenje potvrđuje ovlašteni onaj tko potvrđuje prije nego što Protokol evidentira POEN.
+Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nositelji ZRNA i Gornje Kolo (po aktivaciji). Redovni član se prijavljuje i izvršava ga, a izvršenje potvrđuje ovlašteni onaj tko potvrđuje prije nego što Protokol evidentira POEN.
 
 Nema fiksne „tarife po satu" — predloženi POEN samo je težinski orijentir, a stvarno evidentirani iznos raspoređuje se u okviru dnevnog limita evidentiranja.`,
       },
@@ -323,7 +323,7 @@ Svaki program se prijavljuje posebno, a svi imaju zajednički dnevni limit evide
 
 Kada potvrdiš (potvrđuješ) podatke koji dokazuju da pripadaš toj skupini, Protokol ti automatski upiše POEN, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo sudjelovanje dobije ravnopravno mjesto u sustavu.
 
-Prijava ide kroz platformu i otvorena je potvrđenim korisnicima.
+Prijava ide kroz platformu i otvorena je redovnim članovima.
 
 Pravo imaju korisnici od 50 godina naviše. Dnevni iznos raste s godinama: 1.000 POEN s navršenih 50 godina, uvećano za 100 POEN za svaku sljedeću godinu. Tako korisnik od 65 godina ima 2.500 POEN dnevno, a korisnik od 80 godina 4.000 POEN dnevno. Bliži uvjeti i način dokazivanja godina uređuju se programskim pravilnikom.`,
       },
@@ -402,7 +402,7 @@ Sav RSD dio tvoja je privatna odgovornost prema poreznim propisima.`,
       {
         id: 23,
         pitanje: `Kako radi donacija Fondaciji i koliko POEN-a dobivam?`,
-        odgovor: `Donaciju može dati svaki potvrđeni korisnik, uplatom u dinarima na račun Fondacije.
+        odgovor: `Donaciju može dati svaki redovni član, uplatom u dinarima na račun Fondacije.
 
 Po primitku uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste s kumulativnim iznosom kroz 11 razina — od 1,00 (Razina 1, donacija ispod 5.000 RSD) do 2,00 (pri kumulativno 5.000.000 RSD). Razina je trajna i ne smanjuje se korištenjem POEN-a. (Koeficijent evidencije donacija nije „tečaj" ni obračunski koeficijent ZRNA.)
 
@@ -413,7 +413,7 @@ Donacije pomažu Fondaciji pokriti osnovne troškove rada (server, alati, razvoj
         pitanje: `Što su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
         odgovor: `Pokrovitelji su pravne osobe i poduzetnici koji podržavaju rad Fondacije. Glavna razlika u odnosu na donaciju fizičke osobe u tome je što pokrovitelj može doprinijeti ne samo novcem, nego i u robi ili uslugama.
 
-Pokrovitelj nema vlastiti korisnički račun — POEN bonus evidentira se na korisničkom računu vlasnika ili suvlasnika koji je potvrđeni korisnik, odnosno samog poduzetnika, po fiksnoj tablici sa 7 razina (od 10.000 RSD do 1.000.000 RSD).
+Pokrovitelj nema vlastiti korisnički račun — POEN bonus evidentira se na korisničkom računu vlasnika ili suvlasnika koji je redovni član, odnosno samog poduzetnika, po fiksnoj tablici sa 7 razina (od 10.000 RSD do 1.000.000 RSD).
 
 Svi pokrovitelji javno su vidljivi na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
       },
@@ -422,7 +422,7 @@ Svi pokrovitelji javno su vidljivi na stranici Pokrovitelji — radi transparent
         pitanje: `Može li tvrtka biti izravni član?`,
         odgovor: `Ne. Izravni članovi isključivo su fizičke osobe.
 
-Tvrtke sudjeluju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili suvlasnik kao potvrđeni član dobiva POEN bonus.`,
+Tvrtke sudjeluju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili suvlasnik kao redovni član dobiva POEN bonus.`,
       },
       {
         id: 39,
@@ -438,7 +438,7 @@ Pravna kvalifikacija ovih razmjena u poreznom i fiskalnom smislu ne ukida postoj
         pitanje: `Je li moj oglas na Pijaci javno vidljiv?`,
         odgovor: `Da. Sadržaj oglasa — opis, cijena u POEN-ima, lokacija i tvoj pseudonim — javno je vidljiv svim posjetiteljima, uključujući neregistrirane, da bi razmjena bila dostupna i lakša za pronalaženje.
 
-Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili razmijeni s tobom — to je dostupno samo potvrđenim korisnicima. Za neregistrirane i one bez potvrde, tvoj pseudonim na oglasu ne vodi do tvog profila ni povijesti transakcija.`,
+Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili razmijeni s tobom — to je dostupno samo redovnim članovima. Za neregistrirane i one bez potvrde, tvoj pseudonim na oglasu ne vodi do tvog profila ni povijesti transakcija.`,
       },
       {
         id: 58,
@@ -486,7 +486,7 @@ Po primitku uplate, Protokol ti automatski upiše POEN: iznos donacije pomnožen
 
 (Koeficijent evidencije donacija nije „tečaj" niti obračunski koeficijent ZRNA — to je posebna veličina vezana samo za donacije.)
 
-Donirati može svaki potvrđeni korisnik. Fondacija na zahtjev izdaje potvrdu o donaciji u skladu sa zakonom.`,
+Donirati može svaki redovni član. Fondacija na zahtjev izdaje potvrdu o donaciji u skladu sa zakonom.`,
       },
     ],
   },
@@ -577,7 +577,7 @@ Dnevni limit programa — ukupno dnevno evidentiranje svih programa zajedno ne s
 
 Deterministički algoritamski upisi — Protokol nema diskrecijskih odluka, sve je u kodu.
 
-Transparentnost — evidencija doprinosa je pseudonimna i nepromjenjiva; vidljiva je potvrđenim članovima (gradirano po statusu), dok neregistrirani vide samo agregate.
+Transparentnost — evidencija doprinosa je pseudonimna i nepromjenjiva; vidljiva je redovnim članovima (gradirano po statusu), dok neregistrirani vide samo agregate.
 
 I konačno, aktivacija Gornjeg Kola koja prebacuje nadležnost na članove.`,
       },
@@ -630,7 +630,7 @@ Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog o
 
 Kod i sadržaj su zajedničko dobro: softver je pod AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvaća se po principu DCO (potpis „Signed-off-by") — to je potvrda podrijetla doprinosa, ne prijenos autorskih prava na Fondaciju (nije CLA). Tvoja atribucija na tom doprinosu je trajna i ostaje čak i ako poslije izbrišeš račun.
 
-Da bi ti se POEN upisao, trebaš biti potvrđen korisnik s indeksom stvarnosti od najmanje 10%.
+Da bi ti se POEN upisao, trebaš biti redovni član s indeksom stvarnosti od najmanje 10%.
 
 Mehanizam ide ovako: zadatak objavljuje Fondacija (u početnoj fazi), odnosno nositelji ZRNA i Gornje Kolo nakon aktivacije; ti se prijaviš i izvršiš ga, a izvršenje potvrđuje ovlašteni onaj tko potvrđuje prije nego što se POEN upiše.`,
       },
@@ -641,7 +641,7 @@ Mehanizam ide ovako: zadatak objavljuje Fondacija (u početnoj fazi), odnosno no
 
 Ono što postoji jest izvoz tvojih vlastitih podataka: u svakom trenutku možeš zatražiti sve svoje podatke u strukturiranom, strojno čitljivom formatu (JSON) — to je tvoje zakonsko pravo na prenosivost podataka. Ali to je izvoz tvojih osobnih podataka, ne otvoreno programsko sučelje nad cijelim sustavom.
 
-Važno je da znaš i zašto: sustav ima gradiranu vidljivost — pseudonime i pojedinačne transakcije vide samo potvrđeni korisnici, a neregistrirani samo zbirne pokazatelje. Svaki budući API morao bi poštovati to isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
+Važno je da znaš i zašto: sustav ima gradiranu vidljivost — pseudonime i pojedinačne transakcije vide samo redovni članovi, a neregistrirani samo zbirne pokazatelje. Svaki budući API morao bi poštovati to isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
       },
       {
         id: 71,
@@ -687,7 +687,7 @@ Posebni interni mehanizmi rješavanja sporova mogu se uspostaviti kasnije (poseb
       {
         id: 32,
         pitanje: `Što se događa kada se netko ne pridržava pravila?`,
-        odgovor: `Sustav ima trajno pamćenje — svako ažuriranje evidencije trajno je zabilježeno pod pseudonimom i vidljivo potvrđenim članovima, pa loše ponašanje ostaje vidljivo onima koji sudjeluju u sustavu.
+        odgovor: `Sustav ima trajno pamćenje — svako ažuriranje evidencije trajno je zabilježeno pod pseudonimom i vidljivo redovnim članovima, pa loše ponašanje ostaje vidljivo onima koji sudjeluju u sustavu.
 
 Fondacija može privremeno suspendirati račun (najviše 30 dana, uz pravo korisnika da bude obaviješten o razlozima i da se izjasni) ili isključiti korisnika pri težoj povredi pravila.
 
@@ -696,7 +696,7 @@ Isključeni korisnik gubi pristup, POEN i ZRNO vraćaju se Protokolu, a pseudoni
       {
         id: 33,
         pitanje: `Mogu li podnijeti prigovor na odluku Fondacije?`,
-        odgovor: `Da. Svaki potvrđeni član može podnijeti formalni prigovor kroz platformu — na potvrdu, suspenziju, odluku o programu ili bilo koju drugu odluku.
+        odgovor: `Da. Svaki redovni član može podnijeti formalni prigovor kroz platformu — na potvrdu, suspenziju, odluku o programu ili bilo koju drugu odluku.
 
 Fondacija mora riješiti prigovor u roku od 30 dana, s obrazloženjem.
 
@@ -717,18 +717,18 @@ Neregistrirani posjetitelj vidi samo opće pokazatelje sustava (agregate) — br
 
 Registrirani, ali oni bez potvrde korisnik vidi iznose i vremenske oznake ažuriranja evidencije, ali bez pseudonima strana i bez stanja računa.
 
-Potvrđeni korisnik (indeks stvarnosti ≥ 10%) vidi pseudonime svih korisnika, sve transakcije s pseudonimima strana, stanja računa i profile.
+Redovni član (indeks stvarnosti ≥ 10%) vidi pseudonime svih korisnika, sve transakcije s pseudonimima strana, stanja računa i profile.
 
 Tvoje pravo ime i telefon dobrovoljni su i nisu uvjet za korištenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom — sam biraš hoćeš li i kome (samo potvrđenima) otkriti ime i telefon, a otkrivanje možeš povući.
 
-Iznimka je Pijaca: tvoji oglasi (opis, cijena, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje s poviješću vide samo potvrđeni korisnici.`,
+Iznimka je Pijaca: tvoji oglasi (opis, cijena, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje s poviješću vide samo redovni članovi.`,
       },
       {
         id: 35,
         pitanje: `Kako se štiti moja privatnost?`,
         odgovor: `Minimizacija podataka jedan je od četiri principa sustava — platforma prikuplja samo podatke nužne za funkcioniranje sustava.
 
-Potvrda se obavlja u lancu potvrda: drugi potvrđeni korisnici potvrđuju tvoju stvarnost na temelju osobnog poznavanja, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta računa koji ne prikuplja osobne podatke potvrđenog.
+Potvrda se obavlja u lancu potvrda: drugi redovni članovi potvrđuju tvoju stvarnost na temelju osobnog poznavanja, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta računa koji ne prikuplja osobne podatke potvrđenog.
 
 Sve admin akcije pristupa eventualnim osobnim podacima bilježe se u trajnom logu. Fondacija ne dijeli podatke s trećim osobama osim po nalogu nadležnog tijela.
 
@@ -763,7 +763,7 @@ Pravo ime i broj telefona potpuno su dobrovoljni. Nisu uvjet da budeš potvrđen
 
 Što gubiš ako ih ne daš? Praktično samo lakši kontakt s drugim ljudima. Na prostoru za razmjenu (Pijaca), na primjer, drugi te bez tih podataka teže mogu kontaktirati i dogovoriti razmjenu uživo.
 
-Ako ipak odlučiš unijeti ih, sam biraš hoće li tvoje ime i telefon biti vidljivi potvrđenim korisnicima — i to otkrivanje možeš povući u svakom trenutku, nakon čega se podaci više ne prikazuju drugima.
+Ako ipak odlučiš unijeti ih, sam biraš hoće li tvoje ime i telefon biti vidljivi redovnim članovima — i to otkrivanje možeš povući u svakom trenutku, nakon čega se podaci više ne prikazuju drugima.
 
 Email adresa ti nikada nije javno vidljiva, bez obzira na sve.`,
       },
@@ -778,7 +778,7 @@ Ipak te štiti nekoliko stvari:
 
 Fondacija ne vodi tablicu koja povezuje pseudonim s tvojim identitetom — tu vezu jednostavno ne posjedujemo. Tvoje pravo ime i broj telefona dobrovoljni su; sam biraš hoćeš li ih i kome (samo potvrđenima) otkriti, a otkrivanje možeš povući u svakom trenutku.
 
-Vidljivost je gradirana: neregistrirani vide samo agregate, a pojedinačne transakcije s pseudonimima vide tek potvrđeni članovi. Email, tehnički logovi i mreža potvrda nikada nisu javni.
+Vidljivost je gradirana: neregistrirani vide samo agregate, a pojedinačne transakcije s pseudonimima vide tek redovni članovi. Email, tehnički logovi i mreža potvrda nikada nisu javni.
 
 Odgovoran si i za to da tvoj pseudonim ne sadrži osobne podatke koji bi te odali.
 
@@ -787,7 +787,7 @@ Ovo je poznato ograničenje pseudonimnih sustava. Razdvajamo identifikacijske od
       {
         id: 73,
         pitanje: `Mogu li se potvrditi na daljinu, iz inozemstva?`,
-        odgovor: `Da. Potvrda (dokaz stvarnosti) zasniva se na neposrednom osobnom poznavanju — potvrđeni korisnik koji te osobno poznaje potvrđuje tvoju stvarnost i svojom odgovornošću odgovara za istinitost te tvrdnje. Pravilnik ne zahtijeva fizičku prisutnost u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj tko potvrđuje doista poznaje dovoljno da potvrdi tvoju stvarnost.
+        odgovor: `Da. Potvrda (dokaz stvarnosti) zasniva se na neposrednom osobnom poznavanju — redovni član koji te osobno poznaje potvrđuje tvoju stvarnost i svojom odgovornošću odgovara za istinitost te tvrdnje. Pravilnik ne zahtijeva fizičku prisutnost u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj tko potvrđuje doista poznaje dovoljno da potvrdi tvoju stvarnost.
 
 Zaštita sustava ne počiva na tome da ste u istoj prostoriji, nego na osobnom poznavanju, na odgovornosti onoga tko potvrđuje (lažna potvrda povlači poništavanje potvrda i sankcije) i na strukturi mreže — da bi dosegnuo pun indeks stvarnosti, moraš biti poznat ljudima iz više neovisnih dijelova mreže.
 

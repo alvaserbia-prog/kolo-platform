@@ -125,7 +125,7 @@ export default async function VerifikacijaPage() {
           na Pijacu; desno: lanac verifikacija. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
-          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
+          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} indeks={user.indeksStvarnosti} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
 
           <div id="moj-kod">
             <MojQrKod />

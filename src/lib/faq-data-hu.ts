@@ -79,7 +79,7 @@ A megerősítés sem kér iratokat. A valódiságodat olyan felhasználó erős�
 
 Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kapcsolná. Ez a kapcsolat egyszerűen nem létezik a rendszerben.
 
-A nevedet és a telefonszámodat később csak akkor adhatod meg, ha te magad így akarod — teljesen önkéntesen, és csak megerősített felhasználók számára. Ezt a megosztást bármikor visszavonhatod.
+A nevedet és a telefonszámodat később csak akkor adhatod meg, ha te magad így akarod — teljesen önkéntesen, és csak rendes tagok számára. Ezt a megosztást bármikor visszavonhatod.
 
 Megjegyzés: olyan álnevet válassz, amely nem tartalmaz személyes adatot. Kis településen az álnév, a helység és a tevékenység együttese közvetve utalhat arra, ki vagy — ezzel légy tisztában.`,
       },
@@ -106,7 +106,7 @@ Amint pedig megerősítettél, keresési hirdetést is közzétehetsz — azt, a
       {
         id: 82,
         pitanje: `Olyan hirdetőtől vásárolok, aki nincs megerősítve — mekkora a kockázat?`,
-        odgovor: `A megerősített tag olyasvalaki, akinek a valódiságát más megerősítette — neked ismeretlen, a hálózatnak nem. A nem megerősített hirdető olyasvalaki, akinek a valódiságát még senki nem erősítette meg, és a hirdetése ezt világosan jelzi.
+        odgovor: `A rendes tag olyasvalaki, akinek a valódiságát más megerősítette — neked ismeretlen, a hálózatnak nem. A nem megerősített hirdető olyasvalaki, akinek a valódiságát még senki nem erősítette meg, és a hirdetése ezt világosan jelzi.
 
 Ezért POEN-t kizárólag a javak vagy a szolgáltatás átvétele után küldjetek.
 
@@ -248,7 +248,7 @@ Minden adat nyilvános: az összes rögzített összeg, a lépések száma, a ha
         pitanje: `Hogyan megerősíttethetem magam, és mit nyerek vele?`,
         odgovor: `A megerősítés választható, de előfeltétele a platform funkcióinak teljes elérésének.
 
-A megerősítés a megerősítési láncon keresztül történik: olyan megerősített felhasználó, aki személyesen ismer téged, ezen ismeretség alapján megerősíti a valódiságodat. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről. A megerősítő nem kér és nem gyűjt iratokat.
+A megerősítés a megerősítési láncon keresztül történik: olyan rendes tag, aki személyesen ismer téged, ezen ismeretség alapján megerősíti a valódiságodat. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről. A megerősítő nem kér és nem gyűjt iratokat.
 
 Minden megerősítés 10 százalékponttal növeli a valóságindexedet (0%-tól 100%-ig). A platform funkcióinak teljes elérése a 10%-os küszöbnél nyílik meg.
 
@@ -259,7 +259,7 @@ A megerősítés minden fő funkció előfeltétele: POEN rögzítése adományo
       {
         id: 8,
         pitanje: `Mi van, ha külföldi vagyok — lehetek tag?`,
-        odgovor: `Igen. Az állampolgárság nem feltétel. Az számít, hogy valós személy legyél — ezt pedig nem irattal bizonyítod, hanem a megerősítési láncon keresztül: olyan megerősített felhasználó, aki személyesen ismer, megerősíti a valódiságodat. A regisztrációkor nem kérünk sem útlevelet, sem személyi igazolványt, sem személyi számot — választasz álnevet, megadsz egy e-mail-címet és egy jelszót.
+        odgovor: `Igen. Az állampolgárság nem feltétel. Az számít, hogy valós személy legyél — ezt pedig nem irattal bizonyítod, hanem a megerősítési láncon keresztül: olyan rendes tag, aki személyesen ismer, megerősíti a valódiságodat. A regisztrációkor nem kérünk sem útlevelet, sem személyi igazolványt, sem személyi számot — választasz álnevet, megadsz egy e-mail-címet és egy jelszót.
 
 A rendszer szerb és angol nyelven működik.`,
       },
@@ -316,7 +316,7 @@ Az összeg fix, és napi szinten rögzül, amíg a státusz fennáll.`,
         pitanje: `Hogyan működik a működési hozzájárulás?`,
         odgovor: `A működési hozzájárulás olyan, a közjóért végzett munkaformákat rögzít, amelyek egyébként láthatatlanok maradnának (önkéntes munka, idősek gondozása, közös tevékenységekben való részvétel, alkotói hozzájárulások).
 
-A hozzájárulás meghirdetett feladaton keresztül folyik: a feladatot az Alapítvány tűzi ki (a kezdeti szakaszban), illetve az aktiválás után a ZRNO-tartók és a Felső Kolo. Megerősített felhasználó jelentkezik rá és elvégzi, a teljesítést pedig az arra jogosult megerősítő erősíti meg, mielőtt a Protokoll rögzítené a POEN-t.
+A hozzájárulás meghirdetett feladaton keresztül folyik: a feladatot az Alapítvány tűzi ki (a kezdeti szakaszban), illetve az aktiválás után a ZRNO-tartók és a Felső Kolo. Rendes tag jelentkezik rá és elvégzi, a teljesítést pedig az arra jogosult megerősítő erősíti meg, mielőtt a Protokoll rögzítené a POEN-t.
 
 Nincs fix „órabér" — a javasolt POEN csak súlyozási támpont, a ténylegesen rögzített összeg pedig a napi rögzítési kereten belül oszlik el.`,
       },
@@ -334,7 +334,7 @@ Minden programra külön kell jelentkezni, de mindegyikre közös napi rögzít�
 
 Amikor igazolod az e csoporthoz tartozásodat bizonyító adatokat, a Protokoll automatikusan POEN-t ír be neked, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.
 
-A jelentkezés a platformon keresztül történik, és megerősített felhasználók előtt áll nyitva.
+A jelentkezés a platformon keresztül történik, és rendes tagok előtt áll nyitva.
 
 Az 50 éves és idősebb felhasználók jogosultak. A napi összeg a korral nő: 1000 POEN a betöltött 50. évtől, minden további évért 100 POEN-nel több. Így a 65 éves felhasználónál ez napi 2500 POEN, a 80 évesnél napi 4000 POEN. A részletes feltételeket és az életkor igazolásának módját programszabályzat rendezi.`,
       },
@@ -413,7 +413,7 @@ A teljes dináros rész a te magánfelelősséged az adójogi szabályok szerint
       {
         id: 23,
         pitanje: `Hogyan működik az Alapítványnak adott adomány, és mennyi POEN-t kapok?`,
-        odgovor: `Adományt bármely megerősített felhasználó adhat, dinárban, az Alapítvány számlájára történő utalással.
+        odgovor: `Adományt bármely rendes tag adhat, dinárban, az Alapítvány számlájára történő utalással.
 
 Az utalás beérkezésekor a Protokoll automatikusan POEN-t rögzít: a POEN mennyisége = az adomány összege × az adományrögzítési együttható. Az együttható a halmozott összeggel 11 szinten át nő — 1,00-tól (1. szint, 5000 RSD alatti adomány) 2,00-ig (halmozott 5 000 000 RSD-nél). A szint állandó, és a POEN felhasználásával nem csökken. (Az adományrögzítési együttható nem „árfolyam" és nem a ZRNO elszámolási együtthatója.)
 
@@ -424,7 +424,7 @@ Az adományok segítik az Alapítványt a működés alapköltségeinek fedezés
         pitanje: `Kik a Patrónusok, és miben különböznek az adománytól?`,
         odgovor: `A patrónusok olyan jogi személyek és egyéni vállalkozók, akik támogatják az Alapítvány működését. A magánszemély adományához képest a fő különbség az, hogy a patrónus nemcsak pénzzel, hanem áruval vagy szolgáltatással is hozzájárulhat.
 
-A patrónusnak nincs saját fiókja — a POEN-bónusz annak a tulajdonosnak vagy résztulajdonosnak a fiókjában rögzül, aki megerősített felhasználó, illetve magának az egyéni vállalkozónak a fiókjában, egy 7 szintből álló fix táblázat szerint (10 000 RSD-től 1 000 000 RSD-ig).
+A patrónusnak nincs saját fiókja — a POEN-bónusz annak a tulajdonosnak vagy résztulajdonosnak a fiókjában rögzül, aki rendes tag, illetve magának az egyéni vállalkozónak a fiókjában, egy 7 szintből álló fix táblázat szerint (10 000 RSD-től 1 000 000 RSD-ig).
 
 Minden patrónus nyilvánosan látható a Patrónusok oldalon — az átláthatóság és a hozzájárulás nyilvános elismerése érdekében.`,
       },
@@ -433,7 +433,7 @@ Minden patrónus nyilvánosan látható a Patrónusok oldalon — az átláthat�
         pitanje: `Lehet-e egy cég közvetlen tag?`,
         odgovor: `Nem. Közvetlen tagok kizárólag természetes személyek lehetnek.
 
-A cégek a Patronáláson keresztül vesznek részt — támogatják az Alapítványt, a tulajdonos vagy résztulajdonos pedig megerősített tagként POEN-bónuszt kap.`,
+A cégek a Patronáláson keresztül vesznek részt — támogatják az Alapítványt, a tulajdonos vagy résztulajdonos pedig rendes tagként POEN-bónuszt kap.`,
       },
       {
         id: 39,
@@ -449,7 +449,7 @@ E cserék adójogi és számlaadási minősítése nem szünteti meg a tevékeny
         pitanje: `Nyilvánosan látható a hirdetésem a Piacon?`,
         odgovor: `Igen. A hirdetés tartalma — a leírás, a POEN-ben megadott ár, a helység és az álneved — nyilvánosan látható minden látogató számára, a nem regisztráltak számára is, hogy a csere elérhetőbb és könnyebben megtalálható legyen.
 
-Ami NEM nyilvános: az elérhetőséged (telefonszám), valamint az a lehetőség, hogy valaki írjon neked vagy cseréljen veled — ez csak megerősített felhasználók számára érhető el. A nem regisztráltak és a nem megerősítettek számára a hirdetésen szereplő álneved sem a profilodhoz, sem a tranzakciós előzményeidhez nem vezet.`,
+Ami NEM nyilvános: az elérhetőséged (telefonszám), valamint az a lehetőség, hogy valaki írjon neked vagy cseréljen veled — ez csak rendes tagok számára érhető el. A nem regisztráltak és a nem megerősítettek számára a hirdetésen szereplő álneved sem a profilodhoz, sem a tranzakciós előzményeidhez nem vezet.`,
       },
       {
         id: 58,
@@ -497,7 +497,7 @@ Az utalás beérkezésekor a Protokoll automatikusan POEN-t ír be neked: az ado
 
 (Az adományrögzítési együttható nem „árfolyam" és nem a ZRNO elszámolási együtthatója — külön, kizárólag az adományokhoz kötődő mennyiség.)
 
-Adományozni bármely megerősített felhasználó tud. Kérésre az Alapítvány a törvénynek megfelelő igazolást állít ki az adományról.`,
+Adományozni bármely rendes tag tud. Kérésre az Alapítvány a törvénynek megfelelő igazolást állít ki az adományról.`,
       },
     ],
   },
@@ -588,7 +588,7 @@ A programok napi korlátja — az összes program együttes napi rögzítése ne
 
 Determinisztikus algoritmikus bejegyzések — a Protokollnak nincsenek mérlegelési döntései, minden a kódban van.
 
-Átláthatóság — a hozzájárulások nyilvántartása álnevesített és megváltoztathatatlan; a megerősített tagok látják (státusz szerint fokozatosan), míg a nem regisztráltak csak az összesített adatokat.
+Átláthatóság — a hozzájárulások nyilvántartása álnevesített és megváltoztathatatlan; a rendes tagok látják (státusz szerint fokozatosan), míg a nem regisztráltak csak az összesített adatokat.
 
 Végül pedig a Felső Kolo aktiválása, amely a hatáskört a tagokra ruházza át.`,
       },
@@ -641,7 +641,7 @@ A Felső Kolo aktiválásáig (1. szakasz) minden döntést az Alapítvány hoz 
 
 A kód és a tartalom közjó: a szoftver AGPL-3.0, a tartalom CC BY-SA 4.0 licenc alatt áll. A kóddal való hozzájárulást a DCO elve szerint fogadjuk el („Signed-off-by" aláírás) — ez a hozzájárulás eredetének igazolása, nem a szerzői jogok átruházása az Alapítványra (nem CLA). Az e hozzájárulásra vonatkozó feltüntetésed állandó, és akkor is megmarad, ha később törlöd a fiókodat.
 
-Ahhoz, hogy POEN kerüljön a nyilvántartásodba, megerősített felhasználónak kell lenned, legalább 10%-os valóságindexszel.
+Ahhoz, hogy POEN kerüljön a nyilvántartásodba, rendes tagnak kell lenned, legalább 10%-os valóságindexszel.
 
 A mechanizmus a következő: a feladatot az Alapítvány hirdeti meg (a kezdeti szakaszban), illetve az aktiválás után a ZRNO-tartók és a Felső Kolo; te jelentkezel rá és elvégzed, a teljesítést pedig az arra jogosult megerősítő erősíti meg, mielőtt a POEN rögzülne.`,
       },
@@ -652,7 +652,7 @@ A mechanizmus a következő: a feladatot az Alapítvány hirdeti meg (a kezdeti 
 
 Ami létezik, az a saját adataid exportja: bármikor kérheted az összes adatodat strukturált, géppel olvasható formátumban (JSON) — ez a törvényes adathordozhatósági jogod. De ez a személyes adataid exportja, nem pedig nyílt programozói felület az egész rendszerhez.
 
-Fontos tudnod azt is, miért: a rendszerben fokozatos láthatóság működik — az álneveket és az egyes tranzakciókat csak a megerősített felhasználók látják, a nem regisztráltak pedig csak az összesített mutatókat. Bármely jövőbeli API-nak ugyanezt a szabályt kellene tiszteletben tartania, különben megkerülné az adatvédelmet.`,
+Fontos tudnod azt is, miért: a rendszerben fokozatos láthatóság működik — az álneveket és az egyes tranzakciókat csak a rendes tagok látják, a nem regisztráltak pedig csak az összesített mutatókat. Bármely jövőbeli API-nak ugyanezt a szabályt kellene tiszteletben tartania, különben megkerülné az adatvédelmet.`,
       },
       {
         id: 71,
@@ -698,7 +698,7 @@ Külön belső vitarendezési mechanizmusok később hozhatók létre (külön s
       {
         id: 32,
         pitanje: `Mi történik, ha valaki nem tartja be a szabályokat?`,
-        odgovor: `A rendszernek tartós emlékezete van — minden nyilvántartás-frissítés véglegesen rögzül álnév alatt, és látható a megerősített tagok számára, így a rossz magatartás látható marad azok előtt, akik részt vesznek a rendszerben.
+        odgovor: `A rendszernek tartós emlékezete van — minden nyilvántartás-frissítés véglegesen rögzül álnév alatt, és látható a rendes tagok számára, így a rossz magatartás látható marad azok előtt, akik részt vesznek a rendszerben.
 
 Az Alapítvány ideiglenesen felfüggesztheti a fiókot (legfeljebb 30 napra, a felhasználó azon jogával, hogy tájékoztassák az okokról és nyilatkozhasson), vagy súlyosabb szabálysértés esetén kizárhatja a felhasználót.
 
@@ -707,7 +707,7 @@ A kizárt felhasználó elveszíti a hozzáférését, a POEN és a ZRNO visszak
       {
         id: 33,
         pitanje: `Benyújthatok kifogást az Alapítvány döntése ellen?`,
-        odgovor: `Igen. Minden megerősített tag benyújthat hivatalos kifogást a platformon keresztül — megerősítés, felfüggesztés, programdöntés vagy bármely más döntés ellen.
+        odgovor: `Igen. Minden rendes tag benyújthat hivatalos kifogást a platformon keresztül — megerősítés, felfüggesztés, programdöntés vagy bármely más döntés ellen.
 
 Az Alapítványnak 30 napon belül, indokolással kell elbírálnia a kifogást.
 
@@ -726,20 +726,20 @@ Egyszerre legfeljebb 3 nyitott kifogásod lehet.`,
 
 A nem regisztrált látogató csak a rendszer általános mutatóit (összesített adatokat) látja — a tagok számát, a nyilvántartás-frissítések számát, a forgalomban lévő POEN-t. Egyedi tranzakciókat és álneveket nem lát.
 
-A regisztrált, de nem megerősített felhasználó látja a nyilvántartás-frissítések összegeit és időbélyegeit, de a felek álnevei és a számlaegyenlegek nélkül.
+A regisztrált, de nem rendes tag látja a nyilvántartás-frissítések összegeit és időbélyegeit, de a felek álnevei és a számlaegyenlegek nélkül.
 
-A megerősített felhasználó (valóságindex ≥ 10%) látja az összes felhasználó álnevét, minden tranzakciót a felek álnevével, a számlaegyenlegeket és a profilokat.
+A rendes tag (valóságindex ≥ 10%) látja az összes felhasználó álnevét, minden tranzakciót a felek álnevével, a számlaegyenlegeket és a profilokat.
 
 A valódi neved és a telefonszámod önkéntes, és nem feltétele a használatnak. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kapcsolná — magad döntöd el, felfeded-e a nevedet és a telefonszámodat, és kinek (csak megerősítetteknek), a megosztást pedig visszavonhatod.
 
-Kivétel a Piac: a hirdetéseid (leírás, ár, helység és álnév) nyilvánosan láthatók mindenki számára, de az elérhetőségedet és az előzményekhez kapcsolást csak a megerősített felhasználók látják.`,
+Kivétel a Piac: a hirdetéseid (leírás, ár, helység és álnév) nyilvánosan láthatók mindenki számára, de az elérhetőségedet és az előzményekhez kapcsolást csak a rendes tagok látják.`,
       },
       {
         id: 35,
         pitanje: `Hogyan védik az adataimat?`,
         odgovor: `Az adattakarékosság a rendszer négy alapelvének egyike — a platform csak a rendszer működéséhez szükséges adatokat gyűjti.
 
-A megerősítés a megerősítési láncban zajlik: más megerősített felhasználók személyes ismeretség alapján erősítik meg a valódiságodat, személyes iratok gyűjtése vagy benyújtása nélkül. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről.
+A megerősítés a megerősítési láncban zajlik: más rendes tagok személyes ismeretség alapján erősítik meg a valódiságodat, személyes iratok gyűjtése vagy benyújtása nélkül. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről.
 
 Az esetleges személyes adatokhoz való hozzáférés minden adminisztrátori művelete tartós naplóban rögzül. Az Alapítvány nem oszt meg adatokat harmadik felekkel, kivéve az illetékes hatóság rendelkezésére.
 
@@ -774,7 +774,7 @@ A valódi név és a telefonszám teljesen önkéntes. Nem feltétele sem a mege
 
 Mit veszítesz, ha nem adod meg őket? Gyakorlatilag csak a másokkal való könnyebb kapcsolatfelvételt. A csere terén (Piac) például e nélkül nehezebben tudnak megkeresni és személyes cserét egyeztetni veled.
 
-Ha mégis megadod őket, magad döntöd el, láthatóak lesznek-e a neved és a telefonszámod a megerősített felhasználók számára — és ezt a megosztást bármikor visszavonhatod, ami után az adatok többé nem jelennek meg mások előtt.
+Ha mégis megadod őket, magad döntöd el, láthatóak lesznek-e a neved és a telefonszámod a rendes tagok számára — és ezt a megosztást bármikor visszavonhatod, ami után az adatok többé nem jelennek meg mások előtt.
 
 Az e-mail-címed soha nem nyilvános, függetlenül mindentől.`,
       },
@@ -789,7 +789,7 @@ Több dolog mégis véd téged:
 
 Az Alapítvány nem vezet olyan táblázatot, amely az álnevet a személyazonosságodhoz kötné — ez a kapcsolat egyszerűen nincs a birtokunkban. A valódi neved és a telefonszámod önkéntes; magad döntöd el, felfeded-e őket és kinek (csak megerősítetteknek), és a megosztás bármikor visszavonható.
 
-A láthatóság fokozatos: a nem regisztráltak csak összesített adatokat látnak, az egyedi tranzakciókat álnevekkel pedig csak a megerősített tagok. Az e-mail, a technikai naplók és a megerősítési hálózat soha nem nyilvános.
+A láthatóság fokozatos: a nem regisztráltak csak összesített adatokat látnak, az egyedi tranzakciókat álnevekkel pedig csak a rendes tagok. Az e-mail, a technikai naplók és a megerősítési hálózat soha nem nyilvános.
 
 Azért is te felelsz, hogy az álneved ne tartalmazzon olyan személyes adatot, amely elárul téged.
 
@@ -798,7 +798,7 @@ Ez az álnevesített rendszerek ismert korlátja. Elkülönítjük az azonosít�
       {
         id: 73,
         pitanje: `Megerősíttethetem magam távolról, külföldről?`,
-        odgovor: `Igen. A megerősítés (valóságigazolás) közvetlen személyes ismeretségen alapul — olyan megerősített felhasználó, aki személyesen ismer téged, megerősíti a valódiságodat, és saját felelősségére felel ezért a megerősítésért. A Szabályzat nem követeli meg a fizikai jelenlétet a megerősítés pillanatában, így az távolról is elvégezhető, amíg a megerősítő valóban eléggé ismer téged ahhoz, hogy megerősítse a valódiságodat.
+        odgovor: `Igen. A megerősítés (valóságigazolás) közvetlen személyes ismeretségen alapul — olyan rendes tag, aki személyesen ismer téged, megerősíti a valódiságodat, és saját felelősségére felel ezért a megerősítésért. A Szabályzat nem követeli meg a fizikai jelenlétet a megerősítés pillanatában, így az távolról is elvégezhető, amíg a megerősítő valóban eléggé ismer téged ahhoz, hogy megerősítse a valódiságodat.
 
 A rendszer védelme nem azon nyugszik, hogy egy helyiségben vagytok, hanem a személyes ismeretségen, a megerősítő felelősségén (a hamis megerősítés a megerősítések megsemmisítését és szankciókat von maga után) és a hálózat szerkezetén — a teljes valóságindex eléréséhez a hálózat több független részéből származó embereknek kell ismerniük téged.
 
