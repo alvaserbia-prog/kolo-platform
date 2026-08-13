@@ -115,7 +115,7 @@ A minőségért, a teljesítésért és a megállapodás betartásáért ti kett
       {
         id: 83,
         pitanje: `Hány hirdetést adhatok fel megerősítés előtt?`,
-        odgovor: `Hármat aktívan, és csak ajánlatot — olyasmit, amit kínálsz. Minden hirdetésnek fényképet, legalább 40 karakteres leírást, kategóriát és helységet kell tartalmaznia.
+        odgovor: `Hármat aktívan, és csak ajánlatot — olyasmit, amit kínálsz. Minden hirdetésnek fényképet, kategóriát és helységet kell tartalmaznia.
 
 A keresési hirdetés — amellyel te keresel valamit —, a hirdetők elérése és a beszélgetés kezdeményezése a megerősítéssel jár. Ha valaki a hirdetésed kapcsán keres meg, már előtte is válaszolhatsz neki.`,
       },

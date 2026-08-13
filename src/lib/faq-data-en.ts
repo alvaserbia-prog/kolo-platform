@@ -104,7 +104,7 @@ You are answerable to each other for quality, delivery and performance under gen
       {
         id: 83,
         pitanje: `How many listings can I post before confirmation?`,
-        odgovor: `Three active ones, and offers only — something you are offering. Each listing must have a photograph, a description of at least 40 characters, a category and a place.
+        odgovor: `Three active ones, and offers only — something you are offering. Each listing must have a photograph, a category and a place.
 
 A want ad — a listing in which you ask for something — contacting advertisers and starting a conversation come with confirmation. If someone gets in touch about your listing, you may reply even before that.`,
       },

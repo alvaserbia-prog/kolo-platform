@@ -31,7 +31,6 @@ vi.mock("@/lib/adminAlert", () => ({ posaljiAdminAlert: adminAlertMock }));
 
 import {
   IZNOS,
-  MIN_OPIS,
   MAX_AKTIVNIH_OGLASA,
   oglasIspunjavaMinimum,
   smeDaPostaviOglas,
@@ -45,7 +44,8 @@ import {
   probajEvidentirati,
 } from "@/lib/protokol/doprinos-sadrzaju";
 
-const OPIS = "x".repeat(MIN_OPIS);
+/** Opis nije uslov minimuma — kratak tekst je sasvim ispravan oglas. */
+const OPIS = "Med, 1 kg";
 
 /** Oglas koji ispunjava sadržinski minimum — pojedina polja se gase u testu. */
 function oglas(izmene: Partial<Parameters<typeof oglasIspunjavaMinimum>[0]> = {}) {
@@ -100,16 +100,12 @@ describe("oglasIspunjavaMinimum", () => {
     expect(oglasIspunjavaMinimum(oglas({ images: [] })).ok).toBe(false);
   });
 
-  it(`opis kraći od ${MIN_OPIS} znakova ne prolazi`, () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: "x".repeat(MIN_OPIS - 1) })).ok).toBe(false);
+  it("kratak opis prolazi — dužina opisa nije uslov", () => {
+    expect(oglasIspunjavaMinimum(oglas({ description: "Med" })).ok).toBe(true);
   });
 
-  it("opis od tačno minimuma prolazi", () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: "x".repeat(MIN_OPIS) })).ok).toBe(true);
-  });
-
-  it("razmaci se ne broje kao opis", () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: `  ${"x".repeat(MIN_OPIS - 2)}  ` })).ok).toBe(false);
+  it("prazan opis prolazi — minimum traži fotografiju, kategoriju i mesto", () => {
+    expect(oglasIspunjavaMinimum(oglas({ description: "" })).ok).toBe(true);
   });
 
   it("bez mesta ne prolazi — bez mesta se razmena ne može obaviti", () => {

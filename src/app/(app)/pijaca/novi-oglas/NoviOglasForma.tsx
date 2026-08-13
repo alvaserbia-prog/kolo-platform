@@ -7,7 +7,7 @@ import LokacijaSearch from "@/components/LokacijaSearch";
 import CenaUnos from "@/components/CenaUnos";
 import CategoryChips from "@/components/CategoryChips";
 import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
-import { IZNOS, MIN_OPIS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
+import { IZNOS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
 
 const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
@@ -199,7 +199,7 @@ export default function NoviOglasForma({
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 space-y-1.5">
           <p className="text-sm font-semibold text-kolo-gold-700">{t("neverif_naslov")}</p>
           <p className="text-sm text-kolo-muted">
-            {t("neverif_opis", { min: MIN_OPIS, iznos: IZNOS.toLocaleString("sr-RS") })}
+            {t("neverif_opis", { iznos: IZNOS.toLocaleString("sr-RS") })}
           </p>
           {preostaloOglasa !== null && (
             <p className="text-xs text-kolo-muted">{t("neverif_preostalo", { broj: preostaloOglasa })}</p>

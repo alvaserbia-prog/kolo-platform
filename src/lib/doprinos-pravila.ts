@@ -11,9 +11,6 @@
 /** Iznos jednokratnog doprinosa (čl. 40a st. 2). */
 export const IZNOS = 1000;
 
-/** Sadržinski minimum oglasa — najmanja dužina opisa (Uslovi 4.1.1). */
-export const MIN_OPIS = 40;
-
 /** Najviše aktivnih oglasa za neverifikovanog korisnika (Uslovi 4.1.1). */
 export const MAX_AKTIVNIH_OGLASA = 3;
 
@@ -34,8 +31,13 @@ export type OglasMinimum = {
 };
 
 /**
- * Sadržinski minimum iz Uslova: bar jedna fotografija, opis od najmanje 40
- * znakova, kategorija i mesto.
+ * Sadržinski minimum iz Uslova: bar jedna fotografija, kategorija i mesto.
+ *
+ * 🔴 Najmanja dužina opisa je UKINUTA (odluka vlasnika). Ranije je tražila 40
+ * znakova, čime je odbijala i sasvim uredan kratak oglas („Med, 1 kg") i time
+ * uskraćivala doprinos ljudima koji su Pijacu popunili sadržajem. Ne vraćati
+ * brojčani prag bez izričitog naloga; ako opis ikad ponovo bude uslov, ovde je
+ * jedino mesto gde se dodaje.
  *
  * Minimum ima dve uloge i one se ne poklapaju:
  *  - USLOV ZA OBJAVU važi samo za neverifikovanog korisnika (vidi `smeDaPostaviOglas`);
@@ -46,8 +48,6 @@ export type OglasMinimum = {
 export function oglasIspunjavaMinimum(oglas: OglasMinimum): Provera {
   if (oglas.images.length === 0)
     return { ok: false, razlog: "Oglas mora imati bar jednu fotografiju.", status: 400 };
-  if ((oglas.description ?? "").trim().length < MIN_OPIS)
-    return { ok: false, razlog: `Opis mora imati najmanje ${MIN_OPIS} znakova.`, status: 400 };
   if (!oglas.category)
     return { ok: false, razlog: "Kategorija je obavezna.", status: 400 };
   if (!oglas.location)
