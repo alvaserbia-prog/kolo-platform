@@ -11,9 +11,6 @@
 /** Iznos jednokratnog doprinosa (čl. 40a st. 2). */
 export const IZNOS = 1000;
 
-/** Sadržinski minimum oglasa — najmanja dužina opisa (Uslovi 4.1.1). */
-export const MIN_OPIS = 40;
-
 /** Najviše aktivnih oglasa za neverifikovanog korisnika (Uslovi 4.1.1). */
 export const MAX_AKTIVNIH_OGLASA = 3;
 
@@ -27,6 +24,7 @@ export type Provera = { ok: true } | { ok: false; razlog: string; status: 400 | 
 /** Polja oglasa od kojih zavisi sadržinski minimum. */
 export type OglasMinimum = {
   tip: string;
+  title: string;
   description: string;
   category: string;
   location: string | null;
@@ -34,8 +32,14 @@ export type OglasMinimum = {
 };
 
 /**
- * Sadržinski minimum iz Uslova: bar jedna fotografija, opis od najmanje 40
- * znakova, kategorija i mesto.
+ * Sadržinski minimum iz Uslova: naslov, opis, bar jedna fotografija, kategorija
+ * i mesto. Naslov i opis moraju POSTOJATI, ali im dužina nije uslov.
+ *
+ * 🔴 Brojčani prag dužine je UKINUT (odluka vlasnika, 2026-08-13). Ranije je
+ * tražio opis od 40 znakova, čime je odbijao i sasvim uredan kratak oglas
+ * („Med, 1 kg") i time uskraćivao doprinos ljudima koji su Pijacu popunili
+ * stvarnim sadržajem. Traži se prisustvo, ne obim. Ne vraćati brojčani prag bez
+ * izričitog naloga; ako ikad ponovo bude uslov, ovde je jedino mesto gde se dodaje.
  *
  * Minimum ima dve uloge i one se ne poklapaju:
  *  - USLOV ZA OBJAVU važi samo za neverifikovanog korisnika (vidi `smeDaPostaviOglas`);
@@ -44,10 +48,12 @@ export type OglasMinimum = {
  * povodom njega ne beleži doprinos.
  */
 export function oglasIspunjavaMinimum(oglas: OglasMinimum): Provera {
+  if (!(oglas.title ?? "").trim())
+    return { ok: false, razlog: "Naslov je obavezan.", status: 400 };
+  if (!(oglas.description ?? "").trim())
+    return { ok: false, razlog: "Opis je obavezan.", status: 400 };
   if (oglas.images.length === 0)
     return { ok: false, razlog: "Oglas mora imati bar jednu fotografiju.", status: 400 };
-  if ((oglas.description ?? "").trim().length < MIN_OPIS)
-    return { ok: false, razlog: `Opis mora imati najmanje ${MIN_OPIS} znakova.`, status: 400 };
   if (!oglas.category)
     return { ok: false, razlog: "Kategorija je obavezna.", status: 400 };
   if (!oglas.location)

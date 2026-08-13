@@ -122,7 +122,7 @@ An unverified user may post a listing offering a good or a service. By posting s
 
 An unverified user may not post a listing seeking a good or a service.
 
-A listing posted by an unverified user must meet the content minimum: at least one photograph, a description of at least 40 characters, a category, and a place. A listing that does not meet the content minimum is not published. The same condition applies when an already published listing is edited.
+A listing posted by an unverified user must meet the content minimum: a title, a description, at least one photograph, a category, and a place, whereby the length of the title and the description is not a condition. A listing that does not meet the content minimum is not published. The same condition applies when an already published listing is edited.
 
 An unverified user may have at most three active listings at any one time.
 
@@ -184,7 +184,7 @@ A user who posts an offer or request in the exchange space must provide an accur
 
 The user may not post content that is false, misleading, or that misrepresents the nature, quality, or quantity of the good or service.
 
-The content minimum for a listing — at least one photograph, a description of at least 40 characters, a category, and a place — is a condition for posting a listing by an unverified user (Article 16) and a condition for recording a contribution to platform content for any user (Art. 40a of the Rulebook on the KOLO System). For a verified user, a listing that does not meet the content minimum is published, but no contribution is recorded for it.
+The content minimum for a listing — a title, a description, at least one photograph, a category, and a place, without any condition as to the length of the title and the description — is a condition for posting a listing by an unverified user (Article 16) and a condition for recording a contribution to platform content for any user (Art. 40a of the Rulebook on the KOLO System). For a verified user, a listing that does not meet the content minimum is published, but no contribution is recorded for it.
 
 ### Article 21 — Prohibited Goods and Services
 
