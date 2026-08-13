@@ -122,7 +122,7 @@ Neverificirani korisnik može postaviti oglas kojim nudi dobro ili uslugu. Objav
 
 Neverificirani korisnik ne može postaviti oglas kojim se dobro ili usluga traži.
 
-Oglas neverificiranog korisnika mora ispuniti sadržajni minimum: najmanje jednu fotografiju, kategoriju i mjesto. Oglas koji ne ispunjava sadržajni minimum ne objavljuje se. Isti uvjet vrijedi i pri izmjeni objavljenog oglasa.
+Oglas neverificiranog korisnika mora ispuniti sadržajni minimum: naslov, opis, najmanje jednu fotografiju, kategoriju i mjesto, pri čemu duljina naslova i opisa nije uvjet. Oglas koji ne ispunjava sadržajni minimum ne objavljuje se. Isti uvjet vrijedi i pri izmjeni objavljenog oglasa.
 
 Neverificirani korisnik može istodobno imati najviše tri aktivna oglasa.
 
@@ -184,7 +184,7 @@ Korisnik koji objavljuje ponudu ili zahtjev u prostoru za razmjenu dužan je pru
 
 Korisnik ne smije objavljivati sadržaj koji je lažan, obmanjujuć ili koji pogrešno predstavlja prirodu, kvalitetu ili količinu dobra ili usluge.
 
-Sadržajni minimum oglasa — najmanje jedna fotografija, kategorija i mjesto — uvjet je za objavu oglasa neverificiranog korisnika (Članak 16.) i uvjet za evidentiranje doprinosa sadržaju platforme za svakog korisnika (Članak 40.a Pravilnika o KOLO sustavu). Verificiranom se korisniku oglas koji ne ispunjava sadržajni minimum objavljuje, ali mu se povodom njega ne evidentira doprinos.
+Sadržajni minimum oglasa — naslov, opis, najmanje jedna fotografija, kategorija i mjesto, bez uvjeta o duljini naslova i opisa — uvjet je za objavu oglasa neverificiranog korisnika (Članak 16.) i uvjet za evidentiranje doprinosa sadržaju platforme za svakog korisnika (Članak 40.a Pravilnika o KOLO sustavu). Verificiranom se korisniku oglas koji ne ispunjava sadržajni minimum objavljuje, ali mu se povodom njega ne evidentira doprinos.
 
 ### Članak 21. — Zabranjena dobra i usluge
 

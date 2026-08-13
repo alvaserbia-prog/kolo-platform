@@ -1661,7 +1661,7 @@
     "meta_desc": "A KOLO Piaca — javak, szolgáltatások és mesterségek a környékedről, közvetlen csere emberek között. Az első hirdetéseket megerősítés nélkül is feladhatod.",
     "neverif_objava_hint": "Ajánlatot a megerősítés előtt is közzétehetsz — így látnak meg a környékedről való tagok.",
     "neverif_naslov": "Megerősítés előtt hirdetsz",
-    "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez fénykép, kategória és helység kell. A hirdetés azonnal megjelenik; a {iznos} POEN hozzájárulás akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja a hirdetést.",
+    "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez cím, leírás, fénykép, kategória és helység kell; a cím és a leírás hossza nem feltétel. A hirdetés azonnal megjelenik; a {iznos} POEN hozzájárulás akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja a hirdetést.",
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
     "oznaka_neverifikovan": "NINCS MEGERŐSÍTVE",
     "oznaka_neverifikovan_opis": "A hirdető még nincs megerősítve a megerősítési láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",

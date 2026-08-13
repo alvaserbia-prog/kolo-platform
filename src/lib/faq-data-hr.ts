@@ -104,7 +104,7 @@ Za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pra
       {
         id: 83,
         pitanje: `Koliko oglasa mogu postaviti prije potvrde?`,
-        odgovor: `Tri aktivna, i to samo ponude — nešto što nudiš. Svaki oglas mora imati fotografiju, kategoriju i mjesto.
+        odgovor: `Tri aktivna, i to samo ponude — nešto što nudiš. Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto — duljina naslova i opisa nije uvjet.
 
 Potražnja — oglas kojim nešto tražiš — kontakt s oglašivačima i pokretanje razgovora stižu s potvrdom. Ako ti se netko javi povodom tvog oglasa, možeš mu odgovoriti i prije toga.`,
       },

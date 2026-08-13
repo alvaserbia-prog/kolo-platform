@@ -1668,7 +1668,7 @@
     "uspeh_dugme": "Go to Marketplace",
     "neverif_objava_hint": "You can post an offer before confirmation — that is how members from your area get to see you.",
     "neverif_naslov": "Posting before confirmation",
-    "neverif_opis": "You may post an offer only — something you provide. The listing needs a photo, a category and a place. The listing goes live immediately; the contribution of {iznos} POEN is recorded once the Foundation approves the listing.",
+    "neverif_opis": "You may post an offer only — something you provide. The listing needs a title, a description, a photo, a category and a place; the length of the title and description is not a condition. The listing goes live immediately; the contribution of {iznos} POEN is recorded once the Foundation approves the listing.",
     "neverif_preostalo": "Active listings you may still post: {broj}.",
     "oznaka_neverifikovan": "NOT CONFIRMED",
     "oznaka_neverifikovan_opis": "This advertiser is not yet confirmed in the chain of vouching. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",

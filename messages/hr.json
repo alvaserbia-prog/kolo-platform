@@ -1668,7 +1668,7 @@
     "uspeh_dugme": "Idi na Pijacu",
     "neverif_objava_hint": "Ponudu možeš objaviti i prije potvrde — tako te vide članovi iz tvoga kraja.",
     "neverif_naslov": "Objavljuješ prije potvrde",
-    "neverif_opis": "Možeš objaviti samo ponudu — nešto što nudiš. Oglas mora imati fotografiju, kategoriju i mjesto. Oglas ide na Pijacu odmah; doprinos od {iznos} POEN evidentira ti se kad Zaklada odobri oglas.",
+    "neverif_opis": "Možeš objaviti samo ponudu — nešto što nudiš. Oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto; duljina naslova i opisa nije uvjet. Oglas ide na Pijacu odmah; doprinos od {iznos} POEN evidentira ti se kad Zaklada odobri oglas.",
     "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
     "oznaka_neverifikovan": "BEZ POTVRDE",
     "oznaka_neverifikovan_opis": "Oglašivač još nije potvrđen u lancu potvrda. Za razmjenu odgovarate međusobno — Zaklada ne posreduje i ne odgovara.",

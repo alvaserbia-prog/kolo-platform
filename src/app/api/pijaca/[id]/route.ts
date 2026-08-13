@@ -131,6 +131,7 @@ export async function PATCH(
     if (!vlasnik?.verified) {
       const minimum = oglasIspunjavaMinimum({
         tip: listing.tip,
+        title,
         description,
         category: listing.category,
         location: mesto,

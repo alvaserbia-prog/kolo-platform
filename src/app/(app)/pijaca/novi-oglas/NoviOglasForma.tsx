@@ -117,6 +117,7 @@ export default function NoviOglasForma({
   // Ista funkcija radi i na serveru; ovde je da čovek ne šalje oglas u prazno.
   const minimum = oglasIspunjavaMinimum({
     tip,
+    title,
     description,
     category,
     location: location.trim() || null,
