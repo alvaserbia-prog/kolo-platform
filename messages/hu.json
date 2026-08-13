@@ -2345,7 +2345,8 @@
     "doprinos_revizija_zabelezen_verifikovan": "a hozzájárulás rendes tagnál van feljegyezve — az alábbi gombbal rendezhető",
     "doprinos_revizija_bez_obavestenja": "a POEN nyilvántartásba került, de értesítést nem kaptak",
     "doprinos_revizija_bez_transakcije": "tranzakcióra hivatkozás nélkül került nyilvántartásba — kézzel ellenőrizni",
-    "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}."
+    "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
+    "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",

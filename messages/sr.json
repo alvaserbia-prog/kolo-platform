@@ -2352,7 +2352,8 @@
     "doprinos_revizija_zabelezen_verifikovan": "doprinos stoji zabeležen kod redovnog člana — razrešava se dugmetom ispod",
     "doprinos_revizija_bez_obavestenja": "POEN je evidentiran, a obaveštenje im nije otišlo",
     "doprinos_revizija_bez_transakcije": "evidentirano bez veze na transakciju — proveriti ručno",
-    "doprinos_revizija_uredno": "Čeka odobrenje u tabu „Prvi oglasi”: {ceka}. Poništeno zbog uklonjenog oglasa: {ponisten}."
+    "doprinos_revizija_uredno": "Čeka odobrenje u tabu „Prvi oglasi”: {ceka}. Poništeno zbog uklonjenog oglasa: {ponisten}.",
+    "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

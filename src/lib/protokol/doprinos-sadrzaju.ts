@@ -378,8 +378,15 @@ export type RevizijaDoprinosa = {
   kvalifikovanih: number;
   /** Od toga: koliko ih ima zapis o doprinosu, u bilo kom statusu. */
   saZapisom: number;
-  /** 🔴 Kvalifikovan oglas, a zapisa NEMA — jedina prava rupa. */
+  /** 🔴 Kvalifikovan oglas, a zapisa NEMA — zapis se izgubio. */
   nedostaju: RevizijaStavka[];
+  /**
+   * Ima objavljenu ponudu, ali nijedna ne ispunjava sadržinski minimum — pa mu
+   * doprinos nikada nije ni zabeležen. Nije kvar: kanal traži minimum (čl. 40a
+   * st. 2). Bez ove stavke takav čovek nigde ne bi bio prikazan, a upravo on je
+   * onaj koji „ima oglas a nije dobio POEN".
+   */
+  bezMinimuma: Array<RevizijaStavka & { razlog: string }>;
   /** Zabeležen kod redovnog člana — duguje mu se evidentiranje (dugme ispod). */
   zabelezenVerifikovan: RevizijaStavka[];
   /** Zabeležen kod člana bez potvrde — čeka odobrenje u tabu „Prvi oglasi". */
@@ -437,6 +444,8 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
 
   // Prvi kvalifikovan oglas po korisniku — „prvi oglas kojim nudi" iz čl. 40a.
   const prviKvalifikovan = new Map<string, { oglasId: string; pseudonim: string }>();
+  // Ko ima ponudu, ali nijednu koja prolazi minimum — uz razlog prvog pokušaja.
+  const paoNaMinimumu = new Map<string, { oglasId: string; pseudonim: string; razlog: string }>();
   for (const o of oglasi) {
     if (prviKvalifikovan.has(o.sellerId)) continue;
     const provera = oglasIspunjavaMinimum({
@@ -448,6 +457,13 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
     });
     if (provera.ok) {
       prviKvalifikovan.set(o.sellerId, { oglasId: o.id, pseudonim: o.seller.pseudonim });
+      paoNaMinimumu.delete(o.sellerId);
+    } else if (!paoNaMinimumu.has(o.sellerId)) {
+      paoNaMinimumu.set(o.sellerId, {
+        oglasId: o.id,
+        pseudonim: o.seller.pseudonim,
+        razlog: provera.razlog,
+      });
     }
   }
 
@@ -455,6 +471,7 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
     kvalifikovanih: prviKvalifikovan.size,
     saZapisom: 0,
     nedostaju: [],
+    bezMinimuma: [],
     zabelezenVerifikovan: [],
     zabelezenNeverifikovan: 0,
     evidentiranBezObavestenja: [],
@@ -467,6 +484,11 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
   for (const [userId, o] of prviKvalifikovan) {
     if (imaZapis.has(userId)) rez.saZapisom += 1;
     else rez.nedostaju.push({ userId, pseudonim: o.pseudonim, oglasId: o.oglasId });
+  }
+  // Ko je pao na minimumu, a nema ni zapis: njemu doprinos nije ni pripao.
+  for (const [userId, o] of paoNaMinimumu) {
+    if (prviKvalifikovan.has(userId) || imaZapis.has(userId)) continue;
+    rez.bezMinimuma.push({ userId, pseudonim: o.pseudonim, oglasId: o.oglasId, razlog: o.razlog });
   }
 
   for (const z of zapisi) {

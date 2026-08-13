@@ -80,6 +80,7 @@ export default function OsnivaciTab({
     kvalifikovanih: number;
     saZapisom: number;
     nedostaju: RevizijaStavka[];
+    bezMinimuma: Array<RevizijaStavka & { razlog: string }>;
     zabelezenVerifikovan: RevizijaStavka[];
     zabelezenNeverifikovan: number;
     evidentiranBezObavestenja: RevizijaStavka[];
@@ -317,6 +318,22 @@ export default function OsnivaciTab({
               })}
             </p>
             <RevizijaRed naslov={t("doprinos_revizija_nedostaju")} stavke={revizija.nedostaju} kritican />
+            {/* Nije kvar nego uslov kanala — zato ide sa razlogom, da se vidi šta
+                tačno fali oglasu (fotografija, dužina opisa, kategorija, mesto). */}
+            {revizija.bezMinimuma.length > 0 && (
+              <div className="text-sm">
+                <span className="text-kolo-text font-semibold">
+                  {revizija.bezMinimuma.length} · {t("doprinos_revizija_bez_minimuma")}
+                </span>
+                <ul className="mt-1 space-y-0.5">
+                  {revizija.bezMinimuma.map((s) => (
+                    <li key={s.userId} className="text-xs text-kolo-muted">
+                      <Pseudonim>{s.pseudonim}</Pseudonim> — {s.razlog}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <RevizijaRed naslov={t("doprinos_revizija_zabelezen_verifikovan")} stavke={revizija.zabelezenVerifikovan} />
             <RevizijaRed naslov={t("doprinos_revizija_bez_obavestenja")} stavke={revizija.evidentiranBezObavestenja} />
             <RevizijaRed naslov={t("doprinos_revizija_bez_transakcije")} stavke={revizija.evidentiranBezTransakcije} kritican />

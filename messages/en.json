@@ -2352,7 +2352,8 @@
     "doprinos_revizija_zabelezen_verifikovan": "contribution noted for a full member — resolved by the button below",
     "doprinos_revizija_bez_obavestenja": "POEN recorded, but no notification was sent to them",
     "doprinos_revizija_bez_transakcije": "recorded without a linked transaction — check manually",
-    "doprinos_revizija_uredno": "Awaiting approval in the “First listings” tab: {ceka}. Annulled due to a removed listing: {ponisten}."
+    "doprinos_revizija_uredno": "Awaiting approval in the “First listings” tab: {ceka}. Annulled due to a removed listing: {ponisten}.",
+    "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted"
   },
   "kolacici": {
     "aria": "Cookie consent",
