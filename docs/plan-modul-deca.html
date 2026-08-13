@@ -1,0 +1,1012 @@
+<title>Modul Deca — plan integracije</title>
+<style>
+  :root {
+    --paper:      #F4F5F1;
+    --surface:    #FBFCFA;
+    --ink:        #191E1B;
+    --muted:      #5C6561;
+    --faint:      #858E89;
+    --rule:       #D9DCD3;
+    --rule-soft:  #E7E9E3;
+    --accent:     #2C5A4C;
+    --accent-bg:  #E4EDE8;
+    --alert:      #A03A28;
+    --alert-bg:   #F5E5E1;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #131614;
+      --surface:   #1A1E1B;
+      --ink:       #E6E9E2;
+      --muted:     #97A099;
+      --faint:     #79837C;
+      --rule:      #2C312D;
+      --rule-soft: #232823;
+      --accent:    #74AE97;
+      --accent-bg: #1C2A25;
+      --alert:     #DE8570;
+      --alert-bg:  #2E1F1B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:     #131614;
+    --surface:   #1A1E1B;
+    --ink:       #E6E9E2;
+    --muted:     #97A099;
+    --faint:     #79837C;
+    --rule:      #2C312D;
+    --rule-soft: #232823;
+    --accent:    #74AE97;
+    --accent-bg: #1C2A25;
+    --alert:     #DE8570;
+    --alert-bg:  #2E1F1B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 47rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  /* ---------- zaglavlje ---------- */
+  .mast { display: flex; flex-direction: column; gap: .85rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 2.85rem);
+    line-height: 1.14;
+    letter-spacing: -.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+    max-width: 38rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.4rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    color: var(--faint);
+    border-top: 1px solid var(--rule);
+    padding-top: .85rem;
+  }
+
+  /* ---------- odeljci ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.62rem;
+    line-height: 1.22;
+    letter-spacing: -.005em;
+    margin: 1.6rem 0 0;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .06em;
+    flex: none;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 650;
+    font-size: 1.02rem;
+    letter-spacing: -.005em;
+    margin: 1.1rem 0 0;
+    text-wrap: balance;
+  }
+  h4 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: .9rem 0 0;
+  }
+  p { margin: 0; max-width: 40rem; }
+  ul, ol { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .45rem; max-width: 40rem; }
+  li { padding-left: .15rem; }
+  li::marker { color: var(--faint); }
+  strong { font-weight: 650; }
+  code {
+    font-family: var(--mono);
+    font-size: .855em;
+    background: var(--rule-soft);
+    padding: .1em .34em;
+    border-radius: 2px;
+    word-break: break-word;
+  }
+
+  /* ---------- oznake stanja ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: .22rem .5rem;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+  .chip.usvojeno { color: var(--accent); border-color: var(--accent); background: var(--accent-bg); }
+  .chip.rizik    { color: var(--alert); border-color: var(--alert); background: var(--alert-bg); }
+
+  /* ---------- izdvojeno ---------- */
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-bg);
+    padding: .95rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-radius: 0 3px 3px 0;
+  }
+  .note.warn { border-left-color: var(--alert); background: var(--alert-bg); }
+  .note .lbl {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .note.warn .lbl { color: var(--alert); }
+  .note p { max-width: none; }
+
+  /* ---------- nacrt odredbe ---------- */
+  .odredba {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .hdr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .55rem;
+    border-bottom: 1px solid var(--rule-soft);
+    padding-bottom: .55rem;
+  }
+  .odredba .clan {
+    font-family: var(--mono);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink);
+  }
+  .odredba .kako {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .odredba .tekst {
+    font-family: var(--serif);
+    font-size: .97rem;
+    line-height: 1.62;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .tekst p { max-width: none; }
+  .odredba .obrazlozenje {
+    font-size: .87rem;
+    color: var(--muted);
+    max-width: none;
+    border-top: 1px dashed var(--rule);
+    padding-top: .55rem;
+  }
+  del { color: var(--alert); text-decoration-thickness: 1px; }
+  ins { text-decoration: none; box-shadow: inset 0 -.42em 0 var(--accent-bg); }
+
+  /* ---------- tabele ---------- */
+  .tbl-scroll { overflow-x: auto; margin: .2rem 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .9rem;
+    min-width: 30rem;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: .5rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--ink);
+    padding: .4rem .7rem .4rem 0;
+    vertical-align: bottom;
+  }
+  td {
+    border-bottom: 1px solid var(--rule-soft);
+    padding: .5rem .7rem .5rem 0;
+    vertical-align: top;
+  }
+  td.num, th.num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding-right: 0;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- koraci ---------- */
+  .koraci { display: flex; flex-direction: column; gap: .8rem; counter-reset: k; }
+  .korak {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: .1rem 1rem;
+    align-items: baseline;
+  }
+  .korak::before {
+    counter-increment: k;
+    content: counter(k, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: .78rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .korak > div { display: flex; flex-direction: column; gap: .3rem; }
+  .korak .kt { font-weight: 650; }
+  .korak .kd { font-size: .92rem; color: var(--muted); max-width: 38rem; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: .4rem 0;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  a { color: var(--accent); text-underline-offset: .18em; }
+  a:focus-visible, :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  @media (max-width: 40rem) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.25rem 1.1rem 4rem; gap: 2.25rem; }
+    .korak { grid-template-columns: 1.9rem 1fr; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">KOLO Platforma · radni dokument · Modul Deca (Pravilnik Glava VIII, čl. 58)</div>
+    <h1>Modul Deca — plan integracije</h1>
+    <p class="standfirst">Kako opisanu celinu uklopiti u zatečeni sistem: šta se dodaje, šta se u postojećem kodu mora pomeriti, kojim redom, i gde su mesta na kojima bi nepažljiva integracija oborila nešto što danas radi.</p>
+    <div class="meta">
+      <span>13. avgust 2026</span>
+      <span>Grana: <code>claude/modul-deca-integration-m3kh1t</code></span>
+      <span>Zatečeni set akata: 4.2.2 (statut 4.1)</span>
+      <span>Status: nacrt za odluku</span>
+    </div>
+  </header>
+
+  <!-- ============ 00 ============ -->
+  <section>
+    <h2><span class="num">00</span> Šta je ovaj dokument</h2>
+
+    <p>Opis modula je zatvoren i ovaj plan ga <strong>ne preispituje</strong>. Sve što ovde stoji je prevod te celine na zatečeni kod: koji Prisma modeli nastaju, koje se postojeće rute menjaju, u kom redosledu se isporučuje i šta može da pukne usput.</p>
+
+    <p>Plan <strong>ne počiva ni na jednom očitavanju produkcione baze</strong>. Gde bi broj promenio odluku, to je izričito rečeno, a ne pretpostavljeno.</p>
+
+    <div class="note warn">
+      <span class="lbl">Jedno pravilo pre svega ostalog</span>
+      <p><strong>Dečji prostor ne stvara nijedan nov POEN.</strong> Sve što u njemu kruži ušlo je prepisom od roditelja, a prepis je zero-sum operacija. Iz toga sledi ono što ovaj modul čini bezbednim za integraciju: <strong>opticaj se ne pomera</strong>, pa se ne pomeraju ni osnivački korak na svakih 100.000 POEN-a (<code>osnivacki.ts</code>), ni dnevni limit programa (10% opticaja), ni obračunski koeficijent ZRNA. Ako se ijednom kasnijom izmenom u dečji prostor uvede emisija (dečji zadaci, dečji doprinos sadržaju, bonus za prvi oglas), <strong>ta izmena prva mora da otvori ovu rečenicu</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <h2><span class="num">01</span> Pravni preduslovi — tvrda blokada</h2>
+
+    <p>Član 65 Pravilnika o KOLO sistemu: <em>„Aktiviranje modula koji uvode obradu posebnih kategorija podataka ili podataka maloletnih lica zahteva ažuriranje procene uticaja pre aktiviranja."</em> To nije preporuka i ne može da se odloži za posle. Isto ponavlja i čl. 58 st. 5.</p>
+
+    <p>Zato je redosled obrnut od uobičajenog: <strong>akti idu pre koda u produkciju</strong>, a kod se do tada isporučuje sa ugašenim prekidačem (odeljak 03).</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <caption>Šta mora biti usvojeno pre nego što prekidač pređe na <code>true</code></caption>
+        <thead>
+          <tr><th>Akt</th><th>Šta se menja</th><th>Obim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Pravilnik o Modulu Deca</strong> (nov akt)</td><td>Ceo režim: uzrasne grupe, susedstvo, prekidač roditelja, uvid, mirovanje, osamostaljenje, prijave</td><td>Nov dokument, 5 jezika</td></tr>
+          <tr><td>Pravilnik o KOLO sistemu</td><td>Čl. 58 dopunjen upućivanjem na poseban pravilnik i donju granicu od 7 godina; čl. 15 dobija rečenicu da se u dečjem prostoru ne otvara nijedan kanal evidentiranja</td><td>Izmena</td></tr>
+          <tr><td>Uslovi korišćenja</td><td>Ugovorna sposobnost (7–14 ništavost, 14–18 odobrenje roditelja), odgovornost roditelja za objavljeni sadržaj, uklanjanje sadržaja od strane roditelja, mirovanje kao poseban institut (razgraničen od suspenzije i njenog roka)</td><td>Izmena, više članova</td></tr>
+          <tr><td>Politika privatnosti</td><td>Pravni osnov po uzrastu (ZZPL čl. 16), obim roditeljskog uvida i njegovo sužavanje na 15. rođendan, rok čuvanja poziva (7 dana), brisanje EXIF-a, jedan registar dece</td><td>Izmena, nov pododeljak</td></tr>
+          <tr><td>DPIA</td><td>Nove radnje obrade, novi rizici, nove mere. <strong>Obavezno po čl. 65.</strong></td><td>Izmena</td></tr>
+          <tr><td>Registar radnji obrade</td><td>Radnje: podaci deteta, poziv roditelju, potvrda verifikatora o postojanju deteta, roditeljski uvid</td><td>Izmena</td></tr>
+          <tr><td>Pravilnik o programima podrške</td><td>Jedan registar dece sa Podrškom Majkama; postojanje dečjeg naloga nije dokaz roditeljstva</td><td>Izmena</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Tri posledice po kod, koje se lako previde</h3>
+
+    <ul>
+      <li><strong>Set akata prelazi sa 15 na 16 dokumenata.</strong> <code>__tests__/pravni-dokumenti.test.ts</code> drži spisak <code>AKTI</code> i proverava postojanje svakog na svih pet jezika. Nov pravilnik znači 5 novih fajlova, dopunu tog spiska, mapu u <code>src/app/(public)/pravilnik/[slug]/page.tsx</code>, verzijsku labelu u <code>messages/*.json</code> i unos u <code>sitemap.ts</code>.</li>
+      <li><strong>Ceo set ide na novu verziju.</strong> Set je od 4.2.1 jedinstven — mešovit set proizvodi unakrsne reference na verziju koja kao dokument ne postoji. Dakle 4.2.2 → 4.3.0 za svih 16 akata × 5 jezika, iz <strong>najnovije osnove na <code>main</code></strong> (zamka opisana u CLAUDE.md desila se dvaput).</li>
+      <li><strong><code>PRISTANAK_NA_AKTE_TRAZI_SE</code> verovatno mora nazad na <code>true</code>.</strong> Modul uvodi nov obim prava i novu obradu podataka. Ako sistem do tada bude zvanično u radu, Uslovi čl. 40 i Politika čl. 16 traže obaveštenje 15 dana unapred, nov red <code>PolitikaVerzija</code> i ponovnu saglasnost. To je odluka vlasnika, ali je mesto odluke ovde, a ne posle isporuke.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <h2><span class="num">02</span> Pet nosivih odluka arhitekture</h2>
+
+    <p>Sve ostalo u planu je posledica ovih pet. Ako se neka menja, plan se prepisuje, a ne doteruje.</p>
+
+    <h3>1. Dete je red u <code>User</code>, ne zaseban model naloga</h3>
+    <p>Dečji nalog nasleđuje sve što već radi: prijavu (<code>auth.ts</code>), <code>Wallet</code>, oglase, poruke, notifikacije, pseudonim sa svojim pravilima i jedinstvenošću. Zaseban model naloga značio bi drugi tok prijave, drugi wallet, drugu istoriju transakcija — a zero-sum se drži nad <em>jednim</em> skupom novčanika.</p>
+    <p>Odlučujuće: <strong>pseudonimi dece i odraslih dele isti prostor imena</strong> (<code>User.pseudonimLower @unique</code> + <code>PseudonimIstorija</code>). Da su odvojeni, dete bi moglo da uzme pseudonim postojećeg odraslog člana, što je gotova imitacija.</p>
+    <p>Cena odluke je jedna i mora se platiti pošteno: <strong>svaki zatečeni upit nad <code>User</code> koji je do sada značio „odrastao član" sada mora eksplicitno da kaže da li obuhvata decu.</strong> Popis tih mesta je odeljak 09 i to je najveći deo posla u ovom modulu.</p>
+
+    <h3>2. Dete je <code>TipKorisnika.NEVERIFIKOVAN</code> + marker, ne nova enum vrednost</h3>
+    <p><code>TipKorisnika</code> ostaje na tri vrednosti. Dete nosi <code>User.datumRodjenja</code> (nenulto samo kod dece) i izvedeni marker, a tip mu je <code>NEVERIFIKOVAN</code> do osamnaeste.</p>
+    <p>Zašto: sve tvrde brane sistema već stoje na <code>verified</code>/<code>REGULARNI</code>/indeksu. Time dete <strong>bez ijedne nove provere</strong> ne može da upiše ZRNO, ne glasa u Gornjem Kolu, ne verifikuje nikoga, ne ulazi u nadzor, ne prijavljuje se na programe, ne inicira razgovor sa odraslim. Četvrta enum vrednost bi tražila da se svaka od tih provera pronađe i dopuni — isti posao, ali sa rizikom da se jedna previdi i da dete negde prođe.</p>
+    <p>Menjaju se, dakle, samo mesta na kojima <code>NEVERIFIKOVAN</code> danas <em>sme</em> nešto: objava oglasa, prijem POEN-a, odgovaranje u razgovoru, pregled Pijace. Tih mesta je malo i sva su nabrojana.</p>
+
+    <h3>3. Uzrasna grupa se <em>računa</em>, ne čuva</h3>
+    <p>Grupa (7–11 / 12–14 / 15–17) je funkcija datuma rođenja i tekućeg dana. Ne postoji kolona <code>grupa</code> i ne postoji posao koji je noću pomera.</p>
+    <p>Time se „prelaz u ponoć" dobija besplatno i tačno: čim beogradski dan pređe, izvedena grupa je druga, zatečeni razgovori sa starom grupom prelaze u pregled bez pisanja jer se pravo pisanja izvodi iz iste funkcije. Datum se računa preko <code>beogradskiDan()</code> iz <code>src/lib/protokol/obracunski-dan.ts</code> — nikad preko <code>new Date()</code> u UTC-u, inače bi grupa u letnjem periodu prelazila dva sata ranije.</p>
+    <p>Noćni posao je potreban <strong>samo za dva praga</strong>: petnaesti rođendan (pitati dete za pristanak) i osamnaesti (osamostaljenje). Oni menjaju stanje u bazi, pa moraju da se dese eksplicitno.</p>
+
+    <h3>4. Roditeljska veza nije verifikacija</h3>
+    <p><code>RoditeljVeza</code> je zaseban model. Ne piše se u <code>VerifikacionaVeza</code>, ne ulazi u <code>VerifikacionaZona</code>, ne troši <code>slotoviPotroseni</code>, ne diže <code>indeksStvarnosti</code> i ne pojavljuje se na <code>/graf</code>.</p>
+    <p>Da je obrnuto, jedan roditelj sa četvoro dece dobio bi indeks 40% i verifikacioni kapacitet 4 — deca bi mu služila kao gorivo za mrežu odraslih. Uz to bi zona po <code>zona.ts</code> zatvorila drugog roditelja, jer bi mu dete već bilo u zoni.</p>
+    <p>Veza se u graf pretvara <strong>tek na osamnaesti rođendan</strong>, i to je jedini trenutak kada dodiruje mrežu potvrda (odeljak 13).</p>
+
+    <h3>5. Provera na ulazu se ne izmišlja — postoji</h3>
+    <p>Mehanizam „svi verifikatori roditelja potvrđuju činjenicu, bez uvida u osetljive podatke, odbijanje traži obrazloženje" već je napisan za socijalne programe: <code>src/lib/protokol/program-potvrda.ts</code> (<code>dohvatiVerifikatore</code>, <code>kreirajPotvrde</code>) i model <code>ProgramPotvrda</code>.</p>
+    <p><code>RoditeljstvoPotvrda</code> je njegov blizanac nad drugim predmetom. <code>dohvatiVerifikatore</code> se koristi <strong>neizmenjen</strong>; ostalo je preslikano sa jednom razlikom — kod programa se traži indeks 100%, ovde se traži samo da roditelj bude verifikovan, a broj verifikatora je koliko ih ima.</p>
+
+    <div class="note">
+      <span class="lbl">Izuzetak koji je u opisu, i mora u kod</span>
+      <p>Član UO nema verifikatore (ishodište je lanca potvrda — <code>jeKorenJemstva</code> u <code>src/lib/dozvole.ts</code>). Kod njega bi „svi verifikatori potvrdili" bio prazan skup, što bi <strong>prošlo automatski</strong> — a to je najgori mogući ishod: najjači nalozi bez ijedne provere. Zato se prazan skup verifikatora izričito hvata i vodi na neposrednu potvrdu (odeljak 08), nikad na tiho odobrenje.</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <h2><span class="num">03</span> Prekidač modula</h2>
+
+    <p>U <code>src/lib/moduli.ts</code>, po uzoru na <code>KRUG_AKTIVAN</code>:</p>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">src/lib/moduli.ts</span><span class="kako">dopuna</span></div>
+      <div class="tekst">
+        <p><code>export const MODUL_DECA_AKTIVAN = false;</code></p>
+      </div>
+      <p class="obrazlozenje">Fajl je namerno bez ijednog <code>import</code>-a — uvoze ga i serverske i klijentske komponente. Prekidač ostaje na <code>false</code> kroz ceo razvoj i prelazi na <code>true</code> tek pošto UO usvoji akte i DPIA. Dok je <code>false</code>: stranice <code>notFound()</code>, rute 410 <code>PORUKA_MODUL_UGASEN</code>, nav stavke i admin tabovi se ne renderuju, cron poslovi izlaze bez posla, a <strong>filteri koji sakrivaju decu iz javnih upita rade i dalje</strong> — oni su bezuslovni, jer je njihova cena nula, a cena propuštanja je izlaganje deteta.</p>
+    </div>
+
+    <p>Praktična posledica: ceo modul može da se spoji u <code>main</code> i da živi na testu bez ijedne pravne posledice, jer bez odluke UO nijedno dete ne može da uđe.</p>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <h2><span class="num">04</span> Model podataka</h2>
+
+    <h3>Dopune postojećeg <code>User</code></h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Polje</th><th>Tip</th><th>Zašto</th></tr></thead>
+        <tbody>
+          <tr><td><code>datumRodjenja</code></td><td><code>DateTime? @db.Date</code></td><td>Nenulto samo kod dece. Jedini izvor uzrasne grupe i oba praga. <strong>Ne može se menjati posle potvrde roditelja</strong> — to je jedina provera godina koju sistem ima.</td></tr>
+          <tr><td><code>maloletan</code></td><td><code>Boolean @default(false)</code></td><td>Redundantno sa <code>datumRodjenja</code>, ali je <strong>indeksabilno i jeftino u <code>where</code></strong>. Bez njega bi svaki javni upit morao da računa datum. Gasi se pri osamostaljenju.</td></tr>
+          <tr><td><code>osamostaljenAt</code></td><td><code>DateTime?</code></td><td>Trenutak konverzije na 18. rođendan. Trag da je nalog prošao kroz dečji prostor.</td></tr>
+          <tr><td><code>pristanakOd15At</code></td><td><code>DateTime?</code></td><td>Sopstveni pristanak deteta po ZZPL čl. 16, tražen na 15. rođendan.</td></tr>
+          <tr><td><code>mirovanjeOdAt</code></td><td><code>DateTime?</code></td><td>Nalog bez ijednog povezanog roditelja. <strong>Zaseban od <code>suspendedAt</code></strong> — mirovanje nije mera i na njega se ne primenjuje rok suspenzije.</td></tr>
+          <tr><td><code>dozvolaSusedstvo</code></td><td><code>Boolean @default(false)</code></td><td>Prekidač roditelja. Kod 7–14 otvara razgovor sa susednim grupama; kod 15–17 otvara i razgovor i razmenu sa odraslima.</td></tr>
+          <tr><td><code>prikaziSusednePijaca</code></td><td><code>Boolean</code></td><td>Prekidač pijace — imaju ga <strong>i deca i odrasli</strong>. Podrazumevana vrednost je otvoreno pitanje (odeljak 21).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Zamka: <code>maloletan</code> i <code>datumRodjenja</code> se mogu razići</span>
+      <p>Dva izvora iste istine su recept za tihi kvar — isti obrazac koji je već ujeo <code>pseudonim</code>/<code>pseudonimLower</code>. Rešenje je isto koje je tamo primenjeno: <strong>oba polja se pišu isključivo kroz jednu funkciju</strong> u <code>src/lib/protokol/deca.ts</code> (<code>poljaDeteta()</code> / <code>poljaOsamostaljenja()</code>), nikad ručno, i test to zaključava.</p>
+    </div>
+
+    <h3>Novi modeli</h3>
+
+    <h4>RoditeljVeza</h4>
+    <ul>
+      <li><code>deteId</code>, <code>roditeljId</code>, <code>@@unique([deteId, roditeljId])</code></li>
+      <li><code>uspostavljenaAt</code>, <code>prekinutaAt</code>, <code>prekinuoId</code>, <code>razlogPrekida</code> — <strong>meko gašenje</strong>, kao svuda u sistemu; veza je dokaz da je obrada imala osnov i ne briše se</li>
+      <li><code>redosled</code> (1 ili 2) — najviše dva roditelja po detetu; treći ulazi tek kad neka veza bude prekinuta</li>
+      <li>Indeks po <code>roditeljId</code> — roditelj otvara spisak svoje dece na svakom učitavanju ekrana</li>
+    </ul>
+
+    <h4>RoditeljPoziv</h4>
+    <p>Nosi ceo tok pre nego što nalog deteta postoji. Tri puta ulaza (odeljak 08) razlikuju se samo poljem <code>izvor</code>.</p>
+    <ul>
+      <li><code>izvor</code>: <code>RODITELJ_DODAO</code> · <code>DETE_SE_REGISTROVALO</code> · <code>DETE_POZVALO_DRUGOG</code></li>
+      <li><code>status</code>: <code>CEKA</code> · <code>POTVRDJEN</code> · <code>ODBIJEN_UZRAST</code> · <code>ODBIJEN_NIJE_RODITELJ</code> · <code>ISTEKAO</code></li>
+      <li><code>istekAt</code> — <strong>7 dana</strong>; posle isteka se red <strong>briše</strong>, ne arhivira (podaci deteta bez pravnog osnova su sami po sebi povreda)</li>
+      <li>Kada je izvor <code>DETE_SE_REGISTROVALO</code>: <code>pseudonim</code>, <code>pseudonimLower @unique</code>, <code>passwordHash</code>, <code>uzrastGodine</code>. Nalog još ne postoji, a ime mora biti zauzeto odmah — inače dvoje dece traže isti pseudonim i drugo dobija grešku tek pri potvrdi roditelja, danima kasnije.</li>
+      <li><code>roditeljId</code> je <strong>nullable</strong> — poziv nastaje i kad navedeni pseudonim ne postoji</li>
+    </ul>
+
+    <div class="note warn">
+      <span class="lbl">Zašto poziv nastaje i za nepostojećeg roditelja</span>
+      <p>Ekran čekanja mora izgledati identično bez obzira na to da li pseudonim postoji. Da odgovor zavisi od postojanja, dečja registracija bi postala <strong>alat za nabrajanje pseudonima celog sistema</strong> — bez prijave, bez rate limita koji bi to primetio. Zato se poziv upisuje uvek, a razrešavanje pseudonima ide u pozadini. Ista logika važi i za merljivo vreme odgovora: provera pseudonima i upis moraju se izvršiti u oba slučaja, ne samo u jednom.</p>
+    </div>
+
+    <h4>RoditeljstvoPotvrda</h4>
+    <p>Blizanac <code>ProgramPotvrda</code>. Polja: <code>pozivId</code>, <code>verifikatorId</code>, <code>status</code> (<code>CEKA</code>/<code>POTVRDIO</code>/<code>ODBIO</code>), <code>obrazlozenje</code>, <code>odgovorAt</code>, <code>@@unique([pozivId, verifikatorId])</code>.</p>
+    <p>Verifikator vidi <strong>jednu rečenicu</strong>: „Da li <em>Pseudonim</em> ima dete uzrasta <em>N</em> godina?" Ni pseudonim deteta, ni datum rođenja, ni bilo šta iz naloga. To nije UI odluka nego minimizacija — potvrđuje se činjenica koju verifikator i sam zna.</p>
+
+    <h4>Dete — jedan registar</h4>
+    <p>Model koji spaja decu sa nalogom i decu prijavljenu za Podršku Majkama (odeljak 16).</p>
+    <ul>
+      <li><code>id</code>, <code>datumRodjenja</code>, <code>roditeljId</code></li>
+      <li><code>nalogId</code> — <code>String? @unique</code>, veza ka <code>User</code> kad dete ima nalog; <code>null</code> kad je samo prijavljeno u programu</li>
+      <li><strong>Bez imena deteta.</strong> Zatečena minimizacija u <code>buildMetadata</code> (<code>src/app/api/programi/[type]/prijava/route.ts</code>) čuva samo datum rođenja; taj nivo se ne sme pogoršati zato što se model preseljava.</li>
+    </ul>
+
+    <h4>Prijava u dečjem prostoru + blokada kanala</h4>
+    <ul>
+      <li><code>PrijavaDeca</code>: <code>prijaviocId</code>, <code>prijavljeniId</code>, <code>razlog</code> (enum: neprimeren sadržaj · kontakt van pravila · sagovornik nije ono što tvrdi · lažno navođenje roditelja · sumnja na zloupotrebu naloga), <code>opis</code>, <code>status</code>, <code>resioId</code>. <strong>Identitet prijavioca se ne prikazuje</strong> — vidi ga samo UO.</li>
+      <li><code>BlokadaKanala</code>: <code>aId</code>, <code>bId</code> (sortirani), <code>uzrokPrijavaId</code>. Prijava ga upisuje <strong>pre ijedne provere</strong> — to je jedini deo toka koji ne čeka odluku.</li>
+    </ul>
+
+    <h4>Dopuna postojećeg <code>Poruka</code></h4>
+    <p><code>Poruka</code> danas <strong>nema polja za uklanjanje</strong>, iako ih <code>ChatMessage</code> ima (<code>uklonjenoAt</code>/<code>uklonjenRazlog</code>/<code>uklonioId</code>). Roditelj po opisu mora da može da skine poruku deteta, pa se ista tri polja dodaju i ovde. Nusprodukt koji vredi znati: time i Fondacija dobija polugu nad porukom 1-na-1, koje danas nema — moderacija je do sada pokrivala oglase i Pričaonicu, ali ne i privatnu prepisku.</p>
+
+    <p>Uklanjanje sadržaja oglasa <strong>ne traži nove modele</strong> — <code>MarketplaceListing.uklonjenAt/uklonjenRazlog/uklonioId</code> već postoje i koriste se za moderaciju. Roditelj je samo drugi akter nad istim poljima; razgraničenje ide kroz revizijski dnevnik (<code>OGLAS_UKLONIO_RODITELJ</code> naspram <code>OGLAS_UKLONJEN</code>).</p>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section>
+    <h2><span class="num">05</span> Migracije</h2>
+
+    <p>Redosled je bitan iz istog razloga zbog kog je bitan kod <code>DoprinosOkidac</code>: Postgres ne dozvoljava da se nova vrednost enuma koristi u istoj transakciji u kojoj je dodata.</p>
+
+    <div class="koraci">
+      <div class="korak"><div><span class="kt"><code>_deca_polja_korisnika</code></span><span class="kd">Kolone na <code>User</code>. <strong>Bez backfilla</strong> — svi zatečeni nalozi su odrasli, <code>maloletan=false</code> je tačan podrazumevani.</span></div></div>
+      <div class="korak"><div><span class="kt"><code>_deca_enumi</code></span><span class="kd">Svi novi enumi u zasebnom fajlu, pre modela koji ih koriste.</span></div></div>
+      <div class="korak"><div><span class="kt"><code>_deca_modeli</code></span><span class="kd"><code>RoditeljVeza</code>, <code>RoditeljPoziv</code>, <code>RoditeljstvoPotvrda</code>, <code>PrijavaDeca</code>, <code>BlokadaKanala</code>, polja uklanjanja na <code>Poruka</code>.</span></div></div>
+      <div class="korak"><div><span class="kt"><code>_registar_dece</code></span><span class="kd">Model <code>Dete</code>, prazan.</span></div></div>
+      <div class="korak"><div><span class="kt"><code>_registar_dece_preseljenje</code></span><span class="kd">Prepis <code>ProgramEnrollment.metadata.deca[]</code> → <code>Dete</code> redovi. <strong>Zaseban fajl i zaseban rizik</strong> — vidi odeljak 16.</span></div></div>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Migracije idu automatski u build-u</span>
+      <p><code>vercel.json</code> pokreće <code>prisma migrate deploy</code> pri svakom deploy-u. Neuspela migracija <strong>obara build</strong>, a prethodni deploy ostaje živ. Preseljenje registra dece zato mora biti idempotentno i mora da preživi to što se izvršava dvaput (retry) — <code>ON CONFLICT DO NOTHING</code> nad prirodnim ključem <code>(roditeljId, datumRodjenja)</code>, ne slepi <code>INSERT</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section>
+    <h2><span class="num">06</span> Čista pravila — <code>src/lib/deca-pravila.ts</code></h2>
+
+    <p>Isti obrazac kao <code>doprinos-pravila.ts</code> i <code>nadzor-pravila.ts</code>: <strong>bez ijednog <code>import</code>-a Prisme</strong>, jer ih uvozi i pretraživač (forma dečjeg oglasa, prikaz prekidača, ekran potvrde roditelja). Sve odluke o uzrastu žive ovde i nigde drugde.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Funkcija</th><th>Vraća</th></tr></thead>
+        <tbody>
+          <tr><td><code>UZRAST_MIN = 7</code>, <code>UZRAST_PUNOLETSTVO = 18</code>, <code>UZRAST_SOPSTVENI_PRISTANAK = 15</code></td><td>konstante</td></tr>
+          <tr><td><code>uzrast(datumRodjenja, danas)</code></td><td>navršene godine (<code>danas</code> je uvek beogradski dan)</td></tr>
+          <tr><td><code>uzrasnaGrupa(datumRodjenja, danas)</code></td><td><code>"7-11" | "12-14" | "15-17" | "ODRASTAO" | "PRERANO"</code></td></tr>
+          <tr><td><code>suSusedne(a, b)</code></td><td><code>boolean</code> — <code>7-11</code>↔<code>12-14</code>, <code>12-14</code>↔<code>15-17</code>, <code>15-17</code>↔<code>ODRASTAO</code>. <strong><code>7-11</code> i <code>15-17</code> nisu susedne ni po čemu.</strong></td></tr>
+          <tr><td><code>smeDaPise(od, ka, dozvolaOd, dozvolaKa)</code></td><td>ista grupa uvek; susedna samo uz dozvolu; sa odraslima samo <code>15-17</code> uz dozvolu</td></tr>
+          <tr><td><code>smeDaRazmenjuje(od, ka, dozvolaOd, dozvolaKa)</code></td><td>ista i susedna grupa <strong>uvek, u oba smera</strong>, bez dozvole; sa odraslima samo <code>15-17</code> uz dozvolu</td></tr>
+          <tr><td><code>smeDaVidiOglas(posmatrac, oglasivac, prekidacPijace)</code></td><td>svoja grupa · susedne (uz prekidač) · sopstveni roditelj. <strong>Nikad gost.</strong></td></tr>
+          <tr><td><code>obimUvidaRoditelja(uzrast)</code></td><td><code>"PUN"</code> (&lt;15) · <code>"UZI"</code> (15–17) — uži znači: sa kim i sve razmene, <strong>bez sadržaja poruka</strong></td></tr>
+          <tr><td><code>smeDaPrepise(od, ka)</code></td><td>jedina funkcija koja sme da odgovori na pitanje o toku POEN-a (odeljak 12)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="lbl">Zašto je razmena šira od razgovora</span>
+      <p>Sa susednom grupom se <strong>razmenjuje uvek, u oba smera, i bez dozvole</strong> — ali joj se ne piše. Dvosmernost nije simetrija radi lepote: da POEN ide samo naviše, mlađi bi bili strukturno neto platiše i njihov zapis bi se s vremenom prazan slivao ka starijima. Test to zaključava izričito, jer je to prva stvar koju bi neko „pojednostavio".</p>
+    </div>
+
+    <p><strong>Prekidač ne dira uvid.</strong> <code>obimUvidaRoditelja</code> ne prima <code>dozvolaSusedstvo</code> kao argument — potpis funkcije je mesto na kome se to pravilo sprovodi. Dozvola proširuje detetov krug, ne roditeljev uvid.</p>
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section>
+    <h2><span class="num">07</span> Servisni sloj</h2>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Fajl</th><th>Posao</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/lib/protokol/deca.ts</code></td><td>Re-eksportuje pravila (server ima jedan ulaz, kao kod <code>doprinos-sadrzaju.ts</code>). <code>poljaDeteta()</code>, <code>poljaOsamostaljenja()</code>, <code>ucitajKontekstDeteta(userId)</code> — jedan upit koji vraća uzrast, grupu, dozvolu i roditelje, jer ga traži gotovo svaka ruta.</td></tr>
+          <tr><td><code>src/lib/protokol/roditeljstvo.ts</code></td><td>Ceo ulazni tok: <code>kreirajPoziv</code>, <code>potvrdiPoziv</code>, <code>odbijPoziv</code>, <code>odgovoriNaPotvrdu</code>, <code>prekiniVezu</code>, <code>ocistiIstekle</code>.</td></tr>
+          <tr><td><code>src/lib/protokol/deca-prelazi.ts</code></td><td>Dva praga: <code>obradiPetnaesti(danas)</code>, <code>osamostali(danas)</code>. Zovu ih cron i admin okidač.</td></tr>
+          <tr><td><code>src/lib/protokol/deca-uvid.ts</code></td><td>Roditeljski uvid — jedno mesto na kome se odlučuje šta roditelj dobija, po <code>obimUvidaRoditelja</code>. <strong>Nijedna ruta ne sme sama da sastavlja odgovor za roditelja.</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Obrazac koji se ne sme prekršiti</span>
+      <p>Ništa u ovom modulu ne poziva <code>emitujPoen()</code>. Ako se ikad pozove (osamostaljenje sa emisijom — odeljak 13), mora <strong>van <code>prisma.$transaction()</code></strong>, jer <code>emitujPoen</code> otvara sopstvenu. To je isti obrazac po kom rade <code>probajEvidentirati</code> i <code>probajNapredovati</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 08 ============ -->
+  <section>
+    <h2><span class="num">08</span> Ulazni tok</h2>
+
+    <div class="koraci">
+      <div class="korak"><div><span class="kt">Poziv nastaje</span><span class="kd">Iz naloga roditelja (ekran obaveštenja <strong>pre</strong> unosa ijednog podatka o detetu — redosled je pravno obavezan), ili dečjom registracijom, ili pozivom drugog roditelja koji upućuje samo dete.</span></div></div>
+      <div class="korak"><div><span class="kt">Ekran čekanja</span><span class="kd">Identičan bez obzira na to da li navedeni pseudonim postoji. Poziv živi 7 dana.</span></div></div>
+      <div class="korak"><div><span class="kt">Roditelj odlučuje</span><span class="kd">Vidi šta je dete prijavilo, šta se beleži, šta on može, i da će njegovi verifikatori biti zamoljeni. Tri ishoda: <strong>potvrđujem</strong> · <strong>nije tačan uzrast</strong> · <strong>nisam roditelj</strong>. Uzrast je istaknut, jer se posle potvrde datum rođenja više ne menja. „Nisam roditelj" briše poziv odmah i javlja Fondaciji.</span></div></div>
+      <div class="korak"><div><span class="kt">Verifikatori roditelja</span><span class="kd"><code>dohvatiVerifikatore</code> → po jedan <code>RoditeljstvoPotvrda</code> red i notifikacija. Pitanje je jedna rečenica bez ijednog podatka o detetu.</span></div></div>
+      <div class="korak"><div><span class="kt">Nalog nastaje</span><span class="kd">Tek kad <strong>svi</strong> potvrde. Jedno odbijanje — uz obrazloženje — ruši postupak, poziv i svi podaci se brišu, roditelj dobija obaveštenje bez identiteta onoga ko je odbio.</span></div></div>
+    </div>
+
+    <h3>Šta se proverava pre nego što poziv uopšte krene</h3>
+    <ul>
+      <li>Roditelj je <code>verified</code>, nije <code>maloletan</code>, nalog nije suspendovan ni ugašen.</li>
+      <li>Uzrast je između 7 i 17. Ispod 7 — odbija se; 18 i više — nije dete.</li>
+      <li>Pseudonim deteta prolazi <code>validanPseudonim</code> i <code>proveriZauzece</code> (<strong>uključujući <code>PseudonimIstorija</code></strong>), pa se rezerviše na <code>RoditeljPoziv.pseudonimLower @unique</code>.</li>
+      <li>Dete već nema dva povezana roditelja.</li>
+      <li>Rate limit preko <code>src/lib/rate-limit.ts</code> — konkretan broj je otvoreno pitanje, ali <strong>bez limita se ne isporučuje</strong>: „nisam roditelj" jeste izlaz, ali tek pošto je čovek uznemiren.</li>
+    </ul>
+
+    <h3>Roditelj bez verifikatora</h3>
+    <p>Prazan skup verifikatora bi prošao automatski i to bi bila najgora moguća rupa. Zato:</p>
+    <ul>
+      <li>Ako je roditelj <strong>član UO</strong> (<code>jeKorenJemstva</code>) — poziv ide na <strong>neposrednu potvrdu superadmina</strong>, kao izričitu odluku sa tragom u revizijskom dnevniku.</li>
+      <li>Ako je roditelj verifikovan a ipak nema verifikatora — takvo stanje ne bi trebalo da postoji; poziv se <strong>zaustavlja i prijavljuje</strong> (<code>posaljiAdminAlert</code>), ne odobrava.</li>
+    </ul>
+
+    <h3>Šta ovaj tok <em>ne</em> troši</h3>
+    <p>Ni <code>slotoviPotroseni</code>, ni <code>indeksStvarnosti</code>, ni <code>VerifikacionaZona</code>, ni <code>NadzorZapis</code>. Nema gornjeg broja dece. Rizik koji roditelj nosi nije slot nego sopstveno ime i sopstvena mreža — <strong>i to je jedina brana modula, pa se ne sme razblažiti nijednom „praktičnom" olakšicom</strong> (npr. „dovoljna su tri verifikatora", „ako se ne jave za 48h smatra se potvrđenim"). Ćutanje nije potvrda.</p>
+  </section>
+
+  <!-- ============ 09 ============ -->
+  <section>
+    <h2><span class="num">09</span> Dodirna mesta u zatečenom kodu</h2>
+
+    <p>Ovo je najveći i najopasniji deo posla. Odluka da je dete red u <code>User</code> znači da <strong>svaki zatečeni upit koji je do sada tiho značio „odrastao član" sada mora da se izjasni</strong>. Spisak je sastavljen čitanjem koda, ne po sećanju; svaka stavka je mesto koje bi bez izmene curilo.</p>
+
+    <h3>A — javna površina: dete ne sme da procuri</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Mesto</th><th>Zatečeno stanje</th><th>Izmena</th></tr></thead>
+        <tbody>
+          <tr><td><code>GET /api/pijaca</code></td><td><code>where = { status: "ACTIVE" }</code>, <strong>bez prijave</strong> — vraća sve oglase svakome</td><td>Dodati <code>seller: { maloletan: false }</code> kao <strong>bezuslovni</strong> podrazumevani filter. Dečji prostor je zaseban, prijavljen upit sa sopstvenim pravilima vidljivosti.</td></tr>
+          <tr><td><code>GET /api/pijaca/[id]</code></td><td>Vraća oglas svakome</td><td>Ako je oglašivač maloletan → <code>smeDaVidiOglas</code>, inače 404 (<strong>ne 403</strong> — 403 potvrđuje da oglas postoji).</td></tr>
+          <tr><td><code>src/app/sitemap.ts</code></td><td>Nabraja oglase</td><td>Isključiti dečje. Uz to <code>noindex</code> na stranicama dečjeg prostora.</td></tr>
+          <tr><td><code>GET /api/javno/feed</code></td><td>Gradiran po ulozi, ali nad svim transakcijama</td><td>Isključiti transakcije u kojima je bilo koja strana maloletna — i za verifikovanog posmatrača.</td></tr>
+          <tr><td><code>GET /api/javno/statistike</code></td><td>Broj članova, transakcija, opticaj</td><td>Odluka: da li deca ulaze u „broj članova". Predlog — <strong>ne ulaze</strong> u zatečeni brojač, nego stoje kao zaseban ako se uopšte objavljuje. Opticaj se ne dira (deca nose POEN koji je već u opticaju).</td></tr>
+          <tr><td><code>GET /api/korisnici/pretraga</code> (<code>ClanPretraga</code>)</td><td>Pretraga po pseudonimu</td><td>Deca se <strong>ne pojavljuju</strong> odraslima. Detetu pretraga vraća samo naloge sa kojima sme da razgovara.</td></tr>
+          <tr><td><code>/graf</code>, <code>/api/graf</code></td><td>Mreža potvrda</td><td>Ništa — deca nisu u <code>VerifikacionaVeza</code>. <strong>Provereno, ne pretpostavljeno</strong>, i zaključano testom.</td></tr>
+          <tr><td><code>/profil/[id]</code></td><td>Javni profil sa POEN/ZRNO/rang/oglasi</td><td>Profil deteta vidi samo ko sme da vidi njegov oglas. Rang-liste ne obuhvataju decu.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>B — prava koja <code>NEVERIFIKOVAN</code> danas ima, a dete ima drugačija</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Mesto</th><th>Zatečeno</th><th>Izmena</th></tr></thead>
+        <tbody>
+          <tr><td><code>smeDaSalje()</code> u <code>doprinos-pravila.ts</code>, korišćen u <code>POST /api/transfer</code></td><td>Prima <code>tipKorisnika</code>; <code>NEVERIFIKOVAN</code> ne sme da inicira prepis</td><td><strong>Ne menjati potpis.</strong> U <code>/api/transfer</code> se pre njega uključuje <code>smeDaPrepise(od, ka)</code> iz dečjih pravila; ono odlučuje za svaki par u kome je bar jedna strana maloletna, a <code>smeDaSalje</code> ostaje netaknut za odrasle.</td></tr>
+          <tr><td><code>POST /api/pijaca</code> (objava)</td><td>Neverifikovan sme PONUDU, max 3, uz sadržinski minimum sa <strong>obaveznom fotografijom</strong></td><td>Dete: fotografija <strong>nije uslov</strong>. Sadržinski minimum dečjeg oglasa je otvoreno pitanje. Ograničenje na 3 aktivna — odluka; predlog je da ostane, jer radi isti posao.</td></tr>
+          <tr><td><code>zabeleziDoprinos()</code> u istoj ruti</td><td>Prvi kvalifikovan oglas → 1.000 POEN (čl. 40a)</td><td>🔴 <strong>Mora da preskoči decu, prvi red funkcije.</strong> Bez toga svako dete emituje 1.000 POEN pri prvom oglasu, čime pada nosivo pravilo iz odeljka 00 i pomera se opticaj — a preko njega osnivački korak.</td></tr>
+          <tr><td><code>probajNapredovati()</code> / <code>probajEvidentiratiKorake()</code> (putanja razmene, čl. 40b)</td><td>Zove se pri objavi oglasa, upitu i prepisu POEN-a</td><td>Isto — preskače decu. Koraci 2–5 nose emisiju.</td></tr>
+          <tr><td><code>POST /api/poruke</code></td><td><code>if (!session.user.verified) → 403</code>; neverifikovan sme samo da odgovara</td><td>Dete inicira razgovor u okviru <code>smeDaPise</code>. Uslov se menja iz „verifikovan" u „verifikovan <em>ili</em> dozvoljeno po dečjim pravilima".</td></tr>
+          <tr><td><code>POST /api/poruke/[konvId]</code></td><td>Proverava <strong>samo članstvo</strong> u razgovoru</td><td>🔴 <strong>Najtiša rupa u modulu.</strong> Kad dete pređe u sledeću grupu, zatečeni razgovor mora da postane pregled bez pisanja — a ova ruta danas ne pita ništa osim „jesi li u razgovoru". Isto važi za <code>BlokadaKanala</code> posle prijave. Bez izmene ovde, sva pravila iz odeljka 06 važe samo dok neko ne otvori stari razgovor.</td></tr>
+          <tr><td><code>emitujNoviOglas()</code> u <code>src/lib/oglas-dogadjaji.ts</code></td><td>Javlja svima koji prate kategoriju</td><td>Dečji oglas ne javlja odraslima; oglas odraslog ne javlja deci van susedstva.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C — životni ciklus naloga</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Mesto</th><th>Šta mora da uzme u obzir</th></tr></thead>
+        <tbody>
+          <tr><td><code>DELETE /api/profil</code> (gašenje naloga)</td><td>Ako gasi <strong>roditelj</strong> — veze se prekidaju, a dete koje ostane bez ijednog roditelja ide u <strong>mirovanje</strong>, ne u gašenje. Ako gasi <strong>dete</strong> — isto što i kod odraslih: zapisi POEN-a se poništavaju uz protivzapis Protokola, podaci se anonimiziraju.</td></tr>
+          <tr><td><code>src/lib/reset-korisnika.ts</code></td><td>Reset roditelja bi mu obrisao verifikacije i istoriju, a deca bi ostala visiti. Predlog: <strong>odbiti reset naloga koji ima povezano dete</strong>, uz jasnu poruku — u istom nizu sa zatečenim branama (osnivač, vlasnik pokrovitelja, autor predloga u registru odluka).</td></tr>
+          <tr><td><code>src/lib/protokol/lazna-verifikacija.ts</code> → <code>ponistiNepostojeciNalog</code></td><td>Ako se utvrdi da iza roditeljskog naloga <strong>ne stoji stvarna osoba</strong>, njegova deca gube pravni osnov. Veze se prekidaju, deca idu u mirovanje, a predmet ide UO. Ovo je i mesto na kome se hvata farma lažnih dečjih naloga.</td></tr>
+          <tr><td><code>auth.ts</code> (JWT refresh)</td><td>Refresh već poništava token kad <code>status !== ACTIVE</code>. <strong>Mirovanje nije <code>UserStatus</code></strong>, pa se ne hvata samo od sebe — ili se doda u istu proveru, ili se dete u mirovanju zaustavlja u <code>proxy.ts</code>/rutama. Prva varijanta je manje mesta za promašaj.</td></tr>
+          <tr><td><code>src/lib/levak.ts</code></td><td>Levak meri put novog člana do potvrde. Deca ga ne prolaze i <strong>iskrivila bi svaki korak</strong>. Isključiti.</td></tr>
+          <tr><td><code>GET /api/profil/eksport</code></td><td>Pravo na prenosivost: detetov eksport nosi njegove podatke; roditeljev nosi i vezu i ono što po uzrastu sme da vidi — <strong>ne sadržaj poruka deteta od 15 naviše</strong>.</td></tr>
+          <tr><td><code>POST /api/cron/gdpr-cistenje</code></td><td>Dopuniti brisanjem isteklih poziva i podataka posle prekida veze, po rokovima iz Politike.</td></tr>
+          <tr><td><code>src/lib/chrome-podaci.ts</code> (<code>adminCekanje</code>)</td><td>Nove kategorije na čekanju: prijave iz dečjeg prostora, pozivi koji traže neposrednu potvrdu. Badge pada kad se stavka reši, ne kad se tab otvori.</td></tr>
+          <tr><td><code>/dobrodosli</code>, <code>vodicVidjenAt</code></td><td>Zatečeni vodič priča o potvrdi, prvom oglasu i 1.000 POEN — <strong>ništa od toga ne važi za dete</strong>. Zaseban vodič, isti mehanizam.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Kako sprečiti da se neko od ovih mesta previdi</span>
+      <p>Popis je dugačak i pisan je rukom, pa je i sam podložan promašaju. Jedina odbrana koja se skalira je <strong>test koji nabraja</strong>: integracioni test koji napravi dete i odraslog bez ijedne veze, pa redom pozove svaku javnu rutu iz grupe A i tvrdi da dete <strong>nigde</strong> nije u odgovoru. Kad se sutra doda nova javna ruta, test je ne pokriva sam od sebe — zato uz njega ide i provera koja obara build ako se u <code>src/app/api/javno/</code> pojavi ruta koja nigde ne pominje <code>maloletan</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10 ============ -->
+  <section>
+    <h2><span class="num">10</span> Dečja Pijaca i vidljivost</h2>
+
+    <p>Prostor je isti model (<code>MarketplaceListing</code>), ali drugačija vrata. Odrasla Pijaca je javna svakome ko dođe na sajt; <strong>dečja nije javna nikome van kruga</strong>.</p>
+
+    <ul>
+      <li><strong>Ko vidi dečji oglas:</strong> ista grupa, susedne grupe, sopstveni roditelji. Ne vide ga posetioci, ne indeksira ga pretraživač.</li>
+      <li><strong>Prekidač pijace</strong> (<code>prikaziSusednePijaca</code>) imaju i deca i odrasli. Odrasli njime bira da li mu se prikazuju oglasi uzrasta 15–17; dvanaestogodišnjak da li vidi 7–11 i 15–17. <strong>To je stvar pregleda, ne dozvole</strong> — ne otvara kontakt i ne zamenjuje roditeljski prekidač.</li>
+      <li><strong>Oznaka maloletnika</strong> na oglasu je vidljiva i obavezna. Radi u oba smera: štiti dete od odraslog koji bi se pravio da ne zna, i odraslog od nesvesnog ulaska u dogovor sa licem bez pune poslovne sposobnosti. Vizuelno ide kao <strong>pečat preko fotografije</strong>, po uzoru na zatečeni pečat „BEZ POTVRDE" — sitan tekst uz pseudonim se već jednom pokazao kao premalo.</li>
+      <li><strong>Kontakt pokreće bilo koja strana.</strong> Nema pravila da se prvi javlja mlađi.</li>
+      <li><strong>Fotografija nije uslov objave</strong>, za razliku od sistema odraslih (<code>oglasIspunjavaMinimum</code> traži bar jednu). Posledica: sadržinski minimum dečjeg oglasa mora se definisati zasebno — otvoreno pitanje.</li>
+      <li><strong>EXIF se briše sa svake slike.</strong> Slika predmeta u dvorištu nosi koordinate dvorišta. Danas se slike prosleđuju na R2 <strong>bez ijedne obrade</strong> (<code>sacuvajNaR2</code> u <code>src/lib/skladiste.ts</code> prima <code>Buffer</code> kakav je stigao), pa ovo nije podešavanje nego nov korak u toku. Odluka koju traži: čišćenje samo za decu, ili za sve — <em>predlog: za sve</em>, jer je isti rizik i kod odraslih, a razlika u kodu je nula.</li>
+    </ul>
+
+    <div class="note warn">
+      <span class="lbl">404, ne 403</span>
+      <p>Kad neko ko ne sme zatraži dečji oglas po <code>id</code>-u, odgovor je <strong>404</strong>. Status 403 potvrđuje da oglas postoji, a time i da postoji dete koje ga je objavilo — što je tačno ono što se skriva. Isti obrazac važi i za profil deteta.</p>
+    </div>
+  </section>
+
+  <!-- ============ 11 ============ -->
+  <section>
+    <h2><span class="num">11</span> Poruke i roditeljski uvid</h2>
+
+    <p><code>Konverzacija</code> je <code>@@unique([user1Id, user2Id])</code> — jedna po paru ljudi. To ostaje; pravo pisanja se ne čuva na razgovoru nego izvodi pri svakom slanju, iz uzrasta obe strane u <strong>tom trenutku</strong>. Zato prelaz iz grupe u grupu radi sam, bez ijednog posla u ponoć.</p>
+
+    <p><strong>Pisanje se proverava u <code>POST /api/poruke/[konvId]</code>, ne samo pri otvaranju razgovora.</strong> To je izmena koja nosi ceo model — vidi grupu B u odeljku 09.</p>
+
+    <h3>Uvid</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Uzrast</th><th>Roditelj vidi</th><th>Osnov</th></tr></thead>
+        <tbody>
+          <tr><td>7–14</td><td>Sve: oglase, razgovore <strong>sa sadržajem</strong>, sve zapise</td><td>Pravni osnov obrade je roditeljski pristanak (ZZPL čl. 16)</td></tr>
+          <tr><td>15–17</td><td>S kim dete komunicira i <strong>sve razmene</strong>; <strong>ne i sadržaj poruka</strong></td><td>Dete od 15 samo pristaje na obradu svojih podataka; čitanje prepiske više nije pokriveno njegovim pristankom nego samo nadzorom, i mora biti srazmerno</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Sve što roditelj dobija prolazi kroz <code>deca-uvid.ts</code>. Nijedna ruta ne sme sama da sastavlja odgovor za roditelja — inače će jedna od njih pre ili kasnije poslati <code>...poruka</code> spread-om i sadržaj procuriti, tačno kao što je <code>GET /api/pijaca/[id]</code> nekad curio <code>uklonjenRazlog</code>.</p>
+
+    <h3>Uklanjanje</h3>
+    <p>Roditelj skida bilo koji sadržaj deteta — oglas, sliku, poruku. Meko, kao svuda: <code>uklonjenAt</code>/<code>uklonjenRazlog</code>/<code>uklonioId</code>. Prihvatanjem odnosa roditelj pristaje na sve što dete objavi <strong>do trenutka uklanjanja</strong>; to je rečenica koja mora stajati na ekranu potvrde, jer određuje njegovu odgovornost.</p>
+
+    <p><strong>Roditelj ne ulazi u dečji prostor.</strong> Nema nalog unutra, ne objavljuje, ne javlja se nijednom detetu — ni svom ni tuđem. Vidi, ali ne učestvuje. U kodu to znači da roditeljske rute vraćaju <em>samo čitanje</em> i jednu akciju (uklanjanje) — nema rute kojom bi roditelj poslao poruku u detetov razgovor.</p>
+  </section>
+
+  <!-- ============ 12 ============ -->
+  <section>
+    <h2><span class="num">12</span> POEN — tri toka i jedna zabrana</h2>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Tok</th><th>Dozvoljeno</th><th>Ograničenje</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ulaz</strong>: roditelj → svoje dete</td><td>Da</td><td>Bez ograničenja iznosa. Samo <strong>sopstveno</strong> dete.</td></tr>
+          <tr><td><strong>Unutar prostora</strong>: dete ↔ dete</td><td>Da, ista i susedne grupe, oba smera</td><td>Bez dozvole roditelja. Nema šta da se ograničava — prepis je zero-sum.</td></tr>
+          <tr><td><strong>Izlaz</strong>: dete → odrastao</td><td>Samo iz uzrasta <strong>15–17</strong>, uz otvoren prekidač</td><td>Bilo kom odraslom, uključujući sopstvenog roditelja. Mlađi ne mogu nikome.</td></tr>
+          <tr><td><strong>Odrastao → tuđe dete</strong></td><td>🔴 Ne</td><td>Jedini ulaz je od sopstvenog roditelja.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Sve četiri vrste odgovara <strong>jedna funkcija</strong> — <code>smeDaPrepise(od, ka)</code>. Ako se pitanje o toku POEN-a ikad pojavi na drugom mestu u kodu, to je greška, ne proširenje.</p>
+
+    <p>Zabeleženi doprinos (<code>DoprinosSadrzaju</code>) i putanja razmene (<code>DoprinosRazmeni</code>) <strong>ne postoje za decu</strong>. To nije izostavljanje funkcije nego posledica principa: kanal iz čl. 40a postoji da bi se nov korisnik predstavio mreži i našao nekoga ko ga može potvrditi, a dete se ne potvrđuje tim putem nego preko roditelja.</p>
+
+    <div class="note">
+      <span class="lbl">Nadoknada (čl. 20b) i deca</span>
+      <p>Negativan zapis može nastati samo verifikatoru čija je verifikacija poništena. Dete ne verifikuje nikoga, pa <strong>ne može u minus</strong> — zatečena temeljna odredba (nijedan korisnik nema negativan zapis) za decu važi bez izuzetka. Vredi zapisati, jer je to jedno od retkih mesta gde dečji režim <em>nije</em> uži nego kod odraslih.</p>
+    </div>
+  </section>
+
+  <!-- ============ 13 ============ -->
+  <section>
+    <h2><span class="num">13</span> Dva rođendana</h2>
+
+    <p>Jedini deo modula kome treba noćni posao. Sve ostalo se izvodi iz datuma.</p>
+
+    <h3>Petnaesti</h3>
+    <ul>
+      <li>Dete dobija ekran kojim <strong>samo pristaje</strong> na obradu svojih podataka (ZZPL čl. 16) → <code>pristanakOd15At</code>.</li>
+      <li>Roditeljski uvid se <strong>sužava sam</strong>, jer <code>obimUvidaRoditelja</code> čita uzrast. Ne treba nikakav upis.</li>
+      <li>Veza se ne prekida — ostaje zbog ugovorne strane, do osamnaeste.</li>
+      <li>🔴 <strong>Šta ako dete ne da pristanak</strong> — otvoreno pitanje iz opisa, i jedino od sedam koje <em>blokira</em> isporuku ovog dela: bez odgovora se ne zna šta ekran radi kad se zatvori. Dok se ne odluči, prelaz na 15 se isporučuje samo kao <strong>sužavanje uvida</strong> (koje ionako radi samo), a ekran pristanka ide u kasniju fazu.</li>
+    </ul>
+
+    <h3>Osamnaesti — tri stvari odjednom</h3>
+    <div class="koraci">
+      <div class="korak"><div><span class="kt">Nalog postaje pun</span><span class="kd"><code>maloletan=false</code>, <code>osamostaljenAt</code>, roditeljski uvid i prekidač prestaju, ZRNO i glasanje se otključavaju.</span></div></div>
+      <div class="korak"><div><span class="kt">POEN ide sa njim</span><span class="kd"><strong>Bez ijedne transakcije.</strong> Zapis je već u knjizi; menja se samo status naloga. Zero-sum se ne dira, opticaj se ne pomera.</span></div></div>
+      <div class="korak"><div><span class="kt">Roditeljska veza postaje prva potvrda</span><span class="kd"><code>RoditeljVeza</code> se arhivira (ne briše — dokaz da je obrada imala osnov) i nastaje <code>VerifikacionaVeza</code> roditelj → dete.</span></div></div>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">🔴 Ovde se lomi nosivo pravilo iz odeljka 00 — i mora se odlučiti pre koda</span>
+      <p>Ako se prva potvrda napravi pozivom <code>izvrsiVerifikaciju()</code>, ona <strong>emituje POEN</strong>: 1.000 verifikatoru, 1.000 verifikovanom, 500 nadzorniku kad podleže nadzoru. To je od 2.000 do 2.500 novih POEN-a po svakom osamnaestom rođendanu — dakle <strong>dečji prostor ipak stvara POEN</strong>, opticaj se pomera i osnivački korak se približava.</p>
+      <p>Tri moguća ishoda, i nijedan se ne sme birati usput:</p>
+      <ul>
+        <li><strong>Puna verifikacija sa emisijom</strong> — najjednostavnije u kodu, ali otvara rečenicu iz odeljka 00 i traži izričitu odredbu u aktima.</li>
+        <li><strong>Veza bez emisije</strong> — indeks +10, zona se ažurira, POEN se ne emituje. Traži zaseban put kroz <code>verifikacija-service.ts</code>, jer zatečeni tok emisiju uvek radi.</li>
+        <li><strong>Veza koja se ne upisuje automatski</strong> — roditelj i dete je obave običnim kodom kad hoće. Najmanje koda, ali gubi ono zbog čega osamostaljenje uopšte postoji: da mlad čovek ne ulazi u mrežu kao stranac.</li>
+      </ul>
+      <p>Uz to visi i drugo otvoreno pitanje iz opisa — <strong>troši li ta veza verifikacioni slot roditelja i podleže li nadzoru</strong>. Ako troši, roditelj sa četvoro dece u istoj godini ostaje bez kapaciteta za mrežu odraslih.</p>
+    </div>
+
+    <h3>Kako se prelazi izvršavaju</h3>
+    <p>Nov cron <code>POST /api/cron/deca-prelazi</code>, jednom dnevno, uz zatečene poslove u <code>vercel.json</code>. Vremenski blizu <code>programi-revizija</code> (23:00), ali <strong>ne u istom terminu</strong> kao noćna emisija (22:00) — osamostaljenje ne sme da se sudari sa obračunom dana.</p>
+    <ul>
+      <li>Posao je <strong>idempotentan i nadoknađuje</strong>: obrađuje sve koji su prag prešli, a nisu obrađeni (<code>osamostaljenAt IS NULL AND uzrast &gt;= 18</code>), ne samo one od danas. Bez toga jedan propušten cron ostavlja punoletnog čoveka zaključanog u dečjem prostoru.</li>
+      <li>Uz cron ide i <strong>ručni admin okidač</strong>, po uzoru na <code>/api/admin/emisija/nocna</code> — svaki noćni posao u ovom sistemu ima svoj.</li>
+      <li>Vercel plan <strong>odbija subdnevni cron</strong> (naučeno na tabli jemstva), pa se istek poziva od 7 dana ne rešava zasebnim čestim poslom nego <strong>filtriranjem pri čitanju</strong> + dnevnim čišćenjem.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 14 ============ -->
+  <section>
+    <h2><span class="num">14</span> Mirovanje i prestanak</h2>
+
+    <p><strong>Mirovanje nije mera.</strong> To je posledica prestanka pravnog osnova, i mora se u kodu držati odvojeno od suspenzije — inače će na njega neko primeniti rok od 30 dana koji za suspenziju važi.</p>
+
+    <ul>
+      <li>Povlačenje saglasnosti jednog roditelja <strong>ne zatvara nalog</strong> ako je drugi povezan.</li>
+      <li>Bez ijednog roditelja → <code>mirovanjeOdAt</code>. Dete nema pristup, ali se <strong>ništa ne briše</strong>: zapisi POEN-a, oglasi, istorija razgovora — sve čeka. Oglasi se skidaju sa Pijace dok mirovanje traje (<code>ListingStatus</code> na neaktivno, povratno).</li>
+      <li>Izlaz iz mirovanja: povratak roditelja, preuzimanje od drugog roditelja ili staratelja, ili osamostaljenje. <strong>Osamostaljenje radi i iz mirovanja</strong> — cron ne sme da preskoči nalog samo zato što miruje.</li>
+      <li>Istupanje ili isključenje pre osamnaeste: isto što i kod odraslih (zapisi POEN-a se poništavaju uz protivzapis Protokola, ravnoteža ostaje, ništa se ne isplaćuje i ne prenosi).</li>
+    </ul>
+
+    <p>🟡 <strong>Šta ako mirovanje nikad ne prestane</strong> je otvoreno pitanje iz opisa. Za kod je bitna samo jedna posledica: dok nema odgovora, <strong>ne sme se napisati posao koji naloge u mirovanju posle nekog vremena gasi</strong>. Tiho brisanje detetovih zapisa je ishod koji se ne može opozvati.</p>
+  </section>
+
+  <!-- ============ 15 ============ -->
+  <section>
+    <h2><span class="num">15</span> Prijave</h2>
+
+    <ul>
+      <li>Put <strong>ne prolazi kroz roditelja</strong> — jer prijava može biti i na roditelja. Prijavljuje dete iz svog naloga, roditelj, ili svaki korisnik koji vidi sporan sadržaj.</li>
+      <li><strong>Prijava odmah zatvara kanal</strong> (<code>BlokadaKanala</code>), pre ijedne provere. Sprovodi se u <code>POST /api/poruke/[konvId]</code> — istoj ruti koja nosi i prelaz između grupa.</li>
+      <li>Postupa <strong>UO ili lice koje on ovlasti</strong> — telo, ne pojedinac. U kodu: <code>jeSuperadmin</code>, ne <code>jeAdmin</code>, po uzoru na nadzorne predmete.</li>
+      <li>Identitet prijavioca se ne otkriva.</li>
+      <li>Kada se sumnja odnosi na roditelja, Fondacija obaveštava nadležne organe <strong>i bez njegove saglasnosti</strong>. To je postupak, ne funkcija — u kodu postoji samo kao izdvojen status predmeta i trag u revizijskom dnevniku.</li>
+      <li>Prijave oglasa idu kroz zatečeni <code>PrijavaOglasa</code> (razlozi iz Uslova već postoje); <code>PrijavaDeca</code> pokriva ono što u njemu ne postoji — kontakt van pravila, sumnju u identitet sagovornika, lažno navođenje roditelja.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 16 ============ -->
+  <section>
+    <h2><span class="num">16</span> Jedan registar dece</h2>
+
+    <p>Najsuptilniji deo integracije, jer dodiruje mehanizam koji <strong>svake noći emituje POEN</strong>.</p>
+
+    <h3>Zatečeno stanje</h3>
+    <p>Deca prijavljena za Podršku Majkama žive kao JSON: <code>ProgramEnrollment.metadata = { deca: [{ datumRodjenja }] }</code>. <code>izracunajMajke()</code> u <code>src/lib/protokol/programi.ts</code> čita taj niz i za svako dete računa <code>Math.floor((2000 − godine×100) × koeficijentDeteta(i))</code>, gde je <code>i</code> <strong>redni broj u nizu</strong>.</p>
+
+    <div class="note warn">
+      <span class="lbl">🔴 Redosled niza je deo obračuna</span>
+      <p><code>koeficijentDeteta(i)</code> zavisi od pozicije u nizu. Preseljenje u tabelu <strong>gubi redosled</strong> ako se ne uspostavi izričito sortiranje. Ako se posle preseljenja deca čitaju drugim redosledom, dnevni iznos se menja <em>bez ijedne promene podataka</em> — i to na kanalu koji noću emituje POEN.</p>
+      <p>Zato: <code>Dete</code> se uvek čita <code>orderBy: { datumRodjenja: "asc" }</code>, a migracija upisuje redove <strong>istim redosledom kojim su bili u nizu</strong>. Test koji poredi dnevni iznos pre i posle preseljenja za isti skup datuma je ovde <strong>obavezan</strong>, ne dobrodošao.</p>
+    </div>
+
+    <h3>Redosled radova</h3>
+    <div class="koraci">
+      <div class="korak"><div><span class="kt">Model <code>Dete</code>, prazan</span><span class="kd">Ništa ga još ne čita.</span></div></div>
+      <div class="korak"><div><span class="kt">Preseljenje, uz zadržan JSON</span><span class="kd">Podaci u oba oblika. <code>izracunajMajke</code> i dalje čita JSON.</span></div></div>
+      <div class="korak"><div><span class="kt">Prebacivanje čitanja</span><span class="kd"><code>izracunajMajke</code> prima <strong>listu datuma</strong> umesto <code>metadata</code>. Time ostaje čista funkcija i testovi u <code>__tests__/protokol/programi.test.ts</code> nastavljaju da rade nad istim ulazom.</span></div></div>
+      <div class="korak"><div><span class="kt">Provera nad stvarnim podacima</span><span class="kd">Za svaku aktivnu prijavu uporediti dnevni iznos iz JSON-a i iz tabele. Razlika bilo gde — stop.</span></div></div>
+      <div class="korak"><div><span class="kt">Tek onda gašenje JSON grane</span><span class="kd">Nova prijava upisuje <code>Dete</code>. <code>buildMetadata</code> prestaje da nosi decu.</span></div></div>
+    </div>
+
+    <h3>Dva pravila koja registar nosi</h3>
+    <ul>
+      <li>🔴 <strong>Postojanje dečjeg naloga nije dokaz roditeljstva.</strong> Nalog dobija onaj kome je roditeljstvo već potvrđeno — nikad obrnuto. U kodu: <code>Dete.nalogId</code> se popunjava <em>posle</em> potvrde verifikatora, a prijava na Podršku Majkama <strong>ne sme</strong> da koristi postojanje naloga kao osnov. Da je drugačije, bilo bi kružno: izmišljeno dete pravi nalog koji zatim „dokazuje" da izmišljeno dete postoji.</li>
+      <li><strong>Dete i roditelj primaju uporedo.</strong> Majka prima podršku za dete, dete prima svoj doprinos u dečjem prostoru — različiti osnovi, ne isključuju se. Godišnje revizije nema. Praktično: <code>programi-revizija</code> cron se <strong>ne proširuje</strong> na decu.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 17 ============ -->
+  <section>
+    <h2><span class="num">17</span> Interfejs, prevodi i copy brane</h2>
+
+    <ul>
+      <li><strong>Zaseban Sidebar za dete.</strong> Zatečeni vodi na Potvrde, ZRNO, Doprinos, Programe, Donacije — sve što dete ne može. Grupisana navigacija već postoji; dečja je kraća, ne filtrirana verzija duge (filtrirana bi pri svakoj budućoj izmeni tiho propuštala nove stavke).</li>
+      <li><strong>Roditeljski ekran</strong> stoji u nalogu roditelja, ne u dečjem prostoru: spisak dece, prekidač, uvid, uklanjanje, povlačenje saglasnosti.</li>
+      <li><strong>Admin:</strong> nov tab za prijave iz dečjeg prostora i pozive koji traže neposrednu potvrdu. Vidljiv samo superadminu (isto kao Nadzor i Obaveštenja).</li>
+    </ul>
+
+    <h3>Copy — dve zatečene brane koje će ovaj modul obarati</h3>
+    <div class="note warn">
+      <span class="lbl">Testovi koji obaraju build</span>
+      <p><code>__tests__/copy-ukinuto.test.ts</code> obara build ako se u <code>messages/*.json</code> ili <code>faq-data*.ts</code> pojavi koren <code>verifik</code>/<code>verif</code>/<code>верифи</code>/<code>hitelesít</code> na bilo kom jeziku. Dečji copy zato govori o <strong>potvrdi</strong>, nikad o verifikaciji — a <strong>akti novog pravilnika i dalje govore „verifikacija"</strong>, jer ta brana ne gleda akte. Ovo nije formalnost: prvi <code>{verifikatori}</code> placeholder u dečjoj poruci obara build, i lakše je znati unapred nego to otkriti u CI-ju.</p>
+      <p><code>__tests__/faq-paritet.test.ts</code> poredi <strong>identitet</strong> nizova po jeziku. Dečja FAQ pitanja se dodaju u sve pet fajlova odjednom, a sakrivanje dok je modul ugašen ide kroz <code>FAQ_SAKRIVENA_PITANJA</code> u <code>moduli.ts</code> i filtrira se u <code>FaqStranica.tsx</code> — <strong>nikad u <code>getFaqSekcije()</code></strong>, jer bi test pao.</p>
+    </div>
+
+    <p>Prevodi idu na svih pet jezika odjednom (<code>scripts/check-i18n-parity.mjs</code>). Tekstovi ekrana su otvoreno pitanje iz opisa — ali je bitno da to ne bude poslednji korak: <strong>ekran obaveštenja roditelju i ekran odluke su pravni dokumenti u malom</strong>, a ne kopirajting, i njihov tekst mora ići uz akte pred UO, ne posle.</p>
+
+    <p>Terminologija statusa: zatečeni red je <em>posetilac → nov član → redovan član → nosilac ZRNA</em>. Dete u njemu ne stoji ni na jednom mestu i <strong>ne sme se zvati „nov član"</strong> — ta oznaka znači „prošao je nekoliko dana", a dete može biti u sistemu godinama. Predlog za odluku: dečji prostor uopšte ne prikazuje statusnu oznaku, jer u njemu status ne određuje ništa — sve određuje uzrast.</p>
+  </section>
+
+  <!-- ============ 18 ============ -->
+  <section>
+    <h2><span class="num">18</span> Testovi</h2>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Fajl</th><th>Šta zaključava</th></tr></thead>
+        <tbody>
+          <tr><td><code>__tests__/deca-pravila.test.ts</code></td><td>Granice uzrasta (6/7, 11/12, 14/15, 17/18), susedstvo i <strong>izričito to da 7–11 i 15–17 nisu susedne</strong>, razmena dvosmerna bez dozvole, razgovor jednosmeran uz dozvolu, uvid koji se sužava na 15, prekidač koji ne dira uvid.</td></tr>
+          <tr><td><code>__tests__/protokol/deca-poen.test.ts</code></td><td>Sve četiri vrste toka POEN-a iz odeljka 12; odrastao → tuđe dete pada; 15–17 → odrastao prolazi samo uz prekidač.</td></tr>
+          <tr><td><code>__tests__/protokol/deca-emisija.test.ts</code></td><td>🔴 <strong>Nosivo pravilo:</strong> nizom dečjih radnji (oglas, prepis, upit, više razmena) opticaj ostaje <strong>nepromenjen</strong>. Ovo je test koji čuva osnivački korak.</td></tr>
+          <tr><td><code>__tests__/deca-vidljivost.test.ts</code></td><td>Dete se ne pojavljuje ni u jednom odgovoru javnih ruta iz grupe A; nepozvani zahtev za dečji oglas vraća <strong>404</strong>.</td></tr>
+          <tr><td><code>__tests__/protokol/roditeljstvo.test.ts</code></td><td>Poziv bez potvrde ne pravi nalog; jedno odbijanje ruši postupak; prazan skup verifikatora <strong>ne prolazi</strong>; poziv ističe za 7 dana; odgovor je identičan za postojeći i nepostojeći pseudonim.</td></tr>
+          <tr><td><code>__tests__/protokol/programi.test.ts</code> (dopuna)</td><td>Dnevni iznos Podrške Majkama <strong>isti pre i posle</strong> preseljenja registra, uključujući redosled dece.</td></tr>
+          <tr><td><code>__tests__/copy-ukinuto.test.ts</code> (dopuna)</td><td>Dečji copy ne nosi koren „verifik" ni na jednom jeziku.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 19 ============ -->
+  <section>
+    <h2><span class="num">19</span> Redosled isporuke</h2>
+
+    <p>Sedam koraka. Svaki se spaja u <code>main</code> zasebno i ide na test; prekidač je sve vreme <code>false</code>, pa nijedan ne menja ponašanje sistema za zatečene korisnike.</p>
+
+    <div class="koraci">
+      <div class="korak"><div><span class="kt">Brane vidljivosti — sam za sebe, i pre svega ostalog</span><span class="kd">Filteri iz grupe A u odeljku 09, uz njihove testove. Rade i dok nema nijednog deteta, a bez njih nijedan sledeći korak nije bezbedan da se spoji. <strong>Jedini korak koji je vredan i ako se modul nikad ne upali.</strong></span></div></div>
+      <div class="korak"><div><span class="kt">Šema i prekidač</span><span class="kd">Migracije 1–4, <code>MODUL_DECA_AKTIVAN=false</code>, <code>deca-pravila.ts</code> sa punim testovima. Bez ijedne rute.</span></div></div>
+      <div class="korak"><div><span class="kt">Ulazni tok</span><span class="kd"><code>roditeljstvo.ts</code>, poziv, potvrda verifikatora, nastanak naloga, tri puta ulaza. Ovde se modul prvi put može isprobati od kraja do kraja na testu.</span></div></div>
+      <div class="korak"><div><span class="kt">Prostor</span><span class="kd">Dečja Pijaca, poruke sa proverom pri slanju, prekidač pijace, oznaka maloletnika, brisanje EXIF-a.</span></div></div>
+      <div class="korak"><div><span class="kt">Roditeljski ekran i uklanjanje</span><span class="kd"><code>deca-uvid.ts</code>, prekidač dozvole, uklanjanje sadržaja, povlačenje saglasnosti, mirovanje.</span></div></div>
+      <div class="korak"><div><span class="kt">Prelazi i prijave</span><span class="kd">Cron, ručni okidač, <code>PrijavaDeca</code>, admin tab. Osamostaljenje ide tek pošto je odluka iz odeljka 13 doneta.</span></div></div>
+      <div class="korak"><div><span class="kt">Jedan registar</span><span class="kd">Preseljenje Podrške Majkama. <strong>Namerno poslednje</strong> — jedini korak koji dodiruje mehanizam koji već noću emituje POEN, i bolje je da se izvede kad je sve ostalo mirno.</span></div></div>
+    </div>
+
+    <p>Paralelno i nezavisno od koda teče priprema akata (odeljak 01). Prekidač na <code>true</code> je <strong>poslednji potez</strong>, posle odluke UO i ažuriranog DPIA — i to je zaseban, jednolinijski commit, da se u istoriji vidi tačan trenutak.</p>
+  </section>
+
+  <!-- ============ 20 ============ -->
+  <section>
+    <h2><span class="num">20</span> Zamke nađene u zatečenom kodu</h2>
+
+    <p>Sedam mesta na kojima bi razumna, pažljiva implementacija ipak promašila — jer se promašaj ne vidi dok ne bude kasno.</p>
+
+    <ol>
+      <li><strong><code>POST /api/poruke/[konvId]</code> proverava samo članstvo.</strong> Sva pravila o tome ko kome sme da piše sprovode se pri <em>otvaranju</em> razgovora. Dete koje pređe u drugu grupu, ili nad kojim je prijava zatvorila kanal, nastavlja da piše u zatečeni razgovor. Ovo je jedina izmena bez koje ceo model susedstva postoji samo na papiru.</li>
+      <li><strong><code>zabeleziDoprinos()</code> se zove bezuslovno u <code>POST /api/pijaca</code>.</strong> Bez izričitog preskoka za decu, prvi dečji oglas emituje 1.000 POEN — nosivo pravilo pada u prvom danu rada modula, tiho, i primeti se tek na skoku opticaja.</li>
+      <li><strong>Prazan skup verifikatora prolazi automatski.</strong> Petlja „svi su potvrdili" nad praznim skupom je istinita. Član UO nema verifikatore, pa bi najjači nalog dobio decu bez ijedne provere.</li>
+      <li><strong><code>koeficijentDeteta(i)</code> zavisi od redosleda u nizu.</strong> Preseljenje registra bez izričitog sortiranja menja dnevni iznos Podrške Majkama bez ijedne promene podataka — na kanalu koji noću emituje POEN.</li>
+      <li><strong>Mirovanje nije <code>UserStatus</code>.</strong> JWT refresh poništava token samo za <code>status !== ACTIVE</code>. Dete u mirovanju sa živim cookie-jem nastavlja da radi dok mu sesija ne istekne — isti kvar koji je jednom već propustio suspendovane korisnike.</li>
+      <li><strong>403 odaje ono što se skriva.</strong> Na dečji oglas i dečji profil odgovor je 404 za svakoga ko ne sme da ga vidi.</li>
+      <li><strong>Vercel plan odbija subdnevni cron.</strong> Istek poziva od 7 dana i skidanje oglasa pri mirovanju rešavaju se filtriranjem pri čitanju, ne čestim poslom. Ovo je već jednom koštalo — table jemstva.</li>
+    </ol>
+
+    <div class="note">
+      <span class="lbl">Sitnije, ali vredi zapisati</span>
+      <ul>
+        <li><code>User.email</code> je <code>String? @unique</code> — <strong>dete može bez adrese</strong>. Ali tada nema ni reset lozinke; ako se izgubi, jedini put nazad ide preko roditelja. To je odluka o kojoj se lako ne razmišlja dok se ne desi.</li>
+        <li><code>obavestiAdmineNoviKorisnik</code> i <code>posaljiAdminAlert</code> okidaju pri svakoj registraciji. Dečji ulaz ima dva koraka (poziv, pa nalog) — <strong>ne slati dvaput</strong>.</li>
+        <li>Uzrast se svuda računa iz <code>beogradskiDan()</code>. Golo <code>new Date()</code> u UTC-u pomera rođendan za dva sata unazad leti — dovoljno da dete promeni grupu pre ponoći.</li>
+        <li><code>Konverzacija @@unique([user1Id, user2Id])</code> znači da roditelj i dete dele <strong>jedan</strong> razgovor sa istom osobom kroz sve godine. Zato se pravo pisanja izvodi, a ne čuva na razgovoru.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 21 ============ -->
+  <section>
+    <h2><span class="num">21</span> Otvorena pitanja</h2>
+
+    <h3>Sedam iz opisa modula</h3>
+    <p>Prenose se neizmenjena i ovaj plan ih <strong>ne pogađa</strong>. Uz svako stoji samo koliko blokira isporuku.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Pitanje</th><th>Blokira</th></tr></thead>
+        <tbody>
+          <tr><td>Rate limit za pozive</td><td>Korak 3. Bez limita se ne isporučuje.</td></tr>
+          <tr><td>Podrazumevano stanje prekidača pijace</td><td>Korak 4. Jedna konstanta.</td></tr>
+          <tr><td>Šta ako dete na 15. rođendan ne da pristanak</td><td>Korak 6 delimično — sužavanje uvida radi bez odgovora, ekran pristanka ne.</td></tr>
+          <tr><td><strong>Da li konverzija na 18. troši slot roditelja i podleže nadzoru</strong></td><td>🔴 Korak 6 u celosti. Vidi odeljak 13 — vezano je za emisiju.</td></tr>
+          <tr><td>Šta ako mirovanje nikad ne prestane</td><td>Ne blokira, ali dok nema odgovora ne sme se pisati posao koji naloge u mirovanju gasi.</td></tr>
+          <tr><td>Tekstovi ekrana na pet jezika</td><td>Ne blokira kod, ali ekran obaveštenja i ekran odluke moraju pred UO <em>uz akte</em>.</td></tr>
+          <tr><td>Sadržinski minimum dečjeg oglasa</td><td>Korak 4.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Osam koja se otvaraju tek pri dodiru sa zatečenim kodom</h3>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Pitanje</th><th>Zašto se postavlja</th></tr></thead>
+        <tbody>
+          <tr><td>🔴 <strong>Emituje li se POEN pri osamostaljenju</strong></td><td>Zatečeni tok verifikacije emisiju uvek radi. Odgovor „da" otvara nosivo pravilo iz odeljka 00 i traži odredbu u aktima.</td></tr>
+          <tr><td>🔴 <strong>„Dete prima svoj doprinos u dečjem prostoru" — koji doprinos?</strong></td><td>Opis to kaže uz Podršku Majkama, a na drugom mestu kaže da dečji prostor <strong>ne stvara nijedan POEN</strong> i da kanal iz čl. 40a za decu ne važi. Dve rečenice se ne slažu. Ako se mislilo na POEN koji dete <em>primi od roditelja</em> — tada je sve u redu i treba samo preformulisati. Ako se mislilo na nov zapis — pada princip. <strong>Ovo mora da se razreši pre nego što uđe u akt</strong>, jer se iz akta posle ne vadi.</td></tr>
+          <tr><td>Ulaze li deca u javni brojač članova</td><td><code>/api/javno/statistike</code> i Početna. Predlog: ne ulaze.</td></tr>
+          <tr><td>Ima li dete email adresu</td><td>Bez nje nema reseta lozinke; sa njom se prikuplja podatak koji možda nije potreban. Minimizacija naspram upotrebljivosti.</td></tr>
+          <tr><td>Ostaje li ograničenje od 3 aktivna oglasa</td><td>Zatečeno pravilo za neverifikovane. Za decu radi isti posao, ali nije izričito preneto.</td></tr>
+          <tr><td>Briše li se EXIF samo deci ili svima</td><td>Isti rizik postoji i kod odraslih, a razlika u kodu je nula. Predlog: svima.</td></tr>
+          <tr><td>Sme li se roditeljski nalog resetovati na dan registracije</td><td>Alat postoji i briše verifikacije. Predlog: odbiti dok ima povezano dete.</td></tr>
+          <tr><td>Kako se dete zove u interfejsu</td><td>Zatečeni red statusa ga ne obuhvata, a „nov član" bi bio netačan. Predlog: bez statusne oznake u dečjem prostoru.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 22 ============ -->
+  <section>
+    <h2><span class="num">22</span> Šta ovaj plan ne rešava</h2>
+    <ul>
+      <li><strong>Dečje zadatke.</strong> Ne razvijaju se. Kad se budu uvodili, prva rečenica koju moraju otvoriti je ona iz odeljka 00 — nagrada za zadatak jeste emisija.</li>
+      <li><strong>Staratelja koji nije roditelj.</strong> Opis ga pominje samo kao izlaz iz mirovanja („preuzimanje od drugog roditelja ili staratelja"). Model to podnosi bez izmene — <code>RoditeljVeza</code> ne pita za srodstvo — ali <strong>postupak provere staratelja ne postoji</strong> i nije predmet ovog plana.</li>
+      <li><strong>Prelaz zatečenih maloletnika.</strong> Ako u sistemu već ima naloga iza kojih stoje maloletnici, ovaj plan ih ne pronalazi i ne premešta. To je zasebna odluka, i traži podatak koji sistem namerno ne prikuplja.</li>
+    </ul>
+  </section>
+
+  <hr>
+  <p class="kicker">Kraj dokumenta · KOLO Platforma · Modul Deca</p>
+
+</div>
