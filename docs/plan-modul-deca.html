@@ -492,12 +492,13 @@
       <li><code>status</code>: <code>CEKA</code> · <code>POTVRDJEN</code> · <code>ODBIJEN_UZRAST</code> · <code>ODBIJEN_NIJE_RODITELJ</code> · <code>ISTEKAO</code></li>
       <li><code>istekAt</code> — <strong>7 dana</strong>; posle isteka se red <strong>briše</strong>, ne arhivira (podaci deteta bez pravnog osnova su sami po sebi povreda)</li>
       <li>Kada je izvor <code>DETE_SE_REGISTROVALO</code>: <code>pseudonim</code>, <code>pseudonimLower @unique</code>, <code>passwordHash</code>, <code>uzrastGodine</code>. Nalog još ne postoji, a ime mora biti zauzeto odmah — inače dvoje dece traže isti pseudonim i drugo dobija grešku tek pri potvrdi roditelja, danima kasnije.</li>
-      <li><code>roditeljId</code> je <strong>nullable</strong> — poziv nastaje i kad navedeni pseudonim ne postoji</li>
+      <li><code>roditeljId</code> je <strong>obavezan</strong> — poziv se ne upisuje ako pseudonim ne postoji (odluka vlasnika)</li>
     </ul>
 
     <div class="note warn">
-      <span class="lbl">Zašto poziv nastaje i za nepostojećeg roditelja</span>
-      <p>Ekran čekanja mora izgledati identično bez obzira na to da li pseudonim postoji. Da odgovor zavisi od postojanja, dečja registracija bi postala <strong>alat za nabrajanje pseudonima celog sistema</strong> — bez prijave, bez rate limita koji bi to primetio. Zato se poziv upisuje uvek, a razrešavanje pseudonima ide u pozadini. Ista logika važi i za merljivo vreme odgovora: provera pseudonima i upis moraju se izvršiti u oba slučaja, ne samo u jednom.</p>
+      <span class="lbl">Nepostojeći roditelj — poziv se NE pravi</span>
+      <p>Poziv se upisuje samo kad navedeni pseudonim postoji. Za nepostojećeg se <strong>ništa ne pamti</strong> — podaci deteta ne smeju da leže u bazi čekajući nekoga koga nema.</p>
+      <p>Ali <strong>ekran čekanja ostaje identičan u oba slučaja</strong>, i to nije kozmetika: da odgovor odaje da li pseudonim postoji, dečja registracija bi postala alat za nabrajanje pseudonima celog sistema — bez prijave i bez traga. Isto važi za vreme odgovora: provera mora trajati podjednako, inače razliku odaje sat umesto teksta. Dete koje je pogrešilo pseudonim vidi ekran čekanja, ništa se ne dogodi, i poziv „istekne" posle sedam dana kao i svaki drugi.</p>
     </div>
 
     <h4>RoditeljstvoPotvrda</h4>
@@ -903,7 +904,7 @@
           <tr><td><code>__tests__/protokol/deca-poen.test.ts</code></td><td>Sve četiri vrste toka POEN-a iz odeljka 12; odrastao → tuđe dete pada; 15–17 → odrastao prolazi samo uz prekidač.</td></tr>
           <tr><td><code>__tests__/protokol/deca-emisija.test.ts</code></td><td>🔴 <strong>Nosivo pravilo:</strong> nizom dečjih radnji (oglas, prepis, upit, više razmena) opticaj ostaje <strong>nepromenjen</strong>. Ovo je test koji čuva osnivački korak.</td></tr>
           <tr><td><code>__tests__/deca-vidljivost.test.ts</code></td><td>Dete se ne pojavljuje ni u jednom odgovoru javnih ruta iz grupe A; nepozvani zahtev za dečji oglas vraća <strong>404</strong>.</td></tr>
-          <tr><td><code>__tests__/protokol/roditeljstvo.test.ts</code></td><td>Poziv bez potvrde ne pravi nalog; jedno odbijanje ruši postupak; prazan skup verifikatora <strong>ne prolazi</strong>; poziv ističe za 7 dana; odgovor je identičan za postojeći i nepostojeći pseudonim.</td></tr>
+          <tr><td><code>__tests__/protokol/roditeljstvo.test.ts</code></td><td>Poziv bez potvrde ne pravi nalog; jedno odbijanje ruši postupak; prazan skup verifikatora <strong>ne prolazi</strong>; poziv ističe za 7 dana; <strong>za nepostojeći pseudonim se ništa ne upisuje</strong>, a odgovor je i dalje identičan.</td></tr>
           <tr><td><code>__tests__/protokol/programi.test.ts</code> (dopuna)</td><td>Dnevni iznos Podrške Majkama <strong>isti pre i posle</strong> preseljenja registra, uključujući redosled dece.</td></tr>
           <tr><td><code>__tests__/copy-ukinuto.test.ts</code> (dopuna)</td><td>Dečji copy ne nosi koren „verifik" ni na jednom jeziku.</td></tr>
         </tbody>
