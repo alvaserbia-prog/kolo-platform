@@ -4,7 +4,24 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
-import { evidentirajZateceneVerifikovane } from "@/lib/protokol/doprinos-sadrzaju";
+import { evidentirajZateceneVerifikovane, revidirajDoprinose } from "@/lib/protokol/doprinos-sadrzaju";
+
+/**
+ * GET /api/admin/doprinos-sadrzaju/zatecene
+ *
+ * Revizija kanala: ko je objavio kvalifikovan oglas a nije dobio svojih 1.000 POEN.
+ * ČITA, ne menja ništa — prvo se vidi šta fali, pa se tek onda pokreće ispravka.
+ */
+export async function GET() {
+  const session = await getServerSession(authOptions);
+  if (!session) return await greska("Nije prijavljen.", 401);
+  if (!jeSuperadmin(session.user)) return await greska("Samo superadmin.", 403);
+  try {
+    return NextResponse.json(await revidirajDoprinose());
+  } catch (e) {
+    return await greska(String(e), 500);
+  }
+}
 
 /**
  * POST /api/admin/doprinos-sadrzaju/zatecene
@@ -28,7 +45,7 @@ export async function POST() {
       session.user.id,
       "DOPRINOS_SADRZAJU_ZATECENI_EVIDENTIRANI",
       undefined,
-      `${rezultat.evidentirano} razrešeno, ${rezultat.poenUOpticaj} POEN u opticaj`,
+      `${rezultat.naknadnoZabelezeno} naknadno zabeleženo, ${rezultat.evidentirano} razrešeno, ${rezultat.poenUOpticaj} POEN u opticaj`,
     );
     return NextResponse.json(rezultat);
   } catch (e) {
