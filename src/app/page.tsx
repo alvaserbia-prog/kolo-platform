@@ -180,9 +180,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 2 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
             {t("problem_naslov")}
-          </div>
+          </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[1, 2, 3].map((n) => (
               <div key={n} className="flex flex-col gap-3 items-center text-center">
@@ -198,9 +198,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 3 — KOLO TI DAJE ALTERNATIVU (konsolidovano) ── */}
         <section className="space-y-6 text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
             {t("alternativa_naslov")}
-          </div>
+          </h2>
 
           <blockquote
             className="italic text-kolo-green-900 leading-relaxed text-2xl md:text-3xl max-w-3xl mx-auto whitespace-pre-line"
@@ -217,15 +217,15 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_1_opis")}</p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_2_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">
                 {t("alternativa_2_opis_start")}
                 <strong className="text-kolo-green-900">{t("alternativa_2_istakni_poen")}</strong>
@@ -233,15 +233,15 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_3_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_3_opis")}</p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_4_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_4_opis")}</p>
             </div>
           </div>
