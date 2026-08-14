@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_2_2.md`, `uslovi_koriscenja_4_2_2.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_2_3.md`, `uslovi_koriscenja_4_2_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,21 +27,21 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_2_2.md",
-  "dokaz_stvarnosti_4_2_2.md",
-  "DPIA_4_2_2.md",
-  "radnje_obrade_4_2_2.md",
-  "uslovi_koriscenja_4_2_2.md",
-  "politika_4_2_2.md",
+  "Pravilnik_4_2_3.md",
+  "dokaz_stvarnosti_4_2_3.md",
+  "DPIA_4_2_3.md",
+  "radnje_obrade_4_2_3.md",
+  "uslovi_koriscenja_4_2_3.md",
+  "politika_4_2_3.md",
   "statut_4_1_0.md",
-  "whitepaper_4_2_2.md",
-  "rizici_4_2_2.md",
-  "hijerarhija_4_2_2.md",
-  "donacije_4_2_2.md",
-  "operativni_4_2_2.md",
-  "osnivacki_4_2_2.md",
-  "gornje_kolo_4_2_2.md",
-  "programi_podrske_4_2_2.md",
+  "whitepaper_4_2_3.md",
+  "rizici_4_2_3.md",
+  "hijerarhija_4_2_3.md",
+  "donacije_4_2_3.md",
+  "operativni_4_2_3.md",
+  "osnivacki_4_2_3.md",
+  "gornje_kolo_4_2_3.md",
+  "programi_podrske_4_2_3.md",
 ];
 
 /**
@@ -58,7 +58,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_2_2.md": {
+  "Pravilnik_4_2_3.md": {
     sr: [
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
@@ -85,22 +85,22 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не может превышать 5 000 ПОЕН",
     ],
   },
-  "dokaz_stvarnosti_4_2_2.md": {
+  "dokaz_stvarnosti_4_2_3.md": {
     sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_2_2.md": {
+  "radnje_obrade_4_2_3.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15"],
     en: ["Processing activity No. 14", "Processing activity No. 15"],
     ru: ["Операция обработки № 14", "Операция обработки № 15"],
   },
-  "DPIA_4_2_2.md": {
+  "DPIA_4_2_3.md": {
     sr: ["R15 —", "## 5.10."],
     en: ["R15 —", "## 5.10."],
     ru: ["R15 —", "## 5.10."],
   },
-  "uslovi_koriscenja_4_2_2.md": {
+  "uslovi_koriscenja_4_2_3.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
     en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
     ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
@@ -108,7 +108,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
   // odredbe bi gejt (zamrzavanje naloga do prihvatanja) obuhvatio i te obrade, pa
   // pristanak ne bi bio slobodno dat.
-  "politika_4_2_2.md": {
+  "politika_4_2_3.md": {
     sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
     en: ["is not consent for processing whose legal basis is consent"],
     ru: ["не является согласием на обработку"],
@@ -158,7 +158,7 @@ function bezNapomenaOIzmeni(tekst: string): string {
     .join("\n");
 }
 
-describe("kanonski set akata 4.2.2", () => {
+describe("kanonski set akata 4.2.3", () => {
   it.each(AKTI)("%s postoji na svim jezicima", async (akt) => {
     for (const jez of JEZICI) {
       const pod = jez === "sr" ? "" : `${jez}/`;
@@ -216,7 +216,7 @@ describe("kanonski set akata 4.2.2", () => {
       hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_2.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_3.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -234,7 +234,7 @@ describe("kanonski set akata 4.2.2", () => {
       hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_2.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_2_3.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
@@ -252,7 +252,7 @@ describe("kanonski set akata 4.2.2", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_2_2.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_2_3.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
