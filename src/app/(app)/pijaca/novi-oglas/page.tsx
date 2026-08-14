@@ -20,9 +20,13 @@ export default async function NoviOglasPage({
   // pa bi tek verifikovan korisnik još neko vreme gledao zaključan izbor tipa oglasa.
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { location: true, telefon: true, verified: true },
+    select: { location: true, telefon: true, verified: true, maloletan: true },
   });
-  const verifikovan = korisnik?.verified ?? false;
+  // Za oglas maloletnog korisnika važe isti uslovi objave kao za svaki drugi —
+  // razlikuje se samo vidljivost (Modul Deca, čl. 13 st. 1). Ograničenja za
+  // nepotvrđen nalog postoje zbog naloga iza kog niko ne stoji; iza deteta stoje
+  // roditelj i svi koji su roditelja potvrdili.
+  const verifikovan = (korisnik?.verified ?? false) || (korisnik?.maloletan ?? false);
 
   const aktivnihOglasa = verifikovan
     ? 0

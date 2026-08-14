@@ -155,9 +155,13 @@ export async function PATCH(
 
     const vlasnik = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { verified: true },
+      select: { verified: true, maloletan: true },
     });
-    if (!vlasnik?.verified) {
+    // Sadržinski minimum se pri IZMENI proverava iz istog razloga iz kog i pri
+    // objavi — inače se zaobilazi u dva poteza. Maloletni korisnik je iz njega
+    // izuzet kao i potvrđeni (Modul Deca, čl. 13 st. 1: isti uslovi objave,
+    // razlikuje se samo vidljivost).
+    if (!vlasnik?.verified && !vlasnik?.maloletan) {
       const minimum = oglasIspunjavaMinimum({
         tip: listing.tip,
         description,

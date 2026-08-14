@@ -125,6 +125,9 @@ roditelja iz člana 10.
 
 ### Član 13
 
+Za objavu oglasa maloletnog korisnika važe isti uslovi kao za oglas svakog drugog
+korisnika. Razlikuje se samo vidljivost.
+
 Oglas maloletnog korisnika vidljiv je maloletnim korisnicima i njegovom
 roditelju. Oglas nije javno dostupan i ne prikazuje se u pretraživačima.
 
@@ -212,8 +215,8 @@ a prepis je zero-sum.
 - **Nema klauzule „što nije dopušteno, nije dopušteno".** Sve što pravilnik ne
   pominje čitaće se kao dopušteno.
 - **Nema odredbe o brisanju podataka sa fotografija.**
-- **Nije određen sadržinski minimum oglasa maloletnog korisnika**, ni naziv
-  njegovog statusa u interfejsu.
+- **Naziv statusa maloletnog korisnika u interfejsu** glasi „dete"; sadržinski
+  minimum oglasa nije poseban (vidi čl. 13 st. 1).
 
 ### Proširenja predviđena za kasnije verzije
 

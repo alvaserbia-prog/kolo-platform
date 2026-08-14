@@ -137,9 +137,19 @@ export async function POST(req: NextRequest) {
   // za neverifikovane (limit od tri oglasa, zabrana potražnje).
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { verified: true },
+    select: { verified: true, maloletan: true },
   });
   if (!korisnik) return await greska("Nalog ne postoji.", 401);
+
+  // 🔴 Za oglas maloletnog korisnika važe ISTI uslovi objave kao za svaki drugi
+  // oglas — razlikuje se samo vidljivost (Modul Deca, čl. 13 st. 1). Ograničenja
+  // za nepotvrđen nalog (samo ponuda, najviše tri, sadržinski minimum) postoje
+  // zbog naloga iza kog niko ne stoji; iza deteta stoje roditelj i svi koji su
+  // roditelja potvrdili, pa se na njega ne primenjuju.
+  //
+  // Ovim se ništa ne zaobilazi: nalog detetu otvara samo potvrđen korisnik (čl. 5),
+  // a on ni sam ta ograničenja nema.
+  const punaPravaObjave = korisnik.verified || korisnik.maloletan;
 
   // Nalog u mirovanju (Modul Deca, čl. 16) ne objavljuje — njegovi zatečeni oglasi
   // su već povučeni, pa bi nov oglas bio jedini vidljiv trag naloga koji miruje.
@@ -150,7 +160,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const brojAktivnihOglasa = korisnik.verified
+  const brojAktivnihOglasa = punaPravaObjave
     ? 0
     : await prisma.marketplaceListing.count({
         where: { sellerId: session.user.id, status: "ACTIVE" },
@@ -166,7 +176,7 @@ export async function POST(req: NextRequest) {
     images: imageFiles.map((_, i) => String(i)),
   };
   const smem = smeDaPostaviOglas({
-    verifikovan: korisnik.verified,
+    verifikovan: punaPravaObjave,
     brojAktivnihOglasa,
     oglas: oglasZaProveru,
   });
