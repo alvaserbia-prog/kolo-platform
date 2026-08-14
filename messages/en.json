@@ -1090,12 +1090,14 @@
     "primer_napomena_2": "The honey, the repair and the burek in this example are real. The amount in POEN is proposed by whoever posts the listing and agreed between the two sides. POEN is not bought for money and is not exchanged for money.",
     "kako_funkcionise_naslov": "How it works, in short",
     "kako_funkcionise_link": "Detailed explanation",
+    "kako_funkcionise_link_postupak": "The whole process, step by step",
     "kako_funkcionise_korak_1_naslov": "You register",
-    "kako_funkcionise_korak_1_opis": "Free, about a minute. You choose a pseudonym instead of your real name; no documents are needed.",
+    "kako_funkcionise_korak_1_opis": "Free, and it takes about a minute. You choose a nickname instead of your real name, and no documents are needed.",
     "kako_funkcionise_korak_2_naslov": "You post what you offer",
-    "kako_funkcionise_korak_2_opis": "You can post your first three listings right away, without a single confirmation. That is how members from your area see you.",
+    "kako_funkcionise_korak_2_opis": "You can post your first three listings straight away, without a single confirmation. That is how people where you live get to see you.",
     "kako_funkcionise_korak_3_naslov": "Someone confirms you",
-    "kako_funkcionise_korak_3_opis": "Someone who knows you personally confirms that you are real. The Protocol records 1,000 POENs for you and 1,000 for them — you are both in the chain of confirmations.",
+    "kako_funkcionise_korak_3_opis": "Someone who knows you personally confirms that you are a real person. Both of you thereby enter the chain of confirmations, and 1,000 POEN is recorded for each of you — once, and only for that person.",
+    "kako_funkcionise_korak_3_dodatak": "Don't know anyone in KOLO yet? Exchange with someone first, and let the person you exchanged with confirm you.",
     "pijaca_naslov": "What's being exchanged right now",
     "pijaca_cta": "View the whole Marketplace",
     "pijaca_prazno": "The system is in its early days — these are the first listings.",
@@ -1119,8 +1121,8 @@
     "cta_priduzi": "Register",
     "cta_saznaj": "Follow the progress",
     "cta_footer": "What benefits you benefits your community too.",
-    "kako_funkcionise_korak_4_naslov": "You contribute and benefit",
-    "kako_funkcionise_korak_4_opis": "You exchange goods and services, invite people you know, get involved in the community and, if you wish, donate to the Foundation. Every contribution you make stays recorded and visible in POEN."
+    "kako_funkcionise_korak_4_naslov": "You exchange",
+    "kako_funkcionise_korak_4_opis": "You offer and look for work, goods and knowledge, and you invite people you know into the network. Every contribution of yours stays recorded and visible in POEN."
   },
   "oNama": {
     "meta_title": "About us — KOLO Foundation",

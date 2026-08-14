@@ -1090,12 +1090,14 @@
     "primer_napomena_2": "Med, popravak i burek u ovom primjeru su stvarni. Iznos u POEN-ima predlaže onaj tko postavlja oglas, a dogovaraju ga dvije strane. POEN se ne kupuje za novac i ne mijenja se za novac.",
     "kako_funkcionise_naslov": "Kako funkcionira, ukratko",
     "kako_funkcionise_link": "Detaljno objašnjenje",
+    "kako_funkcionise_link_postupak": "Cijeli postupak, korak po korak",
     "kako_funkcionise_korak_1_naslov": "Registriraš se",
-    "kako_funkcionise_korak_1_opis": "Besplatno, oko minute. Biraš pseudonim umjesto pravog imena; dokumenti nisu potrebni.",
+    "kako_funkcionise_korak_1_opis": "Besplatno, traje oko minutu. Biraš nadimak umjesto pravog imena, dokumenti nisu potrebni.",
     "kako_funkcionise_korak_2_naslov": "Objaviš što nudiš",
-    "kako_funkcionise_korak_2_opis": "Prva tri oglasa možeš postaviti odmah, bez ijedne potvrde. Tako te članovi iz tvoga kraja vide.",
+    "kako_funkcionise_korak_2_opis": "Prva tri oglasa možeš postaviti odmah, bez ijedne potvrde. Tako te vide ljudi iz tvog kraja.",
     "kako_funkcionise_korak_3_naslov": "Netko te potvrdi",
-    "kako_funkcionise_korak_3_opis": "Onaj tko te osobno poznaje potvrđuje tvoju stvarnost. Protokol upisuje 1.000 POEN tebi i 1.000 njemu — obojica ste u lancu potvrda.",
+    "kako_funkcionise_korak_3_opis": "Onaj tko te osobno poznaje potvrđuje da si stvarna osoba. Time oboje ulazite u lanac potvrda i svakome se bilježi po 1.000 POEN, jednom i samo za tu osobu.",
+    "kako_funkcionise_korak_3_dodatak": "Ne poznaješ nikoga u KOLU? Prvo razmijeni s nekim, pa te potvrdi onaj s kim si razmijenio.",
     "pijaca_naslov": "Što se trenutačno razmjenjuje",
     "pijaca_cta": "Pogledaj cijelu Pijacu",
     "pijaca_prazno": "Sustav je u ranoj fazi — ovo su prvi oglasi.",
@@ -1119,8 +1121,8 @@
     "cta_priduzi": "Registriraj se",
     "cta_saznaj": "Prati razvoj",
     "cta_footer": "Ono što koristi tebi, koristi i tvojoj zajednici.",
-    "kako_funkcionise_korak_4_naslov": "Pridonosiš i koristiš",
-    "kako_funkcionise_korak_4_opis": "Razmjenjuješ robu i usluge, pozivaš ljude koje poznaješ, uključuješ se u zajednicu i, ako želiš, doniraš Fondaciji. Svaki tvoj doprinos ostaje zabilježen i vidljiv u POEN-ima."
+    "kako_funkcionise_korak_4_naslov": "Razmjenjuješ",
+    "kako_funkcionise_korak_4_opis": "Nudiš i tražiš rad, dobra i znanje, i pozivaš ljude koje poznaješ da uđu u mrežu. Svaki tvoj doprinos ostaje zabilježen i vidljiv u POEN-ima."
   },
   "oNama": {
     "meta_title": "O nama — KOLO Fondacija",

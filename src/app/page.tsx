@@ -125,10 +125,11 @@ export default async function Home() {
     { naslov: t("primer_korak_3_naslov"), opis: t("primer_korak_3_opis") },
   ];
 
-  const kakoKoraci = [
+  // `dodatak` ima samo treći korak — put za onoga ko još nikoga ne poznaje.
+  const kakoKoraci: { br: string; naslov: string; opis: string; dodatak?: string }[] = [
     { br: "1", naslov: t("kako_funkcionise_korak_1_naslov"), opis: t("kako_funkcionise_korak_1_opis") },
     { br: "2", naslov: t("kako_funkcionise_korak_2_naslov"), opis: t("kako_funkcionise_korak_2_opis") },
-    { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis") },
+    { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis"), dodatak: t("kako_funkcionise_korak_3_dodatak") },
     { br: "4", naslov: t("kako_funkcionise_korak_4_naslov"), opis: t("kako_funkcionise_korak_4_opis") },
   ];
 
@@ -311,9 +312,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 6 — KAKO FUNKCIONIŠE UKRATKO ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             {t("kako_funkcionise_naslov")}
-          </div>
+          </h2>
           <div className="space-y-0">
             {kakoKoraci.map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
@@ -321,15 +322,18 @@ export default async function Home() {
                   {k.br}
                 </div>
                 <div>
-                  <p className="font-semibold text-kolo-text text-sm mb-1">{k.naslov}</p>
+                  <h3 className="font-semibold text-kolo-text text-sm mb-1">{k.naslov}</h3>
                   <p className="text-sm text-kolo-muted leading-relaxed text-body">{k.opis}</p>
+                  {k.dodatak && (
+                    <p className="text-sm text-kolo-green-700 leading-relaxed text-body mt-1.5">{k.dodatak}</p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-5 pt-4 border-t border-kolo-border">
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
-              {t("kako_funkcionise_link")} →
+              {t("kako_funkcionise_link_postupak")} →
             </Link>
           </div>
         </section>

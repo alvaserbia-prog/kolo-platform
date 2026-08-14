@@ -1083,12 +1083,14 @@
     "primer_napomena_2": "A méz, a javítás és a burek ebben a példában valódi. A POEN-ben kifejezett összeget az javasolja, aki a hirdetést feladja, és a két fél állapodik meg róla. A POEN nem vásárolható meg pénzért, és nem váltható pénzre.",
     "kako_funkcionise_naslov": "Hogyan működik, röviden",
     "kako_funkcionise_link": "Részletes magyarázat",
+    "kako_funkcionise_link_postupak": "A teljes folyamat, lépésről lépésre",
     "kako_funkcionise_korak_1_naslov": "Regisztrálsz",
-    "kako_funkcionise_korak_1_opis": "Ingyenes, körülbelül egy perc. Valódi név helyett álnevet választasz; dokumentumokra nincs szükség.",
+    "kako_funkcionise_korak_1_opis": "Ingyenes, körülbelül egy percet vesz igénybe. Valódi név helyett becenevet választasz, dokumentumokra nincs szükség.",
     "kako_funkcionise_korak_2_naslov": "Közzéteszed, amit kínálsz",
-    "kako_funkcionise_korak_2_opis": "Az első három hirdetést azonnal feladhatod, egyetlen megerősítés nélkül. Így látnak meg a környékedről.",
+    "kako_funkcionise_korak_2_opis": "Az első három hirdetést azonnal feladhatod, egyetlen megerősítés nélkül is. Így látnak meg a környékbeliek.",
     "kako_funkcionise_korak_3_naslov": "Valaki megerősít téged",
-    "kako_funkcionise_korak_3_opis": "Aki személyesen ismer, megerősíti a valódiságodat. A Protokoll 1.000 POEN-t ír be neked és 1.000-et neki — mindketten a megerősítési láncban vagytok.",
+    "kako_funkcionise_korak_3_opis": "Aki személyesen ismer, megerősíti, hogy valódi személy vagy. Ezzel mindketten bekerültök a megerősítési láncba, és fejenként 1.000 POEN kerül feljegyzésre — egyszer, és csak arra a személyre.",
+    "kako_funkcionise_korak_3_dodatak": "Még senkit nem ismersz a KOLO-ban? Előbb cserélj valakivel, és erősítsen meg az, akivel cseréltél.",
     "pijaca_naslov": "Mit cserélnek éppen most",
     "pijaca_cta": "Nézd meg a teljes Piacot",
     "pijaca_prazno": "A rendszer a kezdeti szakaszában van — ezek az első hirdetések.",
@@ -1112,8 +1114,8 @@
     "cta_priduzi": "Regisztrálj",
     "cta_saznaj": "Kövesd a fejlődést",
     "cta_footer": "Ami neked hasznos, az a közösségednek is hasznos.",
-    "kako_funkcionise_korak_4_naslov": "Hozzájárulsz és élvezed az előnyeit",
-    "kako_funkcionise_korak_4_opis": "Árukat és szolgáltatásokat cserélsz, meghívod az ismerőseidet, bekapcsolódsz a közösségbe, és ha szeretnéd, adományozol az Alapítványnak. Minden hozzájárulásod rögzítve és POEN-ben láthatóan megmarad."
+    "kako_funkcionise_korak_4_naslov": "Cserélsz",
+    "kako_funkcionise_korak_4_opis": "Munkát, javakat és tudást kínálsz és keresel, és meghívod a hálózatba azokat, akiket ismersz. Minden hozzájárulásod feljegyezve és láthatóan megmarad POEN-ben."
   },
   "oNama": {
     "meta_title": "Rólunk — KOLO Alapítvány",
