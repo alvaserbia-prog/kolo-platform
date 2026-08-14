@@ -446,9 +446,9 @@ export default async function Home() {
             {/* Levo — slika u krugu, tekst iznad i ispod */}
             <div className="bg-kolo-green-900 p-8 flex flex-col items-center justify-center text-center gap-5">
               {/* Tekst iznad fotografije */}
-              <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              <h2 className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
                 {t("ko_stoji_naslov")}
-              </span>
+              </h2>
               <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl">
                 <Image
                   src="/nikola-saric-mantil.png"
