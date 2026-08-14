@@ -22,7 +22,16 @@ export default async function PublicFooter() {
                 <span key={i}>{line}{i === 0 ? <br /> : null}</span>
               ))}
             </p>
-            <p className="text-xs text-kolo-muted">{t("footer_brand_lokacija")}</p>
+            {/* Registracioni podaci Fondacije — javni podaci iz Registra
+                zadužbina i fondacija APR. Broj rešenja se NE objavljuje. */}
+            <div className="text-xs text-kolo-muted leading-relaxed space-y-0.5">
+              <p>{t("footer_fondacija_adresa")}</p>
+              <p>{t("footer_fondacija_brojevi")}</p>
+              <p>{t("footer_fondacija_registar")}</p>
+              <p>
+                <a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">kontakt@ekolo.rs</a>
+              </p>
+            </div>
           </div>
 
           {/* Sistem */}
@@ -32,6 +41,7 @@ export default async function PublicFooter() {
               <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kako")}</Link></li>
               <li><Link href="/o-sistemu" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_o_sistemu")}</Link></li>
               <li><Link href="/pijaca" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pijaca")}</Link></li>
+              <li><Link href="/whitepaper" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_whitepaper")}</Link></li>
             </ul>
           </div>
 
@@ -52,7 +62,6 @@ export default async function PublicFooter() {
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pravilnik")}</Link></li>
               <li><Link href="/statut" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_statut")}</Link></li>
-              <li><Link href="/whitepaper" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_whitepaper")}</Link></li>
               <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_uslovi")}</Link></li>
               <li><Link href="/privatnost" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_privatnost")}</Link></li>
             </ul>
