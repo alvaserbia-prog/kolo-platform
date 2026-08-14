@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import FaqAkordeon from "@/components/FaqAkordeon";
+import KomeKartice from "@/components/KomeKartice";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 import { getTranslations, getLocale } from "next-intl/server";
@@ -113,9 +114,9 @@ export default async function Home() {
     { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
     { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
     { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
-    { ikona: "💻", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
+    { ikona: "🏘️", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
     { ikona: "🤝", naslov: t("kome_8_naslov"), opis: t("kome_8_opis"), poenta: t("kome_8_poenta") },
-    { ikona: "🏘️", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
+    { ikona: "💻", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
   ];
 
   const primerKoraci = [
@@ -260,16 +261,12 @@ export default async function Home() {
           <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("kome_naslov")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {komeKartice.map((seg) => (
-              <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
-                <span className="text-2xl">{seg.ikona}</span>
-                <p className="font-semibold text-kolo-text text-sm leading-snug">{seg.naslov}</p>
-                <p className="text-xs text-kolo-muted leading-relaxed">{seg.opis}</p>
-                <p className="text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line max-w-[70%]">{seg.poenta}</p>
-              </div>
-            ))}
-          </div>
+          <KomeKartice
+            kartice={komeKartice}
+            vidljivo={6}
+            labelJos={t("kome_prikazi_jos")}
+            labelManje={t("kome_prikazi_manje")}
+          />
         </section>
 
         {/* ── SEKCIJA 5 — PRIMER IZ PRAKSE ─────────────────────────── */}
