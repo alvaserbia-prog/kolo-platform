@@ -123,7 +123,6 @@ export default async function Home() {
     { naslov: t("primer_korak_1_naslov"), opis: t("primer_korak_1_opis") },
     { naslov: t("primer_korak_2_naslov"), opis: t("primer_korak_2_opis") },
     { naslov: t("primer_korak_3_naslov"), opis: t("primer_korak_3_opis") },
-    { naslov: t("primer_korak_4_naslov"), opis: t("primer_korak_4_opis") },
   ];
 
   const kakoKoraci = [
@@ -271,17 +270,17 @@ export default async function Home() {
 
         {/* ── SEKCIJA 5 — PRIMER IZ PRAKSE ─────────────────────────── */}
         <section className="space-y-4">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
             {t("primer_naslov")}
-          </div>
+          </h2>
 
-          {/* 4 stubca povezana strelicama po hronologiji */}
+          {/* Stupci povezani strelicama po hronologiji */}
           <div className="flex flex-col md:flex-row items-stretch gap-3">
             {primerKoraci.map((k, i) => (
               <div key={k.naslov} className="contents">
                 <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
                   <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">{i + 1}</span>
-                  <p className="font-semibold text-kolo-text text-sm">{k.naslov}</p>
+                  <h3 className="font-semibold text-kolo-text text-sm">{k.naslov}</h3>
                   <p className="text-kolo-muted leading-relaxed text-xs">{k.opis}</p>
                 </div>
                 {i < primerKoraci.length - 1 && (
