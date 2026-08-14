@@ -215,7 +215,7 @@ export default async function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
               <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
@@ -237,12 +237,14 @@ export default async function Home() {
                 {t("alternativa_3_naslov")}
               </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_3_opis")}</p>
-            </div>
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
-                {t("alternativa_4_naslov")}
-              </h3>
-              <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_4_opis")}</p>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-auto pt-1">
+                <Link href="/pravilnik" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
+                  {t("alternativa_link_pravilnik")} →
+                </Link>
+                <Link href="/statut" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
+                  {t("alternativa_link_statut")} →
+                </Link>
+              </div>
             </div>
           </div>
 
