@@ -2,7 +2,7 @@
 
 # Registar radnji obrade osobnih podataka
 
-*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.2.2) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.2.2) i Pravilnikom o programima podrške (verzija 4.2.2).*
+*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.2.3) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.2.3) i Pravilnikom o programima podrške (verzija 4.2.3).*
 
 **PODACI O VODITELJU OBRADE**
 
@@ -128,7 +128,7 @@
 
 **Radnja obrade br. 10 — Posebne kategorije podataka (Modul 3. — Socijalni programi)**
 
-| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.2.2); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.2.2). |
+| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.2.3); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.2.3). |
 | --- | --- |
 | **Svrha obrade** | Automatsko evidentiranje doprinosa u POEN-ima za korisnike koji pripadaju kvalificiranim skupinama, uz potvrdu ispunjenosti uvjeta od strane verifikatora podnositelja (zaštita integriteta programa od neistinitih prijava). |
 | **Kategorije osoba** | Korisnici koji pripadaju kvalificiranim skupinama (roditelji, starije osobe, osobe s invaliditetom, studenti) i njihovi verifikatori. |
@@ -180,7 +180,7 @@
 
 **Radnja obrade br. 14 — Nadzorni predmet (ishod nadzora verifikacije)**
 
-| **Svrha obrade** | Evidentiranje ishoda nadzora nad verifikacijom i vođenje nadzornog predmeta, radi utvrđivanja lažne verifikacije od strane Upravnog odbora (Pravilnik o dokazu stvarnosti 4.2.2, čl. 11., 11a. i 18.). Do 4.2.1 nadzornik je mogao samo potvrditi verifikaciju; sumnja nije imala gdje biti zabilježena, pa nije ni provjeravana. |
+| **Svrha obrade** | Evidentiranje ishoda nadzora nad verifikacijom i vođenje nadzornog predmeta, radi utvrđivanja lažne verifikacije od strane Upravnog odbora (Pravilnik o dokazu stvarnosti 4.2.3, čl. 11., 11a. i 18.). Do 4.2.1 nadzornik je mogao samo potvrditi verifikaciju; sumnja nije imala gdje biti zabilježena, pa nije ni provjeravana. |
 | --- | --- |
 | **Kategorije osoba** | Verifikator i verificirani korisnik iz nadzirane verifikacije; nadzornik koji je ishod evidentirao. |
 | **Kategorije podataka** | Bez prikupljanja novih podataka od korisnika. Uz postojeći verifikacijski zapis dodaju se: ishod nadzora (uredno / za provjeru / sporno), subjekt sumnje (verifikator, verificirani, oba, dio mreže), šifra razloga sa zatvorenog popisa i, samo uz razlog „ostalo", kratak slobodan opis koji upisuje nadzornik. Nadzorni predmet sadrži iste podatke uz oznaku verifikacijskog zapisa i bilješku uz odluku. |
@@ -193,7 +193,7 @@
 
 **Radnja obrade br. 15 — Upit povodom oglasa i putanja doprinosa razmjeni**
 
-| **Svrha obrade** | Utvrđivanje ispunjenosti uvjeta za evidentiranje doprinosa kroz kanal doprinosa sadržaju platforme, koji se od verzije 4.2.1 evidentira kroz putanju od pet koraka (Pravilnik o KOLO sustavu 4.2.2, čl. 15. t. 8. i čl. 40.b). Sporedna svrha: sprječavanje da se doprinos ostvari bez stvarne razmjene. |
+| **Svrha obrade** | Utvrđivanje ispunjenosti uvjeta za evidentiranje doprinosa kroz kanal doprinosa sadržaju platforme, koji se od verzije 4.2.1 evidentira kroz putanju od pet koraka (Pravilnik o KOLO sustavu 4.2.3, čl. 15. t. 8. i čl. 40.b). Sporedna svrha: sprječavanje da se doprinos ostvari bez stvarne razmjene. |
 | --- | --- |
 | **Kategorije osoba** | Korisnik čiji se napredak na putanji utvrđuje; korisnik koji se javio povodom oglasa; korisnik s kojim je ažurirana evidencija POEN-a. |
 | **Kategorije podataka** | Upit povodom oglasa: pseudonim korisnika koji se javio, oznaka oglasa i vrijeme. Sadržaj se poruke u tu svrhu ne obrađuje. Ostalo se ne prikuplja iznova, već očitava iz postojećih radnji obrade: zapisa o ažuriranju evidencije POEN-a (radnja br. 4) i grafa verifikacija (radnja br. 2), radi utvrđivanja je li druga strana izvan kruga poznanstava. |

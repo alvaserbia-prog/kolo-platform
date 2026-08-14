@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PolitikaPrivatnostiPage() {
   const locale = await getLocale();
   const t = await getTranslations("pravne");
-  const sadrzaj = await ucitajPravniDokument("politika_4_2_2.md", locale);
+  const sadrzaj = await ucitajPravniDokument("politika_4_2_3.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">
