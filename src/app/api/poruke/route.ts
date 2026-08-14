@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
+import { smeDaKomunicira, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
 
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
@@ -54,8 +55,18 @@ export async function POST(req: NextRequest) {
   // u tom razgovoru SME da odgovara — POST /api/poruke/[konvId] proverava samo
   // članstvo u razgovoru, bez uslova verifikacije. To je isti mehanizam koji je
   // napravljen za ukinutu tablu jemstva; on ostaje i preuzima njen posao.
-  if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
   const meId = session.user.id;
+
+  // ── Modul Deca (čl. 12) ───────────────────────────────────────────────────
+  //
+  // Maloletni korisnik JESTE neverifikovan u smislu šeme, ali u dečjem prostoru sme
+  // sam da pokrene razgovor. Zato se za parove u kojima ima deteta odlučuje po
+  // `smeDaKomunicira`, a opšte pravilo o verifikaciji ostaje za sve ostale.
+  const jaUcesnik = await ucitajUcesnika(meId);
+  if (!jaUcesnik) return await greska("Nalog ne postoji.", 401);
+  if (!jaUcesnik.maloletan && !session.user.verified) {
+    return await greska("Verifikacija potrebna.", 403);
+  }
 
   // `oglasId` je opcion i šalje se kad razgovor kreće sa stranice oglasa —
   // po njemu se beleži upit, koji je jedan od uslova koraka 3 putanje doprinosa
@@ -64,8 +75,19 @@ export async function POST(req: NextRequest) {
   if (!userId || userId === meId)
     return await greska("Neispravan korisnik.", 400);
 
-  const drugiUser = await prisma.user.findUnique({ where: { id: userId }, select: { id: true } });
-  if (!drugiUser) return await greska("Korisnik ne postoji.", 404);
+  const drugiUcesnik = await ucitajUcesnika(userId);
+  if (!drugiUcesnik) return await greska("Korisnik ne postoji.", 404);
+
+  if (jaUcesnik.maloletan || drugiUcesnik.maloletan) {
+    if ((await uMirovanju(meId)) || (await uMirovanju(userId))) {
+      return await greska(
+        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
+        403,
+      );
+    }
+    const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
+    if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  }
 
   // Povod razgovora za PRIKAZ (sličica i link u razgovoru) — odvojeno od
   // `zabeleziUpit`, koji broji upite za korak 3. Prihvata se samo ako oglas

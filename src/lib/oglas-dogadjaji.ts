@@ -28,11 +28,26 @@ export interface NoviOglasDogadjaj {
 }
 
 export async function emitujNoviOglas(dogadjaj: NoviOglasDogadjaj): Promise<void> {
+  // Obaveštenje ne sme da probije vidljivost iz Modula Deca (čl. 13): dečji oglas
+  // se ne javlja punoletnima dok roditelj ne otvori prekidač, a oglas punoletnog
+  // ne javlja se detetu pod istim uslovom. Bez ovoga bi zvonce vodilo na stranicu
+  // koja tom čoveku vraća 404 — i usput odalo da oglas postoji.
+  const oglasivac = await prisma.user.findUnique({
+    where: { id: dogadjaj.sellerId },
+    select: { maloletan: true, dozvolaOdrasli: true },
+  });
+  const oglasDeteta = oglasivac?.maloletan ?? false;
+  const primaocUslov = oglasDeteta
+    ? oglasivac?.dozvolaOdrasli
+      ? {} // dete sa saglasnošću — oglas sme i punoletnima
+      : { maloletan: true }
+    : { OR: [{ maloletan: false }, { maloletan: true, dozvolaOdrasli: true }] };
+
   const pratioci = await prisma.followedCategory.findMany({
     where: {
       category: dogadjaj.category,
       userId: { not: dogadjaj.sellerId },
-      user: { deaktiviranAt: null, status: "ACTIVE" },
+      user: { deaktiviranAt: null, status: "ACTIVE", ...primaocUslov },
     },
     select: { userId: true },
     take: MAX_PRIMALACA + 1,

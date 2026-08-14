@@ -49,6 +49,24 @@ export const KRUG_AKTIVAN = false;
 export const POKROVITELJSTVO_AKTIVNO = false;
 
 /**
+ * Modul Deca — Pravilnik o KOLO sistemu Glava VIII, čl. 58.
+ *
+ * 🔴 Ostaje `false` dok Upravni odbor ne usvoji Pravilnik o Modulu Deca, ne uskladi
+ * Pravilnik o KOLO sistemu, Uslove i Politiku, i dok ne bude AŽURIRANA PROCENA
+ * UTICAJA NA ZAŠTITU PODATAKA. Poslednje nije preporuka nego izričita obaveza iz
+ * čl. 65: modul koji uvodi obradu podataka maloletnih lica ne sme se aktivirati bez
+ * nje. Prekidač je zato jedini potez koji sme da bude poslednji.
+ *
+ * Dok je `false`: stranice modula vraćaju 404, njegove API rute 410, a nav stavke i
+ * kartice se ne renderuju.
+ *
+ * 🟡 Brane koje sakrivaju maloletne korisnike iz javnih upita rade BEZ OBZIRA na
+ * prekidač. Cena im je nula, a cena propuštanja je izlaganje deteta — zato nisu
+ * uslovljene.
+ */
+export const MODUL_DECA_AKTIVAN = false;
+
+/**
  * Ekran „Sistem je unapređen — novi akti" pri prijavi (Uslovi čl. 40, Politika čl. 16).
  *
  * `false` = od korisnika se NE traži pristanak; prekrivač se nikad ne prikazuje,

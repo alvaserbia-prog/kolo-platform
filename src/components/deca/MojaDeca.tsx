@@ -1,0 +1,262 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { UZRAST_MIN, UZRAST_PUNOLETSTVO } from "@/lib/deca-pravila";
+
+type Dete = {
+  id: string;
+  pseudonim: string;
+  godine: number | null;
+  dozvolaOdrasli: boolean;
+  balans: number;
+  potvrde: {
+    ukupno: number;
+    potvrdjeno: number;
+    ceka: number;
+    osporeno: number;
+    isteklo: number;
+    rokDo: string | null;
+  };
+};
+
+type Korak = "spisak" | "obavestenje" | "obrazac";
+
+function danaDo(iso: string): number {
+  const ms = new Date(iso).getTime() - Date.now();
+  return ms <= 0 ? 0 : Math.ceil(ms / 86_400_000);
+}
+
+/**
+ * Odeljak „Moja deca" u profilu roditelja (Pravilnik o Modulu Deca, čl. 4).
+ *
+ * 🔴 Klik na „Dodaj dete" NE otvara obrazac nego EKRAN OBAVEŠTENJA. Redosled je
+ * pravno obavezan: obaveštenje o obradi mora prethoditi prikupljanju podataka o
+ * detetu, ne pratiti ga. Zato su to dva odvojena koraka, a ne jedan ekran sa
+ * tekstom iznad polja.
+ */
+export default function MojaDeca() {
+  const t = useTranslations("deca");
+  const [korak, setKorak] = useState<Korak>("spisak");
+  const [deca, setDeca] = useState<Dete[] | null>(null);
+  const [greska, setGreska] = useState<string | null>(null);
+
+  const ucitaj = useCallback(async () => {
+    try {
+      const res = await fetch("/api/deca", { cache: "no-store" });
+      if (res.status === 410) return setDeca([]); // modul nije u radu
+      if (!res.ok) throw new Error();
+      setDeca((await res.json()).deca);
+    } catch {
+      setGreska(t("greska_ucitavanje"));
+    }
+  }, [t]);
+
+  useEffect(() => {
+    void ucitaj();
+  }, [ucitaj]);
+
+  if (deca === null && !greska) return null;
+
+  return (
+    <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <h2 className="text-lg font-semibold text-kolo-text">{t("naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("podnaslov")}</p>
+
+      {greska && <p className="mt-3 text-sm text-kolo-danger">{greska}</p>}
+
+      {korak === "spisak" && (
+        <>
+          {deca && deca.length > 0 && (
+            <ul className="mt-4 space-y-2">
+              {deca.map((d) => (
+                <li key={d.id}>
+                  <Link
+                    href={`/deca/${d.id}`}
+                    className="flex items-center justify-between gap-3 rounded-xl border border-kolo-border px-4 py-3 transition hover:bg-kolo-bg"
+                  >
+                    <span className="min-w-0">
+                      <span className="block truncate font-medium text-kolo-text">{d.pseudonim}</span>
+                      <span className="block text-xs text-kolo-muted">
+                        {d.godine !== null && t("godina", { broj: d.godine })}
+                        {" · "}
+                        {d.potvrde.ceka > 0
+                          ? t("potvrda_u_toku", {
+                              ceka: d.potvrde.ceka,
+                              dana: d.potvrde.rokDo ? danaDo(d.potvrde.rokDo) : 0,
+                            })
+                          : d.potvrde.isteklo > 0
+                            ? t("potvrda_isteklo", { broj: d.potvrde.isteklo })
+                            : t("potvrda_gotova")}
+                      </span>
+                    </span>
+                    <span className="shrink-0 text-sm tabular-nums text-kolo-muted">
+                      {d.balans.toLocaleString("sr-RS")} POEN
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setKorak("obavestenje")}
+            className="mt-4 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800"
+          >
+            {t("dugme_dodaj")}
+          </button>
+        </>
+      )}
+
+      {korak === "obavestenje" && <Obavestenje onDalje={() => setKorak("obrazac")} onOdustani={() => setKorak("spisak")} />}
+
+      {korak === "obrazac" && (
+        <Obrazac
+          onGotovo={async () => {
+            setKorak("spisak");
+            await ucitaj();
+          }}
+          onOdustani={() => setKorak("spisak")}
+        />
+      )}
+    </section>
+  );
+}
+
+/** Ekran obaveštenja — prethodi svakom unosu podataka o detetu. */
+function Obavestenje({ onDalje, onOdustani }: { onDalje: () => void; onOdustani: () => void }) {
+  const t = useTranslations("deca");
+  const stavke = [
+    t("obavestenje_1"),
+    t("obavestenje_2"),
+    t("obavestenje_3"),
+    t("obavestenje_4"),
+  ];
+  return (
+    <div className="mt-4 rounded-xl border border-kolo-border bg-kolo-bg p-4">
+      <h3 className="font-semibold text-kolo-text">{t("obavestenje_naslov")}</h3>
+      <ul className="mt-2 list-disc space-y-1.5 pl-5 text-sm text-kolo-muted">
+        {stavke.map((s, i) => (
+          <li key={i}>{s}</li>
+        ))}
+      </ul>
+      {/* Poslednja stavka je jedina koja roditelja nešto košta, pa stoji izdvojeno
+          i istaknuto — čovek koji je pročitao neće otvarati naloge nasumično. */}
+      <p className="mt-3 rounded-lg border-l-4 border-kolo-danger bg-white p-3 text-sm text-kolo-text">
+        {t("obavestenje_posledica")}
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={onDalje}
+          className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800"
+        >
+          {t("dugme_razumem")}
+        </button>
+        <button
+          type="button"
+          onClick={onOdustani}
+          className="rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg"
+        >
+          {t("dugme_odustani")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: () => void }) {
+  const t = useTranslations("deca");
+  const [pseudonim, setPseudonim] = useState("");
+  const [datum, setDatum] = useState("");
+  const [lozinka, setLozinka] = useState("");
+  const [lozinka2, setLozinka2] = useState("");
+  const [greska, setGreska] = useState<string | null>(null);
+  const [salje, setSalje] = useState(false);
+
+  // Granice se računaju iz istih konstanti kao na serveru — polje ne nudi datum
+  // koji bi server odbio.
+  const danas = new Date();
+  const najranije = new Date(danas.getFullYear() - UZRAST_PUNOLETSTVO, danas.getMonth(), danas.getDate() + 1);
+  const najkasnije = new Date(danas.getFullYear() - UZRAST_MIN, danas.getMonth(), danas.getDate());
+
+  async function posalji(e: React.FormEvent) {
+    e.preventDefault();
+    setGreska(null);
+    if (lozinka !== lozinka2) return setGreska(t("greska_lozinke"));
+    setSalje(true);
+    try {
+      const res = await fetch("/api/deca", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pseudonim, lozinka, datumRodjenja: datum }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.greska ?? t("greska_slanje"));
+      onGotovo();
+    } catch (err) {
+      setGreska(err instanceof Error ? err.message : t("greska_slanje"));
+    } finally {
+      setSalje(false);
+    }
+  }
+
+  const polje = "mt-1 w-full rounded-xl border border-kolo-border px-3 py-2 text-sm";
+
+  return (
+    <form onSubmit={posalji} className="mt-4 space-y-3 rounded-xl border border-kolo-border p-4">
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_pseudonim")}</span>
+        <input className={polje} value={pseudonim} onChange={(e) => setPseudonim(e.target.value)} required minLength={3} maxLength={30} />
+      </label>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_datum")}</span>
+        <input
+          type="date"
+          className={polje}
+          value={datum}
+          onChange={(e) => setDatum(e.target.value)}
+          min={najranije.toISOString().slice(0, 10)}
+          max={najkasnije.toISOString().slice(0, 10)}
+          required
+        />
+        {/* Datum se posle otvaranja naloga ne menja (čl. 7) — to mora da piše ovde,
+            a ne posle, jer je roditeljska izjava jedina provera godina u sistemu. */}
+        <span className="mt-1 block text-xs text-kolo-danger">{t("polje_datum_upozorenje")}</span>
+      </label>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_lozinka")}</span>
+        <input type="password" className={polje} value={lozinka} onChange={(e) => setLozinka(e.target.value)} required minLength={8} />
+        <span className="mt-1 block text-xs text-kolo-muted">{t("polje_lozinka_opis")}</span>
+      </label>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_lozinka_ponovo")}</span>
+        <input type="password" className={polje} value={lozinka2} onChange={(e) => setLozinka2(e.target.value)} required minLength={8} />
+      </label>
+
+      {greska && <p className="text-sm text-kolo-danger">{greska}</p>}
+
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="submit"
+          disabled={salje}
+          className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-60"
+        >
+          {salje ? t("dugme_salje") : t("dugme_otvori")}
+        </button>
+        <button
+          type="button"
+          onClick={onOdustani}
+          className="rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg"
+        >
+          {t("dugme_odustani")}
+        </button>
+      </div>
+    </form>
+  );
+}

@@ -10,6 +10,7 @@ import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
+import { ucitajUcesnika, uMirovanju, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -18,8 +19,15 @@ const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
 
 // GET /api/pijaca — lista aktivnih oglasa
+//
+// Ruta je otvorena i neprijavljenom posetiocu, pa je vidljivost dečjih oglasa
+// (Pravilnik o Modulu Deca, čl. 13) morala da uđe upravo ovde: gost nikada ne vidi
+// oglas maloletnog korisnika, punoletni ga vidi uz saglasnost roditelja, a dete
+// vidi oglase druge dece uvek.
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
+  const session = await getServerSession(authOptions);
+  const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
   // Multi-select kategorije (OR): ?kat=slug1,slug2. Legacy parametar
   // `kategorija` (jedna vrednost) i dalje radi.
   const kategorije = parsirajKatParam(searchParams.get("kat") ?? searchParams.get("kategorija"));
@@ -29,7 +37,10 @@ export async function GET(req: NextRequest) {
   const maxCena = parseInt(searchParams.get("max") ?? "0") || 0;
   const tip = (searchParams.get("tip") ?? "").toUpperCase();
 
-  const where: Record<string, unknown> = { status: "ACTIVE" };
+  const where: Record<string, unknown> = {
+    status: "ACTIVE",
+    seller: usloviVidljivostiOglasa(posmatrac),
+  };
   if (tip === "PONUDA" || tip === "POTRAZNJA") where.tip = tip;
   if (kategorije.length > 0) where.category = { in: kategorije };
   if (pretraga) where.title = { contains: pretraga, mode: "insensitive" };
@@ -53,7 +64,7 @@ export async function GET(req: NextRequest) {
       id: true, title: true, description: true, tip: true,
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: { select: { pseudonim: true, verified: true, maloletan: true } },
     },
   });
 
@@ -129,6 +140,15 @@ export async function POST(req: NextRequest) {
     select: { verified: true },
   });
   if (!korisnik) return await greska("Nalog ne postoji.", 401);
+
+  // Nalog u mirovanju (Modul Deca, čl. 16) ne objavljuje — njegovi zatečeni oglasi
+  // su već povučeni, pa bi nov oglas bio jedini vidljiv trag naloga koji miruje.
+  if (await uMirovanju(session.user.id)) {
+    return await greska(
+      "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
+      403,
+    );
+  }
 
   const brojAktivnihOglasa = korisnik.verified
     ? 0

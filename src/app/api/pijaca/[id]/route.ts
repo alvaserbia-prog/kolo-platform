@@ -7,6 +7,8 @@ import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
+import { smeDaVidiOglas, ucitajUcesnika } from "@/lib/protokol/deca";
+import { jeAdmin } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -26,20 +28,47 @@ export async function GET(
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
     include: {
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: {
+        select: {
+          pseudonim: true,
+          verified: true,
+          id: true,
+          maloletan: true,
+          dozvolaOdrasli: true,
+          roditeljId: true,
+        },
+      },
     },
   });
   if (!listing) return await greska("Oglas nije pronađen.", 404);
 
+  // Vidljivost oglasa maloletnog korisnika (Modul Deca, čl. 13).
+  //
+  // 🔴 404, ne 403: status 403 bi potvrdio da oglas postoji, a time i da postoji
+  // dete koje ga je objavilo — što je upravo ono što se skriva.
+  const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
+  const smem = smeDaVidiOglas(
+    posmatrac ? { ...posmatrac, admin: jeAdmin(session?.user) } : null,
+    listing.seller,
+  );
+  if (!smem) return await greska("Oglas nije pronađen.", 404);
+
   // Trag uklanjanja se ne prosipa u javni odgovor: razlog je saopštenje vlasniku
   // (Uslovi čl. 25 st. 2), a ne podatak o kom se obaveštava svet. `uklonioId`
   // ne izlazi nikome — ko je odlučio je stvar audit loga, ne javnog API-ja.
-  const { uklonjenRazlog, uklonioId: _uklonioId, ...javno } = listing;
+  const { uklonjenRazlog, uklonioId: _uklonioId, seller: _seller, ...javno } = listing;
   const jeVlasnik = listing.sellerId === session?.user?.id;
 
   return NextResponse.json({
     listing: {
       ...javno,
+      // Prodavac se sastavlja izričito: `...listing` bi prosuo `roditeljId` i stanje
+      // prekidača iz čl. 10, koji nikoga sa strane ne zanimaju i ne smeju napolje.
+      seller: {
+        pseudonim: listing.seller.pseudonim,
+        verified: listing.seller.verified,
+        maloletan: listing.seller.maloletan,
+      },
       phone: session?.user?.verified ? listing.phone : null,
       uklonjenRazlog: jeVlasnik ? uklonjenRazlog : null,
     },

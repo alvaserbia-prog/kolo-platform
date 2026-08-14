@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import ProfilKlijent from "./ProfilKlijent";
+import MojaDeca from "@/components/deca/MojaDeca";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 
 export default async function ProfilPage() {
   const session = await getServerSession(authOptions);
@@ -14,7 +16,13 @@ export default async function ProfilPage() {
   });
   if (!user) redirect("/login");
 
+  // Odeljak „Moja deca" vidi samo potvrđen punoletan korisnik: nalog detetu otvara
+  // onaj čiju je stvarnost neko potvrdio (Modul Deca, čl. 5), a maloletni korisnik
+  // ne otvara nalog nikome.
+  const prikaziDecu = MODUL_DECA_AKTIVAN && user.verified && !user.maloletan;
+
   return (
+    <>
     <ProfilKlijent
       praceneKategorije={user.praceneKategorije.map((p) => p.category)}
       user={{
@@ -42,5 +50,11 @@ export default async function ProfilPage() {
         emailObavestenja: user.emailObavestenja,
       }}
     />
+    {prikaziDecu && (
+      <div className="mx-auto mt-6 max-w-3xl">
+        <MojaDeca />
+      </div>
+    )}
+    </>
   );
 }

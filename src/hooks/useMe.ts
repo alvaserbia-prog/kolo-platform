@@ -28,6 +28,10 @@ export interface MeData {
   dnevniBrojevi: DnevniBrojevi | null;
   nadzorBroj: number;
   politikaPotrebno: boolean;
+  /** Maloletni korisnik (Modul Deca) — navigacija je kraća. */
+  maloletan?: boolean;
+  /** Nalog miruje jer stvarnost roditelja više nije potvrđena (Modul Deca, čl. 16). */
+  mirovanje?: boolean;
 }
 
 export const ME_KEY = ["me"] as const;

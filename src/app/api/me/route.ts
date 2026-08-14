@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { mozeNadzor } from "@/lib/dozvole";
 import { izracunajDnevniBrojeve, izracunajNadzorBroj } from "@/lib/chrome-podaci";
 import { pristanakStatus } from "@/lib/politika";
+import { uMirovanju } from "@/lib/protokol/deca";
 
 /**
  * GET /api/me — KONSOLIDOVAN endpoint za ceo „chrome" (Header + Sidebar).
@@ -34,7 +35,10 @@ export async function GET() {
     nadzorBroj,
   ] = await Promise.all([
     prisma.wallet.findUnique({ where: { userId: meId }, select: { balance: true } }),
-    prisma.user.findUnique({ where: { id: meId }, select: { avatar: true, vodicVidjenAt: true } }),
+    prisma.user.findUnique({
+      where: { id: meId },
+      select: { avatar: true, vodicVidjenAt: true, maloletan: true },
+    }),
     prisma.poruka.count({
       where: {
         procitana: false,
@@ -69,5 +73,9 @@ export async function GET() {
     // Prva prijava naloga koji vodič još nije video vodi na `/dobrodosli`
     // (obrazac prijave to čita; vidi `LoginForm`).
     vodicPotreban: user?.vodicVidjenAt == null,
+    // Modul Deca — navigacija maloletnog korisnika je uža, a nalog u mirovanju
+    // (čl. 16) ne radi dok stvarnost roditelja ne bude ponovo potvrđena.
+    maloletan: user?.maloletan ?? false,
+    mirovanje: await uMirovanju(meId),
   });
 }

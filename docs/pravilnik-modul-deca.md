@@ -1,16 +1,17 @@
 # Pravilnik o Modulu Deca
 
-**Nacrt prve verzije.** Radni dokument — NIJE deo kanonskog seta akata i ne
-učitava ga `src/lib/pravni-dokument.ts`. Kad ga Upravni odbor usvoji, prelazi u
-`dokumentacija 4.1/` uz podizanje verzije celog seta i dopunu spiska `AKTI` u
-`__tests__/pravni-dokumenti.test.ts`.
+**Prva verzija.** Dokument čeka usvajanje Upravnog odbora. Do tada stoji u
+`docs/` i NIJE deo kanonskog seta akata — ne učitava ga `src/lib/pravni-dokument.ts`
+i ne broji ga `__tests__/pravni-dokumenti.test.ts`. Usvajanjem prelazi u
+`dokumentacija 4.1/` uz podizanje verzije celog seta i dopunu spiska `AKTI`.
 
 Prva verzija namerno uređuje samo ulazak i zaštitu. Obim aktivnosti sveden je na
 najmanju meru, jer u dečjem prostoru na početku neće biti dovoljno korisnika da
 pravila o međusobnoj komunikaciji uopšte dejstvuju. Proširenja su nabrojana na
 kraju dokumenta.
 
-Tehnički plan integracije: `docs/plan-modul-deca.html`.
+**Sproveden u kodu**, iza prekidača `MODUL_DECA_AKTIVAN` u `src/lib/moduli.ts`
+(vidi napomenu uz čl. 18). Tehnički plan integracije: `docs/plan-modul-deca.html`.
 
 ---
 
@@ -221,3 +222,18 @@ razvrstavanje po uzrasnim grupama i pravila susedstva; uvid roditelja stepenovan
 po uzrastu; sopstveni pristanak deteta po navršenoj petnaestoj godini;
 automatsko uspostavljanje prve potvrde po sticanju punoletstva; jedinstven
 registar dece sa programom Podrška Majkama.
+
+### Gde je šta u kodu
+
+| Odredba | Mesto |
+|---|---|
+| Prekidač modula | `MODUL_DECA_AKTIVAN` u `src/lib/moduli.ts` |
+| Uzrast, susedstvo, dozvole (čl. 2, 12, 13, 14, 16) | `src/lib/deca-pravila.ts` — čiste funkcije, testovi `__tests__/deca-pravila.test.ts` |
+| Otvaranje naloga, potvrde, brisanje (čl. 4–6, 10, 17) | `src/lib/protokol/deca.ts` |
+| Rute modula | `src/app/api/deca/**`, cron `src/app/api/cron/deca-potvrde` (21:00 UTC) |
+| Ekran „Moja deca" | `src/components/deca/MojaDeca.tsx`, uz profil roditelja |
+| Profil deteta viđen od roditelja (čl. 9, 10, 17) | `src/app/(app)/deca/[id]/` |
+| Izjašnjenje potvrđivača (čl. 6) | `src/app/(app)/deca/potvrde/` |
+| Vidljivost oglasa (čl. 13) | `usloviVidljivostiOglasa` — `GET /api/pijaca`, `GET /api/pijaca/[id]`, `sitemap.ts` |
+| Isključenje kanala evidentiranja (čl. 14 st. 1) | `zabeleziDoprinos` i `probajNapredovati` — provera je u samim servisima, ne na pozivnom mestu |
+| Migracija | `prisma/migrations/20260814120000_modul_deca` |

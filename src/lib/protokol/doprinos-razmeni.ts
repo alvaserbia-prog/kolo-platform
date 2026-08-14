@@ -190,6 +190,14 @@ export async function preracunajUcinak(userId: string): Promise<Ucinak> {
  */
 export async function probajNapredovati(userId: string): Promise<number> {
   try {
+    // 🔴 Modul Deca, čl. 14 st. 1 — lestvica se na maloletne korisnike ne primenjuje.
+    // Koraci 2–5 nose emisiju, a u dečjem prostoru ne nastaje nijedan nov zapis POEN-a.
+    const jeDete = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { maloletan: true },
+    });
+    if (jeDete?.maloletan) return 0;
+
     const ucinak = await preracunajUcinak(userId);
     const dostignut = dostignutKorak(ucinak);
     if (dostignut < PRVI_KORAK_OVDE) return 0;

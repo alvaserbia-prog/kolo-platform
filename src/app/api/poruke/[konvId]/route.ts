@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiPush } from "@/lib/push";
 import { posaljiEmailKorisniku } from "@/lib/email";
+import { smeDaKomunicira, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
 
 async function getKonv(konvId: string, meId: string) {
   const k = await prisma.konverzacija.findUnique({ where: { id: konvId } });
@@ -92,6 +93,28 @@ export async function POST(
   // njegovog zahteva za jemstvo (Uslovi čl. 16, Politika čl. 6) — tu sme da uzvrati.
   const k = await getKonv(konvId, session.user.id);
   if (!k) return await greska("Konverzacija nije pronađena.", 404);
+
+  // ── Modul Deca (čl. 12) ───────────────────────────────────────────────────
+  //
+  // 🔴 Ovlašćenje za pisanje se proverava PRI SVAKOJ PORUCI, ne samo pri otvaranju
+  // razgovora. Bez toga bi zatečen razgovor nastavio da radi i pošto roditelj povuče
+  // saglasnost — pravila bi važila samo dok neko ne otvori staru prepisku.
+  const drugiUcesnikId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
+  const [jaUcesnik, drugiUcesnik] = await Promise.all([
+    ucitajUcesnika(session.user.id),
+    ucitajUcesnika(drugiUcesnikId),
+  ]);
+  if (!jaUcesnik || !drugiUcesnik) return await greska("Konverzacija nije pronađena.", 404);
+  if (jaUcesnik.maloletan || drugiUcesnik.maloletan) {
+    if ((await uMirovanju(session.user.id)) || (await uMirovanju(drugiUcesnikId))) {
+      return await greska(
+        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
+        403,
+      );
+    }
+    const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
+    if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  }
 
   const { tekst } = await req.json();
   if (!tekst?.trim()) return await greska("Poruka ne sme biti prazna.", 400);

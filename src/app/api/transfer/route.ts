@@ -9,6 +9,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
+import { smeDaPrepise, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -61,7 +62,29 @@ export async function POST(req: NextRequest) {
   // indeks stvarnosti: ko je jednom verifikovan sme da prepisuje POEN i ako mu indeks
   // kasnije padne. Čita se iz baze, ne iz sesije — token se osvežava sa zakašnjenjem,
   // pa bi tek verifikovan korisnik još neko vreme bio odbijan.
-  if (!smeDaSalje(posiljac.tipKorisnika)) {
+  // ── Modul Deca (čl. 14) ────────────────────────────────────────────────────
+  //
+  // Kad je bar jedna strana maloletna, o prepisu odlučuje `smeDaPrepise`, a ne opšte
+  // pravilo o neverifikovanom nalogu: maloletni korisnik jeste NEVERIFIKOVAN u smislu
+  // šeme, ali u dečjem prostoru sme da prepisuje. Zato ova provera ide PRE
+  // `smeDaSalje`, i preuzima odluku za sve parove u kojima ima deteta.
+  const [odUcesnik, kaUcesnik] = await Promise.all([
+    ucitajUcesnika(posiljac.id),
+    ucitajUcesnika(primalac.id),
+  ]);
+  if (!odUcesnik || !kaUcesnik) return await greska("Nalog ne postoji.", 401);
+  const jeDecjiPar = odUcesnik.maloletan || kaUcesnik.maloletan;
+
+  if (jeDecjiPar) {
+    if ((await uMirovanju(posiljac.id)) || (await uMirovanju(primalac.id))) {
+      return await greska(
+        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
+        403,
+      );
+    }
+    const dozvoljeno = smeDaPrepise(odUcesnik, kaUcesnik);
+    if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  } else if (!smeDaSalje(posiljac.tipKorisnika)) {
     return await greska(
       "Dok nisi verifikovan/a možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po verifikaciji.",
       403,

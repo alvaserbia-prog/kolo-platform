@@ -19,6 +19,8 @@ interface SidebarProps {
   isAdmin: boolean;
   jeNadzornik?: boolean; // POCETNI ili NOSILAC_ZRNA — vidi link "Nadzor"
   brojZaNadzor?: number; // badge na sidebar-u
+  /** Maloletni korisnik (Modul Deca) — dobija sopstvenu, kraću navigaciju. */
+  maloletan?: boolean;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
@@ -168,6 +170,7 @@ function SidebarContent({
   isAdmin,
   jeNadzornik,
   brojZaNadzor,
+  maloletan,
   onLinkClick,
   dnevniBrojevi,
 }: {
@@ -175,6 +178,7 @@ function SidebarContent({
   isAdmin: boolean;
   jeNadzornik?: boolean;
   brojZaNadzor?: number;
+  maloletan?: boolean;
   onLinkClick?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
 }) {
@@ -207,7 +211,18 @@ function SidebarContent({
 
   // Grupe se razlikuju po statusu: neverifikovan dobija slim navigaciju
   // koja ga vodi ka verifikaciji; verifikovan vidi pun sistem grupisan po nameni.
-  const grupe: { label?: string; collapsible?: boolean; links: { href: string; label: string }[] }[] = verified
+  const grupe: { label?: string; collapsible?: boolean; links: { href: string; label: string }[] }[] = maloletan
+    ? // Modul Deca — navigacija je KRAĆA VERZIJA, ne filtrirana. Filtrirana bi pri
+      // svakoj budućoj izmeni tiho propuštala nove stavke detetu. Potvrde, ZRNO,
+      // Doprinos, Programi i Donacije se ne prikazuju jer maloletni korisnik nijedno
+      // od toga ne može (čl. 15), a Početna nosi Pričaonicu — sobu punoletnih.
+      [
+        { links: [
+          { href: "/pijaca", label: t("pijaca") },
+          { href: "/novcanik", label: t("novcanik") },
+        ] },
+      ]
+    : verified
     ? [
         { links: [
           { href: "/pocetna", label: t("pocetna") },
@@ -308,7 +323,7 @@ function SidebarContent({
   );
 }
 
-export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
+export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, maloletan, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
   // Zatvori drawer pri promeni rute
   const pathname = usePathname();
   useEffect(() => {
@@ -319,7 +334,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-60 shrink-0 bg-kolo-green-900 flex-col relative self-start sticky top-0 h-[calc(100dvh-4rem)] before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
-        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} maloletan={maloletan} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 
       {/* Mobile drawer overlay */}
@@ -345,7 +360,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
           <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
           <JezikSvitcer className="ml-auto" poravnaj="desno" />
         </div>
-        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} maloletan={maloletan} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>
     </>
   );

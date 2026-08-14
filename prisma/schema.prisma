@@ -257,6 +257,27 @@ model User {
   // Zatečeni nalozi su u migraciji popunjeni tekućim vremenom — vodič im se ne
   // otvara naknadno.
   vodicVidjenAt                    DateTime?
+  // ─── Modul Deca (Pravilnik o Modulu Deca) ─────────────────────────────────
+  // Nenulto samo kod maloletnih korisnika. Jedini izvor uzrasta; posle otvaranja
+  // naloga se ne menja (čl. 7) — roditeljska izjava je jedina provera godina kojom
+  // sistem raspolaže.
+  datumRodjenja                    DateTime?                 @db.Date
+  // Izvedeno iz `datumRodjenja`, ali indeksabilno i jeftino u `where` — svaki javni
+  // upit mora da isključi decu, a računanje datuma po redu to ne bi podnelo.
+  // 🔴 Oba polja se pišu ISKLJUČIVO kroz `poljaDeteta()` u `src/lib/protokol/deca.ts`.
+  maloletan                        Boolean                   @default(false)
+  // Roditelj koji je otvorio nalog (čl. 4). Prva verzija modula poznaje samo jednog
+  // roditelja po detetu, pa veza stoji na samom nalogu — zaseban model bi u ovoj fazi
+  // nosio samo jedan red po detetu.
+  roditeljId                       String?
+  roditelj                         User?                     @relation("RoditeljDete", fields: [roditeljId], references: [id])
+  deca                             User[]                    @relation("RoditeljDete")
+  // Prekidač iz čl. 10 st. 2: komunikacija i razmena maloletnog korisnika sa
+  // punoletnim korisnicima. Isključen pri otvaranju naloga, povlači se u svakom
+  // trenutku. Stoji na DETETU, a menja ga isključivo roditelj.
+  dozvolaOdrasli                   Boolean                   @default(false)
+  potvrdeRoditeljstvaZaMene        RoditeljstvoPotvrda[]     @relation("PotvrdaDete")
+  potvrdeRoditeljstvaKojeDajem     RoditeljstvoPotvrda[]     @relation("PotvrdaPotvrdjivac")
   memberHash                       String                    @unique
   location                         String?
   telefon                          String?
@@ -335,6 +356,52 @@ model User {
   pseudonimIstorija                PseudonimIstorija[]
   createdAt                        DateTime                  @default(now())
   updatedAt                        DateTime                  @updatedAt
+
+  // Svaki javni upit filtrira decu; bez indeksa bi to bio pun prolaz kroz tabelu.
+  @@index([maloletan])
+  @@index([roditeljId])
+}
+
+// ─── Modul Deca — potvrda roditeljstva (Pravilnik o Modulu Deca, čl. 6) ──────
+//
+// Nalog deteta radi od trenutka otvaranja (čl. 4 st. 1). Lica koja su potvrdila
+// stvarnost roditelja imaju TRIDESET DANA da potvrde da roditelj ima dete tog
+// uzrasta. Ko se ne izjasni, gubi sopstvenu potvrdu stvarnosti tog roditelja:
+// poništavaju se zapisi POEN-a evidentirani povodom te potvrde i oslobađa mu se
+// verifikacioni slot (čl. 6 st. 3).
+//
+// Potvrda se daje ZA SVAKO DETE POSEBNO — otud `@@unique([deteId, potvrdjivacId])`,
+// a ne po roditelju. Čovek sa četvoro dece traži četiri odvojena izjašnjenja.
+//
+// Veza ka `VerifikacionaVeza` se NE čuva: veza se pri poništenju briše, pa bi strani
+// ključ ostao viseći. Merodavan je par (potvrđivač, roditelj), koji je u
+// `VerifikacionaVeza` ionako jedinstven.
+model RoditeljstvoPotvrda {
+  id            String                    @id @default(uuid())
+  deteId        String
+  dete          User                      @relation("PotvrdaDete", fields: [deteId], references: [id], onDelete: Cascade)
+  potvrdjivacId String
+  potvrdjivac   User                      @relation("PotvrdaPotvrdjivac", fields: [potvrdjivacId], references: [id])
+  status        RoditeljstvoPotvrdaStatus @default(CEKA)
+  // Obavezno uz osporavanje (čl. 6 st. 6). Uz potvrdu se ne traži.
+  obrazlozenje  String?
+  rokDo         DateTime
+  odgovorAt     DateTime?
+  createdAt     DateTime                  @default(now())
+
+  @@unique([deteId, potvrdjivacId])
+  @@index([potvrdjivacId, status])
+  @@index([status, rokDo])
+}
+
+enum RoditeljstvoPotvrdaStatus {
+  CEKA
+  POTVRDIO
+  // Osporavanje postojanja deteta — ide Upravnom odboru (čl. 6 st. 6).
+  OSPORIO
+  // Rok od 30 dana istekao bez izjašnjenja; potvrda stvarnosti roditelja je pala.
+  // Izjašnjenje dato posle roka ne otklanja nastupelo poništenje (čl. 6 st. 4).
+  ISTEKLA
 }
 
 /// Napušteni pseudonimi. Dve svrhe, obe posledica toga što pseudonim stoji u

@@ -95,6 +95,24 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
     throw new ResetGreska("Nalog je ugašen — reset ne oživljava obrisan nalog.", 409);
   }
 
+  // Reset obara sve potvrde stvarnosti naloga. Kod roditelja bi to njegovo dete
+  // gurnulo u mirovanje (Modul Deca, čl. 16), a postupak potvrde iz čl. 6 ostao bi
+  // da visi nad potvrđivačima koji sa detetom nemaju veze. Nalog deteta se briše
+  // preko roditeljskog ekrana, ne ovim alatom.
+  const brojDece = await prisma.user.count({ where: { roditeljId: userId, deaktiviranAt: null } });
+  if (brojDece > 0) {
+    throw new ResetGreska(
+      "Nalog ima povezano dete — reset bi mu oborio potvrde i gurnuo detetov nalog u mirovanje.",
+      400,
+    );
+  }
+  if (user.maloletan) {
+    throw new ResetGreska(
+      "Nalog maloletnog korisnika se ne resetuje — briše ga roditelj sa svog profila.",
+      400,
+    );
+  }
+
   const brojPokrovitelja = await prisma.pokrovitelj.count({ where: { vlasnikId: userId } });
   if (brojPokrovitelja > 0) {
     throw new ResetGreska("Nalog je vlasnik pokrovitelja — reset bi pokidao evidenciju pokroviteljstva.", 400);
