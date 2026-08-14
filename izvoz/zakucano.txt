@@ -1,0 +1,98 @@
+# Mesta gde srpski tekst stoji u kodu, a ne u messages/*.json
+# Pažnja: spisak sadrži i komentare i imena ključeva — traži se ručno.
+
+src/components/Pseudonim.tsx:3:// „NoxuzTech" → „НоxузТецх"). `data-no-cyr` signalizira CirilicaProvider-u da
+src/components/PageOpis.tsx:3: * "za šta služi i šta tu mogu da uradim". Pomaže novom korisniku da
+src/components/LokacijaSearch.tsx:42:   * upisuje se u KANONSKOM obliku („stanisic" → „Stanišić", „Stanišić (Sombor)"
+src/components/Header.tsx:182:            // R2 URL → next/image: optimizuje (256→36px, AVIF/WebP) i kešira dugo
+src/components/JezikSvitcer.tsx:13:  { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица", kratko: "СР" },
+src/components/JezikSvitcer.tsx:14:  { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский", kratko: "RU" },
+src/components/JezikSvitcer.tsx:51: * je aktivan locale "sr-Cyrl" (inače bi „Hrvatski" postao „Хрватски"); vidi
+src/components/verifikacija/MiniStablo.tsx:30:  // Korisnik može imati više verifikatora (1 početni + do 10 ličnih = do 100%).
+src/components/verifikacija/MiniStablo.tsx:51: * „nadzirano" = zelena kvačica (bez teksta); „čeka nadzor" = zlatna oznaka.
+src/components/PolitikaPristanak.tsx:18: * Ekran za pristanak na nove akte (Uslovi čl. 40, Politika čl. 16).
+src/components/PolitikaPristanak.tsx:61:   * Keširani `['me']` (odatle AppShell čita `politikaPotrebno`, poll na 30s) MORA
+src/components/PolitikaPristanak.tsx:202:          Izlaz iz gejta. Politika čl. 16 i Uslovi čl. 40 (v4.1.1): ograničenje pristupa
+src/components/profil/IndeksSekcija.tsx:66:      .catch(() => setError("Mreža nije dostupna"));
+src/components/Sidebar.tsx:195:  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
+src/components/graf/GrafKlijent.tsx:402:      {/* Legenda + statistika + "nađi me" */}
+src/components/Providers.tsx:40:  // /api/auth/session, što na sporoj vezi dugo prikazuje "Učitavam...".
+src/components/AppShell.tsx:36:  // Gejt za pristanak na nove akte (Uslovi čl. 40, Politika čl. 16).
+src/components/AppShell.tsx:43:  // keširani `['me']` još ne, ekran je „blicao" između dve rute dok poll ne stigne.
+src/components/AppShell.tsx:47:  // `/profil` je namerno izuzet: Politika čl. 16 i Uslovi čl. 40 (v4.1.1) izričito
+src/components/AppShell.tsx:61:  // Kad korisnik otvori Novčanik/Pijaca → označi "viđeno" (badge ide na 0).
+src/components/AppShell.tsx:63:  // "viđeno" vreme i invalidiramo keš da se uskladi.
+src/app/opengraph-image.tsx:12:export const alt = "KOLO — mreža za razmenu rada, dobara i znanja";
+src/app/page.tsx:110:    { ikona: "🌱", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
+src/app/page.tsx:112:    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
+src/app/page.tsx:113:    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
+src/app/page.tsx:114:    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
+src/app/page.tsx:115:    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
+src/app/page.tsx:442:                  alt="Nikola Šarić"
+src/app/not-found.tsx:7:  title: "Stranica nije pronađena",
+src/app/(auth)/login/LoginForm.tsx:28:  // „nema naloga" od „pogrešna lozinka" (sprečava user enumeration).
+src/app/(app)/programi/ProgramiKlijent.tsx:121:              <span>{t("iskorišcenost")}</span>
+src/app/(app)/novcanik/NovcanikKartice.tsx:109:            st. 3). Naziv je „Zabeležen doprinos", nikad „POEN na čekanju" — POEN
+src/app/(app)/admin/PijacaTab.tsx:76:        setGreska(data.error ?? "Greška pri učitavanju.");
+src/app/(app)/admin/PijacaTab.tsx:95:      setGreska("Razlog uklanjanja je obavezan — šalje se korisniku (Uslovi čl. 25 st. 2).");
+src/app/(app)/admin/PijacaTab.tsx:108:        setGreska(data.error ?? "Greška pri uklanjanju.");
+src/app/(app)/admin/PijacaTab.tsx:126:      if (!res.ok) setGreska(data.error ?? "Greška.");
+src/app/(app)/admin/PijacaTab.tsx:139:      if (!res.ok) setGreska(data.error ?? "Greška.");
+src/app/(app)/admin/PijacaTab.tsx:244:                          {p.status !== "OTVORENA" && ` · ${p.status === "RESENA" ? "rešena" : "odbačena"}`}
+src/app/(app)/admin/PijacaTab.tsx:277:                    placeholder={'Razlog uklanjanja — vidi ga korisnik (npr. „Oglas nudi dobro čiji je promet zabranjen, Uslovi čl. 21").'}
+src/app/(app)/admin/OdlukeTab.tsx:12: *   — „nema osnova" → verifikacija ostaje, predmet se briše posle 90 dana;
+src/app/(app)/admin/OdlukeTab.tsx:62:  ["reseni", "Rešeni"],
+src/app/(app)/admin/OdlukeTab.tsx:78:  DEO_MREZE: "deo mreže",
+src/app/(app)/admin/OdlukeTab.tsx:95:  UTVRDJENA_LAZNA: "Utvrđena lažna verifikacija",
+src/app/(app)/admin/OdlukeTab.tsx:117:        setGreska(data.error ?? "Greška pri učitavanju.");
+src/app/(app)/admin/OdlukeTab.tsx:148:        setGreska(data.error ?? "Greška.");
+src/app/(app)/admin/OdlukeTab.tsx:166:      : "Poništava se samo ova verifikacija.";
+src/app/(app)/admin/OdlukeTab.tsx:225:                    {" → "}
+src/app/(app)/admin/OdlukeTab.tsx:251:                  {p.verifikovani.utvrdjenNepostojeci && " · već utvrđen nepostojećim"}
+src/app/(app)/admin/OdlukeTab.tsx:280:                    placeholder="Beleška uz odluku (opciono) — ide u audit log."
+src/app/(app)/admin/PokroviteljPrijaveTab.tsx:44:      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
+src/app/(app)/admin/PrviOglasiTab.tsx:47:  ["cekanje", "Na čekanju"],
+src/app/(app)/admin/PrviOglasiTab.tsx:69:        setGreska(data.error ?? "Greška pri učitavanju.");
+src/app/(app)/admin/PrviOglasiTab.tsx:91:      if (!res.ok) setGreska(data.error ?? "Greška pri odobravanju.");
+src/app/(app)/admin/PrviOglasiTab.tsx:103:      setGreska("Razlog je obavezan — šalje se korisniku.");
+src/app/(app)/admin/PrviOglasiTab.tsx:116:        setGreska(data.error ?? "Greška pri odbijanju.");
+src/app/(app)/admin/PrviOglasiTab.tsx:132:        samo o doprinosu od 1.000 POEN (Pravilnik čl. 40a). Odobrenjem POEN ulazi u opticaj, a
+src/app/(app)/admin/PrviOglasiTab.tsx:163:          {prikaz === "cekanje" ? "Nema oglasa koji čekaju odobrenje." : "Još nema odobrenih doprinosa."}
+src/app/(app)/admin/PrviOglasiTab.tsx:253:                          {radiId === s.id ? "Šaljem…" : "Potvrdi odbijanje"}
+src/app/(app)/admin/NadzorTab.tsx:32:const NIVO_ZNAK: Record<string, string> = { HITNO: "🔴", UPOZORENJE: "🟠", INFO: "🟡" };
+src/app/(app)/admin/NadzorTab.tsx:91:                    {NIVO_ZNAK[n.nivo] ?? "🟡"} {n.rizik}
+src/app/(app)/admin/NadzorTab.tsx:101:                  <span className="ml-auto text-kolo-muted text-sm">{jeOtvoren ? "▴" : "▾"}</span>
+src/app/(app)/admin/NadzorTab.tsx:109:                          <span className="font-medium">{NIVO_ZNAK[p.nivo] ?? "🟡"} {p.kod}</span> — {p.opis}
+src/app/(app)/admin/AdminKlijent.tsx:639:                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
+src/app/(app)/admin/AdminKlijent.tsx:842:          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_br_izvršilaca_label")}</label>
+src/app/(app)/admin/AdminKlijent.tsx:844:            placeholder={t("novi_oglas_br_izvršilaca_placeholder")}
+src/app/(app)/admin/AdminKlijent.tsx:1624:              {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString(intlTag(locale)), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
+src/app/(app)/admin/ObavestenjaTab.tsx:6: * Namena je uska: izmene Uslova/Politike (Uslovi čl. 40, Politika čl. 16),
+src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:26:// 1, 21, 31… → „aktivan zadatak"; 2–4, 22–24… → „aktivna zadatka"; ostalo → „aktivnih zadataka".
+src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:45:    APPROVED: { label: t("primljen_izvršilac"),  cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
+src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:112:    setPoruka({ text: res.ok ? t("prijava_primljena_izvršilac") : (data.error ?? t("greska")), ok: res.ok });
+src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:146:            <span>{oglas.odobreniClanovi}/{oglas.positions} {oglas.positions === 1 ? t("izvršilac_jedan") : t("izvršilaca")}</span>
+src/app/(app)/doprinos-oglasi/[id]/OglasDetalj.tsx:93:        ? (data.primljen ? t("prijava_primljena_izvršilac") : t("prijava_podneta_ceka"))
+src/app/(app)/doprinos-oglasi/[id]/OglasDetalj.tsx:103:        <Link href="/doprinos-oglasi" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← {t("naslov")}</Link>
+src/app/(app)/doprinos-oglasi/[id]/OglasDetalj.tsx:135:            <p className="text-xs text-kolo-muted mt-0.5">{t("izvršilaca")}</p>
+src/app/(app)/doprinos-oglasi/[id]/OglasDetalj.tsx:156:            {oglas.mojaPrijava.status === "APPROVED" && t("status_primljen_izvršilac")}
+src/app/(app)/pocetna/PocetnaKlijent.tsx:74:      setGreska(data.error ?? "Greška pri uklanjanju poruke.");
+src/app/(app)/dobrodosli/page.tsx:85:  // (gornje dugme = "Preskoči" → /sistem). Inače je vodič otvoren iz "?"
+src/app/(app)/dobrodosli/page.tsx:154:          {prviPut ? t("preskoči") : t("zatvori")}
+src/app/(app)/donacije/DonacijeKlijent.tsx:122:    const tekst = `Primalac: KOLO Fondacija\nRačun: ${prikazRacuna}\nSvrha: Donacija\nModel: 97\nPoziv na broj: ${data!.pozivNaBroj}`;
+src/app/(app)/pijaca/PijacaKlijent.tsx:520:        {/* Pečat da oglašivač nije verifikovan (Uslovi čl. 16, Pravilnik čl. 16).
+src/app/(app)/verifikacija/page.tsx:8: *  - "Pokaži kod" — QR + 6-cifren broj
+src/app/(app)/verifikacija/page.tsx:124:      {/* Levo: indeks stvarnosti → kartice "Pokaži kod" / "Verifikuj nekoga" → ulaz
+src/app/(app)/profil/oglasi/MojiOglasiKlijent.tsx:69:          <Link href="/profil" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← {t("naslov")}</Link>
+src/app/(app)/zrno/ZrnoKlijent.tsx:84:              objasnjenje="Odnos ukupnih POEN-a i raspoloživih ZRNA — pokazuje koliko ti je POEN-a potrebno da upišeš jedno ZRNO. Nije cena i nije kurs."
+src/app/(app)/zrno/ZrnoKlijent.tsx:131:    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok });
+src/app/(app)/postani-pokrovitelj/PokroviteljstvoPrijava.tsx:29:      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
+src/app/(app)/poruke/page.tsx:391:                  placeholder={t("napišite_poruku")}
+src/app/layout.tsx:87:      // og:image obezbeđuje opengraph-image.tsx (dinamička 1200×630) — ne dupliramo ovde.
+src/app/(public)/pravilnik/[slug]/page.tsx:15:    opis: "Osnovni akt sistema — 12 glava, 82 člana.",
+src/app/(public)/pravilnik/[slug]/page.tsx:21:    opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
+src/app/(public)/pravilnik/[slug]/page.tsx:39:    opis: "Operativni program — zadaci i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije.",
+src/app/(public)/pravilnik/[slug]/page.tsx:42:    naziv: "Pravilnik o osnivačkom doprinosu",
+src/app/(public)/pravilnik/[slug]/page.tsx:51:    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; zaštitni veto.",
+src/app/(public)/pravilnik/[slug]/page.tsx:54:    naziv: "Pravilnik o programima podrške",
+src/app/(public)/o-nama/page.tsx:134:                alt="Nikola Šarić"
