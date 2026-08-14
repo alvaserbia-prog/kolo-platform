@@ -8,8 +8,20 @@
  * aplikacije ne radi ništa osim React-a.
  */
 
-/** Isti spisak kao `src/i18n/routing.ts` — kad se tamo doda jezik, dodati i ovde. */
-export type EkranJezik = "sr" | "sr-Cyrl" | "en" | "ru";
+/**
+ * Isti spisak kao `src/i18n/routing.ts` — kad se tamo doda jezik, dodati i ovde.
+ *
+ * 🔴 Nedostajanje jezika se NE vidi kao greška, nego kao srpski tekst: `routing.ts`
+ * je od 2026-08-06 imao `hr` i `hu`, a ovaj tip ih nije imao, pa je
+ * `normalizujJezik()` oba vraćao na "sr" i Hrvat i Mađar su na ekranu pada
+ * sistema i na 404 stranici dobijali srpski. Brana je
+ * `__tests__/sistemski-ekrani.test.ts` — poredi ovaj spisak sa `routing.ts`.
+ *
+ * Register je NAMERNO formalan („Molimo vas", „Vaši zapisi"), kao u srpskom
+ * originalu ovih ekrana i u en/ru prevodu — ostatak sajta govori na „ti", ali
+ * ovo su obaveštenja o stanju sistema, ne razgovor sa korisnikom.
+ */
+export type EkranJezik = "sr" | "sr-Cyrl" | "en" | "ru" | "hr" | "hu";
 
 export type EkranTekst = {
   oznaka: string;
@@ -56,6 +68,22 @@ export const PAD_SISTEMA: Skup = {
     dugme: "Попробовать снова",
     pocetna: "На главную",
   },
+  hr: {
+    oznaka: "Radovi u tijeku",
+    naslov: "Radimo na sustavu",
+    telo: "Implementacija KOLO sustava je u tijeku i ovaj dio trenutno nije dostupan.",
+    dopuna: "Molimo vas da pogledate ponovno malo kasnije. Vaši zapisi su sigurni.",
+    dugme: "Pokušaj ponovno",
+    pocetna: "Na početnu",
+  },
+  hu: {
+    oznaka: "Munkálatok folyamatban",
+    naslov: "A rendszeren dolgozunk",
+    telo: "A KOLO rendszer bevezetése folyamatban van, és ez a rész jelenleg nem érhető el.",
+    dopuna: "Kérjük, nézzen vissza kicsit később. A bejegyzései biztonságban vannak.",
+    dugme: "Próbálja újra",
+    pocetna: "Főoldal",
+  },
 };
 
 /**
@@ -98,6 +126,22 @@ export const ODRZAVANJE: Skup = {
     dugme: "",
     pocetna: "На главную",
   },
+  hr: {
+    oznaka: "Radovi u tijeku",
+    naslov: "Radovi na sustavu su u tijeku",
+    telo: "Trenutno radimo na implementaciji i poboljšanju KOLO sustava, pa platforma nakratko nije dostupna.",
+    dopuna: "Molimo vas da pogledate ponovno malo kasnije. Vaši zapisi su sigurni.",
+    dugme: "",
+    pocetna: "Na početnu",
+  },
+  hu: {
+    oznaka: "Munkálatok folyamatban",
+    naslov: "Rendszerkarbantartás folyamatban",
+    telo: "Éppen a KOLO rendszer bevezetésén és fejlesztésén dolgozunk, ezért a platform rövid ideig nem érhető el.",
+    dopuna: "Kérjük, nézzen vissza kicsit később. A bejegyzései biztonságban vannak.",
+    dugme: "",
+    pocetna: "Főoldal",
+  },
 };
 
 /** 404 — stranica ne postoji. Nije pad sistema, pa i poruka mora da bude druga. */
@@ -134,9 +178,25 @@ export const NEMA_STRANICE: Skup = {
     dugme: "",
     pocetna: "На главную",
   },
+  hr: {
+    oznaka: "Stranica ne postoji",
+    naslov: "Ova stranica nije pronađena",
+    telo: "Adresa koju ste otvorili ne postoji ili je u međuvremenu promijenjena.",
+    dopuna: "Sustav radi normalno — vratite se na početnu i nastavite odatle.",
+    dugme: "",
+    pocetna: "Na početnu",
+  },
+  hu: {
+    oznaka: "Az oldal nem létezik",
+    naslov: "Ez az oldal nem található",
+    telo: "A megnyitott cím nem létezik, vagy időközben megváltozott.",
+    dopuna: "A rendszer megfelelően működik — térjen vissza a főoldalra, és folytassa onnan.",
+    dugme: "",
+    pocetna: "Főoldal",
+  },
 };
 
-const JEZICI: EkranJezik[] = ["sr", "sr-Cyrl", "en", "ru"];
+export const JEZICI: EkranJezik[] = ["sr", "sr-Cyrl", "en", "ru", "hr", "hu"];
 
 export function normalizujJezik(vrednost: string | undefined | null): EkranJezik {
   return JEZICI.includes(vrednost as EkranJezik) ? (vrednost as EkranJezik) : "sr";
@@ -154,9 +214,13 @@ export function jezikIzKolacica(): EkranJezik {
   return normalizujJezik(par?.slice("NEXT_LOCALE=".length));
 }
 
-/** `lang` atribut za `<html>` na ekranima koji sami renderuju dokument. */
+/**
+ * `lang` atribut za `<html>` na ekranima koji sami renderuju dokument.
+ *
+ * „sr-Cyrl" ide na „sr" namerno: pismo se ne prijavljuje čitaču ekrana kao
+ * poseban jezik, a ćirilica je transliteracija istog teksta.
+ */
 export function htmlLang(jezik: EkranJezik): string {
-  if (jezik === "en") return "en";
-  if (jezik === "ru") return "ru";
-  return "sr";
+  if (jezik === "sr" || jezik === "sr-Cyrl") return "sr";
+  return jezik;
 }
