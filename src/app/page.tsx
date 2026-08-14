@@ -509,22 +509,17 @@ export default async function Home() {
           <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
             {t("cta_naslov")}
           </h2>
-          <p className="text-white/90 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
+          <p className="text-white/90 text-sm md:text-base mb-7 max-w-xl mx-auto leading-relaxed">
             {t("cta_opis")}
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
+          {/* Jedno dugme — na telefonu ide u punu širinu, da palac ne promaši. */}
+          <div className="flex justify-center">
             <Link
               href="/registracija"
-              className="px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
+              className="w-full sm:w-auto px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
             >
               {t("cta_priduzi")} →
             </Link>
-            <a
-              href="mailto:kontakt@ekolo.rs?subject=Prati%20razvoj%20KOLO%20sistema"
-              className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-            >
-              {t("cta_saznaj")} →
-            </a>
           </div>
           <div className="mt-8 pt-6 border-t border-white/15">
             <p className="text-xs text-white/85">{t("cta_footer")}</p>
