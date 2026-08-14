@@ -14,6 +14,7 @@ import { prisma } from "@/lib/prisma";
 import { getTranslations, getLocale } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
+import { KATEGORIJE } from "@/lib/kategorije";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("landing");
@@ -60,6 +61,15 @@ async function getPijacaPreview() {
         if (!result.find((r) => r.id === l.id)) result.push(l);
       }
     }
+    // Prikaz ide redom kojim su kategorije nabrojane u `KATEGORIJE` — hrana,
+    // njiva i ručni rad na početku, znanje i kreativa (sajtovi, fotografisanje)
+    // pri kraju. Izbor oglasa i dalje bira najnovije po kategoriji; ovo menja
+    // samo redosled prikaza, da naslovnu otvara ono što se rukama pravi.
+    const redosled = (k: string) => {
+      const i = (KATEGORIJE as readonly string[]).indexOf(k);
+      return i === -1 ? KATEGORIJE.length : i;
+    };
+    result.sort((a, b) => redosled(a.category) - redosled(b.category));
     return result;
   } catch {
     return [];
@@ -409,12 +419,6 @@ export default async function Home() {
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.opticaj.toLocaleString(intlTag(locale))}
-                </div>
-                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
-              </div>
-              <div className="bg-kolo-bg rounded-xl py-5">
-                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
                   {agregati.brojOglasa.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_oglas")}</div>
@@ -425,7 +429,14 @@ export default async function Home() {
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
               </div>
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.opticaj.toLocaleString(intlTag(locale))}
+                </div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
+              </div>
             </div>
+            <p className="text-xs text-kolo-muted mt-4 text-center">{t("statistike_faza")}</p>
           </section>
         )}
 
