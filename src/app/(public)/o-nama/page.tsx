@@ -75,8 +75,6 @@ export default async function ONamaPage() {
     { naslov: t("sek4_naslov"), tekst: t("sek4_tekst") },
     { naslov: t("sek5_naslov"), tekst: t("sek5_tekst") },
     { naslov: t("sek6_naslov"), tekst: t("sek6_tekst") },
-    { naslov: t("sek7_naslov"), tekst: t("sek7_tekst") },
-    { naslov: t("sek8_naslov"), tekst: t("sek8_tekst") },
   ];
 
   const stubovi = [
