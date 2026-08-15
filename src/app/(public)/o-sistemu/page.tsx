@@ -127,7 +127,7 @@ export default async function OSistemuPage() {
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             {t("zajednicko_citat")}
-            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">— {t("zajednicko_citat_izvor")}</span>
+            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">{t("zajednicko_citat_izvor")}</span>
           </blockquote>
 
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
@@ -539,16 +539,13 @@ export default async function OSistemuPage() {
             {t("zasto_citat")}
             <span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
-          <p className="text-sm text-kolo-muted font-medium text-center">— {t("zasto_citat_izvor")}</p>
+          <p className="text-sm text-kolo-muted font-medium text-center">{t("zasto_citat_izvor")}</p>
         </div>
       </section>
 
       {/* ── FAQ TIZER ─────────────────────────────────────────────── */}
       <section className="space-y-4">
         <div className="text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
-            {t("faq_tag")}
-          </div>
           <h2 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("faq_naslov")}
           </h2>

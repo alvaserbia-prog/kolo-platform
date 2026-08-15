@@ -77,17 +77,10 @@ export default async function ONamaPage() {
     { naslov: t("sek6_naslov"), tekst: t("sek6_tekst") },
   ];
 
-  const stubovi: { naslov: string; tekst: string; podnaslov?: string; podtekst?: string }[] = [
+  const stubovi = [
     { naslov: t("stub1_naslov"), tekst: t("stub1_tekst") },
     { naslov: t("stub2_naslov"), tekst: t("stub2_tekst") },
-    {
-      naslov: t("stub3_naslov"),
-      tekst: t("stub3_tekst"),
-      // Sastav organa stoji kao zaseban blok u trećem stubu — imena su javni
-      // podatak iz registra, ali ne pripadaju opisu nadležnosti.
-      podnaslov: t("stub3_sastav_naslov"),
-      podtekst: t("stub3_sastav_tekst"),
-    },
+    { naslov: t("stub3_naslov"), tekst: t("stub3_tekst") },
   ];
 
   const kljucniDokumenti = [
@@ -361,7 +354,7 @@ export default async function ONamaPage() {
           <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3 px-1">
             {t("sek_tag")}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {sekundarne.map((k) => (
               <div key={k.naslov} className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-2">
                 <p className="font-semibold text-kolo-text text-sm leading-snug">{k.naslov}</p>
@@ -418,12 +411,6 @@ export default async function ONamaPage() {
                 <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">{stub.naslov}</p>
               )}
               <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>{stub.tekst}</p>
-              {stub.podnaslov && stub.podtekst && (
-                <div className="mt-4 pt-4 border-t border-kolo-border">
-                  <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-2">{stub.podnaslov}</p>
-                  <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>{stub.podtekst}</p>
-                </div>
-              )}
             </div>
           ))}
         </div>

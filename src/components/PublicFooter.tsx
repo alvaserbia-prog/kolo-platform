@@ -22,16 +22,9 @@ export default async function PublicFooter() {
                 <span key={i}>{line}{i === 0 ? <br /> : null}</span>
               ))}
             </p>
-            {/* Registracioni podaci Fondacije — javni podaci iz Registra
-                zadužbina i fondacija APR. Broj rešenja se NE objavljuje. */}
-            <div className="text-xs text-kolo-muted leading-relaxed space-y-0.5">
-              <p>{t("footer_fondacija_adresa")}</p>
-              <p>{t("footer_fondacija_brojevi")}</p>
-              <p>{t("footer_fondacija_registar")}</p>
-              <p>
-                <a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">kontakt@ekolo.rs</a>
-              </p>
-            </div>
+            <p className="text-xs text-kolo-muted">
+              <a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">kontakt@ekolo.rs</a>
+            </p>
           </div>
 
           {/* Sistem */}
@@ -68,8 +61,18 @@ export default async function PublicFooter() {
           </div>
         </div>
 
-        {/* Donja traka — copyright + licence (na svakoj strani) */}
+        {/* Donja traka — pravni identitet, copyright i licence (na svakoj
+            strani). Registracioni podaci stoje ovde, a ne u koloni brenda:
+            javni su podaci iz Registra zadužbina i fondacija APR i pripadaju
+            uz copyright, a kolonu brenda su izdužili preko ostalih triju.
+            Broj rešenja se NE objavljuje. */}
         <div className="border-t border-kolo-border pt-5 text-xs text-kolo-muted leading-relaxed text-center space-y-1.5">
+          <p>
+            {t("footer_fondacija_adresa")}
+            <span className="hidden sm:inline"> · </span>
+            <span className="block sm:inline">{t("footer_fondacija_brojevi")}</span>
+          </p>
+          <p>{t("footer_fondacija_registar")}</p>
           <p>{t("footer_copyright")}</p>
           <p>
             {t("footer_softver_label")}: <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer" className="hover:underline">AGPL-3.0</a>
