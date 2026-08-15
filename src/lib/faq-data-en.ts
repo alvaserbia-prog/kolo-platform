@@ -146,110 +146,144 @@ One thing works even before confirmation: if someone gets in touch about your li
     pitanja: [
       {
         id: 1,
-        pitanje: `What is POEN and does it have a monetary value?`,
-        odgovor: `POEN is a ledger record that you have given something valuable to the community — through exchanges with other users, confirmation in the chain of confirmations, work for the community, a donation, or sponsorship.
+        pitanje: `What is POEN, and does it have a value in money?`,
+        odgovor: `POEN is a record in the Protocol's ledger that you have given the community something of value — through an exchange with other members, a confirmation of reality, an operational contribution, a social programme, a donation or sponsorship.
 
-POEN is not money in a legal sense — it is not a means of payment, not electronic money, not a digital asset, and does not represent a debt of the Foundation to you.
+POEN exists only in the Protocol. The record is kept by the Protocol and cannot be taken out of the system — POEN has no form in which it could exist outside it. You do not hold it, and you cannot hand it to anyone outside KOLO.
 
-The guideline of "1 POEN ≈ 1 RSD" serves only as a reference so you know the approximate scale of value — the Foundation does not guarantee that value and does not exchange POEN for money.`,
+POEN is not money. It is not a means of payment, not electronic money, not digital assets, not a financial instrument, and it is not a debt the Foundation owes you. It has no value outside the system: it is not exchanged for money, it is not resold, and the Foundation does not buy it back.
+
+So does it have a value in money? There is no exchange rate. But so that you and the other side can agree on what something is worth, amounts in the system are expressed on a scale where 1 POEN corresponds to 1 dinar. That is a measuring scale for comparison inside the system — the way you express weight in kilograms — not a rate at which something is exchanged for money. The Foundation does not guarantee any value of POEN.`,
       },
       {
         id: 2,
-        pitanje: `Can I cash out POEN or sell it for money?`,
-        odgovor: `No. You cannot exchange POEN for dinars, foreign currency, or any other means of payment. The Foundation does not buy back POEN.
+        pitanje: `Can I cash POEN out or sell it for money?`,
+        odgovor: `No. You cannot exchange POEN for dinars, for a foreign currency, or for any other means of payment. The Foundation neither buys it back nor exchanges it.
 
-You can transfer it to another user in an exchange of goods and services — including the marketplace — or use it to inscribe ZRNO.
+POEN does not even exist outside the Protocol — it has no form in which it could leave the system.
 
-Every transfer of POEN is always recorded in the ledger — and if someone privately arranges a cash deal alongside it, they do so at their own risk: the Foundation neither endorses nor is party to such an arrangement, nor can it prevent it.`,
+What you can do: re-register it to another member for a completed exchange of goods, services or knowledge — including on the Marketplace — or use it to record ZRNO.
+
+Selling POEN for money is not part of the system. POEN has no price, and there is no channel through which the Foundation would recognise, record or protect such an arrangement. Anyone who does so acts outside the system and at their own risk — and every re-registration stays permanently logged in the ledger.`,
       },
       {
         id: 3,
         pitanje: `Does POEN expire?`,
-        odgovor: `Not currently. POEN stays recorded in your ledger until you transfer it to others or deactivate your account.
+        odgovor: `No. POEN stays in your ledger until you re-register it to another member or until you delete your account.
 
-Any future introduction of a POEN "ageing" mechanism (which would encourage circulation rather than accumulation) would be a fundamental change to the system and would require a vote of the Upper Kolo — the Foundation cannot do that on its own.`,
+An expiry is not ruled out forever: a mechanism for POEN to "age", which would encourage circulation instead of hoarding, would be a substantive change to the system. That would be decided by a vote of the Upper Kolo — the Foundation cannot introduce it on its own.`,
       },
       {
         id: 4,
         pitanje: `What is ZRNO and what is it for?`,
-        odgovor: `ZRNO is a second record the system keeps about you, separate from POEN. While POEN records your contribution — what you have given to the community — ZRNO records your standing, a measure of more enduring participation in the community. From that standing two things follow: a vote in decisions about the system's rules, and a recorded position that changes with your activity in the system. ZRNO is not a share, a stock, or a digital asset and carries no interest or return — it shows how much of your contribution you have reinvested into the community, not how much the community owes you.`,
+        odgovor: `ZRNO is a record separate from POEN. Where POEN records what you have given the community, ZRNO shows how much of that you have put back into it — and from that stake comes your say in decisions about the rules of the system.
+
+How it is acquired. You record ZRNO with POEN you already have. How much POEN one ZRNO takes is shown by the coefficient. You can also write ZRNO off.
+
+How it gives you a vote. You lock recorded ZRNO to make it active — only active ZRNO carries voting power. The vote does not grow in a straight line: the number of votes is the square root of the number of active ZRNO, so someone with a hundred times more ZRNO has ten times more votes, not a hundred. That way no one can take over decision-making by accumulating.
+
+What ZRNO is not. It is not a share, not a stock, not digital assets, not a financial instrument. It bears no interest and no dividend, no one pays you anything on account of it, and it is not re-registered to another member. It shows how much you have put into the community, not how much it owes you.`,
       },
       {
         id: 5,
-        pitanje: `What is the tax and fiscal situation?`,
-        odgovor: `POEN is not money or legal tender, and exchanges in POEN are not payment transactions under payment services regulations. KOLO does not calculate taxes or issue fiscal receipts on your behalf. Nevertheless, the exchange of goods and services may have tax implications for you depending on what you do and at what scale — general regulations apply. The Foundation does not provide tax advice; each user is responsible for their own tax obligations. If you regularly provide goods or services, consult an accountant.`,
+        pitanje: `What about taxes and fiscal receipts?`,
+        odgovor: `The Foundation does not calculate tax for you and does not issue fiscal receipts in your name. POEN is neither money nor legal tender, and re-registering POEN is not a payment transaction within the meaning of payment services regulations.
+
+POEN is not income in money. It is not paid out, it is not exchanged for dinars, and it cannot leave the Protocol. The 1 POEN = 1 dinar ratio is a measuring scale inside the system, not a price or a rate — POEN has no market on which a value outside the system could be established.
+
+But KOLO does not cancel obligations you already have. If you occasionally pass on a surplus or help someone out, nothing changes. If you make your living selling goods or providing services, the same regulations apply as outside KOLO — regardless of whether the arrangement is recorded in POEN.
+
+The Foundation does not provide tax advice and you are responsible for your own tax obligations. If you provide goods or a service regularly, consult an accountant.`,
       },
       {
         id: 38,
-        pitanje: `What exactly does the "two separate acts" principle mean?`,
-        odgovor: `The two-separate-acts principle describes the legal nature of every POEN credit from the Protocol.
+        pitanje: `What does the principle of two separate acts mean?`,
+        odgovor: `It means POEN is never a consideration for something you have given. These are two separate events, not an exchange.
 
-Act 1: the user contributes to the common good or holds a status that confirms such contribution (makes a donation, contributes through an operational programme, confirms a new user in the chain of confirmations, holds a status that triggers a social programme, or submits a sponsorship application).
+Act one — you do something. You contribute to the common good or hold a status the system recognises: you donate, carry out a task from the operational contribution, confirm the reality of a new member, meet the conditions of a social programme, or submit a sponsorship application.
 
-Act 2: the Protocol algorithmically and deterministically records POEN according to the Rules — without discretion, without a contract, without counter-performance.
+Act two — the Protocol records POEN. Automatically, under a rule written down in advance in the Rulebook. Without anyone's decision, without a contract and without a counter-performance.
 
-These two acts are legally independent — there is no contract between the user and the Foundation under which doing X would entitle the user to Y POEN, nor does the user have a claim against the Foundation for having POEN recorded.`,
+Why that matters. There is no contract between those two acts. There is no arrangement under which doing X earns you Y POEN, and you have no claim against the Foundation for POEN to be recorded. That is why a donation is not a purchase of POEN: you donate because you want to support the community, and POEN is recorded because that is what the rules say — not because you paid for it.`,
       },
       {
         id: 40,
-        pitanje: `Is this a pyramid scheme or a cryptocurrency?`,
+        pitanje: `Is this some kind of pyramid scheme or crypto?`,
         odgovor: `It is neither.
 
-A pyramid scheme works by having new members pay so that earlier members can profit — in KOLO there is no level below you, no commission on others' contributions, and POEN is not purchased with money. The sum is always zero: every POEN that exists is recorded as an equal-and-opposite negative in the Protocol's ledger, so nobody can create POEN out of thin air.
+Why it is not a pyramid scheme. A pyramid scheme works by having new members pay so that earlier ones earn. In KOLO, entry costs nothing, POEN is not bought for money, and there is no level below you. When you confirm someone, 1,000 POEN is recorded for each of you — once, and the same for both. You get nothing from anything that person does afterwards; there is no commission on other people's contributions.
 
-A cryptocurrency exists on a blockchain network, has a market price, and can be bought and sold on exchanges — POEN is not a token, does not exist outside KOLO, cannot be exchanged for dinars, and has no market price.
+Why it is not crypto. A cryptocurrency exists on a blockchain network, has a market price, and is bought and sold on an exchange. POEN is not a token, does not exist outside the Protocol, is not exchanged for money and has no market price.
 
-POEN is, simply, a record of what you have given to the community — similar to a bookkeeping entry, not to money. The value lies in the network of people who exchange work, goods and knowledge with one another, not in speculation.`,
+Where POEN comes from. No one can record POEN for themselves. It arises only when the Protocol records it under a rule written down in advance, and every recorded POEN has an equal minus in the Protocol's ledger. That is why the amount of POEN in circulation is always exactly equal to the sum of the contributions recorded — nothing comes out of nothing.
+
+POEN is a record of what you have given the community, closer to a bookkeeping entry than to money. The value is in the network of people exchanging work, goods and knowledge, not in speculation.`,
       },
       {
         id: 51,
-        pitanje: `What if the system collapses or the Foundation ceases operations — do I lose everything?`,
-        odgovor: `POEN and ZRNO are not money held in your name, nor are they a debt the Foundation owes you — they are records of how much you have contributed and exchanged within the community. Therefore, neither while the system is running nor if it one day ceases do you have a monetary claim you could enforce.
+        pitanje: `What if the system fails or the Foundation ceases to operate — do I lose everything?`,
+        odgovor: `Let us be open about it: if the system one day stops, your record ceases to be worth anything as a possibility of exchange. That is a loss. But it is not a monetary loss, and here is why.
 
-The value you have created through KOLO is not numbers on a screen, but the real exchanges of goods and services that have already happened. Those remain your experience and your network of relationships, regardless of the platform's fate.
+You have no monetary claim — neither now nor then. POEN and ZRNO are not money sitting in your name, nor a debt the Foundation owes you. They are records of how much you have contributed and exchanged in the community. So there is no amount anyone would owe you, neither while the system runs nor if it stops.
 
-If the Foundation were to cease operations, its rules are clear: any remaining assets do not belong to the founders or to any private party, but are transferred to another foundation, endowment or association with the same or similar goals, with preference for those working in the spirit of solidarity economy. No one can profit from shutting the system down.
+What you have already exchanged stays yours. The work, goods and knowledge that passed from hand to hand really happened, and no one annuls them. The same goes for the people you have met.
 
-The software on which KOLO runs is published under an open licence (AGPL-3.0), and the content under an open licence. Even if the particular organisation disappears, the tool and knowledge remain available — the community can continue or rebuild the system on the same foundations. The common good does not end with the closure of one organisation.`,
+No one can profit from the Foundation. Under the Statute, if it ceases to operate the remaining assets do not go to the founders or to anyone privately, but are handed over to another foundation, endowment or association with the same or similar aims, with preference for those working in the spirit of the solidarity economy. No one can enrich themselves by shutting the system down.
+
+The system can carry on without us. The code KOLO runs on is public and published on GitHub — anyone can take it, run it and continue. The software is under the AGPL-3.0 licence and the content under CC BY-SA. If this particular organisation disappears, the tool and the knowledge remain. The common good does not end when one organisation does.`,
       },
       {
         id: 52,
-        pitanje: `Why is there a cap of 1,000,000 ZRNO if ZRNO cannot be traded? Is there staking or a yield?`,
-        odgovor: `The cap is a fixed, pre-determined number — 1,000,000 ZRNO in total, which cannot be increased or decreased. ZRNO cannot be traded or transferred to another user; it records your standing in the common good, from which your vote in the Upper Kolo derives.
+        pitanje: `Why a ceiling of 1,000,000 ZRNO if ZRNO cannot be traded? Is there staking or a yield?`,
+        odgovor: `Why the ceiling. There are 1,000,000 ZRNO in total and that number can neither be increased nor decreased. That way decision-making cannot be diluted: no one can create new ZRNO later and thereby devalue the vote of those already here. With every recording, the number of ZRNO available in the Protocol falls, so the coefficient is higher.
 
-Although it cannot be traded, ZRNO has an accounting value expressed in POEN: the accounting coefficient shows how many POEN are needed to inscribe one ZRNO. That coefficient grows over time — as the total number of POEN in the system increases and the number of ZRNO available in the Protocol decreases with each inscription.
+ZRNO is not traded. It is not re-registered to another member and it does not leave the Protocol. It records your standing in the common good, from which your vote in the Upper Kolo follows.
 
-There is no staking, interest or yield. ZRNO carries no dividend, interest or right to a liquidation surplus. The accounting value changes only through the coefficient as the system grows — but that change is not a guaranteed return, is not paid out by any person, and is realised exclusively in POEN, which has no value outside the system.`,
+Locking is not staking. You lock recorded ZRNO only so that your vote can be counted — only active ZRNO carries voting power. Locking brings you no POEN, no interest and no compensation of any kind. The coefficient grows the same whether your ZRNO is locked or free — locking gains you nothing but the vote.
+
+Writing off does not return the same amount — and we say that plainly. A write-off goes at the coefficient in force at that moment. Since the coefficient grows as the system grows, a write-off will usually give you more POEN than you put in. That difference is not guaranteed, no one promises it, and no person pays it out.
+
+But that is not income. The difference exists solely in POEN, which has no value outside the system, is not exchanged for money and cannot leave the Protocol. You have no profit and no income in money — you have a larger record in the ledger of contributions. So you do not record ZRNO because it pays off, but because you want a say in decisions.`,
       },
       {
         id: 53,
-        pitanje: `Is the confirmation entry (1,000 POEN) a recruitment commission or an airdrop I can farm?`,
-        odgovor: `No. It is not a recruitment commission, not an airdrop, and it cannot be farmed.
+        pitanje: `Is the 1,000 POEN recorded on confirmation a recruitment commission or an airdrop I can farm?`,
+        odgovor: `No. It is not a recruitment commission, it is not an airdrop, and it cannot be farmed.
 
-When someone confirms you, the Protocol credits 1,000 POEN to both you and the person who confirmed you — once and symmetrically, the same amount for each. There are no "levels" above or below you and nothing "flows upward" through some network of people benefiting from your confirmation. This is not a marketing scheme with commissions.
+The record is symmetrical. When someone confirms you, the Protocol records 1,000 POEN for each of you — once, and in the same amount. There is no level above you or below you, and nothing flows upward through a network of people who would profit from your confirmation.
 
-The credit is not compensation for your data either — it is an automatic act of the Protocol under the rule: when a confirmation record is made, the system deterministically credits POEN without any contract or negotiation.
+The record is not a fee. Neither for your work nor for your data. It is an automatic act of the Protocol under a rule written down in advance: once the record of a confirmation exists, POEN is recorded without a contract and without haggling.
 
-Farming makes no sense for several reasons. POEN cannot be cashed out — you cannot exchange it for dinars or for anything outside the system, so there is nothing to "extract". The principle is one person — one account, and confirmation rests on personal acquaintance and the responsibility of the person who confirmed you who answers for the truth of that statement; you cannot invent non-existent people. Moreover, the sum of all records is always zero: every credited POEN has an equal negative in the Protocol's ledger, so no one creates value from nothing.
+Why farming makes no sense:
 
-If someone does fraudulently confirm — confirms someone who doesn't exist or has another account — it is found to be a false confirmation and reversed, with cascading consequences for all such links.`,
+• POEN is not cashed out — there is nothing to extract from the system.
+
+• The principle is one person, one account, and confirmation rests on personal acquaintance. You cannot invent people.
+
+• Whoever confirms someone who is not a real person loses those 1,000 POEN, and for abuse also loses the right to confirm anyone further.
+
+• Contribution to exchange opens once per account and is not repeated.
+
+• Every recorded POEN has an equal minus in the Protocol — no one creates value out of nothing.
+
+A false confirmation is annulled, and with it all the links that followed from it.`,
       },
       {
         id: 54,
-        pitanje: `The founding channel records up to 2,400,000 POEN for "founders" — isn't that those at the top crediting themselves with money?`,
-        odgovor: `No. The founding channel does not credit money — POEN is not money, and the amount confers neither ownership nor control over the system.
+        pitanje: `The founding channel records up to 2,400,000 POEN to the "founders" — isn't that the top recording money for itself?`,
+        odgovor: `No. The founding channel records no money — POEN is not money, and the amount brings neither ownership nor power over the system.
 
-The channel belatedly records work carried out before the platform existed: designing the system, writing the rules, legal and organisational preparation, creating the documentation. That work happened when there was no place to record it, so it is recorded now — like any other contribution.
+What is being recorded. Work done before the platform existed: designing the system, writing the rules, legal and organisational preparation, producing the documentation. Along with it, all the financial and other costs incurred before the Foundation's bank account was opened — the founders bore those personally, because at that point the Foundation did not yet exist as an entity that could pay. All of it took place when there was nowhere to record it, so it is recorded afterwards — like any other contribution.
 
-Founding POEN has the same status as any other: it is non-convertible, has no value outside the system and creates no claim against the Foundation.
+The same status as any other POEN. Non-convertible, without value outside the system, without any claim against the Foundation. The costs are not reimbursed: the founders got back not a single dinar of what they put in, but a record in the same ledger in which every other contribution is entered.
 
-The circle of founders is closed. The persons with that status were established in advance by an internal act of the Foundation and are publicly disclosed; no subsequent decision can expand that circle.
+There are five founders and the circle is closed. They were determined in advance by an internal act of the Foundation, and no later decision can widen that circle.
 
-The pace is not arbitrary either. One step of 24,000 POEN is recorded only when the total number of POEN in the system grows by the next 100,000. The founding contribution thus grows only as fast as the whole system grows; when the 100th step is reached (a total of 2,400,000 POEN), the channel closes permanently and irrevocably.
+The pace is not arbitrary. One step of 24,000 POEN is recorded only once the total amount of POEN in the system grows by another 100,000 — and the founding record itself counts towards that threshold. It means that while the channel lasts, the founding contribution makes up 24% of every newly recorded POEN. By the time the channel is exhausted at 2,400,000, the system has grown by 10,000,000 POEN and the channel closes permanently and irrevocably. From then on the founders' share only falls, because the system keeps growing while the channel no longer works.
 
-A larger balance does not confer greater power. Voting in the Upper Kolo is quadratic — voting power grows as the square root of the number of ZRNO, so a large POEN balance does not give control over the system.
+A larger balance does not give proportionally more power. Voting in the Upper Kolo is quadratic: the number of votes is the square root of the number of active ZRNO. Someone with a hundred times more ZRNO has ten times more votes, not a hundred — so even the largest POEN balance gives no control over decisions.
 
-All data is public: total recorded amount, number of steps, remainder to the cap, and each founder's share.`,
+What you can check. The total amount recorded, the number of steps carried out and how much is left to the ceiling are available on the Founding Contribution page. The register of founders with pseudonyms and shares, including who has been credited how much, is available to full members.`,
       },
     ],
   },

@@ -157,110 +157,144 @@ Egyvalami megerősítés előtt is működik: ha valaki a hirdetésed kapcsán k
     pitanja: [
       {
         id: 1,
-        pitanje: `Mi az a POEN, és van-e dinárban kifejezett értéke?`,
-        odgovor: `A POEN nyilvántartási bejegyzés arról, hogy értékeset adtál a közösségnek — más felhasználókkal folytatott cserével, megerősítési láncbeli megerősítéssel, a közösségért végzett munkával, adománnyal vagy patronálással.
+        pitanje: `Mi az a POEN, és van-e pénzben kifejezett értéke?`,
+        odgovor: `A POEN a Protokoll nyilvántartásában szereplő bejegyzés arról, hogy értékeset adtál a közösségnek — más tagokkal folytatott csere, a valóság megerősítése, működési hozzájárulás, szociális program, adomány vagy patronálás útján.
 
-A POEN jogi értelemben nem pénz — nem fizetőeszköz, nem elektronikus pénz, nem digitális vagyon, és nem jelent az Alapítvány részéről fennálló tartozást feléd.
+A POEN csak a Protokollban létezik. A bejegyzést a Protokoll vezeti, és nem vihető ki a rendszerből — a POEN-nek nincs olyan formája, amelyben azon kívül létezne. Nem tartod a kezedben, és nem adhatod át senkinek a KOLO-n kívül.
 
-Az „1 POEN ≈ 1 RSD" arány csupán tájékoztató támpont, hogy tudd, milyen nagyságrendről van szó — az Alapítvány ezt az értéket nem garantálja, és a POEN-t nem váltja pénzre.`,
+A POEN nem pénz. Nem fizetőeszköz, nem elektronikus pénz, nem digitális vagyon, nem pénzügyi eszköz, és nem az Alapítvány feléd fennálló tartozása. A rendszeren kívül nincs értéke: nem váltható dinárra, nem adható tovább, és az Alapítvány nem vásárolja vissza.
+
+Van-e akkor pénzben kifejezett értéke? Árfolyam nincs. De hogy te és a másik fél meg tudjatok állapodni abban, mi mennyit ér, a rendszerben az összegeket olyan arányban fejezzük ki, amelyben 1 POEN 1 dinárnak felel meg. Ez a rendszeren belüli összehasonlítás mérőskálája — ahogy a súlyt kilogrammban fejezed ki —, nem pedig árfolyam, amelyen valamit pénzre váltanak. Az Alapítvány a POEN semmilyen értékét nem szavatolja.`,
       },
       {
         id: 2,
-        pitanje: `Pénzzé tehetem-e a POEN-t, vagy eladhatom-e pénzért?`,
-        odgovor: `Nem. A POEN nem cserélhető dinárra, külföldi valutára vagy bármilyen más fizetőeszközre. Az Alapítvány nem vásárolja vissza a POEN-t.
+        pitanje: `Készpénzre válthatom vagy eladhatom a POEN-t?`,
+        odgovor: `Nem. A POEN nem váltható dinárra, külföldi valutára, sem semmilyen más fizetőeszközre. Az Alapítvány nem vásárolja vissza és nem váltja be.
 
-Átadhatod más felhasználónak javak és szolgáltatások cseréje során — a Piacon is —, vagy ZRNO-t jegyezhetsz be általa.
+A POEN a Protokollon kívül nem is létezik — nincs olyan formája, amelyben kiléphetne a rendszerből.
 
-Maga a POEN-átadás mindig rögzül a nyilvántartásban; ha pedig emellett valaki magánúton pénzben állapodik meg, azt saját felelősségére teszi: az Alapítvány az ilyen megállapodást nem támogatja, nem részese, és megakadályozni sem tudja.`,
+Amit megtehetsz: átírhatod egy másik tagnak egy lebonyolított javak-, szolgáltatás- vagy tudáscseréért — a Piacot is beleértve —, vagy ZRNO-t jegyezhetsz be vele.
+
+A POEN pénzért való eladása nem része a rendszernek. A POEN-nek nincs ára, és nincs olyan csatorna, amelyen keresztül az Alapítvány egy ilyen megállapodást elismerne, nyilvántartana vagy védene. Aki így jár el, azt a rendszeren kívül és saját felelősségére teszi — és minden átírás tartósan rögzítve marad a nyilvántartásban.`,
       },
       {
         id: 3,
         pitanje: `Lejár-e a POEN?`,
-        odgovor: `Jelenleg nem. A POEN nyilvántartva marad a bejegyzésedben mindaddig, amíg át nem adod másoknak, vagy amíg nem inaktiválod a fiókodat.
+        odgovor: `Nem. A POEN a nyilvántartásodban marad, amíg át nem írod egy másik tagnak, vagy amíg nem törlöd a fiókodat.
 
-A POEN „öregedési" mechanizmusának esetleges bevezetése (amely a felhalmozás helyett a körforgást ösztönözné) a rendszer lényegi megváltoztatása volna, és a Felső Kolo szavazását igényelné — az Alapítvány ezt önmagában nem hozhatja meg.`,
+A lejárat nincs örökre kizárva: a POEN „öregedésének" mechanizmusa, amely a felhalmozás helyett a forgást ösztönözné, a rendszer lényegi módosítása lenne. Erről a Felső Kolo döntene szavazással — az Alapítvány ezt önmagában nem vezetheti be.`,
       },
       {
         id: 4,
-        pitanje: `Mi az a ZRNO, és mire szolgál?`,
-        odgovor: `A ZRNO a második bejegyzés, amelyet a rendszer vezet rólad, a POEN-től elkülönítve. Míg a POEN a hozzájárulásodat rögzíti — azt, amit a közösségnek adtál —, a ZRNO a helyzetedet, a közösségben való tartósabb részvételed mértékét. Ebből a helyzetből két dolog következik: szavazat a rendszer szabályairól szóló döntésekben, valamint egy nyilvántartott helyzet, amely a rendszerbeli tevékenységgel változik. A ZRNO nem részesedés, nem részvény és nem digitális vagyon, és nem hoz sem kamatot, sem hozamot — azt mutatja, mennyit fektettél vissza a hozzájárulásodból a közösségbe, nem pedig azt, hogy a közösség mennyivel tartozik neked.`,
+        pitanje: `Mi az a ZRNO, és mire való?`,
+        odgovor: `A ZRNO a POEN-től elkülönült bejegyzés. Míg a POEN azt rögzíti, mit adtál a közösségnek, a ZRNO azt mutatja, ebből mennyit fektettél vissza bele — és ebből a részesedésből ered a szavad a rendszer szabályairól szóló döntésekben.
+
+Hogyan szerezhető. A ZRNO-t a már meglévő POEN-eddel jegyzed be. Hogy egy ZRNO hány POEN-be kerül, azt a koefficiens mutatja. A ZRNO le is írható.
+
+Hogyan ad szavazatot. A bejegyzett ZRNO-t lezárod, hogy aktívvá váljon — csak az aktív ZRNO hordoz szavazóerőt. A szavazat nem egyenes vonalban nő: a szavazatok száma az aktív ZRNO-k négyzetgyöke, így akinek százszor több ZRNO-ja van, annak tízszer több szavazata van, nem százszor. Így senki nem veheti át a döntéshozatalt felhalmozással.
+
+Mi nem a ZRNO. Nem üzletrész, nem részvény, nem digitális vagyon, nem pénzügyi eszköz. Nem hoz kamatot és osztalékot, senki nem fizet ki rá semmit, és nem írható át másik tagnak. Azt mutatja, mennyit fektettél a közösségbe, nem azt, hogy az mennyivel tartozik neked.`,
       },
       {
         id: 5,
-        pitanje: `Hogyan viszonyul mindez az adózáshoz és a számlaadáshoz?`,
-        odgovor: `A POEN nem pénz és nem törvényes fizetőeszköz, a POEN-ben történő csere pedig nem pénzforgalmi művelet a pénzforgalmi szolgáltatásokról szóló szabályok értelmében. A KOLO nem számol adót, és nem állít ki adóügyi számlát a nevedben. Ugyanakkor a javak és szolgáltatások cseréjének lehetnek adójogi következményei számodra, attól függően, mit és milyen mértékben teszel — erre az általános szabályok vonatkoznak. Az Alapítvány nem ad adótanácsot; a saját adókötelezettségeiért a felhasználó felel. Ha rendszeresen nyújtasz árut vagy szolgáltatást, kérd könyvelő tanácsát.`,
+        pitanje: `Mi a helyzet az adóval és a nyugtaadással?`,
+        odgovor: `Az Alapítvány nem számol el helyetted adót, és nem állít ki a nevedben adóügyi nyugtát. A POEN nem pénz és nem törvényes fizetőeszköz, a POEN átírása pedig nem pénzforgalmi művelet a pénzforgalmi szolgáltatásokra vonatkozó szabályok értelmében.
+
+A POEN nem pénzbeli jövedelem. Nem kerül kifizetésre, nem váltható dinárra, és nem hagyhatja el a Protokollt. Az 1 POEN = 1 dinár arány a rendszeren belüli mérőskála, nem ár és nem árfolyam — a POEN-nek nincs piaca, amelyen a rendszeren kívüli érték kialakulna.
+
+De a KOLO nem szünteti meg a meglévő kötelezettségeidet. Ha alkalmanként továbbadod a feleslegedet vagy segítesz valakinek, semmi nem változik. Ha áruk értékesítéséből vagy szolgáltatásnyújtásból élsz, ugyanazok a szabályok érvényesek, mint a KOLO-n kívül — függetlenül attól, hogy a megállapodás POEN-ben van-e rögzítve.
+
+Az Alapítvány nem ad adótanácsot, és a saját adókötelezettségeidért te felelsz. Ha rendszeresen nyújtasz árut vagy szolgáltatást, kérj tanácsot könyvelőtől.`,
       },
       {
         id: 38,
-        pitanje: `Pontosan mit jelent a két különálló aktus elve?`,
-        odgovor: `A két különálló aktus elve a Protokoll általi minden egyes POEN-rögzítés jogi természetét írja le.
+        pitanje: `Mit jelent a két különálló aktus elve?`,
+        odgovor: `Azt jelenti, hogy a POEN sohasem ellenszolgáltatás azért, amit adtál. Ez két különálló esemény, nem csere.
 
-1. aktus: a felhasználó hozzájárul a közjóhoz, vagy olyan státusza van, amely ezt igazolja (adományoz, működési programon keresztül járul hozzá, új felhasználót megerősít a megerősítési láncban, szociális programot indító státusza van, vagy patronálási kérelmet nyújt be).
+Első aktus — teszel valamit. Hozzájárulsz a közös jóhoz, vagy olyan státuszod van, amelyet a rendszer elismer: adományozol, elvégzel egy működési hozzájárulási feladatot, megerősíted egy új tag valódiságát, megfelelsz egy szociális program feltételeinek, vagy patronálási kérelmet nyújtasz be.
 
-2. aktus: a Protokoll algoritmikusan és determinisztikusan rögzíti a POEN-t a Szabályzat szerint — mérlegelés nélkül, szerződés nélkül, ellenszolgáltatás nélkül.
+Második aktus — a Protokoll POEN-t rögzít. Automatikusan, a Szabályzatban előre lefektetett szabály szerint. Bárki döntése nélkül, szerződés nélkül és ellenszolgáltatás nélkül.
 
-E két aktus jogilag független egymástól — nincs olyan szerződés a felhasználó és az Alapítvány között, amely szerint az elvégzett X-ért Y POEN járna, és a felhasználónak nincs követelése az Alapítvánnyal szemben a POEN rögzítésére.`,
+Miért fontos ez. A két aktus között nincs szerződés. Nincs olyan megállapodás, amely szerint X elvégzéséért Y POEN járna, és nincs követelésed az Alapítvánnyal szemben arra, hogy POEN-t rögzítsen neked. Ezért az adomány nem POEN-vásárlás: azért adományozol, mert támogatni akarod a közösséget, a POEN pedig azért rögzül, mert a szabályok így szólnak — nem azért, mert kifizetted.`,
       },
       {
         id: 40,
-        pitanje: `Ez valamiféle piramisjáték vagy kripto?`,
+        pitanje: `Valamiféle piramisjáték vagy kripto ez?`,
         odgovor: `Egyik sem.
 
-A piramisjáték úgy működik, hogy az új tagok fizetnek azért, hogy a korábbiak keressenek — a KOLO-ban nincs alattad szint, nincs jutalék mások hozzájárulásából, és a POEN nem vásárolható meg pénzért. Az összeg mindig nulla: minden létező POEN ugyanakkora mínuszként szerepel a Protokoll nyilvántartásában, így senki sem hozhat létre POEN-t a semmiből.
+Miért nem piramisjáték. A piramisjáték úgy működik, hogy az új tagok fizetnek, hogy a korábbiak keressenek. A KOLO-ban a belépés ingyenes, a POEN nem vásárolható pénzért, és nincs alattad szint. Amikor megerősítesz valakit, 1.000-1.000 POEN rögzül neked is, neki is — egyszeri alkalommal és mindkettőtöknek azonos összegben. Abból, amit az illető később csinál, neked semmi nem jár; mások hozzájárulásaiból nincs jutalék.
 
-A kriptovaluta blokklánc-hálózaton létezik, piaci ára van, és tőzsdén vehető-eladható — a POEN nem token, a KOLO-n kívül nem létezik, nem váltható dinárra, és nincs piaci ára.
+Miért nem kripto. A kriptovaluta blokklánc-hálózaton létezik, piaci ára van, és tőzsdén adják-veszik. A POEN nem token, a Protokollon kívül nem létezik, nem váltható dinárra, és nincs piaci ára.
 
-A POEN egyszerűen bejegyzés arról, mit adtál a közösségnek: közelebb áll egy könyvelési tételhez, mint a pénzhez. Az érték az emberek hálózatában van, akik munkát, javakat és tudást cserélnek egymással, nem a spekulációban.`,
+Honnan jön a POEN. Senki nem rögzíthet magának POEN-t. Csak úgy keletkezik, hogy a Protokoll előre lefektetett szabály szerint rögzíti, és minden rögzített POEN-nek ugyanakkora mínusza van a Protokoll nyilvántartásában. Ezért a forgalomban lévő POEN mennyisége mindig pontosan egyenlő a rögzített hozzájárulások összegével — semmi nem keletkezik a semmiből.
+
+A POEN annak bejegyzése, mit adtál a közösségnek, közelebb áll egy könyvelési tételhez, mint a pénzhez. Az érték a munkát, javakat és tudást cserélő emberek hálózatában van, nem a spekulációban.`,
       },
       {
         id: 51,
-        pitanje: `Mi történik, ha a rendszer megbukik, vagy az Alapítvány beszünteti a működését — mindent elveszítek?`,
-        odgovor: `A POEN és a ZRNO nem a nevedre szóló pénz, és nem is olyan tartozás, amellyel az Alapítvány neked tartozik — bejegyzések arról, mennyivel járultál hozzá a közösséghez, és mennyit cseréltél benne. Ezért sem a rendszer működése alatt, sem ha az egy nap megszűnne, nincs olyan pénzkövetelésed, amelyet érvényesíthetnél.
+        pitanje: `Mi van, ha a rendszer megbukik vagy az Alapítvány megszűnik — mindent elveszítek?`,
+        odgovor: `Legyünk őszinték: ha a rendszer egy nap megáll, a nyilvántartásod megszűnik értéket jelenteni mint cserelehetőség. Ez veszteség. De nem pénzbeli veszteség, és íme, miért.
 
-Az az érték, amelyet a KOLO-n keresztül szereztél, nem a képernyőn látható számok, hanem a javak és szolgáltatások valóságos, már megtörtént cseréi. Ezek a te tapasztalatodként és a te kapcsolati hálódként megmaradnak, a platform sorsától függetlenül.
+Nincs pénzbeli követelésed — sem most, sem akkor. A POEN és a ZRNO nem a nevedre álló pénz, és nem is az Alapítvány feléd fennálló tartozása. Ezek bejegyzések arról, mennyit járultál hozzá és mennyit cseréltél a közösségben. Ezért nincs olyan összeg, amellyel bárki tartozna neked — sem amíg a rendszer működik, sem ha megáll.
 
-Ha az Alapítvány beszüntetné a működését, a szabályai egyértelműek: a megmaradt vagyon nem az alapítókat és nem is bárkit magánszemélyként illet, hanem azonos vagy hasonló célú másik alapítványnak, közalapítványnak vagy egyesületnek adják át, előnyben részesítve azokat, akik a szolidáris gazdaság szellemében működnek. A rendszer megszűnéséből senki sem gazdagodhat meg.
+Amit már elcseréltél, a tiéd marad. A kézről kézre került munka, javak és tudás valóban megtörténtek, és ezeket senki nem érvényteleníti. Ugyanez áll azokra az emberekre is, akiket megismertél.
 
-A szoftver, amelyen a KOLO fut, nyílt licenc (AGPL-3.0) alatt jelent meg, a tartalom pedig ugyancsak nyílt licenc alatt. Ha egy konkrét szervezet meg is szűnik, az eszköz és a tudás elérhető marad — a közösség folytathatja, vagy ugyanezeken az alapokon újra felépítheti a rendszert. A közjó nem szűnik meg egyetlen szervezet megszűnésével.`,
+Az Alapítványból senki nem húzhat hasznot. Az Alapszabály szerint megszűnés esetén a megmaradt vagyon nem az alapítókat és nem is bárkit magánszemélyként illet, hanem azonos vagy hasonló célú másik alapítványnak, közhasznú alapítványnak vagy egyesületnek adják át, elsőbbséget adva azoknak, akik a szolidáris gazdaság szellemében dolgoznak. A rendszer megszüntetésével senki nem gazdagodhat.
+
+A rendszer nélkülünk is folytatódhat. A kód, amelyen a KOLO fut, nyilvános és a GitHubon elérhető — bárki elviheti, elindíthatja és folytathatja. A szoftver AGPL-3.0 licenc alatt áll, a tartalom CC BY-SA alatt. Ha ez a konkrét szervezet eltűnik, az eszköz és a tudás megmarad. A közös jó nem szűnik meg egyetlen szervezet megszűnésével.`,
       },
       {
         id: 52,
-        pitanje: `Miért van 1 000 000 ZRNO felső határ, ha a ZRNO nem kereskedhető? Van staking vagy hozam?`,
-        odgovor: `A határ rögzített, előre meghatározott szám — összesen 1 000 000 ZRNO, amely sem nem növelhető, sem nem csökkenthető. A ZRNO nem kereskedhető és nem ruházható át más felhasználóra; a közjóban elfoglalt helyzetedet rögzíti, amelyből a Felső Kolo-beli szavazat következik.
+        pitanje: `Mire jó az 1.000.000 ZRNO felső korlát, ha a ZRNO-val nem lehet kereskedni? Van staking vagy hozam?`,
+        odgovor: `Mire jó a korlát. Összesen 1.000.000 ZRNO létezik, és ez a szám sem nem növelhető, sem nem csökkenthető. Így a döntéshozatal nem hígítható fel: senki nem hozhat létre utólag új ZRNO-t, és nem értéktelenítheti el azok szavazatát, akik már itt vannak. Minden bejegyzéssel csökken a Protokollban rendelkezésre álló ZRNO száma, így a koefficiens magasabb.
 
-Bár nem kereskednek vele, a ZRNO-nak van POEN-ben kifejezett elszámolási értéke: az elszámolási együttható mutatja, mennyi POEN szükséges egy ZRNO bejegyzéséhez. Ez az együttható idővel nő — ahogy a rendszerben lévő POEN összmennyisége növekszik, a Protokollban rendelkezésre álló ZRNO mennyisége pedig minden bejegyzéssel csökken.
+A ZRNO-val nem kereskednek. Nem írható át másik tagnak, és nem hagyja el a Protokollt. A közös jóban elfoglalt helyzetedet rögzíti, amelyből a Felső Kolóban való szavazatod ered.
 
-Staking, kamat és hozam nincs. A ZRNO nem jár osztalékkal, kamattal vagy a felszámolási maradványra vonatkozó joggal. Az elszámolási érték kizárólag az együtthatón keresztül változik, ahogy a rendszer növekszik — de ez a változás nem garantált hozam, nem fizeti ki senki, és kizárólag POEN-ben valósul meg, amelynek a rendszeren kívül nincs értéke.`,
+A lezárás nem staking. A bejegyzett ZRNO-t csak azért zárod le, hogy a szavazatod beszámítson — csak az aktív ZRNO hordoz szavazóerőt. A lezárás nem hoz neked sem POEN-t, sem kamatot, sem semmilyen díjazást. A koefficiens ugyanúgy nő, akár le van zárva a ZRNO-d, akár szabad — a lezárással a szavazaton kívül semmit nem nyersz.
+
+A leírás nem ugyanazt az összeget adja vissza — ezt is nyíltan megmondjuk. A leírás az adott pillanatban érvényes koefficiens szerint történik. Mivel a koefficiens a rendszerrel együtt nő, a leírásnál rendszerint több POEN-t kapsz, mint amennyit a bejegyzéskor beletettél. Ez a különbözet nem garantált, senki nem ígéri, és senki nem fizeti ki.
+
+De ez nem jövedelem. A különbözet kizárólag POEN-ben áll fenn, amelynek a rendszeren kívül nincs értéke, nem váltható dinárra, és nem hagyhatja el a Protokollt. Nincs nyereséged és nincs pénzbeli jövedelmed — nagyobb bejegyzésed van a hozzájárulások nyilvántartásában. Ezért a ZRNO-t nem azért jegyzed be, mert megéri, hanem mert szavad akar lenni a döntésekben.`,
       },
       {
         id: 53,
-        pitanje: `A megerősítési bejegyzés (1000 POEN) toborzási jutalék, vagy airdrop, amelyet farmolhatok?`,
+        pitanje: `A megerősítéskor rögzülő 1.000 POEN toborzási jutalék vagy farmolható airdrop?`,
         odgovor: `Nem. Ez nem toborzási jutalék, nem airdrop, és nem farmolható.
 
-Amikor valaki megerősít téged, a Protokoll 1000-1000 POEN-t ír be neked is és annak is, aki megerősített — egyszeri alkalommal és szimmetrikusan, mindkettőtöknek azonos összeget. Nincsenek fölötted vagy alattad „szintek", és semmi sem „folyik felfelé" olyan emberhálózaton át, amely a te megerősítésedből hasznot húzna. Ez nem jutalékos marketing.
+A bejegyzés szimmetrikus. Amikor valaki megerősít téged, a Protokoll 1.000-1.000 POEN-t rögzít neked is, neki is — egyszeri alkalommal és azonos összegben. Nincs szint sem feletted, sem alattad, és semmi nem áramlik felfelé egy olyan hálózaton, amely a te megerősítésedből húzna hasznot.
 
-A bejegyzés nem is az adataidért járó ellenszolgáltatás — a Protokoll automatikus aktusa szabály alapján: amikor megerősítési bejegyzés rögzül, a rendszer determinisztikusan POEN-t ír be, mindenféle szerződés vagy alku nélkül.
+A bejegyzés nem díjazás. Sem a munkádért, sem az adataidért. A Protokoll automatikus aktusa előre lefektetett szabály szerint: amint létrejön a megerősítés bejegyzése, a POEN szerződés és alkudozás nélkül rögzül.
 
-A farmolásnak több okból sincs értelme. A POEN nem tehető pénzzé — nem váltod dinárra, sem a rendszeren kívüli bármi másra, tehát nincs mit „kivenni" belőle. Az elv: egy ember — egy fiók, a megerősítés pedig személyes ismeretségen és a megerősítő felelősségén nyugszik, aki megerősítésével felel az állítás igazságáért; nem létező embereket nem találhatsz ki. Ezenfelül minden bejegyzés összege mindig nulla: minden beírt POEN-nek ugyanakkora mínusza van a Protokoll nyilvántartásában, így senki sem hoz létre értéket a semmiből.
+Miért nincs értelme a farmolásnak:
 
-Ha valaki mégis hamisan megerősít — nem létező személyt, vagy olyat, akinek már van másik fiókja —, azt hamis megerősítésként állapítják meg és semmisítik meg, minden ilyen kapcsolatra kiterjedő, továbbgyűrűző következményekkel.`,
+• A POEN nem váltható készpénzre — nincs mit kivenni a rendszerből.
+
+• Az elv: egy ember — egy fiók, a megerősítés pedig személyes ismeretségen nyugszik. Embereket nem lehet kitalálni.
+
+• Aki olyasvalakit erősít meg, aki nem valódi személy, elveszíti azt az 1.000 POEN-t, visszaélés esetén pedig a további megerősítés jogát is.
+
+• A cseréhez való hozzájárulás fiókonként egyszer nyílik meg, és nem ismétlődik.
+
+• Minden rögzített POEN-nek ugyanakkora mínusza van a Protokollban — senki nem teremt értéket a semmiből.
+
+A hamis megerősítés érvénytelenítésre kerül, és vele mindazok a kapcsolatok, amelyek belőle következtek.`,
       },
       {
         id: 54,
-        pitanje: `Az alapítói csatorna 2 400 000 POEN-ig ír be „alapítóknak" — nem a csúcs írja be magának a pénzt?`,
-        odgovor: `Nem. Az alapítói csatorna nem pénzt ír be — a POEN nem pénz, az összeg pedig sem tulajdont, sem hatalmat nem ad a rendszer felett.
+        pitanje: `Az alapítói csatorna akár 2.400.000 POEN-t rögzít az „alapítóknak" — nem a csúcs írja ez magának a pénzt?`,
+        odgovor: `Nem. Az alapítói csatorna nem pénzt rögzít — a POEN nem pénz, az összeg pedig sem tulajdont, sem hatalmat nem ad a rendszer felett.
 
-A csatorna utólag rögzíti azt a munkát, amely a platform létrejötte előtt folyt: a rendszer megtervezését, a szabályok megírását, a jogi és szervezési előkészítést, a dokumentáció elkészítését. Ez a munka akkor zajlott, amikor nem volt hol rögzíteni, ezért rögzül később — mint minden más hozzájárulás.
+Mit rögzít. A platform létezése előtt elvégzett munkát: a rendszer megtervezését, a szabályok megírását, a jogi és szervezeti előkészítést, a dokumentáció elkészítését. Ezzel együtt mindazokat a pénzügyi és egyéb költségeket, amelyek az Alapítvány számlájának megnyitásáig merültek fel — ezeket az alapítók személyesen viselték, mert az Alapítvány akkor még nem is létezett olyan jogalanyként, amely fizethetett volna. Mindez akkor zajlott, amikor nem volt hol rögzíteni, ezért utólag rögzül — mint minden más hozzájárulás.
 
-Az alapítói POEN státusza ugyanaz, mint bármely másiké: nem konvertibilis, a rendszeren kívül nincs értéke, és nem keletkeztet követelést az Alapítvánnyal szemben.
+Ugyanaz a státusz, mint bármely más POEN-é. Nem konvertálható, a rendszeren kívül értéktelen, az Alapítvánnyal szemben követelést nem alapoz meg. A költségeket nem térítik meg: az alapítók egyetlen dinárt sem kaptak vissza abból, amit beletettek, hanem bejegyzést ugyanabban a nyilvántartásban, amelyben minden más hozzájárulás is szerepel.
 
-Az alapítók köre zárt. Az e státuszú személyeket az Alapítvány belső aktusa előre meghatározta és közzétette; semmilyen későbbi döntés nem bővítheti ezt a kört.
+Öt alapító van, és a kör zárt. Előre meghatározta őket az Alapítvány belső aktusa, és semmilyen későbbi döntés nem bővítheti ezt a kört.
 
-Az ütem sem önkényes. Egy 24 000 POEN-es lépés csak akkor rögzül, amikor a rendszerben lévő POEN összmennyisége további 100 000-rel nő. Az alapítói hozzájárulás így csak annyival nő, amennyivel az egész rendszer; a 100. lépés elérésekor (összesen 2 400 000 POEN) a csatorna véglegesen és visszavonhatatlanul bezárul.
+A tempó nem önkényes. Egy 24.000 POEN-es lépés csak akkor rögzül, amikor a rendszerben lévő POEN összmennyisége újabb 100.000-rel nő — és ebbe a küszöbbe maga az alapítói bejegyzés is beleszámít. Ez azt jelenti, hogy amíg a csatorna tart, az alapítói hozzájárulás minden újonnan rögzített POEN 24%-át teszi ki. Mire a csatorna kimerül 2.400.000-nél, a rendszer 10.000.000 POEN-nel nőtt, a csatorna pedig véglegesen és visszavonhatatlanul bezárul. Onnantól az alapítók részesedése csak csökken, mert a rendszer tovább nő, a csatorna viszont már nem működik.
 
-A nagyobb egyenleg nem jelent nagyobb hatalmat. A Felső Kolo-beli szavazás négyzetes — a szavazóerő a ZRNO-mennyiség négyzetgyökeként nő, így a nagy POEN-egyenleg nem ad ellenőrzést a rendszer felett.
+A nagyobb egyenleg nem ad arányosan több hatalmat. A Felső Koloban a szavazás négyzetes: a szavazatok száma az aktív ZRNO-k négyzetgyöke. Akinek százszor több ZRNO-ja van, annak tízszer több szavazata van, nem százszor — így a legnagyobb POEN-egyenleg sem ad ellenőrzést a döntések felett.
 
-Minden adat nyilvános: az összes rögzített összeg, a lépések száma, a határig hátralévő mennyiség és az egyes alapítók részesedése.`,
+Mit ellenőrizhetsz. A rögzített teljes összeg, a végrehajtott lépések száma és a korlátig hátralévő rész az Alapítói hozzájárulás oldalon elérhető. Az alapítók álnevekkel és részesedésekkel felsorolt jegyzéke — beleértve azt is, kinek mennyi került rögzítésre — a rendes tagok számára hozzáférhető.`,
       },
     ],
   },
