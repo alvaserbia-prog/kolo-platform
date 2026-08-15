@@ -313,6 +313,19 @@ Dve izmene **samo u interfejsu** — akti se ne diraju. Normativni tekst i dalje
 - Dve reči pokvarene ranijom zamenom u srpskom FAQ-u: „perifikaciju", „porifikovala".
 - `skener_uputstvo` je govorio „osobe kojoj **plaćaš**" (hu čak `Beolvasás fizetéshez` = „skeniraj za plaćanje").
 
+### Poništenje prepisa po prijavi razmene (2026-08-15)
+
+Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništenje POEN-a u sistemu bilo je ono iz utvrđene lažne potvrde (dokaz stvarnosti čl. 20a), a `/api/admin/transakcije` ima samo `GET`. FAQ 82 je pri tom već govorio da prepis „može biti poništen po prijavi"; ovo je posao koji tu rečenicu čini istinitom (odluka vlasnika, opcija „b" — napraviti tok, a ne skloniti obećanje).
+
+- **Prijavljuje ISKLJUČIVO pošiljalac** (`smePrijaviti`) — samo on je nešto izgubio. Primalac koji nije dobio robu nije ni prepisao POEN; njegov put je prijava oglasa (moderacija) ili prigovor.
+- **Jedna prijava po prepisu** — `@@unique` na `PrijavaRazmene.transakcijaId`. Druga prijava nad istim prepisom nije nov podatak nego ponovljen pritisak. Uz to najviše **3 otvorene** po korisniku (ista brana kao kod prigovora).
+- 🔴 **Poništenje ne sme da odvede zapis primaoca u minus.** Vraća se `min(iznos, stanje)`, a negativno stanje (nadoknada, čl. 20b) čita se kao **nula** — jedini izuzetak od zabrane negativnog zapisa iz Pravilnika čl. 14 je nadoknada i **ovim se ne proširuje**. Otud i delimičan, pa i nikakav povraćaj; `PrijavaRazmene.vraceno` beleži koliko je stvarno vraćeno, a admin tab prikazuje „vratiće se X" **pre** pritiska na dugme.
+- 🔴 **Protivzapis ide tipom `PONISTENJE_PREPISA`, ne `TRANSFER`.** Brojač putanje doprinosa razmeni (čl. 40b) čita transakcije tipa `TRANSFER`, pa bi povraćaj upisan kao TRANSFER **lažno otvorio korak 2** onome kome je prepis poništen. Istorija se ne prepravlja — protivzapis, kao pri prestanku statusa (čl. 34). Zero-sum netaknut: POEN se seli između dva korisnička zapisa, Protokol se ne pomera.
+- **Ulazna tačka je uz sam prepis** u istoriji POEN-a (`IstorijaKlijent.tsx`), ne na stranici oglasa: odluka se vodi o prepisu, a ne o oglasu, i jedan oglas ume da rodi više prepisa. Dugme vidi samo pošiljalac (`mozePrijaviti` dolazi sa servera); kad je prijava podneta, dugme ustupa mesto ishodu.
+- **Admin tab „Razmene"** (`RazmeneTab.tsx`, ključ `razmene`) — dve odluke, obe uz **obavezno obrazloženje** (ide obema stranama i u revizijski dnevnik): *Poništi prepis* i *Odbaci prijavu*. Nije moderacija (tab „Pijaca") i nije prigovor na odluku Fondacije (tab „Prigovori") — tri različite odluke, tri taba, ne spajati ih.
+- **Kod:** `src/lib/razmena-prijava.ts` (ČISTE funkcije — bez Prisme, jer ih uvozi i admin tab u pretraživaču) + `src/lib/protokol/prijava-razmene.ts` (servisne, re-eksportuje pravila). Rute: `POST /api/transakcije/[id]/prijavi`, `GET /api/admin/prijave-razmene`, `POST .../[id]/{ponisti,odbaci}`. Migracija `20260815120000_prijava_razmene`. Testovi `__tests__/protokol/prijava-razmene.test.ts`. Audit: `PREPIS_PONISTEN`, `PRIJAVA_RAZMENE_ODBACENA`. Badge: tab Razmene + sidebar `adminCekanje`.
+- 🟡 **Akti ovo NE poznaju.** Uslovi čl. 22 kažu da Fondacija nije strana u razmeni, a nijedan akt ne daje joj ovlašćenje da obori prepis. Kod je zato postavljen najuže što se dalo (samo pošiljalac, samo do stanja primaoca, obavezno obrazloženje, pun trag), ali **pre puštanja u ozbiljan rad ovome treba odredba** — najpre u Uslovima (postupak po prijavi) i u Pravilniku uz čl. 14/16. Do tada je to faktička praksa Fondacije, ne pravo primaoca ni obaveza Fondacije.
+
 ### Povod razgovora — oglas u razgovoru (2026-08-10)
 
 Klik na „Kontaktiraj" upisuje `Konverzacija.povodOglasId`, gde **čeka**; prva poruka onoga ko NIJE vlasnik oglasa ga troši i prenosi na `Poruka.oglasId`. Migracija `20260810160000_poruka_oglas_povod`.

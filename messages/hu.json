@@ -348,7 +348,17 @@
     "putanja_zabelezen": "Feljegyezve — a bejegyzés a jóváhagyás vagy a megerősítés után jön létre",
     "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
     "putanja_zakljucan": "Még nem nyílt meg",
-    "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}."
+    "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}.",
+    "prijavi_dugme": "Probléma bejelentése a cseréről",
+    "prijavi_naslov": "Nem teljesült csere bejelentése",
+    "prijavi_opis": "Ha átírtad a POEN-t, és nem kaptad meg a megbeszélteket, jelezd az Alapítványnak. Az átírás nem áll vissza magától — az Alapítvány dönt, és legfeljebb annyi téríthető vissza, amennyi a másik fél nyilvántartásában maradt.",
+    "prijavi_placeholder": "Miben állapodtatok meg, és mi történt.",
+    "prijavi_posalji": "Bejelentés küldése",
+    "prijavi_odustani": "Mégse",
+    "prijavi_ceka": "A bejelentés elküldve — az Alapítvány döntésére vár.",
+    "prijavi_ponistena": "Az átírást a bejelentés alapján érvénytelenítették.",
+    "prijavi_odbacena": "A bejelentést megvizsgálták — az átírás marad.",
+    "prijavi_greska": "A bejelentést nem sikerült elküldeni."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -2354,7 +2364,8 @@
     "doprinos_revizija_bez_obavestenja": "a POEN nyilvántartásba került, de értesítést nem kaptak",
     "doprinos_revizija_bez_transakcije": "tranzakcióra hivatkozás nélkül került nyilvántartásba — kézzel ellenőrizni",
     "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
-    "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre"
+    "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
+    "tab_razmene": "Razmene"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2450,7 +2461,13 @@
     "nadoknada_naslov": "Megtérítés keletkezett a bejegyzéseden",
     "nadoknada_tekst": "Az általad végzett megerősítés érvénytelenítése {iznos} POEN megtérítést keletkeztetett, mert az érvénytelenített POEN nem volt fedezve. A megtérítés nem tartozás és nem hajtható be; a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva.",
     "doprinos_razmeni_naslov": "Cseréhez való hozzájárulást jegyeztünk be neked — {korak}. lépés",
-    "doprinos_razmeni_tekst": "Teljesítetted a cseréhez való hozzájárulás útjának {korak}. lépését, és {iznos} POEN került nyilvántartásba (Szabályzat 40a. cikk)."
+    "doprinos_razmeni_tekst": "Teljesítetted a cseréhez való hozzájárulás útjának {korak}. lépését, és {iznos} POEN került nyilvántartásba (Szabályzat 40a. cikk).",
+    "prijava_razmene_ponistena_naslov": "Az átírás érvénytelenítve",
+    "prijava_razmene_ponistena_tekst": "Az Alapítvány érvénytelenítette a(z) {pseudonim} javára történt átírást. {iznos} POEN visszakerült hozzád. Indokolás: {odluka}",
+    "prijava_razmene_oduzeto_naslov": "Egy átírás érvénytelenítve",
+    "prijava_razmene_oduzeto_tekst": "Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felőli átírást. A nyilvántartásodból {iznos} POEN került vissza. Indokolás: {odluka}",
+    "prijava_razmene_odbacena_naslov": "A csereügyi bejelentésed elbírálva",
+    "prijava_razmene_odbacena_tekst": "Az Alapítvány elbírálta a bejelentésedet, az átírás marad. Indokolás: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
