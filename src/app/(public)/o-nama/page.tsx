@@ -266,12 +266,6 @@ export default async function ONamaPage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-8 pt-6 border-t border-kolo-border">
-            <p className="text-sm font-medium text-kolo-green-900 italic text-center" style={{ lineHeight: "1.7" }}>
-              {t("cilj_tekst")}
-            </p>
-          </div>
         </div>
       </section>
 
