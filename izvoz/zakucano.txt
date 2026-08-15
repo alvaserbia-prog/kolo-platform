@@ -17,18 +17,19 @@ src/components/profil/IndeksSekcija.tsx:66:      .catch(() => setError("Mreža n
 src/components/Sidebar.tsx:195:  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
 src/components/graf/GrafKlijent.tsx:402:      {/* Legenda + statistika + "nađi me" */}
 src/components/Providers.tsx:40:  // /api/auth/session, što na sporoj vezi dugo prikazuje "Učitavam...".
+src/components/KomeKartice.tsx:64:          {prosireno ? labelManje : labelJos} {prosireno ? "↑" : "↓"}
 src/components/AppShell.tsx:36:  // Gejt za pristanak na nove akte (Uslovi čl. 40, Politika čl. 16).
 src/components/AppShell.tsx:43:  // keširani `['me']` još ne, ekran je „blicao" između dve rute dok poll ne stigne.
 src/components/AppShell.tsx:47:  // `/profil` je namerno izuzet: Politika čl. 16 i Uslovi čl. 40 (v4.1.1) izričito
 src/components/AppShell.tsx:61:  // Kad korisnik otvori Novčanik/Pijaca → označi "viđeno" (badge ide na 0).
 src/components/AppShell.tsx:63:  // "viđeno" vreme i invalidiramo keš da se uskladi.
 src/app/opengraph-image.tsx:12:export const alt = "KOLO — mreža za razmenu rada, dobara i znanja";
-src/app/page.tsx:110:    { ikona: "🌱", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
-src/app/page.tsx:112:    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
-src/app/page.tsx:113:    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
-src/app/page.tsx:114:    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
-src/app/page.tsx:115:    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
-src/app/page.tsx:442:                  alt="Nikola Šarić"
+src/app/page.tsx:121:    { ikona: "🌱", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
+src/app/page.tsx:123:    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
+src/app/page.tsx:124:    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
+src/app/page.tsx:125:    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
+src/app/page.tsx:126:    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
+src/app/page.tsx:455:                  alt="Nikola Šarić"
 src/app/not-found.tsx:7:  title: "Stranica nije pronađena",
 src/app/(auth)/login/LoginForm.tsx:28:  // „nema naloga" od „pogrešna lozinka" (sprečava user enumeration).
 src/app/(app)/programi/ProgramiKlijent.tsx:121:              <span>{t("iskorišcenost")}</span>
