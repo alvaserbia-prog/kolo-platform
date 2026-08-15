@@ -22,9 +22,6 @@ export default async function PublicFooter() {
                 <span key={i}>{line}{i === 0 ? <br /> : null}</span>
               ))}
             </p>
-            <p className="text-xs text-kolo-muted">
-              <a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">kontakt@ekolo.rs</a>
-            </p>
           </div>
 
           {/* Sistem */}
