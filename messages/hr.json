@@ -1448,7 +1448,6 @@
     "zrno_koristi5": "Slobodno ZRNO možeš otpisati natrag Protokolu i dobiti POEN po tekućem koeficijentu.",
     "koeficijent_naslov": "Obračunski koeficijent nije tečaj",
     "koeficijent_tekst": "Obračunski koeficijent je odnos broja upisanih POEN-a i raspoloživih ZRNA, i govori samo koliko POEN-a treba za jedno ZRNO u danom trenutku. Budući da raste s rastom mreže, tko je ZRNO upisao ranije, otpisom kasnije dobiva više POEN-a nego što je dao — priznanje onima koji su sustav držali dok je bio malen.\nTo nije zarada. Otpisom ZRNA dobivaš POEN, a POEN nije novac, ne mijenja se za novac i ne izlazi iz sustava. Koeficijent nije cijena i ne izražava vrijednost ZRNA izvan KOLA.",
-    "faq_tag": "Operativna pitanja",
     "faq_naslov": "Najčešća pitanja",
     "faq_link": "Vidi sva pitanja",
     "cta_naslov": "Sad znaš kako radi",

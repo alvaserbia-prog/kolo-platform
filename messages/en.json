@@ -1448,7 +1448,6 @@
     "zrno_koristi5": "Free ZRNO can be written off back to the Protocol, giving you POEN at the current coefficient.",
     "koeficijent_naslov": "The accounting coefficient is not an exchange rate",
     "koeficijent_tekst": "The accounting coefficient is the ratio between the POEN recorded and the ZRNO available, and it says only how much POEN one ZRNO takes at a given moment. Since it rises as the network grows, whoever recorded ZRNO earlier receives more POEN on writing it off later than they gave for it — a recognition of those who held the system up while it was small.\nThis is not earnings. Writing off ZRNO gives you POEN, and POEN is not money, is not exchanged for dinars and does not leave the system. The coefficient is not a price and does not express the value of ZRNO outside KOLO.",
-    "faq_tag": "Operational questions",
     "faq_naslov": "Most common questions",
     "faq_link": "See all questions",
     "cta_naslov": "Now you know how it works",

@@ -389,9 +389,6 @@ export default async function KakoFunkcionisePage() {
       {/* ── S6: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">
         <div className="text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
-            {t("faq_tag")}
-          </div>
           <h2 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("faq_naslov")}
           </h2>

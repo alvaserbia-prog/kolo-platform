@@ -1441,7 +1441,6 @@
     "zrno_koristi5": "A szabad ZRNO visszaírható a Protokollnak, és az aktuális együttható szerint POEN-t kapsz érte.",
     "koeficijent_naslov": "Az elszámolási együttható nem árfolyam",
     "koeficijent_tekst": "Az elszámolási együttható a bejegyzett POEN és a rendelkezésre álló ZRNO aránya, és csak azt mondja meg, hogy adott pillanatban egy ZRNO mennyi POEN-be kerül. Mivel a hálózat növekedésével együtt nő, aki korábban jegyzett be ZRNO-t, később leíráskor több POEN-t kap, mint amennyit adott — ez azok elismerése, akik akkor tartották a rendszert, amikor még kicsi volt.\nEz nem kereset. A ZRNO leírásával POEN-t kapsz, a POEN pedig nem pénz, nem váltható dinárra, és nem lép ki a rendszerből. Az együttható nem ár, és nem fejezi ki a ZRNO KOLO-n kívüli értékét.",
-    "faq_tag": "Gyakorlati kérdések",
     "faq_naslov": "Gyakori kérdések",
     "faq_link": "Összes kérdés megtekintése",
     "cta_naslov": "Most már tudod, hogyan működik",
