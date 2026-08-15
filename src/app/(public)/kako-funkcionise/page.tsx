@@ -142,7 +142,7 @@ export default async function KakoFunkcionisePage() {
                 {k.br}
               </div>
               <p className="font-semibold text-kolo-text text-base mb-1.5">{k.naslov}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed mb-3">{k.opis}</p>
+              <p className="text-sm text-kolo-muted leading-relaxed mb-3 whitespace-pre-line">{k.opis}</p>
               <span className={`text-xs font-semibold px-2 py-0.5 rounded-full mt-auto self-end ${k.istaknut ? "bg-kolo-gold-400 text-kolo-green-900" : "bg-kolo-green-100 text-kolo-green-700"}`}>
                 {k.detalj}
               </span>
@@ -159,7 +159,7 @@ export default async function KakoFunkcionisePage() {
               </div>
               <div>
                 <p className="font-semibold text-kolo-text text-base mb-1">{k.naslov}</p>
-                <p className="text-sm text-kolo-muted leading-relaxed mb-2">{k.opis}</p>
+                <p className="text-sm text-kolo-muted leading-relaxed mb-2 whitespace-pre-line">{k.opis}</p>
                 <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${k.istaknut ? "bg-kolo-gold-400 text-kolo-green-900" : "bg-kolo-green-100 text-kolo-green-700"}`}>
                   {k.detalj}
                 </span>
