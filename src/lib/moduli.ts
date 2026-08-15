@@ -63,8 +63,14 @@ export const POKROVITELJSTVO_AKTIVNO = false;
  * 🟡 Brane koje sakrivaju maloletne korisnike iz javnih upita rade BEZ OBZIRA na
  * prekidač. Cena im je nula, a cena propuštanja je izlaganje deteta — zato nisu
  * uslovljene.
+ *
+ * ─── STANJE: upaljen radi provere na TESTU (14.08.2026) ─────────────────────
+ *
+ * 🔴 MORA nazad na `false` PRE svake objave na ekolo.rs. Modul je upaljen samo da
+ * bi se tok prošao na test okruženju; akti nisu usvojeni i DPIA nije ažuriran, pa
+ * na produkciji ne sme da radi. Objava sa `true` bila bi povreda čl. 65.
  */
-export const MODUL_DECA_AKTIVAN = false;
+export const MODUL_DECA_AKTIVAN = true;
 
 /**
  * Ekran „Sistem je unapređen — novi akti" pri prijavi (Uslovi čl. 40, Politika čl. 16).
