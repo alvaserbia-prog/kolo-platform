@@ -342,7 +342,7 @@
     "zabelezen_opis": "Evidentira se kad Fondacija odobri tvoj prvi oglas, kad te neko potvrdi ili kad ti neko prepiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
     "samo_primalac": "Dok si nov član, možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po potvrdi.",
     "nadoknada_naslov": "Nadoknada",
-    "nadoknada_opis": "Nastala je poništenjem lažne potvrde koju si dao. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis pređe nulu.",
+    "nadoknada_opis": "Nastala je poništenjem zapisa koji nije bio pokriven — poništenom potvrdom koju si dao ili poništenim prepisom po prijavi razmene. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis pređe nulu.",
     "putanja_naslov": "Doprinosi razmeni",
     "putanja_opis": "Pet koraka, svaki 1.000 POEN. Otključavaju se redom, a ukupno se po korisniku evidentira najviše 5.000 POEN.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -355,7 +355,17 @@
     "putanja_zabelezen": "Zabeleženo — zapis nastaje po odobrenju ili potvrdi",
     "putanja_na_redu": "Ispunjeno — evidentira se uskoro",
     "putanja_zakljucan": "Još nije otključano",
-    "putanja_pravila": "U brojač ulaze prepisi POEN-a od najmanje 1.000 POEN sa ljudima koji nisu u tvom krugu poznanstava (mreža potvrda). Svaki sagovornik broji se jednom, bez obzira na broj prepisa. Prepis sa korisnikom koga još niko nije potvrdio se beleži, a broji tek kad on bude potvrđen. Trenutno u brojaču: {sagovornika}."
+    "putanja_pravila": "U brojač ulaze prepisi POEN-a od najmanje 1.000 POEN sa ljudima koji nisu u tvom krugu poznanstava (mreža potvrda). Svaki sagovornik broji se jednom, bez obzira na broj prepisa. Prepis sa korisnikom koga još niko nije potvrdio se beleži, a broji tek kad on bude potvrđen. Trenutno u brojaču: {sagovornika}.",
+    "prijavi_dugme": "Prijavi problem sa razmenom",
+    "prijavi_naslov": "Prijavi neispunjenu razmenu",
+    "prijavi_opis": "Ako si prepisao POEN a nisi dobio dogovoreno, javi Fondaciji. Prepis se ne poništava sam — o njemu odlučuje Fondacija; ako ga poništi, vraća ti se ceo iznos, i onda kada zapis druge strane time ode u minus.",
+    "prijavi_placeholder": "Šta je dogovoreno i šta se dogodilo.",
+    "prijavi_posalji": "Pošalji prijavu",
+    "prijavi_odustani": "Odustani",
+    "prijavi_ceka": "Prijava je poslata — čeka odluku Fondacije.",
+    "prijavi_ponistena": "Prepis je poništen po prijavi.",
+    "prijavi_odbacena": "Prijava je razmotrena — prepis ostaje.",
+    "prijavi_greska": "Prijava nije poslata."
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -1679,7 +1689,7 @@
     "neverif_naslov": "Objavljuješ pre potvrde",
     "neverif_opis": "Možeš da objaviš samo ponudu — nešto što nudiš. Oglas mora imati naslov, opis, fotografiju, kategoriju i mesto; dužina naslova i opisa nije uslov. Oglas ide na Pijacu odmah; doprinos od {iznos} POEN evidentira ti se kad Fondacija odobri oglas.",
     "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
-    "oznaka_neverifikovan": "BEZ POTVRDE",
+    "oznaka_neverifikovan": "Nov član",
     "oznaka_neverifikovan_opis": "Oglašivača još niko nije potvrdio u lancu potvrda. Za razmenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
     "traka_neverifikovan": "Postavi svoj prvi oglas",
     "cta_prijavi_se": "Prijavi se",
@@ -2362,7 +2372,8 @@
     "doprinos_revizija_bez_obavestenja": "POEN je evidentiran, a obaveštenje im nije otišlo",
     "doprinos_revizija_bez_transakcije": "evidentirano bez veze na transakciju — proveriti ručno",
     "doprinos_revizija_uredno": "Čeka odobrenje u tabu „Prvi oglasi”: {ceka}. Poništeno zbog uklonjenog oglasa: {ponisten}.",
-    "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen"
+    "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen",
+    "tab_razmene": "Razmene"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2466,7 +2477,15 @@
     "roditeljstvo_pala_potvrda_naslov": "Jedna potvrda tvoje stvarnosti je pala",
     "roditeljstvo_pala_potvrda_tekst": "Neko ko te je potvrdio nije se izjasnio o postojanju tvog deteta u roku.",
     "oglas_uklonio_roditelj_naslov": "Roditelj je uklonio tvoj oglas",
-    "oglas_uklonio_roditelj_tekst": "Tvoj oglas je uklonjen sa Pijace."
+    "oglas_uklonio_roditelj_tekst": "Tvoj oglas je uklonjen sa Pijace.",
+    "prijava_razmene_ponistena_naslov": "Prepis je poništen",
+    "prijava_razmene_ponistena_tekst": "Fondacija je poništila prepis ka {pseudonim}. Vraćeno ti je {iznos} POEN. Obrazloženje: {odluka}",
+    "prijava_razmene_oduzeto_naslov": "Prepis je poništen",
+    "prijava_razmene_oduzeto_tekst": "Fondacija je po prijavi poništila prepis od {pseudonim}. Sa tvog zapisa je vraćeno {iznos} POEN. Obrazloženje: {odluka}",
+    "prijava_razmene_odbacena_naslov": "Prijava razmene je razmotrena",
+    "prijava_razmene_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i prepis ostaje. Obrazloženje: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "Prepis je poništen — zapis ti je u minusu",
+    "prijava_razmene_oduzeto_minus_tekst": "Fondacija je po prijavi poništila prepis od {pseudonim} i sa tvog zapisa je vraćeno {iznos} POEN. Zapis je time otišao u minus i na njemu stoji nadoknada od {nadoknada} POEN: nije dug i ne može se naplatiti, POEN-i koji ti pristignu prvo je popunjavaju, a prepis drugome je moguć kad zapis pređe nulu. Razmena dobara i usluga ti nije ograničena. Obrazloženje: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",

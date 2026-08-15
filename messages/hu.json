@@ -335,7 +335,7 @@
     "zabelezen_opis": "Akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja az első hirdetésedet, amikor valaki megerősít téged, vagy amikor valaki POEN-t ír át a nyilvántartásodba. Addig nem POEN-bejegyzés, és nem számít bele az egyenlegbe.",
     "samo_primalac": "Amíg nem vagy megerősítve, csak POEN-t fogadhatsz. A más nyilvántartásába való átírás a megerősítés után nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
-    "nadoknada_opis": "Az általad végzett hamis megerősítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor írhatsz át, ha a bejegyzésed túllépi a nullát.",
+    "nadoknada_opis": "Egy fedezetlen tétel érvénytelenítéséből keletkezett — az általad adott megerősítés érvénytelenítéséből vagy egy csereügyi bejelentés nyomán érvénytelenített átírásból. Nem tartozás, és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; POEN-t másnak akkor írhatsz át, ha a nyilvántartásod túllépi a nullát.",
     "putanja_naslov": "Cseréhez való hozzájárulások",
     "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorrendben nyílnak meg, és felhasználónként összesen legfeljebb 5.000 POEN kerül nyilvántartásba.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -348,7 +348,17 @@
     "putanja_zabelezen": "Feljegyezve — a bejegyzés a jóváhagyás vagy a megerősítés után jön létre",
     "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
     "putanja_zakljucan": "Még nem nyílt meg",
-    "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}."
+    "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}.",
+    "prijavi_dugme": "Probléma bejelentése a cseréről",
+    "prijavi_naslov": "Nem teljesült csere bejelentése",
+    "prijavi_opis": "Ha átírtad a POEN-t, és nem kaptad meg a megbeszélteket, jelezd az Alapítványnak. Az átírás nem áll vissza magától — az Alapítvány dönt; ha érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy.",
+    "prijavi_placeholder": "Miben állapodtatok meg, és mi történt.",
+    "prijavi_posalji": "Bejelentés küldése",
+    "prijavi_odustani": "Mégse",
+    "prijavi_ceka": "A bejelentés elküldve — az Alapítvány döntésére vár.",
+    "prijavi_ponistena": "Az átírást a bejelentés alapján érvénytelenítették.",
+    "prijavi_odbacena": "A bejelentést megvizsgálták — az átírás marad.",
+    "prijavi_greska": "A bejelentést nem sikerült elküldeni."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -1672,7 +1682,7 @@
     "neverif_naslov": "Megerősítés előtt hirdetsz",
     "neverif_opis": "Csak ajánlatot tehetsz közzé — olyasmit, amit kínálsz. A hirdetéshez cím, leírás, fénykép, kategória és helység kell; a cím és a leírás hossza nem feltétel. A hirdetés azonnal megjelenik; a {iznos} POEN hozzájárulás akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja a hirdetést.",
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
-    "oznaka_neverifikovan": "NINCS MEGERŐSÍTVE",
+    "oznaka_neverifikovan": "Új tag",
     "oznaka_neverifikovan_opis": "A hirdető még nincs megerősítve a megerősítési láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
     "traka_neverifikovan": "Tedd közzé az első hirdetésed",
     "cta_prijavi_se": "Bejelentkezés",
@@ -2355,7 +2365,8 @@
     "doprinos_revizija_bez_obavestenja": "a POEN nyilvántartásba került, de értesítést nem kaptak",
     "doprinos_revizija_bez_transakcije": "tranzakcióra hivatkozás nélkül került nyilvántartásba — kézzel ellenőrizni",
     "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
-    "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre"
+    "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
+    "tab_razmene": "Razmene"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2459,7 +2470,15 @@
     "roditeljstvo_pala_potvrda_naslov": "A valóságodról adott egyik megerősítés elesett",
     "roditeljstvo_pala_potvrda_tekst": "Valaki, aki megerősített téged, nem nyilatkozott időben a gyermeked létezéséről.",
     "oglas_uklonio_roditelj_naslov": "A szülő eltávolította a hirdetésedet",
-    "oglas_uklonio_roditelj_tekst": "A hirdetésedet eltávolították a Piacról."
+    "oglas_uklonio_roditelj_tekst": "A hirdetésedet eltávolították a Piacról.",
+    "prijava_razmene_ponistena_naslov": "Az átírás érvénytelenítve",
+    "prijava_razmene_ponistena_tekst": "Az Alapítvány érvénytelenítette a(z) {pseudonim} javára történt átírást. {iznos} POEN visszakerült hozzád. Indokolás: {odluka}",
+    "prijava_razmene_oduzeto_naslov": "Egy átírás érvénytelenítve",
+    "prijava_razmene_oduzeto_tekst": "Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felőli átírást. A nyilvántartásodból {iznos} POEN került vissza. Indokolás: {odluka}",
+    "prijava_razmene_odbacena_naslov": "A csereügyi bejelentésed elbírálva",
+    "prijava_razmene_odbacena_tekst": "Az Alapítvány elbírálta a bejelentésedet, az átírás marad. Indokolás: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "Egy átírás érvénytelenítve — a nyilvántartásod mínuszban van",
+    "prijava_razmene_oduzeto_minus_tekst": "Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felőli átírást, és a nyilvántartásodból {iznos} POEN került vissza. A nyilvántartásod ezzel mínuszba ment, és {nadoknada} POEN pótlás áll rajta: ez nem tartozás, nem hajtható be, a hozzád érkező POEN először ezt tölti fel, másnak pedig akkor írhatsz át, ha a nyilvántartás túllépi a nullát. A javak és szolgáltatások cseréje nincs korlátozva. Indokolás: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",

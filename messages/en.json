@@ -342,7 +342,7 @@
     "zabelezen_opis": "It is recorded once the Foundation approves your first listing, once someone confirms you, or once someone re-registers POEN into your record. Until then it is not a POEN record and does not count towards your balance.",
     "samo_primalac": "Until you are confirmed you can only receive POEN. Re-registering POEN into someone else's record opens up upon confirmation.",
     "nadoknada_naslov": "Restitution",
-    "nadoknada_opis": "It arose from the annulment of a false confirmation you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; re-registering POEN to someone else becomes possible once your record passes zero.",
+    "nadoknada_opis": "It arose from an annulled record that was not covered — a confirmation you gave that was annulled, or a re-registration annulled upon an exchange report. It is not a debt and cannot be collected — POEN that reaches you fills it first. Exchanging goods and services is not restricted for you; re-registering POEN to someone else becomes possible once your ledger passes zero.",
     "putanja_naslov": "Exchange contributions",
     "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and no user is recorded more than 5,000 POEN in total.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -355,7 +355,17 @@
     "putanja_zabelezen": "Noted — the record follows approval or confirmation",
     "putanja_na_redu": "Met — being recorded shortly",
     "putanja_zakljucan": "Not unlocked yet",
-    "putanja_pravila": "The count includes re-registrations of at least 1,000 POEN with people outside your circle of acquaintance (the network of confirmations). Each counterpart counts once, however many re-registrations there are. A re-registration with a user who is not yet confirmed is noted, but counts only once they are confirmed. Currently counted: {sagovornika}."
+    "putanja_pravila": "The count includes re-registrations of at least 1,000 POEN with people outside your circle of acquaintance (the network of confirmations). Each counterpart counts once, however many re-registrations there are. A re-registration with a user who is not yet confirmed is noted, but counts only once they are confirmed. Currently counted: {sagovornika}.",
+    "prijavi_dugme": "Report a problem with this exchange",
+    "prijavi_naslov": "Report an unfulfilled exchange",
+    "prijavi_opis": "If you re-registered POEN and did not receive what was agreed, tell the Foundation. The re-registration is not reversed on its own — the Foundation decides; if it annuls it, the whole amount comes back to you, even when that pushes the other side's ledger below zero.",
+    "prijavi_placeholder": "What was agreed and what happened.",
+    "prijavi_posalji": "Send report",
+    "prijavi_odustani": "Cancel",
+    "prijavi_ceka": "Report sent — awaiting the Foundation's decision.",
+    "prijavi_ponistena": "The re-registration was annulled upon the report.",
+    "prijavi_odbacena": "The report was reviewed — the re-registration stands.",
+    "prijavi_greska": "The report was not sent."
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -1679,7 +1689,7 @@
     "neverif_naslov": "Posting before confirmation",
     "neverif_opis": "You may post an offer only — something you provide. The listing needs a title, a description, a photo, a category and a place; the length of the title and description is not a condition. The listing goes live immediately; the contribution of {iznos} POEN is recorded once the Foundation approves the listing.",
     "neverif_preostalo": "Active listings you may still post: {broj}.",
-    "oznaka_neverifikovan": "NOT CONFIRMED",
+    "oznaka_neverifikovan": "New member",
     "oznaka_neverifikovan_opis": "No one has confirmed this advertiser in the chain of confirmations yet. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
     "traka_neverifikovan": "Post your first listing",
     "cta_prijavi_se": "Sign in",
@@ -2362,7 +2372,8 @@
     "doprinos_revizija_bez_obavestenja": "POEN recorded, but no notification was sent to them",
     "doprinos_revizija_bez_transakcije": "recorded without a linked transaction — check manually",
     "doprinos_revizija_uredno": "Awaiting approval in the “First listings” tab: {ceka}. Annulled due to a removed listing: {ponisten}.",
-    "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted"
+    "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
+    "tab_razmene": "Razmene"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2466,7 +2477,15 @@
     "roditeljstvo_pala_potvrda_naslov": "One confirmation of your reality has lapsed",
     "roditeljstvo_pala_potvrda_tekst": "Someone who confirmed you did not respond about your child's existence in time.",
     "oglas_uklonio_roditelj_naslov": "Your parent removed your listing",
-    "oglas_uklonio_roditelj_tekst": "Your listing has been removed from the Marketplace."
+    "oglas_uklonio_roditelj_tekst": "Your listing has been removed from the Marketplace.",
+    "prijava_razmene_ponistena_naslov": "The re-registration has been annulled",
+    "prijava_razmene_ponistena_tekst": "The Foundation has annulled your re-registration to {pseudonim}. {iznos} POEN has been returned to you. Reasons: {odluka}",
+    "prijava_razmene_oduzeto_naslov": "A re-registration has been annulled",
+    "prijava_razmene_oduzeto_tekst": "Upon a report, the Foundation has annulled the re-registration from {pseudonim}. {iznos} POEN has been returned from your ledger. Reasons: {odluka}",
+    "prijava_razmene_odbacena_naslov": "Your exchange report has been reviewed",
+    "prijava_razmene_odbacena_tekst": "The Foundation has reviewed your report and the re-registration stands. Reasons: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "A re-registration has been annulled — your ledger is below zero",
+    "prijava_razmene_oduzeto_minus_tekst": "Upon a report, the Foundation has annulled the re-registration from {pseudonim} and {iznos} POEN has been returned from your ledger. Your ledger has thereby gone below zero and carries a make-good of {nadoknada} POEN: it is not a debt and cannot be collected, POEN that reaches you fills it first, and re-registering to someone else becomes possible once the ledger passes zero. Exchanging goods and services is not restricted for you. Reasons: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
