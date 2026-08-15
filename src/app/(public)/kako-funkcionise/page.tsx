@@ -331,6 +331,8 @@ export default async function KakoFunkcionisePage() {
               </div>
             </div>
 
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("zrno_uvod")}</p>
+
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("zrno_upis_naslov")}</p>
               <ul className="space-y-1.5">
@@ -368,7 +370,7 @@ export default async function KakoFunkcionisePage() {
 
             <div className="bg-kolo-gold-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-gold-600 mb-1">{t("koeficijent_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed text-body">
+              <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
                 {t("koeficijent_tekst")}
               </p>
             </div>
