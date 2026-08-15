@@ -278,6 +278,8 @@ export default async function KakoFunkcionisePage() {
                 {[
                   t("poen_jeste1"),
                   t("poen_jeste2"),
+                  t("poen_jeste3"),
+                  t("poen_jeste4"),
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
                     <span className="text-kolo-green-700 mt-0.5 shrink-0">✓</span>
@@ -300,7 +302,6 @@ export default async function KakoFunkcionisePage() {
                   t("poen_nije4"),
                   t("poen_nije5"),
                   t("poen_nije6"),
-                  t("poen_nije7"),
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
                     <span className="text-red-400 mt-0.5 shrink-0">✕</span>
@@ -312,7 +313,7 @@ export default async function KakoFunkcionisePage() {
 
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-green-700 mb-1">{t("zerosum_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed text-body">
+              <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
                 {t("zerosum_tekst")}
               </p>
             </div>
