@@ -352,14 +352,7 @@ export default async function OSistemuPage() {
               {t("topla_voda_tag")}
             </div>
           </div>
-          <blockquote
-            className="italic text-kolo-muted leading-relaxed text-base md:text-lg mb-6 text-center max-w-[620px] mx-auto"
-            style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
-          >
-            {t("topla_voda_citat")}
-            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">— {t("topla_voda_citat_izvor")}</span>
-          </blockquote>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 mt-6 text-center" style={{ letterSpacing: "-0.02em" }}>
             {t("topla_voda_naslov")}
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
