@@ -73,7 +73,11 @@ export default async function PublicFooter() {
             <span className="block sm:inline">{t("footer_fondacija_brojevi")}</span>
           </p>
           <p>{t("footer_fondacija_registar")}</p>
-          <p>{t("footer_copyright")}</p>
+          <p>
+            {t("footer_copyright")}
+            {" · "}
+            <a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">kontakt@ekolo.rs</a>
+          </p>
           <p>
             {t("footer_softver_label")}: <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer" className="hover:underline">AGPL-3.0</a>
             {" · "}
