@@ -7,106 +7,136 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `I don't know anyone already in KOLO — how can I get confirmed if confirmation requires someone on the inside to confirm me?`,
-        odgovor: `You can get confirmed even if you don't know anyone already in the system. Confirmation is based on personal acquaintance, but three things open the door for you even without prior connections.
+        pitanje: `I don't know anyone in KOLO — can anyone confirm me?`,
+        odgovor: `They can. Confirmation of reality rests on someone getting to know you in person — and that acquaintance is yet to be formed.
 
-First, registration is free and you don't need to be confirmed to join. You can explore the rules, follow the system's general indicators, and browse listings on the marketplace — all of that works without confirmation.
+Joining requires no confirmation. Registration is free. Straight away you can read the rules, look at the public overview of the system and at the offers on the Marketplace, and post up to three listings in which you offer something (you can take a listing down whenever you like).
 
-Second, you don't need to know anyone to begin. Post a listing on the Marketplace — your first three need no confirmation at all — and wait for someone to get in touch. Once you have completed the exchange, the person who now knows you can confirm that you are real.
+Acquaintance grows out of exchange. Post a listing and wait for someone to get in touch. Once you have carried out the exchange in person, that person has genuinely got to know you — and if they are a full member, they can give you confirmation of reality. That is how most people obtain proof of reality.
 
-You can take your listing down at any time.
+Confirmation is given only by someone who holds proof of reality themselves, and always after a face-to-face meeting — never on the basis of a message on the platform.
 
-Third, the chain has to start somewhere — and it starts with the initial users. These are members of the Foundation's Board of Directors, whose reality stems from the public register rather than anyone's prior confirmation. They can confirm new people without restrictions, so the first round of confirmations doesn't depend on knowing anyone in advance — the acquaintance is formed later, through the exchange itself.`,
+If you know no one, the shortest path is to write to us at kontakt@ekolo.rs or to come to a gathering in your area. Acquaintance is not required in advance — it is created.`,
       },
       {
         id: 43,
-        pitanje: `Is it really free, or do I have to pay or donate something to use the system?`,
-        odgovor: `Yes, it is free to use. Registration costs nothing — you pick a pseudonym, enter an email and password, and that's it. We don't ask for any payment to join or to use the basic features.
+        pitanje: `Is it really free — do I have to pay or donate?`,
+        odgovor: `Yes. Using KOLO is free and there are no paid features. Registration costs nothing: you pick a pseudonym, enter an email and a password.
 
-Donations and sponsorships are voluntary and are not a requirement for using the system. A donation supports the Foundation's basic operating costs (server, tools, development, legal and accounting services); upon receipt of a donation, the Protocol records POEN in your ledger according to the system's rules. That recording is not a purchase of POEN — POEN has no value outside the system, cannot be resold or converted back to money, and a donation is non-refundable regardless of the POEN recorded.
+There is no subscription, no commission and no package to buy on top. Full access is not opened by a payment but by confirmation of reality — and that is given by a person, not by money.
 
-POEN is also recorded through other channels — confirmation in the chain of confirmations, operational contribution, and exchanges with other users — so making a payment is neither the only nor a required path. For example, when you are confirmed, 1,000 POEN is recorded in your ledger.`,
+A donation is voluntary and is not a condition for anything. With it you cover the Foundation's costs: the server, tools, development, legal and accounting services.
+
+A donation and POEN are two separate acts. A donation is one-sided and non-refundable — you are not buying anything with it. Independently of it, the Protocol records POEN in your ledger according to the rules of the system. POEN has no value outside the system, is not resold and is not turned back into money.
+
+POEN is recorded for you without a single dinar as well — through confirmation and proof of reality, through operational contribution, and through exchange, in which another member re-registers POEN to you. Nor does money buy a say in decisions: the vote is carried by ZRNO, not by POEN.`,
       },
       {
         id: 44,
-        pitanje: `How do I get my first POEN if I have nothing to offer? What's my first step?`,
-        odgovor: `You don't need any product to accumulate POEN — the first step is confirmation.
+        pitanje: `What is my first step and how do I gather POEN after that?`,
+        odgovor: `The first step is confirmation of reality. Someone who knows you personally and holds proof of reality themselves confirms that you are a real person — on the basis of that acquaintance, without a single document. The Protocol then records 1,000 POEN for each of you, once and in the same amount for both.
 
-Confirmation means that a full member who personally knows you confirms your reality based on that acquaintance, without any documents. As soon as that record is made, the Protocol automatically credits you with 1,000 POEN. That is your starting amount and the key to full access to the rest of the platform's features.
+Until then nothing essential is closed to you: the first listing in which you offer something already earns you POEN.
 
-Once you are confirmed, several ways open up to accumulate more:
+Once you hold proof of reality, four paths open up.
 
-You can confirm other people you genuinely know — for each confirmation you perform, 1,000 POEN is credited to you.
+Exchange. You do not have to sell anything. Exchange also covers services and knowledge — you can help someone with a job, teach them, look after their children. The other side then re-registers POEN to you for what you have done.
 
-You can apply for an operational contribution task — work for the common good published by the Foundation (and later by ZRNO Holders). When you complete the task and an authorised the person who confirmed you confirms completion, POEN is credited to you.
+Confirming others. When you confirm someone you genuinely know, 1,000 POEN is recorded for each of you — once per person. By confirming, you stand behind the fact that this person exists and has no second account, so confirmation is given only for people you truly know.
 
-If you belong to one of the groups covered by the social programmes (mothers, elderly, special care, education), you declare your status and the Protocol credits POEN to you automatically on a daily basis, without registering individual activities.
+Operational contribution. Work for the common good under a published task. Tasks are set by the Foundation in the initial phase, and once the module is activated by ZRNO holders and the Upper Kolo. When you carry out the task and a ZRNO holder confirms performance, POEN is recorded for you.
 
-And simplest of all: you don't have to sell a product. Exchange in the system includes services and knowledge — you can help someone with something, teach them, babysit, do a job. The other party then credits POEN to you for what you did.`,
+Social programmes. If you belong to one of the groups the programmes cover — mothers and other primary carers, the elderly, special care, schooling — you submit an application. Once the Foundation approves it, the Protocol records POEN for you on a daily basis, without reporting individual activities.`,
       },
       {
         id: 45,
-        pitanje: `How much time does it take — do I have to be constantly active?`,
-        odgovor: `You don't have to be constantly active. The system has no mandatory activity — there is no minimum number of logins, contributions or exchanges that you must meet to remain a user.
+        pitanje: `How much time does it take — do I have to be active all the time?`,
+        odgovor: `You do not. There is no minimum of logging in, of contribution or of exchange that you would have to meet in order to remain a member.
 
-You participate as much as you want and when you want. Operational contributions, marketplace exchanges and ZRNO inscription are opportunities, not obligations.
+You take part as much as you want and when you want. Operational contribution, exchange on the Marketplace and recording ZRNO are options, not duties. There is no minimum term of membership and no notice period.
 
-Your recorded position waits for you even when you take a break: if you're inactive for a while, your record is preserved. Your POEN does not currently expire — it stays recorded until you use it or delete your account.
+When you pause, your ledger waits for you. Your POEN does not expire — it stays in your ledger until you re-register it to someone else or until you close your account. Introducing an expiry date for POEN would be a substantive change to the system, decided by the Upper Kolo and not by the Foundation on its own.
 
-Registration is free and simple: you pick a pseudonym, enter an email and set a password. No mandatory deadline, no contractual commitment.
-
-You can leave the system at any time by deleting your account from the profile settings, with no notice period.`,
+You can leave the system at any moment, from your profile settings.`,
       },
       {
         id: 46,
-        pitanje: `What is a "pseudonym" — do I have to reveal my real name, ID number, or photograph my identity document?`,
-        odgovor: `A pseudonym is the username you choose for yourself and under which you are visible in the system and in the public contribution ledger. It is your public name in KOLO — it doesn't have to have anything to do with your real name.
+        pitanje: `What is a pseudonym — do I have to reveal my real name or send an ID card?`,
+        odgovor: `A pseudonym is a name you choose yourself and under which you are visible in the system and in the public record of contributions. It is your public name in KOLO and it need have nothing to do with your real name.
 
-Your real name is not required. At registration we ask only for a pseudonym, an email address and a password. We do not ask for a national ID number, identity card, passport or any other document — and we never ask you to photograph anything.
+Your real name is not required. At registration we ask only for a pseudonym, an email and a password. We do not ask for a personal identification number, an ID card, a passport or any other document, and we never ask you to photograph yourself or your documents.
 
-Confirmation doesn't require documents either. Your reality is confirmed by a user who personally knows you, through the chain of confirmations — there is no document upload or paper check.
+Confirmation does not require documents either. Your reality is confirmed by a member who knows you personally and holds proof of reality themselves. Confirmation rests on acquaintance, not on paper.
 
-The Foundation does not maintain a record that links your pseudonym to your identity. That link simply does not exist in the system.
+Your profile does not carry your name. The Foundation keeps no register linking a pseudonym to the name on an identity card, and other members see only what you have chosen to show. You can enter your name and phone number later, voluntarily — they are then visible only to full members, and you can withdraw that disclosure whenever you like.
 
-You can optionally add your real name and phone number later if you choose to — entirely voluntarily, and visible only to full members. You can withdraw that disclosure at any time.
+Where identity does come into play. If you donate through a bank, your name appears on the statement. If you apply for a social programme or for sponsorship, the data in your application is reviewed by the Foundation. That data is not public, is not shown next to your profile, and is seen only by whoever processes the application.
 
-Note: choose a pseudonym that does not contain your personal data. In a small community, the combination of a pseudonym, location and activity may indirectly point to who you are — be aware of that.`,
+A note: choose a pseudonym that does not contain your personal data. In a small community the combination of pseudonym, place and activity can point indirectly to who you are — be aware of that.`,
       },
       {
         id: 76,
-        pitanje: `What will KOLO never ask of me (protection from fraud)?`,
-        odgovor: `Registration is free. The Foundation will never ask you to send money in order to join the system.
+        pitanje: `How do I spot a scam — what will KOLO never ask of me?`,
+        odgovor: `If someone asks for anything on this list, it is not the Foundation — it is someone presenting themselves as the Foundation.
 
-The Foundation will never ask for your password, PIN, payment card number, national ID number, or a photo of your identity card or passport. Confirmation is carried out through personal acquaintance — no documents whatsoever.
+We never ask for money for access. Registration and use are free. Donations and sponsorship are voluntary and are paid exclusively through the official channels on ekolo.rs — never into a private account and never on the basis of a message that rushes you.
 
-POEN has no value outside the system — it cannot be cashed in, resold, or bought back by the Foundation. Any offer that promises earnings, a refund, or conversion of POEN into cash is not part of KOLO; it is an attempt at fraud.
+We never ask for your password, your PIN or your payment card number. No one from the Foundation will ask you for a password or for a code from a message. Enter your password only on ekolo.rs — never on a page you reached through a link in a message or an email.
 
-If you encounter any of the above, do not share your data and report it to the Foundation.`,
+We ask for no documents, either for registration or for confirmation. No personal identification number, no photograph of an ID card or a passport. Confirmation of reality rests on personal acquaintance.
+
+POEN is not cashed out. It is not exchanged for dinars, it is not resold and the Foundation does not buy it back. Any offer promising earnings, a refund or the conversion of POEN into dinars is an attempted fraud, no matter who sent it to you.
+
+On the Marketplace, re-register POEN only once you have received the goods or the service. If someone rushes you to re-register in advance, walk away from the exchange.
+
+If you come across any of this: do not share your data, do not click the link, and write to us at kontakt@ekolo.rs.`,
       },
       {
         id: 81,
-        pitanje: `How do I get my first POENs if I have nothing to offer?`,
-        odgovor: `The first listing in which you offer something earns you 1,000 POENs through the contribution-to-exchange channel. The listing must have a photograph, a description, a category and a place.
+        pitanje: `How do I get my first POEN while no one has confirmed me yet?`,
+        odgovor: `You need neither a product nor a confirmation for your first POEN to be recorded.
 
-POENs are also recorded for you when someone else re-registers them to you for a completed exchange — as an unfull member you can receive them, you just cannot re-register them to anyone yourself.
+Post a listing in which you offer something — the first such listing earns you 1,000 POEN through contribution to exchange. The listing must have a title, a description, a photograph, a category and a place. Contribution to exchange opens once per account and is not repeated.
 
-And as soon as you are confirmed, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
+POEN is also recorded for you when someone re-registers it to you for a completed exchange. While you do not hold proof of reality you can receive it, but you cannot re-register it to anyone yourself.
+
+As soon as you receive confirmation of reality, you can also post a want ad — what you need — so that whoever has it can get in touch.`,
       },
       {
         id: 82,
-        pitanje: `I am buying from an advertiser who is not confirmed — how big is the risk?`,
-        odgovor: `A full member is someone whose reality has been confirmed by another person — unknown to you, but not to the network. An unconfirmed advertiser is someone whose reality no one has confirmed yet, and their listing states that plainly.
+        pitanje: `I am exchanging with a member no one has confirmed — how big is the risk?`,
+        odgovor: `The risk is yours: if you re-register POEN and do not receive what was agreed, the re-registration is not reversed automatically.
 
-For that reason, send POENs only after you have received the goods or the service.
+So re-register POEN only once you have received the goods or the service. That is the one rule that really protects you.
 
-You are answerable to each other for quality, delivery and performance under general rules — the Foundation and the Protocol do not interfere.`,
+What confirmed means, and what it does not. A full member is someone whose reality another person has confirmed — unknown to you, but not to the network. A new member is someone whose reality no one has confirmed yet, and their listing carries a mark saying so.
+
+What works in your favour. The system remembers permanently. Every update of the record stays logged under a pseudonym and visible to full members — bad conduct is not erased from an account.
+
+If the exchange falls through. Report the case to the Foundation. A re-registration is not irreversible and may be annulled upon a report — but that is not a guarantee of recovery.
+
+For quality, delivery and performance of the agreement you and the other side are answerable under the general rules of the law of obligations; the Foundation and the Protocol are not a party to that relationship. In the initial phase you may also ask for voluntary mediation by the Foundation — it is not binding, but it is often enough.
+
+It is best to meet in person and carry out the exchange face to face. That lowers the risk, and it creates the acquaintance from which confirmation can follow.`,
       },
       {
         id: 83,
         pitanje: `How many listings can I post before confirmation?`,
-        odgovor: `Three active ones, and offers only — something you are offering. Each listing must have a title, a description, a photograph, a category and a place — the length of the title and description is not a condition.
+        odgovor: `Three active listings, and offers only — something you are offering. The first such listing earns you 1,000 POEN.
 
-A want ad — a listing in which you ask for something — contacting advertisers and starting a conversation come with confirmation. If someone gets in touch about your listing, you may reply even before that.`,
+Every listing must have a title, a description, a photograph, a category and a place. There is no prescribed minimum length — write as much as it takes for a person to understand what you are offering.
+
+With confirmation of reality the limit disappears and the rest opens up:
+
+• an unlimited number of active listings
+
+• want ads — a listing in which you ask for what you need
+
+• the contact details on a listing
+
+• starting a conversation
+
+One thing works even before confirmation: if someone gets in touch about your listing, you may reply.`,
       },
     ],
   },
