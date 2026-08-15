@@ -14,10 +14,15 @@
  *    prepis sama od sebe — ona je evidencija o kojoj Fondacija odlučuje.
  *  - Poništenje ide PROTIVZAPISOM, ne brisanjem: istorija se ne prepravlja, kao
  *    ni pri prestanku statusa (čl. 34).
- *  - Zapis primaoca pri poništenju NE SME u minus. Jedini izuzetak od zabrane
- *    negativnog zapisa u celom sistemu je nadoknada iz čl. 20b dokaza
- *    stvarnosti, i on se ovim ne proširuje — vraća se najviše ono što se na
- *    zapisu zatekne, pa i ništa.
+ *
+ * 🔴 POVRAĆAJ JE UVEK PUN — zapis primaoca sme u minus (odluka vlasnika,
+ * 2026-08-15). Ranija verzija je vraćala najviše ono što na zapisu zatekne, pa
+ * je onaj ko brže potroši tuđi POEN prolazio jeftinije od onog ko ga sačuva —
+ * to je nagrađivalo upravo ponašanje zbog kog se prijava i podnosi. Minus radi
+ * isto što i nadoknada iz čl. 20b: nije dug i ne naplaćuje se, POEN-i koji
+ * pristignu prvo ga popunjavaju, a prepis drugome je moguć tek kad zapis pređe
+ * nulu. Time izuzetaka od zabrane negativnog zapisa (Pravilnik čl. 14 st. 3)
+ * ima DVA — vidi napomenu o aktima u CLAUDE.md.
  */
 
 /** Najviše otvorenih prijava po korisniku — ista brana kao kod prigovora. */
@@ -75,19 +80,27 @@ export function smePrijaviti(u: UlazPrijave): IshodProvere {
 }
 
 /**
- * Koliko se POEN-a stvarno može vratiti.
+ * Koliko se vraća — ceo prepisani iznos, bez obzira na stanje primaoca.
  *
- * Ograničeno stanjem primaoca, jer njegov zapis ne sme u minus (Pravilnik čl.
- * 14). Ko je prepisano već potrošio, vraća samo ono što mu je ostalo — i to je
- * razlog zbog kog se u FAQ-u kaže da poništenje nije garancija povraćaja.
- * Negativno stanje (nadoknada, čl. 20b) čita se kao nula, ne kao dug koji bi se
- * ovim produbljivao.
+ * Funkcija postoji i posle ukidanja kape, da bi mesto na kom se iznos određuje
+ * ostalo jedno; ako se ikad uvede delimičan povraćaj, menja se samo ona.
  */
-export function iznosZaVracanje(iznosPrepisa: number, stanjePrimaoca: number): number {
-  return Math.max(0, Math.min(iznosPrepisa, stanjePrimaoca));
+export function iznosPovracaja(iznosPrepisa: number): number {
+  return Math.max(0, iznosPrepisa);
 }
 
-/** Da li je poništenje bilo potpuno (za tekst obaveštenja i za prikaz u tabu). */
-export function ponistenjePotpuno(iznosPrepisa: number, vraceno: number): boolean {
-  return vraceno >= iznosPrepisa;
+/** Stanje primaoca posle poništenja — ume da bude negativno. */
+export function stanjePosle(stanjePrimaoca: number, iznosPrepisa: number): number {
+  return stanjePrimaoca - iznosPovracaja(iznosPrepisa);
+}
+
+/**
+ * Da li poništenje odvodi zapis primaoca u minus (nadoknada).
+ *
+ * Adminu se prikazuje PRE odluke, a primaocu se u obaveštenju objašnjava
+ * drugačijim tekstom — minus menja šta čovek sme da radi sa zapisom, pa ne sme
+ * da se pojavi bez reči.
+ */
+export function idUMinus(stanjePrimaoca: number, iznosPrepisa: number): boolean {
+  return stanjePosle(stanjePrimaoca, iznosPrepisa) < 0;
 }

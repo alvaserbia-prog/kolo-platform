@@ -342,7 +342,7 @@
     "zabelezen_opis": "Evidentira se kad Zaklada odobri tvoj prvi oglas, kad te netko potvrdi ili kad ti netko prepiše POEN. Do tada nije zapis POEN-a i ne ulazi u stanje.",
     "samo_primalac": "Dok nisi potvrđen/a možeš samo primati POEN. Prepis u tuđi zapis otvara se nakon potvrde.",
     "nadoknada_naslov": "Naknada",
-    "nadoknada_opis": "Nastala je poništenjem lažne potvrde koju si obavio. Nije dug i ne može se naplatiti — POEN koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga nije ti ograničena; prepis POEN drugome moguć je kad zapis prijeđe nulu.",
+    "nadoknada_opis": "Nastala je poništenjem zapisa koji nije bio pokriven — poništenom potvrdom koju si dao ili poništenim prepisom po prijavi razmjene. Nije dug i ne može se naplatiti — POEN-i koji ti pristignu prvo je popunjavaju. Razmjena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis prijeđe nulu.",
     "putanja_naslov": "Doprinosi razmjeni",
     "putanja_opis": "Pet koraka, svaki 1.000 POEN. Otključavaju se redom, a ukupno se po korisniku evidentira najviše 5.000 POEN.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -358,7 +358,7 @@
     "putanja_pravila": "U brojač ulaze prepisi POEN-a od najmanje 1.000 POEN s ljudima koji nisu u tvom krugu poznanstava (mreža potvrda). Svaki sugovornik broji se jednom, bez obzira na broj prepisa. Prepis s korisnikom koji još nije potvrđen se bilježi, a broji tek kad on bude potvrđen. Trenutačno u brojaču: {sagovornika}.",
     "prijavi_dugme": "Prijavi problem s razmjenom",
     "prijavi_naslov": "Prijavi neispunjenu razmjenu",
-    "prijavi_opis": "Ako si prepisao POEN a nisi dobio dogovoreno, javi Fondaciji. Prepis se ne poništava sam — o njemu odlučuje Fondacija, a vratiti se može najviše ono što je ostalo na zapisu druge strane.",
+    "prijavi_opis": "Ako si prepisao POEN a nisi dobio dogovoreno, javi Fondaciji. Prepis se ne poništava sam — o njemu odlučuje Fondacija; ako ga poništi, vraća ti se cijeli iznos, i onda kada zapis druge strane time ode u minus.",
     "prijavi_placeholder": "Što je dogovoreno i što se dogodilo.",
     "prijavi_posalji": "Pošalji prijavu",
     "prijavi_odustani": "Odustani",
@@ -2474,7 +2474,9 @@
     "prijava_razmene_oduzeto_naslov": "Prepis je poništen",
     "prijava_razmene_oduzeto_tekst": "Fondacija je po prijavi poništila prepis od {pseudonim}. S tvog zapisa vraćeno je {iznos} POEN. Obrazloženje: {odluka}",
     "prijava_razmene_odbacena_naslov": "Prijava razmjene je razmotrena",
-    "prijava_razmene_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i prepis ostaje. Obrazloženje: {odluka}"
+    "prijava_razmene_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i prepis ostaje. Obrazloženje: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "Prepis je poništen — zapis ti je u minusu",
+    "prijava_razmene_oduzeto_minus_tekst": "Fondacija je po prijavi poništila prepis od {pseudonim} i s tvog zapisa vraćeno je {iznos} POEN. Zapis je time otišao u minus i na njemu stoji nadoknada od {nadoknada} POEN: nije dug i ne može se naplatiti, POEN-i koji ti pristignu prvo je popunjavaju, a prepis drugome je moguć kad zapis prijeđe nulu. Razmjena dobara i usluga ti nije ograničena. Obrazloženje: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",

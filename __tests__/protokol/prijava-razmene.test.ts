@@ -1,8 +1,9 @@
 import { describe, it, expect } from "vitest";
 import {
   smePrijaviti,
-  iznosZaVracanje,
-  ponistenjePotpuno,
+  iznosPovracaja,
+  stanjePosle,
+  idUMinus,
   MAX_OTVORENIH_PRIJAVA,
   MIN_OPIS_PRIJAVE,
 } from "@/lib/razmena-prijava";
@@ -13,8 +14,9 @@ import {
  * Dve stvari koje ovi testovi čuvaju:
  *  1. prijavljuje samo POŠILJALAC — primalac nije ništa prepisao, pa nema šta da
  *     mu se vrati;
- *  2. poništenje ne sme da odvede zapis primaoca u minus (Pravilnik čl. 14 —
- *     jedini izuzetak je nadoknada iz čl. 20b i ovim se ne proširuje).
+ *  2. poništenje vraća CEO iznos i sme da odvede zapis primaoca u minus (odluka
+ *     vlasnika 2026-08-15). Kapa po stanju primaoca je namerno uklonjena: uz nju
+ *     je onaj ko brže potroši tuđi POEN prolazio jeftinije od onog ko ga sačuva.
  */
 
 const OSNOVA = {
@@ -65,28 +67,32 @@ describe("smePrijaviti", () => {
   });
 });
 
-describe("iznosZaVracanje", () => {
-  it("vraća ceo iznos kad primalac ima pokriće", () => {
-    expect(iznosZaVracanje(1000, 5000)).toBe(1000);
-    expect(iznosZaVracanje(1000, 1000)).toBe(1000);
-  });
-
-  it("vraća samo ono što je ostalo kad je primalac potrošio", () => {
-    expect(iznosZaVracanje(1000, 400)).toBe(400);
-  });
-
-  it("ne odvodi zapis primaoca u minus (čl. 14)", () => {
-    expect(iznosZaVracanje(1000, 0)).toBe(0);
-    // Zapis u nadoknadi (čl. 20b) čita se kao nula, a ne kao dug koji bi se
-    // poništenjem produbljivao.
-    expect(iznosZaVracanje(1000, -3000)).toBe(0);
+describe("iznosPovracaja", () => {
+  it("vraća ceo prepisani iznos, bez obzira na stanje primaoca", () => {
+    expect(iznosPovracaja(1000)).toBe(1000);
+    expect(iznosPovracaja(24_000)).toBe(24_000);
   });
 });
 
-describe("ponistenjePotpuno", () => {
-  it("razlikuje pun povraćaj od delimičnog", () => {
-    expect(ponistenjePotpuno(1000, 1000)).toBe(true);
-    expect(ponistenjePotpuno(1000, 999)).toBe(false);
-    expect(ponistenjePotpuno(1000, 0)).toBe(false);
+describe("stanjePosle i idUMinus", () => {
+  it("računa stanje primaoca posle poništenja", () => {
+    expect(stanjePosle(5000, 1000)).toBe(4000);
+    expect(stanjePosle(1000, 1000)).toBe(0);
+  });
+
+  it("pušta zapis u minus kad pokrića nema", () => {
+    expect(stanjePosle(400, 1000)).toBe(-600);
+    expect(idUMinus(400, 1000)).toBe(true);
+    expect(idUMinus(0, 1000)).toBe(true);
+  });
+
+  it("produbljuje zatečenu nadoknadu umesto da je zaobiđe", () => {
+    expect(stanjePosle(-3000, 1000)).toBe(-4000);
+    expect(idUMinus(-3000, 1000)).toBe(true);
+  });
+
+  it("ne prijavljuje minus kad pokrića ima", () => {
+    expect(idUMinus(1000, 1000)).toBe(false);
+    expect(idUMinus(5000, 1000)).toBe(false);
   });
 });

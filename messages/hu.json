@@ -335,7 +335,7 @@
     "zabelezen_opis": "Akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja az első hirdetésedet, amikor valaki megerősít téged, vagy amikor valaki POEN-t ír át a nyilvántartásodba. Addig nem POEN-bejegyzés, és nem számít bele az egyenlegbe.",
     "samo_primalac": "Amíg nem vagy megerősítve, csak POEN-t fogadhatsz. A más nyilvántartásába való átírás a megerősítés után nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
-    "nadoknada_opis": "Az általad végzett hamis megerősítés érvénytelenítéséből keletkezett. Nem tartozás és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; másnak POEN-t akkor írhatsz át, ha a bejegyzésed túllépi a nullát.",
+    "nadoknada_opis": "Egy fedezetlen tétel érvénytelenítéséből keletkezett — az általad adott megerősítés érvénytelenítéséből vagy egy csereügyi bejelentés nyomán érvénytelenített átírásból. Nem tartozás, és nem hajtható be — a hozzád érkező POEN először ezt tölti fel. A javak és szolgáltatások cseréje nincs korlátozva; POEN-t másnak akkor írhatsz át, ha a nyilvántartásod túllépi a nullát.",
     "putanja_naslov": "Cseréhez való hozzájárulások",
     "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorrendben nyílnak meg, és felhasználónként összesen legfeljebb 5.000 POEN kerül nyilvántartásba.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -351,7 +351,7 @@
     "putanja_pravila": "A számlálóba a legalább 1.000 POEN összegű átírások kerülnek olyan emberekkel, akik nincsenek az ismeretségi körödben (a megerősítések hálózata). Minden partner egyszer számít, függetlenül az átírások számától. A még nem megerősített felhasználóval történt átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}.",
     "prijavi_dugme": "Probléma bejelentése a cseréről",
     "prijavi_naslov": "Nem teljesült csere bejelentése",
-    "prijavi_opis": "Ha átírtad a POEN-t, és nem kaptad meg a megbeszélteket, jelezd az Alapítványnak. Az átírás nem áll vissza magától — az Alapítvány dönt, és legfeljebb annyi téríthető vissza, amennyi a másik fél nyilvántartásában maradt.",
+    "prijavi_opis": "Ha átírtad a POEN-t, és nem kaptad meg a megbeszélteket, jelezd az Alapítványnak. Az átírás nem áll vissza magától — az Alapítvány dönt; ha érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy.",
     "prijavi_placeholder": "Miben állapodtatok meg, és mi történt.",
     "prijavi_posalji": "Bejelentés küldése",
     "prijavi_odustani": "Mégse",
@@ -2467,7 +2467,9 @@
     "prijava_razmene_oduzeto_naslov": "Egy átírás érvénytelenítve",
     "prijava_razmene_oduzeto_tekst": "Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felőli átírást. A nyilvántartásodból {iznos} POEN került vissza. Indokolás: {odluka}",
     "prijava_razmene_odbacena_naslov": "A csereügyi bejelentésed elbírálva",
-    "prijava_razmene_odbacena_tekst": "Az Alapítvány elbírálta a bejelentésedet, az átírás marad. Indokolás: {odluka}"
+    "prijava_razmene_odbacena_tekst": "Az Alapítvány elbírálta a bejelentésedet, az átírás marad. Indokolás: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "Egy átírás érvénytelenítve — a nyilvántartásod mínuszban van",
+    "prijava_razmene_oduzeto_minus_tekst": "Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felőli átírást, és a nyilvántartásodból {iznos} POEN került vissza. A nyilvántartásod ezzel mínuszba ment, és {nadoknada} POEN pótlás áll rajta: ez nem tartozás, nem hajtható be, a hozzád érkező POEN először ezt tölti fel, másnak pedig akkor írhatsz át, ha a nyilvántartás túllépi a nullát. A javak és szolgáltatások cseréje nincs korlátozva. Indokolás: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",

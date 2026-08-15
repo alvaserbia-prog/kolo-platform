@@ -123,7 +123,7 @@ Zato prepiši POEN tek kad primiš robu ili uslugu. To je jedino pravilo koje te
 
 Šta radi u tvoju korist. Sistem trajno pamti. Svako ažuriranje evidencije ostaje zabeleženo pod pseudonimom i vidljivo redovnim članovima — loše ponašanje se ne briše sa naloga.
 
-Ako razmena propadne. Prijavi slučaj Fondaciji — dugme stoji uz sam prepis u tvojoj istoriji POEN-a. Prepis nije nepovratan i može biti poništen po prijavi, ali to nije garancija povraćaja: vraća se najviše ono što je na zapisu druge strane ostalo.
+Ako razmena propadne. Prijavi slučaj Fondaciji — dugme stoji uz sam prepis u tvojoj istoriji POEN-a. Prepis nije nepovratan: ako ga Fondacija po prijavi poništi, vraća ti se ceo iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prijava nije automatski povraćaj.
 
 Za kvalitet, isporuku i ispunjenje dogovora odgovaraš ti sa drugom stranom, po opštim pravilima obligacionog prava; Fondacija i Protokol nisu strana u tom odnosu. U početnoj fazi možeš zatražiti i dobrovoljno posredovanje Fondacije — ono nije obavezujuće, ali često je dovoljno.
 

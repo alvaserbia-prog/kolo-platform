@@ -342,7 +342,7 @@
     "zabelezen_opis": "It is recorded once the Foundation approves your first listing, once someone confirms you, or once someone re-registers POEN into your record. Until then it is not a POEN record and does not count towards your balance.",
     "samo_primalac": "Until you are confirmed you can only receive POEN. Re-registering POEN into someone else's record opens up upon confirmation.",
     "nadoknada_naslov": "Restitution",
-    "nadoknada_opis": "It arose from the annulment of a false confirmation you performed. It is not a debt and cannot be collected — POEN you receive fill it first. Exchange of goods and services is not restricted; re-registering POEN to someone else becomes possible once your record passes zero.",
+    "nadoknada_opis": "It arose from an annulled record that was not covered — a confirmation you gave that was annulled, or a re-registration annulled upon an exchange report. It is not a debt and cannot be collected — POEN that reaches you fills it first. Exchanging goods and services is not restricted for you; re-registering POEN to someone else becomes possible once your ledger passes zero.",
     "putanja_naslov": "Exchange contributions",
     "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and no user is recorded more than 5,000 POEN in total.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -358,7 +358,7 @@
     "putanja_pravila": "The count includes re-registrations of at least 1,000 POEN with people outside your circle of acquaintance (the network of confirmations). Each counterpart counts once, however many re-registrations there are. A re-registration with a user who is not yet confirmed is noted, but counts only once they are confirmed. Currently counted: {sagovornika}.",
     "prijavi_dugme": "Report a problem with this exchange",
     "prijavi_naslov": "Report an unfulfilled exchange",
-    "prijavi_opis": "If you re-registered POEN and did not receive what was agreed, tell the Foundation. The re-registration is not reversed on its own — the Foundation decides, and at most what is left in the other side's ledger can be returned.",
+    "prijavi_opis": "If you re-registered POEN and did not receive what was agreed, tell the Foundation. The re-registration is not reversed on its own — the Foundation decides; if it annuls it, the whole amount comes back to you, even when that pushes the other side's ledger below zero.",
     "prijavi_placeholder": "What was agreed and what happened.",
     "prijavi_posalji": "Send report",
     "prijavi_odustani": "Cancel",
@@ -2474,7 +2474,9 @@
     "prijava_razmene_oduzeto_naslov": "A re-registration has been annulled",
     "prijava_razmene_oduzeto_tekst": "Upon a report, the Foundation has annulled the re-registration from {pseudonim}. {iznos} POEN has been returned from your ledger. Reasons: {odluka}",
     "prijava_razmene_odbacena_naslov": "Your exchange report has been reviewed",
-    "prijava_razmene_odbacena_tekst": "The Foundation has reviewed your report and the re-registration stands. Reasons: {odluka}"
+    "prijava_razmene_odbacena_tekst": "The Foundation has reviewed your report and the re-registration stands. Reasons: {odluka}",
+    "prijava_razmene_oduzeto_minus_naslov": "A re-registration has been annulled — your ledger is below zero",
+    "prijava_razmene_oduzeto_minus_tekst": "Upon a report, the Foundation has annulled the re-registration from {pseudonim} and {iznos} POEN has been returned from your ledger. Your ledger has thereby gone below zero and carries a make-good of {nadoknada} POEN: it is not a debt and cannot be collected, POEN that reaches you fills it first, and re-registering to someone else becomes possible once the ledger passes zero. Exchanging goods and services is not restricted for you. Reasons: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",

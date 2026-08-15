@@ -6,10 +6,10 @@
  * Odluka je jedna od dve: poništi prepis (protivzapis) ili odbaci prijavu. Obe
  * traže obrazloženje, jer obe idu čoveku.
  *
- * 🔴 Poništenje ne ume da vrati više nego što je na zapisu primaoca ostalo —
- * zapis ne sme u minus (Pravilnik čl. 14; jedini izuzetak je nadoknada iz čl.
- * 20b i ne proširuje se). Zato uz svaku stavku stoji trenutno stanje primaoca i
- * unapred izračunato „vratiće se": da se odluka donosi znajući ishod.
+ * 🔴 Poništenje vraća CEO prepisani iznos i zapis primaoca sme u minus (odluka
+ * vlasnika 2026-08-15) — minus radi isto što i nadoknada iz čl. 20b. Zato uz
+ * svaku stavku stoji stanje primaoca i stanje POSLE poništenja: odluka se
+ * donosi znajući da li čoveka ostavlja u nadoknadi.
  *
  * Ovo NIJE moderacija (uklanjanje oglasa je tab „Pijaca") i nije prigovor na
  * odluku Fondacije (tab „Prigovori"). Tri različite odluke, tri taba.
@@ -20,7 +20,7 @@ import { intlTag } from "@/lib/format";
 import { useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
-import { iznosZaVracanje } from "@/lib/razmena-prijava";
+import { iznosPovracaja, stanjePosle, idUMinus } from "@/lib/razmena-prijava";
 
 type Prikaz = "otvorene" | "resene";
 
@@ -81,11 +81,10 @@ export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
       return;
     }
     if (vrsta === "ponisti") {
-      const vratice = iznosZaVracanje(s.prepis.iznos, s.protiv.stanje);
-      const poruka =
-        vratice === s.prepis.iznos
-          ? `Poništiti prepis i vratiti ${vratice.toLocaleString("sr-RS")} POEN?`
-          : `Na zapisu primaoca ima ${Math.max(0, s.protiv.stanje).toLocaleString("sr-RS")} POEN. Vratiće se ${vratice.toLocaleString("sr-RS")} od ${s.prepis.iznos.toLocaleString("sr-RS")} POEN. Nastaviti?`;
+      const nakon = stanjePosle(s.protiv.stanje, s.prepis.iznos);
+      const poruka = idUMinus(s.protiv.stanje, s.prepis.iznos)
+        ? `Poništiti prepis i vratiti ${iznosPovracaja(s.prepis.iznos).toLocaleString("sr-RS")} POEN? Zapis primaoca time ide u minus — ostaje mu nadoknada od ${Math.abs(nakon).toLocaleString("sr-RS")} POEN.`
+        : `Poništiti prepis i vratiti ${iznosPovracaja(s.prepis.iznos).toLocaleString("sr-RS")} POEN?`;
       if (!confirm(poruka)) return;
     }
     setRadiId(s.id);
@@ -136,8 +135,9 @@ export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
           ))}
         </div>
         <p className="text-xs text-kolo-muted max-w-xl">
-          Poništenje vraća najviše ono što je na zapisu primaoca ostalo — zapis ne sme u minus
-          (Pravilnik čl. 14). Za razmenu odgovaraju sami korisnici; ovo je odluka Fondacije o
+          Poništenje vraća ceo prepisani iznos i zapis primaoca ume da ode u minus — tada na njemu
+          stoji nadoknada: nije dug, popunjavaju je POEN-i koji pristignu, a prepis drugome je
+          moguć tek preko nule. Za razmenu odgovaraju sami korisnici; ovo je odluka Fondacije o
           prepisu, ne presuda o razmeni.
         </p>
       </div>
@@ -153,7 +153,8 @@ export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
       ) : (
         <div className="space-y-3">
           {stavke.map((s) => {
-            const vratice = iznosZaVracanje(s.prepis.iznos, s.protiv.stanje);
+            const nakon = stanjePosle(s.protiv.stanje, s.prepis.iznos);
+            const uMinus = idUMinus(s.protiv.stanje, s.prepis.iznos);
             return (
               <div key={s.id} className="bg-white rounded-2xl border border-kolo-border p-4 space-y-3">
                 <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
@@ -181,11 +182,11 @@ export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
                     Stanje primaoca: <strong className="text-kolo-text">{s.protiv.stanje.toLocaleString("sr-RS")}</strong>
                   </span>
                   <span>
-                    Vratiće se:{" "}
-                    <strong className={vratice === s.prepis.iznos ? "text-kolo-green-700" : "text-red-500"}>
-                      {vratice.toLocaleString("sr-RS")} POEN
+                    Posle poništenja:{" "}
+                    <strong className={uMinus ? "text-red-500" : "text-kolo-green-700"}>
+                      {nakon.toLocaleString("sr-RS")} POEN
                     </strong>
-                    {vratice < s.prepis.iznos && " (delimično)"}
+                    {uMinus && " (nadoknada)"}
                   </span>
                 </div>
 

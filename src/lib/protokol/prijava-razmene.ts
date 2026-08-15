@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { logAdminAkcija } from "@/lib/audit";
-import { iznosZaVracanje, ponistenjePotpuno } from "@/lib/razmena-prijava";
+import { iznosPovracaja, stanjePosle, idUMinus } from "@/lib/razmena-prijava";
 
 export * from "@/lib/razmena-prijava";
 
@@ -22,16 +22,16 @@ export * from "@/lib/razmena-prijava";
  */
 
 export type IshodOdluke =
-  | { ok: true; vraceno: number; potpuno: boolean }
+  | { ok: true; vraceno: number; uMinusu: boolean }
   | { ok: false; razlog: string };
 
 /**
  * Poništi prepis po prijavi.
  *
- * Vraća najviše ono što na zapisu primaoca zatekne — njegov zapis ne sme u minus
- * (Pravilnik čl. 14; jedini izuzetak je nadoknada iz čl. 20b i ne proširuje se).
- * Zato ishod ume da bude i delimičan, i nikakav: `vraceno` se upisuje u prijavu
- * i javlja obema stranama, da odluka ne izgleda kao pun povraćaj kad nije.
+ * Vraća se CEO prepisani iznos, pa zapis primaoca ume da ode u minus — minus
+ * radi isto što i nadoknada iz čl. 20b (nije dug, ne naplaćuje se, POEN-i koji
+ * pristignu prvo ga popunjavaju, prepis drugome tek preko nule). Bez toga bi
+ * onaj ko brže potroši tuđi POEN prolazio jeftinije od onog ko ga sačuva.
  */
 export async function ponistiPrepis(
   prijavaId: string,
@@ -53,19 +53,18 @@ export async function ponistiPrepis(
     return { ok: false, razlog: "Jedna od strana nema zapis u Protokolu." };
 
   const iznos = prijava.transakcija.amount;
-  const vraceno = iznosZaVracanje(iznos, prijava.protiv.wallet.balance);
-  const potpuno = ponistenjePotpuno(iznos, vraceno);
+  const vraceno = iznosPovracaja(iznos);
+  const uMinusu = idUMinus(prijava.protiv.wallet.balance, iznos);
+  const stanjeNakon = stanjePosle(prijava.protiv.wallet.balance, iznos);
 
   try {
     await prisma.$transaction(async (tx) => {
       if (vraceno > 0) {
-        // Uslovni `updateMany` (kao u `/api/transfer`): ako je primalac u
-        // međuvremenu potrošio POEN, ceo posao pada umesto da ode u minus.
-        const skinuto = await tx.wallet.updateMany({
-          where: { id: prijava.protiv.wallet!.id, balance: { gte: vraceno } },
+        // Bez uslova na stanje: minus je ovde dozvoljen ishod, ne greška.
+        await tx.wallet.update({
+          where: { id: prijava.protiv.wallet!.id },
           data: { balance: { decrement: vraceno } },
         });
-        if (skinuto.count !== 1) throw new Error("STANJE_SE_PROMENILO");
 
         await tx.wallet.update({
           where: { id: prijava.prijavioc.wallet!.id },
@@ -78,7 +77,7 @@ export async function ponistiPrepis(
             toWalletId: prijava.prijavioc.wallet!.id,
             amount: vraceno,
             type: TransactionType.PONISTENJE_PREPISA,
-            description: `Poništen prepis po prijavi Fondaciji${potpuno ? "" : " (delimično — na zapisu nije bilo ceo iznos)"}`,
+            description: "Poništen prepis po prijavi Fondaciji",
           },
         });
       }
@@ -90,8 +89,6 @@ export async function ponistiPrepis(
       if (zatvoreno.count !== 1) throw new Error("VEC_RESENA");
     });
   } catch (e) {
-    if (e instanceof Error && e.message === "STANJE_SE_PROMENILO")
-      return { ok: false, razlog: "Stanje primaoca se u međuvremenu promenilo. Pokušaj ponovo." };
     if (e instanceof Error && e.message === "VEC_RESENA")
       return { ok: false, razlog: "O prijavi je već odlučeno." };
     throw e;
@@ -102,20 +99,26 @@ export async function ponistiPrepis(
     tip: "prijava_razmene",
     kljuc: "notifikacije.prijava_razmene_ponistena",
     parametri: { iznos: vraceno, pseudonim: prijava.protiv.pseudonim, odluka },
-    naslov: vraceno > 0 ? `Vraćeno ti je ${vraceno.toLocaleString("sr-RS")} POEN` : "Prepis je poništen",
-    tekst:
-      vraceno > 0
-        ? `Fondacija je poništila prepis ka ${prijava.protiv.pseudonim}. Vraćeno: ${vraceno.toLocaleString("sr-RS")} POEN${potpuno ? "" : " (na zapisu nije bilo ceo iznos)"}. Obrazloženje: ${odluka}`
-        : `Fondacija je poništila prepis ka ${prijava.protiv.pseudonim}, ali na njegovom zapisu nije bilo POEN-a za vraćanje. Obrazloženje: ${odluka}`,
+    naslov: `Vraćeno ti je ${vraceno.toLocaleString("sr-RS")} POEN`,
+    tekst: `Fondacija je poništila prepis ka ${prijava.protiv.pseudonim}. Vraćeno ti je ${vraceno.toLocaleString("sr-RS")} POEN. Obrazloženje: ${odluka}`,
     link: "/novcanik",
   });
 
+  // Kad zapis ode u minus, čoveku se to MORA objasniti drugim tekstom: minus
+  // menja šta sme sa zapisom (prepis drugome tek preko nule), a nije dug.
   await obavesti(prijava.protivId, {
     tip: "prijava_razmene",
-    kljuc: "notifikacije.prijava_razmene_oduzeto",
-    parametri: { iznos: vraceno, pseudonim: prijava.prijavioc.pseudonim, odluka },
+    kljuc: uMinusu ? "notifikacije.prijava_razmene_oduzeto_minus" : "notifikacije.prijava_razmene_oduzeto",
+    parametri: {
+      iznos: vraceno,
+      pseudonim: prijava.prijavioc.pseudonim,
+      odluka,
+      nadoknada: Math.abs(Math.min(0, stanjeNakon)),
+    },
     naslov: "Prepis je poništen",
-    tekst: `Fondacija je po prijavi poništila prepis od ${prijava.prijavioc.pseudonim}. Sa tvog zapisa je vraćeno ${vraceno.toLocaleString("sr-RS")} POEN. Obrazloženje: ${odluka}`,
+    tekst: uMinusu
+      ? `Fondacija je po prijavi poništila prepis od ${prijava.prijavioc.pseudonim} i sa tvog zapisa je vraćeno ${vraceno.toLocaleString("sr-RS")} POEN. Zapis je time otišao u minus i na njemu stoji nadoknada od ${Math.abs(Math.min(0, stanjeNakon)).toLocaleString("sr-RS")} POEN-a: nije dug i ne može se naplatiti, POEN-i koji ti pristignu prvo je popunjavaju, a prepis drugome je moguć kad zapis pređe nulu. Razmena dobara i usluga ti nije ograničena. Obrazloženje: ${odluka}`
+      : `Fondacija je po prijavi poništila prepis od ${prijava.prijavioc.pseudonim}. Sa tvog zapisa je vraćeno ${vraceno.toLocaleString("sr-RS")} POEN. Obrazloženje: ${odluka}`,
     link: "/novcanik",
   });
 
@@ -123,10 +126,10 @@ export async function ponistiPrepis(
     adminId,
     "PREPIS_PONISTEN",
     prijava.protivId,
-    `prijava ${prijavaId}, prepis ${prijava.transakcijaId}, iznos ${iznos}, vraćeno ${vraceno}; razlog: ${odluka}`,
+    `prijava ${prijavaId}, prepis ${prijava.transakcijaId}, vraćeno ${vraceno}, stanje primaoca posle ${stanjeNakon}; razlog: ${odluka}`,
   );
 
-  return { ok: true, vraceno, potpuno };
+  return { ok: true, vraceno, uMinusu };
 }
 
 /**
@@ -169,5 +172,5 @@ export async function odbaciPrijavu(
     `prijava ${prijavaId}, prepis ${prijava.transakcijaId}; razlog: ${odluka}`,
   );
 
-  return { ok: true, vraceno: 0, potpuno: false };
+  return { ok: true, vraceno: 0, uMinusu: false };
 }

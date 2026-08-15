@@ -124,7 +124,7 @@ Mit jelent a megerősített, és mit nem. A rendes tag olyasvalaki, akinek a val
 
 Mi dolgozik a javadra. A rendszer tartósan emlékszik. A nyilvántartás minden frissítése álnév alatt rögzítve marad, és a rendes tagok látják — a rossz magatartás nem törlődik a fiókról.
 
-Ha a csere meghiúsul. Jelentsd az esetet az Alapítványnak — a gomb magánál az átírásnál van, a POEN-előzményeidben. Az átírás nem visszafordíthatatlan, és bejelentés alapján érvényteleníthető, de ez nem jelent garanciát a visszatérítésre: legfeljebb annyi téríthető vissza, amennyi a másik fél nyilvántartásában maradt.
+Ha a csere meghiúsul. Jelentsd az esetet az Alapítványnak — a gomb magánál az átírásnál van, a POEN-előzményeidben. Az átírás nem visszafordíthatatlan: ha az Alapítvány a bejelentésed alapján érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy. A döntés az Alapítványé, tehát a bejelentés nem automatikus visszatérítés.
 
 A minőségért, a teljesítésért és a megállapodás betartásáért te felelsz a másik féllel együtt, a kötelmi jog általános szabályai szerint; az Alapítvány és a Protokoll nem részese ennek a viszonynak. A kezdeti szakaszban kérheted az Alapítvány önkéntes közvetítését is — az nem kötelező erejű, de gyakran elegendő.
 

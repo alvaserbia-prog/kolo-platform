@@ -113,7 +113,7 @@ What confirmed means, and what it does not. A full member is someone whose reali
 
 What works in your favour. The system remembers permanently. Every update of the record stays logged under a pseudonym and visible to full members — bad conduct is not erased from an account.
 
-If the exchange falls through. Report the case to the Foundation — the button sits next to the re-registration itself in your POEN history. A re-registration is not irreversible and may be annulled upon a report, but that is not a guarantee of recovery: at most what is left in the other side's ledger can be returned.
+If the exchange falls through. Report the case to the Foundation — the button sits next to the re-registration itself in your POEN history. A re-registration is not irreversible: if the Foundation annuls it upon your report, the whole amount comes back to you, even when that pushes the other side's ledger below zero. The decision rests with the Foundation, so a report is not an automatic refund.
 
 For quality, delivery and performance of the agreement you and the other side are answerable under the general rules of the law of obligations; the Foundation and the Protocol are not a party to that relationship. In the initial phase you may also ask for voluntary mediation by the Foundation — it is not binding, but it is often enough.
 

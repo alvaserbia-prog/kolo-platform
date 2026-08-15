@@ -8,8 +8,9 @@ import { ponistiPrepis } from "@/lib/protokol/prijava-razmene";
 /**
  * POST /api/admin/prijave-razmene/[id]/ponisti  { odluka }
  *
- * Poništava prepis protivzapisom, do visine onoga što je na zapisu primaoca
- * ostalo. Obrazloženje je obavezno — ide obema stranama i u revizijski dnevnik.
+ * Poništava prepis protivzapisom, u punom iznosu — zapis primaoca sme da ode u
+ * minus (isti režim kao nadoknada iz čl. 20b). Obrazloženje je obavezno: ide
+ * obema stranama i u revizijski dnevnik.
  */
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -22,5 +23,5 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
   const rez = await ponistiPrepis(id, session.user.id, odluka);
   if (!rez.ok) return await greska(rez.razlog, 400);
-  return NextResponse.json({ ok: true, vraceno: rez.vraceno, potpuno: rez.potpuno });
+  return NextResponse.json({ ok: true, vraceno: rez.vraceno, uMinusu: rez.uMinusu });
 }
