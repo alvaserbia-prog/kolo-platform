@@ -576,28 +576,24 @@ export default async function ONamaPage() {
 
       {/* ── CTA ───────────────────────────────────────────────────── */}
       <section className="bg-kolo-green-700 rounded-2xl p-8 md:p-10 text-center text-white">
-        <p className="text-white/70 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
+        {/* Nadnaslov stoji IZNAD teksta — do sada je stajao ispod dugmadi,
+            gde ga niko ne čita kao najavu nego kao sitan otisak. */}
+        <p className="text-xs font-semibold tracking-widest uppercase text-kolo-gold-400 mb-3">{t("cta_eyebrow")}</p>
+        <p className="text-white/70 text-sm md:text-base mb-7 max-w-xl mx-auto leading-relaxed">
           {t("cta_opis")}<br />
           {t("cta_opis2")}
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
+        <div className="flex justify-center mb-6">
           <Link
             href="/registracija"
-            className="px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
+            className="w-full sm:w-auto px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
           >
             {t("cta_registracija")}
           </Link>
-          <Link
-            href="/kako-funkcionise"
-            className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t("cta_kako")}
-          </Link>
         </div>
-        <p className="text-xs text-white/40 mb-6">{t("cta_eyebrow")}</p>
-        <p className="text-white/40 text-xs">
+        <Link href="/zajednicko-dobro" className="text-white/40 hover:text-white/70 transition-colors text-xs underline underline-offset-4">
           {t("cta_licence")}
-        </p>
+        </Link>
       </section>
 
     </div>
