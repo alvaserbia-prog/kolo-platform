@@ -27,6 +27,9 @@ export default async function IstorijaTransakcija({
     include: {
       fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+      // Status prijave neispunjene razmene — po njemu se bira da li se uz red
+      // nudi dugme za prijavu ili stoji oznaka da je već prijavljeno.
+      prijavaRazmene: { select: { status: true } },
     },
   });
 
@@ -34,7 +37,10 @@ export default async function IstorijaTransakcija({
     const primio = t.toWallet?.userId
       ? t.toWallet.userId === userId
       : t.toWalletId === walletId;
-    const drugiUser = t.type !== "TRANSFER"
+    // Prepis i njegovo poništenje su jedini zapisi između DVA člana — kod svih
+    // ostalih je druga strana Protokol.
+    const medjuClanovima = t.type === "TRANSFER" || t.type === "PONISTENJE_PREPISA";
+    const drugiUser = !medjuClanovima
       ? null
       : primio
       ? t.fromWallet?.user ?? null
@@ -46,9 +52,13 @@ export default async function IstorijaTransakcija({
       type: t.type,
       description: t.description,
       primio,
-      drugiPseudonim: drugiUser?.pseudonim ?? (t.type !== "TRANSFER" ? "Protokol" : "?"),
+      drugiPseudonim: drugiUser?.pseudonim ?? (medjuClanovima ? "?" : "Protokol"),
       drugiId: drugiUser?.id ?? null,
       createdAt: t.createdAt.toISOString(),
+      // Prijavljuje samo pošiljalac (`!primio`) i samo prepis — poništenje se
+      // ne prijavljuje ponovo.
+      mozePrijaviti: t.type === "TRANSFER" && !primio && t.prijavaRazmene === null,
+      prijavaStatus: t.prijavaRazmene?.status ?? null,
     };
   });
 

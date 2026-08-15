@@ -21,6 +21,7 @@ const LevakTab = dynamic(() => import("./LevakTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 const PrviOglasiTab = dynamic(() => import("./PrviOglasiTab"), { ssr: false });
+const RazmeneTab = dynamic(() => import("./RazmeneTab"), { ssr: false });
 const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
 
 interface KorisnikInfo {
@@ -219,6 +220,7 @@ interface AdminKlijentProps {
   otvorenihPrijavaOglasa: number;
   /** Prvi oglasi koji čekaju odobrenje doprinosa — badge na tabu Prvi oglasi (čl. 40a). */
   prvihOglasaNaCekanju: number;
+  otvorenihPrijavaRazmene: number;
 }
 
 const tipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
@@ -247,7 +249,7 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 });
 
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju, otvorenihPrijavaRazmene }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -301,6 +303,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
     ["prvi-oglasi", `${t("tab_prvi_oglasi")}${prvihOglasaNaCekanju > 0 ? ` (${prvihOglasaNaCekanju})` : ""}`],
+    ["razmene", `${t("tab_razmene")}${otvorenihPrijavaRazmene > 0 ? ` (${otvorenihPrijavaRazmene})` : ""}`],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
@@ -399,6 +402,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Prvi oglasi — odobravanje doprinosa iz čl. 40a (nalozi bez potvrde). */}
       {tab === "prvi-oglasi" && <PrviOglasiTab onDone={() => router.refresh()} />}
+
+      {/* Razmene — prijave neispunjene razmene; odlučuje se o prepisu POEN-a. */}
+      {tab === "razmene" && <RazmeneTab onDone={() => router.refresh()} />}
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}

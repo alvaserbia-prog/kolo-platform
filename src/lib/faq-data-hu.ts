@@ -18,106 +18,136 @@ export const FAQ_SEKCIJE_HU: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `Senkit nem ismerek, aki már a KOLO-ban van — hogyan megerősíttethetem magam, ha a megerősítéshez belülről kell valakinek megerősítenie engem?`,
-        odgovor: `Akkor is megerősíttetheted magad, ha senkit nem ismersz a rendszerben. A megerősítés személyes ismeretségen alapul, de három dolog korábbi ismeretségek nélkül is utat nyit neked.
+        pitanje: `Senkit nem ismerek a KOLO-ban — megerősíthet-e engem bárki?`,
+        odgovor: `Igen. A valóság megerősítése azon alapul, hogy valaki személyesen megismer téged — és ez az ismeretség még csak most fog kialakulni.
 
-Először: a regisztráció ingyenes, és a belépéshez nem kell megerősítettnek lenned. Megismerheted a szabályokat, követheted a rendszer általános mutatóit, és megnézheted a Piac kínálatát — mindez megerősítés nélkül is működik.
+A belépéshez nem kell megerősítés. A regisztráció ingyenes. Azonnal elolvashatod a szabályokat, megnézheted a rendszer nyilvános áttekintését és a Piac kínálatát, és feladhatsz legfeljebb három hirdetést, amellyel kínálsz valamit (a hirdetést bármikor leveheted).
 
-Másodszor: a kezdéshez nem kell senkit ismerned. Tegyél közzé egy hirdetést a Piacon — az első hármat egyetlen megerősítés nélkül feladhatod —, és várd meg, hogy valaki jelentkezzen. Amikor a cserét lebonyolítottátok, az, aki már ismer téged, megerősítheti a valódiságodat.
+Az ismeretség a cseréből születik. Adj fel egy hirdetést, és várd meg, hogy valaki jelentkezzen. Amikor a cserét személyesen lebonyolítjátok, az a személy valóban megismert téged — és ha rendes tag, megadhatja neked a valóság megerősítését. A legtöbb ember így jut valóságigazoláshoz.
 
-A hirdetést bármikor leveheted.
+Megerősítést csak az adhat, akinek magának is van valóságigazolása, és mindig közvetlen személyes ismeretség alapján — soha nem pusztán a platformon küldött üzenet alapján.
 
-Harmadszor: a láncnak valahol el kell kezdődnie — és a kezdeti felhasználóknál kezdődik. Ők az Alapítvány Igazgatóságának tagjai, akiknek a valódisága a nyilvános nyilvántartásból következik, nem valaki korábbi megerősítéséből. Ők korlátozás nélkül megerősíthetnek új embereket, így a megerősítések első köre nem függ attól, ismersz-e valakit előre — az ismeretség később alakul ki, magán a cserén keresztül.`,
+Ha senkit nem ismersz, a legrövidebb út, ha írsz nekünk a kontakt@ekolo.rs címre, vagy eljössz egy helyi találkozóra. Az ismeretséget nem előre kérjük — az menet közben jön létre.`,
       },
       {
         id: 43,
-        pitanje: `Tényleg ingyenes, vagy be kell fizetnem vagy adományoznom valamit, hogy használhassam a rendszert?`,
-        odgovor: `Igen, a használat ingyenes. A regisztráció semmibe sem kerül — választasz egy álnevet, megadsz egy e-mail-címet és egy jelszót, és ennyi. Semmilyen befizetést nem kérünk sem a csatlakozásért, sem az alapfunkciók használatáért.
+        pitanje: `Tényleg ingyenes — be kell fizetnem vagy adományoznom valamit?`,
+        odgovor: `Igen. A KOLO használata ingyenes, és nincsenek fizetős funkciók. A regisztráció semmibe sem kerül: választasz egy álnevet, megadsz egy e-mail-címet és egy jelszót.
 
-Az adomány és a patronálás önkéntes, és nem feltétele a használatnak. Adománnyal az Alapítvány működési alapköltségeit támogatod (szerver, eszközök, fejlesztés, jogi és könyvelési szolgáltatások); az adomány beérkezésekor a Protokoll a rendszer szabályai szerint POEN-t rögzít a nyilvántartásodban. Ez a rögzítés nem POEN-vásárlás — a POEN-nek a rendszeren kívül nincs értéke, nem adható tovább és nem váltható vissza pénzre, az adomány pedig a rögzített POEN-től függetlenül visszavonhatatlan.
+Nincs előfizetés, nincs jutalék, és nincs külön megvásárolható csomag. A teljes hozzáférést nem befizetés nyitja meg, hanem a valóság megerősítése — azt pedig ember adja, nem pénz.
 
-A POEN más csatornákon is rögzül — megerősítési láncban történő megerősítéssel, működési hozzájárulással és más felhasználókkal folytatott cserével —, tehát a befizetés se nem egyetlen, se nem kötelező út. Megerősítéskor például 1000 POEN kerül a nyilvántartásodba.`,
+Az adomány önkéntes, és semminek sem feltétele. Vele az Alapítvány költségeit fedezed: a szervert, az eszközöket, a fejlesztést, a jogi és könyvelési szolgáltatásokat.
+
+Az adomány és a POEN két külön aktus. Az adomány egyoldalú és visszavonhatatlan — nem vásárolsz vele semmit. Ettől függetlenül a Protokoll a rendszer szabályai szerint POEN-t rögzít a nyilvántartásodban. A POEN-nek a rendszeren kívül nincs értéke, nem adható tovább és nem váltható vissza pénzre.
+
+POEN egyetlen dinár nélkül is rögzül neked — megerősítéssel és valóságigazolással, működési hozzájárulással és cserével, amelyben egy másik tag POEN-t ír át neked. A döntésekben pedig pénzért szavazatot sem lehet venni: a szavazatot a ZRNO hordozza, nem a POEN.`,
       },
       {
         id: 44,
-        pitanje: `Hogyan jutok az első POEN-jeimhez, ha nincs mit felajánlanom? Mi az első lépés?`,
-        odgovor: `Nem kell egyetlen termék sem ahhoz, hogy POEN-t gyűjts — az első lépés a megerősítés.
+        pitanje: `Mi az első lépésem, és hogyan gyűjtök POEN-t utána?`,
+        odgovor: `Az első lépés a valóság megerősítése. Valaki, aki személyesen ismer téged és magának is van valóságigazolása, megerősíti, hogy valódi ember vagy — ennek az ismeretségnek az alapján, egyetlen dokumentum nélkül. A Protokoll ekkor 1.000-1.000 POEN-t rögzít neked is, neki is, egyszeri alkalommal és mindkettőtöknek azonos összegben.
 
-A megerősítés azt jelenti, hogy valaki, aki már megerősített és személyesen ismer téged, valós személyként megerősít — ezen ismeretség alapján, mindenféle irat nélkül. Amint ez a bejegyzés rögzül, a Protokoll automatikusan 1000 POEN-t ír be neked. Ez a kiinduló összeged, és egyben a kulcs a többi funkció teljes eléréséhez.
+Addig sem zárul el előled semmi lényeges: az első hirdetés, amellyel kínálsz valamit, már hoz neked POEN-t.
 
-Ha megerősített vagy, több módon gyűjthetsz még:
+Amikor megszerzed a valóságigazolást, négy út nyílik meg előtted.
 
-Te magad is megerősíthetsz olyan embereket, akiket valóban ismersz — minden elvégzett megerősítésért 1000 POEN kerül a nyilvántartásodba.
+Csere. Nem kell semmit eladnod. A csere a szolgáltatásokra és a tudásra is kiterjed — segíthetsz valakinek egy munkában, taníthatod, vigyázhatsz a gyerekére. A másik fél ekkor POEN-t ír át neked azért, amit tettél.
 
-Jelentkezhetsz működési hozzájárulási feladatra — ez a közjóért végzett munka, amelyet az Alapítvány hirdet meg (később a ZRNO-tartók is). Ha elvégzed a feladatot, és az arra jogosult megerősítő megerősíti a teljesítést, POEN kerül a nyilvántartásodba.
+Mások megerősítése. Amikor megerősítesz valakit, akit valóban ismersz, 1.000-1.000 POEN rögzül neked is, neki is — személyenként egyszer. Csak azt erősíted meg, hogy ez a személy létezik, és nincs másik fiókja, ezért megerősítést kizárólag olyan emberekre adj, akiket tényleg ismersz.
 
-Ha olyan csoportba tartozol, amelyet a szociális programok lefednek (édesanyák, idősek, különleges gondoskodás, tanulás), bejelented a státuszodat, és a Protokoll napi szinten ír be neked POEN-t, az egyes tevékenységek bejelentése nélkül.
+Működési hozzájárulás. Munka a közös jóért, közzétett feladat alapján. A feladatokat a kezdeti szakaszban az Alapítvány tűzi ki, aktiválás után pedig a ZRNO-tartók és a Felső Kolo. Amikor teljesíted a feladatot, és egy ZRNO-tartó megerősíti a teljesítést, POEN rögzül neked.
 
-És a legegyszerűbb: nem kell terméket árulnod. A rendszerbeli csere a szolgáltatásokra és a tudásra is kiterjed — segíthetsz valakinek valamiben, taníthatod, vigyázhatsz a gyerekére, elvégezhetsz egy munkát. A másik fél ekkor POEN-t ír be neked azért, amit tettél.`,
+Szociális programok. Ha a programok által lefedett csoportok valamelyikébe tartozol — anyák és más elsődleges gondviselők, idősek, különleges gondoskodás, tanulás —, kérelmet nyújtasz be. Miután az Alapítvány jóváhagyja, a Protokoll napi szinten rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül.`,
       },
       {
         id: 45,
-        pitanje: `Mennyi időt vesz el — folyamatosan aktívnak kell lennem?`,
-        odgovor: `Nem kell folyamatosan aktívnak lenned. A rendszerben nincs kötelező aktivitás — nincs olyan minimális belépés-, hozzájárulás- vagy csereszám, amelyet teljesítened kellene ahhoz, hogy felhasználó maradj.
+        pitanje: `Mennyi időmet veszi el — állandóan aktívnak kell lennem?`,
+        odgovor: `Nem kell. Nincs olyan minimum belépés, hozzájárulás vagy csere, amelyet teljesítened kellene ahhoz, hogy tag maradj.
 
-Annyit veszel részt, amennyit szeretnél, és akkor, amikor szeretnéd. A működési hozzájárulás, a piaci csere és a ZRNO bejegyzése lehetőség, nem kötelezettség.
+Annyit és akkor kapcsolódsz be, amennyit és amikor szeretnél. A működési hozzájárulás, a Piacon folytatott csere és a ZRNO-bejegyzés lehetőségek, nem kötelezettségek. Nincs minimális tagsági idő és nincs felmondási idő.
 
-A nyilvántartott helyzeted akkor is megvár, ha szünetet tartasz: ha egy ideig nem vagy aktív, a bejegyzésed megmarad. A POEN-ed jelenleg nem jár le — nyilvántartva marad, amíg fel nem használod, vagy amíg nem törlöd a fiókodat.
+Ha szünetet tartasz, a nyilvántartásod megvár. A POEN-ed nem jár le — a nyilvántartásodban marad, amíg át nem írod másnak, vagy amíg be nem zárod a fiókodat. A POEN lejárati idejének bevezetése a rendszer lényegi módosítása lenne, amelyről a Felső Kolo döntene, nem az Alapítvány önmagában.
 
-A regisztráció ingyenes és egyszerű: választasz álnevet, megadsz egy e-mail-címet, és beállítasz egy jelszót. Kötelező időtartam és szerződéses kötöttség nélkül.
-
-A rendszerből bármikor kiléphetsz a fiók törlésével a profilbeállításokban, felmondási idő nélkül.`,
+A rendszerből bármelyik pillanatban kilépsz, a profilbeállításokból.`,
       },
       {
         id: 46,
-        pitanje: `Mi az az „álnév" — fel kell fednem a valódi nevemet, a személyi számomat, vagy le kell fényképeznem a személyi igazolványomat?`,
-        odgovor: `Az álnév olyan felhasználónév, amelyet magad választasz, és amely alatt látható vagy a rendszerben és a hozzájárulások nyilvános nyilvántartásában. Ez a nyilvános neved a KOLO-ban — semmilyen kapcsolatban nem kell állnia a valódi neveddel.
+        pitanje: `Mi az az álnév — fel kell fednem a valódi nevemet vagy be kell küldenem a személyi igazolványomat?`,
+        odgovor: `Az álnév olyan név, amelyet magad választasz, és amely alatt látható vagy a rendszerben és a hozzájárulások nyilvános nyilvántartásában. Ez a nyilvános neved a KOLO-ban, és semmi köze nem kell hogy legyen a valódi nevedhez.
 
-A valódi név nem kötelező. A regisztrációkor csak álnevet, e-mail-címet és jelszót kérünk. Nem kérünk sem személyi számot, sem személyi igazolványt, sem útlevelet, sem bármilyen iratot — és soha nem kérjük, hogy bármit lefényképezz.
+A valódi név nem kötelező. A regisztrációnál csak álnevet, e-mail-címet és jelszót kérünk. Nem kérünk személyi azonosító számot, személyi igazolványt, útlevelet vagy bármilyen más dokumentumot, és soha nem kérjük, hogy magadról vagy az irataidról fényképet küldj.
 
-A megerősítés sem kér iratokat. A valódiságodat olyan felhasználó erősíti meg, aki személyesen ismer téged, a megerősítési láncon keresztül — nincs igazolványfeltöltés és nincs papírellenőrzés.
+A megerősítés sem kér dokumentumot. A valódiságodat olyan tag erősíti meg, aki személyesen ismer téged, és magának is van valóságigazolása. A megerősítés az ismeretségen nyugszik, nem a papíron.
 
-Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kapcsolná. Ez a kapcsolat egyszerűen nem létezik a rendszerben.
+A profilod nem viseli a nevedet. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevet a személyi igazolványban szereplő névhez kötné, a többi tag pedig csak azt látja, amit magad választottál megmutatni. A nevedet és a telefonszámodat később, önkéntesen megadhatod — akkor csak a rendes tagok látják, és ezt a közzétételt bármikor visszavonhatod.
 
-A nevedet és a telefonszámodat később csak akkor adhatod meg, ha te magad így akarod — teljesen önkéntesen, és csak rendes tagok számára. Ezt a megosztást bármikor visszavonhatod.
+Hol kerül mégis szóba a személyazonosság. Ha bankon keresztül adományozol, a neved ott áll a kivonaton. Ha szociális programra vagy patronálásra jelentkezel, a kérelem adatait az Alapítvány tekinti át. Ezek az adatok nem nyilvánosak, nem jelennek meg a profilod mellett, és csak az látja őket, aki a kérelmet feldolgozza.
 
-Megjegyzés: olyan álnevet válassz, amely nem tartalmaz személyes adatot. Kis településen az álnév, a helység és a tevékenység együttese közvetve utalhat arra, ki vagy — ezzel légy tisztában.`,
+Megjegyzés: olyan álnevet válassz, amely nem tartalmazza a személyes adataidat. Kis közösségben az álnév, a helység és a tevékenység együttese közvetve rámutathat arra, ki vagy — légy ennek tudatában.`,
       },
       {
         id: 76,
-        pitanje: `Mit nem fog tőlem soha kérni a KOLO (védelem a csalás ellen)?`,
-        odgovor: `A regisztráció ingyenes. Az Alapítvány soha nem kéri, hogy pénzt utalj a rendszerbe való belépésért.
+        pitanje: `Hogyan ismerem fel a csalást — mit nem fog tőlem a KOLO soha kérni?`,
+        odgovor: `Ha valaki bármit kér ebből a listából, az nem az Alapítvány — az valaki, aki az Alapítványnak adja ki magát.
 
-Az Alapítvány soha nem fogja kérni a jelszavadat, a PIN-kódodat, a bankkártyaszámodat, a személyi számodat, sem a személyi igazolványod vagy útleveled fényképét. A megerősítés személyes ismeretség útján történik — mindenféle irat nélkül.
+Soha nem kérünk pénzt a hozzáférésért. A regisztráció és a használat ingyenes. Az adomány és a patronálás önkéntes, és kizárólag az ekolo.rs hivatalos csatornáin keresztül fizethető be — soha nem magánszámlára, és soha nem olyan üzenet alapján, amely sürget téged.
 
-A POEN-nek a rendszeren kívül nincs értéke — nem váltható pénzre, nem adható tovább, és az Alapítvány nem vásárolja vissza. Egyetlen olyan ajánlat sem része a KOLO-nak, amely keresetet, pénzvisszatérítést vagy a POEN dinárrá alakítását ígéri; az csalási kísérlet.
+Soha nem kérjük a jelszavadat, a PIN-kódodat vagy a bankkártyád számát. Az Alapítványtól senki nem fog jelszót vagy üzenetből származó kódot kérni tőled. A jelszavadat csak az ekolo.rs oldalon add meg — soha ne olyan oldalon, ahová üzenetben vagy e-mailben kapott hivatkozásról jutottál.
 
-Ha ilyennel találkozol, ne adj ki adatot, és jelentsd az Alapítványnak.`,
+Sem a regisztrációhoz, sem a megerősítéshez nem kérünk dokumentumot. Sem személyi azonosító számot, sem személyi igazolványról vagy útlevélről készült fényképet. A valóság megerősítése személyes ismeretségen nyugszik.
+
+A POEN nem váltható készpénzre. Nem cserélhető dinárra, nem adható tovább, és az Alapítvány nem vásárolja vissza. Minden ajánlat, amely keresetet, pénzvisszatérítést vagy a POEN dinárra váltását ígéri, csalási kísérlet — bárki küldte is neked.
+
+A Piacon csak akkor írd át a POEN-t, ha már megkaptad az árut vagy a szolgáltatást. Ha valaki sürget, hogy előre írd át, állj el a cserétől.
+
+Ha bármelyikkel találkozol: ne oszd meg az adataidat, ne kattints a hivatkozásra, és írj nekünk a kontakt@ekolo.rs címre.`,
       },
       {
         id: 81,
-        pitanje: `Hogyan jutok az első POEN-hez, ha nincs mit kínálnom?`,
-        odgovor: `Az első hirdetés, amellyel kínálsz valamit, 1.000 POEN-t hoz neked a cseréhez való hozzájárulás csatornáján. A hirdetésnek fényképet, leírást, kategóriát és helységet kell tartalmaznia.
+        pitanje: `Hogyan jutok az első POEN-hez, amíg még senki nem erősített meg?`,
+        odgovor: `Ahhoz, hogy az első POEN rögzüljön neked, sem termék, sem megerősítés nem kell.
 
-POEN akkor is jóváírásra kerül neked, ha valaki más írja át neked egy lebonyolított cseréért — nem megerősítettként kaphatod, csak magad nem írhatod át másnak.
+Adj fel egy hirdetést, amellyel kínálsz valamit — az első ilyen hirdetés 1.000 POEN-t hoz neked a cseréhez való hozzájárulás csatornáján. A hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia. A hirdetés azonnal felkerül a Piacra, a POEN pedig akkor rögzül neked, amikor az Alapítvány jóváhagyja a hirdetést. A cseréhez való hozzájárulás fiókonként egyszer nyílik meg, és nem ismétlődik.
 
-Amint pedig megerősítettél, keresési hirdetést is közzétehetsz — azt, amire neked van szükséged —, hogy jelentkezzen az, akinek megvan.`,
+POEN akkor is rögzül neked, ha valaki egy lebonyolított cseréért átírja neked. Amíg nincs valóságigazolásod, kaphatod, de magad nem írhatod át másnak.
+
+Amint megkapod a valóság megerősítését, keresési hirdetést is közzétehetsz — azt, amire neked van szükséged —, hogy jelentkezzen az, akinek megvan.`,
       },
       {
         id: 82,
-        pitanje: `Olyan hirdetőtől vásárolok, aki nincs megerősítve — mekkora a kockázat?`,
-        odgovor: `A rendes tag olyasvalaki, akinek a valódiságát más megerősítette — neked ismeretlen, a hálózatnak nem. A nem megerősített hirdető olyasvalaki, akinek a valódiságát még senki nem erősítette meg, és a hirdetése ezt világosan jelzi.
+        pitanje: `Olyan taggal cserélek, akit senki nem erősített meg — mekkora a kockázat?`,
+        odgovor: `A kockázatot te viseled: ha átírod a POEN-t, és nem kapod meg azt, amiben megállapodtatok, az átírás nem áll vissza automatikusan.
 
-Ezért POEN-t kizárólag a javak vagy a szolgáltatás átvétele után küldjetek.
+Ezért csak akkor írd át a POEN-t, ha már megkaptad az árut vagy a szolgáltatást. Ez az egyetlen szabály, amely valóban megvéd téged.
 
-A minőségért, a teljesítésért és a megállapodás betartásáért ti ketten feleltek az általános szabályok szerint — az Alapítvány és a Protokoll nem avatkozik bele.`,
+Mit jelent a megerősített, és mit nem. A rendes tag olyasvalaki, akinek a valódiságát más megerősítette — neked ismeretlen, a hálózatnak nem. Az új tag olyasvalaki, akinek a valódiságát még senki nem erősítette meg, és a hirdetése ezt jelzi.
+
+Mi dolgozik a javadra. A rendszer tartósan emlékszik. A nyilvántartás minden frissítése álnév alatt rögzítve marad, és a rendes tagok látják — a rossz magatartás nem törlődik a fiókról.
+
+Ha a csere meghiúsul. Jelentsd az esetet az Alapítványnak — a gomb magánál az átírásnál van, a POEN-előzményeidben. Az átírás nem visszafordíthatatlan: ha az Alapítvány a bejelentésed alapján érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy. A döntés az Alapítványé, tehát a bejelentés nem automatikus visszatérítés.
+
+A minőségért, a teljesítésért és a megállapodás betartásáért te felelsz a másik féllel együtt, a kötelmi jog általános szabályai szerint; az Alapítvány és a Protokoll nem részese ennek a viszonynak. A kezdeti szakaszban kérheted az Alapítvány önkéntes közvetítését is — az nem kötelező erejű, de gyakran elegendő.
+
+A legjobb, ha személyesen találkoztok, és a cserét szemtől szemben bonyolítjátok le. Így csökken a kockázat, és megszületik az az ismeretség is, amelyből megerősítés jöhet.`,
       },
       {
         id: 83,
         pitanje: `Hány hirdetést adhatok fel megerősítés előtt?`,
-        odgovor: `Hármat aktívan, és csak ajánlatot — olyasmit, amit kínálsz. Minden hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia — a cím és a leírás hossza nem feltétel.
+        odgovor: `Három aktív hirdetést, és csak ajánlatot — olyasmit, amit kínálsz. Az első ilyen hirdetés 1.000 POEN-t hoz neked: a hirdetés azonnal fent van a Piacon, a POEN pedig akkor rögzül, amikor az Alapítvány jóváhagyja.
 
-A keresési hirdetés — amellyel te keresel valamit —, a hirdetők elérése és a beszélgetés kezdeményezése a megerősítéssel jár. Ha valaki a hirdetésed kapcsán keres meg, már előtte is válaszolhatsz neki.`,
+Minden hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia. Előírt legkisebb hossz nincs — annyit írj, amennyi kell ahhoz, hogy az ember megértse, mit kínálsz.
+
+A valóság megerősítésével a korlát eltűnik, és megnyílik a többi is:
+
+• korlátlan számú aktív hirdetés
+
+• keresési hirdetés — amellyel azt keresed, amire neked van szükséged
+
+• a hirdetésen szereplő elérhetőség
+
+• a beszélgetés kezdeményezése
+
+Egyvalami megerősítés előtt is működik: ha valaki a hirdetésed kapcsán keres meg, válaszolhatsz neki.`,
       },
     ],
   },

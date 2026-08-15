@@ -73,6 +73,7 @@ enum TransactionType {
   EMISIJA_OSNIVACKI
   EMISIJA_SADRZAJ // doprinos sadržaju platforme (Pravilnik čl. 15 t. 8, čl. 40a)
   EMISIJA_RAZMENA // doprinos razmeni — koraci 2–5 putanje prvog kruga (čl. 40a)
+  PONISTENJE_PREPISA // protivzapis prepisa poništenog po prijavi razmene
 }
 
 enum TipKorisnika {
@@ -311,6 +312,8 @@ model User {
   listings                         MarketplaceListing[]      @relation("SellerListings")
   purchases                        MarketplaceListing[]      @relation("BuyerListings")
   prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
+  prijaveRazmene                   PrijavaRazmene[]          @relation("PrijaviocRazmene")
+  prijavljeneRazmene               PrijavaRazmene[]          @relation("ProtivRazmene")
   doprinosSadrzaju                 DoprinosSadrzaju?
   doprinosiRazmeni                 DoprinosRazmeni[]
   oglasUpiti                       OglasUpit[]
@@ -526,6 +529,9 @@ model Transaction {
    */
   opisParametri Json?
   createdAt     DateTime        @default(now())
+
+  /// Prijava da razmena povodom ovog prepisa nije ispunjena (najviše jedna).
+  prijavaRazmene PrijavaRazmene?
 }
 
 model Krug {
@@ -699,6 +705,54 @@ enum PrijavaOglasaStatus {
   OTVORENA
   RESENA // oglas uklonjen povodom prijave
   ODBACENA // pregledano, nema povrede
+}
+
+/**
+ * Prijava da razmena povodom prepisa POEN-a nije ispunjena.
+ * Prepis je ažuriranje evidencije između dva zapisa (Pravilnik čl. 14, 16) i
+ * ne poništava se sam od sebe — za razmenu odgovaraju sami korisnici po
+ * obligacionom pravu, a Fondacija nije strana u tom odnosu (Uslovi čl. 22).
+ * Zato ovo NIJE automatski povraćaj nego evidencija prijave o kojoj Fondacija
+ * odlučuje: može da poništi prepis protivzapisom ili da prijavu odbaci.
+ * Prijavljuje ISKLJUČIVO onaj ko je POEN prepisao — samo on je nešto izgubio.
+ * Jedna prijava po prepisu (@@unique na `transakcijaId`): druga prijava nad
+ * istim prepisom ne bi bila nov podatak nego ponovljen pritisak.
+ */
+model PrijavaRazmene {
+  id            String      @id @default(uuid())
+  transakcijaId String      @unique
+  transakcija   Transaction @relation(fields: [transakcijaId], references: [id], onDelete: Cascade)
+
+  /// Onaj ko je prepisao POEN i nije dobio dogovoreno.
+  prijaviocId String
+  prijavioc   User   @relation("PrijaviocRazmene", fields: [prijaviocId], references: [id])
+  /// Druga strana razmene — onaj kome je POEN prepisan.
+  protivId    String
+  protiv      User   @relation("ProtivRazmene", fields: [protivId], references: [id])
+
+  opis   String
+  status PrijavaRazmeneStatus @default(OTVORENA)
+
+  /// Obrazloženje odluke Fondacije — obavezno u oba ishoda, ide prijaviocu.
+  odluka  String?
+  resioId String?
+  resenAt DateTime?
+  /// Koliko je POEN-a stvarno vraćeno. Može biti manje od prepisanog iznosa i
+  /// može biti 0: zapis primaoca ne sme u minus (Pravilnik čl. 14), pa se vraća
+  /// najviše ono što na njemu zatekne.
+  vraceno Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt(sort: Desc)])
+  @@index([prijaviocId])
+}
+
+enum PrijavaRazmeneStatus {
+  OTVORENA
+  PONISTENA // prepis poništen protivzapisom (u celini ili delimično)
+  ODBACENA // pregledano, prepis ostaje
 }
 
 /// Stanje doprinosa sadržaju platforme (Pravilnik čl. 40a st. 3).

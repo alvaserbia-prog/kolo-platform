@@ -7,106 +7,136 @@ export const FAQ_SEKCIJE_HR: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `Ne poznajem nikoga tko je već u KOLU — kako da se potvrđujem ako potvrda traži da te netko iznutra potvrdi?`,
-        odgovor: `Možeš se potvrditi i kada ne poznaješ nikoga tko je već u sustavu. Potvrda se temelji na osobnom poznanstvu, ali tri ti stvari otvaraju put i bez ranijih poznanstava.
+        pitanje: `Ne poznajem nikoga u KOLU — može li me itko potvrditi?`,
+        odgovor: `Može. Potvrda stvarnosti temelji se na tome da te netko osobno upozna — a to poznanstvo tek treba nastati.
 
-Prvo, registracija je besplatna i ne moraš biti potvrđen da bi ušao. Možeš se upoznati s pravilima, pratiti opće pokazatelje sustava i pogledati ponudu na Pijaci — sve to radi i bez potvrde.
+Ulazak ne traži potvrdu. Registracija je besplatna. Odmah možeš pročitati pravila, pogledati javni pregled sustava i ponudu na Pijaci te postaviti do tri oglasa kojima nešto nudiš (oglas skloniš kad hoćeš).
 
-Drugo, ne moraš nikoga poznavati da bi počeo. Postavi oglas na Pijaci — prva tri možeš postaviti bez ijedne potvrde — i pričekaj da ti se netko javi. Kad razmjenu obavite, onaj tko te sada poznaje može potvrditi tvoju stvarnost.
+Poznanstvo nastaje kroz razmjenu. Postavi oglas i pričekaj da ti se netko javi. Kad razmjenu obavite uživo, ta te je osoba stvarno upoznala — i ako je redovni član, može ti dati potvrdu stvarnosti. Tako većina ljudi stječe dokaz stvarnosti.
 
-Oglas možeš skloniti u svakom trenutku.
+Potvrdu daje samo onaj tko i sam ima dokaz stvarnosti, i uvijek na temelju neposrednog osobnog poznanstva — nikad na temelju same poruke na platformi.
 
-I treće, lanac negdje mora početi — i počinje od početnih korisnika. To su članovi Upravnog odbora Fondacije, čija stvarnost proizlazi iz javnog registra, a ne iz nečije ranije potvrde. Oni mogu potvrditi nove ljude bez ograničenja, pa prvi krug potvrda ne ovisi o tome poznaješ li nekoga unaprijed — poznanstvo se stvara kasnije, kroz samu razmjenu.`,
+Ako ne poznaješ nikoga, najkraći je put da nam pišeš na kontakt@ekolo.rs ili da dođeš na skup u svom mjestu. Poznanstvo se ne traži unaprijed — ono se stvara.`,
       },
       {
         id: 43,
-        pitanje: `Je li stvarno besplatno ili moram nešto uplatiti/donirati da bih koristio sustav?`,
-        odgovor: `Da, korištenje je besplatno. Registracija ne košta ništa — biraš pseudonim, uneseš email i lozinku, i to je sve. Ne tražimo nikakvu uplatu da bi se pridružio ni da bi koristio osnovne funkcije.
+        pitanje: `Je li zaista besplatno — moram li uplatiti ili donirati?`,
+        odgovor: `Da. Korištenje KOLA je besplatno i nema plaćenih funkcija. Registracija ne košta ništa: biraš pseudonim, uneseš email i lozinku.
 
-Donacija i pokroviteljstvo su dobrovoljni i nisu uvjet za korištenje. Donacijom podržavaš osnovne troškove Fondacije (server, alati, razvoj, pravne i računovodstvene usluge); po primitku donacije Protokol evidentira POEN u tvom zapisu, prema pravilima sustava. Takvo evidentiranje nije kupnja POEN-a — POEN nema vrijednost izvan sustava, ne preprodaje se i ne vraća u novac, a donacija je nepovratna neovisno o evidentiranom POEN-u.
+Nema pretplate, provizije ni paketa koji se dokupljuje. Pun pristup ti ne otvara uplata nego potvrda stvarnosti — a nju daje čovjek, ne novac.
 
-POEN se evidentira i kroz druge kanale — potvrdu u lancu potvrda, operativni doprinos i razmjenu s drugim korisnicima — pa uplata nije jedini niti obvezan put. Na primjer, pri potvrdi se u tvom zapisu evidentira 1.000 POEN.`,
+Donacija je dobrovoljna i nije uvjet ni za što. Njome pokrivaš troškove Fondacije: server, alate, razvoj, pravne i računovodstvene usluge.
+
+Donacija i POEN dva su odvojena akta. Donacija je jednostrana i nepovratna — njome ne kupuješ ništa. Neovisno o njoj, Protokol upisuje POEN u tvoj zapis prema pravilima sustava. POEN nema vrijednost izvan sustava, ne preprodaje se i ne vraća se u novac.
+
+POEN ti se upisuje i bez ijedne uplate — kroz potvrdu i dokaz stvarnosti, operativni doprinos i razmjenu, u kojoj ti drugi član prepiše POEN. A novcem se ne kupuje ni glas u odlukama: glas nosi ZRNO, ne POEN.`,
       },
       {
         id: 44,
-        pitanje: `Kako da dođem do svojih prvih POEN-a ako nemam što ponuditi? Koji je moj prvi korak?`,
-        odgovor: `Ne moraš imati nijedan proizvod da bi prikupljao POEN — prvi korak je potvrda.
+        pitanje: `Koji je moj prvi korak i kako dalje prikupljam POEN?`,
+        odgovor: `Prvi je korak potvrda stvarnosti. Netko tko te osobno poznaje i sam ima dokaz stvarnosti potvrdi da si stvarna osoba — na temelju tog poznanstva, bez ijednog dokumenta. Protokol tada upiše po 1.000 POEN i tebi i njemu, jednokratno i u istom iznosu za oboje.
 
-Potvrda znači da te netko tko je već potvrđen, a osobno te poznaje, potvrdi kao stvarnu osobu — na temelju tog poznanstva, bez ikakvih dokumenata. Čim se taj zapis evidentira, Protokol ti automatski upiše 1.000 POEN. To je tvoj početni iznos i ujedno ključ za pun pristup ostalim funkcijama.
+Do tada ti nije zatvoreno ništa bitno: prvi oglas kojim nešto nudiš već ti nosi POEN.
 
-Kad si potvrđen, otvara ti se nekoliko načina da prikupiš još:
+Kad stekneš dokaz stvarnosti, otvaraju ti se četiri puta.
 
-Možeš sam potvrditi druge ljude koje stvarno poznaješ — za svaku obavljenu potvrdu upiše ti se 1.000 POEN.
+Razmjena. Ne moraš ništa prodavati. Razmjena obuhvaća i usluge i znanje — možeš nekome pomoći oko posla, podučiti ga, pričuvati djecu. Druga ti strana tada prepiše POEN za to što si učinio.
 
-Možeš se prijaviti za zadatak iz operativnog doprinosa — to je rad za zajedničko dobro koji objavi Fondacija (kasnije i nositelji ZRNA). Kad izvršiš zadatak i ovlašteni onaj tko potvrđuje potvrdi izvršenje, upiše ti se POEN.
+Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POEN upisuje se i tebi i njemu — jednom po osobi. Potvrđuješ samo to da ta osoba postoji i da nema drugi račun, pa se potvrda daje jedino za ljude koje zaista poznaješ.
 
-Ako pripadaš nekoj od skupina koje pokrivaju socijalni programi (majke, stariji, posebna briga, školovanje), prijaviš svoj status i Protokol ti upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti.
+Operativni doprinos. Rad za zajedničko dobro po objavljenom zadatku. Zadatke postavlja Fondacija u početnoj fazi, a po aktivaciji nositelji ZRNA i Gornje Kolo. Kad izvršiš zadatak i nositelj ZRNA potvrdi izvršenje, POEN ti se upisuje.
 
-I najjednostavnije od svega: ne moraš prodavati proizvod. Razmjena u sustavu obuhvaća i usluge i znanje — možeš nekome pomoći oko nečega, poučiti ga, pričuvati djecu, obaviti neki posao. Druga strana ti tada upiše POEN za to što si učinio.`,
+Socijalni programi. Ako pripadaš nekoj od skupina koje programi pokrivaju — majke i drugi primarni skrbnici, stariji, posebna briga, školovanje — podneseš prijavu. Kad je Fondacija odobri, Protokol ti upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti.`,
       },
       {
         id: 45,
         pitanje: `Koliko mi vremena oduzima — moram li biti stalno aktivan?`,
-        odgovor: `Ne moraš biti stalno aktivan. Sustav nema obveznu aktivnost — ne postoji minimum prijavljivanja, doprinosa ni razmjene koji bi morao ispuniti da bi ostao korisnik.
+        odgovor: `Ne moraš. Ne postoji minimum prijavljivanja, doprinosa ni razmjene koji bi morao ispuniti da bi ostao član.
 
-Uključuješ se onoliko koliko želiš i kada želiš. Operativni doprinos, razmjena na Pijaci i upis ZRNA su mogućnosti, a ne dužnosti.
+Uključuješ se koliko želiš i kada želiš. Operativni doprinos, razmjena na Pijaci i upis ZRNA mogućnosti su, a ne dužnosti. Nema minimalnog trajanja članstva ni otkaznog roka.
 
-Tvoj evidentirani položaj te čeka i kad pauziraš: ako neko vrijeme nisi aktivan, zadržavaš svoj zapis. Tvoj POEN ti trenutačno ne istječe — ostaje zabilježen dok ga ne iskoristiš ili dok ne izbrišeš korisnički račun.
+Kad zastaneš, tvoj te zapis čeka. POEN ti ne istječe — ostaje u tvom zapisu dok ga ne prepišeš drugome ili dok ne zatvoriš račun. Uvođenje roka trajanja POEN-a bila bi suštinska izmjena sustava o kojoj bi odlučivalo Gornje Kolo, a ne Fondacija sama.
 
-Registracija je besplatna i jednostavna: biraš pseudonim, uneseš email i postaviš lozinku. Bez obveznog roka, bez ugovorne vezanosti.
-
-Iz sustava možeš izaći u svakom trenutku, brisanjem korisničkog računa iz postavki profila, bez otkaznog roka.`,
+Iz sustava izlaziš u svakom trenutku, iz postavki profila.`,
       },
       {
         id: 46,
-        pitanje: `Što je „pseudonim" — moram li otkriti pravo ime, JMBG ili slikati osobnu iskaznicu?`,
-        odgovor: `Pseudonim je korisničko ime koje sam biraš i pod kojim si vidljiv u sustavu i u javnoj evidenciji doprinosa. To je tvoje javno ime u KOLO — ne mora imati nikakve veze s tvojim pravim imenom.
+        pitanje: `Što je pseudonim — moram li otkriti pravo ime ili poslati osobnu iskaznicu?`,
+        odgovor: `Pseudonim je ime koje sam biraš i pod kojim si vidljiv u sustavu i u javnoj evidenciji doprinosa. To je tvoje javno ime u KOLU i ne mora imati nikakve veze s tvojim pravim imenom.
 
-Pravo ime nije obvezno. Pri registraciji od tebe se traži samo pseudonim, email adresa i lozinka. Ne tražimo ni JMBG, ni osobnu iskaznicu, ni putovnicu, niti bilo kakav dokument — i nikada ne tražimo da nešto slikaš.
+Pravo ime nije obvezno. Pri registraciji tražimo samo pseudonim, email i lozinku. Ne tražimo OIB ni JMBG, osobnu iskaznicu, putovnicu ni bilo kakav drugi dokument, i nikada ne tražimo da slikaš sebe ili svoje dokumente.
 
-Ni potvrda ne traži dokumente. Tvoju stvarnost potvrđuje korisnik koji te osobno poznaje, kroz lanac potvrda — nema učitavanja osobne iskaznice ni provjere papira.
+Ni potvrda ne traži dokumente. Tvoju stvarnost potvrđuje član koji te osobno poznaje i sam ima dokaz stvarnosti. Potvrda počiva na poznanstvu, ne na papiru.
 
-Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom. Ta veza u sustavu jednostavno ne postoji.
+Tvoj profil ne nosi tvoje ime. Fondacija ne vodi registar koji pseudonim povezuje s imenom iz osobne iskaznice, a drugi članovi vide samo ono što si sam odabrao pokazati. Ime i broj telefona možeš unijeti kasnije, dobrovoljno — tada su vidljivi samo redovnim članovima, a to otkrivanje povlačiš kad hoćeš.
 
-Ime i broj telefona možeš kasnije unijeti samo ako to sam želiš — potpuno dobrovoljno i samo redovnim članovima. To otkrivanje možeš povući u svakom trenutku.
+Gdje identitet ipak ulazi u igru. Ako doniraš preko banke, tvoje ime stoji na izvatku. Ako se prijaviš za socijalni program ili za pokroviteljstvo, podatke iz prijave pregledava Fondacija. Ti podaci nisu javni, ne prikazuju se uz tvoj profil i vidi ih samo onaj tko obrađuje prijavu.
 
-Napomena: biraj pseudonim koji ne sadrži tvoje osobne podatke. U maloj sredini kombinacija pseudonima, lokacije i aktivnosti može posredno ukazati na to tko si — toga budi svjestan.`,
+Napomena: biraj pseudonim koji ne sadrži tvoje osobne podatke. U maloj sredini kombinacija pseudonima, mjesta i aktivnosti može posredno ukazati na to tko si — budi toga svjestan.`,
       },
       {
         id: 76,
-        pitanje: `Što KOLO nikad neće tražiti od mene (zaštita od prijevare)?`,
-        odgovor: `Registracija je besplatna. Fondacija nikada ne traži da uplatiš novac da bi se uključio u sustav.
+        pitanje: `Kako da prepoznam prijevaru — što KOLO nikad neće tražiti od mene?`,
+        odgovor: `Ako netko traži nešto s ovog popisa, to nije Fondacija — to je netko tko se predstavlja kao Fondacija.
 
-Fondacija nikada neće tražiti tvoju lozinku, PIN, broj platne kartice, JMBG ni sliku osobne iskaznice ili putovnice. Potvrda se obavlja kroz osobno poznanstvo — bez ikakvih dokumenata.
+Nikad ne tražimo novac za pristup. Registracija i korištenje su besplatni. Donacija i pokroviteljstvo dobrovoljni su i uplaćuju se isključivo preko službenih kanala na ekolo.rs — nikad na privatni račun i nikad na temelju poruke koja te požuruje.
 
-POEN nema vrijednost izvan sustava — ne unovčava se, ne preprodaje i Fondacija ga ne otkupljuje. Nijedna ponuda koja obećava zaradu, povrat novca ili pretvaranje POEN-a u dinare nije dio KOLA; riječ je o pokušaju prijevare.
+Nikad ne tražimo lozinku, PIN ni broj platne kartice. Nitko iz Fondacije neće od tebe zatražiti lozinku ni kod iz poruke. Lozinku unosi samo na ekolo.rs — nikad na stranici do koje si došao preko poveznice iz poruke ili maila.
 
-Ako naiđeš na bilo što od ovoga, ne dijeli podatke i prijavi to Fondaciji.`,
+Za registraciju i potvrdu ne tražimo dokumente. Ni OIB ni JMBG, ni sliku osobne iskaznice ili putovnice. Potvrda stvarnosti počiva na osobnom poznanstvu.
+
+POEN se ne unovčava. Ne mijenja se za novac, ne preprodaje se i Fondacija ga ne otkupljuje. Svaka ponuda koja obećava zaradu, povrat novca ili pretvaranje POEN-a u novac pokušaj je prijevare, tko god ti je poslao.
+
+Na Pijaci prepiši POEN tek kad primiš robu ili uslugu. Ako te netko požuruje da prepišeš unaprijed, odustani od razmjene.
+
+Ako naiđeš na bilo što od ovoga: ne dijeli podatke, ne klikći na poveznicu i piši nam na kontakt@ekolo.rs.`,
       },
       {
         id: 81,
-        pitanje: `Kako do prvih POEN-a ako nemam što ponuditi?`,
-        odgovor: `Prvi oglas kojim nešto nudiš nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati fotografiju, opis, kategoriju i mjesto.
+        pitanje: `Kako do prvih POEN-a dok me još nitko nije potvrdio?`,
+        odgovor: `Ne treba ti ni proizvod ni potvrda da bi ti se upisao prvi POEN.
 
-POEN ti se upisuje i kad ti ga netko drugi prepiše za obavljenu razmjenu — kao nepotvrđen možeš ga primati, samo ga ne možeš sam prepisivati drugome.
+Postavi oglas kojim nešto nudiš — prvi takav oglas nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto. Oglas ide na Pijacu odmah, a POEN ti se upisuje kad Fondacija odobri oglas. Doprinos razmjeni otvara se jednom po računu i ne ponavlja se.
 
-A čim se potvrđuješ, možeš objaviti i potražnju — što tebi treba — pa da se javi onaj tko to ima.`,
+POEN ti se upisuje i kad ti ga netko prepiše za obavljenu razmjenu. Dok nemaš dokaz stvarnosti možeš ga primati, ali ne i sam prepisivati drugome.
+
+Čim dobiješ potvrdu stvarnosti, možeš objaviti i potražnju — što tebi treba — pa da se javi onaj tko to ima.`,
       },
       {
         id: 82,
-        pitanje: `Kupujem od oglašivača koji nije potvrđen — koliki je rizik?`,
-        odgovor: `Redovni član je onaj čiju je stvarnost netko potvrdio — nepoznat tebi, ali ne i mreži. Bez potvrde oglašivač je onaj čiju stvarnost još nitko nije potvrdio, i njegov oglas to jasno nosi.
+        pitanje: `Razmjenjujem s članom kojeg nitko nije potvrdio — koliki je rizik?`,
+        odgovor: `Rizik snosiš ti: ako prepišeš POEN a ne dobiješ ono što je dogovoreno, prepis se ne poništava automatski.
 
-Zato POEN šaljite isključivo po primitku robe ili usluge.
+Zato prepiši POEN tek kad primiš robu ili uslugu. To je jedino pravilo koje te stvarno štiti.
 
-Za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Zaklada i Protokol se u to ne miješaju.`,
+Što znači potvrđen, a što ne. Redovni član je onaj čiju je stvarnost netko potvrdio — nepoznat tebi, ali ne i mreži. Novi član je onaj čiju stvarnost još nitko nije potvrdio, i njegov oglas nosi oznaku o tome.
+
+Što radi u tvoju korist. Sustav trajno pamti. Svako ažuriranje evidencije ostaje zabilježeno pod pseudonimom i vidljivo redovnim članovima — loše se ponašanje ne briše s računa.
+
+Ako razmjena propadne. Prijavi slučaj Fondaciji — dugme stoji uz sam prepis u tvojoj povijesti POEN-a. Prepis nije nepovratan: ako ga Fondacija po prijavi poništi, vraća ti se cijeli iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prijava nije automatski povrat.
+
+Za kvalitetu, isporuku i ispunjenje dogovora odgovaraš ti s drugom stranom, po općim pravilima obveznog prava; Fondacija i Protokol nisu strana u tom odnosu. U početnoj fazi možeš zatražiti i dobrovoljno posredovanje Fondacije — ono nije obvezujuće, ali često je dovoljno.
+
+Najbolje je da se nađete uživo i razmjenu obavite licem u lice. Tako rizik pada, a nastaje i poznanstvo iz kojeg može doći potvrda.`,
       },
       {
         id: 83,
         pitanje: `Koliko oglasa mogu postaviti prije potvrde?`,
-        odgovor: `Tri aktivna, i to samo ponude — nešto što nudiš. Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto — duljina naslova i opisa nije uvjet.
+        odgovor: `Tri aktivna oglasa, i to samo ponude — nešto što nudiš. Prvi takav oglas nosi ti 1.000 POEN: oglas je na Pijaci odmah, a POEN se upisuje kad ga Fondacija odobri.
 
-Potražnja — oglas kojim nešto tražiš — kontakt s oglašivačima i pokretanje razgovora stižu s potvrdom. Ako ti se netko javi povodom tvog oglasa, možeš mu odgovoriti i prije toga.`,
+Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto. Nema propisane najmanje duljine — piši onoliko koliko treba da čovjek razumije što nudiš.
+
+Potvrdom stvarnosti ograničenje nestaje i otvara ti se ostalo:
+
+• neograničen broj aktivnih oglasa
+
+• potražnja — oglas kojim tražiš ono što tebi treba
+
+• kontakt s oglasa
+
+• pokretanje razgovora
+
+Jedno radi i prije potvrde: ako ti se netko javi povodom tvog oglasa, možeš mu odgovoriti.`,
       },
     ],
   },
