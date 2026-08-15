@@ -522,16 +522,13 @@ export default async function OSistemuPage() {
               {t("zasto_p1")}
             </p>
             <p>
-              {t("zasto_p2_pre")}<strong className="text-kolo-green-900">{t("zasto_p2_bold")}</strong>{t("zasto_p2_post")}
-            </p>
-            <p>
-              {t("zasto_p3")}
+              {t("zasto_p2")}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── MARGARET MID CITAT ────────────────────────────────────── */}
+      {/* ── NARODNA POSLOVICA ─────────────────────────────────────── */}
       <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-10 border-l-4 border-kolo-green-700">
         <div className="max-w-[680px] mx-auto">
           <blockquote
@@ -539,10 +536,10 @@ export default async function OSistemuPage() {
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>
-            {t("margaret_citat")}
+            {t("zasto_citat")}
             <span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
-          <p className="text-sm text-kolo-muted font-medium text-center">— {t("margaret_izvor")}</p>
+          <p className="text-sm text-kolo-muted font-medium text-center">— {t("zasto_citat_izvor")}</p>
         </div>
       </section>
 
@@ -576,24 +573,23 @@ export default async function OSistemuPage() {
           {t("cta_opis")}<br />
           {t("cta_opis2")}
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
-          <Link
-            href="/kako-funkcionise"
-            className="px-7 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
-          >
-            {t("cta_kako")}
-          </Link>
-          <Link
-            href="/o-nama"
-            className="px-7 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t("cta_ko")}
-          </Link>
+        {/* Jedno dugme vodi dalje, druga dva su obicni linkovi — na
+            zavrsetku stranice se bira jedan potez, ne tri ravnopravna. */}
+        <div className="flex justify-center mb-5">
           <Link
             href="/registracija"
-            className="px-7 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
+            className="w-full sm:w-auto px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
           >
             {t("cta_priduzi")}
+          </Link>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm mb-6">
+          <Link href="/kako-funkcionise" className="text-white/80 hover:text-white transition-colors underline underline-offset-4">
+            {t("cta_kako")}
+          </Link>
+          <span className="text-white/40" aria-hidden="true">·</span>
+          <Link href="/o-nama" className="text-white/80 hover:text-white transition-colors underline underline-offset-4">
+            {t("cta_ko")}
           </Link>
         </div>
         <p className="text-white/40 text-xs">
