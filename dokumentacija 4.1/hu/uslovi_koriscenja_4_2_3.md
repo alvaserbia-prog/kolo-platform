@@ -122,7 +122,7 @@ A nem hitelesített felhasználó javat vagy szolgáltatást kínáló hirdetés
 
 A nem hitelesített felhasználó nem tehet közzé javat vagy szolgáltatást kereső hirdetést.
 
-A nem hitelesített felhasználó hirdetésének meg kell felelnie a tartalmi minimumnak: legalább egy fénykép, legalább 40 karakter hosszú leírás, kategória és helység. Az a hirdetés, amely a tartalmi minimumnak nem felel meg, nem kerül közzétételre. Ugyanez a feltétel vonatkozik a már közzétett hirdetés módosítására is.
+A nem hitelesített felhasználó hirdetésének meg kell felelnie a tartalmi minimumnak: cím, leírás, legalább egy fénykép, kategória és helység, azzal, hogy a cím és a leírás hossza nem feltétel. Az a hirdetés, amely a tartalmi minimumnak nem felel meg, nem kerül közzétételre. Ugyanez a feltétel vonatkozik a már közzétett hirdetés módosítására is.
 
 A nem hitelesített felhasználónak egyidejűleg legfeljebb három aktív hirdetése lehet.
 
@@ -184,7 +184,7 @@ Az a felhasználó, aki a csereterületen ajánlatot vagy keresletet tesz közz�
 
 A felhasználó nem tehet közzé olyan tartalmat, amely hamis, megtévesztő, vagy amely a jószág vagy szolgáltatás jellegét, minőségét vagy mennyiségét tévesen mutatja be.
 
-A hirdetés tartalmi minimuma — legalább egy fénykép, legalább 40 karakter hosszú leírás, kategória és helység — a nem hitelesített felhasználó hirdetése közzétételének feltétele (16. cikk), valamint a platform tartalmához való hozzájárulás nyilvántartásba vételének feltétele valamennyi felhasználó esetében (a KOLO rendszerről szóló szabályzat 40.a cikke). A hitelesített felhasználó esetében a tartalmi minimumot el nem érő hirdetés közzétételre kerül, de arra tekintettel hozzájárulás nem kerül nyilvántartásba.
+A hirdetés tartalmi minimuma — cím, leírás, legalább egy fénykép, kategória és helység, a cím és a leírás hosszára vonatkozó feltétel nélkül — a nem hitelesített felhasználó hirdetése közzétételének feltétele (16. cikk), valamint a platform tartalmához való hozzájárulás nyilvántartásba vételének feltétele valamennyi felhasználó esetében (a KOLO rendszerről szóló szabályzat 40.a cikke). A hitelesített felhasználó esetében a tartalmi minimumot el nem érő hirdetés közzétételre kerül, de arra tekintettel hozzájárulás nem kerül nyilvántartásba.
 
 ### 21. cikk — Tiltott javak és szolgáltatások
 

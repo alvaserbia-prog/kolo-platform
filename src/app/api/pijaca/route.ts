@@ -170,6 +170,7 @@ export async function POST(req: NextRequest) {
   // datoteke za sobom.
   const oglasZaProveru = {
     tip,
+    title,
     description,
     category,
     location: mesto,

@@ -434,6 +434,7 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
       select: {
         id: true,
         sellerId: true,
+        title: true,
         description: true,
         category: true,
         location: true,
@@ -462,6 +463,7 @@ export async function revidirajDoprinose(): Promise<RevizijaDoprinosa> {
     if (prviKvalifikovan.has(o.sellerId)) continue;
     const provera = oglasIspunjavaMinimum({
       tip: "PONUDA",
+      title: o.title,
       description: o.description,
       category: o.category,
       location: o.location,

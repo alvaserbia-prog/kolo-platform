@@ -31,7 +31,6 @@ vi.mock("@/lib/adminAlert", () => ({ posaljiAdminAlert: adminAlertMock }));
 
 import {
   IZNOS,
-  MIN_OPIS,
   MAX_AKTIVNIH_OGLASA,
   oglasIspunjavaMinimum,
   smeDaPostaviOglas,
@@ -45,12 +44,14 @@ import {
   probajEvidentirati,
 } from "@/lib/protokol/doprinos-sadrzaju";
 
-const OPIS = "x".repeat(MIN_OPIS);
+/** Opis nije uslov minimuma — kratak tekst je sasvim ispravan oglas. */
+const OPIS = "Med, 1 kg";
 
 /** Oglas koji ispunjava sadržinski minimum — pojedina polja se gase u testu. */
 function oglas(izmene: Partial<Parameters<typeof oglasIspunjavaMinimum>[0]> = {}) {
   return {
     tip: "PONUDA",
+    title: "Med",
     description: OPIS,
     category: "hrana",
     location: "Sombor",
@@ -100,16 +101,20 @@ describe("oglasIspunjavaMinimum", () => {
     expect(oglasIspunjavaMinimum(oglas({ images: [] })).ok).toBe(false);
   });
 
-  it(`opis kraći od ${MIN_OPIS} znakova ne prolazi`, () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: "x".repeat(MIN_OPIS - 1) })).ok).toBe(false);
+  it("kratak opis prolazi — dužina opisa nije uslov", () => {
+    expect(oglasIspunjavaMinimum(oglas({ description: "Med" })).ok).toBe(true);
   });
 
-  it("opis od tačno minimuma prolazi", () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: "x".repeat(MIN_OPIS) })).ok).toBe(true);
+  it("opis mora da postoji, ma koliko kratak bio", () => {
+    expect(oglasIspunjavaMinimum(oglas({ description: "" })).ok).toBe(false);
+    expect(oglasIspunjavaMinimum(oglas({ description: "   " })).ok).toBe(false);
+    expect(oglasIspunjavaMinimum(oglas({ description: "." })).ok).toBe(true);
   });
 
-  it("razmaci se ne broje kao opis", () => {
-    expect(oglasIspunjavaMinimum(oglas({ description: `  ${"x".repeat(MIN_OPIS - 2)}  ` })).ok).toBe(false);
+  it("naslov mora da postoji, ma koliko kratak bio", () => {
+    expect(oglasIspunjavaMinimum(oglas({ title: "" })).ok).toBe(false);
+    expect(oglasIspunjavaMinimum(oglas({ title: "   " })).ok).toBe(false);
+    expect(oglasIspunjavaMinimum(oglas({ title: "M" })).ok).toBe(true);
   });
 
   it("bez mesta ne prolazi — bez mesta se razmena ne može obaviti", () => {
@@ -594,7 +599,7 @@ describe("evidentirajZateceneVerifikovane", () => {
 describe("revidirajDoprinose", () => {
   function redOglasa(izmene: Record<string, unknown> = {}) {
     return {
-      id: "o1", sellerId: "u1", description: OPIS, category: "hrana",
+      id: "o1", sellerId: "u1", title: "Med", description: OPIS, category: "hrana",
       location: "Sombor", images: ["https://r2/s.jpg"],
       seller: { pseudonim: "Marko" }, ...izmene,
     };
