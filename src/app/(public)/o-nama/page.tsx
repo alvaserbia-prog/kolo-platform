@@ -60,8 +60,10 @@ export default async function ONamaPage() {
     { naslov: t("stavka5_naslov"), tekst: t("stavka5_tekst") },
   ];
 
-  const kartice = [
-    { naslov: t("k1_naslov"), tekst: t("k1_tekst"), cta: t("k1_cta"), ctaHref: "/registracija", ctaIsLink: true },
+  // Prva kartica je bez dugmeta — poziv na registraciju stoji u istaknutom
+  // bloku odmah iznad, pa bi ga kartica samo ponovila.
+  const kartice: { naslov: string; tekst: string; cta?: string; ctaHref?: string; ctaIsLink?: boolean }[] = [
+    { naslov: t("k1_naslov"), tekst: t("k1_tekst") },
     { naslov: t("k2_naslov"), tekst: t("k2_tekst"), cta: t("k2_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
     { naslov: t("k3_naslov"), tekst: t("k3_tekst"), cta: t("k3_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
   ];
@@ -329,14 +331,16 @@ export default async function ONamaPage() {
               <p className="text-sm text-kolo-muted leading-relaxed flex-1 text-body" style={{ lineHeight: "1.65" }}>
                 {k.tekst}
               </p>
-              {k.ctaIsLink ? (
-                <Link href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
-                  {k.cta}
-                </Link>
-              ) : (
-                <a href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
-                  {k.cta}
-                </a>
+              {k.cta && k.ctaHref && (
+                k.ctaIsLink ? (
+                  <Link href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
+                    {k.cta}
+                  </Link>
+                ) : (
+                  <a href={k.ctaHref} className="text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors mt-2">
+                    {k.cta}
+                  </a>
+                )
               )}
             </div>
           ))}
