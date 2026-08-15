@@ -75,7 +75,7 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n3_naslov"),
       opis: t("n3_opis"),
       iznos: t("n3_iznos"),
-      boja: "bg-kolo-gold-100 text-kolo-gold-600",
+      boja: "bg-kolo-green-100 text-kolo-green-700",
     },
     {
       br: "4",
@@ -96,7 +96,7 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n6_naslov"),
       opis: t("n6_opis"),
       iznos: t("n6_iznos"),
-      boja: "bg-kolo-green-100 text-kolo-green-700",
+      boja: "bg-kolo-gold-100 text-kolo-gold-600",
     },
     {
       br: "7",
@@ -167,9 +167,18 @@ export default async function KakoFunkcionisePage() {
             </div>
           ))}
         </div>
+
+        {/* Odgovornost za potvrdu — NIJE šesti korak, pa namerno stoji van
+            merdevina: bez rednog broja i bez oznake u uglu. */}
+        <div className="mt-6 rounded-2xl border-l-4 border-kolo-gold-400 bg-kolo-gold-100/40 p-5">
+          <p className="text-sm text-kolo-text leading-relaxed">
+            <strong className="text-kolo-green-900">{t("odgovornost_naslov")}</strong>{" "}
+            {t("odgovornost_tekst")}
+          </p>
+        </div>
       </section>
 
-      {/* ── S3: ŠEST MEHANIZAMA UPISIVANJA POEN-a ──────────────────── */}
+      {/* ── S3: SEDAM KANALA UPISIVANJA POEN-a ─────────────────────── */}
       <section className="space-y-6">
         <div className="text-center space-y-3">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
@@ -234,7 +243,7 @@ export default async function KakoFunkcionisePage() {
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-kolo-muted leading-relaxed text-body">{n.opis}</p>
+                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">{n.opis}</p>
               </div>
             );
           })}
