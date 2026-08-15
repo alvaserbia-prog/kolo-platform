@@ -225,12 +225,16 @@ export default async function KakoFunkcionisePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          {nacinUpisa.map((n) => {
+        {/* Sedam kanala u dva reda: prva četiri (kratak opis) po 3 od 12
+            kolona, poslednja tri (pokroviteljstvo, donacija, osnivački —
+            duži tekst) po 4. Tako nema usamljene kartice u trećem redu,
+            a duži opisi dobijaju širu kolonu. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
+          {nacinUpisa.map((n, i) => {
             return (
               <div
                 key={n.br}
-                className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 md:col-span-2"
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 ${i < 4 ? "md:col-span-3" : "md:col-span-4"}`}
               >
                 <div className="flex items-start gap-3">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
