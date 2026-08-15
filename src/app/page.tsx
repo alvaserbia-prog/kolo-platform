@@ -220,8 +220,8 @@ export default async function Home() {
             {t("alternativa_citat")}
           </blockquote>
 
-          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
-            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl" style={{ letterSpacing: "-0.01em" }}>
+          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-2xl mx-auto">
+            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl text-balance" style={{ letterSpacing: "-0.01em" }}>
               {t("alternativa_podnaslov")}
             </p>
           </div>
@@ -285,17 +285,20 @@ export default async function Home() {
             {t("primer_naslov")}
           </h2>
 
-          {/* Stupci povezani strelicama po hronologiji */}
-          <div className="flex flex-col md:flex-row items-stretch gap-3">
+          {/* Stupci povezani strelicama po hronologiji.
+              Na md+ je red CSS grid sa tri reda (broj / naslov / opis), a kartice
+              preuzimaju te iste redove kroz `subgrid` — tako naslovi i tekstovi
+              počinju na istoj visini i kad naslov u jednom stupcu prelomi u dva reda. */}
+          <div className="flex flex-col gap-3 md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr] md:grid-rows-[auto_auto_1fr] md:items-stretch">
             {primerKoraci.map((k, i) => (
               <div key={k.naslov} className="contents">
-                <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+                <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 items-center text-center md:grid md:grid-rows-subgrid md:row-span-3 md:items-start md:justify-items-center">
                   <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">{i + 1}</span>
                   <h3 className="font-semibold text-kolo-text text-sm">{k.naslov}</h3>
                   <p className="text-kolo-muted leading-relaxed text-xs">{k.opis}</p>
                 </div>
                 {i < primerKoraci.length - 1 && (
-                  <div className="flex items-center justify-center text-kolo-muted shrink-0">
+                  <div className="flex items-center justify-center text-kolo-muted shrink-0 md:row-span-3 md:self-center">
                     <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12"/>
                       <polyline points="12 5 19 12 12 19"/>
