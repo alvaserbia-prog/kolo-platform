@@ -106,10 +106,15 @@ export default async function ONamaPage() {
     { naziv: t("dok_pravilnik_programi_podrske"), href: "/pravilnik/programi-podrske" },
   ];
 
-  const pravniDokumenti = [
+  // Ono što korisnik prihvata pri registraciji odvojeno je od akata o zaštiti
+  // podataka — do sada su stajali u jednoj grupi od pet dokumenata.
+  const korisnickiDokumenti = [
     { naziv: t("dok_uslovi"), href: "/uslovi" },
     { naziv: t("dok_rizici"), href: "/rizici" },
     { naziv: t("dok_politika"), href: "/privatnost" },
+  ];
+
+  const zastitaDokumenti = [
     { naziv: t("dok_dpia"), href: "/dpia" },
     { naziv: t("dok_radnje"), href: "/radnje-obrade" },
   ];
@@ -426,14 +431,21 @@ export default async function ONamaPage() {
 
       {/* ── JAVNO I DOSTUPNO ──────────────────────────────────────── */}
       <section id="dokumenti" className="bg-white rounded-2xl card-shadow p-8 md:p-10">
-        <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+        <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
           {t("javno_tag")}
         </div>
+        <p className="text-kolo-text leading-relaxed mb-6 text-body">{t("javno_opis")}</p>
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Levo — dokumenti */}
           <div>
-            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-4">{t("dok_tag")}</p>
+            <div className="mb-4">
+              <div className="flex items-baseline justify-between gap-2">
+                <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase">{t("dok_tag")}</p>
+                <span className="text-[11px] text-kolo-muted">{t("dok_broj")}</span>
+              </div>
+              <p className="text-sm text-kolo-muted leading-relaxed mt-1.5">{t("dok_opis")}</p>
+            </div>
             <div className="space-y-2">
               {/* Ključni dokumenti — uvek vidljivi */}
               {kljucniDokumenti.map((dok) => (
@@ -451,31 +463,53 @@ export default async function ONamaPage() {
                     </svg>
                   </span>
                 </summary>
-                <div className="px-1 pb-1.5 space-y-1">
-                  {posebniPravilnici.map((dok) => (
-                    <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
-                  ))}
+                <div className="px-1 pb-1.5">
+                  <p className="text-sm text-kolo-muted leading-relaxed px-3 pb-2">{t("dok_posebni_opis")}</p>
+                  <div className="space-y-1">
+                    {posebniPravilnici.map((dok) => (
+                      <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
+                    ))}
+                  </div>
                 </div>
               </details>
 
-              {/* Pravni i korisnički dokumenti — sklopivo */}
+              {/* Šta korisnik prihvata pri registraciji — sklopivo */}
               <details className="group/sek border border-kolo-border rounded-xl overflow-hidden">
                 <summary className="flex items-center justify-between gap-2 p-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-kolo-bg transition-colors">
-                  <span className="text-sm font-semibold text-kolo-text">{t("dok_pravni_tag")}</span>
+                  <span className="text-sm font-semibold text-kolo-text">{t("dok_korisnicki_tag")}</span>
                   <span className="flex items-center gap-2 text-kolo-muted">
-                    <span className="text-[11px]">{t("dok_pravni_broj")}</span>
+                    <span className="text-[11px]">{t("dok_korisnicki_broj")}</span>
                     <svg className="transition-transform group-open/sek:rotate-90" width="14" height="14" viewBox="0 0 14 14" fill="none">
                       <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </span>
                 </summary>
                 <div className="px-1 pb-1.5 space-y-1">
-                  {pravniDokumenti.map((dok) => (
+                  {korisnickiDokumenti.map((dok) => (
+                    <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
+                  ))}
+                </div>
+              </details>
+
+              {/* Zaštita podataka — sklopivo */}
+              <details className="group/sek border border-kolo-border rounded-xl overflow-hidden">
+                <summary className="flex items-center justify-between gap-2 p-3 cursor-pointer list-none [&::-webkit-details-marker]:hidden hover:bg-kolo-bg transition-colors">
+                  <span className="text-sm font-semibold text-kolo-text">{t("dok_zastita_tag")}</span>
+                  <span className="flex items-center gap-2 text-kolo-muted">
+                    <span className="text-[11px]">{t("dok_zastita_broj")}</span>
+                    <svg className="transition-transform group-open/sek:rotate-90" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </summary>
+                <div className="px-1 pb-1.5 space-y-1">
+                  {zastitaDokumenti.map((dok) => (
                     <DokumentRed key={dok.naziv} naziv={dok.naziv} href={dok.href} />
                   ))}
                 </div>
               </details>
             </div>
+            <p className="text-xs text-kolo-muted leading-relaxed mt-4">{t("dok_licenca")}</p>
           </div>
 
           {/* Desno — kontakt */}
