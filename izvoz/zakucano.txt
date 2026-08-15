@@ -8,13 +8,14 @@ src/components/Header.tsx:182:            // R2 URL → next/image: optimizuje (
 src/components/JezikSvitcer.tsx:13:  { kod: "sr-Cyrl", ikona: "/flags/rs-grb.svg", naziv: "Српски — ћирилица", kratko: "СР" },
 src/components/JezikSvitcer.tsx:14:  { kod: "ru", ikona: "/flags/ru.svg", naziv: "Русский", kratko: "RU" },
 src/components/JezikSvitcer.tsx:51: * je aktivan locale "sr-Cyrl" (inače bi „Hrvatski" postao „Хрватски"); vidi
+src/components/verifikacija/IndeksPrikaz.tsx:57:  // Maloletni korisnik nije „nov član" — ta oznaka znači „skoro je došao", a dete
 src/components/verifikacija/MiniStablo.tsx:30:  // Korisnik može imati više verifikatora (1 početni + do 10 ličnih = do 100%).
 src/components/verifikacija/MiniStablo.tsx:51: * „nadzirano" = zelena kvačica (bez teksta); „čeka nadzor" = zlatna oznaka.
 src/components/PolitikaPristanak.tsx:18: * Ekran za pristanak na nove akte (Uslovi čl. 40, Politika čl. 16).
 src/components/PolitikaPristanak.tsx:61:   * Keširani `['me']` (odatle AppShell čita `politikaPotrebno`, poll na 30s) MORA
 src/components/PolitikaPristanak.tsx:202:          Izlaz iz gejta. Politika čl. 16 i Uslovi čl. 40 (v4.1.1): ograničenje pristupa
 src/components/profil/IndeksSekcija.tsx:66:      .catch(() => setError("Mreža nije dostupna"));
-src/components/Sidebar.tsx:195:  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
+src/components/Sidebar.tsx:199:  // Padajuća grupa "Zajedničko dobro": Sistem, Doprinos, Programi (+ Nadzor), ZRNO.
 src/components/graf/GrafKlijent.tsx:402:      {/* Legenda + statistika + "nađi me" */}
 src/components/Providers.tsx:40:  // /api/auth/session, što na sporoj vezi dugo prikazuje "Učitavam...".
 src/components/KomeKartice.tsx:64:          {prosireno ? labelManje : labelJos} {prosireno ? "↑" : "↓"}
@@ -51,6 +52,15 @@ src/app/(app)/admin/OdlukeTab.tsx:166:      : "Poništava se samo ova verifikaci
 src/app/(app)/admin/OdlukeTab.tsx:225:                    {" → "}
 src/app/(app)/admin/OdlukeTab.tsx:251:                  {p.verifikovani.utvrdjenNepostojeci && " · već utvrđen nepostojećim"}
 src/app/(app)/admin/OdlukeTab.tsx:280:                    placeholder="Beleška uz odluku (opciono) — ide u audit log."
+src/app/(app)/admin/RazmeneTab.tsx:10: * vlasnika 2026-08-15) — minus radi isto što i nadoknada iz čl. 20b. Zato uz
+src/app/(app)/admin/RazmeneTab.tsx:42:  ["resene", "Rešene"],
+src/app/(app)/admin/RazmeneTab.tsx:63:        setGreska(data.error ?? "Greška pri učitavanju.");
+src/app/(app)/admin/RazmeneTab.tsx:80:      setGreska("Obrazloženje je obavezno — ide korisniku i u revizijski dnevnik.");
+src/app/(app)/admin/RazmeneTab.tsx:100:        setGreska(data.error ?? "Greška pri odlučivanju.");
+src/app/(app)/admin/RazmeneTab.tsx:151:          {prikaz === "otvorene" ? "Nema otvorenih prijava." : "Nema rešenih prijava."}
+src/app/(app)/admin/RazmeneTab.tsx:197:                        {s.status === "PONISTENA" ? "Prepis poništen" : "Prijava odbačena"}
+src/app/(app)/admin/RazmeneTab.tsx:212:                      placeholder="Obrazloženje — ide korisniku i u revizijski dnevnik."
+src/app/(app)/admin/RazmeneTab.tsx:221:                        {odluka.vrsta === "ponisti" ? "Poništi prepis" : "Odbaci prijavu"}
 src/app/(app)/admin/PokroviteljPrijaveTab.tsx:44:      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
 src/app/(app)/admin/PrviOglasiTab.tsx:47:  ["cekanje", "Na čekanju"],
 src/app/(app)/admin/PrviOglasiTab.tsx:69:        setGreska(data.error ?? "Greška pri učitavanju.");
@@ -64,10 +74,10 @@ src/app/(app)/admin/NadzorTab.tsx:32:const NIVO_ZNAK: Record<string, string> = {
 src/app/(app)/admin/NadzorTab.tsx:91:                    {NIVO_ZNAK[n.nivo] ?? "🟡"} {n.rizik}
 src/app/(app)/admin/NadzorTab.tsx:101:                  <span className="ml-auto text-kolo-muted text-sm">{jeOtvoren ? "▴" : "▾"}</span>
 src/app/(app)/admin/NadzorTab.tsx:109:                          <span className="font-medium">{NIVO_ZNAK[p.nivo] ?? "🟡"} {p.kod}</span> — {p.opis}
-src/app/(app)/admin/AdminKlijent.tsx:639:                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
-src/app/(app)/admin/AdminKlijent.tsx:842:          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_br_izvršilaca_label")}</label>
-src/app/(app)/admin/AdminKlijent.tsx:844:            placeholder={t("novi_oglas_br_izvršilaca_placeholder")}
-src/app/(app)/admin/AdminKlijent.tsx:1624:              {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString(intlTag(locale)), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
+src/app/(app)/admin/AdminKlijent.tsx:645:                    {o.predlozeniPoen > 0 ? o.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}{o.saOdobravanjem ? ` · ${t("ped_oglas_sa_odobravanjem")}` : ""} · {o.positions} {o.positions === 1 ? t("ped_oglas_izvršilac_sing") : t("ped_oglas_izvršilac_pl")} · {o.ukupnoPrijava} {t("ped_oglas_prijava")} · {o.pendingEvidencija} {t("ped_oglas_za_verifikaciju")}
+src/app/(app)/admin/AdminKlijent.tsx:848:          <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("novi_oglas_br_izvršilaca_label")}</label>
+src/app/(app)/admin/AdminKlijent.tsx:850:            placeholder={t("novi_oglas_br_izvršilaca_placeholder")}
+src/app/(app)/admin/AdminKlijent.tsx:1630:              {t("dashboard_zero_sum_zbir", { zbir: zeroSum.zbir.toLocaleString(intlTag(locale)), status: zeroSum.ok ? "✓ OK" : "✗ GREŠKA" })}
 src/app/(app)/admin/ObavestenjaTab.tsx:6: * Namena je uska: izmene Uslova/Politike (Uslovi čl. 40, Politika čl. 16),
 src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:26:// 1, 21, 31… → „aktivan zadatak"; 2–4, 22–24… → „aktivna zadatka"; ostalo → „aktivnih zadataka".
 src/app/(app)/doprinos-oglasi/DoprinosOglasiKlijent.tsx:45:    APPROVED: { label: t("primljen_izvršilac"),  cls: "bg-kolo-green-100 text-kolo-green-700 border-kolo-green-100" },
@@ -80,6 +90,7 @@ src/app/(app)/doprinos-oglasi/[id]/OglasDetalj.tsx:156:            {oglas.mojaPr
 src/app/(app)/pocetna/PocetnaKlijent.tsx:74:      setGreska(data.error ?? "Greška pri uklanjanju poruke.");
 src/app/(app)/dobrodosli/page.tsx:85:  // (gornje dugme = "Preskoči" → /sistem). Inače je vodič otvoren iz "?"
 src/app/(app)/dobrodosli/page.tsx:154:          {prviPut ? t("preskoči") : t("zatvori")}
+src/app/(app)/deca/[id]/page.tsx:15: * vidi jedino on: dugme „Ukloni" uz svaki oglas i prekidač iz čl. 10 st. 2.
 src/app/(app)/donacije/DonacijeKlijent.tsx:122:    const tekst = `Primalac: KOLO Fondacija\nRačun: ${prikazRacuna}\nSvrha: Donacija\nModel: 97\nPoziv na broj: ${data!.pozivNaBroj}`;
 src/app/(app)/pijaca/PijacaKlijent.tsx:520:        {/* Pečat da oglašivač nije verifikovan (Uslovi čl. 16, Pravilnik čl. 16).
 src/app/(app)/verifikacija/page.tsx:8: *  - "Pokaži kod" — QR + 6-cifren broj
