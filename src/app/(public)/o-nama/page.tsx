@@ -77,10 +77,17 @@ export default async function ONamaPage() {
     { naslov: t("sek6_naslov"), tekst: t("sek6_tekst") },
   ];
 
-  const stubovi = [
-    { naslov: "", tekst: t("stub1_tekst") },
+  const stubovi: { naslov: string; tekst: string; podnaslov?: string; podtekst?: string }[] = [
+    { naslov: t("stub1_naslov"), tekst: t("stub1_tekst") },
     { naslov: t("stub2_naslov"), tekst: t("stub2_tekst") },
-    { naslov: t("stub3_naslov"), tekst: t("stub3_tekst") },
+    {
+      naslov: t("stub3_naslov"),
+      tekst: t("stub3_tekst"),
+      // Sastav organa stoji kao zaseban blok u trećem stubu — imena su javni
+      // podatak iz registra, ali ne pripadaju opisu nadležnosti.
+      podnaslov: t("stub3_sastav_naslov"),
+      podtekst: t("stub3_sastav_tekst"),
+    },
   ];
 
   const kljucniDokumenti = [
@@ -406,6 +413,12 @@ export default async function ONamaPage() {
                 <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">{stub.naslov}</p>
               )}
               <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>{stub.tekst}</p>
+              {stub.podnaslov && stub.podtekst && (
+                <div className="mt-4 pt-4 border-t border-kolo-border">
+                  <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-2">{stub.podnaslov}</p>
+                  <p className="text-sm text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.7" }}>{stub.podtekst}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
