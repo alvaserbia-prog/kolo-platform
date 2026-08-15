@@ -8,13 +8,13 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
       {
         id: 42,
         pitanje: `I don't know anyone in KOLO — can anyone confirm me?`,
-        odgovor: `They can. Confirmation of reality rests on someone getting to know you in person — and that acquaintance is yet to be formed.
+        odgovor: `They can. Confirmation of reality rests on someone coming to know you personally — and that acquaintance is yet to be formed.
 
 Joining requires no confirmation. Registration is free. Straight away you can read the rules, look at the public overview of the system and at the offers on the Marketplace, and post up to three listings in which you offer something (you can take a listing down whenever you like).
 
 Acquaintance grows out of exchange. Post a listing and wait for someone to get in touch. Once you have carried out the exchange in person, that person has genuinely got to know you — and if they are a full member, they can give you confirmation of reality. That is how most people obtain proof of reality.
 
-Confirmation is given only by someone who holds proof of reality themselves, and always after a face-to-face meeting — never on the basis of a message on the platform.
+Confirmation is given only by someone who holds proof of reality themselves, and always on the basis of direct personal acquaintance — never on the basis of a message on the platform alone.
 
 If you know no one, the shortest path is to write to us at kontakt@ekolo.rs or to come to a gathering in your area. Acquaintance is not required in advance — it is created.`,
       },
@@ -42,7 +42,7 @@ Once you hold proof of reality, four paths open up.
 
 Exchange. You do not have to sell anything. Exchange also covers services and knowledge — you can help someone with a job, teach them, look after their children. The other side then re-registers POEN to you for what you have done.
 
-Confirming others. When you confirm someone you genuinely know, 1,000 POEN is recorded for each of you — once per person. By confirming, you stand behind the fact that this person exists and has no second account, so confirmation is given only for people you truly know.
+Confirming others. When you confirm someone you genuinely know, 1,000 POEN is recorded for each of you — once per person. You are confirming only that this person exists and has no second account, so confirmation is given solely for people you truly know.
 
 Operational contribution. Work for the common good under a published task. Tasks are set by the Foundation in the initial phase, and once the module is activated by ZRNO holders and the Upper Kolo. When you carry out the task and a ZRNO holder confirms performance, POEN is recorded for you.
 
@@ -96,7 +96,7 @@ If you come across any of this: do not share your data, do not click the link, a
         pitanje: `How do I get my first POEN while no one has confirmed me yet?`,
         odgovor: `You need neither a product nor a confirmation for your first POEN to be recorded.
 
-Post a listing in which you offer something — the first such listing earns you 1,000 POEN through contribution to exchange. The listing must have a title, a description, a photograph, a category and a place. Contribution to exchange opens once per account and is not repeated.
+Post a listing in which you offer something — the first such listing earns you 1,000 POEN through contribution to exchange. The listing must have a title, a description, a photograph, a category and a place. The listing goes onto the Marketplace straight away, and the POEN is recorded for you once the Foundation approves the listing. Contribution to exchange opens once per account and is not repeated.
 
 POEN is also recorded for you when someone re-registers it to you for a completed exchange. While you do not hold proof of reality you can receive it, but you cannot re-register it to anyone yourself.
 
@@ -122,7 +122,7 @@ It is best to meet in person and carry out the exchange face to face. That lower
       {
         id: 83,
         pitanje: `How many listings can I post before confirmation?`,
-        odgovor: `Three active listings, and offers only — something you are offering. The first such listing earns you 1,000 POEN.
+        odgovor: `Three active listings, and offers only — something you are offering. The first such listing earns you 1,000 POEN: the listing is on the Marketplace straight away, and the POEN is recorded once the Foundation approves it.
 
 Every listing must have a title, a description, a photograph, a category and a place. There is no prescribed minimum length — write as much as it takes for a person to understand what you are offering.
 

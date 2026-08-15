@@ -25,7 +25,7 @@ A belépéshez nem kell megerősítés. A regisztráció ingyenes. Azonnal elolv
 
 Az ismeretség a cseréből születik. Adj fel egy hirdetést, és várd meg, hogy valaki jelentkezzen. Amikor a cserét személyesen lebonyolítjátok, az a személy valóban megismert téged — és ha rendes tag, megadhatja neked a valóság megerősítését. A legtöbb ember így jut valóságigazoláshoz.
 
-Megerősítést csak az adhat, akinek magának is van valóságigazolása, és mindig személyes találkozó után — soha nem a platformon küldött üzenet alapján.
+Megerősítést csak az adhat, akinek magának is van valóságigazolása, és mindig közvetlen személyes ismeretség alapján — soha nem pusztán a platformon küldött üzenet alapján.
 
 Ha senkit nem ismersz, a legrövidebb út, ha írsz nekünk a kontakt@ekolo.rs címre, vagy eljössz egy helyi találkozóra. Az ismeretséget nem előre kérjük — az menet közben jön létre.`,
       },
@@ -53,7 +53,7 @@ Amikor megszerzed a valóságigazolást, négy út nyílik meg előtted.
 
 Csere. Nem kell semmit eladnod. A csere a szolgáltatásokra és a tudásra is kiterjed — segíthetsz valakinek egy munkában, taníthatod, vigyázhatsz a gyerekére. A másik fél ekkor POEN-t ír át neked azért, amit tettél.
 
-Mások megerősítése. Amikor megerősítesz valakit, akit valóban ismersz, 1.000-1.000 POEN rögzül neked is, neki is — személyenként egyszer. A megerősítéssel azt vállalod, hogy ez a személy létezik, és nincs másik fiókja, ezért megerősítést csak olyan emberekre adj, akiket tényleg ismersz.
+Mások megerősítése. Amikor megerősítesz valakit, akit valóban ismersz, 1.000-1.000 POEN rögzül neked is, neki is — személyenként egyszer. Csak azt erősíted meg, hogy ez a személy létezik, és nincs másik fiókja, ezért megerősítést kizárólag olyan emberekre adj, akiket tényleg ismersz.
 
 Működési hozzájárulás. Munka a közös jóért, közzétett feladat alapján. A feladatokat a kezdeti szakaszban az Alapítvány tűzi ki, aktiválás után pedig a ZRNO-tartók és a Felső Kolo. Amikor teljesíted a feladatot, és egy ZRNO-tartó megerősíti a teljesítést, POEN rögzül neked.
 
@@ -107,7 +107,7 @@ Ha bármelyikkel találkozol: ne oszd meg az adataidat, ne kattints a hivatkozá
         pitanje: `Hogyan jutok az első POEN-hez, amíg még senki nem erősített meg?`,
         odgovor: `Ahhoz, hogy az első POEN rögzüljön neked, sem termék, sem megerősítés nem kell.
 
-Adj fel egy hirdetést, amellyel kínálsz valamit — az első ilyen hirdetés 1.000 POEN-t hoz neked a cseréhez való hozzájárulás csatornáján. A hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia. A cseréhez való hozzájárulás fiókonként egyszer nyílik meg, és nem ismétlődik.
+Adj fel egy hirdetést, amellyel kínálsz valamit — az első ilyen hirdetés 1.000 POEN-t hoz neked a cseréhez való hozzájárulás csatornáján. A hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia. A hirdetés azonnal felkerül a Piacra, a POEN pedig akkor rögzül neked, amikor az Alapítvány jóváhagyja a hirdetést. A cseréhez való hozzájárulás fiókonként egyszer nyílik meg, és nem ismétlődik.
 
 POEN akkor is rögzül neked, ha valaki egy lebonyolított cseréért átírja neked. Amíg nincs valóságigazolásod, kaphatod, de magad nem írhatod át másnak.
 
@@ -133,7 +133,7 @@ A legjobb, ha személyesen találkoztok, és a cserét szemtől szemben bonyolí
       {
         id: 83,
         pitanje: `Hány hirdetést adhatok fel megerősítés előtt?`,
-        odgovor: `Három aktív hirdetést, és csak ajánlatot — olyasmit, amit kínálsz. Az első ilyen hirdetés 1.000 POEN-t hoz neked.
+        odgovor: `Három aktív hirdetést, és csak ajánlatot — olyasmit, amit kínálsz. Az első ilyen hirdetés 1.000 POEN-t hoz neked: a hirdetés azonnal fent van a Piacon, a POEN pedig akkor rögzül, amikor az Alapítvány jóváhagyja.
 
 Minden hirdetésnek címet, leírást, fényképet, kategóriát és helységet kell tartalmaznia. Előírt legkisebb hossz nincs — annyit írj, amennyi kell ahhoz, hogy az ember megértse, mit kínálsz.
 

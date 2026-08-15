@@ -8,13 +8,13 @@ export const FAQ_SEKCIJE_HR: FaqSekcija[] = [
       {
         id: 42,
         pitanje: `Ne poznajem nikoga u KOLU — može li me itko potvrditi?`,
-        odgovor: `Može. Potvrda stvarnosti temelji se na tome da te netko upozna uživo — a to poznanstvo tek treba nastati.
+        odgovor: `Može. Potvrda stvarnosti temelji se na tome da te netko osobno upozna — a to poznanstvo tek treba nastati.
 
 Ulazak ne traži potvrdu. Registracija je besplatna. Odmah možeš pročitati pravila, pogledati javni pregled sustava i ponudu na Pijaci te postaviti do tri oglasa kojima nešto nudiš (oglas skloniš kad hoćeš).
 
 Poznanstvo nastaje kroz razmjenu. Postavi oglas i pričekaj da ti se netko javi. Kad razmjenu obavite uživo, ta te je osoba stvarno upoznala — i ako je redovni član, može ti dati potvrdu stvarnosti. Tako većina ljudi stječe dokaz stvarnosti.
 
-Potvrdu daje samo onaj tko i sam ima dokaz stvarnosti, i uvijek nakon susreta licem u lice — nikad na temelju poruke na platformi.
+Potvrdu daje samo onaj tko i sam ima dokaz stvarnosti, i uvijek na temelju neposrednog osobnog poznanstva — nikad na temelju same poruke na platformi.
 
 Ako ne poznaješ nikoga, najkraći je put da nam pišeš na kontakt@ekolo.rs ili da dođeš na skup u svom mjestu. Poznanstvo se ne traži unaprijed — ono se stvara.`,
       },
@@ -42,7 +42,7 @@ Kad stekneš dokaz stvarnosti, otvaraju ti se četiri puta.
 
 Razmjena. Ne moraš ništa prodavati. Razmjena obuhvaća i usluge i znanje — možeš nekome pomoći oko posla, podučiti ga, pričuvati djecu. Druga ti strana tada prepiše POEN za to što si učinio.
 
-Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POEN upisuje se i tebi i njemu — jednom po osobi. Potvrdom jamčiš da ta osoba postoji i da nema drugi račun, pa se potvrda daje samo za ljude koje zaista poznaješ.
+Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POEN upisuje se i tebi i njemu — jednom po osobi. Potvrđuješ samo to da ta osoba postoji i da nema drugi račun, pa se potvrda daje jedino za ljude koje zaista poznaješ.
 
 Operativni doprinos. Rad za zajedničko dobro po objavljenom zadatku. Zadatke postavlja Fondacija u početnoj fazi, a po aktivaciji nositelji ZRNA i Gornje Kolo. Kad izvršiš zadatak i nositelj ZRNA potvrdi izvršenje, POEN ti se upisuje.
 
@@ -96,7 +96,7 @@ Ako naiđeš na bilo što od ovoga: ne dijeli podatke, ne klikći na poveznicu i
         pitanje: `Kako do prvih POEN-a dok me još nitko nije potvrdio?`,
         odgovor: `Ne treba ti ni proizvod ni potvrda da bi ti se upisao prvi POEN.
 
-Postavi oglas kojim nešto nudiš — prvi takav oglas nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto. Doprinos razmjeni otvara se jednom po računu i ne ponavlja se.
+Postavi oglas kojim nešto nudiš — prvi takav oglas nosi ti 1.000 POEN kroz doprinos razmjeni. Oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto. Oglas ide na Pijacu odmah, a POEN ti se upisuje kad Fondacija odobri oglas. Doprinos razmjeni otvara se jednom po računu i ne ponavlja se.
 
 POEN ti se upisuje i kad ti ga netko prepiše za obavljenu razmjenu. Dok nemaš dokaz stvarnosti možeš ga primati, ali ne i sam prepisivati drugome.
 
@@ -122,7 +122,7 @@ Najbolje je da se nađete uživo i razmjenu obavite licem u lice. Tako rizik pad
       {
         id: 83,
         pitanje: `Koliko oglasa mogu postaviti prije potvrde?`,
-        odgovor: `Tri aktivna oglasa, i to samo ponude — nešto što nudiš. Prvi takav oglas nosi ti 1.000 POEN.
+        odgovor: `Tri aktivna oglasa, i to samo ponude — nešto što nudiš. Prvi takav oglas nosi ti 1.000 POEN: oglas je na Pijaci odmah, a POEN se upisuje kad ga Fondacija odobri.
 
 Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mjesto. Nema propisane najmanje duljine — piši onoliko koliko treba da čovjek razumije što nudiš.
 

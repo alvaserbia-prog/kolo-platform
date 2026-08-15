@@ -1678,7 +1678,7 @@
     "neverif_naslov": "Posting before confirmation",
     "neverif_opis": "You may post an offer only — something you provide. The listing needs a title, a description, a photo, a category and a place; the length of the title and description is not a condition. The listing goes live immediately; the contribution of {iznos} POEN is recorded once the Foundation approves the listing.",
     "neverif_preostalo": "Active listings you may still post: {broj}.",
-    "oznaka_neverifikovan": "NOT CONFIRMED",
+    "oznaka_neverifikovan": "New member",
     "oznaka_neverifikovan_opis": "No one has confirmed this advertiser in the chain of confirmations yet. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
     "traka_neverifikovan": "Post your first listing",
     "cta_prijavi_se": "Sign in",
