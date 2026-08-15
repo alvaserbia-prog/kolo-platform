@@ -272,6 +272,8 @@ export default async function KakoFunkcionisePage() {
               </div>
             </div>
 
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod")}</p>
+
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("poen_jeste_naslov")}</p>
               <ul className="space-y-1.5">
