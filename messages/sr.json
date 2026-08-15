@@ -1334,10 +1334,14 @@
     "sistemi_fureai_pokazao": "Sistem evidencije doprinosa može postati infrastruktura brige o osetljivim grupama društva. Prepoznavanje rada brige kao ekonomski merljivog ne degradira njegov ljudski karakter — naprotiv, čini ga vidljivim i prenosivim.",
     "familija_tag": "Gde je tu KOLO",
     "familija_naslov": "Ista familija, sa svojim posebnostima",
-    "familija_p1_pre": "KOLO nije kopija nijedne od navedenih mreža. Za razliku od tih mreža — koje su pre svega valute za razmenu — KOLO razdvaja doprinos od glasa: ",
-    "familija_p1_poen": " beleži šta si dao, a ",
-    "familija_p1_zrno": " nosi glas u odlučivanju, uz kvadratno glasanje kao zaštitu da niko ne preuzme moć. Uz to, razmena i njena evidencija su pravno odvojene — pa POEN nikad nije plaćanje — a podrška ranjivim grupama (majke, stariji, đaci) ugrađena je u sam sistem.",
-    "familija_p2": "Ali fundamentalno, KOLO pripada istoj familiji — sistemi evidencije razmene među pojedincima, koji rade komplementarno sa zvaničnom valutom, i koji rade za korisnike umesto da ih koriste.",
+    "familija_p1": "KOLO nije kopija nijedne od tih mreža. One su pravile jedinicu za razmenu. KOLO pravi evidenciju doprinosa, a razmena je ono što iz nje proizlazi.",
+    "familija_p2": "Ono što u tim mrežama ne postoji je lanac potvrda. U KOLU stvarnost svakog člana potvrđuje neko ko ga lično poznaje i za to odgovara. To je ono što mrežu drži stvarnom.",
+    "familija_p3_pre": "Druga razlika je što se doprinos i glas ne mešaju. ",
+    "familija_p3_poen": " beleži šta si dao, a ",
+    "familija_p3_zrno": " nosi glas u odlučivanju, uz kvadratno glasanje koje sprečava da moć završi kod nekolicine. Podrška majkama, starijima i đacima nije dodatak nego deo sistema.",
+    "familija_p4": "Treća razlika je u tome šta je čemu osnov. Ono što se dogovorite i predate jedno drugom je razmena. POEN je samo zapis o njoj. Zapis sam po sebi ne obavezuje nikoga ni na šta.",
+    "familija_p5": "Ima i razlika koje se lako provere. WIR je bankarsku dozvolu dobio 1936. jer daje kredit svojim članovima, a KOLO kredit ne daje. Sardex je preduzeće koje naplaćuje godišnju članarinu, a ulazak u KOLO je besplatan. Nijedan od ta dva pristupa nije pogrešan, samo su odgovor na drugačiji problem.",
+    "familija_p6": "Uz sve to, KOLO pripada istoj familiji: sistemi evidencije razmene među ljudima, koji rade uporedo sa zvaničnim novcem i koji rade za korisnike umesto da ih koriste.",
     "okvir_tag": "Međunarodni okvir",
     "okvir_naslov": "Globalni i evropski tok u koji KOLO ulazi",
     "okvir_opis": "U poslednje četiri godine solidarna ekonomija je postala formalno priznat sektor — i u UN sistemu i u pravnom okviru Evropske unije.",
@@ -1374,8 +1378,7 @@
     "cta_kako": "Kako KOLO funkcioniše →",
     "cta_ko": "Ko stoji iza KOLA →",
     "cta_priduzi": "Pridruži se →",
-    "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence",
-    "familija_p3": "I još nešto što u tim mrežama ne postoji: u KOLU stvarnost svakog člana potvrđuje neko ko ga lično poznaje, i za to odgovara. Lanac potvrda je ono što mrežu drži stvarnom."
+    "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence"
   },
   "kakoFunkcionisePage": {
     "meta_title": "Kako funkcioniše KOLO, korak po korak",

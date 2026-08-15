@@ -428,13 +428,22 @@ export default async function OSistemuPage() {
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
-              {t("familija_p1_pre")}<strong className="text-kolo-green-900">{tc("poen")}</strong>{t("familija_p1_poen")}<strong className="text-kolo-green-900">{tc("zrno")}</strong>{t("familija_p1_zrno")}
+              {t("familija_p1")}
             </p>
             <p>
               {t("familija_p2")}
             </p>
             <p>
-              {t("familija_p3")}
+              {t("familija_p3_pre")}<strong className="text-kolo-green-900">{tc("poen")}</strong>{t("familija_p3_poen")}<strong className="text-kolo-green-900">{tc("zrno")}</strong>{t("familija_p3_zrno")}
+            </p>
+            <p>
+              {t("familija_p4")}
+            </p>
+            <p>
+              {t("familija_p5")}
+            </p>
+            <p>
+              {t("familija_p6")}
             </p>
           </div>
         </div>

@@ -1334,10 +1334,14 @@
     "sistemi_fureai_pokazao": "A contribution ledger can become the infrastructure of care for vulnerable groups in society. Recognising care work as economically measurable does not degrade its human character — on the contrary, it makes it visible and transferable.",
     "familija_tag": "Where KOLO fits",
     "familija_naslov": "The same family, with its own distinctive features",
-    "familija_p1_pre": "KOLO is not a copy of any of the networks mentioned. Unlike those networks — which are primarily exchange currencies — KOLO separates contribution from vote: ",
-    "familija_p1_poen": " records what you gave, and ",
-    "familija_p1_zrno": " carries the vote in decisions, with quadratic voting as protection against anyone seizing power. In addition, exchange and its recording are legally separate — so POEN is never payment — and support for vulnerable groups (mothers, the elderly, students) is built into the system itself.",
-    "familija_p2": "But fundamentally, KOLO belongs to the same family — systems of exchange ledgers among individuals, operating complementarily to the official currency, and working for users rather than exploiting them.",
+    "familija_p1": "KOLO is not a copy of any of those networks. They built a unit for exchange. KOLO builds a record of contribution, and exchange is what follows from it.",
+    "familija_p2": "What those networks do not have is a chain of confirmations. In KOLO the reality of every member is confirmed by someone who knows them personally and answers for it. That is what keeps the network real.",
+    "familija_p3_pre": "The second difference is that contribution and voice are not mixed. ",
+    "familija_p3_poen": " records what you gave, while ",
+    "familija_p3_zrno": " carries the vote in decisions, with quadratic voting that keeps power from ending up with a handful of people. Support for mothers, the elderly and pupils is not an add-on but part of the system.",
+    "familija_p4": "The third difference is what rests on what. What you agree and hand over to each other is the exchange. POEN is only a record of it. A record on its own obliges no one to anything.",
+    "familija_p5": "There are also differences that are easy to check. WIR obtained a banking licence in 1936 because it lends to its members, while KOLO does not lend. Sardex is a company that charges an annual membership fee, while entering KOLO is free. Neither of those approaches is wrong — they are answers to a different problem.",
+    "familija_p6": "With all of that, KOLO belongs to the same family: systems that record exchange between people, run alongside official money, and work for their users instead of using them.",
     "okvir_tag": "International framework",
     "okvir_naslov": "The global and European current KOLO enters",
     "okvir_opis": "Over the past four years solidarity economy has become a formally recognised sector — both in the UN system and in the EU legal framework.",
@@ -1374,8 +1378,7 @@
     "cta_kako": "How KOLO works →",
     "cta_ko": "Who stands behind KOLO →",
     "cta_priduzi": "Join →",
-    "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences",
-    "familija_p3": "And one more thing that does not exist in those networks: in KOLO, every member's reality is confirmed by someone who knows them personally and answers for it. The chain of confirmations is what keeps the network real."
+    "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "kakoFunkcionisePage": {
     "meta_title": "How KOLO works, step by step",

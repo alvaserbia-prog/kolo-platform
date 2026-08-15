@@ -1327,10 +1327,14 @@
     "sistemi_fureai_pokazao": "A hozzájárulás-nyilvántartási rendszer a társadalom kiszolgáltatott csoportjainak gondozási infrastruktúrájává válhat. A gondozói munka gazdaságilag mérhetőként való elismerése nem csökkenti annak emberi jellegét — éppen ellenkezőleg, láthatóvá és átruházhatóvá teszi.",
     "familija_tag": "Hol van a KOLO ebben",
     "familija_naslov": "Ugyanaz a család, saját sajátosságokkal",
-    "familija_p1_pre": "A KOLO nem másolata a felsorolt hálózatok egyikének sem. Ezekkel a hálózatokkal ellentétben — amelyek elsősorban cserevalutaként működnek — a KOLO elkülöníti a hozzájárulást a szavazattól: ",
-    "familija_p1_poen": " rögzíti, amit adtál, és ",
-    "familija_p1_zrno": " a döntéshozatali szavazatot hordozza, a kvadratikus szavazással mint védelemmel a hatalomátvétel ellen. Emellett a csere és rögzítése jogilag elkülönülnek — így a POEN soha nem fizetés —, és a kiszolgáltatott csoportok (anyák, idősek, diákok) támogatása bele van építve magába a rendszerbe.",
-    "familija_p2": "De alapvetően a KOLO ugyanabba a családba tartozik — az egyének közötti cserekönyv-rendszerek, amelyek kiegészítőként működnek a hivatalos valuta mellett, és a felhasználókért dolgoznak ahelyett, hogy kihasználnák őket.",
+    "familija_p1": "A KOLO egyik ilyen hálózatnak sem másolata. Azok cseréhez való egységet hoztak létre. A KOLO a hozzájárulás nyilvántartását hozza létre, a csere pedig az, ami ebből következik.",
+    "familija_p2": "Amit azok a hálózatok nem ismernek, az a megerősítések lánca. A KOLO-ban minden tag valódiságát olyan valaki erősíti meg, aki személyesen ismeri, és felel is érte. Ez tartja valódiként a hálózatot.",
+    "familija_p3_pre": "A második különbség az, hogy a hozzájárulás és a szó nem keveredik. ",
+    "familija_p3_poen": " azt jegyzi fel, mit adtál, a ",
+    "familija_p3_zrno": " pedig a szavazatot viszi a döntésekbe, négyzetes szavazással, amely megakadályozza, hogy a hatalom néhány ember kezébe kerüljön. Az anyák, az idősek és a diákok támogatása nem kiegészítés, hanem a rendszer része.",
+    "familija_p4": "A harmadik különbség az, hogy mi mire épül. Amiben megállapodtok és amit átadtok egymásnak, az a csere. A POEN csak feljegyzés róla. Egy feljegyzés önmagában senkit semmire nem kötelez.",
+    "familija_p5": "Vannak könnyen ellenőrizhető különbségek is. A WIR 1936-ban kapott banki engedélyt, mert hitelt nyújt a tagjainak, a KOLO viszont nem ad hitelt. A Sardex olyan vállalkozás, amely éves tagdíjat szed, a KOLO-ba való belépés pedig ingyenes. Egyik megközelítés sem hibás — csak más problémára adott válasz.",
+    "familija_p6": "Mindezzel együtt a KOLO ugyanabba a családba tartozik: az emberek közötti csere nyilvántartásának rendszerei, amelyek a hivatalos pénz mellett működnek, és a felhasználóikért dolgoznak, nem pedig őket használják.",
     "okvir_tag": "Nemzetközi keret",
     "okvir_naslov": "A globális és európai áramlat, amelybe a KOLO belép",
     "okvir_opis": "Az elmúlt négy évben a szolidáris gazdaság formálisan elismert szektorrá vált — mind az ENSZ rendszerében, mind az EU jogi keretrendszerében.",
@@ -1367,8 +1371,7 @@
     "cta_kako": "Hogyan működik a KOLO →",
     "cta_ko": "Ki áll a KOLO mögött →",
     "cta_priduzi": "Csatlakozás →",
-    "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek",
-    "familija_p3": "És még valami, ami azokban a hálózatokban nincs: a KOLO-ban minden tag valódiságát olyan valaki erősíti meg, aki személyesen ismeri, és felel is érte. A megerősítési lánc az, ami valóságosan tartja a hálózatot."
+    "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek"
   },
   "kakoFunkcionisePage": {
     "meta_title": "Hogyan működik a KOLO, lépésről lépésre",
