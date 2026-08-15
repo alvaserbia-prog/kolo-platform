@@ -491,6 +491,18 @@ export default async function OSistemuPage() {
               {t("pristup_tekst_pre")}<strong className="text-kolo-green-900">{t("pristup_tekst_bold")}</strong>{t("pristup_tekst_post")}
             </p>
           </div>
+
+          {/* Merilo, ne odobrenje — sta od obeležja iz definicija KOLO već ima */}
+          <div className="mt-8 pt-6 border-t border-kolo-border">
+            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">
+              {t("prema_tag")}
+            </p>
+            <div className="space-y-4 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
+              <p>{t("prema_p1")}</p>
+              <p>{t("prema_p2")}</p>
+              <p>{t("prema_p3")}</p>
+            </div>
+          </div>
         </div>
       </section>
 
