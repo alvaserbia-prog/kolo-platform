@@ -29,7 +29,7 @@ src/app/page.tsx:123:    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: 
 src/app/page.tsx:124:    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
 src/app/page.tsx:125:    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
 src/app/page.tsx:126:    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
-src/app/page.tsx:455:                  alt="Nikola Šarić"
+src/app/page.tsx:458:                  alt="Nikola Šarić"
 src/app/not-found.tsx:7:  title: "Stranica nije pronađena",
 src/app/(auth)/login/LoginForm.tsx:28:  // „nema naloga" od „pogrešna lozinka" (sprečava user enumeration).
 src/app/(app)/programi/ProgramiKlijent.tsx:121:              <span>{t("iskorišcenost")}</span>
@@ -96,4 +96,4 @@ src/app/(public)/pravilnik/[slug]/page.tsx:39:    opis: "Operativni program — 
 src/app/(public)/pravilnik/[slug]/page.tsx:42:    naziv: "Pravilnik o osnivačkom doprinosu",
 src/app/(public)/pravilnik/[slug]/page.tsx:51:    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; zaštitni veto.",
 src/app/(public)/pravilnik/[slug]/page.tsx:54:    naziv: "Pravilnik o programima podrške",
-src/app/(public)/o-nama/page.tsx:134:                alt="Nikola Šarić"
+src/app/(public)/o-nama/page.tsx:142:                alt="Nikola Šarić"

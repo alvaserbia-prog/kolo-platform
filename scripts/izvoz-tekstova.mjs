@@ -127,12 +127,15 @@ function faqUMapu(sekcije) {
 
 const faqMape = Object.fromEntries(JEZICI.map((j) => [j, faqUMapu(faq[j])]));
 
+// Ključ mora da bude JEDINSTVEN u celoj tabeli — po njemu se red pronalazi kad
+// se izmenjen tekst vraća u kod. Zato nosi i sekciju: „pitanje 42 — pitanje"
+// samo po sebi ne bi razlikovalo sekcije, a „naslov sekcije" bi se ponovilo 8 puta.
 for (const kljuc of Object.keys(faqMape.sr)) {
   const [sekcija, id, polje] = kljuc.split("|");
   dodaj(
     "faq",
     sekcija,
-    id ? `pitanje ${id} — ${polje}` : "naslov sekcije",
+    id ? `faq.${sekcija}.pitanje-${id}.${polje}` : `faq.${sekcija}.naslov`,
     Object.fromEntries(JEZICI.map((j) => [j, faqMape[j][kljuc] ?? ""])),
   );
 }
@@ -142,19 +145,15 @@ for (const kljuc of Object.keys(faqMape.sr)) {
 // ─────────────────────────────────────────────────────────────
 const ekrani = await import(`file://${join(KOREN, "src", "lib", "ekran-poruke.ts")}`);
 
-for (const [naziv, skup] of Object.entries({
-  "pad sistema": ekrani.PAD_SISTEMA,
-  "održavanje": ekrani.ODRZAVANJE,
-  "404": ekrani.NEMA_STRANICE,
-})) {
+for (const [naziv, oznaka, skup] of [
+  ["pad sistema", "pad_sistema", ekrani.PAD_SISTEMA],
+  ["održavanje", "odrzavanje", ekrani.ODRZAVANJE],
+  ["404", "nema_stranice", ekrani.NEMA_STRANICE],
+]) {
   for (const polje of Object.keys(skup.sr)) {
-    dodaj(
-      "sistemski ekrani",
-      naziv,
-      polje,
-      // Ovi ekrani postoje samo na sr / sr-Cyrl / en / ru — hr i hu nedostaju.
-      Object.fromEntries(JEZICI.map((j) => [j, skup[j]?.[polje] ?? ""])),
-    );
+    dodaj("sistemski ekrani", naziv, `ekran.${oznaka}.${polje}`, {
+      ...Object.fromEntries(JEZICI.map((j) => [j, skup[j]?.[polje] ?? ""])),
+    });
   }
 }
 
@@ -162,6 +161,16 @@ for (const [naziv, skup] of Object.entries({
 // Zapis
 // ─────────────────────────────────────────────────────────────
 mkdirSync(join(KOREN, "izvoz"), { recursive: true });
+
+// Ključ je adresa reda — dva reda sa istim ključem znače da se izmenjen tekst
+// ne bi mogao jednoznačno vratiti u kod. Pada odmah, ne ćuti.
+const brojac = new Map();
+for (const r of redovi) brojac.set(r.kljuc, (brojac.get(r.kljuc) ?? 0) + 1);
+const dupli = [...brojac].filter(([, n]) => n > 1);
+if (dupli.length) {
+  console.error("Ključ se ponavlja:", dupli.map(([k, n]) => `${k} (${n}×)`).join(", "));
+  process.exit(1);
+}
 
 const KOLONE = ["izvor", "sekcija", "kljuc", ...JEZICI];
 
@@ -207,7 +216,7 @@ console.log(`UKUPNO redova:            ${redovi.length}`);
 // Prazno polje = tekst nije preveden na taj jezik. Poznat izuzetak: `dugme` na
 // ekranima održavanja/404 je prazno NAMERNO (nema `reset()` granice greške).
 const prazni = redovi.flatMap((r) =>
-  JEZICI.filter((j) => !r[j] && r.kljuc !== "dugme").map(
+  JEZICI.filter((j) => !r[j] && !r.kljuc.endsWith(".dugme")).map(
     (j) => `${j.padEnd(2)} ← ${r.izvor} / ${r.sekcija} / ${r.kljuc}`,
   ),
 );
