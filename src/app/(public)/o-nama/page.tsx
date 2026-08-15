@@ -171,6 +171,7 @@ export default async function ONamaPage() {
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>{t("prica_p1")}</p>
             <p>{t("prica_p2")}</p>
+            <p>{t("prica_p2b")}</p>
             <p>{t("prica_p3")}</p>
           </div>
         </div>
