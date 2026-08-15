@@ -409,7 +409,7 @@ export default async function KakoFunkcionisePage() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
           {t("cta_naslov")}
         </h2>
-        <p className="text-white/70 text-base mb-7 max-w-md mx-auto leading-relaxed">
+        <p className="text-white/70 text-base mb-7 max-w-xl mx-auto leading-relaxed">
           {t("cta_opis")}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -424,12 +424,6 @@ export default async function KakoFunkcionisePage() {
             className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
           >
             {t("cta_pijaca")}
-          </Link>
-          <Link
-            href="/"
-            className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t("cta_pocetna")}
           </Link>
         </div>
         <p className="text-white/40 text-xs mt-7">
