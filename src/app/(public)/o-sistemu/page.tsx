@@ -367,11 +367,10 @@ export default async function OSistemuPage() {
               {t("topla_voda_p1")}
             </p>
             <p>
-              <strong className="text-kolo-green-900">{t("topla_voda_p2_bold")}</strong>{t("topla_voda_p2_pre")}
+              {t("topla_voda_p2_pre")}<strong className="text-kolo-green-900">{t("topla_voda_p2_bold")}</strong>{t("topla_voda_p2_post")}
             </p>
             <p>
-              {t("topla_voda_p3_pre")}<strong className="text-kolo-green-900">{t("topla_voda_p3_bold1")}</strong>{t("topla_voda_p3_mid")}{" "}
-              <strong className="text-kolo-green-900">{t("topla_voda_p3_bold2")}</strong>{t("topla_voda_p3_post")}
+              {t("topla_voda_p3")}
             </p>
           </div>
         </div>
