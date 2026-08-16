@@ -191,7 +191,7 @@ function BrisanjeNaloga({
         body: JSON.stringify({ pseudonim: uneto }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.greska ?? t("greska_slanje"));
+      if (!res.ok) throw new Error(data?.error ?? t("greska_slanje"));
       onGotovo();
     } catch (e) {
       setGreska(e instanceof Error ? e.message : t("greska_slanje"));

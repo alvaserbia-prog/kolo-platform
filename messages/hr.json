@@ -2824,8 +2824,6 @@
     "polje_datum_upozorenje": "Datum se nakon otvaranja računa više ne mijenja.",
     "polje_lozinka": "Lozinka",
     "polje_lozinka_opis": "Ti je postavljaš i predaješ djetetu. Dijete nema e-poštu, pa se lozinka mijenja preko tebe.",
-    "polje_lozinka_ponovo": "Ponovi lozinku",
-    "greska_lozinke": "Lozinke se ne podudaraju.",
     "greska_slanje": "Nije uspjelo. Pokušaj ponovno.",
     "greska_ucitavanje": "Učitavanje nije uspjelo.",
     "status_dete": "dijete",
@@ -2852,6 +2850,9 @@
     "dugme_nema": "Ne, nema",
     "dugme_posalji": "Pošalji",
     "obrazlozenje_naslov": "Obrazloženje (obvezno)",
-    "ako_ne_znas": "Ako nemaš saznanja o tome, nemoj pritiskati nijedan gumb. Ali znaj: ako se ne izjasniš u roku, tvoja potvrda stvarnosti te osobe bit će poništena, POEN evidentiran povodom nje ukinut, a mjesto ti se oslobađa."
+    "ako_ne_znas": "Ako nemaš saznanja o tome, nemoj pritiskati nijedan gumb. Ali znaj: ako se ne izjasniš u roku, tvoja potvrda stvarnosti te osobe bit će poništena, POEN evidentiran povodom nje ukinut, a mjesto ti se oslobađa.",
+    "prikazi_lozinku": "Prikaži lozinku",
+    "sakrij_lozinku": "Sakrij lozinku",
+    "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom."
   }
 }

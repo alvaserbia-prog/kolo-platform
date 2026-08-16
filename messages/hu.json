@@ -2824,8 +2824,6 @@
     "polje_datum_upozorenje": "A dátum a fiók megnyitása után már nem módosítható.",
     "polje_lozinka": "Jelszó",
     "polje_lozinka_opis": "Te állítod be és adod át a gyermeknek. A gyermeknek nincs e-mail címe, ezért a jelszó rajtad keresztül módosul.",
-    "polje_lozinka_ponovo": "Jelszó ismét",
-    "greska_lozinke": "A jelszavak nem egyeznek.",
     "greska_slanje": "Nem sikerült. Próbáld újra.",
     "greska_ucitavanje": "A betöltés nem sikerült.",
     "status_dete": "gyermek",
@@ -2852,6 +2850,9 @@
     "dugme_nema": "Nem, nincs",
     "dugme_posalji": "Küldés",
     "obrazlozenje_naslov": "Indokolás (kötelező)",
-    "ako_ne_znas": "Ha nincs erről tudomásod, egyik gombot se nyomd meg. De tudd: ha nem nyilatkozol határidőn belül, az adott személy valóságáról adott megerősítésed megsemmisül, az emiatt nyilvántartott POEN visszavonásra kerül, a helyed pedig felszabadul."
+    "ako_ne_znas": "Ha nincs erről tudomásod, egyik gombot se nyomd meg. De tudd: ha nem nyilatkozol határidőn belül, az adott személy valóságáról adott megerősítésed megsemmisül, az emiatt nyilvántartott POEN visszavonásra kerül, a helyed pedig felszabadul.",
+    "prikazi_lozinku": "Jelszó megjelenítése",
+    "sakrij_lozinku": "Jelszó elrejtése",
+    "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval."
   }
 }

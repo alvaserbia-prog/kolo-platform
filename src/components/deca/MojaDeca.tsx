@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { UZRAST_MIN, UZRAST_PUNOLETSTVO } from "@/lib/deca-pravila";
+import { validanPseudonim } from "@/lib/validacija";
+import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
 
 type Dete = {
   id: string;
@@ -172,9 +174,15 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
   const [pseudonim, setPseudonim] = useState("");
   const [datum, setDatum] = useState("");
   const [lozinka, setLozinka] = useState("");
-  const [lozinka2, setLozinka2] = useState("");
+  const [prikaziLozinku, setPrikaziLozinku] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
   const [salje, setSalje] = useState(false);
+
+  // Pravilo pseudonima se proverava i ovde, ne samo na serveru: pseudonimi su
+  // ASCII-only u celom sistemu (adresa profila ostaje čitljiva bez procentnog
+  // kodiranja, a ćirilični homografi ne mogu da imitiraju tuđe ime). Bez ove
+  // provere čovek otkuca „mihađoka", pošalje, i tek onda sazna zašto ne valja.
+  const pseudonimLos = pseudonim.length > 0 && !validanPseudonim(pseudonim.trim());
 
   // Granice se računaju iz istih konstanti kao na serveru — polje ne nudi datum
   // koji bi server odbio.
@@ -185,7 +193,7 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
   async function posalji(e: React.FormEvent) {
     e.preventDefault();
     setGreska(null);
-    if (lozinka !== lozinka2) return setGreska(t("greska_lozinke"));
+    if (pseudonimLos) return setGreska(t("pseudonim_pravilo"));
     setSalje(true);
     try {
       const res = await fetch("/api/deca", {
@@ -193,8 +201,11 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pseudonim, lozinka, datumRodjenja: datum }),
       });
+      // 🔴 `greska()` vraća poruku pod ključem `error`. Čitanje pogrešnog ključa je
+      // gutalo svako objašnjenje servera i pokazivalo opštu poruku, pa se iz ekrana
+      // nije videlo ni šta je odbijeno ni zašto.
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data?.greska ?? t("greska_slanje"));
+      if (!res.ok) throw new Error(data?.error ?? t("greska_slanje"));
       onGotovo();
     } catch (err) {
       setGreska(err instanceof Error ? err.message : t("greska_slanje"));
@@ -209,7 +220,16 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
     <form onSubmit={posalji} className="mt-4 space-y-3 rounded-xl border border-kolo-border p-4">
       <label className="block text-sm">
         <span className="font-medium text-kolo-text">{t("polje_pseudonim")}</span>
-        <input className={polje} value={pseudonim} onChange={(e) => setPseudonim(e.target.value)} required minLength={3} maxLength={30} />
+        <input
+          className={`${polje}${pseudonimLos ? " border-kolo-danger" : ""}`}
+          value={pseudonim}
+          onChange={(e) => setPseudonim(e.target.value)}
+          required
+          minLength={3}
+          maxLength={30}
+          autoComplete="off"
+        />
+        {pseudonimLos && <span className="mt-1 block text-xs text-kolo-danger">{t("pseudonim_pravilo")}</span>}
       </label>
 
       <label className="block text-sm">
@@ -228,15 +248,29 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
         <span className="mt-1 block text-xs text-kolo-danger">{t("polje_datum_upozorenje")}</span>
       </label>
 
+      {/* Jedno polje sa okom, bez ponavljanja: roditelj lozinku ne pamti nego je
+          predaje detetu, pa mu treba da je VIDI — a kad je vidi, ponovni unos ne
+          proverava ništa što oko već nije pokazalo. */}
       <label className="block text-sm">
         <span className="font-medium text-kolo-text">{t("polje_lozinka")}</span>
-        <input type="password" className={polje} value={lozinka} onChange={(e) => setLozinka(e.target.value)} required minLength={8} />
+        <span className="relative mt-1 block">
+          <input
+            type={prikaziLozinku ? "text" : "password"}
+            className={`${polje} mt-0 pr-11`}
+            value={lozinka}
+            onChange={(e) => setLozinka(e.target.value)}
+            required
+            minLength={8}
+            autoComplete="new-password"
+          />
+          <PrikaziLozinkuDugme
+            prikazan={prikaziLozinku}
+            onToggle={() => setPrikaziLozinku((v) => !v)}
+            prikaziLabel={t("prikazi_lozinku")}
+            sakrijLabel={t("sakrij_lozinku")}
+          />
+        </span>
         <span className="mt-1 block text-xs text-kolo-muted">{t("polje_lozinka_opis")}</span>
-      </label>
-
-      <label className="block text-sm">
-        <span className="font-medium text-kolo-text">{t("polje_lozinka_ponovo")}</span>
-        <input type="password" className={polje} value={lozinka2} onChange={(e) => setLozinka2(e.target.value)} required minLength={8} />
       </label>
 
       {greska && <p className="text-sm text-kolo-danger">{greska}</p>}

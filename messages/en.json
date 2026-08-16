@@ -2824,8 +2824,6 @@
     "polje_datum_upozorenje": "The date cannot be changed once the account is open.",
     "polje_lozinka": "Password",
     "polje_lozinka_opis": "You set it and hand it to the child. A child has no e-mail, so the password is changed through you.",
-    "polje_lozinka_ponovo": "Repeat password",
-    "greska_lozinke": "The passwords do not match.",
     "greska_slanje": "That did not work. Try again.",
     "greska_ucitavanje": "Loading failed.",
     "status_dete": "child",
@@ -2852,6 +2850,9 @@
     "dugme_nema": "No, they do not",
     "dugme_posalji": "Send",
     "obrazlozenje_naslov": "Reasons (required)",
-    "ako_ne_znas": "If you do not know, press neither button. But be aware: if you do not respond in time, your confirmation of that person's reality will be annulled, the POEN recorded on account of it withdrawn, and your slot freed."
+    "ako_ne_znas": "If you do not know, press neither button. But be aware: if you do not respond in time, your confirmation of that person's reality will be annulled, the POEN recorded on account of it withdrawn, and your slot freed.",
+    "prikazi_lozinku": "Show password",
+    "sakrij_lozinku": "Hide password",
+    "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator."
   }
 }
