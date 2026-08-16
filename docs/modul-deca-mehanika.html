@@ -1,0 +1,863 @@
+<title>Dva ulaza u dečji prostor</title>
+<style>
+  /* ── Tokeni ────────────────────────────────────────────────────────────────
+     Svetla paleta je puna i stoji na golom :root. Tamna samo redefiniše tokene,
+     dvaput: kroz prefers-color-scheme (za neoznačeni dokument) i kroz
+     [data-theme="dark"] (za izričit izbor). Nijedna boja se ne definiše samo
+     unutar media bloka. */
+  :root {
+    --ground:      #F1F3F4;
+    --paper:       #FBFCFC;
+    --paper-2:     #E9ECEE;
+    --ink:         #16212B;
+    --ink-soft:    #4C5C68;
+    --ink-faint:   #7C8B96;
+    --rule:        #D3D9DD;
+    --rule-soft:   #E2E6E9;
+
+    --upisano:     #1D5F59;   /* evidentirano — konačno */
+    --upisano-bg:  #DCEBE8;
+    --ceka:        #9A6410;   /* zabeleženo — čeka okidač */
+    --ceka-bg:     #F6EBD6;
+    --rizik:       #9E3524;   /* rupa u mehanici */
+    --rizik-bg:    #F6E1DC;
+
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #0F161B;
+      --paper:      #161F26;
+      --paper-2:    #1E2932;
+      --ink:        #E3EAEF;
+      --ink-soft:   #A3B2BD;
+      --ink-faint:  #74848F;
+      --rule:       #2B3841;
+      --rule-soft:  #222D35;
+
+      --upisano:    #58B8AC;
+      --upisano-bg: #17332F;
+      --ceka:       #DFA850;
+      --ceka-bg:    #382A14;
+      --rizik:      #E28873;
+      --rizik-bg:   #3A1E18;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:     #0F161B;
+    --paper:      #161F26;
+    --paper-2:    #1E2932;
+    --ink:        #E3EAEF;
+    --ink-soft:   #A3B2BD;
+    --ink-faint:  #74848F;
+    --rule:       #2B3841;
+    --rule-soft:  #222D35;
+
+    --upisano:    #58B8AC;
+    --upisano-bg: #17332F;
+    --ceka:       #DFA850;
+    --ceka-bg:    #382A14;
+    --rizik:      #E28873;
+    --rizik-bg:   #3A1E18;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 20px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  .col  { max-width: 660px; }
+
+  /* ── Zaglavlje ─────────────────────────────────────────────────────────── */
+  header { padding: 72px 0 40px; border-bottom: 1px solid var(--rule); margin-bottom: 48px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px;
+  }
+  h1 {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 6.4vw, 54px);
+    line-height: 1.08; letter-spacing: -.015em; margin: 0 0 20px; text-wrap: balance;
+  }
+  .stand {
+    font-size: 19px; line-height: 1.55; color: var(--ink-soft);
+    max-width: 620px; margin: 0;
+  }
+  .meta {
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint);
+    margin-top: 26px; display: flex; flex-wrap: wrap; gap: 6px 20px;
+  }
+
+  /* ── Sadržaj ───────────────────────────────────────────────────────────── */
+  nav.toc {
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 3px;
+    padding: 22px 26px; margin-bottom: 56px; max-width: 660px;
+  }
+  nav.toc p {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px;
+  }
+  nav.toc ol { margin: 0; padding-left: 0; list-style: none; counter-reset: t; display: grid; gap: 7px; }
+  nav.toc li { counter-increment: t; font-size: 15.5px; }
+  nav.toc li::before {
+    content: counter(t, decimal-leading-zero); font-family: var(--mono);
+    font-size: 12px; color: var(--ink-faint); margin-right: 12px;
+  }
+  nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  nav.toc a:hover { border-bottom-color: var(--upisano); color: var(--upisano); }
+
+  /* ── Sekcije ───────────────────────────────────────────────────────────── */
+  section { margin-bottom: 68px; }
+  h2 {
+    font-family: var(--serif); font-weight: 400; font-size: clamp(25px, 3.6vw, 33px);
+    line-height: 1.2; letter-spacing: -.01em; margin: 0 0 8px; text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .1em;
+    color: var(--ink-faint); display: block; margin-bottom: 10px; font-weight: 400;
+  }
+  h3 {
+    font-size: 17px; font-weight: 650; letter-spacing: -.005em;
+    margin: 34px 0 10px; color: var(--ink);
+  }
+  h2 + p, h3 + p { margin-top: 0; }
+  p { margin: 0 0 16px; max-width: 660px; }
+  ul, ol.body { max-width: 660px; padding-left: 20px; margin: 0 0 16px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 650; }
+  code {
+    font-family: var(--mono); font-size: .875em; background: var(--paper-2);
+    padding: 1px 5px; border-radius: 2px; color: var(--ink);
+  }
+  a { color: var(--upisano); }
+
+  /* ── Oznake stanja ─────────────────────────────────────────────────────── */
+  .chip {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .07em;
+    text-transform: uppercase; padding: 2.5px 8px; border-radius: 2px;
+    white-space: nowrap; font-weight: 500; display: inline-block;
+  }
+  .chip.ceka    { background: var(--ceka-bg);    color: var(--ceka); }
+  .chip.upisano { background: var(--upisano-bg); color: var(--upisano); }
+  .chip.rizik   { background: var(--rizik-bg);   color: var(--rizik); }
+  .chip.mirno   { background: var(--paper-2);    color: var(--ink-faint); }
+
+  /* ── Tabele ────────────────────────────────────────────────────────────── */
+  .tabela { overflow-x: auto; margin: 26px 0 30px; border: 1px solid var(--rule); border-radius: 3px; background: var(--paper); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; min-width: 560px; }
+  th, td { text-align: left; padding: 11px 15px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+  thead th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 500; background: var(--paper-2);
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.broj, th.broj { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.ko { font-weight: 600; white-space: nowrap; }
+  .da { color: var(--upisano); font-weight: 600; }
+  .ne { color: var(--ink-faint); }
+
+  /* ── Isticanja ─────────────────────────────────────────────────────────── */
+  .blok {
+    border-left: 2px solid var(--rule); padding: 2px 0 2px 22px;
+    margin: 26px 0; max-width: 660px;
+  }
+  .blok.rizik   { border-left-color: var(--rizik); }
+  .blok.upisano { border-left-color: var(--upisano); }
+  .blok .naslov {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+    margin: 0 0 8px; color: var(--ink-faint);
+  }
+  .blok.rizik .naslov   { color: var(--rizik); }
+  .blok.upisano .naslov { color: var(--upisano); }
+  .blok p:last-child { margin-bottom: 0; }
+
+  /* ── Odluke ────────────────────────────────────────────────────────────── */
+  .odluka {
+    border: 1px solid var(--rule); border-radius: 3px; background: var(--paper);
+    padding: 20px 24px; margin-bottom: 14px; max-width: 720px;
+  }
+  .odluka .id {
+    font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .06em;
+    color: var(--upisano); margin-right: 10px;
+  }
+  .odluka .pitanje { font-weight: 650; font-size: 16.5px; }
+  .odluka p { margin: 10px 0 0; font-size: 15.5px; color: var(--ink-soft); max-width: none; }
+  .odluka .predlog { color: var(--ink); }
+  .odluka .predlog b { color: var(--upisano); font-weight: 650; }
+
+  /* ── Tok kroz četvoro ljudi ────────────────────────────────────────────── */
+  .tok { display: grid; gap: 0; margin: 26px 0 30px; max-width: 760px; }
+  .korak {
+    display: grid; grid-template-columns: 42px 1fr; gap: 18px;
+    padding: 16px 0; border-bottom: 1px solid var(--rule-soft);
+  }
+  .korak:last-child { border-bottom: none; }
+  .korak .n {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-faint);
+    padding-top: 3px; font-variant-numeric: tabular-nums;
+  }
+  .korak .sta { margin: 0; max-width: none; }
+  .korak .ishod { margin: 8px 0 0; font-size: 14.5px; color: var(--ink-soft); max-width: none; }
+
+  footer {
+    border-top: 1px solid var(--rule); padding-top: 26px; margin-top: 20px;
+    font-size: 14.5px; color: var(--ink-faint); max-width: 660px;
+  }
+
+  :focus-visible { outline: 2px solid var(--upisano); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  @media (max-width: 600px) {
+    body { font-size: 16.5px; padding: 0 16px 72px; }
+    header { padding: 48px 0 32px; margin-bottom: 36px; }
+    section { margin-bottom: 52px; }
+  }
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Modul Deca · radna beleška o mehanici</p>
+  <h1>Dva ulaza u dečji prostor</h1>
+  <p class="stand">
+    Modul već ima ulaz kroz roditelja. Ovaj tekst opisuje drugi ulaz — kada dete dođe prvo, a
+    roditelja tek dovede — i mehaniku POEN-a za prijateljstvo koja iz toga sledi.
+  </p>
+  <p class="meta">
+    <span>16.08.2026</span>
+    <span>nacrt · nije odluka</span>
+    <span>docs/modul-deca-mehanika.html</span>
+  </p>
+</header>
+
+<nav class="toc">
+  <p>Sadržaj</p>
+  <ol>
+    <li><a href="#zateceno">Šta već radi</a></li>
+    <li><a href="#primer">Primer, korak po korak</a></li>
+    <li><a href="#stanja">Tri stanja dečjeg naloga</a></li>
+    <li><a href="#kada">Kada nastaje POEN za prijateljstvo</a></li>
+    <li><a href="#farma">Zašto ne odmah onome ko je povezan</a></li>
+    <li><a href="#brojevi">Koliko POEN-a ovo pušta u opticaj</a></li>
+    <li><a href="#curenje">Kuda dečji POEN izlazi</a></li>
+    <li><a href="#ograde">Predložene ograde</a></li>
+    <li><a href="#odluke">Odluke koje čekaju tebe</a></li>
+    <li><a href="#kod">Šta se dira u kodu</a></li>
+  </ol>
+</nav>
+
+<section id="zateceno" class="col">
+  <h2><span class="num">01</span>Šta već radi</h2>
+
+  <p>
+    Modul Deca nije prazan list. Postoji nacrt pravilnika od 18 članova
+    (<code>docs/pravilnik-modul-deca.md</code>), sproveden je u kodu, i stoji iza prekidača
+    <code>MODUL_DECA_AKTIVAN</code> — trenutno upaljen na testu, sa izričitom napomenom da mora
+    nazad na <code>false</code> pre objave na ekolo.rs.
+  </p>
+
+  <p>Mehanika koja radi danas:</p>
+
+  <ul>
+    <li><strong>Nalog detetu otvara isključivo roditelj</strong> iz svog naloga. To je tvoja kratka
+      varijanta — ona je već napravljena.</li>
+    <li><strong>Uzrast 7–18.</strong> Datum rođenja unosi roditelj i posle se ne menja.</li>
+    <li><strong>Roditelj mora imati indeks stvarnosti ≥ 10%</strong> — dakle mora biti redovan član.
+      Merodavan je indeks, ne broj ljudi koji su ga potvrdili (osnivači imaju 100% a formalno ih niko
+      nije potvrdio).</li>
+    <li><strong>Provera postojanja deteta ide unazad kroz lanac.</strong> Po otvaranju naloga, svi
+      koji su potvrdili roditelja dobijaju pitanje: „ima li on dete tog uzrasta?" Rok 30 dana. Ko
+      ćuti — <em>gubi sopstvenu potvrdu tog roditelja</em>, uz poništenje POEN-a iz te potvrde i
+      oslobađanje slota.</li>
+    <li><strong>Prijateljstva već postoje</strong> — dvoje dece se povezuju QR kodom koji važi 5
+      minuta i mora se <em>pokazati</em>. To je jedina brana koja traži da stvarno stoje jedno pored
+      drugog. <strong>Bez ijednog POEN-a.</strong></li>
+    <li><strong>Dete se prijavljuje pseudonimom</strong>, nema svoj mejl.</li>
+    <li><strong>Mirovanje:</strong> ako roditelju padne potvrda ispod praga, staju oba naloga.
+      Nalog deteta bez roditelja miruje uvek.</li>
+  </ul>
+
+  <div class="blok rizik">
+    <p class="naslov">Odredba koju tvoj model obara</p>
+    <p>
+      Čl. 14 st. 1 nacrta isključuje kanale evidentiranja iz dečjeg prostora. Obrazloženje uz nacrt
+      kaže zašto: <em>„u dečjem prostoru ne nastaje nijedan nov zapis POEN-a; sve što u njemu kruži
+      ušlo je prepisom od roditelja, a prepis je zero-sum."</em> Zahvaljujući tome dečji nalozi ne
+      pomeraju opticaj — a preko njega ni osnivački korak od 24.000 POEN, ni dnevni limit, ni
+      obračunski koeficijent ZRNA.
+    </p>
+    <p>
+      Isto stoji i u kodu, u <code>prijateljstva.ts</code>: emisija za prijateljstvo je namerno
+      odložena, uz opis tačno one farme koja se opisuje u odeljku 05. Pravilnik menjamo — ali ograde
+      koje je ta odredba nosila moraju negde da se presele, inače ostaju rupe.
+    </p>
+  </div>
+</section>
+
+<section id="primer" class="col">
+  <h2><span class="num">02</span>Primer, korak po korak</h2>
+
+  <p>Tvoja priča, prevedena u poteze sistema. Ovo je dugi ulaz.</p>
+
+  <div class="tok">
+    <div class="korak">
+      <span class="n">01</span>
+      <div>
+        <p class="sta"><strong>Nikola</strong> je redovan član. Otvara nalog svom sinu
+          <strong>Mihajlu</strong> iz svog naloga.</p>
+        <p class="ishod">Kratki ulaz. Mihajlov nalog je odmah <span class="chip upisano">pun</span>.
+          Nikolini potvrđivači dobijaju pitanje o postojanju deteta, rok 30 dana.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">02</span>
+      <div>
+        <p class="sta"><strong>Mihajlo</strong> pokazuje platformu <strong>Milici</strong>.
+          Milica se registruje sama i označava da je dete.</p>
+        <p class="ishod">Ovo danas ne postoji. Ako se ne označi kao dete, niko je neće potvrditi —
+          nema koga uživo da pozove. Označavanjem dobija put koji joj odgovara.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">03</span>
+      <div>
+        <p class="sta">Milica unosi <strong>mejl svog tate Danijela</strong>. Danijel dobija poruku:
+          tvoje dete je otvorilo nalog, evo šta to znači, možeš ga obrisati u svakom trenutku.</p>
+        <p class="ishod">Dok Danijel ne klikne, Milicin nalog je <span class="chip ceka">čeka
+          roditelja</span> — ne radi ništa.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">04</span>
+      <div>
+        <p class="sta">Danijel klikne u mejlu: „jeste, moje je dete."</p>
+        <p class="ishod">Nalog prelazi u <span class="chip ceka">otvoren</span>. Milica koristi
+          platformu, sklapa prijateljstva, ima <strong>0 POEN</strong>. Svako prijateljstvo joj se
+          <strong>beleži</strong>, ne upisuje.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">05</span>
+      <div>
+        <p class="sta">Milica podseća tatu da napravi nalog. <strong>Danijel se registruje</strong>
+          — ali nije redovan član, niko ga još nije potvrdio.</p>
+        <p class="ishod">Milicin nalog i dalje <span class="chip ceka">otvoren</span>. POEN i dalje
+          samo stoji zabeležen.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">06</span>
+      <div>
+        <p class="sta">Milica kaže Mihajlu da zamoli njegovog tatu. <strong>Nikola potvrđuje
+          Danijela</strong> uživo, jednokratnim kodom.</p>
+        <p class="ishod">Danijel postaje redovan član. Dobija 1.000 POEN iz kanala potvrde, Nikola
+          takođe.</p>
+      </div>
+    </div>
+    <div class="korak">
+      <span class="n">07</span>
+      <div>
+        <p class="sta"><strong>Danijel povezuje Milicu</strong> kao svoje dete.</p>
+        <p class="ishod">Nalog prelazi u <span class="chip upisano">pun</span>. Zabeleženi POEN se
+          <strong>evidentira odjednom</strong>. Nikolini potvrđivači Danijela dobijaju pitanje o
+          postojanju deteta.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="blok upisano">
+    <p class="naslov">Ono što je u ovom primeru zapravo otkriveno</p>
+    <p>
+      Korak 06 je najvredniji deo. <strong>Dete je jedini deo sistema koji dovodi odrasle.</strong>
+      Milica nije mogla sama da zaradi ništa — pa je pokrenula lanac koji je završio time da je jedan
+      novi punoletni čovek ušao u mrežu potvrda. Nijedan drugi kanal to ne radi: svi ostali traže da
+      odrastao već bude unutra.
+    </p>
+    <p>
+      Isti mehanizam ima i drugu stranu, koju treba reći naglas: sistem tada <em>plaća detetu da
+      nagovara roditelja</em>. To je pritisak preko deteta i traži svesnu odluku — vidi
+      <code>O9</code>.
+    </p>
+  </div>
+</section>
+
+<section id="stanja">
+  <h2><span class="num">03</span>Tri stanja dečjeg naloga</h2>
+
+  <p class="col">
+    Ovo je jezgro modela. Danas postoje dva stanja (radi / miruje). Dugi ulaz traži tri, jer razdvaja
+    dve stvari koje su do sada bile jedna: <strong>osnov da nalog uopšte sme da postoji</strong> i
+    <strong>uslov da u njemu nastaje POEN</strong>.
+  </p>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Stanje</th>
+          <th>Nastaje kad</th>
+          <th>Dete sme</th>
+          <th>POEN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="chip mirno">čeka roditelja</span></td>
+          <td>dete se registrovalo, mejl poslat, roditelj nije odgovorio</td>
+          <td class="ne">ništa — ekran čekanja</td>
+          <td class="ne">—</td>
+        </tr>
+        <tr>
+          <td><span class="chip ceka">otvoren</span></td>
+          <td>roditelj potvrdio mejlom da je dete njegovo</td>
+          <td>prijavljuje se, sklapa prijateljstva, dopisuje se sa decom, objavljuje oglas u dečjem prostoru</td>
+          <td><strong style="color:var(--ceka)">beleži se</strong></td>
+        </tr>
+        <tr>
+          <td><span class="chip upisano">pun</span></td>
+          <td>roditelj je redovan član <em>i</em> veza je uspostavljena</td>
+          <td>sve iz prethodnog + prepis POEN-a, prekidač za odrasle</td>
+          <td><strong style="color:var(--upisano)">evidentira se</strong>, zaostalo odjednom</td>
+        </tr>
+        <tr>
+          <td><span class="chip mirno">miruje</span></td>
+          <td>roditelju pala potvrda ispod praga, ili je ugasio nalog</td>
+          <td class="ne">ništa; oglasi se povlače, podaci ostaju</td>
+          <td class="ne">stoji</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="blok col">
+    <p class="naslov">Zašto tri, a ne dva</p>
+    <p>
+      Zato što se čekaju dve različite stvari, različitom brzinom. <strong>Pristanak roditelja</strong>
+      je jedan klik u mejlu i stiže za minut — a bez njega Fondacija obrađuje podatke deteta bez
+      osnova, što se ne sme ni dan. <strong>Da roditelj postane redovan član</strong> traži da ga neko
+      potvrdi uživo — to ume da traje nedeljama i ne može biti uslov da nalog uopšte postoji.
+    </p>
+    <p>
+      Zato brza stvar otvara nalog, a spora otvara POEN. Kad bi obe bile jedan uslov, Milica ne bi
+      mogla ni da se prijavi dok joj tata ne uđe u mrežu — a upravo je ona ta koja ga dovodi.
+    </p>
+  </div>
+
+  <div class="blok upisano col">
+    <p class="naslov">Ovo nije nova mašina</p>
+    <p>
+      Beleži se → evidentira se po okidaču je tačno mehanika osmog kanala (čl. 40a): doprinos prvog
+      oglasa stoji <code>ZABELEZEN</code> dok ne nastupi okidač, pa prelazi u <code>EVIDENTIRAN</code>
+      i tek tada ulazi u stanje i opticaj. Isti obrazac, isti razlog: sprečiti da prazni nalozi naduvaju
+      opticaj. Ovde je okidač <em>povezivanje sa roditeljem koji je redovan član</em>.
+    </p>
+  </div>
+
+  <h3>Šta ako roditelj nikad ne dođe</h3>
+  <p class="col">
+    Nalog ne sme da stoji <span class="chip ceka">otvoren</span> doveka — dete gomila zabeležen POEN
+    koji nikad neće nastati, a Fondacija drži podatke deteta na pristanku koji niko nije potvrdio kao
+    stvaran. Predlog: rok, pa nalog prelazi u <span class="chip mirno">miruje</span>; posle drugog roka
+    se briše sa svim zabeleženim. Dužinu vidi <code>O7</code>.
+  </p>
+</section>
+
+<section id="kada">
+  <h2><span class="num">04</span>Kada nastaje POEN za prijateljstvo</h2>
+
+  <p class="col">
+    Prijateljstvo je jedan zapis između dvoje dece. Nagrada nije jedna — <strong>svako dete dobija
+    svojih 500</strong>, i svako po svom uslovu. Ali uslov nije samo njegov, i to je ključna razlika u
+    odnosu na ono kako si ispričao primer.
+  </p>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Milica</th>
+          <th>Mihajlo</th>
+          <th>Milici</th>
+          <th>Mihajlu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="chip ceka">otvoren</span></td>
+          <td><span class="chip upisano">pun</span></td>
+          <td><span style="color:var(--ceka)">beleži se</span></td>
+          <td><span style="color:var(--ceka)">beleži se</span></td>
+        </tr>
+        <tr>
+          <td><span class="chip upisano">pun</span></td>
+          <td><span class="chip upisano">pun</span></td>
+          <td><span style="color:var(--upisano)">upisuje se 500</span></td>
+          <td><span style="color:var(--upisano)">upisuje se 500</span></td>
+        </tr>
+        <tr>
+          <td><span class="chip ceka">otvoren</span></td>
+          <td><span class="chip ceka">otvoren</span></td>
+          <td><span style="color:var(--ceka)">beleži se</span></td>
+          <td><span style="color:var(--ceka)">beleži se</span></td>
+        </tr>
+        <tr>
+          <td colspan="2"><em>isti roditelj</em></td>
+          <td class="ne">nikad</td>
+          <td class="ne">nikad</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="col">
+    Drugim rečima: <strong>prijateljstvo plaća tek kad su oba deteta puna</strong>, a plaća obojici
+    istovremeno. Milicino povezivanje sa tatom ne otključava samo njen zaostatak — otključava i
+    zaostatak <em>svih njenih drugara</em>. Zašto tako, odmah ispod.
+  </p>
+</section>
+
+<section id="farma" class="col">
+  <h2><span class="num">05</span>Zašto ne odmah onome ko je povezan</h2>
+
+  <p>
+    U tvom primeru Mihajlo dobija 500 odmah, jer je on već povezan, a Milica čeka. To je prirodno
+    pročitano — ali otvara farmu koja se ne zatvara ničim drugim.
+  </p>
+
+  <div class="blok rizik">
+    <p class="naslov">Napad</p>
+    <p>
+      Dugi ulaz je otvoren svakome: registruješ se, kažeš da si dete, uneseš mejl koji sam kontrolišeš,
+      klikneš u tom mejlu. Nalog je <span class="chip ceka">otvoren</span> — dovoljno da se uparuje.
+      Napraviš deset takvih. QR se mora pokazati uživo, ali sve ekrane držiš ti.
+    </p>
+    <p>
+      Onda ih upariš sa svojim <em>stvarnim</em> detetom, koje je <span class="chip upisano">pun</span>.
+      Deset prijateljstava × 500 = <strong>5.000 POEN</strong> detetu, koje ih prepiše tebi — prepis
+      dete → roditelj je dozvoljen bez ograničenja. Deset praznih naloga i pet minuta.
+    </p>
+  </div>
+
+  <p>
+    Ako se traži da <strong>oba</strong> deteta budu puna, isti napad traži deset roditelja koji su
+    <em>svaki ponaosob potvrđeni uživo</em> od strane mreže. To više nije napad — to je deset ljudi.
+    Uslov se time ne oslanja na dobru volju, nego na jedini deo sistema koji već traži fizičko
+    prisustvo.
+  </p>
+
+  <p>
+    Postoji i druga farma, koja preživljava i to: <strong>broj dece po roditelju nije ograničen</strong>
+    (čl. 4 st. 3 nacrta). Jedan potvrđen roditelj otvara deset naloga svojoj „deci", upari ih međusobno
+    — 45 parova × 1.000 = <strong>45.000 POEN</strong> — i prepiše sve sebi. Ovu zatvara pravilo da
+    <strong>deca istog roditelja ne nose POEN jedno drugom</strong>, po ugledu na zabranjenu zonu iz
+    dokaza stvarnosti (brat ne potvrđuje brata).
+  </p>
+</section>
+
+<section id="brojevi">
+  <h2><span class="num">06</span>Koliko POEN-a ovo pušta u opticaj</h2>
+
+  <p class="col">
+    Ovo je broj koji treba da vidiš pre nego što odlučiš o iznosu. Svaki par plaća 1.000 POEN ukupno
+    (po 500 sa svake strane). Opticaj okida <strong>osnivački korak na svakih 100.000 POEN</strong>, a
+    svaki korak emituje još 24.000 POEN osnivačima — pa dečji prostor <em>pomera i kanal koji sa decom
+    nema veze</em>.
+  </p>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th class="broj">Parova</th>
+          <th class="broj">POEN deci</th>
+          <th class="broj">Okinutih koraka</th>
+          <th class="broj">Ukupno u opticaj</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>20 dece, po 5 prijatelja</td>
+          <td class="broj">50</td>
+          <td class="broj">50.000</td>
+          <td class="broj">0</td>
+          <td class="broj">50.000</td>
+        </tr>
+        <tr>
+          <td>100 dece, po 8 prijatelja</td>
+          <td class="broj">400</td>
+          <td class="broj">400.000</td>
+          <td class="broj">4</td>
+          <td class="broj">496.000</td>
+        </tr>
+        <tr>
+          <td>jedan razred, 30 dece, svi sa svima</td>
+          <td class="broj">435</td>
+          <td class="broj">435.000</td>
+          <td class="broj">4</td>
+          <td class="broj">531.000</td>
+        </tr>
+        <tr>
+          <td>uz kapu 5.000 POEN po detetu, 100 dece</td>
+          <td class="broj">≤ 500</td>
+          <td class="broj">≤ 500.000</td>
+          <td class="broj">5</td>
+          <td class="broj">≤ 620.000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="blok rizik col">
+    <p class="naslov">Šta ovi brojevi znače u odnosu na ostatak sistema</p>
+    <p>
+      Odrastao koji prođe <strong>celu</strong> putanju doprinosa razmeni — pet koraka, deset različitih
+      ljudi van kruga poznanstava — dobija najviše <strong>5.000 POEN</strong>. Jedan razred dece koja
+      se poznaju iz klupe proizvodi <strong>435.000</strong>. To je koliko 87 odraslih koji su prošli
+      sve.
+    </p>
+    <p>
+      Uz to: 30 dece iz istog razreda pređe prag od 100.000 POEN <em>četiri puta</em> i time isplati
+      96.000 POEN osnivačima — iz kanala koji je zamišljen da prati stvarni rast sistema.
+    </p>
+  </div>
+
+  <p class="col">
+    Zaključak nije „ne raditi to". Zaključak je da je <strong>iznos po prijateljstvu poluga koja se ne
+    okreće nazad</strong>, pa ga treba postaviti sa ovim tabelama pred sobom. Tri načina da se obori,
+    od najblažeg:
+  </p>
+
+  <ol class="body col">
+    <li><strong>Kapa po detetu.</strong> Npr. 5.000 POEN (10 prijateljstava), simetrično sa kapom
+      odraslog iz čl. 40b. Ograničava po glavi, ne po ukupnom.</li>
+    <li><strong>Lestvica umesto ravnog iznosa.</strong> Plaća 1., 3., 5., 10. i 20. prijatelj — po 500,
+      kapa 2.500. Dete i dalje „sakuplja prijatelje", a stoti prijatelj ne vredi kao prvi.</li>
+    <li><strong>Manji iznos.</strong> 500 je izabrano po ugledu na nadzor. Prijateljstvo je znatno
+      jeftinije od nadzora jednog zapisa.</li>
+  </ol>
+</section>
+
+<section id="curenje" class="col">
+  <h2><span class="num">07</span>Kuda dečji POEN izlazi</h2>
+
+  <p>
+    Dečji POEN nije igra u zatvorenoj sobi. Po zatečenoj mehanici, <strong>dete sme da prepiše POEN
+    svom roditelju bez ikakvog uslova</strong> — i to je namerno, jer prekidač za odrasle uređuje odnos
+    sa <em>trećim</em> licima, ne sa sopstvenim roditeljem.
+  </p>
+
+  <p>Posledica: sve što nastane u dečjem prostoru može isti dan biti u odrasloj ekonomiji. Zato:</p>
+
+  <ul>
+    <li>dečja emisija <strong>jeste</strong> emisija — ulazi u opticaj, pomera osnivački korak, ulazi u
+      obračunski koeficijent ZRNA;</li>
+    <li>svaka ograda mora stajati <strong>na nastanku</strong> POEN-a, ne na njegovom kretanju — jednom
+      nastao, izaći će;</li>
+    <li>zabrana prepisa dete → roditelj bi bila pogrešan lek: pogađa poštene, a farmu ne zaustavlja
+      (napadač i tako drži oba naloga).</li>
+  </ul>
+
+  <p>
+    Ostaje otvoreno šta POEN detetu uopšte <em>znači</em>. Ono njime može da razmenjuje sa drugom
+    decom, i sa odraslima ako roditelj upali prekidač. Ako je odgovor „ništa naročito, to je brojka
+    koja raste" — onda je i iznos manje bitan, a farma je jedini stvarni rizik. Ako je odgovor „to su
+    pravi POEN-i" — onda su brojevi iz odeljka 06 glavno pitanje.
+  </p>
+</section>
+
+<section id="ograde" class="col">
+  <h2><span class="num">08</span>Predložene ograde</h2>
+
+  <p>Šest pravila. Prva tri drže mehaniku uspravno; ostala tri su podešavanja.</p>
+
+  <ol class="body">
+    <li>
+      <strong>Prijateljstvo plaća tek kad su oba deteta puna</strong>, i tada plaća obojici. Zatvara
+      farmu praznim nalozima i pretvara povezivanje u događaj koji koristi celom društvu deteta.
+    </li>
+    <li>
+      <strong>Deca istog roditelja ne nose POEN jedno drugom.</strong> Zatvara farmu jednog potvrđenog
+      roditelja sa deset naloga. Po ugledu na zabranjenu zonu — brat ne potvrđuje brata.
+    </li>
+    <li>
+      <strong>Kapa po detetu</strong> (ili lestvica). Bez nje je jedan razred vredniji od 87 odraslih
+      koji su prošli celu putanju doprinosa.
+    </li>
+    <li>
+      <strong>QR uživo ostaje</strong> — 5 minuta, mora se pokazati, ne može se izdiktirati. To je
+      jedina brana koja traži fizičko prisustvo i ne treba je olakšavati.
+    </li>
+    <li>
+      <strong>Rok za roditelja.</strong> Nalog koji predugo stoji <span class="chip ceka">otvoren</span>
+      prelazi u mirovanje, pa se briše zajedno sa zabeleženim.
+    </li>
+    <li>
+      <strong>U mejlu roditelju stoji i „ovo nije moje dete".</strong> Nije isto što i brisanje: klik
+      na to zamrzava nalog i javlja Fondaciji, jer znači da je neko uneo tuđ mejl.
+    </li>
+  </ol>
+</section>
+
+<section id="odluke">
+  <h2><span class="num">09</span>Odluke koje čekaju tebe</h2>
+
+  <p class="col">
+    Svaka ima oznaku, pa možeš da kažeš „hajde o O4" — meni ili Claude-u u drugom razgovoru. Uz svaku
+    stoji moj predlog, ne odluka.
+  </p>
+
+  <div class="odluka">
+    <div><span class="id">O1</span><span class="pitanje">Plaća li prijateljstvo kad je samo jedno dete
+      povezano?</span></div>
+    <p class="predlog">Predlog: <b>ne</b> — oba moraju biti puna, pa se plaća obojici odjednom. Tvoj
+      primer kaže drukčije; razlog za izmenu je farma iz odeljka 05. Sporedna korist: Milicino
+      povezivanje otključava zaostatak svim njenim drugarima, što je jači motiv nego sopstvenih 500.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O2</span><span class="pitanje">Koliko iznosi jedno prijateljstvo i postoji li
+      kapa?</span></div>
+    <p class="predlog">Predlog: <b>500 uz kapu 5.000 po detetu</b> (10 prijateljstava), simetrično sa
+      kapom odraslog. Alternativa koja mi se sviđa više: <b>lestvica</b> 1./3./5./10./20. prijatelj,
+      kapa 2.500 — jer nagrađuje širenje, a ne broj skeniranja.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O3</span><span class="pitanje">Koliko dece sme jedan roditelj?</span></div>
+    <p class="predlog">Nacrt kaže: neograničeno. Sa emisijom to više ne stoji. Predlog: <b>ostaviti
+      neograničeno, ali bez POEN-a među decom istog roditelja</b>, uz javljanje Fondaciji preko nekog
+      broja (npr. 5). Tvrd limit pogađa velike porodice, a farmu ionako zatvara pravilo o istom
+      roditelju.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O4</span><span class="pitanje">Šta dete sme u stanju <span class="chip ceka">otvoren</span>?</span></div>
+    <p class="predlog">Predlog: <b>sve unutar dečjeg prostora</b> — prijateljstva, poruke sa decom,
+      oglas — ali <b>bez ijednog prepisa POEN-a</b> i bez prekidača za odrasle. Prekidač daje roditelj
+      koji je preuzeo odgovornost; ovaj je još samo rekao da je dete njegovo.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O5</span><span class="pitanje">Kako se veza uspostavlja — linkom iz mejla ili
+      kucanjem pseudonima?</span></div>
+    <p class="predlog">Predlog: <b>oba, s tim da je link glavni put</b>. Link iz mejla nosi token i
+      povezuje bez kucanja. Kucanje pseudonima je rezerva (mejl izgubljen, roditelj se registrovao
+      drugom adresom) i tada <b>dete mora da potvrdi</b> — inače bi svako mogao da prisvoji tuđ nalog.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O6</span><span class="pitanje">Ko unosi uzrast u dugom ulazu?</span></div>
+    <p class="predlog">U kratkom ulazu ga unosi roditelj i posle se ne menja. U dugom ga unosi dete i
+      može da slaže. Predlog: <b>dete unosi, roditelj pri povezivanju potvrđuje ili ispravlja</b>, i od
+      tog trenutka je zaključan.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O7</span><span class="pitanje">Koliko dugo nalog čeka roditelja?</span></div>
+    <p class="predlog">Predlog: <b>7 dana</b> do prvog klika (inače brisanje — nema pristanka, nema
+      osnova), pa <b>90 dana</b> u stanju <span class="chip ceka">otvoren</span> do povezivanja sa
+      redovnim članom. Drugi rok je namerno dug: tu je posao deteta da dovede roditelja, a to traje.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O8</span><span class="pitanje">Šta se dešava na 18. rođendan?</span></div>
+    <p class="predlog">Nacrt nema odredbu i to je rupa i bez emisije. Predlog: <b>nalog postaje običan
+      nepotvrđen nalog</b>, roditelj gubi sva ovlašćenja (uvid u razgovore, brisanje, prekidač),
+      <b>POEN ostaje</b>, a potvrda stvarnosti se traži po opštim pravilima.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O9</span><span class="pitanje">Je li u redu da sistem plaća detetu da dovede
+      roditelja?</span></div>
+    <p class="predlog">Ovo nije tehničko pitanje i nemam predlog. Mehanika radi — i baš zato je vredi
+      pogledati pravo: dete koje sakuplja prijatelje uči da je vredno to što je dovelo ljude. Suprotan
+      argument je da to dete i tako radi, samo bez ikakvog traga. Odluka je tvoja i mislim da treba da
+      stoji zapisana kao odluka, a ne da se podrazumeva.</p>
+  </div>
+
+  <div class="odluka">
+    <div><span class="id">O10</span><span class="pitanje">Ostaje li dečja emisija van dnevnog
+      limita?</span></div>
+    <p class="predlog">Predlog: <b>da, van limita</b> — kao svi automatski akti Protokola (potvrda,
+      donacija, doprinos sadržaju). Ali <b>ulazi u opticaj</b>, dakle pomera osnivački korak. Druga
+      opcija je da se dečja emisija izuzme iz osnovice za osnivački korak — to je veći zahvat i menja
+      definiciju opticaja na više mesta.</p>
+  </div>
+</section>
+
+<section id="kod" class="col">
+  <h2><span class="num">10</span>Šta se dira u kodu</h2>
+
+  <p>Redosled je namerno ovakav — svaki korak radi sam za sebe.</p>
+
+  <div class="tabela">
+    <table>
+      <thead>
+        <tr><th>Zahvat</th><th>Gde</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Treće stanje naloga + mejl roditelju i pristanak klikom</td>
+          <td><code>User</code> (stanje, mejl roditelja, token), registracija, nova ruta za pristanak</td>
+        </tr>
+        <tr>
+          <td>Dečji put u registraciji („ja sam dete" + mejl roditelja)</td>
+          <td><code>/api/registracija</code> — danas nema nijedne grane za decu</td>
+        </tr>
+        <tr>
+          <td>Povezivanje roditelja sa zatečenim detetom</td>
+          <td><code>deca.ts</code> — <code>otvoriNalogDeteta</code> zna samo da <em>napravi</em> nalog</td>
+        </tr>
+        <tr>
+          <td>Beleženje i evidentiranje POEN-a za prijateljstvo</td>
+          <td>nov <code>DoprinosPrijateljstvo</code> uz <code>prijateljstva.ts</code>, po obrascu čl. 40a</td>
+        </tr>
+        <tr>
+          <td>Sita: oba puna, različit roditelj, kapa</td>
+          <td>čiste funkcije uz <code>deca-pravila.ts</code></td>
+        </tr>
+        <tr>
+          <td>Nov tip transakcije i audit događaji</td>
+          <td><code>EMISIJA_PRIJATELJSTVO</code>, migracija u zasebnom fajlu (enum vrednost)</td>
+        </tr>
+        <tr>
+          <td>Rokovi za nepovezane naloge</td>
+          <td>noćni posao uz zatečeni <code>cron/deca-potvrde</code></td>
+        </tr>
+        <tr>
+          <td>Uvezivanje sa čl. 6 — potvrda postojanja deteta</td>
+          <td>pokreće se pri <em>povezivanju</em>, ne pri otvaranju naloga</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="blok upisano">
+    <p class="naslov">Šta ostaje netaknuto</p>
+    <p>
+      Prijateljstva (QR, 5 minuta), mirovanje, uvid roditelja u razgovore, uklanjanje oglasa,
+      prekidač za odrasle, brisanje naloga sa protivzapisom, vidljivost oglasa deteta. Sve to radi i
+      ne dodiruje ga nijedna od gornjih izmena.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>
+    Radna beleška, nije akt i nije odluka. Nastala 16.08.2026. iz razgovora o dugom ulazu; opisuje
+    mehaniku pre nego što se piše pravilnik, po dogovoru da se pravilnik i kod menjaju posle.
+  </p>
+</footer>
+
+</div>
