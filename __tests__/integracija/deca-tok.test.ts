@@ -362,14 +362,14 @@ describe.skipIf(!IMA_BAZU)("Modul Deca — ceo tok nad bazom", () => {
  */
 describe.skipIf(!IMA_BAZU)("Prijava pseudonimom", () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async function prijava(unos: string, lozinka: string): Promise<any> {
+  async function prijava(unos: string, lozinka: string, req: unknown = {}): Promise<any> {
     const { authOptions } = await import("@/lib/auth");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const provajder = authOptions.providers.find((p: any) => p.id === "credentials") as any;
     // 🔴 `provajder.authorize` je STUB koji NextAuth uvek postavlja i koji uvek vraća
     // null; prava funkcija stoji pod `options`. Poziv stuba prolazi kao „pogrešna
     // lozinka" i test bi ćutke prolazio ne proveravajući ništa.
-    return provajder.options.authorize({ email: unos, password: lozinka }, {} as never);
+    return provajder.options.authorize({ email: unos, password: lozinka }, req as never);
   }
 
   it("dete se prijavljuje pseudonimom i lozinkom", async () => {
@@ -385,9 +385,7 @@ describe.skipIf(!IMA_BAZU)("Prijava pseudonimom", () => {
     expect(await prijava("PrijavaDete", "pogresna")).toBeNull();
   });
 
-  it("🔴 nalog KOJI IMA imejl se pseudonimom ne otvara", async () => {
-    // Pseudonimi su javni; da prijava po pseudonimu važi za sve naloge, napadaču
-    // bi pola podatka bilo besplatno. Punoletni se prijavljuju imejlom.
+  it("i punoletni nalog se otvara pseudonimom, i dalje i imejlom", async () => {
     const bcrypt = (await import("bcryptjs")).default;
     const hash = await bcrypt.hash("tajna-lozinka", 10);
     await napraviKorisnika("PrijavaOdrastao", {
@@ -395,9 +393,26 @@ describe.skipIf(!IMA_BAZU)("Prijava pseudonimom", () => {
       email: "odrastao@example.com",
     });
 
-    expect(await prijava("PrijavaOdrastao", "tajna-lozinka")).toBeNull();
+    expect((await prijava("PrijavaOdrastao", "tajna-lozinka"))?.pseudonim).toBe("PrijavaOdrastao");
     expect((await prijava("odrastao@example.com", "tajna-lozinka"))?.pseudonim).toBe(
       "PrijavaOdrastao",
     );
+  });
+
+  it("🔴 tuđi pokušaji ne zaključavaju prijavu vlasniku naloga", async () => {
+    // Pseudonim je javan, pa bi brojač vezan samo za nalog dao svakome polugu da
+    // tuđu prijavu obori na petnaest minuta. Brojač zato nosi i adresu sa koje se
+    // pokušava — napadačevih deset pokušaja troše njegovu kvotu, ne vlasnikovu.
+    const bcrypt = (await import("bcryptjs")).default;
+    const hash = await bcrypt.hash("tajna-lozinka", 10);
+    const zrtva = await napraviKorisnika("Zrtva", { passwordHash: hash });
+
+    const napadac = { headers: { "x-forwarded-for": "203.0.113.7" } };
+    for (let i = 0; i < 12; i++) {
+      await prijava("Zrtva", "pogresna", napadac);
+    }
+
+    const vlasnik = { headers: { "x-forwarded-for": "198.51.100.4" } };
+    expect((await prijava("Zrtva", "tajna-lozinka", vlasnik))?.id).toBe(zrtva.id);
   });
 });

@@ -118,7 +118,7 @@
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
     "email_ili_pseudonim": "Email ili pseudonim",
-    "deca_pseudonimom": "Djeca se prijavljuju pseudonimom i lozinkom koju im je dao roditelj — bez e-pošte."
+    "deca_pseudonimom": "Možeš unijeti e-poštu ili pseudonim. Djeca imaju samo pseudonim i lozinku koju im je dao roditelj."
   },
   "zaboravljenaLozinka": {
     "naslov": "Zaboravljena lozinka",

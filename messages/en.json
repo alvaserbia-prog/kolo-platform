@@ -118,7 +118,7 @@
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
     "email_ili_pseudonim": "Email or pseudonym",
-    "deca_pseudonimom": "Children sign in with their pseudonym and the password their parent gave them — no e-mail."
+    "deca_pseudonimom": "You may enter your e-mail or your pseudonym. Children have only a pseudonym and the password their parent gave them."
   },
   "zaboravljenaLozinka": {
     "naslov": "Forgot Password",
