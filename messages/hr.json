@@ -17,7 +17,8 @@
     "grupa_poverenje": "Povjerenje",
     "grupa_podrzi": "Podrži KOLO",
     "grupa_zajednicko_dobro": "Zajedničko dobro",
-    "faq": "Česta pitanja"
+    "faq": "Česta pitanja",
+    "prijatelji": "Prijatelji"
   },
   "header": {
     "moj_profil": "Moj profil",
@@ -2856,5 +2857,38 @@
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
     "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom."
+  },
+  "decjaPocetna": {
+    "naslov": "Dječja tržnica",
+    "pozdrav": "Bok, {pseudonim}!",
+    "dugme_nov_oglas": "Novi oglas",
+    "dugme_moji_oglasi": "Moji oglasi",
+    "dugme_prijatelji": "Prijatelji",
+    "dugme_poruke": "Poruke",
+    "pretraga": "Traži…",
+    "oglasi_naslov": "Oglasi",
+    "oglasi_prazno": "Još nema oglasa. Napravi prvi!",
+    "bez_slike": "bez slike",
+    "pricaonica_naslov": "Pričaonica",
+    "pricaonica_opis": "Ovdje su samo djeca.",
+    "pricaonica_prazno": "Još nitko nije pisao. Počni ti.",
+    "pricaonica_placeholder": "Napiši nešto…",
+    "posalji": "Pošalji",
+    "greska_slanje": "Nije uspjelo. Pokušaj ponovno."
+  },
+  "prijatelji": {
+    "naslov": "Moji prijatelji",
+    "brojac_opis": "toliko prijatelja imaš",
+    "moj_kod": "Moj kod",
+    "pokazi_kod": "Pokaži kod",
+    "kod_uputstvo": "Neka ga prijatelj skenira. Kod vrijedi kratko — zato morate biti jedno pored drugog.",
+    "skeniraj": "Skeniraj kod",
+    "skeniraj_opis": "Skeniraj kod koji ti prijatelj pokazuje.",
+    "dugme_skeniraj": "Otvori kameru",
+    "spisak_naslov": "Popis",
+    "spisak_prazno": "Još nemaš prijatelje. Pokaži kod nekome pored sebe.",
+    "uspeh": "Sada ste prijatelji s {pseudonim}!",
+    "greska_slanje": "Nije uspjelo. Pokušaj ponovno.",
+    "greska_ucitavanje": "Učitavanje nije uspjelo."
   }
 }

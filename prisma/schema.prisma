@@ -279,6 +279,9 @@ model User {
   dozvolaOdrasli                   Boolean                   @default(false)
   potvrdeRoditeljstvaZaMene        RoditeljstvoPotvrda[]     @relation("PotvrdaDete")
   potvrdeRoditeljstvaKojeDajem     RoditeljstvoPotvrda[]     @relation("PotvrdaPotvrdjivac")
+  prijateljstvaA                   Prijateljstvo[]           @relation("PrijateljA")
+  prijateljstvaB                   Prijateljstvo[]           @relation("PrijateljB")
+  prijateljTokeni                  PrijateljToken[]
   memberHash                       String                    @unique
   location                         String?
   telefon                          String?
@@ -1543,8 +1546,18 @@ model BlogPost {
 
 // ─── Chat soba (globalna) ────────────────────────────────────────────────────
 
+/// Soba Pričaonice. 🔴 Soba se NE BIRA nego se izvodi iz toga ko piše: maloletni
+/// korisnik uvek dobija dečju, punoletni uvek sobu odraslih. Nema parametra kojim
+/// bi se prešlo iz jedne u drugu — to je jedini način da se sigurno zna da odrasli
+/// nisu u dečjoj sobi (Modul Deca, čl. 12).
+enum ChatSoba {
+  ODRASLI
+  DECA
+}
+
 model ChatMessage {
   id             String    @id @default(uuid())
+  soba           ChatSoba  @default(ODRASLI)
   userId         String
   user           User      @relation("ChatPoruke", fields: [userId], references: [id])
   content        String
@@ -1556,7 +1569,7 @@ model ChatMessage {
   uklonjenRazlog String?
   uklonioId      String?
 
-  @@index([createdAt(sort: Desc)])
+  @@index([soba, createdAt(sort: Desc)])
   @@index([userId])
 }
 
@@ -1839,4 +1852,40 @@ model Bug {
 
   @@index([status, createdAt(sort: Desc)])
   @@index([userId])
+}
+
+// ─── Modul Deca — prijateljstva ─────────────────────────────────────────────
+//
+// Maloletni korisnici se povezuju skeniranjem QR koda, uživo. Prijateljstvo je
+// SIMETRIČNO: jedan red opisuje obe strane, pa se `aId` i `bId` upisuju sortirano
+// (manji id prvi). Bez toga bi isti par mogao da uđe dvaput, u dva smera, i
+// jedinstveni indeks ne bi ništa značio.
+model Prijateljstvo {
+  id        String   @id @default(uuid())
+  aId       String
+  a         User     @relation("PrijateljA", fields: [aId], references: [id], onDelete: Cascade)
+  bId       String
+  b         User     @relation("PrijateljB", fields: [bId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([aId, bId])
+  @@index([aId])
+  @@index([bId])
+}
+
+// Jednokratni kod za povezivanje. 🔴 NEMA šestocifrenog broja, za razliku od koda
+// za potvrdu stvarnosti — broj se može izdiktirati telefonom, a QR se mora POKAZATI.
+// Zbog toga i kratko traje: kod koji živi satima može da se fotografiše i iskoristi
+// daleko od deteta, a smisao je da se dvoje nađu jedno pored drugog.
+model PrijateljToken {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  korisnikId String
+  korisnik   User     @relation(fields: [korisnikId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  iskoriscen Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([korisnikId])
+  @@index([expiresAt])
 }

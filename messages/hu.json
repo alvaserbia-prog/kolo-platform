@@ -17,7 +17,8 @@
     "grupa_poverenje": "Bizalom",
     "grupa_podrzi": "Támogasd a KOLO-t",
     "grupa_zajednicko_dobro": "Közjó",
-    "faq": "Gyakori kérdések"
+    "faq": "Gyakori kérdések",
+    "prijatelji": "Barátok"
   },
   "header": {
     "moj_profil": "Profilom",
@@ -2856,5 +2857,38 @@
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
     "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval."
+  },
+  "decjaPocetna": {
+    "naslov": "Gyermekpiac",
+    "pozdrav": "Szia, {pseudonim}!",
+    "dugme_nov_oglas": "Új hirdetés",
+    "dugme_moji_oglasi": "Hirdetéseim",
+    "dugme_prijatelji": "Barátok",
+    "dugme_poruke": "Üzenetek",
+    "pretraga": "Keresés…",
+    "oglasi_naslov": "Hirdetések",
+    "oglasi_prazno": "Még nincs hirdetés. Készítsd el az elsőt!",
+    "bez_slike": "nincs kép",
+    "pricaonica_naslov": "Csevegő",
+    "pricaonica_opis": "Itt csak gyerekek vannak.",
+    "pricaonica_prazno": "Még senki sem írt. Kezdd te.",
+    "pricaonica_placeholder": "Írj valamit…",
+    "posalji": "Küldés",
+    "greska_slanje": "Nem sikerült. Próbáld újra."
+  },
+  "prijatelji": {
+    "naslov": "Barátaim",
+    "brojac_opis": "ennyi barátod van",
+    "moj_kod": "A kódom",
+    "pokazi_kod": "Kód mutatása",
+    "kod_uputstvo": "Olvassa be a barátod. A kód rövid ideig él — ezért kell egymás mellett lennetek.",
+    "skeniraj": "Kód beolvasása",
+    "skeniraj_opis": "Olvasd be a kódot, amit a barátod mutat.",
+    "dugme_skeniraj": "Kamera megnyitása",
+    "spisak_naslov": "Lista",
+    "spisak_prazno": "Még nincs barátod. Mutasd meg a kódod valakinek melletted.",
+    "uspeh": "Mostantól barátok vagytok: {pseudonim}!",
+    "greska_slanje": "Nem sikerült. Próbáld újra.",
+    "greska_ucitavanje": "A betöltés nem sikerült."
   }
 }

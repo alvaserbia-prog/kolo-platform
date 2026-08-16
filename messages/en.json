@@ -17,7 +17,8 @@
     "grupa_poverenje": "Trust",
     "grupa_podrzi": "Support KOLO",
     "grupa_zajednicko_dobro": "Common good",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "prijatelji": "Friends"
   },
   "header": {
     "moj_profil": "My profile",
@@ -2856,5 +2857,38 @@
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
     "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator."
+  },
+  "decjaPocetna": {
+    "naslov": "Children's Marketplace",
+    "pozdrav": "Hello, {pseudonim}!",
+    "dugme_nov_oglas": "New listing",
+    "dugme_moji_oglasi": "My listings",
+    "dugme_prijatelji": "Friends",
+    "dugme_poruke": "Messages",
+    "pretraga": "Search…",
+    "oglasi_naslov": "Listings",
+    "oglasi_prazno": "No listings yet. Make the first one!",
+    "bez_slike": "no photo",
+    "pricaonica_naslov": "Chat room",
+    "pricaonica_opis": "Only children are here.",
+    "pricaonica_prazno": "Nobody has written yet. Go ahead.",
+    "pricaonica_placeholder": "Write something…",
+    "posalji": "Send",
+    "greska_slanje": "That did not work. Try again."
+  },
+  "prijatelji": {
+    "naslov": "My friends",
+    "brojac_opis": "that is how many friends you have",
+    "moj_kod": "My code",
+    "pokazi_kod": "Show code",
+    "kod_uputstvo": "Let your friend scan it. The code is short-lived — that is why you must be next to each other.",
+    "skeniraj": "Scan a code",
+    "skeniraj_opis": "Scan the code your friend is showing you.",
+    "dugme_skeniraj": "Open camera",
+    "spisak_naslov": "List",
+    "spisak_prazno": "No friends yet. Show your code to someone next to you.",
+    "uspeh": "You and {pseudonim} are now friends!",
+    "greska_slanje": "That did not work. Try again.",
+    "greska_ucitavanje": "Loading failed."
   }
 }

@@ -17,7 +17,8 @@
     "grupa_poverenje": "Доверие",
     "grupa_podrzi": "Поддержать КОЛО",
     "grupa_zajednicko_dobro": "Общее благо",
-    "faq": "Частые вопросы"
+    "faq": "Частые вопросы",
+    "prijatelji": "Друзья"
   },
   "header": {
     "moj_profil": "Мой профиль",
@@ -2856,5 +2857,38 @@
     "prikazi_lozinku": "Показать пароль",
     "sakrij_lozinku": "Скрыть пароль",
     "pseudonim_pravilo": "Псевдоним: 3–30 знаков, только латинские буквы (a–z), цифры и _ . - — без пробелов и без č, ć, š, ž, đ. Не может начинаться или заканчиваться разделителем."
+  },
+  "decjaPocetna": {
+    "naslov": "Детский рынок",
+    "pozdrav": "Привет, {pseudonim}!",
+    "dugme_nov_oglas": "Новое объявление",
+    "dugme_moji_oglasi": "Мои объявления",
+    "dugme_prijatelji": "Друзья",
+    "dugme_poruke": "Сообщения",
+    "pretraga": "Поиск…",
+    "oglasi_naslov": "Объявления",
+    "oglasi_prazno": "Объявлений пока нет. Создай первое!",
+    "bez_slike": "без фото",
+    "pricaonica_naslov": "Чат",
+    "pricaonica_opis": "Здесь только дети.",
+    "pricaonica_prazno": "Ещё никто не писал. Начни ты.",
+    "pricaonica_placeholder": "Напиши что-нибудь…",
+    "posalji": "Отправить",
+    "greska_slanje": "Не получилось. Попробуй ещё раз."
+  },
+  "prijatelji": {
+    "naslov": "Мои друзья",
+    "brojac_opis": "столько у тебя друзей",
+    "moj_kod": "Мой код",
+    "pokazi_kod": "Показать код",
+    "kod_uputstvo": "Пусть друг его отсканирует. Код живёт недолго — поэтому вы должны быть рядом.",
+    "skeniraj": "Сканировать код",
+    "skeniraj_opis": "Отсканируй код, который показывает друг.",
+    "dugme_skeniraj": "Открыть камеру",
+    "spisak_naslov": "Список",
+    "spisak_prazno": "Друзей пока нет. Покажи свой код тому, кто рядом.",
+    "uspeh": "Теперь вы друзья с {pseudonim}!",
+    "greska_slanje": "Не получилось. Попробуй ещё раз.",
+    "greska_ucitavanje": "Не удалось загрузить."
   }
 }

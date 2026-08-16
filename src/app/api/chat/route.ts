@@ -3,6 +3,17 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { ChatSoba } from "@/generated/prisma/client";
+
+/**
+ * Soba se IZVODI iz toga ko je prijavljen, ne bira se parametrom (Modul Deca,
+ * čl. 12). Maloletni korisnik uvek dobija dečju sobu, punoletni sobu odraslih —
+ * pa ne postoji adresa kojom bi odrasli ušao među decu ni obrnuto.
+ */
+async function mojaSoba(userId: string): Promise<ChatSoba> {
+  const u = await prisma.user.findUnique({ where: { id: userId }, select: { maloletan: true } });
+  return u?.maloletan ? ChatSoba.DECA : ChatSoba.ODRASLI;
+}
 
 // GET /api/chat — poslednje poruke (samo prijavljeni)
 // Query: ?since=ISO-datum (opciono) — vraća samo poruke nakon datog vremena
@@ -19,6 +30,7 @@ export async function GET(req: NextRequest) {
   // Uklonjene poruke (Uslovi čl. 25 st. 2) nestaju iz sobe za sve — i za autora.
   const where = {
     uklonjenoAt: null,
+    soba: await mojaSoba(session.user.id),
     ...(since ? { createdAt: { gt: new Date(since) } } : {}),
   };
   const poruke = await prisma.chatMessage.findMany({
@@ -49,7 +61,11 @@ export async function POST(req: NextRequest) {
   if (!session) {
     return await greska("Pristup samo za prijavljene.", 401);
   }
-  if (!session.user.verified) {
+  // 🔴 Dete piše u svojoj sobi BEZ ikakve potvrde. Uslov „samo potvrđeni" je pisan
+  // za sobu odraslih; preneseno na decu, dečja soba bi zauvek bila samo za čitanje,
+  // jer maloletni korisnik potvrdu nikad ne stiče (Modul Deca, čl. 15).
+  const soba = await mojaSoba(session.user.id);
+  if (soba === ChatSoba.ODRASLI && !session.user.verified) {
     return await greska("Pisanje u pričaonicu je dostupno samo verifikovanim članovima.", 403);
   }
 
@@ -67,6 +83,7 @@ export async function POST(req: NextRequest) {
     data: {
       userId: session.user.id,
       content,
+      soba,
     },
     include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
   });
