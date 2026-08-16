@@ -51,7 +51,10 @@ Broj dece po roditelju nije ograničen.
 
 ### Član 5
 
-Roditelj mora biti korisnik čija je stvarnost potvrđena u lancu potvrda.
+Roditelj mora imati indeks stvarnosti od najmanje deset odsto.
+
+Broj lica koja su njegovu stvarnost potvrdila nije uslov. Početni korisnik ispunjava
+uslov iz stava 1 i kada ga nijedno lice nije potvrdilo, jer je ishodište lanca potvrda.
 
 ### Član 6
 

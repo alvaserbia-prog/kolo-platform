@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import ProfilKlijent from "./ProfilKlijent";
 import MojaDeca from "@/components/deca/MojaDeca";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
+import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 
 export default async function ProfilPage() {
   const session = await getServerSession(authOptions);
@@ -16,10 +17,12 @@ export default async function ProfilPage() {
   });
   if (!user) redirect("/login");
 
-  // Odeljak „Moja deca" vidi samo potvrđen punoletan korisnik: nalog detetu otvara
-  // onaj čiju je stvarnost neko potvrdio (Modul Deca, čl. 5), a maloletni korisnik
-  // ne otvara nalog nikome.
-  const prikaziDecu = MODUL_DECA_AKTIVAN && user.verified && !user.maloletan;
+  // Odeljak „Moja deca" vidi punoletan korisnik sa indeksom stvarnosti od 10% ili
+  // više (Modul Deca, čl. 5). Merodavan je INDEKS, ne broj potvrda — početnom
+  // korisniku (osnivač, UO) indeks je fiksno 100 iako ga formalno niko nije
+  // potvrdio, a upravo on prvi otvara naloge deci.
+  const prikaziDecu =
+    MODUL_DECA_AKTIVAN && !user.maloletan && user.indeksStvarnosti >= FUNKCIONALNI_PRAG_INDEKSA;
 
   return (
     <>

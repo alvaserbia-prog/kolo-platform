@@ -87,7 +87,7 @@ describe.skipIf(!IMA_BAZU)("Modul Deca — ceo tok nad bazom", () => {
     expect(await zbirSvihZapisa()).toBe(0);
   });
 
-  it("1 — roditelj ne može otvoriti nalog dok mu stvarnost nije potvrđena (čl. 5)", async () => {
+  it("1 — roditelj sa indeksom ispod praga ne može otvoriti nalog (čl. 5)", async () => {
     const { otvoriNalogDeteta } = await import("@/lib/protokol/deca");
     const r = await napraviKorisnika("RoditeljTest");
     roditeljId = r.id;
@@ -100,27 +100,33 @@ describe.skipIf(!IMA_BAZU)("Modul Deca — ceo tok nad bazom", () => {
         datumRodjenja: new Date("2015-05-05T00:00:00.000Z"),
         memberHash: "detetst1",
       }),
-    ).rejects.toThrow(/stvarnost/i);
+    ).rejects.toThrow(/indeks stvarnosti/i);
   });
 
-  it("2 — potvrđen roditelj BEZ ijednog potvrđivača se takođe zaustavlja", async () => {
-    // Prazan skup potvrđivača bi u petlji „svi su potvrdili" bio ispunjen a da se
-    // niko nije pitao — član UO nema potvrđivače jer je ishodište lanca.
+  it("2 🔴 — merodavan je INDEKS, ne broj potvrda: početni korisnik prolazi bez ijedne", async () => {
+    // Osnivaču je indeks fiksno 100 iako ga formalno niko nije potvrdio — on je
+    // ishodište lanca. Provera po broju potvrda bi zaustavila upravo onoga ko prvi
+    // otvara naloge deci, pa se gleda samo indeks.
     const { otvoriNalogDeteta } = await import("@/lib/protokol/deca");
-    await prisma.user.update({
-      where: { id: roditeljId },
-      data: { verified: true, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 100 },
+    const osnivac = await napraviKorisnika("Osnivac", {
+      verified: true,
+      tipKorisnika: TipKorisnika.NOSILAC_ZRNA,
+      jeOsnivac: true,
+      indeksStvarnosti: 100,
     });
+    expect(await prisma.verifikacionaVeza.count({ where: { verifikovaniId: osnivac.id } })).toBe(0);
 
-    await expect(
-      otvoriNalogDeteta({
-        roditeljId,
-        pseudonim: "DeteTest",
-        passwordHash: "x",
-        datumRodjenja: new Date("2015-05-05T00:00:00.000Z"),
-        memberHash: "detetst1",
-      }),
-    ).rejects.toThrow(/nijedan korisnik/i);
+    const rez = await otvoriNalogDeteta({
+      roditeljId: osnivac.id,
+      pseudonim: "DeteOsnivaca",
+      passwordHash: "x",
+      datumRodjenja: new Date("2014-03-03T00:00:00.000Z"),
+      memberHash: "osndete1",
+    });
+    // Nalog postoji, ali nema koga da se pita — nijedno izjašnjenje se ne kreira.
+    expect(rez.brojPotvrdjivaca).toBe(0);
+    expect(await prisma.roditeljstvoPotvrda.count({ where: { deteId: rez.id } })).toBe(0);
+    expect(await zbirSvihZapisa()).toBe(0);
   });
 
   it("3 — dvoje ga potvrđuju kroz pravi lanac potvrda, zero-sum ostaje", async () => {

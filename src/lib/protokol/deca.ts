@@ -206,10 +206,14 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
     throw new DecaGreska("Maloletni korisnik ne može otvoriti nalog detetu.", 403);
   if (roditelj.status !== UserStatus.ACTIVE || roditelj.deaktiviranAt)
     throw new DecaGreska("Nalog nije aktivan.", 403);
-  // Čl. 5 — roditelj mora biti korisnik čija je stvarnost potvrđena u lancu potvrda.
-  if (!roditelj.verified)
+  // Čl. 5 — merodavan je INDEKS STVARNOSTI, ne broj ljudi koji su se potpisali.
+  //
+  // 🔴 Ne proveravati broj potvrda. Početnim korisnicima (osnivači, UO) indeks je
+  // fiksno 100 iako ih formalno niko nije potvrdio — oni su ishodište lanca. Provera
+  // po broju potvrda njih zaustavlja, a upravo oni prvi otvaraju naloge deci.
+  if (roditelj.indeksStvarnosti < FUNKCIONALNI_PRAG_INDEKSA)
     throw new DecaGreska(
-      "Nalog detetu možeš otvoriti tek pošto tvoju stvarnost neko potvrdi.",
+      `Nalog detetu možeš otvoriti kad ti indeks stvarnosti bude ${FUNKCIONALNI_PRAG_INDEKSA}% ili više.`,
       403
     );
 
@@ -217,22 +221,17 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
   const dozvoljen = uzrastZaModul(godine);
   if (!dozvoljen.ok) throw new DecaGreska(dozvoljen.razlog, dozvoljen.status);
 
-  // Potvrđivači se čitaju PRE transakcije samo da bi se prazan skup uhvatio ovde,
-  // sa jasnom porukom. Sam upis ide unutar transakcije, iz istog izvora.
+  // Ljudi koji su potvrdili roditelja — njima ide izjašnjenje iz čl. 6.
+  //
+  // 🟡 Skup SME da bude prazan: kod početnog korisnika (osnivač, UO) nema nikoga
+  // iznad njega u lancu, pa se nalog deteta otvara na njegovu reč. To je posledica
+  // toga što je on ishodište lanca potvrda, a ne propust — ali znači i da za ta
+  // deca ne postoji nijedno izjašnjenje, pa se Fondaciji javlja da se zna.
   const veze = await prisma.verifikacionaVeza.findMany({
     where: { verifikovaniId: roditelj.id },
     select: { verifikatorId: true },
   });
   const potvrdjivaci = [...new Set(veze.map((v) => v.verifikatorId))];
-  if (potvrdjivaci.length === 0) {
-    // 🔴 Prazan skup bi u petlji „svi su potvrdili" bio ispunjen a da se niko nije
-    // pitao. Član Upravnog odbora nema potvrđivače jer je ishodište lanca, pa bi
-    // najodgovorniji nalozi prošli bez ijedne provere. Zaustavlja se ovde.
-    throw new DecaGreska(
-      "Tvoju stvarnost nije potvrdio nijedan korisnik, pa postupak potvrde ne može da se pokrene. Obrati se Fondaciji.",
-      403
-    );
-  }
 
   const sada = new Date();
   const rokDo = rokIzjasnjenja(sada);
@@ -266,6 +265,18 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
 
     return kreirano;
   });
+
+  // Nalog otvoren bez ijednog izjašnjenja ostavlja trag kod Fondacije — inače bi
+  // jedini put do dečjeg prostora koji ne prolazi kroz mrežu bio i nevidljiv.
+  if (potvrdjivaci.length === 0) {
+    const { posaljiAdminAlert } = await import("@/lib/adminAlert");
+    void posaljiAdminAlert(
+      "Nalog detetu otvoren bez izjašnjenja",
+      `Roditelj: ${roditelj.pseudonim} (indeks ${roditelj.indeksStvarnosti}%)\n` +
+        `Njegovu stvarnost nije potvrdio nijedan korisnik, pa nema koga da se pita o postojanju deteta.\n` +
+        `Uzrast deteta: ${godine} godina.`,
+    );
+  }
 
   // Obaveštenja idu van transakcije i ne obaraju otvaranje naloga ako padnu.
   for (const potvrdjivacId of potvrdjivaci) {
