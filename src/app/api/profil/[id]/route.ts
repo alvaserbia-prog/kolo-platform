@@ -39,6 +39,9 @@ export async function GET(
     select: {
       id: true,
       pseudonim: true,
+      // Modul Deca: profil maloletnog korisnika ne prikazuje indeks stvarnosti ni
+      // lanac potvrda — dete nikoga ne potvrđuje i njega niko ne potvrđuje (čl. 15).
+      maloletan: true,
       verified: true,
       verifiedAt: true,
       location: true,
@@ -175,6 +178,7 @@ export async function GET(
   return NextResponse.json({
     id: korisnik.id,
     pseudonim: korisnik.pseudonim,
+    maloletan: korisnik.maloletan,
     verified: korisnik.verified,
     verifiedAt: korisnik.verifiedAt,
     status: korisnik.status,

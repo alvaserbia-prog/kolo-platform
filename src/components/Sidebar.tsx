@@ -302,7 +302,10 @@ function SidebarContent({
         ))}
       </nav>
       <div className="px-3 pb-3 pt-2 border-t border-white/10 space-y-2">
-        {!verified && (
+        {/* 🔴 Dete NIKAD nije `verified` (Modul Deca, čl. 15), pa mu se ovaj poziv
+            prikazivao uvek i gurao ga na potvrde odraslih — a on nikoga ne potvrđuje
+            niti se potvrđuje. Njegovo mesto u mreži su prijatelji. */}
+        {!verified && !maloletan && (
           <Link
             href="/verifikacija"
             onClick={onLinkClick}

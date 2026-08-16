@@ -40,6 +40,7 @@ export default async function VerifikacijaPage() {
     where: { id: session.user.id },
     select: {
       pseudonim: true,
+      maloletan: true,
       tipKorisnika: true,
       jeOsnivac: true,
       indeksStvarnosti: true,
@@ -64,6 +65,11 @@ export default async function VerifikacijaPage() {
   });
 
   if (!user) redirect("/login");
+  // 🔴 Potvrde ne postoje kod dece (Modul Deca, čl. 15): maloletni korisnik nema
+  // indeks stvarnosti, nikoga ne potvrđuje i njega niko ne potvrđuje. Njegovo mesto
+  // u mreži su prijatelji, pa se sa ove stranice šalje tamo — a ne da mu se pokaže
+  // ekran čiji nijedan potez ne važi za njega.
+  if (user.maloletan) redirect("/prijatelji");
 
   const kapacitet = izracunajKapacitet(user.tipKorisnika, user.indeksStvarnosti);
   const prikaz = formatIndeksZaPrikaz(

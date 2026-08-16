@@ -35,6 +35,8 @@ interface Oglas {
 interface ProfilData {
   id: string;
   pseudonim: string;
+  /** Maloletni korisnik (Modul Deca) — bez indeksa i bez lanca potvrda. */
+  maloletan?: boolean;
   verified: boolean;
   verifiedAt: string | null;
   status: string;
@@ -287,15 +289,21 @@ export default function JavniProfilPage() {
             </div>
           </div>
 
-          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno) */}
-          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
+          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno).
+              Kod maloletnog korisnika ga nema — nema ni indeks ni lanac potvrda
+              (Modul Deca, čl. 15), pa bi kartica prikazivala nulu bez značenja. */}
+          {!profil.maloletan && (
+            <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
+          )}
         </div>
       </div>
 
       {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
-        {/* LEVO — lanac verifikacija (mini stablo) */}
-        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
+        {/* LEVO — lanac potvrda (mini stablo). Dete u njemu ne postoji. */}
+        {!profil.maloletan && (
+          <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
+        )}
 
         {/* DESNO — transakcije (fiksna visina + skrol) */}
         <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[460px]">
