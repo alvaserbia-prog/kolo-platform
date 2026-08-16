@@ -91,13 +91,13 @@ pojedinačne radnje maloletnog korisnika.
 
 ### Član 9
 
-Roditelj nema neposredan uvid u nalog maloletnog korisnika.
+Roditelj iz svog naloga otvara profil svog deteta. Profil sadrži zapise o
+razmenama, objavljene oglase i razgovore koje maloletni korisnik vodi.
 
-Roditelj iz svog naloga otvara profil svog deteta. Profil se prikazuje na isti
-način kao svakom drugom korisniku i sadrži zapise o razmenama i objavljene
-oglase.
+Roditelj razgovore samo čita. Roditelj ne učestvuje u razgovoru maloletnog
+korisnika, jer je druga strana razgovora dete drugog roditelja.
 
-Roditelj nema uvid u komunikaciju maloletnog korisnika.
+Maloletni korisnik se obaveštava da njegov roditelj vidi njegove razgovore.
 
 ### Član 10
 

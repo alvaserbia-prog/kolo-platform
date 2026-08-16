@@ -2856,7 +2856,11 @@
     "ako_ne_znas": "If you do not know, press neither button. But be aware: if you do not respond in time, your confirmation of that person's reality will be annulled, the POEN recorded on account of it withdrawn, and your slot freed.",
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
-    "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator."
+    "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator.",
+    "razgovori_naslov": "Conversations",
+    "razgovori_opis": "You see what the child writes and who writes to them. You cannot join the conversation — the other side is someone else's child.",
+    "razgovori_prazno": "No conversations.",
+    "uvid_upozorenje": "Your parent can see your conversations."
   },
   "decjaPocetna": {
     "naslov": "Children's Marketplace",

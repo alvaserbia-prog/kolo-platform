@@ -2856,7 +2856,11 @@
     "ako_ne_znas": "Ako nemaš saznanja o tome, nemoj pritiskati nijedan gumb. Ali znaj: ako se ne izjasniš u roku, tvoja potvrda stvarnosti te osobe bit će poništena, POEN evidentiran povodom nje ukinut, a mjesto ti se oslobađa.",
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
-    "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom."
+    "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom.",
+    "razgovori_naslov": "Razgovori",
+    "razgovori_opis": "Vidiš što dijete piše i tko mu piše. Ne možeš se ubaciti u razgovor — s druge strane je tuđe dijete.",
+    "razgovori_prazno": "Nema razgovora.",
+    "uvid_upozorenje": "Tvoj roditelj vidi tvoje razgovore."
   },
   "decjaPocetna": {
     "naslov": "Dječja tržnica",

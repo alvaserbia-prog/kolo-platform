@@ -24,6 +24,29 @@ type Poruka = {
 };
 
 /**
+ * Boje dečjeg prostora.
+ *
+ * Zelena je boja sistema odraslih; ovde je namerno nema kao vodeće. Dete je svoj
+ * ekran nacrtalo bojicama, sa naslovom u kome je svako slovo druge boje — paleta
+ * je odatle, ne iz teme platforme. Vrednosti su upisane doslovno jer žive samo na
+ * ovom ekranu i nemaju šta da traže u temi celog sajta.
+ */
+const BOJE = ["#E4572E", "#F4A259", "#F2C14E", "#8FC93A", "#4CB5AE", "#3D7EA6", "#8E6FBF", "#E56399"];
+
+/** Naslov u kome svako slovo ima svoju boju — kao na crtežu. */
+function SareniNaslov({ tekst }: { tekst: string }) {
+  return (
+    <h1 className="text-center text-4xl font-extrabold tracking-tight sm:text-5xl">
+      {[...tekst].map((slovo, i) => (
+        <span key={i} style={{ color: BOJE[i % BOJE.length] }}>
+          {slovo}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
+/**
  * Dečja početna — sve na JEDNOM ekranu, po skici koju je nacrtalo dete.
  *
  * 🔴 Radnje stoje na stranici, ne u meniju. Za sedmogodišnjaka meni iza hamburgera
@@ -48,6 +71,7 @@ export default function DecjaPocetna({
   chatInicijalno: Poruka[];
 }) {
   const t = useTranslations("decjaPocetna");
+  const tDeca = useTranslations("deca");
   const [pretraga, setPretraga] = useState("");
 
   const vidljivi = pretraga.trim()
@@ -58,33 +82,41 @@ export default function DecjaPocetna({
 
   return (
     <div className="mx-auto max-w-4xl space-y-5">
-      <h1 className="text-center text-3xl font-bold text-kolo-green-800 sm:text-4xl">
-        {t("naslov")}
-      </h1>
+      <SareniNaslov tekst={t("naslov")} />
 
       {/* POEN kao veliki broj — ne iza klika. Dete pita „koliko imam", a ne „gde je
           moj zapis"; odgovor mora da stoji na ekranu. */}
-      <section className="rounded-2xl border border-kolo-border bg-white p-6 text-center shadow-sm">
+      <section
+        className="rounded-3xl bg-white p-6 text-center shadow-sm"
+        style={{ border: `4px solid ${BOJE[2]}` }}
+      >
         <p className="text-sm text-kolo-muted">{t("pozdrav", { pseudonim })}</p>
-        <p className="mt-1 text-5xl font-bold tabular-nums text-kolo-text">
+        <p className="mt-1 text-6xl font-extrabold tabular-nums" style={{ color: BOJE[0] }}>
           {poen.toLocaleString("sr-RS")}
         </p>
-        <p className="text-sm font-medium text-kolo-muted">POEN</p>
+        <p className="text-sm font-bold" style={{ color: BOJE[5] }}>POEN</p>
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Dugme href="/pijaca/novi-oglas" naslov={t("dugme_nov_oglas")} istaknuto />
-        <Dugme href="/profil/oglasi" naslov={t("dugme_moji_oglasi")} broj={mojihOglasa} />
-        <Dugme href="/prijatelji" naslov={t("dugme_prijatelji")} broj={brojPrijatelja} />
-        <Dugme href="/poruke" naslov={t("dugme_poruke")} />
+        <Dugme href="/pijaca/novi-oglas" naslov={t("dugme_nov_oglas")} boja={BOJE[0]} />
+        <Dugme href="/profil/oglasi" naslov={t("dugme_moji_oglasi")} broj={mojihOglasa} boja={BOJE[3]} />
+        <Dugme href="/prijatelji" naslov={t("dugme_prijatelji")} broj={brojPrijatelja} boja={BOJE[6]} />
+        <Dugme href="/poruke" naslov={t("dugme_poruke")} boja={BOJE[4]} />
       </div>
+
+      {/* Obaveštenje stoji uz same poruke, ne u sitnim slovima: roditelj čita
+          razgovore (čl. 9), pa dete to mora znati pre nego što napiše prvu reč. */}
+      <p className="rounded-xl border border-kolo-border bg-kolo-bg px-4 py-2 text-center text-xs text-kolo-muted">
+        {tDeca("uvid_upozorenje")}
+      </p>
 
       <div>
         <input
           value={pretraga}
           onChange={(e) => setPretraga(e.target.value)}
           placeholder={t("pretraga")}
-          className="w-full rounded-2xl border border-kolo-border bg-white px-5 py-3 text-sm outline-none focus:border-kolo-green-700"
+          style={{ borderColor: BOJE[4] }}
+          className="w-full rounded-full border-[3px] bg-white px-5 py-3 text-sm outline-none"
         />
       </div>
 
@@ -96,11 +128,12 @@ export default function DecjaPocetna({
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {vidljivi.map((o) => (
+            {vidljivi.map((o, i) => (
               <Link
                 key={o.id}
                 href={`/pijaca/${o.id}`}
-                className="overflow-hidden rounded-2xl border border-kolo-border bg-white shadow-sm transition hover:shadow"
+                style={{ border: `3px solid ${BOJE[i % BOJE.length]}` }}
+                className="overflow-hidden rounded-3xl bg-white shadow-sm transition hover:shadow-md"
               >
                 <div className="flex h-40 items-center justify-center bg-kolo-bg">
                   {o.imaSliku ? (
@@ -141,28 +174,21 @@ function Dugme({
   href,
   naslov,
   broj,
-  istaknuto,
+  boja,
 }: {
   href: string;
   naslov: string;
   broj?: number;
-  istaknuto?: boolean;
+  boja: string;
 }) {
   return (
     <Link
       href={href}
-      className={`flex flex-col items-center justify-center gap-1 rounded-2xl px-3 py-4 text-center text-sm font-semibold shadow-sm transition ${
-        istaknuto
-          ? "bg-kolo-green-700 text-white hover:bg-kolo-green-800"
-          : "border border-kolo-border bg-white text-kolo-text hover:bg-kolo-bg"
-      }`}
+      style={{ backgroundColor: boja }}
+      className="flex flex-col items-center justify-center gap-1 rounded-3xl px-3 py-5 text-center text-sm font-bold text-white shadow-sm transition hover:brightness-110 active:scale-[0.98]"
     >
       <span>{naslov}</span>
-      {broj !== undefined && (
-        <span className={`text-lg font-bold tabular-nums ${istaknuto ? "" : "text-kolo-green-700"}`}>
-          {broj}
-        </span>
-      )}
+      {broj !== undefined && <span className="text-2xl font-extrabold tabular-nums">{broj}</span>}
     </Link>
   );
 }
@@ -235,8 +261,9 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
             <span className="text-xs text-kolo-muted">{p.pseudonim}</span>
             <p
               className={`inline-block max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
-                p.userId === mojId ? "bg-kolo-green-700 text-white" : "bg-white text-kolo-text"
+                p.userId === mojId ? "text-white" : "bg-white text-kolo-text"
               }`}
+              style={p.userId === mojId ? { backgroundColor: BOJE[6] } : undefined}
             >
               {p.content}
             </p>
@@ -258,7 +285,8 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
         <button
           type="submit"
           disabled={salje || !tekst.trim()}
-          className="shrink-0 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-50"
+          style={{ backgroundColor: BOJE[0] }}
+          className="shrink-0 rounded-full px-5 py-2 text-sm font-bold text-white transition hover:brightness-110 disabled:opacity-50"
         >
           {t("posalji")}
         </button>

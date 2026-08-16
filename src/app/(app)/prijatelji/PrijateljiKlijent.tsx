@@ -11,6 +11,9 @@ const QRCodeSVG = dynamic(() => import("qrcode.react").then((m) => m.QRCodeSVG),
 
 type Prijatelj = { id: string; pseudonim: string; avatar: string | null };
 
+/** Ista paleta kao na dečjoj početnoj — dečji prostor ima svoje boje, ne zelenu. */
+const BOJE = ["#E4572E", "#F4A259", "#F2C14E", "#8FC93A", "#4CB5AE", "#3D7EA6", "#8E6FBF", "#E56399"];
+
 export default function PrijateljiKlijent() {
   const t = useTranslations("prijatelji");
   const [broj, setBroj] = useState<number | null>(null);
@@ -70,9 +73,14 @@ export default function PrijateljiKlijent() {
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       {/* Umesto indeksa stvarnosti — broj prijatelja. */}
-      <section className="rounded-2xl border border-kolo-border bg-white p-6 text-center shadow-sm">
-        <h1 className="text-lg font-semibold text-kolo-text">{t("naslov")}</h1>
-        <p className="mt-2 text-5xl font-bold tabular-nums text-kolo-text">{broj ?? "–"}</p>
+      <section
+        className="rounded-3xl bg-white p-6 text-center shadow-sm"
+        style={{ border: `4px solid ${BOJE[6]}` }}
+      >
+        <h1 className="text-lg font-bold" style={{ color: BOJE[5] }}>{t("naslov")}</h1>
+        <p className="mt-2 text-6xl font-extrabold tabular-nums" style={{ color: BOJE[6] }}>
+          {broj ?? "–"}
+        </p>
         <p className="text-sm text-kolo-muted">{t("brojac_opis")}</p>
       </section>
 
@@ -86,8 +94,11 @@ export default function PrijateljiKlijent() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {/* Moj kod. 🔴 Ispod QR-a NEMA broja: broj se izdiktira telefonom, a QR se
             mora pokazati — to je jedino što traži da dvoje budu jedno pored drugog. */}
-        <section className="rounded-2xl border border-kolo-border bg-white p-6 text-center shadow-sm">
-          <h2 className="font-semibold text-kolo-text">{t("moj_kod")}</h2>
+        <section
+          className="rounded-3xl bg-white p-6 text-center shadow-sm"
+          style={{ border: `3px solid ${BOJE[3]}` }}
+        >
+          <h2 className="font-bold" style={{ color: BOJE[3] }}>{t("moj_kod")}</h2>
           {kod ? (
             <>
               <div className="mt-3 flex justify-center">
@@ -99,20 +110,25 @@ export default function PrijateljiKlijent() {
             <button
               type="button"
               onClick={pokaziKod}
-              className="mt-3 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800"
+              style={{ backgroundColor: BOJE[3] }}
+              className="mt-3 rounded-full px-5 py-2 text-sm font-bold text-white transition hover:brightness-110"
             >
               {t("pokazi_kod")}
             </button>
           )}
         </section>
 
-        <section className="rounded-2xl border border-kolo-border bg-white p-6 text-center shadow-sm">
-          <h2 className="font-semibold text-kolo-text">{t("skeniraj")}</h2>
+        <section
+          className="rounded-3xl bg-white p-6 text-center shadow-sm"
+          style={{ border: `3px solid ${BOJE[4]}` }}
+        >
+          <h2 className="font-bold" style={{ color: BOJE[4] }}>{t("skeniraj")}</h2>
           <p className="mt-1 text-xs text-kolo-muted">{t("skeniraj_opis")}</p>
           <button
             type="button"
             onClick={() => setSkenira(true)}
-            className="mt-3 rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg"
+            style={{ backgroundColor: BOJE[4] }}
+            className="mt-3 rounded-full px-5 py-2 text-sm font-bold text-white transition hover:brightness-110"
           >
             {t("dugme_skeniraj")}
           </button>
@@ -127,16 +143,20 @@ export default function PrijateljiKlijent() {
         />
       )}
 
-      <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
-        <h2 className="font-semibold text-kolo-text">{t("spisak_naslov")}</h2>
+      <section
+        className="rounded-3xl bg-white p-6 shadow-sm"
+        style={{ border: `3px solid ${BOJE[1]}` }}
+      >
+        <h2 className="font-bold" style={{ color: BOJE[1] }}>{t("spisak_naslov")}</h2>
         {spisak.length === 0 ? (
           <p className="mt-2 text-sm text-kolo-muted">{t("spisak_prazno")}</p>
         ) : (
           <ul className="mt-3 flex flex-wrap gap-2">
-            {spisak.map((p) => (
+            {spisak.map((p, i) => (
               <li
                 key={p.id}
-                className="rounded-full border border-kolo-border px-3 py-1.5 text-sm text-kolo-text"
+                style={{ backgroundColor: BOJE[i % BOJE.length] }}
+                className="rounded-full px-3 py-1.5 text-sm font-bold text-white"
               >
                 {p.pseudonim}
               </li>

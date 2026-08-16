@@ -345,6 +345,54 @@ export async function ukloniOglasDeteta(roditeljId: string, deteId: string, ogla
   return { ok: true };
 }
 
+/**
+ * Razgovori deteta — roditelj ih čita (čl. 9).
+ *
+ * 🔴 Roditelj SAMO ČITA. Ne piše u detetov razgovor, i to nije propust: sa druge
+ * strane je drugo dete, a odnos deteta i punoletnog korisnika otvara isključivo
+ * prekidač iz čl. 10, koji daje TUĐI roditelj. Kad bi roditelj mogao da se ubaci u
+ * razgovor, obraćao bi se tuđem detetu bez saglasnosti njegovog roditelja.
+ *
+ * 🟡 Uvid dodiruje i drugu stranu: poruke drugog deteta čita neko ko u razgovoru
+ * ne učestvuje. Zato deca u svom prostoru moraju biti obaveštena da roditelj vidi
+ * razgovore — obaveštenje stoji uz same poruke, ne u sitnim slovima.
+ */
+export async function dohvatiRazgovoreDeteta(roditeljId: string, deteId: string) {
+  const dete = await mojeDeteIliBaci(roditeljId, deteId);
+
+  const konverzacije = await prisma.konverzacija.findMany({
+    where: { OR: [{ user1Id: dete.id }, { user2Id: dete.id }] },
+    orderBy: { lastMessageAt: "desc" },
+    take: 30,
+    select: {
+      id: true,
+      lastMessageAt: true,
+      user1: { select: { id: true, pseudonim: true } },
+      user2: { select: { id: true, pseudonim: true } },
+      poruke: {
+        orderBy: { createdAt: "asc" },
+        take: 100,
+        select: { id: true, tekst: true, posiljacId: true, createdAt: true },
+      },
+    },
+  });
+
+  return konverzacije.map((k) => {
+    const drugi = k.user1.id === dete.id ? k.user2 : k.user1;
+    return {
+      id: k.id,
+      drugi: drugi.pseudonim,
+      poslednja: k.lastMessageAt.toISOString(),
+      poruke: k.poruke.map((p) => ({
+        id: p.id,
+        tekst: p.tekst,
+        odDeteta: p.posiljacId === dete.id,
+        createdAt: p.createdAt.toISOString(),
+      })),
+    };
+  });
+}
+
 // ── Brisanje naloga (čl. 17) ─────────────────────────────────────────────────
 
 /**

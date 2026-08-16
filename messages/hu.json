@@ -2856,7 +2856,11 @@
     "ako_ne_znas": "Ha nincs erről tudomásod, egyik gombot se nyomd meg. De tudd: ha nem nyilatkozol határidőn belül, az adott személy valóságáról adott megerősítésed megsemmisül, az emiatt nyilvántartott POEN visszavonásra kerül, a helyed pedig felszabadul.",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
-    "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval."
+    "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval.",
+    "razgovori_naslov": "Beszélgetések",
+    "razgovori_opis": "Látod, mit ír a gyermek és ki ír neki. A beszélgetésbe nem szólhatsz bele — a másik oldalon más gyermeke van.",
+    "razgovori_prazno": "Nincs beszélgetés.",
+    "uvid_upozorenje": "A szülőd látja a beszélgetéseidet."
   },
   "decjaPocetna": {
     "naslov": "Gyermekpiac",

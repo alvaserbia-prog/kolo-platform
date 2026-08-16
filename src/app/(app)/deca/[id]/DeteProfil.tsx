@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -156,8 +156,93 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
         <p className="mt-3 text-xs text-kolo-muted">{t("oglasi_napomena")}</p>
       </section>
 
+      <Razgovori deteId={dete.id} />
+
       <BrisanjeNaloga deteId={dete.id} pseudonim={dete.pseudonim} onGotovo={() => router.push("/profil")} />
     </div>
+  );
+}
+
+type Razgovor = {
+  id: string;
+  drugi: string;
+  poslednja: string;
+  poruke: { id: string; tekst: string; odDeteta: boolean; createdAt: string }[];
+};
+
+/**
+ * Razgovori deteta (čl. 9) — roditelj ih ČITA.
+ *
+ * 🔴 Nema polja za pisanje. Sa druge strane razgovora je tuđe dete, a odnos deteta
+ * i punoletnog korisnika otvara prekidač koji daje NJEGOV roditelj (čl. 10) — pa bi
+ * ubacivanje roditelja u razgovor obilazilo tuđu saglasnost.
+ */
+function Razgovori({ deteId }: { deteId: string }) {
+  const t = useTranslations("deca");
+  const [razgovori, setRazgovori] = useState<Razgovor[] | null>(null);
+  const [otvoren, setOtvoren] = useState<string | null>(null);
+  const [greska, setGreska] = useState<string | null>(null);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const res = await fetch(`/api/deca/${deteId}/razgovori`, { cache: "no-store" });
+        if (!res.ok) throw new Error();
+        setRazgovori((await res.json()).razgovori);
+      } catch {
+        setGreska(t("greska_ucitavanje"));
+      }
+    })();
+  }, [deteId, t]);
+
+  return (
+    <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <h2 className="font-semibold text-kolo-text">{t("razgovori_naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("razgovori_opis")}</p>
+
+      {greska && <p className="mt-2 text-sm text-kolo-danger">{greska}</p>}
+      {razgovori === null && !greska && (
+        <p className="mt-2 text-sm text-kolo-muted">{t("ucitavanje")}</p>
+      )}
+      {razgovori?.length === 0 && (
+        <p className="mt-2 text-sm text-kolo-muted">{t("razgovori_prazno")}</p>
+      )}
+
+      <ul className="mt-3 space-y-2">
+        {razgovori?.map((r) => (
+          <li key={r.id} className="rounded-xl border border-kolo-border">
+            <button
+              type="button"
+              onClick={() => setOtvoren((o) => (o === r.id ? null : r.id))}
+              className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
+            >
+              <span className="min-w-0 truncate text-sm font-medium text-kolo-text">{r.drugi}</span>
+              <span className="shrink-0 text-xs text-kolo-muted">
+                {new Date(r.poslednja).toLocaleDateString("sr-RS")}
+              </span>
+            </button>
+            {otvoren === r.id && (
+              <div className="max-h-64 space-y-2 overflow-y-auto border-t border-kolo-border bg-kolo-bg p-3">
+                {r.poruke.length === 0 && (
+                  <p className="text-center text-xs text-kolo-muted">{t("razgovori_prazno")}</p>
+                )}
+                {r.poruke.map((p) => (
+                  <div key={p.id} className={p.odDeteta ? "text-right" : ""}>
+                    <p
+                      className={`inline-block max-w-[85%] rounded-2xl px-3 py-1.5 text-sm ${
+                        p.odDeteta ? "bg-kolo-green-700 text-white" : "bg-white text-kolo-text"
+                      }`}
+                    >
+                      {p.tekst}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
