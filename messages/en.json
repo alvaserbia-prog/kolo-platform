@@ -116,7 +116,9 @@
     "greska_oauth": "Google sign-in didn't complete. Please try again.",
     "zaboravljena_lozinka": "Forgot password?",
     "prikazi_lozinku": "Show password",
-    "sakrij_lozinku": "Hide password"
+    "sakrij_lozinku": "Hide password",
+    "email_ili_pseudonim": "Email or pseudonym",
+    "deca_pseudonimom": "Children sign in with their pseudonym and the password their parent gave them — no e-mail."
   },
   "zaboravljenaLozinka": {
     "naslov": "Forgot Password",
@@ -2823,7 +2825,7 @@
     "polje_datum": "Date of birth",
     "polje_datum_upozorenje": "The date cannot be changed once the account is open.",
     "polje_lozinka": "Password",
-    "polje_lozinka_opis": "You set it and hand it to the child. A child has no e-mail, so the password is changed through you.",
+    "polje_lozinka_opis": "The child signs in with the PSEUDONYM and this password, on the same page as everyone else. There is no e-mail.",
     "greska_slanje": "That did not work. Try again.",
     "greska_ucitavanje": "Loading failed.",
     "status_dete": "child",

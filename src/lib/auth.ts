@@ -85,14 +85,29 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const emailNorm = normalizujEmail(credentials.email);
-        // Anti brute-force / credential-stuffing: 10 pokušaja po nalogu u 15 min.
-        if (!rateLimit(`login:${emailNorm}`, 10, 15 * 60 * 1000).ok) return null;
+        // Polje se i dalje zove `email`, ali prima DVE stvari (ime ključa je deo
+        // NextAuth ugovora i ne menja se).
+        //
+        // 🔴 Modul Deca: maloletni korisnik NEMA imejl — nalog mu otvara roditelj i
+        // predaje mu lozinku (Modul Deca, čl. 4). Bez ovog puta njegov nalog postoji
+        // a ne može da se otvori: prijava je do sada tražila isključivo imejl.
+        //
+        // Bez znaka „@" traži se PSEUDONIM, i to samo za nalog koji imejl nema.
+        // Punoletni se i dalje prijavljuju imejlom — pseudonimi su javni, pa bi
+        // prijava po pseudonimu za sve naloge napadaču dala pola podatka besplatno.
+        const unos = credentials.email.trim();
+        const jeImejl = unos.includes("@");
+        const kljuc = jeImejl ? normalizujEmail(unos) : unos.toLowerCase();
 
-        const user = await prisma.user.findUnique({
-          where: { email: emailNorm },
-        });
+        // Anti brute-force / credential-stuffing: 10 pokušaja po nalogu u 15 min.
+        if (!rateLimit(`login:${kljuc}`, 10, 15 * 60 * 1000).ok) return null;
+
+        const user = jeImejl
+          ? await prisma.user.findUnique({ where: { email: kljuc } })
+          : await prisma.user.findUnique({ where: { pseudonimLower: kljuc } });
         if (!user || !user.passwordHash) return null;
+        // Nalog koji ima imejl se pseudonimom ne otvara.
+        if (!jeImejl && user.email) return null;
 
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);
         if (!valid) return null;

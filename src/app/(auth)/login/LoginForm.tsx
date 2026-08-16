@@ -65,7 +65,9 @@ export default function LoginForm() {
     setPrikaziRegistraciju(false);
 
     if (!email.trim()) { setError(t("greska_email_obavezan")); return; }
-    if (!email.includes("@")) { setError(t("greska_email_neispravan")); return; }
+    // Bez znaka „@" unos se čita kao PSEUDONIM — tako se prijavljuje maloletni
+    // korisnik, koji imejl nema (Modul Deca, čl. 4). Zato ovde više ne stoji
+    // uslov da unos mora biti imejl; oblik pseudonima proverava server.
     if (!password) { setError(t("greska_lozinka_obavezna")); return; }
 
     setLoading(true);
@@ -135,17 +137,19 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           <div>
             <label className="block text-sm font-medium text-kolo-text mb-1.5">
-              {t("email")}
+              {t("email_ili_pseudonim")}
             </label>
             <input
-              type="email"
-              autoComplete="email"
+              type="text"
+              inputMode="email"
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
               placeholder={t("placeholder_email")}
               suppressHydrationWarning
             />
+            <p className="mt-1 text-xs text-kolo-muted">{t("deca_pseudonimom")}</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-kolo-text mb-1.5">

@@ -109,7 +109,9 @@
     "zaboravljena_lozinka": "Elfelejtett jelszó?",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
-    "greska_registruj_cta": "Nincs még fiókja? Regisztráljon"
+    "greska_registruj_cta": "Nincs még fiókja? Regisztráljon",
+    "email_ili_pseudonim": "E-mail vagy álnév",
+    "deca_pseudonimom": "A gyermekek álnévvel és a szülőtől kapott jelszóval lépnek be — e-mail nélkül."
   },
   "zaboravljenaLozinka": {
     "naslov": "Elfelejtett jelszó",
@@ -2823,7 +2825,7 @@
     "polje_datum": "Születési dátum",
     "polje_datum_upozorenje": "A dátum a fiók megnyitása után már nem módosítható.",
     "polje_lozinka": "Jelszó",
-    "polje_lozinka_opis": "Te állítod be és adod át a gyermeknek. A gyermeknek nincs e-mail címe, ezért a jelszó rajtad keresztül módosul.",
+    "polje_lozinka_opis": "A gyermek az ÁLNEVÉVEL és ezzel a jelszóval lép be, ugyanazon az oldalon, mint mindenki. E-mail címe nincs.",
     "greska_slanje": "Nem sikerült. Próbáld újra.",
     "greska_ucitavanje": "A betöltés nem sikerült.",
     "status_dete": "gyermek",

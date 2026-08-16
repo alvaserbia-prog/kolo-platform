@@ -116,7 +116,9 @@
     "greska_oauth": "Prijava putem Googlea nije uspjela. Pokušajte ponovno.",
     "zaboravljena_lozinka": "Zaboravljena lozinka?",
     "prikazi_lozinku": "Prikaži lozinku",
-    "sakrij_lozinku": "Sakrij lozinku"
+    "sakrij_lozinku": "Sakrij lozinku",
+    "email_ili_pseudonim": "Email ili pseudonim",
+    "deca_pseudonimom": "Djeca se prijavljuju pseudonimom i lozinkom koju im je dao roditelj — bez e-pošte."
   },
   "zaboravljenaLozinka": {
     "naslov": "Zaboravljena lozinka",
@@ -2823,7 +2825,7 @@
     "polje_datum": "Datum rođenja",
     "polje_datum_upozorenje": "Datum se nakon otvaranja računa više ne mijenja.",
     "polje_lozinka": "Lozinka",
-    "polje_lozinka_opis": "Ti je postavljaš i predaješ djetetu. Dijete nema e-poštu, pa se lozinka mijenja preko tebe.",
+    "polje_lozinka_opis": "Dijete se prijavljuje PSEUDONIMOM i ovom lozinkom, na istoj stranici kao svi. E-poštu nema.",
     "greska_slanje": "Nije uspjelo. Pokušaj ponovno.",
     "greska_ucitavanje": "Učitavanje nije uspjelo.",
     "status_dete": "dijete",
