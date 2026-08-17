@@ -96,13 +96,16 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
   }
 
   // Reset obara sve potvrde stvarnosti naloga. Kod roditelja bi to njegovo dete
-  // gurnulo u mirovanje (Modul Deca, čl. 16), a postupak potvrde iz čl. 6 ostao bi
-  // da visi nad potvrđivačima koji sa detetom nemaju veze. Nalog deteta se briše
-  // preko roditeljskog ekrana, ne ovim alatom.
-  const brojDece = await prisma.user.count({ where: { roditeljId: userId, deaktiviranAt: null } });
+  // vratilo iz stanja `AKTIVNO` u `POVEZANO` (Modul Deca, čl. 4c) — prestao bi upis
+  // POEN-a po prijateljstvima — a postupak potvrde iz čl. 6 ostao bi da visi nad
+  // potvrđivačima koji sa detetom nemaju veze. Nalog deteta se briše preko
+  // roditeljskog ekrana, ne ovim alatom.
+  const brojDece = await prisma.roditeljstvo.count({
+    where: { roditeljId: userId, dete: { deaktiviranAt: null } },
+  });
   if (brojDece > 0) {
     throw new ResetGreska(
-      "Nalog ima povezano dete — reset bi mu oborio potvrde i gurnuo detetov nalog u mirovanje.",
+      "Nalog ima povezano dete — reset bi mu oborio potvrde i zaustavio upis POEN-a na detetovom nalogu.",
       400,
     );
   }

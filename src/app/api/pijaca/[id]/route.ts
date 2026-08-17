@@ -7,7 +7,7 @@ import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
-import { smeDaVidiOglas, ucitajUcesnika } from "@/lib/protokol/deca";
+import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
 import { jeAdmin } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
@@ -28,16 +28,7 @@ export async function GET(
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
     include: {
-      seller: {
-        select: {
-          pseudonim: true,
-          verified: true,
-          id: true,
-          maloletan: true,
-          dozvolaOdrasli: true,
-          roditeljId: true,
-        },
-      },
+      seller: { select: { ...IZBOR_UCESNIKA, pseudonim: true, verified: true } },
     },
   });
   if (!listing) return await greska("Oglas nije pronađen.", 404);
@@ -49,7 +40,7 @@ export async function GET(
   const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
   const smem = smeDaVidiOglas(
     posmatrac ? { ...posmatrac, admin: jeAdmin(session?.user) } : null,
-    listing.seller,
+    ucesnikIzReda(listing.seller),
   );
   if (!smem) return await greska("Oglas nije pronađen.", 404);
 
@@ -62,7 +53,7 @@ export async function GET(
   return NextResponse.json({
     listing: {
       ...javno,
-      // Prodavac se sastavlja izričito: `...listing` bi prosuo `roditeljId` i stanje
+      // Prodavac se sastavlja izričito: `...listing` bi prosuo roditelje i stanje
       // prekidača iz čl. 10, koji nikoga sa strane ne zanimaju i ne smeju napolje.
       seller: {
         pseudonim: listing.seller.pseudonim,

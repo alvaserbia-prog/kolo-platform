@@ -5,7 +5,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiPush } from "@/lib/push";
 import { posaljiEmailKorisniku } from "@/lib/email";
-import { smeDaKomunicira, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
+import { smeDaKomunicira, ucitajUcesnika } from "@/lib/protokol/deca";
+import { obavesti } from "@/lib/notifikacije";
 
 async function getKonv(konvId: string, meId: string) {
   const k = await prisma.konverzacija.findUnique({ where: { id: konvId } });
@@ -27,9 +28,20 @@ export async function GET(
 
   const drugiId = k.user1Id === session.user.id ? k.user2Id : k.user1Id;
   const [drugiUser, jaUser] = await Promise.all([
-    prisma.user.findUnique({ where: { id: drugiId }, select: { id: true, pseudonim: true, avatar: true } }),
-    prisma.user.findUnique({ where: { id: session.user.id }, select: { avatar: true } }),
+    prisma.user.findUnique({
+      where: { id: drugiId },
+      select: { id: true, pseudonim: true, avatar: true, maloletan: true },
+    }),
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { avatar: true, maloletan: true },
+    }),
   ]);
+
+  // Modul Deca, čl. 9 st. 3: kad punoletni korisnik piše detetu, u razgovoru mu
+  // stoji vidljiv natpis da razgovor čita roditelj. To je i odvraćanje i poštenje —
+  // ko piše detetu, treba da zna pred kim piše.
+  const roditeljCita = (drugiUser?.maloletan ?? false) && !(jaUser?.maloletan ?? false);
 
   const poruke = await prisma.poruka.findMany({
     where: { konverzacijaId: konvId },
@@ -65,6 +77,7 @@ export async function GET(
 
   return NextResponse.json({
     drugiUser,
+    roditeljCita,
     povod,
     mojAvatar: jaUser?.avatar ?? null,
     mojPseudonim: session.user.pseudonim,
@@ -106,12 +119,7 @@ export async function POST(
   ]);
   if (!jaUcesnik || !drugiUcesnik) return await greska("Konverzacija nije pronađena.", 404);
   if (jaUcesnik.maloletan || drugiUcesnik.maloletan) {
-    if ((await uMirovanju(session.user.id)) || (await uMirovanju(drugiUcesnikId))) {
-      return await greska(
-        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
-        403,
-      );
-    }
+    // `smeDaKomunicira` sam odbija nalog koji još čeka roditelja (čl. 4c).
     const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
   }
@@ -184,10 +192,51 @@ export async function POST(
     }
   })();
 
+  // Modul Deca, čl. 9 st. 4: roditelj se obaveštava SAMO pri prvom javljanju u
+  // novom razgovoru sa punoletnim licem. Svaka poruka bi značila da roditelj prati
+  // ritam prepiske, a on je ni ne čita — ono što mu treba je da zna da je razgovor
+  // uopšte počeo. Ne baca i ne blokira odgovor.
+  void obavestiRoditeljeONovomRazgovoru(konvId, session.user.id, jaUcesnik, drugiUcesnik);
+
   return NextResponse.json({
     id: poruka.id,
     tekst: poruka.tekst,
     moja: true,
     createdAt: poruka.createdAt.toISOString(),
   });
+}
+
+/** Prvo javljanje punoletnog lica u razgovoru sa detetom — roditeljima ide zvonce. */
+async function obavestiRoditeljeONovomRazgovoru(
+  konvId: string,
+  posiljacId: string,
+  ja: { maloletan: boolean; roditeljIds: string[] },
+  drugi: { id: string; maloletan: boolean; roditeljIds: string[] },
+) {
+  try {
+    if (ja.maloletan === drugi.maloletan) return;
+    const dete = ja.maloletan ? { id: posiljacId, roditeljIds: ja.roditeljIds } : drugi;
+    const brojPoruka = await prisma.poruka.count({ where: { konverzacijaId: konvId } });
+    if (brojPoruka !== 1) return;
+
+    const [deteUser, drugiUser] = await Promise.all([
+      prisma.user.findUnique({ where: { id: dete.id }, select: { pseudonim: true } }),
+      prisma.user.findUnique({
+        where: { id: dete.id === posiljacId ? drugi.id : posiljacId },
+        select: { pseudonim: true },
+      }),
+    ]);
+    for (const roditeljId of dete.roditeljIds) {
+      await obavesti(roditeljId, {
+        tip: "dete_razgovor_odrasli",
+        kljuc: "notifikacije.dete_razgovor_odrasli",
+        parametri: { dete: deteUser?.pseudonim ?? "", pseudonim: drugiUser?.pseudonim ?? "" },
+        naslov: "Nov razgovor tvog deteta sa punoletnim korisnikom",
+        tekst: `${deteUser?.pseudonim ?? "Tvoje dete"} vodi razgovor sa korisnikom ${drugiUser?.pseudonim ?? "?"}. Razgovor možeš da pročitaš na profilu deteta.`,
+        link: `/deca/${dete.id}`,
+      }).catch(() => {});
+    }
+  } catch (e) {
+    console.error("[poruke] Obaveštenje roditelju nije poslato:", e);
+  }
 }

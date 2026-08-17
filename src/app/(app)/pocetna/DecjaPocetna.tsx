@@ -58,6 +58,9 @@ export default function DecjaPocetna({
   mojId,
   poen,
   brojPrijatelja,
+  poenNaCekanju,
+  stanje,
+  kod,
   mojihOglasa,
   oglasi,
   chatInicijalno,
@@ -66,6 +69,10 @@ export default function DecjaPocetna({
   mojId: string;
   poen: number;
   brojPrijatelja: number;
+  poenNaCekanju: number;
+  stanje: "NA_CEKANJU" | "POVEZANO" | "AKTIVNO";
+  /** Šestocifreni kod za roditelja; postoji samo dok nalog čeka. */
+  kod: string | null;
   mojihOglasa: number;
   oglasi: Oglas[];
   chatInicijalno: Poruka[];
@@ -73,12 +80,54 @@ export default function DecjaPocetna({
   const t = useTranslations("decjaPocetna");
   const tDeca = useTranslations("deca");
   const [pretraga, setPretraga] = useState("");
+  const cekaRoditelja = stanje === "NA_CEKANJU";
 
   const vidljivi = pretraga.trim()
     ? oglasi.filter((o) =>
         `${o.naslov} ${o.opis}`.toLowerCase().includes(pretraga.trim().toLowerCase()),
       )
     : oglasi;
+
+  /**
+   * Ekran deteta koje čeka roditelja (čl. 4c).
+   *
+   * 🔴 Poruka mora da bude KONKRETNA. POEN je apstraktan sedmogodišnjaku; ne moći
+   * odgovoriti drugu koji ti je upravo skenirao kod — to je konkretno. Zato se broj
+   * prijatelja koji čekaju stavlja u samu rečenicu.
+   */
+  if (cekaRoditelja) {
+    return (
+      <div className="mx-auto max-w-2xl space-y-5">
+        <SareniNaslov tekst={t("naslov")} />
+        <section
+          className="rounded-3xl bg-white p-6 text-center shadow-sm"
+          style={{ border: `4px solid ${BOJE[1]}` }}
+        >
+          <p className="text-sm text-kolo-muted">{t("pozdrav", { pseudonim })}</p>
+          <h2 className="mt-2 text-xl font-extrabold" style={{ color: BOJE[0] }}>
+            {t("ceka_naslov")}
+          </h2>
+          <p className="mt-2 text-sm text-kolo-text">
+            {t("ceka_opis", { broj: brojPrijatelja })}
+          </p>
+          <p className="mt-3 text-sm text-kolo-muted">{t("ceka_uputstvo")}</p>
+          {kod && (
+            <div className="mt-4 rounded-2xl bg-kolo-bg p-4">
+              <p className="text-xs text-kolo-muted">{t("kod_naslov")}</p>
+              <p className="mt-1 text-3xl font-extrabold tracking-widest tabular-nums" style={{ color: BOJE[5] }}>
+                {kod}
+              </p>
+            </div>
+          )}
+        </section>
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Dugme href="/prijatelji" naslov={t("dugme_prijatelji")} broj={brojPrijatelja} boja={BOJE[6]} />
+          <Dugme href="/profil" naslov={t("dugme_profil")} boja={BOJE[4]} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-4xl space-y-5">
@@ -95,6 +144,13 @@ export default function DecjaPocetna({
           {poen.toLocaleString("sr-RS")}
         </p>
         <p className="text-sm font-bold" style={{ color: BOJE[5] }}>POEN</p>
+        {/* „500 na čekanju" stoji uz sam broj: dete tako vidi koliko mu prijatelja
+            još nema roditelja koji je redovan član (čl. 14b st. 2). */}
+        {poenNaCekanju > 0 && (
+          <p className="mt-2 text-sm font-semibold" style={{ color: BOJE[3] }}>
+            {t("na_cekanju", { iznos: poenNaCekanju })}
+          </p>
+        )}
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -104,10 +160,11 @@ export default function DecjaPocetna({
         <Dugme href="/poruke" naslov={t("dugme_poruke")} boja={BOJE[4]} />
       </div>
 
-      {/* Obaveštenje stoji uz same poruke, ne u sitnim slovima: roditelj čita
-          razgovore (čl. 9), pa dete to mora znati pre nego što napiše prvu reč. */}
+      {/* 🔴 Roditelj VIŠE NE ČITA razgovore među decom (čl. 9 st. 2) — vidi samo sa
+          kim i koliko. Zato tekst ne sme da ostane onakav kakav je bio; dete koje
+          misli da ga niko ne čita, a čita ga, dobija pogrešnu sliku, i obrnuto. */}
       <p className="rounded-xl border border-kolo-border bg-kolo-bg px-4 py-2 text-center text-xs text-kolo-muted">
-        {tDeca("uvid_upozorenje")}
+        {tDeca("uvid_obavestenje")}
       </p>
 
       <div>
@@ -199,6 +256,13 @@ function Dugme({
  * Ista ruta `/api/chat` kao kod odraslih — soba se izvodi iz toga ko je prijavljen,
  * ne bira se parametrom. Zato dete ovde ne može da vidi sobu odraslih ni da napiše
  * u nju, bez obzira šta pošalje.
+ *
+ * Jedna soba za svu decu, ali **svako vidi samo poruke svojih prijatelja**
+ * (čl. 18 st. 3). Posledica koja se dobija besplatno: kad su svi učesnici međusobno
+ * prijatelji, sam od sebe nastaje grupni razgovor.
+ *
+ * 🔴 NEMA odgovora sa citatom. Citat bi pokazao tekst osobe koju čitalac ne poznaje
+ * i time zaobišao filter. Ne dodavati citiranje.
  */
 function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Poruka[] }) {
   const t = useTranslations("decjaPocetna");
@@ -206,7 +270,22 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
   const [tekst, setTekst] = useState("");
   const [salje, setSalje] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
+  const [prijavljene, setPrijavljene] = useState<string[]>([]);
   const dno = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * Prijava poruke (čl. 18a). Roditelj razgovore ne čita, pa je dete jedino koje
+   * može da signalizira — moderacija Fondacije se kači na ovo dugme.
+   */
+  async function prijavi(id: string) {
+    if (!confirm(t("prijavi_potvrda"))) return;
+    setPrijavljene((p) => [...p, id]);
+    try {
+      await fetch(`/api/chat/${id}/prijavi`, { method: "POST" });
+    } catch {
+      /* tiho — prijava se ponavlja sledećim pritiskom */
+    }
+  }
 
   useEffect(() => {
     const id = setInterval(async () => {
@@ -267,6 +346,16 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
             >
               {p.content}
             </p>
+            {p.userId !== mojId && (
+              <button
+                type="button"
+                onClick={() => prijavi(p.id)}
+                disabled={prijavljene.includes(p.id)}
+                className="ml-2 text-[11px] text-kolo-muted underline disabled:no-underline disabled:opacity-60"
+              >
+                {prijavljene.includes(p.id) ? t("prijavljeno") : t("prijavi")}
+              </button>
+            )}
           </div>
         ))}
         <div ref={dno} />

@@ -156,6 +156,8 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
         <p className="mt-3 text-xs text-kolo-muted">{t("oglasi_napomena")}</p>
       </section>
 
+      <Pregled deteId={dete.id} />
+
       <Razgovori deteId={dete.id} />
 
       <BrisanjeNaloga deteId={dete.id} pseudonim={dete.pseudonim} onGotovo={() => router.push("/profil")} />
@@ -171,11 +173,16 @@ type Razgovor = {
 };
 
 /**
- * Razgovori deteta (čl. 9) — roditelj ih ČITA.
+ * Razgovori deteta SA PUNOLETNIM LICIMA (čl. 9 st. 3) — roditelj ih ČITA.
  *
- * 🔴 Nema polja za pisanje. Sa druge strane razgovora je tuđe dete, a odnos deteta
- * i punoletnog korisnika otvara prekidač koji daje NJEGOV roditelj (čl. 10) — pa bi
- * ubacivanje roditelja u razgovor obilazilo tuđu saglasnost.
+ * 🔴 Razgovore između dece roditelj VIŠE NE ČITA. Nadzor nad dečjim razgovorom
+ * dodiruje i tuđe dete, kome njegov roditelj ovaj uvid nije dao; kad roditelj ne
+ * čita, taj problem nestaje ceo. Umesto sadržaja stoji „ko i koliko" (v. `Pregled`).
+ *
+ * 🔴 Nema polja za pisanje. Sa druge strane je odrastao čovek, a taj odnos otvara
+ * isključivo prekidač iz čl. 10 — pa bi ubacivanje roditelja u razgovor bilo
+ * obraćanje trećem licu iz tuđeg naloga. Punoletnom sagovorniku u razgovoru stoji
+ * vidljiv natpis da razgovor čita roditelj.
  */
 function Razgovori({ deteId }: { deteId: string }) {
   const t = useTranslations("deca");
@@ -325,6 +332,85 @@ function BrisanjeNaloga({
             >
               {t("dugme_odustani")}
             </button>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
+type Pregledi = {
+  prijatelji: { pseudonim: string; od: string; poenIsplacen: boolean }[];
+  razgovori: { id: string; drugi: string; poruka: number; poslednja: string }[];
+};
+
+/**
+ * „Ko i koliko" (čl. 9 st. 2) — ono što roditelj dobija UMESTO sadržaja razgovora
+ * među decom: spisak prijatelja sa datumima i spisak razgovora bez ijedne poruke.
+ *
+ * 🔴 Sadržaja ovde nema i nema rute koja bi ga vratila. To nije propust nego mera:
+ * razgovor deteta sa drugim detetom dodiruje i tuđe dete.
+ */
+function Pregled({ deteId }: { deteId: string }) {
+  const t = useTranslations("deca");
+  const [podaci, setPodaci] = useState<Pregledi | null>(null);
+  const [greska, setGreska] = useState<string | null>(null);
+
+  useEffect(() => {
+    void (async () => {
+      try {
+        const res = await fetch(`/api/deca/${deteId}/pregled`, { cache: "no-store" });
+        if (!res.ok) throw new Error();
+        setPodaci(await res.json());
+      } catch {
+        setGreska(t("greska_ucitavanje"));
+      }
+    })();
+  }, [deteId, t]);
+
+  return (
+    <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <h2 className="font-semibold text-kolo-text">{t("pregled_naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("pregled_opis")}</p>
+
+      {greska && <p className="mt-2 text-sm text-kolo-danger">{greska}</p>}
+      {podaci === null && !greska && <p className="mt-2 text-sm text-kolo-muted">{t("ucitavanje")}</p>}
+
+      {podaci && (
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <h3 className="text-sm font-medium text-kolo-text">{t("pregled_prijatelji")}</h3>
+            {podaci.prijatelji.length === 0 ? (
+              <p className="mt-1 text-sm text-kolo-muted">{t("pregled_prijatelji_prazno")}</p>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm">
+                {podaci.prijatelji.map((p) => (
+                  <li key={p.pseudonim} className="flex justify-between gap-2">
+                    <span className="truncate text-kolo-text">{p.pseudonim}</span>
+                    <span className="shrink-0 text-xs text-kolo-muted">
+                      {new Date(p.od).toLocaleDateString("sr-RS")}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-kolo-text">{t("pregled_razgovori")}</h3>
+            {podaci.razgovori.length === 0 ? (
+              <p className="mt-1 text-sm text-kolo-muted">{t("pregled_razgovori_prazno")}</p>
+            ) : (
+              <ul className="mt-2 space-y-1 text-sm">
+                {podaci.razgovori.map((r) => (
+                  <li key={r.id} className="flex justify-between gap-2">
+                    <span className="truncate text-kolo-text">{r.drugi}</span>
+                    <span className="shrink-0 text-xs text-kolo-muted">
+                      {t("pregled_poruka", { broj: r.poruka })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       )}

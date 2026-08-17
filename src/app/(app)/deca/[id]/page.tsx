@@ -32,7 +32,7 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
       avatar: true,
       datumRodjenja: true,
       maloletan: true,
-      roditeljId: true,
+      roditeljstvaKaoDete: { select: { roditeljId: true } },
       deaktiviranAt: true,
       createdAt: true,
       dozvolaOdrasli: true,
@@ -40,7 +40,8 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
     },
   });
   // 404, ne 403 — status 403 bi tuđem roditelju potvrdio da nalog postoji.
-  if (!dete || !dete.maloletan || dete.roditeljId !== session.user.id || dete.deaktiviranAt) {
+  const jeMoje = dete?.roditeljstvaKaoDete.some((r) => r.roditeljId === session.user.id) ?? false;
+  if (!dete || !dete.maloletan || !jeMoje || dete.deaktiviranAt) {
     notFound();
   }
 

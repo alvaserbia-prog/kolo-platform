@@ -64,6 +64,13 @@ export const POKROVITELJSTVO_AKTIVNO = false;
  * prekidač. Cena im je nula, a cena propuštanja je izlaganje deteta — zato nisu
  * uslovljene.
  *
+ * 🔴 **Od unapređenog modela (17.08.2026) prekidač nosi i EKONOMSKU posledicu.**
+ * Prijateljstvo maloletnih korisnika upisuje 500 POEN svakoj strani (Pravilnik o
+ * Modulu Deca, čl. 14b), a raskid i punoletstvo taj POEN otpisuju. Emisija ulazi u
+ * opticaj, pa pomera prag osnivačkog koraka (na svakih 100.000 POEN) i obračunski
+ * koeficijent ZRNA — u OBA smera. Paljenje modula zato više nije potez bez traga u
+ * brojevima sistema.
+ *
  * ─── STANJE: upaljen radi provere na TESTU (14.08.2026) ─────────────────────
  *
  * 🔴 MORA nazad na `false` PRE svake objave na ekolo.rs. Modul je upaljen samo da

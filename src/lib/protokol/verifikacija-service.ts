@@ -30,6 +30,7 @@ import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhr
 import { DoprinosOkidac, Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, osveziSagovornike } from "@/lib/protokol/doprinos-razmeni";
+import { osveziPrijateljstvaDece } from "@/lib/protokol/prijateljstva";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -395,6 +396,10 @@ async function emitujPoenZaVerifikaciju(
 
   // Ista dva okidača važe i za korake 2–5 putanje doprinosa razmeni.
   await probajEvidentiratiKorake(verifikovaniId);
+  // Modul Deca: čim roditelj postane redovan član, sva njegova deca prelaze u stanje
+  // `AKTIVNO`, pa prijateljstva koja su čekala drugu stranu sazrevaju (čl. 14b st. 2).
+  // Ne baca — verifikacija je već upisana i ne sme da padne zbog dečjeg kanala.
+  await osveziPrijateljstvaDece(verifikovaniId);
   // Verifikacija pomera i TUĐE brojače: razmena sa neverifikovanim korisnikom se
   // beleži, a u brojač ulazi tek kad on bude verifikovan. Zato se preračunavaju
   // svi koji su sa njim već obavili razmenu. Sekvencijalno — svaki poziv vodi u
@@ -499,6 +504,40 @@ export async function izvrsiVerifikaciju(
   return emitujPoenZaVerifikaciju(fazaJedan);
 }
 
+
+/**
+ * Verifikacija BEZ jednokratnog koda — jedini put kojim ne upravlja čovek pred
+ * ekranom, nego sam sistem.
+ *
+ * 🔴 Postoji ISKLJUČIVO zbog prelaska maloletnog naloga u punoletni (Modul Deca,
+ * čl. 19 st. 3): tog dana dete dobija potvrde stvarnosti od svojih roditelja — dve,
+ * po jednu od svakog, ili jednu ako su oba u istom lancu potvrda. Kod bi ovde bio
+ * prazna forma: roditelj svoje dete poznaje bolje nego iko koga bi na ekranu
+ * potvrdio, a njegova izjava o postojanju deteta stoji u sistemu od otvaranja naloga.
+ *
+ * 🔴 NE otvarati ovaj put ničemu drugom. Sve ostale verifikacije idu kroz
+ * `izvrsiVerifikaciju`, gde jednokratni kod dokazuje da su se dvoje stvarno našli.
+ *
+ * Sve provere jezgra ostaju na snazi — zabranjena zona (pa i ona koja spreči drugog
+ * roditelja kad su roditelji u istom lancu), slot, prelazno ograničenje iz čl. 22.
+ * Pozivalac hvata `VerifikacijaGreska` i preskače tu potvrdu.
+ */
+export async function izvrsiVerifikacijuBezTokena(
+  verifikatorId: string,
+  verifikovaniId: string,
+  oznaka?: string
+): Promise<IzvrsiVerifikacijuRezultat> {
+  let fazaJedan: FazaJedan;
+  try {
+    fazaJedan = await prisma.$transaction(
+      async (tx) => izvrsiJezgroVerifikacije(tx, verifikatorId, verifikovaniId, normalizujOznaku(oznaka)),
+      { isolationLevel: Prisma.TransactionIsolationLevel.Serializable }
+    );
+  } catch (e) {
+    mapTransakcijaGreska(e);
+  }
+  return emitujPoenZaVerifikaciju(fazaJedan);
+}
 
 /**
  * Postavlja/menja/briše oznaku verifikatora za jednu verifikacionu vezu.

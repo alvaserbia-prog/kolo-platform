@@ -6,11 +6,15 @@ import { MODUL_DECA_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 import { DecaGreska, dohvatiRazgovoreDeteta } from "@/lib/protokol/deca";
 
 /**
- * GET /api/deca/[id]/razgovori — roditelj čita razgovore svog deteta (čl. 9).
+ * GET /api/deca/[id]/razgovori — razgovori deteta SA PUNOLETNIM LICIMA (čl. 9).
+ *
+ * 🔴 Razgovore između dece roditelj VIŠE NE ČITA — servis ih ni ne vraća. Umesto
+ * sadržaja stoji „ko i koliko" na `/api/deca/[id]/pregled`.
  *
  * Samo čitanje. Rute kojom bi roditelj napisao poruku u detetov razgovor NEMA, i
- * to je namerno: sa druge strane je tuđe dete, a odnos deteta i punoletnog
- * korisnika otvara prekidač koji daje TUĐI roditelj (čl. 10).
+ * to je namerno: sa druge strane je odrastao čovek, a taj odnos otvara isključivo
+ * prekidač iz čl. 10. Punoletnom sagovorniku u razgovoru stoji vidljiv natpis da
+ * razgovor čita roditelj — ko piše detetu, treba da zna pred kim piše.
  */
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!MODUL_DECA_AKTIVAN) return await greska(PORUKA_MODUL_UGASEN, 410);

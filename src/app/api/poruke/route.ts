@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
-import { smeDaKomunicira, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
+import { smeDaKomunicira, ucitajUcesnika } from "@/lib/protokol/deca";
 
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
@@ -79,12 +79,8 @@ export async function POST(req: NextRequest) {
   if (!drugiUcesnik) return await greska("Korisnik ne postoji.", 404);
 
   if (jaUcesnik.maloletan || drugiUcesnik.maloletan) {
-    if ((await uMirovanju(meId)) || (await uMirovanju(userId))) {
-      return await greska(
-        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
-        403,
-      );
-    }
+    // `smeDaKomunicira` sam odbija nalog koji još čeka roditelja (stanje
+    // `NA_CEKANJU`, čl. 4c) — stanje je deo `Ucesnik`-a, pa nema odvojene provere.
     const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
   }

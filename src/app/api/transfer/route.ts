@@ -9,7 +9,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
-import { smeDaPrepise, uMirovanju, ucitajUcesnika } from "@/lib/protokol/deca";
+import { smeDaPrepise, ucitajUcesnika } from "@/lib/protokol/deca";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -76,12 +76,8 @@ export async function POST(req: NextRequest) {
   const jeDecjiPar = odUcesnik.maloletan || kaUcesnik.maloletan;
 
   if (jeDecjiPar) {
-    if ((await uMirovanju(posiljac.id)) || (await uMirovanju(primalac.id))) {
-      return await greska(
-        "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
-        403,
-      );
-    }
+    // `smeDaPrepise` sam odbija nalog koji još čeka roditelja (čl. 4c) — stanje
+    // naloga je deo `Ucesnik`-a, pa nema odvojene provere.
     const dozvoljeno = smeDaPrepise(odUcesnik, kaUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
   } else if (!smeDaSalje(posiljac.tipKorisnika)) {

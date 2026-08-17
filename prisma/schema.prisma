@@ -74,6 +74,13 @@ enum TransactionType {
   EMISIJA_SADRZAJ // doprinos sadržaju platforme (Pravilnik čl. 15 t. 8, čl. 40a)
   EMISIJA_RAZMENA // doprinos razmeni — koraci 2–5 putanje prvog kruga (čl. 40a)
   PONISTENJE_PREPISA // protivzapis prepisa poništenog po prijavi razmene
+  // Modul Deca: 500 POEN po sklopljenom prijateljstvu, obema stranama (čl. 14b).
+  // Zaseban tip, da se u istoriji i u opticaju vidi šta je došlo iz dečjeg prostora.
+  EMISIJA_PRIJATELJSTVO
+  // Protivzapis Protokola pri raskidu prijateljstva i pri prelasku u punoletstvo
+  // (čl. 14c, čl. 19). Nije „poništenje prepisa" — poništava se EMISIJA, pa opticaj
+  // opada, dok prepis samo seli POEN između dva korisnička zapisa.
+  OTPIS_PRIJATELJSTVO
 }
 
 enum TipKorisnika {
@@ -259,29 +266,42 @@ model User {
   // otvara naknadno.
   vodicVidjenAt                    DateTime?
   // ─── Modul Deca (Pravilnik o Modulu Deca) ─────────────────────────────────
-  // Nenulto samo kod maloletnih korisnika. Jedini izvor uzrasta; posle otvaranja
-  // naloga se ne menja (čl. 7) — roditeljska izjava je jedina provera godina kojom
-  // sistem raspolaže.
+  // Nenulto samo kod maloletnih korisnika. Jedini izvor uzrasta; posle upisa se ne
+  // menja (čl. 7) — roditeljska izjava je jedina provera godina kojom sistem
+  // raspolaže.
+  //
+  // 🔴 SME da bude NULL i kod maloletnog naloga: dete koje se registrovalo samo
+  // ne unosi datum rođenja — upisuje ga roditelj pri preuzimanju naloga. Sve što
+  // čita ovo polje mora da podnese `null` (uzrast nepoznat).
   datumRodjenja                    DateTime?                 @db.Date
   // Izvedeno iz `datumRodjenja`, ali indeksabilno i jeftino u `where` — svaki javni
   // upit mora da isključi decu, a računanje datuma po redu to ne bi podnelo.
   // 🔴 Oba polja se pišu ISKLJUČIVO kroz `poljaDeteta()` u `src/lib/protokol/deca.ts`.
   maloletan                        Boolean                   @default(false)
-  // Roditelj koji je otvorio nalog (čl. 4). Prva verzija modula poznaje samo jednog
-  // roditelja po detetu, pa veza stoji na samom nalogu — zaseban model bi u ovoj fazi
-  // nosio samo jedan red po detetu.
-  roditeljId                       String?
-  roditelj                         User?                     @relation("RoditeljDete", fields: [roditeljId], references: [id])
-  deca                             User[]                    @relation("RoditeljDete")
+  // Roditelji (čl. 4). Zaseban model, jer dete ima najviše DVA roditelja i oba
+  // imaju ista ovlašćenja — kolona na nalogu bi jednog činila glavnim, a drugog
+  // dopisanim. Prazan skup znači „dete na čekanju": nalog postoji, veza ne.
+  roditeljstvaKaoDete              Roditeljstvo[]            @relation("RoditeljstvoDete")
+  roditeljstvaKaoRoditelj          Roditeljstvo[]            @relation("RoditeljstvoRoditelj")
+  // Poziv upućen roditelju pri samostalnoj registraciji deteta. Najviše jedan
+  // živ po detetu (`@unique` na `deteId`).
+  roditeljPoziv                    RoditeljPoziv?
   // Prekidač iz čl. 10 st. 2: komunikacija i razmena maloletnog korisnika sa
   // punoletnim korisnicima. Isključen pri otvaranju naloga, povlači se u svakom
-  // trenutku. Stoji na DETETU, a menja ga isključivo roditelj.
+  // trenutku. Stoji na DETETU, a menja ga bilo koji od roditelja.
   dozvolaOdrasli                   Boolean                   @default(false)
+  // Prelaz u punoletstvo (Modul Deca, Glava VI). Dva odvojena stuba, jer se dešavaju
+  // mesec dana jedan od drugog i oba moraju biti idempotentna: obaveštenje se šalje
+  // jednom, obrada se izvodi jednom.
+  punoletstvoNajavaAt              DateTime?
+  punoletstvoObradjenAt            DateTime?
   potvrdeRoditeljstvaZaMene        RoditeljstvoPotvrda[]     @relation("PotvrdaDete")
   potvrdeRoditeljstvaKojeDajem     RoditeljstvoPotvrda[]     @relation("PotvrdaPotvrdjivac")
   prijateljstvaA                   Prijateljstvo[]           @relation("PrijateljA")
   prijateljstvaB                   Prijateljstvo[]           @relation("PrijateljB")
+  prijateljstvaRaskinuta           Prijateljstvo[]           @relation("PrijateljstvoRaskinuo")
   prijateljTokeni                  PrijateljToken[]
+  prijaveporuka                    PrijavaPoruke[]           @relation("PrijaviocPoruke")
   memberHash                       String                    @unique
   location                         String?
   telefon                          String?
@@ -365,7 +385,67 @@ model User {
 
   // Svaki javni upit filtrira decu; bez indeksa bi to bio pun prolaz kroz tabelu.
   @@index([maloletan])
+  // Noćni posao punoletstva traži maloletne naloge po datumu rođenja.
+  @@index([maloletan, datumRodjenja])
+}
+
+/// Veza roditelj — dete (Modul Deca, čl. 4 i 5).
+///
+/// Dete ima najviše dva roditelja i **oba imaju ista ovlašćenja**: prekidač za
+/// odrasle, uklanjanje oglasa, uvid u razgovore sa punoletnim licima i brisanje
+/// naloga. Zato veza živi u zasebnoj tabeli, a ne kao kolona na nalogu deteta —
+/// kolona bi jednog roditelja činila nosiocem, a drugog dopisanim.
+///
+/// 🔴 Prazan skup redova za dete NIJE greška u podacima nego stanje: „dete na
+/// čekanju" je nalog koji se registrovao sam i čeka da ga roditelj preuzme.
+model Roditeljstvo {
+  id         String   @id @default(uuid())
+  deteId     String
+  dete       User     @relation("RoditeljstvoDete", fields: [deteId], references: [id], onDelete: Cascade)
+  roditeljId String
+  roditelj   User     @relation("RoditeljstvoRoditelj", fields: [roditeljId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([deteId, roditeljId])
+  @@index([deteId])
   @@index([roditeljId])
+}
+
+/// Poziv roditelju pri samostalnoj registraciji deteta (Modul Deca, čl. 4a).
+///
+/// Dete unosi svoj pseudonim i **email roditelja**; datum rođenja ne unosi — njega
+/// upisuje roditelj pri preuzimanju. Roditelju stiže poruka sa tri radnje: preuzmi
+/// nalog, ovo nije moje dete, obriši nalog.
+///
+/// Dva roka, i namerno su različita:
+///  - `tokenDo` (sedam dana) — koliko važi jednokratni link iz poruke;
+///  - `brisanjeDo` (četrnaest dana od registracije) — koliko nalog uopšte sme da
+///    postoji bez preuzimanja. Dete na čekanju je lice čiji se podaci obrađuju PRE
+///    pribavljenog pristanka roditelja, i to ne sme da traje neograničeno.
+///
+/// `kod` je rezervni put: šest cifara vidljivih u profilu deteta, koje roditelj
+/// unosi uz pseudonim kad poruka ne stigne ili link istekne. Zato traje koliko i
+/// `brisanjeDo`, a ne koliko token.
+model RoditeljPoziv {
+  id           String    @id @default(uuid())
+  deteId       String    @unique
+  dete         User      @relation(fields: [deteId], references: [id], onDelete: Cascade)
+  // Podatak o TREĆEM LICU koji unosi dete. Ne proverava se i ne koristi se ni za
+  // šta osim za slanje jedne poruke — zato u njoj stoji samo pseudonim deteta,
+  // nikad njegovo pravo ime.
+  email        String
+  token        String    @unique
+  kod          String
+  tokenDo      DateTime
+  brisanjeDo   DateTime
+  iskoriscenAt DateTime?
+  // „Ovo nije moje dete" — nalog ostaje do isteka `brisanjeDo`, ali poziv je mrtav
+  // i poruka se ne šalje ponovo na istu adresu.
+  odbijenAt    DateTime?
+  createdAt    DateTime  @default(now())
+
+  @@index([email])
+  @@index([brisanjeDo])
 }
 
 // ─── Modul Deca — potvrda roditeljstva (Pravilnik o Modulu Deca, čl. 6) ──────
@@ -1556,18 +1636,19 @@ enum ChatSoba {
 }
 
 model ChatMessage {
-  id             String    @id @default(uuid())
-  soba           ChatSoba  @default(ODRASLI)
+  id             String          @id @default(uuid())
+  soba           ChatSoba        @default(ODRASLI)
   userId         String
-  user           User      @relation("ChatPoruke", fields: [userId], references: [id])
+  user           User            @relation("ChatPoruke", fields: [userId], references: [id])
   content        String
-  createdAt      DateTime  @default(now())
+  createdAt      DateTime        @default(now())
   // Uklanjanje od strane Fondacije (Uslovi čl. 25 st. 2 — obuhvata „svu drugu
   // komunikaciju putem Platforme"). Meko brisanje: poruka nestaje iz sobe, ali
   // ostaje trag ko je i zašto uklonio dok je noćni cron ne pobriše sa ostalima.
   uklonjenoAt    DateTime?
   uklonjenRazlog String?
   uklonioId      String?
+  prijave        PrijavaPoruke[]
 
   @@index([soba, createdAt(sort: Desc)])
   @@index([userId])
@@ -1860,17 +1941,58 @@ model Bug {
 // SIMETRIČNO: jedan red opisuje obe strane, pa se `aId` i `bId` upisuju sortirano
 // (manji id prvi). Bez toga bi isti par mogao da uđe dvaput, u dva smera, i
 // jedinstveni indeks ne bi ništa značio.
+//
+// ─── Zašto red ostaje i posle raskida ──────────────────────────────────────
+//
+// Raskinut par SME da se obnovi (čl. 14c st. 5) — pomirene drugarice ne gube
+// ništa trajno. Kad bi se red brisao, `@@unique([aId, bId])` ne bi imao šta da
+// čuva i isti par bi mogao da postoji dvaput. Zato se raskid beleži `raskinutAt`,
+// a obnova ga vraća na `null`.
 model Prijateljstvo {
-  id        String   @id @default(uuid())
-  aId       String
-  a         User     @relation("PrijateljA", fields: [aId], references: [id], onDelete: Cascade)
-  bId       String
-  b         User     @relation("PrijateljB", fields: [bId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
+  id           String    @id @default(uuid())
+  aId          String
+  a            User      @relation("PrijateljA", fields: [aId], references: [id], onDelete: Cascade)
+  bId          String
+  b            User      @relation("PrijateljB", fields: [bId], references: [id], onDelete: Cascade)
+  // Da li je 500 POEN upisano OBEMA stranama (čl. 14b). Isplata čeka da obe strane
+  // budu aktivne, pa red često stoji neisplaćen. Ovo polje je jedini izvor istine
+  // o tome duguje li se otpis pri raskidu i pri punoletstvu — broj transakcija se
+  // ne prebrojava unazad.
+  poenIsplacen Boolean   @default(false)
+  isplacenAt   DateTime?
+  // Raskid (čl. 14c). Raskinuti može samo dete, bilo koje od dvoje; roditelj ne
+  // može. `raskinuoId` je zato uvek jedna od dve strane.
+  raskinutAt   DateTime?
+  raskinuoId   String?
+  raskinuo     User?     @relation("PrijateljstvoRaskinuo", fields: [raskinuoId], references: [id])
+  createdAt    DateTime  @default(now())
 
   @@unique([aId, bId])
   @@index([aId])
   @@index([bId])
+}
+
+/// Prijava poruke iz Pričaonice (Modul Deca, čl. 18a; Uslovi čl. 25).
+///
+/// Roditelj razgovore dece ne čita, pa je **dete jedino koje može da signalizira**.
+/// Prijava ne uklanja poruku — uklanja je Fondacija, istim putem kao i svaki drugi
+/// sadržaj (`DELETE /api/admin/chat/[id]`).
+///
+/// `@@unique([porukaId, prijaviocId])` — jedan korisnik, jedna prijava po poruci;
+/// ponovljen pritisak nije nov podatak.
+model PrijavaPoruke {
+  id          String              @id @default(uuid())
+  porukaId    String
+  poruka      ChatMessage         @relation(fields: [porukaId], references: [id], onDelete: Cascade)
+  prijaviocId String
+  prijavioc   User                @relation("PrijaviocPoruke", fields: [prijaviocId], references: [id], onDelete: Cascade)
+  // Slobodan tekst, opcion — sedmogodišnjak neće objasniti, ali stariji hoće.
+  razlog      String?
+  status      PrijavaOglasaStatus @default(OTVORENA)
+  createdAt   DateTime            @default(now())
+
+  @@unique([porukaId, prijaviocId])
+  @@index([status, createdAt(sort: Desc)])
 }
 
 // Jednokratni kod za povezivanje. 🔴 NEMA šestocifrenog broja, za razliku od koda

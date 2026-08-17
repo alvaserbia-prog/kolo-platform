@@ -1,15 +1,20 @@
 /**
- * Modul Deca — servisne funkcije (Pravilnik o Modulu Deca, prva verzija).
+ * Modul Deca — servisne funkcije (Pravilnik o Modulu Deca, druga verzija).
  *
  * Re-eksportuje čista pravila iz `src/lib/deca-pravila.ts`, pa server ima jedan
  * ulaz. Pretraživač uvozi pravila neposredno — ovaj modul povlači Prisma klijent.
  *
- * ─── Šta prva verzija namerno NEMA ──────────────────────────────────────────
+ * ─── Dva ulaza u modul ──────────────────────────────────────────────────────
  *
- * Nema poziva roditelju: nalog otvara isključivo roditelj iz svog naloga (čl. 4),
- * pa nema ni roka od sedam dana, ni rezervacije pseudonima, ni ekrana čekanja.
- * Nema drugog roditelja, uzrasnih grupa ni odredbe o punoletstvu. Sve to su
- * proširenja koja idu izmenom pravilnika, ne prećutnim dopunama koda.
+ *  1. **Roditelj otvara nalog iz svog profila** (čl. 4). Nalog ulazi odmah u
+ *     stanje `AKTIVNO`; postupak potvrde iz čl. 6 teče paralelno. Ovde.
+ *  2. **Dete se registruje samo** (čl. 4a–4c), pre nego što je iko od njegovih
+ *     roditelja na platformi. Nalog počinje na `NA_CEKANJU`. Vidi
+ *     `src/lib/protokol/deca-poziv.ts`.
+ *
+ * Razlika između dva ulaza je SAMO u tome na kom stanju nalog počinje. Drugi ulaz
+ * postoji zato što dete čuje za platformu od drugog deteta, ne od roditelja: ako
+ * mu je jedini put da prvo ubedi roditelja, ono odustaje.
  */
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika, TransactionType, UserStatus, WalletType } from "@/generated/prisma/client";
@@ -20,11 +25,14 @@ import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
 import { ponistiVerifikaciju } from "./lazna-verifikacija";
 import { obavesti } from "@/lib/notifikacije";
 import {
+  PORUKA_CEKA_RODITELJA,
   ROK_POTVRDE_DANA,
-  jeUMirovanju,
+  nalogRadi,
   rokIzjasnjenja,
+  stanjeDeteta,
   uzrast,
   uzrastZaModul,
+  type StanjeDeteta,
   type Ucesnik,
 } from "@/lib/deca-pravila";
 
@@ -42,9 +50,15 @@ export class DecaGreska extends Error {
   }
 }
 
-/** Polja koja opisuju maloletni nalog. 🔴 Jedino mesto koje ih upisuje. */
-export function poljaDeteta(datumRodjenja: Date, roditeljId: string) {
-  return { datumRodjenja, maloletan: true, roditeljId };
+/**
+ * Polja koja opisuju maloletni nalog. 🔴 Jedino mesto koje ih upisuje.
+ *
+ * `datumRodjenja` sme da bude `null` — dete koje se registrovalo samo ga ne unosi,
+ * upisuje ga roditelj pri preuzimanju (čl. 7). Veza sa roditeljem NIJE ovde: ona
+ * živi u tabeli `Roditeljstvo`, jer roditelja može biti dvoje.
+ */
+export function poljaDeteta(datumRodjenja: Date | null) {
+  return { datumRodjenja, maloletan: true };
 }
 
 /** Izbor polja dovoljan da se od korisnika napravi `Ucesnik`. */
@@ -52,79 +66,90 @@ export const IZBOR_UCESNIKA = {
   id: true,
   maloletan: true,
   dozvolaOdrasli: true,
-  roditeljId: true,
+  roditeljstvaKaoDete: {
+    select: {
+      roditeljId: true,
+      roditelj: {
+        select: { verified: true, indeksStvarnosti: true, status: true, deaktiviranAt: true },
+      },
+    },
+  },
 } as const;
+
+type RedUcesnika = {
+  id: string;
+  maloletan: boolean;
+  dozvolaOdrasli: boolean;
+  roditeljstvaKaoDete: {
+    roditeljId: string;
+    roditelj: {
+      verified: boolean;
+      indeksStvarnosti: number;
+      status: UserStatus;
+      deaktiviranAt: Date | null;
+    };
+  }[];
+};
+
+/** Od reda iz baze pravi `Ucesnik` — jedino mesto koje izvodi stanje naloga. */
+export function ucesnikIzReda(red: RedUcesnika): Ucesnik {
+  return {
+    id: red.id,
+    maloletan: red.maloletan,
+    dozvolaOdrasli: red.dozvolaOdrasli,
+    roditeljIds: red.roditeljstvaKaoDete.map((r) => r.roditeljId),
+    // Punoletan korisnik nema stanje — `AKTIVNO` je jedina vrednost koja ništa ne
+    // ograničava, pa se ostatak koda ne mora granati na „je li ovo dete".
+    stanje: red.maloletan
+      ? stanjeDeteta(
+          red.roditeljstvaKaoDete.map((r) => ({
+            aktivan: !r.roditelj.deaktiviranAt && r.roditelj.status === UserStatus.ACTIVE,
+            redovan:
+              r.roditelj.verified && r.roditelj.indeksStvarnosti >= FUNKCIONALNI_PRAG_INDEKSA,
+          }))
+        )
+      : "AKTIVNO",
+  };
+}
 
 /** Učitava najmanji oblik korisnika potreban za odluke ovog modula. */
 export async function ucitajUcesnika(userId: string): Promise<Ucesnik | null> {
-  return prisma.user.findUnique({ where: { id: userId }, select: IZBOR_UCESNIKA });
+  const red = await prisma.user.findUnique({ where: { id: userId }, select: IZBOR_UCESNIKA });
+  return red ? ucesnikIzReda(red) : null;
+}
+
+/** Stanje naloga (čl. 4c). Za punoletni nalog uvek `AKTIVNO`. */
+export async function stanjeNaloga(userId: string): Promise<StanjeDeteta> {
+  return (await ucitajUcesnika(userId))?.stanje ?? "NA_CEKANJU";
 }
 
 /**
- * Da li nalog miruje (čl. 16) — sam nalog ako je maloletan i njegov roditelj više
- * nije potvrđen, ili roditeljski nalog kome je potvrda pala.
+ * Baca ako nalog još čeka roditelja (čl. 4c). Zove se u rutama koje stvaraju
+ * sadržaj ili pomeraju zapise — objava oglasa, prepis POEN-a, poruke, Pričaonica.
  *
- * Izvodi se pri čitanju, ne čuva se u koloni: stanje zavisi od indeksa roditelja,
- * koji se menja poništenjem potvrde na nekom sasvim drugom mestu u sistemu. Kolona
- * bi značila da postoji drugi izvor iste istine i da neko mora da ga održava.
- */
-export async function uMirovanju(userId: string): Promise<boolean> {
-  const izbor = {
-    verified: true,
-    indeksStvarnosti: true,
-    deaktiviranAt: true,
-    status: true,
-  } as const;
-  const u = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { maloletan: true, ...izbor, roditelj: { select: izbor } },
-  });
-  if (!u) return false;
-  const merodavan = u.maloletan ? u.roditelj : u;
-  // Maloletni nalog bez roditelja nema pravni osnov obrade — miruje dok se ne
-  // uspostavi. Isto važi kad roditelj ugasi svoj nalog: dete ostaje, ali stoji.
-  if (!merodavan) return true;
-  if (merodavan.deaktiviranAt || merodavan.status !== UserStatus.ACTIVE) return true;
-  return jeUMirovanju(merodavan, FUNKCIONALNI_PRAG_INDEKSA);
-}
-
-/**
- * Baca ako nalog miruje (čl. 16). Zove se u rutama koje stvaraju sadržaj ili
- * pomeraju zapise — objava oglasa, prepis POEN-a, poruke.
- *
- * 🟡 Mirovanje nije `UserStatus`, pa ga osvežavanje JWT tokena ne hvata samo od sebe
+ * 🟡 Stanje nije `UserStatus`, pa ga osvežavanje JWT tokena ne hvata samo od sebe
  * kao suspenziju. Zato se proverava u samim rutama, a ne oslanja na sesiju.
  */
-export async function zaustaviAkoMiruje(userId: string) {
-  if (await uMirovanju(userId)) {
-    throw new DecaGreska(
-      "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
-      403
-    );
+export async function zaustaviAkoCekaRoditelja(userId: string) {
+  if (!nalogRadi(await stanjeNaloga(userId))) {
+    throw new DecaGreska(PORUKA_CEKA_RODITELJA, 403);
   }
 }
 
 /**
- * Prodavac čiji nalog NE miruje (čl. 16).
+ * Prodavac čiji nalog radi (čl. 4c).
  *
- * Tri grane, jer mirovanje pogađa i roditelja i dete: punoletan bez dece mirovanje
- * ne dodiruje; punoletan roditelj miruje kad mu potvrda padne ispod praga; maloletni
- * miruje kad padne njegovom roditelju.
+ * Punoletan nalog ovaj uslov ne dodiruje. Maloletni mora imati bar jednog
+ * roditelja — dete na čekanju nije objavilo oglas i ne može, ali uslov stoji i
+ * radi kao brana ako veza kasnije nestane (roditelj obriše svoj nalog).
+ *
+ * 🔴 Uslov je „ima roditelja", NE „roditelj je redovan član". Kad roditelju padne
+ * potvrda, dete se vraća u `POVEZANO` — oglasi i poruke rade, samo upis POEN-a
+ * čeka. U prvoj verziji je tada stajalo sve, što u drugom ulazu nema smisla: onaj
+ * ko tek preuzme nalog i JESTE nov član.
  */
-export const USLOV_PRODAVAC_NE_MIRUJE = {
-  OR: [
-    { maloletan: false, deca: { none: {} } },
-    {
-      maloletan: false,
-      deca: { some: {} },
-      verified: true,
-      indeksStvarnosti: { gte: FUNKCIONALNI_PRAG_INDEKSA },
-    },
-    {
-      maloletan: true,
-      roditelj: { is: { verified: true, indeksStvarnosti: { gte: FUNKCIONALNI_PRAG_INDEKSA } } },
-    },
-  ],
+export const USLOV_PRODAVAC_RADI = {
+  OR: [{ maloletan: false }, { maloletan: true, roditeljstvaKaoDete: { some: {} } }],
 };
 
 /**
@@ -135,12 +160,12 @@ export const USLOV_PRODAVAC_NE_MIRUJE = {
  * deteta.
  */
 export function usloviVidljivostiOglasa(posmatrac: Ucesnik | null) {
-  if (!posmatrac) return { AND: [USLOV_PRODAVAC_NE_MIRUJE, { maloletan: false }] };
+  if (!posmatrac) return { AND: [USLOV_PRODAVAC_RADI, { maloletan: false }] };
 
   if (posmatrac.maloletan) {
     return {
       AND: [
-        USLOV_PRODAVAC_NE_MIRUJE,
+        USLOV_PRODAVAC_RADI,
         {
           OR: [
             { maloletan: true },
@@ -155,20 +180,20 @@ export function usloviVidljivostiOglasa(posmatrac: Ucesnik | null) {
 
   return {
     AND: [
-      USLOV_PRODAVAC_NE_MIRUJE,
+      USLOV_PRODAVAC_RADI,
       {
         OR: [
           { maloletan: false },
           { maloletan: true, dozvolaOdrasli: true },
           // Sopstveno dete roditelj vidi i kad je prekidač isključen.
-          { maloletan: true, roditeljId: posmatrac.id },
+          { maloletan: true, roditeljstvaKaoDete: { some: { roditeljId: posmatrac.id } } },
         ],
       },
     ],
   };
 }
 
-// ── Otvaranje naloga (čl. 4–6) ────────────────────────────────────────────────
+// ── Otvaranje naloga iz roditeljskog profila (čl. 4–6) ───────────────────────
 
 export type OtvaranjeUlaz = {
   roditeljId: string;
@@ -181,12 +206,13 @@ export type OtvaranjeUlaz = {
 /**
  * Otvara nalog maloletnog korisnika i pokreće postupak potvrde (čl. 4 i 6).
  *
- * Nalog je aktivan od trenutka otvaranja — zaštita je naknadna i sastoji se u tome
+ * Nalog ulazi odmah u stanje `AKTIVNO` — zaštita je naknadna i sastoji se u tome
  * što potvrđivači roditelja imaju trideset dana da potvrde postojanje deteta, a
  * onaj ko ćuti gubi sopstvenu potvrdu stvarnosti tog roditelja.
  *
- * Sve u JEDNOJ transakciji: nalog, zapis u Protokolu i redovi potvrde nastaju
- * zajedno ili nikako. Nalog bez redova potvrde bio bi nalog bez ijedne provere.
+ * Sve u JEDNOJ transakciji: nalog, veza sa roditeljem, zapis u Protokolu i redovi
+ * potvrde nastaju zajedno ili nikako. Nalog bez veze sa roditeljem bio bi dete na
+ * čekanju, a nalog bez redova potvrde nalog bez ijedne provere.
  */
 export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
   const roditelj = await prisma.user.findUnique({
@@ -194,6 +220,7 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
     select: {
       id: true,
       pseudonim: true,
+      email: true,
       verified: true,
       maloletan: true,
       status: true,
@@ -235,6 +262,11 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
 
   const sada = new Date();
   const rokDo = rokIzjasnjenja(sada);
+  // Kod kojim ulazi DRUGI roditelj (čl. 4b st. 6). Nastaje i ovde, iako poziva
+  // nema — inače bi drugi roditelj mogao da uđe samo kod dece koja su se
+  // registrovala sama, što je razlika bez razloga.
+  const { poljaPozivaZaRoditeljskiUlaz } = await import("./deca-poziv");
+  const roditeljEmail = roditelj.email;
 
   const dete = await prisma.$transaction(async (tx) => {
     const kreirano = await tx.user.create({
@@ -246,7 +278,9 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
         // ne potvrđuje (čl. 15). Time sve zatečene brane sistema — ZRNO, glasanje,
         // nadzor, programi — važe za njega bez ijedne nove provere.
         tipKorisnika: TipKorisnika.NEVERIFIKOVAN,
-        ...poljaDeteta(ulaz.datumRodjenja, roditelj.id),
+        ...poljaDeteta(ulaz.datumRodjenja),
+        roditeljstvaKaoDete: { create: { roditeljId: roditelj.id } },
+        roditeljPoziv: { create: poljaPozivaZaRoditeljskiUlaz(roditeljEmail, sada) },
         // Vodič se prikazuje pri prvoj prijavi, kao i svakom novom nalogu.
         vodicVidjenAt: null,
         wallet: { create: { type: WalletType.USER, balance: 0 } },
@@ -274,7 +308,7 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
       "Nalog detetu otvoren bez izjašnjenja",
       `Roditelj: ${roditelj.pseudonim} (indeks ${roditelj.indeksStvarnosti}%)\n` +
         `Njegovu stvarnost nije potvrdio nijedan korisnik, pa nema koga da se pita o postojanju deteta.\n` +
-        `Uzrast deteta: ${godine} godina.`,
+        `Uzrast deteta: ${godine} godina.`
     );
   }
 
@@ -295,13 +329,25 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
 
 // ── Prekidač i uklanjanje (čl. 10) ────────────────────────────────────────────
 
-/** Provera da je nalog upravo dete tog roditelja; baca ako nije. */
+/**
+ * Provera da je nalog upravo dete tog roditelja; baca ako nije.
+ *
+ * 🔴 Oba roditelja prolaze isti test — nema „prvog" i „drugog". Ovlašćenja iz
+ * čl. 10 (prekidač, uklanjanje oglasa, uvid, brisanje) su im jednaka.
+ */
 export async function mojeDeteIliBaci(roditeljId: string, deteId: string) {
   const dete = await prisma.user.findUnique({
     where: { id: deteId },
-    select: { id: true, pseudonim: true, maloletan: true, roditeljId: true, deaktiviranAt: true },
+    select: {
+      id: true,
+      pseudonim: true,
+      maloletan: true,
+      deaktiviranAt: true,
+      roditeljstvaKaoDete: { select: { roditeljId: true } },
+    },
   });
-  if (!dete || !dete.maloletan || dete.roditeljId !== roditeljId || dete.deaktiviranAt) {
+  const jeMoje = dete?.roditeljstvaKaoDete.some((r) => r.roditeljId === roditeljId) ?? false;
+  if (!dete || !dete.maloletan || !jeMoje || dete.deaktiviranAt) {
     // 404, ne 403 — status 403 bi potvrdio da nalog postoji.
     throw new DecaGreska("Nalog nije pronađen.", 404);
   }
@@ -316,7 +362,7 @@ export async function postaviDozvolu(roditeljId: string, deteId: string, dozvola
 }
 
 /**
- * Uklanjanje oglasa deteta (čl. 10 st. 1) — jedino ovlašćenje uklanjanja koje
+ * Uklanjanje oglasa deteta (čl. 10 st. 1) — jedno od ovlašćenja uklanjanja koje
  * roditelj ima. Meko, kao i moderacija Fondacije: oglas nestaje iz svih prikaza,
  * a trag ko ga je i kada uklonio ostaje.
  */
@@ -346,22 +392,29 @@ export async function ukloniOglasDeteta(roditeljId: string, deteId: string, ogla
 }
 
 /**
- * Razgovori deteta — roditelj ih čita (čl. 9).
+ * Razgovori deteta SA PUNOLETNIM LICIMA — roditelj ih čita (čl. 9).
  *
- * 🔴 Roditelj SAMO ČITA. Ne piše u detetov razgovor, i to nije propust: sa druge
- * strane je drugo dete, a odnos deteta i punoletnog korisnika otvara isključivo
- * prekidač iz čl. 10, koji daje TUĐI roditelj. Kad bi roditelj mogao da se ubaci u
- * razgovor, obraćao bi se tuđem detetu bez saglasnosti njegovog roditelja.
+ * 🔴 IZMENA U ODNOSU NA PRVU VERZIJU: razgovore između dece roditelj VIŠE NE ČITA.
+ * Nadzor nad dečjim razgovorom dodiruje i tuđe dete — poruke drugog deteta čitao bi
+ * neko ko u razgovoru ne učestvuje i kome njegov roditelj ništa nije dozvolio. To je
+ * bilo najteže mesto za procenu uticaja i za Politiku privatnosti; kad roditelj ne
+ * čita, problem nestaje ceo. Umesto sadržaja roditelj vidi KO i KOLIKO (vidi
+ * `dohvatiPregledDeteta`).
  *
- * 🟡 Uvid dodiruje i drugu stranu: poruke drugog deteta čita neko ko u razgovoru
- * ne učestvuje. Zato deca u svom prostoru moraju biti obaveštena da roditelj vidi
- * razgovore — obaveštenje stoji uz same poruke, ne u sitnim slovima.
+ * 🔴 Roditelj SAMO ČITA. Ne piše u razgovor: sa druge strane je odrastao čovek, a
+ * taj odnos otvara isključivo prekidač iz čl. 10. Punoletnom sagovorniku u razgovoru
+ * stoji vidljiv natpis da razgovor čita roditelj — to je i odvraćanje i poštenje.
  */
 export async function dohvatiRazgovoreDeteta(roditeljId: string, deteId: string) {
   const dete = await mojeDeteIliBaci(roditeljId, deteId);
 
   const konverzacije = await prisma.konverzacija.findMany({
-    where: { OR: [{ user1Id: dete.id }, { user2Id: dete.id }] },
+    where: {
+      OR: [
+        { user1Id: dete.id, user2: { maloletan: false } },
+        { user2Id: dete.id, user1: { maloletan: false } },
+      ],
+    },
     orderBy: { lastMessageAt: "desc" },
     take: 30,
     select: {
@@ -382,6 +435,7 @@ export async function dohvatiRazgovoreDeteta(roditeljId: string, deteId: string)
     return {
       id: k.id,
       drugi: drugi.pseudonim,
+      drugiId: drugi.id,
       poslednja: k.lastMessageAt.toISOString(),
       poruke: k.poruke.map((p) => ({
         id: p.id,
@@ -391,6 +445,69 @@ export async function dohvatiRazgovoreDeteta(roditeljId: string, deteId: string)
       })),
     };
   });
+}
+
+/**
+ * Šta roditelj vidi umesto sadržaja razgovora među decom (čl. 9 st. 2): KO i KOLIKO.
+ *
+ * Spisak prijatelja sa datumima i spisak razgovora bez ijedne poruke. Uz to
+ * istorija prepisa i oglasi stoje na svojim mestima, kao i do sada.
+ */
+export async function dohvatiPregledDeteta(roditeljId: string, deteId: string) {
+  const dete = await mojeDeteIliBaci(roditeljId, deteId);
+
+  const [prijateljstva, konverzacije] = await Promise.all([
+    prisma.prijateljstvo.findMany({
+      where: { OR: [{ aId: dete.id }, { bId: dete.id }], raskinutAt: null },
+      orderBy: { createdAt: "desc" },
+      select: {
+        createdAt: true,
+        poenIsplacen: true,
+        a: { select: { id: true, pseudonim: true, deaktiviranAt: true } },
+        b: { select: { id: true, pseudonim: true, deaktiviranAt: true } },
+      },
+    }),
+    prisma.konverzacija.findMany({
+      where: {
+        OR: [
+          { user1Id: dete.id, user2: { maloletan: true } },
+          { user2Id: dete.id, user1: { maloletan: true } },
+        ],
+      },
+      orderBy: { lastMessageAt: "desc" },
+      take: 50,
+      select: {
+        id: true,
+        lastMessageAt: true,
+        user1: { select: { id: true, pseudonim: true } },
+        user2: { select: { id: true, pseudonim: true } },
+        _count: { select: { poruke: true } },
+      },
+    }),
+  ]);
+
+  return {
+    prijatelji: prijateljstva
+      .map((p) => ({
+        drugi: p.a.id === dete.id ? p.b : p.a,
+        createdAt: p.createdAt,
+        poenIsplacen: p.poenIsplacen,
+      }))
+      .filter((p) => !p.drugi.deaktiviranAt)
+      .map((p) => ({
+        pseudonim: p.drugi.pseudonim,
+        od: p.createdAt.toISOString(),
+        poenIsplacen: p.poenIsplacen,
+      })),
+    // 🔴 Bez ijedne poruke — samo sa kim i kada. Sadržaj razgovora među decom
+    // roditelj ne vidi.
+    razgovori: konverzacije.map((k) => ({
+      id: k.id,
+      drugi: (k.user1.id === dete.id ? k.user2 : k.user1).pseudonim,
+      poruka: k._count.poruke,
+      poslednja: k.lastMessageAt.toISOString(),
+    })),
+  };
 }
 
 // ── Brisanje naloga (čl. 17) ─────────────────────────────────────────────────
@@ -406,11 +523,27 @@ export async function dohvatiRazgovoreDeteta(roditeljId: string, deteId: string)
  */
 export async function obrisiNalogDeteta(roditeljId: string, deteId: string) {
   const dete = await mojeDeteIliBaci(roditeljId, deteId);
+  return obrisiDecjiNalog(dete.id, dete.pseudonim, roditeljId, "Modul Deca, čl. 17");
+}
 
+/**
+ * Jezgro brisanja dečjeg naloga. Zove ga i roditelj (čl. 17) i noćni posao koji
+ * uklanja naloge koje niko nije preuzeo u roku od četrnaest dana (čl. 4b st. 5).
+ */
+export async function obrisiDecjiNalog(
+  deteId: string,
+  pseudonim: string,
+  uklonioId: string | null,
+  osnov: string
+) {
   await prisma.$transaction(async (tx) => {
-    const w = await tx.wallet.findUnique({ where: { userId: dete.id } });
+    const w = await tx.wallet.findUnique({ where: { userId: deteId } });
     const balans = w?.balance ?? 0;
-    if (w && balans > 0) {
+    // 🔴 `increment: balans` pokriva i NEGATIVNO stanje. Dečji zapis sme u minus
+    // (raskid prijateljstva, čl. 14c st. 3), pa nulovanje takvog zapisa dodaje POEN
+    // u sistem i Protokol mora da ide dublje u minus, ne plići. Uslov `> 0` bi tada
+    // tiho oborio zero-sum.
+    if (w && balans !== 0) {
       await tx.wallet.update({ where: { id: w.id }, data: { balance: 0 } });
       await tx.wallet.update({
         where: { id: PROTOKOL_WALLET_ID },
@@ -418,46 +551,53 @@ export async function obrisiNalogDeteta(roditeljId: string, deteId: string) {
       });
       await tx.transaction.create({
         data: {
-          fromWalletId: w.id,
-          toWalletId: PROTOKOL_WALLET_ID,
-          amount: balans,
+          fromWalletId: balans > 0 ? w.id : PROTOKOL_WALLET_ID,
+          toWalletId: balans > 0 ? PROTOKOL_WALLET_ID : w.id,
+          amount: Math.abs(balans),
           type: TransactionType.TRANSFER,
-          description: "Poništavanje POEN-a pri brisanju naloga deteta (Modul Deca, čl. 17)",
+          description: `Poništavanje POEN-a pri brisanju naloga deteta (${osnov})`,
         },
       });
     }
 
     await tx.marketplaceListing.updateMany({
-      where: { sellerId: dete.id, uklonjenAt: null },
+      where: { sellerId: deteId, uklonjenAt: null },
       data: {
         uklonjenAt: new Date(),
-        uklonioId: roditeljId,
-        uklonjenRazlog: "Brisanje naloga deteta (Modul Deca, čl. 17)",
+        uklonioId,
+        uklonjenRazlog: `Brisanje naloga deteta (${osnov})`,
         status: "UKLONJEN",
       },
     });
 
     // Postupak potvrde gubi predmet — zapisi koji još čekaju se brišu, a oni koji
     // su okončani (potvrđeni, osporeni, istekli) padaju uz sam nalog kaskadno.
-    await tx.roditeljstvoPotvrda.deleteMany({ where: { deteId: dete.id, status: "CEKA" } });
+    await tx.roditeljstvoPotvrda.deleteMany({ where: { deteId, status: "CEKA" } });
 
-    await tx.verifikacijaToken.deleteMany({ where: { korisnikId: dete.id } });
-    await tx.passwordResetToken.deleteMany({ where: { userId: dete.id } });
-    await tx.aktivnostLog.deleteMany({ where: { userId: dete.id } });
-    await tx.pseudonimIstorija.deleteMany({ where: { userId: dete.id } });
+    // Prijateljstva se brišu bez otpisa: POEN je upravo poništen u celini, pa bi
+    // otpis po prijateljstvu isti iznos oduzeo dvaput. Druga strana zadržava svojih
+    // 500 — nije ona ta koja odlazi.
+    await tx.prijateljstvo.deleteMany({ where: { OR: [{ aId: deteId }, { bId: deteId }] } });
+    await tx.prijateljToken.deleteMany({ where: { korisnikId: deteId } });
+    await tx.roditeljstvo.deleteMany({ where: { deteId } });
+    await tx.roditeljPoziv.deleteMany({ where: { deteId } });
+
+    await tx.verifikacijaToken.deleteMany({ where: { korisnikId: deteId } });
+    await tx.passwordResetToken.deleteMany({ where: { userId: deteId } });
+    await tx.aktivnostLog.deleteMany({ where: { userId: deteId } });
+    await tx.pseudonimIstorija.deleteMany({ where: { userId: deteId } });
 
     await tx.user.update({
-      where: { id: dete.id },
+      where: { id: deteId },
       data: {
         email: null,
         passwordHash: null,
-        ...poljaPseudonima(`obrisani-korisnik-${dete.id.slice(0, 8)}`),
+        ...poljaPseudonima(`obrisani-korisnik-${deteId.slice(0, 8)}`),
         telefon: null,
         location: null,
         avatar: null,
         datumRodjenja: null,
         maloletan: false,
-        roditeljId: null,
         dozvolaOdrasli: false,
         status: UserStatus.EXCLUDED,
         deaktiviranAt: new Date(),
@@ -465,7 +605,7 @@ export async function obrisiNalogDeteta(roditeljId: string, deteId: string) {
     });
   });
 
-  return { ok: true, pseudonim: dete.pseudonim };
+  return { ok: true, pseudonim };
 }
 
 // ── Potvrda roditeljstva (čl. 6) ─────────────────────────────────────────────
@@ -480,15 +620,20 @@ export async function potvrdeNaCekanju(potvrdjivacId: string) {
       rokDo: true,
       // 🔴 Pseudonim deteta i datum rođenja se NE šalju. Potvrđivač se izjašnjava o
       // činjenici koju i sam zna, ne o podatku koji mu se pokazuje (čl. 6 st. 1).
-      dete: { select: { datumRodjenja: true, roditelj: { select: { pseudonim: true } } } },
+      dete: {
+        select: {
+          datumRodjenja: true,
+          roditeljstvaKaoDete: { select: { roditelj: { select: { pseudonim: true } } } },
+        },
+      },
     },
   });
   const danas = beogradskiDan();
   return redovi
-    .filter((r) => r.dete.datumRodjenja && r.dete.roditelj)
+    .filter((r) => r.dete.datumRodjenja && r.dete.roditeljstvaKaoDete.length > 0)
     .map((r) => ({
       id: r.id,
-      roditelj: r.dete.roditelj!.pseudonim,
+      roditelj: r.dete.roditeljstvaKaoDete.map((v) => v.roditelj.pseudonim).join(" / "),
       godine: uzrast(r.dete.datumRodjenja!, danas),
       rokDo: r.rokDo.toISOString(),
     }));
@@ -525,13 +670,21 @@ export async function izjasniSe(
   if (odgovor === "OSPORIO") {
     const podaci = await prisma.roditeljstvoPotvrda.findUnique({
       where: { id: potvrdaId },
-      select: { dete: { select: { pseudonim: true, roditelj: { select: { pseudonim: true } } } } },
+      select: {
+        dete: {
+          select: {
+            pseudonim: true,
+            roditeljstvaKaoDete: { select: { roditelj: { select: { pseudonim: true } } } },
+          },
+        },
+      },
     });
     // O osporavanju odlučuje Upravni odbor (čl. 6 st. 6).
     const { posaljiAdminAlert } = await import("@/lib/adminAlert");
     void posaljiAdminAlert(
       "Osporeno postojanje deteta",
-      `Roditelj: ${podaci?.dete.roditelj?.pseudonim ?? "?"}\nNalog deteta: ${podaci?.dete.pseudonim ?? "?"}\nObrazloženje: ${obrazlozenje}`
+      `Roditelj: ${podaci?.dete.roditeljstvaKaoDete.map((v) => v.roditelj.pseudonim).join(" / ") ?? "?"}\n` +
+        `Nalog deteta: ${podaci?.dete.pseudonim ?? "?"}\nObrazloženje: ${obrazlozenje}`
     );
   }
   return { ok: true };
@@ -560,7 +713,14 @@ export async function obradiIstekleRokove(sada: Date = new Date()) {
     select: {
       id: true,
       potvrdjivacId: true,
-      dete: { select: { id: true, roditeljId: true, roditelj: { select: { pseudonim: true } } } },
+      dete: {
+        select: {
+          id: true,
+          roditeljstvaKaoDete: {
+            select: { roditeljId: true, roditelj: { select: { pseudonim: true } } },
+          },
+        },
+      },
     },
   });
 
@@ -574,42 +734,45 @@ export async function obradiIstekleRokove(sada: Date = new Date()) {
     });
     if (rezervisano.count === 0) continue;
 
-    const roditeljId = zapis.dete.roditeljId;
-    if (!roditeljId) continue;
-
-    const veza = await prisma.verifikacionaVeza.findUnique({
-      where: {
-        verifikatorId_verifikovaniId: {
-          verifikatorId: zapis.potvrdjivacId,
-          verifikovaniId: roditeljId,
+    // Izjašnjenje se traži povodom KONKRETNOG roditelja — onog čiju je stvarnost
+    // potvrdio ovaj potvrđivač. Kod deteta sa dvoje roditelja to je onaj u čijem je
+    // lancu potvrđivač; ako ih je više, padaju sve njegove potvrde tim roditeljima.
+    for (const veza of zapis.dete.roditeljstvaKaoDete) {
+      const vezaPotvrde = await prisma.verifikacionaVeza.findUnique({
+        where: {
+          verifikatorId_verifikovaniId: {
+            verifikatorId: zapis.potvrdjivacId,
+            verifikovaniId: veza.roditeljId,
+          },
         },
-      },
-      select: { id: true },
-    });
-    // Potvrda je u međuvremenu već pala nekim drugim putem — nema šta da se poništi.
-    if (!veza) continue;
+        select: { id: true },
+      });
+      // Potvrda je u međuvremenu već pala nekim drugim putem — nema šta da se poništi.
+      if (!vezaPotvrde) continue;
 
-    await ponistiVerifikaciju(veza.id);
-    await oslobodiSlot(zapis.potvrdjivacId);
-    ponisteno += 1;
+      await ponistiVerifikaciju(vezaPotvrde.id);
+      await oslobodiSlot(zapis.potvrdjivacId);
+      ponisteno += 1;
 
-    await obavesti(zapis.potvrdjivacId, {
-      tip: "roditeljstvo_istekla",
-      kljuc: "notifikacije.roditeljstvo_istekla",
-      parametri: { pseudonim: zapis.dete.roditelj?.pseudonim ?? "" },
-      naslov: "Potvrda stvarnosti je poništena",
-      tekst: `Nisi se izjasnio/la u roku od ${ROK_POTVRDE_DANA} dana, pa je tvoja potvrda stvarnosti korisnika ${zapis.dete.roditelj?.pseudonim ?? ""} poništena.`,
-      link: "/verifikacija",
-    }).catch(() => {});
+      await obavesti(zapis.potvrdjivacId, {
+        tip: "roditeljstvo_istekla",
+        kljuc: "notifikacije.roditeljstvo_istekla",
+        parametri: { pseudonim: veza.roditelj.pseudonim },
+        naslov: "Potvrda stvarnosti je poništena",
+        tekst: `Nisi se izjasnio/la u roku od ${ROK_POTVRDE_DANA} dana, pa je tvoja potvrda stvarnosti korisnika ${veza.roditelj.pseudonim} poništena.`,
+        link: "/verifikacija",
+      }).catch(() => {});
 
-    await obavesti(roditeljId, {
-      tip: "roditeljstvo_pala_potvrda",
-      kljuc: "notifikacije.roditeljstvo_pala_potvrda",
-      parametri: {},
-      naslov: "Jedna potvrda tvoje stvarnosti je pala",
-      tekst: "Neko ko te je potvrdio nije se izjasnio o postojanju tvog deteta u roku od 30 dana.",
-      link: "/verifikacija",
-    }).catch(() => {});
+      await obavesti(veza.roditeljId, {
+        tip: "roditeljstvo_pala_potvrda",
+        kljuc: "notifikacije.roditeljstvo_pala_potvrda",
+        parametri: {},
+        naslov: "Jedna potvrda tvoje stvarnosti je pala",
+        tekst:
+          "Neko ko te je potvrdio nije se izjasnio o postojanju tvog deteta u roku od 30 dana.",
+        link: "/verifikacija",
+      }).catch(() => {});
+    }
   }
 
   return { pregledano: istekli.length, ponisteno };
@@ -632,28 +795,47 @@ async function oslobodiSlot(potvrdjivacId: string, tx?: Tx) {
 
 // ── Prikaz roditelju ──────────────────────────────────────────────────────────
 
-/** Spisak dece sa stanjem postupka potvrde — za odeljak „Moja deca" u profilu. */
+/** Spisak dece sa stanjem naloga i postupka potvrde — za odeljak „Moja deca". */
 export async function dohvatiDecu(roditeljId: string) {
   const deca = await prisma.user.findMany({
-    where: { roditeljId, maloletan: true, deaktiviranAt: null },
+    where: {
+      maloletan: true,
+      deaktiviranAt: null,
+      roditeljstvaKaoDete: { some: { roditeljId } },
+    },
     orderBy: { createdAt: "asc" },
     select: {
-      id: true,
+      ...IZBOR_UCESNIKA,
       pseudonim: true,
       avatar: true,
       datumRodjenja: true,
-      dozvolaOdrasli: true,
       wallet: { select: { balance: true } },
+      roditeljPoziv: { select: { kod: true, brisanjeDo: true } },
       potvrdeRoditeljstvaZaMene: { select: { status: true, rokDo: true } },
+      roditeljstvaKaoDete: {
+        select: {
+          roditeljId: true,
+          roditelj: {
+            select: {
+              pseudonim: true,
+              verified: true,
+              indeksStvarnosti: true,
+              status: true,
+              deaktiviranAt: true,
+            },
+          },
+        },
+      },
     },
   });
   const danas = beogradskiDan();
   return deca.map((d) => {
     const potvrde = d.potvrdeRoditeljstvaZaMene;
     const cekaju = potvrde.filter((p) => p.status === "CEKA");
-    const rokDo = cekaju.length > 0
-      ? cekaju.reduce((min, p) => (p.rokDo < min ? p.rokDo : min), cekaju[0].rokDo)
-      : null;
+    const rokDo =
+      cekaju.length > 0
+        ? cekaju.reduce((min, p) => (p.rokDo < min ? p.rokDo : min), cekaju[0].rokDo)
+        : null;
     return {
       id: d.id,
       pseudonim: d.pseudonim,
@@ -661,6 +843,11 @@ export async function dohvatiDecu(roditeljId: string) {
       godine: d.datumRodjenja ? uzrast(d.datumRodjenja, danas) : null,
       dozvolaOdrasli: d.dozvolaOdrasli,
       balans: d.wallet?.balance ?? 0,
+      stanje: ucesnikIzReda(d).stanje,
+      // Šestocifreni kod stoji uz dete i posle preuzimanja — njime DRUGI roditelj
+      // ulazi u nalog (čl. 4b st. 6).
+      kod: d.roditeljPoziv?.kod ?? null,
+      roditelji: d.roditeljstvaKaoDete.map((r) => r.roditelj.pseudonim),
       potvrde: {
         ukupno: potvrde.length,
         potvrdjeno: potvrde.filter((p) => p.status === "POTVRDIO").length,

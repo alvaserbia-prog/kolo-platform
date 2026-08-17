@@ -202,9 +202,14 @@ describe.skipIf(!IMA_BAZU)("Modul Deca — ceo tok nad bazom", () => {
     deteId = rez.id;
     expect(rez.brojPotvrdjivaca).toBe(2);
 
-    const dete = await prisma.user.findUnique({ where: { id: deteId } });
+    const dete = await prisma.user.findUnique({
+      where: { id: deteId },
+      include: { roditeljstvaKaoDete: true },
+    });
     expect(dete!.maloletan).toBe(true);
-    expect(dete!.roditeljId).toBe(roditeljId);
+    // Veza sa roditeljem živi u zasebnoj tabeli — dete ima najviše dvoje roditelja
+    // i oba imaju ista ovlašćenja (čl. 4b st. 6).
+    expect(dete!.roditeljstvaKaoDete.map((r) => r.roditeljId)).toEqual([roditeljId]);
     expect(dete!.dozvolaOdrasli).toBe(false);
     expect(dete!.tipKorisnika).toBe(TipKorisnika.NEVERIFIKOVAN);
 
@@ -331,10 +336,13 @@ describe.skipIf(!IMA_BAZU)("Modul Deca — ceo tok nad bazom", () => {
 
     await obrisiNalogDeteta(roditeljId, deteId);
 
-    const dete = await prisma.user.findUniqueOrThrow({ where: { id: deteId } });
+    const dete = await prisma.user.findUniqueOrThrow({
+      where: { id: deteId },
+      include: { roditeljstvaKaoDete: true },
+    });
     expect(dete.deaktiviranAt).not.toBeNull();
     expect(dete.maloletan).toBe(false);
-    expect(dete.roditeljId).toBeNull();
+    expect(dete.roditeljstvaKaoDete).toHaveLength(0);
     expect(dete.pseudonim.startsWith("obrisani-korisnik-")).toBe(true);
 
     const zapisDeteta = await prisma.wallet.findUniqueOrThrow({ where: { userId: deteId } });

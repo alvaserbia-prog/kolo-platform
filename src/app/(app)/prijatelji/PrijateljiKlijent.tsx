@@ -9,7 +9,18 @@ import QrSkener from "@/components/verifikacija/QrSkener";
 // biblioteka ne ulazi u početni bundle.
 const QRCodeSVG = dynamic(() => import("qrcode.react").then((m) => m.QRCodeSVG), { ssr: false });
 
-type Prijatelj = { id: string; pseudonim: string; avatar: string | null };
+type Prijatelj = {
+  /** Id PRIJATELJSTVA (ne korisnika) — po njemu ide raskid. */
+  id: string;
+  korisnikId: string;
+  pseudonim: string;
+  avatar: string | null;
+  isplaceno: boolean;
+  /** Braća i sestre: prijateljstvo radi, samo ne nosi POEN (čl. 14b st. 4). */
+  bezPoena: boolean;
+  /** Čeka drugu stranu da postane aktivna — „500 na čekanju". */
+  naCekanju: boolean;
+};
 
 /** Ista paleta kao na dečjoj početnoj — dečji prostor ima svoje boje, ne zelenu. */
 const BOJE = ["#E4572E", "#F4A259", "#F2C14E", "#8FC93A", "#4CB5AE", "#3D7EA6", "#8E6FBF", "#E56399"];
@@ -17,6 +28,7 @@ const BOJE = ["#E4572E", "#F4A259", "#F2C14E", "#8FC93A", "#4CB5AE", "#3D7EA6", 
 export default function PrijateljiKlijent() {
   const t = useTranslations("prijatelji");
   const [broj, setBroj] = useState<number | null>(null);
+  const [naCekanju, setNaCekanju] = useState(0);
   const [spisak, setSpisak] = useState<Prijatelj[]>([]);
   const [kod, setKod] = useState<string | null>(null);
   const [skenira, setSkenira] = useState(false);
@@ -29,6 +41,7 @@ export default function PrijateljiKlijent() {
       if (!res.ok) throw new Error();
       const data = await res.json();
       setBroj(data.broj);
+      setNaCekanju(data.poenNaCekanju ?? 0);
       setSpisak(data.prijatelji);
     } catch {
       setGreska(t("greska_ucitavanje"));
@@ -70,6 +83,28 @@ export default function PrijateljiKlijent() {
     }
   }
 
+  /**
+   * Raskid (čl. 14c). 🔴 Potvrda pre raskida NIJE ukras: otpisuje se 500 POEN i
+   * onome ko raskida i onome ko je raskinut, pa tekst mora da kaže tačno to.
+   */
+  async function raskini(p: Prijatelj) {
+    const pitanje = p.isplaceno
+      ? t("raskid_potvrda_poen", { pseudonim: p.pseudonim })
+      : t("raskid_potvrda", { pseudonim: p.pseudonim });
+    if (!confirm(pitanje)) return;
+    setGreska(null);
+    setPoruka(null);
+    try {
+      const res = await fetch(`/api/deca/prijatelji/${p.id}`, { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error ?? t("greska_slanje"));
+      setPoruka(t("raskid_uspeh", { pseudonim: p.pseudonim }));
+      await ucitaj();
+    } catch (e) {
+      setGreska(e instanceof Error ? e.message : t("greska_slanje"));
+    }
+  }
+
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       {/* Umesto indeksa stvarnosti — broj prijatelja. */}
@@ -82,6 +117,13 @@ export default function PrijateljiKlijent() {
           {broj ?? "–"}
         </p>
         <p className="text-sm text-kolo-muted">{t("brojac_opis")}</p>
+        {/* „500 na čekanju" uz pseudonim je i namera, ne samo obaveštenje: dete koje
+            je aktivno ne dobija ništa dok drugom roditelj ne preuzme nalog. */}
+        {naCekanju > 0 && (
+          <p className="mt-2 rounded-xl bg-kolo-bg px-3 py-2 text-sm font-semibold" style={{ color: BOJE[0] }}>
+            {t("na_cekanju", { iznos: naCekanju })}
+          </p>
+        )}
       </section>
 
       {poruka && (
@@ -151,14 +193,34 @@ export default function PrijateljiKlijent() {
         {spisak.length === 0 ? (
           <p className="mt-2 text-sm text-kolo-muted">{t("spisak_prazno")}</p>
         ) : (
-          <ul className="mt-3 flex flex-wrap gap-2">
+          <ul className="mt-3 space-y-2">
             {spisak.map((p, i) => (
               <li
                 key={p.id}
-                style={{ backgroundColor: BOJE[i % BOJE.length] }}
-                className="rounded-full px-3 py-1.5 text-sm font-bold text-white"
+                className="flex items-center justify-between gap-3 rounded-2xl bg-kolo-bg px-3 py-2"
               >
-                {p.pseudonim}
+                <span className="flex min-w-0 items-center gap-2">
+                  <span
+                    style={{ backgroundColor: BOJE[i % BOJE.length] }}
+                    className="truncate rounded-full px-3 py-1.5 text-sm font-bold text-white"
+                  >
+                    {p.pseudonim}
+                  </span>
+                  <span className="text-xs text-kolo-muted">
+                    {p.bezPoena
+                      ? t("oznaka_bez_poena")
+                      : p.isplaceno
+                        ? t("oznaka_isplaceno")
+                        : t("oznaka_ceka")}
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() => raskini(p)}
+                  className="shrink-0 rounded-full border border-kolo-border px-3 py-1 text-xs font-medium text-kolo-muted transition hover:border-kolo-danger hover:text-kolo-danger"
+                >
+                  {t("dugme_raskini")}
+                </button>
               </li>
             ))}
           </ul>

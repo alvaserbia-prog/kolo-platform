@@ -13,6 +13,11 @@ type Dete = {
   godine: number | null;
   dozvolaOdrasli: boolean;
   balans: number;
+  /** Tri stanja naloga (čl. 4c). Roditelj mora da vidi u kom je njegovo dete. */
+  stanje: "NA_CEKANJU" | "POVEZANO" | "AKTIVNO";
+  /** Šestocifreni kod kojim ulazi DRUGI roditelj (čl. 4b st. 6). */
+  kod: string | null;
+  roditelji: string[];
   potvrde: {
     ukupno: number;
     potvrdjeno: number;
@@ -23,7 +28,9 @@ type Dete = {
   };
 };
 
-type Korak = "spisak" | "obavestenje" | "obrazac";
+type Poziv = { token: string; deteId: string; pseudonim: string; brisanjeDo: string };
+
+type Korak = "spisak" | "obavestenje" | "obrazac" | "preuzmi";
 
 function danaDo(iso: string): number {
   const ms = new Date(iso).getTime() - Date.now();
@@ -42,6 +49,7 @@ export default function MojaDeca() {
   const t = useTranslations("deca");
   const [korak, setKorak] = useState<Korak>("spisak");
   const [deca, setDeca] = useState<Dete[] | null>(null);
+  const [pozivi, setPozivi] = useState<Poziv[]>([]);
   const [greska, setGreska] = useState<string | null>(null);
 
   const ucitaj = useCallback(async () => {
@@ -50,6 +58,10 @@ export default function MojaDeca() {
       if (res.status === 410) return setDeca([]); // modul nije u radu
       if (!res.ok) throw new Error();
       setDeca((await res.json()).deca);
+      // Primarni put iz čl. 4b st. 6: roditelj koji se registrovao istim imejlom
+      // koji je dete unelo ne mora ništa da traži — veza mu se sama predloži.
+      const resP = await fetch("/api/deca/preuzmi", { cache: "no-store" });
+      if (resP.ok) setPozivi((await resP.json()).pozivi ?? []);
     } catch {
       setGreska(t("greska_ucitavanje"));
     }
@@ -70,6 +82,28 @@ export default function MojaDeca() {
 
       {korak === "spisak" && (
         <>
+          {/* Predlog veze — dete je pri registraciji navelo baš ovu adresu. */}
+          {pozivi.length > 0 && (
+            <ul className="mt-4 space-y-2">
+              {pozivi.map((p) => (
+                <li
+                  key={p.token}
+                  className="rounded-xl border-l-4 border-kolo-green-700 bg-kolo-bg px-4 py-3"
+                >
+                  <p className="text-sm text-kolo-text">
+                    {t("poziv_predlog", { pseudonim: p.pseudonim })}
+                  </p>
+                  <Link
+                    href={`/dete-poziv/${p.token}`}
+                    className="mt-2 inline-block rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white"
+                  >
+                    {t("poziv_dugme")}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
           {deca && deca.length > 0 && (
             <ul className="mt-4 space-y-2">
               {deca.map((d) => (
@@ -81,7 +115,8 @@ export default function MojaDeca() {
                     <span className="min-w-0">
                       <span className="block truncate font-medium text-kolo-text">{d.pseudonim}</span>
                       <span className="block text-xs text-kolo-muted">
-                        {d.godine !== null && t("godina", { broj: d.godine })}
+                        {d.godine !== null && `${t("godina", { broj: d.godine })} · `}
+                        {t(`stanje_${d.stanje.toLowerCase()}`)}
                         {" · "}
                         {d.potvrde.ceka > 0
                           ? t("potvrda_u_toku", {
@@ -102,14 +137,36 @@ export default function MojaDeca() {
             </ul>
           )}
 
-          <button
-            type="button"
-            onClick={() => setKorak("obavestenje")}
-            className="mt-4 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800"
-          >
-            {t("dugme_dodaj")}
-          </button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setKorak("obavestenje")}
+              className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800"
+            >
+              {t("dugme_dodaj")}
+            </button>
+            {/* Isti obrazac služi PRVOG roditelja kome poruka nije stigla i DRUGOG
+                roditelja (uvek). Nema zasebnog puta za „drugog roditelja": obojica
+                rade istu radnju i dobijaju ista ovlašćenja (čl. 4b st. 6). */}
+            <button
+              type="button"
+              onClick={() => setKorak("preuzmi")}
+              className="rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg"
+            >
+              {t("dugme_preuzmi")}
+            </button>
+          </div>
         </>
+      )}
+
+      {korak === "preuzmi" && (
+        <PreuzmiObrazac
+          onGotovo={async () => {
+            setKorak("spisak");
+            await ucitaj();
+          }}
+          onOdustani={() => setKorak("spisak")}
+        />
       )}
 
       {korak === "obavestenje" && <Obavestenje onDalje={() => setKorak("obrazac")} onOdustani={() => setKorak("spisak")} />}
@@ -282,6 +339,104 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
           className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-60"
         >
           {salje ? t("dugme_salje") : t("dugme_otvori")}
+        </button>
+        <button
+          type="button"
+          onClick={onOdustani}
+          className="rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg"
+        >
+          {t("dugme_odustani")}
+        </button>
+      </div>
+    </form>
+  );
+}
+
+/**
+ * Preuzimanje naloga deteta pseudonimom i šestocifrenim kodom (čl. 4b st. 6).
+ *
+ * Datum rođenja se traži samo pri PRVOM preuzimanju; drugi roditelj ga ostavlja
+ * praznim, jer se posle upisa ne menja (čl. 7). Server odbija prazan datum samo kad
+ * ga nalog još nema, pa polje ovde nije obavezno.
+ */
+function PreuzmiObrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: () => void }) {
+  const t = useTranslations("deca");
+  const [pseudonim, setPseudonim] = useState("");
+  const [kod, setKod] = useState("");
+  const [datum, setDatum] = useState("");
+  const [greska, setGreska] = useState<string | null>(null);
+  const [salje, setSalje] = useState(false);
+
+  const danas = new Date();
+  const najranije = new Date(danas.getFullYear() - UZRAST_PUNOLETSTVO, danas.getMonth(), danas.getDate() + 1);
+  const najkasnije = new Date(danas.getFullYear() - UZRAST_MIN, danas.getMonth(), danas.getDate());
+  const polje = "mt-1 w-full rounded-xl border border-kolo-border px-3 py-2 text-sm";
+
+  async function posalji(e: React.FormEvent) {
+    e.preventDefault();
+    setGreska(null);
+    setSalje(true);
+    try {
+      const res = await fetch("/api/deca/preuzmi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pseudonim, kod, datumRodjenja: datum || undefined }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error ?? t("greska_slanje"));
+      onGotovo();
+    } catch (err) {
+      setGreska(err instanceof Error ? err.message : t("greska_slanje"));
+    } finally {
+      setSalje(false);
+    }
+  }
+
+  return (
+    <form onSubmit={posalji} className="mt-4 space-y-3 rounded-xl border border-kolo-border p-4">
+      <p className="text-sm text-kolo-muted">{t("preuzmi_opis")}</p>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_pseudonim_deteta")}</span>
+        <input className={polje} value={pseudonim} onChange={(e) => setPseudonim(e.target.value)} required autoComplete="off" />
+      </label>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_kod")}</span>
+        <input
+          className={`${polje} tracking-widest tabular-nums`}
+          value={kod}
+          onChange={(e) => setKod(e.target.value)}
+          inputMode="numeric"
+          maxLength={7}
+          required
+          autoComplete="off"
+        />
+        <span className="mt-1 block text-xs text-kolo-muted">{t("polje_kod_opis")}</span>
+      </label>
+
+      <label className="block text-sm">
+        <span className="font-medium text-kolo-text">{t("polje_datum_preuzimanje")}</span>
+        <input
+          type="date"
+          className={polje}
+          value={datum}
+          onChange={(e) => setDatum(e.target.value)}
+          min={najranije.toISOString().slice(0, 10)}
+          max={najkasnije.toISOString().slice(0, 10)}
+        />
+        <span className="mt-1 block text-xs text-kolo-muted">{t("polje_datum_preuzimanje_opis")}</span>
+      </label>
+
+      {greska && <p className="text-sm text-kolo-danger">{greska}</p>}
+
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="submit"
+          disabled={salje}
+          className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-60"
+        >
+          {salje ? t("dugme_salje") : t("dugme_preuzmi")}
         </button>
         <button
           type="button"

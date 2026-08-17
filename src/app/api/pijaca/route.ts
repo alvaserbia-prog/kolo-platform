@@ -10,7 +10,8 @@ import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
-import { ucitajUcesnika, uMirovanju, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
+import { nalogRadi, stanjeNaloga, ucitajUcesnika, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
+import { PORUKA_CEKA_RODITELJA } from "@/lib/deca-pravila";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -151,13 +152,11 @@ export async function POST(req: NextRequest) {
   // a on ni sam ta ograničenja nema.
   const punaPravaObjave = korisnik.verified || korisnik.maloletan;
 
-  // Nalog u mirovanju (Modul Deca, čl. 16) ne objavljuje — njegovi zatečeni oglasi
-  // su već povučeni, pa bi nov oglas bio jedini vidljiv trag naloga koji miruje.
-  if (await uMirovanju(session.user.id)) {
-    return await greska(
-      "Nalog miruje dok stvarnost roditelja ne bude ponovo potvrđena. Ništa nije obrisano.",
-      403,
-    );
+  // Nalog koji još čeka roditelja (Modul Deca, čl. 4c) ne objavljuje. Dete na
+  // čekanju ima profil, skenira QR kodove i sklapa prijateljstva — ništa više;
+  // iza njega još ne stoji nijedan odrastao čovek koji je sam prošao registraciju.
+  if (!nalogRadi(await stanjeNaloga(session.user.id))) {
+    return await greska(PORUKA_CEKA_RODITELJA, 403);
   }
 
   const brojAktivnihOglasa = punaPravaObjave

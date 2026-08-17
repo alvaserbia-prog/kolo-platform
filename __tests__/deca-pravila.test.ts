@@ -1,6 +1,9 @@
 import { describe, it, expect } from "vitest";
 import {
+  NAJAVA_PUNOLETSTVA_DANA,
+  PRIJATELJSTVO_POEN,
   ROK_POTVRDE_DANA,
+  ROK_PREUZIMANJA_DANA,
   UZRAST_MIN,
   UZRAST_PUNOLETSTVO,
   danaDoIsteka,
@@ -12,16 +15,27 @@ import {
   smeDaVidiOglas,
   uzrast,
   uzrastZaModul,
+  datumPunoletstva,
+  jePunoletan,
+  nalogRadi,
+  otpisPriPunoletstvu,
+  poenSeUpisuje,
+  prijateljstvoNosiPoen,
+  rokPreuzimanja,
+  smeUPricaonicu,
+  stanjeDeteta,
+  suBracaISestre,
+  vremeZaNajavuPunoletstva,
   type Ucesnik,
 } from "@/lib/deca-pravila";
 
 const DANAS = new Date("2026-08-14T00:00:00.000Z");
 
 function dete(o: Partial<Ucesnik> = {}): Ucesnik {
-  return { id: "d1", maloletan: true, dozvolaOdrasli: false, roditeljId: "r1", ...o };
+  return { id: "d1", maloletan: true, dozvolaOdrasli: false, roditeljIds: ["r1"], stanje: "AKTIVNO", ...o };
 }
 function odrastao(o: Partial<Ucesnik> = {}): Ucesnik {
-  return { id: "o1", maloletan: false, dozvolaOdrasli: false, roditeljId: null, ...o };
+  return { id: "o1", maloletan: false, dozvolaOdrasli: false, roditeljIds: [], stanje: "AKTIVNO", ...o };
 }
 
 describe("uzrast", () => {
@@ -55,7 +69,7 @@ describe("uzrastZaModul — granice iz čl. 2", () => {
 
 describe("smeDaKomunicira — čl. 12", () => {
   it("dvoje dece smeju uvek, bez ijedne saglasnosti", () => {
-    expect(smeDaKomunicira(dete({ id: "a" }), dete({ id: "b", roditeljId: "r2" })).ok).toBe(true);
+    expect(smeDaKomunicira(dete({ id: "a" }), dete({ id: "b", roditeljIds: ["r2"] })).ok).toBe(true);
   });
 
   it("dete i odrastao ne smeju bez saglasnosti roditelja", () => {
@@ -82,31 +96,31 @@ describe("smeDaKomunicira — čl. 12", () => {
 describe("smeDaPrepise — čl. 14", () => {
   it("roditelj prepisuje svom detetu i bez saglasnosti (st. 2)", () => {
     const r = odrastao({ id: "r1" });
-    expect(smeDaPrepise(r, dete({ roditeljId: "r1" })).ok).toBe(true);
+    expect(smeDaPrepise(r, dete({ roditeljIds: ["r1"] })).ok).toBe(true);
   });
 
   it("dete prepisuje sopstvenom roditelju i bez saglasnosti", () => {
-    expect(smeDaPrepise(dete({ roditeljId: "r1" }), odrastao({ id: "r1" })).ok).toBe(true);
+    expect(smeDaPrepise(dete({ roditeljIds: ["r1"] }), odrastao({ id: "r1" })).ok).toBe(true);
   });
 
   it("🔴 punoletni ne prepisuje TUĐEM detetu bez saglasnosti", () => {
-    expect(smeDaPrepise(odrastao({ id: "x" }), dete({ roditeljId: "r1" })).ok).toBe(false);
+    expect(smeDaPrepise(odrastao({ id: "x" }), dete({ roditeljIds: ["r1"] })).ok).toBe(false);
   });
 
   it("deca prepisuju međusobno", () => {
-    expect(smeDaPrepise(dete({ id: "a" }), dete({ id: "b", roditeljId: "r2" })).ok).toBe(true);
+    expect(smeDaPrepise(dete({ id: "a" }), dete({ id: "b", roditeljIds: ["r2"] })).ok).toBe(true);
   });
 });
 
 describe("smeDaVidiOglas — čl. 13", () => {
-  const oglasivac = dete({ id: "d1", roditeljId: "r1" });
+  const oglasivac = dete({ id: "d1", roditeljIds: ["r1"] });
 
   it("🔴 gost NIKADA ne vidi oglas maloletnog korisnika", () => {
     expect(smeDaVidiOglas(null, oglasivac)).toBe(false);
   });
 
   it("drugo dete ga vidi", () => {
-    expect(smeDaVidiOglas(dete({ id: "d2", roditeljId: "r2" }), oglasivac)).toBe(true);
+    expect(smeDaVidiOglas(dete({ id: "d2", roditeljIds: ["r2"] }), oglasivac)).toBe(true);
   });
 
   it("sopstveni roditelj ga vidi i kad je prekidač isključen", () => {
@@ -132,8 +146,8 @@ describe("smeDaVidiOglas — čl. 13", () => {
 
 describe("jeMojeDete", () => {
   it("razlikuje sopstveno dete od tuđeg", () => {
-    expect(jeMojeDete(odrastao({ id: "r1" }), dete({ roditeljId: "r1" }))).toBe(true);
-    expect(jeMojeDete(odrastao({ id: "r2" }), dete({ roditeljId: "r1" }))).toBe(false);
+    expect(jeMojeDete(odrastao({ id: "r1" }), dete({ roditeljIds: ["r1"] }))).toBe(true);
+    expect(jeMojeDete(odrastao({ id: "r2" }), dete({ roditeljIds: ["r1"] }))).toBe(false);
   });
 
   it("punoletan korisnik nikome nije dete", () => {
@@ -160,5 +174,125 @@ describe("rok izjašnjenja — čl. 6 st. 2", () => {
 
   it("istekao rok daje nulu, ne negativan broj", () => {
     expect(danaDoIsteka(new Date("2026-01-01"), DANAS)).toBe(0);
+  });
+});
+
+
+describe("tri stanja naloga — čl. 4c", () => {
+  const redovan = { aktivan: true, redovan: true };
+  const novClan = { aktivan: true, redovan: false };
+
+  it("bez ijednog roditelja nalog ČEKA", () => {
+    expect(stanjeDeteta([])).toBe("NA_CEKANJU");
+  });
+
+  it("roditelj koji nije redovan član daje POVEZANO", () => {
+    expect(stanjeDeteta([novClan])).toBe("POVEZANO");
+  });
+
+  it("🔴 dovoljan je JEDAN redovan roditelj — dvoje ne sme da bude gore od jednog", () => {
+    expect(stanjeDeteta([novClan, redovan])).toBe("AKTIVNO");
+  });
+
+  it("ugašen roditelj se ne broji", () => {
+    expect(stanjeDeteta([{ aktivan: false, redovan: true }])).toBe("NA_CEKANJU");
+  });
+
+  it("🔴 Pričaonica se otvara tek kad nalog preuzme neko ko je prošao registraciju", () => {
+    expect(smeUPricaonicu("NA_CEKANJU")).toBe(false);
+    expect(smeUPricaonicu("POVEZANO")).toBe(true);
+    expect(smeUPricaonicu("AKTIVNO")).toBe(true);
+  });
+
+  it("POEN se upisuje tek u stanju AKTIVNO", () => {
+    expect(poenSeUpisuje("POVEZANO")).toBe(false);
+    expect(poenSeUpisuje("AKTIVNO")).toBe(true);
+  });
+
+  it("nalog na čekanju ne objavljuje, ne piše i ne prepisuje", () => {
+    expect(nalogRadi("NA_CEKANJU")).toBe(false);
+    expect(nalogRadi("POVEZANO")).toBe(true);
+  });
+});
+
+describe("nalog na čekanju u komunikaciji i prepisu", () => {
+  const naCekanju = dete({ id: "c", roditeljIds: [], stanje: "NA_CEKANJU" });
+
+  it("ne može da piše ni drugom detetu", () => {
+    expect(smeDaKomunicira(naCekanju, dete({ id: "b", roditeljIds: ["r2"] })).ok).toBe(false);
+  });
+
+  it("ne može da prepiše POEN nikome", () => {
+    expect(smeDaPrepise(naCekanju, dete({ id: "b", roditeljIds: ["r2"] })).ok).toBe(false);
+  });
+
+  it("ni odrastao ne može njemu, ni uz uključen prekidač", () => {
+    expect(
+      smeDaKomunicira(odrastao({ id: "x" }), { ...naCekanju, dozvolaOdrasli: true }).ok
+    ).toBe(false);
+  });
+});
+
+describe("prijateljstvo nosi POEN — čl. 14b", () => {
+  const a = dete({ id: "a", roditeljIds: ["r1"] });
+  const b = dete({ id: "b", roditeljIds: ["r2"] });
+
+  it("dve aktivne strane, različiti roditelji — nosi", () => {
+    expect(prijateljstvoNosiPoen(a, b)).toBe(true);
+  });
+
+  it("🔴 obostrano čekanje: dok jedna strana nije aktivna, ne nosi", () => {
+    expect(prijateljstvoNosiPoen(a, { ...b, stanje: "POVEZANO" })).toBe(false);
+    expect(prijateljstvoNosiPoen({ ...a, stanje: "NA_CEKANJU" }, b)).toBe(false);
+  });
+
+  it("🔴 braća i sestre — prijateljstvo radi, ali POEN ne nosi", () => {
+    const brat = dete({ id: "b2", roditeljIds: ["r1"] });
+    expect(suBracaISestre(a, brat)).toBe(true);
+    expect(prijateljstvoNosiPoen(a, brat)).toBe(false);
+    // Zajednički je dovoljan JEDAN roditelj — polubrat je isto brat.
+    expect(suBracaISestre(a, dete({ id: "b3", roditeljIds: ["r1", "r9"] }))).toBe(true);
+  });
+
+  it("punoletan korisnik u prijateljstvu ne učestvuje", () => {
+    expect(prijateljstvoNosiPoen(a, odrastao({ id: "o" }))).toBe(false);
+  });
+});
+
+describe("punoletstvo — čl. 19", () => {
+  it("otpis je broj isplaćenih prijateljstava × 500", () => {
+    expect(otpisPriPunoletstvu(0)).toBe(0);
+    expect(otpisPriPunoletstvu(30)).toBe(30 * PRIJATELJSTVO_POEN);
+    expect(otpisPriPunoletstvu(30)).toBe(15_000);
+  });
+
+  it("datum punoletstva je osamnaesti rođendan", () => {
+    expect(datumPunoletstva(new Date("2008-08-14T00:00:00.000Z")).toISOString().slice(0, 10)).toBe(
+      "2026-08-14"
+    );
+  });
+
+  it("jePunoletan hvata sam dan rođendana, ne dan posle", () => {
+    expect(jePunoletan(new Date("2008-08-14T00:00:00.000Z"), DANAS)).toBe(true);
+    expect(jePunoletan(new Date("2008-08-15T00:00:00.000Z"), DANAS)).toBe(false);
+  });
+
+  it("nalog bez datuma rođenja (dete na čekanju) nikad nije punoletan", () => {
+    expect(jePunoletan(null, DANAS)).toBe(false);
+    expect(vremeZaNajavuPunoletstva(null, DANAS)).toBe(false);
+  });
+
+  it(`najava ide ${NAJAVA_PUNOLETSTVA_DANA} dana ranije, ne pre i ne posle`, () => {
+    // Rođendan za 20 dana → u prozoru; za 40 dana → još ne.
+    expect(vremeZaNajavuPunoletstva(new Date("2008-09-03T00:00:00.000Z"), DANAS)).toBe(true);
+    expect(vremeZaNajavuPunoletstva(new Date("2008-10-01T00:00:00.000Z"), DANAS)).toBe(false);
+    // Već punoletan — najava nema smisla, obrada je na redu.
+    expect(vremeZaNajavuPunoletstva(new Date("2008-08-01T00:00:00.000Z"), DANAS)).toBe(false);
+  });
+});
+
+describe("rok preuzimanja naloga — čl. 4b st. 5", () => {
+  it(`traje ${ROK_PREUZIMANJA_DANA} dana od registracije deteta`, () => {
+    expect(danaDoIsteka(rokPreuzimanja(DANAS), DANAS)).toBe(ROK_PREUZIMANJA_DANA);
   });
 });

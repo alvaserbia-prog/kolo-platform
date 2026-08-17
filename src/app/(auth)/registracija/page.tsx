@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -213,6 +214,18 @@ export default function RegistracijaPage() {
           {t("vec_imate_nalog")}{" "}
           <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">{t("prijavite_se")}</Link>
         </p>
+
+        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
+            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
+            a ne svoj, i ne traži datum rođenja. */}
+        {MODUL_DECA_AKTIVAN && (
+          <p className="mt-2 text-center text-sm text-kolo-muted">
+            {t("dete_pitanje")}{" "}
+            <Link href="/registracija/dete" className="font-medium text-kolo-green-700 hover:underline">
+              {t("dete_link")}
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );
