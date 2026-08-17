@@ -33,9 +33,15 @@ interface Props {
   zabelezenDoprinos?: number;
   /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
   smeDaSalje?: boolean;
+  /**
+   * Zašto dugmeta nema. Detetu se NE sme reći „otvara se po potvrdi": ono potvrdu
+   * ne dobija do punoletstva (čl. 15), pa bi ga uputstvo slalo u prazno. Njegov
+   * uslov je da roditelj preuzme nalog.
+   */
+  razlogZabrane?: "neverifikovan" | "ceka_roditelja";
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true, razlogZabrane = "neverifikovan" }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -123,7 +129,9 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         {/* Neverifikovanom se objašnjava zašto dugmeta za upis nema. Bez ovoga
             izgleda kao da je nešto pokvareno. */}
         {!smeDaSalje && (
-          <p className="mt-3 text-sm text-kolo-muted">{t("samo_primalac")}</p>
+          <p className="mt-3 text-sm text-kolo-muted">
+            {razlogZabrane === "ceka_roditelja" ? t("ceka_roditelja") : t("samo_primalac")}
+          </p>
         )}
       </div>
 

@@ -370,7 +370,8 @@
     "prijavi_ceka": "Prijava je poslata — čeka odluku Fondacije.",
     "prijavi_ponistena": "Prepis je poništen po prijavi.",
     "prijavi_odbacena": "Prijava je razmotrena — prepis ostaje.",
-    "prijavi_greska": "Prijava nije poslata."
+    "prijavi_greska": "Prijava nije poslata.",
+    "ceka_roditelja": "Nalog čeka da ga preuzme roditelj. Do tada možeš da primaš POEN, a da ga prepisuješ kad roditelj preuzme nalog."
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -2940,7 +2941,8 @@
     "ceka_opis": "Kad tvoj roditelj preuzme nalog, moći ćeš da pričaš sa svojim prijateljima. Imaš {broj} prijatelja koji čekaju.",
     "ceka_uputstvo": "Pokaži mami ili tati poruku koju smo im poslali. Ako nije stigla, na tvom profilu piše šestocifreni kod.",
     "dugme_profil": "Moj profil",
-    "kod_naslov": "Kod za roditelja"
+    "kod_naslov": "Kod za roditelja",
+    "dugme_prepis": "Prepiši POEN"
   },
   "prijatelji": {
     "naslov": "Moji prijatelji",

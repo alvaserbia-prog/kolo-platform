@@ -370,7 +370,8 @@
     "prijavi_ceka": "Report sent — awaiting the Foundation's decision.",
     "prijavi_ponistena": "The re-registration was annulled upon the report.",
     "prijavi_odbacena": "The report was reviewed — the re-registration stands.",
-    "prijavi_greska": "The report was not sent."
+    "prijavi_greska": "The report was not sent.",
+    "ceka_roditelja": "The account is waiting for a parent to take it over. Until then you can receive POEN; you can re-register it to someone else once a parent takes over the account."
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -2940,7 +2941,8 @@
     "ceka_opis": "When your parent takes over the account you will be able to talk to your friends. You have {broj} friends waiting.",
     "ceka_uputstvo": "Show mum or dad the message we sent them. If it did not arrive, your profile shows a six-digit code.",
     "dugme_profil": "My profile",
-    "kod_naslov": "Code for your parent"
+    "kod_naslov": "Code for your parent",
+    "dugme_prepis": "Re-register POEN"
   },
   "prijatelji": {
     "naslov": "My friends",

@@ -153,6 +153,18 @@ export default function DecjaPocetna({
             {t("na_cekanju", { iznos: poenNaCekanju })}
           </p>
         )}
+        {/* Prepis stoji uz sam broj, jer dete traži POEN tu — ne u meniju. Uslov
+            je da je roditelj preuzeo nalog (čl. 4c); potvrda roditelja se čeka
+            samo za UPIS iz prijateljstava, ne i za prepis (čl. 14). */}
+        {!cekaRoditelja && (
+          <Link
+            href="/novcanik"
+            className="mt-3 inline-block rounded-full px-5 py-2 text-sm font-bold text-white"
+            style={{ backgroundColor: BOJE[6] }}
+          >
+            {t("dugme_prepis")}
+          </Link>
+        )}
       </section>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

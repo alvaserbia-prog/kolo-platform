@@ -110,6 +110,31 @@ describe("smeDaPrepise — čl. 14", () => {
   it("deca prepisuju međusobno", () => {
     expect(smeDaPrepise(dete({ id: "a" }), dete({ id: "b", roditeljIds: ["r2"] })).ok).toBe(true);
   });
+
+  /**
+   * 🔴 Prepis NE čeka potvrdu roditelja — čeka samo preuzimanje naloga.
+   *
+   * Potvrda roditelja je uslov za UPIS iz prijateljstava (čl. 14b st. 2), jer
+   * upis stvara nove POEN-e i tu je odbrana od farmovanja. Prepis nijedan POEN
+   * ne stvara: seli postojeći zapis, zero-sum ostaje isti — pa bi vezivanje za
+   * potvrdu zaustavljalo decu bez ijedne koristi po sistem.
+   */
+  it("dete u stanju POVEZANO prepisuje i prima, iako mu se POEN još ne upisuje", () => {
+    const a = dete({ id: "a", roditeljIds: ["r1"], stanje: "POVEZANO" });
+    const b = dete({ id: "b", roditeljIds: ["r2"], stanje: "AKTIVNO" });
+    expect(smeDaPrepise(a, b).ok).toBe(true);
+    expect(smeDaPrepise(b, a).ok).toBe(true);
+    // ...ali upis iz prijateljstva i dalje čeka obe strane.
+    expect(poenSeUpisuje("POVEZANO")).toBe(false);
+    expect(prijateljstvoNosiPoen(a, b)).toBe(false);
+  });
+
+  it("🔴 nalog koji još čeka roditelja ne prepisuje ni u jednom smeru", () => {
+    const ceka = dete({ id: "c", roditeljIds: [], stanje: "NA_CEKANJU" });
+    const drugo = dete({ id: "d", roditeljIds: ["r2"], stanje: "AKTIVNO" });
+    expect(smeDaPrepise(ceka, drugo).ok).toBe(false);
+    expect(smeDaPrepise(drugo, ceka).ok).toBe(false);
+  });
 });
 
 describe("smeDaVidiOglas — čl. 13", () => {

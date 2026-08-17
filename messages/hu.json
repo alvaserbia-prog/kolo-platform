@@ -363,7 +363,8 @@
     "prijavi_ceka": "A bejelentés elküldve — az Alapítvány döntésére vár.",
     "prijavi_ponistena": "Az átírást a bejelentés alapján érvénytelenítették.",
     "prijavi_odbacena": "A bejelentést megvizsgálták — az átírás marad.",
-    "prijavi_greska": "A bejelentést nem sikerült elküldeni."
+    "prijavi_greska": "A bejelentést nem sikerült elküldeni.",
+    "ceka_roditelja": "A fiók arra vár, hogy a szülő átvegye. Addig POEN-t kaphatsz, átírni pedig akkor tudsz, ha a szülő átvette a fiókot."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -2940,7 +2941,8 @@
     "ceka_opis": "Amikor a szülőd átveszi a fiókot, beszélgethetsz a barátaiddal. {broj} barátod vár.",
     "ceka_uputstvo": "Mutasd meg anyának vagy apának az üzenetet, amit küldtünk nekik. Ha nem érkezett meg, a profilodon ott a hatjegyű kód.",
     "dugme_profil": "A profilom",
-    "kod_naslov": "Kód a szülőnek"
+    "kod_naslov": "Kód a szülőnek",
+    "dugme_prepis": "POEN átírása"
   },
   "prijatelji": {
     "naslov": "Barátaim",
