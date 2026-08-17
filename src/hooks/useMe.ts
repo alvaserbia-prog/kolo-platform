@@ -30,8 +30,12 @@ export interface MeData {
   politikaPotrebno: boolean;
   /** Maloletni korisnik (Modul Deca) — navigacija je kraća. */
   maloletan?: boolean;
-  /** Nalog miruje jer stvarnost roditelja više nije potvrđena (Modul Deca, čl. 16). */
-  mirovanje?: boolean;
+  /**
+   * Stanje naloga maloletnog korisnika (Modul Deca, čl. 4c). `null` kod punoletnog.
+   * Zamenilo je raniji `mirovanje` — nije više dva stanja nego tri, i „na čekanju"
+   * i „povezano" nose različita ograničenja.
+   */
+  stanjeDeteta?: "NA_CEKANJU" | "POVEZANO" | "AKTIVNO" | null;
 }
 
 export const ME_KEY = ["me"] as const;
