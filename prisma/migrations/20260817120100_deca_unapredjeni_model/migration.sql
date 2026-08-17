@@ -75,29 +75,6 @@ CREATE INDEX "RoditeljPoziv_brisanjeDo_idx" ON "RoditeljPoziv"("brisanjeDo");
 ALTER TABLE "RoditeljPoziv" ADD CONSTRAINT "RoditeljPoziv_deteId_fkey"
   FOREIGN KEY ("deteId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- Zatečena deca dobijaju red sa šestocifrenim kodom, iako poziv nikad nije poslat.
--- U tom redu živi kod kojim ulazi DRUGI roditelj (čl. 4b st. 6); bez njega bi drugi
--- roditelj mogao da uđe samo kod dece registrovane posle ove izmene.
---
--- `iskoriscenAt` je popunjen, a rokovi su u prošlosti: link se ne šalje i ne sme da
--- radi, a noćni posao koji briše nepreuzete naloge traži `iskoriscenAt IS NULL`, pa
--- ovaj red nikad ne pogađa.
-INSERT INTO "RoditeljPoziv" ("id", "deteId", "email", "token", "kod", "tokenDo", "brisanjeDo", "iskoriscenAt", "createdAt")
-SELECT gen_random_uuid()::text,
-       u."id",
-       '',
-       -- 🔴 NE `gen_random_bytes()` — to je pgcrypto, koje na Neonu nije uključeno,
-       -- pa bi migracija pukla nasred posla. `md5` je ugrađen; dva spojena daju 64
-       -- heksadecimalna znaka, a `u."id"` u ulazu jemči jedinstvenost po detetu.
-       md5(u."id" || random()::text) || md5(random()::text || u."id"),
-       lpad((100000 + floor(random() * 900000)::int)::text, 6, '0'),
-       CURRENT_TIMESTAMP,
-       CURRENT_TIMESTAMP,
-       CURRENT_TIMESTAMP,
-       CURRENT_TIMESTAMP
-FROM "User" u
-WHERE u."maloletan" = true AND u."deaktiviranAt" IS NULL;
-
 -- ─── 4. Prijateljstvo: isplata i raskid ─────────────────────────────────────
 --
 -- Zatečena prijateljstva ostaju NEISPLAĆENA (`poenIsplacen` = false). Namerno:

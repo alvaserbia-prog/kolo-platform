@@ -29,6 +29,31 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - „objava na ekolo.rs" = merge `main` → `production` + push (nepromenjeno).
 - **Env varijable po grani/scope-u:** Production scope (prod baza, tajne za ekolo.rs: `PLACANJE_AKTIVNO`, `NESTPAY_*`) vs Preview scope (test baza). Oba imaju `DATABASE_URL`, pa migracije rade i na test i na prod buildu.
 
+### 🔴 Primenjena migracija se NE dira — `migrate deploy` je TIHO preskače (2026-08-17)
+
+`prisma migrate deploy` **ne proverava kontrolni zbir već primenjenih migracija.**
+Izmenjen fajl se preskoči **bez greške i bez upozorenja**, a deploy prođe kao da je
+sve u redu. Raniji zapis u ovom fajlu je tvrdio suprotno („oborila bi kontrolni zbir
+i deploy") — to nije tačno, i pogrešno je na gori način: kad bi deploy pucao, videlo
+bi se odmah.
+
+Desilo se upravo to: dopuna backfill-a dopisana je u `20260817120100_deca_unapredjeni_model`
+pošto je ta migracija već bila primenjena na test bazu (04:01). Build u 07:30 je
+prošao **READY**, a backfill nije upisao nijedan red. Ispravka je otišla u zasebnu
+migraciju `20260817130000_deca_poziv_backfill`, uz `WHERE NOT EXISTS` da bude
+idempotentna.
+
+**Pravilo:** svaka izmena posle prvog deploy-a ide u NOV fajl. Provera pre puša:
+`git log --oneline -- prisma/migrations/<ime>/` — ako migracija ima više od jednog
+commita, verovatno je već primenjena negde.
+
+🟡 **Uz to: dva builda na istoj test bazi u istom trenutku se sudaraju.** Push na
+granu i na `main` u razmaku od nekoliko sekundi pokreću dva Vercel builda, oba
+Preview scope, oba sa istim `DATABASE_URL`; jedan je pao sa `db_unreachable`
+(Neon endpoint je bio uspavan, pa je hladan start primio dve direktne konekcije).
+Migracija je već bila primenjena, pa šteta nije nastala, ali **grana i `main` se ne
+guraju u istoj minuti** — prvo jedno, pa kad build prođe, drugo.
+
 ### Migracije se primenjuju AUTOMATSKI pri deploy-u
 `vercel.json` → `buildCommand`: `if [ -n "$DATABASE_URL" ]; then prisma migrate deploy; fi && npm run build`.
 - Migracije se primenjuju **same** na bazu okruženja preko Vercel `DATABASE_URL` (prod→prod, test→test). **Nema više ručnog `npx prisma migrate deploy`** posle deploy-a.
@@ -452,7 +477,7 @@ Nadogradnja osmog kanala (čl. 40a): umesto jednokratnih 1.000 POEN, korisnik pr
 | 4 | Razmene sa 5 različitih osoba van tvog lanca | 1.000 |
 | 5 | Razmene sa 10 različitih osoba van tvog lanca | 1.000 |
 
-- 🔴 **„Razmena" = UPIS POEN-a, ništa drugo.** Nema ručnog označavanja razmene, nema modela `Razmena`, nema obostrane potvrde. Brojač čita same transakcije (`TransactionType.TRANSFER`). Odluka vlasnika 2026-08-09; prvobitna verzija je imala model sa obostranom potvrdom i on je uklonjen migracijom `20260809170000_razmena_bez_oznacavanja` (`DROP TABLE IF EXISTS` — prethodna migracija se NE menja, jer bi izmena već primenjene migracije oborila kontrolni zbir i deploy). **Ne vraćati označavanje razmene.**
+- 🔴 **„Razmena" = UPIS POEN-a, ništa drugo.** Nema ručnog označavanja razmene, nema modela `Razmena`, nema obostrane potvrde. Brojač čita same transakcije (`TransactionType.TRANSFER`). Odluka vlasnika 2026-08-09; prvobitna verzija je imala model sa obostranom potvrdom i on je uklonjen migracijom `20260809170000_razmena_bez_oznacavanja` (`DROP TABLE IF EXISTS` — prethodna migracija se NE menja, vidi „Primenjena migracija se NE dira" ispod). **Ne vraćati označavanje razmene.**
 - 🔴 **Korak 1 je ZATEČENI čl. 40a i NIJE diran** — ni iznos, ni odloženo evidentiranje, ni `DoprinosSadrzaju`. Tabela `DoprinosRazmeni` nosi **samo korake 2–5**, uz `CHECK (korak BETWEEN 2 AND 5)` i `@@unique([userId, korak])`. **Kapu time drži BAZA, ne kod:** najviše četiri reda × 1.000 + 1.000 iz čl. 40a = 5.000. Ne dodavati proveru kape u kodu — bila bi druga istina.
 - **Tri sita brojača** (`sagovorniciUBrojacu`, čiste funkcije):
   1. **Prag od 1.000 POEN po transakciji** (`MIN_IZNOS_TRANSAKCIJE`). 🔴 Meri se **PO TRANSAKCIJI, ne po zbiru** sa istim čovekom — inače bi se prag zaobišao deljenjem na sitne upise. Bez praga bi lestvica prolazila sa deset upisa od po jedan POEN.
