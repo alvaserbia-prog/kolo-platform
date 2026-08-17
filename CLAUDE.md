@@ -419,7 +419,7 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - **Posledica koja se dobija besplatno:** kad su svi učesnici međusobno prijatelji, **sam od sebe nastaje grupni razgovor** — graf pravi sobe umesto tebe.
 - 🟡 **Prihvaćeno ponašanje:** Ana odgovori Milici, a Petar (Milicin prijatelj, Anu ne poznaje) vidi Aninu poruku bez povoda. Nije greška.
 - 🔴 **NEMA odgovora sa citatom** — citat bi Petru pokazao Milicin tekst i zaobišao filter. Ne dodavati citiranje.
-- **Dugme „prijavi"** (`PrijavaPoruke`, `POST /api/chat/[id]/prijavi`) — pošto roditelj ne čita, dete je jedino koje može da signalizira; moderacija Fondacije se kači na to. Prijava **ne uklanja** poruku (uklanja je `DELETE /api/admin/chat/[id]`); jedna prijava po korisniku po poruci.
+- **Dugme „prijavi"** (`PrijaviPoruku`, model `PrijavaPoruke`, `POST /api/chat/[id]/prijavi`) — pošto roditelj ne čita, dete je jedino koje može da signalizira; moderacija Fondacije se kači na to. Prijava **ne uklanja** poruku (uklanja je `DELETE /api/admin/chat/[id]`); jedna prijava po korisniku po poruci. Vidi „Prijava poruke nosi i čoveka" ispod.
 
 **Šta roditelj vidi (čl. 9).** 🔴 **Razgovore između dece roditelj VIŠE NE ČITA** — izmena u odnosu na prvu verziju, i namerna: nadzor nad dečjim razgovorom dodiruje i tuđe dete, i to je bilo najteže mesto za DPIA i Politiku. Umesto sadržaja vidi **KO i KOLIKO** (`/api/deca/[id]/pregled`): spisak prijatelja sa datumima i spisak razgovora bez sadržaja, uz istoriju prepisa i oglase.
 - **Razgovor deteta sa PUNOLETNIM licem je izuzetak** — roditelj ga čita, ali **ne piše u njemu** (sa druge strane je odrastao čovek, a odnos otvara isključivo roditeljski prekidač). Punoletnom sagovorniku stoji vidljiv natpis da razgovor čita roditelj — i odvraćanje i poštenje.
@@ -441,6 +441,28 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - Transakcije: `EMISIJA_PRIJATELJSTVO` (upis) i `OTPIS_PRIJATELJSTVO` (protivzapis). 🔴 Otpis **nije** `PONISTENJE_PREPISA` — ovde se poništava EMISIJA, pa opticaj opada; prepis samo seli POEN između dva korisnička zapisa.
 - Testovi: `__tests__/deca-pravila.test.ts`, `__tests__/protokol/prijateljstva-poen.test.ts`, `__tests__/integracija/deca-tok.test.ts` (traži bazu).
 - 🔴 **`User.roditeljId` VIŠE NE POSTOJI** — veza je u tabeli `Roditeljstvo` (najviše dva reda po detetu). Prisma upiti idu preko `roditeljstvaKaoDete` / `roditeljstvaKaoRoditelj`.
+
+### Prijava poruke nosi i čoveka (2026-08-17)
+
+Prijava je do ove izmene hvatala **samo poruku**, uz opcion slobodan tekst, a `status` je ostajao `OTVORENA` zauvek — nijedan ekran je nije zatvarao. Prijava je odlazila u mejl adminu i tu se gubila.
+
+🔴 **Prijava od sada nosi I PORUKU I ČOVEKA, i to je namerno oboje.**
+- **Poruka je DOKAZ.** Roditelj razgovore dece više ne čita, pa je prijavljena poruka jedino što Fondacija sme i može da pogleda. Čista „prijavi korisnika" bez poruke terala bi moderatora da pročita celu sobu — dakle da vrati nadzor koji je unapređeni model upravo skinuo.
+- **Čovek je SUBJEKT.** Opasnost je gotovo uvek nalog: tri prijave iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka sama ne nosi. `PrijavaPoruke.prijavljeniId` je autor poruke, **denormalizovan** (autor poruke se ne menja), a admin ekran grupiše po njemu.
+
+**Šifra razloga sa zatvorene liste** (`PrijavaPorukeRazlog`) umesto samo slobodnog teksta — sedmogodišnjak neće napisati obrazloženje, ali ume da pritisne dugme. Slobodan tekst se traži **samo uz „ostalo"**; uz izabranu šifru bi dodatno pisanje odvraćalo dete od prijave.
+- 🔴 **`TRAZI_SLIKE`, `TRAZI_SUSRET` i `LAZE_UZRAST` stoje odvojeno** — to su obrasci mamljenja i pod zbirnom šifrom „neprimereno" ne bi se videli. Te tri su i **hitne** (`jeHitno`): dižu grupu na vrh spiska, ne sankcionišu ništa.
+- **Jedna lista, dve sobe.** Ekran nudi `RAZLOZI_DECA` odnosno `RAZLOZI_ODRASLI`; server ne proverava pripada li šifra sobi — promašena šifra je pogrešno razvrstana prijava, ne rupa.
+
+**Admin tab „Prijave"** (`PrijaveTab.tsx`, ključ `prijave`) — grupisan po prijavljenom nalogu, uz broj **različitih prijavilaca** (`jeObrazac`, prag 3; jedan čovek koji pritisne tri puta nije obrazac). Dve odluke, obe uz obavezno obrazloženje: **ukloni poruku** (meko uklanjanje + zatvara SVE otvorene prijave nad tom porukom, jer poruke više nema pa nemaju o čemu da odlučuju) i **odbaci prijavu** (zatvara samo svoju — druga prijava nad istom porukom ima drugu šifru i drugog prijavioca).
+- 🔴 **Tab NE sankcioniše nalog.** Suspenzija i isključenje (Uslovi čl. 27, 28) su zasebna odluka i žive u tabu Korisnici. Obrazac se prikazuje da bi ga čovek VIDEO, ne da bi sistem sam kaznio.
+- Nije isto što tab **Pijaca** (oglasi) ni **Razmene** (prepis POEN-a). Četiri različite odluke, četiri taba.
+
+**Dugme je sada i u sobi odraslih.** Ruta je od početka bila otvorena svima, ali dugmeta nije bilo nigde osim u dečjoj sobi — pa je jedini put do Fondacije bio da si dete.
+
+**Kod:** `src/lib/prijava-poruke-pravila.ts` (ČISTE funkcije + šifarnik; uvozi ih i komponenta u pretraživaču) + `src/lib/prijava-poruke.ts` (servisne, re-eksportuje pravila). Komponenta `src/components/PrijaviPoruku.tsx` (obe sobe). Rute: `POST /api/chat/[id]/prijavi` (prima `razlogKod`), `GET /api/admin/prijave-poruka`, `POST .../[id]/{ukloni,odbaci}`. Migracija `20260817140000_prijava_poruke_subjekt` (enum + `prijavljeniId` sa backfill-om iz `ChatMessage.userId`, pa tek onda `NOT NULL`; prijave bez poruke se brišu). Testovi `__tests__/prijava-poruke.test.ts` i `__tests__/integracija/prijava-poruke-tok.test.ts`. Audit: `PRIJAVA_PORUKE_RESENA`, `PRIJAVA_PORUKE_ODBACENA`. Badge: tab Prijave + sidebar `adminCekanje`.
+- **Zvonce adminima uz mejl** — bez javljanja red čekanja postoji a niko ne zna da postoji (isti obrazac kao kod prvih oglasa). Mejl nosi i broj različitih prijavilaca, pa se obrazac vidi pre otvaranja ekrana.
+- 🟡 **Prijava naloga BEZ poruke (sa profila) ne postoji** — za sumnju koja nije u poruci („mislim da moj drug nije dete") još nema ulaza. Sadašnji tok pokriva ono što se u praksi dešava u porukama; ako zatreba, mesto je profil, a ne ovaj tab.
 
 ### Povod razgovora — oglas u razgovoru (2026-08-10)
 

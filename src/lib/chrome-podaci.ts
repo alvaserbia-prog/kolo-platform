@@ -50,6 +50,7 @@ export async function izracunajDnevniBrojeve(
     const [
       programi, oglasPrijave, oglasEvidencije,
       pokrovitelji, donacije, prigovori, prijaveOglasa, prviOglasi, prijaveRazmene,
+      prijavePoruka,
     ] = await Promise.all([
       prisma.programEnrollment.count({ where: { status: "PENDING" } }),
       prisma.oglasPrijava.count({ where: { status: "PENDING" } }),
@@ -67,10 +68,13 @@ export async function izracunajDnevniBrojeve(
       prisma.doprinosSadrzaju.count({ where: { status: "ZABELEZEN" } }),
       // Prijave neispunjene razmene — čekaju odluku o poništenju prepisa.
       prisma.prijavaRazmene.count({ where: { status: "OTVORENA" } }),
+      // Prijavljene poruke iz Pričaonice — čekaju odluku (ukloni / odbaci).
+      prisma.prijavaPoruke.count({ where: { status: "OTVORENA" } }),
     ]);
     adminCekanje =
       programi + oglasPrijave + oglasEvidencije +
-      pokrovitelji + donacije + prigovori + prijaveOglasa + prviOglasi + prijaveRazmene;
+      pokrovitelji + donacije + prigovori + prijaveOglasa + prviOglasi + prijaveRazmene +
+      prijavePoruka;
   }
 
   return { novcanik, pijaca, adminCekanje };

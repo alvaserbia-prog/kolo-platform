@@ -22,6 +22,7 @@ const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false })
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 const PrviOglasiTab = dynamic(() => import("./PrviOglasiTab"), { ssr: false });
 const RazmeneTab = dynamic(() => import("./RazmeneTab"), { ssr: false });
+const PrijaveTab = dynamic(() => import("./PrijaveTab"), { ssr: false });
 const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
 
 interface KorisnikInfo {
@@ -221,6 +222,7 @@ interface AdminKlijentProps {
   /** Prvi oglasi koji čekaju odobrenje doprinosa — badge na tabu Prvi oglasi (čl. 40a). */
   prvihOglasaNaCekanju: number;
   otvorenihPrijavaRazmene: number;
+  otvorenihPrijavaPoruka: number;
 }
 
 const tipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
@@ -249,7 +251,7 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 });
 
 
-export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju, otvorenihPrijavaRazmene }: AdminKlijentProps) {
+export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju, otvorenihPrijavaRazmene, otvorenihPrijavaPoruka }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
   const [tab, postaviTab] = useState<Tab>(pocetniTab);
@@ -304,6 +306,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
     ["prvi-oglasi", `${t("tab_prvi_oglasi")}${prvihOglasaNaCekanju > 0 ? ` (${prvihOglasaNaCekanju})` : ""}`],
     ["razmene", `${t("tab_razmene")}${otvorenihPrijavaRazmene > 0 ? ` (${otvorenihPrijavaRazmene})` : ""}`],
+    ["prijave", `${t("tab_prijave")}${otvorenihPrijavaPoruka > 0 ? ` (${otvorenihPrijavaPoruka})` : ""}`],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
@@ -405,6 +408,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Razmene — prijave neispunjene razmene; odlučuje se o prepisu POEN-a. */}
       {tab === "razmene" && <RazmeneTab onDone={() => router.refresh()} />}
+
+      {/* Prijave — prijavljene poruke iz Pričaonice, grupisane po prijavljenom nalogu. */}
+      {tab === "prijave" && <PrijaveTab onDone={() => router.refresh()} />}
 
       {/* Finansije */}
       {tab === "emisija" && <EmisijaTab onSuccess={() => router.refresh()} />}

@@ -2383,7 +2383,8 @@
     "doprinos_revizija_bez_transakcije": "учтено без связи с транзакцией — проверить вручную",
     "doprinos_revizija_uredno": "Ожидает одобрения во вкладке «Первые объявления»: {ceka}. Аннулировано из-за удалённого объявления: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "есть объявление, но ни одно не отвечает содержательному минимуму — поэтому вклад не был отмечен",
-    "tab_razmene": "Razmene"
+    "tab_razmene": "Razmene",
+    "tab_prijave": "Prijave"
   },
   "kolacici": {
     "aria": "Согласие на использование cookie",
@@ -2513,7 +2514,13 @@
     "punoletstvo_otpis_prijatelj_naslov": "Друг стал совершеннолетним",
     "punoletstvo_otpis_prijatelj_tekst": "{pseudonim} исполнилось 18 лет. Ваша дружба закрыта, с тебя списано {iznos} POEN.",
     "punoletstvo_naslov": "Аккаунт стал взрослым",
-    "punoletstvo_tekst": "С тебя списано {iznos} POEN за {broj} дружб и записано подтверждений реальности от родителей: {potvrda}. Отныне ты сам(а) подтверждаешь других."
+    "punoletstvo_tekst": "С тебя списано {iznos} POEN за {broj} дружб и записано подтверждений реальности от родителей: {potvrda}. Отныне ты сам(а) подтверждаешь других.",
+    "prijava_poruke_admin_naslov": "Жалоба на сообщение в Комнате общения",
+    "prijava_poruke_admin_tekst": "На сообщение в Комнате общения подана жалоба. Смотрите вкладку «Жалобы».",
+    "prijava_poruke_resena_naslov": "Сообщение, на которое вы пожаловались, удалено",
+    "prijava_poruke_resena_tekst": "Фонд удалил сообщение, на которое вы пожаловались. Обоснование: {odluka}",
+    "prijava_poruke_odbacena_naslov": "Ваша жалоба рассмотрена",
+    "prijava_poruke_odbacena_tekst": "Фонд рассмотрел вашу жалобу, сообщение остаётся. Обоснование: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Подтверждение: {pseudonim}",
@@ -2932,9 +2939,6 @@
     "ceka_opis": "Когда твой родитель примет аккаунт, ты сможешь общаться с друзьями. Тебя ждут {broj} друзей.",
     "ceka_uputstvo": "Покажи маме или папе письмо, которое мы им отправили. Если оно не пришло, в твоём профиле есть шестизначный код.",
     "dugme_profil": "Мой профиль",
-    "prijavi": "пожаловаться",
-    "prijavljeno": "жалоба отправлена",
-    "prijavi_potvrda": "Пожаловаться на это сообщение Фонду?",
     "kod_naslov": "Код для родителя"
   },
   "prijatelji": {
@@ -3006,5 +3010,22 @@
     "ishod_obrisan_naslov": "Аккаунт удалён",
     "ishod_obrisan_opis": "Аккаунт и все данные удалены.",
     "na_profil": "Открыть свой профиль"
+  },
+  "prijavaPoruke": {
+    "dugme": "пожаловаться",
+    "poslato": "жалоба отправлена",
+    "naslov": "На что вы жалуетесь?",
+    "razlog_vredjanje": "Оскорбляет, угрожает или травит меня",
+    "razlog_trazi_slike": "Просит прислать фотографии",
+    "razlog_trazi_susret": "Хочет встретиться или писать вне КОЛО",
+    "razlog_laze_uzrast": "Думаю, что это не ребёнок",
+    "razlog_neprimeren_sadrzaj": "Неприемлемое или грубое содержание",
+    "razlog_licni_podaci": "Публикует персональные данные",
+    "razlog_prevara": "Мошенничество или обман",
+    "razlog_ostalo": "Другое",
+    "opis_placeholder": "Одним предложением — что произошло?",
+    "posalji": "Отправить жалобу",
+    "odustani": "Отмена",
+    "greska": "Жалоба не отправлена. Попробуйте ещё раз."
   }
 }

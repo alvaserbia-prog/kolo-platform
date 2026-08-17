@@ -98,10 +98,10 @@ gube ništa trajno.
   minimum oglasa nije poseban (vidi čl. 13 st. 1).
 - **Drugi ulaz u praksi služi starijoj deci** — sedmogodišnjak ne kuca elektronsku
   adresu. Mlađi ulaze kroz roditeljski profil.
-- **Prijava poruke nema admin ekran koji je rešava.** `PrijavaPoruke` se upisuje i
-  javlja adminima, a uklanjanje poruke ide zatečenom rutom
-  `DELETE /api/admin/chat/[id]`; status prijave time ne prelazi u „rešena". Tab za
-  odlučivanje o prijavama poruka je posao za sledeću fazu.
+- **Prijava naloga bez poruke ne postoji.** Prijava se od 17.08.2026. podnosi uz
+  šifru razloga i nosi i autora poruke (admin tab „Prijave" je zatvara), ali za
+  sumnju koja nije ni u jednoj poruci — „mislim da moj drug nije dete" — nema
+  ulaza sa profila.
 
 ### Uzrasne grupe — usvojeno kao prelazna odredba (čl. 12)
 

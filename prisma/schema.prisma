@@ -302,6 +302,7 @@ model User {
   prijateljstvaRaskinuta           Prijateljstvo[]           @relation("PrijateljstvoRaskinuo")
   prijateljTokeni                  PrijateljToken[]
   prijaveporuka                    PrijavaPoruke[]           @relation("PrijaviocPoruke")
+  prijavljenePoruke                PrijavaPoruke[]           @relation("PrijavljeniPoruke")
   memberHash                       String                    @unique
   location                         String?
   telefon                          String?
@@ -782,6 +783,27 @@ enum PrijavaRazlog {
   LICNI_PODACI // čl. 24 — lični podaci trećih lica
   PREVARA // čl. 24 — prevara, manipulacija, nezakonita aktivnost
   DRUGO
+}
+
+/// Šifre razloga za prijavu poruke iz Pričaonice (Uslovi čl. 25; Pravilnik o
+/// učešću dece čl. 18a).
+///
+/// Jedna lista za obe sobe, a ekran nudi samo one šifre koje njegovoj sobi imaju
+/// smisla (dečja: maltretiranje, mamljenje, laž o uzrastu; soba odraslih:
+/// neprimeren sadržaj, lični podaci, prevara). Server ne proverava da li šifra
+/// pripada sobi — promašena šifra je pogrešno razvrstana prijava, ne rupa.
+///
+/// 🔴 TRAZI_SLIKE, TRAZI_SUSRET i LAZE_UZRAST stoje odvojeno namerno: to su
+/// obrasci mamljenja, i pod jednom zbirnom šifrom „neprimereno" ne bi se videli.
+enum PrijavaPorukeRazlog {
+  VREDJANJE // uvrede, pretnje, maltretiranje
+  TRAZI_SLIKE // traži fotografije
+  TRAZI_SUSRET // traži susret ili kontakt van Platforme
+  LAZE_UZRAST // sumnja da iza naloga nije dete
+  NEPRIMEREN_SADRZAJ // vulgaran ili uvredljiv sadržaj
+  LICNI_PODACI // lični podaci trećih lica
+  PREVARA // prevara, obmana, nezakonita aktivnost
+  OSTALO
 }
 
 enum PrijavaOglasaStatus {
@@ -1980,19 +2002,39 @@ model Prijateljstvo {
 ///
 /// `@@unique([porukaId, prijaviocId])` — jedan korisnik, jedna prijava po poruci;
 /// ponovljen pritisak nije nov podatak.
+///
+/// 🔴 Prijava nosi I PORUKU I ČOVEKA. Poruka je dokaz — bez nje bi Fondacija
+/// morala da pročita celu sobu da bi shvatila šta se desilo, a to je upravo
+/// nadzor koji je unapređeni model skinuo. `prijavljeniId` je autor poruke,
+/// denormalizovan namerno: opasnost je gotovo uvek čovek, a tri prijave iz tri
+/// razgovora nad istim nalogom su signal koji nijedna pojedinačna poruka ne nosi.
+/// Denormalizacija je bezbedna jer se autor poruke ne menja.
 model PrijavaPoruke {
-  id          String              @id @default(uuid())
-  porukaId    String
-  poruka      ChatMessage         @relation(fields: [porukaId], references: [id], onDelete: Cascade)
-  prijaviocId String
-  prijavioc   User                @relation("PrijaviocPoruke", fields: [prijaviocId], references: [id], onDelete: Cascade)
-  // Slobodan tekst, opcion — sedmogodišnjak neće objasniti, ali stariji hoće.
-  razlog      String?
-  status      PrijavaOglasaStatus @default(OTVORENA)
-  createdAt   DateTime            @default(now())
+  id            String              @id @default(uuid())
+  porukaId      String
+  poruka        ChatMessage         @relation(fields: [porukaId], references: [id], onDelete: Cascade)
+  prijaviocId   String
+  prijavioc     User                @relation("PrijaviocPoruke", fields: [prijaviocId], references: [id], onDelete: Cascade)
+  /// Autor prijavljene poruke — subjekt prijave.
+  prijavljeniId String
+  prijavljeni   User                @relation("PrijavljeniPoruke", fields: [prijavljeniId], references: [id], onDelete: Cascade)
+  /// Šifra sa zatvorene liste. Sedmogodišnjak neće napisati obrazloženje, ali ume
+  /// da pritisne dugme — a šifra je uz to jedino po čemu se obrazac (mamljenje,
+  /// laž o uzrastu) uopšte može prepoznati kroz više prijava.
+  razlogKod     PrijavaPorukeRazlog @default(OSTALO)
+  // Slobodan tekst, opcion — traži se samo uz šifru „ostalo".
+  razlog        String?
+  status        PrijavaOglasaStatus @default(OTVORENA)
+
+  /// Obrazloženje odluke Fondacije — obavezno u oba ishoda, ide prijaviocu.
+  odluka    String?
+  resioId   String?
+  resenAt   DateTime?
+  createdAt DateTime  @default(now())
 
   @@unique([porukaId, prijaviocId])
   @@index([status, createdAt(sort: Desc)])
+  @@index([prijavljeniId, createdAt(sort: Desc)])
 }
 
 // Jednokratni kod za povezivanje. 🔴 NEMA šestocifrenog broja, za razliku od koda

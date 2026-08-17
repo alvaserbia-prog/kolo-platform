@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PrijaviPoruku from "@/components/PrijaviPoruku";
+import { RAZLOZI_DECA } from "@/lib/prijava-poruke-pravila";
 
 type Oglas = {
   id: string;
@@ -270,22 +272,7 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
   const [tekst, setTekst] = useState("");
   const [salje, setSalje] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
-  const [prijavljene, setPrijavljene] = useState<string[]>([]);
   const dno = useRef<HTMLDivElement | null>(null);
-
-  /**
-   * Prijava poruke (čl. 18a). Roditelj razgovore ne čita, pa je dete jedino koje
-   * može da signalizira — moderacija Fondacije se kači na ovo dugme.
-   */
-  async function prijavi(id: string) {
-    if (!confirm(t("prijavi_potvrda"))) return;
-    setPrijavljene((p) => [...p, id]);
-    try {
-      await fetch(`/api/chat/${id}/prijavi`, { method: "POST" });
-    } catch {
-      /* tiho — prijava se ponavlja sledećim pritiskom */
-    }
-  }
 
   useEffect(() => {
     const id = setInterval(async () => {
@@ -346,15 +333,13 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
             >
               {p.content}
             </p>
+            {/* Prijava (čl. 18a) traži ŠIFRU razloga: roditelj razgovore ne čita,
+                pa je dete jedino koje signalizira — a bez šifre se obrazac
+                (mamljenje, laž o uzrastu) ne bi mogao prepoznati kroz više prijava. */}
             {p.userId !== mojId && (
-              <button
-                type="button"
-                onClick={() => prijavi(p.id)}
-                disabled={prijavljene.includes(p.id)}
-                className="ml-2 text-[11px] text-kolo-muted underline disabled:no-underline disabled:opacity-60"
-              >
-                {prijavljene.includes(p.id) ? t("prijavljeno") : t("prijavi")}
-              </button>
+              <span className="ml-2 inline-block align-bottom">
+                <PrijaviPoruku porukaId={p.id} sifre={RAZLOZI_DECA} malo />
+              </span>
             )}
           </div>
         ))}

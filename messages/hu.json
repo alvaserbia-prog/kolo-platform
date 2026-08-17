@@ -2376,7 +2376,8 @@
     "doprinos_revizija_bez_transakcije": "tranzakcióra hivatkozás nélkül került nyilvántartásba — kézzel ellenőrizni",
     "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
-    "tab_razmene": "Razmene"
+    "tab_razmene": "Razmene",
+    "tab_prijave": "Prijave"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2506,7 +2507,13 @@
     "punoletstvo_otpis_prijatelj_naslov": "Egy barátod nagykorú lett",
     "punoletstvo_otpis_prijatelj_tekst": "{pseudonim} betöltötte a 18. évét. A barátságotok lezárult, és {iznos} POEN-t leírtunk.",
     "punoletstvo_naslov": "A fiók nagykorúvá vált",
-    "punoletstvo_tekst": "{broj} barátságból {iznos} POEN-t leírtunk, és {potvrda} valóságigazolást jegyeztünk be a szüleidtől. Mostantól magad is megerősítesz másokat."
+    "punoletstvo_tekst": "{broj} barátságból {iznos} POEN-t leírtunk, és {potvrda} valóságigazolást jegyeztünk be a szüleidtől. Mostantól magad is megerősítesz másokat.",
+    "prijava_poruke_admin_naslov": "Bejelentett üzenet a Beszélgetőszobában",
+    "prijava_poruke_admin_tekst": "Bejelentettek egy üzenetet a Beszélgetőszobában. Nézd meg a „Bejelentések” fület.",
+    "prijava_poruke_resena_naslov": "A bejelentett üzenetet eltávolították",
+    "prijava_poruke_resena_tekst": "Az Alapítvány eltávolította az általad bejelentett üzenetet. Indokolás: {odluka}",
+    "prijava_poruke_odbacena_naslov": "A bejelentésedet megvizsgálták",
+    "prijava_poruke_odbacena_tekst": "Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}"
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -2932,9 +2939,6 @@
     "ceka_opis": "Amikor a szülőd átveszi a fiókot, beszélgethetsz a barátaiddal. {broj} barátod vár.",
     "ceka_uputstvo": "Mutasd meg anyának vagy apának az üzenetet, amit küldtünk nekik. Ha nem érkezett meg, a profilodon ott a hatjegyű kód.",
     "dugme_profil": "A profilom",
-    "prijavi": "jelentés",
-    "prijavljeno": "jelentve",
-    "prijavi_potvrda": "Jelented ezt az üzenetet az Alapítványnak?",
     "kod_naslov": "Kód a szülőnek"
   },
   "prijatelji": {
@@ -3006,5 +3010,22 @@
     "ishod_obrisan_naslov": "A fiók törölve",
     "ishod_obrisan_opis": "A fiókot és minden adatot eltávolítottunk.",
     "na_profil": "Saját profil megnyitása"
+  },
+  "prijavaPoruke": {
+    "dugme": "jelentés",
+    "poslato": "jelentve",
+    "naslov": "Mit jelentesz?",
+    "razlog_vredjanje": "Sértően ír, fenyeget vagy zaklat",
+    "razlog_trazi_slike": "Képeket kér tőlem",
+    "razlog_trazi_susret": "Találkozni akar, vagy a KOLO-n kívül írni",
+    "razlog_laze_uzrast": "Szerintem nem gyerek",
+    "razlog_neprimeren_sadrzaj": "Nem megfelelő vagy trágár tartalom",
+    "razlog_licni_podaci": "Személyes adatokat tesz közzé",
+    "razlog_prevara": "Csalás vagy megtévesztés",
+    "razlog_ostalo": "Valami más",
+    "opis_placeholder": "Egy mondatban — mi történt?",
+    "posalji": "Jelentés elküldése",
+    "odustani": "Mégse",
+    "greska": "A jelentés nem került elküldésre. Próbáld újra."
   }
 }

@@ -4,10 +4,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { obavesti } from "@/lib/notifikacije";
+import { jeHitno, proveriPrijavu } from "@/lib/prijava-poruke-pravila";
 
 /**
- * POST /api/chat/[id]/prijavi — prijava poruke iz Pričaonice
- * (Modul Deca, čl. 18a; Uslovi čl. 25).
+ * POST /api/chat/[id]/prijavi  { razlogKod, opis? }
+ *
+ * Prijava poruke iz Pričaonice (Pravilnik o učešću dece čl. 18a; Uslovi čl. 25).
  *
  * 🔴 Postoji zato što roditelj razgovore dece VIŠE NE ČITA. Dete je jedino koje
  * može da signalizira, pa se moderacija Fondacije kači na njegovu prijavu. Bez ovog
@@ -19,19 +22,21 @@ import { posaljiAdminAlert } from "@/lib/adminAlert";
  *
  * Otvorena je svakome ko poruku vidi, i detetu i odraslom: sporan sadržaj se
  * prijavljuje tamo gde se vidi, a prijava nije komunikacija sa autorom.
+ *
+ * 🔴 Upisuje se I PORUKA I AUTOR. Poruka je dokaz (bez nje bi moderator morao da
+ * pročita celu sobu — nadzor koji je ovaj model skinuo), a autor je subjekt: tri
+ * prijave iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka
+ * sama ne nosi. Šifra razloga ide sa zatvorene liste, jer sedmogodišnjak neće
+ * napisati obrazloženje, a obrazac mamljenja se bez šifre ne može prepoznati.
  */
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
   const { id } = await params;
 
-  let razlog: string | null = null;
-  try {
-    const body = await req.json();
-    razlog = typeof body?.razlog === "string" ? body.razlog.trim().slice(0, 500) || null : null;
-  } catch {
-    /* razlog je opcion — sedmogodišnjak neće objasniti, stariji hoće */
-  }
+  const body = await req.json().catch(() => ({}));
+  const provera = proveriPrijavu(body?.razlogKod, body?.opis ?? body?.razlog);
+  if (!provera.ok) return await greska(provera.greska, 400);
 
   const poruka = await prisma.chatMessage.findUnique({
     where: { id },
@@ -44,7 +49,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
   try {
     await prisma.prijavaPoruke.create({
-      data: { porukaId: poruka.id, prijaviocId: session.user.id, razlog },
+      data: {
+        porukaId: poruka.id,
+        prijaviocId: session.user.id,
+        prijavljeniId: poruka.userId,
+        razlogKod: provera.kod,
+        razlog: provera.opis,
+      },
     });
   } catch (e) {
     // P2002 = već si prijavio/la ovu poruku. Ponovljen pritisak nije nov podatak,
@@ -55,15 +66,42 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     throw e;
   }
 
-  const autor = await prisma.user.findUnique({
-    where: { id: poruka.userId },
-    select: { pseudonim: true },
-  });
+  // Koliko RAZLIČITIH ljudi je prijavilo ovaj nalog — u alertu, da se obrazac vidi
+  // pre nego što se otvori admin ekran. Broje se prijavioci, ne prijave: jedan
+  // čovek koji pritisne tri puta nije obrazac nego jedan čovek.
+  const [autor, prijavioci] = await Promise.all([
+    prisma.user.findUnique({ where: { id: poruka.userId }, select: { pseudonim: true } }),
+    prisma.prijavaPoruke.findMany({
+      where: { prijavljeniId: poruka.userId },
+      select: { prijaviocId: true },
+      distinct: ["prijaviocId"],
+    }),
+  ]);
+
   void posaljiAdminAlert(
-    `Prijavljena poruka u Pričaonici (${poruka.soba})`,
+    `${jeHitno(provera.kod) ? "🔴 " : ""}Prijavljena poruka u Pričaonici (${poruka.soba})`,
     `Prijavio/la: ${session.user.pseudonim}\nAutor: ${autor?.pseudonim ?? "?"}\n` +
-      `Razlog: ${razlog ?? "(nije naveden)"}\nPoruka: ${poruka.content.slice(0, 300)}`
+      `Šifra: ${provera.kod}\nOpis: ${provera.opis ?? "(nije naveden)"}\n` +
+      `Različitih prijavilaca za ovaj nalog: ${prijavioci.length}\n` +
+      `Poruka: ${poruka.content.slice(0, 300)}\n\n/admin?tab=prijave`
   );
+
+  // Zvonce adminima, da red čekanja ne živi samo u mejlu. Isti obrazac kao kod
+  // prvih oglasa: bez javljanja red postoji a niko ne zna da postoji.
+  const admini = await prisma.user.findMany({
+    where: { admin: { in: ["ADMIN", "SUPERADMIN"] }, deaktiviranAt: null },
+    select: { id: true },
+  });
+  for (const a of admini) {
+    void obavesti(a.id, {
+      tip: "PRIJAVA_PORUKE",
+      kljuc: "notifikacije.prijava_poruke_admin",
+      naslov: "Prijavljena poruka u Pričaonici",
+      tekst: "Prijavljena je poruka u Pričaonici. Pogledaj tab \u201ePrijave\u201c.",
+      link: "/admin?tab=prijave",
+      email: false,
+    });
+  }
 
   return NextResponse.json({ ok: true });
 }
