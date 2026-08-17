@@ -2915,7 +2915,8 @@
     "pregled_prijatelji_prazno": "No friends yet.",
     "pregled_razgovori": "Conversations with children",
     "pregled_razgovori_prazno": "No conversations yet.",
-    "pregled_poruka": "{broj} messages"
+    "pregled_poruka": "{broj} messages",
+    "polje_datum_raspon": "Enter the child's date of birth — the child must be between 7 and 18 years old."
   },
   "decjaPocetna": {
     "naslov": "Children's Marketplace",
@@ -3004,12 +3005,18 @@
     "vec_preuzet_naslov": "The account is already taken over",
     "vec_preuzet_opis": "The account {pseudonim} already has a parent. If you are the second parent, enter the pseudonym and the code under “My children”.",
     "ishod_preuzet_naslov": "Account taken over",
-    "ishod_preuzet_opis": "The child can now use the Chat room. POEN for friendships starts being recorded once you become a regular member.",
+    "ishod_preuzet_opis": "The child can now use the Chat Room. POEN from friendships is kept on record and is recorded once you become a regular member — once someone who knows you confirms you.",
     "ishod_odbijen_naslov": "Noted",
     "ishod_odbijen_opis": "We will not message you about this account again. If nobody takes it over, it is deleted automatically.",
     "ishod_obrisan_naslov": "Account deleted",
     "ishod_obrisan_opis": "The account and all data have been removed.",
-    "na_profil": "Open your profile"
+    "na_profil": "Open your profile",
+    "datum_raspon": "Enter the child's date of birth — the child must be between 7 and 18 years old.",
+    "nisam_clan_naslov": "If you are not on KOLO yet",
+    "nisam_clan_korak1": "1. Open your own account — it is free and brings you back to this page.",
+    "nisam_clan_korak2": "2. Take over the child's account and enter the date of birth.",
+    "nisam_clan_korak3": "3. Ask someone who knows you and is already a member to confirm that you are a real person.",
+    "nisam_clan_poen": "The child uses the platform as soon as you take over the account. POEN is recorded once you become a regular member — nothing is lost, everything earned is kept on record and recorded that day."
   },
   "prijavaPoruke": {
     "dugme": "report",

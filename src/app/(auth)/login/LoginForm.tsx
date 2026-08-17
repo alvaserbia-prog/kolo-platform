@@ -101,7 +101,7 @@ export default function LoginForm() {
           <p className="mt-0.5 text-sm text-kolo-green-700">{t("registruj_boks_tekst")}</p>
           <div className="mt-3 space-y-2">
             <Link
-              href="/registracija"
+              href={callbackUrl ? `/registracija?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/registracija"}
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors"
             >
               {t("registruj_boks_dugme")}
@@ -179,7 +179,7 @@ export default function LoginForm() {
               <p>{error}</p>
               {prikaziRegistraciju && (
                 <Link
-                  href="/registracija"
+                  href={callbackUrl ? `/registracija?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/registracija"}
                   className="mt-2 inline-flex items-center gap-1 font-semibold text-kolo-green-700 hover:underline"
                 >
                   {t("greska_registruj_cta")} →

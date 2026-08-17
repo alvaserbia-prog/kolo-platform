@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { UZRAST_MIN, UZRAST_PUNOLETSTVO } from "@/lib/deca-pravila";
 import { validanPseudonim } from "@/lib/validacija";
 import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
+import DatumRodjenja from "@/components/DatumRodjenja";
 
 type Dete = {
   id: string;
@@ -291,14 +292,12 @@ function Obrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdustani: (
 
       <label className="block text-sm">
         <span className="font-medium text-kolo-text">{t("polje_datum")}</span>
-        <input
-          type="date"
-          className={polje}
+        <DatumRodjenja
           value={datum}
-          onChange={(e) => setDatum(e.target.value)}
+          onChange={setDatum}
           min={najranije.toISOString().slice(0, 10)}
           max={najkasnije.toISOString().slice(0, 10)}
-          required
+          porukaGreske={t("polje_datum_raspon")}
         />
         {/* Datum se posle otvaranja naloga ne menja (čl. 7) — to mora da piše ovde,
             a ne posle, jer je roditeljska izjava jedina provera godina u sistemu. */}
@@ -417,13 +416,12 @@ function PreuzmiObrazac({ onGotovo, onOdustani }: { onGotovo: () => void; onOdus
 
       <label className="block text-sm">
         <span className="font-medium text-kolo-text">{t("polje_datum_preuzimanje")}</span>
-        <input
-          type="date"
-          className={polje}
+        <DatumRodjenja
           value={datum}
-          onChange={(e) => setDatum(e.target.value)}
+          onChange={setDatum}
           min={najranije.toISOString().slice(0, 10)}
           max={najkasnije.toISOString().slice(0, 10)}
+          porukaGreske={t("polje_datum_raspon")}
         />
         <span className="mt-1 block text-xs text-kolo-muted">{t("polje_datum_preuzimanje_opis")}</span>
       </label>

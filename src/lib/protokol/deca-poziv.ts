@@ -179,6 +179,17 @@ async function posaljiPozivRoditelju(
       `Nalog pod pseudonimom <strong>${esc(pseudonim)}</strong> naveo je ovu adresu kao adresu roditelja.`,
       `Ako je to vaše dete, otvorite nalog i unesite njegov datum rođenja — time dajete saglasnost za učešće i preuzimate nalog.`,
       `Ako nije, na istoj stranici stoje dugmad <strong>„Ovo nije moje dete"</strong> i <strong>„Obriši nalog"</strong>.`,
+      // 🔴 Uputstvo za roditelja koji NIJE na platformi. Bez njega poruka traži
+      // radnju koju čovek nema gde da izvrši: dugme ga vodi na prijavu, a nalog
+      // nema. Tri koraka su namerno razdvojena, jer se drugi i treći ne dešavaju
+      // istog dana — a dete u međuvremenu nije zaustavljeno.
+      `<strong>Ako još niste na KOLU:</strong>`,
+      `1. Otvorite svoj nalog (besplatno je) — dugme ispod vas vodi na isto mesto i posle registracije.<br>` +
+        `2. Preuzmite nalog deteta i upišite njegov datum rođenja.<br>` +
+        `3. Zamolite nekoga ko vas poznaje, a već je član, da potvrdi da ste stvarna osoba.`,
+      `Dete koristi platformu čim preuzmete nalog — profil, prijatelje i Pričaonicu. ` +
+        `POEN se detetu upisuje tek kada vi postanete redovan član, ali se ništa ne gubi: ` +
+        `sve što je do tada zaradilo stoji zabeleženo i upiše mu se tog dana.`,
       `Link važi ${ROK_TOKENA_DANA} dana. Ako niko ne preuzme nalog u roku od ${ROK_PREUZIMANJA_DANA} dana od otvaranja, nalog se briše sam.`,
     ],
     dugme: { tekst: "Otvori nalog deteta", link },

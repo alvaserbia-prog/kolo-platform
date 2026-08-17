@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -25,6 +25,9 @@ function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: str
 
 export default function RegistracijaPage() {
   const router = useRouter();
+  // Odakle je čovek došao (npr. poziv za nalog deteta). Bez ovoga bi ga
+  // registracija odvela na vodič i poziv bi ostao samo u mejlu.
+  const callbackUrl = useSearchParams().get("callbackUrl");
   const t = useTranslations("registracija");
   const [form, setForm] = useState({ email: "", pseudonim: "", password: "" });
   const [prikaziLozinku, setPrikaziLozinku] = useState(false);
@@ -90,7 +93,7 @@ export default function RegistracijaPage() {
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     if (result?.error) { router.push("/login?registered=1"); return; }
     try { sessionStorage.setItem("kolo-welcome", "1"); } catch { /* nedostupan */ }
-    router.push("/dobrodosli");
+    router.push(callbackUrl ?? "/dobrodosli");
   }
 
   return (

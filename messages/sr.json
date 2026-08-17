@@ -2915,7 +2915,8 @@
     "pregled_prijatelji_prazno": "Još nema prijatelja.",
     "pregled_razgovori": "Razgovori sa decom",
     "pregled_razgovori_prazno": "Još nema razgovora.",
-    "pregled_poruka": "{broj} poruka"
+    "pregled_poruka": "{broj} poruka",
+    "polje_datum_raspon": "Unesi datum rođenja deteta — dete mora imati između 7 i 18 godina."
   },
   "decjaPocetna": {
     "naslov": "Dečija pijaca",
@@ -3004,12 +3005,18 @@
     "vec_preuzet_naslov": "Nalog je već preuzet",
     "vec_preuzet_opis": "Nalog {pseudonim} već ima roditelja. Ako ste drugi roditelj, unesite pseudonim i kod u odeljku „Moja deca”.",
     "ishod_preuzet_naslov": "Nalog je preuzet",
-    "ishod_preuzet_opis": "Dete sada može u Pričaonicu. POEN po prijateljstvima počinje da se upisuje kad postanete redovan član.",
+    "ishod_preuzet_opis": "Dete sada može u Pričaonicu. POEN po prijateljstvima stoji zabeležen i upisuje se kad postanete redovan član — kad vas potvrdi neko ko vas poznaje.",
     "ishod_odbijen_naslov": "Zabeleženo",
     "ishod_odbijen_opis": "Nećemo vam više slati poruke povodom ovog naloga. Ako ga niko ne preuzme, briše se sam.",
     "ishod_obrisan_naslov": "Nalog je obrisan",
     "ishod_obrisan_opis": "Nalog i svi podaci su uklonjeni.",
-    "na_profil": "Otvori svoj profil"
+    "na_profil": "Otvori svoj profil",
+    "datum_raspon": "Unesi datum rođenja deteta — dete mora imati između 7 i 18 godina.",
+    "nisam_clan_naslov": "Ako još niste na KOLU",
+    "nisam_clan_korak1": "1. Otvorite svoj nalog — besplatno je i vraća vas na ovu stranicu.",
+    "nisam_clan_korak2": "2. Preuzmite nalog deteta i upišite datum rođenja.",
+    "nisam_clan_korak3": "3. Zamolite nekoga ko vas poznaje, a već je član, da potvrdi da ste stvarna osoba.",
+    "nisam_clan_poen": "Dete koristi platformu čim preuzmete nalog. POEN mu se upisuje kada vi postanete redovan član — ništa se ne gubi, sve zarađeno stoji zabeleženo i upiše mu se tog dana."
   },
   "prijavaPoruke": {
     "dugme": "prijavi",

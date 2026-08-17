@@ -4,6 +4,8 @@ import { use, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import DatumRodjenja from "@/components/DatumRodjenja";
+import { UZRAST_MIN, UZRAST_PUNOLETSTVO } from "@/lib/deca-pravila";
 
 type Poziv = {
   pseudonim: string;
@@ -36,6 +38,16 @@ export default function DetePozivPage({ params }: { params: Promise<{ token: str
   const [greska, setGreska] = useState("");
   const [radi, setRadi] = useState(false);
   const [ishod, setIshod] = useState<"preuzet" | "odbijen" | "obrisan" | null>(null);
+
+  // Granice se računaju iz istih konstanti kao na serveru — polje ne prihvata
+  // datum koji bi server odbio.
+  const danas = new Date();
+  const najranije = new Date(danas.getFullYear() - UZRAST_PUNOLETSTVO, danas.getMonth(), danas.getDate() + 1)
+    .toISOString()
+    .slice(0, 10);
+  const najkasnije = new Date(danas.getFullYear() - UZRAST_MIN, danas.getMonth(), danas.getDate())
+    .toISOString()
+    .slice(0, 10);
 
   const ucitaj = useCallback(async () => {
     setUcitava(true);
@@ -132,11 +144,12 @@ export default function DetePozivPage({ params }: { params: Promise<{ token: str
             <label className="mb-1.5 block text-sm font-medium text-kolo-text">
               {t("datum_rodjenja")}
             </label>
-            <input
-              type="date"
+            <DatumRodjenja
               value={datum}
-              onChange={(e) => setDatum(e.target.value)}
-              className="w-full rounded-xl border border-kolo-border px-4 py-3 text-sm outline-none focus:border-kolo-green-700"
+              onChange={setDatum}
+              min={najranije}
+              max={najkasnije}
+              porukaGreske={t("datum_raspon")}
             />
             {/* Datum se posle upisa NE menja (čl. 7) — to mora da piše pre unosa, ne posle. */}
             <p className="mt-1 text-xs text-kolo-muted">{t("datum_opis")}</p>
@@ -149,6 +162,18 @@ export default function DetePozivPage({ params }: { params: Promise<{ token: str
           >
             {t("dugme_preuzmi")}
           </button>
+
+          {/* 🔴 Uputstvo za roditelja koji NIJE na platformi. Dugme iznad ga vodi
+              na prijavu, a on nalog nema — bez ova tri koraka poruka traži radnju
+              koju čovek ne ume da izvrši. Drugi i treći korak se ne dešavaju istog
+              dana, ali dete zbog toga nije zaustavljeno. */}
+          <div className="rounded-xl bg-kolo-bg px-4 py-3 text-xs text-kolo-muted space-y-1">
+            <p className="font-semibold text-kolo-text">{t("nisam_clan_naslov")}</p>
+            <p>{t("nisam_clan_korak1")}</p>
+            <p>{t("nisam_clan_korak2")}</p>
+            <p>{t("nisam_clan_korak3")}</p>
+            <p className="pt-1">{t("nisam_clan_poen")}</p>
+          </div>
 
           <div className="space-y-2 border-t border-kolo-border pt-4">
             <p className="text-xs text-kolo-muted">{t("nije_moje_uvod")}</p>

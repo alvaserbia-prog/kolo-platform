@@ -2915,7 +2915,8 @@
     "pregled_prijatelji_prazno": "Még nincsenek barátok.",
     "pregled_razgovori": "Beszélgetések gyerekekkel",
     "pregled_razgovori_prazno": "Még nincsenek beszélgetések.",
-    "pregled_poruka": "{broj} üzenet"
+    "pregled_poruka": "{broj} üzenet",
+    "polje_datum_raspon": "Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie."
   },
   "decjaPocetna": {
     "naslov": "Gyermekpiac",
@@ -3004,12 +3005,18 @@
     "vec_preuzet_naslov": "A fiókot már átvették",
     "vec_preuzet_opis": "A(z) {pseudonim} fióknak már van szülője. Ha Ön a második szülő, adja meg az álnevet és a kódot a „Gyermekeim” részben.",
     "ishod_preuzet_naslov": "A fiókot átvette",
-    "ishod_preuzet_opis": "A gyermek mostantól használhatja a Beszélgetőt. A barátságokért járó POEN akkor kezd bejegyződni, amikor Ön rendes taggá válik.",
+    "ishod_preuzet_opis": "A gyermek most már használhatja a Beszélgetőszobát. A barátságokból származó POEN nyilván van tartva, és akkor kerül bejegyzésre, amikor Ön rendes taggá válik — amikor valaki, aki ismeri Önt, igazolja Önt.",
     "ishod_odbijen_naslov": "Feljegyeztük",
     "ishod_odbijen_opis": "Erről a fiókról többé nem küldünk üzenetet. Ha senki sem veszi át, magától törlődik.",
     "ishod_obrisan_naslov": "A fiók törölve",
     "ishod_obrisan_opis": "A fiókot és minden adatot eltávolítottunk.",
-    "na_profil": "Saját profil megnyitása"
+    "na_profil": "Saját profil megnyitása",
+    "datum_raspon": "Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie.",
+    "nisam_clan_naslov": "Ha még nincs fiókja a KOLO-n",
+    "nisam_clan_korak1": "1. Nyissa meg saját fiókját — ingyenes, és visszatér erre az oldalra.",
+    "nisam_clan_korak2": "2. Vegye át a gyermek fiókját, és adja meg a születési dátumot.",
+    "nisam_clan_korak3": "3. Kérjen meg valakit, aki ismeri Önt és már tag, hogy igazolja: Ön valós személy.",
+    "nisam_clan_poen": "A gyermek azonnal használhatja a platformot, amint átveszi a fiókot. A POEN akkor kerül bejegyzésre, amikor Ön rendes taggá válik — semmi nem vész el: minden megszerzett érték nyilván van tartva, és aznap bejegyzésre kerül."
   },
   "prijavaPoruke": {
     "dugme": "jelentés",

@@ -5,6 +5,7 @@ import { intlTag } from "@/lib/format";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
+import DatumRodjenja from "@/components/DatumRodjenja";
 
 type EnrollmentStatus = "PENDING" | "ACTIVE" | "INACTIVE" | "REJECTED";
 
@@ -319,8 +320,9 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
       {type === "PODRSKA_STARIJIMA" && (
         <div>
           <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("datum_rodjenja")}</label>
-          <input type="date" value={datumRodjenja} onChange={(e) => setDatumRodjenja(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+          {/* Datum rođenja se KUCA, ne bira iz kalendara: kalendar se otvara na
+              tekućem mesecu, a ovaj datum je decenijama unazad. */}
+          <DatumRodjenja value={datumRodjenja} onChange={setDatumRodjenja} />
           <p className="text-xs text-kolo-muted mt-1">{t("starijima_napomena")}</p>
         </div>
       )}
@@ -359,9 +361,10 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
           {deca.map((d, i) => (
             <div key={i} className="flex items-center gap-2">
               <span className="text-xs text-kolo-muted w-16 shrink-0">{t("dete_ime", { n: i + 1 })}</span>
-              <input type="date" value={d.datumRodjenja}
-                onChange={(e) => setDeca((prev) => prev.map((x, j) => j === i ? { datumRodjenja: e.target.value } : x))}
-                className="flex-1 px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+              <DatumRodjenja
+                value={d.datumRodjenja}
+                onChange={(iso) => setDeca((prev) => prev.map((x, j) => (j === i ? { datumRodjenja: iso } : x)))}
+              />
               {deca.length > 1 && (
                 <button type="button" onClick={() => setDeca((prev) => prev.filter((_, j) => j !== i))}
                   className="text-kolo-danger hover:text-kolo-danger text-lg leading-none px-1">×</button>
