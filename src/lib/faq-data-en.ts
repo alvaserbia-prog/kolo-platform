@@ -297,6 +297,15 @@ What you can check. The total amount recorded, the number of steps carried out a
         odgovor: `No. The platform is currently intended exclusively for adults. Minor users will be covered by a dedicated module with enhanced requirements and parental or legal-guardian consent, which will be activated later.`,
       },
       {
+        id: 84,
+        pitanje: `Can minors register?`,
+        odgovor: `Yes, from the age of seven, with the consent of a parent or legal guardian. Children's participation is governed by the Regulation on the Participation of Children.
+
+There are two paths. A parent already on the platform opens an account for the child from their own profile. A child may also register alone — entering a pseudonym, a password and a parent's e-mail address — and the account then works in a limited scope: the profile and friendships work, the chat room and listings do not, and no POEN is recorded until a parent takes the account over and becomes a regular member.
+
+Children form friendships by scanning a code in person. For a friendship formed, 500 POEN is recorded to each child, but only once both accounts are in full scope. A parent does not read conversations between children — they see who the child is friends with and how many conversations exist, without content; a conversation between a child and an adult is read by the parent, and the adult participant is given a visible notice of that. On the eighteenth birthday the account becomes an adult account, friendships are deleted, POEN earned through friendships is annulled, and the parents record a confirmation of reality for the child.`,
+      },
+      {
         id: 7,
         pitanje: `How do I get confirmed and what do I gain from it?`,
         odgovor: `Confirmation is optional, but it is a prerequisite for full access to the platform's features.

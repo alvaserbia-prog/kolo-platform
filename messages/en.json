@@ -897,11 +897,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -909,23 +909,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.2.3",
+      "ver": "4.3.0",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -945,21 +945,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.2.3",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.3.0",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.2.3",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.3.0",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.2.3",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.3.0",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.2.3",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.3.0",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.2.3",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.3.0",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.2.3",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.3.0",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.2.3",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.3.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -992,6 +992,10 @@
       "programi-podrske": {
         "naziv": "Rulebook on Support Programmes",
         "opis": "Social programmes (Support for Mothers, for the Elderly, Special Care, Schooling) — conditions, coefficients, and the person who confirmed you confirmation."
+      },
+      "ucesce-dece": {
+        "naziv": "Rulebook on the Participation of Children",
+        "opis": "Participation of minors: two entry paths (the parent opens the account or the child registers independently), three account states, friendships and the 500-POEN contribution, transition to an adult account."
       }
     }
   },
@@ -2322,7 +2326,7 @@
     "donacije_iznos_korekcija": "Iznos za potvrdu — korigujte prema stvarnom prilivu iz izvoda",
     "tab_obavestenja": "Obaveštenja",
     "obav_upozorenje_naslov": "Samo sistemska obaveštenja",
-    "obav_upozorenje": "Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.",
+    "obav_upozorenje": "Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.",
     "obav_novo": "Novo obaveštenje",
     "obav_primalaca": "Trenutno bi poruku primilo {broj} korisnika.",
     "obav_naslov_polje": "Naslov",

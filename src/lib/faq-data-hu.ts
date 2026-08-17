@@ -308,6 +308,15 @@ Mit ellenőrizhetsz. A rögzített teljes összeg, a végrehajtott lépések sz�
         odgovor: `Nem. A platform jelenleg kizárólag nagykorú személyeknek szól. A kiskorú felhasználókat külön modul fogja lefedni, szigorúbb követelményekkel és a szülő vagy törvényes képviselő hozzájárulásával; ez a modul később indul.`,
       },
       {
+        id: 84,
+        pitanje: `Regisztrálhatnak-e kiskorúak?`,
+        odgovor: `Igen, hét éves kortól, a szülő, illetve a törvényes képviselő hozzájárulásával. A gyermekek részvételét a gyermekek részvételéről szóló szabályzat rendezi.
+
+Két út van. A platformon már jelen lévő szülő a saját profiljából nyit fiókot a gyermeknek. A gyermek egyedül is regisztrálhat — álnevet, jelszót és a szülő e-mail-címét adja meg —, és a fiók ekkor korlátozott terjedelemben működik: a profil és a barátságok működnek, a beszélgetőszoba és a hirdetések nem, POEN pedig nem kerül bejegyzésre, amíg a szülő át nem veszi a fiókot és nem lesz rendes tag.
+
+A gyermekek barátságot személyes találkozáson, kód beolvasásával kötnek. Megkötött barátságért mindegyik gyermeknek 500 POEN kerül bejegyzésre, de csak akkor, amikor mindkét fiók teljes terjedelemben működik. A szülő nem olvassa a gyermekek egymás közötti beszélgetéseit — azt látja, kivel áll a gyermek barátságban és hány beszélgetése van, tartalom nélkül; a gyermek és nagykorú személy beszélgetését a szülő olvassa, és erről a nagykorú fél látható tájékoztatást kap. A tizennyolcadik születésnapon a fiók nagykorú fiókká válik, a barátságok törlődnek, a barátságokkal szerzett POEN érvénytelenné válik, a szülők pedig valóságigazolást jegyeznek be a gyermeknek.`,
+      },
+      {
         id: 7,
         pitanje: `Hogyan megerősíttethetem magam, és mit nyerek vele?`,
         odgovor: `A megerősítés választható, de előfeltétele a platform funkcióinak teljes elérésének.

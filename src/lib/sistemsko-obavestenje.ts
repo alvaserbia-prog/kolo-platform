@@ -2,7 +2,9 @@
  * Cirkularna SISTEMSKA obaveštenja — jedna poruka svim korisnicima.
  *
  * Namena je uska i propisana aktima: izmene Uslova i Politike privatnosti
- * (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj
+ * (Uslovi čl. 40, Politika čl. 16 — izmene stupaju na snagu danom donošenja, a
+ * obaveštenje se šalje bez odlaganja; rok od 15 dana je ukinut setom 4.3.0),
+ * planirani zastoj
  * duži od 24 sata (Uslovi čl. 33) i slična obaveštenja koja Fondacija DUGUJE
  * korisnicima. Zato ova pošta NE poštuje `User.emailObavestenja` opt-out.
  *

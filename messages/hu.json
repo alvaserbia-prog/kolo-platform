@@ -890,11 +890,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -902,23 +902,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.2.3"
+      "ver": "4.3.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.2.3",
+      "ver": "4.3.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -938,21 +938,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.2.3-s verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.3.0-s verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.2.3-s verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.3.0-s verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.2.3-s verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.3.0-s verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.3-s verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.0-s verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.2.3-s verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.0-s verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.2.3-s verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.3.0-s verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.2.3-s verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.3.0-s verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -985,6 +985,10 @@
       "programi-podrske": {
         "naziv": "Szabályzat a támogatási programokról",
         "opis": "Szociális programok (Édesanyák támogatása, Idősek támogatása, Különleges gondoskodás, Tanulás) — feltételek, együtthatók és a megerősítők megerősítése."
+      },
+      "ucesce-dece": {
+        "naziv": "Szabályzat a gyermekek részvételéről",
+        "opis": "A kiskorúak részvétele: két belépési út (a szülő nyitja meg a fiókot, vagy a gyermek önállóan regisztrál), három fiókállapot, barátságok és az 500 POEN hozzájárulás, átmenet nagykorú fiókba."
       }
     }
   },
@@ -2315,7 +2319,7 @@
     "donacije_iznos_korekcija": "Iznos za potvrdu — korigujte prema stvarnom prilivu iz izvoda",
     "tab_obavestenja": "Obaveštenja",
     "obav_upozorenje_naslov": "Samo sistemska obaveštenja",
-    "obav_upozorenje": "Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.",
+    "obav_upozorenje": "Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.",
     "obav_novo": "Novo obaveštenje",
     "obav_primalaca": "Trenutno bi poruku primilo {broj} korisnika.",
     "obav_naslov_polje": "Naslov",

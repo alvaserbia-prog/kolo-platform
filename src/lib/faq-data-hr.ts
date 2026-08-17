@@ -297,6 +297,15 @@ Veći saldo ne daje razmjerno veću moć. Glasanje u Gornjem Kolu je kvadratno: 
         odgovor: `Ne. Platforma je trenutačno namijenjena isključivo punoljetnim osobama. Maloljetni korisnici bit će obuhvaćeni posebnim modulom s pojačanim zahtjevima i suglasnošću roditelja ili zakonskog zastupnika, koji se aktivira kasnije.`,
       },
       {
+        id: 84,
+        pitanje: `Mogu li se maloljetnici registrirati?`,
+        odgovor: `Da, od sedme godine, uz suglasnost roditelja odnosno zakonskog zastupnika. Sudjelovanje djece uređuje Pravilnik o sudjelovanju djece.
+
+Dva su puta. Roditelj koji je već na platformi otvara račun djetetu iz svojeg profila. Dijete se može i samo registrirati — unosi pseudonim, lozinku i adresu elektroničke pošte roditelja — a račun tada radi u ograničenom obimu: profil i prijateljstva rade, pričaonica i oglasi ne, a POEN se ne upisuje dok roditelj ne preuzme račun i ne postane redovan član.
+
+Djeca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom se djetetu upisuje 500 POEN, ali tek kada su oba računa u punom obimu. Roditelj ne čita razgovore između djece — vidi s kim je dijete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor djeteta s punoljetnom osobom roditelj čita, a punoljetni sugovornik o tome ima vidljivu obavijest. Na osamnaesti rođendan račun prelazi u punoljetni, prijateljstva se brišu, POEN zarađen prijateljstvima se ukida, a roditelji djetetu evidentiraju potvrdu stvarnosti.`,
+      },
+      {
         id: 7,
         pitanje: `Kako se potvrđujem i što time dobivam?`,
         odgovor: `Potvrda je opcionalna, ali je preduvjet za pun pristup funkcijama platforme.
