@@ -2,7 +2,7 @@
  * Izvoz SVIH tekstova sajta u jednu tabelu — radi lakšeg prevođenja i lekture.
  *
  * Pokretanje:  node scripts/izvoz-tekstova.mjs
- * Izlaz:       izvoz/tekstovi-sajta.csv   (svih 5 jezika u kolonama, jedan red = jedan tekst)
+ * Izlaz:       izvoz/tekstovi-sajta.md    (svih 5 jezika jedan pod drugim, uz ključ)
  *              izvoz/zakucano.txt         (mesta gde tekst stoji u kodu, pa nije prevodiv)
  *
  * Skript čita tri izvora, jer tekst sajta NE živi na jednom mestu:
@@ -172,14 +172,180 @@ if (dupli.length) {
   process.exit(1);
 }
 
-const KOLONE = ["izvor", "sekcija", "kljuc", ...JEZICI];
+/**
+ * Markdown, ne CSV (odluka vlasnika 2026-08-17): tekstovi su proza, a ne
+ * tabelarni podaci — FAQ odgovor ima više pasusa, što u ćeliji tablice ne može
+ * da se čita ni menja. Ovde svaki tekst stoji kao pasus, pa se piše kao u
+ * uredniku.
+ *
+ * 🔴 FORMAT JE MAŠINSKI ČITLJIV i po njemu se izmene vraćaju u kod, pa se ne
+ * menja bez potrebe:
+ *   `### <kljuc>`     — jedan tekst, ključ je njegova adresa
+ *   `**<jezik>**`     — jezik, pa PRAZAN RED, pa tekst do sledećeg `**jezik**`
+ *   `---`             — kraj jednog teksta
+ * Uređuje se SAMO tekst pod oznakom jezika. Ključ i oznake jezika ostaju.
+ */
+const zaglavlje = (r) => `### ${r.kljuc}`;
 
-/** CSV po RFC 4180; BOM na početku da Excel prepozna UTF-8 (č, ć, š, ž, đ). */
-const csvPolje = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
-const csv =
-  "﻿" +
-  [KOLONE.join(","), ...redovi.map((r) => KOLONE.map((k) => csvPolje(r[k])).join(","))].join("\r\n");
-writeFileSync(join(KOREN, "izvoz", "tekstovi-sajta.csv"), csv);
+/**
+ * Tekst ide u markdown kakav jeste, uz jedan zahvat: red koji počinje znakom
+ * markdown sintakse (`#`, `-`, `>`, `|`, cifra + tačka) beži obrnutom kosom
+ * crtom, inače bi se prikazao kao naslov ili kao stavka liste. Znak bežanja
+ * `raspakuj()` skida pri čitanju, pa tekst ostaje isti do znaka.
+ *
+ * Prelomi reda se NE pretvaraju u markdown prelome (dupli razmak na kraju
+ * reda): prikaz bi bio verniji, ali bi u tekst ušla dva znaka kojih u kodu
+ * nema, pa bi se pri vraćanju u kod izgubila razlika između pravog teksta i
+ * ukrasa. Vernost teksta je važnija od vernosti prikaza.
+ */
+function telo(tekst) {
+  if (!tekst) return PRAZNO;
+  return tekst
+    .replace(/^ +/, (m) => RAZMAK.repeat(m.length))
+    .replace(/ +$/, (m) => RAZMAK.repeat(m.length))
+    .split("\n")
+    .map((red) => red.replace(/^(\s*)([#>|+*-]|\d+\.)/, "$1\\$2"))
+    .join("\n");
+}
+
+/** Oznaka za tekst koji na tom jeziku ne postoji — da se prazan red ne čita kao brisanje. */
+const PRAZNO = "_(prazno)_";
+
+/**
+ * Razmak na početku ili kraju teksta se ISPISUJE kao „␣".
+ *
+ * Jedanaest tekstova ga nosi namerno — to su odlomci koji se u rečenici spajaju
+ * oko podebljane reči („To zovemo ", pa POEN, pa " je zapis…"), pa bi izgubljen
+ * razmak spojio dve reči. U markdownu se takav razmak ne vidi, a većina
+ * urednika ga briše pri čuvanju fajla, tiho i bez pitanja. Vidljiv znak je
+ * jedina odbrana: ono što se vidi, ne može da se izgubi neopaženo.
+ */
+const RAZMAK = "␣";
+
+/**
+ * Obrnuto od `telo()` — koristi se pri vraćanju izmena iz fajla u kod.
+ *
+ * Prazan red posle oznake jezika i pre sledeće oznake pripada formatu, ne
+ * tekstu, pa se skida po jedan sa svakog kraja. NE koristi se `trim()`, jer bi
+ * odneo i razmak koji je deo teksta.
+ */
+function raspakuj(blok) {
+  const linije = blok.split("\n");
+  if (linije[0] === "") linije.shift();
+  if (linije.at(-1) === "") linije.pop();
+  const tekst = linije
+    .map((red) => red.replace(/^(\s*)\\([#>|+*-]|\d+\.)/, "$1$2"))
+    .join("\n");
+  if (tekst === PRAZNO) return "";
+  return tekst.replaceAll(RAZMAK, " ");
+}
+
+/**
+ * Čita gotov markdown i vraća `{ kljuc: { jezik: tekst } }`.
+ *
+ * Stoji ovde, a ne u zasebnoj skripti, da bi se izvoz proveravao sam: posle
+ * pisanja se fajl pročita natrag i uporedi sa izvorom. Bez toga bi „format je
+ * mašinski čitljiv" bilo obećanje koje ništa ne drži — a upravo od njega
+ * zavisi da se izmene iz fajla mogu vratiti u kod.
+ */
+export function procitajIzvoz(sadrzaj) {
+  const out = {};
+  let kljuc = null;
+  let jezik = null;
+  let blok = [];
+  const zatvori = () => {
+    if (kljuc && jezik) (out[kljuc] ??= {})[jezik] = raspakuj(blok.join("\n"));
+    blok = [];
+  };
+  for (const red of sadrzaj.split("\n")) {
+    const noviKljuc = /^### (.+)$/.exec(red);
+    const noviJezik = /^\*\*([a-z-]{2,7})\*\*$/.exec(red);
+    if (noviKljuc) {
+      zatvori();
+      kljuc = noviKljuc[1].trim();
+      jezik = null;
+    } else if (noviJezik) {
+      zatvori();
+      jezik = noviJezik[1];
+    } else if (red === "---") {
+      zatvori();
+      jezik = null;
+    } else if (jezik) {
+      blok.push(red);
+    }
+  }
+  zatvori();
+  return out;
+}
+
+const md = [];
+md.push("# Tekstovi sajta");
+md.push("");
+md.push(
+  `Generisano skriptom \`scripts/izvoz-tekstova.mjs\`. Ukupno **${redovi.length}** tekstova ` +
+    `na ${JEZICI.length} jezika (${JEZICI.join(", ")}).`,
+);
+md.push("");
+md.push("**Kako se uređuje:** menja se samo tekst ispod oznake jezika. Red koji počinje sa");
+md.push("`###` je ključ — adresa po kojoj se tekst vraća u kod — i ne dira se, kao ni oznake");
+md.push("jezika (`**sr**`, `**en**`…). Novi jezik se ne dodaje ovde nego u `messages/`.");
+md.push("");
+md.push("Dva znaka pripadaju fajlu, a ne tekstu sajta:");
+md.push("");
+md.push("- `\\` na početku reda — izbegnut znak markdown sintakse (`#`, `-`, `>`…).");
+md.push(
+  `- \`${RAZMAK}\` — razmak na početku ili kraju teksta. Nosi ga jedanaest odlomaka koji se u ` +
+    "rečenici spajaju oko podebljane reči; ako se izgubi, dve reči se sastave. Ostavi ga gde je.",
+);
+md.push("");
+md.push(`Tekst koji na nekom jeziku ne postoji označen je sa ${PRAZNO}.`);
+md.push("");
+
+// Sadržaj — po izvoru i sekciji, sa brojem tekstova; sekcija je i naslov ispod.
+md.push("## Sadržaj");
+md.push("");
+const grupe = [];
+for (const r of redovi) {
+  const naziv = `${r.izvor} / ${r.sekcija}`;
+  if (grupe.at(-1)?.naziv !== naziv) grupe.push({ naziv, redovi: [] });
+  grupe.at(-1).redovi.push(r);
+}
+for (const g of grupe) md.push(`- ${g.naziv} — ${g.redovi.length}`);
+md.push("");
+
+for (const g of grupe) {
+  md.push(`## ${g.naziv}`);
+  md.push("");
+  for (const r of g.redovi) {
+    md.push(zaglavlje(r));
+    md.push("");
+    for (const j of JEZICI) {
+      md.push(`**${j}**`);
+      md.push("");
+      md.push(telo(r[j]));
+      md.push("");
+    }
+    md.push("---");
+    md.push("");
+  }
+}
+
+const sadrzajMd = md.join("\n");
+writeFileSync(join(KOREN, "izvoz", "tekstovi-sajta.md"), sadrzajMd);
+
+// Provera da se napisano može pročitati natrag — inače fajl nije upotrebljiv za
+// vraćanje izmena, a to se ne bi videlo do trenutka kad zatreba.
+const procitano = procitajIzvoz(sadrzajMd);
+const razlike = [];
+for (const r of redovi) {
+  for (const j of JEZICI) {
+    if (procitano[r.kljuc]?.[j] !== r[j]) razlike.push(`${r.kljuc} / ${j}`);
+  }
+}
+if (razlike.length) {
+  console.error(`Izvoz se ne čita natrag (${razlike.length}):`, razlike.slice(0, 10).join(", "));
+  process.exit(1);
+}
 
 // ─────────────────────────────────────────────────────────────
 // 4) Tekst zakucan u kodu (nije prevodiv bez izmene koda)
@@ -222,4 +388,4 @@ const prazni = redovi.flatMap((r) =>
 );
 console.log(`nedostaje prevoda:        ${prazni.length}`);
 for (const p of prazni) console.log(`  - ${p}`);
-console.log("\nizvoz/tekstovi-sajta.csv, izvoz/zakucano.txt");
+console.log("\nizvoz/tekstovi-sajta.md, izvoz/zakucano.txt");
