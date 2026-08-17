@@ -1,4 +1,4 @@
-# KOLO Platforma — akti v4.2.3 (Statut 4.1)
+# KOLO Platforma — akti v4.3.0 (Statut 4.1)
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -146,7 +146,8 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
-> **CLAUDE.md sinhronizovan sa kodom do commita `aad2fbe` (2026-08-16).** Šta je uneto u ovom prolazu: **Modul Deca** (implementiran, iza prekidača — vidi zasebnu sekciju; ranije je u ovom fajlu na tri mesta pisalo da nije implementiran), **prijava pseudonimom + ograničenje pokušaja**, **dve Pričaonice** (odrasli/deca), **prijateljstva i dečja Početna**, **plaćanje donacija** (NestPay + IPS QR — nikad nije bilo opisano), oznaka na oglasu „**Nov član**" umesto „BEZ POTVRDE", noviji cron poslovi, prava lista testova, i repoint zaostalih referenci sa `dokumentacija 3.9/` na `dokumentacija 4.1/`. Raniji prolaz (do `120d578`, 2026-06-16): Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, „emisija" → „evidencija doprinosa".
+> **CLAUDE.md sinhronizovan sa kodom do commita `d36903b` (2026-08-17).** Šta je uneto u ovom prolazu: **prijava imejlom ILI pseudonimom + ograničenje pokušaja**, **plaćanje donacija** (NestPay + IPS QR — nikad nije bilo opisano), **datum rođenja se kuca + uputstvo roditelju koji nije član**, 🔴 **`bazniUrl()` — mejlovi sa testa su vodili na `ekolo.rs`**, cron `deca-punoletstvo`, admin tab **Prijave**, prava lista testova i biblioteke, oznaka na oglasu „**Nov član**" umesto „BEZ POTVRDE", i repoint zaostalih referenci na set **4.3.0** i `dokumentacija 4.1/`.
+> **Sažeta i zadržana samo istina koja i dalje važi:** opis Modula Deca iz prve verzije (14–16.08) je **obrisan** i sveden na pododeljak „Osnova iz prve verzije koja i dalje važi" ispod sekcije „Modul Deca — unapređeni model" — druga verzija je oborila nosivo pravilo prve (POEN u dečjem prostoru), pa bi dva opisa jedan pored drugog protivrečila. Raniji prolaz (do `120d578`, 2026-06-16): Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, „emisija" → „evidencija doprinosa".
 
 ## Status usklađenosti (24.05.2026 → 02.06.2026)
 **Kod je u velikoj meri usklađen sa v3.7.5/3.7.4/3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
@@ -201,77 +202,10 @@ Pogođena mesta: 18 API ruta (24 handlera); stranice `(app)/krug/**`, `(app)/pos
 - **Krug je i pre ovoga bio poluugašen:** nijedna navigacija nije vodila na `/krug`, a admin **Krugovi tab** je ranije uklonjen (`KrugoviLista` je mrtva komponenta). `krug` polje u tipovima na `/sistem` i `/profil/[id]` se ne renderuje — ostavljeno namerno, radi manjeg diffa.
 - `validacija.ts` i dalje drži `"krug"` među rezervisanim pseudonimima (ruta postoji, samo vraća 404).
 
-## Modul Deca — implementiran, iza prekidača (2026-08-14 → 16)
-
-Prva verzija modula iz Glave VIII (Pravilnik o KOLO sistemu čl. 58). **Raniji zapis u ovom fajlu da Modul Deca „nije implementiran" više NE važi.**
-
-🔴 **Prekidač `MODUL_DECA_AKTIVAN` (`src/lib/moduli.ts`) je trenutno `true` — SAMO radi provere na testu.** MORA nazad na `false` pre svake objave na `ekolo.rs`: UO nije usvojio Pravilnik o Modulu Deca, nisu usklađeni Pravilnik o KOLO sistemu / Uslovi / Politika, i **DPIA nije ažuriran**. Poslednje nije preporuka nego izričita obaveza (čl. 65) — modul koji uvodi obradu podataka maloletnih lica ne sme se aktivirati bez nje. Dok je `false`: stranice modula 404, njegove rute 410, nav stavke i kartice se ne renderuju.
-
-🟡 **Brane koje sakrivaju maloletne korisnike iz javnih upita rade BEZ OBZIRA na prekidač** — cena im je nula, a cena propuštanja je izlaganje deteta.
-
-**Akt je NACRT, ne kanon:** `docs/pravilnik-modul-deca.md` (18 članova). Radni dokument u `docs/`, **loader ga ne učitava**, pa ne dira ni `pravni-dokumenti.test.ts` ni verziju kanonskog seta (4.2.3).
-
-### Nosivo pravilo — u dečjem prostoru NE NASTAJE nijedan nov zapis POEN-a (čl. 14 st. 1)
-Sve što u njemu kruži ušlo je **prepisom od roditelja**, a prepis je zero-sum. Kanali **doprinosa sadržaju** (čl. 40a) i **doprinosa razmeni** (čl. 40b) preskaču maloletne korisnike, i to **u samim servisima**, ne na pozivnom mestu — da ih nova ruta ne bi zaobišla. Posledica: dečji nalozi ne pomeraju opticaj, pa ne pomeraju ni **osnivački korak** (24.000 POEN na svakih 100.000), ni dnevni limit programa, ni obračunski koeficijent ZRNA. Svaka izmena koja bi u dečji prostor uvela emisiju mora najpre izričito odstupiti od ove rečenice.
-
-### Ulazak (čl. 4–6)
-- Nalog otvara **roditelj iz svog naloga**, i nalog je **aktivan odmah**. Nema poziva, roka od 7 dana, rezervacije pseudonima ni ekrana čekanja — to su proširenja koja idu izmenom pravilnika.
-- 🔴 **Uslov je INDEKS stvarnosti ≥ 10%, ne broj primljenih potvrda** (čl. 5, odluka vlasnika 2026-08-16). Razlog je konkretan: **početnom korisniku** (osnivač, UO) indeks je fiksno 100 iako ga formalno niko nije potvrdio — provera po broju potvrda zaustavljala je upravo onoga ko prvi otvara naloge deci. **Posledica:** kod takvog roditelja nema koga da se pita, pa se **nijedno izjašnjenje ne kreira** i nalog stoji na njegovu reč; zato u tom slučaju ide **upozorenje Fondaciji** (`posaljiAdminAlert`) — jedini put u dečji prostor koji ne prolazi kroz mrežu ne sme da bude i nevidljiv.
-- **Zaštita je naknadna:** lica koja su potvrdila roditelja imaju **30 dana** (`ROK_POTVRDE_DANA`) da potvrde da roditelj ima dete tog uzrasta. **Ko ćuti, gubi sopstvenu potvrdu stvarnosti tog roditelja.**
-- Poništenje ide kroz **zatečeni postupak** (`ponistiVerifikaciju`), pa ukida **sve** zapise POEN-a evidentirane povodom te potvrde (1.000 + 1.000 + 500 nadzorniku ako je ishod bio `UREDNO`). 🔴 Zašto sve, a ne samo potvrđivačevih 1.000: ciklus poništi–ponovi bi inače kovao roditelju po 1.000 POEN u svakom krugu. **Slot se oslobađa** (čl. 6 st. 3) — zatečeno poništenje to ne radi, jer je pisano za utvrđenu lažnu verifikaciju.
-- **Prazan skup potvrđivača se izričito zaustavlja** — petlja „svi su potvrdili" bila bi nad njim ispunjena a da se niko nije pitao.
-- Nalog, zapis u Protokolu i redovi potvrde nastaju u **jednoj transakciji** — nalog bez redova potvrde bio bi nalog bez ijedne provere.
-- Model `RoditeljstvoPotvrda` + enum `RoditeljstvoPotvrdaStatus` (`CEKA`/`POTVRDIO`/`OSPORIO`/`ISTEKLA`). **Potvrda se daje ZA SVAKO DETE POSEBNO** (`@@unique([deteId, potvrdjivacId])`), ne po roditelju — čovek sa četvoro dece traži četiri izjašnjenja. **„Nemam saznanja o tome" se NE beleži** kao odgovor: po pravilniku je to isto što i ćutanje, pa zapis čeka istek roka (da se beleži, čovek bi mislio da je posao završio, a potvrda bi mu ipak pala). Uz **osporavanje** je obrazloženje obavezno (ide UO).
-- **Cron `/api/cron/deca-potvrde` (21:00)** obrađuje istekle rokove; idempotentan i nadoknađuje (obrađuje sve istekle, ne samo današnje).
-
-### Polja i uzrast
-- `User.datumRodjenja` (`@db.Date`) — jedini izvor uzrasta, **posle otvaranja se ne menja** (čl. 7); roditeljska izjava je jedina provera godina kojom sistem raspolaže. `User.maloletan` (indeksirano) je izvedeno ali **upisano**, jer svaki javni upit mora da isključi decu a računanje datuma po redu to ne bi podnelo. 🔴 **Oba se pišu ISKLJUČIVO kroz `poljaDeteta()`.**
-- `User.roditeljId` (relacija `RoditeljDete`) — prva verzija poznaje **jednog** roditelja po detetu. `User.dozvolaOdrasli` — prekidač iz čl. 10 st. 2, stoji **na detetu**, menja ga isključivo roditelj, isključen pri otvaranju.
-- Uzrast **7–18** (`UZRAST_MIN`, `UZRAST_PUNOLETSTVO`). 🔴 `uzrast()` mora dobiti **beogradski dan** (`beogradskiDan()`); golo `new Date()` u UTC-u pomera rođendan dva sata unazad u letnjem periodu.
-
-### Vidljivost i komunikacija
-- **Oglas maloletnog korisnika (čl. 13):** ne vidi ga gost **nikada**, ne indeksira se, ne ulazi u `/api/javno/feed` ni u pretragu članova. Vide ga druga deca, roditelj i admin, a punoletni **samo uz `dozvolaOdrasli`**. Nepozvani zahtev vraća **404, ne 403** — 403 bi potvrdio da oglas postoji. Obrnuti smer je vezan za isti prekidač (dete ne vidi oglase punoletnih bez saglasnosti), jer je po čl. 12 ceo odnos uslovljen saglasnošću.
-- 🔴 **Za dečji oglas važe ISTI uslovi objave kao za svaki drugi** (čl. 13 st. 1, odluka vlasnika): razlikuje se **samo vidljivost**. Ograničenja za nalog bez potvrde (samo PONUDA, najviše 3 aktivna, sadržinski minimum) postoje zbog naloga **iza kog niko ne stoji** — iza deteta stoje roditelj i svi koji su roditelja potvrdili. Ništa se time ne zaobilazi: nalog detetu otvara samo potvrđen korisnik. Provera je na **sva tri mesta** — objava, izmena oglasa i sama forma.
-- **Komunikacija (čl. 12):** deca međusobno uvek (nema razvrstavanja po uzrastu); sa punoletnim **samo uz `dozvolaOdrasli`**. 🔴 Ovlašćenje se proverava **pri SVAKOJ poruci**, ne samo pri otvaranju razgovora — inače bi povlačenje saglasnosti ostavilo zatečene razgovore žive.
-- **Prepis POEN-a (čl. 14):** roditelj ↔ svoje dete **bez uslova** (saglasnost iz čl. 10 uređuje odnos sa **trećim** punoletnim licima); van toga važi isto pravilo kao za komunikaciju.
-- **Obaveštenja o novom oglasu** (`oglas-dogadjaji.ts`) poštuju istu vidljivost — inače bi zvonce vodilo na stranicu koju primalac ne sme da vidi.
-
-### Roditeljska ovlašćenja
-- **Uklanjanje oglasa deteta** (čl. 10 st. 1) — jedino ovlašćenje uklanjanja koje roditelj ima; **meko**, kao moderacija Fondacije (trag ko je i kada uklonio ostaje).
-- **Prekidač `dozvolaOdrasli`** — pali se i gasi u svakom trenutku, sa profila deteta.
-- **Čitanje razgovora deteta (čl. 9, izmenjen 2026-08-16).** 🔴 Roditelj **SAMO ČITA** — rute kojom bi napisao poruku **nema**, i to je namerno: sa druge strane je drugo dete, a odnos deteta i punoletnog otvara isključivo prekidač koji daje **tuđi** roditelj. 🟡 Uvid dodiruje i drugu stranu, pa deca u svom prostoru **moraju biti obaveštena** da roditelj vidi razgovore — obaveštenje stoji uz same poruke.
-- **Brisanje naloga deteta** — poništenje svih zapisa POEN-a uz protivzapis Protokola, uklanjanje oglasa, anonimizacija i deaktivacija (isti postupak kao čl. 34); numerička istorija ostaje (bez nje zero-sum ne bi mogao da se proveri), napušteni pseudonim se briše.
-- Odeljak **„Moja deca"** je na `/profil` (`src/components/deca/MojaDeca.tsx`), vidi ga punoletan korisnik sa indeksom ≥ 10%.
-
-### Mirovanje (čl. 16)
-Nastupa kad stvarnost roditelja više nije potvrđena u propisanoj meri, i pogađa **i roditeljev i detetov** nalog. **Nije mera** (ne teku rokovi suspenzije, ništa se ne briše). Izvodi se **pri čitanju, ne čuva se u koloni** — stanje zavisi od indeksa roditelja, koji se menja poništenjem potvrde na sasvim drugom mestu; kolona bi značila drugi izvor iste istine. 🟡 Mirovanje **nije `UserStatus`**, pa ga osvežavanje JWT-a ne hvata kao suspenziju — zato ga rute proveravaju same (`zaustaviAkoMiruje` pri objavi oglasa, prepisu POEN-a, porukama).
-
-### Dete nikad nije `verified` (čl. 15)
-Dete **nikoga ne potvrđuje i ne potvrđuje se**. Zato je (2026-08-16) uklonjeno: poziv „Zamoli za potvrdu →" u podnožju sidebara (uslov je bio samo `!verified`, pa je detetu stajao **uvek** — obavezan link koji nije mogao da nestane), pristup `/verifikacija` kucanjem adrese (sada preusmerava na `/prijatelji`), indeks stvarnosti na profilu maloletnog i mini stablo lanca potvrda. **Prijatelji i potvrde su isto mesto za različite ljude** — odrasli tu meri ko za njega jemči, dete koga poznaje; zato je jedno **zamenilo** drugo, a ne stalo pored njega.
-
-### Prijateljstva (QR, uživo)
-- Modeli `Prijateljstvo` (**simetrično** — jedan red opisuje obe strane, `aId`/`bId` upisani sortirano, inače bi isti par ušao dvaput u dva smera) i `PrijateljToken`.
-- 🔴 **QR za povezivanje NEMA šestocifreni broj**, za razliku od koda za potvrdu stvarnosti: broj se izdiktira telefonom, a QR se mora **pokazati** — to je jedino što traži da dvoje stvarno budu jedno pored drugog. Zato kod traje **5 minuta** (`TOKEN_VAZI_SEKUNDI` u `prijateljstva.ts`); kod koji živi satima može da se fotografiše i iskoristi daleko od deteta.
-- 🔴 **BEZ EMISIJE POEN-a za prijateljstva.** Zamišljenih 500 po prijatelju otvara put kojim se POEN izvlači: broj dece po roditelju nije ograničen, pa jedan čovek otvori deset naloga, upari ih (45 parova = 45.000 POEN) i prekidačem iz čl. 10 prepiše sve sebi. Emisija ide tek uz ograde i **izmenu čl. 14 st. 1**.
-
-### Dečja Početna i dečja Pričaonica
-- **Ista ruta `/pocetna`** — server prepozna maloletni nalog i renderuje `DecjaPocetna` umesto `PocetnaKlijent`. Ista ruta namerno: klik na logo vodi svakoga „kući", pa dete tako ne završi u Pričaonici odraslih.
-- Sve na **jednom ekranu** (po skici koju je nacrtalo dete): POEN kao veliki broj, četiri dugmeta, pretraga, kartice oglasa i Pričaonica. Za sedmogodišnjaka meni iza hamburgera ne postoji — **sidebar je rezerva**.
-- Na mestu indeksa stvarnosti stoji **broj prijatelja**.
-- **Dve Pričaonice:** `ChatSoba` (`ODRASLI`/`DECA`) + `ChatMessage.soba` (default `ODRASLI`, pa zatečene poruke ostaju gde su bile; migracija `20260814150001_decja_pricaonica`). 🔴 **Soba se IZVODI iz toga ko je prijavljen, ne bira se parametrom** — nema adrese kojom bi odrasli ušao među decu. **Dete u svojoj sobi piše bez ikakve potvrde**; preneseno pravilo odraslih („piše samo verifikovan") ostavilo bi dečju sobu **zauvek samo za čitanje**, jer dete potvrdu nikad ne stiče.
-- **Sidebar za dete je KRAĆA VERZIJA, ne filtrirana** (Početna, Pijaca, POEN, Prijatelji). Filtrirana bi pri svakoj budućoj izmeni tiho propuštala nove stavke detetu.
-- **Levak** (`/api/admin/levak`) isključuje maloletne (`where: { maloletan: false }`) — ne prolaze taj put, pa bi zauvek stajali na koraku „registrovani" i iskrivili svaki korak.
-
-### Kod, rute, migracije, testovi
-- **Kod:** `src/lib/deca-pravila.ts` (ČISTE funkcije — bez Prisme, jer ih uvozi i obrazac u pretraživaču) + `src/lib/protokol/deca.ts` (servisne, re-eksportuje pravila) + `src/lib/protokol/prijateljstva.ts`. Komponente: `components/deca/MojaDeca.tsx`, `(app)/deca/[id]/DeteProfil.tsx`, `(app)/deca/potvrde/`, `(app)/prijatelji/`, `(app)/pocetna/DecjaPocetna.tsx`.
-- **Rute:** `GET/POST /api/deca` · `PATCH/DELETE /api/deca/[id]` · `DELETE /api/deca/[id]/oglas/[oglasId]` · `GET /api/deca/[id]/razgovori` · `GET /api/deca/potvrde` + `POST /api/deca/potvrde/[id]` · `GET/POST /api/deca/prijatelji` + `POST /api/deca/prijatelji/token` · cron `/api/cron/deca-potvrde`.
-- **Migracije:** `20260814120000_modul_deca` → `20260814150000_deca_prijateljstva` → `20260814150001_decja_pricaonica`.
-- **Testovi:** `__tests__/deca-pravila.test.ts` (čista pravila) i `__tests__/integracija/deca-tok.test.ts` (ceo tok **nad pravom bazom** — otvaranje naloga, indeks 0 se odbija, osnivač bez ijedne potvrde prolazi i dobija nula zapisa izjašnjenja, prijava deteta, ograničenje pokušaja).
-
 ## Fundamentalna pravila sistema
 
 1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
-2. **Nema negativnog stanja**: korisnici i Krugovi nikad ispod 0; Protokol ide u minus po pravilu. 🔴 **DVA izuzetka u kodu** (oba se ponašaju kao **nadoknada** — nije dug, ne naplaćuje se, pristigli POEN je prvo popunjava, prepis drugome tek preko nule): (a) nepokriveni deo poništenog POEN-a pri utvrđenoj lažnoj potvrdi, koji pada na **verifikatora** (dokaz stvarnosti čl. 20b); (b) **pun povraćaj po prijavi razmene**, gde zapis primaoca sme u minus (2026-08-15). **Akti poznaju samo prvi** — vidi „Poništenje prepisa po prijavi razmene".
+2. **Nema negativnog stanja**: korisnici i Krugovi nikad ispod 0; Protokol ide u minus po pravilu. 🔴 **TRI izuzetka u kodu** (svi se ponašaju kao **nadoknada** — nije dug, ne naplaćuje se, pristigli POEN je prvo popunjava, prepis drugome tek preko nule): (a) nepokriveni deo poništenog POEN-a pri utvrđenoj lažnoj potvrdi, koji pada na **verifikatora** (dokaz stvarnosti čl. 20b); (b) **pun povraćaj po prijavi razmene**, gde zapis primaoca sme u minus (2026-08-15); (c) **otpis 500 POEN pri raskidu prijateljstva** i pri punoletstvu, na obe strane (2026-08-17) — bez minusa bi ciklus sklopi–prepiši–raskini bio beskonačna kasa. **Akti poznaju samo prvi** — vidi „Poništenje prepisa po prijavi razmene" i „Modul Deca — unapređeni model".
 3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznosi su **obračunski koeficijent ZRNA** (DECIMAL(20,2); u kodu još uvek nazvan „kurs") i RSD iznosi (DECIMAL(12,2)).
 4. **Prenos 1:1 (ažuriranje evidencije)**: prenos POEN-a između korisnika je **ažuriranje evidencije** (zapis davaoca se umanjuje, zapis primaoca uvećava), bez provizije; Protokol nije posrednik i **to nije platna transakcija ni prenos monetarne vrednosti** (Pravilnik čl. 14, 16). Izbegavati „slanje/primanje POEN-a". **Dva registra:** UI za običnog korisnika koristi **„Prepiši POEN"** (od 2026-08-11, vidi „Upis vs. prepis"); pravni/normativni tekst zadržava **„ažuriranje evidencije"** (razlika od „**upisa novih zapisa kroz kanale**" iz čl. 15 — jedino to menja ukupan broj POEN-a, zero-sum). **Interni identifikatori `/api/transfer` i `TransactionType.TRANSFER` zadržani.**
 5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda**.
@@ -285,7 +219,7 @@ Dete **nikoga ne potvrđuje i ne potvrđuje se**. Zato je (2026-08-16) uklonjeno
    - **Neverifikovan prijavljen korisnik** (izmenjeno 2026-08-09): iznose/vremena ažuriranja evidencije POEN-a **bez pseudonima strana** i bez stanja računa; svoje notifikacije; pregled oglasa. **Može da postavi oglas kojim NUDI dobro/uslugu** (najviše 3 aktivna, uz sadržinski minimum) i da razmenjuje dobra/usluge. U ažuriranju evidencije POEN-a učestvuje **samo kao primalac**. Sme da **odgovara** u razgovoru koji je verifikovani pokrenuo povodom njegovog oglasa. Kroz kanal doprinosa sadržaju (čl. 40a) može mu se evidentirati doprinos.
    - **Neverifikovan NE MOŽE**: videti pseudonime u evidenciji, rang-liste, profile drugih; postaviti oglas tipa **POTRAZNJA**; **inicirati prenos POEN-a**; pristupati kontaktu oglašivača; **pokretati** razgovor; upisati ZRNO; evidentirati doprinos kroz ostale kanale.
    - **Verifikovan korisnik (indeks ≥ 10%)**: pun pristup — pseudonimi, sve transakcije sa pseudonimima, stanja, profili, poruke, postavljanje oglasa + kontakt, upis ZRNA, Programi.
-   - **Maloletni korisnik (Modul Deca)**: van ove lestvice — svoj prostor (dečja Pričaonica, prijatelji, oglasi po istim uslovima objave), ali ga **gost ne vidi nikada**, ne ulazi u feed ni u pretragu članova, a kontakt sa punoletnima zavisi od roditeljskog prekidača `dozvolaOdrasli`.
+   - **Maloletni korisnik (Modul Deca)**: van ove lestvice — svoj prostor (dečja Pričaonica u kojoj vidi **samo poruke prijatelja**, prijateljstva, oglasi po istim uslovima objave), ali ga **gost ne vidi nikada**, ne ulazi u feed ni u pretragu članova, a kontakt sa punoletnima zavisi od roditeljskog prekidača. Šta tačno sme zavisi od **stanja naloga** (`NA_CEKANJU`/`POVEZANO`/`AKTIVNO`) — vidi „Modul Deca — unapređeni model".
 
 ## Ključni koncepti
 
@@ -448,6 +382,8 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 
 Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 
+🔴 **STANJE: prekidač je `true`, upaljen radi provere na TESTU.** MORA nazad na `false` pre objave na `ekolo.rs`, dok vlasnik izričito ne kaže da modul ide u rad. Pravna prepreka je otklonjena (akti 4.3.0, DPIA ažuriran), pa je ovo od sada **odluka o puštanju u rad**, ne uslov koji čeka. 🔴 **Puštanje je u praksi jednosmerno:** čim se upiše prvi dečji nalog, gašenje modula ostavlja decu bez pristupa nalogu, a **emitovani POEN ostaje u opticaju**.
+
 🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_1.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
 
 **FAQ pitanje 6 („Mogu li se maloletnici registrovati?") ima dva odgovora i bira ih prekidač:** br. **6** = „ne" (modul ugašen), br. **84** = „da, od sedme godine" (modul radi). `FAQ_SAKRIVENA_PITANJA` sakriva tačno jedan od njih. Tekst se ne prepravlja u jednu rečenicu — u jednom od dva stanja sistema bio bi neistinit.
@@ -522,6 +458,26 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - Transakcije: `EMISIJA_PRIJATELJSTVO` (upis) i `OTPIS_PRIJATELJSTVO` (protivzapis). 🔴 Otpis **nije** `PONISTENJE_PREPISA` — ovde se poništava EMISIJA, pa opticaj opada; prepis samo seli POEN između dva korisnička zapisa.
 - Testovi: `__tests__/deca-pravila.test.ts`, `__tests__/protokol/prijateljstva-poen.test.ts`, `__tests__/integracija/deca-tok.test.ts` (traži bazu).
 - 🔴 **`User.roditeljId` VIŠE NE POSTOJI** — veza je u tabeli `Roditeljstvo` (najviše dva reda po detetu). Prisma upiti idu preko `roditeljstvaKaoDete` / `roditeljstvaKaoRoditelj`.
+
+#### Datum rođenja se KUCA, i roditelj koji nije član dobija uputstvo (2026-08-17)
+Dva mesta na kojima je tok tražio radnju koju čovek ne ume da izvrši.
+1. **`<input type="date">` otvara kalendar na TEKUĆEM mesecu**, a datum rođenja deteta je 7–18 godina unazad — do njega se stiže preko sto klikova ili pogađanjem sitnog polja za godinu koje svaki pretraživač crta drugačije. Roditelj taj datum zna napamet i brže ga otkuca. Nova komponenta **`src/components/DatumRodjenja.tsx`**: tri broja (dd . mm . gggg), numerička tastatura na telefonu, skok na sledeće polje kad dalje kucanje nema gde da stane, **kalendarska provera** (31.02. pada) i provera raspona. **Vraća prazno dok datum nije potpun i ispravan**, pa se sve zatečene provere ponašaju isto. Primenjena na oba mesta u Modulu Deca i na datume rođenja u **Programima** (podnosilac i deca) — isto polje, isti problem.
+2. **Roditelj koji NIJE na platformi nije imao uputstvo** — dugme u poruci vodi na prijavu, a on nalog nema. Sada i mejl i stranica poziva nose tri koraka: *otvori nalog → preuzmi dete → neka te potvrdi neko ko te poznaje*, uz ono što se ne vidi samo od sebe: **dete koristi platformu odmah po preuzimanju, a POEN mu se upisuje kad roditelj postane redovan član** — ništa se ne gubi, sve zarađeno stoji zabeleženo i upiše se tog dana.
+- Uz to **registracija poštuje `callbackUrl`**, a „Pridruži se" sa prijave ga prosleđuje dalje — bez toga bi roditelj koji tek otvara nalog završio na vodiču, a poziv deteta ostao samo u mejlu.
+
+#### Osnova iz prve verzije koja i dalje važi (2026-08-14 → 16)
+Sekcija iznad opisuje **šta je druga verzija promenila**; ovo je ono što je ispod nje ostalo netaknuto i nigde drugde nije zapisano.
+- **Ulazak preko roditeljskog profila:** uslov je **INDEKS stvarnosti ≥ 10%, ne broj primljenih potvrda** (odluka vlasnika 2026-08-16). Razlog je konkretan: **početnom korisniku** (osnivač, UO) indeks je fiksno 100 iako ga formalno niko nije potvrdio — provera po broju potvrda zaustavljala je upravo onoga ko prvi otvara naloge deci. **Posledica:** kod takvog roditelja nema koga da se pita, pa se **nijedno izjašnjenje ne kreira** i nalog stoji na njegovu reč; zato u tom slučaju ide **upozorenje Fondaciji** (`posaljiAdminAlert`) — jedini put u dečji prostor koji ne prolazi kroz mrežu ne sme da bude i nevidljiv.
+- **Potvrde roditeljstva (čl. 6):** lica koja su potvrdila roditelja imaju **30 dana** (`ROK_POTVRDE_DANA`) da potvrde da roditelj ima dete tog uzrasta; **ko ćuti, gubi sopstvenu potvrdu stvarnosti tog roditelja**. Poništenje ide kroz zatečeni `ponistiVerifikaciju`, pa ukida **sve** zapise POEN-a evidentirane povodom te potvrde (1.000 + 1.000 + 500 nadzorniku ako je ishod bio `UREDNO`) — 🔴 ne samo potvrđivačevih 1.000, jer bi ciklus poništi–ponovi inače kovao roditelju po 1.000 u svakom krugu. **Slot se oslobađa**, što zatečeno poništenje inače ne radi. Model `RoditeljstvoPotvrda` (+ `RoditeljstvoPotvrdaStatus`: `CEKA`/`POTVRDIO`/`OSPORIO`/`ISTEKLA`) sa `@@unique([deteId, potvrdjivacId])` — potvrda se daje **za svako dete posebno**, pa čovek sa četvoro dece traži četiri izjašnjenja. **„Nemam saznanja o tome" se NE beleži** (isto je što i ćutanje; da se beleži, čovek bi mislio da je posao završio a potvrda bi mu ipak pala); uz **osporavanje** je obrazloženje obavezno. **Prazan skup potvrđivača se izričito zaustavlja** — petlja „svi su potvrdili" bila bi nad njim ispunjena a da se niko nije pitao. Nalog, zapis u Protokolu i redovi potvrde nastaju u **jednoj transakciji**. Cron `/api/cron/deca-potvrde` (21:00) je idempotentan i nadoknađuje (obrađuje sve istekle, ne samo današnje).
+- **Uzrast 7–18** (`UZRAST_MIN`, `UZRAST_PUNOLETSTVO`). 🔴 `uzrast()` mora dobiti **beogradski dan** (`beogradskiDan()`); golo `new Date()` u UTC-u pomera rođendan dva sata unazad u letnjem periodu. `User.maloletan` je izvedeno ali **upisano** (indeksirano, jer svaki javni upit mora da isključi decu); 🔴 **piše se ISKLJUČIVO kroz `poljaDeteta()`**.
+- **Vidljivost oglasa (čl. 13):** oglas maloletnog ne vidi **gost nikada**, ne indeksira se, ne ulazi u `/api/javno/feed` ni u pretragu članova; punoletni ga vidi **samo uz roditeljski prekidač**. Nepozvani zahtev vraća **404, ne 403** — 403 bi potvrdio da oglas postoji. Obrnuti smer je vezan za isti prekidač. Obaveštenja o novom oglasu (`oglas-dogadjaji.ts`) poštuju istu vidljivost, inače bi zvonce vodilo na stranicu koju primalac ne sme da vidi. 🟡 **Ove brane rade BEZ OBZIRA na prekidač modula** — cena im je nula, a cena propuštanja je izlaganje deteta.
+- 🔴 **Za dečji oglas važe ISTI uslovi objave kao za svaki drugi** (čl. 13 st. 1): razlikuje se **samo vidljivost**. Ograničenja za nalog bez potvrde (samo PONUDA, najviše 3 aktivna, sadržinski minimum) postoje zbog naloga **iza kog niko ne stoji** — iza deteta stoji roditelj i svi koji su njega potvrdili. Provera je na **sva tri mesta**: objava, izmena oglasa i sama forma.
+- **Dečja Početna je ISTA ruta `/pocetna`** — server prepozna maloletni nalog i renderuje `DecjaPocetna`. Namerno ista: klik na logo vodi svakoga „kući", pa dete ne završi u Pričaonici odraslih. Sve stoji na jednom ekranu (POEN kao veliki broj, četiri dugmeta, pretraga, oglasi, Pričaonica), a na mestu indeksa stvarnosti stoji **broj prijatelja**.
+- **Sidebar za dete je KRAĆA VERZIJA, ne filtrirana** (Početna, Pijaca, POEN, Prijatelji) — filtrirana bi pri svakoj budućoj izmeni tiho propuštala nove stavke detetu.
+- **Levak** (`/api/admin/levak`) isključuje maloletne (`where: { maloletan: false }`) — ne prolaze taj put, pa bi zauvek stajali na koraku „registrovani" i iskrivili svaki korak.
+- **Dete nikad nije `verified` (čl. 15):** ne potvrđuje nikoga i ne potvrđuje se. Zato mu nema poziva „Zamoli za potvrdu →" u sidebaru, `/verifikacija` ga preusmerava na `/prijatelji`, a profil maloletnog nema indeks stvarnosti ni mini stablo lanca potvrda. **Prijatelji i potvrde su isto mesto za različite ljude**, pa je jedno zamenilo drugo, a ne stalo pored njega.
+- **Migracije prve verzije** (ispod onih iz 08-17): `20260814120000_modul_deca` → `20260814150000_deca_prijateljstva` → `20260814150001_decja_pricaonica`.
+- 🔴 **Šta je iz prve verzije PALO** (ne vraćati iz starijih beleški): „u dečjem prostoru ne nastaje nijedan nov zapis POEN-a", „bez emisije za prijateljstva", roditeljsko čitanje razgovora **među decom**, **mirovanje** (zamenjeno stanjem `POVEZANO`, i više ne dodiruje roditeljev nalog), `User.roditeljId` (zamenjen tabelom `Roditeljstvo`) i „dete u svojoj sobi piše bez ikakvog uslova" (nalog `NA_CEKANJU` Pričaonicu nema, a vide se samo poruke prijatelja).
 
 ### Prijava poruke nosi i čoveka (2026-08-17)
 
@@ -719,7 +675,7 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 ## Struktura foldera
 ```
 src/app/          — Next.js stranice (App Router)
-src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, postani-pokrovitelj, verifikacija, nadzor, deca/**, prijatelji, politika-prihvati, pravilnik-prihvati, admin; `tabla-jemstva` ostaje samo kao stranica-objašnjenje)
+src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, postani-pokrovitelj, verifikacija, nadzor, deca/**, prijatelji, politika-prihvati, pravilnik-prihvati, admin; `(auth)/registracija/dete` i `(auth)/dete-poziv/[token]` su van ove grupe; `tabla-jemstva` ostaje samo kao stranica-objašnjenje)
 src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise, o-nama, o-sistemu, cesto-postavljena-pitanja, pravilnik, statut, whitepaper, dpia, radnje-obrade, rizici, zajednicko-dobro, osnivacki-doprinos, privatnost, uslovi)
 src/app/pijaca/   — pijaca sa sopstvenim layout-om (javni + auth prikaz)
 src/app/uskoro/   — maintenance/„uskoro" gate stranica
@@ -730,9 +686,9 @@ src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
 __tests__/        — Vitest (protokol/, integracija/, auth/, email/, placanje/ + korenski)
-dokumentacija 4.1/ — KANONSKA dokumentacija (akti v4.2.3, statut 4.1) + en/ ru/ hr/ hu/
+dokumentacija 4.1/ — KANONSKA dokumentacija (16 akata v4.3.0, statut 4.1) + en/ ru/ hr/ hu/
 dokumentacija 4.0/ · 3.9/ · 3.8/ · nova dokumentacija/ — istorija, ništa se odatle ne rendruje
-docs/             — interne radne beleške + NACRTI (npr. `pravilnik-modul-deca.md`) — nije normativa
+docs/             — interne radne beleške (npr. `pravilnik-modul-deca.md`, mehanika Modula Deca) — nije normativa
 ```
 
 ## Implementirane funkcionalnosti
@@ -804,6 +760,7 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 | `/api/cron/nadzor-predmeti-cistenje` | `0 4 * * *` | brisanje predmeta „nema osnova" posle 90 dana |
 | `/api/cron/zero-sum` | `0 6 * * *` | provera zero-suma |
 | `/api/cron/deca-potvrde` | `0 21 * * *` | istek roka od 30 dana za potvrdu postojanja deteta (Modul Deca čl. 6) |
+| `/api/cron/deca-punoletstvo` | `0 20 * * *` | osamnaesti rođendan: otpis POEN-a iz prijateljstava, brisanje prijateljstava, prelazak u punoletni nalog + potvrde od roditelja (Pravilnik o učešću dece čl. 19) |
 | `/api/cron/nocna-emisija` | `0 22 * * *` | emisije programa + ZRNO operacije (paralelno) → osnivački korak → provera praga Faze 2 |
 | `/api/cron/programi-revizija` | `0 23 * * *` | reverifikacija socijalnih programa |
 
@@ -886,6 +843,8 @@ Do sada nije bilo opisano u ovom fajlu. Dva toka, oba **isključivo za donacije 
 
 ### Email korisnicima (Resend)
 - **`src/lib/email.ts`** je jedini ulaz: `emailLayout()` (zajednički HTML šablon svih mejlova), `posaljiEmailRaw()` (Resend fetch, vraća bool), `posaljiEmailKorisniku()` (obaveštenja, poštuje opt-out), `bazniUrl()` (allowlist host-ova protiv host-header poisoning-a).
+- 🔴 **`bazniUrl()` — mejlovi sa TESTA su vodili na `ekolo.rs` (ispravljeno 2026-08-17).** `NEXTAUTH_URL` je na Vercelu postavljen za **sva** okruženja i pokazuje na produkciju, a `bazniUrl()` je na njega padao svaki put kad pozivno mesto ne prosledi origin zahteva — pa je link iz test mejla otvarao produkciju, **gde token iz test baze ne postoji**. Tok se otvarao na stranici koja ga ne poznaje; najteže je pogodilo **poziv roditelju deteta**, jedini put kojim se nalog na čekanju preuzima. Redosled je sada: **origin zahteva** (uz allowlist) → **`VERCEL_URL` na NE-produkcionim okruženjima** (ovim su pokriveni i cron i servisi, koji origin nemaju) → env varijabla. Na produkciji je `VERCEL_ENV === "production"`, pa se srednji korak ne izvršava i ništa se ne menja.
+  - **Pouka za svako novo pozivno mesto:** ako mejl nosi jednokratni token, **prosledi origin zahteva** do slanja (kao `POST /api/deca/registracija`) — inače link vodi na okruženje na kom tog tokena nema.
 - **Dva režima:**
   - **Sistemski mejl** — reset/postavljanje lozinke (`passwordReset.ts`). Ide **uvek**, ne poštuje opt-out (bez njega nalog nije povratljiv), bez linka za odjavu.
   - **Obaveštenja** — sve ostalo. `posaljiEmailKorisniku()` preskače nalog bez email adrese, ugašen nalog (`deaktiviranAt`) i korisnika sa `emailObavestenja=false`; u podnožje ubacuje link za odjavu.
@@ -909,7 +868,7 @@ Do sada nije bilo opisano u ovom fajlu. Dva toka, oba **isključivo za donacije 
 
 ### Početna (`/pocetna`)
 - Vesti Fondacije (Blog, poslednjih 5) levo + **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
-- **Maloletni korisnik na ISTOJ ruti dobija `DecjaPocetna`** (sve na jednom ekranu, dečja soba Pričaonice, broj prijatelja umesto indeksa) — vidi sekciju „Modul Deca".
+- **Maloletni korisnik na ISTOJ ruti dobija `DecjaPocetna`** (sve na jednom ekranu, dečja soba Pričaonice, broj prijatelja umesto indeksa) — vidi „Modul Deca — unapređeni model".
 
 ### Sistem (`/sistem`)
 - `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
@@ -918,7 +877,9 @@ Do sada nije bilo opisano u ovom fajlu. Dva toka, oba **isključivo za donacije 
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
 
 ### Pričaonica (UI naziv, ranije „Chat soba") — DVE sobe od 2026-08-14
-- **Soba odraslih:** svi prijavljeni vide, **samo verifikovani pišu**. **Dečja soba:** vide je i pišu u njoj samo maloletni korisnici, **bez uslova potvrde** (dete potvrdu nikad ne stiče, pa bi preneseno pravilo odraslih ostavilo sobu zauvek samo za čitanje).
+- **Soba odraslih:** svi prijavljeni vide, **samo verifikovani pišu**. **Dečja soba:** vide je i pišu u njoj samo maloletni korisnici, **bez uslova potvrde** (dete potvrdu nikad ne stiče, pa bi preneseno pravilo odraslih ostavilo sobu zauvek samo za čitanje) — ali **tek od stanja `POVEZANO`**: nalog `NA_CEKANJU` Pričaonicu nema (vidi „Modul Deca — unapređeni model").
+- 🔴 **U dečjoj sobi svako vidi SAMO poruke svojih prijatelja** (filter i na serveru i u početnom SSR upitu). Grupni razgovor nastaje sam kad su svi učesnici međusobno prijatelji. **Nema odgovora sa citatom** — citat bi zaobišao filter.
+- **Dugme „prijavi" stoji u OBE sobe** (`PrijaviPoruku`, model `PrijavaPoruke`, šifra razloga sa zatvorene liste) — vidi „Prijava poruke nosi i čoveka".
 - 🔴 **Soba se IZVODI iz toga ko je prijavljen** (`ChatMessage.soba`, enum `ChatSoba` `ODRASLI`/`DECA`), **ne bira se parametrom** — nema adrese kojom bi odrasli ušao među decu ni obrnuto. Migracija `20260814150001_decja_pricaonica` (default `ODRASLI`, pa zatečene poruke ostaju gde su bile).
 - Auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage` (interni identifikator nepromenjen). Uklonjena poruka (Uslovi čl. 25 st. 2) nestaje iz sobe za sve, i za autora.
 
@@ -928,18 +889,18 @@ Do sada nije bilo opisano u ovom fajlu. Dva toka, oba **isključivo za donacije 
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `dokumentacija 4.1/`, prevodi iz `dokumentacija 4.1/{en,ru,hr,hu}/`)
-- Loader `src/lib/pravni-dokument.ts`, `BAZA = "dokumentacija 4.1"`. `/pravilnik` → `Pravilnik_4_2_3.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske**); `/privatnost` → `politika_4_2_3.md`; `/uslovi` → `uslovi_koriscenja_4_2_3.md`; `/statut` → **`statut_4_1_0.md`** (sopstvena numeracija, ne diže se sa setom); `/dpia` → `DPIA_4_2_3.md`; `/radnje-obrade` → `radnje_obrade_4_2_3.md`; `/whitepaper` → `whitepaper_4_2_3.md`; `/rizici` → `rizici_4_2_3.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. Prevod se bira po locale-u, tih fallback na srpski ako fajl nedostaje.
-- ✅ **Verzijske labele** — prikazuju 4.2.3 (statut 4.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
+- Loader `src/lib/pravni-dokument.ts`, `BAZA = "dokumentacija 4.1"`. `/pravilnik` → `Pravilnik_4_3_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske**, **`ucesce-dece`** — 16. akt, od 2026-08-17); `/privatnost` → `politika_4_3_0.md`; `/uslovi` → `uslovi_koriscenja_4_3_0.md`; `/statut` → **`statut_4_1_0.md`** (sopstvena numeracija, ne diže se sa setom); `/dpia` → `DPIA_4_3_0.md`; `/radnje-obrade` → `radnje_obrade_4_3_0.md`; `/whitepaper` → `whitepaper_4_3_0.md`; `/rizici` → `rizici_4_3_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. Prevod se bira po locale-u, tih fallback na srpski ako fajl nedostaje.
+- ✅ **Verzijske labele** — prikazuju 4.3.0 (statut 4.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
-- Tabs (`AdminKlijent.tsx`, redosled iz koda; ključevi u `./tabovi.ts`): Dashboard, Korisnici, Vesti, **Donacije**, Programi, Evidencija/**PED**, *(Pokrovitelji — samo kad je `POKROVITELJSTVO_AKTIVNO`)*, **Prigovori**, **Pijaca** (moderacija), **Prvi oglasi** (odobravanje doprinosa iz čl. 40a), **Razmene** (prijave po prepisu, od 2026-08-15), Finansije/`emisija` (evidencija doprinosa + veto/troškovi), Osnivači — a **samo superadmin** još: **Obaveštenja** (cirkularna sistemska pošta), Audit, Aktivnost, Levak, **Nadzor** (automat, `RizikNalaz`), **Odluke** (`NadzorniPredmet`, ljudska prijava). 🔴 Nadzor i Odluke NISU isto i ne spajaju se. (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- Tabs (`AdminKlijent.tsx`, redosled iz koda; ključevi u `./tabovi.ts`): Dashboard, Korisnici, Vesti, **Donacije**, Programi, Evidencija/**PED**, *(Pokrovitelji — samo kad je `POKROVITELJSTVO_AKTIVNO`)*, **Prigovori**, **Pijaca** (moderacija), **Prvi oglasi** (odobravanje doprinosa iz čl. 40a), **Razmene** (prijave po prepisu, od 2026-08-15), **Prijave** (prijavljene poruke iz Pričaonice, od 2026-08-17), Finansije/`emisija` (evidencija doprinosa + veto/troškovi), Osnivači — a **samo superadmin** još: **Obaveštenja** (cirkularna sistemska pošta), Audit, Aktivnost, Levak, **Nadzor** (automat, `RizikNalaz`), **Odluke** (`NadzorniPredmet`, ljudska prijava). 🔴 Nadzor i Odluke NISU isto i ne spajaju se. (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
 - **Terminologija „emisija" → „evidencija doprinosa" u Sistem/Admin UI** (commit `120d578`, samo `messages/*.json`) — **izuzev istorije transakcija**, gde tip transakcije ostaje vidljiv; u istoriji „Emisija" → prikaz **„Protokol"** uz boje iznosa (Protokol=plavo, primljeno=zeleno, dato=crveno; commit `8fd6d47`).
-- **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Pijaca, Prvi oglasi, **Razmene**, Nadzor, **Odluke**). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
+- **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Pijaca, Prvi oglasi, **Razmene**, **Prijave**, Nadzor, **Odluke**). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
 
 ## Uloge u sistemu
 - **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
-- **Maloletni korisnik (Modul Deca)** — NIJE vrednost u `TipKorisnika`, nego **`User.maloletan` + `roditeljId`**. Nikad nije `verified`, ne ulazi u lanac potvrda, ne dobija POEN ni iz jednog kanala, ne vidi ga gost i ne ulazi u levak. **Roditelj** nije zasebna uloga nego punoletan korisnik sa indeksom ≥ 10% koji ima decu.
+- **Maloletni korisnik (Modul Deca)** — NIJE vrednost u `TipKorisnika`, nego **`User.maloletan` + `roditeljId`**. Nikad nije `verified` i ne ulazi u lanac potvrda **do punoletstva** (tada dobija potvrde od roditelja); ne vidi ga gost i ne ulazi u levak. Od 2026-08-17 **dobija POEN iz devetog kanala** (prijateljstvo, 500 po paru kad su obe strane `AKTIVNO`). **Roditelj** nije zasebna uloga nego punoletan korisnik koji je preuzeo nalog deteta; dete ih može imati **dvoje**, sa istim ovlašćenjima.
 - ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = UO Fondacije** se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
 
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
@@ -974,7 +935,11 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 `/api/pijaca` (+ `/[id]`, `/[id]/kupi`, `/[id]/prijavi`, `/slika/...`) · `/api/poruke` (+ `/[konvId]`) · `GET/POST /api/chat` (soba se izvodi iz korisnika) + `/api/cron/chat-cistenje` · `GET /api/blog` + `/api/admin/blog/*`
 
 ### Modul Deca (sve iza `MODUL_DECA_AKTIVAN`)
-`GET/POST /api/deca` · `PATCH/DELETE /api/deca/[id]` · `DELETE /api/deca/[id]/oglas/[oglasId]` · `GET /api/deca/[id]/razgovori` · `GET /api/deca/potvrde` + `POST /api/deca/potvrde/[id]` · `GET/POST /api/deca/prijatelji` (POST = povezivanje po tokenu) + `POST /api/deca/prijatelji/token` · `POST /api/cron/deca-potvrde`
+**Ulazak preko roditelja:** `GET/POST /api/deca` · `PATCH/DELETE /api/deca/[id]` · `DELETE /api/deca/[id]/oglas/[oglasId]` · `GET /api/deca/[id]/razgovori` (samo razgovori sa punoletnima) · `GET /api/deca/[id]/pregled` (ko i koliko, bez sadržaja) · `GET /api/deca/potvrde` + `POST /api/deca/potvrde/[id]`
+**Samostalna registracija deteta (drugi ulaz, 2026-08-17):** `POST /api/deca/registracija` · `GET|POST /api/deca/poziv/[token]` · `GET|POST /api/deca/preuzmi`
+**Prijateljstva:** `GET/POST /api/deca/prijatelji` (POST = povezivanje po tokenu) · `POST /api/deca/prijatelji/token` · `DELETE /api/deca/prijatelji/[id]` (raskid — samo dete)
+**Pričaonica i moderacija:** `POST /api/chat/[id]/prijavi` · `GET /api/admin/prijave-poruka` + `POST .../[id]/{ukloni,odbaci}`
+**Cron:** `POST /api/cron/deca-potvrde` (21:00) · `POST /api/cron/deca-punoletstvo` (20:00)
 
 ### Prijava razmene / poništenje prepisa
 `POST /api/transakcije/[id]/prijavi` · `GET /api/admin/prijave-razmene` + `POST .../[id]/{ponisti,odbaci}`
@@ -1012,22 +977,24 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 - `doprinos-razmeni.ts` — lestvica koraka 2–5 (čl. 40b); čista pravila u `src/lib/doprinos-razmeni-pravila.ts`
 - `nadoknada.ts` — negativan zapis (`jeNadoknada`, `iznosNadoknade`, `raspolozivo`, `podelaTereta`)
 - `prijava-razmene.ts` — poništenje prepisa po prijavi; čista pravila u `src/lib/razmena-prijava.ts`
-- `deca.ts` — Modul Deca (otvaranje naloga, potvrde roditeljstva, mirovanje, vidljivost); čista pravila u `src/lib/deca-pravila.ts`
-- `prijateljstva.ts` — QR povezivanje maloletnih (`TOKEN_VAZI_SEKUNDI = 5 min`, simetrično `Prijateljstvo`)
+- `deca.ts` — Modul Deca: učesnici, vidljivost oglasa, ulazak preko roditelja, potvrde roditeljstva (čl. 6), uvid, brisanje; čista pravila u `src/lib/deca-pravila.ts`
+- `deca-poziv.ts` — samostalna registracija deteta, poziv roditelju, preuzimanje, drugi roditelj, brisanje nepreuzetih naloga
+- `prijateljstva.ts` — QR povezivanje (`TOKEN_VAZI_SEKUNDI = 5 min`, simetrično `Prijateljstvo`), isplata 500 POEN, raskid i otpis, filter Pričaonice
+- `punoletstvo.ts` — osamnaesti rođendan: najava mesec dana ranije, otpis, prelazak, potvrde od roditelja
 - `zona.ts`, `graf.ts`, `obracunski-dan.ts` — verifikaciona zona, mreža potvrda, beogradski obračunski dan
 - `pristup.ts` — provere pristupa po statusu/indeksu
 - **Van `protokol/`:** `src/lib/notifikacije.ts` (`posaljiNotifikaciju()`), `faq-data*.ts` (`FAQ_SEKCIJE`, 5 jezika), `moduli.ts` (prekidači), `placanje/{nestpay,ips-qr}.ts`, `naselje.ts`, `moderacija.ts`, `nadzor-pravila.ts`, `reset-korisnika.ts`, `pseudonim.ts`, `rate-limit.ts`, `email.ts`, `push.ts`, `audit.ts`, `levak.ts`.
 
 ## Testovi
 - **Vitest** (`npm test`, `npm run test:watch`). Config `vitest.config.ts` (`@/` → `src/`).
-- **`__tests__/protokol/`** — `donacija`, `osnivacki`, `osnivacki-koraci`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `programi-revizija`, `operativni`, `glasanje`, `dokaz-stvarnosti`, `zona`, `graf`, `izuzetak-prva-generacija`, `oznaka-verifikatora`, `nadzor-i-nadoknada`, `doprinos-sadrzaju`, `doprinos-razmeni`, `prijava-razmene`, `obracunski-dan`, `udaljenost`, `lat2cyr`.
-- **Koren `__tests__/`** — `pravni-dokumenti` (integritet kanonskog seta 4.2.3 na 5 jezika), `copy-ukinuto` (brane protiv povratka ukinute terminologije), `faq-paritet`, `prevodi-parametri`, `moderacija`, `naselje`, `pseudonim`, `levak`, `deca-pravila`.
-- **Podfolderi** — `auth/dozvole`, `email/{email,sistemsko-obavestenje}`, `placanje/{nestpay,ips-qr}`, **`integracija/deca-tok`** (jedini test koji radi **nad pravom bazom**).
+- **`__tests__/protokol/`** — `donacija`, `osnivacki`, `osnivacki-koraci`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `programi-revizija`, `operativni`, `glasanje`, `dokaz-stvarnosti`, `zona`, `graf`, `izuzetak-prva-generacija`, `oznaka-verifikatora`, `nadzor-i-nadoknada`, `doprinos-sadrzaju`, `doprinos-razmeni`, `prijava-razmene`, `prijateljstva-poen`, `obracunski-dan`, `udaljenost`, `lat2cyr`.
+- **Koren `__tests__/`** — `pravni-dokumenti` (integritet kanonskog seta 4.3.0 — 16 akata × 5 jezika), `copy-ukinuto` (brane protiv povratka ukinute terminologije), `faq-paritet`, `prevodi-parametri`, `moderacija`, `naselje`, `pseudonim`, `levak`, `deca-pravila`, `prijava-poruke`.
+- **Podfolderi** — `auth/dozvole`, `email/{email,sistemsko-obavestenje}`, `placanje/{nestpay,ips-qr}`, i testovi **nad pravom bazom**: `integracija/deca-tok`, `integracija/prijava-poruke-tok`.
 
 ## Reference
-- **`dokumentacija 4.1/`** — kanonski set (akti **4.2.3**, statut **4.1**), prevodi u `en/ ru/ hr/ hu/`. Vidi tabelu i istoriju verzija na vrhu fajla.
+- **`dokumentacija 4.1/`** — kanonski set (**16 akata, 4.3.0**, statut **4.1**), prevodi u `en/ ru/ hr/ hu/`. Vidi tabelu i istoriju verzija na vrhu fajla.
 - `dokumentacija 4.0/`, `dokumentacija 3.9/`, `dokumentacija 3.8/`, `nova dokumentacija/` — **istorija**, ništa se odatle ne rendruje.
-- `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija, plan ulaza kroz razmenu) i **nacrti akata** (`pravilnik-modul-deca.md`) — nije normativa.
+- `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija, plan ulaza kroz razmenu, mehanika Modula Deca u `pravilnik-modul-deca.md`) — **nije normativa**. 🔴 Normativni tekst o deci živi ISKLJUČIVO u `dokumentacija 4.1/ucesce_dece_4_3_0.md` — dva izvora istine su namerno izbegnuta.
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
 ## Nezavršeni TODO / preostali GAP-ovi (mapirano na v3.7.5/3.7.4/3.7.3/3.7.2)
