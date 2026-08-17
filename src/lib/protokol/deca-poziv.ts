@@ -97,6 +97,12 @@ export type RegistracijaDetetaUlaz = {
   passwordHash: string;
   memberHash: string;
   roditeljEmail: string;
+  /**
+   * Origin sa kog je dete otvorilo nalog. Link u poruci roditelju mora da vodi
+   * na ISTO okruženje: token živi u bazi tog okruženja, pa link na drugi host
+   * otvara stranicu na kojoj poziva nema.
+   */
+  origin?: string;
 };
 
 /**
@@ -143,7 +149,7 @@ export async function registrujDete(ulaz: RegistracijaDetetaUlaz) {
     return kreirano;
   });
 
-  void posaljiPozivRoditelju(email, dete.pseudonim, dete.roditeljPoziv!.token);
+  void posaljiPozivRoditelju(email, dete.pseudonim, dete.roditeljPoziv!.token, ulaz.origin);
 
   return {
     id: dete.id,
@@ -160,8 +166,13 @@ export async function registrujDete(ulaz: RegistracijaDetetaUlaz) {
  * treći i niko je nije proverio — pravo ime u poruci na pogrešnu adresu bilo bi
  * odavanje podatka o detetu osobi koja s njim nema veze.
  */
-async function posaljiPozivRoditelju(email: string, pseudonim: string, token: string) {
-  const link = `${bazniUrl()}/dete-poziv/${token}`;
+async function posaljiPozivRoditelju(
+  email: string,
+  pseudonim: string,
+  token: string,
+  origin?: string,
+) {
+  const link = `${bazniUrl(origin)}/dete-poziv/${token}`;
   const html = emailLayout({
     naslov: "Dete je otvorilo nalog na KOLO platformi",
     telo: [

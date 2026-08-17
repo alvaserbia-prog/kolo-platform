@@ -73,6 +73,9 @@ export async function POST(req: NextRequest) {
       passwordHash: await bcrypt.hash(lozinka, 12),
       memberHash,
       roditeljEmail,
+      // Link u poruci roditelju mora da vodi na okruženje sa kog je nalog otvoren
+      // (test → test): token postoji samo u bazi tog okruženja.
+      origin: req.nextUrl.origin,
     });
     return NextResponse.json(rezultat, { status: 201 });
   } catch (e) {

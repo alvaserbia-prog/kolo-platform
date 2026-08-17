@@ -41,7 +41,7 @@ describe("prijava poruke — šifarnik", () => {
 
   it("svaka šifra ima oznaku na svih pet jezika", () => {
     for (const [jezik, poruke] of Object.entries({ sr, en, ru, hr, hu })) {
-      const ns = (poruke as Record<string, Record<string, string>>).prijavaPoruke;
+      const ns = (poruke as unknown as Record<string, Record<string, string>>).prijavaPoruke;
       expect(ns, `${jezik} nema namespace prijavaPoruke`).toBeTruthy();
       for (const s of RAZLOZI) {
         expect(ns[kljucRazloga(s)], `${jezik} nema oznaku za ${s}`).toBeTruthy();
