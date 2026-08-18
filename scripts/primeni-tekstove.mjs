@@ -103,7 +103,8 @@ function parametri(poruka) {
   const imena = new Set();
   for (const [, unutra] of poruka.matchAll(/\{([^{}]+)\}/g)) {
     const ime = unutra.split(",")[0].trim();
-    if (ime) imena.add(ime);
+    // Samo ime argumenta; grana ICU plurala (`{# stranica}`) je tekst za prevod.
+    if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(ime)) imena.add(ime);
   }
   return imena;
 }

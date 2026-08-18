@@ -37,7 +37,10 @@ function parametri(poruka: string): Set<string> {
   const imena = new Set<string>();
   for (const [, unutra] of poruka.matchAll(/\{([^{}]+)\}/g)) {
     const ime = unutra.split(",")[0].trim();
-    if (ime) imena.add(ime);
+    // Samo ime argumenta je ugovor sa kodom. Grana ICU plurala (`{# stranica}`)
+    // je TEKST i mora da se prevede — bez ove ograde bi provera tražila da
+    // engleski sadrži srpsku reč, pa nijedan plural ne bi mogao da se prevede.
+    if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(ime)) imena.add(ime);
   }
   return imena;
 }
