@@ -30,6 +30,7 @@ tvrda pravila i sve svoje tekstove, pa se može nalepiti u prazan razgovor.
 | [E](paket-E.md) | Poruke o greškama | 278 |
 | [F](paket-F.md) | Modul Deca | 170 |
 | [G](paket-G.md) | Admin panel | 419 |
+| [faza 0](faza-0.md) | Tekst van prevoda — sistemski ekrani (pad, održavanje, 404), slika za deljenje linka, novi ključevi izvučeni iz koda | 166 |
 
 Već prođeno i **nije** ni u jednom paketu: `landing`, `oNama`, `oSistemu`,
 `kakoFunkcionisePage` (448 tekstova, četiri javne stranice).
@@ -63,7 +64,8 @@ Iste provere postoje i kao testovi; skripta ih ponavlja da se ne čeka pad testa
 
 ## Zasebno od paketa — tekst koji nije u `messages`
 
-Tri nalaza iz popisa, rešavaju se u kodu, ne u razgovoru:
+✅ **Urađeno** — tekst je izvučen ili napisan, a na proveru ide kroz
+[faza-0.md](faza-0.md). Ispod stoji šta je zateknuto i kako je rešeno:
 
 1. **~20 rečenica zakucano je direktno u kodu** i nikad se ne prevodi — „Stranica nije
    pronađena“ (404), „Učitavanje…“, ceo ekran `oauth/dovrsi`, opisi akata na
@@ -72,6 +74,18 @@ Tri nalaza iz popisa, rešavaju se u kodu, ne u razgovoru:
 2. **35 od 63 stranice nema SEO naslov i opis** — to je tekst koji izlazi u rezultatima
    pretrage i pri deljenju linka.
 3. **88 ključeva u `admin`** je u engleskom, ruskom i mađarskom ostalo na srpskom — nisu
-   prevedeni, samo prekopirani. Rešava se uz paket G.
+   prevedeni, samo prekopirani. → prevedeni; ostao je jedan, `novcanik.putanja_ukupno`,
+   koji je isti na svim jezicima jer je ceo od parametara i jedinice.
+
+Uz njih su ispala i dva nalaza koja nisu bila u popisu:
+
+- **Hrvatski i mađarski nisu postojali na sistemskim ekranima** (`ekran-poruke.ts`).
+  Ta dva jezika su na 404 stranici i pri padu sistema dobijala srpski, jer se
+  nepoznat jezik svodi na „sr" umesto da pukne. Sada su tu, uz test koji poredi
+  sa `src/i18n/routing.ts`.
+- **Adrese sa jednokratnim tokenom nisu imale `noindex`** — reset lozinke, poziv
+  roditelju da preuzme nalog deteta, odjava sa pošte i kratka adresa člana. To
+  nije bila SEO rupa nego privatnosna: takav link ume da procuri, a jednom
+  indeksiran ostaje javan i pošto token istekne.
 
 Paritet ključeva je inače potpun: 0 nedostaje i 0 viška na sva četiri prevoda.
