@@ -27,7 +27,7 @@ export function formatCenaGlavni(
   return c.price.toLocaleString(locale);
 }
 
-// Da li uz cenu prikazati jedinicu (POEN/P). Za „po dogovoru" se ne prikazuje.
+// Da li uz cenu prikazati jedinicu (POEN). Za „po dogovoru" se ne prikazuje.
 export function prikaziJedinicuCene(c: CenaPolja): boolean {
   return !(c.cenaTip === "DOGOVOR" || c.price == null);
 }

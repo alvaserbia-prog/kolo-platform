@@ -531,7 +531,7 @@ export default function JavniProfilPage() {
                     <p className="text-xs text-kolo-muted mt-0.5">{tPijaca(`kategorija_${kategorijaKljuc(oglas.category)}`)}</p>
                   </div>
                   <span className="text-sm font-semibold text-kolo-green-700 shrink-0 ml-4">
-                    {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " P" : ""}
+                    {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " POEN" : ""}
                   </span>
                 </Link>
               </li>

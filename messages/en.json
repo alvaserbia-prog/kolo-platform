@@ -1012,7 +1012,7 @@
     }
   },
   "javneKomponente": {
-    "nav_fooldal": "Home",
+    "nav_pocetna": "Home",
     "nav_pijaca": "Marketplace",
     "nav_kako_funkcionise": "How it works",
     "nav_o_sistemu": "About the system",
@@ -1046,6 +1046,7 @@
     "footer_link_whitepaper": "Whitepaper",
     "footer_link_uslovi": "Terms of use",
     "footer_link_privatnost": "Privacy policy",
+    "footer_link_rizici": "Risk acceptance statement",
     "footer_copyright": "© 2026 KOLO Foundation · Open testing · ekolo.rs",
     "footer_softver_label": "Software",
     "footer_sadrzaj_label": "Content",

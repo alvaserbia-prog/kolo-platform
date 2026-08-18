@@ -1012,7 +1012,7 @@
     }
   },
   "javneKomponente": {
-    "nav_fooldal": "Početna",
+    "nav_pocetna": "Početna",
     "nav_pijaca": "Pijaca",
     "nav_kako_funkcionise": "Kako funkcionira",
     "nav_o_sistemu": "O sustavu",
@@ -1046,6 +1046,7 @@
     "footer_link_whitepaper": "Whitepaper",
     "footer_link_uslovi": "Uvjeti korištenja",
     "footer_link_privatnost": "Politika privatnosti",
+    "footer_link_rizici": "Izjava o prihvaćanju rizika",
     "footer_copyright": "© 2026 KOLO Fondacija · Otvoreno testiranje · ekolo.rs",
     "footer_softver_label": "Softver",
     "footer_sadrzaj_label": "Sadržaj",

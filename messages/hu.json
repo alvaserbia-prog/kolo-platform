@@ -1005,7 +1005,7 @@
     }
   },
   "javneKomponente": {
-    "nav_fooldal": "Kezdőlap",
+    "nav_pocetna": "Kezdőlap",
     "nav_pijaca": "Piac",
     "nav_kako_funkcionise": "Hogyan működik",
     "nav_o_sistemu": "A rendszerről",
@@ -1039,6 +1039,7 @@
     "footer_link_whitepaper": "Whitepaper",
     "footer_link_uslovi": "Felhasználási feltételek",
     "footer_link_privatnost": "Adatvédelmi irányelvek",
+    "footer_link_rizici": "Kockázatvállalási nyilatkozat",
     "footer_copyright": "© 2026 KOLO Alapítvány · Nyílt tesztelés · ekolo.rs",
     "footer_softver_label": "Szoftver",
     "footer_sadrzaj_label": "Tartalom",

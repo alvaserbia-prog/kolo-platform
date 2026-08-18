@@ -1012,7 +1012,7 @@
     }
   },
   "javneKomponente": {
-    "nav_fooldal": "Главная",
+    "nav_pocetna": "Главная",
     "nav_pijaca": "Рынок",
     "nav_kako_funkcionise": "Как это работает",
     "nav_o_sistemu": "О системе",
@@ -1046,6 +1046,7 @@
     "footer_link_whitepaper": "Whitepaper",
     "footer_link_uslovi": "Условия пользования",
     "footer_link_privatnost": "Политика конфиденциальности",
+    "footer_link_rizici": "Заявление о принятии рисков",
     "footer_copyright": "© 2026 Фонд КОЛО · Открытое тестирование · ekolo.rs",
     "footer_softver_label": "Программное обеспечение",
     "footer_sadrzaj_label": "Содержание",
@@ -3090,5 +3091,6 @@
     "kartica_naslov": "Твоя школа",
     "kartica_bez_skole": "Ты не выбрал школу. Выбери её и посмотри, где вы в Сербии.",
     "kartica_dugme": "Выбрать школу",
-    "kartica_ti": "Ты {mesto}. в своей школе"  }
+    "kartica_ti": "Ты {mesto}. в своей школе"
+  }
 }
