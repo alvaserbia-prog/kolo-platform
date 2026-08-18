@@ -124,7 +124,7 @@ Aktiviranjem Modula 4 (Djeca) u skladu s čl. 58. Pravilnika o KOLO sustavu, sus
 
 **Elektronička adresa roditelja** koju unosi maloljetna osoba podatak je o trećoj osobi. Obrađuje se na temelju legitimnog interesa (čl. 12. st. 1. t. 6. ZZPL-a), radi pribavljanja privole koju zakon zahtijeva, i isključivo radi upućivanja jedne poruke s pozivom za preuzimanje računa. U toj se poruci navodi samo pseudonim maloljetnog korisnika — nikad ime — jer točnost adrese nije provjerena. Adresa se ne upisuje kao adresa računa maloljetnog korisnika i ne otvara put ni za prijavu ni za obnovu lozinke.
 
-**Kategorije podataka:** pseudonim; elektronička adresa roditelja; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi.
+**Kategorije podataka:** pseudonim; elektronička adresa roditelja; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; škola koju navodi sam maloljetni korisnik.
 
 **Svrha obrade:** omogućavanje sudjelovanja maloljetnih korisnika u sustavu pod posebnim režimom ograničenja i evidentiranje njihova doprinosa (čl. 15. t. 9. Pravilnika o KOLO sustavu).
 
@@ -135,6 +135,10 @@ Aktiviranjem Modula 4 (Djeca) u skladu s čl. 58. Pravilnika o KOLO sustavu, sus
 **Zašto je privola ovdje jača od uobičajene.** Roditelj ne potvrđuje privolu samo pritiskom na dugme u poruci: račun maloljetnog korisnika dobiva pun pristup tek kada roditelj postane verificirani korisnik kroz lanac potvrda, dakle kada njegov identitet potvrdi treća osoba u stvarnom svijetu. To je iznad standarda razumnog napora iz čl. 16. st. 2. ZZPL-a.
 
 **Prijava poruke.** Budući da roditelj razgovore između djece ne čita, maloljetni korisnik može sam prijaviti poruku Zakladi (Uvjeti korištenja čl. 25.).
+
+**Škola i pregled po školama.** Maloljetni korisnik može sam navesti školu koju pohađa, odabirom s popisa. Platforma objavljuje zbirni pregled po školama — broj maloljetnih korisnika kojima je barem jedan roditelj redovni član i njihov udio u broju upisanih učenika — koji ne sadrži osobne podatke i dostupan je svima. Pregled maloljetnih korisnika jedne škole, s pseudonimom i stanjem zapisa, dostupan je prijavljenim korisnicima. Navedena škola mijenja se najviše jednom u trideset dana, a podatak se briše stjecanjem punoljetnosti i pri prestanku statusa; povijest ranijih odabira se ne čuva.
+
+**Profil maloljetnog korisnika nije dostupan punoljetnim korisnicima.** Umjesto profila prikazuje se obavijest s pseudonimom maloljetnog korisnika i pseudonimom njegova roditelja. Ovo je sužavanje u odnosu na raniji opseg: do ove izmjene profil je bio dostupan svakom verificiranom korisniku. Suglasnost roditelja ne otvara profil — ona uređuje komunikaciju i razmjenu. Podatak o tome tko su roditelji maloljetnog korisnika, odnosno tko su djeca punoljetnog korisnika, dostupan je prijavljenim korisnicima.
 
 Aktiviranje ovog modula zahtijeva prethodno ažuriranje procjene učinka na zaštitu podataka i donošenje Pravilnika o sudjelovanju djece.
 
@@ -266,7 +270,7 @@ Podaci u oglasu neverificiranog korisnika (pododjeljak 4.8.) čuvaju se dok kori
 
 Zapis o upitu povodom oglasa (pododjeljak 4.10.) briše se s oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizira zajedno s ostalim podacima toga računa.
 
-Podaci maloljetnog korisnika (pododjeljak 4.7) čuvaju se dok račun ostaje aktivan. Elektronička adresa roditelja i poziv za preuzimanje računa brišu se s računom koji nitko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se s računom pri prestanku statusa. Prijateljstva se brišu stjecanjem punoljetnosti korisnika i pri brisanju računa. Prijava poruke čuva se do okončanja postupka po njoj, a najdulje 12 mjeseci.
+Podaci maloljetnog korisnika (pododjeljak 4.7) čuvaju se dok račun ostaje aktivan. Elektronička adresa roditelja i poziv za preuzimanje računa brišu se s računom koji nitko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se s računom pri prestanku statusa. Prijateljstva se brišu stjecanjem punoljetnosti korisnika i pri brisanju računa. Prijava poruke čuva se do okončanja postupka po njoj, a najdulje 12 mjeseci. Podatak o školi briše se stjecanjem punoljetnosti i pri prestanku statusa; povijest ranijih odabira se ne čuva.
 
 Po isteku roka podaci se brišu ili trajno anonimiziraju na način koji onemogućuje identifikaciju osobe.
 

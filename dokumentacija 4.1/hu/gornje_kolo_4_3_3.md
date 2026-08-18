@@ -2,7 +2,7 @@
 
 # Szabályzat a Felső Koloról
 
-*Ez a szabályzat a Felső Kolo szavazási eljárásait és működésének operatív szabályait rendezi. A KOLO rendszerről szóló szabályzat (v4.3.1) 41., 46. és 47. cikke alapján kerül elfogadásra, amelyek kifejezetten erre az aktusra utalnak. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a Felső Kolo szavazási eljárásait és működésének operatív szabályait rendezi. A KOLO rendszerről szóló szabályzat (v4.3.3) 41., 46. és 47. cikke alapján kerül elfogadásra, amelyek kifejezetten erre az aktusra utalnak. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 

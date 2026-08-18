@@ -2,7 +2,7 @@
 
 # Pravilnik o Gornjem Kolu
 
-*Ovaj pravilnik uređuje postupke glasovanja i operativna pravila rada Gornjeg Kola. Donosi se na temelju članaka 41., 46. i 47. Pravilnika o KOLO sustavu (v4.3.1), koji izričito upućuju na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje postupke glasovanja i operativna pravila rada Gornjeg Kola. Donosi se na temelju članaka 41., 46. i 47. Pravilnika o KOLO sustavu (v4.3.3), koji izričito upućuju na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 

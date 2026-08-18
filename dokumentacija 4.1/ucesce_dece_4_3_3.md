@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.1), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.3), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -93,6 +93,8 @@ Izjašnjenje kojim se postojanje deteta osporava zahteva obrazloženje; o njemu 
 ### Član 7
 
 Uzrast maloletnog korisnika utvrđuje se iz datuma rođenja koji je naveo roditelj — pri otvaranju naloga (član 4) ili pri njegovom preuzimanju (član 4b). Naveden datum se ne menja.
+
+Maloletni korisnik može sam navesti školu koju pohađa, izborom sa spiska škola. Navođenje škole nije uslov za korišćenje naloga.
 
 ## III — Odnos roditelja i maloletnog korisnika
 
@@ -197,6 +199,32 @@ Raskinuto prijateljstvo može se ponovo sklopiti; doprinos se tada evidentira po
 ### Član 15
 
 Maloletni korisnik ne upisuje ZRNO i ne učestvuje u odlučivanju u Gornjem Kolu. Maloletni korisnik nema indeks stvarnosti i nikoga ne potvrđuje. Ova ograničenja ne otklanja saglasnost roditelja.
+
+### Član 15a — Škola i pregled po školama
+
+Školu iz člana 7 bira sam maloletni korisnik, izborom sa spiska škola; slobodan unos nije moguć. Navedena škola prikazuje se na profilu maloletnog korisnika.
+
+Platforma objavljuje pregled po školama: broj maloletnih korisnika čiji je bar jedan roditelj redovan član i njihov udeo u broju upisanih učenika škole. Taj pregled ne sadrži podatke o ličnosti i dostupan je svakome.
+
+Pregled maloletnih korisnika jedne škole, sa pseudonimom i stanjem zapisa POEN-a, dostupan je prijavljenim korisnicima. Sa tog pregleda se ne pristupa profilu maloletnog korisnika (član 15b).
+
+Navedena škola menja se najviše jednom u trideset dana. Podatak o školi briše se prelaskom u punoletni nalog i prestankom svojstva korisnika; istorija ranijih izbora se ne čuva.
+
+Mesto na pregledu iz ovog člana ne predstavlja osnov za evidentiranje doprinosa i ne donosi POEN.
+
+### Član 15b — Pristup profilu maloletnog korisnika
+
+Profil maloletnog korisnika nije dostupan punoletnim korisnicima. Umesto profila prikazuje se obaveštenje koje sadrži pseudonim maloletnog korisnika i pseudonim njegovog roditelja.
+
+Saglasnost roditelja iz člana 10 ne otvara pristup profilu; ona uređuje komunikaciju i razmenu.
+
+Kontakt punoletnog korisnika sa maloletnim ostvaruje se povodom oglasa koji je maloletni korisnik objavio, na način iz člana 12 i uz uvid roditelja iz člana 9.
+
+Maloletni korisnik pristupa profilu maloletnog korisnika sa kojim je sklopio prijateljstvo.
+
+Podatak o tome ko su roditelji maloletnog korisnika, odnosno ko su deca punoletnog korisnika, dostupan je prijavljenim korisnicima.
+
+Ovaj član ne ograničava Fondaciju u postupanju po prijavi i u uklanjanju sadržaja.
 
 ## V — Pričaonica
 

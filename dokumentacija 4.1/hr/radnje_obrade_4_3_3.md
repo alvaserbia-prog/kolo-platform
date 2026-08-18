@@ -128,7 +128,7 @@
 
 **Radnja obrade br. 10 — Posebne kategorije podataka (Modul 3. — Socijalni programi)**
 
-| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.3.1); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.3.0). |
+| **Status** | AKTIVNO — Modul 3. aktivira se u skladu s čl. 57. Pravilnika i Pravilnikom o programima podrške (v4.3.3); aktiviranje je popraćeno ažuriranjem DPIA-e (v4.3.0). |
 | --- | --- |
 | **Svrha obrade** | Automatsko evidentiranje doprinosa u POEN-ima za korisnike koji pripadaju kvalificiranim skupinama, uz potvrdu ispunjenosti uvjeta od strane verifikatora podnositelja (zaštita integriteta programa od neistinitih prijava). |
 | **Kategorije osoba** | Korisnici koji pripadaju kvalificiranim skupinama (roditelji, starije osobe, osobe s invaliditetom, učenici i studenti) i njihovi verifikatori. |
@@ -145,12 +145,12 @@
 | --- | --- |
 | **Svrha obrade** | Omogućavanje sudjelovanja maloljetnih korisnika u sustavu pod posebnim režimom ograničenja i evidentiranje njihova doprinosa (čl. 15. t. 9. Pravilnika o KOLO sustavu). |
 | **Kategorije osoba** | Maloljetni korisnici platforme (od navršenih sedam do navršenih osamnaest godina) i roditelji odnosno zakonski zastupnici. |
-| **Kategorije podataka** | Pseudonim maloljetnog korisnika; elektronička adresa roditelja koju unosi maloljetna osoba; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja i privola; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; prijave poruka. |
+| **Kategorije podataka** | Pseudonim maloljetnog korisnika; elektronička adresa roditelja koju unosi maloljetna osoba; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja i privola; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; prijave poruka; škola koju navodi sam maloljetni korisnik. |
 | **Pravni temelj** | Privola roditelja ili zakonskog zastupnika (čl. 16. ZZPL-a), s dodatnim ograničenjima za osobe mlađe od petnaest godina. Za elektroničku adresu roditelja — legitimni interes (čl. 12. st. 1. t. 6. ZZPL-a) radi pribavljanja te privole. |
 | **Primatelji / izvršitelji obrade** | Vercel Inc. (hosting), Neon Inc. (baza podataka) i Resend (dostava jedne poruke roditelju), Sjedinjene Američke Države, na temelju ugovora o obradi. Drugi maloljetni korisnici vide poruke svojih prijatelja; roditelj vidi popis prijateljstava i razgovora bez sadržaja, a sadržaj razgovora samo kada je druga strana punoljetna. |
 | **Prijenos u treću zemlju** | Da — izvršitelji obrade infrastrukture nalaze se u SAD-u (vidjeti čl. 9. Politike privatnosti). |
 | **Rok čuvanja** | Dok račun ostaje aktivan. Račun koji roditelj ne preuzme u roku od četrnaest dana od otvaranja briše se, zajedno s adresom roditelja i pozivom. Prijateljstva se brišu stjecanjem punoljetnosti i pri brisanju računa. Prijava poruke — do okončanja postupka, najdulje 12 mjeseci. |
-| **Mjere zaštite** | Vidi točku 5.11. DPIA-e. Najvažnije: u prozoru prije privole obrađuju se samo dva podatka; u poruci roditelju stoji samo pseudonim, nikad ime; dvije radnje za prekid obrade bez prijave; pun pristup tek kada roditelja potvrdi treća osoba u lancu potvrda; roditelj ne čita razgovore između maloljetnih korisnika; punoljetni se sugovornik obavještava da razgovor čita roditelj; dječja Pričaonica filtrirana grafom prijateljstava, bez odgovora s citatom; prijava poruke kao vlastiti put maloljetnog korisnika do Zaklade. |
+| **Mjere zaštite** | Vidi točku 5.11. DPIA-e. Najvažnije: u prozoru prije privole obrađuju se samo dva podatka; u poruci roditelju stoji samo pseudonim, nikad ime; dvije radnje za prekid obrade bez prijave; pun pristup tek kada roditelja potvrdi treća osoba u lancu potvrda; roditelj ne čita razgovore između maloljetnih korisnika; punoljetni se sugovornik obavještava da razgovor čita roditelj; dječja Pričaonica filtrirana grafom prijateljstava, bez odgovora s citatom; prijava poruke kao vlastiti put maloljetnog korisnika do Zaklade; profil maloljetnog korisnika nije dostupan punoljetnim korisnicima, nego se prikazuje obavijest s pseudonimom roditelja; pregled po školama je zbirni i bez osobnih podataka; povijest ranijih odabira škole se ne čuva. |
 
 **Radnja obrade br. 12 — Nadzor integriteta sustava verifikacija (sprječavanje zlouporaba)**
 

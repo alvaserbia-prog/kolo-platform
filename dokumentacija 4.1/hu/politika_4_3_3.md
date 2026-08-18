@@ -124,7 +124,7 @@ A 4. modul (Gyermekek) aktiválásával a KOLO rendszerről szóló szabályzat 
 
 **A szülő elektronikus címe**, amelyet a kiskorú ad meg, harmadik személyre vonatkozó adat. Kezelése jogos érdeken alapul (ZZPL 12. cikk (1) bek. 6. pont), a jogszabály által megkívánt beleegyezés megszerzése céljából, és kizárólag egyetlen, a fiók átvételére felhívó üzenet elküldése érdekében. Ebben az üzenetben csak a kiskorú felhasználó álneve szerepel — soha a neve —, mivel a cím pontossága nincs ellenőrizve. A cím nem kerül a kiskorú felhasználó fiókjának címeként bejegyzésre, és nem nyit utat sem a bejelentkezéshez, sem a jelszó helyreállításához.
 
-**Adatkategóriák:** álnév; a szülő elektronikus címe; a szülő által bejegyzett születési dátum; egy vagy két szülővel való kapcsolat; a barátságok gráfja dátumokkal; üzenetek a gyermekek Beszélgetőjében és a beszélgetésekben; POEN-bejegyzések; hirdetések.
+**Adatkategóriák:** álnév; a szülő elektronikus címe; a szülő által bejegyzett születési dátum; egy vagy két szülővel való kapcsolat; a barátságok gráfja dátumokkal; üzenetek a gyermekek Beszélgetőjében és a beszélgetésekben; POEN-bejegyzések; hirdetések; a kiskorú felhasználó által megadott iskola.
 
 **Az adatkezelés célja:** a kiskorú felhasználók rendszerben való részvételének lehetővé tétele különleges korlátozó rendben, valamint hozzájárulásuk nyilvántartásba vétele (a KOLO rendszerről szóló szabályzat 15. cikk 9. pont).
 
@@ -135,6 +135,10 @@ A 4. modul (Gyermekek) aktiválásával a KOLO rendszerről szóló szabályzat 
 **Miért erősebb itt a hozzájárulás a szokásosnál.** A szülő nem csupán az üzenetben lévő gomb megnyomásával erősíti meg a hozzájárulást: a kiskorú felhasználó fiókja csak akkor kap teljes hozzáférést, amikor a szülő a megerősítések láncán keresztül hitelesített felhasználóvá válik, azaz amikor a személyazonosságát harmadik személy a valós világban megerősítette. Ez meghaladja a ZZPL 16. cikk (2) bekezdése szerinti észszerű erőfeszítés követelményét.
 
 **Üzenet bejelentése.** Mivel a szülő nem olvassa a gyermekek közötti beszélgetéseket, a kiskorú felhasználó maga is bejelentheti az üzenetet az Alapítványnak (Használati feltételek 25. cikk).
+
+**Az iskola és az iskolánkénti áttekintés.** A kiskorú felhasználó maga is megadhatja, hogy melyik iskolába jár, listáról választva. A Platform összesített áttekintést tesz közzé iskolánként — azon kiskorú felhasználók számát, akiknek legalább az egyik szülője rendes tag, valamint arányukat a beiratkozott tanulók számához képest —, amely nem tartalmaz személyes adatot, és mindenki számára elérhető. Egyetlen iskola kiskorú felhasználóinak áttekintése — álnévvel és a bejegyzés egyenlegével — a bejelentkezett felhasználók számára érhető el. A megadott iskola legfeljebb harminc naponta egyszer változtatható, az adat pedig a nagykorúság elérésekor és a jogállás megszűnésekor törlődik; a korábbi választások előzményei nem kerülnek megőrzésre.
+
+**A kiskorú felhasználó profilja nem érhető el a nagykorú felhasználók számára.** A profil helyett tájékoztatás jelenik meg a kiskorú felhasználó álnevével és a szülője álnevével. Ez szűkítés a korábbi terjedelemhez képest: e módosításig a profil minden hitelesített felhasználó számára elérhető volt. A szülői hozzájárulás nem nyitja meg a profilt — az a kommunikációt és a cserét szabályozza. Az az adat, hogy kik a kiskorú felhasználó szülei, illetve kik a nagykorú felhasználó gyermekei, a bejelentkezett felhasználók számára elérhető.
 
 E modul aktiválása az adatvédelmi hatásvizsgálat előzetes frissítését és a gyermekek részvételéről szóló szabályzat elfogadását igényli.
 
@@ -266,7 +270,7 @@ A nem hitelesített felhasználó hirdetésében szereplő adatokat (4.8. alpont
 
 A hirdetés kapcsán tett megkeresés bejegyzését (4.10. alpont) azzal a hirdetéssel együtt töröljük, amelyre vonatkozik. A felhasználói jogállás megszűnésekor az adott fiók többi adatával együtt töröljük, illetve anonimizáljuk.
 
-A kiskorú felhasználó adatai (4.7. alpont) addig kerülnek megőrzésre, ameddig a fiók aktív marad. A szülő elektronikus címe és a fiók átvételére szóló felhívás törlődik azzal a fiókkal együtt, amelyet tizennégy napon belül senki nem vett át; az átvételt követően elveszítik céljukat, és a jogállás megszűnésekor a fiókkal együtt törlődnek. A barátságok a felhasználó nagykorúvá válásával és a fiók törlésekor törlődnek. Az üzenet bejelentése a rá vonatkozó eljárás befejezéséig, de legfeljebb 12 hónapig kerül megőrzésre.
+A kiskorú felhasználó adatai (4.7. alpont) addig kerülnek megőrzésre, ameddig a fiók aktív marad. A szülő elektronikus címe és a fiók átvételére szóló felhívás törlődik azzal a fiókkal együtt, amelyet tizennégy napon belül senki nem vett át; az átvételt követően elveszítik céljukat, és a jogállás megszűnésekor a fiókkal együtt törlődnek. A barátságok a felhasználó nagykorúvá válásával és a fiók törlésekor törlődnek. Az üzenet bejelentése a rá vonatkozó eljárás befejezéséig, de legfeljebb 12 hónapig kerül megőrzésre. Az iskolára vonatkozó adat a nagykorúság elérésekor és a jogállás megszűnésekor törlődik; a korábbi választások előzményei nem kerülnek megőrzésre.
 
 A határidő lejártát követően az adatokat töröljük vagy véglegesen anonimizáljuk oly módon, amely a személy azonosítását ellehetetleníti.
 

@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.3.1) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.3.3) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -95,6 +95,8 @@ A gyermek létét vitató nyilatkozat indokolást igényel; arról az Igazgatót
 ### 7. cikk
 
 A kiskorú felhasználó korát a szülő által megadott születési dátum alapján állapítják meg — a fiók megnyitásakor (4. cikk) vagy annak átvételekor (4.b cikk). A megadott dátum nem módosul.
+
+A kiskorú felhasználó maga is megadhatja, hogy melyik iskolába jár, az iskolák listájáról választva. Az iskola megadása nem feltétele a fiók használatának.
 
 ## III — A szülő és a kiskorú felhasználó viszonya
 
@@ -199,6 +201,32 @@ A megszüntetett barátság újból megkötethető; a hozzájárulás ekkor ism�
 ### 15. cikk
 
 A kiskorú felhasználó nem ír be ZRNO-t, és nem vesz részt a Felső Koloban való döntéshozatalban. A kiskorú felhasználónak nincs valóságindexe, és senkit nem erősít meg. E korlátozásokat a szülő beleegyezése nem szünteti meg.
+
+### 15a. cikk — Az iskola és az iskolánkénti áttekintés
+
+A 7. cikk szerinti iskolát maga a kiskorú felhasználó választja ki az iskolák listájáról; szabad szöveges bevitel nem lehetséges. A megadott iskola megjelenik a kiskorú felhasználó profilján.
+
+A Platform iskolánkénti áttekintést tesz közzé: azon kiskorú felhasználók számát, akiknek legalább az egyik szülője rendes tag, valamint arányukat az iskolába beiratkozott tanulók számához képest. Ez az áttekintés nem tartalmaz személyes adatot, és mindenki számára elérhető.
+
+Egyetlen iskola kiskorú felhasználóinak áttekintése — álnévvel és a POEN-bejegyzés egyenlegével — a bejelentkezett felhasználók számára érhető el. Ebből az áttekintésből nem nyílik hozzáférés a kiskorú felhasználó profiljához (15b. cikk).
+
+A megadott iskola legfeljebb harminc naponta egyszer változtatható meg. Az iskolára vonatkozó adat a nagykorú fiókba való átlépéskor és a felhasználói minőség megszűnésekor törlődik; a korábbi választások előzményei nem kerülnek megőrzésre.
+
+Az e cikk szerinti áttekintésben elfoglalt hely nem alapja a hozzájárulás nyilvántartásba vételének, és nem jár POEN-nel.
+
+### 15b. cikk — A kiskorú felhasználó profiljához való hozzáférés
+
+A kiskorú felhasználó profilja nem érhető el a nagykorú felhasználók számára. A profil helyett tájékoztatás jelenik meg, amely tartalmazza a kiskorú felhasználó álnevét és a szülője álnevét.
+
+A 10. cikk szerinti szülői hozzájárulás nem nyitja meg a profilhoz való hozzáférést; az a kommunikációt és a cserét szabályozza.
+
+A nagykorú felhasználó és a kiskorú közötti kapcsolatfelvétel a kiskorú felhasználó által közzétett hirdetés kapcsán, a 12. cikk szerinti módon és a 9. cikk szerinti szülői betekintés mellett valósul meg.
+
+A kiskorú felhasználó hozzáfér annak a kiskorú felhasználónak a profiljához, akivel barátságot kötött.
+
+Az az adat, hogy kik a kiskorú felhasználó szülei, illetve kik a nagykorú felhasználó gyermekei, a bejelentkezett felhasználók számára elérhető.
+
+E cikk nem korlátozza az Alapítványt a bejelentés elbírálásában és a tartalom eltávolításában.
 
 ## V — A Beszélgető
 

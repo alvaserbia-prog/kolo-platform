@@ -124,7 +124,7 @@ Upon activation of Module 4 (Children) in accordance with Art. 58 of the Ruleboo
 
 **The parent's email address** entered by the minor is data about a third party. It is processed on the basis of legitimate interest (Art. 12(1)(6) LPDP), for the purpose of obtaining the consent required by law, and solely in order to send one message inviting the takeover of the account. That message states only the minor user's pseudonym — never their name — because the accuracy of the address has not been verified. The address is not recorded as the address of the minor user's account and opens no path to login or password recovery.
 
-**Categories of data:** pseudonym; the parent's email address; the date of birth entered by the parent; the link to one or two parents; the friendship graph with dates; messages in the children's Chat room and in conversations; POEN records; listings.
+**Categories of data:** pseudonym; the parent's email address; the date of birth entered by the parent; the link to one or two parents; the friendship graph with dates; messages in the children's Chat room and in conversations; POEN records; listings; the school stated by the minor user themselves.
 
 **Purpose of processing:** enabling minor users to participate in the system under a special limitation regime and recording their contribution (Art. 15, item 9 of the Rulebook on the KOLO System).
 
@@ -135,6 +135,10 @@ Upon activation of Module 4 (Children) in accordance with Art. 58 of the Ruleboo
 **Why consent here is stronger than usual.** The parent does not confirm consent merely by pressing a button in a message: a minor user's account gains full access only once the parent becomes a verified user through the chain of confirmations, that is, once their identity has been confirmed by a third party in the real world. This exceeds the reasonable-effort standard of Art. 16(2) LPDP.
 
 **Reporting a message.** Since the parent does not read conversations between children, a minor user may report a message to the Foundation themselves (Terms of Use, Art. 25).
+
+**The school and the overview by school.** A minor user may themselves state the school they attend, by choosing from a list. The Platform publishes an aggregate overview by school — the number of minor users having at least one parent who is a full member, and their share in the number of enrolled pupils — which contains no personal data and is available to everyone. An overview of the minor users of a single school, with their pseudonym and record balance, is available to signed-in users. The stated school may be changed at most once every thirty days, and the datum is deleted upon attaining majority and upon termination of status; no history of earlier choices is kept.
+
+**The profile of a minor user is not available to adult users.** Instead of the profile, a notice is displayed with the pseudonym of the minor user and the pseudonym of their parent. This is a narrowing compared to the earlier scope: until this amendment the profile was available to every verified user. Parental consent does not open the profile — it governs communication and exchange. Information on who the parents of a minor user are, and on who the children of an adult user are, is available to signed-in users.
 
 Activation of this module requires a prior update of the data protection impact assessment and the adoption of the Rulebook on the Participation of Children.
 
@@ -266,7 +270,7 @@ Data in a listing by an unverified user (sub-section 4.8) are retained until the
 
 The record of an enquiry in relation to a listing (sub-section 4.10) is deleted together with the listing to which it relates. Upon termination of the user's status it is deleted or anonymized together with the other data of that account.
 
-A minor user's data (subsection 4.7) are retained while the account remains active. The parent's email address and the invitation to take over the account are deleted together with an account that nobody has taken over within fourteen days; upon takeover they lose their purpose and are deleted with the account upon termination of status. Friendships are deleted when the user attains the age of majority and upon deletion of the account. A report of a message is retained until the procedure concerning it is concluded, and for no longer than 12 months.
+A minor user's data (subsection 4.7) are retained while the account remains active. The parent's email address and the invitation to take over the account are deleted together with an account that nobody has taken over within fourteen days; upon takeover they lose their purpose and are deleted with the account upon termination of status. Friendships are deleted when the user attains the age of majority and upon deletion of the account. A report of a message is retained until the procedure concerning it is concluded, and for no longer than 12 months. The school datum is deleted upon attaining majority and upon termination of status; no history of earlier choices is kept.
 
 Upon expiry of the retention period, data are deleted or permanently anonymized in a manner that prevents identification of the person.
 

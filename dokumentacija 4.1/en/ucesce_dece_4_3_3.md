@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.1), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.3), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -95,6 +95,8 @@ A declaration disputing the existence of the child requires a statement of reaso
 ### Article 7
 
 The age of a minor user is established from the date of birth stated by the parent — upon the opening of the account (Article 4) or upon its takeover (Article 4b). The stated date is not changed.
+
+A minor user may themselves state the school they attend, by choosing from the list of schools. Stating a school is not a condition for using the account.
 
 ## III — The Relationship Between the Parent and the Minor User
 
@@ -199,6 +201,32 @@ An ended friendship may be made again; the contribution is then recorded anew.
 ### Article 15
 
 A minor user does not inscribe ZRNO and does not participate in decision-making in the Upper Kolo. A minor user has no reality index and confirms no one. These limitations are not removed by parental consent.
+
+### Article 15a — The School and the Overview by School
+
+The school referred to in Article 7 is chosen by the minor user themselves, from the list of schools; free-text entry is not possible. The stated school is displayed on the minor user's profile.
+
+The Platform publishes an overview by school: the number of minor users having at least one parent who is a full member, and their share in the number of pupils enrolled at that school. This overview contains no personal data and is available to everyone.
+
+An overview of the minor users of a single school, with their pseudonym and the balance of their POEN record, is available to signed-in users. That overview does not give access to a minor user's profile (Article 15b).
+
+The stated school may be changed at most once every thirty days. The school datum is deleted upon transition to an adult account and upon termination of the capacity of user; no history of earlier choices is kept.
+
+A position in the overview referred to in this Article is not a ground for recording a contribution and carries no POEN.
+
+### Article 15b — Access to the Profile of a Minor User
+
+The profile of a minor user is not available to adult users. Instead of the profile, a notice is displayed containing the pseudonym of the minor user and the pseudonym of their parent.
+
+The parental consent referred to in Article 10 does not open access to the profile; it governs communication and exchange.
+
+Contact between an adult user and a minor user is established in connection with a listing published by the minor user, in the manner set out in Article 12 and subject to the parental insight under Article 9.
+
+A minor user may access the profile of a minor user with whom they have formed a friendship.
+
+Information on who the parents of a minor user are, and on who the children of an adult user are, is available to signed-in users.
+
+This Article does not restrict the Foundation in acting upon a report or in removing content.
 
 ## V — The Chat Room
 

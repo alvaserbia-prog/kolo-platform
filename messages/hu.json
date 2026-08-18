@@ -902,11 +902,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -914,23 +914,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.2"
+      "ver": "4.3.3"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.3.2",
+      "ver": "4.3.3",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -950,21 +950,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.3.2-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.3.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.3.2-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.3.3-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.3.2-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.3.3-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.2-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.3-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.2-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.3-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.3.2-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.3.3-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.3.2-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.3.3-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
