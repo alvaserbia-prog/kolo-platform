@@ -9,12 +9,22 @@
  * Brojevi: sr → 1.234.567,89 · en → 1,234,567.89 · ru → 1 234 567,89
  */
 
-/** next-intl locale → pun BCP-47 tag za Intl. */
+/**
+ * next-intl locale → pun BCP-47 tag za Intl.
+ *
+ * 🔴 Mora da pokrije SVE jezike iz `src/i18n/routing.ts`. Jezik koji nedostaje
+ * ne pravi grešku nego tiho pada na srpski format: `hr` i `hu` su ovde
+ * nedostajali od kad su odmrznuti (2026-08-06), pa je Mađar video datum
+ * poređan po srpski („18. 08. 2026." umesto „2026. 08. 18."). Isti obrazac kao
+ * u `ekran-poruke.ts` — brana je `__tests__/format.test.ts`.
+ */
 const TAG: Record<string, string> = {
   sr: "sr-Latn-RS",
   "sr-Cyrl": "sr-Cyrl-RS",
   en: "en-GB", // dan-pre-meseca, kao u srpskom
   ru: "ru-RU",
+  hr: "hr-HR",
+  hu: "hu-HU",
 };
 
 /** Podrazumevano srpska latinica — nepoznat locale ne sme da obori prikaz. */

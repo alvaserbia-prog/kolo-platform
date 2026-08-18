@@ -1,6 +1,6 @@
 # Tekstovi sajta
 
-Generisano skriptom `scripts/izvoz-tekstova.mjs`. Ukupno **3089** tekstova na 5 jezika (sr, en, ru, hr, hu).
+Generisano skriptom `scripts/izvoz-tekstova.mjs`. Ukupno **3088** tekstova na 5 jezika (sr, en, ru, hr, hu).
 
 **Kako se uređuje:** menja se samo tekst ispod oznake jezika. Red koji počinje sa
 `###` je ključ — adresa po kojoj se tekst vraća u kod — i ne dira se, kao ni oznake
@@ -63,7 +63,7 @@ Tekst koji na nekom jeziku ne postoji označen je sa _(prazno)_.
 - interfejs / notifikacije — 118
 - interfejs / transakcije — 15
 - interfejs / mejl — 17
-- interfejs / greske — 279
+- interfejs / greske — 278
 - interfejs / deca — 77
 - interfejs / decjaPocetna — 23
 - interfejs / prijatelji — 21
@@ -16807,23 +16807,23 @@ Az összeget az admin állítja be · 6 havonta újraellenőrzés
 
 **sr**
 
-Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset potvrda. Ceo tvoj lanac potvrđuje ispunjenost uslova pre odobravanja.
+Za socijalni program potrebna je najmanje jedna potvrda — indeks stvarnosti od 10%. Ceo tvoj lanac potvrđuje ispunjenost uslova pre odobravanja.
 
 **en**
 
-A social programme requires a full reality index (100%) — all ten confirmations. All the people in your chain confirm that the eligibility condition is met before approval.
+A social programme requires at least one confirmation — a reality index of 10%. Everyone in your chain confirms that the eligibility condition is met before approval.
 
 **ru**
 
-Для социальной программы требуется полный индекс реальности (100%) — все десять подтверждений. Вся ваша цепочка подтверждает выполнение условий до одобрения.
+Для социальной программы требуется не менее одного подтверждения — индекс реальности 10 %. Вся ваша цепочка подтверждает выполнение условий до одобрения.
 
 **hr**
 
-Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset potvrda. Svi vaši oni koji potvrđuju potvrđuju ispunjenost uvjeta prije odobravanja.
+Za socijalni program potrebna je najmanje jedna potvrda — indeks stvarnosti od 10 %. Cijeli vaš lanac potvrđuje ispunjenost uvjeta prije odobravanja.
 
 **hu**
 
-A szociális programhoz teljes valóságindex (100%) szükséges — mind a tíz megerősítés. A jóváhagyás előtt minden megerősítőd megerősíti, hogy a jogosultsági feltétel teljesül.
+A szociális programhoz legalább egy megerősítés szükséges — 10 %-os valóságindex. A jóváhagyás előtt a teljes láncod megerősíti, hogy a jogosultsági feltétel teljesül.
 
 ---
 
@@ -16903,23 +16903,23 @@ Csak az illetékes hatóság határozatának keltét rögzítjük — sem a hat�
 
 **sr**
 
-Pristajem da svih deset ljudi iz mog lanca bude zamoljeno da pod punom odgovornošću potvrde da ispunjavam uslov za ovaj program. Oni ne vide unete podatke. Prijavu odobrava Fondacija tek kada svi potvrde.
+Pristajem da svi ljudi iz mog lanca budu zamoljeni da pod punom odgovornošću potvrde da ispunjavam uslov za ovaj program. Oni ne vide unete podatke. Prijavu odobrava Fondacija tek kada svi potvrde.
 
 **en**
 
-I consent to the ten people in my chain being asked to confirm under full responsibility that I meet the condition for this programme. The person who confirmeds do not see the entered data. The Foundation approves the application only when all confirm.
+I consent to everyone in my chain being asked to confirm, under full responsibility, that I meet the condition for this programme. They do not see the data I entered. The Foundation approves the application only once all of them have confirmed.
 
 **ru**
 
-Я согласен(на), чтобы всех десятерых людей из моей цепочки попросили под полную ответственность подтвердить, что я отвечаю условиям этой программы. Они не видят внесённые данные. Заявку одобряет Фонд только после того, как подтвердят все.
+Я соглашаюсь с тем, чтобы всех людей из моей цепочки попросили под полную ответственность подтвердить, что я отвечаю условию этой программы. Они не видят внесённые данные. Фонд одобряет заявку только после того, как подтвердят все.
 
 **hr**
 
-Pristajem da mojih deset onoga tko potvrđuje bude zamoljeno da pod punom odgovornošću potvrde da ispunjavam uvjet za ovaj program. Oni koji potvrđuju ne vide unesene podatke. Prijavu odobrava Fondacija tek kada svi potvrde.
+Pristajem da svi ljudi iz mog lanca budu zamoljeni da pod punom odgovornošću potvrde da ispunjavam uvjet za ovaj program. Oni ne vide unesene podatke. Prijavu odobrava Zaklada tek kada svi potvrde.
 
 **hu**
 
-Hozzájárulok, hogy a tíz megerősítőmet megkérdezzék, megerősítik-e teljes felelősségük mellett, hogy megfelelek e program feltételének. A megerősítők nem látják a megadott adatokat. Az Alapítvány csak akkor hagyja jóvá a kérelmet, ha mindannyian megerősítik.
+Hozzájárulok ahhoz, hogy a láncomban lévő valamennyi személyt felkérjék, hogy teljes felelősség mellett erősítse meg, hogy megfelelek e program feltételének. Ők nem látják a megadott adatokat. A kérelmet az Alapítvány csak akkor hagyja jóvá, ha mindannyian megerősítették.
 
 ---
 
@@ -20612,23 +20612,23 @@ A KOLO platform felhasználási feltételei
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20660,23 +20660,23 @@ A KOLO platform adatvédelmi szabályzata
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20756,23 +20756,23 @@ DPIA — Adatvédelmi hatásvizsgálat
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20804,23 +20804,23 @@ Adatkezelési tevékenységek nyilvántartása
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20852,23 +20852,23 @@ Kockázatvállalási nyilatkozat
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20900,23 +20900,23 @@ KOLO Whitepaper
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -20948,23 +20948,23 @@ KOLO rendszer szabályzatai
 
 **sr**
 
-\4.3.0
+\4.3.1
 
 **en**
 
-\4.3.0
+\4.3.1
 
 **ru**
 
-\4.3.0
+\4.3.1
 
 **hr**
 
-\4.3.0
+\4.3.1
 
 **hu**
 
-\4.3.0
+\4.3.1
 
 ---
 
@@ -21356,23 +21356,23 @@ Felhasználási feltételek — KOLO
 
 **sr**
 
-Uslovi korišćenja KOLO platforme, verzija 4.3.0
+Uslovi korišćenja KOLO platforme, verzija 4.3.1
 
 **en**
 
-KOLO Platform Terms of Use, version 4.3.0
+KOLO Platform Terms of Use, version 4.3.1
 
 **ru**
 
-Условия пользования платформой КОЛО, версия 4.3.0
+Условия пользования платформой КОЛО, версия 4.3.1
 
 **hr**
 
-Uvjeti korištenja KOLO platforme, verzija 4.3.0
+Uvjeti korištenja KOLO platforme, verzija 4.3.1
 
 **hu**
 
-A KOLO platform felhasználási feltételei, 4.3.0-s verzió
+A KOLO platform felhasználási feltételei, 4.3.1-es verzió
 
 ---
 
@@ -21404,23 +21404,23 @@ Adatvédelmi szabályzat — KOLO
 
 **sr**
 
-Politika privatnosti KOLO platforme, verzija 4.3.0
+Politika privatnosti KOLO platforme, verzija 4.3.1
 
 **en**
 
-KOLO Platform Privacy Policy, version 4.3.0
+KOLO Platform Privacy Policy, version 4.3.1
 
 **ru**
 
-Политика конфиденциальности платформы КОЛО, версия 4.3.0
+Политика конфиденциальности платформы КОЛО, версия 4.3.1
 
 **hr**
 
-Politika privatnosti KOLO platforme, verzija 4.3.0
+Politika privatnosti KOLO platforme, verzija 4.3.1
 
 **hu**
 
-A KOLO platform adatvédelmi szabályzata, 4.3.0-s verzió
+A KOLO platform adatvédelmi szabályzata, 4.3.1-es verzió
 
 ---
 
@@ -21500,23 +21500,23 @@ DPIA — KOLO
 
 **sr**
 
-Procena uticaja na zaštitu podataka o ličnosti, verzija 4.3.0
+Procena uticaja na zaštitu podataka o ličnosti, verzija 4.3.1
 
 **en**
 
-Data Protection Impact Assessment, version 4.3.0
+Data Protection Impact Assessment, version 4.3.1
 
 **ru**
 
-Оценка воздействия на защиту персональных данных, версия 4.3.0
+Оценка воздействия на защиту персональных данных, версия 4.3.1
 
 **hr**
 
-Procjena učinka na zaštitu osobnih podataka, verzija 4.3.0
+Procjena učinka na zaštitu osobnih podataka, verzija 4.3.1
 
 **hu**
 
-Adatvédelmi hatásvizsgálat, 4.3.0-s verzió
+Adatvédelmi hatásvizsgálat, 4.3.1-es verzió
 
 ---
 
@@ -21548,23 +21548,23 @@ Adatkezelési tevékenységek nyilvántartása — KOLO
 
 **sr**
 
-Registar radnji obrade podataka o ličnosti, verzija 4.3.0
+Registar radnji obrade podataka o ličnosti, verzija 4.3.1
 
 **en**
 
-Register of personal data processing activities, version 4.3.0
+Register of personal data processing activities, version 4.3.1
 
 **ru**
 
-Реестр операций обработки персональных данных, версия 4.3.0
+Реестр операций обработки персональных данных, версия 4.3.1
 
 **hr**
 
-Registar radnji obrade osobnih podataka, verzija 4.3.0
+Registar radnji obrade osobnih podataka, verzija 4.3.1
 
 **hu**
 
-Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.0-s verzió
+Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.1-es verzió
 
 ---
 
@@ -21596,23 +21596,23 @@ Kockázatvállalási nyilatkozat — KOLO
 
 **sr**
 
-Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.3.0
+Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.3.1
 
 **en**
 
-Risk acceptance statement for participation in the KOLO system, version 4.3.0
+Risk acceptance statement for participation in the KOLO system, version 4.3.1
 
 **ru**
 
-Заявление о принятии рисков участия в системе КОЛО, версия 4.3.0
+Заявление о принятии рисков участия в системе КОЛО, версия 4.3.1
 
 **hr**
 
-Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.0
+Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.1
 
 **hu**
 
-A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.0-s verzió
+A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.1-es verzió
 
 ---
 
@@ -21644,23 +21644,23 @@ Whitepaper — KOLO
 
 **sr**
 
-KOLO Whitepaper, verzija 4.3.0
+KOLO Whitepaper, verzija 4.3.1
 
 **en**
 
-KOLO Whitepaper, version 4.3.0
+KOLO Whitepaper, version 4.3.1
 
 **ru**
 
-KOLO Whitepaper, версия 4.3.0
+KOLO Whitepaper, версия 4.3.1
 
 **hr**
 
-KOLO Whitepaper, verzija 4.3.0
+KOLO Whitepaper, verzija 4.3.1
 
 **hu**
 
-KOLO Whitepaper, 4.3.0-s verzió
+KOLO Whitepaper, 4.3.1-es verzió
 
 ---
 
@@ -21692,23 +21692,23 @@ KOLO rendszer szabályzatai — KOLO
 
 **sr**
 
-Indeks pravilnika KOLO sistema, verzija 4.3.0
+Indeks pravilnika KOLO sistema, verzija 4.3.1
 
 **en**
 
-Index of KOLO system rulebooks, version 4.3.0
+Index of KOLO system rulebooks, version 4.3.1
 
 **ru**
 
-Указатель правил системы КОЛО, версия 4.3.0
+Указатель правил системы КОЛО, версия 4.3.1
 
 **hr**
 
-Indeks pravilnika KOLO sustava, verzija 4.3.0
+Indeks pravilnika KOLO sustava, verzija 4.3.1
 
 **hu**
 
-A KOLO rendszer szabályzatainak indexe, 4.3.0-s verzió
+A KOLO rendszer szabályzatainak indexe, 4.3.1-es verzió
 
 ---
 
@@ -64842,30 +64842,6 @@ Za robu i usluge obavezan je maloprodajni cenovnik.
 
 ---
 
-### greske.za_socijalni_program_potreban_je_pun_indeks_stvarnosti_100_sve_verifikacije
-
-**sr**
-
-Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset potvrda.
-
-**en**
-
-A social programme requires a full reality index (100%) — all confirmations.
-
-**ru**
-
-Для социальной программы требуется полный индекс реальности (100%) — все подтверждения.
-
-**hr**
-
-Za socijalni program potreban je pun indeks stvarnosti (100%) — sve potvrde.
-
-**hu**
-
-Szociális programhoz teljes valóságindex (100%) szükséges — minden megerősítés.
-
----
-
 ### greske.zadatak_nije_aktivan
 
 **sr**
@@ -71646,7 +71622,7 @@ Can minors register?
 
 **ru**
 
-Могут ли зарегистрироваться несовершеннолетние?
+Могут ли несовершеннолетние зарегистрироваться?
 
 **hr**
 
@@ -71662,43 +71638,43 @@ Regisztrálhatnak-e kiskorúak?
 
 **sr**
 
-Da, od sedme godine, uz saglasnost roditelja odnosno zakonskog zastupnika. Učešće dece uređuje Pravilnik o učešću dece.
+Mogu, od sedme godine, ali ne sami do kraja. Nalog maloletnog lica uvek stoji uz roditelja: ili ga roditelj otvara iz svog naloga, ili ga dete otvara i upisuje roditeljev email, pa roditelj nalog preuzima.
 
-Dva su puta. Roditelj koji je već na platformi otvara nalog detetu iz svog profila. Dete se može i samo registrovati — unosi pseudonim, lozinku i elektronsku adresu roditelja, a nalog dobija ograničen obim: profil i prijateljstva rade, pričaonica i oglasi ne, i POEN se ne upisuje dok roditelj ne preuzme nalog i ne postane redovan član.
+Dete mlađe od sedam godina nalog nema. Ako se ispostavi da je punoletan nalog otvorilo maloletno lice, nalog se briše.
 
-Deca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom detetu se upisuje 500 POEN, ali tek kada su oba naloga u punom obimu. Roditelj ne čita razgovore između dece — vidi sa kim je dete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor deteta sa punoletnim licem čita, i o tome punoletni sagovornik ima vidljivo obaveštenje. Na osamnaesti rođendan nalog prelazi u punoletni, prijateljstva se brišu, POEN zarađen prijateljstvima se poništava, a roditelji detetu evidentiraju potvrdu stvarnosti.
+Sve ostalo o dečjim nalozima stoji u odeljku Deca i roditelji.
 
 **en**
 
-Yes, from the age of seven, with the consent of a parent or legal guardian. Children's participation is governed by the Regulation on the Participation of Children.
+They can, from the age of seven, but not entirely on their own. A minor's account always stands alongside a parent: either the parent opens it from their own account, or the child opens it and enters the parent's email, and the parent then takes the account over.
 
-There are two paths. A parent already on the platform opens an account for the child from their own profile. A child may also register alone — entering a pseudonym, a password and a parent's e-mail address — and the account then works in a limited scope: the profile and friendships work, the chat room and listings do not, and no POEN is recorded until a parent takes the account over and becomes a regular member.
+A child under seven has no account. If it turns out that an adult account was opened by a minor, the account is deleted.
 
-Children form friendships by scanning a code in person. For a friendship formed, 500 POEN is recorded to each child, but only once both accounts are in full scope. A parent does not read conversations between children — they see who the child is friends with and how many conversations exist, without content; a conversation between a child and an adult is read by the parent, and the adult participant is given a visible notice of that. On the eighteenth birthday the account becomes an adult account, friendships are deleted, POEN earned through friendships is annulled, and the parents record a confirmation of reality for the child.
+Everything else about children's accounts is in the section Children and parents.
 
 **ru**
 
-Да, с семи лет, с согласия родителя или законного представителя. Участие детей регулируется Правилами об участии детей.
+Могут, с семи лет, но не полностью самостоятельно. Аккаунт несовершеннолетнего всегда стоит рядом с родителем: либо родитель открывает его из своего аккаунта, либо ребёнок открывает его и вводит email родителя, а родитель затем аккаунт принимает.
 
-Есть два пути. Родитель, уже присутствующий на платформе, открывает ребёнку учётную запись из своего профиля. Ребёнок может зарегистрироваться и сам — указывает псевдоним, пароль и адрес электронной почты родителя, — и тогда запись работает в ограниченном объёме: профиль и дружеские связи работают, комната общения и объявления нет, а POEN не вносится, пока родитель не примет запись и не станет полноправным участником.
+У ребёнка младше семи лет аккаунта нет. Если выяснится, что взрослый аккаунт открыл несовершеннолетний, аккаунт удаляется.
 
-Дети заключают дружбу, сканируя код при личной встрече. За заключённую дружбу каждому ребёнку вносится 500 POEN, но только когда обе записи находятся в полном объёме. Родитель не читает разговоры между детьми — он видит, с кем ребёнок дружит и сколько у него разговоров, без содержания; разговор ребёнка с совершеннолетним лицом родитель читает, и совершеннолетний собеседник видит явное уведомление об этом. В день восемнадцатилетия запись переходит в совершеннолетнюю, дружеские связи удаляются, POEN, полученный за дружбу, отменяется, а родители вносят ребёнку подтверждение реальности.
+Всё остальное о детских аккаунтах — в разделе «Дети и родители».
 
 **hr**
 
-Da, od sedme godine, uz suglasnost roditelja odnosno zakonskog zastupnika. Sudjelovanje djece uređuje Pravilnik o sudjelovanju djece.
+Mogu, od sedme godine, ali ne sami do kraja. Račun maloljetne osobe uvijek stoji uz roditelja: ili ga roditelj otvara iz svog računa, ili ga dijete otvara i upisuje roditeljev email, pa roditelj račun preuzima.
 
-Dva su puta. Roditelj koji je već na platformi otvara račun djetetu iz svojeg profila. Dijete se može i samo registrirati — unosi pseudonim, lozinku i adresu elektroničke pošte roditelja — a račun tada radi u ograničenom obimu: profil i prijateljstva rade, pričaonica i oglasi ne, a POEN se ne upisuje dok roditelj ne preuzme račun i ne postane redovan član.
+Dijete mlađe od sedam godina račun nema. Ako se ispostavi da je punoljetni račun otvorila maloljetna osoba, račun se briše.
 
-Djeca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom se djetetu upisuje 500 POEN, ali tek kada su oba računa u punom obimu. Roditelj ne čita razgovore između djece — vidi s kim je dijete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor djeteta s punoljetnom osobom roditelj čita, a punoljetni sugovornik o tome ima vidljivu obavijest. Na osamnaesti rođendan račun prelazi u punoljetni, prijateljstva se brišu, POEN zarađen prijateljstvima se ukida, a roditelji djetetu evidentiraju potvrdu stvarnosti.
+Sve ostalo o dječjim računima stoji u odjeljku Djeca i roditelji.
 
 **hu**
 
-Igen, hét éves kortól, a szülő, illetve a törvényes képviselő hozzájárulásával. A gyermekek részvételét a gyermekek részvételéről szóló szabályzat rendezi.
+Igen, hét éves kortól, de nem teljesen önállóan. A kiskorú fiókja mindig szülő mellett áll: vagy a szülő nyitja meg a saját fiókjából, vagy a gyerek nyitja meg és megadja a szülő e-mail-címét, a szülő pedig átveszi a fiókot.
 
-Két út van. A platformon már jelen lévő szülő a saját profiljából nyit fiókot a gyermeknek. A gyermek egyedül is regisztrálhat — álnevet, jelszót és a szülő e-mail-címét adja meg —, és a fiók ekkor korlátozott terjedelemben működik: a profil és a barátságok működnek, a beszélgetőszoba és a hirdetések nem, POEN pedig nem kerül bejegyzésre, amíg a szülő át nem veszi a fiókot és nem lesz rendes tag.
+A hét évnél fiatalabb gyereknek nincs fiókja. Ha kiderül, hogy egy felnőtt fiókot kiskorú nyitott meg, a fiók törlődik.
 
-A gyermekek barátságot személyes találkozáson, kód beolvasásával kötnek. Megkötött barátságért mindegyik gyermeknek 500 POEN kerül bejegyzésre, de csak akkor, amikor mindkét fiók teljes terjedelemben működik. A szülő nem olvassa a gyermekek egymás közötti beszélgetéseit — azt látja, kivel áll a gyermek barátságban és hány beszélgetése van, tartalom nélkül; a gyermek és nagykorú személy beszélgetését a szülő olvassa, és erről a nagykorú fél látható tájékoztatást kap. A tizennyolcadik születésnapon a fiók nagykorú fiókká válik, a barátságok törlődnek, a barátságokkal szerzett POEN érvénytelenné válik, a szülők pedig valóságigazolást jegyeznek be a gyermeknek.
+Minden egyéb a gyerekfiókokról a Gyerekek és szülők szakaszban áll.
 
 ---
 
@@ -71710,19 +71686,19 @@ Kako dobijam potvrdu i šta time dobijam?
 
 **en**
 
-How do I get confirmed and what do I gain from it?
+How do I get confirmed and what does it give me?
 
 **ru**
 
-Как пройти подтверждение и что она мне даёт?
+Как получить подтверждение и что оно мне даёт?
 
 **hr**
 
-Kako se potvrđujem i što time dobivam?
+Kako dobivam potvrdu i što time dobivam?
 
 **hu**
 
-Hogyan megerősíttethetem magam, és mit nyerek vele?
+Hogyan kapok megerősítést, és mit nyerek vele?
 
 ---
 
@@ -71730,63 +71706,83 @@ Hogyan megerősíttethetem magam, és mit nyerek vele?
 
 **sr**
 
-Potvrda je opciona, ali je preduslov za pun pristup funkcijama platforme.
+Potvrda nije obavezna, ali nalog bez nje uglavnom samo gleda. Većina funkcija otvara se tek sa prvom potvrdom.
 
-Potvrda se obavlja kroz lanac: redovan član koji te lično poznaje potvrđuje tvoju stvarnost na osnovu tog poznavanja. Poznanstvo stečeno kroz obavljenu razmenu punopravan je osnov — ne morate se znati odranije. Platforma obezbeđuje tehnički mehanizam saglasnosti i potvrde identiteta naloga koji ne prikuplja lične podatke potvrđenog. Onaj ko potvrđuje ne traži niti prikuplja dokumente.
+Kako se dobija. Potvrdu daje redovan član koji te lično poznaje i koji tom radnjom tvrdi da si stvarna osoba. Zahtev šalješ sam, dugmetom Zatraži potvrdu. Poznanstvo ne mora biti staro: dovoljno je i ono koje je nastalo kroz obavljenu razmenu.
 
-Svaka potvrda uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
+Dokumenti se ne traže ni od koga. Ni lična karta, ni pasoš, ni JMBG, ni fotografija. Onaj ko te potvrđuje ne unosi nijedan tvoj podatak; potvrđuje ono što zna.
 
-Po evidentiranju zapisa o potvrdi, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN onome ko te je potvrdio i 500 POEN nadzorniku.
+Šta se time menja. Svaka potvrda podiže tvoj indeks stvarnosti za 10 procentnih poena. Ukupno ih možeš primiti deset, pa je najviši indeks 100%.
 
-Potvrda je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.
+Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, punu Pijacu i komunikaciju sa ostalim članovima. Time postaješ redovan član i sam možeš potvrđivati druge.
+
+Šta se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POEN tebi i 1.000 onome ko te je potvrdio. Ako potvrda podleže nadzoru, prvi nadzornik koji upiše ishod dobija 500 POEN.
+
+Zašto potvrda nešto vredi. Ko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to podleže merama iz Uslova korišćenja, do isključenja iz mreže. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.
 
 **en**
 
-Confirmation is optional, but it is a prerequisite for full access to the platform's features.
+Confirmation is not compulsory, but an account without it mostly just looks around. Most features open up only with the first confirmation.
 
-Confirmation is carried out through the chain of confirmations: a full member who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal documents. The person who confirms you does not request or collect documents.
+How it is obtained. Confirmation is given by a full member who knows you personally and who by that act asserts that you are a real person. You send the request yourself, with the Request confirmation button. The acquaintance need not be old: one formed through a completed exchange is enough.
 
-Each confirmation increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
+No documents are asked of anyone. No ID card, no passport, no personal identification number, no photograph. The person confirming you enters none of your data; they confirm what they know.
 
-Upon recording of the confirmation entry, the Protocol automatically credits 1,000 POEN to you, 1,000 POEN to the person who confirmed you, and 500 POEN to the supervisor.
+What it changes. Every confirmation raises your reality index by 10 percentage points. You can receive ten in total, so the highest index is 100%.
 
-Confirmation is a prerequisite for all major features: recording POEN through donations and sponsorships, inscribing ZRNO, participating in Programmes, and full access to the marketplace and communication with other members.
+The very first confirmation — an index of 10% — opens the main features: recording POEN through donations and sponsorship, recording ZRNO, taking part in the Programmes, the full Marketplace, and communication with other members. You thereby become a full member and can confirm others yourself.
+
+What is recorded. Once the confirmation is entered, the Protocol records 1,000 POEN for you and 1,000 for the person who confirmed you. If the confirmation is subject to supervision, the first supervisor to enter an outcome receives 500 POEN.
+
+Why a confirmation is worth something. Whoever confirms a person who is not real loses those 1,000 POEN — and if they have spent them in the meantime, a make-good remains on their ledger. On top of that they are subject to the measures in the Terms of Use, up to exclusion from the network. A confirmation therefore carries responsibility for someone else's identity and is not given lightly.
 
 **ru**
 
-Подтверждение необязательна, но она — предпосылка полного доступа к функциям платформы.
+Подтверждение не обязательно, но аккаунт без него в основном только смотрит. Большинство функций открывается лишь с первым подтверждением.
 
-Подтверждение проходит через цепочку подтверждений: действительный участник, который лично тебя знает, подтверждает твою реальность на основании этого знакомства. Платформа обеспечивает технический механизм согласия и подтверждения принадлежности учётной записи, который не собирает личных данных подтверждаемого. Подтвердивший не запрашивает и не собирает документов.
+Как оно получается. Подтверждение даёт действительный участник, который знает тебя лично и который этим действием утверждает, что ты реальный человек. Запрос отправляешь сам, кнопкой «Запросить подтверждение». Знакомство не обязано быть давним: достаточно и того, которое возникло через совершённый обмен.
 
-Каждое подтверждение увеличивает твой индекс реальности на 10 процентных пунктов (от 0 % до 100 %). Полный доступ к функциям платформы открывается на пороге 10 %.
+Документов не требуют ни от кого. Ни удостоверения личности, ни паспорта, ни идентификационного номера, ни фотографии. Тот, кто тебя подтверждает, не вводит ни одного твоего данного; он подтверждает то, что знает.
 
-По учёте записи о подтверждении Протокол автоматически записывает 1 000 ПОЕН тебе, 1 000 ПОЕН подтвердившему и 500 ПОЕН наблюдателю.
+Что этим меняется. Каждое подтверждение поднимает твой индекс реальности на 10 процентных пунктов. Всего их можно принять десять, поэтому наивысший индекс — 100%.
 
-Подтверждение — предпосылка для всех основных возможностей: учёта ПОЕН через пожертвования и покровительство, записи ЗРНО, участия в Программах, а также полного доступа к Рынку и общению с другими участниками.
+Уже первое подтверждение, то есть индекс в 10%, открывает главные функции: запись ПОЕН через пожертвования и покровительство, запись ЗРНА, участие в Программах, полный Рынок и общение с остальными участниками. Тем самым ты становишься действительным участником и сам можешь подтверждать других.
+
+Что записывается. Когда подтверждение учтено, Протокол записывает 1 000 ПОЕН тебе и 1 000 тому, кто тебя подтвердил. Если подтверждение подлежит надзору, первый надзорный, который внесёт итог, получает 500 ПОЕН.
+
+Почему подтверждение чего-то стоит. Тот, кто подтвердит человека, который не существует, теряет эти 1 000 ПОЕН — а если он их тем временем потратил, на его записи остаётся возмещение. Кроме того, к нему применяются меры из Условий пользования, вплоть до исключения из сети. Поэтому подтверждение несёт ответственность за чужую личность и не даётся легкомысленно.
 
 **hr**
 
-Potvrda je opcionalna, ali je preduvjet za pun pristup funkcijama platforme.
+Potvrda nije obvezna, ali račun bez nje uglavnom samo gleda. Većina funkcija otvara se tek s prvom potvrdom.
 
-Potvrda se obavlja kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke potvrđenoga. Onaj tko potvrđuje ne traži niti prikuplja dokumente.
+Kako se dobiva. Potvrdu daje redovni član koji te osobno poznaje i koji tom radnjom tvrdi da si stvarna osoba. Zahtjev šalješ sam, dugmetom Zatraži potvrdu. Poznanstvo ne mora biti staro: dovoljno je i ono koje je nastalo kroz obavljenu razmjenu.
 
-Svaka potvrda uvećava tvoj indeks stvarnosti za 10 postotnih bodova (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
+Dokumenti se ne traže ni od koga. Ni osobna iskaznica, ni putovnica, ni identifikacijski broj, ni fotografija. Onaj tko te potvrđuje ne unosi nijedan tvoj podatak; potvrđuje ono što zna.
 
-Po evidentiranju zapisa o potvrdi, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN onome tko potvrđuje i 500 POEN nadzorniku.
+Što se time mijenja. Svaka potvrda podiže tvoj indeks stvarnosti za 10 postotnih bodova. Ukupno ih možeš primiti deset, pa je najviši indeks 100%.
 
-Potvrda je preduvjet za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, sudjelovanje u Programima, kao i pun pristup Pijaci i komunikaciji s drugim članovima.
+Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, sudjelovanje u Programima, punu Pijacu i komunikaciju s ostalim članovima. Time postaješ redovni član i sam možeš potvrđivati druge.
+
+Što se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POEN tebi i 1.000 onome tko te je potvrdio. Ako potvrda podliježe nadzoru, prvi nadzornik koji upiše ishod dobiva 500 POEN.
+
+Zašto potvrda nešto vrijedi. Tko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to podliježe mjerama iz Uvjeta korištenja, do isključenja iz mreže. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.
 
 **hu**
 
-A megerősítés választható, de előfeltétele a platform funkcióinak teljes elérésének.
+A megerősítés nem kötelező, de a fiók nélküle többnyire csak nézelődik. A legtöbb funkció csak az első megerősítéssel nyílik meg.
 
-A megerősítés a megerősítési láncon keresztül történik: olyan rendes tag, aki személyesen ismer téged, ezen ismeretség alapján megerősíti a valódiságodat. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről. A megerősítő nem kér és nem gyűjt iratokat.
+Hogyan szerezhető. A megerősítést olyan rendes tag adja, aki személyesen ismer téged, és aki ezzel a cselekedettel azt állítja, hogy valódi ember vagy. A kérést magad küldöd, a Megerősítés kérése gombbal. Az ismeretségnek nem kell réginek lennie: a lebonyolított cseréből született is elegendő.
 
-Minden megerősítés 10 százalékponttal növeli a valóságindexedet (0%-tól 100%-ig). A platform funkcióinak teljes elérése a 10%-os küszöbnél nyílik meg.
+Dokumentumot senkitől nem kérünk. Sem személyi igazolványt, sem útlevelet, sem személyi azonosító számot, sem fényképet. Aki megerősít téged, egyetlen adatodat sem viszi be; azt erősíti meg, amit tud.
 
-A megerősítési bejegyzés rögzítésekor a Protokoll automatikusan 1000 POEN-t ír be neked, 1000 POEN-t a megerősítőnek és 500 POEN-t a felügyelőnek.
+Mi változik ezzel. Minden megerősítés 10 százalékponttal emeli a valóságindexedet. Összesen tízet kaphatsz, így a legmagasabb index 100%.
 
-A megerősítés minden fő funkció előfeltétele: POEN rögzítése adományokon és patronáláson keresztül, ZRNO bejegyzése, részvétel a Programokban, valamint a Piac és a tagokkal folytatott kommunikáció teljes elérése.
+Már az első megerősítés, tehát a 10%-os index, megnyitja a fő funkciókat: a POEN rögzítését adományon és patronáláson keresztül, a ZRNO bejegyzését, a Programokban való részvételt, a teljes Piacot és a többi taggal folytatott kommunikációt. Ezzel rendes taggá válsz, és magad is megerősíthetsz másokat.
+
+Mi rögzül. Amikor a megerősítés bejegyzésre kerül, a Protokoll 1.000 POEN-t rögzít neked és 1.000-et annak, aki megerősített. Ha a megerősítés felügyelet alá esik, az első felügyelő, aki rögzíti a kimenetelt, 500 POEN-t kap.
+
+Miért ér valamit a megerősítés. Aki olyan személyt erősít meg, aki nem valódi, elveszíti azt az 1.000 POEN-t — és ha időközben elköltötte, pótlás marad a nyilvántartásán. Ezen felül a Felhasználási feltételekben szereplő intézkedések vonatkoznak rá, a hálózatból való kizárásig. A megerősítés ezért felelősséget hordoz más ember személyazonosságáért, és nem adják könnyelműen.
 
 ---
 
@@ -71798,11 +71794,11 @@ A megerősítés minden fő funkció előfeltétele: POEN rögzítése adományo
 
 **en**
 
-What if I'm a foreigner — can I be a member?
+What if I am a foreigner — can I be a member?
 
 **ru**
 
-Что если я иностранец — могу ли я быть участником?
+А если я иностранец — могу ли я быть участником?
 
 **hr**
 
@@ -71818,33 +71814,43 @@ Mi van, ha külföldi vagyok — lehetek tag?
 
 **sr**
 
-Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: redovan član koji te lično poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+Možeš. Državljanstvo i prebivalište nisu uslov, niti se bilo gde upisuju. Pri registraciji biraš pseudonim i unosiš email i lozinku; dokumenti se ne traže.
 
-Sistem radi na srpskom i engleskom jeziku.
+Jedini stvarni uslov je da te neko potvrdi kao stvarnu osobu, a taj neko može biti bilo gde. Ako u mreži još nikoga ne poznaješ, poznanstvo nastalo kroz obavljenu razmenu takođe je punopravan osnov za potvrdu.
+
+Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i ta verzija je merodavna. Prevodi postoje kao pomoć čitaocu.
 
 **en**
 
-Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a full member who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
+You can. Citizenship and residence are not a condition, nor are they recorded anywhere. At registration you choose a pseudonym and enter an email and a password; no documents are asked for.
 
-The system operates in Serbian and English.
+The only real condition is that someone confirms you as a real person, and that someone can be anywhere. If you do not yet know anyone in the network, an acquaintance formed through a completed exchange is equally valid grounds for confirmation.
+
+The Rulebook, the Terms of Use and the other binding acts were adopted in Serbian and that version is authoritative. Translations exist as an aid to the reader.
 
 **ru**
 
-Да. Гражданство не является условием. Важно, что ты реальный человек, — а это доказывается не документом, а через цепочку подтверждений: действительный участник, который лично тебя знает, подтверждает твою реальность. При регистрации мы не просим ни паспорт, ни удостоверение личности, ни персональный номер — ты выбираешь псевдоним, вводишь email и пароль.
+Можешь. Гражданство и место жительства не являются условием и нигде не записываются. При регистрации ты выбираешь псевдоним и вводишь email и пароль; документы не требуются.
 
-Система работает на сербском и английском языках.
+Единственное реальное условие — чтобы кто-то подтвердил тебя как реального человека, а этот кто-то может быть где угодно. Если в сети ты пока никого не знаешь, знакомство, возникшее через совершённый обмен, тоже полноценное основание для подтверждения.
+
+Правила, Условия пользования и прочие обязывающие акты приняты на сербском, и эта версия является определяющей. Переводы существуют как помощь читателю.
 
 **hr**
 
-Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+Možeš. Državljanstvo i prebivalište nisu uvjet, niti se bilo gdje upisuju. Pri registraciji biraš pseudonim i unosiš email i lozinku; dokumenti se ne traže.
 
-Sustav radi na srpskom i engleskom jeziku.
+Jedini stvarni uvjet je da te netko potvrdi kao stvarnu osobu, a taj netko može biti bilo gdje. Ako u mreži još nikoga ne poznaješ, poznanstvo nastalo kroz obavljenu razmjenu također je punopravan temelj za potvrdu.
+
+Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i ta je verzija mjerodavna. Prijevodi postoje kao pomoć čitatelju.
 
 **hu**
 
-Igen. Az állampolgárság nem feltétel. Az számít, hogy valós személy legyél — ezt pedig nem irattal bizonyítod, hanem a megerősítési láncon keresztül: olyan rendes tag, aki személyesen ismer, megerősíti a valódiságodat. A regisztrációkor nem kérünk sem útlevelet, sem személyi igazolványt, sem személyi számot — választasz álnevet, megadsz egy e-mail-címet és egy jelszót.
+Lehetsz. Az állampolgárság és a lakóhely nem feltétel, és sehol nem kerül rögzítésre. A regisztrációnál álnevet választasz, és megadsz egy e-mail-címet és egy jelszót; dokumentumot nem kérünk.
 
-A rendszer szerb és angol nyelven működik.
+Az egyetlen valódi feltétel, hogy valaki megerősítsen téged valódi emberként, és ez a valaki bárhol lehet. Ha a hálózatban még senkit nem ismersz, a lebonyolított cseréből született ismeretség is teljes értékű alap a megerősítéshez.
+
+A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktus szerb nyelven került elfogadásra, és az a változat az irányadó. A fordítások az olvasó segítésére szolgálnak.
 
 ---
 
@@ -71856,15 +71862,15 @@ Mogu li imati više naloga ili više pseudonima?
 
 **en**
 
-Can I have multiple accounts or multiple pseudonyms?
+Can I have more than one account or more than one pseudonym?
 
 **ru**
 
-Могу ли я иметь несколько учётных записей или несколько псевдонимов?
+Могу ли я иметь несколько аккаунтов или несколько псевдонимов?
 
 **hr**
 
-Mogu li imati više korisničkih računa ili više pseudonima?
+Mogu li imati više računa ili više pseudonima?
 
 **hu**
 
@@ -71876,33 +71882,53 @@ Lehet több fiókom vagy több álnevem?
 
 **sr**
 
-Ne. Princip je „jedan čovek — jedan nalog". Kreiranje više naloga je prekršaj uslova korišćenja i može dovesti do isključenja iz sistema.
+Ne. Pravilo je jedan čovek, jedan nalog, i to je uslov korišćenja. Ko otvori drugi nalog, može biti isključen iz sistema.
 
-Imaš jedan pseudonim u javnom prikazu sistema.
+Drugi nalog uglavnom nema smisla ni pre nego što ga neko primeti. Nalog bez potvrde skoro ništa ne radi, a potvrdu daje čovek koji tvrdi da te lično poznaje i koji za netačnu potvrdu odgovara.
+
+Nalog koji roditelj otvori svom detetu nije izuzetak od ovog pravila.
+
+Pseudonim je jedan i pod njim te vide ostali članovi. O njegovoj promeni u sledećem pitanju.
 
 **en**
 
-No. The principle is "one person — one account". Creating multiple accounts is a breach of the terms of use and may result in exclusion from the system.
+No. The rule is one person, one account, and that is a condition of use. Anyone who opens a second account may be excluded from the system.
 
-You have one pseudonym in the public view of the system.
+A second account mostly makes no sense even before anyone notices it. An account without confirmation does almost nothing, and confirmation is given by a person who asserts they know you personally and who is answerable for an untrue confirmation.
+
+An account a parent opens for their child is not an exception to this rule.
+
+You have one pseudonym and other members see you under it. On changing it, see the next question.
 
 **ru**
 
-Нет. Принцип — «один человек, одна учётная запись». Создание нескольких учётных записей нарушает условия пользования и может привести к исключению из системы.
+Нет. Правило: один человек — один аккаунт, и это условие пользования. Тот, кто откроет второй аккаунт, может быть исключён из системы.
 
-В публичном отображении системы у тебя один псевдоним.
+Второй аккаунт в основном не имеет смысла ещё до того, как его кто-то заметит. Аккаунт без подтверждения почти ничего не делает, а подтверждение даёт человек, который утверждает, что знает тебя лично, и который за неверное подтверждение отвечает.
+
+Аккаунт, который родитель открывает своему ребёнку, не является исключением из этого правила.
+
+Псевдоним один, и под ним тебя видят остальные участники. О его смене — в следующем вопросе.
 
 **hr**
 
-Ne. Princip je „jedan čovjek — jedan korisnički račun". Stvaranje više računa prekršaj je uvjeta korištenja i može dovesti do isključenja iz sustava.
+Ne. Pravilo je jedan čovjek, jedan račun, i to je uvjet korištenja. Tko otvori drugi račun, može biti isključen iz sustava.
 
-Imaš jedan pseudonim u javnom prikazu sustava.
+Drugi račun uglavnom nema smisla ni prije nego što ga netko primijeti. Račun bez potvrde skoro ništa ne radi, a potvrdu daje čovjek koji tvrdi da te osobno poznaje i koji za netočnu potvrdu odgovara.
+
+Račun koji roditelj otvori svom djetetu nije iznimka od ovog pravila.
+
+Pseudonim je jedan i pod njim te vide ostali članovi. O njegovoj promjeni u sljedećem pitanju.
 
 **hu**
 
-Nem. Az elv: „egy ember — egy fiók". Több fiók létrehozása sérti a felhasználási feltételeket, és a rendszerből való kizáráshoz vezethet.
+Nem. A szabály: egy ember — egy fiók, és ez a használat feltétele. Aki második fiókot nyit, kizárható a rendszerből.
 
-A rendszer nyilvános felületén egy álneved van.
+A második fióknak többnyire azelőtt sincs értelme, hogy bárki észrevenné. A megerősítés nélküli fiók szinte semmit nem csinál, a megerősítést pedig olyan ember adja, aki azt állítja, hogy személyesen ismer téged, és aki a valótlan megerősítésért felel.
+
+Az a fiók, amelyet a szülő nyit a gyerekének, nem kivétel e szabály alól.
+
+Az álnév egy van, és a többi tag ez alatt lát téged. A megváltoztatásáról a következő kérdésben.
 
 ---
 
@@ -71934,33 +71960,63 @@ Megváltoztathatom az álnevemet?
 
 **sr**
 
-Da, ali najviše jednom u 30 dana.
+Možeš, najviše jednom u trideset dana.
 
-Kad promeniš pseudonim, sve tvoje transakcije u istoriji prikazuju se pod novim pseudonimom — stari se više nigde ne vidi. Jedino trajno i nepromenljivo je tvoj interni korisnički identifikator, koji drugi korisnici ne vide.
+Promena važi odmah. Čim je potvrdiš, ceo tvoj nalog se ostalima prikazuje pod novim pseudonimom, uključujući i istoriju; stari se više ne vidi.
+
+Pseudonim sme da sadrži latinična slova, cifre i znake _ . - bez razmaka i bez slova č, ć, š, ž i đ. Latiničan je i kada sajt čitaš ćirilicom. Stoji i u adresi tvog profila.
+
+Ranije podeljeni linkovi i dalje rade: stara adresa vodi na tvoj profil i posle promene, a napušteni pseudonim ne može da uzme neko drugi — inače bi već podeljen link tiho odveo na drugu osobu.
+
+Sam nalog se time ne menja: lanac potvrda, indeks stvarnosti i evidencija doprinosa ostaju isti, jer je promenjeno samo ime pod kojim se vide.
 
 **en**
 
-Yes, but no more than once every 30 days.
+You can, at most once in thirty days.
 
-When you change your pseudonym, all your transactions in the history are displayed under the new pseudonym — the old one is no longer visible anywhere. The only permanent and unchangeable element is your internal user identifier, which other users do not see.
+The change takes effect immediately. As soon as you confirm it, your whole account is shown to others under the new pseudonym, history included; the old one is no longer visible.
+
+A pseudonym may contain Latin letters, digits and the characters _ . - without spaces and without the letters č, ć, š, ž and đ. It stays in the Latin alphabet even when you read the site in Cyrillic. It also stands in your profile's address.
+
+Links shared earlier keep working: the old address leads to your profile after the change too, and an abandoned pseudonym cannot be taken by someone else — otherwise an already shared link would quietly lead to a different person.
+
+The account itself does not change: the chain of confirmations, the reality index and the record of contributions stay the same, because only the name they are seen under has changed.
 
 **ru**
 
-Да, но не чаще одного раза в 30 дней.
+Можешь, не чаще одного раза в тридцать дней.
 
-Когда ты меняешь псевдоним, все твои операции в истории отображаются под новым псевдонимом — старый больше нигде не виден. Единственное, что остаётся постоянным и неизменным, — твой внутренний пользовательский идентификатор, которого другие пользователи не видят.
+Смена действует сразу. Как только ты её подтвердишь, весь твой аккаунт показывается остальным под новым псевдонимом, включая историю; старый больше не виден.
+
+Псевдоним может содержать латинские буквы, цифры и знаки _ . - без пробелов и без букв č, ć, š, ž и đ. Он остаётся латинским и тогда, когда ты читаешь сайт кириллицей. Он же стоит и в адресе твоего профиля.
+
+Ранее отправленные ссылки продолжают работать: старый адрес ведёт на твой профиль и после смены, а покинутый псевдоним не может занять кто-то другой — иначе уже отправленная ссылка тихо привела бы к другому человеку.
+
+Сам аккаунт этим не меняется: цепочка подтверждений, индекс реальности и учёт вкладов остаются теми же, потому что изменено только имя, под которым они видны.
 
 **hr**
 
-Da, ali najviše jednom u 30 dana.
+Možeš, najviše jednom u trideset dana.
 
-Kad promijeniš pseudonim, sve tvoje transakcije u povijesti prikazuju se pod novim pseudonimom — stari se više nigdje ne vidi. Jedino trajno i nepromjenjivo je tvoj interni korisnički identifikator, koji drugi korisnici ne vide.
+Promjena vrijedi odmah. Čim je potvrdiš, cijeli tvoj račun ostalima se prikazuje pod novim pseudonimom, uključujući i povijest; stari se više ne vidi.
+
+Pseudonim smije sadržavati latinična slova, znamenke i znakove _ . - bez razmaka i bez slova č, ć, š, ž i đ. Latiničan je i kada stranicu čitaš ćirilicom. Stoji i u adresi tvog profila.
+
+Ranije podijeljene poveznice i dalje rade: stara adresa vodi na tvoj profil i nakon promjene, a napušteni pseudonim ne može uzeti netko drugi — inače bi već podijeljena poveznica tiho odvela na drugu osobu.
+
+Sam račun se time ne mijenja: lanac potvrda, indeks stvarnosti i evidencija doprinosa ostaju isti, jer je promijenjeno samo ime pod kojim se vide.
 
 **hu**
 
-Igen, de legfeljebb 30 naponta egyszer.
+Megváltoztathatod, legfeljebb harmincnaponta egyszer.
 
-Amikor álnevet váltasz, az előzményekben szereplő összes tranzakciód az új álnév alatt jelenik meg — a régi sehol többé nem látszik. Az egyetlen állandó és megváltoztathatatlan elem a belső felhasználói azonosítód, amelyet más felhasználók nem látnak.
+A változás azonnal érvényes. Amint megerősíted, a teljes fiókod új álnéven jelenik meg a többiek számára, az előzményekkel együtt; a régi már nem látszik.
+
+Az álnév tartalmazhat latin betűket, számjegyeket és a _ . - jeleket, szóköz nélkül, valamint a č, ć, š, ž és đ betűk nélkül. Latin betűs marad akkor is, ha az oldalt cirill betűkkel olvasod. Ott áll a profilod címében is.
+
+A korábban megosztott hivatkozások továbbra is működnek: a régi cím a változás után is a profilodra vezet, az elhagyott álnevet pedig más nem veheti el — különben egy már megosztott hivatkozás csendben más emberhez vezetne.
+
+Maga a fiók ezzel nem változik: a megerősítési lánc, a valóságindex és a hozzájárulások nyilvántartása ugyanaz marad, mert csak az a név változott, amely alatt látszanak.
 
 ---
 
@@ -71968,23 +72024,23 @@ Amikor álnevet váltasz, az előzményekben szereplő összes tranzakciód az �
 
 **sr**
 
-Na kom jeziku radi sistem? Postoji li engleska verzija?
+Na kom jeziku radi sistem?
 
 **en**
 
-What language does the system use? Is there an English version?
+What language does the system work in?
 
 **ru**
 
-На каком языке работает система? Есть ли английская версия?
+На каком языке работает система?
 
 **hr**
 
-Na kojem jeziku radi sustav? Postoji li engleska verzija?
+Na kojem jeziku radi sustav?
 
 **hu**
 
-Milyen nyelven működik a rendszer? Van angol változat?
+Milyen nyelven működik a rendszer?
 
 ---
 
@@ -71992,23 +72048,33 @@ Milyen nyelven működik a rendszer? Van angol változat?
 
 **sr**
 
-Interfejs radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš prekidačem u zaglavlju. Pravilnik, Uslovi i ostali pravno obavezujući tekstovi doneti su na srpskom i srpska verzija je merodavna; njihovi engleski prevodi postoje kao nezvanična pomoć čitaocu.
+Sajt i aplikacija rade na pet jezika: srpskom, engleskom, ruskom, hrvatskom i mađarskom. Srpski možeš čitati latinicom ili ćirilicom. I jedno i drugo bira se prekidačem u zaglavlju i menja se u svakom trenutku.
+
+Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i ta verzija je merodavna. Prevodi na ostale jezike postoje kao nezvanična pomoć čitaocu; ako se negde razlikuju od srpskog teksta, važi srpski.
 
 **en**
 
-The interface works in Serbian (Latin and Cyrillic script) and in English — you choose the language with the switcher in the header. The Rules, the Terms and the other legally binding texts were adopted in Serbian and the Serbian version is authoritative; their English translations exist as an unofficial aid to the reader.
+The site and the application work in five languages: Serbian, English, Russian, Croatian and Hungarian. Serbian can be read in the Latin or the Cyrillic script. Both are chosen with the switch in the header and can be changed at any moment.
+
+The Rulebook, the Terms of Use and the other binding acts were adopted in Serbian and that version is authoritative. Translations into the other languages exist as an unofficial aid to the reader; where they differ from the Serbian text, the Serbian text prevails.
 
 **ru**
 
-Интерфейс работает на сербском (латиница и кириллица) и на английском — язык выбирается переключателем в шапке. Регламент, Условия и остальные юридически обязывающие тексты приняты на сербском, и сербская версия является определяющей; их переводы на другие языки существуют как неофициальная помощь читателю.
+Сайт и приложение работают на пяти языках: сербском, английском, русском, хорватском и венгерском. Сербский можно читать латиницей или кириллицей. И то и другое выбирается переключателем в шапке и меняется в любой момент.
+
+Правила, Условия пользования и прочие обязывающие акты приняты на сербском, и эта версия является определяющей. Переводы на остальные языки существуют как неофициальная помощь читателю; если где-то они расходятся с сербским текстом, действует сербский.
 
 **hr**
 
-Sučelje radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš prekidačem u zaglavlju. Pravilnik, Uvjeti i ostali pravno obvezujući tekstovi doneseni su na srpskom i srpska je verzija mjerodavna; njihovi engleski prijevodi postoje kao neslužbena pomoć čitatelju.
+Stranica i aplikacija rade na pet jezika: srpskom, engleskom, ruskom, hrvatskom i mađarskom. Srpski možeš čitati latinicom ili ćirilicom. I jedno i drugo bira se prekidačem u zaglavlju i mijenja se u svakom trenutku.
+
+Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i ta je verzija mjerodavna. Prijevodi na ostale jezike postoje kao neslužbena pomoć čitatelju; ako se negdje razlikuju od srpskog teksta, vrijedi srpski.
 
 **hu**
 
-A felület szerbül (latin és cirill betűvel) és angolul működik — a nyelvet a fejlécben lévő kapcsolóval választod ki. A Szabályzat, a Feltételek és a többi jogilag kötelező szöveg szerb nyelven készült, és a szerb változat az irányadó; a más nyelvű fordításaik nem hivatalos, az olvasót segítő szövegek.
+A honlap és az alkalmazás öt nyelven működik: szerbül, angolul, oroszul, horvátul és magyarul. A szerb olvasható latin vagy cirill betűkkel. Mindkettőt a fejlécben lévő kapcsolóval választod ki, és bármikor módosítható.
+
+A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktus szerb nyelven került elfogadásra, és az a változat az irányadó. A többi nyelvre készült fordítások nem hivatalos segítségként szolgálnak az olvasónak; ha valahol eltérnek a szerb szövegtől, a szerb az irányadó.
 
 ---
 
