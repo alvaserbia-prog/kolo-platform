@@ -9,10 +9,10 @@ import { ImageResponse } from "next/og";
  * kao asset, pa radi i u serverless i u edge okruženju.
  */
 export const runtime = "edge";
-// Alt čitaju čitači ekrana i pretraga, pa nosi zvaničnu definiciju sistema —
-// istu koja stoji u naslovu sajta (`seo.site_naslov`), da se dva mesta koja se
-// vide jedno pored drugog pri deljenju linka ne razilaze.
-export const alt = "KOLO — sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru";
+// Alt čitaju čitači ekrana i pretraga. Nosi definiciju („sistem uzajamnosti"),
+// ali NE prepisuje tagline sa same slike — opisuje šta se na njoj vidi, pa ko
+// sliku ne vidi dobija isto obaveštenje, a ne dva puta istu rečenicu.
+export const alt = "KOLO — sistem uzajamnosti za razmenu rada, dobara i znanja";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

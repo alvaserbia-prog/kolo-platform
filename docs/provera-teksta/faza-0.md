@@ -457,7 +457,7 @@ Ono što se vidi kad se `ekolo.rs` podeli na mrežama ili u poruci. Jedna slika 
 sve jezike — tekst na njoj je srpski i prevod nije moguć bez izmene u kodu.
 
 - `og.alt` — opis slike za čitače ekrana i za pretragu  
-  „KOLO — sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru“
+  „KOLO — sistem uzajamnosti za razmenu rada, dobara i znanja“
 - `og.oznaka` — sitan natpis iznad imena  
   „ZAJEDNIČKO DOBRO“
 - `og.naziv` — veliko ime u sredini  
