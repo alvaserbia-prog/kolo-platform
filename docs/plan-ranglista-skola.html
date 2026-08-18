@@ -1,0 +1,635 @@
+<title>Ranglista škola</title>
+<style>
+  :root {
+    --paper:      #F4F5F1;
+    --surface:    #FBFCFA;
+    --ink:        #191E1B;
+    --muted:      #5C6561;
+    --faint:      #858E89;
+    --rule:       #D9DCD3;
+    --rule-soft:  #E7E9E3;
+    --accent:     #2C5A4C;
+    --accent-bg:  #E4EDE8;
+    --alert:      #A03A28;
+    --alert-bg:   #F5E5E1;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #131614;
+      --surface:   #1A1E1B;
+      --ink:       #E6E9E2;
+      --muted:     #97A099;
+      --faint:     #79837C;
+      --rule:      #2C312D;
+      --rule-soft: #232823;
+      --accent:    #74AE97;
+      --accent-bg: #1C2A25;
+      --alert:     #DE8570;
+      --alert-bg:  #2E1F1B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:     #131614;
+    --surface:   #1A1E1B;
+    --ink:       #E6E9E2;
+    --muted:     #97A099;
+    --faint:     #79837C;
+    --rule:      #2C312D;
+    --rule-soft: #232823;
+    --accent:    #74AE97;
+    --accent-bg: #1C2A25;
+    --alert:     #DE8570;
+    --alert-bg:  #2E1F1B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 47rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+  }
+
+  /* ---------- zaglavlje ---------- */
+  .mast { display: flex; flex-direction: column; gap: .85rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(2rem, 5.5vw, 2.85rem);
+    line-height: 1.14;
+    letter-spacing: -.012em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+    max-width: 38rem;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem 1.4rem;
+    font-family: var(--mono);
+    font-size: .74rem;
+    color: var(--faint);
+    border-top: 1px solid var(--rule);
+    padding-top: .85rem;
+  }
+
+  /* ---------- odeljci ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+  h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 1.62rem;
+    line-height: 1.22;
+    letter-spacing: -.005em;
+    margin: 1.6rem 0 0;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    text-wrap: balance;
+  }
+  h2 .num {
+    font-family: var(--mono);
+    font-size: .8rem;
+    color: var(--accent);
+    letter-spacing: .06em;
+    flex: none;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 650;
+    font-size: 1.02rem;
+    letter-spacing: -.005em;
+    margin: 1.1rem 0 0;
+    text-wrap: balance;
+  }
+  h4 {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: .9rem 0 0;
+  }
+  p { margin: 0; max-width: 40rem; }
+  ul, ol { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .45rem; max-width: 40rem; }
+  li { padding-left: .15rem; }
+  li::marker { color: var(--faint); }
+  strong { font-weight: 650; }
+  code {
+    font-family: var(--mono);
+    font-size: .855em;
+    background: var(--rule-soft);
+    padding: .1em .34em;
+    border-radius: 2px;
+    word-break: break-word;
+  }
+
+  /* ---------- oznake stanja ---------- */
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .chip {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: .22rem .5rem;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    background: var(--surface);
+    white-space: nowrap;
+  }
+  .chip.usvojeno { color: var(--accent); border-color: var(--accent); background: var(--accent-bg); }
+  .chip.rizik    { color: var(--alert); border-color: var(--alert); background: var(--alert-bg); }
+
+  /* ---------- izdvojeno ---------- */
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-bg);
+    padding: .95rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-radius: 0 3px 3px 0;
+  }
+  .note.warn { border-left-color: var(--alert); background: var(--alert-bg); }
+  .note .lbl {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .note.warn .lbl { color: var(--alert); }
+  .note p { max-width: none; }
+
+  /* ---------- nacrt odredbe ---------- */
+  .odredba {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 1rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .hdr {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .55rem;
+    border-bottom: 1px solid var(--rule-soft);
+    padding-bottom: .55rem;
+  }
+  .odredba .clan {
+    font-family: var(--mono);
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--ink);
+  }
+  .odredba .kako {
+    font-family: var(--mono);
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .odredba .tekst {
+    font-family: var(--serif);
+    font-size: .97rem;
+    line-height: 1.62;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+  }
+  .odredba .tekst p { max-width: none; }
+  .odredba .obrazlozenje {
+    font-size: .87rem;
+    color: var(--muted);
+    max-width: none;
+    border-top: 1px dashed var(--rule);
+    padding-top: .55rem;
+  }
+  del { color: var(--alert); text-decoration-thickness: 1px; }
+  ins { text-decoration: none; box-shadow: inset 0 -.42em 0 var(--accent-bg); }
+
+  /* ---------- tabele ---------- */
+  .tbl-scroll { overflow-x: auto; margin: .2rem 0; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: .9rem;
+    min-width: 30rem;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+    padding-bottom: .5rem;
+  }
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--ink);
+    padding: .4rem .7rem .4rem 0;
+    vertical-align: bottom;
+  }
+  td {
+    border-bottom: 1px solid var(--rule-soft);
+    padding: .5rem .7rem .5rem 0;
+    vertical-align: top;
+  }
+  td.num, th.num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding-right: 0;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* ---------- koraci ---------- */
+  .koraci { display: flex; flex-direction: column; gap: .8rem; counter-reset: k; }
+  .korak {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: .1rem 1rem;
+    align-items: baseline;
+  }
+  .korak::before {
+    counter-increment: k;
+    content: counter(k, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: .78rem;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .korak > div { display: flex; flex-direction: column; gap: .3rem; }
+  .korak .kt { font-weight: 650; }
+  .korak .kd { font-size: .92rem; color: var(--muted); max-width: 38rem; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: .4rem 0;
+  }
+  .kicker {
+    font-family: var(--mono);
+    font-size: .72rem;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  a { color: var(--accent); text-underline-offset: .18em; }
+  a:focus-visible, :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  @media (max-width: 40rem) {
+    body { font-size: 16px; }
+    .wrap { padding: 2.25rem 1.1rem 4rem; gap: 2.25rem; }
+    .korak { grid-template-columns: 1.9rem 1fr; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="eyebrow">KOLO Platforma · Modul Deca · radni dokument</div>
+    <h1>Ranglista škola</h1>
+    <p class="standfirst">Dete bira svoju školu, a iz izbora nastaju dve nacionalne rang-liste — po broju uključene dece i po procentu uključenosti. Plan sprovođenja: šta se broji, šta se prikazuje, šta se menja u aktima i kojim redom.</p>
+    <div class="meta">
+      <span>18. avgust 2026</span>
+      <span>Osnov: Pravilnik o učešću dece 4.3.1</span>
+      <span>Modul Deca — iza prekidača <code>MODUL_DECA_AKTIVAN</code></span>
+    </div>
+  </header>
+
+  <!-- ============ 00 ============ -->
+  <section>
+    <h2><span class="num">00</span> Odluke pod kojima je plan pisan</h2>
+    <p>Sve ispod je odluka vlasnika i u planu se dalje ne otvara. Zapisano je da bi se kasnije videlo šta je bilo izabrano, a šta izvedeno.</p>
+
+    <ul>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Broji se dete čiji je roditelj redovan član.</strong> Odbrana od naduvavanja nije brojčano ograničenje nego položaj roditelja — on rizikuje sopstveni nalog.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Rang je nacionalni</strong>, za celu Srbiju. Bez opštinskih i okružnih lista.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Dve liste:</strong> po broju uključene dece i po procentu uključenosti dece iz te škole.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Škola se prikazuje</strong> — i na rang-listi i na profilu deteta.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Školu bira sámo dete.</strong></li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Nema praga prikaza.</strong> Škola sa jednim detetom stoji na listi kao i svaka druga.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Porodice se ne mešaju u prikaz</strong> — broj se izražava decom, ne domaćinstvima.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Punoletni korisnik ne vidi podatke o tuđem detetu</strong> — vidi njegove oglase, može da ga pronađe i da mu prepiše POEN.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Ne nosi POEN.</strong> Ni izbor škole, ni mesto na listi.</li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Škola se menja jednom u 30 dana.</strong></li>
+      <li><span class="chip usvojeno">usvojeno</span> <strong>Krug se razrađuje kasnije</strong> — škola kao kolektivni oblik nije predmet ovog plana.</li>
+    </ul>
+  </section>
+
+  <!-- ============ 01 ============ -->
+  <section>
+    <h2><span class="num">01</span> Šta mehanizam zapravo radi</h2>
+
+    <p>Modul Deca danas radi u jednom smeru: dete čeka roditelja. Prelaz iz stanja <code>POVEZANO</code> u <code>AKTIVNO</code> zavisi isključivo od toga hoće li roditelj proći lanac potvrda, a dete nema čime da ga požuruje osim rečenicom „hoću POEN”. To je slab argument za kuhinjskim stolom.</p>
+
+    <p>Ranglista taj smer obrće. „Našoj školi fali troje do šestog mesta u Srbiji” je razlog koji dete <strong>samo</strong> odnese kući i ponovi. Mehanizam ne dodaje decu — on decu pretvara u razlog da roditelj uđe u mrežu potvrda, a to je jedini rast koji sistemu stvarno treba.</p>
+
+    <div class="note">
+      <span class="lbl">Zašto ovo ne traži nijedan nov podsticaj</span>
+      <p>Dete već dobija 500 POEN po sklopljenom prijateljstvu (čl. 14b). Ranglista ne plaća ništa novo — ona postojećoj motivaciji daje <strong>pravac</strong>. Zato je odluka „ne nosi POEN” ujedno i tehnički najjeftinija: mehanizam ostaje potpuno izvan aparata iz čl. 15, bez desetog kanala, bez dnevnog limita i bez ijednog dodira sa opticajem.</p>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section>
+    <h2><span class="num">02</span> Ko se broji</h2>
+
+    <p>Broji se maloletni nalog u stanju <code>AKTIVNO</code> — dakle onaj koji ima bar jednog roditelja koji je <strong>redovan član</strong>. To je ista brana koja već čuva 500 POEN po prijateljstvu: iza svakog izbrojanog deteta stoji odrastao čovek koga je treće lice potvrdilo u stvarnom svetu.</p>
+
+    <p>Stanje se ne čuva u koloni nego se izvodi (<code>stanjeDeteta()</code> u <code>deca-pravila.ts</code>). Za rang-listu se isti uslov izražava jednim upitom, bez učitavanja svakog deteta ponaosob:</p>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Upit rang-liste</span><span class="kako">groupBy po šifri škole</span></div>
+      <div class="tekst">
+        <p><code>maloletan: true</code> · <code>status: ACTIVE</code> · <code>deaktiviranAt: null</code> · <code>skolaSifra: { not: null }</code></p>
+        <p><code>roditeljstvaKaoDete: { some: { roditelj: { verified: true, indeksStvarnosti: &gt;= 10, status: ACTIVE, deaktiviranAt: null } } }</code></p>
+      </div>
+      <p class="obrazlozenje">Dva uslova na roditelju su doslovno <code>aktivan</code> i <code>redovan</code> iz <code>ucesnikIzReda()</code>. 🔴 Ako se <code>stanjeDeteta()</code> ikad promeni, ovaj upit mora s njim — inače postoje dve istine o tome šta je aktivno dete. Uslov zato ide u <strong>jednu izvezenu konstantu</strong> koju dele i upit i pravila.</p>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Posledica koju treba znati unapred</span>
+      <p>Škola u kojoj ima dvadesetoro dece na čekanju prikazuje <strong>0</strong>. To nije greška — to je baš poruka koju dete treba da odnese kući. Ali biće doživljena kao kvar ako se ne objasni na samom ekranu, pa uz brojku ide rečenica: <em>„broje se samo deca čiji je roditelj redovan član”</em>.</p>
+    </div>
+
+    <p><strong>Rang je živa vrednost, ne snimak.</strong> Kad roditelju padne potvrda, dete istog trena izlazi iz brojanja; kad je stekne, ulazi. Isti obrazac kao brojač putanje doprinosa razmeni. Nema noćnog posla i nema zabeleženog stanja koje bi se razišlo sa stvarnim.</p>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section>
+    <h2><span class="num">03</span> Šifarnik škola — jedini pravi rizik plana</h2>
+
+    <p>Bez šifarnika ranglista ne postoji: „OŠ Vuk Karadžić”, „Osnovna škola Vuk Karadžić” i „vuk karadzic ns” postaju tri škole. Ista greška je u ovom sistemu već jednom napravljena sa mestima („Stanišić (Sombor)”) i rešena je modulom <code>naselje.ts</code>. Ovde se ponavlja rešenje, ne greška.</p>
+
+    <h3>Oblik</h3>
+    <p><code>src/lib/skole-srbije.ts</code>, jedan red po školi:</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Polje</th><th>Čemu služi</th></tr></thead>
+        <tbody>
+          <tr><td><code>sifra</code></td><td>Ključ. 🔴 Naziv NIJE jedinstven — „Vuk Karadžić” nosi preko trideset škola u Srbiji. Jedinstven je tek par naziv + mesto, a šifra je jeftinija i stabilnija.</td></tr>
+          <tr><td><code>naziv</code></td><td>Prikaz i pretraga.</td></tr>
+          <tr><td><code>mesto</code></td><td>Razlikovanje istoimenih škola. <strong>Mora biti kanonsko naselje</strong> iz <code>NASELJA_SRBIJE</code>.</td></tr>
+          <tr><td><code>tip</code></td><td><code>OSNOVNA</code> / <code>SREDNJA</code>.</td></tr>
+          <tr><td><code>ucenika</code></td><td>Broj upisanih učenika. Potreban <strong>samo</strong> za procentualnu listu.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Blokira ceo posao</span>
+      <p><strong>Procentualna lista ne postoji bez broja upisanih učenika po školi.</strong> To je jedini ulazni podatak koji sistem ne može sam da proizvede i koji treba obezbediti <em>pre</em> nego što se napiše ijedna linija koda. Ako se za deo škola ne obezbedi, te škole ostaju na listi po broju, a u procentualnoj stoje sa crticom — nikad izmišljenom procenom.</p>
+    </div>
+
+    <h3>Provera koja se lako previdi</h3>
+    <p>Svako <code>mesto</code> u šifarniku škola mora da prođe <code>razresiNaselje()</code>. Ako ne prođe, dve liste se tiho razilaze: škola postoji, a mesto joj ne pogađa nijedno naselje, pa ne radi ni pretraga ni bilo šta što se kasnije zakači na lokaciju. Test koji to čuva piše se zajedno sa šifarnikom, ne posle.</p>
+
+    <h3>Razrešavanje unosa je ovde jednostavnije nego kod naselja</h3>
+    <p>Kod mesta je postojao slobodan tekst, pa je <code>razresiNaselje()</code> morao da tolerantno tumači ono što je čovek otkucao. Ovde slobodnog unosa nema: dete bira stavku iz padajuće liste, a server prima <strong>šifru</strong>. Provera je samo „postoji li ta šifra u šifarniku”. Namerno — svaka tolerancija na ovom mestu vraća problem koji šifarnik i postoji da reši.</p>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section>
+    <h2><span class="num">04</span> Dve rang-liste</h2>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Lista</th><th>Vrednost</th><th>Šta pokazuje</th></tr></thead>
+        <tbody>
+          <tr><td>Po broju</td><td class="num">broj aktivne dece</td><td>Apsolutnu snagu. Velike gradske škole prirodno vode.</td></tr>
+          <tr><td>Po procentu</td><td class="num">deca / upisani</td><td>Uključenost. Ovde mala škola može da bude prva u državi.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Procentualna lista je ona koja pravi priču — „selo prvo u Srbiji” je vest, „Beograd prvi po broju” nije. Zato obe stoje ravnopravno, a ne jedna kao glavna i druga kao dodatak.</p>
+
+    <div class="note">
+      <span class="lbl">Bez praga, ali i bez zavaravanja</span>
+      <p>Pošto praga prikaza nema, škola sa 12 upisanih učenika i jednim detetom daje 8,3% i seda na vrh države. Ništa se tu ne krije, ali čitalac mora da vidi težinu broja, pa <strong>uz procenat uvek ide i razlomak</strong>: <code>8,3% (1 od 12)</code>. Time se nijedna škola ne sklanja sa liste, a broj ne obmanjuje.</p>
+    </div>
+
+    <p><strong>Računanje je jedan upit</strong> (odeljak 02) plus deljenje brojem upisanih. Pri današnjim brojevima to je trivijalno i radi uživo. Ako lista jednom poraste, dodaje se keš od nekoliko minuta — ne noćni posao i ne zabeleženo stanje, jer rang mora da prati stvarnost istog dana kad se roditelj potvrdi.</p>
+
+    <p class="kicker">Otvoreno pitanje 12/a: da li osnovne i srednje škole idu u jednu listu ili u dve.</p>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section>
+    <h2><span class="num">05</span> Ekrani</h2>
+
+    <div class="koraci">
+      <div class="korak"><div>
+        <span class="kt">Izbor škole — profil deteta</span>
+        <span class="kd">Padajuća pretraga po nazivu i mestu, po uzoru na <code>LokacijaSearch</code>. Polje je <strong>opciono</strong>: dete koje ne želi da navede školu koristi sve ostalo bez ijedne posledice.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt"><code>/skole</code> — obe rang-liste</span>
+        <span class="kd">Dve tabele. Agregat, bez ijednog imena. Vidi ga i neprijavljen posetilac.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt"><code>/skole/[sifra]</code> — jedna škola</span>
+        <span class="kd">Mesto na obe liste, broj i procenat, i <strong>spisak dece te škole</strong> — samo prijavljenima (odeljak 06).</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt">Profil deteta</span>
+        <span class="kd">Škola stoji kao red na profilu, sa linkom na stranicu škole.</span>
+      </div></div>
+      <div class="korak"><div>
+        <span class="kt">Dečja početna — kartica koja nosi ceo mehanizam</span>
+        <span class="kd">Ne tabela od hiljadu redova, nego jedna rečenica: <strong>„OŠ „Vuk Karadžić”, Stanišić — 7. u Srbiji · fali vam 3 do šestog mesta”</strong>. To je jedino što dete prepričava kod kuće, i po tome ovaj mehanizam uspeva ili pada.</span>
+      </div></div>
+    </div>
+
+    <p>Dete koje još nije izabralo školu vidi na istom mestu poziv da je izabere — bez toga polje ostaje neotkriveno, jer se profil retko otvara.</p>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section>
+    <h2><span class="num">06</span> Ko šta vidi</h2>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Posmatrač</th><th>Rang-liste</th><th>Spisak dece u školi</th><th>Oglasi i prepis POEN-a</th></tr></thead>
+        <tbody>
+          <tr><td>Gost</td><td>vidi</td><td>ne vidi</td><td>ne</td></tr>
+          <tr><td>Punoletan član</td><td>vidi</td><td>vidi pseudonime</td><td>uz roditeljski prekidač</td></tr>
+          <tr><td>Dete</td><td>vidi</td><td>vidi pseudonime</td><td>da</td></tr>
+          <tr><td>Roditelj tog deteta</td><td>vidi</td><td>vidi</td><td>bezuslovno prema svom detetu</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Gost ne vidi spisak dece</strong> zato što po čl. 13 oglas maloletnog korisnika gostu nije dostupan ni danas (<code>smeDaVidiOglas</code> vraća <code>false</code>). Spisak koji bi gostu pokazao decu bio bi širi od onoga što isti akt već zabranjuje na Pijaci.</p>
+
+    <p><strong>Deca se i dalje ne pojavljuju u opštoj pretrazi članova</strong> — <code>GET /api/korisnici/pretraga</code> filtrira <code>maloletan: false</code> i taj filter ostaje. Put do deteta ide isključivo kroz školu ili prijateljstvo, nikad kroz pretragu po imenu.</p>
+
+    <div class="note warn">
+      <span class="lbl">Jedino mesto gde nalog dodiruje usvojen akt</span>
+      <p>„Punoletni članovi mogu da pronađu decu i da im pošalju POEN” u kodu prolazi kroz <code>smeDaPrepise()</code> → <code>smeDaKomunicira()</code>, a to za par odraslo–dete traži <strong>roditeljski prekidač</strong> <code>dozvolaOdrasli</code> (čl. 10 st. 2 i čl. 12 Pravilnika o učešću dece). Dok je prekidač ugašen, prepis se odbija.</p>
+      <p>Plan zato zadržava prekidač i predlaže da dugme na spisku <strong>stoji, ali onemogućeno</strong>, uz rečenicu zašto — inače izgleda kao kvar. Ako se hoće da prepis prolazi bezuslovno, to nije izmena koda nego <strong>izmena čl. 12</strong> i ide u isti set akata. Odluka je vlasnikova (pitanje 12/b).</p>
+    </div>
+
+    <p>Van spiska i oglasa, punoletni član o tuđem detetu ne vidi ništa: ni prijateljstva, ni razgovore, ni istoriju POEN-a. Uvid iz čl. 9 ostaje isključivo roditeljski i nepromenjen.</p>
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section>
+    <h2><span class="num">07</span> Promena škole</h2>
+
+    <p>Škola se menja <strong>jednom u 30 dana</strong>. Prva postavka nije promena — dete koje tek bira školu ne čeka ništa.</p>
+
+    <p>Rok ne štiti od farmovanja (nema šta da se zaradi) nego od pomeranja liste: bez njega bi razred mogao da „upadne” u tuđu školu na dan kad neko gleda rang. Poruka pri odbijanju navodi <strong>datum</strong> kada je sledeća promena moguća, ne samo da nije moguća sada.</p>
+
+    <p><strong>Istorija škola se ne čuva.</strong> Drži se tekuća vrednost i datum poslednje promene, ništa više — minimizacija podataka je jedan od četiri principa koje ni Gornje Kolo ne može da napusti, a istorija škola ovde ne služi nijednoj svrsi.</p>
+  </section>
+
+  <!-- ============ 08 ============ -->
+  <section>
+    <h2><span class="num">08</span> Model podataka</h2>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">User</span><span class="kako">dve kolone + indeks</span></div>
+      <div class="tekst">
+        <p><code>skolaSifra String?</code> — šifra iz šifarnika, nikad naziv.</p>
+        <p><code>skolaPromenjenaAt DateTime?</code> — nosi rok od 30 dana.</p>
+        <p><code>@@index([skolaSifra])</code></p>
+      </div>
+      <p class="obrazlozenje">Migracija je čista — nijedan zatečeni nalog nema školu, pa nema backfilla.</p>
+    </div>
+
+    <h3>Zašto nema tabele <code>Skola</code></h3>
+    <p>Šifarnik je statičan spisak u kodu, isto kao <code>NASELJA_SRBIJE</code>. Tabela bi tražila seed, sinhronizaciju i migraciju pri svakoj dopuni spiska, a ne bi donela ništa — sistem o školi ne stvara nijedan sopstveni podatak. Ako škola jednom postane Krug, tabela nastaje tada i za to, ne unapred.</p>
+
+    <div class="note warn">
+      <span class="lbl">Dva mesta koja se lako previde</span>
+      <p><strong>Punoletstvo.</strong> <code>punoletstvo.ts</code> mora da obriše <code>skolaSifra</code> pri prelasku u punoletni nalog. Bez toga punoletan čovek zauvek ostaje u brojanju svoje osnovne škole. Jedan red u postojećem cron-u u 20:00 — i tačno onakav propust koji se ne primeti mesecima.</p>
+      <p><strong>Gašenje naloga.</strong> Škola je podatak o detetu i briše se sa ostalima pri anonimizaciji (čl. 34), zajedno sa <code>skolaPromenjenaAt</code>.</p>
+    </div>
+  </section>
+
+  <!-- ============ 09 ============ -->
+  <section>
+    <h2><span class="num">09</span> Izmene akata</h2>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Pravilnik o učešću dece, čl. 7</span><span class="kako">dopuna</span></div>
+      <div class="tekst"><p>Uz datum rođenja, koji upisuje roditelj, maloletni korisnik može sam navesti <ins>školu koju pohađa, izborom sa spiska škola</ins>. Navođenje škole nije uslov za korišćenje naloga.</p></div>
+    </div>
+
+    <div class="odredba">
+      <div class="hdr"><span class="clan">Pravilnik o učešću dece, nov član u Glavi IV</span><span class="kako">nov</span></div>
+      <div class="tekst">
+        <p>Škola se bira isključivo sa spiska; slobodan unos nije moguć. Navedena škola prikazuje se na profilu maloletnog korisnika.</p>
+        <p>Platforma objavljuje zbirni pregled po školama — broj maloletnih korisnika čiji je bar jedan roditelj redovan član i njihov udeo u broju upisanih učenika. Pregled ne sadrži lične podatke.</p>
+        <p>Navedena škola menja se najviše jednom u trideset dana. Podatak o školi briše se prelaskom u punoletni nalog i prestankom statusa korisnika.</p>
+      </div>
+      <p class="obrazlozenje">Član namerno ne pominje nikakvu korist — ni POEN, ni pravo, ni prvenstvo. Čim bi je pomenuo, ranglista bi postala kanal i tražila izmenu Pravilnika o KOLO sistemu, čl. 15.</p>
+    </div>
+
+    <ul>
+      <li><strong>Politika privatnosti, 4.7</strong> — škola ulazi u kategorije podataka maloletnog korisnika, uz svrhu (zbirni pregled) i pravni osnov koji je isti kao za ostatak modula.</li>
+      <li><strong>Registar radnji obrade, radnja br. 11</strong> — dopuna kategorije podataka i mera zaštite. <strong>Nije nova radnja</strong> — Modul Deca je već upisan, škola je nov podatak u okviru iste obrade.</li>
+      <li><strong>DPIA, mere 5.11 i rizik R16</strong> — R16 već pokriva izloženost maloletnog korisnika; dopunjuje se rečenicom o javnoj vidljivosti škole na profilu, jer to jeste proširenje izloženosti u odnosu na stanje pri usvajanju 4.3.0.</li>
+    </ul>
+
+    <div class="note warn">
+      <span class="lbl">Cena koju treba znati pre nego što se krene</span>
+      <p>Ovo je <strong>sadržinska</strong> izmena teksta posle objave, pa po pravilu iz <code>CLAUDE.md</code> ceo set ide na <strong>4.3.2</strong> — šesnaest akata puta pet jezika, uz repoint loadera i verzijskih labela. Nema prečice: fajl sa imenom 4.3.1 ne sme da govori nešto drugo nego kad je 4.3.1 objavljena.</p>
+      <p>Nove <code>PolitikaVerzija</code> nema — <code>PRISTANAK_NA_AKTE_TRAZI_SE</code> je <code>false</code> i sistem još nije zvanično u radu.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10 ============ -->
+  <section>
+    <h2><span class="num">10</span> Šta se namerno NE radi</h2>
+    <ul>
+      <li><span class="chip rizik">ne</span> <strong>Nijedan POEN.</strong> Bio bi to deseti kanal iz čl. 15, sa dnevnim limitom i celim aparatom — a emisija vezana za broj naloga je farm po definiciji i gura opticaj ka osnivačkom koraku na 100.000.</li>
+      <li><span class="chip rizik">ne</span> <strong>Škola kao Krug.</strong> Razrađuje se kasnije; <code>KRUG_AKTIVAN</code> je i dalje <code>false</code>.</li>
+      <li><span class="chip rizik">ne</span> <strong>Prag prikaza i skrivanje malih škola.</strong> Umesto praga — razlomak uz procenat.</li>
+      <li><span class="chip rizik">ne</span> <strong>Broj porodica u javnom prikazu.</strong></li>
+      <li><span class="chip rizik">ne</span> <strong>Opštinske i okružne liste.</strong></li>
+      <li><span class="chip rizik">ne</span> <strong>Veza sa programom Školovanje.</strong> Izbor škole je samodeklaracija; program traži dokaz statusa (upisan razred) i potvrdu iz lanca. Da se spoje, ranglista bi istog dana postala kapija ka POEN-u.</li>
+      <li><span class="chip rizik">ne</span> <strong>Istorija promene škola.</strong></li>
+    </ul>
+  </section>
+
+  <!-- ============ 11 ============ -->
+  <section>
+    <h2><span class="num">11</span> Redosled poslova</h2>
+    <div class="koraci">
+      <div class="korak"><div><span class="kt">Obezbediti spisak škola sa brojem upisanih učenika</span><span class="kd">Blokira sve ostalo. Dok ovoga nema, procentualna lista ne postoji.</span></div></div>
+      <div class="korak"><div><span class="kt">Šifarnik <code>skole-srbije.ts</code> + test</span><span class="kd">Test proverava jedinstvenost šifri i da svako <code>mesto</code> prolazi <code>razresiNaselje()</code>.</span></div></div>
+      <div class="korak"><div><span class="kt">Migracija i model</span><span class="kd">Dve kolone i indeks na <code>User</code>. Bez backfilla.</span></div></div>
+      <div class="korak"><div><span class="kt">Izbor škole na profilu deteta + ruta</span><span class="kd">Uz proveru roka od 30 dana i poruku sa datumom.</span></div></div>
+      <div class="korak"><div><span class="kt">Upit rang-liste + <code>/skole</code> + <code>/skole/[sifra]</code></span><span class="kd">Uslov „aktivno dete” u jednoj izvezenoj konstanti, deljenoj sa pravilima.</span></div></div>
+      <div class="korak"><div><span class="kt">Kartica na dečjoj početnoj</span><span class="kd">Mesto na listi i koliko fali do sledećeg mesta.</span></div></div>
+      <div class="korak"><div><span class="kt">Brisanje škole u <code>punoletstvo.ts</code> i pri gašenju naloga</span><span class="kd">Dva reda koja se najlakše zaborave.</span></div></div>
+      <div class="korak"><div><span class="kt">Prevodi na svih pet jezika</span><span class="kd">Uključujući hr i hu, koji su ranije tiho dobijali srpski tekst.</span></div></div>
+      <div class="korak"><div><span class="kt">Izmene akata i podizanje seta na 4.3.2</span><span class="kd">Može paralelno sa kodom, ali mora pre paljenja.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ 12 ============ -->
+  <section>
+    <h2><span class="num">12</span> Otvorena pitanja</h2>
+    <ol>
+      <li><strong>Osnovne i srednje — jedna lista ili dve?</strong> Preporuka: <strong>dve</strong>. Uzrast je različit, dete se seli iz jedne u drugu, a u jednoj listi bi svaka gimnazija sa 900 đaka pregazila seosku osnovnu školu i po broju i po procentu.</li>
+      <li><strong>Prepis POEN-a odraslog detetu sa spiska škole</strong> — ostaje li roditeljski prekidač (čl. 12)? Preporuka: <strong>ostaje</strong>. Ukidanje traži izmenu usvojenog člana i skida jedinu zaštitu koju dete ima od nepoznatog odraslog.</li>
+      <li><strong>Broj različitih roditelja</strong> — u javnom prikazu ne ide (odlučeno). Da li da stoji u <strong>admin prikazu</strong>? Preporuka: <strong>da</strong>. Ne kažnjava nikoga, ali čini vidljivim ako jedan nalog otvori desetoro dece iste škole.</li>
+      <li><strong>Kada se set akata diže na 4.3.2</strong> — sa ovim paketom ili sa sledećim skupom izmena?</li>
+    </ol>
+  </section>
+
+</div>
