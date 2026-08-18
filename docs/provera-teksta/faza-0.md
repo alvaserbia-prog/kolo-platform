@@ -56,12 +56,14 @@ Pun spisak je u paketima A–G; ovde su samo ona koja ovaj tekst dodiruje.
 
 ## Na šta bih ti skrenuo pažnju
 
-**Jedna neusklađenost koju sam našao dok sam pisao ovaj dokument.** Slika za
-deljenje linka nosi rečenicu *„Sistem uzajamnosti zasnovan na doprinosu
-**zajednici**“*, a naslov sajta si u paketu A promenio na *„…doprinosu
-**zajedničkom dobru**“*. Dva mesta govore isto, a različitim rečima — i to su
-baš dva mesta koja čovek vidi jedno pored drugog kad se link podeli na mreži.
-Nisam ih ujednačio sam, jer je izbor tvoj: predlažem da slika prati naslov.
+**Primljeno u ovom krugu:** slika za deljenje linka sada nosi istu definiciju
+kao naslov sajta (i u vidljivom tekstu i u `alt`-u), 404 stranica je preformulisana
+bezlično na svih šest jezika, hrvatski pravopis je ispravljen, a hrvatski je
+prestao da prevodi ime Fondacije u „Zaklada“ (21 poruka).
+
+🟡 **Otvoreno, čeka tvoj tekst:** `ekran.PAD_SISTEMA.*.telo` na svih šest jezika
+i dalje kaže da je „implementacija u toku“, a taj ekran se pali i kad baza
+otkaže. Odgovor je DA — vidi obrazloženje u poruci uz ovaj dokument.
 
 **Tri stvari koje ovde NEĆEŠ naći, jer su rešene brisanjem, ne prepravkom:**
 
@@ -327,7 +329,7 @@ Pali se ručno, kad se radi na sistemu. Nema dugmeta „Pokušaj ponovo“ jer n
 - `ekran.ODRZAVANJE.hr.naslov` — naslov  
   „Radovi na sustavu su u tijeku“
 - `ekran.ODRZAVANJE.hr.telo` — glavna rečenica  
-  „Trenutno radimo na implementaciji i unapređenju KOLO sustava, pa platforma nakratko nije dostupna.“
+  „Trenutno radimo na implementaciji i poboljšanju KOLO sustava, pa platforma nakratko nije dostupna.“
 - `ekran.ODRZAVANJE.hr.dopuna` — druga rečenica  
   „Pogledaj ponovno malo kasnije. Tvoji zapisi su sigurni.“
 - `ekran.ODRZAVANJE.hr.dugme` — dugme (prazno = nema ga)  
@@ -363,7 +365,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.sr.naslov` — naslov  
   „Ova stranica nije pronađena“
 - `ekran.NEMA_STRANICE.sr.telo` — glavna rečenica  
-  „Adresa koju si otvorio ne postoji ili je u međuvremenu promenjena.“
+  „Ova adresa ne postoji ili je u međuvremenu promenjena.“
 - `ekran.NEMA_STRANICE.sr.dopuna` — druga rečenica  
   „Sistem radi normalno — vrati se na početnu i nastavi odatle.“
 - `ekran.NEMA_STRANICE.sr.dugme` — dugme (prazno = nema ga)  
@@ -378,7 +380,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.sr-Cyrl.naslov` — naslov  
   „Ова страница није пронађена“
 - `ekran.NEMA_STRANICE.sr-Cyrl.telo` — glavna rečenica  
-  „Адреса коју си отворио не постоји или је у међувремену промењена.“
+  „Ова адреса не постоји или је у међувремену промењена.“
 - `ekran.NEMA_STRANICE.sr-Cyrl.dopuna` — druga rečenica  
   „Систем ради нормално — врати се на почетну и настави одатле.“
 - `ekran.NEMA_STRANICE.sr-Cyrl.dugme` — dugme (prazno = nema ga)  
@@ -393,7 +395,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.en.naslov` — naslov  
   „This page could not be found“
 - `ekran.NEMA_STRANICE.en.telo` — glavna rečenica  
-  „The address you opened does not exist or has changed in the meantime.“
+  „This address does not exist or has changed in the meantime.“
 - `ekran.NEMA_STRANICE.en.dopuna` — druga rečenica  
   „The system is running normally — go back to the home page and continue from there.“
 - `ekran.NEMA_STRANICE.en.dugme` — dugme (prazno = nema ga)  
@@ -408,7 +410,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.ru.naslov` — naslov  
   „Эта страница не найдена“
 - `ekran.NEMA_STRANICE.ru.telo` — glavna rečenica  
-  „Открытый вами адрес не существует или был изменён.“
+  „Этот адрес не существует или был изменён.“
 - `ekran.NEMA_STRANICE.ru.dopuna` — druga rečenica  
   „Система работает нормально — вернись на главную и продолжи оттуда.“
 - `ekran.NEMA_STRANICE.ru.dugme` — dugme (prazno = nema ga)  
@@ -423,7 +425,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.hr.naslov` — naslov  
   „Ova stranica nije pronađena“
 - `ekran.NEMA_STRANICE.hr.telo` — glavna rečenica  
-  „Adresa koju si otvorio ne postoji ili je u međuvremenu promijenjena.“
+  „Ova adresa ne postoji ili je u međuvremenu promijenjena.“
 - `ekran.NEMA_STRANICE.hr.dopuna` — druga rečenica  
   „Sustav radi normalno — vrati se na početnu i nastavi odatle.“
 - `ekran.NEMA_STRANICE.hr.dugme` — dugme (prazno = nema ga)  
@@ -438,7 +440,7 @@ Pogrešna adresa NIJE kvar, pa poruka mora da bude drugačija od pada sistema. C
 - `ekran.NEMA_STRANICE.hu.naslov` — naslov  
   „Ez az oldal nem található“
 - `ekran.NEMA_STRANICE.hu.telo` — glavna rečenica  
-  „A megnyitott cím nem létezik, vagy időközben megváltozott.“
+  „Ez a cím nem létezik, vagy időközben megváltozott.“
 - `ekran.NEMA_STRANICE.hu.dopuna` — druga rečenica  
   „A rendszer rendben működik — térj vissza a főoldalra, és onnan folytasd.“
 - `ekran.NEMA_STRANICE.hu.dugme` — dugme (prazno = nema ga)  
@@ -455,14 +457,13 @@ Ono što se vidi kad se `ekolo.rs` podeli na mrežama ili u poruci. Jedna slika 
 sve jezike — tekst na njoj je srpski i prevod nije moguć bez izmene u kodu.
 
 - `og.alt` — opis slike za čitače ekrana i za pretragu  
-  „KOLO — mreža za razmenu rada, dobara i znanja“
+  „KOLO — sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru“
 - `og.oznaka` — sitan natpis iznad imena  
   „ZAJEDNIČKO DOBRO“
 - `og.naziv` — veliko ime u sredini  
   „KOLO“
 - `og.tagline` — rečenica ispod imena  
-  „Sistem uzajamnosti zasnovan na doprinosu zajednici“  
-  ↳ 🔴 **ovde je neusklađenost** — naslov sajta od paketa A glasi „…doprinosu **zajedničkom dobru**“
+  „Sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru“
 - `og.domen` — donji levi ugao  
   „ekolo.rs“
 - `og.besplatno` — donji desni ugao  

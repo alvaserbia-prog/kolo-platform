@@ -117,7 +117,7 @@ export const ODRZAVANJE: Skup = {
   hr: {
     oznaka: "Radovi u tijeku",
     naslov: "Radovi na sustavu su u tijeku",
-    telo: "Trenutno radimo na implementaciji i unapređenju KOLO sustava, pa platforma nakratko nije dostupna.",
+    telo: "Trenutno radimo na implementaciji i poboljšanju KOLO sustava, pa platforma nakratko nije dostupna.",
     dopuna: "Pogledaj ponovno malo kasnije. Tvoji zapisi su sigurni.",
     dugme: "",
     pocetna: "Na početnu",
@@ -137,7 +137,7 @@ export const NEMA_STRANICE: Skup = {
   sr: {
     oznaka: "Stranica ne postoji",
     naslov: "Ova stranica nije pronađena",
-    telo: "Adresa koju si otvorio ne postoji ili je u međuvremenu promenjena.",
+    telo: "Ova adresa ne postoji ili je u međuvremenu promenjena.",
     dopuna: "Sistem radi normalno — vrati se na početnu i nastavi odatle.",
     dugme: "",
     pocetna: "Na početnu",
@@ -145,7 +145,7 @@ export const NEMA_STRANICE: Skup = {
   "sr-Cyrl": {
     oznaka: "Страница не постоји",
     naslov: "Ова страница није пронађена",
-    telo: "Адреса коју си отворио не постоји или је у међувремену промењена.",
+    telo: "Ова адреса не постоји или је у међувремену промењена.",
     dopuna: "Систем ради нормално — врати се на почетну и настави одатле.",
     dugme: "",
     pocetna: "На почетну",
@@ -153,7 +153,7 @@ export const NEMA_STRANICE: Skup = {
   en: {
     oznaka: "Page not found",
     naslov: "This page could not be found",
-    telo: "The address you opened does not exist or has changed in the meantime.",
+    telo: "This address does not exist or has changed in the meantime.",
     dopuna: "The system is running normally — go back to the home page and continue from there.",
     dugme: "",
     pocetna: "Home page",
@@ -161,7 +161,7 @@ export const NEMA_STRANICE: Skup = {
   ru: {
     oznaka: "Страница не найдена",
     naslov: "Эта страница не найдена",
-    telo: "Открытый вами адрес не существует или был изменён.",
+    telo: "Этот адрес не существует или был изменён.",
     dopuna: "Система работает нормально — вернись на главную и продолжи оттуда.",
     dugme: "",
     pocetna: "На главную",
@@ -169,7 +169,7 @@ export const NEMA_STRANICE: Skup = {
   hr: {
     oznaka: "Stranica ne postoji",
     naslov: "Ova stranica nije pronađena",
-    telo: "Adresa koju si otvorio ne postoji ili je u međuvremenu promijenjena.",
+    telo: "Ova adresa ne postoji ili je u međuvremenu promijenjena.",
     dopuna: "Sustav radi normalno — vrati se na početnu i nastavi odatle.",
     dugme: "",
     pocetna: "Na početnu",
@@ -177,7 +177,7 @@ export const NEMA_STRANICE: Skup = {
   hu: {
     oznaka: "Az oldal nem létezik",
     naslov: "Ez az oldal nem található",
-    telo: "A megnyitott cím nem létezik, vagy időközben megváltozott.",
+    telo: "Ez a cím nem létezik, vagy időközben megváltozott.",
     dopuna: "A rendszer rendben működik — térj vissza a főoldalra, és onnan folytasd.",
     dugme: "",
     pocetna: "A főoldalra",
