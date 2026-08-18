@@ -875,179 +875,142 @@ Until the Upper Kolo is activated (Phase 1), all decisions are made by the Found
   },
   {
     id: "tehnika",
-    naslov: "Technology and Open Source",
+    naslov: "Technology and open source",
     pitanja: [
       {
-        id: 69,
-        pitanje: `If I submit a PR (code contribution) — do I receive POEN? Is it an operational contribution? Do I have to be confirmed?`,
-        odgovor: `A code contribution falls under operational contribution — the same channel through which work for the common good is recorded.
-
-Code and content are the common good: the software is under AGPL-3.0, the content under CC BY-SA 4.0. Code contributions are accepted under the DCO principle (a "Signed-off-by" sign-off) — that is confirmation of the origin of the contribution, not a transfer of copyright to the Foundation (it is not a CLA). Your attribution for that contribution is permanent and remains even if you later delete your account.
-
-To have POEN recorded, you need to be a full member with a reality index of at least 10%.
-
-The mechanism works as follows: the task is published by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo after activation; you apply and complete it, and an authorised the person who confirmed you confirms completion before POEN is recorded.`,
-      },
-      {
-        id: 70,
-        pitanje: `Is there a public or developer API? Can I build integrations or bots?`,
-        odgovor: `There is currently no public developer API for building integrations or bots.
-
-What does exist is an export of your own data: at any time you can request all your data in a structured, machine-readable format (JSON) — that is your statutory right to data portability. But that is an export of your personal data, not an open programmatic interface over the entire system.
-
-It is also important to understand why: the system has graduated visibility — pseudonyms and individual transactions are visible only to full members, while unregistered visitors see only aggregate indicators. Any future API would have to respect those same rules, otherwise it would circumvent the privacy protection.`,
-      },
-      {
         id: 71,
-        pitanje: `What is the security model? Is it a blockchain? What prevents someone from minting POEN or rewriting history?`,
-        odgovor: `It is not a blockchain. KOLO uses a centralised ledger maintained by the Protocol on infrastructure held by the Foundation. Decentralisation here is not technical but governance-based — decision-making is progressively transferred from the founders to the community.
+        pitanje: `What is the security model? Is it a blockchain? What stops someone from minting POEN or rewriting history?`,
+        odgovor: `It is not a blockchain. KOLO uses a centralised ledger kept by the Protocol on infrastructure held by the Foundation. Decentralisation here is not technical but governance-based — decision-making is transferred over time from the founders to the community.
 
-Protection against "minting" POEN rests on the zero-sum rule: every POEN that exists is recorded as an equal negative in the Protocol's ledger. No one can credit POEN from nothing, because that would immediately disrupt the balance that the system constantly checks. Moreover, all Protocol operations are deterministic and algorithmic, without discretion — the Protocol cannot act outside the rules, so even an admin cannot manually add POEN to someone's account outside the defined channels.
+Protection against "minting" POEN rests on the zero-sum rule: every POEN that exists is entered as an equal minus in the Protocol's record. No one can record POEN out of nothing, because that would immediately break the balance the system keeps checking. On top of that, all the Protocol's operations are deterministic, without discretion — not even an administrator can "manually" add POEN to someone outside the defined channels.
 
-As for history, every record in the ledger is time-stamped and tied to the previous state, so earlier states cannot be silently overwritten without disrupting the entire chain. In addition, every access to data is logged in a tamper-proof format that cannot be altered retroactively, and regular consistency checks confirm that the ledger complies with the rules at all times.
+As for history, every entry is time-stamped and the history is not rewritten: corrections go in as a new entry in the opposite direction, never by deleting or altering an old one. Administrative actions are logged in an audit trail, and regular automatic checks confirm that the sum of all entries is zero at every moment — any deviation is immediately visible.
 
-On limits: this immutability is a design rule enforced by software architecture, not a cryptographic "trustless" guarantee like that provided by a public blockchain. In other words, integrity rests on correctly written code, access control and transparency, not on mathematics making fraud impossible without anyone's trust. That is why additional measures are in place — encryption of data in transit and at rest, regular backups to separate locations, and open code that anyone can independently review.`,
+On the limits: this immutability is a design rule secured by the software architecture, not a cryptographic "trustless" guarantee such as a public blockchain provides. Integrity rests on correctly written code, access control and transparency, not on mathematics making fraud impossible. That is why there are further measures — encryption of data in transit and at rest, regular backups to separate locations, and open code that anyone can review independently.`,
       },
       {
         id: 80,
         pitanje: `Where is the public code repository? Can I download it and run it myself (self-host)?`,
-        odgovor: `The platform's entire source code is publicly available on GitHub:
+        odgovor: `The platform's entire source code is publicly available on GitHub: https://github.com/alvaserbia-prog/kolo-platform
 
-https://github.com/alvaserbia-prog/kolo-platform
+You are free to review it, download it and run your own copy. The software is under the AGPL-3.0 licence, which expressly permits this — on one condition: if you run your copy as a public internet service, you must also make your own source code, with all your changes, available to your users under the same licence. That is how the code stays permanently open.
 
-You can freely browse it, download (clone) it and run your own copy. The software is under the AGPL-3.0 licence, which explicitly allows this — with one condition: if you run your copy as a public internet service, you must also make your source code, including all modifications, available to your users under the same licence. This keeps the code permanently open.
+To run it you need a Node.js environment and a PostgreSQL database; the basic instructions (installation, running, environment variables) are in the README and .env.example files in the repository itself. Contributions to the code are accepted with a DCO sign-off on the origin of the contribution, described in the CONTRIBUTING file.
 
-To run it you need a Node.js environment and a PostgreSQL database. Basic instructions (installation, running, required environment variables) are in the README and .env.example files in the repository itself. Code contributions are accepted with a Developer Certificate of Origin (DCO) sign-off — described in the CONTRIBUTING file.
+The documentation and the system's texts are licensed under CC BY-SA 4.0 — free to use and adapt with attribution and under the same licence.`,
+      },
+      {
+        id: 69,
+        pitanje: `If I send a PR (a contribution in code) — do I get POEN? Is that an operational contribution? Does someone have to confirm me?`,
+        odgovor: `A contribution in code falls under the operational contribution — the same channel through which all work for the common good is recorded.
 
-Documentation and system texts are licensed under CC BY-SA 4.0 — free to use and adapt with attribution and the same licence.`,
+The code and the content are a common good: the software is under the AGPL-3.0 licence, the content under CC BY-SA 4.0. A contribution in code is accepted on the DCO principle (the "Signed-off-by" line) — that is a certificate of the contribution's origin, not a transfer of copyright to the Foundation. Your attribution on the contribution is permanent and remains even if you later delete your account.
+
+For POEN to be recorded for you, you need to be a full member, and the contribution goes through a published task: in the initial phase the Foundation posts the tasks and confirms performance, and once community governance is activated the Upper Kolo and ZRNO holders post tasks as well, with ZRNO holders confirming performance. You apply, you carry out the task, the performance is confirmed — and then POEN is recorded.`,
+      },
+      {
+        id: 70,
+        pitanje: `Is there a public or developer API? Can I build integrations or bots?`,
+        odgovor: `At present there is no public developer API for building integrations or bots.
+
+What does exist is the export of your own data: at any moment you can request all of your data in a structured, machine-readable format (JSON) — that is your legal right to portability. But that is an export of your personal data, not a programming interface over the whole system.
+
+The reason matters too: the system has graduated visibility — pseudonyms and individual transactions are seen only by full members, while those who are not registered see only aggregate figures. Any future API would have to respect the same rule, otherwise it would bypass the protection of privacy.`,
       },
     ],
   },
   {
     id: "sporovi",
-    naslov: "Disputes and Rule Violations",
+    naslov: "Disputes and breaches of the rules",
     pitanja: [
       {
         id: 31,
         pitanje: `How are disputes between members resolved?`,
-        odgovor: `A dispute between members over an exchange is resolved under the general rules of contract law, before a competent court — the Foundation is not a party to that relationship.
+        odgovor: `A dispute between members over an exchange is resolved under the general rules of the law of obligations, before the competent court — the Foundation is not a party to that relationship.
 
-In the initial phase you may request voluntary (non-binding) mediation by the Foundation. If the dispute is between a member and the Foundation itself, an amicable resolution is first sought; otherwise the competent court is in Sombor.
+In the initial phase you can ask for voluntary, non-binding mediation by the Foundation. If the dispute is between you and the Foundation itself, an amicable settlement is sought first; failing that, the court in Sombor has jurisdiction.
 
-For the protection of personal data you have the right to lodge a complaint with the Commissioner for Information of Public Importance and Personal Data Protection.
+For the protection of personal data you have the right to complain to the Commissioner for Information of Public Importance and Personal Data Protection.
 
-Specific internal dispute resolution mechanisms may be established later (through a dedicated set of rules or a decision of the Upper Kolo); they do not currently exist.`,
+Special internal dispute-resolution mechanisms may be established later, by a separate set of rules or by a decision of the Upper Kolo; for now there are none.`,
       },
       {
         id: 32,
-        pitanje: `What happens when someone does not comply with the rules?`,
-        odgovor: `The system has a permanent memory — every record update is permanently recorded under a pseudonym and visible to full members, so bad behaviour remains visible to those participating in the system.
+        pitanje: `What happens when someone does not abide by the rules?`,
+        odgovor: `The system has a permanent memory — every update of the record is permanently logged under a pseudonym and visible to full members, so bad conduct remains visible to those taking part in the system.
 
-The Foundation may temporarily suspend an account (for up to 30 days, with the user's right to be informed of the reasons and to respond) or exclude a user for a more serious breach of the rules.
+The Foundation may temporarily suspend an account — for at most 30 days, with the member's right to be informed of the reasons and to be heard — or, for a more serious breach of the rules, exclude the member.
 
-An excluded user loses access, POEN and ZRNO are returned to the Protocol, and the pseudonym is anonymised.`,
+An excluded member loses access, POEN and ZRNO are written off to the Protocol, and the pseudonym is anonymised.`,
       },
       {
         id: 33,
-        pitanje: `Can I file a complaint against a Foundation decision?`,
-        odgovor: `Yes. Any full member may submit a formal complaint through the platform — regarding confirmation, suspension, a programme decision, or any other decision.
+        pitanje: `Can I appeal against a decision of the Foundation?`,
+        odgovor: `Yes. Every full member can lodge a formal appeal through the platform — against a confirmation, a suspension, a decision on a programme or any other decision.
 
-The Foundation must resolve the complaint within 30 days, with reasons given.
+The Foundation must decide the appeal within 30 days, with reasons.
 
-You may have a maximum of 3 open complaints at any one time.`,
+You can have at most three open appeals at the same time.`,
       },
     ],
   },
   {
     id: "privatnost-izlazak",
-    naslov: "Privacy and Leaving the System",
+    naslov: "Privacy and leaving",
     pitanja: [
       {
         id: 34,
-        pitanje: `Who can see my pseudonym and transactions?`,
-        odgovor: `Visibility depends on your status in the system (access is graded):
+        pitanje: `Who can see my pseudonym and my transactions?`,
+        odgovor: `Visibility depends on your status in the system — access is graduated.
 
-An unregistered visitor sees only general system indicators (aggregates) — number of members, number of ledger updates, POEN in circulation. They do not see individual transactions or pseudonyms.
+A visitor who is not registered sees only the system's aggregate figures: the number of members, the number of record updates, POEN in circulation. They see neither individual transactions nor pseudonyms.
 
-A registered but unfull member sees amounts and timestamps of ledger updates, but without the pseudonyms of the parties and without account balances.
+A new member sees the amounts and the timestamps of record updates, but without the pseudonyms of the parties and without balances.
 
-A full member (reality index ≥ 10%) sees the pseudonyms of all users, all transactions with the parties' pseudonyms, account balances and profiles.
+A full member (a reality index of at least 10%) sees the pseudonyms of all members, all transactions with the parties' pseudonyms, balances and profiles.
 
-Your real name and phone number are voluntary and are not a condition for using the system. The Foundation does not maintain a record linking your pseudonym to your identity — you choose whether and to whom (full members only) you reveal your name and phone number, and you can withdraw that disclosure.
+Your real name and phone number are voluntary and are not a condition of use. The Foundation keeps no register linking your pseudonym to your identity — you choose yourself whether and to whom (full members only) to disclose them, and you can withdraw the disclosure.
 
-The marketplace is an exception: your listings (description, price, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your transaction history are visible only to full members.`,
+The Marketplace is the exception: your listings (description, amount in POEN, location and pseudonym) are publicly visible to everyone, but your contact details and the link to your history are seen only by full members.`,
+      },
+      {
+        id: 55,
+        pitanje: `Can I use the system without a name and a phone number? What do I lose?`,
+        odgovor: `Yes, you can. At registration only a pseudonym (a name you choose yourself), an email and a password are required — nothing more.
+
+Your real name and phone number are entirely voluntary. They are not a condition for being confirmed through the chain of confirmations, nor a condition for access to any function of the system. The Foundation keeps no register linking your pseudonym to your identity.
+
+What do you lose by not giving them? In practice only easier contact: on the Marketplace others find it harder to reach you without them and harder to arrange an exchange in person.
+
+If you do decide to enter them, you choose yourself whether they will be visible to full members — and you can withdraw that disclosure at any moment, after which the data is no longer shown.
+
+Your email address is never publicly visible.`,
+      },
+      {
+        id: 56,
+        pitanje: `Could someone de-anonymise me by combining amounts, timing and the frequency of transactions?`,
+        odgovor: `Yes. Pseudonymity is not the same as anonymity.
+
+Your transactions are kept under a pseudonym, not under your name. But the combination of amounts, timing and the frequency of record updates can in some cases point indirectly to who you are — especially in a small community where people know one another. By registering you accept that the public nature of the pseudonymous record is built into the system and cannot be switched off.
+
+Several things do protect you, though.
+
+The Foundation keeps no table linking a pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose yourself whether and to whom (full members only) to disclose them, and you can withdraw the disclosure at any moment.
+
+Visibility is graduated: those who are not registered see only aggregate figures, while individual transactions with pseudonyms are seen only by full members. Email addresses, technical logs and the network of confirmations are never public.
+
+It is also up to you to choose a pseudonym that does not contain personal data that would give you away.`,
       },
       {
         id: 35,
         pitanje: `How is my privacy protected?`,
-        odgovor: `Data minimisation is one of the four principles of the system — the platform collects only the data necessary for the system to function.
+        odgovor: `Data minimisation is one of the system's four unchangeable principles — the platform collects only what is necessary for it to work.
 
-Confirmation is carried out in the chain of confirmations: other full members confirm your reality based on personal acquaintance, without collecting or submitting personal documents. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal data.
+Confirmation is carried out in the chain of confirmations: full members confirm your reality on the basis of personal acquaintance, without collecting or submitting personal documents. In doing so the platform only records technically that a confirmation was given — it collects no personal data about the person being confirmed.
 
-All admin actions involving any personal data are recorded in a permanent log. The Foundation does not share data with third parties except pursuant to an order from a competent authority.
+Administrative actions are logged in an audit trail that is not rewritten. The Foundation does not sell data and does not share it with third parties for their own purposes: it is processed only by infrastructure providers on the Foundation's behalf (described in the Privacy Policy), and it is disclosed to the competent authorities only where the law so requires.
 
-At any time you can request an export of all your data in JSON format, or anonymise it by deleting your account.`,
-      },
-      {
-        id: 36,
-        pitanje: `How do I leave the system?`,
-        odgovor: `Account deletion is available at any time from the profile settings.
-
-Before deactivation you may initiate a ledger update of POEN in favour of another user. All ZRNO is written off to the Protocol upon cessation of status — that write-off does not trigger a POEN credit. Any remaining POEN is also cancelled and returned to the Protocol.
-
-Your personal data is anonymised (the pseudonym becomes a neutral UserID), but the numerical transaction history remains to maintain the mathematical correctness of the system.
-
-Contributions under the common-good licences (code, content you have licensed for open use) have permanent attribution.`,
-      },
-      {
-        id: 37,
-        pitanje: `What happens to POEN in the event of death — can it be inherited?`,
-        odgovor: `No. POEN and ZRNO are not inheritable property and are not a claim against the Foundation.
-
-Upon a user's death, the account is deactivated, POEN and ZRNO are returned to the Protocol. Heirs, family members and third parties have no proprietary right to them.
-
-This is a fundamental difference between POEN and financial assets, and one of the reasons why POEN is not "money" in a legal sense.`,
-      },
-      {
-        id: 55,
-        pitanje: `Can I use the system without providing my name and phone number? What do I miss out on?`,
-        odgovor: `Yes, you can. At registration only a pseudonym (a username of your own choosing), an email address and a password are required — nothing more.
-
-Your real name and phone number are entirely voluntary. They are not a condition for being confirmed through the chain of confirmations, nor a condition for accessing any feature of the system. The Foundation does not maintain a record linking your pseudonym to your identity.
-
-What do you miss out on if you don't provide them? Practically only easier contact with other people. On the marketplace, for example, others find it harder to contact you and arrange an in-person exchange without that information.
-
-If you do decide to add them, you choose whether your name and phone number will be visible to full members — and you can withdraw that disclosure at any time, after which the data is no longer shown to others.
-
-Your email address is never publicly visible, regardless of anything else.`,
-      },
-      {
-        id: 56,
-        pitanje: `Could someone de-anonymise me by combining amounts, timing and frequency of transactions?`,
-        odgovor: `Yes. Pseudonymity is not the same as anonymity.
-
-Your transactions in the ledger are held under a pseudonym, not your real name. But the combination of amounts, timing and frequency of ledger updates may in some cases indirectly indicate who you are — especially in a small community where people know each other. By registering you accept that the public nature of the pseudonymous ledger is built into the system and cannot be switched off.
-
-Several things do protect you, however:
-
-The Foundation does not maintain a table linking your pseudonym to your identity — we simply do not hold that link. Your real name and phone number are voluntary; you choose whether and to whom (full members only) to reveal them, and you can withdraw that disclosure at any time.
-
-Visibility is graded: unregistered visitors see only aggregates, and individual transactions with pseudonyms are visible only to full members. Email, technical logs and the confirmation network are never public.
-
-You are also responsible for ensuring that your pseudonym does not contain personal data that would give you away.
-
-This is a known limitation of pseudonymous systems. We separate identifying from accounting data and do not hold a central link, but additional technical measures specifically against linkage attacks have not yet been specially developed — if you use the system in a small community, keep this in mind.`,
-      },
-      {
-        id: 73,
-        pitanje: `Can I get confirmed remotely, from abroad?`,
-        odgovor: `Yes. Confirmation (proof of reality) is based on direct personal acquaintance — a full member who personally knows you confirms your reality and answers for that confirmation. The Rules do not require physical presence at the moment of confirmation, so it can take place remotely, as long as the person who confirmed you genuinely knows you well enough to confirm your reality.
-
-The system's protection does not rest on you being in the same room, but on personal acquaintance, on the person who confirmed you's responsibility (a false confirmation results in the reversal of confirmations and sanctions) and on the structure of the network — to reach a full reality index you must be known to people from several independent parts of the network.
-
-You are therefore not excluded if you are abroad: you can register, choose a pseudonym and follow the system, and full access to features is unlocked as soon as someone who knows you confirms you — in person or remotely.
-
-Citizenship is not a requirement — what matters is that you are a real person.`,
+At any moment you can request an export of all your data in JSON format, or have it anonymised by deleting your account.`,
       },
       {
         id: 78,
@@ -1059,6 +1022,37 @@ Such a transfer is permitted and regulated under personal data protection law. T
 Regardless of where the servers are physically located, the same technical measures apply: encryption of data in transit and at rest, separation of identifying from accounting data, and access on a need-to-know basis.
 
 Your rights — access, rectification, erasure, portability and complaint to the Commissioner — remain the same regardless of server location.`,
+      },
+      {
+        id: 73,
+        pitanje: `Can I be confirmed remotely, from abroad?`,
+        odgovor: `Yes. Confirmation of reality rests on direct personal acquaintance — a full member who knows you personally confirms your reality and is answerable for the truth of that assertion. The Rulebook does not require physical presence at the moment of confirmation, so it can also be done remotely, as long as the person confirming really does know you well enough.
+
+The system's protection does not rest on your being in the same room, but on personal acquaintance, on the responsibility of the person confirming (a false confirmation entails the annulment of confirmations and sanctions) and on the structure of the network — a full reality index requires that people from several independent parts of the network know you.
+
+So you are not excluded if you are abroad: you can register, choose a pseudonym and follow the system, and full access to the functions unlocks as soon as someone who knows you confirms you — in person or remotely.
+
+Citizenship is not a condition — what matters is that you are a real person.`,
+      },
+      {
+        id: 36,
+        pitanje: `How do I leave the system?`,
+        odgovor: `Deleting your account is available at any moment from your profile settings.
+
+Before deleting, you can initiate an update of the POEN record in favour of another member. On the cessation of status all ZRNO is written off to the Protocol — that write-off triggers no recording of POEN — and any POEN left over is annulled and returned to the Protocol.
+
+Your personal data is anonymised and your pseudonym is replaced by a neutral marker; the numerical history of transactions remains, for the mathematical soundness of the system.
+
+Contributions published under open licences (code, content) keep their permanent attribution.`,
+      },
+      {
+        id: 37,
+        pitanje: `What happens to POEN in the event of death — can it be inherited?`,
+        odgovor: `No. POEN and ZRNO are neither inheritable property nor a claim against the Foundation.
+
+On the death of a member the account is deactivated, and POEN and ZRNO are written off to the Protocol. Heirs, family and third parties have no property right over them.
+
+This is the essential difference between POEN and financial assets — and one of the reasons why POEN is not money in the legal sense.`,
       },
     ],
   },

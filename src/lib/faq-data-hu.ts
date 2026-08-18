@@ -889,176 +889,139 @@ A Felső Kolo aktiválásáig (1. fázis) minden döntést az Alapítvány hoz a
     naslov: "Technika és nyílt forráskód",
     pitanja: [
       {
+        id: 71,
+        pitanje: `Milyen a biztonsági modell? Blokklánc ez? Mi akadályozza meg, hogy valaki POEN-t „verjen" vagy átírja az előzményeket?`,
+        odgovor: `Nem blokklánc. A KOLO központosított nyilvántartást használ, amelyet a Protokoll vezet az Alapítvány kezében lévő infrastruktúrán. A decentralizáció itt nem technikai, hanem irányítási: a döntéshozatal idővel az alapítóktól a közösséghez kerül át.
+
+A POEN „verése" elleni védelem a nulla összegű szabályon nyugszik: minden létező POEN ugyanakkora mínuszként van bejegyezve a Protokoll nyilvántartásában. Senki nem rögzíthet POEN-t a semmiből, mert az azonnal megbontaná azt az egyensúlyt, amelyet a rendszer folyamatosan ellenőriz. Ráadásul a Protokoll minden művelete determinisztikus, mérlegelés nélküli — még az adminisztrátor sem adhat valakinek „kézzel" POEN-t a meghatározott csatornákon kívül.
+
+Ami az előzményeket illeti, minden bejegyzés időbélyeget kap, és az előzményeket nem írjuk át: a helyesbítések új, ellentétes irányú bejegyzésként kerülnek be, sosem a régi törlésével vagy módosításával. Az adminisztrátori műveleteket ellenőrzési napló rögzíti, a rendszeres automatikus ellenőrzések pedig igazolják, hogy az összes bejegyzés összege minden pillanatban nulla — bármilyen eltérés azonnal látszik.
+
+A korlátokról: ez a megváltoztathatatlanság tervezési szabály, amelyet a szoftverarchitektúra biztosít, nem pedig olyan kriptográfiai „trustless" garancia, amilyet a nyilvános blokklánc ad. Az integritás a helyesen megírt kódon, a hozzáférés-ellenőrzésen és az átláthatóságon nyugszik, nem azon, hogy a matematika lehetetlenné teszi a csalást. Ezért vannak további intézkedések is — az adatok titkosítása átvitel közben és nyugalmi állapotban, rendszeres, külön helyre készülő biztonsági mentések, és nyílt kód, amelyet bárki függetlenül átnézhet.`,
+      },
+      {
+        id: 80,
+        pitanje: `Hol van a nyilvános kódtár? Letölthetem és futtathatom magam (self-host)?`,
+        odgovor: `A platform teljes forráskódja nyilvánosan elérhető a GitHubon: https://github.com/alvaserbia-prog/kolo-platform
+
+Szabadon átnézheted, letöltheted és futtathatod a saját másolatodat. A szoftver AGPL-3.0 licenc alatt áll, amely ezt kifejezetten megengedi — egyetlen feltétellel: ha a másolatodat nyilvános internetes szolgáltatásként üzemelteted, neked is elérhetővé kell tenned a saját forráskódodat, minden módosítással együtt, a felhasználóid számára, ugyanazon licenc alatt. Így marad a kód tartósan nyitott.
+
+A futtatáshoz Node.js környezet és PostgreSQL adatbázis szükséges; az alapvető útmutatás (telepítés, indítás, környezeti változók) a kódtár README és .env.example fájljaiban található. A kódhoz való hozzájárulásokat a hozzájárulás eredetéről szóló DCO-aláírással fogadjuk, amelyet a CONTRIBUTING fájl ír le.
+
+A dokumentáció és a rendszer szövegei CC BY-SA 4.0 licenc alatt állnak — szabadon használhatók és átdolgozhatók a szerzőség feltüntetésével és ugyanazon licenc alatt.`,
+      },
+      {
         id: 69,
-        pitanje: `Ha PR-t küldök (kóddal járulok hozzá) — kapok POEN-t? Ez működési hozzájárulás? Megerősítettnek kell lennem?`,
-        odgovor: `A kóddal való hozzájárulás a működési hozzájárulás körébe tartozik — ugyanaz a csatorna, amelyen keresztül a közjóért végzett munka rögzül.
+        pitanje: `Ha PR-t küldök (kódhozzájárulást) — kapok POEN-t? Működési hozzájárulás ez? Kell, hogy valaki megerősítsen?`,
+        odgovor: `A kódhozzájárulás a működési hozzájárulás körébe tartozik — ugyanabba a csatornába, amelyen keresztül a közös jóért végzett minden munka rögzül.
 
-A kód és a tartalom közjó: a szoftver AGPL-3.0, a tartalom CC BY-SA 4.0 licenc alatt áll. A kóddal való hozzájárulást a DCO elve szerint fogadjuk el („Signed-off-by" aláírás) — ez a hozzájárulás eredetének igazolása, nem a szerzői jogok átruházása az Alapítványra (nem CLA). Az e hozzájárulásra vonatkozó feltüntetésed állandó, és akkor is megmarad, ha később törlöd a fiókodat.
+A kód és a tartalom közös jó: a szoftver AGPL-3.0, a tartalom CC BY-SA 4.0 licenc alatt áll. A kódhozzájárulást a DCO elve szerint fogadjuk (a „Signed-off-by" aláírással) — ez a hozzájárulás eredetének igazolása, nem a szerzői jogok átruházása az Alapítványra. A hozzájáruláson szereplő névfeltüntetésed tartós, és akkor is megmarad, ha később törlöd a fiókodat.
 
-Ahhoz, hogy POEN kerüljön a nyilvántartásodba, rendes tagnak kell lenned, legalább 10%-os valóságindexszel.
-
-A mechanizmus a következő: a feladatot az Alapítvány hirdeti meg (a kezdeti szakaszban), illetve az aktiválás után a ZRNO-tartók és a Felső Kolo; te jelentkezel rá és elvégzed, a teljesítést pedig az arra jogosult megerősítő erősíti meg, mielőtt a POEN rögzülne.`,
+Ahhoz, hogy POEN rögzüljön neked, rendes tagnak kell lenned, a hozzájárulás pedig közzétett feladaton keresztül megy: a kezdeti szakaszban a feladatokat az Alapítvány teszi közzé és a teljesítést is az erősíti meg, a közösségi irányítás aktiválása után pedig a Felső Kolo és a ZRNO-tartók is tesznek közzé feladatot, a teljesítést pedig ZRNO-tartók erősítik meg. Te jelentkezel, elvégzed a feladatot, a teljesítést megerősítik — és ekkor rögzül a POEN.`,
       },
       {
         id: 70,
         pitanje: `Van nyilvános vagy fejlesztői API? Építhetek integrációkat vagy botokat?`,
         odgovor: `Jelenleg nincs nyilvános fejlesztői API integrációk vagy botok építéséhez.
 
-Ami létezik, az a saját adataid exportja: bármikor kérheted az összes adatodat strukturált, géppel olvasható formátumban (JSON) — ez a törvényes adathordozhatósági jogod. De ez a személyes adataid exportja, nem pedig nyílt programozói felület az egész rendszerhez.
+Ami van, az a saját adataid exportja: bármikor kérheted az összes adatodat strukturált, géppel olvasható formátumban (JSON) — ez a hordozhatósághoz való törvényes jogod. De ez a személyes adataid exportja, nem az egész rendszer feletti programozói felület.
 
-Fontos tudnod azt is, miért: a rendszerben fokozatos láthatóság működik — az álneveket és az egyes tranzakciókat csak a rendes tagok látják, a nem regisztráltak pedig csak az összesített mutatókat. Bármely jövőbeli API-nak ugyanezt a szabályt kellene tiszteletben tartania, különben megkerülné az adatvédelmet.`,
-      },
-      {
-        id: 71,
-        pitanje: `Milyen a biztonsági modell? Blokklánc ez? Mi akadályozza meg, hogy valaki POEN-t „verjen" vagy átírja az előzményeket?`,
-        odgovor: `Nem blokklánc. A KOLO központosított nyilvántartást használ, amelyet a Protokoll vezet az Alapítvány tulajdonában lévő infrastruktúrán. A decentralizáció itt nem technikai, hanem irányítási jellegű — a döntéshozatal idővel az alapítóktól a közösséghez kerül át.
-
-A POEN „verése" elleni védelem a nulla összegű szabályon nyugszik: minden létező POEN ugyanakkora mínuszként szerepel a Protokoll bejegyzésében. Senki sem írhat be POEN-t a semmiből, mert az azonnal felborítaná az egyensúlyt, amelyet a rendszer folyamatosan ellenőriz. Ezenfelül a Protokoll minden művelete determinisztikus és algoritmikus, mérlegelés nélkül — a Protokoll nem járhat el a szabályokon kívül, így az adminisztrátor sem adhat „kézzel" senkinek POEN-t a meghatározott csatornákon kívül.
-
-Ami az előzményeket illeti: a nyilvántartás minden bejegyzése időbélyeggel van ellátva és az előző állapothoz kötött, így a korábbi állapotok utólag nem írhatók át csendben az egész lánc megsértése nélkül. Emellett minden adathozzáférés olyan védett formátumban rögzül, amely visszamenőleg nem módosítható, a rendszeres konzisztenciaellenőrzések pedig igazolják, hogy a nyilvántartás minden pillanatban megfelel a szabályoknak.
-
-A korlátokról: ez a megváltoztathatatlanság tervezési szabály, amelyet a szoftverarchitektúra biztosít, nem pedig olyan kriptográfiai, „bizalommentes" garancia, amilyet a nyilvános blokklánc nyújt. Más szóval az integritás a helyesen megírt kódon, a hozzáférés-ellenőrzésen és az átláthatóságon nyugszik, nem azon, hogy a matematika bárki bizalma nélkül lehetetlenné teszi a csalást. Ezért vannak további intézkedések is — az adatok titkosítása átvitel közben és tárolt állapotban, rendszeres, külön helyszínekre készülő biztonsági mentések, és nyílt kód, amelyet bárki függetlenül átnézhet.`,
-      },
-      {
-        id: 80,
-        pitanje: `Hol van a nyilvános kódtár? Letölthetem és futtathatom magam (self-host)?`,
-        odgovor: `A platform teljes forráskódja nyilvánosan elérhető a GitHubon:
-
-https://github.com/alvaserbia-prog/kolo-platform
-
-Szabadon átnézheted, letöltheted (klónozhatod), és futtathatod a saját másolatodat. A szoftver AGPL-3.0 licenc alatt áll, amely ezt kifejezetten megengedi — egy feltétellel: ha a másolatodat nyilvános internetes szolgáltatásként futtatod, neked is elérhetővé kell tenned a saját forráskódodat, minden módosítással együtt, a felhasználóid számára, ugyanezen licenc alatt. Így a kód tartósan nyílt marad.
-
-A futtatáshoz Node.js környezetre és PostgreSQL adatbázisra van szükséged. Az alapvető útmutatók (telepítés, indítás, szükséges környezeti változók) magában a kódtárban, a README és a .env.example fájlban találhatók. A kódhoz való hozzájárulásokat a hozzájárulás eredetéről szóló nyilatkozat (DCO) aláírásával fogadjuk el, amelyet a CONTRIBUTING fájl ír le.
-
-A rendszer dokumentációja és szövegei CC BY-SA 4.0 licenc alatt állnak — szabadon felhasználhatók és átdolgozhatók a szerzőség feltüntetésével és ugyanazon licenc alatt.`,
+Az is számít, miért: a rendszernek fokozatos láthatósága van — az álneveket és az egyes tranzakciókat csak a rendes tagok látják, a nem regisztráltak pedig csak összesített számokat. Bármely jövőbeli API-nak ugyanezt a szabályt kellene tiszteletben tartania, különben megkerülné a magánélet védelmét.`,
       },
     ],
   },
   {
     id: "sporovi",
-    naslov: "Viták és a szabályok megsértése",
+    naslov: "Jogviták és a szabályok megsértése",
     pitanja: [
       {
         id: 31,
-        pitanje: `Hogyan rendeződnek a tagok közötti viták?`,
-        odgovor: `A tagok közötti, cserével kapcsolatos vita a kötelmi jog általános szabályai szerint, az illetékes bíróság előtt rendeződik — az Alapítvány nem részese ennek a viszonynak.
+        pitanje: `Hogyan rendezik a tagok közötti jogvitákat?`,
+        odgovor: `A tagok közötti, cserével kapcsolatos jogvitát a kötelmi jog általános szabályai szerint, az illetékes bíróság rendezi — az Alapítvány nem részese ennek a viszonynak.
 
-A kezdeti szakaszban kérheted az Alapítvány önkéntes (nem kötelező erejű) közvetítését. Ha a vita egy tag és maga az Alapítvány között áll fenn, először a megegyezéses rendezést kell keresni, egyébként a zombori bíróság illetékes.
+A kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését. Ha a jogvita közted és maga az Alapítvány között áll fenn, először egyezséget keresünk; ennek hiányában a zombori bíróság illetékes.
 
-A személyes adatok védelme ügyében jogod van panaszt tenni a közérdekű információkkal és a személyes adatok védelmével foglalkozó Biztosnál.
+A személyes adatok védelme ügyében jogod van panaszt tenni a közérdekű információkért és a személyes adatok védelméért felelős Biztosnál.
 
-Külön belső vitarendezési mechanizmusok később hozhatók létre (külön szabályzattal vagy a Felső Kolo döntésével); egyelőre nincsenek.`,
+Külön belső vitarendezési mechanizmusok később hozhatók létre, külön szabályzattal vagy a Felső Kolo döntésével; egyelőre nincsenek.`,
       },
       {
         id: 32,
         pitanje: `Mi történik, ha valaki nem tartja be a szabályokat?`,
-        odgovor: `A rendszernek tartós emlékezete van — minden nyilvántartás-frissítés véglegesen rögzül álnév alatt, és látható a rendes tagok számára, így a rossz magatartás látható marad azok előtt, akik részt vesznek a rendszerben.
+        odgovor: `A rendszernek tartós emlékezete van — a nyilvántartás minden frissítése álnév alatt tartósan rögzítve marad, és a rendes tagok látják, így a rossz magatartás látható marad azok számára, akik részt vesznek a rendszerben.
 
-Az Alapítvány ideiglenesen felfüggesztheti a fiókot (legfeljebb 30 napra, a felhasználó azon jogával, hogy tájékoztassák az okokról és nyilatkozhasson), vagy súlyosabb szabálysértés esetén kizárhatja a felhasználót.
+Az Alapítvány ideiglenesen felfüggesztheti a fiókot — legfeljebb 30 napra, a tag jogával együtt, hogy tájékoztassák az okokról és hogy nyilatkozhasson —, vagy a szabályok súlyosabb megsértése esetén kizárhatja a tagot.
 
-A kizárt felhasználó elveszíti a hozzáférését, a POEN és a ZRNO visszakerül a Protokollhoz, az álnév pedig anonimizálódik.`,
+A kizárt tag elveszíti a hozzáférést, a POEN és a ZRNO a Protokollnak íródik le, az álnevet pedig anonimizáljuk.`,
       },
       {
         id: 33,
-        pitanje: `Benyújthatok kifogást az Alapítvány döntése ellen?`,
-        odgovor: `Igen. Minden rendes tag benyújthat hivatalos kifogást a platformon keresztül — megerősítés, felfüggesztés, programdöntés vagy bármely más döntés ellen.
+        pitanje: `Élhetek kifogással az Alapítvány döntése ellen?`,
+        odgovor: `Igen. Minden rendes tag hivatalos kifogást nyújthat be a platformon keresztül — megerősítés, felfüggesztés, programról szóló döntés vagy bármely más döntés ellen.
 
 Az Alapítványnak 30 napon belül, indokolással kell elbírálnia a kifogást.
 
-Egyszerre legfeljebb 3 nyitott kifogásod lehet.`,
+Egyszerre legfeljebb három nyitott kifogásod lehet.`,
       },
     ],
   },
   {
     id: "privatnost-izlazak",
-    naslov: "Adatvédelem és kilépés",
+    naslov: "Magánélet és kilépés",
     pitanja: [
       {
         id: 34,
         pitanje: `Ki látja az álnevemet és a tranzakcióimat?`,
-        odgovor: `A láthatóság a rendszerbeli státuszodtól függ (a hozzáférés fokozatos):
+        odgovor: `A láthatóság a rendszerbeli státuszodtól függ — a hozzáférés fokozatos.
 
-A nem regisztrált látogató csak a rendszer általános mutatóit (összesített adatokat) látja — a tagok számát, a nyilvántartás-frissítések számát, a forgalomban lévő POEN-t. Egyedi tranzakciókat és álneveket nem lát.
+A nem regisztrált látogató csak a rendszer összesített számait látja: a tagok számát, a nyilvántartás-frissítések számát, a forgalomban lévő POEN-t. Sem az egyes tranzakciókat, sem az álneveket nem látja.
 
-A regisztrált, de nem rendes tag látja a nyilvántartás-frissítések összegeit és időbélyegeit, de a felek álnevei és a számlaegyenlegek nélkül.
+Az új tag látja a nyilvántartás-frissítések összegeit és időbélyegeit, de a felek álnevei és az egyenlegek nélkül.
 
-A rendes tag (valóságindex ≥ 10%) látja az összes felhasználó álnevét, minden tranzakciót a felek álnevével, a számlaegyenlegeket és a profilokat.
+A rendes tag (legalább 10%-os valóságindex) látja az összes tag álnevét, az összes tranzakciót a felek álneveivel, az egyenlegeket és a profilokat.
 
-A valódi neved és a telefonszámod önkéntes, és nem feltétele a használatnak. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kapcsolná — magad döntöd el, felfeded-e a nevedet és a telefonszámodat, és kinek (csak megerősítetteknek), a megosztást pedig visszavonhatod.
+A valódi neved és a telefonszámod önkéntes, és nem feltétele a használatnak. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kötné — magad döntöd el, felfeded-e őket és kinek (csak a rendes tagoknak), és a felfedést vissza is vonhatod.
 
-Kivétel a Piac: a hirdetéseid (leírás, ár, helység és álnév) nyilvánosan láthatók mindenki számára, de az elérhetőségedet és az előzményekhez kapcsolást csak a rendes tagok látják.`,
-      },
-      {
-        id: 35,
-        pitanje: `Hogyan védik az adataimat?`,
-        odgovor: `Az adattakarékosság a rendszer négy alapelvének egyike — a platform csak a rendszer működéséhez szükséges adatokat gyűjti.
-
-A megerősítés a megerősítési láncban zajlik: más rendes tagok személyes ismeretség alapján erősítik meg a valódiságodat, személyes iratok gyűjtése vagy benyújtása nélkül. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről.
-
-Az esetleges személyes adatokhoz való hozzáférés minden adminisztrátori művelete tartós naplóban rögzül. Az Alapítvány nem oszt meg adatokat harmadik felekkel, kivéve az illetékes hatóság rendelkezésére.
-
-Bármikor kérheted az összes adatod exportját JSON formátumban, vagy anonimizálhatod őket a fiók törlésével.`,
-      },
-      {
-        id: 36,
-        pitanje: `Hogyan lépek ki a rendszerből?`,
-        odgovor: `A fiók törlése bármikor elérhető a profilbeállításokban.
-
-A deaktiválás előtt kezdeményezheted a POEN-nyilvántartás frissítését egy másik felhasználó javára. A ZRNO-k a státusz megszűnésekor mind visszaíródnak a Protokollhoz — ez a visszaírás nem indít POEN-rögzítést. A megmaradt POEN szintén érvénytelenítésre kerül és visszaszáll a Protokollra.
-
-A személyes adataid anonimizálódnak (az álnév semleges felhasználó-azonosítóvá válik), de a tranzakciók számszerű előzményei megmaradnak a rendszer matematikai helyességének megőrzése érdekében.
-
-A közjó licencei alatt tett hozzájárulások (kód, nyílt felhasználásra licencelt tartalom) állandó feltüntetéssel bírnak.`,
-      },
-      {
-        id: 37,
-        pitanje: `Mi lesz a POEN-nel halál esetén — örökölhető?`,
-        odgovor: `Nem. A POEN és a ZRNO nem örökölhető vagyon, és nem az Alapítvánnyal szembeni követelés.
-
-A felhasználó halála esetén a fiók inaktiválódik, a POEN és a ZRNO visszaszáll a Protokollra. Az örökösöknek, a családnak és harmadik személyeknek nincs rájuk vagyoni joguk.
-
-Ez lényegi különbség a POEN és a pénzügyi vagyon között, és egyike azoknak az okoknak, amelyek miatt a POEN jogi értelemben nem „pénz".`,
+Kivétel a Piac: a hirdetéseid (leírás, POEN-összeg, helység és álnév) mindenki számára nyilvánosan láthatók, de az elérhetőségedet és az előzményekkel való összekapcsolást csak a rendes tagok látják.`,
       },
       {
         id: 55,
         pitanje: `Használhatom a rendszert név és telefonszám nélkül? Mit veszítek?`,
-        odgovor: `Igen, használhatod. A regisztrációkor csak az álnév (az általad választott felhasználónév), az e-mail-cím és a jelszó kötelező — semmi más.
+        odgovor: `Igen, használhatod. A regisztrációnál csak az álnév (a név, amelyet magad választasz), az e-mail-cím és a jelszó kötelező — semmi több.
 
-A valódi név és a telefonszám teljesen önkéntes. Nem feltétele sem a megerősítési láncon keresztüli megerősítésnek, sem a rendszer bármely funkciójához való hozzáférésnek. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kapcsolná.
+A valódi név és a telefonszám teljesen önkéntes. Nem feltétele annak, hogy a megerősítési láncban megerősítsenek, és nem feltétele a rendszer egyetlen funkciójához való hozzáférésnek sem. Az Alapítvány nem vezet olyan nyilvántartást, amely az álnevedet a személyazonosságodhoz kötné.
 
-Mit veszítesz, ha nem adod meg őket? Gyakorlatilag csak a másokkal való könnyebb kapcsolatfelvételt. A csere terén (Piac) például e nélkül nehezebben tudnak megkeresni és személyes cserét egyeztetni veled.
+Mit veszítesz, ha nem adod meg őket? Gyakorlatilag csak a könnyebb kapcsolatfelvételt: a Piacon nehezebben érnek el, és nehezebben beszéltek meg személyes cserét.
 
-Ha mégis megadod őket, magad döntöd el, láthatóak lesznek-e a neved és a telefonszámod a rendes tagok számára — és ezt a megosztást bármikor visszavonhatod, ami után az adatok többé nem jelennek meg mások előtt.
+Ha mégis megadod őket, magad döntöd el, láthatók lesznek-e a rendes tagok számára — és ezt a felfedést bármikor visszavonhatod, ezután az adatok többé nem jelennek meg.
 
-Az e-mail-címed soha nem nyilvános, függetlenül mindentől.`,
+Az e-mail-címed soha nem látható nyilvánosan.`,
       },
       {
         id: 56,
-        pitanje: `Deanonimizálhat-e valaki az összegek, az időpontok és a tranzakciók gyakoriságának összevetésével?`,
+        pitanje: `Beazonosíthat-e valaki az összegek, az időpontok és a tranzakciók gyakorisága alapján?`,
         odgovor: `Igen. Az álnevesség nem ugyanaz, mint a névtelenség.
 
-A tranzakcióid álnév alatt szerepelnek a nyilvántartásban, nem a neveden. De az összegek, az időpontok és a nyilvántartás-frissítések gyakoriságának együttese bizonyos esetekben közvetve utalhat arra, ki vagy — különösen kis településen, ahol az emberek ismerik egymást. A regisztrációval elfogadod, hogy az álnevesített nyilvántartás nyilvánossága be van építve a rendszerbe, és nem kapcsolható ki.
+A tranzakcióid álnév alatt futnak, nem a neveden. De az összegek, az időpontok és a nyilvántartás-frissítések gyakoriságának együttese egyes esetekben közvetve rámutathat arra, ki vagy — különösen kis közösségben, ahol az emberek ismerik egymást. A regisztrációval elfogadod, hogy az álneves nyilvántartás nyilvánossága be van építve a rendszerbe, és nem kapcsolható ki.
 
-Több dolog mégis véd téged:
+Néhány dolog azért véd téged.
 
-Az Alapítvány nem vezet olyan táblázatot, amely az álnevet a személyazonosságodhoz kötné — ez a kapcsolat egyszerűen nincs a birtokunkban. A valódi neved és a telefonszámod önkéntes; magad döntöd el, felfeded-e őket és kinek (csak megerősítetteknek), és a megosztás bármikor visszavonható.
+Az Alapítvány nem vezet olyan táblázatot, amely az álnevet a személyazonosságodhoz kötné — ez a kapcsolat egyszerűen nincs a birtokunkban. A valódi név és a telefonszám önkéntes; magad döntöd el, felfeded-e őket és kinek (csak a rendes tagoknak), és a felfedést bármikor visszavonhatod.
 
-A láthatóság fokozatos: a nem regisztráltak csak összesített adatokat látnak, az egyedi tranzakciókat álnevekkel pedig csak a rendes tagok. Az e-mail, a technikai naplók és a megerősítési hálózat soha nem nyilvános.
+A láthatóság fokozatos: a nem regisztráltak csak összesített számokat látnak, az egyes tranzakciókat álnevekkel pedig csak a rendes tagok. Az e-mail-cím, a technikai naplók és a megerősítési háló soha nem nyilvánosak.
 
-Azért is te felelsz, hogy az álneved ne tartalmazzon olyan személyes adatot, amely elárul téged.
-
-Ez az álnevesített rendszerek ismert korlátja. Elkülönítjük az azonosító és az elszámolási adatokat, és nem tartunk fenn központi kapcsolatot közöttük, de az összekapcsolásos támadások elleni további technikai intézkedések még nincsenek külön kidolgozva — ha kis településen használod a rendszert, tartsd ezt szem előtt.`,
+Rajtad is múlik, hogy olyan álnevet válassz, amely nem tartalmaz téged eláruló személyes adatokat.`,
       },
       {
-        id: 73,
-        pitanje: `Megerősíttethetem magam távolról, külföldről?`,
-        odgovor: `Igen. A megerősítés (valóságigazolás) közvetlen személyes ismeretségen alapul — olyan rendes tag, aki személyesen ismer téged, megerősíti a valódiságodat, és saját felelősségére felel ezért a megerősítésért. A Szabályzat nem követeli meg a fizikai jelenlétet a megerősítés pillanatában, így az távolról is elvégezhető, amíg a megerősítő valóban eléggé ismer téged ahhoz, hogy megerősítse a valódiságodat.
+        id: 35,
+        pitanje: `Hogyan védik a magánéletemet?`,
+        odgovor: `Az adattakarékosság a rendszer négy megváltoztathatatlan elvének egyike — a platform csak azt gyűjti, ami a működéséhez szükséges.
 
-A rendszer védelme nem azon nyugszik, hogy egy helyiségben vagytok, hanem a személyes ismeretségen, a megerősítő felelősségén (a hamis megerősítés a megerősítések megsemmisítését és szankciókat von maga után) és a hálózat szerkezetén — a teljes valóságindex eléréséhez a hálózat több független részéből származó embereknek kell ismerniük téged.
+A megerősítés a megerősítési láncban történik: rendes tagok személyes ismeretség alapján erősítik meg a valódiságodat, személyes okiratok gyűjtése vagy benyújtása nélkül. A platform eközben csak technikailag rögzíti, hogy a megerősítés megtörtént — nem gyűjt személyes adatot arról, akit megerősítenek.
 
-Ezért nem vagy kizárva, ha külföldön vagy: regisztrálhatsz, választhatsz álnevet és követheted a rendszert, a funkciók teljes elérése pedig akkor nyílik meg, amint valaki, aki ismer téged, megerősít — akár személyesen, akár távolról.
+Az adminisztrátori műveleteket olyan ellenőrzési napló rögzíti, amelyet nem írunk át. Az Alapítvány nem ad el adatokat, és nem osztja meg őket harmadik felekkel azok saját céljaira: kizárólag az infrastruktúra-szolgáltatók dolgozzák fel őket az Alapítvány nevében (leírásuk az Adatvédelmi szabályzatban), az illetékes hatóságoknak pedig csak akkor adjuk ki, ha a törvény előírja.
 
-Az állampolgárság nem feltétel — az számít, hogy valós személy legyél.`,
+Bármikor kérheted az összes adatod exportját JSON formátumban, vagy a fiók törlésével anonimizálhatod őket.`,
       },
       {
         id: 78,
@@ -1070,6 +1033,37 @@ Az ilyen továbbítás megengedett, és a személyes adatok védelméről szól�
 Függetlenül attól, hol vannak fizikailag a szerverek, ugyanazok a technikai intézkedések érvényesek: az adatok titkosítása átvitel közben és tárolt állapotban, az azonosító és az elszámolási adatok szétválasztása, valamint a szükséges minimum elvén alapuló hozzáférés.
 
 A jogaid — hozzáférés, helyesbítés, törlés, adathordozhatóság és panasz a Biztosnál — a szerverek elhelyezkedésétől függetlenül ugyanazok maradnak.`,
+      },
+      {
+        id: 73,
+        pitanje: `Kaphatok megerősítést távolról, külföldről?`,
+        odgovor: `Igen. A valóság megerősítése közvetlen személyes ismeretségen alapul — az a rendes tag, aki személyesen ismer téged, megerősíti a valódiságodat, és felel ennek az állításnak az igazságáért. A Szabályzat nem kívánja meg a fizikai jelenlétet a megerősítés pillanatában, így az távolról is megtörténhet, amíg az, aki megerősít, valóban eléggé ismer téged.
+
+A rendszer védelme nem azon nyugszik, hogy egy szobában vagytok, hanem a személyes ismeretségen, a megerősítő felelősségén (a hamis megerősítés a megerősítések érvénytelenítését és szankciókat von maga után) és a háló szerkezetén — a teljes valóságindexhez az kell, hogy a háló több független részéből ismerjenek téged.
+
+Ezért nem vagy kizárva, ha külföldön vagy: regisztrálhatsz, választhatsz álnevet és követheted a rendszert, a funkciókhoz való teljes hozzáférés pedig akkor nyílik meg, amint megerősít valaki, aki ismer téged — személyesen vagy távolról.
+
+Az állampolgárság nem feltétel — az számít, hogy valódi ember vagy.`,
+      },
+      {
+        id: 36,
+        pitanje: `Hogyan lépek ki a rendszerből?`,
+        odgovor: `A fiók törlése bármikor elérhető a profilbeállításokból.
+
+A törlés előtt kezdeményezheted a POEN-nyilvántartás frissítését egy másik tag javára. A jogállás megszűnésekor az összes ZRNO a Protokollnak íródik le — ez a leírás nem vált ki POEN-rögzítést —, a megmaradó POEN pedig érvénytelenné válik és visszakerül a Protokollhoz.
+
+A személyes adataidat anonimizáljuk, az álnevet pedig semleges jelölés váltja fel; a tranzakciók számszerű előzményei megmaradnak, a rendszer matematikai helyessége miatt.
+
+A nyílt licencek alatt közzétett hozzájárulások (kód, tartalom) megtartják tartós névfeltüntetésüket.`,
+      },
+      {
+        id: 37,
+        pitanje: `Mi lesz a POEN-nel halál esetén — örökölhető?`,
+        odgovor: `Nem. A POEN és a ZRNO nem örökölhető vagyon, és nem is követelés az Alapítvánnyal szemben.
+
+A tag halálakor a fiók deaktiválódik, a POEN és a ZRNO pedig a Protokollnak íródik le. Az örökösöknek, a családnak és harmadik személyeknek nincs rájuk vagyoni joguk.
+
+Ez a lényegi különbség a POEN és a pénzügyi vagyon között — és egyik oka annak, hogy a POEN jogi értelemben nem pénz.`,
       },
     ],
   },

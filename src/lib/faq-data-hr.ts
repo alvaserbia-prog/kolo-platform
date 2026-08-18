@@ -878,74 +878,70 @@ Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog o
     naslov: "Tehnika i open-source",
     pitanja: [
       {
-        id: 69,
-        pitanje: `Ako pošaljem PR (doprinos kodom) — dobivam li POEN? Je li to operativni doprinos? Moram li biti potvrđen?`,
-        odgovor: `Doprinos kodom spada u operativni doprinos — isti kanal kroz koji se evidentira rad za zajedničko dobro.
-
-Kod i sadržaj su zajedničko dobro: softver je pod AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvaća se po principu DCO (potpis „Signed-off-by") — to je potvrda podrijetla doprinosa, ne prijenos autorskih prava na Fondaciju (nije CLA). Tvoja atribucija na tom doprinosu je trajna i ostaje čak i ako poslije izbrišeš račun.
-
-Da bi ti se POEN upisao, trebaš biti redovni član s indeksom stvarnosti od najmanje 10%.
-
-Mehanizam ide ovako: zadatak objavljuje Fondacija (u početnoj fazi), odnosno nositelji ZRNA i Gornje Kolo nakon aktivacije; ti se prijaviš i izvršiš ga, a izvršenje potvrđuje ovlašteni onaj tko potvrđuje prije nego što se POEN upiše.`,
-      },
-      {
-        id: 70,
-        pitanje: `Postoji li javni ili developerski API? Mogu li graditi integracije ili botove?`,
-        odgovor: `Trenutno ne postoji javni developerski API za gradnju integracija ili botova.
-
-Ono što postoji jest izvoz tvojih vlastitih podataka: u svakom trenutku možeš zatražiti sve svoje podatke u strukturiranom, strojno čitljivom formatu (JSON) — to je tvoje zakonsko pravo na prenosivost podataka. Ali to je izvoz tvojih osobnih podataka, ne otvoreno programsko sučelje nad cijelim sustavom.
-
-Važno je da znaš i zašto: sustav ima gradiranu vidljivost — pseudonime i pojedinačne transakcije vide samo redovni članovi, a neregistrirani samo zbirne pokazatelje. Svaki budući API morao bi poštovati to isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
-      },
-      {
         id: 71,
         pitanje: `Kakav je sigurnosni model? Je li blockchain? Što sprječava da netko iskuje POEN ili prepiše povijest?`,
         odgovor: `Nije blockchain. KOLO koristi centraliziranu evidenciju koju vodi Protokol na infrastrukturi koju drži Fondacija. Decentralizacija ovdje nije tehnička nego upravljačka — odlučivanje se s vremenom prenosi s osnivača na zajednicu.
 
-Zaštita od „kovanja" POEN-a počiva na zero-sum pravilu: svaki POEN koji postoji upisan je kao isti takav minus u zapisu Protokola. Nitko ne može upisati POEN ni iz čega, jer bi to odmah narušilo ravnotežu koju sustav stalno provjerava. Uz to, sve operacije Protokola determinističke su i algoritamske, bez diskrecije — Protokol ne može postupati izvan pravila, pa ni admin ne može „ručno" dodati nekome POEN mimo definiranih kanala.
+Zaštita od „kovanja" POEN-a počiva na zero-sum pravilu: svaki POEN koji postoji upisan je kao isti takav minus u zapisu Protokola. Nitko ne može upisati POEN ni iz čega, jer bi to odmah narušilo ravnotežu koju sustav stalno provjerava. Uz to, sve su operacije Protokola determinističke, bez diskrecije — ni admin ne može „ručno" dodati nekome POEN mimo definiranih kanala.
 
-Što se povijesti tiče, svaki zapis u evidenciji vremenski je označen i vezan za prethodno stanje, tako da se ranija stanja ne mogu naknadno tiho prepisati bez narušavanja cijelog lanca. Uz to, svaki pristup podacima bilježi se u zaštićenom formatu koji se ne može mijenjati unatrag, a redovite provjere konzistentnosti potvrđuju da evidencija u svakom trenutku odgovara pravilima.
+Što se povijesti tiče, svaki je zapis vremenski označen, a povijest se ne prepravlja: ispravke idu novim zapisom u suprotnom smjeru, nikad brisanjem ili mijenjanjem starog. Administratorske radnje bilježe se u revizijskom dnevniku, a redovite automatske provjere potvrđuju da zbroj svih zapisa u svakom trenutku daje nulu — svako odstupanje odmah je vidljivo.
 
-O granicama: ova nepromjenjivost dizajnersko je pravilo osigurano softverskom arhitekturom, a ne kriptografsko „trustless" jamstvo kakvo pruža javni blockchain. Drugim riječima, integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, a ne na tome da matematika čini prijevaru nemogućom bez ičijeg povjerenja. Zato su tu i dodatne mjere — šifriranje podataka u prijenosu i u mirovanju, redovite sigurnosne kopije na odvojenim lokacijama i otvoren kod koji svatko može neovisno pregledati.`,
+O granicama: ova nepromjenjivost je dizajnersko pravilo osigurano softverskom arhitekturom, a ne kriptografsko „trustless" jamstvo kakvo pruža javni blockchain. Integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, ne na tome da matematika čini prijevaru nemogućom. Zato su tu i dodatne mjere — šifriranje podataka u prijenosu i u mirovanju, redovite sigurnosne kopije na odvojene lokacije i otvoren kod koji svatko može neovisno pregledati.`,
       },
       {
         id: 80,
         pitanje: `Gdje je javni repozitorij koda? Mogu li ga preuzeti i sam pokrenuti (self-host)?`,
-        odgovor: `Cijeli izvorni kod platforme javno je dostupan na GitHubu:
+        odgovor: `Cijeli izvorni kod platforme javno je dostupan na GitHubu: https://github.com/alvaserbia-prog/kolo-platform
 
-https://github.com/alvaserbia-prog/kolo-platform
+Možeš ga slobodno pregledati, preuzeti i pokrenuti vlastitu kopiju. Softver je pod licencom AGPL-3.0, koja to izričito dopušta — uz jedan uvjet: ako svoju kopiju pokreneš kao javni internetski servis, moraš i sam učiniti svoj izvorni kod, sa svim izmjenama, dostupnim svojim korisnicima pod istom licencom. Tako kod ostaje trajno otvoren.
 
-Možeš ga slobodno pregledati, preuzeti (klonirati) i pokrenuti vlastitu kopiju. Softver je pod licencom AGPL-3.0, koja ti to izričito dopušta — uz jedan uvjet: ako svoju kopiju pokreneš kao javni internetski servis, i sam moraš učiniti svoj izvorni kod, uključujući sve izmjene, dostupnim svojim korisnicima pod istom licencom. Tako kod ostaje trajno otvoren.
-
-Za pokretanje su ti potrebni Node.js okruženje i PostgreSQL baza. Osnovne upute (instalacija, pokretanje, potrebne varijable okruženja) nalaze se u datotekama README i .env.example u samom repozitoriju. Doprinosi kodu primaju se uz potpis suglasnosti o podrijetlu doprinosa (DCO) — opisan u datoteci CONTRIBUTING.
+Za pokretanje su potrebni Node.js okruženje i PostgreSQL baza; osnovne upute (instalacija, pokretanje, varijable okruženja) nalaze se u datotekama README i .env.example u samom repozitoriju. Doprinosi kodu primaju se uz DCO potpis o podrijetlu doprinosa, opisan u datoteci CONTRIBUTING.
 
 Dokumentacija i tekstovi sustava licencirani su pod CC BY-SA 4.0 — slobodni za korištenje i prilagodbu uz navođenje autorstva i istu licencu.`,
+      },
+      {
+        id: 69,
+        pitanje: `Ako pošaljem PR (doprinos kodom) — dobivam li POEN? Je li to operativni doprinos? Mora li me netko potvrditi?`,
+        odgovor: `Doprinos kodom spada u operativni doprinos — isti kanal kroz koji se evidentira svaki rad za zajedničko dobro.
+
+Kod i sadržaj su zajedničko dobro: softver je pod licencom AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvaća se po načelu DCO (potpis „Signed-off-by") — to je potvrda podrijetla doprinosa, ne prijenos autorskih prava na Fondaciju. Tvoja atribucija na doprinosu je trajna i ostaje i ako kasnije obrišeš račun.
+
+Da bi ti se POEN upisao, treba da budeš redovni član, a doprinos ide kroz objavljen zadatak: u početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija, a po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nositelji ZRNA, a izvršenje potvrđuju nositelji ZRNA. Ti se prijaviš, izvršiš zadatak, izvršenje se potvrdi — i tada se POEN upiše.`,
+      },
+      {
+        id: 70,
+        pitanje: `Postoji li javni ili razvojni API? Mogu li graditi integracije ili botove?`,
+        odgovor: `Trenutno ne postoji javni razvojni API za gradnju integracija ili botova.
+
+Ono što postoji jest izvoz tvojih vlastitih podataka: u svakom trenutku možeš zatražiti sve svoje podatke u strukturiranom, strojno čitljivom formatu (JSON) — to je tvoje zakonsko pravo na prenosivost. Ali to je izvoz tvojih osobnih podataka, ne programerski pristup cijelom sustavu.
+
+Važno je i zašto: sustav ima gradiranu vidljivost — pseudonime i pojedinačne transakcije vide samo redovni članovi, a neregistrirani samo zbirne brojeve. Svaki budući API morao bi poštovati isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
       },
     ],
   },
   {
     id: "sporovi",
-    naslov: "Sporovi i nepoštivanje pravila",
+    naslov: "Sporovi i nepoštovanje pravila",
     pitanja: [
       {
         id: 31,
         pitanje: `Kako se rješavaju sporovi između članova?`,
         odgovor: `Spor između članova oko razmjene rješava se po općim pravilima obveznog prava, pred nadležnim sudom — Fondacija nije strana u tom odnosu.
 
-U početnoj fazi možeš zatražiti dobrovoljno (neobvezujuće) posredovanje Fondacije. Ako je spor između člana i same Fondacije, prvo se traži sporazumno rješenje, a inače je nadležan sud u Somboru.
+U početnoj fazi možeš zatražiti dobrovoljno, neobvezujuće posredovanje Fondacije. Ako je spor između tebe i same Fondacije, prvo se traži sporazumno rješenje; inače je nadležan sud u Somboru.
 
 Za zaštitu osobnih podataka imaš pravo pritužbe Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti.
 
-Posebni interni mehanizmi rješavanja sporova mogu se uspostaviti kasnije (poseban pravilnik ili odluka Gornjeg Kola); zasad ne postoje.`,
+Posebni interni mehanizmi rješavanja sporova mogu se uspostaviti kasnije, posebnim pravilnikom ili odlukom Gornjeg Kola; zasad ne postoje.`,
       },
       {
         id: 32,
         pitanje: `Što se događa kada se netko ne pridržava pravila?`,
         odgovor: `Sustav ima trajno pamćenje — svako ažuriranje evidencije trajno je zabilježeno pod pseudonimom i vidljivo redovnim članovima, pa loše ponašanje ostaje vidljivo onima koji sudjeluju u sustavu.
 
-Fondacija može privremeno suspendirati račun (najviše 30 dana, uz pravo korisnika da bude obaviješten o razlozima i da se izjasni) ili isključiti korisnika pri težoj povredi pravila.
+Fondacija može privremeno suspendirati račun — najviše 30 dana, uz pravo člana da bude obaviješten o razlozima i da se izjasni — ili pri težoj povredi pravila isključiti člana.
 
-Isključeni korisnik gubi pristup, POEN i ZRNO vraćaju se Protokolu, a pseudonim se anonimizira.`,
+Isključeni član gubi pristup, POEN i ZRNO se otpisuju Protokolu, a pseudonim se anonimizira.`,
       },
       {
         id: 33,
@@ -954,7 +950,7 @@ Isključeni korisnik gubi pristup, POEN i ZRNO vraćaju se Protokolu, a pseudoni
 
 Fondacija mora riješiti prigovor u roku od 30 dana, s obrazloženjem.
 
-Možeš imati najviše 3 otvorena prigovora istodobno.`,
+Istodobno možeš imati najviše tri otvorena prigovora.`,
       },
     ],
   },
@@ -965,89 +961,56 @@ Možeš imati najviše 3 otvorena prigovora istodobno.`,
       {
         id: 34,
         pitanje: `Tko sve vidi moj pseudonim i transakcije?`,
-        odgovor: `Vidljivost ovisi o tvojem statusu u sustavu (pristup je gradiran):
+        odgovor: `Vidljivost ovisi o tvom statusu u sustavu — pristup je gradiran.
 
-Neregistrirani posjetitelj vidi samo opće pokazatelje sustava (agregate) — broj članova, broj ažuriranja evidencije, POEN u optjecaju. Ne vidi pojedinačne transakcije ni pseudonime.
+Neregistrirani posjetitelj vidi samo zbirne brojeve sustava: broj članova, broj ažuriranja evidencije, POEN u optjecaju. Ne vidi pojedinačne transakcije ni pseudonime.
 
-Registrirani, ali oni bez potvrde korisnik vidi iznose i vremenske oznake ažuriranja evidencije, ali bez pseudonima strana i bez stanja računa.
+Novi član vidi iznose i vremenske oznake ažuriranja evidencije, ali bez pseudonima strana i bez stanja.
 
-Redovni član (indeks stvarnosti ≥ 10%) vidi pseudonime svih korisnika, sve transakcije s pseudonimima strana, stanja računa i profile.
+Redovni član (indeks stvarnosti od najmanje 10%) vidi pseudonime svih članova, sve transakcije s pseudonimima strana, stanja i profile.
 
-Tvoje pravo ime i telefon dobrovoljni su i nisu uvjet za korištenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom — sam biraš hoćeš li i kome (samo potvrđenima) otkriti ime i telefon, a otkrivanje možeš povući.
+Tvoje pravo ime i telefon su dobrovoljni i nisu uvjet za korištenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom — sam biraš hoćeš li ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući.
 
-Iznimka je Pijaca: tvoji oglasi (opis, cijena, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje s poviješću vide samo redovni članovi.`,
-      },
-      {
-        id: 35,
-        pitanje: `Kako se štiti moja privatnost?`,
-        odgovor: `Minimizacija podataka jedan je od četiri principa sustava — platforma prikuplja samo podatke nužne za funkcioniranje sustava.
-
-Potvrda se obavlja u lancu potvrda: drugi redovni članovi potvrđuju tvoju stvarnost na temelju osobnog poznavanja, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta računa koji ne prikuplja osobne podatke potvrđenog.
-
-Sve admin akcije pristupa eventualnim osobnim podacima bilježe se u trajnom logu. Fondacija ne dijeli podatke s trećim osobama osim po nalogu nadležnog tijela.
-
-U svakom trenutku možeš zatražiti eksport svih svojih podataka u JSON formatu, ili ih anonimizirati kroz brisanje računa.`,
-      },
-      {
-        id: 36,
-        pitanje: `Kako izlazim iz sustava?`,
-        odgovor: `Brisanje računa dostupno je u svakom trenutku iz postavki profila.
-
-Prije deaktivacije možeš inicirati ažuriranje evidencije POEN-a u korist drugog korisnika. Sva se ZRNA pri prestanku statusa otpisuju Protokolu — taj otpis ne pokreće evidentiranje POEN-a. POEN koji ostane također se poništava i vraća Protokolu.
-
-Tvoji osobni podaci se anonimiziraju (pseudonim postaje neutralni KorisnikID), ali numerička povijest transakcija ostaje radi očuvanja matematičke ispravnosti sustava.
-
-Doprinosi pod licencama zajedničkog dobra (kod, sadržaj koji si licencirao za otvorenu uporabu) imaju trajnu atribuciju.`,
-      },
-      {
-        id: 37,
-        pitanje: `Što s POEN-om u slučaju smrti — može li se naslijediti?`,
-        odgovor: `Ne. POEN i ZRNO nisu nasljedna imovina niti potraživanje prema Fondaciji.
-
-Pri smrti korisnika račun se deaktivira, a POEN i ZRNO vraćaju se Protokolu. Nasljednici, obitelj i treće osobe nemaju imovinsko pravo na njih.
-
-Ovo je temeljna razlika između POEN-a i financijske imovine, i jedan je od razloga zašto POEN nije „novac" u pravnom smislu.`,
+Iznimka je Pijaca: tvoji oglasi (opis, iznos u POEN-ima, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje s poviješću vide samo redovni članovi.`,
       },
       {
         id: 55,
         pitanje: `Mogu li koristiti sustav bez imena i telefona? Što gubim?`,
-        odgovor: `Da, možeš. Pri registraciji obavezni su samo pseudonim (korisničko ime koje sam biraš), email i lozinka — ništa više.
+        odgovor: `Da, možeš. Pri registraciji obvezni su samo pseudonim (ime koje sam biraš), email i lozinka — ništa više.
 
 Pravo ime i broj telefona potpuno su dobrovoljni. Nisu uvjet da budeš potvrđen kroz lanac potvrda, niti uvjet za pristup bilo kojoj funkciji sustava. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim s tvojim identitetom.
 
-Što gubiš ako ih ne daš? Praktično samo lakši kontakt s drugim ljudima. Na prostoru za razmjenu (Pijaca), na primjer, drugi te bez tih podataka teže mogu kontaktirati i dogovoriti razmjenu uživo.
+Što gubiš ako ih ne daš? Praktično samo lakši kontakt: na Pijaci te drugi bez tih podataka teže kontaktiraju i teže dogovarate razmjenu uživo.
 
-Ako ipak odlučiš unijeti ih, sam biraš hoće li tvoje ime i telefon biti vidljivi redovnim članovima — i to otkrivanje možeš povući u svakom trenutku, nakon čega se podaci više ne prikazuju drugima.
+Ako ipak odlučiš da ih uneseš, sam biraš hoće li biti vidljivi redovnim članovima — i to otkrivanje možeš povući u svakom trenutku, nakon čega se podaci više ne prikazuju.
 
-Email adresa ti nikada nije javno vidljiva, bez obzira na sve.`,
+Email adresa ti nikada nije javno vidljiva.`,
       },
       {
         id: 56,
         pitanje: `Može li me netko deanonimizirati kombinirajući iznose, vrijeme i učestalost transakcija?`,
         odgovor: `Da. Pseudonimnost nije isto što i anonimnost.
 
-Tvoje se transakcije u evidenciji vode pod pseudonimom, ne pod tvojim imenom. Ali sama kombinacija iznosa, vremena i učestalosti ažuriranja evidencije može u nekim slučajevima posredno ukazati na to tko si — osobito u maloj sredini gdje se ljudi poznaju. Registracijom prihvaćaš da je javnost pseudonimne evidencije ugrađena u sustav i da se ne može isključiti.
+Tvoje se transakcije vode pod pseudonimom, ne pod tvojim imenom. Ali kombinacija iznosa, vremena i učestalosti ažuriranja evidencije može u nekim slučajevima posredno ukazati na to tko si — osobito u maloj sredini gdje se ljudi poznaju. Registracijom prihvaćaš da je javnost pseudonimne evidencije ugrađena u sustav i da se ne može isključiti.
 
-Ipak te štiti nekoliko stvari:
+Ipak te štiti nekoliko stvari.
 
-Fondacija ne vodi tablicu koja povezuje pseudonim s tvojim identitetom — tu vezu jednostavno ne posjedujemo. Tvoje pravo ime i broj telefona dobrovoljni su; sam biraš hoćeš li ih i kome (samo potvrđenima) otkriti, a otkrivanje možeš povući u svakom trenutku.
+Fondacija ne vodi tablicu koja povezuje pseudonim s tvojim identitetom — tu vezu jednostavno ne posjedujemo. Pravo ime i broj telefona su dobrovoljni; sam biraš hoćeš li ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući u svakom trenutku.
 
-Vidljivost je gradirana: neregistrirani vide samo agregate, a pojedinačne transakcije s pseudonimima vide tek redovni članovi. Email, tehnički logovi i mreža potvrda nikada nisu javni.
+Vidljivost je gradirana: neregistrirani vide samo zbirne brojeve, a pojedinačne transakcije s pseudonimima vide tek redovni članovi. Email, tehnički zapisi i mreža potvrda nikada nisu javni.
 
-Odgovoran si i za to da tvoj pseudonim ne sadrži osobne podatke koji bi te odali.
-
-Ovo je poznato ograničenje pseudonimnih sustava. Razdvajamo identifikacijske od obračunskih podataka i ne držimo središnju vezu, ali dodatne tehničke mjere baš protiv napada povezivanjem još nisu posebno razrađene — ako koristiš sustav u maloj sredini, imaj ovo na umu.`,
+Na tebi je i da pseudonim ne sadrži osobne podatke koji bi te odali.`,
       },
       {
-        id: 73,
-        pitanje: `Mogu li se potvrditi na daljinu, iz inozemstva?`,
-        odgovor: `Da. Potvrda (dokaz stvarnosti) zasniva se na neposrednom osobnom poznavanju — redovni član koji te osobno poznaje potvrđuje tvoju stvarnost i svojom odgovornošću odgovara za istinitost te tvrdnje. Pravilnik ne zahtijeva fizičku prisutnost u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj tko potvrđuje doista poznaje dovoljno da potvrdi tvoju stvarnost.
+        id: 35,
+        pitanje: `Kako se štiti moja privatnost?`,
+        odgovor: `Minimizacija podataka jedno je od četiri nepromjenjiva načela sustava — platforma prikuplja samo ono što je nužno za rad.
 
-Zaštita sustava ne počiva na tome da ste u istoj prostoriji, nego na osobnom poznavanju, na odgovornosti onoga tko potvrđuje (lažna potvrda povlači poništavanje potvrda i sankcije) i na strukturi mreže — da bi dosegnuo pun indeks stvarnosti, moraš biti poznat ljudima iz više neovisnih dijelova mreže.
+Potvrda se obavlja u lancu potvrda: redovni članovi potvrđuju tvoju stvarnost na temelju osobnog poznanstva, bez prikupljanja ili dostavljanja osobnih dokumenata. Platforma pritom samo tehnički bilježi da je potvrda dana — ne prikuplja osobne podatke onoga tko se potvrđuje.
 
-Zato nisi isključen ako si u inozemstvu: možeš se registrirati, birati pseudonim i pratiti sustav, a pun pristup funkcijama otključava se čim te netko tko te poznaje potvrđuje — bilo uživo, bilo na daljinu.
+Administratorske radnje bilježe se u revizijskom dnevniku koji se ne prepravlja. Fondacija ne prodaje podatke i ne dijeli ih s trećima za njihove svrhe: obrađuju ih samo pružatelji infrastrukture u ime Fondacije (opisani u Politici privatnosti), a nadležnim tijelima dostavljaju se samo kad zakon nalaže.
 
-Državljanstvo nije uvjet — bitno je da si stvarna osoba.`,
+U svakom trenutku možeš zatražiti izvoz svih svojih podataka u JSON formatu, ili ih anonimizirati brisanjem računa.`,
       },
       {
         id: 78,
@@ -1059,6 +1022,37 @@ Takav prijenos dopušten je i uređen zakonom o zaštiti podataka o ličnosti. F
 Bez obzira na to gdje se poslužitelji fizički nalaze, primjenjuju se iste tehničke mjere: šifriranje podataka u prijenosu i u mirovanju, razdvajanje identifikacijskih od obračunskih podataka i pristup po načelu minimalne nužnosti.
 
 Tvoja prava — uvid, ispravak, brisanje, prenosivost i pritužba Povereniku — ostaju ista bez obzira na lokaciju poslužitelja.`,
+      },
+      {
+        id: 73,
+        pitanje: `Mogu li dobiti potvrdu na daljinu, iz inozemstva?`,
+        odgovor: `Da. Potvrda stvarnosti temelji se na neposrednom osobnom poznanstvu — redovni član koji te osobno poznaje potvrđuje tvoju stvarnost i za istinitost te tvrdnje odgovara. Pravilnik ne zahtijeva fizičku prisutnost u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj tko potvrđuje zaista poznaje dovoljno.
+
+Zaštita sustava ne počiva na tome da ste u istoj prostoriji, nego na osobnom poznanstvu, na odgovornosti onoga tko potvrđuje (lažna potvrda povlači poništavanje potvrda i sankcije) i na strukturi mreže — za pun indeks stvarnosti potrebno je da te poznaju ljudi iz više neovisnih dijelova mreže.
+
+Zato nisi isključen ako si u inozemstvu: možeš se registrirati, izabrati pseudonim i pratiti sustav, a pun pristup funkcijama otključava se čim te potvrdi netko tko te poznaje — uživo ili na daljinu.
+
+Državljanstvo nije uvjet — bitno je da si stvarna osoba.`,
+      },
+      {
+        id: 36,
+        pitanje: `Kako izlazim iz sustava?`,
+        odgovor: `Brisanje računa dostupno je u svakom trenutku iz postavki profila.
+
+Prije brisanja možeš inicirati ažuriranje evidencije POEN-a u korist drugog člana. Pri prestanku statusa sva se ZRNA otpisuju Protokolu — taj otpis ne pokreće upis POEN-a — a POEN koji ostane poništava se i vraća Protokolu.
+
+Tvoji osobni podaci se anonimiziraju, a pseudonim se zamjenjuje neutralnom oznakom; numerička povijest transakcija ostaje, radi matematičke ispravnosti sustava.
+
+Doprinosi objavljeni pod otvorenim licencama (kod, sadržaj) zadržavaju trajnu atribuciju.`,
+      },
+      {
+        id: 37,
+        pitanje: `Što s POEN-om u slučaju smrti — može li se naslijediti?`,
+        odgovor: `Ne. POEN i ZRNO nisu nasljedna imovina niti potraživanje prema Fondaciji.
+
+Pri smrti člana račun se deaktivira, a POEN i ZRNO se otpisuju Protokolu. Nasljednici, obitelj i treće osobe nemaju imovinsko pravo na njih.
+
+Ovo je suštinska razlika između POEN-a i financijske imovine — i jedan od razloga zašto POEN nije novac u pravnom smislu.`,
       },
     ],
   },
