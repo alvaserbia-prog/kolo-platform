@@ -299,50 +299,68 @@ What you can check. The total amount recorded, the number of steps carried out a
       {
         id: 84,
         pitanje: `Can minors register?`,
-        odgovor: `Yes, from the age of seven, with the consent of a parent or legal guardian. Children's participation is governed by the Regulation on the Participation of Children.
+        odgovor: `They can, from the age of seven, but not entirely on their own. A minor's account always stands alongside a parent: either the parent opens it from their own account, or the child opens it and enters the parent's email, and the parent then takes the account over.
 
-There are two paths. A parent already on the platform opens an account for the child from their own profile. A child may also register alone — entering a pseudonym, a password and a parent's e-mail address — and the account then works in a limited scope: the profile and friendships work, the chat room and listings do not, and no POEN is recorded until a parent takes the account over and becomes a regular member.
+A child under seven has no account. If it turns out that an adult account was opened by a minor, the account is deleted.
 
-Children form friendships by scanning a code in person. For a friendship formed, 500 POEN is recorded to each child, but only once both accounts are in full scope. A parent does not read conversations between children — they see who the child is friends with and how many conversations exist, without content; a conversation between a child and an adult is read by the parent, and the adult participant is given a visible notice of that. On the eighteenth birthday the account becomes an adult account, friendships are deleted, POEN earned through friendships is annulled, and the parents record a confirmation of reality for the child.`,
+Everything else about children's accounts is in the section Children and parents.`,
       },
       {
         id: 7,
-        pitanje: `How do I get confirmed and what do I gain from it?`,
-        odgovor: `Confirmation is optional, but it is a prerequisite for full access to the platform's features.
+        pitanje: `How do I get confirmed and what does it give me?`,
+        odgovor: `Confirmation is not compulsory, but an account without it mostly just looks around. Most features open up only with the first confirmation.
 
-Confirmation is carried out through the chain of confirmations: a full member who personally knows you confirms your reality based on that acquaintance. The platform provides a technical mechanism for consent and account-identity confirmation that does not collect the confirmed person's personal documents. The person who confirms you does not request or collect documents.
+How it is obtained. Confirmation is given by a full member who knows you personally and who by that act asserts that you are a real person. You send the request yourself, with the Request confirmation button. The acquaintance need not be old: one formed through a completed exchange is enough.
 
-Each confirmation increases your reality index by 10 percentage points (from 0% to 100%). Full access to the platform's features is unlocked at the 10% threshold.
+No documents are asked of anyone. No ID card, no passport, no personal identification number, no photograph. The person confirming you enters none of your data; they confirm what they know.
 
-Upon recording of the confirmation entry, the Protocol automatically credits 1,000 POEN to you, 1,000 POEN to the person who confirmed you, and 500 POEN to the supervisor.
+What it changes. Every confirmation raises your reality index by 10 percentage points. You can receive ten in total, so the highest index is 100%.
 
-Confirmation is a prerequisite for all major features: recording POEN through donations and sponsorships, inscribing ZRNO, participating in Programmes, and full access to the marketplace and communication with other members.`,
+The very first confirmation — an index of 10% — opens the main features: recording POEN through donations and sponsorship, recording ZRNO, taking part in the Programmes, the full Marketplace, and communication with other members. You thereby become a full member and can confirm others yourself.
+
+What is recorded. Once the confirmation is entered, the Protocol records 1,000 POEN for you and 1,000 for the person who confirmed you. If the confirmation is subject to supervision, the first supervisor to enter an outcome receives 500 POEN.
+
+Why a confirmation is worth something. Whoever confirms a person who is not real loses those 1,000 POEN — and if they have spent them in the meantime, a make-good remains on their ledger. On top of that they are subject to the measures in the Terms of Use, up to exclusion from the network. A confirmation therefore carries responsibility for someone else's identity and is not given lightly.`,
       },
       {
         id: 8,
-        pitanje: `What if I'm a foreigner — can I be a member?`,
-        odgovor: `Yes. Citizenship is not a requirement. What matters is that you are a real person — and that is not proved with a document, but through the chain of confirmations: a full member who personally knows you confirms your reality. At registration we do not ask for a passport, identity card, or national ID number — you pick a pseudonym, enter an email and password.
+        pitanje: `What if I am a foreigner — can I be a member?`,
+        odgovor: `You can. Citizenship and residence are not a condition, nor are they recorded anywhere. At registration you choose a pseudonym and enter an email and a password; no documents are asked for.
 
-The system operates in Serbian and English.`,
+The only real condition is that someone confirms you as a real person, and that someone can be anywhere. If you do not yet know anyone in the network, an acquaintance formed through a completed exchange is equally valid grounds for confirmation.
+
+The Rulebook, the Terms of Use and the other binding acts were adopted in Serbian and that version is authoritative. Translations exist as an aid to the reader.`,
       },
       {
         id: 9,
-        pitanje: `Can I have multiple accounts or multiple pseudonyms?`,
-        odgovor: `No. The principle is "one person — one account". Creating multiple accounts is a breach of the terms of use and may result in exclusion from the system.
+        pitanje: `Can I have more than one account or more than one pseudonym?`,
+        odgovor: `No. The rule is one person, one account, and that is a condition of use. Anyone who opens a second account may be excluded from the system.
 
-You have one pseudonym in the public view of the system.`,
+A second account mostly makes no sense even before anyone notices it. An account without confirmation does almost nothing, and confirmation is given by a person who asserts they know you personally and who is answerable for an untrue confirmation.
+
+An account a parent opens for their child is not an exception to this rule.
+
+You have one pseudonym and other members see you under it. On changing it, see the next question.`,
       },
       {
         id: 10,
         pitanje: `Can I change my pseudonym?`,
-        odgovor: `Yes, but no more than once every 30 days.
+        odgovor: `You can, at most once in thirty days.
 
-When you change your pseudonym, all your transactions in the history are displayed under the new pseudonym — the old one is no longer visible anywhere. The only permanent and unchangeable element is your internal user identifier, which other users do not see.`,
+The change takes effect immediately. As soon as you confirm it, your whole account is shown to others under the new pseudonym, history included; the old one is no longer visible.
+
+A pseudonym may contain Latin letters, digits and the characters _ . - without spaces and without the letters č, ć, š, ž and đ. It stays in the Latin alphabet even when you read the site in Cyrillic. It also stands in your profile's address.
+
+Links shared earlier keep working: the old address leads to your profile after the change too, and an abandoned pseudonym cannot be taken by someone else — otherwise an already shared link would quietly lead to a different person.
+
+The account itself does not change: the chain of confirmations, the reality index and the record of contributions stay the same, because only the name they are seen under has changed.`,
       },
       {
         id: 75,
-        pitanje: `What language does the system use? Is there an English version?`,
-        odgovor: `The interface works in Serbian (Latin and Cyrillic script) and in English — you choose the language with the switcher in the header. The Rules, the Terms and the other legally binding texts were adopted in Serbian and the Serbian version is authoritative; their English translations exist as an unofficial aid to the reader.`,
+        pitanje: `What language does the system work in?`,
+        odgovor: `The site and the application work in five languages: Serbian, English, Russian, Croatian and Hungarian. Serbian can be read in the Latin or the Cyrillic script. Both are chosen with the switch in the header and can be changed at any moment.
+
+The Rulebook, the Terms of Use and the other binding acts were adopted in Serbian and that version is authoritative. Translations into the other languages exist as an unofficial aid to the reader; where they differ from the Serbian text, the Serbian text prevails.`,
       },
     ],
   },

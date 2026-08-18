@@ -299,50 +299,68 @@ Veći saldo ne daje razmjerno veću moć. Glasanje u Gornjem Kolu je kvadratno: 
       {
         id: 84,
         pitanje: `Mogu li se maloljetnici registrirati?`,
-        odgovor: `Da, od sedme godine, uz suglasnost roditelja odnosno zakonskog zastupnika. Sudjelovanje djece uređuje Pravilnik o sudjelovanju djece.
+        odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Račun maloljetne osobe uvijek stoji uz roditelja: ili ga roditelj otvara iz svog računa, ili ga dijete otvara i upisuje roditeljev email, pa roditelj račun preuzima.
 
-Dva su puta. Roditelj koji je već na platformi otvara račun djetetu iz svojeg profila. Dijete se može i samo registrirati — unosi pseudonim, lozinku i adresu elektroničke pošte roditelja — a račun tada radi u ograničenom obimu: profil i prijateljstva rade, pričaonica i oglasi ne, a POEN se ne upisuje dok roditelj ne preuzme račun i ne postane redovan član.
+Dijete mlađe od sedam godina račun nema. Ako se ispostavi da je punoljetni račun otvorila maloljetna osoba, račun se briše.
 
-Djeca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom se djetetu upisuje 500 POEN, ali tek kada su oba računa u punom obimu. Roditelj ne čita razgovore između djece — vidi s kim je dijete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor djeteta s punoljetnom osobom roditelj čita, a punoljetni sugovornik o tome ima vidljivu obavijest. Na osamnaesti rođendan račun prelazi u punoljetni, prijateljstva se brišu, POEN zarađen prijateljstvima se ukida, a roditelji djetetu evidentiraju potvrdu stvarnosti.`,
+Sve ostalo o dječjim računima stoji u odjeljku Djeca i roditelji.`,
       },
       {
         id: 7,
-        pitanje: `Kako se potvrđujem i što time dobivam?`,
-        odgovor: `Potvrda je opcionalna, ali je preduvjet za pun pristup funkcijama platforme.
+        pitanje: `Kako dobivam potvrdu i što time dobivam?`,
+        odgovor: `Potvrda nije obvezna, ali račun bez nje uglavnom samo gleda. Većina funkcija otvara se tek s prvom potvrdom.
 
-Potvrda se obavlja kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost na temelju tog poznanstva. Platforma osigurava tehnički mehanizam suglasnosti i potvrde identiteta korisničkog računa koji ne prikuplja osobne podatke potvrđenoga. Onaj tko potvrđuje ne traži niti prikuplja dokumente.
+Kako se dobiva. Potvrdu daje redovni član koji te osobno poznaje i koji tom radnjom tvrdi da si stvarna osoba. Zahtjev šalješ sam, dugmetom Zatraži potvrdu. Poznanstvo ne mora biti staro: dovoljno je i ono koje je nastalo kroz obavljenu razmjenu.
 
-Svaka potvrda uvećava tvoj indeks stvarnosti za 10 postotnih bodova (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
+Dokumenti se ne traže ni od koga. Ni osobna iskaznica, ni putovnica, ni identifikacijski broj, ni fotografija. Onaj tko te potvrđuje ne unosi nijedan tvoj podatak; potvrđuje ono što zna.
 
-Po evidentiranju zapisa o potvrdi, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN onome tko potvrđuje i 500 POEN nadzorniku.
+Što se time mijenja. Svaka potvrda podiže tvoj indeks stvarnosti za 10 postotnih bodova. Ukupno ih možeš primiti deset, pa je najviši indeks 100%.
 
-Potvrda je preduvjet za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, sudjelovanje u Programima, kao i pun pristup Pijaci i komunikaciji s drugim članovima.`,
+Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, sudjelovanje u Programima, punu Pijacu i komunikaciju s ostalim članovima. Time postaješ redovni član i sam možeš potvrđivati druge.
+
+Što se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POEN tebi i 1.000 onome tko te je potvrdio. Ako potvrda podliježe nadzoru, prvi nadzornik koji upiše ishod dobiva 500 POEN.
+
+Zašto potvrda nešto vrijedi. Tko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to podliježe mjerama iz Uvjeta korištenja, do isključenja iz mreže. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
       },
       {
         id: 8,
         pitanje: `Što ako sam stranac — mogu li biti član?`,
-        odgovor: `Da. Državljanstvo nije uvjet. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: redovni član koji te osobno poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni putovnicu, ni osobnu iskaznicu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+        odgovor: `Možeš. Državljanstvo i prebivalište nisu uvjet, niti se bilo gdje upisuju. Pri registraciji biraš pseudonim i unosiš email i lozinku; dokumenti se ne traže.
 
-Sustav radi na srpskom i engleskom jeziku.`,
+Jedini stvarni uvjet je da te netko potvrdi kao stvarnu osobu, a taj netko može biti bilo gdje. Ako u mreži još nikoga ne poznaješ, poznanstvo nastalo kroz obavljenu razmjenu također je punopravan temelj za potvrdu.
+
+Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i ta je verzija mjerodavna. Prijevodi postoje kao pomoć čitatelju.`,
       },
       {
         id: 9,
-        pitanje: `Mogu li imati više korisničkih računa ili više pseudonima?`,
-        odgovor: `Ne. Princip je „jedan čovjek — jedan korisnički račun". Stvaranje više računa prekršaj je uvjeta korištenja i može dovesti do isključenja iz sustava.
+        pitanje: `Mogu li imati više računa ili više pseudonima?`,
+        odgovor: `Ne. Pravilo je jedan čovjek, jedan račun, i to je uvjet korištenja. Tko otvori drugi račun, može biti isključen iz sustava.
 
-Imaš jedan pseudonim u javnom prikazu sustava.`,
+Drugi račun uglavnom nema smisla ni prije nego što ga netko primijeti. Račun bez potvrde skoro ništa ne radi, a potvrdu daje čovjek koji tvrdi da te osobno poznaje i koji za netočnu potvrdu odgovara.
+
+Račun koji roditelj otvori svom djetetu nije iznimka od ovog pravila.
+
+Pseudonim je jedan i pod njim te vide ostali članovi. O njegovoj promjeni u sljedećem pitanju.`,
       },
       {
         id: 10,
         pitanje: `Mogu li promijeniti pseudonim?`,
-        odgovor: `Da, ali najviše jednom u 30 dana.
+        odgovor: `Možeš, najviše jednom u trideset dana.
 
-Kad promijeniš pseudonim, sve tvoje transakcije u povijesti prikazuju se pod novim pseudonimom — stari se više nigdje ne vidi. Jedino trajno i nepromjenjivo je tvoj interni korisnički identifikator, koji drugi korisnici ne vide.`,
+Promjena vrijedi odmah. Čim je potvrdiš, cijeli tvoj račun ostalima se prikazuje pod novim pseudonimom, uključujući i povijest; stari se više ne vidi.
+
+Pseudonim smije sadržavati latinična slova, znamenke i znakove _ . - bez razmaka i bez slova č, ć, š, ž i đ. Latiničan je i kada stranicu čitaš ćirilicom. Stoji i u adresi tvog profila.
+
+Ranije podijeljene poveznice i dalje rade: stara adresa vodi na tvoj profil i nakon promjene, a napušteni pseudonim ne može uzeti netko drugi — inače bi već podijeljena poveznica tiho odvela na drugu osobu.
+
+Sam račun se time ne mijenja: lanac potvrda, indeks stvarnosti i evidencija doprinosa ostaju isti, jer je promijenjeno samo ime pod kojim se vide.`,
       },
       {
         id: 75,
-        pitanje: `Na kojem jeziku radi sustav? Postoji li engleska verzija?`,
-        odgovor: `Sučelje radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš prekidačem u zaglavlju. Pravilnik, Uvjeti i ostali pravno obvezujući tekstovi doneseni su na srpskom i srpska je verzija mjerodavna; njihovi engleski prijevodi postoje kao neslužbena pomoć čitatelju.`,
+        pitanje: `Na kojem jeziku radi sustav?`,
+        odgovor: `Stranica i aplikacija rade na pet jezika: srpskom, engleskom, ruskom, hrvatskom i mađarskom. Srpski možeš čitati latinicom ili ćirilicom. I jedno i drugo bira se prekidačem u zaglavlju i mijenja se u svakom trenutku.
+
+Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i ta je verzija mjerodavna. Prijevodi na ostale jezike postoje kao neslužbena pomoć čitatelju; ako se negdje razlikuju od srpskog teksta, vrijedi srpski.`,
       },
     ],
   },

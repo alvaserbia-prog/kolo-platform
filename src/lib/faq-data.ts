@@ -309,50 +309,68 @@ Veći saldo ne daje srazmerno veću moć. Glasanje u Gornjem Kolu je kvadratno: 
       {
         id: 84,
         pitanje: `Mogu li se maloletnici registrovati?`,
-        odgovor: `Da, od sedme godine, uz saglasnost roditelja odnosno zakonskog zastupnika. Učešće dece uređuje Pravilnik o učešću dece.
+        odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Nalog maloletnog lica uvek stoji uz roditelja: ili ga roditelj otvara iz svog naloga, ili ga dete otvara i upisuje roditeljev email, pa roditelj nalog preuzima.
 
-Dva su puta. Roditelj koji je već na platformi otvara nalog detetu iz svog profila. Dete se može i samo registrovati — unosi pseudonim, lozinku i elektronsku adresu roditelja, a nalog dobija ograničen obim: profil i prijateljstva rade, pričaonica i oglasi ne, i POEN se ne upisuje dok roditelj ne preuzme nalog i ne postane redovan član.
+Dete mlađe od sedam godina nalog nema. Ako se ispostavi da je punoletan nalog otvorilo maloletno lice, nalog se briše.
 
-Deca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom detetu se upisuje 500 POEN, ali tek kada su oba naloga u punom obimu. Roditelj ne čita razgovore između dece — vidi sa kim je dete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor deteta sa punoletnim licem čita, i o tome punoletni sagovornik ima vidljivo obaveštenje. Na osamnaesti rođendan nalog prelazi u punoletni, prijateljstva se brišu, POEN zarađen prijateljstvima se poništava, a roditelji detetu evidentiraju potvrdu stvarnosti.`,
+Sve ostalo o dečjim nalozima stoji u odeljku Deca i roditelji.`,
       },
       {
         id: 7,
         pitanje: `Kako dobijam potvrdu i šta time dobijam?`,
-        odgovor: `Potvrda je opciona, ali je preduslov za pun pristup funkcijama platforme.
+        odgovor: `Potvrda nije obavezna, ali nalog bez nje uglavnom samo gleda. Većina funkcija otvara se tek sa prvom potvrdom.
 
-Potvrda se obavlja kroz lanac: redovan član koji te lično poznaje potvrđuje tvoju stvarnost na osnovu tog poznavanja. Poznanstvo stečeno kroz obavljenu razmenu punopravan je osnov — ne morate se znati odranije. Platforma obezbeđuje tehnički mehanizam saglasnosti i potvrde identiteta naloga koji ne prikuplja lične podatke potvrđenog. Onaj ko potvrđuje ne traži niti prikuplja dokumente.
+Kako se dobija. Potvrdu daje redovan član koji te lično poznaje i koji tom radnjom tvrdi da si stvarna osoba. Zahtev šalješ sam, dugmetom Zatraži potvrdu. Poznanstvo ne mora biti staro: dovoljno je i ono koje je nastalo kroz obavljenu razmenu.
 
-Svaka potvrda uvećava tvoj indeks stvarnosti za 10 procentnih poena (od 0% do 100%). Pun pristup funkcijama platforme otključava se na pragu od 10%.
+Dokumenti se ne traže ni od koga. Ni lična karta, ni pasoš, ni JMBG, ni fotografija. Onaj ko te potvrđuje ne unosi nijedan tvoj podatak; potvrđuje ono što zna.
 
-Po evidentiranju zapisa o potvrdi, Protokol automatski upisuje 1.000 POEN tebi, 1.000 POEN onome ko te je potvrdio i 500 POEN nadzorniku.
+Šta se time menja. Svaka potvrda podiže tvoj indeks stvarnosti za 10 procentnih poena. Ukupno ih možeš primiti deset, pa je najviši indeks 100%.
 
-Potvrda je preduslov za sve glavne funkcionalnosti: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, kao i pun pristup Pijaci i komunikaciji sa drugim članovima.`,
+Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POEN-a kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, punu Pijacu i komunikaciju sa ostalim članovima. Time postaješ redovan član i sam možeš potvrđivati druge.
+
+Šta se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POEN tebi i 1.000 onome ko te je potvrdio. Ako potvrda podleže nadzoru, prvi nadzornik koji upiše ishod dobija 500 POEN.
+
+Zašto potvrda nešto vredi. Ko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to podleže merama iz Uslova korišćenja, do isključenja iz mreže. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
       },
       {
         id: 8,
         pitanje: `Šta ako sam stranac — mogu li biti član?`,
-        odgovor: `Da. Državljanstvo nije uslov. Bitno je da si stvarna osoba — a to se ne dokazuje dokumentom, nego kroz lanac potvrda: redovan član koji te lično poznaje potvrđuje tvoju stvarnost. Pri registraciji ne tražimo ni pasoš, ni ličnu kartu, ni JMBG — biraš pseudonim, uneseš email i lozinku.
+        odgovor: `Možeš. Državljanstvo i prebivalište nisu uslov, niti se bilo gde upisuju. Pri registraciji biraš pseudonim i unosiš email i lozinku; dokumenti se ne traže.
 
-Sistem radi na srpskom i engleskom jeziku.`,
+Jedini stvarni uslov je da te neko potvrdi kao stvarnu osobu, a taj neko može biti bilo gde. Ako u mreži još nikoga ne poznaješ, poznanstvo nastalo kroz obavljenu razmenu takođe je punopravan osnov za potvrdu.
+
+Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i ta verzija je merodavna. Prevodi postoje kao pomoć čitaocu.`,
       },
       {
         id: 9,
         pitanje: `Mogu li imati više naloga ili više pseudonima?`,
-        odgovor: `Ne. Princip je „jedan čovek — jedan nalog". Kreiranje više naloga je prekršaj uslova korišćenja i može dovesti do isključenja iz sistema.
+        odgovor: `Ne. Pravilo je jedan čovek, jedan nalog, i to je uslov korišćenja. Ko otvori drugi nalog, može biti isključen iz sistema.
 
-Imaš jedan pseudonim u javnom prikazu sistema.`,
+Drugi nalog uglavnom nema smisla ni pre nego što ga neko primeti. Nalog bez potvrde skoro ništa ne radi, a potvrdu daje čovek koji tvrdi da te lično poznaje i koji za netačnu potvrdu odgovara.
+
+Nalog koji roditelj otvori svom detetu nije izuzetak od ovog pravila.
+
+Pseudonim je jedan i pod njim te vide ostali članovi. O njegovoj promeni u sledećem pitanju.`,
       },
       {
         id: 10,
         pitanje: `Mogu li da promenim pseudonim?`,
-        odgovor: `Da, ali najviše jednom u 30 dana.
+        odgovor: `Možeš, najviše jednom u trideset dana.
 
-Kad promeniš pseudonim, sve tvoje transakcije u istoriji prikazuju se pod novim pseudonimom — stari se više nigde ne vidi. Jedino trajno i nepromenljivo je tvoj interni korisnički identifikator, koji drugi korisnici ne vide.`,
+Promena važi odmah. Čim je potvrdiš, ceo tvoj nalog se ostalima prikazuje pod novim pseudonimom, uključujući i istoriju; stari se više ne vidi.
+
+Pseudonim sme da sadrži latinična slova, cifre i znake _ . - bez razmaka i bez slova č, ć, š, ž i đ. Latiničan je i kada sajt čitaš ćirilicom. Stoji i u adresi tvog profila.
+
+Ranije podeljeni linkovi i dalje rade: stara adresa vodi na tvoj profil i posle promene, a napušteni pseudonim ne može da uzme neko drugi — inače bi već podeljen link tiho odveo na drugu osobu.
+
+Sam nalog se time ne menja: lanac potvrda, indeks stvarnosti i evidencija doprinosa ostaju isti, jer je promenjeno samo ime pod kojim se vide.`,
       },
       {
         id: 75,
-        pitanje: `Na kom jeziku radi sistem? Postoji li engleska verzija?`,
-        odgovor: `Interfejs radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš prekidačem u zaglavlju. Pravilnik, Uslovi i ostali pravno obavezujući tekstovi doneti su na srpskom i srpska verzija je merodavna; njihovi engleski prevodi postoje kao nezvanična pomoć čitaocu.`,
+        pitanje: `Na kom jeziku radi sistem?`,
+        odgovor: `Sajt i aplikacija rade na pet jezika: srpskom, engleskom, ruskom, hrvatskom i mađarskom. Srpski možeš čitati latinicom ili ćirilicom. I jedno i drugo bira se prekidačem u zaglavlju i menja se u svakom trenutku.
+
+Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i ta verzija je merodavna. Prevodi na ostale jezike postoje kao nezvanična pomoć čitaocu; ako se negde razlikuju od srpskog teksta, važi srpski.`,
       },
     ],
   },

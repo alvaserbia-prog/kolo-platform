@@ -310,50 +310,68 @@ Mit ellenőrizhetsz. A rögzített teljes összeg, a végrehajtott lépések sz�
       {
         id: 84,
         pitanje: `Regisztrálhatnak-e kiskorúak?`,
-        odgovor: `Igen, hét éves kortól, a szülő, illetve a törvényes képviselő hozzájárulásával. A gyermekek részvételét a gyermekek részvételéről szóló szabályzat rendezi.
+        odgovor: `Igen, hét éves kortól, de nem teljesen önállóan. A kiskorú fiókja mindig szülő mellett áll: vagy a szülő nyitja meg a saját fiókjából, vagy a gyerek nyitja meg és megadja a szülő e-mail-címét, a szülő pedig átveszi a fiókot.
 
-Két út van. A platformon már jelen lévő szülő a saját profiljából nyit fiókot a gyermeknek. A gyermek egyedül is regisztrálhat — álnevet, jelszót és a szülő e-mail-címét adja meg —, és a fiók ekkor korlátozott terjedelemben működik: a profil és a barátságok működnek, a beszélgetőszoba és a hirdetések nem, POEN pedig nem kerül bejegyzésre, amíg a szülő át nem veszi a fiókot és nem lesz rendes tag.
+A hét évnél fiatalabb gyereknek nincs fiókja. Ha kiderül, hogy egy felnőtt fiókot kiskorú nyitott meg, a fiók törlődik.
 
-A gyermekek barátságot személyes találkozáson, kód beolvasásával kötnek. Megkötött barátságért mindegyik gyermeknek 500 POEN kerül bejegyzésre, de csak akkor, amikor mindkét fiók teljes terjedelemben működik. A szülő nem olvassa a gyermekek egymás közötti beszélgetéseit — azt látja, kivel áll a gyermek barátságban és hány beszélgetése van, tartalom nélkül; a gyermek és nagykorú személy beszélgetését a szülő olvassa, és erről a nagykorú fél látható tájékoztatást kap. A tizennyolcadik születésnapon a fiók nagykorú fiókká válik, a barátságok törlődnek, a barátságokkal szerzett POEN érvénytelenné válik, a szülők pedig valóságigazolást jegyeznek be a gyermeknek.`,
+Minden egyéb a gyerekfiókokról a Gyerekek és szülők szakaszban áll.`,
       },
       {
         id: 7,
-        pitanje: `Hogyan megerősíttethetem magam, és mit nyerek vele?`,
-        odgovor: `A megerősítés választható, de előfeltétele a platform funkcióinak teljes elérésének.
+        pitanje: `Hogyan kapok megerősítést, és mit nyerek vele?`,
+        odgovor: `A megerősítés nem kötelező, de a fiók nélküle többnyire csak nézelődik. A legtöbb funkció csak az első megerősítéssel nyílik meg.
 
-A megerősítés a megerősítési láncon keresztül történik: olyan rendes tag, aki személyesen ismer téged, ezen ismeretség alapján megerősíti a valódiságodat. A platform olyan technikai hozzájárulási és fiókazonosítási mechanizmust biztosít, amely nem gyűjt személyes adatot a megerősítettről. A megerősítő nem kér és nem gyűjt iratokat.
+Hogyan szerezhető. A megerősítést olyan rendes tag adja, aki személyesen ismer téged, és aki ezzel a cselekedettel azt állítja, hogy valódi ember vagy. A kérést magad küldöd, a Megerősítés kérése gombbal. Az ismeretségnek nem kell réginek lennie: a lebonyolított cseréből született is elegendő.
 
-Minden megerősítés 10 százalékponttal növeli a valóságindexedet (0%-tól 100%-ig). A platform funkcióinak teljes elérése a 10%-os küszöbnél nyílik meg.
+Dokumentumot senkitől nem kérünk. Sem személyi igazolványt, sem útlevelet, sem személyi azonosító számot, sem fényképet. Aki megerősít téged, egyetlen adatodat sem viszi be; azt erősíti meg, amit tud.
 
-A megerősítési bejegyzés rögzítésekor a Protokoll automatikusan 1000 POEN-t ír be neked, 1000 POEN-t a megerősítőnek és 500 POEN-t a felügyelőnek.
+Mi változik ezzel. Minden megerősítés 10 százalékponttal emeli a valóságindexedet. Összesen tízet kaphatsz, így a legmagasabb index 100%.
 
-A megerősítés minden fő funkció előfeltétele: POEN rögzítése adományokon és patronáláson keresztül, ZRNO bejegyzése, részvétel a Programokban, valamint a Piac és a tagokkal folytatott kommunikáció teljes elérése.`,
+Már az első megerősítés, tehát a 10%-os index, megnyitja a fő funkciókat: a POEN rögzítését adományon és patronáláson keresztül, a ZRNO bejegyzését, a Programokban való részvételt, a teljes Piacot és a többi taggal folytatott kommunikációt. Ezzel rendes taggá válsz, és magad is megerősíthetsz másokat.
+
+Mi rögzül. Amikor a megerősítés bejegyzésre kerül, a Protokoll 1.000 POEN-t rögzít neked és 1.000-et annak, aki megerősített. Ha a megerősítés felügyelet alá esik, az első felügyelő, aki rögzíti a kimenetelt, 500 POEN-t kap.
+
+Miért ér valamit a megerősítés. Aki olyan személyt erősít meg, aki nem valódi, elveszíti azt az 1.000 POEN-t — és ha időközben elköltötte, pótlás marad a nyilvántartásán. Ezen felül a Felhasználási feltételekben szereplő intézkedések vonatkoznak rá, a hálózatból való kizárásig. A megerősítés ezért felelősséget hordoz más ember személyazonosságáért, és nem adják könnyelműen.`,
       },
       {
         id: 8,
         pitanje: `Mi van, ha külföldi vagyok — lehetek tag?`,
-        odgovor: `Igen. Az állampolgárság nem feltétel. Az számít, hogy valós személy legyél — ezt pedig nem irattal bizonyítod, hanem a megerősítési láncon keresztül: olyan rendes tag, aki személyesen ismer, megerősíti a valódiságodat. A regisztrációkor nem kérünk sem útlevelet, sem személyi igazolványt, sem személyi számot — választasz álnevet, megadsz egy e-mail-címet és egy jelszót.
+        odgovor: `Lehetsz. Az állampolgárság és a lakóhely nem feltétel, és sehol nem kerül rögzítésre. A regisztrációnál álnevet választasz, és megadsz egy e-mail-címet és egy jelszót; dokumentumot nem kérünk.
 
-A rendszer szerb és angol nyelven működik.`,
+Az egyetlen valódi feltétel, hogy valaki megerősítsen téged valódi emberként, és ez a valaki bárhol lehet. Ha a hálózatban még senkit nem ismersz, a lebonyolított cseréből született ismeretség is teljes értékű alap a megerősítéshez.
+
+A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktus szerb nyelven került elfogadásra, és az a változat az irányadó. A fordítások az olvasó segítésére szolgálnak.`,
       },
       {
         id: 9,
         pitanje: `Lehet több fiókom vagy több álnevem?`,
-        odgovor: `Nem. Az elv: „egy ember — egy fiók". Több fiók létrehozása sérti a felhasználási feltételeket, és a rendszerből való kizáráshoz vezethet.
+        odgovor: `Nem. A szabály: egy ember — egy fiók, és ez a használat feltétele. Aki második fiókot nyit, kizárható a rendszerből.
 
-A rendszer nyilvános felületén egy álneved van.`,
+A második fióknak többnyire azelőtt sincs értelme, hogy bárki észrevenné. A megerősítés nélküli fiók szinte semmit nem csinál, a megerősítést pedig olyan ember adja, aki azt állítja, hogy személyesen ismer téged, és aki a valótlan megerősítésért felel.
+
+Az a fiók, amelyet a szülő nyit a gyerekének, nem kivétel e szabály alól.
+
+Az álnév egy van, és a többi tag ez alatt lát téged. A megváltoztatásáról a következő kérdésben.`,
       },
       {
         id: 10,
         pitanje: `Megváltoztathatom az álnevemet?`,
-        odgovor: `Igen, de legfeljebb 30 naponta egyszer.
+        odgovor: `Megváltoztathatod, legfeljebb harmincnaponta egyszer.
 
-Amikor álnevet váltasz, az előzményekben szereplő összes tranzakciód az új álnév alatt jelenik meg — a régi sehol többé nem látszik. Az egyetlen állandó és megváltoztathatatlan elem a belső felhasználói azonosítód, amelyet más felhasználók nem látnak.`,
+A változás azonnal érvényes. Amint megerősíted, a teljes fiókod új álnéven jelenik meg a többiek számára, az előzményekkel együtt; a régi már nem látszik.
+
+Az álnév tartalmazhat latin betűket, számjegyeket és a _ . - jeleket, szóköz nélkül, valamint a č, ć, š, ž és đ betűk nélkül. Latin betűs marad akkor is, ha az oldalt cirill betűkkel olvasod. Ott áll a profilod címében is.
+
+A korábban megosztott hivatkozások továbbra is működnek: a régi cím a változás után is a profilodra vezet, az elhagyott álnevet pedig más nem veheti el — különben egy már megosztott hivatkozás csendben más emberhez vezetne.
+
+Maga a fiók ezzel nem változik: a megerősítési lánc, a valóságindex és a hozzájárulások nyilvántartása ugyanaz marad, mert csak az a név változott, amely alatt látszanak.`,
       },
       {
         id: 75,
-        pitanje: `Milyen nyelven működik a rendszer? Van angol változat?`,
-        odgovor: `A felület szerbül (latin és cirill betűvel) és angolul működik — a nyelvet a fejlécben lévő kapcsolóval választod ki. A Szabályzat, a Feltételek és a többi jogilag kötelező szöveg szerb nyelven készült, és a szerb változat az irányadó; a más nyelvű fordításaik nem hivatalos, az olvasót segítő szövegek.`,
+        pitanje: `Milyen nyelven működik a rendszer?`,
+        odgovor: `A honlap és az alkalmazás öt nyelven működik: szerbül, angolul, oroszul, horvátul és magyarul. A szerb olvasható latin vagy cirill betűkkel. Mindkettőt a fejlécben lévő kapcsolóval választod ki, és bármikor módosítható.
+
+A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktus szerb nyelven került elfogadásra, és az a változat az irányadó. A többi nyelvre készült fordítások nem hivatalos segítségként szolgálnak az olvasónak; ha valahol eltérnek a szerb szövegtől, a szerb az irányadó.`,
       },
     ],
   },
