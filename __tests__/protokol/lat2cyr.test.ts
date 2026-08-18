@@ -73,6 +73,28 @@ describe("lat2cyr — zaštićeni tokeni", () => {
     expect(lat2cyr("Pošalji email odmah")).toBe("Пошаљи email одмах");
     expect(lat2cyr("Tvoj e-mail je bitan")).toBe("Твој e-mail је битан");
   });
+  it("Google i naziv fascikle Spam ostaju latinica", () => {
+    // „Гоогле" i „Спам фасцикла" su izlazili na ekranu; ime firme i naziv
+    // fascikle u klijentu za poštu čitaju se onako kako u klijentu i stoje.
+    expect(lat2cyr("Prijavi se Google nalogom")).toBe("Пријави се Google налогом");
+    expect(lat2cyr("Prijava preko Google-a nije uspela.")).toBe(
+      "Пријава преко Google-а није успела.",
+    );
+    expect(lat2cyr("Proveri i Spam fasciklu.")).toBe("Провери и Spam фасциклу.");
+    // Obična reč „spam" je odomaćena — ona ide u ćirilicu.
+    expect(lat2cyr("spam poruke")).toBe("спам поруке");
+  });
+  it("skraćenice i imena fajlova iz zajedničkog dobra ostaju latinica", () => {
+    expect(lat2cyr("Doprinosi idu uz Signed-off-by")).toBe("Доприноси иду уз Signed-off-by");
+    expect(lat2cyr("Vidi CONTRIBUTING.md i DCO")).toBe("Види CONTRIBUTING.md и DCO");
+    expect(lat2cyr("Procena DPIA je objavljena")).toBe("Процена DPIA је објављена");
+  });
+  it("APR i PIB ostaju latinica (odluka vlasnika, iako je АПР/ПИБ pravilna ćirilica)", () => {
+    expect(lat2cyr("Registar zadužbina i fondacija (APR)")).toBe(
+      "Регистар задужбина и фондација (APR)",
+    );
+    expect(lat2cyr("PIB 115840443")).toBe("PIB 115840443");
+  });
   it("ICU placeholderi {ime} ostaju netaknuti (inače next-intl FORMATTING_ERROR)", () => {
     expect(lat2cyr("Dobrodošli, {pseudonim}")).toBe("Добродошли, {pseudonim}");
     expect(lat2cyr("Imate {count} poruka")).toBe("Имате {count} порука");

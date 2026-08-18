@@ -21,6 +21,15 @@ const BELA_LISTA = [
   "PDF", "JSON", "API", "URL", "HTML", "CSS", "OAuth", "GDPR",
   "RSD", "EUR", "USD", "ISO", "NestPay", "Vercel", "Neon", "Prisma",
   "Next.js", "TypeScript", "PostgreSQL", "Whitepaper",
+  // Strano ime i skraćenice koje su se u ćirilici raspadale u besmislicu:
+  // „Гоогле", „ДЦО", „Сигнед-офф-бy", „ЦОНТРИБУТИНГ.мд", „ДПИА".
+  "Google", "DCO", "Signed-off-by", "CONTRIBUTING.md", "DPIA",
+  // Naziv fascikle u klijentu za poštu — piše se onako kako u klijentu i stoji.
+  // Samo veliko „Spam"; obična reč „spam" je odomaćena i ide u ćirilicu.
+  "Spam",
+  // APR i PIB se u srpskoj ćirilici inače pišu АПР i ПИБ — ovde ostaju u
+  // latinici odlukom vlasnika, radi jednoobraznosti sa ostalim skraćenicama.
+  "APR", "PIB",
 ];
 
 // Strane reči (pozajmljenice) koje ostaju u latinici u SVIM padežnim oblicima.

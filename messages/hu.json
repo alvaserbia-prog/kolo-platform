@@ -83,65 +83,65 @@
     "mesto_iz_spiska": "Válasszon egy települést a felkínált listából — csak egy helyet adjon meg."
   },
   "seo": {
-    "site_naslov": "KOLO — A közösséghez való hozzájáruláson alapuló kölcsönösségi rendszer",
-    "site_opis": "A KOLO a közjóhoz való hozzájárulás nyilvántartásának rendszere, amely a kölcsönösségen alapul. A POEN rögzíti, mit adtál a közösségnek, a ZRNO pedig szavazatot ad neked a döntésekben. A tagság ingyenes."
+    "site_naslov": "KOLO — A közjóhoz való hozzájáruláson alapuló kölcsönösségi rendszer",
+    "site_opis": "A KOLO a közjóhoz való hozzájárulás nyilvántartásának rendszere, amely a kölcsönösségen alapul. A POEN rögzíti a hozzájárulásodat és a részvételedet, a ZRNO pedig szavazatot ad neked a döntésekben. A tagság ingyenes."
   },
   "login": {
     "naslov": "Bejelentkezés",
-    "podnaslov": "Üdvözöljük vissza a Kör-ben",
-    "dugme_google": "Bejelentkezés Google-lel",
-    "registruj_boks_naslov": "Nincs még fiókja?",
-    "registruj_boks_tekst": "Hozza létre fiókját néhány perc alatt.",
+    "podnaslov": "Jó, hogy újra itt vagy.",
+    "dugme_google": "Bejelentkezés Google-fiókkal",
+    "registruj_boks_naslov": "Nincs még fiókod?",
+    "registruj_boks_tekst": "Hozz létre egyet néhány perc alatt.",
     "registruj_boks_dugme": "Fiók létrehozása",
-    "registruj_boks_google": "Regisztráció Google-lel",
+    "registruj_boks_google": "Regisztráció Google-fiókkal",
     "email": "Email",
     "lozinka": "Jelszó",
-    "placeholder_email": "az@email.com",
+    "placeholder_email": "te@email.com",
     "placeholder_lozinka": "••••••••",
     "dugme": "Bejelentkezés",
     "dugme_loading": "Bejelentkezés...",
-    "nalog_kreiran": "A fiók létrehozva. Jelentkezz be a folytatáshoz — egy ismerősöd igazol, vagy bemutatkozhatsz a hálózatnak.",
+    "nalog_kreiran": "A fiók elkészült. Jelentkezz be a folytatáshoz — teljes hozzáférést akkor kapsz, ha megerősít valaki, aki személyesen ismer, de magadat is bemutathatod a hálózatnak.",
     "greska_email_obavezan": "Az email kötelező.",
-    "greska_email_neispravan": "Adjon meg érvényes email címet.",
+    "greska_email_neispravan": "Adj meg érvényes email címet.",
     "greska_lozinka_obavezna": "A jelszó kötelező.",
     "greska_pogresni_podaci": "Helytelen email vagy jelszó.",
-    "greska_prijava": "Bejelentkezési hiba. Kérjük próbálja újra.",
-    "greska_oauth": "A Google-bejelentkezés nem sikerült. Kérjük, próbálja újra.",
+    "greska_prijava": "Bejelentkezési hiba. Próbáld újra.",
+    "greska_oauth": "A Google-bejelentkezés nem sikerült. Próbáld újra.",
     "zaboravljena_lozinka": "Elfelejtett jelszó?",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
-    "greska_registruj_cta": "Nincs még fiókja? Regisztráljon",
+    "greska_registruj_cta": "Nincs még fiókod? Regisztrálj",
     "email_ili_pseudonim": "E-mail vagy álnév",
     "deca_pseudonimom": "Megadhatod az e-mail címedet vagy az álnevedet. A gyermekeknek csak álnevük van és a szülőtől kapott jelszavuk."
   },
   "zaboravljenaLozinka": {
     "naslov": "Elfelejtett jelszó",
-    "podnaslov": "Adja meg az email címét és küldünk egy visszaállítási linket.",
+    "podnaslov": "Add meg az email címed, és küldünk egy linket az új jelszó beállításához.",
     "email": "Email",
-    "placeholder_email": "az@email.com",
+    "placeholder_email": "te@email.com",
     "dugme": "Link küldése",
     "dugme_loading": "Küldés...",
     "nazad_na_login": "Vissza a bejelentkezéshez",
-    "poslato_poruka": "Ha létezik fiók ezzel az email címmel, elküldtük a visszaállítási linket.",
-    "poslato_napomena": "Ellenőrizze a Spam/Levélszemét mappát. A link 1 óráig érvényes.",
+    "poslato_poruka": "Ha létezik fiók ezzel az email címmel, a linket elküldtük a címedre.",
+    "poslato_napomena": "Nézd meg a Spam mappát is. A link 1 óráig érvényes.",
     "greska_email_obavezan": "Az email kötelező.",
-    "greska_email_neispravan": "Adjon meg érvényes email címet.",
-    "greska_zahtev": "Hiba a kérés küldésekor. Kérjük próbálja újra."
+    "greska_email_neispravan": "Adj meg érvényes email címet.",
+    "greska_zahtev": "Hiba a kérés küldésekor. Próbáld újra."
   },
   "resetLozinka": {
     "naslov": "Új jelszó",
-    "podnaslov": "Adjon meg egy új jelszót a fiókjához.",
+    "podnaslov": "Állíts be új jelszót a fiókodhoz.",
     "nova_lozinka": "Új jelszó",
     "placeholder_lozinka": "••••••••",
     "dugme": "Új jelszó mentése",
     "dugme_loading": "Mentés...",
     "provera_linka": "Link ellenőrzése...",
-    "link_nevazeci": "A link érvénytelen vagy lejárt. Kérjen új linket.",
+    "link_nevazeci": "A link érvénytelen vagy lejárt. Kérj újat.",
     "trazi_novi_link": "Új link kérése",
     "uspesno_promenjena": "A jelszó sikeresen megváltozott.",
     "preusmeravanje": "Átirányítás a bejelentkezéshez...",
     "greska_lozinka_kratka": "A jelszónak legalább 8 karakteresnek kell lennie.",
-    "greska_zahtev": "Hiba a jelszó megváltoztatásakor. Kérjük próbálja újra.",
+    "greska_zahtev": "Hiba a jelszó megváltoztatásakor. Próbáld újra.",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése"
   },
@@ -160,14 +160,14 @@
   },
   "registracija": {
     "naslov": "Regisztráció",
-    "podnaslov": "Csatlakozzon a KOLO közösséghez",
+    "podnaslov": "Csatlakozz a KOLO közösséghez",
     "email": "Email",
     "pseudonim": "Álnév",
     "lozinka": "Jelszó",
     "mesto": "Hely",
-    "mesto_opis": "Válasszon egy települést a listából. Segít a közeli hirdetések megjelenítésében. Kihagyhatja, és később is megadhatja.",
+    "mesto_opis": "A települések listájából választható — egy hely. Segít a közeli hirdetések megjelenítésében. Kihagyhatod, és később is megadhatod.",
     "opciono": "(opcionális)",
-    "placeholder_pseudonim": "AzÖnÁlneve",
+    "placeholder_pseudonim": "Álneved",
     "placeholder_lozinka": "••••••••",
     "pseudonim_provera": "...",
     "pseudonim_slobodan_opis": "Nyilvánosan látható, nem mutatja a valódi nevet. Latin betűk, számok és _ . - (szóköz és ékezet nélkül).",
@@ -181,17 +181,17 @@
     "privatnost_link": "Adatvédelmi szabályzatot",
     "dugme": "Regisztráljon",
     "dugme_loading": "Regisztráció...",
-    "vec_imate_nalog": "Már van fiókja?",
-    "prijavite_se": "Bejelentkezés",
-    "greska_email": "Adjon meg érvényes email címet.",
+    "vec_imate_nalog": "Van már fiókod?",
+    "prijavite_se": "Jelentkezz be",
+    "greska_email": "Adj meg érvényes email címet.",
     "greska_pseudonim_duljina": "Az álnévnek legalább 3 karakterből kell állnia.",
     "greska_pseudonim_zauzet": "Ez az álnév már foglalt.",
     "greska_lozinka_duljina": "A jelszónak legalább 8 karakterből kell állnia.",
-    "greska_uslovi": "El kell fogadnia a feltételeket és az adatvédelmi szabályzatot.",
-    "greska_registracija": "Regisztrációs hiba.",
+    "greska_uslovi": "A folytatáshoz fogadd el a Felhasználási feltételeket és az Adatvédelmi szabályzatot.",
+    "greska_registracija": "Regisztrációs hiba. Próbáld újra.",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
-    "dete_pitanje": "Gyerek vagy?",
+    "dete_pitanje": "18 évesnél fiatalabb vagy?",
     "dete_link": "Gyerekfiók nyitása"
   },
   "sistem": {
@@ -965,15 +965,15 @@
       },
       "dokaz-stvarnosti": {
         "naziv": "Szabályzat a valóságigazolásról",
-        "opis": "A felhasználók megerősítési láncon keresztüli megerősítésének működési szabályai: a valóságindex, a megerősítési kapacitás és a körkörösség elleni szabály."
+        "opis": "A valóság megerősítésének működési mechanikája a megerősítési láncon keresztül: a valóságindex, a megerősítésre rendelkezésre álló helyek száma és a megerősítési zóna szabálya."
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Szabályzat a patronálásról és az adományokról",
-        "opis": "A magánszemélyek adományozási szintjei (11 szint, együttható 1,00–2,00) és a jogi személyek patronálási szintjei (7 szint, küszöb 10 000 RSD)."
+        "opis": "Magánszemélyek adományai (11 szint, együttható 1,00–2,00) és jogi személyek patronálása (7 szint, küszöb 10 000 RSD)."
       },
       "operativni": {
         "naziv": "Szabályzat a működési hozzájárulásról",
-        "opis": "A működési program szabályai — a feladatok meghirdetése és teljesítésük megerősítése a ZRNO-tartók, az első szakaszban pedig az Alapítvány Igazgatósága által."
+        "opis": "A működési program mechanikája: a feladatokat a ZRNO-tartók hirdetik meg, és a teljesítést is ők erősítik meg, az első szakaszban pedig az Alapítvány Igazgatósága."
       },
       "osnivacki": {
         "naziv": "Szabályzat az alapítói hozzájárulásról",
@@ -985,7 +985,7 @@
       },
       "programi-podrske": {
         "naziv": "Szabályzat a támogatási programokról",
-        "opis": "Szociális programok (Édesanyák támogatása, Idősek támogatása, Különleges gondoskodás, Tanulás) — feltételek, együtthatók és a megerősítők megerősítése."
+        "opis": "Szociális programok (Édesanyák támogatása, Idősek támogatása, Különleges gondoskodás, Tanulás) — feltételek, együtthatók és a láncodból érkező megerősítés."
       },
       "ucesce-dece": {
         "naziv": "Szabályzat a gyermekek részvételéről",
@@ -1009,10 +1009,10 @@
     "header_priduzi_se": "Csatlakozás",
     "header_aria_otvori": "Menü megnyitása",
     "header_aria_zatvori": "Menü bezárása",
-    "footer_brand_opis": "Hálózat, amelyben az emberek közvetítők nélkül cserélnek munkát, javakat és tudást.\nMinden hozzájárulás feljegyezve marad.",
+    "footer_brand_opis": "A kölcsönösség rendszere, amelyben a munkát, a javakat és a tudást pénz nélkül cserélik.\nMinden hozzájárulás feljegyezve marad.",
     "footer_fondacija_adresa": "KOLO Alapítvány · Šetalište 16, Zombor",
     "footer_fondacija_brojevi": "Törzsszám: 28836627 · Adószám: 115840443",
-    "footer_fondacija_registar": "Bejegyezve az APR alapítványi nyilvántartásába 2026. 07. 21-én.",
+    "footer_fondacija_registar": "Bejegyezve az Alapítványok és Alapok Nyilvántartásába (APR) 2026. 07. 21-én.",
     "footer_sistem": "Rendszer",
     "footer_zajednica": "Közösség",
     "footer_pravni": "Jogi keret",
@@ -1493,16 +1493,16 @@
     "meta_title": "Pártfogók — KOLO",
     "meta_desc": "A KOLO közösség pártfogói — jogi személyek és vállalkozók, akik az Alapítványhoz való hozzájárulással (pénz, áru vagy szolgáltatás) támogatják a rendszert.",
     "naslov": "Pártfogók",
-    "opis": "Szervezetek és vállalkozók, akik a KOLO rendszert támogatják",
-    "prazno_naslov": "Még nincsenek pártfogók",
+    "opis": "A pártfogók jogi személyek és vállalkozók, akik az Alapítványnak nyújtott hozzájárulással — pénzben, áruban vagy szolgáltatásban — támogatják a KOLO rendszert.",
+    "prazno_naslov": "Még nincsenek bejegyzett pártfogók.",
     "postani_naslov": "Légy pártfogó",
-    "postani_opis": "Ha szervezeted vagy vállalkozásod szeretné támogatni a KOLO projektet, vedd fel velünk a kapcsolatot.",
+    "postani_opis": "Ha jogi személyt képviselsz vagy vállalkozó vagy, és támogatnád a KOLO közösséget, vedd fel velünk a kapcsolatot.",
     "postani_cta": "Pártfogóvá válás",
     "nivo": "szint"
   },
   "zajednickoDobroPage": {
     "meta_title": "Közjó és licenszek — KOLO",
-    "meta_desc": "A KOLO rendszer közjava — szoftver AGPL-3.0 alatt, tartalom CC BY-SA 4.0 alatt. Minden felhasználó kollektív java, amelyre senkinek nincs tulajdonjoga.",
+    "meta_desc": "A KOLO rendszer közjava — szoftver AGPL-3.0 alatt, tartalom CC BY-SA 4.0 alatt. Minden tagé; senkinek nincs rajta tulajdonjoga.",
     "naslov": "Közjó és licenszek",
     "opis": "A KOLO nyílt forráskód és szabad tartalom elvein alapul",
     "softver_naslov": "Szoftver – AGPL-3.0",
@@ -1516,7 +1516,7 @@
     "doprinosi_cta": "CONTRIBUTING.md megtekintése",
     "principi_naslov": "Alapelvek",
     "principi_1_naslov": "Nem konvertálható",
-    "principi_1_opis": "A POEN nem váltható pénzre, nem ruházható át és nem képvisel vagyoni jogot.",
+    "principi_1_opis": "A POEN nem váltható pénzre és nem képvisel vagyoni jogot. A bejegyzések keletkeznek és átíródnak, de mindig a Protokollban maradnak — a közjóhoz tartoznak.",
     "principi_2_naslov": "Adatok minimalizálása",
     "principi_2_opis": "A rendszer csak a feltétlenül szükséges adatokat gyűjti. Az identitás és a pseudonym nem összekapcsolt a nyilvántartásban.",
     "principi_3_naslov": "Visszavonhatatlan licenszek",
@@ -1524,7 +1524,7 @@
   },
   "osnivackiDoprinosPage": {
     "meta_title": "Alapítói hozzájárulás — KOLO",
-    "meta_desc": "KOLO alapítói hozzájárulás — a platform előkészítésén végzett munka utólagos rögzítése. Kövesse a csatorna állapotát, az elvégzett lépéseket és a POEN-elosztást.",
+    "meta_desc": "A KOLO rendszer alapítói hozzájárulása — a platform előkészítésén végzett munka utólagos rögzítése. Kövesd a csatorna állapotát, az elvégzett lépéseket és a POEN elosztását az alapítók között.",
     "naslov": "Alapítói hozzájárulás",
     "opis": "Az indulás előtti munka utólagos rögzítése",
     "stanje_naslov": "Az alapítói csatorna állapota",
@@ -1551,7 +1551,7 @@
     "naslov": "Gyakran ismételt kérdések",
     "opis": "A KOLO rendszerrel kapcsolatos leggyakoribb kérdések és válaszok",
     "pretraga_placeholder": "Keresés a kérdések között...",
-    "nema_rezultata": "Nincs találat.",
+    "nema_rezultata": "Nincs találat. Próbálj másik szót.",
     "brzo_navigovanje": "Gyors navigáció"
   },
   "pijaca": {
@@ -2390,9 +2390,9 @@
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "Az álnévnek legalább 3 karakterből kell állnia.",
     "greska_pseudonim_zauzet": "Ez az álnév foglalt.",
-    "greska_uslovi": "El kell fogadnod a feltételeket és az adatvédelmi szabályzatot.",
+    "greska_uslovi": "A folytatáshoz fogadd el a Felhasználási feltételeket és az Adatvédelmi szabályzatot.",
     "greska_opsta": "Hiba. Próbáld újra.",
-    "ph_pseudonim": "AzÖnÁlneve",
+    "ph_pseudonim": "Álneved",
     "cuvanje": "Mentés...",
     "zavrsi": "Regisztráció befejezése"
   },

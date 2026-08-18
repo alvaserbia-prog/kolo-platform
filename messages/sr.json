@@ -90,31 +90,31 @@
     "mesto_iz_spiska": "Izaberi mesto iz ponuđenog spiska naselja — upiši samo jedno mesto."
   },
   "seo": {
-    "site_naslov": "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajednici",
-    "site_opis": "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. POEN beleži šta si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno."
+    "site_naslov": "KOLO — Sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru",
+    "site_opis": "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. POEN beleži tvoj doprinos i učešće, ZRNO ti daje glas u odlukama. Članstvo je besplatno."
   },
   "login": {
     "naslov": "Prijava",
-    "podnaslov": "Dobrodošli nazad u KOLO",
+    "podnaslov": "Lepo je videti te ponovo.",
     "email": "Email",
     "lozinka": "Lozinka",
-    "placeholder_email": "vas@email.com",
+    "placeholder_email": "tvoj@email.com",
     "placeholder_lozinka": "••••••••",
     "dugme": "Prijavi se",
     "dugme_loading": "Prijava u toku...",
-    "dugme_google": "Prijavi se sa Google",
-    "registruj_boks_naslov": "Nemate nalog?",
-    "registruj_boks_tekst": "Napravite svoj nalog za par minuta.",
-    "registruj_boks_dugme": "Napravite nalog",
-    "registruj_boks_google": "Napravite nalog sa Google",
-    "nalog_kreiran": "Nalog je kreiran. Prijavi se za nastavak — potvrdi te neko ko te poznaje, ili se možeš predstaviti mreži.",
+    "dugme_google": "Prijavi se Google nalogom",
+    "registruj_boks_naslov": "Nemaš nalog?",
+    "registruj_boks_tekst": "Napravi nalog za par minuta.",
+    "registruj_boks_dugme": "Napravi nalog",
+    "registruj_boks_google": "Registruj se Google nalogom",
+    "nalog_kreiran": "Nalog je napravljen. Prijavi se za nastavak — pun pristup dobijaš kada te potvrdi neko ko te lično poznaje, a mreži se možeš predstaviti i sam.",
     "greska_email_obavezan": "Email je obavezan.",
-    "greska_email_neispravan": "Unesite ispravnu email adresu.",
+    "greska_email_neispravan": "Unesi ispravnu email adresu.",
     "greska_lozinka_obavezna": "Lozinka je obavezna.",
     "greska_pogresni_podaci": "Pogrešan email ili lozinka.",
-    "greska_registruj_cta": "Nemate nalog? Registrujte se",
-    "greska_prijava": "Greška pri prijavi. Pokušajte ponovo.",
-    "greska_oauth": "Prijava preko Google-a nije uspela. Pokušajte ponovo.",
+    "greska_registruj_cta": "Nemaš nalog? Registruj se",
+    "greska_prijava": "Greška pri prijavi. Pokušaj ponovo.",
+    "greska_oauth": "Prijava preko Google-a nije uspela. Pokušaj ponovo.",
     "zaboravljena_lozinka": "Zaboravljena lozinka?",
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
@@ -123,32 +123,32 @@
   },
   "zaboravljenaLozinka": {
     "naslov": "Zaboravljena lozinka",
-    "podnaslov": "Unesite email i poslaćemo vam link za resetovanje.",
+    "podnaslov": "Unesi email i poslaćemo ti link za postavljanje nove lozinke.",
     "email": "Email",
-    "placeholder_email": "vas@email.com",
+    "placeholder_email": "tvoj@email.com",
     "dugme": "Pošalji link",
     "dugme_loading": "Slanje...",
     "nazad_na_login": "Nazad na prijavu",
-    "poslato_poruka": "Ako postoji nalog sa tim email-om, link za resetovanje je poslat na vašu adresu.",
-    "poslato_napomena": "Proverite i Spam/Junk fasciklu. Link važi 1 sat.",
+    "poslato_poruka": "Ako postoji nalog sa tim email-om, link je poslat na tvoju adresu.",
+    "poslato_napomena": "Proveri i Spam fasciklu. Link važi 1 sat.",
     "greska_email_obavezan": "Email je obavezan.",
-    "greska_email_neispravan": "Unesite ispravnu email adresu.",
-    "greska_zahtev": "Greška pri slanju zahteva. Pokušajte ponovo."
+    "greska_email_neispravan": "Unesi ispravnu email adresu.",
+    "greska_zahtev": "Greška pri slanju zahteva. Pokušaj ponovo."
   },
   "resetLozinka": {
     "naslov": "Nova lozinka",
-    "podnaslov": "Postavite novu lozinku za vaš nalog.",
+    "podnaslov": "Postavi novu lozinku za svoj nalog.",
     "nova_lozinka": "Nova lozinka",
     "placeholder_lozinka": "••••••••",
     "dugme": "Sačuvaj novu lozinku",
     "dugme_loading": "Čuvanje...",
     "provera_linka": "Provera linka...",
-    "link_nevazeci": "Link je nevažeći ili je istekao. Zatražite novi link.",
+    "link_nevazeci": "Link je nevažeći ili je istekao. Zatraži novi link.",
     "trazi_novi_link": "Zatraži novi link",
     "uspesno_promenjena": "Lozinka je uspešno promenjena.",
     "preusmeravanje": "Preusmeravanje na prijavu...",
     "greska_lozinka_kratka": "Lozinka mora imati najmanje 8 karaktera.",
-    "greska_zahtev": "Greška pri promeni lozinke. Pokušajte ponovo.",
+    "greska_zahtev": "Greška pri promeni lozinke. Pokušaj ponovo.",
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku"
   },
@@ -167,14 +167,14 @@
   },
   "registracija": {
     "naslov": "Registracija",
-    "podnaslov": "Pridružite se KOLO zajednici",
+    "podnaslov": "Pridruži se KOLO zajednici",
     "email": "Email",
     "pseudonim": "Pseudonim",
     "lozinka": "Lozinka",
     "mesto": "Mesto",
-    "mesto_opis": "Bira se iz spiska naselja — jedno mesto. Pomaže da vidite oglase u blizini. Možete preskočiti i dodati kasnije.",
+    "mesto_opis": "Bira se iz spiska naselja — jedno mesto. Pomaže da vidiš oglase u blizini. Možeš preskočiti i dodati kasnije.",
     "opciono": "(opciono)",
-    "placeholder_pseudonim": "VasePseudonim",
+    "placeholder_pseudonim": "TvojPseudonim",
     "placeholder_lozinka": "••••••••",
     "pseudonim_provera": "...",
     "pseudonim_slobodan_opis": "Javno vidljiv, ne prikazuje pravo ime. Latinična slova, brojevi i _ . - (bez razmaka i srpskih slova).",
@@ -188,17 +188,17 @@
     "privatnost_link": "Politiku privatnosti",
     "dugme": "Registruj se",
     "dugme_loading": "Registracija...",
-    "vec_imate_nalog": "Već imate nalog?",
-    "prijavite_se": "Prijavite se",
-    "greska_email": "Unesite ispravnu email adresu.",
+    "vec_imate_nalog": "Već imaš nalog?",
+    "prijavite_se": "Prijavi se",
+    "greska_email": "Unesi ispravnu email adresu.",
     "greska_pseudonim_duljina": "Pseudonim mora imati najmanje 3 karaktera.",
     "greska_pseudonim_zauzet": "Ovaj pseudonim je zauzet.",
     "greska_lozinka_duljina": "Lozinka mora imati najmanje 8 karaktera.",
-    "greska_uslovi": "Morate prihvatiti uslove i politiku privatnosti.",
-    "greska_registracija": "Greška pri registraciji.",
+    "greska_uslovi": "Da nastaviš, prihvati Uslove korišćenja i Politiku privatnosti.",
+    "greska_registracija": "Greška pri registraciji. Pokušaj ponovo.",
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
-    "dete_pitanje": "Dete si?",
+    "dete_pitanje": "Imaš manje od 18 godina?",
     "dete_link": "Otvori dečji nalog"
   },
   "sistem": {
@@ -892,7 +892,7 @@
   "pravne": {
     "eyebrow": "Pravni dokumenti",
     "dokumentacija": "Dokumentacija",
-    "viditeI": "Vidite i:",
+    "viditeI": "Vidi i:",
     "nazadNaPocetnu": "Nazad na početnu",
     "verzija": "Verzija",
     "otvoriDokument": "Otvori dokument →",
@@ -972,15 +972,15 @@
       },
       "dokaz-stvarnosti": {
         "naziv": "Pravilnik o dokazu stvarnosti",
-        "opis": "Operativna mehanika potvrde stvarnosti kroz lanac potvrda: indeks stvarnosti, broj mesta za potvrdu, anti-cirkularno pravilo."
+        "opis": "Operativna mehanika potvrde stvarnosti kroz lanac potvrda: indeks stvarnosti, broj mesta za potvrdu, pravilo zone potvrđivanja."
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Pravilnik o pokroviteljstvu i donacijama",
-        "opis": "Nivoi donacija fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i nivoi pokroviteljstva pravnih lica (7 nivoa, prag 10.000 RSD)."
+        "opis": "Donacije fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i pokroviteljstvo pravnih lica (7 nivoa, prag 10.000 RSD)."
       },
       "operativni": {
         "naziv": "Pravilnik o operativnom doprinosu",
-        "opis": "Mehanika operativnog programa — objavljivanje zadataka i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije u prvoj fazi."
+        "opis": "Mehanika operativnog programa: zadatke objavljuju i izvršenje potvrđuju nosioci ZRNA, u prvoj fazi Uprava Fondacije."
       },
       "osnivacki": {
         "naziv": "Pravilnik o osnivačkom doprinosu",
@@ -992,11 +992,11 @@
       },
       "programi-podrske": {
         "naziv": "Pravilnik o programima podrške",
-        "opis": "Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) — uslovi, koeficijenti i potvrda iz lanca."
+        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga, Školovanje) — uslovi, koeficijenti i potvrda iz lanca."
       },
       "ucesce-dece": {
         "naziv": "Pravilnik o učešću dece",
-        "opis": "Učešće maloletnih lica: dva ulaza (roditelj otvara nalog ili se dete registruje samo), tri stanja naloga, prijateljstva i doprinos od 500 POEN, prelazak u punoletni nalog."
+        "opis": "Učešće maloletnih lica: dva ulaza (roditelj otvara nalog ili se dete registruje samo), tri stanja naloga, prijateljstva i doprinos od 500 POEN-a, prelazak u punoletni nalog."
       }
     }
   },
@@ -1016,10 +1016,10 @@
     "header_priduzi_se": "Pridruži se",
     "header_aria_otvori": "Otvori meni",
     "header_aria_zatvori": "Zatvori meni",
-    "footer_brand_opis": "Mreža u kojoj ljudi razmenjuju rad, dobra i znanje bez posrednika.\nSvaki doprinos ostaje zabeležen.",
+    "footer_brand_opis": "Sistem uzajamnosti u kome se rad, dobra i znanje razmenjuju bez novca.\nSvaki doprinos ostaje zabeležen.",
     "footer_fondacija_adresa": "KOLO Fondacija · Šetalište 16, Sombor",
     "footer_fondacija_brojevi": "Matični broj: 28836627 · PIB: 115840443",
-    "footer_fondacija_registar": "Upisana u Registar zadužbina i fondacija APR, 21.07.2026.",
+    "footer_fondacija_registar": "Upisana u Registar zadužbina i fondacija (APR) 21.07.2026.",
     "footer_sistem": "Sistem",
     "footer_zajednica": "Zajednica",
     "footer_pravni": "Pravni okvir",
@@ -1500,16 +1500,16 @@
     "meta_title": "Pokrovitelji — KOLO",
     "meta_desc": "Pokrovitelji KOLO zajednice — pravna lica i preduzetnici koji doprinosom Fondaciji (novac, roba ili usluge) podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
     "naslov": "Pokrovitelji",
-    "opis": "Pokrovitelji su pravna lica i organizacije koje podržavaju KOLO zajednicu sponzorstvima i donacijama.",
+    "opis": "Pokrovitelji su pravna lica i preduzetnici koji doprinosom Fondaciji — u novcu, robi ili uslugama — podržavaju KOLO sistem.",
     "nivo": "Nivo",
-    "prazno_naslov": "Još uvek nema registrovanih pokrovitelja.",
+    "prazno_naslov": "Još nema registrovanih pokrovitelja.",
     "postani_naslov": "Postanite pokrovitelj",
-    "postani_opis": "Ako zastupate pravno lice ili ste preduzetnik i želite da podržite KOLO zajednicu, obratite se administratorima.",
+    "postani_opis": "Ako zastupaš pravno lice ili si preduzetnik i želiš da podržiš KOLO zajednicu, javi nam se.",
     "postani_cta": "Saznajte više →"
   },
   "zajednickoDobroPage": {
     "meta_title": "Zajedničko dobro i licence — KOLO",
-    "meta_desc": "Zajedničko dobro KOLO sistema — softver pod AGPL-3.0 i sadržaj pod CC BY-SA 4.0. Kolektivno dobro svih korisnika nad kojim niko nema svojinsko pravo.",
+    "meta_desc": "Zajedničko dobro KOLO sistema — softver pod AGPL-3.0 i sadržaj pod CC BY-SA 4.0. Pripada svim članovima; niko nad njim nema svojinsko pravo.",
     "naslov": "Zajedničko dobro i licence",
     "opis": "Zajedničko dobro KOLO sistema čine softver sistema, pravila sistema, evidencija doprinosa i učešća, i sadržaj nastao u sistemu.",
     "softver_naslov": "Softver — AGPL-3.0",
@@ -1523,7 +1523,7 @@
     "doprinosi_cta": "Pregledaj CONTRIBUTING.md",
     "principi_naslov": "Osnovna načela",
     "principi_1_naslov": "Nekonvertibilnost",
-    "principi_1_opis": "POEN se ne može zameniti za novac, preneti ni predstavlja imovinsko pravo.",
+    "principi_1_opis": "POEN se ne može zameniti za novac i ne predstavlja imovinsko pravo. Zapisi se upisuju i prepisuju, ali uvek ostaju u Protokolu — pripadaju zajedničkom dobru.",
     "principi_2_naslov": "Minimizacija podataka",
     "principi_2_opis": "Sistem prikuplja samo neophodne podatke. Identitet i pseudonim nisu međusobno povezani u evidenciji.",
     "principi_3_naslov": "Neopozive licence",
@@ -1531,7 +1531,7 @@
   },
   "osnivackiDoprinosPage": {
     "meta_title": "Osnivački doprinos — KOLO",
-    "meta_desc": "Osnivački doprinos KOLO sistema — naknadno evidentiranje rada na pripremi platforme. Pratite stanje kanala, izvršene korake i raspodelu POEN-a među osnivačima.",
+    "meta_desc": "Osnivački doprinos KOLO sistema — naknadno evidentiranje rada na pripremi platforme. Prati stanje kanala, izvršene korake i raspodelu POEN-a među osnivačima.",
     "naslov": "Osnivački doprinos",
     "opis": "Osnivački doprinos je naknadno evidentiranje rada obavljenog na projektovanju i pripremi KOLO sistema pre otvaranja platforme.",
     "stanje_naslov": "Stanje kanala",
@@ -1558,8 +1558,8 @@
     "naslov": "Često postavljana pitanja",
     "opis": "Odgovori na najčešća pitanja o KOLO sistemu.",
     "pretraga_placeholder": "Pretraži pitanja…",
-    "nema_rezultata": "Nema rezultata.",
-    "brzo_navigovanje": "Brzo navigovanje"
+    "nema_rezultata": "Nema rezultata. Pokušaj drugu reč.",
+    "brzo_navigovanje": "Brza navigacija"
   },
   "pijaca": {
     "naslov": "Pijaca",
@@ -2397,9 +2397,9 @@
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "Pseudonim mora imati najmanje 3 karaktera.",
     "greska_pseudonim_zauzet": "Ovaj pseudonim je zauzet.",
-    "greska_uslovi": "Morate prihvatiti uslove i politiku privatnosti.",
-    "greska_opsta": "Greška. Pokušajte ponovo.",
-    "ph_pseudonim": "VasPseudonim",
+    "greska_uslovi": "Da nastaviš, prihvati Uslove korišćenja i Politiku privatnosti.",
+    "greska_opsta": "Greška. Pokušaj ponovo.",
+    "ph_pseudonim": "TvojPseudonim",
     "cuvanje": "Čuvanje...",
     "zavrsi": "Završi registraciju"
   },

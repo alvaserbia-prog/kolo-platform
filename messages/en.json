@@ -90,31 +90,31 @@
     "mesto_iz_spiska": "Choose a place from the offered list of settlements — enter only one place."
   },
   "seo": {
-    "site_naslov": "KOLO — A system of mutuality based on contribution to the community",
-    "site_opis": "KOLO is a system for recording contributions to the common good, based on mutuality. POEN records what you have given to the community; ZRNO gives you a voice in decisions. Membership is free."
+    "site_naslov": "KOLO — A system of mutuality based on contribution to the common good",
+    "site_opis": "KOLO is a system for recording contributions to the common good, based on mutuality. POEN records your contribution and participation; ZRNO gives you a voice in decisions. Membership is free."
   },
   "login": {
     "naslov": "Sign In",
-    "podnaslov": "Welcome back to Circle",
+    "podnaslov": "Good to see you again.",
     "email": "Email",
     "lozinka": "Password",
     "placeholder_email": "your@email.com",
     "placeholder_lozinka": "••••••••",
     "dugme": "Sign In",
     "dugme_loading": "Signing in...",
-    "dugme_google": "Continue with Google",
+    "dugme_google": "Sign in with Google",
     "registruj_boks_naslov": "Don't have an account?",
-    "registruj_boks_tekst": "Create your account in a couple of minutes.",
+    "registruj_boks_tekst": "Create one in a couple of minutes.",
     "registruj_boks_dugme": "Create an account",
     "registruj_boks_google": "Sign up with Google",
-    "nalog_kreiran": "Account created. Sign in to continue — someone who knows you confirms you, or you can introduce yourself to the network.",
+    "nalog_kreiran": "Your account is created. Sign in to continue — you get full access once someone who knows you in person confirms you, and you can introduce yourself to the network on your own.",
     "greska_email_obavezan": "Email is required.",
     "greska_email_neispravan": "Enter a valid email address.",
     "greska_lozinka_obavezna": "Password is required.",
     "greska_pogresni_podaci": "Wrong email or password.",
     "greska_registruj_cta": "Don't have an account? Sign up",
-    "greska_prijava": "Sign in error. Please try again.",
-    "greska_oauth": "Google sign-in didn't complete. Please try again.",
+    "greska_prijava": "Sign-in error. Try again.",
+    "greska_oauth": "Google sign-in didn't go through. Try again.",
     "zaboravljena_lozinka": "Forgot password?",
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
@@ -123,17 +123,17 @@
   },
   "zaboravljenaLozinka": {
     "naslov": "Forgot Password",
-    "podnaslov": "Enter your email and we'll send you a reset link.",
+    "podnaslov": "Enter your email and we'll send you a link to set a new password.",
     "email": "Email",
     "placeholder_email": "your@email.com",
     "dugme": "Send link",
     "dugme_loading": "Sending...",
     "nazad_na_login": "Back to sign in",
-    "poslato_poruka": "If an account with that email exists, a reset link has been sent to your address.",
-    "poslato_napomena": "Check your Spam/Junk folder. The link is valid for 1 hour.",
+    "poslato_poruka": "If an account with that email exists, the link has been sent to your address.",
+    "poslato_napomena": "Check your Spam folder too. The link is valid for 1 hour.",
     "greska_email_obavezan": "Email is required.",
     "greska_email_neispravan": "Enter a valid email address.",
-    "greska_zahtev": "Error sending request. Please try again."
+    "greska_zahtev": "Error sending the request. Try again."
   },
   "resetLozinka": {
     "naslov": "New Password",
@@ -143,12 +143,12 @@
     "dugme": "Save new password",
     "dugme_loading": "Saving...",
     "provera_linka": "Checking link...",
-    "link_nevazeci": "The link is invalid or has expired. Request a new link.",
+    "link_nevazeci": "The link is invalid or has expired. Request a new one.",
     "trazi_novi_link": "Request a new link",
     "uspesno_promenjena": "Password changed successfully.",
     "preusmeravanje": "Redirecting to sign in...",
     "greska_lozinka_kratka": "Password must be at least 8 characters.",
-    "greska_zahtev": "Error changing password. Please try again.",
+    "greska_zahtev": "Error changing the password. Try again.",
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password"
   },
@@ -172,7 +172,7 @@
     "pseudonim": "Pseudonym",
     "lozinka": "Password",
     "mesto": "Place",
-    "mesto_opis": "Pick one place from the list of settlements. Helps you see listings nearby. You can skip and add it later.",
+    "mesto_opis": "Pick one place from the list of settlements. It helps you see listings nearby. You can skip it and add it later.",
     "opciono": "(optional)",
     "placeholder_pseudonim": "YourPseudonym",
     "placeholder_lozinka": "••••••••",
@@ -189,16 +189,16 @@
     "dugme": "Register",
     "dugme_loading": "Registering...",
     "vec_imate_nalog": "Already have an account?",
-    "prijavite_se": "Sign In",
+    "prijavite_se": "Sign in",
     "greska_email": "Enter a valid email address.",
     "greska_pseudonim_duljina": "Pseudonym must be at least 3 characters.",
     "greska_pseudonim_zauzet": "This pseudonym is taken.",
     "greska_lozinka_duljina": "Password must be at least 8 characters.",
-    "greska_uslovi": "You must accept the terms and privacy policy.",
-    "greska_registracija": "Registration error.",
+    "greska_uslovi": "To continue, accept the Terms of Use and the Privacy Policy.",
+    "greska_registracija": "Registration error. Try again.",
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
-    "dete_pitanje": "Are you a child?",
+    "dete_pitanje": "Are you under 18?",
     "dete_link": "Open a child account"
   },
   "sistem": {
@@ -972,15 +972,15 @@
       },
       "dokaz-stvarnosti": {
         "naziv": "Rulebook on Proof of Reality",
-        "opis": "The operational mechanics of user confirmation through the chain of confirmations: the reality index, confirmation capacity, and the anti-circularity rule."
+        "opis": "How reality is confirmed through the chain of confirmations: the reality index, how many confirmations you may give, and the confirmation zone rule."
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Rulebook on Sponsorship and Donations",
-        "opis": "Donation tiers for individuals (11 levels, coefficient 1.00–2.00) and sponsorship tiers for legal entities (7 levels, threshold RSD 10,000)."
+        "opis": "Donations by individuals (11 levels, coefficient 1.00–2.00) and sponsorship by legal entities (7 levels, threshold RSD 10,000)."
       },
       "operativni": {
         "naziv": "Rulebook on Operational Contribution",
-        "opis": "The mechanics of the operational programme — publishing tasks and confirming their completion by ZRNO Holders, or by the Foundation's Management Board in the first phase."
+        "opis": "How the operational programme works: tasks are published and their completion confirmed by ZRNO holders, or by the Foundation's Management Board in the first phase."
       },
       "osnivacki": {
         "naziv": "Rulebook on Founding Contribution",
@@ -992,11 +992,11 @@
       },
       "programi-podrske": {
         "naziv": "Rulebook on Support Programmes",
-        "opis": "Social programmes (Support for Mothers, for the Elderly, Special Care, Schooling) — conditions, coefficients, and the person who confirmed you confirmation."
+        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Care, Schooling) — conditions, coefficients and confirmation from your chain."
       },
       "ucesce-dece": {
         "naziv": "Rulebook on the Participation of Children",
-        "opis": "Participation of minors: two entry paths (the parent opens the account or the child registers independently), three account states, friendships and the 500-POEN contribution, transition to an adult account."
+        "opis": "Participation of minors: two entry paths (the parent opens the account, or the child registers on their own), three account states, friendships and the 500-POEN contribution, and the move to an adult account."
       }
     }
   },
@@ -1016,10 +1016,10 @@
     "header_priduzi_se": "Join",
     "header_aria_otvori": "Open menu",
     "header_aria_zatvori": "Close menu",
-    "footer_brand_opis": "A network where people exchange work, goods and knowledge without middlemen.\nEvery contribution stays recorded.",
+    "footer_brand_opis": "A system of mutuality where work, goods and knowledge are exchanged without money.\nEvery contribution stays recorded.",
     "footer_fondacija_adresa": "KOLO Foundation · Šetalište 16, Sombor",
     "footer_fondacija_brojevi": "Registration number: 28836627 · Tax ID: 115840443",
-    "footer_fondacija_registar": "Entered in the APR Register of Endowments and Foundations on 21 July 2026.",
+    "footer_fondacija_registar": "Entered in the Register of Endowments and Foundations (APR) on 21 July 2026.",
     "footer_sistem": "System",
     "footer_zajednica": "Community",
     "footer_pravni": "Legal framework",
@@ -1500,16 +1500,16 @@
     "meta_title": "Sponsors — KOLO",
     "meta_desc": "KOLO community sponsors — legal entities and entrepreneurs who support the system by contributing to the Foundation (money, goods or services). View active sponsors and their tiers.",
     "naslov": "Sponsors",
-    "opis": "Sponsors are legal entities and organisations that support the KOLO community through sponsorships and donations.",
+    "opis": "Sponsors are legal entities and sole traders that support the KOLO system through a contribution to the Foundation — in money, goods or services.",
     "nivo": "Tier",
     "prazno_naslov": "No sponsors have registered yet.",
     "postani_naslov": "Become a sponsor",
-    "postani_opis": "If you represent a legal entity or are a sole trader and wish to support the KOLO community, get in touch with the administrators.",
+    "postani_opis": "If you represent a legal entity or are a sole trader and want to support the KOLO community, get in touch.",
     "postani_cta": "Find out more →"
   },
   "zajednickoDobroPage": {
     "meta_title": "Common good and licences — KOLO",
-    "meta_desc": "KOLO system common good — software under AGPL-3.0 and content under CC BY-SA 4.0. A collective good belonging to all users over which no one holds a property right.",
+    "meta_desc": "The KOLO system's common good — software under AGPL-3.0 and content under CC BY-SA 4.0. It belongs to all members; no one holds a property right over it.",
     "naslov": "Common good and licences",
     "opis": "The common good of the KOLO system comprises the system software, the system rules, the contribution and participation ledger, and content created within the system.",
     "softver_naslov": "Software — AGPL-3.0",
@@ -1523,7 +1523,7 @@
     "doprinosi_cta": "View CONTRIBUTING.md",
     "principi_naslov": "Core principles",
     "principi_1_naslov": "Non-convertible",
-    "principi_1_opis": "POEN cannot be exchanged for money or transferred, and confers no property right.",
+    "principi_1_opis": "POEN cannot be exchanged for money and is not a property right. Records are written and re-registered, but they always stay in the Protocol — they belong to the common good.",
     "principi_2_naslov": "Data minimisation",
     "principi_2_opis": "The system collects only necessary data. Identity and pseudonym are not linked in the registry.",
     "principi_3_naslov": "Irrevocable licences",
@@ -1531,7 +1531,7 @@
   },
   "osnivackiDoprinosPage": {
     "meta_title": "Founding contribution — KOLO",
-    "meta_desc": "KOLO founding contribution — retrospective recording of preparatory work on the platform. Track channel status, completed steps and POEN distribution among founders.",
+    "meta_desc": "KOLO founding contribution — retrospective recording of the work of preparing the platform. Follow the channel's status, the completed steps and how POEN is distributed among the founders.",
     "naslov": "Founding contribution",
     "opis": "The founding contribution is the retrospective recording of work carried out on the design and preparation of the KOLO system before the platform opened.",
     "stanje_naslov": "Channel status",
@@ -1558,7 +1558,7 @@
     "naslov": "Frequently asked questions",
     "opis": "Answers to the most common questions about the KOLO system. Click on a question to expand the answer, or search by keyword.",
     "pretraga_placeholder": "Search questions…",
-    "nema_rezultata": "No results.",
+    "nema_rezultata": "No results. Try another word.",
     "brzo_navigovanje": "Quick navigation"
   },
   "pijaca": {
@@ -2397,8 +2397,8 @@
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "The pseudonym must be at least 3 characters long.",
     "greska_pseudonim_zauzet": "This pseudonym is taken.",
-    "greska_uslovi": "You must accept the terms and the privacy policy.",
-    "greska_opsta": "Error. Please try again.",
+    "greska_uslovi": "To continue, accept the Terms of Use and the Privacy Policy.",
+    "greska_opsta": "Error. Try again.",
     "ph_pseudonim": "YourPseudonym",
     "cuvanje": "Saving...",
     "zavrsi": "Finish registration"
