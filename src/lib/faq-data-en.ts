@@ -515,101 +515,121 @@ All of this is set out in more detail in the Rules on the participation of child
     pitanja: [
       {
         id: 16,
-        pitanje: `What are Programmes and which ones exist?`,
-        odgovor: `Some forms of community participation are ongoing and diffuse — caring for children, caring for elderly people — and cannot be recorded as individual exchanges. For that, social programmes exist: mothers as primary carers, elderly users, special care, and education. When you confirm that you belong to such a group, the Protocol automatically credits POEN to you on a daily basis, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.`,
+        pitanje: `What are the Protocol Programmes and which ones exist?`,
+        odgovor: `Some forms of participation cannot be recorded as individual exchanges, so the Protocol Programmes exist for them.
+
+The social programmes cover groups whose participation in the community is constant and diffuse: Support for Mothers (and other primary carers), Support for the Elderly, Special Care (people with disabilities) and Schooling. Once your application is confirmed, the Protocol records POEN for you automatically on a daily basis, without reporting individual activities. This is not social assistance or a benefit — it is a way for that kind of participation to have an equal place in the system as well.
+
+Alongside them, the Programmes also include contributions: contribution to exchange (a path of five steps for joining in the exchange), operational contribution (work for the common good through published tasks) and the children's contribution (children's participation in the children's space, described in the section "Children and parents"). Each is explained in its own question.
+
+Applying for the social programmes is open to full members.`,
       },
       {
         id: 17,
         pitanje: `Who can apply for Support for Mothers?`,
-        odgovor: `Mothers, or another primary caregiver of the child.
+        odgovor: `A mother or another primary carer of a child — the programme follows the care of a child, not motherhood alone.
 
-The amount credited to you depends on the number of children — the more children, the larger the total amount, but with a slight decrease per child (through a coefficient applied by formula).
+The amount depends on the number and the age of the children: the base per child falls as the child grows, while the multiplier rises with each further child, so larger families receive proportionally more support. The exact amounts and examples are given in the separate question on the amounts of Support for Mothers.
 
-Applications are made through the platform with proof of status.`,
-      },
-      {
-        id: 18,
-        pitanje: `What is Special Care and how do I apply?`,
-        odgovor: `Special Care is the programme for persons with disabilities.
-
-The only document required is an official disability determination — we do not ask for medical records, a diagnosis or "proof of chronic illness", because that would involve processing sensitive data that is extremely restricted under law.
-
-The amount is fixed and credited on a daily basis for as long as the status lasts.`,
-      },
-      {
-        id: 19,
-        pitanje: `How does operational contribution work?`,
-        odgovor: `Operational contribution records forms of work for the common good that would otherwise remain invisible (voluntary work, caring for the elderly, work in community activities, creative contributions).
-
-Contribution flows through a published task: the task is posted by the Foundation (in the initial phase), or by ZRNO Holders and the Upper Kolo (after activation). A full member applies and completes the task, and an authorised the person who confirmed you confirms completion before the Protocol records POEN.
-
-There is no fixed "hourly rate" — the proposed POEN is only a weighting indicator, and the actual amount recorded is distributed within the daily recording limit.`,
-      },
-      {
-        id: 20,
-        pitanje: `Can I be in multiple programmes at the same time?`,
-        odgovor: `Yes, if you meet the criteria for more than one programme. For example, a mother who is studying may be in both Support for Mothers and Education.
-
-Each programme is applied for separately, and all share a common daily recording limit of 10% of the system's current circulation (so that too much POEN is not recorded at once).`,
-      },
-      {
-        id: 61,
-        pitanje: `What is "Support for the Elderly" — who qualifies and how do I apply?`,
-        odgovor: `Support for the Elderly is one of the social programmes. Elderly users are one of the qualifying groups — a group whose participation in the community the Protocol recognises even though it does not manifest through individual exchanges.
-
-When you confirm (confirm) the data that demonstrates you belong to that group, the Protocol automatically credits POEN to you, without registering individual activities. This is not social assistance or a benefit — it is a way for such participation to have an equal place in the system.
-
-Applications are made through the platform and are open to full members.
-
-Users aged 50 and over qualify. The daily amount grows with age: 1,000 POEN at age 50, increased by 100 POEN for each subsequent year. A user aged 65 thus receives 2,500 POEN per day, and a user aged 80 receives 4,000 POEN per day. Detailed conditions and the method of proving age are governed by the programme rules.`,
-      },
-      {
-        id: 62,
-        pitanje: `What is "proof of status" for a social programme — do I have to upload a birth certificate or a child's document?`,
-        odgovor: `You do not need to upload any document.
-
-For Support for Mothers, for example, you yourself enter the child's name and date of birth through a form on the platform — nothing is scanned or attached. The amount credited to you depends on the number of children.
-
-Your application is then reviewed and approved by the Foundation before the Protocol begins automatically crediting POEN to you. The data you enter is not public — it is seen only by the person processing the application, as it is sensitive data processed solely with your explicit consent, and you can withdraw that consent at any time (at which point the automatic POEN credit also stops).
-
-The exact conditions for confirming status for each group are governed by the Rules on Support Programmes, published on the website.`,
-      },
-      {
-        id: 63,
-        pitanje: `Is there a programme for unemployment or general financial hardship?`,
-        odgovor: `There is currently no dedicated programme for unemployment or general financial hardship.
-
-The social programmes cover specifically defined groups whose participation in the community is ongoing and diffuse, and therefore cannot be recorded through individual exchanges: mothers, elderly users, special care (persons with disabilities) and education. Unemployment and poverty are not among those groups.
-
-It is also important to note that social programmes are not social assistance or benefits — they exist so that such diffuse participation has an equal place in the system, not as support based on financial situation.
-
-If you are in financial hardship, the path to POEN is the same as for everyone else: through exchanges of goods and services with others and through operational contribution — work for the common good published as a task, for which POEN is credited to you upon completion.
-
-New qualifying groups can be added later: in the first phase the Foundation decides, and after community governance is activated — the Upper Kolo. Specific future programmes have not yet been worked out.`,
-      },
-      {
-        id: 64,
-        pitanje: `Is this a job? Do I have income, a contract, or a guaranteed monthly amount?`,
-        odgovor: `No, this is not a job in the sense of an employment relationship, and you have no guaranteed amount.
-
-When you do something for the common good, you decide yourself whether to apply, how to complete the task and at what pace — and you can drop out at any time, without consequences. Nobody gives you orders and you have no obligation to work. That is why this is not an employment relationship: there is no superior, no obligation to work, no salary.
-
-There is no contract under which doing X entitles you to exactly Y POEN. Your contribution and the recording of POEN are two separate acts: you contribute, and the Protocol then records POEN according to the rules. This does not create a claim against the Foundation — there is no one from whom to "collect".
-
-POEN is not a wage or a fee. When a task is published, it comes with a proposed POEN amount, but that is not a guaranteed figure — it is just the task's weight. How much is actually credited to you depends on how much total contribution entered the shared daily budget that day, which is then distributed proportionally. No confirmed record carries over to the next day or creates an obligation of the system towards you.
-
-This is a voluntary contribution to the community that is recorded, not a job with a guaranteed monthly income.`,
+The application goes through the platform — you enter the details about the children into a form, without attaching documents.`,
       },
       {
         id: 79,
-        pitanje: `How much POEN per day per child does Support for Mothers provide, and how do the number and age of children affect the amount?`,
-        odgovor: `For each child the base daily amount is 2,000 POEN. From that base, 100 POEN is deducted for each year of the child's age — so the support gradually decreases as the child grows older and stops when the child turns 20.
+        pitanje: `How much POEN per day per child does Support for Mothers bring, and how do the number and the age of the children affect the amount?`,
+        odgovor: `For every child the starting daily base is 2,000 POEN, reduced by 100 POEN for each year of the child's age — the support gradually falls as the child grows and ends when the child turns 20.
 
-The number of children increases the total amount, but not by simple addition — each subsequent child carries a higher multiplier, progressively: 1st child ×1.00, 2nd ×1.20, 3rd ×1.50, 4th ×2.00, 5th ×3.00, 6th ×4.50, 7th ×6.00, 8th ×8.00, 9th ×10.00, and for the 10th child and beyond the multiplier grows by ×2.00 for each additional child. Larger families thus receive proportionally greater support.
+The number of children raises the total amount, but not by simple addition: each further child carries a higher multiplier. The first child ×1.00, the second ×1.20, the third ×1.50, the fourth ×2.00, the fifth ×3.00, the sixth ×4.50, the seventh ×6.00, the eighth ×8.00, the ninth ×10.00. That way larger families receive proportionally more support.
 
-Example: for a single child aged 3, that is (2,000 − 300) × 1.00 = 1,700 POEN per day. For the same child as the third in order it would be (2,000 − 300) × 1.50 = 2,550 POEN per day.
+An example: one child aged 3 — (2,000 − 300) × 1.00 = 1,700 POEN per day. The same child as the third in order — (2,000 − 300) × 1.50 = 2,550 POEN per day.
 
-Support is credited automatically on a daily basis for as long as the status lasts, without registering individual activities. As with all programmes, all daily recordings share the system's common daily budget, so on days of high circulation amounts may be proportionally reduced. These parameters are governed by the programme rules and can be changed by amending them.`,
+The support is recorded automatically on a daily basis while the status lasts, without reporting individual activities. Like the other social programmes, it shares the common daily frame, so on days with many contributions the amounts may be reduced proportionally. The parameters are set by the Rules on support programmes and can be changed by amending them.`,
+      },
+      {
+        id: 61,
+        pitanje: `What is "Support for the Elderly" — who is entitled and how do I apply?`,
+        odgovor: `Support for the Elderly is a social programme for members aged 50 and over.
+
+The daily amount rises with age: 1,000 POEN at the age of 50, increased by 100 POEN for every further year — a member of 65 has 2,500 POEN per day, and a member of 80 has 4,000 POEN per day.
+
+The application goes through the platform and is open to full members; POEN is then recorded automatically, on a daily basis, without reporting individual activities. Like the other social programmes, this is not social assistance or a benefit either — with it the Protocol recognises participation that is not visible through individual exchanges. The closer conditions and the way age is confirmed are set by the Rules on support programmes.`,
+      },
+      {
+        id: 18,
+        pitanje: `What is Special Care and how does one apply?`,
+        odgovor: `Special Care is a programme for people with disabilities.
+
+The application asks only for the detail of the disability ruling — no medical documentation, no diagnosis, no medical history. The least that is necessary is taken, because this is sensitive data, and even that little is processed only with your explicit consent.
+
+The amount is fixed at 2,000 POEN per day, for as long as the status lasts.`,
+      },
+      {
+        id: 96,
+        pitanje: `What is the Schooling programme and whom does it cover?`,
+        odgovor: `Schooling is a social programme for students — members enrolled at a higher education institution.
+
+The daily amount is fixed at 2,000 POEN, for as long as the status lasts. The status is checked once a year, by academic year; if it is not confirmed at the review, the recording stops.
+
+The application follows the same rules as the other social programmes: through the platform, by entering data into a form — for this programme, the year of study you are enrolled in — without attaching documents.`,
+      },
+      {
+        id: 62,
+        pitanje: `What is "proof of status" for a social programme — do I have to attach a birth certificate or a document of the child?`,
+        odgovor: `You attach no document at all — nothing is scanned or sent.
+
+You enter the data into a form on the platform: for Support for Mothers, for example, the child's name and date of birth. The amount recorded for you depends on the number and the age of the children.
+
+The application is then confirmed, without sight of the data you entered, by the members of your chain — those who confirmed your reality — under full responsibility, and after that the Foundation approves it. The data you entered is not public: only the person processing the application sees it. This is sensitive data, so it is processed only with your explicit consent, and you can withdraw that consent at any moment — the automatic recording of POEN then stops as well.
+
+The closer conditions by which the status is confirmed for each group are set by the Rules on support programmes, published on the site.`,
+      },
+      {
+        id: 20,
+        pitanje: `Can I be in more than one programme at the same time?`,
+        odgovor: `Yes, if you meet the conditions for more than one — a mother who is a student can be in both Support for Mothers and Schooling. Each programme is applied for separately.
+
+The social programmes and the operational contribution share a common daily frame of 10% of the total amount of POEN in the system, so that too much POEN is not recorded at once — when there are more contributions than the frame takes, the daily amounts are reduced proportionally. The contribution to exchange and the children's contribution do not enter that frame.`,
+      },
+      {
+        id: 97,
+        pitanje: `What is the contribution to exchange and how does one pass the five steps?`,
+        odgovor: `The contribution to exchange is a path of five steps through which the Protocol records POEN for genuinely joining in the exchange — 1,000 POEN for each step, at most 5,000 POEN in total.
+
+The first step: you post your first proper listing offering a good or a service (for a new member the POEN is recorded once the Foundation approves the listing). The second: you record POEN for the first time to someone outside your circle of acquaintance. The third: you have three posted listings, two of which received an enquiry from two different members. The fourth: exchanges with five different people outside your circle of acquaintance. The fifth: exchanges with ten different people.
+
+The steps are passed in order, and from the second step on you have to be a full member. What counts are exchanges of at least 1,000 POEN per transaction, with full members outside your circle of acquaintance, and each person counts once for the whole path. You report nothing — the Protocol follows the progress itself and records POEN once a step has been passed.`,
+      },
+      {
+        id: 19,
+        pitanje: `How does the operational contribution work?`,
+        odgovor: `The operational contribution records work for the common good that would otherwise stay invisible — volunteering, care for the elderly, work in joint activities, creative contributions.
+
+Everything runs through a published task: someone posts it, a full member applies and carries it out, the performance is confirmed — and only then does the Protocol record POEN. In the initial phase the Foundation posts the tasks and confirms performance; once community governance is activated, the Upper Kolo and ZRNO holders post tasks as well, and ZRNO holders confirm performance.
+
+There is no hourly rate. A proposed POEN figure stands with the task, but it is a weighting guide, not a price — the amount actually recorded depends on how many contributions share the common daily frame that day, so the amounts are distributed proportionally.`,
+      },
+      {
+        id: 63,
+        pitanje: `Is there a programme for the unemployed or for general financial hardship?`,
+        odgovor: `At present there is no separate programme for unemployment or for general financial hardship.
+
+The social programmes cover precisely defined groups whose participation in the community is constant and diffuse, and so cannot be recorded through individual exchanges: mothers and primary carers, the elderly, people with disabilities and students. Neither unemployment nor poverty is among those groups — the social programmes are not social assistance or a benefit, but a way for diffuse participation to have an equal place in the system, not a form of support based on your financial situation.
+
+If you are in financial hardship, the path to POEN is the same as for everyone: exchanging goods and services with others, the contribution to exchange — five steps of joining in the exchange that together bring up to 5,000 POEN — and the operational contribution, work for the common good through published tasks.
+
+New qualifying groups may be added later: in the first phase the Foundation decides on that, and once community governance is activated, the Upper Kolo. Concrete future programmes have not been worked out yet.`,
+      },
+      {
+        id: 64,
+        pitanje: `Is this a job? Do I have income, a contract or a guaranteed monthly amount?`,
+        odgovor: `No. This is not a job in the sense of an employment relationship, and you have no guaranteed amount.
+
+You decide whether to apply for a task, how you will carry it out and at what pace — and you can drop it at any moment, without consequences. No one gives you orders and you have no duty to work. That is why it is not an employment relationship: there is no superior, no duty to work, no wage.
+
+Nor is there a contract under which doing X gets exactly Y POEN recorded. Your contribution and the recording of POEN are two separate acts: you contribute, and the Protocol then records POEN under the rules. No claim against the Foundation arises from that — there is no one to "collect" from.
+
+POEN is not a wage or a fee. A proposed POEN figure stands with a published task, but it is a weighting guide, not a guaranteed amount: how much is actually recorded depends on how many contributions entered the common daily frame that day, which is shared proportionally. Whatever does not fit into the frame that day is not carried over to tomorrow and creates no obligation of the system towards you.
+
+This is a voluntary contribution to the community that gets recorded — not a job with a guaranteed monthly income.`,
       },
     ],
   },

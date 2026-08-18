@@ -526,101 +526,121 @@ Minderről részletesebben a gyermekek részvételéről szóló szabályzat ren
     pitanja: [
       {
         id: 16,
-        pitanje: `Mik azok a Programok, és melyek léteznek?`,
-        odgovor: `A közösségi részvétel egyes formái állandóak és szétszórtak — a gyermekekről, az idősekről való gondoskodás —, ezért nem rögzíthetők egyedi cserékként. Erre szolgálnak a szociális programok: édesanyák mint elsődleges gondviselők, idős felhasználók, különleges gondoskodás és tanulás. Ha igazolod, hogy ilyen csoportba tartozol, a Protokoll napi szinten automatikusan POEN-t ír be neked, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.`,
+        pitanje: `Mik a Protokoll programjai, és melyek léteznek?`,
+        odgovor: `A részvétel egyes formái nem rögzíthetők egyedi cserékként, ezért vannak rájuk a Protokoll programjai.
+
+A szociális programok azokat a csoportokat fedik le, amelyek részvétele a közösségben állandó és szétszórt: Anyák Támogatása (és más elsődleges gondviselőké), Idősek Támogatása, Különleges Gondoskodás (fogyatékossággal élők) és Tanulás. Amint a kérelmedet megerősítik, a Protokoll napi szinten, automatikusan rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.
+
+Rajtuk kívül a Programokhoz tartoznak a hozzájárulások is: a cseréhez való hozzájárulás (ötlépcsős út a cserébe való bekapcsolódáshoz), a működési hozzájárulás (munka a közös jóért közzétett feladatokon keresztül) és a gyerekhozzájárulás (a gyerekek részvétele a gyerektérben, lásd a „Gyerekek és szülők" szakaszt). Mindegyiket külön kérdés magyarázza.
+
+A szociális programokra a rendes tagok jelentkezhetnek.`,
       },
       {
         id: 17,
-        pitanje: `Ki jelentkezhet az Édesanyák támogatására?`,
-        odgovor: `Édesanyák vagy a gyermek más elsődleges gondviselője.
+        pitanje: `Ki jelentkezhet az Anyák Támogatására?`,
+        odgovor: `Az anya vagy a gyerek más elsődleges gondviselője — a program a gyerekről való gondoskodást követi, nem kizárólag az anyaságot.
 
-A neked rögzülő összeg a gyermekek számától függ — minél több gyermek, annál nagyobb a teljes összeg, de gyermekenként enyhén csökkenő mértékben (képlet szerint alkalmazott együtthatóval).
+Az összeg a gyerekek számától és korától függ: a gyerekenkénti alap csökken, ahogy a gyerek nő, a szorzó pedig minden további gyerekkel emelkedik, így a nagyobb családok arányosan nagyobb támogatást kapnak. A pontos összegek és példák az Anyák Támogatásának összegeiről szóló külön kérdésben szerepelnek.
 
-A jelentkezés a platformon keresztül történik, a státusz igazolásával.`,
+A kérelem a platformon keresztül megy — a gyerekek adatait űrlapon adod meg, dokumentumok csatolása nélkül.`,
+      },
+      {
+        id: 79,
+        pitanje: `Naponta hány POEN-t hoz gyerekenként az Anyák Támogatása, és hogyan hat az összegre a gyerekek száma és kora?`,
+        odgovor: `Minden gyerekre a kiinduló napi alap 2.000 POEN, csökkentve 100 POEN-nel a gyerek életkorának minden éve után — a támogatás fokozatosan csökken, ahogy a gyerek nő, és megszűnik, amikor a gyerek betölti a 20. évét.
+
+A gyerekek száma növeli a teljes összeget, de nem egyszerű összeadással: minden további gyerek nagyobb szorzót hordoz. Az első gyerek ×1,00, a második ×1,20, a harmadik ×1,50, a negyedik ×2,00, az ötödik ×3,00, a hatodik ×4,50, a hetedik ×6,00, a nyolcadik ×8,00, a kilencedik ×10,00. Így a nagyobb családok arányosan nagyobb támogatást kapnak.
+
+Példa: egy hároméves gyerek — (2.000 − 300) × 1,00 = 1.700 POEN naponta. Ugyanez a gyerek harmadikként — (2.000 − 300) × 1,50 = 2.550 POEN naponta.
+
+A támogatás automatikusan, napi szinten rögzül, amíg a státusz tart, az egyes tevékenységek bejelentése nélkül. A többi szociális programhoz hasonlóan a közös napi keretet osztja, így a sok hozzájárulást hozó napokon az összegek arányosan csökkenhetnek. A paramétereket a támogatási programokról szóló szabályzat állapítja meg, és annak módosításával változtathatók.`,
+      },
+      {
+        id: 61,
+        pitanje: `Mi az „Idősek Támogatása" — ki jogosult és hogyan jelentkezem?`,
+        odgovor: `Az Idősek Támogatása szociális program az 50 éves és idősebb tagoknak.
+
+A napi összeg a korral nő: 1.000 POEN a betöltött 50. évtől, minden további évre 100 POEN-nel emelve — a 65 éves tagnak napi 2.500 POEN jár, a 80 évesnek napi 4.000 POEN.
+
+A jelentkezés a platformon keresztül megy, és a rendes tagok előtt áll nyitva; a POEN ezután automatikusan rögzül, napi szinten, az egyes tevékenységek bejelentése nélkül. A többi szociális programhoz hasonlóan ez sem szociális segély és nem juttatás — a Protokoll ezzel ismeri el azt a részvételt, amely az egyedi cseréken keresztül nem látszik. A közelebbi feltételeket és az életkor igazolásának módját a támogatási programokról szóló szabályzat rendezi.`,
       },
       {
         id: 18,
-        pitanje: `Mi a Különleges gondoskodás, és hogyan lehet jelentkezni?`,
-        odgovor: `A Különleges gondoskodás a fogyatékossággal élő személyek programja.
+        pitanje: `Mi a Különleges Gondoskodás és hogyan lehet jelentkezni?`,
+        odgovor: `A Különleges Gondoskodás a fogyatékossággal élők programja.
 
-Az egyetlen szükséges irat a fogyatékosságot megállapító határozat — nem kérünk sem orvosi dokumentációt, sem diagnózist, sem „krónikus betegség igazolását", mert az különleges adatok kezelése volna, amelyet a törvény rendkívül szigorúan korlátoz.
+A jelentkezéskor csak a rokkantsági határozatra vonatkozó adatot kérjük — nem orvosi dokumentációt, nem diagnózist, nem kórtörténetet. A lehető legkevesebbet vesszük el, mert érzékeny adatokról van szó, és még ez a kevés is kizárólag a kifejezett hozzájárulásoddal kerül feldolgozásra.
 
-Az összeg fix, és napi szinten rögzül, amíg a státusz fennáll.`,
+Az összeg fix, napi 2.000 POEN, amíg a státusz tart.`,
       },
       {
-        id: 19,
-        pitanje: `Hogyan működik a működési hozzájárulás?`,
-        odgovor: `A működési hozzájárulás olyan, a közjóért végzett munkaformákat rögzít, amelyek egyébként láthatatlanok maradnának (önkéntes munka, idősek gondozása, közös tevékenységekben való részvétel, alkotói hozzájárulások).
+        id: 96,
+        pitanje: `Mi a Tanulás program, és kikre vonatkozik?`,
+        odgovor: `A Tanulás szociális program a hallgatóknak — azoknak a tagoknak, akik felsőoktatási intézménybe vannak beiratkozva.
 
-A hozzájárulás meghirdetett feladaton keresztül folyik: a feladatot az Alapítvány tűzi ki (a kezdeti szakaszban), illetve az aktiválás után a ZRNO-tartók és a Felső Kolo. Rendes tag jelentkezik rá és elvégzi, a teljesítést pedig az arra jogosult megerősítő erősíti meg, mielőtt a Protokoll rögzítené a POEN-t.
+A napi összeg fix, 2.000 POEN, amíg a státusz tart. A státuszt évente egyszer, tanévenként ellenőrzik; ha a felülvizsgálatkor nem igazolódik, a rögzítés megszűnik.
 
-Nincs fix „órabér" — a javasolt POEN csak súlyozási támpont, a ténylegesen rögzített összeg pedig a napi rögzítési kereten belül oszlik el.`,
+A jelentkezés ugyanazok szerint a szabályok szerint megy, mint a többi szociális programnál: a platformon keresztül, az adatok űrlapon való megadásával — ennél a programnál a beiratkozott évfolyammal —, dokumentumok csatolása nélkül.`,
+      },
+      {
+        id: 62,
+        pitanje: `Mi a „státusz igazolása" a szociális programnál — be kell nyújtanom anyakönyvi kivonatot vagy a gyerek dokumentumát?`,
+        odgovor: `Egyetlen dokumentumot sem nyújtasz be — semmit nem szkennelünk és nem küldünk.
+
+Az adatokat a platform űrlapján adod meg: az Anyák Támogatásánál például a gyerek nevét és születési dátumát. A neked rögzülő összeg a gyerekek számától és korától függ.
+
+A kérelmet ezután — a megadott adatok ismerete nélkül — a láncod tagjai erősítik meg, azok, akik a valódiságodat megerősítették, teljes felelősséggel, majd az Alapítvány hagyja jóvá. A megadott adatok nem nyilvánosak: csak az látja őket, aki a kérelmet feldolgozza. Érzékeny adatokról van szó, ezért kizárólag a kifejezett hozzájárulásoddal kerülnek feldolgozásra, a hozzájárulást pedig bármikor visszavonhatod — ekkor a POEN automatikus rögzítése is megszűnik.
+
+A közelebbi feltételeket, amelyekkel az egyes csoportok státusza igazolható, a támogatási programokról szóló szabályzat rendezi, amely az oldalon közzé van téve.`,
       },
       {
         id: 20,
         pitanje: `Lehetek egyszerre több programban?`,
-        odgovor: `Igen, ha több program feltételeinek is megfelelsz. Például az az édesanya, aki tanul, egyszerre lehet az Édesanyák támogatásában és a Tanulásban is.
+        odgovor: `Igen, ha több program feltételeinek is megfelelsz — az az anya, aki egyetemre jár, lehet az Anyák Támogatásában és a Tanulásban is. Minden programra külön kell jelentkezni.
 
-Minden programra külön kell jelentkezni, de mindegyikre közös napi rögzítési korlát vonatkozik: a rendszer aktuális forgalmának 10%-a (hogy ne kerüljön egyszerre túl sok POEN a nyilvántartásba).`,
+A szociális programok és a működési hozzájárulás közös napi keretet osztanak, amely a rendszerben lévő POEN teljes mennyiségének 10%-a, hogy ne rögzüljön túl sok POEN egyszerre — ha több a hozzájárulás, mint amennyit a keret befogad, a napi összegek arányosan csökkennek. A cseréhez való hozzájárulás és a gyerekhozzájárulás nem tartozik ebbe a keretbe.`,
       },
       {
-        id: 61,
-        pitanje: `Mi az „Idősek támogatása" — ki jogosult, és hogyan jelentkezem?`,
-        odgovor: `Az Idősek támogatása az egyik szociális program. Az idős felhasználók a jogosult csoportok egyike — olyan csoport, amelynek közösségi részvételét a Protokoll akkor is elismeri, ha az nem egyedi cserékben nyilvánul meg.
+        id: 97,
+        pitanje: `Mi a cseréhez való hozzájárulás, és hogyan lehet végigmenni az öt lépésen?`,
+        odgovor: `A cseréhez való hozzájárulás ötlépcsős út, amelyen a Protokoll POEN-t rögzít a cserébe való tényleges bekapcsolódásért — lépésenként 1.000 POEN-t, összesen legfeljebb 5.000 POEN-t.
 
-Amikor igazolod az e csoporthoz tartozásodat bizonyító adatokat, a Protokoll automatikusan POEN-t ír be neked, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.
+Első lépés: közzéteszed az első rendben lévő hirdetést, amellyel javakat vagy szolgáltatást kínálsz (új tagnál a POEN akkor rögzül, amikor az Alapítvány jóváhagyja a hirdetést). Második: először írsz POEN-t olyasvalakinek, aki az ismeretségi körödön kívül van. Harmadik: három közzétett hirdetésed van, amelyek közül kettő két különböző tagtól kapott érdeklődést. Negyedik: cserék öt különböző, az ismeretségi körödön kívüli emberrel. Ötödik: cserék tíz különböző emberrel.
 
-A jelentkezés a platformon keresztül történik, és rendes tagok előtt áll nyitva.
-
-Az 50 éves és idősebb felhasználók jogosultak. A napi összeg a korral nő: 1000 POEN a betöltött 50. évtől, minden további évért 100 POEN-nel több. Így a 65 éves felhasználónál ez napi 2500 POEN, a 80 évesnél napi 4000 POEN. A részletes feltételeket és az életkor igazolásának módját programszabályzat rendezi.`,
+A lépések sorrendben teljesülnek, a másodiktól kezdve pedig rendes tagnak kell lenned. Tranzakciónként legalább 1.000 POEN értékű cserék számítanak, az ismeretségi körödön kívüli rendes tagokkal, és minden ember egyszer számít az egész útra. Semmit nem kell bejelentened — a Protokoll maga követi az előrehaladást, és rögzíti a POEN-t, amint egy lépés teljesült.`,
       },
       {
-        id: 62,
-        pitanje: `Mi a „státuszigazolás" a szociális programhoz — fel kell töltenem anyakönyvi kivonatot vagy a gyermek iratát?`,
-        odgovor: `Semmilyen iratot nem kell feltöltened.
+        id: 19,
+        pitanje: `Hogyan működik a működési hozzájárulás?`,
+        odgovor: `A működési hozzájárulás azt a közös jóért végzett munkát rögzíti, amely különben láthatatlan maradna — az önkéntességet, az idősekről való gondoskodást, a közös tevékenységekben végzett munkát, az alkotó hozzájárulásokat.
 
-Az Édesanyák támogatásánál például te magad írod be a gyermek nevét és születési dátumát a platform űrlapján — semmit nem kell beszkennelni vagy csatolni. A neked rögzülő összeg a gyermekek számától függ.
+Minden közzétett feladaton keresztül zajlik: valaki közzéteszi, egy rendes tag jelentkezik rá és elvégzi, a teljesítést megerősítik — és a Protokoll csak ekkor rögzít POEN-t. A kezdeti szakaszban a feladatokat az Alapítvány teszi közzé és a teljesítést is az erősíti meg; a közösségi irányítás aktiválása után feladatot a Felső Kolo és a ZRNO-tartók is közzétesznek, a teljesítést pedig ZRNO-tartók erősítik meg.
 
-A jelentkezésedet ezután az Alapítvány vizsgálja meg és hagyja jóvá, mielőtt a Protokoll automatikusan POEN-t kezdene beírni neked. Az általad megadott adatok nem nyilvánosak — csak az látja őket, aki a kérelmet feldolgozza, mivel különleges adatokról van szó, amelyeket kizárólag a kifejezett hozzájárulásoddal kezelünk, és ezt a hozzájárulást bármikor visszavonhatod (ekkor az automatikus POEN-rögzítés is megszűnik).
-
-Az egyes csoportok státuszigazolásának részletes feltételeit a honlapon közzétett, támogatási programokról szóló Szabályzat rendezi.`,
+Órabér nincs. A feladat mellett javasolt POEN áll, de ez súlyozási iránymutató, nem ár — a ténylegesen rögzített összeg attól függ, hány hozzájárulás osztja aznap a közös napi keretet, így az összegek arányosan oszlanak el.`,
       },
       {
         id: 63,
-        pitanje: `Van program munkanélkülieknek vagy általános anyagi szükséghelyzetre?`,
-        odgovor: `Jelenleg nincs külön program sem a munkanélküliségre, sem az általános anyagi szükséghelyzetre.
+        pitanje: `Van program a munkanélkülieknek vagy általános anyagi szükséghelyzetre?`,
+        odgovor: `Jelenleg nincs külön program a munkanélküliségre vagy általános anyagi szükséghelyzetre.
 
-A szociális programok pontosan meghatározott csoportokat fednek le, amelyek közösségi részvétele állandó és szétszórt, ezért nem rögzíthető egyedi cseréken keresztül: édesanyákat, idős felhasználókat, különleges gondoskodást (fogyatékossággal élő személyek) és tanulást. Sem a munkanélküliség, sem a szegénység nem tartozik e csoportok közé.
+A szociális programok pontosan meghatározott csoportokat fednek le, amelyek részvétele a közösségben állandó és szétszórt, ezért egyedi cseréken keresztül nem rögzíthető: az anyákat és az elsődleges gondviselőket, az időseket, a fogyatékossággal élőket és a hallgatókat. Sem a munkanélküliség, sem a szegénység nincs e csoportok között — a szociális programok nem szociális segélyek és nem juttatások, hanem azt szolgálják, hogy a szétszórt részvétel egyenrangú helyet kapjon a rendszerben, nem pedig az anyagi helyzet miatti támogatás formái.
 
-Fontos az is, hogy a szociális programok nem szociális segélyek és nem juttatások — azért léteznek, hogy a szétszórt részvétel is egyenrangú helyet kapjon a rendszerben, nem pedig az anyagi helyzet miatti támogatási formaként.
+Ha anyagi szükséghelyzetben vagy, a POEN-hez vezető út ugyanaz, mint mindenki másnak: javak és szolgáltatások cseréje másokkal, a cseréhez való hozzájárulás — a cserébe való bekapcsolódás öt lépése, amelyek együtt legfeljebb 5.000 POEN-t hoznak — és a működési hozzájárulás, vagyis munka a közös jóért közzétett feladatokon keresztül.
 
-Ha anyagi szükséghelyzetben vagy, a POEN-hez vezető út ugyanaz, mint mindenki másnál: a másokkal folytatott áru- és szolgáltatáscsere, valamint a működési hozzájárulás — a közjóért végzett munka, amelyet feladatként hirdetnek meg, és amelynek elvégzéséért POEN kerül a nyilvántartásodba.
-
-Új jogosult csoportok később hozzáadhatók: az első szakaszban erről az Alapítvány dönt, a közösségi önkormányzás aktiválása után pedig a Felső Kolo. Konkrét jövőbeli programok még nincsenek kidolgozva.`,
+Új jogosult csoportok később hozzáadhatók: az első szakaszban erről az Alapítvány dönt, a közösségi irányítás aktiválása után pedig a Felső Kolo. Konkrét jövőbeli programok még nincsenek kidolgozva.`,
       },
       {
         id: 64,
-        pitanje: `Ez munka? Van jövedelmem, szerződésem vagy garantált havi összegem?`,
-        odgovor: `Nem, ez nem munka munkaviszony értelmében, és nincs garantált összeged.
+        pitanje: `Munka ez? Van jövedelmem, szerződésem vagy garantált havi összegem?`,
+        odgovor: `Nem. Ez nem munka munkaviszony értelmében, és garantált összeged sincs.
 
-Amikor a közjóért teszel valamit, magad döntöd el, jelentkezel-e, hogyan és milyen ütemben végzed el a feladatot — és bármikor visszaléphetsz, következmények nélkül. Senki sem utasít, és nincs munkavégzési kötelezettséged. Ezért ez nem munkaviszony: nincs felettes, nincs munkavégzési kötelezettség, nincs bér.
+Te döntöd el, jelentkezel-e egy feladatra, hogyan végzed el és milyen ütemben — és bármikor visszaléphetsz, következmények nélkül. Senki nem parancsol neked, és nincs munkavégzési kötelezettséged. Ezért ez nem munkaviszony: nincs felettes, nincs munkavégzési kötelezettség, nincs bér.
 
-Nincs olyan szerződés sem, amely szerint az elvégzett X-ért pontosan Y POEN járna. A hozzájárulásod és a POEN rögzítése két különálló aktus: te hozzájárulsz, a Protokoll pedig ezt követően a szabályok szerint rögzíti a POEN-t. Ebből nem keletkezik követelés az Alapítvánnyal szemben — nincs kitől „behajtanod".
+Nincs olyan szerződés sem, amely szerint az elvégzett X-ért pontosan Y POEN rögzülne. A hozzájárulásod és a POEN rögzítése két különálló aktus: te hozzájárulsz, a Protokoll pedig ezt követően a szabályok szerint rögzít POEN-t. Ebből nem keletkezik követelés az Alapítvánnyal szemben — nincs kitől „behajtanod".
 
-A POEN nem bér és nem juttatás. Amikor feladatot hirdetnek meg, javasolt POEN tartozik hozzá, de ez nem garantált összeg — csupán a feladat súlya. Hogy valójában mennyi kerül a nyilvántartásodba, attól függ, aznap mennyi hozzájárulás került a közös napi keretbe, amely arányosan oszlik el. Egyetlen megerősített bejegyzés sem vihető át a következő napra, és nem keletkeztet kötelezettséget a rendszer részéről feléd.
+A POEN nem bér és nem díjazás. A közzétett feladat mellett javasolt POEN áll, de ez súlyozási iránymutató, nem garantált összeg: az, hogy mennyi rögzül ténylegesen, attól függ, hány hozzájárulás került aznap a közös napi keretbe, amely arányosan oszlik el. Ami aznap nem fér bele a keretbe, nem vihető át holnapra, és nem keletkeztet kötelezettséget a rendszer részéről feléd.
 
-Ez a közösségnek nyújtott önkéntes hozzájárulás, amelyet rögzítenek, nem pedig garantált havi keresetű munka.`,
-      },
-      {
-        id: 79,
-        pitanje: `Hány POEN jár naponta gyermekenként az Édesanyák támogatásából, és hogyan hat a gyermekek száma és életkora?`,
-        odgovor: `Minden gyermek után a kiinduló napi alap 2000 POEN. Ebből az alapból a gyermek életkorának minden évéért 100 POEN-t vonnak le, így a támogatás fokozatosan csökken, ahogy a gyermek nő, és megszűnik, amikor a gyermek betölti a 20. életévét.
-
-A gyermekek száma növeli a teljes összeget, de nem egyszerű összeadással — minden további gyermek nagyobb szorzót hoz, mégpedig progresszíven: 1. gyermek ×1,00, 2. ×1,20, 3. ×1,50, 4. ×2,00, 5. ×3,00, 6. ×4,50, 7. ×6,00, 8. ×8,00, 9. ×10,00, a 10. gyermektől kezdve pedig minden további gyermekért ×2,00-del nő tovább. Így a nagyobb családok arányosan nagyobb támogatást kapnak.
-
-Példa: egy hároméves gyermek esetében ez (2000 − 300) × 1,00 = 1700 POEN naponta. Ugyanez a gyermek harmadikként (2000 − 300) × 1,50 = 2550 POEN naponta.
-
-A támogatás automatikusan, napi szinten rögzül, amíg a státusz fennáll, az egyes tevékenységek bejelentése nélkül. Mint a többi programnál, minden napi rögzítés a rendszer közös napi keretén osztozik, ezért nagy forgalmú napokon az összegek arányosan csökkenhetnek. E paramétereket programszabályzat rendezi, és annak módosításával változtathatók.`,
+Ez a közösségnek nyújtott önkéntes hozzájárulás, amely rögzítésre kerül — nem pedig garantált havi keresettel járó munka.`,
       },
     ],
   },

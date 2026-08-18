@@ -525,101 +525,121 @@ Podrobnije o svemu ovome piše Pravilnik o učešću dece, na stranici Pravilnik
     pitanja: [
       {
         id: 16,
-        pitanje: `Šta su Programi i koji postoje?`,
-        odgovor: `Neki oblici učešća u zajednici su stalni i razuđeni — briga o deci, o starijima — pa se ne mogu evidentirati kao pojedinačne razmene. Za to postoje socijalni programi: majke kao primarni staratelji, stariji korisnici, posebna briga i školovanje. Kad potvrdiš da pripadaš takvoj grupi, Protokol ti automatski upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo učešće dobije ravnopravno mesto u sistemu.`,
+        pitanje: `Šta su Programi Protokola i koji postoje?`,
+        odgovor: `Neki oblici učešća ne mogu se evidentirati kao pojedinačne razmene, pa za njih postoje Programi Protokola.
+
+Socijalni programi pokrivaju grupe čije je učešće u zajednici stalno i razuđeno: Podrška Majkama (i drugim primarnim starateljima), Podrška Starijima, Posebna Briga (osobe sa invaliditetom) i Školovanje. Kad se tvoja prijava potvrdi, Protokol ti automatski upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo učešće dobije ravnopravno mesto u sistemu.
+
+Pored njih, u Programe spadaju i doprinosi: doprinos razmeni (putanja od pet koraka za uključivanje u razmenu), operativni doprinos (rad za zajedničko dobro kroz objavljene zadatke) i dečji doprinos (učešće dece u dečjem prostoru, opisano u sekciji „Deca i roditelji"). Svaki je objašnjen u posebnom pitanju.
+
+Prijava na socijalne programe otvorena je redovnim članovima.`,
       },
       {
         id: 17,
         pitanje: `Ko se može prijaviti za Podršku Majkama?`,
-        odgovor: `Majke ili drugi primarni staratelj deteta.
+        odgovor: `Majka ili drugi primarni staratelj deteta — program prati brigu o detetu, ne isključivo majčinstvo.
 
-Iznos koji ti se evidentira zavisi od broja dece — što više dece, to veći ukupan iznos, ali sa blagim opadanjem po detetu (kroz koeficijent koji se primenjuje formulom).
+Iznos zavisi od broja i uzrasta dece: osnova po detetu opada kako dete raste, a množilac raste sa svakim narednim detetom, pa veće porodice dobijaju srazmerno veću podršku. Tačni iznosi i primeri dati su u posebnom pitanju o iznosima Podrške Majkama.
 
-Prijava ide kroz platformu uz dokaz statusa.`,
+Prijava ide kroz platformu — podatke o deci uneseš u formu, bez prilaganja dokumenata.`,
+      },
+      {
+        id: 79,
+        pitanje: `Koliko POEN dnevno po detetu donosi Podrška Majkama i kako broj i uzrast dece utiču na iznos?`,
+        odgovor: `Za svako dete polazna dnevna osnova je 2.000 POEN, umanjena za 100 POEN za svaku godinu uzrasta deteta — podrška postepeno opada kako dete raste i prestaje kad dete napuni 20 godina.
+
+Broj dece povećava ukupan iznos, ali ne prostim sabiranjem: svako naredno dete nosi veći množilac. Prvo dete ×1,00, drugo ×1,20, treće ×1,50, četvrto ×2,00, peto ×3,00, šesto ×4,50, sedmo ×6,00, osmo ×8,00, deveto ×10,00. Tako veće porodice dobijaju srazmerno veću podršku.
+
+Primer: jedno dete od 3 godine — (2.000 − 300) × 1,00 = 1.700 POEN dnevno. Isto dete kao treće po redu — (2.000 − 300) × 1,50 = 2.550 POEN dnevno.
+
+Podrška se upisuje automatski na dnevnom nivou dok status traje, bez prijavljivanja pojedinačnih aktivnosti. Kao i ostali socijalni programi, deli zajednički dnevni okvir, pa se u danima sa mnogo doprinosa iznosi mogu srazmerno umanjiti. Parametri su uređeni Pravilnikom o programima podrške i mogu se menjati njegovom izmenom.`,
+      },
+      {
+        id: 61,
+        pitanje: `Šta je „Podrška Starijima" — ko ima pravo i kako se prijavljujem?`,
+        odgovor: `Podrška Starijima je socijalni program za članove od 50 godina naviše.
+
+Dnevni iznos raste sa godinama: 1.000 POEN sa navršenih 50, uvećano za 100 POEN za svaku narednu godinu — član od 65 godina ima 2.500 POEN dnevno, a član od 80 godina 4.000 POEN dnevno.
+
+Prijava ide kroz platformu i otvorena je redovnim članovima; POEN se potom upisuje automatski, na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. Kao i ostali socijalni programi, ni ovo nije socijalna pomoć ni naknada — Protokol time priznaje učešće koje se ne vidi kroz pojedinačne razmene. Bliži uslovi i način potvrđivanja godina uređeni su Pravilnikom o programima podrške.`,
       },
       {
         id: 18,
         pitanje: `Šta je Posebna Briga i kako se prijavljuje?`,
         odgovor: `Posebna Briga je program za osobe sa invaliditetom.
 
-Jedini potreban dokument je rešenje o invalidnosti — ne tražimo medicinsku dokumentaciju, dijagnozu ni „dokaz hronične bolesti", jer to bi bila obrada osetljivih podataka koja je izuzetno restriktivna po zakonu.
+Pri prijavi se traži samo podatak o rešenju o invalidnosti — ne medicinska dokumentacija, ne dijagnoza, ne istorija bolesti. Uzima se najmanje što je nužno, jer je reč o osetljivim podacima, a i to malo obrađuje se samo uz tvoj izričit pristanak.
 
-Iznos je fiksan i evidentira se na dnevnom nivou dok status traje.`,
+Iznos je fiksan i iznosi 2.000 POEN dnevno, dok status traje.`,
       },
       {
-        id: 19,
-        pitanje: `Kako radi operativni doprinos?`,
-        odgovor: `Operativni doprinos evidentira oblike rada za zajedničko dobro koji bi inače ostali nevidljivi (volonterski rad, briga o starijima, rad u zajedničkim aktivnostima, kreativni doprinosi).
+        id: 96,
+        pitanje: `Šta je program Školovanje i na koga se odnosi?`,
+        odgovor: `Školovanje je socijalni program za studente — članove upisane na visokoškolsku ustanovu.
 
-Doprinos teče kroz objavljen zadatak: zadatak postavlja Fondacija (u početnoj fazi), odnosno nosioci ZRNA i Gornje Kolo (po aktivaciji). Redovan član se prijavljuje i izvršava ga, a izvršenje potvrđuje nosilac ZRNA pre nego što Protokol evidentira POEN.
+Dnevni iznos je fiksan i iznosi 2.000 POEN, dok status traje. Status se proverava jednom godišnje, po studijskoj godini; ako se pri reviziji ne potvrdi, upis prestaje.
 
-Nema fiksne „tarife po satu" — predloženi POEN je samo težinski orijentir, a stvarno evidentirani iznos raspoređuje se u okviru dnevnog limita evidentiranja.`,
+Prijava ide po istim pravilima kao za druge socijalne programe: kroz platformu, unosom podataka u formu — za ovaj program upisane godine studija — bez prilaganja dokumenata.`,
+      },
+      {
+        id: 62,
+        pitanje: `Šta je „dokaz statusa" za socijalni program — moram li da prilažem izvod ili dokument deteta?`,
+        odgovor: `Ne prilažeš nijedan dokument — ništa se ne skenira niti šalje.
+
+Podatke uneseš u formu na platformi: za Podršku Majkama, na primer, ime deteta i datum rođenja. Iznos koji ti se upisuje zavisi od broja i uzrasta dece.
+
+Prijavu zatim, bez uvida u unete podatke, potvrđuju članovi iz tvog lanca — oni koji su potvrdili tvoju stvarnost — pod punom odgovornošću, pa je odobrava Fondacija. Uneti podaci nisu javni: vidi ih samo onaj ko obrađuje prijavu. Reč je o osetljivim podacima, pa se obrađuju samo uz tvoj izričit pristanak, a pristanak možeš povući u svakom trenutku — tada prestaje i automatski upis POEN-a.
+
+Bliži uslovi kojima se potvrđuje status za svaku grupu uređeni su Pravilnikom o programima podrške, objavljenim na sajtu.`,
       },
       {
         id: 20,
         pitanje: `Mogu li biti u više programa istovremeno?`,
-        odgovor: `Da, ako ispunjavaš kriterijume za više programa. Na primer, majka koja se školuje može biti i u Podršci Majkama i u Školovanju.
+        odgovor: `Da, ako ispunjavaš uslove za više programa — majka koja studira može biti i u Podršci Majkama i u Školovanju. Svaki program se prijavljuje posebno.
 
-Svaki program se prijavljuje posebno, a svi imaju zajednički dnevni limit evidentiranja od 10% trenutnog opticaja sistema (kako se ne bi previše POEN-a upisalo odjednom).`,
+Socijalni programi i operativni doprinos dele zajednički dnevni okvir od 10% ukupnog broja POEN-a u sistemu, kako se ne bi previše POEN-a upisalo odjednom — kad doprinosa ima više nego što okvir prima, dnevni iznosi se srazmerno umanjuju. Doprinos razmeni i dečji doprinos ne ulaze u taj okvir.`,
       },
       {
-        id: 61,
-        pitanje: `Šta je „Podrška Starijima" — ko ima pravo i kako se prijavljujem?`,
-        odgovor: `Podrška Starijima je jedan od socijalnih programa. Stariji korisnici su jedna od kvalifikovanih grupa — grupa čije učešće u zajednici Protokol prepoznaje iako se ne ispoljava kroz pojedinačne razmene.
+        id: 97,
+        pitanje: `Šta je doprinos razmeni i kako se prolazi pet koraka?`,
+        odgovor: `Doprinos razmeni je putanja od pet koraka kojom Protokol upisuje POEN za stvarno uključivanje u razmenu — po 1.000 POEN za svaki korak, ukupno najviše 5.000 POEN.
 
-Kada potvrdiš podatke koji dokazuju da pripadaš toj grupi, Protokol ti automatski upiše POEN, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo učešće dobije ravnopravno mesto u sistemu.
+Prvi korak: objaviš prvi uredan oglas kojim nudiš dobro ili uslugu (novom članu se POEN upisuje kad Fondacija odobri oglas). Drugi: prvi put upišeš POEN nekome van svog kruga poznanstava. Treći: imaš tri objavljena oglasa, od kojih su dva dobila upit od dva različita člana. Četvrti: razmene sa pet različitih osoba van tvog kruga poznanstava. Peti: razmene sa deset različitih osoba.
 
-Prijava ide kroz platformu i otvorena je redovnim članovima.
-
-Pravo imaju korisnici od 50 godina naviše. Dnevni iznos raste sa godinama: 1.000 POEN sa navršenih 50 godina, uvećano za 100 POEN za svaku narednu godinu. Tako korisnik od 65 godina ima 2.500 POEN dnevno, a korisnik od 80 godina 4.000 POEN dnevno. Bliži uslovi i način dokazivanja godina uređuju se programskim pravilnikom.`,
+Koraci se prolaze redom, a za korake od drugog naviše potrebno je da si redovan član. Broje se razmene od najmanje 1.000 POEN po transakciji, sa redovnim članovima van tvog kruga poznanstava, i svaka osoba se računa jednom za celu putanju. Ništa ne prijavljuješ — Protokol sam prati napredovanje i upisuje POEN kad korak bude pređen.`,
       },
       {
-        id: 62,
-        pitanje: `Šta je „dokaz statusa" za socijalni program — moram li da uploadujem izvod ili dokument deteta?`,
-        odgovor: `Ne moraš da uploaduješ nikakav dokument.
+        id: 19,
+        pitanje: `Kako radi operativni doprinos?`,
+        odgovor: `Operativni doprinos evidentira rad za zajedničko dobro koji bi inače ostao nevidljiv — volontiranje, brigu o starijima, rad u zajedničkim aktivnostima, kreativne doprinose.
 
-Za Podršku Majkama, na primer, ti sam(a) upišeš ime deteta i datum rođenja kroz formu na platformi — ništa se ne skenira niti prilaže. Iznos koji ti se evidentira zavisi od broja dece.
+Sve teče kroz objavljen zadatak: neko ga objavi, redovan član se prijavi i izvrši ga, izvršenje se potvrdi — i tek tada Protokol upisuje POEN. U početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija; po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nosioci ZRNA, a izvršenje potvrđuju nosioci ZRNA.
 
-Tvoju prijavu zatim pregleda i odobrava Fondacija pre nego što ti Protokol počne automatski da upisuje POEN. Podaci koje uneseš nisu javni — vidi ih samo onaj ko obrađuje prijavu, jer je reč o osetljivim podacima koji se obrađuju samo uz tvoj izričit pristanak, a taj pristanak možeš povući u svakom trenutku (tada prestaje i automatski upis POEN-a).
-
-Bliži uslovi kojima se potvrđuje status za svaku grupu uređeni su Pravilnikom o programima podrške, objavljenim na sajtu.`,
+Nema tarife po satu. Uz zadatak stoji predloženi POEN, ali to je težinski orijentir, ne cena — stvarno upisani iznos zavisi od toga koliko doprinosa tog dana deli zajednički dnevni okvir, pa se iznosi srazmerno raspoređuju.`,
       },
       {
         id: 63,
         pitanje: `Postoji li program za nezaposlene ili opštu finansijsku nuždu?`,
         odgovor: `Trenutno ne postoji poseban program za nezaposlenost ni za opštu finansijsku nuždu.
 
-Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke, starije korisnike, posebnu brigu (osobe sa invaliditetom) i školovanje. Nezaposlenost ni siromaštvo nisu među tim grupama.
+Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke i primarne staratelje, starije, osobe sa invaliditetom i studente. Nezaposlenost ni siromaštvo nisu među tim grupama — socijalni programi nisu socijalna pomoć ni naknada, nego način da razuđeno učešće dobije ravnopravno mesto u sistemu, a ne oblik podrške zbog finansijskog stanja.
 
-Važno je i da socijalni programi nisu socijalna pomoć ni naknada — oni postoje da bi i takvo razuđeno učešće dobilo ravnopravno mesto u sistemu, a ne kao oblik podrške zbog finansijskog stanja.
+Ako si u finansijskoj nuždi, put do POEN-a je isti kao za sve: razmena dobara i usluga sa drugima, doprinos razmeni — pet koraka uključivanja u razmenu koji zajedno donose do 5.000 POEN — i operativni doprinos, rad za zajedničko dobro kroz objavljene zadatke.
 
-Ako se nalaziš u finansijskoj nuždi, put do POEN-a je isti kao za sve ostale: kroz razmenu dobara i usluga sa drugima i kroz operativni doprinos — rad za zajedničko dobro koji se objavljuje kao zadatak, pa ti se za izvršenje upiše POEN.
-
-Nove kvalifikovane grupe se mogu dodati kasnije: u prvoj fazi o tome odlučuje Fondacija, a po aktivaciji upravljanja zajednicom — Gornje Kolo. Konkretni budući programi nisu još razrađeni.`,
+Nove kvalifikovane grupe mogu se dodati kasnije: u prvoj fazi o tome odlučuje Fondacija, a po aktivaciji upravljanja zajednicom — Gornje Kolo. Konkretni budući programi još nisu razrađeni.`,
       },
       {
         id: 64,
         pitanje: `Je li ovo posao? Imam li prihod, ugovor ili zagarantovan mesečni iznos?`,
-        odgovor: `Ne, ovo nije posao u smislu radnog odnosa, i nemaš zagarantovan iznos.
+        odgovor: `Ne. Ovo nije posao u smislu radnog odnosa i nemaš zagarantovan iznos.
 
-Kada radiš nešto za zajedničko dobro, sam odlučuješ da li ćeš se prijaviti, kako ćeš zadatak izvršiti i kojim tempom — i možeš odustati u svakom trenutku, bez posledica. Niko ti ne naređuje i nemaš obavezu da radiš. Zato to nije radni odnos: nema nadređenog, nema obaveze rada, nema plate.
+Ti odlučuješ da li ćeš se prijaviti na zadatak, kako ćeš ga izvršiti i kojim tempom — i možeš odustati u svakom trenutku, bez posledica. Niko ti ne naređuje i nemaš obavezu da radiš. Zato to nije radni odnos: nema nadređenog, nema obaveze rada, nema plate.
 
-Ne postoji ni ugovor po kome bi za urađeno X dobio tačno Y POEN-a. Tvoj doprinos i upis POEN-a su dva odvojena akta: ti doprineseš, a Protokol potom po pravilima upiše POEN. Iz toga ne nastaje potraživanje prema Fondaciji — nemaš od koga da „naplatiš".
+Ne postoji ni ugovor po kome se za urađeno X upisuje tačno Y POEN-a. Tvoj doprinos i upis POEN-a su dva odvojena akta: ti doprineseš, a Protokol potom po pravilima upiše POEN. Iz toga ne nastaje potraživanje prema Fondaciji — nemaš od koga da „naplatiš".
 
-POEN nije plata ni naknada. Kada se objavi zadatak, uz njega ide predloženi POEN, ali to nije zagarantovan iznos — to je samo težina zadatka. Koliko će ti se zaista upisati zavisi od toga koliko je doprinosa toga dana ušlo u zajednički dnevni okvir, pa se taj okvir srazmerno deli. Nijedna potvrđena evidencija se ne prenosi za naredni dan i ne stvara obavezu sistema prema tebi.
+POEN nije plata ni naknada. Uz objavljen zadatak stoji predloženi POEN, ali to je težinski orijentir, ne zagarantovan iznos: koliko će se stvarno upisati zavisi od toga koliko je doprinosa tog dana ušlo u zajednički dnevni okvir, koji se srazmerno deli. Ono što tog dana ne stane u okvir ne prenosi se za sutra i ne stvara obavezu sistema prema tebi.
 
-Ovo je dobrovoljan doprinos zajednici koji se beleži, a ne posao sa zagarantovanom mesečnom zaradom.`,
-      },
-      {
-        id: 79,
-        pitanje: `Koliko POEN dnevno po detetu donosi Podrška Majkama i kako broj i uzrast dece utiču?`,
-        odgovor: `Za svako dete polazna dnevna osnova je 2.000 POEN. Od te osnove se oduzima 100 POEN za svaku godinu uzrasta deteta — tako da podrška postepeno opada kako dete raste i prestaje kada dete napuni 20 godina.
-
-Broj dece povećava ukupan iznos, ali ne prostim sabiranjem — svako naredno dete nosi veći množilac, i to progresivno: 1. dete ×1,00, 2. ×1,20, 3. ×1,50, 4. ×2,00, 5. ×3,00, 6. ×4,50, 7. ×6,00, 8. ×8,00, 9. ×10,00, a za 10. dete i dalje raste za ×2,00 po svakom narednom detetu. Tako veće porodice dobijaju srazmerno veću podršku.
-
-Primer: za jedno dete od 3 godine to je (2.000 − 300) × 1,00 = 1.700 POEN dnevno. Za isto dete kao treće po redu bilo bi (2.000 − 300) × 1,50 = 2.550 POEN dnevno.
-
-Podrška se evidentira automatski na dnevnom nivou dok status traje, bez prijavljivanja pojedinačnih aktivnosti. Kao i kod ostalih programa, sva dnevna evidentiranja dele zajednički dnevni okvir sistema, pa se u danima velikog opticaja iznosi mogu srazmerno umanjiti. Ovi parametri uređeni su programskim pravilnikom i mogu se menjati njegovom izmenom.`,
+Ovo je dobrovoljan doprinos zajednici koji se beleži — ne posao sa zagarantovanom mesečnom zaradom.`,
       },
     ],
   },
