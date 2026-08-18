@@ -1,6 +1,6 @@
 # Tekstovi sajta
 
-Generisano skriptom `scripts/izvoz-tekstova.mjs`. Ukupno **2893** tekstova na 5 jezika (sr, en, ru, hr, hu).
+Generisano skriptom `scripts/izvoz-tekstova.mjs`. Ukupno **3089** tekstova na 5 jezika (sr, en, ru, hr, hu).
 
 **Kako se uređuje:** menja se samo tekst ispod oznake jezika. Red koji počinje sa
 `###` je ključ — adresa po kojoj se tekst vraća u kod — i ne dira se, kao ni oznake
@@ -15,19 +15,19 @@ Tekst koji na nekom jeziku ne postoji označen je sa _(prazno)_.
 
 ## Sadržaj
 
-- interfejs / nav — 18
+- interfejs / nav — 19
 - interfejs / header — 16
 - interfejs / push — 5
 - interfejs / bagovi — 17
 - interfejs / common — 23
 - interfejs / seo — 2
-- interfejs / login — 24
+- interfejs / login — 26
 - interfejs / zaboravljenaLozinka — 12
 - interfejs / resetLozinka — 15
 - interfejs / odjavaObavestenja — 11
-- interfejs / registracija — 32
+- interfejs / registracija — 34
 - interfejs / sistem — 94
-- interfejs / novcanik — 73
+- interfejs / novcanik — 74
 - interfejs / verifikacija — 68
 - interfejs / graf — 39
 - interfejs / krug — 61
@@ -36,8 +36,8 @@ Tekst koji na nekom jeziku ne postoji označen je sa _(prazno)_.
 - interfejs / programi — 51
 - interfejs / glasanje — 55
 - interfejs / donacije — 66
-- interfejs / poruke — 11
-- interfejs / pravne — 69
+- interfejs / poruke — 12
+- interfejs / pravne — 71
 - interfejs / javneKomponente — 38
 - interfejs / landing — 106
 - interfejs / oNama — 131
@@ -57,17 +57,23 @@ Tekst koji na nekom jeziku ne postoji označen je sa _(prazno)_.
 - interfejs / dobrodosli — 54
 - interfejs / politikaPrihvati — 15
 - interfejs / pravilnikPrihvati — 11
-- interfejs / admin — 418
+- interfejs / admin — 419
 - interfejs / kolacici — 5
 - interfejs / oauthDovrsi — 7
-- interfejs / notifikacije — 94
-- interfejs / transakcije — 11
+- interfejs / notifikacije — 118
+- interfejs / transakcije — 15
 - interfejs / mejl — 17
 - interfejs / greske — 279
-- interfejs / deca — 52
+- interfejs / deca — 77
+- interfejs / decjaPocetna — 23
+- interfejs / prijatelji — 21
+- interfejs / registracijaDeteta — 21
+- interfejs / detePoziv — 28
+- interfejs / prijavaPoruke — 15
 - faq / pocetnici — 19
 - faq / poen-zrno — 23
-- faq / ukljucivanje — 13
+- faq / ukljucivanje — 15
+- faq / deca — 23
 - faq / programi — 21
 - faq / pijaca-donacije — 23
 - faq / porezi-legalnost — 11
@@ -510,6 +516,30 @@ FAQ
 **hu**
 
 Gyakori kérdések
+
+---
+
+### nav.prijatelji
+
+**sr**
+
+Prijatelji
+
+**en**
+
+Friends
+
+**ru**
+
+Друзья
+
+**hr**
+
+Prijatelji
+
+**hu**
+
+Barátok
 
 ---
 
@@ -2613,6 +2643,54 @@ Jelszó elrejtése
 
 ---
 
+### login.email_ili_pseudonim
+
+**sr**
+
+Email ili pseudonim
+
+**en**
+
+Email or pseudonym
+
+**ru**
+
+Эл. почта или псевдоним
+
+**hr**
+
+Email ili pseudonim
+
+**hu**
+
+E-mail vagy álnév
+
+---
+
+### login.deca_pseudonimom
+
+**sr**
+
+Možeš uneti mejl ili pseudonim. Deca imaju samo pseudonim i lozinku koju im je dao roditelj.
+
+**en**
+
+You may enter your e-mail or your pseudonym. Children have only a pseudonym and the password their parent gave them.
+
+**ru**
+
+Можно ввести почту или псевдоним. У детей есть только псевдоним и пароль, который им дал родитель.
+
+**hr**
+
+Možeš unijeti e-poštu ili pseudonim. Djeca imaju samo pseudonim i lozinku koju im je dao roditelj.
+
+**hu**
+
+Megadhatod az e-mail címedet vagy az álnevedet. A gyermekeknek csak álnevük van és a szülőtől kapott jelszavuk.
+
+---
+
 ## interfejs / zaboravljenaLozinka
 
 ### zaboravljenaLozinka.naslov
@@ -4298,6 +4376,54 @@ Sakrij lozinku
 **hu**
 
 Jelszó elrejtése
+
+---
+
+### registracija.dete_pitanje
+
+**sr**
+
+Dete si?
+
+**en**
+
+Are you a child?
+
+**ru**
+
+Ты ребёнок?
+
+**hr**
+
+Jesi li dijete?
+
+**hu**
+
+Gyerek vagy?
+
+---
+
+### registracija.dete_link
+
+**sr**
+
+Otvori dečji nalog
+
+**en**
+
+Open a child account
+
+**ru**
+
+Открыть детский аккаунт
+
+**hr**
+
+Otvori dječji račun
+
+**hu**
+
+Gyerekfiók nyitása
 
 ---
 
@@ -8310,6 +8436,30 @@ Prijava nije poslana.
 **hu**
 
 A bejelentést nem sikerült elküldeni.
+
+---
+
+### novcanik.ceka_roditelja
+
+**sr**
+
+Nalog čeka da ga preuzme roditelj. Do tada možeš da primaš POEN, a da ga prepisuješ kad roditelj preuzme nalog.
+
+**en**
+
+The account is waiting for a parent to take it over. Until then you can receive POEN; you can re-register it to someone else once a parent takes over the account.
+
+**ru**
+
+Учётная запись ждёт, чтобы её принял родитель. До этого вы можете получать ПОЕН, а переписывать его — когда родитель примет учётную запись.
+
+**hr**
+
+Račun čeka da ga preuzme roditelj. Do tada možeš primati POEN, a prepisivati ga kad roditelj preuzme račun.
+
+**hu**
+
+A fiók arra vár, hogy a szülő átvegye. Addig POEN-t kaphatsz, átírni pedig akkor tudsz, ha a szülő átvette a fiókot.
 
 ---
 
@@ -20264,6 +20414,30 @@ Vissza
 
 ---
 
+### poruke.roditelj_cita
+
+**sr**
+
+Sa druge strane je dete. Ovaj razgovor čita njegov roditelj.
+
+**en**
+
+The other side is a child. This conversation is read by their parent.
+
+**ru**
+
+С другой стороны — ребёнок. Этот разговор читает его родитель.
+
+**hr**
+
+S druge strane je dijete. Ovaj razgovor čita njegov roditelj.
+
+**hu**
+
+A másik oldalon gyerek van. Ezt a beszélgetést a szülője olvassa.
+
+---
+
 ## interfejs / pravne
 
 ### pravne.eyebrow
@@ -20438,23 +20612,23 @@ A KOLO platform felhasználási feltételei
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20486,23 +20660,23 @@ A KOLO platform adatvédelmi szabályzata
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20582,23 +20756,23 @@ DPIA — Adatvédelmi hatásvizsgálat
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20630,23 +20804,23 @@ Adatkezelési tevékenységek nyilvántartása
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20678,23 +20852,23 @@ Kockázatvállalási nyilatkozat
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20726,23 +20900,23 @@ KOLO Whitepaper
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -20774,23 +20948,23 @@ KOLO rendszer szabályzatai
 
 **sr**
 
-\4.2.3
+\4.3.0
 
 **en**
 
-\4.2.3
+\4.3.0
 
 **ru**
 
-\4.2.3
+\4.3.0
 
 **hr**
 
-\4.2.3
+\4.3.0
 
 **hu**
 
-\4.2.3
+\4.3.0
 
 ---
 
@@ -21182,23 +21356,23 @@ Felhasználási feltételek — KOLO
 
 **sr**
 
-Uslovi korišćenja KOLO platforme, verzija 4.2.3
+Uslovi korišćenja KOLO platforme, verzija 4.3.0
 
 **en**
 
-KOLO Platform Terms of Use, version 4.2.3
+KOLO Platform Terms of Use, version 4.3.0
 
 **ru**
 
-Условия пользования платформой КОЛО, версия 4.2.3
+Условия пользования платформой КОЛО, версия 4.3.0
 
 **hr**
 
-Uvjeti korištenja KOLO platforme, verzija 4.2.3
+Uvjeti korištenja KOLO platforme, verzija 4.3.0
 
 **hu**
 
-A KOLO platform felhasználási feltételei, 4.2.3-s verzió
+A KOLO platform felhasználási feltételei, 4.3.0-s verzió
 
 ---
 
@@ -21230,23 +21404,23 @@ Adatvédelmi szabályzat — KOLO
 
 **sr**
 
-Politika privatnosti KOLO platforme, verzija 4.2.3
+Politika privatnosti KOLO platforme, verzija 4.3.0
 
 **en**
 
-KOLO Platform Privacy Policy, version 4.2.3
+KOLO Platform Privacy Policy, version 4.3.0
 
 **ru**
 
-Политика конфиденциальности платформы КОЛО, версия 4.2.3
+Политика конфиденциальности платформы КОЛО, версия 4.3.0
 
 **hr**
 
-Politika privatnosti KOLO platforme, verzija 4.2.3
+Politika privatnosti KOLO platforme, verzija 4.3.0
 
 **hu**
 
-A KOLO platform adatvédelmi szabályzata, 4.2.3-s verzió
+A KOLO platform adatvédelmi szabályzata, 4.3.0-s verzió
 
 ---
 
@@ -21326,23 +21500,23 @@ DPIA — KOLO
 
 **sr**
 
-Procena uticaja na zaštitu podataka o ličnosti, verzija 4.2.3
+Procena uticaja na zaštitu podataka o ličnosti, verzija 4.3.0
 
 **en**
 
-Data Protection Impact Assessment, version 4.2.3
+Data Protection Impact Assessment, version 4.3.0
 
 **ru**
 
-Оценка воздействия на защиту персональных данных, версия 4.2.3
+Оценка воздействия на защиту персональных данных, версия 4.3.0
 
 **hr**
 
-Procjena učinka na zaštitu osobnih podataka, verzija 4.2.3
+Procjena učinka na zaštitu osobnih podataka, verzija 4.3.0
 
 **hu**
 
-Adatvédelmi hatásvizsgálat, 4.2.3-s verzió
+Adatvédelmi hatásvizsgálat, 4.3.0-s verzió
 
 ---
 
@@ -21374,23 +21548,23 @@ Adatkezelési tevékenységek nyilvántartása — KOLO
 
 **sr**
 
-Registar radnji obrade podataka o ličnosti, verzija 4.2.3
+Registar radnji obrade podataka o ličnosti, verzija 4.3.0
 
 **en**
 
-Register of personal data processing activities, version 4.2.3
+Register of personal data processing activities, version 4.3.0
 
 **ru**
 
-Реестр операций обработки персональных данных, версия 4.2.3
+Реестр операций обработки персональных данных, версия 4.3.0
 
 **hr**
 
-Registar radnji obrade osobnih podataka, verzija 4.2.3
+Registar radnji obrade osobnih podataka, verzija 4.3.0
 
 **hu**
 
-Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.2.3-s verzió
+Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.0-s verzió
 
 ---
 
@@ -21422,23 +21596,23 @@ Kockázatvállalási nyilatkozat — KOLO
 
 **sr**
 
-Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.2.3
+Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.3.0
 
 **en**
 
-Risk acceptance statement for participation in the KOLO system, version 4.2.3
+Risk acceptance statement for participation in the KOLO system, version 4.3.0
 
 **ru**
 
-Заявление о принятии рисков участия в системе КОЛО, версия 4.2.3
+Заявление о принятии рисков участия в системе КОЛО, версия 4.3.0
 
 **hr**
 
-Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.2.3
+Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.0
 
 **hu**
 
-A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.2.3-s verzió
+A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.0-s verzió
 
 ---
 
@@ -21470,23 +21644,23 @@ Whitepaper — KOLO
 
 **sr**
 
-KOLO Whitepaper, verzija 4.2.3
+KOLO Whitepaper, verzija 4.3.0
 
 **en**
 
-KOLO Whitepaper, version 4.2.3
+KOLO Whitepaper, version 4.3.0
 
 **ru**
 
-KOLO Whitepaper, версия 4.2.3
+KOLO Whitepaper, версия 4.3.0
 
 **hr**
 
-KOLO Whitepaper, verzija 4.2.3
+KOLO Whitepaper, verzija 4.3.0
 
 **hu**
 
-KOLO Whitepaper, 4.2.3-s verzió
+KOLO Whitepaper, 4.3.0-s verzió
 
 ---
 
@@ -21518,23 +21692,23 @@ KOLO rendszer szabályzatai — KOLO
 
 **sr**
 
-Indeks pravilnika KOLO sistema, verzija 4.2.3
+Indeks pravilnika KOLO sistema, verzija 4.3.0
 
 **en**
 
-Index of KOLO system rulebooks, version 4.2.3
+Index of KOLO system rulebooks, version 4.3.0
 
 **ru**
 
-Указатель правил системы КОЛО, версия 4.2.3
+Указатель правил системы КОЛО, версия 4.3.0
 
 **hr**
 
-Indeks pravilnika KOLO sustava, verzija 4.2.3
+Indeks pravilnika KOLO sustava, verzija 4.3.0
 
 **hu**
 
-A KOLO rendszer szabályzatainak indexe, 4.2.3-s verzió
+A KOLO rendszer szabályzatainak indexe, 4.3.0-s verzió
 
 ---
 
@@ -21919,6 +22093,54 @@ Socijalni programi (Podrška majkama, starijima, posebna briga, školovanje) —
 **hu**
 
 Szociális programok (Édesanyák támogatása, Idősek támogatása, Különleges gondoskodás, Tanulás) — feltételek, együtthatók és a megerősítők megerősítése.
+
+---
+
+### pravne.rb.ucesce-dece.naziv
+
+**sr**
+
+Pravilnik o učešću dece
+
+**en**
+
+Rulebook on the Participation of Children
+
+**ru**
+
+Регламент об участии детей
+
+**hr**
+
+Pravilnik o sudjelovanju djece
+
+**hu**
+
+Szabályzat a gyermekek részvételéről
+
+---
+
+### pravne.rb.ucesce-dece.opis
+
+**sr**
+
+Učešće maloletnih lica: dva ulaza (roditelj otvara nalog ili se dete registruje samo), tri stanja naloga, prijateljstva i doprinos od 500 POEN, prelazak u punoletni nalog.
+
+**en**
+
+Participation of minors: two entry paths (the parent opens the account or the child registers independently), three account states, friendships and the 500-POEN contribution, transition to an adult account.
+
+**ru**
+
+Участие несовершеннолетних лиц: два входа (родитель открывает запись либо ребёнок регистрируется сам), три состояния записи, дружбы и вклад в 500 ПОЕН, переход в совершеннолетнюю запись.
+
+**hr**
+
+Sudjelovanje maloljetnih osoba: dva ulaza (roditelj otvara račun ili se dijete registrira samo), tri stanja računa, prijateljstva i doprinos od 500 POEN, prijelaz u punoljetni račun.
+
+**hu**
+
+A kiskorúak részvétele: két belépési út (a szülő nyitja meg a fiókot, vagy a gyermek önállóan regisztrál), három fiókállapot, barátságok és az 500 POEN hozzájárulás, átmenet nagykorú fiókba.
 
 ---
 
@@ -52956,23 +53178,23 @@ Samo sistemska obaveštenja
 
 **sr**
 
-Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
+Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
 
 **en**
 
-Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
+Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
 
 **ru**
 
-Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
+Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
 
 **hr**
 
-Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
+Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
 
 **hu**
 
-Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — najmanje 15 dana unapred), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
+Ovaj kanal služi isključivo za obaveštenja koja Fondacija duguje korisnicima: izmene Uslova i Politike privatnosti (Uslovi čl. 40, Politika čl. 16 — stupaju na snagu danom donošenja, obaveštenje bez odlaganja), planirani zastoj duži od 24 sata (Uslovi čl. 33) i slično. Poruka stiže svim korisnicima i onima koji su isključili email obaveštenja. Vesti i bilten se NE šalju ovim putem — za to je potrebna dopuna Politike privatnosti (čl. 8) i zaseban pristanak korisnika.
 
 ---
 
@@ -54341,6 +54563,30 @@ Razmene
 **hu**
 
 Razmene
+
+---
+
+### admin.tab_prijave
+
+**sr**
+
+Prijave
+
+**en**
+
+Prijave
+
+**ru**
+
+Prijave
+
+**hr**
+
+Prijave
+
+**hu**
+
+Prijave
 
 ---
 
@@ -56934,6 +57180,582 @@ Bejelentés alapján az Alapítvány érvénytelenítette a(z) {pseudonim} felő
 
 ---
 
+### notifikacije.dete_preuzet_nalog_naslov
+
+**sr**
+
+Roditelj je preuzeo tvoj nalog
+
+**en**
+
+A parent took over your account
+
+**ru**
+
+Родитель принял твой аккаунт
+
+**hr**
+
+Roditelj je preuzeo tvoj račun
+
+**hu**
+
+A szülő átvette a fiókodat
+
+---
+
+### notifikacije.dete_preuzet_nalog_tekst
+
+**sr**
+
+{pseudonim} je preuzeo/la tvoj nalog. Sada možeš u Pričaonicu.
+
+**en**
+
+{pseudonim} took over your account. You can now use the Chat room.
+
+**ru**
+
+{pseudonim} принял(а) твой аккаунт. Теперь тебе доступна Разговорная.
+
+**hr**
+
+{pseudonim} je preuzeo/la tvoj račun. Sada možeš u Pričaonicu.
+
+**hu**
+
+{pseudonim} átvette a fiókodat. Mostantól használhatod a Beszélgetőt.
+
+---
+
+### notifikacije.dete_razgovor_odrasli_naslov
+
+**sr**
+
+Nov razgovor tvog deteta sa punoletnim korisnikom
+
+**en**
+
+New conversation between your child and an adult member
+
+**ru**
+
+Новый разговор вашего ребёнка со взрослым участником
+
+**hr**
+
+Nov razgovor tvog djeteta s punoljetnim korisnikom
+
+**hu**
+
+Új beszélgetés a gyermeked és egy felnőtt tag között
+
+---
+
+### notifikacije.dete_razgovor_odrasli_tekst
+
+**sr**
+
+{dete} vodi razgovor sa korisnikom {pseudonim}. Razgovor možeš da pročitaš na profilu deteta.
+
+**en**
+
+{dete} is in a conversation with {pseudonim}. You can read it on the child's profile.
+
+**ru**
+
+{dete} ведёт разговор с участником {pseudonim}. Прочитать его можно в профиле ребёнка.
+
+**hr**
+
+{dete} vodi razgovor s korisnikom {pseudonim}. Razgovor možeš pročitati na profilu djeteta.
+
+**hu**
+
+{dete} beszélgetést folytat vele: {pseudonim}. A gyermek profilján elolvashatod.
+
+---
+
+### notifikacije.prijateljstvo_poen_naslov
+
+**sr**
+
+Upisano ti je {iznos} POEN
+
+**en**
+
+{iznos} POEN recorded for you
+
+**ru**
+
+Тебе записано {iznos} POEN
+
+**hr**
+
+Upisano ti je {iznos} POEN
+
+**hu**
+
+{iznos} POEN-t jegyeztünk be neked
+
+---
+
+### notifikacije.prijateljstvo_poen_tekst
+
+**sr**
+
+Prijateljstvo sa {pseudonim} donelo ti je {iznos} POEN.
+
+**en**
+
+The friendship with {pseudonim} brought you {iznos} POEN.
+
+**ru**
+
+Дружба с {pseudonim} принесла тебе {iznos} POEN.
+
+**hr**
+
+Prijateljstvo s {pseudonim} donijelo ti je {iznos} POEN.
+
+**hu**
+
+A(z) {pseudonim} nevűvel kötött barátság {iznos} POEN-t hozott neked.
+
+---
+
+### notifikacije.prijateljstvo_raskinuto_naslov
+
+**sr**
+
+Prijateljstvo je raskinuto
+
+**en**
+
+A friendship has ended
+
+**ru**
+
+Дружба прекращена
+
+**hr**
+
+Prijateljstvo je raskinuto
+
+**hu**
+
+A barátság megszűnt
+
+---
+
+### notifikacije.prijateljstvo_raskinuto_tekst
+
+**sr**
+
+{pseudonim} je raskinuo/la prijateljstvo.
+
+**en**
+
+{pseudonim} ended the friendship.
+
+**ru**
+
+{pseudonim} прекратил(а) дружбу.
+
+**hr**
+
+{pseudonim} je raskinuo/la prijateljstvo.
+
+**hu**
+
+{pseudonim} megszüntette a barátságot.
+
+---
+
+### notifikacije.prijateljstvo_raskinuto_poen_naslov
+
+**sr**
+
+Prijateljstvo je raskinuto
+
+**en**
+
+A friendship has ended
+
+**ru**
+
+Дружба прекращена
+
+**hr**
+
+Prijateljstvo je raskinuto
+
+**hu**
+
+A barátság megszűnt
+
+---
+
+### notifikacije.prijateljstvo_raskinuto_poen_tekst
+
+**sr**
+
+{pseudonim} je raskinuo/la prijateljstvo. Otpisano ti je {iznos} POEN.
+
+**en**
+
+{pseudonim} ended the friendship. {iznos} POEN has been written off.
+
+**ru**
+
+{pseudonim} прекратил(а) дружбу. С тебя списано {iznos} POEN.
+
+**hr**
+
+{pseudonim} je raskinuo/la prijateljstvo. Otpisano ti je {iznos} POEN.
+
+**hu**
+
+{pseudonim} megszüntette a barátságot. {iznos} POEN-t leírtunk.
+
+---
+
+### notifikacije.punoletstvo_najava_naslov
+
+**sr**
+
+Za {dana} dana puniš 18
+
+**en**
+
+You turn 18 in {dana} days
+
+**ru**
+
+Через {dana} дн. тебе исполнится 18
+
+**hr**
+
+Za {dana} dana puniš 18
+
+**hu**
+
+{dana} nap múlva betöltöd a 18-at
+
+---
+
+### notifikacije.punoletstvo_najava_tekst
+
+**sr**
+
+Tog dana biće ti otpisano {iznos} POEN iz {broj} prijateljstava, a prijateljstva će biti zatvorena. Zauzvrat te potvrđuju roditelji i sam počinješ da potvrđuješ druge.
+
+**en**
+
+On that day {iznos} POEN from {broj} friendships will be written off and the friendships closed. In return your parents confirm you and you start confirming others.
+
+**ru**
+
+В этот день с тебя будет списано {iznos} POEN за {broj} дружб, а дружбы будут закрыты. Взамен тебя подтвердят родители, и ты сам(а) начнёшь подтверждать других.
+
+**hr**
+
+Tog dana bit će ti otpisano {iznos} POEN iz {broj} prijateljstava, a prijateljstva će biti zatvorena. Zauzvrat te potvrđuju roditelji i sam počinješ potvrđivati druge.
+
+**hu**
+
+Aznap {broj} barátságból {iznos} POEN-t leírunk, a barátságok pedig lezárulnak. Cserébe a szüleid megerősítenek, te pedig magad kezded megerősíteni másokat.
+
+---
+
+### notifikacije.punoletstvo_najava_prijatelj_naslov
+
+**sr**
+
+Prijatelj uskoro puni 18
+
+**en**
+
+A friend turns 18 soon
+
+**ru**
+
+Другу скоро исполнится 18
+
+**hr**
+
+Prijatelj uskoro puni 18
+
+**hu**
+
+Egy barátod hamarosan betölti a 18-at
+
+---
+
+### notifikacije.punoletstvo_najava_prijatelj_tekst
+
+**sr**
+
+{pseudonim} za {dana} dana puni 18. Tada se vaše prijateljstvo zatvara i biće ti otpisano {iznos} POEN.
+
+**en**
+
+{pseudonim} turns 18 in {dana} days. Your friendship then closes and {iznos} POEN will be written off.
+
+**ru**
+
+{pseudonim} через {dana} дн. исполняется 18. Тогда ваша дружба закроется и с тебя будет списано {iznos} POEN.
+
+**hr**
+
+{pseudonim} za {dana} dana puni 18. Tada se vaše prijateljstvo zatvara i bit će ti otpisano {iznos} POEN.
+
+**hu**
+
+{pseudonim} {dana} nap múlva betölti a 18-at. Akkor a barátságotok lezárul, és {iznos} POEN-t leírunk.
+
+---
+
+### notifikacije.punoletstvo_otpis_prijatelj_naslov
+
+**sr**
+
+Prijatelj je postao punoletan
+
+**en**
+
+A friend has come of age
+
+**ru**
+
+Друг стал совершеннолетним
+
+**hr**
+
+Prijatelj je postao punoljetan
+
+**hu**
+
+Egy barátod nagykorú lett
+
+---
+
+### notifikacije.punoletstvo_otpis_prijatelj_tekst
+
+**sr**
+
+{pseudonim} je napunio/la 18 godina. Vaše prijateljstvo je zatvoreno i otpisano ti je {iznos} POEN.
+
+**en**
+
+{pseudonim} turned 18. Your friendship is closed and {iznos} POEN has been written off.
+
+**ru**
+
+{pseudonim} исполнилось 18 лет. Ваша дружба закрыта, с тебя списано {iznos} POEN.
+
+**hr**
+
+{pseudonim} je napunio/la 18 godina. Vaše prijateljstvo je zatvoreno i otpisano ti je {iznos} POEN.
+
+**hu**
+
+{pseudonim} betöltötte a 18. évét. A barátságotok lezárult, és {iznos} POEN-t leírtunk.
+
+---
+
+### notifikacije.punoletstvo_naslov
+
+**sr**
+
+Nalog je prešao u punoletni
+
+**en**
+
+The account is now an adult account
+
+**ru**
+
+Аккаунт стал взрослым
+
+**hr**
+
+Račun je prešao u punoljetni
+
+**hu**
+
+A fiók nagykorúvá vált
+
+---
+
+### notifikacije.punoletstvo_tekst
+
+**sr**
+
+Otpisano ti je {iznos} POEN iz {broj} prijateljstava, a upisano ti je {potvrda} potvrda stvarnosti od roditelja. Od sada i sam/a potvrđuješ druge.
+
+**en**
+
+{iznos} POEN from {broj} friendships has been written off, and {potvrda} confirmations of reality from your parents recorded. From now on you confirm others yourself.
+
+**ru**
+
+С тебя списано {iznos} POEN за {broj} дружб и записано подтверждений реальности от родителей: {potvrda}. Отныне ты сам(а) подтверждаешь других.
+
+**hr**
+
+Otpisano ti je {iznos} POEN iz {broj} prijateljstava, a upisano ti je {potvrda} potvrda stvarnosti od roditelja. Od sada i sam/a potvrđuješ druge.
+
+**hu**
+
+{broj} barátságból {iznos} POEN-t leírtunk, és {potvrda} valóságigazolást jegyeztünk be a szüleidtől. Mostantól magad is megerősítesz másokat.
+
+---
+
+### notifikacije.prijava_poruke_admin_naslov
+
+**sr**
+
+Prijavljena poruka u Pričaonici
+
+**en**
+
+Message reported in the Chat Room
+
+**ru**
+
+Жалоба на сообщение в Комнате общения
+
+**hr**
+
+Prijavljena poruka u Pričaonici
+
+**hu**
+
+Bejelentett üzenet a Beszélgetőszobában
+
+---
+
+### notifikacije.prijava_poruke_admin_tekst
+
+**sr**
+
+Prijavljena je poruka u Pričaonici. Pogledaj tab „Prijave”.
+
+**en**
+
+A message in the Chat Room has been reported. See the “Reports” tab.
+
+**ru**
+
+На сообщение в Комнате общения подана жалоба. Смотрите вкладку «Жалобы».
+
+**hr**
+
+Prijavljena je poruka u Pričaonici. Pogledaj tab „Prijave”.
+
+**hu**
+
+Bejelentettek egy üzenetet a Beszélgetőszobában. Nézd meg a „Bejelentések” fület.
+
+---
+
+### notifikacije.prijava_poruke_resena_naslov
+
+**sr**
+
+Prijavljena poruka je uklonjena
+
+**en**
+
+The reported message was removed
+
+**ru**
+
+Сообщение, на которое вы пожаловались, удалено
+
+**hr**
+
+Prijavljena poruka je uklonjena
+
+**hu**
+
+A bejelentett üzenetet eltávolították
+
+---
+
+### notifikacije.prijava_poruke_resena_tekst
+
+**sr**
+
+Fondacija je uklonila poruku koju si prijavio/la. Obrazloženje: {odluka}
+
+**en**
+
+The Foundation removed the message you reported. Reasons: {odluka}
+
+**ru**
+
+Фонд удалил сообщение, на которое вы пожаловались. Обоснование: {odluka}
+
+**hr**
+
+Zaklada je uklonila poruku koju si prijavio/la. Obrazloženje: {odluka}
+
+**hu**
+
+Az Alapítvány eltávolította az általad bejelentett üzenetet. Indokolás: {odluka}
+
+---
+
+### notifikacije.prijava_poruke_odbacena_naslov
+
+**sr**
+
+Prijava poruke je razmotrena
+
+**en**
+
+Your message report was considered
+
+**ru**
+
+Ваша жалоба рассмотрена
+
+**hr**
+
+Prijava poruke je razmotrena
+
+**hu**
+
+A bejelentésedet megvizsgálták
+
+---
+
+### notifikacije.prijava_poruke_odbacena_tekst
+
+**sr**
+
+Fondacija je razmotrila tvoju prijavu i poruka ostaje. Obrazloženje: {odluka}
+
+**en**
+
+The Foundation considered your report and the message stays. Reasons: {odluka}
+
+**ru**
+
+Фонд рассмотрел вашу жалобу, сообщение остаётся. Обоснование: {odluka}
+
+**hr**
+
+Zaklada je razmotrila tvoju prijavu i poruka ostaje. Obrazloženje: {odluka}
+
+**hu**
+
+Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}
+
+---
+
 ## interfejs / transakcije
 
 ### transakcije.verifikacija
@@ -57197,6 +58019,102 @@ Doprinos razmjeni — korak {korak}
 **hu**
 
 Hozzájárulás a cseréhez — {korak}. lépés
+
+---
+
+### transakcije.prijateljstvo
+
+**sr**
+
+Prijateljstvo sa {pseudonim}
+
+**en**
+
+Friendship with {pseudonim}
+
+**ru**
+
+Дружба с {pseudonim}
+
+**hr**
+
+Prijateljstvo s {pseudonim}
+
+**hu**
+
+Barátság vele: {pseudonim}
+
+---
+
+### transakcije.prijateljstvo_raskid
+
+**sr**
+
+Raskinuto prijateljstvo sa {pseudonim}
+
+**en**
+
+Friendship with {pseudonim} ended
+
+**ru**
+
+Дружба с {pseudonim} прекращена
+
+**hr**
+
+Raskinuto prijateljstvo s {pseudonim}
+
+**hu**
+
+A barátság megszűnt vele: {pseudonim}
+
+---
+
+### transakcije.prijateljstvo_punoletstvo
+
+**sr**
+
+Prijatelj {pseudonim} je postao punoletan
+
+**en**
+
+Friend {pseudonim} came of age
+
+**ru**
+
+Друг {pseudonim} стал совершеннолетним
+
+**hr**
+
+Prijatelj {pseudonim} je postao punoljetan
+
+**hu**
+
+{pseudonim} barátod nagykorú lett
+
+---
+
+### transakcije.prijateljstvo_punoletstvo_zbirno
+
+**sr**
+
+Poništenje POEN-a iz {broj} prijateljstava (punoletstvo)
+
+**en**
+
+POEN from {broj} friendships written off (coming of age)
+
+**ru**
+
+Списание POEN за {broj} дружб (совершеннолетие)
+
+**hr**
+
+Poništenje POEN-a iz {broj} prijateljstava (punoljetnost)
+
+**hu**
+
+{broj} barátságból származó POEN leírása (nagykorúság)
 
 ---
 
@@ -64842,71 +65760,23 @@ Jelszó
 
 **sr**
 
-Ti je postavljaš i predaješ detetu. Dete nema imejl, pa se lozinka menja preko tebe.
+Dete se prijavljuje PSEUDONIMOM i ovom lozinkom, na istoj stranici kao svi. Imejl nema.
 
 **en**
 
-You set it and hand it to the child. A child has no e-mail, so the password is changed through you.
+The child signs in with the PSEUDONYM and this password, on the same page as everyone else. There is no e-mail.
 
 **ru**
 
-Вы задаёте его и передаёте ребёнку. У ребёнка нет почты, поэтому пароль меняется через вас.
+Ребёнок входит по ПСЕВДОНИМУ и этому паролю, на той же странице, что и все. Почты нет.
 
 **hr**
 
-Ti je postavljaš i predaješ djetetu. Dijete nema e-poštu, pa se lozinka mijenja preko tebe.
+Dijete se prijavljuje PSEUDONIMOM i ovom lozinkom, na istoj stranici kao svi. E-poštu nema.
 
 **hu**
 
-Te állítod be és adod át a gyermeknek. A gyermeknek nincs e-mail címe, ezért a jelszó rajtad keresztül módosul.
-
----
-
-### deca.polje_lozinka_ponovo
-
-**sr**
-
-Ponovi lozinku
-
-**en**
-
-Repeat password
-
-**ru**
-
-Повторите пароль
-
-**hr**
-
-Ponovi lozinku
-
-**hu**
-
-Jelszó ismét
-
----
-
-### deca.greska_lozinke
-
-**sr**
-
-Lozinke se ne poklapaju.
-
-**en**
-
-The passwords do not match.
-
-**ru**
-
-Пароли не совпадают.
-
-**hr**
-
-Lozinke se ne podudaraju.
-
-**hu**
-
-A jelszavak nem egyeznek.
+A gyermek az ÁLNEVÉVEL és ezzel a jelszóval lép be, ugyanazon az oldalon, mint mindenki. E-mail címe nincs.
 
 ---
 
@@ -65555,6 +66425,3256 @@ Ako nemaš saznanja o tome, nemoj pritiskati nijedan gumb. Ali znaj: ako se ne i
 **hu**
 
 Ha nincs erről tudomásod, egyik gombot se nyomd meg. De tudd: ha nem nyilatkozol határidőn belül, az adott személy valóságáról adott megerősítésed megsemmisül, az emiatt nyilvántartott POEN visszavonásra kerül, a helyed pedig felszabadul.
+
+---
+
+### deca.prikazi_lozinku
+
+**sr**
+
+Prikaži lozinku
+
+**en**
+
+Show password
+
+**ru**
+
+Показать пароль
+
+**hr**
+
+Prikaži lozinku
+
+**hu**
+
+Jelszó megjelenítése
+
+---
+
+### deca.sakrij_lozinku
+
+**sr**
+
+Sakrij lozinku
+
+**en**
+
+Hide password
+
+**ru**
+
+Скрыть пароль
+
+**hr**
+
+Sakrij lozinku
+
+**hu**
+
+Jelszó elrejtése
+
+---
+
+### deca.pseudonim_pravilo
+
+**sr**
+
+Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne sme počinjati ni završavati se razdvajačem.
+
+**en**
+
+Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator.
+
+**ru**
+
+Псевдоним: 3–30 знаков, только латинские буквы (a–z), цифры и _ . - — без пробелов и без č, ć, š, ž, đ. Не может начинаться или заканчиваться разделителем.
+
+**hr**
+
+Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . - — bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom.
+
+**hu**
+
+Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval.
+
+---
+
+### deca.razgovori_naslov
+
+**sr**
+
+Razgovori
+
+**en**
+
+Conversations
+
+**ru**
+
+Разговоры
+
+**hr**
+
+Razgovori
+
+**hu**
+
+Beszélgetések
+
+---
+
+### deca.razgovori_opis
+
+**sr**
+
+Vidiš šta dete piše i ko mu piše. Ne možeš da se ubaciš u razgovor — sa druge strane je tuđe dete.
+
+**en**
+
+You see what the child writes and who writes to them. You cannot join the conversation — the other side is someone else's child.
+
+**ru**
+
+Ты видишь, что пишет ребёнок и кто пишет ему. Вмешаться в разговор нельзя — с другой стороны чужой ребёнок.
+
+**hr**
+
+Vidiš što dijete piše i tko mu piše. Ne možeš se ubaciti u razgovor — s druge strane je tuđe dijete.
+
+**hu**
+
+Látod, mit ír a gyermek és ki ír neki. A beszélgetésbe nem szólhatsz bele — a másik oldalon más gyermeke van.
+
+---
+
+### deca.razgovori_prazno
+
+**sr**
+
+Nema razgovora.
+
+**en**
+
+No conversations.
+
+**ru**
+
+Разговоров нет.
+
+**hr**
+
+Nema razgovora.
+
+**hu**
+
+Nincs beszélgetés.
+
+---
+
+### deca.uvid_obavestenje
+
+**sr**
+
+Roditelj ne čita tvoje razgovore sa drugom decom — vidi samo s kim se dopisuješ i koliko. Razgovore sa odraslima čita.
+
+**en**
+
+Your parent does not read your conversations with other children — they only see with whom and how much. Conversations with adults they do read.
+
+**ru**
+
+Родитель не читает твои разговоры с другими детьми — он видит только с кем и сколько. Разговоры со взрослыми он читает.
+
+**hr**
+
+Roditelj ne čita tvoje razgovore s drugom djecom — vidi samo s kim se dopisuješ i koliko. Razgovore s odraslima čita.
+
+**hu**
+
+A szülő nem olvassa a más gyerekekkel folytatott beszélgetéseidet — csak azt látja, kivel és mennyit. A felnőttekkel folytatott beszélgetéseket olvassa.
+
+---
+
+### deca.stanje_na_cekanju
+
+**sr**
+
+čeka roditelja
+
+**en**
+
+waiting for a parent
+
+**ru**
+
+ждёт родителя
+
+**hr**
+
+čeka roditelja
+
+**hu**
+
+szülőre vár
+
+---
+
+### deca.stanje_povezano
+
+**sr**
+
+povezano
+
+**en**
+
+linked
+
+**ru**
+
+связан
+
+**hr**
+
+povezano
+
+**hu**
+
+összekapcsolva
+
+---
+
+### deca.stanje_aktivno
+
+**sr**
+
+aktivno
+
+**en**
+
+active
+
+**ru**
+
+активен
+
+**hr**
+
+aktivno
+
+**hu**
+
+aktív
+
+---
+
+### deca.poziv_predlog
+
+**sr**
+
+Dete {pseudonim} navelo je tvoju adresu kao adresu roditelja.
+
+**en**
+
+The child {pseudonim} gave your address as the parent's address.
+
+**ru**
+
+Ребёнок {pseudonim} указал ваш адрес как адрес родителя.
+
+**hr**
+
+Dijete {pseudonim} navelo je tvoju adresu kao adresu roditelja.
+
+**hu**
+
+A(z) {pseudonim} nevű gyerek az Ön címét adta meg szülői címként.
+
+---
+
+### deca.poziv_dugme
+
+**sr**
+
+Otvori i preuzmi
+
+**en**
+
+Open and take over
+
+**ru**
+
+Открыть и принять
+
+**hr**
+
+Otvori i preuzmi
+
+**hu**
+
+Megnyitás és átvétel
+
+---
+
+### deca.dugme_preuzmi
+
+**sr**
+
+Preuzmi nalog deteta
+
+**en**
+
+Take over a child's account
+
+**ru**
+
+Принять аккаунт ребёнка
+
+**hr**
+
+Preuzmi račun djeteta
+
+**hu**
+
+Gyerekfiók átvétele
+
+---
+
+### deca.preuzmi_opis
+
+**sr**
+
+Unesi pseudonim deteta i šestocifreni kod sa njegovog ekrana. Istim putem ulazi i drugi roditelj.
+
+**en**
+
+Enter the child's pseudonym and the six-digit code from their screen. The second parent uses the same path.
+
+**ru**
+
+Введите псевдоним ребёнка и шестизначный код с его экрана. Тем же путём входит и второй родитель.
+
+**hr**
+
+Unesi pseudonim djeteta i šesteroznamenkasti kod s njegova zaslona. Istim putem ulazi i drugi roditelj.
+
+**hu**
+
+Adja meg a gyermek álnevét és a képernyőjén látható hatjegyű kódot. A második szülő is ezen az úton lép be.
+
+---
+
+### deca.polje_pseudonim_deteta
+
+**sr**
+
+Pseudonim deteta
+
+**en**
+
+Child's pseudonym
+
+**ru**
+
+Псевдоним ребёнка
+
+**hr**
+
+Pseudonim djeteta
+
+**hu**
+
+A gyermek álneve
+
+---
+
+### deca.polje_kod
+
+**sr**
+
+Šestocifreni kod
+
+**en**
+
+Six-digit code
+
+**ru**
+
+Шестизначный код
+
+**hr**
+
+Šesteroznamenkasti kod
+
+**hu**
+
+Hatjegyű kód
+
+---
+
+### deca.polje_kod_opis
+
+**sr**
+
+Piše na profilu deteta.
+
+**en**
+
+Shown on the child's profile.
+
+**ru**
+
+Показан в профиле ребёнка.
+
+**hr**
+
+Piše na profilu djeteta.
+
+**hu**
+
+A gyermek profilján látható.
+
+---
+
+### deca.polje_datum_preuzimanje
+
+**sr**
+
+Datum rođenja (samo prvi put)
+
+**en**
+
+Date of birth (first time only)
+
+**ru**
+
+Дата рождения (только в первый раз)
+
+**hr**
+
+Datum rođenja (samo prvi put)
+
+**hu**
+
+Születési dátum (csak először)
+
+---
+
+### deca.polje_datum_preuzimanje_opis
+
+**sr**
+
+Ako nalog već ima upisan datum, ostavi prazno — datum se posle upisa ne menja.
+
+**en**
+
+If the account already has a date, leave this empty — the date cannot be changed once entered.
+
+**ru**
+
+Если дата уже внесена, оставьте поле пустым — после внесения она не меняется.
+
+**hr**
+
+Ako račun već ima upisan datum, ostavi prazno — datum se nakon upisa ne mijenja.
+
+**hu**
+
+Ha a fiókban már szerepel dátum, hagyja üresen — a megadás után nem módosítható.
+
+---
+
+### deca.pregled_naslov
+
+**sr**
+
+Prijatelji i razgovori
+
+**en**
+
+Friends and conversations
+
+**ru**
+
+Друзья и разговоры
+
+**hr**
+
+Prijatelji i razgovori
+
+**hu**
+
+Barátok és beszélgetések
+
+---
+
+### deca.pregled_opis
+
+**sr**
+
+Sadržaj razgovora među decom se ne prikazuje — vidi se samo s kim i koliko.
+
+**en**
+
+The content of conversations between children is not shown — only with whom and how much.
+
+**ru**
+
+Содержание разговоров между детьми не показывается — видно только с кем и сколько.
+
+**hr**
+
+Sadržaj razgovora među djecom se ne prikazuje — vidi se samo s kim i koliko.
+
+**hu**
+
+A gyerekek közötti beszélgetések tartalma nem jelenik meg — csak az, kivel és mennyit.
+
+---
+
+### deca.pregled_prijatelji
+
+**sr**
+
+Prijatelji
+
+**en**
+
+Friends
+
+**ru**
+
+Друзья
+
+**hr**
+
+Prijatelji
+
+**hu**
+
+Barátok
+
+---
+
+### deca.pregled_prijatelji_prazno
+
+**sr**
+
+Još nema prijatelja.
+
+**en**
+
+No friends yet.
+
+**ru**
+
+Друзей пока нет.
+
+**hr**
+
+Još nema prijatelja.
+
+**hu**
+
+Még nincsenek barátok.
+
+---
+
+### deca.pregled_razgovori
+
+**sr**
+
+Razgovori sa decom
+
+**en**
+
+Conversations with children
+
+**ru**
+
+Разговоры с детьми
+
+**hr**
+
+Razgovori s djecom
+
+**hu**
+
+Beszélgetések gyerekekkel
+
+---
+
+### deca.pregled_razgovori_prazno
+
+**sr**
+
+Još nema razgovora.
+
+**en**
+
+No conversations yet.
+
+**ru**
+
+Разговоров пока нет.
+
+**hr**
+
+Još nema razgovora.
+
+**hu**
+
+Még nincsenek beszélgetések.
+
+---
+
+### deca.pregled_poruka
+
+**sr**
+
+{broj} poruka
+
+**en**
+
+{broj} messages
+
+**ru**
+
+сообщений: {broj}
+
+**hr**
+
+{broj} poruka
+
+**hu**
+
+{broj} üzenet
+
+---
+
+### deca.polje_datum_raspon
+
+**sr**
+
+Unesi datum rođenja deteta — dete mora imati između 7 i 18 godina.
+
+**en**
+
+Enter the child's date of birth — the child must be between 7 and 18 years old.
+
+**ru**
+
+Укажите дату рождения ребёнка — ребёнку должно быть от 7 до 18 лет.
+
+**hr**
+
+Unesi datum rođenja djeteta — dijete mora imati između 7 i 18 godina.
+
+**hu**
+
+Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie.
+
+---
+
+## interfejs / decjaPocetna
+
+### decjaPocetna.naslov
+
+**sr**
+
+Dečija pijaca
+
+**en**
+
+Children's Marketplace
+
+**ru**
+
+Детский рынок
+
+**hr**
+
+Dječja tržnica
+
+**hu**
+
+Gyermekpiac
+
+---
+
+### decjaPocetna.pozdrav
+
+**sr**
+
+Zdravo, {pseudonim}!
+
+**en**
+
+Hello, {pseudonim}!
+
+**ru**
+
+Привет, {pseudonim}!
+
+**hr**
+
+Bok, {pseudonim}!
+
+**hu**
+
+Szia, {pseudonim}!
+
+---
+
+### decjaPocetna.dugme_nov_oglas
+
+**sr**
+
+Napravi oglas
+
+**en**
+
+New listing
+
+**ru**
+
+Новое объявление
+
+**hr**
+
+Novi oglas
+
+**hu**
+
+Új hirdetés
+
+---
+
+### decjaPocetna.dugme_moji_oglasi
+
+**sr**
+
+Moji oglasi
+
+**en**
+
+My listings
+
+**ru**
+
+Мои объявления
+
+**hr**
+
+Moji oglasi
+
+**hu**
+
+Hirdetéseim
+
+---
+
+### decjaPocetna.dugme_prijatelji
+
+**sr**
+
+Prijatelji
+
+**en**
+
+Friends
+
+**ru**
+
+Друзья
+
+**hr**
+
+Prijatelji
+
+**hu**
+
+Barátok
+
+---
+
+### decjaPocetna.dugme_poruke
+
+**sr**
+
+Poruke
+
+**en**
+
+Messages
+
+**ru**
+
+Сообщения
+
+**hr**
+
+Poruke
+
+**hu**
+
+Üzenetek
+
+---
+
+### decjaPocetna.pretraga
+
+**sr**
+
+Traži…
+
+**en**
+
+Search…
+
+**ru**
+
+Поиск…
+
+**hr**
+
+Traži…
+
+**hu**
+
+Keresés…
+
+---
+
+### decjaPocetna.oglasi_naslov
+
+**sr**
+
+Oglasi
+
+**en**
+
+Listings
+
+**ru**
+
+Объявления
+
+**hr**
+
+Oglasi
+
+**hu**
+
+Hirdetések
+
+---
+
+### decjaPocetna.oglasi_prazno
+
+**sr**
+
+Još nema oglasa. Napravi prvi!
+
+**en**
+
+No listings yet. Make the first one!
+
+**ru**
+
+Объявлений пока нет. Создай первое!
+
+**hr**
+
+Još nema oglasa. Napravi prvi!
+
+**hu**
+
+Még nincs hirdetés. Készítsd el az elsőt!
+
+---
+
+### decjaPocetna.bez_slike
+
+**sr**
+
+bez slike
+
+**en**
+
+no photo
+
+**ru**
+
+без фото
+
+**hr**
+
+bez slike
+
+**hu**
+
+nincs kép
+
+---
+
+### decjaPocetna.pricaonica_naslov
+
+**sr**
+
+Pričaonica
+
+**en**
+
+Chat room
+
+**ru**
+
+Чат
+
+**hr**
+
+Pričaonica
+
+**hu**
+
+Csevegő
+
+---
+
+### decjaPocetna.pricaonica_opis
+
+**sr**
+
+Ovde su samo deca.
+
+**en**
+
+Only children are here.
+
+**ru**
+
+Здесь только дети.
+
+**hr**
+
+Ovdje su samo djeca.
+
+**hu**
+
+Itt csak gyerekek vannak.
+
+---
+
+### decjaPocetna.pricaonica_prazno
+
+**sr**
+
+Ovde vidiš poruke svojih prijatelja. Skeniraj QR kod nekog druga da bi razgovor počeo.
+
+**en**
+
+Here you see messages from your friends. Scan a friend's QR code to start a conversation.
+
+**ru**
+
+Здесь ты видишь сообщения своих друзей. Отсканируй QR-код друга, чтобы начать разговор.
+
+**hr**
+
+Ovdje vidiš poruke svojih prijatelja. Skeniraj QR kod nekog prijatelja da bi razgovor počeo.
+
+**hu**
+
+Itt a barátaid üzeneteit látod. Olvasd be egy barátod QR-kódját, hogy elinduljon a beszélgetés.
+
+---
+
+### decjaPocetna.pricaonica_placeholder
+
+**sr**
+
+Napiši nešto…
+
+**en**
+
+Write something…
+
+**ru**
+
+Напиши что-нибудь…
+
+**hr**
+
+Napiši nešto…
+
+**hu**
+
+Írj valamit…
+
+---
+
+### decjaPocetna.posalji
+
+**sr**
+
+Pošalji
+
+**en**
+
+Send
+
+**ru**
+
+Отправить
+
+**hr**
+
+Pošalji
+
+**hu**
+
+Küldés
+
+---
+
+### decjaPocetna.greska_slanje
+
+**sr**
+
+Nije uspelo. Pokušaj ponovo.
+
+**en**
+
+That did not work. Try again.
+
+**ru**
+
+Не получилось. Попробуй ещё раз.
+
+**hr**
+
+Nije uspjelo. Pokušaj ponovno.
+
+**hu**
+
+Nem sikerült. Próbáld újra.
+
+---
+
+### decjaPocetna.na_cekanju
+
+**sr**
+
+\+{iznos} POEN te čeka
+
+**en**
+
+\+{iznos} POEN waiting for you
+
+**ru**
+
+\+{iznos} POEN тебя ждёт
+
+**hr**
+
+\+{iznos} POEN te čeka
+
+**hu**
+
+\+{iznos} POEN vár rád
+
+---
+
+### decjaPocetna.ceka_naslov
+
+**sr**
+
+Nalog čeka roditelja
+
+**en**
+
+The account is waiting for a parent
+
+**ru**
+
+Аккаунт ждёт родителя
+
+**hr**
+
+Račun čeka roditelja
+
+**hu**
+
+A fiók szülőre vár
+
+---
+
+### decjaPocetna.ceka_opis
+
+**sr**
+
+Kad tvoj roditelj preuzme nalog, moći ćeš da pričaš sa svojim prijateljima. Imaš {broj} prijatelja koji čekaju.
+
+**en**
+
+When your parent takes over the account you will be able to talk to your friends. You have {broj} friends waiting.
+
+**ru**
+
+Когда твой родитель примет аккаунт, ты сможешь общаться с друзьями. Тебя ждут {broj} друзей.
+
+**hr**
+
+Kad tvoj roditelj preuzme račun, moći ćeš razgovarati sa svojim prijateljima. Imaš {broj} prijatelja koji čekaju.
+
+**hu**
+
+Amikor a szülőd átveszi a fiókot, beszélgethetsz a barátaiddal. {broj} barátod vár.
+
+---
+
+### decjaPocetna.ceka_uputstvo
+
+**sr**
+
+Pokaži mami ili tati poruku koju smo im poslali. Ako nije stigla, na tvom profilu piše šestocifreni kod.
+
+**en**
+
+Show mum or dad the message we sent them. If it did not arrive, your profile shows a six-digit code.
+
+**ru**
+
+Покажи маме или папе письмо, которое мы им отправили. Если оно не пришло, в твоём профиле есть шестизначный код.
+
+**hr**
+
+Pokaži mami ili tati poruku koju smo im poslali. Ako nije stigla, na tvom profilu piše šesteroznamenkasti kod.
+
+**hu**
+
+Mutasd meg anyának vagy apának az üzenetet, amit küldtünk nekik. Ha nem érkezett meg, a profilodon ott a hatjegyű kód.
+
+---
+
+### decjaPocetna.dugme_profil
+
+**sr**
+
+Moj profil
+
+**en**
+
+My profile
+
+**ru**
+
+Мой профиль
+
+**hr**
+
+Moj profil
+
+**hu**
+
+A profilom
+
+---
+
+### decjaPocetna.kod_naslov
+
+**sr**
+
+Kod za roditelja
+
+**en**
+
+Code for your parent
+
+**ru**
+
+Код для родителя
+
+**hr**
+
+Kod za roditelja
+
+**hu**
+
+Kód a szülőnek
+
+---
+
+### decjaPocetna.dugme_prepis
+
+**sr**
+
+Prepiši POEN
+
+**en**
+
+Re-register POEN
+
+**ru**
+
+Переписать ПОЕН
+
+**hr**
+
+Prepiši POEN
+
+**hu**
+
+POEN átírása
+
+---
+
+## interfejs / prijatelji
+
+### prijatelji.naslov
+
+**sr**
+
+Moji prijatelji
+
+**en**
+
+My friends
+
+**ru**
+
+Мои друзья
+
+**hr**
+
+Moji prijatelji
+
+**hu**
+
+Barátaim
+
+---
+
+### prijatelji.brojac_opis
+
+**sr**
+
+toliko prijatelja imaš
+
+**en**
+
+that is how many friends you have
+
+**ru**
+
+столько у тебя друзей
+
+**hr**
+
+toliko prijatelja imaš
+
+**hu**
+
+ennyi barátod van
+
+---
+
+### prijatelji.moj_kod
+
+**sr**
+
+Moj kod
+
+**en**
+
+My code
+
+**ru**
+
+Мой код
+
+**hr**
+
+Moj kod
+
+**hu**
+
+A kódom
+
+---
+
+### prijatelji.pokazi_kod
+
+**sr**
+
+Pokaži kod
+
+**en**
+
+Show code
+
+**ru**
+
+Показать код
+
+**hr**
+
+Pokaži kod
+
+**hu**
+
+Kód mutatása
+
+---
+
+### prijatelji.kod_uputstvo
+
+**sr**
+
+Neka ga drug skenira. Kod važi kratko — zato morate biti jedno pored drugog.
+
+**en**
+
+Let your friend scan it. The code is short-lived — that is why you must be next to each other.
+
+**ru**
+
+Пусть друг его отсканирует. Код живёт недолго — поэтому вы должны быть рядом.
+
+**hr**
+
+Neka ga prijatelj skenira. Kod vrijedi kratko — zato morate biti jedno pored drugog.
+
+**hu**
+
+Olvassa be a barátod. A kód rövid ideig él — ezért kell egymás mellett lennetek.
+
+---
+
+### prijatelji.skeniraj
+
+**sr**
+
+Skeniraj kod
+
+**en**
+
+Scan a code
+
+**ru**
+
+Сканировать код
+
+**hr**
+
+Skeniraj kod
+
+**hu**
+
+Kód beolvasása
+
+---
+
+### prijatelji.skeniraj_opis
+
+**sr**
+
+Skeniraj kod koji ti drug pokazuje.
+
+**en**
+
+Scan the code your friend is showing you.
+
+**ru**
+
+Отсканируй код, который показывает друг.
+
+**hr**
+
+Skeniraj kod koji ti prijatelj pokazuje.
+
+**hu**
+
+Olvasd be a kódot, amit a barátod mutat.
+
+---
+
+### prijatelji.dugme_skeniraj
+
+**sr**
+
+Otvori kameru
+
+**en**
+
+Open camera
+
+**ru**
+
+Открыть камеру
+
+**hr**
+
+Otvori kameru
+
+**hu**
+
+Kamera megnyitása
+
+---
+
+### prijatelji.spisak_naslov
+
+**sr**
+
+Spisak
+
+**en**
+
+List
+
+**ru**
+
+Список
+
+**hr**
+
+Popis
+
+**hu**
+
+Lista
+
+---
+
+### prijatelji.spisak_prazno
+
+**sr**
+
+Još nemaš prijatelje. Pokaži kod nekome pored sebe.
+
+**en**
+
+No friends yet. Show your code to someone next to you.
+
+**ru**
+
+Друзей пока нет. Покажи свой код тому, кто рядом.
+
+**hr**
+
+Još nemaš prijatelje. Pokaži kod nekome pored sebe.
+
+**hu**
+
+Még nincs barátod. Mutasd meg a kódod valakinek melletted.
+
+---
+
+### prijatelji.uspeh
+
+**sr**
+
+Sada ste prijatelji sa {pseudonim}!
+
+**en**
+
+You and {pseudonim} are now friends!
+
+**ru**
+
+Теперь вы друзья с {pseudonim}!
+
+**hr**
+
+Sada ste prijatelji s {pseudonim}!
+
+**hu**
+
+Mostantól barátok vagytok: {pseudonim}!
+
+---
+
+### prijatelji.greska_slanje
+
+**sr**
+
+Nije uspelo. Pokušaj ponovo.
+
+**en**
+
+That did not work. Try again.
+
+**ru**
+
+Не получилось. Попробуй ещё раз.
+
+**hr**
+
+Nije uspjelo. Pokušaj ponovno.
+
+**hu**
+
+Nem sikerült. Próbáld újra.
+
+---
+
+### prijatelji.greska_ucitavanje
+
+**sr**
+
+Učitavanje nije uspelo.
+
+**en**
+
+Loading failed.
+
+**ru**
+
+Не удалось загрузить.
+
+**hr**
+
+Učitavanje nije uspjelo.
+
+**hu**
+
+A betöltés nem sikerült.
+
+---
+
+### prijatelji.na_cekanju
+
+**sr**
+
+{iznos} POEN čeka — prijatelji čiji roditelj još nije preuzeo nalog.
+
+**en**
+
+{iznos} POEN pending — friends whose parent has not taken over their account yet.
+
+**ru**
+
+{iznos} POEN ждёт — друзья, чей родитель ещё не принял аккаунт.
+
+**hr**
+
+{iznos} POEN čeka — prijatelji čiji roditelj još nije preuzeo račun.
+
+**hu**
+
+{iznos} POEN vár — olyan barátok, akiknek a szülője még nem vette át a fiókot.
+
+---
+
+### prijatelji.oznaka_isplaceno
+
+**sr**
+
+500 POEN upisano
+
+**en**
+
+500 POEN recorded
+
+**ru**
+
+500 POEN записано
+
+**hr**
+
+500 POEN upisano
+
+**hu**
+
+500 POEN bejegyezve
+
+---
+
+### prijatelji.oznaka_ceka
+
+**sr**
+
+500 na čekanju
+
+**en**
+
+500 pending
+
+**ru**
+
+500 в ожидании
+
+**hr**
+
+500 na čekanju
+
+**hu**
+
+500 függőben
+
+---
+
+### prijatelji.oznaka_bez_poena
+
+**sr**
+
+brat/sestra — bez POEN-a
+
+**en**
+
+sibling — no POEN
+
+**ru**
+
+брат/сестра — без POEN
+
+**hr**
+
+brat/sestra — bez POEN-a
+
+**hu**
+
+testvér — POEN nélkül
+
+---
+
+### prijatelji.dugme_raskini
+
+**sr**
+
+Raskini
+
+**en**
+
+End
+
+**ru**
+
+Прекратить
+
+**hr**
+
+Raskini
+
+**hu**
+
+Megszüntetés
+
+---
+
+### prijatelji.raskid_potvrda
+
+**sr**
+
+Raskinuti prijateljstvo sa {pseudonim}?
+
+**en**
+
+End the friendship with {pseudonim}?
+
+**ru**
+
+Прекратить дружбу с {pseudonim}?
+
+**hr**
+
+Raskinuti prijateljstvo s {pseudonim}?
+
+**hu**
+
+Megszünteted a barátságot vele: {pseudonim}?
+
+---
+
+### prijatelji.raskid_potvrda_poen
+
+**sr**
+
+Raskinuti prijateljstvo sa {pseudonim}? Izgubićeš 500 POEN, i on/ona takođe.
+
+**en**
+
+End the friendship with {pseudonim}? You will lose 500 POEN, and so will they.
+
+**ru**
+
+Прекратить дружбу с {pseudonim}? Ты потеряешь 500 POEN, и он/она тоже.
+
+**hr**
+
+Raskinuti prijateljstvo s {pseudonim}? Izgubit ćeš 500 POEN, i on/ona također.
+
+**hu**
+
+Megszünteted a barátságot vele: {pseudonim}? Elveszítesz 500 POEN-t, és ő is.
+
+---
+
+### prijatelji.raskid_uspeh
+
+**sr**
+
+Prijateljstvo sa {pseudonim} je raskinuto.
+
+**en**
+
+The friendship with {pseudonim} has ended.
+
+**ru**
+
+Дружба с {pseudonim} прекращена.
+
+**hr**
+
+Prijateljstvo s {pseudonim} je raskinuto.
+
+**hu**
+
+A barátság megszűnt vele: {pseudonim}.
+
+---
+
+## interfejs / registracijaDeteta
+
+### registracijaDeteta.naslov
+
+**sr**
+
+Otvori svoj nalog
+
+**en**
+
+Open your account
+
+**ru**
+
+Открой свой аккаунт
+
+**hr**
+
+Otvori svoj račun
+
+**hu**
+
+Nyisd meg a fiókodat
+
+---
+
+### registracijaDeteta.podnaslov
+
+**sr**
+
+Izaberi ime, lozinku i upiši imejl svog roditelja. Njemu šaljemo poruku da preuzme nalog.
+
+**en**
+
+Pick a name and a password, and enter your parent's e-mail. We send them a message to take over the account.
+
+**ru**
+
+Выбери имя и пароль и укажи адрес электронной почты родителя. Мы отправим ему письмо, чтобы он принял аккаунт.
+
+**hr**
+
+Izaberi ime i lozinku i upiši e-adresu svog roditelja. Njemu šaljemo poruku da preuzme račun.
+
+**hu**
+
+Válassz nevet és jelszót, és add meg a szülőd e-mail-címét. Üzenetet küldünk neki, hogy vegye át a fiókot.
+
+---
+
+### registracijaDeteta.pseudonim
+
+**sr**
+
+Kako da te zovemo
+
+**en**
+
+What should we call you
+
+**ru**
+
+Как тебя называть
+
+**hr**
+
+Kako da te zovemo
+
+**hu**
+
+Hogy szólítsunk
+
+---
+
+### registracijaDeteta.pseudonim_placeholder
+
+**sr**
+
+npr. Milica
+
+**en**
+
+e.g. Milica
+
+**ru**
+
+например, Милица
+
+**hr**
+
+npr. Milica
+
+**hu**
+
+pl. Milica
+
+---
+
+### registracijaDeteta.pseudonim_opis
+
+**sr**
+
+Ovo ime vide drugi. Slova bez kvačica, brojevi i - _ .
+
+**en**
+
+Other people see this name. Letters, digits and - _ .
+
+**ru**
+
+Это имя видят другие. Латинские буквы, цифры и - _ .
+
+**hr**
+
+Ovo ime vide drugi. Slova bez kvačica, brojevi i - _ .
+
+**hu**
+
+Ezt a nevet látják mások. Ékezet nélküli betűk, számok és - _ .
+
+---
+
+### registracijaDeteta.lozinka
+
+**sr**
+
+Lozinka
+
+**en**
+
+Password
+
+**ru**
+
+Пароль
+
+**hr**
+
+Lozinka
+
+**hu**
+
+Jelszó
+
+---
+
+### registracijaDeteta.prikazi_lozinku
+
+**sr**
+
+Prikaži lozinku
+
+**en**
+
+Show password
+
+**ru**
+
+Показать пароль
+
+**hr**
+
+Prikaži lozinku
+
+**hu**
+
+Jelszó megjelenítése
+
+---
+
+### registracijaDeteta.sakrij_lozinku
+
+**sr**
+
+Sakrij lozinku
+
+**en**
+
+Hide password
+
+**ru**
+
+Скрыть пароль
+
+**hr**
+
+Sakrij lozinku
+
+**hu**
+
+Jelszó elrejtése
+
+---
+
+### registracijaDeteta.email_roditelja
+
+**sr**
+
+Imejl mame ili tate
+
+**en**
+
+Mum's or dad's e-mail
+
+**ru**
+
+Почта мамы или папы
+
+**hr**
+
+E-adresa mame ili tate
+
+**hu**
+
+Anya vagy apa e-mail-címe
+
+---
+
+### registracijaDeteta.email_roditelja_opis
+
+**sr**
+
+Šaljemo im jednu poruku da preuzmu tvoj nalog. Bez toga nalog radi 14 dana pa se briše.
+
+**en**
+
+We send them one message to take over your account. Without it the account works for 14 days and is then deleted.
+
+**ru**
+
+Мы отправим им одно письмо, чтобы они приняли твой аккаунт. Без этого аккаунт работает 14 дней и удаляется.
+
+**hr**
+
+Šaljemo im jednu poruku da preuzmu tvoj račun. Bez toga račun radi 14 dana pa se briše.
+
+**hu**
+
+Egyetlen üzenetet küldünk nekik, hogy vegyék át a fiókodat. Enélkül a fiók 14 napig működik, aztán törlődik.
+
+---
+
+### registracijaDeteta.dugme
+
+**sr**
+
+Napravi nalog
+
+**en**
+
+Create account
+
+**ru**
+
+Создать аккаунт
+
+**hr**
+
+Napravi račun
+
+**hu**
+
+Fiók létrehozása
+
+---
+
+### registracijaDeteta.dugme_salje
+
+**sr**
+
+Pravim nalog…
+
+**en**
+
+Creating…
+
+**ru**
+
+Создаём…
+
+**hr**
+
+Radim račun…
+
+**hu**
+
+Létrehozás…
+
+---
+
+### registracijaDeteta.greska
+
+**sr**
+
+Nalog nije napravljen. Pokušaj ponovo.
+
+**en**
+
+The account was not created. Try again.
+
+**ru**
+
+Аккаунт не создан. Попробуй ещё раз.
+
+**hr**
+
+Račun nije napravljen. Pokušaj ponovno.
+
+**hu**
+
+A fiók nem jött létre. Próbáld újra.
+
+---
+
+### registracijaDeteta.uspeh_naslov
+
+**sr**
+
+Nalog je napravljen
+
+**en**
+
+Account created
+
+**ru**
+
+Аккаунт создан
+
+**hr**
+
+Račun je napravljen
+
+**hu**
+
+A fiók elkészült
+
+---
+
+### registracijaDeteta.uspeh_opis
+
+**sr**
+
+Poslali smo poruku na {email}. Do preuzimanja možeš da skupljaš prijatelje.
+
+**en**
+
+We sent a message to {email}. Until it is taken over you can collect friends.
+
+**ru**
+
+Мы отправили письмо на {email}. До принятия ты можешь собирать друзей.
+
+**hr**
+
+Poslali smo poruku na {email}. Do preuzimanja možeš skupljati prijatelje.
+
+**hu**
+
+Üzenetet küldtünk ide: {email}. Az átvételig barátokat gyűjthetsz.
+
+---
+
+### registracijaDeteta.kod_naslov
+
+**sr**
+
+Kod za roditelja
+
+**en**
+
+Code for your parent
+
+**ru**
+
+Код для родителя
+
+**hr**
+
+Kod za roditelja
+
+**hu**
+
+Kód a szülőnek
+
+---
+
+### registracijaDeteta.kod_opis
+
+**sr**
+
+Ako poruka ne stigne, roditelj unosi tvoje ime i ovaj kod.
+
+**en**
+
+If the message does not arrive, your parent enters your name and this code.
+
+**ru**
+
+Если письмо не придёт, родитель вводит твоё имя и этот код.
+
+**hr**
+
+Ako poruka ne stigne, roditelj unosi tvoje ime i ovaj kod.
+
+**hu**
+
+Ha az üzenet nem érkezik meg, a szülő a nevedet és ezt a kódot adja meg.
+
+---
+
+### registracijaDeteta.dalje
+
+**sr**
+
+Idemo dalje
+
+**en**
+
+Let's go
+
+**ru**
+
+Дальше
+
+**hr**
+
+Idemo dalje
+
+**hu**
+
+Tovább
+
+---
+
+### registracijaDeteta.odrastao
+
+**sr**
+
+Nisi dete?
+
+**en**
+
+Not a child?
+
+**ru**
+
+Ты не ребёнок?
+
+**hr**
+
+Nisi dijete?
+
+**hu**
+
+Nem vagy gyerek?
+
+---
+
+### registracijaDeteta.odrastao_link
+
+**sr**
+
+Otvori običan nalog
+
+**en**
+
+Open a regular account
+
+**ru**
+
+Открыть обычный аккаунт
+
+**hr**
+
+Otvori obični račun
+
+**hu**
+
+Nyiss rendes fiókot
+
+---
+
+### registracijaDeteta.ugaseno
+
+**sr**
+
+Ova mogućnost trenutno nije u radu.
+
+**en**
+
+This is currently not available.
+
+**ru**
+
+Эта возможность сейчас недоступна.
+
+**hr**
+
+Ova mogućnost trenutačno nije u radu.
+
+**hu**
+
+Ez a lehetőség jelenleg nem érhető el.
+
+---
+
+## interfejs / detePoziv
+
+### detePoziv.naslov
+
+**sr**
+
+Dete je otvorilo nalog
+
+**en**
+
+A child opened an account
+
+**ru**
+
+Ребёнок открыл аккаунт
+
+**hr**
+
+Dijete je otvorilo račun
+
+**hu**
+
+Egy gyerek fiókot nyitott
+
+---
+
+### detePoziv.opis
+
+**sr**
+
+Nalog pod imenom {pseudonim} naveo je vašu adresu kao adresu roditelja.
+
+**en**
+
+An account under the name {pseudonim} gave your address as the parent's address.
+
+**ru**
+
+Аккаунт под именем {pseudonim} указал ваш адрес как адрес родителя.
+
+**hr**
+
+Račun pod imenom {pseudonim} naveo je vašu adresu kao adresu roditelja.
+
+**hu**
+
+A(z) {pseudonim} nevű fiók az Ön címét adta meg szülői címként.
+
+---
+
+### detePoziv.datum_rodjenja
+
+**sr**
+
+Datum rođenja deteta
+
+**en**
+
+Child's date of birth
+
+**ru**
+
+Дата рождения ребёнка
+
+**hr**
+
+Datum rođenja djeteta
+
+**hu**
+
+A gyermek születési dátuma
+
+---
+
+### detePoziv.datum_opis
+
+**sr**
+
+Datum se posle upisa ne menja. Njime dajete saglasnost za učešće deteta.
+
+**en**
+
+The date cannot be changed once entered. By entering it you consent to the child's participation.
+
+**ru**
+
+После внесения дата не меняется. Этим вы даёте согласие на участие ребёнка.
+
+**hr**
+
+Datum se nakon upisa ne mijenja. Njime dajete privolu za sudjelovanje djeteta.
+
+**hu**
+
+A dátum a megadás után nem módosítható. Ezzel hozzájárul a gyermek részvételéhez.
+
+---
+
+### detePoziv.dugme_preuzmi
+
+**sr**
+
+Preuzmi nalog
+
+**en**
+
+Take over the account
+
+**ru**
+
+Принять аккаунт
+
+**hr**
+
+Preuzmi račun
+
+**hu**
+
+Fiók átvétele
+
+---
+
+### detePoziv.nije_moje_uvod
+
+**sr**
+
+Ako ovo nije vaše dete:
+
+**en**
+
+If this is not your child:
+
+**ru**
+
+Если это не ваш ребёнок:
+
+**hr**
+
+Ako ovo nije vaše dijete:
+
+**hu**
+
+Ha ez nem az Ön gyermeke:
+
+---
+
+### detePoziv.dugme_nije_moje
+
+**sr**
+
+Ovo nije moje dete
+
+**en**
+
+This is not my child
+
+**ru**
+
+Это не мой ребёнок
+
+**hr**
+
+Ovo nije moje dijete
+
+**hu**
+
+Ez nem az én gyermekem
+
+---
+
+### detePoziv.dugme_obrisi
+
+**sr**
+
+Obriši nalog
+
+**en**
+
+Delete the account
+
+**ru**
+
+Удалить аккаунт
+
+**hr**
+
+Obriši račun
+
+**hu**
+
+Fiók törlése
+
+---
+
+### detePoziv.potvrda_brisanja
+
+**sr**
+
+Nalog i svi njegovi podaci biće obrisani. Nastaviti?
+
+**en**
+
+The account and all its data will be deleted. Continue?
+
+**ru**
+
+Аккаунт и все его данные будут удалены. Продолжить?
+
+**hr**
+
+Račun i svi njegovi podaci bit će obrisani. Nastaviti?
+
+**hu**
+
+A fiók és minden adata törlődik. Folytatja?
+
+---
+
+### detePoziv.istekao
+
+**sr**
+
+Link je istekao. Zamolite dete da vam pročita šestocifreni kod sa svog ekrana i unesite ga u odeljku „Moja deca”.
+
+**en**
+
+The link has expired. Ask the child to read you the six-digit code from their screen and enter it under “My children”.
+
+**ru**
+
+Срок действия ссылки истёк. Попросите ребёнка прочитать шестизначный код с его экрана и введите его в разделе «Мои дети».
+
+**hr**
+
+Poveznica je istekla. Zamolite dijete da vam pročita šesteroznamenkasti kod sa svog zaslona i unesite ga u odjeljku „Moja djeca”.
+
+**hu**
+
+A hivatkozás lejárt. Kérje meg a gyermeket, hogy olvassa fel a képernyőjén látható hatjegyű kódot, és adja meg a „Gyermekeim” részben.
+
+---
+
+### detePoziv.ucitavanje
+
+**sr**
+
+Učitavanje…
+
+**en**
+
+Loading…
+
+**ru**
+
+Загрузка…
+
+**hr**
+
+Učitavanje…
+
+**hu**
+
+Betöltés…
+
+---
+
+### detePoziv.nepostoji
+
+**sr**
+
+Poziv nije pronađen.
+
+**en**
+
+Invitation not found.
+
+**ru**
+
+Приглашение не найдено.
+
+**hr**
+
+Poziv nije pronađen.
+
+**hu**
+
+A meghívó nem található.
+
+---
+
+### detePoziv.greska
+
+**sr**
+
+Radnja nije izvršena. Pokušajte ponovo.
+
+**en**
+
+The action failed. Please try again.
+
+**ru**
+
+Действие не выполнено. Попробуйте снова.
+
+**hr**
+
+Radnja nije izvršena. Pokušajte ponovno.
+
+**hu**
+
+A művelet nem sikerült. Próbálja újra.
+
+---
+
+### detePoziv.vec_preuzet_naslov
+
+**sr**
+
+Nalog je već preuzet
+
+**en**
+
+The account is already taken over
+
+**ru**
+
+Аккаунт уже принят
+
+**hr**
+
+Račun je već preuzet
+
+**hu**
+
+A fiókot már átvették
+
+---
+
+### detePoziv.vec_preuzet_opis
+
+**sr**
+
+Nalog {pseudonim} već ima roditelja. Ako ste drugi roditelj, unesite pseudonim i kod u odeljku „Moja deca”.
+
+**en**
+
+The account {pseudonim} already has a parent. If you are the second parent, enter the pseudonym and the code under “My children”.
+
+**ru**
+
+У аккаунта {pseudonim} уже есть родитель. Если вы второй родитель, введите псевдоним и код в разделе «Мои дети».
+
+**hr**
+
+Račun {pseudonim} već ima roditelja. Ako ste drugi roditelj, unesite pseudonim i kod u odjeljku „Moja djeca”.
+
+**hu**
+
+A(z) {pseudonim} fióknak már van szülője. Ha Ön a második szülő, adja meg az álnevet és a kódot a „Gyermekeim” részben.
+
+---
+
+### detePoziv.ishod_preuzet_naslov
+
+**sr**
+
+Nalog je preuzet
+
+**en**
+
+Account taken over
+
+**ru**
+
+Аккаунт принят
+
+**hr**
+
+Račun je preuzet
+
+**hu**
+
+A fiókot átvette
+
+---
+
+### detePoziv.ishod_preuzet_opis
+
+**sr**
+
+Dete sada može u Pričaonicu. POEN po prijateljstvima stoji zabeležen i upisuje se kad postanete redovan član — kad vas potvrdi neko ko vas poznaje.
+
+**en**
+
+The child can now use the Chat Room. POEN from friendships is kept on record and is recorded once you become a regular member — once someone who knows you confirms you.
+
+**ru**
+
+Ребёнок теперь может пользоваться Комнатой общения. ПОЕН за дружбу сохраняется и вносится, когда вы станете полноправным участником — когда вас подтвердит тот, кто вас знает.
+
+**hr**
+
+Dijete sada može u Pričaonicu. POEN po prijateljstvima stoji zabilježen i upisuje se kad postanete redovan član — kad vas potvrdi netko tko vas poznaje.
+
+**hu**
+
+A gyermek most már használhatja a Beszélgetőszobát. A barátságokból származó POEN nyilván van tartva, és akkor kerül bejegyzésre, amikor Ön rendes taggá válik — amikor valaki, aki ismeri Önt, igazolja Önt.
+
+---
+
+### detePoziv.ishod_odbijen_naslov
+
+**sr**
+
+Zabeleženo
+
+**en**
+
+Noted
+
+**ru**
+
+Записано
+
+**hr**
+
+Zabilježeno
+
+**hu**
+
+Feljegyeztük
+
+---
+
+### detePoziv.ishod_odbijen_opis
+
+**sr**
+
+Nećemo vam više slati poruke povodom ovog naloga. Ako ga niko ne preuzme, briše se sam.
+
+**en**
+
+We will not message you about this account again. If nobody takes it over, it is deleted automatically.
+
+**ru**
+
+Мы больше не будем писать вам об этом аккаунте. Если его никто не примет, он удалится сам.
+
+**hr**
+
+Nećemo vam više slati poruke o ovom računu. Ako ga nitko ne preuzme, briše se sam.
+
+**hu**
+
+Erről a fiókról többé nem küldünk üzenetet. Ha senki sem veszi át, magától törlődik.
+
+---
+
+### detePoziv.ishod_obrisan_naslov
+
+**sr**
+
+Nalog je obrisan
+
+**en**
+
+Account deleted
+
+**ru**
+
+Аккаунт удалён
+
+**hr**
+
+Račun je obrisan
+
+**hu**
+
+A fiók törölve
+
+---
+
+### detePoziv.ishod_obrisan_opis
+
+**sr**
+
+Nalog i svi podaci su uklonjeni.
+
+**en**
+
+The account and all data have been removed.
+
+**ru**
+
+Аккаунт и все данные удалены.
+
+**hr**
+
+Račun i svi podaci su uklonjeni.
+
+**hu**
+
+A fiókot és minden adatot eltávolítottunk.
+
+---
+
+### detePoziv.na_profil
+
+**sr**
+
+Otvori svoj profil
+
+**en**
+
+Open your profile
+
+**ru**
+
+Открыть свой профиль
+
+**hr**
+
+Otvori svoj profil
+
+**hu**
+
+Saját profil megnyitása
+
+---
+
+### detePoziv.datum_raspon
+
+**sr**
+
+Unesi datum rođenja deteta — dete mora imati između 7 i 18 godina.
+
+**en**
+
+Enter the child's date of birth — the child must be between 7 and 18 years old.
+
+**ru**
+
+Укажите дату рождения ребёнка — ребёнку должно быть от 7 до 18 лет.
+
+**hr**
+
+Unesi datum rođenja djeteta — dijete mora imati između 7 i 18 godina.
+
+**hu**
+
+Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie.
+
+---
+
+### detePoziv.nisam_clan_naslov
+
+**sr**
+
+Ako još niste na KOLU
+
+**en**
+
+If you are not on KOLO yet
+
+**ru**
+
+Если вас ещё нет в КОЛО
+
+**hr**
+
+Ako još niste na KOLU
+
+**hu**
+
+Ha még nincs fiókja a KOLO-n
+
+---
+
+### detePoziv.nisam_clan_korak1
+
+**sr**
+
+\1. Otvorite svoj nalog — besplatno je i vraća vas na ovu stranicu.
+
+**en**
+
+\1. Open your own account — it is free and brings you back to this page.
+
+**ru**
+
+\1. Откройте свою учётную запись — это бесплатно, и вы вернётесь на эту страницу.
+
+**hr**
+
+\1. Otvorite svoj račun — besplatno je i vraća vas na ovu stranicu.
+
+**hu**
+
+\1. Nyissa meg saját fiókját — ingyenes, és visszatér erre az oldalra.
+
+---
+
+### detePoziv.nisam_clan_korak2
+
+**sr**
+
+\2. Preuzmite nalog deteta i upišite datum rođenja.
+
+**en**
+
+\2. Take over the child's account and enter the date of birth.
+
+**ru**
+
+\2. Примите учётную запись ребёнка и укажите дату рождения.
+
+**hr**
+
+\2. Preuzmite račun djeteta i upišite datum rođenja.
+
+**hu**
+
+\2. Vegye át a gyermek fiókját, és adja meg a születési dátumot.
+
+---
+
+### detePoziv.nisam_clan_korak3
+
+**sr**
+
+\3. Zamolite nekoga ko vas poznaje, a već je član, da potvrdi da ste stvarna osoba.
+
+**en**
+
+\3. Ask someone who knows you and is already a member to confirm that you are a real person.
+
+**ru**
+
+\3. Попросите того, кто вас знает и уже является участником, подтвердить, что вы реальный человек.
+
+**hr**
+
+\3. Zamolite nekoga tko vas poznaje, a već je član, da potvrdi da ste stvarna osoba.
+
+**hu**
+
+\3. Kérjen meg valakit, aki ismeri Önt és már tag, hogy igazolja: Ön valós személy.
+
+---
+
+### detePoziv.nisam_clan_poen
+
+**sr**
+
+Dete koristi platformu čim preuzmete nalog. POEN mu se upisuje kada vi postanete redovan član — ništa se ne gubi, sve zarađeno stoji zabeleženo i upiše mu se tog dana.
+
+**en**
+
+The child uses the platform as soon as you take over the account. POEN is recorded once you become a regular member — nothing is lost, everything earned is kept on record and recorded that day.
+
+**ru**
+
+Ребёнок пользуется платформой сразу после того, как вы примете учётную запись. ПОЕН вносится, когда вы станете полноправным участником — ничего не теряется: всё заработанное сохраняется и вносится в тот же день.
+
+**hr**
+
+Dijete koristi platformu čim preuzmete račun. POEN mu se upisuje kada vi postanete redovan član — ništa se ne gubi, sve zarađeno stoji zabilježeno i upiše mu se toga dana.
+
+**hu**
+
+A gyermek azonnal használhatja a platformot, amint átveszi a fiókot. A POEN akkor kerül bejegyzésre, amikor Ön rendes taggá válik — semmi nem vész el: minden megszerzett érték nyilván van tartva, és aznap bejegyzésre kerül.
+
+---
+
+## interfejs / prijavaPoruke
+
+### prijavaPoruke.dugme
+
+**sr**
+
+prijavi
+
+**en**
+
+report
+
+**ru**
+
+пожаловаться
+
+**hr**
+
+prijavi
+
+**hu**
+
+jelentés
+
+---
+
+### prijavaPoruke.poslato
+
+**sr**
+
+prijavljeno
+
+**en**
+
+reported
+
+**ru**
+
+жалоба отправлена
+
+**hr**
+
+prijavljeno
+
+**hu**
+
+jelentve
+
+---
+
+### prijavaPoruke.naslov
+
+**sr**
+
+Šta prijavljuješ?
+
+**en**
+
+What are you reporting?
+
+**ru**
+
+На что вы жалуетесь?
+
+**hr**
+
+Što prijavljuješ?
+
+**hu**
+
+Mit jelentesz?
+
+---
+
+### prijavaPoruke.razlog_vredjanje
+
+**sr**
+
+Ružno mi piše, preti ili me maltretira
+
+**en**
+
+They insult, threaten or harass me
+
+**ru**
+
+Оскорбляет, угрожает или травит меня
+
+**hr**
+
+Ružno mi piše, prijeti mi ili me maltretira
+
+**hu**
+
+Sértően ír, fenyeget vagy zaklat
+
+---
+
+### prijavaPoruke.razlog_trazi_slike
+
+**sr**
+
+Traži da mu pošaljem slike
+
+**en**
+
+They ask me to send pictures
+
+**ru**
+
+Просит прислать фотографии
+
+**hr**
+
+Traži da mu pošaljem slike
+
+**hu**
+
+Képeket kér tőlem
+
+---
+
+### prijavaPoruke.razlog_trazi_susret
+
+**sr**
+
+Traži da se vidimo ili da pišemo van KOLA
+
+**en**
+
+They want to meet or to talk outside KOLO
+
+**ru**
+
+Хочет встретиться или писать вне КОЛО
+
+**hr**
+
+Traži da se vidimo ili da pišemo izvan KOLA
+
+**hu**
+
+Találkozni akar, vagy a KOLO-n kívül írni
+
+---
+
+### prijavaPoruke.razlog_laze_uzrast
+
+**sr**
+
+Mislim da nije dete
+
+**en**
+
+I think this is not a child
+
+**ru**
+
+Думаю, что это не ребёнок
+
+**hr**
+
+Mislim da nije dijete
+
+**hu**
+
+Szerintem nem gyerek
+
+---
+
+### prijavaPoruke.razlog_neprimeren_sadrzaj
+
+**sr**
+
+Neprimeren ili vulgaran sadržaj
+
+**en**
+
+Inappropriate or vulgar content
+
+**ru**
+
+Неприемлемое или грубое содержание
+
+**hr**
+
+Neprimjeren ili vulgaran sadržaj
+
+**hu**
+
+Nem megfelelő vagy trágár tartalom
+
+---
+
+### prijavaPoruke.razlog_licni_podaci
+
+**sr**
+
+Objavljuje lične podatke
+
+**en**
+
+They post personal data
+
+**ru**
+
+Публикует персональные данные
+
+**hr**
+
+Objavljuje osobne podatke
+
+**hu**
+
+Személyes adatokat tesz közzé
+
+---
+
+### prijavaPoruke.razlog_prevara
+
+**sr**
+
+Prevara ili obmana
+
+**en**
+
+Fraud or deception
+
+**ru**
+
+Мошенничество или обман
+
+**hr**
+
+Prijevara ili obmana
+
+**hu**
+
+Csalás vagy megtévesztés
+
+---
+
+### prijavaPoruke.razlog_ostalo
+
+**sr**
+
+Nešto drugo
+
+**en**
+
+Something else
+
+**ru**
+
+Другое
+
+**hr**
+
+Nešto drugo
+
+**hu**
+
+Valami más
+
+---
+
+### prijavaPoruke.opis_placeholder
+
+**sr**
+
+U jednoj rečenici — šta se dogodilo?
+
+**en**
+
+In one sentence — what happened?
+
+**ru**
+
+Одним предложением — что произошло?
+
+**hr**
+
+U jednoj rečenici — što se dogodilo?
+
+**hu**
+
+Egy mondatban — mi történt?
+
+---
+
+### prijavaPoruke.posalji
+
+**sr**
+
+Pošalji prijavu
+
+**en**
+
+Send report
+
+**ru**
+
+Отправить жалобу
+
+**hr**
+
+Pošalji prijavu
+
+**hu**
+
+Jelentés elküldése
+
+---
+
+### prijavaPoruke.odustani
+
+**sr**
+
+Odustani
+
+**en**
+
+Cancel
+
+**ru**
+
+Отмена
+
+**hr**
+
+Odustani
+
+**hu**
+
+Mégse
+
+---
+
+### prijavaPoruke.greska
+
+**sr**
+
+Prijava nije poslata. Pokušaj ponovo.
+
+**en**
+
+The report was not sent. Try again.
+
+**ru**
+
+Жалоба не отправлена. Попробуйте ещё раз.
+
+**hr**
+
+Prijava nije poslana. Pokušaj ponovno.
+
+**hu**
+
+A jelentés nem került elküldésre. Próbáld újra.
 
 ---
 
@@ -67514,6 +71634,74 @@ Nem. A platform jelenleg kizárólag nagykorú személyeknek szól. A kiskorú f
 
 ---
 
+### faq.ukljucivanje.pitanje-84.pitanje
+
+**sr**
+
+Mogu li se maloletnici registrovati?
+
+**en**
+
+Can minors register?
+
+**ru**
+
+Могут ли зарегистрироваться несовершеннолетние?
+
+**hr**
+
+Mogu li se maloljetnici registrirati?
+
+**hu**
+
+Regisztrálhatnak-e kiskorúak?
+
+---
+
+### faq.ukljucivanje.pitanje-84.odgovor
+
+**sr**
+
+Da, od sedme godine, uz saglasnost roditelja odnosno zakonskog zastupnika. Učešće dece uređuje Pravilnik o učešću dece.
+
+Dva su puta. Roditelj koji je već na platformi otvara nalog detetu iz svog profila. Dete se može i samo registrovati — unosi pseudonim, lozinku i elektronsku adresu roditelja, a nalog dobija ograničen obim: profil i prijateljstva rade, pričaonica i oglasi ne, i POEN se ne upisuje dok roditelj ne preuzme nalog i ne postane redovan član.
+
+Deca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom detetu se upisuje 500 POEN, ali tek kada su oba naloga u punom obimu. Roditelj ne čita razgovore između dece — vidi sa kim je dete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor deteta sa punoletnim licem čita, i o tome punoletni sagovornik ima vidljivo obaveštenje. Na osamnaesti rođendan nalog prelazi u punoletni, prijateljstva se brišu, POEN zarađen prijateljstvima se poništava, a roditelji detetu evidentiraju potvrdu stvarnosti.
+
+**en**
+
+Yes, from the age of seven, with the consent of a parent or legal guardian. Children's participation is governed by the Regulation on the Participation of Children.
+
+There are two paths. A parent already on the platform opens an account for the child from their own profile. A child may also register alone — entering a pseudonym, a password and a parent's e-mail address — and the account then works in a limited scope: the profile and friendships work, the chat room and listings do not, and no POEN is recorded until a parent takes the account over and becomes a regular member.
+
+Children form friendships by scanning a code in person. For a friendship formed, 500 POEN is recorded to each child, but only once both accounts are in full scope. A parent does not read conversations between children — they see who the child is friends with and how many conversations exist, without content; a conversation between a child and an adult is read by the parent, and the adult participant is given a visible notice of that. On the eighteenth birthday the account becomes an adult account, friendships are deleted, POEN earned through friendships is annulled, and the parents record a confirmation of reality for the child.
+
+**ru**
+
+Да, с семи лет, с согласия родителя или законного представителя. Участие детей регулируется Правилами об участии детей.
+
+Есть два пути. Родитель, уже присутствующий на платформе, открывает ребёнку учётную запись из своего профиля. Ребёнок может зарегистрироваться и сам — указывает псевдоним, пароль и адрес электронной почты родителя, — и тогда запись работает в ограниченном объёме: профиль и дружеские связи работают, комната общения и объявления нет, а POEN не вносится, пока родитель не примет запись и не станет полноправным участником.
+
+Дети заключают дружбу, сканируя код при личной встрече. За заключённую дружбу каждому ребёнку вносится 500 POEN, но только когда обе записи находятся в полном объёме. Родитель не читает разговоры между детьми — он видит, с кем ребёнок дружит и сколько у него разговоров, без содержания; разговор ребёнка с совершеннолетним лицом родитель читает, и совершеннолетний собеседник видит явное уведомление об этом. В день восемнадцатилетия запись переходит в совершеннолетнюю, дружеские связи удаляются, POEN, полученный за дружбу, отменяется, а родители вносят ребёнку подтверждение реальности.
+
+**hr**
+
+Da, od sedme godine, uz suglasnost roditelja odnosno zakonskog zastupnika. Sudjelovanje djece uređuje Pravilnik o sudjelovanju djece.
+
+Dva su puta. Roditelj koji je već na platformi otvara račun djetetu iz svojeg profila. Dijete se može i samo registrirati — unosi pseudonim, lozinku i adresu elektroničke pošte roditelja — a račun tada radi u ograničenom obimu: profil i prijateljstva rade, pričaonica i oglasi ne, a POEN se ne upisuje dok roditelj ne preuzme račun i ne postane redovan član.
+
+Djeca sklapaju prijateljstva skeniranjem koda uživo. Za sklopljeno prijateljstvo svakom se djetetu upisuje 500 POEN, ali tek kada su oba računa u punom obimu. Roditelj ne čita razgovore između djece — vidi s kim je dijete u prijateljstvu i koliko razgovora ima, bez sadržaja; razgovor djeteta s punoljetnom osobom roditelj čita, a punoljetni sugovornik o tome ima vidljivu obavijest. Na osamnaesti rođendan račun prelazi u punoljetni, prijateljstva se brišu, POEN zarađen prijateljstvima se ukida, a roditelji djetetu evidentiraju potvrdu stvarnosti.
+
+**hu**
+
+Igen, hét éves kortól, a szülő, illetve a törvényes képviselő hozzájárulásával. A gyermekek részvételét a gyermekek részvételéről szóló szabályzat rendezi.
+
+Két út van. A platformon már jelen lévő szülő a saját profiljából nyit fiókot a gyermeknek. A gyermek egyedül is regisztrálhat — álnevet, jelszót és a szülő e-mail-címét adja meg —, és a fiók ekkor korlátozott terjedelemben működik: a profil és a barátságok működnek, a beszélgetőszoba és a hirdetések nem, POEN pedig nem kerül bejegyzésre, amíg a szülő át nem veszi a fiókot és nem lesz rendes tag.
+
+A gyermekek barátságot személyes találkozáson, kód beolvasásával kötnek. Megkötött barátságért mindegyik gyermeknek 500 POEN kerül bejegyzésre, de csak akkor, amikor mindkét fiók teljes terjedelemben működik. A szülő nem olvassa a gyermekek egymás közötti beszélgetéseit — azt látja, kivel áll a gyermek barátságban és hány beszélgetése van, tartalom nélkül; a gyermek és nagykorú személy beszélgetését a szülő olvassa, és erről a nagykorú fél látható tájékoztatást kap. A tizennyolcadik születésnapon a fiók nagykorú fiókká válik, a barátságok törlődnek, a barátságokkal szerzett POEN érvénytelenné válik, a szülők pedig valóságigazolást jegyeznek be a gyermeknek.
+
+---
+
 ### faq.ukljucivanje.pitanje-7.pitanje
 
 **sr**
@@ -67821,6 +72009,980 @@ Sučelje radi na srpskom (latinica i ćirilica) i na engleskom — jezik biraš 
 **hu**
 
 A felület szerbül (latin és cirill betűvel) és angolul működik — a nyelvet a fejlécben lévő kapcsolóval választod ki. A Szabályzat, a Feltételek és a többi jogilag kötelező szöveg szerb nyelven készült, és a szerb változat az irányadó; a más nyelvű fordításaik nem hivatalos, az olvasót segítő szövegek.
+
+---
+
+## faq / deca
+
+### faq.deca.naslov
+
+**sr**
+
+Deca i roditelji
+
+**en**
+
+Children and parents
+
+**ru**
+
+Дети и родители
+
+**hr**
+
+Djeca i roditelji
+
+**hu**
+
+Gyerekek és szülők
+
+---
+
+### faq.deca.pitanje-85.pitanje
+
+**sr**
+
+Od koliko godina dete može da ima nalog i kako se otvara?
+
+**en**
+
+From what age can a child have an account, and how is it opened?
+
+**ru**
+
+С какого возраста у ребёнка может быть аккаунт и как он открывается?
+
+**hr**
+
+Od koliko godina dijete može imati račun i kako se otvara?
+
+**hu**
+
+Hány éves kortól lehet a gyereknek fiókja, és hogyan nyílik meg?
+
+---
+
+### faq.deca.pitanje-85.odgovor
+
+**sr**
+
+Donja granica je sedam godina. Nalog se otvara na dva načina.
+
+Prvi: ti ga otvaraš iz svog naloga. Nalog radi odmah, a ti odgovaraš za ono što dete objavi.
+
+Drugi: dete ga otvara samo i unosi tvoj email. Tebi tada stiže poruka u kojoj možeš da preuzmeš nalog, da označiš da to nije tvoje dete ili da nalog obrišeš. Druge dve radnje moguće su i bez prijave na platformu, jer tvoju adresu može upisati bilo ko. U poruci stoji samo pseudonim deteta, nikada ime.
+
+Link iz poruke važi sedam dana. Ako nalog niko ne preuzme u roku od četrnaest dana, briše se. Ako poruka nije stigla, dete u svom profilu ima šestocifreni kod koji možeš uneti umesto linka.
+
+Datum rođenja upisuješ ti, prilikom preuzimanja. Proveri ga pre potvrde, jer se posle upisa ne menja, a od njega zavisi kada nalog prelazi u punoletni.
+
+Dok čeka preuzimanje, dete ima profil i može da sklapa prijateljstva, ali nema Pričaonicu, poruke ni oglase. Posle preuzimanja sve to radi.
+
+**en**
+
+The lower limit is seven years of age. An account is opened in one of two ways.
+
+The first: you open it from your own account. It works straight away, and you are answerable for what the child posts.
+
+The second: the child opens it alone and enters your email. A message then reaches you in which you can take over the account, mark that this is not your child, or delete the account. The latter two actions are possible without signing in to the platform, because anyone can enter your address. The message contains only the child's pseudonym, never a name.
+
+The link in the message is valid for seven days. If no one takes the account over within fourteen days, it is deleted. If the message did not arrive, the child has a six-digit code in their profile that you can enter instead of the link.
+
+You enter the date of birth, at the moment of taking over. Check it before confirming, because it cannot be changed afterwards, and it determines when the account becomes an adult one.
+
+While it waits to be taken over, the child has a profile and can make friendships, but has no Chat room, no messages and no listings. After the takeover all of that works.
+
+**ru**
+
+Нижняя граница — семь лет. Аккаунт открывается двумя способами.
+
+Первый: ты открываешь его из своего аккаунта. Аккаунт работает сразу, а ты отвечаешь за то, что ребёнок публикует.
+
+Второй: ребёнок открывает его сам и вводит твой email. Тебе тогда приходит письмо, в котором ты можешь принять аккаунт, отметить, что это не твой ребёнок, или удалить аккаунт. Два последних действия возможны и без входа на платформу, потому что твой адрес может указать кто угодно. В письме стоит только псевдоним ребёнка, никогда имя.
+
+Ссылка из письма действует семь дней. Если аккаунт никто не примет в течение четырнадцати дней, он удаляется. Если письмо не пришло, у ребёнка в профиле есть шестизначный код, который можно ввести вместо ссылки.
+
+Дату рождения вводишь ты, при принятии. Проверь её перед подтверждением, потому что после записи она не меняется, а от неё зависит, когда аккаунт станет совершеннолетним.
+
+Пока аккаунт ждёт принятия, у ребёнка есть профиль и он может заводить дружбы, но нет ни Беседки, ни сообщений, ни объявлений. После принятия всё это работает.
+
+**hr**
+
+Donja granica je sedam godina. Račun se otvara na dva načina.
+
+Prvi: ti ga otvaraš iz svog računa. Račun radi odmah, a ti odgovaraš za ono što dijete objavi.
+
+Drugi: dijete ga otvara samo i unosi tvoj email. Tebi tada stiže poruka u kojoj možeš preuzeti račun, označiti da to nije tvoje dijete ili račun obrisati. Druge dvije radnje moguće su i bez prijave na platformu, jer tvoju adresu može upisati bilo tko. U poruci stoji samo pseudonim djeteta, nikada ime.
+
+Poveznica iz poruke vrijedi sedam dana. Ako račun nitko ne preuzme u roku od četrnaest dana, briše se. Ako poruka nije stigla, dijete u svom profilu ima šesteroznamenkasti kod koji možeš unijeti umjesto poveznice.
+
+Datum rođenja upisuješ ti, prilikom preuzimanja. Provjeri ga prije potvrde, jer se poslije upisa ne mijenja, a o njemu ovisi kada račun prelazi u punoljetni.
+
+Dok čeka preuzimanje, dijete ima profil i može sklapati prijateljstva, ali nema Pričaonicu, poruke ni oglase. Poslije preuzimanja sve to radi.
+
+**hu**
+
+Az alsó határ hét év. A fiók kétféleképpen nyitható meg.
+
+Az első: te nyitod meg a saját fiókodból. A fiók azonnal működik, és te felelsz azért, amit a gyerek közzétesz.
+
+A második: a gyerek maga nyitja meg, és megadja a te e-mail-címedet. Ekkor üzenet érkezik hozzád, amelyben átveheted a fiókot, jelezheted, hogy nem a te gyereked, vagy törölheted a fiókot. Az utóbbi két művelet a platformra való belépés nélkül is elvégezhető, mert a címedet bárki beírhatja. Az üzenetben csak a gyerek álneve szerepel, név soha.
+
+Az üzenetben lévő hivatkozás hét napig érvényes. Ha a fiókot tizennégy napon belül senki nem veszi át, törlődik. Ha az üzenet nem érkezett meg, a gyereknek a profiljában van egy hatjegyű kód, amelyet a hivatkozás helyett megadhatsz.
+
+A születési dátumot te írod be, az átvételkor. Ellenőrizd megerősítés előtt, mert a beírás után nem módosítható, és tőle függ, mikor válik a fiók nagykorúvá.
+
+Amíg átvételre vár, a gyereknek van profilja és köthet barátságokat, de nincs Csevegőszobája, üzenetei és hirdetései. Az átvétel után mindez működik.
+
+---
+
+### faq.deca.pitanje-86.pitanje
+
+**sr**
+
+Nisam član KOLA. Mogu li da preuzmem nalog svog deteta?
+
+**en**
+
+I am not a member of KOLO. Can I take over my child's account?
+
+**ru**
+
+Я не участник КОЛО. Могу ли я принять аккаунт своего ребёнка?
+
+**hr**
+
+Nisam član KOLA. Mogu li preuzeti račun svog djeteta?
+
+**hu**
+
+Nem vagyok a KOLO tagja. Átvehetem a gyerekem fiókját?
+
+---
+
+### faq.deca.pitanje-86.odgovor
+
+**sr**
+
+Možeš. Postupak ima tri koraka.
+
+\1. Otvori svoj nalog. Link iz poruke vodi pravo na registraciju.
+
+\2. Preuzmi dete. Od tog trenutka detetu radi sve: Pričaonica, poruke, oglasi i prijateljstva. Ti i dete od tada prepisujete POEN jedno drugom.
+
+\3. Zamoli nekoga ko te lično poznaje da te potvrdi. Potvrdu tražiš iz svog naloga i dovoljna je jedna.
+
+Do trećeg koraka detetu se ne upisuje POEN iz prijateljstava. Prijateljstva se u međuvremenu sklapaju i beleže, a upis se izvršava onog dana kada postaneš redovan član.
+
+**en**
+
+You can. The procedure has three steps.
+
+\1. Open your own account. The link in the message leads straight to registration.
+
+\2. Take over the child. From that moment everything works for the child: the Chat room, messages, listings and friendships. From then on you and the child re-register POEN to each other.
+
+\3. Ask someone who knows you personally to confirm you. You request the confirmation from your own account, and one is enough.
+
+Until the third step, no POEN from friendships is recorded for the child. Friendships are made and logged in the meantime, and the recording is carried out on the day you become a full member.
+
+**ru**
+
+Можешь. Порядок состоит из трёх шагов.
+
+\1. Открой свой аккаунт. Ссылка из письма ведёт прямо на регистрацию.
+
+\2. Прими ребёнка. С этого момента ребёнку работает всё: Беседка, сообщения, объявления и дружбы. Ты и ребёнок с этого момента переписываете ПОЕН друг другу.
+
+\3. Попроси того, кто знает тебя лично, подтвердить тебя. Подтверждение запрашиваешь из своего аккаунта, и достаточно одного.
+
+До третьего шага ребёнку не записывается ПОЕН из дружб. Дружбы тем временем заводятся и учитываются, а запись выполняется в тот день, когда ты станешь действительным участником.
+
+**hr**
+
+Možeš. Postupak ima tri koraka.
+
+\1. Otvori svoj račun. Poveznica iz poruke vodi ravno na registraciju.
+
+\2. Preuzmi dijete. Od tog trenutka djetetu radi sve: Pričaonica, poruke, oglasi i prijateljstva. Ti i dijete od tada prepisujete POEN jedno drugome.
+
+\3. Zamoli nekoga tko te osobno poznaje da te potvrdi. Potvrdu tražiš iz svog računa i dovoljna je jedna.
+
+Do trećeg koraka djetetu se ne upisuje POEN iz prijateljstava. Prijateljstva se u međuvremenu sklapaju i bilježe, a upis se izvršava onog dana kada postaneš redovni član.
+
+**hu**
+
+Átveheted. Az eljárás három lépésből áll.
+
+\1. Nyisd meg a saját fiókodat. Az üzenetben lévő hivatkozás egyenesen a regisztrációhoz vezet.
+
+\2. Vedd át a gyereket. Ettől a pillanattól a gyereknek minden működik: a Csevegőszoba, az üzenetek, a hirdetések és a barátságok. Te és a gyerek ettől kezdve átírtok egymásnak POEN-t.
+
+\3. Kérd meg azt, aki személyesen ismer, hogy erősítsen meg téged. A megerősítést a saját fiókodból kéred, és egy is elég.
+
+A harmadik lépésig a gyereknek nem rögzül POEN a barátságokból. A barátságok addig is létrejönnek és rögzülnek, a bejegyzés pedig azon a napon hajtódik végre, amikor rendes taggá válsz.
+
+---
+
+### faq.deca.pitanje-87.pitanje
+
+**sr**
+
+Mogu li oba roditelja da imaju pristup?
+
+**en**
+
+Can both parents have access?
+
+**ru**
+
+Могут ли оба родителя иметь доступ?
+
+**hr**
+
+Mogu li oba roditelja imati pristup?
+
+**hu**
+
+Mindkét szülőnek lehet hozzáférése?
+
+---
+
+### faq.deca.pitanje-87.odgovor
+
+**sr**
+
+Mogu. Drugi roditelj ulazi istim putem kao i prvi i dobija ista ovlašćenja: isti uvid, isto brisanje i iste prekidače. To znači i da svaki od dvoje može sam obrisati detetov nalog.
+
+Detetu je dovoljno da jedan roditelj bude redovan član da bi mu se upisivao POEN.
+
+**en**
+
+They can. The second parent enters by the same route as the first and gets the same powers: the same oversight, the same deletion and the same switches. That also means either of the two can delete the child's account on their own.
+
+For the child it is enough that one parent is a full member for POEN to be recorded.
+
+**ru**
+
+Могут. Второй родитель входит тем же путём, что и первый, и получает те же полномочия: тот же обзор, то же удаление и те же переключатели. Это значит и то, что каждый из двоих может сам удалить аккаунт ребёнка.
+
+Ребёнку достаточно, чтобы один родитель был действительным участником, чтобы ему записывался ПОЕН.
+
+**hr**
+
+Mogu. Drugi roditelj ulazi istim putem kao i prvi i dobiva iste ovlasti: isti uvid, isto brisanje i iste prekidače. To znači i da svatko od njih dvoje može sam obrisati djetetov račun.
+
+Djetetu je dovoljno da jedan roditelj bude redovni član da bi mu se upisivao POEN.
+
+**hu**
+
+Lehet. A második szülő ugyanazon az úton lép be, mint az első, és ugyanazokat a jogosultságokat kapja: ugyanazt a betekintést, ugyanazt a törlést és ugyanazokat a kapcsolókat. Ez azt is jelenti, hogy kettejük közül bármelyik egyedül törölheti a gyerek fiókját.
+
+A gyereknek elég, ha az egyik szülő rendes tag, hogy POEN rögzüljön neki.
+
+---
+
+### faq.deca.pitanje-88.pitanje
+
+**sr**
+
+Može li odrasla osoba da priđe mom detetu?
+
+**en**
+
+Can an adult approach my child?
+
+**ru**
+
+Может ли взрослый подойти к моему ребёнку?
+
+**hr**
+
+Može li odrasla osoba prići mom djetetu?
+
+**hu**
+
+Megközelítheti-e felnőtt a gyerekemet?
+
+---
+
+### faq.deca.pitanje-88.odgovor
+
+**sr**
+
+Nezavisno od tvojih podešavanja važi sledeće. Detetov profil ne vidi neprijavljeni posetilac. Dete se ne pojavljuje u feedu ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
+
+Razgovor sa punoletnim osobama otvara samo roditeljski prekidač u detetovom profilu. Dok je ugašen, odrasla osoba detetu ne može pisati.
+
+Ako ga upališ, primenjuju se tri pravila:
+
+• ti čitaš taj razgovor, ali u njemu ne pišeš;
+
+• punoletnom sagovorniku stoji vidljiv natpis da razgovor čita roditelj;
+
+• obaveštenje ti stiže pri prvom javljanju u novom razgovoru, a ne pri svakoj poruci.
+
+Razgovore koje dete vodi sa drugom decom ne čitaš. O tome u sledećem pitanju.
+
+**en**
+
+Regardless of your settings, the following holds. A visitor who is not signed in does not see the child's profile. The child does not appear in the feed or in the member search. A friendship is made solely by scanning a QR code in person, and the code lasts five minutes and has no number that could be dictated over the phone, so a friendship cannot be made at a distance.
+
+A conversation with adults is opened only by the parental switch in the child's profile. While it is off, an adult cannot write to the child.
+
+If you turn it on, three rules apply:
+
+• you read that conversation, but you do not write in it;
+
+• the adult on the other side sees a visible notice that a parent reads the conversation;
+
+• a notification reaches you the first time someone writes in a new conversation, not with every message.
+
+You do not read the conversations the child has with other children. More on that in the next question.
+
+**ru**
+
+Независимо от твоих настроек действует следующее. Профиль ребёнка не виден незарегистрированному посетителю. Ребёнок не появляется ни в ленте, ни в поиске участников. Дружба заводится исключительно сканированием QR-кода вживую, код действует пять минут и не имеет номера, который можно было бы продиктовать по телефону, поэтому дружбу нельзя завести на расстоянии.
+
+Разговор с совершеннолетними открывает только родительский переключатель в профиле ребёнка. Пока он выключен, взрослый ребёнку писать не может.
+
+Если ты его включишь, действуют три правила:
+
+• ты читаешь этот разговор, но в нём не пишешь;
+
+• совершеннолетнему собеседнику видна надпись, что разговор читает родитель;
+
+• уведомление приходит тебе при первом обращении в новом разговоре, а не при каждом сообщении.
+
+Разговоры, которые ребёнок ведёт с другими детьми, ты не читаешь. Об этом — в следующем вопросе.
+
+**hr**
+
+Neovisno o tvojim postavkama vrijedi sljedeće. Djetetov profil ne vidi neprijavljeni posjetitelj. Dijete se ne pojavljuje u feedu ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
+
+Razgovor s punoljetnim osobama otvara samo roditeljski prekidač u djetetovu profilu. Dok je ugašen, odrasla osoba djetetu ne može pisati.
+
+Ako ga upališ, primjenjuju se tri pravila:
+
+• ti čitaš taj razgovor, ali u njemu ne pišeš;
+
+• punoljetnom sugovorniku stoji vidljiv natpis da razgovor čita roditelj;
+
+• obavijest ti stiže pri prvom javljanju u novom razgovoru, a ne pri svakoj poruci.
+
+Razgovore koje dijete vodi s drugom djecom ne čitaš. O tome u sljedećem pitanju.
+
+**hu**
+
+A beállításaidtól függetlenül a következő érvényes. A gyerek profilját be nem jelentkezett látogató nem látja. A gyerek nem jelenik meg sem a hírfolyamban, sem a tagkeresésben. Barátság kizárólag QR-kód személyes beolvasásával jön létre, a kód öt percig él, és nincs olyan száma, amelyet telefonon be lehetne diktálni, így barátság távolról nem köthető.
+
+A felnőttekkel folytatott beszélgetést kizárólag a gyerek profiljában lévő szülői kapcsoló nyitja meg. Amíg ki van kapcsolva, felnőtt nem írhat a gyereknek.
+
+Ha bekapcsolod, három szabály érvényes:
+
+• te olvasod azt a beszélgetést, de nem írsz bele;
+
+• a nagykorú beszélgetőpartner számára látható felirat jelzi, hogy a beszélgetést szülő olvassa;
+
+• értesítés az új beszélgetés első megkeresésekor érkezik hozzád, nem minden üzenetnél.
+
+A gyerek más gyerekekkel folytatott beszélgetéseit nem olvasod. Erről a következő kérdésben.
+
+---
+
+### faq.deca.pitanje-89.pitanje
+
+**sr**
+
+Šta ja vidim od detetovog naloga?
+
+**en**
+
+What do I see of my child's account?
+
+**ru**
+
+Что я вижу из аккаунта ребёнка?
+
+**hr**
+
+Što ja vidim od djetetova računa?
+
+**hu**
+
+Mit látok a gyerekem fiókjából?
+
+---
+
+### faq.deca.pitanje-89.odgovor
+
+**sr**
+
+Uvid ti obuhvata:
+
+• spisak prijatelja sa datumima kada je prijateljstvo sklopljeno;
+
+• spisak razgovora, dakle s kim i koliko, bez sadržaja poruka;
+
+• celu istoriju prepisa POEN-a;
+
+• sve oglase koje je dete objavilo.
+
+Razgovore između dece ne čitaš. Razlog je taj što u svakom takvom razgovoru učestvuje i tuđe dete, čiji roditelj na uvid nije pristao. Izuzetak je razgovor deteta sa punoletnom osobom, koji čitaš.
+
+Prijateljstva ne odobravaš. Sklapaju se uživo, skeniranjem koda, a ti dobijaš obaveštenje i vidiš spisak.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor sa odraslima i obrisati nalog.
+
+**en**
+
+Your oversight covers:
+
+• the list of friends with the dates the friendships were made;
+
+• the list of conversations — that is, with whom and how many — without the content of the messages;
+
+• the whole history of POEN re-registrations;
+
+• every listing the child has posted.
+
+You do not read the conversations between children. The reason is that every such conversation also involves someone else's child, whose parent has not consented to your oversight. The exception is a conversation between the child and an adult, which you do read.
+
+You do not approve friendships. They are made in person, by scanning a code, and you get a notification and see the list.
+
+At any moment you can remove a listing, switch off conversations with adults, and delete the account.
+
+**ru**
+
+Твой обзор охватывает:
+
+• список друзей с датами, когда дружба была заведена;
+
+• список разговоров, то есть с кем и сколько, без содержания сообщений;
+
+• всю историю переписываний ПОЕН;
+
+• все объявления, которые ребёнок разместил.
+
+Разговоры между детьми ты не читаешь. Причина в том, что в каждом таком разговоре участвует и чужой ребёнок, чей родитель на твой обзор не соглашался. Исключение — разговор ребёнка с совершеннолетним, который ты читаешь.
+
+Дружбы ты не одобряешь. Они заводятся вживую, сканированием кода, а ты получаешь уведомление и видишь список.
+
+В любой момент ты можешь удалить объявление, выключить переключатель разговора со взрослыми и удалить аккаунт.
+
+**hr**
+
+Uvid ti obuhvaća:
+
+• popis prijatelja s datumima kada je prijateljstvo sklopljeno;
+
+• popis razgovora, dakle s kim i koliko, bez sadržaja poruka;
+
+• cijelu povijest prepisa POEN-a;
+
+• sve oglase koje je dijete objavilo.
+
+Razgovore između djece ne čitaš. Razlog je taj što u svakom takvom razgovoru sudjeluje i tuđe dijete, čiji roditelj na uvid nije pristao. Iznimka je razgovor djeteta s punoljetnom osobom, koji čitaš.
+
+Prijateljstva ne odobravaš. Sklapaju se uživo, skeniranjem koda, a ti dobivaš obavijest i vidiš popis.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor s odraslima i obrisati račun.
+
+**hu**
+
+A betekintésed kiterjed:
+
+• a barátok listájára, a barátságkötés dátumaival;
+
+• a beszélgetések listájára, tehát kivel és mennyit, az üzenetek tartalma nélkül;
+
+• a POEN-átírások teljes előzményére;
+
+• minden hirdetésre, amelyet a gyerek közzétett.
+
+A gyerekek egymás közötti beszélgetéseit nem olvasod. Ennek oka, hogy minden ilyen beszélgetésben más gyereke is részt vesz, akinek a szülője a betekintéshez nem járult hozzá. Kivétel a gyerek és nagykorú személy beszélgetése, amelyet olvasol.
+
+A barátságokat nem hagyod jóvá. Személyesen, kód beolvasásával jönnek létre, te pedig értesítést kapsz és látod a listát.
+
+Bármikor eltávolíthatsz hirdetést, kikapcsolhatod a felnőttekkel folytatott beszélgetés kapcsolóját, és törölheted a fiókot.
+
+---
+
+### faq.deca.pitanje-90.pitanje
+
+**sr**
+
+Šta ako dete dobije neprimerenu poruku?
+
+**en**
+
+What if my child receives an inappropriate message?
+
+**ru**
+
+Что если ребёнок получит неподобающее сообщение?
+
+**hr**
+
+Što ako dijete dobije neprimjerenu poruku?
+
+**hu**
+
+Mi van, ha a gyerek nem megfelelő üzenetet kap?
+
+---
+
+### faq.deca.pitanje-90.odgovor
+
+**sr**
+
+Uz svaku poruku stoji dugme prijavi. Dete ga pritiska samo, bez pitanja i bez čekanja.
+
+Prijava ne uklanja poruku. Ona je signal moderaciji Fondacije, koja poruku pregleda i uklanja je ako za to ima osnova. Istu poruku svaki korisnik može prijaviti jednom.
+
+**en**
+
+Next to every message there is a report button. The child presses it alone, without asking and without waiting.
+
+A report does not remove the message. It is a signal to the Foundation's moderation, which reviews the message and removes it if there are grounds. Each user can report the same message once.
+
+**ru**
+
+У каждого сообщения есть кнопка «пожаловаться». Ребёнок нажимает её сам, без спроса и без ожидания.
+
+Жалоба не удаляет сообщение. Она сигнал модерации Фонда, которая сообщение просматривает и удаляет, если для этого есть основание. Одно и то же сообщение каждый пользователь может пожаловать один раз.
+
+**hr**
+
+Uz svaku poruku stoji dugme prijavi. Dijete ga pritišće samo, bez pitanja i bez čekanja.
+
+Prijava ne uklanja poruku. Ona je signal moderaciji Fondacije, koja poruku pregleda i uklanja je ako za to ima osnova. Istu poruku svaki korisnik može prijaviti jednom.
+
+**hu**
+
+Minden üzenet mellett ott a bejelentés gombja. A gyerek maga nyomja meg, kérdezés és várakozás nélkül.
+
+A bejelentés nem távolítja el az üzenetet. Jelzés az Alapítvány moderációjának, amely az üzenetet megvizsgálja, és eltávolítja, ha van rá alap. Ugyanazt az üzenetet minden felhasználó egyszer jelentheti be.
+
+---
+
+### faq.deca.pitanje-91.pitanje
+
+**sr**
+
+Odgovaram li ja za ono što dete uradi?
+
+**en**
+
+Am I answerable for what my child does?
+
+**ru**
+
+Отвечаю ли я за то, что делает ребёнок?
+
+**hr**
+
+Odgovaram li ja za ono što dijete učini?
+
+**hu**
+
+Felelek-e azért, amit a gyerek tesz?
+
+---
+
+### faq.deca.pitanje-91.odgovor
+
+**sr**
+
+Da. Za ono što dete objavi i uradi na platformi odgovaraš ti.
+
+Odgovornost se odnosi na ono što je javno i što možeš videti: oglase, prepise POEN-a, ponašanje prema drugima. Za sve to imaš uvid i dugme. Privatan razgovor dvoje dece nije tvoj teren, jer nije ni samo tvog deteta.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti razgovor sa odraslima ili obrisati nalog.
+
+**en**
+
+Yes. You are answerable for what the child posts and does on the platform.
+
+The responsibility covers what is public and what you can see: listings, POEN re-registrations, conduct towards others. For all of that you have both oversight and a button. A private conversation between two children is not your ground, because it is not your child's alone either.
+
+At any moment you can remove a listing, switch off conversations with adults, or delete the account.
+
+**ru**
+
+Да. За то, что ребёнок публикует и делает на платформе, отвечаешь ты.
+
+Ответственность касается того, что публично и что ты можешь видеть: объявлений, переписываний ПОЕН, поведения по отношению к другим. Для всего этого у тебя есть и обзор, и кнопка. Частный разговор двоих детей — не твоя территория, потому что он и не только твоего ребёнка.
+
+В любой момент ты можешь удалить объявление, выключить разговор со взрослыми или удалить аккаунт.
+
+**hr**
+
+Da. Za ono što dijete objavi i učini na platformi odgovaraš ti.
+
+Odgovornost se odnosi na ono što je javno i što možeš vidjeti: oglase, prepise POEN-a, ponašanje prema drugima. Za sve to imaš uvid i dugme. Privatan razgovor dvoje djece nije tvoj teren, jer nije ni samo tvog djeteta.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti razgovor s odraslima ili obrisati račun.
+
+**hu**
+
+Igen. Azért, amit a gyerek a platformon közzétesz és tesz, te felelsz.
+
+A felelősség arra terjed ki, ami nyilvános és amit láthatsz: a hirdetésekre, a POEN-átírásokra, a másokkal szembeni viselkedésre. Mindehhez van betekintésed és gombod is. Két gyerek magánbeszélgetése nem a te tereped, mert nem is csak a te gyerekedé.
+
+Bármikor eltávolíthatsz hirdetést, kikapcsolhatod a felnőttekkel folytatott beszélgetést, vagy törölheted a fiókot.
+
+---
+
+### faq.deca.pitanje-92.pitanje
+
+**sr**
+
+Kako dete stiče POEN?
+
+**en**
+
+How does a child obtain POEN?
+
+**ru**
+
+Как ребёнок получает ПОЕН?
+
+**hr**
+
+Kako dijete stječe POEN?
+
+**hu**
+
+Hogyan szerez a gyerek POEN-t?
+
+---
+
+### faq.deca.pitanje-92.odgovor
+
+**sr**
+
+Na tri načina.
+
+Prijateljstvo. Za svako sklopljeno prijateljstvo upisuje se po 500 POEN svakom detetu. Upis čeka da oba naloga budu aktivna, a nalog je aktivan kada je bar jedan roditelj redovan član. Dok se čeka, obojici stoji natpis „500 na čekanju". Prijateljstvo dvoje dece istog roditelja sklapa se normalno i vidi se u Pričaonici, ali ne nosi POEN.
+
+Pijaca. Dete objavljuje oglase pod istim uslovima kao ostali članovi i POEN iz razmene upisuje mu se na isti način.
+
+Prepis od roditelja. Ti i dete prepisujete POEN jedno drugom u oba pravca, bez uslova i bez ograničenja; dovoljno je da si preuzeo nalog. Prepisom se ne stvara nov POEN, nego se postojeći prenosi.
+
+POEN nije novac i nema vrednost izvan sistema.
+
+**en**
+
+In three ways.
+
+Friendship. For every friendship made, 500 POEN is recorded for each child. The recording waits for both accounts to be active, and an account is active once at least one parent is a full member. While it waits, both see the note "500 pending". A friendship between two children of the same parent is made normally and shows in the Chat room, but carries no POEN.
+
+The Marketplace. The child posts listings under the same conditions as other members, and POEN from an exchange is recorded in the same way.
+
+A re-registration from a parent. You and the child re-register POEN to each other in both directions, without conditions and without limits; it is enough that you have taken the account over. A re-registration creates no new POEN — it moves existing POEN.
+
+POEN is not money and has no value outside the system.
+
+**ru**
+
+Тремя способами.
+
+Дружба. За каждую заведённую дружбу записывается по 500 ПОЕН каждому ребёнку. Запись ждёт, пока оба аккаунта не станут активными, а аккаунт активен, когда хотя бы один родитель — действительный участник. Пока идёт ожидание, у обоих стоит надпись «500 в ожидании». Дружба двоих детей одного родителя заводится обычным образом и видна в Беседке, но ПОЕН не приносит.
+
+Рынок. Ребёнок размещает объявления на тех же условиях, что и остальные участники, и ПОЕН из обмена записывается ему так же.
+
+Переписывание от родителя. Ты и ребёнок переписываете ПОЕН друг другу в обе стороны, без условий и без ограничений; достаточно, что ты принял аккаунт. Переписыванием новый ПОЕН не создаётся, а существующий переносится.
+
+ПОЕН — не деньги и вне системы ценности не имеет.
+
+**hr**
+
+Na tri načina.
+
+Prijateljstvo. Za svako sklopljeno prijateljstvo upisuje se po 500 POEN svakom djetetu. Upis čeka da oba računa budu aktivna, a račun je aktivan kada je bar jedan roditelj redovni član. Dok se čeka, objema stranama stoji natpis „500 na čekanju". Prijateljstvo dvoje djece istog roditelja sklapa se normalno i vidi se u Pričaonici, ali ne nosi POEN.
+
+Pijaca. Dijete objavljuje oglase pod istim uvjetima kao ostali članovi i POEN iz razmjene upisuje mu se na isti način.
+
+Prepis od roditelja. Ti i dijete prepisujete POEN jedno drugome u oba smjera, bez uvjeta i bez ograničenja; dovoljno je da si preuzeo račun. Prepisom se ne stvara nov POEN, nego se postojeći prenosi.
+
+POEN nije novac i nema vrijednost izvan sustava.
+
+**hu**
+
+Háromféleképpen.
+
+Barátság. Minden megkötött barátságért 500-500 POEN rögzül mindkét gyereknek. A bejegyzés megvárja, hogy mindkét fiók aktív legyen, a fiók pedig akkor aktív, ha legalább az egyik szülő rendes tag. Amíg vár, mindkettőjüknél a „500 függőben" felirat áll. Ugyanazon szülő két gyerekének barátsága a szokásos módon jön létre és látszik a Csevegőszobában, de POEN-t nem hoz.
+
+Piac. A gyerek ugyanolyan feltételekkel ad fel hirdetéseket, mint a többi tag, és a cseréből származó POEN ugyanúgy rögzül neki.
+
+Átírás a szülőtől. Te és a gyerek mindkét irányban átírtok egymásnak POEN-t, feltétel és korlát nélkül; elég, hogy átvetted a fiókot. Az átírás nem hoz létre új POEN-t, hanem a meglévőt mozgatja.
+
+A POEN nem pénz, és a rendszeren kívül nincs értéke.
+
+---
+
+### faq.deca.pitanje-93.pitanje
+
+**sr**
+
+Šta biva ako se prijateljstvo raskine?
+
+**en**
+
+What happens if a friendship is ended?
+
+**ru**
+
+Что происходит, если дружба расторгнута?
+
+**hr**
+
+Što biva ako se prijateljstvo raskine?
+
+**hu**
+
+Mi történik, ha egy barátság megszűnik?
+
+---
+
+### faq.deca.pitanje-93.odgovor
+
+**sr**
+
+Prijateljstvo raskida samo dete, bilo koje od dvoje. Ti kao roditelj tu radnju nemaš; ostaju ti uklanjanje oglasa, prekidač za razgovor sa odraslima i brisanje naloga.
+
+Pri raskidu se otpisuje po 500 POEN obema stranama, i onoj koja raskida i onoj koja nije. Pre potvrde stoji upozorenje na to, pa se raskid ne dešava slučajno.
+
+Ako je taj POEN u međuvremenu potrošen, zapis odlazi u minus. To nije dug: ništa se ne naplaćuje i ne traži nazad, a prvi POEN koji stigne popunjava ga.
+
+Ako deca kasnije ponovo sklope prijateljstvo, POEN se upisuje ponovo.
+
+**en**
+
+Only a child ends a friendship, either of the two. You as a parent do not have that action; what remains to you is removing a listing, the switch for conversations with adults, and deleting the account.
+
+When it ends, 500 POEN is written off from both sides — from the one who ended it and from the one who did not. A warning about that stands before the confirmation, so it does not happen by accident.
+
+If that POEN has been spent in the meantime, the ledger goes below zero. That is not a debt: nothing is collected and nothing is demanded back, and the first POEN to arrive fills it.
+
+If the children later make friends again, the POEN is recorded again.
+
+**ru**
+
+Дружбу расторгает только ребёнок, любой из двоих. У тебя как у родителя такого действия нет; тебе остаются удаление объявления, переключатель разговора со взрослыми и удаление аккаунта.
+
+При расторжении списывается по 500 ПОЕН обеим сторонам — и той, которая расторгает, и той, которая нет. Перед подтверждением стоит предупреждение об этом, так что расторжение не происходит случайно.
+
+Если этот ПОЕН тем временем потрачен, запись уходит в минус. Это не долг: ничего не взыскивается и не требуется назад, а первый пришедший ПОЕН его заполняет.
+
+Если дети позже снова заведут дружбу, ПОЕН записывается снова.
+
+**hr**
+
+Prijateljstvo raskida samo dijete, bilo koje od dvoje. Ti kao roditelj tu radnju nemaš; ostaju ti uklanjanje oglasa, prekidač za razgovor s odraslima i brisanje računa.
+
+Pri raskidu se otpisuje po 500 POEN objema stranama, i onoj koja raskida i onoj koja nije. Prije potvrde stoji upozorenje na to, pa se raskid ne događa slučajno.
+
+Ako je taj POEN u međuvremenu potrošen, zapis odlazi u minus. To nije dug: ništa se ne naplaćuje i ne traži natrag, a prvi POEN koji stigne popunjava ga.
+
+Ako djeca kasnije ponovno sklope prijateljstvo, POEN se upisuje ponovno.
+
+**hu**
+
+A barátságot csak gyerek bontja fel, a kettő közül bármelyik. Neked mint szülőnek ez a művelet nincs meg; marad a hirdetés eltávolítása, a felnőttekkel folytatott beszélgetés kapcsolója és a fiók törlése.
+
+Felbontáskor 500-500 POEN íródik le mindkét oldalról — attól is, aki felbontja, és attól is, aki nem. A megerősítés előtt figyelmeztetés áll erről, így a felbontás nem történik véletlenül.
+
+Ha ezt a POEN-t időközben elköltötték, a nyilvántartás mínuszba megy. Ez nem tartozás: semmit nem hajtanak be és nem követelnek vissza, az első beérkező POEN pedig feltölti.
+
+Ha a gyerekek később újra barátságot kötnek, a POEN újra rögzül.
+
+---
+
+### faq.deca.pitanje-94.pitanje
+
+**sr**
+
+Šta se dešava na osamnaesti rođendan?
+
+**en**
+
+What happens on the eighteenth birthday?
+
+**ru**
+
+Что происходит в восемнадцатый день рождения?
+
+**hr**
+
+Što se događa na osamnaesti rođendan?
+
+**hu**
+
+Mi történik a tizennyolcadik születésnapon?
+
+---
+
+### faq.deca.pitanje-94.odgovor
+
+**sr**
+
+Obaveštenje o prelasku stiže mesec dana ranije, i detetu i svim njegovim prijateljima. Na sam dan dešava se sledeće.
+
+Poništava se POEN zarađen prijateljstvima, po 500 za svako prijateljstvo za koje je upis izvršen. Dete sa trideset takvih prijateljstava gubi 15.000 POEN. Otpis pogađa i drugu stranu: svakom od tih prijatelja otpisuje se po 500 za to prijateljstvo, i zbog toga obaveštenje ide i njima. Kao i pri raskidu, zapis sme u minus i to nije dug.
+
+Prijateljstva se brišu. Njihovo mesto zauzima lanac potvrda.
+
+Roditelji potvrđuju dete u lancu potvrda, po jednu potvrdu svaki, odnosno jednu ako su oba u istom lancu. Nalog time postaje punoletan i dobija pun pristup.
+
+Ostalo se ne dira: POEN koji si prepisao detetu, POEN iz razmene na Pijaci, oglasi i istorija ostaju.
+
+**en**
+
+A notification about the transition arrives a month in advance, both to the child and to all their friends. On the day itself the following happens.
+
+The POEN earned through friendships is annulled — 500 for every friendship for which the recording was carried out. A child with thirty such friendships loses 15,000 POEN. The write-off also hits the other side: each of those friends has 500 written off for that friendship, and that is why the notification goes to them too. As with ending a friendship, the ledger may go below zero and that is not a debt.
+
+The friendships are deleted. Their place is taken by the chain of confirmations.
+
+The parents confirm the child in the chain of confirmations — one confirmation each, or one if both are in the same chain. The account thereby becomes an adult account and gets full access.
+
+Nothing else is touched: the POEN you re-registered to the child, POEN from exchanges on the Marketplace, listings and history all remain.
+
+**ru**
+
+Уведомление о переходе приходит за месяц, и ребёнку, и всем его друзьям. В сам день происходит следующее.
+
+Отменяется ПОЕН, заработанный дружбами, — по 500 за каждую дружбу, по которой запись была выполнена. Ребёнок с тридцатью такими дружбами теряет 15 000 ПОЕН. Списание затрагивает и другую сторону: каждому из этих друзей списывается по 500 за эту дружбу, и поэтому уведомление идёт и им. Как и при расторжении, запись может уйти в минус, и это не долг.
+
+Дружбы удаляются. Их место занимает цепочка подтверждений.
+
+Родители подтверждают ребёнка в цепочке подтверждений — по одному подтверждению каждый, то есть одно, если оба в одной цепочке. Аккаунт тем самым становится совершеннолетним и получает полный доступ.
+
+Остальное не трогается: ПОЕН, который ты переписал ребёнку, ПОЕН из обмена на Рынке, объявления и история остаются.
+
+**hr**
+
+Obavijest o prijelazu stiže mjesec dana ranije, i djetetu i svim njegovim prijateljima. Na sam dan događa se sljedeće.
+
+Poništava se POEN zarađen prijateljstvima, po 500 za svako prijateljstvo za koje je upis izvršen. Dijete s trideset takvih prijateljstava gubi 15.000 POEN. Otpis pogađa i drugu stranu: svakom od tih prijatelja otpisuje se po 500 za to prijateljstvo, i zbog toga obavijest ide i njima. Kao i pri raskidu, zapis smije u minus i to nije dug.
+
+Prijateljstva se brišu. Njihovo mjesto zauzima lanac potvrda.
+
+Roditelji potvrđuju dijete u lancu potvrda, po jednu potvrdu svaki, odnosno jednu ako su oba u istom lancu. Račun time postaje punoljetan i dobiva pun pristup.
+
+Ostalo se ne dira: POEN koji si prepisao djetetu, POEN iz razmjene na Pijaci, oglasi i povijest ostaju.
+
+**hu**
+
+Az átmenetről egy hónappal korábban érkezik értesítés, a gyereknek és minden barátjának is. Magán a napon a következő történik.
+
+Érvénytelenné válik a barátságokkal szerzett POEN, barátságonként 500, amelyeknél a bejegyzés végrehajtásra került. A harminc ilyen barátsággal rendelkező gyerek 15.000 POEN-t veszít. A leírás a másik oldalt is érinti: mindegyik barátnál 500 íródik le azért a barátságért, és ezért nekik is megy értesítés. A felbontáshoz hasonlóan a nyilvántartás mínuszba mehet, és ez nem tartozás.
+
+A barátságok törlődnek. Helyüket a megerősítési lánc veszi át.
+
+A szülők megerősítik a gyereket a megerősítési láncban, fejenként egy megerősítéssel, illetve eggyel, ha mindketten ugyanabban a láncban vannak. A fiók ezzel nagykorúvá válik és teljes hozzáférést kap.
+
+A többi érintetlen marad: a POEN, amelyet a gyereknek átírtál, a Piacon folytatott cseréből származó POEN, a hirdetések és az előzmények megmaradnak.
+
+---
+
+### faq.deca.pitanje-95.pitanje
+
+**sr**
+
+Kako da obrišem detetov nalog?
+
+**en**
+
+How do I delete my child's account?
+
+**ru**
+
+Как удалить аккаунт ребёнка?
+
+**hr**
+
+Kako da obrišem djetetov račun?
+
+**hu**
+
+Hogyan törlöm a gyerekem fiókját?
+
+---
+
+### faq.deca.pitanje-95.odgovor
+
+**sr**
+
+Nalog deteta možeš obrisati u svakom trenutku iz svog naloga.
+
+Brisanje deluje isto kao raskid prijateljstva, samo odjednom za sva. Svakom prijatelju obrisanog naloga otpisuje se po 500 POEN za to prijateljstvo. Kao i pri raskidu, njihov zapis sme u minus i to nije dug.
+
+Ako obrišeš sopstveni nalog, a dete nema upisanog drugog roditelja, briše se i detetov nalog, sa istom posledicom po njegove prijatelje. Ako drugi roditelj postoji, detetov nalog ostaje i vezan je za njega.
+
+Ako ti je stigla poruka o nalogu koji nisi otvorio i dete nije tvoje, u toj poruci imaš dve radnje koje ne traže prijavu na platformu: da označiš da to nije tvoje dete i da nalog obrišeš. Označavanje bez brisanja ostavlja nalog da i dalje koristi tvoju adresu do isteka roka, pa je brisanje sigurnije.
+
+Nalog koji niko ne preuzme briše se sam posle četrnaest dana.
+
+Podrobnije o svemu ovome piše Pravilnik o učešću dece, na stranici Pravilnik.
+
+**en**
+
+You can delete the child's account at any moment from your own account.
+
+Deletion works like ending a friendship, only for all of them at once. Every friend of the deleted account has 500 POEN written off for that friendship. As with ending a friendship, their ledger may go below zero and that is not a debt.
+
+If you delete your own account and the child has no second parent recorded, the child's account is deleted too, with the same consequence for their friends. If a second parent exists, the child's account remains and is tied to them.
+
+If a message reached you about an account you did not open and the child is not yours, that message gives you two actions that do not require signing in to the platform: to mark that this is not your child, and to delete the account. Marking without deleting leaves the account using your address until the deadline runs out, so deleting is safer.
+
+An account no one takes over is deleted on its own after fourteen days.
+
+All of this is set out in more detail in the Rules on the participation of children, on the Rulebook page.
+
+**ru**
+
+Аккаунт ребёнка можно удалить в любой момент из своего аккаунта.
+
+Удаление действует так же, как расторжение дружбы, только сразу для всех. Каждому другу удалённого аккаунта списывается по 500 ПОЕН за эту дружбу. Как и при расторжении, их запись может уйти в минус, и это не долг.
+
+Если ты удалишь собственный аккаунт, а у ребёнка не записан второй родитель, удаляется и аккаунт ребёнка, с теми же последствиями для его друзей. Если второй родитель есть, аккаунт ребёнка остаётся и привязан к нему.
+
+Если тебе пришло письмо об аккаунте, который ты не открывал, и ребёнок не твой, в этом письме есть два действия, не требующие входа на платформу: отметить, что это не твой ребёнок, и удалить аккаунт. Отметка без удаления оставляет аккаунт использовать твой адрес до истечения срока, поэтому удаление надёжнее.
+
+Аккаунт, который никто не принял, удаляется сам через четырнадцать дней.
+
+Подробнее обо всём этом сказано в Правилах об участии детей, на странице «Правила».
+
+**hr**
+
+Račun djeteta možeš obrisati u svakom trenutku iz svog računa.
+
+Brisanje djeluje isto kao raskid prijateljstva, samo odjednom za sva. Svakom prijatelju obrisanog računa otpisuje se po 500 POEN za to prijateljstvo. Kao i pri raskidu, njihov zapis smije u minus i to nije dug.
+
+Ako obrišeš vlastiti račun, a dijete nema upisanog drugog roditelja, briše se i djetetov račun, s istom posljedicom za njegove prijatelje. Ako drugi roditelj postoji, djetetov račun ostaje i vezan je za njega.
+
+Ako ti je stigla poruka o računu koji nisi otvorio i dijete nije tvoje, u toj poruci imaš dvije radnje koje ne traže prijavu na platformu: da označiš da to nije tvoje dijete i da račun obrišeš. Označavanje bez brisanja ostavlja račun da i dalje koristi tvoju adresu do isteka roka, pa je brisanje sigurnije.
+
+Račun koji nitko ne preuzme briše se sam nakon četrnaest dana.
+
+Podrobnije o svemu ovome piše Pravilnik o sudjelovanju djece, na stranici Pravilnik.
+
+**hu**
+
+A gyerek fiókját bármikor törölheted a saját fiókodból.
+
+A törlés ugyanúgy hat, mint a barátság felbontása, csak egyszerre mindre. A törölt fiók minden barátjánál 500 POEN íródik le azért a barátságért. A felbontáshoz hasonlóan az ő nyilvántartásuk mínuszba mehet, és ez nem tartozás.
+
+Ha a saját fiókodat törlöd, és a gyereknek nincs bejegyzett második szülője, a gyerek fiókja is törlődik, ugyanazzal a következménnyel a barátaira nézve. Ha van második szülő, a gyerek fiókja megmarad, és hozzá kötődik.
+
+Ha olyan fiókról kaptál üzenetet, amelyet nem te nyitottál, és a gyerek nem a tiéd, abban az üzenetben két olyan művelet áll rendelkezésedre, amely nem igényel belépést a platformra: jelezni, hogy nem a te gyereked, és törölni a fiókot. A jelzés törlés nélkül meghagyja, hogy a fiók a határidő lejártáig továbbra is a te címedet használja, ezért a törlés biztonságosabb.
+
+Az a fiók, amelyet senki nem vesz át, tizennégy nap múlva magától törlődik.
+
+Minderről részletesebben a gyermekek részvételéről szóló szabályzat rendelkezik, a Szabályzat oldalon.
 
 ---
 
