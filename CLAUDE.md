@@ -1,4 +1,4 @@
-# KOLO Platforma — akti v4.3.0 (Statut 4.1)
+# KOLO Platforma — akti v4.3.1 (Statut 4.1)
 
 ## ⚠️ Deploy i grane (OBAVEZNO poštovati)
 Vercel **Production Branch = `production`**. Podela okruženja:
@@ -146,7 +146,7 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
-> **CLAUDE.md sinhronizovan sa kodom do commita `37e9455` (2026-08-18).** Šta je uneto u ovom prolazu: **prijava imejlom ILI pseudonimom + ograničenje pokušaja**, **plaćanje donacija** (NestPay + IPS QR — nikad nije bilo opisano), **datum rođenja se kuca + uputstvo roditelju koji nije član**, 🔴 **`bazniUrl()` — mejlovi sa testa su vodili na `ekolo.rs`**, cron `deca-punoletstvo`, admin tab **Prijave**, prava lista testova i biblioteke, oznaka na oglasu „**Nov član**" umesto „BEZ POTVRDE", i repoint zaostalih referenci na set **4.3.0** i `dokumentacija 4.1/`. Poslednja dopuna (18.08): FAQ sekcija „Deca i roditelji" (pitanja 85–95, cela vezana za prekidač modula) i pravilo da **akordeon FAQ-a ne renderuje markdown**.
+> **CLAUDE.md sinhronizovan sa kodom do commita `4dab95d` (2026-08-18).** Šta je uneto u ovom prolazu: **prijava imejlom ILI pseudonimom + ograničenje pokušaja**, **plaćanje donacija** (NestPay + IPS QR — nikad nije bilo opisano), **datum rođenja se kuca + uputstvo roditelju koji nije član**, 🔴 **`bazniUrl()` — mejlovi sa testa su vodili na `ekolo.rs`**, cron `deca-punoletstvo`, admin tab **Prijave**, prava lista testova i biblioteke, oznaka na oglasu „**Nov član**" umesto „BEZ POTVRDE", i repoint zaostalih referenci na set **4.3.x** i `dokumentacija 4.1/`. Poslednje dopune (18.08): FAQ sekcija „Deca i roditelji" (pitanja 85–95, cela vezana za prekidač modula), pravilo da **akordeon FAQ-a ne renderuje markdown**, prepis FAQ sekcije „Uključivanje" sa dve ispravke koje kod obara, i bump seta na **4.3.1** (socijalni program traži indeks 10%, ne 100%).
 > **Sažeta i zadržana samo istina koja i dalje važi:** opis Modula Deca iz prve verzije (14–16.08) je **obrisan** i sveden na pododeljak „Osnova iz prve verzije koja i dalje važi" ispod sekcije „Modul Deca — unapređeni model" — druga verzija je oborila nosivo pravilo prve (POEN u dečjem prostoru), pa bi dva opisa jedan pored drugog protivrečila. Raniji prolaz (do `120d578`, 2026-06-16): Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, „emisija" → „evidencija doprinosa".
 
 ## Status usklađenosti (24.05.2026 → 02.06.2026)
@@ -314,6 +314,12 @@ Dva dana rada isključivo nad `messages/*.json` i FAQ podacima — **bez ijedne 
 - **Prepisane cele FAQ sekcije** „Za početnike" i „POEN i ZRNO" (5 jezika).
 - 🟡 **Ispravke koje su bile stvarne greške, ne stil:** FAQ 42 je tražio **susret licem u lice** kao uslov potvrde — dokaz stvarnosti čl. 1 kaže neposredno lično **poznavanje**, bez fizičkog prisustva, pa je FAQ bio stroži od akta; FAQ 44 je govorio da potvrdom „**jemčiš**" (reč ukinuta u 4.2.1, i zamenjena tvrdnjom o postojanju, ne parafrazom); FAQ 81 i 83 su obećavali 1.000 POEN za prvi oglas **ne pominjući odobrenje Fondacije** za nalog bez potvrde; ukinuta terminologija je preživela u **en/ru/hu** copy-ju i izbačena posebnim prolazom.
 - **Pouka koja se ponavlja:** brana u `copy-ukinuto.test.ts` hvata samo obrasce koje joj neko upiše — pri ukidanju izraza pokriti **sve imenice i sve jezike** koje ukinuta reč nosi uz sebe.
+
+**Nastavak 18.08 — FAQ sekcija „Uključivanje" prepisana (5 jezika).** Šest pitanja (84, 7, 8, 9, 10, 75); **pitanje 6 nije dirano** jer je to odgovor „ne" koji se prikazuje dok je Modul Deca ugašen i mora da ostane istinit u tom stanju. Sadržinski novo: 84 **upućuje** na sekciju „Deca i roditelji" umesto da je ponavlja, 7 je razloženo na četiri koraka i **prvi put pominje 500 POEN prvom nadzorniku**, 75 nabraja svih pet jezika i oba pisma.
+- 🔴 **Dve tvrdnje iz dostavljenog teksta su ISPRAVLJENE jer ih kod obara** (obe vredi znati, jer se lako pogađaju pogrešno):
+  1. „Promena pseudonima je zakazana i stupa na snagu u ponoć" — **nije**: `POST /api/profil/pseudonim` menja ime **odmah, u jednoj transakciji**. U ponoć se izvršavaju grupne operacije ZRNA i delegacija, ne pseudonim.
+  2. „Posle promene ranije podeljeni linkovi ka profilu ne vode nikuda" — **vode**: `PseudonimIstorija` čuva napušteno ime, `razresiKorisnikaIzAdrese` ga razrešava na isti nalog, a `proveriZauzece` sprečava da ga uzme neko drugi. Oba pravila postoje baš zato da podeljen link ne bi tiho odveo na DRUGU osobu.
+- Uz to je posledica lažne potvrde svedena na ono što akt i kod stvarno propisuju: **poništenje i gubitak 1.000 POEN** (uz nadoknadu ako su potrošeni) i mere iz Uslova do isključenja. 🔴 **Gubitak prava na dalje potvrđivanje ne postoji** — ni u čl. 21 Pravilnika o dokazu stvarnosti ni u kodu; ne upisivati ga u copy.
 
 ### Pristanak na akte se NE traži (prekidač, 2026-08-11)
 `PRISTANAK_NA_AKTE_TRAZI_SE = false` u `src/lib/moduli.ts`. Odluka vlasnika: akti 4.2.1 su punovažni danom donošenja, sistem još nije zvanično u radu, a ekran je smetao ljudima koji prvi put dolaze. Provera je na **jednom mestu** — `pristanakStatus()` u `src/lib/politika.ts` — pa i shell i sam ekran ćute; `/politika-prihvati` propušta dalje.
@@ -662,7 +668,7 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 ### Moduli sistema (Pravilnik Glava VIII, čl. 53–59)
 - Glava VIII = **Moduli**: kolektivni oblici (**Krug**, **Zadruga** — registrovano pravno lice po Zakonu o zadrugama), socijalni programi, **Modul Deca** (maloletnici, poseban režim < 15, bez ZRNA/glasanja do 18), internacionalizacija.
 - Aktiviranje/deaktiviranje: Fondacija u Fazi 1, Gornje Kolo u Fazi 2 (čl. 54).
-- 🔴 Zadruga nije implementirana (odluka vlasnika: moduli nisu fokus). **Modul Deca JESTE implementiran** i stoji iza prekidača `MODUL_DECA_AKTIVAN`, uz usvojen Pravilnik o učešću dece (4.3.0) — vidi sekciju „Modul Deca — unapređeni model". Krug postoji ali je ugašen prekidačem; `KrugProjekat` je samo aktivnost Kruga (PRIKUPLJANJE/REDISTRIBUCIJA).
+- 🔴 Zadruga nije implementirana (odluka vlasnika: moduli nisu fokus). **Modul Deca JESTE implementiran** i stoji iza prekidača `MODUL_DECA_AKTIVAN`, uz usvojen Pravilnik o učešću dece (4.3.0, sada 4.3.1) — vidi sekciju „Modul Deca — unapređeni model". Krug postoji ali je ugašen prekidačem; `KrugProjekat` je samo aktivnost Kruga (PRIKUPLJANJE/REDISTRIBUCIJA).
 - 🟡 Opis Glave VIII iznad („poseban režim < 15") potiče iz Pravilnika o KOLO sistemu i **nije sproveden u kodu** — Pravilnik o učešću dece uzrasne grupe ne poznaje, uzrast je **7–18**.
 
 ## Konvencije koda
@@ -691,7 +697,7 @@ src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
 messages/         — i18n prevodi (next-intl)
 __tests__/        — Vitest (protokol/, integracija/, auth/, email/, placanje/ + korenski)
-dokumentacija 4.1/ — KANONSKA dokumentacija (16 akata v4.3.0, statut 4.1) + en/ ru/ hr/ hu/
+dokumentacija 4.1/ — KANONSKA dokumentacija (16 akata v4.3.1, statut 4.1) + en/ ru/ hr/ hu/
 dokumentacija 4.0/ · 3.9/ · 3.8/ · nova dokumentacija/ — istorija, ništa se odatle ne rendruje
 docs/             — interne radne beleške (npr. `pravilnik-modul-deca.md`, mehanika Modula Deca) — nije normativa
 ```
@@ -894,8 +900,8 @@ Do sada nije bilo opisano u ovom fajlu. Dva toka, oba **isključivo za donacije 
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
 ### Javne pravne stranice (rendruju iz `dokumentacija 4.1/`, prevodi iz `dokumentacija 4.1/{en,ru,hr,hu}/`)
-- Loader `src/lib/pravni-dokument.ts`, `BAZA = "dokumentacija 4.1"`. `/pravilnik` → `Pravilnik_4_3_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske**, **`ucesce-dece`** — 16. akt, od 2026-08-17); `/privatnost` → `politika_4_3_0.md`; `/uslovi` → `uslovi_koriscenja_4_3_0.md`; `/statut` → **`statut_4_1_0.md`** (sopstvena numeracija, ne diže se sa setom); `/dpia` → `DPIA_4_3_0.md`; `/radnje-obrade` → `radnje_obrade_4_3_0.md`; `/whitepaper` → `whitepaper_4_3_0.md`; `/rizici` → `rizici_4_3_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. Prevod se bira po locale-u, tih fallback na srpski ako fajl nedostaje.
-- ✅ **Verzijske labele** — prikazuju 4.3.0 (statut 4.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
+- Loader `src/lib/pravni-dokument.ts`, `BAZA = "dokumentacija 4.1"`. `/pravilnik` → `Pravilnik_4_3_1.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske**, **`ucesce-dece`** — 16. akt, od 2026-08-17); `/privatnost` → `politika_4_3_1.md`; `/uslovi` → `uslovi_koriscenja_4_3_1.md`; `/statut` → **`statut_4_1_0.md`** (sopstvena numeracija, ne diže se sa setom); `/dpia` → `DPIA_4_3_1.md`; `/radnje-obrade` → `radnje_obrade_4_3_1.md`; `/whitepaper` → `whitepaper_4_3_1.md`; `/rizici` → `rizici_4_3_1.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. Prevod se bira po locale-u, tih fallback na srpski ako fajl nedostaje.
+- ✅ **Verzijske labele** — prikazuju 4.3.1 (statut 4.1); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
 ### Admin panel
@@ -993,13 +999,13 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 ## Testovi
 - **Vitest** (`npm test`, `npm run test:watch`). Config `vitest.config.ts` (`@/` → `src/`).
 - **`__tests__/protokol/`** — `donacija`, `osnivacki`, `osnivacki-koraci`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `programi-revizija`, `operativni`, `glasanje`, `dokaz-stvarnosti`, `zona`, `graf`, `izuzetak-prva-generacija`, `oznaka-verifikatora`, `nadzor-i-nadoknada`, `doprinos-sadrzaju`, `doprinos-razmeni`, `prijava-razmene`, `prijateljstva-poen`, `obracunski-dan`, `udaljenost`, `lat2cyr`.
-- **Koren `__tests__/`** — `pravni-dokumenti` (integritet kanonskog seta 4.3.0 — 16 akata × 5 jezika), `copy-ukinuto` (brane protiv povratka ukinute terminologije), `faq-paritet`, `prevodi-parametri`, `moderacija`, `naselje`, `pseudonim`, `levak`, `deca-pravila`, `prijava-poruke`.
+- **Koren `__tests__/`** — `pravni-dokumenti` (integritet kanonskog seta 4.3.1 — 16 akata × 5 jezika), `copy-ukinuto` (brane protiv povratka ukinute terminologije), `faq-paritet`, `prevodi-parametri`, `moderacija`, `naselje`, `pseudonim`, `levak`, `deca-pravila`, `prijava-poruke`.
 - **Podfolderi** — `auth/dozvole`, `email/{email,sistemsko-obavestenje}`, `placanje/{nestpay,ips-qr}`, i testovi **nad pravom bazom**: `integracija/deca-tok`, `integracija/prijava-poruke-tok`.
 
 ## Reference
-- **`dokumentacija 4.1/`** — kanonski set (**16 akata, 4.3.0**, statut **4.1**), prevodi u `en/ ru/ hr/ hu/`. Vidi tabelu i istoriju verzija na vrhu fajla.
+- **`dokumentacija 4.1/`** — kanonski set (**16 akata, 4.3.1**, statut **4.1**), prevodi u `en/ ru/ hr/ hu/`. Vidi tabelu i istoriju verzija na vrhu fajla.
 - `dokumentacija 4.0/`, `dokumentacija 3.9/`, `dokumentacija 3.8/`, `nova dokumentacija/` — **istorija**, ništa se odatle ne rendruje.
-- `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija, plan ulaza kroz razmenu, mehanika Modula Deca u `pravilnik-modul-deca.md`) — **nije normativa**. 🔴 Normativni tekst o deci živi ISKLJUČIVO u `dokumentacija 4.1/ucesce_dece_4_3_0.md` — dva izvora istine su namerno izbegnuta.
+- `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija, plan ulaza kroz razmenu, mehanika Modula Deca u `pravilnik-modul-deca.md`) — **nije normativa**. 🔴 Normativni tekst o deci živi ISKLJUČIVO u `dokumentacija 4.1/ucesce_dece_4_3_1.md` — dva izvora istine su namerno izbegnuta.
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
 ## Nezavršeni TODO / preostali GAP-ovi (mapirano na v3.7.5/3.7.4/3.7.3/3.7.2)
