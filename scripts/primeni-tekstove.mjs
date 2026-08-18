@@ -170,7 +170,11 @@ for (let [kljuc, tekst] of Object.entries(nov)) {
     continue;
   }
 
-  const pao = ZABRANJENO[jezik].find(([obrazac]) => obrazac.test(tekst));
+  // Placeholderi se izuzimaju iz provere terminologije: `{verifikator}` i
+  // `{verifikovani}` su imena koja kod traži po slovu — nisu copy. Isti izuzetak
+  // ima i `__tests__/copy-ukinuto.test.ts`; bez njega se dobra rečenica odbija.
+  const bezPlaceholdera = tekst.replace(/\{[^{}]*\}/g, "");
+  const pao = ZABRANJENO[jezik].find(([obrazac]) => obrazac.test(bezPlaceholdera));
   if (pao) {
     greske.push(`${kljuc} — ${pao[1]}\n      "${tekst.slice(0, 100)}"`);
     continue;
