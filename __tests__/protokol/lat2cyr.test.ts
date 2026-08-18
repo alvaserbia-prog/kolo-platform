@@ -125,6 +125,14 @@ describe("lat2cyr — zaštićeni tokeni", () => {
       "књига The End of Money and the Future of Civilization",
     );
   });
+  it("imena proizvoda ostaju latinica", () => {
+    // Ove ne hvata provera „mešanih" reči — bez slova q/w/x/y rezultat je čista
+    // ćirilica, pa polomljen izraz izgleda kao običan tekst („Цлоудфларе Р2").
+    expect(lat2cyr("plaćanje uz 3D Secure")).toBe("плаћање уз 3D Secure");
+    expect(lat2cyr("skladište je Cloudflare R2")).toBe("складиште је Cloudflare R2");
+    // IPS, UO i „model" su domaći i ISPRAVNO idu u ćirilicu — ne dodavati ih.
+    expect(lat2cyr("IPS uplata, model 97, odluka UO")).toBe("ИПС уплата, модел 97, одлука УО");
+  });
   it("duži token iz bele liste pobeđuje kraći koji mu je početak", () => {
     // Bez sortiranja po dužini „AGPL-3.0“ pojede početak i ostavi „онлy“,
     // a „Google“ ostavi „Аналyтицс“.

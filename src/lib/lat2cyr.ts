@@ -39,6 +39,9 @@ const BELA_LISTA = [
   "Innovation in Exchange and Finance",
   "The End of Money and the Future of Civilization",
   "GNU Affero General Public License", "Google Analytics",
+  // Imena proizvoda: „3Д Сецуре" i „Цлоудфларе Р2" su izlazili na ekranu.
+  // Sestre po istom pravilu (Vercel, Neon, Prisma, NestPay) su gore.
+  "3D Secure", "Cloudflare R2", "Cloudflare",
   // Duži token MORA biti maskiran pre kraćeg koji je njegov početak, inače
   // „AGPL-3.0" pojede početak i ostavi „онлy", a „Google" ostavi „Аналyтицс".
   // Sortiranje to rešava jednom za svagda — red unosa iznad je onda slobodan.
