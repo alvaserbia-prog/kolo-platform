@@ -343,9 +343,45 @@
     <div class="meta">
       <span>18. avgust 2026</span>
       <span>Osnov: Pravilnik o učešću dece 4.3.1</span>
-      <span>Modul Deca — iza prekidača <code>MODUL_DECA_AKTIVAN</code></span>
+      <span>Akti: 4.3.1 → <strong>4.3.2</strong></span>
+      <span>Stanje: sprovedeno, čeka spisak škola</span>
     </div>
   </header>
+
+
+  <!-- ============ STANJE ============ -->
+  <section>
+    <h2><span class="num">✓</span> Stanje sprovođenja — 18. avgust 2026</h2>
+
+    <p>Sve iz ovog plana je napravljeno osim jedne stvari, i ta jedna stvar drži ceo mehanizam u mirovanju.</p>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Posao</th><th>Stanje</th></tr></thead>
+        <tbody>
+          <tr><td>Pravila, šifarnik, uvozna skripta</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Izbor škole na profilu deteta, rok od 30 dana</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Zatvoren prikaz maloletnog naloga, svih šest staza</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Veza roditelj–dete u oba smera</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Nacionalne liste, stranica škole, lista u školi</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Kartica na dečjoj početnoj</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Brisanje škole pri punoletstvu, gašenju i resetu naloga</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Prevodi na pet jezika</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td>Izmene akata, set podignut na 4.3.2</td><td><span class="chip usvojeno">gotovo</span></td></tr>
+          <tr><td><strong>Spisak škola sa brojem upisanih učenika</strong></td><td><span class="chip rizik">čeka</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="lbl">Šta tačno nedostaje</span>
+      <p>Potreban je izvoz <strong>ustanova</strong> iz Jedinstvenog informacionog sistema prosvete: naziv škole, mesto, tip (osnovna/srednja) i broj upisanih učenika. Dostavljeni skup podataka Republičkog zavoda za statistiku sadrži <strong>broj učenika po opštini</strong> — 205 teritorija, dvanaest školskih godina, po razredu i polu — ali <strong>nijedno ime škole</strong>. Iz njega se šifarnik ne može napraviti.</p>
+      <p>Uvoz je jedna komanda: <code>node scripts/uvezi-skole.mjs izvoz.csv</code>. Skripta sama prepoznaje uobičajene nazive kolona, odbija uvoz ako se neko mesto ne razrešava u spisak naselja, i ispiše koja mesta fale.</p>
+      <p><strong>Broj upisanih učenika je odvojiv od ostatka.</strong> Ako stigne spisak bez njega, lista po broju dece radi u celosti, a procentualna stoji sa crticom dok brojevi ne dođu — što je i predviđeno, jer se imenilac nikad ne procenjuje.</p>
+    </div>
+
+    <p>Dok je spisak prazan, prikaz škola se ne renderuje, nijedan ekran ne puca i <strong>nijedan podatak o detetu se ne obrađuje</strong>. To je i razlog zašto su akti mogli da odu pre podataka, a ne obrnuto.</p>
+  </section>
 
   <!-- ============ 00 ============ -->
   <section>
