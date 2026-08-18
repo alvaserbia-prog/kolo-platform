@@ -824,63 +824,63 @@ Az adományok adatait az Alapítvány a pénzügyi beszámolásra vonatkozó sza
     pitanja: [
       {
         id: 26,
-        pitanje: `Ki felügyeli a KOLO-t?`,
-        odgovor: `Jelenleg (1. szakasz) minden döntést a KOLO Alapítvány hoz meg az Igazgatóságon keresztül.
+        pitanje: `Ki irányítja a KOLO-t?`,
+        odgovor: `Jelenleg (1. fázis) minden döntést a KOLO Alapítvány hoz meg az Igazgatóságon keresztül.
 
-Amikor a rögzített POEN összmennyisége eléri az 1 000 000-t, aktiválódik a Felső Kolo — az összes ZRNO-tartó irányító testülete, amely a kulcsfontosságú rendszerkérdésekről négyzetes szavazással dönt.
+Amint a rögzített POEN összmennyisége eléri az 1.000.000-t, aktiválódik a Felső Kolo — az összes ZRNO-tartó irányító testülete, amely a kulcsfontosságú rendszerkérdésekről négyzetes szavazással dönt.
 
-Az Alapítvány ettől a pillanattól kezdve szuverén szervből végrehajtó szervvé válik — a Felső Kolo döntéseit hajtja végre, nem maga hozza meg őket.`,
+Az Alapítvány ettől a pillanattól szuverén testületből végrehajtó testületté válik — végrehajtja a Felső Kolo döntéseit, nem maga hozza őket.`,
       },
       {
         id: 27,
-        pitanje: `Mi akadályozza meg az adminisztrátorok vagy az alapítók visszaéléseit?`,
-        odgovor: `Több szerkezeti védelem működik párhuzamosan.
+        pitanje: `Mi akadályozza meg az adminisztrátor vagy az alapítók visszaélését?`,
+        odgovor: `Több szerkezeti védelem működik egyszerre.
 
-A nulla összegű elv — minden POEN-bejegyzés növeli a Protokoll mínuszát, senki sem hozhat létre POEN-t a semmiből.
+A nulla összegű elv — a POEN minden rögzítése mélyíti a Protokoll mínuszát, így senki nem teremthet POEN-t a semmiből.
 
-A programok napi korlátja — az összes program együttes napi rögzítése nem haladhatja meg a forgalom 10%-át.
+A programok napi kerete — a szociális programok és a működési hozzájárulás együtt naponta nem rögzíthet többet a rendszerben lévő POEN teljes mennyiségének 10%-ánál.
 
-Determinisztikus algoritmikus bejegyzések — a Protokollnak nincsenek mérlegelési döntései, minden a kódban van.
+Determinisztikus bejegyzések — a Protokollnak nincsenek mérlegelési döntései: minden a kódban van, előre közzétett szabályok szerint, a kód pedig nyilvános, és bárki ellenőrizheti.
 
-Átláthatóság — a hozzájárulások nyilvántartása álnevesített és megváltoztathatatlan; a rendes tagok látják (státusz szerint fokozatosan), míg a nem regisztráltak csak az összesített adatokat.
+Átláthatóság — a hozzájárulások nyilvántartása álneves, a bejegyzések előzményeit nem írjuk át (minden helyesbítés új bejegyzésként kerül be), a rendes tagok látják, a nem regisztráltak pedig csak összesített számokat.
 
-Végül pedig a Felső Kolo aktiválása, amely a hatáskört a tagokra ruházza át.`,
+És végül a Felső Kolo aktiválása — a hatáskör átszáll a tagokra.`,
       },
       {
         id: 28,
         pitanje: `Mi a Felső Kolo, és mikor aktiválódik?`,
-        odgovor: `A Felső Kolo az összes ZRNO-tartó irányító testülete — a rendszerrel kapcsolatos döntéshozatal legfelső szerve. Nem választott közgyűlés, hanem dinamikus összetételű testület: azok alkotják, akiknek az adott pillanatban ZRNO-juk van.
+        odgovor: `A Felső Kolo az összes ZRNO-tartó irányító testülete — a rendszer legfőbb döntéshozó szerve. Nem választott közgyűlés, hanem dinamikus összetétel: azok alkotják, akiknek az adott pillanatban van ZRNO-juk.
 
-Automatikusan aktiválódik, amikor a Protokoll mínusza eléri a −1 000 000 POEN-t (jelezve, hogy a rendszer kellően aktív, és a tagok jelentős közös felelősséget viselnek).
+Automatikusan aktiválódik, amint a rögzített POEN összmennyisége eléri az 1.000.000-t — a Protokoll nyilvántartásában ez −1.000.000 egyenleg —, ami azt jelzi, hogy a rendszer elég aktív, és a tagok jelentős kollektív felelősséget viselnek.
 
-Addig minden döntést az Alapítvány hoz; azt követően a kulcsfontosságú rendszerdöntéseket (a Szabályzat módosítása, új Programok, Programok felfüggesztése) a Felső Kolo hozza meg, ZRNO-val történő négyzetes szavazással.`,
+Ez előtt minden döntést az Alapítvány hoz; ezt követően a kulcsfontosságú rendszerdöntéseket (a Szabályzat módosítása, új programok, egy program felfüggesztése) a Felső Kolo hozza, négyzetes szavazással.`,
       },
       {
         id: 29,
         pitanje: `Mi az a négyzetes szavazás?`,
-        odgovor: `Ez olyan szavazási mód, amelynél a szavazóerő a ZRNO-mennyiség négyzetgyökeként nő. Ha 1 ZRNO-d van — 1 szavazat, 100 ZRNO — 10 szavazat, 10 000 ZRNO — 100 szavazat.
+        odgovor: `Olyan szavazási mód, amelyben a szavazóerő a ZRNO-k számának négyzetgyökeként nő: 1 ZRNO — 1 szavazat, 100 ZRNO — 10 szavazat, 10.000 ZRNO — 100 szavazat.
 
-A cél az, hogy vagyonos egyének ne „vásárolhassanak meg" egy döntést pusztán azzal, hogy sok ZRNO-juk van — a tényleges befolyás lassan nő, ami a hatalom összpontosítása helyett a szélesebb részvételt ösztönzi.`,
+A cél, hogy senki ne dönthesse el a kérdést pusztán a ZRNO mennyiségével: a befolyás sokkal lassabban nő, mint a ZRNO száma, így a döntést inkább a részvétel szélessége viszi el, mint a hatalom koncentrációja.`,
       },
       {
         id: 30,
-        pitanje: `Mi az Alapítvány Védelmi vétója?`,
-        odgovor: `Amíg az Alapítvány nem pénzügyileg önálló, megtagadhatja a Felső Kolo olyan döntésének végrehajtását, amely veszélyeztetné a működési és pénzügyi fenntarthatóságát — mindenekelőtt az olyan, forráselköltésről szóló döntésekét (a közös beszerzéseket is beleértve), amelyek aláásnák az Alapítvány képességét az alapköltségek fedezésére és a rendszer fenntartására.
+        pitanje: `Mi az Alapítvány védelmi vétója?`,
+        odgovor: `Amíg az Alapítvány nem pénzügyileg önálló, megtagadhatja a Felső Kolo olyan döntésének végrehajtását, amely veszélyeztetné a működési és pénzügyi fenntarthatóságát — mindenekelőtt a források elköltéséről szóló döntésekét (a közösségi beszerzéseket is beleértve), amelyek aláásnák az Alapítvány képességét az alapköltségek fedezésére és a rendszer fenntartására.
 
-A vétó nem mérlegelési jogkör — konkrét fenntarthatósági fenyegetésre hivatkozva meg kell indokolni; az indokolás nélküli vétó maga a visszaélés. Ez nem politikai ellenőrzés, hanem az Alapítvány folytonosságának és fenntarthatóságának védelme.
+A vétó nem mérlegelési jogkör: konkrét fenntarthatósági fenyegetésre hivatkozva meg kell indokolni, az indokolás nélküli vétó pedig önmagában visszaélés. Ez nem politikai ellenőrzés, hanem a rendszer folytonosságának védelme.
 
-A vétó véglegesen és egyirányúan megszűnik, amikor az Alapítvány eszközei elérik a pénzügyi önállóság küszöbét — az előző havi működési költség háromszorosát, amelyet a Felső Kolóról szóló Szabályzat állapít meg. Ekkor a fenntarthatóság már nincs veszélyben.`,
+A vétó véglegesen és egy irányban szűnik meg, amint az Alapítvány forrásai elérik a pénzügyi önállóság küszöbét — az előző havi működési költség háromszorosát, amelyet a Felső Koloról szóló szabályzat állapít meg.`,
       },
       {
         id: 72,
-        pitanje: `Pontosan mit változtatnak a tagok a „teljes önkormányzásban", és mikor áll be ez?`,
-        odgovor: `Két különálló küszöb létezik, és könnyű őket összekeverni.
+        pitanje: `Mit változtatnak pontosan a tagok a „teljes önigazgatásban", és mikor kezdődik ez?`,
+        odgovor: `Két külön küszöb van, és könnyű összekeverni őket.
 
-Első küszöb — a Felső Kolo aktiválása. Amikor a rendszerben rögzített POEN összmennyisége eléri az 1 000 000-t (ami a Protokoll nyilvántartásában a −1 000 000 állapotnak felel meg), automatikusan megnyílik a ZRNO bejegyzése, és létrejön a Felső Kolo — az összes ZRNO-tartó irányító testülete. Ettől kezdve a tagok aktív ZRNO-val, négyzetes szavazással döntenek a rendszer szabályairól: a Szabályzat módosításairól, a Programokról és más, a közjót érintő kérdésekről. Az Alapítvány szuverén szervből végrehajtó és szolgáltató szervvé válik — végrehajtja a döntéseket, nem maga hozza meg őket.
+Az első küszöb — a Felső Kolo aktiválása. Amint a rendszerben rögzített POEN összmennyisége eléri az 1.000.000-t (ami a Protokoll nyilvántartásában −1.000.000 egyenlegnek felel meg), automatikusan megnyílik a ZRNO bejegyzése, és létrejön a Felső Kolo — az összes ZRNO-tartó irányító testülete. Ettől a pillanattól a tagok négyzetes szavazással döntenek a rendszer szabályairól: a Szabályzat módosításairól, a programokról és a közös jót érintő egyéb kérdésekről. Az Alapítvány szuverén testületből végrehajtó és szolgáltató testületté válik — végrehajtja a döntéseket, nem maga hozza őket.
 
-Második küszöb — a védelmi vétó megszűnése. Amíg az Alapítvány nem pénzügyileg önálló, védelmi vétója van: megtagadhatja a Felső Kolo olyan döntésének végrehajtását, amely veszélyeztetné a működési fenntarthatóságát — mindenekelőtt a forráselköltésről szóló döntésekét (például közös beszerzések), mielőtt a fenntarthatóság biztosított volna (a vétót meg kell indokolni, nem önkényes). Ez a vétó véglegesen és egyirányúan csak akkor szűnik meg, amikor az Alapítvány pénzeszközei elérik a pénzügyi önállóság küszöbét — az előző havi működési költség háromszorosát, amelyet a Felső Kolóról szóló Szabályzat állapít meg.
+A második küszöb — a védelmi vétó megszűnése. Amíg az Alapítvány nem pénzügyileg önálló, védelmi vétója van: megtagadhatja a Felső Kolo olyan döntésének végrehajtását, amely veszélyeztetné a működési fenntarthatóságát — mindenekelőtt a források elköltéséről szóló döntésekét, például a közösségi beszerzésekét, mielőtt a fenntarthatóság biztosított volna. A vétót meg kell indokolni, nem önkényes. Véglegesen és egy irányban csak akkor szűnik meg, ha az Alapítvány forrásai elérik a pénzügyi önállóság küszöbét — az előző havi működési költség háromszorosát, amelyet a Felső Koloról szóló szabályzat állapít meg.
 
-A Felső Kolo aktiválásáig (1. szakasz) minden döntést az Alapítvány hoz meg az Igazgatóságon keresztül.`,
+A Felső Kolo aktiválásáig (1. fázis) minden döntést az Alapítvány hoz az Igazgatóságon keresztül.`,
       },
     ],
   },

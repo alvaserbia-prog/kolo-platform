@@ -809,67 +809,67 @@ The Foundation keeps the data on donations in accordance with financial reportin
   },
   {
     id: "zastite",
-    naslov: "Safeguards and Governance",
+    naslov: "Safeguards and governance",
     pitanja: [
       {
         id: 26,
         pitanje: `Who controls KOLO?`,
-        odgovor: `Currently (Phase 1), all decisions are made by the KOLO Foundation through its Board of Directors.
+        odgovor: `At present (Phase 1) all decisions are made by the KOLO Foundation through its Board of Directors.
 
-When the total number of recorded POEN reaches 1,000,000, the Upper Kolo is activated — the governing body of all ZRNO Holders, which decides on key systemic matters through quadratic voting.
+Once the total amount of POEN recorded reaches 1,000,000, the Upper Kolo is activated — the governing body of all ZRNO holders, which decides key system questions by quadratic voting.
 
-From that point the Foundation transitions from a sovereign to an executive body — it implements the decisions of the Upper Kolo rather than making them on its own.`,
+From that moment the Foundation moves from a sovereign to an executive body — it carries out the decisions of the Upper Kolo, it does not make them itself.`,
       },
       {
         id: 27,
-        pitanje: `What prevents abuse by admins or founders?`,
+        pitanje: `What prevents abuse by an administrator or a founder?`,
         odgovor: `Several structural safeguards work in parallel.
 
-The zero-sum principle — every recording of POEN increases the Protocol's minus; no one can create POEN from nothing.
+The zero-sum principle — every recording of POEN deepens the Protocol's minus, so no one can create POEN out of nothing.
 
-The programmes' daily recording limit — the total daily recording from all programmes together must not exceed 10% of circulation.
+The daily frame of the programmes — the social programmes and the operational contribution together may not record more than 10% of the total amount of POEN in the system per day.
 
-Deterministic algorithmic records — the Protocol has no discretionary decisions; everything is in the code.
+Deterministic recording — the Protocol has no discretionary decisions: everything is in the code, under rules published in advance, and the code is public for anyone to check.
 
-Transparency — the contribution ledger is pseudonymous and immutable; visible to full members (graded by status), while unregistered visitors see only aggregates.
+Transparency — the record of contributions is pseudonymous, the history of entries is not rewritten (every correction goes in as a new entry), it is visible to full members, and those who are not registered see only aggregate figures.
 
-And finally, the activation of the Upper Kolo, which transfers governance authority to the members.`,
+And finally, the activation of the Upper Kolo — competence passes to the members.`,
       },
       {
         id: 28,
         pitanje: `What is the Upper Kolo and when is it activated?`,
-        odgovor: `The Upper Kolo is the governing body of all ZRNO Holders — the highest decision-making body for the system. It is not an elected assembly but a dynamic body: it comprises everyone who holds ZRNO at a given moment.
+        odgovor: `The Upper Kolo is the governing body of all ZRNO holders — the highest decision-making body for the system. It is not an assembly that is elected but a dynamic composition: it consists of everyone who holds ZRNO at a given moment.
 
-It is activated automatically when the Protocol's negative balance reaches −1,000,000 POEN (a sign that the system is sufficiently active and that members bear significant collective responsibility).
+It is activated automatically once the total amount of POEN recorded reaches 1,000,000 — in the Protocol's ledger that is a balance of −1,000,000 — which signals that the system is active enough and that the members carry significant collective responsibility.
 
-Before that, the Foundation makes all decisions; after that, key systemic decisions (amendments to the Rules, new Programmes, suspension of Programmes) are made by the Upper Kolo through quadratic ZRNO-weighted voting.`,
+Before that, all decisions are made by the Foundation; after it, key system decisions (amendments to the Rulebook, new programmes, suspension of a programme) are made by the Upper Kolo through quadratic voting.`,
       },
       {
         id: 29,
         pitanje: `What is quadratic voting?`,
-        odgovor: `It is a voting method where voting power grows as the square root of the number of ZRNO held. If you have 1 ZRNO — 1 vote, 100 ZRNO — 10 votes, 10,000 ZRNO — 100 votes.
+        odgovor: `It is a way of voting in which voting power grows as the square root of the number of ZRNO: 1 ZRNO — 1 vote, 100 ZRNO — 10 votes, 10,000 ZRNO — 100 votes.
 
-The goal is that wealthy individuals cannot "buy" a decision simply by holding a lot of ZRNO — effective influence grows slowly, encouraging broader participation rather than concentration of power.`,
+The aim is that no one can tip a decision by sheer quantity of ZRNO — influence grows far more slowly than the number of ZRNO, so a decision is carried by the breadth of participation rather than by a concentration of power.`,
       },
       {
         id: 30,
-        pitanje: `What is the Foundation's Protective Veto?`,
-        odgovor: `While the Foundation is not financially self-sustaining, it may refuse to implement a decision of the Upper Kolo that would jeopardise its operational and financial sustainability — in particular decisions on spending funds (including collective purchases) that would undermine the Foundation's ability to cover basic costs and maintain the system.
+        pitanje: `What is the Foundation's protective veto?`,
+        odgovor: `While the Foundation is not financially self-sustaining, it may refuse to carry out a decision of the Upper Kolo that would endanger its operational and financial sustainability — above all decisions on spending funds (including collective procurement) that would undermine the Foundation's ability to cover basic costs and maintain the system.
 
-The veto is not discretionary — it must be reasoned with reference to a specific threat to sustainability; a veto without reasoning is itself an abuse. This is not political control but protection of the Foundation's continuity and sustainability.
+The veto is not discretionary: it must be reasoned by pointing to a concrete threat to sustainability, and a veto without reasons is in itself an abuse. This is not political control but protection of the system's continuity.
 
-The veto is extinguished permanently and irrevocably when the Foundation's funds reach the financial self-sustainability threshold — three times the operating costs of the previous month, established by the Rules on the Upper Kolo. At that point sustainability is no longer threatened.`,
+The veto is extinguished permanently and in one direction once the Foundation's funds reach the threshold of financial independence — three times the operating cost of the previous month, set by the Rules on the Upper Kolo.`,
       },
       {
         id: 72,
-        pitanje: `What exactly do members change under "full self-governance" and when does that come into effect?`,
+        pitanje: `What exactly do members change under "full self-governance", and when does it begin?`,
         odgovor: `There are two separate thresholds, and they are easy to confuse.
 
-First threshold — activation of the Upper Kolo. When the total number of POEN recorded in the system reaches 1,000,000 (which in the Protocol's ledger corresponds to a state of −1,000,000), ZRNO inscription automatically opens and the Upper Kolo is established — the governing body of all ZRNO Holders. From that point members decide, through quadratic voting with active ZRNO, on the system's rules: amendments to the Rules, Programmes and other matters affecting the common good. The Foundation transitions from a sovereign to an executive and service body — it implements decisions, it does not make them on its own.
+The first threshold — activation of the Upper Kolo. Once the total amount of POEN recorded in the system reaches 1,000,000 (which in the Protocol's ledger corresponds to a balance of −1,000,000), the recording of ZRNO opens automatically and the Upper Kolo comes into being — the governing body of all ZRNO holders. From that moment the members decide the rules of the system by quadratic voting: amendments to the Rulebook, programmes and other questions affecting the common good. The Foundation moves from a sovereign to an executive and service body — it carries out decisions, it does not make them itself.
 
-Second threshold — extinction of the Protective Veto. While the Foundation is not financially self-sustaining, it holds a protective veto: it may refuse to implement a decision of the Upper Kolo that would jeopardise its operational sustainability — in particular decisions on spending funds (e.g. collective purchases) before sustainability is secured (the veto must be reasoned and is not arbitrary). That veto is extinguished permanently and irrevocably only when the Foundation's financial resources reach the financial self-sustainability threshold — three times the operating costs of the previous month, established by the Rules on the Upper Kolo.
+The second threshold — the extinction of the protective veto. While the Foundation is not financially self-sustaining, it holds a protective veto: it may refuse to carry out a decision of the Upper Kolo that would endanger its operational sustainability — above all decisions on spending funds, such as collective procurement, before sustainability is secured. The veto must be reasoned; it is not arbitrary. It is extinguished permanently and in one direction only once the Foundation's funds reach the threshold of financial independence — three times the operating cost of the previous month, set by the Rules on the Upper Kolo.
 
-Until the Upper Kolo is activated (Phase 1) all decisions are made by the Foundation through the Board of Directors.`,
+Until the Upper Kolo is activated (Phase 1), all decisions are made by the Foundation through its Board of Directors.`,
       },
     ],
   },

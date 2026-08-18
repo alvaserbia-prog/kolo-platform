@@ -816,58 +816,58 @@ Podatke o donacijama Fondacija čuva u skladu s propisima o financijskom izvješ
         pitanje: `Tko kontrolira KOLO?`,
         odgovor: `Trenutno (Faza 1) sve odluke donosi KOLO Fondacija preko Upravnog odbora.
 
-Kad ukupan broj evidentiranih POEN-a dosegne 1.000.000, aktivira se Gornje Kolo — upravljačko tijelo svih nositelja ZRNA, koje o ključnim pitanjima sustava odlučuje kvadratnim glasovanjem.
+Kad ukupan broj upisanih POEN-a dostigne 1.000.000, aktivira se Gornje Kolo — upravljačko tijelo svih nositelja ZRNA, koje o ključnim sustavnim pitanjima odlučuje kvadratnim glasanjem.
 
 Fondacija od tog trenutka prelazi iz suverenog u izvršno tijelo — provodi odluke Gornjeg Kola, ne donosi ih sama.`,
       },
       {
         id: 27,
         pitanje: `Što sprječava zlouporabu od strane admina ili osnivača?`,
-        odgovor: `Više strukturnih zaštita djeluje paralelno.
+        odgovor: `Više strukturnih zaštita radi usporedno.
 
-Zero-sum princip — svaki upis POEN-a uvećava minus Protokola, nitko ne može stvoriti POEN ni iz čega.
+Zero-sum načelo — svaki upis POEN-a uvećava minus Protokola, pa nitko ne može stvoriti POEN ni iz čega.
 
-Dnevni limit programa — ukupno dnevno evidentiranje svih programa zajedno ne smije prijeći 10% optjecaja.
+Dnevni okvir programa — socijalni programi i operativni doprinos zajedno ne smiju dnevno upisati više od 10% ukupnog broja POEN-a u sustavu.
 
-Deterministički algoritamski upisi — Protokol nema diskrecijskih odluka, sve je u kodu.
+Deterministički upisi — Protokol nema diskrecijske odluke: sve je u kodu, po unaprijed objavljenim pravilima, a kod je javno objavljen i svatko ga može provjeriti.
 
-Transparentnost — evidencija doprinosa je pseudonimna i nepromjenjiva; vidljiva je redovnim članovima (gradirano po statusu), dok neregistrirani vide samo agregate.
+Transparentnost — evidencija doprinosa je pseudonimna, povijest zapisa se ne prepravlja (svaka ispravka ide novim zapisom), vidljiva je redovnim članovima, a neregistrirani vide samo zbirne brojeve.
 
-I konačno, aktivacija Gornjeg Kola koja prebacuje nadležnost na članove.`,
+I konačno, aktivacija Gornjeg Kola — nadležnost prelazi na članove.`,
       },
       {
         id: 28,
         pitanje: `Što je Gornje Kolo i kada se aktivira?`,
-        odgovor: `Gornje Kolo je upravljačko tijelo svih nositelja ZRNA — najviše tijelo odlučivanja o sustavu. Nije skupština koja se bira, već dinamičan sastav: čine ga svi koji u danom trenutku imaju ZRNO.
+        odgovor: `Gornje Kolo je upravljačko tijelo svih nositelja ZRNA — najviše tijelo odlučivanja o sustavu. Nije skupština koja se bira, nego dinamičan sastav: čine ga svi koji u danom trenutku imaju ZRNO.
 
-Aktivira se automatski kad minus Protokola dosegne −1.000.000 POEN (znak da je sustav dovoljno aktivan i da članovi imaju značajnu kolektivnu odgovornost).
+Aktivira se automatski kad ukupan broj upisanih POEN-a dostigne 1.000.000 — u evidenciji Protokola to je stanje od −1.000.000 — što je znak da je sustav dovoljno aktivan i da članovi nose značajnu kolektivnu odgovornost.
 
-Prije toga, Fondacija donosi sve odluke; poslije toga, ključne odluke o sustavu (izmjene Pravilnika, novi Programi, suspenzija Programa) donosi Gornje Kolo kroz kvadratno glasovanje sa ZRNOM.`,
+Prije toga sve odluke donosi Fondacija; poslije toga ključne sustavne odluke (izmjene Pravilnika, novi programi, suspenzija programa) donosi Gornje Kolo kvadratnim glasanjem.`,
       },
       {
         id: 29,
-        pitanje: `Što je kvadratno glasovanje?`,
-        odgovor: `To je način glasovanja gdje glasačka snaga raste kao kvadratni korijen broja ZRNA. Ako imaš 1 ZRNO — 1 glas, 100 ZRNA — 10 glasova, 10.000 ZRNA — 100 glasova.
+        pitanje: `Što je kvadratno glasanje?`,
+        odgovor: `To je način glasanja u kojem glasačka snaga raste kao kvadratni korijen broja ZRNA: 1 ZRNO — 1 glas, 100 ZRNA — 10 glasova, 10.000 ZRNA — 100 glasova.
 
-Cilj je da bogati pojedinci ne mogu „kupiti" odluku samo time što imaju mnogo ZRNA — efektivni utjecaj raste sporo, potičući širu participaciju umjesto koncentracije moći.`,
+Cilj je da nitko ne može prevagnuti odluku samom količinom ZRNA — utjecaj raste mnogo sporije od broja ZRNA, pa odluku prije odnosi širina sudjelovanja nego koncentracija moći.`,
       },
       {
         id: 30,
         pitanje: `Što je Zaštitni veto Fondacije?`,
         odgovor: `Dok Fondacija nije financijski samostalna, može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njezinu operativnu i financijsku održivost — prije svega odluke o trošenju sredstava (uključujući kolektivne nabave) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava sustav.
 
-Veto nije diskrecijski — mora biti obrazložen pozivanjem na konkretnu prijetnju održivosti; veto bez obrazloženja sam je zlouporaba. To nije politička kontrola, već zaštita kontinuiteta i održivosti Fondacije.
+Veto nije diskrecijski: mora biti obrazložen pozivanjem na konkretnu prijetnju održivosti, a veto bez obrazloženja već je sam po sebi zlouporaba. To nije politička kontrola, nego zaštita kontinuiteta sustava.
 
-Veto se gasi trajno i jednosmjerno kad sredstva Fondacije dosegnu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu. Tada održivost više nije ugrožena.`,
+Veto se gasi trajno i jednosmjerno kad sredstva Fondacije dostignu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu.`,
       },
       {
         id: 72,
         pitanje: `Što točno mijenjaju članovi u „punom samoupravljanju" i kada to nastupa?`,
         odgovor: `Postoje dva odvojena praga, i lako ih je pomiješati.
 
-Prvi prag — aktivacija Gornjeg Kola. Kada ukupan broj upisanih POEN-a u sustavu dosegne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravno tijelo svih nositelja ZRNA. Od tog trenutka članovi kroz kvadratno glasovanje aktivnim ZRNOM odlučuju o pravilima sustava: izmjenama Pravilnika, Programima i drugim pitanjima koja utječu na zajedničko dobro. Fondacija od suverenog prelazi u izvršno i servisno tijelo — provodi odluke, ne donosi ih sama.
+Prvi prag — aktivacija Gornjeg Kola. Kad ukupan broj upisanih POEN-a u sustavu dostigne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravljačko tijelo svih nositelja ZRNA. Od tog trenutka članovi kvadratnim glasanjem odlučuju o pravilima sustava: izmjenama Pravilnika, programima i drugim pitanjima koja utječu na zajedničko dobro. Fondacija od suverenog prelazi u izvršno i servisno tijelo — provodi odluke, ne donosi ih sama.
 
-Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije financijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njezinu operativnu održivost — prije svega odluke o trošenju sredstava (npr. kolektivne nabave) prije nego što je osigurana održivost (veto mora biti obrazložen, nije samovoljan). Taj se veto gasi trajno i jednosmjerno tek kada financijska sredstva Fondacije dosegnu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu.
+Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije financijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njezinu operativnu održivost — prije svega odluke o trošenju sredstava, poput kolektivnih nabava, prije nego što je održivost osigurana. Veto mora biti obrazložen, nije samovoljan. Gasi se trajno i jednosmjerno tek kad sredstva Fondacije dostignu prag financijske samostalnosti — trostruki operativni trošak prethodnog mjeseca, utvrđen Pravilnikom o Gornjem Kolu.
 
 Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog odbora.`,
       },
