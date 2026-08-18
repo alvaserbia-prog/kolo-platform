@@ -695,7 +695,9 @@
     "opozovi_pitanje": "Revoke delegation?",
     "opis": "ZRNO records your position in the community and from it derives your vote in decision-making. Here you subscribe and redeem ZRNO and manage your vote.",
     "zakazana_promena": "Scheduled: → <ime>{pseudonim}</ime> — takes effect at midnight",
-    "zakazan_opoziv": "Revocation scheduled — takes effect at midnight"
+    "zakazan_opoziv": "Revocation scheduled — takes effect at midnight",
+    "kurs_objasnjenje": "The ratio between the total POEN and the ZRNO available to be recorded — it shows how much POEN you need for one ZRNO. It is not a price and does not express value.",
+    "greska_delegiranje": "Error while delegating. Try again."
   },
   "programi": {
     "naslov": "Protocol Programs",
@@ -1726,7 +1728,8 @@
     "brojac_clanovi": "Members",
     "brojac_oglasi": "Listings",
     "brojac_razmene": "Exchanges",
-    "brojac_opticaj": "Total POEN"
+    "brojac_opticaj": "Total POEN",
+    "greska_uklanjanje": "Error while removing the message."
   },
   "postaniPokrovitelj": {
     "naslov": "Sponsorship",
@@ -1772,7 +1775,8 @@
     "prikazi_ugovor": "Show agreement",
     "potpis_potvrda": "Sign the donation agreement on behalf of the legal entity or entrepreneur?",
     "greska": "Error.",
-    "potpisi": "Sign"
+    "potpisi": "Sign",
+    "greska_ucitavanje": "Error while loading the applications."
   },
   "doprinosOglasi": {
     "naslov": "Contribution Tasks",
@@ -2401,7 +2405,9 @@
     "greska_opsta": "Error. Try again.",
     "ph_pseudonim": "YourPseudonym",
     "cuvanje": "Saving...",
-    "zavrsi": "Finish registration"
+    "zavrsi": "Finish registration",
+    "naslov": "One more step",
+    "podnaslov": "Choose a pseudonym for your KOLO account"
   },
   "notifikacije": {
     "transfer_primljen_naslov": "{iznos} POEN re-registered to you",

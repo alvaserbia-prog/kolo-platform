@@ -30,7 +30,7 @@ export const IS_PRODUCTION = process.env.VERCEL_ENV === "production";
  */
 export const SITE_DESCRIPTION =
   "KOLO je sistem evidencije doprinosa zajedničkom dobru, zasnovan na uzajamnosti. " +
-  "POEN beleži šta si dao zajednici, ZRNO ti daje glas u odlukama. Članstvo je besplatno.";
+  "POEN beleži tvoj doprinos i učešće, ZRNO ti daje glas u odlukama. Članstvo je besplatno.";
 
 /** Apsolutni URL od relativne putanje (npr. "/pijaca" → "https://ekolo.rs/pijaca"). */
 export function absoluteUrl(path = "/"): string {

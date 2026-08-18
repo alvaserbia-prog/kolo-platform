@@ -688,7 +688,9 @@
     "opozovi_pitanje": "Visszavonja a delegálást?",
     "opis": "A ZRNO a közösségben elfoglalt helyzetedet rögzíti, és ebből ered a szavazatod a döntéshozatalban. Itt jegyzed be és írod vissza a ZRNO-t, és itt kezeled a szavazatodat.",
     "zakazana_promena": "Ütemezve: → <ime>{pseudonim}</ime> — éjfélkor lép hatályba",
-    "zakazan_opoziv": "Visszavonás ütemezve — éjfélkor lép hatályba"
+    "zakazan_opoziv": "Visszavonás ütemezve — éjfélkor lép hatályba",
+    "kurs_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
+    "greska_delegiranje": "Hiba a delegáláskor. Próbáld újra."
   },
   "programi": {
     "naslov": "Protokoll programok",
@@ -1719,7 +1721,8 @@
     "brojac_clanovi": "Tag",
     "brojac_oglasi": "Hirdetés",
     "brojac_razmene": "Csere",
-    "brojac_opticaj": "Összes POEN"
+    "brojac_opticaj": "Összes POEN",
+    "greska_uklanjanje": "Hiba az üzenet eltávolításakor."
   },
   "postaniPokrovitelj": {
     "naslov": "Patronálás",
@@ -1765,7 +1768,8 @@
     "prikazi_ugovor": "Szerződés megjelenítése",
     "potpis_potvrda": "Aláírod az adományozási szerződést a jogi személy vagy vállalkozó nevében?",
     "greska": "Hiba.",
-    "potpisi": "Aláírás"
+    "potpisi": "Aláírás",
+    "greska_ucitavanje": "Hiba a jelentkezések betöltésekor."
   },
   "doprinosOglasi": {
     "naslov": "Hozzájárulási feladatok",
@@ -2394,7 +2398,9 @@
     "greska_opsta": "Hiba. Próbáld újra.",
     "ph_pseudonim": "Álneved",
     "cuvanje": "Mentés...",
-    "zavrsi": "Regisztráció befejezése"
+    "zavrsi": "Regisztráció befejezése",
+    "naslov": "Még egy lépés",
+    "podnaslov": "Válassz álnevet a KOLO fiókodhoz"
   },
   "notifikacije": {
     "transfer_primljen_naslov": "{iznos} POEN átírva neked",

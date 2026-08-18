@@ -695,7 +695,9 @@
     "opozovi_pitanje": "Opozvati delegaciju?",
     "opis": "ZRNO bilježi tvoj položaj u zajednici i iz njega proizlazi tvoj glas u odlučivanju. Ovdje upisuješ i otpisuješ ZRNO i upravljaš svojim glasom.",
     "zakazana_promena": "Zakazano: → <ime>{pseudonim}</ime> — stupa na snagu u ponoć",
-    "zakazan_opoziv": "Zakazan opoziv — stupa na snagu u ponoć"
+    "zakazan_opoziv": "Zakazan opoziv — stupa na snagu u ponoć",
+    "kurs_objasnjenje": "Odnos ukupnog broja POEN-a i ZRNA raspoloživih za upis — pokazuje koliko ti je POEN-a potrebno za jedno ZRNO. Nije cijena i ne izražava vrijednost.",
+    "greska_delegiranje": "Greška pri delegiranju. Pokušaj ponovno."
   },
   "programi": {
     "naslov": "Programi Protokola",
@@ -1726,7 +1728,8 @@
     "brojac_clanovi": "Članova",
     "brojac_oglasi": "Oglasa",
     "brojac_razmene": "Razmjena",
-    "brojac_opticaj": "Ukupno POEN-a"
+    "brojac_opticaj": "Ukupno POEN-a",
+    "greska_uklanjanje": "Greška pri uklanjanju poruke."
   },
   "postaniPokrovitelj": {
     "naslov": "Pokroviteljstvo",
@@ -1772,7 +1775,8 @@
     "prikazi_ugovor": "Prikaži ugovor",
     "potpis_potvrda": "Potpisati ugovor o donaciji u ime pravne osobe ili poduzetnika?",
     "greska": "Greška.",
-    "potpisi": "Potpiši"
+    "potpisi": "Potpiši",
+    "greska_ucitavanje": "Greška pri učitavanju prijava."
   },
   "doprinosOglasi": {
     "naslov": "Operativni doprinos",
@@ -2401,7 +2405,9 @@
     "greska_opsta": "Greška. Pokušaj ponovno.",
     "ph_pseudonim": "TvojPseudonim",
     "cuvanje": "Čuvanje...",
-    "zavrsi": "Završi registraciju"
+    "zavrsi": "Završi registraciju",
+    "naslov": "Još jedan korak",
+    "podnaslov": "Izaberi pseudonim za svoj KOLO račun"
   },
   "notifikacije": {
     "transfer_primljen_naslov": "Prepisano ti je {iznos} POEN",

@@ -2,11 +2,13 @@
 
 import { useEffect } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function MemberLinkPage() {
   const { hash } = useParams<{ hash: string }>();
   const searchParams = useSearchParams();
   const router = useRouter();
+  const t = useTranslations("common");
 
   useEffect(() => {
     async function resolve() {
@@ -42,7 +44,7 @@ export default function MemberLinkPage() {
 
   return (
     <div className="min-h-screen bg-kolo-bg flex items-center justify-center">
-      <p className="text-kolo-muted text-sm">Učitavanje...</p>
+      <p className="text-kolo-muted text-sm">{t("ucitavanje")}</p>
     </div>
   );
 }

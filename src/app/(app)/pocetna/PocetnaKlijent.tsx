@@ -73,7 +73,7 @@ export default function PocetnaKlijent({
     if (res.ok) setPoruke((prev) => prev.filter((p) => p.id !== id));
     else {
       const data = await res.json().catch(() => ({}));
-      setGreska(data.error ?? "Greška pri uklanjanju poruke.");
+      setGreska(data.error ?? t("greska_uklanjanje"));
     }
   }
 
