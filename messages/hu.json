@@ -2529,7 +2529,9 @@
     "prijava_poruke_resena_naslov": "A bejelentett üzenetet eltávolították",
     "prijava_poruke_resena_tekst": "Az Alapítvány eltávolította az általad bejelentett üzenetet. Indoklás: {odluka}",
     "prijava_poruke_odbacena_naslov": "A bejelentésedet megvizsgálták",
-    "prijava_poruke_odbacena_tekst": "Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}"
+    "prijava_poruke_odbacena_tekst": "Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}",
+    "lozinka_promenio_roditelj_naslov": "A szülőd új jelszót állított be neked",
+    "lozinka_promenio_roditelj_tekst": "Kérdezd meg tőle az új jelszót, és azzal jelentkezz be."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -2931,7 +2933,13 @@
     "pregled_razgovori": "Beszélgetések gyerekekkel",
     "pregled_razgovori_prazno": "Még nincsenek beszélgetések.",
     "pregled_poruka": "{broj} üzenet",
-    "polje_datum_raspon": "Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie."
+    "polje_datum_raspon": "Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie.",
+    "lozinka_naslov": "Új jelszó a gyermeknek",
+    "lozinka_opis": "A gyermek fiókjához nem tartozik e-mail cím, ezért a gyermek nem tud új jelszót kérni. Itt te állítod be.",
+    "lozinka_polje": "Új jelszó",
+    "lozinka_dugme": "Jelszó beállítása",
+    "lozinka_pravilo": "Legalább {broj} karakter. Írd fel, és mondd el a gyermekednek.",
+    "lozinka_uspeh": "A jelszó be van állítva. Mondd el a gyermekednek."
   },
   "decjaPocetna": {
     "naslov": "Gyerekpiac",
@@ -3091,5 +3099,32 @@
     "kartica_bez_skole": "Még nem választottál iskolát. Válaszd ki, és nézd meg, hol álltok Szerbiában.",
     "kartica_dugme": "Iskola választása",
     "kartica_ti": "Te vagy a(z) {mesto}. az iskoládban"
+  },
+  "emailDeteta": {
+    "naslov": "Az e-mail címem",
+    "opis": "Ha van saját e-mail címed, add meg. Egyetlen dologra szolgál: hogy új jelszót állíthass be, ha elfelejted a régit.",
+    "placeholder": "a.te@cimed.hu",
+    "dugme": "Mentés",
+    "dugme_salje": "Küldés…",
+    "poslato": "Üzenetet küldtünk a következő címre: {email}. Nyisd meg, és erősítsd meg a címet.",
+    "ceka_potvrdu": "A(z) {email} cím megerősítésre vár. Nyisd meg az üzenetet, amelyet rá küldtünk.",
+    "oznaka_potvrdjena": "megerősítve",
+    "ukloni": "Cím eltávolítása",
+    "uklonjeno": "A címet eltávolítottuk.",
+    "napomena": "Értesítéseket nem küldünk rá. Ha nincs saját címed, az új jelszót a szülőd állítja be.",
+    "greska": "Nem sikerült. Próbáld újra."
+  },
+  "potvrdiEmail": {
+    "naslov": "Erősítsd meg a címedet",
+    "podnaslov": "Még egy kattintás, és a cím mentve van.",
+    "podnaslov_gotovo": "A cím mentve van a fiókodban.",
+    "objasnjenje": "Ezt a címet egy KOLO-fiókhoz adták meg. Erősítsd meg, hogy új jelszót állíthass be, ha elfelejted a régit.",
+    "nisi_ti": "Ha nem te voltál, zárd be az oldalt. Megerősítés nélkül a cím sehol nem kerül mentésre.",
+    "dugme": "Cím megerősítése",
+    "dugme_loading": "Megerősítés…",
+    "uspesno": "Kész. A cím megerősítve.",
+    "cemu_sluzi": "Ha elfelejted a jelszavad, erre a címre küldünk hivatkozást az újhoz. Értesítéseket nem küldünk.",
+    "na_pocetnu": "Vissza a főoldalra",
+    "greska": "A hivatkozás érvénytelen vagy lejárt. Add meg a címet újra a profilodban."
   }
 }

@@ -2536,7 +2536,9 @@
     "prijava_poruke_resena_naslov": "Prijavljena poruka je uklonjena",
     "prijava_poruke_resena_tekst": "Fondacija je uklonila poruku koju si prijavio. Obrazloženje: {odluka}",
     "prijava_poruke_odbacena_naslov": "Prijava poruke je razmotrena",
-    "prijava_poruke_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i poruka ostaje. Obrazloženje: {odluka}"
+    "prijava_poruke_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i poruka ostaje. Obrazloženje: {odluka}",
+    "lozinka_promenio_roditelj_naslov": "Roditelj ti je postavio novu lozinku",
+    "lozinka_promenio_roditelj_tekst": "Pitaj ga koja je nova lozinka i prijavi se njome."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2931,7 +2933,13 @@
     "pregled_razgovori": "Razgovori s djecom",
     "pregled_razgovori_prazno": "Još nema razgovora.",
     "pregled_poruka": "{broj} poruka",
-    "polje_datum_raspon": "Unesi datum rođenja djeteta — dijete mora imati između 7 i 18 godina."
+    "polje_datum_raspon": "Unesi datum rođenja djeteta — dijete mora imati između 7 i 18 godina.",
+    "lozinka_naslov": "Nova lozinka za dijete",
+    "lozinka_opis": "Račun djeteta nema e-mail adresu, pa dijete ne može samo zatražiti novu lozinku. Ovdje je postavljaš ti.",
+    "lozinka_polje": "Nova lozinka",
+    "lozinka_dugme": "Postavi lozinku",
+    "lozinka_pravilo": "Najmanje {broj} znakova. Zapiši je i reci djetetu.",
+    "lozinka_uspeh": "Lozinka je postavljena. Reci je djetetu."
   },
   "decjaPocetna": {
     "naslov": "Dječja pijaca",
@@ -3091,5 +3099,32 @@
     "kartica_bez_skole": "Nisi odabrao školu. Odaberi je i vidi gdje ste u Srbiji.",
     "kartica_dugme": "Odaberi školu",
     "kartica_ti": "Ti si {mesto}. u svojoj školi"
+  },
+  "emailDeteta": {
+    "naslov": "Moja e-mail adresa",
+    "opis": "Ako imaš svoju e-mail adresu, upiši je. Služi samo za jedno: da možeš postaviti novu lozinku ako je zaboraviš.",
+    "placeholder": "tvoja@adresa.hr",
+    "dugme": "Upiši",
+    "dugme_salje": "Šaljem…",
+    "poslato": "Poslali smo poruku na {email}. Otvori je i potvrdi adresu.",
+    "ceka_potvrdu": "Adresa {email} čeka potvrdu. Otvori poruku koju smo poslali na nju.",
+    "oznaka_potvrdjena": "potvrđena",
+    "ukloni": "Ukloni adresu",
+    "uklonjeno": "Adresa je uklonjena.",
+    "napomena": "Obavijesti ti ne šaljemo na nju. Ako nemaš svoju adresu, novu lozinku ti postavlja roditelj.",
+    "greska": "Nije uspjelo. Pokušaj ponovno."
+  },
+  "potvrdiEmail": {
+    "naslov": "Potvrdi svoju adresu",
+    "podnaslov": "Još jedan klik i adresa je upisana.",
+    "podnaslov_gotovo": "Adresa je upisana na tvoj račun.",
+    "objasnjenje": "Ova adresa je upisana na račun na KOLU. Potvrdi je da bi mogao postaviti novu lozinku ako je zaboraviš.",
+    "nisi_ti": "Ako ovo nisi ti, zatvori stranicu. Bez potvrde se adresa nigdje ne upisuje.",
+    "dugme": "Potvrdi adresu",
+    "dugme_loading": "Potvrđujem…",
+    "uspesno": "Gotovo. Adresa je potvrđena.",
+    "cemu_sluzi": "Ako zaboraviš lozinku, na ovu adresu šaljemo poveznicu za novu. Obavijesti ne šaljemo.",
+    "na_pocetnu": "Idi na početnu",
+    "greska": "Poveznica nije važeća ili je istekla. Upiši adresu ponovno u svom profilu."
   }
 }

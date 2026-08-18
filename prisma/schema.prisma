@@ -379,6 +379,7 @@ model User {
   blogObjave                       BlogPost[]                @relation("BlogAutor")
   chatPoruke                       ChatMessage[]             @relation("ChatPoruke")
   passwordResetTokens              PasswordResetToken[]
+  emailPotvrde                     EmailPotvrda[]
   verifikacijeKojeSamObavio        VerifikacionaVeza[]       @relation("Verifikator")
   verifikacijeKojeSuMeVerifikovale VerifikacionaVeza[]       @relation("Verifikovani")
   nadzori                          VerifikacionaVeza[]       @relation("Nadzornik")
@@ -565,6 +566,30 @@ model PasswordResetToken {
   id        String    @id @default(uuid())
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+/// Potvrda imejl adrese koju maloletni korisnik sam upiše (Pravilnik o učešću dece,
+/// čl. 7 — školu i ostale dobrovoljne podatke navodi sámo dete).
+///
+/// 🔴 Adresa se NE upisuje u `User.email` dok se ne potvrdi klikom na link poslat
+/// NA NJU. Bez tog koraka jedna omaška u kucanju predaje ključ od dečjeg naloga
+/// nepoznatoj osobi: tok „zaboravljena lozinka" šalje link upravo na upisanu
+/// adresu. Do potvrde adresa živi samo u ovom redu i ne radi ništa.
+///
+/// Red se ne briše posle upotrebe (`usedAt`), da se isti link ne bi upotrebio
+/// dvaput; čisti ga isti posao koji čisti istekle tokene.
+model EmailPotvrda {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email     String
   tokenHash String    @unique
   expiresAt DateTime
   usedAt    DateTime?

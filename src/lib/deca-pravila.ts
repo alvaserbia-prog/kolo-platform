@@ -53,6 +53,15 @@ export const ROK_TOKENA_DANA = 7;
  */
 export const ROK_PREUZIMANJA_DANA = 14;
 
+/**
+ * Najmanja dužina lozinke naloga maloletnog korisnika.
+ *
+ * Isti prag kao za punoletne naloge (`/api/profil/lozinka`). Stoji ovde zato što
+ * lozinku detetu zadaje i menja roditelj, pa isto pravilo treba i obrascu u
+ * pretraživaču i ruti na serveru.
+ */
+export const MIN_LOZINKA = 8;
+
 /** POEN po sklopljenom prijateljstvu, svakoj strani (čl. 14b st. 1). */
 export const PRIJATELJSTVO_POEN = 500;
 

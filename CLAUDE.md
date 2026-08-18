@@ -471,6 +471,58 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - Testovi: `__tests__/deca-pravila.test.ts`, `__tests__/protokol/prijateljstva-poen.test.ts`, `__tests__/integracija/deca-tok.test.ts` (traži bazu).
 - 🔴 **`User.roditeljId` VIŠE NE POSTOJI** — veza je u tabeli `Roditeljstvo` (najviše dva reda po detetu). Prisma upiti idu preko `roditeljstvaKaoDete` / `roditeljstvaKaoRoditelj`.
 
+### Povratak u nalog deteta: imejl deteta i roditeljsko dugme (2026-08-18)
+
+Nalog maloletnog korisnika po pravilu **nema imejl** — pri samostalnoj registraciji
+dete unosi adresu SVOG RODITELJA, i ona se namerno ne upisuje u `User.email`
+(čl. 4a, `deca-poziv.ts`). Tok „zaboravljena lozinka" traži imejl, pa detetu nije
+stajao na raspolaganju: **zaboravljena lozinka je značila trajno zaključan nalog**,
+sa prijateljstvima i POEN-om u njemu. Otud dva izlaza, i oba su potrebna.
+
+**1. Roditelj postavlja novu lozinku** (`postaviLozinkuDeteta` u `protokol/deca.ts`,
+`POST /api/deca/[id]/lozinka`, odeljak „Nova lozinka za dete" u `DeteProfil.tsx`).
+Radi uvek, i za sedmogodišnjaka bez ijedne adrese.
+- 🔴 **Stara lozinka se NE traži i ne može da se traži** — roditelj je ne zna, u
+  tome i jeste stvar. Zaštitu nosi `mojeDeteIliBaci`: radnju izvodi isključivo
+  roditelj tog deteta, prijavljen na sopstveni nalog.
+- Dete dobija obaveštenje (`notifikacije.lozinka_promenio_roditelj`) — bez njega bi
+  mu prijava prestala da radi bez ijednog traga o tome zašto.
+- Polje **ne skriva lozinku**: roditelj je smišlja za dete i mora da je pročita
+  naglas.
+
+**2. Dete upisuje svoju adresu** (`protokol/dete-email.ts`, `GET|PATCH|DELETE
+/api/profil/email`, `POST /api/profil/email/potvrdi`, `EmailDeteta.tsx` na profilu,
+stranica `/potvrdi-email/[token]`). Za stariju decu koja adresu imaju.
+- 🔴 **Adresa se NE upisuje u `User.email` pri unosu nego tek po potvrdi linkom
+  poslatim NA NJU** (model `EmailPotvrda`, migracija `20260818140000_email_deteta`,
+  rok 24 sata). Reset lozinke ide na upisanu adresu, pa bi jedno pogrešno otkucano
+  slovo dalo nepoznatoj osobi trajan ključ od dečjeg naloga, i to bez ijednog znaka
+  da se išta desilo. Sa potvrdom omaška ne pravi štetu.
+- 🔴 **Potvrda je POST, ne GET** — klijenti za poštu prefetch-uju linkove. Isti
+  razlog kao kod odjave sa obaveštenja.
+- 🔴 **Potvrda postavlja `emailObavestenja: false`.** Adresa je data radi povratka u
+  nalog, ne radi pošte; obim obrade se ne širi preko svrhe zbog koje je podatak dat.
+- Jedan živ link po nalogu (stariji se poništavaju), inače bi potvrda mogla da upiše
+  adresu koju je dete u međuvremenu ispravilo. Zauzetost adrese proverava se i pri
+  unosu i pri potvrdi — `User.email` je `@unique`, a između ta dva trenutka prolazi
+  ceo dan.
+- Ruta je zatvorena za punoletne naloge (`deteIliBaci`) — odluka da se imejl ne
+  prikazuje u podešavanjima punoletnog profila se ovim NE menja.
+
+🔴 **AKTI OVO JOŠ NE POZNAJU.** Pravilnik o učešću dece čl. 7 nabraja podatke koje
+dete navodi (datum rođenja upisuje roditelj, školu bira dete); **imejl deteta nije
+među njima**, a Politika privatnosti 4.7 i Registar radnji obrade (radnja br. 11)
+govore o adresi RODITELJA, po legitimnom interesu. Pre puštanja u rad ovome treba
+odredba: dobrovoljnost, svrha (isključivo povratak u nalog), zabrana slanja
+obaveštenja, brisanje pri punoletstvu i pri gašenju naloga. Do tada je to mogućnost
+koju sistem nudi, a akti ne opisuju — isti obrazac kao kod poništenja prepisa po
+prijavi razmene.
+
+🟡 **Brisanje adrese pri punoletstvu i gašenju naloga NIJE dodato** — `punoletstvo.ts`
+i `DELETE /api/profil` ne diraju `User.email` (punoletan nalog imejl i inače sme da
+ima, pa bi brisanje bilo gore od zadržavanja). Ako odredba u aktima kaže drugačije,
+mesto je isto ono gde se briše škola — tri mesta iz sekcije „Ranglista škola".
+
 ### Ranglista škola (2026-08-18)
 
 Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.3).

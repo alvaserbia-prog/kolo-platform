@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { MIN_LOZINKA } from "@/lib/deca-pravila";
 
 type Dete = {
   id: string;
@@ -159,6 +160,8 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
       <Pregled deteId={dete.id} />
 
       <Razgovori deteId={dete.id} />
+
+      <NovaLozinka deteId={dete.id} />
 
       <BrisanjeNaloga deteId={dete.id} pseudonim={dete.pseudonim} onGotovo={() => router.push("/profil")} />
     </div>
@@ -413,6 +416,82 @@ function Pregled({ deteId }: { deteId: string }) {
             )}
           </div>
         </div>
+      )}
+    </section>
+  );
+}
+
+
+/**
+ * Nova lozinka detetu (čl. 10 st. 1).
+ *
+ * 🔴 Stara lozinka se ne traži — roditelj je ne zna, i baš zato ovo postoji.
+ * Nalog maloletnog korisnika po pravilu nema imejl, pa mu tok „zaboravljena
+ * lozinka" ne stoji na raspolaganju: bez ovog dugmeta zaboravljena lozinka znači
+ * trajno zaključan nalog, sa svim prijateljstvima i POEN-om u njemu.
+ *
+ * Lozinka se prikazuje dok se kuca. Roditelj je smišlja za dete i mora da je
+ * pročita naglas — sakriveno polje bi ovde radilo protiv svrhe.
+ */
+function NovaLozinka({ deteId }: { deteId: string }) {
+  const t = useTranslations("deca");
+  const [lozinka, setLozinka] = useState("");
+  const [radi, setRadi] = useState(false);
+  const [poruka, setPoruka] = useState<{ tekst: string; greska: boolean } | null>(null);
+
+  async function postavi() {
+    setRadi(true);
+    setPoruka(null);
+    try {
+      const res = await fetch(`/api/deca/${deteId}/lozinka`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lozinka }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setPoruka({ tekst: data?.error ?? t("greska_slanje"), greska: true });
+        return;
+      }
+      setPoruka({ tekst: t("lozinka_uspeh"), greska: false });
+      setLozinka("");
+    } catch {
+      setPoruka({ tekst: t("greska_slanje"), greska: true });
+    } finally {
+      setRadi(false);
+    }
+  }
+
+  return (
+    <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+      <h2 className="font-semibold text-kolo-text">{t("lozinka_naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("lozinka_opis")}</p>
+
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+        <input
+          type="text"
+          value={lozinka}
+          onChange={(e) => setLozinka(e.target.value)}
+          placeholder={t("lozinka_polje")}
+          autoComplete="new-password"
+          className="w-full rounded-xl border border-kolo-border px-3 py-2 text-sm outline-none focus:border-kolo-green-500"
+        />
+        <button
+          type="button"
+          onClick={postavi}
+          disabled={radi || lozinka.length < MIN_LOZINKA}
+          className="shrink-0 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-semibold text-white transition hover:bg-kolo-green-900 disabled:opacity-50"
+        >
+          {t("lozinka_dugme")}
+        </button>
+      </div>
+
+      <p className="mt-2 text-xs text-kolo-muted">{t("lozinka_pravilo", { broj: MIN_LOZINKA })}</p>
+
+      {poruka && (
+        <p className={`mt-2 text-sm ${poruka.greska ? "text-kolo-danger" : "text-kolo-green-700"}`}>
+          {poruka.tekst}
+        </p>
       )}
     </section>
   );

@@ -242,6 +242,10 @@ Dve stvari da znaš:
 
 U profilu postoje i polja za ime, telefon, mesto i opis. **Ne moraš da ih popuniš i bolje je da ostanu prazna.**
 
+**Imejl adresa je izuzetak.** Ako imaš svoju adresu, možeš da je upišeš u profilu, u odeljku „Moja imejl adresa". Ona služi samo za jedno: da sam sebi postaviš novu lozinku ako je zaboraviš. Kad je upišeš, na nju ti stiže poruka — dok ne pritisneš dugme u toj poruci, adresa se nigde ne upisuje. Obaveštenja ti na nju ne šaljemo.
+
+Ako nemaš svoju adresu, ništa ne fali: novu lozinku ti postavlja roditelj.
+
 **7. Kad ti je nelagodno — reci mami ili tati.** Ne moraš da imaš dokaz i ne moraš da znaš kako se to zove. Nećeš upasti u nevolju zato što si rekao.
 
 **8. Prijava nije tužakanje.** Prijavom pomažeš i sebi i drugoj deci. Dalje je posao odraslih u KOLU.
@@ -420,7 +424,7 @@ Na dan rođendana:
 | Nestao mi je oglas | Roditelj može da ukloni oglas; o tome dobiješ obaveštenje. |
 | Nema liste škola | Spisak škola još nije unet. |
 | Ne mogu da promenim školu | Prošlo je manje od 30 dana od prethodne promene. |
-| Zaboravio sam lozinku | Javi roditelju. Pošto nemaš imejl, novu lozinku ne možeš da tražiš sam. |
+| Zaboravio sam lozinku | Ako si upisao svoju imejl adresu, koristi „Zaboravljena lozinka" pri prijavi. Ako nisi, javi roditelju — on ti postavlja novu. |
 
 ---
 
@@ -476,9 +480,22 @@ Ako kasnije izgubite potvrdu, detetov nalog se vraća u stanje „Povezano" — 
 
 Sistem traži samo **pseudonim i datum rođenja**. Profil nudi i polja za ime, telefon, mesto i opis — ona su dobrovoljna i preporuka je da ostanu prazna. Škola je takođe dobrovoljna i bira je samo dete.
 
-Dete **nema svoj imejl**. Posledica: ne postoji samostalno resetovanje lozinke. **Zapišite lozinku koju ste zadali.**
+Dete po pravilu **nema svoj imejl**. Starije dete može samo da upiše svoju adresu u profilu — služi isključivo za postavljanje nove lozinke i potvrđuje se klikom na link poslat na tu adresu. Obaveštenja na nju ne idu.
 
-## R5. Šta vidite, a šta ne
+**Zapišite lozinku koju ste zadali.** Ako je dete zaboravi, a nema svoju adresu, novu mu postavljate vi (R5).
+
+## R5. Nova lozinka za dete
+
+Nalog deteta nema imejl, pa dete ne može samo da zatraži novu lozinku. Postavljate je vi:
+
+1. Otvorite „Moja deca" i uđite u nalog svog deteta.
+2. Nađite odeljak **„Nova lozinka za dete"**.
+3. Upišite novu lozinku (najmanje 8 znakova) i pritisnite **„Postavi lozinku"**.
+4. Recite je detetu.
+
+Staru lozinku ne morate da znate. Dete dobija obaveštenje da ste mu postavili novu, da mu prijava ne prestane da radi bez objašnjenja.
+
+## R6. Šta vidite, a šta ne
 
 | Vidite | Ne vidite |
 |---|---|
@@ -488,9 +505,9 @@ Dete **nema svoj imejl**. Posledica: ne postoji samostalno resetovanje lozinke. 
 | detetove oglase | |
 | detetove prepise POEN-a | |
 
-**Čitate:** razgovore deteta sa punoletnim članovima — ali samo kada ih uključite (R6). U njima **ne možete da pišete**.
+**Čitate:** razgovore deteta sa punoletnim članovima — ali samo kada ih uključite (R7). U njima **ne možete da pišete**.
 
-## R6. Dopisivanje sa odraslima — prekidač
+## R7. Dopisivanje sa odraslima — prekidač
 
 Podrazumevano nije moguće. Uključujete ga na profilu svog deteta:
 
@@ -503,19 +520,20 @@ Kada je uključen, vi te razgovore čitate ali u njima ne pišete, a punoletni s
 
 **Napomena:** poruku povodom detetovog oglasa može da pošalje **bilo koje dete sa KOLA**, i kad prijateljstvo nije sklopljeno. Prijateljstvo je uslov za Pričaonicu i za 500 POEN, ne za privatnu poruku.
 
-## R7. Šta možete, a šta ne
+## R8. Šta možete, a šta ne
 
 | Možete | Ne možete |
 |---|---|
 | da uklonite detetov oglas | da raskinete detetovo prijateljstvo — to može samo dete |
 | da uključite ili isključite dopisivanje sa odraslima | da pišete u detetovom razgovoru sa odraslom osobom |
 | da obrišete detetov nalog | da čitate razgovore sa drugom decom |
+| da postavite detetu novu lozinku | |
 
 **Brisanje naloga** poništava sav POEN deteta i uklanja sve njegove oglase. Ne može da se opozove — zato se traži da otkucate detetov pseudonim.
 
 Za ono što dete objavi odgovarate vi. Zato u svakom trenutku možete da uklonite njegov oglas. Saglasnost dajete jednom; ne odobravate svaki detetov potez.
 
-## R8. Prijateljstva i POEN
+## R9. Prijateljstva i POEN
 
 Prijateljstvo se sklapa **isključivo skeniranjem QR koda uživo** — kod traje 5 minuta i mora da se pokaže sa ekrana.
 
@@ -529,11 +547,11 @@ Prijateljstvo se sklapa **isključivo skeniranjem QR koda uživo** — kod traje
 | 18. rođendan | prijateljstva se zatvaraju i taj POEN se otpisuje na obe strane |
 | POEN od vas i iz razmene | ostaje i posle 18. rođendana |
 
-## R9. Škola
+## R10. Škola
 
 Dete samo bira školu, sa gotovog spiska; od tih izbora se prave liste škola. Izbor **ne donosi POEN**. Promena je moguća jednom u 30 dana. Škola se briše na 18. rođendan i pri gašenju naloga.
 
-## R10. Potvrde postojanja deteta
+## R11. Potvrde postojanja deteta
 
 Kada **otvorite nalog detetu iz svog profila** (R2), ljudi koji su ranije potvrdili vašu stvarnost biće zamoljeni da potvrde da imate dete tog uzrasta.
 
@@ -543,7 +561,7 @@ Kada **otvorite nalog detetu iz svog profila** (R2), ljudi koji su ranije potvrd
 
 **Ako ste nalog preuzeli** (R1), ovaj postupak se ne pokreće.
 
-## R11. Prijava poruke — zašto postoji
+## R12. Prijava poruke — zašto postoji
 
 Pošto ne čitate razgovore deteta sa drugom decom, dete ima sopstveno dugme „prijavi" ispod svake poruke. To je njegov direktan put do Fondacije.
 
@@ -554,15 +572,16 @@ Pošto ne čitate razgovore deteta sa drugom decom, dete ima sopstveno dugme „
 
 **Recite detetu jednu rečenicu:** *„Ako ti neko traži slike, da se vidite ili da pišete negde drugde — pritisni prijavi i reci mi. Nećeš imati problem."*
 
-## R12. Šta se briše samo
+## R13. Šta se briše samo
 
 Poruke iz dečje Pričaonice brišu se posle **30 dana**.
 
-## R13. Rokovi na jednom mestu
+## R14. Rokovi na jednom mestu
 
 | Rok | Na šta se odnosi |
 |---|---|
 | 5 minuta | važenje QR koda za prijateljstvo |
+| 24 sata | važenje linka kojim dete potvrđuje svoju imejl adresu |
 | 7 dana | važenje linka za preuzimanje naloga |
 | 14 dana | koliko nepreuzet detetov nalog čeka, pa se briše |
 | 30 dana | rok potvrdiocima da se izjasne o postojanju deteta |
