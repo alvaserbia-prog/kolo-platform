@@ -95,6 +95,42 @@ describe("lat2cyr — zaštićeni tokeni", () => {
     );
     expect(lat2cyr("PIB 115840443")).toBe("PIB 115840443");
   });
+  it("ICU plural zadržava sintaksu, a tekst grana ide u ćirilicu", () => {
+    // Prosta maska `{[^{}]*}` ne pokriva ugnežđene zagrade, pa su ključne reči
+    // odlazile u ćirilicu (`{цоунт, плурал, оне …}`) i next-intl više nije umeo
+    // da pročita poruku. Sintaksa mora ostati latinična, a „stranica“ ne sme —
+    // to je jedino što čovek vidi.
+    expect(lat2cyr("{count, plural, one {# stranica} few {# stranice} other {# stranica}}")).toBe(
+      "{count, plural, one {# страница} few {# странице} other {# страница}}",
+    );
+  });
+  it("formati slika i oznake granica ostaju latinica", () => {
+    // „ili" je srpska reč i ide u ćirilicu — latinica ostaju samo oznake formata.
+    expect(lat2cyr("JPG, PNG ili WebP")).toBe("JPG, PNG или WebP");
+    expect(lat2cyr("Max POEN")).toBe("Max ПОЕН");
+    expect(lat2cyr("Slika je prevelika (max 5MB).")).toBe("Слика је превелика (max 5МБ).");
+  });
+  it("browser ostaje latinica u svim padežima", () => {
+    expect(lat2cyr("Ovaj browser ne podržava obaveštenja")).toBe("Овај browser не подржава обавештења");
+    expect(lat2cyr("u podešavanjima browsera")).toBe("у подешавањима browsera");
+  });
+  it("imena stranih sistema i naslovi na engleskom ostaju latinica", () => {
+    // Engleska fraza bez slova q/w/x/y ne izgleda polomljeno — samo tiho postane
+    // ćirilična besmislica, pa se maskira cela fraza, ne pojedinačne reči.
+    expect(lat2cyr("WIR je stariji od Sardexa")).toBe("WIR је старији од Sardexa");
+    expect(lat2cyr("prva Local Exchange Trading System mreža")).toBe(
+      "прва Local Exchange Trading System мрежа",
+    );
+    expect(lat2cyr("knjiga The End of Money and the Future of Civilization")).toBe(
+      "књига The End of Money and the Future of Civilization",
+    );
+  });
+  it("duži token iz bele liste pobeđuje kraći koji mu je početak", () => {
+    // Bez sortiranja po dužini „AGPL-3.0“ pojede početak i ostavi „онлy“,
+    // a „Google“ ostavi „Аналyтицс“.
+    expect(lat2cyr("licenca AGPL-3.0-only")).toBe("лиценца AGPL-3.0-only");
+    expect(lat2cyr("koristimo Google Analytics")).toBe("користимо Google Analytics");
+  });
   it("ICU placeholderi {ime} ostaju netaknuti (inače next-intl FORMATTING_ERROR)", () => {
     expect(lat2cyr("Dobrodošli, {pseudonim}")).toBe("Добродошли, {pseudonim}");
     expect(lat2cyr("Imate {count} poruka")).toBe("Имате {count} порука");
