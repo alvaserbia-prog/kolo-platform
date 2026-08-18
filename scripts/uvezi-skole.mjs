@@ -1,7 +1,7 @@
 /**
  * Uvoz šifarnika škola iz zvaničnog izvoza JISP-a u `src/lib/skole-srbije.ts`.
  *
- *   node scripts/uvezi-skole.mjs <izvoz.csv> [--godina 2025/2026]
+ *   node scripts/uvezi-skole.mjs <izvoz.csv> [još-izvoza.csv ...] [--godina 2025/2026]
  *
  * ─── Odakle podaci ──────────────────────────────────────────────────────────
  *
@@ -28,12 +28,27 @@
  * **42 mesta**. Šifra je determinističan slug, pa ponovljen uvoz daje iste
  * vrednosti i zatečeni izbori dece ostaju važeći; sudar slugova ruši uvoz.
  *
- * ─── Šta se NE uvozi ────────────────────────────────────────────────────────
+ * ─── 🔴 SVI IZVOZI IDU U ISTOM POZIVU ───────────────────────────────────────
  *
- * Srednje škole. U ovom izvozu ih ima svega četrdesetak (muzičke, baletske i
- * poneka gimnazija koje dele ustanovu sa osnovnom), a u Srbiji ih je oko petsto.
- * Lista od četrdeset škola predstavljena kao „srednje škole u Srbiji" bila bi
- * netačna, pa se izostavljaju dok ne stigne izvoz srednjeg obrazovanja.
+ * Skripta ISPISUJE ceo `skole-srbije.ts`, ne dopisuje ga. Pokretanje samo sa
+ * izvozom srednjeg obrazovanja obrisalo bi 1.285 osnovnih škola — i to bez ijedne
+ * greške, jer bi fajl ostao ispravan, samo prazan tamo gde je bio pun. Zato se
+ * svi izvozi navode u istom pozivu:
+ *
+ *   node scripts/uvezi-skole.mjs osnovno.csv srednje.csv
+ *
+ * ─── Srednje škole i prag od 200 ────────────────────────────────────────────
+ *
+ * Tip se izvodi iz kolone „Vrsta ustanove" (Основна… → OSNOVNA, Средња… →
+ * SREDNJA), ali izvoz OSNOVNOG obrazovanja usput nosi i četrdesetak srednjih
+ * škola — muzičke i baletske koje dele ustanovu sa osnovnom. Lista od četrdeset
+ * predstavljena kao „srednje škole u Srbiji" bila bi netačna, a u Srbiji ih je
+ * oko petsto.
+ *
+ * Zato srednje škole ulaze tek kad ih u ulazu ima najmanje `PRAG_SREDNJIH` — što
+ * znači da je među izvozima i pravi izvoz srednjeg obrazovanja. Ispod tog broja
+ * se preskaču uz glasnu poruku. Prag je brana od nepotpune liste, ne merilo
+ * kvaliteta podataka.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -166,9 +181,19 @@ const KOLONE = {
 
 // ── Glavni tok ────────────────────────────────────────────────────────────────
 
-const putanja = process.argv[2];
-if (!putanja) {
-  console.error("Upotreba: node scripts/uvezi-skole.mjs <izvoz.csv> [--godina 2025/2026]");
+/** Najmanji broj srednjih škola koji se prihvata kao pun spisak (vidi zaglavlje). */
+const PRAG_SREDNJIH = 200;
+
+const putanje = [];
+for (let i = 2; i < process.argv.length; i++) {
+  const a = process.argv[i];
+  if (a === "--godina") { i++; continue; }
+  if (a.startsWith("--")) continue;
+  putanje.push(a);
+}
+if (putanje.length === 0) {
+  console.error("Upotreba: node scripts/uvezi-skole.mjs <izvoz.csv> [još-izvoza.csv ...] [--godina 2025/2026]");
+  console.error("🔴 Svi izvozi idu u ISTOM pozivu — skripta ispisuje ceo šifarnik, ne dopisuje ga.");
   process.exit(1);
 }
 const trazenaGodina = (() => {
@@ -176,34 +201,46 @@ const trazenaGodina = (() => {
   return i > 0 ? process.argv[i + 1] : null;
 })();
 
-const redovi = citajCsv(readFileSync(resolve(putanja), "utf8"));
-if (redovi.length < 2) {
-  console.error("Fajl nema nijedan red podataka.");
-  process.exit(1);
-}
-
-const norm = redovi[0].map(zaglavljeKljuc);
-const kolone = {};
-for (const [polje, kandidati] of Object.entries(KOLONE)) {
-  const i = norm.findIndex((h) => kandidati.includes(h));
-  if (i < 0) {
-    console.error(`Nedostaje kolona „${polje}". Zaglavlje: ${redovi[0].join(" | ")}`);
+// Svaki izvoz ima sopstveno zaglavlje — kolone se traže po fajlu, jer se redosled
+// između izveštaja ume da razlikuje.
+const podaci = [];
+for (const put of putanje) {
+  const redovi = citajCsv(readFileSync(resolve(put), "utf8"));
+  if (redovi.length < 2) {
+    console.error(`Fajl ${put} nema nijedan red podataka.`);
     process.exit(1);
   }
-  kolone[polje] = i;
+  const norm = redovi[0].map(zaglavljeKljuc);
+  const kolone = {};
+  for (const [polje, kandidati] of Object.entries(KOLONE)) {
+    const i = norm.findIndex((h) => kandidati.includes(h));
+    if (i < 0) {
+      console.error(`U ${put} nedostaje kolona „${polje}". Zaglavlje: ${redovi[0].join(" | ")}`);
+      process.exit(1);
+    }
+    kolone[polje] = i;
+  }
+  for (const r of redovi.slice(1)) {
+    const uzmi = (polje) => (r[kolone[polje]] ?? "").trim();
+    podaci.push({
+      godina: uzmi("godina"),
+      naziv: uzmi("naziv"),
+      mesto: uzmi("mesto"),
+      opstina: uzmi("opstina"),
+      vrsta: uzmi("vrsta"),
+      ucenika: uzmi("ucenika"),
+    });
+  }
+  console.log(`Pročitano: ${put} (${redovi.length - 1} redova)`);
 }
-
-const podaci = redovi.slice(1);
-const uzmi = (red, polje) => (red[kolone[polje]] ?? "").trim();
 
 // Najnovija školska godina sa značajnim brojem redova. Poslednja godina u izvozu
 // ume da bude tek započeta (svega nekoliko odeljenja), pa se bira po BROJU redova
 // među najnovijima, ne prosto najveći niz.
 const poGodini = new Map();
 for (const r of podaci) {
-  const g = uzmi(r, "godina");
-  if (!/^\d{4}\/\d{4}$/.test(g)) continue;
-  poGodini.set(g, (poGodini.get(g) ?? 0) + 1);
+  if (!/^\d{4}\/\d{4}$/.test(r.godina)) continue;
+  poGodini.set(r.godina, (poGodini.get(r.godina) ?? 0) + 1);
 }
 const godina =
   trazenaGodina ??
@@ -214,23 +251,34 @@ if (!godina) {
 }
 console.log(`Školska godina: ${godina} (${poGodini.get(godina)} odeljenja u izvozu)`);
 
-const skole = new Map();
-let preskoceneSrednje = 0;
-for (const r of podaci) {
-  if (uzmi(r, "godina") !== godina) continue;
-  const vrsta = uzmi(r, "vrsta");
-  if (vrsta.startsWith("Средња") || vrsta.startsWith("Srednja")) { preskoceneSrednje++; continue; }
+const jeSrednja = (vrsta) => vrsta.startsWith("Средња") || vrsta.startsWith("Srednja");
 
-  const naziv = preslovi(uzmi(r, "naziv"));
-  const mestoUnos = preslovi(uzmi(r, "mesto"));
+const skole = new Map();
+for (const r of podaci) {
+  if (r.godina !== godina) continue;
+  const naziv = preslovi(r.naziv);
+  const mestoUnos = preslovi(r.mesto);
   if (!naziv || !mestoUnos) continue;
 
   const kljuc = `${naziv}|${mestoUnos}`;
   if (!skole.has(kljuc)) {
-    skole.set(kljuc, { naziv, mestoUnos, opstina: preslovi(uzmi(r, "opstina")), ucenika: 0 });
+    skole.set(kljuc, {
+      naziv,
+      mestoUnos,
+      opstina: preslovi(r.opstina),
+      tip: jeSrednja(r.vrsta) ? "SREDNJA" : "OSNOVNA",
+      ucenika: 0,
+    });
   }
-  const broj = Number(uzmi(r, "ucenika").replace(",", "."));
+  const broj = Number(r.ucenika.replace(",", "."));
   if (Number.isFinite(broj) && broj > 0) skole.get(kljuc).ucenika += broj;
+}
+
+// Srednje škole ulaze tek kad ih ima dovoljno da spisak bude pun (vidi zaglavlje).
+const srednjih = [...skole.values()].filter((s) => s.tip === "SREDNJA").length;
+const uzimamSrednje = srednjih >= PRAG_SREDNJIH;
+if (!uzimamSrednje) {
+  for (const [k, v] of skole) if (v.tip === "SREDNJA") skole.delete(k);
 }
 
 // ── Provere koje ruše ceo uvoz ────────────────────────────────────────────────
@@ -255,7 +303,7 @@ for (const s of skole.values()) {
     sifra,
     naziv: s.naziv,
     mesto,
-    tip: "OSNOVNA",
+    tip: s.tip,
     ucenika: Math.round(s.ucenika) || null,
   });
 }
@@ -295,12 +343,15 @@ const telo =
   `\n];\n`;
 writeFileSync(IZLAZ, zaglavlje + telo, "utf8");
 
-console.log(`✅ Upisano ${izlazni.length} osnovnih škola u ${IZLAZ}`);
+const brojPoTipu = (t) => izlazni.filter((s) => s.tip === t).length;
+console.log(`✅ Upisano ${izlazni.length} škola u ${IZLAZ}`);
+console.log(`   osnovnih: ${brojPoTipu("OSNOVNA")}   srednjih: ${brojPoTipu("SREDNJA")}`);
 console.log(`   ukupno upisanih učenika: ${izlazni.reduce((z, s) => z + (s.ucenika ?? 0), 0).toLocaleString("sr-RS")}`);
 if (bezBroja > 0) console.log(`   🟡 bez broja učenika: ${bezBroja} — u procentualnoj listi stoje sa crticom.`);
-if (preskoceneSrednje > 0) {
+if (!uzimamSrednje && srednjih > 0) {
   console.log(
-    `   🟡 preskočeno ${preskoceneSrednje} odeljenja srednjih škola — ovaj izvoz ih nosi tek četrdesetak,\n` +
-      `      a u Srbiji ih je oko petsto; čeka se izvoz srednjeg obrazovanja.`
+    `   🟡 preskočeno ${srednjih} srednjih škola — ispod praga od ${PRAG_SREDNJIH}, dakle nije pun spisak.\n` +
+      `      Izvoz osnovnog obrazovanja usput nosi četrdesetak srednjih (muzičke, baletske);\n` +
+      `      dodaj izvoz SREDNJEG obrazovanja u isti poziv pa će ući obe liste.`
   );
 }
