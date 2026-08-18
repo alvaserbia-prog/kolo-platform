@@ -737,60 +737,73 @@ Tvrtke i obrtnici sudjeluju kroz Pokroviteljstvo — podupru Fondaciju, a vlasni
     pitanja: [
       {
         id: 47,
-        pitanje: `Je li itko od regulatora (NBS, Poreska, Poverenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
+        pitanje: `Je li itko od regulatora (NBS, Porezna, Povjerenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
         odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost — ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
 
-Ono na čemu sustav počiva nije nečija dozvola, nego vlastita pravna konstrukcija. POEN po pravilima nije novac, valuta, elektronički novac, sredstvo plaćanja ni digitalna imovina, i ne može se pretvoriti u nešto s vrijednošću izvan sustava. Ažuriranje evidencije POEN-a između korisnika nije platna transakcija u smislu propisa o platnim uslugama. Za samu razmjenu dobara i usluga između ljudi vrijede opća pravila obveznog prava, a sporovi se vode pred nadležnim sudom. Pravna pozicija sustava, dakle, proizlazi iz toga kako je sustav strukturno postavljen, a ne iz vanjske suglasnosti.
+Ono na čemu sustav počiva nije nečija dozvola, nego vlastita pravna konstrukcija. POEN po pravilima nije novac, valuta, elektronički novac, platno sredstvo, financijski instrument ni digitalna imovina, i ne može se pretvoriti u nešto s vrijednošću izvan sustava. Ažuriranje evidencije POEN-a između članova nije platna transakcija u smislu propisa o platnim uslugama. Za samu razmjenu dobara i usluga vrijede opća pravila obveznog prava, a sporovi se vode pred nadležnim sudom. Pravna pozicija sustava, dakle, proizlazi iz toga kako je sustav postavljen, a ne iz vanjske suglasnosti.
 
-Što se poreza tiče, način na koji će se ove razmjene tretirati u poreznom i fiskalnom smislu ne ukida tvoje postojeće obveze ako obavljaš djelatnost. Fondacija ne pruža porezni savjet i ti si odgovoran za vlastite porezne obveze.
+Što se poreza tiče, porezni i fiskalni tretman ovih razmjena ne ukida tvoje postojeće obveze ako obavljaš djelatnost. Fondacija ne pruža porezni savjet — svoje porezne obveze snosiš ti.
 
 Za zaštitu osobnih podataka uvijek imaš pravo obratiti se Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti.
 
-Izmjene propisa ili tumačenja regulatora rizik su koji trebaš imati u vidu prije nego što se uključiš.`,
+Izmjene propisa ili novo tumačenje regulatora rizik su koji treba imati na umu prije nego što se uključiš.`,
+      },
+      {
+        id: 50,
+        pitanje: `Po čemu se POEN razlikuje od elektroničkog novca i nije li donacija zapravo skrivena kupnja POEN-a?`,
+        odgovor: `Elektronički novac ima tri svojstva: dobiješ ga kad uplatiš novac, predstavlja tvoje potraživanje prema izdavatelju i možeš ga u svakom trenutku vratiti i dobiti novac natrag. POEN ne ispunjava nijedno od ta tri.
+
+POEN se ne upisuje po uplati novca, nego po doprinosu zajednici ili po potvrđenom statusu u nekom od programa. Fondacija ti po osnovi POEN-a ništa ne duguje i ne otkupljuje ga. POEN ne možeš pretvoriti u novac ni u bilo koje sredstvo plaćanja izvan sustava.
+
+Donacija nije skrivena kupnja POEN-a zato što su to dva pravno neovisna akta. Prvi je tvoja nepovratna donacija Fondaciji. Drugi je automatski upis POEN-a koji Protokol izvodi po unaprijed objavljenim pravilima.
+
+Iz donacije ne nastaje tvoje potraživanje — ni pravo da od Fondacije tražiš upis POEN-a, ni pravo da tražiš novac natrag. Upis POEN-a nije protuusluga za donaciju.
+
+Radi orijentacije koristi se mjerna skala od otprilike 1 POEN za 1 dinar, ali Fondacija tu vrijednost ne jamči i ne mijenja POEN za novac.`,
+      },
+      {
+        id: 98,
+        pitanje: `Je li POEN digitalna imovina — virtualna valuta ili digitalni token — po Zakonu o digitalnoj imovini?`,
+        odgovor: `Nije. Zakon o digitalnoj imovini poznaje dvije vrste digitalne imovine — virtualnu valutu i digitalni token — i POEN ne ispunjava odlike nijedne.
+
+Virtualna valuta je digitalni zapis vrijednosti koji se kupuje, prodaje i prenosi, i kojim se plaća ili ulaže. POEN se ne može kupiti ni prodati: ne nabavlja se novcem, nego nastaje upisom po unaprijed objavljenim pravilima, kao zapis o doprinosu. Nema vrijednost izvan sustava, nema tržište ni cijenu, ne može se prenijeti izvan Protokola i Fondacija ga ne otkupljuje. Donacija nije kupnja POEN-a — to su dva pravno neovisna akta, objašnjena u posebnom pitanju.
+
+Digitalni token je zapis koji nosi neko imovinsko pravo — udio, potraživanje, pravo na prinos ili uslugu. POEN ne nosi nijedno: iz njega ne nastaje potraživanje prema Fondaciji ni prema bilo kome, ne daje udio, kamatu ni prinos, i ne obvezuje nikoga — ni Fondaciju ni članove — da ti za njega nešto pruži. On bilježi činjenicu doprinosa, kao upis u matičnoj knjizi — a upis u knjizi nije imovina.
+
+Iz istih razloga POEN nije ni financijski instrument. Isto vrijedi i za ZRNO: ne prepisuje se drugom članu, nema tržište i ne nosi imovinsko pravo — više o tome u odjeljku „POEN i ZRNO".
+
+Kao i sve ovdje, ovo je pravna konstrukcija sustava, a ne potvrda regulatora — rizik izmjene propisa ili tumačenja opisan je u prvom pitanju ovog odjeljka.`,
       },
       {
         id: 48,
         pitanje: `Redovito prodajem viškove (med, rakija, zimnica) ili pružam obrtničke usluge — treba li mi račun, PDV ili registrirana djelatnost? Tko snosi porez?`,
         odgovor: `KOLO ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime, ali ti ne ukida obveze koje već imaš po općim propisima.
 
-Razmjena dobara i usluga među korisnicima nije konstruirana kao klasična prodaja, a sam prijenos POEN-a nije plaćanje novcem u smislu propisa o platnim uslugama — POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POEN-a, ali ne vodi tvoje porezne knjige niti izdaje račune.
+Razmjena dobara i usluga među članovima nije postavljena kao klasična prodaja, a prijenos POEN-a nije plaćanje novcem u smislu propisa o platnim uslugama — POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POEN-a, ali ne vodi tvoje porezne knjige niti izdaje račune.
 
-To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovito i u opsegu koji nalikuje djelatnosti, na tebe se primjenjuju opći propisi kao i izvan platforme. Fondacija ne pruža porezni savjet i nije strana u tvojoj razmjeni — za ispunjenje, kvalitetu i rizik odgovarate ti i druga strana po općim pravilima obveznog prava, a za vlastite porezne obveze odgovoran si ti.`,
+To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovito i u opsegu koji nalikuje djelatnosti, na tebe se primjenjuju opći propisi kao i izvan platforme. Za pojedina dobra — poput alkoholnih pića ili hrane — postoje i posebni propisi o proizvodnji i prometu, i oni vrijede i ovdje.
+
+Fondacija ne pruža porezni savjet i nije strana u tvojoj razmjeni: za ispunjenje, kvalitetu i rizik odgovarate ti i druga strana po općim pravilima obveznog prava, a svoje porezne obveze snosiš ti.`,
       },
       {
         id: 49,
         pitanje: `Utječe li sudjelovanje u KOLU / POEN na moju mirovinu ili socijalna davanja?`,
-        odgovor: `POEN ne utječe na tvoju mirovinu ni na socijalna davanja.
+        odgovor: `Sa strane sustava — ne. POEN nije novac, nije zarada ni prihod: to je interni zapis u evidenciji o tome što si dao zajednici, i ne može se pretvoriti u sredstvo s vrijednošću izvan sustava. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigdje kao tvoj prihod.
 
-POEN nije novac, nije plaća ni prihod — to je interni zapis u evidenciji o tome što si dao zajednici, i ne može se pretvoriti u sredstvo s vrijednošću izvan sustava. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigdje kao tvoj prihod.
+Ako ti se POEN upisuje kroz neki od socijalnih programa (na primjer kao primarnom skrbniku, starijem članu ili kroz Školovanje), ni to nije socijalna pomoć ni naknada — nego automatsko ažuriranje evidencije koje takvom sudjelovanju daje ravnopravno mjesto u sustavu.
 
-Ako primaš POEN kroz neki od socijalnih programa (na primjer kao roditelj-skrbnik, stariji korisnik ili u školovanju), ni to nije socijalna pomoć ni naknada — to je samo automatsko ažuriranje evidencije u POEN-ima koje ti omogućava ravnopravnije sudjelovanje u sustavu.
+Treba, međutim, razlikovati POEN od onoga što radiš izvan sustava. Sve što naplaćuješ u novcu tvoja je djelatnost za koju vrijede opći propisi — i to može imati posljedice za tvoj status, ovisno o tome što i u kojem opsegu radiš.
 
-Trebaš, međutim, napraviti razliku između POEN-a i onoga što radiš izvan sustava. Ako se s nekim dogovoriš da dio razmjene ide u dinarima, ta dinarska djelatnost je tvoja i za nju vrijede opći propisi — kao i za svaku drugu razmjenu dobara i usluga. To može imati posljedice po tvoj status, ovisno o tome što i u kojem opsegu radiš.
-
-Fondacija ne pruža porezni ni pravni savjet. Ako primaš mirovinu ili neko socijalno davanje pa nisi siguran kako se to slaže s tvojom djelatnošću, najsigurnije je provjeriti s nadležnom službom (PIO) ili s knjigovođom.`,
-      },
-      {
-        id: 50,
-        pitanje: `Po čemu se POEN razlikuje od elektroničkog novca i nije li donacija zapravo skrivena kupnja POEN-a?`,
-        odgovor: `Elektronički novac ima tri osobine: dobiješ ga kada uplatiš novac, predstavlja tvoje potraživanje prema izdavatelju, i možeš ga u svakom trenutku vratiti i dobiti novac natrag. POEN ne ispunjava nijednu od te tri.
-
-POEN se ne upisuje zato što si uplatio novac, nego zato što si pridonio zajednici ili imaš status koji to potvrđuje. Fondacija ti ništa ne duguje na temelju POEN-a i ne otkupljuje ga. POEN ne možeš pretvoriti u dinare ni u bilo koje sredstvo plaćanja izvan sustava.
-
-Donacija nije skrivena kupnja POEN-a zato što su to dva pravno neovisna događaja. Prvi je tvoja nepovratna donacija Fondaciji. Drugi je automatski upis POEN-a koji Protokol radi po unaprijed utvrđenim pravilima.
-
-Ne postoji ugovor po kojem za uplaćenih X dinara dobivaš Y POEN-a. Donacija ti ne daje pravo da od Fondacije tražiš da ti POEN upiše, niti pravo da tražiš novac natrag. Upis POEN-a nije protuusluga za donaciju.
-
-Da znaš o kolikoj je vrijednosti riječ, koristi se orijentir da je 1 POEN otprilike 1 dinar, ali Fondacija tu vrijednost ne jamči i ne mijenja POEN za novac.`,
+Fondacija ne pruža porezni ni pravni savjet. Ako primaš mirovinu ili neko socijalno davanje, a nisi siguran kako se ono slaže s onim što radiš, najsigurnije je provjeriti s nadležnom službom ili s knjigovođom.`,
       },
       {
         id: 77,
         pitanje: `Je li Fondacija obveznik propisa o sprječavanju pranja novca (AML/KYC) i identificira li donatore?`,
-        odgovor: `Fondacija nije financijska institucija i ne posluje novcem korisnika — POEN nije novac, a razmjena među korisnicima nije platna transakcija. Po svojoj djelatnosti Fondacija nije obveznik propisa o sprječavanju pranja novca i financiranja terorizma.
+        odgovor: `Fondacija nije financijska institucija i ne posluje novcem članova — POEN nije novac, a razmjena među članovima nije platna transakcija. Po svojoj djelatnosti Fondacija nije među obveznicima koje propisi o sprječavanju pranja novca i financiranja terorizma nabrajaju.
 
-Donatori se ipak ne primaju anonimno. Donacije fizičkih osoba primaju se uplatom na račun Fondacije, s bankovnih računa čiji je vlasnik identificiran — pa identifikaciju uplatitelja i provjeru podrijetla sredstava provodi sam bankarski sustav, po svojim propisima. Pokrovitelji su pravne osobe i poduzetnici koji se identificiraju ugovorom o donaciji.
+Donacije se ipak ne primaju anonimno. Primaju se kroz bankovni sustav — uplatom na račun Fondacije ili karticom — s računa čiji je vlasnik identificiran, pa identifikaciju uplatitelja i provjeru podrijetla sredstava provodi banka po svojim propisima. Pokrovitelji su pravne osobe i obrtnici koji se identificiraju ugovorom.
 
-Podatke o donacijama Fondacija čuva u skladu s propisima o financijskom izvještavanju i čini ih dostupnima nadležnim tijelima — uključujući Poresku upravu i Upravu za sprečavanje pranja novca — kada to zakon nalaže.`,
+Podatke o donacijama Fondacija čuva u skladu s propisima o financijskom izvještavanju i čini ih dostupnima nadležnim tijelima — uključujući Poresku upravu i Upravu za sprečavanje pranja novca — kad to zakon nalaže.`,
       },
     ],
   },

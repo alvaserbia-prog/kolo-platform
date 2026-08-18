@@ -748,60 +748,73 @@ A cégek és az egyéni vállalkozók a Patronálás útján vesznek részt: tá
     pitanja: [
       {
         id: 47,
-        pitanje: `Megerősítette-e bármelyik szabályozó hatóság (Nemzeti Bank, Adóhivatal, Biztos), hogy ez jogszerű, vagy csak az Alapítvány állítja ezt?`,
-        odgovor: `Nem. Jelenleg nincs olyan írásbeli szabályozói állásfoglalás, amely megerősítené a jogszerűséget — sem a Nemzeti Bank, sem az Adóhivatal, sem a Biztos nem adott ki ilyen igazolást.
+        pitanje: `Megerősítette-e bármelyik szabályozó (a Nemzeti Bank, az Adóhivatal, a Biztos), hogy ez jogszerű, vagy csak az Alapítvány állítja?`,
+        odgovor: `Nem. Jelenleg nincs olyan írásos szabályozói állásfoglalás, amely a jogszerűséget megerősítené — sem a Nemzeti Bank, sem az Adóhivatal, sem a Biztos nem adott ki ilyen igazolást.
 
-Amin a rendszer nyugszik, az nem valakinek az engedélye, hanem a saját jogi felépítése. A POEN a szabályok szerint nem pénz, nem valuta, nem elektronikus pénz, nem fizetőeszköz és nem digitális vagyon, és nem alakítható át semmivé, aminek a rendszeren kívül értéke volna. A POEN-nyilvántartás felhasználók közötti frissítése nem pénzforgalmi művelet a pénzforgalmi szolgáltatásokról szóló szabályok értelmében. Magára az emberek közötti áru- és szolgáltatáscserére a kötelmi jog általános szabályai vonatkoznak, a vitákat pedig az illetékes bíróság rendezi. A rendszer jogi helyzete tehát abból következik, ahogyan a rendszer szerkezetileg fel van építve, nem pedig külső jóváhagyásból.
+Amin a rendszer nyugszik, az nem valakinek az engedélye, hanem a saját jogi felépítése. A szabályok szerint a POEN nem pénz, nem valuta, nem elektronikus pénz, nem fizetőeszköz, nem pénzügyi eszköz és nem digitális vagyon, és nem alakítható át olyasmivé, aminek a rendszeren kívül értéke van. A POEN-nyilvántartás frissítése a tagok között nem pénzforgalmi művelet a pénzforgalmi szolgáltatásokra vonatkozó szabályok értelmében. Magára a javak és szolgáltatások cseréjére a kötelmi jog általános szabályai vonatkoznak, a jogvitákat pedig az illetékes bíróság tárgyalja. A rendszer jogi helyzete tehát abból következik, ahogyan a rendszer fel van építve, nem pedig külső jóváhagyásból.
 
-Ami az adókat illeti: az, ahogyan e cseréket adójogi és számlaadási szempontból kezelni fogják, nem szünteti meg a meglévő kötelezettségeidet, ha tevékenységet folytatsz. Az Alapítvány nem ad adótanácsot, és a saját adókötelezettségeidért te felelsz.
+Ami az adókat illeti, e cserék adó- és számlaadási megítélése nem szünteti meg a meglévő kötelezettségeidet, ha tevékenységet folytatsz. Az Alapítvány nem ad adótanácsot — az adókötelezettségeidet te viseled.
 
-A személyes adatok védelme ügyében mindig jogod van a közérdekű információkkal és a személyes adatok védelmével foglalkozó Biztoshoz fordulni.
+A személyes adatok védelme ügyében mindig jogod van a közérdekű információkért és a személyes adatok védelméért felelős Biztoshoz fordulni.
 
-A szabályok vagy a szabályozói értelmezések változása olyan kockázat, amelyet érdemes figyelembe venned, mielőtt csatlakozol.`,
+A jogszabályok változása vagy a szabályozó új értelmezése olyan kockázat, amelyet érdemes szem előtt tartani, mielőtt csatlakozol.`,
+      },
+      {
+        id: 50,
+        pitanje: `Miben különbözik a POEN az elektronikus pénztől, és nem rejtett POEN-vásárlás-e valójában az adomány?`,
+        odgovor: `Az elektronikus pénznek három ismérve van: akkor kapod, ha pénzt fizetsz be, a kibocsátóval szembeni követelésedet testesíti meg, és bármikor visszaadhatod, hogy visszakapd a pénzed. A POEN egyiknek sem felel meg.
+
+A POEN nem pénz befizetésére rögzül, hanem a közösséghez való hozzájárulásra vagy valamelyik program megerősített jogállására. Az Alapítvány a POEN alapján semmivel nem tartozik neked, és nem is vásárolja vissza. A POEN-t nem alakíthatod dinárrá, sem a rendszeren kívüli bármely fizetőeszközzé.
+
+Az adomány azért nem rejtett POEN-vásárlás, mert ez két jogilag független aktus. Az első a te visszavonhatatlan adományod az Alapítványnak. A második a POEN automatikus rögzítése, amelyet a Protokoll előre közzétett szabályok szerint végez.
+
+Az adományból nem keletkezik követelésed — sem az a jog, hogy az Alapítványtól POEN rögzítését követeld, sem az, hogy visszakérd a pénzt. A POEN rögzítése nem ellenszolgáltatás az adományért.
+
+Tájékozódás végett nagyjából 1 POEN = 1 dinár mérőskála használatos, de az Alapítvány ezt az értéket nem szavatolja, és a POEN-t nem váltja pénzre.`,
+      },
+      {
+        id: 98,
+        pitanje: `Digitális vagyon-e a POEN — virtuális valuta vagy digitális token — a digitális vagyonról szóló törvény szerint?`,
+        odgovor: `Nem az. A digitális vagyonról szóló törvény a digitális vagyon két fajtáját ismeri — a virtuális valutát és a digitális tokent —, és a POEN egyiknek az ismérveit sem teljesíti.
+
+A virtuális valuta olyan digitális értékfeljegyzés, amelyet adnak-vesznek és átruháznak, és amellyel fizetnek vagy befektetnek. A POEN sem meg nem vásárolható, sem el nem adható: nem pénzért szerezhető meg, hanem előre közzétett szabályok szerinti bejegyzéssel keletkezik, a hozzájárulás feljegyzéseként. A rendszeren kívül nincs értéke, nincs piaca és ára, nem vihető ki a Protokollból, és az Alapítvány nem vásárolja vissza. Az adomány nem POEN-vásárlás — ez két jogilag független aktus, külön kérdésben kifejtve.
+
+A digitális token olyan feljegyzés, amely valamilyen vagyoni jogot hordoz: részesedést, követelést, hozamhoz vagy szolgáltatáshoz való jogot. A POEN egyiket sem hordozza: sem az Alapítvánnyal, sem bárki mással szemben nem keletkezik belőle követelés, nem ad részesedést, kamatot és hozamot, és senkit — sem az Alapítványt, sem a tagokat — nem kötelez arra, hogy érte bármit nyújtson neked. A hozzájárulás tényét rögzíti, mint egy anyakönyvi bejegyzés — a könyvbe tett bejegyzés pedig nem vagyon.
+
+Ugyanezen okokból a POEN pénzügyi eszköznek sem minősül. Ugyanez áll a ZRNO-ra: nem írható át másik tagnak, nincs piaca és nem hordoz vagyoni jogot — erről bővebben a „POEN és ZRNO" szakaszban.
+
+Mint minden itt, ez is a rendszer jogi felépítése, nem szabályozói megerősítés — a jogszabályok vagy értelmezésük változásának kockázatát e szakasz első kérdése írja le.`,
       },
       {
         id: 48,
-        pitanje: `Rendszeresen árulom a felesleget (méz, pálinka, befőtt), vagy kézműves szolgáltatást nyújtok — kell-e számla, áfa vagy bejegyzett tevékenység? Ki viseli az adót?`,
-        odgovor: `A KOLO nem számol neked adót, és nem állít ki adóügyi számlát a nevedben, de nem is szünteti meg azokat a kötelezettségeidet, amelyek az általános szabályok szerint már fennállnak.
+        pitanje: `Rendszeresen eladom a feleslegemet (méz, pálinka, befőttek), vagy kézműves szolgáltatást nyújtok — kell-e számla, áfa vagy bejegyzett tevékenység? Ki viseli az adót?`,
+        odgovor: `A KOLO nem számol el helyetted adót, és nem állít ki a nevedben adóügyi nyugtát, de nem is szünteti meg azokat a kötelezettségeidet, amelyek az általános szabályok szerint már fennállnak.
 
-A felhasználók közötti áru- és szolgáltatáscsere nem klasszikus adásvételként van felépítve, maga a POEN átadása pedig nem pénzbeli fizetés a pénzforgalmi szabályok értelmében — a POEN hozzájárulás-nyilvántartás, nem pénz. Ezért a Protokoll frissíti a POEN-nyilvántartást, de nem vezeti az adókönyveidet, és nem állít ki számlákat.
+A javak és szolgáltatások tagok közötti cseréje nem klasszikus adásvételként épül fel, a POEN átírása pedig nem pénzbeli fizetés a pénzforgalmi szolgáltatásokra vonatkozó szabályok értelmében — a POEN a hozzájárulás nyilvántartása, nem pénz. Ezért a Protokoll frissíti a POEN-nyilvántartást, de nem vezeti az adókönyveidet és nem állít ki számlát.
 
-Ez azonban nem jelenti azt, hogy mentesülnél a szabályok alól. Ha árut vagy szolgáltatást rendszeresen és tevékenységre emlékeztető mértékben nyújtasz, rád ugyanúgy vonatkoznak az általános szabályok, mint a platformon kívül. Az Alapítvány nem ad adótanácsot, és nem részese a cserédnek — a teljesítésért, a minőségért és a kockázatért te és a másik fél feleltek a kötelmi jog általános szabályai szerint, a saját adókötelezettségeidért pedig te felelsz.`,
+Ez azonban nem jelenti azt, hogy mentesülnél a szabályok alól. Ha az árut vagy a szolgáltatást rendszeresen és tevékenységre emlékeztető mértékben nyújtod, ugyanúgy vonatkoznak rád az általános szabályok, mint a platformon kívül. Egyes javakra — például az alkoholtartalmú italokra vagy az élelmiszerre — külön előállítási és forgalmazási szabályok is vonatkoznak, és azok itt is érvényesek.
+
+Az Alapítvány nem ad adótanácsot, és nem részese a cserédnek: a teljesítésért, a minőségért és a kockázatért te és a másik fél feleltek a kötelmi jog általános szabályai szerint, az adókötelezettségeidet pedig te viseled.`,
       },
       {
         id: 49,
         pitanje: `Hat-e a KOLO-ban való részvétel / a POEN a nyugdíjamra vagy a szociális juttatásaimra?`,
-        odgovor: `A POEN nem hat sem a nyugdíjadra, sem a szociális juttatásaidra.
+        odgovor: `A rendszer felől nézve — nem. A POEN nem pénz, nem kereset és nem jövedelem: belső nyilvántartási bejegyzés arról, mit adtál a közösségnek, és nem alakítható át a rendszeren kívül értékkel bíró eszközzé. Az Alapítvány semmilyen pénzbeli juttatást nem fizet neked, és a POEN-t sehol nem jelenti be a jövedelmedként.
 
-A POEN nem pénz, nem kereset és nem jövedelem — belső nyilvántartási bejegyzés arról, mit adtál a közösségnek, és nem alakítható át a rendszeren kívül értékkel bíró eszközzé. Az Alapítvány semmilyen pénzbeli juttatást nem fizet neked, és a POEN-t sehol nem jelenti be a jövedelmedként.
+Ha a POEN valamelyik szociális programon keresztül rögzül neked (például elsődleges gondviselőként, idősebb tagként vagy a Tanulás révén), az sem szociális segély és nem juttatás, hanem a nyilvántartás automatikus frissítése, amely az ilyen részvételnek egyenrangú helyet ad a rendszerben.
 
-Ha valamelyik szociális programon keresztül kapsz POEN-t (például szülő-gondviselőként, idős felhasználóként vagy tanulásban), az sem szociális segély és nem juttatás — csupán automatikus POEN-nyilvántartás-frissítés, amely egyenrangúbb részvételt tesz lehetővé a rendszerben.
+Meg kell azonban különböztetni a POEN-t attól, amit a rendszeren kívül csinálsz. Mindaz, amiért pénzt kérsz, a te tevékenységed, amelyre az általános szabályok vonatkoznak — és ennek következményei lehetnek a jogállásodra nézve, attól függően, mit és milyen mértékben csinálsz.
 
-Különbséget kell azonban tenned a POEN és aközött, amit a rendszeren kívül teszel. Ha valakivel úgy állapodsz meg, hogy a csere egy része dinárban történik, az a dináros tevékenység a tiéd, és arra az általános szabályok vonatkoznak — mint minden más áru- és szolgáltatáscserére. Ennek lehetnek következményei a státuszodra nézve, attól függően, mit és milyen mértékben teszel.
-
-Az Alapítvány sem adó-, sem jogi tanácsot nem ad. Ha nyugdíjat vagy valamilyen szociális juttatást kapsz, és nem vagy biztos abban, hogyan fér ez össze a tevékenységeddel, a legbiztosabb, ha az illetékes szervnél (nyugdíjbiztosító) vagy könyvelőnél érdeklődsz.`,
-      },
-      {
-        id: 50,
-        pitanje: `Miben különbözik a POEN az elektronikus pénztől, és nem rejtett POEN-vásárlás-e az adomány?`,
-        odgovor: `Az elektronikus pénznek három ismérve van: akkor kapod, ha pénzt fizetsz be; a kibocsátóval szembeni követelésedet testesíti meg; és bármikor visszaválthatod, hogy pénzt kapj vissza. A POEN e három közül egyiknek sem felel meg.
-
-A POEN nem azért kerül a nyilvántartásba, mert pénzt fizettél be, hanem azért, mert hozzájárultál a közösséghez, vagy olyan státuszod van, amely ezt igazolja. Az Alapítvány a POEN alapján semmivel sem tartozik neked, és nem is vásárolja vissza. A POEN nem alakítható át sem dinárrá, sem a rendszeren kívüli bármely fizetőeszközzé.
-
-Az adomány azért nem rejtett POEN-vásárlás, mert ez két jogilag független esemény. Az első a te visszavonhatatlan adományod az Alapítványnak. A második a POEN automatikus rögzítése, amelyet a Protokoll előre meghatározott szabályok szerint végez.
-
-Nincs olyan szerződés, amely szerint a befizetett X dinárért Y POEN-t kapsz. Az adomány nem ad jogot arra, hogy az Alapítványtól POEN rögzítését követeld, sem arra, hogy a pénzt visszakérd. A POEN rögzítése nem ellenszolgáltatás az adományért.
-
-Hogy tudd, milyen nagyságrendről van szó, támpontként az szolgál, hogy 1 POEN körülbelül 1 dinár, de az Alapítvány ezt az értéket nem garantálja, és a POEN-t nem váltja pénzre.`,
+Az Alapítvány sem adó-, sem jogi tanácsot nem ad. Ha nyugdíjat vagy valamilyen szociális juttatást kapsz, és nem vagy biztos benne, hogyan fér össze azzal, amit csinálsz, a legbiztosabb, ha az illetékes hivatalnál (a nyugdíjpénztárnál) vagy könyvelőnél ellenőrzöd.`,
       },
       {
         id: 77,
-        pitanje: `Az Alapítvány a pénzmosás elleni szabályok (AML/KYC) hatálya alá tartozik-e, és azonosítja-e az adományozókat?`,
-        odgovor: `Az Alapítvány nem pénzügyi intézmény, és nem a felhasználók pénzével gazdálkodik — a POEN nem pénz, a felhasználók közötti csere pedig nem pénzforgalmi művelet. Tevékenysége szerint az Alapítvány nem tartozik a pénzmosás és a terrorizmus finanszírozása elleni szabályok hatálya alá.
+        pitanje: `Az Alapítvány a pénzmosás megelőzéséről szóló szabályok (AML/KYC) kötelezettje-e, és azonosítja-e az adományozókat?`,
+        odgovor: `Az Alapítvány nem pénzügyi intézmény, és nem kezeli a tagok pénzét — a POEN nem pénz, a tagok közötti csere pedig nem pénzforgalmi művelet. Tevékenysége szerint az Alapítvány nincs azon kötelezettek között, amelyeket a pénzmosás és a terrorizmus finanszírozása megelőzéséről szóló szabályok felsorolnak.
 
-Az adományozókat mindazonáltal nem fogadja névtelenül. A magánszemélyek adományai az Alapítvány számlájára, ellenőrzött bankszámlákról érkező utalással érkeznek — így a befizető azonosítását és a pénzeszközök eredetének ellenőrzését maga a bankrendszer végzi el, a saját szabályai szerint. A patrónusok olyan jogi személyek és egyéni vállalkozók, akiket az adományozási szerződés azonosít.
+Az adományokat ettől függetlenül nem fogadjuk névtelenül. A banki rendszeren keresztül érkeznek — az Alapítvány számlájára történő befizetéssel vagy bankkártyával —, olyan számláról, amelynek tulajdonosa azonosított, így a befizető azonosítását és a pénzeszközök eredetének ellenőrzését a bank végzi a saját szabályai szerint. A patrónusok jogi személyek és egyéni vállalkozók, akiket szerződés azonosít.
 
-Az adományokra vonatkozó adatokat az Alapítvány a pénzügyi beszámolási szabályoknak megfelelően őrzi, és az illetékes szervek — köztük az Adóhivatal és a pénzmosás elleni hatóság — rendelkezésére bocsátja, amikor azt törvény írja elő.`,
+Az adományok adatait az Alapítvány a pénzügyi beszámolásra vonatkozó szabályokkal összhangban őrzi, és hozzáférhetővé teszi az illetékes hatóságok — köztük az Adóhivatal és a pénzmosás megelőzéséért felelős hivatal — számára, ha a törvény ezt előírja.`,
       },
     ],
   },

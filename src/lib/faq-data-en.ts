@@ -733,64 +733,77 @@ Companies and sole traders take part through Sponsorship — they support the Fo
   },
   {
     id: "porezi-legalnost",
-    naslov: "Taxes and Legality",
+    naslov: "Taxes and legality",
     pitanja: [
       {
         id: 47,
-        pitanje: `Has any regulator (the National Bank, the Tax Authority, the Commissioner) confirmed this is legal, or is that just the Foundation's claim?`,
-        odgovor: `No. At present there is no written regulatory opinion confirming legality — neither the National Bank of Serbia, nor the Tax Administration, nor the Commissioner for Personal Data Protection has issued such a confirmation.
+        pitanje: `Has any regulator (the National Bank, the Tax Administration, the Commissioner) confirmed that this is legal, or is it only the Foundation saying so?`,
+        odgovor: `No. At present there is no written opinion from a regulator confirming legality — neither the National Bank, nor the Tax Administration, nor the Commissioner has issued such a confirmation.
 
-What the system rests on is not someone's permission, but its own legal construction. POEN under the rules is not money, a currency, electronic money, a means of payment or a digital asset, and cannot be converted into anything of value outside the system. Updating the POEN ledger between users is not a payment transaction within the meaning of payment services regulations. For the actual exchange of goods and services between people, the general rules of contract law apply, and disputes are brought before a competent court. The system's legal position therefore derives from how the system is structurally designed, not from external approval.
+What the system rests on is not anyone's permission but its own legal construction. Under the rules, POEN is not money, a currency, electronic money, a means of payment, a financial instrument or digital assets, and it cannot be turned into anything with value outside the system. Updating the POEN record between members is not a payment transaction within the meaning of payment services regulations. The exchange of goods and services itself is governed by the general rules of the law of obligations, and disputes are heard by the competent court. The system's legal position therefore follows from how the system is set up, not from external approval.
 
-As for taxes, the way these exchanges will be treated for tax and fiscal purposes does not override your existing obligations if you conduct an activity. The Foundation does not provide tax advice and you are responsible for your own tax obligations.
+As for tax, the tax and fiscal treatment of these exchanges does not remove your existing obligations if you carry on a business. The Foundation does not provide tax advice — your tax obligations are yours to bear.
 
-For personal data protection you always have the right to contact the Commissioner for Information of Public Importance and Personal Data Protection.
+For the protection of personal data you always have the right to turn to the Commissioner for Information of Public Importance and Personal Data Protection.
 
-Changes in regulations or regulatory interpretations are a risk you should bear in mind before joining.`,
-      },
-      {
-        id: 48,
-        pitanje: `I regularly sell surplus produce (honey, spirits, preserves) or provide craft services — do I need a receipt, VAT registration or registered business activity? Who bears the tax?`,
-        odgovor: `KOLO does not calculate taxes or issue fiscal receipts on your behalf, but it does not remove the obligations you already have under general regulations.
-
-The exchange of goods and services between users is not construed as a conventional sale, and the transfer of POEN itself is not a payment of money within the meaning of payment services regulations — POEN is a record of contribution, not money. The Protocol therefore updates the POEN ledger but does not keep your tax books or issue receipts.
-
-That does not mean you are exempt from regulations. If you provide goods or services regularly and at a scale that resembles a business activity, general regulations apply to you just as they would outside the platform. The Foundation does not provide tax advice and is not a party to your exchange — for fulfilment, quality and risk you and the other party are responsible under the general rules of contract law, and for your own tax obligations you are personally responsible.`,
-      },
-      {
-        id: 49,
-        pitanje: `Does participation in KOLO / POEN affect my pension or social benefits?`,
-        odgovor: `POEN does not affect your pension or social benefits.
-
-POEN is not money, income or earnings — it is an internal ledger record of what you have given to the community, and it cannot be converted into anything of value outside the system. The Foundation does not pay you any monetary compensation and does not report POEN to any authority as your income.
-
-If you receive POEN through one of the social programmes (for example as a parent-carer, elderly user or in education), that too is not social assistance or a benefit — it is just an automatic update of the POEN ledger that allows you to participate more equitably in the system.
-
-You do, however, need to distinguish between POEN and what you do outside the system. If you arrange with someone that part of an exchange is in dinars, that cash activity is yours and general regulations apply to it — as they do for any other exchange of goods and services. That may have implications for your status, depending on what you do and at what scale.
-
-The Foundation does not provide tax or legal advice. If you receive a pension or a social benefit and are unsure how that sits with your activity, the safest course is to check with the relevant authority (PIO Fund) or an accountant.`,
+Changes in regulations or a new interpretation by a regulator are a risk to bear in mind before you join.`,
       },
       {
         id: 50,
-        pitanje: `How does POEN differ from electronic money, and is a donation actually a hidden purchase of POEN?`,
-        odgovor: `Electronic money has three characteristics: you receive it when you deposit money, it represents your claim against the issuer, and you can return it at any time and get money back. POEN satisfies none of these three.
+        pitanje: `How does POEN differ from electronic money, and isn't a donation really a hidden purchase of POEN?`,
+        odgovor: `Electronic money has three features: you get it when you pay money in, it represents your claim against the issuer, and you can return it at any moment and get your money back. POEN meets none of the three.
 
-POEN is not credited because you deposited money, but because you contributed to the community or hold a status that confirms such contribution. The Foundation owes you nothing on the basis of POEN and does not buy it back. You cannot convert POEN into dinars or any means of payment outside the system.
+POEN is not recorded upon a payment of money, but upon a contribution to the community or upon a confirmed status in one of the programmes. The Foundation owes you nothing on account of POEN and does not buy it back. You cannot turn POEN into dinars or into any means of payment outside the system.
 
-A donation is not a hidden purchase of POEN because they are two legally independent events. The first is your non-refundable donation to the Foundation. The second is the automatic recording of POEN that the Protocol performs according to pre-established rules.
+A donation is not a hidden purchase of POEN because these are two legally independent acts. The first is your non-refundable donation to the Foundation. The second is the automatic recording of POEN that the Protocol carries out under rules published in advance.
 
-There is no contract under which depositing X dinars entitles you to Y POEN. A donation does not give you the right to demand that the Foundation record POEN for you, nor the right to demand the money back. The recording of POEN is not counter-performance for the donation.
+No claim of yours arises from the donation — neither a right to demand that the Foundation record POEN for you, nor a right to demand your money back. The recording of POEN is not a consideration for the donation.
 
-As a reference for the scale of value, the guideline of 1 POEN being roughly 1 dinar is used, but the Foundation does not guarantee that value and does not exchange POEN for money.`,
+For orientation, a measuring scale of roughly 1 POEN to 1 dinar is used, but the Foundation does not guarantee that value and does not exchange POEN for money.`,
+      },
+      {
+        id: 98,
+        pitanje: `Is POEN digital assets — a virtual currency or a digital token — under the Digital Assets Act?`,
+        odgovor: `It is not. The Digital Assets Act recognises two kinds of digital assets — a virtual currency and a digital token — and POEN has the features of neither.
+
+A virtual currency is a digital record of value that is bought, sold and transferred, and with which one pays or invests. POEN can be neither bought nor sold: it is not acquired with money but arises by being recorded under rules published in advance, as a record of contribution. It has no value outside the system, no market and no price, it cannot be transferred outside the Protocol, and the Foundation does not buy it back. A donation is not a purchase of POEN — those are two legally independent acts, explained in a separate question.
+
+A digital token is a record carrying some property right — a share, a claim, a right to a yield or to a service. POEN carries none of those: no claim against the Foundation or against anyone arises from it, it gives no share, no interest and no yield, and it obliges no one — neither the Foundation nor members — to provide you with anything in return for it. It records the fact of a contribution, like an entry in a civil register — and an entry in a register is not property.
+
+For the same reasons POEN is not a financial instrument either. The same holds for ZRNO: it is not re-registered to another member, it has no market and it carries no property right — more on that in the section "POEN and ZRNO".
+
+As with everything here, this is the system's legal construction, not a regulator's confirmation — the risk of a change in regulations or in their interpretation is described in the first question of this section.`,
+      },
+      {
+        id: 48,
+        pitanje: `I regularly sell surpluses (honey, brandy, preserves) or provide craft services — do I need a receipt, VAT or a registered business? Who bears the tax?`,
+        odgovor: `KOLO does not calculate tax for you and does not issue fiscal receipts in your name, but neither does it remove the obligations you already have under the general regulations.
+
+The exchange of goods and services between members is not set up as an ordinary sale, and the transfer of POEN is not a payment in money within the meaning of payment services regulations — POEN is a record of contribution, not money. So the Protocol updates the POEN record, but it does not keep your tax books and does not issue invoices.
+
+That, however, does not mean you are exempt from the regulations. If you provide goods or a service regularly and on a scale resembling a business, the general regulations apply to you just as they do outside the platform. For certain goods — such as alcoholic drinks or food — there are also special regulations on production and trade, and those apply here too.
+
+The Foundation does not provide tax advice and is not a party to your exchange: for performance, quality and risk you and the other side are answerable under the general rules of the law of obligations, and your tax obligations are yours to bear.`,
+      },
+      {
+        id: 49,
+        pitanje: `Does taking part in KOLO / POEN affect my pension or social benefits?`,
+        odgovor: `From the system's side — no. POEN is not money, not earnings and not income: it is an internal record of what you have given the community, and it cannot be turned into anything with value outside the system. The Foundation pays you no monetary compensation and reports POEN nowhere as your income.
+
+If POEN is recorded for you through one of the social programmes (as a primary carer, an elderly member or through Schooling, for example), that too is neither social assistance nor a benefit — it is an automatic update of the record that gives such participation an equal place in the system.
+
+You should, however, distinguish POEN from what you do outside the system. Everything you charge for in money is your own activity, governed by the general regulations — and that may have consequences for your status, depending on what you do and on what scale.
+
+The Foundation provides neither tax nor legal advice. If you receive a pension or some social benefit and are not sure how it sits with what you do, the safest course is to check with the competent authority (the pension fund) or with an accountant.`,
       },
       {
         id: 77,
-        pitanje: `Is the Foundation subject to anti-money-laundering regulations (AML/KYC) and does it identify donors?`,
-        odgovor: `The Foundation is not a financial institution and does not handle users' money — POEN is not money, and exchanges between users are not payment transactions. By the nature of its activities, the Foundation is not subject to anti-money-laundering and counter-terrorist-financing regulations.
+        pitanje: `Is the Foundation subject to anti-money-laundering rules (AML/KYC), and does it identify donors?`,
+        odgovor: `The Foundation is not a financial institution and does not handle members' money — POEN is not money, and an exchange between members is not a payment transaction. By its activity the Foundation is not among the obliged entities listed in the regulations on the prevention of money laundering and the financing of terrorism.
 
-Donors are not accepted anonymously, however. Donations from individuals are received by payment to the Foundation's bank account from bank accounts with an identified holder — so the identification of the payer and the confirmation of the source of funds is carried out by the banking system itself, under its own regulations. Sponsors are legal entities and sole traders who are identified by a donation agreement.
+Donations are nevertheless not accepted anonymously. They are received through the banking system — by payment into the Foundation's account or by card — from an account whose holder is identified, so the identification of the payer and the check on the origin of funds are carried out by the bank under its own rules. Sponsors are legal entities and sole traders identified by contract.
 
-The Foundation retains donation data in accordance with financial reporting regulations and makes it available to competent authorities — including the Tax Administration and the Anti-Money-Laundering Administration — when required by law.`,
+The Foundation keeps the data on donations in accordance with financial reporting regulations and makes it available to the competent authorities — including the Tax Administration and the Administration for the Prevention of Money Laundering — where the law so requires.`,
       },
     ],
   },
