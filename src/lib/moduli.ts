@@ -45,14 +45,22 @@
 /** Krugovi (kolektivni oblici) — Pravilnik Glava VIII. */
 export const KRUG_AKTIVAN = false;
 
-/** Pokroviteljstvo pravnih lica i preduzetnika — Pravilnik čl. 38–40. */
-export const POKROVITELJSTVO_AKTIVNO = false;
+/**
+ * Pokroviteljstvo pravnih lica i preduzetnika — Pravilnik čl. 38–40.
+ *
+ * 🟢 UKLJUČENO 2026-08-18 (odluka vlasnika). Paljenjem se vraćaju: stranice
+ * `/postani-pokrovitelj` i `/pokrovitelji`, 18 API ruta, stavka „Pokrovitelj" u
+ * navigaciji, admin tab Pokrovitelji sa svojim badge-om, ranglista na `/sistem`
+ * i FAQ pitanja 24 i 25 — sve bez ijedne dalje izmene, jer je gašenje od početka
+ * išlo kroz ovaj prekidač.
+ */
+export const POKROVITELJSTVO_AKTIVNO = true;
 
 /**
  * Modul Deca — Pravilnik o KOLO sistemu Glava VIII, čl. 58.
  *
  * 🟢 **Pravni uslovi su ispunjeni setom akata 4.3.0 (17.08.2026).** Usvojen je
- * **Pravilnik o učešću dece** (`dokumentacija 4.1/ucesce_dece_4_3_1.md`), usklađeni
+ * **Pravilnik o učešću dece** (`dokumentacija 4.1/ucesce_dece_4_3_2.md`), usklađeni
  * su Pravilnik o KOLO sistemu (čl. 14 st. 3, čl. 15 t. 9 — deveti kanal, čl. 58),
  * Uslovi (čl. 7, 25) i Politika (4.7), a **DPIA je AŽURIRAN** — radnja obrade br. 11
  * prevedena je u aktivnu, uz nov rizik R16 i mere 5.11. To je bila izričita obaveza

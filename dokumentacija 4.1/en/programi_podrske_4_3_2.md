@@ -144,7 +144,11 @@ Status is subject to annual review. If status is not confirmed upon review, auto
 
 *Right and amount*
 
-The right is held by users in education: primary and secondary school pupils and students — users enrolled at an educational or higher education institution. Proof of status is the enrolled grade, that is, the enrolled academic year.
+The right is held by users in education: primary and secondary school pupils and students — users duly enrolled at an educational or higher education institution.
+
+Proof of status is a statement, not a document. For a minor user the statement is given by a parent or legal representative, who confirms under full responsibility that the child is duly enrolled at school or at a faculty; for a user of age the statement is given by the user themselves. Enrolment confirmations, certificates and other documents are neither submitted nor requested from users.
+
+An untrue statement under paragraph 2 entails the measures set out in the Terms of Use, including suspension and exclusion, and the cessation of recording under this programme; POEN already recorded is annulled by a counter-entry of the Protocol.
 
 For a minor user, the application is submitted by a parent or legal representative, in accordance with the Rules on the participation of children.
 

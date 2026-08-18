@@ -142,7 +142,11 @@ Status podleže godišnjoj reviziji. Ako se status pri reviziji ne potvrdi, auto
 
 *Pravo i iznos*
 
-Pravo imaju korisnici koji se školuju: učenici osnovne i srednje škole i studenti — korisnici upisani u obrazovnu odnosno visokoškolsku ustanovu. Dokaz statusa je upisani razred, odnosno upisana godina studija.
+Pravo imaju korisnici koji se školuju: učenici osnovne i srednje škole i studenti — korisnici redovno upisani u obrazovnu odnosno visokoškolsku ustanovu.
+
+Dokaz statusa je izjava, a ne isprava. Za maloletnog korisnika izjavu daje roditelj odnosno zakonski zastupnik, koji pod punom odgovornošću potvrđuje da je dete redovno upisano u školu odnosno na fakultet; za punoletnog korisnika izjavu daje on sam. Potvrde o upisu, uverenja ni druge isprave ne dostavljaju se niti se od korisnika traže.
+
+Neistinita izjava iz stava 2 povlači mere iz Uslova korišćenja, uključujući suspenziju i isključenje, i prestanak evidentiranja po ovom programu; već evidentirani POEN poništava se protivzapisom Protokola.
 
 Za maloletnog korisnika prijavu podnosi roditelj odnosno zakonski zastupnik, u skladu sa Pravilnikom o učešću dece.
 

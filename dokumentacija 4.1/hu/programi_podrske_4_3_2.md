@@ -144,7 +144,11 @@ A jogállás éves felülvizsgálat alá esik. Ha a jogállás a felülvizsgála
 
 *Jogosultság és összeg*
 
-Jogosultak azok a felhasználók, akik tanulnak: az általános és középiskolai tanulók, valamint a hallgatók — oktatási, illetve felsőoktatási intézménybe beiratkozott felhasználók. A jogállás igazolása a beiratkozott évfolyam, illetve a beiratkozott tanulmányi év.
+Jogosultak azok a felhasználók, akik tanulnak: az általános és középiskolai tanulók, valamint a hallgatók — oktatási, illetve felsőoktatási intézménybe szabályszerűen beiratkozott felhasználók.
+
+A jogállás igazolása nyilatkozat, nem okirat. Kiskorú felhasználó esetén a nyilatkozatot a szülő, illetve a törvényes képviselő teszi, aki teljes felelőssége mellett megerősíti, hogy a gyerek szabályszerűen be van iratkozva az iskolába, illetve a felsőoktatási intézménybe; nagykorú felhasználó esetén a nyilatkozatot maga a felhasználó teszi. Beiratkozási igazolásokat, hatósági igazolásokat és egyéb okiratokat nem kell benyújtani, és a felhasználóktól nem is kérünk ilyet.
+
+A 2. bekezdés szerinti valótlan nyilatkozat a Felhasználási feltételekben foglalt intézkedéseket vonja maga után, ideértve a felfüggesztést és a kizárást, valamint az e program szerinti nyilvántartásba vétel megszűnését; a már rögzített POEN a Protokoll ellenbejegyzésével érvénytelenné válik.
 
 Kiskorú felhasználó esetén a kérelmet a szülő, illetve a törvényes képviselő nyújtja be, a gyermekek részvételéről szóló szabályzattal összhangban.
 

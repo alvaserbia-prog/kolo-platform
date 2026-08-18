@@ -671,15 +671,6 @@ Minden mást — a szállítást, a határidőt, a további feltételeket — k�
 Megjegyzés: ez a Piacon zajló cserére vonatkozik. A működési hozzájárulás más csatorna — ott az összeg nem szabad megállapodás, hanem javasolt POEN, súlyozási iránymutató a napi elosztásban.`,
       },
       {
-        id: 22,
-        pitanje: `Kérhetek-e a Piacon részben dinárban ellenértéket?`,
-        odgovor: `A Piac elsősorban POEN-alapon működik.
-
-A vegyes cserék (részben POEN, részben RSD) lehetségesek a te és a vevő közötti magánmegállapodásként, de ez a rendszeren kívül esik — az Alapítvány ezt a részt nem rögzíti és nem fedezi.
-
-A teljes dináros rész a te magánfelelősséged az adójogi szabályok szerint.`,
-      },
-      {
         id: 41,
         pitanje: `Nyilvánosan látható-e a hirdetésem a Piacon?`,
         odgovor: `Igen. A hirdetés tartalma — a leírás, a POEN-összeg, a helység és az álneved — minden látogató számára látható, a nem regisztráltaknak is, hogy a csere elérhető és könnyen megtalálható legyen. Amíg új tag vagy, a hirdetés fényképén látható „Új tag" jelzés is áll.

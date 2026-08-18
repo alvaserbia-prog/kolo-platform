@@ -660,15 +660,6 @@ Everything else — delivery, deadline, additional terms — you agree directly 
 A note: this applies to exchange on the Marketplace. The operational contribution is a different channel — there the amount is not a free agreement but a proposed POEN figure, a weighting guide in the daily distribution.`,
       },
       {
-        id: 22,
-        pitanje: `Can I charge part of the price in dinars on the marketplace?`,
-        odgovor: `The marketplace operates primarily on the basis of POEN.
-
-Hybrid exchanges (part POEN, part RSD) are possible as a private arrangement between you and the buyer, but that is outside the system — the Foundation does not record or cover that portion.
-
-The entire RSD portion is your private responsibility under tax regulations.`,
-      },
-      {
         id: 41,
         pitanje: `Is my listing on the Marketplace publicly visible?`,
         odgovor: `Yes. The content of the listing — the description, the amount in POEN, the location and your pseudonym — is visible to all visitors, including those who are not registered, so that exchange is accessible and easy to find. While you are a new member, a visible "New member" mark also stands over the listing's photograph.

@@ -670,15 +670,6 @@ Sve ostalo — isporuku, rok, dodatne uslove — dogovaraš direktno sa drugom s
 Napomena: ovo važi za razmenu na Pijaci. Operativni doprinos je drugi kanal — tamo iznos nije slobodan dogovor, nego predloženi POEN, težinski orijentir u dnevnoj raspodeli.`,
       },
       {
-        id: 22,
-        pitanje: `Mogu li na Pijaci naplaćivati delom u dinarima?`,
-        odgovor: `Pijaca prevashodno radi na bazi POEN-a.
-
-Hibridne razmene (deo POEN, deo RSD) su moguće kao privatni dogovor između tebe i kupca, ali to je van sistema — Fondacija ne evidentira niti pokriva taj deo.
-
-Sav RSD deo je tvoja privatna odgovornost prema poreskim propisima.`,
-      },
-      {
         id: 41,
         pitanje: `Da li je moj oglas na Pijaci javno vidljiv?`,
         odgovor: `Da. Sadržaj oglasa — opis, iznos u POEN-ima, lokacija i tvoj pseudonim — vidljiv je svim posetiocima, uključujući neregistrovane, da bi razmena bila dostupna i laka za pronalaženje. Dok si nov član, preko fotografije oglasa stoji i vidljiva oznaka „Nov član".

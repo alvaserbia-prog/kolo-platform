@@ -69,6 +69,14 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
+**AŽURIRANO 2026-08-18 (deveti put):** ceo set je dignut na **4.3.2** — svih 16 akata (sr + en/ru/hr/hu), i kad su sadržinski nepromenjeni. Povod je odluka vlasnika da **program Školovanje obuhvati i učenike osnovne i srednje škole**, ne samo studente, i da se **status dokazuje IZJAVOM, ne ispravom**. Sadržinski su izmenjeni **Pravilnik o programima podrške** (čl. 3 i čl. 13), **Registar radnji obrade** (kategorije lica) i **Whitepaper** (početne grupe); ostali akti su samo dignuti radi jedinstvene verzije seta.
+
+🔴 **Dokaz statusa za Školovanje je izjava pod punom odgovornošću** (čl. 13 st. 2 i 3): za maloletnog korisnika daje je roditelj odnosno zakonski zastupnik i njome potvrđuje da je dete redovno upisano u školu odnosno na fakultet; punoletni korisnik daje je sam. **Potvrde o upisu i druge isprave se NE traže** — ne dostavljaju se i ne prikupljaju. Neistinita izjava povlači mere iz Uslova (suspenzija, isključenje), prestanak evidentiranja i poništenje već evidentiranog POEN-a protivzapisom. Uz to važi i zatečena verifikatorska potvrda iz čl. 4 (svi verifikatori podnosioca, bez uvida u unete podatke).
+
+Iznos se nije menjao — fiksnih 2.000 POEN dnevno po čl. 13, što `programi.ts` već isplaćuje, pa proširenje kruga korisnika nije tražilo nijednu izmenu koda.
+
+🟢 **Pokroviteljstvo je UKLJUČENO 2026-08-18** (`POKROVITELJSTVO_AKTIVNO = true`). Vratile su se stranice, rute, navigacija, admin tab, ranglista na `/sistem` i FAQ pitanja 24 i 25. Sekcija FAQ-a zove se sada „Pijaca, donacije i pokrovitelji". **Krugovi ostaju ugašeni.**
+
 **AŽURIRANO 2026-08-18 (osmi put):** ceo set je dignut na **4.3.1** — svih 16 akata (sr + en/ru/hr/hu), i kad su sadržinski nepromenjeni. Povod je odluka vlasnika da **za učešće u socijalnim programima bude dovoljna jedna potvrda, tj. indeks stvarnosti od 10%** umesto punog indeksa od 100%. Sadržinski su izmenjeni **Pravilnik o programima podrške** (čl. 4 st. 1), **Politika privatnosti** (4.6 — posebne kategorije podataka) i **Registar radnji obrade** (radnja br. 10, mere zaštite); ostali akti su samo dignuti radi jedinstvene verzije seta. Bump je urađen zato što je tekst izmenjen POSLE objave 4.3.0 (set je gurnut 17.08.2026), pa bi fajl sa imenom 4.3.0 govorio nešto drugo nego kad je ta verzija objavljena.
 
 🔴 **Prag je sada isti kao za operativni doprinos** — funkcionalnih 10% (`FUNKCIONALNI_PRAG_INDEKSA`), koji je i inače uslov pristupa programima po čl. 4 Pravilnika o dokazu stvarnosti. **Anti-malverzaciju NE nosi visina indeksa nego čl. 4 st. 2** — potvrda SVIH verifikatora podnosioca pod punom odgovornošću, bez uvida u unete podatke, uz tvrdu blokadu dok svi ne potvrde. To pravilo je netaknuto, ali treba znati posledicu: pri indeksu od 10% podnosilac ima **jednog** verifikatora, pa tvrda blokada počiva na jednoj osobi umesto na deset. Ako to postane problem, rešenje je poseban minimum broja potvrda u čl. 4, ne vraćanje praga indeksa.
@@ -182,9 +190,9 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 - **Nema instaliranog zod, decimal.js, ni sličnih library-a** — validacija ručno, Decimal tipovi se konvertuju sa `Number()`
 - **Skladište slika = Cloudflare R2** (S3-kompatibilan, `aws4fetch`). Sve slike (avatari + slike oglasa na Pijaci) idu na R2; u bazu se upisuje samo **javni URL** (ne base64, ne binarno). Helper `src/lib/skladiste.ts` (`sacuvajNaR2`, `obrisiSaR2`, `r2Konfigurisan`). Env (Vercel, sva okruženja): `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL`. Dev fallback (kad R2 nije konfigurisan): lokalni disk `storage/oglasi/...` za oglase; avatar traži R2. Legacy base64 avatari rade dok se ne migriraju (admin Dashboard → „Migracija avatara na R2"; endpoint `/api/admin/migracija-avatara`). `/api/pijaca/slika/...` preusmerava na bilo koji apsolutni https URL (R2/CDN). (Raniji Vercel Blob tok napušten; `@vercel/blob` dep ostaje neiskorišćen.)
 
-## Ugašeni moduli — Krugovi i Pokroviteljstvo (2026-08-11)
+## Ugašeni moduli — Krugovi (2026-08-11; pokroviteljstvo vraćeno 2026-08-18)
 
-Odlukom vlasnika **Krugovi** i **Pokroviteljstvo** privremeno nisu u radu; vraćaju se kad dođe vreme za implementaciju. **Zadruga** se ne pominje jer nikad nije ni bila implementirana (Glava VIII, čl. 56) — ostala su samo pominjanja u tekstu.
+Odlukom vlasnika **Krugovi** privremeno nisu u radu; vraćaju se kad dođe vreme za implementaciju. **Pokroviteljstvo je 2026-08-18 vraćeno u rad** (`POKROVITELJSTVO_AKTIVNO = true`) — opis ispod i dalje važi kao mapa toga šta prekidač dodiruje, ali su ta mesta sada aktivna. **Zadruga** se ne pominje jer nikad nije ni bila implementirana (Glava VIII, čl. 56) — ostala su samo pominjanja u tekstu.
 
 **Prekidač je jedan fajl — `src/lib/moduli.ts`** (`KRUG_AKTIVAN`, `POKROVITELJSTVO_AKTIVNO`). Povratak = `false` → `true`, bez ijedne dalje izmene. Fajl je namerno **bez ijednog `import`-a** — uvoze ga i serverske i klijentske komponente.
 
