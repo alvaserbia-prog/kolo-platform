@@ -34,7 +34,7 @@ A támogatási programok a következő minősített csoportokra terjednek ki:
 
 3) különleges gondozási rendben lévő felhasználók (fogyatékossággal élő személyek) — Különleges Gondozás program;
 
-4) hallgatók — Tanulmányok program.
+4) tanulók és hallgatók — Tanulmányok program.
 
 Az elsődleges gondviselők az Anyák Támogatása programból eredő jogok tekintetében az anyákkal egyenrangúak.
 
@@ -144,7 +144,9 @@ A jogállás éves felülvizsgálat alá esik. Ha a jogállás a felülvizsgála
 
 *Jogosultság és összeg*
 
-Jogosultak a hallgatók — a felsőoktatási intézménybe beiratkozott felhasználók. A jogállás igazolása a beiratkozott tanulmányi év (beiratkozási igazolás).
+Jogosultak azok a felhasználók, akik tanulnak: az általános és középiskolai tanulók, valamint a hallgatók — oktatási, illetve felsőoktatási intézménybe beiratkozott felhasználók. A jogállás igazolása a beiratkozott évfolyam, illetve a beiratkozott tanulmányi év.
+
+Kiskorú felhasználó esetén a kérelmet a szülő, illetve a törvényes képviselő nyújtja be, a gyermekek részvételéről szóló szabályzattal összhangban.
 
 A napi összeg állandó, és 2.000 POEN.
 

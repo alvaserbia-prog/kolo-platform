@@ -1060,7 +1060,7 @@ Pojmovi su grupirani tematski radi lakšeg snalaženja. Svaka je definicija dosl
 
 **Zadruga — **Lokalna organizacijska jedinica utemeljena na teritorijalnom načelu. Registrira se po Zakonu o zadrugama i ima punu pravnu osobnost. Tri funkcije: lokalna koordinacija, verifikacija i poticajna. Poglavlje 9, Modul 2.
 
-**Socijalni programi — **Mehanizam automatskog evidentiranja POEN-a za kvalificirane skupine korisnika čije strukturno sudjelovanje u zajedničkom dobru protokol prepoznaje iako se ne očituje kroz pojedinačne aktivnosti. Početne skupine: roditelji, stariji korisnici, osobe s invaliditetom, studenti. Poglavlje 9, Modul 3.
+**Socijalni programi — **Mehanizam automatskog evidentiranja POEN-a za kvalificirane skupine korisnika čije strukturno sudjelovanje u zajedničkom dobru protokol prepoznaje iako se ne očituje kroz pojedinačne aktivnosti. Početne skupine: roditelji, stariji korisnici, osobe s invaliditetom, učenici i studenti. Poglavlje 9, Modul 3.
 
 **Rast krugova i zadruga — **Mehanizam evidentiranja POEN-a aktiviran s Modulima 1 (Krugovi) i 2 (Zadruge). Protokol upisuje nove zapise POEN-a u skladu s brojem članova organizacijske jedinice i dosezanjem definiranih pragova. POEN-i se evidentiraju u zapisu kruga ili zadruge kao organizacijske jedinice, ne u zapisima pojedinačnih članova. Nije korisnički doprinos u smislu ostalih kategorija. Poglavlje 9.
 

@@ -34,7 +34,7 @@ The support programmes cover the following qualifying groups:
 
 3) users in the special care regime (persons with disabilities) — the Special Care programme;
 
-4) students — the Education programme.
+4) pupils and students — the Education programme.
 
 Primary caregivers are treated on equal footing with mothers with respect to the rights under the Mothers Support programme.
 
@@ -144,7 +144,9 @@ Status is subject to annual review. If status is not confirmed upon review, auto
 
 *Right and amount*
 
-The right is held by students — users enrolled at a higher education institution. Proof of status is the enrolled academic year (enrolment confirmation).
+The right is held by users in education: primary and secondary school pupils and students — users enrolled at an educational or higher education institution. Proof of status is the enrolled grade, that is, the enrolled academic year.
+
+For a minor user, the application is submitted by a parent or legal representative, in accordance with the Rules on the participation of children.
 
 The daily amount is fixed at 2,000 POEN.
 

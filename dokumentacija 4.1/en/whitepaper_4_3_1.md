@@ -1060,7 +1060,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Cooperative —** A local organizational unit based on a territorial principle. Registered under the Law on Cooperatives and has full legal personality. Three functions: local coordination, verification, and incentive. Chapter 9, Module 2.
 
-**Social programs —** A mechanism for automatic POEN recording for qualified groups of users whose structural participation in the common good the Protocol recognizes even though it is not expressed through individual activities. Initial groups: parents, older users, persons with disabilities, students. Chapter 9, Module 3.
+**Social programs —** A mechanism for automatic POEN recording for qualified groups of users whose structural participation in the common good the Protocol recognizes even though it is not expressed through individual activities. Initial groups: parents, older users, persons with disabilities, pupils and students. Chapter 9, Module 3.
 
 **Growth of Circles and Cooperatives —** A POEN recording mechanism activated with Modules 1 (Circles) and 2 (Cooperatives). The Protocol enters new POEN records in proportion to the number of members of the organizational unit and the reaching of defined thresholds. POENs are recorded in the record of the Circle or Cooperative as an organizational unit, not in the records of individual members. Not a user contribution in the sense of the other categories. Chapter 9.
 

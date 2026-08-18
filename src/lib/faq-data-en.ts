@@ -565,11 +565,11 @@ The amount is fixed at 2,000 POEN per day, for as long as the status lasts.`,
       {
         id: 96,
         pitanje: `What is the Schooling programme and whom does it cover?`,
-        odgovor: `Schooling is a social programme for students — members enrolled at a higher education institution.
+        odgovor: `Schooling is a social programme for those in education — primary and secondary school pupils and students.
 
-The daily amount is fixed at 2,000 POEN, for as long as the status lasts. The status is checked once a year, by academic year; if it is not confirmed at the review, the recording stops.
+The daily amount is fixed at 2,000 POEN, for as long as the status lasts. The status is checked once a year; if it is not confirmed at the review, the recording stops.
 
-The application follows the same rules as the other social programmes: through the platform, by entering data into a form — for this programme, the year of study you are enrolled in — without attaching documents.`,
+The application follows the same rules as the other social programmes: through the platform, by entering data into a form — for this programme, the grade or the year of study you are enrolled in — without attaching documents. For a minor member the application is submitted by a parent.`,
       },
       {
         id: 62,
@@ -585,7 +585,7 @@ The closer conditions by which the status is confirmed for each group are set by
       {
         id: 20,
         pitanje: `Can I be in more than one programme at the same time?`,
-        odgovor: `Yes, if you meet the conditions for more than one — a mother who is a student can be in both Support for Mothers and Schooling. Each programme is applied for separately.
+        odgovor: `Yes, if you meet the conditions for more than one — a mother who is in education can be in both Support for Mothers and Schooling. Each programme is applied for separately.
 
 The social programmes and the operational contribution share a common daily frame of 10% of the total amount of POEN in the system, so that too much POEN is not recorded at once — when there are more contributions than the frame takes, the daily amounts are reduced proportionally. The contribution to exchange and the children's contribution do not enter that frame.`,
       },
@@ -612,7 +612,7 @@ There is no hourly rate. A proposed POEN figure stands with the task, but it is 
         pitanje: `Is there a programme for the unemployed or for general financial hardship?`,
         odgovor: `At present there is no separate programme for unemployment or for general financial hardship.
 
-The social programmes cover precisely defined groups whose participation in the community is constant and diffuse, and so cannot be recorded through individual exchanges: mothers and primary carers, the elderly, people with disabilities and students. Neither unemployment nor poverty is among those groups — the social programmes are not social assistance or a benefit, but a way for diffuse participation to have an equal place in the system, not a form of support based on your financial situation.
+The social programmes cover precisely defined groups whose participation in the community is constant and diffuse, and so cannot be recorded through individual exchanges: mothers and primary carers, the elderly, people with disabilities and those in education. Neither unemployment nor poverty is among those groups — the social programmes are not social assistance or a benefit, but a way for diffuse participation to have an equal place in the system, not a form of support based on your financial situation.
 
 If you are in financial hardship, the path to POEN is the same as for everyone: exchanging goods and services with others, the contribution to exchange — five steps of joining in the exchange that together bring up to 5,000 POEN — and the operational contribution, work for the common good through published tasks.
 
@@ -635,16 +635,29 @@ This is a voluntary contribution to the community that gets recorded — not a j
   },
   {
     id: "pijaca-donacije",
-        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
-    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
-    naslov: "Marketplace and Donations",
+    naslov: "Marketplace, donations and sponsors",
     pitanja: [
       {
-        id: 21,
-        pitanje: `Marketplace — who is responsible if an exchange fails?`,
-        odgovor: `An exchange on the marketplace is a direct relationship between two users and is a matter of private law. The Foundation and the Protocol are not responsible for quality, delivery or fulfilment of obligations — everything is governed by the general rules of contract law.
+        id: 39,
+        pitanje: `Is an exchange on the Marketplace a sale?`,
+        odgovor: `Under the KOLO system Rulebook, the exchange of goods and services between members on the Marketplace is not set up as an ordinary sale. It is an arrangement between two members — one gives a good or a service, the other re-registers POEN to them, and POEN is not money but a record of contribution to the common good.
 
-If your exchange fails, first try to resolve it directly with the other party; in the initial phase you may request voluntary, non-binding mediation by the Foundation, and you also have access to court remedies.`,
+The transfer of POEN in that exchange is neither a payment in money nor a means of payment within the meaning of payment services regulations. The relations arising from the exchange — performance, liability, risk — are governed by the general rules of the law of obligations; the Protocol does not mediate in the exchange.
+
+If you carry on a business through the Marketplace, your tax and fiscal obligations under the general regulations remain — nothing here removes them.`,
+      },
+      {
+        id: 60,
+        pitanje: `How do I set the price and quantities of my products, and who values them?`,
+        odgovor: `You set the amount in POEN for your goods and services yourself, freely. The platform does not fix it, does not limit it and does not control it, nor does anyone value your goods for you — you know best what you are offering and what it is worth.
+
+There is only a guide: one POEN corresponds roughly to one dinar. That is a measuring scale that helps you find your bearings when setting an amount, but it binds you to nothing and is not an official exchange rate.
+
+What is asked of you is honesty: an accurate and clear description of the good or the service, a realistic quantity and a realistic amount in POEN, and all the terms of the exchange. False or misleading content that misrepresents the nature, quality or quantity of what you offer is not allowed.
+
+Everything else — delivery, deadline, additional terms — you agree directly with the other side.
+
+A note: this applies to exchange on the Marketplace. The operational contribution is a different channel — there the amount is not a free agreement but a proposed POEN figure, a weighting guide in the daily distribution.`,
       },
       {
         id: 22,
@@ -656,93 +669,74 @@ Hybrid exchanges (part POEN, part RSD) are possible as a private arrangement bet
 The entire RSD portion is your private responsibility under tax regulations.`,
       },
       {
+        id: 41,
+        pitanje: `Is my listing on the Marketplace publicly visible?`,
+        odgovor: `Yes. The content of the listing — the description, the amount in POEN, the location and your pseudonym — is visible to all visitors, including those who are not registered, so that exchange is accessible and easy to find. While you are a new member, a visible "New member" mark also stands over the listing's photograph.
+
+What is not public: your contact details and the possibility for someone to write to you or exchange with you — those are for full members only. For visitors who are not registered and for new members, your pseudonym on the listing does not lead to your profile or your transaction history.`,
+      },
+      {
+        id: 58,
+        pitanje: `Can I swap work for work or a tool for a crop with my neighbour, without a single POEN (barter)?`,
+        odgovor: `You can. A direct barter — your work for their work, your tool for their crop — is a private arrangement between you and your neighbour, and KOLO does not forbid it.
+
+Such an exchange takes place outside the system: if you do not update the POEN record alongside it, it stays your personal arrangement and is recorded nowhere as your contribution.
+
+And that is precisely the point of KOLO: that an exchange you would have made "hand to hand" anyway gets a record. When you update the record alongside the exchange, POEN passes from the ledger of the one who received the good or the service to the ledger of the one who gave it — and a trace remains of who gave how much to the community.
+
+For quality, delivery and performance of the agreement the two of you are answerable, under the general rules — the Foundation and the Protocol do not interfere and are not liable for it.`,
+      },
+      {
+        id: 21,
+        pitanje: `The Marketplace — who is liable if an exchange fails?`,
+        odgovor: `An exchange on the Marketplace is a direct relationship between two members and is private-law in nature. The Foundation and the Protocol are not liable for quality, delivery or the performance of obligations — everything is governed by the general rules of the law of obligations.
+
+If an exchange fails, first try directly with the other side; in the initial phase you can ask for voluntary, non-binding mediation by the Foundation, and judicial protection is available as well.`,
+      },
+      {
+        id: 59,
+        pitanje: `Who is liable if work has a hidden defect, goods break down or the buyer does not collect? Guarantee, complaint and return of POEN?`,
+        odgovor: `For quality, soundness and delivery, the members exchanging are answerable — the one giving the good or the service and the one receiving it. The Foundation and the Protocol are not a party to the exchange and do not mediate in it; everything is governed by the general rules of the law of obligations, as with any purchase between two people.
+
+The guarantee, the deadline and the terms you agree directly with the other side before the exchange — the more clearly you agree the condition of the goods, the deadline and what happens if something is wrong, the more easily you resolve a problem later. If you are exchanging with someone offering goods or a service in the course of a business, consumer protection law applies as well; between two private individuals the general rules of the law of obligations apply.
+
+The system has no automatic reversal of an exchange. If you agree that something is to be returned, it is carried out as a new, voluntary update of the POEN record in the opposite direction — as a new exchange back.
+
+If something goes wrong, first try to resolve it directly with the other side. In the initial phase you can also ask for voluntary, non-binding mediation by the Foundation; if no agreement is reached, judicial protection under the general rules remains. Next to the re-registration itself in your POEN history there is also a button with which you report the case to the Foundation — if it annuls the re-registration upon your report, the POEN comes back to you in full.`,
+      },
+      {
         id: 23,
-        pitanje: `How does a donation to the Foundation work and how much POEN do I receive?`,
-        odgovor: `Any full member can make a donation by paying in dinars to the Foundation's bank account.
+        pitanje: `How does a donation to the Foundation work and how much POEN do I get?`,
+        odgovor: `Any full member can make a donation, by paying in dinars into the Foundation's account — directly or through the platform, where card payment and the IPS QR code are also available.
 
-Upon receipt of the payment, the Protocol automatically records POEN: the number of POEN equals the donation amount × the donation recording coefficient. The coefficient grows with the cumulative amount across 11 levels — from 1.00 (Level 1, a donation below 5,000 RSD) to 2.00 (at a cumulative 5,000,000 RSD). The level is permanent and does not decrease as POEN is spent. (The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient.)
+Once the payment is confirmed, the Protocol records POEN for you: the amount of the donation × the donation recording coefficient. The coefficient rises with the total (cumulative) amount of your donations across 11 levels, from 1.00 to 2.00 (the highest level at a cumulative 5,000,000 RSD). When a donation takes you past a threshold, the coefficient of the new level applies to that whole donation. A level once reached is permanent and does not fall through the use of POEN. The donation recording coefficient is neither an "exchange rate" nor the accounting coefficient of ZRNO.
 
-Donations help the Foundation cover its basic operating costs (server, tools, development, legal counsel, accounting). When income exceeds operating costs, the surplus is directed into the system's programmes.`,
+A donation is non-refundable — that is one of the system's unchangeable principles. Donations cover the basic costs of the Foundation's work (server, tools, development, legal and accounting services), and once income exceeds operating costs, the surplus is redirected into collective procurement.`,
+      },
+      {
+        id: 74,
+        pitanje: `In what currency do I donate — can I send euros from abroad?`,
+        odgovor: `You can — a donation is made by payment into the Foundation's account, in dinars or in another currency, so euros from abroad as well. Card payment and the IPS QR code through the platform work in dinars only.
+
+POEN is recorded under the same rules as for any donation: the amount × the donation recording coefficient, which rises with the cumulative amount across 11 levels (in detail in the question about donations). An amount in a foreign currency is counted at its dinar equivalent.
+
+On request, the Foundation issues a confirmation of the donation in accordance with the law.`,
       },
       {
         id: 24,
-        pitanje: `What are Sponsors and how are they different from donations?`,
-        odgovor: `Sponsors are legal entities and sole proprietors that support the Foundation's work. The main difference from an individual donation is that a sponsor can contribute not only in cash but also in goods or services.
+        pitanje: `What are Sponsors and how do they differ from donors?`,
+        odgovor: `Sponsors are legal entities and sole traders that support the Foundation's work — not only with money, but also with goods or services.
 
-A sponsor does not have its own account — the POEN bonus is recorded on the account of the confirmed owner or co-owner, or of the sole proprietor themselves, according to a fixed table with 7 levels (from 10,000 RSD to 1,000,000 RSD).
+A sponsor has no account of its own: the POEN bonus is recorded to the account of the owner or co-owner who is a full member, or of the sole trader themselves, under a fixed table of 7 levels (from 10,000 to 1,000,000 RSD).
 
-All sponsors are publicly visible on the Sponsors page — for transparency and public recognition of their contribution.`,
+All sponsors are shown publicly on the Sponsors page — for transparency and public recognition of the contribution.`,
       },
       {
         id: 25,
         pitanje: `Can a company be a direct member?`,
         odgovor: `No. Direct members are exclusively natural persons.
 
-Companies participate through Sponsorship — they support the Foundation, and the owner or co-owner as a full member receives a POEN bonus.`,
-      },
-      {
-        id: 39,
-        pitanje: `Is an exchange on the marketplace a sale?`,
-        odgovor: `Under the KOLO system's Rules, the exchange of goods and services between users on the marketplace is not construed as a conventional sale. It is a mutual arrangement between two users — one provides the goods or service, the other transfers POEN, which is not money but a record of contribution to the common good.
-
-The transfer of POEN in that exchange is not a payment of money or a means of payment within the meaning of the Payment Services Act. Relations between users arising from an exchange — including questions of fulfilment, liability and risk — are governed by the general rules of contract law; the Protocol does not intermediate in that exchange.
-
-The legal classification of these exchanges for tax and fiscal purposes does not override existing obligations of users who conduct an activity under general regulations.`,
-      },
-      {
-        id: 41,
-        pitanje: `Is my listing on the marketplace publicly visible?`,
-        odgovor: `Yes. The content of a listing — description, price in POEN, location and your pseudonym — is publicly visible to all visitors, including unregistered ones, so that exchange is accessible and easy to find.
-
-What is NOT public: your contact details (phone number) and the ability for someone to write to you or exchange with you — those are available only to full members. For unregistered and unconfirmed visitors, your pseudonym on a listing does not lead to your profile or transaction history.`,
-      },
-      {
-        id: 58,
-        pitanje: `Can I swap labour-for-labour or tool-for-harvest with a neighbour without any POEN (barter)?`,
-        odgovor: `You can. Direct barter — your labour for their labour, your tool for their harvest — is a private arrangement between you and your neighbour and KOLO does not prohibit it.
-
-Such an exchange takes place outside the system. If the ledger is not updated with POEN alongside it, it remains your personal arrangement and is recorded nowhere as your contribution.
-
-And that is precisely the point of KOLO: so that an exchange you would otherwise carry out "hand to hand" gets a record. When you update the ledger alongside an exchange, the record of the giver decreases and the record of the receiver increases by the same amount — and a trace of who gave how much to the community is preserved.
-
-You can also combine: do part of it as pure barter and re-register part of it through POEN. Then only the portion for which you updated the ledger is recorded; the pure barter beyond that remains unrecorded.
-
-In any case, you and the other party are responsible for quality, delivery and fulfilment of the arrangement under general rules — the Foundation and the Protocol do not intervene and do not guarantee it.`,
-      },
-      {
-        id: 59,
-        pitanje: `Who is responsible if work has a hidden defect, goods break down, or the buyer doesn't collect? Warranty, complaints and POEN refunds?`,
-        odgovor: `For everything related to quality, soundness and delivery, the users who are exchanging are themselves responsible — the one providing the goods or service and the one receiving them. The Foundation and the Protocol are not a party to that exchange and do not intermediate in it; everything is governed by the general rules of contract law, as with any other purchase between two people.
-
-Warranty, deadlines and conditions are agreed directly with the other party before the exchange — the clearer everything is agreed upfront (condition of goods, deadline, what happens if something is wrong), the easier it is to resolve any problem later. If goods or services are involved where consumer protection law applies, that protection is valid here too, regardless of your arrangement.
-
-The system has no automatic "reversal" of an exchange. If you agree that something should be returned, this is done as a new, voluntary ledger update in the opposite direction — as if you were conducting a new exchange in reverse.
-
-If something goes wrong, first try to resolve it directly with the other party. In the initial phase you may also request voluntary, non-binding mediation by the Foundation. If agreement cannot be reached, court remedies under the general rules are available to you.`,
-      },
-      {
-        id: 60,
-        pitanje: `How do I set the price and quantities of my goods and who determines their value?`,
-        odgovor: `You set the price of your goods and services yourself, freely, in POEN. The platform does not set it, limit it or control it, and nobody assesses your goods on your behalf. You know best what you are offering and what it is worth.
-
-There is only one reference point: one POEN roughly corresponds to one dinar. That is a guideline to help you set your price, but it does not bind you to anything and is not an official rate. You may take it into account or not.
-
-What is required of you is honesty: you must provide an accurate and clear description of the goods or service, a realistic quantity and a realistic amount in POEN, as well as all conditions of the exchange. It is not permitted to publish false or misleading content that misrepresents the nature, quality or quantity of what you are offering.
-
-Everything else — method of delivery, deadline, additional conditions — is agreed directly with the other party.
-
-Note: this applies to exchanges on the marketplace. Operational contribution is a different channel and there the amount is not a free negotiation but a proposed POEN that serves as a weighting coefficient in the distribution of the daily limit.`,
-      },
-      {
-        id: 74,
-        pitanje: `In which currency do I donate — can I send euros from abroad?`,
-        odgovor: `You can donate in dinars or in another currency — including euros from abroad. A donation is made by payment to the Foundation's bank account.
-
-Upon receipt of the payment, the Protocol automatically credits POEN to you: the donation amount multiplied by the donation recording coefficient. That coefficient grows with your cumulative donation across 11 levels — from 1.00 (at the lowest level, a donation below 5,000 RSD) to 2.00 (at the highest). The level reached is permanent and does not decrease as you spend POEN.
-
-(The donation recording coefficient is not the "exchange rate" or the ZRNO accounting coefficient — it is a separate figure tied only to donations.)
-
-Any full member can make a donation. The Foundation issues a donation receipt on request, in accordance with the law.`,
+Companies and sole traders take part through Sponsorship — they support the Foundation, and the owner, co-owner or the sole trader themselves, as a full member, receives the POEN bonus.`,
       },
     ],
   },

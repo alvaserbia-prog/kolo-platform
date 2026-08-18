@@ -1060,7 +1060,7 @@ A fogalmak tematikusan csoportosítva szerepelnek a könnyebb eligazodás érdek
 
 **Szövetkezet — **Területi elven alapuló helyi szervezeti egység. A szövetkezetekről szóló törvény alapján kerül bejegyzésre és teljes jogalanyisággal rendelkezik. Három funkció: helyi koordináció, hitelesítés és ösztönzés. 9. fejezet, 2. modul.
 
-**Szociális programok — **A POEN automatikus nyilvántartásba vételének mechanizmusa azon minősített felhasználói csoportok számára, amelyeknek a közjóban való szerkezeti részvételét a protokoll elismeri akkor is, ha az nem egyedi tevékenységekben nyilvánul meg. Kezdeti csoportok: szülők, idősebb felhasználók, fogyatékossággal élő személyek, hallgatók. 9. fejezet, 3. modul.
+**Szociális programok — **A POEN automatikus nyilvántartásba vételének mechanizmusa azon minősített felhasználói csoportok számára, amelyeknek a közjóban való szerkezeti részvételét a protokoll elismeri akkor is, ha az nem egyedi tevékenységekben nyilvánul meg. Kezdeti csoportok: szülők, idősebb felhasználók, fogyatékossággal élő személyek, tanulók és hallgatók. 9. fejezet, 3. modul.
 
 **A körök és a szövetkezetek növekedése — **A POEN nyilvántartásba vételének mechanizmusa, amely az 1. (Körök) és 2. (Szövetkezetek) modullal aktiválódik. A protokoll új POEN-bejegyzéseket ír be a szervezeti egység tagjainak számával és a meghatározott küszöbök elérésével összhangban. A POEN-ek a kör vagy a szövetkezet mint szervezeti egység bejegyzésében kerülnek nyilvántartásba, nem az egyes tagok bejegyzéseiben. Nem felhasználói hozzájárulás a többi kategória értelmében. 9. fejezet.
 

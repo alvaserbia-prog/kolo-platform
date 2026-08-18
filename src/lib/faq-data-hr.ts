@@ -565,11 +565,11 @@ Iznos je fiksan i iznosi 2.000 POEN dnevno, dok status traje.`,
       {
         id: 96,
         pitanje: `Što je program Školovanje i na koga se odnosi?`,
-        odgovor: `Školovanje je socijalni program za studente — članove upisane na visokoškolsku ustanovu.
+        odgovor: `Školovanje je socijalni program za one koji se školuju — učenike osnovne i srednje škole i studente.
 
-Dnevni iznos je fiksan i iznosi 2.000 POEN, dok status traje. Status se provjerava jednom godišnje, po studijskoj godini; ako se pri reviziji ne potvrdi, upis prestaje.
+Dnevni iznos je fiksan i iznosi 2.000 POEN, dok status traje. Status se provjerava jednom godišnje; ako se pri reviziji ne potvrdi, upis prestaje.
 
-Prijava ide po istim pravilima kao za druge socijalne programe: kroz platformu, unosom podataka u obrazac — za ovaj program upisane godine studija — bez prilaganja dokumenata.`,
+Prijava ide po istim pravilima kao za druge socijalne programe: kroz platformu, unosom podataka u obrazac — za ovaj program upisanog razreda odnosno godine studija — bez prilaganja dokumenata. Za maloljetnog člana prijavu podnosi roditelj.`,
       },
       {
         id: 62,
@@ -585,7 +585,7 @@ Bliži uvjeti kojima se potvrđuje status za svaku skupinu uređeni su Pravilnik
       {
         id: 20,
         pitanje: `Mogu li biti u više programa istodobno?`,
-        odgovor: `Da, ako ispunjavaš uvjete za više programa — majka koja studira može biti i u Podršci Majkama i u Školovanju. Svaki program se prijavljuje posebno.
+        odgovor: `Da, ako ispunjavaš uvjete za više programa — majka koja se školuje može biti i u Podršci Majkama i u Školovanju. Svaki program se prijavljuje posebno.
 
 Socijalni programi i operativni doprinos dijele zajednički dnevni okvir od 10% ukupnog broja POEN-a u sustavu, kako se ne bi previše POEN-a upisalo odjednom — kad doprinosa ima više nego što okvir prima, dnevni iznosi se razmjerno umanjuju. Doprinos razmjeni i dječji doprinos ne ulaze u taj okvir.`,
       },
@@ -612,7 +612,7 @@ Nema tarife po satu. Uz zadatak stoji predloženi POEN, ali to je težinski orij
         pitanje: `Postoji li program za nezaposlene ili opću financijsku nuždu?`,
         odgovor: `Trenutno ne postoji poseban program za nezaposlenost ni za opću financijsku nuždu.
 
-Socijalni programi pokrivaju točno određene skupine čije je sudjelovanje u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmjene: majke i primarne skrbnike, starije, osobe s invaliditetom i studente. Nezaposlenost ni siromaštvo nisu među tim skupinama — socijalni programi nisu socijalna pomoć ni naknada, nego način da razuđeno sudjelovanje dobije ravnopravno mjesto u sustavu, a ne oblik podrške zbog financijskog stanja.
+Socijalni programi pokrivaju točno određene skupine čije je sudjelovanje u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmjene: majke i primarne skrbnike, starije, osobe s invaliditetom i one koji se školuju. Nezaposlenost ni siromaštvo nisu među tim skupinama — socijalni programi nisu socijalna pomoć ni naknada, nego način da razuđeno sudjelovanje dobije ravnopravno mjesto u sustavu, a ne oblik podrške zbog financijskog stanja.
 
 Ako si u financijskoj nuždi, put do POEN-a je isti kao za sve: razmjena dobara i usluga s drugima, doprinos razmjeni — pet koraka uključivanja u razmjenu koji zajedno donose do 5.000 POEN — i operativni doprinos, rad za zajedničko dobro kroz objavljene zadatke.
 
@@ -635,16 +635,29 @@ Ovo je dobrovoljan doprinos zajednici koji se bilježi — ne posao sa zajamčen
   },
   {
     id: "pijaca-donacije",
-        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
-    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
-    naslov: "Pijaca i donacije",
+    naslov: "Pijaca, donacije i pokrovitelji",
     pitanja: [
       {
-        id: 21,
-        pitanje: `Pijaca — tko odgovara ako razmjena ne uspije?`,
-        odgovor: `Razmjena na Pijaci izravan je odnos između dva korisnika i privatnopravne je prirode. Fondacija i Protokol ne odgovaraju za kvalitetu, isporuku ni za ispunjenje obveza — sve se uređuje po općim pravilima obveznog prava.
+        id: 39,
+        pitanje: `Je li razmjena na Pijaci prodaja?`,
+        odgovor: `Po Pravilniku KOLO sustava, razmjena dobara i usluga između članova na Pijaci nije postavljena kao klasična prodaja. Riječ je o dogovoru dvaju članova — jedan daje dobro ili uslugu, drugi mu prepisuje POEN, a POEN nije novac nego evidencija doprinosa zajedničkom dobru.
 
-Ako ti razmjena ne uspije, prvo pokušaj izravno s drugom stranom; u početnoj fazi možeš zatražiti dobrovoljno, neobvezujuće posredovanje Fondacije, a na raspolaganju je i sudska zaštita.`,
+Prijenos POEN-a u toj razmjeni nije plaćanje novcem niti sredstvo plaćanja u smislu propisa o platnim uslugama. Odnosi povodom razmjene — ispunjenje, odgovornost, rizik — uređuju se po općim pravilima obveznog prava; Protokol u razmjeni ne posreduje.
+
+Ako kroz Pijacu obavljaš djelatnost, tvoje porezne i fiskalne obveze po općim propisima ostaju — ništa ih ovdje ne ukida.`,
+      },
+      {
+        id: 60,
+        pitanje: `Kako određujem cijenu i količine svojih proizvoda i tko ih vrednuje?`,
+        odgovor: `Iznos u POEN-ima za svoja dobra i usluge određuješ sam, slobodno. Platforma ga ne utvrđuje, ne ograničava i ne kontrolira, niti itko vrednuje tvoju robu umjesto tebe — ti najbolje znaš što nudiš i koliko vrijedi.
+
+Postoji samo orijentir: jedan POEN otprilike odgovara jednom dinaru. To je mjerna skala koja pomaže da se snađeš pri određivanju iznosa, ali te ni na što ne obvezuje i nije službeni tečaj.
+
+Ono što se traži jest poštenje: točan i jasan opis dobra ili usluge, realna količina i realan iznos u POEN-ima, i svi uvjeti razmjene. Nije dopušten lažan ili obmanjujuć sadržaj koji pogrešno predstavlja prirodu, kvalitetu ili količinu onoga što nudiš.
+
+Sve ostalo — isporuku, rok, dodatne uvjete — dogovaraš izravno s drugom stranom.
+
+Napomena: ovo vrijedi za razmjenu na Pijaci. Operativni doprinos je drugi kanal — ondje iznos nije slobodan dogovor, nego predloženi POEN, težinski orijentir u dnevnoj raspodjeli.`,
       },
       {
         id: 22,
@@ -656,93 +669,74 @@ Hibridne razmjene (dio POEN, dio RSD) moguće su kao privatni dogovor između te
 Sav RSD dio tvoja je privatna odgovornost prema poreznim propisima.`,
       },
       {
+        id: 41,
+        pitanje: `Je li moj oglas na Pijaci javno vidljiv?`,
+        odgovor: `Da. Sadržaj oglasa — opis, iznos u POEN-ima, lokacija i tvoj pseudonim — vidljiv je svim posjetiteljima, uključujući neregistrirane, kako bi razmjena bila dostupna i laka za pronaći. Dok si novi član, preko fotografije oglasa stoji i vidljiva oznaka „Novi član".
+
+Što nije javno: tvoj kontakt i mogućnost da ti netko piše ili razmjenjuje s tobom — to imaju samo redovni članovi. Neregistriranima i novim članovima tvoj pseudonim na oglasu ne vodi ka profilu ni povijesti transakcija.`,
+      },
+      {
+        id: 58,
+        pitanje: `Mogu li sa susjedom razmijeniti rad-za-rad ili alat-za-usjev bez ijednog POEN-a (trampa)?`,
+        odgovor: `Možeš. Izravna trampa — tvoj rad za njegov rad, tvoj alat za njegov usjev — privatan je dogovor između tebe i susjeda i KOLO ti to ne zabranjuje.
+
+Takva se razmjena odvija izvan sustava: ako uz nju ne ažurirate evidenciju POEN-a, ostaje vaš osobni dogovor i nigdje se ne bilježi kao tvoj doprinos.
+
+A baš je tu smisao KOLA: da razmjena koju biste ionako obavili „iz ruke u ruku" dobije zapis. Kad uz razmjenu ažurirate evidenciju, POEN prijeđe sa zapisa onoga tko je dobro ili uslugu primio na zapis onoga tko ih je dao — i ostaje trag tko je koliko dao zajednici.
+
+Za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Fondacija i Protokol se u to ne miješaju i za to ne odgovaraju.`,
+      },
+      {
+        id: 21,
+        pitanje: `Pijaca — tko odgovara ako razmjena ne uspije?`,
+        odgovor: `Razmjena na Pijaci izravan je odnos dvaju članova i privatnopravne je naravi. Fondacija i Protokol ne odgovaraju za kvalitetu, isporuku ni ispunjenje obveza — sve se uređuje po općim pravilima obveznog prava.
+
+Ako razmjena ne uspije, prvo pokušaj izravno s drugom stranom; u početnoj fazi možeš zatražiti dobrovoljno, neobvezujuće posredovanje Fondacije, a na raspolaganju je i sudska zaštita.`,
+      },
+      {
+        id: 59,
+        pitanje: `Tko odgovara ako rad ima skriveni nedostatak, roba se pokvari ili kupac ne preuzme? Jamstvo, reklamacija i povrat POEN-a?`,
+        odgovor: `Za kvalitetu, ispravnost i isporuku odgovaraju članovi koji razmjenjuju — onaj tko dobro ili uslugu daje i onaj tko ih prima. Fondacija i Protokol nisu strana u razmjeni i ne posreduju u njoj; sve se uređuje po općim pravilima obveznog prava, kao kod svake nabave između dvoje ljudi.
+
+Jamstvo, rok i uvjete dogovaraš izravno s drugom stranom prije razmjene — što jasnije dogovorite stanje robe, rok i što ako nešto ne valja, to lakše rješavate problem kasnije. Ako razmjenjuješ s nekim tko robu ili uslugu nudi u okviru djelatnosti, vrijedi i zakonska zaštita potrošača; između dvije fizičke osobe vrijede opća pravila obveznog prava.
+
+Sustav nema automatsko storniranje razmjene. Ako se dogovorite da se nešto vrati, izvodi se kao novo, dobrovoljno ažuriranje evidencije POEN-a u suprotnom smjeru — kao nova razmjena natrag.
+
+Ako nešto pođe naopako, prvo pokušaj riješiti izravno s drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobvezujuće posredovanje Fondacije; ako dogovor ne uspije, ostaje sudska zaštita po općim pravilima. Uz sam prepis u povijesti POEN-a stoji i dugme kojim slučaj prijavljuješ Fondaciji — ako po prijavi poništi prepis, POEN ti se vraća u cijelosti.`,
+      },
+      {
         id: 23,
         pitanje: `Kako radi donacija Fondaciji i koliko POEN-a dobivam?`,
-        odgovor: `Donaciju može dati svaki redovni član, uplatom u dinarima na račun Fondacije.
+        odgovor: `Donaciju može dati svaki redovni član, uplatom u dinarima na račun Fondacije — izravno ili kroz platformu, gdje je dostupno i plaćanje karticom i IPS QR kodom.
 
-Po primitku uplate, Protokol automatski evidentira POEN: broj POEN-a = iznos donacije × koeficijent evidencije donacija. Koeficijent raste s kumulativnim iznosom kroz 11 razina — od 1,00 (Razina 1, donacija ispod 5.000 RSD) do 2,00 (pri kumulativno 5.000.000 RSD). Razina je trajna i ne smanjuje se korištenjem POEN-a. (Koeficijent evidencije donacija nije „tečaj" ni obračunski koeficijent ZRNA.)
+Kad uplata bude potvrđena, Protokol ti upisuje POEN: iznos donacije × koeficijent evidencije donacija. Koeficijent raste s ukupnim (kumulativnim) iznosom tvojih donacija kroz 11 razina, od 1,00 do 2,00 (najviša razina na kumulativnih 5.000.000 RSD). Kad donacijom prijeđeš prag, koeficijent nove razine primjenjuje se na cijelu tu donaciju. Dostignuta razina je trajna i ne smanjuje se korištenjem POEN-a. Koeficijent evidencije donacija nije „tečaj" ni obračunski koeficijent ZRNA.
 
-Donacije pomažu Fondaciji pokriti osnovne troškove rada (server, alati, razvoj, pravnik, računovodstvo). Kad prihodi premaše operativne troškove, višak se usmjerava u programe sustava.`,
+Donacija je nepovratna — to je jedno od nepromjenjivih načela sustava. Donacije pokrivaju osnovne troškove rada Fondacije (server, alati, razvoj, pravnik, računovodstvo), a kad prihodi premaše operativne troškove, višak se preusmjerava u kolektivne nabave.`,
+      },
+      {
+        id: 74,
+        pitanje: `U kojoj valuti doniram — mogu li poslati eure iz inozemstva?`,
+        odgovor: `Možeš — donacija se daje uplatom na račun Fondacije, u dinarima ili u drugoj valuti, dakle i eurima iz inozemstva. Plaćanje karticom i IPS QR kodom kroz platformu radi samo u dinarima.
+
+POEN se upisuje po istim pravilima kao za svaku donaciju: iznos × koeficijent evidencije donacija, koji raste s kumulativnim iznosom kroz 11 razina (podrobno u pitanju o donacijama). Iznos u stranoj valuti računa se u dinarskoj protuvrijednosti.
+
+Fondacija na zahtjev izdaje potvrdu o donaciji u skladu sa zakonom.`,
       },
       {
         id: 24,
         pitanje: `Što su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su pravne osobe i poduzetnici koji podržavaju rad Fondacije. Glavna razlika u odnosu na donaciju fizičke osobe u tome je što pokrovitelj može doprinijeti ne samo novcem, nego i u robi ili uslugama.
+        odgovor: `Pokrovitelji su pravne osobe i obrtnici koji podupiru rad Fondacije — ne samo novcem, nego i robom ili uslugama.
 
-Pokrovitelj nema vlastiti korisnički račun — POEN bonus evidentira se na korisničkom računu vlasnika ili suvlasnika koji je redovni član, odnosno samog poduzetnika, po fiksnoj tablici sa 7 razina (od 10.000 RSD do 1.000.000 RSD).
+Pokrovitelj nema vlastiti račun: POEN bonus upisuje se na račun vlasnika ili suvlasnika koji je redovni član, odnosno samog obrtnika, po fiksnoj tablici sa 7 razina (od 10.000 do 1.000.000 RSD).
 
-Svi pokrovitelji javno su vidljivi na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
+Svi pokrovitelji javno su prikazani na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
       },
       {
         id: 25,
         pitanje: `Može li tvrtka biti izravni član?`,
         odgovor: `Ne. Izravni članovi isključivo su fizičke osobe.
 
-Tvrtke sudjeluju kroz Pokroviteljstvo — daju podršku Fondaciji, a vlasnik ili suvlasnik kao redovni član dobiva POEN bonus.`,
-      },
-      {
-        id: 39,
-        pitanje: `Je li razmjena na Pijaci prodaja?`,
-        odgovor: `Prema Pravilniku KOLO sustava, razmjena dobara i usluga između korisnika na Pijaci nije konstruirana kao klasična prodaja. Riječ je o međusobnom dogovoru dvaju korisnika — jedan daje robu ili uslugu, drugi prenosi POEN, koji nije novac već evidencija doprinosa zajedničkom dobru.
-
-Sam prijenos POEN-a u toj razmjeni nije plaćanje novcem niti sredstvom plaćanja u smislu Zakona o platnim uslugama. Odnosi između korisnika povodom razmjene — uključujući pitanja ispunjenja, odgovornosti i rizika — uređuju se prema općim pravilima obveznog prava; Protokol u toj razmjeni ne posreduje.
-
-Pravna kvalifikacija ovih razmjena u poreznom i fiskalnom smislu ne ukida postojeće obveze korisnika koji obavlja djelatnost po općim propisima.`,
-      },
-      {
-        id: 41,
-        pitanje: `Je li moj oglas na Pijaci javno vidljiv?`,
-        odgovor: `Da. Sadržaj oglasa — opis, cijena u POEN-ima, lokacija i tvoj pseudonim — javno je vidljiv svim posjetiteljima, uključujući neregistrirane, da bi razmjena bila dostupna i lakša za pronalaženje.
-
-Ono što NIJE javno: tvoj kontakt (telefon) i mogućnost da ti netko piše ili razmijeni s tobom — to je dostupno samo redovnim članovima. Za neregistrirane i one bez potvrde, tvoj pseudonim na oglasu ne vodi do tvog profila ni povijesti transakcija.`,
-      },
-      {
-        id: 58,
-        pitanje: `Mogu li sa susjedom razmijeniti rad-za-rad ili alat-za-usjev bez ijednog POEN-a (trampa)?`,
-        odgovor: `Možeš. Izravna trampa — tvoj rad za njegov rad, tvoj alat za njegov usjev — privatni je dogovor između tebe i susjeda i KOLO ti to ne zabranjuje.
-
-Takva razmjena odvija se izvan sustava. Ako se uz nju ne ažurira evidencija POEN-a, ona ostaje vaš osobni dogovor i nigdje se ne bilježi kao tvoj doprinos.
-
-A baš u tome je smisao KOLA: da razmjena koju biste ionako obavili „iz ruke u ruku" dobije zapis. Kad uz razmjenu ažurirate evidenciju, zapis onoga tko daje umanjuje se, a zapis onoga tko prima uvećava za isti iznos — i ostaje trag o tome tko je koliko dao zajednici.
-
-Možeš i kombinirati: dio obavite kao čistu trampu, a dio prepišete kroz POEN. Tada se bilježi samo onaj dio za koji ste ažurirali evidenciju; čista trampa izvan toga ostaje neevidentirana.
-
-U svakom slučaju, za kvalitetu, isporuku i ispunjenje dogovora odgovarate vas dvoje, po općim pravilima — Fondacija i Protokol se u to ne miješaju i ne odgovaraju za njega.`,
-      },
-      {
-        id: 59,
-        pitanje: `Tko odgovara ako rad ima skriveni nedostatak, roba se pokvari ili kupac ne preuzme? Garancija, reklamacija i povrat POEN-a?`,
-        odgovor: `Za sve što se tiče kvalitete, ispravnosti i isporuke odgovaraju sami korisnici koji razmjenjuju — onaj tko daje dobro ili uslugu i onaj tko ga prima. Fondacija i Protokol nisu strana u toj razmjeni i ne posreduju u njoj; sve se uređuje po općim pravilima obveznog prava, kao i kod svake druge nabave između dvoje ljudi.
-
-Garanciju, rok i uvjete dogovaraš izravno s drugom stranom prije razmjene — što jasnije sve dogovoriš (stanje robe, rok, što ako nešto ne valja), to lakše riješiš eventualni problem kasnije. Ako se radi o robi ili usluzi gdje po zakonu postoji zaštita potrošača, ta zaštita vrijedi i ovdje, bez obzira na vaš dogovor.
-
-Sustav nema automatsko „storniranje" razmjene. Ako se dogovorite da se nešto vrati, to se izvodi kao novo, dobrovoljno ažuriranje evidencije POEN-a u suprotnom smjeru — kao da činite novu razmjenu natrag.
-
-Ako nešto pođe po zlu, prvo pokušaj riješiti izravno s drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobvezujuće posredovanje Fondacije. Ako dogovor ne uspije, na raspolaganju ti je sudska zaštita po općim pravilima.`,
-      },
-      {
-        id: 60,
-        pitanje: `Kako određujem cijenu i količine svojih proizvoda i tko ih vrednuje?`,
-        odgovor: `Cijenu svojih dobara i usluga određuješ sam, slobodno, u POEN-ima. Platforma je ne utvrđuje, ne ograničava i ne kontrolira, niti itko vrednuje tvoju robu umjesto tebe. Ti najbolje znaš što nudiš i koliko to vrijedi.
-
-Postoji samo orijentir: jedan POEN otprilike odgovara jednom dinaru. To je referentna vrijednost koja ti pomaže snaći se pri formiranju cijene, ali te ni na što ne obvezuje i nije nikakav služben tečaj. Možeš je uzeti u obzir ili ne.
-
-Ono što se od tebe traži jest poštenje: dužan si dati točan i jasan opis dobra ili usluge, realnu količinu i realan iznos u POEN-ima, kao i sve uvjete razmjene. Nije dopušteno objavljivati lažan ili zavaravajući sadržaj koji pogrešno predstavlja prirodu, kvalitetu ili količinu onoga što nudiš.
-
-Sve ostalo — način isporuke, rok, dodatne uvjete — dogovaraš izravno s drugom stranom.
-
-Napomena: ovo vrijedi za razmjenu na Pijaci. Operativni doprinos drugi je kanal i tamo iznos nije slobodan dogovor, nego predloženi POEN koji služi kao težinski koeficijent u raspodjeli dnevnog limita.`,
-      },
-      {
-        id: 74,
-        pitanje: `U kojoj valuti doniram — mogu li poslati eure iz inozemstva?`,
-        odgovor: `Možeš donirati u dinarima ili u drugoj valuti — dakle i eure iz inozemstva. Donacija se daje uplatom na račun Fondacije.
-
-Po primitku uplate, Protokol ti automatski upiše POEN: iznos donacije pomnožen koeficijentom evidencije donacija. Taj koeficijent raste s tvojom kumulativnom donacijom kroz 11 razina — od 1,00 (na najnižoj razini, donacija ispod 5.000 RSD) do 2,00 (na najvišoj). Dosegnuta razina trajna je i ne smanjuje se kako trošiš POEN.
-
-(Koeficijent evidencije donacija nije „tečaj" niti obračunski koeficijent ZRNA — to je posebna veličina vezana samo za donacije.)
-
-Donirati može svaki redovni član. Fondacija na zahtjev izdaje potvrdu o donaciji u skladu sa zakonom.`,
+Tvrtke i obrtnici sudjeluju kroz Pokroviteljstvo — podupru Fondaciju, a vlasnik, suvlasnik ili sam obrtnik, kao redovni član, dobiva POEN bonus.`,
       },
     ],
   },

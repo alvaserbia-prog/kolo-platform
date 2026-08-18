@@ -576,11 +576,11 @@ Az összeg fix, napi 2.000 POEN, amíg a státusz tart.`,
       {
         id: 96,
         pitanje: `Mi a Tanulás program, és kikre vonatkozik?`,
-        odgovor: `A Tanulás szociális program a hallgatóknak — azoknak a tagoknak, akik felsőoktatási intézménybe vannak beiratkozva.
+        odgovor: `A Tanulás szociális program azoknak, akik tanulnak — az általános és középiskolai tanulóknak és a hallgatóknak.
 
-A napi összeg fix, 2.000 POEN, amíg a státusz tart. A státuszt évente egyszer, tanévenként ellenőrzik; ha a felülvizsgálatkor nem igazolódik, a rögzítés megszűnik.
+A napi összeg fix, 2.000 POEN, amíg a státusz tart. A státuszt évente egyszer ellenőrzik; ha a felülvizsgálatkor nem igazolódik, a rögzítés megszűnik.
 
-A jelentkezés ugyanazok szerint a szabályok szerint megy, mint a többi szociális programnál: a platformon keresztül, az adatok űrlapon való megadásával — ennél a programnál a beiratkozott évfolyammal —, dokumentumok csatolása nélkül.`,
+A jelentkezés ugyanazok szerint a szabályok szerint megy, mint a többi szociális programnál: a platformon keresztül, az adatok űrlapon való megadásával — ennél a programnál a beiratkozott osztállyal, illetve évfolyammal —, dokumentumok csatolása nélkül. Kiskorú tag esetén a kérelmet a szülő nyújtja be.`,
       },
       {
         id: 62,
@@ -596,7 +596,7 @@ A közelebbi feltételeket, amelyekkel az egyes csoportok státusza igazolható,
       {
         id: 20,
         pitanje: `Lehetek egyszerre több programban?`,
-        odgovor: `Igen, ha több program feltételeinek is megfelelsz — az az anya, aki egyetemre jár, lehet az Anyák Támogatásában és a Tanulásban is. Minden programra külön kell jelentkezni.
+        odgovor: `Igen, ha több program feltételeinek is megfelelsz — az az anya, aki tanul, lehet az Anyák Támogatásában és a Tanulásban is. Minden programra külön kell jelentkezni.
 
 A szociális programok és a működési hozzájárulás közös napi keretet osztanak, amely a rendszerben lévő POEN teljes mennyiségének 10%-a, hogy ne rögzüljön túl sok POEN egyszerre — ha több a hozzájárulás, mint amennyit a keret befogad, a napi összegek arányosan csökkennek. A cseréhez való hozzájárulás és a gyerekhozzájárulás nem tartozik ebbe a keretbe.`,
       },
@@ -623,7 +623,7 @@ Minden közzétett feladaton keresztül zajlik: valaki közzéteszi, egy rendes 
         pitanje: `Van program a munkanélkülieknek vagy általános anyagi szükséghelyzetre?`,
         odgovor: `Jelenleg nincs külön program a munkanélküliségre vagy általános anyagi szükséghelyzetre.
 
-A szociális programok pontosan meghatározott csoportokat fednek le, amelyek részvétele a közösségben állandó és szétszórt, ezért egyedi cseréken keresztül nem rögzíthető: az anyákat és az elsődleges gondviselőket, az időseket, a fogyatékossággal élőket és a hallgatókat. Sem a munkanélküliség, sem a szegénység nincs e csoportok között — a szociális programok nem szociális segélyek és nem juttatások, hanem azt szolgálják, hogy a szétszórt részvétel egyenrangú helyet kapjon a rendszerben, nem pedig az anyagi helyzet miatti támogatás formái.
+A szociális programok pontosan meghatározott csoportokat fednek le, amelyek részvétele a közösségben állandó és szétszórt, ezért egyedi cseréken keresztül nem rögzíthető: az anyákat és az elsődleges gondviselőket, az időseket, a fogyatékossággal élőket és azokat, akik tanulnak. Sem a munkanélküliség, sem a szegénység nincs e csoportok között — a szociális programok nem szociális segélyek és nem juttatások, hanem azt szolgálják, hogy a szétszórt részvétel egyenrangú helyet kapjon a rendszerben, nem pedig az anyagi helyzet miatti támogatás formái.
 
 Ha anyagi szükséghelyzetben vagy, a POEN-hez vezető út ugyanaz, mint mindenki másnak: javak és szolgáltatások cseréje másokkal, a cseréhez való hozzájárulás — a cserébe való bekapcsolódás öt lépése, amelyek együtt legfeljebb 5.000 POEN-t hoznak — és a működési hozzájárulás, vagyis munka a közös jóért közzétett feladatokon keresztül.
 
@@ -646,16 +646,29 @@ Ez a közösségnek nyújtott önkéntes hozzájárulás, amely rögzítésre ke
   },
   {
     id: "pijaca-donacije",
-        // Pokroviteljstvo je privremeno ugašeno (vidi `lib/moduli.ts`) — kad kanal krene,
-    // u naslov se vraća i pomen pokrovitelja, a pitanja 24 i 25 se otključavaju sama.
-    naslov: "Piac és adományok",
+    naslov: "Piac, adományok és patrónusok",
     pitanja: [
       {
-        id: 21,
-        pitanje: `Piac — ki felel, ha a csere meghiúsul?`,
-        odgovor: `A piaci csere két felhasználó közvetlen, magánjogi jellegű viszonya. Az Alapítvány és a Protokoll nem felel sem a minőségért, sem a szállításért, sem a kötelezettségek teljesítéséért — mindezt a kötelmi jog általános szabályai rendezik.
+        id: 39,
+        pitanje: `Adásvétel-e a Piacon zajló csere?`,
+        odgovor: `A KOLO rendszer szabályzata szerint a javak és szolgáltatások tagok közötti cseréje a Piacon nem klasszikus adásvételként van felépítve. Két tag megállapodásáról van szó: az egyik javakat vagy szolgáltatást ad, a másik POEN-t ír át neki, a POEN pedig nem pénz, hanem a közös jóhoz való hozzájárulás nyilvántartása.
 
-Ha a csere meghiúsul, először próbáld meg közvetlenül a másik féllel rendezni; a kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését, és rendelkezésre áll a bírói út is.`,
+A POEN átírása ebben a cserében sem pénzbeli fizetés, sem fizetőeszköz a pénzforgalmi szolgáltatásokra vonatkozó szabályok értelmében. A cserével kapcsolatos viszonyokat — a teljesítést, a felelősséget, a kockázatot — a kötelmi jog általános szabályai rendezik; a Protokoll a cserében nem közvetít.
+
+Ha a Piacon keresztül tevékenységet folytatsz, az általános szabályok szerinti adó- és számlaadási kötelezettségeid megmaradnak — itt semmi nem szünteti meg őket.`,
+      },
+      {
+        id: 60,
+        pitanje: `Hogyan határozom meg a termékeim árát és mennyiségét, és ki értékeli őket?`,
+        odgovor: `A javaidért és szolgáltatásaidért járó POEN-összeget magad határozod meg, szabadon. A platform nem állapítja meg, nem korlátozza és nem ellenőrzi, és senki nem értékeli helyetted az árudat — te tudod a legjobban, mit kínálsz és mennyit ér.
+
+Csak egy iránymutató van: egy POEN nagyjából egy dinárnak felel meg. Ez mérőskála, amely segít eligazodni az összeg meghatározásakor, de semmire nem kötelez, és nem hivatalos árfolyam.
+
+Amit elvárunk, az a tisztesség: a javak vagy a szolgáltatás pontos és világos leírása, valós mennyiség és valós POEN-összeg, valamint a csere minden feltétele. Nem megengedett a hamis vagy megtévesztő tartalom, amely tévesen mutatja be a kínált dolog jellegét, minőségét vagy mennyiségét.
+
+Minden mást — a szállítást, a határidőt, a további feltételeket — közvetlenül a másik féllel egyeztetsz.
+
+Megjegyzés: ez a Piacon zajló cserére vonatkozik. A működési hozzájárulás más csatorna — ott az összeg nem szabad megállapodás, hanem javasolt POEN, súlyozási iránymutató a napi elosztásban.`,
       },
       {
         id: 22,
@@ -667,93 +680,74 @@ A vegyes cserék (részben POEN, részben RSD) lehetségesek a te és a vevő k�
 A teljes dináros rész a te magánfelelősséged az adójogi szabályok szerint.`,
       },
       {
+        id: 41,
+        pitanje: `Nyilvánosan látható-e a hirdetésem a Piacon?`,
+        odgovor: `Igen. A hirdetés tartalma — a leírás, a POEN-összeg, a helység és az álneved — minden látogató számára látható, a nem regisztráltaknak is, hogy a csere elérhető és könnyen megtalálható legyen. Amíg új tag vagy, a hirdetés fényképén látható „Új tag" jelzés is áll.
+
+Ami nem nyilvános: az elérhetőséged és az a lehetőség, hogy valaki írjon neked vagy cseréljen veled — ez csak a rendes tagoké. A nem regisztráltak és az új tagok számára a hirdetésen szereplő álneved nem vezet sem a profilodhoz, sem a tranzakciós előzményeidhez.`,
+      },
+      {
+        id: 58,
+        pitanje: `Cserélhetek a szomszédommal munkát munkáért vagy szerszámot terményért, egyetlen POEN nélkül (cserekereskedelem)?`,
+        odgovor: `Cserélhetsz. A közvetlen cserekereskedelem — a te munkád az ő munkájáért, a te szerszámod az ő terményéért — magánmegállapodás közted és a szomszédod között, és a KOLO ezt nem tiltja.
+
+Az ilyen csere a rendszeren kívül zajlik: ha mellé nem frissítitek a POEN-nyilvántartást, a személyes megállapodásotok marad, és sehol nem rögzül a te hozzájárulásodként.
+
+Márpedig épp ez a KOLO értelme: hogy az a csere, amelyet amúgy is „kézből kézbe" bonyolítanátok, bejegyzést kapjon. Amikor a csere mellé frissítitek a nyilvántartást, a POEN átkerül annak a bejegyzéséről, aki a javakat vagy a szolgáltatást kapta, annak a bejegyzésére, aki adta — és nyoma marad, ki mennyit adott a közösségnek.
+
+A minőségért, a szállításért és a megállapodás teljesítéséért ti ketten feleltek az általános szabályok szerint — az Alapítvány és a Protokoll ebbe nem avatkozik bele, és ezért nem felel.`,
+      },
+      {
+        id: 21,
+        pitanje: `Piac — ki felel, ha a csere nem sikerül?`,
+        odgovor: `A Piacon zajló csere két tag közvetlen viszonya, és magánjogi természetű. Az Alapítvány és a Protokoll nem felel a minőségért, a szállításért, sem a kötelezettségek teljesítéséért — mindent a kötelmi jog általános szabályai rendeznek.
+
+Ha a csere nem sikerül, először közvetlenül a másik féllel próbálkozz; a kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését, és rendelkezésre áll a bírói út is.`,
+      },
+      {
+        id: 59,
+        pitanje: `Ki felel, ha a munkának rejtett hibája van, az áru elromlik, vagy a vevő nem veszi át? Jótállás, reklamáció és a POEN visszatérítése?`,
+        odgovor: `A minőségért, a hibátlanságért és a szállításért a cserélő tagok felelnek — az, aki a javakat vagy a szolgáltatást adja, és az, aki átveszi. Az Alapítvány és a Protokoll nem részese a cserének és nem közvetít benne; mindent a kötelmi jog általános szabályai rendeznek, mint bármely két ember közötti beszerzésnél.
+
+A jótállást, a határidőt és a feltételeket közvetlenül a másik féllel egyezteted a csere előtt — minél világosabban állapodtok meg az áru állapotáról, a határidőről és arról, mi van, ha valami nem stimmel, annál könnyebben oldjátok meg a gondot később. Ha olyasvalakivel cserélsz, aki az árut vagy a szolgáltatást tevékenysége körében kínálja, a fogyasztóvédelmi jog is érvényes; két magánszemély között a kötelmi jog általános szabályai érvényesek.
+
+A rendszerben nincs automatikus csere-visszavonás. Ha megállapodtok, hogy valami visszajár, az új, önkéntes POEN-nyilvántartás-frissítésként történik ellenkező irányban — mint új, visszafelé irányuló csere.
+
+Ha valami rosszul sül el, először próbáld közvetlenül a másik féllel megoldani. A kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését is; ha nem születik megállapodás, marad a bírói út az általános szabályok szerint. Magánál az átírásnál, a POEN-előzményeidben ott a gomb is, amellyel az esetet bejelented az Alapítványnak — ha a bejelentés alapján érvényteleníti az átírást, a POEN teljes egészében visszakerül hozzád.`,
+      },
+      {
         id: 23,
-        pitanje: `Hogyan működik az Alapítványnak adott adomány, és mennyi POEN-t kapok?`,
-        odgovor: `Adományt bármely rendes tag adhat, dinárban, az Alapítvány számlájára történő utalással.
+        pitanje: `Hogyan működik az Alapítványnak nyújtott adomány, és mennyi POEN-t kapok?`,
+        odgovor: `Adományt minden rendes tag adhat, dinárban történő befizetéssel az Alapítvány számlájára — közvetlenül vagy a platformon keresztül, ahol elérhető a bankkártyás fizetés és az IPS QR-kód is.
 
-Az utalás beérkezésekor a Protokoll automatikusan POEN-t rögzít: a POEN mennyisége = az adomány összege × az adományrögzítési együttható. Az együttható a halmozott összeggel 11 szinten át nő — 1,00-tól (1. szint, 5000 RSD alatti adomány) 2,00-ig (halmozott 5 000 000 RSD-nél). A szint állandó, és a POEN felhasználásával nem csökken. (Az adományrögzítési együttható nem „árfolyam" és nem a ZRNO elszámolási együtthatója.)
+Amint a befizetés megerősítést nyer, a Protokoll POEN-t rögzít neked: az adomány összege × az adományok nyilvántartási koefficiense. A koefficiens az adományaid teljes (halmozott) összegével nő, 11 szinten át, 1,00-tól 2,00-ig (a legmagasabb szint 5.000.000 RSD halmozott összegnél). Amikor egy adománnyal átléped a küszöböt, az új szint koefficiense az egész adományra vonatkozik. Az elért szint tartós, és a POEN felhasználásával nem csökken. Az adományok nyilvántartási koefficiense sem nem „árfolyam", sem nem a ZRNO elszámolási koefficiense.
 
-Az adományok segítik az Alapítványt a működés alapköltségeinek fedezésében (szerver, eszközök, fejlesztés, jogász, könyvelés). Ha a bevételek meghaladják a működési költségeket, a többlet a rendszer programjaiba kerül.`,
+Az adomány visszavonhatatlan — ez a rendszer megváltoztathatatlan elveinek egyike. Az adományok az Alapítvány működésének alapköltségeit fedezik (szerver, eszközök, fejlesztés, jogász, könyvelés), és amint a bevételek meghaladják a működési költségeket, a többlet közösségi beszerzésekbe kerül.`,
+      },
+      {
+        id: 74,
+        pitanje: `Milyen pénznemben adományozok — küldhetek eurót külföldről?`,
+        odgovor: `Küldhetsz — az adomány az Alapítvány számlájára történő befizetéssel adható, dinárban vagy más pénznemben, tehát euróban is külföldről. A platformon keresztüli bankkártyás fizetés és az IPS QR-kód csak dinárban működik.
+
+A POEN ugyanazok szerint a szabályok szerint rögzül, mint bármely adománynál: összeg × az adományok nyilvántartási koefficiense, amely a halmozott összeggel nő 11 szinten át (részletesen az adományokról szóló kérdésben). A külföldi pénznemben lévő összeg a dináregyenértéken számít.
+
+Kérésre az Alapítvány a törvénnyel összhangban igazolást állít ki az adományról.`,
       },
       {
         id: 24,
-        pitanje: `Kik a Patrónusok, és miben különböznek az adománytól?`,
-        odgovor: `A patrónusok olyan jogi személyek és egyéni vállalkozók, akik támogatják az Alapítvány működését. A magánszemély adományához képest a fő különbség az, hogy a patrónus nemcsak pénzzel, hanem áruval vagy szolgáltatással is hozzájárulhat.
+        pitanje: `Kik a Patrónusok, és miben különböznek az adományozóktól?`,
+        odgovor: `A patrónusok jogi személyek és egyéni vállalkozók, akik az Alapítvány munkáját támogatják — nem csak pénzzel, hanem áruval vagy szolgáltatással is.
 
-A patrónusnak nincs saját fiókja — a POEN-bónusz annak a tulajdonosnak vagy résztulajdonosnak a fiókjában rögzül, aki rendes tag, illetve magának az egyéni vállalkozónak a fiókjában, egy 7 szintből álló fix táblázat szerint (10 000 RSD-től 1 000 000 RSD-ig).
+A patrónusnak nincs saját fiókja: a POEN-bónusz annak a tulajdonosnak vagy társtulajdonosnak a fiókjára rögzül, aki rendes tag, illetve magának az egyéni vállalkozónak, egy 7 szintből álló fix táblázat szerint (10.000-től 1.000.000 RSD-ig).
 
-Minden patrónus nyilvánosan látható a Patrónusok oldalon — az átláthatóság és a hozzájárulás nyilvános elismerése érdekében.`,
+Minden patrónus nyilvánosan szerepel a Patrónusok oldalon — az átláthatóság és a hozzájárulás nyilvános elismerése végett.`,
       },
       {
         id: 25,
         pitanje: `Lehet-e egy cég közvetlen tag?`,
         odgovor: `Nem. Közvetlen tagok kizárólag természetes személyek lehetnek.
 
-A cégek a Patronáláson keresztül vesznek részt — támogatják az Alapítványt, a tulajdonos vagy résztulajdonos pedig rendes tagként POEN-bónuszt kap.`,
-      },
-      {
-        id: 39,
-        pitanje: `A piaci csere adásvételnek minősül?`,
-        odgovor: `A KOLO rendszer Szabályzata szerint a felhasználók közötti áru- és szolgáltatáscsere a Piacon nem klasszikus adásvételként van felépítve. Két felhasználó kölcsönös megállapodásáról van szó — az egyik árut vagy szolgáltatást ad, a másik POEN-t ad át, amely nem pénz, hanem a közjóhoz való hozzájárulás nyilvántartása.
-
-Maga a POEN átadása ebben a cserében nem pénzbeli fizetés és nem fizetőeszközzel történő fizetés a pénzforgalmi szolgáltatásokról szóló törvény értelmében. A felhasználók közötti, a cserével kapcsolatos viszonyokat — beleértve a teljesítés, a felelősség és a kockázat kérdéseit — a kötelmi jog általános szabályai rendezik; a Protokoll ebben a cserében nem közvetít.
-
-E cserék adójogi és számlaadási minősítése nem szünteti meg a tevékenységet folytató felhasználó általános szabályok szerinti kötelezettségeit.`,
-      },
-      {
-        id: 41,
-        pitanje: `Nyilvánosan látható a hirdetésem a Piacon?`,
-        odgovor: `Igen. A hirdetés tartalma — a leírás, a POEN-ben megadott ár, a helység és az álneved — nyilvánosan látható minden látogató számára, a nem regisztráltak számára is, hogy a csere elérhetőbb és könnyebben megtalálható legyen.
-
-Ami NEM nyilvános: az elérhetőséged (telefonszám), valamint az a lehetőség, hogy valaki írjon neked vagy cseréljen veled — ez csak rendes tagok számára érhető el. A nem regisztráltak és a nem megerősítettek számára a hirdetésen szereplő álneved sem a profilodhoz, sem a tranzakciós előzményeidhez nem vezet.`,
-      },
-      {
-        id: 58,
-        pitanje: `Cserélhetek a szomszéddal munkát munkáért vagy szerszámot terményért, egyetlen POEN nélkül (barter)?`,
-        odgovor: `Cserélhetsz. A közvetlen barter — a te munkád az ő munkájáért, a te szerszámod az ő terményéért — magánmegállapodás közted és a szomszédod között, és a KOLO ezt nem tiltja.
-
-Az ilyen csere a rendszeren kívül zajlik. Ha mellette nem frissül a POEN-nyilvántartás, akkor a ti személyes megállapodásotok marad, és sehol nem rögzül a hozzájárulásodként.
-
-Márpedig épp ez a KOLO értelme: hogy az a csere, amelyet egyébként „kézből kézbe" bonyolítanátok, bejegyzést kapjon. Amikor a csere mellett frissítitek a nyilvántartást, az adó fél bejegyzése csökken, a kapó félé pedig ugyanannyival nő — és nyoma marad annak, ki mennyit adott a közösségnek.
-
-Kombinálhatod is: egy részt tiszta barterként végeztek, egy részt pedig POEN-ben írtok át. Ekkor csak az a rész rögzül, amelyre a nyilvántartást frissítettétek; az ezen felüli tiszta barter nyilvántartatlan marad.
-
-Mindenesetre a minőségért, a szállításért és a megállapodás teljesítéséért ti ketten feleltek az általános szabályok szerint — az Alapítvány és a Protokoll ebbe nem avatkozik bele, és ezért nem is felel.`,
-      },
-      {
-        id: 59,
-        pitanje: `Ki felel, ha a munkának rejtett hibája van, az áru megromlik, vagy a vevő nem veszi át? Jótállás, reklamáció és a POEN visszatérítése?`,
-        odgovor: `Mindenért, ami a minőséget, a hibátlanságot és a szállítást illeti, maguk a cserélő felhasználók felelnek — az, aki a javakat vagy a szolgáltatást adja, és az, aki átveszi. Az Alapítvány és a Protokoll nem részese ennek a cserének, és nem közvetít benne; mindent a kötelmi jog általános szabályai rendeznek, mint bármely más, két ember közötti beszerzésnél.
-
-A jótállást, a határidőt és a feltételeket közvetlenül a másik féllel egyeztetd a csere előtt — minél világosabban állapodtok meg mindenben (az áru állapota, a határidő, mi történik, ha valami nem jó), annál könnyebben rendezhető egy esetleges probléma később. Ha olyan áruról vagy szolgáltatásról van szó, amelynél törvény szerint fogyasztóvédelem áll fenn, az itt is érvényes, a megállapodásotoktól függetlenül.
-
-A rendszerben nincs automatikus „sztornó". Ha megállapodtok valaminek a visszaadásáról, az új, önkéntes POEN-nyilvántartás-frissítésként történik ellenkező irányban — mintha új, visszafelé irányuló cserét bonyolítanátok.
-
-Ha valami rosszul sül el, először próbáld meg közvetlenül a másik féllel rendezni. A kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését is. Ha a megállapodás nem sikerül, az általános szabályok szerinti bírói út áll rendelkezésedre.`,
-      },
-      {
-        id: 60,
-        pitanje: `Hogyan határozom meg a termékeim árát és mennyiségét, és ki értékeli azokat?`,
-        odgovor: `A javaid és szolgáltatásaid árát magad határozod meg, szabadon, POEN-ben. A platform nem állapítja meg, nem korlátozza és nem ellenőrzi, és senki sem értékeli helyetted az árudat. Te tudod a legjobban, mit kínálsz, és mennyit ér.
-
-Csak egy támpont létezik: egy POEN nagyjából egy dinárnak felel meg. Ez tájékoztató érték, amely segít eligazodni az árképzésnél, de semmire sem kötelez, és nem hivatalos árfolyam. Figyelembe veheted, vagy nem.
-
-Amit elvárunk tőled, az a tisztesség: köteles vagy pontos és világos leírást adni a javakról vagy a szolgáltatásról, valós mennyiséget és valós POEN-összeget megjelölni, valamint a csere minden feltételét közölni. Nem megengedett hamis vagy megtévesztő tartalom közzététele, amely helytelenül mutatja be a kínált dolog jellegét, minőségét vagy mennyiségét.
-
-Minden mást — a szállítás módját, a határidőt, a további feltételeket — közvetlenül a másik féllel egyeztetsz.
-
-Megjegyzés: ez a piaci cserére vonatkozik. A működési hozzájárulás másik csatorna, és ott az összeg nem szabad megállapodás tárgya, hanem a javasolt POEN súlyozási együtthatóként szolgál a napi keret elosztásában.`,
-      },
-      {
-        id: 74,
-        pitanje: `Milyen pénznemben adományozhatok — küldhetek eurót külföldről?`,
-        odgovor: `Adományozhatsz dinárban vagy más pénznemben — tehát eurót is külföldről. Az adomány az Alapítvány számlájára történő utalással történik.
-
-Az utalás beérkezésekor a Protokoll automatikusan POEN-t ír be neked: az adomány összegét megszorozva az adományrögzítési együtthatóval. Ez az együttható a halmozott adományoddal 11 szinten át nő — 1,00-tól (a legalsó szinten, 5000 RSD alatti adomány) 2,00-ig (a legfelsőn). Az elért szint állandó, és nem csökken, ahogy a POEN-t felhasználod.
-
-(Az adományrögzítési együttható nem „árfolyam" és nem a ZRNO elszámolási együtthatója — külön, kizárólag az adományokhoz kötődő mennyiség.)
-
-Adományozni bármely rendes tag tud. Kérésre az Alapítvány a törvénynek megfelelő igazolást állít ki az adományról.`,
+A cégek és az egyéni vállalkozók a Patronálás útján vesznek részt: támogatják az Alapítványt, a tulajdonos, a társtulajdonos vagy maga az egyéni vállalkozó pedig rendes tagként POEN-bónuszt kap.`,
       },
     ],
   },
