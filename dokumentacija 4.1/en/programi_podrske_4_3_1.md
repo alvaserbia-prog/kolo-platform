@@ -46,7 +46,7 @@ New qualifying groups are added by a decision of the Foundation in Phase 1, or o
 
 *Application conditions, verifier confirmation, and consent*
 
-The right to a programme is exercised by a verified user with a full reality index (100%) who enters data confirming membership of the qualifying group and gives explicit consent under this Article. The application is reviewed and approved by the Foundation before recording begins.
+The right to a programme is exercised by a verified user with a reality index of at least 10% (at least one confirmation received in the chain of confirmations) who enters data confirming membership of the qualifying group and gives explicit consent under this Article. The application is reviewed and approved by the Foundation before recording begins.
 
 Before the Foundation decides, the fulfilment of conditions is confirmed by all of the applicant's verifiers. Each verifier, under full responsibility and on the basis of direct personal acquaintance with the applicant, confirms that the applicant satisfies the programme's conditions, or refuses confirmation with a mandatory statement of reasons. Verifiers do not have access to the data entered by the applicant — they confirm on the basis of their own knowledge. The Foundation may approve the application only once all verifiers have confirmed; the absence or refusal of even one verifier prevents approval. This mechanism protects the integrity of the programmes against false applications (anti-fraud).
 

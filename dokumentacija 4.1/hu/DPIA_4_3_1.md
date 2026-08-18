@@ -19,7 +19,7 @@
 | **Adatvédelmi tisztviselő (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Készítés dátuma** | 2026.05.23. (utolsó módosítás 2026.06.16.) |
 | **A vizsgálat tárgya** | KOLO rendszer — 1. szakasz, az 1–15. sz. aktív adatkezelési tevékenység, ideértve az aktivált 3. modult (Szociális programok hitelesítői megerősítéssel), a hitelesítési rendszer integritásának felügyeletét, az adományok nyilvános listáját, a felügyeleti ügyet, a cseréhez való hozzájárulás útját és az **aktivált 4. modult — Gyermekek (11. sz. tevékenység)** |
-| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.3.0), Adatvédelmi szabályzat (v4.3.0), Az adatkezelési tevékenységek nyilvántartása (v4.3.0), Szabályzat a támogatási programokról (v4.3.0), Szabályzat az aktusok hierarchiájáról (v4.3.0), Alapszabály (v4.1), Whitepaper (v4.3.0) |
+| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.3.1), Adatvédelmi szabályzat (v4.3.1), Az adatkezelési tevékenységek nyilvántartása (v4.3.1), Szabályzat a támogatási programokról (v4.3.1), Szabályzat az aktusok hierarchiájáról (v4.3.1), Alapszabály (v4.1), Whitepaper (v4.3.1) |
 | **Következő felülvizsgálat** | A szociális programok megerősítési mechanizmusának módosításakor, a gyermektér szabályainak módosításakor, vagy legkésőbb az utolsó módosítástól számított 12 hónapon belül |
 
 Ez az adatvédelmi hatásvizsgálat (a továbbiakban: DPIA) a személyes adatok védelméről szóló törvény („SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 54. cikkével összhangban készül. A DPIA a KOLO rendszerről szóló szabályzat IX. fejezetének rendelkezésein (60–67. cikk), a KOLO platform adatvédelmi szabályzatán és a személyes adatok kezelési tevékenységeinek nyilvántartásán alapul.
@@ -46,7 +46,7 @@ Harmadik tervezési döntés — adattakarékosság. A platform kizárólag a re
 
 ## 2.3. Az adatkezelési tevékenységek áttekintése
 
-A rendszer az 1. szakaszban tizenöt, az adatkezelési tevékenységek nyilvántartásában (v4.3.0) meghatározott tevékenységet foglal magában. Mind a tizenöt tevékenység aktív. A 3. modult (Szociális programok) e vizsgálat korábbi változata aktiválta; a 13. tevékenység az adományok nyilvános listáját, a 14. tevékenység a valóság bizonyításáról szóló szabályzat 4.2.1 által bevezetett felügyeleti ügyet, a 15. tevékenység pedig a KOLO rendszerről szóló szabályzat 40.b cikke által bevezetett, cseréhez való hozzájárulás útját foglalja magában. **A 11. tevékenységet (4. modul — Gyermekek) ez a vizsgálat aktiválja**, a gyermekek részvételéről szóló szabályzattal együtt.
+A rendszer az 1. szakaszban tizenöt, az adatkezelési tevékenységek nyilvántartásában (v4.3.1) meghatározott tevékenységet foglal magában. Mind a tizenöt tevékenység aktív. A 3. modult (Szociális programok) e vizsgálat korábbi változata aktiválta; a 13. tevékenység az adományok nyilvános listáját, a 14. tevékenység a valóság bizonyításáról szóló szabályzat 4.2.1 által bevezetett felügyeleti ügyet, a 15. tevékenység pedig a KOLO rendszerről szóló szabályzat 40.b cikke által bevezetett, cseréhez való hozzájárulás útját foglalja magában. **A 11. tevékenységet (4. modul — Gyermekek) ez a vizsgálat aktiválja**, a gyermekek részvételéről szóló szabályzattal együtt.
 
 | **Tevékenység** | **Megnevezés** | **Jogalap** | **Állapot** |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ A rendszer az 1. szakaszban tizenöt, az adatkezelési tevékenységek nyilvánt
 | 14. sz. | Felügyeleti ügy (a hitelesítés felügyeletének eredménye) | Szerződéses jogviszony teljesítése (12. cikk 1. bek. 2. pont) | Aktív |
 | 15. sz. | A hirdetés kapcsán tett megkeresés és a cseréhez való hozzájárulás útja | Szerződéses jogviszony teljesítése (12. cikk 1. bek. 2. pont) | Aktív |
 
-Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.3.0) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
+Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.3.1) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
 
 ## 2.4. Az adatáramlás
 
@@ -218,7 +218,7 @@ Az anonimizálás mechanikája a jogállás megszűnésekor: az e-mail-cím tör
 
 ## 8.1. 3. modul — Szociális programok (e vizsgálattal aktiválva)
 
-A 3. modul e vizsgálattal aktiválódik, a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (v4.3.0) összhangban. A rendszer az adatok különleges kategóriáinak kezelését vezeti be — szülői jogállás, életkor, fogyatékosság (az illetékes hatóság határozata — nem diagnózis), hallgatói jogállás (ZZPL 17. cikk). A jogalap a felhasználó kifejezett hozzájárulása (ZZPL 17. cikk 2. bek. 1. pont). Az Alapítvány nem őrzi a benyújtott dokumentáció másolatait — csak a csoporthoz tartozásról szóló minimális bejegyzés és a jogállás igazolásának dátuma marad.
+A 3. modul e vizsgálattal aktiválódik, a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (v4.3.1) összhangban. A rendszer az adatok különleges kategóriáinak kezelését vezeti be — szülői jogállás, életkor, fogyatékosság (az illetékes hatóság határozata — nem diagnózis), hallgatói jogállás (ZZPL 17. cikk). A jogalap a felhasználó kifejezett hozzájárulása (ZZPL 17. cikk 2. bek. 1. pont). Az Alapítvány nem őrzi a benyújtott dokumentáció másolatait — csak a csoporthoz tartozásról szóló minimális bejegyzés és a jogállás igazolásának dátuma marad.
 
 A programok integritásának a valótlan kérelmekkel szembeni védelme érdekében a jóváhagyás előtt a feltételek teljesülését a kérelmező valamennyi hitelesítője megerősíti, teljes felelősséggel és személyes ismeretség alapján, a megadott adatokba való betekintés nélkül; az elutasítás indokolást igényel, a kérelem pedig nem hagyható jóvá, amíg mindannyian meg nem erősítik (kemény zárolás). Ez az eljárás vezeti be az R11 kockázatot (különleges kategóriához tartozás feltárása a saját hitelesítők előtt), amelyre az intézkedéseket az 5.6. pont állapítja meg.
 

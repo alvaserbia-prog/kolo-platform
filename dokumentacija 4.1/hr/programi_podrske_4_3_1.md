@@ -46,7 +46,7 @@ Nove kvalificirane skupine dodaju se odlukom Zaklade u Fazi 1., odnosno Gornjeg 
 
 *Uvjeti prijave, verifikatorska potvrda i privola*
 
-Pravo na program ostvaruje verificirani korisnik s punim indeksom stvarnosti (100 %) koji unese podatke kojima se potvrđuje pripadnost kvalificiranoj skupini i dade izričitu privolu iz ovog članka. Prijavu pregledava i odobrava Zaklada prije početka evidentiranja.
+Pravo na program ostvaruje verificirani korisnik s indeksom stvarnosti od najmanje 10 % (najmanje jedna primljena potvrda u lancu potvrda) koji unese podatke kojima se potvrđuje pripadnost kvalificiranoj skupini i dade izričitu privolu iz ovog članka. Prijavu pregledava i odobrava Zaklada prije početka evidentiranja.
 
 Prije odlučivanja Zaklade ispunjenost uvjeta potvrđuju svi verifikatori podnositelja. Svaki verifikator, pod punom odgovornošću i na temelju neposrednog osobnog poznanstva s podnositeljem, potvrđuje da podnositelj ispunjava uvjet programa ili odbija potvrdu uz obvezno obrazloženje. Verifikatori nemaju uvid u podatke koje je podnositelj unio — potvrđuju na temelju vlastita saznanja. Zaklada može odobriti prijavu tek kada svi verifikatori potvrde; izostanak ili odbijanje makar jednog verifikatora sprječava odobravanje. Taj mehanizam štiti integritet programa od neistinitih prijava (antimalverzacija).
 

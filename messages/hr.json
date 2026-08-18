@@ -731,11 +731,11 @@
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima Kruga 50+",
     "opis_posebna_briga": "2.000 POEN/dan · osobe s invaliditetom · rješenje nadležnog tijela",
     "opis_skolovanje": "Iznos postavlja admin · ponovna provjera svakih 6 mjeseci",
-    "nepun_indeks": "Za socijalni program potreban je pun indeks stvarnosti (100%) — svih deset potvrda. Svi vaši oni koji potvrđuju potvrđuju ispunjenost uvjeta prije odobravanja.",
+    "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda — indeks stvarnosti od 10 %. Cijeli vaš lanac potvrđuje ispunjenost uvjeta prije odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rješenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rješenja (opcionalno — ostavite prazno ako je trajno)",
     "posebna_briga_napomena2": "Evidentira se samo datum rješenja nadležnog tijela — ne traži se broj rješenja, naziv tijela, medicinska dokumentacija ni dijagnoza.",
-    "pristanak_tekst": "Pristajem da mojih deset onoga tko potvrđuje bude zamoljeno da pod punom odgovornošću potvrde da ispunjavam uvjet za ovaj program. Oni koji potvrđuju ne vide unesene podatke. Prijavu odobrava Fondacija tek kada svi potvrde.",
+    "pristanak_tekst": "Pristajem da svi ljudi iz mog lanca budu zamoljeni da pod punom odgovornošću potvrde da ispunjavam uvjet za ovaj program. Oni ne vide unesene podatke. Prijavu odobrava Zaklada tek kada svi potvrde.",
     "potvrde_naslov": "Zahtjevi za potvrdu",
     "potvrde_opis": "Korisnici koje ste potvrdili prijavili su se za socijalni program i naveli vas kao onoga tko potvrđuje. Potvrdite pod punom odgovornošću da osoba ispunjava uvjet ili obrazložite zašto ne možete potvrditi. Ne vidite unesene podatke prijave.",
     "potvrde_prazno": "Trenutačno nemate zahtjeva za potvrdu.",
@@ -898,11 +898,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -910,23 +910,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.0"
+      "ver": "4.3.1"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.3.0",
+      "ver": "4.3.1",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -946,21 +946,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja — KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.3.0",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.3.1",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.3.0",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.3.1",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.3.0",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.3.1",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.3.0",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.3.1",
     "meta_rizici_title": "Izjava o prihvaćanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.0",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.3.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.3.1",
     "meta_pravilnik_title": "Pravilnici KOLO sustava — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.3.0",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.3.1",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -2823,7 +2823,6 @@
     "zrno_trziste_nije_aktivno": "ZRNO tržište nije aktivno.",
     "za_ovaj_zadatak_je_obavezan_plan_izvrsenja_najmanje_10_karaktera": "Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 karaktera).",
     "za_robu_i_usluge_obavezan_je_maloprodajni_cenovnik": "Za robu i usluge obavezan je maloprodajni cenovnik.",
-    "za_socijalni_program_potreban_je_pun_indeks_stvarnosti_100_sve_verifikacije": "Za socijalni program potreban je pun indeks stvarnosti (100%) — sve potvrde.",
     "zadatak_nije_aktivan": "Zadatak nije aktivan.",
     "zahtev_nije_aktivan": "Zahtjev nije aktivan.",
     "zahtev_nije_na_cekanju": "Zahtjev nije na čekanju.",

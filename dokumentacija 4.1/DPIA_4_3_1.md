@@ -17,7 +17,7 @@
 | **Lice za zaštitu podataka (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Datum izrade** | 23.05.2026. (poslednja izmena 16.06.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–15, uključujući aktivirani Modul 3 (Socijalni programi sa verifikatorskom potvrdom), Nadzor integriteta sistema verifikacija, javnu listu donacija, nadzorni predmet, putanju doprinosa razmeni i **aktivirani Modul 4 — Deca (radnja br. 11)** |
-| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.3.0), Politika privatnosti (v4.3.0), Registar radnji obrade (v4.3.0), Pravilnik o programima podrške (v4.3.0), Pravilnik o hijerarhiji akata (v4.3.0), Statut (v4.1), Whitepaper (v4.3.0) |
+| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.3.1), Politika privatnosti (v4.3.1), Registar radnji obrade (v4.3.1), Pravilnik o programima podrške (v4.3.1), Pravilnik o hijerarhiji akata (v4.3.1), Statut (v4.1), Whitepaper (v4.3.1) |
 | **Sledeća revizija** | Pri izmeni mehanizma potvrde socijalnih programa, pri izmeni pravila dečjeg prostora, ili najkasnije 12 meseci od poslednje izmene |
 
 Ova procena uticaja na zaštitu podataka o ličnosti (u daljem tekstu: DPIA) izrađuje se u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL). DPIA se zasniva na odredbama Glave IX Pravilnika o KOLO sistemu (čl. 60–67), Politici privatnosti KOLO platforme i Registru radnji obrade podataka o ličnosti.
@@ -44,7 +44,7 @@ Treća dizajnerska odluka — minimizacija podataka. Platforma prikuplja samo po
 
 ## 2.3. Pregled radnji obrade
 
-Sistem u Fazi 1 obuhvata petnaest radnji obrade definisanih Registrom radnji obrade (v4.3.0). Sve petnaest radnji su aktivne. Modul 3 (Socijalni programi) aktiviran je ranijom verzijom ove procene; radnja 13 obuhvata javnu listu donacija, radnja 14 nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15 putanju doprinosa razmeni uvedenu članom 40b Pravilnika o KOLO sistemu. **Radnja 11 (Modul 4 — Deca) aktivira se ovom procenom**, uz Pravilnik o učešću dece.
+Sistem u Fazi 1 obuhvata petnaest radnji obrade definisanih Registrom radnji obrade (v4.3.1). Sve petnaest radnji su aktivne. Modul 3 (Socijalni programi) aktiviran je ranijom verzijom ove procene; radnja 13 obuhvata javnu listu donacija, radnja 14 nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15 putanju doprinosa razmeni uvedenu članom 40b Pravilnika o KOLO sistemu. **Radnja 11 (Modul 4 — Deca) aktivira se ovom procenom**, uz Pravilnik o učešću dece.
 
 | **Radnja** | **Naziv** | **Pravni osnov** | **Status** |
 | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ Sistem u Fazi 1 obuhvata petnaest radnji obrade definisanih Registrom radnji obr
 | Br. 14 | Nadzorni predmet (ishod nadzora verifikacije) | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
 | Br. 15 | Upit povodom oglasa i putanja doprinosa razmeni | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
 
-Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.3.0) koji se primenjuje zajedno sa ovom procenom.
+Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.3.1) koji se primenjuje zajedno sa ovom procenom.
 
 ## 2.4. Tok podataka
 
@@ -216,7 +216,7 @@ Mehanika anonimizacije pri prestanku statusa: email adresa se briše, veze u gra
 
 ## 8.1. Modul 3 — Socijalni programi (aktiviran ovom procenom)
 
-Modul 3 se aktivira ovom procenom, u skladu sa čl. 57 Pravilnika i Pravilnikom o programima podrške (v4.3.0). Sistem uvodi obradu posebnih kategorija podataka — status roditelja, starosna dob, invaliditet (rešenje nadležnog organa — ne dijagnoza), studentski status (čl. 17 ZZPL-a). Pravni osnov je izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Fondacija ne čuva kopije podnesene dokumentacije — ostaje samo minimalni zapis o pripadnosti grupi i datum verifikacije.
+Modul 3 se aktivira ovom procenom, u skladu sa čl. 57 Pravilnika i Pravilnikom o programima podrške (v4.3.1). Sistem uvodi obradu posebnih kategorija podataka — status roditelja, starosna dob, invaliditet (rešenje nadležnog organa — ne dijagnoza), studentski status (čl. 17 ZZPL-a). Pravni osnov je izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Fondacija ne čuva kopije podnesene dokumentacije — ostaje samo minimalni zapis o pripadnosti grupi i datum verifikacije.
 
 Radi zaštite integriteta programa od neistinitih prijava, pre odobravanja ispunjenost uslova potvrđuju svi verifikatori podnosioca, pod punom odgovornošću i na osnovu ličnog poznavanja, bez uvida u unete podatke; odbijanje zahteva obrazloženje, a prijava se ne odobrava dok svi ne potvrde (tvrda blokada). Ovaj postupak uvodi rizik R11 (otkrivanje pripadnosti posebnoj kategoriji sopstvenim verifikatorima), za koji su mere utvrđene u tački 5.6.
 

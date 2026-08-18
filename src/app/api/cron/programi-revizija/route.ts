@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
         status: "INACTIVE",
         rejectionReason: istekla
           ? "Istekao rok reverifikacije statusa (čl. 12); status nije ponovo potvrđen."
-          : "Indeks stvarnosti pao ispod 100% — osnov za program više ne važi.",
+          : "Indeks stvarnosti pao ispod 10% — osnov za program više ne važi.",
       },
     });
 
@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
 
     const razlog = istekla
       ? "Istekao je rok za godišnju reviziju statusa, a status nije ponovo potvrđen."
-      : "Vaš indeks stvarnosti je pao ispod 100%, pa je osnov za program prestao da važi.";
+      : "Vaš indeks stvarnosti je pao ispod 10%, pa je osnov za program prestao da važi.";
     await obavesti(en.user.id, {
       tip: "info",
       kljuc: "notifikacije.program_obustavljen",

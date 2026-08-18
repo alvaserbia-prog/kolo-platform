@@ -46,7 +46,7 @@ Az elsődleges gondviselők az Anyák Támogatása programból eredő jogok teki
 
 *A jelentkezés feltételei, hitelesítői megerősítés és hozzájárulás*
 
-A programra az a hitelesített felhasználó jogosult, akinek teljes a valóságindexe (100 %), aki megadja a minősített csoporthoz való tartozást igazoló adatokat, és megadja az e cikk szerinti kifejezett hozzájárulást. A kérelmet a nyilvántartásba vétel megkezdése előtt az Alapítvány vizsgálja meg és hagyja jóvá.
+A programra az a hitelesített felhasználó jogosult, akinek valóságindexe legalább 10 % (legalább egy kapott megerősítés a megerősítési láncban), aki megadja a minősített csoporthoz való tartozást igazoló adatokat, és megadja az e cikk szerinti kifejezett hozzájárulást. A kérelmet a nyilvántartásba vétel megkezdése előtt az Alapítvány vizsgálja meg és hagyja jóvá.
 
 Az Alapítvány döntése előtt a feltételek teljesülését a kérelmező valamennyi hitelesítője megerősíti. Minden hitelesítő teljes felelősséggel, a kérelmezővel való közvetlen személyes ismeretség alapján megerősíti, hogy a kérelmező megfelel a program feltételének, vagy kötelező indokolás mellett megtagadja a megerősítést. A hitelesítők nem látják a kérelmező által megadott adatokat — saját tudomásuk alapján erősítenek meg. Az Alapítvány csak akkor hagyhatja jóvá a kérelmet, ha valamennyi hitelesítő megerősítette; akár egyetlen hitelesítő hallgatása vagy elutasítása is megakadályozza a jóváhagyást. Ez a mechanizmus védi a programok integritását a valótlan kérelmekkel szemben (visszaélés elleni védelem).
 

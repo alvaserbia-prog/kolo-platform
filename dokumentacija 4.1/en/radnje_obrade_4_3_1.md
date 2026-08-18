@@ -2,7 +2,7 @@
 
 # Records of Processing Activities of Personal Data
 
-*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.3.0), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.3.0) and the Rulebook on Support Programmes (version 4.3.0).*
+*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.3.1), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.3.1) and the Rulebook on Support Programmes (version 4.3.1).*
 
 **CONTROLLER DETAILS**
 
@@ -128,7 +128,7 @@
 
 **Processing activity no. 10 — Special categories of data (Module 3 — Social Programs)**
 
-| **Status** | ACTIVE — Module 3 is activated in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.3.0); activation is accompanied by an updated DPIA (v4.3.0). |
+| **Status** | ACTIVE — Module 3 is activated in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.3.1); activation is accompanied by an updated DPIA (v4.3.0). |
 | --- | --- |
 | **Purpose of processing** | Automatic recording of contributions in POENs for users belonging to qualifying groups, with confirmation of fulfilment of conditions by the applicant's verifiers (protecting the integrity of programs from false applications). |
 | **Categories of data subjects** | Users belonging to qualifying groups (parents, elderly persons, persons with disabilities, students) and their verifiers. |
@@ -137,7 +137,7 @@
 | **Recipients / processors** | Vercel Inc. (hosting) and Neon Inc. (database), United States, on the basis of a processing agreement. The person at the Foundation processing the application has access to the entered data. The applicant's verifiers receive exclusively the request for confirmation (program name and the pseudonym of the applicant whom they personally know) — without access to the entered data. |
 | **Transfer to a third country** | Yes — infrastructure processors are located in the USA (see Art. 9 of the Privacy Policy). |
 | **Retention period** | Until withdrawal of consent by the user. Records of verifiers' confirmations (confirmed/rejected, reason for rejection) are retained with the application while the status lasts. |
-| **Protection measures** | Data are maintained pseudonymously and accessible only to the person at the Foundation processing the application; verifiers and other users do not have access to the entered data. Minimization: only dates are recorded (children's dates of birth without names, date of disability decision without number/diagnosis). The application requires a full reality index (100%) and explicit consent. Hard block: the application is not approved until all verifiers confirm; a refusal requires a reason. Notification of verifiers exclusively within the platform (in-app), without external channels. Minimization: the content of the application is not displayed to the verifier. |
+| **Protection measures** | Data are maintained pseudonymously and accessible only to the person at the Foundation processing the application; verifiers and other users do not have access to the entered data. Minimization: only dates are recorded (children's dates of birth without names, date of disability decision without number/diagnosis). The application requires a reality index of at least 10% and explicit consent. Hard block: the application is not approved until all verifiers confirm; a refusal requires a reason. Notification of verifiers exclusively within the platform (in-app), without external channels. Minimization: the content of the application is not displayed to the verifier. |
 
 **Processing activity no. 11 — Data of minors (Module 4 — Children)**
 
@@ -180,7 +180,7 @@
 
 **Processing activity No. 14 — Supervision case (supervision outcome of a verification)**
 
-| **Purpose of processing** | Recording the outcome of supervision over a verification and maintaining a supervision case, for the purpose of establishing a false verification by the Management Board (Rulebook on Proof of Reality 4.3.0, Arts. 11, 11a and 18). Until 4.2.1 a supervisor could only confirm a verification; suspicion had nowhere to be recorded and was therefore never examined. |
+| **Purpose of processing** | Recording the outcome of supervision over a verification and maintaining a supervision case, for the purpose of establishing a false verification by the Management Board (Rulebook on Proof of Reality 4.3.1, Arts. 11, 11a and 18). Until 4.2.1 a supervisor could only confirm a verification; suspicion had nowhere to be recorded and was therefore never examined. |
 | --- | --- |
 | **Categories of data subjects** | The verifier and the verified user from the supervised verification; the supervisor who recorded the outcome. |
 | **Categories of data** | No new data are collected from users. The following are added to the existing verification record: the supervision outcome (sound / needs review / disputed), the subject of suspicion (verifier, verified user, both, part of the network), a reason code from a closed list and, only with the reason "other", a brief free-text description entered by the supervisor. The supervision case contains the same data together with the designation of the verification record and a note on the decision. |
@@ -193,7 +193,7 @@
 
 **Processing activity No. 15 — Enquiry in relation to a listing and the exchange contribution path**
 
-| **Purpose of processing** | Establishing that the conditions for recording a contribution through the channel of contribution to platform content are met; from version 4.2.1 that contribution is recorded through a path of five steps (Rulebook on the KOLO System 4.3.0, Art. 15 item 8 and Art. 40b). Ancillary purpose: preventing the contribution from being obtained without a genuine exchange. |
+| **Purpose of processing** | Establishing that the conditions for recording a contribution through the channel of contribution to platform content are met; from version 4.2.1 that contribution is recorded through a path of five steps (Rulebook on the KOLO System 4.3.1, Art. 15 item 8 and Art. 40b). Ancillary purpose: preventing the contribution from being obtained without a genuine exchange. |
 | --- | --- |
 | **Categories of data subjects** | The user whose progress along the path is being established; the user who made contact in relation to a listing; the user with whom the POEN ledger was updated. |
 | **Categories of data** | Enquiry in relation to a listing: the pseudonym of the user who made contact, the listing identifier, and the time. The content of the message is not processed for this purpose. The remainder is not collected anew but read from existing processing activities: records of POEN ledger updates (activity no. 4) and the verification graph (activity no. 2), in order to establish whether the other party is outside the circle of acquaintance. |

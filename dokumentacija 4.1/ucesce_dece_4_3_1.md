@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.0), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.1), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 

@@ -44,7 +44,7 @@ Nove kvalifikovane grupe dodaju se odlukom Fondacije u Fazi 1, odnosno Gornjeg K
 
 *Uslovi prijave, verifikatorska potvrda i pristanak*
 
-Pravo na program ostvaruje verifikovani korisnik sa punim indeksom stvarnosti (100%) koji unese podatke kojima se potvrđuje pripadnost kvalifikovanoj grupi i da izričit pristanak iz ovog člana. Prijavu pregleda i odobrava Fondacija pre početka evidentiranja.
+Pravo na program ostvaruje verifikovani korisnik sa indeksom stvarnosti od najmanje 10% (najmanje jedna primljena potvrda u lancu potvrda) koji unese podatke kojima se potvrđuje pripadnost kvalifikovanoj grupi i da izričit pristanak iz ovog člana. Prijavu pregleda i odobrava Fondacija pre početka evidentiranja.
 
 Pre odlučivanja Fondacije, ispunjenost uslova potvrđuju svi verifikatori podnosioca. Svaki verifikator, pod punom odgovornošću i na osnovu neposrednog ličnog poznavanja podnosioca, potvrđuje da podnosilac ispunjava uslov programa, ili odbija potvrdu uz obavezno obrazloženje. Verifikatori nemaju uvid u podatke koje je podnosilac uneo — potvrđuju na osnovu sopstvenog saznanja. Fondacija može odobriti prijavu tek kada svi verifikatori potvrde; izostanak ili odbijanje makar jednog verifikatora sprečava odobravanje. Ovaj mehanizam štiti integritet programa od neistinitih prijava (anti-malverzacija).
 

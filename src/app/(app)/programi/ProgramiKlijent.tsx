@@ -36,7 +36,7 @@ interface Props {
   pedAktivan: boolean;
   brojAktivnih: number;
   isVerified: boolean;
-  imaPunIndeks: boolean;
+  imaPristupProgramima: boolean;
   emisioniKontekst: EmisioniKontekst;
 }
 
@@ -51,7 +51,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPunIndeks, emisioniKontekst }: Props) {
+export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPristupProgramima, emisioniKontekst }: Props) {
   const locale = useLocale();
   const t = useTranslations("programi");
   const tc = useTranslations("common");
@@ -138,7 +138,7 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
         </div>
       )}
 
-      {isVerified && !imaPunIndeks && (
+      {isVerified && !imaPristupProgramima && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-2xl px-5 py-4 text-sm text-kolo-gold-600">
           {t("nepun_indeks")}
         </div>
@@ -151,7 +151,7 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
             key={p.type}
             p={p}
             isVerified={isVerified}
-            imaPunIndeks={imaPunIndeks}
+            imaPristupProgramima={imaPristupProgramima}
             loading={loading}
             poruka={poruka?.for === p.type ? poruka : null}
             expanded={activeProgram === p.type}
@@ -200,11 +200,11 @@ function OperativniKartica({ aktivan }: { aktivan: boolean }) {
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 const ProgramKartica = memo(function ProgramKartica({
-  p, isVerified, imaPunIndeks, loading, poruka, expanded, onExpand, onPrijavi,
+  p, isVerified, imaPristupProgramima, loading, poruka, expanded, onExpand, onPrijavi,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
-  imaPunIndeks: boolean;
+  imaPristupProgramima: boolean;
   loading: boolean;
   poruka: { text: string; ok: boolean } | null;
   expanded: boolean;
@@ -217,8 +217,10 @@ const ProgramKartica = memo(function ProgramKartica({
   const statusBadge = useStatusBadge();
   const enStatus = p.enrollment?.status;
 
-  // Socijalni programi zahtevaju pun indeks stvarnosti (100%) — anti-malverzacija (čl. 4).
-  const mozePrijaviti = isVerified && imaPunIndeks && p.programAktivan;
+  // Socijalni programi traže indeks stvarnosti od najmanje 10% — jedna primljena
+  // potvrda (čl. 4 Pravilnika o programima podrške, set 4.3.1). Anti-malverzaciju
+  // nosi potvrda svih verifikatora podnosioca, ne visina indeksa.
+  const mozePrijaviti = isVerified && imaPristupProgramima && p.programAktivan;
 
   const handleExpand = useCallback(() => onExpand(p.type), [onExpand, p.type]);
   const handlePrijavi = useCallback((meta?: Record<string, unknown>) => onPrijavi(p.type, meta), [onPrijavi, p.type]);

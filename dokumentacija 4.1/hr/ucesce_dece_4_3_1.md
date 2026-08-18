@@ -2,7 +2,7 @@
 
 # Pravilnik o sudjelovanju djece
 
-*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.3.0), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.3.1), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 

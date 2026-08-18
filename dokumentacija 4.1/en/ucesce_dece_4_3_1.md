@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.0), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.1), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 

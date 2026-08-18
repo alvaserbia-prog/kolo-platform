@@ -19,7 +19,7 @@
 | **Data Protection Officer (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Date of preparation** | 23.05.2026. (last amended 16.06.2026.) |
 | **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–15, including the activated Module 3 (Social Programs with verifier confirmation), Integrity Monitoring of the Verification System, the public list of donations, the supervision case, the exchange contribution path, and the **activated Module 4 — Children (activity no. 11)** |
-| **Related documents** | Rulebook on the KOLO System (v4.3.0), Privacy Policy (v4.3.0), Records of Processing Activities (v4.3.0), Rulebook on Support Programmes (v4.3.0), Rulebook on the Hierarchy of Acts (v4.3.0), Statute (v4.1), Whitepaper (v4.3.0) |
+| **Related documents** | Rulebook on the KOLO System (v4.3.1), Privacy Policy (v4.3.1), Records of Processing Activities (v4.3.1), Rulebook on Support Programmes (v4.3.1), Rulebook on the Hierarchy of Acts (v4.3.1), Statute (v4.1), Whitepaper (v4.3.1) |
 | **Next review** | Upon amendment of the social program confirmation mechanism, upon amendment of the rules of the children's space, or at the latest 12 months from the last amendment |
 
 This data protection impact assessment (hereinafter: DPIA) is prepared in accordance with Art. 54 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP). The DPIA is based on the provisions of Chapter IX of the Rulebook on the KOLO System (Art. 60–67), the Privacy Policy of the KOLO Platform, and the Records of Processing Activities of Personal Data.
@@ -46,7 +46,7 @@ Third design decision — data minimization. The Platform collects only the data
 
 ## 2.3. Overview of Processing Activities
 
-The system in Phase 1 encompasses fifteen processing activities defined by the Records of Processing Activities (v4.3.0). All fifteen activities are active. Module 3 (Social Programs) was activated by an earlier version of this assessment; activity 13 covers the public list of donations, activity 14 the supervision case introduced by the Rulebook on Proof of Reality 4.2.1, and activity 15 the exchange contribution path introduced by Article 40b of the Rulebook on the KOLO System. **Activity 11 (Module 4 — Children) is activated by this assessment**, together with the Rulebook on the Participation of Children.
+The system in Phase 1 encompasses fifteen processing activities defined by the Records of Processing Activities (v4.3.1). All fifteen activities are active. Module 3 (Social Programs) was activated by an earlier version of this assessment; activity 13 covers the public list of donations, activity 14 the supervision case introduced by the Rulebook on Proof of Reality 4.2.1, and activity 15 the exchange contribution path introduced by Article 40b of the Rulebook on the KOLO System. **Activity 11 (Module 4 — Children) is activated by this assessment**, together with the Rulebook on the Participation of Children.
 
 | **Activity** | **Name** | **Legal basis** | **Status** |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ The system in Phase 1 encompasses fifteen processing activities defined by the R
 | No. 14 | Supervision case (supervision outcome of a verification) | Performance of the contractual relationship (Art. 12(1)(2)) | Active |
 | No. 15 | Enquiry in relation to a listing and the exchange contribution path | Performance of the contractual relationship (Art. 12(1)(2)) | Active |
 
-Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.3.0) applied together with this assessment.
+Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.3.1) applied together with this assessment.
 
 ## 2.4. Data Flow
 
@@ -218,7 +218,7 @@ Mechanics of anonymization upon status termination: the email address is deleted
 
 ## 8.1. Module 3 — Social Programs (activated by this assessment)
 
-Module 3 is activated by this assessment, in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.3.0). The system introduces the processing of special categories of data — parental status, age, disability (competent authority's decision — not diagnosis), student status (Art. 17 LPDP). The legal basis is the explicit consent of the user (Art. 17 para. 2 item 1 LPDP). The Foundation does not retain copies of submitted documentation — only the minimum record of group membership and the date of verification remains.
+Module 3 is activated by this assessment, in accordance with Art. 57 of the Rulebook and the Rulebook on Support Programmes (v4.3.1). The system introduces the processing of special categories of data — parental status, age, disability (competent authority's decision — not diagnosis), student status (Art. 17 LPDP). The legal basis is the explicit consent of the user (Art. 17 para. 2 item 1 LPDP). The Foundation does not retain copies of submitted documentation — only the minimum record of group membership and the date of verification remains.
 
 To protect the integrity of programs from false applications, before approval the fulfilment of conditions is confirmed by all of the applicant's verifiers, under full responsibility and on the basis of personal acquaintance, without access to the entered data; a refusal requires a reason, and the application is not approved until all confirm (hard block). This procedure introduces risk R11 (disclosure of special-category membership to the applicant's own verifiers), for which measures are established in section 5.6.
 

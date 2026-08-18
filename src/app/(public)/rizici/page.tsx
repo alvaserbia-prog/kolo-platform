@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RiziciPage() {
   const locale = await getLocale();
   const t = await getTranslations("pravne");
-  const sadrzaj = await ucitajPravniDokument("rizici_4_3_0.md", locale);
+  const sadrzaj = await ucitajPravniDokument("rizici_4_3_1.md", locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">

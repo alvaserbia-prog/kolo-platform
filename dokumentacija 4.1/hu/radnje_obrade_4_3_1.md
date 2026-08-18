@@ -2,7 +2,7 @@
 
 # Az adatkezelési tevékenységek nyilvántartása
 
-*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.3.0 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.3.0 verzió) és a támogatási programokról szóló szabályzattal (4.3.0 verzió) együtt alkalmazandó.*
+*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.3.1 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.3.1 verzió) és a támogatási programokról szóló szabályzattal (4.3.1 verzió) együtt alkalmazandó.*
 
 **AZ ADATKEZELŐ ADATAI**
 
@@ -128,7 +128,7 @@
 
 **10. sz. adatkezelési tevékenység — Az adatok különleges kategóriái (3. modul — Szociális programok)**
 
-| **Állapot** | AKTÍV — a 3. modul a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (4.3.0 v.) összhangban aktiválódik; az aktiválást a DPIA frissítése kíséri (4.3.0 v.). |
+| **Állapot** | AKTÍV — a 3. modul a szabályzat 57. cikkével és a támogatási programokról szóló szabályzattal (4.3.1 v.) összhangban aktiválódik; az aktiválást a DPIA frissítése kíséri (4.3.0 v.). |
 | --- | --- |
 | **Az adatkezelés célja** | A minősített csoportokhoz tartozó felhasználók hozzájárulásának automatikus nyilvántartásba vétele POEN-ben, a kérelmező hitelesítőinek a feltételek teljesülésére vonatkozó megerősítésével (a programok integritásának védelme a valótlan kérelmekkel szemben). |
 | **Az érintettek kategóriái** | A minősített csoportokhoz tartozó felhasználók (szülők, idősebb személyek, fogyatékossággal élő személyek, hallgatók) és hitelesítőik. |
@@ -137,7 +137,7 @@
 | **Címzettek / adatfeldolgozók** | Vercel Inc. (tárhely) és Neon Inc. (adatbázis), Amerikai Egyesült Államok, adatfeldolgozási szerződés alapján. A kérelmet az Alapítványnál feldolgozó személy betekinthet a megadott adatokba. A kérelmező hitelesítői kizárólag megerősítési kérést kapnak (a program megnevezése és az általuk személyesen ismert kérelmező álneve) — a megadott adatokba való betekintés nélkül. |
 | **Harmadik országba történő továbbítás** | Igen — az infrastruktúra adatfeldolgozói az USA-ban találhatók (lásd az adatvédelmi szabályzat 9. cikkét). |
 | **Megőrzési idő** | A felhasználó általi hozzájárulás visszavonásáig. A hitelesítői megerősítésekről szóló bejegyzések (megerősítve/elutasítva, az elutasítás indokolása) a kérelem mellett maradnak, amíg a jogállás fennáll. |
-| **Védelmi intézkedések** | Az adatok álnevesítve kezelendők, és csak a kérelmet az Alapítványnál feldolgozó személy számára hozzáférhetők; a hitelesítők és a többi felhasználó nem tekinthet be a megadott adatokba. Adattakarékosság: csak dátumok kerülnek nyilvántartásba (a gyermekek születési dátuma név nélkül, a rokkantsági határozat dátuma szám/diagnózis nélkül). A kérelem teljes valóságindexet (100 %) és kifejezett hozzájárulást igényel. Kemény zárolás: a kérelem nem hagyható jóvá, amíg valamennyi hitelesítő meg nem erősítette; az elutasítás indokolást igényel. A hitelesítők értesítése kizárólag a platformon belül (in-app), külső csatornák nélkül. Adattakarékosság: a hitelesítő nem látja a kérelem tartalmát. |
+| **Védelmi intézkedések** | Az adatok álnevesítve kezelendők, és csak a kérelmet az Alapítványnál feldolgozó személy számára hozzáférhetők; a hitelesítők és a többi felhasználó nem tekinthet be a megadott adatokba. Adattakarékosság: csak dátumok kerülnek nyilvántartásba (a gyermekek születési dátuma név nélkül, a rokkantsági határozat dátuma szám/diagnózis nélkül). A kérelem legalább 10 %-os valóságindexet és kifejezett hozzájárulást igényel. Kemény zárolás: a kérelem nem hagyható jóvá, amíg valamennyi hitelesítő meg nem erősítette; az elutasítás indokolást igényel. A hitelesítők értesítése kizárólag a platformon belül (in-app), külső csatornák nélkül. Adattakarékosság: a hitelesítő nem látja a kérelem tartalmát. |
 
 **11. sz. adatkezelési tevékenység — Kiskorúak adatai (4. modul — Gyermekek)**
 
@@ -180,7 +180,7 @@
 
 **14. adatkezelési tevékenység — Felügyeleti ügy (a hitelesítés felügyeletének eredménye)**
 
-| **Az adatkezelés célja** | A hitelesítés feletti felügyelet eredményének rögzítése és a felügyeleti ügy vezetése abból a célból, hogy az Igazgatótanács megállapíthassa a hamis hitelesítést (a valóság bizonyításáról szóló szabályzat 4.3.0, 11., 11a. és 18. cikk). A 4.2.1 verzióig a felügyelő csak megerősíthette a hitelesítést; a gyanúnak nem volt hova rögzülnie, ezért nem is került kivizsgálásra. |
+| **Az adatkezelés célja** | A hitelesítés feletti felügyelet eredményének rögzítése és a felügyeleti ügy vezetése abból a célból, hogy az Igazgatótanács megállapíthassa a hamis hitelesítést (a valóság bizonyításáról szóló szabályzat 4.3.1, 11., 11a. és 18. cikk). A 4.2.1 verzióig a felügyelő csak megerősíthette a hitelesítést; a gyanúnak nem volt hova rögzülnie, ezért nem is került kivizsgálásra. |
 | --- | --- |
 | **Érintetti kategóriák** | A felügyelt hitelesítés hitelesítője és hitelesített felhasználója; az eredményt rögzítő felügyelő. |
 | **Adatkategóriák** | A felhasználóktól új adat nem kerül begyűjtésre. A meglévő hitelesítési bejegyzés a következőkkel egészül ki: a felügyelet eredménye (rendben / ellenőrzésre / vitatott), a gyanú alanya (hitelesítő, hitelesített, mindkettő, a hálózat egy része), zárt listáról választott indokkód, valamint — kizárólag az „egyéb“ indok esetén — a felügyelő által beírt rövid szabadszöveges leírás. A felügyeleti ügy ugyanezeket az adatokat tartalmazza a hitelesítési bejegyzés megjelölésével és a döntéshez fűzött feljegyzéssel együtt. |
@@ -193,7 +193,7 @@
 
 **15. sz. adatkezelési tevékenység — A hirdetés kapcsán tett megkeresés és a cseréhez való hozzájárulás útja**
 
-| **Az adatkezelés célja** | Annak megállapítása, hogy teljesülnek-e a platform tartalmához való hozzájárulás csatornáján keresztüli hozzájárulás nyilvántartásba vételének feltételei; e hozzájárulás a 4.2.1 verziótól öt lépésből álló úton keresztül kerül nyilvántartásba (a KOLO rendszerről szóló szabályzat 4.3.0, 15. cikk 8. pont és 40.b cikk). Járulékos cél: annak megelőzése, hogy a hozzájárulás valódi csere nélkül legyen megszerezhető. |
+| **Az adatkezelés célja** | Annak megállapítása, hogy teljesülnek-e a platform tartalmához való hozzájárulás csatornáján keresztüli hozzájárulás nyilvántartásba vételének feltételei; e hozzájárulás a 4.2.1 verziótól öt lépésből álló úton keresztül kerül nyilvántartásba (a KOLO rendszerről szóló szabályzat 4.3.1, 15. cikk 8. pont és 40.b cikk). Járulékos cél: annak megelőzése, hogy a hozzájárulás valódi csere nélkül legyen megszerezhető. |
 | --- | --- |
 | **Az érintettek kategóriái** | Az a felhasználó, akinek az úton elért haladását megállapítjuk; az a felhasználó, aki a hirdetés kapcsán jelentkezett; az a felhasználó, akivel a POEN-nyilvántartás frissült. |
 | **Az adatok kategóriái** | A hirdetés kapcsán tett megkeresés: a jelentkező felhasználó álneve, a hirdetés azonosítója és az időpont. Az üzenet tartalmát e célból nem kezeljük. A többit nem gyűjtjük újra, hanem a meglévő adatkezelési tevékenységekből olvassuk ki: a POEN-nyilvántartás frissítéseinek bejegyzéseiből (4. sz. tevékenység) és a hitelesítési gráfból (2. sz. tevékenység), annak megállapítása céljából, hogy a másik fél az ismeretségi körön kívül van-e. |

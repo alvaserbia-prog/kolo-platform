@@ -1,6 +1,6 @@
 # Radne beleške — Pravilnik o učešću dece
 
-🟢 **Akt je USVOJEN.** Merodavan tekst je **`dokumentacija 4.1/ucesce_dece_4_3_0.md`**
+🟢 **Akt je USVOJEN.** Merodavan tekst je **`dokumentacija 4.1/ucesce_dece_4_3_1.md`**
 (uz prevode `en/`, `ru/`, `hr/`, `hu/`), pod nazivom **Pravilnik o učešću dece**,
 verzija **4.3.0** — deo kanonskog seta. Učitava ga `src/lib/pravni-dokument.ts`,
 prikazuje se na `/pravilnik/ucesce-dece` i broji ga `__tests__/pravni-dokumenti.test.ts`.
