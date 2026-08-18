@@ -124,7 +124,9 @@ Aktiviranjem Modula 4 (Djeca) u skladu s čl. 58. Pravilnika o KOLO sustavu, sus
 
 **Elektronička adresa roditelja** koju unosi maloljetna osoba podatak je o trećoj osobi. Obrađuje se na temelju legitimnog interesa (čl. 12. st. 1. t. 6. ZZPL-a), radi pribavljanja privole koju zakon zahtijeva, i isključivo radi upućivanja jedne poruke s pozivom za preuzimanje računa. U toj se poruci navodi samo pseudonim maloljetnog korisnika — nikad ime — jer točnost adrese nije provjerena. Adresa se ne upisuje kao adresa računa maloljetnog korisnika i ne otvara put ni za prijavu ni za obnovu lozinke.
 
-**Kategorije podataka:** pseudonim; elektronička adresa roditelja; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; škola koju navodi sam maloljetni korisnik.
+**Elektronička adresa maloljetnog korisnika.** Maloljetni korisnik može navesti vlastitu elektroničku adresu. Navođenje je dobrovoljno i nije uvjet za korištenje računa. Adresa se obrađuje isključivo radi ponovnog pristupa računu — postavljanja nove lozinke kada je maloljetni korisnik zaboravi; na nju se ne šalju obavijesti. Adresa se upisuje tek nakon što je maloljetni korisnik potvrdi otvaranjem poveznice poslane na samu adresu, a do potvrde ne proizvodi učinak; time se sprječava da pogrešno navedena adresa otvori put prema računu maloljetnog korisnika. Adresa se uklanja u svakom trenutku. Ako maloljetni korisnik nema vlastitu adresu, novu lozinku postavlja roditelj iz profila svog djeteta; prethodna lozinka se pritom ne traži, a maloljetni korisnik se o promjeni obavještava.
+
+**Kategorije podataka:** pseudonim; elektronička adresa roditelja; vlastita elektronička adresa maloljetnog korisnika, ako je navede; datum rođenja koji upisuje roditelj; veza s jednim ili dvoje roditelja; graf prijateljstava s datumima; poruke u dječjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; škola koju navodi sam maloljetni korisnik.
 
 **Svrha obrade:** omogućavanje sudjelovanja maloljetnih korisnika u sustavu pod posebnim režimom ograničenja i evidentiranje njihova doprinosa (čl. 15. t. 9. Pravilnika o KOLO sustavu).
 
@@ -270,7 +272,7 @@ Podaci u oglasu neverificiranog korisnika (pododjeljak 4.8.) čuvaju se dok kori
 
 Zapis o upitu povodom oglasa (pododjeljak 4.10.) briše se s oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizira zajedno s ostalim podacima toga računa.
 
-Podaci maloljetnog korisnika (pododjeljak 4.7) čuvaju se dok račun ostaje aktivan. Elektronička adresa roditelja i poziv za preuzimanje računa brišu se s računom koji nitko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se s računom pri prestanku statusa. Prijateljstva se brišu stjecanjem punoljetnosti korisnika i pri brisanju računa. Prijava poruke čuva se do okončanja postupka po njoj, a najdulje 12 mjeseci. Podatak o školi briše se stjecanjem punoljetnosti i pri prestanku statusa; povijest ranijih odabira se ne čuva.
+Podaci maloljetnog korisnika (pododjeljak 4.7) čuvaju se dok račun ostaje aktivan. Elektronička adresa roditelja i poziv za preuzimanje računa brišu se s računom koji nitko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se s računom pri prestanku statusa. Prijateljstva se brišu stjecanjem punoljetnosti korisnika i pri brisanju računa. Prijava poruke čuva se do okončanja postupka po njoj, a najdulje 12 mjeseci. Podatak o školi briše se stjecanjem punoljetnosti i pri prestanku statusa; povijest ranijih odabira se ne čuva. Vlastita elektronička adresa maloljetnog korisnika čuva se dok je ne ukloni ili dok ne prestane svojstvo korisnika; prelaskom u punoljetni račun se zadržava. Nepotvrđena adresa i poveznica za potvrdu gube učinak nakon dvadeset četiri sata.
 
 Po isteku roka podaci se brišu ili trajno anonimiziraju na način koji onemogućuje identifikaciju osobe.
 

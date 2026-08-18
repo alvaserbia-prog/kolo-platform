@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.3), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.3.4), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -96,6 +96,20 @@ Uzrast maloletnog korisnika utvrđuje se iz datuma rođenja koji je naveo rodite
 
 Maloletni korisnik može sam navesti školu koju pohađa, izborom sa spiska škola. Navođenje škole nije uslov za korišćenje naloga.
 
+### Član 7a — Elektronska adresa maloletnog korisnika
+
+Maloletni korisnik može navesti sopstvenu elektronsku adresu. Navođenje adrese je dobrovoljno i nije uslov za korišćenje naloga.
+
+Adresa iz stava 1 obrađuje se isključivo radi ponovnog pristupa nalogu — postavljanja nove lozinke kada je maloletni korisnik zaboravi. Na tu adresu se ne šalju obaveštenja niti druga pošta.
+
+Adresa se upisuje na nalog tek pošto je maloletni korisnik potvrdi otvaranjem veze poslate na samu adresu. Do potvrde adresa ne proizvodi dejstvo i ne upisuje se na nalog. Veza za potvrdu važi dvadeset četiri sata.
+
+Maloletni korisnik uklanja navedenu adresu u svakom trenutku.
+
+Prelaskom u punoletni nalog navedena adresa se zadržava, jer punoletni nalog elektronsku adresu i inače ima. Podatak se briše prestankom svojstva korisnika.
+
+Elektronska adresa roditelja iz člana 4a ne postaje adresa naloga maloletnog korisnika i ovim članom se ne dira.
+
 ## III — Odnos roditelja i maloletnog korisnika
 
 ### Član 8
@@ -119,6 +133,8 @@ Maloletni korisnik se obaveštava o obimu uvida iz ovog člana.
 Na profilu svog deteta roditelj može ukloniti svaki oglas koji je dete objavilo.
 
 Na istom mestu roditelj prekidačem odobrava komunikaciju i razmenu maloletnog korisnika sa punoletnim korisnicima. Saglasnost se povlači u svakom trenutku.
+
+Na profilu svog deteta roditelj postavlja novu lozinku maloletnog korisnika. Prethodna lozinka se pri tom ne traži, jer je roditelj ne zna. Maloletni korisnik se o promeni obaveštava. Ovo ovlašćenje postoji zato što nalog maloletnog korisnika po pravilu nema elektronsku adresu, pa mu postupak za zaboravljenu lozinku nije dostupan.
 
 Roditelj odgovara za sadržaj koji je maloletni korisnik objavio do trenutka uklanjanja, i za radnje maloletnog korisnika na Platformi.
 

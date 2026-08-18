@@ -69,6 +69,18 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
+**AŽURIRANO 2026-08-18 (jedanaesti put):** ceo set je dignut na **4.3.4** — svih 16 akata (sr + en/ru/hr/hu). Povod je **sopstvena elektronska adresa maloletnog korisnika** i **roditeljsko postavljanje nove lozinke** (vidi sekciju „Povratak u nalog deteta" ispod). Sadržinski su izmenjeni:
+- **Pravilnik o učešću dece** — nov **čl. 7a** (adresa je dobrovoljna, svrha ograničena na ponovni pristup nalogu, upis tek po potvrdi sa same adrese, veza važi 24 sata, uklanjanje u svakom trenutku, zadržava se pri prelasku u punoletni nalog, briše se prestankom svojstva korisnika, adresa roditelja iz čl. 4a se ne dira) i dopuna **čl. 10** (roditelj postavlja novu lozinku, stara se ne traži, dete se obaveštava).
+- **Politika privatnosti 4.7** — nova alineja o adresi deteta, dopunjene kategorije podataka i rok čuvanja.
+- **Registar radnji obrade, radnja br. 11** — kategorije podataka, pravni osnov, rok čuvanja i mere. Nova radnja NIJE dodata: adresa je nov podatak unutar iste obrade.
+- **DPIA** — rizik **R16** dopunjen, mere **5.11** dopunjene sa tri stavke (potvrda adrese, svrha uža od kanala, izlaz i bez adrese).
+
+🔴 **Ovim je zatvorena praznina zapisana pri uvođenju funkcije** — do 4.3.4 je kod prikupljao imejl maloletnika, a akti su govorili samo o adresi RODITELJA po legitimnom interesu. Test `pravni-dokumenti.test.ts` sada traži odredbe čl. 7a i čl. 10 doslovno, na sr/en/ru.
+
+🟡 **Pri ovom bumpu je `main` bio jedan commit ispred** (prevodi, ruski na „ti"); grana je pre izmene dokumenata dovučena na tu osnovu, po pravilu da dokumenta nove verzije nastaju iz najnovije osnove.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja na ranije setove namerno su ostavljena kakva jesu.
+
 **AŽURIRANO 2026-08-18 (deseti put):** ceo set je dignut na **4.3.3** — svih 16 akata (sr + en/ru/hr/hu). Povod je **ranglista škola** (vidi sekciju „Ranglista škola" ispod). Sadržinski su izmenjeni:
 - **Pravilnik o učešću dece** — dopuna **čl. 7** (školu navodi sámo dete, izborom sa spiska; nije uslov za korišćenje naloga) i **dva nova člana**: **čl. 15a** (škola i pregled po školama — zbirni pregled bez podataka o ličnosti, pojedinačni pregled jedne škole prijavljenima, promena najviše jednom u trideset dana, brisanje pri punoletstvu i prestanku statusa, bez istorije ranijih izbora, mesto na listi ne donosi POEN) i **čl. 15b** (pristup profilu maloletnog korisnika).
 - **Politika privatnosti 4.7** — škola u kategorijama podataka, pregled po školama, zatvoren profil; rok čuvanja dopunjen.
@@ -97,7 +109,7 @@ Iznos se nije menjao — fiksnih 2.000 POEN dnevno po čl. 13, što `programi.ts
 
 Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja koja govore da su Modul 3 i Modul 4 aktivirani **DPIA v4.3.0** namerno su ostavljena na 4.3.0 (Registar radnji obrade, radnje 10 i 11) — blanket zamena bi ih učinila neistinitim.
 
-**AŽURIRANO 2026-08-17 (sedmi put):** ceo set je bio dignut na **4.3.0** i od sada ima **16 akata** (sr + en/ru/hr/hu). Povod je usvajanje **Pravilnika o učešću dece** (`ucesce_dece_4_3_3.md`, pri usvajanju `_4_3_0`) — nov, šesnaesti akt, uz koji je unapređeni Modul Deca dobio pravni osnov. Sadržinski su izmenjeni:
+**AŽURIRANO 2026-08-17 (sedmi put):** ceo set je bio dignut na **4.3.0** i od sada ima **16 akata** (sr + en/ru/hr/hu). Povod je usvajanje **Pravilnika o učešću dece** (`ucesce_dece_4_3_4.md`, pri usvajanju `_4_3_0`) — nov, šesnaesti akt, uz koji je unapređeni Modul Deca dobio pravni osnov. Sadržinski su izmenjeni:
 - **Pravilnik o KOLO sistemu** — čl. 14 st. 3 (tri izričito nabrojana izuzetka od zabrane negativnog zapisa + zatvarajuća odredba da se dalji ne mogu ustanoviti), **čl. 15 t. 9 — DEVETI KANAL** (doprinos dece u dečjem prostoru; automatski akt Protokola izvan dnevnog limita), čl. 16 (poništenje prepisa po prijavi razmene), čl. 34 (nadoknada → „negativan zapis po čl. 14 st. 3"), čl. 58 (prepisan: samostalno pristupanje maloletnog lica, odgovornost roditelja, upućivanje na nov pravilnik).
 - **Uslovi korišćenja** — čl. 7 (maloletna lica od 7 godina, dva ulaza), čl. 25 (prijava poruke), **čl. 40 — UKINUT ROK OD 15 DANA**.
 - **Politika privatnosti** — 4.7 prepisan (dva ulaza, elektronska adresa roditelja po legitimnom interesu, sužen uvid roditelja, prijava poruke), rok čuvanja, **čl. 16 — UKINUT ROK OD 15 DANA**.
@@ -395,7 +407,7 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 
 Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 
-🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_3.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
+🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_4.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
 
 **FAQ pitanje 6 („Mogu li se maloletnici registrovati?") ima dva odgovora i bira ih prekidač:** br. **6** = „ne" (modul ugašen), br. **84** = „da, od sedme godine" (modul radi). `FAQ_SAKRIVENA_PITANJA` sakriva tačno jedan od njih. Tekst se ne prepravlja u jednu rečenicu — u jednom od dva stanja sistema bio bi neistinit.
 
@@ -509,23 +521,22 @@ stranica `/potvrdi-email/[token]`). Za stariju decu koja adresu imaju.
 - Ruta je zatvorena za punoletne naloge (`deteIliBaci`) — odluka da se imejl ne
   prikazuje u podešavanjima punoletnog profila se ovim NE menja.
 
-🔴 **AKTI OVO JOŠ NE POZNAJU.** Pravilnik o učešću dece čl. 7 nabraja podatke koje
-dete navodi (datum rođenja upisuje roditelj, školu bira dete); **imejl deteta nije
-među njima**, a Politika privatnosti 4.7 i Registar radnji obrade (radnja br. 11)
-govore o adresi RODITELJA, po legitimnom interesu. Pre puštanja u rad ovome treba
-odredba: dobrovoljnost, svrha (isključivo povratak u nalog), zabrana slanja
-obaveštenja, brisanje pri punoletstvu i pri gašenju naloga. Do tada je to mogućnost
-koju sistem nudi, a akti ne opisuju — isti obrazac kao kod poništenja prepisa po
-prijavi razmene.
+🟢 **AKTI OVO POZNAJU OD SETA 4.3.4** (isti dan): **Pravilnik o učešću dece čl. 7a**
+uređuje dobrovoljnost, svrhu ograničenu na ponovni pristup nalogu, upis tek po
+potvrdi sa same adrese, rok od 24 sata, uklanjanje u svakom trenutku, zadržavanje
+pri prelasku u punoletni nalog i brisanje prestankom svojstva korisnika; **čl. 10**
+daje roditelju ovlašćenje da postavi novu lozinku bez znanja stare, uz obaveštenje
+detetu. Dopunjeni su i Politika 4.7, Registar radnji obrade (radnja 11) i DPIA
+(R16, mere 5.11). Odredbe su zaključane testom `pravni-dokumenti.test.ts`.
 
-🟡 **Brisanje adrese pri punoletstvu i gašenju naloga NIJE dodato** — `punoletstvo.ts`
-i `DELETE /api/profil` ne diraju `User.email` (punoletan nalog imejl i inače sme da
-ima, pa bi brisanje bilo gore od zadržavanja). Ako odredba u aktima kaže drugačije,
-mesto je isto ono gde se briše škola — tri mesta iz sekcije „Ranglista škola".
+🟢 **Kod i akt se ovde poklapaju:** `punoletstvo.ts` i `DELETE /api/profil` ne diraju
+`User.email`, a čl. 7a st. 5 izričito kaže da se adresa prelaskom u punoletni nalog
+**zadržava** (punoletan nalog imejl i inače sme da ima), a briše prestankom svojstva
+korisnika. Ne dodavati brisanje pri punoletstvu — protivrečilo bi aktu.
 
 ### Ranglista škola (2026-08-18)
 
-Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.3).
+Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.4).
 
 **Zašto postoji.** Modul Deca radi u jednom smeru — dete čeka roditelja, a nema čime da ga požuruje osim rečenicom „hoću poene". „Našoj školi fali troje do šestog mesta" je razlog koji dete sámo odnese kući. Ranglista deci ne daje ništa novo; ona postojećoj motivaciji (500 POEN po prijateljstvu, čl. 14b) daje **pravac**.
 

@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.3.3) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.3.4) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -98,6 +98,20 @@ A kiskorú felhasználó korát a szülő által megadott születési dátum ala
 
 A kiskorú felhasználó maga is megadhatja, hogy melyik iskolába jár, az iskolák listájáról választva. Az iskola megadása nem feltétele a fiók használatának.
 
+### 7.a cikk — A kiskorú felhasználó e-mail címe
+
+A kiskorú felhasználó megadhatja saját e-mail címét. A cím megadása önkéntes, és nem feltétele a fiók használatának.
+
+Az (1) bekezdés szerinti címet kizárólag a fiókhoz való ismételt hozzáférés céljából kezeljük — új jelszó beállítására, ha a kiskorú felhasználó elfelejtette a régit. Erre a címre értesítéseket és egyéb levelet nem küldünk.
+
+A cím csak azt követően kerül be a fiókba, hogy a kiskorú felhasználó megerősítette azt az ugyanerre a címre küldött hivatkozás megnyitásával. A megerősítésig a cím nem fejt ki hatást, és nem kerül be a fiókba. A megerősítő hivatkozás huszonnégy óráig érvényes.
+
+A kiskorú felhasználó a megadott címet bármikor eltávolítja.
+
+A nagykorú fiókba való átlépéskor a megadott cím megmarad, mivel a nagykorú fiók e-mail címmel egyébként is rendelkezik. Az adat a felhasználói minőség megszűnésével törlődik.
+
+A szülőnek a 4.a cikk szerinti e-mail címe nem válik a kiskorú felhasználó fiókjának címévé, és azt e cikk nem érinti.
+
 ## III — A szülő és a kiskorú felhasználó viszonya
 
 ### 8. cikk
@@ -121,6 +135,8 @@ A kiskorú felhasználó tájékoztatást kap az e cikk szerinti betekintés ter
 Gyermeke profilján a szülő eltávolíthat minden hirdetést, amelyet a gyermek közzétett.
 
 Ugyanott a szülő kapcsolóval engedélyezi a kiskorú felhasználó felnőtt felhasználókkal való kommunikációját és cseréjét. A beleegyezés bármikor visszavonható.
+
+Gyermeke profilján a szülő új jelszót állít be a kiskorú felhasználónak. A korábbi jelszót ehhez nem kérjük, mivel a szülő nem ismeri. A kiskorú felhasználó értesítést kap a változásról. E jogosultság azért létezik, mert a kiskorú felhasználó fiókja rendszerint nem rendelkezik e-mail címmel, így az elfelejtett jelszóra vonatkozó eljárás nem áll a rendelkezésére.
 
 A szülő felel a kiskorú felhasználó által az eltávolítás pillanatáig közzétett tartalomért, valamint a kiskorú felhasználó Platformon végzett cselekményeiért.
 

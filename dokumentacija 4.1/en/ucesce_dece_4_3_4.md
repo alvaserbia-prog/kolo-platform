@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.3), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.3.4), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -98,6 +98,20 @@ The age of a minor user is established from the date of birth stated by the pare
 
 A minor user may themselves state the school they attend, by choosing from the list of schools. Stating a school is not a condition for using the account.
 
+### Article 7a — The Minor User's E-mail Address
+
+A minor user may state their own e-mail address. Stating an address is voluntary and is not a condition for using the account.
+
+The address referred to in paragraph 1 is processed exclusively for the purpose of regaining access to the account — setting a new password when the minor user has forgotten it. No notifications or other mail are sent to that address.
+
+The address is recorded on the account only after the minor user has confirmed it by opening a link sent to that very address. Until confirmation the address has no effect and is not recorded on the account. The confirmation link is valid for twenty-four hours.
+
+The minor user removes the stated address at any time.
+
+Upon transition to an adult account the stated address is retained, since an adult account has an e-mail address in any event. The data is erased upon cessation of the capacity of user.
+
+The parent's e-mail address referred to in Article 4a does not become the address of the minor user's account and is not affected by this Article.
+
 ## III — The Relationship Between the Parent and the Minor User
 
 ### Article 8
@@ -121,6 +135,8 @@ The minor user is informed of the scope of the insight under this Article.
 On their child's profile, the parent may remove any listing the child has published.
 
 At the same place, the parent approves, by means of a switch, the minor user's communication and exchange with adult users. Consent may be withdrawn at any time.
+
+On their child's profile the parent sets a new password for the minor user. The previous password is not required for this, since the parent does not know it. The minor user is notified of the change. This power exists because a minor user's account as a rule has no e-mail address, so the forgotten-password procedure is not available to them.
 
 The parent is liable for content published by the minor user up to the moment of removal, and for the actions of the minor user on the Platform.
 

@@ -909,11 +909,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -921,23 +921,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.3.3",
+      "ver": "4.3.4",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -957,21 +957,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja — KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.3.3",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.3.4",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.3.3",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.3.4",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.3.3",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.3.4",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.3.3",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.3.4",
     "meta_rizici_title": "Izjava o prihvaćanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.3",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.4",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.3.3",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.3.4",
     "meta_pravilnik_title": "Pravilnici KOLO sustava — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.3.3",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.3.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
