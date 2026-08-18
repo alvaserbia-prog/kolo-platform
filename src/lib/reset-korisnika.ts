@@ -380,6 +380,11 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
       vodicVidjenAt: null,
       pseudonimChangedAt: null,
       emailObavestenja: true,
+      // Nalog treba da zatekne stanje sa dana registracije, a nov nalog školu nema.
+      // Uz to se briše i rok od 30 dana — inače bi resetovan nalog nasledio čekanje
+      // koje ničim nije zaslužio.
+      skolaSifra: null,
+      skolaPromenjenaAt: null,
       createdAt: new Date(),
     },
   });

@@ -27,6 +27,7 @@ import {
   suBracaISestre,
   vremeZaNajavuPunoletstva,
   type Ucesnik,
+  smeDaVidiProfilDeteta,
 } from "@/lib/deca-pravila";
 
 const DANAS = new Date("2026-08-14T00:00:00.000Z");
@@ -319,5 +320,53 @@ describe("punoletstvo — čl. 19", () => {
 describe("rok preuzimanja naloga — čl. 4b st. 5", () => {
   it(`traje ${ROK_PREUZIMANJA_DANA} dana od registracije deteta`, () => {
     expect(danaDoIsteka(rokPreuzimanja(DANAS), DANAS)).toBe(ROK_PREUZIMANJA_DANA);
+  });
+});
+
+describe("pristup profilu maloletnog korisnika", () => {
+  // Načelo: do deteta se dolazi samo kroz ono što je dete sámo objavilo. Ranglista
+  // i knjiga zapisa pokazuju da dete postoji — one nisu vrata ni u šta.
+
+  it("punoletan član NE otvara profil deteta", () => {
+    expect(smeDaVidiProfilDeteta(odrastao(), dete(), false)).toBe(false);
+  });
+
+  it("ni kad je roditeljski prekidač upaljen", () => {
+    // Prekidač iz čl. 10 otvara komunikaciju i razmenu, ne profil. Da ga otvara,
+    // roditelj bi jednim potezom otključao i ono što nikad nije ni razmatrao.
+    expect(smeDaVidiProfilDeteta(odrastao(), dete({ dozvolaOdrasli: true }), false)).toBe(false);
+  });
+
+  it("roditelj svog deteta vidi profil (čl. 9)", () => {
+    expect(smeDaVidiProfilDeteta(odrastao({ id: "r1" }), dete(), false)).toBe(true);
+  });
+
+  it("Fondacija vidi profil — bez toga nema moderacije", () => {
+    expect(smeDaVidiProfilDeteta({ ...odrastao(), admin: true }, dete(), false)).toBe(true);
+  });
+
+  it("dete vidi profil SAMO svog prijatelja", () => {
+    const drugo = dete({ id: "d2", roditeljIds: ["r9"] });
+    expect(smeDaVidiProfilDeteta(drugo, dete(), true)).toBe(true);
+    expect(smeDaVidiProfilDeteta(drugo, dete(), false)).toBe(false);
+  });
+
+  it("dete iz iste škole koje nije prijatelj ne prolazi", () => {
+    // Lista unutar škole pokazuje nadimak koji se ne može otvoriti. Put do drugog
+    // deteta ostaje jedan: skeniran QR kod uživo.
+    expect(smeDaVidiProfilDeteta(dete({ id: "d2", roditeljIds: ["r9"] }), dete(), false)).toBe(false);
+  });
+
+  it("svako vidi sopstveni profil", () => {
+    expect(smeDaVidiProfilDeteta(dete(), dete(), false)).toBe(true);
+  });
+
+  it("gost ne vidi profil deteta", () => {
+    expect(smeDaVidiProfilDeteta(null, dete(), false)).toBe(false);
+  });
+
+  it("profil punoletnog korisnika ovo pravilo ne dodiruje", () => {
+    expect(smeDaVidiProfilDeteta(odrastao({ id: "o2" }), odrastao(), false)).toBe(true);
+    expect(smeDaVidiProfilDeteta(null, odrastao(), false)).toBe(true);
   });
 });

@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import ProfilKlijent from "./ProfilKlijent";
 import MojaDeca from "@/components/deca/MojaDeca";
+import IzborSkole from "@/components/deca/IzborSkole";
+import { razresiSkolu } from "@/lib/skola";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 
@@ -23,6 +25,10 @@ export default async function ProfilPage() {
   // potvrdio, a upravo on prvi otvara naloge deci.
   const prikaziDecu =
     MODUL_DECA_AKTIVAN && !user.maloletan && user.indeksStvarnosti >= FUNKCIONALNI_PRAG_INDEKSA;
+
+  // Izbor škole vidi SAMO maloletni nalog: školu bira sámo dete (Pravilnik o
+  // učešću dece, čl. 7), pa ni roditelj ovaj odeljak nema.
+  const skola = MODUL_DECA_AKTIVAN && user.maloletan ? razresiSkolu(user.skolaSifra) : null;
 
   return (
     <>
@@ -53,6 +59,13 @@ export default async function ProfilPage() {
         emailObavestenja: user.emailObavestenja,
       }}
     />
+    {MODUL_DECA_AKTIVAN && user.maloletan && (
+      <div className="mx-auto mt-6 max-w-3xl">
+        <IzborSkole
+          pocetna={skola ? { sifra: skola.sifra, naziv: skola.naziv, mesto: skola.mesto } : null}
+        />
+      </div>
+    )}
     {prikaziDecu && (
       <div className="mx-auto mt-6 max-w-3xl">
         <MojaDeca />

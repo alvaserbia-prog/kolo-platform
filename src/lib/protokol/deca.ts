@@ -29,6 +29,7 @@ import {
   ROK_POTVRDE_DANA,
   nalogRadi,
   rokIzjasnjenja,
+  smeDaVidiProfilDeteta,
   stanjeDeteta,
   uzrast,
   uzrastZaModul,
@@ -858,4 +859,84 @@ export async function dohvatiDecu(roditeljId: string) {
       },
     };
   });
+}
+
+/**
+ * Odluka o pristupu profilu maloletnog korisnika (vidi `smeDaVidiProfilDeteta`).
+ *
+ * Kad pristup nije dopušten, vraća se sadržaj ZATVORENOG PRIKAZA — a ne gola
+ * zabrana. Ekran mora da uradi tri stvari, inače izgleda kao kvar:
+ *   1. kaže ZAŠTO profil nije otvoren,
+ *   2. imenuje ODRASLU OSOBU kojoj se čovek obraća (čl. 10 — roditelj odgovara za
+ *      radnje deteta; bez imena roditelja je to slepa ulica, a i zapis u knjizi
+ *      ostaje neobjašnjen: „ko je sad pa Mihajlo"),
+ *   3. pokazuje JEDINI dozvoljeni put dalje — oglas na Pijaci.
+ *
+ * 🔴 U zatvorenom prikazu NE SME biti ničega drugog: ni stanja, ni škole, ni
+ * oglasa, ni prijateljstava. Svaki dodatak pretvara ekran u mali profil.
+ *
+ * `razlog` razdvaja dva različita ekrana: punoletnom članu se objašnjava pravilo,
+ * detetu se kaže da profil vidi samo svojim prijateljima.
+ */
+export async function pristupProfiluDeteta(
+  posmatracId: string | null,
+  metaId: string,
+  posmatracJeAdmin: boolean
+): Promise<
+  | { sme: true }
+  | {
+      sme: false;
+      zatvoren: {
+        pseudonim: string;
+        roditelji: { id: string; pseudonim: string }[];
+        razlog: "PUNOLETAN" | "NIJE_PRIJATELJ";
+      };
+    }
+> {
+  const meta = await ucitajUcesnika(metaId);
+  if (!meta || !meta.maloletan) return { sme: true };
+
+  const posmatrac = posmatracId ? await ucitajUcesnika(posmatracId) : null;
+
+  // Prijateljstvo se proverava upitom umesto pozivom `suPrijatelji()` iz
+  // `prijateljstva.ts` — taj modul uvozi OVAJ (`IZBOR_UCESNIKA`, `ucesnikIzReda`),
+  // pa bi obrnut uvoz zatvorio krug. Par se uvek pamti uređeno (`aId < bId`).
+  const [aId, bId] = posmatracId
+    ? posmatracId < metaId
+      ? [posmatracId, metaId]
+      : [metaId, posmatracId]
+    : ["", ""];
+  const prijatelji =
+    posmatracId && posmatrac?.maloletan
+      ? (await prisma.prijateljstvo.count({ where: { aId, bId, raskinutAt: null } })) > 0
+      : false;
+
+  if (
+    smeDaVidiProfilDeteta(
+      posmatrac ? { ...posmatrac, admin: posmatracJeAdmin } : null,
+      meta,
+      prijatelji
+    )
+  ) {
+    return { sme: true };
+  }
+
+  const red = await prisma.user.findUnique({
+    where: { id: metaId },
+    select: {
+      pseudonim: true,
+      roditeljstvaKaoDete: {
+        select: { roditelj: { select: { id: true, pseudonim: true } } },
+      },
+    },
+  });
+
+  return {
+    sme: false,
+    zatvoren: {
+      pseudonim: red?.pseudonim ?? "",
+      roditelji: red?.roditeljstvaKaoDete.map((r) => r.roditelj) ?? [],
+      razlog: posmatrac?.maloletan ? "NIJE_PRIJATELJ" : "PUNOLETAN",
+    },
+  };
 }

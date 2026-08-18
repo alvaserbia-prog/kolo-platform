@@ -5,6 +5,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
 import { razresiKorisnikaIzAdrese } from "@/lib/pseudonim";
+import { pristupProfiluDeteta } from "@/lib/protokol/deca";
+import { razresiSkolu } from "@/lib/skola";
 
 export async function GET(
   req: NextRequest,
@@ -30,6 +32,22 @@ export async function GET(
     return await greska("Verifikacija potrebna.", 403);
   }
 
+  // Modul Deca: profil maloletnog korisnika punoletni članovi NE otvaraju
+  // (Pravilnik o učešću dece — član o pristupu profilu maloletnog korisnika).
+  //
+  // 🔴 Provera je OVDE, na serveru, a ne u komponenti: ekran nije poslednja reč, a
+  // ovo je jedina odbrana koju dete ima od nepoznatog odraslog. Umesto profila se
+  // vraća sadržaj zatvorenog prikaza (200, ne 403) — stranica mora da objasni
+  // zašto i da imenuje roditelja, inače izgleda kao kvar.
+  const pristup = await pristupProfiluDeteta(
+    session.user.id,
+    id,
+    jeAdmin({ admin: session.user.admin })
+  );
+  if (!pristup.sme) {
+    return NextResponse.json({ zatvoren: pristup.zatvoren });
+  }
+
   // Vlasnik na sopstvenom profilu vidi SVE svoje podatke bez obzira na togglove
   // vidljivosti; togglovi i dalje važe za druge posetioce.
   const jeVlasnik = id === session.user.id;
@@ -50,6 +68,24 @@ export async function GET(
       createdAt: true,
       tipKorisnika: true,
       status: true,
+      // Škola maloletnog korisnika (čl. 7). Ovde stoji šifra; naziv i mesto se
+      // razrešavaju iz šifarnika u aplikaciji, jer sistem o školi ne čuva ništa
+      // svoje. Punoletan nalog je nema.
+      skolaSifra: true,
+      // Veza roditelj–dete je javna u OBA smera (odluka vlasnika): sa deteta se vidi
+      // roditelj, sa roditelja se vidi ko su mu deca.
+      //
+      // 🔴 Posledica koja je svesno prihvaćena: time deca postaju popisiva preko
+      // odraslih. Zaštitu tada ne nosi skrivenost nego ZATVOREN PROFIL (vidi
+      // `pristupProfiluDeteta`) i roditeljski prekidač iz čl. 10 — spisak pokazuje
+      // da dete postoji, ali ni sa jednog reda ne vodi nigde.
+      roditeljstvaKaoDete: {
+        select: { roditelj: { select: { id: true, pseudonim: true } } },
+      },
+      roditeljstvaKaoRoditelj: {
+        where: { dete: { status: { not: "EXCLUDED" }, deaktiviranAt: null } },
+        select: { dete: { select: { id: true, pseudonim: true, avatar: true } } },
+      },
       podaci: {
         select: {
           punoIme: true,
@@ -80,6 +116,7 @@ export async function GET(
 
   const podaci = korisnik.podaci;
   const krug = korisnik.krugClanstva[0]?.krug ?? null;
+  const skola = razresiSkolu(korisnik.skolaSifra);
 
   // Rang donacija — uvek vidljiv
   let rangDonacija: number | null = null;
@@ -179,6 +216,9 @@ export async function GET(
     id: korisnik.id,
     pseudonim: korisnik.pseudonim,
     maloletan: korisnik.maloletan,
+    skola: skola ? { sifra: skola.sifra, naziv: skola.naziv, mesto: skola.mesto } : null,
+    roditelji: korisnik.roditeljstvaKaoDete.map((r) => r.roditelj),
+    deca: korisnik.roditeljstvaKaoRoditelj.map((r) => r.dete),
     verified: korisnik.verified,
     verifiedAt: korisnik.verifiedAt,
     status: korisnik.status,

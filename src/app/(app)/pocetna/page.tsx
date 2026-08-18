@@ -9,6 +9,7 @@ import { usloviVidljivostiOglasa, ucitajUcesnika } from "@/lib/protokol/deca";
 import { dohvatiPrijatelje, idPrijatelja } from "@/lib/protokol/prijateljstva";
 import { smeUPricaonicu } from "@/lib/deca-pravila";
 import DecjaPocetna from "./DecjaPocetna";
+import { karticaSkoleZaDete } from "@/lib/protokol/skole";
 
 export default async function PocetnaPage() {
   const session = await getServerSession(authOptions);
@@ -35,7 +36,7 @@ export default async function PocetnaPage() {
           where: { deteId: ja.id },
           select: { kod: true },
         });
-    const [zapis, prijatelji, oglasi, mojihOglasa, chatDeca] = await Promise.all([
+    const [zapis, prijatelji, oglasi, mojihOglasa, chatDeca, karticaSkole] = await Promise.all([
       prisma.wallet.findUnique({ where: { userId: ja.id }, select: { balance: true } }),
       dohvatiPrijatelje(ja.id),
       prisma.marketplaceListing.findMany({
@@ -58,10 +59,14 @@ export default async function PocetnaPage() {
             include: { user: { select: { id: true, pseudonim: true, avatar: true } } },
           })
         : Promise.resolve([]),
+      // Kartica škole (čl. 7). `null` dok dete nije izabralo školu ili dok
+      // zvaničan spisak škola nije uvezen.
+      karticaSkoleZaDete(ja.id),
     ]);
 
     return (
       <DecjaPocetna
+        skola={karticaSkole}
         pseudonim={session.user.pseudonim}
         mojId={ja.id}
         poen={zapis?.balance ?? 0}

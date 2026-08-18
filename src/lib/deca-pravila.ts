@@ -306,6 +306,49 @@ export function smeDaVidiOglas(
   return oglasivac.dozvolaOdrasli;
 }
 
+/**
+ * Da li posmatrač sme da otvori profil maloletnog korisnika.
+ *
+ * ─── Načelo ─────────────────────────────────────────────────────────────────
+ *
+ * 🔴 **Do deteta se dolazi samo kroz ono što je dete sámo objavilo.** Nikad kroz
+ * profil, nikad kroz pretragu, nikad kroz spisak. Ranglista i knjiga zapisa
+ * pokazuju da dete postoji — one nisu vrata ni u šta.
+ *
+ * Ovo je SUŽAVANJE u odnosu na zatečeno stanje: do sada je profil maloletnog naloga
+ * bio dostupan svakom potvrđenom članu, i krio je samo indeks i lanac potvrda.
+ *
+ * ─── Šta zatvaranje stvarno štiti ───────────────────────────────────────────
+ *
+ * Ne krije detetove transakcije — knjiga zapisa je otvorena i tako ostaje, pa je
+ * uporan čovek može prelistati. Krije sve ostalo SKUPLJENO NA JEDNOM MESTU: sliku,
+ * opis, mesto, školu, prijateljstva i, najvažnije, ukupno stanje — a stanje je ono
+ * što dete čini metom.
+ *
+ * ─── Ko ipak sme ────────────────────────────────────────────────────────────
+ *
+ *  - **Fondacija** — bez toga nema uklanjanja spornog oglasa ni postupanja po
+ *    prijavi poruke; moderacija bi stala.
+ *  - **Roditelj svog deteta** — uvid iz čl. 9, nepromenjen.
+ *  - **Drugo dete, ali SAMO ako su prijatelji.** Dete iz iste škole koje mu nije
+ *    prijatelj dobija isti zatvoren prikaz. Put do drugog deteta ostaje jedan:
+ *    skeniran QR kod uživo.
+ */
+export function smeDaVidiProfilDeteta(
+  posmatrac: (Ucesnik & { admin?: boolean }) | null,
+  meta: Ucesnik,
+  suPrijatelji: boolean
+): boolean {
+  // Profil punoletnog korisnika ovo pravilo ne dodiruje.
+  if (!meta.maloletan) return true;
+  if (!posmatrac) return false;
+  if (posmatrac.id === meta.id) return true;
+  if (posmatrac.admin) return true;
+  if (meta.roditeljIds.includes(posmatrac.id)) return true;
+  if (posmatrac.maloletan) return suPrijatelji;
+  return false;
+}
+
 // ── Rokovi ───────────────────────────────────────────────────────────────────
 
 /** Trenutak isteka roka za izjašnjenje, računat od otvaranja naloga (čl. 6 st. 2). */

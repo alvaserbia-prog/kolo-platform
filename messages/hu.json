@@ -18,7 +18,8 @@
     "grupa_podrzi": "Támogasd a KOLO-t",
     "grupa_zajednicko_dobro": "Közjó",
     "faq": "Gyakori kérdések",
-    "prijatelji": "Barátok"
+    "prijatelji": "Barátok",
+    "skole": "Iskolák"
   },
   "header": {
     "moj_profil": "Profilom",
@@ -662,7 +663,15 @@
     "email_toggle": "Küldjetek email értesítéseket",
     "email_napomena_lozinka": "A jelszó-visszaállító e-mail mindig megérkezik, ettől a kapcsolótól függetlenül.",
     "email_ukljuceno": "Bekapcsolva",
-    "email_iskljuceno": "Kikapcsolva"
+    "email_iskljuceno": "Kikapcsolva",
+    "zatvoren_naslov": "Kiskorú felhasználó fiókja",
+    "zatvoren_opis": "Kiskorú felhasználó profilja nem érhető el a nagykorú tagok számára.",
+    "zatvoren_prijatelj": "Másik gyerek profilját csak akkor látod, ha barátok vagytok.",
+    "zatvoren_roditelj": "Bármivel kapcsolatban forduljon a szülőhöz:",
+    "zatvoren_oglas": "Ha érdekli valami, amit közzétett, jelentkezzen magán a piactéri hirdetésen keresztül. A kiskorúval folytatott beszélgetést a szülője nyitja meg, és ő is olvassa.",
+    "skola": "Iskola",
+    "roditelji": "Szülők",
+    "deca": "Gyerekek"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3041,5 +3050,46 @@
     "posalji": "Jelentés elküldése",
     "odustani": "Mégse",
     "greska": "A jelentés nem került elküldésre. Próbáld újra."
+  },
+  "skole": {
+    "naslov": "Iskolák",
+    "podnaslov": "Hány gyerek vesz részt a KOLO-ban iskolánként",
+    "tab_osnovne": "Általános iskolák",
+    "tab_srednje": "Középiskolák",
+    "lista_broj": "Gyerekek száma szerint",
+    "lista_broj_opis": "Hány gyerek vesz részt az iskolából.",
+    "lista_procenat": "Részvételi arány szerint",
+    "lista_procenat_opis": "Az iskola mekkora része vesz részt. Itt egy kis iskola is lehet első az országban.",
+    "kol_mesto": "Helyezés",
+    "kol_skola": "Iskola",
+    "kol_grad": "Település",
+    "kol_dece": "Gyerek",
+    "kol_udeo": "Arány",
+    "bez_broja_ucenika": "A beiratkozott tanulók száma nem ismert.",
+    "napomena": "Csak azok a gyerekek számítanak, akiknek legalább az egyik szülője rendes tag.",
+    "spisak_prazan": "Az iskolák listája még nincs feltöltve.",
+    "greska_ucitavanje": "A betöltés nem sikerült.",
+    "nema_skola": "Nincs iskola.",
+    "nazad": "Összes iskola",
+    "mesto_po_broju": "{mesto}. a gyerekek száma szerint",
+    "mesto_po_udelu": "{mesto}. a részvételi arány szerint",
+    "od_ukupno": "{ukupno} iskolából",
+    "fali_do": "Még {broj} hiányzik a(z) {mesto}. helyhez",
+    "prvo_mesto": "Első hely Szerbiában",
+    "deca_naslov": "Az iskola gyerekei",
+    "deca_prazno": "Ebből az iskolából még nincs egy gyerek sem.",
+    "deca_samo_prijavljeni": "A gyerekek listáját a bejelentkezett tagok látják.",
+    "izbor_naslov": "Az iskolám",
+    "izbor_opis": "Válaszd ki az iskoládat. Ebből készül a szerbiai iskolák rangsora.",
+    "izbor_placeholder": "Írd be az iskola nevét vagy a települést",
+    "izbor_nema_pogodaka": "Nincs ilyen nevű iskola.",
+    "izbor_sacuvano": "Elmentve.",
+    "izbor_ukloni": "Iskola eltávolítása",
+    "izbor_rok": "Az iskolát 30 naponta egyszer változtathatod meg.",
+    "izbor_poziv": "Válaszd ki az iskoládat",
+    "kartica_naslov": "Az iskolád",
+    "kartica_bez_skole": "Még nem választottál iskolát. Válaszd ki, és nézd meg, hol álltok Szerbiában.",
+    "kartica_dugme": "Iskola választása",
+    "kartica_ti": "Te vagy a(z) {mesto}. az iskoládban"
   }
 }

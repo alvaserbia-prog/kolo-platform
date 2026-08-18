@@ -223,7 +223,16 @@ async function prevediUPunoletni(deteId: string) {
     await tx.roditeljstvoPotvrda.deleteMany({ where: { deteId, status: "CEKA" } });
     await tx.user.update({
       where: { id: deteId },
-      data: { maloletan: false, dozvolaOdrasli: false },
+      data: {
+        maloletan: false,
+        dozvolaOdrasli: false,
+        // 🔴 Škola se briše OVDE. Bez toga punoletan čovek zauvek ostaje u brojanju
+        // svoje osnovne škole — kvar koji se ne primeti mesecima, jer nigde ne puca:
+        // ranglista prosto pokazuje broj koji je za jedno veći nego što jeste.
+        // Škola svake godine gubi maturante i to je ispravno.
+        skolaSifra: null,
+        skolaPromenjenaAt: null,
+      },
     });
   });
 

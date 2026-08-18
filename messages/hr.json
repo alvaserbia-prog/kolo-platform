@@ -18,7 +18,8 @@
     "grupa_podrzi": "Podrži KOLO",
     "grupa_zajednicko_dobro": "Zajedničko dobro",
     "faq": "Česta pitanja",
-    "prijatelji": "Prijatelji"
+    "prijatelji": "Prijatelji",
+    "skole": "Škole"
   },
   "header": {
     "moj_profil": "Moj profil",
@@ -669,7 +670,15 @@
     "email_toggle": "Šalji mi email obavijesti",
     "email_napomena_lozinka": "Email za resetiranje lozinke stiže uvijek, neovisno o ovom prekidaču.",
     "email_ukljuceno": "Uključeno",
-    "email_iskljuceno": "Isključeno"
+    "email_iskljuceno": "Isključeno",
+    "zatvoren_naslov": "Račun maloljetnog korisnika",
+    "zatvoren_opis": "Profil maloljetnog korisnika nije dostupan punoljetnim članovima.",
+    "zatvoren_prijatelj": "Profil drugog djeteta vidiš samo ako ste prijatelji.",
+    "zatvoren_roditelj": "Za sve u vezi s ovim računom obratite se roditelju:",
+    "zatvoren_oglas": "Ako vas zanima nešto što je objavio, javite se putem samog oglasa na Tržnici. Razgovor s maloljetnim korisnikom otvara njegov roditelj i taj razgovor čita.",
+    "skola": "Škola",
+    "roditelji": "Roditelji",
+    "deca": "Djeca"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3041,5 +3050,46 @@
     "posalji": "Pošalji prijavu",
     "odustani": "Odustani",
     "greska": "Prijava nije poslana. Pokušaj ponovno."
+  },
+  "skole": {
+    "naslov": "Škole",
+    "podnaslov": "Koliko djece iz koje škole sudjeluje u KOLU",
+    "tab_osnovne": "Osnovne škole",
+    "tab_srednje": "Srednje škole",
+    "lista_broj": "Po broju djece",
+    "lista_broj_opis": "Koliko djece iz škole sudjeluje.",
+    "lista_procenat": "Po uključenosti",
+    "lista_procenat_opis": "Koliki dio škole sudjeluje. Ovdje i mala škola može biti prva u državi.",
+    "kol_mesto": "Mjesto",
+    "kol_skola": "Škola",
+    "kol_grad": "Mjesto škole",
+    "kol_dece": "Djece",
+    "kol_udeo": "Udio",
+    "bez_broja_ucenika": "Broj upisanih učenika nije poznat.",
+    "napomena": "Broje se djeca kojima je barem jedan roditelj redovni član.",
+    "spisak_prazan": "Popis škola još nije unesen.",
+    "greska_ucitavanje": "Učitavanje nije uspjelo.",
+    "nema_skola": "Nema škola.",
+    "nazad": "Sve škole",
+    "mesto_po_broju": "{mesto}. po broju djece",
+    "mesto_po_udelu": "{mesto}. po uključenosti",
+    "od_ukupno": "od {ukupno} škola",
+    "fali_do": "Nedostaje vam {broj} do {mesto}. mjesta",
+    "prvo_mesto": "Prvo mjesto u Srbiji",
+    "deca_naslov": "Djeca iz ove škole",
+    "deca_prazno": "Iz ove škole još nema nijednog djeteta.",
+    "deca_samo_prijavljeni": "Popis djece vide prijavljeni članovi.",
+    "izbor_naslov": "Moja škola",
+    "izbor_opis": "Odaberi školu koju pohađaš. Od toga se radi ljestvica škola u Srbiji.",
+    "izbor_placeholder": "Upiši naziv škole ili mjesto",
+    "izbor_nema_pogodaka": "Nema škole s tim nazivom.",
+    "izbor_sacuvano": "Spremljeno.",
+    "izbor_ukloni": "Ukloni školu",
+    "izbor_rok": "Školu možeš promijeniti jednom u 30 dana.",
+    "izbor_poziv": "Odaberi svoju školu",
+    "kartica_naslov": "Tvoja škola",
+    "kartica_bez_skole": "Nisi odabrao školu. Odaberi je i vidi gdje ste u Srbiji.",
+    "kartica_dugme": "Odaberi školu",
+    "kartica_ti": "Ti si {mesto}. u svojoj školi"
   }
 }

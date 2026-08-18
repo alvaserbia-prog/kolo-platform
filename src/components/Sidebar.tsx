@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
-import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
+import { MODUL_DECA_AKTIVAN, POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 interface DnevniBrojevi {
   novcanik: number;
@@ -207,6 +207,9 @@ function SidebarContent({
     { href: "/programi", label: t("programi") },
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
     { href: "/zrno", label: t("zrno") },
+    // Škole su pregled zajednice, ne lični alat — otud u padajućoj grupi, a ne u
+    // gornjoj. Punoletnom članu su izvor vesti („selo prvo u Srbiji"), ne zadatak.
+    ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),
   ];
 
   const adminGrupa = isAdmin ? [{ links: [{ href: "/admin", label: t("admin") }] }] : [];
@@ -226,6 +229,9 @@ function SidebarContent({
           // Dečja zamena za „Potvrde": dete nikoga ne potvrđuje (čl. 15), pa mu
           // na tom mestu stoje prijatelji.
           { href: "/prijatelji", label: t("prijatelji") },
+          // Ranglista škola: detetu je to razlog da dovede druga, pa stavka stoji
+          // uz prijatelje, a ne u nekoj dubljoj grupi.
+          ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),
         ] },
       ]
     : verified

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import type { KarticaSkole } from "@/lib/skola";
 import PrijaviPoruku from "@/components/PrijaviPoruku";
 import { RAZLOZI_DECA } from "@/lib/prijava-poruke-pravila";
 
@@ -66,6 +67,7 @@ export default function DecjaPocetna({
   mojihOglasa,
   oglasi,
   chatInicijalno,
+  skola,
 }: {
   pseudonim: string;
   mojId: string;
@@ -78,9 +80,12 @@ export default function DecjaPocetna({
   mojihOglasa: number;
   oglasi: Oglas[];
   chatInicijalno: Poruka[];
+  /** Kartica škole (čl. 7). `null` dok dete nije izabralo školu. */
+  skola: KarticaSkole | null;
 }) {
   const t = useTranslations("decjaPocetna");
   const tDeca = useTranslations("deca");
+  const tSkole = useTranslations("skole");
   const [pretraga, setPretraga] = useState("");
   const cekaRoditelja = stanje === "NA_CEKANJU";
 
@@ -173,6 +178,12 @@ export default function DecjaPocetna({
         <Dugme href="/prijatelji" naslov={t("dugme_prijatelji")} broj={brojPrijatelja} boja={BOJE[6]} />
         <Dugme href="/poruke" naslov={t("dugme_poruke")} boja={BOJE[4]} />
       </div>
+
+      {/* Kartica škole — ovo je mesto na kome ceo mehanizam uspeva ili pada.
+          Ne tabela od hiljadu redova nego JEDNA rečenica koju dete prepričava kod
+          kuće: „našoj školi fali troje do šestog mesta". Ranglista deci ne daje
+          ništa novo — ona postojećoj želji da pripadaju daje pravac. */}
+      <SkolaKartica skola={skola} boje={BOJE} t={tSkole} />
 
       {/* 🔴 Roditelj VIŠE NE ČITA razgovore među decom (čl. 9 st. 2) — vidi samo sa
           kim i koliko. Zato tekst ne sme da ostane onakav kakav je bio; dete koje
@@ -377,6 +388,84 @@ function DecjaPricaonica({ mojId, inicijalno }: { mojId: string; inicijalno: Por
           {t("posalji")}
         </button>
       </form>
+    </section>
+  );
+}
+
+/**
+ * Kartica škole na dečjoj početnoj.
+ *
+ * 🔴 Namerno JEDNA rečenica, ne tabela. Nacionalna lista je apstraktna („sedmi smo
+ * u Srbiji") i služi ponosu; ono što tera na akciju je koliko FALI do sledećeg
+ * mesta — i to je jedini broj koji dete odnese kući. Tabela sa hiljadu škola živi
+ * na `/skole`, iza klika.
+ *
+ * Dete bez izabrane škole vidi poziv da je izabere: bez ovoga polje ostaje
+ * neotkriveno, jer se profil retko otvara.
+ */
+function SkolaKartica({
+  skola,
+  boje,
+  t,
+}: {
+  skola: KarticaSkole | null;
+  boje: string[];
+  t: (kljuc: string, vrednosti?: Record<string, string | number>) => string;
+}) {
+  if (!skola) {
+    return (
+      <section
+        className="rounded-2xl bg-white p-5 text-center"
+        style={{ border: `3px solid ${boje[4]}` }}
+      >
+        <p className="text-sm text-kolo-muted">{t("kartica_bez_skole")}</p>
+        <Link
+          href="/profil"
+          className="mt-3 inline-block rounded-full px-5 py-2 text-sm font-bold text-white"
+          style={{ backgroundColor: boje[4] }}
+        >
+          {t("kartica_dugme")}
+        </Link>
+      </section>
+    );
+  }
+
+  return (
+    <section
+      className="rounded-2xl bg-white p-5"
+      style={{ border: `3px solid ${boje[4]}` }}
+    >
+      <p className="text-xs font-semibold uppercase tracking-wide text-kolo-muted">
+        {t("kartica_naslov")}
+      </p>
+      <Link
+        href={`/skole/${encodeURIComponent(skola.sifra)}`}
+        className="mt-1 block text-lg font-extrabold text-kolo-text hover:underline"
+      >
+        {skola.naziv}
+      </Link>
+      <p className="text-sm text-kolo-muted">{skola.mesto}</p>
+
+      <p className="mt-3 text-sm font-semibold" style={{ color: boje[0] }}>
+        {t("mesto_po_broju", { mesto: skola.mestoSkole })}{" "}
+        <span className="font-normal text-kolo-muted">
+          {t("od_ukupno", { ukupno: skola.ukupnoSkola })}
+        </span>
+      </p>
+
+      {skola.doSledecegMesta === null ? (
+        <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>{t("prvo_mesto")}</p>
+      ) : (
+        <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>
+          {t("fali_do", { broj: skola.doSledecegMesta, mesto: skola.mestoSkole - 1 })}
+        </p>
+      )}
+
+      {skola.mojeMesto !== null && (
+        <p className="mt-1 text-sm text-kolo-muted">
+          {t("kartica_ti", { mesto: skola.mojeMesto })}
+        </p>
+      )}
     </section>
   );
 }

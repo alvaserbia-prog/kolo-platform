@@ -290,6 +290,18 @@ model User {
   // punoletnim korisnicima. Isključen pri otvaranju naloga, povlači se u svakom
   // trenutku. Stoji na DETETU, a menja ga bilo koji od roditelja.
   dozvolaOdrasli                   Boolean                   @default(false)
+  // Škola koju maloletni korisnik pohađa (Pravilnik o učešću dece, čl. 7). Bira je
+  // SÁMO dete, sa spiska u `src/lib/skole-srbije.ts` — ovde stoji ŠIFRA, nikad
+  // naziv, jer isto ime nosi preko trideset škola u Srbiji.
+  //
+  // 🔴 Briše se na dva mesta i oba se lako previde: pri prelasku u punoletni nalog
+  // (`punoletstvo.ts` — inače punoletan čovek zauvek ostaje u brojanju svoje
+  // osnovne škole) i pri gašenju naloga (čl. 34).
+  skolaSifra                       String?
+  // Nosi rok od 30 dana između dve promene. 🔴 PRVA postavka nije promena i ostavlja
+  // ovo polje prazno — dete koje tek bira školu ne čeka ništa. Istorija škola se NE
+  // čuva (minimizacija): pamti se samo tekuća vrednost i trenutak poslednje izmene.
+  skolaPromenjenaAt                DateTime?
   // Prelaz u punoletstvo (Modul Deca, Glava VI). Dva odvojena stuba, jer se dešavaju
   // mesec dana jedan od drugog i oba moraju biti idempotentna: obaveštenje se šalje
   // jednom, obrada se izvodi jednom.
@@ -388,6 +400,9 @@ model User {
   @@index([maloletan])
   // Noćni posao punoletstva traži maloletne naloge po datumu rođenja.
   @@index([maloletan, datumRodjenja])
+  // Ranglista škola grupiše decu po šifri škole. Prvi član indeksa je `maloletan`
+  // zato što upit UVEK počinje od njega — punoletan nalog školu nema.
+  @@index([maloletan, skolaSifra])
 }
 
 /// Veza roditelj — dete (Modul Deca, čl. 4 i 5).

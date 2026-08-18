@@ -18,7 +18,8 @@
     "grupa_podrzi": "Support KOLO",
     "grupa_zajednicko_dobro": "Common good",
     "faq": "FAQ",
-    "prijatelji": "Friends"
+    "prijatelji": "Friends",
+    "skole": "Schools"
   },
   "header": {
     "moj_profil": "My profile",
@@ -669,7 +670,15 @@
     "email_toggle": "Send me email notifications",
     "email_napomena_lozinka": "Password reset emails are always sent, regardless of this switch.",
     "email_ukljuceno": "On",
-    "email_iskljuceno": "Off"
+    "email_iskljuceno": "Off",
+    "zatvoren_naslov": "Account of a minor",
+    "zatvoren_opis": "The profile of a minor is not available to adult members.",
+    "zatvoren_prijatelj": "You can see another child's profile only if you are friends.",
+    "zatvoren_roditelj": "For anything regarding this account, contact the parent:",
+    "zatvoren_oglas": "If something they posted interests you, get in touch through the listing itself on the Marketplace. A conversation with a minor is opened by their parent, who also reads it.",
+    "skola": "School",
+    "roditelji": "Parents",
+    "deca": "Children"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3041,5 +3050,46 @@
     "posalji": "Send report",
     "odustani": "Cancel",
     "greska": "The report was not sent. Try again."
+  },
+  "skole": {
+    "naslov": "Schools",
+    "podnaslov": "How many children from each school take part in KOLO",
+    "tab_osnovne": "Primary schools",
+    "tab_srednje": "Secondary schools",
+    "lista_broj": "By number of children",
+    "lista_broj_opis": "How many children from the school take part.",
+    "lista_procenat": "By participation",
+    "lista_procenat_opis": "What share of the school takes part. Here even a small school can come first in the country.",
+    "kol_mesto": "Rank",
+    "kol_skola": "School",
+    "kol_grad": "Town",
+    "kol_dece": "Children",
+    "kol_udeo": "Share",
+    "bez_broja_ucenika": "The number of enrolled pupils is not known.",
+    "napomena": "Only children with at least one parent who is a full member are counted.",
+    "spisak_prazan": "The list of schools has not been entered yet.",
+    "greska_ucitavanje": "Loading failed.",
+    "nema_skola": "No schools.",
+    "nazad": "All schools",
+    "mesto_po_broju": "{mesto}. by number of children",
+    "mesto_po_udelu": "{mesto}. by participation",
+    "od_ukupno": "of {ukupno} schools",
+    "fali_do": "{broj} more to reach place {mesto}",
+    "prvo_mesto": "First place in Serbia",
+    "deca_naslov": "Children from this school",
+    "deca_prazno": "No children from this school yet.",
+    "deca_samo_prijavljeni": "The list of children is visible to signed-in members.",
+    "izbor_naslov": "My school",
+    "izbor_opis": "Choose the school you attend. The national school ranking is built from these choices.",
+    "izbor_placeholder": "Type the school name or town",
+    "izbor_nema_pogodaka": "No school with that name.",
+    "izbor_sacuvano": "Saved.",
+    "izbor_ukloni": "Remove school",
+    "izbor_rok": "You can change your school once every 30 days.",
+    "izbor_poziv": "Choose your school",
+    "kartica_naslov": "Your school",
+    "kartica_bez_skole": "You have not chosen a school. Choose it and see where you stand in Serbia.",
+    "kartica_dugme": "Choose school",
+    "kartica_ti": "You are {mesto}. in your school"
   }
 }
