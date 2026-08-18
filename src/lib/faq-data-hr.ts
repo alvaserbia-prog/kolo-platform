@@ -347,6 +347,151 @@ Kad promijeniš pseudonim, sve tvoje transakcije u povijesti prikazuju se pod no
     ],
   },
   {
+    id: "deca",
+    naslov: "Djeca i roditelji",
+    pitanja: [
+      {
+        id: 85,
+        pitanje: `Od koliko godina dijete može imati račun i kako se otvara?`,
+        odgovor: `Donja granica je sedam godina. Račun se otvara na dva načina.
+
+Prvi: ti ga otvaraš iz svog računa. Račun radi odmah, a ti odgovaraš za ono što dijete objavi.
+
+Drugi: dijete ga otvara samo i unosi tvoj email. Tebi tada stiže poruka u kojoj možeš preuzeti račun, označiti da to nije tvoje dijete ili račun obrisati. Druge dvije radnje moguće su i bez prijave na platformu, jer tvoju adresu može upisati bilo tko. U poruci stoji samo pseudonim djeteta, nikada ime.
+
+Poveznica iz poruke vrijedi sedam dana. Ako račun nitko ne preuzme u roku od četrnaest dana, briše se. Ako poruka nije stigla, dijete u svom profilu ima šesteroznamenkasti kod koji možeš unijeti umjesto poveznice.
+
+Datum rođenja upisuješ ti, prilikom preuzimanja. Provjeri ga prije potvrde, jer se poslije upisa ne mijenja, a o njemu ovisi kada račun prelazi u punoljetni.
+
+Dok čeka preuzimanje, dijete ima profil i može sklapati prijateljstva, ali nema Pričaonicu, poruke ni oglase. Poslije preuzimanja sve to radi.`,
+      },
+      {
+        id: 86,
+        pitanje: `Nisam član KOLA. Mogu li preuzeti račun svog djeteta?`,
+        odgovor: `Možeš. Postupak ima tri koraka.
+
+1. Otvori svoj račun. Poveznica iz poruke vodi ravno na registraciju.
+
+2. Preuzmi dijete. Od tog trenutka djetetu radi sve: Pričaonica, poruke, oglasi i prijateljstva. Ti i dijete od tada prepisujete POEN jedno drugome.
+
+3. Zamoli nekoga tko te osobno poznaje da te potvrdi. Potvrdu tražiš iz svog računa i dovoljna je jedna.
+
+Do trećeg koraka djetetu se ne upisuje POEN iz prijateljstava. Prijateljstva se u međuvremenu sklapaju i bilježe, a upis se izvršava onog dana kada postaneš redovni član.`,
+      },
+      {
+        id: 87,
+        pitanje: `Mogu li oba roditelja imati pristup?`,
+        odgovor: `Mogu. Drugi roditelj ulazi istim putem kao i prvi i dobiva iste ovlasti: isti uvid, isto brisanje i iste prekidače. To znači i da svatko od njih dvoje može sam obrisati djetetov račun.
+
+Djetetu je dovoljno da jedan roditelj bude redovni član da bi mu se upisivao POEN.`,
+      },
+      {
+        id: 88,
+        pitanje: `Može li odrasla osoba prići mom djetetu?`,
+        odgovor: `Neovisno o tvojim postavkama vrijedi sljedeće. Djetetov profil ne vidi neprijavljeni posjetitelj. Dijete se ne pojavljuje u feedu ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
+
+Razgovor s punoljetnim osobama otvara samo roditeljski prekidač u djetetovu profilu. Dok je ugašen, odrasla osoba djetetu ne može pisati.
+
+Ako ga upališ, primjenjuju se tri pravila:
+
+• ti čitaš taj razgovor, ali u njemu ne pišeš;
+
+• punoljetnom sugovorniku stoji vidljiv natpis da razgovor čita roditelj;
+
+• obavijest ti stiže pri prvom javljanju u novom razgovoru, a ne pri svakoj poruci.
+
+Razgovore koje dijete vodi s drugom djecom ne čitaš. O tome u sljedećem pitanju.`,
+      },
+      {
+        id: 89,
+        pitanje: `Što ja vidim od djetetova računa?`,
+        odgovor: `Uvid ti obuhvaća:
+
+• popis prijatelja s datumima kada je prijateljstvo sklopljeno;
+
+• popis razgovora, dakle s kim i koliko, bez sadržaja poruka;
+
+• cijelu povijest prepisa POEN-a;
+
+• sve oglase koje je dijete objavilo.
+
+Razgovore između djece ne čitaš. Razlog je taj što u svakom takvom razgovoru sudjeluje i tuđe dijete, čiji roditelj na uvid nije pristao. Iznimka je razgovor djeteta s punoljetnom osobom, koji čitaš.
+
+Prijateljstva ne odobravaš. Sklapaju se uživo, skeniranjem koda, a ti dobivaš obavijest i vidiš popis.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor s odraslima i obrisati račun.`,
+      },
+      {
+        id: 90,
+        pitanje: `Što ako dijete dobije neprimjerenu poruku?`,
+        odgovor: `Uz svaku poruku stoji dugme prijavi. Dijete ga pritišće samo, bez pitanja i bez čekanja.
+
+Prijava ne uklanja poruku. Ona je signal moderaciji Fondacije, koja poruku pregleda i uklanja je ako za to ima osnova. Istu poruku svaki korisnik može prijaviti jednom.`,
+      },
+      {
+        id: 91,
+        pitanje: `Odgovaram li ja za ono što dijete učini?`,
+        odgovor: `Da. Za ono što dijete objavi i učini na platformi odgovaraš ti.
+
+Odgovornost se odnosi na ono što je javno i što možeš vidjeti: oglase, prepise POEN-a, ponašanje prema drugima. Za sve to imaš uvid i dugme. Privatan razgovor dvoje djece nije tvoj teren, jer nije ni samo tvog djeteta.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti razgovor s odraslima ili obrisati račun.`,
+      },
+      {
+        id: 92,
+        pitanje: `Kako dijete stječe POEN?`,
+        odgovor: `Na tri načina.
+
+Prijateljstvo. Za svako sklopljeno prijateljstvo upisuje se po 500 POEN svakom djetetu. Upis čeka da oba računa budu aktivna, a račun je aktivan kada je bar jedan roditelj redovni član. Dok se čeka, objema stranama stoji natpis „500 na čekanju". Prijateljstvo dvoje djece istog roditelja sklapa se normalno i vidi se u Pričaonici, ali ne nosi POEN.
+
+Pijaca. Dijete objavljuje oglase pod istim uvjetima kao ostali članovi i POEN iz razmjene upisuje mu se na isti način.
+
+Prepis od roditelja. Ti i dijete prepisujete POEN jedno drugome u oba smjera, bez uvjeta i bez ograničenja; dovoljno je da si preuzeo račun. Prepisom se ne stvara nov POEN, nego se postojeći prenosi.
+
+POEN nije novac i nema vrijednost izvan sustava.`,
+      },
+      {
+        id: 93,
+        pitanje: `Što biva ako se prijateljstvo raskine?`,
+        odgovor: `Prijateljstvo raskida samo dijete, bilo koje od dvoje. Ti kao roditelj tu radnju nemaš; ostaju ti uklanjanje oglasa, prekidač za razgovor s odraslima i brisanje računa.
+
+Pri raskidu se otpisuje po 500 POEN objema stranama, i onoj koja raskida i onoj koja nije. Prije potvrde stoji upozorenje na to, pa se raskid ne događa slučajno.
+
+Ako je taj POEN u međuvremenu potrošen, zapis odlazi u minus. To nije dug: ništa se ne naplaćuje i ne traži natrag, a prvi POEN koji stigne popunjava ga.
+
+Ako djeca kasnije ponovno sklope prijateljstvo, POEN se upisuje ponovno.`,
+      },
+      {
+        id: 94,
+        pitanje: `Što se događa na osamnaesti rođendan?`,
+        odgovor: `Obavijest o prijelazu stiže mjesec dana ranije, i djetetu i svim njegovim prijateljima. Na sam dan događa se sljedeće.
+
+Poništava se POEN zarađen prijateljstvima, po 500 za svako prijateljstvo za koje je upis izvršen. Dijete s trideset takvih prijateljstava gubi 15.000 POEN. Otpis pogađa i drugu stranu: svakom od tih prijatelja otpisuje se po 500 za to prijateljstvo, i zbog toga obavijest ide i njima. Kao i pri raskidu, zapis smije u minus i to nije dug.
+
+Prijateljstva se brišu. Njihovo mjesto zauzima lanac potvrda.
+
+Roditelji potvrđuju dijete u lancu potvrda, po jednu potvrdu svaki, odnosno jednu ako su oba u istom lancu. Račun time postaje punoljetan i dobiva pun pristup.
+
+Ostalo se ne dira: POEN koji si prepisao djetetu, POEN iz razmjene na Pijaci, oglasi i povijest ostaju.`,
+      },
+      {
+        id: 95,
+        pitanje: `Kako da obrišem djetetov račun?`,
+        odgovor: `Račun djeteta možeš obrisati u svakom trenutku iz svog računa.
+
+Brisanje djeluje isto kao raskid prijateljstva, samo odjednom za sva. Svakom prijatelju obrisanog računa otpisuje se po 500 POEN za to prijateljstvo. Kao i pri raskidu, njihov zapis smije u minus i to nije dug.
+
+Ako obrišeš vlastiti račun, a dijete nema upisanog drugog roditelja, briše se i djetetov račun, s istom posljedicom za njegove prijatelje. Ako drugi roditelj postoji, djetetov račun ostaje i vezan je za njega.
+
+Ako ti je stigla poruka o računu koji nisi otvorio i dijete nije tvoje, u toj poruci imaš dvije radnje koje ne traže prijavu na platformu: da označiš da to nije tvoje dijete i da račun obrišeš. Označavanje bez brisanja ostavlja račun da i dalje koristi tvoju adresu do isteka roka, pa je brisanje sigurnije.
+
+Račun koji nitko ne preuzme briše se sam nakon četrnaest dana.
+
+Podrobnije o svemu ovome piše Pravilnik o sudjelovanju djece, na stranici Pravilnik.`,
+      },
+    ],
+  },
+  {
     id: "programi",
     naslov: "Programi Protokola",
     pitanja: [

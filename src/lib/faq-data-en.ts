@@ -347,6 +347,151 @@ When you change your pseudonym, all your transactions in the history are display
     ],
   },
   {
+    id: "deca",
+    naslov: "Children and parents",
+    pitanja: [
+      {
+        id: 85,
+        pitanje: `From what age can a child have an account, and how is it opened?`,
+        odgovor: `The lower limit is seven years of age. An account is opened in one of two ways.
+
+The first: you open it from your own account. It works straight away, and you are answerable for what the child posts.
+
+The second: the child opens it alone and enters your email. A message then reaches you in which you can take over the account, mark that this is not your child, or delete the account. The latter two actions are possible without signing in to the platform, because anyone can enter your address. The message contains only the child's pseudonym, never a name.
+
+The link in the message is valid for seven days. If no one takes the account over within fourteen days, it is deleted. If the message did not arrive, the child has a six-digit code in their profile that you can enter instead of the link.
+
+You enter the date of birth, at the moment of taking over. Check it before confirming, because it cannot be changed afterwards, and it determines when the account becomes an adult one.
+
+While it waits to be taken over, the child has a profile and can make friendships, but has no Chat room, no messages and no listings. After the takeover all of that works.`,
+      },
+      {
+        id: 86,
+        pitanje: `I am not a member of KOLO. Can I take over my child's account?`,
+        odgovor: `You can. The procedure has three steps.
+
+1. Open your own account. The link in the message leads straight to registration.
+
+2. Take over the child. From that moment everything works for the child: the Chat room, messages, listings and friendships. From then on you and the child re-register POEN to each other.
+
+3. Ask someone who knows you personally to confirm you. You request the confirmation from your own account, and one is enough.
+
+Until the third step, no POEN from friendships is recorded for the child. Friendships are made and logged in the meantime, and the recording is carried out on the day you become a full member.`,
+      },
+      {
+        id: 87,
+        pitanje: `Can both parents have access?`,
+        odgovor: `They can. The second parent enters by the same route as the first and gets the same powers: the same oversight, the same deletion and the same switches. That also means either of the two can delete the child's account on their own.
+
+For the child it is enough that one parent is a full member for POEN to be recorded.`,
+      },
+      {
+        id: 88,
+        pitanje: `Can an adult approach my child?`,
+        odgovor: `Regardless of your settings, the following holds. A visitor who is not signed in does not see the child's profile. The child does not appear in the feed or in the member search. A friendship is made solely by scanning a QR code in person, and the code lasts five minutes and has no number that could be dictated over the phone, so a friendship cannot be made at a distance.
+
+A conversation with adults is opened only by the parental switch in the child's profile. While it is off, an adult cannot write to the child.
+
+If you turn it on, three rules apply:
+
+• you read that conversation, but you do not write in it;
+
+• the adult on the other side sees a visible notice that a parent reads the conversation;
+
+• a notification reaches you the first time someone writes in a new conversation, not with every message.
+
+You do not read the conversations the child has with other children. More on that in the next question.`,
+      },
+      {
+        id: 89,
+        pitanje: `What do I see of my child's account?`,
+        odgovor: `Your oversight covers:
+
+• the list of friends with the dates the friendships were made;
+
+• the list of conversations — that is, with whom and how many — without the content of the messages;
+
+• the whole history of POEN re-registrations;
+
+• every listing the child has posted.
+
+You do not read the conversations between children. The reason is that every such conversation also involves someone else's child, whose parent has not consented to your oversight. The exception is a conversation between the child and an adult, which you do read.
+
+You do not approve friendships. They are made in person, by scanning a code, and you get a notification and see the list.
+
+At any moment you can remove a listing, switch off conversations with adults, and delete the account.`,
+      },
+      {
+        id: 90,
+        pitanje: `What if my child receives an inappropriate message?`,
+        odgovor: `Next to every message there is a report button. The child presses it alone, without asking and without waiting.
+
+A report does not remove the message. It is a signal to the Foundation's moderation, which reviews the message and removes it if there are grounds. Each user can report the same message once.`,
+      },
+      {
+        id: 91,
+        pitanje: `Am I answerable for what my child does?`,
+        odgovor: `Yes. You are answerable for what the child posts and does on the platform.
+
+The responsibility covers what is public and what you can see: listings, POEN re-registrations, conduct towards others. For all of that you have both oversight and a button. A private conversation between two children is not your ground, because it is not your child's alone either.
+
+At any moment you can remove a listing, switch off conversations with adults, or delete the account.`,
+      },
+      {
+        id: 92,
+        pitanje: `How does a child obtain POEN?`,
+        odgovor: `In three ways.
+
+Friendship. For every friendship made, 500 POEN is recorded for each child. The recording waits for both accounts to be active, and an account is active once at least one parent is a full member. While it waits, both see the note "500 pending". A friendship between two children of the same parent is made normally and shows in the Chat room, but carries no POEN.
+
+The Marketplace. The child posts listings under the same conditions as other members, and POEN from an exchange is recorded in the same way.
+
+A re-registration from a parent. You and the child re-register POEN to each other in both directions, without conditions and without limits; it is enough that you have taken the account over. A re-registration creates no new POEN — it moves existing POEN.
+
+POEN is not money and has no value outside the system.`,
+      },
+      {
+        id: 93,
+        pitanje: `What happens if a friendship is ended?`,
+        odgovor: `Only a child ends a friendship, either of the two. You as a parent do not have that action; what remains to you is removing a listing, the switch for conversations with adults, and deleting the account.
+
+When it ends, 500 POEN is written off from both sides — from the one who ended it and from the one who did not. A warning about that stands before the confirmation, so it does not happen by accident.
+
+If that POEN has been spent in the meantime, the ledger goes below zero. That is not a debt: nothing is collected and nothing is demanded back, and the first POEN to arrive fills it.
+
+If the children later make friends again, the POEN is recorded again.`,
+      },
+      {
+        id: 94,
+        pitanje: `What happens on the eighteenth birthday?`,
+        odgovor: `A notification about the transition arrives a month in advance, both to the child and to all their friends. On the day itself the following happens.
+
+The POEN earned through friendships is annulled — 500 for every friendship for which the recording was carried out. A child with thirty such friendships loses 15,000 POEN. The write-off also hits the other side: each of those friends has 500 written off for that friendship, and that is why the notification goes to them too. As with ending a friendship, the ledger may go below zero and that is not a debt.
+
+The friendships are deleted. Their place is taken by the chain of confirmations.
+
+The parents confirm the child in the chain of confirmations — one confirmation each, or one if both are in the same chain. The account thereby becomes an adult account and gets full access.
+
+Nothing else is touched: the POEN you re-registered to the child, POEN from exchanges on the Marketplace, listings and history all remain.`,
+      },
+      {
+        id: 95,
+        pitanje: `How do I delete my child's account?`,
+        odgovor: `You can delete the child's account at any moment from your own account.
+
+Deletion works like ending a friendship, only for all of them at once. Every friend of the deleted account has 500 POEN written off for that friendship. As with ending a friendship, their ledger may go below zero and that is not a debt.
+
+If you delete your own account and the child has no second parent recorded, the child's account is deleted too, with the same consequence for their friends. If a second parent exists, the child's account remains and is tied to them.
+
+If a message reached you about an account you did not open and the child is not yours, that message gives you two actions that do not require signing in to the platform: to mark that this is not your child, and to delete the account. Marking without deleting leaves the account using your address until the deadline runs out, so deleting is safer.
+
+An account no one takes over is deleted on its own after fourteen days.
+
+All of this is set out in more detail in the Rules on the participation of children, on the Rulebook page.`,
+      },
+    ],
+  },
+  {
     id: "programi",
     naslov: "Protocol Programmes",
     pitanja: [

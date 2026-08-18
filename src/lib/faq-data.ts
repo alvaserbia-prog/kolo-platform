@@ -357,6 +357,151 @@ Kad promeniš pseudonim, sve tvoje transakcije u istoriji prikazuju se pod novim
     ],
   },
   {
+    id: "deca",
+    naslov: "Deca i roditelji",
+    pitanja: [
+      {
+        id: 85,
+        pitanje: `Od koliko godina dete može da ima nalog i kako se otvara?`,
+        odgovor: `Donja granica je sedam godina. Nalog se otvara na dva načina.
+
+Prvi: ti ga otvaraš iz svog naloga. Nalog radi odmah, a ti odgovaraš za ono što dete objavi.
+
+Drugi: dete ga otvara samo i unosi tvoj email. Tebi tada stiže poruka u kojoj možeš da preuzmeš nalog, da označiš da to nije tvoje dete ili da nalog obrišeš. Druge dve radnje moguće su i bez prijave na platformu, jer tvoju adresu može upisati bilo ko. U poruci stoji samo pseudonim deteta, nikada ime.
+
+Link iz poruke važi sedam dana. Ako nalog niko ne preuzme u roku od četrnaest dana, briše se. Ako poruka nije stigla, dete u svom profilu ima šestocifreni kod koji možeš uneti umesto linka.
+
+Datum rođenja upisuješ ti, prilikom preuzimanja. Proveri ga pre potvrde, jer se posle upisa ne menja, a od njega zavisi kada nalog prelazi u punoletni.
+
+Dok čeka preuzimanje, dete ima profil i može da sklapa prijateljstva, ali nema Pričaonicu, poruke ni oglase. Posle preuzimanja sve to radi.`,
+      },
+      {
+        id: 86,
+        pitanje: `Nisam član KOLA. Mogu li da preuzmem nalog svog deteta?`,
+        odgovor: `Možeš. Postupak ima tri koraka.
+
+1. Otvori svoj nalog. Link iz poruke vodi pravo na registraciju.
+
+2. Preuzmi dete. Od tog trenutka detetu radi sve: Pričaonica, poruke, oglasi i prijateljstva. Ti i dete od tada prepisujete POEN jedno drugom.
+
+3. Zamoli nekoga ko te lično poznaje da te potvrdi. Potvrdu tražiš iz svog naloga i dovoljna je jedna.
+
+Do trećeg koraka detetu se ne upisuje POEN iz prijateljstava. Prijateljstva se u međuvremenu sklapaju i beleže, a upis se izvršava onog dana kada postaneš redovan član.`,
+      },
+      {
+        id: 87,
+        pitanje: `Mogu li oba roditelja da imaju pristup?`,
+        odgovor: `Mogu. Drugi roditelj ulazi istim putem kao i prvi i dobija ista ovlašćenja: isti uvid, isto brisanje i iste prekidače. To znači i da svaki od dvoje može sam obrisati detetov nalog.
+
+Detetu je dovoljno da jedan roditelj bude redovan član da bi mu se upisivao POEN.`,
+      },
+      {
+        id: 88,
+        pitanje: `Može li odrasla osoba da priđe mom detetu?`,
+        odgovor: `Nezavisno od tvojih podešavanja važi sledeće. Detetov profil ne vidi neprijavljeni posetilac. Dete se ne pojavljuje u feedu ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
+
+Razgovor sa punoletnim osobama otvara samo roditeljski prekidač u detetovom profilu. Dok je ugašen, odrasla osoba detetu ne može pisati.
+
+Ako ga upališ, primenjuju se tri pravila:
+
+• ti čitaš taj razgovor, ali u njemu ne pišeš;
+
+• punoletnom sagovorniku stoji vidljiv natpis da razgovor čita roditelj;
+
+• obaveštenje ti stiže pri prvom javljanju u novom razgovoru, a ne pri svakoj poruci.
+
+Razgovore koje dete vodi sa drugom decom ne čitaš. O tome u sledećem pitanju.`,
+      },
+      {
+        id: 89,
+        pitanje: `Šta ja vidim od detetovog naloga?`,
+        odgovor: `Uvid ti obuhvata:
+
+• spisak prijatelja sa datumima kada je prijateljstvo sklopljeno;
+
+• spisak razgovora, dakle s kim i koliko, bez sadržaja poruka;
+
+• celu istoriju prepisa POEN-a;
+
+• sve oglase koje je dete objavilo.
+
+Razgovore između dece ne čitaš. Razlog je taj što u svakom takvom razgovoru učestvuje i tuđe dete, čiji roditelj na uvid nije pristao. Izuzetak je razgovor deteta sa punoletnom osobom, koji čitaš.
+
+Prijateljstva ne odobravaš. Sklapaju se uživo, skeniranjem koda, a ti dobijaš obaveštenje i vidiš spisak.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor sa odraslima i obrisati nalog.`,
+      },
+      {
+        id: 90,
+        pitanje: `Šta ako dete dobije neprimerenu poruku?`,
+        odgovor: `Uz svaku poruku stoji dugme prijavi. Dete ga pritiska samo, bez pitanja i bez čekanja.
+
+Prijava ne uklanja poruku. Ona je signal moderaciji Fondacije, koja poruku pregleda i uklanja je ako za to ima osnova. Istu poruku svaki korisnik može prijaviti jednom.`,
+      },
+      {
+        id: 91,
+        pitanje: `Odgovaram li ja za ono što dete uradi?`,
+        odgovor: `Da. Za ono što dete objavi i uradi na platformi odgovaraš ti.
+
+Odgovornost se odnosi na ono što je javno i što možeš videti: oglase, prepise POEN-a, ponašanje prema drugima. Za sve to imaš uvid i dugme. Privatan razgovor dvoje dece nije tvoj teren, jer nije ni samo tvog deteta.
+
+U svakom trenutku možeš ukloniti oglas, ugasiti razgovor sa odraslima ili obrisati nalog.`,
+      },
+      {
+        id: 92,
+        pitanje: `Kako dete stiče POEN?`,
+        odgovor: `Na tri načina.
+
+Prijateljstvo. Za svako sklopljeno prijateljstvo upisuje se po 500 POEN svakom detetu. Upis čeka da oba naloga budu aktivna, a nalog je aktivan kada je bar jedan roditelj redovan član. Dok se čeka, obojici stoji natpis „500 na čekanju". Prijateljstvo dvoje dece istog roditelja sklapa se normalno i vidi se u Pričaonici, ali ne nosi POEN.
+
+Pijaca. Dete objavljuje oglase pod istim uslovima kao ostali članovi i POEN iz razmene upisuje mu se na isti način.
+
+Prepis od roditelja. Ti i dete prepisujete POEN jedno drugom u oba pravca, bez uslova i bez ograničenja; dovoljno je da si preuzeo nalog. Prepisom se ne stvara nov POEN, nego se postojeći prenosi.
+
+POEN nije novac i nema vrednost izvan sistema.`,
+      },
+      {
+        id: 93,
+        pitanje: `Šta biva ako se prijateljstvo raskine?`,
+        odgovor: `Prijateljstvo raskida samo dete, bilo koje od dvoje. Ti kao roditelj tu radnju nemaš; ostaju ti uklanjanje oglasa, prekidač za razgovor sa odraslima i brisanje naloga.
+
+Pri raskidu se otpisuje po 500 POEN obema stranama, i onoj koja raskida i onoj koja nije. Pre potvrde stoji upozorenje na to, pa se raskid ne dešava slučajno.
+
+Ako je taj POEN u međuvremenu potrošen, zapis odlazi u minus. To nije dug: ništa se ne naplaćuje i ne traži nazad, a prvi POEN koji stigne popunjava ga.
+
+Ako deca kasnije ponovo sklope prijateljstvo, POEN se upisuje ponovo.`,
+      },
+      {
+        id: 94,
+        pitanje: `Šta se dešava na osamnaesti rođendan?`,
+        odgovor: `Obaveštenje o prelasku stiže mesec dana ranije, i detetu i svim njegovim prijateljima. Na sam dan dešava se sledeće.
+
+Poništava se POEN zarađen prijateljstvima, po 500 za svako prijateljstvo za koje je upis izvršen. Dete sa trideset takvih prijateljstava gubi 15.000 POEN. Otpis pogađa i drugu stranu: svakom od tih prijatelja otpisuje se po 500 za to prijateljstvo, i zbog toga obaveštenje ide i njima. Kao i pri raskidu, zapis sme u minus i to nije dug.
+
+Prijateljstva se brišu. Njihovo mesto zauzima lanac potvrda.
+
+Roditelji potvrđuju dete u lancu potvrda, po jednu potvrdu svaki, odnosno jednu ako su oba u istom lancu. Nalog time postaje punoletan i dobija pun pristup.
+
+Ostalo se ne dira: POEN koji si prepisao detetu, POEN iz razmene na Pijaci, oglasi i istorija ostaju.`,
+      },
+      {
+        id: 95,
+        pitanje: `Kako da obrišem detetov nalog?`,
+        odgovor: `Nalog deteta možeš obrisati u svakom trenutku iz svog naloga.
+
+Brisanje deluje isto kao raskid prijateljstva, samo odjednom za sva. Svakom prijatelju obrisanog naloga otpisuje se po 500 POEN za to prijateljstvo. Kao i pri raskidu, njihov zapis sme u minus i to nije dug.
+
+Ako obrišeš sopstveni nalog, a dete nema upisanog drugog roditelja, briše se i detetov nalog, sa istom posledicom po njegove prijatelje. Ako drugi roditelj postoji, detetov nalog ostaje i vezan je za njega.
+
+Ako ti je stigla poruka o nalogu koji nisi otvorio i dete nije tvoje, u toj poruci imaš dve radnje koje ne traže prijavu na platformu: da označiš da to nije tvoje dete i da nalog obrišeš. Označavanje bez brisanja ostavlja nalog da i dalje koristi tvoju adresu do isteka roka, pa je brisanje sigurnije.
+
+Nalog koji niko ne preuzme briše se sam posle četrnaest dana.
+
+Podrobnije o svemu ovome piše Pravilnik o učešću dece, na stranici Pravilnik.`,
+      },
+    ],
+  },
+  {
     id: "programi",
     naslov: "Programi Protokola",
     pitanja: [

@@ -113,6 +113,10 @@ export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
  * 24 — „Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?"
  * 25 — „Može li firma da bude direktni član?" (odgovor upućuje na pokroviteljstvo)
  *
+ * 85–95 su sekcija „Deca i roditelji" — cela pada sa modulom, jer opisuje naloge
+ * dece, prijateljstva i roditeljski uvid, čega bez modula nema. Prazna sekcija se
+ * ne iscrtava (`FaqStranica` odbacuje sekcije bez pitanja), pa nema šta da ostane.
+ *
  * 6 i 84 su ISTO pitanje („Mogu li se maloletnici registrovati?") sa dva odgovora,
  * i tačno jedan od njih se prikazuje. Odgovor ne može da bude jedan tekst: dok je
  * modul ugašen istinit odgovor je „ne", a dok radi „da, od sedme godine". Zato se
@@ -121,7 +125,7 @@ export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
  */
 export const FAQ_SAKRIVENA_PITANJA: number[] = [
   ...(POKROVITELJSTVO_AKTIVNO ? [] : [24, 25]),
-  ...(MODUL_DECA_AKTIVAN ? [6] : [84]),
+  ...(MODUL_DECA_AKTIVAN ? [6] : [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95]),
 ];
 
 /**

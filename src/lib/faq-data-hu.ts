@@ -358,6 +358,151 @@ Amikor álnevet váltasz, az előzményekben szereplő összes tranzakciód az �
     ],
   },
   {
+    id: "deca",
+    naslov: "Gyerekek és szülők",
+    pitanja: [
+      {
+        id: 85,
+        pitanje: `Hány éves kortól lehet a gyereknek fiókja, és hogyan nyílik meg?`,
+        odgovor: `Az alsó határ hét év. A fiók kétféleképpen nyitható meg.
+
+Az első: te nyitod meg a saját fiókodból. A fiók azonnal működik, és te felelsz azért, amit a gyerek közzétesz.
+
+A második: a gyerek maga nyitja meg, és megadja a te e-mail-címedet. Ekkor üzenet érkezik hozzád, amelyben átveheted a fiókot, jelezheted, hogy nem a te gyereked, vagy törölheted a fiókot. Az utóbbi két művelet a platformra való belépés nélkül is elvégezhető, mert a címedet bárki beírhatja. Az üzenetben csak a gyerek álneve szerepel, név soha.
+
+Az üzenetben lévő hivatkozás hét napig érvényes. Ha a fiókot tizennégy napon belül senki nem veszi át, törlődik. Ha az üzenet nem érkezett meg, a gyereknek a profiljában van egy hatjegyű kód, amelyet a hivatkozás helyett megadhatsz.
+
+A születési dátumot te írod be, az átvételkor. Ellenőrizd megerősítés előtt, mert a beírás után nem módosítható, és tőle függ, mikor válik a fiók nagykorúvá.
+
+Amíg átvételre vár, a gyereknek van profilja és köthet barátságokat, de nincs Csevegőszobája, üzenetei és hirdetései. Az átvétel után mindez működik.`,
+      },
+      {
+        id: 86,
+        pitanje: `Nem vagyok a KOLO tagja. Átvehetem a gyerekem fiókját?`,
+        odgovor: `Átveheted. Az eljárás három lépésből áll.
+
+1. Nyisd meg a saját fiókodat. Az üzenetben lévő hivatkozás egyenesen a regisztrációhoz vezet.
+
+2. Vedd át a gyereket. Ettől a pillanattól a gyereknek minden működik: a Csevegőszoba, az üzenetek, a hirdetések és a barátságok. Te és a gyerek ettől kezdve átírtok egymásnak POEN-t.
+
+3. Kérd meg azt, aki személyesen ismer, hogy erősítsen meg téged. A megerősítést a saját fiókodból kéred, és egy is elég.
+
+A harmadik lépésig a gyereknek nem rögzül POEN a barátságokból. A barátságok addig is létrejönnek és rögzülnek, a bejegyzés pedig azon a napon hajtódik végre, amikor rendes taggá válsz.`,
+      },
+      {
+        id: 87,
+        pitanje: `Mindkét szülőnek lehet hozzáférése?`,
+        odgovor: `Lehet. A második szülő ugyanazon az úton lép be, mint az első, és ugyanazokat a jogosultságokat kapja: ugyanazt a betekintést, ugyanazt a törlést és ugyanazokat a kapcsolókat. Ez azt is jelenti, hogy kettejük közül bármelyik egyedül törölheti a gyerek fiókját.
+
+A gyereknek elég, ha az egyik szülő rendes tag, hogy POEN rögzüljön neki.`,
+      },
+      {
+        id: 88,
+        pitanje: `Megközelítheti-e felnőtt a gyerekemet?`,
+        odgovor: `A beállításaidtól függetlenül a következő érvényes. A gyerek profilját be nem jelentkezett látogató nem látja. A gyerek nem jelenik meg sem a hírfolyamban, sem a tagkeresésben. Barátság kizárólag QR-kód személyes beolvasásával jön létre, a kód öt percig él, és nincs olyan száma, amelyet telefonon be lehetne diktálni, így barátság távolról nem köthető.
+
+A felnőttekkel folytatott beszélgetést kizárólag a gyerek profiljában lévő szülői kapcsoló nyitja meg. Amíg ki van kapcsolva, felnőtt nem írhat a gyereknek.
+
+Ha bekapcsolod, három szabály érvényes:
+
+• te olvasod azt a beszélgetést, de nem írsz bele;
+
+• a nagykorú beszélgetőpartner számára látható felirat jelzi, hogy a beszélgetést szülő olvassa;
+
+• értesítés az új beszélgetés első megkeresésekor érkezik hozzád, nem minden üzenetnél.
+
+A gyerek más gyerekekkel folytatott beszélgetéseit nem olvasod. Erről a következő kérdésben.`,
+      },
+      {
+        id: 89,
+        pitanje: `Mit látok a gyerekem fiókjából?`,
+        odgovor: `A betekintésed kiterjed:
+
+• a barátok listájára, a barátságkötés dátumaival;
+
+• a beszélgetések listájára, tehát kivel és mennyit, az üzenetek tartalma nélkül;
+
+• a POEN-átírások teljes előzményére;
+
+• minden hirdetésre, amelyet a gyerek közzétett.
+
+A gyerekek egymás közötti beszélgetéseit nem olvasod. Ennek oka, hogy minden ilyen beszélgetésben más gyereke is részt vesz, akinek a szülője a betekintéshez nem járult hozzá. Kivétel a gyerek és nagykorú személy beszélgetése, amelyet olvasol.
+
+A barátságokat nem hagyod jóvá. Személyesen, kód beolvasásával jönnek létre, te pedig értesítést kapsz és látod a listát.
+
+Bármikor eltávolíthatsz hirdetést, kikapcsolhatod a felnőttekkel folytatott beszélgetés kapcsolóját, és törölheted a fiókot.`,
+      },
+      {
+        id: 90,
+        pitanje: `Mi van, ha a gyerek nem megfelelő üzenetet kap?`,
+        odgovor: `Minden üzenet mellett ott a bejelentés gombja. A gyerek maga nyomja meg, kérdezés és várakozás nélkül.
+
+A bejelentés nem távolítja el az üzenetet. Jelzés az Alapítvány moderációjának, amely az üzenetet megvizsgálja, és eltávolítja, ha van rá alap. Ugyanazt az üzenetet minden felhasználó egyszer jelentheti be.`,
+      },
+      {
+        id: 91,
+        pitanje: `Felelek-e azért, amit a gyerek tesz?`,
+        odgovor: `Igen. Azért, amit a gyerek a platformon közzétesz és tesz, te felelsz.
+
+A felelősség arra terjed ki, ami nyilvános és amit láthatsz: a hirdetésekre, a POEN-átírásokra, a másokkal szembeni viselkedésre. Mindehhez van betekintésed és gombod is. Két gyerek magánbeszélgetése nem a te tereped, mert nem is csak a te gyerekedé.
+
+Bármikor eltávolíthatsz hirdetést, kikapcsolhatod a felnőttekkel folytatott beszélgetést, vagy törölheted a fiókot.`,
+      },
+      {
+        id: 92,
+        pitanje: `Hogyan szerez a gyerek POEN-t?`,
+        odgovor: `Háromféleképpen.
+
+Barátság. Minden megkötött barátságért 500-500 POEN rögzül mindkét gyereknek. A bejegyzés megvárja, hogy mindkét fiók aktív legyen, a fiók pedig akkor aktív, ha legalább az egyik szülő rendes tag. Amíg vár, mindkettőjüknél a „500 függőben" felirat áll. Ugyanazon szülő két gyerekének barátsága a szokásos módon jön létre és látszik a Csevegőszobában, de POEN-t nem hoz.
+
+Piac. A gyerek ugyanolyan feltételekkel ad fel hirdetéseket, mint a többi tag, és a cseréből származó POEN ugyanúgy rögzül neki.
+
+Átírás a szülőtől. Te és a gyerek mindkét irányban átírtok egymásnak POEN-t, feltétel és korlát nélkül; elég, hogy átvetted a fiókot. Az átírás nem hoz létre új POEN-t, hanem a meglévőt mozgatja.
+
+A POEN nem pénz, és a rendszeren kívül nincs értéke.`,
+      },
+      {
+        id: 93,
+        pitanje: `Mi történik, ha egy barátság megszűnik?`,
+        odgovor: `A barátságot csak gyerek bontja fel, a kettő közül bármelyik. Neked mint szülőnek ez a művelet nincs meg; marad a hirdetés eltávolítása, a felnőttekkel folytatott beszélgetés kapcsolója és a fiók törlése.
+
+Felbontáskor 500-500 POEN íródik le mindkét oldalról — attól is, aki felbontja, és attól is, aki nem. A megerősítés előtt figyelmeztetés áll erről, így a felbontás nem történik véletlenül.
+
+Ha ezt a POEN-t időközben elköltötték, a nyilvántartás mínuszba megy. Ez nem tartozás: semmit nem hajtanak be és nem követelnek vissza, az első beérkező POEN pedig feltölti.
+
+Ha a gyerekek később újra barátságot kötnek, a POEN újra rögzül.`,
+      },
+      {
+        id: 94,
+        pitanje: `Mi történik a tizennyolcadik születésnapon?`,
+        odgovor: `Az átmenetről egy hónappal korábban érkezik értesítés, a gyereknek és minden barátjának is. Magán a napon a következő történik.
+
+Érvénytelenné válik a barátságokkal szerzett POEN, barátságonként 500, amelyeknél a bejegyzés végrehajtásra került. A harminc ilyen barátsággal rendelkező gyerek 15.000 POEN-t veszít. A leírás a másik oldalt is érinti: mindegyik barátnál 500 íródik le azért a barátságért, és ezért nekik is megy értesítés. A felbontáshoz hasonlóan a nyilvántartás mínuszba mehet, és ez nem tartozás.
+
+A barátságok törlődnek. Helyüket a megerősítési lánc veszi át.
+
+A szülők megerősítik a gyereket a megerősítési láncban, fejenként egy megerősítéssel, illetve eggyel, ha mindketten ugyanabban a láncban vannak. A fiók ezzel nagykorúvá válik és teljes hozzáférést kap.
+
+A többi érintetlen marad: a POEN, amelyet a gyereknek átírtál, a Piacon folytatott cseréből származó POEN, a hirdetések és az előzmények megmaradnak.`,
+      },
+      {
+        id: 95,
+        pitanje: `Hogyan törlöm a gyerekem fiókját?`,
+        odgovor: `A gyerek fiókját bármikor törölheted a saját fiókodból.
+
+A törlés ugyanúgy hat, mint a barátság felbontása, csak egyszerre mindre. A törölt fiók minden barátjánál 500 POEN íródik le azért a barátságért. A felbontáshoz hasonlóan az ő nyilvántartásuk mínuszba mehet, és ez nem tartozás.
+
+Ha a saját fiókodat törlöd, és a gyereknek nincs bejegyzett második szülője, a gyerek fiókja is törlődik, ugyanazzal a következménnyel a barátaira nézve. Ha van második szülő, a gyerek fiókja megmarad, és hozzá kötődik.
+
+Ha olyan fiókról kaptál üzenetet, amelyet nem te nyitottál, és a gyerek nem a tiéd, abban az üzenetben két olyan művelet áll rendelkezésedre, amely nem igényel belépést a platformra: jelezni, hogy nem a te gyereked, és törölni a fiókot. A jelzés törlés nélkül meghagyja, hogy a fiók a határidő lejártáig továbbra is a te címedet használja, ezért a törlés biztonságosabb.
+
+Az a fiók, amelyet senki nem vesz át, tizennégy nap múlva magától törlődik.
+
+Minderről részletesebben a gyermekek részvételéről szóló szabályzat rendelkezik, a Szabályzat oldalon.`,
+      },
+    ],
+  },
+  {
     id: "programi",
     naslov: "A Protokoll programjai",
     pitanja: [
