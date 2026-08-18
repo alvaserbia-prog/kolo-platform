@@ -260,7 +260,7 @@ Why farming makes no sense:
 
 • The principle is one person, one account, and confirmation rests on personal acquaintance. You cannot invent people.
 
-• Whoever confirms someone who is not a real person loses those 1,000 POEN, and for abuse also loses the right to confirm anyone further.
+• Whoever confirms someone who is not a real person loses those 1,000 POEN, and for abuse loses the right to confirm anyone else and the right to take part in the network.
 
 • Contribution to exchange opens once per account and is not repeated.
 
@@ -320,7 +320,7 @@ The very first confirmation — an index of 10% — opens the main features: rec
 
 What is recorded. Once the confirmation is entered, the Protocol records 1,000 POEN for you and 1,000 for the person who confirmed you. If the confirmation is subject to supervision, the first supervisor to enter an outcome receives 500 POEN.
 
-Why a confirmation is worth something. Whoever confirms a person who is not real loses those 1,000 POEN — and if they have spent them in the meantime, a make-good remains on their ledger. On top of that they are subject to the measures in the Terms of Use, up to exclusion from the network. A confirmation therefore carries responsibility for someone else's identity and is not given lightly.`,
+Why a confirmation is worth something. Whoever confirms a person who is not real loses those 1,000 POEN — and if they have spent them in the meantime, a make-good remains on their ledger. On top of that a sanction follows: the loss of the right to confirm anyone else and — since a false confirmation is expressly listed in the Terms of Use as a grave violation — the loss of the right to take part in the network. A confirmation therefore carries responsibility for someone else's identity and is not given lightly.`,
       },
       {
         id: 8,

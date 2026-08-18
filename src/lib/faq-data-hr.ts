@@ -260,7 +260,7 @@ Zašto farmanje nema smisla:
 
 • Načelo je jedan čovjek — jedan račun, a potvrda počiva na osobnom poznanstvu. Ne možeš izmišljati ljude.
 
-• Tko potvrdi nekoga tko nije stvarna osoba, gubi tih 1.000 POEN, a za zlouporabu gubi i pravo dalje potvrđivati.
+• Tko potvrdi nekoga tko nije stvarna osoba, gubi tih 1.000 POEN, a za zlouporabu gubi pravo dalje potvrđivati druge i pravo na sudjelovanje u mreži.
 
 • Doprinos razmjeni otvara se jednom po računu i ne ponavlja se.
 
@@ -320,7 +320,7 @@ Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POEN-a kroz
 
 Što se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POEN tebi i 1.000 onome tko te je potvrdio. Ako potvrda podliježe nadzoru, prvi nadzornik koji upiše ishod dobiva 500 POEN.
 
-Zašto potvrda nešto vrijedi. Tko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to podliježe mjerama iz Uvjeta korištenja, do isključenja iz mreže. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
+Zašto potvrda nešto vrijedi. Tko potvrdi osobu koja nije stvarna, gubi tih 1.000 POEN — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to slijedi sankcija: gubitak prava dalje potvrđivati druge i, budući da je lažna potvrda Uvjetima korištenja izrijekom navedena kao teža povreda, gubitak prava na sudjelovanje u mreži. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
       },
       {
         id: 8,

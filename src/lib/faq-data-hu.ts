@@ -271,7 +271,7 @@ Miért nincs értelme a farmolásnak:
 
 • Az elv: egy ember — egy fiók, a megerősítés pedig személyes ismeretségen nyugszik. Embereket nem lehet kitalálni.
 
-• Aki olyasvalakit erősít meg, aki nem valódi személy, elveszíti azt az 1.000 POEN-t, visszaélés esetén pedig a további megerősítés jogát is.
+• Aki olyasvalakit erősít meg, aki nem valódi személy, elveszíti azt az 1.000 POEN-t, visszaélés esetén pedig a mások megerősítéséhez való jogát és a hálózatban való részvétel jogát is.
 
 • A cseréhez való hozzájárulás fiókonként egyszer nyílik meg, és nem ismétlődik.
 
@@ -331,7 +331,7 @@ Már az első megerősítés, tehát a 10%-os index, megnyitja a fő funkciókat
 
 Mi rögzül. Amikor a megerősítés bejegyzésre kerül, a Protokoll 1.000 POEN-t rögzít neked és 1.000-et annak, aki megerősített. Ha a megerősítés felügyelet alá esik, az első felügyelő, aki rögzíti a kimenetelt, 500 POEN-t kap.
 
-Miért ér valamit a megerősítés. Aki olyan személyt erősít meg, aki nem valódi, elveszíti azt az 1.000 POEN-t — és ha időközben elköltötte, pótlás marad a nyilvántartásán. Ezen felül a Felhasználási feltételekben szereplő intézkedések vonatkoznak rá, a hálózatból való kizárásig. A megerősítés ezért felelősséget hordoz más ember személyazonosságáért, és nem adják könnyelműen.`,
+Miért ér valamit a megerősítés. Aki olyan személyt erősít meg, aki nem valódi, elveszíti azt az 1.000 POEN-t — és ha időközben elköltötte, pótlás marad a nyilvántartásán. Ezen felül szankció következik: elveszíti a jogot, hogy másokat megerősítsen, és — mivel a hamis megerősítést a Felhasználási feltételek kifejezetten súlyos jogsértésként nevezik meg — elveszíti a hálózatban való részvétel jogát is. A megerősítés ezért felelősséget hordoz más ember személyazonosságáért, és nem adják könnyelműen.`,
       },
       {
         id: 8,
