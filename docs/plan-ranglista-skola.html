@@ -344,7 +344,7 @@
       <span>18. avgust 2026</span>
       <span>Osnov: Pravilnik o učešću dece 4.3.3</span>
       <span>Akti: 4.3.2 → <strong>4.3.3</strong></span>
-      <span>Stanje: sprovedeno, čeka spisak škola</span>
+      <span>Stanje: sprovedeno i uvezeno</span>
     </div>
   </header>
 
@@ -368,19 +368,25 @@
           <tr><td>Brisanje škole pri punoletstvu, gašenju i resetu naloga</td><td><span class="chip usvojeno">gotovo</span></td></tr>
           <tr><td>Prevodi na pet jezika</td><td><span class="chip usvojeno">gotovo</span></td></tr>
           <tr><td>Izmene akata, set podignut na 4.3.3</td><td><span class="chip usvojeno">gotovo</span></td></tr>
-          <tr><td><strong>Spisak škola sa brojem upisanih učenika</strong></td><td><span class="chip rizik">čeka</span></td></tr>
+          <tr><td><strong>Spisak škola sa brojem upisanih učenika</strong></td><td><span class="chip usvojeno">uvezeno — 1.285 osnovnih</span></td></tr>
+          <tr><td>Spisak srednjih škola</td><td><span class="chip rizik">čeka</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="note warn">
-      <span class="lbl">Šta tačno nedostaje</span>
-      <p>Potreban je izvoz <strong>ustanova</strong> iz Jedinstvenog informacionog sistema prosvete: naziv škole, mesto, tip (osnovna/srednja) i broj upisanih učenika. Dostavljeni skup podataka Republičkog zavoda za statistiku sadrži <strong>broj učenika po opštini</strong> — 205 teritorija, dvanaest školskih godina, po razredu i polu — ali <strong>nijedno ime škole</strong>. Iz njega se šifarnik ne može napraviti.</p>
-      <p>Uvoz je jedna komanda: <code>node scripts/uvezi-skole.mjs izvoz.csv</code>. Skripta sama prepoznaje uobičajene nazive kolona, odbija uvoz ako se neko mesto ne razrešava u spisak naselja, i ispiše koja mesta fale.</p>
-      <p><strong>Broj upisanih učenika je odvojiv od ostatka.</strong> Ako stigne spisak bez njega, lista po broju dece radi u celosti, a procentualna stoji sa crticom dok brojevi ne dođu — što je i predviđeno, jer se imenilac nikad ne procenjuje.</p>
+    <div class="note">
+      <span class="lbl">Uvoz je obavljen</span>
+      <p>Iz izvoza JISP-a („Osnovno obrazovanje — Odeljenja i razredi", školska 2025/2026) uvezeno je <strong>1.285 osnovnih škola sa 522.884 upisana učenika</strong>. Izvoz je po odeljenju, pa se broj učenika dobija sabiranjem; nijedna škola nije ostala bez tog broja, tako da procentualna lista radi u punom obimu.</p>
+      <p>Uz uvoz je <strong>spisak naselja proširen za 336 imena</strong> — sedišta škola kojih u popisnom spisku nije bilo. Blok širi zatečeni obim: dodata su i naselja sa Kosova i Metohije u kojima radi srpski obrazovni sistem, jer bez njih te škole ne bi mogle ni da uđu u šifarnik.</p>
     </div>
 
-    <p>Dok je spisak prazan, prikaz škola se ne renderuje, nijedan ekran ne puca i <strong>nijedan podatak o detetu se ne obrađuje</strong>. To je i razlog zašto su akti mogli da odu pre podataka, a ne obrnuto.</p>
+    <div class="note warn">
+      <span class="lbl">Srednjih škola još nema</span>
+      <p>Ovaj izvoz nosi tek četrdesetak srednjih škola — muzičke i baletske koje dele ustanovu sa osnovnom — a u Srbiji ih je oko petsto. Lista od četrdeset predstavljena kao „srednje škole u Srbiji" bila bi netačna, pa su izostavljene.</p>
+      <p>Do izvoza srednjeg obrazovanja nacionalna lista srednjih škola stoji prazna, a <strong>dete u srednjoj školi svoju školu ne može da izabere</strong>. Uvoz je tada jedna komanda: <code>node scripts/uvezi-skole.mjs izvoz.csv</code>.</p>
+    </div>
+
+    <p>Akti su otišli pre podataka, a ne obrnuto — dok je spisak bio prazan, prikaz se nije renderovao i nijedan podatak o detetu se nije obrađivao. Sada kanal radi u punom obimu za osnovne škole.</p>
   </section>
 
   <!-- ============ 00 ============ -->

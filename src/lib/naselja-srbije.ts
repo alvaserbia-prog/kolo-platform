@@ -925,6 +925,69 @@ const RAW: string[] = [
   "Temerin", "Bački Jarak", "Sirig",
   // Opština Titel (6)
   "Titel", "Vilovo", "Gardinovci", "Lok", "Mošorin", "Šajkaš",
+  // ── Naselja iz izvoza JISP-a (2025/2026) ────────────────────────────────
+  // Sedišta osnovnih škola kojih nije bilo u popisnom spisku iznad — uglavnom
+  // sela i prigradska naselja. Dodata su zato što škola čije mesto ne pogađa
+  // nijedno naselje tiho ispada iz svega što se kači na lokaciju, a na listi
+  // škola i dalje stoji (vidi `scripts/uvezi-skole.mjs`).
+  //
+  // 🔴 Ovaj blok širi zatečeni obim spiska: gornji deo je popis 2022 BEZ KiM, a
+  // ovde su i naselja sa Kosova i Metohije u kojima radi srpski obrazovni sistem
+  // (Kosovska Mitrovica, Banjska, Babin Most i druga). Bez njih te škole ne bi
+  // mogle ni da uđu u šifarnik, pa ni deca iz njih da izaberu svoju školu.
+  //
+  // 🟡 Nova naselja NEMAJU koordinate u `naselja-koordinate.ts`, pa im udaljenost
+  // na Pijaci ostaje neizračunata dok se koordinate ne dopune. Ništa ne puca —
+  // `koordinateZaMesto` vraća null, kao i za druga naselja bez koordinata.
+  "Aleksandrovo", "Aleksinački Rudnik", "Babin Most", "Badovinci", "Baljevac", "Banatski Brestovac",
+  "Banatsko Veliko Selo", "Banjani", "Banjska", "Bare", "Bašaid", "Belanovica", "Beli Potok",
+  "Belo Blato", "Belo Polje", "Belosavci", "Belušić", "Bečmen", "Biljača", "Bivolje",
+  "Blaževo", "Bobova", "Bogojevce", "Borča", "Bostane", "Bočar", "Bošnjace", "Božetići",
+  "Boževac", "Božica", "Bradarac", "Brankovina", "Bratljevo", "Brekovo", "Brezova",
+  "Brnjak", "Brod", "Brzi Brod", "Bunar", "Cerevajka", "Cernica", "Cerovac", "Crkolez",
+  "Crkvena Vodica", "Crkvine", "Crnotince", "Crvena Reka", "Darosava", "Debrc", "Dedevci",
+  "Delimeđe", "Desimirovac", "Devići", "Deževa", "Divci", "Donja Borina", "Donja Brnjica",
+  "Donja Gušterica", "Donja Lopušnja", "Donja Mutnica", "Donja Trepča", "Donja Trnava",
+  "Donja Šatornja", "Donje Leskovice", "Donji Bučumet", "Donji Krčin", "Donji Ribnik",
+  "Donji Stajevac", "Dragaš", "Draginac", "Dračić", "Dubovac", "Duga Poljana", "Dušanovac",
+  "Dvorane", "Džep", "Farkaždin", "Gabrovac", "Glibovac", "Godačica", "Gojbulja",
+  "Golobok", "Goraždevac", "Gornja Rapča", "Gornja Trnava", "Gornje Kusce", "Gornji Matejevac",
+  "Gornji Prisjan", "Gornji Stepoš", "Gotovuša", "Grace", "Gračanica", "Grebenac",
+  "Grošnica", "Guča (varošica)", "Hajdučica", "Hum", "Istočni Mojstir", "Ivanje",
+  "Ivanovo", "Jadranska Lešnica", "Janjevo", "Jasenovik", "Kamenica", "Kaona", "Karan",
+  "Kasidoli", "Katići", "Kladnica", "Klek", "Klenike", "Klenje", "Klokot", "Klupci",
+  "Kobišnica", "Kololeč", "Konak", "Konjuh", "Korbevac", "Korbovo", "Koretište",
+  "Kosovo Polje", "Kosovska Kamenica", "Kosovska Mitrovica", "Kostojevići", "Kovačevac",
+  "Kovilje", "Krajišnik", "Kratovo", "Krepoljin", "Krupanj", "Kruševo", "Kuzmin",
+  "Kušići", "Kuštilj", "Laplje Selo", "Latvica", "Laznica", "Lađevci", "Lece", "Lepina",
+  "Leposavić", "Leskova", "Lešak", "Lešnica", "Lipljan", "Lipnički Šor", "Ljuberađa",
+  "Lokve", "Loćika", "Lugavčina", "Lukare", "Majilovac", "Mala Krsna", "Mala Plana",
+  "Mali Jasenovac", "Manojlovce", "Maršić", "Mačkat", "Melnica", "Metlić", "Međurečje",
+  "Miljkovac", "Miloševac", "Miratovac", "Miroševce", "Mokrin", "Mudrakovac", "Natalinci",
+  "Nesalce", "Neuzina", "Niška Banja", "Novi Karlovci", "Novo Selo", "Obilić", "Orahovac",
+  "Oraovica", "Oreškovica", "Orlovat", "Osaonica", "Osipaonica", "Osojane", "Ostružnica",
+  "Ovča", "Padež", "Padinska Skela", "Paralovo", "Parteš", "Pasjane", "Pecka", "Petrovaradin",
+  "Pečenjevce", "Plažane", "Plemetina", "Pločica", "Podgorac", "Podujevo", "Podvrška",
+  "Popovac", "Požega", "Pranjani", "Prekovce", "Prijevor", "Prilužje", "Radalj",
+  "Radinac", "Radljevo", "Radojevo", "Radovnica", "Rajac", "Rajince", "Rajković",
+  "Rajčinoviće", "Ralja", "Ranilović", "Ranilug", "Ranovac", "Rataje", "Ratari",
+  "Razbojna", "Rašanac", "Raždaginja", "Reljan", "Restelica", "Ribare", "Ribariće",
+  "Ripanj", "Rogačica", "Rudna Glava", "Rušanj", "Salaš", "Samaila", "Samoš", "Sedlare",
+  "Selevac", "Seljašnica", "Sevce", "Sirča", "Sićevo", "Skobalj", "Skorenovac", "Skržuti",
+  "Sočanica", "Srednjevo", "Sremska Kamenica", "Sremčica", "Stalać", "Stari Banovci",
+  "Stojnik", "Stopanja", "Stragari", "Strelac", "Strezovce", "Stubal", "Sumrakovac",
+  "Supnje", "Sušica", "Svođe", "Tegošnica", "Tekeriš", "Tekija", "Tibužde", "Tomaševac",
+  "Trgovište", "Trnjane", "Tubravić", "Tulare", "Tupale", "Turekovac", "Ugljare",
+  "Uljma", "Umka", "Umčari", "Urovica", "Varda", "Velika Grabovnica", "Velika Greda",
+  "Velika Hoča", "Velika Krsna", "Velika Moštanica", "Velika Reka", "Veliki Crljeni",
+  "Veliki Kupci", "Veliki Popović", "Veliki Trnovac", "Veliki Šiljegovac", "Veliko Bonjince",
+  "Veliko Gradište", "Veliko Laole", "Veliko Ropotovo", "Veliko Trnjane", "Vinarce",
+  "Vitanovac", "Vitina", "Vitkovac", "Vitoševac", "Viča", "Vladimirovac", "Vlajkovci",
+  "Vlaole", "Vlase", "Vlasina Okruglica", "Vodanj", "Vojka", "Vojska", "Vraneši",
+  "Vranište", "Vranjska Banja", "Vranovo", "Vračev Gaj", "Vražogrnac", "Vrba", "Vrnjci",
+  "Vrtogoš", "Vrčin", "Zablaće", "Zubin Potok", "Zupče", "Zvečan", "Zvonce", "Čibutkovica",
+  "Čitluk", "Čokot", "Čumić", "Šetonje", "Šilovo", "Šišave", "Štavalj", "Štrpce",
+  "Štubik", "Žabare", "Žbevac", "Žerovnica", "Žitkovac", "Žitni Potok", "Žiča",
 ];
 
 // Dedupliciraj i sortiraj po abecedi (srpska latinica)
