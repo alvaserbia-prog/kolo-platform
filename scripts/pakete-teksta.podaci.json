@@ -1,0 +1,181 @@
+{
+  "OPIS": {
+    "javneKomponente": "Zaglavlje, meni i futer javnog dela sajta (vidi ih svaki posetilac, na svakoj stranici).",
+    "pravne": "Stranice akata — naslovi, verzijske oznake, opisi svakog pravilnika na `/pravilnik`.",
+    "cestoPage": "Omotač stranice „Često postavljena pitanja“ (sama pitanja su već prepravljena).",
+    "pokroviteljPage": "Javna stranica `/pokrovitelji` — spisak pokrovitelja.",
+    "osnivackiDoprinosPage": "Javna stranica `/osnivacki-doprinos` — transparentnost osnivačkog kanala.",
+    "zajednickoDobroPage": "Javna stranica `/zajednicko-dobro` — licence, DCO, otvoreni kod.",
+    "kolacici": "Traka za pristanak na kolačiće.",
+    "seo": "Naslov i opis sajta u rezultatima pretrage i pri deljenju linka.",
+    "login": "Ekran prijave.",
+    "registracija": "Ekran registracije.",
+    "zaboravljenaLozinka": "Ekran „zaboravio sam lozinku“.",
+    "resetLozinka": "Ekran za postavljanje nove lozinke iz mejla.",
+    "oauthDovrsi": "Ekran posle prijave preko Google naloga — izbor pseudonima.",
+    "dobrodosli": "Vodič kroz sistem, otvara se sam pri prvoj prijavi. Prvo što nov čovek pročita.",
+    "nav": "Stavke bočnog menija.",
+    "header": "Gornja traka u aplikaciji.",
+    "common": "Dugmad i reči koje se ponavljaju svuda (Sačuvaj, Otkaži, Učitavanje…).",
+    "pocetna": "Ekran „Početna“ — vesti Fondacije i Pričaonica.",
+    "pijaca": "Pijaca — spisak oglasa, pojedinačan oglas, obrazac za nov oglas, moji oglasi.",
+    "profil": "Profil — sopstveni (podešavanja) i tuđi (javni prikaz).",
+    "novcanik": "Ekran POEN — stanje, istorija, obrazac za prepis, putanja doprinosa razmeni.",
+    "verifikacija": "Ekran „Potvrde“ — QR kod, skener, indeks stvarnosti, lanac potvrda.",
+    "graf": "Mreža potvrda — prikaz grafa.",
+    "nadzor": "Ekran nadzora (vide ga nosioci ZRNA) — ishodi nadzora nad potvrdama.",
+    "transakcije": "Nazivi vrsta zapisa u istoriji POEN-a.",
+    "poruke": "Razgovori jedan na jedan.",
+    "prijavaPoruke": "Obrazac za prijavu poruke (i u dečjoj i u odrasloj Pričaonici).",
+    "tablaJemstva": "Stranica koja objašnjava da je Tabla jemstva ukinuta i šta ju je zamenilo.",
+    "sistem": "Ekran „Sistem“ — brojevi sistema, članovi, opticaj, sredstva Fondacije.",
+    "zrno": "Ekran ZRNO — upis, otpis, obračunski koeficijent, delegiranje glasova.",
+    "programi": "Socijalni programi — prijava, potvrde iz lanca.",
+    "doprinosOglasi": "Operativni doprinos — zadaci za zajedničko dobro, prijava, evidencija izvršenja.",
+    "donacije": "Donacije Fondaciji — iznosi, nivoi, plaćanje.",
+    "postaniPokrovitelj": "Prijava za pokroviteljstvo (pravna lica i preduzetnici) — ugovor, potpis.",
+    "glasanje": "Gornje Kolo — predlozi, glasanje, registar odluka.",
+    "krug": "Krugovi (modul je trenutno ugašen, tekst ostaje za povratak).",
+    "politikaPrihvati": "Ekran pristanka na izmenjene akte (trenutno ugašen prekidačem).",
+    "pravilnikPrihvati": "Ekran pristanka na Pravilnik.",
+    "odjavaObavestenja": "Stranica za odjavu sa mejlova, otvara se iz podnožja poruke.",
+    "bagovi": "Prijava greške u aplikaciji.",
+    "push": "Traka koja nudi uključivanje obaveštenja na telefonu.",
+    "pojam": "Objašnjenje pojma na dodir (tooltip).",
+    "notifikacije": "Tekst svakog obaveštenja — isti tekst ide u zvonce, na telefon i u mejl.",
+    "mejl": "Omotač mejla — pozdrav, potpis, dugme, podnožje, link za odjavu.",
+    "greske": "Sve poruke koje se pojave kad nešto ne uspe — i na ekranu i iz API-ja.",
+    "deca": "Modul Deca — roditeljski pregled, profil deteta, potvrde.",
+    "decjaPocetna": "Početni ekran koji vidi dete.",
+    "detePoziv": "Poziv roditelju da preuzme nalog deteta (stranica iz mejla).",
+    "registracijaDeteta": "Registracija deteta koje se prijavljuje samo.",
+    "prijatelji": "Prijateljstva dece — QR kod, spisak, raskid.",
+    "admin": "Admin panel — vide ga samo članovi Upravnog odbora."
+  },
+  "ZAKLJUCANI": {
+    "header.upisi_poen": "mora nositi koren „prepis“ (ne „upis“)",
+    "profil.upisi_poen": "mora nositi koren „prepis“ (ne „upis“)",
+    "novcanik.posalji_poen": "mora nositi koren „prepis“ (ne „upis“)",
+    "novcanik.send_naslov": "mora nositi koren „prepis“ (ne „upis“)",
+    "novcanik.send_dugme": "mora nositi koren „prepis“ (ne „upis“)",
+    "novcanik.send_napomena": "definiciona rečenica — mora postojati i objašnjavati da prepis ne stvara nove POEN-e"
+  },
+  "PAKETI": [
+    [
+      "A",
+      "Javna površina i ulaz",
+      "Sve što čovek pročita PRE nego što ima nalog, plus sami ekrani za prijavu i registraciju. Ovo je jedini tekst koji odlučuje da li će uopšte otvoriti nalog.",
+      [
+        "javneKomponente",
+        "pravne",
+        "cestoPage",
+        "pokroviteljPage",
+        "osnivackiDoprinosPage",
+        "zajednickoDobroPage",
+        "kolacici",
+        "seo",
+        "login",
+        "registracija",
+        "zaboravljenaLozinka",
+        "resetLozinka",
+        "oauthDovrsi"
+      ]
+    ],
+    [
+      "B",
+      "Prvi dani člana",
+      "Ono što nov čovek vidi prvih dana: vodič koji se sam otvara, meni, Pijaca i profil. Po odluci vlasnika, prvi potez novog člana je objava oglasa na Pijaci — tekst treba da ga vodi tamo, a ne u brojeve sistema.",
+      [
+        "dobrodosli",
+        "nav",
+        "header",
+        "common",
+        "pocetna",
+        "pijaca",
+        "profil"
+      ]
+    ],
+    [
+      "C1",
+      "POEN i potvrde",
+      "Jezgro svakodnevnog rada: ekran POEN (stanje, prepis, istorija) i ekran Potvrde (lanac potvrda, indeks stvarnosti). Ovde su i najstroža pravila o rečima.",
+      [
+        "novcanik",
+        "verifikacija",
+        "graf",
+        "nadzor",
+        "transakcije",
+        "poruke",
+        "prijavaPoruke",
+        "tablaJemstva"
+      ]
+    ],
+    [
+      "C2",
+      "Zajedničko dobro",
+      "Ekrani do kojih se dolazi kroz padajuću grupu „Zajedničko dobro“: Sistem, ZRNO, Programi, Doprinos, Donacije, Pokroviteljstvo, Glasanje, Krugovi.",
+      [
+        "sistem",
+        "zrno",
+        "programi",
+        "doprinosOglasi",
+        "donacije",
+        "postaniPokrovitelj",
+        "glasanje",
+        "krug"
+      ]
+    ],
+    [
+      "C3",
+      "Pristanci i sitni ekrani",
+      "Manji ekrani koji se retko otvaraju, ali se čitaju pažljivo kad se otvore.",
+      [
+        "politikaPrihvati",
+        "pravilnikPrihvati",
+        "odjavaObavestenja",
+        "bagovi",
+        "push",
+        "pojam"
+      ]
+    ],
+    [
+      "D",
+      "Obaveštenja i mejlovi",
+      "Tekst svakog obaveštenja. Isti tekst ide na tri mesta — u zvonce u aplikaciji, kao poruka na telefon i kao mejl — pa mora da radi i kad se čita sam, bez ekrana oko sebe. Naslov je ono što se vidi na zaključanom telefonu.",
+      [
+        "notifikacije",
+        "mejl"
+      ]
+    ],
+    [
+      "E",
+      "Poruke o greškama",
+      "Sve što se kaže čoveku kad nešto ne uspe. Ovo je tekst koji se čita najpažljivije, jer se pojavljuje u trenutku kad je čovek zbunjen ili ljut. Svaka poruka treba da kaže ŠTA se desilo i ŠTA sad da uradi — ne samo da je nešto zabranjeno.",
+      [
+        "greske"
+      ]
+    ],
+    [
+      "F",
+      "Modul Deca",
+      "Ekrani koje vide deca (od 7 godina) i njihovi roditelji. Modul stoji iza prekidača i još nije pušten u rad. Tekst za dete mora biti razumljiv sedmogodišnjaku; tekst za roditelja mora jasno reći šta roditelj vidi, a šta NE vidi.",
+      [
+        "deca",
+        "decjaPocetna",
+        "detePoziv",
+        "registracijaDeteta",
+        "prijatelji"
+      ]
+    ],
+    [
+      "G",
+      "Admin panel",
+      "Vide ga samo članovi Upravnog odbora Fondacije. Poslednji po redu jer ga ne vidi nijedan član. NAPOMENA: 88 ovih ključeva je u engleskom, ruskom i mađarskom ostalo na srpskom — nisu prevedeni, samo prekopirani.",
+      [
+        "admin"
+      ]
+    ]
+  ],
+  "PRAVILA": "## Tvrda pravila — reči koje se NE smeju pojaviti\n\nOva pravila čuvaju automatske provere u kodu; tekst koji ih prekrši obara build.\nNisu stilske preference nego posledice odluka koje su već donete.\n\n**1. Nigde „verifikacija“, „verifikovan“, „verifikator“.**\nNa ekranu se govori o **potvrdi**: *potvrdi nekoga koga poznaješ*, *lanac potvrda*,\n*mreža potvrda*. Razlog: akt meri odgovornost i tamo reč mora da nosi težinu, a ekran\ngovori čoveku — a poznavanje je osnov instituta, ne njegovo ime.\n🔴 **Imenica za ulogu se NE uvodi.** „Potvrđivač potvrđuje“ muca. Umesto nje imenuj\npravu ulogu: **„tvoj lanac“**, **„nosilac ZRNA“**, **„onaj ko te je potvrdio“**.\n\n**2. Statusi članova imaju imena, ne trpne prideve:**\n> posetilac → **nov član** → **redovan član** → **nosilac ZRNA**\n\nNikad „neverifikovan“, „nepotvrđen“, „nepunopravan“. **Nov član JESTE član** — ima nalog,\nobjavljuje ponude, prima POEN, odgovara na poruke. Ceo red je bez ijedne negacije.\n*Izuzetak:* pečat preko fotografije na Pijaci ostaje **„BEZ POTVRDE“** — on radi zaštitni\nposao prema kupcu, a „NOV“ bi rekao samo da je čovek skoro došao.\n\n**3. Nigde „novčanik“** (ni `wallet`, ни `кошелёк`, ni `pénztárca`).\nEkran se zove **POEN**. Novčanik je posuda za novac, a POEN postoji isključivo kao zapis\nu Protokolu — nema nosioca i ne drži se. U rečenicama se kaže **„tvoj zapis“**\n(*„prepisano u tvoj zapis“*), ne ime ekrana.\n\n**4. UPIS i PREPIS nisu isto — ovo je najlakše pogrešiti.**\n- **UPIS** = POEN *nastaje*. Protokol ide u minus za isti iznos, ukupan broj POEN-a raste.\n  Tako rade kanali (potvrda, donacija, program, prvi oglas) i tako radi **upis ZRNA**.\n- **PREPIS** = POEN se *ne stvara*. Jedan zapis se umanjuje, drugi uvećava, zbir isti.\n  Tako radi prenos između dva člana.\n\nUz obrazac za prepis stoji definiciona rečenica koja **ne sme da nestane**:\n*„Prepis ne stvara nove POEN-e: tvoj zapis se umanjuje za onoliko za koliko se njegov\nuvećava.“* Bez nje reč „prepis“ vuče na dva pogrešna čitanja — *prepisati kuću* (prenos\nsvojine) i *prepisati* kao napraviti kopiju.\n\n**5. POEN nije novac.** Nema „plaćanja“, „kupovine“, „cene u POEN-ima“, „slanja i primanja\nPOEN-a“, „stanja na računu“. POEN je interna obračunska jedinica kojom se evidentira\ndoprinos — analogija je zapis u matičnoj knjizi. Ne predstavlja potraživanje prema\nFondaciji i ne nasleđuje se.\n\n**6. Ukinuti instituti se ne pominju:** „tabla jemstva“, „kartica prepoznavanja“,\n„lanac jemstva“, „jemac“, „graf jemstva“. Tabla je ukinuta 2026-08-09; put do potvrde\nsada vodi kroz oglas na Pijaci.\n\n**7. Rok od 15 dana za izmenu akata je UKINUT.** Akti stupaju na snagu danom donošenja,\nobaveštenje ide bez odlaganja. Ne vraćati ga ni u jednu rečenicu.\n*(Rok od 15 dana za prigovor na isključenje je drugi institut i ostaje.)*\n\n**8. Pravo ime se ne prikazuje nigde** — u sistemu se ljudi vide po pseudonimu.\n\n**9. Za socijalni program dovoljna je JEDNA potvrda** (indeks 10%), ne svih deset.\nAko negde piše „svih deset verifikatora“ — to je zastarelo.\n\n**10. Krugovi su trenutno ugašeni**, pokroviteljstvo radi. Ako tekst obećava Krugove kao\nnešto što postoji, prijavi to umesto da prepravljaš.\n\n## Šta se NE dira\n\n- **`{parametri} u vitičastim zagradama`** — to su vrednosti koje kod ubacuje\n  (`{pseudonim}`, `{iznos}`, `{broj}`). Ime unutar zagrada se prepisuje **doslovno**;\n  promenjeno ime znači da se rečenica ne sklopi i čovek vidi praznu rupu.\n- **Ključevi** (`novcanik.send_naslov`) — to su adrese u kodu, ne tekst.\n- **Ključevi označeni sa 🔒** — uz njih piše zašto.\n- **HTML oznake** ako ih ima (`<b>`, `<br/>`) — ostaju kako jesu.\n\n## Kako se piše\n\n- Srpski, latinica. Tekst se automatski preslovljava u ćirilicu, pa **ako uvodiš stranu\n  reč koja u ćirilici izgleda pogrešno** (tipa *freelancer*), napomeni to posebno.\n- Obraćanje na **ti** — tako je već svuda u aplikaciji.\n- Kratko. Dugmad su 1–3 reči, poruke jedna rečenica, objašnjenja najviše dve-tri.\n- Reci šta čovek DOBIJA ili šta SAD da uradi, ne šta mu je zabranjeno.\n\n## Šta da vratiš\n\nVrati **samo JSON** sa punim ključevima i novim tekstom — bez ostalih objašnjenja u\nistom bloku. Ključeve koje ne menjaš **izostavi**:\n\n```json\n{\n  \"novcanik.send_naslov\": \"Prepiši POEN\",\n  \"pijaca.prazno\": \"Ovde još nema oglasa. Tvoj može biti prvi.\"\n}\n```\n\nAko naiđeš na tekst koji je **činjenično netačan** ili obećava nešto što sistem ne radi —\nnapiši to **ispod JSON bloka**, u posebnom spisku. To je vrednije od same prepravke.\n",
+  "KONTEKST": "## Šta je KOLO\n\nAlternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru.\nNije novčani sistem i namerno izbegava rečnik novca. Vodi ga **KOLO Fondacija**;\nsoftver se zove **Protokol**.\n\nDve interne jedinice:\n- **POEN** — beleži doprinos i učešće. Postoji samo kao zapis u Protokolu, izražava se\n  celim brojevima, nema nosioca. **Nije** novac, valuta, platno sredstvo, digitalna\n  imovina ni hartija od vrednosti; ne nasleđuje se.\n- **ZRNO** — beleži položaj člana; iz aktiviranog ZRNA proizlazi glas u **Gornjem Kolu**\n  (telo koje odlučuje glasanjem).\n\nZbir svih zapisa, uključujući Protokol, uvek je **nula**: kad POEN nastane, Protokol ide\nu minus za isti iznos.\n\n**Statusi** (u interfejsu): posetilac → **nov član** → **redovan član** → **nosilac ZRNA**.\nIz statusa u status se prelazi **potvrdom** — čovek koji te lično poznaje potvrdi da\npostojiš. Deset potvrda čini pun **indeks stvarnosti** (100%); za pun pristup dovoljno je\n**10%**, dakle jedna potvrda.\n\n**Pijaca** je prostor za oglase (ponuda i potražnja dobara i usluga). Pregled oglasa je\njavan; postavljanje ponude može i nov član, a kontakt i pokretanje razgovora samo redovan.\n"
+}
