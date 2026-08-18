@@ -2096,7 +2096,7 @@
     "emisija_nema_clanova": "No members to enter the term",
     "emisija_iznos_label": "Iznos donacije (RSD)",
     "emisija_pseudonim_obavezan": "Pseudonim je obavezan.",
-    "emisija_iznos_nevalidan": "Unesite pozitivan iznos.",
+    "emisija_iznos_nevalidan": "Enter a positive amount.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Recorded: {poen} POEN · Level {nivo}",
     "emisija_prag_nedostignut": "Threshold not reached — no POEN recorded",

@@ -2096,7 +2096,7 @@
     "emisija_nema_clanova": "Nema članova za uneti pojam",
     "emisija_iznos_label": "Iznos donacije (RSD)",
     "emisija_pseudonim_obavezan": "Pseudonim je obavezan.",
-    "emisija_iznos_nevalidan": "Unesite pozitivan iznos.",
+    "emisija_iznos_nevalidan": "Unesi pozitivan iznos.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Evidentirano: {poen} POEN · Nivo {nivo}",
     "emisija_prag_nedostignut": "Prag nije dostignut — nema evidencije POEN-a",

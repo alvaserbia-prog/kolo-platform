@@ -22,52 +22,60 @@ export type EkranTekst = {
 
 type Skup = Record<EkranJezik, EkranTekst>;
 
-/** Pad sistema — neplanirani prekid (greška u renderu, baza nedostupna…). */
+/**
+ * Pad sistema — NEPLANIRAN prekid (greška u renderu, baza nedostupna…).
+ *
+ * 🔴 Tekst mora da se razlikuje od `ODRZAVANJE`. Do 2026-08-18 su oba ekrana
+ * imala istu oznaku („Radovi u toku") i skoro isti naslov, pa se kvar
+ * predstavljao kao planiran rad — a nije istina i čovek nema šta da čeka.
+ * Ovde se kaže da je došlo do greške; „radovi u toku" ostaje samo tamo gde
+ * radovi zaista teku.
+ */
 export const PAD_SISTEMA: Skup = {
   sr: {
-    oznaka: "Radovi u toku",
-    naslov: "Radimo na sistemu",
-    telo: "Implementacija KOLO sistema je u toku i ovaj deo trenutno nije dostupan.",
+    oznaka: "Greška",
+    naslov: "Nešto nije u redu",
+    telo: "Došlo je do greške i ovaj deo trenutno nije dostupan.",
     dopuna: "Pogledaj ponovo malo kasnije. Tvoji zapisi su bezbedni.",
     dugme: "Pokušaj ponovo",
     pocetna: "Na početnu",
   },
   "sr-Cyrl": {
-    oznaka: "Радови у току",
-    naslov: "Радимо на систему",
-    telo: "Имплементација КОЛО система је у току и овај део тренутно није доступан.",
+    oznaka: "Грешка",
+    naslov: "Нешто није у реду",
+    telo: "Дошло је до грешке и овај део тренутно није доступан.",
     dopuna: "Погледај поново мало касније. Твоји записи су безбедни.",
     dugme: "Покушај поново",
     pocetna: "На почетну",
   },
   en: {
-    oznaka: "Work in progress",
-    naslov: "We are working on the system",
-    telo: "Implementation of the KOLO system is under way and this part is temporarily unavailable.",
+    oznaka: "Error",
+    naslov: "Something went wrong",
+    telo: "An error occurred and this part is temporarily unavailable.",
     dopuna: "Check back a little later. Your records are safe.",
     dugme: "Try again",
     pocetna: "Home page",
   },
   ru: {
-    oznaka: "Идут работы",
-    naslov: "Мы работаем над системой",
-    telo: "Внедрение системы KOLO продолжается, и этот раздел временно недоступен.",
+    oznaka: "Ошибка",
+    naslov: "Что-то пошло не так",
+    telo: "Произошла ошибка, и этот раздел временно недоступен.",
     dopuna: "Загляни немного позже. Твои записи в безопасности.",
     dugme: "Попробовать снова",
     pocetna: "На главную",
   },
   hr: {
-    oznaka: "Radovi u tijeku",
-    naslov: "Radimo na sustavu",
-    telo: "Implementacija KOLO sustava je u tijeku i ovaj dio trenutno nije dostupan.",
+    oznaka: "Greška",
+    naslov: "Nešto nije u redu",
+    telo: "Došlo je do greške i ovaj dio trenutno nije dostupan.",
     dopuna: "Pogledaj ponovno malo kasnije. Tvoji zapisi su sigurni.",
     dugme: "Pokušaj ponovno",
     pocetna: "Na početnu",
   },
   hu: {
-    oznaka: "Munkálatok folyamatban",
-    naslov: "A rendszeren dolgozunk",
-    telo: "A KOLO rendszer bevezetése folyamatban van, és ez a rész átmenetileg nem érhető el.",
+    oznaka: "Hiba",
+    naslov: "Valami nem stimmel",
+    telo: "Hiba történt, és ez a rész átmenetileg nem érhető el.",
     dopuna: "Nézz vissza kicsit később. A bejegyzéseid biztonságban vannak.",
     dugme: "Próbáld újra",
     pocetna: "A főoldalra",
