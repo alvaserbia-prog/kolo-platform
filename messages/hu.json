@@ -81,7 +81,7 @@
     "zrno": "ZRNO",
     "detalji": "Részletek →",
     "pretrazi_clanove": "Tagok keresése…",
-    "mesto_iz_spiska": "Válasszon egy települést a felkínált listából — csak egy helyet adjon meg."
+    "mesto_iz_spiska": "Válassz egy települést a felkínált listából — csak egy helyet adj meg."
   },
   "seo": {
     "site_naslov": "KOLO — A közjóhoz való hozzájáruláson alapuló kölcsönösségi rendszer",
@@ -198,7 +198,7 @@
   "sistem": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
     "nalog_nije_verifikovan_naslov": "A fiók nincs ellenőrizve",
-    "nalog_nije_verifikovan_opis": "Ellenőrizze személyazonosságát és kapjon {iznos} bónuszt.",
+    "nalog_nije_verifikovan_opis": "A megerősítés teljes hozzáférést nyit neked — a Piacot, az üzeneteket és a közösségi részvételt. A megerősítéskor az első {iznos} hozzájárulás is rögzül a bejegyzésedben.",
     "verifikuj_dugme": "Ellenőrzés kérése →",
     "kartica_clanovi": "Tagok",
     "kartica_transakcije": "Összes csere",
@@ -296,7 +296,7 @@
     "moj_qr": "QR kódom",
     "skeniraj_dugme": "Beolvasás",
     "skener_naslov": "Beolvasás POEN átírásához",
-    "skener_opis": "Olvassa be a címzett QR kódját, hogy POEN-t írjon át neki.",
+    "skener_opis": "Olvasd be a címzett QR-kódját, hogy POEN-t írj át neki.",
     "skener_uputstvo": "Irányítsa a kamerát annak a személynek a QR kódjára, akinek POEN-t ír át.",
     "skener_greska_qr": "Érvénytelen QR-kód. Olvasd be a KOLO QR-kódját az átíráshoz.",
     "istorija_transakcija": "Bejegyzések könyve",
@@ -2089,7 +2089,7 @@
     "emisija_nema_clanova": "Nincs tag a fogalom megadásához",
     "emisija_iznos_label": "Iznos donacije (RSD)",
     "emisija_pseudonim_obavezan": "Pseudonim je obavezan.",
-    "emisija_iznos_nevalidan": "Unesite pozitivan iznos.",
+    "emisija_iznos_nevalidan": "Adj meg pozitív összeget.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Rögzítve: {poen} POEN · {nivo}. szint",
     "emisija_prag_nedostignut": "A küszöb nincs elérve — nincs POEN rögzítés",
@@ -2917,7 +2917,7 @@
     "stanje_na_cekanju": "szülőre vár",
     "stanje_povezano": "összekapcsolva",
     "stanje_aktivno": "aktív",
-    "poziv_predlog": "A(z) {pseudonim} nevű gyerek az Ön címét adta meg szülői címként.",
+    "poziv_predlog": "A(z) {pseudonim} nevű gyerek a te címedet adta meg szülői címként.",
     "poziv_dugme": "Megnyitás és átvétel",
     "dugme_preuzmi": "Gyerekfiók átvétele",
     "preuzmi_opis": "Adja meg a gyermek álnevét és a képernyőjén látható hatjegyű kódot. A második szülő is ezen az úton lép be.",
@@ -2971,7 +2971,7 @@
     "brojac_opis": "ennyi barátod van",
     "moj_kod": "A kódom",
     "pokazi_kod": "Kód mutatása",
-    "kod_uputstvo": "Olvassa be a barátod. A kód rövid ideig él — ezért kell egymás mellett lennetek.",
+    "kod_uputstvo": "Olvastasd be a barátoddal. A kód rövid ideig él — ezért kell egymás mellett lennetek.",
     "skeniraj": "Kód beolvasása",
     "skeniraj_opis": "Olvasd be a kódot, amit a barátod mutat.",
     "dugme_skeniraj": "Kamera megnyitása",
