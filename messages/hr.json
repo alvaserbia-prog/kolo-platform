@@ -3040,7 +3040,8 @@
     "nisam_clan_korak1": "1. Otvori svoj račun — besplatno je i vraća te na ovu stranicu.",
     "nisam_clan_korak2": "2. Preuzmi račun djeteta i upiši datum rođenja.",
     "nisam_clan_korak3": "3. Zamoli nekoga tko te poznaje, a već je član, da potvrdi da si stvarna osoba.",
-    "nisam_clan_poen": "Dijete koristi platformu čim preuzmeš račun. POEN mu se upisuje kada ti postaneš redovan član — ništa se ne gubi, sve stoji zabilježeno i upiše mu se tog dana."
+    "nisam_clan_poen": "Dijete koristi platformu čim preuzmeš račun. POEN mu se upisuje kada ti postaneš redovan član — ništa se ne gubi, sve stoji zabilježeno i upiše mu se tog dana.",
+    "dobijate": "Preuzimanjem dobivate uvid u djetetove prijatelje i oglase, prekidač za razgovor s odraslima i mogućnost da mu postavite novu lozinku. Sadržaj razgovora s drugom djecom ne vidite."
   },
   "prijavaPoruke": {
     "dugme": "prijavi",

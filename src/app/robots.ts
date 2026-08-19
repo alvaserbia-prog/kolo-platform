@@ -36,6 +36,7 @@ export default function robots(): MetadataRoute.Robots {
         // link, ako negde procuri, uopšte završi u redu za obilazak.
         "/reset-lozinka",
         "/dete-poziv",
+        "/potvrdi-email",
         "/odjava-obavestenja",
         "/m/",
         // Prijavljeni deo koji je do sada bio izostavljen iz spiska.

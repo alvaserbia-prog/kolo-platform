@@ -3040,7 +3040,8 @@
     "nisam_clan_korak1": "1. Otvori svoj nalog — besplatno je i vraća te na ovu stranicu.",
     "nisam_clan_korak2": "2. Preuzmi nalog deteta i upiši datum rođenja.",
     "nisam_clan_korak3": "3. Zamoli nekoga ko te poznaje, a već je član, da potvrdi da si stvarna osoba.",
-    "nisam_clan_poen": "Dete koristi platformu čim preuzmeš nalog. POEN mu se upisuje kada ti postaneš redovan član — ništa se ne gubi, sve stoji zabeleženo i upiše mu se tog dana."
+    "nisam_clan_poen": "Dete koristi platformu čim preuzmeš nalog. POEN mu se upisuje kada ti postaneš redovan član — ništa se ne gubi, sve stoji zabeleženo i upiše mu se tog dana.",
+    "dobijate": "Preuzimanjem dobijate uvid u detetove prijatelje i oglase, prekidač za razgovor sa odraslima i mogućnost da mu postavite novu lozinku. Sadržaj razgovora sa drugom decom ne vidite."
   },
   "prijavaPoruke": {
     "dugme": "prijavi",

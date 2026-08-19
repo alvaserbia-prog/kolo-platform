@@ -47,7 +47,7 @@ Ako zaboraviš lozinku, javi roditelju — on ti postavlja novu. Ako imaš svoju
 
 # Za roditelja
 
-**Preuzimanje naloga.** Otvorite link iz poruke — važi 7 dana i radi i ako još nemate nalog na KOLU, jer vas vodi na otvaranje pa vraća nazad. Ako je link istekao, unesite detetov pseudonim i šestocifreni kod sa njegovog ekrana, u odeljku „Moja deca"; taj odeljak vidite kada postanete redovan član. Pri preuzimanju upisujete detetov datum rođenja. Nalog mogu preuzeti oba roditelja.
+**Preuzimanje naloga.** Otvorite link iz poruke; važi 7 dana. Stranica se otvara i ako niste prijavljeni i ako uopšte nemate nalog na KOLU — tu vidite ime deteta i tri dugmeta: preuzmi, „Ovo nije moje dete" i „Obriši nalog". Poslednja dva rade bez prijave. Za preuzimanje vam treba nalog; ako ga nemate, link u tekstu vas vodi na otvaranje i vraća nazad na isto mesto. Pri preuzimanju upisujete detetov datum rođenja. Ako je link istekao, dete vam pročita šestocifreni kod sa svog ekrana, a vi ga unesete u odeljku „Moja deca". Nalog mogu preuzeti oba roditelja.
 
 **Dva koraka.** Preuzimanjem naloga dete odmah koristi platformu. POEN mu se upisuje kada vi postanete redovan član, kada vas potvrdi neko ko vas poznaje.
 
