@@ -133,7 +133,9 @@ export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
  */
 export const FAQ_SAKRIVENA_PITANJA: number[] = [
   ...(POKROVITELJSTVO_AKTIVNO ? [] : [24, 25]),
-  ...(MODUL_DECA_AKTIVAN ? [6] : [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95]),
+  ...(MODUL_DECA_AKTIVAN
+    ? [6]
+    : [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 99, 100]),
 ];
 
 /**

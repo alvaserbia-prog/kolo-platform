@@ -83,14 +83,17 @@ async function getPijacaPreview() {
 // emisija Protokola), aktivni oglasi (pregled oglasa je ionako javan, čl. 16)
 // i ukupno evidentiranih POEN-a. Opticaj se računa kao zbir pozitivnih
 // stanja (pod zero-sum jednako apsolutnoj vrednosti minusa Protokola) — bez
-// zavisnosti od ID-ja Protokol novčanika.
+// zavisnosti od ID-ja Protokol novčanika. Zbir ide preko SVIH ne-Protokol
+// novčanika, uključujući negativne (nadoknada čl. 20b, poništen prepis, otpis
+// prijateljstva); filtriranje na `balance > 0` bi prikazalo veći opticaj nego
+// što ga ima.
 async function getAgregati() {
   try {
     const [brojClanova, brojTransfera, brojOglasa, opticajAgg] = await Promise.all([
       prisma.user.count({ where: { verified: true } }),
       prisma.transaction.count({ where: { type: "TRANSFER" } }),
       prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
-      prisma.wallet.aggregate({ _sum: { balance: true }, where: { balance: { gt: 0 } } }),
+      prisma.wallet.aggregate({ _sum: { balance: true }, where: { type: { not: "PROTOKOL" } } }),
     ]);
     return {
       brojClanova,
@@ -113,7 +116,7 @@ export default async function Home() {
   const [pijacaOglasi, agregati, faqPitanja] = await Promise.all([
     getPijacaPreview(),
     getAgregati(),
-    Promise.resolve(getFaqPoBrojevima([1, 2, 42], locale)),
+    Promise.resolve(getFaqPoBrojevima([43, 42, 40], locale)),
   ]);
 
   // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.

@@ -54,6 +54,7 @@ export default async function PublicFooter() {
               <li><Link href="/statut" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_statut")}</Link></li>
               <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_uslovi")}</Link></li>
               <li><Link href="/privatnost" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_privatnost")}</Link></li>
+              <li><Link href="/rizici" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_rizici")}</Link></li>
             </ul>
           </div>
         </div>

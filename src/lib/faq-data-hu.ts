@@ -308,15 +308,6 @@ Mit ellenőrizhetsz. A rögzített teljes összeg, a végrehajtott lépések sz�
         odgovor: `Nem. A platform jelenleg kizárólag nagykorú személyeknek szól. A kiskorú felhasználókat külön modul fogja lefedni, szigorúbb követelményekkel és a szülő vagy törvényes képviselő hozzájárulásával; ez a modul később indul.`,
       },
       {
-        id: 84,
-        pitanje: `Regisztrálhatnak-e kiskorúak?`,
-        odgovor: `Igen, hét éves kortól, de nem teljesen önállóan. A kiskorú fiókja mindig szülő mellett áll: vagy a szülő nyitja meg a saját fiókjából, vagy a gyerek nyitja meg és megadja a szülő e-mail-címét, a szülő pedig átveszi a fiókot.
-
-A hét évnél fiatalabb gyereknek nincs fiókja. Ha kiderül, hogy egy felnőtt fiókot kiskorú nyitott meg, a fiók törlődik.
-
-Minden egyéb a gyerekfiókokról a Gyerekek és szülők szakaszban áll.`,
-      },
-      {
         id: 7,
         pitanje: `Hogyan kapok megerősítést, és mit nyerek vele?`,
         odgovor: `A megerősítés nem kötelező, de a fiók nélküle többnyire csak nézelődik. A legtöbb funkció csak az első megerősítéssel nyílik meg.
@@ -380,6 +371,15 @@ A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktu
     naslov: "Gyerekek és szülők",
     pitanja: [
       {
+        id: 84,
+        pitanje: `Regisztrálhatnak-e kiskorúak?`,
+        odgovor: `Igen, hét éves kortól, de nem teljesen önállóan. A kiskorú fiókja mindig szülő mellett áll: vagy a szülő nyitja meg a saját fiókjából, vagy a gyerek nyitja meg és megadja a szülő e-mail-címét, a szülő pedig átveszi a fiókot.
+
+A hét évnél fiatalabb gyereknek nincs fiókja. Ha kiderül, hogy egy felnőtt fiókot kiskorú nyitott meg, a fiók törlődik.
+
+Minden egyéb a gyerekfiókokról a Gyerekek és szülők szakaszban áll.`,
+      },
+      {
         id: 85,
         pitanje: `Hány éves kortól lehet a gyereknek fiókja, és hogyan nyílik meg?`,
         odgovor: `Az alsó határ hét év. A fiók kétféleképpen nyitható meg.
@@ -406,6 +406,15 @@ Amíg átvételre vár, a gyereknek van profilja és köthet barátságokat, de 
 3. Kérd meg azt, aki személyesen ismer, hogy erősítsen meg téged. A megerősítést a saját fiókodból kéred, és egy is elég.
 
 A harmadik lépésig a gyereknek nem rögzül POEN a barátságokból. A barátságok addig is létrejönnek és rögzülnek, a bejegyzés pedig azon a napon hajtódik végre, amikor rendes taggá válsz.`,
+      },
+      {
+        id: 100,
+        pitanje: `A gyerek elfelejtette a jelszavát — most mi lesz?`,
+        odgovor: `Két út van.
+
+Ha a gyerek megadta a profiljában a saját e-mail-címét, és megerősítette az arra a címre küldött hivatkozásra kattintva, egyszerűen új jelszót kér, mint bármely más tag. Ez a cím kizárólag erre szolgál — értesítéseket nem küldünk rá.
+
+Ha a gyereknek nincs saját címe, az új jelszót te állítod be a saját profilodból. A régit nem kell tudnod, a gyerek pedig értesítést kap arról, hogy megváltoztattad.`,
       },
       {
         id: 87,
@@ -478,6 +487,17 @@ Piac. A gyerek ugyanolyan feltételekkel ad fel hirdetéseket, mint a többi tag
 Átírás a szülőtől. Te és a gyerek mindkét irányban átírtok egymásnak POEN-t, feltétel és korlát nélkül; elég, hogy átvetted a fiókot. Az átírás nem hoz létre új POEN-t, hanem a meglévőt mozgatja.
 
 A POEN nem pénz, és a rendszeren kívül nincs értéke.`,
+      },
+      {
+        id: 99,
+        pitanje: `Mi az iskolaválasztás, és mit hoz a rangsor?`,
+        odgovor: `A gyerek a profiljában kiválasztja az iskolát, amelybe jár, a szerbiai iskolák listájáról. A választás nem feltétele a fiók használatának — a fiók enélkül is működik.
+
+A választásokból három lista áll össze: két országos — a részt vevő gyerekek száma szerint, illetve a beiratkozott tanulókhoz viszonyított arány szerint, külön az általános és a középiskolákra —, valamint egy az iskolán belül, a POEN aktuális állása szerint. A számításba csak az a gyerek kerül be, akinek legalább az egyik szülője rendes tag.
+
+A listán elfoglalt hely nem hoz POEN-t. Sem az iskolaválasztás, sem az első hely, sem bármi más a listán. A lista megmutatja, ki hol áll, és ennél többet nem.
+
+Az iskola legfeljebb harminc naponta egyszer változtatható. Az első beállítás nem változtatás, és nem indítja el ezt a határidőt. A korábbi választások előzménye nem marad meg, az iskola pedig a nagykorúsággal és a fiók megszüntetésekor törlődik.`,
       },
       {
         id: 93,

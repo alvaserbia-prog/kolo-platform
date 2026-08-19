@@ -297,15 +297,6 @@ Veći saldo ne daje razmjerno veću moć. Glasanje u Gornjem Kolu je kvadratno: 
         odgovor: `Ne. Platforma je trenutačno namijenjena isključivo punoljetnim osobama. Maloljetni korisnici bit će obuhvaćeni posebnim modulom s pojačanim zahtjevima i suglasnošću roditelja ili zakonskog zastupnika, koji se aktivira kasnije.`,
       },
       {
-        id: 84,
-        pitanje: `Mogu li se maloljetnici registrirati?`,
-        odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Račun maloljetne osobe uvijek stoji uz roditelja: ili ga roditelj otvara iz svog računa, ili ga dijete otvara i upisuje roditeljev email, pa roditelj račun preuzima.
-
-Dijete mlađe od sedam godina račun nema. Ako se ispostavi da je punoljetni račun otvorila maloljetna osoba, račun se briše.
-
-Sve ostalo o dječjim računima stoji u odjeljku Djeca i roditelji.`,
-      },
-      {
         id: 7,
         pitanje: `Kako dobivam potvrdu i što time dobivam?`,
         odgovor: `Potvrda nije obvezna, ali račun bez nje uglavnom samo gleda. Većina funkcija otvara se tek s prvom potvrdom.
@@ -369,6 +360,15 @@ Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i
     naslov: "Djeca i roditelji",
     pitanja: [
       {
+        id: 84,
+        pitanje: `Mogu li se maloljetnici registrirati?`,
+        odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Račun maloljetne osobe uvijek stoji uz roditelja: ili ga roditelj otvara iz svog računa, ili ga dijete otvara i upisuje roditeljev email, pa roditelj račun preuzima.
+
+Dijete mlađe od sedam godina račun nema. Ako se ispostavi da je punoljetni račun otvorila maloljetna osoba, račun se briše.
+
+Sve ostalo o dječjim računima stoji u odjeljku Djeca i roditelji.`,
+      },
+      {
         id: 85,
         pitanje: `Od koliko godina dijete može imati račun i kako se otvara?`,
         odgovor: `Donja granica je sedam godina. Račun se otvara na dva načina.
@@ -395,6 +395,15 @@ Dok čeka preuzimanje, dijete ima profil i može sklapati prijateljstva, ali nem
 3. Zamoli nekoga tko te osobno poznaje da te potvrdi. Potvrdu tražiš iz svog računa i dovoljna je jedna.
 
 Do trećeg koraka djetetu se ne upisuje POEN iz prijateljstava. Prijateljstva se u međuvremenu sklapaju i bilježe, a upis se izvršava onog dana kada postaneš redovni član.`,
+      },
+      {
+        id: 100,
+        pitanje: `Dijete je zaboravilo lozinku — što sad?`,
+        odgovor: `Dva su puta.
+
+Ako je dijete u svojem profilu unijelo vlastitu e-mail adresu i potvrdilo je klikom na poveznicu koja mu je stigla na tu adresu, samo zatraži novu lozinku kao i svaki drugi član. Ta adresa služi isključivo za to — obavijesti na nju ne idu.
+
+Ako dijete nema svoju adresu, novu lozinku postavljaš ti, iz svojeg profila. Staru lozinku ne moraš znati, a dijete dobiva obavijest da si je promijenio.`,
       },
       {
         id: 87,
@@ -467,6 +476,17 @@ Pijaca. Dijete objavljuje oglase pod istim uvjetima kao ostali članovi i POEN i
 Prepis od roditelja. Ti i dijete prepisujete POEN jedno drugome u oba smjera, bez uvjeta i bez ograničenja; dovoljno je da si preuzeo račun. Prepisom se ne stvara nov POEN, nego se postojeći prenosi.
 
 POEN nije novac i nema vrijednost izvan sustava.`,
+      },
+      {
+        id: 99,
+        pitanje: `Što je izbor škole i što donosi rang-lista?`,
+        odgovor: `Dijete u svojem profilu bira školu koju pohađa, s popisa škola u Srbiji. Izbor nije uvjet za korištenje računa — račun radi i bez njega.
+
+Iz izbora nastaju tri liste: dvije nacionalne, po broju uključene djece i po udjelu u broju upisanih učenika, odvojeno za osnovne i srednje škole, i jedna unutar same škole, po tekućem stanju POENA. U brojanje ulazi samo dijete čiji je barem jedan roditelj redovan član.
+
+Mjesto na listi ne donosi POEN. Ni izbor škole, ni prvo mjesto, ni bilo što drugo na listi. Lista pokazuje gdje je tko, i ništa preko toga.
+
+Škola se može promijeniti najviše jednom u trideset dana. Prva postavka nije promjena i ne pokreće taj rok. Povijest ranijih izbora se ne čuva, a škola se briše s punoljetnošću i pri gašenju računa.`,
       },
       {
         id: 93,

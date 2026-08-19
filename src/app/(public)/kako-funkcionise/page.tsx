@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
@@ -19,7 +20,7 @@ export default async function KakoFunkcionisePage() {
   const locale = await getLocale();
   const t = await getTranslations("kakoFunkcionisePage");
   const tc = await getTranslations("common");
-  const faqPitanja = getFaqPoBrojevima([4, 16, 5], locale);
+  const faqPitanja = getFaqPoBrojevima([5, 48, 21], locale);
 
   const koraci = [
     {
@@ -54,6 +55,11 @@ export default async function KakoFunkcionisePage() {
       detalj: t("k5_detalj"),
     },
   ];
+
+  // Broj kanala koje ova stranica nabraja: sedam ličnih + dečji, dok modul radi.
+  // Ide kao CIFRA, ne kao reč — brojna reč bi se sklanjala po jeziku, a jedan
+  // prosleđen string ne može da posluži svih pet prevoda.
+  const brojKanala = MODUL_DECA_AKTIVAN ? 8 : 7;
 
   const nacinUpisa = [
     {
@@ -105,7 +111,31 @@ export default async function KakoFunkcionisePage() {
       iznos: t("n7_iznos"),
       boja: "bg-kolo-green-100 text-kolo-green-700",
     },
+    // Deveti kanal iz čl. 15 (doprinos dece u dečjem prostoru) — na stranici je
+    // osmi, jer rast kolektivnih oblika upisuje u zapis Kruga, ne čoveka.
+    // Prikazuje se samo dok Modul Deca radi; inače naslov sekcije laže broj.
+    ...(MODUL_DECA_AKTIVAN
+      ? [
+          {
+            br: "8",
+            naslov: t("n8_naslov"),
+            opis: t("n8_opis"),
+            iznos: t("n8_iznos"),
+            boja: "bg-kolo-green-100 text-kolo-green-700",
+          },
+        ]
+      : []),
   ];
+
+  // Širina kartice kanala u mreži od 12 kolona — vidi komentar uz samu mrežu.
+  const rasponKartice = (i: number) =>
+    nacinUpisa.length >= 8
+      ? i < 6
+        ? "md:col-span-4"
+        : "md:col-span-6"
+      : i < 4
+        ? "md:col-span-3"
+        : "md:col-span-4";
 
   return (
     <div className="space-y-6 pb-12">
@@ -185,7 +215,7 @@ export default async function KakoFunkcionisePage() {
             {t("evidencija_tag")}
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            {t("evidencija_naslov")}
+            {t("evidencija_naslov", { broj: brojKanala })}
           </h2>
         </div>
 
@@ -209,7 +239,7 @@ export default async function KakoFunkcionisePage() {
               </svg>
             </span>
             <p className="text-sm text-kolo-text leading-relaxed">
-              {t("poen_kanali")}
+              {t("poen_kanali", { broj: brojKanala })}
             </p>
           </div>
           <div className="bg-white rounded-xl card-shadow p-4 flex items-start gap-3">
@@ -225,29 +255,29 @@ export default async function KakoFunkcionisePage() {
           </div>
         </div>
 
-        {/* Sedam kanala u dva reda: prva četiri (kratak opis) po 3 od 12
-            kolona, poslednja tri (pokroviteljstvo, donacija, osnivački —
-            duži tekst) po 4. Tako nema usamljene kartice u trećem redu,
-            a duži opisi dobijaju širu kolonu. */}
+        {/* Raspored po redovima, u mreži od 12 kolona. Zavisi od broja kartica,
+            jer dečji kanal prati prekidač modula:
+              8 kartica -> 3/3/2 (4+4+4 | 4+4+4 | 6+6)
+              7 kartica -> 4/3   (3+3+3+3 | 4+4+4)
+            Cilj je da nijedan red ne ostane sa jednom karticom. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
           {nacinUpisa.map((n, i) => {
             return (
               <div
                 key={n.br}
-                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 ${i < 4 ? "md:col-span-3" : "md:col-span-4"}`}
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col ${rasponKartice(i)}`}
               >
-                <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
-                    {n.br}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-kolo-text text-base mb-1">{n.naslov}</p>
-                    <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${n.boja}`}>
-                      {n.iznos}
-                    </span>
-                  </div>
+                {/* Redni broj stoji iznad, a naslov, iznos i opis počinju od iste
+                    leve ivice — ranije je opis bio pun red ispod, pa se nije
+                    poklapao sa naslovom uvučenim pored broja. */}
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 mb-3 ${n.boja}`}>
+                  {n.br}
                 </div>
-                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">{n.opis}</p>
+                <p className="font-semibold text-kolo-text text-base leading-snug">{n.naslov}</p>
+                <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full self-start mt-2 ${n.boja}`}>
+                  {n.iznos}
+                </span>
+                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line mt-3">{n.opis}</p>
               </div>
             );
           })}
@@ -276,7 +306,7 @@ export default async function KakoFunkcionisePage() {
               </div>
             </div>
 
-            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod")}</p>
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod", { broj: brojKanala })}</p>
 
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("poen_jeste_naslov")}</p>
@@ -320,7 +350,7 @@ export default async function KakoFunkcionisePage() {
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-green-700 mb-1">{t("zerosum_naslov")}</p>
               <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
-                {t("zerosum_tekst")}
+                {t("zerosum_tekst", { broj: brojKanala })}
               </p>
             </div>
           </div>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,7 +40,7 @@ function DokumentRed({ naziv, href }: { naziv: string; href: string }) {
 export default async function ONamaPage() {
   const locale = await getLocale();
   const t = await getTranslations("oNama");
-  const faqPitanja = getFaqPoBrojevima([26, 27, 30], locale);
+  const faqPitanja = getFaqPoBrojevima([26, 27, 54], locale);
 
   const faze = [
     { r1: t("faza1"), r2: t("faza1b"), opis: t("faza1_opis"), aktivan: false },
@@ -66,6 +67,11 @@ export default async function ONamaPage() {
     { naslov: t("k1_naslov"), tekst: t("k1_tekst") },
     { naslov: t("k2_naslov"), tekst: t("k2_tekst"), cta: t("k2_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
     { naslov: t("k3_naslov"), tekst: t("k3_tekst"), cta: t("k3_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
+    // Roditelj o Modulu Deca ovde saznaje prvi put: FAQ nosi detalje, a
+    // /kako-funkcionise samo dečji kanal POENA. Prati prekidač modula.
+    ...(MODUL_DECA_AKTIVAN
+      ? [{ naslov: t("k4_naslov"), tekst: t("k4_tekst"), cta: t("k4_cta"), ctaHref: "/pravilnik/ucesce-dece", ctaIsLink: true }]
+      : []),
   ];
 
   const sekundarne = [
@@ -97,6 +103,7 @@ export default async function ONamaPage() {
     { naziv: t("dok_pravilnik_osnivacki"), href: "/pravilnik/osnivacki" },
     { naziv: t("dok_pravilnik_gornje_kolo"), href: "/pravilnik/gornje-kolo" },
     { naziv: t("dok_pravilnik_programi_podrske"), href: "/pravilnik/programi-podrske" },
+    { naziv: t("dok_pravilnik_ucesce_dece"), href: "/pravilnik/ucesce-dece" },
   ];
 
   // Ono što korisnik prihvata pri registraciji odvojeno je od akata o zaštiti
@@ -132,7 +139,9 @@ export default async function ONamaPage() {
               {t("hero_opis")}
             </p>
           </div>
-          <div className="shrink-0 mx-auto md:ml-auto">
+          {/* Potpis ide ISPOD fotografije: od izmene zaglavlja ime više ne stoji u
+              podnaslovu, pa bi bez ovoga u vrhu strane stajalo lice bez imena. */}
+          <div className="shrink-0 mx-auto md:ml-auto text-center">
             <div
               className="rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl"
               style={{ width: "160px", height: "160px" }}
@@ -147,6 +156,8 @@ export default async function ONamaPage() {
                 style={{ width: "160px", height: "160px", display: "block", transform: "scale(1.28)", transformOrigin: "center 22%" }}
               />
             </div>
+            <p className="text-white font-semibold text-sm mt-3 leading-tight">{t("hero_potpis_ime")}</p>
+            <p className="text-white/70 text-xs leading-tight">{t("hero_potpis_uloga")}</p>
           </div>
         </div>
       </section>

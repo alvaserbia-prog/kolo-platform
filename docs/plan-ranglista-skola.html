@@ -344,7 +344,7 @@
       <span>18. avgust 2026</span>
       <span>Osnov: Pravilnik o učešću dece 4.3.3</span>
       <span>Akti: 4.3.2 → <strong>4.3.3</strong></span>
-      <span>Stanje: sprovedeno, čeka spisak škola</span>
+      <span>Stanje: sprovedeno i uvezeno</span>
     </div>
   </header>
 
@@ -368,19 +368,25 @@
           <tr><td>Brisanje škole pri punoletstvu, gašenju i resetu naloga</td><td><span class="chip usvojeno">gotovo</span></td></tr>
           <tr><td>Prevodi na pet jezika</td><td><span class="chip usvojeno">gotovo</span></td></tr>
           <tr><td>Izmene akata, set podignut na 4.3.3</td><td><span class="chip usvojeno">gotovo</span></td></tr>
-          <tr><td><strong>Spisak škola sa brojem upisanih učenika</strong></td><td><span class="chip rizik">čeka</span></td></tr>
+          <tr><td><strong>Spisak škola sa brojem upisanih učenika</strong></td><td><span class="chip usvojeno">uvezeno — 1.327 osnovnih</span></td></tr>
+          <tr><td>Spisak srednjih škola</td><td><span class="chip usvojeno">uvezeno — 561 srednja</span></td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="note warn">
-      <span class="lbl">Šta tačno nedostaje</span>
-      <p>Potreban je izvoz <strong>ustanova</strong> iz Jedinstvenog informacionog sistema prosvete: naziv škole, mesto, tip (osnovna/srednja) i broj upisanih učenika. Dostavljeni skup podataka Republičkog zavoda za statistiku sadrži <strong>broj učenika po opštini</strong> — 205 teritorija, dvanaest školskih godina, po razredu i polu — ali <strong>nijedno ime škole</strong>. Iz njega se šifarnik ne može napraviti.</p>
-      <p>Uvoz je jedna komanda: <code>node scripts/uvezi-skole.mjs izvoz.csv</code>. Skripta sama prepoznaje uobičajene nazive kolona, odbija uvoz ako se neko mesto ne razrešava u spisak naselja, i ispiše koja mesta fale.</p>
-      <p><strong>Broj upisanih učenika je odvojiv od ostatka.</strong> Ako stigne spisak bez njega, lista po broju dece radi u celosti, a procentualna stoji sa crticom dok brojevi ne dođu — što je i predviđeno, jer se imenilac nikad ne procenjuje.</p>
+    <div class="note">
+      <span class="lbl">Uvoz je obavljen — oba nivoa</span>
+      <p>Iz izvoza JISP-a („Odeljenja i razredi", školska 2025/2026) uvezeno je <strong>1.888 škola</strong>: 1.327 osnovnih sa 542.718 učenika i 561 srednja sa 227.360. Izvozi su po odeljenju, pa se broj učenika dobija sabiranjem; nijedna škola nije ostala bez tog broja, tako da procentualna lista radi u punom obimu na oba nivoa.</p>
+      <p>Uz uvoz je <strong>spisak naselja proširen za 338 imena</strong> — sedišta škola kojih u popisnom spisku nije bilo. Blok širi zatečeni obim: dodata su i naselja sa Kosova i Metohije u kojima radi srpski obrazovni sistem, jer bez njih te škole ne bi mogle ni da uđu u šifarnik.</p>
     </div>
 
-    <p>Dok je spisak prazan, prikaz škola se ne renderuje, nijedan ekran ne puca i <strong>nijedan podatak o detetu se ne obrađuje</strong>. To je i razlog zašto su akti mogli da odu pre podataka, a ne obrnuto.</p>
+    <div class="note warn">
+      <span class="lbl">Zamka koja je uhvaćena u uvozu</span>
+      <p>Prvo rešenje je nivo čitalo iz kolone „Vrsta ustanove" i bilo je pogrešno: izvoz srednjeg obrazovanja nosi <strong>88 ustanova čiji naziv vrste ne počinje sa „Средња"</strong> — „Мешовита школа", „Школа са домом" i „Школа за ученике са сметњама у развоју" — pa su upadale među osnovne, i to sa brojem srednjoškolaca.</p>
+      <p>Vrsta opisuje <strong>ustanovu</strong>, a nivo se traži za <strong>odeljenje</strong>. Zato se tip sada izvodi iz samog izveštaja, a <strong>72 mešovite ustanove ulaze dva puta</strong> — jednom kao osnovna sa svojim osnovcima, jednom kao srednja sa svojim srednjoškolcima. Dete bira nivo koji pohađa, a imenilac procentualne liste ostaje tačan.</p>
+    </div>
+
+    <p>Akti su otišli pre podataka, a ne obrnuto — dok je spisak bio prazan, prikaz se nije renderovao i nijedan podatak o detetu se nije obrađivao. Sada kanal radi u punom obimu, na oba nivoa obrazovanja.</p>
   </section>
 
   <!-- ============ 00 ============ -->
