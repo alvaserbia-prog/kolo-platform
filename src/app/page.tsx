@@ -116,7 +116,7 @@ export default async function Home() {
   const [pijacaOglasi, agregati, faqPitanja] = await Promise.all([
     getPijacaPreview(),
     getAgregati(),
-    Promise.resolve(getFaqPoBrojevima([1, 2, 42], locale)),
+    Promise.resolve(getFaqPoBrojevima([43, 42, 40], locale)),
   ]);
 
   // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.

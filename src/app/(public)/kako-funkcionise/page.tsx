@@ -20,7 +20,7 @@ export default async function KakoFunkcionisePage() {
   const locale = await getLocale();
   const t = await getTranslations("kakoFunkcionisePage");
   const tc = await getTranslations("common");
-  const faqPitanja = getFaqPoBrojevima([4, 16, 5], locale);
+  const faqPitanja = getFaqPoBrojevima([5, 48, 21], locale);
 
   const koraci = [
     {

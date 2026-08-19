@@ -297,15 +297,6 @@ What you can check. The total amount recorded, the number of steps carried out a
         odgovor: `No. The platform is currently intended exclusively for adults. Minor users will be covered by a dedicated module with enhanced requirements and parental or legal-guardian consent, which will be activated later.`,
       },
       {
-        id: 84,
-        pitanje: `Can minors register?`,
-        odgovor: `They can, from the age of seven, but not entirely on their own. A minor's account always stands alongside a parent: either the parent opens it from their own account, or the child opens it and enters the parent's email, and the parent then takes the account over.
-
-A child under seven has no account. If it turns out that an adult account was opened by a minor, the account is deleted.
-
-Everything else about children's accounts is in the section Children and parents.`,
-      },
-      {
         id: 7,
         pitanje: `How do I get confirmed and what does it give me?`,
         odgovor: `Confirmation is not compulsory, but an account without it mostly just looks around. Most features open up only with the first confirmation.
@@ -369,6 +360,15 @@ The Rulebook, the Terms of Use and the other binding acts were adopted in Serbia
     naslov: "Children and parents",
     pitanja: [
       {
+        id: 84,
+        pitanje: `Can minors register?`,
+        odgovor: `They can, from the age of seven, but not entirely on their own. A minor's account always stands alongside a parent: either the parent opens it from their own account, or the child opens it and enters the parent's email, and the parent then takes the account over.
+
+A child under seven has no account. If it turns out that an adult account was opened by a minor, the account is deleted.
+
+Everything else about children's accounts is in the section Children and parents.`,
+      },
+      {
         id: 85,
         pitanje: `From what age can a child have an account, and how is it opened?`,
         odgovor: `The lower limit is seven years of age. An account is opened in one of two ways.
@@ -395,6 +395,15 @@ While it waits to be taken over, the child has a profile and can make friendship
 3. Ask someone who knows you personally to confirm you. You request the confirmation from your own account, and one is enough.
 
 Until the third step, no POEN from friendships is recorded for the child. Friendships are made and logged in the meantime, and the recording is carried out on the day you become a full member.`,
+      },
+      {
+        id: 100,
+        pitanje: `My child forgot their password — what now?`,
+        odgovor: `There are two routes.
+
+If the child has entered their own e-mail address in their profile and confirmed it by clicking the link sent to that address, they simply request a new password like any other member. That address serves only this purpose — no notifications are sent to it.
+
+If the child has no address of their own, you set the new password from your own profile. You do not need to know the old one, and the child is notified that you changed it.`,
       },
       {
         id: 87,
@@ -467,6 +476,17 @@ The Marketplace. The child posts listings under the same conditions as other mem
 A re-registration from a parent. You and the child re-register POEN to each other in both directions, without conditions and without limits; it is enough that you have taken the account over. A re-registration creates no new POEN — it moves existing POEN.
 
 POEN is not money and has no value outside the system.`,
+      },
+      {
+        id: 99,
+        pitanje: `What is the choice of school and what does the ranking bring?`,
+        odgovor: `In their profile, a child chooses the school they attend, from a list of schools in Serbia. The choice is not a condition for using the account — the account works without it.
+
+Three lists arise from these choices: two national ones, by the number of children taking part and by their share of enrolled pupils, kept separately for primary and secondary schools, and one within the school itself, by current POEN balance. Only a child with at least one parent who is a regular member is counted.
+
+A place on the list brings no POEN. Neither the choice of school, nor first place, nor anything else on the list. The list shows where everyone stands, and nothing beyond that.
+
+A school may be changed at most once in thirty days. The first entry is not a change and does not start that period. No history of earlier choices is kept, and the school is deleted at adulthood and when the account is closed.`,
       },
       {
         id: 93,

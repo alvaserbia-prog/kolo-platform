@@ -40,7 +40,7 @@ function DokumentRed({ naziv, href }: { naziv: string; href: string }) {
 export default async function ONamaPage() {
   const locale = await getLocale();
   const t = await getTranslations("oNama");
-  const faqPitanja = getFaqPoBrojevima([26, 27, 30], locale);
+  const faqPitanja = getFaqPoBrojevima([26, 27, 54], locale);
 
   const faze = [
     { r1: t("faza1"), r2: t("faza1b"), opis: t("faza1_opis"), aktivan: false },

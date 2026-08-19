@@ -18,7 +18,7 @@ export default async function OSistemuPage() {
   const locale = await getLocale();
   const t = await getTranslations("oSistemu");
   const tc = await getTranslations("common");
-  const faqPitanja = getFaqPoBrojevima([1, 4, 28], locale);
+  const faqPitanja = getFaqPoBrojevima([71, 52, 28], locale);
 
   const sistemi = [
     {
