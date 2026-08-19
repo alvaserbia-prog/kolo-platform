@@ -19,57 +19,45 @@ import GdeSeNalazi, { type Gde } from "@/components/dobrodosli/GdeSeNalazi";
 type Akcija = { href: string; ctaKey: string; gde: Gde };
 
 /** Konfiguracija ekrana: ključ u messages + akcione veze.
- *  finalni ekran nosi dve glavne CTA dugmadi (verifikacija / objava ponude).
  *
- *  Redosled je namerno akcioni, ne opisni: novi korisnik ima tačno jedan
- *  zadatak (da ga neko potvrdi), pa dva puta do potvrde idu odmah na ekranima
- *  2 i 3 — teorija (POEN, Pijaca, profil) tek posle. */
-const EKRANI: { key: string; pasusi: number; akcije?: Akcija[]; finalni?: boolean }[] = [
-  // dobrodošlica + šta je zadatak + gde je uopšte meni
-  { key: "ekran1", pasusi: 4 },
-  // Put A — poznaje nekog (QR/kod)
+ *  Redosled prati stvarni put novog člana: objava ponude (koju sme odmah,
+ *  bez ijedne potvrde) pa tek onda potvrda. Raniji vodič je imao sedam ekrana
+ *  i dva „puta" kroz koja je svako prolazio linearno, pa je isto pitanje
+ *  postavljao dvaput — na prvom i na poslednjem ekranu. */
+const EKRANI: { key: string; pasusi: number; akcije?: Akcija[] }[] = [
+  // šta je KOLO i šta je POEN — jedini ekran bez radnje
+  { key: "ekran1", pasusi: 3 },
+  // prvi potez: objava ponude. Ide PRE potvrde, jer je to danas glavni put
+  // (čl. 16 st. 5 i čl. 40a) i jer isti redosled obećava Početna.
   {
     key: "ekran2",
+    pasusi: 2,
+    akcije: [
+      { href: "/pijaca/novi-oglas", ctaKey: "ekran2_cta", gde: { vrsta: "meni", stavka: "pijaca" } },
+    ],
+  },
+  // drugi potez: potvrda. Oba puta (poznaje / ne poznaje nikoga) stoje na
+  // JEDNOM ekranu — ranije su bila dva ekrana kroz koja je svako prolazio.
+  {
+    key: "ekran3",
     pasusi: 3,
     akcije: [
       {
         href: "/verifikacija",
-        ctaKey: "ekran2_cta",
+        ctaKey: "ekran3_cta",
         gde: { vrsta: "meni", stavka: "verifikacija", grupa: "grupa_poverenje" },
       },
     ],
   },
-  // Put B — ne poznaje nikoga: objavi ponudu na Pijaci i neka te mreža nađe
+  // profil i gde je šta
   {
-    key: "ekran3",
-    pasusi: 4,
+    key: "ekran4",
+    pasusi: 2,
     akcije: [
-      {
-        href: "/pijaca/novi-oglas",
-        ctaKey: "ekran3_cta",
-        gde: { vrsta: "meni", stavka: "pijaca" },
-      },
+      { href: "/pijaca", ctaKey: "ekran4_cta_pijaca", gde: { vrsta: "meni", stavka: "pijaca" } },
+      { href: "/profil", ctaKey: "ekran4_cta_profil", gde: { vrsta: "profil" } },
     ],
   },
-  // šta se otključava potvrdom
-  { key: "ekran4", pasusi: 3 },
-  // POEN
-  {
-    key: "ekran5",
-    pasusi: 3,
-    akcije: [{ href: "/novcanik", ctaKey: "ekran5_cta", gde: { vrsta: "meni", stavka: "novcanik" } }],
-  },
-  // dok čeka potvrdu: profil (van menija — preko profilne slike) + Pijaca
-  {
-    key: "ekran6",
-    pasusi: 5,
-    akcije: [
-      { href: "/profil", ctaKey: "ekran6_cta_profil", gde: { vrsta: "profil" } },
-      { href: "/pijaca", ctaKey: "ekran6_cta_pijaca", gde: { vrsta: "meni", stavka: "pijaca" } },
-    ],
-  },
-  // uradi jednu stvar sada
-  { key: "ekran7", pasusi: 3, finalni: true },
 ];
 
 /** sessionStorage ključ za korak na koji se korisnik vraća posle CTA odlaska. */
@@ -182,36 +170,17 @@ export default function DobrodosliPage() {
         </div>
 
         {/* Akcione veze ekrana: dugme + crtež gde se stranica nalazi u navigaciji */}
-        {!ekran.finalni &&
-          ekran.akcije?.map((akcija) => (
-            <div key={akcija.href} className="mt-5 flex flex-col items-start">
-              <button
-                onClick={() => idiNa(akcija.href)}
-                className="inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
-              >
-                {t(akcija.ctaKey)} →
-              </button>
-              <GdeSeNalazi gde={akcija.gde} />
-            </div>
-          ))}
-
-        {/* Završni CTA-ovi na poslednjem ekranu */}
-        {ekran.finalni && (
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+        {ekran.akcije?.map((akcija) => (
+          <div key={akcija.href} className="mt-5 flex flex-col items-start">
             <button
-              onClick={() => idiNa("/verifikacija")}
-              className="flex-1 px-4 py-3 bg-kolo-green-700 hover:bg-kolo-green-500 text-white text-sm font-semibold rounded-xl transition-colors"
+              onClick={() => idiNa(akcija.href)}
+              className="inline-flex items-center gap-1 text-sm font-semibold text-kolo-green-700 hover:underline"
             >
-              {t("cta_poznajem")}
+              {t(akcija.ctaKey)} →
             </button>
-            <button
-              onClick={() => idiNa("/pijaca/novi-oglas")}
-              className="flex-1 px-4 py-3 bg-white border border-kolo-green-700 text-kolo-green-700 hover:bg-kolo-green-100 text-sm font-semibold rounded-xl transition-colors"
-            >
-              {t("cta_ne_poznajem")}
-            </button>
+            <GdeSeNalazi gde={akcija.gde} />
           </div>
-        )}
+        ))}
       </div>
 
       {/* Navigacija */}
