@@ -127,6 +127,16 @@ export default async function KakoFunkcionisePage() {
       : []),
   ];
 
+  // Širina kartice kanala u mreži od 12 kolona — vidi komentar uz samu mrežu.
+  const rasponKartice = (i: number) =>
+    nacinUpisa.length >= 8
+      ? i < 6
+        ? "md:col-span-4"
+        : "md:col-span-6"
+      : i < 4
+        ? "md:col-span-3"
+        : "md:col-span-4";
+
   return (
     <div className="space-y-6 pb-12">
 
@@ -245,16 +255,17 @@ export default async function KakoFunkcionisePage() {
           </div>
         </div>
 
-        {/* Sedam kanala u dva reda: prva četiri (kratak opis) po 3 od 12
-            kolona, poslednja tri (pokroviteljstvo, donacija, osnivački —
-            duži tekst) po 4. Tako nema usamljene kartice u trećem redu,
-            a duži opisi dobijaju širu kolonu. */}
+        {/* Raspored po redovima, u mreži od 12 kolona. Zavisi od broja kartica,
+            jer dečji kanal prati prekidač modula:
+              8 kartica -> 3/3/2 (4+4+4 | 4+4+4 | 6+6)
+              7 kartica -> 4/3   (3+3+3+3 | 4+4+4)
+            Cilj je da nijedan red ne ostane sa jednom karticom. */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
           {nacinUpisa.map((n, i) => {
             return (
               <div
                 key={n.br}
-                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 ${i < 4 ? "md:col-span-3" : "md:col-span-4"}`}
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 ${rasponKartice(i)}`}
               >
                 <div className="flex items-start gap-3">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
