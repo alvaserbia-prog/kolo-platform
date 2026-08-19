@@ -69,6 +69,18 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
+**AŽURIRANO 2026-08-18 (jedanaesti put):** ceo set je dignut na **4.3.4** — svih 16 akata (sr + en/ru/hr/hu). Povod je **sopstvena elektronska adresa maloletnog korisnika** i **roditeljsko postavljanje nove lozinke** (vidi sekciju „Povratak u nalog deteta" ispod). Sadržinski su izmenjeni:
+- **Pravilnik o učešću dece** — nov **čl. 7a** (adresa je dobrovoljna, svrha ograničena na ponovni pristup nalogu, upis tek po potvrdi sa same adrese, veza važi 24 sata, uklanjanje u svakom trenutku, zadržava se pri prelasku u punoletni nalog, briše se prestankom svojstva korisnika, adresa roditelja iz čl. 4a se ne dira) i dopuna **čl. 10** (roditelj postavlja novu lozinku, stara se ne traži, dete se obaveštava).
+- **Politika privatnosti 4.7** — nova alineja o adresi deteta, dopunjene kategorije podataka i rok čuvanja.
+- **Registar radnji obrade, radnja br. 11** — kategorije podataka, pravni osnov, rok čuvanja i mere. Nova radnja NIJE dodata: adresa je nov podatak unutar iste obrade.
+- **DPIA** — rizik **R16** dopunjen, mere **5.11** dopunjene sa tri stavke (potvrda adrese, svrha uža od kanala, izlaz i bez adrese).
+
+🔴 **Ovim je zatvorena praznina zapisana pri uvođenju funkcije** — do 4.3.4 je kod prikupljao imejl maloletnika, a akti su govorili samo o adresi RODITELJA po legitimnom interesu. Test `pravni-dokumenti.test.ts` sada traži odredbe čl. 7a i čl. 10 doslovno, na sr/en/ru.
+
+🟡 **Pri ovom bumpu je `main` bio jedan commit ispred** (prevodi, ruski na „ti"); grana je pre izmene dokumenata dovučena na tu osnovu, po pravilu da dokumenta nove verzije nastaju iz najnovije osnove.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja na ranije setove namerno su ostavljena kakva jesu.
+
 **AŽURIRANO 2026-08-18 (deseti put):** ceo set je dignut na **4.3.3** — svih 16 akata (sr + en/ru/hr/hu). Povod je **ranglista škola** (vidi sekciju „Ranglista škola" ispod). Sadržinski su izmenjeni:
 - **Pravilnik o učešću dece** — dopuna **čl. 7** (školu navodi sámo dete, izborom sa spiska; nije uslov za korišćenje naloga) i **dva nova člana**: **čl. 15a** (škola i pregled po školama — zbirni pregled bez podataka o ličnosti, pojedinačni pregled jedne škole prijavljenima, promena najviše jednom u trideset dana, brisanje pri punoletstvu i prestanku statusa, bez istorije ranijih izbora, mesto na listi ne donosi POEN) i **čl. 15b** (pristup profilu maloletnog korisnika).
 - **Politika privatnosti 4.7** — škola u kategorijama podataka, pregled po školama, zatvoren profil; rok čuvanja dopunjen.
@@ -97,7 +109,7 @@ Iznos se nije menjao — fiksnih 2.000 POEN dnevno po čl. 13, što `programi.ts
 
 Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja koja govore da su Modul 3 i Modul 4 aktivirani **DPIA v4.3.0** namerno su ostavljena na 4.3.0 (Registar radnji obrade, radnje 10 i 11) — blanket zamena bi ih učinila neistinitim.
 
-**AŽURIRANO 2026-08-17 (sedmi put):** ceo set je bio dignut na **4.3.0** i od sada ima **16 akata** (sr + en/ru/hr/hu). Povod je usvajanje **Pravilnika o učešću dece** (`ucesce_dece_4_3_3.md`, pri usvajanju `_4_3_0`) — nov, šesnaesti akt, uz koji je unapređeni Modul Deca dobio pravni osnov. Sadržinski su izmenjeni:
+**AŽURIRANO 2026-08-17 (sedmi put):** ceo set je bio dignut na **4.3.0** i od sada ima **16 akata** (sr + en/ru/hr/hu). Povod je usvajanje **Pravilnika o učešću dece** (`ucesce_dece_4_3_4.md`, pri usvajanju `_4_3_0`) — nov, šesnaesti akt, uz koji je unapređeni Modul Deca dobio pravni osnov. Sadržinski su izmenjeni:
 - **Pravilnik o KOLO sistemu** — čl. 14 st. 3 (tri izričito nabrojana izuzetka od zabrane negativnog zapisa + zatvarajuća odredba da se dalji ne mogu ustanoviti), **čl. 15 t. 9 — DEVETI KANAL** (doprinos dece u dečjem prostoru; automatski akt Protokola izvan dnevnog limita), čl. 16 (poništenje prepisa po prijavi razmene), čl. 34 (nadoknada → „negativan zapis po čl. 14 st. 3"), čl. 58 (prepisan: samostalno pristupanje maloletnog lica, odgovornost roditelja, upućivanje na nov pravilnik).
 - **Uslovi korišćenja** — čl. 7 (maloletna lica od 7 godina, dva ulaza), čl. 25 (prijava poruke), **čl. 40 — UKINUT ROK OD 15 DANA**.
 - **Politika privatnosti** — 4.7 prepisan (dva ulaza, elektronska adresa roditelja po legitimnom interesu, sužen uvid roditelja, prijava poruke), rok čuvanja, **čl. 16 — UKINUT ROK OD 15 DANA**.
@@ -395,7 +407,7 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 
 Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 
-🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_3.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
+🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_4.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
 
 **FAQ pitanje 6 („Mogu li se maloletnici registrovati?") ima dva odgovora i bira ih prekidač:** br. **6** = „ne" (modul ugašen), br. **84** = „da, od sedme godine" (modul radi). `FAQ_SAKRIVENA_PITANJA` sakriva tačno jedan od njih. Tekst se ne prepravlja u jednu rečenicu — u jednom od dva stanja sistema bio bi neistinit.
 
@@ -471,9 +483,60 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - Testovi: `__tests__/deca-pravila.test.ts`, `__tests__/protokol/prijateljstva-poen.test.ts`, `__tests__/integracija/deca-tok.test.ts` (traži bazu).
 - 🔴 **`User.roditeljId` VIŠE NE POSTOJI** — veza je u tabeli `Roditeljstvo` (najviše dva reda po detetu). Prisma upiti idu preko `roditeljstvaKaoDete` / `roditeljstvaKaoRoditelj`.
 
+### Povratak u nalog deteta: imejl deteta i roditeljsko dugme (2026-08-18)
+
+Nalog maloletnog korisnika po pravilu **nema imejl** — pri samostalnoj registraciji
+dete unosi adresu SVOG RODITELJA, i ona se namerno ne upisuje u `User.email`
+(čl. 4a, `deca-poziv.ts`). Tok „zaboravljena lozinka" traži imejl, pa detetu nije
+stajao na raspolaganju: **zaboravljena lozinka je značila trajno zaključan nalog**,
+sa prijateljstvima i POEN-om u njemu. Otud dva izlaza, i oba su potrebna.
+
+**1. Roditelj postavlja novu lozinku** (`postaviLozinkuDeteta` u `protokol/deca.ts`,
+`POST /api/deca/[id]/lozinka`, odeljak „Nova lozinka za dete" u `DeteProfil.tsx`).
+Radi uvek, i za sedmogodišnjaka bez ijedne adrese.
+- 🔴 **Stara lozinka se NE traži i ne može da se traži** — roditelj je ne zna, u
+  tome i jeste stvar. Zaštitu nosi `mojeDeteIliBaci`: radnju izvodi isključivo
+  roditelj tog deteta, prijavljen na sopstveni nalog.
+- Dete dobija obaveštenje (`notifikacije.lozinka_promenio_roditelj`) — bez njega bi
+  mu prijava prestala da radi bez ijednog traga o tome zašto.
+- Polje **ne skriva lozinku**: roditelj je smišlja za dete i mora da je pročita
+  naglas.
+
+**2. Dete upisuje svoju adresu** (`protokol/dete-email.ts`, `GET|PATCH|DELETE
+/api/profil/email`, `POST /api/profil/email/potvrdi`, `EmailDeteta.tsx` na profilu,
+stranica `/potvrdi-email/[token]`). Za stariju decu koja adresu imaju.
+- 🔴 **Adresa se NE upisuje u `User.email` pri unosu nego tek po potvrdi linkom
+  poslatim NA NJU** (model `EmailPotvrda`, migracija `20260818140000_email_deteta`,
+  rok 24 sata). Reset lozinke ide na upisanu adresu, pa bi jedno pogrešno otkucano
+  slovo dalo nepoznatoj osobi trajan ključ od dečjeg naloga, i to bez ijednog znaka
+  da se išta desilo. Sa potvrdom omaška ne pravi štetu.
+- 🔴 **Potvrda je POST, ne GET** — klijenti za poštu prefetch-uju linkove. Isti
+  razlog kao kod odjave sa obaveštenja.
+- 🔴 **Potvrda postavlja `emailObavestenja: false`.** Adresa je data radi povratka u
+  nalog, ne radi pošte; obim obrade se ne širi preko svrhe zbog koje je podatak dat.
+- Jedan živ link po nalogu (stariji se poništavaju), inače bi potvrda mogla da upiše
+  adresu koju je dete u međuvremenu ispravilo. Zauzetost adrese proverava se i pri
+  unosu i pri potvrdi — `User.email` je `@unique`, a između ta dva trenutka prolazi
+  ceo dan.
+- Ruta je zatvorena za punoletne naloge (`deteIliBaci`) — odluka da se imejl ne
+  prikazuje u podešavanjima punoletnog profila se ovim NE menja.
+
+🟢 **AKTI OVO POZNAJU OD SETA 4.3.4** (isti dan): **Pravilnik o učešću dece čl. 7a**
+uređuje dobrovoljnost, svrhu ograničenu na ponovni pristup nalogu, upis tek po
+potvrdi sa same adrese, rok od 24 sata, uklanjanje u svakom trenutku, zadržavanje
+pri prelasku u punoletni nalog i brisanje prestankom svojstva korisnika; **čl. 10**
+daje roditelju ovlašćenje da postavi novu lozinku bez znanja stare, uz obaveštenje
+detetu. Dopunjeni su i Politika 4.7, Registar radnji obrade (radnja 11) i DPIA
+(R16, mere 5.11). Odredbe su zaključane testom `pravni-dokumenti.test.ts`.
+
+🟢 **Kod i akt se ovde poklapaju:** `punoletstvo.ts` i `DELETE /api/profil` ne diraju
+`User.email`, a čl. 7a st. 5 izričito kaže da se adresa prelaskom u punoletni nalog
+**zadržava** (punoletan nalog imejl i inače sme da ima), a briše prestankom svojstva
+korisnika. Ne dodavati brisanje pri punoletstvu — protivrečilo bi aktu.
+
 ### Ranglista škola (2026-08-18)
 
-Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.3).
+Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.4).
 
 **Zašto postoji.** Modul Deca radi u jednom smeru — dete čeka roditelja, a nema čime da ga požuruje osim rečenicom „hoću poene". „Našoj školi fali troje do šestog mesta" je razlog koji dete sámo odnese kući. Ranglista deci ne daje ništa novo; ona postojećoj motivaciji (500 POEN po prijateljstvu, čl. 14b) daje **pravac**.
 
@@ -489,7 +552,17 @@ Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste.
 
 🔴 **Nema praga prikaza** (odluka vlasnika), pa škola sa 12 upisanih i jednim detetom daje 8,3% i seda na vrh. Zato **uz procenat UVEK ide i sam odnos** — `8,3% (1 od 12)`. Ne uklanjati taj razlomak: bez njega broj obmanjuje, a prag je izričito odbijen.
 
-**Šifarnik škola.** `src/lib/skole-srbije.ts` — 🔴 **prazan dok se ne uveze zvaničan izvoz JISP-a** (`opendata.mpn.gov.rs`) skriptom `scripts/uvezi-skole.mjs`. Ključ je **šifra**, ne naziv („Vuk Karadžić" nosi preko trideset škola). Broj upisanih učenika je jedini podatak koji sistem ne može sam da proizvede i **nikad se ne procenjuje** — škola bez njega stoji na listi po broju, a u procentualnoj sa crticom. Dok je spisak prazan, `skolePostoje()` je `false` i prikaz se ne renderuje. Uvozna skripta odbija ceo uvoz ako se neko `mesto` ne razrešava u `NASELJA_SRBIJE` — škola čije mesto ne pogađa naselje tiho ispada iz svega što se kači na lokaciju.
+**Šifarnik škola.** `src/lib/skole-srbije.ts` — **uvezen 18–19.08.2026: 1.888 škola, 1.327 osnovnih (542.718 učenika) i 561 srednja (227.360)** (JISP izveštaji „Osnovno obrazovanje" i „Srednje obrazovanje — Odeljenja i razredi", školska 2025/2026). 🔴 **Fajl se ne piše rukom** — generiše ga `scripts/uvezi-skole.mjs`, pa ručna izmena preživi do sledećeg uvoza.
+- 🔴 **OBA izvoza idu u ISTOM pozivu** (`node scripts/uvezi-skole.mjs osnovno.csv srednje.csv`). Skripta ispisuje ceo fajl umesto da ga dopisuje, pa bi pokretanje samo sa srednjim izvozom obrisalo osnovne — bez ijedne greške, jer bi fajl ostao ispravan, samo prazan tamo gde je bio pun.
+- 🔴 **Tip se izvodi iz IZVEŠTAJA, ne iz naziva ustanove.** Prvo rešenje je čitalo kolonu „Vrsta ustanove" i bilo je pogrešno: izvoz srednjeg obrazovanja nosi 88 ustanova čiji naziv vrste ne počinje sa „Средња" — „Мешовита школа" (45), „Школа за ученике са сметњама у развоју" (29) i „Школа са домом" (14) — pa su upadale među OSNOVNE, i to sa brojem srednjoškolaca. Vrsta opisuje USTANOVU, a nivo se traži za ODELJENJE. Izveštaj se prepoznaje po koloni „Obrazovni profil", koju ima samo srednji.
+- **72 mešovite ustanove ulaze DVA puta** — jednom kao osnovna sa svojim osnovcima, jednom kao srednja sa svojim srednjoškolcima (npr. Baletska škola u Novom Sadu: 182 + 77). Dete bira nivo koji pohađa, imenilac procentualne liste ostaje tačan. Srednja nosi sufiks `-srednja` u šifri; osnovne su bez sufiksa, pa im se šifre između uvoza ne menjaju.
+- **Izvozi su po ODELJENJU**, ne po školi: broj učenika se dobija tek sabiranjem odeljenja.
+- **Izvoz nema identifikator ustanove**, pa je `sifra` determinističan slug iz naziva i mesta. Par naziv + mesto jeste jedinstven, sam naziv nije — „OŠ Branko Radičević" javlja se na **42 mesta**.
+- **Izvozi su na ćirilici** — skripta preslovljava. Dvoslovi (љ, њ, џ) prate okolinu, inače „ЉУБЕРАЂА" postane „LjUBERAĐA".
+- 🔴 **Sadržaj zagrade se razrešava PRVI**: JISP beogradske škole vodi kao „БЕОГРАД (ЗВЕЗДАРА)", pa bi odbacivanje zagrade sve svelo na „Beograd" — i dve škole istog imena iz različitih opština dobile bi isti ključ (desilo se sa „OŠ Branko Radičević" i „OŠ Vladislav Petković Dis").
+- Broj upisanih učenika **nikad se ne procenjuje**; u ovom uvozu nijedna škola nije ostala bez njega.
+- **Uvoz ruši ceo posao** ako se neko `mesto` ne razrešava u `NASELJA_SRBIJE` ili ako se dve škole sudare oko šifre. Isto zaključava `__tests__/skola.test.ts`.
+- 🔴 **`NASELJA_SRBIJE` je pri uvozu prošireno za 338 naselja** (sa 1.561 na 1.899 navoda) — sedišta škola kojih nije bilo u popisnom spisku. Blok **širi zatečeni obim**: gornji deo je popis 2022 **bez KiM**, a dodata su i naselja sa Kosova i Metohije u kojima radi srpski obrazovni sistem (Kosovska Mitrovica, Banjska, Babin Most, Preoce, Stanišor…). 🟡 Nova naselja nemaju koordinate u `naselja-koordinate.ts`, pa im udaljenost na Pijaci ostaje neizračunata — `koordinateZaMesto` vraća `null`, kao i za druga naselja bez koordinata.
 
 **Promena škole najviše jednom u 30 dana.** 🔴 **PRVA postavka nije promena** i ne pokreće rok; brisanje izbora takođe ne. Poruka o odbijanju nosi **datum**, ne „pokušaj kasnije". Rok ne štiti od zloupotrebe (nema šta da se zaradi) nego od pomeranja liste — bez njega bi odeljenje moglo da „upadne" u tuđu školu na dan merenja. **Istorija izbora se ne čuva.**
 

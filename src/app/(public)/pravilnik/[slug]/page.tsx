@@ -16,40 +16,40 @@ import { pageMetadata } from "@/lib/seo";
  */
 const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "kolo-sistem": {
-    fajl: "Pravilnik_4_3_3.md",
+    fajl: "Pravilnik_4_3_4.md",
     verzija: "4.3.3",
   },
   "hijerarhija": {
-    fajl: "hijerarhija_4_3_3.md",
+    fajl: "hijerarhija_4_3_4.md",
     verzija: "4.3.3",
   },
   "dokaz-stvarnosti": {
-    fajl: "dokaz_stvarnosti_4_3_3.md",
+    fajl: "dokaz_stvarnosti_4_3_4.md",
     verzija: "4.3.3",
   },
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_3_3.md",
+    fajl: "donacije_4_3_4.md",
     verzija: "4.3.3",
   },
   "operativni": {
-    fajl: "operativni_4_3_3.md",
+    fajl: "operativni_4_3_4.md",
     verzija: "4.3.3",
   },
   "osnivacki": {
-    fajl: "osnivacki_4_3_3.md",
+    fajl: "osnivacki_4_3_4.md",
     verzija: "4.3.3",
   },
   "gornje-kolo": {
-    fajl: "gornje_kolo_4_3_3.md",
+    fajl: "gornje_kolo_4_3_4.md",
     verzija: "4.3.3",
   },
   "programi-podrske": {
-    fajl: "programi_podrske_4_3_3.md",
+    fajl: "programi_podrske_4_3_4.md",
     verzija: "4.3.3",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_3_3.md",
+    fajl: "ucesce_dece_4_3_4.md",
     verzija: "4.3.3",
   },
 };

@@ -909,11 +909,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -921,23 +921,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.3"
+      "ver": "4.3.4"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.3.3",
+      "ver": "4.3.4",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -957,21 +957,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.3.3",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.3.4",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.3.3",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.3.4",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.3.3",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.3.4",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.3.3",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.3.4",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.3.3",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.3.4",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.3.3",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.3.4",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.3.3",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.3.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -2546,7 +2546,9 @@
     "prijava_poruke_resena_naslov": "The reported message was removed",
     "prijava_poruke_resena_tekst": "The Foundation has removed the message you reported. Explanation: {odluka}",
     "prijava_poruke_odbacena_naslov": "Your message report was considered",
-    "prijava_poruke_odbacena_tekst": "The Foundation considered your report and the message stays. Reasons: {odluka}"
+    "prijava_poruke_odbacena_tekst": "The Foundation considered your report and the message stays. Reasons: {odluka}",
+    "lozinka_promenio_roditelj_naslov": "Your parent set a new password for you",
+    "lozinka_promenio_roditelj_tekst": "Ask them what the new password is and sign in with it."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -2941,7 +2943,13 @@
     "pregled_razgovori": "Conversations with children",
     "pregled_razgovori_prazno": "No conversations yet.",
     "pregled_poruka": "{broj} messages",
-    "polje_datum_raspon": "Enter the child's date of birth — the child must be between 7 and 18 years old."
+    "polje_datum_raspon": "Enter the child's date of birth — the child must be between 7 and 18 years old.",
+    "lozinka_naslov": "New password for your child",
+    "lozinka_opis": "A child account has no e-mail address, so the child cannot request a new password. You set it here.",
+    "lozinka_polje": "New password",
+    "lozinka_dugme": "Set password",
+    "lozinka_pravilo": "At least {broj} characters. Write it down and tell your child.",
+    "lozinka_uspeh": "The password is set. Tell your child what it is."
   },
   "decjaPocetna": {
     "naslov": "Children's marketplace",
@@ -3101,5 +3109,32 @@
     "kartica_bez_skole": "You have not chosen a school. Choose it and see where you stand in Serbia.",
     "kartica_dugme": "Choose school",
     "kartica_ti": "You are {mesto}. in your school"
+  },
+  "emailDeteta": {
+    "naslov": "My e-mail address",
+    "opis": "If you have your own e-mail address, enter it. It is used for one thing only: so you can set a new password if you forget yours.",
+    "placeholder": "your@address.com",
+    "dugme": "Save",
+    "dugme_salje": "Sending…",
+    "poslato": "We sent a message to {email}. Open it and confirm the address.",
+    "ceka_potvrdu": "The address {email} is waiting to be confirmed. Open the message we sent to it.",
+    "oznaka_potvrdjena": "confirmed",
+    "ukloni": "Remove address",
+    "uklonjeno": "The address has been removed.",
+    "napomena": "We do not send notifications to it. If you have no address of your own, your parent sets your new password.",
+    "greska": "That did not work. Try again."
+  },
+  "potvrdiEmail": {
+    "naslov": "Confirm your address",
+    "podnaslov": "One more click and the address is saved.",
+    "podnaslov_gotovo": "The address is saved to your account.",
+    "objasnjenje": "This address was entered on a KOLO account. Confirm it so you can set a new password if you forget yours.",
+    "nisi_ti": "If this was not you, close this page. Without confirmation the address is not saved anywhere.",
+    "dugme": "Confirm address",
+    "dugme_loading": "Confirming…",
+    "uspesno": "Done. The address is confirmed.",
+    "cemu_sluzi": "If you forget your password, we send a link for a new one to this address. We do not send notifications.",
+    "na_pocetnu": "Go to home",
+    "greska": "The link is not valid or has expired. Enter the address again in your profile."
   }
 }

@@ -7,15 +7,17 @@ import {
   sledecaPromenaSkole,
   smePromenitiSkolu,
   udeoUkljucenosti,
+  skolePostoje,
+  razresiSkolu,
+  pretraziSkole,
   type RedSkole,
 } from "@/lib/skola";
+import { SKOLE } from "@/lib/skole-srbije";
+import { razresiNaselje } from "@/lib/naselje";
 
 /**
- * Pravila ranglista škola. Plan: `docs/plan-ranglista-skola.html`.
- *
- * Šifarnik (`skole-srbije.ts`) je namerno prazan dok se ne uveze zvaničan spisak,
- * pa se ovde ne testira sadržaj spiska nego SAMO pravila — ona rade i sa praznim
- * spiskom i moraju da nastave da rade kad se spisak popuni.
+ * Pravila ranglista škola i brana nad uvezenim šifarnikom.
+ * Plan: `docs/plan-ranglista-skola.html`.
  */
 
 function red(sifra: string, dece: number, ucenika: number | null, naziv = sifra): RedSkole {
@@ -123,5 +125,71 @@ describe("rok od 30 dana", () => {
     const tacno = new Date(sada.getTime() - ROK_PROMENE_SKOLE_DANA * 24 * 3600 * 1000);
     expect(smePromenitiSkolu(tacno, sada).ok).toBe(true);
     expect(sledecaPromenaSkole(tacno).getTime()).toBe(sada.getTime());
+  });
+});
+
+/**
+ * Brana nad samim šifarnikom (`skole-srbije.ts`), koji generiše
+ * `scripts/uvezi-skole.mjs` iz izvoza JISP-a.
+ *
+ * Testira se PODATAK, ne pravilo — jer upravo se u podatku greška ne vidi:
+ * dupla šifra tiho sabere dve škole u jedan red, a mesto koje ne pogađa nijedno
+ * naselje ispadne iz svega što se kači na lokaciju dok škola i dalje stoji na
+ * listi. Oba kvara prolaze i tipove i build.
+ */
+describe("šifarnik škola", () => {
+  it("nije prazan — spisak je uvezen", () => {
+    expect(skolePostoje()).toBe(true);
+    expect(SKOLE.length).toBeGreaterThan(1500);
+  });
+
+  it("svaka šifra je jedinstvena", () => {
+    const sifre = new Set(SKOLE.map((s) => s.sifra));
+    expect(sifre.size).toBe(SKOLE.length);
+  });
+
+  it("svaka šifra se razrešava nazad u svoju školu", () => {
+    for (const s of SKOLE) expect(razresiSkolu(s.sifra)?.naziv).toBe(s.naziv);
+  });
+
+  it("svako mesto je kanonsko naselje iz šifarnika naselja", () => {
+    // 🔴 Ovo je provera koja se najlakše previdi: škola čije mesto ne pogađa
+    // nijedno naselje nigde ne puca, samo tiho ispada iz svega što se kači na
+    // lokaciju. Uvozna skripta zato odbija ceo uvoz, a ovaj test to zaključava.
+    const promaseno = SKOLE.filter((s) => razresiNaselje(s.mesto) !== s.mesto);
+    expect(promaseno.map((s) => `${s.naziv} — ${s.mesto}`)).toEqual([]);
+  });
+
+  it("broj upisanih učenika je pozitivan ili nepoznat, nikad nula ni negativan", () => {
+    // Nula bi u procentualnoj listi dala deljenje nulom; `udeoUkljucenosti` to
+    // hvata i vraća null, ali podatak takav ne sme ni da uđe.
+    for (const s of SKOLE) {
+      if (s.ucenika !== null) expect(s.ucenika).toBeGreaterThan(0);
+    }
+  });
+
+  it("ima obe liste — i osnovne i srednje škole", () => {
+    // Nacionalne liste idu odvojeno po tipu; prazna lista srednjih značila bi da
+    // je uvezen samo izvoz osnovnog obrazovanja.
+    expect(SKOLE.filter((s) => s.tip === "OSNOVNA").length).toBeGreaterThan(1000);
+    expect(SKOLE.filter((s) => s.tip === "SREDNJA").length).toBeGreaterThan(400);
+  });
+
+  it("mešovita ustanova ulazi na oba nivoa, sa razdvojenim brojem učenika", () => {
+    // 🔴 Tip se izvodi iz izveštaja, ne iz naziva ustanove: „Mešovita škola" ima
+    // i osnovna i srednja odeljenja. Da se sabiraju u jedan red, imenilac
+    // procentualne liste bio bi zbir dva nivoa.
+    const kljuc = (s: (typeof SKOLE)[number]) => `${s.naziv}|${s.mesto}`;
+    const osnovne = new Set(SKOLE.filter((s) => s.tip === "OSNOVNA").map(kljuc));
+    const naObaNivoa = SKOLE.filter((s) => s.tip === "SREDNJA" && osnovne.has(kljuc(s)));
+    expect(naObaNivoa.length).toBeGreaterThan(0);
+    for (const s of naObaNivoa) expect(s.sifra.endsWith("-srednja")).toBe(true);
+  });
+
+  it("pretraga pogađa školu po nazivu i mestu", () => {
+    const nadjena = SKOLE.find((s) => s.ucenika !== null)!;
+    const prvaRec = nadjena.naziv.replace(/[„"]/g, " ").trim().split(/\s+/).pop()!;
+    const pogoci = pretraziSkole(`${prvaRec} ${nadjena.mesto}`, { limit: 50 });
+    expect(pogoci.some((s) => s.sifra === nadjena.sifra)).toBe(true);
   });
 });

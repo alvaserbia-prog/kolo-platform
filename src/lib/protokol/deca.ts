@@ -23,6 +23,7 @@ import { poljaPseudonima } from "@/lib/pseudonim";
 import { beogradskiDan } from "./obracunski-dan";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
 import { ponistiVerifikaciju } from "./lazna-verifikacija";
+import bcrypt from "bcryptjs";
 import { obavesti } from "@/lib/notifikacije";
 import {
   PORUKA_CEKA_RODITELJA,
@@ -35,6 +36,7 @@ import {
   uzrastZaModul,
   type StanjeDeteta,
   type Ucesnik,
+  MIN_LOZINKA,
 } from "@/lib/deca-pravila";
 
 export * from "@/lib/deca-pravila";
@@ -360,6 +362,51 @@ export async function postaviDozvolu(roditeljId: string, deteId: string, dozvola
   await mojeDeteIliBaci(roditeljId, deteId);
   await prisma.user.update({ where: { id: deteId }, data: { dozvolaOdrasli: dozvola } });
   return { dozvolaOdrasli: dozvola };
+}
+
+/**
+ * Nova lozinka detetu, na zahtev roditelja (čl. 10 st. 1).
+ *
+ * ─── Zašto ovo mora da postoji ──────────────────────────────────────────────
+ *
+ * Nalog maloletnog korisnika po pravilu nema imejl (čl. 4a — dete unosi adresu
+ * SVOG RODITELJA, koja se ne upisuje u `User.email`). Tok „zaboravljena lozinka"
+ * traži imejl, pa detetu bez adrese ne stoji na raspolaganju: zaboravljena lozinka
+ * je do ove izmene značila trajno zaključan nalog, sa svim prijateljstvima i
+ * POEN-om u njemu. Drugi izlaz — da dete sámo upiše i potvrdi svoju adresu — radi
+ * samo za stariju decu; ovaj radi uvek.
+ *
+ * 🔴 Stara lozinka se NE traži i ne može da se traži: roditelj je ne zna, u tome i
+ * jeste stvar. Zaštitu nosi to što radnju izvodi isključivo roditelj tog deteta,
+ * prijavljen na sopstveni nalog (`mojeDeteIliBaci`).
+ *
+ * Dete o promeni dobija obaveštenje. Bez njega bi mu nalog prestao da radi bez
+ * ijednog traga o tome zašto — a lozinku koju je zapamtilo više ne bi mogao da
+ * upotrebi ni ono ni bilo ko drugi.
+ */
+export async function postaviLozinkuDeteta(
+  roditeljId: string,
+  deteId: string,
+  lozinka: unknown
+) {
+  const dete = await mojeDeteIliBaci(roditeljId, deteId);
+  if (typeof lozinka !== "string" || lozinka.length < MIN_LOZINKA) {
+    throw new DecaGreska(`Lozinka mora imati najmanje ${MIN_LOZINKA} znakova.`, 400);
+  }
+
+  const passwordHash = await bcrypt.hash(lozinka, 12);
+  await prisma.user.update({ where: { id: dete.id }, data: { passwordHash } });
+
+  await obavesti(dete.id, {
+    tip: "lozinka_promenio_roditelj",
+    kljuc: "notifikacije.lozinka_promenio_roditelj",
+    parametri: {},
+    naslov: "Roditelj ti je postavio novu lozinku",
+    tekst: "Pitaj ga koja je nova lozinka i prijavi se njome.",
+    link: "/pocetna",
+  }).catch(() => {});
+
+  return { ok: true };
 }
 
 /**

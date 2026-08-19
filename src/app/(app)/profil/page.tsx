@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import ProfilKlijent from "./ProfilKlijent";
 import MojaDeca from "@/components/deca/MojaDeca";
+import EmailDeteta from "@/components/deca/EmailDeteta";
 import IzborSkole from "@/components/deca/IzborSkole";
 import { razresiSkolu } from "@/lib/skola";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
@@ -59,6 +60,11 @@ export default async function ProfilPage() {
         emailObavestenja: user.emailObavestenja,
       }}
     />
+    {MODUL_DECA_AKTIVAN && user.maloletan && (
+      <div className="mx-auto mt-6 max-w-3xl">
+        <EmailDeteta />
+      </div>
+    )}
     {MODUL_DECA_AKTIVAN && user.maloletan && (
       <div className="mx-auto mt-6 max-w-3xl">
         <IzborSkole
