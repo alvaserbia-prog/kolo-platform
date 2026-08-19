@@ -16,11 +16,8 @@ import { SKOLE } from "@/lib/skole-srbije";
 import { razresiNaselje } from "@/lib/naselje";
 
 /**
- * Pravila ranglista škola. Plan: `docs/plan-ranglista-skola.html`.
- *
- * Šifarnik (`skole-srbije.ts`) je namerno prazan dok se ne uveze zvaničan spisak,
- * pa se ovde ne testira sadržaj spiska nego SAMO pravila — ona rade i sa praznim
- * spiskom i moraju da nastave da rade kad se spisak popuni.
+ * Pravila ranglista škola i brana nad uvezenim šifarnikom.
+ * Plan: `docs/plan-ranglista-skola.html`.
  */
 
 function red(sifra: string, dece: number, ucenika: number | null, naziv = sifra): RedSkole {
@@ -143,7 +140,7 @@ describe("rok od 30 dana", () => {
 describe("šifarnik škola", () => {
   it("nije prazan — spisak je uvezen", () => {
     expect(skolePostoje()).toBe(true);
-    expect(SKOLE.length).toBeGreaterThan(1000);
+    expect(SKOLE.length).toBeGreaterThan(1500);
   });
 
   it("svaka šifra je jedinstvena", () => {
@@ -169,6 +166,24 @@ describe("šifarnik škola", () => {
     for (const s of SKOLE) {
       if (s.ucenika !== null) expect(s.ucenika).toBeGreaterThan(0);
     }
+  });
+
+  it("ima obe liste — i osnovne i srednje škole", () => {
+    // Nacionalne liste idu odvojeno po tipu; prazna lista srednjih značila bi da
+    // je uvezen samo izvoz osnovnog obrazovanja.
+    expect(SKOLE.filter((s) => s.tip === "OSNOVNA").length).toBeGreaterThan(1000);
+    expect(SKOLE.filter((s) => s.tip === "SREDNJA").length).toBeGreaterThan(400);
+  });
+
+  it("mešovita ustanova ulazi na oba nivoa, sa razdvojenim brojem učenika", () => {
+    // 🔴 Tip se izvodi iz izveštaja, ne iz naziva ustanove: „Mešovita škola" ima
+    // i osnovna i srednja odeljenja. Da se sabiraju u jedan red, imenilac
+    // procentualne liste bio bi zbir dva nivoa.
+    const kljuc = (s: (typeof SKOLE)[number]) => `${s.naziv}|${s.mesto}`;
+    const osnovne = new Set(SKOLE.filter((s) => s.tip === "OSNOVNA").map(kljuc));
+    const naObaNivoa = SKOLE.filter((s) => s.tip === "SREDNJA" && osnovne.has(kljuc(s)));
+    expect(naObaNivoa.length).toBeGreaterThan(0);
+    for (const s of naObaNivoa) expect(s.sifra.endsWith("-srednja")).toBe(true);
   });
 
   it("pretraga pogađa školu po nazivu i mestu", () => {

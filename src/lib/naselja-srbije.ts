@@ -987,7 +987,7 @@ const RAW: string[] = [
   "Vranište", "Vranjska Banja", "Vranovo", "Vračev Gaj", "Vražogrnac", "Vrba", "Vrnjci",
   "Vrtogoš", "Vrčin", "Zablaće", "Zubin Potok", "Zupče", "Zvečan", "Zvonce", "Čibutkovica",
   "Čitluk", "Čokot", "Čumić", "Šetonje", "Šilovo", "Šišave", "Štavalj", "Štrpce",
-  "Štubik", "Žabare", "Žbevac", "Žerovnica", "Žitkovac", "Žitni Potok", "Žiča",
+  "Štubik", "Žabare", "Žbevac", "Žerovnica", "Žitkovac", "Žitni Potok", "Preoce", "Stanišor", "Žiča",
 ];
 
 // Dedupliciraj i sortiraj po abecedi (srpska latinica)

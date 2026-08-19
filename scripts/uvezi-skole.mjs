@@ -37,18 +37,32 @@
  *
  *   node scripts/uvezi-skole.mjs osnovno.csv srednje.csv
  *
+ * ─── 🔴 TIP SE IZVODI IZ IZVEŠTAJA, NE IZ NAZIVA USTANOVE ───────────────────
+ *
+ * Prvo rešenje je čitalo kolonu „Vrsta ustanove" (Средња… → SREDNJA, ostalo →
+ * OSNOVNA) i bilo je pogrešno: izvoz SREDNJEG obrazovanja nosi 88 ustanova čiji
+ * naziv vrste ne počinje sa „Средња" — „Мешовита школа" (45), „Школа за ученике
+ * са сметњама у развоју" (29) i „Школа са домом" (14). Sve one su upadale među
+ * OSNOVNE, i to sa brojem SREDNJOŠKOLACA.
+ *
+ * Ispravno merilo je izveštaj: „Osnovno obrazovanje" nosi odeljenja osnovnog
+ * nivoa, „Srednje obrazovanje" odeljenja srednjeg. Vrsta ustanove opisuje USTANOVU,
+ * a nivo se traži za ODELJENJE — a mešovita škola po definiciji ima oba.
+ *
+ * Posledica koja je ispravna, ne nuspojava: mešovita škola ulazi DVA puta, jednom
+ * kao osnovna sa svojim osnovcima i jednom kao srednja sa svojim srednjoškolcima.
+ * Dete bira nivo koji pohađa, a imenilac procentualne liste ostaje tačan.
+ *
+ * Izveštaj se prepoznaje po koloni „Obrazovni profil", koju ima samo srednji —
+ * dakle po građi samog izveštaja, ne po nagađanju nad podacima.
+ *
  * ─── Srednje škole i prag od 200 ────────────────────────────────────────────
  *
- * Tip se izvodi iz kolone „Vrsta ustanove" (Основна… → OSNOVNA, Средња… →
- * SREDNJA), ali izvoz OSNOVNOG obrazovanja usput nosi i četrdesetak srednjih
- * škola — muzičke i baletske koje dele ustanovu sa osnovnom. Lista od četrdeset
- * predstavljena kao „srednje škole u Srbiji" bila bi netačna, a u Srbiji ih je
- * oko petsto.
- *
- * Zato srednje škole ulaze tek kad ih u ulazu ima najmanje `PRAG_SREDNJIH` — što
- * znači da je među izvozima i pravi izvoz srednjeg obrazovanja. Ispod tog broja
- * se preskaču uz glasnu poruku. Prag je brana od nepotpune liste, ne merilo
- * kvaliteta podataka.
+ * Izvoz osnovnog obrazovanja sam za sebe ne daje nijednu srednju školu (sve
+ * njegove redove nosi osnovni nivo), pa prag praktično znači: uvezi srednje tek
+ * kad je među izvozima i pravi izvoz srednjeg obrazovanja. Lista od četrdesetak
+ * škola predstavljena kao „srednje škole u Srbiji" bila bi netačna — u Srbiji ih
+ * je oko petsto.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -170,6 +184,9 @@ function citajCsv(tekst) {
 const zaglavljeKljuc = (s) =>
   String(s ?? "").replace(/^﻿/, "").trim().toLowerCase().replace(/[\s.-]+/g, "_");
 
+/** Kolona koju ima SAMO izveštaj srednjeg obrazovanja — po njoj se prepoznaje nivo. */
+const KOLONA_SREDNJI = "obrazovni_profil";
+
 const KOLONE = {
   godina: ["skolska_godina"],
   naziv: ["naziv_ustanove"],
@@ -220,6 +237,10 @@ for (const put of putanje) {
     }
     kolone[polje] = i;
   }
+  // Nivo se čita iz GRAĐE izveštaja, ne iz podataka: „Obrazovni profil" postoji
+  // samo u srednjem obrazovanju.
+  const tip = norm.includes(KOLONA_SREDNJI) ? "SREDNJA" : "OSNOVNA";
+
   for (const r of redovi.slice(1)) {
     const uzmi = (polje) => (r[kolone[polje]] ?? "").trim();
     podaci.push({
@@ -227,11 +248,11 @@ for (const put of putanje) {
       naziv: uzmi("naziv"),
       mesto: uzmi("mesto"),
       opstina: uzmi("opstina"),
-      vrsta: uzmi("vrsta"),
       ucenika: uzmi("ucenika"),
+      tip,
     });
   }
-  console.log(`Pročitano: ${put} (${redovi.length - 1} redova)`);
+  console.log(`Pročitano: ${put} — ${tip === "SREDNJA" ? "srednje" : "osnovno"} obrazovanje (${redovi.length - 1} redova)`);
 }
 
 // Najnovija školska godina sa značajnim brojem redova. Poslednja godina u izvozu
@@ -251,8 +272,6 @@ if (!godina) {
 }
 console.log(`Školska godina: ${godina} (${poGodini.get(godina)} odeljenja u izvozu)`);
 
-const jeSrednja = (vrsta) => vrsta.startsWith("Средња") || vrsta.startsWith("Srednja");
-
 const skole = new Map();
 for (const r of podaci) {
   if (r.godina !== godina) continue;
@@ -260,15 +279,12 @@ for (const r of podaci) {
   const mestoUnos = preslovi(r.mesto);
   if (!naziv || !mestoUnos) continue;
 
-  const kljuc = `${naziv}|${mestoUnos}`;
+  // 🔴 Tip je deo ključa: mešovita škola ima i osnovna i srednja odeljenja, pa
+  // ulazi kao dva reda sa razdvojenim brojem učenika. Bez toga bi joj se osnovci
+  // i srednjoškolci sabrali u jedan imenilac.
+  const kljuc = `${r.tip}|${naziv}|${mestoUnos}`;
   if (!skole.has(kljuc)) {
-    skole.set(kljuc, {
-      naziv,
-      mestoUnos,
-      opstina: preslovi(r.opstina),
-      tip: jeSrednja(r.vrsta) ? "SREDNJA" : "OSNOVNA",
-      ucenika: 0,
-    });
+    skole.set(kljuc, { naziv, mestoUnos, opstina: preslovi(r.opstina), tip: r.tip, ucenika: 0 });
   }
   const broj = Number(r.ucenika.replace(",", "."));
   if (Number.isFinite(broj) && broj > 0) skole.get(kljuc).ucenika += broj;
@@ -294,9 +310,13 @@ for (const s of skole.values()) {
     nepoznataNaselja.set(s.mestoUnos, (nepoznataNaselja.get(s.mestoUnos) ?? 0) + 1);
     continue;
   }
-  const sifra = `${normalizuj(s.naziv)}-${normalizuj(mesto)}`
+  // Srednja škola nosi sufiks: mešovita ustanova daje dva reda sa istim nazivom i
+  // mestom. Osnovne ostaju bez sufiksa, pa im se šifre ne menjaju između uvoza i
+  // zatečeni izbori dece ostaju važeći.
+  const osnova = `${normalizuj(s.naziv)}-${normalizuj(mesto)}`
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+  const sifra = s.tip === "SREDNJA" ? `${osnova}-srednja` : osnova;
   if (vidjeneSifre.has(sifra)) sudari.push(`${sifra}: „${vidjeneSifre.get(sifra)}" i „${s.naziv} — ${mesto}"`);
   vidjeneSifre.set(sifra, `${s.naziv} — ${mesto}`);
   izlazni.push({
