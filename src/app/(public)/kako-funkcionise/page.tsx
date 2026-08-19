@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
@@ -55,6 +56,11 @@ export default async function KakoFunkcionisePage() {
     },
   ];
 
+  // Broj kanala koje ova stranica nabraja: sedam ličnih + dečji, dok modul radi.
+  // Ide kao CIFRA, ne kao reč — brojna reč bi se sklanjala po jeziku, a jedan
+  // prosleđen string ne može da posluži svih pet prevoda.
+  const brojKanala = MODUL_DECA_AKTIVAN ? 8 : 7;
+
   const nacinUpisa = [
     {
       br: "1",
@@ -105,6 +111,20 @@ export default async function KakoFunkcionisePage() {
       iznos: t("n7_iznos"),
       boja: "bg-kolo-green-100 text-kolo-green-700",
     },
+    // Deveti kanal iz čl. 15 (doprinos dece u dečjem prostoru) — na stranici je
+    // osmi, jer rast kolektivnih oblika upisuje u zapis Kruga, ne čoveka.
+    // Prikazuje se samo dok Modul Deca radi; inače naslov sekcije laže broj.
+    ...(MODUL_DECA_AKTIVAN
+      ? [
+          {
+            br: "8",
+            naslov: t("n8_naslov"),
+            opis: t("n8_opis"),
+            iznos: t("n8_iznos"),
+            boja: "bg-kolo-green-100 text-kolo-green-700",
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -185,7 +205,7 @@ export default async function KakoFunkcionisePage() {
             {t("evidencija_tag")}
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            {t("evidencija_naslov")}
+            {t("evidencija_naslov", { broj: brojKanala })}
           </h2>
         </div>
 
@@ -209,7 +229,7 @@ export default async function KakoFunkcionisePage() {
               </svg>
             </span>
             <p className="text-sm text-kolo-text leading-relaxed">
-              {t("poen_kanali")}
+              {t("poen_kanali", { broj: brojKanala })}
             </p>
           </div>
           <div className="bg-white rounded-xl card-shadow p-4 flex items-start gap-3">
@@ -276,7 +296,7 @@ export default async function KakoFunkcionisePage() {
               </div>
             </div>
 
-            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod")}</p>
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod", { broj: brojKanala })}</p>
 
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("poen_jeste_naslov")}</p>
@@ -320,7 +340,7 @@ export default async function KakoFunkcionisePage() {
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-green-700 mb-1">{t("zerosum_naslov")}</p>
               <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
-                {t("zerosum_tekst")}
+                {t("zerosum_tekst", { broj: brojKanala })}
               </p>
             </div>
           </div>

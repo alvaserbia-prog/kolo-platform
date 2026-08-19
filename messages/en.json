@@ -1291,7 +1291,8 @@
     "dok_korisnicki_broj": "3 documents",
     "dok_zastita_tag": "Data protection",
     "dok_zastita_broj": "2 documents",
-    "dok_licenca": "The documentation is licensed under CC BY-SA 4.0, the software under AGPL-3.0."
+    "dok_licenca": "The documentation is licensed under CC BY-SA 4.0, the software under AGPL-3.0.",
+    "dok_pravilnik_ucesce_dece": "Rulebook on the Participation of Children"
   },
   "oSistemu": {
     "meta_title": "Where KOLO comes from — solidarity economy in practice",
@@ -1442,16 +1443,16 @@
     "odgovornost_naslov": "A confirmation carries responsibility.",
     "odgovornost_tekst": "Whoever confirms someone who is not a real person loses those 1,000 POEN. For abuse they lose the right to confirm anyone further, and for a repeated one they may be excluded from the network. That is why a confirmation in KOLO is worth something.",
     "evidencija_tag": "Contribution ledger",
-    "evidencija_naslov": "Seven channels through which the Protocol records POEN in your ledger",
+    "evidencija_naslov": "{broj} channels through which the Protocol records POEN in your ledger",
     "poen_ne_kupuje": "POEN is not bought for money.",
-    "poen_kanali": "It is recorded through seven channels of contribution, under rules that are public and the same for everyone. For exchange, confirmation and donation the recording is automatic. For work for the community and for patronage, someone must first confirm that the work was done.",
+    "poen_kanali": "It is recorded through {broj} channels of contribution, under rules that are public and the same for everyone. For exchange, confirmation and donation the recording is automatic. For work for the community and for patronage, someone must first confirm that the work was done.",
     "poen_preraspodela": "When you exchange with someone, POEN is only re-registered from one to the other. Existing records are redistributed and nothing new comes into being.",
     "n1_naslov": "Contribution to exchange",
     "n1_iznos": "1,000 POEN",
     "n1_opis": "Your first listing offering a good or a service — with a photograph, a description, a category and a place — brings you 1,000 POEN.",
     "dve_jedinice_tag": "Two units in the system",
     "poen_jedinica_label": "unit for recording contribution",
-    "poen_uvod": "POEN records what you have given to the community. It comes about only through contribution, through the seven channels listed above. It is what others in the network know you by when you need something yourself.",
+    "poen_uvod": "POEN records what you have given to the community. It comes about only through contribution, through the {broj} channels listed above. It is what others in the network know you by when you need something yourself.",
     "poen_jeste_naslov": "What POEN is",
     "poen_jeste1": "A record of what you have given to the community",
     "poen_jeste2": "It does not expire — your contribution is remembered for good",
@@ -1466,7 +1467,7 @@
     "poen_nije5": "A claim against the Foundation or a property right of the user",
     "poen_nije6": "A thing existing outside the ledger — POEN is a record and nothing else",
     "zerosum_naslov": "How POEN comes about and how it moves",
-    "zerosum_tekst": "New POEN comes about only through the seven channels of contribution. Every time the Protocol records new POEN, it records the same amount against itself as a minus, so the sum of all records in the system — those of users and those of the Protocol — is always exactly zero.\nIn an exchange between people nothing new comes about. POEN is only re-registered from one to the other.",
+    "zerosum_tekst": "New POEN comes about only through the {broj} channels of contribution. Every time the Protocol records new POEN, it records the same amount against itself as a minus, so the sum of all records in the system — those of users and those of the Protocol — is always exactly zero.\nIn an exchange between people nothing new comes about. POEN is only re-registered from one to the other.",
     "zrno_jedinica_label": "unit of decision-making",
     "zrno_uvod": "ZRNO gives you a vote in the Upper Kolo, the body that decides on KOLO's rules. Whoever contributes over a long time also gains a say in what the system looks like.",
     "zrno_upis_naslov": "How it is registered",
@@ -1506,7 +1507,10 @@
     "n3_iznos": "per job done",
     "n2_naslov": "Proof of reality",
     "n2_iznos": "1,000 / 1,000 / 500",
-    "n2_opis": "When a full member who knows you personally confirms you in the chain of confirmations, the Protocol records 1,000 POEN for you and 1,000 for them. When the confirmation is subject to oversight, 500 POEN goes to the overseer as well."
+    "n2_opis": "When a full member who knows you personally confirms you in the chain of confirmations, the Protocol records 1,000 POEN for you and 1,000 for them. When the confirmation is subject to oversight, 500 POEN goes to the overseer as well.",
+    "n8_naslov": "Children's space",
+    "n8_iznos": "500 POINTS per friendship",
+    "n8_opis": "Children from the age of seven have their own space, separate from the rest of the system. A friendship is formed in person, by scanning a code, and 500 POINTS are recorded for each child — but only once at least one parent of each child is a regular member. Governed by the Rulebook on the Participation of Children."
   },
   "pokroviteljPage": {
     "meta_title": "Sponsors — KOLO",

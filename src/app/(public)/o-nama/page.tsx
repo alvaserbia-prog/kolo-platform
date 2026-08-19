@@ -97,6 +97,7 @@ export default async function ONamaPage() {
     { naziv: t("dok_pravilnik_osnivacki"), href: "/pravilnik/osnivacki" },
     { naziv: t("dok_pravilnik_gornje_kolo"), href: "/pravilnik/gornje-kolo" },
     { naziv: t("dok_pravilnik_programi_podrske"), href: "/pravilnik/programi-podrske" },
+    { naziv: t("dok_pravilnik_ucesce_dece"), href: "/pravilnik/ucesce-dece" },
   ];
 
   // Ono što korisnik prihvata pri registraciji odvojeno je od akata o zaštiti

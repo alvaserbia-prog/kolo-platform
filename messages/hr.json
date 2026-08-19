@@ -1291,7 +1291,8 @@
     "dok_korisnicki_broj": "3 dokumenta",
     "dok_zastita_tag": "Zaštita podataka",
     "dok_zastita_broj": "2 dokumenta",
-    "dok_licenca": "Dokumentacija je pod licencom CC BY-SA 4.0, softver pod AGPL-3.0."
+    "dok_licenca": "Dokumentacija je pod licencom CC BY-SA 4.0, softver pod AGPL-3.0.",
+    "dok_pravilnik_ucesce_dece": "Pravilnik o sudjelovanju djece"
   },
   "oSistemu": {
     "meta_title": "Odakle dolazi KOLO — solidarna ekonomija u praksi",
@@ -1442,16 +1443,16 @@
     "odgovornost_naslov": "Potvrda nosi odgovornost.",
     "odgovornost_tekst": "Tko potvrdi nekoga tko nije stvarna osoba, gubi tih 1.000 POEN. Za zlouporabu gubi pravo da dalje potvrđuje, a za ponovljenu može biti isključen iz mreže. Zato potvrda u KOLU nešto vrijedi.",
     "evidencija_tag": "Evidencija doprinosa",
-    "evidencija_naslov": "Sedam kanala kroz koje Protokol upisuje POEN u tvoju evidenciju",
+    "evidencija_naslov": "{broj} kanala kroz koje Protokol upisuje POEN u tvoju evidenciju",
     "poen_ne_kupuje": "POEN se ne kupuje za novac.",
-    "poen_kanali": "Upisuje se kroz sedam kanala doprinosa, po pravilima koja su javna i ista za sve. Kod razmjene, potvrde i donacije upis je automatski. Kod rada za zajednicu i pokroviteljstva netko prvo mora potvrditi da je posao obavljen.",
+    "poen_kanali": "Upisuje se kroz {broj} kanala doprinosa, po pravilima koja su javna i ista za sve. Kod razmjene, potvrde i donacije upis je automatski. Kod rada za zajednicu i pokroviteljstva netko prvo mora potvrditi da je posao obavljen.",
     "poen_preraspodela": "Kad razmjenjuješ s nekim, POEN se samo prepisuje od jednog do drugog. Postojeći zapisi se preraspodjeljuju i ništa novo ne nastaje.",
     "n1_naslov": "Doprinos razmjeni",
     "n1_iznos": "1.000 POEN",
     "n1_opis": "Prvi oglas kojim nudiš dobro ili uslugu, s fotografijom, opisom, kategorijom i mjestom, nosi ti 1.000 POEN.",
     "dve_jedinice_tag": "Dvije jedinice u sustavu",
     "poen_jedinica_label": "jedinica evidencije doprinosa",
-    "poen_uvod": "POEN bilježi što si dao zajednici. Nastaje samo kroz doprinos, kroz sedam kanala nabrojanih iznad. Po njemu te drugi u mreži prepoznaju kad i tebi nešto zatreba.",
+    "poen_uvod": "POEN bilježi što si dao zajednici. Nastaje samo kroz doprinos, kroz {broj} kanala nabrojanih iznad. Po njemu te drugi u mreži prepoznaju kad i tebi nešto zatreba.",
     "poen_jeste_naslov": "Što POEN jest",
     "poen_jeste1": "Zapis o tome što si dao zajednici",
     "poen_jeste2": "Ne istječe, tvoj doprinos se pamti trajno",
@@ -1466,7 +1467,7 @@
     "poen_nije5": "Potraživanje prema Fondaciji ni imovinsko pravo korisnika",
     "poen_nije6": "Stvar koja postoji izvan evidencije, POEN je isključivo zapis",
     "zerosum_naslov": "Kako POEN nastaje i kako se kreće",
-    "zerosum_tekst": "Novi POEN nastaje samo kroz sedam kanala doprinosa. Svaki put kad Protokol upiše nove POEN-e, sebi upisuje isti iznos u minus, pa je zbroj svih zapisa u sustavu, korisničkih i protokolarnih, uvijek točno nula.\nU razmjeni među ljudima ništa novo ne nastaje. POEN se samo prepisuje od jednog do drugog.",
+    "zerosum_tekst": "Novi POEN nastaje samo kroz {broj} kanala doprinosa. Svaki put kad Protokol upiše nove POEN-e, sebi upisuje isti iznos u minus, pa je zbroj svih zapisa u sustavu, korisničkih i protokolarnih, uvijek točno nula.\nU razmjeni među ljudima ništa novo ne nastaje. POEN se samo prepisuje od jednog do drugog.",
     "zrno_jedinica_label": "jedinica odlučivanja",
     "zrno_uvod": "ZRNO ti daje glas u Gornjem Kolu, tijelu koje odlučuje o pravilima KOLA. Tko dugo pridonosi, dobiva i pravo odlučivati kako sustav izgleda.",
     "zrno_upis_naslov": "Kako se upisuje",
@@ -1506,7 +1507,10 @@
     "n3_iznos": "po obavljenom poslu",
     "n2_naslov": "Dokaz stvarnosti",
     "n2_iznos": "1.000 / 1.000 / 500",
-    "n2_opis": "Kad te redovan član koji te osobno poznaje potvrdi u lancu potvrda, Protokol upisuje 1.000 POEN tebi i 1.000 njemu. Kad potvrda podliježe nadzoru, i 500 POEN nadzorniku."
+    "n2_opis": "Kad te redovan član koji te osobno poznaje potvrdi u lancu potvrda, Protokol upisuje 1.000 POEN tebi i 1.000 njemu. Kad potvrda podliježe nadzoru, i 500 POEN nadzorniku.",
+    "n8_naslov": "Dječji prostor",
+    "n8_iznos": "500 POENA po prijateljstvu",
+    "n8_opis": "Djeca od sedme godine imaju vlastiti prostor, odvojen od ostatka sustava. Prijateljstvo se sklapa uživo, skeniranjem koda, i objema se upisuje po 500 POENA — ali tek kad je barem jedan roditelj svakog djeteta redovan član. Uređeno je Pravilnikom o sudjelovanju djece."
   },
   "pokroviteljPage": {
     "meta_title": "Pokrovitelji — KOLO",
