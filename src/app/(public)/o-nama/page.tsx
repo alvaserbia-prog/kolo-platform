@@ -133,7 +133,9 @@ export default async function ONamaPage() {
               {t("hero_opis")}
             </p>
           </div>
-          <div className="shrink-0 mx-auto md:ml-auto">
+          {/* Potpis ide ISPOD fotografije: od izmene zaglavlja ime više ne stoji u
+              podnaslovu, pa bi bez ovoga u vrhu strane stajalo lice bez imena. */}
+          <div className="shrink-0 mx-auto md:ml-auto text-center">
             <div
               className="rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl"
               style={{ width: "160px", height: "160px" }}
@@ -148,6 +150,8 @@ export default async function ONamaPage() {
                 style={{ width: "160px", height: "160px", display: "block", transform: "scale(1.28)", transformOrigin: "center 22%" }}
               />
             </div>
+            <p className="text-white font-semibold text-sm mt-3 leading-tight">{t("hero_potpis_ime")}</p>
+            <p className="text-white/70 text-xs leading-tight">{t("hero_potpis_uloga")}</p>
           </div>
         </div>
       </section>

@@ -1161,12 +1161,12 @@
     "kako_funkcionise_korak_4_opis": "Nudiš i tražiš rad, dobra i znanje, i pozivaš ljude koje poznaješ da uđu u mrežu. Svaki tvoj doprinos ostaje zabilježen i vidljiv u POEN-ima."
   },
   "oNama": {
-    "meta_title": "Tko stoji iza KOLA — KOLO Fondacija",
-    "meta_desc": "Nikola Šarić, liječnik iz Sombora, petnaest godina gradi sustav razmjene rada, dobara i znanja bez posrednika. Priča o KOLU, o Fondaciji i o tome kako se uključuješ.",
+    "meta_title": "KOLO Zaklada — kako je sustav nastao i gdje je sada",
+    "meta_desc": "KOLO Zaklada upisana je u registar u srpnju 2026, a platforma je u testiranju sa stvarnim korisnicima. Kako je sustav nastao, u kojoj je fazi razvoja i na koje se načine uključuješ.",
     "hero_tag": "KOLO Fondacija · Sombor",
-    "hero_naslov": "Tko stoji iza KOLA",
-    "hero_podnaslov": "Nikola Šarić, liječnik iz Sombora",
-    "hero_opis": "Sustav koji petnaest godina gradim među ljudima, bez posrednika. Ovo je priča o tome kako je nastao, gdje je sada i kako se uključuješ.",
+    "hero_naslov": "KOLO Zaklada",
+    "hero_podnaslov": "Tko gradi sustav, dokle se stiglo i što dolazi dalje",
+    "hero_opis": "Zaklada je upisana u Registar zaklada i fundacija u srpnju 2026. Platforma radi i sada je u testiranju, sa stvarnim ljudima i stvarnom razmjenom. Ovdje piše kako je sustav nastao, u kojoj je fazi razvoja i kako se uključuješ.",
     "citat_tekst": "Kao liječniku, poziv mi je pomagati ljudima. Vjerujem da je iz istog razloga uređeno i društvo u kojem živimo. Svaki dan u ordinaciji vidim ljude kojima sustav treba pomoći, ali ne može. Poljoprivrednike, umirovljenike, majke, bolesne ljude koji bi još mnogo toga mogli pružiti. Svatko ima svoje mjesto u društvu i nešto čime može pridonijeti. Samo im treba infrastruktura — alat i zajednica iza njega.",
     "prica_tag": "Priča",
     "prica_naslov": "Što nas je dovelo ovamo",
@@ -1292,7 +1292,9 @@
     "dok_zastita_tag": "Zaštita podataka",
     "dok_zastita_broj": "2 dokumenta",
     "dok_licenca": "Dokumentacija je pod licencom CC BY-SA 4.0, softver pod AGPL-3.0.",
-    "dok_pravilnik_ucesce_dece": "Pravilnik o sudjelovanju djece"
+    "dok_pravilnik_ucesce_dece": "Pravilnik o sudjelovanju djece",
+    "hero_potpis_uloga": "liječnik iz Sombora",
+    "hero_potpis_ime": "Nikola Šarić"
   },
   "oSistemu": {
     "meta_title": "Odakle dolazi KOLO — solidarna ekonomija u praksi",

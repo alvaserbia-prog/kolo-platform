@@ -1161,12 +1161,12 @@
     "kako_funkcionise_korak_4_opis": "You offer and look for work, goods and knowledge, and you invite people you know into the network. Every contribution of yours stays recorded and visible in POEN."
   },
   "oNama": {
-    "meta_title": "Who stands behind KOLO — KOLO Foundation",
-    "meta_desc": "Nikola Šarić, a doctor from Sombor, has spent fifteen years building a system for exchanging work, goods and knowledge without intermediaries. The story of KOLO, of the Foundation, and of how you join.",
+    "meta_title": "KOLO Foundation — how the system came about and where it stands",
+    "meta_desc": "The KOLO Foundation was entered in the register in July 2026, and the platform is in testing with real users. How the system came about, what stage of development it is in, and how you can take part.",
     "hero_tag": "KOLO Foundation · Sombor",
-    "hero_naslov": "Who stands behind KOLO",
-    "hero_podnaslov": "Nikola Šarić, a doctor from Sombor",
-    "hero_opis": "A system I have spent fifteen years building between people, without intermediaries. This is the story of how it came about, where it stands now, and how you join.",
+    "hero_naslov": "KOLO Foundation",
+    "hero_podnaslov": "Who is building the system, how far it has come and what comes next",
+    "hero_opis": "The Foundation was entered in the Register of Endowments and Foundations in July 2026. The platform is running and now in testing, with real people and real exchange. This page covers how the system came about, what stage of development it is in and how you take part.",
     "citat_tekst": "As a doctor, my calling is to help people. I believe the society we live in is arranged for the same reason. Every day in my surgery I see people the system ought to help but cannot. Farmers, pensioners, mothers, people who are ill and who still have a great deal to give. Everyone has their place in society and something to contribute. All they need is the infrastructure — the tools and a community behind them.",
     "prica_tag": "Story",
     "prica_naslov": "What brought us here",
@@ -1292,7 +1292,9 @@
     "dok_zastita_tag": "Data protection",
     "dok_zastita_broj": "2 documents",
     "dok_licenca": "The documentation is licensed under CC BY-SA 4.0, the software under AGPL-3.0.",
-    "dok_pravilnik_ucesce_dece": "Rulebook on the Participation of Children"
+    "dok_pravilnik_ucesce_dece": "Rulebook on the Participation of Children",
+    "hero_potpis_uloga": "physician from Sombor",
+    "hero_potpis_ime": "Nikola Šarić"
   },
   "oSistemu": {
     "meta_title": "Where KOLO comes from — solidarity economy in practice",

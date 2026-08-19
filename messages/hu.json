@@ -1154,12 +1154,12 @@
     "kako_funkcionise_korak_4_opis": "Munkát, javakat és tudást kínálsz és keresel, és meghívod a hálózatba azokat, akiket ismersz. Minden hozzájárulásod feljegyezve és láthatóan megmarad POEN-ben."
   },
   "oNama": {
-    "meta_title": "Ki áll a KOLO mögött — KOLO Alapítvány",
-    "meta_desc": "Nikola Šarić zombori orvos tizenöt éve épít rendszert a munka, a javak és a tudás közvetítők nélküli cseréjére. Történet a KOLO-ról, az Alapítványról, és arról, hogyan kapcsolódhatsz be.",
+    "meta_title": "KOLO Alapítvány — hogyan jött létre a rendszer és hol tart most",
+    "meta_desc": "A KOLO Alapítványt 2026 júliusában jegyezték be, a platform pedig valós felhasználókkal tesztelés alatt áll. Hogyan jött létre a rendszer, milyen fejlesztési szakaszban tart, és hogyan kapcsolódhatsz be.",
     "hero_tag": "KOLO Alapítvány · Zombor",
-    "hero_naslov": "Ki áll a KOLO mögött",
-    "hero_podnaslov": "Nikola Šarić, zombori orvos",
-    "hero_opis": "Rendszer, amelyet tizenöt éve építek emberek között, közvetítők nélkül. Ez a története annak, hogyan jött létre, hol tart most, és hogyan kapcsolódhatsz be.",
+    "hero_naslov": "KOLO Alapítvány",
+    "hero_podnaslov": "Ki építi a rendszert, meddig jutottunk és mi jön ezután",
+    "hero_opis": "Az Alapítványt 2026 júliusában jegyezték be az Alapítványok és Alapok Nyilvántartásába. A platform működik, és jelenleg tesztelés alatt áll, valós emberekkel és valós cserével. Itt olvasható, hogyan jött létre a rendszer, milyen fejlesztési szakaszban tart, és hogyan kapcsolódhatsz be.",
     "citat_tekst": "Orvosként az a hivatásom, hogy segítsek az embereken. Úgy hiszem, ugyanezért van berendezve az a társadalom is, amelyben élünk. Minden nap látok a rendelőben olyan embereket, akiknek a rendszernek segítenie kellene, de nem tud. Gazdálkodókat, nyugdíjasokat, anyákat, beteg embereket, akik még nagyon sokat tudnának adni. Mindenkinek megvan a helye a társadalomban, és van valami, amivel hozzájárulhat. Csak infrastruktúrára van szükségük — eszközökre és egy közösségre mögöttük.",
     "prica_tag": "Történet",
     "prica_naslov": "Mi hozott ide minket",
@@ -1285,7 +1285,9 @@
     "dok_zastita_tag": "Adatvédelem",
     "dok_zastita_broj": "2 dokumentum",
     "dok_licenca": "A dokumentáció CC BY-SA 4.0, a szoftver AGPL-3.0 licenc alatt áll.",
-    "dok_pravilnik_ucesce_dece": "Szabályzat a gyermekek részvételéről"
+    "dok_pravilnik_ucesce_dece": "Szabályzat a gyermekek részvételéről",
+    "hero_potpis_uloga": "orvos Somborból",
+    "hero_potpis_ime": "Nikola Šarić"
   },
   "oSistemu": {
     "meta_title": "Honnan ered a KOLO — a szolidáris gazdaság a gyakorlatban",
