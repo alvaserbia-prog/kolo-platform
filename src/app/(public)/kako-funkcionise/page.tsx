@@ -265,20 +265,19 @@ export default async function KakoFunkcionisePage() {
             return (
               <div
                 key={n.br}
-                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 ${rasponKartice(i)}`}
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col ${rasponKartice(i)}`}
               >
-                <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
-                    {n.br}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-kolo-text text-base mb-1">{n.naslov}</p>
-                    <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${n.boja}`}>
-                      {n.iznos}
-                    </span>
-                  </div>
+                {/* Redni broj stoji iznad, a naslov, iznos i opis počinju od iste
+                    leve ivice — ranije je opis bio pun red ispod, pa se nije
+                    poklapao sa naslovom uvučenim pored broja. */}
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 mb-3 ${n.boja}`}>
+                  {n.br}
                 </div>
-                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">{n.opis}</p>
+                <p className="font-semibold text-kolo-text text-base leading-snug">{n.naslov}</p>
+                <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full self-start mt-2 ${n.boja}`}>
+                  {n.iznos}
+                </span>
+                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line mt-3">{n.opis}</p>
               </div>
             );
           })}
