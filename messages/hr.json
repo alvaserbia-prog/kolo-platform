@@ -1294,7 +1294,10 @@
     "dok_licenca": "Dokumentacija je pod licencom CC BY-SA 4.0, softver pod AGPL-3.0.",
     "dok_pravilnik_ucesce_dece": "Pravilnik o sudjelovanju djece",
     "hero_potpis_uloga": "liječnik iz Sombora",
-    "hero_potpis_ime": "Nikola Šarić"
+    "hero_potpis_ime": "Nikola Šarić",
+    "k4_naslov": "Otvori račun svojem djetetu",
+    "k4_tekst": "Djeca od sedme godine mogu imati račun, u prostoru odvojenom od ostatka sustava. Ne vide oglase odraslih i ne dopisuju se s njima bez tvojeg odobrenja, a njihov profil odraslim članovima nije otvoren. Račun otvaraš iz svojeg profila, ili se dijete prijavi samo i unese tvoju adresu, pa ti račun preuzmeš. Sve je uređeno Pravilnikom o sudjelovanju djece.",
+    "k4_cta": "Pročitaj pravilnik →"
   },
   "oSistemu": {
     "meta_title": "Odakle dolazi KOLO — solidarna ekonomija u praksi",

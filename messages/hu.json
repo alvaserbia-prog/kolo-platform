@@ -1287,7 +1287,10 @@
     "dok_licenca": "A dokumentáció CC BY-SA 4.0, a szoftver AGPL-3.0 licenc alatt áll.",
     "dok_pravilnik_ucesce_dece": "Szabályzat a gyermekek részvételéről",
     "hero_potpis_uloga": "orvos Somborból",
-    "hero_potpis_ime": "Nikola Šarić"
+    "hero_potpis_ime": "Nikola Šarić",
+    "k4_naslov": "Nyiss fiókot a gyermekednek",
+    "k4_tekst": "A hétéves kortól a gyerekeknek lehet fiókjuk, a rendszer többi részétől elkülönített térben. Nem látják a felnőttek hirdetéseit, és a jóváhagyásod nélkül nem leveleznek velük, a profiljuk pedig nem nyitott a felnőtt tagok előtt. A fiókot a saját profilodból nyitod meg, vagy a gyerek egyedül regisztrál és megadja a te címedet, majd te veszed át a fiókot. Mindezt a gyermekek részvételéről szóló szabályzat rendezi.",
+    "k4_cta": "Olvasd el a szabályzatot →"
   },
   "oSistemu": {
     "meta_title": "Honnan ered a KOLO — a szolidáris gazdaság a gyakorlatban",

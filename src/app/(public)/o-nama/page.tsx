@@ -4,6 +4,7 @@ import Image from "next/image";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -66,6 +67,11 @@ export default async function ONamaPage() {
     { naslov: t("k1_naslov"), tekst: t("k1_tekst") },
     { naslov: t("k2_naslov"), tekst: t("k2_tekst"), cta: t("k2_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
     { naslov: t("k3_naslov"), tekst: t("k3_tekst"), cta: t("k3_cta"), ctaHref: "mailto:kontakt@ekolo.rs", ctaIsLink: false },
+    // Roditelj o Modulu Deca ovde saznaje prvi put: FAQ nosi detalje, a
+    // /kako-funkcionise samo dečji kanal POENA. Prati prekidač modula.
+    ...(MODUL_DECA_AKTIVAN
+      ? [{ naslov: t("k4_naslov"), tekst: t("k4_tekst"), cta: t("k4_cta"), ctaHref: "/pravilnik/ucesce-dece", ctaIsLink: true }]
+      : []),
   ];
 
   const sekundarne = [

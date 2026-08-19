@@ -1294,7 +1294,10 @@
     "dok_licenca": "The documentation is licensed under CC BY-SA 4.0, the software under AGPL-3.0.",
     "dok_pravilnik_ucesce_dece": "Rulebook on the Participation of Children",
     "hero_potpis_uloga": "physician from Sombor",
-    "hero_potpis_ime": "Nikola Šarić"
+    "hero_potpis_ime": "Nikola Šarić",
+    "k4_naslov": "Open an account for your child",
+    "k4_tekst": "Children from the age of seven can have an account, in a space separate from the rest of the system. They do not see adults’ listings and do not exchange messages with adults without your approval, and their profile is not open to adult members. You open the account from your own profile, or the child registers alone and enters your address, after which you take the account over. All of it is governed by the Rulebook on the Participation of Children.",
+    "k4_cta": "Read the rulebook →"
   },
   "oSistemu": {
     "meta_title": "Where KOLO comes from — solidarity economy in practice",
