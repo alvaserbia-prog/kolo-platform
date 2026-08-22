@@ -56,7 +56,7 @@ export async function PATCH(
   const bagKljuc = BAG_KLJUC[status] ?? "bag_promenjen";
   const BAG_SR: Record<string, [string, string]> = {
     bag_u_radu: ["Radi se na tvojoj prijavi", `Primili smo tvoju prijavu „${bag.naslov}" i radimo na njoj.`],
-    bag_reseno: ["Prijavljeni bag je rešen", `Greška koju si prijavio/la — „${bag.naslov}" — je otklonjena. Hvala ti.`],
+    bag_reseno: ["Prijavljeni bag je rešen", `Greška iz tvoje prijave — „${bag.naslov}“ — je otklonjena. Hvala ti.`],
     bag_odbijeno: ["Prijava baga je odbijena", `Tvoja prijava „${bag.naslov}" nije prihvaćena kao greška.`],
     bag_promenjen: ["Status prijave baga je promenjen", `Status tvoje prijave „${bag.naslov}" je promenjen.`],
   };

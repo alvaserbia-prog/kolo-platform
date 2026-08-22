@@ -93,7 +93,7 @@ export async function ukloniPoPrijavi(prijavaId: string, adminId: string, odluka
       kljuc: "notifikacije.prijava_poruke_resena",
       parametri: { odluka },
       naslov: "Prijavljena poruka je uklonjena",
-      tekst: `Fondacija je uklonila poruku koju si prijavio/la. Obrazloženje: ${odluka}`,
+      tekst: `Fondacija je uklonila poruku iz tvoje prijave. Obrazloženje: ${odluka}`,
       link: "/pocetna",
     });
   }

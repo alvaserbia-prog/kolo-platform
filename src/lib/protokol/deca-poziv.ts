@@ -319,7 +319,7 @@ async function poveziRoditelja(
     kljuc: "notifikacije.dete_preuzet_nalog",
     parametri: { pseudonim: roditelj.pseudonim },
     naslov: "Roditelj je preuzeo tvoj nalog",
-    tekst: `${roditelj.pseudonim} je preuzeo/la tvoj nalog. Sada možeš u Pričaonicu.`,
+    tekst: `Tvoj nalog je preuzeo ${roditelj.pseudonim}. Sada možeš u Pričaonicu.`,
     link: "/pocetna",
   }).catch(() => {});
 

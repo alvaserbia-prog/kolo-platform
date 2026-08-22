@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
   const rl = rateLimit(`deca:${session.user.id}:${klijentIP(req)}`, 5, 24 * 60 * 60 * 1000);
   if (!rl.ok) {
     return await greska(
-      "Otvorio/la si više naloga u kratkom roku. Sačekaj pre nego što otvoriš još jedan.",
+      "U kratkom roku je otvoreno više dečjih naloga. Svaki nalog traži izjašnjenje od svih koji su te potvrdili, pa se otvara najviše pet dnevno. Pokušaj ponovo sutra.",
       429
     );
   }

@@ -55,7 +55,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
     if (body.akcija !== "preuzmi") return await greska("Neispravan zahtev.", 400);
 
     const session = await getServerSession(authOptions);
-    if (!session) return await greska("Prijavi se svojim nalogom da bi preuzeo/la nalog deteta.", 401);
+    if (!session) return await greska("Prijavi se svojim nalogom da preuzmeš nalog deteta.", 401);
 
     const datum = parsirajDatumRodjenja(body.datumRodjenja);
     if (datum === undefined) return await greska("Datum rođenja nije ispravan.", 400);

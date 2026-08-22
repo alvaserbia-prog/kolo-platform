@@ -198,7 +198,7 @@ export default function PrijaveTab({ onDone }: { onDone?: () => void }) {
                     </strong>
                     <span>·</span>
                     <span>
-                      prijavio/la{" "}
+                      prijavilo{" "}
                       <a href={profilHref(p.prijavioc)} className="text-kolo-green-700 hover:underline">
                         <Pseudonim>{p.prijavioc.pseudonim}</Pseudonim>
                       </a>
