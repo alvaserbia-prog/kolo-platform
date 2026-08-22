@@ -285,7 +285,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
   async function promeniLozinku(e: React.FormEvent) {
     e.preventDefault();
     setLzError(""); setLzSuccess("");
-    if (novaLozinka.length < 8) { setLzError(t("lz_greska_duljina")); return; }
+    if (novaLozinka.length < 8) { setLzError(t("lz_greska_duzina")); return; }
     const res = await fetch("/api/profil/lozinka", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

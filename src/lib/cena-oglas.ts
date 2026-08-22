@@ -61,19 +61,19 @@ export function parsirajCenu(
     const od = Math.floor(Number(priceRaw));
     const doCena = Math.floor(Number(cenaDoRaw));
     if (!priceRaw || isNaN(od) || od <= 0 || od > MAX_CENA)
-      return greska("Donja cena mora biti pozitivan ceo broj.");
+      return greska("Donji iznos mora biti pozitivan ceo broj.");
     if (!cenaDoRaw || isNaN(doCena) || doCena <= 0 || doCena > MAX_CENA)
-      return greska("Gornja cena mora biti pozitivan ceo broj.");
+      return greska("Gornji iznos mora biti pozitivan ceo broj.");
     if (doCena <= od)
-      return greska("Gornja cena mora biti veća od donje.");
+      return greska("Gornji iznos mora biti veći od donjeg.");
     return { ok: true, cenaTip: "RASPON", price: od, cenaDo: doCena };
   }
 
   // FIKSNA (default)
   const p = Math.floor(Number(priceRaw));
   if (!priceRaw || isNaN(p) || p <= 0)
-    return greska("Cena mora biti pozitivan ceo broj.");
+    return greska("Iznos mora biti pozitivan ceo broj.");
   if (p > MAX_CENA)
-    return greska("Cena je neuobičajeno velika.");
+    return greska("Iznos je neuobičajeno velik.");
   return { ok: true, cenaTip: "FIKSNA", price: p, cenaDo: null };
 }
