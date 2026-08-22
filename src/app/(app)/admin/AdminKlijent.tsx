@@ -10,6 +10,7 @@ import { jeSuperadmin } from "@/lib/dozvole";
 import { ADMIN_TABOVI, type Tab } from "./tabovi";
 import Pseudonim from "@/components/Pseudonim";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
+import { RANG_TABELA } from "@/lib/donacija-pravila";
 
 // Teški tabovi iz zasebnih fajlova — lazy-load (smanjuje početni admin bundle).
 // Svi su `export default`, pa dynamic koristi default export direktno.
@@ -968,7 +969,6 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("emisija_opticaj_label")}</p>
           <p className="text-xl md:text-2xl font-bold text-kolo-text">{opticaj.toLocaleString(intlTag(locale))}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("emisija_opticaj_sub")}</p>
         </div>
         <div className="bg-white rounded-2xl border border-kolo-border p-4">
           <p className="text-xs text-kolo-muted mb-1">{t("emisija_dnevni_limit")}</p>
@@ -1290,7 +1290,7 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
         </form>
       </div>
 
-      {/* Pragovi donacija — nivoi (ispod) */}
+      {/* Nivoi donacija i koeficijent — cita se iz RANG_TABELA, da se ne prepisuje rucno */}
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-4 py-3 border-b border-kolo-border">
           <h3 className="text-sm font-semibold text-kolo-muted">{t("emisija_pragovi_naslov")}</h3>
@@ -1306,19 +1306,17 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
             </tr>
           </thead>
           <tbody>
-            {[
-              [1, "10.000",     "20.000"],
-              [2, "20.000",     "30.000"],
-              [3, "50.000",     "80.000"],
-              [4, "100.000",   "150.000"],
-              [5, "200.000",   "300.000"],
-              [6, "500.000",   "800.000"],
-              [7, "1.000.000", "1.500.000"],
-            ].map(([nivo, prag, bonus]) => (
-              <tr key={nivo} className="border-t border-kolo-border">
-                <td className="px-4 py-2 text-center font-medium text-kolo-text">{nivo}</td>
-                <td className="px-4 py-2 text-kolo-muted">{prag} RSD</td>
-                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">{bonus}</td>
+            {RANG_TABELA.map((r) => (
+              <tr key={r.nivo} className="border-t border-kolo-border">
+                <td className="px-4 py-2 text-center font-medium text-kolo-text">{r.nivo}</td>
+                <td className="px-4 py-2 text-kolo-muted">
+                  {r.do === 0
+                    ? t("emisija_tbl_nivo1")
+                    : `${r.do.toLocaleString(intlTag(locale))} RSD`}
+                </td>
+                <td className="px-4 py-2 text-right font-semibold text-kolo-green-700">
+                  {r.kurs.toFixed(2).replace(".", ",")}×
+                </td>
               </tr>
             ))}
           </tbody>

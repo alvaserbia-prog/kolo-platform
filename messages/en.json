@@ -975,7 +975,7 @@
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
-        "opis": "The system's foundational act (12 chapters, 82 articles). Governs POEN, ZRNO, the accounting coefficient, proof of reality, the contribution-recording channels, modules, and governance."
+        "opis": "The system’s founding act (12 chapters, 85 articles). It governs POEN, ZRNO, the accounting coefficient, proof of reality, the channels for recording contribution, modules and governance."
       },
       "hijerarhija": {
         "naziv": "Rulebook on the Hierarchy of Acts",
@@ -987,7 +987,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Rulebook on Sponsorship and Donations",
-        "opis": "Donations by individuals (11 levels, coefficient 1.00–2.00) and sponsorship by legal entities (7 levels, threshold RSD 10,000)."
+        "opis": "Donations by natural persons (11 levels, coefficient 1.00–2.00) and patronage by legal entities and sole traders (7 levels, threshold 10,000 RSD)."
       },
       "operativni": {
         "naziv": "Rulebook on Operational Contribution",
@@ -1003,7 +1003,7 @@
       },
       "programi-podrske": {
         "naziv": "Rulebook on Support Programmes",
-        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Care, Schooling) — conditions, coefficients and confirmation from your chain."
+        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Care, Schooling) — conditions, coefficients and confirmation from the chain. One attestation, that is a reality index of 10%, is enough for access."
       },
       "ucesce-dece": {
         "naziv": "Rulebook on the Participation of Children",
@@ -1992,7 +1992,7 @@
     "krug_potvrdi_odbijanje": "Potvrdi odbijanje",
     "krug_obrada": "Obrađujem...",
     "krug_odbijam": "Odbijam...",
-    "krug_odobrena_msg": "Circle \"{name}\" approved. 50,000 POEN recorded.",
+    "krug_odobrena_msg": "Circle “{name}” has been approved. 50,000 POEN recorded.",
     "krug_odbijen_msg": "Zahtev odbijen.",
     "greska_generalna": "Greška.",
     "ped_tab_oglasi": "Oglasi ({count})",
@@ -2068,14 +2068,13 @@
     "programi_odbij_razlog_prompt": "Reason for rejection (optional):",
     "programi_dnevni_iznos_placeholder": "Dnevni iznos POEN *",
     "emisija_opticaj_label": "Total POEN",
-    "emisija_opticaj_sub": "POEN u sistemu",
     "emisija_dnevni_limit": "Dnevni limit programa",
     "emisija_dnevni_limit_sub": "10% of the total POEN",
-    "emisija_pragovi_naslov": "Donation thresholds — fixed bonus",
-    "emisija_pragovi_sub": "The bonus is recorded once, when the cumulative total passes the threshold",
+    "emisija_pragovi_naslov": "Donation levels and coefficient",
+    "emisija_pragovi_sub": "The coefficient of the newly reached level applies to the whole new donation. The level is cumulative and permanent.",
     "emisija_tbl_nivo": "Nivo",
-    "emisija_tbl_kumulativ": "Kumulativ RSD",
-    "emisija_tbl_bonus": "Bonus POEN",
+    "emisija_tbl_kumulativ": "Cumulative from (RSD)",
+    "emisija_tbl_bonus": "Coefficient",
     "emisija_donacija_naslov": "Evidentiraj donaciju",
     "emisija_pseudonim_label": "Pseudonim donatora",
     "emisija_pseudonim_placeholder": "e.g. Beekeeper021",
@@ -2085,7 +2084,7 @@
     "emisija_iznos_nevalidan": "Enter a positive amount.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Recorded: {poen} POEN · Level {nivo}",
-    "emisija_prag_nedostignut": "Threshold not reached — no POEN recorded",
+    "emisija_prag_nedostignut": "The amount is too small for a single POEN to be recorded.",
     "emisija_kumulativ": "Kumulativ: {val} RSD",
     "emisija_evidentiram": "Evidentiram...",
     "emisija_btn": "Evidentiraj POEN",
@@ -2138,13 +2137,13 @@
     "korisnici_suspenduj": "Suspenduj",
     "korisnici_aktiviraj": "Aktiviraj",
     "korisnici_iskljuci": "Isključi",
-    "korisnici_lazni_verifikator": "False confirmation",
+    "korisnici_lazni_verifikator": "Account is not real",
     "korisnici_admin_rola": "Admin role:",
     "korisnici_iskljuci_confirm": "Permanently exclude the member from the system?",
-    "korisnici_lazni_confirm": "Mark that this member gave false confirmations? All confirmations in their subtree will be cancelled recursively, the recorded POEN (1,000/1,000/500) written off in favour of the Protocol (a negative record is possible), and the member excluded. Affected members drop to a 0% index.",
+    "korisnici_lazni_confirm": "Establish that no real person stands behind this account?\n\nEvery attestation the account touches falls — both those it gave and those it received. Each affected member loses 10 percentage points of their reality index and regains a slot in the chain; their other attestations remain in force. The recorded POEN (1,000 / 1,000 / 500) is written back to the Protocol, and any uncovered part passes as compensation onto the record of whoever gave the attestation. The account itself drops to a 0% index and is excluded.",
     "korisnici_suspenzija_razlog_prompt": "Razlog suspenzije:",
     "korisnici_superadmin_confirm": "Grant SUPERADMIN? They get every lever, including dangerous and system-wide actions.",
-    "korisnici_ponisteno_msg": "Voided {count} confirmations in the subtree.",
+    "korisnici_ponisteno_msg": "{count} attestations that this account touched have been annulled.",
     "korisnici_reset": "Resetuj nalog",
     "korisnici_reset_prompt": "Return the account “{pseudonim}” to its registration day?\n\nIrreversible: every confirmation the account touches falls (including those it gave others, along with the POEN recorded then), POEN and ZRNO go to zero, and listings, conversations, notifications, history and consents to the acts are deleted. The email, password and pseudonym remain — signing in works with the same details.\n\nType the pseudonym to confirm:",
     "korisnici_reset_gotovo": "The account “{pseudonim}” has been returned to its registration day. Written off in favour of the Protocol: {poen} POEN. {potvrde} confirmations fell, {oglasi} listings were deleted.",
@@ -2234,7 +2233,7 @@
     "vesti_obrisi_btn": "Obriši",
     "nadzor_naslov": "Confirmation integrity supervision",
     "nadzor_opis": "The system only observes and flags — no action is automatic. A person pulls the trigger.",
-    "nadzor_nema": "No open findings. (The cron runs at night — the list stays empty until it runs for the first time.)",
+    "nadzor_nema": "No open findings. The list is filled by the nightly run, so it stays empty until that runs for the first time.",
     "nadzor_grupa_label": "Grupa ({count} naloga)",
     "nadzor_nalozi_u_grupi": "Nalozi u grupi:",
     "nadzor_otvori_profil": "Otvori profil",
@@ -2288,7 +2287,7 @@
     "osnivaci_otkljucaj_confirm": "Unlock the list of founders for editing? While it is unlocked, steps are not recorded.",
     "osnivaci_evidentiraj_treba_zakljucati": "Steps are only recorded once the list of founders is locked (sum of shares 100%).",
     "doprinos_zatecene_naslov": "Outstanding content contributions (one-off)",
-    "doprinos_zatecene_opis": "The contribution is first NOTED retroactively for those who have a qualifying listing but no record at all (the record is lost if posting fails halfway). Then: Full members whose 1,000 POEN contribution is noted but not recorded have it recorded now (Art. 40a, transitional provision). Members without a confirmation are skipped — you approve those one by one in the First listings tab. Those whose contribution was recorded without a notification going out are notified as well.",
+    "doprinos_zatecene_opis": "The action runs in three steps. First, the contribution is recorded retroactively for members who have a qualifying listing but no record at all — the record is lost if publishing breaks halfway. Then, regular members whose 1,000 POEN contribution is noted but not yet recorded have it recorded now (Art. 40a, transitional paragraph); members without an attestation are skipped, as you approve those one by one in the First listings tab. Finally, notice goes out to those whose contribution was recorded but who were never told.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "The total POEN jumps by 1,000 × the number resolved. Since a founding step is recorded automatically at every 100,000 POEN, the first nightly run after this may trigger a step. Running it again does not record twice.",
@@ -2384,7 +2383,8 @@
     "doprinos_revizija_uredno": "Awaiting approval in the “First listings” tab: {ceka}. Annulled due to a removed listing: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave"
+    "tab_prijave": "Prijave",
+    "emisija_tbl_nivo1": "any donation below 5,000"
   },
   "kolacici": {
     "aria": "Cookie consent",

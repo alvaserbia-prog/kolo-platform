@@ -17,40 +17,40 @@ import { pageMetadata } from "@/lib/seo";
 const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "kolo-sistem": {
     fajl: "Pravilnik_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "hijerarhija": {
     fajl: "hijerarhija_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "dokaz-stvarnosti": {
     fajl: "dokaz_stvarnosti_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "pokroviteljstvo-donacije": {
     fajl: "donacije_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "operativni": {
     fajl: "operativni_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "osnivacki": {
     fajl: "osnivacki_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "gornje-kolo": {
     fajl: "gornje_kolo_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   "programi-podrske": {
     fajl: "programi_podrske_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
     fajl: "ucesce_dece_4_3_4.md",
-    verzija: "4.3.3",
+    verzija: "4.3.4",
   },
 };
 

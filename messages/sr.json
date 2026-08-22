@@ -975,7 +975,7 @@
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
-        "opis": "Osnovni akt sistema (12 glava, 82 člana). Uređuje POEN, ZRNO, obračunski koeficijent, dokaz stvarnosti, kanale evidentiranja doprinosa, module i upravljanje."
+        "opis": "Osnovni akt sistema (12 glava, 85 članova). Uređuje POEN, ZRNO, obračunski koeficijent, dokaz stvarnosti, kanale evidentiranja doprinosa, module i upravljanje."
       },
       "hijerarhija": {
         "naziv": "Pravilnik o hijerarhiji akata",
@@ -987,7 +987,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Pravilnik o pokroviteljstvu i donacijama",
-        "opis": "Donacije fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i pokroviteljstvo pravnih lica (7 nivoa, prag 10.000 RSD)."
+        "opis": "Donacije fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i pokroviteljstvo pravnih lica i preduzetnika (7 nivoa, prag 10.000 RSD)."
       },
       "operativni": {
         "naziv": "Pravilnik o operativnom doprinosu",
@@ -1003,7 +1003,7 @@
       },
       "programi-podrske": {
         "naziv": "Pravilnik o programima podrške",
-        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga, Školovanje) — uslovi, koeficijenti i potvrda iz lanca."
+        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga, Školovanje) — uslovi, koeficijenti i potvrda iz lanca. Za pristup je dovoljna jedna potvrda, odnosno indeks stvarnosti od 10%."
       },
       "ucesce-dece": {
         "naziv": "Pravilnik o učešću dece",
@@ -1992,7 +1992,7 @@
     "krug_potvrdi_odbijanje": "Potvrdi odbijanje",
     "krug_obrada": "Obrađujem...",
     "krug_odbijam": "Odbijam...",
-    "krug_odobrena_msg": "Krug \"{name}\" je odobren. Upisano 50.000 POENA.",
+    "krug_odobrena_msg": "Krug „{name}“ je odobren. Upisano 50.000 POENA.",
     "krug_odbijen_msg": "Zahtev odbijen.",
     "greska_generalna": "Greška.",
     "ped_tab_oglasi": "Oglasi ({count})",
@@ -2068,14 +2068,13 @@
     "programi_odbij_razlog_prompt": "Razlog odbijanja (opciono):",
     "programi_dnevni_iznos_placeholder": "Dnevni iznos POEN *",
     "emisija_opticaj_label": "Ukupno POENA",
-    "emisija_opticaj_sub": "POEN u sistemu",
     "emisija_dnevni_limit": "Dnevni limit programa",
     "emisija_dnevni_limit_sub": "10% ukupnog broja POENA",
-    "emisija_pragovi_naslov": "Pragovi donacija — fiksni bonus",
-    "emisija_pragovi_sub": "Bonus se evidentira jednom, kad kumulativ pređe prag",
+    "emisija_pragovi_naslov": "Nivoi donacija i koeficijent",
+    "emisija_pragovi_sub": "Koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju. Nivo je kumulativan i trajan.",
     "emisija_tbl_nivo": "Nivo",
-    "emisija_tbl_kumulativ": "Kumulativ RSD",
-    "emisija_tbl_bonus": "Bonus POEN",
+    "emisija_tbl_kumulativ": "Kumulativ od (RSD)",
+    "emisija_tbl_bonus": "Koeficijent",
     "emisija_donacija_naslov": "Evidentiraj donaciju",
     "emisija_pseudonim_label": "Pseudonim donatora",
     "emisija_pseudonim_placeholder": "npr. Pcelar021",
@@ -2085,7 +2084,7 @@
     "emisija_iznos_nevalidan": "Unesi pozitivan iznos.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Evidentirano: {poen} POEN · Nivo {nivo}",
-    "emisija_prag_nedostignut": "Prag nije dostignut — nema evidencije POENA",
+    "emisija_prag_nedostignut": "Iznos je premali da bi se upisao ijedan POEN.",
     "emisija_kumulativ": "Kumulativ: {val} RSD",
     "emisija_evidentiram": "Evidentiram...",
     "emisija_btn": "Evidentiraj POEN",
@@ -2138,13 +2137,13 @@
     "korisnici_suspenduj": "Suspenduj",
     "korisnici_aktiviraj": "Aktiviraj",
     "korisnici_iskljuci": "Isključi",
-    "korisnici_lazni_verifikator": "Lažna potvrda",
+    "korisnici_lazni_verifikator": "Nalog nije stvaran",
     "korisnici_admin_rola": "Admin uloga:",
     "korisnici_iskljuci_confirm": "Trajno isključiti člana iz sistema?",
-    "korisnici_lazni_confirm": "Označiti da je ovaj član davao lažne potvrde? Sve potvrde iz njegovog podstabla biće rekurzivno poništene, upisani POEN (1.000/1.000/500) otpisan u korist Protokola (moguć minus), a član isključen. Pogođeni članovi padaju na 0% indeksa.",
+    "korisnici_lazni_confirm": "Utvrditi da iza ovog naloga ne stoji stvarna osoba?\n\nPadaju sve potvrde koje nalog dodiruje — i one koje je dao i one koje je primio. Svakom pogođenom članu indeks stvarnosti umanjuje se za 10 procentnih poena i oslobađa mu se mesto u lancu; njegove ostale potvrde ostaju na snazi. Upisani POEN (1.000 / 1.000 / 500) otpisuje se u korist Protokola, a nepokriveni deo prelazi kao nadoknada na zapis onoga ko je potvrdu dao. Sam nalog pada na indeks 0% i isključuje se.",
     "korisnici_suspenzija_razlog_prompt": "Razlog suspenzije:",
     "korisnici_superadmin_confirm": "Dodeliti SUPERADMIN? Dobija sve poluge, uključujući opasne i sistemske radnje.",
-    "korisnici_ponisteno_msg": "Poništeno {count} potvrda u podstablu.",
+    "korisnici_ponisteno_msg": "Poništeno {count} potvrda koje je ovaj nalog dodirivao.",
     "korisnici_reset": "Resetuj nalog",
     "korisnici_reset_prompt": "Vratiti nalog „{pseudonim}“ na dan registracije?\n\nNepovratno: padaju sve potvrde koje nalog dodiruje (i one koje je dao drugima, sa POENOM koji je tada upisan), POEN i ZRNO idu na nulu, a brišu se oglasi, razgovori, obaveštenja, istorija i pristanci na akte. Ostaju email, lozinka i pseudonim — prijava radi istim podacima.\n\nZa potvrdu otkucaj pseudonim:",
     "korisnici_reset_gotovo": "Nalog „{pseudonim}“ je vraćen na dan registracije. Otpisano u korist Protokola: {poen} POEN. Palo je {potvrde} potvrda, obrisano je {oglasi} oglasa.",
@@ -2234,7 +2233,7 @@
     "vesti_obrisi_btn": "Obriši",
     "nadzor_naslov": "Nadzor integriteta potvrda",
     "nadzor_opis": "Sistem samo posmatra i obeležava — nijedna radnja nije automatska. Gašenje povlači čovek.",
-    "nadzor_nema": "Nema otvorenih nalaza. (Cron se pokreće noću — spisak je prazan dok prvi put ne odradi.)",
+    "nadzor_nema": "Nema otvorenih nalaza. Spisak popunjava noćna obrada, pa je prazan dok ona prvi put ne odradi.",
     "nadzor_grupa_label": "Grupa ({count} naloga)",
     "nadzor_nalozi_u_grupi": "Nalozi u grupi:",
     "nadzor_otvori_profil": "Otvori profil",
@@ -2288,7 +2287,7 @@
     "osnivaci_otkljucaj_confirm": "Otključati listu osnivača za izmene? Dok je otključana, koraci se ne evidentiraju.",
     "osnivaci_evidentiraj_treba_zakljucati": "Koraci se evidentiraju tek kad je lista osnivača zaključana (zbir udela 100%).",
     "doprinos_zatecene_naslov": "Zatečeni doprinosi za sadržaj (jednokratno)",
-    "doprinos_zatecene_opis": "Prvo se doprinos naknadno BELEŽI onima koji imaju kvalifikovan oglas a nemaju nijedan zapis (zapis se izgubi ako objava pukne na pola). Zatim: Redovnim članovima kojima doprinos od 1.000 POEN stoji zabeležen, a nije evidentiran, evidentira se sada (čl. 40a, prelazni stav). Članovi bez potvrde se preskaču — njih odobravaš pojedinačno u tabu Prvi oglasi. Uz to se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
+    "doprinos_zatecene_opis": "Radnja ide u tri koraka. Prvo se doprinos naknadno beleži onima koji imaju kvalifikovan oglas a nemaju nijedan zapis — zapis se izgubi ako objava pukne na pola. Zatim se redovnim članovima kojima doprinos od 1.000 POENA stoji zabeležen, a nije evidentiran, evidentira sada (čl. 40a, prelazni stav); članovi bez potvrde se preskaču, njih odobravaš pojedinačno u tabu Prvi oglasi. Na kraju se javlja onima kojima je doprinos evidentiran a obaveštenje nije otišlo.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Ukupan broj POENA skače za 1.000 × broj razrešenih. Pošto se osnivački korak evidentira automatski na svakih 100.000 POENA, prva noćna obrada posle ovoga može da upali korak. Ponovno pokretanje ne evidentira dvaput.",
@@ -2384,7 +2383,8 @@
     "doprinos_revizija_uredno": "Čeka odobrenje u tabu „Prvi oglasi”: {ceka}. Poništeno zbog uklonjenog oglasa: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave"
+    "tab_prijave": "Prijave",
+    "emisija_tbl_nivo1": "svaka donacija ispod 5.000"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

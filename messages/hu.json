@@ -968,7 +968,7 @@
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
-        "opis": "A rendszer alapokmánya (12 fejezet, 82 cikk). A POEN-t, a ZRNO-t, az elszámolási együtthatót, a valóságigazolást, a hozzájárulás rögzítésének csatornáit, a modulokat és az irányítást szabályozza."
+        "opis": "A rendszer alapokmánya (12 fejezet, 85 cikk). Szabályozza a POEN-t, a ZRNO-t, az elszámolási együtthatót, a valóság bizonyítását, a hozzájárulás nyilvántartási csatornáit, a modulokat és az irányítást."
       },
       "hijerarhija": {
         "naziv": "Szabályzat az aktusok hierarchiájáról",
@@ -980,7 +980,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Szabályzat a patronálásról és az adományokról",
-        "opis": "Magánszemélyek adományai (11 szint, együttható 1,00–2,00) és jogi személyek patronálása (7 szint, küszöb 10 000 RSD)."
+        "opis": "Természetes személyek adományai (11 szint, együttható 1,00–2,00) és jogi személyek, valamint egyéni vállalkozók támogatása (7 szint, küszöb 10.000 RSD)."
       },
       "operativni": {
         "naziv": "Szabályzat a működési hozzájárulásról",
@@ -996,7 +996,7 @@
       },
       "programi-podrske": {
         "naziv": "Szabályzat a támogatási programokról",
-        "opis": "Szociális programok (Édesanyák támogatása, Idősek támogatása, Különleges gondoskodás, Tanulás) — feltételek, együtthatók és a láncodból érkező megerősítés."
+        "opis": "Szociális programok (Anyák támogatása, Idősek támogatása, Különleges gondoskodás, Iskoláztatás) – feltételek, együtthatók és a láncból érkező megerősítés. A hozzáféréshez elég egyetlen megerősítés, vagyis 10%-os valóságindex."
       },
       "ucesce-dece": {
         "naziv": "Szabályzat a gyermekek részvételéről",
@@ -1985,7 +1985,7 @@
     "krug_potvrdi_odbijanje": "Potvrdi odbijanje",
     "krug_obrada": "Obrađujem...",
     "krug_odbijam": "Odbijam...",
-    "krug_odobrena_msg": "A(z) \"{name}\" Kör jóváhagyva. 50.000 POEN bejegyezve.",
+    "krug_odobrena_msg": "A(z) „{name}” Kör jóváhagyva. 50.000 POEN bejegyezve.",
     "krug_odbijen_msg": "Zahtev odbijen.",
     "greska_generalna": "Greška.",
     "ped_tab_oglasi": "Oglasi ({count})",
@@ -2061,14 +2061,13 @@
     "programi_odbij_razlog_prompt": "Az elutasítás oka (nem kötelező):",
     "programi_dnevni_iznos_placeholder": "Dnevni iznos POEN *",
     "emisija_opticaj_label": "Összes POEN",
-    "emisija_opticaj_sub": "POEN u sistemu",
     "emisija_dnevni_limit": "Dnevni limit programa",
     "emisija_dnevni_limit_sub": "Az összes POEN 10%-a",
-    "emisija_pragovi_naslov": "Adományozási küszöbök — fix bónusz",
-    "emisija_pragovi_sub": "A bónusz egyszer kerül rögzítésre, amikor a halmozott összeg átlépi a küszöböt",
+    "emisija_pragovi_naslov": "Adományozási szintek és együttható",
+    "emisija_pragovi_sub": "Az újonnan elért szint együtthatója a teljes új adományra vonatkozik. A szint halmozódó és állandó.",
     "emisija_tbl_nivo": "Nivo",
-    "emisija_tbl_kumulativ": "Kumulativ RSD",
-    "emisija_tbl_bonus": "Bonus POEN",
+    "emisija_tbl_kumulativ": "Halmozottan ettől (RSD)",
+    "emisija_tbl_bonus": "Együttható",
     "emisija_donacija_naslov": "Evidentiraj donaciju",
     "emisija_pseudonim_label": "Pseudonim donatora",
     "emisija_pseudonim_placeholder": "pl. Pcelar021",
@@ -2078,7 +2077,7 @@
     "emisija_iznos_nevalidan": "Adj meg pozitív összeget.",
     "emisija_evidentirana": "Donacija evidentirana!",
     "emisija_emitovano": "Rögzítve: {poen} POEN · {nivo}. szint",
-    "emisija_prag_nedostignut": "A küszöb nincs elérve — nincs POEN rögzítés",
+    "emisija_prag_nedostignut": "Az összeg túl kicsi ahhoz, hogy akár egyetlen POEN is bejegyzésre kerüljön.",
     "emisija_kumulativ": "Kumulativ: {val} RSD",
     "emisija_evidentiram": "Evidentiram...",
     "emisija_btn": "Evidentiraj POEN",
@@ -2131,13 +2130,13 @@
     "korisnici_suspenduj": "Suspenduj",
     "korisnici_aktiviraj": "Aktiviraj",
     "korisnici_iskljuci": "Isključi",
-    "korisnici_lazni_verifikator": "Lažni megerősítő",
+    "korisnici_lazni_verifikator": "A fiók nem valós",
     "korisnici_admin_rola": "Admin szerepkör:",
     "korisnici_iskljuci_confirm": "Véglegesen kizárod a tagot a rendszerből?",
-    "korisnici_lazni_confirm": "Megjelölöd, hogy ez a tag hamis megerősítéseket adott? Az alfájában lévő összes megerősítés rekurzívan visszavonásra kerül, a bejegyzett POEN (1.000/1.000/500) a Protokoll javára leírásra (mínusz lehetséges), a tag pedig kizárásra. Az érintett tagok 0% indexre esnek.",
+    "korisnici_lazni_confirm": "Megállapítod, hogy e fiók mögött nem áll valós személy?\n\nMinden megerősítés megdől, amelyet a fiók érint – azok is, amelyeket adott, és azok is, amelyeket kapott. Minden érintett tag valóságindexe 10 százalékponttal csökken, és felszabadul egy helye a láncban; többi megerősítése érvényben marad. A bejegyzett POEN (1.000 / 1.000 / 500) a Protokoll javára leírásra kerül, a fedezetlen rész pedig megtérítésként annak nyilvántartására száll át, aki a megerősítést adta. Maga a fiók 0%-os indexre esik, és kizárásra kerül.",
     "korisnici_suspenzija_razlog_prompt": "Razlog suspenzije:",
     "korisnici_superadmin_confirm": "Megadod a SZUPERADMIN jogot? Minden eszközt megkap, a veszélyes és rendszerszintű műveleteket is.",
-    "korisnici_ponisteno_msg": "Poništeno {count} verifikacija u podstablu.",
+    "korisnici_ponisteno_msg": "{count} megerősítés megdőlt, amelyet ez a fiók érintett.",
     "korisnici_reset": "Resetuj nalog",
     "korisnici_reset_prompt": "Visszaállítod a(z) „{pseudonim}” fiókot a regisztráció napjára?\n\nVisszafordíthatatlan: minden megerősítés elesik, amelyet a fiók érint (azok is, amelyeket másoknak adott, az akkor bejegyzett POEN-nel együtt), a POEN és a ZRNO nullára megy, a hirdetések, beszélgetések, értesítések, előzmények és az aktusokhoz adott hozzájárulások pedig törlődnek. Az email, a jelszó és az álnév megmarad — a bejelentkezés ugyanazokkal az adatokkal működik.\n\nA megerősítéshez gépeld be az álnevet:",
     "korisnici_reset_gotovo": "A(z) „{pseudonim}” fiók visszaállt a regisztráció napjára. A Protokoll javára leírva: {poen} POEN. {potvrde} megerősítés esett el, {oglasi} hirdetés törlődött.",
@@ -2227,7 +2226,7 @@
     "vesti_obrisi_btn": "Obriši",
     "nadzor_naslov": "Nadzor integriteta verifikacija",
     "nadzor_opis": "A rendszer csak figyel és megjelöl — semmilyen művelet nem automatikus. A ravaszt ember húzza meg.",
-    "nadzor_nema": "Nincsenek nyitott észlelések. (A cron éjszaka fut — a lista üres, amíg először le nem fut.)",
+    "nadzor_nema": "Nincs nyitott megállapítás. A listát az éjszakai futás tölti fel, ezért üres marad, amíg az először le nem fut.",
     "nadzor_grupa_label": "Grupa ({count} naloga)",
     "nadzor_nalozi_u_grupi": "Nalozi u grupi:",
     "nadzor_otvori_profil": "Otvori profil",
@@ -2281,7 +2280,7 @@
     "osnivaci_otkljucaj_confirm": "Feloldod az alapítók listáját módosításra? Amíg fel van oldva, a lépések nem rögzülnek.",
     "osnivaci_evidentiraj_treba_zakljucati": "A lépések csak akkor rögzülnek, ha az alapítók listája zárolva van (a részesedések összege 100%).",
     "doprinos_zatecene_naslov": "Függő tartalmi hozzájárulások (egyszeri)",
-    "doprinos_zatecene_opis": "A hozzájárulás előbb utólag FELJEGYZÉSRE kerül azoknak, akiknek van megfelelő hirdetésük, de nincs egyetlen bejegyzésük sem (a bejegyzés elvész, ha a közzététel félúton megszakad). Ezután: Azoknál a rendes tagoknál, akiknél az 1.000 POEN hozzájárulás fel van jegyezve, de nincs nyilvántartásba véve, most bevezetésre kerül (40a. cikk, átmeneti rendelkezés). A megerősítés nélküli tagok kimaradnak — őket egyenként hagyod jóvá az Első hirdetések fülön. Emellett értesítést kapnak azok is, akiknél a bevezetés megtörtént, de az értesítés nem ment ki.",
+    "doprinos_zatecene_opis": "A művelet három lépésben zajlik. Először azoknak kerül utólag rögzítésre a hozzájárulás, akiknek van megfelelő hirdetésük, de egyetlen bejegyzésük sincs – a bejegyzés elvész, ha a közzététel félbeszakad. Ezután azoknak a rendes tagoknak, akiknél az 1.000 POEN hozzájárulás fel van jegyezve, de nincs nyilvántartásba véve, most kerül nyilvántartásba (40a. cikk, átmeneti bekezdés); a megerősítés nélküli tagok kimaradnak, őket egyenként hagyod jóvá az Első hirdetések fülön. Végül értesítés megy azoknak, akiknek a hozzájárulás rögzült, de az értesítés nem ment ki.",
     "doprinos_zatecene_btn": "Evidentiraj zatečene",
     "doprinos_zatecene_loading": "Evidentiram…",
     "doprinos_zatecene_napomena": "Az összes POEN 1.000 × a rendezettek számával ugrik. Mivel az alapítói lépés minden 100.000 POEN-nél automatikusan rögzül, az ezt követő első éjszakai futás beindíthat egy lépést. Az ismételt indítás nem rögzít kétszer.",
@@ -2377,7 +2376,8 @@
     "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave"
+    "tab_prijave": "Prijave",
+    "emisija_tbl_nivo1": "minden 5.000 alatti adomány"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
