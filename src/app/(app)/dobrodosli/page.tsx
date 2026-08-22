@@ -13,25 +13,30 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import GdeSeNalazi, { type Gde } from "@/components/dobrodosli/GdeSeNalazi";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 
 /** Akciona veza ekrana: dugme + crtež koji pokazuje gde ta stranica stoji u
  *  navigaciji (vidi GdeSeNalazi). Ekran može imati više akcija (korak 6). */
 type Akcija = { href: string; ctaKey: string; gde: Gde };
 
-/** Konfiguracija ekrana: ključ u messages + akcione veze.
+/** Konfiguracija ekrana: ključevi pasusa u messages + akcione veze.
+ *
+ *  Pasusi se navode POIMENCE, ne brojem, da bi neki mogao da bude uslovan —
+ *  pasus o deci na poslednjem ekranu postoji samo dok Modul Deca radi. Dok je
+ *  ovde stajao broj pasusa, uslovan pasus bi tražio i menjanje brojeva ključeva.
  *
  *  Redosled prati stvarni put novog člana: objava ponude (koju sme odmah,
  *  bez ijedne potvrde) pa tek onda potvrda. Raniji vodič je imao sedam ekrana
  *  i dva „puta" kroz koja je svako prolazio linearno, pa je isto pitanje
  *  postavljao dvaput — na prvom i na poslednjem ekranu. */
-const EKRANI: { key: string; pasusi: number; akcije?: Akcija[] }[] = [
+const EKRANI: { key: string; pasusi: string[]; akcije?: Akcija[] }[] = [
   // šta je KOLO i šta je POEN — jedini ekran bez radnje
-  { key: "ekran1", pasusi: 3 },
+  { key: "ekran1", pasusi: ["ekran1_p1", "ekran1_p2"] },
   // prvi potez: objava ponude. Ide PRE potvrde, jer je to danas glavni put
   // (čl. 16 st. 5 i čl. 40a) i jer isti redosled obećava Početna.
   {
     key: "ekran2",
-    pasusi: 2,
+    pasusi: ["ekran2_p1", "ekran2_p2"],
     akcije: [
       { href: "/pijaca/novi-oglas", ctaKey: "ekran2_cta", gde: { vrsta: "meni", stavka: "pijaca" } },
     ],
@@ -40,7 +45,7 @@ const EKRANI: { key: string; pasusi: number; akcije?: Akcija[] }[] = [
   // JEDNOM ekranu — ranije su bila dva ekrana kroz koja je svako prolazio.
   {
     key: "ekran3",
-    pasusi: 3,
+    pasusi: ["ekran3_p1", "ekran3_p2", "ekran3_p3", "ekran3_p4"],
     akcije: [
       {
         href: "/verifikacija",
@@ -49,10 +54,10 @@ const EKRANI: { key: string; pasusi: number; akcije?: Akcija[] }[] = [
       },
     ],
   },
-  // profil i gde je šta
+  // profil, gde je šta, i (dok modul radi) nalog za dete
   {
     key: "ekran4",
-    pasusi: 2,
+    pasusi: ["ekran4_p1", "ekran4_p2", ...(MODUL_DECA_AKTIVAN ? ["ekran4_p3"] : [])],
     akcije: [
       { href: "/pijaca", ctaKey: "ekran4_cta_pijaca", gde: { vrsta: "meni", stavka: "pijaca" } },
       { href: "/profil", ctaKey: "ekran4_cta_profil", gde: { vrsta: "profil" } },
@@ -116,7 +121,7 @@ export default function DobrodosliPage() {
   const prvi = korak === 0;
   const poslednji = korak === EKRANI.length - 1;
   const oznaka = t(`${ekran.key}_oznaka`);
-  const pasusi = Array.from({ length: ekran.pasusi }, (_, i) => t(`${ekran.key}_p${i + 1}`));
+  const pasusi = ekran.pasusi.map((k) => t(k));
 
   /**
    * Izlaz iz vodiča.
