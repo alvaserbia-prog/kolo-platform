@@ -97,7 +97,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         {/* Nadoknada (čl. 20b) stoji ISPOD kartice, kao zaseban red. Nije prikazana
             kao negativno stanje jer nije dug: Fondacija po njoj nema potraživanje i
             ne može je naplatiti. Razmena dobara i usluga se njome ne ograničava —
-            ograničen je samo upis POEN-a drugome, dok zapis ne pređe nulu. */}
+            ograničen je samo upis POENA drugome, dok zapis ne pređe nulu. */}
         {uNadoknadi && (
           <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4">
             <div className="flex items-baseline justify-between gap-3">
@@ -111,7 +111,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         )}
 
         {/* Zabeležen doprinos stoji ISPOD kartice, kao zaseban red — namerno nije
-            sabran sa stanjem: do okidača to nije zapis POEN-a (Pravilnik čl. 40a
+            sabran sa stanjem: do okidača to nije zapis POENA (Pravilnik čl. 40a
             st. 3). Naziv je „Zabeležen doprinos", nikad „POEN na čekanju" — POEN
             postoji isključivo kao zapis u Protokolu (čl. 12). */}
         {zabelezenDoprinos > 0 && (

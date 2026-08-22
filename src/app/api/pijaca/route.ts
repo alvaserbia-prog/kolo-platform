@@ -95,21 +95,21 @@ export async function POST(req: NextRequest) {
   const phone = (formData.get("phone") as string)?.trim() ?? "";
 
   if (!title || title.length < 3)
-    return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+    return await greska("Naslov mora imati najmanje 3 znaka.", 400);
   // Gornje granice dužine — sprečavaju bujanje baze i predimenzioniran javni odgovor.
   if (title.length > 120)
-    return await greska("Naslov može imati najviše 120 karaktera.", 400);
+    return await greska("Naslov može imati najviše 120 znakova.", 400);
   if (description.length > 4000)
-    return await greska("Opis može imati najviše 4000 karaktera.", 400);
+    return await greska("Opis može imati najviše 4000 znakova.", 400);
   if (location.length > 80)
-    return await greska("Lokacija može imati najviše 80 karaktera.", 400);
+    return await greska("Lokacija može imati najviše 80 znakova.", 400);
   // Lokacija oglasa je opciona, ali kad se navede mora biti JEDNO naselje iz
   // šifarnika — po njoj se filtrira Pijaca i računa udaljenost do posmatrača.
   const mesto = location ? razresiNaselje(location) : null;
   if (location && !mesto)
     return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
   if (phone.length > 40)
-    return await greska("Telefon može imati najviše 40 karaktera.", 400);
+    return await greska("Telefon može imati najviše 40 znakova.", 400);
   // Kod potražnje budžet se uvek dogovara — cena se ne unosi (uvek DOGOVOR).
   const cena = tip === "POTRAZNJA"
     ? { ok: true as const, cenaTip: "DOGOVOR" as const, price: null, cenaDo: null }

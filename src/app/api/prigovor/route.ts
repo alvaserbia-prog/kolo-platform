@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   const { opis, tipOdluke } = body;
 
   if (!opis || opis.trim().length < 10) {
-    return await greska("Opis prigovora mora imati najmanje 10 karaktera.", 400);
+    return await greska("Opis prigovora mora imati najmanje 10 znakova.", 400);
   }
 
   // OGLAS — prigovor na uklonjen oglas ili poruku (Uslovi čl. 25 st. 2, čl. 30).

@@ -56,11 +56,11 @@ export async function POST(req: NextRequest) {
       tip: "VERIFIKOVAN",
       kljuc: "notifikacije.verifikovan",
       parametri: { verifikator: rez.verifikatorPseudonim },
-      naslov: "Verifikovan/a si — možeš da postaviš oglas",
+      naslov: "Sada si redovan član",
       tekst:
-        `„${rez.verifikatorPseudonim}" te je verifikovao/la i dobio/la si pun pristup. ` +
-        `Sad možeš da postaviš oglas na Pijaci, pišeš poruke i upišeš ZRNO. ` +
-        `Ako ne poznaješ ovu osobu, prijavi verifikaciju na stranici Verifikacija.`,
+        `„${rez.verifikatorPseudonim}" te je potvrdio i imaš pun pristup. ` +
+        `Sad možeš da pišeš poruke, kontaktiraš oglašivače, objaviš oglas kojim nešto tražiš i upišeš ZRNO. ` +
+        `Ako ne poznaješ ovu osobu, prijavi to na stranici Potvrde.`,
       link: "/pijaca/novi-oglas",
       emailDugme: "Postavi oglas",
     });

@@ -79,13 +79,13 @@ export function smeDaPostaviOglas(input: {
   if (input.oglas.tip !== "PONUDA")
     return {
       ok: false,
-      razlog: "Dok nisi verifikovan/a možeš da objaviš samo ponudu — oglas kojim nudiš dobro ili uslugu.",
+      razlog: "Dok si nov član, možeš da objaviš samo ponudu — oglas kojim nudiš dobro ili uslugu.",
       status: 403,
     };
   if (input.brojAktivnihOglasa >= MAX_AKTIVNIH_OGLASA)
     return {
       ok: false,
-      razlog: `Dok nisi verifikovan/a možeš imati najviše ${MAX_AKTIVNIH_OGLASA} aktivna oglasa.`,
+      razlog: `Dok si nov član, možeš imati najviše ${MAX_AKTIVNIH_OGLASA} aktivna oglasa.`,
       status: 403,
     };
   return oglasIspunjavaMinimum(input.oglas);

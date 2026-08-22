@@ -60,7 +60,7 @@ export async function PATCH(
   });
 
   await logAdminAkcija(session.user.id, "DOPRINOS_OGLAS_IZMENJEN", id,
-    `${izmenjen.title} (${predlozeni > 0 ? `maks ${predlozeni} POEN` : "bez maksimuma POEN-a"})`);
+    `${izmenjen.title} (${predlozeni > 0 ? `maks ${predlozeni} POEN` : "bez maksimuma POENA"})`);
 
   return NextResponse.json({ ok: true, id });
 }

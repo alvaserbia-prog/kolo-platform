@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
   }
   if (!validanPseudonim(pseudonim)) return await greska(PSEUDONIM_PRAVILO, 400);
   if (lozinka.length < 8 || lozinka.length > 200) {
-    return await greska("Lozinka mora imati između 8 i 200 karaktera.", 400);
+    return await greska("Lozinka mora imati između 8 i 200 znakova.", 400);
   }
   if (!validanEmail(roditeljEmail)) {
     return await greska("Unesi ispravnu imejl adresu roditelja.", 400);

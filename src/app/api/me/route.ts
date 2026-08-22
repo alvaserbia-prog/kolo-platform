@@ -6,6 +6,8 @@ import { mozeNadzor } from "@/lib/dozvole";
 import { izracunajDnevniBrojeve, izracunajNadzorBroj } from "@/lib/chrome-podaci";
 import { pristanakStatus } from "@/lib/politika";
 import { stanjeNaloga } from "@/lib/protokol/deca";
+import { prevedi, type Parametri } from "@/lib/prevod-servera";
+import { getLocale } from "next-intl/server";
 
 /**
  * GET /api/me — KONSOLIDOVAN endpoint za ceo „chrome" (Header + Sidebar).
@@ -50,7 +52,10 @@ export async function GET() {
       where: { userId: meId },
       orderBy: { createdAt: "desc" },
       take: 30,
-      select: { id: true, tip: true, naslov: true, tekst: true, procitana: true, link: true, createdAt: true },
+      select: {
+        id: true, tip: true, naslov: true, tekst: true, procitana: true,
+        link: true, createdAt: true, kljuc: true, parametri: true,
+      },
     }),
     prisma.notifikacija.count({ where: { userId: meId, procitana: false } }),
     // Isti izvor istine kao `GET /api/politika/prihvati` — dva odvojena upita su
@@ -61,11 +66,27 @@ export async function GET() {
     nadzornik ? izracunajNadzorBroj(meId, session.user) : Promise.resolve(0),
   ]);
 
+  // Zvonce se prevodi ovde, a ne samo u /api/notifikacije: listu koju Header
+  // prikazuje uzima OVAJ endpoint, pa bi bez prevoda svih 120 prevedenih
+  // obaveštenja radilo samo za push i mejl, a u zvoncetu bi stajao sačuvan
+  // srpski tekst iz pozivnog mesta. Jezik je jezik POSMATRAČA (kolačić) —
+  // isto kao u /api/notifikacije. Redovi bez ključa ostaju kakvi jesu.
+  const locale = await getLocale();
+  const notifikacijePrevedene = notifikacije.map(({ kljuc, parametri, ...n }) => {
+    if (!kljuc) return n;
+    const p = (parametri ?? undefined) as Parametri | undefined;
+    return {
+      ...n,
+      naslov: prevedi(locale, `${kljuc}_naslov`, p, n.naslov),
+      tekst: prevedi(locale, `${kljuc}_tekst`, p, n.tekst),
+    };
+  });
+
   return NextResponse.json({
     balance: wallet?.balance ?? 0,
     avatar: user?.avatar ?? null,
     neprocitanoPoruke,
-    notifikacije,
+    notifikacije: notifikacijePrevedene,
     notifNeprocitano,
     dnevniBrojevi,
     nadzorBroj,

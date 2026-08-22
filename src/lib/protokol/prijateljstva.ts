@@ -442,7 +442,7 @@ export async function otpisiPunoletnom(korisnikId: string, iznos: number, broj: 
   await otpisiPoen(
     korisnikId,
     iznos,
-    `Poništenje POEN-a iz ${broj} prijateljstava (punoletstvo)`,
+    `Poništenje POENA iz ${broj} prijateljstava (punoletstvo)`,
     "transakcije.prijateljstvo_punoletstvo_zbirno",
     { broj }
   );

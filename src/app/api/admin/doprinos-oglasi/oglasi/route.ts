@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
   });
 
   await logAdminAkcija(session.user.id, "DOPRINOS_OGLAS_KREIRAN", oglas.id,
-    `${oglas.title} (${predlozeni > 0 ? `maks ${predlozeni} POEN` : "bez maksimuma POEN-a"})`);
+    `${oglas.title} (${predlozeni > 0 ? `maks ${predlozeni} POEN` : "bez maksimuma POENA"})`);
 
   return NextResponse.json({ ok: true, id: oglas.id });
 }

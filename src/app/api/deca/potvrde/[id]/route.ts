@@ -30,7 +30,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
   const obrazlozenje = typeof body.obrazlozenje === "string" ? body.obrazlozenje : undefined;
   if (obrazlozenje && obrazlozenje.length > 1000) {
-    return await greska("Obrazloženje može imati najviše 1000 karaktera.", 400);
+    return await greska("Obrazloženje može imati najviše 1000 znakova.", 400);
   }
 
   try {

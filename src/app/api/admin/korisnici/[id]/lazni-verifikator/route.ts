@@ -40,7 +40,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
         kljuc: "notifikacije.verifikacija_ponistena",
         naslov: "Verifikacija poništena",
         tekst:
-          "Za nalog iz tvog lanca potvrda utvrđeno je da iza njega ne stoji stvarna osoba, pa je verifikacija koja ide preko njega poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POEN-e. Ostale tvoje verifikacije ostaju na snazi.",
+          "Za nalog iz tvog lanca potvrda utvrđeno je da iza njega ne stoji stvarna osoba, pa je verifikacija koja ide preko njega poništena. Indeks stvarnosti ti je umanjen za 10 procentnih poena i oslobodilo ti se mesto u lancu — kad te neko drugi verifikuje, vraćaš i indeks i POENE. Ostale tvoje verifikacije ostaju na snazi.",
         link: "/profil",
       });
     }
@@ -53,7 +53,7 @@ export async function POST(_req: NextRequest, { params }: { params: Promise<{ id
         kljuc: "notifikacije.nadoknada",
         parametri: { iznos: n.iznos },
         naslov: "Nastala je nadoknada na tvom zapisu",
-        tekst: `Poništenjem verifikacije koju si obavio nastala je nadoknada od ${n.iznos} POEN-a, jer poništeni POEN-i nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POEN-i koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena.`,
+        tekst: `Poništenjem verifikacije koju si obavio nastala je nadoknada od ${n.iznos} POENA, jer poništeni POENI nisu bili pokriveni. Nadoknada nije dug i ne može se naplatiti; POENI koji ti pristignu prvo je popunjavaju. Razmena dobara i usluga ti nije ograničena.`,
         link: "/novcanik",
       });
     }

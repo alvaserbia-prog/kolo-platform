@@ -194,7 +194,7 @@ export async function ponistiVerifikaciju(
     where: { id: verifikacijaId },
     include: { verifikovani: { select: { pseudonim: true } } },
   });
-  if (!veza) throw new LaznaVerifikacijaGreska("Verifikacija nije pronađena.", 404);
+  if (!veza) throw new LaznaVerifikacijaGreska("Potvrda nije pronađena.", 404);
 
   const pogodjeni = new Set<string>();
   const nadoknade = new Map<string, number>();

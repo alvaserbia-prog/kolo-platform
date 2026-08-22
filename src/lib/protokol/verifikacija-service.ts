@@ -140,23 +140,23 @@ async function izvrsiJezgroVerifikacije(
   oznaka: string | null
 ): Promise<FazaJedan> {
   if (verifikovaniId === verifikatorId) {
-    throw new VerifikacijaGreska("Ne možeš da verifikuješ samog sebe.", 400);
+    throw new VerifikacijaGreska("Ne možeš da potvrdiš samog sebe.", 400);
   }
 
   // Učitaj verifikatora i verifikovanog
   const verifikator = await tx.user.findUnique({ where: { id: verifikatorId } });
   if (!verifikator) {
-    throw new VerifikacijaGreska("Verifikator ne postoji.", 404);
+    throw new VerifikacijaGreska("Član koji potvrđuje ne postoji.", 404);
   }
   const verifikovani = await tx.user.findUnique({ where: { id: verifikovaniId } });
   if (!verifikovani) {
-    throw new VerifikacijaGreska("Verifikovani korisnik ne postoji.", 404);
+    throw new VerifikacijaGreska("Član koga potvrđuješ ne postoji.", 404);
   }
 
   // Provera prava verifikatora (čl. 4)
   if (!imaPristupVerifikaciji(verifikator.tipKorisnika, verifikator.indeksStvarnosti)) {
     throw new VerifikacijaGreska(
-      "Nemaš pravo da verifikuješ druge (indeks ispod 10% ili nisi verifikovan).",
+      "Ne možeš da potvrđuješ druge: indeks stvarnosti ti je ispod 10% ili tebe još niko nije potvrdio.",
       403
     );
   }
@@ -334,10 +334,10 @@ function mapTransakcijaGreska(e: unknown): never {
   if (e instanceof VerifikacijaGreska) throw e;
   const code = e && typeof e === "object" && "code" in e ? (e as { code?: string }).code : undefined;
   if (code === "P2002") {
-    throw new VerifikacijaGreska("Ova verifikacija već postoji.", 409);
+    throw new VerifikacijaGreska("Ova potvrda već postoji.", 409);
   }
   if (code === "P2034") {
-    throw new VerifikacijaGreska("Verifikacija je u toku — pokušaj ponovo.", 409);
+    throw new VerifikacijaGreska("Potvrda je u toku, pokušaj ponovo.", 409);
   }
   throw e;
 }
@@ -383,7 +383,7 @@ async function emitujPoenZaVerifikaciju(
     // Verifikacija je u bazi, slot iskorišćen, ali POEN nije emitovan.
     // Bacamo dalje da UI moze da prikaze upozorenje korisniku.
     throw new VerifikacijaGreska(
-      "Verifikacija je evidentirana, ali emisija POEN-a je pukla. Kontaktiraj administratora.",
+      "Potvrda je evidentirana, ali upis POENA nije uspeo. Javi se administratoru.",
       500
     );
   }
@@ -427,7 +427,7 @@ export async function izvrsiVerifikaciju(
 
   if (!potvrdaPoznavanja) {
     throw new VerifikacijaGreska(
-      "Moraš potvrditi lično poznavanje i odgovornost za verifikaciju.",
+      "Moraš potvrditi da osobu lično poznaješ i da preuzimaš odgovornost za potvrdu.",
       400
     );
   }
@@ -557,11 +557,11 @@ export async function postaviOznakuVerifikatora(input: {
     select: { verifikatorId: true },
   });
   if (!veza) {
-    throw new VerifikacijaGreska("Verifikacija ne postoji.", 404);
+    throw new VerifikacijaGreska("Potvrda ne postoji.", 404);
   }
   if (veza.verifikatorId !== verifikatorId) {
     throw new VerifikacijaGreska(
-      "Oznaku može da menja samo verifikator koji je obavio verifikaciju.",
+      "Oznaku može da menja samo član koji je dao potvrdu.",
       403
     );
   }

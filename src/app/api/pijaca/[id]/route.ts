@@ -109,7 +109,7 @@ export async function PATCH(
     const keepRaw = (fd.get("keepImages") as string) ?? "[]";
 
     if (!title || title.length < 3)
-      return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+      return await greska("Naslov mora imati najmanje 3 znaka.", 400);
     if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
       return await greska("Neko polje premašuje dozvoljenu dužinu.", 400);
     // Novo mesto mora biti JEDNO naselje iz šifarnika; zatečena vrednost oglasa

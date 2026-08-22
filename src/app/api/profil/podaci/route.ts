@@ -24,10 +24,10 @@ export async function PATCH(req: NextRequest) {
   const opis = typeof body.opis === "string" ? body.opis.trim() : null;
 
   if (punoIme !== null && punoIme.length > 100) {
-    return await greska("Ime je predugačko (max 100 karaktera).", 400);
+    return await greska("Ime je predugačko (max 100 znakova).", 400);
   }
   if (opis !== null && opis.length > 200) {
-    return await greska("Opis je predugačak (max 200 karaktera).", 400);
+    return await greska("Opis je predugačak (max 200 znakova).", 400);
   }
 
   const toggleUpdate: Record<string, boolean> = {};

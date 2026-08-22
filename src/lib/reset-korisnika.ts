@@ -105,7 +105,7 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
   });
   if (brojDece > 0) {
     throw new ResetGreska(
-      "Nalog ima povezano dete — reset bi mu oborio potvrde i zaustavio upis POEN-a na detetovom nalogu.",
+      "Nalog ima povezano dete — reset bi mu oborio potvrde i zaustavio upis POENA na detetovom nalogu.",
       400,
     );
   }

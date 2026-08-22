@@ -154,7 +154,7 @@ export function generisiUgovorTekst(p: {
     "",
     `Član 1. Donator donira Primaocu ${vrsta} u vrednosti od ${p.vrednostRsd.toLocaleString("sr-RS")} RSD.`,
     "Član 2. Donacija je dobrovoljna i bez naknade.",
-    "Član 3. Ovaj ugovor ne sadrži odredbe o POEN-u niti o evidentiranju POEN-a.",
+    "Član 3. Ovaj ugovor ne sadrži odredbe o POENU niti o evidentiranju POENA.",
     "Član 4. Poreske obaveze koje proizlaze iz donacije snosi Donator u skladu sa važećim propisima.",
     "",
     "Potpisom korisnik potvrđuje da je ovlašćen da zastupa Donatora i da prihvata uslove ugovora.",

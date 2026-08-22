@@ -28,7 +28,7 @@ export async function POST(
 
   // Plan izvršenja je obavezan za zadatke „sa odobravanjem" (čl. 11, 14).
   if (oglas.saOdobravanjem && planIzvrsenja.length < 10)
-    return await greska("Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 karaktera).", 400);
+    return await greska("Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 znakova).", 400);
 
   const postoji = await prisma.oglasPrijava.findUnique({
     where: { oglasId_userId: { oglasId: id, userId: session.user.id } },

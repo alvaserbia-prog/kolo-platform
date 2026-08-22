@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
   }
   if (!validanPseudonim(pseudonim)) return await greska(PSEUDONIM_PRAVILO, 400);
   if (lozinka.length < 8 || lozinka.length > 200) {
-    return await greska("Lozinka mora imati između 8 i 200 karaktera.", 400);
+    return await greska("Lozinka mora imati između 8 i 200 znakova.", 400);
   }
   // Datum se prima kao YYYY-MM-DD i čita kao UTC ponoć — kolona je DATE, bez vremena.
   if (!/^\d{4}-\d{2}-\d{2}$/.test(datumRodjenja)) {

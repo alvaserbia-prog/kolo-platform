@@ -56,7 +56,7 @@ export type IshodProvere = { ok: true } | { ok: false; razlog: string };
  */
 export function smePrijaviti(u: UlazPrijave): IshodProvere {
   if (u.tipTransakcije !== "TRANSFER")
-    return { ok: false, razlog: "Prijavljuje se samo prepis POEN-a između dva člana." };
+    return { ok: false, razlog: "Prijavljuje se samo prepis POENA između dva člana." };
 
   if (!u.posiljaocId || u.posiljaocId !== u.prijaviocId)
     return { ok: false, razlog: "Prepis može da prijavi samo onaj ko je POEN prepisao." };

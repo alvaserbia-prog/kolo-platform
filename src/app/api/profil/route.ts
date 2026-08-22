@@ -268,7 +268,7 @@ export async function DELETE(req: NextRequest) {
       });
 
       if (!primalac || !primalac.wallet) {
-        return await greska("Primalac POEN-a nije pronađen.", 400);
+        return await greska("Primalac POENA nije pronađen.", 400);
       }
 
       await prisma.$transaction(async (tx) => {
@@ -296,7 +296,7 @@ export async function DELETE(req: NextRequest) {
             toWalletId: PROTOKOL_WALLET_ID,
             amount: balans,
             type: TransactionType.TRANSFER,
-            description: `Poništavanje POEN-a pri prestanku statusa (čl. 34 Pravilnika v3.7.5)`,
+            description: `Poništavanje POENA pri prestanku statusa (čl. 34 Pravilnika v3.7.5)`,
           },
         });
       });

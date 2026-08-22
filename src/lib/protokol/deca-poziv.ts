@@ -197,7 +197,7 @@ async function posaljiPozivRoditelju(
         `Odluka je vaša — evo šta koja mogućnost znači.`,
 
       `<strong>Šta je KOLO.</strong> Platforma na kojoj ljudi jedni drugima daju stvari i usluge, a učešće se ` +
-        `beleži u POEN-ima. POEN nije novac: ne menja se za dinare i ne može se podići. Deca imaju svoj deo, ` +
+        `beleži u POENIma. POEN nije novac: ne menja se za dinare i ne može se podići. Deca imaju svoj deo, ` +
         `u kome su samo deca.`,
 
       `<strong>Šta dete može sada, bez vas.</strong> Samo da sklapa prijateljstva skeniranjem koda uživo. ` +
@@ -285,7 +285,7 @@ async function poveziRoditelja(
     throw new DecaGreska("Nalog nije pronađen.", 404);
   }
   if (dete.roditeljstvaKaoDete.some((r) => r.roditeljId === roditeljId)) {
-    throw new DecaGreska("Već si upisan/a kao roditelj ovog naloga.", 409);
+    throw new DecaGreska("Već si upisan kao roditelj ovog naloga.", 409);
   }
   if (dete.roditeljstvaKaoDete.length >= MAX_RODITELJA) {
     throw new DecaGreska("Nalog već ima dva roditelja.", 409);

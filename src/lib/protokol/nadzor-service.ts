@@ -105,23 +105,23 @@ export async function obaviNadzor(input: {
       },
     });
     if (!veza) {
-      throw new NadzorGreska("Verifikacija ne postoji.", 404);
+      throw new NadzorGreska("Potvrda ne postoji.", 404);
     }
     if (!veza.podlezeNadzoru) {
       throw new NadzorGreska(
-        "Ova verifikacija ne podleže nadzoru (čl. 10 Pravilnika).",
+        "Ova potvrda ne podleže nadzoru (čl. 10 Pravilnika).",
         400
       );
     }
     if (veza.nadzorIshod === "UREDNO") {
-      throw new NadzorGreska("Nadzor nad ovom verifikacijom je okončan.", 409);
+      throw new NadzorGreska("Nadzor nad ovom potvrdom je okončan.", 409);
     }
     // Čl. 10 st. 4: nadzor ne može da obavlja onaj ko je u verifikaciji učestvovao —
     // ni kao verifikator ni kao verifikovani. Do 4.2.0 je bila pokrivena samo prva
     // strana, pa je nadzornik mogao da „nadzire" verifikaciju u kojoj je on meta.
     if (veza.verifikatorId === nadzornikId || veza.verifikovaniId === nadzornikId) {
       throw new NadzorGreska(
-        "Ne možeš da nadziraš verifikaciju u kojoj si i sam učestvovao.",
+        "Ne možeš da nadziraš potvrdu u kojoj si i sam učestvovao.",
         400
       );
     }
@@ -147,7 +147,7 @@ export async function obaviNadzor(input: {
       select: { id: true },
     });
     if (vecGledao) {
-      throw new NadzorGreska("Već si evidentirao ishod nad ovom verifikacijom.", 409);
+      throw new NadzorGreska("Već si evidentirao ishod nad ovom potvrdom.", 409);
     }
 
     const dosadasnjih = await tx.nadzorZapis.count({ where: { verifikacijaId } });

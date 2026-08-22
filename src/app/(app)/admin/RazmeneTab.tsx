@@ -136,7 +136,7 @@ export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
         </div>
         <p className="text-xs text-kolo-muted max-w-xl">
           Poništenje vraća ceo prepisani iznos i zapis primaoca ume da ode u minus — tada na njemu
-          stoji nadoknada: nije dug, popunjavaju je POEN-i koji pristignu, a prepis drugome je
+          stoji nadoknada: nije dug, popunjavaju je POENI koji pristignu, a prepis drugome je
           moguć tek preko nule. Za razmenu odgovaraju sami korisnici; ovo je odluka Fondacije o
           prepisu, ne presuda o razmeni.
         </p>

@@ -53,7 +53,7 @@ export async function POST(
   if (!date || !predlozeniPoen || !description) return await greska("Nedostaju podaci.", 400);
   const predlozeni = Number(predlozeniPoen);
   if (!Number.isInteger(predlozeni) || predlozeni < 1) return await greska("Predloženi POEN mora biti pozitivan ceo broj.", 400);
-  if (typeof description !== "string" || description.trim().length < 10) return await greska("Opis mora imati najmanje 10 karaktera.", 400);
+  if (typeof description !== "string" || description.trim().length < 10) return await greska("Opis mora imati najmanje 10 znakova.", 400);
 
   // Datum — max 3 dana unazad
   const datumEv = new Date(String(date));
@@ -96,7 +96,7 @@ export async function POST(
     });
     const dosadasnji = agg._sum.predlozeniPoen ?? 0;
     if (dosadasnji + predlozeni > oglas.predlozeniPoen)
-      return await greska(`Zbir predloženog POEN-a po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).`, 400);
+      return await greska(`Zbir predloženog POENA po dnevnim izvršenjima (${(dosadasnji + predlozeni).toLocaleString("sr-RS")}) prelazi maksimalni POEN zadatka (${oglas.predlozeniPoen.toLocaleString("sr-RS")}).`, 400);
   }
 
   // Dokaz: screenshot → R2 (javni URL u bazu), ili legacy tekstualni link.

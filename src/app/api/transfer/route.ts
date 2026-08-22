@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
   } else if (!smeDaSalje(posiljac.tipKorisnika)) {
     return await greska(
-      "Dok nisi verifikovan/a možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po verifikaciji.",
+      "Dok si nov član, POEN može da se prepisuje u tvoj zapis. Prepis u tuđi zapis otvara se po potvrdi.",
       403,
     );
   }
@@ -91,14 +91,14 @@ export async function POST(req: NextRequest) {
   // nadoknadu — dok zapis ne pređe nulu nema čime da se prepisuje drugome.
   if (jeNadoknada(posiljac.wallet.balance)) {
     return await greska(
-      `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POEN-a. ` +
-        `POEN-i koji ti pristignu prvo je popunjavaju; prepis u tuđi zapis je moguć tek kad zapis pređe nulu. ` +
+      `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POENA. ` +
+        `POENI koji ti pristignu prvo je popunjavaju; prepis u tuđi zapis je moguć tek kad zapis pređe nulu. ` +
         `Razmena dobara i usluga ti nije ograničena.`,
       400
     );
   }
   if (posiljac.wallet.balance < iznos) {
-    return await greska(`Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.`, 400);
+    return await greska(`Nemate dovoljno POENA. Stanje: ${posiljac.wallet.balance}.`, 400);
   }
 
   // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
@@ -130,7 +130,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
-      return await greska("Nemate dovoljno POEN-a.", 400);
+      return await greska("Nemate dovoljno POENA.", 400);
     }
     throw e;
   }
