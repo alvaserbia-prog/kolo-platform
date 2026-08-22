@@ -203,7 +203,7 @@ async function prevediUPunoletni(deteId: string) {
           kljuc: "notifikacije.punoletstvo_otpis_prijatelj",
           parametri: { pseudonim: dete.pseudonim, iznos: PRIJATELJSTVO_POEN },
           naslov: "Prijatelj je postao punoletan",
-          tekst: `${dete.pseudonim} je napunio/la ${UZRAST_PUNOLETSTVO} godina. Vaše prijateljstvo je zatvoreno i otpisano ti je ${PRIJATELJSTVO_POEN} POEN.`,
+          tekst: `${dete.pseudonim} ima ${UZRAST_PUNOLETSTVO} godina. Vaše prijateljstvo je zatvoreno i otpisano ti je ${PRIJATELJSTVO_POEN} POEN.`,
           link: "/prijatelji",
         }).catch(() => {});
       } catch (e) {

@@ -346,7 +346,7 @@ async function javiEvidentiranKorak(
       parametri: { iznos: iznos.toLocaleString("sr-RS"), korak },
       naslov: `Evidentiran ti je doprinos razmeni — korak ${korak}`,
       tekst:
-        `Prošao/la si ${korak}. korak putanje doprinosa razmeni i evidentirano ti je ` +
+        `Evidentiran ti je ${korak}. korak putanje doprinosa razmeni i upisano ti je ` +
         `${iznos.toLocaleString("sr-RS")} POEN (Pravilnik čl. 40a).`,
       link: "/novcanik",
     });

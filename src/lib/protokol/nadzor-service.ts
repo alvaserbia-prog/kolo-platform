@@ -121,7 +121,7 @@ export async function obaviNadzor(input: {
     // strana, pa je nadzornik mogao da „nadzire" verifikaciju u kojoj je on meta.
     if (veza.verifikatorId === nadzornikId || veza.verifikovaniId === nadzornikId) {
       throw new NadzorGreska(
-        "Ne možeš da nadziraš potvrdu u kojoj si i sam učestvovao.",
+        "Ne možeš da nadziraš potvrdu u kojoj i ti učestvuješ.",
         400
       );
     }
@@ -147,7 +147,7 @@ export async function obaviNadzor(input: {
       select: { id: true },
     });
     if (vecGledao) {
-      throw new NadzorGreska("Već si evidentirao ishod nad ovom potvrdom.", 409);
+      throw new NadzorGreska("Tvoj ishod nad ovom potvrdom je već upisan.", 409);
     }
 
     const dosadasnjih = await tx.nadzorZapis.count({ where: { verifikacijaId } });

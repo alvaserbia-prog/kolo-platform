@@ -58,7 +58,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       },
     });
   } catch (e) {
-    // P2002 = već si prijavio/la ovu poruku. Ponovljen pritisak nije nov podatak,
+    // P2002 = ova poruka je već prijavljena s ovog naloga. Ponovljen pritisak nije nov podatak,
     // pa se odgovara isto kao prvi put — da se ne odaje da li si već prijavio.
     if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") {
       return NextResponse.json({ ok: true });

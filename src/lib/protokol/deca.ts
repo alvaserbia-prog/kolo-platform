@@ -322,7 +322,7 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
       kljuc: "notifikacije.roditeljstvo_potvrda",
       parametri: { pseudonim: roditelj.pseudonim, godine, dana: ROK_POTVRDE_DANA },
       naslov: "Potvrdi postojanje deteta",
-      tekst: `${roditelj.pseudonim} je otvorio/la nalog svom detetu uzrasta ${godine} godina. Imaš ${ROK_POTVRDE_DANA} dana da potvrdiš da to znaš.`,
+      tekst: `Sa naloga ${roditelj.pseudonim} otvoren je nalog za dete uzrasta ${godine} godina. Imaš ${ROK_POTVRDE_DANA} dana da potvrdiš da to znaš.`,
       link: "/deca/potvrde",
     }).catch(() => {});
   }
@@ -807,7 +807,7 @@ export async function obradiIstekleRokove(sada: Date = new Date()) {
         kljuc: "notifikacije.roditeljstvo_istekla",
         parametri: { pseudonim: veza.roditelj.pseudonim },
         naslov: "Potvrda stvarnosti je poništena",
-        tekst: `Nisi se izjasnio/la u roku od ${ROK_POTVRDE_DANA} dana, pa je tvoja potvrda stvarnosti korisnika ${veza.roditelj.pseudonim} poništena.`,
+        tekst: `Izjašnjenje nije stiglo u roku od ${ROK_POTVRDE_DANA} dana, pa je tvoja potvrda stvarnosti člana ${veza.roditelj.pseudonim} poništena.`,
         link: "/verifikacija",
       }).catch(() => {});
 

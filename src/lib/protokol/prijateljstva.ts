@@ -411,8 +411,8 @@ export async function raskiniPrijateljstvo(korisnikId: string, prijateljstvoId: 
     parametri: { pseudonim: jaPseudonim, iznos: PRIJATELJSTVO_POEN },
     naslov: "Prijateljstvo je raskinuto",
     tekst: p.poenIsplacen
-      ? `${jaPseudonim} je raskinuo/la prijateljstvo. Otpisano ti je ${PRIJATELJSTVO_POEN} POEN.`
-      : `${jaPseudonim} je raskinuo/la prijateljstvo.`,
+      ? `Prijateljstvo sa ${jaPseudonim} je raskinuto. Otpisano ti je ${PRIJATELJSTVO_POEN} POEN.`
+      : `Prijateljstvo sa ${jaPseudonim} je raskinuto.`,
     link: "/prijatelji",
   }).catch(() => {});
 

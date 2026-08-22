@@ -157,7 +157,7 @@ export async function POST(req: NextRequest) {
       : "notifikacije.transfer_primljen",
     parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
     naslov: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    tekst: `${posiljac.pseudonim} ti je prepisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis.${description ? ` Poruka: "${description}"` : ""}`,
+    tekst: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis — od člana ${posiljac.pseudonim}.${description ? ` Poruka: „${description}"` : ""}`,
     link: "/novcanik",
   });
 

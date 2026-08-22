@@ -66,7 +66,7 @@ export async function POST(
     kljuc: "notifikacije.pristupnica_prihvacena",
     parametri: { krug: krug?.name ?? krugId },
     naslov: "Pristupnica prihvaćena!",
-    tekst: `Postao/la si član kruga „${krug?.name ?? krugId}".`,
+    tekst: `Tvoja pristupnica za Krug „${krug?.name ?? krugId}" je prihvaćena.`,
     link: `/krug/${krugId}`,
   });
 
