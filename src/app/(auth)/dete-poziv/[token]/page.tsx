@@ -163,13 +163,29 @@ export default function DetePozivPage({ params }: { params: Promise<{ token: str
             {t("dugme_preuzmi")}
           </button>
 
+          {/* Poruka traži saglasnost — mora da kaže i šta se za nju dobija.
+              Isti sadržaj stoji i u mejlu; ekran ne sme da bude škrtiji od njega. */}
+          <p className="text-xs text-kolo-muted">{t("dobijate")}</p>
+
           {/* 🔴 Uputstvo za roditelja koji NIJE na platformi. Dugme iznad ga vodi
               na prijavu, a on nalog nema — bez ova tri koraka poruka traži radnju
               koju čovek ne ume da izvrši. Drugi i treći korak se ne dešavaju istog
               dana, ali dete zbog toga nije zaustavljeno. */}
           <div className="rounded-xl bg-kolo-bg px-4 py-3 text-xs text-kolo-muted space-y-1">
             <p className="font-semibold text-kolo-text">{t("nisam_clan_naslov")}</p>
-            <p>{t("nisam_clan_korak1")}</p>
+            {/* 🔴 Korak 1 mora da bude ŽIV link, i to sa `callbackUrl`. Dugme
+                „Preuzmi nalog" iznad vodi na prijavu, a čovek koji nema nalog
+                nema šta tamo da radi; obrazac za registraciju sam po sebi ne zna
+                da ga posle vrati na poziv. Bez ovoga se roditelj posle otvaranja
+                naloga gubi i mora ponovo da traži poruku u pošti. */}
+            <p>
+              <Link
+                href={`/registracija?callbackUrl=${encodeURIComponent(`/dete-poziv/${token}`)}`}
+                className="font-medium text-kolo-green-700 underline underline-offset-2"
+              >
+                {t("nisam_clan_korak1")}
+              </Link>
+            </p>
             <p>{t("nisam_clan_korak2")}</p>
             <p>{t("nisam_clan_korak3")}</p>
             <p className="pt-1">{t("nisam_clan_poen")}</p>

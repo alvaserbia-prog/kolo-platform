@@ -160,11 +160,28 @@ export async function registrujDete(ulaz: RegistracijaDetetaUlaz) {
 }
 
 /**
- * Poruka roditelju sa tri radnje: preuzmi nalog, ovo nije moje dete, obriši nalog.
+ * Poruka roditelju — izbor, ne jedno dugme.
  *
  * 🔴 U poruci stoji SAMO pseudonim deteta. Adresa je podatak koji je uneo neko
- * treći i niko je nije proverio — pravo ime u poruci na pogrešnu adresu bilo bi
- * odavanje podatka o detetu osobi koja s njim nema veze.
+ * treći i niko je nije proverio; pravo ime na pogrešnoj adresi bilo bi odavanje
+ * podatka o detetu osobi koja s njim nema veze.
+ *
+ * ─── Zašto poruka opisuje DVA koraka, a ne jedan ────────────────────────────
+ *
+ * Preuzimanje naloga i sticanje svojstva redovnog člana su dve različite stvari i
+ * ne dešavaju se istog dana. Ranija poruka je to pominjala u jednoj rečenici pri
+ * dnu, pa je roditelj koji preuzme nalog očekivao da detetu odmah krene POEN — a
+ * POEN čeka drugi korak. Sada svaki korak ima svoj naslov i svoju posledicu, pa
+ * čovek vidi šta dobija odmah, a šta tek kad ga neko potvrdi.
+ *
+ * Uz to su izričito nabrojana ovlašćenja koja roditelj dobija preuzimanjem
+ * (čl. 9 i 10). Bez toga poruka traži saglasnost, a ne kaže šta se za nju dobija.
+ *
+ * ─── Zašto su odbijanje i brisanje ravnopravno navedeni ─────────────────────
+ *
+ * Adresa nije proverena, pa je čovek na drugoj strani možda nema veze sa detetom.
+ * Njemu poruka mora da ponudi izlaz jednako vidljivo kao i pristanak, inače je to
+ * pritisak, a ne izbor. Obe radnje rade BEZ prijave (čl. 4b st. 4).
  */
 async function posaljiPozivRoditelju(
   email: string,
@@ -176,23 +193,39 @@ async function posaljiPozivRoditelju(
   const html = emailLayout({
     naslov: "Dete je otvorilo nalog na KOLO platformi",
     telo: [
-      `Nalog pod pseudonimom <strong>${esc(pseudonim)}</strong> naveo je ovu adresu kao adresu roditelja.`,
-      `Ako je to vaše dete, otvorite nalog i unesite njegov datum rođenja — time dajete saglasnost za učešće i preuzimate nalog.`,
-      `Ako nije, na istoj stranici stoje dugmad <strong>„Ovo nije moje dete"</strong> i <strong>„Obriši nalog"</strong>.`,
-      // 🔴 Uputstvo za roditelja koji NIJE na platformi. Bez njega poruka traži
-      // radnju koju čovek nema gde da izvrši: dugme ga vodi na prijavu, a nalog
-      // nema. Tri koraka su namerno razdvojena, jer se drugi i treći ne dešavaju
-      // istog dana — a dete u međuvremenu nije zaustavljeno.
-      `<strong>Ako još niste na KOLU:</strong>`,
-      `1. Otvorite svoj nalog (besplatno je) — dugme ispod vas vodi na isto mesto i posle registracije.<br>` +
-        `2. Preuzmite nalog deteta i upišite njegov datum rođenja.<br>` +
-        `3. Zamolite nekoga ko vas poznaje, a već je član, da potvrdi da ste stvarna osoba.`,
-      `Dete koristi platformu čim preuzmete nalog — profil, prijatelje i Pričaonicu. ` +
-        `POEN se detetu upisuje tek kada vi postanete redovan član, ali se ništa ne gubi: ` +
-        `sve što je do tada zaradilo stoji zabeleženo i upiše mu se tog dana.`,
-      `Link važi ${ROK_TOKENA_DANA} dana. Ako niko ne preuzme nalog u roku od ${ROK_PREUZIMANJA_DANA} dana od otvaranja, nalog se briše sam.`,
+      `Nalog pod pseudonimom <strong>${esc(pseudonim)}</strong> naveo je ovu adresu kao adresu roditelja. ` +
+        `Odluka je vaša — evo šta koja mogućnost znači.`,
+
+      `<strong>Šta je KOLO.</strong> Platforma na kojoj ljudi jedni drugima daju stvari i usluge, a učešće se ` +
+        `beleži u POEN-ima. POEN nije novac: ne menja se za dinare i ne može se podići. Deca imaju svoj deo, ` +
+        `u kome su samo deca.`,
+
+      `<strong>Šta dete može sada, bez vas.</strong> Samo da sklapa prijateljstva skeniranjem koda uživo. ` +
+        `Nema pristup Pričaonici, ne može da objavljuje oglase ni da razmenjuje poruke, i POEN mu se ne upisuje.`,
+
+      `<strong>Mogućnost 1 — preuzmete nalog.</strong> Otvorite svoj nalog ako ga nemate (besplatno je), ` +
+        `upišete detetov datum rođenja i time date saglasnost. Dete odmah dobija Pričaonicu, oglase i poruke. ` +
+        `Vi dobijate: spisak njegovih prijatelja sa datumima, uvid s kim se dopisuje i koliko (bez sadržaja ` +
+        `poruka), njegove oglase — svaki možete ukloniti — prekidač kojim odobravate ili zabranjujete razgovor ` +
+        `sa punoletnim korisnicima, i mogućnost da mu postavite novu lozinku ako je zaboravi.`,
+
+      `<strong>Mogućnost 2 — uz to postanete i redovan član.</strong> To znači da vas je potvrdio neko ko vas ` +
+        `lično poznaje, a već je na KOLU. Tek tada se detetu <strong>upisuje POEN</strong> — 500 za svako ` +
+        `sklopljeno prijateljstvo. Ništa se do tada ne gubi: sve što dete zaradi stoji zabeleženo i upiše mu se ` +
+        `tog dana. Uz to i vi sami koristite platformu u punom obimu.`,
+
+      `<strong>Mogućnost 3 — ovo nije vaše dete.</strong> Na stranici stoje dugmad ` +
+        `<strong>„Ovo nije moje dete"</strong> i <strong>„Obriši nalog"</strong>. Obe rade bez prijave i bez ` +
+        `otvaranja naloga. Ako ne uradite ništa, nalog se briše sam u roku od ${ROK_PREUZIMANJA_DANA} dana.`,
+
+      `<strong>Šta se o detetu evidentira.</strong> Pseudonim i datum rođenja. Ništa više — ni ime, ni adresa, ` +
+        `ni broj telefona. Prijateljstva se sklapaju isključivo skeniranjem koda uživo, pa se do vašeg deteta ` +
+        `ne može doći sa interneta, a njegov profil drugim odraslim korisnicima nije dostupan.`,
+
+      `Link važi ${ROK_TOKENA_DANA} dana. Ako istekne, dete na svom ekranu ima šestocifreni kod koji vam ` +
+        `pročita, pa nalog preuzimate u odeljku „Moja deca".`,
     ],
-    dugme: { tekst: "Otvori nalog deteta", link },
+    dugme: { tekst: "Pogledaj i odluči", link },
   });
   await posaljiEmailRaw(email, "Dete je otvorilo nalog na KOLO platformi", html, "deca-poziv");
 }
