@@ -84,7 +84,7 @@ export default function PublicNav({ isLoggedIn }: Props) {
     <>
       {/* Desktop nav */}
       <nav className="hidden md:flex items-center gap-6">
-        {topLink("/", t("nav_fooldal"))}
+        {topLink("/", t("nav_pocetna"))}
         {topLink("/pijaca", t("nav_pijaca"))}
         {topLink("/kako-funkcionise", t("nav_kako_funkcionise"))}
         {topLink("/o-sistemu", t("nav_o_sistemu"))}
@@ -148,7 +148,7 @@ export default function PublicNav({ isLoggedIn }: Props) {
 
           <nav className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
             <div className="space-y-1">
-              {mobilePrimaryLink("/", t("nav_fooldal"))}
+              {mobilePrimaryLink("/", t("nav_pocetna"))}
               {mobilePrimaryLink("/pijaca", t("nav_pijaca"))}
               {mobilePrimaryLink("/kako-funkcionise", t("nav_kako_funkcionise"))}
               {mobilePrimaryLink("/o-sistemu", t("nav_o_sistemu"))}

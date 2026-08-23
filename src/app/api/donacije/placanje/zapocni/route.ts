@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         error:
-          "Za javnu donaciju (sa POEN) unesite ime i prezime u profilu, ili izaberite anonimnu donaciju (bez POEN-a).",
+          "Za javnu donaciju (sa POEN) unesite ime i prezime u profilu, ili izaberite anonimnu donaciju (bez POENA).",
         trebaPunoIme: true,
       },
       { status: 400 }

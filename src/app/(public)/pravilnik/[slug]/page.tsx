@@ -7,54 +7,50 @@ import remarkGfm from "remark-gfm";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
 import { pageMetadata } from "@/lib/seo";
 
-const PRAVILNICI: Record<string, { naziv: string; fajl: string; verzija: string; opis: string }> = {
+/**
+ * Fajl i verzija po slug-u. Naziv i opis NISU ovde — čitaju se iz prevoda
+ * (`pravne.rb.<slug>.naziv` / `.opis`), pa postoje na svih pet jezika. Ranije
+ * su stajali i ovde, u srpskoj kopiji koju nijedna linija nije čitala; ta
+ * kopija je zaostala na staroj terminologiji („verifikacija korisnika") i
+ * čekala da je neko prepiše kao tačnu.
+ */
+const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "kolo-sistem": {
-    naziv: "Pravilnik o KOLO sistemu",
-    fajl: "Pravilnik_4_2_3.md",
-    verzija: "4.2.0",
-    opis: "Osnovni akt sistema — 12 glava, 82 člana.",
+    fajl: "Pravilnik_4_3_4.md",
+    verzija: "4.3.4",
   },
   "hijerarhija": {
-    naziv: "Pravilnik o hijerarhiji akata",
-    fajl: "hijerarhija_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Odnosi između opštih akata Fondacije i platformskih akata.",
+    fajl: "hijerarhija_4_3_4.md",
+    verzija: "4.3.4",
   },
   "dokaz-stvarnosti": {
-    naziv: "Pravilnik o dokazu stvarnosti",
-    fajl: "dokaz_stvarnosti_4_2_3.md",
-    verzija: "4.2.0",
-    opis: "Operativna mehanika verifikacije korisnika kroz lanac potvrda.",
+    fajl: "dokaz_stvarnosti_4_3_4.md",
+    verzija: "4.3.4",
   },
   "pokroviteljstvo-donacije": {
-    naziv: "Pravilnik o pokroviteljstvu i donacijama",
-    fajl: "donacije_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Nivoi donacija i pokroviteljstva.",
+    fajl: "donacije_4_3_4.md",
+    verzija: "4.3.4",
   },
   "operativni": {
-    naziv: "Pravilnik o operativnom doprinosu",
-    fajl: "operativni_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Operativni program — zadaci i potvrda izvršenja od strane nosilaca ZRNA, odnosno Uprave Fondacije.",
+    fajl: "operativni_4_3_4.md",
+    verzija: "4.3.4",
   },
   "osnivacki": {
-    naziv: "Pravilnik o osnivačkom doprinosu",
-    fajl: "osnivacki_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Naknadno evidentiranje rada pre otvaranja platforme.",
+    fajl: "osnivacki_4_3_4.md",
+    verzija: "4.3.4",
   },
   "gornje-kolo": {
-    naziv: "Pravilnik o Gornjem Kolu",
-    fajl: "gornje_kolo_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Glasanje, delegiranje i odlučivanje u Gornjem Kolu; zaštitni veto.",
+    fajl: "gornje_kolo_4_3_4.md",
+    verzija: "4.3.4",
   },
   "programi-podrske": {
-    naziv: "Pravilnik o programima podrške",
-    fajl: "programi_podrske_4_2_3.md",
-    verzija: "4.1.1",
-    opis: "Socijalni programi — uslovi i verifikatorska potvrda.",
+    fajl: "programi_podrske_4_3_4.md",
+    verzija: "4.3.4",
+  },
+  // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
+  "ucesce-dece": {
+    fajl: "ucesce_dece_4_3_4.md",
+    verzija: "4.3.4",
   },
 };
 

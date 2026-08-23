@@ -26,9 +26,11 @@ type Props = {
   statusKaoBadge?: boolean;
   /** Kartica popunjava punu visinu roditelja (h-full), sadržaj centriran. */
   ispuniVisinu?: boolean;
+  /** Maloletni korisnik (Modul Deca) — oznaka statusa glasi „dete". */
+  maloletan?: boolean;
 };
 
-export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu }: Props) {
+export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu, maloletan }: Props) {
   const t = useTranslations("verifikacija");
   const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
     ispuniVisinu ? " h-full flex flex-col justify-center" : ""
@@ -52,16 +54,23 @@ export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov
 
   // Osnivači (početni korisnici, UO Fondacije) su koren lanca potvrda — nemaju
   // nikoga iznad sebe, pa se njihov status prikazuje kao „Početni korisnik".
-  const labela = jeOsnivac
-    ? t("tip_pocetna")
-    : bezPristupa
-      ? t("tip_bez_pristupa")
-      : (tipLabela[tip] ?? tip);
-  const stil = jeOsnivac
-    ? "bg-kolo-gold-100 text-kolo-gold-600"
-    : bezPristupa
-      ? "bg-kolo-bg text-kolo-muted"
-      : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
+  // Maloletni korisnik nije „nov član" — ta oznaka znači „skoro je došao", a dete
+  // može biti u sistemu godinama. U dečjem prostoru status ionako ne određuje ništa
+  // (Modul Deca, čl. 15), pa oznaka imenuje samo ko je: dete.
+  const labela = maloletan
+    ? t("tip_dete")
+    : jeOsnivac
+      ? t("tip_pocetna")
+      : bezPristupa
+        ? t("tip_bez_pristupa")
+        : (tipLabela[tip] ?? tip);
+  const stil = maloletan
+    ? "bg-kolo-bg text-kolo-muted"
+    : jeOsnivac
+      ? "bg-kolo-gold-100 text-kolo-gold-600"
+      : bezPristupa
+        ? "bg-kolo-bg text-kolo-muted"
+        : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
 
   const indeksBlok = (
     <div className="min-w-0 text-center">

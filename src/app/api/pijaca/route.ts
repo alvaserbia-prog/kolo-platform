@@ -10,6 +10,8 @@ import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
+import { nalogRadi, stanjeNaloga, ucitajUcesnika, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
+import { PORUKA_CEKA_RODITELJA } from "@/lib/deca-pravila";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -18,8 +20,15 @@ const MAX_IMAGES = 5;
 const MAX_SIZE = 5 * 1024 * 1024;
 
 // GET /api/pijaca — lista aktivnih oglasa
+//
+// Ruta je otvorena i neprijavljenom posetiocu, pa je vidljivost dečjih oglasa
+// (Pravilnik o Modulu Deca, čl. 13) morala da uđe upravo ovde: gost nikada ne vidi
+// oglas maloletnog korisnika, punoletni ga vidi uz saglasnost roditelja, a dete
+// vidi oglase druge dece uvek.
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
+  const session = await getServerSession(authOptions);
+  const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
   // Multi-select kategorije (OR): ?kat=slug1,slug2. Legacy parametar
   // `kategorija` (jedna vrednost) i dalje radi.
   const kategorije = parsirajKatParam(searchParams.get("kat") ?? searchParams.get("kategorija"));
@@ -29,7 +38,10 @@ export async function GET(req: NextRequest) {
   const maxCena = parseInt(searchParams.get("max") ?? "0") || 0;
   const tip = (searchParams.get("tip") ?? "").toUpperCase();
 
-  const where: Record<string, unknown> = { status: "ACTIVE" };
+  const where: Record<string, unknown> = {
+    status: "ACTIVE",
+    seller: usloviVidljivostiOglasa(posmatrac),
+  };
   if (tip === "PONUDA" || tip === "POTRAZNJA") where.tip = tip;
   if (kategorije.length > 0) where.category = { in: kategorije };
   if (pretraga) where.title = { contains: pretraga, mode: "insensitive" };
@@ -53,7 +65,7 @@ export async function GET(req: NextRequest) {
       id: true, title: true, description: true, tip: true,
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: { select: { pseudonim: true, verified: true, maloletan: true } },
     },
   });
 
@@ -83,21 +95,21 @@ export async function POST(req: NextRequest) {
   const phone = (formData.get("phone") as string)?.trim() ?? "";
 
   if (!title || title.length < 3)
-    return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+    return await greska("Naslov mora imati najmanje 3 znaka.", 400);
   // Gornje granice dužine — sprečavaju bujanje baze i predimenzioniran javni odgovor.
   if (title.length > 120)
-    return await greska("Naslov može imati najviše 120 karaktera.", 400);
+    return await greska("Naslov može imati najviše 120 znakova.", 400);
   if (description.length > 4000)
-    return await greska("Opis može imati najviše 4000 karaktera.", 400);
+    return await greska("Opis može imati najviše 4000 znakova.", 400);
   if (location.length > 80)
-    return await greska("Lokacija može imati najviše 80 karaktera.", 400);
+    return await greska("Lokacija može imati najviše 80 znakova.", 400);
   // Lokacija oglasa je opciona, ali kad se navede mora biti JEDNO naselje iz
   // šifarnika — po njoj se filtrira Pijaca i računa udaljenost do posmatrača.
   const mesto = location ? razresiNaselje(location) : null;
   if (location && !mesto)
     return await greska(PORUKA_MESTO_IZ_SPISKA, 400);
   if (phone.length > 40)
-    return await greska("Telefon može imati najviše 40 karaktera.", 400);
+    return await greska("Telefon može imati najviše 40 znakova.", 400);
   // Kod potražnje budžet se uvek dogovara — cena se ne unosi (uvek DOGOVOR).
   const cena = tip === "POTRAZNJA"
     ? { ok: true as const, cenaTip: "DOGOVOR" as const, price: null, cenaDo: null }
@@ -126,11 +138,28 @@ export async function POST(req: NextRequest) {
   // za neverifikovane (limit od tri oglasa, zabrana potražnje).
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { verified: true },
+    select: { verified: true, maloletan: true },
   });
   if (!korisnik) return await greska("Nalog ne postoji.", 401);
 
-  const brojAktivnihOglasa = korisnik.verified
+  // 🔴 Za oglas maloletnog korisnika važe ISTI uslovi objave kao za svaki drugi
+  // oglas — razlikuje se samo vidljivost (Modul Deca, čl. 13 st. 1). Ograničenja
+  // za nepotvrđen nalog (samo ponuda, najviše tri, sadržinski minimum) postoje
+  // zbog naloga iza kog niko ne stoji; iza deteta stoje roditelj i svi koji su
+  // roditelja potvrdili, pa se na njega ne primenjuju.
+  //
+  // Ovim se ništa ne zaobilazi: nalog detetu otvara samo potvrđen korisnik (čl. 5),
+  // a on ni sam ta ograničenja nema.
+  const punaPravaObjave = korisnik.verified || korisnik.maloletan;
+
+  // Nalog koji još čeka roditelja (Modul Deca, čl. 4c) ne objavljuje. Dete na
+  // čekanju ima profil, skenira QR kodove i sklapa prijateljstva — ništa više;
+  // iza njega još ne stoji nijedan odrastao čovek koji je sam prošao registraciju.
+  if (!nalogRadi(await stanjeNaloga(session.user.id))) {
+    return await greska(PORUKA_CEKA_RODITELJA, 403);
+  }
+
+  const brojAktivnihOglasa = punaPravaObjave
     ? 0
     : await prisma.marketplaceListing.count({
         where: { sellerId: session.user.id, status: "ACTIVE" },
@@ -147,7 +176,7 @@ export async function POST(req: NextRequest) {
     images: imageFiles.map((_, i) => String(i)),
   };
   const smem = smeDaPostaviOglas({
-    verifikovan: korisnik.verified,
+    verifikovan: punaPravaObjave,
     brojAktivnihOglasa,
     oglas: oglasZaProveru,
   });

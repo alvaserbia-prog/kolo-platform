@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import IndeksPrikaz from "@/components/verifikacija/IndeksPrikaz";
 import MiniStablo, {
   type CvorVerifikator,
@@ -50,27 +51,30 @@ export default function IndeksSekcija({
   indeksKaoBadge?: boolean;
   ispuniVisinu?: boolean;
 }) {
+  const t = useTranslations("common");
   const [data, setData] = useState<LanacResponse | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // Samo prekidač: kad upit padne, sekcija se ne crta (`if (error) return null`),
+  // pa poruka o grešci nema gde da se prikaže — zato boolean, ne tekst.
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch(`/api/verifikacija/lanac/${korisnikId}`)
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (!d) {
-          setError("Indeks nije dostupan.");
+          setError(true);
           return;
         }
         setData(d);
       })
-      .catch(() => setError("Mreža nije dostupna"));
+      .catch(() => setError(true));
   }, [korisnikId]);
 
   if (error) return null;
   if (!data) {
     return (
       <div className={`rounded-2xl border border-black/10 bg-white p-6 shadow-sm${ispuniVisinu ? " h-full" : ""}`}>
-        <div className="text-sm text-black/55">Učitavanje indeksa...</div>
+        <div className="text-sm text-black/55">{t("ucitavanje")}</div>
       </div>
     );
   }

@@ -117,7 +117,7 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-xs text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
                   <span className="text-xs text-kolo-border">·</span>
-                  <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " P" : ""}</span>
+                  <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " POEN" : ""}</span>
                   {l.soldAt && (
                     <>
                       <span className="text-xs text-kolo-border">·</span>

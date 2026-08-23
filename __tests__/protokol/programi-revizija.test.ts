@@ -38,19 +38,31 @@ describe("razlogObustaveProgram", () => {
     ).toBeNull();
   });
 
-  it("bez roka, REGULARNI sa indeksom < 100 → 'indeks'", () => {
+  it("bez roka, REGULARNI sa indeksom ispod 10 → 'indeks'", () => {
     expect(
       razlogObustaveProgram(
-        { nextReverifikacija: null, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 90 },
+        { nextReverifikacija: null, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 0 },
         SADA
       )
     ).toBe("indeks");
   });
 
-  it("bez roka, REGULARNI sa indeksom 100 → null", () => {
+  // 4.3.1 — prag je funkcionalnih 10% (jedna primljena potvrda). Do tog seta je
+  // ovde stajalo 100%, pa je jedna poništena potvrda gasila program čoveku koji
+  // po čl. 4 i dalje ispunjava uslov.
+  it("bez roka, REGULARNI sa indeksom 10 → null (jedna potvrda je dovoljna)", () => {
     expect(
       razlogObustaveProgram(
-        { nextReverifikacija: null, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 100 },
+        { nextReverifikacija: null, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 10 },
+        SADA
+      )
+    ).toBeNull();
+  });
+
+  it("bez roka, REGULARNI sa indeksom 90 → null (nepun indeks ne obustavlja)", () => {
+    expect(
+      razlogObustaveProgram(
+        { nextReverifikacija: null, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 90 },
         SADA
       )
     ).toBeNull();
@@ -59,7 +71,7 @@ describe("razlogObustaveProgram", () => {
   it("NOSILAC_ZRNA sa niskim indeksom NE obustavlja (standing iz statusa)", () => {
     expect(
       razlogObustaveProgram(
-        { nextReverifikacija: null, tipKorisnika: TipKorisnika.NOSILAC_ZRNA, indeksStvarnosti: 50 },
+        { nextReverifikacija: null, tipKorisnika: TipKorisnika.NOSILAC_ZRNA, indeksStvarnosti: 0 },
         SADA
       )
     ).toBeNull();
@@ -68,7 +80,7 @@ describe("razlogObustaveProgram", () => {
   it("istekao rok ima prednost nad padom indeksa → 'revizija'", () => {
     expect(
       razlogObustaveProgram(
-        { nextReverifikacija: PROSLOST, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 50 },
+        { nextReverifikacija: PROSLOST, tipKorisnika: TipKorisnika.REGULARNI, indeksStvarnosti: 0 },
         SADA
       )
     ).toBe("revizija");

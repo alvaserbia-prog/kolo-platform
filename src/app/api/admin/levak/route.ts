@@ -24,6 +24,10 @@ export async function GET() {
   const [korisnici, poverenjeRedovi, formaRedovi, oglasi, najstarijaAktivnost] =
     await Promise.all([
       prisma.user.findMany({
+        // Maloletni korisnici ne prolaze ovaj put — nalog im otvara roditelj i ne
+        // potvrđuju se u lancu potvrda. Da ulaze u levak, iskrivili bi svaki korak,
+        // jer bi zauvek stajali na „registrovani".
+        where: { maloletan: false },
         select: { id: true, createdAt: true, verifiedAt: true },
         orderBy: { createdAt: "asc" },
       }),

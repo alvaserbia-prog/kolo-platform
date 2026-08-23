@@ -18,7 +18,7 @@ export default async function OSistemuPage() {
   const locale = await getLocale();
   const t = await getTranslations("oSistemu");
   const tc = await getTranslations("common");
-  const faqPitanja = getFaqPoBrojevima([1, 4, 28], locale);
+  const faqPitanja = getFaqPoBrojevima([71, 52, 28], locale);
 
   const sistemi = [
     {
@@ -127,7 +127,7 @@ export default async function OSistemuPage() {
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             {t("zajednicko_citat")}
-            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">— {t("zajednicko_citat_izvor")}</span>
+            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">{t("zajednicko_citat_izvor")}</span>
           </blockquote>
 
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
@@ -352,14 +352,7 @@ export default async function OSistemuPage() {
               {t("topla_voda_tag")}
             </div>
           </div>
-          <blockquote
-            className="italic text-kolo-muted leading-relaxed text-base md:text-lg mb-6 text-center max-w-[620px] mx-auto"
-            style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
-          >
-            {t("topla_voda_citat")}
-            <span className="block not-italic text-sm text-kolo-muted/70 mt-3">— {t("topla_voda_citat_izvor")}</span>
-          </blockquote>
-          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 text-center" style={{ letterSpacing: "-0.02em" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900 mb-6 mt-6 text-center" style={{ letterSpacing: "-0.02em" }}>
             {t("topla_voda_naslov")}
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
@@ -367,11 +360,10 @@ export default async function OSistemuPage() {
               {t("topla_voda_p1")}
             </p>
             <p>
-              <strong className="text-kolo-green-900">{t("topla_voda_p2_bold")}</strong>{t("topla_voda_p2_pre")}
+              {t("topla_voda_p2_pre")}<strong className="text-kolo-green-900">{t("topla_voda_p2_bold")}</strong>{t("topla_voda_p2_post")}
             </p>
             <p>
-              {t("topla_voda_p3_pre")}<strong className="text-kolo-green-900">{t("topla_voda_p3_bold1")}</strong>{t("topla_voda_p3_mid")}{" "}
-              <strong className="text-kolo-green-900">{t("topla_voda_p3_bold2")}</strong>{t("topla_voda_p3_post")}
+              {t("topla_voda_p3")}
             </p>
           </div>
         </div>
@@ -436,13 +428,22 @@ export default async function OSistemuPage() {
           </h2>
           <div className="space-y-5 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
             <p>
-              {t("familija_p1_pre")}<strong className="text-kolo-green-900">{tc("poen")}</strong>{t("familija_p1_poen")}<strong className="text-kolo-green-900">{tc("zrno")}</strong>{t("familija_p1_zrno")}
+              {t("familija_p1")}
             </p>
             <p>
               {t("familija_p2")}
             </p>
             <p>
-              {t("familija_p3")}
+              {t("familija_p3_pre")}<strong className="text-kolo-green-900">{tc("poen")}</strong>{t("familija_p3_poen")}<strong className="text-kolo-green-900">{tc("zrno")}</strong>{t("familija_p3_zrno")}
+            </p>
+            <p>
+              {t("familija_p4")}
+            </p>
+            <p>
+              {t("familija_p5")}
+            </p>
+            <p>
+              {t("familija_p6")}
             </p>
           </div>
         </div>
@@ -490,6 +491,18 @@ export default async function OSistemuPage() {
               {t("pristup_tekst_pre")}<strong className="text-kolo-green-900">{t("pristup_tekst_bold")}</strong>{t("pristup_tekst_post")}
             </p>
           </div>
+
+          {/* Merilo, ne odobrenje — sta od obeležja iz definicija KOLO već ima */}
+          <div className="mt-8 pt-6 border-t border-kolo-border">
+            <p className="text-xs font-bold tracking-widest text-kolo-muted uppercase mb-3">
+              {t("prema_tag")}
+            </p>
+            <div className="space-y-4 text-kolo-text leading-relaxed text-body" style={{ lineHeight: "1.75" }}>
+              <p>{t("prema_p1")}</p>
+              <p>{t("prema_p2")}</p>
+              <p>{t("prema_p3")}</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -509,16 +522,13 @@ export default async function OSistemuPage() {
               {t("zasto_p1")}
             </p>
             <p>
-              {t("zasto_p2_pre")}<strong className="text-kolo-green-900">{t("zasto_p2_bold")}</strong>{t("zasto_p2_post")}
-            </p>
-            <p>
-              {t("zasto_p3")}
+              {t("zasto_p2")}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── MARGARET MID CITAT ────────────────────────────────────── */}
+      {/* ── NARODNA POSLOVICA ─────────────────────────────────────── */}
       <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-10 border-l-4 border-kolo-green-700">
         <div className="max-w-[680px] mx-auto">
           <blockquote
@@ -526,19 +536,16 @@ export default async function OSistemuPage() {
             style={{ fontFamily: "Georgia, serif", lineHeight: "1.65" }}
           >
             <span className="text-kolo-green-700 font-bold mr-0.5">&bdquo;</span>
-            {t("margaret_citat")}
+            {t("zasto_citat")}
             <span className="text-kolo-green-700 font-bold ml-0.5">&ldquo;</span>
           </blockquote>
-          <p className="text-sm text-kolo-muted font-medium text-center">— {t("margaret_izvor")}</p>
+          <p className="text-sm text-kolo-muted font-medium text-center">{t("zasto_citat_izvor")}</p>
         </div>
       </section>
 
       {/* ── FAQ TIZER ─────────────────────────────────────────────── */}
       <section className="space-y-4">
         <div className="text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
-            {t("faq_tag")}
-          </div>
           <h2 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("faq_naslov")}
           </h2>
@@ -563,24 +570,23 @@ export default async function OSistemuPage() {
           {t("cta_opis")}<br />
           {t("cta_opis2")}
         </p>
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
-          <Link
-            href="/kako-funkcionise"
-            className="px-7 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
-          >
-            {t("cta_kako")}
-          </Link>
-          <Link
-            href="/o-nama"
-            className="px-7 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t("cta_ko")}
-          </Link>
+        {/* Jedno dugme vodi dalje, druga dva su obicni linkovi — na
+            zavrsetku stranice se bira jedan potez, ne tri ravnopravna. */}
+        <div className="flex justify-center mb-5">
           <Link
             href="/registracija"
-            className="px-7 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
+            className="w-full sm:w-auto px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
           >
             {t("cta_priduzi")}
+          </Link>
+        </div>
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm mb-6">
+          <Link href="/kako-funkcionise" className="text-white/80 hover:text-white transition-colors underline underline-offset-4">
+            {t("cta_kako")}
+          </Link>
+          <span className="text-white/40" aria-hidden="true">·</span>
+          <Link href="/o-nama" className="text-white/80 hover:text-white transition-colors underline underline-offset-4">
+            {t("cta_ko")}
           </Link>
         </div>
         <p className="text-white/40 text-xs">

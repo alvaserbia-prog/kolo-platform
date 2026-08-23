@@ -7,6 +7,8 @@ import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
+import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
+import { jeAdmin } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -26,20 +28,38 @@ export async function GET(
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
     include: {
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: { select: { ...IZBOR_UCESNIKA, pseudonim: true, verified: true } },
     },
   });
   if (!listing) return await greska("Oglas nije pronađen.", 404);
 
+  // Vidljivost oglasa maloletnog korisnika (Modul Deca, čl. 13).
+  //
+  // 🔴 404, ne 403: status 403 bi potvrdio da oglas postoji, a time i da postoji
+  // dete koje ga je objavilo — što je upravo ono što se skriva.
+  const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
+  const smem = smeDaVidiOglas(
+    posmatrac ? { ...posmatrac, admin: jeAdmin(session?.user) } : null,
+    ucesnikIzReda(listing.seller),
+  );
+  if (!smem) return await greska("Oglas nije pronađen.", 404);
+
   // Trag uklanjanja se ne prosipa u javni odgovor: razlog je saopštenje vlasniku
   // (Uslovi čl. 25 st. 2), a ne podatak o kom se obaveštava svet. `uklonioId`
   // ne izlazi nikome — ko je odlučio je stvar audit loga, ne javnog API-ja.
-  const { uklonjenRazlog, uklonioId: _uklonioId, ...javno } = listing;
+  const { uklonjenRazlog, uklonioId: _uklonioId, seller: _seller, ...javno } = listing;
   const jeVlasnik = listing.sellerId === session?.user?.id;
 
   return NextResponse.json({
     listing: {
       ...javno,
+      // Prodavac se sastavlja izričito: `...listing` bi prosuo roditelje i stanje
+      // prekidača iz čl. 10, koji nikoga sa strane ne zanimaju i ne smeju napolje.
+      seller: {
+        pseudonim: listing.seller.pseudonim,
+        verified: listing.seller.verified,
+        maloletan: listing.seller.maloletan,
+      },
       phone: session?.user?.verified ? listing.phone : null,
       uklonjenRazlog: jeVlasnik ? uklonjenRazlog : null,
     },
@@ -89,7 +109,7 @@ export async function PATCH(
     const keepRaw = (fd.get("keepImages") as string) ?? "[]";
 
     if (!title || title.length < 3)
-      return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+      return await greska("Naslov mora imati najmanje 3 znaka.", 400);
     if (title.length > 120 || description.length > 4000 || location.length > 80 || phone.length > 40)
       return await greska("Neko polje premašuje dozvoljenu dužinu.", 400);
     // Novo mesto mora biti JEDNO naselje iz šifarnika; zatečena vrednost oglasa
@@ -126,9 +146,13 @@ export async function PATCH(
 
     const vlasnik = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { verified: true },
+      select: { verified: true, maloletan: true },
     });
-    if (!vlasnik?.verified) {
+    // Sadržinski minimum se pri IZMENI proverava iz istog razloga iz kog i pri
+    // objavi — inače se zaobilazi u dva poteza. Maloletni korisnik je iz njega
+    // izuzet kao i potvrđeni (Modul Deca, čl. 13 st. 1: isti uslovi objave,
+    // razlikuje se samo vidljivost).
+    if (!vlasnik?.verified && !vlasnik?.maloletan) {
       const minimum = oglasIspunjavaMinimum({
         tip: listing.tip,
         title,

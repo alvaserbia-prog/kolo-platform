@@ -95,6 +95,27 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
     throw new ResetGreska("Nalog je ugašen — reset ne oživljava obrisan nalog.", 409);
   }
 
+  // Reset obara sve potvrde stvarnosti naloga. Kod roditelja bi to njegovo dete
+  // vratilo iz stanja `AKTIVNO` u `POVEZANO` (Modul Deca, čl. 4c) — prestao bi upis
+  // POEN-a po prijateljstvima — a postupak potvrde iz čl. 6 ostao bi da visi nad
+  // potvrđivačima koji sa detetom nemaju veze. Nalog deteta se briše preko
+  // roditeljskog ekrana, ne ovim alatom.
+  const brojDece = await prisma.roditeljstvo.count({
+    where: { roditeljId: userId, dete: { deaktiviranAt: null } },
+  });
+  if (brojDece > 0) {
+    throw new ResetGreska(
+      "Nalog ima povezano dete — reset bi mu oborio potvrde i zaustavio upis POENA na detetovom nalogu.",
+      400,
+    );
+  }
+  if (user.maloletan) {
+    throw new ResetGreska(
+      "Nalog maloletnog korisnika se ne resetuje — briše ga roditelj sa svog profila.",
+      400,
+    );
+  }
+
   const brojPokrovitelja = await prisma.pokrovitelj.count({ where: { vlasnikId: userId } });
   if (brojPokrovitelja > 0) {
     throw new ResetGreska("Nalog je vlasnik pokrovitelja — reset bi pokidao evidenciju pokroviteljstva.", 400);
@@ -359,6 +380,11 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
       vodicVidjenAt: null,
       pseudonimChangedAt: null,
       emailObavestenja: true,
+      // Nalog treba da zatekne stanje sa dana registracije, a nov nalog školu nema.
+      // Uz to se briše i rok od 30 dana — inače bi resetovan nalog nasledio čekanje
+      // koje ničim nije zaslužio.
+      skolaSifra: null,
+      skolaPromenjenaAt: null,
       createdAt: new Date(),
     },
   });

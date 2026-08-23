@@ -2,7 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { jeAdmin } from "@/lib/dozvole";
 
+/**
+ * Stranice koje nose JEDNOKRATNI TOKEN u putanji i moraju da rade BEZ prijave.
+ *
+ * 🔴 Ovo nije popuštanje nego ispravka: sve tri stranice su i napravljene za
+ * čoveka koji u tom trenutku nije prijavljen — roditelja koji tek dobija poruku o
+ * detetu, dete koje otvara poštu na tuđem telefonu, primaoca koji hoće da se
+ * odjavi. Dok su bile van ovog spiska, proxy ih je slao na `/login` pre nego što
+ * se stranica iscrta, pa su:
+ *  - „Ovo nije moje dete" i „Obriši nalog" (Pravilnik o učešću dece čl. 4b st. 4)
+ *    bili nedostupni upravo osobi kojoj su namenjeni — onome ko nije član a čiju
+ *    je adresu dete pogrešno unelo;
+ *  - uputstvo „Ako još niste na KOLU" stajalo na stranici koju neregistrovan
+ *    roditelj nikad nije video;
+ *  - potvrda imejl adrese deteta padala u najčešćem slučaju (pošta se otvara na
+ *    uređaju na kome nalog nije prijavljen).
+ *
+ * Pristup ostaje zatvoren tamo gde treba: sam token je dokaz da čovek drži poruku,
+ * a radnje koje traže nalog (preuzimanje deteta) proveravaju sesiju u SVOJOJ ruti,
+ * ne u proxy-ju — `POST /api/deca/poziv/[token]` vraća 401 za `preuzmi`, a
+ * propušta `odbij` i `obrisi`.
+ *
+ * Sve tri su uz to `noindex` (v. `app/(auth)/layout.tsx`) i u `robots.txt`.
+ */
+const JAVNE_TOKEN_RUTE = ["/dete-poziv", "/potvrdi-email", "/odjava-obavestenja"];
+
 const JAVNE_RUTE = [
+  ...JAVNE_TOKEN_RUTE,
   "/", "/pijaca", "/kako-funkcionise", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
   "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/odrzavanje",

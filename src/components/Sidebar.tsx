@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import JezikSvitcer from "@/components/JezikSvitcer";
-import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
+import { MODUL_DECA_AKTIVAN, POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 interface DnevniBrojevi {
   novcanik: number;
@@ -19,6 +19,8 @@ interface SidebarProps {
   isAdmin: boolean;
   jeNadzornik?: boolean; // POCETNI ili NOSILAC_ZRNA — vidi link "Nadzor"
   brojZaNadzor?: number; // badge na sidebar-u
+  /** Maloletni korisnik (Modul Deca) — dobija sopstvenu, kraću navigaciju. */
+  maloletan?: boolean;
   mobileOpen?: boolean;
   onMobileClose?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
@@ -67,6 +69,8 @@ function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
       return <svg {...p}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.5 4.04 3 5.5l7 7Z" /></svg>;
     case "/postani-pokrovitelj":
       return <svg {...p}><circle cx="12" cy="8" r="6" /><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5" /></svg>;
+    case "/prijatelji":
+      return <svg {...p}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>;
     case "/admin":
       return <svg {...p}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>;
     default:
@@ -168,6 +172,7 @@ function SidebarContent({
   isAdmin,
   jeNadzornik,
   brojZaNadzor,
+  maloletan,
   onLinkClick,
   dnevniBrojevi,
 }: {
@@ -175,6 +180,7 @@ function SidebarContent({
   isAdmin: boolean;
   jeNadzornik?: boolean;
   brojZaNadzor?: number;
+  maloletan?: boolean;
   onLinkClick?: () => void;
   dnevniBrojevi?: DnevniBrojevi | null;
 }) {
@@ -201,13 +207,34 @@ function SidebarContent({
     { href: "/programi", label: t("programi") },
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
     { href: "/zrno", label: t("zrno") },
+    // Škole su pregled zajednice, ne lični alat — otud u padajućoj grupi, a ne u
+    // gornjoj. Punoletnom članu su izvor vesti („selo prvo u Srbiji"), ne zadatak.
+    ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),
   ];
 
   const adminGrupa = isAdmin ? [{ links: [{ href: "/admin", label: t("admin") }] }] : [];
 
   // Grupe se razlikuju po statusu: neverifikovan dobija slim navigaciju
   // koja ga vodi ka verifikaciji; verifikovan vidi pun sistem grupisan po nameni.
-  const grupe: { label?: string; collapsible?: boolean; links: { href: string; label: string }[] }[] = verified
+  const grupe: { label?: string; collapsible?: boolean; links: { href: string; label: string }[] }[] = maloletan
+    ? // Modul Deca — navigacija je KRAĆA VERZIJA, ne filtrirana. Filtrirana bi pri
+      // svakoj budućoj izmeni tiho propuštala nove stavke detetu. Potvrde, ZRNO,
+      // Doprinos, Programi i Donacije se ne prikazuju jer maloletni korisnik nijedno
+      // od toga ne može (čl. 15), a Početna nosi Pričaonicu — sobu punoletnih.
+      [
+        { links: [
+          { href: "/pocetna", label: t("pocetna") },
+          { href: "/pijaca", label: t("pijaca") },
+          { href: "/novcanik", label: t("novcanik") },
+          // Dečja zamena za „Potvrde": dete nikoga ne potvrđuje (čl. 15), pa mu
+          // na tom mestu stoje prijatelji.
+          { href: "/prijatelji", label: t("prijatelji") },
+          // Ranglista škola: detetu je to razlog da dovede druga, pa stavka stoji
+          // uz prijatelje, a ne u nekoj dubljoj grupi.
+          ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),
+        ] },
+      ]
+    : verified
     ? [
         { links: [
           { href: "/pocetna", label: t("pocetna") },
@@ -281,7 +308,10 @@ function SidebarContent({
         ))}
       </nav>
       <div className="px-3 pb-3 pt-2 border-t border-white/10 space-y-2">
-        {!verified && (
+        {/* 🔴 Dete NIKAD nije `verified` (Modul Deca, čl. 15), pa mu se ovaj poziv
+            prikazivao uvek i gurao ga na potvrde odraslih — a on nikoga ne potvrđuje
+            niti se potvrđuje. Njegovo mesto u mreži su prijatelji. */}
+        {!verified && !maloletan && (
           <Link
             href="/verifikacija"
             onClick={onLinkClick}
@@ -308,7 +338,7 @@ function SidebarContent({
   );
 }
 
-export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
+export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, maloletan, mobileOpen, onMobileClose, dnevniBrojevi }: SidebarProps) {
   // Zatvori drawer pri promeni rute
   const pathname = usePathname();
   useEffect(() => {
@@ -319,7 +349,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex w-60 shrink-0 bg-kolo-green-900 flex-col relative self-start sticky top-0 h-[calc(100dvh-4rem)] before:absolute before:top-0 before:bottom-0 before:right-full before:w-screen before:bg-kolo-green-900 before:content-['']">
-        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} maloletan={maloletan} dnevniBrojevi={dnevniBrojevi} />
       </aside>
 
       {/* Mobile drawer overlay */}
@@ -345,7 +375,7 @@ export default function Sidebar({ verified, isAdmin, jeNadzornik, brojZaNadzor, 
           <span className="font-bold text-white text-xl tracking-widest">KOLO</span>
           <JezikSvitcer className="ml-auto" poravnaj="desno" />
         </div>
-        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
+        <SidebarContent verified={verified} isAdmin={isAdmin} jeNadzornik={jeNadzornik} brojZaNadzor={brojZaNadzor} maloletan={maloletan} onLinkClick={onMobileClose} dnevniBrojevi={dnevniBrojevi} />
       </aside>
     </>
   );

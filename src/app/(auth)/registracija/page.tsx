@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -24,6 +25,9 @@ function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: str
 
 export default function RegistracijaPage() {
   const router = useRouter();
+  // Odakle je čovek došao (npr. poziv za nalog deteta). Bez ovoga bi ga
+  // registracija odvela na vodič i poziv bi ostao samo u mejlu.
+  const callbackUrl = useSearchParams().get("callbackUrl");
   const t = useTranslations("registracija");
   const [form, setForm] = useState({ email: "", pseudonim: "", password: "" });
   const [prikaziLozinku, setPrikaziLozinku] = useState(false);
@@ -89,7 +93,7 @@ export default function RegistracijaPage() {
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     if (result?.error) { router.push("/login?registered=1"); return; }
     try { sessionStorage.setItem("kolo-welcome", "1"); } catch { /* nedostupan */ }
-    router.push("/dobrodosli");
+    router.push(callbackUrl ?? "/dobrodosli");
   }
 
   return (
@@ -213,6 +217,18 @@ export default function RegistracijaPage() {
           {t("vec_imate_nalog")}{" "}
           <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">{t("prijavite_se")}</Link>
         </p>
+
+        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
+            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
+            a ne svoj, i ne traži datum rođenja. */}
+        {MODUL_DECA_AKTIVAN && (
+          <p className="mt-2 text-center text-sm text-kolo-muted">
+            {t("dete_pitanje")}{" "}
+            <Link href="/registracija/dete" className="font-medium text-kolo-green-700 hover:underline">
+              {t("dete_link")}
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );

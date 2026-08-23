@@ -64,7 +64,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let oglasi: MetadataRoute.Sitemap = [];
   try {
     const listings = await prisma.marketplaceListing.findMany({
-      where: { status: "ACTIVE" },
+      // Oglas maloletnog korisnika se ne indeksira (Modul Deca, čl. 13 st. 1) —
+      // on nije javno dostupan, pa u sitemap-u nema šta da traži.
+      where: { status: "ACTIVE", seller: { maloletan: false } },
       select: { id: true, updatedAt: true },
       orderBy: { createdAt: "desc" },
       take: MAX_OGLASA,

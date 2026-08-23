@@ -18,7 +18,7 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { intlTag } from "@/lib/format";
 import Pseudonim from "@/components/Pseudonim";
 
@@ -62,20 +62,24 @@ const PRIKAZI: [Prikaz, string][] = [
   ["reseni", "Rešeni"],
 ];
 
-const RAZLOG_TEKST: Record<string, string> = {
-  ne_poznaju_se: "Ne poznaju se",
-  nalog_bez_znakova: "Nalog bez znakova stvarnosti",
-  dvostruki_nalog: "Dvostruki nalog",
-  obrazac_verifikacija: "Obrazac verifikacija",
-  prijava_verifikovanog: "Prijava verifikovanog",
-  ostalo: "Ostalo",
+// Šifarnik se NE prepisuje ovde — čita se iz `messages.nadzor`, isto odakle ga
+// čita i ekran nadzornika. Dok je stajala sopstvena kopija, ta kopija je zaostala
+// na terminologiji koju je set 4.2.1 ukinuo („verifikator", „Obrazac verifikacija"),
+// pa su dva ekrana istu šifru zvala različito.
+const RAZLOG_KLJUC: Record<string, string> = {
+  ne_poznaju_se: "razlog_ne_poznaju_se",
+  nalog_bez_znakova: "razlog_nalog_bez_znakova",
+  dvostruki_nalog: "razlog_dvostruki_nalog",
+  obrazac_verifikacija: "razlog_obrazac_verifikacija",
+  prijava_verifikovanog: "razlog_prijava_verifikovanog",
+  ostalo: "razlog_ostalo",
 };
 
-const SUBJEKT_TEKST: Record<string, string> = {
-  VERIFIKATOR: "verifikator",
-  VERIFIKOVANI: "verifikovani",
-  OBA: "oba korisnika",
-  DEO_MREZE: "deo mreže",
+const SUBJEKT_KLJUC: Record<string, string> = {
+  VERIFIKATOR: "subjekt_verifikator",
+  VERIFIKOVANI: "subjekt_verifikovani",
+  OBA: "subjekt_oba",
+  DEO_MREZE: "subjekt_deo_mreze",
 };
 
 const ISHOD_STIL: Record<string, string> = {
@@ -84,20 +88,23 @@ const ISHOD_STIL: Record<string, string> = {
   UREDNO: "bg-emerald-100 text-emerald-700 border-emerald-200",
 };
 
-const ISHOD_TEKST: Record<string, string> = {
-  SPORNO: "Sporno",
-  ZA_PROVERU: "Za proveru",
-  UREDNO: "Uredno",
+const ISHOD_KLJUC: Record<string, string> = {
+  SPORNO: "ishod_sporno",
+  ZA_PROVERU: "ishod_za_proveru",
+  UREDNO: "ishod_uredno",
 };
 
 const STATUS_TEKST: Record<string, string> = {
   OTVOREN: "Otvoren",
-  UTVRDJENA_LAZNA: "Utvrđena lažna verifikacija",
+  UTVRDJENA_LAZNA: "Utvrđena lažna potvrda",
   NEMA_OSNOVA: "Nema osnova",
 };
 
 export default function OdlukeTab() {
   const locale = useLocale();
+  const tn = useTranslations("nadzor");
+  /** Šifra → tekst iz `messages.nadzor`; nepoznata šifra se ispisuje kakva jeste. */
+  const sifra = (kljuc: string | undefined, sirovo: string) => (kljuc ? tn(kljuc) : sirovo);
   const [prikaz, setPrikaz] = useState<Prikaz>("otvoreni");
   const [predmeti, setPredmeti] = useState<Predmet[]>([]);
   const [ucitava, setUcitava] = useState(true);
@@ -156,15 +163,15 @@ export default function OdlukeTab() {
   }
 
   async function nemaOsnova(id: string) {
-    if (!confirm("Zatvoriti predmet nalazom da za sumnju nema osnova? Verifikacija ostaje na snazi.")) return;
+    if (!confirm("Zatvoriti predmet nalazom da za sumnju nema osnova? Potvrda ostaje na snazi.")) return;
     await posalji(id, "nema-osnova", { beleska: beleska.trim() || null });
   }
 
   async function utvrdi(p: Predmet) {
     const opseg = nepostojeci
-      ? `Padaju SVE verifikacije koje nalog ${p.verifikovani.pseudonim} dodiruje.`
-      : "Poništava se samo ova verifikacija.";
-    if (!confirm(`Utvrditi lažnu verifikaciju?\n\n${opseg}\n\nOvo se ne može poništiti.`)) return;
+      ? `Padaju SVE potvrde koje nalog ${p.verifikovani.pseudonim} dodiruje.`
+      : "Poništava se samo ova potvrda.";
+    if (!confirm(`Utvrditi lažnu potvrdu?\n\n${opseg}\n\nOvo se ne može poništiti.`)) return;
     await posalji(p.id, "utvrdi", {
       nepostojeciNalog: nepostojeci,
       beleska: beleska.trim() || null,
@@ -176,10 +183,10 @@ export default function OdlukeTab() {
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-lg font-semibold text-kolo-text">Odluke o spornim verifikacijama</h2>
+        <h2 className="text-lg font-semibold text-kolo-text">Odluke o spornim potvrdama</h2>
         <p className="text-sm text-kolo-muted">
           Predmeti koje su otvorili nadzornici ishodom „za proveru" ili „sporno" (čl. 11a).
-          Predmet sam po sebi ne proizvodi dejstvo prema korisniku — lažnu verifikaciju
+          Predmet sam po sebi ne proizvodi dejstvo prema članu — lažnu potvrdu
           utvrđuje Upravni odbor (čl. 18).
         </p>
       </div>
@@ -234,7 +241,7 @@ export default function OdlukeTab() {
                     ISHOD_STIL[p.zapisi.at(-1)?.ishod ?? "ZA_PROVERU"] ?? ISHOD_STIL.ZA_PROVERU
                   }`}
                 >
-                  {SUBJEKT_TEKST[p.subjekt] ?? p.subjekt} · {RAZLOG_TEKST[p.razlog] ?? p.razlog}
+                  {sifra(SUBJEKT_KLJUC[p.subjekt], p.subjekt)} · {sifra(RAZLOG_KLJUC[p.razlog], p.razlog)}
                 </span>
               </div>
 
@@ -256,10 +263,10 @@ export default function OdlukeTab() {
                 {p.zapisi.map((z) => (
                   <div key={z.id} className="text-xs text-kolo-muted">
                     <span className={`px-1.5 py-0.5 rounded border ${ISHOD_STIL[z.ishod]}`}>
-                      {ISHOD_TEKST[z.ishod] ?? z.ishod}
+                      {sifra(ISHOD_KLJUC[z.ishod], z.ishod)}
                     </span>{" "}
                     {z.nadzornik} · {dat(z.createdAt)}
-                    {z.razlog && ` · ${RAZLOG_TEKST[z.razlog] ?? z.razlog}`}
+                    {z.razlog && ` · ${sifra(RAZLOG_KLJUC[z.razlog], z.razlog)}`}
                     {z.opis && ` — ${z.opis}`}
                   </div>
                 ))}
@@ -292,9 +299,9 @@ export default function OdlukeTab() {
                       Utvrđeno je i da iza naloga <strong>{p.verifikovani.pseudonim}</strong> ne
                       stoji stvarna osoba, odnosno da nalog nije jedinstven.
                       <span className="block text-xs text-kolo-muted">
-                        Bez ovoga pada samo ova verifikacija, a verifikovani zadržava status i
-                        sopstvene verifikacije (čl. 19). Sa ovim padaju sve verifikacije koje
-                        nalog dodiruje, a kaskada staje na prvom stvarnom čoveku (čl. 20).
+                        Bez ovoga pada samo ova potvrda, a onaj koga su potvrdili zadržava
+                        status i potvrde koje je sam dao (čl. 19). Sa ovim padaju sve potvrde
+                        koje nalog dodiruje, a kaskada staje na prvom stvarnom čoveku (čl. 20).
                       </span>
                     </span>
                   </label>
@@ -304,7 +311,7 @@ export default function OdlukeTab() {
                       disabled={radiId === p.id}
                       className="px-3 py-1.5 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:opacity-50"
                     >
-                      Utvrdi lažnu verifikaciju
+                      Utvrdi lažnu potvrdu
                     </button>
                     <button
                       onClick={() => nemaOsnova(p.id)}

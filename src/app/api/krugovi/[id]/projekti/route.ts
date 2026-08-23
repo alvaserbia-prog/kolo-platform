@@ -30,7 +30,7 @@ export async function POST(
   const type = body.type as ProjectType;
 
   if (!title || title.length < 3)
-    return await greska("Naziv projekta mora imati najmanje 3 karaktera.", 400);
+    return await greska("Naziv projekta mora imati najmanje 3 znaka.", 400);
   if (!["PRIKUPLJANJE", "REDISTRIBUCIJA"].includes(type))
     return await greska("Neispravna vrsta projekta.", 400);
 

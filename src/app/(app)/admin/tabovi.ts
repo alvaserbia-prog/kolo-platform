@@ -6,5 +6,11 @@
 // Dva različita posla, namerno dva taba.
 // „prvi-oglasi" = odobravanje doprinosa iz čl. 40a za naloge bez potvrde. Nije
 // moderacija (to je „pijaca"): oglas ostaje, odlučuje se samo o 1.000 POEN.
-export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
+// „razmene" = prijave da razmena povodom prepisa POEN-a nije ispunjena. Ni to
+// nije moderacija: odlučuje se o zapisu POEN-a, ne o sadržaju oglasa.
+// „prijave" = prijavljene poruke iz Pričaonice, grupisane po prijavljenom nalogu.
+// Zaseban tab od „pijaca" (oglasi) jer je drugi sadržaj i drugi red čekanja; do
+// sada prijava poruke nije imala ekran koji je zatvara, pa je status zauvek ostajao
+// OTVORENA.
+export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "razmene", "prijave", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
 export type Tab = (typeof ADMIN_TABOVI)[number];

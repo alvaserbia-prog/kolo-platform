@@ -8,11 +8,13 @@ import { Link } from "@/i18n/navigation";
 import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import FaqAkordeon from "@/components/FaqAkordeon";
+import KomeKartice from "@/components/KomeKartice";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 import { getTranslations, getLocale } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
+import { KATEGORIJE } from "@/lib/kategorije";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("landing");
@@ -59,6 +61,15 @@ async function getPijacaPreview() {
         if (!result.find((r) => r.id === l.id)) result.push(l);
       }
     }
+    // Prikaz ide redom kojim su kategorije nabrojane u `KATEGORIJE` — hrana,
+    // njiva i ručni rad na početku, znanje i kreativa (sajtovi, fotografisanje)
+    // pri kraju. Izbor oglasa i dalje bira najnovije po kategoriji; ovo menja
+    // samo redosled prikaza, da naslovnu otvara ono što se rukama pravi.
+    const redosled = (k: string) => {
+      const i = (KATEGORIJE as readonly string[]).indexOf(k);
+      return i === -1 ? KATEGORIJE.length : i;
+    };
+    result.sort((a, b) => redosled(a.category) - redosled(b.category));
     return result;
   } catch {
     return [];
@@ -72,14 +83,17 @@ async function getPijacaPreview() {
 // emisija Protokola), aktivni oglasi (pregled oglasa je ionako javan, čl. 16)
 // i ukupno evidentiranih POEN-a. Opticaj se računa kao zbir pozitivnih
 // stanja (pod zero-sum jednako apsolutnoj vrednosti minusa Protokola) — bez
-// zavisnosti od ID-ja Protokol novčanika.
+// zavisnosti od ID-ja Protokol novčanika. Zbir ide preko SVIH ne-Protokol
+// novčanika, uključujući negativne (nadoknada čl. 20b, poništen prepis, otpis
+// prijateljstva); filtriranje na `balance > 0` bi prikazalo veći opticaj nego
+// što ga ima.
 async function getAgregati() {
   try {
     const [brojClanova, brojTransfera, brojOglasa, opticajAgg] = await Promise.all([
       prisma.user.count({ where: { verified: true } }),
       prisma.transaction.count({ where: { type: "TRANSFER" } }),
       prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
-      prisma.wallet.aggregate({ _sum: { balance: true }, where: { balance: { gt: 0 } } }),
+      prisma.wallet.aggregate({ _sum: { balance: true }, where: { type: { not: "PROTOKOL" } } }),
     ]);
     return {
       brojClanova,
@@ -102,7 +116,7 @@ export default async function Home() {
   const [pijacaOglasi, agregati, faqPitanja] = await Promise.all([
     getPijacaPreview(),
     getAgregati(),
-    Promise.resolve(getFaqPoBrojevima([1, 2, 42], locale)),
+    Promise.resolve(getFaqPoBrojevima([43, 42, 40], locale)),
   ]);
 
   // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.
@@ -113,22 +127,22 @@ export default async function Home() {
     { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
     { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
     { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
-    { ikona: "💻", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
+    { ikona: "🏘️", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
     { ikona: "🤝", naslov: t("kome_8_naslov"), opis: t("kome_8_opis"), poenta: t("kome_8_poenta") },
-    { ikona: "🏘️", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
+    { ikona: "💻", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
   ];
 
   const primerKoraci = [
     { naslov: t("primer_korak_1_naslov"), opis: t("primer_korak_1_opis") },
     { naslov: t("primer_korak_2_naslov"), opis: t("primer_korak_2_opis") },
     { naslov: t("primer_korak_3_naslov"), opis: t("primer_korak_3_opis") },
-    { naslov: t("primer_korak_4_naslov"), opis: t("primer_korak_4_opis") },
   ];
 
-  const kakoKoraci = [
+  // `dodatak` ima samo treći korak — put za onoga ko još nikoga ne poznaje.
+  const kakoKoraci: { br: string; naslov: string; opis: string; dodatak?: string }[] = [
     { br: "1", naslov: t("kako_funkcionise_korak_1_naslov"), opis: t("kako_funkcionise_korak_1_opis") },
     { br: "2", naslov: t("kako_funkcionise_korak_2_naslov"), opis: t("kako_funkcionise_korak_2_opis") },
-    { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis") },
+    { br: "3", naslov: t("kako_funkcionise_korak_3_naslov"), opis: t("kako_funkcionise_korak_3_opis"), dodatak: t("kako_funkcionise_korak_3_dodatak") },
     { br: "4", naslov: t("kako_funkcionise_korak_4_naslov"), opis: t("kako_funkcionise_korak_4_opis") },
   ];
 
@@ -180,9 +194,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 2 — PROBLEM KOJI SVI OSEĆAMO ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
             {t("problem_naslov")}
-          </div>
+          </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[1, 2, 3].map((n) => (
               <div key={n} className="flex flex-col gap-3 items-center text-center">
@@ -198,9 +212,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 3 — KOLO TI DAJE ALTERNATIVU (konsolidovano) ── */}
         <section className="space-y-6 text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-4 py-2 rounded-full tracking-wide uppercase">
             {t("alternativa_naslov")}
-          </div>
+          </h2>
 
           <blockquote
             className="italic text-kolo-green-900 leading-relaxed text-2xl md:text-3xl max-w-3xl mx-auto whitespace-pre-line"
@@ -209,23 +223,23 @@ export default async function Home() {
             {t("alternativa_citat")}
           </blockquote>
 
-          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-4xl mx-auto">
-            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl" style={{ letterSpacing: "-0.01em" }}>
+          <div className="bg-white rounded-2xl card-shadow px-6 py-5 md:px-8 md:py-6 max-w-2xl mx-auto">
+            <p className="text-kolo-green-900 font-bold leading-snug text-lg md:text-xl text-balance" style={{ letterSpacing: "-0.01em" }}>
               {t("alternativa_podnaslov")}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_1_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_1_opis")}</p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_2_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">
                 {t("alternativa_2_opis_start")}
                 <strong className="text-kolo-green-900">{t("alternativa_2_istakni_poen")}</strong>
@@ -233,16 +247,18 @@ export default async function Home() {
               </p>
             </div>
             <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
+              <h3 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 {t("alternativa_3_naslov")}
-              </h2>
+              </h3>
               <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_3_opis")}</p>
-            </div>
-            <div className="bg-white rounded-2xl card-shadow p-6 flex flex-col gap-3 border-t-4 border-kolo-green-700">
-              <h2 className="font-bold text-kolo-green-900 text-lg leading-snug" style={{ letterSpacing: "-0.01em" }}>
-                {t("alternativa_4_naslov")}
-              </h2>
-              <p className="text-sm text-kolo-text leading-relaxed">{t("alternativa_4_opis")}</p>
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 mt-auto pt-1">
+                <Link href="/pravilnik" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
+                  {t("alternativa_link_pravilnik")} →
+                </Link>
+                <Link href="/statut" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
+                  {t("alternativa_link_statut")} →
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -258,35 +274,34 @@ export default async function Home() {
           <h2 className="text-xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("kome_naslov")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {komeKartice.map((seg) => (
-              <div key={seg.naslov} className="bg-white rounded-2xl card-shadow p-4 flex flex-col gap-2">
-                <span className="text-2xl">{seg.ikona}</span>
-                <p className="font-semibold text-kolo-text text-sm leading-snug">{seg.naslov}</p>
-                <p className="text-xs text-kolo-muted leading-relaxed">{seg.opis}</p>
-                <p className="text-xs font-medium text-kolo-green-700 leading-relaxed mt-auto ml-auto text-right text-balance whitespace-pre-line max-w-[70%]">{seg.poenta}</p>
-              </div>
-            ))}
-          </div>
+          <KomeKartice
+            kartice={komeKartice}
+            vidljivo={6}
+            labelJos={t("kome_prikazi_jos")}
+            labelManje={t("kome_prikazi_manje")}
+          />
         </section>
 
         {/* ── SEKCIJA 5 — PRIMER IZ PRAKSE ─────────────────────────── */}
         <section className="space-y-4">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
             {t("primer_naslov")}
-          </div>
+          </h2>
 
-          {/* 4 stubca povezana strelicama po hronologiji */}
-          <div className="flex flex-col md:flex-row items-stretch gap-3">
+          {/* Stupci povezani strelicama po hronologiji.
+              Na md+ je red CSS grid sa tri reda (broj / naslov / opis), a kartice
+              preuzimaju te iste redove kroz `subgrid` — tako naslovi i tekstovi
+              počinju na istoj visini i kad naslov u jednom stupcu prelomi u dva reda. */}
+          <div className="flex flex-col gap-3 md:grid md:grid-cols-[1fr_auto_1fr_auto_1fr] md:grid-rows-[auto_auto_1fr] md:items-stretch">
             {primerKoraci.map((k, i) => (
               <div key={k.naslov} className="contents">
-                <div className="bg-white rounded-2xl card-shadow p-5 flex-1 flex flex-col gap-3 items-center text-center">
+                <div className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 items-center text-center md:grid md:grid-rows-subgrid md:row-span-3 md:items-start md:justify-items-center">
                   <span className="w-14 h-14 rounded-full bg-kolo-green-100 text-kolo-green-700 inline-flex items-center justify-center text-2xl font-bold">{i + 1}</span>
-                  <p className="font-semibold text-kolo-text text-sm">{k.naslov}</p>
+                  <h3 className="font-semibold text-kolo-text text-sm">{k.naslov}</h3>
                   <p className="text-kolo-muted leading-relaxed text-xs">{k.opis}</p>
                 </div>
                 {i < primerKoraci.length - 1 && (
-                  <div className="flex items-center justify-center text-kolo-muted shrink-0">
+                  <div className="flex items-center justify-center text-kolo-muted shrink-0 md:row-span-3 md:self-center">
                     <svg className="w-6 h-6 rotate-90 md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12"/>
                       <polyline points="12 5 19 12 12 19"/>
@@ -313,9 +328,9 @@ export default async function Home() {
 
         {/* ── SEKCIJA 6 — KAKO FUNKCIONIŠE UKRATKO ────────────────── */}
         <section className="bg-white rounded-2xl card-shadow p-6 md:p-8">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
+          <h2 className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-5 tracking-wide uppercase">
             {t("kako_funkcionise_naslov")}
-          </div>
+          </h2>
           <div className="space-y-0">
             {kakoKoraci.map((k, i, arr) => (
               <div key={k.br} className={`flex gap-5 items-start pt-4 ${i < arr.length - 1 ? "border-b border-kolo-border pb-4" : ""}`}>
@@ -323,15 +338,18 @@ export default async function Home() {
                   {k.br}
                 </div>
                 <div>
-                  <p className="font-semibold text-kolo-text text-sm mb-1">{k.naslov}</p>
+                  <h3 className="font-semibold text-kolo-text text-sm mb-1">{k.naslov}</h3>
                   <p className="text-sm text-kolo-muted leading-relaxed text-body">{k.opis}</p>
+                  {k.dodatak && (
+                    <p className="text-sm text-kolo-green-700 leading-relaxed text-body mt-1.5">{k.dodatak}</p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
           <div className="mt-5 pt-4 border-t border-kolo-border">
             <Link href="/kako-funkcionise" className="text-sm font-medium text-kolo-green-700 hover:text-kolo-green-900 transition-colors">
-              {t("kako_funkcionise_link")} →
+              {t("kako_funkcionise_link_postupak")} →
             </Link>
           </div>
         </section>
@@ -407,12 +425,6 @@ export default async function Home() {
               </div>
               <div className="bg-kolo-bg rounded-xl py-5">
                 <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
-                  {agregati.opticaj.toLocaleString(intlTag(locale))}
-                </div>
-                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
-              </div>
-              <div className="bg-kolo-bg rounded-xl py-5">
-                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
                   {agregati.brojOglasa.toLocaleString(intlTag(locale))}
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_oglas")}</div>
@@ -423,7 +435,14 @@ export default async function Home() {
                 </div>
                 <div className="text-xs text-kolo-muted mt-1">{t("statistike_transfer")}</div>
               </div>
+              <div className="bg-kolo-bg rounded-xl py-5">
+                <div className="text-2xl md:text-3xl font-bold text-kolo-green-700 tabular-nums">
+                  {agregati.opticaj.toLocaleString(intlTag(locale))}
+                </div>
+                <div className="text-xs text-kolo-muted mt-1">{t("statistike_poen_evidentirano")}</div>
+              </div>
             </div>
+            <p className="text-xs text-kolo-muted mt-4 text-center">{t("statistike_faza")}</p>
           </section>
         )}
 
@@ -433,9 +452,9 @@ export default async function Home() {
             {/* Levo — slika u krugu, tekst iznad i ispod */}
             <div className="bg-kolo-green-900 p-8 flex flex-col items-center justify-center text-center gap-5">
               {/* Tekst iznad fotografije */}
-              <span className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
+              <h2 className="inline-block bg-white/10 text-white/80 text-[11px] font-semibold px-3 py-1.5 rounded-full tracking-wide uppercase">
                 {t("ko_stoji_naslov")}
-              </span>
+              </h2>
               <div className="relative w-36 h-36 rounded-full overflow-hidden ring-4 ring-white/10 shadow-xl">
                 <Image
                   src="/nikola-saric-mantil.png"
@@ -496,22 +515,17 @@ export default async function Home() {
           <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
             {t("cta_naslov")}
           </h2>
-          <p className="text-white/90 text-sm md:text-base mb-7 max-w-md mx-auto leading-relaxed">
+          <p className="text-white/90 text-sm md:text-base mb-7 max-w-xl mx-auto leading-relaxed">
             {t("cta_opis")}
           </p>
-          <div className="flex flex-wrap gap-3 justify-center">
+          {/* Jedno dugme — na telefonu ide u punu širinu, da palac ne promaši. */}
+          <div className="flex justify-center">
             <Link
               href="/registracija"
-              className="px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
+              className="w-full sm:w-auto px-8 py-3.5 bg-kolo-gold-400 text-kolo-green-900 font-bold rounded-xl hover:bg-kolo-gold-600 hover:text-white transition-colors text-sm"
             >
               {t("cta_priduzi")} →
             </Link>
-            <a
-              href="mailto:kontakt@ekolo.rs?subject=Prati%20razvoj%20KOLO%20sistema"
-              className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-            >
-              {t("cta_saznaj")} →
-            </a>
           </div>
           <div className="mt-8 pt-6 border-t border-white/15">
             <p className="text-xs text-white/85">{t("cta_footer")}</p>

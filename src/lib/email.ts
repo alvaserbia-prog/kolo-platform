@@ -35,8 +35,18 @@ function jeDozvoljenHost(host: string): boolean {
 
 /**
  * Bazni URL za linkove u mejlu. Prioritet: origin sa kog je zahtev poslat
- * (test → test, prod → prod), uz allowlist; fallback na env varijablu.
- * Pozadinski poslovi (cron, servisi) nemaju origin i uvek padaju na env.
+ * (test → test, prod → prod), uz allowlist; pa Vercel URL na NE-produkcionim
+ * okruženjima; pa env varijabla.
+ *
+ * 🔴 Korak sa `VERCEL_URL` postoji zato što je `NEXTAUTH_URL` na Vercelu
+ * postavljen za SVA okruženja i pokazuje na `ekolo.rs`. Bez njega je svaki mejl
+ * poslat sa TESTA vodio na produkciju: link je otvarao ekolo.rs, gde token iz
+ * test baze ne postoji — pa je tok koji se testira bio neprolazan, i to na
+ * najgorem mestu (poziv roditelju deteta). Na produkciji je `VERCEL_ENV`
+ * jednako `"production"`, pa ovaj korak tamo ne radi ništa.
+ *
+ * Pozadinski poslovi (cron, servisi) nemaju origin; njih od sada pokriva korak
+ * sa `VERCEL_URL`.
  */
 export function bazniUrl(requestOrigin?: string): string {
   if (requestOrigin) {
@@ -46,6 +56,9 @@ export function bazniUrl(requestOrigin?: string): string {
     } catch {
       // neispravan origin — pada na fallback ispod
     }
+  }
+  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production" && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
   }
   const url = process.env.NEXTAUTH_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
   if (url) return url.replace(/\/$/, "");

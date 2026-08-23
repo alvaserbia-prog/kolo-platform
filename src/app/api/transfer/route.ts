@@ -9,6 +9,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
+import { smeDaPrepise, ucitajUcesnika } from "@/lib/protokol/deca";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -61,9 +62,27 @@ export async function POST(req: NextRequest) {
   // indeks stvarnosti: ko je jednom verifikovan sme da prepisuje POEN i ako mu indeks
   // kasnije padne. Čita se iz baze, ne iz sesije — token se osvežava sa zakašnjenjem,
   // pa bi tek verifikovan korisnik još neko vreme bio odbijan.
-  if (!smeDaSalje(posiljac.tipKorisnika)) {
+  // ── Modul Deca (čl. 14) ────────────────────────────────────────────────────
+  //
+  // Kad je bar jedna strana maloletna, o prepisu odlučuje `smeDaPrepise`, a ne opšte
+  // pravilo o neverifikovanom nalogu: maloletni korisnik jeste NEVERIFIKOVAN u smislu
+  // šeme, ali u dečjem prostoru sme da prepisuje. Zato ova provera ide PRE
+  // `smeDaSalje`, i preuzima odluku za sve parove u kojima ima deteta.
+  const [odUcesnik, kaUcesnik] = await Promise.all([
+    ucitajUcesnika(posiljac.id),
+    ucitajUcesnika(primalac.id),
+  ]);
+  if (!odUcesnik || !kaUcesnik) return await greska("Nalog ne postoji.", 401);
+  const jeDecjiPar = odUcesnik.maloletan || kaUcesnik.maloletan;
+
+  if (jeDecjiPar) {
+    // `smeDaPrepise` sam odbija nalog koji još čeka roditelja (čl. 4c) — stanje
+    // naloga je deo `Ucesnik`-a, pa nema odvojene provere.
+    const dozvoljeno = smeDaPrepise(odUcesnik, kaUcesnik);
+    if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  } else if (!smeDaSalje(posiljac.tipKorisnika)) {
     return await greska(
-      "Dok nisi verifikovan/a možeš samo da primaš POEN. Prepis u tuđi zapis otvara se po verifikaciji.",
+      "Dok si nov član, POEN može da se prepisuje u tvoj zapis. Prepis u tuđi zapis otvara se po potvrdi.",
       403,
     );
   }
@@ -72,14 +91,14 @@ export async function POST(req: NextRequest) {
   // nadoknadu — dok zapis ne pređe nulu nema čime da se prepisuje drugome.
   if (jeNadoknada(posiljac.wallet.balance)) {
     return await greska(
-      `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POEN-a. ` +
-        `POEN-i koji ti pristignu prvo je popunjavaju; prepis u tuđi zapis je moguć tek kad zapis pređe nulu. ` +
+      `Na tvom zapisu stoji nadoknada od ${iznosNadoknade(posiljac.wallet.balance)} POENA. ` +
+        `POENI koji ti pristignu prvo je popunjavaju; prepis u tuđi zapis je moguć tek kad zapis pređe nulu. ` +
         `Razmena dobara i usluga ti nije ograničena.`,
       400
     );
   }
   if (posiljac.wallet.balance < iznos) {
-    return await greska(`Nemate dovoljno POEN-a. Stanje: ${posiljac.wallet.balance}.`, 400);
+    return await greska(`Nemate dovoljno POENA. Stanje: ${posiljac.wallet.balance}.`, 400);
   }
 
   // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
@@ -111,7 +130,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
-      return await greska("Nemate dovoljno POEN-a.", 400);
+      return await greska("Nemate dovoljno POENA.", 400);
     }
     throw e;
   }
@@ -138,7 +157,7 @@ export async function POST(req: NextRequest) {
       : "notifikacije.transfer_primljen",
     parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
     naslov: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    tekst: `${posiljac.pseudonim} ti je prepisao/la ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis.${description ? ` Poruka: "${description}"` : ""}`,
+    tekst: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis — od člana ${posiljac.pseudonim}.${description ? ` Poruka: „${description}"` : ""}`,
     link: "/novcanik",
   });
 

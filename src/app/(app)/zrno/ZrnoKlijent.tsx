@@ -81,7 +81,7 @@ export default function ZrnoKlijent(props: Props) {
           <p className="text-xs text-kolo-muted mb-1">
             <Pojam
               termin={t("kurs")}
-              objasnjenje="Odnos ukupnih POEN-a i raspoloživih ZRNA — pokazuje koliko ti je POEN-a potrebno da upišeš jedno ZRNO. Nije cena i nije kurs."
+              objasnjenje={t("kurs_objasnjenje")}
             />
           </p>
           <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString(intlTag(locale), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
@@ -128,7 +128,7 @@ function DelegacijaSekcija({ glasackaMoc: moja, delegacija, onRefresh }: Props &
     const res = await fetch("/api/zrno/delegiraj", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ pseudonim: pseudonim.trim() }) });
     const data = await res.json();
     setLoading(false);
-    setPoruka({ text: res.ok ? data.poruka : (data.error ?? "Greška."), ok: res.ok });
+    setPoruka({ text: res.ok ? data.poruka : (data.error ?? t("greska_delegiranje")), ok: res.ok });
     if (res.ok) { setPseudonim(""); setTimeout(onRefresh, 1200); }
   }
 

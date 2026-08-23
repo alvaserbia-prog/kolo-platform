@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { pageMetadata } from "@/lib/seo";
+import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { getLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 
@@ -19,7 +20,7 @@ export default async function KakoFunkcionisePage() {
   const locale = await getLocale();
   const t = await getTranslations("kakoFunkcionisePage");
   const tc = await getTranslations("common");
-  const faqPitanja = getFaqPoBrojevima([4, 16, 5], locale);
+  const faqPitanja = getFaqPoBrojevima([5, 48, 21], locale);
 
   const koraci = [
     {
@@ -55,6 +56,11 @@ export default async function KakoFunkcionisePage() {
     },
   ];
 
+  // Broj kanala koje ova stranica nabraja: sedam ličnih + dečji, dok modul radi.
+  // Ide kao CIFRA, ne kao reč — brojna reč bi se sklanjala po jeziku, a jedan
+  // prosleđen string ne može da posluži svih pet prevoda.
+  const brojKanala = MODUL_DECA_AKTIVAN ? 8 : 7;
+
   const nacinUpisa = [
     {
       br: "1",
@@ -75,7 +81,7 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n3_naslov"),
       opis: t("n3_opis"),
       iznos: t("n3_iznos"),
-      boja: "bg-kolo-gold-100 text-kolo-gold-600",
+      boja: "bg-kolo-green-100 text-kolo-green-700",
     },
     {
       br: "4",
@@ -96,7 +102,7 @@ export default async function KakoFunkcionisePage() {
       naslov: t("n6_naslov"),
       opis: t("n6_opis"),
       iznos: t("n6_iznos"),
-      boja: "bg-kolo-green-100 text-kolo-green-700",
+      boja: "bg-kolo-gold-100 text-kolo-gold-600",
     },
     {
       br: "7",
@@ -105,7 +111,31 @@ export default async function KakoFunkcionisePage() {
       iznos: t("n7_iznos"),
       boja: "bg-kolo-green-100 text-kolo-green-700",
     },
+    // Deveti kanal iz čl. 15 (doprinos dece u dečjem prostoru) — na stranici je
+    // osmi, jer rast kolektivnih oblika upisuje u zapis Kruga, ne čoveka.
+    // Prikazuje se samo dok Modul Deca radi; inače naslov sekcije laže broj.
+    ...(MODUL_DECA_AKTIVAN
+      ? [
+          {
+            br: "8",
+            naslov: t("n8_naslov"),
+            opis: t("n8_opis"),
+            iznos: t("n8_iznos"),
+            boja: "bg-kolo-green-100 text-kolo-green-700",
+          },
+        ]
+      : []),
   ];
+
+  // Širina kartice kanala u mreži od 12 kolona — vidi komentar uz samu mrežu.
+  const rasponKartice = (i: number) =>
+    nacinUpisa.length >= 8
+      ? i < 6
+        ? "md:col-span-4"
+        : "md:col-span-6"
+      : i < 4
+        ? "md:col-span-3"
+        : "md:col-span-4";
 
   return (
     <div className="space-y-6 pb-12">
@@ -142,7 +172,7 @@ export default async function KakoFunkcionisePage() {
                 {k.br}
               </div>
               <p className="font-semibold text-kolo-text text-base mb-1.5">{k.naslov}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed mb-3">{k.opis}</p>
+              <p className="text-sm text-kolo-muted leading-relaxed mb-3 whitespace-pre-line">{k.opis}</p>
               <span className={`text-xs font-semibold px-2 py-0.5 rounded-full mt-auto self-end ${k.istaknut ? "bg-kolo-gold-400 text-kolo-green-900" : "bg-kolo-green-100 text-kolo-green-700"}`}>
                 {k.detalj}
               </span>
@@ -159,7 +189,7 @@ export default async function KakoFunkcionisePage() {
               </div>
               <div>
                 <p className="font-semibold text-kolo-text text-base mb-1">{k.naslov}</p>
-                <p className="text-sm text-kolo-muted leading-relaxed mb-2">{k.opis}</p>
+                <p className="text-sm text-kolo-muted leading-relaxed mb-2 whitespace-pre-line">{k.opis}</p>
                 <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${k.istaknut ? "bg-kolo-gold-400 text-kolo-green-900" : "bg-kolo-green-100 text-kolo-green-700"}`}>
                   {k.detalj}
                 </span>
@@ -167,16 +197,25 @@ export default async function KakoFunkcionisePage() {
             </div>
           ))}
         </div>
+
+        {/* Odgovornost za potvrdu — NIJE šesti korak, pa namerno stoji van
+            merdevina: bez rednog broja i bez oznake u uglu. */}
+        <div className="mt-6 rounded-2xl border-l-4 border-kolo-gold-400 bg-kolo-gold-100/40 p-5">
+          <p className="text-sm text-kolo-text leading-relaxed">
+            <strong className="text-kolo-green-900">{t("odgovornost_naslov")}</strong>{" "}
+            {t("odgovornost_tekst")}
+          </p>
+        </div>
       </section>
 
-      {/* ── S3: ŠEST MEHANIZAMA UPISIVANJA POEN-a ──────────────────── */}
+      {/* ── S3: SEDAM KANALA UPISIVANJA POEN-a ─────────────────────── */}
       <section className="space-y-6">
         <div className="text-center space-y-3">
           <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-sm font-bold px-5 py-2 rounded-full tracking-wide uppercase">
             {t("evidencija_tag")}
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
-            {t("evidencija_naslov")}
+            {t("evidencija_naslov", { broj: brojKanala })}
           </h2>
         </div>
 
@@ -200,7 +239,7 @@ export default async function KakoFunkcionisePage() {
               </svg>
             </span>
             <p className="text-sm text-kolo-text leading-relaxed">
-              {t("poen_kanali")}
+              {t("poen_kanali", { broj: brojKanala })}
             </p>
           </div>
           <div className="bg-white rounded-xl card-shadow p-4 flex items-start gap-3">
@@ -216,25 +255,29 @@ export default async function KakoFunkcionisePage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3">
-          {nacinUpisa.map((n) => {
+        {/* Raspored po redovima, u mreži od 12 kolona. Zavisi od broja kartica,
+            jer dečji kanal prati prekidač modula:
+              8 kartica -> 3/3/2 (4+4+4 | 4+4+4 | 6+6)
+              7 kartica -> 4/3   (3+3+3+3 | 4+4+4)
+            Cilj je da nijedan red ne ostane sa jednom karticom. */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-3">
+          {nacinUpisa.map((n, i) => {
             return (
               <div
                 key={n.br}
-                className="bg-white rounded-2xl card-shadow p-5 flex flex-col gap-3 md:col-span-2"
+                className={`bg-white rounded-2xl card-shadow p-5 flex flex-col ${rasponKartice(i)}`}
               >
-                <div className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${n.boja}`}>
-                    {n.br}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-kolo-text text-base mb-1">{n.naslov}</p>
-                    <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full ${n.boja}`}>
-                      {n.iznos}
-                    </span>
-                  </div>
+                {/* Redni broj stoji iznad, a naslov, iznos i opis počinju od iste
+                    leve ivice — ranije je opis bio pun red ispod, pa se nije
+                    poklapao sa naslovom uvučenim pored broja. */}
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 mb-3 ${n.boja}`}>
+                  {n.br}
                 </div>
-                <p className="text-sm text-kolo-muted leading-relaxed text-body">{n.opis}</p>
+                <p className="font-semibold text-kolo-text text-base leading-snug">{n.naslov}</p>
+                <span className={`text-xs font-semibold px-1.5 py-0.5 rounded-full self-start mt-2 ${n.boja}`}>
+                  {n.iznos}
+                </span>
+                <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line mt-3">{n.opis}</p>
               </div>
             );
           })}
@@ -263,12 +306,16 @@ export default async function KakoFunkcionisePage() {
               </div>
             </div>
 
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("poen_uvod", { broj: brojKanala })}</p>
+
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("poen_jeste_naslov")}</p>
               <ul className="space-y-1.5">
                 {[
                   t("poen_jeste1"),
                   t("poen_jeste2"),
+                  t("poen_jeste3"),
+                  t("poen_jeste4"),
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
                     <span className="text-kolo-green-700 mt-0.5 shrink-0">✓</span>
@@ -291,7 +338,6 @@ export default async function KakoFunkcionisePage() {
                   t("poen_nije4"),
                   t("poen_nije5"),
                   t("poen_nije6"),
-                  t("poen_nije7"),
                 ].map((s) => (
                   <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
                     <span className="text-red-400 mt-0.5 shrink-0">✕</span>
@@ -303,8 +349,8 @@ export default async function KakoFunkcionisePage() {
 
             <div className="bg-kolo-green-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-green-700 mb-1">{t("zerosum_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed text-body">
-                {t("zerosum_tekst")}
+              <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
+                {t("zerosum_tekst", { broj: brojKanala })}
               </p>
             </div>
           </div>
@@ -320,6 +366,8 @@ export default async function KakoFunkcionisePage() {
                 <p className="text-sm text-kolo-muted">{t("zrno_jedinica_label")}</p>
               </div>
             </div>
+
+            <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("zrno_uvod")}</p>
 
             <div>
               <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("zrno_upis_naslov")}</p>
@@ -358,7 +406,7 @@ export default async function KakoFunkcionisePage() {
 
             <div className="bg-kolo-gold-100 rounded-xl p-4">
               <p className="text-sm font-semibold text-kolo-gold-600 mb-1">{t("koeficijent_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed text-body">
+              <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">
                 {t("koeficijent_tekst")}
               </p>
             </div>
@@ -371,9 +419,6 @@ export default async function KakoFunkcionisePage() {
       {/* ── S6: FAQ AKORDEON ───────────────────────────────────────── */}
       <section className="space-y-4">
         <div className="text-center">
-          <div className="inline-block bg-kolo-green-100 text-kolo-green-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-3 tracking-wide uppercase">
-            {t("faq_tag")}
-          </div>
           <h2 className="text-2xl font-bold text-kolo-green-900" style={{ letterSpacing: "-0.02em" }}>
             {t("faq_naslov")}
           </h2>
@@ -397,7 +442,7 @@ export default async function KakoFunkcionisePage() {
         <h2 className="text-2xl md:text-3xl font-bold mb-3" style={{ letterSpacing: "-0.02em" }}>
           {t("cta_naslov")}
         </h2>
-        <p className="text-white/70 text-base mb-7 max-w-md mx-auto leading-relaxed">
+        <p className="text-white/70 text-base mb-7 max-w-xl mx-auto leading-relaxed">
           {t("cta_opis")}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
@@ -412,12 +457,6 @@ export default async function KakoFunkcionisePage() {
             className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
           >
             {t("cta_pijaca")}
-          </Link>
-          <Link
-            href="/"
-            className="px-8 py-3.5 border border-white/30 text-white font-medium rounded-xl hover:bg-white/10 transition-colors text-sm"
-          >
-            {t("cta_pocetna")}
           </Link>
         </div>
         <p className="text-white/40 text-xs mt-7">

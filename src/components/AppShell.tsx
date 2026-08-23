@@ -99,6 +99,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
           brojZaNadzor={brojZaNadzor}
           mobileOpen={mobileOpen}
           onMobileClose={() => setMobileOpen(false)}
+          maloletan={me?.maloletan ?? false}
           dnevniBrojevi={dnevniBrojevi}
         />
         <main className="flex-1 min-w-0">

@@ -34,7 +34,7 @@ export default async function AdminPage({
     allUsers, protokol, pendingKrugovi,
     adminProgrami, dashboardData, auditLogs, krugoviLista, pokroviteljiData, zaposljavanjeData,
     blogObjave, pendingDonacije, otvoreniPrigovori, otvorenihPrijavaOglasa,
-    prvihOglasaNaCekanju,
+    prvihOglasaNaCekanju, otvorenihPrijavaRazmene, otvorenihPrijavaPoruka,
   ] = await Promise.all([
     prisma.user.findMany({
       select: { id: true, pseudonim: true, email: true, location: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, wallet: { select: { balance: true } } },
@@ -135,6 +135,9 @@ export default async function AdminPage({
     // Badge na tabu Prvi oglasi — doprinosi naloga bez potvrde koji čekaju
     // odobrenje (čl. 40a st. 4). Sam spisak se učitava lenjo, iz taba.
     prisma.doprinosSadrzaju.count({ where: { status: "ZABELEZEN" } }),
+    // Badge na tabu Razmene — prijave neispunjene razmene koje čekaju odluku.
+    prisma.prijavaRazmene.count({ where: { status: "OTVORENA" } }),
+    prisma.prijavaPoruke.count({ where: { status: "OTVORENA" } }),
   ]);
 
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
@@ -180,6 +183,8 @@ export default async function AdminPage({
       pocetniTab={pocetniTab}
       otvorenihPrijavaOglasa={otvorenihPrijavaOglasa}
       prvihOglasaNaCekanju={prvihOglasaNaCekanju}
+      otvorenihPrijavaRazmene={otvorenihPrijavaRazmene}
+      otvorenihPrijavaPoruka={otvorenihPrijavaPoruka}
       users={allUsers.map((u) => ({
         id: u.id, pseudonim: u.pseudonim, email: u.email, location: u.location, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,

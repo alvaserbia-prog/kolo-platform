@@ -32,9 +32,28 @@ interface Oglas {
   createdAt: string;
 }
 
+/**
+ * Zatvoren prikaz maloletnog naloga (Pravilnik o učešću dece — član o pristupu
+ * profilu maloletnog korisnika). Kad server vrati ovo umesto profila, stranica
+ * NE renderuje ništa od profila — vidi `ZatvorenProfil`.
+ */
+interface ZatvorenProfil {
+  pseudonim: string;
+  roditelji: { id: string; pseudonim: string }[];
+  razlog: "PUNOLETAN" | "NIJE_PRIJATELJ";
+}
+
 interface ProfilData {
   id: string;
   pseudonim: string;
+  /** Škola maloletnog korisnika (čl. 7). Punoletan nalog je nema. */
+  skola: { sifra: string; naziv: string; mesto: string } | null;
+  /** Veza roditelj–dete je javna u oba smera (odluka vlasnika, 18.08.2026). */
+  roditelji: { id: string; pseudonim: string }[];
+  deca: { id: string; pseudonim: string; avatar: string | null }[];
+  zatvoren?: ZatvorenProfil;
+  /** Maloletni korisnik (Modul Deca) — bez indeksa i bez lanca potvrda. */
+  maloletan?: boolean;
   verified: boolean;
   verifiedAt: string | null;
   status: string;
@@ -157,6 +176,44 @@ export default function JavniProfilPage() {
     );
   }
 
+  // 🔴 Zatvoren prikaz ide PRE svake druge grane. Odluka je doneta na serveru
+  // (`pristupProfiluDeteta`); ovde se samo iscrtava ono što je poslao. Ekran mora
+  // da uradi tri stvari, inače izgleda kao kvar: kaže zašto, imenuje roditelja
+  // kome se čovek obraća (čl. 10), i pokaže jedini dozvoljeni put — oglas.
+  if (profil?.zatvoren) {
+    const z = profil.zatvoren;
+    return (
+      <div className="mx-auto max-w-xl rounded-2xl border border-kolo-border bg-white p-8">
+        <p className="text-lg font-semibold text-kolo-text">
+          <Pseudonim>{z.pseudonim}</Pseudonim>
+        </p>
+        <p className="mt-1 text-sm text-kolo-muted">{t("zatvoren_naslov")}</p>
+
+        <p className="mt-5 text-sm text-kolo-text">
+          {z.razlog === "NIJE_PRIJATELJ" ? t("zatvoren_prijatelj") : t("zatvoren_opis")}
+        </p>
+
+        {z.razlog === "PUNOLETAN" && z.roditelji.length > 0 && (
+          <p className="mt-4 text-sm text-kolo-text">
+            {t("zatvoren_roditelj")}{" "}
+            {z.roditelji.map((r, i) => (
+              <span key={r.id}>
+                {i > 0 && ", "}
+                <Link href={profilHref(r)} className="font-medium text-kolo-green-700 hover:underline">
+                  <Pseudonim>{r.pseudonim}</Pseudonim>
+                </Link>
+              </span>
+            ))}
+          </p>
+        )}
+
+        {z.razlog === "PUNOLETAN" && (
+          <p className="mt-4 text-sm text-kolo-muted">{t("zatvoren_oglas")}</p>
+        )}
+      </div>
+    );
+  }
+
   if (greska || !profil) {
     return (
       <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center">
@@ -234,6 +291,55 @@ export default function JavniProfilPage() {
 
           {/* Info red */}
           <dl className="mt-4 space-y-2.5 text-sm border-t border-kolo-border pt-4">
+            {/* Škola maloletnog korisnika (čl. 7). Ovaj profil vide samo roditelj,
+                prijatelj i Fondacija — punoletnom članu se uopšte ne otvara. */}
+            {profil.skola && (
+              <div className="flex justify-between gap-2">
+                <dt className="text-kolo-muted">{t("skola")}</dt>
+                <dd className="text-right">
+                  <Link
+                    href={`/skole/${encodeURIComponent(profil.skola.sifra)}`}
+                    className="text-kolo-green-700 hover:underline"
+                  >
+                    {profil.skola.naziv}
+                  </Link>
+                  <span className="block text-xs text-kolo-muted">{profil.skola.mesto}</span>
+                </dd>
+              </div>
+            )}
+            {/* Veza roditelj–dete je javna u OBA smera (odluka vlasnika). Sa deteta
+                se vidi roditelj, sa roditelja ko su mu deca. Klik na dete vodi na
+                zatvoren prikaz — spisak nije vrata. */}
+            {profil.roditelji.length > 0 && (
+              <div className="flex justify-between gap-2">
+                <dt className="text-kolo-muted">{t("roditelji")}</dt>
+                <dd className="text-right">
+                  {profil.roditelji.map((r, i) => (
+                    <span key={r.id}>
+                      {i > 0 && ", "}
+                      <Link href={profilHref(r)} className="text-kolo-green-700 hover:underline">
+                        <Pseudonim>{r.pseudonim}</Pseudonim>
+                      </Link>
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            )}
+            {profil.deca.length > 0 && (
+              <div className="flex justify-between gap-2">
+                <dt className="text-kolo-muted">{t("deca")}</dt>
+                <dd className="text-right">
+                  {profil.deca.map((d, i) => (
+                    <span key={d.id}>
+                      {i > 0 && ", "}
+                      <Link href={profilHref(d)} className="text-kolo-green-700 hover:underline">
+                        <Pseudonim>{d.pseudonim}</Pseudonim>
+                      </Link>
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            )}
             <div className="flex justify-between gap-2">
               <dt className="text-kolo-muted">{t("clan_od")}</dt>
               <dd className="text-kolo-muted">
@@ -287,15 +393,21 @@ export default function JavniProfilPage() {
             </div>
           </div>
 
-          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno) */}
-          <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
+          {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno).
+              Kod maloletnog korisnika ga nema — nema ni indeks ni lanac potvrda
+              (Modul Deca, čl. 15), pa bi kartica prikazivala nulu bez značenja. */}
+          {!profil.maloletan && (
+            <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
+          )}
         </div>
       </div>
 
       {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
-        {/* LEVO — lanac verifikacija (mini stablo) */}
-        <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
+        {/* LEVO — lanac potvrda (mini stablo). Dete u njemu ne postoji. */}
+        {!profil.maloletan && (
+          <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
+        )}
 
         {/* DESNO — transakcije (fiksna visina + skrol) */}
         <div className="bg-white rounded-2xl border border-kolo-border flex flex-col lg:h-[460px]">
@@ -419,7 +531,7 @@ export default function JavniProfilPage() {
                     <p className="text-xs text-kolo-muted mt-0.5">{tPijaca(`kategorija_${kategorijaKljuc(oglas.category)}`)}</p>
                   </div>
                   <span className="text-sm font-semibold text-kolo-green-700 shrink-0 ml-4">
-                    {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " P" : ""}
+                    {formatCenaGlavni(oglas, t("cena_po_dogovoru"))}{prikaziJedinicuCene(oglas) ? " POEN" : ""}
                   </span>
                 </Link>
               </li>

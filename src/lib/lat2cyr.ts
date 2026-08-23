@@ -21,7 +21,31 @@ const BELA_LISTA = [
   "PDF", "JSON", "API", "URL", "HTML", "CSS", "OAuth", "GDPR",
   "RSD", "EUR", "USD", "ISO", "NestPay", "Vercel", "Neon", "Prisma",
   "Next.js", "TypeScript", "PostgreSQL", "Whitepaper",
-];
+  // Strano ime i skraćenice koje su se u ćirilici raspadale u besmislicu:
+  // „Гоогле", „ДЦО", „Сигнед-офф-бy", „ЦОНТРИБУТИНГ.мд", „ДПИА".
+  "Google", "DCO", "Signed-off-by", "CONTRIBUTING.md", "DPIA",
+  // Naziv fascikle u klijentu za poštu — piše se onako kako u klijentu i stoji.
+  // Samo veliko „Spam"; obična reč „spam" je odomaćena i ide u ćirilicu.
+  "Spam",
+  // APR i PIB se u srpskoj ćirilici inače pišu АПР i ПИБ — ovde ostaju u
+  // latinici odlukom vlasnika, radi jednoobraznosti sa ostalim skraćenicama.
+  "APR", "PIB",
+  // Formati slika i oznake granica: „WебП", „Маx", „ЈПГ", „ПНГ".
+  "AGPL-3.0-only", "WebP", "JPG", "PNG", "Screenshot", "Max", "max", "Min", "min",
+  // Imena sistema i naslovi na engleskom sa javnih stranica. Engleska fraza bez
+  // slova q/w/x/y ne izgleda polomljeno — samo tiho postane ćirilična
+  // besmislica („Тхе Енд оф Монеy"), pa se cele fraze maskiraju.
+  "WIR", "Local Exchange Trading System",
+  "Innovation in Exchange and Finance",
+  "The End of Money and the Future of Civilization",
+  "GNU Affero General Public License", "Google Analytics",
+  // Imena proizvoda: „3Д Сецуре" i „Цлоудфларе Р2" su izlazili na ekranu.
+  // Sestre po istom pravilu (Vercel, Neon, Prisma, NestPay) su gore.
+  "3D Secure", "Cloudflare R2", "Cloudflare",
+  // Duži token MORA biti maskiran pre kraćeg koji je njegov početak, inače
+  // „AGPL-3.0" pojede početak i ostavi „онлy", a „Google" ostavi „Аналyтицс".
+  // Sortiranje to rešava jednom za svagda — red unosa iznad je onda slobodan.
+].sort((a, b) => b.length - a.length);
 
 // Strane reči (pozajmljenice) koje ostaju u latinici u SVIM padežnim oblicima.
 // Obrasci su case-insensitive; originalni oblik se očuva (maskiranje vraća tekst
@@ -37,6 +61,12 @@ const BELA_LISTA_OBRASCI: RegExp[] = [
   /\be-?mail[a-z]*\b/gi,
   // chat / Chat soba / chatu… → ostaje latinica (pozajmljenica, „Цхат“ izgleda pogrešno).
   /\bchat[a-z]*\b/gi,
+  // browser, browsera, browseru… → „броwсер" je bio vidljiv u porukama o
+  // dozvoli za kameru i o obaveštenjima.
+  /\bbrowser[a-z]*\b/gi,
+  // Sardex, Sardexa, Sardexu… — ime se u srpskom menja po padežima, pa tačan
+  // token nije dovoljan.
+  /\bsardex[a-z]*\b/gi,
 ];
 
 // Reči kod kojih digraf NIJE jedno slovo (n+j, d+ž zasebno) — npr. prefiks
@@ -75,7 +105,18 @@ const RE_DOMEN = /\b[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.(?:rs|com|org|net|eu|io|i
 // vrednost po imenu (FORMATTING_ERROR) ni rich tag. Maskira se SAMO oznaka;
 // tekst između tagova (npr. <strong>Naslov</strong>) i dalje ide u ćirilicu.
 // (Sve poruke koriste proste {ime} placeholdere — bez ugnežđenih { } / ICU plural.)
-const RE_ICU = /\{[^{}]*\}/g;
+// Prost argument: `{pseudonim}`, `{count, number}`. Namerno NE hvata granu ICU
+// plurala (`{# stranica}`), koja počinje sa `#` — tekst u grani se VIDI na
+// ekranu i mora u ćirilicu.
+const RE_ICU = /\{\s*[A-Za-z0-9_]+(?:\s*,[^{}]*)?\s*\}/g;
+// ICU plural/select ima ugnežđene zagrade, koje prosta maska ne pokriva. Bez
+// ovoga su ključne reči odlazile u ćirilicu (`{цоунт, плурал, оне …}`) i
+// next-intl više nije umeo da pročita poruku — dakle kvar, ne kozmetika.
+const RE_ICU_ZAGLAVLJE = /\{\s*[A-Za-z0-9_]+\s*,\s*(?:plural|select|selectordinal)\s*,/g;
+const IMA_ICU_GRANE = /\{\s*[A-Za-z0-9_]+\s*,\s*(?:plural|select|selectordinal)\s*,/;
+// Kategorije se maskiraju samo unutar takve poruke: „one" je i srpska reč, pa
+// bez te ograde ne bi bilo bezbedno.
+const RE_ICU_KATEGORIJA = /(?:\b(?:zero|one|two|few|many|other)|=\d+)\s*(?=\{)/g;
 const RE_TAG = /<\/?[A-Za-z][A-Za-z0-9-]*\s*\/?>/g;
 
 function ucinilVelikim(c: string): boolean {
@@ -140,9 +181,9 @@ export function lat2cyr(input: string): string {
   let s = input
     .replace(RE_URL, masc)
     .replace(RE_EMAIL, masc)
-    .replace(RE_DOMEN, masc)
-    .replace(RE_ICU, masc)
-    .replace(RE_TAG, masc);
+    .replace(RE_DOMEN, masc);
+  if (IMA_ICU_GRANE.test(s)) s = s.replace(RE_ICU_ZAGLAVLJE, masc).replace(RE_ICU_KATEGORIJA, masc);
+  s = s.replace(RE_ICU, masc).replace(RE_TAG, masc);
 
   // 2) Maskiraj reči iz bele liste (kao cele reči, case-sensitive po unosu).
   for (const token of BELA_LISTA) {

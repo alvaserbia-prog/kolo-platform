@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { izracunajDnevniIznos, labelPrograma } from "@/lib/protokol/programi";
+import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 import { ProgramType } from "@/generated/prisma/client";
 import ProgramiKlijent from "./ProgramiKlijent";
 
@@ -65,7 +66,7 @@ export default async function ProgramiPage() {
       pedAktivan={pedAktivan}
       brojAktivnih={brojAktivnih}
       isVerified={session.user.verified}
-      imaPunIndeks={(korisnik?.indeksStvarnosti ?? 0) >= 100}
+      imaPristupProgramima={(korisnik?.indeksStvarnosti ?? 0) >= FUNKCIONALNI_PRAG_INDEKSA}
       emisioniKontekst={{
         opticaj,
         dnevniLimit,

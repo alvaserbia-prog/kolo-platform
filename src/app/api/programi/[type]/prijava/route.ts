@@ -7,7 +7,6 @@ import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { obavesti } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
-import { MAX_INDEKS } from "@/lib/protokol/dokaz-stvarnosti";
 import { dohvatiVerifikatore, kreirajPotvrde } from "@/lib/protokol/program-potvrda";
 import { labelPrograma } from "@/lib/protokol/programi";
 
@@ -18,9 +17,11 @@ const DOZVOLJENI_TIPOVI: ProgramType[] = [
 ];
 
 // POST /api/programi/[type]/prijava — prijava na socijalni program.
-// Anti-malverzacija (Pravilnik o programima podrške čl. 4): potreban je pun indeks
-// stvarnosti (100%), izričit pristanak i potvrda SVIH verifikatora pod punom
-// odgovornošću pre nego što Fondacija može da odobri prijavu.
+// Uslov je indeks stvarnosti od najmanje 10% — jedna primljena potvrda (Pravilnik o
+// programima podrške čl. 4, set 4.3.1; do tada je tražen pun indeks od 100%). Prag
+// proverava `imaFunkcionalniPristup` iznad, isti koji otvara i operativni doprinos.
+// Anti-malverzaciju nosi ostatak čl. 4: izričit pristanak i potvrda SVIH verifikatora
+// podnosioca pod punom odgovornošću pre nego što Fondacija može da odobri prijavu.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ type: string }> }
@@ -43,14 +44,11 @@ export async function POST(
   if (!program?.isActive)
     return await greska("Program nije aktivan.", 400);
 
-  // Pun indeks stvarnosti (100% = svih 10 verifikacija) — uslov za socijalni program.
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { indeksStvarnosti: true, pseudonim: true },
+    select: { pseudonim: true },
   });
   if (!korisnik) return await greska("Korisnik ne postoji.", 404);
-  if (korisnik.indeksStvarnosti < MAX_INDEKS)
-    return await greska("Za socijalni program potreban je pun indeks stvarnosti (100%) — sve verifikacije.", 403);
 
   const body = await req.json().catch(() => ({}));
 
@@ -69,7 +67,7 @@ export async function POST(
 
   const metadata = buildMetadata(programType, body);
 
-  // Verifikatori koji će potvrđivati (pri indeksu 100% biće ih 10).
+  // Verifikatori koji će potvrđivati — svi koje podnosilac ima (najmanje jedan).
   const verifikatori = await dohvatiVerifikatore(prisma, session.user.id);
   if (verifikatori.length === 0)
     return await greska("Nemate verifikatore koji mogu da potvrde prijavu.", 403);

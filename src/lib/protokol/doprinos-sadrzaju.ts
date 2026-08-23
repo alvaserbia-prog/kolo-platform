@@ -70,6 +70,18 @@ export async function zabeleziDoprinos(
   if (oglas.tip !== "PONUDA") return false;
   if (!oglasIspunjavaMinimum(oglas).ok) return false;
 
+  // 🔴 Modul Deca, čl. 14 st. 1: kanali doprinosa sadržaju i doprinosa razmeni se na
+  // maloletne korisnike NE primenjuju. Bez ovoga bi prvi oglas svakog deteta emitovao
+  // 1.000 POEN, pa bi dečji nalozi pomerali opticaj — a preko njega osnivački korak
+  // od 24.000 POEN-a, koji se pali na svakih 100.000 POEN-a opticaja.
+  //
+  // Provera stoji OVDE, a ne na pozivnom mestu, da je nova ruta ne bi zaobišla.
+  const jeDete = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { maloletan: true },
+  });
+  if (jeDete?.maloletan) return false;
+
   try {
     await prisma.doprinosSadrzaju.create({
       data: { userId, oglasId: oglas.id, iznos: IZNOS },

@@ -33,13 +33,24 @@ const IZUZETI_NAMESPACE = new Set(["tablaJemstva"]);
  * obavezivanje za tuđe buduće ispunjenje, a verifikator tvrdi činjenicu koja
  * u tom trenutku jeste ili nije istinita. Bez ove provere se stara reč vraća
  * prvom izmenom copy-ja, jer je u prevodima nosi pet različitih korena.
+ *
+ * 🔴 Obrasci za en/ru/hu su 2026-08-14 prošireni sa PARA REČI na KOREN, jer je
+ * uža provera propustila ~40 mesta: ruski je govorio „цепь поручительства"
+ * (obrazac je tražio „цепочка"), engleski „chain of guarantee" i „guarantor",
+ * mađarski „kezes" u obaveštenjima o socijalnim programima. Zajedničko im je
+ * to što ukinuta reč ne dolazi uvek uz istu imenicu — zato se sada zabranjuje
+ * sam koren, odnosno uloga („guarantor"). Engleski `guarantee` se NE zabranjuje
+ * u celini: „the Foundation does not guarantee that value" je obično značenje
+ * reči i sme da ostane (isto pravilo kao za srpsko „Fondacija ne jamči"). Srpski i hrvatski OSTAJU na parovima reči: `politikaPrihvati.opis`
+ * legitimno kaže „Lanac jemstva se od sada zove lanac potvrda", pa bi zabrana
+ * korena oborila i tu istinitu rečenicu.
  */
 const ZABRANJENO: Record<string, RegExp[]> = {
   sr: [/tabl[aeiou]\s+(zahteva\s+za\s+)?jemstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /mrež[aeiu]\s+jemstva/i, /graf[au]?\s+jemstva/i],
   hr: [/ploč[aeiu]\s+(zahtjeva\s+za\s+)?jamstv/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /graf[au]?\s+jamstva/i],
-  en: [/(guarantee|vouching)\s+(request\s+)?board/i, /recognition\s+card/i, /vouching\s+(chain|network|graph)/i],
-  ru: [/доск[аеиу]\s+(запросов\s+о\s+)?поручительств/i, /карточк[ауи]\s+узнавания/i, /цепочк[аеиу]\s+поручительства/i, /граф[ае]?\s+поручительства/i],
-  hu: [/kezességi\s+(kérelmek\s+)?tábl/i, /felismerési\s+kártya/i, /kezességi\s+(lánc|gráf)/i],
+  en: [/(guarantee|vouching)\s+(request\s+)?board/i, /recognition\s+card/i, /chain\s+of\s+guarant\w*/i, /\bguarantors?\b/i, /vouch/i],
+  ru: [/доск[аеиу]\s+(запросов\s+о\s+)?поручительств/i, /карточк[ауи]\s+узнавания/i, /поручител/i, /цеп(ь|и|ью|ей|очк[аеиуой])\s+поручительств/i],
+  hu: [/kezességi\s+(kérelmek\s+)?tábl/i, /felismerési\s+kártya/i, /kezes/i],
 };
 
 /** Svaki string u prevodima, sa punom putanjom ključa. */

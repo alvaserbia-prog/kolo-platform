@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
   const osnivaci: string[] = body.osnivaci ?? [];
 
   if (!name || name.length < 3)
-    return await greska("Naziv mora imati najmanje 3 karaktera.", 400);
+    return await greska("Naziv mora imati najmanje 3 znaka.", 400);
   // Sedište kruga je opciono, ali kad se navede mora biti naselje iz šifarnika.
   const mesto = location ? razresiNaselje(location) : null;
   if (location && !mesto)

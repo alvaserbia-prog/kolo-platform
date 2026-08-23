@@ -338,7 +338,7 @@ export function proveriDozvoluVerifikacije(
     return {
       dozvoljeno: false,
       vrsta: "ZONA",
-      razlog: "Ne možeš da verifikuješ samog sebe.",
+      razlog: "Ne možeš da potvrdiš samog sebe.",
     };
   }
   if (pocetniIds.has(verifikovaniId)) {

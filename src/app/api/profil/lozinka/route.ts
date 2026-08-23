@@ -14,7 +14,7 @@ export async function PATCH(req: NextRequest) {
     return await greska("Sva polja su obavezna.", 400);
   }
   if (novaLozinka.length < 8) {
-    return await greska("Nova lozinka mora imati najmanje 8 karaktera.", 400);
+    return await greska("Nova lozinka mora imati najmanje 8 znakova.", 400);
   }
 
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });

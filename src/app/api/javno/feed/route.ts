@@ -24,7 +24,19 @@ export async function GET(req: NextRequest) {
   const offset = Number(req.nextUrl.searchParams.get("offset") ?? "0");
   const take = 50;
 
+  // Transakcije u kojima je bilo koja strana maloletna se NE prikazuju — ni
+  // verifikovanom posmatraču, kome bi feed inače otkrio pseudonim deteta
+  // (Modul Deca, čl. 13; dečji prostor nije javan).
+  // Zapis Protokola i zapis Kruga nemaju korisnika — njih uslov mora da propusti,
+  // inače bi svaka emisija ispala iz feeda.
+  const bezDece = { OR: [{ user: { is: null } }, { user: { is: { maloletan: false } } }] };
   const transakcije = await prisma.transaction.findMany({
+    where: {
+      AND: [
+        { OR: [{ fromWalletId: null }, { fromWallet: { is: bezDece } }] },
+        { toWallet: { is: bezDece } },
+      ],
+    },
     orderBy: { createdAt: "desc" },
     skip: offset,
     take,

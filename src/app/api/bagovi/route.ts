@@ -53,10 +53,10 @@ export async function POST(req: NextRequest) {
   const opis = typeof body.opis === "string" ? body.opis.trim() : "";
 
   if (naslov.length < 3) {
-    return await greska("Naslov mora imati najmanje 3 karaktera.", 400);
+    return await greska("Naslov mora imati najmanje 3 znaka.", 400);
   }
   if (opis.length < 10) {
-    return await greska("Opis mora imati najmanje 10 karaktera.", 400);
+    return await greska("Opis mora imati najmanje 10 znakova.", 400);
   }
 
   // Spreči spam: najviše 5 otvorenih prijava po korisniku.

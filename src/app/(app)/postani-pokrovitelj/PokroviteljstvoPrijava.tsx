@@ -26,7 +26,7 @@ export default function PokroviteljstvoPrijava() {
     queryKey: ["pokroviteljstvo-moje-prijave"],
     queryFn: async (): Promise<Prijava[]> => {
       const res = await fetch("/api/pokroviteljstvo/prijava");
-      if (!res.ok) throw new Error("Greška pri učitavanju prijava");
+      if (!res.ok) throw new Error(t("greska_ucitavanje"));
       const d = await res.json();
       return d.prijave ?? [];
     },

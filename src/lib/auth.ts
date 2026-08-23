@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { WalletType } from "@/generated/prisma/client";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
 import { normalizujEmail } from "@/lib/validacija";
-import { rateLimit } from "@/lib/rate-limit";
+import { rateLimit, klijentIP } from "@/lib/rate-limit";
 
 /**
  * K5: "pun pristup" (vidljivost pseudonima/profila/grafa) zavisi od FUNKCIONALNOG
@@ -82,16 +82,46 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Lozinka", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const emailNorm = normalizujEmail(credentials.email);
-        // Anti brute-force / credential-stuffing: 10 pokušaja po nalogu u 15 min.
-        if (!rateLimit(`login:${emailNorm}`, 10, 15 * 60 * 1000).ok) return null;
+        // Polje se i dalje zove `email`, ali prima DVE stvari — imejl ili pseudonim
+        // (ime ključa je deo NextAuth ugovora i ne menja se).
+        //
+        // Bez znaka „@" unos se čita kao PSEUDONIM. Heuristika je sigurna jer
+        // `validanPseudonim` ne dopušta „@" u pseudonimu, pa se ta dva skupa ne seku.
+        //
+        // Maloletni korisnik imejl NEMA — nalog mu otvara roditelj i predaje mu
+        // lozinku (Modul Deca, čl. 4), pa je ovo za njega jedini put do prijave.
+        const unos = credentials.email.trim();
+        const jeImejl = unos.includes("@");
+        const kljuc = jeImejl ? normalizujEmail(unos) : unos.toLowerCase();
 
-        const user = await prisma.user.findUnique({
-          where: { email: emailNorm },
+        // ── Ograničenje pokušaja ────────────────────────────────────────────
+        //
+        // 🔴 Ključ nosi I IP, ne samo nalog. Otkad se prijava otvara i pseudonimom,
+        // identifikator je JAVAN — svako vidi tuđi pseudonim na svakom ekranu. Da je
+        // brojač samo po nalogu, bilo ko bi sa deset pogrešnih pokušaja zaključao
+        // tuđu prijavu na petnaest minuta, a čovek bi sa ispravnom lozinkom dobijao
+        // „pogrešni podaci" i ne bi imao pojma zašto.
+        //
+        // Uz to stoje dve šire ograde: jedan IP ne sme da preliva pokušaje po mnogo
+        // naloga, a nijedan nalog ne sme da primi neograničeno pokušaja ni sa mnogo
+        // adresa (drugi prag je namerno visok — čovek ga nikad ne dodirne).
+        const ip = klijentIP({
+          headers: {
+            get: (n: string) =>
+              (req?.headers as Record<string, string> | undefined)?.[n] ?? null,
+          },
         });
+        const PROZOR = 15 * 60 * 1000;
+        if (!rateLimit(`login:${kljuc}:${ip}`, 10, PROZOR).ok) return null;
+        if (!rateLimit(`login-ip:${ip}`, 30, PROZOR).ok) return null;
+        if (!rateLimit(`login-nalog:${kljuc}`, 100, PROZOR).ok) return null;
+
+        const user = jeImejl
+          ? await prisma.user.findUnique({ where: { email: kljuc } })
+          : await prisma.user.findUnique({ where: { pseudonimLower: kljuc } });
         if (!user || !user.passwordHash) return null;
 
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);

@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
 import { danObracuna } from "./obracunski-dan";
-import { MAX_INDEKS } from "./dokaz-stvarnosti";
+import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
 import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
@@ -20,8 +20,13 @@ export type RevizijaRazlog = "revizija" | "indeks";
 /**
  * Da li ACTIVE socijalni program treba obustaviti (čista, testabilna odluka):
  *  - "revizija": prošao rok `nextReverifikacija`, status nije ponovo potvrđen (čl. 12);
- *  - "indeks": REGULARNI korisnik ima indeks stvarnosti ispod 100% — osnov na kojem je
- *    program odobren (pun indeks + potvrda svih verifikatora) više ne važi.
+ *  - "indeks": REGULARNI korisnik ima indeks stvarnosti ispod 10% — osnov na kojem je
+ *    program odobren (funkcionalni prag + potvrda svih verifikatora) više ne važi.
+ *
+ * Prag je od seta akata 4.3.1 funkcionalnih 10% (jedna primljena potvrda), ne pun
+ * indeks: čl. 4 Pravilnika o programima podrške traži isti prag koji otvara i
+ * operativni doprinos. Anti-malverzaciju i dalje nosi potvrda SVIH verifikatora
+ * podnosioca iz istog člana, ne visina indeksa.
  * Vraća null ako program ostaje aktivan.
  */
 export function razlogObustaveProgram(
@@ -31,7 +36,7 @@ export function razlogObustaveProgram(
   if (args.nextReverifikacija != null && args.nextReverifikacija.getTime() <= sada.getTime()) {
     return "revizija";
   }
-  if (args.tipKorisnika === TipKorisnika.REGULARNI && args.indeksStvarnosti < MAX_INDEKS) {
+  if (args.tipKorisnika === TipKorisnika.REGULARNI && args.indeksStvarnosti < FUNKCIONALNI_PRAG_INDEKSA) {
     return "indeks";
   }
   return null;

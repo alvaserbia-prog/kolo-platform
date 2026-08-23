@@ -9,7 +9,10 @@ import { ImageResponse } from "next/og";
  * kao asset, pa radi i u serverless i u edge okruženju.
  */
 export const runtime = "edge";
-export const alt = "KOLO — mreža za razmenu rada, dobara i znanja";
+// Alt čitaju čitači ekrana i pretraga. Nosi definiciju („sistem uzajamnosti"),
+// ali NE prepisuje tagline sa same slike — opisuje šta se na njoj vidi, pa ko
+// sliku ne vidi dobija isto obaveštenje, a ne dva puta istu rečenicu.
+export const alt = "KOLO — sistem uzajamnosti za razmenu rada, dobara i znanja";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -101,7 +104,7 @@ export default async function OpengraphImage() {
               display: "flex",
             }}
           >
-            Sistem uzajamnosti zasnovan na doprinosu zajednici
+            Sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru
           </div>
         </div>
 

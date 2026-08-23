@@ -43,6 +43,10 @@ function PorukeContent() {
   const [drugiAvatar, setDrugiAvatar] = useState<string | null>(null);
   // Oglas povodom kog je razgovor otvoren, a poruka još nije napisana.
   const [povod, setPovod] = useState<{ id: string; naslov: string; imaSliku: boolean } | null>(null);
+  // Modul Deca, čl. 9 st. 3: sa druge strane je dete, a razgovor čita njegov
+  // roditelj. Natpis je i odvraćanje i poštenje — ko piše detetu, treba da zna
+  // pred kim piše. Server ga postavlja samo punoletnom sagovorniku.
+  const [roditeljCita, setRoditeljCita] = useState(false);
   const [mojAvatar, setMojAvatar] = useState<string | null>(null);
   const [mojPseudonim, setMojPseudonim] = useState("");
   const [mobilniPrikaz, setMobilniPrikaz] = useState<"lista" | "chat">("lista");
@@ -84,6 +88,7 @@ function PorukeContent() {
     setDrugiAvatar(data.drugiUser?.avatar ?? null);
     setMojAvatar(data.mojAvatar ?? null);
     setPovod(data.povod ?? null);
+    setRoditeljCita(Boolean(data.roditeljCita));
     setMojPseudonim(data.mojPseudonim ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
@@ -368,6 +373,11 @@ function PorukeContent() {
             <div className="px-4 py-3 border-t border-kolo-border">
               {/* Povodom čega je razgovor otvoren. Stoji dok se ne napiše prva
                   poruka — tada prelazi na nju, kao kartica iznad teksta. */}
+              {roditeljCita && (
+                <p className="mb-2 rounded-xl border-l-4 border-kolo-gold-400 bg-kolo-bg px-3 py-2 text-xs text-kolo-text">
+                  {t("roditelj_cita")}
+                </p>
+              )}
               {povod && (
                 <a
                   href={`/pijaca/${povod.id}`}

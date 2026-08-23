@@ -15,7 +15,12 @@ export type Transakcija = {
   drugiPseudonim: string;
   drugiId: string | null;
   createdAt: string;
+  mozePrijaviti?: boolean;
+  prijavaStatus?: string | null;
 };
+
+/** Prepis i njegovo poništenje idu između dva člana; sve ostalo je Protokol. */
+const izmedjuClanova = (tip: string) => tip === "TRANSFER" || tip === "PONISTENJE_PREPISA";
 
 type Filter = "sve" | "primljeno" | "poslato" | "emisije";
 
@@ -24,9 +29,9 @@ export default function IstorijaKlijent({ transakcije, pseudonim }: { transakcij
   const [filter, setFilter] = useState<Filter>("sve");
 
   const filtered = useMemo(() => transakcije.filter((tx) => {
-    if (filter === "primljeno") return tx.primio && tx.type === "TRANSFER";
-    if (filter === "poslato") return !tx.primio && tx.type === "TRANSFER";
-    if (filter === "emisije") return tx.type !== "TRANSFER";
+    if (filter === "primljeno") return tx.primio && izmedjuClanova(tx.type);
+    if (filter === "poslato") return !tx.primio && izmedjuClanova(tx.type);
+    if (filter === "emisije") return !izmedjuClanova(tx.type);
     return true;
   }), [transakcije, filter]);
 
@@ -107,6 +112,43 @@ export default function IstorijaKlijent({ transakcije, pseudonim }: { transakcij
 
 const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcija; pseudonim: string; jePoslednji: boolean }) {
   const locale = useLocale();
+  // `t` je transakcija (kao u originalu), pa prevodi idu pod `tr`.
+  const tr = useTranslations("novcanik");
+  const [otvoreno, setOtvoreno] = useState(false);
+  const [opis, setOpis] = useState("");
+  const [salje, setSalje] = useState(false);
+  const [poslato, setPoslato] = useState(false);
+  const [greska, setGreska] = useState("");
+
+  async function prijavi() {
+    setSalje(true);
+    setGreska("");
+    try {
+      const res = await fetch(`/api/transakcije/${t.id}/prijavi`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ opis: opis.trim() }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setGreska(data.error ?? tr("prijavi_greska"));
+        return;
+      }
+      setOtvoreno(false);
+      setPoslato(true);
+    } finally {
+      setSalje(false);
+    }
+  }
+
+  const statusTekst = poslato || t.prijavaStatus === "OTVORENA"
+    ? tr("prijavi_ceka")
+    : t.prijavaStatus === "PONISTENA"
+    ? tr("prijavi_ponistena")
+    : t.prijavaStatus === "ODBACENA"
+    ? tr("prijavi_odbacena")
+    : null;
+
   return (
     <div
       className={`px-4 py-2.5 ${!jePoslednji ? "border-b border-kolo-border" : ""}`}
@@ -159,7 +201,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
         {/* Opis */}
         <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
         {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
-        <span className={`text-base font-bold text-right ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+        <span className={`text-base font-bold text-right ${!izmedjuClanova(t.type) && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
           {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
         </span>
       </div>
@@ -200,7 +242,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
               })}
             </p>
           </div>
-          <span className={`text-sm font-bold text-right shrink-0 ${t.type !== "TRANSFER" && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+          <span className={`text-sm font-bold text-right shrink-0 ${!izmedjuClanova(t.type) && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
             {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
           </span>
         </div>
@@ -208,6 +250,52 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
           <p className="mt-1 text-xs text-kolo-muted/70 truncate">{t.description}</p>
         )}
       </div>
+
+      {/* Prijava neispunjene razmene — ulazna tačka stoji uz sam prepis, jer se
+          odluka i vodi o tom prepisu. Vidi je samo pošiljalac (server šalje
+          `mozePrijaviti`), a kad je prijava podneta, dugme ustupa mesto ishodu. */}
+      {(statusTekst || t.mozePrijaviti) && (
+        <div className="mt-2 pt-2 border-t border-kolo-border/60">
+          {statusTekst ? (
+            <p className="text-xs text-kolo-muted">{statusTekst}</p>
+          ) : otvoreno ? (
+            <div className="space-y-2">
+              <p className="text-xs font-semibold text-kolo-text">{tr("prijavi_naslov")}</p>
+              <p className="text-xs text-kolo-muted">{tr("prijavi_opis")}</p>
+              <textarea
+                value={opis}
+                onChange={(e) => setOpis(e.target.value)}
+                rows={3}
+                placeholder={tr("prijavi_placeholder")}
+                className="w-full text-sm border border-kolo-border rounded-xl px-3 py-2"
+              />
+              {greska && <p className="text-xs text-red-600">{greska}</p>}
+              <div className="flex gap-2">
+                <button
+                  onClick={prijavi}
+                  disabled={salje || opis.trim().length < 10}
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-kolo-green-700 disabled:opacity-50"
+                >
+                  {tr("prijavi_posalji")}
+                </button>
+                <button
+                  onClick={() => { setOtvoreno(false); setGreska(""); }}
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium border border-kolo-border text-kolo-muted"
+                >
+                  {tr("prijavi_odustani")}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setOtvoreno(true)}
+              className="text-xs font-medium text-kolo-muted hover:text-kolo-text underline underline-offset-2"
+            >
+              {tr("prijavi_dugme")}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 });

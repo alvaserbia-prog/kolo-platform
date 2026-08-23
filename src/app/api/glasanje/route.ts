@@ -62,9 +62,9 @@ export async function POST(req: NextRequest) {
   const vrsta = body.vrsta === "DINARSKA_PREPORUKA" ? "DINARSKA_PREPORUKA" : "ODLUKA";
 
   if (!title || title.length < 5)
-    return await greska("Naslov mora imati najmanje 5 karaktera.", 400);
+    return await greska("Naslov mora imati najmanje 5 znakova.", 400);
   if (!description || description.length < 20)
-    return await greska("Opis mora imati najmanje 20 karaktera.", 400);
+    return await greska("Opis mora imati najmanje 20 znakova.", 400);
 
   // Neusvojen predlog iste sadržine ne sme ponovo pre 30 dana (čl. 22)
   if (await postojiSkoroOdbijen(title))

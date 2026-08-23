@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       return await greska("Nova lozinka je obavezna.", 400);
     }
     if (novaLozinka.length < 8) {
-      return await greska("Lozinka mora imati najmanje 8 karaktera.", 400);
+      return await greska("Lozinka mora imati najmanje 8 znakova.", 400);
     }
 
     const verified = await verifikujResetToken(token);

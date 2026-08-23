@@ -7,6 +7,9 @@ import { useTranslations } from "next-intl";
 
 export default function OAuthDovrsiPage() {
   const t = useTranslations("oauthDovrsi");
+  // Oznake pristanka su iste kao na registraciji — isti tekst, isti linkovi,
+  // pa se uzimaju odatle umesto da se duplira na pet jezika.
+  const tReg = useTranslations("registracija");
   const { data: session, update } = useSession();
   const router = useRouter();
   const [pseudonim, setPseudonim] = useState("");
@@ -87,8 +90,8 @@ export default function OAuthDovrsiPage() {
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-8">
         <div className="mb-7">
-          <h1 className="text-xl font-bold text-kolo-text">Još jedan korak</h1>
-          <p className="mt-1 text-sm text-kolo-muted">Izaberite pseudonim za vaš KOLO nalog</p>
+          <h1 className="text-xl font-bold text-kolo-text">{t("naslov")}</h1>
+          <p className="mt-1 text-sm text-kolo-muted">{t("podnaslov")}</p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
@@ -124,14 +127,14 @@ export default function OAuthDovrsiPage() {
               <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                Prihvatam <a href="/uslovi" target="_blank" className="text-kolo-green-700 underline">Uslove korišćenja</a>
+                {tReg("uslovi")} <a href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{tReg("uslovi_link")}</a>
               </span>
             </label>
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={privatnost} onChange={(e) => setPrivatnost(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                Prihvatam <a href="/privatnost" target="_blank" className="text-kolo-green-700 underline">Politiku privatnosti</a>
+                {tReg("uslovi")} <a href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{tReg("privatnost_link")}</a>
               </span>
             </label>
           </div>

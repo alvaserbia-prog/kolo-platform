@@ -122,7 +122,7 @@ export function proveriPrelaznoOgranicenje(
   return {
     dozvoljeno: false,
     razlog:
-      "U početnoj fazi sistema (do 100.000 POEN-a opticaja) korisnik može primiti samo jednu verifikaciju (čl. 22 Pravilnika o dokazu stvarnosti).",
+      "U početnoj fazi sistema (do 100.000 POENA opticaja) korisnik može primiti samo jednu verifikaciju (čl. 22 Pravilnika o dokazu stvarnosti).",
   };
 }
 
@@ -169,7 +169,7 @@ export function proveriAntiCirkularno(
   if (verifikatorId === verifikovaniId) {
     return {
       dozvoljeno: false,
-      razlog: "Ne možeš da verifikuješ samog sebe.",
+      razlog: "Ne možeš da potvrdiš samog sebe.",
     };
   }
 
