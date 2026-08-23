@@ -2172,6 +2172,12 @@
     "korisnici_reset": "Resetuj nalog",
     "korisnici_reset_prompt": "Return the account “{pseudonim}” to its registration day?\n\nIrreversible: every confirmation the account touches falls (including those it gave others, along with the POEN recorded then), POEN and ZRNO go to zero, and listings, conversations, notifications, history and consents to the acts are deleted. The email, password and pseudonym remain — signing in works with the same details.\n\nType the pseudonym to confirm:",
     "korisnici_reset_gotovo": "The account “{pseudonim}” has been returned to its registration day. Written off in favour of the Protocol: {poen} POEN. {potvrde} confirmations fell, {oglasi} listings were deleted.",
+    "korisnici_u_dete": "Convert to child",
+    "korisnici_u_dete_prompt": "Convert the account “{pseudonim}” into a minor user account?\n\nIrreversible: every confirmation the account touches falls (including those it gave to others, along with the POEN recorded at the time), ZRNO is written off, programme applications are closed and pending contributions are deleted. The POEN record, listings and conversations remain.\n\nThere is no way back — it becomes an adult account on its own, on the day of majority.\n\nType the pseudonym to confirm:",
+    "korisnici_u_dete_roditelj_prompt": "Pseudonym of the parent to be recorded for this account:",
+    "korisnici_u_dete_datum_prompt": "Child’s date of birth (YYYY-MM-DD). It cannot be changed afterwards and the day of majority is derived from it:",
+    "korisnici_u_dete_confirm": "Final check: the account “{pseudonim}” becomes a child account and loses all reality confirmations. Continue?",
+    "korisnici_u_dete_gotovo": "The account “{pseudonim}” has been converted to a child account ({godine} yrs), parent “{roditelj}”. {potvrde} confirmations fell, and {izjasnjenja} of the parent’s confirmers were asked to state that the child exists.",
     "izmeni_korisnika_naslov": "Edit member details",
     "izmeni_email_label": "Email",
     "izmeni_pseudonim_label": "Pseudonim",
@@ -2549,7 +2555,11 @@
     "prijava_poruke_odbacena_naslov": "Your message report was considered",
     "prijava_poruke_odbacena_tekst": "The Foundation considered your report and the message stays. Reasons: {odluka}",
     "lozinka_promenio_roditelj_naslov": "Your parent set a new password for you",
-    "lozinka_promenio_roditelj_tekst": "Ask them what the new password is and sign in with it."
+    "lozinka_promenio_roditelj_tekst": "Ask them what the new password is and sign in with it.",
+    "nalog_preveden_u_maloletni_naslov": "Your account is now a child account",
+    "nalog_preveden_u_maloletni_tekst": "Your account now follows the rules for minor users, and {roditelj} is recorded as your parent.",
+    "roditeljstvo_upisano_naslov": "You are recorded as a parent",
+    "roditeljstvo_upisano_tekst": "The account {pseudonim} became a child account and you are recorded as its parent."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",

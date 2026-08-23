@@ -30,14 +30,7 @@ import {
   TipKorisnika,
   UserStatus,
 } from "@/generated/prisma/client";
-import {
-  POEN_NADZORNIK,
-  POEN_VERIFIKATOR,
-  POEN_VERIFIKOVANI,
-  izracunajIndeks,
-  zasticeniIndeks,
-} from "@/lib/protokol/dokaz-stvarnosti";
-import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
+import { oboriVerifikacijeNaloga } from "@/lib/protokol/verifikacije-naloga";
 import { obrisiSaR2 } from "@/lib/skladiste";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
@@ -140,93 +133,10 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
   };
 
   // ── 1. Graf verifikacija ───────────────────────────────────────────────────
-  // Padaju sve veze koje nalog dodiruje — i primljene i obavljene. POEN
-  // emitovan povodom njih vraća se Protokolu i drugoj strani (capped na stanje,
-  // čl. 14: niko osim Protokola ne ide u minus), indeks se preračunava, a slot
-  // verifikatoru oslobađa. Isti postupak kao pri prestanku statusa (čl. 34).
-  const vezeKaoVerifikator = await prisma.verifikacionaVeza.findMany({ where: { verifikatorId: userId } });
-  const vezeKaoVerifikovani = await prisma.verifikacionaVeza.findMany({ where: { verifikovaniId: userId } });
-  let poenVracenOdDrugih = 0;
-
-  if (vezeKaoVerifikator.length > 0 || vezeKaoVerifikovani.length > 0) {
-    await prisma.$transaction(
-      async (tx) => {
-        /** Skida POEN sa tuđeg zapisa i vraća ga Protokolu; nikad ispod nule. */
-        async function vratiPoenProtokolu(targetUserId: string, iznos: number) {
-          if (iznos <= 0) return;
-          const w = await tx.wallet.findUnique({ where: { userId: targetUserId } });
-          if (!w) return;
-          const stvarno = Math.min(w.balance, iznos);
-          if (stvarno <= 0) return;
-          await tx.wallet.update({ where: { id: w.id }, data: { balance: { decrement: stvarno } } });
-          await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: stvarno } } });
-          poenVracenOdDrugih += stvarno;
-        }
-
-        // 1a) Veze u kojima je ovaj nalog VERIFIKATOR — pada verifikovani.
-        for (const v of vezeKaoVerifikator) {
-          await vratiPoenProtokolu(v.verifikovaniId, POEN_VERIFIKOVANI);
-          if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
-            // Nadzornikovih 500 pada samo ako je ishod bio UREDNO (čl. 20a).
-            await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
-          }
-
-          const ostalo = await tx.verifikacionaVeza.count({
-            where: { verifikovaniId: v.verifikovaniId, id: { not: v.id } },
-          });
-          const pogodjeni = await tx.user.findUnique({
-            where: { id: v.verifikovaniId },
-            select: { jeOsnivac: true },
-          });
-          if (ostalo === 0 && !pogodjeni?.jeOsnivac) {
-            await tx.user.update({
-              where: { id: v.verifikovaniId },
-              data: {
-                tipKorisnika: TipKorisnika.NEVERIFIKOVAN,
-                verified: false,
-                verifiedAt: null,
-                indeksStvarnosti: 0,
-              },
-            });
-          } else {
-            await tx.user.update({
-              where: { id: v.verifikovaniId },
-              data: { indeksStvarnosti: zasticeniIndeks(pogodjeni?.jeOsnivac ?? false, izracunajIndeks(ostalo)) },
-            });
-          }
-        }
-
-        // 1b) Veze u kojima je ovaj nalog VERIFIKOVANI — pada verifikator.
-        for (const v of vezeKaoVerifikovani) {
-          await vratiPoenProtokolu(v.verifikatorId, POEN_VERIFIKATOR);
-          if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
-            await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
-          }
-          const verifikator = await tx.user.findUnique({
-            where: { id: v.verifikatorId },
-            select: { tipKorisnika: true, slotoviPotroseni: true },
-          });
-          if (verifikator?.tipKorisnika === TipKorisnika.REGULARNI && verifikator.slotoviPotroseni > 0) {
-            await tx.user.update({
-              where: { id: v.verifikatorId },
-              data: { slotoviPotroseni: { decrement: 1 } },
-            });
-          }
-        }
-
-        // 1c) Obriši veze (NadzorZapis i NadzorniPredmet padaju kaskadno).
-        await tx.verifikacionaVeza.deleteMany({
-          where: { OR: [{ verifikatorId: userId }, { verifikovaniId: userId }] },
-        });
-        // 1d) Tuđe veze koje je ovaj nalog nadzirao ostaju — samo bez nadzornika.
-        await tx.verifikacionaVeza.updateMany({ where: { nadzornikId: userId }, data: { nadzornikId: null } });
-
-        // 1e) Keš zabranjene zone se preračunava od nule — unija nije invertibilna.
-        await preracunajZoneUBazi(tx);
-      },
-      { timeout: 30_000 },
-    );
-  }
+  // Nalog izlazi iz lanca potvrda sa svim posledicama po druge ljude — vidi
+  // `verifikacije-naloga.ts` (isti postupak koristi i prevođenje u maloletni).
+  const { ponisteno: ponistenoVerifikacija, poenVracenOdDrugih } =
+    await oboriVerifikacijeNaloga(userId);
 
   // Nadzori nad tuđim verifikacijama koje ovaj nalog nije dodirivao kao strana
   // (veze su ostale, otpada samo zapis nadzora).
@@ -412,7 +322,7 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
     poenVracenProtokolu: balans,
     poenVracenOdDrugih,
     zrnaOtpisana,
-    ponistenoVerifikacija: vezeKaoVerifikator.length + vezeKaoVerifikovani.length,
+    ponistenoVerifikacija,
     obrisanoOglasa,
     obrisanoZapisa,
   };
