@@ -99,9 +99,43 @@ export default function RegistracijaPage() {
   return (
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
-        <div className="mb-7">
-          <h1 className="text-xl font-bold text-kolo-text">{t("naslov")}</h1>
-          <p className="mt-1 text-sm text-kolo-muted">{t("podnaslov")}</p>
+        <h1 className="mb-5 text-xl font-bold text-kolo-text">{t("naslov")}</h1>
+
+        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
+            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
+            a ne svoj, i ne traži datum rođenja.
+
+            Stoji PRE obrasca i istaknuto je namerno: ovo nije „još jedan link"
+            nego skretnica. Dete koje ga ne primeti prođe kroz punoletni obrazac
+            i dobije nalog bez roditeljske veze, bez pristanka i van režima iz
+            Pravilnika o učešću dece — a to se posle ne ispravlja samo od sebe. */}
+        {MODUL_DECA_AKTIVAN && (
+          <Link
+            href="/registracija/dete"
+            className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-kolo-green-500 bg-kolo-green-100 px-4 py-3 transition-colors hover:bg-white"
+          >
+            <span className="text-sm text-kolo-text">{t("dete_pitanje")}</span>
+            <span className="shrink-0 text-sm font-semibold text-kolo-green-700">{t("dete_link")} →</span>
+          </Link>
+        )}
+
+        {/* Izbor načina pristupanja stoji PRE obrasca: Google preskače ceo
+            obrazac (vodi na /oauth/dovrsi), pa dugme između polja preseca
+            unos i redosled tabulatora. */}
+        <button
+          type="button"
+          onClick={() => signIn("google", { callbackUrl: "/oauth/dovrsi" })}
+          className="w-full flex items-center justify-center gap-3 py-2.5 rounded-xl border border-kolo-border text-sm font-medium text-kolo-text hover:bg-kolo-bg transition-colors"
+        >
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+          {t("dugme_google")}
+        </button>
+
+        <div className="relative flex items-center justify-center my-5">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-kolo-border" />
+          </div>
+          <span className="relative bg-white px-3 text-xs text-kolo-muted">{t("ili")}</span>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
@@ -110,7 +144,7 @@ export default function RegistracijaPage() {
             <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("email")} *</label>
             <input type="email" autoComplete="email" value={form.email} onChange={(e) => set("email", e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-              placeholder="vas@email.com" suppressHydrationWarning />
+              placeholder={t("placeholder_email")} suppressHydrationWarning />
           </div>
 
           {/* Pseudonim */}
@@ -131,7 +165,6 @@ export default function RegistracijaPage() {
             {pseudonimStatus === "zauzet" && (
               <p className="mt-1 text-xs text-red-500">{pseudonimGreska || t("pseudonim_zauzet")}</p>
             )}
-            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">{t("pseudonim_slobodan_opis")}</p>}
           </div>
 
           {/* Lozinka */}
@@ -194,41 +227,10 @@ export default function RegistracijaPage() {
           </button>
         </form>
 
-        <div className="mt-5">
-          <div className="relative flex items-center justify-center mb-4">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-kolo-border" />
-            </div>
-            <span className="relative bg-white px-3 text-xs text-kolo-muted">ili se registruj sa</span>
-          </div>
-          <div className="space-y-2">
-            <button
-              type="button"
-              onClick={() => signIn("google", { callbackUrl: "/oauth/dovrsi" })}
-              className="w-full flex items-center justify-center gap-3 py-2.5 rounded-xl border border-kolo-border text-sm font-medium text-kolo-text hover:bg-kolo-bg transition-colors"
-            >
-              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.34-8.16 2.34-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-              Registruj se sa Google
-            </button>
-          </div>
-        </div>
-
         <p className="mt-5 text-center text-sm text-kolo-muted">
           {t("vec_imate_nalog")}{" "}
           <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">{t("prijavite_se")}</Link>
         </p>
-
-        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
-            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
-            a ne svoj, i ne traži datum rođenja. */}
-        {MODUL_DECA_AKTIVAN && (
-          <p className="mt-2 text-center text-sm text-kolo-muted">
-            {t("dete_pitanje")}{" "}
-            <Link href="/registracija/dete" className="font-medium text-kolo-green-700 hover:underline">
-              {t("dete_link")}
-            </Link>
-          </p>
-        )}
       </div>
     </div>
   );
