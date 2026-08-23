@@ -3215,10 +3215,10 @@
     "kol_dece": "Children",
     "kol_udeo": "Share",
     "bez_broja_ucenika": "The number of enrolled pupils is not known.",
-    "napomena": "Only children with at least one parent who is a full member are counted.",
+    "napomena": "The list shows schools with at least one participating child. Only children with at least one parent who is a full member are counted.",
     "spisak_prazan": "The list of schools has not been entered yet.",
     "greska_ucitavanje": "Loading failed.",
-    "nema_skola": "No schools.",
+    "nema_skola": "No school has a participating child yet.",
     "nazad": "All schools",
     "mesto_po_broju": "{mesto}. by number of children",
     "mesto_po_udelu": "{mesto}. by participation",
@@ -3239,6 +3239,7 @@
     "kartica_naslov": "Your school",
     "kartica_bez_skole": "You have not chosen a school. Choose it and see where you stand in Serbia.",
     "kartica_dugme": "Choose school",
+    "kartica_nije_na_listi": "Your school is not on the list yet — it joins with its first participating child.",
     "kartica_ti": "You are {mesto}. in your school"
   },
   "emailDeteta": {

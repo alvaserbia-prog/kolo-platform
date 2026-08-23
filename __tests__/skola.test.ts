@@ -4,6 +4,7 @@ import {
   pozicijaPoBroju,
   rangirajPoBroju,
   rangirajPoProcentu,
+  samoSaDecom,
   sledecaPromenaSkole,
   smePromenitiSkolu,
   udeoUkljucenosti,
@@ -50,11 +51,33 @@ describe("poredak po broju", () => {
     expect(p.map((r) => r.naziv)).toEqual(["Branko", "Vuk"]);
   });
 
-  it("škola sa nula dece ostaje na listi", () => {
-    // Škola u kojoj dvadesetoro dece čeka roditelje mora da vidi svoju nulu —
-    // to je baš poruka koju dete treba da odnese kući.
+  it("ne izbacuje nulu — filtriranje nije posao poretka", () => {
+    // Škole bez ijednog deteta sklanja `samoSaDecom`, i to na jednom mestu
+    // (`redoviSkola`). Da poredak i sam filtrira, imali bismo dva pravila o istoj
+    // stvari i jedno bi pre ili kasnije zaostalo.
     const p = rangirajPoBroju([red("a", 0, 100), red("b", 2, 100)]);
     expect(p.map((r) => r.sifra)).toEqual(["b", "a"]);
+  });
+});
+
+describe("samo škole sa decom", () => {
+  it("na listu ulazi samo škola sa bar jednim uključenim detetom", () => {
+    // Odluka vlasnika (2026-08-23) i obrt ranijeg pravila: lista pokazuje ko
+    // UČESTVUJE. Ceo šifarnik od blizu dve hiljade škola značio je hiljadu i po
+    // nula iza prvih nekoliko redova.
+    const p = samoSaDecom([red("a", 0, 100), red("b", 1, 100), red("c", 5, 100)]);
+    expect(p.map((r) => r.sifra)).toEqual(["b", "c"]);
+  });
+
+  it("ne dira redosled ni sadržaj redova koji prolaze", () => {
+    const ulaz = [red("b", 1, 100), red("a", 3, 100)];
+    expect(samoSaDecom(ulaz)).toEqual(ulaz);
+  });
+
+  it("prazna lista kad nijedna škola nema dete", () => {
+    // Ekran tada prikazuje `nema_skola` — stanje pre prvog uključenog deteta,
+    // ne kvar.
+    expect(samoSaDecom([red("a", 0, 100), red("b", 0, null)])).toEqual([]);
   });
 });
 
