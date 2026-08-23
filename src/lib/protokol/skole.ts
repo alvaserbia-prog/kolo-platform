@@ -25,6 +25,7 @@ import {
   pozicijaPoBroju,
   rangirajPoBroju,
   rangirajPoProcentu,
+  samoSaDecom,
   smePromenitiSkolu,
   skolePostoje,
   PORUKA_SKOLA_SA_SPISKA,
@@ -39,6 +40,7 @@ export {
   razresiSkolu,
   rangirajPoBroju,
   rangirajPoProcentu,
+  samoSaDecom,
   smePromenitiSkolu,
   skolePostoje,
   ROK_PROMENE_SKOLE_DANA,
@@ -100,19 +102,27 @@ async function brojDecePoSkoli(): Promise<Map<string, number>> {
 }
 
 /**
- * Redovi ranglista za jedan tip škole.
+ * Redovi ranglista za jedan tip škole — SAMO škole sa bar jednim uključenim detetom.
  *
- * 🔴 Škola sa NULA aktivne dece se i dalje prikazuje. To nije previd: škola u kojoj
- * dvadesetoro dece čeka roditelje mora da vidi svoju nulu — to je baš poruka koju
- * dete treba da odnese kući. Prikaz uz brojku nosi objašnjenje da se broje samo
- * deca čiji je roditelj redovan član, inače nula izgleda kao kvar.
+ * 🔴 Odluka vlasnika (2026-08-23) i obrt ranijeg pravila: do ove izmene je lista
+ * nosila ceo šifarnik, pa je iza prvih nekoliko redova išlo hiljadu i po nula.
+ * Obrazloženje i šta se time gubi — vidi `samoSaDecom` u `skola.ts`.
+ *
+ * Filter je JEDAN, ovde, jer odavde čitaju sve tri strane (obe nacionalne liste,
+ * stranica jedne škole i kartica na dečjoj početnoj) — inače bi „ukupno škola" na
+ * jednom ekranu značilo nešto drugo nego na drugom.
+ *
+ * Prikaz uz brojku i dalje nosi objašnjenje da se broje samo deca čiji je roditelj
+ * redovan član, inače mali broj izgleda kao kvar.
  */
 export async function redoviSkola(tip: TipSkole): Promise<RedSkole[]> {
   const brojevi = await brojDecePoSkoli();
-  return SKOLE.filter((s) => s.tip === tip).map((s) => ({
-    ...s,
-    dece: brojevi.get(s.sifra) ?? 0,
-  }));
+  return samoSaDecom(
+    SKOLE.filter((s) => s.tip === tip).map((s) => ({
+      ...s,
+      dece: brojevi.get(s.sifra) ?? 0,
+    }))
+  );
 }
 
 /** Obe nacionalne liste za jedan tip škole, već poređane. */
@@ -250,7 +260,10 @@ export async function karticaSkoleZaDete(deteId: string): Promise<KarticaSkole |
     naziv: skola.naziv,
     mesto: skola.mesto,
     brojDece: deca.length,
-    mestoSkole: poz?.mesto ?? 0,
+    // 🔴 `null`, ne nula: na listu ulaze samo škole sa bar jednim uključenim
+    // detetom, pa dete koje još čeka roditelja gleda svoju školu van poretka.
+    // Nula bi se na ekranu pročitala kao „nulto mesto".
+    mestoSkole: poz?.mesto ?? null,
     ukupnoSkola: poz?.ukupnoSkola ?? poredak.length,
     doSledecegMesta: poz?.doSledecegMesta ?? null,
     // Dete koje još čeka roditelja se ne broji, pa ga nema ni na spisku svoje
