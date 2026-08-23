@@ -164,8 +164,8 @@
   },
   "registracija": {
     "naslov": "Регистрация",
-    "podnaslov": "Присоединяйся к сообществу КОЛО",
     "email": "Email",
+    "placeholder_email": "tvoy@email.com",
     "pseudonim": "Псевдоним",
     "lozinka": "Пароль",
     "mesto": "Населённый пункт",

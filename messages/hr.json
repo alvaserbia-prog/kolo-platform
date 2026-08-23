@@ -164,8 +164,8 @@
   },
   "registracija": {
     "naslov": "Registracija",
-    "podnaslov": "Pridruži se KOLO zajednici",
     "email": "E-mail",
+    "placeholder_email": "tvoj@email.com",
     "pseudonim": "Pseudonim",
     "lozinka": "Lozinka",
     "mesto": "Mjesto",

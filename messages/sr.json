@@ -164,8 +164,8 @@
   },
   "registracija": {
     "naslov": "Pridruživanje",
-    "podnaslov": "Traje oko minut. Biraš nadimak umesto imena, dokumenti nisu potrebni.",
     "email": "Email",
+    "placeholder_email": "tvoj@email.com",
     "pseudonim": "Pseudonim",
     "lozinka": "Lozinka",
     "mesto": "Mesto",

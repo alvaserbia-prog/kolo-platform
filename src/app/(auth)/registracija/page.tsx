@@ -99,10 +99,7 @@ export default function RegistracijaPage() {
   return (
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
-        <div className="mb-7">
-          <h1 className="text-xl font-bold text-kolo-text">{t("naslov")}</h1>
-          <p className="mt-1 text-sm text-kolo-muted">{t("podnaslov")}</p>
-        </div>
+        <h1 className="mb-7 text-xl font-bold text-kolo-text">{t("naslov")}</h1>
 
         <form onSubmit={handleSubmit} noValidate className="space-y-4" suppressHydrationWarning>
           {/* Email */}
@@ -110,7 +107,7 @@ export default function RegistracijaPage() {
             <label className="block text-sm font-medium text-kolo-text mb-1.5">{t("email")} *</label>
             <input type="email" autoComplete="email" value={form.email} onChange={(e) => set("email", e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors bg-kolo-bg"
-              placeholder="vas@email.com" suppressHydrationWarning />
+              placeholder={t("placeholder_email")} suppressHydrationWarning />
           </div>
 
           {/* Pseudonim */}

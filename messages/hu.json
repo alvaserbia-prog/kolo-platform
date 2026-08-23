@@ -157,8 +157,8 @@
   },
   "registracija": {
     "naslov": "Regisztráció",
-    "podnaslov": "Csatlakozz a KOLO közösséghez",
     "email": "Email",
+    "placeholder_email": "te@email.com",
     "pseudonim": "Álnév",
     "lozinka": "Jelszó",
     "mesto": "Hely",
