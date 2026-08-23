@@ -1715,6 +1715,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
   const [filter, setFilter] = useState("");
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [izmeniKorisnik, setIzmeniKorisnik] = useState<KorisnikInfo | null>(null);
+  const [uDete, setUDete] = useState<KorisnikInfo | null>(null);
 
   const q = filter.toLowerCase().trim();
   const filtered = useMemo(
@@ -1770,45 +1771,6 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
           poen: (d.poenVracenProtokolu ?? 0).toLocaleString(intlTag(locale)),
           potvrde: d.ponistenoVerifikacija ?? 0,
           oglasi: d.obrisanoOglasa ?? 0,
-        }),
-      );
-      onDone();
-    } else {
-      alert(d.error ?? t("greska_generalna"));
-    }
-  }
-
-  // Prevođenje punoletnog naloga u nalog maloletnog korisnika, uz određivanje
-  // roditelja — ispravka za dete koje je promašilo dečji ulaz i registrovalo se
-  // kroz punoletni obrazac. Nepovratno i pogađa druge naloge (padaju sve potvrde
-  // koje nalog dodiruje), pa se pseudonim otkuca kao i kod reseta.
-  async function prevediUDete(u: KorisnikInfo) {
-    const upisano = prompt(t("korisnici_u_dete_prompt", { pseudonim: u.pseudonim }));
-    if (upisano === null) return;
-    const roditelj = prompt(t("korisnici_u_dete_roditelj_prompt"));
-    if (roditelj === null) return;
-    const datumRodjenja = prompt(t("korisnici_u_dete_datum_prompt"));
-    if (datumRodjenja === null) return;
-    if (!confirm(t("korisnici_u_dete_confirm", { pseudonim: u.pseudonim }))) return;
-
-    setLoadingId(u.id);
-    const res = await fetch(`/api/admin/korisnici/${u.id}/u-dete`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pseudonim: upisano, roditelj, datumRodjenja }),
-    });
-    const d = await res.json().catch(() => ({}));
-    setLoadingId(null);
-    if (res.ok) {
-      alert(
-        t("korisnici_u_dete_gotovo", {
-          pseudonim: d.pseudonim ?? u.pseudonim,
-          roditelj: d.roditeljPseudonim ?? "",
-          godine: d.godine ?? 0,
-          poen: (d.otpisanoNalogu ?? 0).toLocaleString(intlTag(locale)),
-          potvrde: d.ponistenoPotvrda ?? 0,
-          minus: d.brojUMinusu ?? 0,
-          izjasnjenja: d.brojPotvrdjivaca ?? 0,
         }),
       );
       onDone();
@@ -1924,7 +1886,7 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                         `punoletstvo.ts` na sam dan. */}
                     {viewerJeSuperadmin && u.id !== viewerId && u.admin === "NONE"
                       && u.status !== "EXCLUDED" && !u.maloletan && (
-                      <button onClick={() => prevediUDete(u)} disabled={loadingId === u.id}
+                      <button onClick={() => setUDete(u)} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
                         {t("korisnici_u_dete")}
                       </button>
@@ -1963,6 +1925,190 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
           onDone={() => { setIzmeniKorisnik(null); onDone(); }}
         />
       )}
+
+      {uDete && (
+        <PrevodUDeteForma
+          korisnik={uDete}
+          onClose={() => setUDete(null)}
+          onDone={() => { setUDete(null); onDone(); }}
+        />
+      )}
+    </div>
+  );
+}
+
+/**
+ * Prevođenje punoletnog naloga u nalog maloletnog korisnika, uz određivanje
+ * roditelja (`POST /api/admin/korisnici/[id]/u-dete`).
+ *
+ * Roditelj se BIRA IZ PRETRAGE, ne kuca. Kucanje je tražilo tačno poklapanje sa
+ * aktuelnim pseudonimom, pa nalog čiji je pseudonim u međuvremenu promenjen nije
+ * mogao da se nađe po imenu koga se čovek seća. Admin pretraga gleda i napuštena
+ * imena i vraća i sam nalog onoga ko pretražuje — roditelj svog deteta je čest
+ * slučaj, a opšta pretraga članova sebe namerno izostavlja.
+ *
+ * Datum rođenja ide kroz `type="date"` (kalendar), ne kroz otkucan tekst.
+ */
+function PrevodUDeteForma({ korisnik, onClose, onDone }: {
+  korisnik: KorisnikInfo;
+  onClose: () => void;
+  onDone: () => void;
+}) {
+  const locale = useLocale();
+  const t = useTranslations("admin");
+  const [upit, setUpit] = useState("");
+  const [rezultati, setRezultati] = useState<{ id: string; pseudonim: string; verified: boolean; indeksStvarnosti: number; staroIme: string | null }[]>([]);
+  const [roditelj, setRoditelj] = useState<{ id: string; pseudonim: string } | null>(null);
+  const [datumRodjenja, setDatumRodjenja] = useState("");
+  const [razumem, setRazumem] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [greska, setGreska] = useState("");
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const q = upit.trim();
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (q.length < 2) { setRezultati([]); return; }
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/admin/korisnici/pretraga?q=${encodeURIComponent(q)}`);
+        setRezultati(res.ok ? await res.json() : []);
+      } catch {
+        setRezultati([]);
+      }
+    }, 250);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [upit]);
+
+  // Granice kalendara su granice uzrasta iz čl. 2 — datum van njih se ni ne nudi,
+  // umesto da ga server odbija posle unosa.
+  const danas = new Date();
+  const najranije = new Date(danas.getFullYear() - 18, danas.getMonth(), danas.getDate() + 1);
+  const najkasnije = new Date(danas.getFullYear() - 7, danas.getMonth(), danas.getDate());
+  const isoDan = (d: Date) => d.toISOString().slice(0, 10);
+
+  const moze = !loading && roditelj !== null && datumRodjenja !== "" && razumem;
+
+  async function posalji() {
+    if (!roditelj) return;
+    setGreska("");
+    setLoading(true);
+    const res = await fetch(`/api/admin/korisnici/${korisnik.id}/u-dete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pseudonim: korisnik.pseudonim, roditeljId: roditelj.id, datumRodjenja }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setLoading(false);
+    if (!res.ok) { setGreska(d.error ?? t("greska_generalna")); return; }
+    alert(
+      t("korisnici_u_dete_gotovo", {
+        pseudonim: d.pseudonim ?? korisnik.pseudonim,
+        roditelj: d.roditeljPseudonim ?? roditelj.pseudonim,
+        godine: d.godine ?? 0,
+        poen: (d.otpisanoNalogu ?? 0).toLocaleString(intlTag(locale)),
+        potvrde: d.ponistenoPotvrda ?? 0,
+        minus: d.brojUMinusu ?? 0,
+        izjasnjenja: d.brojPotvrdjivaca ?? 0,
+      }),
+    );
+    onDone();
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 bg-black/40">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-4 my-8">
+        <div>
+          <h3 className="text-base font-semibold text-kolo-text">{t("korisnici_u_dete_naslov")}</h3>
+          <p className="text-sm text-kolo-muted mt-0.5"><Pseudonim>{korisnik.pseudonim}</Pseudonim></p>
+        </div>
+
+        <p className="text-xs text-kolo-muted bg-kolo-bg rounded-lg px-3 py-2 whitespace-pre-line">
+          {t("korisnici_u_dete_posledice")}
+        </p>
+
+        <div>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("korisnici_u_dete_roditelj_label")}</label>
+          {roditelj ? (
+            <div className="flex items-center justify-between gap-2 rounded-xl border border-kolo-green-500 bg-kolo-green-100 px-4 py-3">
+              <span className="text-sm font-medium text-kolo-text truncate"><Pseudonim>{roditelj.pseudonim}</Pseudonim></span>
+              <button onClick={() => { setRoditelj(null); setUpit(""); }}
+                className="shrink-0 text-xs font-semibold text-kolo-green-700 hover:underline">
+                {t("korisnici_u_dete_promeni")}
+              </button>
+            </div>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={upit}
+                onChange={(e) => setUpit(e.target.value)}
+                placeholder={t("korisnici_u_dete_roditelj_placeholder")}
+                className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+              />
+              {rezultati.length > 0 && (
+                <ul className="mt-1 max-h-44 overflow-y-auto rounded-xl border border-kolo-border divide-y divide-kolo-border">
+                  {rezultati.map((r) => (
+                    <li key={r.id}>
+                      <button
+                        onClick={() => setRoditelj({ id: r.id, pseudonim: r.pseudonim })}
+                        className="w-full px-3 py-2 text-left hover:bg-kolo-bg transition-colors"
+                      >
+                        <span className="text-sm text-kolo-text"><Pseudonim>{r.pseudonim}</Pseudonim></span>
+                        {r.staroIme && (
+                          <span className="block text-xs text-kolo-muted">
+                            {t("korisnici_u_dete_ranije", { ime: r.staroIme })}
+                          </span>
+                        )}
+                        <span className="block text-xs text-kolo-muted">
+                          {t("korisnici_u_dete_indeks", { indeks: r.indeksStvarnosti })}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {upit.trim().length >= 2 && rezultati.length === 0 && (
+                <p className="mt-1 text-xs text-kolo-muted">{t("korisnici_u_dete_nema_pogodaka")}</p>
+              )}
+            </>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("korisnici_u_dete_datum_label")}</label>
+          <input
+            type="date"
+            value={datumRodjenja}
+            min={isoDan(najranije)}
+            max={isoDan(najkasnije)}
+            onChange={(e) => setDatumRodjenja(e.target.value)}
+            className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700 transition-colors"
+          />
+          <p className="mt-1 text-xs text-kolo-muted">{t("korisnici_u_dete_datum_opis")}</p>
+        </div>
+
+        <label className="flex items-start gap-2.5 cursor-pointer">
+          <input type="checkbox" checked={razumem} onChange={(e) => setRazumem(e.target.checked)}
+            className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
+          <span className="text-xs text-kolo-muted">{t("korisnici_u_dete_razumem")}</span>
+        </label>
+
+        {greska && (
+          <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>
+        )}
+
+        <div className="flex gap-3 pt-1">
+          <button onClick={onClose}
+            className="flex-1 py-2.5 rounded-xl border border-kolo-border text-kolo-muted text-sm font-medium hover:bg-kolo-bg transition-colors">
+            {t("izmeni_otkazi")}
+          </button>
+          <button onClick={posalji} disabled={!moze}
+            className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-60">
+            {loading ? t("korisnici_u_dete_radim") : t("korisnici_u_dete_dugme")}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 import { prisma } from "@/lib/prisma";
-import { gdePseudonim } from "@/lib/pseudonim";
+import { razresiKorisnikaIzAdrese } from "@/lib/pseudonim";
 import { parsirajDatumRodjenja } from "@/lib/protokol/deca-poziv";
 import { PrevodGreska, prevediUMaloletni } from "@/lib/protokol/prevod-u-maloletni";
 
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   const { id } = await params;
   if (id === session.user.id) return await greska("Sopstveni nalog se ne prevodi.", 400);
 
-  let body: { pseudonim?: unknown; roditelj?: unknown; datumRodjenja?: unknown };
+  let body: { pseudonim?: unknown; roditeljId?: unknown; roditelj?: unknown; datumRodjenja?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -45,22 +45,35 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   if (typeof potvrda !== "string" || !potvrda.trim()) {
     return await greska("Nedostaje potvrda pseudonima.", 400);
   }
-  const roditeljPseudonim = body.roditelj;
-  if (typeof roditeljPseudonim !== "string" || !roditeljPseudonim.trim()) {
-    return await greska("Nedostaje pseudonim roditelja.", 400);
-  }
 
   const datumRodjenja = parsirajDatumRodjenja(body.datumRodjenja);
   if (!datumRodjenja) return await greska("Datum rođenja mora biti u obliku GGGG-MM-DD.", 400);
 
   const meta = await prisma.user.findUnique({ where: { id }, select: { pseudonim: true } });
   if (!meta) return await greska("Korisnik nije pronađen.", 404);
+  // Ekran šalje pseudonim koji je prikazao uz nalog; neslaganje znači da je spisak
+  // bio zastareo i da bi radnja pogodila drugog čoveka nego što piše na ekranu.
   if (potvrda.trim().toLowerCase() !== meta.pseudonim.toLowerCase()) {
-    return await greska("Otkucani pseudonim se ne poklapa sa nalogom.", 400);
+    return await greska("Prikazani pseudonim se ne poklapa sa nalogom. Osveži spisak.", 400);
   }
 
-  const roditelj = await prisma.user.findFirst({
-    where: gdePseudonim(roditeljPseudonim.trim()),
+  // Roditelj se bira iz pretrage, pa u pravilu stiže po ID-u. Pseudonim ostaje kao
+  // rezerva; razrešava se i ako je NAPUŠTEN, jer se ime u međuvremenu moglo
+  // promeniti a čovek pamti staro.
+  let roditeljId: string | null =
+    typeof body.roditeljId === "string" && body.roditeljId.trim() ? body.roditeljId.trim() : null;
+
+  if (!roditeljId) {
+    const roditeljPseudonim = body.roditelj;
+    if (typeof roditeljPseudonim !== "string" || !roditeljPseudonim.trim()) {
+      return await greska("Nije izabran roditelj.", 400);
+    }
+    roditeljId = await razresiKorisnikaIzAdrese(roditeljPseudonim.trim());
+  }
+  if (!roditeljId) return await greska("Nalog roditelja nije pronađen.", 404);
+
+  const roditelj = await prisma.user.findUnique({
+    where: { id: roditeljId },
     select: { id: true },
   });
   if (!roditelj) return await greska("Nalog roditelja nije pronađen.", 404);
