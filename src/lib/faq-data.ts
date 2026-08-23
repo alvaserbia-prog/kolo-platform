@@ -374,7 +374,7 @@ Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i
         pitanje: `Mogu li se maloletnici registrovati?`,
         odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Nalog maloletnog lica uvek stoji uz roditelja: ili ga roditelj otvara iz svog naloga, ili ga dete otvara i upisuje roditeljev email, pa roditelj nalog preuzima.
 
-Dete mlađe od sedam godina nalog nema. Ako se ispostavi da je punoletan nalog otvorilo maloletno lice, nalog se briše.
+Dete mlađe od sedam godina nalog nema. Ako je dete greškom prošlo kroz punoletni obrazac, nalog se ne briše — Fondacija ga na zahtev prevodi u dečji i vezuje za roditelja.
 
 Sve ostalo o dečjim nalozima stoji u odeljku Deca i roditelji.`,
       },
@@ -392,6 +392,17 @@ Link iz poruke važi sedam dana. Ako nalog niko ne preuzme u roku od četrnaest 
 Datum rođenja upisuješ ti, prilikom preuzimanja. Proveri ga pre potvrde, jer se posle upisa ne menja, a od njega zavisi kada nalog prelazi u punoletni.
 
 Dok čeka preuzimanje, dete ima profil i može da sklapa prijateljstva, ali nema Pričaonicu, poruke ni oglase. Posle preuzimanja sve to radi.`,
+      },
+      {
+        id: 101,
+        pitanje: `Dete se registrovalo kao punoletno — može li to da se ispravi?`,
+        odgovor: `Može. Nalog se ne briše: Fondacija ga na zahtev prevodi u dečji nalog i vezuje za tebe kao roditelja. Piši nam na kontakt@ekolo.rs sa adrese svog naloga i navedi pseudonim deteta.
+
+Nalog time dobija sve zaštite dečjeg režima — zatvoren profil, tvoj prekidač za komunikaciju i razmenu sa punoletnim članovima, prijateljstva i dečju Pričaonicu. Gubi ono što po tom režimu detetu ne pripada: potvrde koje je primio i dao padaju, ZRNO se otpisuje, a POEN koji mu je Protokol upisao kroz kanale (potvrde, doprinos sadržaju i razmeni, donacije, programi) se poništava. POEN koji su mu ljudi prepisali ostaje — prepis ne stvara nove POENE nego seli zapis, a dete ga sme imati. Oglasi, poruke i istorija ostaju.
+
+Zapis pri tom sme da ode u minus, i to sa obe strane: i detetu koje je POEN već potrošilo, i onome ko ga je potvrdio pa mu se ta potvrda poništava. Minus nije dug i ne naplaćuje se — prvi POEN koji pristigne ga popunjava.
+
+Radnja je nepovratna. U punoletni nalog prelazi sam, na dan osamnaestog rođendana, po datumu rođenja koji tada upišeš.`,
       },
       {
         id: 86,

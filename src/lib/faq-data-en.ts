@@ -364,7 +364,7 @@ The Rulebook, the Terms of Use and the other binding acts were adopted in Serbia
         pitanje: `Can minors register?`,
         odgovor: `They can, from the age of seven, but not entirely on their own. A minor's account always stands alongside a parent: either the parent opens it from their own account, or the child opens it and enters the parent's email, and the parent then takes the account over.
 
-A child under seven has no account. If it turns out that an adult account was opened by a minor, the account is deleted.
+A child under seven has no account. If a child went through the adult form by mistake, the account is not deleted — on request the Foundation converts it into a child account and links it to a parent.
 
 Everything else about children's accounts is in the section Children and parents.`,
       },
@@ -382,6 +382,17 @@ The link in the message is valid for seven days. If no one takes the account ove
 You enter the date of birth, at the moment of taking over. Check it before confirming, because it cannot be changed afterwards, and it determines when the account becomes an adult one.
 
 While it waits to be taken over, the child has a profile and can make friendships, but has no Chat room, no messages and no listings. After the takeover all of that works.`,
+      },
+      {
+        id: 101,
+        pitanje: `A child registered as an adult — can that be corrected?`,
+        odgovor: `It can. The account is not deleted: on request the Foundation converts it into a child account and links it to you as the parent. Write to kontakt@ekolo.rs from the address on your account and give the child's pseudonym.
+
+The account then gains every protection of the child regime — a closed profile, your switch for communication and exchange with adult members, friendships and the children's chat room. It loses what does not belong to a child under that regime: the confirmations it received and gave are annulled, any ZRNO is written off, and the POEN the Protocol recorded to it through the channels (confirmations, contribution to content and to exchange, donations, programmes) is annulled. POEN that people re-registered to it stays — a re-registration creates no new POEN, it moves an existing record, and a child may hold it. Listings, messages and history stay.
+
+The record may go negative, on both sides: for the child that has already spent the POEN, and for whoever confirmed the child and now has that confirmation annulled. A negative record is not a debt and is never collected — the first POEN that arrives fills it.
+
+The step is irreversible. The account becomes an adult account on its own, on the day of the eighteenth birthday, from the date of birth you enter at that point.`,
       },
       {
         id: 86,
