@@ -129,12 +129,9 @@ export default async function ONamaPage() {
             <div className="inline-block bg-white/10 text-white/80 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 tracking-wide uppercase">
               {t("hero_tag")}
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-2" style={{ letterSpacing: "-0.02em" }}>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-3" style={{ letterSpacing: "-0.02em" }}>
               {t("hero_naslov")}
             </h1>
-            <p className="text-white font-semibold text-lg md:text-xl mb-3">
-              {t("hero_podnaslov")}
-            </p>
             <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-[520px]">
               {t("hero_opis")}
             </p>
