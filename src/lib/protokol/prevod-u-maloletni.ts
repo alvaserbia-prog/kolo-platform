@@ -77,7 +77,9 @@
  *
  * ─── Ograničenja ────────────────────────────────────────────────────────────
  *
- * Samo SUPERADMIN, uz otkucan pseudonim (ruta `POST /api/admin/korisnici/[id]/u-dete`).
+ * Samo SUPERADMIN (ruta `POST /api/admin/korisnici/[id]/u-dete`). Roditelj se bira
+ * iz pretrage, ne kuca — tačno poklapanje po pseudonimu nije nalazilo nalog čije je
+ * ime u međuvremenu promenjeno.
  * Radnja je nepovratna: povratak u punoletni nalog vodi isključivo `punoletstvo.ts`,
  * na dan punoletstva.
  */

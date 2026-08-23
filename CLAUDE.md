@@ -549,8 +549,21 @@ potvrda, koji je maloletnom korisniku zabranjen (čl. 15). Zaštita napravljena 
 za decu ne pokriva dete koje je ušlo na pogrešna vrata.
 
 **Admin → Korisnici → „Prevedi u dete"** (`POST /api/admin/korisnici/[id]/u-dete`).
-Samo **SUPERADMIN**, uz **otkucan pseudonim** naloga, pseudonim roditelja i datum
-rođenja. Nudi se samo punoletnom, aktivnom nalogu bez admin role.
+Samo **SUPERADMIN**. Nudi se samo punoletnom, aktivnom nalogu bez admin role.
+
+**Obrazac, ne kucanje** (izmena 2026-08-23, isti dan): roditelj se bira iz pretrage
+(`GET /api/admin/korisnici/pretraga`), datum rođenja kroz kalendar (`type="date"`,
+granice iz čl. 2), a potvrda je čekiranje da je radnja nepovratna. Ranije su bila tri
+`prompt`-a. 🔴 **Kucanje je bilo i funkcionalna greška, ne samo nezgodno:** roditelj se
+tražio kroz `gdePseudonim`, dakle TAČNIM poklapanjem sa aktuelnim pseudonimom — pa se
+nalog čije je ime u međuvremenu promenjeno nije mogao naći po imenu koga se čovek seća.
+Admin pretraga zato gleda i **napuštena imena** (`PseudonimIstorija`, prikazuje
+„ranije: X") i vraća i **sam nalog onoga ko pretražuje** — roditelj svog deteta je čest
+slučaj, a opšta `/api/korisnici/pretraga` sebe namerno izostavlja (i traži `verified`).
+Ruta i dalje prima pseudonim kao rezervu, ali kroz `razresiKorisnikaIzAdrese`, koji
+razrešava i napušteno ime. Potvrda pseudonima naloga OSTAJE, samo je više ne kuca čovek
+nego je šalje ekran — hvata zastareo spisak, tj. da radnja pogodi drugog čoveka nego što
+piše na ekranu.
 
 **Smer je suprotan od punoletstva**, pa radi ono što bi `punoletstvo.ts` poništilo:
 1. **Nalog izlazi iz lanca potvrda** — padaju sve veze koje dodiruje, u oba smera
