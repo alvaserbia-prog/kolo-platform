@@ -1916,12 +1916,12 @@
     "ekran1_naslov": "Your account is open",
     "ekran1_p1": "In KOLO people exchange work, goods and knowledge without money. What you give the community is recorded in POEN. POEN is not money: it cannot be bought, it cannot be exchanged for dinars, and outside the system it means nothing.",
     "ekran1_p2": "POEN exists so that an exchange need not be simultaneous or mutual. You can help a neighbour today and find what you need from a third person a month later.",
-    "ekran2_oznaka": "First move",
+    "ekran2_oznaka": "Your offer",
     "ekran2_naslov": "Publish what you offer",
     "ekran2_p1": "Publish what you really have or know how to do. No attestation is needed for that, and you can have three active listings straight away. It does not have to be a trade or a profession: a lift into town, childcare, help in the garden, maths lessons, a bicycle repair, a surplus from the garden.",
     "ekran2_p2": "A listing needs a title, a description, at least one photograph, a category and a place. For the first listing in which you offer something, 1,000 POEN is recorded for you as soon as the Foundation reviews and approves it.",
     "ekran2_cta": "Publish an offer",
-    "ekran3_oznaka": "Second move",
+    "ekran3_oznaka": "Attestation",
     "ekran3_naslov": "Have someone attest to you",
     "ekran3_p1": "An attestation means that someone who knows you personally has stood behind the fact that you are a real person. It is the only check in KOLO. No documents or photographs are required.",
     "ekran3_p2": "The attestation records 1,000 POEN for you and 1,000 for them, and everything else opens up for you: messages, the Chatroom, contact with advertisers, listings in which you ask for something, and applying to programmes. From that moment you can also attest to people you know.",
@@ -1941,7 +1941,7 @@
     "dete1_p2": "In children’s KOLO, POEN is recorded for you for the friendships you make. POEN is not money and cannot be bought. With POEN you can get something from another child, and for what you give them you receive POEN.",
     "dete1_p3": "To become a member, your parent needs to take over the account. If you made the account yourself and entered their email, a message has gone to that address. If they cannot find it, or it never arrived, send them the six-digit code they enter together with your name.",
     "dete1_p4": "While the account waits for a parent, you can set up your profile and collect friends. As soon as your parent takes over the account, the Chatroom, listings and messages open up. Access to POEN comes once your parent also becomes a regular member of KOLO.",
-    "dete2_oznaka": "First move",
+    "dete2_oznaka": "Listing",
     "dete2_naslov": "Create a listing",
     "dete2_p1": "Create a listing for what you have or know how to do. Comics you have finished, a toy you no longer need, help with maths homework, drawing, walking a dog.",
     "dete2_p2": "A listing needs a title, a description, at least one picture, a category and a place. Other children in KOLO see your listings. Adults do not see them until your parent allows communication with them.",
@@ -1961,7 +1961,7 @@
     "dete4_p3": "You spend POEN by agreeing with another child and transferring it to them for something you need. You give the POEN, they give the thing or the help.",
     "dete4_cta_pijaca": "Open the Children’s Marketplace",
     "dete4_cta_profil": "My profile",
-    "ekran1_p3": "Two moves lead to full participation: publishing what you offer, and receiving an attestation from someone who knows you. Both are on the next two screens."
+    "ekran1_p3": "The next two screens explain what opens everything else for you: a listing in which you offer something, and an attestation from someone who knows you."
   },
   "politikaPrihvati": {
     "naslov": "The system has been upgraded — new acts",

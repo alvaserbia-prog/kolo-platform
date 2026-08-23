@@ -1909,12 +1909,12 @@
     "ekran1_naslov": "A fiókod meg van nyitva",
     "ekran1_p1": "A KOLO-ban az emberek pénz nélkül cserélnek munkát, javakat és tudást. Amit a közösségnek adsz, POEN-ben kerül bejegyzésre. A POEN nem pénz: nem lehet megvenni, nem váltható dinárra, és a rendszeren kívül semmit sem jelent.",
     "ekran1_p2": "A POEN azt szolgálja, hogy a csere ne kelljen egyidejű és kölcsönös legyen. Ma segíthetsz a szomszédnak, azt pedig, amire neked van szükséged, egy hónap múlva egy harmadik embernél találod meg.",
-    "ekran2_oznaka": "Első lépés",
+    "ekran2_oznaka": "A te ajánlatod",
     "ekran2_naslov": "Tedd közzé, mit kínálsz",
     "ekran2_p1": "Tedd közzé azt, amid valóban van, vagy amihez értesz. Ehhez egyetlen megerősítés sem kell, és rögtön lehet három aktív hirdetésed. Nem kell mesterségnek vagy szakmának lennie: fuvar a városba, gyermekfelügyelet, segítség a kertben, matematikaóra, kerékpárjavítás, felesleg a kertből.",
     "ekran2_p2": "A hirdetéshez cím, leírás, legalább egy fénykép, kategória és hely kell. Az első hirdetésért, amellyel felkínálsz valamit, 1.000 POEN kerül bejegyzésre, amint az Alapítvány átnézi és jóváhagyja.",
     "ekran2_cta": "Ajánlat közzététele",
-    "ekran3_oznaka": "Második lépés",
+    "ekran3_oznaka": "Megerősítés",
     "ekran3_naslov": "Erősítsen meg valaki",
     "ekran3_p1": "A megerősítés azt jelenti, hogy valaki, aki személyesen ismer, kiállt amellett, hogy valós személy vagy. Ez az egyetlen ellenőrzés a KOLO-ban. Iratokra és fényképekre nincs szükség.",
     "ekran3_p2": "A megerősítéssel neked is és neki is 1.000-1.000 POEN kerül bejegyzésre, neked pedig megnyílik minden más: üzenetek, a Beszélgető, kapcsolatfelvétel a hirdetőkkel, hirdetések, amelyekben keresel valamit, és a programokra való jelentkezés. Attól a pillanattól te is megerősíthetsz olyanokat, akiket ismersz.",
@@ -1934,7 +1934,7 @@
     "dete1_p2": "A gyermek-KOLO-ban a megkötött barátságokért kerül POEN a nevedre. A POEN nem pénz, és nem lehet megvenni. POEN-ért kaphatsz valamit egy másik gyerektől, azért pedig, amit te adsz neki, POEN-t kapsz.",
     "dete1_p3": "Ahhoz, hogy tag legyél, a szülődnek át kell vennie a fiókot. Ha magad hoztad létre a fiókot és megadtad az e-mail-címét, arra a címre üzenet ment. Ha nem találja, vagy az üzenet nem érkezett meg, küldd el neki a hatjegyű kódot, amelyet a nevedhez ír be.",
     "dete1_p4": "Amíg a fiók a szülőre vár, rendezheted a profilodat és gyűjthetsz barátokat. Amint a szülő átveszi a fiókot, megnyílik a Beszélgető, a hirdetések és az üzenetek. A POEN-hez akkor kapsz hozzáférést, amikor a szülő maga is a KOLO rendes tagja lesz.",
-    "dete2_oznaka": "Első lépés",
+    "dete2_oznaka": "Hirdetés",
     "dete2_naslov": "Készíts hirdetést",
     "dete2_p1": "Készíts hirdetést arról, amid van, vagy amihez értesz. Képregények, amelyeket kiolvastál, játék, amire már nincs szükséged, segítség a matekházihoz, rajzolás, kutyasétáltatás.",
     "dete2_p2": "A hirdetéshez cím, leírás, legalább egy kép, kategória és hely kell. A hirdetéseidet a KOLO-ban lévő többi gyerek látja. A felnőttek addig nem látják, amíg a szülőd nem engedélyezi a velük való kapcsolattartást.",
@@ -1954,7 +1954,7 @@
     "dete4_p3": "A POEN-t úgy költöd el, hogy megegyezel egy másik gyerekkel, és átírod neki azért, amire szükséged van. Te adod a POEN-t, ő adja a tárgyat vagy a segítséget.",
     "dete4_cta_pijaca": "Gyermekpiac megnyitása",
     "dete4_cta_profil": "A profilom",
-    "ekran1_p3": "A teljes részvételhez két lépés vezet: tedd közzé, mit kínálsz, és kapj megerősítést valakitől, aki ismer téged. Mindkettő a következő két képernyőn található."
+    "ekran1_p3": "A következő két képernyő azt magyarázza el, ami mindent mást megnyit neked: egy hirdetést, amelyben felkínálsz valamit, és egy megerősítést valakitől, aki ismer téged."
   },
   "politikaPrihvati": {
     "naslov": "A rendszer fejlődött — új szabályzatok",

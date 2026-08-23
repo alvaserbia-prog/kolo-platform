@@ -1916,12 +1916,12 @@
     "ekran1_naslov": "Račun ti je otvoren",
     "ekran1_p1": "U KOLU ljudi razmjenjuju rad, dobra i znanje bez novca. Ono što daš zajednici upisuje ti se u POENIMA. POEN nije novac: ne kupuje se, ne mijenja se za dinare i izvan sustava ne znači ništa.",
     "ekran1_p2": "POEN služi zato da razmjena ne mora biti istodobna ni uzajamna. Možeš danas pomoći susjedu, a ono što tebi treba naći kod trećeg čovjeka za mjesec dana.",
-    "ekran2_oznaka": "Prvi potez",
+    "ekran2_oznaka": "Tvoja ponuda",
     "ekran2_naslov": "Objavi što nudiš",
     "ekran2_p1": "Objavi ono što stvarno imaš ili znaš. Za to ti ne treba nijedna potvrda i možeš odmah imati tri aktivna oglasa. Ne mora biti obrt ni struka: prijevoz do grada, čuvanje djece, pomoć u vrtu, sati matematike, popravak bicikla, višak iz vrta.",
     "ekran2_p2": "Oglas mora imati naslov, opis, barem jednu fotografiju, kategoriju i mjesto. Za prvi oglas kojim nešto nudiš upisuje ti se 1.000 POENA, čim Zaklada pregleda i odobri oglas.",
     "ekran2_cta": "Objavi ponudu",
-    "ekran3_oznaka": "Drugi potez",
+    "ekran3_oznaka": "Potvrda",
     "ekran3_naslov": "Neka te netko potvrdi",
     "ekran3_p1": "Potvrda znači da je netko tko te osobno poznaje stao iza toga da si stvarna osoba. To je jedina provjera u KOLU. Nisu potrebni dokumenti ni fotografije.",
     "ekran3_p2": "Potvrdom se i tebi i njemu upisuje po 1.000 POENA, a tebi se otvara sve ostalo: poruke, Pričaonica, kontakt s oglašivačima, oglasi kojima nešto tražiš i prijava na programe. Od tog trenutka i ti možeš potvrđivati ljude koje poznaješ.",
@@ -1941,7 +1941,7 @@
     "dete1_p2": "U dječjem KOLU POENI ti se upisuju za sklopljena prijateljstva. POEN nije novac i ne može se kupiti. Za POENE možeš dobiti nešto od drugog djeteta, a za ono što ti daš njemu dobivaš POENE.",
     "dete1_p3": "Da postaneš član, tvoj roditelj treba preuzeti račun. Ako je račun napravljen bez njega i upisan njegov mail, na tu adresu mu je otišla poruka. Ako je ne može pronaći ili poruka nije stigla, pošalji mu šesteroznamenkasti kod koji on unosi uz tvoje ime.",
     "dete1_p4": "Dok račun čeka roditelja, možeš srediti profil i skupljati prijatelje. Čim roditelj preuzme račun, otvaraju ti se Pričaonica, oglasi i poruke. Pristup POENIMA dobivaš kad roditelj i sam postane redovni član KOLA.",
-    "dete2_oznaka": "Prvi potez",
+    "dete2_oznaka": "Oglas",
     "dete2_naslov": "Napravi oglas",
     "dete2_p1": "Napravi oglas za ono što imaš ili znaš. Pročitani stripovi, igračka koja ti više ne treba, pomoć oko zadaće iz matematike, crtanje, šetanje psa.",
     "dete2_p2": "Oglas treba imati naslov, opis, barem jednu sliku, kategoriju i mjesto. Tvoje oglase vide druga djeca u KOLU. Ne vide ih odrasli dok ti roditelj ne dopusti komunikaciju s njima.",
@@ -1961,7 +1961,7 @@
     "dete4_p3": "POENE trošiš tako što se dogovoriš s drugim djetetom i prepišeš mu ih za nešto što ti treba. Ti daješ POENE, on daje stvar ili pomoć.",
     "dete4_cta_pijaca": "Otvori Dječju tržnicu",
     "dete4_cta_profil": "Moj profil",
-    "ekran1_p3": "Do punog sudjelovanja vode dva poteza: da objaviš što nudiš i dobiješ potvrdu od nekoga tko te poznaje. Oba stoje na sljedeća dva zaslona."
+    "ekran1_p3": "Sljedeća dva zaslona objašnjavaju ono što ti otvara sve ostalo: oglas kojim nešto nudiš i potvrdu od nekoga tko te poznaje."
   },
   "politikaPrihvati": {
     "naslov": "Sustav je unaprijeđen — novi akti",
