@@ -248,12 +248,7 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
           {/* Kupac → kontakt prodavca (razmenu članovi dogovaraju međusobno; Protokol ne posreduje) */}
           {dostupan && !oglas.isMine && (
             <div className="space-y-2">
-              {!isVerified ? (
-                <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 text-sm text-kolo-gold-600">
-                  <Link href="/verifikacija" className="font-semibold hover:underline">{t("zatrazi_verifikaciju_kupovina")}</Link>{" "}
-                  {t("zatrazi_verifikaciju_kupovina_tekst")}
-                </div>
-              ) : (
+              {isVerified ? (
                 <button
                   onClick={handleKontakt}
                   disabled={chatLoading}
@@ -261,6 +256,50 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
                 >
                   {chatLoading ? "..." : jePotraznja ? t("javi_se_narucilac") : t("kontaktiraj_prodavca")}
                 </button>
+              ) : !jePrijavljen ? (
+                /* Gost: potvrdu ne može ni da zatraži dok nema nalog, pa mu se
+                   nudi korak koji je na njemu — otvaranje naloga. */
+                <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 space-y-3">
+                  <p className="text-sm text-kolo-gold-600">
+                    <span className="font-semibold">{t("kontakt_samo_redovni")}</span>{" "}
+                    {t("kontakt_gost_opis")}
+                  </p>
+                  <div className="flex gap-2">
+                    <Link
+                      href="/registracija"
+                      className="flex-1 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold text-center hover:bg-kolo-green-900 transition-colors"
+                    >
+                      {t("registruj_se")}
+                    </Link>
+                    <Link
+                      href="/login"
+                      className="flex-1 py-2.5 rounded-xl border border-kolo-green-700 text-kolo-green-700 text-sm font-semibold text-center hover:bg-kolo-green-700 hover:text-white transition-colors"
+                    >
+                      {t("prijavi_se")}
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                /* Nov član: potvrda ne dolazi na zahtev nego od nekoga ko ga
+                   poznaje, pa dugme vodi na jedini potez koji zavisi od njega
+                   — sopstvenu ponudu, kroz koju ga mreža i nađe (čl. 32 st. 4). */
+                <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 space-y-3">
+                  <p className="text-sm text-kolo-gold-600">
+                    <span className="font-semibold">{t("kontakt_samo_redovni")}</span>{" "}
+                    {t("kontakt_nov_opis")}
+                  </p>
+                  <div className="flex items-center justify-between gap-3">
+                    <Link
+                      href="/pijaca/novi-oglas"
+                      className="py-2.5 px-4 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors"
+                    >
+                      {t("cta_postavi_oglas")}
+                    </Link>
+                    <Link href="/verifikacija" className="text-xs font-semibold text-kolo-gold-600 hover:underline">
+                      {t("kontakt_nov_link")}
+                    </Link>
+                  </div>
+                </div>
               )}
             </div>
           )}
