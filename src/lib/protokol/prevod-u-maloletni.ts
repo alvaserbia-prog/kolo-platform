@@ -25,27 +25,50 @@
  *     smera, sa vraćanjem POEN-a Protokolu i preračunom tuđih indeksa i zona
  *     (`oboriVerifikacijeNaloga`). 🔴 Ovo NIJE utvrđenje lažne potvrde: niko nije
  *     slagao, nego je pogrešno upisan uzrast. Zato ne ide kroz Glavu VIII dokaza
- *     stvarnosti i nema nadoknade — POEN se skida najviše do nule, nikome se ne
- *     pravi minus.
- *  2. **ZRNO se otpisuje** — maloletni korisnik ga ne drži i ne glasa (Glava VIII,
+ *     stvarnosti i nema postupka pred UO — ali poništenje POEN-a jeste puno, i na
+ *     tuđoj strani (vidi ispod).
+ *  2. **Poništava se sve što je Protokol upisao nalogu** — vidi odeljak ispod.
+ *  3. **ZRNO se otpisuje** — maloletni korisnik ga ne drži i ne glasa (Glava VIII,
  *     čl. 58). ZRNA se vraćaju u raspoloživa u Protokolu, kao pri prestanku
  *     statusa (čl. 34 st. 1).
- *  3. **Zabeleženi doprinosi se brišu** — kanali iz čl. 40a i 40b se na maloletne
+ *  4. **Zabeleženi doprinosi se brišu** — kanali iz čl. 40a i 40b se na maloletne
  *     korisnike ne primenjuju (čl. 14 st. 1). `probajEvidentirati` NEMA proveru
  *     uzrasta (nju nosi beleženje), pa bi zabeležen red bez ovoga kasnije emitovao
- *     1.000 POEN detetu — na prvi primljen POEN. Već EVIDENTIRAN doprinos se ne
- *     dira: taj POEN postoji u Protokolu i briše se protivzapisom, ne zaboravom.
- *  4. **Programi se gase** — socijalni programi i operativni doprinos traže indeks
+ *     1.000 POEN detetu — na prvi primljen POEN.
+ *  5. **Programi se gase** — socijalni programi i operativni doprinos traže indeks
  *     ≥ 10%, koji je upravo pao na nulu. Bez ovoga bi prijava stajala ACTIVE do
  *     noćne revizije i dotle isplaćivala.
- *  5. **Veza sa roditeljem, poziv za drugog roditelja i postupak potvrde iz čl. 6**
+ *  6. **Veza sa roditeljem, poziv za drugog roditelja i postupak potvrde iz čl. 6**
  *     — isto što i pri otvaranju naloga iz roditeljskog profila.
  *
- * 🔴 **POEN na zapisu se NE dira.** Dete sme da ima POEN (prepis od roditelja,
- * razmena), a ovaj nalog ga je stekao radom, ne prijateljstvima. Otpis pri
- * punoletstvu (čl. 19 st. 2) meri se po `Prijateljstvo.poenIsplacen`, a taj nalog
- * nijedno prijateljstvo nema — pa se na 18. rođendan neće poništiti ništa što
- * ovde nije nastalo.
+ * 🔴 **Poništava se SVE što je Protokol upisao tom nalogu** — potvrde, doprinos
+ * sadržaju i razmeni, donacije, programi, pokroviteljstvo, osnivački. To su
+ * kanali iz čl. 15 Pravilnika o KOLO sistemu, a maloletni korisnik ih ne koristi
+ * (Pravilnik o učešću dece čl. 14 st. 1, čl. 15): POEN je upisan pod pretpostavkom
+ * da je nalog punoletan, i ta pretpostavka pada zajedno sa uzrastom.
+ *
+ * 🔴 **POEN koji su mu ljudi PREPISALI ostaje.** Prepis nije emisija — ničim ne
+ * menja ukupan broj POEN-a nego seli zapis sa čoveka na čoveka (čl. 14, 16), i
+ * dete ga sme imati (roditelj mu prepisuje bezuslovno, čl. 14). Zato se poništava
+ * NETO emisija: sve što je stiglo od Protokola, umanjeno za sve što je Protokolu
+ * vraćeno (upis ZRNA, raniji otpisi). Ko je taj POEN već potrošio, tome zapis ide
+ * u MINUS — inače bi onaj ko brže potroši prošao jeftinije od onoga ko sačuva, što
+ * je isto pravilo koje već važi za otpis prijateljstva (čl. 14c) i za poništen
+ * prepis po prijavi razmene. Minus JESTE nadoknada (čl. 20b): nije dug, ne
+ * naplaćuje se, POEN-i koji pristignu prvo ga popunjavaju.
+ *
+ * 🔴 **Isto važi i za DRUGE ljude** kojima je POEN upisan povodom palih potvrda —
+ * i njima se skida pun iznos, pa i oni mogu u minus (`dozvoliMinus`). Odluka
+ * vlasnika 2026-08-23. Posledicu treba znati: čovek koji je uredno potvrdio
+ * poznanika može završiti sa negativnim zapisom zbog tuđe omaške u uzrastu, pa
+ * mu ide protivzapis u istoriju i obaveštenje — minus se ne sme pojaviti bez reči.
+ *
+ * 🟡 Vraćanje naloga na dan registracije (`reset-korisnika.ts`) i dalje staje na
+ * nuli: tamo je reč o probi korisničkog puta, ne o poništenju emisije.
+ *
+ * Otpis pri punoletstvu (čl. 19 st. 2) meri se po `Prijateljstvo.poenIsplacen`, a
+ * ovaj nalog nijedno prijateljstvo nema — pa mu se na 18. rođendan neće poništiti
+ * ništa što ovde nije nastalo.
  *
  * 🔴 **Oglasi, poruke i istorija OSTAJU.** Dete sme da ima oglase i razgovore.
  * Posledica koju treba znati: postojeći razgovori sa punoletnim licima od sada
@@ -59,7 +82,13 @@
  * na dan punoletstva.
  */
 import { prisma } from "@/lib/prisma";
-import { EnrollmentStatus, DoprinosStatus, TipKorisnika, UserStatus } from "@/generated/prisma/client";
+import {
+  DoprinosStatus,
+  EnrollmentStatus,
+  TipKorisnika,
+  TransactionType,
+  UserStatus,
+} from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { oboriVerifikacijeNaloga } from "@/lib/protokol/verifikacije-naloga";
 import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
@@ -92,8 +121,8 @@ export type NalogZaPrevod = {
   /**
    * Ima li nalog već upisanog roditelja.
    *
-   * 🔴 Provera stoji zbog REDOSLEDA: koraci 1–4 (pad potvrda, otpis ZRNA) su
-   * upisani pre nego što se stvori veza sa roditeljem, pa bi sudar na
+   * 🔴 Provera stoji zbog REDOSLEDA: koraci 1–5 (pad potvrda, poništenje emisije,
+   * otpis ZRNA) su upisani pre nego što se stvori veza sa roditeljem, pa bi sudar na
    * `@@unique([deteId, roditeljId])` ostavio nalog obran a nepovezan. Punoletan
    * nalog roditelja ne bi trebalo da ima — `punoletstvo.ts` te redove briše pri
    * prelasku — ali cena greške je takva da se ne oslanja na „ne bi trebalo".
@@ -167,12 +196,77 @@ export function proveriPrevodUMaloletni(
   return uzrastZaModul(godine);
 }
 
+const PROTOKOL_WALLET_ID = "banka-singleton";
+
+/**
+ * Koliko je Protokol NETO upisao ovom nalogu: sve što je stiglo od Protokola,
+ * umanjeno za sve što mu je vraćeno.
+ *
+ * 🔴 Meri se iz ISTORIJE, ne iz stanja. Stanje ne razlikuje POEN koji je nastao
+ * emisijom od POEN-a koji je čovek dobio prepisom, a upravo ta razlika odlučuje
+ * šta se poništava (čl. 15 — kanali) a šta ostaje (čl. 14, 16 — prepis).
+ *
+ * Oduzimanje vraćenog je bitno u oba smera: ko je POEN dao Protokolu (upis ZRNA)
+ * više ga nema, pa mu se ne sme skinuti dvaput; a ranije otpise (raskid, poništenje)
+ * ne treba ponavljati. Ko je POEN prepisao DRUGOM ČOVEKU, taj u zbir ne ulazi — i
+ * baš zato takav nalog ovde ide u minus, što je i namera pravila.
+ */
+async function netoEmisijaNaloga(userId: string): Promise<number> {
+  const wallet = await prisma.wallet.findUnique({ where: { userId }, select: { id: true } });
+  if (!wallet) return 0;
+
+  const [primljeno, vraceno] = await Promise.all([
+    prisma.transaction.aggregate({
+      where: { fromWalletId: PROTOKOL_WALLET_ID, toWalletId: wallet.id },
+      _sum: { amount: true },
+    }),
+    prisma.transaction.aggregate({
+      where: { fromWalletId: wallet.id, toWalletId: PROTOKOL_WALLET_ID },
+      _sum: { amount: true },
+    }),
+  ]);
+
+  return (primljeno._sum.amount ?? 0) - (vraceno._sum.amount ?? 0);
+}
+
+/**
+ * Poništi emisiju sa zapisa naloga, uz protivzapis Protokola.
+ *
+ * 🔴 Zapis SME u minus — vidi zaglavlje. Isti obrazac kao otpis prijateljstva
+ * (`prijateljstva.ts`): opticaj opada, zero-sum ostaje očuvan.
+ */
+async function otpisiEmisijuNalogu(userId: string, iznos: number) {
+  await prisma.$transaction(async (tx) => {
+    const w = await tx.wallet.findUnique({ where: { userId }, select: { id: true } });
+    if (!w) throw new PrevodGreska("Nalog nema zapis u Protokolu.", 500);
+    await tx.wallet.update({ where: { id: w.id }, data: { balance: { decrement: iznos } } });
+    await tx.wallet.update({
+      where: { id: PROTOKOL_WALLET_ID },
+      data: { balance: { increment: iznos } },
+    });
+    await tx.transaction.create({
+      data: {
+        fromWalletId: w.id,
+        toWalletId: PROTOKOL_WALLET_ID,
+        amount: iznos,
+        type: TransactionType.OTPIS_PREVOD_U_MALOLETNI,
+        description: "Poništenje POENA upisanih kroz kanale (nalog preveden u dečji)",
+        opisKljuc: "transakcije.prevod_u_maloletni_otpis",
+      },
+    });
+  });
+}
+
 export type PrevodRezultat = {
   pseudonim: string;
   roditeljPseudonim: string;
   godine: number;
   ponistenoPotvrda: number;
+  /** Poništena neto emisija sa zapisa samog naloga. */
+  otpisanoNalogu: number;
   poenVracenOdDrugih: number;
+  /** Koliko je DRUGIH ljudi ovim otišlo u negativan zapis. */
+  brojUMinusu: number;
   zrnaOtpisana: number;
   obrisanoZabelezenih: number;
   ugasenoProgramaPrijava: number;
@@ -250,7 +344,20 @@ export async function prevediUMaloletni(
   if (!provera.ok) throw new PrevodGreska(provera.razlog, provera.status);
 
   // ── 1. Izlazak iz lanca potvrda ────────────────────────────────────────────
-  const { ponisteno, poenVracenOdDrugih } = await oboriVerifikacijeNaloga(userId);
+  //
+  // Neto emisija se čita PRE svega ostalog: čim se upiše sopstveni protivzapis iz
+  // koraka 2, isti zbir bi ga uračunao i drugo pokretanje ne bi bilo idempotentno.
+  const netoEmisija = await netoEmisijaNaloga(userId);
+
+  const { ponisteno, poenVracenOdDrugih, uMinusu } = await oboriVerifikacijeNaloga(userId, {
+    // 🔴 Poništenje je puno na svim stranama (odluka vlasnika 2026-08-23): ko je
+    // primljeni POEN već potrošio, ide u minus. Vraćanje naloga na dan registracije
+    // i dalje staje na nuli — tamo je reč o probi, ne o poništenju emisije.
+    dozvoliMinus: true,
+    opis: `Poništenje POENA iz pale potvrde (nalog ${nalog.pseudonim} preveden u dečji)`,
+    opisKljuc: "transakcije.prevod_u_maloletni_potvrda",
+    opisParametri: { pseudonim: nalog.pseudonim },
+  });
   await prisma.nadzorZapis.deleteMany({ where: { nadzornikId: userId } });
   await prisma.nadzorniPredmet.updateMany({
     where: { resenById: userId },
@@ -258,7 +365,14 @@ export async function prevediUMaloletni(
   });
   await prisma.verifikacijaToken.deleteMany({ where: { korisnikId: userId } });
 
-  // ── 2. ZRNO ────────────────────────────────────────────────────────────────
+  // ── 2. Poništenje svega što je Protokol upisao ovom nalogu ────────────────
+  // Zapis SME u minus — vidi obrazloženje u zaglavlju. Prepisi od drugih ljudi
+  // nisu emisija i u zbir ne ulaze, pa ostaju detetu.
+  if (netoEmisija > 0) {
+    await otpisiEmisijuNalogu(userId, netoEmisija);
+  }
+
+  // ── 3. ZRNO ────────────────────────────────────────────────────────────────
   // Otpis bez evidentiranja POEN-a: ZRNA se vraćaju u raspoloživa u Protokolu
   // (imenilac obračunskog koeficijenta), jer se raspoloživo računa kao razlika do
   // `UKUPNO_ZRNA` — brisanjem reda se vraćaju sama.
@@ -274,20 +388,20 @@ export async function prevediUMaloletni(
   await prisma.zrnoStatusZahtev.deleteMany({ where: { userId } });
   await prisma.zrnoStanje.deleteMany({ where: { userId } });
 
-  // ── 3. Zabeleženi doprinosi (čl. 40a i 40b) ────────────────────────────────
+  // ── 4. Zabeleženi doprinosi (čl. 40a i 40b) ────────────────────────────────
   const [sadrzaj, razmena] = await Promise.all([
     prisma.doprinosSadrzaju.deleteMany({ where: { userId, status: DoprinosStatus.ZABELEZEN } }),
     prisma.doprinosRazmeni.deleteMany({ where: { userId, status: DoprinosStatus.ZABELEZEN } }),
   ]);
   const obrisanoZabelezenih = sadrzaj.count + razmena.count;
 
-  // ── 4. Programi ────────────────────────────────────────────────────────────
+  // ── 5. Programi ────────────────────────────────────────────────────────────
   const ugaseno = await prisma.programEnrollment.updateMany({
     where: { userId, status: { in: [EnrollmentStatus.PENDING, EnrollmentStatus.ACTIVE] } },
     data: { status: EnrollmentStatus.INACTIVE },
   });
 
-  // ── 5. Nalog, roditelj, poziv i postupak potvrde ───────────────────────────
+  // ── 6. Nalog, roditelj, poziv i postupak potvrde ───────────────────────────
   //
   // Potvrđivači roditelja — njima ide izjašnjenje iz čl. 6, isto kao kad roditelj
   // otvori nalog detetu. Postupak se NE preskače zato što nalog već postoji:
@@ -343,7 +457,7 @@ export async function prevediUMaloletni(
     }
   });
 
-  // ── 6. Javljanja (van transakcije — pad pošte ne obara prevođenje) ─────────
+  // ── 7. Javljanja (van transakcije — pad pošte ne obara prevođenje) ─────────
   if (potvrdjivaci.length === 0) {
     const { posaljiAdminAlert } = await import("@/lib/adminAlert");
     void posaljiAdminAlert(
@@ -357,11 +471,33 @@ export async function prevediUMaloletni(
   await obavesti(userId, {
     tip: "nalog_preveden_u_maloletni",
     kljuc: "notifikacije.nalog_preveden_u_maloletni",
-    parametri: { roditelj: roditelj.pseudonim },
+    parametri: { roditelj: roditelj.pseudonim, iznos: netoEmisija > 0 ? netoEmisija : 0 },
     naslov: "Nalog je preveden u dečji",
-    tekst: `Tvoj nalog sada radi po pravilima za maloletne korisnike, a kao roditelj je upisan ${roditelj.pseudonim}.`,
-    link: "/profil",
+    tekst:
+      `Tvoj nalog sada radi po pravilima za maloletne korisnike, a kao roditelj je upisan ${roditelj.pseudonim}. ` +
+      `Poništeno ti je ${netoEmisija > 0 ? netoEmisija : 0} POEN upisanih kroz kanale; POEN koji su ti drugi prepisali ostaje.`,
+    link: "/novcanik",
   }).catch(() => {});
+
+  // Onima koji su otišli u minus javlja se posebno: negativan zapis menja šta
+  // čovek sme sa POEN-om (prepis drugome je moguć tek preko nule), pa se ne sme
+  // pojaviti bez reči. Isti obrazac kao kod poništenog prepisa po prijavi razmene.
+  //
+  // Isti čovek ume da bude pogođen dvaput (i kao strana i kao nadzornik). Drugi
+  // zapis je izračunat POSLE prvog skidanja, pa nosi ukupan minus — zato se
+  // prepisuje, ne sabira.
+  const minusPoCoveku = new Map<string, number>();
+  for (const m of uMinusu) minusPoCoveku.set(m.userId, m.iznos);
+  for (const [pogodjeniId, iznos] of minusPoCoveku) {
+    await obavesti(pogodjeniId, {
+      tip: "potvrda_pala_minus",
+      kljuc: "notifikacije.potvrda_pala_minus",
+      parametri: { pseudonim: nalog.pseudonim, iznos },
+      naslov: "Potvrda je pala, zapis je u minusu",
+      tekst: `Nalog ${nalog.pseudonim} je preveden u dečji, pa je potvrda povodom koje ti je upisan POEN pala. Tvoj zapis je sada u minusu za ${iznos} POEN — POEN-i koji pristignu prvo popunjavaju taj minus.`,
+      link: "/novcanik",
+    }).catch(() => {});
+  }
 
   await obavesti(roditelj.id, {
     tip: "roditeljstvo_upisano",
@@ -388,7 +524,9 @@ export async function prevediUMaloletni(
     roditeljPseudonim: roditelj.pseudonim,
     godine,
     ponistenoPotvrda: ponisteno,
+    otpisanoNalogu: netoEmisija > 0 ? netoEmisija : 0,
     poenVracenOdDrugih,
+    brojUMinusu: minusPoCoveku.size,
     zrnaOtpisana,
     obrisanoZabelezenih,
     ugasenoProgramaPrijava: ugaseno.count,

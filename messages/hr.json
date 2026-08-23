@@ -2173,11 +2173,11 @@
     "korisnici_reset_prompt": "Vratiti račun „{pseudonim}“ na dan registracije?\n\nNepovratno: padaju sve potvrde koje račun dodiruje (i one koje je dao drugima, s POEN-om koji je tada upisan), POEN i ZRNO idu na nulu, a brišu se oglasi, razgovori, obavijesti, povijest i pristanci na akte. Ostaju email, lozinka i pseudonim — prijava radi istim podacima.\n\nZa potvrdu utipkaj pseudonim:",
     "korisnici_reset_gotovo": "Račun „{pseudonim}“ je vraćen na dan registracije. Otpisano u korist Protokola: {poen} POEN. Palo je {potvrde} potvrda, obrisano je {oglasi} oglasa.",
     "korisnici_u_dete": "Prevedi u dijete",
-    "korisnici_u_dete_prompt": "Prevesti račun „{pseudonim}“ u račun maloljetnog korisnika?\n\nNepovratno: padaju sve potvrde koje račun dodiruje (i one koje je dao drugima, s POENOM koji je tada upisan), ZRNO se otpisuje, gase se prijave na programe i brišu zabilježeni doprinosi. POEN na zapisu, oglasi i razgovori ostaju.\n\nPovratka nema — u punoljetni račun prelazi sam, na dan punoljetnosti.\n\nZa potvrdu otkucaj pseudonim:",
+    "korisnici_u_dete_prompt": "Prevesti račun „{pseudonim}“ u račun maloljetnog korisnika?\n\nNepovratno: poništava se sav POEN koji je Protokol upisao ovom računu (zapis smije u minus; prepisi od drugih ljudi ostaju), padaju sve potvrde koje račun dodiruje — pa i ljudi kojima je povodom njih upisan POEN mogu otići u minus — ZRNO se otpisuje, gase se prijave na programe i brišu zabilježeni doprinosi. Oglasi i razgovori ostaju.\n\nPovratka nema — u punoljetni račun prelazi sam, na dan punoljetnosti.\n\nZa potvrdu otkucaj pseudonim:",
     "korisnici_u_dete_roditelj_prompt": "Pseudonim roditelja koji se upisuje uz ovaj račun:",
     "korisnici_u_dete_datum_prompt": "Datum rođenja djeteta (GGGG-MM-DD). Poslije upisa se ne mijenja, a iz njega se računa dan punoljetnosti:",
     "korisnici_u_dete_confirm": "Posljednja provjera: račun „{pseudonim}“ postaje dječji i gubi sve potvrde stvarnosti. Nastaviti?",
-    "korisnici_u_dete_gotovo": "Račun „{pseudonim}“ je preveden u dječji ({godine} god.), roditelj je „{roditelj}“. Palo je {potvrde} potvrda, a {izjasnjenja} potvrđivača roditelja je zamoljeno da se izjasni o postojanju djeteta.",
+    "korisnici_u_dete_gotovo": "Račun „{pseudonim}“ je preveden u dječji ({godine} god.), roditelj je „{roditelj}“. Poništeno je {poen} POEN sa zapisa, palo je {potvrde} potvrda ({minus} ljudi je otišlo u minus), a {izjasnjenja} potvrđivača roditelja je zamoljeno da se izjasni o postojanju djeteta.",
     "izmeni_korisnika_naslov": "Izmijeni podatke člana",
     "izmeni_email_label": "Email",
     "izmeni_pseudonim_label": "Pseudonim",
@@ -2557,9 +2557,11 @@
     "lozinka_promenio_roditelj_naslov": "Roditelj ti je postavio novu lozinku",
     "lozinka_promenio_roditelj_tekst": "Pitaj ga koja je nova lozinka i prijavi se njome.",
     "nalog_preveden_u_maloletni_naslov": "Račun je preveden u dječji",
-    "nalog_preveden_u_maloletni_tekst": "Tvoj račun sada radi po pravilima za maloljetne korisnike, a kao roditelj je upisan {roditelj}.",
+    "nalog_preveden_u_maloletni_tekst": "Tvoj račun sada radi po pravilima za maloljetne korisnike, a kao roditelj je upisan {roditelj}. Poništeno ti je {iznos} POEN upisanih kroz kanale; POEN koji su ti drugi prepisali ostaje.",
     "roditeljstvo_upisano_naslov": "Upisan si kao roditelj",
-    "roditeljstvo_upisano_tekst": "Račun {pseudonim} je preveden u dječji i ti si upisan kao njegov roditelj."
+    "roditeljstvo_upisano_tekst": "Račun {pseudonim} je preveden u dječji i ti si upisan kao njegov roditelj.",
+    "potvrda_pala_minus_naslov": "Potvrda je pala, zapis je u minusu",
+    "potvrda_pala_minus_tekst": "Račun {pseudonim} je preveden u dječji, pa je potvrda povodom koje ti je upisan POEN pala. Tvoj zapis je sada u minusu za {iznos} POEN — POEN-i koji pristignu prvo popunjavaju taj minus."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2576,7 +2578,9 @@
     "prijateljstvo": "Prijateljstvo s {pseudonim}",
     "prijateljstvo_raskid": "Raskinuto prijateljstvo s {pseudonim}",
     "prijateljstvo_punoletstvo": "Punoljetnost — zatvoreno prijateljstvo s {pseudonim}",
-    "prijateljstvo_punoletstvo_zbirno": "Poništenje POEN-a iz {broj} prijateljstava (punoljetnost)"
+    "prijateljstvo_punoletstvo_zbirno": "Poništenje POEN-a iz {broj} prijateljstava (punoljetnost)",
+    "prevod_u_maloletni_otpis": "Poništenje POENA upisanih kroz kanale (račun preveden u dječji)",
+    "prevod_u_maloletni_potvrda": "Poništenje POENA iz pale potvrde ({pseudonim} preveden u dječji račun)"
   },
   "mejl": {
     "pozdrav": "Pozdrav",

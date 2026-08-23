@@ -13,7 +13,7 @@
  * na dan registracije i prevođenje naloga u maloletni.
  */
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika } from "@/generated/prisma/client";
+import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -30,6 +30,30 @@ export type IshodObaranja = {
   ponisteno: number;
   /** POEN skinut DRUGIM korisnicima (verifikovanima, verifikatorima, nadzornicima). */
   poenVracenOdDrugih: number;
+  /** Ko je ovim otišao u negativan zapis — samo uz `dozvoliMinus`. Njima se javlja. */
+  uMinusu: { userId: string; iznos: number }[];
+};
+
+export type OpcijeObaranja = {
+  /**
+   * Sme li tuđi zapis u minus.
+   *
+   * `false` (podrazumevano) — POEN se skida najviše do nule, kao pri prestanku
+   * statusa. Tako radi vraćanje naloga na dan registracije: tamo je reč o probi
+   * korisničkog puta i nema razloga da neko treći završi sa negativnim zapisom.
+   *
+   * `true` — skida se pun iznos i zapis ide u minus. Minus se ponaša isto kao
+   * nadoknada (čl. 20b): nije dug, ne naplaćuje se, POEN-i koji pristignu prvo ga
+   * popunjavaju, prepis drugome je moguć tek preko nule, razmena nije ograničena.
+   * Bez toga bi onaj ko primljeni POEN brže potroši prošao jeftinije od onoga ko
+   * ga sačuva — isto pravilo koje već važi za otpis prijateljstva i za poništen
+   * prepis po prijavi razmene.
+   */
+  dozvoliMinus?: boolean;
+  /** Opis koji ide u protivzapis (vidi se u istoriji pogođenog čoveka). */
+  opis?: string;
+  opisKljuc?: string;
+  opisParametri?: Record<string, string | number>;
 };
 
 /**
@@ -38,7 +62,10 @@ export type IshodObaranja = {
  * Ne dira sam nalog — pozivalac odlučuje šta radi sa njegovim tipom, indeksom i
  * slotovima, jer se to razlikuje od radnje do radnje.
  */
-export async function oboriVerifikacijeNaloga(userId: string): Promise<IshodObaranja> {
+export async function oboriVerifikacijeNaloga(
+  userId: string,
+  opcije: OpcijeObaranja = {},
+): Promise<IshodObaranja> {
   const vezeKaoVerifikator = await prisma.verifikacionaVeza.findMany({
     where: { verifikatorId: userId },
   });
@@ -47,20 +74,27 @@ export async function oboriVerifikacijeNaloga(userId: string): Promise<IshodObar
   });
   const ponisteno = vezeKaoVerifikator.length + vezeKaoVerifikovani.length;
   let poenVracenOdDrugih = 0;
+  const uMinusu: { userId: string; iznos: number }[] = [];
 
   if (ponisteno === 0) {
     // Zona se i tako ne menja kad nijedna veza nije pala.
-    return { ponisteno, poenVracenOdDrugih };
+    return { ponisteno, poenVracenOdDrugih, uMinusu };
   }
 
   await prisma.$transaction(
     async (tx) => {
-      /** Skida POEN sa tuđeg zapisa i vraća ga Protokolu; nikad ispod nule. */
+      /**
+       * Skida POEN sa tuđeg zapisa i vraća ga Protokolu.
+       *
+       * Bez `dozvoliMinus` staje na nuli; sa njim skida pun iznos i pušta zapis u
+       * minus, uz protivzapis u istoriji — negativan zapis menja šta čovek sme sa
+       * POEN-om i ne sme da se pojavi bez ijednog traga o tome odakle je došao.
+       */
       async function vratiPoenProtokolu(targetUserId: string, iznos: number) {
         if (iznos <= 0) return;
         const w = await tx.wallet.findUnique({ where: { userId: targetUserId } });
         if (!w) return;
-        const stvarno = Math.min(w.balance, iznos);
+        const stvarno = opcije.dozvoliMinus ? iznos : Math.min(w.balance, iznos);
         if (stvarno <= 0) return;
         await tx.wallet.update({ where: { id: w.id }, data: { balance: { decrement: stvarno } } });
         await tx.wallet.update({
@@ -68,6 +102,21 @@ export async function oboriVerifikacijeNaloga(userId: string): Promise<IshodObar
           data: { balance: { increment: stvarno } },
         });
         poenVracenOdDrugih += stvarno;
+        if (opcije.dozvoliMinus) {
+          await tx.transaction.create({
+            data: {
+              fromWalletId: w.id,
+              toWalletId: PROTOKOL_WALLET_ID,
+              amount: stvarno,
+              type: TransactionType.OTPIS_PREVOD_U_MALOLETNI,
+              description: opcije.opis ?? "Poništenje POENA iz pale potvrde",
+              opisKljuc: opcije.opisKljuc,
+              opisParametri: opcije.opisParametri,
+            },
+          });
+          const posle = w.balance - stvarno;
+          if (posle < 0) uMinusu.push({ userId: targetUserId, iznos: -posle });
+        }
       }
 
       // 1) Veze u kojima je ovaj nalog VERIFIKATOR — pada verifikovani.
@@ -142,5 +191,5 @@ export async function oboriVerifikacijeNaloga(userId: string): Promise<IshodObar
     { timeout: 30_000 },
   );
 
-  return { ponisteno, poenVracenOdDrugih };
+  return { ponisteno, poenVracenOdDrugih, uMinusu };
 }
