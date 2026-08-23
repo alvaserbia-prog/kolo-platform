@@ -534,6 +534,69 @@ detetu. Dopunjeni su i Politika 4.7, Registar radnji obrade (radnja 11) i DPIA
 **zadržava** (punoletan nalog imejl i inače sme da ima), a briše prestankom svojstva
 korisnika. Ne dodavati brisanje pri punoletstvu — protivrečilo bi aktu.
 
+### Prevođenje punoletnog naloga u maloletni (2026-08-23)
+
+Dete koje promaši dečji ulaz i registruje se kroz punoletni obrazac do sada je
+ostajalo odrastao nalog **zauvek**: `maloletan: true` upisuje se samo pri
+`user.create`, na dva mesta (`deca.ts`, `deca-poziv.ts`), a preuzimanje odbija
+punoletan nalog (`poveziRoditelja` traži `maloletan: true`). Jedini lek bio je
+ugasiti nalog i otvoriti ga ponovo.
+
+🔴 **Posledice promašaja nisu simetrične — nalog gubi zaštite a dobija
+ovlašćenja:** profil mu je otvoren svakom potvrđenom članu (`smeDaVidiProfilDeteta`
+gleda `maloletan`), izlazi u `GET /api/korisnici/pretraga`, i može ući u lanac
+potvrda, koji je maloletnom korisniku zabranjen (čl. 15). Zaštita napravljena baš
+za decu ne pokriva dete koje je ušlo na pogrešna vrata.
+
+**Admin → Korisnici → „Prevedi u dete"** (`POST /api/admin/korisnici/[id]/u-dete`).
+Samo **SUPERADMIN**, uz **otkucan pseudonim** naloga, pseudonim roditelja i datum
+rođenja. Nudi se samo punoletnom, aktivnom nalogu bez admin role.
+
+**Smer je suprotan od punoletstva**, pa radi ono što bi `punoletstvo.ts` poništilo:
+1. **Nalog izlazi iz lanca potvrda** — padaju sve veze koje dodiruje, u oba smera
+   (`oboriVerifikacijeNaloga`). 🔴 **Nije utvrđenje lažne potvrde**: niko nije
+   slagao, pogrešno je upisan uzrast. Zato ne ide kroz Glavu VIII i **nema
+   nadoknade** — POEN se drugima skida najviše do nule, minus se ne pravi.
+2. **ZRNO se otpisuje** (maloletni ga ne drži i ne glasa).
+3. **Zabeleženi doprinosi se BRIŠU** (čl. 14 st. 1). 🔴 Nužno: `probajEvidentirati`
+   nema proveru uzrasta — nju nosi beleženje — pa bi zabeležen red kasnije emitovao
+   1.000 POEN detetu, na prvi primljen POEN. Već EVIDENTIRAN se ne dira.
+4. **Prijave na programe** ACTIVE/PENDING → INACTIVE (indeks je pao na nulu; bez
+   ovoga bi isplaćivale do noćne revizije).
+5. **Roditelj, poziv za drugog roditelja i postupak potvrde iz čl. 6** — isto što i
+   pri otvaranju naloga iz roditeljskog profila.
+
+🔴 **POEN, oglasi, poruke i istorija OSTAJU.** Dete sme da ih ima, a otpis pri
+punoletstvu meri se po `Prijateljstvo.poenIsplacen` — taj nalog prijateljstva nema,
+pa mu se na 18. rođendan neće poništiti ništa što ovde nije nastalo.
+
+🟡 **Indeks roditelja se NAMERNO ne traži** (za razliku od `otvoriNalogDeteta`, čl. 5):
+nalog već postoji i samo dobija roditelja, kao pri preuzimanju kod deteta koje se
+registrovalo samo. Roditelj bez potvrde ostavlja dete u stanju `POVEZANO`, gde mu se
+POEN ne upisuje — to je dovoljna brana.
+
+🟡 **Zatečeni razgovori sa punoletnim licima od prevođenja potpadaju pod čl. 9** —
+roditelj ih čita, a sagovorniku se prikazuje natpis o tome. Sagovornik to nije mogao
+da zna dok je pisao. Razgovori se ne brišu (brisanje bi uništilo i detetov trag).
+
+🟡 **Članstvo u Krugu se ne dira** — modul je ugašen, pa nema šta da se raščisti.
+
+**Redosled je bitan:** koraci 1–4 su upisani PRE nego što se stvori veza sa
+roditeljem, pa svaka provera mora da prođe unapred — otud i `imaRoditelja` u
+čistoj proveri, koja hvata sudar na `@@unique([deteId, roditeljId])` pre nego što
+išta padne.
+
+**Kod:** `src/lib/protokol/prevod-u-maloletni.ts` (čista provera
+`proveriPrevodUMaloletni` + servisni `prevediUMaloletni`) i **nov zajednički**
+`src/lib/protokol/verifikacije-naloga.ts` (`oboriVerifikacijeNaloga` — izdvojeno iz
+`reset-korisnika.ts`, koji ga sada zove; ista kaskada, jedno mesto). Testovi
+`__tests__/protokol/prevod-u-maloletni.test.ts`. Audit: `NALOG_PREVEDEN_U_MALOLETNI`.
+**Bez migracije** — `User.maloletan` i `Roditeljstvo` već postoje.
+
+🔴 **Povratka nema.** U punoletni nalog prelazi isključivo preko `punoletstvo.ts`,
+na dan izračunat iz ovde upisanog datuma. Ispravka samog datuma ide zasebnom rutom
+(`/api/admin/deca/[id]/datum-rodjenja`), koja namerno nema dugme.
+
 ### Ranglista škola (2026-08-18)
 
 Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.4).

@@ -38,6 +38,8 @@ interface KorisnikInfo {
   suspendedReason: string | null;
   balance: number;
   createdAt: string;
+  /** Maloletni nalog se ne prevodi ponovo — dugme „Prevedi u dete" se tada ne nudi. */
+  maloletan: boolean;
 }
 
 interface DashboardData {
@@ -1776,6 +1778,43 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
     }
   }
 
+  // Prevođenje punoletnog naloga u nalog maloletnog korisnika, uz određivanje
+  // roditelja — ispravka za dete koje je promašilo dečji ulaz i registrovalo se
+  // kroz punoletni obrazac. Nepovratno i pogađa druge naloge (padaju sve potvrde
+  // koje nalog dodiruje), pa se pseudonim otkuca kao i kod reseta.
+  async function prevediUDete(u: KorisnikInfo) {
+    const upisano = prompt(t("korisnici_u_dete_prompt", { pseudonim: u.pseudonim }));
+    if (upisano === null) return;
+    const roditelj = prompt(t("korisnici_u_dete_roditelj_prompt"));
+    if (roditelj === null) return;
+    const datumRodjenja = prompt(t("korisnici_u_dete_datum_prompt"));
+    if (datumRodjenja === null) return;
+    if (!confirm(t("korisnici_u_dete_confirm", { pseudonim: u.pseudonim }))) return;
+
+    setLoadingId(u.id);
+    const res = await fetch(`/api/admin/korisnici/${u.id}/u-dete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pseudonim: upisano, roditelj, datumRodjenja }),
+    });
+    const d = await res.json().catch(() => ({}));
+    setLoadingId(null);
+    if (res.ok) {
+      alert(
+        t("korisnici_u_dete_gotovo", {
+          pseudonim: d.pseudonim ?? u.pseudonim,
+          roditelj: d.roditeljPseudonim ?? "",
+          godine: d.godine ?? 0,
+          potvrde: d.ponistenoPotvrda ?? 0,
+          izjasnjenja: d.brojPotvrdjivaca ?? 0,
+        }),
+      );
+      onDone();
+    } else {
+      alert(d.error ?? t("greska_generalna"));
+    }
+  }
+
   async function postaviAdminRolu(userId: string, nivo: string) {
     if (nivo === "SUPERADMIN" && !confirm(t("korisnici_superadmin_confirm"))) return;
     setLoadingId(userId);
@@ -1875,6 +1914,17 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                       <button onClick={() => resetujNalog(u)} disabled={loadingId === u.id}
                         className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
                         {t("korisnici_reset")}
+                      </button>
+                    )}
+                    {/* Ispravka za dete koje se registrovalo kroz punoletni obrazac:
+                        nalog se prevodi u maloletni i dobija roditelja. Maloletnom
+                        nalogu se ne nudi — prevođenja unazad nema, punoletstvo vodi
+                        `punoletstvo.ts` na sam dan. */}
+                    {viewerJeSuperadmin && u.id !== viewerId && u.admin === "NONE"
+                      && u.status !== "EXCLUDED" && !u.maloletan && (
+                      <button onClick={() => prevediUDete(u)} disabled={loadingId === u.id}
+                        className="px-2.5 py-1 bg-kolo-bg border border-kolo-border text-kolo-muted text-xs font-semibold rounded-lg hover:bg-kolo-border disabled:opacity-60 transition-colors">
+                        {t("korisnici_u_dete")}
                       </button>
                     )}
                   </div>

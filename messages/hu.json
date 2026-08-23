@@ -2165,6 +2165,12 @@
     "korisnici_reset": "Resetuj nalog",
     "korisnici_reset_prompt": "Visszaállítod a(z) „{pseudonim}” fiókot a regisztráció napjára?\n\nVisszafordíthatatlan: minden megerősítés elesik, amelyet a fiók érint (azok is, amelyeket másoknak adott, az akkor bejegyzett POEN-nel együtt), a POEN és a ZRNO nullára megy, a hirdetések, beszélgetések, értesítések, előzmények és az aktusokhoz adott hozzájárulások pedig törlődnek. Az email, a jelszó és az álnév megmarad — a bejelentkezés ugyanazokkal az adatokkal működik.\n\nA megerősítéshez gépeld be az álnevet:",
     "korisnici_reset_gotovo": "A(z) „{pseudonim}” fiók visszaállt a regisztráció napjára. A Protokoll javára leírva: {poen} POEN. {potvrde} megerősítés esett el, {oglasi} hirdetés törlődött.",
+    "korisnici_u_dete": "Átminősítés gyerekfiókká",
+    "korisnici_u_dete_prompt": "Átminősíted a(z) „{pseudonim}” fiókot kiskorú felhasználói fiókká?\n\nVisszafordíthatatlan: minden megerősítés megszűnik, amelyet a fiók érint (azok is, amelyeket másoknak adott, az akkor bejegyzett POEN-nel együtt), a ZRNO leírásra kerül, a programjelentkezések lezárulnak, a függő hozzájárulások törlődnek. A POEN-bejegyzés, a hirdetések és a beszélgetések megmaradnak.\n\nNincs visszaút — a nagykorúság napján magától válik felnőtt fiókká.\n\nA megerősítéshez írd be az álnevet:",
+    "korisnici_u_dete_roditelj_prompt": "A fiókhoz bejegyzendő szülő álneve:",
+    "korisnici_u_dete_datum_prompt": "A gyermek születési dátuma (ÉÉÉÉ-HH-NN). Bejegyzés után nem módosul, és ebből számítjuk a nagykorúság napját:",
+    "korisnici_u_dete_confirm": "Utolsó ellenőrzés: a(z) „{pseudonim}” fiók gyerekfiókká válik, és elveszíti minden valóságmegerősítését. Folytatod?",
+    "korisnici_u_dete_gotovo": "A(z) „{pseudonim}” fiók gyerekfiókká vált ({godine} év), a szülő „{roditelj}”. {potvrde} megerősítés szűnt meg, és a szülő {izjasnjenja} megerősítőjét kértük, hogy nyilatkozzon a gyermek létezéséről.",
     "izmeni_korisnika_naslov": "Tag adatainak módosítása",
     "izmeni_email_label": "Email",
     "izmeni_pseudonim_label": "Pseudonim",
@@ -2542,7 +2548,11 @@
     "prijava_poruke_odbacena_naslov": "A bejelentésedet megvizsgálták",
     "prijava_poruke_odbacena_tekst": "Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}",
     "lozinka_promenio_roditelj_naslov": "A szülőd új jelszót állított be neked",
-    "lozinka_promenio_roditelj_tekst": "Kérdezd meg tőle az új jelszót, és azzal jelentkezz be."
+    "lozinka_promenio_roditelj_tekst": "Kérdezd meg tőle az új jelszót, és azzal jelentkezz be.",
+    "nalog_preveden_u_maloletni_naslov": "A fiókod gyerekfiók lett",
+    "nalog_preveden_u_maloletni_tekst": "A fiókod mostantól a kiskorú felhasználókra vonatkozó szabályok szerint működik, szülőként pedig {roditelj} van bejegyezve.",
+    "roditeljstvo_upisano_naslov": "Szülőként vagy bejegyezve",
+    "roditeljstvo_upisano_tekst": "A(z) {pseudonim} fiók gyerekfiók lett, és téged jegyeztek be a szülőjeként."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
