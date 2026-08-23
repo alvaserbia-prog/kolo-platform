@@ -14,10 +14,15 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import GdeSeNalazi, { type Gde } from "@/components/dobrodosli/GdeSeNalazi";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
+import { useMe } from "@/hooks/useMe";
 
-/** Akciona veza ekrana: dugme + crtež koji pokazuje gde ta stranica stoji u
- *  navigaciji (vidi GdeSeNalazi). Ekran može imati više akcija (korak 6). */
-type Akcija = { href: string; ctaKey: string; gde: Gde };
+/** Akciona veza ekrana: dugme + (opciono) crtež koji pokazuje gde ta stranica
+ *  stoji u navigaciji (vidi GdeSeNalazi). Ekran može imati više akcija.
+ *
+ *  🔴 Dečji ekrani NEMAJU crtež: `GdeSeNalazi` crta meni punoletnog naloga, a
+ *  navigacija maloletnog je kraća verzija (Sidebar) — crtež bi pokazivao stavke
+ *  kojih dete nema. Zato je `gde` opciono, a ne izmišljen dečji crtež. */
+type Akcija = { href: string; ctaKey: string; gde?: Gde };
 
 /** Konfiguracija ekrana: ključevi pasusa u messages + akcione veze.
  *
@@ -29,7 +34,7 @@ type Akcija = { href: string; ctaKey: string; gde: Gde };
  *  bez ijedne potvrde) pa tek onda potvrda. Raniji vodič je imao sedam ekrana
  *  i dva „puta" kroz koja je svako prolazio linearno, pa je isto pitanje
  *  postavljao dvaput — na prvom i na poslednjem ekranu. */
-const EKRANI: { key: string; pasusi: string[]; akcije?: Akcija[] }[] = [
+const EKRANI_ODRASLI: { key: string; pasusi: string[]; akcije?: Akcija[] }[] = [
   // šta je KOLO i šta je POEN — jedini ekran bez radnje
   { key: "ekran1", pasusi: ["ekran1_p1", "ekran1_p2"] },
   // prvi potez: objava ponude. Ide PRE potvrde, jer je to danas glavni put
@@ -65,12 +70,45 @@ const EKRANI: { key: string; pasusi: string[]; akcije?: Akcija[] }[] = [
   },
 ];
 
+/** Vodič za maloletni nalog — isti okvir, drugi tekst i druge rute.
+ *
+ *  Redosled prati ono što dete stvarno radi: šta je KOLO i šta roditelj treba
+ *  da uradi, pa oglas, pa prijateljstva (odakle POENI i dolaze), pa profil i
+ *  trošenje POENA. Ključevi su u `dobrodosli`, sa prefiksom `dete`.
+ */
+const EKRANI_DETE: { key: string; pasusi: string[]; akcije?: Akcija[] }[] = [
+  { key: "dete1", pasusi: ["dete1_p1", "dete1_p2", "dete1_p3", "dete1_p4"] },
+  {
+    key: "dete2",
+    pasusi: ["dete2_p1", "dete2_p2", "dete2_p3"],
+    akcije: [{ href: "/pijaca/novi-oglas", ctaKey: "dete2_cta" }],
+  },
+  {
+    key: "dete3",
+    pasusi: ["dete3_p1", "dete3_p2", "dete3_p3", "dete3_p4"],
+    akcije: [{ href: "/prijatelji", ctaKey: "dete3_cta" }],
+  },
+  {
+    key: "dete4",
+    pasusi: ["dete4_p1", "dete4_p2", "dete4_p3"],
+    akcije: [
+      { href: "/pijaca", ctaKey: "dete4_cta_pijaca" },
+      { href: "/profil", ctaKey: "dete4_cta_profil" },
+    ],
+  },
+];
+
 /** sessionStorage ključ za korak na koji se korisnik vraća posle CTA odlaska. */
 const KLJUC_KORAK = "kolo-dobrodosli-korak";
 
 export default function DobrodosliPage() {
   const t = useTranslations("dobrodosli");
   const router = useRouter();
+  // Dete i odrastao dobijaju različit vodič. Čita se iz `/api/me`, ne iz sesije:
+  // `maloletan` se ne nalazi u tokenu, a dok odgovor ne stigne prikazuje se
+  // vodič za odrasle — to je i podrazumevani slučaj i ne treperi na promeni.
+  const { data: me } = useMe();
+  const EKRANI = me?.maloletan ? EKRANI_DETE : EKRANI_ODRASLI;
   const [korak, setKorak] = useState(0);
   const [prviPut, setPrviPut] = useState(false);
 
@@ -183,7 +221,7 @@ export default function DobrodosliPage() {
             >
               {t(akcija.ctaKey)} →
             </button>
-            <GdeSeNalazi gde={akcija.gde} />
+            {akcija.gde && <GdeSeNalazi gde={akcija.gde} />}
           </div>
         ))}
       </div>
