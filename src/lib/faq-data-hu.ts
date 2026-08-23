@@ -375,7 +375,7 @@ A Szabályzat, a Felhasználási feltételek és a többi kötelező erejű aktu
         pitanje: `Regisztrálhatnak-e kiskorúak?`,
         odgovor: `Igen, hét éves kortól, de nem teljesen önállóan. A kiskorú fiókja mindig szülő mellett áll: vagy a szülő nyitja meg a saját fiókjából, vagy a gyerek nyitja meg és megadja a szülő e-mail-címét, a szülő pedig átveszi a fiókot.
 
-A hét évnél fiatalabb gyereknek nincs fiókja. Ha kiderül, hogy egy felnőtt fiókot kiskorú nyitott meg, a fiók törlődik.
+A hét évnél fiatalabb gyereknek nincs fiókja. Ha a gyerek tévedésből a felnőtt űrlapon ment végig, a fiók nem törlődik — kérésre az Alapítvány gyerekfiókká alakítja és szülőhöz köti.
 
 Minden egyéb a gyerekfiókokról a Gyerekek és szülők szakaszban áll.`,
       },
@@ -393,6 +393,17 @@ Az üzenetben lévő hivatkozás hét napig érvényes. Ha a fiókot tizennégy 
 A születési dátumot te írod be, az átvételkor. Ellenőrizd megerősítés előtt, mert a beírás után nem módosítható, és tőle függ, mikor válik a fiók nagykorúvá.
 
 Amíg átvételre vár, a gyereknek van profilja és köthet barátságokat, de nincs Csevegőszobája, üzenetei és hirdetései. Az átvétel után mindez működik.`,
+      },
+      {
+        id: 101,
+        pitanje: `A gyerek nagykorúként regisztrált — helyre lehet ezt hozni?`,
+        odgovor: `Igen. A fiók nem törlődik: kérésre az Alapítvány gyerekfiókká alakítja, és hozzád köti mint szülőhöz. Írj nekünk a kontakt@ekolo.rs címre a fiókodhoz tartozó címről, és add meg a gyerek álnevét.
+
+A fiók így megkapja a gyerekrend minden védelmét — zárt profil, a te kapcsolót a nagykorú tagokkal való érintkezésre és cserére, barátságok és a gyerekek csevegőszobája. Elveszíti azt, ami e rend szerint gyereket nem illet meg: a kapott és adott megerősítések elesnek, a ZRNO leírásra kerül, és a POEN, amelyet a Protokoll a csatornákon keresztül jegyzett fel neki (megerősítések, tartalomhoz és cseréhez való hozzájárulás, adományok, programok), semmissé válik. A POEN, amelyet mások írtak át rá, megmarad — az átírás nem hoz létre új POEN-t, hanem a bejegyzést mozgatja, és gyerek is birtokolhatja. A hirdetések, üzenetek és az előzmények megmaradnak.
+
+A bejegyzés eközben mínuszba mehet, mégpedig mindkét oldalon: a gyereknél, aki a POEN-t már elköltötte, és annál is, aki megerősítette őt, és akinek most ez a megerősítése semmissé válik. A mínusz nem tartozás, és nem hajtják be — az első beérkező POEN feltölti.
+
+A lépés visszafordíthatatlan. Nagykorú fiókká magától válik, a tizennyolcadik születésnap napján, az akkor megadott születési dátum szerint.`,
       },
       {
         id: 86,

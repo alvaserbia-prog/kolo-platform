@@ -364,7 +364,7 @@ Pravilnik, Uvjeti korištenja i ostali obvezujući akti doneseni su na srpskom i
         pitanje: `Mogu li se maloljetnici registrirati?`,
         odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Račun maloljetne osobe uvijek stoji uz roditelja: ili ga roditelj otvara iz svog računa, ili ga dijete otvara i upisuje roditeljev email, pa roditelj račun preuzima.
 
-Dijete mlađe od sedam godina račun nema. Ako se ispostavi da je punoljetni račun otvorila maloljetna osoba, račun se briše.
+Dijete mlađe od sedam godina račun nema. Ako je dijete greškom prošlo kroz punoljetni obrazac, račun se ne briše — Fondacija ga na zahtjev prevodi u dječji i veže uz roditelja.
 
 Sve ostalo o dječjim računima stoji u odjeljku Djeca i roditelji.`,
       },
@@ -382,6 +382,17 @@ Poveznica iz poruke vrijedi sedam dana. Ako račun nitko ne preuzme u roku od č
 Datum rođenja upisuješ ti, prilikom preuzimanja. Provjeri ga prije potvrde, jer se poslije upisa ne mijenja, a o njemu ovisi kada račun prelazi u punoljetni.
 
 Dok čeka preuzimanje, dijete ima profil i može sklapati prijateljstva, ali nema Pričaonicu, poruke ni oglase. Poslije preuzimanja sve to radi.`,
+      },
+      {
+        id: 101,
+        pitanje: `Dijete se registriralo kao punoljetno — može li se to ispraviti?`,
+        odgovor: `Može. Račun se ne briše: Fondacija ga na zahtjev prevodi u dječji račun i veže uz tebe kao roditelja. Piši nam na kontakt@ekolo.rs s adrese svog računa i navedi pseudonim djeteta.
+
+Račun time dobiva sve zaštite dječjeg režima — zatvoren profil, tvoj prekidač za komunikaciju i razmjenu s punoljetnim članovima, prijateljstva i dječju Pričaonicu. Gubi ono što po tom režimu djetetu ne pripada: potvrde koje je primio i dao padaju, ZRNO se otpisuje, a POEN koji mu je Protokol upisao kroz kanale (potvrde, doprinos sadržaju i razmjeni, donacije, programi) se poništava. POEN koji su mu ljudi prepisali ostaje — prepis ne stvara nove POENE nego seli zapis, a dijete ga smije imati. Oglasi, poruke i povijest ostaju.
+
+Zapis pritom smije otići u minus, i to s obje strane: i djetetu koje je POEN već potrošilo, i onome tko ga je potvrdio pa mu se ta potvrda poništava. Minus nije dug i ne naplaćuje se — prvi POEN koji stigne ga popunjava.
+
+Radnja je nepovratna. U punoljetni račun prelazi sam, na dan osamnaestog rođendana, po datumu rođenja koji tada upišeš.`,
       },
       {
         id: 86,

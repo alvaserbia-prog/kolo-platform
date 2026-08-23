@@ -633,6 +633,18 @@ Migracija `20260823120000_otpis_prevod_u_maloletni` (samo nova vrednost enum-a
 na dan izračunat iz ovde upisanog datuma. Ispravka samog datuma ide zasebnom rutom
 (`/api/admin/deca/[id]/datum-rodjenja`), koja namerno nema dugme.
 
+🟢 **Akt se ovim NE dopunjava — odluka vlasnika (2026-08-23).** Pravilnik o učešću
+dece o prevođenju ne govori i neće: reč je o **tehničkoj ispravci pogrešno unetog
+uzrasta**, ne o novom institutu. Nalog posle prevođenja stoji tačno u režimu koji
+akt već uređuje, a poništenje POEN-a je posledica toga što kanali iz čl. 15 nisu
+bili otvoreni maloletnom korisniku — ne nova mera. **Ne otvarati ovo ponovo pri
+sledećem bumpu seta.** (Razlika u odnosu na prijavu razmene, gde akt NEDOSTAJE: tamo
+Fondacija obara tuđi prepis bez ovlašćenja iz ijednog akta.)
+
+FAQ ovo pokriva: pitanje 84 (ispravljena rečenica o brisanju) i pitanje **101**
+(„Dete se registrovalo kao punoletno — može li to da se ispravi?"), na svih pet
+jezika; oba su u sekciji koja pada sa ugašenim modulom.
+
 ### Ranglista škola (2026-08-18)
 
 Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste. Plan: `docs/plan-ranglista-skola.html`. Akt: **Pravilnik o učešću dece čl. 7, 15a i 15b** (set 4.3.4).
