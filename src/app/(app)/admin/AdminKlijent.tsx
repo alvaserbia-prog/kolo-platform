@@ -1805,7 +1805,9 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
           pseudonim: d.pseudonim ?? u.pseudonim,
           roditelj: d.roditeljPseudonim ?? "",
           godine: d.godine ?? 0,
+          poen: (d.otpisanoNalogu ?? 0).toLocaleString(intlTag(locale)),
           potvrde: d.ponistenoPotvrda ?? 0,
+          minus: d.brojUMinusu ?? 0,
           izjasnjenja: d.brojPotvrdjivaca ?? 0,
         }),
       );

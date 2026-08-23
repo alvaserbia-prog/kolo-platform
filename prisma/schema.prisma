@@ -81,6 +81,10 @@ enum TransactionType {
   // (čl. 14c, čl. 19). Nije „poništenje prepisa" — poništava se EMISIJA, pa opticaj
   // opada, dok prepis samo seli POEN između dva korisnička zapisa.
   OTPIS_PRIJATELJSTVO
+  // Prevođenje punoletnog naloga u maloletni: poništenje svega što je Protokol
+  // upisao tom nalogu, i skidanje POENA ljudima kojima je upisan povodom njegovih
+  // potvrda. Poništava se EMISIJA, pa opticaj opada.
+  OTPIS_PREVOD_U_MALOLETNI
 }
 
 enum TipKorisnika {

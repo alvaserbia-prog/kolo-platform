@@ -566,9 +566,31 @@ rođenja. Nudi se samo punoletnom, aktivnom nalogu bez admin role.
 5. **Roditelj, poziv za drugog roditelja i postupak potvrde iz čl. 6** — isto što i
    pri otvaranju naloga iz roditeljskog profila.
 
-🔴 **POEN, oglasi, poruke i istorija OSTAJU.** Dete sme da ih ima, a otpis pri
-punoletstvu meri se po `Prijateljstvo.poenIsplacen` — taj nalog prijateljstva nema,
-pa mu se na 18. rođendan neće poništiti ništa što ovde nije nastalo.
+🔴 **POEN se poništava — sve što je Protokol UPISAO tom nalogu** (potvrde, doprinos
+sadržaju i razmeni, donacije, programi, pokroviteljstvo, osnivački). To su kanali iz
+čl. 15 koje maloletni korisnik ne koristi; POEN je upisan pod pretpostavkom da je
+nalog punoletan i ta pretpostavka pada zajedno sa uzrastom. **POEN koji su mu ljudi
+PREPISALI ostaje** — prepis nije emisija nego seoba zapisa (čl. 14, 16), a dete ga
+sme imati. Meri se **neto emisija iz ISTORIJE** (Protokol→nalog minus nalog→Protokol),
+ne iz stanja: stanje ne razlikuje emisiju od prepisa, a upravo ta razlika odlučuje.
+
+🔴 **Zapis SME u minus, i to na OBE strane** (odluka vlasnika 2026-08-23). Ko je
+POEN već potrošio, ide u minus — inače bi onaj ko brže potroši prošao jeftinije od
+onoga ko sačuva (isto pravilo kao otpis prijateljstva i poništen prepis po prijavi
+razmene). Isto važi i za **druge ljude** kojima je POEN upisan povodom palih potvrda
+(`dozvoliMinus`). 🟡 **Posledicu znati:** čovek koji je uredno potvrdio poznanika može
+završiti sa negativnim zapisom zbog tuđe omaške u uzrastu — zato mu ide **protivzapis
+u istoriju** (`OTPIS_PREVOD_U_MALOLETNI`) **i obaveštenje**; minus menja šta sme sa
+zapisom i ne sme da se pojavi bez reči. **Izuzetaka od zabrane negativnog zapisa
+(Pravilnik čl. 14 st. 3) u kodu sada ima ČETIRI** — nadoknada, poništen prepis, otpis
+prijateljstva i ovo.
+
+🟡 **Reset naloga (`reset-korisnika.ts`) i dalje staje na nuli** — `dozvoliMinus` je
+podrazumevano `false`. Tamo je reč o probi korisničkog puta, ne o poništenju emisije.
+
+🔴 **Oglasi, poruke i istorija OSTAJU.** Dete sme da ih ima, a otpis pri punoletstvu
+meri se po `Prijateljstvo.poenIsplacen` — taj nalog prijateljstva nema, pa mu se na
+18. rođendan neće poništiti ništa što ovde nije nastalo.
 
 🟡 **Indeks roditelja se NAMERNO ne traži** (za razliku od `otvoriNalogDeteta`, čl. 5):
 nalog već postoji i samo dobija roditelja, kao pri preuzimanju kod deteta koje se
@@ -591,7 +613,8 @@ išta padne.
 `src/lib/protokol/verifikacije-naloga.ts` (`oboriVerifikacijeNaloga` — izdvojeno iz
 `reset-korisnika.ts`, koji ga sada zove; ista kaskada, jedno mesto). Testovi
 `__tests__/protokol/prevod-u-maloletni.test.ts`. Audit: `NALOG_PREVEDEN_U_MALOLETNI`.
-**Bez migracije** — `User.maloletan` i `Roditeljstvo` već postoje.
+Migracija `20260823120000_otpis_prevod_u_maloletni` (samo nova vrednost enum-a
+`TransactionType.OTPIS_PREVOD_U_MALOLETNI`, zaseban fajl bez upotrebe).
 
 🔴 **Povratka nema.** U punoletni nalog prelazi isključivo preko `punoletstvo.ts`,
 na dan izračunat iz ovde upisanog datuma. Ispravka samog datuma ide zasebnom rutom

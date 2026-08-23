@@ -72,7 +72,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
       "NALOG_PREVEDEN_U_MALOLETNI",
       id,
       `${rez.pseudonim} (${rez.godine} god.) → roditelj ${rez.roditeljPseudonim}; ` +
-        `${rez.ponistenoPotvrda} potvrda palo, ${rez.poenVracenOdDrugih} POEN skinuto drugima, ` +
+        `${rez.otpisanoNalogu} POEN poništeno sa zapisa, ${rez.ponistenoPotvrda} potvrda palo, ` +
+        `${rez.poenVracenOdDrugih} POEN skinuto drugima (${rez.brojUMinusu} u minusu), ` +
         `${rez.zrnaOtpisana} ZRNA otpisano, ${rez.obrisanoZabelezenih} zabeleženih doprinosa obrisano, ` +
         `${rez.ugasenoProgramaPrijava} prijava na programe ugašeno, ` +
         `${rez.brojPotvrdjivaca} izjašnjenja po čl. 6`,
