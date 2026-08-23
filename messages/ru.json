@@ -185,6 +185,8 @@
     "privatnost_link": "Политику конфиденциальности",
     "dugme": "Зарегистрироваться",
     "dugme_loading": "Регистрация...",
+    "dugme_google": "Регистрация через Google",
+    "ili": "или",
     "vec_imate_nalog": "Уже есть учётная запись?",
     "prijavite_se": "Войди",
     "greska_email": "Введи корректный email.",

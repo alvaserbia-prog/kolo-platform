@@ -185,6 +185,8 @@
     "privatnost_link": "Privacy Policy",
     "dugme": "Register",
     "dugme_loading": "Registering...",
+    "dugme_google": "Sign up with Google",
+    "ili": "or",
     "vec_imate_nalog": "Already have an account?",
     "prijavite_se": "Sign in",
     "greska_email": "Enter a valid email address.",
