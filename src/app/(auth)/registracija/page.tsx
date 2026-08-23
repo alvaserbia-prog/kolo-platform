@@ -99,7 +99,25 @@ export default function RegistracijaPage() {
   return (
     <div className="w-full max-w-sm">
       <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6">
-        <h1 className="mb-6 text-xl font-bold text-kolo-text">{t("naslov")}</h1>
+        <h1 className="mb-5 text-xl font-bold text-kolo-text">{t("naslov")}</h1>
+
+        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
+            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
+            a ne svoj, i ne traži datum rođenja.
+
+            Stoji PRE obrasca i istaknuto je namerno: ovo nije „još jedan link"
+            nego skretnica. Dete koje ga ne primeti prođe kroz punoletni obrazac
+            i dobije nalog bez roditeljske veze, bez pristanka i van režima iz
+            Pravilnika o učešću dece — a to se posle ne ispravlja samo od sebe. */}
+        {MODUL_DECA_AKTIVAN && (
+          <Link
+            href="/registracija/dete"
+            className="mb-5 flex items-center justify-between gap-3 rounded-xl border border-kolo-green-500 bg-kolo-green-100 px-4 py-3 transition-colors hover:bg-white"
+          >
+            <span className="text-sm text-kolo-text">{t("dete_pitanje")}</span>
+            <span className="shrink-0 text-sm font-semibold text-kolo-green-700">{t("dete_link")} →</span>
+          </Link>
+        )}
 
         {/* Izbor načina pristupanja stoji PRE obrasca: Google preskače ceo
             obrazac (vodi na /oauth/dovrsi), pa dugme između polja preseca
@@ -147,7 +165,6 @@ export default function RegistracijaPage() {
             {pseudonimStatus === "zauzet" && (
               <p className="mt-1 text-xs text-red-500">{pseudonimGreska || t("pseudonim_zauzet")}</p>
             )}
-            {pseudonimStatus !== "zauzet" && <p className="mt-1 text-xs text-kolo-muted">{t("pseudonim_slobodan_opis")}</p>}
           </div>
 
           {/* Lozinka */}
@@ -214,18 +231,6 @@ export default function RegistracijaPage() {
           {t("vec_imate_nalog")}{" "}
           <Link href="/login" className="text-kolo-green-700 font-medium hover:underline">{t("prijavite_se")}</Link>
         </p>
-
-        {/* Modul Deca, čl. 4a: dete se registruje samo, pre nego što je iko od
-            njegovih roditelja na platformi. Zaseban obrazac — traži imejl RODITELJA,
-            a ne svoj, i ne traži datum rođenja. */}
-        {MODUL_DECA_AKTIVAN && (
-          <p className="mt-2 text-center text-sm text-kolo-muted">
-            {t("dete_pitanje")}{" "}
-            <Link href="/registracija/dete" className="font-medium text-kolo-green-700 hover:underline">
-              {t("dete_link")}
-            </Link>
-          </p>
-        )}
       </div>
     </div>
   );
