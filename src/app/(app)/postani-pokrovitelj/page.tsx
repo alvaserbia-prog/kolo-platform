@@ -14,7 +14,7 @@ export default async function PostaniPokroviteljPage() {
   if (!POKROVITELJSTVO_AKTIVNO) notFound();
   const locale = await getLocale();
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/prijava");
+  if (!session) redirect("/login");
   const t = await getTranslations("postaniPokrovitelj");
   const tc = await getTranslations("common");
 

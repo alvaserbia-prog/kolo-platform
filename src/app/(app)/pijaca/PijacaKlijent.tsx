@@ -575,10 +575,10 @@ const OglasKartica = memo(function OglasKartica({
                nema ni nalog, a prijavljenom je najbliži potez sopstveni oglas —
                kroz njega ga mreža i nađe (Pravilnik čl. 32 st. 4). */
             <Link
-              href={prijavljen ? "/pijaca/novi-oglas" : "/prijava"}
+              href={prijavljen ? "/pijaca/novi-oglas" : "/registracija"}
               className="shrink-0 text-xs text-kolo-green-700 font-semibold hover:underline"
             >
-              {prijavljen ? t("cta_postavi_oglas") : t("cta_prijavi_se")}
+              {prijavljen ? t("cta_postavi_oglas") : t("registruj_se")}
             </Link>
           )}
         </div>
