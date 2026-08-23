@@ -35,6 +35,22 @@ const JAVNE_RUTE = [
   "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",
 ];
 
+/**
+ * Rute koje su javne SAMO na tačnoj putanji — podrute im ostaju zatvorene.
+ *
+ * 🔴 Zašto zaseban spisak: `JAVNE_RUTE` se poklapa i po prefiksu (`r + "/"`), pa
+ * bi `/skole` upisano tamo otvorilo i `/skole/<šifra>`. Pravilnik o učešću dece
+ * čl. 15a razlikuje dva pregleda i daje im različit obim: zbirni pregled je čist
+ * zbir bez ijednog podatka o ličnosti, dok se pojedinačna škola — gde se vide
+ * pseudonimi dece te škole — daje „prijavljenima". Jedan spisak sa poklapanjem
+ * po prefiksu ne ume da napravi tu razliku.
+ *
+ * Do ove ispravke su OBA pregleda bila zatvorena: `src/app/skole/layout.tsx` ima
+ * granu za gosta sa `PublicHeader`, ali je proxy slao na `/login` pre nego što
+ * se stranica iscrta, pa ta grana nikad nije dolazila na red.
+ */
+const JAVNE_TACNE_RUTE = ["/skole"];
+
 const ZAKLJUCANE_ULAZNE_RUTE = [
   "/login", "/registracija", "/oauth",
   "/zaboravljena-lozinka", "/reset-lozinka",
@@ -122,7 +138,9 @@ export default async function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const isJavna = JAVNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/"));
+  const isJavna =
+    JAVNE_RUTE.some((r) => pathname === r || pathname.startsWith(r + "/")) ||
+    JAVNE_TACNE_RUTE.includes(pathname);
   if (isJavna) return NextResponse.next();
 
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
