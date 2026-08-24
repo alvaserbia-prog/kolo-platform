@@ -329,8 +329,14 @@ export default async function ONamaPage() {
           </div>
         </div>
 
-        {/* Primarne kartice (3) */}
-        <div className="grid md:grid-cols-3 gap-4">
+        {/* Primarne kartice. Broj kolona prati broj kartica, jer četvrta
+            (Modul Deca) prati prekidač modula: sa njom je raspored 2×2, bez nje
+            tri kartice stanu u jedan red. U tri kolone bi četvrta ostajala sama
+            u drugom redu. Obe klase moraju stajati kao pun literal — Tailwind
+            ne prepoznaje sastavljeno ime. */}
+        <div
+          className={`grid gap-4 ${kartice.length % 2 === 0 ? "sm:grid-cols-2" : "md:grid-cols-3"}`}
+        >
           {kartice.map((k) => (
             <div
               key={k.naslov}
