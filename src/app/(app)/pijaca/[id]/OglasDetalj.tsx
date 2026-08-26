@@ -212,12 +212,18 @@ export default function OglasDetalj({
               ne govori onome ko treba da zna da je sa druge strane dete i da
               razgovor čita njegov roditelj (čl. 9). */}
           {oglas.sellerMaloletan ? (
-            <div className="flex items-start gap-2 text-xs text-kolo-green-700 bg-kolo-green-100 border border-kolo-green-500/20 rounded-xl px-3 py-2">
-              <span className="shrink-0 bg-white/95 border-2 border-kolo-green-700 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
-                {t("oznaka_dete")}
-              </span>
-              <span>{posmatracMaloletan ? t("oznaka_dete_opis_dete") : t("oznaka_dete_opis")}</span>
-            </div>
+            // Detetu koje gleda tuđi dečji oglas ostaje sam pečat: ceo tekst nosi
+            // napomenu o roditeljskom uvidu, a nju roditelj ima nad razgovorom
+            // deteta sa PUNOLETNIM licem (čl. 9) — razgovore između dece ne čita
+            // niko, pa bi ista rečenica detetu bila neistinita.
+            posmatracMaloletan ? null : (
+              <div className="flex items-start gap-2 text-xs text-kolo-green-700 bg-kolo-green-100 border border-kolo-green-500/20 rounded-xl px-3 py-2">
+                <span className="shrink-0 bg-white/95 border-2 border-kolo-green-700 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
+                  {t("oznaka_dete")}
+                </span>
+                <span>{t("oznaka_dete_opis")}</span>
+              </div>
+            )
           ) : !oglas.sellerVerified ? (
             <div className="flex items-start gap-2 text-xs text-kolo-gold-600 bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2">
               <span className="shrink-0 bg-white/95 border-2 border-kolo-gold-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">

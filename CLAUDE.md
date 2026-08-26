@@ -732,12 +732,16 @@ Ono što sagovorniku zaista treba je da je sa druge strane dete. Kartica i stran
 oglasa zato biraju pečat po `sellerMaloletan`: **DETE** umesto **BEZ POTVRDE**, u
 zelenoj umesto u zlatnoj boji.
 
-🔴 **Rečenica „razgovor čita njegov roditelj" (čl. 9) vezana je za `posmatracMaloletan`,
-ne za oglas.** Roditelj čita razgovor deteta sa **punoletnim** licem; razgovore između
-dece ne čita niko, pa bi detetu koje gleda tuđi dečji oglas ta rečenica bila neistinita.
-Otud dva ključa — `pijaca.oznaka_dete_opis` (punoletnom posmatraču, sa roditeljem) i
-`pijaca.oznaka_dete_opis_dete` (detetu, bez njega); oba zadržavaju napomenu da za
-razmenu odgovaraju sami korisnici, koja je do sada visila na pečatu „bez potvrde".
+🔴 **Objašnjenje uz pečat vidi samo PUNOLETAN posmatrač** (`posmatracMaloletan`).
+Tekst glasi „Oglas je objavilo dete. Njegov roditelj ima uvid u razgovor koji vodite."
+i ceo počiva na čl. 9 — roditelj čita razgovor deteta sa **punoletnim** licem, a
+razgovore između dece ne čita niko. Detetu koje gleda tuđi dečji oglas zato ostaje sam
+pečat; ista rečenica bi mu bila neistinita.
+
+🟡 **Napomena „za razmenu odgovarate međusobno — Fondacija ne posreduje" na oglasu
+deteta više NE stoji** (formulacija vlasnika, 2026-08-26). Stajala je tu samo zato što
+je dete uz to bilo i neverifikovano, pa je nosio pečat „bez potvrde". Pravilo iz Uslova
+čl. 22 se time ne menja — samo se ne ponavlja na tom mestu.
 
 🟡 **Slika oglasa (`/api/pijaca/slika/...`) i dalje se služi bez provere** — ko zna
 `id` oglasa, dobija sliku. Gejt tu ne bi zatvorio ništa jer ruta ionako preusmerava na

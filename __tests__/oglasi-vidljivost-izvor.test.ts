@@ -72,7 +72,7 @@ describe("vidljivost oglasa maloletnog korisnika (čl. 13)", () => {
  */
 describe("oznaka oglasa maloletnog korisnika", () => {
   const JEZICI = { sr, en, ru, hr, hu } as Record<string, { pijaca: Record<string, string> }>;
-  const KLJUCEVI = ["oznaka_dete", "oznaka_dete_opis", "oznaka_dete_opis_dete"];
+  const KLJUCEVI = ["oznaka_dete", "oznaka_dete_opis"];
 
   it.each(Object.keys(JEZICI))("%s ima ceo skup ključeva", (jez) => {
     const pijaca = JEZICI[jez].pijaca;
@@ -91,12 +91,14 @@ describe("oznaka oglasa maloletnog korisnika", () => {
     }
   });
 
-  it("stranica oglasa rečenicu o roditelju vezuje za punoletnog posmatrača", () => {
+  it("napomenu o roditelju vidi samo punoletan posmatrač", () => {
     const izvor = readFileSync(
       path.join(KOREN, "src/app/(app)/pijaca/[id]/OglasDetalj.tsx"),
       "utf8",
     );
-    expect(izvor).toContain("posmatracMaloletan ? t(\"oznaka_dete_opis_dete\") : t(\"oznaka_dete_opis\")");
+    // Ceo tekst nosi napomenu o roditeljskom uvidu, pa se ne sme prikazati detetu:
+    // roditelj čita razgovor deteta sa punoletnim licem, ne razgovore između dece.
+    expect(izvor).toContain("posmatracMaloletan ? null :");
   });
 
   it("Pijaca i stranica oglasa prosleđuju `sellerMaloletan` sa servera", () => {

@@ -1721,8 +1721,7 @@
     "oznaka_neverifikovan": "Novi član",
     "oznaka_neverifikovan_opis": "Oglašivač još nije potvrđen u lancu potvrda. Za razmjenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
     "oznaka_dete": "DIJETE",
-    "oznaka_dete_opis": "Oglas je objavilo dijete. Razgovor koji povodom njega povedeš čita njegov roditelj. Za razmjenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
-    "oznaka_dete_opis_dete": "Oglas je objavilo dijete. Za razmjenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
+    "oznaka_dete_opis": "Oglas je objavilo dijete. Njegov roditelj ima uvid u razgovor koji vodite.",
     "traka_neverifikovan": "Postavi svoj prvi oglas",
     "cta_postavi_oglas": "Postavi oglas"
   },
