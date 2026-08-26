@@ -697,6 +697,38 @@ Ovo je **SUŽAVANJE** zatečenog stanja: do 4.3.3 je profil maloletnog naloga bi
 - 🔴 **Sve staze vode na taj ekran.** Ako makar jedna ostane otvorena, zabrana ne vredi ništa: knjiga zapisa, oglas na Pijaci, lista u školi, spisak dece na profilu roditelja, QR kod, obaveštenje o prepisu. `GET /api/korisnici/pretraga` i dalje filtrira `maloletan: false`.
 - **Šta zatvaranje NE krije:** detetove transakcije — knjiga zapisa je otvorena i tako ostaje. Krije sve ostalo skupljeno na jednom mestu, pre svega **ukupno stanje**, koje dete čini metom.
 
+### 🔴 Oglas deteta: pravilo je stajalo, ali nije bilo uvezano (2026-08-26)
+
+Vidljivost oglasa maloletnog korisnika (čl. 13) sprovode `smeDaVidiOglas`
+(`deca-pravila.ts`) i `usloviVidljivostiOglasa` (`protokol/deca.ts`) — oba tačna od
+uvođenja unapređenog modela. **Bili su uvezani samo u `GET /api/pijaca` i
+`GET /api/pijaca/[id]`, dve rute koje nijedan ekran ne poziva:** `PijacaKlijent` ceo
+spisak dobija kroz props sa servera i filtrira ga tek u pretraživaču. Stvarni prikazi
+su oglase dizali sopstvenim upitom, bez ijedne provere:
+
+- `src/app/pijaca/page.tsx` — spisak na Pijaci (`where: { status: "ACTIVE" }`);
+- `src/app/pijaca/[id]/page.tsx` — stranica oglasa, uključujući `generateMetadata`
+  (naslov, opis i OG slika oglasa deteta išli su Guglu i svakom programu za poruke,
+  bez ijedne prijave);
+- `src/app/page.tsx` — pregled Pijace na javnoj početnoj, dakle i gostu.
+
+Sva tri sada sprovode isto pravilo; stranica oglasa vraća `notFound()` (ne poruku o
+zabrani — poruka bi potvrdila da oglas, a time i dete, postoji), a javna početna
+koristi gostinski uslov `usloviVidljivostiOglasa(null)`, jer je keširana i služi se
+neprijavljenom posmatraču. `sitemap.ts` i `(app)/pocetna` su i ranije bili ispravni.
+
+🔴 **Pouka je ista koja je zapisana uz zatvoren profil — „sve staze vode na taj
+ekran".** Ispravno pravilo u `deca-pravila.ts` ne vredi ništa dok svaki prikaz ne
+prođe kroz njega; ovde su tri prikaza pisala svoj upit. Brana je
+`__tests__/oglasi-vidljivost-izvor.test.ts` — skenira IZVOR i pada kad fajl koji čita
+oglase ne pominje nijedan ulaz u pravilo, ili kad `findMany` opet digne oglase golim
+`status: "ACTIVE"`. Agregatni `count` je namerno izuzet: broj oglasa je agregat, kao
+knjiga zapisa, i nije put do deteta.
+
+🟡 **Slika oglasa (`/api/pijaca/slika/...`) i dalje se služi bez provere** — ko zna
+`id` oglasa, dobija sliku. Gejt tu ne bi zatvorio ništa jer ruta ionako preusmerava na
+javni R2 URL; zatvaranje bi tražilo potpisane URL-ove, što je zaseban posao.
+
 **Veza roditelj–dete je javna u OBA smera** (odluka vlasnika): sa deteta se vidi roditelj, sa roditelja ko su mu deca. 🔴 **Posledica je svesno prihvaćena** — deca time postaju popisiva preko odraslih, što je šira izloženost od svih ranglista zajedno. Zaštitu tada nosi zatvoren profil i prekidač, ne skrivenost. Usput utvrđeno: program **Podrška majkama tu javnost NE traži** (Fondacija vezu ionako vidi, a potvrđivači potvrđuju bez uvida u unete podatke) — javnost stoji na sopstvenom razlogu.
 
 ### Prijava poruke nosi i čoveka (2026-08-17)
