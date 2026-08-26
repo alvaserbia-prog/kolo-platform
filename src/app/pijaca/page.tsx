@@ -56,7 +56,7 @@ export default async function PijacaPage({
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
       sellerId: true,
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: { select: { pseudonim: true, verified: true, maloletan: true } },
     },
   });
 
@@ -95,6 +95,7 @@ export default async function PijacaPage({
           sellerId: l.sellerId,
           sellerPseudonim: l.seller.pseudonim,
           sellerVerified: l.seller.verified,
+          sellerMaloletan: l.seller.maloletan,
         }))}
         isVerified={isVerified}
         prijavljen={!!session?.user}

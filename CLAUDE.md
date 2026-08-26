@@ -315,7 +315,7 @@ Dve izmene istog dana, obe **samo u interfejsu** — akti, Prisma šema i identi
 - „Nov" umesto negacije: *nepotvrđen*/*nepunopravan* imenuju manjak na čoveku, „nov" imenuje trenutak koji prolazi. **Nov član JESTE član** — ima nalog, objavljuje ponude (najviše 3), prima POEN, odgovara na poruke povodom svog oglasa. Ceo red je bez ijedne negacije.
 - 🔴 **Zašto NE druge reči:** „pridruženi član" se sudara sa dugmetom **„Pridruži se"** (registracija), pa bi se čitalo kao „upisao sam se", ne kao manja prava; **„nepoznat"** je zauzet porukama o grešci („Nepoznat jezik", „Nepoznata akcija"); **„poznat član"** se u srpskom čita kao *slavan*; „pristupnik" pada na `pristupnicu` za Krug. Odbačene iz tih razloga, ne stilski.
 
-🔴 **Pečat na Pijaci NAMERNO ostaje `BEZ POTVRDE`.** On radi zaštitni posao prema kupcu — kaže da iza oglašivača još niko nije stao. „NOV" bi rekao samo da je skoro došao, a čovek može ostati bez potvrde godinu dana. Pečat i oznaka statusa rade različit posao i smeju da se razlikuju.
+🔴 **Pečat na Pijaci NAMERNO ostaje `BEZ POTVRDE`.** On radi zaštitni posao prema kupcu — kaže da iza oglašivača još niko nije stao. „NOV" bi rekao samo da je skoro došao, a čovek može ostati bez potvrde godinu dana. Pečat i oznaka statusa rade različit posao i smeju da se razlikuju. 🟡 **Od 2026-08-26 pečat važi samo za PUNOLETNE naloge** — oglas deteta nosi svoj (vidi „Oglas deteta: pravilo je stajalo…" ispod).
 
 🔴 **Baza se NE menja.** `VerifikacionaVeza`, `VerifikacijaToken`, `VerifikacionaZona`, `TipKorisnika.NEVERIFIKOVAN`, `EMISIJA_VERIFIKACIJA`, `NadzorSubjekt.VERIFIKATOR` ostaju — akti i dalje govore „verifikacija", a baza je zapis pravne činjenice, bliža aktu nego ekranu. Isti presedan kao `PROTOKOL_WALLET_ID = "banka-singleton"` uz UI „Protokol" i model `ChatMessage` uz UI „Pričaonica". Ostaju i placeholderi `{verifikator}`/`{verifikovani}` i polje `verifikacijaId` u poruci o grešci — kod ih traži po imenu.
 
@@ -724,6 +724,20 @@ prođe kroz njega; ovde su tri prikaza pisala svoj upit. Brana je
 oglase ne pominje nijedan ulaz u pravilo, ili kad `findMany` opet digne oglase golim
 `status: "ACTIVE"`. Agregatni `count` je namerno izuzet: broj oglasa je agregat, kao
 knjiga zapisa, i nije put do deteta.
+
+**Uz to: oglas deteta nosi SVOJ pečat, ne „bez potvrde".** Maloletni nalog jeste
+neverifikovan i uvek će biti — u lanac potvrda ne sme da uđe (čl. 15) — pa mu „bez
+potvrde" saopštava trajno svojstvo, i to rečju koja opisuje **novog odraslog člana**.
+Ono što sagovorniku zaista treba je da je sa druge strane dete. Kartica i stranica
+oglasa zato biraju pečat po `sellerMaloletan`: **DETE** umesto **BEZ POTVRDE**, u
+zelenoj umesto u zlatnoj boji.
+
+🔴 **Rečenica „razgovor čita njegov roditelj" (čl. 9) vezana je za `posmatracMaloletan`,
+ne za oglas.** Roditelj čita razgovor deteta sa **punoletnim** licem; razgovore između
+dece ne čita niko, pa bi detetu koje gleda tuđi dečji oglas ta rečenica bila neistinita.
+Otud dva ključa — `pijaca.oznaka_dete_opis` (punoletnom posmatraču, sa roditeljem) i
+`pijaca.oznaka_dete_opis_dete` (detetu, bez njega); oba zadržavaju napomenu da za
+razmenu odgovaraju sami korisnici, koja je do sada visila na pečatu „bez potvrde".
 
 🟡 **Slika oglasa (`/api/pijaca/slika/...`) i dalje se služi bez provere** — ko zna
 `id` oglasa, dobija sliku. Gejt tu ne bi zatvorio ništa jer ruta ionako preusmerava na

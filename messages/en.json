@@ -1720,6 +1720,9 @@
     "neverif_preostalo": "Active listings you may still post: {broj}.",
     "oznaka_neverifikovan": "New member",
     "oznaka_neverifikovan_opis": "No one has confirmed this advertiser in the chain of confirmations yet. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
+    "oznaka_dete": "CHILD",
+    "oznaka_dete_opis": "This ad was posted by a child. Any conversation you start about it is read by their parent. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
+    "oznaka_dete_opis_dete": "This ad was posted by a child. You deal with each other directly — the Foundation neither mediates nor bears responsibility.",
     "traka_neverifikovan": "Post your first listing",
     "cta_postavi_oglas": "Post a listing"
   },

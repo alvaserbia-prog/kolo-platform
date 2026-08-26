@@ -17,6 +17,11 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import sr from "@/../messages/sr.json";
+import en from "@/../messages/en.json";
+import ru from "@/../messages/ru.json";
+import hr from "@/../messages/hr.json";
+import hu from "@/../messages/hu.json";
 
 const KOREN = process.cwd();
 
@@ -50,6 +55,54 @@ describe("vidljivost oglasa maloletnog korisnika (čl. 13)", () => {
         izvor,
       );
       expect(goli, `${rel} ima spisak oglasa bez uslova nad prodavcem`).toBe(false);
+    }
+  });
+});
+
+/**
+ * Oglas deteta nosi svoj pečat, ne „bez potvrde".
+ *
+ * Maloletni nalog jeste neverifikovan i uvek će biti — u lanac potvrda ne sme da
+ * uđe (čl. 15) — pa mu „bez potvrde" saopštava trajno svojstvo rečju koja opisuje
+ * novog ODRASLOG člana, a prećutkuje ono jedino što sagovorniku treba: da je sa
+ * druge strane dete i da razgovor čita njegov roditelj (čl. 9).
+ *
+ * Rečenica o roditelju vezana je za `posmatracMaloletan`: razgovore između dece
+ * ne čita niko, pa bi detetu bila neistinita.
+ */
+describe("oznaka oglasa maloletnog korisnika", () => {
+  const JEZICI = { sr, en, ru, hr, hu } as Record<string, { pijaca: Record<string, string> }>;
+  const KLJUCEVI = ["oznaka_dete", "oznaka_dete_opis", "oznaka_dete_opis_dete"];
+
+  it.each(Object.keys(JEZICI))("%s ima ceo skup ključeva", (jez) => {
+    const pijaca = JEZICI[jez].pijaca;
+    const nedostaje = KLJUCEVI.filter((k) => !pijaca[k]?.trim());
+    expect(nedostaje, `nedostaju ključevi u ${jez}`).toEqual([]);
+  });
+
+  it("kartica i stranica oglasa biraju pečat po `sellerMaloletan`", () => {
+    for (const rel of [
+      "src/app/(app)/pijaca/PijacaKlijent.tsx",
+      "src/app/(app)/pijaca/[id]/OglasDetalj.tsx",
+    ]) {
+      const izvor = readFileSync(path.join(KOREN, rel), "utf8");
+      expect(izvor, `${rel} ne zna za maloletnog oglašivača`).toContain("oglas.sellerMaloletan");
+      expect(izvor, `${rel} ne prikazuje pečat deteta`).toContain("oznaka_dete");
+    }
+  });
+
+  it("stranica oglasa rečenicu o roditelju vezuje za punoletnog posmatrača", () => {
+    const izvor = readFileSync(
+      path.join(KOREN, "src/app/(app)/pijaca/[id]/OglasDetalj.tsx"),
+      "utf8",
+    );
+    expect(izvor).toContain("posmatracMaloletan ? t(\"oznaka_dete_opis_dete\") : t(\"oznaka_dete_opis\")");
+  });
+
+  it("Pijaca i stranica oglasa prosleđuju `sellerMaloletan` sa servera", () => {
+    for (const rel of ["src/app/pijaca/page.tsx", "src/app/pijaca/[id]/page.tsx"]) {
+      const izvor = readFileSync(path.join(KOREN, rel), "utf8");
+      expect(izvor, `${rel} ne šalje podatak o uzrastu oglašivača`).toContain("sellerMaloletan");
     }
   });
 });

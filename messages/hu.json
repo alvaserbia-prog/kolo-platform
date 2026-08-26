@@ -1713,6 +1713,9 @@
     "neverif_preostalo": "Ennyi aktív hirdetést tehetsz még közzé: {broj}.",
     "oznaka_neverifikovan": "Új tag",
     "oznaka_neverifikovan_opis": "A hirdető még nincs megerősítve a megerősítési láncban. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
+    "oznaka_dete": "GYEREK",
+    "oznaka_dete_opis": "A hirdetést gyerek adta fel. A vele kapcsolatban indított beszélgetést a szülője olvassa. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
+    "oznaka_dete_opis_dete": "A hirdetést gyerek adta fel. A cseréért egymásnak feleltek — az Alapítvány nem közvetít és nem felel.",
     "traka_neverifikovan": "Tedd közzé az első hirdetésed",
     "cta_postavi_oglas": "Hirdetés feladása"
   },

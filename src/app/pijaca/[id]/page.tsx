@@ -108,6 +108,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         sellerId: listing.seller.id,
         sellerPseudonim: listing.seller.pseudonim,
         sellerVerified: listing.seller.verified,
+        sellerMaloletan: listing.seller.maloletan,
         isMine: listing.seller.id === session?.user?.id,
         pregledi: listing.pregledi,
         // Razlog uklanjanja se saopštava vlasniku (Uslovi čl. 25 st. 2), ne javnosti.
@@ -116,6 +117,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
       }}
       isVerified={session?.user?.verified ?? false}
       jePrijavljen={!!session?.user}
+      posmatracMaloletan={posmatrac?.maloletan ?? false}
     />
   );
 }

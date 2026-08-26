@@ -26,6 +26,8 @@ interface Listing {
   sellerId: string;
   sellerPseudonim: string;
   sellerVerified: boolean;
+  /** Oglašivač je maloletan korisnik — pečat i objašnjenje su drugi (čl. 9, 13). */
+  sellerMaloletan: boolean;
 }
 
 interface Props {
@@ -519,12 +521,22 @@ const OglasKartica = memo(function OglasKartica({
         </span>
         {/* Pečat da oglašivač nije verifikovan (Uslovi čl. 16, Pravilnik čl. 16).
             Vide ga svi kojima je vidljiv i oglas, uključujući neprijavljene.
-            Ranije je stajao kao sitan tekst uz pseudonim i lako se previđao. */}
-        {!oglas.sellerVerified && (
+            Ranije je stajao kao sitan tekst uz pseudonim i lako se previđao.
+
+            🔴 Dete dobija SVOJ pečat, ne „bez potvrde". Maloletni nalog jeste
+            neverifikovan i uvek će biti — u lanac potvrda ne sme da uđe (čl. 15) —
+            pa bi mu „bez potvrde" saopštavalo nešto što se nikad neće promeniti,
+            i to rečju koja opisuje novog odraslog člana. Ono što sagovorniku
+            zaista treba je da je sa druge strane dete. */}
+        {oglas.sellerMaloletan ? (
+          <span className="absolute top-2 right-2 bg-white/95 text-kolo-green-700 border-2 border-kolo-green-700 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
+            {t("oznaka_dete")}
+          </span>
+        ) : !oglas.sellerVerified ? (
           <span className="absolute top-2 right-2 bg-white/95 text-kolo-gold-600 border-2 border-kolo-gold-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
             {t("oznaka_neverifikovan")}
           </span>
-        )}
+        ) : null}
       </Link>
 
       {/* Sadržaj */}
