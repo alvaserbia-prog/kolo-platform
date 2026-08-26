@@ -11,6 +11,7 @@ import FaqAkordeon from "@/components/FaqAkordeon";
 import KomeKartice from "@/components/KomeKartice";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
+import { usloviVidljivostiOglasa } from "@/lib/protokol/deca";
 import { getTranslations, getLocale } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
@@ -28,7 +29,10 @@ export async function generateMetadata(): Promise<Metadata> {
 async function getPijacaPreview() {
   try {
     const listings = await prisma.marketplaceListing.findMany({
-      where: { status: "ACTIVE" },
+      // Oglas maloletnog korisnika se ovde ne prikazuje nikada (Modul Deca, čl. 13):
+      // stranica je javna i keširana, pa se služi neprijavljenom posmatraču — a njemu
+      // dečji oglas ne pripada ni uz roditeljsku saglasnost.
+      where: { status: "ACTIVE", seller: usloviVidljivostiOglasa(null) },
       orderBy: { createdAt: "desc" },
       take: 12,
       select: {

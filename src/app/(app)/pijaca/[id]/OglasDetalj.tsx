@@ -29,6 +29,8 @@ interface OglasProps {
   sellerId: string;
   sellerPseudonim: string;
   sellerVerified: boolean;
+  /** Oglašivač je maloletan korisnik — pečat i objašnjenje su drugi (čl. 9, 13). */
+  sellerMaloletan: boolean;
   isMine: boolean;
   /** Broj pregleda — prikazuje se samo oglašivaču. */
   pregledi: number;
@@ -41,9 +43,22 @@ interface Props {
   isVerified: boolean;
   /** Prijavljen posetilac sme da prijavi sporan oglas; gost ne. */
   jePrijavljen: boolean;
+  /**
+   * Da li je i sam posmatrač maloletan.
+   *
+   * 🔴 Odlučuje SAMO da li se pominje roditeljsko čitanje. Roditelj čita razgovor
+   * deteta sa PUNOLETNIM licem (čl. 9); razgovore između dece ne čita niko. Detetu
+   * koje gleda tuđi dečji oglas ta rečenica bi bila neistinita.
+   */
+  posmatracMaloletan?: boolean;
 }
 
-export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) {
+export default function OglasDetalj({
+  oglas,
+  isVerified,
+  jePrijavljen,
+  posmatracMaloletan = false,
+}: Props) {
   const locale = useLocale();
   const t = useTranslations("pijaca");
   const tc = useTranslations("common");
@@ -189,15 +204,34 @@ export default function OglasDetalj({ oglas, isVerified, jePrijavljen }: Props) 
 
           {/* Javna oznaka da oglašivač nije verifikovan (Uslovi 4.1.1). Vide je i
               neprijavljeni posetioci — pregled oglasa je javan, pa i upozorenje
-              mora biti. Za razmenu odgovaraju sami korisnici (Pravilnik čl. 16). */}
-          {!oglas.sellerVerified && (
+              mora biti. Za razmenu odgovaraju sami korisnici (Pravilnik čl. 16).
+
+              🔴 Oglas deteta nosi SVOJU oznaku umesto „bez potvrde": maloletni
+              nalog u lanac potvrda ne ulazi (čl. 15), pa mu manjak potvrde nije
+              stanje koje prolazi nego trajno svojstvo — a rečenica o tome ništa
+              ne govori onome ko treba da zna da je sa druge strane dete i da
+              razgovor čita njegov roditelj (čl. 9). */}
+          {oglas.sellerMaloletan ? (
+            // Detetu koje gleda tuđi dečji oglas ostaje sam pečat: ceo tekst nosi
+            // napomenu o roditeljskom uvidu, a nju roditelj ima nad razgovorom
+            // deteta sa PUNOLETNIM licem (čl. 9) — razgovore između dece ne čita
+            // niko, pa bi ista rečenica detetu bila neistinita.
+            posmatracMaloletan ? null : (
+              <div className="flex items-start gap-2 text-xs text-kolo-green-700 bg-kolo-green-100 border border-kolo-green-500/20 rounded-xl px-3 py-2">
+                <span className="shrink-0 bg-white/95 border-2 border-kolo-green-700 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
+                  {t("oznaka_dete")}
+                </span>
+                <span>{t("oznaka_dete_opis")}</span>
+              </div>
+            )
+          ) : !oglas.sellerVerified ? (
             <div className="flex items-start gap-2 text-xs text-kolo-gold-600 bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-3 py-2">
               <span className="shrink-0 bg-white/95 border-2 border-kolo-gold-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md rotate-[-6deg]">
                 {t("oznaka_neverifikovan")}
               </span>
               <span>{t("oznaka_neverifikovan_opis")}</span>
             </div>
-          )}
+          ) : null}
 
           <div className="flex flex-wrap gap-4 text-xs text-kolo-muted pt-1 border-t border-kolo-border">
             <span>{jePotraznja ? t("narucilac") : t("prodavac")}: <strong className="text-kolo-muted"><Pseudonim>{oglas.sellerPseudonim}</Pseudonim></strong></span>

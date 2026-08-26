@@ -315,7 +315,7 @@ Dve izmene istog dana, obe **samo u interfejsu** — akti, Prisma šema i identi
 - „Nov" umesto negacije: *nepotvrđen*/*nepunopravan* imenuju manjak na čoveku, „nov" imenuje trenutak koji prolazi. **Nov član JESTE član** — ima nalog, objavljuje ponude (najviše 3), prima POEN, odgovara na poruke povodom svog oglasa. Ceo red je bez ijedne negacije.
 - 🔴 **Zašto NE druge reči:** „pridruženi član" se sudara sa dugmetom **„Pridruži se"** (registracija), pa bi se čitalo kao „upisao sam se", ne kao manja prava; **„nepoznat"** je zauzet porukama o grešci („Nepoznat jezik", „Nepoznata akcija"); **„poznat član"** se u srpskom čita kao *slavan*; „pristupnik" pada na `pristupnicu` za Krug. Odbačene iz tih razloga, ne stilski.
 
-🔴 **Pečat na Pijaci NAMERNO ostaje `BEZ POTVRDE`.** On radi zaštitni posao prema kupcu — kaže da iza oglašivača još niko nije stao. „NOV" bi rekao samo da je skoro došao, a čovek može ostati bez potvrde godinu dana. Pečat i oznaka statusa rade različit posao i smeju da se razlikuju.
+🔴 **Pečat na Pijaci NAMERNO ostaje `BEZ POTVRDE`.** On radi zaštitni posao prema kupcu — kaže da iza oglašivača još niko nije stao. „NOV" bi rekao samo da je skoro došao, a čovek može ostati bez potvrde godinu dana. Pečat i oznaka statusa rade različit posao i smeju da se razlikuju. 🟡 **Od 2026-08-26 pečat važi samo za PUNOLETNE naloge** — oglas deteta nosi svoj (vidi „Oglas deteta: pravilo je stajalo…" ispod).
 
 🔴 **Baza se NE menja.** `VerifikacionaVeza`, `VerifikacijaToken`, `VerifikacionaZona`, `TipKorisnika.NEVERIFIKOVAN`, `EMISIJA_VERIFIKACIJA`, `NadzorSubjekt.VERIFIKATOR` ostaju — akti i dalje govore „verifikacija", a baza je zapis pravne činjenice, bliža aktu nego ekranu. Isti presedan kao `PROTOKOL_WALLET_ID = "banka-singleton"` uz UI „Protokol" i model `ChatMessage` uz UI „Pričaonica". Ostaju i placeholderi `{verifikator}`/`{verifikovani}` i polje `verifikacijaId` u poruci o grešci — kod ih traži po imenu.
 
@@ -696,6 +696,56 @@ Ovo je **SUŽAVANJE** zatečenog stanja: do 4.3.3 je profil maloletnog naloga bi
 - **Dete vidi profil SAMO svog prijatelja.** Dete iz iste škole koje mu nije prijatelj dobija isti zatvoren ekran; put do drugog deteta ostaje jedan — skeniran QR kod uživo.
 - 🔴 **Sve staze vode na taj ekran.** Ako makar jedna ostane otvorena, zabrana ne vredi ništa: knjiga zapisa, oglas na Pijaci, lista u školi, spisak dece na profilu roditelja, QR kod, obaveštenje o prepisu. `GET /api/korisnici/pretraga` i dalje filtrira `maloletan: false`.
 - **Šta zatvaranje NE krije:** detetove transakcije — knjiga zapisa je otvorena i tako ostaje. Krije sve ostalo skupljeno na jednom mestu, pre svega **ukupno stanje**, koje dete čini metom.
+
+### 🔴 Oglas deteta: pravilo je stajalo, ali nije bilo uvezano (2026-08-26)
+
+Vidljivost oglasa maloletnog korisnika (čl. 13) sprovode `smeDaVidiOglas`
+(`deca-pravila.ts`) i `usloviVidljivostiOglasa` (`protokol/deca.ts`) — oba tačna od
+uvođenja unapređenog modela. **Bili su uvezani samo u `GET /api/pijaca` i
+`GET /api/pijaca/[id]`, dve rute koje nijedan ekran ne poziva:** `PijacaKlijent` ceo
+spisak dobija kroz props sa servera i filtrira ga tek u pretraživaču. Stvarni prikazi
+su oglase dizali sopstvenim upitom, bez ijedne provere:
+
+- `src/app/pijaca/page.tsx` — spisak na Pijaci (`where: { status: "ACTIVE" }`);
+- `src/app/pijaca/[id]/page.tsx` — stranica oglasa, uključujući `generateMetadata`
+  (naslov, opis i OG slika oglasa deteta išli su Guglu i svakom programu za poruke,
+  bez ijedne prijave);
+- `src/app/page.tsx` — pregled Pijace na javnoj početnoj, dakle i gostu.
+
+Sva tri sada sprovode isto pravilo; stranica oglasa vraća `notFound()` (ne poruku o
+zabrani — poruka bi potvrdila da oglas, a time i dete, postoji), a javna početna
+koristi gostinski uslov `usloviVidljivostiOglasa(null)`, jer je keširana i služi se
+neprijavljenom posmatraču. `sitemap.ts` i `(app)/pocetna` su i ranije bili ispravni.
+
+🔴 **Pouka je ista koja je zapisana uz zatvoren profil — „sve staze vode na taj
+ekran".** Ispravno pravilo u `deca-pravila.ts` ne vredi ništa dok svaki prikaz ne
+prođe kroz njega; ovde su tri prikaza pisala svoj upit. Brana je
+`__tests__/oglasi-vidljivost-izvor.test.ts` — skenira IZVOR i pada kad fajl koji čita
+oglase ne pominje nijedan ulaz u pravilo, ili kad `findMany` opet digne oglase golim
+`status: "ACTIVE"`. Agregatni `count` je namerno izuzet: broj oglasa je agregat, kao
+knjiga zapisa, i nije put do deteta.
+
+**Uz to: oglas deteta nosi SVOJ pečat, ne „bez potvrde".** Maloletni nalog jeste
+neverifikovan i uvek će biti — u lanac potvrda ne sme da uđe (čl. 15) — pa mu „bez
+potvrde" saopštava trajno svojstvo, i to rečju koja opisuje **novog odraslog člana**.
+Ono što sagovorniku zaista treba je da je sa druge strane dete. Kartica i stranica
+oglasa zato biraju pečat po `sellerMaloletan`: **DETE** umesto **BEZ POTVRDE**, u
+zelenoj umesto u zlatnoj boji.
+
+🔴 **Objašnjenje uz pečat vidi samo PUNOLETAN posmatrač** (`posmatracMaloletan`).
+Tekst glasi „Oglas je objavilo dete. Njegov roditelj ima uvid u razgovor koji vodite."
+i ceo počiva na čl. 9 — roditelj čita razgovor deteta sa **punoletnim** licem, a
+razgovore između dece ne čita niko. Detetu koje gleda tuđi dečji oglas zato ostaje sam
+pečat; ista rečenica bi mu bila neistinita.
+
+🟡 **Napomena „za razmenu odgovarate međusobno — Fondacija ne posreduje" na oglasu
+deteta više NE stoji** (formulacija vlasnika, 2026-08-26). Stajala je tu samo zato što
+je dete uz to bilo i neverifikovano, pa je nosio pečat „bez potvrde". Pravilo iz Uslova
+čl. 22 se time ne menja — samo se ne ponavlja na tom mestu.
+
+🟡 **Slika oglasa (`/api/pijaca/slika/...`) i dalje se služi bez provere** — ko zna
+`id` oglasa, dobija sliku. Gejt tu ne bi zatvorio ništa jer ruta ionako preusmerava na
+javni R2 URL; zatvaranje bi tražilo potpisane URL-ove, što je zaseban posao.
 
 **Veza roditelj–dete je javna u OBA smera** (odluka vlasnika): sa deteta se vidi roditelj, sa roditelja ko su mu deca. 🔴 **Posledica je svesno prihvaćena** — deca time postaju popisiva preko odraslih, što je šira izloženost od svih ranglista zajedno. Zaštitu tada nosi zatvoren profil i prekidač, ne skrivenost. Usput utvrđeno: program **Podrška majkama tu javnost NE traži** (Fondacija vezu ionako vidi, a potvrđivači potvrđuju bez uvida u unete podatke) — javnost stoji na sopstvenom razlogu.
 

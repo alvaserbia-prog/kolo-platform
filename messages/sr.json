@@ -1720,6 +1720,8 @@
     "neverif_preostalo": "Možeš još ovoliko aktivnih oglasa: {broj}.",
     "oznaka_neverifikovan": "BEZ POTVRDE",
     "oznaka_neverifikovan_opis": "Oglašivača još niko nije potvrdio u lancu potvrda. Za razmenu odgovarate međusobno — Fondacija ne posreduje i ne odgovara.",
+    "oznaka_dete": "DETE",
+    "oznaka_dete_opis": "Oglas je objavilo dete. Njegov roditelj ima uvid u razgovor koji vodite.",
     "traka_neverifikovan": "Postavi svoj prvi oglas",
     "cta_postavi_oglas": "Postavi oglas"
   },

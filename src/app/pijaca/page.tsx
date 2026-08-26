@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { pageMetadata } from "@/lib/seo";
 import { parsirajKatParam } from "@/lib/kategorije";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
+import { ucitajUcesnika, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
 import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -39,8 +40,15 @@ export default async function PijacaPage({
     : null;
   const pracene = korisnik?.praceneKategorije.map((p) => p.category) ?? [];
 
+  // Vidljivost oglasa maloletnog korisnika (Modul Deca, čl. 13).
+  //
+  // 🔴 Filter mora da stoji OVDE, a ne samo u `GET /api/pijaca`: `PijacaKlijent`
+  // ceo spisak dobija kroz props sa servera i dalje filtrira samo u pretraživaču,
+  // pa ruta koja isti uslov već sprovodi nije na putu kojim čovek dolazi na Pijacu.
+  const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
+
   const listings = await prisma.marketplaceListing.findMany({
-    where: { status: "ACTIVE" },
+    where: { status: "ACTIVE", seller: usloviVidljivostiOglasa(posmatrac) },
     orderBy: { createdAt: "desc" },
     take: 60,
     select: {
@@ -48,7 +56,7 @@ export default async function PijacaPage({
       cenaTip: true, price: true, cenaDo: true,
       category: true, images: true, location: true, createdAt: true,
       sellerId: true,
-      seller: { select: { pseudonim: true, verified: true } },
+      seller: { select: { pseudonim: true, verified: true, maloletan: true } },
     },
   });
 
@@ -87,6 +95,7 @@ export default async function PijacaPage({
           sellerId: l.sellerId,
           sellerPseudonim: l.seller.pseudonim,
           sellerVerified: l.seller.verified,
+          sellerMaloletan: l.seller.maloletan,
         }))}
         isVerified={isVerified}
         prijavljen={!!session?.user}
