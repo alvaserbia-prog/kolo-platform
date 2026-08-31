@@ -192,7 +192,7 @@ export const NEMA_STRANICE: Skup = {
   },
 };
 
-const JEZICI: EkranJezik[] = ["sr", "sr-Cyrl", "en", "ru", "hr", "hu"];
+export const JEZICI: EkranJezik[] = ["sr", "sr-Cyrl", "en", "ru", "hr", "hu"];
 
 export function normalizujJezik(vrednost: string | undefined | null): EkranJezik {
   return JEZICI.includes(vrednost as EkranJezik) ? (vrednost as EkranJezik) : "sr";
