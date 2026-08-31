@@ -902,7 +902,8 @@
     "nazad": "Back",
     "roditelj_cita": "The other side is a child. This conversation is read by their parent.",
     "dete_prijatelji_naslov": "Write to your friends",
-    "dete_prijatelji_prazno": "No friends yet. Scan someone's code next to you."
+    "dete_prijatelji_prazno": "No friends yet. Scan someone's code next to you.",
+    "razgovor_zatvoren": "The friendship ended, so this conversation no longer works. If you make up, scan the code again."
   },
   "pravne": {
     "eyebrow": "Legal documents",
@@ -3242,7 +3243,6 @@
     "prvo_mesto": "First place in Serbia",
     "deca_naslov": "Children from this school",
     "deca_prazno": "No children from this school yet.",
-    "deca_samo_prijavljeni": "The list of children is visible to signed-in members.",
     "izbor_naslov": "My school",
     "izbor_opis": "Choose the school you attend. The national school ranking is built from these choices.",
     "izbor_placeholder": "Type the school name or town",
@@ -3255,7 +3255,8 @@
     "kartica_bez_skole": "You have not chosen a school. Choose it and see where you stand in Serbia.",
     "kartica_dugme": "Choose school",
     "kartica_nije_na_listi": "Your school is not on the list yet — it joins with its first participating child.",
-    "kartica_ti": "You are {mesto}. in your school"
+    "kartica_ti": "You are {mesto}. in your school",
+    "deca_samo_deca": "Only children see the list of children from this school. The numbers and the ranking are visible to everyone."
   },
   "emailDeteta": {
     "naslov": "My e-mail address",

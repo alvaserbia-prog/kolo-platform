@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
 import { smePokrenutiRazgovor, ucitajUcesnika } from "@/lib/protokol/deca";
+import { PORUKA_RASKINUTO, raskinutoIzmedju } from "@/lib/protokol/prijateljstva";
 
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
@@ -93,6 +94,16 @@ export async function POST(req: NextRequest) {
   // dugme ne može ponovo postati strože od rute.
   const dozvoljeno = smePokrenutiRazgovor(jaUcesnik, drugiUcesnik, session.user.verified);
   if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+
+  // Raskinut par ne otvara nov razgovor — inače bi se ugašeni razgovor zaobišao
+  // u jednom kliku sa oglasa.
+  if (
+    jaUcesnik.maloletan &&
+    drugiUcesnik.maloletan &&
+    (await raskinutoIzmedju(jaUcesnik.id, drugiUcesnik.id))
+  ) {
+    return await greska(PORUKA_RASKINUTO, 403);
+  }
 
   // Povod razgovora za PRIKAZ (sličica i link u razgovoru) — odvojeno od
   // `zabeleziUpit`, koji broji upite za korak 3. Prihvata se samo ako oglas

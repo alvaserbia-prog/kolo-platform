@@ -515,6 +515,30 @@ export async function suPrijatelji(x: string, y: string): Promise<boolean> {
 }
 
 /**
+ * Da li je prijateljstvo između dvoje dece RASKINUTO i nije obnovljeno.
+ *
+ * 🔴 Raskid gasi i zatečene razgovore (odluka vlasnika, 31.08.2026). Do tada je
+ * raskid sklanjao osobu iz Pričaonice, ali je razgovor u četiri oka nastavljao da
+ * radi kao da se ništa nije desilo — pa je jedini potez kojim dete prekida kontakt
+ * koštao 500 POENA i nije prekidao ono zbog čega se povlači.
+ *
+ * Provera se veže za RASKINUT red, ne za odsustvo prijateljstva: dvoje dece koja
+ * nikad nisu bila prijatelji smeju da se dopisuju povodom oglasa (čl. 12). Kad se
+ * par obnovi, aktivan red postoji i razgovor ponovo radi — kao i POEN.
+ */
+export const PORUKA_RASKINUTO =
+  "Prijateljstvo je raskinuto, pa razgovor više ne radi. Ako se pomirite, skenirajte kod ponovo.";
+
+export async function raskinutoIzmedju(x: string, y: string): Promise<boolean> {
+  const [aId, bId] = par(x, y);
+  const red = await prisma.prijateljstvo.findUnique({
+    where: { aId_bId: { aId, bId } },
+    select: { raskinutAt: true },
+  });
+  return !!red?.raskinutAt;
+}
+
+/**
  * Id-evi svih prijatelja — Pričaonica po njima filtrira poruke (čl. 18 st. 3).
  * Uvek uključuje i samog korisnika: svoje poruke čovek vidi i pre nego što ima ijednog
  * prijatelja, inače mu se posle slanja ne desi ništa na ekranu.
