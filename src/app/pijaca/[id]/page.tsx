@@ -8,16 +8,13 @@ import OglasDetalj from "../../(app)/pijaca/[id]/OglasDetalj";
 import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
 import { jeAdmin } from "@/lib/dozvole";
 
-// Apsolutni URL slike oglasa za OG/Twitter karticu (Facebook, Viber, WhatsApp…).
-// R2/CDN slike su već apsolutne — koristimo ih direktno. Legacy disk putanje
-// služe se preko API rute (apsolutizovane na kanonski domen). Bez slike →
-// vraća undefined, pa OG nasleđuje podrazumevanu dinamičku sliku iz opengraph-image.tsx.
-function ogSlikaUrl(images: string[], id: string): string | undefined {
-  if (images.length === 0) return undefined;
-  const prva = images[0];
-  if (/^https?:\/\//i.test(prva)) return prva;
-  return absoluteUrl(`/api/pijaca/slika/${id}/0`);
-}
+// og:image se ovde NE navodi — obezbeđuje ga susedni `opengraph-image.tsx`
+// (1200×630 PNG sa fotografijom oglasa, uz og:image:width/height/type), jedini
+// oblik koji Viber i Messenger pouzdano prikazuju pri PRVOM deljenju linka.
+// Twitter/X bez sopstvene slike pada nazad na og:image.
+//
+// Ta ruta sprovodi vidljivost oglasa deteta sama za sebe — file-convention
+// slika se emituje i kad `generateMetadata` vrati prazno.
 
 export async function generateMetadata({
   params,
@@ -27,18 +24,18 @@ export async function generateMetadata({
   const { id } = await params;
   const listing = await prisma.marketplaceListing.findUnique({
     where: { id },
-    select: { title: true, description: true, images: true, seller: { select: { maloletan: true } } },
+    select: { title: true, description: true, seller: { select: { maloletan: true } } },
   });
   if (!listing) return {};
 
   // Oglas maloletnog korisnika nije javno dostupan (Modul Deca, čl. 13), pa mu
-  // naslov, opis i slika ne smeju u zaglavlje stranice ni u OG karticu — odatle
-  // ih pokupe Gugl i svaki program za poruke, bez ijedne prijave.
+  // naslov i opis ne smeju u zaglavlje stranice ni u OG karticu — odatle ih
+  // pokupe Gugl i svaki program za poruke, bez ijedne prijave. Sliku zatvara
+  // `opengraph-image.tsx` sopstvenom proverom.
   if (listing.seller.maloletan) return {};
 
   // Opis sa kartice (početni deo), fallback na opšti opis sistema.
   const opis = (listing.description?.trim() || SITE_DESCRIPTION).slice(0, 200);
-  const slika = ogSlikaUrl(listing.images, id);
   const putanja = `/pijaca/${id}`;
 
   return {
@@ -51,13 +48,11 @@ export async function generateMetadata({
       siteName: SITE_NAME,
       title: listing.title,
       description: opis,
-      ...(slika ? { images: [{ url: slika }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: listing.title,
       description: opis,
-      ...(slika ? { images: [slika] } : {}),
     },
   };
 }
