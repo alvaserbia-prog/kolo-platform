@@ -1105,6 +1105,9 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 
 ### Sistem (`/sistem`)
 - `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
+- 🔴 **Kartica „Članovi" broji i AKTIVNU DECU (2026-08-31).** Veliki broj je `verifikovanih + aktivneDece`, a „novih" je ostatak. Do ove izmene je brojao samo `verified: true`, pa je maloletni nalog zauvek stajao među „novima" — dete se **nikad ne potvrđuje** (u lanac potvrda ne sme da uđe, Pravilnik o učešću dece čl. 15), a nalog u stanju `AKTIVNO` radi u punom obimu. Uslov je **isti `USLOV_AKTIVNO_DETE`** koji broji ranglista škola (`protokol/skole.ts`) — ne praviti drugu definiciju aktivnog deteta.
+- **Dete u spisku članova nosi pečat „DETE"** (`sistem.clan_dete`, 5 jezika), ne „?" — isti razlog kao pečat na Pijaci: „bez potvrde" bi mu saopštavalo nešto što se nikad neće promeniti.
+- 🟡 **Sekcija „Lokacije" se NIJE menjala** — tamo „{ukupno} članova · {verif} redovnih" i pragovi za otključavanje kolektivnih oblika i dalje broje samo redovne članove. Dete ne osniva Zadrugu, pa bi ga brojanje tamo naduvalo prag.
 
 ### Blog (Vesti Fondacije)
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
