@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { posaljiPush } from "@/lib/push";
 import { posaljiEmailKorisniku } from "@/lib/email";
 import { smeDaKomunicira, ucitajUcesnika } from "@/lib/protokol/deca";
+import { PORUKA_RASKINUTO, raskinutoIzmedju } from "@/lib/protokol/prijateljstva";
 import { obavesti } from "@/lib/notifikacije";
 
 async function getKonv(konvId: string, meId: string) {
@@ -43,6 +44,12 @@ export async function GET(
   // ko piše detetu, treba da zna pred kim piše.
   const roditeljCita = (drugiUser?.maloletan ?? false) && !(jaUser?.maloletan ?? false);
 
+  // Razgovor ugašen raskidom prijateljstva — polje za pisanje se ne prikazuje.
+  const razgovorZatvoren =
+    (drugiUser?.maloletan ?? false) &&
+    (jaUser?.maloletan ?? false) &&
+    (await raskinutoIzmedju(session.user.id, drugiId));
+
   const poruke = await prisma.poruka.findMany({
     where: { konverzacijaId: konvId },
     orderBy: { createdAt: "asc" },
@@ -78,6 +85,7 @@ export async function GET(
   return NextResponse.json({
     drugiUser,
     roditeljCita,
+    razgovorZatvoren,
     povod,
     mojAvatar: jaUser?.avatar ?? null,
     mojPseudonim: session.user.pseudonim,
@@ -122,6 +130,17 @@ export async function POST(
     // `smeDaKomunicira` sam odbija nalog koji još čeka roditelja (čl. 4c).
     const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  }
+
+  // Raskid prijateljstva gasi i zatečeni razgovor (odluka vlasnika, 31.08.2026).
+  // Bez ovoga je jedini potez kojim se dete povlači od nekoga koštao 500 POENA i
+  // nije prekidao ono zbog čega se povlači.
+  if (
+    jaUcesnik.maloletan &&
+    drugiUcesnik.maloletan &&
+    (await raskinutoIzmedju(jaUcesnik.id, drugiUcesnik.id))
+  ) {
+    return await greska(PORUKA_RASKINUTO, 403);
   }
 
   const { tekst } = await req.json();

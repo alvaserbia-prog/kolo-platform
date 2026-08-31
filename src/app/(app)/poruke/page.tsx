@@ -57,6 +57,8 @@ function PorukeContent() {
   // roditelj. Natpis je i odvraćanje i poštenje — ko piše detetu, treba da zna
   // pred kim piše. Server ga postavlja samo punoletnom sagovorniku.
   const [roditeljCita, setRoditeljCita] = useState(false);
+  /** Razgovor ugašen raskidom prijateljstva (čl. 14c) — polje za pisanje otpada. */
+  const [razgovorZatvoren, setRazgovorZatvoren] = useState(false);
   const [mojAvatar, setMojAvatar] = useState<string | null>(null);
   const [mojPseudonim, setMojPseudonim] = useState("");
   const [mobilniPrikaz, setMobilniPrikaz] = useState<"lista" | "chat">("lista");
@@ -112,6 +114,7 @@ function PorukeContent() {
     setMojAvatar(data.mojAvatar ?? null);
     setPovod(data.povod ?? null);
     setRoditeljCita(Boolean(data.roditeljCita));
+    setRazgovorZatvoren(Boolean(data.razgovorZatvoren));
     setMojPseudonim(data.mojPseudonim ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
@@ -436,6 +439,14 @@ function PorukeContent() {
                   <span className="text-xs font-semibold text-kolo-green-700 underline truncate">{povod.naslov}</span>
                 </a>
               )}
+              {/* Raskid gasi razgovor. Poruke ostaju — trag deteta se ne briše —
+                  ali se polje za pisanje ne prikazuje, umesto da dete piše u
+                  prazno i dobije grešku tek na „Pošalji". */}
+              {razgovorZatvoren ? (
+                <p className="rounded-xl border border-kolo-border bg-kolo-bg px-4 py-3 text-sm text-kolo-muted">
+                  {t("razgovor_zatvoren")}
+                </p>
+              ) : (
               <form onSubmit={posalji} className="flex items-end gap-2">
                 <textarea
                   ref={inputRef}
@@ -456,6 +467,7 @@ function PorukeContent() {
                   {slanje ? t("saljem") : t("posalji")}
                 </button>
               </form>
+              )}
             </div>
           </>
         )}

@@ -902,7 +902,8 @@
     "nazad": "Nazad",
     "roditelj_cita": "Sa druge strane je dete. Ovaj razgovor čita njegov roditelj.",
     "dete_prijatelji_naslov": "Piši svojim prijateljima",
-    "dete_prijatelji_prazno": "Još nemaš prijatelje. Skeniraj kod nekome pored sebe."
+    "dete_prijatelji_prazno": "Još nemaš prijatelje. Skeniraj kod nekome pored sebe.",
+    "razgovor_zatvoren": "Prijateljstvo je raskinuto, pa razgovor više ne radi. Ako se pomirite, skenirajte kod ponovo."
   },
   "pravne": {
     "eyebrow": "Pravni dokumenti",
@@ -3242,7 +3243,6 @@
     "prvo_mesto": "Prvo mesto u Srbiji",
     "deca_naslov": "Deca iz ove škole",
     "deca_prazno": "Još nema nijednog deteta iz ove škole.",
-    "deca_samo_prijavljeni": "Spisak dece vide prijavljeni članovi.",
     "izbor_naslov": "Moja škola",
     "izbor_opis": "Izaberi školu koju pohađaš. Od toga se pravi ranglista škola u Srbiji.",
     "izbor_placeholder": "Ukucaj naziv škole ili mesto",
@@ -3255,7 +3255,8 @@
     "kartica_bez_skole": "Nisi izabrao školu. Izaberi je i vidi gde ste u Srbiji.",
     "kartica_dugme": "Izaberi školu",
     "kartica_nije_na_listi": "Tvoja škola još nije na listi — uđe na nju sa prvim uključenim detetom.",
-    "kartica_ti": "Ti si {mesto}. u svojoj školi"
+    "kartica_ti": "Ti si {mesto}. u svojoj školi",
+    "deca_samo_deca": "Spisak dece iz ove škole vide samo deca. Brojevi i mesto na listama vidljivi su svima."
   },
   "emailDeteta": {
     "naslov": "Moja imejl adresa",

@@ -895,7 +895,8 @@
     "nazad": "Vissza",
     "roditelj_cita": "A másik oldalon gyerek van. Ezt a beszélgetést a szülője olvassa.",
     "dete_prijatelji_naslov": "Írj a barátaidnak",
-    "dete_prijatelji_prazno": "Még nincs barátod. Olvasd be valakinek a kódját magad mellett."
+    "dete_prijatelji_prazno": "Még nincs barátod. Olvasd be valakinek a kódját magad mellett.",
+    "razgovor_zatvoren": "A barátság véget ért, ezért a beszélgetés már nem működik. Ha kibékültök, olvassátok be újra a kódot."
   },
   "pravne": {
     "eyebrow": "Jogi dokumentumok",
@@ -3242,7 +3243,6 @@
     "prvo_mesto": "Első hely Szerbiában",
     "deca_naslov": "Az iskola gyerekei",
     "deca_prazno": "Ebből az iskolából még nincs egy gyerek sem.",
-    "deca_samo_prijavljeni": "A gyerekek listáját a bejelentkezett tagok látják.",
     "izbor_naslov": "Az iskolám",
     "izbor_opis": "Válaszd ki az iskoládat. Ebből készül a szerbiai iskolák rangsora.",
     "izbor_placeholder": "Írd be az iskola nevét vagy a települést",
@@ -3255,7 +3255,8 @@
     "kartica_bez_skole": "Még nem választottál iskolát. Válaszd ki, és nézd meg, hol álltok Szerbiában.",
     "kartica_dugme": "Iskola választása",
     "kartica_nije_na_listi": "Az iskolád még nincs a listán — az első részt vevő gyerekkel kerül fel rá.",
-    "kartica_ti": "Te vagy a(z) {mesto}. az iskoládban"
+    "kartica_ti": "Te vagy a(z) {mesto}. az iskoládban",
+    "deca_samo_deca": "Az iskola gyerekeinek listáját csak gyerekek látják. A számok és a helyezés mindenki számára láthatók."
   },
   "emailDeteta": {
     "naslov": "Az e-mail címem",
