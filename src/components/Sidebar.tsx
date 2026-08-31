@@ -9,6 +9,7 @@ import JezikSvitcer from "@/components/JezikSvitcer";
 import { MODUL_DECA_AKTIVAN, POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
 interface DnevniBrojevi {
+  pocetna: number;
   novcanik: number;
   pijaca: number;
   adminCekanje: number;
@@ -188,6 +189,7 @@ function SidebarContent({
   const t = useTranslations("nav");
 
   const badge: Record<string, number> = dnevniBrojevi ? {
+    "/pocetna": dnevniBrojevi.pocetna,
     "/novcanik": dnevniBrojevi.novcanik,
     "/pijaca": dnevniBrojevi.pijaca,
     "/admin": dnevniBrojevi.adminCekanje,

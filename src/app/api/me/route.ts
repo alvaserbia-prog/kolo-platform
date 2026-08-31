@@ -23,7 +23,6 @@ export async function GET() {
   if (!session) return await greska("Unauthorized", 401);
 
   const meId = session.user.id;
-  const verified = session.user.verified;
   const nadzornik = mozeNadzor(session.user);
 
   const [
@@ -61,8 +60,10 @@ export async function GET() {
     // Isti izvor istine kao `GET /api/politika/prihvati` — dva odvojena upita su
     // umela da se raziđu, pa je ekran za pristanak bljesnuo i odmah nestao.
     pristanakStatus(meId),
-    // Badge brojevi su relevantni samo za verifikovane (sidebar „Zajedničko dobro").
-    verified ? izracunajDnevniBrojeve(meId, session.user) : Promise.resolve(null),
+    // Badge brojevi se računaju za SVAKOG prijavljenog, ne samo za potvrđene:
+    // gornja grupa u sidebaru (Početna, POEN, Pijaca) stoji i novom članu, pa je
+    // uslov po potvrdi ostavljao te badge-eve trajno prazne.
+    izracunajDnevniBrojeve(meId, session.user),
     nadzornik ? izracunajNadzorBroj(meId, session.user) : Promise.resolve(0),
   ]);
 

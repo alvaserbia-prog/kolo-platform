@@ -261,6 +261,7 @@ model User {
   // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
   vidjenoNovcanikAt                DateTime?
   vidjenoPijacaAt                  DateTime?
+  vidjenoPocetnaAt                 DateTime?
   // Kad je čovek prvi put video vodič `/dobrodosli`. Dok je NULL, prva prijava
   // vodi na vodič — isto što registracija radi odmah po otvaranju naloga.
   // Do sada je „prvi prolaz" živeo samo u `sessionStorage` pregledača, pa vodič
