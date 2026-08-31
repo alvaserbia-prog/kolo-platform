@@ -29,6 +29,26 @@ type Poruka = {
   oglas?: { id: string; naslov: string; imaSliku: boolean } | null;
 };
 
+/**
+ * Javi service worker-u da zatvori prikazane push notifikacije ovog razgovora
+ * (tag/link = `/poruke?k=<id>`) čim ga korisnik pročita.
+ *
+ * OS crvenu brojku na ikonici računa iz PRIKAZANIH notifikacija, a one ne
+ * nestaju same kad poruku pročitaš u aplikaciji — bez ovoga brojka ostaje.
+ * No-op kad service worker ili push nisu aktivni.
+ */
+function zatvoriNotifikacijeKonverzacije(konvId: string) {
+  if (typeof navigator === "undefined" || !("serviceWorker" in navigator)) return;
+  navigator.serviceWorker.ready
+    .then((reg) => {
+      (reg.active ?? navigator.serviceWorker.controller)?.postMessage({
+        type: "zatvori-notifikacije",
+        link: `/poruke?k=${konvId}`,
+      });
+    })
+    .catch(() => {});
+}
+
 function PorukeContent() {
   const t = useTranslations("poruke");
   const router = useRouter();
@@ -118,6 +138,9 @@ function PorukeContent() {
     setMojPseudonim(data.mojPseudonim ?? "");
     // GET je upravo označio primljene poruke pročitanim — osveži badge u zaglavlju.
     window.dispatchEvent(new Event("poruke-procitane"));
+    // I zatvori sistemske push notifikacije ovog razgovora, da crvena brojka na
+    // ikonici (desktop/PWA) padne — inače ostaje, jer notifikacija ne nestaje sama.
+    zatvoriNotifikacijeKonverzacije(konvId);
   }, []);
 
   // Inicijalno učitavanje konverzacija
