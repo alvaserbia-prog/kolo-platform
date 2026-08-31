@@ -11,6 +11,15 @@
  * Prijava NE uklanja poruku. Uklanja je Fondacija, i tek posle odluke; ovde se samo
  * diže ruka. Zato posle slanja piše da je prijava poslata, a ne da je poruka
  * uklonjena — obećanje koje ekran ne može da ispuni gore je od ćutanja.
+ *
+ * 🔴 Veličina nije stvar ukusa (izmena 31.08.2026). Dugme je bilo `text-[10px]`
+ * podvučeni sivi tekst bez ijednog piksela padinga — meta oko 12 × 30 px, dakle
+ * šest puta manja od minimuma, i to na ekranu čiji su svi ostali elementi dugmad
+ * u jarkim bojama i brojevi od 6 rem. Pošto roditelj razgovore među decom ne čita
+ * (čl. 9 st. 2), dete je JEDINI senzor koji sistem ima za traženje slika, poziv na
+ * susret i laž o uzrastu. Zaštita koju sedmogodišnjak ne može da pogodi prstom
+ * faktički ne postoji. Prop `malo` je zato uklonjen — nije postojala veličina
+ * ispod ove koja bi bila ispravna ni u jednoj od dve sobe.
  */
 
 import { useState } from "react";
@@ -20,12 +29,16 @@ import { kljucRazloga, MAX_OPIS, type RazlogKod } from "@/lib/prijava-poruke-pra
 export default function PrijaviPoruku({
   porukaId,
   sifre,
-  malo,
+  dete,
 }: {
   porukaId: string;
   sifre: RazlogKod[];
-  /** Sitniji prikaz, za gustu listu poruka. */
-  malo?: boolean;
+  /**
+   * Poruka je u dečjoj sobi. Menja se samo ono što se posle prijave kaže: dete
+   * dobija i uputstvo da javi roditelju, jer je Fondacija spora u odnosu na veče
+   * u kome se nešto dešava, a roditelj je jedini ko te večeri može da reaguje.
+   */
+  dete?: boolean;
 }) {
   const t = useTranslations("prijavaPoruke");
   const [otvoreno, setOtvoreno] = useState(false);
@@ -58,8 +71,19 @@ export default function PrijaviPoruku({
     }
   }
 
+  /**
+   * Posle slanja se ranije ispisivala jedna reč — „prijavljeno" — i ništa više.
+   * Dete nije saznalo ni šta se dalje dešava, ni ko to gleda, ni da treba da kaže
+   * roditelju. Ishod se objavljuje (`role="status"`), inače ga čitač ekrana ne
+   * pročita, a upravo je to trenutak u kome potvrda znači najviše.
+   */
   if (poslato) {
-    return <span className={`${malo ? "text-[10px]" : "text-[11px]"} text-kolo-muted`}>{t("poslato")}</span>;
+    return (
+      <span role="status" className="inline-block rounded-xl bg-kolo-green-100 px-3 py-2 text-sm text-kolo-green-800">
+        {t("poslato")}
+        {dete && <span className="mt-0.5 block font-semibold">{t("poslato_reci_roditelju")}</span>}
+      </span>
+    );
   }
 
   if (!otvoreno) {
@@ -67,17 +91,23 @@ export default function PrijaviPoruku({
       <button
         type="button"
         onClick={() => setOtvoreno(true)}
-        className={`${malo ? "text-[10px]" : "text-[11px]"} text-kolo-muted underline hover:text-kolo-danger`}
+        className="meta-dete gap-1 rounded-full border border-kolo-border px-3 text-sm font-semibold text-kolo-muted transition hover:border-kolo-danger hover:text-kolo-danger"
       >
+        {/* Zastavica: dete koje sriče bira po obliku, ali oblik sam ne nosi
+            značenje — uz njega uvek stoji i reč. */}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0">
+          <path d="M4 21V4" />
+          <path d="M4 4h13l-2 4 2 4H4" />
+        </svg>
         {t("dugme")}
       </button>
     );
   }
 
   return (
-    <div className="mt-1 rounded-xl border border-kolo-border bg-white p-2 text-left">
-      <p className="text-xs font-medium text-kolo-text">{t("naslov")}</p>
-      <div className="mt-1.5 flex flex-wrap gap-1.5">
+    <div className="mt-1 rounded-xl border border-kolo-border bg-white p-3 text-left">
+      <p className="text-base font-medium text-kolo-text">{t("naslov")}</p>
+      <div className="mt-2 flex flex-wrap gap-2">
         {sifre.map((s) => (
           <button
             key={s}
@@ -89,7 +119,7 @@ export default function PrijaviPoruku({
               // server odbija. Ostale šifre same nose podatak i idu odmah.
               if (s !== "OSTALO") void posalji(s);
             }}
-            className={`rounded-full border px-2.5 py-1 text-[11px] ${
+            className={`meta-dete rounded-full border px-4 text-sm ${
               kod === s
                 ? "border-kolo-green-700 bg-kolo-green-700 text-white"
                 : "border-kolo-border text-kolo-text"
@@ -101,32 +131,40 @@ export default function PrijaviPoruku({
       </div>
 
       {kod === "OSTALO" && (
-        <div className="mt-2 space-y-1.5">
+        <div className="mt-2 space-y-2">
+          <label htmlFor={`prijava-opis-${porukaId}`} className="sr-only">
+            {t("opis_placeholder")}
+          </label>
           <textarea
+            id={`prijava-opis-${porukaId}`}
             value={opis}
             onChange={(e) => setOpis(e.target.value)}
             rows={2}
             maxLength={MAX_OPIS}
             placeholder={t("opis_placeholder")}
-            className="w-full rounded-xl border border-kolo-border px-2 py-1.5 text-xs"
+            className="w-full rounded-xl border border-kolo-border px-3 py-2 text-base"
           />
           <button
             type="button"
             disabled={salje || opis.trim().length < 3}
             onClick={() => void posalji("OSTALO")}
-            className="rounded-xl bg-kolo-green-700 px-3 py-1.5 text-xs font-semibold text-white disabled:opacity-50"
+            className="meta-dete rounded-xl bg-kolo-green-700 px-4 text-sm font-semibold text-white disabled:opacity-50"
           >
             {t("posalji")}
           </button>
         </div>
       )}
 
-      {greska && <p className="mt-1.5 text-xs text-kolo-danger">{greska}</p>}
+      {greska && (
+        <p role="alert" className="mt-2 text-sm text-kolo-danger">
+          {greska}
+        </p>
+      )}
 
       <button
         type="button"
         onClick={() => { setOtvoreno(false); setKod(null); setOpis(""); setGreska(""); }}
-        className="mt-1.5 text-[11px] text-kolo-muted underline"
+        className="meta-dete mt-1 px-2 text-sm text-kolo-muted underline"
       >
         {t("odustani")}
       </button>
