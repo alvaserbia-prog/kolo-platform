@@ -370,7 +370,9 @@
     "prijavi_ponistena": "The re-registration was annulled upon the report.",
     "prijavi_odbacena": "The report was reviewed — the re-registration stands.",
     "prijavi_greska": "The report was not sent.",
-    "ceka_roditelja": "The account is waiting for a parent to take it over. Until then POEN can be re-registered into your record; re-registering to others unlocks once a parent takes the account over."
+    "ceka_roditelja": "The account is waiting for a parent to take it over. Until then POEN can be re-registered into your record; re-registering to others unlocks once a parent takes the account over.",
+    "nadoknada_naslov_dete": "You owe",
+    "nadoknada_opis_dete": "This came off when a friendship ended. The first POEN that arrives fills it in. Everything else works as usual."
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -676,7 +678,9 @@
     "zatvoren_oglas": "If something they posted interests you, get in touch through the listing itself on the Marketplace. A conversation with a minor is opened by their parent, who also reads it.",
     "skola": "School",
     "roditelji": "Parents",
-    "deca": "Children"
+    "deca": "Children",
+    "status_dete_ceka": "waiting for a parent's approval",
+    "status_dete_radi": "account works"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3111,7 +3115,8 @@
     "ceka_uputstvo": "Show your mum or dad the message we sent them. If it did not arrive, read them this number out loud.",
     "dugme_profil": "My profile",
     "kod_naslov": "Number for your mum or dad",
-    "dugme_prepis": "My POEN"
+    "dugme_prepis": "My POEN",
+    "kod_profil_opis": "Read this number out to your mum or dad. They enter it with your name."
   },
   "prijatelji": {
     "naslov": "My friends",
