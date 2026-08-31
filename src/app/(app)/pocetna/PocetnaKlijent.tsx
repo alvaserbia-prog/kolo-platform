@@ -273,7 +273,7 @@ export default function PocetnaKlijent({
                             bila otvorena i odraslima, ali dugmeta nije bilo nigde
                             osim u dečjoj sobi — pa je jedini put do Fondacije bio
                             da si dete. */}
-                        {!moja && <PrijaviPoruku porukaId={p.id} sifre={RAZLOZI_ODRASLI} malo />}
+                        {!moja && <PrijaviPoruku porukaId={p.id} sifre={RAZLOZI_ODRASLI} />}
                       </div>
                       <div
                         className={`px-3 py-2 rounded-2xl text-sm whitespace-pre-wrap break-words ${
