@@ -163,9 +163,15 @@ export function nalogRadi(stanje: StanjeDeteta): boolean {
   return stanje !== "NA_CEKANJU";
 }
 
-/** Poruka koju vidi dete čiji nalog čeka roditelja. Jedna, na svim mestima. */
+/**
+ * Poruka koju vidi dete čiji nalog čeka roditelja. Jedna, na svim mestima.
+ *
+ * Govori DETETU, pa ne pominje „preuzimanje naloga": glagol „preuzeti" deci znači
+ * uzeti nekome nešto, a ovde se dešava suprotno. Pravni pojam preuzimanja (čl. 4b)
+ * ostaje u roditeljskim ekranima i u aktima.
+ */
 export const PORUKA_CEKA_RODITELJA =
-  "Nalog čeka da ga preuzme roditelj. Do tada možeš da skupljaš prijatelje.";
+  "Još se čeka odobrenje mame ili tate. Dok ih čekaš, možeš da skupljaš prijatelje.";
 
 // ── Uzrast ────────────────────────────────────────────────────────────────────
 
@@ -273,6 +279,31 @@ export function smeDaKomunicira(a: Ucesnik, b: Ucesnik): Provera {
       "Razgovor između maloletnog i punoletnog korisnika otvara roditelj, na profilu svog deteta.",
     status: 403,
   };
+}
+
+/**
+ * Da li posmatrač sme da POKRENE razgovor sa datim korisnikom.
+ *
+ * 🔴 Jedan izvor istine za rutu i za ekran (uvedeno 31.08.2026). Do tada je uslov
+ * postojao na dva mesta i razišao se: `POST /api/poruke` je dete izričito puštao
+ * (`if (!jaUcesnik.maloletan && !session.user.verified)`), a Pijaca je dugme
+ * „Kontaktiraj" birala po `session.user.verified` — a maloletni nalog je TRAJNO
+ * `verified: false`, jer u lanac potvrda ne ulazi (čl. 15) i nikad neće.
+ *
+ * Posledica je bila da dete vidi tuđe oglase, ima POEN, a nema nijedno dugme koje
+ * to dvoje spaja: umesto njega je dobijalo poziv da postane redovan član, sa
+ * linkom na stranicu koju ne sme ni da otvori. Dečja ekonomija time nije imala
+ * završetak, iako ga je server sve vreme dozvoljavao.
+ *
+ * Pravilo: opšti uslov verifikacije važi za punoletne (čl. 16 st. 5, čl. 28 st. 2);
+ * čim je bar jedna strana maloletna, odlučuje `smeDaKomunicira` (čl. 12).
+ */
+export function smePokrenutiRazgovor(ja: Ucesnik, drugi: Ucesnik, verifikovan: boolean): Provera {
+  if (!ja.maloletan && !verifikovan) {
+    return { ok: false, razlog: "Verifikacija potrebna.", status: 403 };
+  }
+  if (ja.maloletan || drugi.maloletan) return smeDaKomunicira(ja, drugi);
+  return { ok: true };
 }
 
 /**

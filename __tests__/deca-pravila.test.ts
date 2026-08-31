@@ -11,6 +11,7 @@ import {
   jeUMirovanju,
   rokIzjasnjenja,
   smeDaKomunicira,
+  smePokrenutiRazgovor,
   smeDaPrepise,
   smeDaVidiOglas,
   uzrast,
@@ -65,6 +66,35 @@ describe("uzrastZaModul — granice iz čl. 2", () => {
   });
   it(`odbija ${UZRAST_PUNOLETSTVO}`, () => {
     expect(uzrastZaModul(UZRAST_PUNOLETSTVO).ok).toBe(false);
+  });
+});
+
+describe("smePokrenutiRazgovor — ekran ne sme biti stroži od rute", () => {
+  // Do 31.08.2026. je Pijaca dugme „Kontaktiraj" birala po `session.user.verified`,
+  // a maloletni nalog je TRAJNO neverifikovan (čl. 15) — pa dete nije imalo nijedno
+  // dugme za razgovor, iako mu ga `POST /api/poruke` sve vreme dozvoljava. Ova
+  // funkcija je od tada jedini izvor istine za oba mesta.
+  it("dete piše drugom detetu iako nije i nikad neće biti verifikovano", () => {
+    expect(smePokrenutiRazgovor(dete({ id: "a" }), dete({ id: "b", roditeljIds: ["r2"] }), false).ok).toBe(true);
+  });
+
+  it("dete koje čeka odobrenje roditelja ne piše nikome", () => {
+    expect(smePokrenutiRazgovor(dete({ stanje: "NA_CEKANJU" }), dete({ id: "b", roditeljIds: ["r2"] }), false).ok).toBe(false);
+  });
+
+  it("dete piše odraslom samo uz roditeljski prekidač", () => {
+    expect(smePokrenutiRazgovor(dete(), odrastao(), false).ok).toBe(false);
+    expect(smePokrenutiRazgovor(dete({ dozvolaOdrasli: true }), odrastao(), false).ok).toBe(true);
+  });
+
+  it("punoletnom nalogu uslov verifikacije ostaje (čl. 28 st. 2)", () => {
+    expect(smePokrenutiRazgovor(odrastao({ id: "a" }), odrastao({ id: "b" }), false).ok).toBe(false);
+    expect(smePokrenutiRazgovor(odrastao({ id: "a" }), odrastao({ id: "b" }), true).ok).toBe(true);
+  });
+
+  it("ni verifikovan odrastao ne piše detetu bez prekidača", () => {
+    expect(smePokrenutiRazgovor(odrastao(), dete(), true).ok).toBe(false);
+    expect(smePokrenutiRazgovor(odrastao(), dete({ dozvolaOdrasli: true }), true).ok).toBe(true);
   });
 });
 

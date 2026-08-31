@@ -896,7 +896,9 @@
     "saljem": "...",
     "neverifikovan_info": "Dok si nov član, možeš odgovarati samo na poruke redovnih članova koji su ti se javili povodom tvog oglasa.",
     "nazad": "Natrag",
-    "roditelj_cita": "S druge strane je dijete. Ovaj razgovor čita njegov roditelj."
+    "roditelj_cita": "S druge strane je dijete. Ovaj razgovor čita njegov roditelj.",
+    "dete_prijatelji_naslov": "Piši svojim prijateljima",
+    "dete_prijatelji_prazno": "Još nemaš prijatelje. Skeniraj kod nekome pored sebe."
   },
   "pravne": {
     "eyebrow": "Pravni dokumenti",
@@ -1724,7 +1726,12 @@
     "oznaka_dete": "DIJETE",
     "oznaka_dete_opis": "Oglas je objavilo dijete. Njegov roditelj ima uvid u razgovor koji vodite.",
     "traka_neverifikovan": "Postavi svoj prvi oglas",
-    "cta_postavi_oglas": "Postavi oglas"
+    "cta_postavi_oglas": "Postavi oglas",
+    "pisi_detetu": "Piši — {pseudonim}",
+    "dete_ceka_odobrenje": "Kad mama ili tata odobre tvoj profil, moći ćeš mu pisati.",
+    "dete_odrasli_zabranjeni": "S odraslima pišeš tek kad ti mama ili tata to uključe.",
+    "dete_ceka_kratko": "čeka odobrenje",
+    "dete_odrasli_kratko": "treba dopuštenje roditelja"
   },
   "pocetna": {
     "dobrodoslice": "Bok, <ime>{pseudonim}</ime>",

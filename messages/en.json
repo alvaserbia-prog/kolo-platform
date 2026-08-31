@@ -896,7 +896,9 @@
     "saljem": "...",
     "neverifikovan_info": "While you are a new member, you can only reply to messages from regular members who contacted you about your listing.",
     "nazad": "Back",
-    "roditelj_cita": "The other side is a child. This conversation is read by their parent."
+    "roditelj_cita": "The other side is a child. This conversation is read by their parent.",
+    "dete_prijatelji_naslov": "Write to your friends",
+    "dete_prijatelji_prazno": "No friends yet. Scan someone's code next to you."
   },
   "pravne": {
     "eyebrow": "Legal documents",
@@ -1724,7 +1726,12 @@
     "oznaka_dete": "CHILD",
     "oznaka_dete_opis": "This ad was posted by a child. Their parent has access to the conversation you have.",
     "traka_neverifikovan": "Post your first listing",
-    "cta_postavi_oglas": "Post a listing"
+    "cta_postavi_oglas": "Post a listing",
+    "pisi_detetu": "Message — {pseudonim}",
+    "dete_ceka_odobrenje": "Once your mum or dad approves your account, you can write to them.",
+    "dete_odrasli_zabranjeni": "You can write to adults only when your mum or dad turns that on.",
+    "dete_ceka_kratko": "waiting for approval",
+    "dete_odrasli_kratko": "needs a parent's permission"
   },
   "pocetna": {
     "dobrodoslice": "Hello, <ime>{pseudonim}</ime>",

@@ -36,6 +36,18 @@ interface Props {
   // Da li je posetilac prijavljen. Bez ovoga je dugme na kartici nudilo
   // verifikaciju i onome ko još nema nalog — korak koji ne može ni da počne.
   prijavljen?: boolean;
+  /** Posmatrač je maloletan — dugme na kartici bira se po dečjim pravilima. */
+  posmatracMaloletan?: boolean;
+  /**
+   * Dete čiji nalog radi (nije `NA_CEKANJU`) sme da piše drugoj deci.
+   *
+   * 🔴 Dugme se NE bira po `isVerified`: maloletni nalog je trajno neverifikovan
+   * (čl. 15), pa je detetu na svakoj kartici stajao poziv da postavi svoj oglas
+   * umesto dugmeta „Kontaktiraj" — iako mu ruta razgovor dozvoljava.
+   */
+  detePise?: boolean;
+  /** Prekidač iz čl. 10 st. 2 — bez njega dete ne piše punoletnim članovima. */
+  deteSmeSaOdraslima?: boolean;
   // Predizabrane kategorije iz URL-a (?kat=slug1,slug2) — validirane na serveru.
   initialKat?: string[];
   // Kategorije koje ulogovani korisnik prati (za čip „Samo praćene").
@@ -44,7 +56,17 @@ interface Props {
   mojaLokacija?: string | null;
 }
 
-export default function PijacaKlijent({ listings, isVerified, prijavljen = true, initialKat = [], pracene = [], mojaLokacija = null }: Props) {
+export default function PijacaKlijent({
+  listings,
+  isVerified,
+  prijavljen = true,
+  posmatracMaloletan = false,
+  detePise = false,
+  deteSmeSaOdraslima = false,
+  initialKat = [],
+  pracene = [],
+  mojaLokacija = null,
+}: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
   const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
@@ -430,6 +452,9 @@ export default function PijacaKlijent({ listings, isVerified, prijavljen = true,
               oglas={l}
               isVerified={isVerified}
               prijavljen={prijavljen}
+              posmatracMaloletan={posmatracMaloletan}
+              detePise={detePise}
+              deteSmeSaOdraslima={deteSmeSaOdraslima}
               kontaktLoading={kontaktLoadingId === l.id}
               onKontakt={handleKontakt}
               t={t}
@@ -477,6 +502,9 @@ const OglasKartica = memo(function OglasKartica({
   oglas,
   isVerified,
   prijavljen,
+  posmatracMaloletan,
+  detePise,
+  deteSmeSaOdraslima,
   kontaktLoading,
   onKontakt,
   t,
@@ -486,6 +514,9 @@ const OglasKartica = memo(function OglasKartica({
   oglas: Listing;
   isVerified: boolean;
   prijavljen: boolean;
+  posmatracMaloletan: boolean;
+  detePise: boolean;
+  deteSmeSaOdraslima: boolean;
   kontaktLoading: boolean;
   onKontakt: (oglasId: string, sellerId: string) => void;
   t: TFunction;
@@ -574,14 +605,27 @@ const OglasKartica = memo(function OglasKartica({
               <span className="ml-1 text-kolo-green-700 font-medium">· ~{udaljenost} km</span>
             )}
           </span>
-          {isVerified ? (
+          {/* Dete piše drugom detetu bezuslovno (čl. 12), a punoletnom članu samo
+              uz roditeljski prekidač. Oglas punoletnog mu se ionako ne prikazuje
+              dok prekidač stoji isključen, pa je uslov ovde druga brana, ne prva. */}
+          {(posmatracMaloletan ? detePise && (oglas.sellerMaloletan || deteSmeSaOdraslima) : isVerified) ? (
             <button
               onClick={() => onKontakt(oglas.id, oglas.sellerId)}
               disabled={kontaktLoading}
-              className="shrink-0 px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors disabled:opacity-60"
+              className={`shrink-0 font-semibold text-white transition-colors disabled:opacity-60 ${
+                posmatracMaloletan
+                  ? "meta-dete rounded-full bg-deca-korala-600 px-4 text-sm hover:opacity-90"
+                  : "rounded-lg bg-kolo-green-700 px-3 py-1.5 text-xs hover:bg-kolo-green-900"
+              }`}
             >
               {kontaktLoading ? "..." : oglas.tip === "POTRAZNJA" ? t("javi_se") : t("kontaktiraj")}
             </button>
+          ) : posmatracMaloletan ? (
+            /* Detetu se NIKAD ne nudi potvrda kao izlaz — u lanac potvrda ne ulazi
+               (čl. 15). Ostaje istinit razlog, bez dugmeta koje ne vodi nikuda. */
+            <span className="shrink-0 text-sm text-kolo-muted">
+              {detePise ? t("dete_odrasli_kratko") : t("dete_ceka_kratko")}
+            </span>
           ) : (
             /* Neverifikovanom se više ne nudi verifikacija kao prvi korak: gost
                nema ni nalog, a prijavljenom je najbliži potez sopstveni oglas —

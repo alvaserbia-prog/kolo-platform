@@ -37,6 +37,16 @@ function PorukeContent() {
 
   const [konverzacije, setKonverzacije] = useState<Konverzacija[]>([]);
   const [verified, setVerified] = useState(true);
+  /**
+   * Maloletni nalog. Njemu se NE prikazuje rečenica o „redovnim članovima":
+   * ona je za dete neistinita na svakoj reči — ono nije „nov član" koji čeka
+   * potvrdu (u lanac potvrda ne ulazi, čl. 15), sme da piše svakom svom
+   * prijatelju, a punoletni članovi mu se po pravilu i ne javljaju jer je
+   * roditeljski prekidač podrazumevano isključen. Umesto toga dobija spisak
+   * svojih prijatelja kao dugmad — što je i najbolji mogući sadržaj tog mesta.
+   */
+  const [maloletan, setMaloletan] = useState(false);
+  const [prijatelji, setPrijatelji] = useState<{ korisnikId: string; pseudonim: string }[]>([]);
   const [poruke, setPoruke] = useState<Poruka[]>([]);
   const [drugiPseudonim, setDrugiPseudonim] = useState("");
   const [drugiId, setDrugiId] = useState("");
@@ -72,8 +82,21 @@ function PorukeContent() {
       // inače bi se cela lista konverzacija re-renderovala svakih 5s bez razloga.
       setKonverzacije((prev) => (istiKonv(prev, nove) ? prev : nove));
       if (typeof data.verified === "boolean") setVerified(data.verified);
+      if (typeof data.maloletan === "boolean") setMaloletan(data.maloletan);
     }
   }, []);
+
+  useEffect(() => {
+    if (!maloletan) return;
+    void (async () => {
+      try {
+        const res = await fetch("/api/deca/prijatelji", { cache: "no-store" });
+        if (res.ok) setPrijatelji((await res.json()).prijatelji ?? []);
+      } catch {
+        /* tiho — spisak je prečica, razgovori rade i bez njega */
+      }
+    })();
+  }, [maloletan]);
 
   const ucitajPoruke = useCallback(async (konvId: string) => {
     const res = await fetch(`/api/poruke/${konvId}`);
@@ -256,7 +279,28 @@ function PorukeContent() {
         </div>
 
         {/* Nova konverzacija — pretraga (samo verifikovani mogu da iniciraju) */}
-        {!verified ? (
+        {maloletan ? (
+          <div className="px-3 py-3 border-b border-kolo-border">
+            <p className="text-sm font-semibold text-kolo-text">{t("dete_prijatelji_naslov")}</p>
+            {prijatelji.length === 0 ? (
+              <p className="mt-1 text-sm text-kolo-muted">{t("dete_prijatelji_prazno")}</p>
+            ) : (
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {prijatelji.map((p) => (
+                  <li key={p.korisnikId}>
+                    <button
+                      type="button"
+                      onClick={() => otvoriKonverzaciju(p.korisnikId)}
+                      className="meta-dete rounded-full bg-deca-slezova-600 px-4 text-sm font-bold text-white transition hover:opacity-90"
+                    >
+                      {p.pseudonim}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ) : !verified ? (
           <div className="px-3 py-2 border-b border-kolo-border">
             <p className="text-[11px] text-kolo-muted leading-relaxed">
               {t("neverifikovan_info")}

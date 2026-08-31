@@ -889,7 +889,9 @@
     "saljem": "...",
     "neverifikovan_info": "Amíg új tag vagy, csak azoknak a rendes tagoknak az üzeneteire válaszolhatsz, akik a hirdetésed miatt kerestek meg.",
     "nazad": "Vissza",
-    "roditelj_cita": "A másik oldalon gyerek van. Ezt a beszélgetést a szülője olvassa."
+    "roditelj_cita": "A másik oldalon gyerek van. Ezt a beszélgetést a szülője olvassa.",
+    "dete_prijatelji_naslov": "Írj a barátaidnak",
+    "dete_prijatelji_prazno": "Még nincs barátod. Olvasd be valakinek a kódját magad mellett."
   },
   "pravne": {
     "eyebrow": "Jogi dokumentumok",
@@ -1717,7 +1719,12 @@
     "oznaka_dete": "GYEREK",
     "oznaka_dete_opis": "A hirdetést gyerek adta fel. A szülője betekinthet a beszélgetésetekbe.",
     "traka_neverifikovan": "Tedd közzé az első hirdetésed",
-    "cta_postavi_oglas": "Hirdetés feladása"
+    "cta_postavi_oglas": "Hirdetés feladása",
+    "pisi_detetu": "Írj — {pseudonim}",
+    "dete_ceka_odobrenje": "Amikor anya vagy apa jóváhagyja a fiókodat, írhatsz neki.",
+    "dete_odrasli_zabranjeni": "Felnőtteknek csak akkor írhatsz, ha anya vagy apa bekapcsolja.",
+    "dete_ceka_kratko": "jóváhagyásra vár",
+    "dete_odrasli_kratko": "szülői engedély kell"
   },
   "pocetna": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
