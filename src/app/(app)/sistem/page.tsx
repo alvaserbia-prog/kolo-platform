@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
+import { USLOV_AKTIVNO_DETE } from "@/lib/protokol/skole";
 import SistemKlijent from "./SistemKlijent";
 import { SEKCIJE, type Sekcija } from "./sekcije";
 
@@ -45,6 +46,7 @@ export default async function SistemPage({
     ukupnoVerifikacija,
     danasVerifikacija,
     saldoFondacije,
+    aktivneDece,
   ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { id: "banka-singleton" },
@@ -83,6 +85,7 @@ export default async function SistemPage({
         avatar: true,
         location: true,
         createdAt: true,
+        maloletan: true,
         wallet: { select: { balance: true } },
         krugClanstva: {
           where: { leftAt: null },
@@ -135,6 +138,13 @@ export default async function SistemPage({
       where: { vremenskiZig: { gte: danas } },
     }),
     dohvatiSaldoFondacije(),
+    // Maloletni nalozi u stanju AKTIVNO (bar jedan roditelj je redovan član).
+    // Oni su punopravni korisnici — koriste dečji prostor, sklapaju prijateljstva
+    // i primaju POEN — pa ulaze u broj članova na kartici, iako u lanac potvrda
+    // ne smeju da uđu (Pravilnik o učešću dece čl. 15), tj. `verified` im je
+    // trajno `false`. Uslov je isti onaj po kome se broji ranglista škola —
+    // jedna istina o tome šta je aktivno dete.
+    prisma.user.count({ where: { ...USLOV_AKTIVNO_DETE, oauthPending: false } }),
   ]);
 
   const opticaj = Math.abs(protokol?.balance ?? 0);
@@ -184,6 +194,7 @@ export default async function SistemPage({
       id: u.id,
       pseudonim: u.pseudonim,
       verified: u.verified,
+      maloletan: u.maloletan,
       avatar: u.avatar,
       balance: u.wallet?.balance ?? 0,
       krug: u.krugClanstva[0]?.krug?.name ?? null,
@@ -211,6 +222,7 @@ export default async function SistemPage({
       protokolBalance={protokolBalance}
       ukupnoKorisnika={ukupnoKorisnika}
       verifikovanih={verifikovanih}
+      aktivneDece={aktivneDece}
       ukupnoTransakcija={ukupnoTransakcija}
       danasEmitovano={danasEmitovano}
       danasLimit={danasLimit}

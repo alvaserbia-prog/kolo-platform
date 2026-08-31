@@ -157,6 +157,29 @@ export type RedSkole = Skola & { dece: number };
 export type RedSkoleSaProcentom = RedSkole & { procenat: number | null };
 
 /**
+ * Sa liste se prikazuju SAMO škole u kojima učestvuje bar jedno dete (odluka
+ * vlasnika, 2026-08-23).
+ *
+ * 🔴 Ovo je OBRT ranijeg pravila. Do ove izmene je na listi stajao ceo šifarnik od
+ * blizu dve hiljade škola, pa je iza prvih nekoliko redova išlo hiljadu i po nula —
+ * a nula je bila zamišljena kao poruka („dvadesetoro dece čeka roditelje, vidite
+ * svoju nulu"). U spisku te dužine ta poruka se ne čita: ono što se vidi jeste da
+ * je lista prazna svuda osim na vrhu. Lista sada pokazuje ko UČESTVUJE.
+ *
+ * Šta se time gubi i gde je nadoknađeno: škola bez ijednog deteta nema svoj red u
+ * poretku, ali njena stranica (`/skole/[sifra]`) i dalje radi po direktnom linku i
+ * prikazuje nulu, a dete koje je izabralo tu školu vidi na svojoj početnoj da škola
+ * još nije na listi. Prikaz je taj koji se sužava, ne podatak.
+ *
+ * 🔴 Broji se dete u stanju `AKTIVNO` (vidi `USLOV_AKTIVNO_DETE`), pa škola u kojoj
+ * sva deca čekaju roditelje ima nulu i ne ulazi na listu. To i jeste pritisak koji
+ * mehanizam vrši: na listu se ulazi tek kad iza deteta stane odrastao član.
+ */
+export function samoSaDecom(redovi: RedSkole[]): RedSkole[] {
+  return redovi.filter((r) => r.dece > 0);
+}
+
+/**
  * Udeo uključene dece u broju upisanih učenika, u procentima.
  *
  * Vraća `null` kad imenilac nije poznat ili nema smisla — takva škola u
@@ -237,8 +260,14 @@ export type KarticaSkole = {
   naziv: string;
   mesto: string;
   brojDece: number;
-  /** Mesto škole na nacionalnoj listi po broju dece. */
-  mestoSkole: number;
+  /**
+   * Mesto škole na nacionalnoj listi po broju dece.
+   *
+   * `null` kad škola još nije na listi — na nju ulaze samo škole sa bar jednim
+   * uključenim detetom (vidi `samoSaDecom`), a dete koje čeka roditelja se ne
+   * broji, pa mu škola u tom trenutku nema mesto u poretku.
+   */
+  mestoSkole: number | null;
   ukupnoSkola: number;
   /** Koliko dece fali do mesta iznad; `null` kad je škola prva. */
   doSledecegMesta: number | null;

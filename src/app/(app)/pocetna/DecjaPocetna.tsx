@@ -446,19 +446,30 @@ function SkolaKartica({
       </Link>
       <p className="text-sm text-kolo-muted">{skola.mesto}</p>
 
-      <p className="mt-3 text-sm font-semibold" style={{ color: boje[0] }}>
-        {t("mesto_po_broju", { mesto: skola.mestoSkole })}{" "}
-        <span className="font-normal text-kolo-muted">
-          {t("od_ukupno", { ukupno: skola.ukupnoSkola })}
-        </span>
-      </p>
-
-      {skola.doSledecegMesta === null ? (
-        <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>{t("prvo_mesto")}</p>
-      ) : (
-        <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>
-          {t("fali_do", { broj: skola.doSledecegMesta, mesto: skola.mestoSkole - 1 })}
+      {/* Škola ulazi na listu tek sa prvim uključenim detetom (vidi `samoSaDecom`).
+          Dok čeka roditelja, dete gleda svoju školu van poretka — a ta rečenica je
+          upravo poziv da roditelja dovede. */}
+      {skola.mestoSkole === null ? (
+        <p className="mt-3 text-sm font-semibold" style={{ color: boje[0] }}>
+          {t("kartica_nije_na_listi")}
         </p>
+      ) : (
+        <>
+          <p className="mt-3 text-sm font-semibold" style={{ color: boje[0] }}>
+            {t("mesto_po_broju", { mesto: skola.mestoSkole })}{" "}
+            <span className="font-normal text-kolo-muted">
+              {t("od_ukupno", { ukupno: skola.ukupnoSkola })}
+            </span>
+          </p>
+
+          {skola.doSledecegMesta === null ? (
+            <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>{t("prvo_mesto")}</p>
+          ) : (
+            <p className="mt-1 text-sm font-bold" style={{ color: boje[6] }}>
+              {t("fali_do", { broj: skola.doSledecegMesta, mesto: skola.mestoSkole - 1 })}
+            </p>
+          )}
+        </>
       )}
 
       {skola.mojeMesto !== null && (

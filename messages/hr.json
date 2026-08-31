@@ -224,6 +224,7 @@
     "posalje": "Davatelj",
     "primalac": "Primatelj",
     "clanovi_pregled_blokiran": "Pregled svih članova dostupan je redovnim članovima.",
+    "clan_dete": "DIJETE",
     "nema_rezultata": "Nema rezultata. Pokušaj drugu riječ.",
     "clan_count_1": "član",
     "clan_count_vise": "članova",
@@ -3214,10 +3215,10 @@
     "kol_dece": "Djece",
     "kol_udeo": "Udio",
     "bez_broja_ucenika": "Broj upisanih učenika nije poznat.",
-    "napomena": "Broje se djeca kojima je barem jedan roditelj redovni član.",
+    "napomena": "Na popisu su škole u kojima sudjeluje barem jedno dijete. Broje se djeca kojima je barem jedan roditelj redovni član.",
     "spisak_prazan": "Popis škola još nije unesen.",
     "greska_ucitavanje": "Učitavanje nije uspjelo.",
-    "nema_skola": "Nema škola.",
+    "nema_skola": "Još nijedna škola nema uključeno dijete.",
     "nazad": "Sve škole",
     "mesto_po_broju": "{mesto}. po broju djece",
     "mesto_po_udelu": "{mesto}. po uključenosti",
@@ -3238,6 +3239,7 @@
     "kartica_naslov": "Tvoja škola",
     "kartica_bez_skole": "Nisi odabrao školu. Odaberi je i vidi gdje ste u Srbiji.",
     "kartica_dugme": "Odaberi školu",
+    "kartica_nije_na_listi": "Tvoja škola još nije na popisu — ulazi na njega s prvim uključenim djetetom.",
     "kartica_ti": "Ti si {mesto}. u svojoj školi"
   },
   "emailDeteta": {

@@ -40,6 +40,8 @@ interface Clan {
   id: string;
   pseudonim: string;
   verified: boolean;
+  /** Maloletni nalog — nosi svoj pečat, ne „bez potvrde" (vidi ClanRed). */
+  maloletan: boolean;
   avatar: string | null;
   balance: number;
   krug: string | null;
@@ -80,6 +82,8 @@ interface Props {
   protokolBalance: number;
   ukupnoKorisnika: number;
   verifikovanih: number;
+  /** Maloletni nalozi u stanju AKTIVNO — punopravni članovi, ali nikad `verified`. */
+  aktivneDece: number;
   ukupnoTransakcija: number;
   danasEmitovano: number;
   danasLimit: number;
@@ -109,6 +113,7 @@ export default function SistemKlijent({
   protokolBalance,
   ukupnoKorisnika,
   verifikovanih,
+  aktivneDece,
   ukupnoTransakcija,
   danasEmitovano,
   danasLimit,
@@ -137,6 +142,15 @@ export default function SistemKlijent({
     postaviSekciju(s);
     window.history.replaceState(null, "", s === "pregled" ? "/sistem" : `/sistem?sekcija=${s}`);
   };
+
+  // Kartica „Članovi": veliki broj su PUNOPRAVNI učesnici — redovni članovi
+  // (potvrđeni u lancu potvrda) i deca u stanju AKTIVNO. Dete se nikad ne
+  // potvrđuje — u lanac potvrda ne sme da uđe (Pravilnik o učešću dece čl. 15) —
+  // pa bi po `verified` zauvek stajalo među „novima", iako mu nalog radi u punom
+  // obimu. `Math.max` je zaštita od zaostalog brojanja: `verifikovanih` se broji
+  // bez filtera po statusu naloga, pa razlika ume da bude negativna.
+  const punopravnih = verifikovanih + aktivneDece;
+  const novih = Math.max(0, ukupnoKorisnika - punopravnih);
 
   const zeroSum = opticaj + protokolBalance === 0;
   const faza2 = opticaj >= CILJ_OPTICAJ;
@@ -192,9 +206,9 @@ export default function SistemKlijent({
             aktivan={sekcija === "clanovi"}
             onClick={() => setSekcija("clanovi")}
             label={t("kartica_clanovi")}
-            broj={verifikovanih}
+            broj={punopravnih}
             danas={danasKorisnika}
-            podnaslov={t("kartica_verif_opis", { ukupno: ukupnoKorisnika, neverif: ukupnoKorisnika - verifikovanih })}
+            podnaslov={t("kartica_verif_opis", { ukupno: ukupnoKorisnika, neverif: novih })}
           />
           <Kartica
             aktivan={sekcija === "lokacije"}
@@ -806,7 +820,13 @@ const ClanRed = memo(function ClanRed({
           >
             <Pseudonim>{c.pseudonim}</Pseudonim>
           </Link>
-          {c.verified ? (
+          {/* 🔴 Dete dobija SVOJ pečat, ne „?". Maloletni nalog jeste neverifikovan
+              i uvek će biti — u lanac potvrda ne sme da uđe (Pravilnik o učešću
+              dece čl. 15) — pa bi mu oznaka za novog člana saopštavala nešto što
+              se nikad neće promeniti. Isti razlog kao pečat na Pijaci. */}
+          {c.maloletan ? (
+            <span className="shrink-0 text-[10px] bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_dete")}</span>
+          ) : c.verified ? (
             <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
           ) : (
             <span className="shrink-0 text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>
@@ -836,7 +856,9 @@ const ClanRed = memo(function ClanRed({
             <Link href={profilHref(c)} className="font-semibold text-kolo-green-700 hover:underline truncate">
               <Pseudonim>{c.pseudonim}</Pseudonim>
             </Link>
-            {c.verified ? (
+            {c.maloletan ? (
+              <span className="text-[10px] bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_dete")}</span>
+            ) : c.verified ? (
               <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
             ) : (
               <span className="text-xs bg-kolo-bg text-kolo-muted px-1.5 py-0.5 rounded font-medium">?</span>

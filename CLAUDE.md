@@ -661,6 +661,8 @@ Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste.
 
 🟡 **Rangiranje po tekućem stanju je odluka vlasnika**, uz poznatu posledicu: u rang ulazi i POEN koji je detetu prepisao roditelj, a potrošeni izlazi. Kad deca dobiju sopstvene zadatke, stanje će sve više odražavati njihov rad.
 
+🔴 **Na listama su SAMO škole sa bar jednim uključenim detetom** (odluka vlasnika, 2026-08-23) — **obrt ranijeg pravila**, po kome je nula bila poruka („dvadesetoro dece čeka roditelje, vidite svoju nulu"). U spisku od blizu dve hiljade škola ta poruka se ne čita: iza prvih nekoliko redova išlo je hiljadu i po nula. Filter je **jedna čista funkcija** (`samoSaDecom` u `skola.ts`) pozvana na **jednom mestu** (`redoviSkola` u `protokol/skole.ts`), odakle čitaju obe nacionalne liste, stranica jedne škole i kartica na dečjoj početnoj — inače bi „ukupno škola" na jednom ekranu značilo nešto drugo nego na drugom. **Sužava se prikaz, ne podatak:** `/skole/[sifra]` i dalje radi po direktnom linku i pokazuje nulu, a `KarticaSkole.mestoSkole` je zato **`number | null`** (`null` = škola još nije na listi; nula bi se pročitala kao „nulto mesto") i kartica tada nosi `skole.kartica_nije_na_listi`.
+
 🔴 **Nema praga prikaza** (odluka vlasnika), pa škola sa 12 upisanih i jednim detetom daje 8,3% i seda na vrh. Zato **uz procenat UVEK ide i sam odnos** — `8,3% (1 od 12)`. Ne uklanjati taj razlomak: bez njega broj obmanjuje, a prag je izričito odbijen.
 
 **Šifarnik škola.** `src/lib/skole-srbije.ts` — **uvezen 18–19.08.2026: 1.888 škola, 1.327 osnovnih (542.718 učenika) i 561 srednja (227.360)** (JISP izveštaji „Osnovno obrazovanje" i „Srednje obrazovanje — Odeljenja i razredi", školska 2025/2026). 🔴 **Fajl se ne piše rukom** — generiše ga `scripts/uvezi-skole.mjs`, pa ručna izmena preživi do sledećeg uvoza.
@@ -1105,6 +1107,9 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 
 ### Sistem (`/sistem`)
 - `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
+- 🔴 **Kartica „Članovi" broji i AKTIVNU DECU (2026-08-31).** Veliki broj je `verifikovanih + aktivneDece`, a „novih" je ostatak. Do ove izmene je brojao samo `verified: true`, pa je maloletni nalog zauvek stajao među „novima" — dete se **nikad ne potvrđuje** (u lanac potvrda ne sme da uđe, Pravilnik o učešću dece čl. 15), a nalog u stanju `AKTIVNO` radi u punom obimu. Uslov je **isti `USLOV_AKTIVNO_DETE`** koji broji ranglista škola (`protokol/skole.ts`) — ne praviti drugu definiciju aktivnog deteta.
+- **Dete u spisku članova nosi pečat „DETE"** (`sistem.clan_dete`, 5 jezika), ne „?" — isti razlog kao pečat na Pijaci: „bez potvrde" bi mu saopštavalo nešto što se nikad neće promeniti.
+- 🟡 **Sekcija „Lokacije" se NIJE menjala** — tamo „{ukupno} članova · {verif} redovnih" i pragovi za otključavanje kolektivnih oblika i dalje broje samo redovne članove. Dete ne osniva Zadrugu, pa bi ga brojanje tamo naduvalo prag.
 
 ### Blog (Vesti Fondacije)
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.

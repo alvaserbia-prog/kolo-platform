@@ -217,6 +217,7 @@
     "posalje": "Adó fél",
     "primalac": "Fogadó",
     "clanovi_pregled_blokiran": "A tagok listája csak ellenőrzött tagok számára érhető el.",
+    "clan_dete": "GYEREK",
     "nema_rezultata": "Nincs találat. Próbálj másik szót.",
     "clan_count_1": "tag",
     "clan_count_vise": "tag",
@@ -3214,10 +3215,10 @@
     "kol_dece": "Gyerek",
     "kol_udeo": "Arány",
     "bez_broja_ucenika": "A beiratkozott tanulók száma nem ismert.",
-    "napomena": "Csak azok a gyerekek számítanak, akiknek legalább az egyik szülője rendes tag.",
+    "napomena": "A listán azok az iskolák szerepelnek, amelyekből legalább egy gyerek részt vesz. Csak azok a gyerekek számítanak, akiknek legalább az egyik szülője rendes tag.",
     "spisak_prazan": "Az iskolák listája még nincs feltöltve.",
     "greska_ucitavanje": "A betöltés nem sikerült.",
-    "nema_skola": "Nincs iskola.",
+    "nema_skola": "Még egyetlen iskolából sincs részt vevő gyerek.",
     "nazad": "Összes iskola",
     "mesto_po_broju": "{mesto}. a gyerekek száma szerint",
     "mesto_po_udelu": "{mesto}. a részvételi arány szerint",
@@ -3238,6 +3239,7 @@
     "kartica_naslov": "Az iskolád",
     "kartica_bez_skole": "Még nem választottál iskolát. Válaszd ki, és nézd meg, hol álltok Szerbiában.",
     "kartica_dugme": "Iskola választása",
+    "kartica_nije_na_listi": "Az iskolád még nincs a listán — az első részt vevő gyerekkel kerül fel rá.",
     "kartica_ti": "Te vagy a(z) {mesto}. az iskoládban"
   },
   "emailDeteta": {
