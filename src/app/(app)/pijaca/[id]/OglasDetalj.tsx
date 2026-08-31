@@ -51,6 +51,19 @@ interface Props {
    * koje gleda tuđi dečji oglas ta rečenica bi bila neistinita.
    */
   posmatracMaloletan?: boolean;
+  /**
+   * Sme li posmatrač da POKRENE razgovor povodom oglasa — izračunato na serveru
+   * (`smePokrenutiRazgovor`), istom funkcijom koju zove i `POST /api/poruke`.
+   *
+   * 🔴 Ne izvodi se iz `isVerified`. Maloletni nalog je trajno neverifikovan
+   * (čl. 15), pa je dete na svakom oglasu dobijalo poziv da postane redovan član
+   * i link na `/verifikacija` — stranicu koju ne sme ni da otvori — dok mu je ruta
+   * razgovor sve vreme dozvoljavala. `isVerified` od sada odlučuje samo o
+   * prikazu telefona (Politika čl. 6).
+   */
+  smePisati?: boolean;
+  /** Zašto dete ne može da piše; `null` za punoletnog posmatrača. */
+  razlogZabrane?: "ceka_odobrenje" | "odrasli_zabranjeni" | null;
 }
 
 export default function OglasDetalj({
@@ -58,6 +71,8 @@ export default function OglasDetalj({
   isVerified,
   jePrijavljen,
   posmatracMaloletan = false,
+  smePisati = false,
+  razlogZabrane = null,
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("pijaca");
@@ -282,14 +297,37 @@ export default function OglasDetalj({
           {/* Kupac → kontakt prodavca (razmenu članovi dogovaraju međusobno; Protokol ne posreduje) */}
           {dostupan && !oglas.isMine && (
             <div className="space-y-2">
-              {isVerified ? (
+              {smePisati ? (
                 <button
                   onClick={handleKontakt}
                   disabled={chatLoading}
-                  className="w-full py-3.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
+                  className={`w-full rounded-xl font-semibold text-white transition-colors disabled:opacity-50 ${
+                    posmatracMaloletan
+                      ? "min-h-[3.25rem] bg-deca-korala-600 py-3.5 text-base hover:opacity-90"
+                      : "bg-kolo-green-700 py-3.5 text-sm hover:bg-kolo-green-900"
+                  }`}
                 >
-                  {chatLoading ? "..." : jePotraznja ? t("javi_se_narucilac") : t("kontaktiraj_prodavca")}
+                  {chatLoading
+                    ? "..."
+                    : posmatracMaloletan
+                      ? /* Detetu se dugme imenuje pseudonimom: sedmogodišnjak ne
+                           zna reč „oglašivač", ali zna ime. */
+                        t("pisi_detetu", { pseudonim: oglas.sellerPseudonim })
+                      : jePotraznja
+                        ? t("javi_se_narucilac")
+                        : t("kontaktiraj_prodavca")}
                 </button>
+              ) : posmatracMaloletan ? (
+                /* Dete koje ne može da piše dobija ISTINIT razlog i kraj koji se
+                   vidi — nikad poziv da postane redovan član, jer to za maloletni
+                   nalog nije put (čl. 15). */
+                <div className="rounded-xl border border-deca-sunce-400 bg-deca-sunce-100 px-4 py-3">
+                  <p className="text-base text-deca-sunce-ink">
+                    {razlogZabrane === "ceka_odobrenje"
+                      ? t("dete_ceka_odobrenje")
+                      : t("dete_odrasli_zabranjeni")}
+                  </p>
+                </div>
               ) : !jePrijavljen ? (
                 /* Gost: potvrdu ne može ni da zatraži dok nema nalog, pa mu se
                    nudi korak koji je na njemu — otvaranje naloga. */

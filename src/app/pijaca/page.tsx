@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { pageMetadata } from "@/lib/seo";
 import { parsirajKatParam } from "@/lib/kategorije";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
-import { ucitajUcesnika, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
+import { ucitajUcesnika, usloviVidljivostiOglasa, nalogRadi } from "@/lib/protokol/deca";
 import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -99,6 +99,9 @@ export default async function PijacaPage({
         }))}
         isVerified={isVerified}
         prijavljen={!!session?.user}
+        posmatracMaloletan={posmatrac?.maloletan ?? false}
+        detePise={!!posmatrac?.maloletan && nalogRadi(posmatrac.stanje)}
+        deteSmeSaOdraslima={!!posmatrac?.dozvolaOdrasli}
         initialKat={initialKat}
         pracene={pracene}
         mojaLokacija={korisnik?.location ?? null}
