@@ -60,6 +60,12 @@ const SECURITY_HEADERS = [
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["bcryptjs"],
+  // OG slika oglasa (`/pijaca/[id]/opengraph-image`) čita Inter .woff sa diska u
+  // Node runtime-u (Prisma ne radi na edge-u) — obezbedi da fontovi uđu u
+  // serverless bundle.
+  outputFileTracingIncludes: {
+    "/pijaca/**": ["./src/app/_fonts/*.woff"],
+  },
   images: {
     // AVIF/WebP za manju isporuku slika (Next image optimizacija).
     formats: ["image/avif", "image/webp"],

@@ -1,5 +1,5 @@
 import { prisma } from "./prisma";
-import { posaljiPush } from "./push";
+import { zakaziPush } from "./push";
 import { posaljiEmailKorisniku } from "./email";
 import { prevedi, type Parametri } from "./prevod-servera";
 
@@ -49,8 +49,9 @@ export async function posaljiNotifikaciju(
   const tekstL = naJeziku("tekst", tekst);
 
   // Push na telefon/uređaj (ako je korisnik uključio obaveštenja). Ne blokira i
-  // ne baca — zvonce u aplikaciji radi nezavisno od push-a.
-  void posaljiPush(userId, { naslov: naslovL, tekst: tekstL, link, tip });
+  // ne baca — zvonce u aplikaciji radi nezavisno od push-a. `zakaziPush` koristi
+  // `after()` da push preživi kraj serverless odgovora (vidi push.ts).
+  zakaziPush(userId, { naslov: naslovL, tekst: tekstL, link, tip });
   // Email (Resend) — isti tekst kao zvonce. Takođe ne blokira i ne baca.
   if (opcije?.email !== false) {
     void posaljiEmailKorisniku(userId, {
