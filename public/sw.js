@@ -20,16 +20,40 @@ self.addEventListener("push", (event) => {
   }
 
   const naslov = data.naslov || "KOLO";
+  const link = data.link || "/pocetna";
   const opcije = {
     body: data.tekst || "",
     icon: "/kolo-icon.png",
     badge: "/kolo-icon.png",
-    // Iste vrste notifikacija se grupišu (npr. više poruka istog tipa).
-    tag: data.tip || "kolo",
-    data: { link: data.link || "/pocetna" },
+    // Grupiši po CILJU (link), ne po tipu: inače sve poruke — iz svih
+    // konverzacija — dele isti tag ("poruka") i tiho preklapaju jedna drugu,
+    // pa korisnik vidi i čuje samo prvu. Sada svaki razgovor ima svoj tag.
+    tag: `${data.tip || "kolo"}:${link}`,
+    // renotify: i kad nov push zameni notifikaciju istog tag-a, ponovo obavesti
+    // (zvuk/vibracija) umesto tihe zamene.
+    renotify: true,
+    data: { link },
   };
 
   event.waitUntil(self.registration.showNotification(naslov, opcije));
+});
+
+// Aplikacija javi (postMessage) kad korisnik pročita poruke za određeni cilj →
+// zatvaramo pripadajuće sistemske notifikacije da crvena brojka na ikonici
+// padne. OS broji PRIKAZANE notifikacije, a `showNotification` ne nestaje sam,
+// pa bez ovoga brojka ostaje i posle čitanja.
+self.addEventListener("message", (event) => {
+  const data = event.data || {};
+  if (data.type !== "zatvori-notifikacije") return;
+  event.waitUntil(
+    self.registration.getNotifications().then((notifikacije) => {
+      for (const n of notifikacije) {
+        const link = (n.data && n.data.link) || "";
+        // Bez `link` u poruci → zatvori sve; inače samo one čiji cilj odgovara.
+        if (!data.link || link === data.link || link.startsWith(data.link)) n.close();
+      }
+    }),
+  );
 });
 
 self.addEventListener("notificationclick", (event) => {

@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import webpush from "web-push";
 import { prisma } from "./prisma";
 
@@ -41,8 +42,29 @@ export function pushKonfigurisan(): boolean {
 }
 
 /**
+ * Zakaži slanje push obaveštenja POSLE što API odgovor ode klijentu.
+ *
+ * 🔴 Na Vercel serverless-u je „pošalji i zaboravi" (`void posaljiPush(...)`)
+ * nepouzdano: čim se `NextResponse` vrati, funkcija sme da se zamrzne ili ugasi
+ * pre nego što `webpush.sendNotification()` završi mrežni poziv ka push servisu
+ * (FCM/Apple) — otud „push nekad ne stigne". `after()` drži funkciju živom dok
+ * se posao ne završi, bez blokiranja odgovora.
+ *
+ * Van request scope-a (skripte, cron van route-handlera) `after` baca — tada
+ * fallback na staro ponašanje.
+ */
+export function zakaziPush(userId: string, payload: PushPayload): void {
+  try {
+    after(() => posaljiPush(userId, payload));
+  } catch {
+    void posaljiPush(userId, payload);
+  }
+}
+
+/**
  * Pošalji push obaveštenje na SVE uređaje korisnika.
- * Pozivaj kao `void posaljiPush(...)` da ne blokiraš API odgovor.
+ * Iz route handlera preferiraj `zakaziPush(...)` (vidi iznad); ovu funkciju
+ * zovi direktno samo kad push već awaituješ (npr. u skripti).
  * Mrtve pretplate (404/410) se automatski brišu iz baze.
  */
 export async function posaljiPush(userId: string, payload: PushPayload): Promise<void> {
