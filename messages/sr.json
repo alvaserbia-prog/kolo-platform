@@ -370,7 +370,9 @@
     "prijavi_ponistena": "Prepis je poništen po prijavi.",
     "prijavi_odbacena": "Prijava je razmotrena — prepis ostaje.",
     "prijavi_greska": "Prijava nije poslata.",
-    "ceka_roditelja": "Nalog čeka da ga preuzme roditelj. Do tada POEN može da se prepisuje u tvoj zapis; prepis drugima otključava se kad roditelj preuzme nalog."
+    "ceka_roditelja": "Nalog čeka da ga preuzme roditelj. Do tada POEN može da se prepisuje u tvoj zapis; prepis drugima otključava se kad roditelj preuzme nalog.",
+    "nadoknada_naslov_dete": "Duguješ",
+    "nadoknada_opis_dete": "Ovo se skinulo kad je prijateljstvo prestalo. Prvi POENI koji ti stignu popunjavaju ovo. Sve ostalo radi normalno."
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -676,7 +678,9 @@
     "zatvoren_oglas": "Ako te zanima nešto sa oglasa, javi se preko samog oglasa na Pijaci. Razgovor sa maloletnim korisnikom otvara roditelj i taj razgovor čita.",
     "skola": "Škola",
     "roditelji": "Roditelji",
-    "deca": "Deca"
+    "deca": "Deca",
+    "status_dete_ceka": "čeka odobrenje roditelja",
+    "status_dete_radi": "nalog radi"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3111,7 +3115,8 @@
     "ceka_uputstvo": "Pokaži mami ili tati poruku koju smo im poslali. Ako je nisu dobili, pročitaj im ovaj broj naglas.",
     "dugme_profil": "Moj profil",
     "kod_naslov": "Broj za mamu ili tatu",
-    "dugme_prepis": "Moj POEN"
+    "dugme_prepis": "Moj POEN",
+    "kod_profil_opis": "Pročitaj ovaj broj mami ili tati. Unose ga uz tvoje ime."
   },
   "prijatelji": {
     "naslov": "Moji prijatelji",

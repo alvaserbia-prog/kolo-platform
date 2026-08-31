@@ -40,9 +40,21 @@ interface ProfilProps {
     emailObavestenja: boolean;
   };
   praceneKategorije: string[];
+  /**
+   * Maloletni nalog (Modul Deca).
+   *
+   * 🔴 Do 31.08.2026. je detetu renderovan CEO odrasli profil, a dečji odeljci su
+   * se samo dopisivali ispod njega. Sedmogodišnjak je tako na svom profilu imao
+   * polje Telefon sa klizačem vidljivosti, „Prigovor na odluku" sa listom vrsta
+   * odluka, GDPR eksport i crveno „Obriši nalog" iza jednog otkucanog pseudonima.
+   * Deca tog uzrasta pritiskaju crvena dugmad da vide šta rade.
+   */
+  maloletan?: boolean;
+  /** Stanje naloga deteta (čl. 4c) — zamenjuje red „Status: čeka potvrdu". */
+  stanjeDeteta?: "NA_CEKANJU" | "POVEZANO" | "AKTIVNO" | null;
 }
 
-export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) {
+export default function ProfilKlijent({ user, praceneKategorije, maloletan = false, stanjeDeteta = null }: ProfilProps) {
   const locale = useLocale();
   const t = useTranslations("profil");
   const tc = useTranslations("common");
@@ -430,14 +442,22 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
               <dt className="text-kolo-muted">{t("pseudonim_label")}</dt>
               <dd className="font-medium text-kolo-text"><Pseudonim>{user.pseudonim}</Pseudonim></dd>
             </div>
-            <div className="flex justify-between">
-              <dt className="text-kolo-muted">{t("uloga_label")}</dt>
-              <dd className="text-kolo-muted">{tipLabel[user.tipKorisnika] ?? user.tipKorisnika}</dd>
-            </div>
+            {!maloletan && (
+              <div className="flex justify-between">
+                <dt className="text-kolo-muted">{t("uloga_label")}</dt>
+                <dd className="text-kolo-muted">{tipLabel[user.tipKorisnika] ?? user.tipKorisnika}</dd>
+              </div>
+            )}
             <div className="flex justify-between">
               <dt className="text-kolo-muted">{t("status_label")}</dt>
               <dd>
-                {user.verified ? (
+                {maloletan ? (
+                  stanjeDeteta === "NA_CEKANJU" ? (
+                    <span className="font-medium text-deca-sunce-ink">{t("status_dete_ceka")}</span>
+                  ) : (
+                    <span className="font-medium text-deca-trava-600">{t("status_dete_radi")}</span>
+                  )
+                ) : user.verified ? (
                   <span className="text-kolo-green-700 font-medium">{t("status_verifikovan")}</span>
                 ) : (
                   <span className="text-kolo-gold-600 font-medium">{t("status_ceka")}</span>
@@ -460,7 +480,7 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
                 <dd className="text-kolo-muted">{user.location}</dd>
               </div>
             )}
-            {user.telefon && (
+            {user.telefon && !maloletan && (
               <div className="flex justify-between">
                 <dt className="text-kolo-muted">{t("telefon_label")}</dt>
                 <dd className="text-kolo-muted">{user.telefon}</dd>
@@ -519,8 +539,10 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
               {renderSwitch("prikaziLokaciju")}
             </div>
           </div>
-          {/* Telefon */}
-          <div>
+          {/* Telefon — maloletnom nalogu se ne nudi. Sistem dete pažljivo štiti od
+              kontakta nepoznatih odraslih, a onda mu je na profilu stajalo polje
+              kojim svoj broj može da objavi svakome kome je vidljiv. */}
+          <div className={maloletan ? "hidden" : ""}>
             <label className="block text-sm text-kolo-muted mb-1.5">{t("telefon")} <span className="text-kolo-muted">({tc("opciono")})</span></label>
             <div className="flex items-center gap-3">
               <input
@@ -726,8 +748,11 @@ export default function ProfilKlijent({ user, praceneKategorije }: ProfilProps) 
         </div>
       </div>
 
-      {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+      {/* Podaci i privatnost — prigovor levo; desno prenosivost (gore) + gašenje (dole).
+          Detetu se ne prikazuje: prigovor Fondaciji, GDPR eksport i nepovratno
+          gašenje naloga nisu radnje sedmogodišnjaka. Prava po ZZPL-u time nisu
+          uskraćena — ostvaruje ih roditelj, koji za dete i odgovara (čl. 10). */}
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 items-start ${maloletan ? "hidden" : ""}`}>
         {/* Prigovor na odluku — levo */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
           <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("prigovor_naslov")}</h2>

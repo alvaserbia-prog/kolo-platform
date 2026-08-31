@@ -363,7 +363,9 @@
     "prijavi_ponistena": "Az átírást a bejelentés alapján érvénytelenítették.",
     "prijavi_odbacena": "A bejelentést megvizsgálták — az átírás marad.",
     "prijavi_greska": "A bejelentést nem sikerült elküldeni.",
-    "ceka_roditelja": "A fiók arra vár, hogy egy szülő átvegye. Addig a POEN átírható a bejegyzésedbe; a másoknak való átírás akkor nyílik meg, amikor a szülő átveszi a fiókot."
+    "ceka_roditelja": "A fiók arra vár, hogy egy szülő átvegye. Addig a POEN átírható a bejegyzésedbe; a másoknak való átírás akkor nyílik meg, amikor a szülő átveszi a fiókot.",
+    "nadoknada_naslov_dete": "Tartozol",
+    "nadoknada_opis_dete": "Ez akkor íródott le, amikor egy barátság véget ért. Az első POEN, ami érkezik, feltölti. Minden más a szokásos módon működik."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -669,7 +671,9 @@
     "zatvoren_oglas": "Ha érdekli valami, amit közzétett, jelentkezzen magán a piactéri hirdetésen keresztül. A kiskorúval folytatott beszélgetést a szülője nyitja meg, és ő is olvassa.",
     "skola": "Iskola",
     "roditelji": "Szülők",
-    "deca": "Gyerekek"
+    "deca": "Gyerekek",
+    "status_dete_ceka": "szülői jóváhagyásra vár",
+    "status_dete_radi": "a fiók működik"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -3111,7 +3115,8 @@
     "ceka_uputstvo": "Mutasd meg anyának vagy apának az üzenetet, amit küldtünk nekik. Ha nem kapták meg, olvasd fel nekik ezt a számot.",
     "dugme_profil": "A profilom",
     "kod_naslov": "Szám anyának vagy apának",
-    "dugme_prepis": "Az én POEN-em"
+    "dugme_prepis": "Az én POEN-em",
+    "kod_profil_opis": "Olvasd fel ezt a számot anyának vagy apának. A nevedddel együtt írják be."
   },
   "prijatelji": {
     "naslov": "Barátaim",
