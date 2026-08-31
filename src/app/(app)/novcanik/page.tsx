@@ -40,6 +40,7 @@ export default async function NovcanikPage({
     dohvatiZabelezeneKorake(session.user.id),
   ]);
   const zabelezenDoprinos = zabelezenOglas + zabelezeniKoraci;
+  const maloletan = dbUser?.maloletan ?? false;
 
   // Detetu se stanje naloga čita iz veze sa roditeljem (čl. 4c), a ne iz tipa
   // korisnika — vidi napomenu uz `smeDaSalje` ispod.
@@ -57,7 +58,8 @@ export default async function NovcanikPage({
         platiPseudonim={plati ?? primalac}
         prefillIznos={iznos}
         prefillOpis={description}
-        zabelezenDoprinos={zabelezenDoprinos}
+        zabelezenDoprinos={maloletan ? 0 : zabelezenDoprinos}
+        maloletan={maloletan}
         // Neverifikovani u ažuriranju evidencije učestvuje samo kao primalac
         // (čl. 28 st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto.
         //
@@ -74,10 +76,18 @@ export default async function NovcanikPage({
       />
 
       {/* Putanja doprinosa razmeni (čl. 40a). Očitava brojače iz više tabela, pa
-          se striminguje odvojeno — kartice ne čekaju na nju. */}
-      <Suspense fallback={<PutanjaSkeleton />}>
-        <PutanjaRazmene userId={session.user.id} />
-      </Suspense>
+          se striminguje odvojeno — kartice ne čekaju na nju.
+
+          🔴 Maloletnom nalogu se NE prikazuje. Kanal mu je zatvoren u samom kodu
+          (`doprinos-razmeni.ts`), pa je dete gledalo lestvicu od pet koraka do
+          5.000 POENA koju nikad ne može popeti, sa brojačem koji zauvek stoji na
+          nuli, i rečenice tipa „razmene sa 10 različitih osoba van tvog lanca".
+          Za dete to nije informacija nego merilo po pravilima koja ne razume. */}
+      {!maloletan && (
+        <Suspense fallback={<PutanjaSkeleton />}>
+          <PutanjaRazmene userId={session.user.id} />
+        </Suspense>
+      )}
 
       {/* Istorija transakcija je najteži upit (100 redova + ugnežđeni JOIN-ovi):
           striminguje se odvojeno da kartice ne čekaju na nju. */}

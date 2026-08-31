@@ -107,10 +107,11 @@ export default function SkolaKlijent({ sifra }: { sifra: string }) {
         </div>
 
         {deca === null ? (
-          // Gost ne vidi spisak: po čl. 13 njemu nije dostupan ni oglas maloletnog
-          // korisnika, pa spisak dece ne sme biti dostupniji od toga.
+          // Spisak vidi samo dete (odluka vlasnika). Punoletnom nalogu i gostu se
+          // sa servera i ne šalje: pseudonim + sličica + stanje POENA, poređani po
+          // iznosu, jesu upravo ono što zatvoren profil deteta krije.
           <p className="px-5 py-8 text-center text-sm text-kolo-muted">
-            {t("deca_samo_prijavljeni")}
+            {t("deca_samo_deca")}
           </p>
         ) : deca.length === 0 ? (
           <p className="px-5 py-8 text-center text-sm text-kolo-muted">{t("deca_prazno")}</p>

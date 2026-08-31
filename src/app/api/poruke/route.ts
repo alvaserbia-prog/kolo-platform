@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
-import { smeDaKomunicira, ucitajUcesnika } from "@/lib/protokol/deca";
+import { smePokrenutiRazgovor, ucitajUcesnika } from "@/lib/protokol/deca";
+import { PORUKA_RASKINUTO, raskinutoIzmedju } from "@/lib/protokol/prijateljstva";
 
 // GET — lista konverzacija za trenutnog korisnika
 export async function GET() {
@@ -42,7 +43,19 @@ export async function GET() {
     };
   });
 
-  return NextResponse.json({ konverzacije: data, verified: session.user.verified });
+  // `maloletan` ide klijentu da bi ekran znao ŠTA da ponudi umesto pretrage
+  // članova: detetu se ne prikazuje rečenica o „redovnim članovima" (za njega je
+  // neistinita — piše svakom svom prijatelju), nego spisak njegovih prijatelja.
+  const ja = await prisma.user.findUnique({
+    where: { id: meId },
+    select: { maloletan: true },
+  });
+
+  return NextResponse.json({
+    konverzacije: data,
+    verified: session.user.verified,
+    maloletan: ja?.maloletan ?? false,
+  });
 }
 
 // POST — otvori ili kreiraj konverzaciju sa korisnikom (po userId)
@@ -64,9 +77,6 @@ export async function POST(req: NextRequest) {
   // `smeDaKomunicira`, a opšte pravilo o verifikaciji ostaje za sve ostale.
   const jaUcesnik = await ucitajUcesnika(meId);
   if (!jaUcesnik) return await greska("Nalog ne postoji.", 401);
-  if (!jaUcesnik.maloletan && !session.user.verified) {
-    return await greska("Verifikacija potrebna.", 403);
-  }
 
   // `oglasId` je opcion i šalje se kad razgovor kreće sa stranice oglasa —
   // po njemu se beleži upit, koji je jedan od uslova koraka 3 putanje doprinosa
@@ -78,11 +88,21 @@ export async function POST(req: NextRequest) {
   const drugiUcesnik = await ucitajUcesnika(userId);
   if (!drugiUcesnik) return await greska("Korisnik ne postoji.", 404);
 
-  if (jaUcesnik.maloletan || drugiUcesnik.maloletan) {
-    // `smeDaKomunicira` sam odbija nalog koji još čeka roditelja (stanje
-    // `NA_CEKANJU`, čl. 4c) — stanje je deo `Ucesnik`-a, pa nema odvojene provere.
-    const dozvoljeno = smeDaKomunicira(jaUcesnik, drugiUcesnik);
-    if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+  // `smePokrenutiRazgovor` nosi OBA uslova — opšti uslov verifikacije za punoletne
+  // i `smeDaKomunicira` za parove sa detetom (koji sam odbija nalog što još čeka
+  // roditelja, jer je stanje deo `Ucesnik`-a). Isti poziv radi i ekran Pijace, pa
+  // dugme ne može ponovo postati strože od rute.
+  const dozvoljeno = smePokrenutiRazgovor(jaUcesnik, drugiUcesnik, session.user.verified);
+  if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
+
+  // Raskinut par ne otvara nov razgovor — inače bi se ugašeni razgovor zaobišao
+  // u jednom kliku sa oglasa.
+  if (
+    jaUcesnik.maloletan &&
+    drugiUcesnik.maloletan &&
+    (await raskinutoIzmedju(jaUcesnik.id, drugiUcesnik.id))
+  ) {
+    return await greska(PORUKA_RASKINUTO, 403);
   }
 
   // Povod razgovora za PRIKAZ (sličica i link u razgovoru) — odvojeno od

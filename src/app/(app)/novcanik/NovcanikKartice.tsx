@@ -23,6 +23,16 @@ const QrSkener = dynamic(() => import("@/components/verifikacija/QrSkener"), {
 });
 
 interface Props {
+  /**
+   * Maloletni nalog. Menja se SAMO objašnjenje uz minus.
+   *
+   * 🔴 Zatečeni tekst govori o poništenoj potvrdi i o prijavi razmene — dva
+   * instituta koja dete nikad nije dodirnulo. Kod deteta minus nastaje iz
+   * raskinutog prijateljstva (čl. 14c) ili sa osamnaestim rođendanom (čl. 19),
+   * pa dete koje se posvađalo sa drugaricom čita pasus o postupku Fondacije.
+   * Iznos, računica i pravni režim minusa ostaju isti — menja se rečenica.
+   */
+  maloletan?: boolean;
   balance: number;
   pseudonim: string;
   memberHash: string;
@@ -41,7 +51,7 @@ interface Props {
   razlogZabrane?: "neverifikovan" | "ceka_roditelja";
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true, razlogZabrane = "neverifikovan" }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -101,12 +111,12 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
         {uNadoknadi && (
           <div className="mt-3 rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4">
             <div className="flex items-baseline justify-between gap-3">
-              <p className="text-sm font-semibold text-amber-900">{t("nadoknada_naslov")}</p>
+              <p className="text-sm font-semibold text-amber-900">{t(maloletan ? "nadoknada_naslov_dete" : "nadoknada_naslov")}</p>
               <p className="text-lg font-bold tabular-nums text-amber-800">
                 {iznosNadoknade(balance).toLocaleString(intlTag(locale))} {tc("poen")}
               </p>
             </div>
-            <p className="text-sm text-amber-800/80 mt-1">{t("nadoknada_opis")}</p>
+            <p className="text-sm text-amber-800/80 mt-1">{t(maloletan ? "nadoknada_opis_dete" : "nadoknada_opis")}</p>
           </div>
         )}
 

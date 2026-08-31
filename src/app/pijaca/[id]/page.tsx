@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { SITE_NAME, SITE_DESCRIPTION, absoluteUrl } from "@/lib/seo";
 import OglasDetalj from "../../(app)/pijaca/[id]/OglasDetalj";
-import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
+import { IZBOR_UCESNIKA, nalogRadi, smeDaVidiOglas, smePokrenutiRazgovor, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
 import { jeAdmin } from "@/lib/dozvole";
 
 // Apsolutni URL slike oglasa za OG/Twitter karticu (Facebook, Viber, WhatsApp…).
@@ -81,11 +81,24 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
   // time i da postoji dete koje ga je objavilo — upravo ono što se skriva. Isti
   // izbor kao 404 u `GET /api/pijaca/[id]`.
   const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
+  const prodavac = ucesnikIzReda(listing.seller);
   const smem = smeDaVidiOglas(
     posmatrac ? { ...posmatrac, admin: jeAdmin(session?.user) } : null,
-    ucesnikIzReda(listing.seller),
+    prodavac,
   );
   if (!smem) notFound();
+
+  /**
+   * Sme li posmatrač da pokrene razgovor povodom oglasa.
+   *
+   * 🔴 NE `session.user.verified`. Maloletni nalog je trajno neverifikovan (čl. 15),
+   * pa je dete na svakom tuđem oglasu dobijalo poziv da postane redovan član — a
+   * ruta `POST /api/poruke` mu razgovor sve vreme dozvoljava. Ista funkcija odlučuje
+   * i tamo i ovde, pa se to dvoje više ne može raziće.
+   */
+  const razgovor = posmatrac
+    ? smePokrenutiRazgovor(posmatrac, prodavac, session?.user?.verified ?? false)
+    : ({ ok: false, razlog: "", status: 403 } as const);
 
   return (
     <OglasDetalj
@@ -118,6 +131,14 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
       isVerified={session?.user?.verified ?? false}
       jePrijavljen={!!session?.user}
       posmatracMaloletan={posmatrac?.maloletan ?? false}
+      smePisati={razgovor.ok}
+      razlogZabrane={
+        posmatrac?.maloletan && !razgovor.ok
+          ? nalogRadi(posmatrac.stanje)
+            ? "odrasli_zabranjeni"
+            : "ceka_odobrenje"
+          : null
+      }
     />
   );
 }
