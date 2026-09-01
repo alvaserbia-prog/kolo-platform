@@ -180,7 +180,9 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
-> **CLAUDE.md sinhronizovan sa kodom do commita `120d578` (2026-06-16).** Posle 2026-06-13 najviše kozmetičkih UI izmena (Profil/Pijaca/Novčanik/Početna raspored, header jezik switcher, fontovi); činjenične izmene unete iznad: Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, terminologija „emisija" → „evidencija doprinosa".
+> **CLAUDE.md sinhronizovan sa kodom do commita `26cc1fb` (2026-09-01).** Poslednji krug unetih izmena: redizajn dečjeg prostora (boje, mete za prst, copy pisan detetu), `smePokrenutiRazgovor` kao jedan uslov za pokretanje razgovora, dečji POEN i profil bez odraslog pravnog sloja, spisak dece škole samo deci, raskid prijateljstva gasi i razgovor, badge uz „Početna", pouzdana dostava push obaveštenja, `opengraph-image` za oglas, Intl oznake za hr/hu i E2E testovi (Playwright).
+>
+> Raniji zapis (do `120d578`, 2026-06-16): Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, terminologija „emisija" → „evidencija doprinosa".
 
 ## Status usklađenosti (24.05.2026 → 02.06.2026)
 **Kod je u velikoj meri usklađen sa v3.7.5/3.7.4/3.7.3/3.7.2.** Većina ranijih 🟡 odstupanja je rešena. Aktuelno stanje:
@@ -442,7 +444,9 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - **Roditelj prijateljstvo NE odobrava** — sklapa se uživo, a odobravanje bi bilo naknadno presuđivanje o tome sa kim se dete druži u životu. Roditelj dobija obaveštenje i vidi spisak sa datumima.
 - **Broj prijateljstava po detetu i broj dece po roditelju nisu ograničeni.**
 
-**Raskid (čl. 14c).** 🔴 **Raskinuti može SAMO DETE**, bilo koje od dvoje; roditelj nema raskid (njemu ostaju brisanje naloga, uklanjanje oglasa i prekidač za odrasle). Otpisuje se **500 POEN OBEMA stranama**, uz potvrdu sa jasnim tekstom „izgubićeš 500 POEN".
+**Raskid (čl. 14c).** 🔴 **Raskid gasi i razgovor u četiri oka (2026-08-31).** Dotad je sklanjao osobu iz Pričaonice, a lične poruke su nastavljale da rade — pa je jedini potez kojim se dete povlači od nekoga koštao 500 POEN i nije prekidao ono zbog čega se povlači. Provera (`raskinutoIzmedju`, `PORUKA_RASKINUTO`) veže se za **RASKINUT red**, ne za odsustvo prijateljstva: dvoje dece koja nikad nisu bila prijatelji i dalje smeju da se dopisuju povodom oglasa (čl. 12), a kad se par obnovi, razgovor radi ponovo — kao i POEN. **Poruke se ne brišu**; polje za pisanje se ne prikazuje, uz rečenicu zašto. Provera važi i pri **slanju** (`POST /api/poruke`, `POST /api/poruke/[konvId]`) i pri **otvaranju** razgovora — inače bi se ugašen razgovor zaobišao jednim klikom sa oglasa.
+
+🔴 **Raskinuti može SAMO DETE**, bilo koje od dvoje; roditelj nema raskid (njemu ostaju brisanje naloga, uklanjanje oglasa i prekidač za odrasle). Otpisuje se **500 POEN OBEMA stranama**, uz potvrdu sa jasnim tekstom „izgubićeš 500 POEN".
 - 🔴 **Zapis SME u minus, i to je neophodno, ne strogo.** Bez minusa bi postojao potez: sklopi, dobij 500, odmah prepiši roditelju, raskini — otpis pada na prazan račun; pa obnovi par i ponovi = **beskonačna kasa iz jednog prijateljstva**. Sa minusom ciklus daje **tačno nulu**, pa **par sme da se obnovi** i POEN se upisuje ponovo (pomirene drugarice ne gube ništa trajno). Kazna je trenutna za štedišu, odložena za onoga ko je brz — ali od nje niko ne beži.
 - 🔴 **Izuzetaka od zabrane negativnog zapisa (Pravilnik čl. 14 st. 3) u kodu sada ima TRI:** nadoknada po čl. 20b, poništen prepis po prijavi razmene i otpis prijateljstva. Nema zasebne kolone — minus JESTE nadoknada, pa `jeNadoknada`/`iznosNadoknade`/`raspolozivo` iz `nadoknada.ts` pokrivaju sva tri.
 
@@ -456,7 +460,7 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - **Razlog za poništenje je uravnoteženje kanala:** prijateljstvo nosi 500 za trideset sekundi u istoj prostoriji, potvrda 1.000 uz odgovornost za tuđi identitet. Bez poništenja bi onaj ko krene sa 17 odradio godinu jeftinog kanala, ušao u 18. sa zalihom i **povrh toga** dobio ceo skupi — isti čovek, godina razlike, trajno drugačija pozicija.
 - **Mesec dana ranije** ide obaveštenje detetu **i njegovim prijateljima** (i njima odlazi po 500 — bez toga je iznenađenje na najgorem mestu).
 
-**Pričaonica (čl. 18).** Jedna soba za svu decu, ali **svako vidi samo poruke svojih prijatelja** (`idPrijatelja`, filter i na serveru i u početnom SSR upitu).
+**Pričaonica (čl. 18).** Soba se bira po uzrastu — `ChatSoba.DECA` / `ChatSoba.ODRASLI`, `mojaSoba()` u `/api/chat` čita `User.maloletan`; dve sobe, jedan model `ChatMessage`. Dečja je **jedna soba za svu decu**, ali **svako vidi samo poruke svojih prijatelja** (`idPrijatelja`, filter i na serveru i u početnom SSR upitu).
 - **Posledica koja se dobija besplatno:** kad su svi učesnici međusobno prijatelji, **sam od sebe nastaje grupni razgovor** — graf pravi sobe umesto tebe.
 - 🟡 **Prihvaćeno ponašanje:** Ana odgovori Milici, a Petar (Milicin prijatelj, Anu ne poznaje) vidi Aninu poruku bez povoda. Nije greška.
 - 🔴 **NEMA odgovora sa citatom** — citat bi Petru pokazao Milicin tekst i zaobišao filter. Ne dodavati citiranje.
@@ -685,6 +689,10 @@ Dete u svom profilu bira **školu koju pohađa**, i iz izbora nastaju tri liste.
 - **Pretraga ide RUTOM, ne šifarnikom u paketu** — spisak nosi oko 1.600 škola i preko sto kilobajta, a treba samo detetu koje bira školu, jednom. (Kod naselja je suprotno, jer je taj spisak petostruko manji.)
 - **Nema tabele `Skola`** — šifarnik je statičan spisak u kodu, kao `NASELJA_SRBIJE`; sistem o školi ne stvara nijedan sopstveni podatak.
 
+🔴 **Spisak dece jedne škole vidi SAMO maloletni nalog (odluka vlasnika, 2026-08-31).** Do tada ga je dobijao svako ko je prijavljen — dakle i punoletan nalog otvoren pre dva minuta — i to sa pseudonimom, **sličicom i tekućim stanjem POEN-a**, poređan od najbogatijeg deteta. Zatvoren profil maloletnog naloga izričito krije sliku, mesto, školu i stanje; spisak je nosio upravo to, sabrano i rangirano, samo sa druge strane. Uz to ga **roditeljski prekidač nije dodirivao**: roditelj koji je isključio komunikaciju sa odraslima i dalje je imao dete na javnoj listi. Odluka je u `GET /api/skole/[sifra]` (server, ne komponenta), za **svaku** školu.
+- **Nacionalne liste i svi brojevi ostaju svima** — one pokreću mehanizam („našoj školi fali troje do šestog mesta") i ne imenuju nikoga. Sužava se samo spisak imena.
+- Isti obrazac kao kod zatvorenog profila: **do deteta se dolazi samo kroz ono što je dete sámo objavilo**.
+
 ### 🔴 Profil maloletnog korisnika se punoletnim članovima NE otvara (2026-08-18)
 
 Pravilo je šire od ranglista i vredi više od njih. Načelo: **do deteta se dolazi samo kroz ono što je dete sámo objavilo** — nikad kroz profil, pretragu ili spisak. Ranglista i knjiga zapisa pokazuju da dete postoji; one nisu vrata ni u šta.
@@ -750,6 +758,30 @@ je dete uz to bilo i neverifikovano, pa je nosio pečat „bez potvrde". Pravilo
 javni R2 URL; zatvaranje bi tražilo potpisane URL-ove, što je zaseban posao.
 
 **Veza roditelj–dete je javna u OBA smera** (odluka vlasnika): sa deteta se vidi roditelj, sa roditelja ko su mu deca. 🔴 **Posledica je svesno prihvaćena** — deca time postaju popisiva preko odraslih, što je šira izloženost od svih ranglista zajedno. Zaštitu tada nosi zatvoren profil i prekidač, ne skrivenost. Usput utvrđeno: program **Podrška majkama tu javnost NE traži** (Fondacija vezu ionako vidi, a potvrđivači potvrđuju bez uvida u unete podatke) — javnost stoji na sopstvenom razlogu.
+
+### Dečji prostor je pisan detetu (redizajn, 2026-08-31)
+
+Četiri koraka istog dana. Modul Deca je do tada radio, ali je ekrane nasledio od odraslog dela sajta — boje sa crteža, pravni sloj koji detetu ne pripada i copy pisan roditelju.
+
+**1. Boje, mete za prst, pristupačnost** (`f79a777`). Paleta iz `DecjaPocetna` prešla je u tokene **`--color-deca-*` u tri stope** (`globals.css`). 🔴 **Zatečenih osam boja koristilo se kao podloga BELOG teksta, a nijedna ne prelazi 4,5 : 1** — „Moji oglasi" je bio na **1,98 : 1**, kao i rečenica „+500 POEN te čeka". Stopa **400** zadržava boju sa crteža za velike površine i okvire, **600** nosi tekst i dugmad (~5,1 : 1), **100** je podloga; žuta ima i `-ink` za tekst NA njoj (7,4 : 1). Uz to `style={{backgroundColor}}` ne ume `hover:`/`focus-visible:`, pa se to nadoknađivalo sa `hover:brightness-110` — koje svetlu boju čini još svetlijom.
+- 🔴 **Dugme za prijavu poruke je bilo `text-[10px]` bez padinga** — meta oko 12 × 30 px, šest puta ispod minimuma. Pošto roditelj razgovore među decom ne čita (čl. 9), dete je **jedini senzor** za traženje slika, poziv na susret i laž o uzrastu; zaštita koju sedmogodišnjak ne pogodi prstom faktički ne postoji. Prop `malo` je uklonjen, a posle prijave se detetu kaže da javi roditelju.
+- Veliki iznos POEN-a ide kroz `.broj-kartica`, pa se „1.000.000" više ne seče na telefonu od 320 px; **Pričaonica skroluje SVOJ kontejner** i samo ako je dete bilo pri dnu (dotad je `scrollIntoView` trzao celu stranicu na svakih 10 sekundi); `role="alert"`/`"status"` na poruke o ishodu, labele uz polja, `<ul>` umesto `<div>` liste; globalni **`:focus-visible`** prsten i **`prefers-reduced-motion`** (u celom repou dotad poštovan na jednom mestu).
+- **Copy na svih 5 jezika:** „preuzimanje naloga" izlazi iz svega što čita dete i postaje **„odobrenje roditelja"** (deci „preuzeti" znači uzeti nekome nešto, pa je rečenica saopštavala suprotno); rok je **14 dana**, kako sistem radi i kako stoji u čl. 4b; „drug" → **„prijatelj"**; ICU množina; oznaka uz prijatelja **imenuje ČIJE se odobrenje čeka** — dotad je pisalo „500 na čekanju" i kad koči sopstveni roditelj, pa je dete krivilo sve ostale. Hrvatski dečji tekstovi više ne govore „račun" (u hrvatskom je to priznanica), a Pričaonica ima **jedno ime po jeziku** (ruski ih je imao tri, mađarski četiri).
+
+**2. Dete sme da piše — ekran više nije stroži od rute** (`6c3addf`). `POST /api/poruke` dete izričito propušta i odlučuje po `smeDaKomunicira` (čl. 12), a **Pijaca je dugme „Kontaktiraj" birala po `session.user.verified`** — dok je maloletni nalog **trajno `verified: false`**, jer u lanac potvrda ne ulazi (čl. 15) i nikad neće. Posledica: dete vidi tuđe oglase, ima POEN, i nema nijedno dugme koje to dvoje spaja; umesto njega je dobijalo poziv da postane redovan član i link na `/verifikacija` — stranicu koju ne sme ni da otvori.
+- 🔴 **Uslov je sada JEDNA čista funkcija — `smePokrenutiRazgovor(ja, drugi, verifikovan)`** (`deca-pravila.ts`), koju zovu i ruta i **oba** ekrana Pijace (`(app)/pijaca` i javni `pijaca/`), pa se ta mesta više ne mogu raziće. Nosi oba pravila: verifikacija za punoletne (čl. 16 st. 5, čl. 28 st. 2), `smeDaKomunicira` čim je bar jedna strana maloletna. Zaključano testovima u `__tests__/deca-pravila.test.ts`.
+- Kad dete ne sme da piše, dobija **istinit razlog i kraj koji se vidi** („kad mama ili tata odobre nalog" / „sa odraslima tek kad ti to uključe") — **nikad poziv na potvrdu**, koja za njega nije put. `isVerified` od sada odlučuje samo o prikazu telefona (Politika čl. 6).
+- **Ekran Poruke:** detetu je stajala rečenica o odgovaranju „redovnim članovima koji su ti se javili povodom tvog oglasa" — neistinita u svakoj reči za maloletni nalog. Na njeno mesto ide **spisak njegovih prijatelja kao dugmad** za pokretanje razgovora; pretraga članova ostaje zatvorena.
+
+**3. Dečji POEN i profil bez odraslog pravnog sloja** (`672fdd2`). Ekran POEN je detetu prikazivao **`PutanjaRazmene`** — lestvicu od pet koraka do 5.000 POEN, sa rečenicama tipa „razmene sa 10 različitih osoba van tvog lanca". Kanal je maloletnom nalogu zatvoren u kodu, pa je to bila lestvica koja se nikad ne može popeti, sa brojačem zauvek na nuli. Isto i **„Zabeležen doprinos"** (čl. 40a/40b).
+- **Minus se detetu objašnjava njegovim uzrocima** — raskinuto prijateljstvo (čl. 14c) ili osamnaesti rođendan (čl. 19) — a ne poništenom potvrdom i prijavom razmene. **Iznos i pravni režim minusa se ne menjaju, samo rečenica.**
+- 🔴 **Profil:** dotad se detetu renderovao CEO odrasli profil, a dečji odeljci su se dopisivali ispod njega — sedmogodišnjak je imao polje **Telefon** sa klizačem vidljivosti, **„Prigovor na odluku"** sa listom vrsta odluka, **GDPR eksport** i crveno **„Obriši nalog"** iza jednog otkucanog pseudonima. Ta tri odeljka mu se više ne prikazuju: **prava po ZZPL-u ostvaruje roditelj, koji za dete i odgovara** (čl. 10). `ProfilKlijent` prima `maloletan` i `stanjeDeteta`.
+- Red „Uloga: nov član" i „Status: čeka potvrdu" zamenjuje **stanje iz čl. 4c**. Za maloletni nalog je „čeka potvrdu" trajno stanje predstavljeno kao privremeno.
+- **Šestocifreni kod za roditelja sada stoji i na profilu deteta** — i uputstvo detetu i roditeljski tekst su OBA slala po njega „na profil", a koda tamo nije bilo; lanac se prekidao na najužem mestu modula.
+
+**4. Spisak dece i raskid** (`eb3b7e6`) — opisano uz „Ranglista škola" i uz raskid u „Modul Deca".
+
+🟡 Nalaz pet stručnih ocena i plan redizajna su bili u repou (`bf753d6`) pa **uklonjeni** (`81e7d20`) — plan je odrađen, a docs nisu normativa.
 
 ### Prijava poruke nosi i čoveka (2026-08-17)
 
@@ -861,6 +893,28 @@ Odluka vlasnika, u dva koraka istog dana: prvo „neka nepotvrđen član dobije 
 - **Test `pravni-dokumenti.test.ts`** traži rečenicu o odobrenju na sr, en i ru — brana da se akt ne vrati na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
 - **Copy:** Pijaca (`neverif_opis`) kaže da oglas ide odmah a doprinos po odobrenju; Novčanik (`zabelezen_opis`, `putanja_zabelezen`) navodi odobrenje kao prvi put. 🟡 **Usput ispravljeno u onboardingu** (`dobrodosli`, zatečene greške): `ekran5_p3` je znao za dva izvora POEN-a umesto tri, a `ekran6_p5` je tvrdio da se postavljanje oglasa otključava potvrdom — što ne važi od 4.1.0.
 
+### Push obaveštenja: dostava, grupisanje i skidanje brojke (2026-08-31)
+
+Tri odvojena kvara u istom toku, sva tri se vide kao „push nekad ne radi".
+
+1. 🔴 **Push „nekad ne stigne".** Slalo se kao `void posaljiPush(...)` — pošalji i zaboravi. Na Vercel serverless-u se funkcija sme **zamrznuti ili ugasiti čim odgovor ode klijentu**, dakle pre nego što `webpush.sendNotification()` završi poziv ka FCM/Apple. Nov **`zakaziPush()`** koristi `after()` i drži funkciju živom dok se slanje ne završi, bez usporavanja odgovora; van request scope-a (skripte, cron) `after` baca, pa ide fallback na staro ponašanje.
+2. 🔴 **Vidi se i čuje samo prva poruka.** Sve notifikacije su delile **tag po TIPU** (`"poruka"`), a nova notifikacija istog tag-a **tiho zameni staru** — tri poruke iz tri razgovora davale su jednu notifikaciju. Tag je sada **po cilju** (`poruka:/poruke?k=<id>`), uz `renotify: true` da zamena unutar istog razgovora ipak obavesti.
+3. 🔴 **Crvena brojka na ikonici ne pada kad poruku pročitaš.** OS je računa iz **PRIKAZANIH** notifikacija, a `showNotification` ne nestaje sam. Service worker (`public/sw.js`) prima poruku **`zatvori-notifikacije`** i zatvara notifikacije datog cilja; ekran Poruke je šalje čim učita razgovor (isto mesto gde već osvežava badge u zaglavlju). No-op kad service worker ili push nisu aktivni.
+
+### Preview oglasa u Viberu i Messengeru — `opengraph-image` (2026-08-31)
+
+Do ove izmene je u `og:image` išao **direktan URL slike sa R2**. Facebook i Messenger sliku dovlače asinhrono i pri **PRVOM deljenju** je ne pokažu ako ne znaju dimenzije, a **Viber ne ume WebP i ne prati redirect**. Link se deli, kartica ostaje bez slike — i to tačno na prvom deljenju, jer se posle toga podaci keširaju.
+
+Sada oglas ima svoju **`src/app/pijaca/[id]/opengraph-image.tsx`**: Next generiše **PNG 1200×630** sa fotografijom preko cele kartice i sam emituje `og:image:width/height/type`. Fiksne, unapred poznate dimenzije, uvek PNG, ista adresa bez redirecta. Kad oglas nema upotrebljivu fotografiju (nema slike, ne može da se dovuče, ili je WebP koji satori ne renderuje) ide **brendirana kartica** sa naslovom oglasa.
+- **Node runtime, ne edge** — ruta čita bazu, a `@prisma/adapter-pg` na edge-u ne radi. Fontovi se čitaju sa diska, uz `outputFileTracingIncludes` u `next.config.ts` da uđu u serverless bundle.
+- 🔴 **Ruta sprovodi vidljivost oglasa maloletnog korisnika** (čl. 13). File-convention slika se emituje **i kad `generateMetadata` vrati prazno**, a ruta je javna i nema sesiju — bez provere bi ko zna `id` dobio fotografiju dečjeg oglasa, i pokupili bi je Gugl i svaki program za poruke. Za takav oglas ide ista brendirana kartica kao za nepostojeći: potvrđuje samo da adresa vodi na Pijacu, ništa o detetu.
+
+### Datum i broj po jeziku — hr i hu više ne padaju na srpski (2026-08-31)
+
+`src/lib/format.ts` je držao Intl oznake za `sr`, `sr-Cyrl`, `en` i `ru`. 🔴 **Jezik koji nedostaje u toj mapi ne pravi grešku nego TIHO pada na srpski format**, pa je Mađar od odmrzavanja hr i hu (2026-08-06) na svakom ekranu video datum poređan po srpski — „18. 08. 2026." umesto „2026. 08. 18." — i srpski razdvajač hiljada. Dodati su `hr-HR` i `hu-HU`. Sistemski ekrani (`ekran-poruke.ts`) su isti propust već preživeli i u međuvremenu su dopunjeni, pa se odatle samo izvozi spisak `JEZICI` radi provere.
+
+**Dve brane, jer se nijedan od ova dva propusta ne vidi kao greška nego kao srpski tekst na tuđem jeziku:** `__tests__/format.test.ts` (svaki jezik iz `routing.ts` mora imati sopstvenu Intl oznaku; mađarski datum počinje godinom, srpski danom) i `__tests__/sistemski-ekrani.test.ts` (spisak jezika prati `routing.ts`, nijedno polje nije prazno, nijedan prevod nije ostao na srpskom).
+
 ### Mesto / lokacija = jedno naselje iz šifarnika (2026-08-06)
 - **Povod:** nov član je kao lokaciju upisao **„Stanišić (Sombor)"** — i selo i opštinu. Bilo je moguće jer je polje bilo **slobodan tekst**: `LokacijaSearch` je padajućom listom samo *predlagao* naselja, a `onChange` je upisivao svaki otkucani znak. Strogu proveru je imala **samo kartica jemstva** (`validirajKarticu`), nigde drugde. Posledica nije kozmetička: takav zapis ne pogađa nijedno naselje iz šifarnika, pa nema koordinate (udaljenost na Pijaci) i ne poklapa se sa filterom po mestu.
 - **Jedno mesto provere:** `src/lib/naselje.ts` — `razresiNaselje()` vraća **kanonski** naziv iz `NASELJA_SRBIJE` ili `null`. Toleriše opširniji zapis istog mesta i zadržava **uži pojam**: „stanisic" → „Stanišić", „Stanišić (Sombor)" → „Stanišić", „Novi Sad, Liman" → „Novi Sad". Dva mesta bez razdvojnika („Stanišić Sombor") **ne prolaze** — čovek mora da izabere jedno. Poruka greške je zajednička (`PORUKA_MESTO_IZ_SPISKA`).
@@ -955,8 +1009,10 @@ src/lib/          — pomoćne funkcije, validacije, faq-data
 src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
 src/generated/prisma/ — generisani Prisma klijent
 prisma/           — šema i migracije
+e2e/              — Playwright E2E testovi (odvojeno od Vitest `__tests__/`)
 messages/         — i18n prevodi (next-intl)
-dokumentacija 3.9/ — kanonska dokumentacija (v3.9.0)
+dokumentacija 4.1/ — KANONSKA dokumentacija (set v4.3.4; sr + en/ru/hr/hu podfolderi)
+dokumentacija 4.0/, 3.9/, 3.8/ — istorija (raniji setovi)
 nova dokumentacija/ — prethodni mešani set (3.7.2–3.7.6), istorija; app rendering još čita odavde
 docs/             — interne radne beleške (nije normativa)
 ```
@@ -1023,7 +1079,9 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 - Vidljivost transakcija gradirana po ulozi (vidi `/api/javno/feed`).
 
 ### Poruke (Chat 1-na-1)
-- `/poruke` split-panel; polling 5s; badge nepročitanih; Enter/Shift+Enter; mobilni view; „Kontaktiraj prodavca" na oglasu; notifikacija primaocu.
+- `/poruke` split-panel; polling 5s; badge nepročitanih; Enter/Shift+Enter; mobilni view; „Kontaktiraj prodavca" na oglasu; notifikacija primaocu. Otvaranje razgovora šalje service workeru `zatvori-notifikacije` (skida brojku sa ikonice, vidi „Push obaveštenja").
+- **Pokretanje razgovora ide kroz `smePokrenutiRazgovor`** (`deca-pravila.ts`) — isti uslov na ruti i na oba ekrana Pijace. Detetu ekran nudi **spisak njegovih prijatelja** kao dugmad; pretraga članova mu je zatvorena.
+- **Raskinuto prijateljstvo gasi razgovor** (čl. 14c) — polje za pisanje se ne prikazuje, uz rečenicu zašto; provera i pri slanju i pri otvaranju.
 
 ### Pijaca (Marketplace)
 - Listinzi; pretraga po kategoriji/lokaciji; sopstveni layout (`src/app/pijaca/`, van `(app)/` grupe — vidi BUG sa badge-om u „Sidebar badge"); detalji na `/pijaca/[id]`.
@@ -1077,7 +1135,8 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 
 ### Notifikacije
 - Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
-- **Tri kanala iz jednog poziva (od 2026-08-03):** `posaljiNotifikaciju()` upiše zvonce (`Notifikacija`), pošalje **web push** (`push.ts`, VAPID) i **email** (`email.ts`, Resend). Push i email idu kao `void` — ne blokiraju odgovor i ne bacaju.
+- **Tri kanala iz jednog poziva (od 2026-08-03):** `posaljiNotifikaciju()` upiše zvonce (`Notifikacija`), pošalje **web push** (`push.ts`, VAPID) i **email** (`email.ts`, Resend). Email ide kao `void` — ne blokira odgovor i ne baca.
+- 🔴 **Push ide kroz `zakaziPush()` / `after()`, ne kao `void`** (od 2026-08-31) — inače serverless funkcija ume da se ugasi pre nego što slanje ka FCM/Apple završi. Tag je po **cilju**, ne po tipu. Vidi „Push obaveštenja: dostava, grupisanje i skidanje brojke".
 
 ### Email korisnicima (Resend)
 - **`src/lib/email.ts`** je jedini ulaz: `emailLayout()` (zajednički HTML šablon svih mejlova), `posaljiEmailRaw()` (Resend fetch, vraća bool), `posaljiEmailKorisniku()` (obaveštenja, poštuje opt-out), `bazniUrl()` (allowlist host-ova protiv host-header poisoning-a).
@@ -1114,16 +1173,17 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 ### Blog (Vesti Fondacije)
 - Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
 
-### Pričaonica (globalna soba; UI naziv, ranije „Chat soba")
-- Jedna soba; svi prijavljeni vide, samo verifikovani pišu; auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage` (interni identifikator nepromenjen).
+### Pričaonica (UI naziv, ranije „Chat soba")
+- **Dve sobe, jedan model:** `ChatSoba.ODRASLI` i `ChatSoba.DECA` (`ChatMessage.soba`); soba se bira po `User.maloletan` (`mojaSoba()` u `/api/chat`), korisnik ne bira. U sobi odraslih svi prijavljeni vide, **samo verifikovani pišu**; u dečjoj piše svako dete kome nalog radi (čl. 4c), a **vidi samo poruke svojih prijatelja** (čl. 18 st. 3). Auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage` (interni identifikator nepromenjen).
 
 ### Doprinos zajedničkom dobru — Oglasi (Operativni program)
 - Predlagač objavljuje zadatak; verifikovan korisnik (indeks ≥ 10%) se prijavljuje (`/api/doprinos-oglasi/[id]/prijavi`), evidentira izvršenje (`/api/doprinos-oglasi/[id]/evidencija`).
 - ✅ **Usklađeno:** model je **predloženi POEN × min(1, L/P)** (`DoprinosOglas.predlozeniPoen`, `OglasEvidencija.predlozeniPoen`; `programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (verifikator ≠ izvršilac ≠ predlagač). Satnica (`hourlyRate`/`hoursWorked`) uklonjena. Konsolidovano sa starim PED tokom — `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; „PED" je samo enum/labela koja se rutira kroz doprinos-oglase.
 - Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
 
-### Javne pravne stranice (rendruju iz `dokumentacija 3.9/`, EN iz `dokumentacija 3.9/en/`)
-- `/pravilnik` → `Pravilnik_3_9_0.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske** — svi 3.9.0); `/privatnost` → `politika_3_9_1.md`; `/uslovi` → `uslovi_koriscenja_3_9_1.md`; `/statut` → `statut_3_8_0.md`; `/dpia` → `DPIA_3_9_0.md`; `/radnje-obrade` → `radnje_obrade_3_9_0.md`; `/whitepaper` → `whitepaper_3_9_0.md`; `/rizici` → `rizici_3_9_0.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. **EN:** locale `en` → `dokumentacija 3.9/en/<isti fajl>` (fallback srpski).
+### Javne pravne stranice (rendruju iz `dokumentacija 4.1/`, prevodi iz `en/`, `ru/`, `hr/`, `hu/`)
+- Loader `src/lib/pravni-dokument.ts`, `BAZA = "dokumentacija 4.1"`. Aktuelan set je **4.3.4** (16 akata × 5 jezika), **Statut ostaje 4.1** (`statut_4_1_0.md`, sopstvena numeracija).
+- `/pravilnik` → `Pravilnik_4_3_4.md` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, **gornje-kolo**, **programi-podrske**, **ucesce-dece**); `/privatnost` → `politika_4_3_4.md`; `/uslovi` → `uslovi_koriscenja_4_3_4.md`; `/statut` → `statut_4_1_0.md`; `/dpia` → `DPIA_4_3_4.md`; `/radnje-obrade` → `radnje_obrade_4_3_4.md`; `/whitepaper` → `whitepaper_4_3_4.md`; `/rizici` → `rizici_4_3_4.md`; `/zajednicko-dobro`, `/osnivacki-doprinos`. Sve otključano za posetioce. Prevod se bira po locale-u, **tih fallback na srpski** ako fajl nedostaje.
 - ✅ **Verzijske labele** — prikazuju 3.9.0 (statut 3.8.0); izvor u `messages` (`pravne.<doc>.ver`, `meta_*_desc`, `javneKomponente.dok_tag`).
 - **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
 
@@ -1147,9 +1207,12 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 - Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Glasanje, Profil) dostupne preko drugih ulaznih tačaka.
 
 ### Sidebar badge — dve vrste (od 2026-06-11)
-- **„Viđeno" badge-evi (Novčanik, Pijaca):** broje stavke nastale POSLE poslednjeg otvaranja taba. Kolone `User.vidjenoNovcanikAt` / `vidjenoPijacaAt` (migracija `20260611120000_sidebar_vidjeno`); `GET /api/dnevni-brojevi` broji `createdAt > viđeno` (fallback ponoć ako tab nije otvaran); `POST /api/dnevni-brojevi/vidjeno {sekcija}` postavi „viđeno = sad" → badge na 0. Nulovanje okida `AppShell` `useEffect` na promenu `pathname` (`/novcanik` | `/pijaca`): optimističko nulovanje + POST + re-fetch.
+- **„Viđeno" badge-evi (Početna, Novčanik, Pijaca):** broje stavke nastale POSLE poslednjeg otvaranja taba. Kolone `User.vidjenoPocetnaAt` / `vidjenoNovcanikAt` / `vidjenoPijacaAt` (migracije `20260611120000_sidebar_vidjeno`, `20260831120000_vidjeno_pocetna`); `GET /api/dnevni-brojevi` broji `createdAt > viđeno` (fallback ponoć ako tab nije otvaran); `POST /api/dnevni-brojevi/vidjeno {sekcija}` postavi „viđeno = sad" → badge na 0. Nulovanje okida `AppShell` `useEffect` na promenu `pathname` (`/pocetna` | `/novcanik` | `/pijaca`): optimističko nulovanje + POST + re-fetch.
+- **Badge uz „Početna" (2026-08-31)** — ekran nosi Pričaonicu i Vesti Fondacije, dve stvari koje se menjaju bez povoda da se ekran otvori. 🔴 **Broji se tačno ono što posmatrač na tom ekranu VIDI**, inače nastaje badge koji se ne može spustiti (otvoriš Početnu, a poruke koja ga je podigla nema): soba se izvodi iz uzrasta kao u `GET /api/chat` (čl. 12) — dete broji **dečju** sobu, punoletni sobu odraslih; dete u dečjoj sobi vidi samo poruke **svojih prijatelja** (čl. 18 st. 3), pa se i broje samo one; nalog koji čeka roditelja (čl. 4c) sobu ne vidi i badge mu je **0**; dečja Početna nema Vesti, pa se detetu Blog ne broji; uklonjene (Uslovi čl. 25 st. 2) i sopstvene poruke se ne broje. Račun je u `brojNovoNaPocetnoj` (`chrome-podaci.ts`).
+- **`/api/me` badge brojeve računa za SVAKOG prijavljenog**, ne samo za potvrđene — gornja grupa u sidebaru (Početna, POEN, Pijaca) stoji i novom članu, pa su mu ta tri badge-a dotad bila trajno prazna.
+- **Migracija ostavlja zatečene naloge na `NULL` namerno** — tada se pada na ponoć („novo danas"), isto što Novčanik i Pijaca već rade; upis vremena bi ćutke sakrio ono što je stiglo jutros.
 - **Akcioni badge-evi (Admin, Nadzor):** broje otvorene stavke koje traže radnju (stavke na čekanju za admina, verifikacije za nadzor). **Namerno se NE nuluju na otvaranje** — padaju tek kad se sama stavka reši. Ako korisnik očekuje da nestanu „kad se očitaju", to je očekivano ponašanje, nije bug.
-- 🔴 **BUG (Pijaca badge se ne nuluje):** ruta `/pijaca` (index + `[id]`) je u `src/app/pijaca/` sa **sopstvenim** `layout.tsx` koji renderuje `Sidebar` direktno — **van `AppShell`-a**. Zato se „viđeno" `useEffect` (koji je u `AppShell`) NIKAD ne okine pri ulasku u Pijacu → `vidjenoPijacaAt` se ne pomera → badge ostaje. (Novčanik je u `(app)/` grupi pa radi.) Fix: okinuti `POST /api/dnevni-brojevi/vidjeno {sekcija:"pijaca"}` iz klijentske komponente na `/pijaca` (npr. `useEffect` u `PijacaKlijent`), ili dignuti „viđeno" logiku u `Sidebar` (deljen u oba layout-a).
+- ✅ **REŠENO — Pijaca badge se nuluje.** Raniji kvar: `src/app/pijaca/layout.tsx` je renderovao `Sidebar` direktno, van `AppShell`-a, pa se „viđeno" `useEffect` nikad nije okidao. Sada taj layout za prijavljenog korisnika renderuje **`AppShell`** (gost dobija `PublicHeader`), pa nulovanje radi kao i za Novčanik.
 
 ## API endpointi (izbor)
 
@@ -1197,11 +1260,14 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 - `src/lib/notifikacije.ts` — `posaljiNotifikaciju()`; `src/lib/faq-data.ts` — `FAQ_SEKCIJE`
 
 ## Testovi
-- **Vitest** (`npm test`, `npm run test:watch`). Lokacija: `__tests__/protokol/`.
-- Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
+- **Vitest** (`npm test`, `npm run test:watch`). Lokacija: `__tests__/` (jezgro Protokola u `__tests__/protokol/`). Config `vitest.config.ts` (`@/` → `src/`).
+- Pokriva čiste funkcije i brane: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`, `glasanje`, `nadzor-i-nadoknada`, `prijava-razmene`, `doprinos-sadrzaju`, `doprinos-razmeni`, `prijateljstva-poen`, `prevod-u-maloletni`; uz njih `deca-pravila`, `skola`, `naselje`, `pseudonim`, `moderacija`, `prijava-poruke`, `format`, `sistemski-ekrani`, `pravni-dokumenti`, `copy-ukinuto`, `faq-paritet`, `oglasi-vidljivost-izvor` i integracioni (`__tests__/integracija/`, traže bazu).
+- **E2E: Playwright (Chromium), od 2026-08-31.** Živi u **`e2e/`**, odvojeno od Vitest-a. `npm run e2e` sam diže dev server; `E2E_BASE_URL=…` gađa već pokrenut ili eksterni (test) URL. `npm run e2e:ui`, `npm run e2e:report`. Za sada **jedan smoke test** (javna početna se učita i ima naslov) — polazna tačka, ne pokrivenost; tokovi (registracija → oglas → potvrda) idu kao zasebni `*.spec.ts`.
+- 🔴 **Browser se NE skida uz build:** `vercel.json` nosi `build.env.PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`, jer bi postinstall paketa `playwright` dovlačio ~150 MB Chromium-a na svakom deploy-u, a na serveru nijedan E2E test ne radi. Lokalno jednom `npx playwright install chromium`; u remote okruženju je pre-instaliran (`PLAYWRIGHT_BROWSERS_PATH=/opt/pw-browsers`, revizija 1194 — otud pin na `@playwright/test` 1.56.0).
+- **Vitest ne zna da li se stranica učitala** — proverava da li račun daje tačan broj. Padovi tipa bela stranica, pukao ekran, dugme koje ne radi hvataju se samo E2E-om.
 
 ## Reference
-- `dokumentacija 3.9/` — kanonski set v3.9.0 (vidi tabelu na vrhu). `nova dokumentacija/` = prethodni mešani set (istorija; app rendering još odatle)
+- `dokumentacija 4.1/` — **kanonski set v4.3.4** (vidi sekciju „Kanonska dokumentacija" na vrhu). `dokumentacija 4.0/`, `dokumentacija 3.9/`, `dokumentacija 3.8/`, `nova dokumentacija/` = istorija
 - `docs/` — interne radne beleške (FAQ analiza/triaža, glosar, model vidljivosti, pregled funkcija) — nije normativa
 - Stari dokumenti (v2.x, v3.7.0) — obrisani iz repo-a
 
