@@ -1693,6 +1693,7 @@
     "cena_dogovor_hint": "No amount — you agree on it in conversation.",
     "cena_po_dogovoru": "Negotiable",
     "kategorija_label": "Category *",
+    "kategorija_izaberi": "Choose a category",
     "lokacija_placeholder": "e.g. Novi Sad",
     "kontakt_placeholder": "e.g. 064 123 4567",
     "slike_do": "(up to {max}, optional)",

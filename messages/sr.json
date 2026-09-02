@@ -1693,6 +1693,7 @@
     "cena_dogovor_hint": "Bez iznosa — dogovarate ga u razgovoru.",
     "cena_po_dogovoru": "Po dogovoru",
     "kategorija_label": "Kategorija *",
+    "kategorija_izaberi": "Izaberi kategoriju",
     "lokacija_placeholder": "npr. Novi Sad",
     "kontakt_placeholder": "npr. 064 123 4567",
     "slike_do": "(do {max}, opciono)",
