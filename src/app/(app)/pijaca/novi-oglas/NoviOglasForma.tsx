@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import CenaUnos from "@/components/CenaUnos";
-import CategoryChips from "@/components/CategoryChips";
+import { KATEGORIJE, kategorijaEmoji, kategorijaKljuc } from "@/lib/kategorije";
 import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 import { IZNOS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
 
@@ -272,14 +272,31 @@ export default function NoviOglasForma({
           />
         )}
 
-        {/* Kategorija — čipovi, single izbor (radio ponašanje), obavezno polje */}
+        {/* Kategorija — padajući meni, obavezno polje. Trinaest čipova je u
+            obrascu pravilo prelom u tri-četiri reda i guralo ostala polja
+            nadole; ovde se bira tačno jedna, pa je meni tačniji oblik. Native
+            <select> namerno: na telefonu otvara sistemski birač i ne traži
+            sopstveno hvatanje klika izvan panela. Čipovi ostaju na Pijaci i u
+            profilu, gde je izbor višestruk. */}
         <div>
-          <label className="block text-sm font-semibold text-kolo-muted mb-2">{t("kategorija_label")}</label>
-          <CategoryChips
-            mode="single"
-            selected={category ? [category] : []}
-            onChange={(next) => setCategory(next[0] ?? "")}
-          />
+          <label htmlFor="kategorija" className="block text-sm font-semibold text-kolo-muted mb-2">
+            {t("kategorija_label")}
+          </label>
+          <select
+            id="kategorija"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className={`w-full px-4 py-3 rounded-xl border border-kolo-border bg-white text-sm outline-none focus:border-kolo-green-500 transition-colors ${
+              category ? "text-kolo-text" : "text-kolo-muted"
+            }`}
+          >
+            <option value="">{t("kategorija_izaberi")}</option>
+            {KATEGORIJE.map((slug) => (
+              <option key={slug} value={slug} className="text-kolo-text">
+                {kategorijaEmoji(slug)} {t(`kategorija_${kategorijaKljuc(slug)}`)}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Lokacija */}

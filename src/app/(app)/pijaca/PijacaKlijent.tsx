@@ -262,7 +262,6 @@ export default function PijacaKlijent({
           Multi-select sa OR logikom; stanje u URL-u (?kat=). */}
       {showKategorije && (
         <CategoryChips
-          mode="multi"
           selected={selektovaneKat}
           onChange={azurirajKategorije}
           counts={brojaciKat}

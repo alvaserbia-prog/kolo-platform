@@ -3,11 +3,12 @@
 import { useTranslations } from "next-intl";
 import { KATEGORIJE, kategorijaKljuc } from "@/lib/kategorije";
 
-// Čipovi kategorija Pijace — jedna komponenta, dva moda:
-//  - "multi"  → višestruki izbor (filter na Pijaci, praćene kategorije u profilu)
-//  - "single" → radio ponašanje (forma za objavu oglasa)
-// Svih 13 kategorija je stalno vidljivo u flex-wrap rasporedu. Veličina čipa
-// prati dugmad prekidača Ponude|Potražnja (px-4 py-1.5, zahtev vlasnika).
+// Čipovi kategorija Pijace — višestruki izbor (filter na Pijaci, praćene
+// kategorije u profilu). Svih 13 kategorija je stalno vidljivo u flex-wrap
+// rasporedu; veličina čipa prati dugmad prekidača Ponude|Potražnja
+// (px-4 py-1.5, zahtev vlasnika).
+// Forma za objavu oglasa NE koristi čipove — tamo se bira tačno jedna
+// kategorija, pa stoji padajući meni (raniji mod „single" je uklonjen).
 // `counts` (samo filter): prikazuje broj u čipu; kategorija sa 0 oglasa je
 // prigušena, ali i dalje klikabilna.
 
@@ -18,7 +19,6 @@ export interface LeadingChip {
 }
 
 interface Props {
-  mode: "multi" | "single";
   selected: string[];
   onChange: (next: string[]) => void;
   counts?: Record<string, number>;
@@ -26,22 +26,17 @@ interface Props {
   leadingChip?: LeadingChip;
 }
 
-export default function CategoryChips({ mode, selected, onChange, counts, leadingChip }: Props) {
+export default function CategoryChips({ selected, onChange, counts, leadingChip }: Props) {
   const t = useTranslations("pijaca");
 
   function toggle(slug: string) {
-    if (mode === "single") {
-      // Radio ponašanje: uvek tačno jedna izabrana; ponovni klik ne poništava.
-      onChange([slug]);
-      return;
-    }
     onChange(
       selected.includes(slug) ? selected.filter((s) => s !== slug) : [...selected, slug]
     );
   }
 
   return (
-    <div className="flex flex-wrap gap-1.5" role={mode === "single" ? "radiogroup" : "group"}>
+    <div className="flex flex-wrap gap-1.5" role="group">
       {leadingChip && (
         <button
           type="button"
@@ -65,9 +60,7 @@ export default function CategoryChips({ mode, selected, onChange, counts, leadin
             key={slug}
             type="button"
             onClick={() => toggle(slug)}
-            role={mode === "single" ? "radio" : undefined}
-            aria-checked={mode === "single" ? aktivna : undefined}
-            aria-pressed={mode === "multi" ? aktivna : undefined}
+            aria-pressed={aktivna}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
               aktivna
                 ? "bg-kolo-green-700 text-white"

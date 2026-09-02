@@ -1684,6 +1684,7 @@
     "cena_dogovor_hint": "Összeg nélkül — a beszélgetésben állapodtok meg róla.",
     "cena_po_dogovoru": "Megegyezés szerint",
     "kategorija_label": "Kategória *",
+    "kategorija_izaberi": "Válassz kategóriát",
     "lokacija_placeholder": "pl. Újvidék",
     "kontakt_placeholder": "pl. 064 123 4567",
     "slike_do": "(legfeljebb {max}, nem kötelező)",

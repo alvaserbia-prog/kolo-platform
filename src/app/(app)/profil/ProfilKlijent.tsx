@@ -716,7 +716,7 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
       <div className="bg-white rounded-2xl border border-kolo-border p-6">
         <h2 className="text-base font-semibold text-kolo-muted mb-1">{t("pratim_kategorije_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-4">{t("pratim_kategorije_opis")}</p>
-        <CategoryChips mode="multi" selected={pracene} onChange={togglePracenje} />
+        <CategoryChips selected={pracene} onChange={togglePracenje} />
       </div>
 
       {/* Email obaveštenja — jedan prekidač. Gasi SVE obaveštajne mejlove; mejl za

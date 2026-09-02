@@ -1693,6 +1693,7 @@
     "cena_dogovor_hint": "Без суммы — договариваешься о ней в разговоре.",
     "cena_po_dogovoru": "По договорённости",
     "kategorija_label": "Категория *",
+    "kategorija_izaberi": "Выбери категорию",
     "lokacija_placeholder": "напр. Нови-Сад",
     "kontakt_placeholder": "напр. 064 123 4567",
     "slike_do": "(до {max}, необязательно)",
