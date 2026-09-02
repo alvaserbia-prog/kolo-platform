@@ -22,7 +22,6 @@ interface FondTx {
   userId: string | null;
   iznosRSD: number;
 }
-type TxFilter = "sve" | "protokol" | "clanovi";
 
 interface Transakcija {
   id: string;
@@ -99,7 +98,10 @@ interface Props {
   donacije: DonacijaItem[];
   pokrovitelji: PokroviteljItem[];
   emisijeChart: EmisijaChart[];
-  transakcije: Transakcija[];
+  /** Zapisi Protokola — sve što nije prepis između korisnika. */
+  protokolTx: Transakcija[];
+  /** Prepisi između korisnika (TRANSFER) — kartica „Ukupno razmena". */
+  razmene: Transakcija[];
   clanovi: Clan[];
   pocetnaSekcija: Sekcija;
 }
@@ -127,7 +129,8 @@ export default function SistemKlijent({
   donacije,
   pokrovitelji,
   emisijeChart,
-  transakcije,
+  protokolTx,
+  razmene,
   clanovi,
   pocetnaSekcija,
 }: Props) {
@@ -178,11 +181,12 @@ export default function SistemKlijent({
         {t("opis_stranice")}
       </PageOpis>
 
-      {/* Upozorenje za neverifikovane. Dva izlaza, jer put do potvrde ne ide samo
-          preko poznanika: ko nema koga da zamoli, objavi ponudu na Pijaci i mreža
-          ga povodom nje prepozna (Pravilnik 4.1.1 čl. 32 st. 4, čl. 40a). Zato uz
-          poziv na potvrdu stoji i dugme ka objavi oglasa — bez njega je čoveku bez
-          ijednog poznanika u sistemu ovo slepa ulica. */}
+      {/* Upozorenje za neverifikovane. JEDAN potez, i to onaj koji nov član može
+          sam da izvede: objavi ponudu pa ga mreža povodom nje prepozna (Pravilnik
+          4.1.1 čl. 32 st. 4, čl. 40a). Dugme ka stranici Potvrde je uklonjeno —
+          potvrdu ne pribavlja sam, nju mu daje neko drugi, pa ga je ono slalo na
+          ekran na kome, bez poznanika u sistemu, nema šta da uradi. Put do Potvrda
+          ostaje u meniju za onoga ko poznanika ima. */}
       {!verified && (
         <div className="box-warning">
           <p className="text-sm font-semibold">{t("nalog_nije_verifikovan_naslov")}</p>
@@ -192,22 +196,14 @@ export default function SistemKlijent({
           <p className="text-sm mt-1.5 opacity-90">
             {t("nalog_nije_verifikovan_alternativa")}
           </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <Link
-              href="/verifikacija"
-              className="inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
-            >
-              {t("verifikuj_dugme")}
-            </Link>
-            {/* Vodi PRAVO na obrazac za oglas, ne na Pijacu: rečenica iznad obećava
-                objavu, a svaki međukorak je mesto na kome se odustaje. */}
-            <Link
-              href="/pijaca/novi-oglas"
-              className="inline-block px-4 py-2 bg-white text-kolo-gold-600 border border-kolo-gold-600 text-sm font-semibold rounded-xl hover:bg-kolo-gold-100 transition-colors"
-            >
-              {t("prvi_oglas_dugme")}
-            </Link>
-          </div>
+          {/* Vodi PRAVO na obrazac za oglas, ne na Pijacu: rečenica iznad obećava
+              objavu, a svaki međukorak je mesto na kome se odustaje. */}
+          <Link
+            href="/pijaca/novi-oglas"
+            className="mt-3 inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
+          >
+            {t("prvi_oglas_dugme")}
+          </Link>
         </div>
       )}
 
@@ -245,7 +241,7 @@ export default function SistemKlijent({
             label={t("kartica_transakcije")}
             broj={ukupnoTransakcija}
             danas={danasTransakcija}
-            podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
+            podnaslov={t("kartica_tx_opis", { count: razmene.length })}
           />
           <Kartica
             aktivan={sekcija === "iznos"}
@@ -370,7 +366,7 @@ export default function SistemKlijent({
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
-          transakcije={transakcije}
+          protokolTx={protokolTx}
         />
       )}
       {sekcija === "clanovi" && (
@@ -380,7 +376,7 @@ export default function SistemKlijent({
         <LokacijeSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "transakcije" && (
-        <TransakcijeSekcija transakcije={transakcije} verified={verified} />
+        <TransakcijeSekcija razmene={razmene} verified={verified} />
       )}
       {sekcija === "donacije" && (
         <DonacijeSekcija donacije={donacije} pokrovitelji={pokrovitelji} verified={verified} />
@@ -389,7 +385,7 @@ export default function SistemKlijent({
         <IznosSekcija
           ukupanIznosTx={ukupanIznosTx}
           danasIznosTx={danasIznosTx}
-          transakcije={transakcije}
+          razmene={razmene}
           verified={verified}
         />
       )}
@@ -610,30 +606,68 @@ function Kartica({
 
 // ── Pregled ───────────────────────────────────────────────────────────────────
 
+/**
+ * Strana u zapisu — pseudonim, „—" ili naziv Protokola.
+ *
+ * Pseudonim u evidenciji doprinosa vidi SAMO potvrđen član (Pravilnik čl. 67,
+ * Politika čl. 6). Nov član vidi vreme, iznos i opis zapisa, a strane ne — i to
+ * u sva tri spiska na Sistemu. Do 2026-09-02 su spisak razmena i spisak prepisa
+ * to poštovali, a spisak zapisa Protokola nije: linka nije bilo, ali je pseudonim
+ * stajao kao običan tekst, pa je pravilo važilo na dva mesta od tri. Otud jedna
+ * komponenta za svih šest mesta — da se sledeći put ne razmimoiđu.
+ *
+ * Sam Protokol nije osoba (`id === null`) i njegovo ime se NE krije: bez njega bi
+ * red glasio „— → —" i ne bi značio ništa.
+ */
+function Ucesnik({
+  id,
+  pseudonim,
+  verified,
+  className = "",
+}: {
+  id: string | null;
+  pseudonim: string;
+  verified: boolean;
+  className?: string;
+}) {
+  if (!id) {
+    return (
+      <span className={`text-kolo-muted truncate ${className}`}>
+        <Pseudonim>{pseudonim}</Pseudonim>
+      </span>
+    );
+  }
+  if (!verified) return <span className={`text-kolo-muted ${className}`}>—</span>;
+  return (
+    <Link
+      href={profilHref({ id, pseudonim })}
+      className={`text-kolo-green-700 hover:underline truncate ${className}`}
+    >
+      <Pseudonim>{pseudonim}</Pseudonim>
+    </Link>
+  );
+}
+
 function PregledSekcija({
   verified,
   opticaj,
   danasEmitovano,
   danasLimit,
   emisijeChart,
-  transakcije,
+  protokolTx,
 }: {
   verified: boolean;
   opticaj: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
-  transakcije: Transakcija[];
+  protokolTx: Transakcija[];
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
   const tc = useTranslations("common");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
   const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
-
-  const protokolTx = transakcije.filter(
-    (tx) => tx.fromId === null || tx.toId === null
-  );
 
   return (
     <div className="space-y-5">
@@ -700,23 +734,11 @@ function PregledSekcija({
                     })}
                   </p>
                   <div className="min-w-0">
-                    {verified && tx.fromId ? (
-                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        <Pseudonim>{tx.fromPseudonim}</Pseudonim>
-                      </Link>
-                    ) : (
-                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                    )}
+                    <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} className="text-base block" />
                   </div>
                   <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
                   <div className="min-w-0">
-                    {verified && tx.toId ? (
-                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        <Pseudonim>{tx.toPseudonim}</Pseudonim>
-                      </Link>
-                    ) : (
-                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                    )}
+                    <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} className="text-base block" />
                   </div>
                   <span className="text-base font-bold text-kolo-text text-right">
                     {tx.amount.toLocaleString(intlTag(locale))}
@@ -726,17 +748,9 @@ function PregledSekcija({
                 <div className="sm:hidden space-y-1">
                   <div className="flex items-center justify-between gap-2">
                     <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
-                      {verified && tx.fromId ? (
-                        <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
-                      ) : (
-                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                      )}
+                      <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} />
                       <span className="text-kolo-muted shrink-0">→</span>
-                      {verified && tx.toId ? (
-                        <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
-                      ) : (
-                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                      )}
+                      <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} />
                     </div>
                     <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
                   </div>
@@ -1289,56 +1303,33 @@ function LokacijaKartica({
 
 // ── Transakcije ───────────────────────────────────────────────────────────────
 
+/**
+ * Sekcija kartice „Ukupno razmena" — ISKLJUČIVO prepisi između korisnika.
+ *
+ * Filter (sve | Protokol | između članova) je uklonjen: kartica iznad broji samo
+ * prepise, pa je spisak koji uz nju ume da prikaže i zapise Protokola govorio
+ * nešto drugo nego broj na koji je čovek kliknuo. Zapisi Protokola imaju svoje
+ * mesto — karticu „Ukupno POENA" (opticaj).
+ */
 function TransakcijeSekcija({
-  transakcije,
+  razmene,
   verified,
 }: {
-  transakcije: Transakcija[];
+  razmene: Transakcija[];
   verified: boolean;
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
-  const [filter, setFilter] = useState<TxFilter>("sve");
-
-  const filtrirane = useMemo(
-    () =>
-      transakcije.filter((tx) => {
-        if (filter === "protokol") return tx.fromId === null || tx.toId === null;
-        if (filter === "clanovi") return tx.type === "TRANSFER";
-        return true;
-      }),
-    [transakcije, filter]
-  );
-
-  const filteri: [TxFilter, string][] = [
-    ["sve", t("filter_sve")],
-    ["protokol", t("filter_protokol")],
-    ["clanovi", t("filter_clanovi")],
-  ];
 
   return (
     <div className="space-y-4">
-      {/* Filter dugmad */}
       <div className="flex flex-wrap gap-2 items-center">
-        {filteri.map(([key, label]) => (
-          <button
-            key={key}
-            onClick={() => setFilter(key)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors border ${
-              filter === key
-                ? "bg-kolo-green-700 text-white border-kolo-green-700"
-                : "bg-white text-kolo-muted border-kolo-border hover:border-kolo-green-500 hover:text-kolo-text"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
         <span className="ml-auto text-xs text-kolo-muted self-center">
-          {t("transakcija_count", { count: filtrirane.length })}
+          {t("transakcija_count", { count: razmene.length })}
         </span>
       </div>
 
-      {filtrirane.length === 0 ? (
+      {razmene.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           {t("nema_tx")}
         </div>
@@ -1352,10 +1343,10 @@ function TransakcijeSekcija({
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("primalac")}</span>
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("iznos")}</span>
           </div>
-          {filtrirane.map((tx, i) => (
+          {razmene.map((tx, i) => (
             <div
               key={tx.id}
-              className={`px-4 py-2.5 ${i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+              className={`px-4 py-2.5 ${i < razmene.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
               {/* Desktop grid */}
               <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
@@ -1368,33 +1359,13 @@ function TransakcijeSekcija({
                 </p>
                 {/* Pošiljalac */}
                 <div className="min-w-0">
-                  {verified ? (
-                    tx.fromId ? (
-                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        <Pseudonim>{tx.fromPseudonim}</Pseudonim>
-                      </Link>
-                    ) : (
-                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                    )
-                  ) : (
-                    <span className="text-base text-kolo-muted">—</span>
-                  )}
+                  <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} className="text-base block" />
                 </div>
                 {/* Strelica */}
                 <span className="text-base font-bold text-kolo-muted text-center leading-none">→</span>
                 {/* Primalac */}
                 <div className="min-w-0">
-                  {verified ? (
-                    tx.toId ? (
-                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-base text-kolo-green-700 hover:underline truncate block">
-                        <Pseudonim>{tx.toPseudonim}</Pseudonim>
-                      </Link>
-                    ) : (
-                      <span className="text-base text-kolo-muted truncate block"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                    )
-                  ) : (
-                    <span className="text-base text-kolo-muted">—</span>
-                  )}
+                  <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} className="text-base block" />
                 </div>
                 {/* Iznos */}
                 <span className="text-base font-bold text-kolo-text text-right">
@@ -1405,25 +1376,9 @@ function TransakcijeSekcija({
               <div className="sm:hidden space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
-                    {verified ? (
-                      tx.fromId ? (
-                        <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
-                      ) : (
-                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                      )
-                    ) : (
-                      <span className="text-kolo-muted">—</span>
-                    )}
+                    <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} />
                     <span className="text-kolo-muted shrink-0">→</span>
-                    {verified ? (
-                      tx.toId ? (
-                        <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
-                      ) : (
-                        <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                      )
-                    ) : (
-                      <span className="text-kolo-muted">—</span>
-                    )}
+                    <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} />
                   </div>
                   <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
                 </div>
@@ -1598,17 +1553,17 @@ function DonacijeSekcija({
 function IznosSekcija({
   ukupanIznosTx,
   danasIznosTx,
-  transakcije,
+  razmene,
   verified,
 }: {
   ukupanIznosTx: number;
   danasIznosTx: number;
-  transakcije: Transakcija[];
+  razmene: Transakcija[];
   verified: boolean;
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
-  const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
+  const transferi = razmene;
   const ukupnoTransferi = transferi.reduce((s, tx) => s + tx.amount, 0);
 
   return (
@@ -1660,25 +1615,9 @@ function IznosSekcija({
                     day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
                   })}
                 </span>
-                {!verified ? (
-                  <span className="text-kolo-muted">—</span>
-                ) : tx.fromId ? (
-                  <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate">
-                    <Pseudonim>{tx.fromPseudonim}</Pseudonim>
-                  </Link>
-                ) : (
-                  <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                )}
+                <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} />
                 <span className="text-kolo-muted text-center">→</span>
-                {!verified ? (
-                  <span className="text-kolo-muted">—</span>
-                ) : tx.toId ? (
-                  <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate">
-                    <Pseudonim>{tx.toPseudonim}</Pseudonim>
-                  </Link>
-                ) : (
-                  <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                )}
+                <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} />
                 <span className="font-semibold text-kolo-text text-right">
                   {tx.amount.toLocaleString(intlTag(locale))}
                 </span>
@@ -1687,21 +1626,9 @@ function IznosSekcija({
               <div className="sm:hidden space-y-1">
                 <div className="flex items-center justify-between gap-2">
                   <div className="min-w-0 flex-1 flex items-center gap-1.5 text-sm">
-                    {!verified ? (
-                      <span className="text-kolo-muted">—</span>
-                    ) : tx.fromId ? (
-                      <Link href={profilHref({ id: tx.fromId, pseudonim: tx.fromPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></Link>
-                    ) : (
-                      <span className="text-kolo-muted truncate"><Pseudonim>{tx.fromPseudonim}</Pseudonim></span>
-                    )}
+                    <Ucesnik id={tx.fromId} pseudonim={tx.fromPseudonim} verified={verified} />
                     <span className="text-kolo-muted shrink-0">→</span>
-                    {!verified ? (
-                      <span className="text-kolo-muted">—</span>
-                    ) : tx.toId ? (
-                      <Link href={profilHref({ id: tx.toId, pseudonim: tx.toPseudonim })} className="text-kolo-green-700 hover:underline truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></Link>
-                    ) : (
-                      <span className="text-kolo-muted truncate"><Pseudonim>{tx.toPseudonim}</Pseudonim></span>
-                    )}
+                    <Ucesnik id={tx.toId} pseudonim={tx.toPseudonim} verified={verified} />
                   </div>
                   <span className="font-bold text-kolo-text shrink-0 text-sm">{tx.amount.toLocaleString(intlTag(locale))}</span>
                 </div>

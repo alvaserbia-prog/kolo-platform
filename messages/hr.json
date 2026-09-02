@@ -204,7 +204,6 @@
     "nalog_nije_verifikovan_naslov": "Još te nitko nije potvrdio",
     "nalog_nije_verifikovan_opis": "Potvrda ti otključava pun pristup i sudjelovanje u zajedničkom dobru, a u tvom zapisu evidentira se i prvih {iznos} doprinosa.",
     "nalog_nije_verifikovan_alternativa": "Ako ne poznaješ nikoga tko bi te mogao potvrditi, postavi svoj prvi oglas — tako te članovi iz tvog kraja vide.",
-    "verifikuj_dugme": "Postani redovan član →",
     "prvi_oglas_dugme": "Postavi svoj prvi oglas →",
     "kartica_clanovi": "Članovi",
     "kartica_transakcije": "Ukupno razmjena",
@@ -219,9 +218,6 @@
     "emisija_14_dana": "Evidencija doprinosa posljednjih 14 dana",
     "emisija_limit_danas": "Limit danas: {limit} POEN",
     "emisija_danas": "Evidentirano danas:",
-    "filter_sve": "Sve",
-    "filter_protokol": "Protokol",
-    "filter_clanovi": "Između članova",
     "transakcija_count": "{count} zapisa",
     "posalje": "Davatelj",
     "primalac": "Primatelj",
@@ -917,11 +913,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -929,23 +925,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.3.4",
+      "ver": "4.4.1",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -965,21 +961,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja — KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.3.4",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.4.1",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.3.4",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.1",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.3.4",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.1",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.3.4",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.1",
     "meta_rizici_title": "Izjava o prihvaćanju rizika — KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.3.4",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.4.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.3.4",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.1",
     "meta_pravilnik_title": "Pravilnici KOLO sustava — KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.3.4",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.4.1",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -1016,6 +1012,10 @@
       "ucesce-dece": {
         "naziv": "Pravilnik o sudjelovanju djece",
         "opis": "Sudjelovanje maloljetnih osoba: dva ulaza (roditelj otvara račun ili se dijete registrira samo), tri stanja računa, prijateljstva i doprinos od 500 POEN-a, prijelaz u punoljetni račun."
+      },
+      "projekti-nabavke": {
+        "naziv": "Pravilnik o projektima i kolektivnim nabavama",
+        "opis": "Raspoređivanje dinarskih sredstava u projekte zajednice: prijedlog za nabavu, registar prijedloga, izbor predmeta glasovanjem, kalkulacija, redoslijed po broju POEN-a i poništenje zapisa po iskorištenju."
       }
     }
   },

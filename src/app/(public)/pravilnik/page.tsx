@@ -23,6 +23,7 @@ const SLUGOVI = [
   "gornje-kolo",
   "programi-podrske",
   "ucesce-dece",
+  "projekti-nabavke",
 ] as const;
 
 export default async function PravilniciIndex() {

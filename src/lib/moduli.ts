@@ -60,7 +60,7 @@ export const POKROVITELJSTVO_AKTIVNO = true;
  * Modul Deca — Pravilnik o KOLO sistemu Glava VIII, čl. 58.
  *
  * 🟢 **Pravni uslovi su ispunjeni setom akata 4.3.0 (17.08.2026).** Usvojen je
- * **Pravilnik o učešću dece** (`dokumentacija 4.1/ucesce_dece_4_3_4.md`), usklađeni
+ * **Pravilnik o učešću dece** (`dokumentacija 4.1/ucesce_dece_4_4_1.md`), usklađeni
  * su Pravilnik o KOLO sistemu (čl. 14 st. 3, čl. 15 t. 9 — deveti kanal, čl. 58),
  * Uslovi (čl. 7, 25) i Politika (4.7), a **DPIA je AŽURIRAN** — radnja obrade br. 11
  * prevedena je u aktivnu, uz nov rizik R16 i mere 5.11. To je bila izričita obaveza

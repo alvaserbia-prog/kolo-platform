@@ -16,41 +16,46 @@ import { pageMetadata } from "@/lib/seo";
  */
 const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "kolo-sistem": {
-    fajl: "Pravilnik_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "Pravilnik_4_4_1.md",
+    verzija: "4.4.1",
   },
   "hijerarhija": {
-    fajl: "hijerarhija_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "hijerarhija_4_4_1.md",
+    verzija: "4.4.1",
   },
   "dokaz-stvarnosti": {
-    fajl: "dokaz_stvarnosti_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "dokaz_stvarnosti_4_4_1.md",
+    verzija: "4.4.1",
   },
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "donacije_4_4_1.md",
+    verzija: "4.4.1",
   },
   "operativni": {
-    fajl: "operativni_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "operativni_4_4_1.md",
+    verzija: "4.4.1",
   },
   "osnivacki": {
-    fajl: "osnivacki_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "osnivacki_4_4_1.md",
+    verzija: "4.4.1",
   },
   "gornje-kolo": {
-    fajl: "gornje_kolo_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "gornje_kolo_4_4_1.md",
+    verzija: "4.4.1",
   },
   "programi-podrske": {
-    fajl: "programi_podrske_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "programi_podrske_4_4_1.md",
+    verzija: "4.4.1",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_3_4.md",
-    verzija: "4.3.4",
+    fajl: "ucesce_dece_4_4_1.md",
+    verzija: "4.4.1",
+  },
+  // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
+  "projekti-nabavke": {
+    fajl: "projekti_nabavke_4_4_1.md",
+    verzija: "4.4.1",
   },
 };
 

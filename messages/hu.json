@@ -197,7 +197,6 @@
     "nalog_nije_verifikovan_naslov": "Még senki sem erősített meg téged",
     "nalog_nije_verifikovan_opis": "A megerősítés teljes hozzáférést és a közös jóban való részvételt nyit meg neked, a bejegyzésedben pedig rögzül az első {iznos} hozzájárulás.",
     "nalog_nije_verifikovan_alternativa": "Ha nem ismersz senkit, aki megerősíthetne, tedd közzé az első hirdetésed — így látnak meg a környékbeli tagok.",
-    "verifikuj_dugme": "Legyél rendes tag →",
     "prvi_oglas_dugme": "Tedd közzé az első hirdetésed →",
     "kartica_clanovi": "Tagok",
     "kartica_transakcije": "Összes csere",
@@ -212,9 +211,6 @@
     "emisija_14_dana": "Hozzájárulások — utolsó 14 nap",
     "emisija_limit_danas": "Mai limit: {limit} POEN",
     "emisija_danas": "Ma rögzítve:",
-    "filter_sve": "Összes",
-    "filter_protokol": "Protokoll",
-    "filter_clanovi": "Tagok között",
     "transakcija_count": "{count} tranzakció",
     "posalje": "Adó fél",
     "primalac": "Fogadó",
@@ -910,11 +906,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -922,23 +918,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.3.4",
+      "ver": "4.4.1",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -958,21 +954,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.3.4-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.1-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.3.4-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.1-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.3.4-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.1-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.3.4-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.1-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.3.4-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.1-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.3.4-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.1-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.3.4-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.4.1-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1009,6 +1005,10 @@
       "ucesce-dece": {
         "naziv": "Szabályzat a gyermekek részvételéről",
         "opis": "A kiskorúak részvétele: két belépési út (a szülő nyitja meg a fiókot, vagy a gyermek önállóan regisztrál), három fiókállapot, barátságok és az 500 POEN hozzájárulás, átmenet nagykorú fiókba."
+      },
+      "projekti-nabavke": {
+        "naziv": "Szabályzat a projektekről és a kollektív beszerzésekről",
+        "opis": "Dinárban meglévő eszközök elosztása közösségi projektekre: beszerzési javaslat, a javaslatok nyilvántartása, a tárgy kiválasztása szavazással, kalkuláció, POEN-szám szerinti sorrend és a bejegyzések felhasználás miatti érvénytelenítése."
       }
     }
   },
