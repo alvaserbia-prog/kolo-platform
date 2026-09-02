@@ -178,19 +178,36 @@ export default function SistemKlijent({
         {t("opis_stranice")}
       </PageOpis>
 
-      {/* Upozorenje za neverifikovane */}
+      {/* Upozorenje za neverifikovane. Dva izlaza, jer put do potvrde ne ide samo
+          preko poznanika: ko nema koga da zamoli, objavi ponudu na Pijaci i mreža
+          ga povodom nje prepozna (Pravilnik 4.1.1 čl. 32 st. 4, čl. 40a). Zato uz
+          poziv na potvrdu stoji i dugme ka objavi oglasa — bez njega je čoveku bez
+          ijednog poznanika u sistemu ovo slepa ulica. */}
       {!verified && (
         <div className="box-warning">
           <p className="text-sm font-semibold">{t("nalog_nije_verifikovan_naslov")}</p>
           <p className="text-sm mt-0.5 opacity-90">
             {t("nalog_nije_verifikovan_opis", { iznos: "1.000 POEN" })}
           </p>
-          <Link
-            href="/verifikacija"
-            className="mt-3 inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
-          >
-            {t("verifikuj_dugme")}
-          </Link>
+          <p className="text-sm mt-1.5 opacity-90">
+            {t("nalog_nije_verifikovan_alternativa")}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link
+              href="/verifikacija"
+              className="inline-block px-4 py-2 bg-kolo-gold-600 text-white text-sm font-semibold rounded-xl hover:bg-kolo-gold-400 transition-colors"
+            >
+              {t("verifikuj_dugme")}
+            </Link>
+            {/* Vodi PRAVO na obrazac za oglas, ne na Pijacu: rečenica iznad obećava
+                objavu, a svaki međukorak je mesto na kome se odustaje. */}
+            <Link
+              href="/pijaca/novi-oglas"
+              className="inline-block px-4 py-2 bg-white text-kolo-gold-600 border border-kolo-gold-600 text-sm font-semibold rounded-xl hover:bg-kolo-gold-100 transition-colors"
+            >
+              {t("prvi_oglas_dugme")}
+            </Link>
+          </div>
         </div>
       )}
 
