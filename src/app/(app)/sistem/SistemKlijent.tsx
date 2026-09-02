@@ -22,7 +22,6 @@ interface FondTx {
   userId: string | null;
   iznosRSD: number;
 }
-type TxFilter = "sve" | "protokol" | "clanovi";
 
 interface Transakcija {
   id: string;
@@ -99,7 +98,10 @@ interface Props {
   donacije: DonacijaItem[];
   pokrovitelji: PokroviteljItem[];
   emisijeChart: EmisijaChart[];
-  transakcije: Transakcija[];
+  /** Zapisi Protokola — sve što nije prepis između korisnika. */
+  protokolTx: Transakcija[];
+  /** Prepisi između korisnika (TRANSFER) — kartica „Ukupno razmena". */
+  razmene: Transakcija[];
   clanovi: Clan[];
   pocetnaSekcija: Sekcija;
 }
@@ -127,7 +129,8 @@ export default function SistemKlijent({
   donacije,
   pokrovitelji,
   emisijeChart,
-  transakcije,
+  protokolTx,
+  razmene,
   clanovi,
   pocetnaSekcija,
 }: Props) {
@@ -245,7 +248,7 @@ export default function SistemKlijent({
             label={t("kartica_transakcije")}
             broj={ukupnoTransakcija}
             danas={danasTransakcija}
-            podnaslov={t("kartica_tx_opis", { count: ukupnoTransakcija })}
+            podnaslov={t("kartica_tx_opis", { count: razmene.length })}
           />
           <Kartica
             aktivan={sekcija === "iznos"}
@@ -370,7 +373,7 @@ export default function SistemKlijent({
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
-          transakcije={transakcije}
+          protokolTx={protokolTx}
         />
       )}
       {sekcija === "clanovi" && (
@@ -380,7 +383,7 @@ export default function SistemKlijent({
         <LokacijeSekcija clanovi={clanovi} verified={verified} />
       )}
       {sekcija === "transakcije" && (
-        <TransakcijeSekcija transakcije={transakcije} verified={verified} />
+        <TransakcijeSekcija razmene={razmene} verified={verified} />
       )}
       {sekcija === "donacije" && (
         <DonacijeSekcija donacije={donacije} pokrovitelji={pokrovitelji} verified={verified} />
@@ -389,7 +392,7 @@ export default function SistemKlijent({
         <IznosSekcija
           ukupanIznosTx={ukupanIznosTx}
           danasIznosTx={danasIznosTx}
-          transakcije={transakcije}
+          razmene={razmene}
           verified={verified}
         />
       )}
@@ -616,24 +619,20 @@ function PregledSekcija({
   danasEmitovano,
   danasLimit,
   emisijeChart,
-  transakcije,
+  protokolTx,
 }: {
   verified: boolean;
   opticaj: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
-  transakcije: Transakcija[];
+  protokolTx: Transakcija[];
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
   const tc = useTranslations("common");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
   const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
-
-  const protokolTx = transakcije.filter(
-    (tx) => tx.fromId === null || tx.toId === null
-  );
 
   return (
     <div className="space-y-5">
@@ -1289,56 +1288,33 @@ function LokacijaKartica({
 
 // ── Transakcije ───────────────────────────────────────────────────────────────
 
+/**
+ * Sekcija kartice „Ukupno razmena" — ISKLJUČIVO prepisi između korisnika.
+ *
+ * Filter (sve | Protokol | između članova) je uklonjen: kartica iznad broji samo
+ * prepise, pa je spisak koji uz nju ume da prikaže i zapise Protokola govorio
+ * nešto drugo nego broj na koji je čovek kliknuo. Zapisi Protokola imaju svoje
+ * mesto — karticu „Ukupno POENA" (opticaj).
+ */
 function TransakcijeSekcija({
-  transakcije,
+  razmene,
   verified,
 }: {
-  transakcije: Transakcija[];
+  razmene: Transakcija[];
   verified: boolean;
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
-  const [filter, setFilter] = useState<TxFilter>("sve");
-
-  const filtrirane = useMemo(
-    () =>
-      transakcije.filter((tx) => {
-        if (filter === "protokol") return tx.fromId === null || tx.toId === null;
-        if (filter === "clanovi") return tx.type === "TRANSFER";
-        return true;
-      }),
-    [transakcije, filter]
-  );
-
-  const filteri: [TxFilter, string][] = [
-    ["sve", t("filter_sve")],
-    ["protokol", t("filter_protokol")],
-    ["clanovi", t("filter_clanovi")],
-  ];
 
   return (
     <div className="space-y-4">
-      {/* Filter dugmad */}
       <div className="flex flex-wrap gap-2 items-center">
-        {filteri.map(([key, label]) => (
-          <button
-            key={key}
-            onClick={() => setFilter(key)}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors border ${
-              filter === key
-                ? "bg-kolo-green-700 text-white border-kolo-green-700"
-                : "bg-white text-kolo-muted border-kolo-border hover:border-kolo-green-500 hover:text-kolo-text"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
         <span className="ml-auto text-xs text-kolo-muted self-center">
-          {t("transakcija_count", { count: filtrirane.length })}
+          {t("transakcija_count", { count: razmene.length })}
         </span>
       </div>
 
-      {filtrirane.length === 0 ? (
+      {razmene.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           {t("nema_tx")}
         </div>
@@ -1352,10 +1328,10 @@ function TransakcijeSekcija({
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("primalac")}</span>
             <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("iznos")}</span>
           </div>
-          {filtrirane.map((tx, i) => (
+          {razmene.map((tx, i) => (
             <div
               key={tx.id}
-              className={`px-4 py-2.5 ${i < filtrirane.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+              className={`px-4 py-2.5 ${i < razmene.length - 1 ? "border-b border-kolo-border/30" : ""}`}
             >
               {/* Desktop grid */}
               <div className="hidden sm:grid grid-cols-[9rem_1fr_1.5rem_1fr_7rem] gap-x-3 items-center">
@@ -1598,17 +1574,17 @@ function DonacijeSekcija({
 function IznosSekcija({
   ukupanIznosTx,
   danasIznosTx,
-  transakcije,
+  razmene,
   verified,
 }: {
   ukupanIznosTx: number;
   danasIznosTx: number;
-  transakcije: Transakcija[];
+  razmene: Transakcija[];
   verified: boolean;
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
-  const transferi = transakcije.filter((tx) => tx.type === "TRANSFER");
+  const transferi = razmene;
   const ukupnoTransferi = transferi.reduce((s, tx) => s + tx.amount, 0);
 
   return (

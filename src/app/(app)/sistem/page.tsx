@@ -32,7 +32,8 @@ export default async function SistemPage({
     ukupnoKorisnika,
     verifikovanih,
     emisije,
-    transakcijeSve,
+    protokolZapisi,
+    razmeneZapisi,
     ukupnoTransakcija,
     korisnici,
     danasKorisnika,
@@ -58,7 +59,16 @@ export default async function SistemPage({
       orderBy: { date: "desc" },
       take: 30,
     }),
+    // Dve odvojene liste, jer dve kartice pokazuju dve različite stvari i svaka
+    // mora da ima svojih sto redova. Dok je bio jedan mešan upit od 100 najnovijih,
+    // razmene su se gubile među zapisima Protokola (emisija je mnogo više), pa je
+    // ispod kartice „Ukupno razmena" znao da stoji šačica redova iako ih je u
+    // sistemu mnogo više.
+    // „Ukupno POENA" (opticaj) → zapisi Protokola: sve što NIJE prenos između
+    // korisnika. Tu spada i poništenje prepisa: ono se dešava između dva
+    // korisnička zapisa, ali je akt Fondacije, ne razmena.
     prisma.transaction.findMany({
+      where: { type: { not: "TRANSFER" } },
       orderBy: { createdAt: "desc" },
       take: 100,
       include: {
@@ -66,7 +76,17 @@ export default async function SistemPage({
         toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
-    // Kartica „Transakcije" broji samo prenose između korisnika (TRANSFER),
+    // „Ukupno razmena" → isključivo prepisi između korisnika (TRANSFER).
+    prisma.transaction.findMany({
+      where: { type: "TRANSFER" },
+      orderBy: { createdAt: "desc" },
+      take: 100,
+      include: {
+        fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+        toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
+      },
+    }),
+    // Kartica „Ukupno razmena" broji samo prenose između korisnika (TRANSFER),
     // ne i evidentiranje Protokola (EMISIJA_*, UPIS/OTPIS_ZRNO).
     prisma.transaction.count({ where: { type: "TRANSFER" } }),
     prisma.user.findMany({
@@ -176,7 +196,7 @@ export default async function SistemPage({
   const danasEmitovano = danasEmisija?.totalEmitted ?? 0;
   const danasLimit = danasEmisija?.limit ?? Math.floor(opticaj * 0.1);
 
-  const txData = transakcijeSve.map((t) => ({
+  const zaPrikaz = (t: (typeof protokolZapisi)[number]) => ({
     id: t.id,
     amount: t.amount,
     type: t.type,
@@ -186,7 +206,10 @@ export default async function SistemPage({
     fromId: t.fromWallet?.user?.id ?? null,
     toPseudonim: t.toWallet?.user?.pseudonim ?? "Protokol",
     toId: t.toWallet?.user?.id ?? null,
-  }));
+  });
+
+  const protokolTx = protokolZapisi.map(zaPrikaz);
+  const razmene = razmeneZapisi.map(zaPrikaz);
 
   const clanovi = korisnici.map((u) => {
     const donacijeRSD = u.donations.reduce((s, d) => s + Number(d.amountRSD), 0);
@@ -238,7 +261,8 @@ export default async function SistemPage({
       donacije={donacije}
       pokrovitelji={pokrovitelji}
       emisijeChart={emisijeChart}
-      transakcije={txData}
+      protokolTx={protokolTx}
+      razmene={razmene}
       clanovi={clanovi}
       pocetnaSekcija={pocetnaSekcija}
     />
