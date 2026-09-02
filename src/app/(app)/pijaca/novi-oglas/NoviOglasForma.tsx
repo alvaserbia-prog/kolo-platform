@@ -191,14 +191,19 @@ export default function NoviOglasForma({
         <h1 className="kolo-naslov">{jePotraznja ? t("nova_potraznja_naslov") : t("novi_oglas_naslov")}</h1>
       </div>
 
-      {/* Neverifikovanom se objašnjava i šta sme i šta time dobija. Bez ovoga bi
-          zaključan izbor tipa i odbijanje zbog minimuma izgledali kao kvar. */}
+      {/* Nepotvrđenom se kaže jedino šta dobija i kada — objava mu je otvorena
+          (Pravilnik čl. 16 st. 5), pa nema šta da se pravda. Šta oglasu fali po
+          sadržinskom minimumu javlja se uz samo dugme (`minimum.razlog` ispod),
+          tamo gde čovek i zapne, a ne unapred. */}
       {!verifikovan && (
         <div className="bg-kolo-gold-100 border border-kolo-gold-100 rounded-xl px-4 py-3 space-y-1.5">
           <p className="text-sm font-semibold text-kolo-gold-700">{t("neverif_naslov")}</p>
           <p className="text-sm text-kolo-muted">
             {t("neverif_opis", { iznos: IZNOS.toLocaleString("sr-RS") })}
           </p>
+          {/* Zvezdica: iznos je bezuslovan tek po odobrenju, pa uslov stoji uz
+              obećanje, a ne u istoj rečenici sa njim. */}
+          <p className="text-xs text-kolo-muted">{t("neverif_napomena")}</p>
         </div>
       )}
 
