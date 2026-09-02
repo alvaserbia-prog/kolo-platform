@@ -201,6 +201,9 @@ export default function NoviOglasForma({
           <p className="text-sm text-kolo-muted">
             {t("neverif_opis", { iznos: IZNOS.toLocaleString("sr-RS") })}
           </p>
+          {/* Zvezdica: iznos je bezuslovan tek po odobrenju, pa uslov stoji uz
+              obećanje, a ne u istoj rečenici sa njim. */}
+          <p className="text-xs text-kolo-muted">{t("neverif_napomena")}</p>
         </div>
       )}
 
