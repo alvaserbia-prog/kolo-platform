@@ -209,6 +209,11 @@ function SidebarContent({
     { href: "/programi", label: t("programi") },
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
     { href: "/zrno", label: t("zrno") },
+    // Nabavke stoje uz Sistem i Doprinos jer su isti red stvari: šta zajednica
+    // radi sa zajedničkim sredstvima. Registar predloga radi i pre ijedne nabavke —
+    // on je mapa rupa u zajednici (Pravilnik o projektima i kolektivnim nabavkama
+    // čl. 10), pa stavka ulazi odmah, a ne tek kad prva nabavka postoji.
+    { href: "/nabavke", label: t("nabavke") },
     // Škole su pregled zajednice, ne lični alat — otud u padajućoj grupi, a ne u
     // gornjoj. Punoletnom članu su izvor vesti („selo prvo u Srbiji"), ne zadatak.
     ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),

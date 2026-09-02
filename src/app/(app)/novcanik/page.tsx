@@ -9,6 +9,7 @@ import { dohvatiZabelezeneKorake } from "@/lib/protokol/doprinos-razmeni";
 import PutanjaRazmene, { PutanjaSkeleton } from "./PutanjaRazmene";
 import { ucitajUcesnika } from "@/lib/protokol/deca";
 import { nalogRadi } from "@/lib/deca-pravila";
+import { rezervisanoZaNabavku } from "@/lib/protokol/nabavka";
 
 export default async function NovcanikPage({
   searchParams,
@@ -23,7 +24,7 @@ export default async function NovcanikPage({
 
   // Laki upiti potrebni za gornju karticu (stanje POEN). ZRNO kartica je
   // privremeno uklonjena iz Novčanika (ostaje dostupna preko sidebara /zrno).
-  const [wallet, dbUser, zabelezenOglas, zabelezeniKoraci] = await Promise.all([
+  const [wallet, dbUser, zabelezenOglas, zabelezeniKoraci, rezervisano] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
@@ -38,6 +39,9 @@ export default async function NovcanikPage({
     // Koraci 2–5 putanje (čl. 40a) čekaju iste okidače kao korak 1, pa u kartici
     // stoje kao jedan red „zabeležen doprinos", ne kao dva odvojena iznosa.
     dohvatiZabelezeneKorake(session.user.id),
+    // Rezervisano za kolektivnu nabavku (čl. 23 st. 2). Zaseban red, nikad sabran
+    // sa stanjem: do preuzimanja POEN nije poništen (čl. 27 st. 3).
+    rezervisanoZaNabavku(session.user.id),
   ]);
   const zabelezenDoprinos = zabelezenOglas + zabelezeniKoraci;
   const maloletan = dbUser?.maloletan ?? false;
@@ -59,6 +63,8 @@ export default async function NovcanikPage({
         prefillIznos={iznos}
         prefillOpis={description}
         zabelezenDoprinos={maloletan ? 0 : zabelezenDoprinos}
+        // Maloletni nalog ne učestvuje u nabavci (čl. 4), pa reda ni nema.
+        rezervisanoNabavka={maloletan ? 0 : rezervisano}
         maloletan={maloletan}
         // Neverifikovani u ažuriranju evidencije učestvuje samo kao primalac
         // (čl. 28 st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto.

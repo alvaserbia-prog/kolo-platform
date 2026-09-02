@@ -19,7 +19,8 @@
     "grupa_zajednicko_dobro": "Zajedničko dobro",
     "faq": "Česta pitanja",
     "prijatelji": "Prijatelji",
-    "skole": "Škole"
+    "skole": "Škole",
+    "nabavke": "Nabavke"
   },
   "header": {
     "moj_profil": "Moj profil",
@@ -370,7 +371,9 @@
     "prijavi_greska": "Prijava nije poslata.",
     "ceka_roditelja": "Nalog čeka da ga preuzme roditelj. Do tada POEN može da se prepisuje u tvoj zapis; prepis drugima otključava se kad roditelj preuzme nalog.",
     "nadoknada_naslov_dete": "Duguješ",
-    "nadoknada_opis_dete": "Ovo se skinulo kad je prijateljstvo prestalo. Prvi POENI koji ti stignu popunjavaju ovo. Sve ostalo radi normalno."
+    "nadoknada_opis_dete": "Ovo se skinulo kad je prijateljstvo prestalo. Prvi POENI koji ti stignu popunjavaju ovo. Sve ostalo radi normalno.",
+    "rezervisano_nabavka": "Rezervisano za nabavku",
+    "rezervisano_nabavka_opis": "Rezervisano do preuzimanja robe. Poništava se pri preuzimanju, ne pre; ako ne preuzmeš, vraća se u tvoj zapis."
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -2442,7 +2445,8 @@
     "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen",
     "tab_razmene": "Razmene",
     "tab_prijave": "Prijave",
-    "emisija_tbl_nivo1": "svaka donacija ispod 5.000"
+    "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
+    "tab_nabavke": "Nabavke"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2588,7 +2592,11 @@
     "roditeljstvo_upisano_naslov": "Upisan si kao roditelj",
     "roditeljstvo_upisano_tekst": "Nalog {pseudonim} je preveden u dečji i ti si upisan kao njegov roditelj.",
     "potvrda_pala_minus_naslov": "Potvrda je pala, zapis je u minusu",
-    "potvrda_pala_minus_tekst": "Nalog {pseudonim} je preveden u dečji, pa je potvrda povodom koje ti je upisan POEN pala. Tvoj zapis je sada u minusu za {iznos} POEN — POEN-i koji pristignu prvo popunjavaju taj minus."
+    "potvrda_pala_minus_tekst": "Nalog {pseudonim} je preveden u dečji, pa je potvrda povodom koje ti je upisan POEN pala. Tvoj zapis je sada u minusu za {iznos} POEN — POEN-i koji pristignu prvo popunjavaju taj minus.",
+    "nabavka_poziv_naslov": "Ušao si u nabavku",
+    "nabavka_poziv_tekst": "Nabavka „{dobro}” — tvoj deo košta {poen} POEN. Potvrdi izborom dana preuzimanja.",
+    "nabavka_preuzeto_naslov": "Deo je preuzet",
+    "nabavka_preuzeto_tekst": "Preuzeo si svoj deo iz nabavke „{dobro}”. Poništeno je {poen} POEN."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2607,7 +2615,8 @@
     "prijateljstvo_punoletstvo": "Punoletstvo — zatvoreno prijateljstvo sa {pseudonim}",
     "prijateljstvo_punoletstvo_zbirno": "Poništenje POENA iz {broj} prijateljstava (punoletstvo)",
     "prevod_u_maloletni_otpis": "Poništenje POENA upisanih kroz kanale (nalog preveden u dečji)",
-    "prevod_u_maloletni_potvrda": "Poništenje POENA iz pale potvrde ({pseudonim} preveden u dečji nalog)"
+    "prevod_u_maloletni_potvrda": "Poništenje POENA iz pale potvrde ({pseudonim} preveden u dečji nalog)",
+    "nabavka": "Kolektivna nabavka — {dobro}"
   },
   "mejl": {
     "pozdrav": "Pozdrav",
@@ -3288,5 +3297,79 @@
     "cemu_sluzi": "Ako zaboraviš lozinku, na ovu adresu ti šaljemo link za novu. Obaveštenja ne šaljemo.",
     "na_pocetnu": "Idi na početnu",
     "greska": "Link nije važeći ili je istekao. Upiši adresu ponovo u svom profilu."
+  },
+  "nabavke": {
+    "naslov": "Nabavke",
+    "uvod": "Šta zajednici treba, a niko iznutra ne nudi. Iz registra predloga bira se predmet kolektivne nabavke.",
+    "predlog_naslov": "Tvoj predlog",
+    "predlog_opis": "Jedna reč — šta bi trebalo nabaviti. Svaki član ima jedan predlog; nov zamenjuje raniji.",
+    "ukloni": "Ukloni",
+    "polje_placeholder": "Npr. đubrivo, gorivo, cement…",
+    "upisi": "Upiši „{naziv}”",
+    "zameni": "Zameni sa „{naziv}”",
+    "upisano": "Predlog je upisan.",
+    "greska_upis": "Predlog nije upisan.",
+    "greska_opsta": "Radnja nije uspela.",
+    "ucitavanje": "Učitavanje…",
+    "nabavke_naslov": "Nabavke u toku",
+    "zavrsene_naslov": "Ranije nabavke",
+    "status_NACRT": "U pripremi",
+    "status_OBJAVLJENA": "Prijave su otvorene",
+    "status_RED_UTVRDJEN": "Red je utvrđen",
+    "status_PLACENA": "Preuzimanje je u toku",
+    "status_ZAVRSENA": "Završena",
+    "status_OBUSTAVLJENA": "Obustavljena",
+    "kartica_deo": "Deo: {velicina} × {jedinica} — {poen} POEN",
+    "moja_PRIJAVLJEN": "Prijavljen si.",
+    "moja_POZVAN": "Pozvan si — potvrdi dan preuzimanja.",
+    "moja_POTVRDIO": "Potvrđeno — imaš kod za preuzimanje.",
+    "moja_PREUZEO": "Preuzeo si svoj deo.",
+    "moja_ODUSTAO": "Odustao si.",
+    "moja_ISTEKAO": "Rok za odgovor je istekao — mesto je otišlo sledećem u redu.",
+    "moja_NIJE_PREUZEO": "Deo nije preuzet upisanog dana. POEN ti je oslobođen.",
+    "registar_naslov": "Registar predloga",
+    "registar_opis": "Rangira se po broju različitih članova, ne po broju POEN-a. Ko je šta predložio se ne objavljuje.",
+    "registar_prazan": "Registar je prazan. Upiši prvi predlog.",
+    "broj_clanova": "{broj} članova",
+    "pravni_osnov": "Pravilnik o projektima i kolektivnim nabavkama, čl. 9–32.",
+    "nazad": "Nabavke",
+    "nije_nadjena": "Nabavka nije pronađena.",
+    "obustavljena": "Nabavka je obustavljena: {razlog}",
+    "prijava_opis": "Prijave su otvorene do {rok}. Prijava ne dira tvoj zapis — obaveza nastaje tek kad potvrdiš dan preuzimanja.",
+    "prijavi_se": "Prijavi se",
+    "prijave_zatvorene": "Prijave za ovu nabavku su zatvorene.",
+    "cekas_mesto": "Prijavljen si — {mesto}. u redu. Poziv stiže kad dođe red na tebe.",
+    "cekas_red": "Prijavljen si. Red se utvrđuje po zatvaranju prijava.",
+    "odustani": "Odustajem",
+    "pozvan": "Ušao si — {mesto}. mesto. Tvoj deo košta {poen} POEN.",
+    "pozvan_uputstvo": "Izaberi dan kad dolaziš po robu. Tek tada se POEN rezerviše.",
+    "potvrdi": "Potvrdi dan preuzimanja",
+    "potvrdjeno": "Potvrđeno za {dan}, {mesto}.",
+    "kod_uputstvo": "Pokaži ovaj kod kod dobavljača. POEN se poništava pri preuzimanju, ne pre.",
+    "rezervisano": "Rezervisano: {poen} POEN",
+    "preuzeto": "Preuzeo si svoj deo. Poništeno je {poen} POEN.",
+    "kalkulacija": "Kalkulacija",
+    "k_saldo": "Saldo Fondacije",
+    "k_rezerva": "Operativna rezerva",
+    "k_iznos": "Iznos nabavke",
+    "k_dobavljac": "Dobavljač",
+    "k_nabavna": "Nabavna cena",
+    "k_maloprodajna": "Maloprodajna referenca",
+    "k_jedinica": "Broj jedinica",
+    "k_delova": "Broj delova",
+    "k_deo": "Deo po članu",
+    "k_poen_po_delu": "POEN po delu",
+    "k_ukupno_poena": "Ukupno POEN se poništava",
+    "k_odnos": "Odnos poništenja (POEN po dinaru)",
+    "k_placeno": "Plaćeno dobavljaču",
+    "k_mesto": "Mesto preuzimanja",
+    "k_period": "Period preuzimanja",
+    "k_izvori": "Izvori maloprodajnih cena: {izvori}",
+    "paritet_napomena": "POEN po jedinici jednak je maloprodajnoj referenci, jedan prema jedan. POEN se ne razmenjuje za robu i ne dolazi do dobavljača — roba je kupljena dinarima, a POEN se poništava kao zapis o iskorišćenom učešću.",
+    "ponude": "Prikupljene ponude",
+    "ponude_opis": "Objavljuju se sve, i one koje nisu izabrane.",
+    "preuzeli": "Preuzeli",
+    "preuzeli_napomena": "Prikazuju se pseudonim i mesto u redu. Broj POEN-a u zapisu se ne objavljuje.",
+    "broj_prijava": "Prijavljenih: {broj}"
   }
 }

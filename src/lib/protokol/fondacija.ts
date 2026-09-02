@@ -1,7 +1,8 @@
 /**
  * Fondacija — transparentnost sredstava i Zastitni veto (Pravilnik o KOLO sistemu cl. 48–50, v3.7.5)
  *
- * Sredstva Fondacije = priliv (donacije + pokroviteljstvo, oba u RSD) - odliv (troskovi)
+ * Sredstva Fondacije = priliv (donacije + pokroviteljstvo, oba u RSD) - odliv
+ * (operativni troskovi + projektni odliv)
  * Veto aktivan ako Protokol balansa < -1.000.000 POEN I trajnoUgasen = false
  * Veto se trajno gasi kad sredstva Fondacije >= 3 × operativni trosak prethodnog meseca
  *   (reper po Pravilniku o Gornjem Kolu 3.7.6, cl. 19).
@@ -18,7 +19,9 @@ export interface FondacijaSaldo {
   ukupanPriliv: number;        // RSD
   donacije: number;            // RSD (potvrdjene)
   pokroviteljstvo: number;     // RSD
-  ukupanOdliv: number;         // RSD (sumirani troskovi)
+  ukupanOdliv: number;         // RSD (operativni troskovi + projekti)
+  operativniOdliv: number;     // RSD (samo FondacijaTrosak)
+  projektniOdliv: number;      // RSD (samo ProjekatTrosak — kolektivne nabavke)
   saldo: number;               // RSD (priliv - odliv)
 }
 
@@ -35,7 +38,7 @@ export interface VetoStatus {
 }
 
 export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
-  const [donacijeAgg, pokroviteljstvoAgg, troskoviAgg] = await Promise.all([
+  const [donacijeAgg, pokroviteljstvoAgg, troskoviAgg, projektiAgg] = await Promise.all([
     prisma.donationRecord.aggregate({
       where: { status: "CONFIRMED" },
       _sum: { amountRSD: true },
@@ -46,11 +49,16 @@ export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
     prisma.fondacijaTrosak.aggregate({
       _sum: { iznosRSD: true },
     }),
+    prisma.projekatTrosak.aggregate({
+      _sum: { iznosRSD: true },
+    }),
   ]);
 
   const donacije = Number(donacijeAgg._sum.amountRSD ?? 0);
   const pokroviteljstvo = Number(pokroviteljstvoAgg._sum.rsdIznos ?? 0);
-  const ukupanOdliv = Number(troskoviAgg._sum.iznosRSD ?? 0);
+  const operativniOdliv = Number(troskoviAgg._sum.iznosRSD ?? 0);
+  const projektniOdliv = Number(projektiAgg._sum.iznosRSD ?? 0);
+  const ukupanOdliv = operativniOdliv + projektniOdliv;
   const ukupanPriliv = donacije + pokroviteljstvo;
 
   return {
@@ -58,6 +66,8 @@ export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
     donacije,
     pokroviteljstvo,
     ukupanOdliv,
+    operativniOdliv,
+    projektniOdliv,
     saldo: ukupanPriliv - ukupanOdliv,
   };
 }
@@ -66,6 +76,12 @@ export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
  * Operativni trosak Fondacije za prethodni KALENDARSKI mesec — reper za prag
  * gasenja zastitnog veta (Pravilnik o Gornjem Kolu 3.7.6, cl. 19).
  * Vraca 0 dok ne postoji nijedan zapis za prethodni mesec.
+ *
+ * 🔴 Broji SAMO `FondacijaTrosak` — nikad `ProjekatTrosak`. Prag za gasenje veta je
+ * `trosak × 3`, pa bi nabavka od 200.000 RSD upisana kao operativa podigla prag za
+ * 600.000 RSD; veto bi se najteze gasio bas u mesecima kada Fondacija najvise radi,
+ * a mesec bez nabavke bi ga naglo olaksao. Prag mora da meri operativu, ne aktivnost.
+ * Zato kolektivne nabavke imaju sopstveni model (vidi `ProjekatTrosak` u semi).
  */
 export async function dohvatiTrosakPrethodnogMeseca(): Promise<number> {
   const danas = new Date();

@@ -85,6 +85,11 @@ enum TransactionType {
   // upisao tom nalogu, i skidanje POENA ljudima kojima je upisan povodom njegovih
   // potvrda. Poništava se EMISIJA, pa opticaj opada.
   OTPIS_PREVOD_U_MALOLETNI
+  // Kolektivna nabavka: poništenje zapisa PO ISKORIŠĆENJU (Pravilnik čl. 14a).
+  // Poništava se EMISIJA — Protokolov minus se smanjuje i opticaj opada. Nije
+  // PONISTENJE_PREPISA: tamo se POEN seli između dva korisnička zapisa, ovde
+  // nestaje iz sistema zato što je iskorišćen.
+  OTPIS_NABAVKA
 }
 
 enum TipKorisnika {
@@ -129,6 +134,10 @@ enum IzvrsenjeStatus {
 enum PredlogVrsta {
   ODLUKA
   DINARSKA_PREPORUKA
+  // Izbor jedne mogućnosti između više ponuđenih (Gornje Kolo čl. 8 st. 4).
+  // Predmet nabavke je dinarsko pitanje, pa ovaj tip NIKAD ne ide u izvršenje
+  // po čl. 17 — kao ni DINARSKA_PREPORUKA. Stvara ga isključivo server.
+  IZBOR_NABAVKE
 }
 
 // Obrazložen odgovor UO na usvojenu dinarsku preporuku (čl. 20)
@@ -399,6 +408,10 @@ model User {
   prijavljeniBagovi                Bug[]                     @relation("PrijaviocBaga")
   sistemskaObavestenja             SistemskoObavestenje[]    @relation("KreiraoObavestenje")
   pseudonimIstorija                PseudonimIstorija[]
+  predlogNabavke                   PredlogNabavke?
+  naziviDobara                     NazivDobra[]              @relation("KreiraoNaziv")
+  nabavkaPrijave                   NabavkaPrijava[]
+  projekatTroskovi                 ProjekatTrosak[]          @relation("KreiraoProjekatTrosak")
   createdAt                        DateTime                  @default(now())
   updatedAt                        DateTime                  @updatedAt
 
@@ -1264,6 +1277,7 @@ model GlasanjePredlog {
   uoObrazlozenje   String?
   uoOdgovorAt      DateTime?
   glasovi          GlasanjeGlas[]
+  nabavka          Nabavka?
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 }
@@ -1274,7 +1288,11 @@ model GlasanjeGlas {
   predlog         GlasanjePredlog @relation(fields: [predlogId], references: [id])
   userId          String
   user            User            @relation(fields: [userId], references: [id])
-  za              Boolean
+  /// Za/protiv glasanje (ODLUKA, DINARSKA_PREPORUKA). Null pri izbornom glasanju.
+  za              Boolean?
+  /// Izborno glasanje (IZBOR_NABAVKE): id naziva dobra za koji je glas dat.
+  /// Null pri za/protiv glasanju. Tačno jedno od `za` i `izbor` je popunjeno.
+  izbor           String?
   glasackaGlasova Int
   createdAt       DateTime        @default(now())
 
@@ -2097,4 +2115,194 @@ model PrijateljToken {
 
   @@index([korisnikId])
   @@index([expiresAt])
+}
+
+// ─── Projekti i kolektivne nabavke ───────────────────────────────────────────
+// Pravilnik o KOLO sistemu čl. 14a i 51a; Pravilnik o projektima i kolektivnim
+// nabavkama (set 4.4.1).
+
+/// Rečnik naziva dobara. Zaseban model, a ne slobodan tekst na predlogu: bez
+/// rečnika bi „gorivo", „dizel" i „gorivo za traktor" bili tri stavke za istu
+/// stvar, registar bi se rasprašio i nijedan naziv nikad ne bi skupio dovoljno
+/// korisnika da se o njemu glasa (čl. 9 st. 2).
+model NazivDobra {
+  id         String           @id @default(uuid())
+  /// Prikazni oblik, onako kako ga je uneo prvi korisnik.
+  naziv      String
+  /// Ključ za poklapanje bez obzira na veličinu slova i razmake. Jedinstven —
+  /// isti razlog kao `User.pseudonimLower`.
+  nazivLower String           @unique
+  kreiraoId  String?
+  kreirao    User?            @relation("KreiraoNaziv", fields: [kreiraoId], references: [id])
+  predlozi   PredlogNabavke[]
+  nabavke    Nabavka[]
+  createdAt  DateTime         @default(now())
+
+  @@index([createdAt])
+}
+
+/// Predlog za nabavku — jedna reč, jedan po korisniku (čl. 9 st. 3).
+/// Jednokratnost drži BAZA (`userId @unique`), ne kod: nov predlog zamenjuje
+/// raniji, pa je registar „jedan član — jedan glas o predmetu".
+model PredlogNabavke {
+  id        String     @id @default(uuid())
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  nazivId   String
+  naziv     NazivDobra @relation(fields: [nazivId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+
+  // Registar grupiše po nazivu i broji različite korisnike.
+  @@index([nazivId])
+}
+
+enum NabavkaStatus {
+  NACRT // Fondacija prikuplja ponude, kalkulacija još nije objavljena
+  OBJAVLJENA // kalkulacija objavljena, prijave otvorene (3 dana)
+  RED_UTVRDJEN // prijave zatvorene, red snimljen, pozivi za potvrdu teku
+  PLACENA // dobavljaču plaćeno, period preuzimanja teče (3 dana)
+  ZAVRSENA
+  OBUSTAVLJENA
+}
+
+enum NabavkaPrijavaStatus {
+  PRIJAVLJEN // u redu, čeka poziv
+  POZVAN // poziv poslat, teče rok za odgovor (3 dana)
+  POTVRDIO // upisao dan preuzimanja, POEN rezervisan
+  PREUZEO // POEN poništen protivzapisom
+  ODUSTAO
+  ISTEKAO // nije odgovorio na poziv u roku
+  NIJE_PREUZEO // potvrdio, ali nije došao upisanog dana
+}
+
+/// Jedna kolektivna nabavka, od izbora predmeta do preuzimanja.
+/// Svi brojevi kalkulacije se SNIMAJU na zapis u trenutku objave (čl. 20 st. 2:
+/// kalkulacija se posle objave ne menja). Bez snimka bi se prikazana kalkulacija
+/// menjala kad se promeni saldo Fondacije ili maloprodajna cena.
+model Nabavka {
+  id      String        @id @default(uuid())
+  nazivId String
+  naziv   NazivDobra    @relation(fields: [nazivId], references: [id])
+  status  NabavkaStatus @default(NACRT)
+
+  /// Glasanje kojim je predmet izabran (čl. 12). Null za nabavku koju je UO
+  /// pokrenuo pre konstituisanja Gornjeg Kola.
+  glasanjePredlogId String?          @unique
+  glasanjePredlog   GlasanjePredlog? @relation(fields: [glasanjePredlogId], references: [id])
+
+  // ── Sredstva (čl. 5 i 8) — snimak u trenutku objave
+  saldoSnimak   Decimal? @db.Decimal(12, 2)
+  rezervaSnimak Decimal? @db.Decimal(12, 2)
+  iznosNabavke  Decimal? @db.Decimal(12, 2)
+
+  // ── Ponuda i kalkulacija (čl. 15, 17, 18, 19)
+  dobavljac    String?
+  jedinicaMere String? // „vreća 25 kg" — samo za prikaz
+  nabavnaCena  Decimal? @db.Decimal(12, 2)
+  /// Maloprodajna referenca u celim dinarima; ujedno POEN po jedinici (paritet 1:1).
+  maloprodajna Int?
+  izvoriCena   String?
+  brojJedinica Int?
+  brojDelova   Int?
+  velicinaDela Int?
+  poenPoDelu   Int?
+
+  // ── Rokovi (čl. 21, 23, 26)
+  prijaveDo        DateTime?
+  mestoPreuzimanja String?
+  preuzimanjeOd    DateTime?
+  preuzimanjeDo    DateTime?
+
+  objavljenoAt DateTime?
+  redUtvrdjenAt DateTime?
+  placenoAt    DateTime?
+  placenoRSD   Decimal?  @db.Decimal(12, 2)
+  zavrsenoAt   DateTime?
+  obustavljenoAt DateTime?
+  obustavaRazlog String?
+
+  ponude  NabavkaPonuda[]
+  prijave NabavkaPrijava[]
+  trosak  ProjekatTrosak?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+  @@index([nazivId])
+}
+
+/// Prikupljena ponuda (čl. 15). Objavljuju se SVE, i one koje nisu izabrane —
+/// bez toga „najpovoljnija" nije provera nego tvrdnja.
+model NabavkaPonuda {
+  id             String   @id @default(uuid())
+  nabavkaId      String
+  nabavka        Nabavka  @relation(fields: [nabavkaId], references: [id], onDelete: Cascade)
+  ponudjac       String
+  cenaPoJedinici Decimal  @db.Decimal(12, 2)
+  izabrana       Boolean  @default(false)
+  napomena       String?
+  createdAt      DateTime @default(now())
+
+  @@index([nabavkaId])
+}
+
+/// Prijava korisnika na nabavku i njegovo mesto u redu.
+model NabavkaPrijava {
+  id        String               @id @default(uuid())
+  nabavkaId String
+  nabavka   Nabavka              @relation(fields: [nabavkaId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status    NabavkaPrijavaStatus @default(PRIJAVLJEN)
+
+  /// 🔴 SNIMAK broja POEN-a u trenutku isteka roka za prijavu (čl. 22 st. 2).
+  /// Red mora biti snimak, ne živa vrednost: rolanje poziva traje danima, a ljudi
+  /// u međuvremenu troše POEN — pri živom rangiranju red bi se premeštao pod
+  /// nogama onima koji čekaju poziv.
+  poenSnimak Int?
+  /// Mesto u redu, 1 = prvi. Utvrđuje se zajedno sa snimkom.
+  mesto      Int?
+
+  pozvanAt       DateTime?
+  potvrdjenoAt   DateTime?
+  danPreuzimanja DateTime?
+  /// Kod koji korisnik pokazuje dobavljaču. Dobavljač dobija SAMO spisak kodova —
+  /// nikad pseudonim ni bilo koji drugi podatak o licu (čl. 26 st. 3).
+  kod            String?   @unique
+  preuzetoAt     DateTime?
+
+  /// Rezervisan POEN dok traje potvrda. Nula kad nema rezervacije — Novčanik red
+  /// prikazuje samo kad postoji.
+  rezervisano Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Jedna prijava po korisniku po nabavci — brana drži baza, ne kod.
+  @@unique([nabavkaId, userId])
+  @@index([nabavkaId, status])
+  @@index([nabavkaId, mesto])
+  @@index([userId])
+}
+
+/// Dinarski odliv u projekat.
+///
+/// 🔴 NE ide u `FondacijaTrosak`. `dohvatiTrosakPrethodnogMeseca()` sabira sve
+/// redove tog modela, a `pragZaGasenje = trosak × 3` — nabavka od 200.000 RSD
+/// podigla bi prag za 600.000 RSD, pa bi se zaštitni veto najteže gasio baš u
+/// mesecima kada Fondacija najviše radi. Saldo se umanjuje i za projekte
+/// (`dohvatiSaldoFondacije`), ali prag meri SAMO operativu.
+model ProjekatTrosak {
+  id        String   @id @default(uuid())
+  nabavkaId String?  @unique
+  nabavka   Nabavka? @relation(fields: [nabavkaId], references: [id])
+  datum     DateTime @db.Date
+  iznosRSD  Decimal  @db.Decimal(12, 2)
+  opis      String
+  kreiraoId String
+  kreirao   User     @relation("KreiraoProjekatTrosak", fields: [kreiraoId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@index([datum])
 }

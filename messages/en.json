@@ -19,7 +19,8 @@
     "grupa_zajednicko_dobro": "Common good",
     "faq": "FAQ",
     "prijatelji": "Friends",
-    "skole": "Schools"
+    "skole": "Schools",
+    "nabavke": "Procurement"
   },
   "header": {
     "moj_profil": "My profile",
@@ -370,7 +371,9 @@
     "prijavi_greska": "The report was not sent.",
     "ceka_roditelja": "The account is waiting for a parent to take it over. Until then POEN can be re-registered into your record; re-registering to others unlocks once a parent takes the account over.",
     "nadoknada_naslov_dete": "You owe",
-    "nadoknada_opis_dete": "This came off when a friendship ended. The first POEN that arrives fills it in. Everything else works as usual."
+    "nadoknada_opis_dete": "This came off when a friendship ended. The first POEN that arrives fills it in. Everything else works as usual.",
+    "rezervisano_nabavka": "Reserved for procurement",
+    "rezervisano_nabavka_opis": "Reserved until the goods are collected. Annulled upon collection, not before; if you do not collect, it returns to your record."
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -2442,7 +2445,8 @@
     "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
     "tab_razmene": "Razmene",
     "tab_prijave": "Prijave",
-    "emisija_tbl_nivo1": "any donation below 5,000"
+    "emisija_tbl_nivo1": "any donation below 5,000",
+    "tab_nabavke": "Nabavke"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2588,7 +2592,11 @@
     "roditeljstvo_upisano_naslov": "You are recorded as a parent",
     "roditeljstvo_upisano_tekst": "The account {pseudonim} became a child account and you are recorded as its parent.",
     "potvrda_pala_minus_naslov": "A confirmation lapsed, your record is negative",
-    "potvrda_pala_minus_tekst": "The account {pseudonim} became a child account, so the confirmation for which POEN was recorded to you has lapsed. Your record is now negative by {iznos} POEN — incoming POEN fills that gap first."
+    "potvrda_pala_minus_tekst": "The account {pseudonim} became a child account, so the confirmation for which POEN was recorded to you has lapsed. Your record is now negative by {iznos} POEN — incoming POEN fills that gap first.",
+    "nabavka_poziv_naslov": "You are in the procurement",
+    "nabavka_poziv_tekst": "Procurement “{dobro}” — your share costs {poen} POEN. Confirm by choosing a collection day.",
+    "nabavka_preuzeto_naslov": "Share collected",
+    "nabavka_preuzeto_tekst": "You collected your share from the “{dobro}” procurement. {poen} POEN was annulled."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -2607,7 +2615,8 @@
     "prijateljstvo_punoletstvo": "Coming of age — friendship with {pseudonim} closed",
     "prijateljstvo_punoletstvo_zbirno": "POEN from {broj} friendships written off (coming of age)",
     "prevod_u_maloletni_otpis": "Reversal of POEN recorded through the channels (account converted to a child account)",
-    "prevod_u_maloletni_potvrda": "Reversal of POEN from a lapsed confirmation ({pseudonim} converted to a child account)"
+    "prevod_u_maloletni_potvrda": "Reversal of POEN from a lapsed confirmation ({pseudonim} converted to a child account)",
+    "nabavka": "Collective procurement — {dobro}"
   },
   "mejl": {
     "pozdrav": "Hello",
@@ -3288,5 +3297,79 @@
     "cemu_sluzi": "If you forget your password, we send a link for a new one to this address. We do not send notifications.",
     "na_pocetnu": "Go to home",
     "greska": "The link is not valid or has expired. Enter the address again in your profile."
+  },
+  "nabavke": {
+    "naslov": "Procurement",
+    "uvod": "What the community needs and nobody here offers. The object of a collective procurement is chosen from the register of proposals.",
+    "predlog_naslov": "Your proposal",
+    "predlog_opis": "One word — what should be procured. Each member has one proposal; a new one replaces the previous.",
+    "ukloni": "Remove",
+    "polje_placeholder": "E.g. fertiliser, fuel, cement…",
+    "upisi": "Submit “{naziv}”",
+    "zameni": "Replace with “{naziv}”",
+    "upisano": "Proposal recorded.",
+    "greska_upis": "The proposal was not recorded.",
+    "greska_opsta": "The action failed.",
+    "ucitavanje": "Loading…",
+    "nabavke_naslov": "Procurements under way",
+    "zavrsene_naslov": "Earlier procurements",
+    "status_NACRT": "In preparation",
+    "status_OBJAVLJENA": "Applications open",
+    "status_RED_UTVRDJEN": "Order established",
+    "status_PLACENA": "Collection under way",
+    "status_ZAVRSENA": "Completed",
+    "status_OBUSTAVLJENA": "Suspended",
+    "kartica_deo": "Share: {velicina} × {jedinica} — {poen} POEN",
+    "moja_PRIJAVLJEN": "You have applied.",
+    "moja_POZVAN": "You are invited — confirm your collection day.",
+    "moja_POTVRDIO": "Confirmed — you have a collection code.",
+    "moja_PREUZEO": "You have collected your share.",
+    "moja_ODUSTAO": "You withdrew.",
+    "moja_ISTEKAO": "The response period expired — the place went to the next in the order.",
+    "moja_NIJE_PREUZEO": "The share was not collected on the day entered. Your POEN has been released.",
+    "registar_naslov": "Register of proposals",
+    "registar_opis": "Ranked by the number of distinct members, not by number of POEN. Who proposed what is not published.",
+    "registar_prazan": "The register is empty. Submit the first proposal.",
+    "broj_clanova": "{broj} members",
+    "pravni_osnov": "Rulebook on Projects and Collective Procurement, Art. 9–32.",
+    "nazad": "Procurement",
+    "nije_nadjena": "Procurement not found.",
+    "obustavljena": "The procurement was suspended: {razlog}",
+    "prijava_opis": "Applications are open until {rok}. Applying does not touch your record — the obligation arises only when you confirm a collection day.",
+    "prijavi_se": "Apply",
+    "prijave_zatvorene": "Applications for this procurement are closed.",
+    "cekas_mesto": "You have applied — {mesto} in the order. An invitation arrives when your turn comes.",
+    "cekas_red": "You have applied. The order is established once applications close.",
+    "odustani": "Withdraw",
+    "pozvan": "You are in — place {mesto}. Your share costs {poen} POEN.",
+    "pozvan_uputstvo": "Choose the day you are coming for the goods. Only then is the POEN reserved.",
+    "potvrdi": "Confirm collection day",
+    "potvrdjeno": "Confirmed for {dan}, {mesto}.",
+    "kod_uputstvo": "Show this code at the supplier. POEN is annulled upon collection, not before.",
+    "rezervisano": "Reserved: {poen} POEN",
+    "preuzeto": "You have collected your share. {poen} POEN was annulled.",
+    "kalkulacija": "Calculation",
+    "k_saldo": "Foundation balance",
+    "k_rezerva": "Operating reserve",
+    "k_iznos": "Procurement amount",
+    "k_dobavljac": "Supplier",
+    "k_nabavna": "Purchase price",
+    "k_maloprodajna": "Retail reference price",
+    "k_jedinica": "Number of units",
+    "k_delova": "Number of shares",
+    "k_deo": "Share per member",
+    "k_poen_po_delu": "POEN per share",
+    "k_ukupno_poena": "Total POEN to be annulled",
+    "k_odnos": "Annulment ratio (POEN per dinar)",
+    "k_placeno": "Paid to the supplier",
+    "k_mesto": "Place of collection",
+    "k_period": "Collection period",
+    "k_izvori": "Sources of retail prices: {izvori}",
+    "paritet_napomena": "The POEN per unit equals the retail reference price, one to one. POEN is not exchanged for goods and does not reach the supplier — the goods were bought with dinars, while POEN is annulled as a record of participation that has been used.",
+    "ponude": "Collected offers",
+    "ponude_opis": "All are published, including those not selected.",
+    "preuzeli": "Collected by",
+    "preuzeli_napomena": "The pseudonym and position in the order are shown. The number of POEN in the record is not published.",
+    "broj_prijava": "Applicants: {broj}"
   }
 }
