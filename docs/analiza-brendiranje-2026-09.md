@@ -221,3 +221,65 @@ Problem je jedan i ima tri lica:
 ## Zaključna napomena
 
 Najveći rizik ovog projekta nije da neće uspeti — nego da će se **odlična dokumentacija zameniti za odličan brend**. To su dve različite stvari: dokumentacija dokazuje da sistem zaslužuje poverenje, a brend čini da neko poželi da ga isproba pre nego što dokaz pročita. KOLO ima prvo u meri koja je retka; drugo mu tek predstoji, i traži manje posla nego što je već obavljeno.
+
+---
+
+# DOPUNA — stvarno stanje na produkciji (2.9.2026)
+
+Prvi deo izveštaja je pisan iz koda i copy-ja. Ovaj deo je pisan iz **stvarnih podataka
+sa ekolo.rs baze** (`/api/javno/statistike`, `/api/pijaca` na produkcijskom deploy-u) i
+menja tri ranija nalaza.
+
+## Brojevi
+
+- **33 potvrđena člana**, opticaj **75.500 POEN** → prosek **~2.288 POEN po članu**.
+- **26 aktivnih oglasa**, od **12 oglašivača** — 21 od 33 člana nikad nije objavio ništa.
+- **Koncentracija:** 4 čoveka nose **16 od 26 oglasa (62%)**; jedna osoba 7, osnivač 4.
+- **Geografija:** svaki oglas je Sombor ili Stanišić. Nijedan iz drugog mesta.
+- **Tempo objave pada:** jun 11 → jul 12 → **avgust 3** → septembar 0. Poslednji oglas
+  je od 23. avgusta.
+
+## Ispravka nalaza br. 6 — pijaca nije prazna, nego usahla i promašena
+
+Naslovna obećava med, jaja, sir i povrće („Hrana putuje, a raste pored nas").
+Na pijaci je **hrana 2 od 26 oglasa** (sok od jabuke, torte). Nema meda, jaja, sira ni
+povrća. Najveća kategorija je **polovna garderoba — 7 oglasa, svih sedam od iste osobe**.
+
+To je najveći nesklad između obećanja i stvarnosti na sajtu i poništava najbolji copy koji
+projekat ima. Posao nije „napuniti pijacu", nego **napuniti je onim što naslovna obećava**:
+deset stalnih proizvođača hrane iz okoline. Dok toga nema, ili se menja ponuda ili se menja
+obećanje — treće ne postoji.
+
+## Ispravka nalaza br. 5 — jedna opština nije preporuka nego zatečeno stanje
+
+KOLO **već jeste** lokalna mreža Sombora i Stanišića. Sajt to krije i nastupa nacionalno.
+Ispravno je obrnuto: „u Somboru i okolini razmenjuje 33 čoveka" je konkretno i proverljivo;
+„mreža razmene u tvojoj zajednici" je apstraktno i za posetioca iz Niša neistinito.
+
+## Potvrda nalaza br. 10 — sada sa brojem
+
+Prosečan član ima 2.288 POEN. Medijalna cena oglasa je oko 2.000, fotografisanje 12.000,
+torta do 8.000. Prosečan član može da obavi **jednu** razmenu i ostane prazan; nov član sa
+1.000 POEN može da kupi **dve stvari na celoj pijaci**. Bez ponude u rangu 500–1.500 POEN
+prvi upisani POEN nema šta da znači.
+
+## 🔴 Nov nalaz — de facto paritet 1 POEN = 1 dinar
+
+Cene na pijaci su dinarske cene prepisane jedan-na-jedan: usisivač 1.500, salonke 1.900,
+torte 3.500–8.000, fotografisanje 12.000, šteneta 200.
+
+Ceo pravni položaj POEN-a počiva na tome da **nije novac i da se ne konvertuje** (Pravilnik
+čl. 12–13), a Pijaca javno prikazuje kurs 1:1. Nijedan akt to ne zabranjuje — iznos predlaže
+oglašivač, dogovaraju ga dve strane — ali posmatraču sa strane, regulatoru ili novinaru,
+izgleda kao cenovnik u paralelnoj valuti. Jedini nalaz iz ove analize koji nosi **pravni**,
+a ne marketinški rizik.
+
+Najbrža poluga je copy: uz iznos u POEN-ima tražiti/prikazati **osnov predloga** (utrošen
+rad, materijal, vreme) umesto golog broja koji se čita kao dinar.
+
+## Usput utvrđeno
+
+- **Vercel Web Analytics nije uključen** za projekat (API vraća 404). Google Analytics jeste
+  postavljen (vidi se u CSP), ali druge merne tačke nema.
+- `x-robots-tag: noindex` na `*.vercel.app` adresama je Vercel-ov automatski zaglavni red za
+  deploy URL-ove — **ne odnosi se na ekolo.rs** i nije greška u `seo.ts`.
