@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_3_4.md`, `uslovi_koriscenja_4_3_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_1.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,23 +27,25 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_3_4.md",
-  "dokaz_stvarnosti_4_3_4.md",
-  "DPIA_4_3_4.md",
-  "radnje_obrade_4_3_4.md",
-  "uslovi_koriscenja_4_3_4.md",
-  "politika_4_3_4.md",
+  "Pravilnik_4_4_1.md",
+  "dokaz_stvarnosti_4_4_1.md",
+  "DPIA_4_4_1.md",
+  "radnje_obrade_4_4_1.md",
+  "uslovi_koriscenja_4_4_1.md",
+  "politika_4_4_1.md",
   "statut_4_1_0.md",
-  "whitepaper_4_3_4.md",
-  "rizici_4_3_4.md",
-  "hijerarhija_4_3_4.md",
-  "donacije_4_3_4.md",
-  "operativni_4_3_4.md",
-  "osnivacki_4_3_4.md",
-  "gornje_kolo_4_3_4.md",
-  "programi_podrske_4_3_4.md",
+  "whitepaper_4_4_1.md",
+  "rizici_4_4_1.md",
+  "hijerarhija_4_4_1.md",
+  "donacije_4_4_1.md",
+  "operativni_4_4_1.md",
+  "osnivacki_4_4_1.md",
+  "gornje_kolo_4_4_1.md",
+  "programi_podrske_4_4_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_3_4.md",
+  "ucesce_dece_4_4_1.md",
+  // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
+  "projekti_nabavke_4_4_1.md",
 ];
 
 /**
@@ -60,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_3_4.md": {
+  "Pravilnik_4_4_1.md": {
     sr: [
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
@@ -77,6 +79,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // u konstantama; ako se u aktu izmene a u kodu ne, ili obrnuto, razilaze se
       // norma i primena — pa se traže doslovno.
       "### Član 40b",
+      // 4.4.1 — poništenje zapisa po ISKORIŠĆENJU (čl. 14a) je nov pravni osnov
+      // gašenja POEN-a, odvojen od čl. 34 i Glave VIII; bez njega kod gasi POEN
+      // pri preuzimanju robe bez ijednog osnova u aktima. Čl. 51a nosi delegaciju
+      // na poseban pravilnik — bez nje sedamnaesti akt visi bez osnova.
+      "### Član 14a",
+      "### Član 51a",
       "ne može preći 5.000 POEN-a po korisniku",
       "najmanje 1.000 POEN-a",
     ],
@@ -87,6 +95,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "There are three exceptions, and they are listed here exhaustively",
       "contribution of children in the children's space",
       "### Article 40b",
+      "### Article 14a",
+      "### Article 51a",
       "may not exceed 5,000 POENs per user",
     ],
     ru: [
@@ -96,25 +106,67 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Исключений три, и здесь они перечислены исчерпывающе",
       "вклад детей в детском пространстве",
       "### Статья 40b",
+      "### Статья 14a",
+      "### Статья 51a",
       "не может превышать 5 000 ПОЕН",
     ],
   },
-  "dokaz_stvarnosti_4_3_4.md": {
+  "dokaz_stvarnosti_4_4_1.md": {
     sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_3_4.md": {
-    sr: ["Radnja obrade br. 14", "Radnja obrade br. 15"],
-    en: ["Processing activity No. 14", "Processing activity No. 15"],
-    ru: ["Операция обработки № 14", "Операция обработки № 15"],
+  "radnje_obrade_4_4_1.md": {
+    sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
+    en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
+    ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
   },
-  "DPIA_4_3_4.md": {
-    sr: ["R15 —", "## 5.10."],
-    en: ["R15 —", "## 5.10."],
-    ru: ["R15 —", "## 5.10."],
+  "DPIA_4_4_1.md": {
+    sr: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
+    en: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
+    ru: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
   },
-  "uslovi_koriscenja_4_3_4.md": {
+  // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
+  // izbor jedne mogućnosti između više njih nije prosta većina i bez ove odredbe kod
+  // sprovodi glasanje koje akt ne poznaje.
+  "gornje_kolo_4_4_1.md": {
+    sr: ["glasa se izborno"],
+    en: ["the vote is selective"],
+    ru: ["голосование является выборным"],
+  },
+  // 4.4.1 — brojevi kolektivne nabavke žive i u kodu kao konstante (koeficijent
+  // trošenja, niz 100/50/20, paritet 1:1, rokovi od tri dana). Traže se doslovno da
+  // se norma i primena ne raziđu, isto kao kapa i prag iz čl. 40b.
+  "projekti_nabavke_4_4_1.md": {
+    sr: [
+      "### Član 27",
+      "tri operativna troška Fondacije za prethodni mesec",
+      "Koeficijent trošenja iznosi 1,00",
+      "iz niza 100, 50 i 20",
+      "u odnosu jedan prema jedan",
+      "najmanje tri ponude",
+      "Rok za prijavu iznosi tri dana",
+      "Rok za odgovor na poziv iznosi tri dana",
+      "Period preuzimanja iznosi tri dana",
+    ],
+    en: [
+      "The spending coefficient is 1.00",
+      "from the sequence 100, 50, and 20",
+      "in a one-to-one ratio",
+      "at least three offers",
+      "The application period is three days",
+      "The collection period is three days",
+    ],
+    ru: [
+      "Коэффициент расходования составляет 1,00",
+      "из ряда 100, 50 и 20",
+      "в соотношении один к одному",
+      "не менее трёх оферт",
+      "Срок подачи заявки составляет три дня",
+      "Период получения составляет три дня",
+    ],
+  },
+  "uslovi_koriscenja_4_4_1.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
     en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
     ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
@@ -132,7 +184,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_3_4.md": {
+  "ucesce_dece_4_4_1.md": {
     sr: [
       "### Član 7a",
       "### Član 15a",
@@ -176,7 +228,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не приносит ПОЕН",
     ],
   },
-  "politika_4_3_4.md": {
+  "politika_4_4_1.md": {
     sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
     en: ["is not consent for processing whose legal basis is consent"],
     ru: ["не является согласием на обработку"],
@@ -185,7 +237,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // potvrda), ne pun indeks od 100%. Kod prag drži u konstanti
   // FUNKCIONALNI_PRAG_INDEKSA i propušta prijavu na 10%; da akt tiho sklizne
   // nazad na pun indeks, norma i primena bi se razišle bez ijednog traga.
-  "programi_podrske_4_3_4.md": {
+  "programi_podrske_4_4_1.md": {
     sr: ["indeksom stvarnosti od najmanje 10%"],
     en: ["reality index of at least 10%"],
     ru: ["индексом реальности не менее 10 %"],
@@ -293,7 +345,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_3_4.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_4_1.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -311,7 +363,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_3_4.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_4_1.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
@@ -329,7 +381,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_3_4.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_4_1.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
