@@ -44,7 +44,6 @@ export default async function NoviOglasPage({
       // Neverifikovani sme samo ponudu — izbor tipa mu je zaključan u formi.
       initialTip={!verifikovan || tip?.toUpperCase() !== "POTRAZNJA" ? "PONUDA" : "POTRAZNJA"}
       verifikovan={verifikovan}
-      preostaloOglasa={verifikovan ? null : MAX_AKTIVNIH_OGLASA - aktivnihOglasa}
     />
   );
 }

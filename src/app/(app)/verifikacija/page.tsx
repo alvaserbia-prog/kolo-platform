@@ -156,6 +156,12 @@ export default async function VerifikacijaPage() {
               <p className="text-sm text-kolo-muted mt-0.5">
                 {t("pijaca_neverifikovan_opis")}
               </p>
+              {/* Kartica je i dalje cela klikabilna (<a> oko svega), pa je poziv na
+                  radnju <span>, ne ugnežden link ili dugme — ugnežden interaktivni
+                  element unutar <a> nije ispravan HTML i lomi navigaciju tastaturom. */}
+              <span className="inline-block mt-3 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium">
+                {t("pijaca_neverifikovan_dugme")}
+              </span>
             </a>
           )}
         </div>
