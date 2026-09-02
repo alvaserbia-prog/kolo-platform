@@ -56,15 +56,12 @@ export default function NoviOglasForma({
   defaultPhone = "",
   initialTip = "PONUDA",
   verifikovan = true,
-  preostaloOglasa = null,
 }: {
   defaultLocation?: string;
   defaultPhone?: string;
   initialTip?: "PONUDA" | "POTRAZNJA";
   /** Neverifikovanom je tip zaključan na ponudu i važi sadržinski minimum. */
   verifikovan?: boolean;
-  /** Koliko još aktivnih oglasa neverifikovani sme (null za verifikovanog). */
-  preostaloOglasa?: number | null;
 }) {
   const t = useTranslations("pijaca");
   const router = useRouter();
@@ -202,9 +199,6 @@ export default function NoviOglasForma({
           <p className="text-sm text-kolo-muted">
             {t("neverif_opis", { iznos: IZNOS.toLocaleString("sr-RS") })}
           </p>
-          {preostaloOglasa !== null && (
-            <p className="text-xs text-kolo-muted">{t("neverif_preostalo", { broj: preostaloOglasa })}</p>
-          )}
         </div>
       )}
 
