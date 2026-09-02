@@ -201,9 +201,11 @@
   },
   "sistem": {
     "dobrodoslice": "Hello, <ime>{pseudonim}</ime>",
-    "nalog_nije_verifikovan_naslov": "Account not confirmed",
-    "nalog_nije_verifikovan_opis": "Confirm your identity and receive {iznos} bonus.",
+    "nalog_nije_verifikovan_naslov": "No one has confirmed you yet",
+    "nalog_nije_verifikovan_opis": "Confirmation unlocks full access and participation in the common good, and the first {iznos} of contribution are recorded in your entry.",
+    "nalog_nije_verifikovan_alternativa": "If you don't know anyone who could confirm you, post your first listing — that is how members from your area get to see you.",
     "verifikuj_dugme": "Become a regular member →",
+    "prvi_oglas_dugme": "Post your first listing →",
     "kartica_clanovi": "Members",
     "kartica_transakcije": "Total exchanges",
     "kartica_opticaj": "Total POEN",
