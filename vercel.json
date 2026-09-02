@@ -1,5 +1,5 @@
 {
-  "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
+  "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then node scripts/raschisti-migracije.mjs && prisma migrate deploy; fi && npm run build",
   "build": {
     "env": {
       "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
