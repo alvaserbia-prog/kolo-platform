@@ -915,11 +915,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -927,23 +927,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.3.4"
+      "ver": "4.4.1"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.3.4",
+      "ver": "4.4.1",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -963,21 +963,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.3.4",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.1",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.3.4",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.4.1",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.3.4",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.4.1",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.3.4",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.4.1",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.3.4",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.3.4",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.1",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.3.4",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.4.1",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1014,6 +1014,10 @@
       "ucesce-dece": {
         "naziv": "Rulebook on the Participation of Children",
         "opis": "Participation of minors: two entry paths (the parent opens the account, or the child registers on their own), three account states, friendships and the 500-POEN contribution, and the move to an adult account."
+      },
+      "projekti-nabavke": {
+        "naziv": "Rulebook on Projects and Collective Procurement",
+        "opis": "Allocation of dinar funds to community projects: the procurement proposal, the register of proposals, selection of the object by vote, the calculation, the order by number of POEN, and annulment of records upon use."
       }
     }
   },

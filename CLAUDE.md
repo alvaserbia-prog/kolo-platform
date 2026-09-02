@@ -69,6 +69,31 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
+**AŽURIRANO 2026-09-02 (dvanaesti put):** ceo set je dignut na **4.4.1** i od sada ima **17 akata** (sr + en/ru/hr/hu). Povod je **kolektivna nabavka** — prvi uređeni oblik trošenja dinarskih sredstava Fondacije u projekte zajednice. Nov, sedamnaesti akt je **`projekti_nabavke_4_4_1.md` — „Pravilnik o projektima i kolektivnim nabavkama"** (36 članova), slug `/pravilnik/projekti-nabavke`. Sadržinski su izmenjeni:
+- **Pravilnik o KOLO sistemu** — nov **čl. 14a** (poništenje zapisa POEN-a po ISKORIŠĆENJU) i nov **čl. 51a** (projekti i kolektivne nabavke + uputna odredba na poseban pravilnik); dopunjen zaključni stav **čl. 14** (ukupan broj POEN-a se sada i UMANJUJE).
+- **Pravilnik o Gornjem Kolu** — **čl. 8** dobio stav o **izbornom glasanju**, **čl. 9** pravilo izjednačenosti pri izboru. To je jedina sadržinska izmena tog akta; nadležnost je već pokrivao čl. 8, a dinarski režim čl. 20.
+- **Uslovi korišćenja** — dopuna **čl. 22** (odredbe o razmeni se NE primenjuju na nabavku) i nov **čl. 22a**.
+- **Politika privatnosti** — nov pododeljak **4.11** i dopunjen rok čuvanja u čl. 10.
+- **Registar radnji obrade** — nova **radnja br. 16**; DPIA prebrojana sa petnaest na šesnaest radnji.
+- **DPIA** — nov rizik **R17** (nizak, 3) i nove mere **5.12**; ukupno sada **sedamnaest** rizika.
+- **Pravilnik o hijerarhiji akata** — nov akt dopisan u čl. 7 st. 2.
+
+🔴 **Najveća pravna novina nije nabavka nego poništenje po iskorišćenju.** Do 4.4.1 se POEN gasio isključivo kao POSLEDICA — prestanak statusa (čl. 34), utvrđena lažna potvrda, poništen prepis, otpis prijateljstva. Sada se prvi put gasi **zato što je iskorišćen**. Zato odredba stoji u glavnom Pravilniku (čl. 14a), a ne u posebnom: poseban pravilnik ne sme sam da uvede nov način gašenja POEN-a. Uz to, nabavka **NE uvodi četvrti izuzetak** od zabrane negativnog zapisa — čl. 14a izričito kaže da zapis ne može u minus, pa čl. 14 st. 3 ostaje na **tri** izuzetka.
+
+🔴 **Zašto poseban akt, a ne dopuna Gornjeg Kola:** hijerarhija čl. 7 st. 4 propisuje baš taj put („drugi pravilnici kada KOLO Pravilnik izričito uputi"), a čl. 7 st. 3 traži razgraničenje **po predmetu** — predmet Gornjeg Kola je ORGAN, a nabavke PROCES.
+
+**Mehanika koju akt propisuje** (kod je NIJE dobio — ovo je za sada samo normativa): predlog za nabavku je **jedna reč iz rečnika, jedan po članu**; registar predloga rangira po **broju različitih korisnika**, ne po POEN-u; Gornje Kolo bira jednu reč izbornim glasanjem (do Faze 2 — UO, po istoj proceduri); iznos = `saldo − 3 × operativni trošak prethodnog meseca`, koeficijent trošenja **k = 1,00**; broj delova N se **ne bira nego izvodi** — najveće iz {100, 50, 20} pri kome deo ≥ 1 cela jedinica; POEN po jedinici = **maloprodajna referenca 1:1** (prosek tri javne cene na dan objave); prijava **3 dana**, otvorena svima bez obzira šta su predložili; red po **broju POEN-a sa snimkom** u trenutku zatvaranja prijava; potvrda = **upis dana preuzimanja**, rok za odgovor **3 dana**; odustanak/istek/nepreuzimanje oslobađaju mesto i poziv ide **sledećem u redu** (nema posebne liste čekanja); period preuzimanja **3 dana**, direktno kod dobavljača uz kod; POEN se gasi **pri preuzimanju**, ne pre; predlozi izabrane reči se posle nabavke **brišu** (inače ista reč pobeđuje zauvek).
+
+🔴 **Dobavljač NE dobija podatke o ličnosti** — samo spisak kodova. To je nosivo za radnju obrade br. 16 i za mere 5.12; ne menjati bez izmene oba akta.
+
+🔴 **Reklamacija je namerno izostavljena** (odluka vlasnika): Fondacija jeste kupac prema dobavljaču (čl. 30 novog akta, čl. 22 Uslova), ali korisnički tok reklamacije ne postoji ni u aktu ni u planu koda.
+
+🟡 **Kriterijumi uključivanja su odbačeni** (npr. „samo svinjari"): prijavljuju se svi, pa se ne prikuplja nijedna izjava o delatnosti ili imovini. Posledica koju treba znati: reč ne filtrira sama sebe, pa robu mogu uzeti i oni kojima ne treba. Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči — ne uvoditi proveru statusa.
+
+**Brojevi su zaključani testom** `pravni-dokumenti.test.ts` (koeficijent 1,00; niz 100/50/20; paritet 1:1; sva tri roka od tri dana; najmanje tri ponude) — isti razlog kao kapa i prag iz čl. 40b: konstante žive i u kodu, pa se norma i primena ne smeju razići.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja na 4.3.0 i 4.2.1 namerno su ostavljena kakva jesu.
+
 **AŽURIRANO 2026-08-18 (jedanaesti put):** ceo set je dignut na **4.3.4** — svih 16 akata (sr + en/ru/hr/hu). Povod je **sopstvena elektronska adresa maloletnog korisnika** i **roditeljsko postavljanje nove lozinke** (vidi sekciju „Povratak u nalog deteta" ispod). Sadržinski su izmenjeni:
 - **Pravilnik o učešću dece** — nov **čl. 7a** (adresa je dobrovoljna, svrha ograničena na ponovni pristup nalogu, upis tek po potvrdi sa same adrese, veza važi 24 sata, uklanjanje u svakom trenutku, zadržava se pri prelasku u punoletni nalog, briše se prestankom svojstva korisnika, adresa roditelja iz čl. 4a se ne dira) i dopuna **čl. 10** (roditelj postavlja novu lozinku, stara se ne traži, dete se obaveštava).
 - **Politika privatnosti 4.7** — nova alineja o adresi deteta, dopunjene kategorije podataka i rok čuvanja.
