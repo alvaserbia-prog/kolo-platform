@@ -1434,6 +1434,15 @@
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "kakoFunkcionisePage": {
+    "sistem_meta_title": "How the system works — channels, POEN and ZRNO",
+    "sistem_meta_desc": "Which channels the Protocol records POEN through, why POEN is not money, how ZRNO is recorded and what the accounting coefficient is.",
+    "sistem_hero_tag": "The deeper layer",
+    "sistem_hero_naslov": "How the system works",
+    "sistem_hero_opis": "You don't need to know any of this to start. This page covers the channels POEN comes from and how ZRNO works.",
+    "dublje_naslov": "Want the mechanics too?",
+    "dublje_opis": "The channels POEN comes from, what POEN is and what it isn't, how ZRNO is recorded and what the accounting coefficient is. None of it is needed to start.",
+    "dublje_link": "How the system works",
+    "nazad_link": "Back to the first steps",
     "meta_title": "How KOLO works, step by step",
     "meta_desc": "How you enter KOLO, how it is confirmed that you are a real person, how POEN comes about and who decides on the rules. A detailed explanation of the whole system.",
     "hero_tag": "Detailed version",

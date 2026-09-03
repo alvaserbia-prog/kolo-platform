@@ -123,17 +123,18 @@ export default async function Home() {
     Promise.resolve(getFaqPoBrojevima([43, 42, 40], locale)),
   ]);
 
-  // Emoji ikone su jezički neutralne — ostaju u kodu, tekst dolazi iz i18n.
+  // Ikone su oznake iz seta u `KomeKartice` (ranije emodži — vidi komentar tamo);
+  // jezički su neutralne i ostaju u kodu, tekst dolazi iz i18n.
   const komeKartice = [
-    { ikona: "🌱", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
-    { ikona: "🔧", naslov: t("kome_2_naslov"), opis: t("kome_2_opis"), poenta: t("kome_2_poenta") },
-    { ikona: "👴👵", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
-    { ikona: "🏠", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
-    { ikona: "👩‍👧", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
-    { ikona: "🌅", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
-    { ikona: "🏘️", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
-    { ikona: "🤝", naslov: t("kome_8_naslov"), opis: t("kome_8_opis"), poenta: t("kome_8_poenta") },
-    { ikona: "💻", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
+    { ikona: "klica", naslov: t("kome_1_naslov"), opis: t("kome_1_opis"), poenta: t("kome_1_poenta") },
+    { ikona: "alat", naslov: t("kome_2_naslov"), opis: t("kome_2_opis"), poenta: t("kome_2_poenta") },
+    { ikona: "vreme", naslov: t("kome_3_naslov"), opis: t("kome_3_opis"), poenta: t("kome_3_poenta") },
+    { ikona: "kuvanje", naslov: t("kome_4_naslov"), opis: t("kome_4_opis"), poenta: t("kome_4_poenta") },
+    { ikona: "porodica", naslov: t("kome_5_naslov"), opis: t("kome_5_opis"), poenta: t("kome_5_poenta") },
+    { ikona: "pocetak", naslov: t("kome_6_naslov"), opis: t("kome_6_opis"), poenta: t("kome_6_poenta") },
+    { ikona: "mesto", naslov: t("kome_7_naslov"), opis: t("kome_7_opis"), poenta: t("kome_7_poenta") },
+    { ikona: "mreza", naslov: t("kome_8_naslov"), opis: t("kome_8_opis"), poenta: t("kome_8_poenta") },
+    { ikona: "kod", naslov: t("kome_9_naslov"), opis: t("kome_9_opis"), poenta: t("kome_9_poenta") },
   ];
 
   const primerKoraci = [

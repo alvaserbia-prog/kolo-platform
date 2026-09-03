@@ -1427,6 +1427,15 @@
     "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek"
   },
   "kakoFunkcionisePage": {
+    "sistem_meta_title": "Hogyan működik a rendszer — csatornák, POEN és ZRNO",
+    "sistem_meta_desc": "Milyen csatornákon írja be a Protokoll a POEN-t, miért nem pénz a POEN, hogyan írható be a ZRNO, és mi az elszámolási együttható.",
+    "sistem_hero_tag": "A mélyebb réteg",
+    "sistem_hero_naslov": "Hogyan működik a rendszer",
+    "sistem_hero_opis": "Ezt nem kell tudnod ahhoz, hogy elkezdd. Itt arról van szó, milyen csatornákon keletkezik a POEN, és hogyan működik a ZRNO.",
+    "dublje_naslov": "A mechanikát is szeretnéd?",
+    "dublje_opis": "A csatornák, amelyeken a POEN keletkezik, mi a POEN és mi nem az, hogyan írható be a ZRNO, és mi az elszámolási együttható. Semmit ebből nem kell tudni a kezdéshez.",
+    "dublje_link": "Hogyan működik a rendszer",
+    "nazad_link": "Vissza az első lépésekhez",
     "meta_title": "Hogyan működik a KOLO, lépésről lépésre",
     "meta_desc": "Hogyan lehet belépni a KOLO-ba, hogyan erősítik meg, hogy valódi személy vagy, hogyan keletkezik a POEN, és ki dönt a szabályokról. A teljes rendszer részletes magyarázata.",
     "hero_tag": "Részletes változat",

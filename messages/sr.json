@@ -1434,6 +1434,15 @@
     "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence"
   },
   "kakoFunkcionisePage": {
+    "sistem_meta_title": "Kako sistem radi — kanali, POEN i ZRNO",
+    "sistem_meta_desc": "Kroz koje kanale Protokol upisuje POEN, zašto POEN nije novac, kako se upisuje ZRNO i šta je obračunski koeficijent.",
+    "sistem_hero_tag": "Dublji sloj",
+    "sistem_hero_naslov": "Kako sistem radi",
+    "sistem_hero_opis": "Ovo ne treba da znaš da bi počeo. Ovde piše kroz koje kanale POEN nastaje i kako radi ZRNO.",
+    "dublje_naslov": "Hoćeš i mehaniku?",
+    "dublje_opis": "Kanali kroz koje POEN nastaje, šta POEN jeste i šta nije, kako se upisuje ZRNO i šta je obračunski koeficijent. Ništa od toga ne treba da znaš da bi počeo.",
+    "dublje_link": "Kako sistem radi",
+    "nazad_link": "Nazad na prve korake",
     "meta_title": "Kako funkcioniše KOLO, korak po korak",
     "meta_desc": "Kako se ulazi u KOLO, kako se potvrđuje da si stvarna osoba, kako nastaje POEN i ko odlučuje o pravilima. Detaljno objašnjenje celog sistema.",
     "hero_tag": "Detaljna verzija",
