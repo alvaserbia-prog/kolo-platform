@@ -283,3 +283,51 @@ rad, materijal, vreme) umesto golog broja koji se čita kao dinar.
   postavljen (vidi se u CSP), ali druge merne tačke nema.
 - `x-robots-tag: noindex` na `*.vercel.app` adresama je Vercel-ov automatski zaglavni red za
   deploy URL-ove — **ne odnosi se na ekolo.rs** i nije greška u `seo.ts`.
+
+---
+
+# Obaveštenje o puštanju Modula Deca u rad (nacrt, 03.09.2026)
+
+Šalje se iz **Admin → Obaveštenja** (samo superadmin). Prvo „proba" na sopstvenu
+adresu, pa „pošalji". Slanje je nastavljivo — ekran sam poziva rutu u petlji dok ne
+prođe kroz sve primaoce, i istom čoveku ne šalje dvaput.
+
+🔴 **Pravni osnov je obavezno polje** i ide u revizijski dnevnik i u podnožje mejla.
+Ovaj kanal ne poštuje opt-out i mejl nema link za odjavu, pa se koristi samo kad
+osnov postoji. Ovde je:
+
+> **Pravilnik o KOLO sistemu čl. 54 st. 1** — Fondacija u Fazi 1 aktivira i
+> deaktivira module; puštanje modula koji uvodi obradu podataka maloletnih lica
+> (Politika privatnosti 4.7) korisnicima se saopštava.
+
+**Naslov:** Dečji nalozi su u radu
+
+**Telo:**
+
+> Od danas deca od sedme godine mogu imati sopstveni nalog u KOLU, u prostoru
+> odvojenom od ostatka sistema.
+>
+> Šta to znači:
+>
+> — Nalog otvaraš iz svog profila. Može i obrnuto: dete se prijavi samo i unese tvoju
+> elektronsku adresu, pa ti nalog preuzmeš.
+> — Dete ne vidi oglase odraslih i ne dopisuje se sa punoletnim licima bez tvog
+> odobrenja. Profil maloletnog naloga odraslim članovima nije otvoren.
+> — Deca se međusobno upoznaju skeniranjem koda uživo, ne pretragom. Za svako
+> sklopljeno prijateljstvo Protokol upisuje po 500 POENA svakom detetu, kada su oba
+> naloga aktivna.
+> — Razgovore između dece roditelj ne čita. Vidiš ko su prijatelji i kada su se
+> upoznali. Razgovor svog deteta sa punoletnim licem čitaš, i sagovorniku to piše.
+> — Dete može da izabere školu koju pohađa, pa se iz tih izbora prave liste škola.
+> Izbor škole ne nosi POEN.
+> — Sve je uređeno Pravilnikom o učešću dece, koji je javno objavljen.
+>
+> Ako ti nalog za dete ne treba, ništa ne moraš da uradiš — na tvoj nalog ovo ne
+> utiče.
+
+**Linkovi u mejlu:** `/pravilnik/ucesce-dece` i `/profil` (odatle se otvara nalog
+detetu).
+
+🟡 **Pre slanja:** domen do sada šalje po nekoliko mejlova dnevno. Ovo je prvo
+masovno slanje — sa 33 naloga nema opasnosti za reputaciju domena, ali kad se broj
+članova uveća, slati postepeno.

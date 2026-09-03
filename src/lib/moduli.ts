@@ -81,13 +81,24 @@ export const POKROVITELJSTVO_AKTIVNO = true;
  * osnivačkog koraka (na svakih 100.000 POEN) i obračunski koeficijent ZRNA — u OBA
  * smera. Paljenje modula zato više nije potez bez traga u brojevima sistema.
  *
- * ─── STANJE: upaljen radi provere na TESTU (14.08.2026) ─────────────────────
+ * ─── STANJE: U RADU na ekolo.rs (odluka vlasnika, 03.09.2026) ───────────────
  *
- * 🔴 MORA nazad na `false` PRE objave na ekolo.rs, dok vlasnik izričito ne kaže da
- * modul ide u rad. Pravna prepreka je otklonjena (akti 4.3.0, DPIA ažuriran), pa je
- * ovo od sada ODLUKA o puštanju u rad, a ne uslov koji čeka da se ispuni. Puštanje
- * je jednosmerno u praksi: čim se upiše prvi dečji nalog, gašenje modula ostavlja
- * decu bez pristupa nalogu, a emitovani POEN u opticaju.
+ * 🟢 Modul je **pušten u rad**. Ranije je ovde stajalo uputstvo da prekidač „MORA
+ * nazad na `false` pre objave na ekolo.rs" — ono više NE važi i namerno je
+ * uklonjeno: zatečena beleška je opisivala privremenu proveru na testu
+ * (14.08.2026), a od tada je prekidač otišao na produkciju i tamo ostao.
+ *
+ * 🔴 **Gašenje više nije čist potez i ne radi se bez odluke vlasnika.** Za razliku
+ * od Kruga, ovaj modul ima korisnike: čim postoji jedan dečji nalog, `false`
+ * ostavlja dete bez pristupa sopstvenom nalogu (stranice 404, rute 410), a POEN
+ * upisan kroz prijateljstva (čl. 14b) ostaje u opticaju bez ijednog ekrana na kome
+ * se vidi. Ako gašenje ikada zatreba, ide istim putem kao gašenje naloga —
+ * protivzapisom Protokola i obaveštenjem roditeljima, ne prekidačem.
+ *
+ * 🟡 Ono što paljenje NE pokriva, jer nije u kodu: puštanje u rad prati obaveštenje
+ * korisnicima (Admin → Obaveštenja, pravni osnov Pravilnik čl. 54 st. 1) i čovek
+ * koji rešava prijave poruka iz dečje Pričaonice (Admin → Prijave). Bez drugog,
+ * red čekanja postoji a niko ga ne gleda.
  */
 export const MODUL_DECA_AKTIVAN = true;
 

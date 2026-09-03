@@ -509,9 +509,22 @@ dobavljaču, ali korisnički tok reklamacije nije ni u aktu ni u kodu.
 
 ### Modul Deca — unapređeni model (2026-08-17)
 
-Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
+🟢 **MODUL JE U RADU na ekolo.rs od 2026-09-03** (odluka vlasnika). Prekidač
+`MODUL_DECA_AKTIVAN` u `src/lib/moduli.ts` je `true` i na `main` i na `production`;
+raniji zapis „stoji iza prekidača" i uputstvo da prekidač mora nazad na `false` pre
+objave **više NE važe** i uklonjeni su iz komentara u kodu.
 
-🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_4.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena i pravnih prepreka za paljenje više nema — od sada je to **odluka o puštanju u rad**, ne uslov koji čeka. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
+🔴 **Gašenje nije više čist potez.** Za razliku od Kruga, modul ima korisnike: `false`
+ostavlja dete bez pristupa sopstvenom nalogu, a POEN upisan kroz prijateljstva ostaje
+u opticaju bez ekrana na kome se vidi. Gašenje bi išlo protivzapisom Protokola i
+obaveštenjem roditeljima, kao gašenje naloga — ne prekidačem.
+
+🟡 **Dve stvari koje paljenje ne pokriva jer nisu u kodu:** obaveštenje korisnicima o
+puštanju u rad (Admin → Obaveštenja, pravni osnov Pravilnik čl. 54 st. 1; tekst u
+`docs/analiza-brendiranje-2026-09.md`) i čovek koji rešava prijave poruka iz dečje
+Pričaonice (Admin → Prijave). Moderaciju je vlasnik preuzeo na sebe.
+
+🟢 **Akt je USVOJEN setom 4.3.0 (2026-08-17): `dokumentacija 4.1/ucesce_dece_4_3_4.md` — „Pravilnik o učešću dece"** (23 člana, sr + en/ru/hr/hu), slug `/pravilnik/ucesce-dece`. Ime je pri usvajanju izmenjeno iz „Pravilnik o Modulu Deca" — uređuje **učešće lica**, a ne modul kao softversku celinu (modul je i dalje Glava VIII Pravilnika o KOLO sistemu). Numeracija članova iz nacrta je zadržana. **DPIA je ažuriran** (radnja 11 aktivna, rizik R16, mere 5.11), pa je obaveza iz čl. 65 ispunjena. Modul je pušten u rad **2026-09-03**. `docs/pravilnik-modul-deca.md` je sveden na **radne beleške** (obrazloženja mehanike, praznine, mapa koda); normativni tekst je iz njega uklonjen da ne bi bila dva izvora istine.
 
 **FAQ pitanje 6 („Mogu li se maloletnici registrovati?") ima dva odgovora i bira ih prekidač:** br. **6** = „ne" (modul ugašen), br. **84** = „da, od sedme godine" (modul radi). `FAQ_SAKRIVENA_PITANJA` sakriva tačno jedan od njih. Tekst se ne prepravlja u jednu rečenicu — u jednom od dva stanja sistema bio bi neistinit.
 
@@ -1033,7 +1046,7 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 ### Moduli sistema (Pravilnik Glava VIII, čl. 53–59)
 - Glava VIII = **Moduli**: kolektivni oblici (**Krug**, **Zadruga** — registrovano pravno lice po Zakonu o zadrugama), socijalni programi, **Modul Deca** (maloletnici, poseban režim < 15, bez ZRNA/glasanja do 18), internacionalizacija.
 - Aktiviranje/deaktiviranje: Fondacija u Fazi 1, Gornje Kolo u Fazi 2 (čl. 54).
-- 🔴 Zadruga nije implementirana (odluka vlasnika: moduli nisu fokus). **Modul Deca JESTE implementiran** i stoji iza prekidača `MODUL_DECA_AKTIVAN`, uz usvojen Pravilnik o učešću dece (4.3.0) — vidi sekciju „Modul Deca — unapređeni model". Krug postoji; `KrugProjekat` je samo aktivnost Kruga (PRIKUPLJANJE/REDISTRIBUCIJA).
+- 🔴 Zadruga nije implementirana (odluka vlasnika: moduli nisu fokus). **Modul Deca JESTE implementiran i U RADU** od 2026-09-03 (`MODUL_DECA_AKTIVAN = true`), uz usvojen Pravilnik o učešću dece (4.3.0) — vidi sekciju „Modul Deca — unapređeni model". Krug postoji; `KrugProjekat` je samo aktivnost Kruga (PRIKUPLJANJE/REDISTRIBUCIJA).
 
 ## Konvencije koda
 - POEN/ZRNO iznosi: `INTEGER` u bazi, nikad float/decimal.
@@ -1321,7 +1334,7 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 7. ✅ **REŠENO — Dual `Role` / `TipKorisnika`.** Legacy `Role` enum uklonjen (Faza C: C1 admin→`POCETNI`, C2 članstvo→`KrugClanstvo`, C3 drop kolone/enuma). Jedinstveni model je `TipKorisnika`. **Operativno:** na produkciji obavezno `npx prisma migrate deploy` (backfill prebacuje postojeće admine na POCETNI).
 
 ### Mehanizmi delegirani posebnim pravilnicima / nisu fokus
-8. **Modul Zadruga (čl. 56)** — nije implementiran (odluka vlasnika). Krug postoji. **Modul Deca (čl. 58) JESTE implementiran** iza prekidača; **Pravilnik o učešću dece je usvojen setom 4.3.0** i DPIA je ažuriran, pa je paljenje od sada odluka o puštanju u rad.
+8. **Modul Zadruga (čl. 56)** — nije implementiran (odluka vlasnika). Krug postoji. **Modul Deca (čl. 58) JESTE implementiran i pušten u rad 2026-09-03**; Pravilnik o učešću dece je usvojen setom 4.3.0, DPIA ažuriran.
 9. **Raspoređivanje dinarskih sredstava (čl. 51)** — višak iznad troškova u programe; Faza 2 preporuke Gornjeg Kola UO. Postoji `FondacijaTrosak`; automatizacija raspodele nije.
 10. **Unutrašnje odlučivanje Kruga / ovlašćena lica (čl. 55)** — poseban pravilnik o krugovima; `KrugClanstvo.isAdmin` postoji bez formalnog ograničenja broja.
 11. **Rešavanje sporova (čl. 79)** — sud (obligaciono pravo); interni mehanizmi opcioni. Postoji samo `PrigovorNaOdluku`.
