@@ -521,9 +521,11 @@ function FazaSekcija({ opticaj }: { opticaj: number }) {
         <h2 className="text-xl md:text-2xl font-bold text-kolo-green-900 mt-1 mb-3" style={{ letterSpacing: "-0.02em" }}>
           {t("status_naslov")}
         </h2>
-        <p className="text-kolo-muted leading-relaxed text-body" style={{ lineHeight: "1.7" }}>
-          {t("status_opis")}
-        </p>
+        {/* Rečenica „Prva je iza nas, u drugoj smo sada" (`oNama.status_opis`) je
+            uklonjena 2026-09-03: otkako su koraci grupisani u Fazu 1 i Fazu 2,
+            ona govori o KORACIMA, a čita se kao da govori o fazama — a mi smo u
+            drugom koraku, dakle i dalje u Fazi 1. Na `/o-nama` rečenica ostaje:
+            tamo grupisanja nema, pa nema ni dvosmislenosti. */}
 
         {/* Timeline */}
         <div className="relative mt-8">
