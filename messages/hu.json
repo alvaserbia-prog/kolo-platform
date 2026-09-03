@@ -229,6 +229,8 @@
     "faza_sistema_opis": "Amikor a közösség 1.000.000 POEN hozzájárulást rögzít, a rendszer automatikusan a 2. szakaszba lép, és aktiválódik a Felső Kör (közös döntéshozatal) és a ZRNO bejegyzése.",
     "faza_1": "1. szakasz",
     "faza_2": "2. szakasz",
+    "faza_grupa_1_opis": "az Alapítvány dönt",
+    "faza_grupa_2_opis": "a Felső Kör dönt",
     "gornje_kolo_aktivno": "A Felső Kolo aktív",
     "do_gornjeg_kola": "{pct}% a Felső Kolóig",
     "kartica_opticaj_opis": "A rendszerben jelenleg lévő POEN teljes mennyisége. Azt mutatja, mennyire aktív a közösség.",
