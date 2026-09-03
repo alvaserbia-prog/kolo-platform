@@ -37,13 +37,36 @@ export async function POST(
     return await greska("Nemate glasačku moć (potrebno aktivno ZRNO).", 403);
 
   const body = await req.json();
+
+  // Izborno glasanje (Gornje Kolo čl. 8 st. 4): glas ide JEDNOJ mogućnosti, a `za`
+  // ostaje null. Za/protiv listić i izborni listić su različiti govorni činovi i ne
+  // smeju da se pomešaju — zato se oblik glasa izvodi iz VRSTE predloga, ne iz toga
+  // šta je klijent poslao.
+  if (predlog.vrsta === "IZBOR_NABAVKE") {
+    const izbor = typeof body.izbor === "string" ? body.izbor : "";
+    if (!izbor) return await greska("Izaberite jednu mogućnost sa liste.", 400);
+
+    const postoji = await prisma.predlogNabavke.findFirst({
+      where: { nazivId: izbor },
+      select: { id: true },
+    });
+    if (!postoji) return await greska("Ta mogućnost nije u registru predloga.", 400);
+
+    await prisma.glasanjeGlas.upsert({
+      where: { predlogId_userId: { predlogId: id, userId: session.user.id } },
+      create: { predlogId: id, userId: session.user.id, za: null, izbor, glasackaGlasova: glasovi },
+      update: { za: null, izbor, glasackaGlasova: glasovi },
+    });
+    return NextResponse.json({ ok: true, glasackaGlasova: glasovi, izbor });
+  }
+
   const za = body.za === true;
 
   // Upsert — dozvoljavamo izmenu glasa dok glasanje traje (čl. 11)
   await prisma.glasanjeGlas.upsert({
     where: { predlogId_userId: { predlogId: id, userId: session.user.id } },
-    create: { predlogId: id, userId: session.user.id, za, glasackaGlasova: glasovi },
-    update: { za, glasackaGlasova: glasovi },
+    create: { predlogId: id, userId: session.user.id, za, izbor: null, glasackaGlasova: glasovi },
+    update: { za, izbor: null, glasackaGlasova: glasovi },
   });
 
   return NextResponse.json({ ok: true, glasackaGlasova: glasovi });

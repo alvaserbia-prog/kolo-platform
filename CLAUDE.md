@@ -428,6 +428,85 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 - **Kod:** `src/lib/razmena-prijava.ts` (ČISTE funkcije — bez Prisme, jer ih uvozi i admin tab u pretraživaču) + `src/lib/protokol/prijava-razmene.ts` (servisne, re-eksportuje pravila). Rute: `POST /api/transakcije/[id]/prijavi`, `GET /api/admin/prijave-razmene`, `POST .../[id]/{ponisti,odbaci}`. Migracija `20260815120000_prijava_razmene`. Testovi `__tests__/protokol/prijava-razmene.test.ts`. Audit: `PREPIS_PONISTEN`, `PRIJAVA_RAZMENE_ODBACENA`. Badge: tab Razmene + sidebar `adminCekanje`.
 - 🔴 **Akti ovo NE poznaju, a od pune naplate u minus razmimoilaženje je veće.** Uslovi čl. 22 kažu da Fondacija nije strana u razmeni; nijedan akt joj ne daje ovlašćenje da obori prepis, a čl. 14 st. 3 poznaje **samo jedan** izuzetak od zabrane negativnog zapisa (nadoknadu iz čl. 20b) — kod ih sada ima dva. **Pre puštanja u ozbiljan rad ovome treba odredba**: postupak po prijavi u Uslovima i drugi izuzetak u Pravilniku uz čl. 14/16 (uz upućivanje na režim nadoknade iz čl. 20b, jer se minus tako i ponaša). Do tada je to faktička praksa Fondacije, ne pravo prijavioca ni obaveza Fondacije.
 
+### Kolektivna nabavka — implementacija (2026-09-02)
+
+Mehanizam iz **Pravilnika o projektima i kolektivnim nabavkama** (set 4.4.1) je od
+sada u kodu. Nema prekidača — nabavka ne postoji dok je Fondacija ne otvori, pa je
+prazno stanje ujedno i isključeno stanje.
+
+**Tok:** predlog (jedna reč iz rečnika, jedan po članu) → registar po broju
+različitih članova → izbor predmeta (Gornje Kolo izborno, UO do Faze 2) → najmanje
+tri ponude → objava kalkulacije → prijave 3 dana → red po broju POEN-a **sa
+snimkom** → poziv, potvrda upisom dana preuzimanja, rok 3 dana → preuzimanje kod
+dobavljača uz kod, period 3 dana → **poništenje POEN-a po iskorišćenju**.
+
+🔴 **Kalkulacija se SNIMA na `Nabavka` pri objavi.** Po čl. 20 st. 2 se posle objave
+ne menja; bez snimka bi se prikazani iznosi menjali sa saldom Fondacije i sa tržišnom
+cenom, pa bi čovek koji se prijavljuje video druge brojeve nego onaj koji je odlučivao.
+
+🔴 **Red je SNIMAK (`poenSnimak`, `mesto`), ne živa vrednost.** Rolanje poziva traje
+danima, a ljudi u međuvremenu troše POEN — pri živom rangiranju red bi se premeštao
+pod nogama onima koji čekaju poziv, i ishod ne bi bio proverljiv.
+
+🔴 **POEN se REZERVIŠE pri potvrdi, a GASI tek pri preuzimanju** (čl. 23, 27).
+Ko nije došao ne sme ništa da izgubi. Protivzapis ide tipom **`OTPIS_NABAVKA`** —
+nikad `TRANSFER` ni `PONISTENJE_PREPISA`: ovde se poništava EMISIJA, pa Protokolov
+minus opada i sa njim opticaj, dok prepis samo seli POEN između dva korisnička zapisa.
+
+🔴 **Zapis NE SME u minus** (čl. 28). Kolektivna nabavka **ne uvodi peti izuzetak**
+od zabrane negativnog zapisa — `oznaciPreuzeto` odbija preuzimanje ako stanje u
+međuvremenu padne ispod rezervisanog, umesto da napravi minus.
+
+🔴 **Projektni odliv ide u `ProjekatTrosak`, NIKAD u `FondacijaTrosak`.**
+`dohvatiTrosakPrethodnogMeseca()` sabira sve redove `FondacijaTrosak`, a prag za
+gašenje zaštitnog veta je `trosak × 3` — nabavka od 200.000 RSD podigla bi prag za
+600.000 RSD, pa bi se veto najteže gasio baš u mesecima kada Fondacija najviše radi.
+`dohvatiSaldoFondacije()` sada oduzima i projektni odliv (nova polja `operativniOdliv`
+i `projektniOdliv`), ali prag i dalje meri SAMO operativu.
+
+🔴 **Predlozi izabrane reči se brišu po sprovedenoj nabavci** (`zavrsiNabavku` →
+`brisiPredlogeNaziva`). Bez toga ista reč pobeđuje zauvek i registar prestaje da meri
+išta. Ko i dalje hoće to dobro, upiše ga ponovo — i to je svež signal.
+
+**Izborno glasanje** (Gornje Kolo čl. 8 st. 4): nova vrsta predloga
+**`IZBOR_NABAVKE`**, `GlasanjeGlas.za` postaje **nullable** uz nov `izbor`.
+🔴 U `zatvoriIstekleIObjaviIshod` se buckets biraju **izričito** (`=== true` /
+`=== false`) — sa ranijim `filter((g) => !g.za)` svaki izborni glas (kome je `za`
+null) tiho bi pao u „protiv" i oborio glasanje u kome protiv uopšte ne postoji.
+`IZBOR_NABAVKE` nikad ne ide u izvršenje po čl. 17 (dinarsko pitanje), i **stvara ga
+isključivo server** — opšta ruta za predloge ga ne prima.
+
+🔴 **Dva nova crona, oba obavezna:**
+- `/api/cron/glasanje-zatvaranje` (00:30) — do sada se `zatvoriIstekleIObjaviIshod`
+  zvao ISKLJUČIVO lenjo, iz tri ekrana; ako niko ne otvori nijedan, predlog ostaje
+  `ACTIVE` i izvršenje ne može da počne. Kod odluke o novcu to blokira ceo postupak.
+- `/api/cron/nabavke` (05:00) — rolanje poziva je jedina stvar u mehanizmu koju ne
+  pokreće ničiji klik: bez njega poziv istekne a mesto se ne oslobodi. Redosled u
+  `obradiNabavke` je bitan — nepreuzeto (3) mora pre zatvaranja nabavke (5).
+
+**Kod:** `src/lib/nabavka-pravila.ts` (ČISTE funkcije — formula iznosa, izvođenje N
+iz {100,50,20}, paritet, red, rokovi, izborni ishod; uvozi ih i pretraživač) +
+`src/lib/protokol/nabavka.ts` (servisne, re-eksportuje pravila). Modeli `NazivDobra`,
+`PredlogNabavke`, `Nabavka`, `NabavkaPonuda`, `NabavkaPrijava`, `ProjekatTrosak`.
+Migracije `20260902130000_nabavka_enumi` (samo nove enum vrednosti, ZASEBAN fajl) →
+`20260902130100_nabavke`. Ekrani `/nabavke`, `/nabavke/[id]`, admin tab **Nabavke**,
+stavka u sidebaru, red **„Rezervisano za nabavku"** u Novčaniku (prikazuje se samo
+kad rezervacija postoji). Testovi `__tests__/nabavka-pravila.test.ts` (46 provera) i
+`__tests__/integracija/nabavka-tok.test.ts` (traži bazu). Audit: `NABAVKA_OTVORENA`,
+`NABAVKA_PONUDA_DODATA/OBRISANA`, `NABAVKA_OBJAVLJENA`, `NABAVKA_RED_UTVRDJEN`,
+`NABAVKA_PLACENA`, `NABAVKA_PREUZETO`, `NABAVKA_OBUSTAVLJENA`, `NABAVKA_IZBOR_*`.
+
+🟡 **Kriterijumi uključivanja ne postoje** — prijavljuje se svaki punoletni korisnik
+sa aktivnim nalogom, bez obzira šta je predložio. Reč zato ne filtrira sama sebe.
+Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči —
+ne uvoditi proveru statusa (to bi vratilo prikupljanje podataka o delatnosti).
+
+🟡 **Maloletni nalozi su isključeni IZRIČITO** (`smeUcestvovati`), ne posredno preko
+indeksa: dete sme da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju.
+
+🟡 **Reklamacija ne postoji** (odluka vlasnika) — Fondacija jeste kupac prema
+dobavljaču, ali korisnički tok reklamacije nije ni u aktu ni u kodu.
+
 ### Modul Deca — unapređeni model (2026-08-17)
 
 Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.

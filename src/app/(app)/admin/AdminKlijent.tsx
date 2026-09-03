@@ -23,6 +23,7 @@ const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false })
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 const PrviOglasiTab = dynamic(() => import("./PrviOglasiTab"), { ssr: false });
 const RazmeneTab = dynamic(() => import("./RazmeneTab"), { ssr: false });
+const NabavkeTab = dynamic(() => import("./NabavkeTab"), { ssr: false });
 const PrijaveTab = dynamic(() => import("./PrijaveTab"), { ssr: false });
 const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
 
@@ -310,6 +311,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["prvi-oglasi", `${t("tab_prvi_oglasi")}${prvihOglasaNaCekanju > 0 ? ` (${prvihOglasaNaCekanju})` : ""}`],
     ["razmene", `${t("tab_razmene")}${otvorenihPrijavaRazmene > 0 ? ` (${otvorenihPrijavaRazmene})` : ""}`],
     ["prijave", `${t("tab_prijave")}${otvorenihPrijavaPoruka > 0 ? ` (${otvorenihPrijavaPoruka})` : ""}`],
+    ["nabavke", t("tab_nabavke")],
     ["emisija", t("tab_emisija")],
     ["osnivaci", t("tab_osnivaci")],
     ...(viewerJeSuperadmin
@@ -411,6 +413,9 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Razmene — prijave neispunjene razmene; odlučuje se o prepisu POEN-a. */}
       {tab === "razmene" && <RazmeneTab onDone={() => router.refresh()} />}
+
+      {/* Nabavke — sprovođenje kolektivne nabavke (Pravilnik čl. 51a). */}
+      {tab === "nabavke" && <NabavkeTab onDone={() => router.refresh()} />}
 
       {/* Prijave — prijavljene poruke iz Pričaonice, grupisane po prijavljenom nalogu. */}
       {tab === "prijave" && <PrijaveTab onDone={() => router.refresh()} />}

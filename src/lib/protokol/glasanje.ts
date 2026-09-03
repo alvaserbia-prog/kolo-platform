@@ -130,8 +130,19 @@ export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promis
     Math.min(g.glasackaGlasova, glasackaMoc(aktivnoMap.get(g.userId) ?? 0));
 
   for (const p of istekli) {
-    const zaZbir = p.glasovi.filter((g) => g.za).reduce((s, g) => s + trenutnaMoc(g), 0);
-    const protivZbir = p.glasovi.filter((g) => !g.za).reduce((s, g) => s + trenutnaMoc(g), 0);
+    // 🔴 `za` je od izbornog glasanja OPCIONO: izborni glas nosi `izbor`, a `za` mu je
+    // null. Zato se buckets biraju IZRIČITO (`=== true` / `=== false`) — sa ranijim
+    // `filter((g) => !g.za)` svaki izborni glas bi tiho pao u „protiv" i oborio ishod
+    // glasanja u kome protiv uopšte ne postoji.
+    const izborno = p.vrsta === "IZBOR_NABAVKE";
+    const zaZbir = izborno
+      ? // Pri izbornom glasanju nema „protiv": zbir je ukupna data moć, a koja je
+        // mogućnost pobedila utvrđuje `utvrdiIzborNabavke` iz samih glasova.
+        p.glasovi.reduce((s, g) => s + trenutnaMoc(g), 0)
+      : p.glasovi.filter((g) => g.za === true).reduce((s, g) => s + trenutnaMoc(g), 0);
+    const protivZbir = izborno
+      ? 0
+      : p.glasovi.filter((g) => g.za === false).reduce((s, g) => s + trenutnaMoc(g), 0);
     const usvojen = utvrdiIshod(zaZbir, protivZbir); // izjednačeno = neusvojeno (čl. 9)
     await prisma.glasanjePredlog.update({
       where: { id: p.id },
@@ -142,6 +153,8 @@ export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promis
         ishodUsvojen: usvojen,
         // Usvojena ODLUKA je obavezujuća → izvršenje Fondacije (čl. 17).
         // Usvojena DINARSKA_PREPORUKA nije obavezujuća → čeka obrazložen odgovor UO (čl. 20).
+        // IZBOR_NABAVKE je po predmetu dinarsko pitanje (čl. 51a Pravilnika), pa i on
+        // ostaje van izvršenja — vrsta se izvodi iz predmeta, ne iz izbora predlagača.
         izvrsenjeStatus: usvojen && p.vrsta === "ODLUKA" ? "ZA_IZVRSENJE" : null,
       },
     });

@@ -56,6 +56,16 @@ function NavIkona({ href, mali }: { href: string; mali?: boolean }) {
       return <svg {...p}><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v15" /><path d="M4 4.5v15A2.5 2.5 0 0 0 6.5 22H20" /><path d="M20 18H6.5a2.5 2.5 0 0 0 0 4" /><path d="M9 7h7" /><path d="M9 11h7" /></svg>;
     case "/pijaca":
       return <svg {...p}><path d="m2 7 2-4h16l2 4" /><path d="M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7" /><path d="M2 7h20" /><path d="M9 21v-6h6v6" /></svg>;
+    // Kolektivna nabavka — kamion, ne korpa ni paket: korpa/tezga je Pijaca
+    // (razmena između članova), a paket je ikonica grupe „Zajedničko dobro".
+    // Nabavka je dovoz na veliko od dobavljača, pa je vozilo jedini oblik koji
+    // se ne meša ni sa jednim od ta dva.
+    case "/nabavke":
+      return <svg {...p}><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><path d="M15 18H9" /><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><circle cx="7" cy="18" r="2" /><circle cx="17" cy="18" r="2" /></svg>;
+    // Škola — zgrada sa zastavicom, ne diplomska kapa: kapa čita kao fakultet,
+    // a pregled po školama obuhvata osnovne i srednje.
+    case "/skole":
+      return <svg {...p}><path d="m4 6 7.11-3.55a2 2 0 0 1 1.78 0L20 6" /><path d="M6 5v17" /><path d="M18 5v17" /><path d="m18 10 3.45 1.72a1 1 0 0 1 .55.9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7.38a1 1 0 0 1 .55-.9L6 10" /><circle cx="12" cy="9" r="2" /><path d="M14 22v-4a2 2 0 1 0-4 0v4" /></svg>;
     case "/verifikacija":
       return <svg {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>;
     case "/zrno":
@@ -209,6 +219,11 @@ function SidebarContent({
     { href: "/programi", label: t("programi") },
     ...(jeNadzornik ? [{ href: "/nadzor", label: t("nadzor") }] : []),
     { href: "/zrno", label: t("zrno") },
+    // Nabavke stoje uz Sistem i Doprinos jer su isti red stvari: šta zajednica
+    // radi sa zajedničkim sredstvima. Registar predloga radi i pre ijedne nabavke —
+    // on je mapa rupa u zajednici (Pravilnik o projektima i kolektivnim nabavkama
+    // čl. 10), pa stavka ulazi odmah, a ne tek kad prva nabavka postoji.
+    { href: "/nabavke", label: t("nabavke") },
     // Škole su pregled zajednice, ne lični alat — otud u padajućoj grupi, a ne u
     // gornjoj. Punoletnom članu su izvor vesti („selo prvo u Srbiji"), ne zadatak.
     ...(MODUL_DECA_AKTIVAN ? [{ href: "/skole", label: t("skole") }] : []),

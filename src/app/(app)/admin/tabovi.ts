@@ -8,9 +8,13 @@
 // moderacija (to je „pijaca"): oglas ostaje, odlučuje se samo o 1.000 POEN.
 // „razmene" = prijave da razmena povodom prepisa POEN-a nije ispunjena. Ni to
 // nije moderacija: odlučuje se o zapisu POEN-a, ne o sadržaju oglasa.
+// „nabavke" = sprovođenje kolektivne nabavke: ponude, kalkulacija, red, plaćanje i
+// potvrda preuzimanja. Nije moderacija („pijaca"), nije prigovor („prigovori") i
+// nije odluka o prepisu POEN-a („razmene") — ovde se troše dinarska sredstva i gasi
+// POEN po iskorišćenju (Pravilnik čl. 14a i 51a).
 // „prijave" = prijavljene poruke iz Pričaonice, grupisane po prijavljenom nalogu.
 // Zaseban tab od „pijaca" (oglasi) jer je drugi sadržaj i drugi red čekanja; do
 // sada prijava poruke nije imala ekran koji je zatvara, pa je status zauvek ostajao
 // OTVORENA.
-export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "razmene", "prijave", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
+export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "razmene", "prijave", "nabavke", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
 export type Tab = (typeof ADMIN_TABOVI)[number];

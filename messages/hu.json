@@ -19,7 +19,8 @@
     "grupa_zajednicko_dobro": "Közjó",
     "faq": "Gyakori kérdések",
     "prijatelji": "Barátok",
-    "skole": "Iskolák"
+    "skole": "Iskolák",
+    "nabavke": "Beszerzések"
   },
   "header": {
     "moj_profil": "Profilom",
@@ -363,7 +364,9 @@
     "prijavi_greska": "A bejelentést nem sikerült elküldeni.",
     "ceka_roditelja": "A fiók arra vár, hogy egy szülő átvegye. Addig a POEN átírható a bejegyzésedbe; a másoknak való átírás akkor nyílik meg, amikor a szülő átveszi a fiókot.",
     "nadoknada_naslov_dete": "Tartozol",
-    "nadoknada_opis_dete": "Ez akkor íródott le, amikor egy barátság véget ért. Az első POEN, ami érkezik, feltölti. Minden más a szokásos módon működik."
+    "nadoknada_opis_dete": "Ez akkor íródott le, amikor egy barátság véget ért. Az első POEN, ami érkezik, feltölti. Minden más a szokásos módon működik.",
+    "rezervisano_nabavka": "Beszerzésre foglalva",
+    "rezervisano_nabavka_opis": "Az áru átvételéig foglalva. Az átvételkor kerül érvénytelenítésre, nem korábban; ha nem veszed át, visszakerül a bejegyzésedbe."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -2435,7 +2438,8 @@
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
     "tab_razmene": "Razmene",
     "tab_prijave": "Prijave",
-    "emisija_tbl_nivo1": "minden 5.000 alatti adomány"
+    "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
+    "tab_nabavke": "Nabavke"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2581,7 +2585,11 @@
     "roditeljstvo_upisano_naslov": "Szülőként vagy bejegyezve",
     "roditeljstvo_upisano_tekst": "A(z) {pseudonim} fiók gyerekfiók lett, és téged jegyeztek be a szülőjeként.",
     "potvrda_pala_minus_naslov": "Megszűnt egy megerősítés, a bejegyzésed mínuszban van",
-    "potvrda_pala_minus_tekst": "A(z) {pseudonim} fiók gyerekfiókká vált, így megszűnt az a megerősítés, amelyért POEN-t jegyeztek be neked. A bejegyzésed most {iznos} POEN-nel mínuszban van — a beérkező POEN először ezt tölti fel."
+    "potvrda_pala_minus_tekst": "A(z) {pseudonim} fiók gyerekfiókká vált, így megszűnt az a megerősítés, amelyért POEN-t jegyeztek be neked. A bejegyzésed most {iznos} POEN-nel mínuszban van — a beérkező POEN először ezt tölti fel.",
+    "nabavka_poziv_naslov": "Bekerültél a beszerzésbe",
+    "nabavka_poziv_tekst": "„{dobro}” beszerzés — a részed {poen} POEN-be kerül. Erősítsd meg az átvételi nap kiválasztásával.",
+    "nabavka_preuzeto_naslov": "A rész átvéve",
+    "nabavka_preuzeto_tekst": "Átvetted a részedet a „{dobro}” beszerzésből. {poen} POEN érvénytelenítésre került."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -2600,7 +2608,8 @@
     "prijateljstvo_punoletstvo": "Nagykorúság – a(z) {pseudonim} barátság lezárult",
     "prijateljstvo_punoletstvo_zbirno": "{broj} barátságból származó POEN leírása (nagykorúság)",
     "prevod_u_maloletni_otpis": "A csatornákon bejegyzett POEN visszavonása (a fiók gyerekfiókká vált)",
-    "prevod_u_maloletni_potvrda": "Megszűnt megerősítésből származó POEN visszavonása ({pseudonim} gyerekfiókká vált)"
+    "prevod_u_maloletni_potvrda": "Megszűnt megerősítésből származó POEN visszavonása ({pseudonim} gyerekfiókká vált)",
+    "nabavka": "Kollektív beszerzés — {dobro}"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",
@@ -3288,5 +3297,78 @@
     "cemu_sluzi": "Ha elfelejted a jelszavad, erre a címre küldünk hivatkozást az újhoz. Értesítéseket nem küldünk.",
     "na_pocetnu": "Vissza a főoldalra",
     "greska": "A hivatkozás érvénytelen vagy lejárt. Add meg a címet újra a profilodban."
+  },
+  "nabavke": {
+    "naslov": "Közös beszerzések",
+    "uvod": "A közös beszerzésekkel olyan árukat biztosítunk, amelyeket tagjaink nem állítanak elő.",
+    "predlog_naslov": "A te javaslatod",
+    "predlog_opis": "Javasold, mi legyen a következő közös beszerzés tárgya.",
+    "ukloni": "Eltávolítás",
+    "polje_placeholder": "Pl. műtrágya, üzemanyag, cement…",
+    "upisi": "„{naziv}” beírása",
+    "zameni": "Csere erre: „{naziv}”",
+    "upisano": "A javaslat rögzítve.",
+    "greska_upis": "A javaslat nem került rögzítésre.",
+    "greska_opsta": "A művelet nem sikerült.",
+    "ucitavanje": "Betöltés…",
+    "nabavke_naslov": "Folyamatban lévő beszerzések",
+    "zavrsene_naslov": "Korábbi beszerzések",
+    "status_NACRT": "Előkészítés alatt",
+    "status_OBJAVLJENA": "A jelentkezés nyitva",
+    "status_RED_UTVRDJEN": "A sorrend megállapítva",
+    "status_PLACENA": "Az átvétel folyamatban",
+    "status_ZAVRSENA": "Lezárva",
+    "status_OBUSTAVLJENA": "Felfüggesztve",
+    "kartica_deo": "Rész: {velicina} × {jedinica} — {poen} POEN",
+    "moja_PRIJAVLJEN": "Jelentkeztél.",
+    "moja_POZVAN": "Meghívást kaptál — erősítsd meg az átvétel napját.",
+    "moja_POTVRDIO": "Megerősítve — van átvételi kódod.",
+    "moja_PREUZEO": "Átvetted a részedet.",
+    "moja_ODUSTAO": "Visszaléptél.",
+    "moja_ISTEKAO": "A válaszadási határidő lejárt — a hely a sorrendben következőé lett.",
+    "moja_NIJE_PREUZEO": "A részt nem vetted át a megadott napon. A POEN felszabadult.",
+    "registar_naslov": "Javaslatok nyilvántartása",
+    "registar_prazan": "A nyilvántartás üres. Írd be az első javaslatot.",
+    "broj_clanova": "{broj} tag",
+    "pravni_osnov": "Szabályzat a projektekről és a kollektív beszerzésekről, 9–32. cikk.",
+    "nazad": "Beszerzések",
+    "nije_nadjena": "A beszerzés nem található.",
+    "obustavljena": "A beszerzés felfüggesztésre került: {razlog}",
+    "prijava_opis": "A jelentkezés {rok}-ig nyitva. A jelentkezés nem érinti a bejegyzésedet — a kötelezettség csak az átvételi nap megerősítésekor keletkezik.",
+    "prijavi_se": "Jelentkezem",
+    "prijave_zatvorene": "E beszerzésre a jelentkezés lezárult.",
+    "cekas_mesto": "Jelentkeztél — {mesto}. a sorrendben. A meghívás akkor érkezik, amikor rád kerül a sor.",
+    "cekas_red": "Jelentkeztél. A sorrend a jelentkezés lezárásakor kerül megállapításra.",
+    "odustani": "Visszalépek",
+    "pozvan": "Bekerültél — {mesto}. hely. A részed {poen} POEN-be kerül.",
+    "pozvan_uputstvo": "Válaszd ki a napot, amikor jössz az áruért. A POEN csak ekkor kerül foglalásra.",
+    "potvrdi": "Átvételi nap megerősítése",
+    "potvrdjeno": "Megerősítve: {dan}, {mesto}.",
+    "kod_uputstvo": "Mutasd fel ezt a kódot a szállítónál. A POEN az átvételkor kerül érvénytelenítésre, nem korábban.",
+    "rezervisano": "Foglalva: {poen} POEN",
+    "preuzeto": "Átvetted a részedet. {poen} POEN érvénytelenítésre került.",
+    "kalkulacija": "Kalkuláció",
+    "k_saldo": "Az Alapítvány egyenlege",
+    "k_rezerva": "Működési tartalék",
+    "k_iznos": "A beszerzés összege",
+    "k_dobavljac": "Szállító",
+    "k_nabavna": "Beszerzési ár",
+    "k_maloprodajna": "Kiskereskedelmi referenciaár",
+    "k_jedinica": "Egységek száma",
+    "k_delova": "Részek száma",
+    "k_deo": "Egy tagra jutó rész",
+    "k_poen_po_delu": "POEN részenként",
+    "k_ukupno_poena": "Összesen érvénytelenítendő POEN",
+    "k_odnos": "Érvénytelenítési arány (POEN dináronként)",
+    "k_placeno": "A szállítónak kifizetve",
+    "k_mesto": "Az átvétel helye",
+    "k_period": "Átvételi időszak",
+    "k_izvori": "A kiskereskedelmi árak forrásai: {izvori}",
+    "paritet_napomena": "Az egységenkénti POEN megegyezik a kiskereskedelmi referenciaárral, egy az egyhez. A POEN nem cserélődik árura és nem jut el a szállítóhoz — az árut dinárral vásárolták, a POEN pedig a felhasznált részvétel bejegyzéseként kerül érvénytelenítésre.",
+    "ponude": "Begyűjtött ajánlatok",
+    "ponude_opis": "Mind közzétételre kerül, a ki nem választottak is.",
+    "preuzeli": "Átvették",
+    "preuzeli_napomena": "Az álnév és a sorrendbeli hely látszik. A bejegyzésben szereplő POEN-szám nem kerül közzétételre.",
+    "broj_prijava": "Jelentkezők: {broj}"
   }
 }

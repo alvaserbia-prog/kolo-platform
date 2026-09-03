@@ -41,6 +41,8 @@ interface Props {
   prefillOpis?: string;
   /** Doprinos sadržaju koji čeka okidač (0 = nema). Nikad se ne sabira sa stanjem. */
   zabelezenDoprinos?: number;
+  /** Rezervisano za kolektivnu nabavku. Nula = reda nema (odluka vlasnika). */
+  rezervisanoNabavka?: number;
   /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
   smeDaSalje?: boolean;
   /**
@@ -51,7 +53,7 @@ interface Props {
   razlogZabrane?: "neverifikovan" | "ceka_roditelja";
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, rezervisanoNabavka = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -133,6 +135,22 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
               </p>
             </div>
             <p className="text-sm text-kolo-muted mt-1">{t("zabelezen_opis")}</p>
+          </div>
+        )}
+
+        {/* Rezervisano za kolektivnu nabavku (Pravilnik o projektima i kolektivnim
+            nabavkama čl. 23 st. 2). Zaseban red, NIKAD sabran sa stanjem — isti
+            razlog kao zabeležen doprinos. Red se prikazuje samo kad rezervacija
+            postoji; do preuzimanja POEN nije poništen (čl. 27 st. 3). */}
+        {rezervisanoNabavka > 0 && (
+          <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-sm font-semibold text-kolo-text">{t("rezervisano_nabavka")}</p>
+              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
+                {rezervisanoNabavka.toLocaleString(intlTag(locale))} {tc("poen")}
+              </p>
+            </div>
+            <p className="text-sm text-kolo-muted mt-1">{t("rezervisano_nabavka_opis")}</p>
           </div>
         )}
 
