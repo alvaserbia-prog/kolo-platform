@@ -216,7 +216,6 @@ export default function NabavkeKlijent() {
       {/* ── Registar predloga (čl. 10) ────────────────────────────────────── */}
       <section className="rounded-2xl border border-kolo-border bg-white p-5 shadow-sm">
         <h2 className="text-lg font-semibold">{t("registar_naslov")}</h2>
-        <p className="mt-1 text-sm text-kolo-muted">{t("registar_opis")}</p>
 
         {ucitava ? (
           <p className="mt-3 text-sm text-kolo-muted">{t("ucitavanje")}</p>
