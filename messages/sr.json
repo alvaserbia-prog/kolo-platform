@@ -236,8 +236,6 @@
     "faza_sistema_opis": "Kada zajednica evidentira 1.000.000 POENA doprinosa, sistem automatski prelazi u Fazu 2 i aktiviraju se Gornje Kolo (zajedničko odlučivanje) i upis ZRNA.",
     "faza_1": "Faza 1",
     "faza_2": "Faza 2",
-    "faza_grupa_1_opis": "odlučuje Fondacija",
-    "faza_grupa_2_opis": "odlučuje Gornje Kolo",
     "gornje_kolo_aktivno": "Gornje Kolo aktivno",
     "do_gornjeg_kola": "{pct}% do Gornjeg Kola",
     "kartica_opticaj_opis": "Ukupan broj POENA koji trenutno postoji u sistemu. Pokazuje koliko je zajednica aktivna.",

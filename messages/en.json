@@ -236,8 +236,6 @@
     "faza_sistema_opis": "When the community records 1,000,000 POEN of contribution, the system automatically moves to Phase 2 and the Upper Circle (shared decision-making) and the recording of ZRNO are activated.",
     "faza_1": "Phase 1",
     "faza_2": "Phase 2",
-    "faza_grupa_1_opis": "the Foundation decides",
-    "faza_grupa_2_opis": "the Upper Circle decides",
     "gornje_kolo_aktivno": "Upper Circle active",
     "do_gornjeg_kola": "{pct}% to Upper Circle",
     "kartica_opticaj_opis": "The total number of POEN currently in the system. Shows how active the community is.",
