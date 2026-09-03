@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { izracunajLevak, pocetakNedelje, type LevakUlaz } from "@/lib/levak";
+import { izracunajLevak, pocetakMeseca, pocetakNedelje, type LevakUlaz } from "@/lib/levak";
 
 const DAN = 24 * 60 * 60 * 1000;
 
@@ -16,6 +16,12 @@ function korak(grupa: ReturnType<typeof izracunajLevak>[number], naziv: string) 
   return grupa.koraci.find((k) => k.korak === naziv)!;
 }
 
+function grupa(grupe: ReturnType<typeof izracunajLevak>, oznaka: string) {
+  const g = grupe.find((x) => x.oznaka === oznaka);
+  if (!g) throw new Error(`nema grupe „${oznaka}“ (ima: ${grupe.map((x) => x.oznaka).join(", ")})`);
+  return g;
+}
+
 describe("pocetakNedelje", () => {
   it("vraća ponedeljak te nedelje", () => {
     // 2026-08-06 je četvrtak → ponedeljak je 2026-08-03
@@ -30,11 +36,18 @@ describe("pocetakNedelje", () => {
   });
 });
 
+describe("pocetakMeseca", () => {
+  it("vraća mesec (UTC) datog datuma", () => {
+    expect(pocetakMeseca(new Date("2026-08-31T23:00:00Z"))).toBe("2026-08");
+    expect(pocetakMeseca(new Date("2026-09-01T00:00:00Z"))).toBe("2026-09");
+  });
+});
+
 describe("izracunajLevak", () => {
-  it("bez korisnika vraća samo zbirni red sa nulama", () => {
+  it("bez korisnika vraća zbirni red i pomerajuće prozore, sve na nuli", () => {
     const g = izracunajLevak(prazanUlaz([]));
-    expect(g).toHaveLength(1);
-    expect(g[0].oznaka).toBe("ukupno");
+    // ukupno + poslednjih 7 dana + poslednjih 30 dana; pojedinačnih perioda nema
+    expect(g.map((x) => x.oznaka)).toEqual(["ukupno", "nedelja", "mesec"]);
     expect(korak(g[0], "registrovani").broj).toBe(0);
     // Prolaz se ne računa kad je prethodni korak nula — ne deli se nulom.
     expect(korak(g[0], "objavili_oglas").prolaz).toBeNull();
@@ -50,9 +63,11 @@ describe("izracunajLevak", () => {
       prviOglas: new Map([["a", new Date("2026-08-05T09:00:00Z")]]),
     };
     const g = izracunajLevak(ulaz);
-    const nedelja = g.find((x) => x.oznaka === "2026-07-06")!;
+    const nedelja = grupa(g, "n:2026-07-06");
     expect(korak(nedelja, "objavili_oglas").broj).toBe(1);
     expect(korak(nedelja, "objavili_oglas").prolaz).toBe(100);
+    // isti čovek u mesecu registracije, iako je oglas objavio u avgustu
+    expect(korak(grupa(g, "m:2026-07"), "objavili_oglas").broj).toBe(1);
   });
 
   it("prolaz je udeo u odnosu na prethodni korak", () => {
@@ -114,10 +129,11 @@ describe("izracunajLevak", () => {
       createdAt: new Date(new Date("2026-08-03T00:00:00Z").getTime() - i * 7 * DAN),
       verifiedAt: null,
     }));
-    const g = izracunajLevak(prazanUlaz(korisnici), 2);
-    expect(g).toHaveLength(3); // 2 nedelje + ukupno
-    expect(g[g.length - 1].oznaka).toBe("ukupno");
-    expect(korak(g[g.length - 1], "registrovani").broj).toBe(5);
+    const g = izracunajLevak(prazanUlaz(korisnici), { brojNedelja: 2, brojMeseci: 1 });
+    expect(g.filter((x) => x.oznaka.startsWith("n:"))).toHaveLength(2);
+    expect(g.filter((x) => x.oznaka.startsWith("m:"))).toHaveLength(1);
+    expect(g[0].oznaka).toBe("ukupno");
+    expect(korak(g[0], "registrovani").broj).toBe(5);
   });
 
   it("nedelje su poređane od najnovije ka starijoj", () => {
@@ -126,7 +142,52 @@ describe("izracunajLevak", () => {
       { id: "novi", createdAt: new Date("2026-08-03T00:00:00Z"), verifiedAt: null },
     ];
     const g = izracunajLevak(prazanUlaz(korisnici));
-    expect(g[0].oznaka).toBe("2026-08-03");
-    expect(g[1].oznaka).toBe("2026-07-06");
+    expect(g.filter((x) => x.oznaka.startsWith("n:")).map((x) => x.oznaka)).toEqual([
+      "n:2026-08-03",
+      "n:2026-07-06",
+    ]);
+    expect(g.filter((x) => x.oznaka.startsWith("m:")).map((x) => x.oznaka)).toEqual([
+      "m:2026-08",
+      "m:2026-07",
+    ]);
+  });
+
+  it("pomerajući prozori mere 7 i 30 dana od `sada`, ne kalendarski period", () => {
+    const sada = new Date("2026-09-03T12:00:00Z");
+    const korisnici = [
+      { id: "danas", createdAt: new Date("2026-09-03T09:00:00Z"), verifiedAt: null },
+      { id: "pre5dana", createdAt: new Date("2026-08-29T09:00:00Z"), verifiedAt: null },
+      { id: "pre20dana", createdAt: new Date("2026-08-14T09:00:00Z"), verifiedAt: null },
+      { id: "pre60dana", createdAt: new Date("2026-07-05T09:00:00Z"), verifiedAt: null },
+    ];
+    const g = izracunajLevak(prazanUlaz(korisnici), { sada });
+    expect(korak(grupa(g, "nedelja"), "registrovani").broj).toBe(2);
+    expect(korak(grupa(g, "mesec"), "registrovani").broj).toBe(3);
+    expect(korak(grupa(g, "ukupno"), "registrovani").broj).toBe(4);
+  });
+
+  it("prozor od 7 dana nije isto što red poslednje kalendarske nedelje", () => {
+    // ponedeljak 2026-08-31 u 10h: prozor hvata i prošlu nedelju, red „n:“ ne
+    const sada = new Date("2026-08-31T10:00:00Z");
+    const korisnici = [
+      { id: "ponedeljak", createdAt: new Date("2026-08-31T09:00:00Z"), verifiedAt: null },
+      { id: "petak", createdAt: new Date("2026-08-28T09:00:00Z"), verifiedAt: null },
+    ];
+    const g = izracunajLevak(prazanUlaz(korisnici), { sada });
+    expect(korak(grupa(g, "nedelja"), "registrovani").broj).toBe(2);
+    expect(korak(grupa(g, "n:2026-08-31"), "registrovani").broj).toBe(1);
+    expect(korak(grupa(g, "n:2026-08-24"), "registrovani").broj).toBe(1);
+  });
+
+  it("meseci se grupišu po mesecu registracije, nezavisno od nedelja", () => {
+    const korisnici = [
+      // ista nedelja (2026-08-31 – 2026-09-06), a dva različita meseca
+      { id: "avgust", createdAt: new Date("2026-08-31T09:00:00Z"), verifiedAt: null },
+      { id: "septembar", createdAt: new Date("2026-09-01T09:00:00Z"), verifiedAt: null },
+    ];
+    const g = izracunajLevak(prazanUlaz(korisnici));
+    expect(korak(grupa(g, "n:2026-08-31"), "registrovani").broj).toBe(2);
+    expect(korak(grupa(g, "m:2026-08"), "registrovani").broj).toBe(1);
+    expect(korak(grupa(g, "m:2026-09"), "registrovani").broj).toBe(1);
   });
 });

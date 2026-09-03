@@ -11,6 +11,11 @@ import { izracunajLevak, type LevakUlaz } from "@/lib/levak";
  * Samo superadmin, kao i dnevnik aktivnosti iz kog se dva koraka izvode.
  * Vraća isključivo AGREGATE (brojeve), nijedan pseudonim ni id.
  *
+ * Vraća sve periode (ukupno, poslednjih 7 i 30 dana, pojedinačne nedelje i
+ * mesece) u jednom pozivu — skup podataka je mali (korisnici + oglasi), pa je
+ * jedan upit po izabranom periodu bio čist gubitak: prikaz bira red iz onoga
+ * što već ima, bez ijednog novog zahteva.
+ *
  * Dva koraka („otvorili poverenje", „otvorili formu za oglas") čitaju se iz
  * `AktivnostLog`, koji postoji tek od uvođenja dnevnika i čuva 12 meseci —
  * zato se vraća i `aktivnostOd`, pa prikaz može da označi kohorte starije od
@@ -72,7 +77,9 @@ export async function GET() {
   };
 
   return NextResponse.json({
-    grupe: izracunajLevak(ulaz),
+    // `sada` se prosleđuje izričito, da pomerajući prozori (poslednjih 7 i 30
+    // dana) mere od jednog trenutka za sve grupe u istom odgovoru.
+    grupe: izracunajLevak(ulaz, { sada: new Date() }),
     aktivnostOd: najstarijaAktivnost?.createdAt.toISOString() ?? null,
   });
 }

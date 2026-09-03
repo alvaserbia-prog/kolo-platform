@@ -1,11 +1,16 @@
 /**
  * Levak — gde ljudi otpadaju na putu od registracije do objavljenog oglasa.
  *
- * Grupisanje je po NEDELJI REGISTRACIJE (kohorta), a koraci se broje kao
- * „da li je taj čovek to IKAD uradio", ne „da li je uradio te nedelje".
- * Zato brojevi u redu nedelje mogu da rastu i kasnije: neko ko se registrovao
- * u julu a oglas postavio u avgustu i dalje se broji u julskoj kohorti. To je
- * i poenta — pratimo sudbinu ljudi, ne nedeljni promet.
+ * Grupisanje je po PERIODU REGISTRACIJE (kohorta): pomerajući prozor poslednjih
+ * 7 i 30 dana, pojedinačne nedelje i pojedinačni meseci, uz zbirno „ukupno".
+ * Koraci se broje kao „da li je taj čovek to IKAD uradio", ne „da li je uradio
+ * u tom periodu". Zato brojevi u redu jedne nedelje mogu da rastu i kasnije:
+ * neko ko se registrovao u julu a oglas postavio u avgustu i dalje se broji u
+ * julskoj kohorti. To je i poenta — pratimo sudbinu ljudi, ne nedeljni promet.
+ *
+ * Iz istog razloga se redovi jednog perioda NE sabiraju u red dužeg: mesec nije
+ * zbir svojih nedelja po koracima jer isti čovek u obe kohorte ne ulazi, ali
+ * njegov korak može da padne u drugi period od registracije.
  *
  * Sve funkcije ovde su čiste (bez baze), da bi se mogle testirati.
  */
@@ -53,7 +58,13 @@ export interface LevakKorak {
 }
 
 export interface LevakGrupa {
-  /** ISO datum ponedeljka kohorte, ili "ukupno" za zbirni red. */
+  /**
+   * Ključ perioda:
+   *  - `ukupno` — svi korisnici,
+   *  - `nedelja` / `mesec` — POMERAJUĆI prozor od 7, odnosno 30 dana do sada,
+   *  - `n:YYYY-MM-DD` — pojedinačna nedelja registracije (ponedeljak, UTC),
+   *  - `m:YYYY-MM` — pojedinačan mesec registracije (UTC).
+   */
   oznaka: string;
   koraci: LevakKorak[];
   /** Prosečan broj dana od registracije do verifikacije (samo verifikovani). */
@@ -71,6 +82,11 @@ export function pocetakNedelje(d: Date): string {
   const pomak = (u.getUTCDay() + 6) % 7;
   u.setUTCDate(u.getUTCDate() - pomak);
   return u.toISOString().slice(0, 10);
+}
+
+/** Mesec (UTC) u kome je dati datum, kao "YYYY-MM". */
+export function pocetakMeseca(d: Date): string {
+  return d.toISOString().slice(0, 7);
 }
 
 function prosek(vrednosti: number[]): number | null {
@@ -132,32 +148,67 @@ function vremenaZa(korisnici: KorisnikRed[], ulaz: LevakUlaz) {
   };
 }
 
+function grupa(oznaka: string, ljudi: KorisnikRed[], ulaz: LevakUlaz): LevakGrupa {
+  return { oznaka, koraci: koraciZa(ljudi, ulaz), ...vremenaZa(ljudi, ulaz) };
+}
+
+export interface LevakOpcije {
+  /** Koliko pojedinačnih nedelja registracije se vraća (najnovije prve). */
+  brojNedelja?: number;
+  /** Koliko pojedinačnih meseci registracije se vraća (najnoviji prvi). */
+  brojMeseci?: number;
+  /** Trenutak od kog se mere pomerajući prozori. Ubacuje se radi testova. */
+  sada?: Date;
+}
+
 /**
- * Levak po nedeljama registracije (najnovija prva) + zbirni red „ukupno".
- * `brojNedelja` ograničava koliko se nedelja vraća; „ukupno" uvek obuhvata SVE
- * korisnike, i one starije od tog preseka.
+ * Levak po periodima registracije.
+ *
+ * Redosled je onaj u kome se periodi i prikazuju:
+ * `ukupno`, pomerajuća `nedelja` i `mesec`, pa pojedinačne nedelje (najnovija
+ * prva) i pojedinačni meseci (najnoviji prvi).
+ *
+ * 🔴 Pomerajući prozori NISU isto što poslednja kalendarska nedelja/mesec:
+ * `nedelja` obuhvata registracije u poslednjih 7 dana, a `n:` red nedelju
+ * koja počinje u ponedeljak. U ponedeljak ujutru se ta dva broja najviše
+ * razilaze i to nije greška — jedan odgovara na „kako ide ovih dana", drugi
+ * na „kakva je bila ta nedelja".
+ *
+ * `brojNedelja`/`brojMeseci` ograničavaju samo koliko se pojedinačnih perioda
+ * vraća; `ukupno` uvek obuhvata SVE korisnike, i one starije od tog preseka.
  */
-export function izracunajLevak(ulaz: LevakUlaz, brojNedelja = 12): LevakGrupa[] {
+export function izracunajLevak(ulaz: LevakUlaz, opcije: LevakOpcije = {}): LevakGrupa[] {
+  const { brojNedelja = 12, brojMeseci = 12, sada = new Date() } = opcije;
+
   const poNedelji = new Map<string, KorisnikRed[]>();
-  for (const k of ulaz.korisnici) {
-    const kljuc = pocetakNedelje(k.createdAt);
-    const niz = poNedelji.get(kljuc);
+  const poMesecu = new Map<string, KorisnikRed[]>();
+  const dodaj = (mapa: Map<string, KorisnikRed[]>, kljuc: string, k: KorisnikRed) => {
+    const niz = mapa.get(kljuc);
     if (niz) niz.push(k);
-    else poNedelji.set(kljuc, [k]);
+    else mapa.set(kljuc, [k]);
+  };
+
+  const granicaNedelje = sada.getTime() - 7 * DAN_MS;
+  const granicaMeseca = sada.getTime() - 30 * DAN_MS;
+  const poslednjaNedelja: KorisnikRed[] = [];
+  const poslednjiMesec: KorisnikRed[] = [];
+
+  for (const k of ulaz.korisnici) {
+    dodaj(poNedelji, pocetakNedelje(k.createdAt), k);
+    dodaj(poMesecu, pocetakMeseca(k.createdAt), k);
+    const t = k.createdAt.getTime();
+    if (t >= granicaNedelje) poslednjaNedelja.push(k);
+    if (t >= granicaMeseca) poslednjiMesec.push(k);
   }
 
   const nedelje = [...poNedelji.keys()].sort().reverse().slice(0, brojNedelja);
+  const meseci = [...poMesecu.keys()].sort().reverse().slice(0, brojMeseci);
 
-  const grupe: LevakGrupa[] = nedelje.map((oznaka) => {
-    const ljudi = poNedelji.get(oznaka)!;
-    return { oznaka, koraci: koraciZa(ljudi, ulaz), ...vremenaZa(ljudi, ulaz) };
-  });
-
-  grupe.push({
-    oznaka: "ukupno",
-    koraci: koraciZa(ulaz.korisnici, ulaz),
-    ...vremenaZa(ulaz.korisnici, ulaz),
-  });
-
-  return grupe;
+  return [
+    grupa("ukupno", ulaz.korisnici, ulaz),
+    grupa("nedelja", poslednjaNedelja, ulaz),
+    grupa("mesec", poslednjiMesec, ulaz),
+    ...nedelje.map((o) => grupa(`n:${o}`, poNedelji.get(o)!, ulaz)),
+    ...meseci.map((o) => grupa(`m:${o}`, poMesecu.get(o)!, ulaz)),
+  ];
 }
