@@ -3299,8 +3299,8 @@
     "greska": "A hivatkozás érvénytelen vagy lejárt. Add meg a címet újra a profilodban."
   },
   "nabavke": {
-    "naslov": "Beszerzések",
-    "uvod": "A közös beszerzésekkel olyan árukat biztosítunk a közösség tagjainak, amelyeket tagjaink nem állítanak elő.",
+    "naslov": "Közös beszerzések",
+    "uvod": "A közös beszerzésekkel olyan árukat biztosítunk, amelyeket tagjaink nem állítanak elő.",
     "predlog_naslov": "A te javaslatod",
     "predlog_opis": "Javasold, mi legyen a következő közös beszerzés tárgya.",
     "ukloni": "Eltávolítás",

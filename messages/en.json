@@ -3299,8 +3299,8 @@
     "greska": "The link is not valid or has expired. Enter the address again in your profile."
   },
   "nabavke": {
-    "naslov": "Procurement",
-    "uvod": "Through collective procurement we provide members of the community with goods our members do not produce.",
+    "naslov": "Collective procurement",
+    "uvod": "Through collective procurement we provide goods our members do not produce.",
     "predlog_naslov": "Your proposal",
     "predlog_opis": "Suggest what the next collective procurement should be.",
     "ukloni": "Remove",
