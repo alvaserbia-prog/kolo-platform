@@ -362,7 +362,6 @@ export default function SistemKlijent({
       {sekcija === "pregled" && (
         <PregledSekcija
           verified={verified}
-          opticaj={opticaj}
           danasEmitovano={danasEmitovano}
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
@@ -389,7 +388,7 @@ export default function SistemKlijent({
           verified={verified}
         />
       )}
-      {sekcija === "faza" && <FazaSekcija />}
+      {sekcija === "faza" && <FazaSekcija opticaj={opticaj} />}
       {sekcija === "fondacija" && <FondacijaSekcija />}
     </div>
   );
@@ -478,17 +477,41 @@ function FondacijaSekcija() {
 
 // ── Faza (preslikano sa /o-nama) ──────────────────────────────────────────────
 
-function FazaSekcija() {
+/**
+ * Faza sistema — sedam koraka razvoja, grupisanih u DVE faze iz Pravilnika.
+ *
+ * Dva reda pojmova su se do sada mešala: „faza" u ovom spisku znači korak
+ * razvoja (Pripremna, Testiranje, Kritična masa…), a „Faza 1 / Faza 2" u
+ * Pravilniku znači ko odlučuje — Fondacija, odnosno Gornje Kolo. Zato su
+ * koraci sada podeljeni: prva tri su Faza 1, poslednja četiri Faza 2. Granica
+ * pada tačno tamo gde treba i po sadržaju: četvrti korak („Potpuno aktivan
+ * sistem") je onaj u kome odlučivanje ide kroz Gornje Kolo.
+ *
+ * Uz korake stoji i traka napretka do praga od 1.000.000 POENA, koja je do
+ * 2026-09-03 stajala uz spisak zapisa Protokola. Prag JESTE prelaz iz Faze 1
+ * u Fazu 2, pa mu je mesto ovde.
+ */
+function FazaSekcija({ opticaj }: { opticaj: number }) {
+  const locale = useLocale();
   const t = useTranslations("oNama");
+  const ts = useTranslations("sistem");
+  const tc = useTranslations("common");
+  const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
+  const uFazi2 = opticaj >= CILJ_OPTICAJ;
 
   const faze = [
-    { r1: t("faza1"), r2: t("faza1b"), opis: t("faza1_opis"), aktivan: false },
-    { r1: t("faza2"), r2: t("faza2b"), opis: t("faza2_opis"), aktivan: true },
-    { r1: t("faza3"), r2: t("faza3b"), opis: t("faza3_opis"), aktivan: false },
-    { r1: t("faza4"), r2: t("faza4b"), opis: t("faza4_opis"), aktivan: false },
-    { r1: t("faza5"), r2: t("faza5b"), opis: t("faza5_opis"), aktivan: false },
-    { r1: t("faza6"), r2: t("faza6b"), opis: t("faza6_opis"), aktivan: false },
-    { r1: t("faza7"), r2: t("faza7b"), opis: t("faza7_opis"), aktivan: false },
+    { r1: t("faza1"), r2: t("faza1b"), opis: t("faza1_opis"), aktivan: false, grupa: 1 },
+    { r1: t("faza2"), r2: t("faza2b"), opis: t("faza2_opis"), aktivan: true, grupa: 1 },
+    { r1: t("faza3"), r2: t("faza3b"), opis: t("faza3_opis"), aktivan: false, grupa: 1 },
+    { r1: t("faza4"), r2: t("faza4b"), opis: t("faza4_opis"), aktivan: false, grupa: 2 },
+    { r1: t("faza5"), r2: t("faza5b"), opis: t("faza5_opis"), aktivan: false, grupa: 2 },
+    { r1: t("faza6"), r2: t("faza6b"), opis: t("faza6_opis"), aktivan: false, grupa: 2 },
+    { r1: t("faza7"), r2: t("faza7b"), opis: t("faza7_opis"), aktivan: false, grupa: 2 },
+  ];
+
+  const grupe = [
+    { broj: 1, naslov: ts("faza_1"), opis: ts("faza_grupa_1_opis"), span: "col-span-3" },
+    { broj: 2, naslov: ts("faza_2"), opis: ts("faza_grupa_2_opis"), span: "col-span-4" },
   ];
 
   return (
@@ -504,54 +527,126 @@ function FazaSekcija() {
 
         {/* Timeline */}
         <div className="relative mt-8">
-          {/* Mobilni — vertikalni redosled */}
-          <div className="md:hidden relative">
-            <div
-              className="absolute w-0.5 bg-kolo-border"
-              style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
-            />
-            <div className="flex flex-col gap-3">
-              {faze.map((faza) => (
-                <div key={faza.r1 + faza.r2} className="relative flex items-start gap-3">
-                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 mt-1 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
-                  <div className="min-w-0">
-                    <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
-                      {faza.r1} {faza.r2}
-                      {faza.aktivan && (
-                        <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
-                      )}
-                    </p>
-                    <p className="text-xs text-kolo-muted leading-relaxed mt-0.5">{faza.opis}</p>
+          {/* Mobilni — vertikalni redosled, jedan blok po fazi */}
+          <div className="md:hidden space-y-5">
+            {grupe.map((grupa) => (
+              <div key={grupa.broj}>
+                <div
+                  className={`rounded-xl px-3 py-2 mb-3 ${
+                    uFazi2 === (grupa.broj === 2)
+                      ? "bg-kolo-green-100 text-kolo-green-700"
+                      : "bg-kolo-bg text-kolo-muted"
+                  }`}
+                >
+                  <p className="text-xs font-bold tracking-wide">{grupa.naslov}</p>
+                  <p className="text-[11px] leading-tight opacity-80">{grupa.opis}</p>
+                </div>
+                <div className="relative">
+                  <div
+                    className="absolute w-0.5 bg-kolo-border"
+                    style={{ top: "0.5rem", bottom: "0.5rem", left: "6px" }}
+                  />
+                  <div className="flex flex-col gap-3">
+                    {faze.filter((f) => f.grupa === grupa.broj).map((faza) => (
+                      <div key={faza.r1 + faza.r2} className="relative flex items-start gap-3">
+                        <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 shrink-0 mt-1 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                        <div className="min-w-0">
+                          <p className={`text-sm leading-tight ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                            {faza.r1} {faza.r2}
+                            {faza.aktivan && (
+                              <span className="ml-2 text-[11px] font-bold text-kolo-green-700">{t("faza_tu_smo_mobilni")}</span>
+                            )}
+                          </p>
+                          <p className="text-xs text-kolo-muted leading-relaxed mt-0.5">{faza.opis}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
           {/* Desktop — horizontalni redosled */}
-          <div className="hidden md:block relative pt-5">
-            <div
-              className="absolute h-0.5 bg-kolo-border"
-              style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
-            />
-            <div className="relative grid grid-cols-7">
-              {faze.map((faza) => (
-                <div key={faza.r1 + faza.r2} className="group relative flex flex-col items-center gap-1.5 px-1 cursor-help">
-                  {faza.aktivan && (
-                    <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
-                      {t("faza_tu_smo_desktop")}
-                    </span>
-                  )}
-                  <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
-                  <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
-                    {faza.r1}<br />{faza.r2}
-                  </p>
-                  <span className="pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block w-48 z-50 rounded-xl bg-kolo-text text-white text-xs leading-relaxed font-normal text-left p-3 shadow-xl">
-                    {faza.opis}
-                  </span>
+          <div className="hidden md:block relative">
+            {/* Zaglavlje grupa — ista mreža od sedam kolona, pa se granica
+                između 3. i 4. koraka poklapa sa granicom između faza. */}
+            <div className="grid grid-cols-7 mb-4">
+              {grupe.map((grupa) => (
+                <div
+                  key={grupa.broj}
+                  className={`${grupa.span} mx-1 rounded-xl px-3 py-2 text-center ${
+                    uFazi2 === (grupa.broj === 2)
+                      ? "bg-kolo-green-100 text-kolo-green-700"
+                      : "bg-kolo-bg text-kolo-muted"
+                  }`}
+                >
+                  <p className="text-xs font-bold tracking-wide">{grupa.naslov}</p>
+                  <p className="text-[11px] leading-tight opacity-80">{grupa.opis}</p>
                 </div>
               ))}
             </div>
+            {/* pt-5 drži prostor za oznaku „tu smo" iznad prvog kruga; linija ide
+                kroz sredinu krugova, pa se meri od vrha OVOG omotača, ne od
+                zaglavlja grupa iznad njega. */}
+            <div className="relative pt-5">
+              <div
+                className="absolute h-0.5 bg-kolo-border"
+                style={{ top: "calc(1.25rem + 6px)", left: "7.14%", right: "7.14%" }}
+              />
+              <div className="relative grid grid-cols-7">
+                {faze.map((faza) => (
+                  <div key={faza.r1 + faza.r2} className="group relative flex flex-col items-center gap-1.5 px-1 cursor-help">
+                    {faza.aktivan && (
+                      <span className="absolute -top-5 text-[10px] font-bold text-kolo-green-700 whitespace-nowrap">
+                        {t("faza_tu_smo_desktop")}
+                      </span>
+                    )}
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 relative z-10 ${faza.aktivan ? "bg-kolo-green-700 border-kolo-green-700" : "bg-white border-kolo-border"}`} />
+                    <p className={`text-[11px] leading-tight text-center ${faza.aktivan ? "text-kolo-green-700 font-semibold" : "text-kolo-muted"}`}>
+                      {faza.r1}<br />{faza.r2}
+                    </p>
+                    <span className="pointer-events-none absolute top-full mt-2 left-1/2 -translate-x-1/2 hidden group-hover:block w-48 z-50 rounded-xl bg-kolo-text text-white text-xs leading-relaxed font-normal text-left p-3 shadow-xl">
+                      {faza.opis}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Napredak do Faze 2 — prag iz Pravilnika (1.000.000 evidentiranih
+            POENA) je granica između dve grupe koraka iznad, pa traka stoji
+            odmah ispod njih. */}
+        <div className="mt-8 pt-5 border-t border-kolo-border">
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-sm font-semibold text-kolo-text">
+              <Pojam
+                termin={ts("rast_opticaja")}
+                objasnjenje={ts("rast_opticaja_objasnjenje")}
+              />
+            </p>
+            <p className="text-xs text-kolo-muted">
+              {ts("rast_opticaja_cilj", { cilj: CILJ_OPTICAJ.toLocaleString(intlTag(locale)) })}
+            </p>
+          </div>
+          <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
+            <div
+              className="h-full bg-kolo-green-500 rounded-full transition-all"
+              style={{ width: `${opticajPct}%` }}
+            />
+          </div>
+          <div className="flex justify-between text-xs text-kolo-muted">
+            <span>
+              {ts("rast_opticaja_trenutno")}{" "}
+              <strong className="text-kolo-text">
+                {opticaj.toLocaleString(intlTag(locale))} {tc("poen")}
+              </strong>
+            </span>
+            <span className="font-medium text-kolo-green-700">
+              {opticajPct.toFixed(1)}%
+            </span>
           </div>
         </div>
       </div>
@@ -650,14 +745,12 @@ function Ucesnik({
 
 function PregledSekcija({
   verified,
-  opticaj,
   danasEmitovano,
   danasLimit,
   emisijeChart,
   protokolTx,
 }: {
   verified: boolean;
-  opticaj: number;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
@@ -667,43 +760,13 @@ function PregledSekcija({
   const t = useTranslations("sistem");
   const tc = useTranslations("common");
   const maxEmitted = Math.max(...emisijeChart.map((e) => e.emitted), 1);
-  const opticajPct = Math.min((opticaj / CILJ_OPTICAJ) * 100, 100);
 
   return (
     <div className="space-y-5">
-      {/* Progress bar do 1M */}
-      <div className="bg-white rounded-2xl border border-kolo-border p-5">
-        <div className="flex justify-between items-center mb-3">
-          <p className="text-sm font-semibold text-kolo-text">
-            <Pojam
-              termin={t("rast_opticaja")}
-              objasnjenje={t("rast_opticaja_objasnjenje")}
-            />
-          </p>
-          <p className="text-xs text-kolo-muted">
-            {t("rast_opticaja_cilj", { cilj: CILJ_OPTICAJ.toLocaleString(intlTag(locale)) })}
-          </p>
-        </div>
-        <div className="w-full h-3 bg-kolo-bg rounded-full overflow-hidden mb-2">
-          <div
-            className="h-full bg-kolo-green-500 rounded-full transition-all"
-            style={{ width: `${opticajPct}%` }}
-          />
-        </div>
-        <div className="flex justify-between text-xs text-kolo-muted">
-          <span>
-            {t("rast_opticaja_trenutno")}{" "}
-            <strong className="text-kolo-text">
-              {opticaj.toLocaleString(intlTag(locale))} {tc("poen")}
-            </strong>
-          </span>
-          <span className="font-medium text-kolo-green-700">
-            {opticajPct.toFixed(1)}%
-          </span>
-        </div>
-      </div>
-
-      {/* Transakcije Protokola */}
+      {/* Traka „Napredak do Faze 2" preseljena je u sekciju Faza sistema (2026-09-03):
+          prag od 1.000.000 POENA je granica između Faze 1 i Faze 2, pa stoji tamo
+          gde su faze i nabrojane, a ne uz spisak zapisa Protokola. */}
+      {/* Zapisi Protokola */}
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center">
           <p className="text-sm font-semibold text-kolo-text">{t("protokol_tx_naslov")}</p>
