@@ -510,8 +510,8 @@ function FazaSekcija({ opticaj }: { opticaj: number }) {
   ];
 
   const grupe = [
-    { broj: 1, naslov: ts("faza_1"), opis: ts("faza_grupa_1_opis"), span: "col-span-3" },
-    { broj: 2, naslov: ts("faza_2"), opis: ts("faza_grupa_2_opis"), span: "col-span-4" },
+    { broj: 1, naslov: ts("faza_1"), span: "col-span-3" },
+    { broj: 2, naslov: ts("faza_2"), span: "col-span-4" },
   ];
 
   return (
@@ -534,14 +534,13 @@ function FazaSekcija({ opticaj }: { opticaj: number }) {
             {grupe.map((grupa) => (
               <div key={grupa.broj}>
                 <div
-                  className={`rounded-xl px-3 py-2 mb-3 ${
+                  className={`rounded-xl px-3 py-2.5 mb-3 ${
                     uFazi2 === (grupa.broj === 2)
                       ? "bg-kolo-green-100 text-kolo-green-700"
                       : "bg-kolo-bg text-kolo-muted"
                   }`}
                 >
-                  <p className="text-xs font-bold tracking-wide">{grupa.naslov}</p>
-                  <p className="text-[11px] leading-tight opacity-80">{grupa.opis}</p>
+                  <p className="text-sm font-bold tracking-wide">{grupa.naslov}</p>
                 </div>
                 <div className="relative">
                   <div
@@ -577,14 +576,13 @@ function FazaSekcija({ opticaj }: { opticaj: number }) {
               {grupe.map((grupa) => (
                 <div
                   key={grupa.broj}
-                  className={`${grupa.span} mx-1 rounded-xl px-3 py-2 text-center ${
+                  className={`${grupa.span} mx-1 rounded-xl px-3 py-2.5 text-center ${
                     uFazi2 === (grupa.broj === 2)
                       ? "bg-kolo-green-100 text-kolo-green-700"
                       : "bg-kolo-bg text-kolo-muted"
                   }`}
                 >
-                  <p className="text-xs font-bold tracking-wide">{grupa.naslov}</p>
-                  <p className="text-[11px] leading-tight opacity-80">{grupa.opis}</p>
+                  <p className="text-sm font-bold tracking-wide">{grupa.naslov}</p>
                 </div>
               ))}
             </div>
