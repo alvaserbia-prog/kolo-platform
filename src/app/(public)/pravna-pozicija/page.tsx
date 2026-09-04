@@ -57,6 +57,21 @@ export default async function PravnaPozicijaPage() {
     naslov: t(`zasto${n}_naslov`),
     tekst: t(`zasto${n}_tekst`),
   }));
+  // Provera po propisima. Obrazloženja su prenesena iz Whitepapera (pogl. 4 i 6),
+  // gde stoji analiza po svakom zakonu — do sada nijedna javna strana nije nosila
+  // razlog, samo zaključak („nije digitalna imovina"). Zaključak bez razloga na
+  // pravnoj strani ne vredi ništa: onaj ko pita neće ga prihvatiti na reč.
+  const propisi = [
+    { naslov: t("zdi_naslov"), tekst: t("zdi_tekst") },
+    { naslov: t("zps_naslov"), tekst: t("zps_tekst") },
+    { naslov: t("ztk_naslov"), tekst: t("ztk_tekst") },
+  ];
+  // Dva mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
+  // uoči sam, a ne nađe odgovor, zaključiće da odgovora nema.
+  const sporno = [
+    { naslov: t("sporno1_naslov"), tekst: t("sporno1_tekst") },
+    { naslov: t("sporno2_naslov"), tekst: t("sporno2_tekst") },
+  ];
   const dokumenti = [
     { href: "/whitepaper", label: td("dok_whitepaper") },
     { href: "/pravilnik", label: td("dok_pravilnik_kolo") },
@@ -121,6 +136,50 @@ export default async function PravnaPozicijaPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── PROVERA PO PROPISIMA ───────────────────────────────────── */}
+      <section className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold text-kolo-green-900 mb-1" style={{ letterSpacing: "-0.02em" }}>
+            {t("propisi_naslov")}
+          </h2>
+          <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("propisi_uvod")}</p>
+        </div>
+        <div className="space-y-3">
+          {propisi.map((z) => (
+            <div key={z.naslov} className="bg-white rounded-2xl card-shadow p-5 md:p-6">
+              <p className="font-semibold text-kolo-green-900 text-base mb-2">{z.naslov}</p>
+              <p className="text-sm text-kolo-muted leading-relaxed text-body whitespace-pre-line">{z.tekst}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── DVA MESTA KOJA IZGLEDAJU SPORNO ────────────────────────── */}
+      <section className="space-y-4">
+        <div>
+          <h2 className="text-2xl font-bold text-kolo-green-900 mb-1" style={{ letterSpacing: "-0.02em" }}>
+            {t("sporno_naslov")}
+          </h2>
+          <p className="text-sm text-kolo-muted leading-relaxed text-body">{t("sporno_uvod")}</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-3">
+          {sporno.map((s) => (
+            <div key={s.naslov} className="bg-white rounded-2xl card-shadow p-5 md:p-6 border-l-4 border-kolo-gold-400">
+              <p className="font-semibold text-kolo-text text-base mb-2">{s.naslov}</p>
+              <p className="text-sm text-kolo-muted leading-relaxed text-body">{s.tekst}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── NOSEĆI PRINCIP ─────────────────────────────────────────── */}
+      <section className="bg-kolo-green-100 rounded-2xl p-6 md:p-8">
+        <h2 className="text-xl font-bold text-kolo-green-900 mb-2" style={{ letterSpacing: "-0.02em" }}>
+          {t("principi_naslov")}
+        </h2>
+        <p className="text-sm text-kolo-text leading-relaxed text-body">{t("principi_tekst")}</p>
       </section>
 
       {/* ── FONDACIJA I LICENCE ────────────────────────────────────── */}
