@@ -27,9 +27,9 @@ import { jeAdmin } from "@/lib/dozvole";
  */
 const JAVNE_TOKEN_RUTE = ["/dete-poziv", "/potvrdi-email", "/odjava-obavestenja"];
 
-const JAVNE_RUTE = [
+export const JAVNE_RUTE = [
   ...JAVNE_TOKEN_RUTE,
-  "/", "/pijaca", "/kako-funkcionise", "/uslovi",
+  "/", "/pijaca", "/kako-funkcionise", "/kako-sistem-radi", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
   "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/odrzavanje",
   "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",
@@ -49,7 +49,7 @@ const JAVNE_RUTE = [
  * granu za gosta sa `PublicHeader`, ali je proxy slao na `/login` pre nego što
  * se stranica iscrta, pa ta grana nikad nije dolazila na red.
  */
-const JAVNE_TACNE_RUTE = ["/skole"];
+export const JAVNE_TACNE_RUTE = ["/skole"];
 
 const ZAKLJUCANE_ULAZNE_RUTE = [
   "/login", "/registracija", "/oauth",
