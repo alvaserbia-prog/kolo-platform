@@ -219,6 +219,7 @@ Miért fontos ez. A két aktus között nincs szerződés. Nincs olyan megállap
       },
       {
         id: 40,
+        link: { href: "/pravna-pozicija", label: "A KOLO jogi helyzete" },
         pitanje: `Valamiféle piramisjáték vagy kripto ez?`,
         odgovor: `Egyik sem.
 
@@ -781,6 +782,7 @@ A cégek és az egyéni vállalkozók a Patronálás útján vesznek részt: tá
     pitanja: [
       {
         id: 47,
+        link: { href: "/pravna-pozicija", label: "A KOLO jogi helyzete" },
         pitanje: `Megerősítette-e bármelyik szabályozó (a Nemzeti Bank, az Adóhivatal, a Biztos), hogy ez jogszerű, vagy csak az Alapítvány állítja?`,
         odgovor: `Nem. Jelenleg nincs olyan írásos szabályozói állásfoglalás, amely a jogszerűséget megerősítené — sem a Nemzeti Bank, sem az Adóhivatal, sem a Biztos nem adott ki ilyen igazolást.
 

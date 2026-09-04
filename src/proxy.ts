@@ -29,7 +29,7 @@ const JAVNE_TOKEN_RUTE = ["/dete-poziv", "/potvrdi-email", "/odjava-obavestenja"
 
 export const JAVNE_RUTE = [
   ...JAVNE_TOKEN_RUTE,
-  "/", "/pijaca", "/kako-funkcionise", "/kako-sistem-radi", "/uslovi",
+  "/", "/pijaca", "/kako-funkcionise", "/kako-sistem-radi", "/pravna-pozicija", "/uslovi",
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
   "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/odrzavanje",
   "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",

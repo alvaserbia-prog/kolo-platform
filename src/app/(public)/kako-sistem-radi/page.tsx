@@ -242,26 +242,25 @@ export default async function KakoSistemRadiPage() {
               </ul>
             </div>
 
-            <div>
-              <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase mb-2">{t("poen_nije_naslov")}</p>
-              <p className="text-sm text-kolo-muted leading-relaxed mb-2 text-body">
-                {t("poen_nije_uvod")}
+            {/* „Šta POEN nije" — šest odričnih stavki sa tri zakona — preseljeno
+                je na /pravna-pozicija (03.09.2026). Regulatoru i novinaru je ta
+                argumentacija neophodna, ali čoveku koji je došao da vidi pijacu
+                proizvodi sumnju koje nije bilo: niko se ne brani od optužbe koja
+                nije postavljena. Ovde ostaje tvrdnja u potvrdnom obliku, a ceo
+                zakonski deo je iza jednog klika. */}
+            <div className="rounded-xl border border-kolo-border p-4">
+              <p className="text-sm text-kolo-text leading-relaxed text-body mb-3">
+                {t("poen_nije_kratko")}
               </p>
-              <ul className="space-y-1.5">
-                {[
-                  t("poen_nije1"),
-                  t("poen_nije2"),
-                  t("poen_nije3"),
-                  t("poen_nije4"),
-                  t("poen_nije5"),
-                  t("poen_nije6"),
-                ].map((s) => (
-                  <li key={s} className="flex gap-2 items-start text-base text-kolo-muted">
-                    <span className="text-red-400 mt-0.5 shrink-0">✕</span>
-                    {s}
-                  </li>
-                ))}
-              </ul>
+              <Link
+                href="/pravna-pozicija"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-kolo-green-700 hover:text-kolo-green-900 transition-colors"
+              >
+                {t("pravna_link")}
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             </div>
 
             <div className="bg-kolo-green-100 rounded-xl p-4">
