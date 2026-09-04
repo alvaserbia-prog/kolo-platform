@@ -187,18 +187,25 @@ export default function PijacaKlijent({
 
   return (
     <div className="space-y-5">
-      {/* Zaglavlje. Objava je sada otvorena i neverifikovanom (Pravilnik 4.1.1
-          čl. 16 st. 5), pa dugme vodi na formu i njemu — samo bez potražnje, koju
-          ne sme da objavi. Objašnjenje šta važi za njega stoji ispod. */}
+      {/* Zaglavlje. Objava je otvorena i neverifikovanom (Pravilnik 4.1.1 čl. 16
+          st. 5), pa dugme vodi na formu i njemu — samo bez potražnje, koju ne sme
+          da objavi. Objašnjenje šta važi za njega stoji ispod.
+
+          🔴 Dugme se prikazuje samo PRIJAVLJENOM. Gostu je stajalo kao i svima,
+          a vodilo je na `/pijaca/novi-oglas`, gde ga proxy odbija na `/login` —
+          poziv na radnju koju ne može da izvrši. Njemu umesto dugmeta ide traka
+          ispod, koja ga zove tamo gde stvarno može da nastavi: na pridruživanje. */}
       <div className="space-y-1">
         <div className="flex justify-between items-center gap-3">
           <h1 className="kolo-naslov" style={{ letterSpacing: "-0.02em" }}>{t("naslov")}</h1>
-          <Link
-            href={isVerified && jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
-            className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
-          >
-            {isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
-          </Link>
+          {prijavljen && (
+            <Link
+              href={isVerified && jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
+              className="shrink-0 px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
+            >
+              {isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+            </Link>
+          )}
         </div>
         {!isVerified && prijavljen && (
           <Link
@@ -206,6 +213,14 @@ export default function PijacaKlijent({
             className="block rounded-xl bg-kolo-green-100 text-kolo-green-900 text-sm font-semibold px-4 py-2.5 hover:bg-kolo-green-200 transition-colors"
           >
             {t("traka_neverifikovan")} →
+          </Link>
+        )}
+        {!prijavljen && (
+          <Link
+            href="/registracija"
+            className="block rounded-xl bg-kolo-green-100 text-kolo-green-900 text-sm font-semibold px-4 py-2.5 hover:bg-kolo-green-200 transition-colors"
+          >
+            {t("traka_gost")} →
           </Link>
         )}
       </div>

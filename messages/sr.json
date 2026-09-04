@@ -1602,6 +1602,7 @@
     "brzo_navigovanje": "Brza navigacija"
   },
   "pijaca": {
+    "traka_gost": "Pogledaj ponudu na pijaci i pridruži se da bi mogao da učestvuješ",
     "naslov": "Pijaca",
     "opis": "Mesto gde članovi nude i traže dobra i usluge. Oglase može da razgleda svako, ponudu objavljuje i nov član, a kontakt sa oglašivačem otključava potvrda stvarnosti.",
     "novi_oglas": "+ Novi oglas",
