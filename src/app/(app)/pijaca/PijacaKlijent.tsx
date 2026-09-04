@@ -480,18 +480,24 @@ export default function PijacaKlijent({
       )}
 
       {/* Plutajuće dugme za novi oglas — uvek dostupno bez skrolovanja na vrh.
-          Na mobilnom samo krug sa plusom, na širim ekranima plus + tekst. */}
-      {isVerified && (
+          Na mobilnom samo krug sa plusom, na širim ekranima plus + tekst.
+
+          Uslov je PRIJAVLJEN, ne potvrđen: objava je otvorena i novom članu
+          (Pravilnik čl. 16 st. 5), a dok je stajalo `isVerified`, onaj kome je
+          objava prvi potez sistema nije imao dugme — do forme je stizao samo
+          preko zaglavlja ili zelene trake. Potražnju i dalje sme samo potvrđen
+          član, pa se za ostale putanja i natpis vraćaju na običan oglas. */}
+      {prijavljen && (
         <Link
-          href={jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
-          aria-label={jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+          href={isVerified && jePotraznja ? "/pijaca/novi-oglas?tip=potraznja" : "/pijaca/novi-oglas"}
+          aria-label={isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
           className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-kolo-green-700 text-white rounded-full shadow-lg hover:bg-kolo-green-900 active:scale-95 transition-all p-4 sm:py-3 sm:px-5"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           <span className="hidden sm:inline text-sm font-semibold">
-            {jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
+            {isVerified && jePotraznja ? t("nova_potraznja") : t("novi_oglas")}
           </span>
         </Link>
       )}
