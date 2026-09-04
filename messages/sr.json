@@ -916,11 +916,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -928,11 +928,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -964,15 +964,15 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja — KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.1",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.2",
     "meta_privatnost_title": "Politika privatnosti — KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.1",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.2",
     "meta_statut_title": "Statut KOLO Fondacije — KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.4.1",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.4.2",
     "meta_radnje_title": "Registar radnji obrade — KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.1",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika — KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
@@ -2449,7 +2449,6 @@
     "doprinos_revizija_uredno": "Čeka odobrenje u tabu „Prvi oglasi”: {ceka}. Poništeno zbog uklonjenog oglasa: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum — zato doprinos nije ni zabeležen",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave",
     "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
     "tab_nabavke": "Nabavke"
   },
@@ -2584,12 +2583,6 @@
     "punoletstvo_otpis_prijatelj_tekst": "{pseudonim} ima 18 godina. Vaše prijateljstvo je zatvoreno i otpisano ti je {iznos} POEN.",
     "punoletstvo_naslov": "Nalog je prešao u punoletni",
     "punoletstvo_tekst": "Otpisano ti je {iznos} POEN iz {broj} prijateljstava, a upisano ti je {potvrda} potvrda stvarnosti od roditelja. Od sada i sam potvrđuješ druge.",
-    "prijava_poruke_admin_naslov": "Prijavljena poruka u Pričaonici",
-    "prijava_poruke_admin_tekst": "Prijavljena je poruka u Pričaonici. Pogledaj tab „Prijave“.",
-    "prijava_poruke_resena_naslov": "Prijavljena poruka je uklonjena",
-    "prijava_poruke_resena_tekst": "Fondacija je uklonila poruku po tvojoj prijavi. Obrazloženje: {odluka}",
-    "prijava_poruke_odbacena_naslov": "Prijava poruke je razmotrena",
-    "prijava_poruke_odbacena_tekst": "Fondacija je razmotrila tvoju prijavu i poruka ostaje. Obrazloženje: {odluka}",
     "lozinka_promenio_roditelj_naslov": "Roditelj ti je postavio novu lozinku",
     "lozinka_promenio_roditelj_tekst": "Pitaj ga koja je nova lozinka i prijavi se njome.",
     "nalog_preveden_u_maloletni_naslov": "Nalog je preveden u dečji",
@@ -3216,23 +3209,6 @@
     "nisam_clan_korak3": "3. Zamoli nekoga ko te poznaje, a već je član, da potvrdi da si stvarna osoba.",
     "nisam_clan_poen": "Dete koristi platformu čim preuzmeš nalog. POEN mu se upisuje kada ti postaneš redovan član — ništa se ne gubi, sve stoji zabeleženo i upiše mu se tog dana.",
     "dobijate": "Preuzimanjem dobijaš uvid u detetove prijatelje i oglase, prekidač za razgovor sa odraslima i mogućnost da mu postaviš novu lozinku. Sadržaj razgovora sa drugom decom ne vidiš."
-  },
-  "prijavaPoruke": {
-    "dugme": "Prijavi",
-    "poslato": "Prijava je poslata. Gleda je Fondacija.",
-    "naslov": "Šta prijavljuješ?",
-    "razlog_vredjanje": "Ružno mi piše, preti ili me maltretira",
-    "razlog_trazi_slike": "Traži da mu pošaljem slike",
-    "razlog_trazi_susret": "Traži da se vidimo ili da pišemo van KOLA",
-    "razlog_laze_uzrast": "Mislim da nije dete",
-    "razlog_neprimeren_sadrzaj": "Neprimeren ili vulgaran sadržaj",
-    "razlog_licni_podaci": "Objavljuje lične podatke",
-    "razlog_prevara": "Prevara ili obmana",
-    "razlog_ostalo": "Nešto drugo",
-    "opis_placeholder": "U jednoj rečenici — šta se dogodilo?",
-    "posalji": "Pošalji prijavu",
-    "odustani": "Odustani",
-    "greska": "Prijava nije poslata. Pokušaj ponovo."
   },
   "skole": {
     "naslov": "Škole",

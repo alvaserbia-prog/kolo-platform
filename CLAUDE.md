@@ -69,6 +69,51 @@ Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom d
 Sistem funkcioniše kroz Fondaciju, mrežu **Krugova** (lokalnih operativnih grupa), KOLO **Protokol** (softverski protokol) i korisnike. **KOLO Zajednica** je opisni pojam za sveukupnost svih korisnika platforme — nije pravni entitet i nema organe.
 
 ## Kanonska dokumentacija (folder `dokumentacija 4.1/`)
+
+### 🔴 PRAVILO BUMPOVANJA — bumpuje se SAMO akt koji se menja (2026-09-04)
+
+Odluka vlasnika. **Akt koji se sadržinski menja dobija narednu šifru; ostali se ne
+prepisuju i ostaju na svojoj.** Set od sada NIJE jedinstven i to je namerno.
+
+🔴 **Ovo OBARA pravilo koje je ovde stajalo od 4.2.1** („Set je ponovo JEDINSTVEN —
+jedan broj važi za ceo folder"). Raniji zapis je mešovit set držao za grešku, jer je
+prethodni mešovit set (4.2.0 uz 4.1.1) proizveo unakrsna upućivanja na verziju koja
+kao dokument više ne postoji. **Taj rizik nije nestao — samo se sada nosi ručno:**
+pri svakom bumpu obavezno proveriti da li neki akt upućuje na akt koji je promenio
+šifru, i ta upućivanja ispraviti. Provera je jedna komanda:
+
+```
+grep -rn "v4\.4\.[0-9]\|verzija 4\.4\.[0-9]" "dokumentacija 4.1/"
+```
+
+Upućivanja na akte koji se NISU menjali ostaju na staroj šifri — to nije previd nego
+tačan podatak.
+
+**Šta se menja uz svaki bump:** ime fajla na svih 5 jezika, mapa u
+`src/app/(public)/pravilnik/[slug]/page.tsx` (`fajl` i `verzija`), poziv
+`ucitajPravniDokument` na odgovarajućoj `page.tsx`, verzijske labele u
+`messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
+`__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
+
+**AŽURIRANO 2026-09-04 (trinaesti put):** prvi bump po novom pravilu. Na **4.4.2**
+idu **PET akata** — Pravilnik o učešću dece, Uslovi korišćenja, Politika privatnosti,
+DPIA i Registar radnji obrade. Preostalih dvanaest **ostaje na 4.4.1**, Statut na 4.1.
+Povod je **uklanjanje prijave poruke iz Pričaonice** (odluka vlasnika; vidi „Prijava
+poruke je ukinuta" ispod). Sadržinski:
+- **Pravilnik o učešću dece** — **čl. 18a BRISAN** (maloletni korisnik je po njemu
+  mogao da prijavi poruku). Numeracija ostalih članova nije dirana — čl. 18a je bio
+  dopisan član, pa njegovim brisanjem ništa ne klizi.
+- **Uslovi korišćenja, čl. 25** — brisan pasus o prijavi pojedinačne poruke. Stav da
+  Fondacija **može da ukloni** sadržaj je netaknut: uklonjen je korisnički signal, ne
+  poluga Fondacije.
+- **Politika privatnosti** — brisana alineja „Prijava poruke" iz 4.7 i rečenica o
+  roku čuvanja prijave.
+- **DPIA** — prijava poruke izbačena iz mera uz rizik **R16** i iz tačke **5.11**.
+- **Registar radnji obrade, radnja br. 11** — prijava poruke izbačena iz kategorija
+  podataka, roka čuvanja i mera zaštite.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
+
 **AŽURIRANO 2026-09-02 (dvanaesti put):** ceo set je dignut na **4.4.1** i od sada ima **17 akata** (sr + en/ru/hr/hu). Povod je **kolektivna nabavka** — prvi uređeni oblik trošenja dinarskih sredstava Fondacije u projekte zajednice. Nov, sedamnaesti akt je **`projekti_nabavke_4_4_1.md` — „Pravilnik o projektima i kolektivnim nabavkama"** (36 članova), slug `/pravilnik/projekti-nabavke`. Sadržinski su izmenjeni:
 - **Pravilnik o KOLO sistemu** — nov **čl. 14a** (poništenje zapisa POEN-a po ISKORIŠĆENJU) i nov **čl. 51a** (projekti i kolektivne nabavke + uputna odredba na poseban pravilnik); dopunjen zaključni stav **čl. 14** (ukupan broj POEN-a se sada i UMANJUJE).
 - **Pravilnik o Gornjem Kolu** — **čl. 8** dobio stav o **izbornom glasanju**, **čl. 9** pravilo izjednačenosti pri izboru. To je jedina sadržinska izmena tog akta; nadležnost je već pokrivao čl. 8, a dinarski režim čl. 20.
@@ -136,7 +181,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statu
 
 **AŽURIRANO 2026-08-17 (sedmi put):** ceo set je bio dignut na **4.3.0** i od sada ima **16 akata** (sr + en/ru/hr/hu). Povod je usvajanje **Pravilnika o učešću dece** (`ucesce_dece_4_3_4.md`, pri usvajanju `_4_3_0`) — nov, šesnaesti akt, uz koji je unapređeni Modul Deca dobio pravni osnov. Sadržinski su izmenjeni:
 - **Pravilnik o KOLO sistemu** — čl. 14 st. 3 (tri izričito nabrojana izuzetka od zabrane negativnog zapisa + zatvarajuća odredba da se dalji ne mogu ustanoviti), **čl. 15 t. 9 — DEVETI KANAL** (doprinos dece u dečjem prostoru; automatski akt Protokola izvan dnevnog limita), čl. 16 (poništenje prepisa po prijavi razmene), čl. 34 (nadoknada → „negativan zapis po čl. 14 st. 3"), čl. 58 (prepisan: samostalno pristupanje maloletnog lica, odgovornost roditelja, upućivanje na nov pravilnik).
-- **Uslovi korišćenja** — čl. 7 (maloletna lica od 7 godina, dva ulaza), čl. 25 (prijava poruke), **čl. 40 — UKINUT ROK OD 15 DANA**.
+- **Uslovi korišćenja** — čl. 7 (maloletna lica od 7 godina, dva ulaza), čl. 25 (prijava poruke — *brisana setom 4.4.2*), **čl. 40 — UKINUT ROK OD 15 DANA**.
 - **Politika privatnosti** — 4.7 prepisan (dva ulaza, elektronska adresa roditelja po legitimnom interesu, sužen uvid roditelja, prijava poruke), rok čuvanja, **čl. 16 — UKINUT ROK OD 15 DANA**.
 - **DPIA** i **Registar radnji obrade** — radnja br. 11 (Modul Deca) prevedena iz „nije aktivna" u **aktivnu**, dvojni pravni osnov, nov rizik **R16**, mere **5.11**; usput ispravljena zatečena greška „trinaest rizika" → **šesnaest** (R1–R15 su već postojali) na svih 5 jezika.
 - **Pravilnik o hijerarhiji akata** — dopisan nov akt.
@@ -151,7 +196,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statu
 
 **AŽURIRANO 2026-08-09 (četvrti put):** ceo set je dignut na **4.2.1** — svih 15 akata (sr + en/ru/hr/hu), i kad su sadržinski nepromenjeni. Povod je paket „doprinos razmeni — putanja prvog kruga": nov **čl. 40b Pravilnika**, dopune **Uslova** (čl. 16 i 22), **Politike** (nova pododeljka 4.10 + rok čuvanja), **DPIA** (radnja br. 15, rizik **R15**, mere **5.10**) i **Registra radnji obrade** (radnja br. 15). Fajlovi žive u **istom folderu `dokumentacija 4.1/`**; loader, mapa u `pravilnik/[slug]`, stranice `/dpia` i `/radnje-obrade` i verzijske labele u `messages` su repointovani. **Statut ostaje 4.1** (`statut_4_1_0.md`, sopstvena numeracija — ne dira se).
 
-🟢 **Set je od 4.2.1 ponovo JEDINSTVEN** — jedan broj važi za ceo folder (osim Statuta). Prethodni mešoviti set (4.2.0 uz 4.1.1) je uklonjen: fajlovi `*_4_1_1.md` za četiri akta koja su već bila na 4.2.0 su obrisani, a 4.2.1 je nastao iz **novije** osnove (4.2.0). Razlog za povratak na jedinstvenu verziju je isti kao pri bumpu na 4.1.1: mešovit set proizvodi unakrsne reference na verziju koja kao dokument više ne postoji.
+🔴 **PREVAZIĐENO 2026-09-04** (vidi pravilo bumpovanja na vrhu sekcije) — od tada se bumpuje samo akt koji se menja. Zapis ispod opisuje pravilo koje je važilo od 4.2.1 do 4.4.1 i ostavljen je kao istorija. ~~Set je od 4.2.1 ponovo JEDINSTVEN~~ — jedan broj važi za ceo folder (osim Statuta). Prethodni mešoviti set (4.2.0 uz 4.1.1) je uklonjen: fajlovi `*_4_1_1.md` za četiri akta koja su već bila na 4.2.0 su obrisani, a 4.2.1 je nastao iz **novije** osnove (4.2.0). Razlog za povratak na jedinstvenu verziju je isti kao pri bumpu na 4.1.1: mešovit set proizvodi unakrsne reference na verziju koja kao dokument više ne postoji.
 
 🔴 **Zamka koja se već desila dvaput — čitati pre svakog sledećeg bumpa:** dokumenta nove verzije moraju nastati iz **najnovije** osnove na `main`-u, ne iz one sa koje je grana krenula. Prvi put je 4.2.0 nastao iz 4.1.0 dok je `main` izdao 4.1.1, pa bi objava tiho poništila izmenu čl. 40a. Zato test `pravni-dokumenti.test.ts` izričito traži rečenicu „Verifikovanom korisniku doprinos se evidentira" i odredbe čl. 40b — da se propust ne ponovi tiho.
 
@@ -564,7 +609,7 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 - **Posledica koja se dobija besplatno:** kad su svi učesnici međusobno prijatelji, **sam od sebe nastaje grupni razgovor** — graf pravi sobe umesto tebe.
 - 🟡 **Prihvaćeno ponašanje:** Ana odgovori Milici, a Petar (Milicin prijatelj, Anu ne poznaje) vidi Aninu poruku bez povoda. Nije greška.
 - 🔴 **NEMA odgovora sa citatom** — citat bi Petru pokazao Milicin tekst i zaobišao filter. Ne dodavati citiranje.
-- 🔴 **Dugmeta „prijavi" u dečjoj sobi VIŠE NEMA (odluka vlasnika, 2026-09-04).** Stajalo je tu od 17.08. i vodilo u admin tab „Prijave"; taj red čekanja nema ko da rešava, pa je bilo obećanje koje se ne ispunjava. Ugašeno na **dva mesta** — `DecjaPocetna.tsx` ga ne renderuje, a `POST /api/chat/[id]/prijavi` odbija poruku iz `ChatSoba.DECA` sa **404** (ne 403: „nije ti dozvoljeno" bi reklo da put postoji pa je zatvoren). Soba odraslih je netaknuta. Vidi „Dečja soba nema prijavu" ispod.
+- 🔴 **Prijave poruke VIŠE NEMA — ni u dečjoj sobi ni u sobi odraslih (odluka vlasnika, 2026-09-04).** Model `PrijavaPoruke` je obrisan, a odredbe koje su je uređivale izbrisane su iz akata (čl. 18a Pravilnika o učešću dece, pasus čl. 25 Uslova — set 4.4.2). Uklanjanje poruke od strane Fondacije ostaje. Vidi „Prijava poruke je UKINUTA" ispod.
 
 **Šta roditelj vidi (čl. 9).** 🔴 **Razgovore između dece roditelj VIŠE NE ČITA** — izmena u odnosu na prvu verziju, i namerna: nadzor nad dečjim razgovorom dodiruje i tuđe dete, i to je bilo najteže mesto za DPIA i Politiku. Umesto sadržaja vidi **KO i KOLIKO** (`/api/deca/[id]/pregled`): spisak prijatelja sa datumima i spisak razgovora bez sadržaja, uz istoriju prepisa i oglase.
 - **Razgovor deteta sa PUNOLETNIM licem je izuzetak** — roditelj ga čita, ali **ne piše u njemu** (sa druge strane je odrastao čovek, a odnos otvara isključivo roditeljski prekidač). Punoletnom sagovorniku stoji vidljiv natpis da razgovor čita roditelj — i odvraćanje i poštenje.
@@ -798,7 +843,7 @@ Ovo je **SUŽAVANJE** zatečenog stanja: do 4.3.3 je profil maloletnog naloga bi
 - **Odluka je na SERVERU** (`pristupProfiluDeteta` u `protokol/deca.ts`, pravilo `smeDaVidiProfilDeteta` u `deca-pravila.ts`), ne u komponenti — ekran nije poslednja reč, a ovo je jedina odbrana koju dete ima od nepoznatog odraslog. Ruta vraća **200 sa `zatvoren`**, ne 403, jer stranica mora da objasni zašto.
 - **Zatvoren ekran radi tri stvari:** kaže zašto, **imenuje roditelja** (čl. 10 — roditelj odgovara za radnje deteta; bez imena je to slepa ulica, a zapis u knjizi ostaje neobjašnjen) i pokazuje jedini put dalje — oglas. 🔴 Ništa drugo na njemu ne stoji: ni stanje, ni škola, ni oglasi, ni prijateljstva. Svaki dodatak ga pretvara u mali profil.
 - 🔴 **Roditeljski prekidač `dozvolaOdrasli` profil NE otvara** — on uređuje komunikaciju i razmenu (čl. 10 st. 2, čl. 12). Da ga otvara, roditelj bi jednim potezom otključao i ono što nikad nije razmatrao. Zaključano testom.
-- **Fondacija zadržava uvid** — bez toga nema uklanjanja spornog oglasa ni postupanja po prijavi poruke.
+- **Fondacija zadržava uvid** — bez toga nema uklanjanja spornog oglasa ni sporne poruke.
 - **Dete vidi profil SAMO svog prijatelja.** Dete iz iste škole koje mu nije prijatelj dobija isti zatvoren ekran; put do drugog deteta ostaje jedan — skeniran QR kod uživo.
 - 🔴 **Sve staze vode na taj ekran.** Ako makar jedna ostane otvorena, zabrana ne vredi ništa: knjiga zapisa, oglas na Pijaci, lista u školi, spisak dece na profilu roditelja, QR kod, obaveštenje o prepisu. `GET /api/korisnici/pretraga` i dalje filtrira `maloletan: false`.
 - **Šta zatvaranje NE krije:** detetove transakcije — knjiga zapisa je otvorena i tako ostaje. Krije sve ostalo skupljeno na jednom mestu, pre svega **ukupno stanje**, koje dete čini metom.
@@ -892,63 +937,47 @@ nalog pre potvrda), istim postupkom kojim `oglasi-vidljivost-izvor.test.ts` čuv
 `/verifikacija` izgledalo je kao pravilo, a bilo je samo navigacija — kao što je
 `smeDaVidiOglas` bio tačno pravilo koje tri prikaza nisu zvala.
 
-### 🔴 Dečja soba nema prijavu poruke (2026-09-04)
+### 🔴 Prijava poruke je UKINUTA — model obrisan (2026-09-04)
 
-Odluka vlasnika. Dugme „prijavi" je iz dečje Pričaonice uklonjeno, zajedno sa
-`RAZLOZI_DECA`. Razlog nije tehnički: prijava je vodila u admin tab „Prijave", a
-taj red čekanja nema ko da rešava — dugme koje ništa ne pokreće je obećanje koje
-se ne ispunjava.
+Odluka vlasnika, u dva koraka istog dana: prvo uklanjanje dugmeta iz dečje sobe, pa
+brisanje celog mehanizma. Merodavan je drugi korak — **prijava poruke iz Pričaonice
+više ne postoji ni u jednoj sobi.**
 
-**Ugašeno je na DVA mesta**, jer je ekran već jednom u ovom modulu bio uzet za
-poslednju reč a nije: `DecjaPocetna.tsx` dugme ne renderuje, a
-`POST /api/chat/[id]/prijavi` odbija poruku iz `ChatSoba.DECA`. Odgovor je **404,
-ne 403** — „nije ti dozvoljeno" bi reklo da put postoji pa je zatvoren.
+Povod je dečja soba: red čekanja u admin tabu „Prijave" nema ko da rešava, pa je
+dugme bilo obećanje koje se ne ispunjava. Pošto je uz to iz akata izlazio i pravni
+osnov, mehanizam nije ostavljen da visi u sobi odraslih — obrisan je u celini.
 
-🔴 **Posledicu treba znati i ne treba je ublažavati:** roditelj razgovore između
-dece **ne čita** (Pravilnik o učešću dece čl. 9 st. 2) — to je bila razmena
-napravljena upravo zato što prijava postoji. Bez oba, dečja soba nema **nijedan**
-put do Fondacije; jedino što detetu ostaje je da kaže roditelju, i raskid
-prijateljstva, koji poruke tog deteta sklanja iz sobe (filter Pričaonice ide po
-prijateljstvima). FAQ 90 je zato prepisan na svih pet jezika — govorio je o dugmetu
-kog nema, a sada upućuje na roditelja, raskid i `kontakt@ekolo.rs`.
+**Obrisano:** model `PrijavaPoruke`, enum `PrijavaPorukeRazlog`, komponenta
+`PrijaviPoruku.tsx`, `prijava-poruke-pravila.ts`, `prijava-poruke.ts`,
+`POST /api/chat/[id]/prijavi`, `GET /api/admin/prijave-poruka` + `{ukloni,odbaci}`,
+admin tab **Prijave** (`PrijaveTab.tsx`, ključ `prijave` iz `ADMIN_TABOVI`), badge u
+`chrome-podaci.ts`, oba testa i pripadajući ključevi prevoda na svih pet jezika
+(namespace `prijavaPoruke`, `admin.tab_prijave`, šest `notifikacije.prijava_poruke_*`).
+Migracija `20260904120000_ukloni_prijavu_poruke`.
 
-🔴 **Akt i kod se od ove izmene RAZILAZE.** Čl. 18a Pravilnika o učešću dece glasi:
-„Maloletni korisnik može prijaviti poruku iz Pričaonice." Ta odredba je usvojena i
-javno stoji na `/pravilnik/ucesce-dece`. Nijedan test to ne zaključava, pa razlaz
-neće nigde pući — zato stoji ovde. Zatvara se na jedan od dva načina: vraćanjem
-prijave, ili brisanjem čl. 18a uz bump celog seta (isti obrazac kao kod prijave
-razmene, gde akt takođe nedostaje). **Ne izmišljati treći put.**
+🔴 **Ovde se BRIŠU I PODACI, za razliku od gašenja Kruga.** Bezopasno je po zero-sum:
+`PrijavaPoruke` ne nosi nijedan zapis POEN-a, nema `Wallet` i ne ulazi u opticaj.
+Nema šta da se čuva „zbog zatečenih redova", pa nema ni razloga za prekidač.
 
-🟡 **Šta OSTAJE:** model `PrijavaPoruke`, admin tab „Prijave", servisni sloj
-(`prijava-poruke.ts`) i tri šifre mamljenja u enum-u — zatečene prijave iz dečje
-sobe i dalje se rešavaju, i tab je i dalje potreban za sobu odraslih. Servisni sloj
-sobu **ne gleda** i ne sme da je gleda.
+🔴 **Moderacija Pričaonice OSTAJE.** `ChatMessage.uklonjenoAt` / `uklonjenRazlog` /
+`uklonioId` i `DELETE /api/admin/chat/[id]` su netaknuti, pa Fondacija i dalje može
+da ukloni poruku po čl. 25 Uslova. Izgubljen je **korisnički signal**, ne poluga.
 
-**Brana:** `__tests__/prijava-poruke.test.ts`, blok „dečja soba nema prijavu" — pada
-ako se `<PrijaviPoruku` ili `RAZLOZI_DECA` vrate u `DecjaPocetna.tsx`, ako ruta
-izgubi proveru sobe, ili ako soba odraslih ostane bez dugmeta.
+🔴 **Ne mešati sa `PrijavaOglasa`** — prijava oglasa na Pijaci je drugi institut,
+drugi model, drugi admin tab (**Pijaca**), i **nije dirana**. Zato u šemi ostaje i
+enum `PrijavaOglasaStatus`, koji je `PrijavaPoruke` delila sa njom.
 
-### Prijava poruke nosi i čoveka (2026-08-17)
+🟢 **Akti su usklađeni istim potezom** (set 4.4.2, pet akata): brisan je čl. 18a
+Pravilnika o učešću dece i pasus čl. 25 Uslova, uz prateće izmene Politike, DPIA i
+Registra radnji obrade. **Kod i akt se ovde poklapaju** — razlaz zabeležen pri
+prvom koraku više ne postoji.
 
-Prijava je do ove izmene hvatala **samo poruku**, uz opcion slobodan tekst, a `status` je ostajao `OTVORENA` zauvek — nijedan ekran je nije zatvarao. Prijava je odlazila u mejl adminu i tu se gubila.
-
-🔴 **Prijava od sada nosi I PORUKU I ČOVEKA, i to je namerno oboje.**
-- **Poruka je DOKAZ.** Roditelj razgovore dece više ne čita, pa je prijavljena poruka jedino što Fondacija sme i može da pogleda. Čista „prijavi korisnika" bez poruke terala bi moderatora da pročita celu sobu — dakle da vrati nadzor koji je unapređeni model upravo skinuo.
-- **Čovek je SUBJEKT.** Opasnost je gotovo uvek nalog: tri prijave iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka sama ne nosi. `PrijavaPoruke.prijavljeniId` je autor poruke, **denormalizovan** (autor poruke se ne menja), a admin ekran grupiše po njemu.
-
-**Šifra razloga sa zatvorene liste** (`PrijavaPorukeRazlog`) umesto samo slobodnog teksta — sedmogodišnjak neće napisati obrazloženje, ali ume da pritisne dugme. Slobodan tekst se traži **samo uz „ostalo"**; uz izabranu šifru bi dodatno pisanje odvraćalo dete od prijave.
-- 🔴 **`TRAZI_SLIKE`, `TRAZI_SUSRET` i `LAZE_UZRAST` stoje odvojeno** — to su obrasci mamljenja i pod zbirnom šifrom „neprimereno" ne bi se videli. Te tri su i **hitne** (`jeHitno`): dižu grupu na vrh spiska, ne sankcionišu ništa.
-- **Jedna lista, jedna soba (od 2026-09-04).** Ekran nudi `RAZLOZI_ODRASLI`; `RAZLOZI_DECA` je obrisan sa uklanjanjem prijave iz dečje sobe. 🔴 Tri šifre mamljenja (`TRAZI_SLIKE`, `TRAZI_SUSRET`, `LAZE_UZRAST`) **ostaju** u `RAZLOZI` i u enum-u — nose ih zatečeni redovi, a admin ekran mora da ume da ih prikaže; isti razlog iz kog ostaje `WalletType.KRUG`. Server ne proverava pripada li šifra sobi — promašena šifra je pogrešno razvrstana prijava, ne rupa.
-
-**Admin tab „Prijave"** (`PrijaveTab.tsx`, ključ `prijave`) — grupisan po prijavljenom nalogu, uz broj **različitih prijavilaca** (`jeObrazac`, prag 3; jedan čovek koji pritisne tri puta nije obrazac). Dve odluke, obe uz obavezno obrazloženje: **ukloni poruku** (meko uklanjanje + zatvara SVE otvorene prijave nad tom porukom, jer poruke više nema pa nemaju o čemu da odlučuju) i **odbaci prijavu** (zatvara samo svoju — druga prijava nad istom porukom ima drugu šifru i drugog prijavioca).
-- 🔴 **Tab NE sankcioniše nalog.** Suspenzija i isključenje (Uslovi čl. 27, 28) su zasebna odluka i žive u tabu Korisnici. Obrazac se prikazuje da bi ga čovek VIDEO, ne da bi sistem sam kaznio.
-- Nije isto što tab **Pijaca** (oglasi) ni **Razmene** (prepis POEN-a). Četiri različite odluke, četiri taba.
-
-**Dugme je sada i u sobi odraslih.** Ruta je od početka bila otvorena svima, ali dugmeta nije bilo nigde osim u dečjoj sobi — pa je jedini put do Fondacije bio da si dete.
-
-**Kod:** `src/lib/prijava-poruke-pravila.ts` (ČISTE funkcije + šifarnik; uvozi ih i komponenta u pretraživaču) + `src/lib/prijava-poruke.ts` (servisne, re-eksportuje pravila). Komponenta `src/components/PrijaviPoruku.tsx` (samo soba odraslih od 2026-09-04). Rute: `POST /api/chat/[id]/prijavi` (prima `razlogKod`), `GET /api/admin/prijave-poruka`, `POST .../[id]/{ukloni,odbaci}`. Migracija `20260817140000_prijava_poruke_subjekt` (enum + `prijavljeniId` sa backfill-om iz `ChatMessage.userId`, pa tek onda `NOT NULL`; prijave bez poruke se brišu). Testovi `__tests__/prijava-poruke.test.ts` i `__tests__/integracija/prijava-poruke-tok.test.ts`. Audit: `PRIJAVA_PORUKE_RESENA`, `PRIJAVA_PORUKE_ODBACENA`. Badge: tab Prijave + sidebar `adminCekanje`.
-- **Zvonce adminima uz mejl** — bez javljanja red čekanja postoji a niko ne zna da postoji (isti obrazac kao kod prvih oglasa). Mejl nosi i broj različitih prijavilaca, pa se obrazac vidi pre otvaranja ekrana.
-- 🟡 **Prijava naloga BEZ poruke (sa profila) ne postoji** — za sumnju koja nije u poruci („mislim da moj drug nije dete") još nema ulaza. Sadašnji tok pokriva ono što se u praksi dešava u porukama; ako zatreba, mesto je profil, a ne ovaj tab.
+🔴 **Posledicu treba znati i ne treba je ublažavati:** roditelj razgovore između dece
+**ne čita** (Pravilnik o učešću dece čl. 9 st. 2) — to je bila razmena napravljena
+upravo zato što prijava postoji. Bez oba, dečja soba nema **nijedan** put do
+Fondacije; detetu ostaju roditelj i **raskid prijateljstva**, koji poruke tog deteta
+sklanja iz sobe (filter Pričaonice ide po prijateljstvima). FAQ 90 je zato prepisan
+na svih pet jezika i upućuje na roditelja, raskid i `kontakt@ekolo.rs`.
 
 ### Povod razgovora — oglas u razgovoru (2026-08-10)
 

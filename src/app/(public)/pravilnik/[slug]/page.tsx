@@ -49,8 +49,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "ucesce_dece_4_4_2.md",
+    verzija: "4.4.2",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   "projekti-nabavke": {
