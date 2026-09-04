@@ -462,9 +462,11 @@ At any moment you can remove a listing, switch off conversations with adults, an
       {
         id: 90,
         pitanje: `What if my child receives an inappropriate message?`,
-        odgovor: `Next to every message there is a report button. The child presses it alone, without asking and without waiting.
+        odgovor: `Tell your child to come to you straight away. You are the first port of call, not the platform.
 
-A report does not remove the message. It is a signal to the Foundation's moderation, which reviews the message and removes it if there are grounds. Each user can report the same message once.`,
+In the Chatroom a child sees only messages from its friends. So the fastest move is to end the friendship — once the child ends it, those messages are gone from view. Only the child can end a friendship, and both children lose 500 POEN.
+
+If the message is one we should see, write to us at kontakt@ekolo.rs with the child's pseudonym and the time of the message. The Foundation can remove the message and can close the account it was sent from.`,
       },
       {
         id: 91,

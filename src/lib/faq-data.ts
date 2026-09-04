@@ -472,9 +472,11 @@ U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor sa odras
       {
         id: 90,
         pitanje: `Šta ako dete dobije neprimerenu poruku?`,
-        odgovor: `Uz svaku poruku stoji dugme prijavi. Dete ga pritiska samo, bez pitanja i bez čekanja.
+        odgovor: `Reci detetu da ti odmah javi. Ti si prvi kome se javlja, ne platforma.
 
-Prijava ne uklanja poruku. Ona je signal moderaciji Fondacije, koja poruku pregleda i uklanja je ako za to ima osnova. Istu poruku svaki korisnik može prijaviti jednom.`,
+U Pričaonici dete vidi samo poruke svojih prijatelja. Zato je najbrži potez raskid prijateljstva — čim ga dete raskine, te poruke više ne vidi. Raskid može samo dete i oba deteta gube po 500 POEN.
+
+Ako je poruka takva da treba da je vidimo, piši nam na kontakt@ekolo.rs sa pseudonimom deteta i vremenom poruke. Fondacija poruku može ukloniti i može zatvoriti nalog sa koga je poslata.`,
       },
       {
         id: 91,

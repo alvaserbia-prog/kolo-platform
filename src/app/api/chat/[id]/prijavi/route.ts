@@ -6,28 +6,33 @@ import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { obavesti } from "@/lib/notifikacije";
 import { jeHitno, proveriPrijavu } from "@/lib/prijava-poruke-pravila";
+import { ChatSoba } from "@/generated/prisma/client";
 
 /**
  * POST /api/chat/[id]/prijavi  { razlogKod, opis? }
  *
- * Prijava poruke iz Pričaonice (Pravilnik o učešću dece čl. 18a; Uslovi čl. 25).
+ * Prijava poruke iz Pričaonice — SAMO iz sobe odraslih (Uslovi čl. 25).
  *
- * 🔴 Postoji zato što roditelj razgovore dece VIŠE NE ČITA. Dete je jedino koje
- * može da signalizira, pa se moderacija Fondacije kači na njegovu prijavu. Bez ovog
- * dugmeta bi dečja soba bila jedini prostor na platformi bez ijednog puta do
- * Fondacije.
+ * 🔴 **Dečja soba je isključena (odluka vlasnika, 04.09.2026.)** Prijava je tamo
+ * postojala od 17.08. i vodila u admin tab „Prijave"; taj red čekanja nema ko da
+ * rešava, pa je dugme bilo obećanje koje se ne ispunjava. Ugašeno je i na ekranu
+ * (`DecjaPocetna.tsx`) i OVDE — ekran nije poslednja reč, ruta je dostižna svakome
+ * ko zna adresu, a prijava koja tiho nigde ne stiže gora je od dugmeta kog nema.
+ *
+ * 🔴 **Posledica koju treba znati:** roditelj razgovore između dece NE ČITA
+ * (Pravilnik o učešću dece čl. 9 st. 2), pa dečja soba od ove izmene nema nijedan
+ * put do Fondacije — ni preko deteta ni preko roditelja. Uz to čl. 18a istog
+ * pravilnika maloletnom korisniku izričito daje pravo da prijavi poruku, pa akt i
+ * kod od ove izmene govore različito. Ako se to ikad zatvara, zatvara se na jednom
+ * od dva načina: vraćanjem prijave (ova ruta + dugme) ili izmenom čl. 18a — ne
+ * trećim putem.
  *
  * Prijava NE uklanja poruku — uklanja je Fondacija, istim putem kao svaki drugi
  * sadržaj (`DELETE /api/admin/chat/[id]`). Uklanjanje je odluka, prijava je signal.
  *
- * Otvorena je svakome ko poruku vidi, i detetu i odraslom: sporan sadržaj se
- * prijavljuje tamo gde se vidi, a prijava nije komunikacija sa autorom.
- *
- * 🔴 Upisuje se I PORUKA I AUTOR. Poruka je dokaz (bez nje bi moderator morao da
- * pročita celu sobu — nadzor koji je ovaj model skinuo), a autor je subjekt: tri
- * prijave iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka
- * sama ne nosi. Šifra razloga ide sa zatvorene liste, jer sedmogodišnjak neće
- * napisati obrazloženje, a obrazac mamljenja se bez šifre ne može prepoznati.
+ * 🔴 Upisuje se I PORUKA I AUTOR. Poruka je dokaz, a autor je subjekt: tri prijave
+ * iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka sama ne
+ * nosi. Šifra ide sa zatvorene liste, da se obrazac vidi kroz više prijava.
  */
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -43,6 +48,11 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     select: { id: true, userId: true, soba: true, uklonjenoAt: true, content: true },
   });
   if (!poruka || poruka.uklonjenoAt) return await greska("Poruka nije pronađena.", 404);
+  // Dečja soba nema prijavu (vidi zaglavlje). 404, ne 403: poruka za ovu rutu ne
+  // postoji, a odgovor „nije ti dozvoljeno" bi rekao da put postoji pa je zatvoren.
+  if (poruka.soba === ChatSoba.DECA) {
+    return await greska("Poruka nije pronađena.", 404);
+  }
   if (poruka.userId === session.user.id) {
     return await greska("Svoju poruku ne prijavljuješ — obriši je ili je ostavi.", 400);
   }

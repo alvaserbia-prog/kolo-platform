@@ -135,10 +135,16 @@ a bilo je samo navigacija.
   minimum oglasa nije poseban (vidi čl. 13 st. 1).
 - **Drugi ulaz u praksi služi starijoj deci** — sedmogodišnjak ne kuca elektronsku
   adresu. Mlađi ulaze kroz roditeljski profil.
-- **Prijava naloga bez poruke ne postoji.** Prijava se od 17.08.2026. podnosi uz
-  šifru razloga i nosi i autora poruke (admin tab „Prijave" je zatvara), ali za
-  sumnju koja nije ni u jednoj poruci — „mislim da moj drug nije dete" — nema
-  ulaza sa profila.
+- 🔴 **Prijave poruke u dečjoj sobi VIŠE NEMA** (odluka vlasnika, 04.09.2026) —
+  uklonjena je i sa ekrana i sa rute, jer red čekanja u admin tabu „Prijave" nema
+  ko da rešava. Time dečja soba nema nijedan put do Fondacije: roditelj razgovore
+  između dece ne čita (čl. 9 st. 2), a to je bila razmena napravljena baš zato što
+  prijava postoji. Detetu ostaju roditelj i raskid prijateljstva (koji poruke tog
+  deteta sklanja iz sobe). 🔴 **Čl. 18a i dalje daje pravo na prijavu — akt i kod se
+  time razilaze**; zatvara se vraćanjem prijave ili brisanjem čl. 18a, ne trećim
+  putem. Soba odraslih je netaknuta.
+- **Prijava naloga bez poruke ne postoji** ni pre ni posle toga — za sumnju koja
+  nije ni u jednoj poruci („mislim da moj drug nije dete") nema ulaza sa profila.
 
 ### Uzrasne grupe — usvojeno kao prelazna odredba (čl. 12)
 

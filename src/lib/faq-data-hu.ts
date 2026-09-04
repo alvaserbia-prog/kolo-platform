@@ -473,9 +473,11 @@ Bármikor eltávolíthatsz hirdetést, kikapcsolhatod a felnőttekkel folytatott
       {
         id: 90,
         pitanje: `Mi van, ha a gyerek nem megfelelő üzenetet kap?`,
-        odgovor: `Minden üzenet mellett ott a bejelentés gombja. A gyerek maga nyomja meg, kérdezés és várakozás nélkül.
+        odgovor: `Mondd meg a gyereknek, hogy azonnal szóljon neked. Hozzád fordul először, nem a platformhoz.
 
-A bejelentés nem távolítja el az üzenetet. Jelzés az Alapítvány moderációjának, amely az üzenetet megvizsgálja, és eltávolítja, ha van rá alap. Ugyanazt az üzenetet minden felhasználó egyszer jelentheti be.`,
+A Csevegőben a gyerek csak a barátai üzeneteit látja. Ezért a leggyorsabb lépés a barátság felbontása — amint a gyerek felbontja, azokat az üzeneteket többé nem látja. Felbontani csak a gyerek tudja, és mindkét gyerek elveszít 500 POEN-t.
+
+Ha az üzenetet látnunk kellene, írj nekünk a kontakt@ekolo.rs címre a gyerek álnevével és az üzenet idejével. Az Alapítvány el tudja távolítani az üzenetet, és le tudja zárni a fiókot, ahonnan küldték.`,
       },
       {
         id: 91,

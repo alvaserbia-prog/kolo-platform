@@ -1,12 +1,15 @@
 "use client";
 
 /**
- * Dugme „prijavi" uz poruku u Pričaonici — zajedničko za dečju sobu i sobu odraslih.
+ * Dugme „prijavi" uz poruku u Pričaonici.
+ *
+ * 🔴 **Samo soba ODRASLIH (odluka vlasnika, 04.09.2026).** Do tada je stajalo i u
+ * dečjoj sobi; uklonjeno je i sa tog ekrana i sa rute, jer red čekanja u admin tabu
+ * „Prijave" nema ko da rešava. Otud je otpao i prop `dete`, koji je posle slanja
+ * dodavao uputstvo da se kaže roditelju.
  *
  * Prijava traži ŠIFRU sa zatvorene liste (`prijava-poruke-pravila.ts`), a slobodan
- * tekst samo uz „nešto drugo". Razlog: sedmogodišnjak neće napisati obrazloženje,
- * ali ume da pritisne dugme — a obrazac (mamljenje, laž o uzrastu) se bez šifre ne
- * može prepoznati kroz više prijava.
+ * tekst samo uz „nešto drugo" — ko je izabrao šifru već je rekao šta prijavljuje.
  *
  * Prijava NE uklanja poruku. Uklanja je Fondacija, i tek posle odluke; ovde se samo
  * diže ruka. Zato posle slanja piše da je prijava poslata, a ne da je poruka
@@ -14,12 +17,8 @@
  *
  * 🔴 Veličina nije stvar ukusa (izmena 31.08.2026). Dugme je bilo `text-[10px]`
  * podvučeni sivi tekst bez ijednog piksela padinga — meta oko 12 × 30 px, dakle
- * šest puta manja od minimuma, i to na ekranu čiji su svi ostali elementi dugmad
- * u jarkim bojama i brojevi od 6 rem. Pošto roditelj razgovore među decom ne čita
- * (čl. 9 st. 2), dete je JEDINI senzor koji sistem ima za traženje slika, poziv na
- * susret i laž o uzrastu. Zaštita koju sedmogodišnjak ne može da pogodi prstom
- * faktički ne postoji. Prop `malo` je zato uklonjen — nije postojala veličina
- * ispod ove koja bi bila ispravna ni u jednoj od dve sobe.
+ * šest puta manja od minimuma. Prop `malo` je uklonjen: nije postojala veličina
+ * ispod ove koja bi bila ispravna.
  */
 
 import { useState } from "react";
@@ -29,16 +28,9 @@ import { kljucRazloga, MAX_OPIS, type RazlogKod } from "@/lib/prijava-poruke-pra
 export default function PrijaviPoruku({
   porukaId,
   sifre,
-  dete,
 }: {
   porukaId: string;
   sifre: RazlogKod[];
-  /**
-   * Poruka je u dečjoj sobi. Menja se samo ono što se posle prijave kaže: dete
-   * dobija i uputstvo da javi roditelju, jer je Fondacija spora u odnosu na veče
-   * u kome se nešto dešava, a roditelj je jedini ko te večeri može da reaguje.
-   */
-  dete?: boolean;
 }) {
   const t = useTranslations("prijavaPoruke");
   const [otvoreno, setOtvoreno] = useState(false);
@@ -73,15 +65,13 @@ export default function PrijaviPoruku({
 
   /**
    * Posle slanja se ranije ispisivala jedna reč — „prijavljeno" — i ništa više.
-   * Dete nije saznalo ni šta se dalje dešava, ni ko to gleda, ni da treba da kaže
-   * roditelju. Ishod se objavljuje (`role="status"`), inače ga čitač ekrana ne
-   * pročita, a upravo je to trenutak u kome potvrda znači najviše.
+   * Ishod se objavljuje (`role="status"`), inače ga čitač ekrana ne pročita, a
+   * upravo je to trenutak u kome potvrda znači najviše.
    */
   if (poslato) {
     return (
       <span role="status" className="inline-block rounded-xl bg-kolo-green-100 px-3 py-2 text-sm text-kolo-green-800">
         {t("poslato")}
-        {dete && <span className="mt-0.5 block font-semibold">{t("poslato_reci_roditelju")}</span>}
       </span>
     );
   }
@@ -93,8 +83,7 @@ export default function PrijaviPoruku({
         onClick={() => setOtvoreno(true)}
         className="meta-dete gap-1 rounded-full border border-kolo-border px-3 text-sm font-semibold text-kolo-muted transition hover:border-kolo-danger hover:text-kolo-danger"
       >
-        {/* Zastavica: dete koje sriče bira po obliku, ali oblik sam ne nosi
-            značenje — uz njega uvek stoji i reč. */}
+        {/* Zastavica: oblik sam ne nosi značenje — uz njega uvek stoji i reč. */}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0">
           <path d="M4 21V4" />
           <path d="M4 4h13l-2 4 2 4H4" />
