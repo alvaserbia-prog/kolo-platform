@@ -7,10 +7,8 @@
  *
  * ─── Zašto prijava nosi I poruku I čoveka ───────────────────────────────────
  *
- * Poruka je DOKAZ. Roditelj razgovore dece više ne čita (Pravilnik o učešću dece,
- * čl. 9), pa je prijavljena poruka jedino što Fondacija sme i može da pogleda.
- * Čista „prijavi korisnika" bez poruke terala bi moderatora da pročita celu sobu
- * da bi shvatio šta se desilo — dakle da vrati nadzor koji je ovaj model skinuo.
+ * Poruka je DOKAZ. Čista „prijavi korisnika" bez poruke terala bi moderatora da
+ * pročita celu sobu da bi shvatio šta se desilo.
  *
  * Čovek je SUBJEKT. Opasnost je gotovo uvek nalog, ne pojedinačna poruka: tri
  * prijave iz tri razgovora nad istim nalogom su signal koji nijedna od tih poruka
@@ -32,20 +30,21 @@ export const RAZLOZI = [
 export type RazlogKod = (typeof RAZLOZI)[number];
 
 /**
- * Šifre koje se nude u DEČJOJ sobi.
+ * 🔴 **`RAZLOZI_DECA` VIŠE NE POSTOJI (odluka vlasnika, 04.09.2026).** Prijava je
+ * uklonjena iz dečje sobe — i sa ekrana (`DecjaPocetna.tsx`) i sa rute
+ * (`POST /api/chat/[id]/prijavi` odbija poruku iz `ChatSoba.DECA`). Razlog nije
+ * tehnički: red čekanja u admin tabu „Prijave" nema ko da rešava, pa je dugme bilo
+ * obećanje koje se ne ispunjava.
  *
- * 🔴 Tri šifre mamljenja (`TRAZI_SLIKE`, `TRAZI_SUSRET`, `LAZE_UZRAST`) stoje
- * odvojeno namerno. Pod jednom zbirnom šifrom „neprimereno" obrazac se ne bi
- * video, a upravo obrazac — ne pojedinačna poruka — je ono što se ovde traži.
- * Formulacije su detinje jednostavne jer ih čita sedmogodišnjak.
+ * 🔴 **Tri šifre mamljenja — `TRAZI_SLIKE`, `TRAZI_SUSRET`, `LAZE_UZRAST` — OSTAJU
+ * u `RAZLOZI` i u enum-u `PrijavaPorukeRazlog`.** Nose ih zatečene prijave upisane
+ * dok je dugme radilo, a admin ekran mora da ume da ih prikaže; brisanje vrednosti
+ * oborilo bi prikaz tih redova. Isti razlog iz kog ostaju `WalletType.KRUG` i
+ * `EMISIJA_KRUG_BONUS` posle gašenja Kruga. Iz istog razloga ih i `jeHitno` i dalje
+ * prepoznaje.
+ *
+ * Ako se prijava ikad vrati u dečju sobu, vraća se ovaj niz — ne izmišlja se nov.
  */
-export const RAZLOZI_DECA: RazlogKod[] = [
-  "VREDJANJE",
-  "TRAZI_SLIKE",
-  "TRAZI_SUSRET",
-  "LAZE_UZRAST",
-  "OSTALO",
-];
 
 /** Šifre koje se nude u sobi odraslih (Uslovi čl. 22, 24, 25). */
 export const RAZLOZI_ODRASLI: RazlogKod[] = [

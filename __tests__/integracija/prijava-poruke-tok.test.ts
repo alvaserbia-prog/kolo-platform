@@ -54,6 +54,9 @@ describe.skipIf(!IMA_BAZU)("prijava poruke — odluka Fondacije", () => {
     const bojan = (await korisnik("BojanPrijava")).id;
     const cveta = (await korisnik("CvetaPrijava")).id;
 
+    // `soba: "DECA"` je namerno i posle 04.09.2026. Nove prijave iz dečje sobe
+    // ruta više ne prima, ali ZATEČENE — upisane dok je dugme radilo — admin i
+    // dalje mora da ume da reši. Servisni sloj sobu ne gleda i ne sme da je gleda.
     const poruka = await prisma.chatMessage.create({
       data: { userId: autor, content: "sporna poruka", soba: "DECA" },
     });

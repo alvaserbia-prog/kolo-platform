@@ -843,13 +843,13 @@ enum PrijavaRazlog {
   DRUGO
 }
 
-/// Šifre razloga za prijavu poruke iz Pričaonice (Uslovi čl. 25; Pravilnik o
-/// učešću dece čl. 18a).
+/// Šifre razloga za prijavu poruke iz Pričaonice (Uslovi čl. 25).
 ///
-/// Jedna lista za obe sobe, a ekran nudi samo one šifre koje njegovoj sobi imaju
-/// smisla (dečja: maltretiranje, mamljenje, laž o uzrastu; soba odraslih:
-/// neprimeren sadržaj, lični podaci, prevara). Server ne proverava da li šifra
-/// pripada sobi — promašena šifra je pogrešno razvrstana prijava, ne rupa.
+/// 🔴 Prijava je 04.09.2026. UKLONJENA iz dečje sobe (odluka vlasnika), pa se nove
+/// prijave upisuju samo iz sobe odraslih. Tri šifre mamljenja (TRAZI_SLIKE,
+/// TRAZI_SUSRET, LAZE_UZRAST) OSTAJU: nose ih zatečeni redovi upisani dok je dugme
+/// radilo, a admin ekran mora da ume da ih prikaže. Brisanje vrednosti oborilo bi
+/// prikaz tih prijava.
 ///
 /// 🔴 TRAZI_SLIKE, TRAZI_SUSRET i LAZE_UZRAST stoje odvojeno namerno: to su
 /// obrasci mamljenja, i pod jednom zbirnom šifrom „neprimereno" ne bi se videli.
@@ -2057,9 +2057,10 @@ model Prijateljstvo {
   @@index([bId])
 }
 
-/// Prijava poruke iz Pričaonice (Modul Deca, čl. 18a; Uslovi čl. 25).
+/// Prijava poruke iz Pričaonice — od 04.09.2026. samo iz sobe ODRASLIH (Uslovi
+/// čl. 25). Dečja soba prijavu više nema (odluka vlasnika); zatečeni redovi iz nje
+/// ostaju i admin ih i dalje rešava, pa servisni sloj sobu ne gleda.
 ///
-/// Roditelj razgovore dece ne čita, pa je **dete jedino koje može da signalizira**.
 /// Prijava ne uklanja poruku — uklanja je Fondacija, istim putem kao i svaki drugi
 /// sadržaj (`DELETE /api/admin/chat/[id]`).
 ///

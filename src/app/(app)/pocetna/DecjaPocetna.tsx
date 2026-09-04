@@ -4,8 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { KarticaSkole } from "@/lib/skola";
-import PrijaviPoruku from "@/components/PrijaviPoruku";
-import { RAZLOZI_DECA } from "@/lib/prijava-poruke-pravila";
 
 type Oglas = {
   id: string;
@@ -426,14 +424,11 @@ function DecjaPricaonica({
                   >
                     {p.content}
                   </p>
-                  {/* Prijava (čl. 18a) traži ŠIFRU razloga: roditelj razgovore ne čita,
-                      pa je dete jedino koje signalizira — a bez šifre se obrazac
-                      (mamljenje, laž o uzrastu) ne bi mogao prepoznati kroz više prijava. */}
-                  {!moja && (
-                    <span className="ml-2 inline-block align-bottom">
-                      <PrijaviPoruku porukaId={p.id} sifre={RAZLOZI_DECA} dete />
-                    </span>
-                  )}
+                  {/* Prijava poruke je UKLONJENA iz dečje sobe (odluka vlasnika,
+                      04.09.2026). Dugme je stajalo ovde od 17.08. i vodilo je u
+                      admin tab „Prijave"; taj red čekanja nema ko da rešava, pa je
+                      obećanje koje ekran ne može da ispuni. Ista ruta i dalje radi
+                      u sobi odraslih. Vidi `POST /api/chat/[id]/prijavi`. */}
                 </li>
               );
             })}
