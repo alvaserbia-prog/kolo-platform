@@ -46,7 +46,14 @@ export default async function PravnaPozicijaPage() {
     t("zrno_nije1"), t("zrno_nije2"), t("zrno_nije3"),
     t("zrno_nije4"), t("zrno_nije5"), t("zrno_nije6"),
   ];
-  const razlozi = [1, 2, 3, 4, 5].map((n) => ({
+  // Šest odredaba koje obaraju čitanje ZRNA kao investicionog instrumenta.
+  // 🔴 `zasto2` NE tvrdi da dinarskog ulaza nema — donacija u dinarima postoji i
+  // nosi evidentiran POEN. Tvrdi ono što akti stvarno kažu: da su to dva pravno
+  // nezavisna akta, da dinar ulazi u Fondaciju a ne u obračunski okvir (čl. 38)
+  // i da evidentiranje nije protivusluga (čl. 73). Ranija formulacija „nema
+  // dinarskog ulaza" bila je neistinita i lako oboriva, što je na pravnoj strani
+  // gore od ćutanja.
+  const razlozi = [1, 2, 3, 4, 5, 6].map((n) => ({
     naslov: t(`zasto${n}_naslov`),
     tekst: t(`zasto${n}_tekst`),
   }));
