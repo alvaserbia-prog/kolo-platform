@@ -208,6 +208,7 @@ Why that matters. There is no contract between those two acts. There is no arran
       },
       {
         id: 40,
+        link: { href: "/pravna-pozicija", label: "KOLO's legal position" },
         pitanje: `Is this some kind of pyramid scheme or crypto?`,
         odgovor: `It is neither.
 
@@ -768,6 +769,7 @@ Companies and sole traders take part through Sponsorship — they support the Fo
     pitanja: [
       {
         id: 47,
+        link: { href: "/pravna-pozicija", label: "KOLO's legal position" },
         pitanje: `Has any regulator (the National Bank, the Tax Administration, the Commissioner) confirmed that this is legal, or is it only the Foundation saying so?`,
         odgovor: `No. At present there is no written opinion from a regulator confirming legality — neither the National Bank, nor the Tax Administration, nor the Commissioner has issued such a confirmation.
 

@@ -2,6 +2,11 @@ export type FaqPitanje = {
   id: number;
   pitanje: string;
   odgovor: string;
+  /** Neobavezan link ispod odgovora — za pitanja na koja postoji stranica sa
+   *  punim odgovorom (npr. „piramida ili kripto?" → /pravna-pozicija).
+   *  Odgovori se iscrtavaju kao čist tekst, bez markdown-a i bez HTML-a, pa
+   *  link ne može da stoji u samom tekstu — otud zasebno polje. */
+  link?: { href: string; label: string };
 };
 
 export type FaqSekcija = {
@@ -218,6 +223,7 @@ Zašto je to važno. Između ta dva akta ne postoji ugovor. Ne postoji dogovor p
       },
       {
         id: 40,
+        link: { href: "/pravna-pozicija", label: "Pravna pozicija KOLA" },
         pitanje: `Da li je ovo neka piramida ili kripto?`,
         odgovor: `Nije ni jedno ni drugo.
 
@@ -780,6 +786,7 @@ Vlasnik firme može, naravno, i sam biti član kao fizičko lice, nezavisno od p
     pitanja: [
       {
         id: 47,
+        link: { href: "/pravna-pozicija", label: "Pravna pozicija KOLA" },
         pitanje: `Da li je iko od regulatora (NBS, Poreska, Poverenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
         odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost — ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
 

@@ -208,6 +208,7 @@ Zašto je to važno. Između ta dva akta ne postoji ugovor. Ne postoji dogovor p
       },
       {
         id: 40,
+        link: { href: "/pravna-pozicija", label: "Pravna pozicija KOLA" },
         pitanje: `Je li ovo neka piramida ili kripto?`,
         odgovor: `Nije ni jedno ni drugo.
 
@@ -768,6 +769,7 @@ Tvrtke i obrtnici sudjeluju kroz Pokroviteljstvo — podupru Fondaciju, a vlasni
     pitanja: [
       {
         id: 47,
+        link: { href: "/pravna-pozicija", label: "Pravna pozicija KOLA" },
         pitanje: `Je li itko od regulatora (NBS, Porezna, Povjerenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
         odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost — ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
 
