@@ -556,7 +556,7 @@ Modul postoji iza prekidača **`MODUL_DECA_AKTIVAN`** u `src/lib/moduli.ts`.
 3. **Prijateljstva se brišu.** Njihovo mesto zauzima lanac potvrda.
 - **Sve ostalo OSTAJE**: POEN koji je roditelj prepisao i POEN iz razmene sa drugom decom se ne diraju.
 - 🟡 **Ispravka datuma rođenja postoji, ali NAMERNO nema dugme** (odluka vlasnika 2026-08-18: „mogućnost ostaviti, ali je ne promovisati"). Po čl. 7 datum upisuje roditelj i posle upisa se ne menja; `POST /api/admin/deca/[id]/datum-rodjenja` je ispravka omaške koju sprovodi Fondacija na zahtev roditelja — **samo SUPERADMIN**, uz otkucan pseudonim. Nov datum mora da ostavi nalog maloletnim: prelazak u punoletni vodi isključivo `punoletstvo.ts` (otpis POEN-a, brisanje prijateljstava, potvrde roditelja), pa ispravka polja ne sme ni da ga pokrene ni da ga preskoči. Gasi `punoletstvoNajavaAt`, jer je najava izračunata iz starog datuma. Audit: `DATUM_RODJENJA_ISPRAVLJEN`. **Ne dodavati ulaznu tačku u interfejsu** — dugme bi ovo pretvorilo u redovan tok i otvorilo put da se punoletstvo pomera.
-- **Redosled je bitan:** otpis → brisanje prijateljstava → prevođenje naloga → potvrde. Jezgro verifikacije odbija maloletni nalog kao metu, a potvrda pre otpisa dala bi 1.000 POEN koji bi otpis odmah pojeo.
+- **Redosled je bitan:** otpis → brisanje prijateljstava → prevođenje naloga → potvrde. Jezgro verifikacije odbija maloletni nalog kao metu (od 04.09.2026 — vidi „Dete ne ulazi u lanac potvrda" ispod; do tada je ta rečenica opisivala proveru koje nije bilo), a potvrda pre otpisa dala bi 1.000 POEN koji bi otpis odmah pojeo.
 - **Razlog za poništenje je uravnoteženje kanala:** prijateljstvo nosi 500 za trideset sekundi u istoj prostoriji, potvrda 1.000 uz odgovornost za tuđi identitet. Bez poništenja bi onaj ko krene sa 17 odradio godinu jeftinog kanala, ušao u 18. sa zalihom i **povrh toga** dobio ceo skupi — isti čovek, godina razlike, trajno drugačija pozicija.
 - **Mesec dana ranije** ide obaveštenje detetu **i njegovim prijateljima** (i njima odlazi po 500 — bez toga je iznenađenje na najgorem mestu).
 
@@ -854,6 +854,43 @@ je dete uz to bilo i neverifikovano, pa je nosio pečat „bez potvrde". Pravilo
 javni R2 URL; zatvaranje bi tražilo potpisane URL-ove, što je zaseban posao.
 
 **Veza roditelj–dete je javna u OBA smera** (odluka vlasnika): sa deteta se vidi roditelj, sa roditelja ko su mu deca. 🔴 **Posledica je svesno prihvaćena** — deca time postaju popisiva preko odraslih, što je šira izloženost od svih ranglista zajedno. Zaštitu tada nosi zatvoren profil i prekidač, ne skrivenost. Usput utvrđeno: program **Podrška majkama tu javnost NE traži** (Fondacija vezu ionako vidi, a potvrđivači potvrđuju bez uvida u unete podatke) — javnost stoji na sopstvenom razlogu.
+
+### 🔴 Dete ne ulazi u lanac potvrda — provere nije bilo (2026-09-04)
+
+Čl. 15 Pravilnika o učešću dece kaže da maloletni korisnik u lanac potvrda ne ulazi.
+Kod to **nije sprovodio**, a odsustvo se nije videlo ni na jednom ekranu:
+`/verifikacija` maloletan nalog preusmerava na `/prijatelji`, pa je put izgledao
+zatvoreno. Rute ispod tog ekrana bile su otvorene — `POST /api/verifikacija/token`
+izdavao je kod svakom prijavljenom nalogu, a `izvrsiJezgroVerifikacije` metu je
+proveravalo po tipu naloga i indeksu.
+
+🔴 **Indeks tu ne brani ništa, i to je srž greške.** Smer „ko potvrđuje" dete jeste
+obarao (`imaPristupVerifikaciji` traži indeks ≥ 10%, dete ga ima 0). Smer **meta**
+nije obarao ništa, jer su `verified` i indeks upravo ono što se potvrdom **dobija** —
+vrednošću koja tek nastaje meta se ne može odbiti. Potvrđeno dete dobija
+`verified: true` i indeks 10%, a na tome — ne na uzrastu — stoje `POST /api/zrno/upis`,
+socijalni programi (`imaFunkcionalniPristup`), `POST /api/donacije`, glas u Gornjem
+Kolu i sopstveni verifikacioni kapacitet (⌊10/10⌋ = 1). Jedna propuštena provera
+otvarala je sve odjednom.
+
+**Provera je sada izričita:** `smeULanacPotvrda` + `PORUKA_DETE_VAN_LANCA`
+(`deca-pravila.ts`), sprovedena u `verifikacija-service.ts` na dva mesta — u jezgru
+potvrde za **oba smera** i pri izdavanju koda. Izričito, ne posredno preko indeksa,
+iz istog razloga iz kog i `smeUcestvovati` u `nabavka-pravila.ts` gleda `maloletan`.
+
+🟡 **Punoletstvo se na ovu proveru oslanja.** `punoletstvo.ts` roditeljske potvrde iz
+čl. 19 st. 3 upisuje TEK pošto nalog pređe u punoletni (korak 4 posle koraka 3);
+`izvrsiVerifikacijuBezTokena` ide kroz isto jezgro. Taj redosled je do sada bio
+**opisan** kao zaštita a nije bio ništa — sada jeste, pa se ne sme obrnuti.
+
+**Brana:** `__tests__/deca-lanac-potvrda.test.ts` — gleda i pravilo i IZVOR
+(`verifikacija-service.ts` mora da pominje oba ulaza, punoletstvo mora da prevede
+nalog pre potvrda), istim postupkom kojim `oglasi-vidljivost-izvor.test.ts` čuva
+čl. 13.
+
+🔴 **Pouka je treći put ista:** ekran nije poslednja reč. Preusmerenje sa
+`/verifikacija` izgledalo je kao pravilo, a bilo je samo navigacija — kao što je
+`smeDaVidiOglas` bio tačno pravilo koje tri prikaza nisu zvala.
 
 ### Prijava poruke nosi i čoveka (2026-08-17)
 

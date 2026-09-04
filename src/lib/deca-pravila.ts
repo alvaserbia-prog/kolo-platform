@@ -389,6 +389,41 @@ export function smeDaVidiProfilDeteta(
   return false;
 }
 
+/**
+ * Sme li nalog da uđe u lanac potvrda — kao onaj ko potvrđuje ILI kao meta
+ * (čl. 15 Pravilnika o učešću dece: maloletni korisnik u lanac potvrda ne ulazi).
+ *
+ * 🔴 **Provera je IZRIČITA, ne posredna preko indeksa.** Dete je
+ * `TipKorisnika.NEVERIFIKOVAN` sa indeksom 0, pa ga smer „ko potvrđuje" već
+ * obara `imaPristupVerifikaciji`. Smer „meta" NIJE obarao ništa: `verified` i
+ * indeks su ono što se potvrdom DOBIJA, pa se njima meta ne može odbiti. Isti
+ * razlog zbog koga i `smeUcestvovati` u `nabavka-pravila.ts` gleda `maloletan`
+ * umesto da se osloni na indeks.
+ *
+ * Posledica propuštanja nije kozmetička: potvrđeno dete dobija `verified: true`
+ * i indeks 10%, a na tome — ne na uzrastu — stoje ZRNO (`/api/zrno/upis`),
+ * socijalni programi (`imaFunkcionalniPristup`), donacije, glas u Gornjem Kolu i
+ * sopstveni verifikacioni kapacitet. Jedna propuštena provera otvara sve odjednom.
+ *
+ * 🔴 **Punoletstvo se oslanja na OVU funkciju.** `punoletstvo.ts` roditeljske
+ * potvrde upisuje TEK pošto nalog pređe u punoletni (korak 4 posle koraka 3) —
+ * baš zato što jezgro verifikacije maloletnu metu odbija. Ako se ovde ikad
+ * doda izuzetak, taj redosled prestaje da bude zaštita i mora se čitati ponovo.
+ */
+export function smeULanacPotvrda(nalog: { maloletan: boolean }): boolean {
+  return !nalog.maloletan;
+}
+
+/**
+ * Poruka koju jezgro potvrde vraća maloletnom nalogu (čl. 15).
+ *
+ * Kratka namerno: `kljucGreske()` iz srpskog teksta izvodi ključ i **seče ga na
+ * 80 znakova**, pa duža rečenica daje ključ presečen usred reči — nečitljiv i,
+ * gore, podložan sudaru sa drugom porukom koja deli istih 80 znakova.
+ */
+export const PORUKA_DETE_VAN_LANCA =
+  "Maloletni nalog ne ulazi u lanac potvrda. Potvrde dobija na 18. rođendan.";
+
 // ── Rokovi ───────────────────────────────────────────────────────────────────
 
 /** Trenutak isteka roka za izjašnjenje, računat od otvaranja naloga (čl. 6 st. 2). */
