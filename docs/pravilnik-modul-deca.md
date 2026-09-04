@@ -1,8 +1,9 @@
 # Radne beleške — Pravilnik o učešću dece
 
-🟢 **Akt je USVOJEN.** Merodavan tekst je **`dokumentacija 4.1/ucesce_dece_4_3_1.md`**
-(uz prevode `en/`, `ru/`, `hr/`, `hu/`), pod nazivom **Pravilnik o učešću dece**,
-verzija **4.3.0** — deo kanonskog seta. Učitava ga `src/lib/pravni-dokument.ts`,
+🟢 **Akt je USVOJEN.** Merodavan tekst je **`dokumentacija 4.1/ucesce_dece_4_4_1.md`**
+(uz prevode `en/`, `ru/`, `hr/`, `hu/`), pod nazivom **Pravilnik o učešću dece**.
+Usvojen je setom **4.3.0**, a fajl nosi broj tekućeg seta jer se ceo set diže
+zajedno (poslednji bump: **4.4.1**, kolektivna nabavka). Deo je kanonskog seta. Učitava ga `src/lib/pravni-dokument.ts`,
 prikazuje se na `/pravilnik/ucesce-dece` i broji ga `__tests__/pravni-dokumenti.test.ts`.
 
 🔴 **Normativni tekst iz ovog fajla je UKLONJEN da ne bi postojala dva izvora
@@ -15,8 +16,12 @@ ispod i dalje poklapaju sa usvojenim tekstom.
 Ostaje samo ono što nije normativa: obrazloženja mehanike, svesno ostavljene
 praznine i mapa koda. Tehnički plan integracije: `docs/plan-modul-deca.html`.
 
-**Sproveden u kodu**, iza prekidača `MODUL_DECA_AKTIVAN` u `src/lib/moduli.ts`
-(usvojen akt više nije uslov za paljenje; vidi napomenu uz čl. 22 usvojenog teksta).
+**Sproveden u kodu.** Prekidač `MODUL_DECA_AKTIVAN` u `src/lib/moduli.ts` je
+**`true`** — modul je u radu na ekolo.rs od **03.09.2026** (odluka vlasnika).
+Gašenje više nije čist potez: modul ima korisnike, pa `false` ostavlja dete bez
+pristupa sopstvenom nalogu, a POEN iz prijateljstava ostaje u opticaju bez ekrana
+na kome se vidi. Ako gašenje ikada zatreba, ide protivzapisom Protokola i
+obaveštenjem roditeljima, kao gašenje naloga — ne prekidačem.
 
 ---
 
@@ -84,6 +89,38 @@ neograničena kasa iz jednog jedinog prijateljstva. Sa minusom ciklus daje tačn
 nulu, pa je i obnavljanje para iz čl. 14c st. 5 bezopasno: pomirene drugarice ne
 gube ništa trajno.
 
+### Zatvorena rupa: dete u lancu potvrda (04.09.2026)
+
+Čl. 15 kaže da maloletni korisnik u lanac potvrda ne ulazi. Provere za to **nije
+bilo**, a odsustvo se nije videlo ni na jednom ekranu: `/verifikacija` maloletan
+nalog preusmerava na `/prijatelji`, pa je put izgledao zatvoreno. Rute ispod tog
+ekrana bile su otvorene — `POST /api/verifikacija/token` izdavao je kod svakom
+prijavljenom nalogu, a `izvrsiJezgroVerifikacije` metu je proveravalo po tipu i
+indeksu.
+
+🔴 **Zašto indeks tu ništa ne brani.** Smer „ko potvrđuje" dete jeste obarao
+(`imaPristupVerifikaciji` traži indeks ≥ 10%, dete ga ima 0). Smer „meta" nije
+obarao ništa, jer su `verified` i indeks upravo ono što se potvrdom **dobija** —
+vrednošću koja tek nastaje meta se ne može odbiti. Potvrđeno dete dobija
+`verified: true` i indeks 10%, a na tome — ne na uzrastu — stoje `/api/zrno/upis`,
+socijalni programi (`imaFunkcionalniPristup`), `/api/donacije`, glas u Gornjem Kolu
+i sopstveni verifikacioni kapacitet (⌊10/10⌋ = 1). Jedna propuštena provera
+otvarala je sve odjednom.
+
+Provera je sada izričita — `smeULanacPotvrda` u `deca-pravila.ts`, sprovedena u
+jezgru potvrde (oba smera) i pri izdavanju koda. Isti razlog iz kog i
+`smeUcestvovati` u `nabavka-pravila.ts` gleda `maloletan` umesto da se osloni na
+indeks.
+
+🟡 **Punoletstvo se na ovu proveru oslanja.** `punoletstvo.ts` roditeljske potvrde
+iz čl. 19 st. 3 upisuje TEK pošto nalog pređe u punoletni (korak 4 posle koraka 3).
+Taj redosled je do sada bio opisan kao zaštita a nije bio ništa; sada jeste. Brana:
+`__tests__/deca-lanac-potvrda.test.ts`.
+
+🔴 **Pouka je ista koja u CLAUDE.md stoji uz zatvoren profil i uz vidljivost oglasa:
+ekran nije poslednja reč.** Preusmerenje sa `/verifikacija` je izgledalo kao pravilo,
+a bilo je samo navigacija.
+
 ### Praznine koje usvojena verzija svesno ostavlja
 
 - **Zaštita po članu 4 je i dalje naknadna.** Nalog radi trideset dana pre nego što
@@ -123,6 +160,7 @@ stepenovan po uzrastu; jedinstven registar dece sa programom Podrška Majkama.
 | Samostalna registracija, poziv, preuzimanje, drugi roditelj (čl. 4a–4b) | `src/lib/protokol/deca-poziv.ts` |
 | Prijateljstva, doprinos i raskid (čl. 14a–14c) | `src/lib/protokol/prijateljstva.ts` |
 | Punoletstvo (čl. 19) | `src/lib/protokol/punoletstvo.ts` |
+| Dete van lanca potvrda (čl. 15) | `smeULanacPotvrda` u `src/lib/deca-pravila.ts`, sprovedeno u `verifikacija-service.ts` (jezgro + izdavanje koda); brana `__tests__/deca-lanac-potvrda.test.ts` |
 | Rute modula | `src/app/api/deca/**`, `src/app/api/chat/[id]/prijavi`, cron `deca-potvrde` (21:00 UTC) i `deca-punoletstvo` (20:00 UTC) |
 | Ekran „Moja deca" i preuzimanje | `src/components/deca/MojaDeca.tsx`, uz profil roditelja |
 | Registracija deteta (čl. 4a) | `src/app/(auth)/registracija/dete/` |

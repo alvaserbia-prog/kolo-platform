@@ -31,6 +31,7 @@ import { DoprinosOkidac, Prisma, TipKorisnika, TransactionType } from "@/generat
 import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, osveziSagovornike } from "@/lib/protokol/doprinos-razmeni";
 import { osveziPrijateljstvaDece } from "@/lib/protokol/prijateljstva";
+import { PORUKA_DETE_VAN_LANCA, smeULanacPotvrda } from "@/lib/deca-pravila";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -66,6 +67,12 @@ export async function generisiTokenZaVerifikaciju(korisnikId: string) {
   const korisnik = await prisma.user.findUnique({ where: { id: korisnikId } });
   if (!korisnik) {
     throw new VerifikacijaGreska("Korisnik ne postoji", 404);
+  }
+  // Detetu se kod ne izdaje (čl. 15). Ekran `/verifikacija` maloletan nalog i
+  // inače preusmerava, ali ekran nije poslednja reč — ruta je dostižna svakome
+  // ko zna adresu, a kod koji ništa ne otvara je poziv da se pokuša.
+  if (!smeULanacPotvrda(korisnik)) {
+    throw new VerifikacijaGreska(PORUKA_DETE_VAN_LANCA, 403);
   }
 
   // Generiše unique token i 6-cifren broj
@@ -151,6 +158,14 @@ async function izvrsiJezgroVerifikacije(
   const verifikovani = await tx.user.findUnique({ where: { id: verifikovaniId } });
   if (!verifikovani) {
     throw new VerifikacijaGreska("Član koga potvrđuješ ne postoji.", 404);
+  }
+
+  // Maloletni nalog ne ulazi u lanac potvrda — ni sa jedne strane (čl. 15
+  // Pravilnika o učešću dece). Provera stoji PRE svih ostalih jer je jedina
+  // koju indeks ne može da nadomesti: `verified` i indeks su ono što se
+  // potvrdom dobija, pa se njima meta ne može odbiti. Vidi `smeULanacPotvrda`.
+  if (!smeULanacPotvrda(verifikator) || !smeULanacPotvrda(verifikovani)) {
+    throw new VerifikacijaGreska(PORUKA_DETE_VAN_LANCA, 403);
   }
 
   // Provera prava verifikatora (čl. 4)
