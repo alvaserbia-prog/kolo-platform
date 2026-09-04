@@ -12,18 +12,21 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-// Redosled prikaza pravilnika; nazivi i opisi se čitaju iz i18n (pravne.rb.<slug>).
-const SLUGOVI = [
-  "kolo-sistem",
-  "hijerarhija",
-  "dokaz-stvarnosti",
-  "pokroviteljstvo-donacije",
-  "operativni",
-  "osnivacki",
-  "gornje-kolo",
-  "programi-podrske",
-  "ucesce-dece",
-  "projekti-nabavke",
+/**
+ * Pravilnici u tri grupe, poređane po tome šta čovek prvo treba da pročita.
+ *
+ * Do 03.09.2026. je ovde stajao ravan spisak od deset akata, svih deset u istoj
+ * težini. Ko otvori tu stranu ne zna odakle da počne, pa najčešće ne počne
+ * nigde — a prva tri akta odgovaraju na pitanje šta je sistem, dok ostalih
+ * sedam razrađuju pojedine delove. Redosled unutar grupa je nepromenjen.
+ *
+ * Nazivi i opisi samih pravilnika i dalje se čitaju iz `pravne.rb.<slug>`;
+ * naslovi grupa iz `pravne.grupa<n>_naslov` i `_opis`.
+ */
+const GRUPE = [
+  { kljuc: "grupa1", slugovi: ["kolo-sistem", "dokaz-stvarnosti", "hijerarhija"] },
+  { kljuc: "grupa2", slugovi: ["operativni", "osnivacki", "pokroviteljstvo-donacije", "programi-podrske"] },
+  { kljuc: "grupa3", slugovi: ["gornje-kolo", "projekti-nabavke", "ucesce-dece"] },
 ] as const;
 
 export default async function PravilniciIndex() {
@@ -51,21 +54,33 @@ export default async function PravilniciIndex() {
         </div>
       </div>
 
-      <div className="space-y-3">
-        {SLUGOVI.map((slug) => (
-          <Link
-            key={slug}
-            href={`/pravilnik/${slug}`}
-            className="block bg-white rounded-2xl card-shadow p-5 hover:shadow-md transition-shadow border-t-4 border-kolo-green-700"
-          >
-            <h2 className="font-bold text-kolo-green-900 text-lg leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>
-              {t(`rb.${slug}.naziv`)}
-            </h2>
-            <p className="text-sm text-kolo-muted leading-relaxed">
-              {t(`rb.${slug}.opis`)}
-            </p>
-            <p className="text-sm font-medium text-kolo-green-700 mt-3">{t("otvoriDokument")}</p>
-          </Link>
+      <div className="space-y-8">
+        {GRUPE.map((grupa) => (
+          <section key={grupa.kljuc} className="space-y-3">
+            <div>
+              <h2 className="text-sm font-bold tracking-widest text-kolo-muted uppercase">
+                {t(`${grupa.kljuc}_naslov`)}
+              </h2>
+              <p className="text-sm text-kolo-muted leading-relaxed mt-1">
+                {t(`${grupa.kljuc}_opis`)}
+              </p>
+            </div>
+            {grupa.slugovi.map((slug) => (
+              <Link
+                key={slug}
+                href={`/pravilnik/${slug}`}
+                className="block bg-white rounded-2xl card-shadow p-5 hover:shadow-md transition-shadow border-t-4 border-kolo-green-700"
+              >
+                <h3 className="font-bold text-kolo-green-900 text-lg leading-snug mb-2" style={{ letterSpacing: "-0.01em" }}>
+                  {t(`rb.${slug}.naziv`)}
+                </h3>
+                <p className="text-sm text-kolo-muted leading-relaxed">
+                  {t(`rb.${slug}.opis`)}
+                </p>
+                <p className="text-sm font-medium text-kolo-green-700 mt-3">{t("otvoriDokument")}</p>
+              </Link>
+            ))}
+          </section>
         ))}
       </div>
 

@@ -908,6 +908,12 @@
     "razgovor_zatvoren": "The friendship ended, so this conversation no longer works. If you make up, scan the code again."
   },
   "pravne": {
+    "grupa1_naslov": "Foundational",
+    "grupa1_opis": "What KOLO is, the rules it runs on, and how the acts relate to one another.",
+    "grupa2_naslov": "How POEN comes about",
+    "grupa2_opis": "The channels through which the Protocol records contribution, and how dinar funds are allocated.",
+    "grupa3_naslov": "Governance and special regimes",
+    "grupa3_opis": "Who decides, how shared funds are spent, and the terms on which children take part.",
     "eyebrow": "Legal documents",
     "dokumentacija": "Documentation",
     "viditeI": "See also:",

@@ -908,6 +908,12 @@
     "razgovor_zatvoren": "Prijateljstvo je raskinuto, pa razgovor više ne radi. Ako se pomirite, skenirajte kod ponovo."
   },
   "pravne": {
+    "grupa1_naslov": "Temeljni",
+    "grupa1_opis": "Što je KOLO, po čemu radi i kako se akti odnose jedan prema drugome.",
+    "grupa2_naslov": "Kako nastaje POEN",
+    "grupa2_opis": "Kanali kroz koje Protokol upisuje doprinos i kako se raspoređuju dinarska sredstva.",
+    "grupa3_naslov": "Odlučivanje i posebni režimi",
+    "grupa3_opis": "Tko donosi odluke, kako se troše zajednička sredstva i pod kojim uvjetima sudjeluju djeca.",
     "eyebrow": "Pravni dokumenti",
     "dokumentacija": "Dokumentacija",
     "viditeI": "Pogledaj i:",

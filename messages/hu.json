@@ -901,6 +901,12 @@
     "razgovor_zatvoren": "A barátság véget ért, ezért a beszélgetés már nem működik. Ha kibékültök, olvassátok be újra a kódot."
   },
   "pravne": {
+    "grupa1_naslov": "Alapvető",
+    "grupa1_opis": "Mi a KOLO, milyen szabályok szerint működik, és hogyan viszonyulnak egymáshoz az aktusok.",
+    "grupa2_naslov": "Hogyan keletkezik a POEN",
+    "grupa2_opis": "A csatornák, amelyeken a Protokoll rögzíti a hozzájárulást, és hogyan osztják el a dináreszközöket.",
+    "grupa3_naslov": "Döntéshozatal és különleges rendek",
+    "grupa3_opis": "Ki dönt, hogyan költik a közös eszközöket, és milyen feltételekkel vesznek részt a gyerekek.",
     "eyebrow": "Jogi dokumentumok",
     "dokumentacija": "Dokumentáció",
     "viditeI": "Lásd még:",
