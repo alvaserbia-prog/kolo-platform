@@ -909,11 +909,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -921,11 +921,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -957,15 +957,15 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.1-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.2-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.1-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.2-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.1-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.2-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.1-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.2-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.1-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
@@ -2452,7 +2452,6 @@
     "doprinos_revizija_uredno": "A „Első hirdetések” fülön jóváhagyásra vár: {ceka}. Eltávolított hirdetés miatt megsemmisítve: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave",
     "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
     "tab_nabavke": "Nabavke"
   },
@@ -2587,12 +2586,6 @@
     "punoletstvo_otpis_prijatelj_tekst": "{pseudonim} betöltötte a 18. életévét. A barátságotok lezárult, és a bejegyzésedről {iznos} POEN leírásra került.",
     "punoletstvo_naslov": "A fiók nagykorúvá vált",
     "punoletstvo_tekst": "{broj} barátságból {iznos} POEN leírásra került a bejegyzésedről, és {potvrda} szülői megerősítés került bejegyzésre. Mostantól te magad is megerősítesz másokat.",
-    "prijava_poruke_admin_naslov": "Bejelentett üzenet a Csevegőben",
-    "prijava_poruke_admin_tekst": "Bejelentettek egy üzenetet a Csevegőben. Nézd meg a „Bejelentések” fület.",
-    "prijava_poruke_resena_naslov": "A bejelentett üzenetet eltávolították",
-    "prijava_poruke_resena_tekst": "Az Alapítvány eltávolította az általad bejelentett üzenetet. Indoklás: {odluka}",
-    "prijava_poruke_odbacena_naslov": "A bejelentésedet megvizsgálták",
-    "prijava_poruke_odbacena_tekst": "Az Alapítvány megvizsgálta a bejelentésedet, az üzenet marad. Indokolás: {odluka}",
     "lozinka_promenio_roditelj_naslov": "A szülőd új jelszót állított be neked",
     "lozinka_promenio_roditelj_tekst": "Kérdezd meg tőle az új jelszót, és azzal jelentkezz be.",
     "nalog_preveden_u_maloletni_naslov": "A fiókod gyerekfiók lett",
@@ -3226,23 +3219,6 @@
     "nisam_clan_korak3": "3. Kérj meg valakit, aki ismer és már tag, hogy erősítse meg, hogy valódi ember vagy.",
     "nisam_clan_poen": "A gyermek azonnal használja a platformot, amint átveszed a fiókot. A POEN akkor kerül bejegyzésre neki, amikor rendes taggá válsz — semmi nem vész el, minden fel van jegyezve, és aznap bejegyzésre kerül.",
     "dobijate": "Az átvétellel betekintést kap gyermeke barátaiba és hirdetéseibe, megkapja a felnőttekkel folytatott beszélgetés kapcsolóját, és beállíthat neki új jelszót. A más gyermekekkel folytatott beszélgetések tartalmát nem látja."
-  },
-  "prijavaPoruke": {
-    "dugme": "Jelentés",
-    "poslato": "A jelentés elment. Az Alapítvány megnézi.",
-    "naslov": "Mit jelentesz?",
-    "razlog_vredjanje": "Sértően ír, fenyeget vagy zaklat",
-    "razlog_trazi_slike": "Képeket kér tőlem",
-    "razlog_trazi_susret": "Találkozni akar, vagy a KOLO-n kívül írni",
-    "razlog_laze_uzrast": "Szerintem nem gyerek",
-    "razlog_neprimeren_sadrzaj": "Nem megfelelő vagy trágár tartalom",
-    "razlog_licni_podaci": "Személyes adatokat tesz közzé",
-    "razlog_prevara": "Csalás vagy megtévesztés",
-    "razlog_ostalo": "Valami más",
-    "opis_placeholder": "Egy mondatban — mi történt?",
-    "posalji": "Jelentés elküldése",
-    "odustani": "Mégse",
-    "greska": "A jelentés nem került elküldésre. Próbáld újra."
   },
   "skole": {
     "naslov": "Iskolák",

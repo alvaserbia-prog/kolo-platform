@@ -916,11 +916,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -928,11 +928,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.4.1"
+      "ver": "4.4.2"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -964,15 +964,15 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.1",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.2",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.4.1",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.4.2",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.4.1",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.4.2",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.4.1",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.4.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.1",
     "meta_whitepaper_title": "Whitepaper — KOLO",
@@ -2459,7 +2459,6 @@
     "doprinos_revizija_uredno": "Awaiting approval in the “First listings” tab: {ceka}. Annulled due to a removed listing: {ponisten}.",
     "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
     "tab_razmene": "Razmene",
-    "tab_prijave": "Prijave",
     "emisija_tbl_nivo1": "any donation below 5,000",
     "tab_nabavke": "Nabavke"
   },
@@ -2594,12 +2593,6 @@
     "punoletstvo_otpis_prijatelj_tekst": "{pseudonim} has turned 18. Your friendship is closed and {iznos} POEN has been written off from your record.",
     "punoletstvo_naslov": "The account is now an adult account",
     "punoletstvo_tekst": "{iznos} POEN from {broj} friendships has been written off from your record, and {potvrda} confirmation(s) from your parents have been recorded. From now on you confirm others yourself.",
-    "prijava_poruke_admin_naslov": "Message reported in the Chat Room",
-    "prijava_poruke_admin_tekst": "A message in the Chat Room has been reported. See the “Reports” tab.",
-    "prijava_poruke_resena_naslov": "The reported message was removed",
-    "prijava_poruke_resena_tekst": "The Foundation has removed the message you reported. Explanation: {odluka}",
-    "prijava_poruke_odbacena_naslov": "Your message report was considered",
-    "prijava_poruke_odbacena_tekst": "The Foundation considered your report and the message stays. Reasons: {odluka}",
     "lozinka_promenio_roditelj_naslov": "Your parent set a new password for you",
     "lozinka_promenio_roditelj_tekst": "Ask them what the new password is and sign in with it.",
     "nalog_preveden_u_maloletni_naslov": "Your account is now a child account",
@@ -3226,23 +3219,6 @@
     "nisam_clan_korak3": "3. Ask someone who knows you and is already a member to confirm that you are a real person.",
     "nisam_clan_poen": "The child uses the platform as soon as you take the account over. Their POEN is recorded once you become a regular member — nothing is lost, it all stays noted and is recorded to them on that day.",
     "dobijate": "By taking over you gain insight into your child's friends and listings, the switch for conversations with adults, and the ability to set a new password for them. You do not see the content of conversations with other children."
-  },
-  "prijavaPoruke": {
-    "dugme": "Report",
-    "poslato": "Report sent. The Foundation will look at it.",
-    "naslov": "What are you reporting?",
-    "razlog_vredjanje": "They insult, threaten or harass me",
-    "razlog_trazi_slike": "They ask me to send pictures",
-    "razlog_trazi_susret": "They want to meet or to talk outside KOLO",
-    "razlog_laze_uzrast": "I think this is not a child",
-    "razlog_neprimeren_sadrzaj": "Inappropriate or vulgar content",
-    "razlog_licni_podaci": "They post personal data",
-    "razlog_prevara": "Fraud or deception",
-    "razlog_ostalo": "Something else",
-    "opis_placeholder": "In one sentence — what happened?",
-    "posalji": "Send report",
-    "odustani": "Cancel",
-    "greska": "The report was not sent. Try again."
   },
   "skole": {
     "naslov": "Schools",

@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_1.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_2.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_1.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_4_1.md",
-  "radnje_obrade_4_4_1.md",
-  "uslovi_koriscenja_4_4_1.md",
-  "politika_4_4_1.md",
+  "DPIA_4_4_2.md",
+  "radnje_obrade_4_4_2.md",
+  "uslovi_koriscenja_4_4_2.md",
+  "politika_4_4_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_1.md",
   "rizici_4_4_1.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_1.md",
   "programi_podrske_4_4_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_4_1.md",
+  "ucesce_dece_4_4_2.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_4_1.md",
 ];
@@ -116,12 +116,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_4_1.md": {
+  "radnje_obrade_4_4_2.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
   },
-  "DPIA_4_4_1.md": {
+  "DPIA_4_4_2.md": {
     sr: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
     en: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
     ru: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
@@ -166,7 +166,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Период получения составляет три дня",
     ],
   },
-  "uslovi_koriscenja_4_4_1.md": {
+  "uslovi_koriscenja_4_4_2.md": {
     sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
     en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
     ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
@@ -184,7 +184,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_4_1.md": {
+  "ucesce_dece_4_4_2.md": {
     sr: [
       "### Član 7a",
       "### Član 15a",
@@ -228,7 +228,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не приносит ПОЕН",
     ],
   },
-  "politika_4_4_1.md": {
+  "politika_4_4_2.md": {
     sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
     en: ["is not consent for processing whose legal basis is consent"],
     ru: ["не является согласием на обработку"],

@@ -47,7 +47,8 @@ Sve niže navedeno je **sprovedeno** — ovo je spisak izmena, ne spisak zadatak
   nalog, odgovornost roditelja za radnje deteta, upućivanje na ovaj pravilnik i na
   čl. 15 t. 9.
 - **Uslovi korišćenja** — čl. 7 (maloletna lica od sedam godina, dva ulaza,
-  elektronska adresa roditelja) i čl. 25 (postupak po prijavi poruke iz čl. 18a).
+  elektronska adresa roditelja) i čl. 25 (postupak po prijavi poruke iz čl. 18a —
+  *oba brisana setom 4.4.2*).
 - **Politika privatnosti** — pododeljak 4.7 prepisan u celini: dva ulaza,
   elektronska adresa roditelja kao podatak trećeg lica na osnovu **legitimnog
   interesa** (čl. 12 st. 1 t. 6 ZZPL), **suženi** uvid roditelja i prijava poruke.
@@ -135,14 +136,13 @@ a bilo je samo navigacija.
   minimum oglasa nije poseban (vidi čl. 13 st. 1).
 - **Drugi ulaz u praksi služi starijoj deci** — sedmogodišnjak ne kuca elektronsku
   adresu. Mlađi ulaze kroz roditeljski profil.
-- 🔴 **Prijave poruke u dečjoj sobi VIŠE NEMA** (odluka vlasnika, 04.09.2026) —
-  uklonjena je i sa ekrana i sa rute, jer red čekanja u admin tabu „Prijave" nema
-  ko da rešava. Time dečja soba nema nijedan put do Fondacije: roditelj razgovore
-  između dece ne čita (čl. 9 st. 2), a to je bila razmena napravljena baš zato što
-  prijava postoji. Detetu ostaju roditelj i raskid prijateljstva (koji poruke tog
-  deteta sklanja iz sobe). 🔴 **Čl. 18a i dalje daje pravo na prijavu — akt i kod se
-  time razilaze**; zatvara se vraćanjem prijave ili brisanjem čl. 18a, ne trećim
-  putem. Soba odraslih je netaknuta.
+- 🔴 **Prijava poruke je UKINUTA U CELINI** (odluka vlasnika, 04.09.2026) — model
+  `PrijavaPoruke` je obrisan, a **čl. 18a ovog pravilnika je brisan** zajedno sa
+  pasusom čl. 25 Uslova (set 4.4.2), pa se akt i kod poklapaju. Time dečja soba nema
+  nijedan put do Fondacije: roditelj razgovore između dece ne čita (čl. 9 st. 2), a
+  to je bila razmena napravljena baš zato što prijava postoji. Detetu ostaju roditelj
+  i raskid prijateljstva (koji poruke tog deteta sklanja iz sobe). Uklanjanje poruke
+  od strane Fondacije je netaknuto — izgubljen je korisnički signal, ne poluga.
 - **Prijava naloga bez poruke ne postoji** ni pre ni posle toga — za sumnju koja
   nije ni u jednoj poruci („mislim da moj drug nije dete") nema ulaza sa profila.
 
