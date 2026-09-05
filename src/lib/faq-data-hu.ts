@@ -18,29 +18,29 @@ export const FAQ_SEKCIJE_HU: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `Senkit nem ismerek a KOLO-ban — megerősíthet-e engem bárki?`,
-        odgovor: `Igen. A valóság megerősítése azon alapul, hogy valaki személyesen megismer téged — és ez az ismeretség még csak most fog kialakulni.
+        pitanje: `Senkit nem ismerek a KOLO-ban, megerősíthet-e engem bárki?`,
+        odgovor: `Igen. A valóság megerősítése azon alapul, hogy valaki személyesen megismer téged, és ez az ismeretség még csak most fog kialakulni.
 
 A belépéshez nem kell megerősítés. A regisztráció ingyenes. Azonnal elolvashatod a szabályokat, megnézheted a rendszer nyilvános áttekintését és a Piac kínálatát, és feladhatsz legfeljebb három hirdetést, amellyel kínálsz valamit (a hirdetést bármikor leveheted).
 
-Az ismeretség a cseréből születik. Adj fel egy hirdetést, és várd meg, hogy valaki jelentkezzen. Amikor a cserét személyesen lebonyolítjátok, az a személy valóban megismert téged — és ha rendes tag, megadhatja neked a valóság megerősítését. A legtöbb ember így jut valóságigazoláshoz.
+Az ismeretség a cseréből születik. Adj fel egy hirdetést, és várd meg, hogy valaki jelentkezzen. Amikor a cserét személyesen lebonyolítjátok, az a személy valóban megismert téged. Ha rendes tag, megadhatja neked a valóság megerősítését. A legtöbb ember így jut valóságigazoláshoz.
 
-Megerősítést csak az adhat, akinek magának is van valóságigazolása, és mindig közvetlen személyes ismeretség alapján — soha nem pusztán a platformon küldött üzenet alapján.
+Megerősítést csak az adhat, akinek magának is van valóságigazolása, és mindig közvetlen személyes ismeretség alapján, soha nem pusztán a platformon küldött üzenet alapján.
 
-Ha senkit nem ismersz, a legrövidebb út, ha írsz nekünk a kontakt@ekolo.rs címre, vagy eljössz egy helyi találkozóra. Az ismeretséget nem előre kérjük — az menet közben jön létre.`,
+Ha senkit nem ismersz, a legrövidebb út, ha írsz nekünk a kontakt@ekolo.rs címre, vagy eljössz egy helyi találkozóra. Az ismeretséget nem előre kérjük, az menet közben jön létre.`,
       },
       {
         id: 43,
-        pitanje: `Tényleg ingyenes — be kell fizetnem vagy adományoznom valamit?`,
+        pitanje: `Tényleg ingyenes, be kell fizetnem vagy adományoznom valamit?`,
         odgovor: `Igen. A KOLO használata ingyenes, és nincsenek fizetős funkciók. A regisztráció semmibe sem kerül: választasz egy álnevet, megadsz egy e-mail-címet és egy jelszót.
 
-Nincs előfizetés, nincs jutalék, és nincs külön megvásárolható csomag. A teljes hozzáférést nem befizetés nyitja meg, hanem a valóság megerősítése — azt pedig ember adja, nem pénz.
+Nincs előfizetés, nincs jutalék, és nincs külön megvásárolható csomag. A teljes hozzáférést nem befizetés nyitja meg, hanem a valóság megerősítése, azt pedig ember adja, nem pénz.
 
 Az adomány önkéntes, és semminek sem feltétele. Vele az Alapítvány költségeit fedezed: a szervert, az eszközöket, a fejlesztést, a jogi és könyvelési szolgáltatásokat.
 
-Az adomány és a POEN két külön aktus. Az adomány egyoldalú és visszavonhatatlan — nem vásárolsz vele semmit. Ettől függetlenül a Protokoll a rendszer szabályai szerint POEN-t rögzít a nyilvántartásodban. A POEN-nek a rendszeren kívül nincs értéke, nem adható tovább és nem váltható vissza pénzre.
+Az adomány és a POEN két külön aktus. Az adomány egyoldalú és visszavonhatatlan, nem vásárolsz vele semmit. Ettől függetlenül a Protokoll a rendszer szabályai szerint POEN-t rögzít a nyilvántartásodban. A POEN-nek a rendszeren kívül nincs értéke, nem adható tovább és nem váltható vissza pénzre.
 
-POEN egyetlen dinár nélkül is rögzül neked — megerősítéssel és valóságigazolással, működési hozzájárulással és cserével, amelyben egy másik tag POEN-t ír át neked. A döntésekben pedig pénzért szavazatot sem lehet venni: a szavazatot a ZRNO hordozza, nem a POEN.`,
+POEN egyetlen dinár nélkül is rögzül neked: megerősítéssel és valóságigazolással, működési hozzájárulással és cserével, amelyben egy másik tag POEN-t ír át neked. A döntésekben pedig pénzért szavazatot sem lehet venni: a szavazatot a ZRNO hordozza, nem a POEN.`,
       },
       {
         id: 44,
@@ -223,11 +223,11 @@ Miért fontos ez. A két aktus között nincs szerződés. Nincs olyan megállap
         pitanje: `Valamiféle piramisjáték vagy kripto ez?`,
         odgovor: `Egyik sem.
 
-Miért nem piramisjáték. A piramisjáték úgy működik, hogy az új tagok fizetnek, hogy a korábbiak keressenek. A KOLO-ban a belépés ingyenes, a POEN nem vásárolható pénzért, és nincs alattad szint. Amikor megerősítesz valakit, 1.000-1.000 POEN rögzül neked is, neki is — egyszeri alkalommal és mindkettőtöknek azonos összegben. Abból, amit az illető később csinál, neked semmi nem jár; mások hozzájárulásaiból nincs jutalék.
+Miért nem piramisjáték. A piramisjáték úgy működik, hogy az új tagok fizetnek, hogy a korábbiak keressenek. A KOLO-ban a belépés ingyenes, a POEN nem vásárolható pénzért, és nincs alattad szint. Amikor megerősítesz valakit, 1.000-1.000 POEN rögzül neked is, neki is, egyszeri alkalommal és mindkettőtöknek azonos összegben. Abból, amit az illető később csinál, neked semmi nem jár; mások hozzájárulásaiból nincs jutalék.
 
 Miért nem kripto. A kriptovaluta blokklánc-hálózaton létezik, piaci ára van, és tőzsdén adják-veszik. A POEN nem token, a Protokollon kívül nem létezik, nem váltható dinárra, és nincs piaci ára.
 
-Honnan jön a POEN. Senki nem rögzíthet magának POEN-t. Csak úgy keletkezik, hogy a Protokoll előre lefektetett szabály szerint rögzíti, és minden rögzített POEN-nek ugyanakkora mínusza van a Protokoll nyilvántartásában. Ezért a forgalomban lévő POEN mennyisége mindig pontosan egyenlő a rögzített hozzájárulások összegével — semmi nem keletkezik a semmiből.
+Honnan jön a POEN. Senki nem rögzíthet magának POEN-t. Csak úgy keletkezik, hogy a Protokoll előre lefektetett szabály szerint rögzíti, és minden rögzített POEN-nek ugyanakkora mínusza van a Protokoll nyilvántartásában. Ezért a forgalomban lévő POEN mennyisége mindig pontosan egyenlő a rögzített hozzájárulások összegével. Semmi nem keletkezik a semmiből.
 
 A POEN annak bejegyzése, mit adtál a közösségnek, közelebb áll egy könyvelési tételhez, mint a pénzhez. Az érték a munkát, javakat és tudást cserélő emberek hálózatában van, nem a spekulációban.`,
       },

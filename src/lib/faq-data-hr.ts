@@ -7,29 +7,29 @@ export const FAQ_SEKCIJE_HR: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `Ne poznajem nikoga u KOLU — može li me itko potvrditi?`,
-        odgovor: `Može. Potvrda stvarnosti temelji se na tome da te netko osobno upozna — a to poznanstvo tek treba nastati.
+        pitanje: `Ne poznajem nikoga u KOLU, može li me itko potvrditi?`,
+        odgovor: `Može. Potvrda stvarnosti temelji se na tome da te netko osobno upozna, a to poznanstvo tek treba nastati.
 
 Ulazak ne traži potvrdu. Registracija je besplatna. Odmah možeš pročitati pravila, pogledati javni pregled sustava i ponudu na Pijaci te postaviti do tri oglasa kojima nešto nudiš (oglas skloniš kad hoćeš).
 
-Poznanstvo nastaje kroz razmjenu. Postavi oglas i pričekaj da ti se netko javi. Kad razmjenu obavite uživo, ta te je osoba stvarno upoznala — i ako je redovni član, može ti dati potvrdu stvarnosti. Tako većina ljudi stječe dokaz stvarnosti.
+Poznanstvo nastaje kroz razmjenu. Postavi oglas i pričekaj da ti se netko javi. Kad razmjenu obavite uživo, ta te je osoba stvarno upoznala. Ako je redovni član, može ti dati potvrdu stvarnosti. Tako većina ljudi stječe dokaz stvarnosti.
 
-Potvrdu daje samo onaj tko i sam ima dokaz stvarnosti, i uvijek na temelju neposrednog osobnog poznanstva — nikad na temelju same poruke na platformi.
+Potvrdu daje samo onaj tko i sam ima dokaz stvarnosti, i uvijek na temelju neposrednog osobnog poznanstva, nikad na temelju same poruke na platformi.
 
-Ako ne poznaješ nikoga, najkraći je put da nam pišeš na kontakt@ekolo.rs ili da dođeš na skup u svom mjestu. Poznanstvo se ne traži unaprijed — ono se stvara.`,
+Ako ne poznaješ nikoga, najkraći je put da nam pišeš na kontakt@ekolo.rs ili da dođeš na skup u svom mjestu. Poznanstvo se ne traži unaprijed, ono se stvara.`,
       },
       {
         id: 43,
-        pitanje: `Je li zaista besplatno — moram li uplatiti ili donirati?`,
+        pitanje: `Je li zaista besplatno, moram li uplatiti ili donirati?`,
         odgovor: `Da. Korištenje KOLA je besplatno i nema plaćenih funkcija. Registracija ne košta ništa: biraš pseudonim, uneseš email i lozinku.
 
-Nema pretplate, provizije ni paketa koji se dokupljuje. Pun pristup ti ne otvara uplata nego potvrda stvarnosti — a nju daje čovjek, ne novac.
+Nema pretplate, provizije ni paketa koji se dokupljuje. Pun pristup ti ne otvara uplata , a nju daje čovjek, ne novac.
 
 Donacija je dobrovoljna i nije uvjet ni za što. Njome pokrivaš troškove Fondacije: server, alate, razvoj, pravne i računovodstvene usluge.
 
-Donacija i POEN dva su odvojena akta. Donacija je jednostrana i nepovratna — njome ne kupuješ ništa. Neovisno o njoj, Protokol upisuje POEN u tvoj zapis prema pravilima sustava. POEN nema vrijednost izvan sustava, ne preprodaje se i ne vraća se u novac.
+Donacija i POEN dva su odvojena akta. Donacija je jednostrana i nepovratna, njome ne kupuješ ništa. Neovisno o njoj, Protokol upisuje POEN u tvoj zapis prema pravilima sustava. POEN nema vrijednost izvan sustava, ne preprodaje se i ne vraća se u novac.
 
-POEN ti se upisuje i bez ijedne uplate — kroz potvrdu i dokaz stvarnosti, operativni doprinos i razmjenu, u kojoj ti drugi član prepiše POEN. A novcem se ne kupuje ni glas u odlukama: glas nosi ZRNO, ne POEN.`,
+POEN ti se upisuje i bez ijedne uplate. Dobivaš ga kroz potvrdu i dokaz stvarnosti, operativni doprinos i razmjenu, u kojoj ti drugi član prepiše POEN. A novcem se ne kupuje ni glas u odlukama: glas nosi ZRNO, ne POEN.`,
       },
       {
         id: 44,
@@ -212,11 +212,11 @@ Zašto je to važno. Između ta dva akta ne postoji ugovor. Ne postoji dogovor p
         pitanje: `Je li ovo neka piramida ili kripto?`,
         odgovor: `Nije ni jedno ni drugo.
 
-Zašto nije piramida. Piramidalna shema radi tako da novi članovi plaćaju kako bi raniji zaradili. U KOLU se ulaz ne plaća, POEN se ne kupuje za novac i ne postoji razina ispod tebe. Kad nekoga potvrdiš, upiše se po 1.000 POEN i tebi i njemu — jednokratno i isto za oboje. Od svega što ta osoba kasnije radi ti nemaš ništa; provizije od tuđih doprinosa nema.
+Zašto nije piramida. Piramidalna shema radi tako da novi članovi plaćaju kako bi raniji zaradili. U KOLU se ulaz ne plaća, POEN se ne kupuje za novac i ne postoji razina ispod tebe. Kad nekoga potvrdiš, upiše se po 1.000 POEN i tebi i njemu, jednokratno i isto za oboje. Od svega što ta osoba kasnije radi ti nemaš ništa; provizije od tuđih doprinosa nema.
 
 Zašto nije kripto. Kriptovaluta postoji na blockchain mreži, ima tržišnu cijenu i kupuje se i prodaje na burzi. POEN nije token, ne postoji izvan Protokola, ne mijenja se za novac i nema tržišnu cijenu.
 
-Odakle POEN dolazi. Nitko ne može sam sebi upisati POEN. Nastaje jedino tako što ga Protokol upiše po unaprijed zapisanom pravilu, i svaki upisani POEN ima isti takav minus u evidenciji Protokola. Zato je količina POEN-a u optjecaju uvijek točno jednaka zbroju zabilježenih doprinosa — ništa ne nastaje ni iz čega.
+Odakle POEN dolazi. Nitko ne može sam sebi upisati POEN. Nastaje jedino tako što ga Protokol upiše po unaprijed zapisanom pravilu, i svaki upisani POEN ima isti takav minus u evidenciji Protokola. Zato je količina POEN-a u optjecaju uvijek točno jednaka zbroju zabilježenih doprinosa. Ništa ne nastaje ni iz čega.
 
 POEN je zapis o tome što si dao zajednici, bliži knjigovodstvenoj stavci nego novcu. Vrijednost je u mreži ljudi koji razmjenjuju rad, dobra i znanje, ne u špekulaciji.`,
       },

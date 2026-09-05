@@ -7,29 +7,29 @@ export const FAQ_SEKCIJE_EN: FaqSekcija[] = [
     pitanja: [
       {
         id: 42,
-        pitanje: `I don't know anyone in KOLO — can anyone confirm me?`,
-        odgovor: `They can. Confirmation of reality rests on someone coming to know you personally — and that acquaintance is yet to be formed.
+        pitanje: `I don't know anyone in KOLO, can anyone confirm me?`,
+        odgovor: `They can. Confirmation of reality rests on someone coming to know you personally, and that acquaintance is yet to be formed.
 
 Joining requires no confirmation. Registration is free. Straight away you can read the rules, look at the public overview of the system and at the offers on the Marketplace, and post up to three listings in which you offer something (you can take a listing down whenever you like).
 
-Acquaintance grows out of exchange. Post a listing and wait for someone to get in touch. Once you have carried out the exchange in person, that person has genuinely got to know you — and if they are a full member, they can give you confirmation of reality. That is how most people obtain proof of reality.
+Acquaintance grows out of exchange. Post a listing and wait for someone to get in touch. Once you have carried out the exchange in person, that person has genuinely got to know you. If they are a full member, they can give you confirmation of reality. That is how most people obtain proof of reality.
 
-Confirmation is given only by someone who holds proof of reality themselves, and always on the basis of direct personal acquaintance — never on the basis of a message on the platform alone.
+Confirmation is given only by someone who holds proof of reality themselves, and always on the basis of direct personal acquaintance, never on the basis of a message on the platform alone.
 
-If you know no one, the shortest path is to write to us at kontakt@ekolo.rs or to come to a gathering in your area. Acquaintance is not required in advance — it is created.`,
+If you know no one, the shortest path is to write to us at kontakt@ekolo.rs or to come to a gathering in your area. Acquaintance is not required in advance, it is created.`,
       },
       {
         id: 43,
-        pitanje: `Is it really free — do I have to pay or donate?`,
+        pitanje: `Is it really free, do I have to pay or donate?`,
         odgovor: `Yes. Using KOLO is free and there are no paid features. Registration costs nothing: you pick a pseudonym, enter an email and a password.
 
-There is no subscription, no commission and no package to buy on top. Full access is not opened by a payment but by confirmation of reality — and that is given by a person, not by money.
+There is no subscription, no commission and no package to buy on top. Full access is not opened by a payment but , and that is given by a person, not by money.
 
 A donation is voluntary and is not a condition for anything. With it you cover the Foundation's costs: the server, tools, development, legal and accounting services.
 
-A donation and POEN are two separate acts. A donation is one-sided and non-refundable — you are not buying anything with it. Independently of it, the Protocol records POEN in your ledger according to the rules of the system. POEN has no value outside the system, is not resold and is not turned back into money.
+A donation and POEN are two separate acts. A donation is one-sided and non-refundable, and you are not buying anything with it. Independently of it, the Protocol records POEN in your ledger according to the rules of the system. POEN has no value outside the system, is not resold and is not turned back into money.
 
-POEN is recorded for you without a single dinar as well — through confirmation and proof of reality, through operational contribution, and through exchange, in which another member re-registers POEN to you. Nor does money buy a say in decisions: the vote is carried by ZRNO, not by POEN.`,
+POEN is recorded for you without a single dinar as well. You get it through confirmation and proof of reality, through operational contribution, and through exchange, in which another member re-registers POEN to you. Nor does money buy a say in decisions: the vote is carried by ZRNO, not by POEN.`,
       },
       {
         id: 44,
@@ -212,11 +212,11 @@ Why that matters. There is no contract between those two acts. There is no arran
         pitanje: `Is this some kind of pyramid scheme or crypto?`,
         odgovor: `It is neither.
 
-Why it is not a pyramid scheme. A pyramid scheme works by having new members pay so that earlier ones earn. In KOLO, entry costs nothing, POEN is not bought for money, and there is no level below you. When you confirm someone, 1,000 POEN is recorded for each of you — once, and the same for both. You get nothing from anything that person does afterwards; there is no commission on other people's contributions.
+Why it is not a pyramid scheme. A pyramid scheme works by having new members pay so that earlier ones earn. In KOLO, entry costs nothing, POEN is not bought for money, and there is no level below you. When you confirm someone, 1,000 POEN is recorded for each of you, once, and the same for both. You get nothing from anything that person does afterwards; there is no commission on other people's contributions.
 
 Why it is not crypto. A cryptocurrency exists on a blockchain network, has a market price, and is bought and sold on an exchange. POEN is not a token, does not exist outside the Protocol, is not exchanged for money and has no market price.
 
-Where POEN comes from. No one can record POEN for themselves. It arises only when the Protocol records it under a rule written down in advance, and every recorded POEN has an equal minus in the Protocol's ledger. That is why the amount of POEN in circulation is always exactly equal to the sum of the contributions recorded — nothing comes out of nothing.
+Where POEN comes from. No one can record POEN for themselves. It arises only when the Protocol records it under a rule written down in advance, and every recorded POEN has an equal minus in the Protocol's ledger. That is why the amount of POEN in circulation is always exactly equal to the sum of the contributions recorded. Nothing comes out of nothing.
 
 POEN is a record of what you have given the community, closer to a bookkeeping entry than to money. The value is in the network of people exchanging work, goods and knowledge, not in speculation.`,
       },
