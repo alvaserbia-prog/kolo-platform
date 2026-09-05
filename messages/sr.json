@@ -1058,6 +1058,7 @@
     "footer_link_pijaca": "Pijaca",
     "footer_link_o_nama": "O nama",
     "footer_link_faq": "Pitanja",
+    "footer_link_vesti": "Vesti",
     "footer_link_pokrovitelji": "Pokrovitelji",
     "footer_link_kontakt": "Javi nam se",
     "footer_link_pravilnik": "Pravilnik",
@@ -1440,6 +1441,15 @@
     "cta_ko": "Ko stoji iza KOLA",
     "cta_priduzi": "Pridruži se →",
     "cta_licence": "Softver: AGPL-3.0 · Sadržaj: CC BY-SA 4.0 · Zajedničko dobro i licence"
+  },
+  "vestiPage": {
+    "meta_title": "Vesti — KOLO Fondacija",
+    "meta_desc": "Šta se dešava u KOLU: nove funkcije, odluke Fondacije i ono što se menja u sistemu.",
+    "hero_naslov": "Vesti",
+    "hero_opis": "Šta se dešava u KOLU i šta Fondacija radi.",
+    "prazno": "Još nema objavljenih vesti.",
+    "procitaj": "Pročitaj",
+    "nazad": "Nazad na vesti"
   },
   "pravnaPozicija": {
     "meta_title": "Pravna pozicija KOLA",

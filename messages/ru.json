@@ -1058,6 +1058,7 @@
     "footer_link_pijaca": "Рынок",
     "footer_link_o_nama": "О нас",
     "footer_link_faq": "Вопросы",
+    "footer_link_vesti": "Новости",
     "footer_link_pokrovitelji": "Покровители",
     "footer_link_kontakt": "Напиши нам",
     "footer_link_pravilnik": "Правила",
@@ -1440,6 +1441,15 @@
     "cta_ko": "Кто стоит за КОЛО",
     "cta_priduzi": "Войти в КОЛО →",
     "cta_licence": "Программное обеспечение: AGPL-3.0 · Содержание: CC BY-SA 4.0 · Общее благо и лицензии"
+  },
+  "vestiPage": {
+    "meta_title": "Новости — Фонд КОЛО",
+    "meta_desc": "Что происходит в КОЛО: новые возможности, решения Фонда и изменения в системе.",
+    "hero_naslov": "Новости",
+    "hero_opis": "Что происходит в КОЛО и чем занимается Фонд.",
+    "prazno": "Новостей пока нет.",
+    "procitaj": "Читать",
+    "nazad": "Назад к новостям"
   },
   "pravnaPozicija": {
     "meta_title": "Правовая позиция КОЛО",

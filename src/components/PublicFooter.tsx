@@ -41,6 +41,7 @@ export default async function PublicFooter() {
             <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">{t("footer_zajednica")}</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_o_nama")}</Link></li>
+              <li><Link href="/vesti" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_vesti")}</Link></li>
               <li><Link href="/cesto-postavljena-pitanja" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_faq")}</Link></li>
               {POKROVITELJSTVO_AKTIVNO && <li><Link href="/pokrovitelji" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pokrovitelji")}</Link></li>}
               <li><a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kontakt")}</a></li>

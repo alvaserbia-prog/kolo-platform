@@ -1051,6 +1051,7 @@
     "footer_link_pijaca": "Piac",
     "footer_link_o_nama": "Rólunk",
     "footer_link_faq": "Kérdések",
+    "footer_link_vesti": "Hírek",
     "footer_link_pokrovitelji": "Támogatók",
     "footer_link_kontakt": "Írj nekünk",
     "footer_link_pravilnik": "Szabályzat",
@@ -1433,6 +1434,15 @@
     "cta_ko": "Ki áll a KOLO mögött",
     "cta_priduzi": "Lépj be a KOLO-ba →",
     "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek"
+  },
+  "vestiPage": {
+    "meta_title": "Hírek — KOLO Alapítvány",
+    "meta_desc": "Mi történik a KOLO-ban: új funkciók, alapítványi döntések és a rendszer változásai.",
+    "hero_naslov": "Hírek",
+    "hero_opis": "Mi történik a KOLO-ban, és mit csinál az Alapítvány.",
+    "prazno": "Még nincs közzétett hír.",
+    "procitaj": "Elolvasom",
+    "nazad": "Vissza a hírekhez"
   },
   "pravnaPozicija": {
     "meta_title": "A KOLO jogi helyzete",

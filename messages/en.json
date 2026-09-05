@@ -1058,6 +1058,7 @@
     "footer_link_pijaca": "Marketplace",
     "footer_link_o_nama": "About us",
     "footer_link_faq": "Questions",
+    "footer_link_vesti": "News",
     "footer_link_pokrovitelji": "Sponsors",
     "footer_link_kontakt": "Get in touch",
     "footer_link_pravilnik": "Rulebook",
@@ -1440,6 +1441,15 @@
     "cta_ko": "Who stands behind KOLO",
     "cta_priduzi": "Join KOLO →",
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
+  },
+  "vestiPage": {
+    "meta_title": "News — KOLO Foundation",
+    "meta_desc": "What is happening in KOLO: new features, Foundation decisions and changes to the system.",
+    "hero_naslov": "News",
+    "hero_opis": "What is happening in KOLO and what the Foundation is doing.",
+    "prazno": "No news published yet.",
+    "procitaj": "Read",
+    "nazad": "Back to news"
   },
   "pravnaPozicija": {
     "meta_title": "KOLO — legal position",
