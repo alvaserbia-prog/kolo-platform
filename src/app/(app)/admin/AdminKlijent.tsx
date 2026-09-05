@@ -30,6 +30,10 @@ interface KorisnikInfo {
   id: string;
   pseudonim: string;
   email: string | null;
+  /** Broj telefona (`User.telefon`). Vidi ga samo UO u admin panelu — vidljivost
+      na javnom profilu uređuje zasebno `UserPodaci.prikaziTelefon` i ovaj prikaz
+      je ne dira. */
+  telefon: string | null;
   location: string | null;
   tipKorisnika: string;
   admin: string;
@@ -1719,7 +1723,13 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
 
   const q = filter.toLowerCase().trim();
   const filtered = useMemo(
-    () => users.filter((u) => u.pseudonim.toLowerCase().includes(q) || (u.location ?? "").toLowerCase().includes(q)),
+    () =>
+      users.filter(
+        (u) =>
+          u.pseudonim.toLowerCase().includes(q) ||
+          (u.location ?? "").toLowerCase().includes(q) ||
+          (u.telefon ?? "").toLowerCase().includes(q)
+      ),
     [users, q]
   );
   const tl = useMemo(() => tipLabel(t), [t]);
@@ -1832,6 +1842,14 @@ function KorisniciTab({ users, onDone, viewerJeSuperadmin, viewerId }: { users: 
                     <p className="text-xs text-kolo-muted mt-0.5 break-all flex items-start gap-1">
                       <span aria-hidden className="shrink-0">✉</span>
                       <span className="min-w-0 break-all">{u.email}</span>
+                    </p>
+                  )}
+                  {u.telefon && (
+                    <p className="text-xs text-kolo-muted mt-0.5 flex items-start gap-1">
+                      <span aria-hidden className="shrink-0">☎</span>
+                      <a href={`tel:${u.telefon.replace(/[^+\d]/g, "")}`} className="min-w-0 break-all hover:text-kolo-green-700 transition-colors">
+                        {u.telefon}
+                      </a>
                     </p>
                   )}
                   {u.location && (
