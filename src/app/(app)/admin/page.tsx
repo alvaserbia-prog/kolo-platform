@@ -37,7 +37,7 @@ export default async function AdminPage({
     prvihOglasaNaCekanju, otvorenihPrijavaRazmene,
   ] = await Promise.all([
     prisma.user.findMany({
-      select: { id: true, pseudonim: true, email: true, location: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, maloletan: true, wallet: { select: { balance: true } } },
+      select: { id: true, pseudonim: true, email: true, telefon: true, location: true, tipKorisnika: true, admin: true, verified: true, status: true, suspendedReason: true, createdAt: true, maloletan: true, wallet: { select: { balance: true } } },
       orderBy: { createdAt: "desc" },
       take: 100,
     }),
@@ -184,7 +184,7 @@ export default async function AdminPage({
       prvihOglasaNaCekanju={prvihOglasaNaCekanju}
       otvorenihPrijavaRazmene={otvorenihPrijavaRazmene}
       users={allUsers.map((u) => ({
-        id: u.id, pseudonim: u.pseudonim, email: u.email, location: u.location, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
+        id: u.id, pseudonim: u.pseudonim, email: u.email, telefon: u.telefon, location: u.location, tipKorisnika: u.tipKorisnika, admin: u.admin, verified: u.verified,
         status: u.status, suspendedReason: u.suspendedReason,
         balance: u.wallet?.balance ?? 0, createdAt: u.createdAt.toISOString(), maloletan: u.maloletan,
       }))}
