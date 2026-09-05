@@ -49,54 +49,54 @@ POEN ti se upisuje i bez ijednog dinara. Dobijaš ga kroz potvrdu i dokaz stvarn
       {
         id: 44,
         pitanje: `Koji je moj prvi korak i kako dalje prikupljam POEN?`,
-        odgovor: `Prvi korak je potvrda stvarnosti. Neko ko te lično poznaje i sam ima dokaz stvarnosti potvrdi da si stvarna osoba — na osnovu tog poznanstva, bez ijednog dokumenta. Protokol tada upiše po 1.000 POENA i tebi i njemu, jednokratno i u istom iznosu za oboje.
+        odgovor: `Prvi korak je potvrda stvarnosti. Neko ko te lično poznaje i sam ima dokaz stvarnosti potvrdi da si stvarna osoba, na osnovu tog poznanstva, bez ijednog dokumenta. Protokol tada upiše po 1.000 POENA i tebi i njemu, jednokratno i u istom iznosu za oboje.
 
 Do tada ti nije zatvoreno ništa bitno: prvi oglas kojim nešto nudiš već ti nosi POEN.
 
 Kad stekneš dokaz stvarnosti, otvaraju ti se četiri puta.
 
-Razmena. Ne moraš ništa da prodaješ. Razmena obuhvata i usluge i znanje — možeš nekome pomoći oko posla, podučiti ga, pričuvati decu. Druga strana ti tada prepiše POEN za to što si učinio.
+Razmena. Ne moraš ništa da prodaješ. Razmena obuhvata i usluge i znanje, možeš nekome pomoći oko posla, podučiti ga, pričuvati decu. Druga strana ti tada prepiše POEN za to što si učinio.
 
-Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POENA se upisuje i tebi i njemu — jednom po osobi. Potvrđuješ samo to da ta osoba postoji i da nema drugi nalog, pa se potvrda daje jedino za ljude koje zaista poznaješ.
+Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POENA se upisuje i tebi i njemu, jednom po osobi. Potvrđuješ samo to da ta osoba postoji i da nema drugi nalog, pa se potvrda daje jedino za ljude koje zaista poznaješ.
 
 Operativni doprinos. Rad za zajedničko dobro po objavljenom zadatku. Zadatke postavlja Fondacija u početnoj fazi, a po aktivaciji nosioci ZRNA i Gornje Kolo. Kad izvršiš zadatak i nosilac ZRNA potvrdi izvršenje, POEN ti se upisuje.
 
-Socijalni programi. Ako pripadaš nekoj od grupa koje programi pokrivaju — majke i drugi primarni staratelji, stariji, posebna briga, školovanje — podneseš prijavu. Kad je Fondacija odobri, Protokol ti upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti.`,
+Socijalni programi. Ako pripadaš nekoj od grupa koje programi pokrivaju (majke i drugi primarni staratelji, stariji, posebna briga, školovanje) podneseš prijavu. Kad je Fondacija odobri, Protokol ti upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti.`,
       },
       {
         id: 45,
-        pitanje: `Koliko vremena mi oduzima — moram li biti stalno aktivan?`,
+        pitanje: `Koliko vremena mi oduzima, moram li biti stalno aktivan?`,
         odgovor: `Ne moraš. Ne postoji minimum prijavljivanja, doprinosa ni razmene koji bi morao da ispuniš da bi ostao član.
 
 Uključuješ se koliko želiš i kada želiš. Operativni doprinos, razmena na Pijaci i upis ZRNA su mogućnosti, a ne dužnosti. Nema minimalnog trajanja članstva ni otkaznog roka.
 
-Kad pauziraš, tvoj zapis te čeka. POEN ti ne ističe — ostaje u tvom zapisu dok ga ne prepišeš drugome ili dok ne zatvoriš nalog. Uvođenje roka trajanja POENA bila bi suštinska izmena sistema o kojoj bi odlučivalo Gornje Kolo, a ne Fondacija sama.
+Kad pauziraš, tvoj zapis te čeka. POEN ti ne ističe, ostaje u tvom zapisu dok ga ne prepišeš drugome ili dok ne zatvoriš nalog. Uvođenje roka trajanja POENA bila bi suštinska izmena sistema o kojoj bi odlučivalo Gornje Kolo, a ne Fondacija sama.
 
 Iz sistema izlaziš u svakom trenutku, iz podešavanja profila.`,
       },
       {
         id: 46,
-        pitanje: `Šta je pseudonim — moram li otkriti pravo ime ili poslati ličnu kartu?`,
+        pitanje: `Šta je pseudonim, moram li otkriti pravo ime ili poslati ličnu kartu?`,
         odgovor: `Pseudonim je ime koje sam biraš i pod kojim si vidljiv u sistemu i u javnoj evidenciji doprinosa. To je tvoje javno ime u KOLU i ne mora imati nikakve veze sa tvojim pravim imenom.
 
 Pravo ime nije obavezno. Pri registraciji tražimo samo pseudonim, email i lozinku. Ne tražimo JMBG, ličnu kartu, pasoš ni bilo kakav drugi dokument, i nikada ne tražimo da slikaš sebe ili svoja dokumenta.
 
 Ni potvrda ne traži dokumente. Tvoju stvarnost potvrđuje član koji te lično poznaje i sam ima dokaz stvarnosti. Potvrda počiva na poznanstvu, ne na papiru.
 
-Tvoj profil ne nosi tvoje ime. Fondacija ne vodi registar koji pseudonim povezuje sa imenom iz lične karte, a drugi članovi vide samo ono što si sam izabrao da pokažeš. Ime i broj telefona možeš uneti kasnije, dobrovoljno — tada su vidljivi samo redovnim članovima, a to otkrivanje povlačiš kad hoćeš.
+Tvoj profil ne nosi tvoje ime. Fondacija ne vodi registar koji pseudonim povezuje sa imenom iz lične karte, a drugi članovi vide samo ono što si sam izabrao da pokažeš. Ime i broj telefona možeš uneti kasnije, dobrovoljno, tada su vidljivi samo redovnim članovima, a to otkrivanje povlačiš kad hoćeš.
 
 Gde identitet ipak ulazi u igru. Ako doniraš preko banke, tvoje ime stoji na izvodu. Ako se prijaviš za socijalni program ili za pokroviteljstvo, podatke iz prijave pregleda Fondacija. Ti podaci nisu javni, ne prikazuju se uz tvoj profil i vidi ih samo onaj ko obrađuje prijavu.
 
-Napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U maloj sredini kombinacija pseudonima, mesta i aktivnosti može posredno ukazati na to ko si — budi toga svestan.`,
+Napomena: biraj pseudonim koji ne sadrži tvoje lične podatke. U maloj sredini kombinacija pseudonima, mesta i aktivnosti može posredno ukazati na to ko si, budi toga svestan.`,
       },
       {
         id: 76,
-        pitanje: `Kako da prepoznam prevaru — šta KOLO nikad neće tražiti od mene?`,
-        odgovor: `Ako neko traži nešto sa ovog spiska, to nije Fondacija — to je neko ko se predstavlja kao Fondacija.
+        pitanje: `Kako da prepoznam prevaru, šta KOLO nikad neće tražiti od mene?`,
+        odgovor: `Ako neko traži nešto sa ovog spiska, to nije Fondacija, to je neko ko se predstavlja kao Fondacija.
 
-Nikad ne tražimo novac za pristup. Registracija i korišćenje su besplatni. Donacija i pokroviteljstvo su dobrovoljni i uplaćuju se isključivo preko zvaničnih kanala na ekolo.rs — nikad na privatni račun i nikad na osnovu poruke koja te požuruje.
+Nikad ne tražimo novac za pristup. Registracija i korišćenje su besplatni. Donacija i pokroviteljstvo su dobrovoljni i uplaćuju se isključivo preko zvaničnih kanala na ekolo.rs, nikad na privatni račun i nikad na osnovu poruke koja te požuruje.
 
-Nikad ne tražimo lozinku, PIN ni broj platne kartice. Niko iz Fondacije neće od tebe zatražiti lozinku ni kod iz poruke. Lozinku unosi samo na ekolo.rs — nikad na stranici do koje si došao preko linka iz poruke ili mejla.
+Nikad ne tražimo lozinku, PIN ni broj platne kartice. Niko iz Fondacije neće od tebe zatražiti lozinku ni kod iz poruke. Lozinku unosi samo na ekolo.rs, nikad na stranici do koje si došao preko linka iz poruke ili mejla.
 
 Za registraciju i potvrdu ne tražimo dokumente. Ni JMBG, ni sliku lične karte ili pasoša. Potvrda stvarnosti počiva na ličnom poznanstvu.
 
@@ -111,41 +111,41 @@ Ako naiđeš na bilo šta od ovoga: ne deli podatke, ne klikći na link i piši 
         pitanje: `Kako do prvih POENA dok me još niko nije potvrdio?`,
         odgovor: `Ne treba ti ni proizvod ni potvrda da bi ti se upisao prvi POEN.
 
-Postavi oglas kojim nešto nudiš — prvi takav oglas nosi ti 1.000 POENA kroz doprinos razmeni. Oglas mora imati naslov, opis, fotografiju, kategoriju i mesto. Oglas ide na Pijacu odmah, a POEN ti se upisuje kad Fondacija odobri oglas. Doprinos razmeni se otvara jednom po nalogu i ne ponavlja se.
+Postavi oglas kojim nešto nudiš, prvi takav oglas nosi ti 1.000 POENA kroz doprinos razmeni. Oglas mora imati naslov, opis, fotografiju, kategoriju i mesto. Oglas ide na Pijacu odmah, a POEN ti se upisuje kad Fondacija odobri oglas. Doprinos razmeni se otvara jednom po nalogu i ne ponavlja se.
 
 POEN ti se upisuje i kad ti ga neko prepiše za obavljenu razmenu. Dok nemaš dokaz stvarnosti možeš da ga primaš, ali ne i da ga sam prepisuješ drugome.
 
-Čim dobiješ potvrdu stvarnosti, možeš da objaviš i potražnju — šta tebi treba — pa da se javi onaj ko to ima.`,
+Čim dobiješ potvrdu stvarnosti, možeš da objaviš i potražnju (šta tebi treba) pa da se javi onaj ko to ima.`,
       },
       {
         id: 82,
-        pitanje: `Razmenjujem sa članom koga niko nije potvrdio — koliki je rizik?`,
+        pitanje: `Razmenjujem sa članom koga niko nije potvrdio, koliki je rizik?`,
         odgovor: `Rizik snosiš ti: ako prepišeš POEN a ne dobiješ ono što je dogovoreno, prepis se ne poništava automatski.
 
 Zato prepiši POEN tek kad primiš robu ili uslugu. To je jedino pravilo koje te stvarno štiti.
 
-Šta znači potvrđen, a šta ne. Redovan član je onaj čiju je stvarnost neko potvrdio — nepoznat tebi, ali ne i mreži. Nov član je onaj čiju stvarnost još niko nije potvrdio, i njegov oglas nosi oznaku o tome.
+Šta znači potvrđen, a šta ne. Redovan član je onaj čiju je stvarnost neko potvrdio, nepoznat tebi, ali ne i mreži. Nov član je onaj čiju stvarnost još niko nije potvrdio, i njegov oglas nosi oznaku o tome.
 
-Šta radi u tvoju korist. Sistem trajno pamti. Svako ažuriranje evidencije ostaje zabeleženo pod pseudonimom i vidljivo redovnim članovima — loše ponašanje se ne briše sa naloga.
+Šta radi u tvoju korist. Sistem trajno pamti. Svako ažuriranje evidencije ostaje zabeleženo pod pseudonimom i vidljivo redovnim članovima, loše ponašanje se ne briše sa naloga.
 
-Ako razmena propadne. Prijavi slučaj Fondaciji — dugme stoji uz sam prepis u tvojoj istoriji POENA. Prepis nije nepovratan: ako ga Fondacija po prijavi poništi, vraća ti se ceo iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prijava nije automatski povraćaj.
+Ako razmena propadne. Prijavi slučaj Fondaciji, dugme stoji uz sam prepis u tvojoj istoriji POENA. Prepis nije nepovratan: ako ga Fondacija po prijavi poništi, vraća ti se ceo iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prijava nije automatski povraćaj.
 
-Za kvalitet, isporuku i ispunjenje dogovora odgovaraš ti sa drugom stranom, po opštim pravilima obligacionog prava; Fondacija i Protokol nisu strana u tom odnosu. U početnoj fazi možeš zatražiti i dobrovoljno posredovanje Fondacije — ono nije obavezujuće, ali često je dovoljno.
+Za kvalitet, isporuku i ispunjenje dogovora odgovaraš ti sa drugom stranom, po opštim pravilima obligacionog prava; Fondacija i Protokol nisu strana u tom odnosu. U početnoj fazi možeš zatražiti i dobrovoljno posredovanje Fondacije, ono nije obavezujuće, ali često je dovoljno.
 
 Najbolje je da se nađete uživo i razmenu obavite licem u lice. Tako rizik pada, a nastaje i poznanstvo iz kojeg može doći potvrda.`,
       },
       {
         id: 83,
         pitanje: `Koliko oglasa mogu da postavim pre potvrde?`,
-        odgovor: `Tri aktivna oglasa, i to samo ponude — nešto što nudiš. Prvi takav oglas nosi ti 1.000 POENA: oglas je na Pijaci odmah, a POEN se upisuje kad ga Fondacija odobri.
+        odgovor: `Tri aktivna oglasa, i to samo ponude, nešto što nudiš. Prvi takav oglas nosi ti 1.000 POENA: oglas je na Pijaci odmah, a POEN se upisuje kad ga Fondacija odobri.
 
-Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mesto. Nema propisane najmanje dužine — piši onoliko koliko treba da čovek razume šta nudiš.
+Svaki oglas mora imati naslov, opis, fotografiju, kategoriju i mesto. Nema propisane najmanje dužine, piši onoliko koliko treba da čovek razume šta nudiš.
 
 Potvrdom stvarnosti ograničenje nestaje i otvara ti se ostalo:
 
 • neograničen broj aktivnih oglasa
 
-• potražnja — oglas kojim tražiš ono što tebi treba
+• potražnja, oglas kojim tražiš ono što tebi treba
 
 • kontakt sa oglasa
 
@@ -162,40 +162,40 @@ Jedno radi i pre potvrde: ako ti se neko javi povodom tvog oglasa, možeš mu od
       {
         id: 1,
         pitanje: `Šta je POEN i ima li vrednost u dinarima?`,
-        odgovor: `POEN je zapis u evidenciji Protokola da si zajednici dao nešto vredno — kroz razmenu sa drugim članovima, potvrdu stvarnosti, operativni doprinos, socijalni program, donaciju ili pokroviteljstvo.
+        odgovor: `POEN je zapis u evidenciji Protokola da si zajednici dao nešto vredno, kroz razmenu sa drugim članovima, potvrdu stvarnosti, operativni doprinos, socijalni program, donaciju ili pokroviteljstvo.
 
-POEN postoji samo u Protokolu. Zapis se vodi na Protokolu i ne može se izneti iz sistema — POEN nema oblik u kome bi postojao izvan njega. Ne držiš ga i ne možeš ga predati nikome van KOLA.
+POEN postoji samo u Protokolu. Zapis se vodi na Protokolu i ne može se izneti iz sistema. POEN nema oblik u kome bi postojao izvan njega. Ne držiš ga i ne možeš ga predati nikome van KOLA.
 
 POEN nije novac. Nije sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, nije finansijski instrument i ne predstavlja dug Fondacije prema tebi. Nema vrednost van sistema: ne menja se za dinare, ne preprodaje se i Fondacija ga ne otkupljuje.
 
-Ima li onda vrednost u dinarima? Nema kurs. Ali da biste ti i druga strana mogli da se dogovorite koliko nešto vredi, Uslovi korišćenja određuju referentnu vrednost: jedan POEN je približno jedan dinar (1 POEN ≈ 1 RSD). To je merna skala za poređenje unutar sistema — kao kad težinu izražavaš u kilogramima — a ne kurs po kome se nešto menja za novac. Fondacija ne garantuje nikakvu vrednost POENA.`,
+Ima li onda vrednost u dinarima? Nema kurs. Ali da biste ti i druga strana mogli da se dogovorite koliko nešto vredi, Uslovi korišćenja određuju referentnu vrednost: jedan POEN je približno jedan dinar (1 POEN ≈ 1 RSD). To je merna skala za poređenje unutar sistema (kao kad težinu izražavaš u kilogramima) a ne kurs po kome se nešto menja za novac. Fondacija ne garantuje nikakvu vrednost POENA.`,
       },
       {
         id: 2,
         pitanje: `Mogu li unovčiti POEN ili ga prodati za novac?`,
         odgovor: `Ne. POEN ne možeš zameniti za dinare, stranu valutu ni bilo koje drugo sredstvo plaćanja. Fondacija ga ne otkupljuje i ne menja.
 
-POEN i ne postoji izvan Protokola — nema oblik u kome bi mogao da izađe iz sistema.
+POEN i ne postoji izvan Protokola, nema oblik u kome bi mogao da izađe iz sistema.
 
-Ono što možeš: prepisati ga drugom članu za obavljenu razmenu dobara, usluga ili znanja — uključujući Pijacu — ili njime upisati ZRNO.
+Ono što možeš: prepisati ga drugom članu za obavljenu razmenu dobara, usluga ili znanja (uključujući Pijacu) ili njime upisati ZRNO.
 
-Prodaja POENA za novac nije deo sistema. POEN nema cenu i ne postoji kanal kroz koji bi Fondacija takav dogovor priznala, evidentirala ili zaštitila. Ko tako postupi, čini to van sistema i na svoju odgovornost — a svaki prepis ostaje trajno zabeležen u evidenciji.`,
+Prodaja POENA za novac nije deo sistema. POEN nema cenu i ne postoji kanal kroz koji bi Fondacija takav dogovor priznala, evidentirala ili zaštitila. Ko tako postupi, čini to van sistema i na svoju odgovornost, a svaki prepis ostaje trajno zabeležen u evidenciji.`,
       },
       {
         id: 3,
         pitanje: `Da li POEN ističe?`,
         odgovor: `Ne. POEN ostaje u tvom zapisu dok ga ne prepišeš drugom članu ili dok ne obrišeš nalog.
 
-Rok trajanja nije isključen zauvek: mehanizam „starenja" POENA, koji bi podsticao cirkulaciju umesto gomilanja, bio bi suštinska izmena sistema. O tome bi odlučivalo Gornje Kolo glasanjem — Fondacija to ne može uvesti sama.`,
+Rok trajanja nije isključen zauvek: mehanizam „starenja" POENA, koji bi podsticao cirkulaciju umesto gomilanja, bio bi suštinska izmena sistema. O tome bi odlučivalo Gornje Kolo glasanjem. Fondacija to ne može uvesti sama.`,
       },
       {
         id: 4,
         pitanje: `Šta je ZRNO i čemu služi?`,
-        odgovor: `ZRNO je zapis odvojen od POENA. Dok POEN beleži šta si dao zajednici, ZRNO pokazuje koliko si od toga uložio nazad u nju — i iz tog uloga dobijaš glas u odlukama o pravilima sistema.
+        odgovor: `ZRNO je zapis odvojen od POENA. Dok POEN beleži šta si dao zajednici, ZRNO pokazuje koliko si od toga uložio nazad u nju, i iz tog uloga dobijaš glas u odlukama o pravilima sistema.
 
 Kako se stiče. ZRNO upisuješ POENOM koji već imaš. Koliko je POENA potrebno za jedno ZRNO pokazuje koeficijent. ZRNO možeš i otpisati.
 
-Kako daje glas. Upisano ZRNO zaključavaš da bi postalo aktivno — tek aktivno ZRNO nosi glasačku moć. Glas ne raste pravolinijski: broj glasova je kvadratni koren broja aktivnih ZRNA, pa ko ima sto puta više ZRNA ima deset puta više glasova, a ne sto. Tako niko ne može da preuzme odlučivanje gomilanjem.
+Kako daje glas. Upisano ZRNO zaključavaš da bi postalo aktivno, tek aktivno ZRNO nosi glasačku moć. Glas ne raste pravolinijski: broj glasova je kvadratni koren broja aktivnih ZRNA, pa ko ima sto puta više ZRNA ima deset puta više glasova, a ne sto. Tako niko ne može da preuzme odlučivanje gomilanjem.
 
 Šta ZRNO nije. Nije udeo, nije akcija, nije digitalna imovina, nije finansijski instrument. Ne nosi kamatu ni dividendu, niko ti po njemu ništa ne isplaćuje, i ne prepisuje se drugom članu. Ono pokazuje koliko si uložio u zajednicu, ne koliko ti ona duguje.`,
       },
@@ -204,9 +204,9 @@ Kako daje glas. Upisano ZRNO zaključavaš da bi postalo aktivno — tek aktivno
         pitanje: `Kakav je odnos prema porezu i fiskalizaciji?`,
         odgovor: `Fondacija ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime. POEN nije novac ni zakonsko sredstvo plaćanja, a prepis POENA nije platna transakcija u smislu propisa o platnim uslugama.
 
-POEN nije prihod u novcu. Ne isplaćuje se, ne menja se za dinare i ne može izaći iz Protokola. Referentna vrednost od približno jednog dinara po POENU je merna skala unutar sistema, a ne cena ni kurs — POEN nema tržište na kome bi se utvrđivala vrednost van sistema.
+POEN nije prihod u novcu. Ne isplaćuje se, ne menja se za dinare i ne može izaći iz Protokola. Referentna vrednost od približno jednog dinara po POENU je merna skala unutar sistema, a ne cena ni kurs. POEN nema tržište na kome bi se utvrđivala vrednost van sistema.
 
-Ali KOLO ti ne ukida obaveze koje već imaš. Ako povremeno daš viškove ili nekome pomogneš, ništa se ne menja. Ako od prodaje robe ili pružanja usluga živiš, važe isti propisi kao i van KOLA — bez obzira na to da li se dogovor beleži u POENIMA.
+Ali KOLO ti ne ukida obaveze koje već imaš. Ako povremeno daš viškove ili nekome pomogneš, ništa se ne menja. Ako od prodaje robe ili pružanja usluga živiš, važe isti propisi kao i van KOLA, bez obzira na to da li se dogovor beleži u POENIMA.
 
 Fondacija ne pruža poreski savet i ti si odgovoran za svoje poreske obaveze. Ako redovno pružaš robu ili uslugu, posavetuj se sa knjigovođom.`,
       },
@@ -215,11 +215,11 @@ Fondacija ne pruža poreski savet i ti si odgovoran za svoje poreske obaveze. Ak
         pitanje: `Šta znači princip dva odvojena akta?`,
         odgovor: `Znači da POEN nikada nije protivusluga za nešto što si dao. To su dva odvojena događaja, a ne razmena.
 
-Akt prvi — ti nešto uradiš. Doprineseš zajedničkom dobru ili imaš status koji sistem prepoznaje: doniraš, izvršiš zadatak iz operativnog doprinosa, potvrdiš stvarnost novog člana, ispunjavaš uslove socijalnog programa ili podneseš prijavu pokroviteljstva.
+Akt prvi, ti nešto uradiš. Doprineseš zajedničkom dobru ili imaš status koji sistem prepoznaje: doniraš, izvršiš zadatak iz operativnog doprinosa, potvrdiš stvarnost novog člana, ispunjavaš uslove socijalnog programa ili podneseš prijavu pokroviteljstva.
 
-Akt drugi — Protokol upiše POEN. Automatski, po pravilu koje je unapred zapisano u Pravilniku. Bez ičije odluke, bez ugovora i bez protivčinidbe.
+Akt drugi. Protokol upiše POEN. Automatski, po pravilu koje je unapred zapisano u Pravilniku. Bez ičije odluke, bez ugovora i bez protivčinidbe.
 
-Zašto je to važno. Između ta dva akta ne postoji ugovor. Ne postoji dogovor po kome bi za urađeno X dobio Y POENA, i nemaš potraživanje prema Fondaciji da ti POEN bude upisan. Zato donacija nije kupovina POENA: doniraš zato što hoćeš da podržiš zajednicu, a POEN se upisuje zato što tako piše u pravilima — ne zato što si ga platio.`,
+Zašto je to važno. Između ta dva akta ne postoji ugovor. Ne postoji dogovor po kome bi za urađeno X dobio Y POENA, i nemaš potraživanje prema Fondaciji da ti POEN bude upisan. Zato donacija nije kupovina POENA: doniraš zato što hoćeš da podržiš zajednicu, a POEN se upisuje zato što tako piše u pravilima, ne zato što si ga platio.`,
       },
       {
         id: 40,
@@ -237,16 +237,16 @@ POEN je zapis o tome šta si dao zajednici, bliži knjigovodstvenoj stavci nego 
       },
       {
         id: 51,
-        pitanje: `Šta ako sistem propadne ili Fondacija prestane sa radom — gubim li sve?`,
+        pitanje: `Šta ako sistem propadne ili Fondacija prestane sa radom, gubim li sve?`,
         odgovor: `Da budemo otvoreni: ako sistem jednog dana stane, tvoj zapis prestaje da vredi kao mogućnost razmene. To jeste gubitak. Ali nije novčani gubitak, i evo zašto.
 
-Nemaš novčano potraživanje — ni sada, ni tada. POEN i ZRNO nisu novac koji leži na tvoje ime ni dug koji ti Fondacija duguje. To su zapisi o tome koliko si doprineo i razmenio u zajednici. Zato nema iznosa koji bi ti neko bio dužan da isplati, ni dok sistem radi, ni ako prestane.
+Nemaš novčano potraživanje, ni sada, ni tada. POEN i ZRNO nisu novac koji leži na tvoje ime ni dug koji ti Fondacija duguje. To su zapisi o tome koliko si doprineo i razmenio u zajednici. Zato nema iznosa koji bi ti neko bio dužan da isplati, ni dok sistem radi, ni ako prestane.
 
 Ono što si već razmenio ostaje tvoje. Rad, dobra i znanje koji su prešli iz ruke u ruku dogodili su se stvarno i njih niko ne poništava. Isto važi i za ljude koje si upoznao.
 
 Fondacijom se niko ne može okoristiti. Po Statutu, u slučaju prestanka rada preostala imovina ne pripada osnivačima ni bilo kome privatno, nego se predaje drugoj fondaciji, zadužbini ili udruženju sa istim ili sličnim ciljevima, sa prednošću za one koji rade u duhu solidarne ekonomije. Niko se ne može obogatiti gašenjem sistema.
 
-Sistem može da nastavi i bez nas. Kod na kome KOLO radi je javan i objavljen na GitHub-u — svako ga može uzeti, pokrenuti i nastaviti. Softver je pod licencom AGPL-3.0, a sadržaj pod CC BY-SA. Ako konkretna organizacija nestane, alat i znanje ostaju. Zajedničko dobro ne prestaje gašenjem jedne organizacije.`,
+Sistem može da nastavi i bez nas. Kod na kome KOLO radi je javan i objavljen na GitHub-u, svako ga može uzeti, pokrenuti i nastaviti. Softver je pod licencom AGPL-3.0, a sadržaj pod CC BY-SA. Ako konkretna organizacija nestane, alat i znanje ostaju. Zajedničko dobro ne prestaje gašenjem jedne organizacije.`,
       },
       {
         id: 52,
@@ -255,49 +255,49 @@ Sistem može da nastavi i bez nas. Kod na kome KOLO radi je javan i objavljen na
 
 ZRNO se ne trguje. Ne prepisuje se drugom članu i ne izlazi iz Protokola. Ono beleži tvoj položaj u zajedničkom dobru, iz kojeg proizlazi glas u Gornjem Kolu.
 
-Zaključavanje nije staking. Upisano ZRNO zaključavaš samo zato da bi se obračunao tvoj glas — tek aktivno ZRNO nosi glasačku moć. Zaključavanje ti ne donosi ni POEN, ni kamatu, ni bilo kakvu naknadu. Koeficijent raste isto, bez obzira na to da li ti je ZRNO zaključano ili slobodno — zaključavanjem se ne dobija ništa osim glasa.
+Zaključavanje nije staking. Upisano ZRNO zaključavaš samo zato da bi se obračunao tvoj glas, tek aktivno ZRNO nosi glasačku moć. Zaključavanje ti ne donosi ni POEN, ni kamatu, ni bilo kakvu naknadu. Koeficijent raste isto, bez obzira na to da li ti je ZRNO zaključano ili slobodno, zaključavanjem se ne dobija ništa osim glasa.
 
-Otpis ne vraća isti iznos — i to ti kažemo otvoreno. Otpis ide po koeficijentu koji važi u tom trenutku. Pošto koeficijent raste kako sistem raste, otpisom najčešće dobiješ više POENA nego što si upisom uložio. Ta razlika nije zagarantovana, niko je ne obećava i nijedno lice je ne isplaćuje.
+Otpis ne vraća isti iznos, i to ti kažemo otvoreno. Otpis ide po koeficijentu koji važi u tom trenutku. Pošto koeficijent raste kako sistem raste, otpisom najčešće dobiješ više POENA nego što si upisom uložio. Ta razlika nije zagarantovana, niko je ne obećava i nijedno lice je ne isplaćuje.
 
-Ali to nije prihod. Razlika postoji isključivo u POENIMA, koji nemaju vrednost van sistema, ne menjaju se za dinare i ne mogu izaći iz Protokola. Nemaš dobit ni prihod u novcu — imaš veći zapis u evidenciji doprinosa. Zato ZRNO ne upisuješ zato što bi ti se to isplatilo, nego zato što hoćeš glas u odlukama.`,
+Ali to nije prihod. Razlika postoji isključivo u POENIMA, koji nemaju vrednost van sistema, ne menjaju se za dinare i ne mogu izaći iz Protokola. Nemaš dobit ni prihod u novcu, imaš veći zapis u evidenciji doprinosa. Zato ZRNO ne upisuješ zato što bi ti se to isplatilo, nego zato što hoćeš glas u odlukama.`,
       },
       {
         id: 53,
         pitanje: `Je li upis po potvrdi (1.000 POENA) provizija za regrutovanje ili airdrop koji mogu da farmam?`,
         odgovor: `Ne. To nije provizija za regrutovanje, nije airdrop i ne može se farmati.
 
-Upis je simetričan. Kad te neko potvrdi, Protokol upiše po 1.000 POENA i tebi i njemu — jednokratno i u istom iznosu. Nema nivoa iznad tebe ni ispod tebe i ništa ne teče naviše kroz mrežu ljudi koji bi se okoristili tvojom potvrdom.
+Upis je simetričan. Kad te neko potvrdi, Protokol upiše po 1.000 POENA i tebi i njemu, jednokratno i u istom iznosu. Nema nivoa iznad tebe ni ispod tebe i ništa ne teče naviše kroz mrežu ljudi koji bi se okoristili tvojom potvrdom.
 
 Upis nije naknada. Ni za tvoj rad, ni za tvoje podatke. To je automatski akt Protokola po unapred zapisanom pravilu: kad nastane zapis o potvrdi, POEN se upiše bez ugovora i bez pogađanja.
 
 Zašto farmanje nema smisla:
 
-• POEN se ne unovčava — nemaš šta da izvučeš iz sistema.
+• POEN se ne unovčava, nemaš šta da izvučeš iz sistema.
 
-• Princip je jedan čovek — jedan nalog, a potvrda počiva na ličnom poznanstvu. Ne možeš izmišljati ljude.
+• Princip je jedan čovek, jedan nalog, a potvrda počiva na ličnom poznanstvu. Ne možeš izmišljati ljude.
 
 • Ko potvrdi nekoga ko nije stvarna osoba, gubi tih 1.000 POENA, a za zloupotrebu gubi pravo da dalje potvrđuje druge i pravo na učešće u mreži.
 
 • Doprinos razmeni otvara se jednom po nalogu i ne ponavlja se.
 
-• Svaki upisani POEN ima isti takav minus u Protokolu — niko ne stvara vrednost ni iz čega.
+• Svaki upisani POEN ima isti takav minus u Protokolu, niko ne stvara vrednost ni iz čega.
 
 Lažna potvrda se poništava, a sa njom i sve veze koje su iz nje proizašle.`,
       },
       {
         id: 54,
-        pitanje: `Osnivački kanal upisuje do 2.400.000 POENA „osnivačima" — nije li to vrh koji sebi upiše novac?`,
-        odgovor: `Ne. Osnivački kanal ne upisuje novac — POEN nije novac, a iznos ne donosi ni vlasništvo ni moć nad sistemom.
+        pitanje: `Osnivački kanal upisuje do 2.400.000 POENA „osnivačima", nije li to vrh koji sebi upiše novac?`,
+        odgovor: `Ne. Osnivački kanal ne upisuje novac. POEN nije novac, a iznos ne donosi ni vlasništvo ni moć nad sistemom.
 
-Šta se beleži. Rad obavljen pre nego što je platforma postojala: projektovanje sistema, pisanje pravila, pravna i organizaciona priprema, izrada dokumentacije. Uz to i svi finansijski i drugi troškovi nastali do otvaranja računa Fondacije — njih su osnivači snosili lično, jer Fondacija tada nije ni postojala kao subjekt koji može da plati. Sve se to odvijalo dok nije bilo gde da se zabeleži, pa se beleži naknadno — kao i svaki drugi doprinos.
+Šta se beleži. Rad obavljen pre nego što je platforma postojala: projektovanje sistema, pisanje pravila, pravna i organizaciona priprema, izrada dokumentacije. Uz to i svi finansijski i drugi troškovi nastali do otvaranja računa Fondacije, njih su osnivači snosili lično, jer Fondacija tada nije ni postojala kao subjekt koji može da plati. Sve se to odvijalo dok nije bilo gde da se zabeleži, pa se beleži naknadno, kao i svaki drugi doprinos.
 
 Isti status kao svaki drugi POEN. Nekonvertibilan, bez vrednosti van sistema, bez potraživanja prema Fondaciji. Troškovi se ne refundiraju: osnivači nisu dobili nazad ni dinar od onoga što su uložili, nego zapis u istoj evidenciji u kojoj se beleži i svaki drugi doprinos.
 
 Osnivača je pet i krug je zatvoren. Utvrđeni su unapred internim aktom Fondacije i nijedna kasnija odluka ne može proširiti taj krug.
 
-Tempo nije proizvoljan. Jedan korak od 24.000 POENA upisuje se tek kad ukupan broj POENA u sistemu poraste za narednih 100.000 — a u taj prag ulazi i sam osnivački upis. To znači da dok kanal traje, osnivački doprinos čini 24% svakog novoupisanog POENA. Kad se kanal isprazni na 2.400.000, sistem je porastao za 10.000.000 POENA i kanal se trajno i neopozivo zatvara. Odatle nadalje udeo osnivača samo pada, jer sistem nastavlja da raste a kanal više ne radi.
+Tempo nije proizvoljan. Jedan korak od 24.000 POENA upisuje se tek kad ukupan broj POENA u sistemu poraste za narednih 100.000, a u taj prag ulazi i sam osnivački upis. To znači da dok kanal traje, osnivački doprinos čini 24% svakog novoupisanog POENA. Kad se kanal isprazni na 2.400.000, sistem je porastao za 10.000.000 POENA i kanal se trajno i neopozivo zatvara. Odatle nadalje udeo osnivača samo pada, jer sistem nastavlja da raste a kanal više ne radi.
 
-Veći saldo ne daje srazmerno veću moć. Glasanje u Gornjem Kolu je kvadratno: broj glasova je kvadratni koren broja aktivnih ZRNA. Ko ima sto puta više ZRNA ima deset puta više glasova, a ne sto — pa ni najveći saldo POENA ne daje kontrolu nad odlukama.
+Veći saldo ne daje srazmerno veću moć. Glasanje u Gornjem Kolu je kvadratno: broj glasova je kvadratni koren broja aktivnih ZRNA. Ko ima sto puta više ZRNA ima deset puta više glasova, a ne sto, pa ni najveći saldo POENA ne daje kontrolu nad odlukama.
 
 Šta možeš da proveriš. Ukupan upisan iznos, broj izvršenih koraka i preostalo do granice dostupni su na stranici Osnivački doprinos. Registar osnivača sa pseudonimima i udelima, uključujući to kome je koliko upisano, dostupan je redovnim članovima.`,
       },
@@ -327,11 +327,11 @@ Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POENA kroz 
 
 Šta se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POENA tebi i 1.000 onome ko te je potvrdio. Ako potvrda podleže nadzoru, prvi nadzornik koji upiše ishod dobija 500 POENA.
 
-Zašto potvrda nešto vredi. Ko potvrdi osobu koja nije stvarna, gubi tih 1.000 POENA — a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to sledi sankcija: gubitak prava da dalje potvrđuje druge i, pošto je lažna potvrda Uslovima korišćenja izričito navedena kao teža povreda, gubitak prava na učešće u mreži. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
+Zašto potvrda nešto vredi. Ko potvrdi osobu koja nije stvarna, gubi tih 1.000 POENA, a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to sledi sankcija: gubitak prava da dalje potvrđuje druge i, pošto je lažna potvrda Uslovima korišćenja izričito navedena kao teža povreda, gubitak prava na učešće u mreži. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
       },
       {
         id: 8,
-        pitanje: `Šta ako sam stranac — mogu li biti član?`,
+        pitanje: `Šta ako sam stranac, mogu li biti član?`,
         odgovor: `Možeš. Državljanstvo i prebivalište nisu uslov, niti se bilo gde upisuju. Pri registraciji biraš pseudonim i unosiš email i lozinku; dokumenti se ne traže.
 
 Jedini stvarni uslov je da te neko potvrdi kao stvarnu osobu, a taj neko može biti bilo gde. Ako u mreži još nikoga ne poznaješ, poznanstvo nastalo kroz obavljenu razmenu takođe je punopravan osnov za potvrdu.
@@ -358,7 +358,7 @@ Promena važi odmah. Čim je potvrdiš, ceo tvoj nalog se ostalima prikazuje pod
 
 Pseudonim sme da sadrži latinična slova, cifre i znake _ . - bez razmaka i bez slova č, ć, š, ž i đ. Latiničan je i kada sajt čitaš ćirilicom. Stoji i u adresi tvog profila.
 
-Ranije podeljeni linkovi i dalje rade: stara adresa vodi na tvoj profil i posle promene, a napušteni pseudonim ne može da uzme neko drugi — inače bi već podeljen link tiho odveo na drugu osobu.
+Ranije podeljeni linkovi i dalje rade: stara adresa vodi na tvoj profil i posle promene, a napušteni pseudonim ne može da uzme neko drugi, inače bi već podeljen link tiho odveo na drugu osobu.
 
 Sam nalog se time ne menja: lanac potvrda, indeks stvarnosti i evidencija doprinosa ostaju isti, jer je promenjeno samo ime pod kojim se vide.`,
       },
@@ -380,7 +380,7 @@ Pravilnik, Uslovi korišćenja i ostali obavezujući akti doneti su na srpskom i
         pitanje: `Mogu li se maloletnici registrovati?`,
         odgovor: `Mogu, od sedme godine, ali ne sami do kraja. Nalog maloletnog lica uvek stoji uz roditelja: ili ga roditelj otvara iz svog naloga, ili ga dete otvara i upisuje roditeljev email, pa roditelj nalog preuzima.
 
-Dete mlađe od sedam godina nalog nema. Ako je dete greškom prošlo kroz punoletni obrazac, nalog se ne briše — Fondacija ga na zahtev prevodi u dečji i vezuje za roditelja.
+Dete mlađe od sedam godina nalog nema. Ako je dete greškom prošlo kroz punoletni obrazac, nalog se ne briše. Fondacija ga na zahtev prevodi u dečji i vezuje za roditelja.
 
 Sve ostalo o dečjim nalozima stoji u odeljku Deca i roditelji.`,
       },
@@ -401,12 +401,12 @@ Dok čeka preuzimanje, dete ima profil i može da sklapa prijateljstva, ali nema
       },
       {
         id: 101,
-        pitanje: `Dete se registrovalo kao punoletno — može li to da se ispravi?`,
+        pitanje: `Dete se registrovalo kao punoletno, može li to da se ispravi?`,
         odgovor: `Može. Nalog se ne briše: Fondacija ga na zahtev prevodi u dečji nalog i vezuje za tebe kao roditelja. Piši nam na kontakt@ekolo.rs sa adrese svog naloga i navedi pseudonim deteta.
 
-Nalog time dobija sve zaštite dečjeg režima — zatvoren profil, tvoj prekidač za komunikaciju i razmenu sa punoletnim članovima, prijateljstva i dečju Pričaonicu. Gubi ono što po tom režimu detetu ne pripada: potvrde koje je primio i dao padaju, ZRNO se otpisuje, a POEN koji mu je Protokol upisao kroz kanale (potvrde, doprinos sadržaju i razmeni, donacije, programi) se poništava. POEN koji su mu ljudi prepisali ostaje — prepis ne stvara nove POENE nego seli zapis, a dete ga sme imati. Oglasi, poruke i istorija ostaju.
+Nalog time dobija sve zaštite dečjeg režima, zatvoren profil, tvoj prekidač za komunikaciju i razmenu sa punoletnim članovima, prijateljstva i dečju Pričaonicu. Gubi ono što po tom režimu detetu ne pripada: potvrde koje je primio i dao padaju, ZRNO se otpisuje, a POEN koji mu je Protokol upisao kroz kanale (potvrde, doprinos sadržaju i razmeni, donacije, programi) se poništava. POEN koji su mu ljudi prepisali ostaje, prepis ne stvara nove POENE nego seli zapis, a dete ga sme imati. Oglasi, poruke i istorija ostaju.
 
-Zapis pri tom sme da ode u minus, i to sa obe strane: i detetu koje je POEN već potrošilo, i onome ko ga je potvrdio pa mu se ta potvrda poništava. Minus nije dug i ne naplaćuje se — prvi POEN koji pristigne ga popunjava.
+Zapis pri tom sme da ode u minus, i to sa obe strane: i detetu koje je POEN već potrošilo, i onome ko ga je potvrdio pa mu se ta potvrda poništava. Minus nije dug i ne naplaćuje se, prvi POEN koji pristigne ga popunjava.
 
 Radnja je nepovratna. U punoletni nalog prelazi sam, na dan osamnaestog rođendana, po datumu rođenja koji tada upišeš.`,
       },
@@ -425,10 +425,10 @@ Do trećeg koraka detetu se ne upisuje POEN iz prijateljstava. Prijateljstva se 
       },
       {
         id: 100,
-        pitanje: `Dete je zaboravilo lozinku — šta sad?`,
+        pitanje: `Dete je zaboravilo lozinku, šta sad?`,
         odgovor: `Dva su puta.
 
-Ako je dete u svom profilu unelo sopstvenu imejl adresu i potvrdilo je klikom na link koji mu je stigao na tu adresu, samo traži novu lozinku kao i svaki drugi član. Ta adresa služi isključivo za to — obaveštenja na nju ne idu.
+Ako je dete u svom profilu unelo sopstvenu imejl adresu i potvrdilo je klikom na link koji mu je stigao na tu adresu, samo traži novu lozinku kao i svaki drugi član. Ta adresa služi isključivo za to, obaveštenja na nju ne idu.
 
 Ako dete nema svoju adresu, novu lozinku mu postavljaš ti, iz svog profila. Staru lozinku ne moraš da znaš, a dete dobija obaveštenje da si je promenio.`,
       },
@@ -442,9 +442,9 @@ Detetu je dovoljno da jedan roditelj bude redovan član da bi mu se upisivao POE
       {
         id: 88,
         pitanje: `Može li odrasla osoba da priđe mom detetu?`,
-        odgovor: `Nezavisno od tvojih podešavanja važi sledeće. Detetov profil je zatvoren za sve punoletne članove, a ne samo za neprijavljene posetioce: ko otvori adresu detetovog profila, vidi objašnjenje zašto je zatvoren i ko mu je roditelj, i ništa više — ni stanje, ni školu, ni oglase, ni prijateljstva. Dete se ne pojavljuje ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
+        odgovor: `Nezavisno od tvojih podešavanja važi sledeće. Detetov profil je zatvoren za sve punoletne članove, a ne samo za neprijavljene posetioce: ko otvori adresu detetovog profila, vidi objašnjenje zašto je zatvoren i ko mu je roditelj, i ništa više, ni stanje, ni školu, ni oglase, ni prijateljstva. Dete se ne pojavljuje ni u pretrazi članova. Prijateljstvo se sklapa isključivo skeniranjem QR koda uživo, a kod traje pet minuta i nema broj koji bi se mogao izdiktirati telefonom, pa se prijateljstvo ne može sklopiti na daljinu.
 
-Razgovor sa punoletnim osobama otvara samo roditeljski prekidač u detetovom profilu. Dok je ugašen, odrasla osoba detetu ne može pisati. Ni upaljen prekidač profil ne otvara — on uređuje razgovor i razmenu, ne uvid u nalog.
+Razgovor sa punoletnim osobama otvara samo roditeljski prekidač u detetovom profilu. Dok je ugašen, odrasla osoba detetu ne može pisati. Ni upaljen prekidač profil ne otvara, on uređuje razgovor i razmenu, ne uvid u nalog.
 
 Ako ga upališ, primenjuju se tri pravila:
 
@@ -480,7 +480,7 @@ U svakom trenutku možeš ukloniti oglas, ugasiti prekidač za razgovor sa odras
         pitanje: `Šta ako dete dobije neprimerenu poruku?`,
         odgovor: `Reci detetu da ti odmah javi. Ti si prvi kome se javlja, ne platforma.
 
-U Pričaonici dete vidi samo poruke svojih prijatelja. Zato je najbrži potez raskid prijateljstva — čim ga dete raskine, te poruke više ne vidi. Raskid može samo dete i oba deteta gube po 500 POEN.
+U Pričaonici dete vidi samo poruke svojih prijatelja. Zato je najbrži potez raskid prijateljstva, čim ga dete raskine, te poruke više ne vidi. Raskid može samo dete i oba deteta gube po 500 POEN.
 
 Ako je poruka takva da treba da je vidimo, piši nam na kontakt@ekolo.rs sa pseudonimom deteta i vremenom poruke. Fondacija poruku može ukloniti i može zatvoriti nalog sa koga je poslata.`,
       },
@@ -509,7 +509,7 @@ POEN nije novac i nema vrednost izvan sistema.`,
       {
         id: 99,
         pitanje: `Šta je izbor škole i šta donosi ranglista?`,
-        odgovor: `Dete u svom profilu bira školu koju pohađa, sa spiska škola u Srbiji. Izbor nije uslov za korišćenje naloga — nalog radi i bez njega.
+        odgovor: `Dete u svom profilu bira školu koju pohađa, sa spiska škola u Srbiji. Izbor nije uslov za korišćenje naloga, nalog radi i bez njega.
 
 Iz izbora nastaju tri liste: dve nacionalne, po broju uključene dece i po udelu u broju upisanih učenika, odvojeno za osnovne i srednje škole, i jedna unutar same škole, po tekućem stanju POENA. U brojanje ulazi samo dete čiji je bar jedan roditelj redovan član.
 
@@ -567,7 +567,7 @@ Podrobnije o svemu ovome piše Pravilnik o učešću dece, na stranici Pravilnik
         pitanje: `Šta su Programi Protokola i koji postoje?`,
         odgovor: `Neki oblici učešća ne mogu se evidentirati kao pojedinačne razmene, pa za njih postoje Programi Protokola.
 
-Socijalni programi pokrivaju grupe čije je učešće u zajednici stalno i razuđeno: Podrška Majkama (i drugim primarnim starateljima), Podrška Starijima, Posebna Briga (osobe sa invaliditetom) i Školovanje. Kad se tvoja prijava potvrdi, Protokol ti automatski upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada — to je način da i takvo učešće dobije ravnopravno mesto u sistemu.
+Socijalni programi pokrivaju grupe čije je učešće u zajednici stalno i razuđeno: Podrška Majkama (i drugim primarnim starateljima), Podrška Starijima, Posebna Briga (osobe sa invaliditetom) i Školovanje. Kad se tvoja prijava potvrdi, Protokol ti automatski upisuje POEN na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada, to je način da i takvo učešće dobije ravnopravno mesto u sistemu.
 
 Pored njih, u Programe spadaju i doprinosi: doprinos razmeni (putanja od pet koraka za uključivanje u razmenu), operativni doprinos (rad za zajedničko dobro kroz objavljene zadatke) i dečji doprinos (učešće dece u dečjem prostoru, opisano u sekciji „Deca i roditelji"). Svaki je objašnjen u posebnom pitanju.
 
@@ -576,109 +576,109 @@ Prijava na socijalne programe otvorena je redovnim članovima.`,
       {
         id: 17,
         pitanje: `Ko se može prijaviti za Podršku Majkama?`,
-        odgovor: `Majka ili drugi primarni staratelj deteta — program prati brigu o detetu, ne isključivo majčinstvo.
+        odgovor: `Majka ili drugi primarni staratelj deteta, program prati brigu o detetu, ne isključivo majčinstvo.
 
 Iznos zavisi od broja i uzrasta dece: osnova po detetu opada kako dete raste, a množilac raste sa svakim narednim detetom, pa veće porodice dobijaju srazmerno veću podršku. Tačni iznosi i primeri dati su u posebnom pitanju o iznosima Podrške Majkama.
 
-Prijava ide kroz platformu — podatke o deci uneseš u formu, bez prilaganja dokumenata.`,
+Prijava ide kroz platformu, podatke o deci uneseš u formu, bez prilaganja dokumenata.`,
       },
       {
         id: 79,
         pitanje: `Koliko POEN dnevno po detetu donosi Podrška Majkama i kako broj i uzrast dece utiču na iznos?`,
-        odgovor: `Za svako dete polazna dnevna osnova je 2.000 POENA, umanjena za 100 POENA za svaku godinu uzrasta deteta — podrška postepeno opada kako dete raste i prestaje kad dete napuni 20 godina.
+        odgovor: `Za svako dete polazna dnevna osnova je 2.000 POENA, umanjena za 100 POENA za svaku godinu uzrasta deteta, podrška postepeno opada kako dete raste i prestaje kad dete napuni 20 godina.
 
 Broj dece povećava ukupan iznos, ali ne prostim sabiranjem: svako naredno dete nosi veći množilac. Prvo dete ×1,00, drugo ×1,20, treće ×1,50, četvrto ×2,00, peto ×3,00, šesto ×4,50, sedmo ×6,00, osmo ×8,00, deveto ×10,00. Tako veće porodice dobijaju srazmerno veću podršku.
 
-Primer: jedno dete od 3 godine — (2.000 − 300) × 1,00 = 1.700 POENA dnevno. Isto dete kao treće po redu — (2.000 − 300) × 1,50 = 2.550 POENA dnevno.
+Primer: jedno dete od 3 godine ((2.000 − 300) × 1,00 = 1.700 POENA dnevno. Isto dete kao treće po redu) (2.000 − 300) × 1,50 = 2.550 POENA dnevno.
 
 Podrška se upisuje automatski na dnevnom nivou dok status traje, bez prijavljivanja pojedinačnih aktivnosti. Kao i ostali socijalni programi, deli zajednički dnevni okvir, pa se u danima sa mnogo doprinosa iznosi mogu srazmerno umanjiti. Parametri su uređeni Pravilnikom o programima podrške i mogu se menjati njegovom izmenom.`,
       },
       {
         id: 61,
-        pitanje: `Šta je „Podrška Starijima" — ko ima pravo i kako se prijavljujem?`,
+        pitanje: `Šta je „Podrška Starijima", ko ima pravo i kako se prijavljujem?`,
         odgovor: `Podrška Starijima je socijalni program za članove od 50 godina naviše.
 
-Dnevni iznos raste sa godinama: 1.000 POENA sa navršenih 50, uvećano za 100 POENA za svaku narednu godinu — član od 65 godina ima 2.500 POENA dnevno, a član od 80 godina 4.000 POENA dnevno.
+Dnevni iznos raste sa godinama: 1.000 POENA sa navršenih 50, uvećano za 100 POENA za svaku narednu godinu, član od 65 godina ima 2.500 POENA dnevno, a član od 80 godina 4.000 POENA dnevno.
 
-Prijava ide kroz platformu i otvorena je redovnim članovima; POEN se potom upisuje automatski, na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. Kao i ostali socijalni programi, ni ovo nije socijalna pomoć ni naknada — Protokol time priznaje učešće koje se ne vidi kroz pojedinačne razmene. Bliži uslovi i način potvrđivanja godina uređeni su Pravilnikom o programima podrške.`,
+Prijava ide kroz platformu i otvorena je redovnim članovima; POEN se potom upisuje automatski, na dnevnom nivou, bez prijavljivanja pojedinačnih aktivnosti. Kao i ostali socijalni programi, ni ovo nije socijalna pomoć ni naknada. Protokol time priznaje učešće koje se ne vidi kroz pojedinačne razmene. Bliži uslovi i način potvrđivanja godina uređeni su Pravilnikom o programima podrške.`,
       },
       {
         id: 18,
         pitanje: `Šta je Posebna Briga i kako se prijavljuje?`,
         odgovor: `Posebna Briga je program za osobe sa invaliditetom.
 
-Pri prijavi se traži samo podatak o rešenju o invalidnosti — ne medicinska dokumentacija, ne dijagnoza, ne istorija bolesti. Uzima se najmanje što je nužno, jer je reč o osetljivim podacima, a i to malo obrađuje se samo uz tvoj izričit pristanak.
+Pri prijavi se traži samo podatak o rešenju o invalidnosti, ne medicinska dokumentacija, ne dijagnoza, ne istorija bolesti. Uzima se najmanje što je nužno, jer je reč o osetljivim podacima, a i to malo obrađuje se samo uz tvoj izričit pristanak.
 
 Iznos je fiksan i iznosi 2.000 POENA dnevno, dok status traje.`,
       },
       {
         id: 96,
         pitanje: `Šta je program Školovanje i na koga se odnosi?`,
-        odgovor: `Školovanje je socijalni program za one koji se školuju — učenike osnovne i srednje škole i studente.
+        odgovor: `Školovanje je socijalni program za one koji se školuju, učenike osnovne i srednje škole i studente.
 
 Dnevni iznos je fiksan i iznosi 2.000 POENA, dok status traje. Status se proverava jednom godišnje; ako se pri reviziji ne potvrdi, upis prestaje.
 
-Prijava ide po istim pravilima kao za druge socijalne programe: kroz platformu, unosom podataka u formu — za ovaj program upisanog razreda odnosno godine studija — bez prilaganja dokumenata. Za maloletnog člana prijavu podnosi roditelj.`,
+Prijava ide po istim pravilima kao za druge socijalne programe: kroz platformu, unosom podataka u formu (za ovaj program upisanog razreda odnosno godine studija) bez prilaganja dokumenata. Za maloletnog člana prijavu podnosi roditelj.`,
       },
       {
         id: 62,
-        pitanje: `Šta je „dokaz statusa" za socijalni program — moram li da prilažem izvod ili dokument deteta?`,
-        odgovor: `Ne prilažeš nijedan dokument — ništa se ne skenira niti šalje.
+        pitanje: `Šta je „dokaz statusa" za socijalni program, moram li da prilažem izvod ili dokument deteta?`,
+        odgovor: `Ne prilažeš nijedan dokument, ništa se ne skenira niti šalje.
 
 Podatke uneseš u formu na platformi: za Podršku Majkama, na primer, ime deteta i datum rođenja. Iznos koji ti se upisuje zavisi od broja i uzrasta dece.
 
-Prijavu zatim, bez uvida u unete podatke, potvrđuju članovi iz tvog lanca — oni koji su potvrdili tvoju stvarnost — pod punom odgovornošću, pa je odobrava Fondacija. Uneti podaci nisu javni: vidi ih samo onaj ko obrađuje prijavu. Reč je o osetljivim podacima, pa se obrađuju samo uz tvoj izričit pristanak, a pristanak možeš povući u svakom trenutku — tada prestaje i automatski upis POENA.
+Prijavu zatim, bez uvida u unete podatke, potvrđuju članovi iz tvog lanca (oni koji su potvrdili tvoju stvarnost) pod punom odgovornošću, pa je odobrava Fondacija. Uneti podaci nisu javni: vidi ih samo onaj ko obrađuje prijavu. Reč je o osetljivim podacima, pa se obrađuju samo uz tvoj izričit pristanak, a pristanak možeš povući u svakom trenutku, tada prestaje i automatski upis POENA.
 
 Bliži uslovi kojima se potvrđuje status za svaku grupu uređeni su Pravilnikom o programima podrške, objavljenim na sajtu.`,
       },
       {
         id: 20,
         pitanje: `Mogu li biti u više programa istovremeno?`,
-        odgovor: `Da, ako ispunjavaš uslove za više programa — majka koja se školuje može biti i u Podršci Majkama i u Školovanju. Svaki program se prijavljuje posebno.
+        odgovor: `Da, ako ispunjavaš uslove za više programa, majka koja se školuje može biti i u Podršci Majkama i u Školovanju. Svaki program se prijavljuje posebno.
 
-Socijalni programi i operativni doprinos dele zajednički dnevni okvir od 10% ukupnog broja POENA u sistemu, kako se ne bi previše POENA upisalo odjednom — kad doprinosa ima više nego što okvir prima, dnevni iznosi se srazmerno umanjuju. Doprinos razmeni i dečji doprinos ne ulaze u taj okvir.`,
+Socijalni programi i operativni doprinos dele zajednički dnevni okvir od 10% ukupnog broja POENA u sistemu, kako se ne bi previše POENA upisalo odjednom, kad doprinosa ima više nego što okvir prima, dnevni iznosi se srazmerno umanjuju. Doprinos razmeni i dečji doprinos ne ulaze u taj okvir.`,
       },
       {
         id: 97,
         pitanje: `Šta je doprinos razmeni i kako se prolazi pet koraka?`,
-        odgovor: `Doprinos razmeni je putanja od pet koraka kojom Protokol upisuje POEN za stvarno uključivanje u razmenu — po 1.000 POENA za svaki korak, ukupno najviše 5.000 POENA.
+        odgovor: `Doprinos razmeni je putanja od pet koraka kojom Protokol upisuje POEN za stvarno uključivanje u razmenu, po 1.000 POENA za svaki korak, ukupno najviše 5.000 POENA.
 
 Prvi korak: objaviš prvi uredan oglas kojim nudiš dobro ili uslugu (novom članu se POEN upisuje kad Fondacija odobri oglas). Drugi: prvi put upišeš POEN nekome van svog kruga poznanstava. Treći: imaš tri objavljena oglasa, od kojih su dva dobila upit od dva različita člana. Četvrti: razmene sa pet različitih osoba van tvog kruga poznanstava. Peti: razmene sa deset različitih osoba.
 
-Koraci se prolaze redom, a za korake od drugog naviše potrebno je da si redovan član. Broje se razmene od najmanje 1.000 POENA po transakciji, sa redovnim članovima van tvog kruga poznanstava, i svaka osoba se računa jednom za celu putanju. Ništa ne prijavljuješ — Protokol sam prati napredovanje i upisuje POEN kad korak bude pređen.`,
+Koraci se prolaze redom, a za korake od drugog naviše potrebno je da si redovan član. Broje se razmene od najmanje 1.000 POENA po transakciji, sa redovnim članovima van tvog kruga poznanstava, i svaka osoba se računa jednom za celu putanju. Ništa ne prijavljuješ. Protokol sam prati napredovanje i upisuje POEN kad korak bude pređen.`,
       },
       {
         id: 19,
         pitanje: `Kako radi operativni doprinos?`,
-        odgovor: `Operativni doprinos evidentira rad za zajedničko dobro koji bi inače ostao nevidljiv — volontiranje, brigu o starijima, rad u zajedničkim aktivnostima, kreativne doprinose.
+        odgovor: `Operativni doprinos evidentira rad za zajedničko dobro koji bi inače ostao nevidljiv, volontiranje, brigu o starijima, rad u zajedničkim aktivnostima, kreativne doprinose.
 
-Sve teče kroz objavljen zadatak: neko ga objavi, redovan član se prijavi i izvrši ga, izvršenje se potvrdi — i tek tada Protokol upisuje POEN. U početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija; po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nosioci ZRNA, a izvršenje potvrđuju nosioci ZRNA.
+Sve teče kroz objavljen zadatak: neko ga objavi, redovan član se prijavi i izvrši ga, izvršenje se potvrdi, i tek tada Protokol upisuje POEN. U početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija; po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nosioci ZRNA, a izvršenje potvrđuju nosioci ZRNA.
 
-Nema tarife po satu. Uz zadatak stoji predloženi POEN, ali to je težinski orijentir, ne cena — stvarno upisani iznos zavisi od toga koliko doprinosa tog dana deli zajednički dnevni okvir, pa se iznosi srazmerno raspoređuju.`,
+Nema tarife po satu. Uz zadatak stoji predloženi POEN, ali to je težinski orijentir, ne cena, stvarno upisani iznos zavisi od toga koliko doprinosa tog dana deli zajednički dnevni okvir, pa se iznosi srazmerno raspoređuju.`,
       },
       {
         id: 63,
         pitanje: `Postoji li program za nezaposlene ili opštu finansijsku nuždu?`,
         odgovor: `Trenutno ne postoji poseban program za nezaposlenost ni za opštu finansijsku nuždu.
 
-Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke i primarne staratelje, starije, osobe sa invaliditetom i one koji se školuju. Nezaposlenost ni siromaštvo nisu među tim grupama — socijalni programi nisu socijalna pomoć ni naknada, nego način da razuđeno učešće dobije ravnopravno mesto u sistemu, a ne oblik podrške zbog finansijskog stanja.
+Socijalni programi pokrivaju tačno određene grupe čije je učešće u zajednici stalno i razuđeno, pa se ne može evidentirati kroz pojedinačne razmene: majke i primarne staratelje, starije, osobe sa invaliditetom i one koji se školuju. Nezaposlenost ni siromaštvo nisu među tim grupama, socijalni programi nisu socijalna pomoć ni naknada, nego način da razuđeno učešće dobije ravnopravno mesto u sistemu, a ne oblik podrške zbog finansijskog stanja.
 
-Ako si u finansijskoj nuždi, put do POENA je isti kao za sve: razmena dobara i usluga sa drugima, doprinos razmeni — pet koraka uključivanja u razmenu koji zajedno donose do 5.000 POENA — i operativni doprinos, rad za zajedničko dobro kroz objavljene zadatke.
+Ako si u finansijskoj nuždi, put do POENA je isti kao za sve: razmena dobara i usluga sa drugima, doprinos razmeni (pet koraka uključivanja u razmenu koji zajedno donose do 5.000 POENA) i operativni doprinos, rad za zajedničko dobro kroz objavljene zadatke.
 
-Nove kvalifikovane grupe mogu se dodati kasnije: u prvoj fazi o tome odlučuje Fondacija, a po aktivaciji upravljanja zajednicom — Gornje Kolo. Konkretni budući programi još nisu razrađeni.`,
+Nove kvalifikovane grupe mogu se dodati kasnije: u prvoj fazi o tome odlučuje Fondacija, a po aktivaciji upravljanja zajednicom. Gornje Kolo. Konkretni budući programi još nisu razrađeni.`,
       },
       {
         id: 64,
         pitanje: `Je li ovo posao? Imam li prihod, ugovor ili zagarantovan mesečni iznos?`,
         odgovor: `Ne. Ovo nije posao u smislu radnog odnosa i nemaš zagarantovan iznos.
 
-Ti odlučuješ da li ćeš se prijaviti na zadatak, kako ćeš ga izvršiti i kojim tempom — i možeš odustati u svakom trenutku, bez posledica. Niko ti ne naređuje i nemaš obavezu da radiš. Zato to nije radni odnos: nema nadređenog, nema obaveze rada, nema plate.
+Ti odlučuješ da li ćeš se prijaviti na zadatak, kako ćeš ga izvršiti i kojim tempom, i možeš odustati u svakom trenutku, bez posledica. Niko ti ne naređuje i nemaš obavezu da radiš. Zato to nije radni odnos: nema nadređenog, nema obaveze rada, nema plate.
 
-Ne postoji ni ugovor po kome se za urađeno X upisuje tačno Y POENA. Tvoj doprinos i upis POENA su dva odvojena akta: ti doprineseš, a Protokol potom po pravilima upiše POEN. Iz toga ne nastaje potraživanje prema Fondaciji — nemaš od koga da „naplatiš".
+Ne postoji ni ugovor po kome se za urađeno X upisuje tačno Y POENA. Tvoj doprinos i upis POENA su dva odvojena akta: ti doprineseš, a Protokol potom po pravilima upiše POEN. Iz toga ne nastaje potraživanje prema Fondaciji, nemaš od koga da „naplatiš".
 
 POEN nije plata ni naknada. Uz objavljen zadatak stoji predloženi POEN, ali to je težinski orijentir, ne zagarantovan iznos: koliko će se stvarno upisati zavisi od toga koliko je doprinosa tog dana ušlo u zajednički dnevni okvir, koji se srazmerno deli. Ono što tog dana ne stane u okvir ne prenosi se za sutra i ne stvara obavezu sistema prema tebi.
 
-Ovo je dobrovoljan doprinos zajednici koji se beleži — ne posao sa zagarantovanom mesečnom zaradom.`,
+Ovo je dobrovoljan doprinos zajednici koji se beleži, ne posao sa zagarantovanom mesečnom zaradom.`,
       },
     ],
   },
@@ -689,74 +689,74 @@ Ovo je dobrovoljan doprinos zajednici koji se beleži — ne posao sa zagarantov
       {
         id: 39,
         pitanje: `Da li je razmena na Pijaci prodaja?`,
-        odgovor: `Po Pravilniku KOLO sistema, razmena dobara i usluga između članova na Pijaci nije postavljena kao klasična prodaja. Reč je o dogovoru dva člana — jedan daje dobro ili uslugu, drugi mu prepisuje POEN, a POEN nije novac nego evidencija doprinosa zajedničkom dobru.
+        odgovor: `Po Pravilniku KOLO sistema, razmena dobara i usluga između članova na Pijaci nije postavljena kao klasična prodaja. Reč je o dogovoru dva člana, jedan daje dobro ili uslugu, drugi mu prepisuje POEN, a POEN nije novac nego evidencija doprinosa zajedničkom dobru.
 
-Prenos POENA u toj razmeni nije plaćanje novcem niti sredstvo plaćanja u smislu Zakona o platnim uslugama. Odnosi povodom razmene — ispunjenje, odgovornost, rizik — uređuju se po opštim pravilima obligacionog prava; Protokol u razmeni ne posreduje.
+Prenos POENA u toj razmeni nije plaćanje novcem niti sredstvo plaćanja u smislu Zakona o platnim uslugama. Odnosi povodom razmene (ispunjenje, odgovornost, rizik) uređuju se po opštim pravilima obligacionog prava; Protokol u razmeni ne posreduje.
 
-Ako kroz Pijacu obavljaš delatnost, tvoje poreske i fiskalne obaveze po opštim propisima ostaju — ništa ovde ih ne ukida.`,
+Ako kroz Pijacu obavljaš delatnost, tvoje poreske i fiskalne obaveze po opštim propisima ostaju, ništa ovde ih ne ukida.`,
       },
       {
         id: 60,
         pitanje: `Kako određujem cenu i količine svojih proizvoda i ko ih vrednuje?`,
-        odgovor: `Iznos u POENIMA za svoja dobra i usluge određuješ sam, slobodno. Platforma ga ne utvrđuje, ne ograničava i ne kontroliše, niti iko vrednuje tvoju robu umesto tebe — ti najbolje znaš šta nudiš i koliko vredi.
+        odgovor: `Iznos u POENIMA za svoja dobra i usluge određuješ sam, slobodno. Platforma ga ne utvrđuje, ne ograničava i ne kontroliše, niti iko vrednuje tvoju robu umesto tebe, ti najbolje znaš šta nudiš i koliko vredi.
 
 Postoji samo orijentir: jedan POEN otprilike odgovara jednom dinaru. To je merna skala koja pomaže da se snađeš pri određivanju iznosa, ali te ni na šta ne obavezuje i nije zvaničan kurs.
 
 Ono što se traži jeste poštenje: tačan i jasan opis dobra ili usluge, realna količina i realan iznos u POENIMA, i svi uslovi razmene. Nije dozvoljen lažan ili obmanjujuć sadržaj koji pogrešno predstavlja prirodu, kvalitet ili količinu onoga što nudiš.
 
-Sve ostalo — isporuku, rok, dodatne uslove — dogovaraš direktno sa drugom stranom.
+Sve ostalo (isporuku, rok, dodatne uslove) dogovaraš direktno sa drugom stranom.
 
-Napomena: ovo važi za razmenu na Pijaci. Operativni doprinos je drugi kanal — tamo iznos nije slobodan dogovor, nego predloženi POEN, težinski orijentir u dnevnoj raspodeli.`,
+Napomena: ovo važi za razmenu na Pijaci. Operativni doprinos je drugi kanal, tamo iznos nije slobodan dogovor, nego predloženi POEN, težinski orijentir u dnevnoj raspodeli.`,
       },
       {
         id: 41,
         pitanje: `Da li je moj oglas na Pijaci javno vidljiv?`,
-        odgovor: `Da. Sadržaj oglasa — opis, iznos u POENIMA, lokacija i tvoj pseudonim — vidljiv je svim posetiocima, uključujući neregistrovane, da bi razmena bila dostupna i laka za pronalaženje. Dok si nov član, preko fotografije oglasa stoji i vidljiva oznaka „Nov član".
+        odgovor: `Da. Sadržaj oglasa (opis, iznos u POENIMA, lokacija i tvoj pseudonim) vidljiv je svim posetiocima, uključujući neregistrovane, da bi razmena bila dostupna i laka za pronalaženje. Dok si nov član, preko fotografije oglasa stoji i vidljiva oznaka „Nov član".
 
-Šta nije javno: tvoj kontakt i mogućnost da ti neko piše ili razmenjuje s tobom — to imaju samo redovni članovi. Neregistrovanima i novim članovima tvoj pseudonim na oglasu ne vodi ka profilu ni istoriji transakcija.`,
+Šta nije javno: tvoj kontakt i mogućnost da ti neko piše ili razmenjuje s tobom, to imaju samo redovni članovi. Neregistrovanima i novim članovima tvoj pseudonim na oglasu ne vodi ka profilu ni istoriji transakcija.`,
       },
       {
         id: 58,
         pitanje: `Mogu li sa komšijom razmeniti rad-za-rad ili alat-za-usev bez ijednog POENA (trampa)?`,
-        odgovor: `Možeš. Direktna trampa — tvoj rad za njegov rad, tvoj alat za njegov usev — privatan je dogovor između tebe i komšije i KOLO ti to ne zabranjuje.
+        odgovor: `Možeš. Direktna trampa (tvoj rad za njegov rad, tvoj alat za njegov usev) privatan je dogovor između tebe i komšije i KOLO ti to ne zabranjuje.
 
 Takva razmena odvija se van sistema: ako uz nju ne ažurirate evidenciju POENA, ostaje vaš lični dogovor i nigde se ne beleži kao tvoj doprinos.
 
-A baš tu je smisao KOLA: da razmena koju biste ionako obavili „od ruke do ruke" dobije zapis. Kad uz razmenu ažurirate evidenciju, POEN pređe sa zapisa onoga ko je dobro ili uslugu primio na zapis onoga ko ih je dao — i ostaje trag ko je koliko dao zajednici.
+A baš tu je smisao KOLA: da razmena koju biste ionako obavili „od ruke do ruke" dobije zapis. Kad uz razmenu ažurirate evidenciju, POEN pređe sa zapisa onoga ko je dobro ili uslugu primio na zapis onoga ko ih je dao, i ostaje trag ko je koliko dao zajednici.
 
-Za kvalitet, isporuku i ispunjenje dogovora odgovarate vas dvoje, po opštim pravilima — Fondacija i Protokol se u to ne mešaju i za to ne odgovaraju.`,
+Za kvalitet, isporuku i ispunjenje dogovora odgovarate vas dvoje, po opštim pravilima. Fondacija i Protokol se u to ne mešaju i za to ne odgovaraju.`,
       },
       {
         id: 21,
-        pitanje: `Pijaca — ko odgovara ako razmena ne uspe?`,
-        odgovor: `Razmena na Pijaci je direktan odnos dva člana i privatnopravne je prirode. Fondacija i Protokol ne odgovaraju za kvalitet, isporuku ni ispunjenje obaveza — sve se uređuje po opštim pravilima obligacionog prava.
+        pitanje: `Pijaca, ko odgovara ako razmena ne uspe?`,
+        odgovor: `Razmena na Pijaci je direktan odnos dva člana i privatnopravne je prirode. Fondacija i Protokol ne odgovaraju za kvalitet, isporuku ni ispunjenje obaveza, sve se uređuje po opštim pravilima obligacionog prava.
 
 Ako razmena ne uspe, prvo pokušaj direktno sa drugom stranom; u početnoj fazi možeš zatražiti dobrovoljno, neobavezujuće posredovanje Fondacije, a na raspolaganju je i sudska zaštita.`,
       },
       {
         id: 59,
         pitanje: `Ko odgovara ako rad ima skriveni nedostatak, roba se pokvari ili kupac ne preuzme? Garancija, reklamacija i povrat POENA?`,
-        odgovor: `Za kvalitet, ispravnost i isporuku odgovaraju članovi koji razmenjuju — onaj ko dobro ili uslugu daje i onaj ko ih prima. Fondacija i Protokol nisu strana u razmeni i ne posreduju u njoj; sve se uređuje po opštim pravilima obligacionog prava, kao kod svake nabavke između dvoje ljudi.
+        odgovor: `Za kvalitet, ispravnost i isporuku odgovaraju članovi koji razmenjuju, onaj ko dobro ili uslugu daje i onaj ko ih prima. Fondacija i Protokol nisu strana u razmeni i ne posreduju u njoj; sve se uređuje po opštim pravilima obligacionog prava, kao kod svake nabavke između dvoje ljudi.
 
-Garanciju, rok i uslove dogovaraš direktno sa drugom stranom pre razmene — što jasnije dogovorite stanje robe, rok i šta ako nešto ne valja, to lakše rešavate problem kasnije. Ako razmenjuješ sa nekim ko robu ili uslugu nudi u okviru delatnosti, važi i zakonska zaštita potrošača; između dva fizička lica važe opšta pravila obligacionog prava.
+Garanciju, rok i uslove dogovaraš direktno sa drugom stranom pre razmene, što jasnije dogovorite stanje robe, rok i šta ako nešto ne valja, to lakše rešavate problem kasnije. Ako razmenjuješ sa nekim ko robu ili uslugu nudi u okviru delatnosti, važi i zakonska zaštita potrošača; između dva fizička lica važe opšta pravila obligacionog prava.
 
-Sistem nema automatsko storniranje razmene. Ako se dogovorite da se nešto vrati, izvodi se kao novo, dobrovoljno ažuriranje evidencije POENA u suprotnom smeru — kao nova razmena nazad.
+Sistem nema automatsko storniranje razmene. Ako se dogovorite da se nešto vrati, izvodi se kao novo, dobrovoljno ažuriranje evidencije POENA u suprotnom smeru, kao nova razmena nazad.
 
-Ako nešto pođe naopako, prvo pokušaj da rešiš direktno sa drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobavezujuće posredovanje Fondacije; ako dogovor ne uspe, ostaje sudska zaštita po opštim pravilima. Uz sam prepis u istoriji POENA stoji i dugme kojim slučaj prijavljuješ Fondaciji — ako po prijavi poništi prepis, POEN ti se vraća u celini.`,
+Ako nešto pođe naopako, prvo pokušaj da rešiš direktno sa drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobavezujuće posredovanje Fondacije; ako dogovor ne uspe, ostaje sudska zaštita po opštim pravilima. Uz sam prepis u istoriji POENA stoji i dugme kojim slučaj prijavljuješ Fondaciji, ako po prijavi poništi prepis, POEN ti se vraća u celini.`,
       },
       {
         id: 23,
         pitanje: `Kako radi donacija Fondaciji i koliko POENA dobijam?`,
-        odgovor: `Donaciju može dati svaki redovan član, uplatom u dinarima na račun Fondacije — direktno ili kroz platformu, gde je dostupno i plaćanje karticom i IPS QR kodom.
+        odgovor: `Donaciju može dati svaki redovan član, uplatom u dinarima na račun Fondacije, direktno ili kroz platformu, gde je dostupno i plaćanje karticom i IPS QR kodom.
 
 Kad uplata bude potvrđena, Protokol ti upisuje POEN: iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa ukupnim (kumulativnim) iznosom tvojih donacija kroz 11 nivoa, od 1,00 do 2,00 (najviši nivo na kumulativnih 5.000.000 RSD). Kad donacijom pređeš prag, koeficijent novog nivoa primenjuje se na celu tu donaciju. Dostignuti nivo je trajan i ne smanjuje se korišćenjem POENA. Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.
 
-Donacija je nepovratna — to je jedan od nepromenljivih principa sistema. Donacije pokrivaju osnovne troškove rada Fondacije (server, alati, razvoj, pravnik, računovodstvo), a kad prihodi premaše operativne troškove, višak se preusmerava u kolektivne nabavke.`,
+Donacija je nepovratna, to je jedan od nepromenljivih principa sistema. Donacije pokrivaju osnovne troškove rada Fondacije (server, alati, razvoj, pravnik, računovodstvo), a kad prihodi premaše operativne troškove, višak se preusmerava u kolektivne nabavke.`,
       },
       {
         id: 74,
-        pitanje: `U kojoj valuti doniram — mogu li poslati evre iz inostranstva?`,
-        odgovor: `Možeš — donacija se daje uplatom na račun Fondacije, u dinarima ili u drugoj valuti, dakle i evrima iz inostranstva. Plaćanje karticom i IPS QR kodom kroz platformu radi samo u dinarima.
+        pitanje: `U kojoj valuti doniram, mogu li poslati evre iz inostranstva?`,
+        odgovor: `Možeš, donacija se daje uplatom na račun Fondacije, u dinarima ili u drugoj valuti, dakle i evrima iz inostranstva. Plaćanje karticom i IPS QR kodom kroz platformu radi samo u dinarima.
 
 POEN se upisuje po istim pravilima kao za svaku donaciju: iznos × koeficijent evidencije donacija, koji raste sa kumulativnim iznosom kroz 11 nivoa (detaljno u pitanju o donacijama). Iznos u stranoj valuti računa se u dinarskoj protivvrednosti.
 
@@ -765,18 +765,18 @@ Fondacija na zahtev izdaje potvrdu o donaciji u skladu sa zakonom.`,
       {
         id: 24,
         pitanje: `Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su pravna lica i preduzetnici koji podržavaju rad Fondacije — ne samo novcem, nego i robom ili uslugama.
+        odgovor: `Pokrovitelji su pravna lica i preduzetnici koji podržavaju rad Fondacije, ne samo novcem, nego i robom ili uslugama.
 
 Pokrovitelj nema sopstveni nalog: POEN bonus se upisuje na nalog vlasnika ili suvlasnika koji je redovan član, odnosno samog preduzetnika, po fiksnoj tabeli sa 7 nivoa (od 10.000 do 1.000.000 RSD).
 
-Svi pokrovitelji javno su prikazani na stranici Pokrovitelji — radi transparentnosti i javnog priznanja doprinosa.`,
+Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentnosti i javnog priznanja doprinosa.`,
       },
       {
         id: 25,
         pitanje: `Može li firma da bude direktni član?`,
-        odgovor: `Ne. Direktni članovi su isključivo fizička lica. Nalog se otvara na čoveka, a stvarnost čoveka potvrđuje drugi čovek koji ga lično poznaje — firma se ne može potvrditi.
+        odgovor: `Ne. Direktni članovi su isključivo fizička lica. Nalog se otvara na čoveka, a stvarnost čoveka potvrđuje drugi čovek koji ga lično poznaje, firma se ne može potvrditi.
 
-Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama, a POEN se upisuje vlasniku, suvlasniku ili samom preduzetniku — ako je redovan član. Sama firma ne dobija POEN, jer nije član.
+Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama, a POEN se upisuje vlasniku, suvlasniku ili samom preduzetniku, ako je redovan član. Sama firma ne dobija POEN, jer nije član.
 
 Vlasnik firme može, naravno, i sam biti član kao fizičko lice, nezavisno od pokroviteljstva.`,
       },
@@ -790,11 +790,11 @@ Vlasnik firme može, naravno, i sam biti član kao fizičko lice, nezavisno od p
         id: 47,
         link: { href: "/pravna-pozicija", label: "Pravna pozicija KOLA" },
         pitanje: `Da li je iko od regulatora (NBS, Poreska, Poverenik) potvrdio da je ovo legalno, ili samo Fondacija tako tvrdi?`,
-        odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost — ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
+        odgovor: `Ne. Trenutno ne postoji pisano mišljenje regulatora koje potvrđuje legalnost, ni Narodna banka, ni Poreska uprava, ni Poverenik nisu izdali takvu potvrdu.
 
 Ono na čemu sistem počiva nije nečija dozvola, nego sopstvena pravna konstrukcija. POEN po pravilima nije novac, valuta, elektronski novac, platno sredstvo, finansijski instrument ni digitalna imovina, i ne može se pretvoriti u nešto sa vrednošću van sistema. Ažuriranje evidencije POENA između članova nije platna transakcija u smislu propisa o platnim uslugama. Za samu razmenu dobara i usluga važe opšta pravila obligacionog prava, a sporovi se vode pred nadležnim sudom. Pravna pozicija sistema, dakle, proizlazi iz toga kako je sistem postavljen, a ne iz spoljne saglasnosti.
 
-Što se poreza tiče, poreski i fiskalni tretman ovih razmena ne ukida tvoje postojeće obaveze ako obavljaš delatnost. Fondacija ne pruža poreski savet — svoje poreske obaveze snosiš ti.
+Što se poreza tiče, poreski i fiskalni tretman ovih razmena ne ukida tvoje postojeće obaveze ako obavljaš delatnost. Fondacija ne pruža poreski savet, svoje poreske obaveze snosiš ti.
 
 Za zaštitu ličnih podataka uvek imaš pravo da se obratiš Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti.
 
@@ -809,53 +809,53 @@ POEN se ne upisuje po uplati novca, nego po doprinosu zajednici ili po potvrđen
 
 Donacija nije skrivena kupovina POENA zato što su to dva pravno nezavisna akta. Prvi je tvoja nepovratna donacija Fondaciji. Drugi je automatski upis POENA koji Protokol izvodi po unapred objavljenim pravilima.
 
-Iz donacije ne nastaje tvoje potraživanje — ni pravo da od Fondacije tražiš upis POENA, ni pravo da tražiš novac nazad. Upis POENA nije protivusluga za donaciju.
+Iz donacije ne nastaje tvoje potraživanje, ni pravo da od Fondacije tražiš upis POENA, ni pravo da tražiš novac nazad. Upis POENA nije protivusluga za donaciju.
 
 Radi orijentacije koristi se merna skala od otprilike 1 POEN za 1 dinar, ali Fondacija tu vrednost ne garantuje i ne menja POEN za novac.`,
       },
       {
         id: 98,
-        pitanje: `Da li je POEN digitalna imovina — virtuelna valuta ili digitalni token — po Zakonu o digitalnoj imovini?`,
-        odgovor: `Nije. Zakon o digitalnoj imovini poznaje dve vrste digitalne imovine — virtuelnu valutu i digitalni token — i POEN ne ispunjava odlike nijedne.
+        pitanje: `Da li je POEN digitalna imovina (virtuelna valuta ili digitalni token) po Zakonu o digitalnoj imovini?`,
+        odgovor: `Nije. Zakon o digitalnoj imovini poznaje dve vrste digitalne imovine (virtuelnu valutu i digitalni token) i POEN ne ispunjava odlike nijedne.
 
-Virtuelna valuta je digitalni zapis vrednosti koji se kupuje, prodaje i prenosi, i kojim se plaća ili ulaže. POEN se ne može kupiti ni prodati: ne nabavlja se novcem, nego nastaje upisom po unapred objavljenim pravilima, kao zapis o doprinosu. Nema vrednost van sistema, nema tržište ni cenu, ne može se preneti van Protokola i Fondacija ga ne otkupljuje. Donacija nije kupovina POENA — to su dva pravno nezavisna akta, objašnjena u posebnom pitanju.
+Virtuelna valuta je digitalni zapis vrednosti koji se kupuje, prodaje i prenosi, i kojim se plaća ili ulaže. POEN se ne može kupiti ni prodati: ne nabavlja se novcem, nego nastaje upisom po unapred objavljenim pravilima, kao zapis o doprinosu. Nema vrednost van sistema, nema tržište ni cenu, ne može se preneti van Protokola i Fondacija ga ne otkupljuje. Donacija nije kupovina POENA, to su dva pravno nezavisna akta, objašnjena u posebnom pitanju.
 
-Digitalni token je zapis koji nosi neko imovinsko pravo — udeo, potraživanje, pravo na prinos ili uslugu. POEN ne nosi nijedno: iz njega ne nastaje potraživanje prema Fondaciji ni prema bilo kome, ne daje udeo, kamatu ni prinos, i ne obavezuje nikoga — ni Fondaciju ni članove — da ti za njega nešto pruži. On beleži činjenicu doprinosa, kao upis u matičnoj knjizi — a upis u knjizi nije imovina.
+Digitalni token je zapis koji nosi neko imovinsko pravo, udeo, potraživanje, pravo na prinos ili uslugu. POEN ne nosi nijedno: iz njega ne nastaje potraživanje prema Fondaciji ni prema bilo kome, ne daje udeo, kamatu ni prinos, i ne obavezuje nikoga (ni Fondaciju ni članove) da ti za njega nešto pruži. On beleži činjenicu doprinosa, kao upis u matičnoj knjizi, a upis u knjizi nije imovina.
 
-Iz istih razloga POEN nije ni finansijski instrument. Isto važi i za ZRNO: ne prepisuje se drugom članu, nema tržište i ne nosi imovinsko pravo — više o tome u sekciji „POEN i ZRNO".
+Iz istih razloga POEN nije ni finansijski instrument. Isto važi i za ZRNO: ne prepisuje se drugom članu, nema tržište i ne nosi imovinsko pravo, više o tome u sekciji „POEN i ZRNO".
 
-Kao i sve ovde, ovo je pravna konstrukcija sistema, a ne potvrda regulatora — rizik izmene propisa ili tumačenja opisan je u prvom pitanju ove sekcije.`,
+Kao i sve ovde, ovo je pravna konstrukcija sistema, a ne potvrda regulatora, rizik izmene propisa ili tumačenja opisan je u prvom pitanju ove sekcije.`,
       },
       {
         id: 48,
-        pitanje: `Redovno prodajem viškove (med, rakija, zimnica) ili pružam zanatske usluge — treba li mi račun, PDV ili registrovana delatnost? Ko snosi porez?`,
+        pitanje: `Redovno prodajem viškove (med, rakija, zimnica) ili pružam zanatske usluge, treba li mi račun, PDV ili registrovana delatnost? Ko snosi porez?`,
         odgovor: `KOLO ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime, ali ti ne ukida obaveze koje već imaš po opštim propisima.
 
-Razmena dobara i usluga među članovima nije postavljena kao klasična prodaja, a prenos POENA nije plaćanje novcem u smislu propisa o platnim uslugama — POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POENA, ali ne vodi tvoje poreske knjige niti izdaje račune.
+Razmena dobara i usluga među članovima nije postavljena kao klasična prodaja, a prenos POENA nije plaćanje novcem u smislu propisa o platnim uslugama. POEN je evidencija doprinosa, ne novac. Zato Protokol ažurira evidenciju POENA, ali ne vodi tvoje poreske knjige niti izdaje račune.
 
-To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovno i u obimu koji liči na delatnost, na tebe se primenjuju opšti propisi kao i van platforme. Za pojedina dobra — poput alkoholnih pića ili hrane — postoje i posebni propisi o proizvodnji i prometu, i oni važe i ovde.
+To, međutim, ne znači da si oslobođen propisa. Ako robu ili uslugu pružaš redovno i u obimu koji liči na delatnost, na tebe se primenjuju opšti propisi kao i van platforme. Za pojedina dobra (poput alkoholnih pića ili hrane) postoje i posebni propisi o proizvodnji i prometu, i oni važe i ovde.
 
 Fondacija ne pruža poreski savet i nije strana u tvojoj razmeni: za ispunjenje, kvalitet i rizik odgovarate ti i druga strana po opštim pravilima obligacionog prava, a svoje poreske obaveze snosiš ti.`,
       },
       {
         id: 49,
         pitanje: `Utiče li učešće u KOLU / POEN na moju penziju ili socijalna davanja?`,
-        odgovor: `Sa strane sistema — ne. POEN nije novac, nije zarada ni prihod: to je interni zapis u evidenciji o tome šta si dao zajednici, i ne može se pretvoriti u sredstvo sa vrednošću van sistema. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigde kao tvoj prihod.
+        odgovor: `Sa strane sistema, ne. POEN nije novac, nije zarada ni prihod: to je interni zapis u evidenciji o tome šta si dao zajednici, i ne može se pretvoriti u sredstvo sa vrednošću van sistema. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigde kao tvoj prihod.
 
-Ako ti se POEN upisuje kroz neki od socijalnih programa (na primer kao primarni staratelj, stariji član ili kroz Školovanje), ni to nije socijalna pomoć ni naknada — nego automatsko ažuriranje evidencije koje takvom učešću daje ravnopravno mesto u sistemu.
+Ako ti se POEN upisuje kroz neki od socijalnih programa (na primer kao primarni staratelj, stariji član ili kroz Školovanje), ni to nije socijalna pomoć ni naknada, nego automatsko ažuriranje evidencije koje takvom učešću daje ravnopravno mesto u sistemu.
 
-Treba, međutim, razlikovati POEN od onoga što radiš van sistema. Sve što naplaćuješ u dinarima tvoja je delatnost za koju važe opšti propisi — i to može imati posledice po tvoj status, zavisno od toga šta i u kom obimu radiš.
+Treba, međutim, razlikovati POEN od onoga što radiš van sistema. Sve što naplaćuješ u dinarima tvoja je delatnost za koju važe opšti propisi, i to može imati posledice po tvoj status, zavisno od toga šta i u kom obimu radiš.
 
 Fondacija ne pruža poreski ni pravni savet. Ako primaš penziju ili neko socijalno davanje, a nisi siguran kako se ono slaže sa onim što radiš, najsigurnije je da proveriš sa nadležnom službom (PIO) ili sa knjigovođom.`,
       },
       {
         id: 77,
         pitanje: `Da li je Fondacija obveznik propisa o sprečavanju pranja novca (AML/KYC) i identifikuje li donatore?`,
-        odgovor: `Fondacija nije finansijska institucija i ne posluje novcem članova — POEN nije novac, a razmena među članovima nije platna transakcija. Po svojoj delatnosti Fondacija nije među obveznicima koje propisi o sprečavanju pranja novca i finansiranja terorizma nabrajaju.
+        odgovor: `Fondacija nije finansijska institucija i ne posluje novcem članova. POEN nije novac, a razmena među članovima nije platna transakcija. Po svojoj delatnosti Fondacija nije među obveznicima koje propisi o sprečavanju pranja novca i finansiranja terorizma nabrajaju.
 
-Donacije se ipak ne primaju anonimno. Primaju se kroz bankarski sistem — uplatom na račun Fondacije ili karticom — sa računa čiji je vlasnik identifikovan, pa identifikaciju uplatioca i proveru porekla sredstava sprovodi banka po svojim propisima. Pokrovitelji su pravna lica i preduzetnici koji se identifikuju ugovorom.
+Donacije se ipak ne primaju anonimno. Primaju se kroz bankarski sistem (uplatom na račun Fondacije ili karticom) sa računa čiji je vlasnik identifikovan, pa identifikaciju uplatioca i proveru porekla sredstava sprovodi banka po svojim propisima. Pokrovitelji su pravna lica i preduzetnici koji se identifikuju ugovorom.
 
-Podatke o donacijama Fondacija čuva u skladu sa propisima o finansijskom izveštavanju i čini ih dostupnim nadležnim organima — uključujući Poresku upravu i Upravu za sprečavanje pranja novca — kad to zakon nalaže.`,
+Podatke o donacijama Fondacija čuva u skladu sa propisima o finansijskom izveštavanju i čini ih dostupnim nadležnim organima (uključujući Poresku upravu i Upravu za sprečavanje pranja novca) kad to zakon nalaže.`,
       },
     ],
   },
@@ -868,58 +868,58 @@ Podatke o donacijama Fondacija čuva u skladu sa propisima o finansijskom izveš
         pitanje: `Ko kontroliše KOLO?`,
         odgovor: `Trenutno (Faza 1) sve odluke donosi KOLO Fondacija preko Upravnog odbora.
 
-Kad ukupan broj upisanih POENA dostigne 1.000.000, aktivira se Gornje Kolo — upravljačko telo svih nosilaca ZRNA, koje o ključnim sistemskim pitanjima odlučuje kvadratnim glasanjem.
+Kad ukupan broj upisanih POENA dostigne 1.000.000, aktivira se Gornje Kolo, upravljačko telo svih nosilaca ZRNA, koje o ključnim sistemskim pitanjima odlučuje kvadratnim glasanjem.
 
-Fondacija od tog trenutka prelazi iz suverenog u izvršni organ — sprovodi odluke Gornjeg Kola, ne donosi ih sama.`,
+Fondacija od tog trenutka prelazi iz suverenog u izvršni organ, sprovodi odluke Gornjeg Kola, ne donosi ih sama.`,
       },
       {
         id: 27,
         pitanje: `Šta sprečava zloupotrebu od strane admina ili osnivača?`,
         odgovor: `Više strukturnih zaštita radi paralelno.
 
-Zero-sum princip — svaki upis POENA uvećava minus Protokola, pa niko ne može stvoriti POEN ni iz čega.
+Zero-sum princip, svaki upis POENA uvećava minus Protokola, pa niko ne može stvoriti POEN ni iz čega.
 
-Dnevni okvir programa — socijalni programi i operativni doprinos zajedno ne smeju dnevno upisati više od 10% ukupnog broja POENA u sistemu.
+Dnevni okvir programa, socijalni programi i operativni doprinos zajedno ne smeju dnevno upisati više od 10% ukupnog broja POENA u sistemu.
 
-Deterministički upisi — Protokol nema diskrecione odluke: sve je u kodu, po unapred objavljenim pravilima, a kod je javno objavljen i svako ga može proveriti.
+Deterministički upisi. Protokol nema diskrecione odluke: sve je u kodu, po unapred objavljenim pravilima, a kod je javno objavljen i svako ga može proveriti.
 
-Transparentnost — evidencija doprinosa je pseudonimna, istorija zapisa se ne prepravlja (svaka ispravka ide novim zapisom), vidljiva je redovnim članovima, a neregistrovani vide samo zbirne brojeve.
+Transparentnost, evidencija doprinosa je pseudonimna, istorija zapisa se ne prepravlja (svaka ispravka ide novim zapisom), vidljiva je redovnim članovima, a neregistrovani vide samo zbirne brojeve.
 
-I konačno, aktivacija Gornjeg Kola — nadležnost prelazi na članove.`,
+I konačno, aktivacija Gornjeg Kola, nadležnost prelazi na članove.`,
       },
       {
         id: 28,
         pitanje: `Šta je Gornje Kolo i kada se aktivira?`,
-        odgovor: `Gornje Kolo je upravljačko telo svih nosilaca ZRNA — najviše telo odlučivanja o sistemu. Nije skupština koja se bira, nego dinamičan sastav: čine ga svi koji u datom trenutku imaju ZRNO.
+        odgovor: `Gornje Kolo je upravljačko telo svih nosilaca ZRNA, najviše telo odlučivanja o sistemu. Nije skupština koja se bira, nego dinamičan sastav: čine ga svi koji u datom trenutku imaju ZRNO.
 
-Aktivira se automatski kad ukupan broj upisanih POENA dostigne 1.000.000 — u evidenciji Protokola to je stanje od −1.000.000 — što je znak da je sistem dovoljno aktivan i da članovi nose značajnu kolektivnu odgovornost.
+Aktivira se automatski kad ukupan broj upisanih POENA dostigne 1.000.000 (u evidenciji Protokola to je stanje od −1.000.000) što je znak da je sistem dovoljno aktivan i da članovi nose značajnu kolektivnu odgovornost.
 
 Pre toga sve odluke donosi Fondacija; posle toga ključne sistemske odluke (izmene Pravilnika, novi programi, suspenzija programa) donosi Gornje Kolo kvadratnim glasanjem.`,
       },
       {
         id: 29,
         pitanje: `Šta je kvadratno glasanje?`,
-        odgovor: `To je način glasanja u kome glasačka snaga raste kao kvadratni koren broja ZRNA: 1 ZRNO — 1 glas, 100 ZRNA — 10 glasova, 10.000 ZRNA — 100 glasova.
+        odgovor: `To je način glasanja u kome glasačka snaga raste kao kvadratni koren broja ZRNA: 1 ZRNO (1 glas, 100 ZRNA) 10 glasova, 10.000 ZRNA, 100 glasova.
 
-Cilj je da niko ne može prevagnuti odluku samom količinom ZRNA — uticaj raste mnogo sporije od broja ZRNA, pa odluku pre odnosi širina učešća nego koncentracija moći.`,
+Cilj je da niko ne može prevagnuti odluku samom količinom ZRNA, uticaj raste mnogo sporije od broja ZRNA, pa odluku pre odnosi širina učešća nego koncentracija moći.`,
       },
       {
         id: 30,
         pitanje: `Šta je Zaštitni veto Fondacije?`,
-        odgovor: `Dok Fondacija nije finansijski samostalna, može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu i finansijsku održivost — pre svega odluke o trošenju sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava sistem.
+        odgovor: `Dok Fondacija nije finansijski samostalna, može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu i finansijsku održivost, pre svega odluke o trošenju sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava sistem.
 
 Veto nije diskrecion: mora biti obrazložen pozivanjem na konkretnu pretnju održivosti, a veto bez obrazloženja već je sam po sebi zloupotreba. To nije politička kontrola, nego zaštita kontinuiteta sistema.
 
-Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti — trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu.`,
+Veto se gasi trajno i jednosmerno kad sredstva Fondacije dostignu prag finansijske samostalnosti, trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu.`,
       },
       {
         id: 72,
         pitanje: `Šta tačno menjaju članovi u „punom samoupravljanju" i kada to nastupa?`,
         odgovor: `Postoje dva odvojena praga, i lako ih je pomešati.
 
-Prvi prag — aktivacija Gornjeg Kola. Kad ukupan broj upisanih POENA u sistemu dostigne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo — upravljačko telo svih nosilaca ZRNA. Od tog trenutka članovi kvadratnim glasanjem odlučuju o pravilima sistema: izmenama Pravilnika, programima i drugim pitanjima koja utiču na zajedničko dobro. Fondacija od suverenog prelazi u izvršni i servisni organ — sprovodi odluke, ne donosi ih sama.
+Prvi prag, aktivacija Gornjeg Kola. Kad ukupan broj upisanih POENA u sistemu dostigne 1.000.000 (što u evidenciji Protokola odgovara stanju −1.000.000), automatski se otvara upis ZRNA i nastaje Gornje Kolo, upravljačko telo svih nosilaca ZRNA. Od tog trenutka članovi kvadratnim glasanjem odlučuju o pravilima sistema: izmenama Pravilnika, programima i drugim pitanjima koja utiču na zajedničko dobro. Fondacija od suverenog prelazi u izvršni i servisni organ, sprovodi odluke, ne donosi ih sama.
 
-Drugi prag — gašenje zaštitnog veta. Dok Fondacija nije finansijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu održivost — pre svega odluke o trošenju sredstava, poput kolektivnih nabavki, pre nego što je održivost obezbeđena. Veto mora biti obrazložen, nije samovoljan. Gasi se trajno i jednosmerno tek kad sredstva Fondacije dostignu prag finansijske samostalnosti — trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu.
+Drugi prag, gašenje zaštitnog veta. Dok Fondacija nije finansijski samostalna, ima zaštitni veto: može odbiti izvršenje odluke Gornjeg Kola koja bi ugrozila njenu operativnu održivost, pre svega odluke o trošenju sredstava, poput kolektivnih nabavki, pre nego što je održivost obezbeđena. Veto mora biti obrazložen, nije samovoljan. Gasi se trajno i jednosmerno tek kad sredstva Fondacije dostignu prag finansijske samostalnosti, trostruki operativni trošak prethodnog meseca, utvrđen Pravilnikom o Gornjem Kolu.
 
 Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog odbora.`,
       },
@@ -932,42 +932,42 @@ Do aktivacije Gornjeg Kola (Faza 1) sve odluke donosi Fondacija preko Upravnog o
       {
         id: 71,
         pitanje: `Kakav je sigurnosni model? Je li blockchain? Šta sprečava da neko iskuje POEN ili prepiše istoriju?`,
-        odgovor: `Nije blockchain. KOLO koristi centralizovanu evidenciju koju vodi Protokol na infrastrukturi koju drži Fondacija. Decentralizacija ovde nije tehnička nego upravljačka — odlučivanje se vremenom prenosi sa osnivača na zajednicu.
+        odgovor: `Nije blockchain. KOLO koristi centralizovanu evidenciju koju vodi Protokol na infrastrukturi koju drži Fondacija. Decentralizacija ovde nije tehnička nego upravljačka, odlučivanje se vremenom prenosi sa osnivača na zajednicu.
 
-Zaštita od „kovanja" POENA počiva na zero-sum pravilu: svaki POEN koji postoji upisan je kao isti takav minus u zapisu Protokola. Niko ne može da upiše POEN ni iz čega, jer bi to odmah narušilo ravnotežu koju sistem stalno proverava. Uz to, sve operacije Protokola su determinističke, bez diskrecije — ni admin ne može „ručno" da doda nekome POEN mimo definisanih kanala.
+Zaštita od „kovanja" POENA počiva na zero-sum pravilu: svaki POEN koji postoji upisan je kao isti takav minus u zapisu Protokola. Niko ne može da upiše POEN ni iz čega, jer bi to odmah narušilo ravnotežu koju sistem stalno proverava. Uz to, sve operacije Protokola su determinističke, bez diskrecije, ni admin ne može „ručno" da doda nekome POEN mimo definisanih kanala.
 
-Što se istorije tiče, svaki zapis je vremenski označen, a istorija se ne prepravlja: ispravke idu novim zapisom u suprotnom smeru, nikad brisanjem ili menjanjem starog. Administratorske radnje beleže se u revizijskom dnevniku, a redovne automatske provere potvrđuju da zbir svih zapisa u svakom trenutku daje nulu — svako odstupanje odmah je vidljivo.
+Što se istorije tiče, svaki zapis je vremenski označen, a istorija se ne prepravlja: ispravke idu novim zapisom u suprotnom smeru, nikad brisanjem ili menjanjem starog. Administratorske radnje beleže se u revizijskom dnevniku, a redovne automatske provere potvrđuju da zbir svih zapisa u svakom trenutku daje nulu, svako odstupanje odmah je vidljivo.
 
-O granicama: ova nepromenljivost je dizajnersko pravilo obezbeđeno softverskom arhitekturom, a ne kriptografska „trustless" garancija kakvu pruža javni blockchain. Integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, ne na tome da matematika čini prevaru nemogućom. Zato su tu i dodatne mere — šifrovanje podataka u prenosu i u mirovanju, redovni bekapi na odvojene lokacije i otvoren kod koji svako može nezavisno da pregleda.`,
+O granicama: ova nepromenljivost je dizajnersko pravilo obezbeđeno softverskom arhitekturom, a ne kriptografska „trustless" garancija kakvu pruža javni blockchain. Integritet počiva na ispravno napisanom kodu, kontroli pristupa i transparentnosti, ne na tome da matematika čini prevaru nemogućom. Zato su tu i dodatne mere, šifrovanje podataka u prenosu i u mirovanju, redovni bekapi na odvojene lokacije i otvoren kod koji svako može nezavisno da pregleda.`,
       },
       {
         id: 80,
         pitanje: `Gde je javni repozitorijum koda? Mogu li ga preuzeti i sam pokrenuti (self-host)?`,
         odgovor: `Ceo izvorni kod platforme javno je dostupan na GitHub-u: https://github.com/alvaserbia-prog/kolo-platform
 
-Možeš ga slobodno pregledati, preuzeti i pokrenuti sopstvenu kopiju. Softver je pod licencom AGPL-3.0, koja to izričito dozvoljava — uz jedan uslov: ako svoju kopiju pokreneš kao javni internet servis, moraš i sam učiniti svoj izvorni kod, sa svim izmenama, dostupnim svojim korisnicima pod istom licencom. Tako kod ostaje trajno otvoren.
+Možeš ga slobodno pregledati, preuzeti i pokrenuti sopstvenu kopiju. Softver je pod licencom AGPL-3.0, koja to izričito dozvoljava, uz jedan uslov: ako svoju kopiju pokreneš kao javni internet servis, moraš i sam učiniti svoj izvorni kod, sa svim izmenama, dostupnim svojim korisnicima pod istom licencom. Tako kod ostaje trajno otvoren.
 
 Za pokretanje su potrebni Node.js okruženje i PostgreSQL baza; osnovna uputstva (instalacija, pokretanje, varijable okruženja) nalaze se u fajlovima README i .env.example u samom repozitorijumu. Doprinosi kodu primaju se uz DCO potpis o poreklu doprinosa, opisan u fajlu CONTRIBUTING.
 
-Dokumentacija i tekstovi sistema licencirani su pod CC BY-SA 4.0 — slobodni za korišćenje i adaptaciju uz navođenje autorstva i istu licencu.`,
+Dokumentacija i tekstovi sistema licencirani su pod CC BY-SA 4.0, slobodni za korišćenje i adaptaciju uz navođenje autorstva i istu licencu.`,
       },
       {
         id: 69,
-        pitanje: `Ako pošaljem PR (doprinos kodom) — dobijam li POEN? Je li to operativni doprinos? Mora li me neko potvrditi?`,
-        odgovor: `Doprinos kodom spada u operativni doprinos — isti kanal kroz koji se evidentira svaki rad za zajedničko dobro.
+        pitanje: `Ako pošaljem PR (doprinos kodom), dobijam li POEN? Je li to operativni doprinos? Mora li me neko potvrditi?`,
+        odgovor: `Doprinos kodom spada u operativni doprinos, isti kanal kroz koji se evidentira svaki rad za zajedničko dobro.
 
-Kod i sadržaj su zajedničko dobro: softver je pod licencom AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvata se po principu DCO (potpis „Signed-off-by") — to je potvrda porekla doprinosa, ne prenos autorskih prava na Fondaciju. Tvoja atribucija na doprinosu je trajna i ostaje i ako kasnije obrišeš nalog.
+Kod i sadržaj su zajedničko dobro: softver je pod licencom AGPL-3.0, sadržaj pod CC BY-SA 4.0. Doprinos kodom prihvata se po principu DCO (potpis „Signed-off-by"), to je potvrda porekla doprinosa, ne prenos autorskih prava na Fondaciju. Tvoja atribucija na doprinosu je trajna i ostaje i ako kasnije obrišeš nalog.
 
-Da bi ti se POEN upisao, treba da budeš redovan član, a doprinos ide kroz objavljen zadatak: u početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija, a po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nosioci ZRNA, a izvršenje potvrđuju nosioci ZRNA. Ti se prijaviš, izvršiš zadatak, izvršenje se potvrdi — i tada se POEN upiše.`,
+Da bi ti se POEN upisao, treba da budeš redovan član, a doprinos ide kroz objavljen zadatak: u početnoj fazi zadatke objavljuje i izvršenje potvrđuje Fondacija, a po aktivaciji upravljanja zajednicom zadatke objavljuju i Gornje Kolo i nosioci ZRNA, a izvršenje potvrđuju nosioci ZRNA. Ti se prijaviš, izvršiš zadatak, izvršenje se potvrdi, i tada se POEN upiše.`,
       },
       {
         id: 70,
         pitanje: `Postoji li javni ili developerski API? Mogu li graditi integracije ili botove?`,
         odgovor: `Trenutno ne postoji javni developerski API za gradnju integracija ili botova.
 
-Ono što postoji jeste izvoz tvojih sopstvenih podataka: u svakom trenutku možeš zatražiti sve svoje podatke u strukturisanom, mašinski čitljivom formatu (JSON) — to je tvoje zakonsko pravo na prenosivost. Ali to je izvoz tvojih ličnih podataka, ne programerski interfejs nad celim sistemom.
+Ono što postoji jeste izvoz tvojih sopstvenih podataka: u svakom trenutku možeš zatražiti sve svoje podatke u strukturisanom, mašinski čitljivom formatu (JSON), to je tvoje zakonsko pravo na prenosivost. Ali to je izvoz tvojih ličnih podataka, ne programerski interfejs nad celim sistemom.
 
-Važno je i zašto: sistem ima gradiranu vidljivost — pseudonime i pojedinačne transakcije vide samo redovni članovi, a neregistrovani samo zbirne brojeve. Svaki budući API morao bi da poštuje isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
+Važno je i zašto: sistem ima gradiranu vidljivost, pseudonime i pojedinačne transakcije vide samo redovni članovi, a neregistrovani samo zbirne brojeve. Svaki budući API morao bi da poštuje isto pravilo, inače bi zaobišao zaštitu privatnosti.`,
       },
     ],
   },
@@ -978,7 +978,7 @@ Važno je i zašto: sistem ima gradiranu vidljivost — pseudonime i pojedinačn
       {
         id: 31,
         pitanje: `Kako se rešavaju sporovi između članova?`,
-        odgovor: `Spor između članova oko razmene rešava se po opštim pravilima obligacionog prava, pred nadležnim sudom — Fondacija nije strana u tom odnosu.
+        odgovor: `Spor između članova oko razmene rešava se po opštim pravilima obligacionog prava, pred nadležnim sudom. Fondacija nije strana u tom odnosu.
 
 U početnoj fazi možeš zatražiti dobrovoljno, neobavezujuće posredovanje Fondacije. Ako je spor između tebe i same Fondacije, prvo se traži sporazumno rešenje; inače je nadležan sud u Somboru.
 
@@ -989,16 +989,16 @@ Posebni interni mehanizmi rešavanja sporova mogu se uspostaviti kasnije, posebn
       {
         id: 32,
         pitanje: `Šta se dešava kada se neko ne pridržava pravila?`,
-        odgovor: `Sistem ima trajno pamćenje — svako ažuriranje evidencije trajno je zabeleženo pod pseudonimom i vidljivo redovnim članovima, pa loše ponašanje ostaje vidljivo onima koji učestvuju u sistemu.
+        odgovor: `Sistem ima trajno pamćenje, svako ažuriranje evidencije trajno je zabeleženo pod pseudonimom i vidljivo redovnim članovima, pa loše ponašanje ostaje vidljivo onima koji učestvuju u sistemu.
 
-Fondacija može privremeno suspendovati nalog — najviše 30 dana, uz pravo člana da bude obavešten o razlozima i da se izjasni — ili pri težoj povredi pravila isključiti člana.
+Fondacija može privremeno suspendovati nalog (najviše 30 dana, uz pravo člana da bude obavešten o razlozima i da se izjasni) ili pri težoj povredi pravila isključiti člana.
 
 Isključeni član gubi pristup, POEN i ZRNO se otpisuju Protokolu, a pseudonim se anonimizuje.`,
       },
       {
         id: 33,
         pitanje: `Mogu li podneti prigovor na odluku Fondacije?`,
-        odgovor: `Da. Svaki redovan član može podneti formalni prigovor kroz platformu — na potvrdu, suspenziju, odluku o programu ili bilo koju drugu odluku.
+        odgovor: `Da. Svaki redovan član može podneti formalni prigovor kroz platformu, na potvrdu, suspenziju, odluku o programu ili bilo koju drugu odluku.
 
 Fondacija mora rešiti prigovor u roku od 30 dana, sa obrazloženjem.
 
@@ -1013,7 +1013,7 @@ Istovremeno možeš imati najviše tri otvorena prigovora.`,
       {
         id: 34,
         pitanje: `Ko sve vidi moj pseudonim i transakcije?`,
-        odgovor: `Vidljivost zavisi od tvog statusa u sistemu — pristup je gradiran.
+        odgovor: `Vidljivost zavisi od tvog statusa u sistemu, pristup je gradiran.
 
 Neregistrovan posetilac vidi samo zbirne brojeve sistema: broj članova, broj ažuriranja evidencije, POEN u opticaju. Ne vidi pojedinačne transakcije ni pseudonime.
 
@@ -1021,20 +1021,20 @@ Nov član vidi iznose i vremenske oznake ažuriranja evidencije, ali bez pseudon
 
 Redovan član (indeks stvarnosti od najmanje 10%) vidi pseudonime svih članova, sve transakcije sa pseudonimima strana, stanja i profile.
 
-Tvoje pravo ime i telefon su dobrovoljni i nisu uslov za korišćenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom — sam biraš da li ćeš ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući.
+Tvoje pravo ime i telefon su dobrovoljni i nisu uslov za korišćenje. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom, sam biraš da li ćeš ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući.
 
 Izuzetak je Pijaca: tvoji oglasi (opis, iznos u POENIMA, lokacija i pseudonim) javno su vidljivi svima, ali tvoj kontakt i povezivanje sa istorijom vide samo redovni članovi.`,
       },
       {
         id: 55,
         pitanje: `Mogu li koristiti sistem bez imena i telefona? Šta gubim?`,
-        odgovor: `Da, možeš. Pri registraciji obavezni su samo pseudonim (ime koje sam biraš), imejl i lozinka — ništa više.
+        odgovor: `Da, možeš. Pri registraciji obavezni su samo pseudonim (ime koje sam biraš), imejl i lozinka, ništa više.
 
 Pravo ime i broj telefona potpuno su dobrovoljni. Nisu uslov da budeš potvrđen kroz lanac potvrda, niti uslov za pristup bilo kojoj funkciji sistema. Fondacija ne vodi evidenciju koja povezuje tvoj pseudonim sa tvojim identitetom.
 
 Šta gubiš ako ih ne daš? Praktično samo lakši kontakt: na Pijaci te drugi bez tih podataka teže kontaktiraju i teže dogovarate razmenu uživo.
 
-Ako ipak odlučiš da ih uneseš, sam biraš da li će biti vidljivi redovnim članovima — i to otkrivanje možeš povući u svakom trenutku, posle čega se podaci više ne prikazuju.
+Ako ipak odlučiš da ih uneseš, sam biraš da li će biti vidljivi redovnim članovima, i to otkrivanje možeš povući u svakom trenutku, posle čega se podaci više ne prikazuju.
 
 Imejl adresa ti nikada nije javno vidljiva.`,
       },
@@ -1043,11 +1043,11 @@ Imejl adresa ti nikada nije javno vidljiva.`,
         pitanje: `Može li me neko deanonimizovati kombinujući iznose, vreme i učestalost transakcija?`,
         odgovor: `Da. Pseudonimnost nije isto što i anonimnost.
 
-Tvoje transakcije vode se pod pseudonimom, ne pod tvojim imenom. Ali kombinacija iznosa, vremena i učestalosti ažuriranja evidencije može u nekim slučajevima posredno ukazati na to ko si — naročito u maloj sredini gde se ljudi poznaju. Registracijom prihvataš da je javnost pseudonimne evidencije ugrađena u sistem i da se ne može isključiti.
+Tvoje transakcije vode se pod pseudonimom, ne pod tvojim imenom. Ali kombinacija iznosa, vremena i učestalosti ažuriranja evidencije može u nekim slučajevima posredno ukazati na to ko si, naročito u maloj sredini gde se ljudi poznaju. Registracijom prihvataš da je javnost pseudonimne evidencije ugrađena u sistem i da se ne može isključiti.
 
 Ipak te štiti nekoliko stvari.
 
-Fondacija ne vodi tabelu koja povezuje pseudonim sa tvojim identitetom — tu vezu jednostavno ne posedujemo. Pravo ime i broj telefona su dobrovoljni; sam biraš da li ćeš ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući u svakom trenutku.
+Fondacija ne vodi tabelu koja povezuje pseudonim sa tvojim identitetom, tu vezu jednostavno ne posedujemo. Pravo ime i broj telefona su dobrovoljni; sam biraš da li ćeš ih i kome (samo redovnim članovima) otkriti, a otkrivanje možeš povući u svakom trenutku.
 
 Vidljivost je gradirana: neregistrovani vide samo zbirne brojeve, a pojedinačne transakcije sa pseudonimima vide tek redovni članovi. Imejl, tehnički logovi i mreža potvrda nikada nisu javni.
 
@@ -1056,9 +1056,9 @@ Na tebi je i da pseudonim ne sadrži lične podatke koji bi te odali.`,
       {
         id: 35,
         pitanje: `Kako se štiti moja privatnost?`,
-        odgovor: `Minimizacija podataka jedan je od četiri nepromenljiva principa sistema — platforma prikuplja samo ono što je neophodno za rad.
+        odgovor: `Minimizacija podataka jedan je od četiri nepromenljiva principa sistema, platforma prikuplja samo ono što je neophodno za rad.
 
-Potvrda se obavlja u lancu potvrda: redovni članovi potvrđuju tvoju stvarnost na osnovu ličnog poznavanja, bez prikupljanja ili dostavljanja ličnih dokumenata. Platforma pritom samo tehnički beleži da je potvrda data — ne prikuplja lične podatke onoga ko se potvrđuje.
+Potvrda se obavlja u lancu potvrda: redovni članovi potvrđuju tvoju stvarnost na osnovu ličnog poznavanja, bez prikupljanja ili dostavljanja ličnih dokumenata. Platforma pritom samo tehnički beleži da je potvrda data, ne prikuplja lične podatke onoga ko se potvrđuje.
 
 Administratorske radnje beleže se u revizijskom dnevniku koji se ne prepravlja. Fondacija ne prodaje podatke i ne deli ih sa trećima za njihove svrhe: obrađuju ih samo pružaoci infrastrukture u ime Fondacije (opisani u Politici privatnosti), a nadležnim organima dostavljaju se samo kad zakon nalaže.
 
@@ -1069,29 +1069,29 @@ U svakom trenutku možeš zatražiti izvoz svih svojih podataka u JSON formatu, 
         pitanje: `Gde se nalaze serveri i prelaze li moji podaci granicu Srbije?`,
         odgovor: `Platforma se hostuje kod renomiranih provajdera infrastrukture čiji se serveri nalaze u Evropskoj uniji i Sjedinjenim Američkim Državama. To znači da tvoji podaci mogu biti obrađivani i van Srbije.
 
-Takav prenos je dozvoljen i uređen zakonom o zaštiti podataka o ličnosti. Fondacija obezbeđuje odgovarajuće zaštitne mere — standardne ugovorne klauzule ili drugi pravni osnov koji garantuje nivo zaštite uporediv sa domaćim — i bira provajdere vodeći računa o lokaciji servera i pravnom okviru njihove jurisdikcije.
+Takav prenos je dozvoljen i uređen zakonom o zaštiti podataka o ličnosti. Fondacija obezbeđuje odgovarajuće zaštitne mere (standardne ugovorne klauzule ili drugi pravni osnov koji garantuje nivo zaštite uporediv sa domaćim) i bira provajdere vodeći računa o lokaciji servera i pravnom okviru njihove jurisdikcije.
 
 Bez obzira na to gde se serveri fizički nalaze, primenjuju se iste tehničke mere: šifrovanje podataka u prenosu i u mirovanju, razdvajanje identifikacionih od obračunskih podataka i pristup po principu minimalne neophodnosti.
 
-Tvoja prava — uvid, ispravka, brisanje, prenosivost i pritužba Povereniku — ostaju ista bez obzira na lokaciju servera.`,
+Tvoja prava (uvid, ispravka, brisanje, prenosivost i pritužba Povereniku) ostaju ista bez obzira na lokaciju servera.`,
       },
       {
         id: 73,
         pitanje: `Mogu li dobiti potvrdu na daljinu, iz inostranstva?`,
-        odgovor: `Da. Potvrda stvarnosti zasniva se na neposrednom ličnom poznavanju — redovan član koji te lično poznaje potvrđuje tvoju stvarnost i za istinitost te tvrdnje odgovara. Pravilnik ne zahteva fizičko prisustvo u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj ko potvrđuje zaista poznaje dovoljno.
+        odgovor: `Da. Potvrda stvarnosti zasniva se na neposrednom ličnom poznavanju, redovan član koji te lično poznaje potvrđuje tvoju stvarnost i za istinitost te tvrdnje odgovara. Pravilnik ne zahteva fizičko prisustvo u trenutku potvrde, pa se ona može obaviti i na daljinu, sve dok te onaj ko potvrđuje zaista poznaje dovoljno.
 
-Zaštita sistema ne počiva na tome da ste u istoj prostoriji, nego na ličnom poznavanju, na odgovornosti onoga ko potvrđuje (lažna potvrda povlači poništavanje potvrda i sankcije) i na strukturi mreže — za pun indeks stvarnosti potrebno je da te poznaju ljudi iz više nezavisnih delova mreže.
+Zaštita sistema ne počiva na tome da ste u istoj prostoriji, nego na ličnom poznavanju, na odgovornosti onoga ko potvrđuje (lažna potvrda povlači poništavanje potvrda i sankcije) i na strukturi mreže, za pun indeks stvarnosti potrebno je da te poznaju ljudi iz više nezavisnih delova mreže.
 
-Zato nisi isključen ako si u inostranstvu: možeš se registrovati, izabrati pseudonim i pratiti sistem, a pun pristup funkcijama otključava se čim te potvrdi neko ko te poznaje — uživo ili na daljinu.
+Zato nisi isključen ako si u inostranstvu: možeš se registrovati, izabrati pseudonim i pratiti sistem, a pun pristup funkcijama otključava se čim te potvrdi neko ko te poznaje, uživo ili na daljinu.
 
-Državljanstvo nije uslov — bitno je da si stvarna osoba.`,
+Državljanstvo nije uslov, bitno je da si stvarna osoba.`,
       },
       {
         id: 36,
         pitanje: `Kako izlazim iz sistema?`,
         odgovor: `Brisanje naloga dostupno je u svakom trenutku iz podešavanja profila.
 
-Pre brisanja možeš inicirati ažuriranje evidencije POENA u korist drugog člana. Pri prestanku statusa sva ZRNA se otpisuju Protokolu — taj otpis ne pokreće upis POENA — a POEN koji ostane poništava se i vraća Protokolu.
+Pre brisanja možeš inicirati ažuriranje evidencije POENA u korist drugog člana. Pri prestanku statusa sva ZRNA se otpisuju Protokolu (taj otpis ne pokreće upis POENA) a POEN koji ostane poništava se i vraća Protokolu.
 
 Tvoji lični podaci se anonimizuju, a pseudonim se zamenjuje neutralnom oznakom; numerička istorija transakcija ostaje, radi matematičke ispravnosti sistema.
 
@@ -1099,12 +1099,12 @@ Doprinosi objavljeni pod otvorenim licencama (kod, sadržaj) zadržavaju trajnu 
       },
       {
         id: 37,
-        pitanje: `Šta sa POENOM u slučaju smrti — može li se naslediti?`,
+        pitanje: `Šta sa POENOM u slučaju smrti, može li se naslediti?`,
         odgovor: `Ne. POEN i ZRNO nisu nasledna imovina niti potraživanje prema Fondaciji.
 
 Pri smrti člana nalog se deaktivira, a POEN i ZRNO se otpisuju Protokolu. Naslednici, porodica i treća lica nemaju imovinsko pravo na njih.
 
-Ovo je suštinska razlika između POENA i finansijske imovine — i jedan od razloga zašto POEN nije novac u pravnom smislu.`,
+Ovo je suštinska razlika između POENA i finansijske imovine, i jedan od razloga zašto POEN nije novac u pravnom smislu.`,
       },
     ],
   },
