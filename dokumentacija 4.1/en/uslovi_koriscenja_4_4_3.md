@@ -192,6 +192,8 @@ The content minimum for a listing — a title, a description, at least one photo
 
 The offering and exchange of goods and services whose trade is prohibited by law is forbidden, including narcotic drugs and precursors, weapons and explosives whose trade is not permitted, stolen goods or goods for which there is a suspicion that they originate from a criminal act, personal documents and official papers, personal data of third parties, content that incites hatred, violence, or discrimination, and financial instruments or schemes designed to circumvent regulations.
 
+Listings whose subject is POEN or ZRNO are likewise prohibited — offering, seeking, buying, or selling them for money or for any other value outside the system (Article 24).
+
 The list of prohibited categories is not exhaustive. The Foundation may remove a listing it determines to be in violation of the law, these Terms, or the Rulebook, and notifies the user of the removal, stating the reason.
 
 ### Article 22 — Execution of Exchange
@@ -233,6 +235,10 @@ Harassment, threats, discrimination, or any form of conduct that endangers the d
 ### Article 24 — Prohibited Use of the Platform
 
 The user is prohibited from: registering multiple accounts or registering with a false identity or third-party data; conducting fictitious transactions for the purpose of artificially generating POENs; arranging transactions whose sole purpose is manipulation of the system or the ledger; using the Platform for money laundering, fraud, or any other unlawful activity; misusing the personal data of other users obtained through use of the Platform; falsely representing themselves as another user or as a representative of the Foundation; attempting to gain unauthorized access to third-party accounts or the Platform's infrastructure; and using automated tools, bots, or scripts to interact with the Platform without the Foundation's written authorization.
+
+The user is likewise prohibited from offering, buying, selling, or brokering the transfer of POEN or ZRNO for money or for any other value outside the system. Such trade is contrary to the principle of non-convertibility under the Rulebook on the KOLO System, according to which no accounting unit of the system may be converted into a means having value outside the system, whether directly or indirectly.
+
+An arrangement referred to in paragraph 2 of this Article is concluded entirely outside the Platform. The Foundation does not broker it, does not record it, and does not provide protection to either party, and a user who acquires POEN in that manner acquires no donation tier and does not move the recording coefficient under the Rulebook on Sponsorship and Donations. A user acting contrary to paragraph 2 is subject to the measures under Articles 27 and 28 of these Terms.
 
 ### Article 25 — User Content
 

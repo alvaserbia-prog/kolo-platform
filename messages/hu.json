@@ -915,7 +915,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.4.2"
+      "ver": "4.4.3"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -935,7 +935,7 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.4.1"
+      "ver": "4.4.3"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -963,7 +963,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.2-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.2-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
@@ -973,7 +973,7 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.2-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.1-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.3-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.1-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",

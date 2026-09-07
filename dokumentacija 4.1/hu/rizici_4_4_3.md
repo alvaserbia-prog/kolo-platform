@@ -46,6 +46,10 @@ Az adományozó nem szerez visszatérítéshez való jogot, nem szerez irányít
 
 A Protokoll nyilvántartásba veszi az adományozói hozzájárulás tényét POEN-ben, de ez a nyilvántartás nem ellenszolgáltatás az adományért. Az adományozó nem kötheti az adományt a nyilvántartásba vételhez, és a nyilvántartás nem keletkeztet kötelezettséget az Alapítvány részéről az adományozóval szemben.
 
+Az adomány alapján nyilvántartásba vett POEN-ek száma a pártfogásról és adományokról szóló szabályzatban megállapított adományszinttől függ. A nyilvántartási együttható különbsége a közös jóhoz való hozzájárulás megbecsülését jelenti, nem pedig az adomány ellenszolgáltatását.
+
+A POEN nem szerezhető meg más felhasználóktól pénzért vagy a rendszeren kívüli más értékért. Az ilyen ügyletet a Felhasználási Feltételek tiltják, azt teljes egészében a Platformon kívül és mindenféle védelem nélkül kötik meg, az azt megkötő felhasználó pedig nem szerez adományszintet, nem mozdítja el a nyilvántartási együtthatót, és nem kap sem adományigazolást, sem a hozzájárulás nyilvános elismerését — így saját helyzetét tekintve rosszabbul jár, mint az a felhasználó, aki ugyanezt az összeget az Alapítványnak adta.
+
 ### 6. cikk — Az álnevesített nyilvántartás nyilvánossága
 
 A hozzájárulás-nyilvántartás álnevesített formában nyilvános. Az álnevesítettség nem anonimitás — az álnevesített adatok a személyes adatok védelméről szóló törvény értelmében személyes adatok maradnak, mivel további információk birtokában azonosított személyhez köthetők.

@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_2.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -31,13 +31,13 @@ const AKTI = [
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_4_2.md",
   "radnje_obrade_4_4_2.md",
-  "uslovi_koriscenja_4_4_2.md",
+  "uslovi_koriscenja_4_4_3.md",
   "politika_4_4_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_1.md",
-  "rizici_4_4_1.md",
+  "rizici_4_4_3.md",
   "hijerarhija_4_4_1.md",
-  "donacije_4_4_1.md",
+  "donacije_4_4_3.md",
   "operativni_4_4_1.md",
   "osnivacki_4_4_1.md",
   "gornje_kolo_4_4_1.md",
@@ -166,10 +166,71 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Период получения составляет три дня",
     ],
   },
-  "uslovi_koriscenja_4_4_2.md": {
-    sr: ["Oglas neverifikovanog korisnika", "ne smatra se izmenom Uslova"],
-    en: ["Listing by an Unverified User", "is not deemed an amendment to the Terms"],
-    ru: ["Объявление неверифицированного пользователя", "не считается изменением Условий"],
+  // 4.4.3 — zabrana prometa POEN-a i ZRNA van sistema (čl. 21 i 24). Bez nje je
+  // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
+  // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
+  // počiva upravo na tome da takav promet nije dopušten.
+  "uslovi_koriscenja_4_4_3.md": {
+    sr: [
+      "Oglas neverifikovanog korisnika",
+      "ne smatra se izmenom Uslova",
+      "posreduje u prometu POEN-a ili ZRNA",
+      "načelu nekonvertibilnosti",
+      "ne stiče nivo donacija",
+    ],
+    en: [
+      "Listing by an Unverified User",
+      "is not deemed an amendment to the Terms",
+      "brokering the transfer of POEN or ZRNO",
+      "principle of non-convertibility",
+      "acquires no donation tier",
+    ],
+    ru: [
+      "Объявление неверифицированного пользователя",
+      "не считается изменением Условий",
+      "посредничать в их обороте",
+      "принципу неконвертируемости",
+      "не получает уровня пожертвований",
+    ],
+  },
+  // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
+  // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
+  // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
+  "donacije_4_4_3.md": {
+    sr: [
+      "nije cena POEN-a i nije popust na donaciju",
+      "Donacijom se ništa ne pribavlja",
+      "veću meru priznanja doprinosa",
+    ],
+    en: [
+      "is not a price of POEN and is not a discount on a donation",
+      "Nothing is acquired by a donation",
+      "greater measure of recognition of the contribution",
+    ],
+    ru: [
+      "не является ценой ПОЕН и не является скидкой",
+      "Пожертвованием ничего не приобретается",
+      "большую меру признания вклада",
+    ],
+  },
+  // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
+  // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
+  "rizici_4_4_3.md": {
+    sr: [
+      "ne pribavlja od drugih korisnika za novac",
+      "ne pomera koeficijent evidencije",
+      "a ne protivčinidbu za donaciju",
+    ],
+    en: [
+      "not acquired from other users for money",
+      "does not move the recording coefficient",
+      "not consideration for the donation",
+    ],
+    ru: [
+      "не приобретается у других пользователей за деньги",
+      "не сдвигает коэффициент учёта",
+      "а не встречное предоставление за пожертвование",
+    ],
   },
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
   // odredbe bi gejt (zamrzavanje naloga do prihvatanja) obuhvatio i te obrade, pa

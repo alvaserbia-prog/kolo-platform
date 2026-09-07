@@ -27,9 +27,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     fajl: "dokaz_stvarnosti_4_4_1.md",
     verzija: "4.4.1",
   },
+  // 4.4.3 — obrazloženje koeficijenta evidencije (čl. 4) i definicija koeficijenta
+  // bez jedinične formulacije „po jednom dinaru" (čl. 2).
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "donacije_4_4_3.md",
+    verzija: "4.4.3",
   },
   "operativni": {
     fajl: "operativni_4_4_1.md",

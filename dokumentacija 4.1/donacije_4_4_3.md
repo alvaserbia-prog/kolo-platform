@@ -10,7 +10,7 @@ Ovim pravilnikom uređuju se parametri evidentiranja finansijskog doprinosa u KO
 
 Pojmovi koji se koriste u ovom pravilniku imaju značenje utvrđeno Pravilnikom o KOLO sistemu. Pored toga, u ovom pravilniku koriste se i sledeći pojmovi:
 
-**Koeficijent evidencije donacija** — broj POEN-a koji se evidentira po jednom dinaru donacije. Određen je nivoom donacija. Nije obračunski koeficijent u smislu Pravilnika o KOLO sistemu.
+**Koeficijent evidencije donacija** — broj kojim se uvećava evidentirani doprinos donatora pri utvrđivanju broja POEN-a. Određen je nivoom donacija. Nije cena, nije kurs i nije obračunski koeficijent u smislu Pravilnika o KOLO sistemu.
 
 **Nivo donacija** — stepen kumulativnog doprinosa donatora koji određuje koeficijent evidencije donacija.
 
@@ -32,7 +32,7 @@ Donator pri svakoj donaciji bira da li je donacija javna ili anonimna. Javnom do
 
 ### Član 4 — Nivoi donacija i koeficijent evidencije
 
-Što je veća kumulativna donacija korisnika, viši je koeficijent evidencije donacija — više POEN-a se evidentira po svakom dinaru naredne donacije.
+Što je veći kumulativni doprinos korisnika zajedničkom dobru, viši je koeficijent evidencije donacija — naredni doprinos se evidentira u većem broju POEN-a.
 
 Nivo se utvrđuje na osnovu zbira svih prethodnih donacija korisnika i nove donacije. Koeficijent evidencije za novodostignuti nivo primenjuje se na celu novu donaciju.
 
@@ -53,6 +53,10 @@ Nivo se utvrđuje na osnovu zbira svih prethodnih donacija korisnika i nove dona
 Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koeficijentom evidencije.
 
 Nivo je kumulativan i trajan — ne smanjuje se korišćenjem POEN-a niti bilo kojom drugom aktivnošću korisnika.
+
+Koeficijent evidencije izražava uvažavanje doprinosa zajedničkom dobru. Veći pojedinačan doprinos ima veći značaj za zajednicu od istog iznosa razlivenog kroz vreme, jer zaokružen iznos omogućava da se konkretna potreba zajednice podmiri odjednom — da se plati infrastruktura, pokrene program ili sprovede projekat. Zajednica takav doprinos zato i uvažava više.
+
+Koeficijent evidencije nije cena POEN-a i nije popust na donaciju. Donacijom se ništa ne pribavlja: donator ne stiče nijedno dobro, nijedno potraživanje prema Fondaciji, pravo na povraćaj, pravo na otkup POEN-a ni uticaj u odlučivanju o pravilima sistema. Pošto predmeta sticanja nema, razlika u koeficijentu ne predstavlja povoljniji uslov sticanja nego veću meru priznanja doprinosa.
 
 ### Član 5 — Pravna kvalifikacija evidentiranja donacija
 

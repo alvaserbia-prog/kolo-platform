@@ -46,6 +46,10 @@ A donor does not acquire a right to a refund, does not acquire a governance righ
 
 The Protocol records the fact of the donor's contribution in POEN, but that record is not consideration for the donation. The donor may not make the donation conditional on the recording, nor does the recording create an obligation of the Foundation towards the donor.
 
+The number of POEN recorded on the basis of a donation depends on the donation tier established by the Rulebook on Sponsorship and Donations. The difference in the recording coefficient represents the regard in which a contribution to the common good is held, and not consideration for the donation.
+
+POEN is not acquired from other users for money or for any other value outside the system. Such an arrangement is prohibited by the Terms of Use, is concluded entirely outside the Platform and without any protection, and a user who enters into it acquires no donation tier, does not move the recording coefficient, and receives neither a donation confirmation nor public recognition of a contribution — and is therefore in a worse position than a user who gave the same amount to the Foundation.
+
 ### Article 6 — Public nature of the pseudonymous ledger
 
 The contribution ledger is public in pseudonymous form. Pseudonymity is not anonymity — pseudonymised data remain personal data within the meaning of the Law on Personal Data Protection because they can, with additional information, be connected to an identified person.

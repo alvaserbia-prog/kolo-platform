@@ -46,6 +46,10 @@ Donator ne stječe pravo na povrat, ne stječe upravljačko pravo u Zakladi na t
 
 Protokol evidentira činjenicu donatorskog doprinosa u POEN-ima, ali ta evidencija nije protuusluga za donaciju. Donator ne može uvjetovati donaciju evidencijom niti evidencija stvara obvezu Zaklade prema donatoru.
 
+Broj POEN-a evidentiran po osnovi donacije ovisi o razini donacija utvrđenoj Pravilnikom o pokroviteljstvu i donacijama. Razlika u koeficijentu evidencije predstavlja uvažavanje doprinosa zajedničkom dobru, a ne protučinidbu za donaciju.
+
+POEN se ne pribavlja od drugih korisnika za novac ni za drugu vrijednost izvan sustava. Takav je posao zabranjen Uvjetima korištenja, sklapa se u cijelosti izvan Platforme i bez ikakve zaštite, a korisnik koji ga sklopi ne stječe razinu donacija, ne pomiče koeficijent evidencije i ne dobiva ni potvrdu o donaciji ni javno priznanje doprinosa — pa je i po vlastitom položaju u lošijem stanju od korisnika koji je isti iznos dao Zakladi.
+
 ### Članak 6. — Javnost pseudonimne evidencije
 
 Evidencija doprinosa javna je u pseudonimnom obliku. Pseudonimnost nije anonimnost — pseudonimizirani podaci ostaju osobni podaci u smislu Zakona o zaštiti podataka o osobnosti jer se, uz dodatne informacije, mogu povezati s identificiranom osobom.

@@ -12,7 +12,7 @@ E szabályzat rendezi a pénzügyi hozzájárulás nyilvántartásának paramét
 
 Az e szabályzatban használt fogalmak a KOLO rendszerről szóló szabályzatban megállapított jelentéssel bírnak. Ezen túlmenően e szabályzatban a következő fogalmak is használatosak:
 
-**Az adományok nyilvántartási együtthatója** — az adomány egy dinárja után nyilvántartásba vett POEN-ek száma. Az adományok szintje határozza meg. Nem elszámolási együttható a KOLO rendszerről szóló szabályzat értelmében.
+**Az adományok nyilvántartási együtthatója** — az a szám, amellyel az adományozó nyilvántartott hozzájárulása a POEN-ek számának megállapításakor növekszik. Az adományok szintje határozza meg. Nem ár, nem árfolyam és nem elszámolási együttható a KOLO rendszerről szóló szabályzat értelmében.
 
 **Az adományok szintje** — az adományozó halmozott hozzájárulásának foka, amely meghatározza az adományok nyilvántartási együtthatóját.
 
@@ -34,7 +34,7 @@ Az adományozó minden adományozás alkalmával megválasztja, hogy az adomány
 
 ### 4. cikk — Az adományok szintjei és a nyilvántartási együttható
 
-Minél nagyobb a felhasználó halmozott adománya, annál magasabb az adományok nyilvántartási együtthatója — annál több POEN kerül nyilvántartásba a következő adomány minden dinárja után.
+Minél nagyobb a felhasználó közös jóhoz való halmozott hozzájárulása, annál magasabb az adományok nyilvántartási együtthatója — a következő hozzájárulás nagyobb számú POEN-ben kerül nyilvántartásba.
 
 A szint a felhasználó valamennyi korábbi adományának és az új adománynak az összege alapján kerül megállapításra. Az újonnan elért szinthez tartozó nyilvántartási együttható a teljes új adományra alkalmazandó.
 
@@ -55,6 +55,10 @@ A szint a felhasználó valamennyi korábbi adományának és az új adománynak
 A nyilvántartásba vett POEN-ek száma megegyezik az adomány dinárban kifejezett összegének és a nyilvántartási együtthatónak a szorzatával.
 
 A szint halmozott és tartós — nem csökken a POEN felhasználásával, sem a felhasználó bármely más tevékenységével.
+
+A nyilvántartási együttható a közös jóhoz való hozzájárulás megbecsülését fejezi ki. A nagyobb egyszeri hozzájárulás nagyobb jelentőséggel bír a közösség számára, mint ugyanazon összeg időben elnyújtva, mivel a kerek összeg lehetővé teszi a közösség konkrét szükségletének egyszerre történő fedezését — az infrastruktúra kifizetését, egy program elindítását vagy egy projekt megvalósítását. A közösség ezért az ilyen hozzájárulást nagyobbra értékeli.
+
+A nyilvántartási együttható nem a POEN ára és nem az adomány kedvezménye. Az adománnyal semmi sem kerül megszerzésre: az adományozó nem szerez sem jószágot, sem követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, sem a POEN visszaváltásához való jogot, sem befolyást a rendszer szabályairól szóló döntéshozatalban. Mivel a megszerzés tárgya hiányzik, az együttható különbsége nem kedvezőbb megszerzési feltételt jelent, hanem a hozzájárulás elismerésének nagyobb mértékét.
 
 ### 5. cikk — Az adományok nyilvántartásba vételének jogi minősítése
 

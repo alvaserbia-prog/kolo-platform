@@ -192,6 +192,8 @@ A hirdetés tartalmi minimuma — cím, leírás, legalább egy fénykép, kateg
 
 Tilos az olyan javak és szolgáltatások kínálata és cseréje, amelyek forgalmát jogszabály tiltja, ideértve a kábítószereket és prekurzorokat, azokat a fegyvereket és robbanóanyagokat, amelyek forgalma nem engedélyezett, a lopott árut vagy azt az árut, amelyről feltehető, hogy bűncselekményből származik, a személyi okmányokat és hivatalos iratokat, harmadik személyek személyes adatait, a gyűlöletre, erőszakra vagy megkülönböztetésre uszító tartalmat, valamint azokat a pénzügyi eszközöket vagy konstrukciókat, amelyek célja a jogszabályok megkerülése.
 
+Tilos továbbá az olyan hirdetés, amelynek tárgya a POEN vagy a ZRNO — azok kínálata, keresése, megvásárlása vagy eladása pénzért vagy a rendszeren kívüli más értékért (24. cikk).
+
 A tiltott kategóriák felsorolása nem kimerítő. Az Alapítvány eltávolíthatja azt a bejegyzést, amelyről megállapítja, hogy sérti a jogszabályt, a jelen Feltételeket vagy a Szabályzatot, és az eltávolításról az indok megjelölésével értesíti a felhasználót.
 
 ### 22. cikk — A csere teljesítése
@@ -233,6 +235,10 @@ Tilos a zaklatás, a fenyegetés, a megkülönböztetés, valamint minden olyan 
 ### 24. cikk — A Platform tiltott használata
 
 A felhasználónak tilos több fiókot regisztrálnia, hamis személyazonossággal vagy más adataival regisztrálnia, fiktív tranzakciókat végeznie POEN mesterséges előállítása céljából, olyan tranzakciókat megbeszélnie, amelyek egyetlen célja a rendszer vagy a nyilvántartás manipulálása, a Platformot pénzmosásra, csalásra vagy bármely más jogellenes tevékenységre használnia, más felhasználók olyan személyes adataival visszaélnie, amelyekhez a Platform használatával jutott, magát más felhasználónak vagy az Alapítvány képviselőjének hamisan kiadnia, jogosulatlanul hozzáférést kísérelnie más fiókjaihoz vagy a Platform infrastruktúrájához, valamint automatizált eszközöket, botokat vagy szkripteket használnia a Platformmal való interakcióhoz az Alapítvány írásbeli engedélye nélkül.
+
+A felhasználónak tilos továbbá POEN-t vagy ZRNO-t kínálnia, vásárolnia, eladnia, illetve azok forgalmában közvetítenie pénzért vagy a rendszeren kívüli más értékért. Az ilyen forgalom ellentétes a KOLO rendszerről szóló szabályzat szerinti nem átválthatóság elvével, amely szerint a rendszer egyetlen elszámolási egysége sem váltható át a rendszeren kívüli értékkel bíró eszközre, sem közvetlenül, sem közvetve.
+
+A jelen cikk (2) bekezdése szerinti ügyletet teljes egészében a Platformon kívül kötik meg. Az Alapítvány abban nem közvetít, azt nem veszi nyilvántartásba, és egyik félnek sem nyújt védelmet, az a felhasználó pedig, aki így szerez POEN-t, nem szerez adományszintet, és nem mozdítja el a pártfogásról és adományokról szóló szabályzat szerinti nyilvántartási együtthatót. A (2) bekezdéssel ellentétesen eljáró felhasználóval szemben a jelen Feltételek 27. és 28. cikke szerinti intézkedéseket kell alkalmazni.
 
 ### 25. cikk — Felhasználói tartalom
 

@@ -95,6 +95,53 @@ tačan podatak.
 `messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
 `__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
 
+**AŽURIRANO 2026-09-07 (četrnaesti put):** na **4.4.3** idu **TRI akta** — Pravilnik
+o pokroviteljstvu i donacijama, Uslovi korišćenja i Izjava o prihvatanju rizika.
+Ostalih četrnaest ostaje gde jeste (Pravilnik, dokaz stvarnosti, hijerarhija,
+operativni, osnivački, Gornje Kolo, programi podrške, whitepaper i projekti/nabavke
+na 4.4.1; Politika, DPIA, Registar radnji obrade i učešće dece na 4.4.2; Statut 4.1).
+Povod je **pravna odbrana koeficijenta evidencije donacija i zabrana prometa POEN-a
+van sistema** (odluka vlasnika). Sadržinski:
+- **Donacije, čl. 2** — definicija koeficijenta više ne glasi „broj POEN-a po jednom
+  dinaru donacije" nego „broj kojim se uvećava evidentirani doprinos". 🔴 Razlog nije
+  stilski: jedinična formulacija je **kotacija cene**, i bila je kursnija od same
+  tabele. Isto je preformulisan i uvodni stav čl. 4.
+- **Donacije, čl. 4** — dva nova stava sa obrazloženjem zašto koeficijent raste.
+  🔴 Obrazloženje glasi da **veći pojedinačan doprinos ima veći značaj za zajednicu**
+  (zaokružen iznos podmiruje konkretnu potrebu odjednom), i da se **donacijom ništa
+  ne pribavlja**, pa razlika u koeficijentu nije popust nego veća mera priznanja.
+  🔴 **NE pisati da koeficijent nagrađuje istrajnost** — aritmetika to obara: 10.000
+  RSD odjednom daje 12.000 POEN, a pet uplata po 2.000 daje 10.800, jer se koeficijent
+  novodostignutog nivoa primenjuje na CELU novu donaciju. Tabela i pravilo obračuna
+  su namerno **netaknuti** (odluka vlasnika: opcije „fiksan iznos po nivou" i „ravnih
+  1,00" su odbačene).
+- **Uslovi, čl. 21 i 24** — zabrana nuđenja, kupovine, prodaje i posredovanja u
+  prometu POEN-a i ZRNA za vrednost van sistema, uz mere iz čl. 27 i 28 i uz zabranu
+  oglasa čiji je predmet POEN ili ZRNO. Do sada je čl. 24 zabranjivao samo fiktivne
+  transakcije i manipulaciju evidencijom — **prodaja POEN-a za keš nije bila
+  zabranjena nijednom odredbom**, pa je nekonvertibilnost bila izjava bez sankcije.
+- **Izjava o rizicima, čl. 5** — razlika u koeficijentu je uvažavanje doprinosa a ne
+  protivčinidba; uz to upozorenje da onaj ko POEN pribavi mimo Fondacije **ne stiče
+  nivo donacija i ne pomera koeficijent**, pa prolazi lošije od onoga ko je isti
+  iznos dao Fondaciji. To je ekonomski razlog zbog kog zabrana iz Uslova stoji sama.
+
+🔴 **Uslov koji još NIJE ispunjen:** odbrana koeficijenta zavisi od toga da broj
+POEN-a po delu u kolektivnoj nabavci prestane da bude izveden iz maloprodajne
+vrednosti (čl. 19 Pravilnika o nabavkama, „u odnosu jedan prema jedan"). Dok to
+stoji, koeficijent 2,00 znači **dvostruko više odredive robe po dinaru** i tabela se
+čita kao cenovnik bez obzira na obrazloženje. Odluka je doneta, tekst nije napisan.
+
+🟡 **Takođe nedovršeno iz istog paketa:** Uslovi čl. 19 objavljuju referentnu vrednost
+(1 POEN ≈ 1 RSD) i kažu da služi „i za parametrizaciju kanala evidentiranja
+doprinosa" — a nijedan iznos u pravilnicima nije izveden iz dinara. Odluka vlasnika
+je da paritet **ostaje isključivo kao pomoć korisniku pri postavljanju oglasa** i da
+se ne vezuje ni za jednu radnju Fondacije, pa taj deo rečenice treba da padne pri
+sledećem bumpu Uslova. Registar rizika sa obrazloženjima je u istoriji sesije.
+
+DPIA i Registar radnji obrade **nisu dirani** — nijedna izmena ne uvodi nov podatak
+o ličnosti ni novu radnju obrade. Nema nove `PolitikaVerzija` —
+`PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
+
 **AŽURIRANO 2026-09-04 (trinaesti put):** prvi bump po novom pravilu. Na **4.4.2**
 idu **PET akata** — Pravilnik o učešću dece, Uslovi korišćenja, Politika privatnosti,
 DPIA i Registar radnji obrade. Preostalih dvanaest **ostaje na 4.4.1**, Statut na 4.1.

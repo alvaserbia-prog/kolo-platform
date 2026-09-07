@@ -12,7 +12,7 @@ This Rulebook governs the parameters for recording financial contributions in th
 
 Terms used in this Rulebook have the meaning established in the KOLO System Rulebook. In addition, the following terms are used in this Rulebook:
 
-**Donation recording coefficient** — the number of POEN recorded per one dinar of donation. It is determined by the donation tier. It is not an accounting coefficient within the meaning of the KOLO System Rulebook.
+**Donation recording coefficient** — the number by which a donor's recorded contribution is increased when determining the number of POEN. It is determined by the donation tier. It is not a price, not an exchange rate, and not an accounting coefficient within the meaning of the KOLO System Rulebook.
 
 **Donation tier** — the level of a donor's cumulative contribution that determines the donation recording coefficient.
 
@@ -34,7 +34,7 @@ With each donation, the donor chooses whether the donation is public or anonymou
 
 ### Article 4 — Donation tiers and recording coefficient
 
-The larger the user's cumulative donation, the higher the donation recording coefficient — more POEN are recorded per dinar of the next donation.
+The larger the user's cumulative contribution to the common good, the higher the donation recording coefficient — the next contribution is recorded in a larger number of POEN.
 
 The tier is determined on the basis of the sum of all of the user's previous donations and the new donation. The recording coefficient for the newly reached tier applies to the entire new donation.
 
@@ -55,6 +55,10 @@ The tier is determined on the basis of the sum of all of the user's previous don
 The number of POEN recorded equals the donation amount in dinars multiplied by the recording coefficient.
 
 The tier is cumulative and permanent — it does not decrease through the use of POEN or through any other user activity.
+
+The recording coefficient expresses the regard in which a contribution to the common good is held. A larger single contribution has greater significance for the community than the same amount spread out over time, because a rounded sum makes it possible to meet a concrete need of the community at once — to pay for infrastructure, to launch a programme, or to carry out a project. The community therefore holds such a contribution in higher regard.
+
+The recording coefficient is not a price of POEN and is not a discount on a donation. Nothing is acquired by a donation: the donor acquires no good, no claim against the Foundation, no right to a refund, no right to redemption of POEN, and no influence in decision-making on the rules of the system. Since there is no object of acquisition, the difference in the coefficient does not constitute more favourable terms of acquisition but a greater measure of recognition of the contribution.
 
 ### Article 5 — Legal qualification of donation recording
 

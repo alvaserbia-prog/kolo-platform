@@ -192,6 +192,8 @@ Sadržajni minimum oglasa — naslov, opis, najmanje jedna fotografija, kategori
 
 Zabranjeno je nuđenje i razmjena dobara i usluga čiji je promet zabranjen zakonom, uključujući opojne droge i prekursore, oružje i eksplozivne tvari čiji promet nije dopušten, ukradenu robu ili robu za koju postoji sumnja da potječe iz kaznenog djela, osobne dokumente i službene isprave, osobne podatke trećih osoba, sadržaj koji potiče mržnju, nasilje ili diskriminaciju te financijske instrumente ili sheme čiji je cilj zaobilaženje propisa.
 
+Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupnja ili prodaja za novac ili drugu vrijednost izvan sustava (Članak 24.).
+
 Popis zabranjenih kategorija nije konačan. Zaklada može ukloniti objavu za koju utvrdi da krši zakon, ove Uvjete ili Pravilnik i obavještava korisnika o uklanjanju uz navođenje razloga.
 
 ### Članak 22. — Izvršenje razmjene
@@ -233,6 +235,10 @@ Zabranjeno je uznemiravanje, prijetnje, diskriminacija ili bilo koji oblik pona�
 ### Članak 24. — Zabranjena uporaba Platforme
 
 Korisniku je zabranjeno registrirati više računa ili se registrirati lažnim identitetom ili tuđim podacima, obavljati fiktivne transakcije radi umjetnog generiranja POEN-a, dogovarati transakcije čija je jedina svrha manipulacija sustavom ili evidencijom, koristiti Platformu za pranje novca, prijevaru ili bilo koju drugu nezakonitu aktivnost, zlouporabiti osobne podatke drugih korisnika do kojih je došao korištenjem Platforme, lažno se predstavljati kao drugi korisnik ili kao predstavnik Zaklade, pokušavati neovlašteno pristupiti tuđim računima ili infrastrukturi Platforme te koristiti automatizirane alate, botove ili skripte za interakciju s Platformom bez pisanog odobrenja Zaklade.
+
+Korisniku je zabranjeno i nuditi, kupovati, prodavati POEN ili ZRNO te posredovati u njihovu prometu za novac ili drugu vrijednost izvan sustava. Takav je promet protivan načelu nekonvertibilnosti iz Pravilnika o KOLO sustavu, prema kojem se nijedna obračunska jedinica sustava ne može konvertirati u sredstvo s vrijednošću izvan sustava, neposredno ni posredno.
+
+Posao iz stavka 2. ovoga članka sklapa se u cijelosti izvan Platforme. Zaklada u njemu ne posreduje, ne evidentira ga i ne pruža zaštitu nijednoj strani, a korisnik koji POEN pribavi na taj način ne stječe razinu donacija niti pomiče koeficijent evidencije iz Pravilnika o pokroviteljstvu i donacijama. Na korisnika koji postupi protivno stavku 2. primjenjuju se mjere iz Članaka 27. i 28. ovih Uvjeta.
 
 ### Članak 25. — Sadržaj korisnika
 

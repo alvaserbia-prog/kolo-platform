@@ -190,6 +190,8 @@ Sadržinski minimum oglasa — naslov, opis, najmanje jedna fotografija, kategor
 
 Zabranjeno je nuđenje i razmena dobara i usluga čiji je promet zabranjen zakonom, uključujući opojne droge i prekursore, oružje i eksplozivne materije čiji promet nije dozvoljen, ukradenu robu ili robu za koju postoji sumnja da potiče iz krivičnog dela, lične dokumente i zvanične isprave, lične podatke trećih lica, sadržaj koji podstiče mržnju, nasilje ili diskriminaciju, i finansijske instrumente ili šeme čiji je cilj zaobilaženje propisa.
 
+Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupovina ili prodaja za novac ili drugu vrednost van sistema (Član 24).
+
 Lista zabranjenih kategorija nije konačna. Fondacija može ukloniti objavu za koju utvrdi da krši zakon, ove Uslove ili Pravilnik i obaveštava korisnika o uklanjanju uz navođenje razloga.
 
 ### Član 22 — Izvršenje razmene
@@ -231,6 +233,10 @@ Zabranjeno je uznemiravanje, pretnje, diskriminacija ili bilo koji oblik ponaša
 ### Član 24 — Zabranjena upotreba Platforme
 
 Korisniku je zabranjeno da registruje više naloga ili se registruje lažnim identitetom ili tuđim podacima, vrši fiktivne transakcije u svrhu veštačkog generisanja POEN-a, dogovara transakcije čija jedina svrha je manipulacija sistemom ili evidencijom, koristi Platformu za pranje novca, prevaru ili bilo koju drugu nezakonitu aktivnost, zloupotrebljava lične podatke drugih korisnika do kojih je došao korišćenjem Platforme, lažno se predstavlja kao drugi korisnik ili kao predstavnik Fondacije, pokušava da neovlašćeno pristupi tuđim nalozima ili infrastrukturi Platforme i koristi automatizovane alate, botove ili skripte za interakciju sa Platformom bez pisanog odobrenja Fondacije.
+
+Korisniku je zabranjeno i da nudi, kupuje, prodaje ili posreduje u prometu POEN-a ili ZRNA za novac ili drugu vrednost van sistema. Takav promet protivan je načelu nekonvertibilnosti iz Pravilnika o KOLO sistemu, po kome se nijedna obračunska jedinica sistema ne može konvertovati u sredstvo sa vrednošću van sistema, neposredno ni posredno.
+
+Posao iz stava 2 ovog člana sklapa se u celini van Platforme. Fondacija u njemu ne posreduje, ne evidentira ga i ne pruža zaštitu nijednoj strani, a korisnik koji POEN pribavi na taj način ne stiče nivo donacija niti pomera koeficijent evidencije iz Pravilnika o pokroviteljstvu i donacijama. Na korisnika koji postupi protivno stavu 2 primenjuju se mere iz Članova 27 i 28 ovih Uslova.
 
 ### Član 25 — Sadržaj korisnika
 
