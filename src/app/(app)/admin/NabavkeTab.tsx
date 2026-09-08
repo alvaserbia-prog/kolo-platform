@@ -55,6 +55,8 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
   // Obrasci
   const [ponudjac, setPonudjac] = useState("");
   const [cena, setCena] = useState("");
+  const [kolicina, setKolicina] = useState("");
+  const [velicinaDela, setVelicinaDela] = useState("");
   const [poenPoDelu, setPoenPoDelu] = useState("");
   const [obrazlozenje, setObrazlozenje] = useState("");
   const [jedinica, setJedinica] = useState("");
@@ -201,7 +203,13 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
               ))}
             </ul>
 
-            {uToku.status === "NACRT" && (
+            {uToku.status === "NACRT" && uToku.poenPoDelu === null && (
+              <p className="mt-2 text-xs text-kolo-danger">
+                Ponude se prikupljaju tek pošto se utvrde parametri nabavke (čl. 17 st. 3).
+              </p>
+            )}
+
+            {uToku.status === "NACRT" && uToku.poenPoDelu !== null && (
               <div className="mt-2 flex flex-wrap gap-2">
                 <input
                   value={ponudjac}
@@ -236,16 +244,30 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
             )}
           </div>
 
-          {/* Objava kalkulacije (čl. 17, 20) */}
-          {uToku.status === "NACRT" && uToku.ponude.length >= 3 && (
+          {/* Parametri odluke (čl. 17) — PRE prikupljanja ponuda */}
+          {uToku.status === "NACRT" && uToku.poenPoDelu === null && (
             <div className="mt-4 rounded-xl bg-kolo-bg p-3">
-              <h4 className="text-sm font-semibold">Objava kalkulacije</h4>
+              <h4 className="text-sm font-semibold">Parametri nabavke (odluka)</h4>
               <p className="mt-1 text-xs text-kolo-muted">
-                Bira se NAJPOVOLJNIJA ponuda. Broj POEN-a po delu utvrđuje odluka o nabavci — NE izvodi se
-                iz cene dobra i ne mora stajati u srazmeri sa njom (čl. 17 i 19). Obrazloženje se objavljuje
-                uz kalkulaciju. Posle objave se kalkulacija ne menja.
+                Odluka utvrđuje ukupnu količinu, veličinu jednog dela i broj POEN-a po delu. Utvrđuju se
+                PRE prikupljanja ponuda i ne izvode se iz cene dobra, koja u ovom trenutku nije poznata
+                (čl. 17 i 19). Količina mora biti deljiva veličinom dela bez ostatka. Posle objave se ne menjaju.
               </p>
-              <div className="mt-2 grid gap-2 sm:grid-cols-2">
+              <div className="mt-2 grid gap-2 sm:grid-cols-3">
+                <input
+                  value={kolicina}
+                  onChange={(e) => setKolicina(e.target.value)}
+                  placeholder="Ukupna količina"
+                  inputMode="numeric"
+                  className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
+                />
+                <input
+                  value={velicinaDela}
+                  onChange={(e) => setVelicinaDela(e.target.value)}
+                  placeholder="Veličina jednog dela"
+                  inputMode="numeric"
+                  className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
+                />
                 <input
                   value={poenPoDelu}
                   onChange={(e) => setPoenPoDelu(e.target.value)}
@@ -253,13 +275,40 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
                   inputMode="numeric"
                   className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
                 />
-                <input
-                  value={obrazlozenje}
-                  onChange={(e) => setObrazlozenje(e.target.value)}
-                  placeholder="Obrazloženje kako je broj utvrđen"
-                  className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
-                />
               </div>
+              <input
+                value={obrazlozenje}
+                onChange={(e) => setObrazlozenje(e.target.value)}
+                placeholder="Obrazloženje kako su parametri utvrđeni"
+                className="mt-2 w-full rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
+              />
+              <button
+                onClick={async () => {
+                  const r = await posalji(`/api/admin/nabavke/${uToku.id}/parametri`, {
+                    kolicina: Number(kolicina),
+                    velicinaDela: Number(velicinaDela),
+                    poenPoDelu: Number(poenPoDelu),
+                    poenObrazlozenje: obrazlozenje,
+                  });
+                  if (r) setPoruka("Parametri su utvrđeni. Sada se prikupljaju ponude.");
+                }}
+                disabled={radi || !kolicina || !velicinaDela || !poenPoDelu || !obrazlozenje}
+                className="mt-2 w-full rounded-full bg-kolo-green-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
+              >
+                Utvrdi parametre nabavke
+              </button>
+            </div>
+          )}
+
+          {/* Objava kalkulacije (čl. 15, 18, 20) */}
+          {uToku.status === "NACRT" && uToku.poenPoDelu !== null && uToku.ponude.length >= 3 && (
+            <div className="mt-4 rounded-xl bg-kolo-bg p-3">
+              <h4 className="text-sm font-semibold">Objava kalkulacije</h4>
+              <p className="mt-1 text-xs text-kolo-muted">
+                Bira se NAJPOVOLJNIJA ponuda. Ako ukupan trošak (količina × cena po jedinici) pređe gornju
+                granicu iz čl. 8, nabavka se ne sprovodi — sredstva ostaju za narednu, a nova odluka može
+                utvrditi manju količinu. Posle objave se kalkulacija ne menja.
+              </p>
               <div className="mt-2 grid gap-2 sm:grid-cols-3">
                 <input
                   value={jedinica}
@@ -285,15 +334,13 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
                   const najjeftinija = [...uToku.ponude].sort((a, b) => a.cena - b.cena)[0];
                   const r = await posalji(`/api/admin/nabavke/${uToku.id}/objavi`, {
                     ponudaId: najjeftinija?.id,
-                    poenPoDelu: Number(poenPoDelu),
-                    poenObrazlozenje: obrazlozenje,
                     jedinicaMere: jedinica,
                     mestoPreuzimanja: mesto,
                     preuzimanjeOd: odKad,
                   });
                   if (r) setPoruka("Kalkulacija je objavljena, prijave su otvorene.");
                 }}
-                disabled={radi || !poenPoDelu || !obrazlozenje || !jedinica || !mesto || !odKad}
+                disabled={radi || !jedinica || !mesto || !odKad}
                 className="mt-2 w-full rounded-full bg-kolo-green-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
               >
                 Objavi kalkulaciju i otvori prijave
@@ -307,7 +354,7 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
               {[
                 ["Dobavljač", uToku.dobavljac ?? "—"],
                 ["Nabavna cena", rsd(uToku.nabavnaCena)],
-                ["Jedinica", `${uToku.brojJedinica ?? "—"} × ${uToku.jedinicaMere ?? ""}`],
+                ["Ukupna količina", `${uToku.brojJedinica ?? "—"} × ${uToku.jedinicaMere ?? ""}`],
                 ["Delova × veličina", `${uToku.brojDelova ?? "—"} × ${uToku.velicinaDela ?? "—"}`],
                 ["POEN po delu", (uToku.poenPoDelu ?? 0).toLocaleString("sr-RS")],
                 ["Plaćeno", rsd(uToku.placenoRSD)],

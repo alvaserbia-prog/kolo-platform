@@ -74,11 +74,13 @@ While the Foundation's protective veto is in force within the meaning of Article
 
 ### Article 8
 
-*Amount of the procurement*
+*Upper spending limit*
 
-The amount of the procurement equals the funds available for projects multiplied by the spending coefficient.
+For a single procurement, no more dinar funds may be spent than the funds available for projects multiplied by the spending coefficient.
 
 The spending coefficient is 1.00. A change to the spending coefficient constitutes an amendment to this Rulebook.
+
+This limit does not determine the quantity of the good to be acquired. The quantity, the size of a share, and the number of POEN per share are established by the decision initiating the procurement (Article 17), while the dinar cost becomes known only through the collection of offers (Article 15).
 
 ## III — Procurement proposal and register of proposals
 
@@ -160,23 +162,23 @@ An offer from a user of the system is accepted only if it is the most favourable
 
 ### Article 17
 
-*Number of POEN per share*
+*Parameters established by the procurement decision*
 
-The number of POEN a user relinquishes for one share is established by the decision initiating the procurement, in accordance with Article 12 of this Rulebook.
+The decision initiating the procurement establishes the total quantity of the good to be acquired, the size of a single share, and the number of POEN annulled per share, in accordance with Article 12 of this Rulebook.
 
-The number of POEN per share is published with the calculation, before applications are opened, together with a statement of reasons for how it was established. It is not modified after publication.
+The number of shares equals the quotient of the total quantity and the size of a share.
+
+The parameters under paragraph 1 are established before offers are collected and are not derived from the dinar price of the good, which is not known at that time. They are published with the calculation, together with a statement of reasons for how they were established, and are not modified after publication.
 
 ### Article 18
 
-*Number of units, number of shares, and size of a share*
+*Dinar cost and the upper limit*
 
-The maximum number of units that may be acquired equals the integer part of the quotient of the amount of the procurement and the purchase price per unit.
+The total dinar cost of the procurement equals the product of the total quantity and the purchase price per unit from the selected offer.
 
-The number of shares is the largest number from the sequence 100, 50, and 20 at which the size of a share amounts to at least one whole unit of the good. The size of a share equals the integer part of the quotient of the maximum number of units and the number of shares.
+If the total dinar cost exceeds the upper limit under Article 8, no procurement is carried out. The funds remain available for the next procurement, and a new decision may establish a smaller quantity.
 
-Exactly as many units are acquired as the product of the size of a share and the number of shares. Any remaining funds stay with the Foundation.
-
-If, even at a number of shares of 20, the size of a share does not reach one whole unit, no procurement is carried out and the funds remain available for the next procurement.
+Funds remaining above the total dinar cost stay with the Foundation.
 
 ### Article 19
 
@@ -192,7 +194,7 @@ POEN is not exchanged for goods and does not reach the supplier; the goods are a
 
 *Calculation*
 
-Before applications are opened, the Foundation publishes the calculation, which contains: the selected good, all collected offers with amounts, the selected supplier and the purchase price per unit, the number of units, the number of shares, the size of a share, the number of POEN per share together with a statement of reasons for how it was established, the total number of POEN to be annulled, the place of collection, and the collection period.
+Before applications are opened, the Foundation publishes the calculation, which contains: the selected good, all collected offers with amounts, the parameters under Article 17 — the total quantity, the size of a share, the number of shares, and the number of POEN per share — together with a statement of reasons for how they were established, all collected offers with amounts, the selected supplier and the purchase price per unit, the total dinar cost and its relation to the upper limit under Article 8, the total number of POEN to be annulled, the place of collection, and the collection period.
 
 The calculation is not modified after publication. Modifying the calculation requires suspending and re-initiating the procurement.
 

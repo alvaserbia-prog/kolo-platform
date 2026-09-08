@@ -161,6 +161,28 @@ van sistema** (odluka vlasnika). Sadržinski:
   bi i predlaganje, pa bi registar predloga prestao da meri potrebu cele zajednice.
   🟡 Operativno menja malo (čl. 22 ionako sortira po POEN-u, a broj delova odseca
   krug); funkcija je deklarativna.
+- 🔴 **Nabavke, čl. 8, 17, 18 i 20 — TOK JE OBRNUT (odluka vlasnika).** Do sada je
+  novac određivao raspodelu: količina = iznos ÷ nabavna cena, broj delova izveden iz
+  niza {100, 50, 20}, veličina dela ostatak tog računa. Sada **odluka kojom se
+  nabavka pokreće utvrđuje ukupnu količinu, veličinu jednog dela i broj POEN-a po
+  delu**, broj delova je količnik količine i veličine dela, a tender odgovara samo na
+  pitanje koliko to košta u dinarima. Čl. 8 iz „iznosa koji se troši" postaje
+  **gornja granica**; čl. 18 iz izvođenja delova postaje pravilo o dinarskom trošku i
+  granici. **Niz {100, 50, 20} više ne postoji** — postojao je isključivo da bi se N
+  izveo iz novca.
+  🔴 **Parametri se utvrđuju PRE prikupljanja ponuda** i to sprovodi kod: `dodajPonudu`
+  odbija ponudu dok parametri nisu utvrđeni, a `utvrdiParametre` odbija izmenu kad
+  ponuda već ima. Time tvrdnja iz čl. 19 („broj POEN-a nije cena dobra i ne izvodi se
+  iz nje") prestaje da bude izjava o nameri i postaje **svojstvo redosleda**: u
+  trenutku odlučivanja dinarska cena ne postoji. Ne vraćati unos parametara u objavu.
+  🔴 **Prekoračenje granice nije greška u unosu nego ishod tendera** (čl. 18 st. 2):
+  nabavka se ne sprovodi, sredstva ostaju za narednu, a nova odluka može utvrditi
+  manju količinu. **Ne skraćivati količinu automatski** — time bi novac ponovo
+  određivao raspodelu.
+  🟡 Migracija nije bila potrebna: `brojJedinica`, `velicinaDela`, `brojDelova` i
+  `poenPoDelu` već postoje, samo se sada upisuju pri utvrđivanju parametara umesto pri
+  objavi. Nova ruta `POST /api/admin/nabavke/[id]/parametri`, audit
+  `NABAVKA_PARAMETRI_UTVRDJENI`.
 - **DPIA na 4.4.3 — ispravljen zbir u zaključku.** Tačka 9 je vodila **sedam** rizika
   kao srednje, uključujući R5, a tabela rizika daje R5 = 4 (nizak); uz to je tačka
   5.8 izostavljala R13 iz spiska najviših. Tačno je **šest srednjih** (R1, R2, R8,
@@ -207,7 +229,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
 
 🔴 **Zašto poseban akt, a ne dopuna Gornjeg Kola:** hijerarhija čl. 7 st. 4 propisuje baš taj put („drugi pravilnici kada KOLO Pravilnik izričito uputi"), a čl. 7 st. 3 traži razgraničenje **po predmetu** — predmet Gornjeg Kola je ORGAN, a nabavke PROCES.
 
-**Mehanika koju akt propisuje** (kod je NIJE dobio — ovo je za sada samo normativa): predlog za nabavku je **jedna reč iz rečnika, jedan po članu**; registar predloga rangira po **broju različitih korisnika**, ne po POEN-u; Gornje Kolo bira jednu reč izbornim glasanjem (do Faze 2 — UO, po istoj proceduri); iznos = `saldo − 3 × operativni trošak prethodnog meseca`, koeficijent trošenja **k = 1,00**; broj delova N se **ne bira nego izvodi** — najveće iz {100, 50, 20} pri kome deo ≥ 1 cela jedinica; broj POEN-a po delu **utvrđuje odluka o nabavci** i ne izvodi se iz cene (od 4.4.3; do tada paritet 1:1 sa maloprodajnom referencom); prijava **3 dana**, otvorena svima bez obzira šta su predložili; red po **broju POEN-a sa snimkom** u trenutku zatvaranja prijava; potvrda = **upis dana preuzimanja**, rok za odgovor **3 dana**; odustanak/istek/nepreuzimanje oslobađaju mesto i poziv ide **sledećem u redu** (nema posebne liste čekanja); period preuzimanja **3 dana**, direktno kod dobavljača uz kod; POEN se gasi **pri preuzimanju**, ne pre; predlozi izabrane reči se posle nabavke **brišu** (inače ista reč pobeđuje zauvek).
+**Mehanika koju akt propisuje** (kod je NIJE dobio — ovo je za sada samo normativa): predlog za nabavku je **jedna reč iz rečnika, jedan po članu**; registar predloga rangira po **broju različitih korisnika**, ne po POEN-u; Gornje Kolo bira jednu reč izbornim glasanjem (do Faze 2 — UO, po istoj proceduri); od 4.4.3 **odluka utvrđuje ukupnu količinu, veličinu dela i broj POEN-a po delu**, broj delova je njihov količnik, a dinar ulazi tek kao provera staje li trošak u gornju granicu (`saldo − 3 × operativni trošak`, koeficijent trošenja **k = 1,00**); do tada je novac određivao količinu, N se izvodio iz {100, 50, 20}, a broj POEN-a bio paritet 1:1 sa maloprodajnom referencom; prijava **3 dana**, otvorena svima bez obzira šta su predložili; red po **broju POEN-a sa snimkom** u trenutku zatvaranja prijava; potvrda = **upis dana preuzimanja**, rok za odgovor **3 dana**; odustanak/istek/nepreuzimanje oslobađaju mesto i poziv ide **sledećem u redu** (nema posebne liste čekanja); period preuzimanja **3 dana**, direktno kod dobavljača uz kod; POEN se gasi **pri preuzimanju**, ne pre; predlozi izabrane reči se posle nabavke **brišu** (inače ista reč pobeđuje zauvek).
 
 🔴 **Dobavljač NE dobija podatke o ličnosti** — samo spisak kodova. To je nosivo za radnju obrade br. 16 i za mere 5.12; ne menjati bez izmene oba akta.
 
@@ -215,7 +237,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
 
 🟡 **Kriterijumi uključivanja su odbačeni** (npr. „samo svinjari"): prijavljuju se svi, pa se ne prikuplja nijedna izjava o delatnosti ili imovini. Posledica koju treba znati: reč ne filtrira sama sebe, pa robu mogu uzeti i oni kojima ne treba. Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči — ne uvoditi proveru statusa.
 
-**Brojevi su zaključani testom** `pravni-dokumenti.test.ts` (koeficijent 1,00; niz 100/50/20; sva tri roka od tri dana; najmanje tri ponude; od 4.4.3 i **odsustvo** pariteta — traži se da broj POEN-a po delu utvrđuje odluka i da nije cena dobra) — isti razlog kao kapa i prag iz čl. 40b: konstante žive i u kodu, pa se norma i primena ne smeju razići.
+**Brojevi su zaključani testom** `pravni-dokumenti.test.ts` (koeficijent 1,00; sva tri roka od tri dana; najmanje tri ponude; od 4.4.3 i **odsustvo** pariteta i izvođenja — traži se da odluka utvrđuje količinu, da je broj delova količnik, da se parametri utvrđuju pre ponuda i da se nabavka ne sprovodi kad trošak pređe granicu) — isti razlog kao kapa i prag iz čl. 40b: konstante žive i u kodu, pa se norma i primena ne smeju razići.
 
 Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja na 4.3.0 i 4.2.1 namerno su ostavljena kakva jesu.
 
@@ -610,7 +632,7 @@ isključivo server** — opšta ruta za predloge ga ne prima.
   `obradiNabavke` je bitan — nepreuzeto (3) mora pre zatvaranja nabavke (5).
 
 **Kod:** `src/lib/nabavka-pravila.ts` (ČISTE funkcije — formula iznosa, izvođenje N
-iz {100,50,20}, provera broja POEN-a po delu, red, rokovi, izborni ishod; uvozi ih i pretraživač) +
+provera parametara odluke, broj delova, ukupan trošak, red, rokovi, izborni ishod; uvozi ih i pretraživač) +
 `src/lib/protokol/nabavka.ts` (servisne, re-eksportuje pravila). Modeli `NazivDobra`,
 `PredlogNabavke`, `Nabavka`, `NabavkaPonuda`, `NabavkaPrijava`, `ProjekatTrosak`.
 Migracije `20260902130000_nabavka_enumi` (samo nove enum vrednosti, ZASEBAN fajl) →

@@ -74,11 +74,13 @@ Dok je zaštitni veto Zaklade na snazi u smislu članka 48. Pravilnika o KOLO su
 
 ### Članak 8.
 
-*Iznos nabave*
+*Gornja granica trošenja*
 
-Iznos nabave jednak je sredstvima raspoloživim za projekte pomnoženim koeficijentom trošenja.
+Za jednu se nabavu može utrošiti najviše onoliko dinarskih sredstava koliko iznose sredstva raspoloživa za projekte pomnožena koeficijentom trošenja.
 
 Koeficijent trošenja iznosi 1,00. Izmjena koeficijenta trošenja predstavlja izmjenu ovoga pravilnika.
+
+Ova granica ne određuje količinu dobra koje se nabavlja. Količinu, veličinu dijela i broj POEN-a po dijelu utvrđuje odluka kojom se nabava pokreće (članak 17.), a dinarski se trošak saznaje tek prikupljanjem ponuda (članak 15.).
 
 ## III — Prijedlog za nabavu i registar prijedloga
 
@@ -160,23 +162,23 @@ Ponuda korisnika sustava prihvaća se samo ako je najpovoljnija, uz objavljenu u
 
 ### Članak 17.
 
-*Broj POEN-a po dijelu*
+*Parametri koje utvrđuje odluka o nabavi*
 
-Broj POEN-a koji korisnik ustupa za jedan dio utvrđuje se odlukom kojom se nabava pokreće, u skladu s člankom 12. ovoga pravilnika.
+Odluka kojom se nabava pokreće utvrđuje ukupnu količinu dobra koje se nabavlja, veličinu jednoga dijela i broj POEN-a koji se poništava po jednom dijelu, u skladu s člankom 12. ovoga pravilnika.
 
-Broj POEN-a po dijelu objavljuje se kalkulacijom, prije otvaranja prijava, uz obrazloženje kako je utvrđen. Nakon objave se ne mijenja.
+Broj dijelova jednak je količniku ukupne količine i veličine dijela.
+
+Parametri iz stavka 1. utvrđuju se prije prikupljanja ponuda i ne izvode se iz dinarske cijene dobra, koja u tom trenutku nije poznata. Objavljuju se kalkulacijom, uz obrazloženje kako su utvrđeni, i nakon objave se ne mijenjaju.
 
 ### Članak 18.
 
-*Broj jedinica, broj dijelova i veličina dijela*
+*Dinarski trošak i gornja granica*
 
-Najveći broj jedinica koje se mogu nabaviti jednak je cjelobrojnom dijelu količnika iznosa nabave i nabavne cijene po jedinici.
+Ukupan dinarski trošak nabave jednak je umnošku ukupne količine i nabavne cijene po jedinici iz izabrane ponude.
 
-Broj dijelova je najveći broj iz niza 100, 50 i 20 pri kojem veličina dijela iznosi najmanje jednu cijelu jedinicu dobra. Veličina dijela jednaka je cjelobrojnom dijelu količnika najvećeg broja jedinica i broja dijelova.
+Ako ukupan dinarski trošak prelazi gornju granicu iz članka 8., nabava se ne provodi. Sredstva ostaju raspoloživa za sljedeću nabavu, a nova odluka može utvrditi manju količinu.
 
-Nabavlja se točno onoliko jedinica koliko iznosi umnožak veličine dijela i broja dijelova. Preostala sredstva ostaju Zakladi.
-
-Ako ni pri broju dijelova od 20 veličina dijela ne dosegne jednu cijelu jedinicu, nabava se ne provodi, a sredstva ostaju raspoloživa za sljedeću nabavu.
+Sredstva koja pretječu iznad ukupnoga dinarskog troška ostaju Zakladi.
 
 ### Članak 19.
 
@@ -192,7 +194,7 @@ POEN se ne razmjenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena 
 
 *Kalkulacija*
 
-Prije otvaranja prijava Zaklada objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude s iznosima, izabranog dobavljača i nabavnu cijenu po jedinici, broj jedinica, broj dijelova, veličinu dijela, broj POEN-a po dijelu uz obrazloženje kako je utvrđen, ukupan broj POEN-a koji se poništava, mjesto preuzimanja i razdoblje preuzimanja.
+Prije otvaranja prijava Zaklada objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude s iznosima, parametre iz članka 17. — ukupnu količinu, veličinu dijela, broj dijelova i broj POEN-a po dijelu — uz obrazloženje kako su utvrđeni, sve prikupljene ponude s iznosima, izabranog dobavljača i nabavnu cijenu po jedinici, ukupan dinarski trošak i njegov odnos prema gornjoj granici iz članka 8., ukupan broj POEN-a koji se poništava, mjesto preuzimanja i razdoblje preuzimanja.
 
 Kalkulacija se ne mijenja nakon objave. Izmjena kalkulacije zahtijeva obustavu i ponovno pokretanje nabave.
 

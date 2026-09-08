@@ -72,11 +72,13 @@ Dok je zaštitni veto Fondacije na snazi u smislu člana 48 Pravilnika o KOLO si
 
 ### Član 8
 
-*Iznos nabavke*
+*Gornja granica trošenja*
 
-Iznos nabavke jednak je sredstvima raspoloživim za projekte pomnoženim koeficijentom trošenja.
+Za jednu nabavku može se utrošiti najviše onoliko dinarskih sredstava koliko iznose sredstva raspoloživa za projekte pomnožena koeficijentom trošenja.
 
 Koeficijent trošenja iznosi 1,00. Izmena koeficijenta trošenja predstavlja izmenu ovog pravilnika.
+
+Ova granica ne određuje količinu dobra koje se nabavlja. Količinu, veličinu dela i broj POEN-a po delu utvrđuje odluka kojom se nabavka pokreće (član 17), a dinarski trošak se saznaje tek prikupljanjem ponuda (član 15).
 
 ## III — Predlog za nabavku i registar predloga
 
@@ -158,23 +160,23 @@ Ponuda korisnika sistema prihvata se samo ako je najpovoljnija, uz objavljeno po
 
 ### Član 17
 
-*Broj POEN-a po delu*
+*Parametri koje utvrđuje odluka o nabavci*
 
-Broj POEN-a koji korisnik ustupa za jedan deo utvrđuje se odlukom kojom se nabavka pokreće, u skladu sa članom 12 ovog pravilnika.
+Odluka kojom se nabavka pokreće utvrđuje ukupnu količinu dobra koje se nabavlja, veličinu jednog dela i broj POEN-a koji se poništava po jednom delu, u skladu sa članom 12 ovog pravilnika.
 
-Broj POEN-a po delu objavljuje se kalkulacijom, pre otvaranja prijava, uz obrazloženje kako je utvrđen. Posle objave se ne menja.
+Broj delova jednak je količniku ukupne količine i veličine dela.
+
+Parametri iz stava 1 utvrđuju se pre prikupljanja ponuda i ne izvode se iz dinarske cene dobra, koja u tom trenutku nije poznata. Objavljuju se kalkulacijom, uz obrazloženje kako su utvrđeni, i posle objave se ne menjaju.
 
 ### Član 18
 
-*Broj jedinica, broj delova i veličina dela*
+*Dinarski trošak i gornja granica*
 
-Najveći broj jedinica koje se mogu nabaviti jednak je celobrojnom delu količnika iznosa nabavke i nabavne cene po jedinici.
+Ukupan dinarski trošak nabavke jednak je proizvodu ukupne količine i nabavne cene po jedinici iz izabrane ponude.
 
-Broj delova je najveći broj iz niza 100, 50 i 20 pri kome veličina dela iznosi najmanje jednu celu jedinicu dobra. Veličina dela jednaka je celobrojnom delu količnika najvećeg broja jedinica i broja delova.
+Ako ukupan dinarski trošak prelazi gornju granicu iz člana 8, nabavka se ne sprovodi. Sredstva ostaju raspoloživa za narednu nabavku, a nova odluka može utvrditi manju količinu.
 
-Nabavlja se tačno onoliko jedinica koliko iznosi proizvod veličine dela i broja delova. Preostala sredstva ostaju Fondaciji.
-
-Ako ni pri broju delova od 20 veličina dela ne dostiže jednu celu jedinicu, nabavka se ne sprovodi, a sredstva ostaju raspoloživa za narednu nabavku.
+Sredstva koja pretiču iznad ukupnog dinarskog troška ostaju Fondaciji.
 
 ### Član 19
 
@@ -190,7 +192,7 @@ POEN se ne razmenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena d
 
 *Kalkulacija*
 
-Pre otvaranja prijava Fondacija objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude sa iznosima, izabranog dobavljača i nabavnu cenu po jedinici, broj jedinica, broj delova, veličinu dela, broj POEN-a po delu sa obrazloženjem kako je utvrđen, ukupan broj POEN-a koji se poništava, mesto preuzimanja i period preuzimanja.
+Pre otvaranja prijava Fondacija objavljuje kalkulaciju, koja sadrži: izabrano dobro, parametre iz člana 17 — ukupnu količinu, veličinu dela, broj delova i broj POEN-a po delu — sa obrazloženjem kako su utvrđeni, sve prikupljene ponude sa iznosima, izabranog dobavljača i nabavnu cenu po jedinici, ukupan dinarski trošak i njegov odnos prema gornjoj granici iz člana 8, ukupan broj POEN-a koji se poništava, mesto preuzimanja i period preuzimanja.
 
 Kalkulacija se ne menja posle objave. Izmena kalkulacije zahteva obustavu i ponovno pokretanje nabavke.
 

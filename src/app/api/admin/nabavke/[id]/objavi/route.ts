@@ -9,7 +9,7 @@ import { objaviNabavku, NabavkaGreska } from "@/lib/protokol/nabavka";
 
 /**
  * POST /api/admin/nabavke/[id]/objavi
- *   { ponudaId, poenPoDelu, poenObrazlozenje, jedinicaMere, mestoPreuzimanja, preuzimanjeOd }
+ *   { ponudaId, jedinicaMere, mestoPreuzimanja, preuzimanjeOd }
  *
  * Objava kalkulacije i otvaranje prijava (čl. 20).
  *
@@ -27,24 +27,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const b = await req.json().catch(() => ({}));
 
-  // Čl. 17 — broj POEN-a po delu utvrđuje odluka o nabavci; ne izvodi se iz cene.
-  const poenPoDelu = Number(b.poenPoDelu);
-  if (!Number.isInteger(poenPoDelu) || poenPoDelu <= 0) {
-    return await greska("Broj POEN-a po delu mora biti ceo broj veći od nule (čl. 17).", 400);
-  }
   const preuzimanjeOd = typeof b.preuzimanjeOd === "string" ? new Date(b.preuzimanjeOd) : null;
   if (!preuzimanjeOd || Number.isNaN(preuzimanjeOd.getTime())) {
     return await greska("Izaberite prvi dan preuzimanja.", 400);
   }
-  for (const polje of ["poenObrazlozenje", "jedinicaMere", "mestoPreuzimanja"]) {
+  for (const polje of ["jedinicaMere", "mestoPreuzimanja"]) {
     if (!String(b[polje] ?? "").trim()) return await greska(`Polje „${polje}" je obavezno.`, 400);
   }
 
   try {
     const kalk = await objaviNabavku(id, {
       ponudaId: String(b.ponudaId ?? ""),
-      poenPoDelu,
-      poenObrazlozenje: String(b.poenObrazlozenje),
       jedinicaMere: String(b.jedinicaMere),
       mestoPreuzimanja: String(b.mestoPreuzimanja),
       preuzimanjeOd,
@@ -53,7 +46,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       session.user.id,
       "NABAVKA_OBJAVLJENA",
       id,
-      `${kalk.brojDelova} delova × ${kalk.poenPoDelu} POEN; plaćanje ~${kalk.procenjenoPlacanjeRSD} RSD`
+      `${kalk.brojDelova} delova × ${kalk.poenPoDelu} POEN; trošak ${kalk.ukupnoRSD} RSD od granice ${kalk.gornjaGranicaRSD} RSD`
     );
     return NextResponse.json({ ok: true, kalkulacija: kalk });
   } catch (e) {

@@ -25,6 +25,9 @@ import {
   ociscenNaziv,
   validanNaziv,
   izracunajKalkulaciju,
+  validniParametri,
+  brojDelova,
+  type ParametriOdluke,
   poredjajRed,
   rokPrijave,
   rokPotvrde,
@@ -241,10 +244,58 @@ export async function pripremiNabavku(nazivId: string, glasanjePredlogId?: strin
   return prisma.nabavka.create({ data: { nazivId, glasanjePredlogId: glasanjePredlogId ?? null } });
 }
 
+/**
+ * Čl. 17 — odluka utvrđuje ukupnu količinu, veličinu dela i broj POEN-a po delu.
+ *
+ * 🔴 Mora se izvršiti PRE prve ponude. To nije formalnost nego jedina brana koja
+ * tvrdnju iz čl. 19 čini proverljivom: broj POEN-a ne može biti izveden iz cene
+ * koja u tom trenutku još ne postoji. Zato `dodajPonudu` odbija ponudu dok
+ * parametri nisu utvrđeni, a ovde se odbija izmena kad ponude već postoje.
+ */
+export async function utvrdiParametre(
+  nabavkaId: string,
+  ulaz: ParametriOdluke & { poenObrazlozenje: string }
+) {
+  const n = await prisma.nabavka.findUnique({
+    where: { id: nabavkaId },
+    select: { status: true, _count: { select: { ponude: true } } },
+  });
+  if (!n) throw new NabavkaGreska("Nabavka nije pronađena.", 404);
+  if (n.status !== "NACRT") throw new NabavkaGreska("Parametri se utvrđuju pre objave kalkulacije.");
+  if (n._count.ponude > 0) {
+    throw new NabavkaGreska("Parametri se utvrđuju pre prikupljanja ponuda (čl. 17 st. 3).", 409);
+  }
+  if (!validniParametri(ulaz)) {
+    throw new NabavkaGreska(
+      "Količina, veličina dela i broj POEN-a po delu moraju biti celi brojevi veći od nule, a količina deljiva veličinom dela bez ostatka (čl. 17).",
+    );
+  }
+  if (!ulaz.poenObrazlozenje.trim()) {
+    throw new NabavkaGreska("Obrazloženje parametara je obavezno (čl. 17 st. 3).");
+  }
+
+  return prisma.nabavka.update({
+    where: { id: nabavkaId },
+    data: {
+      brojJedinica: ulaz.kolicina,
+      velicinaDela: ulaz.velicinaDela,
+      brojDelova: brojDelova(ulaz.kolicina, ulaz.velicinaDela),
+      poenPoDelu: ulaz.poenPoDelu,
+      poenObrazlozenje: ulaz.poenObrazlozenje.trim(),
+    },
+  });
+}
+
 export async function dodajPonudu(nabavkaId: string, ponudjac: string, cenaPoJedinici: number, napomena?: string) {
-  const n = await prisma.nabavka.findUnique({ where: { id: nabavkaId }, select: { status: true } });
+  const n = await prisma.nabavka.findUnique({
+    where: { id: nabavkaId },
+    select: { status: true, poenPoDelu: true },
+  });
   if (!n) throw new NabavkaGreska("Nabavka nije pronađena.", 404);
   if (n.status !== "NACRT") throw new NabavkaGreska("Ponude se dodaju samo dok kalkulacija nije objavljena.");
+  if (n.poenPoDelu === null) {
+    throw new NabavkaGreska("Prvo se utvrđuju parametri nabavke, pa se prikupljaju ponude (čl. 17 st. 3).", 409);
+  }
   if (!ponudjac.trim()) throw new NabavkaGreska("Naziv ponuđača je obavezan.");
   if (!(cenaPoJedinici > 0)) throw new NabavkaGreska("Cena po jedinici mora biti veća od nule.");
 
@@ -265,10 +316,6 @@ export async function obrisiPonudu(ponudaId: string) {
 
 export interface ObjavaUlaz {
   ponudaId: string;
-  /** Čl. 17 — broj POEN-a po delu iz odluke o nabavci. */
-  poenPoDelu: number;
-  /** Čl. 17 st. 2 — obrazloženje kako je broj utvrđen; objavljuje se kalkulacijom. */
-  poenObrazlozenje: string;
   jedinicaMere: string;
   mestoPreuzimanja: string;
   preuzimanjeOd: Date;
@@ -308,15 +355,24 @@ export async function objaviNabavku(nabavkaId: string, ulaz: ObjavaUlaz) {
     throw new NabavkaGreska("Zaštitni veto Fondacije je na snazi — nabavka se ne sprovodi (čl. 7).", 409);
   }
 
+  if (n.brojJedinica === null || n.velicinaDela === null || n.poenPoDelu === null) {
+    throw new NabavkaGreska("Parametri nabavke nisu utvrđeni (čl. 17).", 409);
+  }
+
   const kalk = izracunajKalkulaciju({
     saldoRSD: sredstva.saldoRSD,
     trosakPrethodnogMesecaRSD: sredstva.trosakPrethodnogMesecaRSD,
     nabavnaCena: Number(izabrana.cenaPoJedinici),
-    poenPoDelu: ulaz.poenPoDelu,
+    parametri: {
+      kolicina: n.brojJedinica,
+      velicinaDela: n.velicinaDela,
+      poenPoDelu: n.poenPoDelu,
+    },
   });
   if (!kalk) {
+    // Čl. 18 st. 2 — prekoračenje granice nije greška u unosu nego ishod tendera.
     throw new NabavkaGreska(
-      "Nabavka nije moguća: ili nema sredstava iznad rezerve, ili ni pri dvadeset delova deo ne dostiže jednu jedinicu (čl. 18 st. 4)."
+      "Nabavka se ne sprovodi: ili nema sredstava iznad rezerve, ili ukupan dinarski trošak prelazi gornju granicu iz čl. 8. Sredstva ostaju za narednu nabavku, a nova odluka može utvrditi manju količinu."
     );
   }
 
@@ -334,14 +390,9 @@ export async function objaviNabavku(nabavkaId: string, ulaz: ObjavaUlaz) {
         dobavljac: izabrana.ponudjac,
         nabavnaCena: izabrana.cenaPoJedinici,
         jedinicaMere: ulaz.jedinicaMere.trim(),
-        poenObrazlozenje: ulaz.poenObrazlozenje.trim(),
         saldoSnimak: sredstva.saldoRSD,
         rezervaSnimak: kalk.rezervaRSD,
-        iznosNabavke: kalk.iznosNabavkeRSD,
-        brojJedinica: kalk.brojJedinica,
-        brojDelova: kalk.brojDelova,
-        velicinaDela: kalk.velicinaDela,
-        poenPoDelu: kalk.poenPoDelu,
+        iznosNabavke: kalk.gornjaGranicaRSD,
         mestoPreuzimanja: ulaz.mestoPreuzimanja.trim(),
         preuzimanjeOd,
         preuzimanjeDo: krajPeriodaPreuzimanja(preuzimanjeOd),

@@ -74,11 +74,13 @@ Amíg az Alapítvány védelmi vétója a KOLO rendszerről szóló szabályzat 
 
 ### 8. cikk
 
-*A beszerzés összege*
+*A ráfordítás felső határa*
 
-A beszerzés összege a projektekre rendelkezésre álló eszközök és a ráfordítási együttható szorzata.
+Egy beszerzésre legfeljebb annyi dináreszköz fordítható, amennyi a projektekre rendelkezésre álló eszközök és a ráfordítási együttható szorzata.
 
 A ráfordítási együttható 1,00. A ráfordítási együttható megváltoztatása e szabályzat módosításának minősül.
+
+Ez a határ nem határozza meg a beszerzendő jószág mennyiségét. A mennyiséget, a rész méretét és az egy részre eső POEN számát a beszerzést megindító határozat állapítja meg (17. cikk), a dinárban kifejezett költség pedig csak az ajánlatok begyűjtésével válik ismertté (15. cikk).
 
 ## III — Beszerzési javaslat és a javaslatok nyilvántartása
 
@@ -160,23 +162,23 @@ A rendszer felhasználójának ajánlata csak akkor kerül elfogadásra, ha az a
 
 ### 17. cikk
 
-*Az egy részre eső POEN száma*
+*A beszerzésről szóló határozat által megállapított paraméterek*
 
-Azt a POEN-számot, amelyet a felhasználó egy részért átenged, a beszerzést megindító határozat állapítja meg, e szabályzat 12. cikkével összhangban.
+A beszerzést megindító határozat megállapítja a beszerzendő jószág teljes mennyiségét, egy rész méretét és az egy részre eső, érvénytelenítésre kerülő POEN számát, e szabályzat 12. cikkével összhangban.
 
-Az egy részre eső POEN száma a kalkulációval együtt, a jelentkezések megnyitása előtt kerül közzétételre, annak indokolásával együtt, hogy miként került megállapításra. A közzététel után nem módosul.
+A részek száma a teljes mennyiség és a rész méretének hányadosa.
+
+Az (1) bekezdés szerinti paramétereket az ajánlatok begyűjtése előtt állapítják meg, és azok nem vezethetők le a jószág dinárban kifejezett árából, amely ebben az időpontban nem ismert. A kalkulációval együtt kerülnek közzétételre, a megállapításukra vonatkozó indokolással, és a közzététel után nem módosulnak.
 
 ### 18. cikk
 
-*Az egységek száma, a részek száma és a rész mérete*
+*A dinárban kifejezett költség és a felső határ*
 
-A beszerezhető egységek legnagyobb száma a beszerzés összege és az egységenkénti beszerzési ár hányadosának egész része.
+A beszerzés teljes dinárban kifejezett költsége a teljes mennyiség és a kiválasztott ajánlat szerinti egységenkénti beszerzési ár szorzata.
 
-A részek száma a 100, 50 és 20 sorozat azon legnagyobb száma, amelynél a rész mérete eléri a jószág legalább egy egész egységét. A rész mérete az egységek legnagyobb száma és a részek számának hányadosának egész része.
+Ha a teljes dinárköltség meghaladja a 8. cikk szerinti felső határt, beszerzésre nem kerül sor. Az eszközök a következő beszerzésre maradnak rendelkezésre, új határozat pedig kisebb mennyiséget állapíthat meg.
 
-Pontosan annyi egység kerül beszerzésre, amennyi a rész méretének és a részek számának szorzata. A fennmaradó eszközök az Alapítványnál maradnak.
-
-Ha a rész mérete 20 részszám mellett sem éri el az egy egész egységet, beszerzésre nem kerül sor, az eszközök pedig a következő beszerzésre maradnak rendelkezésre.
+A teljes dinárköltségen felül fennmaradó eszközök az Alapítványnál maradnak.
 
 ### 19. cikk
 
@@ -192,7 +194,7 @@ A POEN nem cserélődik javakra és nem jut el a szállítóhoz; a javak dinárb
 
 *Kalkuláció*
 
-A jelentkezések megnyitása előtt az Alapítvány közzéteszi a kalkulációt, amely tartalmazza: a kiválasztott jószágot, valamennyi begyűjtött ajánlatot összegekkel, a kiválasztott szállítót és az egységenkénti beszerzési árat, az egységek számát, a részek számát, a rész méretét, az egy részre eső POEN számát a megállapítására vonatkozó indokolással együtt, az érvénytelenítésre kerülő POEN teljes számát, az átvétel helyét és az átvételi időszakot.
+A jelentkezések megnyitása előtt az Alapítvány közzéteszi a kalkulációt, amely tartalmazza: a kiválasztott jószágot, valamennyi begyűjtött ajánlatot összegekkel, a 17. cikk szerinti paramétereket — a teljes mennyiséget, a rész méretét, a részek számát és az egy részre eső POEN számát — a megállapításukra vonatkozó indokolással együtt, valamennyi begyűjtött ajánlatot összegekkel, a kiválasztott szállítót és az egységenkénti beszerzési árat, a teljes dinárköltséget és annak a 8. cikk szerinti felső határhoz való viszonyát, az érvénytelenítésre kerülő POEN teljes számát, az átvétel helyét és az átvételi időszakot.
 
 A kalkuláció a közzététel után nem módosul. A kalkuláció módosítása a beszerzés felfüggesztését és újbóli megindítását igényli.
 
