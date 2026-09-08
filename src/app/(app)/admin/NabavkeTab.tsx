@@ -9,7 +9,6 @@ type Nabavka = {
   status: string;
   dobavljac: string | null;
   nabavnaCena: number | null;
-  maloprodajna: number | null;
   brojDelova: number | null;
   velicinaDela: number | null;
   poenPoDelu: number | null;
@@ -56,8 +55,8 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
   // Obrasci
   const [ponudjac, setPonudjac] = useState("");
   const [cena, setCena] = useState("");
-  const [cene, setCene] = useState(["", "", ""]);
-  const [izvori, setIzvori] = useState("");
+  const [poenPoDelu, setPoenPoDelu] = useState("");
+  const [obrazlozenje, setObrazlozenje] = useState("");
   const [jedinica, setJedinica] = useState("");
   const [mesto, setMesto] = useState("");
   const [odKad, setOdKad] = useState("");
@@ -242,27 +241,25 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
             <div className="mt-4 rounded-xl bg-kolo-bg p-3">
               <h4 className="text-sm font-semibold">Objava kalkulacije</h4>
               <p className="mt-1 text-xs text-kolo-muted">
-                Bira se NAJPOVOLJNIJA ponuda. Maloprodajna referenca je prosek tačno tri javne cene na dan
-                objave; izvori se objavljuju uz kalkulaciju. Posle objave se kalkulacija ne menja.
+                Bira se NAJPOVOLJNIJA ponuda. Broj POEN-a po delu utvrđuje odluka o nabavci — NE izvodi se
+                iz cene dobra i ne mora stajati u srazmeri sa njom (čl. 17 i 19). Obrazloženje se objavljuje
+                uz kalkulaciju. Posle objave se kalkulacija ne menja.
               </p>
-              <div className="mt-2 grid gap-2 sm:grid-cols-3">
-                {cene.map((c, i) => (
-                  <input
-                    key={i}
-                    value={c}
-                    onChange={(e) => setCene(cene.map((x, j) => (j === i ? e.target.value : x)))}
-                    placeholder={`Maloprodajna cena ${i + 1}`}
-                    inputMode="decimal"
-                    className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
-                  />
-                ))}
+              <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                <input
+                  value={poenPoDelu}
+                  onChange={(e) => setPoenPoDelu(e.target.value)}
+                  placeholder="POEN po delu"
+                  inputMode="numeric"
+                  className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
+                />
+                <input
+                  value={obrazlozenje}
+                  onChange={(e) => setObrazlozenje(e.target.value)}
+                  placeholder="Obrazloženje kako je broj utvrđen"
+                  className="rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
+                />
               </div>
-              <input
-                value={izvori}
-                onChange={(e) => setIzvori(e.target.value)}
-                placeholder="Izvori tri cene (prodavci / linkovi)"
-                className="mt-2 w-full rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
-              />
               <div className="mt-2 grid gap-2 sm:grid-cols-3">
                 <input
                   value={jedinica}
@@ -288,15 +285,15 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
                   const najjeftinija = [...uToku.ponude].sort((a, b) => a.cena - b.cena)[0];
                   const r = await posalji(`/api/admin/nabavke/${uToku.id}/objavi`, {
                     ponudaId: najjeftinija?.id,
-                    cene: cene.map(Number),
-                    izvoriCena: izvori,
+                    poenPoDelu: Number(poenPoDelu),
+                    poenObrazlozenje: obrazlozenje,
                     jedinicaMere: jedinica,
                     mestoPreuzimanja: mesto,
                     preuzimanjeOd: odKad,
                   });
                   if (r) setPoruka("Kalkulacija je objavljena, prijave su otvorene.");
                 }}
-                disabled={radi || cene.some((c) => !c) || !izvori || !jedinica || !mesto || !odKad}
+                disabled={radi || !poenPoDelu || !obrazlozenje || !jedinica || !mesto || !odKad}
                 className="mt-2 w-full rounded-full bg-kolo-green-700 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50"
               >
                 Objavi kalkulaciju i otvori prijave
@@ -305,12 +302,11 @@ export default function NabavkeTab({ onDone }: { onDone?: () => void }) {
           )}
 
           {/* Kalkulacija posle objave */}
-          {uToku.maloprodajna !== null && (
+          {uToku.poenPoDelu !== null && (
             <dl className="mt-4 divide-y divide-kolo-border text-sm">
               {[
                 ["Dobavljač", uToku.dobavljac ?? "—"],
                 ["Nabavna cena", rsd(uToku.nabavnaCena)],
-                ["Maloprodajna referenca", rsd(uToku.maloprodajna)],
                 ["Jedinica", `${uToku.brojJedinica ?? "—"} × ${uToku.jedinicaMere ?? ""}`],
                 ["Delova × veličina", `${uToku.brojDelova ?? "—"} × ${uToku.velicinaDela ?? "—"}`],
                 ["POEN po delu", (uToku.poenPoDelu ?? 0).toLocaleString("sr-RS")],

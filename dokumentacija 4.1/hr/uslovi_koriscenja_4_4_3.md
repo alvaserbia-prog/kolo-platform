@@ -172,13 +172,17 @@ Pseudonim oglašivača u prostoru za razmjenu ne povezuje se, za neprijavljene i
 
 Zaklada nije stranka u razmjeni i ne posreduje u njoj. Pravni odnos nastaje isključivo između korisnika koji razmjenjuju dobra i usluge.
 
-### Članak 19. — Referentna vrijednost i formiranje cijena
+### Članak 19. — Orijentacijski odnos i određivanje iznosa u oglasu
 
-Referentna vrijednost jednog POEN-a iznosi jedan srpski dinar (1 POEN ≈ 1 RSD). Referentna vrijednost služi kao orijentir pri određivanju cijena dobara i usluga na Platformi i za parametrizaciju kanala evidentiranja doprinosa u skladu s Pravilnikom.
+Radi lakšeg određivanja iznosa u oglasu, kao orijentacijski odnos uzima se da jedan POEN odgovara jednom srpskom dinaru (1 POEN ≈ 1 RSD). Orijentacijski odnos služi isključivo korisniku pri određivanju iznosa u vlastitom oglasu.
 
-Referentna vrijednost nije jamstvo konvertibilnosti, ne obvezuje nijednu stranku u razmjeni, ne predstavlja tečaj u smislu propisa o platnim uslugama i ne mijenja pravnu prirodu POEN-a utvrđenu Pravilnikom.
+Zaklada orijentacijski odnos ne primjenjuje ni u jednom svom postupku: po njemu ne evidentira doprinos, ne utvrđuje nijedan iznos propisan pravilnicima i ne određuje broj POEN-a u projektima i kolektivnim nabavama. Iznosi koje pravilnici propisuju izraženi su u POEN-ima i ne izvode se iz dinara.
 
-Korisnici slobodno određuju cijenu dobara i usluga koje nude. Platforma ne utvrđuje, ne ograničava niti kontrolira cijene.
+Orijentacijski odnos ne obvezuje nijednu stranku u razmjeni, nije jamstvo konvertibilnosti, ne predstavlja tečaj u smislu propisa o platnim uslugama i ne mijenja pravnu prirodu POEN-a utvrđenu Pravilnikom. Zaklada tu vrijednost ne jamči i ne održava.
+
+Zaklada ne provodi otkup POEN-a ni ZRNA i ne osigurava njihovu konverziju u dinare ili drugo sredstvo plaćanja. Ne postoji ugovor o razmjeni dinara za POEN.
+
+Korisnici slobodno određuju iznos za dobra i usluge koje nude. Platforma iznose ne utvrđuje, ne ograničava i ne kontrolira.
 
 ### Članak 20. — Pravila objavljivanja
 

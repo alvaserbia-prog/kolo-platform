@@ -263,8 +263,10 @@ export async function obrisiPonudu(ponudaId: string) {
 
 export interface ObjavaUlaz {
   ponudaId: string;
-  cene: [number, number, number];
-  izvoriCena: string;
+  /** Čl. 17 — broj POEN-a po delu iz odluke o nabavci. */
+  poenPoDelu: number;
+  /** Čl. 17 st. 2 — obrazloženje kako je broj utvrđen; objavljuje se kalkulacijom. */
+  poenObrazlozenje: string;
   jedinicaMere: string;
   mestoPreuzimanja: string;
   preuzimanjeOd: Date;
@@ -308,7 +310,7 @@ export async function objaviNabavku(nabavkaId: string, ulaz: ObjavaUlaz) {
     saldoRSD: sredstva.saldoRSD,
     trosakPrethodnogMesecaRSD: sredstva.trosakPrethodnogMesecaRSD,
     nabavnaCena: Number(izabrana.cenaPoJedinici),
-    cene: ulaz.cene,
+    poenPoDelu: ulaz.poenPoDelu,
   });
   if (!kalk) {
     throw new NabavkaGreska(
@@ -330,11 +332,10 @@ export async function objaviNabavku(nabavkaId: string, ulaz: ObjavaUlaz) {
         dobavljac: izabrana.ponudjac,
         nabavnaCena: izabrana.cenaPoJedinici,
         jedinicaMere: ulaz.jedinicaMere.trim(),
-        izvoriCena: ulaz.izvoriCena.trim(),
+        poenObrazlozenje: ulaz.poenObrazlozenje.trim(),
         saldoSnimak: sredstva.saldoRSD,
         rezervaSnimak: kalk.rezervaRSD,
         iznosNabavke: kalk.iznosNabavkeRSD,
-        maloprodajna: kalk.maloprodajna,
         brojJedinica: kalk.brojJedinica,
         brojDelova: kalk.brojDelova,
         velicinaDela: kalk.velicinaDela,

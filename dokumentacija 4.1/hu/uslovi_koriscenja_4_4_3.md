@@ -172,13 +172,17 @@ A hirdető álneve a csereterületen a be nem jelentkezett és a nem hitelesíte
 
 Az Alapítvány nem fél a cserében, és abban nem közvetít. A jogviszony kizárólag a javakat és szolgáltatásokat cserélő felhasználók között jön létre.
 
-### 19. cikk — Referenciaérték és az árak kialakítása
+### 19. cikk — Tájékoztató arány és a hirdetésben szereplő összeg meghatározása
 
-Egy POEN referenciaértéke egy szerb dinár (1 POEN ≈ 1 RSD). A referenciaérték iránymutatásul szolgál a Platformon kínált javak és szolgáltatások árának meghatározásához, valamint a hozzájárulás nyilvántartási csatornáinak paraméterezéséhez a Szabályzat szerint.
+A hirdetésben szereplő összeg könnyebb meghatározása érdekében tájékoztató arányként azt vesszük alapul, hogy egy POEN egy szerb dinárnak felel meg (1 POEN ≈ 1 RSD). A tájékoztató arány kizárólag a felhasználót szolgálja a saját hirdetésében szereplő összeg meghatározásakor.
 
-A referenciaérték nem jelent konvertibilitási garanciát, nem kötelezi a csere egyik felét sem, nem minősül árfolyamnak a pénzforgalmi szolgáltatásokra vonatkozó jogszabályok értelmében, és nem változtatja meg a POEN Szabályzatban meghatározott jogi természetét.
+Az Alapítvány a tájékoztató arányt egyetlen saját eljárásában sem alkalmazza: nem vesz nyilvántartásba hozzájárulást annak alapján, nem állapít meg annak alapján a szabályzatokban előírt egyetlen összeget sem, és nem határozza meg annak alapján a POEN számát a projektekben és a kollektív beszerzésekben. A szabályzatokban előírt összegek POEN-ben vannak kifejezve, és nem dinárból vezethetők le.
 
-A felhasználók szabadon határozzák meg az általuk kínált javak és szolgáltatások árát. A Platform az árakat nem határozza meg, nem korlátozza és nem ellenőrzi.
+A tájékoztató arány a csere egyik felét sem kötelezi, nem jelent konvertibilitási garanciát, nem minősül árfolyamnak a pénzforgalmi szolgáltatásokra vonatkozó jogszabályok értelmében, és nem változtatja meg a POEN Szabályzatban meghatározott jogi természetét. Az Alapítvány ezt az értéket nem szavatolja és nem tartja fenn.
+
+Az Alapítvány nem váltja vissza a POEN-t és a ZRNO-t, és nem biztosítja azok dinárra vagy más fizetőeszközre való átváltását. Dinár POEN-re történő cseréjéről szóló szerződés nem létezik.
+
+A felhasználók szabadon határozzák meg az általuk kínált javakért és szolgáltatásokért járó összeget. A Platform az összegeket nem határozza meg, nem korlátozza és nem ellenőrzi.
 
 ### 20. cikk — A közzététel szabályai
 

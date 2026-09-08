@@ -45,7 +45,7 @@ const AKTI = [
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_4_2.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_4_1.md",
+  "projekti_nabavke_4_4_3.md",
 ];
 
 /**
@@ -137,13 +137,20 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.1 — brojevi kolektivne nabavke žive i u kodu kao konstante (koeficijent
   // trošenja, niz 100/50/20, paritet 1:1, rokovi od tri dana). Traže se doslovno da
   // se norma i primena ne raziđu, isto kao kapa i prag iz čl. 40b.
-  "projekti_nabavke_4_4_1.md": {
+  // 🔴 4.4.3 — paritet je ODVEZAN: broj POEN-a po delu utvrđuje odluka o nabavci i
+  // NE izvodi se iz maloprodajne vrednosti dobra. Dok je stajao odnos „jedan prema
+  // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
+  // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
+  // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
+  "projekti_nabavke_4_4_3.md": {
     sr: [
       "### Član 27",
       "tri operativna troška Fondacije za prethodni mesec",
       "Koeficijent trošenja iznosi 1,00",
       "iz niza 100, 50 i 20",
-      "u odnosu jedan prema jedan",
+      "utvrđuje se odlukom kojom se nabavka pokreće",
+      "nije cena dobra",
+      "ne mora stajati u srazmeri",
       "najmanje tri ponude",
       "Rok za prijavu iznosi tri dana",
       "Rok za odgovor na poziv iznosi tri dana",
@@ -152,7 +159,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: [
       "The spending coefficient is 1.00",
       "from the sequence 100, 50, and 20",
-      "in a one-to-one ratio",
+      "established by the decision initiating the procurement",
+      "is not a price of the good",
+      "need not stand in proportion",
       "at least three offers",
       "The application period is three days",
       "The collection period is three days",
@@ -160,7 +169,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ru: [
       "Коэффициент расходования составляет 1,00",
       "из ряда 100, 50 и 20",
-      "в соотношении один к одному",
+      "устанавливается решением, которым начинается закупка",
+      "не является ценой блага",
+      "не обязано находиться с ней в соотношении",
       "не менее трёх оферт",
       "Срок подачи заявки составляет три дня",
       "Период получения составляет три дня",
@@ -177,6 +188,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "posreduje u prometu POEN-a ili ZRNA",
       "načelu nekonvertibilnosti",
       "ne stiče nivo donacija",
+      // 🔴 Orijentacioni odnos 1 POEN ≈ 1 RSD OSTAJE, ali samo kao pomoć korisniku
+      // pri postavljanju oglasa. Rečenica da ga Fondacija ne primenjuje ni u jednom
+      // svom postupku je ono što ga razlikuje od kursa: bez nje sistem sam objavljuje
+      // koliko POEN vredi u dinarima i primenjuje to na sopstvene radnje.
+      "ne primenjuje ni u jednom svom postupku",
+      "ne izvode se iz dinara",
     ],
     en: [
       "Listing by an Unverified User",
@@ -184,6 +201,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "brokering the transfer of POEN or ZRNO",
       "principle of non-convertibility",
       "acquires no donation tier",
+      "does not apply the orientation ratio in any of its own procedures",
+      "are not derived from dinars",
     ],
     ru: [
       "Объявление неверифицированного пользователя",
@@ -191,6 +210,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "посредничать в их обороте",
       "принципу неконвертируемости",
       "не получает уровня пожертвований",
+      "не применяет ориентировочное соотношение ни в одной своей процедуре",
+      "не выводятся из динаров",
     ],
   },
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez

@@ -20,8 +20,7 @@ type Detalj = {
   dobavljac: string | null;
   jedinicaMere: string | null;
   nabavnaCena: number | null;
-  maloprodajna: number | null;
-  izvoriCena: string | null;
+  poenObrazlozenje: string | null;
   saldoSnimak: number | null;
   rezervaSnimak: number | null;
   iznosNabavke: number | null;
@@ -30,7 +29,6 @@ type Detalj = {
   velicinaDela: number | null;
   poenPoDelu: number | null;
   ukupnoPoena: number | null;
-  odnosPonistenja: number | null;
   mestoPreuzimanja: string | null;
   preuzimanjeOd: string | null;
   preuzimanjeDo: string | null;
@@ -225,7 +223,7 @@ export default function NabavkaDetaljKlijent({ id }: { id: string }) {
       </section>
 
       {/* ── Kalkulacija (čl. 20) ──────────────────────────────────────────── */}
-      {n.maloprodajna !== null && (
+      {n.poenPoDelu !== null && (
         <section className="rounded-2xl border border-kolo-border bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold">{t("kalkulacija")}</h2>
           <dl className="mt-3 divide-y divide-kolo-border text-sm">
@@ -235,13 +233,11 @@ export default function NabavkaDetaljKlijent({ id }: { id: string }) {
               [t("k_iznos"), rsd(n.iznosNabavke)],
               [t("k_dobavljac"), n.dobavljac ?? "—"],
               [t("k_nabavna"), `${rsd(n.nabavnaCena)} / ${n.jedinicaMere ?? ""}`],
-              [t("k_maloprodajna"), rsd(n.maloprodajna)],
               [t("k_jedinica"), String(n.brojJedinica ?? "—")],
               [t("k_delova"), String(n.brojDelova ?? "—")],
               [t("k_deo"), `${n.velicinaDela ?? "—"} × ${n.jedinicaMere ?? ""}`],
               [t("k_poen_po_delu"), poen(n.poenPoDelu)],
               [t("k_ukupno_poena"), poen(n.ukupnoPoena)],
-              [t("k_odnos"), n.odnosPonistenja ? n.odnosPonistenja.toFixed(2) : "—"],
               [t("k_placeno"), rsd(n.placenoRSD)],
               [t("k_mesto"), n.mestoPreuzimanja ?? "—"],
               [t("k_period"), `${dan(n.preuzimanjeOd)} – ${dan(n.preuzimanjeDo)}`],
@@ -252,7 +248,9 @@ export default function NabavkaDetaljKlijent({ id }: { id: string }) {
               </div>
             ))}
           </dl>
-          {n.izvoriCena && <p className="mt-3 text-xs text-kolo-muted">{t("k_izvori", { izvori: n.izvoriCena })}</p>}
+          {n.poenObrazlozenje && (
+            <p className="mt-3 text-xs text-kolo-muted">{t("k_obrazlozenje", { obrazlozenje: n.poenObrazlozenje })}</p>
+          )}
           <p className="mt-2 text-xs text-kolo-muted">{t("paritet_napomena")}</p>
         </section>
       )}

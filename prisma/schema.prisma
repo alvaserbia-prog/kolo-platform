@@ -2111,7 +2111,7 @@ enum NabavkaPrijavaStatus {
 /// Jedna kolektivna nabavka, od izbora predmeta do preuzimanja.
 /// Svi brojevi kalkulacije se SNIMAJU na zapis u trenutku objave (čl. 20 st. 2:
 /// kalkulacija se posle objave ne menja). Bez snimka bi se prikazana kalkulacija
-/// menjala kad se promeni saldo Fondacije ili maloprodajna cena.
+/// menjala kad se promeni saldo Fondacije ili nabavna cena.
 model Nabavka {
   id      String        @id @default(uuid())
   nazivId String
@@ -2132,13 +2132,16 @@ model Nabavka {
   dobavljac    String?
   jedinicaMere String? // „vreća 25 kg" — samo za prikaz
   nabavnaCena  Decimal? @db.Decimal(12, 2)
-  /// Maloprodajna referenca u celim dinarima; ujedno POEN po jedinici (paritet 1:1).
-  maloprodajna Int?
-  izvoriCena   String?
   brojJedinica Int?
   brojDelova   Int?
   velicinaDela Int?
+  /// Čl. 17 — broj POEN-a po delu koji je utvrdila odluka o nabavci. NE izvodi se
+  /// iz cene dobra: do 4.4.3 je bio `velicinaDela × maloprodajna referenca`, čime
+  /// je sistem objavljivao kurs POEN-a prema dinaru.
   poenPoDelu   Int?
+  /// Čl. 17 st. 2 — obrazloženje kako je broj POEN-a po delu utvrđen. Objavljuje se
+  /// kalkulacijom, jer je bez njega parametar odluke neproverljiv.
+  poenObrazlozenje String?
 
   // ── Rokovi (čl. 21, 23, 26)
   prijaveDo        DateTime?

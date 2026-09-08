@@ -170,13 +170,17 @@ Pseudonim oglašivača u prostoru za razmenu ne povezuje se, za neprijavljena i 
 
 Fondacija nije strana u razmeni i ne posreduje u njoj. Pravni odnos nastaje isključivo između korisnika koji razmenjuju dobra i usluge.
 
-### Član 19 — Referentna vrednost i formiranje cena
+### Član 19 — Orijentacioni odnos i određivanje iznosa u oglasu
 
-Referentna vrednost jednog POEN-a iznosi jedan srpski dinar (1 POEN ≈ 1 RSD). Referentna vrednost služi kao orijentir pri određivanju cena dobara i usluga na Platformi i za parametrizaciju kanala evidentiranja doprinosa u skladu sa Pravilnikom.
+Radi lakšeg određivanja iznosa u oglasu, kao orijentacioni odnos uzima se da jedan POEN odgovara jednom srpskom dinaru (1 POEN ≈ 1 RSD). Orijentacioni odnos služi isključivo korisniku pri određivanju iznosa u sopstvenom oglasu.
 
-Referentna vrednost nije garancija konvertibilnosti, ne obavezuje nijednu stranu u razmeni, ne predstavlja kurs u smislu propisa o platnim uslugama i ne menja pravnu prirodu POEN-a utvrđenu Pravilnikom.
+Fondacija orijentacioni odnos ne primenjuje ni u jednom svom postupku: po njemu ne evidentira doprinos, ne utvrđuje nijedan iznos propisan pravilnicima i ne određuje broj POEN-a u projektima i kolektivnim nabavkama. Iznosi koje pravilnici propisuju izraženi su u POEN-ima i ne izvode se iz dinara.
 
-Korisnici slobodno određuju cenu dobara i usluga koje nude. Platforma ne utvrđuje, ne ograničava ni ne kontroliše cene.
+Orijentacioni odnos ne obavezuje nijednu stranu u razmeni, nije garancija konvertibilnosti, ne predstavlja kurs u smislu propisa o platnim uslugama i ne menja pravnu prirodu POEN-a utvrđenu Pravilnikom. Fondacija tu vrednost ne garantuje i ne održava.
+
+Fondacija ne vrši otkup POEN-a niti ZRNA i ne obezbeđuje njihovu konverziju u dinare ili drugo sredstvo plaćanja. Ne postoji ugovor o razmeni dinara za POEN.
+
+Korisnici slobodno određuju iznos za dobra i usluge koje nude. Platforma iznose ne utvrđuje, ne ograničava i ne kontroliše.
 
 ### Član 20 — Pravila objavljivanja
 

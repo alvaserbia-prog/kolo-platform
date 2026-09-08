@@ -153,7 +153,7 @@ POEN exists only in the Protocol. The record is kept by the Protocol and cannot 
 
 POEN is not money. It is not a means of payment, not electronic money, not digital assets, not a financial instrument, and it is not a debt the Foundation owes you. It has no value outside the system: it is not exchanged for money, it is not resold, and the Foundation does not buy it back.
 
-So does it have a value in money? There is no exchange rate. But so that you and the other side can agree on what something is worth, amounts in the system are expressed on a scale where 1 POEN corresponds to 1 dinar. That is a measuring scale for comparison inside the system — the way you express weight in kilograms — not a rate at which something is exchanged for money. The Foundation does not guarantee any value of POEN.`,
+So does it have a value in money? There is no exchange rate. But so that you and the other side can agree on what something is worth, amounts in the system are expressed on a scale where 1 POEN corresponds to 1 dinar. That is a measuring scale for comparison inside the system — the way you express weight in kilograms — not a rate at which something is exchanged for money. The ratio serves you alone when you post a listing: the Foundation does not apply it in any of its own procedures, does not record contributions by it, and does not determine any amount from the rulebooks by it. The Foundation does not guarantee any value of POEN and does not redeem it.`,
       },
       {
         id: 2,
@@ -735,6 +735,10 @@ If something goes wrong, first try to resolve it directly with the other side. I
         odgovor: `Any full member can make a donation, by paying in dinars into the Foundation's account — directly or through the platform, where card payment and the IPS QR code are also available.
 
 Once the payment is confirmed, the Protocol records POEN for you: the amount of the donation × the donation recording coefficient. The coefficient rises with the total (cumulative) amount of your donations across 11 levels, from 1.00 to 2.00 (the highest level at a cumulative 5,000,000 RSD). When a donation takes you past a threshold, the coefficient of the new level applies to that whole donation. A level once reached is permanent and does not fall through the use of POEN. The donation recording coefficient is neither an "exchange rate" nor the accounting coefficient of ZRNO.
+
+Why the coefficient rises at all. A larger single contribution has greater significance for the community than the same amount spread out over time — a rounded sum makes it possible to meet a concrete need at once, to pay for infrastructure or launch a programme. The community therefore holds such a contribution in higher regard. This is not a discount: nothing is bought by a donation, no good is acquired, no claim against the Foundation and no right to a refund, so the difference in the coefficient is not a better price but a greater measure of recognition.
+
+POEN is not bought from other users. Offering, buying, and selling POEN for money are prohibited by the Terms of Use and carry suspension or exclusion. It does not pay off either: whoever acquires POEN outside the Foundation does not move their donation tier, does not raise the coefficient, and receives neither a donation confirmation nor public recognition — so in the long run they are worse off than someone who gave the same amount to the Foundation.
 
 A donation is non-refundable — that is one of the system's unchangeable principles. Donations cover the basic costs of the Foundation's work (server, tools, development, legal and accounting services), and once income exceeds operating costs, the surplus is redirected into collective procurement.`,
       },

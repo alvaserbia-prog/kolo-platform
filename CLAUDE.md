@@ -124,19 +124,35 @@ van sistema** (odluka vlasnika). Sadržinski:
   protivčinidba; uz to upozorenje da onaj ko POEN pribavi mimo Fondacije **ne stiče
   nivo donacija i ne pomera koeficijent**, pa prolazi lošije od onoga ko je isti
   iznos dao Fondaciji. To je ekonomski razlog zbog kog zabrana iz Uslova stoji sama.
+- 🔴 **Nabavke, čl. 17, 19 i 20 — PARITET JE ODVEZAN.** Broj POEN-a po delu više se
+  ne računa kao `veličina dela × maloprodajna referenca` „u odnosu jedan prema
+  jedan", nego ga **utvrđuje odluka kojom se nabavka pokreće** (čl. 12; Gornje Kolo,
+  do Faze 2 UO), objavljuje se kalkulacijom uz obrazloženje i posle objave se ne
+  menja. **Maloprodajna referenca kao institut više ne postoji** — čl. 17 je
+  prepisan, iz kalkulacije (čl. 20) izbačena je referenca sa izvorima, a čl. 19
+  sada kaže da broj **nije cena dobra**, da se ne izvodi ni iz nabavne cene ni iz
+  maloprodajne vrednosti i da **ne mora stajati u srazmeri** sa njom. Razlog: dok je
+  paritet stajao, svaka objavljena nabavka bila je javan dokaz kursa, pa je
+  koeficijent 2,00 značio dvostruko više **odredive robe po dinaru** i tabela
+  donacija se čitala kao cenovnik bez obzira na obrazloženje.
+- **Uslovi, čl. 19 — orijentacioni odnos ostaje, ali samo za korisnika.** Odnos
+  1 POEN ≈ 1 RSD se **ne ukida** (odluka vlasnika: vrednost se ne može sakriti — ako
+  se sir dobija i za POEN i za dinare, odnos postoji bez obzira na to da li ga mi
+  ispisujemo). Menja se ko iza njega stoji: član sada kaže da odnos služi
+  **isključivo korisniku pri određivanju iznosa u sopstvenom oglasu**, da ga
+  Fondacija **ne primenjuje ni u jednom svom postupku** — ne evidentira po njemu
+  doprinos, ne utvrđuje nijedan iznos iz pravilnika i ne određuje broj POEN-a u
+  nabavkama — i da su iznosi u pravilnicima izraženi u POEN-ima i **ne izvode se iz
+  dinara** (provereno: nijedan nije). Brisan je deo rečenice o „parametrizaciji
+  kanala evidentiranja doprinosa", koji je bio i činjenično netačan. Dodate su i dve
+  rečenice iz završnih odredaba Pravilnika (nema otkupa i konverzije; ne postoji
+  ugovor o razmeni dinara za POEN) — one nose odbranu i treba da stoje **uz sam
+  paritet**, ne dvadeset članova dalje.
 
-🔴 **Uslov koji još NIJE ispunjen:** odbrana koeficijenta zavisi od toga da broj
-POEN-a po delu u kolektivnoj nabavci prestane da bude izveden iz maloprodajne
-vrednosti (čl. 19 Pravilnika o nabavkama, „u odnosu jedan prema jedan"). Dok to
-stoji, koeficijent 2,00 znači **dvostruko više odredive robe po dinaru** i tabela se
-čita kao cenovnik bez obzira na obrazloženje. Odluka je doneta, tekst nije napisan.
-
-🟡 **Takođe nedovršeno iz istog paketa:** Uslovi čl. 19 objavljuju referentnu vrednost
-(1 POEN ≈ 1 RSD) i kažu da služi „i za parametrizaciju kanala evidentiranja
-doprinosa" — a nijedan iznos u pravilnicima nije izveden iz dinara. Odluka vlasnika
-je da paritet **ostaje isključivo kao pomoć korisniku pri postavljanju oglasa** i da
-se ne vezuje ni za jednu radnju Fondacije, pa taj deo rečenice treba da padne pri
-sledećem bumpu Uslova. Registar rizika sa obrazloženjima je u istoriji sesije.
+🟡 **Uslovi su ostali na 4.4.3** iako su menjani dvaput istog dana: 4.4.3 nije bio
+objavljen ni na `main`-u ni na produkciji kad je došla izmena čl. 19, pa nema
+verzije koja bi „govorila nešto drugo nego kad je objavljena". Nabavke su prvi put
+bumpovane i idu takođe na **4.4.3**.
 
 DPIA i Registar radnji obrade **nisu dirani** — nijedna izmena ne uvodi nov podatak
 o ličnosti ni novu radnju obrade. Nema nove `PolitikaVerzija` —
@@ -174,7 +190,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
 
 🔴 **Zašto poseban akt, a ne dopuna Gornjeg Kola:** hijerarhija čl. 7 st. 4 propisuje baš taj put („drugi pravilnici kada KOLO Pravilnik izričito uputi"), a čl. 7 st. 3 traži razgraničenje **po predmetu** — predmet Gornjeg Kola je ORGAN, a nabavke PROCES.
 
-**Mehanika koju akt propisuje** (kod je NIJE dobio — ovo je za sada samo normativa): predlog za nabavku je **jedna reč iz rečnika, jedan po članu**; registar predloga rangira po **broju različitih korisnika**, ne po POEN-u; Gornje Kolo bira jednu reč izbornim glasanjem (do Faze 2 — UO, po istoj proceduri); iznos = `saldo − 3 × operativni trošak prethodnog meseca`, koeficijent trošenja **k = 1,00**; broj delova N se **ne bira nego izvodi** — najveće iz {100, 50, 20} pri kome deo ≥ 1 cela jedinica; POEN po jedinici = **maloprodajna referenca 1:1** (prosek tri javne cene na dan objave); prijava **3 dana**, otvorena svima bez obzira šta su predložili; red po **broju POEN-a sa snimkom** u trenutku zatvaranja prijava; potvrda = **upis dana preuzimanja**, rok za odgovor **3 dana**; odustanak/istek/nepreuzimanje oslobađaju mesto i poziv ide **sledećem u redu** (nema posebne liste čekanja); period preuzimanja **3 dana**, direktno kod dobavljača uz kod; POEN se gasi **pri preuzimanju**, ne pre; predlozi izabrane reči se posle nabavke **brišu** (inače ista reč pobeđuje zauvek).
+**Mehanika koju akt propisuje** (kod je NIJE dobio — ovo je za sada samo normativa): predlog za nabavku je **jedna reč iz rečnika, jedan po članu**; registar predloga rangira po **broju različitih korisnika**, ne po POEN-u; Gornje Kolo bira jednu reč izbornim glasanjem (do Faze 2 — UO, po istoj proceduri); iznos = `saldo − 3 × operativni trošak prethodnog meseca`, koeficijent trošenja **k = 1,00**; broj delova N se **ne bira nego izvodi** — najveće iz {100, 50, 20} pri kome deo ≥ 1 cela jedinica; broj POEN-a po delu **utvrđuje odluka o nabavci** i ne izvodi se iz cene (od 4.4.3; do tada paritet 1:1 sa maloprodajnom referencom); prijava **3 dana**, otvorena svima bez obzira šta su predložili; red po **broju POEN-a sa snimkom** u trenutku zatvaranja prijava; potvrda = **upis dana preuzimanja**, rok za odgovor **3 dana**; odustanak/istek/nepreuzimanje oslobađaju mesto i poziv ide **sledećem u redu** (nema posebne liste čekanja); period preuzimanja **3 dana**, direktno kod dobavljača uz kod; POEN se gasi **pri preuzimanju**, ne pre; predlozi izabrane reči se posle nabavke **brišu** (inače ista reč pobeđuje zauvek).
 
 🔴 **Dobavljač NE dobija podatke o ličnosti** — samo spisak kodova. To je nosivo za radnju obrade br. 16 i za mere 5.12; ne menjati bez izmene oba akta.
 
@@ -182,7 +198,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
 
 🟡 **Kriterijumi uključivanja su odbačeni** (npr. „samo svinjari"): prijavljuju se svi, pa se ne prikuplja nijedna izjava o delatnosti ili imovini. Posledica koju treba znati: reč ne filtrira sama sebe, pa robu mogu uzeti i oni kojima ne treba. Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči — ne uvoditi proveru statusa.
 
-**Brojevi su zaključani testom** `pravni-dokumenti.test.ts` (koeficijent 1,00; niz 100/50/20; paritet 1:1; sva tri roka od tri dana; najmanje tri ponude) — isti razlog kao kapa i prag iz čl. 40b: konstante žive i u kodu, pa se norma i primena ne smeju razići.
+**Brojevi su zaključani testom** `pravni-dokumenti.test.ts` (koeficijent 1,00; niz 100/50/20; sva tri roka od tri dana; najmanje tri ponude; od 4.4.3 i **odsustvo** pariteta — traži se da broj POEN-a po delu utvrđuje odluka i da nije cena dobra) — isti razlog kao kapa i prag iz čl. 40b: konstante žive i u kodu, pa se norma i primena ne smeju razići.
 
 Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. **Statut ostaje 4.1** (`statut_4_1_0.md`). Istorijska pozivanja na 4.3.0 i 4.2.1 namerno su ostavljena kakva jesu.
 
@@ -532,7 +548,7 @@ tri ponude → objava kalkulacije → prijave 3 dana → red po broju POEN-a **s
 snimkom** → poziv, potvrda upisom dana preuzimanja, rok 3 dana → preuzimanje kod
 dobavljača uz kod, period 3 dana → **poništenje POEN-a po iskorišćenju**.
 
-🔴 **Kalkulacija se SNIMA na `Nabavka` pri objavi.** Po čl. 20 st. 2 se posle objave
+🔴 **Kalkulacija se SNIMA na `Nabavka` pri objavi** (od 4.4.3 uz `poenObrazlozenje`; kolone `maloprodajna` i `izvoriCena` su obrisane migracijom `20260907120000_nabavka_poen_parametar`, jer je snimljena maloprodajna referenca bila snimljen KURS). Po čl. 20 st. 2 se posle objave
 ne menja; bez snimka bi se prikazani iznosi menjali sa saldom Fondacije i sa tržišnom
 cenom, pa bi čovek koji se prijavljuje video druge brojeve nego onaj koji je odlučivao.
 
@@ -577,7 +593,7 @@ isključivo server** — opšta ruta za predloge ga ne prima.
   `obradiNabavke` je bitan — nepreuzeto (3) mora pre zatvaranja nabavke (5).
 
 **Kod:** `src/lib/nabavka-pravila.ts` (ČISTE funkcije — formula iznosa, izvođenje N
-iz {100,50,20}, paritet, red, rokovi, izborni ishod; uvozi ih i pretraživač) +
+iz {100,50,20}, provera broja POEN-a po delu, red, rokovi, izborni ishod; uvozi ih i pretraživač) +
 `src/lib/protokol/nabavka.ts` (servisne, re-eksportuje pravila). Modeli `NazivDobra`,
 `PredlogNabavke`, `Nabavka`, `NabavkaPonuda`, `NabavkaPrijava`, `ProjekatTrosak`.
 Migracije `20260902130000_nabavka_enumi` (samo nove enum vrednosti, ZASEBAN fajl) →

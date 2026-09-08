@@ -160,11 +160,11 @@ Ponuda korisnika sustava prihvaća se samo ako je najpovoljnija, uz objavljenu u
 
 ### Članak 17.
 
-*Maloprodajna referenca*
+*Broj POEN-a po dijelu*
 
-Maloprodajna referenca je prosjek triju javno dostupnih maloprodajnih cijena izabranog dobra na dan objave kalkulacije, zaokružen na cijeli dinar.
+Broj POEN-a koji korisnik ustupa za jedan dio utvrđuje se odlukom kojom se nabava pokreće, u skladu s člankom 12. ovoga pravilnika.
 
-Uz kalkulaciju se objavljuju izvori svih triju cijena.
+Broj POEN-a po dijelu objavljuje se kalkulacijom, prije otvaranja prijava, uz obrazloženje kako je utvrđen. Nakon objave se ne mijenja.
 
 ### Članak 18.
 
@@ -180,17 +180,19 @@ Ako ni pri broju dijelova od 20 veličina dijela ne dosegne jednu cijelu jedinic
 
 ### Članak 19.
 
-*Broj POEN-a po dijelu*
+*Priroda broja POEN-a po dijelu*
 
-Broj POEN-a koji korisnik ustupa za jedan dio jednak je umnošku veličine dijela i maloprodajne reference, u odnosu jedan prema jedan.
+Broj POEN-a po dijelu nije cijena dobra. On se ne izvodi ni iz nabavne cijene ni iz maloprodajne vrijednosti dobra i ne mora stajati u razmjeru s njom.
 
-Broj POEN-a po dijelu ne izvodi se iz nabavne cijene. POEN se ne razmjenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena dinarskim sredstvima, a POEN se poništava kao zapis o iskorištenom sudjelovanju.
+Broj POEN-a po dijelu izražava mjeru sudjelovanja u zajedničkom dobru koja se poništava preuzimanjem dijela.
+
+POEN se ne razmjenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena dinarskim sredstvima, a POEN se poništava kao zapis o iskorištenom sudjelovanju.
 
 ### Članak 20.
 
 *Kalkulacija*
 
-Prije otvaranja prijava Zaklada objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude s iznosima, izabranog dobavljača i nabavnu cijenu po jedinici, maloprodajnu referencu s izvorima, broj jedinica, broj dijelova, veličinu dijela, broj POEN-a po dijelu, ukupan broj POEN-a koji se poništava, mjesto preuzimanja i razdoblje preuzimanja.
+Prije otvaranja prijava Zaklada objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude s iznosima, izabranog dobavljača i nabavnu cijenu po jedinici, broj jedinica, broj dijelova, veličinu dijela, broj POEN-a po dijelu uz obrazloženje kako je utvrđen, ukupan broj POEN-a koji se poništava, mjesto preuzimanja i razdoblje preuzimanja.
 
 Kalkulacija se ne mijenja nakon objave. Izmjena kalkulacije zahtijeva obustavu i ponovno pokretanje nabave.
 

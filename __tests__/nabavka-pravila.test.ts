@@ -12,11 +12,9 @@ import {
   validanNaziv,
   raspolozivoZaProjekte,
   iznosNabavke,
-  maloprodajnaReferenca,
+  validanPoenPoDelu,
   najveciBrojJedinica,
   izvediPodelu,
-  poenPoDelu,
-  odnosPonistenja,
   izracunajKalkulaciju,
   poredjajRed,
   krajDana,
@@ -94,20 +92,21 @@ describe("sredstva (čl. 5 i 8)", () => {
   });
 });
 
-describe("maloprodajna referenca (čl. 17)", () => {
-  it("prosek tri cene, zaokružen na ceo dinar", () => {
-    expect(maloprodajnaReferenca([4290, 4150, 4400])).toBe(4280);
-    expect(maloprodajnaReferenca([100, 101, 101])).toBe(101);
+// 🔴 Set 4.4.3 — paritet je ODVEZAN. Broj POEN-a po delu je parametar odluke o
+// nabavci; funkcija koja ga je računala iz maloprodajne reference (`poenPoDelu`) i
+// merilo `odnosPonistenja` su obrisani, jer su oboje objavljivali odnos POEN-a
+// prema dinaru. Ostaje samo provera ispravnosti unetog broja.
+describe("broj POEN-a po delu (čl. 17)", () => {
+  it("prima ceo broj veći od nule", () => {
+    expect(validanPoenPoDelu(4280)).toBe(true);
+    expect(validanPoenPoDelu(1)).toBe(true);
   });
 
-  it("traži tačno tri cene", () => {
-    expect(maloprodajnaReferenca([100, 200])).toBeNull();
-    expect(maloprodajnaReferenca([100, 200, 300, 400])).toBeNull();
-  });
-
-  it("odbija nevažeće cene", () => {
-    expect(maloprodajnaReferenca([100, 0, 300])).toBeNull();
-    expect(maloprodajnaReferenca([100, -5, 300])).toBeNull();
+  it("odbija nulu, negativan i decimalan broj", () => {
+    expect(validanPoenPoDelu(0)).toBe(false);
+    expect(validanPoenPoDelu(-100)).toBe(false);
+    expect(validanPoenPoDelu(4280.5)).toBe(false);
+    expect(validanPoenPoDelu(Number.NaN)).toBe(false);
   });
 });
 
@@ -140,29 +139,16 @@ describe("izvođenje broja delova (čl. 18)", () => {
   });
 });
 
-describe("POEN po delu (čl. 19)", () => {
-  it("paritet jedan prema jedan sa maloprodajnom referencom", () => {
-    expect(poenPoDelu(1, 4280)).toBe(4280);
-    expect(poenPoDelu(2, 4280)).toBe(8560);
-  });
-
-  it("odnos poništenja meri koliko POEN-a nestane po dinaru", () => {
-    expect(odnosPonistenja(4280, 3150)).toBeCloseTo(1.3587, 4);
-    expect(odnosPonistenja(4280, 0)).toBeNull();
-  });
-});
-
 describe("cela kalkulacija", () => {
   // Primer iz razrade: kasa 640.000, operativa 85.000/mesec, vreća nabavno 3.150,
-  // tri javne maloprodajne cene 4.290 / 4.150 / 4.400.
-  const ulaz = { saldoRSD: 640_000, trosakPrethodnogMesecaRSD: 85_000, nabavnaCena: 3150, cene: [4290, 4150, 4400] };
+  // a odluka o nabavci je utvrdila 4.280 POEN po delu.
+  const ulaz = { saldoRSD: 640_000, trosakPrethodnogMesecaRSD: 85_000, nabavnaCena: 3150, poenPoDelu: 4280 };
 
   it("prolazi ceo lanac od salda do broja poništenih POEN-a", () => {
     const k = izracunajKalkulaciju(ulaz)!;
     expect(k.rezervaRSD).toBe(255_000);
     expect(k.raspolozivoRSD).toBe(385_000);
     expect(k.iznosNabavkeRSD).toBe(385_000);
-    expect(k.maloprodajna).toBe(4280);
     expect(k.najviseJedinica).toBe(122);
     expect(k.brojDelova).toBe(100);
     expect(k.velicinaDela).toBe(1);
@@ -170,7 +156,6 @@ describe("cela kalkulacija", () => {
     expect(k.poenPoDelu).toBe(4280);
     expect(k.ukupnoPoena).toBe(428_000);
     expect(k.procenjenoPlacanjeRSD).toBe(315_000);
-    expect(k.odnosPonistenja).toBeCloseTo(1.36, 2);
   });
 
   it("plaćanje nikad ne prelazi iznos nabavke", () => {
@@ -186,8 +171,22 @@ describe("cela kalkulacija", () => {
     expect(izracunajKalkulaciju({ ...ulaz, nabavnaCena: 30_000 })).toBeNull();
   });
 
-  it("nema kalkulacije bez tri cene", () => {
-    expect(izracunajKalkulaciju({ ...ulaz, cene: [4290, 4150] })).toBeNull();
+  // Broj POEN-a po delu se ne izvodi ni iz čega — mora doći iz odluke, pa
+  // kalkulacija bez njega ne postoji.
+  it("nema kalkulacije bez ispravnog broja POEN-a po delu", () => {
+    expect(izracunajKalkulaciju({ ...ulaz, poenPoDelu: 0 })).toBeNull();
+    expect(izracunajKalkulaciju({ ...ulaz, poenPoDelu: -1 })).toBeNull();
+  });
+
+  // 🔴 Brana protiv vraćanja pariteta: broj POEN-a po delu ne sme da zavisi ni od
+  // nabavne cene ni od veličine dela. Ista odluka daje isti broj bez obzira na to
+  // koliko je roba koštala.
+  it("broj POEN-a po delu ne zavisi od cene ni od veličine dela", () => {
+    const a = izracunajKalkulaciju(ulaz)!;
+    const b = izracunajKalkulaciju({ ...ulaz, nabavnaCena: 1575 })!;
+    expect(a.poenPoDelu).toBe(4280);
+    expect(b.poenPoDelu).toBe(4280);
+    expect(b.velicinaDela).not.toBe(a.velicinaDela);
   });
 });
 

@@ -164,7 +164,7 @@ A POEN csak a Protokollban létezik. A bejegyzést a Protokoll vezeti, és nem v
 
 A POEN nem pénz. Nem fizetőeszköz, nem elektronikus pénz, nem digitális vagyon, nem pénzügyi eszköz, és nem az Alapítvány feléd fennálló tartozása. A rendszeren kívül nincs értéke: nem váltható dinárra, nem adható tovább, és az Alapítvány nem vásárolja vissza.
 
-Van-e akkor pénzben kifejezett értéke? Árfolyam nincs. De hogy te és a másik fél meg tudjatok állapodni abban, mi mennyit ér, a rendszerben az összegeket olyan arányban fejezzük ki, amelyben 1 POEN 1 dinárnak felel meg. Ez a rendszeren belüli összehasonlítás mérőskálája — ahogy a súlyt kilogrammban fejezed ki —, nem pedig árfolyam, amelyen valamit pénzre váltanak. Az Alapítvány a POEN semmilyen értékét nem szavatolja.`,
+Van-e akkor pénzben kifejezett értéke? Árfolyam nincs. De hogy te és a másik fél meg tudjatok állapodni abban, mi mennyit ér, a rendszerben az összegeket olyan arányban fejezzük ki, amelyben 1 POEN 1 dinárnak felel meg. Ez a rendszeren belüli összehasonlítás mérőskálája — ahogy a súlyt kilogrammban fejezed ki —, nem pedig árfolyam, amelyen valamit pénzre váltanak. Ez az arány kizárólag téged szolgál, amikor hirdetést adsz fel: az Alapítvány egyetlen saját eljárásában sem alkalmazza, nem vesz nyilvántartásba hozzájárulást annak alapján, és nem határoz meg annak alapján egyetlen szabályzati összeget sem. Az Alapítvány a POEN semmilyen értékét nem szavatolja, és nem váltja vissza.`,
       },
       {
         id: 2,
@@ -746,6 +746,10 @@ Ha valami rosszul sül el, először próbáld közvetlenül a másik féllel me
         odgovor: `Adományt minden rendes tag adhat, dinárban történő befizetéssel az Alapítvány számlájára — közvetlenül vagy a platformon keresztül, ahol elérhető a bankkártyás fizetés és az IPS QR-kód is.
 
 Amint a befizetés megerősítést nyer, a Protokoll POEN-t rögzít neked: az adomány összege × az adományok nyilvántartási koefficiense. A koefficiens az adományaid teljes (halmozott) összegével nő, 11 szinten át, 1,00-tól 2,00-ig (a legmagasabb szint 5.000.000 RSD halmozott összegnél). Amikor egy adománnyal átléped a küszöböt, az új szint koefficiense az egész adományra vonatkozik. Az elért szint tartós, és a POEN felhasználásával nem csökken. Az adományok nyilvántartási koefficiense sem nem „árfolyam", sem nem a ZRNO elszámolási koefficiense.
+
+Miért nő egyáltalán a koefficiens. A nagyobb egyszeri hozzájárulás nagyobb jelentőséggel bír a közösség számára, mint ugyanazon összeg időben elnyújtva — a kerek összeg lehetővé teszi egy konkrét szükséglet egyszerre történő fedezését, az infrastruktúra kifizetését vagy egy program elindítását. A közösség ezért értékeli az ilyen hozzájárulást nagyobbra. Ez nem kedvezmény: az adománnyal semmi sem kerül megvásárlásra, nem szerzel sem jószágot, sem követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, így a koefficiens különbsége nem kedvezőbb ár, hanem az elismerés nagyobb mértéke.
+
+A POEN nem vásárolható meg más felhasználóktól. A POEN pénzért való kínálását, vételét és eladását a Felhasználási Feltételek tiltják, és felfüggesztést vagy kizárást vonnak maguk után. Ráadásul nem is éri meg: aki az Alapítványon kívül szerez POEN-t, nem mozdítja el az adományszintjét, nem emeli a koefficienst, és nem kap sem adományigazolást, sem nyilvános elismerést — így hosszú távon rosszabbul jár, mint aki ugyanazt az összeget az Alapítványnak adta.
 
 Az adomány visszavonhatatlan — ez a rendszer megváltoztathatatlan elveinek egyike. Az adományok az Alapítvány működésének alapköltségeit fedezik (szerver, eszközök, fejlesztés, jogász, könyvelés), és amint a bevételek meghaladják a működési költségeket, a többlet közösségi beszerzésekbe kerül.`,
       },

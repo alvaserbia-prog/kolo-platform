@@ -158,11 +158,11 @@ Ponuda korisnika sistema prihvata se samo ako je najpovoljnija, uz objavljeno po
 
 ### Član 17
 
-*Maloprodajna referenca*
+*Broj POEN-a po delu*
 
-Maloprodajna referenca je prosek tri javno dostupne maloprodajne cene izabranog dobra na dan objave kalkulacije, zaokružen na ceo dinar.
+Broj POEN-a koji korisnik ustupa za jedan deo utvrđuje se odlukom kojom se nabavka pokreće, u skladu sa članom 12 ovog pravilnika.
 
-Uz kalkulaciju se objavljuju izvori sve tri cene.
+Broj POEN-a po delu objavljuje se kalkulacijom, pre otvaranja prijava, uz obrazloženje kako je utvrđen. Posle objave se ne menja.
 
 ### Član 18
 
@@ -178,17 +178,19 @@ Ako ni pri broju delova od 20 veličina dela ne dostiže jednu celu jedinicu, na
 
 ### Član 19
 
-*Broj POEN-a po delu*
+*Priroda broja POEN-a po delu*
 
-Broj POEN-a koji korisnik ustupa za jedan deo jednak je proizvodu veličine dela i maloprodajne reference, u odnosu jedan prema jedan.
+Broj POEN-a po delu nije cena dobra. On se ne izvodi ni iz nabavne cene ni iz maloprodajne vrednosti dobra i ne mora stajati u srazmeri sa njom.
 
-Broj POEN-a po delu ne izvodi se iz nabavne cene. POEN se ne razmenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena dinarskim sredstvima, a POEN se poništava kao zapis o iskorišćenom učešću.
+Broj POEN-a po delu izražava meru učešća u zajedničkom dobru koja se poništava preuzimanjem dela.
+
+POEN se ne razmenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena dinarskim sredstvima, a POEN se poništava kao zapis o iskorišćenom učešću.
 
 ### Član 20
 
 *Kalkulacija*
 
-Pre otvaranja prijava Fondacija objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude sa iznosima, izabranog dobavljača i nabavnu cenu po jedinici, maloprodajnu referencu sa izvorima, broj jedinica, broj delova, veličinu dela, broj POEN-a po delu, ukupan broj POEN-a koji se poništava, mesto preuzimanja i period preuzimanja.
+Pre otvaranja prijava Fondacija objavljuje kalkulaciju, koja sadrži: izabrano dobro, sve prikupljene ponude sa iznosima, izabranog dobavljača i nabavnu cenu po jedinici, broj jedinica, broj delova, veličinu dela, broj POEN-a po delu sa obrazloženjem kako je utvrđen, ukupan broj POEN-a koji se poništava, mesto preuzimanja i period preuzimanja.
 
 Kalkulacija se ne menja posle objave. Izmena kalkulacije zahteva obustavu i ponovno pokretanje nabavke.
 

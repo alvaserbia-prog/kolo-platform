@@ -9,7 +9,7 @@
  *
  * `src/lib/protokol/nabavka.ts` sve ovo re-eksportuje, pa server ima jedan ulaz.
  *
- * Osnov: Pravilnik o projektima i kolektivnim nabavkama (set 4.4.1), čl. 5, 8,
+ * Osnov: Pravilnik o projektima i kolektivnim nabavkama (set 4.4.3), čl. 5, 8,
  * 15, 17, 18, 19, 21, 22, 23 i 26; Pravilnik o KOLO sistemu čl. 14a i 51a.
  *
  * 🔴 Brojevi iz ovog fajla stoje DOSLOVNO u aktu i zaključani su testom
@@ -34,9 +34,6 @@ export const NIZ_DELOVA = [100, 50, 20] as const;
 
 /** Čl. 15 st. 1 — najmanje toliko ponuda pre izbora najpovoljnije. */
 export const NAJMANJE_PONUDA = 3;
-
-/** Čl. 17 — maloprodajna referenca je prosek tačno toliko javnih cena. */
-export const BROJ_CENA_ZA_REFERENCU = 3;
 
 /** Čl. 21 st. 2 — rok za prijavu, u danima od objave kalkulacije. */
 export const ROK_PRIJAVE_DANA = 3;
@@ -102,19 +99,6 @@ export function iznosNabavke(raspolozivoRSD: number): number {
 
 // ─── Kalkulacija (čl. 17, 18, 19) ─────────────────────────────────────────────
 
-/**
- * Čl. 17 — maloprodajna referenca: prosek tri javne cene, zaokružen na ceo dinar.
- *
- * 🔴 Ovaj broj JESTE kurs, jer je POEN po jedinici jednak njemu (paritet 1:1).
- * Zato akt traži tačno tri cene i objavljene izvore — bez toga bi jedan čovek
- * određivao koliko POEN-a nestaje iz sistema.
- */
-export function maloprodajnaReferenca(cene: number[]): number | null {
-  if (cene.length !== BROJ_CENA_ZA_REFERENCU) return null;
-  if (cene.some((c) => !Number.isFinite(c) || c <= 0)) return null;
-  return Math.round(cene.reduce((a, b) => a + b, 0) / cene.length);
-}
-
 /** Čl. 18 st. 1 — najveći broj jedinica koji iznos nabavke pokriva. */
 export function najveciBrojJedinica(iznosRSD: number, nabavnaCenaPoJedinici: number): number {
   if (!Number.isFinite(nabavnaCenaPoJedinici) || nabavnaCenaPoJedinici <= 0) return 0;
@@ -149,39 +133,36 @@ export function izvediPodelu(najviseJedinica: number): Podela | null {
 }
 
 /**
- * Čl. 19 — broj POEN-a po delu, u odnosu jedan prema jedan sa maloprodajnom
- * referencom.
+ * Čl. 17 i 19 — broj POEN-a po delu je PARAMETAR ODLUKE o nabavci, ne izvedena
+ * veličina.
  *
- * 🔴 NE izvodi se iz nabavne cene. POEN se ne razmenjuje za dobra i ne dolazi do
- * dobavljača; dobra su kupljena dinarima, a POEN se poništava kao zapis o
- * iskorišćenom učešću.
+ * 🔴 Do 4.4.3 se računao kao `velicinaDela × maloprodajna referenca`, u odnosu
+ * jedan prema jedan. Time je sistem sam objavljivao koliko POEN vredi u dinarima:
+ * svaka nabavka je bila javan dokaz kursa, pa se i tabela koeficijenta donacija
+ * čitala kao cenovnik (viši koeficijent = izračunljivo više robe po dinaru).
+ * Sada broj utvrđuje odluka kojom se nabavka pokreće, objavljuje se sa
+ * obrazloženjem pre otvaranja prijava i posle objave se ne menja (čl. 20 st. 2).
+ * Ne izvodi se ni iz nabavne cene ni iz maloprodajne vrednosti dobra i ne mora
+ * stajati u srazmeri sa njom.
+ *
+ * Ne vraćati izvođenje iz cene — to je izmena koja bi vratila objavljen kurs.
  */
-export function poenPoDelu(velicinaDela: number, maloprodajnaRef: number): number {
-  return velicinaDela * maloprodajnaRef;
-}
-
-/**
- * Merilo po kome se nabavka ocenjuje: koliko POEN-a nestane iz sistema po
- * potrošenom dinaru. Što je nabavna cena niža, to je odnos veći — jedan broj koji
- * poravnava interes Fondacije (jeftinije) i interes sistema (više poništenog POEN-a).
- */
-export function odnosPonistenja(maloprodajnaRef: number, nabavnaCena: number): number | null {
-  if (!Number.isFinite(nabavnaCena) || nabavnaCena <= 0) return null;
-  return maloprodajnaRef / nabavnaCena;
+export function validanPoenPoDelu(poenPoDelu: number): boolean {
+  return Number.isInteger(poenPoDelu) && poenPoDelu > 0;
 }
 
 export interface UlazKalkulacije {
   saldoRSD: number;
   trosakPrethodnogMesecaRSD: number;
   nabavnaCena: number;
-  cene: number[];
+  /** Čl. 17 — utvrđuje ga odluka o nabavci; ovde ulazi kao dat broj. */
+  poenPoDelu: number;
 }
 
 export interface Kalkulacija {
   rezervaRSD: number;
   raspolozivoRSD: number;
   iznosNabavkeRSD: number;
-  maloprodajna: number;
   najviseJedinica: number;
   brojDelova: number;
   velicinaDela: number;
@@ -189,12 +170,11 @@ export interface Kalkulacija {
   poenPoDelu: number;
   ukupnoPoena: number;
   procenjenoPlacanjeRSD: number;
-  odnosPonistenja: number;
 }
 
 /**
  * Ceo lanac iz čl. 5 → 19 u jednom pozivu. Vraća `null` kad nabavka nije moguća
- * (nema sredstava, nevažeće cene, ili deo ne dostiže jednu jedinicu).
+ * (nema sredstava, neispravan broj POEN-a po delu, ili deo ne dostiže jednu jedinicu).
  */
 export function izracunajKalkulaciju(ulaz: UlazKalkulacije): Kalkulacija | null {
   const rezervaRSD = ulaz.trosakPrethodnogMesecaRSD * MESECI_REZERVE;
@@ -202,22 +182,18 @@ export function izracunajKalkulaciju(ulaz: UlazKalkulacije): Kalkulacija | null 
   if (raspolozivoRSD <= 0) return null;
 
   const iznosNabavkeRSD = iznosNabavke(raspolozivoRSD);
-  const maloprodajna = maloprodajnaReferenca(ulaz.cene);
-  if (maloprodajna === null) return null;
+  if (!validanPoenPoDelu(ulaz.poenPoDelu)) return null;
 
   const najviseJedinica = najveciBrojJedinica(iznosNabavkeRSD, ulaz.nabavnaCena);
   const podela = izvediPodelu(najviseJedinica);
   if (!podela) return null;
 
-  const poenDela = poenPoDelu(podela.velicinaDela, maloprodajna);
-  const odnos = odnosPonistenja(maloprodajna, ulaz.nabavnaCena);
-  if (odnos === null) return null;
+  const poenDela = ulaz.poenPoDelu;
 
   return {
     rezervaRSD,
     raspolozivoRSD,
     iznosNabavkeRSD,
-    maloprodajna,
     najviseJedinica,
     brojDelova: podela.brojDelova,
     velicinaDela: podela.velicinaDela,
@@ -225,7 +201,6 @@ export function izracunajKalkulaciju(ulaz: UlazKalkulacije): Kalkulacija | null 
     poenPoDelu: poenDela,
     ukupnoPoena: poenDela * podela.brojDelova,
     procenjenoPlacanjeRSD: podela.jedinicaSeKupuje * ulaz.nabavnaCena,
-    odnosPonistenja: odnos,
   };
 }
 

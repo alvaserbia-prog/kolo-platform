@@ -172,13 +172,17 @@ For non-registered and unverified persons, the advertiser's pseudonym in the exc
 
 The Foundation is not a party to the exchange and does not mediate in it. The legal relationship arises exclusively between the users who exchange goods and services.
 
-### Article 19 — Reference Value and Price Formation
+### Article 19 — Orientation Ratio and Determining the Amount in a Listing
 
-The reference value of one POEN is one Serbian dinar (1 POEN ≈ 1 RSD). The reference value serves as an orientation for determining the prices of goods and services on the Platform and for the parameterization of contribution recording channels in accordance with the Rulebook.
+To make it easier to determine the amount in a listing, one POEN is taken to correspond to one Serbian dinar (1 POEN ≈ 1 RSD) as an orientation ratio. The orientation ratio serves the user alone, in determining the amount in their own listing.
 
-The reference value is not a guarantee of convertibility, does not bind any party to an exchange, does not constitute an exchange rate within the meaning of payment services regulations, and does not change the legal nature of POEN as established by the Rulebook.
+The Foundation does not apply the orientation ratio in any of its own procedures: it does not record contributions by it, does not establish any amount prescribed by the rulebooks by it, and does not determine the number of POEN in projects and collective procurements by it. The amounts prescribed by the rulebooks are expressed in POEN and are not derived from dinars.
 
-Users freely determine the price of the goods and services they offer. The Platform does not establish, limit, or control prices.
+The orientation ratio does not bind any party to an exchange, is not a guarantee of convertibility, does not constitute an exchange rate within the meaning of payment services regulations, and does not change the legal nature of POEN as established by the Rulebook. The Foundation does not guarantee or maintain that value.
+
+The Foundation does not redeem POEN or ZRNO and does not provide for their conversion into dinars or any other means of payment. There is no contract for the exchange of dinars for POEN.
+
+Users freely determine the amount for the goods and services they offer. The Platform does not establish, limit, or control amounts.
 
 ### Article 20 — Posting Rules
 

@@ -55,9 +55,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     verzija: "4.4.2",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
+  // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod
+  // iz maloprodajne vrednosti dobra (čl. 19). Maloprodajna referenca je brisana.
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "projekti_nabavke_4_4_3.md",
+    verzija: "4.4.3",
   },
 };
 

@@ -160,11 +160,11 @@ A rendszer felhasználójának ajánlata csak akkor kerül elfogadásra, ha az a
 
 ### 17. cikk
 
-*Kiskereskedelmi referenciaár*
+*Az egy részre eső POEN száma*
 
-A kiskereskedelmi referenciaár a kiválasztott jószág három nyilvánosan hozzáférhető kiskereskedelmi árának átlaga a kalkuláció közzétételének napján, egész dinárra kerekítve.
+Azt a POEN-számot, amelyet a felhasználó egy részért átenged, a beszerzést megindító határozat állapítja meg, e szabályzat 12. cikkével összhangban.
 
-A kalkulációval együtt mindhárom ár forrása közzétételre kerül.
+Az egy részre eső POEN száma a kalkulációval együtt, a jelentkezések megnyitása előtt kerül közzétételre, annak indokolásával együtt, hogy miként került megállapításra. A közzététel után nem módosul.
 
 ### 18. cikk
 
@@ -180,17 +180,19 @@ Ha a rész mérete 20 részszám mellett sem éri el az egy egész egységet, be
 
 ### 19. cikk
 
-*Az egy részre eső POEN száma*
+*Az egy részre eső POEN szám természete*
 
-Az a POEN-szám, amelyet a felhasználó egy részért átenged, a rész méretének és a kiskereskedelmi referenciaárnak a szorzata, egy az egyhez arányban.
+Az egy részre eső POEN száma nem a jószág ára. Nem vezethető le sem a beszerzési árból, sem a jószág kiskereskedelmi értékéből, és nem kell azzal arányban állnia.
 
-Az egy részre eső POEN száma nem a beszerzési árból vezethető le. A POEN nem cserélődik javakra és nem jut el a szállítóhoz; a javak dinárban meglévő eszközökből kerültek beszerzésre, a POEN pedig a felhasznált részvétel bejegyzéseként érvénytelenítésre kerül.
+Az egy részre eső POEN száma a közös jóban való részvételnek azt a mértékét fejezi ki, amely a rész átvételével érvénytelenítésre kerül.
+
+A POEN nem cserélődik javakra és nem jut el a szállítóhoz; a javak dinárban meglévő eszközökből kerültek beszerzésre, a POEN pedig a felhasznált részvétel bejegyzéseként érvénytelenítésre kerül.
 
 ### 20. cikk
 
 *Kalkuláció*
 
-A jelentkezések megnyitása előtt az Alapítvány közzéteszi a kalkulációt, amely tartalmazza: a kiválasztott jószágot, valamennyi begyűjtött ajánlatot összegekkel, a kiválasztott szállítót és az egységenkénti beszerzési árat, a kiskereskedelmi referenciaárat forrásokkal, az egységek számát, a részek számát, a rész méretét, az egy részre eső POEN számát, az érvénytelenítésre kerülő POEN teljes számát, az átvétel helyét és az átvételi időszakot.
+A jelentkezések megnyitása előtt az Alapítvány közzéteszi a kalkulációt, amely tartalmazza: a kiválasztott jószágot, valamennyi begyűjtött ajánlatot összegekkel, a kiválasztott szállítót és az egységenkénti beszerzési árat, az egységek számát, a részek számát, a rész méretét, az egy részre eső POEN számát a megállapítására vonatkozó indokolással együtt, az érvénytelenítésre kerülő POEN teljes számát, az átvétel helyét és az átvételi időszakot.
 
 A kalkuláció a közzététel után nem módosul. A kalkuláció módosítása a beszerzés felfüggesztését és újbóli megindítását igényli.
 

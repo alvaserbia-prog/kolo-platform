@@ -160,11 +160,11 @@ An offer from a user of the system is accepted only if it is the most favourable
 
 ### Article 17
 
-*Retail reference price*
+*Number of POEN per share*
 
-The retail reference price is the average of three publicly available retail prices of the selected good on the day the calculation is published, rounded to a whole dinar.
+The number of POEN a user relinquishes for one share is established by the decision initiating the procurement, in accordance with Article 12 of this Rulebook.
 
-The sources of all three prices are published together with the calculation.
+The number of POEN per share is published with the calculation, before applications are opened, together with a statement of reasons for how it was established. It is not modified after publication.
 
 ### Article 18
 
@@ -180,17 +180,19 @@ If, even at a number of shares of 20, the size of a share does not reach one who
 
 ### Article 19
 
-*Number of POEN per share*
+*Nature of the number of POEN per share*
 
-The number of POEN a user relinquishes for one share equals the product of the size of a share and the retail reference price, in a one-to-one ratio.
+The number of POEN per share is not a price of the good. It is derived neither from the purchase price nor from the retail value of the good, and need not stand in proportion to it.
 
-The number of POEN per share is not derived from the purchase price. POEN is not exchanged for goods and does not reach the supplier; the goods are acquired with dinar funds, while POEN is annulled as a record of participation that has been used.
+The number of POEN per share expresses the measure of participation in the common good that is annulled by the collection of a share.
+
+POEN is not exchanged for goods and does not reach the supplier; the goods are acquired with dinar funds, while POEN is annulled as a record of participation that has been used.
 
 ### Article 20
 
 *Calculation*
 
-Before applications are opened, the Foundation publishes the calculation, which contains: the selected good, all collected offers with amounts, the selected supplier and the purchase price per unit, the retail reference price with sources, the number of units, the number of shares, the size of a share, the number of POEN per share, the total number of POEN to be annulled, the place of collection, and the collection period.
+Before applications are opened, the Foundation publishes the calculation, which contains: the selected good, all collected offers with amounts, the selected supplier and the purchase price per unit, the number of units, the number of shares, the size of a share, the number of POEN per share together with a statement of reasons for how it was established, the total number of POEN to be annulled, the place of collection, and the collection period.
 
 The calculation is not modified after publication. Modifying the calculation requires suspending and re-initiating the procurement.
 

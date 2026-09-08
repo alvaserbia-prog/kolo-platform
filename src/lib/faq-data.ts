@@ -168,7 +168,7 @@ POEN postoji samo u Protokolu. Zapis se vodi na Protokolu i ne može se izneti i
 
 POEN nije novac. Nije sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, nije finansijski instrument i ne predstavlja dug Fondacije prema tebi. Nema vrednost van sistema: ne menja se za dinare, ne preprodaje se i Fondacija ga ne otkupljuje.
 
-Ima li onda vrednost u dinarima? Nema kurs. Ali da biste ti i druga strana mogli da se dogovorite koliko nešto vredi, Uslovi korišćenja određuju referentnu vrednost: jedan POEN je približno jedan dinar (1 POEN ≈ 1 RSD). To je merna skala za poređenje unutar sistema (kao kad težinu izražavaš u kilogramima) a ne kurs po kome se nešto menja za novac. Fondacija ne garantuje nikakvu vrednost POENA.`,
+Ima li onda vrednost u dinarima? Nema kurs. Ali da biste ti i druga strana mogli da se dogovorite koliko nešto vredi, Uslovi korišćenja daju orijentacioni odnos: jedan POEN odgovara jednom dinaru (1 POEN ≈ 1 RSD). To je merna skala za poređenje unutar sistema (kao kad težinu izražavaš u kilogramima) a ne kurs po kome se nešto menja za novac. Taj odnos služi samo tebi kad postavljaš oglas — Fondacija ga ne primenjuje ni u jednom svom postupku, ne evidentira po njemu doprinos i ne određuje po njemu nijedan iznos iz pravilnika. Fondacija ne garantuje nikakvu vrednost POENA i ne otkupljuje ga.`,
       },
       {
         id: 2,
@@ -750,6 +750,10 @@ Ako nešto pođe naopako, prvo pokušaj da rešiš direktno sa drugom stranom. U
         odgovor: `Donaciju može dati svaki redovan član, uplatom u dinarima na račun Fondacije, direktno ili kroz platformu, gde je dostupno i plaćanje karticom i IPS QR kodom.
 
 Kad uplata bude potvrđena, Protokol ti upisuje POEN: iznos donacije × koeficijent evidencije donacija. Koeficijent raste sa ukupnim (kumulativnim) iznosom tvojih donacija kroz 11 nivoa, od 1,00 do 2,00 (najviši nivo na kumulativnih 5.000.000 RSD). Kad donacijom pređeš prag, koeficijent novog nivoa primenjuje se na celu tu donaciju. Dostignuti nivo je trajan i ne smanjuje se korišćenjem POENA. Koeficijent evidencije donacija nije „kurs" ni obračunski koeficijent ZRNA.
+
+Zašto koeficijent uopšte raste. Veći pojedinačan doprinos ima veći značaj za zajednicu od istog iznosa razlivenog kroz vreme — zaokružen iznos omogućava da se konkretna potreba podmiri odjednom, da se plati infrastruktura ili pokrene program. Zato zajednica takav doprinos i uvažava više. To nije popust: donacijom se ništa ne kupuje, ne stiče se nijedno dobro, nikakvo potraživanje prema Fondaciji ni pravo na povraćaj, pa razlika u koeficijentu nije povoljnija cena nego veća mera priznanja.
+
+POEN se ne kupuje od drugih korisnika. Nuđenje, kupovina i prodaja POENA za novac zabranjeni su Uslovima korišćenja i povlače suspenziju ili isključenje. Uz to se ni ne isplati: ko POEN pribavi mimo Fondacije ne pomera svoj nivo donacija, ne diže koeficijent i ne dobija ni potvrdu o donaciji ni javno priznanje — pa dugoročno prolazi lošije od onoga ko je isti iznos dao Fondaciji.
 
 Donacija je nepovratna, to je jedan od nepromenljivih principa sistema. Donacije pokrivaju osnovne troškove rada Fondacije (server, alati, razvoj, pravnik, računovodstvo), a kad prihodi premaše operativne troškove, višak se preusmerava u kolektivne nabavke.`,
       },
