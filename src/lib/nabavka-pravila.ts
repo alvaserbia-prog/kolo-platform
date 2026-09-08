@@ -35,6 +35,18 @@ export const NIZ_DELOVA = [100, 50, 20] as const;
 /** Čl. 15 st. 1 — najmanje toliko ponuda pre izbora najpovoljnije. */
 export const NAJMANJE_PONUDA = 3;
 
+/**
+ * Čl. 21 st. 1 — najmanji broj evidentiranih POEN-a za prijavu na nabavku.
+ *
+ * Jednak je minimumu za upis ZRNA iz čl. 19 Pravilnika o KOLO sistemu, da prag ne
+ * bi bio proizvoljan broj: za učešće u raspodeli sredstava zajednice traži se isti
+ * red veličine doprinosa kao za ulazak u upravljanje njome.
+ *
+ * 🔴 Poreklo POEN-a se NE ispituje — svih devet kanala iz čl. 15 Pravilnika vredi
+ * jednako, pa i donacija. Prag meri nagomilan doprinos, ne način na koji je nastao.
+ */
+export const PRAG_POENA_ZA_UCESCE = 20_000;
+
 /** Čl. 21 st. 2 — rok za prijavu, u danima od objave kalkulacije. */
 export const ROK_PRIJAVE_DANA = 3;
 
@@ -298,6 +310,10 @@ export interface UcesnikProvera {
  * 🔴 Maloletni nalog je isključen izričito, a ne posredno preko indeksa: dete sme
  * da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju robe.
  */
+export function ispunjavaPrag(poen: number): boolean {
+  return Number.isFinite(poen) && poen >= PRAG_POENA_ZA_UCESCE;
+}
+
 export function smeUcestvovati(u: UcesnikProvera): boolean {
   if (u.maloletan) return false;
   if (u.deaktiviranAt) return false;

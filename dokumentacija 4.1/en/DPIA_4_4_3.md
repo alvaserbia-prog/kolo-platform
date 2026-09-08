@@ -190,7 +190,7 @@ Minimisation — the only new datum is the fact of the enquiry (which user made 
 
 ## 5.8. Residual Risk
 
-After the application of all stated measures, the residual risk is assessed as acceptable. The highest residual risks are R1 (unauthorized access), R2 (re-identification), R8 (cross-border transfer), R11 (disclosure of special-category membership to verifiers), and R16 (the children's space), all at the medium level (5–8). Risk R5 (public visibility of a listing) falls to a low level (4) with the abolition of the board and the narrowing of the processing. These risks are further mitigated by continuous monitoring, regular testing, and updating of measures.
+After the application of all stated measures, the residual risk is assessed as acceptable. The highest residual risks are R1 (unauthorized access), R2 (re-identification), R8 (cross-border transfer), R11 (disclosure of special-category membership to verifiers), R13 (de-anonymization of a donor through the public list of donations), and R16 (the children's space), all at the medium level (5–8). Risk R5 (public visibility of a listing) falls to a low level (4) with the abolition of the board and the narrowing of the processing. These risks are further mitigated by continuous monitoring, regular testing, and updating of measures.
 
 ## 6. Rights of Data Subjects
 
@@ -249,7 +249,7 @@ Additional risks: minors are a particularly vulnerable category; the friendship 
 
 On the basis of the assessment conducted:
 
-Seventeen risks to the rights and freedoms of data subjects have been identified. No risk has been assessed as high. Seven risks are at the medium level (R1, R2, R5, R8, R11, R13, R16), and ten at the low level (R3, R4, R6, R7, R9, R10, R12, R14, R15, R17).
+Seventeen risks to the rights and freedoms of data subjects have been identified. No risk has been assessed as high. Six risks are at the medium level (R1, R2, R8, R11, R13, R16), and eleven at the low level (R3, R4, R5, R6, R7, R9, R10, R12, R14, R15, R17).
 
 For each identified risk, appropriate technical and organizational protection measures have been applied. The residual risk after the application of measures is assessed as acceptable.
 

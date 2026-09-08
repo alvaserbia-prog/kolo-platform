@@ -202,7 +202,13 @@ The calculation is not modified after publication. Modifying the calculation req
 
 *Application*
 
-Every adult user with an active account applies for a published procurement, regardless of which name they proposed and regardless of whether they submitted a proposal at all.
+Every adult user with an active account whose record contains at least 20,000 recorded POEN applies for a published procurement, regardless of which name they proposed and regardless of whether they submitted a proposal at all.
+
+The threshold under paragraph 1 equals the minimum of recorded POEN for the recording of ZRNO under Article 19 of the Rulebook on the KOLO System. The origin of the POEN is not examined; all contribution recording channels count equally.
+
+The threshold is checked upon submission of the application and again at the expiry of the application period, at the same time as the order under Article 22 is established. A user who does not meet the threshold at the expiry of the period does not enter the order.
+
+The threshold does not affect the right to submit a procurement proposal under Article 9, which belongs to every adult user with an active account.
 
 The application period is three days from the publication of the calculation.
 

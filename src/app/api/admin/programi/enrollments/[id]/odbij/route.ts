@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma } from "@/lib/protokol/programi";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/programi/enrollments/[id]/odbij
@@ -14,7 +14,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || !jeAdmin(session.user))
+  // Odlučuje isključivo superadmin — isto lice koje jedino i vidi unete podatke
+  // (DPIA 5.6). Odluka bez uvida u prijavu bila bi odluka na slepo.
+  if (!session || !jeSuperadmin(session.user))
     return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;

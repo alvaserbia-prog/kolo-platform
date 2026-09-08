@@ -5,7 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { ProgramType } from "@/generated/prisma/client";
 import { labelPrograma } from "@/lib/protokol/programi";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
 
 const SVI_TIPOVI: ProgramType[] = [
   "PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
@@ -32,6 +32,13 @@ export async function GET() {
 
   const programiMap = new Map(programi.map((p) => [p.type, p]));
 
+  // 🔴 Posebne kategorije podataka (datumi rođenja dece, datum rešenja o
+  // invalidnosti, dob) idu ISKLJUČIVO superadminu. DPIA 5.6 kaže da su uneti podaci
+  // „dostupni isključivo licu koje obrađuje prijavu u Fondaciji" — dok ih je video
+  // svaki admin, tekst mere bio je uži od primene. Isti obrazac kao revizijski
+  // dnevnik i nadzor, koji su i ranije bili zatvoreni za obične admine.
+  const smeVidetiPodatke = jeSuperadmin(session.user);
+
   return NextResponse.json({
     programi: SVI_TIPOVI.map((type) => ({
       type,
@@ -44,7 +51,7 @@ export async function GET() {
       pseudonim: e.user.pseudonim,
       type: e.type,
       label: labelPrograma(e.type),
-      metadata: e.metadata,
+      metadata: smeVidetiPodatke ? e.metadata : null,
       createdAt: e.createdAt.toISOString(),
     })),
     poslednjeEmisije: poslednjeEmisije.map((s) => ({

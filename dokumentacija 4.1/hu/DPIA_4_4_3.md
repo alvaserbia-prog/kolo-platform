@@ -190,7 +190,7 @@ Minimalizálás — az egyetlen új adat a megkeresés ténye (melyik felhaszná
 
 ## 5.8. Fennmaradó kockázat
 
-Valamennyi felsorolt intézkedés alkalmazása után a fennmaradó kockázat elfogadhatónak minősül. A legmagasabb fennmaradó kockázatok az R1 (jogosulatlan hozzáférés), az R2 (újraazonosítás), az R8 (határokon átnyúló továbbítás), az R11 (különleges kategóriához tartozás feltárása a hitelesítők előtt) és az R16 (gyermektér), mindegyik közepes szinten (5–8). Az R5 kockázat (a hirdetés nyilvános láthatósága) a tábla megszüntetésével és az adatkezelés szűkítésével alacsony szintre (4) csökken. E kockázatok folyamatos felügyelettel, rendszeres teszteléssel és az intézkedések frissítésével tovább csökkenthetők.
+Valamennyi felsorolt intézkedés alkalmazása után a fennmaradó kockázat elfogadhatónak minősül. A legmagasabb fennmaradó kockázatok az R1 (jogosulatlan hozzáférés), az R2 (újraazonosítás), az R8 (határokon átnyúló továbbítás), az R11 (különleges kategóriához tartozás feltárása a hitelesítők előtt), az R13 (az adományozó anonimitásának megszűnése az adományok nyilvános listáján keresztül) és az R16 (gyermektér), mindegyik közepes szinten (5–8). Az R5 kockázat (a hirdetés nyilvános láthatósága) a tábla megszüntetésével és az adatkezelés szűkítésével alacsony szintre (4) csökken. E kockázatok folyamatos felügyelettel, rendszeres teszteléssel és az intézkedések frissítésével tovább csökkenthetők.
 
 ## 6. Az érintettek jogai
 
@@ -249,7 +249,7 @@ További kockázatok: a kiskorúak különösen kiszolgáltatott csoport; a bar�
 
 A lefolytatott vizsgálat alapján:
 
-Tizenhét, az érintettek jogaira és szabadságaira vonatkozó kockázat került azonosításra. Egyetlen kockázat sem minősült magasnak. Hét kockázat közepes szintű (R1, R2, R5, R8, R11, R13, R16), tíz pedig alacsony (R3, R4, R6, R7, R9, R10, R12, R14, R15, R17).
+Tizenhét, az érintettek jogaira és szabadságaira vonatkozó kockázat került azonosításra. Egyetlen kockázat sem minősült magasnak. Hat kockázat közepes szintű (R1, R2, R8, R11, R13, R16), tizenegy pedig alacsony (R3, R4, R5, R6, R7, R9, R10, R12, R14, R15, R17).
 
 Minden azonosított kockázathoz megfelelő technikai és szervezési védelmi intézkedések kerültek alkalmazásra. Az intézkedések alkalmazása utáni fennmaradó kockázat elfogadhatónak minősül.
 

@@ -29,7 +29,7 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_1.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_4_2.md",
+  "DPIA_4_4_3.md",
   "radnje_obrade_4_4_2.md",
   "uslovi_koriscenja_4_4_3.md",
   "politika_4_4_2.md",
@@ -121,10 +121,13 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
   },
-  "DPIA_4_4_2.md": {
-    sr: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
-    en: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
-    ru: ["R15 —", "## 5.10.", "R17 —", "## 5.12."],
+  // 4.4.3 — ispravljen zbir u zaključku: tabela daje R5 = 4 (nizak), a zaključak ga
+  // je vodio među srednjima i izostavljao R13 iz spiska najviših. Brojevi se traže
+  // doslovno da se aritmetika procene ne raziđe sa sopstvenom tabelom rizika.
+  "DPIA_4_4_3.md": {
+    sr: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16)"],
+    en: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Six risks are at the medium level (R1, R2, R8, R11, R13, R16)"],
+    ru: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Шесть рисков находятся на среднем уровне (R1, R2, R8, R11, R13, R16)"],
   },
   // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
   // izbor jedne mogućnosti između više njih nije prosta većina i bez ove odredbe kod
@@ -149,6 +152,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Koeficijent trošenja iznosi 1,00",
       "iz niza 100, 50 i 20",
       "utvrđuje se odlukom kojom se nabavka pokreće",
+      "najmanje 20.000 evidentiranih POEN-a",
       "nije cena dobra",
       "ne mora stajati u srazmeri",
       "najmanje tri ponude",
@@ -160,6 +164,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The spending coefficient is 1.00",
       "from the sequence 100, 50, and 20",
       "established by the decision initiating the procurement",
+      "at least 20,000 recorded POEN",
       "is not a price of the good",
       "need not stand in proportion",
       "at least three offers",
@@ -170,6 +175,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Коэффициент расходования составляет 1,00",
       "из ряда 100, 50 и 20",
       "устанавливается решением, которым начинается закупка",
+      "не менее 20 000 ПОЕН",
       "не является ценой блага",
       "не обязано находиться с ней в соотношении",
       "не менее трёх оферт",

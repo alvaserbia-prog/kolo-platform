@@ -382,7 +382,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
       {tab === "dashboard" && <DashboardTab data={dashboard} onRefresh={() => router.refresh()} />}
 
       {/* Programi */}
-      {tab === "programi" && <AdminProgramiTab data={adminProgrami} opticaj={opticaj} onDone={() => router.refresh()} />}
+      {tab === "programi" && <AdminProgramiTab data={adminProgrami} opticaj={opticaj} sme={viewerJeSuperadmin} onDone={() => router.refresh()} />}
 
       {/* Evidencija doprinosa */}
       {tab === "ped" && <AdminPedTab data={adminPed} onDone={() => router.refresh()} />}
@@ -900,7 +900,7 @@ function NoviOglasForma({ oglas, onSuccess, onCancel }: { oglas?: AdminOglasItem
 
 // ── Programi tab ──────────────────────────────────────────────────────────────
 
-function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; opticaj: number; onDone: () => void }) {
+function AdminProgramiTab({ data, opticaj, sme, onDone }: { data: AdminProgramiData; opticaj: number; sme: boolean; onDone: () => void }) {
   const locale = useLocale();
   const t = useTranslations("admin");
   const [loadingToggle, setLoadingToggle] = useState<string | null>(null);
@@ -1036,7 +1036,7 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
         <div className="space-y-3">
           <h3 className="text-sm font-semibold text-kolo-muted">{t("programi_prijave_naslov", { count: data.pendingEnrollments.length })}</h3>
           {data.pendingEnrollments.map((e) => (
-            <EnrollmentKartica key={e.id} e={e} onOdobri={(amt) => odobriEnrollment(e.id, amt)} onOdbij={() => odbijEnrollment(e.id)} />
+            <EnrollmentKartica key={e.id} e={e} sme={sme} onOdobri={(amt) => odobriEnrollment(e.id, amt)} onOdbij={() => odbijEnrollment(e.id)} />
           ))}
         </div>
       )}
@@ -1069,8 +1069,10 @@ function AdminProgramiTab({ data, opticaj, onDone }: { data: AdminProgramiData; 
   );
 }
 
-function EnrollmentKartica({ e, onOdobri, onOdbij }: {
+function EnrollmentKartica({ e, sme, onOdobri, onOdbij }: {
   e: PendingEnrollment;
+  /** Superadmin — jedini koji vidi unete podatke i jedini koji odlučuje (DPIA 5.6). */
+  sme: boolean;
   onOdobri: (dailyAmount?: number) => void;
   onOdbij: () => void;
 }) {
@@ -1090,12 +1092,13 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
         </div>
         <span className="text-xs text-kolo-muted">{new Date(e.createdAt).toLocaleDateString(intlTag(locale))}</span>
       </div>
-      {e.type === "SKOLOVANJE" && (
+      {!sme && <p className="text-xs text-kolo-muted">{t("programi_samo_superadmin")}</p>}
+      {sme && e.type === "SKOLOVANJE" && (
         <input type="number" min={100} placeholder={t("programi_dnevni_iznos_placeholder")} value={dailyAmount}
           onChange={(ev) => setDailyAmount(ev.target.value)}
           className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
       )}
-      <div className="flex gap-2">
+      {sme && <div className="flex gap-2">
         <button onClick={() => onOdobri(dailyAmount ? Number(dailyAmount) : undefined)}
           disabled={e.type === "SKOLOVANJE" && !dailyAmount}
           className="flex-1 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 disabled:opacity-60 transition-colors">
@@ -1105,7 +1108,7 @@ function EnrollmentKartica({ e, onOdobri, onOdbij }: {
           className="flex-1 py-2 rounded-xl border border-kolo-danger/20 text-kolo-danger text-sm font-semibold hover:bg-kolo-danger-light transition-colors">
           {t("krug_odbij")}
         </button>
-      </div>
+      </div>}
     </div>
   );
 }

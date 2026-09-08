@@ -202,7 +202,13 @@ Kalkulacija se ne mijenja nakon objave. Izmjena kalkulacije zahtijeva obustavu i
 
 *Prijava*
 
-Na objavljenu nabavu prijavljuje se svaki punoljetni korisnik s aktivnim računom, bez obzira na to koji je naziv predložio i je li uopće podnio prijedlog.
+Na objavljenu nabavu prijavljuje se svaki punoljetni korisnik s aktivnim računom čiji zapis sadrži najmanje 20.000 evidentiranih POEN-a, bez obzira na to koji je naziv predložio i je li uopće podnio prijedlog.
+
+Prag iz stavka 1. jednak je minimumu evidentiranih POEN-a za upis ZRNA iz članka 19. Pravilnika o KOLO sustavu. Podrijetlo POEN-a se ne ispituje; svi kanali evidentiranja doprinosa vrijede jednako.
+
+Prag se provjerava pri podnošenju prijave i ponovno u trenutku isteka roka za prijavu, istodobno s utvrđivanjem redoslijeda iz članka 22. Korisnik koji na istek roka ne ispunjava prag ne ulazi u redoslijed.
+
+Prag ne dira pravo na podnošenje prijedloga za nabavu iz članka 9., koje pripada svakom punoljetnom korisniku s aktivnim računom.
 
 Rok za prijavu iznosi tri dana od objave kalkulacije.
 

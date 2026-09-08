@@ -149,6 +149,23 @@ van sistema** (odluka vlasnika). Sadržinski:
   ugovor o razmeni dinara za POEN) — one nose odbranu i treba da stoje **uz sam
   paritet**, ne dvadeset članova dalje.
 
+- **Nabavke, čl. 21 — PRAG ZA PRIJAVU.** Prijavljuje se korisnik čiji zapis sadrži
+  najmanje **20.000 evidentiranih POEN-a**. Broj nije proizvoljan: jednak je minimumu
+  za upis ZRNA iz čl. 19 Pravilnika, pa prag ima uporište u aktu („za učešće u
+  raspodeli sredstava zajednice traži se isti red veličine doprinosa kao za ulazak u
+  upravljanje njome"). 🔴 **Poreklo POEN-a se NE ispituje** — donacija vredi kao i
+  operativni doprinos (odluka vlasnika). Prag se meri **dvaput**: pri prijavi i
+  ponovo na istek roka, istovremeno sa snimkom reda; ko tada padne ispod praga ostaje
+  bez `mesto`, a `pozoviSledeceg` uzima samo redove sa mestom. Prag **ne dira** pravo
+  na predlog iz čl. 9 — zato stoji u čl. 21, a ne u čl. 4: da stoji u čl. 4, presekao
+  bi i predlaganje, pa bi registar predloga prestao da meri potrebu cele zajednice.
+  🟡 Operativno menja malo (čl. 22 ionako sortira po POEN-u, a broj delova odseca
+  krug); funkcija je deklarativna.
+- **DPIA na 4.4.3 — ispravljen zbir u zaključku.** Tačka 9 je vodila **sedam** rizika
+  kao srednje, uključujući R5, a tabela rizika daje R5 = 4 (nizak); uz to je tačka
+  5.8 izostavljala R13 iz spiska najviših. Tačno je **šest srednjih** (R1, R2, R8,
+  R11, R13, R16) i **jedanaest niskih**. Brojevi su zaključani testom.
+
 🟡 **Uslovi su ostali na 4.4.3** iako su menjani dvaput istog dana: 4.4.3 nije bio
 objavljen ni na `main`-u ni na produkciji kad je došla izmena čl. 19, pa nema
 verzije koja bi „govorila nešto drugo nego kad je objavljena". Nabavke su prvi put
@@ -604,10 +621,11 @@ kad rezervacija postoji). Testovi `__tests__/nabavka-pravila.test.ts` (46 prover
 `NABAVKA_PONUDA_DODATA/OBRISANA`, `NABAVKA_OBJAVLJENA`, `NABAVKA_RED_UTVRDJEN`,
 `NABAVKA_PLACENA`, `NABAVKA_PREUZETO`, `NABAVKA_OBUSTAVLJENA`, `NABAVKA_IZBOR_*`.
 
-🟡 **Kriterijumi uključivanja ne postoje** — prijavljuje se svaki punoletni korisnik
-sa aktivnim nalogom, bez obzira šta je predložio. Reč zato ne filtrira sama sebe.
-Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči —
-ne uvoditi proveru statusa (to bi vratilo prikupljanje podataka o delatnosti).
+🟡 **Jedini kriterijum je PRAG od 20.000 POEN** (čl. 21, od 4.4.3) — bez obzira na
+kanal kroz koji je POEN nastao i bez obzira šta je korisnik predložio. Reč zato ne
+filtrira sama sebe. Ako to postane problem, poluga je rezervisati prvih M mesta
+predlagačima te reči — ne uvoditi proveru statusa (to bi vratilo prikupljanje
+podataka o delatnosti).
 
 🟡 **Maloletni nalozi su isključeni IZRIČITO** (`smeUcestvovati`), ne posredno preko
 indeksa: dete sme da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju.
@@ -1208,6 +1226,8 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 - 🔴 **Socijalni program traži indeks ≥ 10% — jednu primljenu potvrdu (od seta 4.3.1, 2026-08-18).** Do tada je čl. 4 Pravilnika o programima podrške tražio **pun indeks (100%)**, pa su prijavu mogli da podnesu samo nalozi sa svih deset potvrda; u kodu je to bio zaseban `MAX_INDEKS` gejt u `POST /api/programi/[type]/prijava`, iznad već postojećeg `imaFunkcionalniPristup`. Taj gejt je uklonjen — prag sada drži jedno mesto. Isto važi i za obustavu: `razlogObustaveProgram` (`programi.ts`, cron `/api/cron/programi-revizija`) gasi ACTIVE prijavu tek kad indeks padne **ispod 10%**, ne ispod 100%; ranije je jedna poništena potvrda gasila program čoveku koji uslov i dalje ispunjava. UI prop se zove `imaPristupProgramima` (bio `imaPunIndeks`).
 - **Ostatak čl. 4 je netaknut:** izričit pristanak podnosioca i potvrda SVIH njegovih verifikatora pod punom odgovornošću, bez uvida u unete podatke; Fondacija ne odobrava dok svi ne potvrde. Copy (`programi.nepun_indeks`, `programi.pristanak_tekst`, 5 jezika) više ne pominje „svih deset" — broj verifikatora zavisi od indeksa.
 - Dnevni limit (10% opticaja), proporcionalno smanjenje pri prekoračenju.
+- 🔴 **Unete podatke prijave vidi i odluku donosi ISKLJUČIVO SUPERADMIN (2026-09-07).** DPIA 5.6 kaže da su uneti podaci „dostupni isključivo licu koje obrađuje prijavu u Fondaciji", a do ove izmene ih je video svaki admin — tekst mere bio je **uži od primene**. Sada `GET /api/admin/programi` i SSR u `admin/page.tsx` šalju `metadata` samo superadminu, a rute `enrollments/[id]/{odobri,odbij}` traže `jeSuperadmin`. Odluka i uvid idu zajedno: odlučivanje bez uvida bilo bi odlučivanje na slepo. Običan admin vidi pseudonim, program i datum, uz napomenu `admin.programi_samo_superadmin`. Isti obrazac kao revizijski dnevnik i nadzor.
+- 🟢 **Posebne kategorije se čuvaju minimalno (provereno 2026-09-07):** `buildMetadata` upisuje samo datume rođenja dece **bez imena**, datum rođenja, **datum rešenja i opcioni datum isteka** bez broja, organa i dijagnoze, i naziv ustanove. Raniji nalaz da se čuva `dijagnoza` je **zastareo i netačan** (ispravljen u `docs/analiza-kod-vs-pravilnici.md`). Enkripcije na nivou aplikacije nema, ali je DPIA ni ne obećava — tačka 5.1 govori o enkripciji **na nivou hosting infrastrukture**.
 
 ### Moduli sistema (Pravilnik Glava VIII, čl. 53–59)
 - Glava VIII = **Moduli**: kolektivni oblici (**Krug**, **Zadruga** — registrovano pravno lice po Zakonu o zadrugama), socijalni programi, **Modul Deca** (maloletnici, poseban režim < 15, bez ZRNA/glasanja do 18), internacionalizacija.

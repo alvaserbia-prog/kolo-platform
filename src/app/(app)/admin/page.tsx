@@ -201,7 +201,9 @@ export default async function AdminPage({
         }),
         pendingEnrollments: adminProgrami[2].map((e) => ({
           id: e.id, pseudonim: e.user.pseudonim, type: e.type, label: labelPrograma(e.type),
-          metadata: e.metadata as Record<string, unknown> | null, createdAt: e.createdAt.toISOString(),
+          // Posebne kategorije — samo superadminu (DPIA 5.6). Vidi /api/admin/programi.
+          metadata: viewerJeSuperadmin ? (e.metadata as Record<string, unknown> | null) : null,
+          createdAt: e.createdAt.toISOString(),
         })),
         poslednjeEmisije: adminProgrami[3].map((s) => ({
           date: s.date.toISOString(), opticaj: s.opticaj, limit: s.limit,

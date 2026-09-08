@@ -13,6 +13,8 @@ import {
   raspolozivoZaProjekte,
   iznosNabavke,
   validanPoenPoDelu,
+  ispunjavaPrag,
+  PRAG_POENA_ZA_UCESCE,
   najveciBrojJedinica,
   izvediPodelu,
   izracunajKalkulaciju,
@@ -107,6 +109,26 @@ describe("broj POEN-a po delu (čl. 17)", () => {
     expect(validanPoenPoDelu(-100)).toBe(false);
     expect(validanPoenPoDelu(4280.5)).toBe(false);
     expect(validanPoenPoDelu(Number.NaN)).toBe(false);
+  });
+});
+
+// Čl. 21 st. 1 — prag za prijavu. Vezan je za minimum za upis ZRNA iz čl. 19
+// Pravilnika (20.000), da ne bi bio proizvoljan broj. Poreklo POEN-a se ne gleda.
+describe("prag za učešće (čl. 21)", () => {
+  it("prag je 20.000 POEN", () => {
+    expect(PRAG_POENA_ZA_UCESCE).toBe(20_000);
+  });
+
+  it("na tačnoj granici prolazi", () => {
+    expect(ispunjavaPrag(20_000)).toBe(true);
+    expect(ispunjavaPrag(19_999)).toBe(false);
+    expect(ispunjavaPrag(0)).toBe(false);
+  });
+
+  // Nadoknada i poništen prepis mogu odvesti zapis u minus (čl. 14 st. 3
+  // Pravilnika) — takav nalog ne ulazi u red.
+  it("negativan zapis ne ispunjava prag", () => {
+    expect(ispunjavaPrag(-5_000)).toBe(false);
   });
 });
 

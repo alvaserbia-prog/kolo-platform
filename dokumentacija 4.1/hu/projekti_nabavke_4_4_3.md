@@ -202,7 +202,13 @@ A kalkuláció a közzététel után nem módosul. A kalkuláció módosítása 
 
 *Jelentkezés*
 
-A közzétett beszerzésre minden aktív fiókkal rendelkező nagykorú felhasználó jelentkezik, függetlenül attól, hogy melyik megnevezést javasolta, és hogy egyáltalán nyújtott-e be javaslatot.
+A közzétett beszerzésre minden aktív fiókkal rendelkező nagykorú felhasználó jelentkezik, akinek bejegyzése legalább 20.000 nyilvántartott POEN-t tartalmaz, függetlenül attól, hogy melyik megnevezést javasolta, és hogy egyáltalán nyújtott-e be javaslatot.
+
+Az (1) bekezdés szerinti küszöb megegyezik a ZRNO bejegyzéséhez szükséges nyilvántartott POEN minimumával a KOLO rendszerről szóló szabályzat 19. cikke szerint. A POEN eredetét nem vizsgálják; a hozzájárulás valamennyi nyilvántartási csatornája egyenlő értékű.
+
+A küszöböt a jelentkezés benyújtásakor és ismét a jelentkezési határidő lejártakor kell ellenőrizni, egyidejűleg a 22. cikk szerinti sorrend megállapításával. Az a felhasználó, aki a határidő lejártakor nem éri el a küszöböt, nem kerül be a sorrendbe.
+
+A küszöb nem érinti a 9. cikk szerinti beszerzési javaslat benyújtásának jogát, amely minden aktív fiókkal rendelkező nagykorú felhasználót megillet.
 
 A jelentkezési határidő a kalkuláció közzétételétől számított három nap.
 

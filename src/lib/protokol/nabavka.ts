@@ -31,6 +31,8 @@ import {
   krajPeriodaPreuzimanja,
   danJeUPeriodu,
   smeUcestvovati,
+  ispunjavaPrag,
+  PRAG_POENA_ZA_UCESCE,
   utvrdiIzbor,
   predlogIstice,
 } from "@/lib/nabavka-pravila";
@@ -358,7 +360,7 @@ export async function prijaviSe(userId: string, nabavkaId: string) {
   const [korisnik, n] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
-      select: { maloletan: true, deaktiviranAt: true, status: true },
+      select: { maloletan: true, deaktiviranAt: true, status: true, wallet: { select: { balance: true } } },
     }),
     prisma.nabavka.findUnique({ where: { id: nabavkaId }, select: { status: true, prijaveDo: true } }),
   ]);
@@ -366,6 +368,14 @@ export async function prijaviSe(userId: string, nabavkaId: string) {
   if (!n) throw new NabavkaGreska("Nabavka nije pronađena.", 404);
   if (!smeUcestvovati(korisnik)) {
     throw new NabavkaGreska("U nabavci učestvuju punoletni korisnici sa aktivnim nalogom (čl. 4).", 403);
+  }
+  // Čl. 21 st. 1 — prag se proverava pri prijavi i PONOVO na istek roka, kad se
+  // utvrđuje red; ko tada ne ispunjava prag, ne ulazi u red.
+  if (!ispunjavaPrag(korisnik.wallet?.balance ?? 0)) {
+    throw new NabavkaGreska(
+      `Za prijavu je potrebno najmanje ${PRAG_POENA_ZA_UCESCE.toLocaleString("sr-RS")} evidentiranih POEN-a (čl. 21).`,
+      403
+    );
   }
   if (n.status !== "OBJAVLJENA") throw new NabavkaGreska("Prijave nisu otvorene.");
   if (n.prijaveDo && n.prijaveDo.getTime() <= Date.now()) throw new NabavkaGreska("Rok za prijavu je istekao.");
@@ -421,14 +431,19 @@ export async function zatvoriPrijaveIUtvrdiRed(nabavkaId: string) {
     },
   });
 
+  // Čl. 21 st. 1 — prag se meri u istom trenutku u kome se snima red. Ko je između
+  // prijave i isteka roka potrošio POEN i pao ispod praga, ne ulazi u red: ostaje
+  // bez `mesto`, a `pozoviSledeceg` uzima isključivo redove sa mestom.
   const red = poredjajRed(
-    prijave.map((p) => ({
-      id: p.id,
-      userId: p.userId,
-      poen: Math.max(0, p.user.wallet?.balance ?? 0),
-      prijavljenoAt: p.createdAt,
-      nalogOd: p.user.createdAt,
-    }))
+    prijave
+      .map((p) => ({
+        id: p.id,
+        userId: p.userId,
+        poen: Math.max(0, p.user.wallet?.balance ?? 0),
+        prijavljenoAt: p.createdAt,
+        nalogOd: p.user.createdAt,
+      }))
+      .filter((p) => ispunjavaPrag(p.poen))
   );
 
   await prisma.$transaction(async (tx) => {

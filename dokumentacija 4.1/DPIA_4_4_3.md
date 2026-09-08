@@ -188,7 +188,7 @@ Minimizacija — jedini nov podatak je činjenica upita (koji korisnik se javio 
 
 ## 5.8. Rezidualni rizik
 
-Nakon primene svih navedenih mera, rezidualni rizik se ocenjuje kao prihvatljiv. Najviši rezidualni rizici su R1 (neovlašćen pristup), R2 (reidentifikacija), R8 (prekogranični prenos), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima) i R16 (dečji prostor), svi na srednjem nivou (5–8). Rizik R5 (javna vidljivost oglasa) ukidanjem table i sužavanjem obrade pada na nizak nivo (4). Ovi rizici se dodatno umanjuju kontinuiranim nadzorom, redovnim testiranjem i ažuriranjem mera.
+Nakon primene svih navedenih mera, rezidualni rizik se ocenjuje kao prihvatljiv. Najviši rezidualni rizici su R1 (neovlašćen pristup), R2 (reidentifikacija), R8 (prekogranični prenos), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima), R13 (deanonimizacija donatora kroz javnu listu donacija) i R16 (dečji prostor), svi na srednjem nivou (5–8). Rizik R5 (javna vidljivost oglasa) ukidanjem table i sužavanjem obrade pada na nizak nivo (4). Ovi rizici se dodatno umanjuju kontinuiranim nadzorom, redovnim testiranjem i ažuriranjem mera.
 
 ## 6. Prava lica na koja se podaci odnose
 
@@ -247,7 +247,7 @@ Dodatni rizici: maloletna lica su posebno ranjiva kategorija; graf prijateljstav
 
 Na osnovu sprovedene procene:
 
-Identifikovano je sedamnaest rizika po prava i slobode lica na koja se podaci odnose. Nijedan rizik nije ocenjen kao visok. Sedam rizika je na srednjem nivou (R1, R2, R5, R8, R11, R13, R16), a deset na niskom (R3, R4, R6, R7, R9, R10, R12, R14, R15, R17).
+Identifikovano je sedamnaest rizika po prava i slobode lica na koja se podaci odnose. Nijedan rizik nije ocenjen kao visok. Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16), a jedanaest na niskom (R3, R4, R5, R6, R7, R9, R10, R12, R14, R15, R17).
 
 Za svaki identifikovani rizik primenjene su odgovarajuće tehničke i organizacione mere zaštite. Rezidualni rizik nakon primene mera ocenjuje se kao prihvatljiv.
 

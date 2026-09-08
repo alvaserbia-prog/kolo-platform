@@ -934,7 +934,7 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.4.2"
+      "ver": "4.4.3"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
@@ -976,7 +976,7 @@
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.2",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.3",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.2",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
@@ -2197,6 +2197,7 @@
     "programi_greska_prefix": "Greška: {msg}",
     "programi_odbij_razlog_prompt": "Razlog odbijanja (opciono):",
     "programi_dnevni_iznos_placeholder": "Dnevni iznos POEN *",
+    "programi_samo_superadmin": "Unete podatke i odluku o prijavi vidi i donosi superadmin (posebne kategorije podataka).",
     "emisija_opticaj_label": "Ukupno POEN-a",
     "emisija_dnevni_limit": "Dnevni limit programa",
     "emisija_dnevni_limit_sub": "10% ukupnog broja POEN-a",
