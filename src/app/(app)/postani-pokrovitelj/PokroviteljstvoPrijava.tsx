@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations, useLocale } from "next-intl";
@@ -38,28 +38,10 @@ export default function PokroviteljstvoPrijava() {
   const [naziv, setNaziv] = useState("");
   const [pib, setPib] = useState("");
   const [vrednost, setVrednost] = useState("");
-  // Knjigovodstvena isprava iz poslovnih knjiga pokrovitelja (čl. 7) — pokazuje
-  // da davanje potiče iz imovine firme, a ne iz ličnog džepa podnosioca.
-  const [isprava, setIsprava] = useState<string | null>(null);
   const [greska, setGreska] = useState("");
-  const ispravaRef = useRef<HTMLInputElement>(null);
-
-  function onIsprava(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0];
-    setGreska("");
-    if (!f) { setIsprava(null); return; }
-    if (f.size > MAX_BYTES) { setGreska(t("forma_isprava_prevelika")); if (ispravaRef.current) ispravaRef.current.value = ""; return; }
-    const reader = new FileReader();
-    reader.onload = () => setIsprava(typeof reader.result === "string" ? reader.result : null);
-    reader.readAsDataURL(f);
-  }
 
   async function posalji() {
     setGreska("");
-    if (!isprava) {
-      setGreska(t("forma_isprava_obavezna"));
-      return;
-    }
     if (Number(vrednost) < MINIMUM_PRIJAVE_POKROVITELJSTVA) {
       setGreska(t("forma_minimum", { iznos: MINIMUM_PRIJAVE_POKROVITELJSTVA.toLocaleString(intlTag(locale)) }));
       return;
@@ -68,13 +50,12 @@ export default function PokroviteljstvoPrijava() {
     const res = await fetch("/api/pokroviteljstvo/prijava", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: "NOVAC", vrednostRsd: Number(vrednost), ispravaSlika: isprava }),
+      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: "NOVAC", vrednostRsd: Number(vrednost) }),
     });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok) {
-      setNaziv(""); setPib(""); setVrednost(""); setIsprava(null);
-      if (ispravaRef.current) ispravaRef.current.value = "";
+      setNaziv(""); setPib(""); setVrednost("");
       await refetch();
     } else setGreska(d.error ?? t("forma_greska_slanja"));
   }
@@ -124,14 +105,9 @@ export default function PokroviteljstvoPrijava() {
             </p>
           </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_isprava_label")}</label>
-          <input ref={ispravaRef} type="file" accept="image/*" onChange={onIsprava} className="text-sm" />
-          <p className="mt-1 text-xs text-kolo-muted">{t("forma_isprava_napomena")}</p>
-        </div>
         {greska && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>}
         <button onClick={posalji}
-          disabled={radnja === "posalji" || !naziv.trim() || !pib.trim() || !vrednost || Number(vrednost) <= 0 || !isprava}
+          disabled={radnja === "posalji" || !naziv.trim() || !pib.trim() || !vrednost || Number(vrednost) <= 0}
           className="px-5 py-2.5 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50">
           {radnja === "posalji" ? t("forma_saljem") : t("forma_podnesi")}
         </button>

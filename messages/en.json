@@ -1896,11 +1896,7 @@
     "potpisi": "Sign",
     "greska_ucitavanje": "Error while loading the applications.",
     "forma_minimum": "The minimum sponsorship amount is {iznos} RSD.",
-    "forma_minimum_napomena": "The minimum sponsorship amount is {iznos} RSD. Sponsorship is a donation of money.",
-    "forma_isprava_label": "Accounting document (image)",
-    "forma_isprava_napomena": "A business account statement, a transfer order or other proof of entry, for the same amount and from the same payer. It shows that the payment originates from the assets of the legal entity or entrepreneur, and not from your personal assets.",
-    "forma_isprava_prevelika": "The document is too large (max. ~3MB).",
-    "forma_isprava_obavezna": "Attach the accounting document."
+    "forma_minimum_napomena": "The minimum sponsorship amount is {iznos} RSD. Sponsorship is a donation of money."
   },
   "doprinosOglasi": {
     "naslov": "Contribution Tasks",
@@ -2462,8 +2458,6 @@
     "pokr_prijave_odbij_razlog_prompt": "Reason for rejection (the member will see it):",
     "pokr_prijave_ugovor_naslov": "Ugovor o donaciji",
     "pokr_prijave_zatvori": "Zatvori",
-    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
-    "pokr_prijave_isprava_alt": "Isprava",
     "donacije_nacin_ips": "IPS QR",
     "donacije_izvod_naslov": "Record a payment from the statement",
     "donacije_izvod_opis": "Enter the reference number from the incoming payment (model 97) — it identifies the member. The check digits are validated, so a wrong copy cannot get through.",

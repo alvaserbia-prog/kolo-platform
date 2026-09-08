@@ -109,8 +109,6 @@ A pártfogást a rendszer hitelesített felhasználója indítja meg pártfogás
 
 A kérelem tartalmazza: a jogi személy vagy egyéni vállalkozó nevét, az adóazonosító számot és az adomány dinárban kifejezett összegét. A pártfogási kérelem legkisebb összege 10.000 dinár.
 
-A kérelemhez csatolni kell azt a számviteli bizonylatot, amellyel a pártfogó ugyanezt a kifizetést a saját üzleti könyveiben nyilvántartásba veszi — üzleti számlakivonatot, átutalási megbízást vagy a könyvelés egyéb bizonyítékát, azonos összegre és azonos fizető féltől. A bizonylat igazolja, hogy a kifizetés a jogi személy, illetve az egyéni vállalkozó vagyonából származik, nem pedig a kérelmet benyújtó felhasználó személyes vagyonából.
-
 A kérelem benyújtását követően a platform automatikusan létrehozza az adományozási szerződést a megjelölt pártfogó és az Alapítvány között. Az adományozási szerződés nem tartalmaz a POEN-re, sem a POEN nyilvántartásba vételére vonatkozó rendelkezéseket.
 
 ### 8. cikk — Aláírás és teljesítés

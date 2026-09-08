@@ -13,13 +13,12 @@ type Prijava = {
   pib: string;
   vrstaDonacije: "NOVAC" | "ROBA" | "USLUGE";
   vrednostRsd: number;
-  imaIspravu: boolean;
   status: "CEKA_POTPIS" | "POTPISANA" | "POTVRDJENA" | "ODBIJENA";
   odbijenoRazlog: string | null;
   createdAt: string;
 };
 
-type Detalji = Prijava & { ugovorTekst: string; ispravaSlika: string | null };
+type Detalji = Prijava & { ugovorTekst: string };
 
 export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }) {
   const locale = useLocale();
@@ -121,13 +120,6 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
           <div className="bg-white rounded-2xl max-w-lg w-full max-h-[85vh] overflow-auto p-6 space-y-4" onClick={(e) => e.stopPropagation()}>
             <h3 className="font-semibold text-kolo-text">{t("pokr_prijave_ugovor_naslov")}</h3>
             <pre className="text-xs text-kolo-text whitespace-pre-wrap font-sans bg-kolo-bg rounded-xl p-4">{detalji.ugovorTekst}</pre>
-            {detalji.ispravaSlika && (
-              <div>
-                <p className="text-sm font-medium text-kolo-muted mb-2">{t("pokr_prijave_isprava_naslov")}</p>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={detalji.ispravaSlika} alt={t("pokr_prijave_isprava_alt")} className="w-full rounded-xl border border-kolo-border" />
-              </div>
-            )}
             <button onClick={() => setDetalji(null)} className="px-4 py-2 rounded-xl bg-kolo-bg border border-kolo-border text-sm font-semibold text-kolo-muted">
               {t("pokr_prijave_zatvori")}
             </button>

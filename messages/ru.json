@@ -1896,11 +1896,7 @@
     "potpisi": "Подписать",
     "greska_ucitavanje": "Ошибка при загрузке заявок.",
     "forma_minimum": "Минимальная сумма покровительства — {iznos} RSD.",
-    "forma_minimum_napomena": "Минимальная сумма покровительства — {iznos} RSD. Покровительство является денежным пожертвованием.",
-    "forma_isprava_label": "Бухгалтерский документ (изображение)",
-    "forma_isprava_napomena": "Выписка с расчётного счёта, платёжное поручение или иное доказательство проводки, на ту же сумму и от того же плательщика. Им ты показываешь, что выплата происходит из имущества юридического лица либо индивидуального предпринимателя, а не из твоего личного имущества.",
-    "forma_isprava_prevelika": "Документ слишком большой (макс. ~3 МБ).",
-    "forma_isprava_obavezna": "Приложи бухгалтерский документ."
+    "forma_minimum_napomena": "Минимальная сумма покровительства — {iznos} RSD. Покровительство является денежным пожертвованием."
   },
   "doprinosOglasi": {
     "naslov": "Операционный вклад",
@@ -2462,8 +2458,6 @@
     "pokr_prijave_odbij_razlog_prompt": "Причина отказа (участник её увидит):",
     "pokr_prijave_ugovor_naslov": "Ugovor o donaciji",
     "pokr_prijave_zatvori": "Zatvori",
-    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
-    "pokr_prijave_isprava_alt": "Isprava",
     "donacije_nacin_ips": "IPS QR",
     "donacije_izvod_naslov": "Учесть платёж из выписки",
     "donacije_izvod_opis": "Введи номер платежа из поступления (модель 97) — он определяет участника. Контрольные цифры сверяются, поэтому неверная переписка не пройдёт.",

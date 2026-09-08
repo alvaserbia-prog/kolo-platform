@@ -109,8 +109,6 @@ Pokroviteljstvo pokreće verificirani korisnik sustava podnošenjem prijave pokr
 
 Prijava sadrži: naziv pravne osobe ili obrtnika, OIB i iznos donacije u dinarima. Najmanji iznos prijave pokroviteljstva jest 10.000 dinara.
 
-Uz prijavu se prilaže knjigovodstvena isprava kojom pokrovitelj to isto davanje evidentira u vlastitim poslovnim knjigama — izvod s poslovnog računa, nalog za prijenos ili drugi dokaz o knjiženju, na isti iznos i s istim davateljem. Isprava potvrđuje da davanje potječe iz imovine pravne osobe odnosno obrtnika, a ne iz osobne imovine korisnika koji podnosi prijavu.
-
 Po podnošenju prijave platforma automatski generira ugovor o donaciji između navedenog pokrovitelja i Zaklade. Ugovor o donaciji ne sadrži odredbe o POEN-u niti o evidentiranju POEN-a.
 
 ### Članak 8. — Potpisivanje i izvršenje

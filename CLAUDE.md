@@ -762,10 +762,9 @@ za nivo.
   pogrešna). **Ne prepisivati tabele u ekrane.**
 - `GET /api/donacije` šalje `tabelaZaPrikaz()` (14 redova) umesto `RANG_TABELA`.
 
-**Baza se NE menja.** Enum `VrstaDonacije` (NOVAC/ROBA/USLUGE) i kolona
-`cenovnikSlika` ostaju — nose ih zatečeni zapisi. `ispravaSlika` je **u aktivnoj
-upotrebi** (obavezna uz svaku prijavu, vidi pasus iznad), pa nije mrtvo polje.
-`Pokrovitelj.trenutniNivo` i `rsdKumulativ` ostaju.
+**Baza se NE menja.** Enum `VrstaDonacije` (NOVAC/ROBA/USLUGE) i kolone
+`cenovnikSlika`/`ispravaSlika` ostaju — nose ih zatečeni zapisi, a `ispravaSlika` je
+polje za mogući povratak robe. `Pokrovitelj.trenutniNivo` i `rsdKumulativ` ostaju.
 
 **Testovi:** `__tests__/protokol/pokrovitelj.test.ts` prepisan (odnos ×1,20 na svakom
 pragu, svih dvanaest objavljenih redova, kontinuitet zatečenih nivoa, minimum);
@@ -794,11 +793,24 @@ ceo osnivački kanal odjednom. **Odluka vlasnika: ne rešava se sada.**
 Odluke uz analizu rizika **R-05** (pokroviteljstvo pravnih lica i preduzetnika).
 Izmenjeni čl. 7, 11 i 13 `donacije_4_4_3.md` na svih pet jezika, uz izmenu koda.
 
-🔴 **DELIMIČNO PREVAZIĐENO ISTOG DANA — roba i usluge su UKINUTE** (vidi sekciju
-„Tabele donacija i pokroviteljstva" ispod). Sve što naredni pasus kaže o
-**maloprodajnoj ceni** više ne važi — ta odredba nema predmet i izbrisana je iz
-akta. 🟢 **Knjigovodstvena isprava OSTAJE** (odluka vlasnika, isti dan: „k3
-vrati") — samo je promenila predmet, vidi pasus o njoj ispod.
+🔴 **PREVAZIĐENO ISTOG DANA — roba i usluge su UKINUTE** (vidi sekciju „Tabele
+donacija i pokroviteljstva" ispod). Sve što ovaj pasus i naredni kažu o
+maloprodajnoj ceni i knjigovodstvenoj ispravi **više ne važi** — te odredbe nemaju
+predmet i izbrisane su iz akta. Zapis ostaje kao istorija odluke; kolona
+`PokroviteljPrijava.ispravaSlika` je zadržana jer je to tačno polje koje bi
+trebalo ako se roba jednom vrati po uslovu „nabavna vrednost + otpremnica".
+
+🔴 **Isprava je 08.09.2026. bila VRAĆENA pa ISTOG DANA ponovo uklonjena — ne
+predlagati je ponovo.** Vraćena je uz **novčano** pokroviteljstvo, sa obrazloženjem
+da bez nje čovek uplati iz ličnog džepa a prijavi kao davanje firme (koeficijent
+×1,20 umesto ×1,00). Vlasnik je to odbio, i **razlog obara predlog**: donacija se
+izvršava **uplatom na račun Fondacije** (čl. 8), pa se **iz izvoda uvek vidi ko je
+uplatio** — ako je platila firma, to piše na samom prilivu, uz **matični broj i
+PIB** iz prijave. Isprava bi bila drugi dokaz iste činjenice, i to onaj koji
+prilaže strana koja ima korist. **P-5 time nije zatvoren, ali se ne zatvara
+ispravom** — nosi ga čovek koji potvrđuje prijem prijave, poređenjem uplatioca sa
+prijavljenim pravnim licem. (Commit `4bfbf60` je vraćen commit-om koji ga poništava;
+kolona `ispravaSlika` ostaje neiskorišćena.)
 
 ~~Maloprodajna cena OSTAJE — ali sada ima obrazloženje~~ (odluka vlasnika; M-1
 „po nabavnoj vrednosti" je bila odbijena). Obrazloženje u čl. 7 glasi da se pokrovitelj
@@ -812,23 +824,16 @@ je **marža** — stvarno odricanje, ali izmakli prihod, ne izdatak. Sa sve tri 
 maloprodajna cena je odbranjiva mera ukupnog odricanja; sa samo PDV-om ne pokriva
 sopstveni broj.
 
-🔴 **KNJIGOVODSTVENA ISPRAVA JE OBAVEZNA UZ SVAKU PRIJAVU** (čl. 7;
-`PokroviteljPrijava.ispravaSlika`, migracija `20260908130000_pokroviteljstvo_isprava`).
-🔴 **Predmet joj je promenjen kad su roba i usluge ukinuti** — traži se uz **novčano**
-pokroviteljstvo: izvod sa poslovnog računa, nalog za prenos ili drugi dokaz o knjiženju,
-na isti iznos i sa istim davaocem.
-🔴 **I razlog je drugi.** Dok je bilo robe, isprava je merila **vrednost** (cenovnik je
-pisala strana koja ima korist). Kod novca vrednost nije sporna — sporno je **čije je
-davanje**: bez isprave čovek uplati **iz ličnog džepa**, prijavi to kao davanje svoje
-firme i dobije koeficijent **×1,20 umesto ×1,00**. Isprava time zatvara **P-5**
-(razgraničenje prema pravnom licu iz čl. 11) na jedinom mestu na kome kod uopšte može
-da ga dodirne. **Ne uklanjati je uz obrazloženje „novac se ne procenjuje"** — ona ne
-procenjuje novac.
-🟡 Ruta odbija prijavu bez isprave (`400`), obrazac ne pušta slanje, admin je vidi u
-detaljima prijave. Base64 u bazi (do ~3MB), ne R2 — prati zatečeni obrazac tog toka.
-🟡 Kod i dalje **ne proverava** da li je podnosilac vlasnik odnosno zakonski zastupnik
-(čl. 7 st. 1); isprava to ne dokazuje, samo pokazuje odakle je novac pošao. Konačnu
-proveru i dalje nosi čovek koji potvrđuje prijem.
+🔴 **Uz cenovnik ide i KNJIGOVODSTVENA ISPRAVA** (čl. 7; `PokroviteljPrijava.ispravaSlika`,
+migracija `20260908130000_pokroviteljstvo_isprava`). Otpremnica, račun ili druga isprava
+kojom pokrovitelj **to isto davanje evidentira u sopstvenim poslovnim knjigama**, na istu
+robu i istu vrednost. Razlog: cenovnik utvrđuje **meru**, a meru je do sada određivala
+strana koja ima korist — korisnik prilaže cenovnik SVOJE firme i po njemu se emituje
+POEN. Isprava tu meru vezuje za knjige, pa se vrednost ne može naduvati samo prema
+Fondaciji bez posledica drugde. Ruta odbija prijavu za ROBA/USLUGE bez isprave;
+obrazac ima drugo polje; admin je vidi u detaljima prijave.
+🟡 Ista base64 putanja kao `cenovnikSlika` (do ~3MB u bazi), ne R2 — prati zatečeni
+obrazac tog toka.
 
 🔴 **Javno imenovanje SME, pravo na promociju NE** (čl. 13; M-3 ublažen na zahtev
 vlasnika, koji pokrovitelje namerava da pominje kao javno priznanje). Granica prema

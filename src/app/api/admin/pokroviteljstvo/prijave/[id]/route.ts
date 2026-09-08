@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { jeAdmin } from "@/lib/dozvole";
 import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
-// GET /api/admin/pokroviteljstvo/prijave/[id] — detalji (ugovor + isprava)
+// GET /api/admin/pokroviteljstvo/prijave/[id] — detalji (ugovor + cenovnik)
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
   const session = await getServerSession(authOptions);
@@ -28,7 +28,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     vrstaDonacije: p.vrstaDonacije,
     vrednostRsd: Number(p.vrednostRsd),
     ugovorTekst: p.ugovorTekst,
-    ispravaSlika: p.ispravaSlika,
     status: p.status,
     odbijenoRazlog: p.odbijenoRazlog,
     createdAt: p.createdAt.toISOString(),

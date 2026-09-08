@@ -283,10 +283,6 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "donacija novca pravnog lica ili preduzetnika",
       "uvećanom za dvadeset odsto",
       "Najmanji iznos prijave pokroviteljstva je 10.000 dinara",
-      // Knjigovodstvena isprava (čl. 7) — pokazuje ČIJE je davanje: bez nje se
-      // uplata iz ličnog džepa prijavljuje kao davanje firme.
-      "knjigovodstvena isprava kojom pokrovitelj to isto davanje evidentira u sopstvenim poslovnim knjigama",
-      "a ne iz lične imovine korisnika koji podnosi prijavu",
       "Tabela se nastavlja bez ograničenja",
       "nije raspodela dobiti",
       "ne stiče pravo na objavljivanje logotipa",
@@ -303,8 +299,6 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "a donation of money by a legal entity",
       "increased by twenty percent",
       "minimum amount of a sponsorship application is 10,000 dinars",
-      "accounting document by which the sponsor records that same disbursement in its own business books",
-      "not from the personal assets of the user submitting the application",
       "The table continues without limit",
       "is not a distribution of profit",
       "no right to the publication of a logo",
@@ -321,8 +315,6 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "денежное пожертвование юридическим лицом",
       "увеличенному на двадцать процентов",
       "Наименьшая сумма заявки на покровительство — 10 000 динаров",
-      "бухгалтерский документ, которым покровитель учитывает эту же выплату в собственных бухгалтерских книгах",
-      "а не из личного имущества пользователя, подающего заявку",
       "Таблица продолжается без ограничения",
       "не является распределением прибыли",
       "не приобретает права на публикацию логотипа",
